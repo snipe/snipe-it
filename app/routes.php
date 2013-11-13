@@ -52,7 +52,7 @@ Route::group(array('prefix' => 'admin'), function()
 		# Manufacturers
 		Route::group(array('prefix' => 'manufacturers'), function()
 		{
-			Route::get('/', array('as' => 'manufacturers', 'uses' => 'Controllers\Admin\ModelsController@getIndex'));
+			Route::get('/', array('as' => 'manufacturers', 'uses' => 'Controllers\Admin\ManufacturersController@getIndex'));
 		});
 
 		# Categories
