@@ -70,16 +70,29 @@
 							<ul class="nav pull-right">
 								
 								<li class="divider-vertical"></li>
+								
+								<li class="dropdown{{ (Request::is('admin/users*|admin/groups*') ? ' active' : '') }}">
+										<a class="dropdown-toggle" data-toggle="dropdown" href="{{ URL::to('admin/users') }}">
+											<i class="icon-wrench icon-white"></i> Settings <span class="caret"></span>
+										</a>
+										<ul class="dropdown-menu">
+											<li{{ (Request::is('admin/users*') ? ' class="active"' : '') }}><a href="{{ URL::to('admin/users') }}"><i class="icon-user"></i> Manufacturers</a></li>
+											<li{{ (Request::is('admin/groups*') ? ' class="active"' : '') }}><a href="{{ URL::to('admin/groups') }}"><i class="icon-th"></i> Categories</a></li>
+
+											<li{{ (Request::is('admin/groups*') ? ' class="active"' : '') }}><a href="{{ URL::to('admin/groups') }}"><i class="icon-arrow-down"></i> Depreciation</a></li>
+											<li{{ (Request::is('admin/settings*') ? ' class="active"' : '') }}><a href="{{ URL::to('admin/users') }}"><i class="icon-wrench"></i> Settings</a></li>											
+										</ul>
+									</li>
+								
 									<li class="dropdown{{ (Request::is('admin/users*|admin/groups*') ? ' active' : '') }}">
-									<a class="dropdown-toggle" data-toggle="dropdown" href="{{ URL::to('admin/users') }}">
-										<i class="icon-user icon-white"></i> Admin <span class="caret"></span>
-									</a>
-									<ul class="dropdown-menu">
-										<li{{ (Request::is('admin/users*') ? ' class="active"' : '') }}><a href="{{ URL::to('admin/users') }}"><i class="icon-user"></i> Users</a></li>
-										<li{{ (Request::is('admin/groups*') ? ' class="active"' : '') }}><a href="{{ URL::to('admin/groups') }}"><i class="icon-user"></i> Groups</a></li>
-										
-									</ul>
-								</li>
+										<a class="dropdown-toggle" data-toggle="dropdown" href="{{ URL::to('admin/users') }}">
+											<i class="icon-user icon-white"></i> Admin <span class="caret"></span>
+										</a>
+										<ul class="dropdown-menu">
+											<li{{ (Request::is('admin/users*') ? ' class="active"' : '') }}><a href="{{ URL::to('admin/users') }}"><i class="icon-user"></i> Users</a></li>
+											<li{{ (Request::is('admin/groups*') ? ' class="active"' : '') }}><a href="{{ URL::to('admin/groups') }}"><i class="icon-user"></i> Groups</a></li>
+										</ul>
+									</li>
 								<li><a href="{{ route('logout') }}"> <i class="icon-off icon-white"></i> Logout</a></li>
 								
 								
