@@ -23,7 +23,7 @@ class Category extends Eloquent {
 	 */
 	public function name()
 	{
-		return nl2br($this->content);
+		return nl2br($this->name);
 	}
 
 
