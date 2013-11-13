@@ -54,9 +54,9 @@ return array(
 
 		'mysql' => array(
 			'driver'    => 'mysql',
-			'host'      => '127.0.0.1',
-			'database'  => 'laravel4_testing',
-			'username'  => 'root',
+			'host'      => 'localhost',
+			'database'  => 'snipeit_laravel',
+			'username'  => 'snipeit_laravel',
 			'password'  => '',
 			'charset'   => 'utf8',
 			'collation' => 'utf8_unicode_ci',
