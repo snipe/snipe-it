@@ -23,7 +23,7 @@ Asset Categories ::
 <table class="table table-bordered table-striped table-hover">
 	<thead>
 		<tr>
-			<th class="span6">@lang('admin/categories/table.id')</th>
+			<th class="span1">@lang('admin/categories/table.id')</th>
 			<th class="span2">@lang('admin/categories/table.title')</th>
 			<th class="span2">@lang('admin/categories/table.parent')</th>
 			<th class="span2">@lang('admin/categories/table.created_at')</th>
@@ -38,8 +38,8 @@ Asset Categories ::
 			<td>{{ $category->parent }}</td>
 			<td>{{ $category->created_at->diffForHumans() }}</td>
 			<td>
-				<a href="{{ route('update/category', $category->id) }}" class="btn btn-mini">@lang('button.edit')</a>
-				<a href="{{ route('delete/category', $category->id) }}" class="btn btn-mini btn-danger">@lang('button.delete')</a>
+				<a href="#" class="btn btn-mini">@lang('button.edit')</a>
+				<a href="#" class="btn btn-mini btn-danger">@lang('button.delete')</a>
 			</td>
 		</tr>
 		@endforeach
