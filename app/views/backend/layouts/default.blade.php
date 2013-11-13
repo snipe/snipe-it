@@ -63,27 +63,27 @@
 								<li{{ (Request::is('assets/models') ? ' class="active"' : '') }}><a href="{{ URL::to('assets/models') }}"><i class="icon-th-list icon-white"></i> Models</a></li>
 								<li{{ (Request::is('assets/people') ? ' class="active"' : '') }}><a href="{{ URL::to('assets/models') }}"><i class="icon-user icon-white"></i> People</a></li>
 								<li{{ (Request::is('assets/people') ? ' class="active"' : '') }}><a href="{{ URL::to('assets/models') }}"><i class="icon-signal icon-white"></i> Reports</a></li>
-								
+
 							</ul>
-								
-									
+
+
 							<ul class="nav pull-right">
-								
+
 								<li class="divider-vertical"></li>
-								
+
 								<li class="dropdown{{ (Request::is('admin/users*|admin/groups*') ? ' active' : '') }}">
 										<a class="dropdown-toggle" data-toggle="dropdown" href="{{ URL::to('admin/users') }}">
 											<i class="icon-wrench icon-white"></i> Settings <span class="caret"></span>
 										</a>
 										<ul class="dropdown-menu">
-											<li{{ (Request::is('admin/users*') ? ' class="active"' : '') }}><a href="{{ URL::to('admin/users') }}"><i class="icon-user"></i> Manufacturers</a></li>
+											<li{{ (Request::is('admin/settings/manufacturers*') ? ' class="active"' : '') }}><a href="{{ URL::to('admin/settings/manufacturers') }}"><i class="icon-user"></i> Manufacturers</a></li>
 											<li{{ (Request::is('admin/settings/categories*') ? ' class="active"' : '') }}><a href="{{ URL::to('admin/settings/categories') }}"><i class="icon-th"></i> Categories</a></li>
 
 											<li{{ (Request::is('admin/groups*') ? ' class="active"' : '') }}><a href="{{ URL::to('admin/groups') }}"><i class="icon-arrow-down"></i> Depreciation</a></li>
-											<li{{ (Request::is('admin/settings*') ? ' class="active"' : '') }}><a href="{{ URL::to('admin/users') }}"><i class="icon-wrench"></i> Settings</a></li>											
+											<li{{ (Request::is('admin/settings*') ? ' class="active"' : '') }}><a href="{{ URL::to('admin/users') }}"><i class="icon-wrench"></i> Settings</a></li>
 										</ul>
 									</li>
-								
+
 									<li class="dropdown{{ (Request::is('admin/users*|admin/groups*') ? ' active' : '') }}">
 										<a class="dropdown-toggle" data-toggle="dropdown" href="{{ URL::to('admin/users') }}">
 											<i class="icon-user icon-white"></i> Admin <span class="caret"></span>
@@ -94,8 +94,8 @@
 										</ul>
 									</li>
 								<li><a href="{{ route('logout') }}"> <i class="icon-off icon-white"></i> Logout</a></li>
-								
-								
+
+
 							</ul>
 						</div>
 					</div>
