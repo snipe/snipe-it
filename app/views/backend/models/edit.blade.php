@@ -2,7 +2,7 @@
 
 {{-- Page title --}}
 @section('title')
-Blog Post Update ::
+Update Asset Model ::
 @parent
 @stop
 
@@ -13,7 +13,7 @@ Blog Post Update ::
 		Blog Post Update
 
 		<div class="pull-right">
-			<a href="{{ route('blogs') }}" class="btn btn-small btn-inverse"><i class="icon-circle-arrow-left icon-white"></i> Back</a>
+			<a href="{{ route('models') }}" class="btn btn-small btn-inverse"><i class="icon-circle-arrow-left icon-white"></i> Back</a>
 		</div>
 	</h3>
 </div>

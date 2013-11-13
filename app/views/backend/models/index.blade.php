@@ -32,12 +32,12 @@ Asset Models ::
 	<tbody>
 		@foreach ($models as $model)
 		<tr>
-			<td>{{ $model->title }}</td>
 			<td>{{ $model->name }}</td>
+			<td>{{ $model->modelno }}</td>
 			<td>{{ $model->created_at->diffForHumans() }}</td>
 			<td>
-				<a href="{{ route('update/blog', $post->id) }}" class="btn btn-mini">@lang('button.edit')</a>
-				<a href="{{ route('delete/blog', $post->id) }}" class="btn btn-mini btn-danger">@lang('button.delete')</a>
+				<a href="#" class="btn btn-mini">@lang('button.edit')</a>
+				<a href="#" class="btn btn-mini btn-danger">@lang('button.delete')</a>
 			</td>
 		</tr>
 		@endforeach

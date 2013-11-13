@@ -2,7 +2,7 @@
 
 {{-- Page title --}}
 @section('title')
-Create a New Blog Post ::
+Create a New Asset Model ::
 @parent
 @stop
 
@@ -10,10 +10,10 @@ Create a New Blog Post ::
 @section('content')
 <div class="page-header">
 	<h3>
-		Create a New Blog Post
+		Create a New Asset Model
 
 		<div class="pull-right">
-			<a href="{{ route('blogs') }}" class="btn btn-small btn-inverse"><i class="icon-circle-arrow-left icon-white"></i> Back</a>
+			<a href="{{ route('models') }}" class="btn btn-small btn-inverse"><i class="icon-circle-arrow-left icon-white"></i> Back</a>
 		</div>
 	</h3>
 </div>
