@@ -59,8 +59,7 @@
 						<div class="nav-collapse collapse">
 							<ul class="nav">
 								<li {{ (Request::is('/') ? 'class="active"' : '') }}><a href="{{ route('home') }}"><i class="icon-home icon-white"></i> Home</a></li>
-								<li {{ (Request::is('about-us') ? 'class="active"' : '') }}><a href="{{ URL::to('about-us') }}"><i class="icon-file icon-white"></i> About us</a></li>
-								<li {{ (Request::is('contact-us') ? 'class="active"' : '') }}><a href="{{ URL::to('contact-us') }}"><i class="icon-file icon-white"></i> Contact us</a></li>
+								
 							</ul>
 
 							<ul class="nav pull-right">
@@ -73,7 +72,7 @@
 									</a>
 									<ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
 										@if(Sentry::getUser()->hasAccess('admin'))
-										<li><a href="{{ route('admin') }}"><i class="icon-cog"></i> Administration</a></li>
+										<li><a href="{{ route('admin') }}"><i class="icon-cog"></i> Settings</a></li>
 										@endif
 										<li{{ (Request::is('account/profile') ? ' class="active"' : '') }}><a href="{{ route('profile') }}"><i class="icon-user"></i> Your profile</a></li>
 										<li class="divider"></li>
@@ -82,7 +81,7 @@
 								</li>
 								@else
 								<li {{ (Request::is('auth/signin') ? 'class="active"' : '') }}><a href="{{ route('signin') }}">Sign in</a></li>
-								<li {{ (Request::is('auth/signup') ? 'class="active"' : '') }}><a href="{{ route('signup') }}">Sign up</a></li>
+								
 								@endif
 							</ul>
 						</div>
