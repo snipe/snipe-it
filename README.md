@@ -1,4 +1,4 @@
-## Snipe-IT - Asset Management For the Resst of Us
+## Snipe-IT - Asset Management For the Rest of Us
 
 This is a FOSS project for asset management in IT Operations. Knowing who has which laptop, when it was purchased in order to depreciate it correctly, etc.
 
@@ -17,16 +17,16 @@ This isn't actually ready for anyone to use yet, as I'm still working out some o
 
 -----
 
-## How to Install
+## How to Install (Don't do this yet - it's not ready for you)
 
 ### 1) Downloading
 #### 1.1) Clone the Repository
 
-	git clone http://github.com/brunogaspar/laravel4-starter-kit your-folder
+	git clone http://github.com/snipe/snipe-it your-folder
 
 #### 1.2) Download the Repository
 
-	https://github.com/brunogaspar/laravel4-starter-kit/archive/master.zip
+	https://github.com/snipe/snipe-it/archive/master.zip
 
 -----
 
