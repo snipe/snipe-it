@@ -17,7 +17,6 @@ Route::group(array('prefix' => 'assets'), function()
 	Route::group(array('prefix' => 'models'), function()
 	{
 		Route::get('/', array('as' => 'models', 'uses' => 'Controllers\Admin\ModelsController@getIndex'));
-
 	});
 
 });
@@ -46,24 +45,31 @@ Route::group(array('prefix' => 'admin'), function()
 		Route::get('{blogId}/delete', array('as' => 'delete/blog', 'uses' => 'Controllers\Admin\BlogsController@getDelete'));
 		Route::get('{blogId}/restore', array('as' => 'restore/blog', 'uses' => 'Controllers\Admin\BlogsController@getRestore'));
 	});
-	
+
 	# Admin Settings Routes (for categories, maufactureres, etc)
 	Route::group(array('prefix' => 'settings'), function()
 	{
 		# Manufacturers
 		Route::group(array('prefix' => 'manufacturers'), function()
 		{
-			Route::get('/', array('as' => 'manufacturers', 'uses' => 'Controllers\Admin\ModelsController@getIndex'));	
+			Route::get('/', array('as' => 'manufacturers', 'uses' => 'Controllers\Admin\ModelsController@getIndex'));
 		});
-		
+
 		# Categories
 		Route::group(array('prefix' => 'categories'), function()
 		{
-			Route::get('/', array('as' => 'categories', 'uses' => 'Controllers\Admin\ModelsController@getIndex'));
-	
+			Route::get('/', array('as' => 'categories', 'uses' => 'Controllers\Admin\CategoriesController@getIndex'));
+
+		});
+
+		# Depreciation
+		Route::group(array('prefix' => 'depreciation'), function()
+		{
+			Route::get('/', array('as' => 'depreciation', 'uses' => 'Controllers\Admin\ModelsController@getIndex'));
+
 		});
 	});
-		
+
 
 
 	# User Management
