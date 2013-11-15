@@ -5,6 +5,7 @@ use Input;
 use Lang;
 use Category;
 use Redirect;
+use DB;
 use Sentry;
 use Str;
 use Validator;
@@ -17,9 +18,10 @@ class CategoriesController extends AdminController {
 	 *
 	 * @return View
 	 */
+
 	public function getIndex()
 	{
-		// Grab all the categorys
+		// Grab all the categories
 		$categories = Category::orderBy('created_at', 'DESC')->paginate(10);
 
 		// Show the page
@@ -35,7 +37,7 @@ class CategoriesController extends AdminController {
 	public function getCreate()
 	{
 		// Show the page
-		$category_options = array('' => 'Top Level') + Category::lists('name', 'id');
+		$category_options = array('0' => 'Top Level') + Category::lists('name', 'id');
 		return View::make('backend/categories/create')->with('category_options',$category_options);
 	}
 
@@ -50,7 +52,6 @@ class CategoriesController extends AdminController {
 		// Declare the rules for the form validation
 		$rules = array(
 			'name'   => 'required|min:3',
-			'parent'   => 'required|min:1',
 		);
 
 		// Create a new validator instance from our validation rules
@@ -75,7 +76,7 @@ class CategoriesController extends AdminController {
 		if($category->save())
 		{
 			// Redirect to the new category  page
-			return Redirect::to("admin/settings/categories/$category->id/edit")->with('success', Lang::get('admin/categories/message.create.success'));
+			return Redirect::to("admin/settings/categories")->with('success', Lang::get('admin/categories/message.create.success'));
 		}
 
 		// Redirect to the category create page
@@ -94,11 +95,13 @@ class CategoriesController extends AdminController {
 		if (is_null($category = Category::find($categoryId)))
 		{
 			// Redirect to the blogs management page
-			return Redirect::to('admin/settings/settingscategories')->with('error', Lang::get('admin/categories/message.does_not_exist'));
+			return Redirect::to('admin/settings/settings/categories')->with('error', Lang::get('admin/categories/message.does_not_exist'));
 		}
 
 		// Show the page
-		$category_options = array('' => 'Top Level') + Category::lists('name', 'id');
+		//$category_options = array('' => 'Top Level') + Category::lists('name', 'id');
+
+		$category_options = array('' => 'Top Level') + DB::table('categories')->where('id', '!=', $categoryId)->lists('name', 'id');
 		return View::make('backend/categories/edit', compact('category'))->with('category_options',$category_options);
 	}
 
@@ -121,7 +124,6 @@ class CategoriesController extends AdminController {
 		// Declare the rules for the form validation
 		$rules = array(
 			'name'   => 'required|min:3',
-			'parent' => 'required|min:1',
 		);
 
 		// Create a new validator instance from our validation rules
