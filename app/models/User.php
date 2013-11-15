@@ -36,4 +36,13 @@ class User extends SentryUserModel {
 		return "//gravatar.org/avatar/{$gravatar}";
 	}
 
+	public function numassets()
+	{
+
+		$assetcount = DB::table('users')
+            ->join('contacts', 'users.id', '=', 'contacts.user_id')
+            ->join('orders', 'users.id', '=', 'orders.user_id')
+            ->select('users.id', 'contacts.phone', 'orders.price');
+	}
+
 }
