@@ -61,7 +61,8 @@
 								<li{{ (Request::is('admin') ? ' class="active"' : '') }}><a href="{{ URL::to('admin') }}"><i class="icon-home icon-white"></i> Dashboard</a></li>
 								<li{{ (Request::is('assets') ? ' class="active"' : '') }}><a href="{{ URL::to('assets') }}"><i class="icon-barcode icon-white"></i> Assets</a></li>
 								<li{{ (Request::is('assets/models') ? ' class="active"' : '') }}><a href="{{ URL::to('assets/models') }}"><i class="icon-th-list icon-white"></i> Models</a></li>
-								<li{{ (Request::is('assets/people') ? ' class="active"' : '') }}><a href="{{ URL::to('assets/models') }}"><i class="icon-user icon-white"></i> People</a></li>
+								<li{{ (Request::is('admin/users') ? ' class="active"' : '') }}><a href="{{ URL::to('admin/users') }}"><i class="icon-user icon-white"></i> People</a></li>
+								<li{{ (Request::is('admin/users') ? ' class="active"' : '') }}><a href="{{ URL::to('admin/users') }}"><i class="icon-certificate icon-white"></i> Licenses</a></li>
 								<li{{ (Request::is('assets/people') ? ' class="active"' : '') }}><a href="{{ URL::to('assets/models') }}"><i class="icon-signal icon-white"></i> Reports</a></li>
 
 							</ul>
@@ -71,26 +72,18 @@
 
 								<li class="divider-vertical"></li>
 
-								<li class="dropdown{{ (Request::is('admin/users*|admin/groups*') ? ' active' : '') }}">
-										<a class="dropdown-toggle" data-toggle="dropdown" href="{{ URL::to('admin/users') }}">
-											<i class="icon-wrench icon-white"></i> Settings <span class="caret"></span>
-										</a>
-										<ul class="dropdown-menu">
-											<li{{ (Request::is('admin/settings/manufacturers*') ? ' class="active"' : '') }}><a href="{{ URL::to('admin/settings/manufacturers') }}"><i class="icon-user"></i> Manufacturers</a></li>
-											<li{{ (Request::is('admin/settings/categories*') ? ' class="active"' : '') }}><a href="{{ URL::to('admin/settings/categories') }}"><i class="icon-th"></i> Categories</a></li>
-
-											<li{{ (Request::is('admin/groups*') ? ' class="active"' : '') }}><a href="{{ URL::to('admin/groups') }}"><i class="icon-arrow-down"></i> Depreciation</a></li>
-											<li{{ (Request::is('admin/settings') ? ' class="active"' : '') }}><a href="{{ URL::to('admin/users') }}"><i class="icon-wrench"></i> Settings</a></li>
-										</ul>
-									</li>
 
 									<li class="dropdown{{ (Request::is('admin/users*|admin/groups*') ? ' active' : '') }}">
 										<a class="dropdown-toggle" data-toggle="dropdown" href="{{ URL::to('admin/users') }}">
-											<i class="icon-user icon-white"></i> Admin <span class="caret"></span>
+											<i class="icon-wrench icon-white"></i> Admin <span class="caret"></span>
 										</a>
 										<ul class="dropdown-menu">
-											<li{{ (Request::is('admin/users*') ? ' class="active"' : '') }}><a href="{{ URL::to('admin/users') }}"><i class="icon-user"></i> Users</a></li>
 											<li{{ (Request::is('admin/groups*') ? ' class="active"' : '') }}><a href="{{ URL::to('admin/groups') }}"><i class="icon-user"></i> Groups</a></li>
+											<li{{ (Request::is('admin/settings/manufacturers*') ? ' class="active"' : '') }}><a href="{{ URL::to('admin/settings/manufacturers') }}"><i class="icon-briefcase"></i> Manufacturers</a></li>
+											<li{{ (Request::is('admin/settings/categories*') ? ' class="active"' : '') }}><a href="{{ URL::to('admin/settings/categories') }}"><i class="icon-th"></i> Categories</a></li>
+
+											<li{{ (Request::is('admin/groups*') ? ' class="active"' : '') }}><a href="{{ URL::to('admin/groups') }}"><i class="icon-arrow-down"></i> Depreciation</a></li>
+
 										</ul>
 									</li>
 								<li><a href="{{ route('logout') }}"> <i class="icon-off icon-white"></i> Logout</a></li>
