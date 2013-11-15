@@ -3,6 +3,7 @@
 return array(
 
 	'yes' => 'Yes',
-	'no'  => 'No'
+	'no'  => 'No',
+	'currency'  => '$'
 
 );
