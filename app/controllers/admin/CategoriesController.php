@@ -95,7 +95,7 @@ class CategoriesController extends AdminController {
 		if (is_null($category = Category::find($categoryId)))
 		{
 			// Redirect to the blogs management page
-			return Redirect::to('admin/settings/settings/categories')->with('error', Lang::get('admin/categories/message.does_not_exist'));
+			return Redirect::to('admin/settings/categories')->with('error', Lang::get('admin/categories/message.does_not_exist'));
 		}
 
 		// Show the page
