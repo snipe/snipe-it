@@ -7,6 +7,7 @@ return array(
 	'last_name'  => 'Last Name',
 	'email'      => 'Email',
 	'last_login'  => 'Last Login',
+	'checkedout'  => 'Assets',
 	'activated'  => 'Active',
 	'created_at' => 'Created',
 
