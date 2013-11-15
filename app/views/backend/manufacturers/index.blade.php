@@ -27,7 +27,6 @@ Asset Manufacturers ::
 		<tr>
 			<th class="span2">@lang('admin/manufacturers/table.id')</th>
 			<th class="span6">@lang('admin/manufacturers/table.title')</th>
-			<th class="span2">@lang('admin/manufacturers/table.created_at')</th>
 			<th class="span2">@lang('table.actions')</th>
 		</tr>
 	</thead>
@@ -36,7 +35,6 @@ Asset Manufacturers ::
 		<tr>
 			<td>{{ $manufacturer->id }}</td>
 			<td>{{ $manufacturer->name }}</td>
-			<td>{{ $manufacturer->created_at->diffForHumans() }}</td>
 			<td>
 				<a href="#" class="btn btn-mini">@lang('button.edit')</a>
 				<a href="#" class="btn btn-mini btn-danger">@lang('button.delete')</a>

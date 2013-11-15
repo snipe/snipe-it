@@ -26,7 +26,6 @@ Asset Categories ::
 			<th class="span1">@lang('admin/categories/table.id')</th>
 			<th class="span2">@lang('admin/categories/table.title')</th>
 			<th class="span2">@lang('admin/categories/table.parent')</th>
-			<th class="span2">@lang('admin/categories/table.created_at')</th>
 			<th class="span2">@lang('table.actions')</th>
 		</tr>
 	</thead>
@@ -44,8 +43,6 @@ Asset Categories ::
 			@endif
 
 			</td>
-
-			<td>{{ $category->created_at->diffForHumans() }}</td>
 			<td>
 				<a href="{{ route('update/category', $category->id) }}" class="btn btn-mini">@lang('button.edit')</a>
 				<a href="{{ route('delete/category', $category->id) }}" class="btn btn-mini btn-danger">@lang('button.delete')</a>
