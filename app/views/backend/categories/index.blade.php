@@ -24,7 +24,7 @@ Asset Categories ::
 	<thead>
 		<tr>
 			<th class="span1">@lang('admin/categories/table.id')</th>
-			<th class="span2">@lang('admin/categories/table.title')</th>
+			<th class="span6">@lang('admin/categories/table.title')</th>
 			<th class="span2">@lang('admin/categories/table.parent')</th>
 			<th class="span2">@lang('table.actions')</th>
 		</tr>
