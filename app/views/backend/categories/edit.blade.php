@@ -43,7 +43,7 @@ Category Update ::
 			<div class="control-group {{ $errors->has('parent') ? 'error' : '' }}">
 				<label class="control-label" for="parent">Category Parent</label>
 				<div class="controls">
-					<input type="text" name="parent" id="parent" value="{{ Input::old('name', $category->parent) }}" />
+					{{ Form::select('parent', $category_options, Input::old('parent', $category->parent)) }}
 					{{ $errors->first('parent', '<span class="help-inline">:message</span>') }}
 				</div>
 			</div>

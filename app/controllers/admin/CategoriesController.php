@@ -35,7 +35,8 @@ class CategoriesController extends AdminController {
 	public function getCreate()
 	{
 		// Show the page
-		return View::make('backend/categories/create');
+		$category_options = array('' => 'Top Level') + Category::lists('name', 'id');
+		return View::make('backend/categories/create')->with('category_options',$category_options);
 	}
 
 
@@ -97,7 +98,8 @@ class CategoriesController extends AdminController {
 		}
 
 		// Show the page
-		return View::make('backend/categories/edit', compact('category'));
+		$category_options = array('' => 'Top Level') + Category::lists('name', 'id');
+		return View::make('backend/categories/edit', compact('category'))->with('category_options',$category_options);
 	}
 
 
@@ -168,6 +170,7 @@ class CategoriesController extends AdminController {
 		// Redirect to the blog posts management page
 		return Redirect::to('admin/settings/categories')->with('success', Lang::get('admin/categories/message.delete.success'));
 	}
+
 
 
 }

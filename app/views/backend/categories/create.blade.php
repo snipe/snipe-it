@@ -39,7 +39,7 @@ Create a New Asset Category ::
 			<div class="control-group {{ $errors->has('parent') ? 'error' : '' }}">
 				<label class="control-label" for="parent">Category Parent</label>
 				<div class="controls">
-					<input class="span6" type="text" name="parent" id="parent" value="{{ Input::old('parent') }}" />
+					{{ Form::select('parent', $category_options , Input::old('parent')) }}
 					{{ $errors->first('parent', '<span class="help-inline">:message</span>') }}
 				</div>
 			</div>
