@@ -1,12 +1,12 @@
 ## Snipe-IT - Asset Management For the Rest of Us
 
-This is a FOSS project for asset management in IT Operations. Knowing who has which laptop, when it was purchased in order to depreciate it correctly, etc.
+This is a FOSS project for asset management in IT Operations. Knowing who has which laptop, when it was purchased in order to depreciate it correctly, handling software licenses, etc.
 
-It is built on [Laravel 4](http://laravel.com) and uses the [Sentry 2](https://github.com/cartalyst/sentry) package. I chose Laravel because it's no better or worse than any other PHP framework out there, and not really for any other reason.
+It is built on [Laravel 4](http://laravel.com) and uses the [Sentry 2](https://github.com/cartalyst/sentry) package.
 
-Many thanks to the [Laravel 4 starter site](https://github.com/brunogaspar/laravel4-starter-kit) for a quick start. 
+Many thanks to the [Laravel 4 starter site](https://github.com/brunogaspar/laravel4-starter-kit) for a quick start.
 
-This isn't actually ready for anyone to use yet, as I'm still working out some of the basic functionality. But stay tuned.
+This isn't actually ready for anyone to use yet, as I'm still working out some of the basic functionality. Feel free to check out the [Snipe IT Trello board here](https://trello.com/b/WwZm4pwv/snipe-it) to check on progress.
 
 -----
 
@@ -65,12 +65,12 @@ Now, you need to create yourself a user and finish the installation.
 Use the following command to create your default user, user groups and run all the necessary migrations automatically.
 
 	php artisan app:install
-	
+
 
 ### 6) License
-	
+
 	Copyright (C) 2013 Alison Gianotto
-	
+
 	This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU Affero General Public License as published by
     the Free Software Foundation, either version 3 of the License, or
@@ -83,5 +83,5 @@ Use the following command to create your default user, user groups and run all t
 
     You should have received a copy of the GNU Affero General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
-    
-    
+
+
