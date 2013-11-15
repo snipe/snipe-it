@@ -80,7 +80,7 @@
 											<li{{ (Request::is('admin/settings/categories*') ? ' class="active"' : '') }}><a href="{{ URL::to('admin/settings/categories') }}"><i class="icon-th"></i> Categories</a></li>
 
 											<li{{ (Request::is('admin/groups*') ? ' class="active"' : '') }}><a href="{{ URL::to('admin/groups') }}"><i class="icon-arrow-down"></i> Depreciation</a></li>
-											<li{{ (Request::is('admin/settings*') ? ' class="active"' : '') }}><a href="{{ URL::to('admin/users') }}"><i class="icon-wrench"></i> Settings</a></li>
+											<li{{ (Request::is('admin/settings') ? ' class="active"' : '') }}><a href="{{ URL::to('admin/users') }}"><i class="icon-wrench"></i> Settings</a></li>
 										</ul>
 									</li>
 

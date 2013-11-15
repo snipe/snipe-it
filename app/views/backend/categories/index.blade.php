@@ -13,7 +13,7 @@ Asset Categories ::
 		Asset Categories
 
 		<div class="pull-right">
-			<a href="#" class="btn btn-small btn-info"><i class="icon-plus-sign icon-white"></i> Create</a>
+			<a href="{{ route('create/category') }}" class="btn btn-small btn-info"><i class="icon-plus-sign icon-white"></i> Create</a>
 		</div>
 	</h3>
 </div>
@@ -38,8 +38,8 @@ Asset Categories ::
 			<td>{{ $category->parent }}</td>
 			<td>{{ $category->created_at->diffForHumans() }}</td>
 			<td>
-				<a href="#" class="btn btn-mini">@lang('button.edit')</a>
-				<a href="#" class="btn btn-mini btn-danger">@lang('button.delete')</a>
+				<a href="{{ route('update/category', $category->id) }}" class="btn btn-mini">@lang('button.edit')</a>
+				<a href="{{ route('delete/category', $category->id) }}" class="btn btn-mini btn-danger">@lang('button.delete')</a>
 			</td>
 		</tr>
 		@endforeach
