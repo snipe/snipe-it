@@ -17,9 +17,9 @@ Asset Categories ::
 		</div>
 	</h3>
 </div>
-
+@if (count($categories) > 10)
 {{ $categories->links() }}
-
+@endif
 <table class="table table-bordered table-striped table-hover">
 	<thead>
 		<tr>
@@ -35,7 +35,16 @@ Asset Categories ::
 		<tr>
 			<td>{{ $category->id }}</td>
 			<td>{{ $category->name }}</td>
-			<td>{{ $category->parent }}</td>
+			<td>
+
+			@if (is_object($category->parentname))
+				{{ $category->parentname->name }}
+			@else
+				Top Level
+			@endif
+
+			</td>
+
 			<td>{{ $category->created_at->diffForHumans() }}</td>
 			<td>
 				<a href="{{ route('update/category', $category->id) }}" class="btn btn-mini">@lang('button.edit')</a>
@@ -46,5 +55,7 @@ Asset Categories ::
 	</tbody>
 </table>
 
+@if (count($categories) > 10)
 {{ $categories->links() }}
+@endif
 @stop
