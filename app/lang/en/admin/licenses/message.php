@@ -15,8 +15,8 @@ return array(
 	),
 
 	'delete' => array(
-		'error'   => 'There was an issue deleting the category. Please try again.',
-		'success' => 'The category was deleted successfully.'
+		'error'   => 'There was an issue deleting the license. Please try again.',
+		'success' => 'The license was deleted successfully.'
 	)
 
 );
