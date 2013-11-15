@@ -19,10 +19,6 @@ Category Update ::
 </div>
 
 
-
-
-
-
 <form class="form-horizontal" method="post" action="" autocomplete="off">
 	<!-- CSRF Token -->
 	<input type="hidden" name="_token" value="{{ csrf_token() }}" />
@@ -48,8 +44,6 @@ Category Update ::
 				</div>
 			</div>
 		</div>
-
-
 
 	<!-- Form actions -->
 	<div class="control-group">
