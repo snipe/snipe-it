@@ -53,6 +53,11 @@ Route::group(array('prefix' => 'admin'), function()
 		Route::group(array('prefix' => 'manufacturers'), function()
 		{
 			Route::get('/', array('as' => 'manufacturers', 'uses' => 'Controllers\Admin\ManufacturersController@getIndex'));
+			Route::get('create', array('as' => 'create/manufacturer', 'uses' => 'Controllers\Admin\ManufacturersController@getCreate'));
+			Route::post('create', 'Controllers\Admin\ManufacturersController@postCreate');
+			Route::get('{manufacturerId}/edit', array('as' => 'update/manufacturer', 'uses' => 'Controllers\Admin\ManufacturersController@getEdit'));
+			Route::post('{manufacturerId}/edit', 'Controllers\Admin\ManufacturersController@postEdit');
+			Route::get('{manufacturerId}/delete', array('as' => 'delete/manufacturer', 'uses' => 'Controllers\Admin\ManufacturersController@getDelete'));
 		});
 
 		# Categories
@@ -64,7 +69,6 @@ Route::group(array('prefix' => 'admin'), function()
 			Route::get('{categoryId}/edit', array('as' => 'update/category', 'uses' => 'Controllers\Admin\CategoriesController@getEdit'));
 			Route::post('{categoryId}/edit', 'Controllers\Admin\CategoriesController@postEdit');
 			Route::get('{categoryId}/delete', array('as' => 'delete/category', 'uses' => 'Controllers\Admin\CategoriesController@getDelete'));
-			Route::get('{categoryId}/restore', array('as' => 'restore/category', 'uses' => 'Controllers\Admin\CategoriesController@getRestore'));
 
 		});
 
