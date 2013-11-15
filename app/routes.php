@@ -52,9 +52,9 @@ Route::group(array('prefix' => 'admin'), function()
 			Route::get('/', array('as' => 'licenses', 'uses' => 'Controllers\Admin\LicensesController@getIndex'));
 			Route::get('create', array('as' => 'create/licenses', 'uses' => 'Controllers\Admin\LicensesController@getCreate'));
 			Route::post('create', 'Controllers\Admin\LicensesController@postCreate');
-			Route::get('{manufacturerId}/edit', array('as' => 'update/licenses', 'uses' => 'Controllers\Admin\LicensesController@getEdit'));
-			Route::post('{manufacturerId}/edit', 'Controllers\Admin\LicensesController@postEdit');
-			Route::get('{manufacturerId}/delete', array('as' => 'delete/licenses', 'uses' => 'Controllers\Admin\LicensesController@getDelete'));
+			Route::get('{licenseId}/edit', array('as' => 'update/license', 'uses' => 'Controllers\Admin\LicensesController@getEdit'));
+			Route::post('{licenseId}/edit', 'Controllers\Admin\LicensesController@postEdit');
+			Route::get('{licenseId}/delete', array('as' => 'delete/license', 'uses' => 'Controllers\Admin\LicensesController@getDelete'));
 		});
 
 
