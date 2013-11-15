@@ -16,7 +16,7 @@ return array(
 
 	'delete' => array(
 		'error'   => 'There was an issue deleting the category. Please try again.',
-		'success' => 'The category post was deleted successfully.'
+		'success' => 'The category was deleted successfully.'
 	)
 
 );
