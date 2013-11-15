@@ -46,6 +46,18 @@ Route::group(array('prefix' => 'admin'), function()
 		Route::get('{blogId}/restore', array('as' => 'restore/blog', 'uses' => 'Controllers\Admin\BlogsController@getRestore'));
 	});
 
+	# Licenses
+		Route::group(array('prefix' => 'licenses'), function()
+		{
+			Route::get('/', array('as' => 'licenses', 'uses' => 'Controllers\Admin\LicensesController@getIndex'));
+			Route::get('create', array('as' => 'create/licenses', 'uses' => 'Controllers\Admin\LicensesController@getCreate'));
+			Route::post('create', 'Controllers\Admin\LicensesController@postCreate');
+			Route::get('{manufacturerId}/edit', array('as' => 'update/licenses', 'uses' => 'Controllers\Admin\LicensesController@getEdit'));
+			Route::post('{manufacturerId}/edit', 'Controllers\Admin\LicensesController@postEdit');
+			Route::get('{manufacturerId}/delete', array('as' => 'delete/licenses', 'uses' => 'Controllers\Admin\LicensesController@getDelete'));
+		});
+
+
 	# Admin Settings Routes (for categories, maufactureres, etc)
 	Route::group(array('prefix' => 'settings'), function()
 	{
@@ -69,8 +81,10 @@ Route::group(array('prefix' => 'admin'), function()
 			Route::get('{categoryId}/edit', array('as' => 'update/category', 'uses' => 'Controllers\Admin\CategoriesController@getEdit'));
 			Route::post('{categoryId}/edit', 'Controllers\Admin\CategoriesController@postEdit');
 			Route::get('{categoryId}/delete', array('as' => 'delete/category', 'uses' => 'Controllers\Admin\CategoriesController@getDelete'));
-
 		});
+
+
+
 
 		# Depreciation
 		Route::group(array('prefix' => 'depreciation'), function()
