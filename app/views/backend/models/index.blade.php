@@ -17,9 +17,9 @@ Asset Models ::
 		</div>
 	</h3>
 </div>
-
+@if (count($models) > 10)
 {{ $models->links() }}
-
+@endif
 <table class="table table-bordered table-striped table-hover">
 	<thead>
 		<tr>
@@ -44,5 +44,8 @@ Asset Models ::
 	</tbody>
 </table>
 
+@if (count($models) > 10)
 {{ $models->links() }}
+@endif
+
 @stop

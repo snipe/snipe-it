@@ -18,7 +18,9 @@ Asset Manufacturers ::
 	</h3>
 </div>
 
+@if (count($manufacturers) > 10)
 {{ $manufacturers->links() }}
+@endif
 
 <table class="table table-bordered table-striped table-hover">
 	<thead>
@@ -44,5 +46,8 @@ Asset Manufacturers ::
 	</tbody>
 </table>
 
+@if (count($manufacturers) > 10)
 {{ $manufacturers->links() }}
+@endif
+
 @stop
