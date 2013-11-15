@@ -59,6 +59,12 @@ Route::group(array('prefix' => 'admin'), function()
 		Route::group(array('prefix' => 'categories'), function()
 		{
 			Route::get('/', array('as' => 'categories', 'uses' => 'Controllers\Admin\CategoriesController@getIndex'));
+			Route::get('create', array('as' => 'create/category', 'uses' => 'Controllers\Admin\CategoriesController@getCreate'));
+			Route::post('create', 'Controllers\Admin\CategoriesController@postCreate');
+			Route::get('{categoryId}/edit', array('as' => 'update/category', 'uses' => 'Controllers\Admin\CategoriesController@getEdit'));
+			Route::post('{categoryId}/edit', 'Controllers\Admin\CategoriesController@postEdit');
+			Route::get('{categoryId}/delete', array('as' => 'delete/category', 'uses' => 'Controllers\Admin\CategoriesController@getDelete'));
+			Route::get('{categoryId}/restore', array('as' => 'restore/category', 'uses' => 'Controllers\Admin\CategoriesController@getRestore'));
 
 		});
 
