@@ -2,21 +2,21 @@
 
 return array(
 
-	'does_not_exist' => 'Blog post does not exist.',
+	'does_not_exist' => 'Model does not exist.',
 
 	'create' => array(
-		'error'   => 'Blog post was not created, please try again.',
-		'success' => 'Blog post created successfully.'
+		'error'   => 'Model was not created, please try again.',
+		'success' => 'Model created successfully.'
 	),
 
 	'update' => array(
-		'error'   => 'Blog post was not updated, please try again',
-		'success' => 'Blog post updated successfully.'
+		'error'   => 'Model was not updated, please try again',
+		'success' => 'Model updated successfully.'
 	),
 
 	'delete' => array(
-		'error'   => 'There was an issue deleting the blog post. Please try again.',
-		'success' => 'The blog post was deleted successfully.'
+		'error'   => 'There was an issue deleting the model. Please try again.',
+		'success' => 'The model was deleted successfully.'
 	)
 
 );

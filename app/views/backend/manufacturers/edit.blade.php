@@ -37,7 +37,7 @@
 		<div class="tab-pane active" id="tab-general">
 			<!-- Category Title -->
 			<div class="control-group {{ $errors->has('name') ? 'error' : '' }}">
-				<label class="control-label" for="name">Category Name</label>
+				<label class="control-label" for="name">Manufacturer Name</label>
 				<div class="controls">
 					<input type="text" name="name" id="name" value="{{ Input::old('name', $manufacturer->name) }}" />
 					{{ $errors->first('name', '<span class="help-inline">:message</span>') }}

@@ -2,7 +2,11 @@
 
 {{-- Page title --}}
 @section('title')
-Update Asset Model ::
+	@if ($model->id)
+		Update Model
+	@else
+		Create Model
+	@endif
 @parent
 @stop
 
@@ -10,19 +14,17 @@ Update Asset Model ::
 @section('content')
 <div class="page-header">
 	<h3>
-		Blog Post Update
+		@if ($model->id)
+		Update Model
+		@else
+			Create New Model
+		@endif
 
 		<div class="pull-right">
 			<a href="{{ route('models') }}" class="btn btn-small btn-inverse"><i class="icon-circle-arrow-left icon-white"></i> Back</a>
 		</div>
 	</h3>
 </div>
-
-<!-- Tabs -->
-<ul class="nav nav-tabs">
-	<li class="active"><a href="#tab-general" data-toggle="tab">General</a></li>
-	<li><a href="#tab-meta-data" data-toggle="tab">Meta Data</a></li>
-</ul>
 
 <form class="form-horizontal" method="post" action="" autocomplete="off">
 	<!-- CSRF Token -->
@@ -32,77 +34,42 @@ Update Asset Model ::
 	<div class="tab-content">
 		<!-- General tab -->
 		<div class="tab-pane active" id="tab-general">
-			<!-- Post Title -->
-			<div class="control-group {{ $errors->has('title') ? 'error' : '' }}">
-				<label class="control-label" for="title">Post Title</label>
+			<!-- Model Title -->
+			<div class="control-group {{ $errors->has('name') ? 'error' : '' }}">
+				<label class="control-label" for="name">Model Name</label>
 				<div class="controls">
-					<input type="text" name="title" id="title" value="{{ Input::old('title', $post->title) }}" />
-					{{ $errors->first('title', '<span class="help-inline">:message</span>') }}
+					<input type="text" name="name" id="name" value="{{ Input::old('name', $model->name) }}" />
+					{{ $errors->first('name', '<span class="help-inline">:message</span>') }}
 				</div>
 			</div>
 
-			<!-- Post Slug -->
-			<div class="control-group">
-				<label class="control-label" for="slug">Slug</label>
+			<div class="control-group {{ $errors->has('name') ? 'error' : '' }}">
+				<label class="control-label" for="modelno">Model No.</label>
 				<div class="controls">
-					<div class="input-prepend">
-						<span class="add-on">
-							{{ str_finish(URL::to('/'), '/') }}
-						</span>
-						<input class="span6" type="text" name="slug" id="slug" value="{{ Input::old('slug', $post->slug) }}">
-					</div>
+					<input type="text" name="modelno" id="modelno" value="{{ Input::old('modelno', $model->modelno) }}" />
+					{{ $errors->first('modelno', '<span class="help-inline">:message</span>') }}
 				</div>
 			</div>
 
-			<!-- Content -->
-			<div class="control-group {{ $errors->has('content') ? 'error' : '' }}">
-				<label class="control-label" for="content">Content</label>
+
+			<!-- Depreciation -->
+			<div class="control-group {{ $errors->has('depreciation_id') ? 'error' : '' }}">
+				<label class="control-label" for="parent">Depreciation</label>
 				<div class="controls">
-					<textarea class="span10" name="content" value="content" rows="10">{{ Input::old('content', $post->content) }}</textarea>
-					{{ $errors->first('content', '<span class="help-inline">:message</span>') }}
+					{{ Form::select('depreciation_id', $depreciation_list , Input::old('depreciation_id', $model->depreciation_id)) }}
+					{{ $errors->first('depreciation_id', '<span class="help-inline">:message</span>') }}
 				</div>
 			</div>
 		</div>
 
-		<!-- Meta Data tab -->
-		<div class="tab-pane" id="tab-meta-data">
-			<!-- Meta Title -->
-			<div class="control-group {{ $errors->has('meta-title') ? 'error' : '' }}">
-				<label class="control-label" for="meta-title">Meta Title</label>
-				<div class="controls">
-					<input class="span10" type="text" name="meta-title" id="meta-title" value="{{ Input::old('meta-title', $post->meta_title) }}" />
-					{{ $errors->first('meta-title', '<span class="help-inline">:message</span>') }}
-				</div>
-			</div>
 
-			<!-- Meta Description -->
-			<div class="control-group {{ $errors->has('meta-description') ? 'error' : '' }}">
-				<label class="control-label" for="meta-description">Meta Description</label>
-				<div class="controls">
-					<input class="span10" type="text" name="meta-description" id="meta-description" value="{{ Input::old('meta-description', $post->meta_description) }}" />
-					{{ $errors->first('meta-description', '<span class="help-inline">:message</span>') }}
-				</div>
-			</div>
-
-			<!-- Meta Keywords -->
-			<div class="control-group {{ $errors->has('meta-keywords') ? 'error' : '' }}">
-				<label class="control-label" for="meta-keywords">Meta Keywords</label>
-				<div class="controls">
-					<input class="span10" type="text" name="meta-keywords" id="meta-keywords" value="{{ Input::old('meta-keywords', $post->meta_keywords) }}" />
-					{{ $errors->first('meta-keywords', '<span class="help-inline">:message</span>') }}
-				</div>
-			</div>
-		</div>
 	</div>
 
 	<!-- Form Actions -->
 	<div class="control-group">
 		<div class="controls">
 			<a class="btn btn-link" href="{{ route('blogs') }}">Cancel</a>
-
-			<button type="reset" class="btn">Reset</button>
-
-			<button type="submit" class="btn btn-success">Publish</button>
+			<button type="submit" class="btn btn-success">Save</button>
 		</div>
 	</div>
 </form>

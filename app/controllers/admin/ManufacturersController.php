@@ -34,9 +34,7 @@ class ManufacturersController extends AdminController {
 	 */
 	public function getCreate()
 	{
-		// Show the page
-		$manufacturer_options = array('0' => 'Top Level') + Manufacturer::lists('name', 'id');
-		return View::make('backend/manufacturers/edit')->with('manufacturer_options',$manufacturer_options)->with('manufacturer', new Manufacturer);
+		return View::make('backend/manufacturers/edit')->with('manufacturer', new Manufacturer);
 	}
 
 

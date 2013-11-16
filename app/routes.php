@@ -29,6 +29,11 @@ Route::group(array('prefix' => 'assets'), function()
 	Route::group(array('prefix' => 'models'), function()
 	{
 		Route::get('/', array('as' => 'models', 'uses' => 'Controllers\Admin\ModelsController@getIndex'));
+		Route::get('create', array('as' => 'create/model', 'uses' => 'Controllers\Admin\ModelsController@getCreate'));
+		Route::post('create', 'Controllers\Admin\ModelsController@postCreate');
+		Route::get('{modelId}/edit', array('as' => 'update/model', 'uses' => 'Controllers\Admin\ModelsController@getEdit'));
+		Route::post('{modelId}/edit', 'Controllers\Admin\ModelsController@postEdit');
+		Route::get('{modelId}/delete', array('as' => 'delete/model', 'uses' => 'Controllers\Admin\ModelsController@getDelete'));
 	});
 
 
