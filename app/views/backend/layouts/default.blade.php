@@ -21,6 +21,7 @@
 		================================================== -->
 		<link href="{{ asset('assets/css/bootstrap.css') }}" rel="stylesheet">
 		<link href="{{ asset('assets/css/bootstrap-responsive.css') }}" rel="stylesheet">
+		<link rel="stylesheet" type="text/css" href="{{ asset('assets/css/datepicker.css') }}">
 
 		<style>
 		@section('styles')
@@ -41,13 +42,17 @@
 		<link rel="apple-touch-icon-precomposed" sizes="114x114" href="{{ asset('assets/ico/apple-touch-icon-114-precomposed.png') }}">
 		<link rel="apple-touch-icon-precomposed" sizes="72x72" href="{{ asset('assets/ico/apple-touch-icon-72-precomposed.png') }}">
 		<link rel="apple-touch-icon-precomposed" href="{{ asset('assets/ico/apple-touch-icon-57-precomposed.png') }}">
+
 		<link rel="shortcut icon" href="{{ asset('assets/ico/favicon.png') }}">
 	</head>
 
 	<body>
 		<!-- Container -->
 		<div class="container">
+			<!-- Header thingie will go here -->
+
 			<!-- Navbar -->
+
 			<div class="navbar navbar-inverse navbar-fixed-top">
 				<div class="navbar-inner">
 					<div class="container">
@@ -105,5 +110,12 @@
 		================================================== -->
 		<script src="{{ asset('assets/js/jquery.1.10.2.min.js') }}"></script>
 		<script src="{{ asset('assets/js/bootstrap/bootstrap.min.js') }}"></script>
+		<script type="text/javascript" src="{{ asset('assets/js/bootstrap-datepicker.js') }}"></script>
+
+		<script type="text/javascript">
+			$(document).ready(function() {
+    		$('.datepicker').datepicker();
+			});
+		</script>
 	</body>
 </html>

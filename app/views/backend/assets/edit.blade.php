@@ -66,21 +66,21 @@ Asset Update ::
 				</div>
 			</div>
 
-			<!-- Model Number -->
+				<!-- Model -->
 			<div class="control-group {{ $errors->has('model_id') ? 'error' : '' }}">
-				<label class="control-label" for="model_id">Model ID</label>
+				<label class="control-label" for="parent">Model</label>
 				<div class="controls">
-					<input class="span2" type="text" name="model_id" id="model_id" value="{{ Input::old('model_id', $asset->model_id) }}" />
+					{{ Form::select('model_id', $model_list , Input::old('model_id', $asset->model_id)) }}
 					{{ $errors->first('model_id', '<span class="help-inline">:message</span>') }}
 				</div>
 			</div>
 
 			<!-- Purchase Date -->
 			<div class="control-group {{ $errors->has('purchase_date') ? 'error' : '' }}">
-				<label class="control-label" for="purchase_date">Purchase Date (YYY-mm-dd)</label>
+				<label class="control-label" for="purchase_date">Purchase Date</label>
 				<div class="controls">
-					<input class="span2" type="text" name="purchase_date" id="purchase_date" value="{{ Input::old('purchase_date', $asset->purchase_date) }}" />
-					{{ $errors->first('purchase_date', '<span class="help-inline">:message</span>') }}
+				<input type="text" class="datepicker span2" data-date-format="yyyy-mm-dd" placeholder="Select Date" name="purchase_date" id="purchase_date" value="{{ Input::old('purchase_date', $asset->purchase_date) }}">
+				{{ $errors->first('purchase_date', '<span class="help-inline">:message</span>') }}
 				</div>
 			</div>
 
