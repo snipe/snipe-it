@@ -22,7 +22,6 @@ class ModelsSeeder extends Seeder {
 			'user_id' => 1,
 		);
 
-		$date = new DateTime;
 		$models[] = array(
 			'name'      => 'MacBook Pro (Retina, 13-inch, Late 2012)',
 			'manufacturer_id'      => '1',
@@ -34,7 +33,6 @@ class ModelsSeeder extends Seeder {
 			'user_id' => 1,
 		);
 
-		$date = new DateTime;
 		$models[] = array(
 			'name'      => 'MacBook Pro (Retina, 13-inch, Early 2013)',
 			'manufacturer_id'      => '2',
@@ -47,7 +45,6 @@ class ModelsSeeder extends Seeder {
 		);
 
 
-		$date = new DateTime;
 		$models[] = array(
 			'name'      => 'MacBook Pro (Retina, 13-inch, Late 2013)',
 			'manufacturer_id'      => '2',
@@ -59,7 +56,7 @@ class ModelsSeeder extends Seeder {
 			'user_id' => 1,
 		);
 
-		$date = new DateTime;
+
 		$models[] = array(
 			'name'      => 'Inspiron 15 Non-Touch',
 			'manufacturer_id'      => '4',
@@ -71,7 +68,6 @@ class ModelsSeeder extends Seeder {
 			'user_id' => 1,
 		);
 
-		$date = new DateTime;
 		$models[] = array(
 			'name'      => '22-inch T897',
 			'manufacturer_id'      => '4',

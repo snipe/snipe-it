@@ -116,6 +116,68 @@ class AssetsSeeder extends Seeder {
 		);
 
 
+		$asset[] = array(
+			'name'      => 'Ricky Laptop',
+			'asset_tag'      => 'NNY987348r9',
+			'model_id'      => 5,
+			'serial'      => 'WS98479437593',
+			'purchase_date'      => '2011-05-06',
+			'purchase_cost'      => '3499.99',
+			'order_number'      => '9080908',
+			'created_at' => $date->modify('-10 day'),
+			'updated_at' => $date->modify('-3 day'),
+			'user_id' => 1,
+			'assigned_to' => 1,
+			'location_id' => 1,
+		);
+
+		$asset[] = array(
+			'name'      => 'Andrew Laptop',
+			'asset_tag'      => 'NNY989789',
+			'model_id'      => 6,
+			'serial'      => 'WS9080908',
+			'purchase_date'      => '2012-09-18',
+			'purchase_cost'      => '3499.99',
+			'order_number'      => '09809809080',
+			'created_at' => $date->modify('-10 day'),
+			'updated_at' => $date->modify('-3 day'),
+			'user_id' => 1,
+			'assigned_to' => 1,
+			'location_id' => 1,
+		);
+
+		$asset[] = array(
+			'name'      => 'Andra Laptop',
+			'asset_tag'      => 'NNY8907979',
+			'model_id'      => 6,
+			'serial'      => 'WS9080908',
+			'purchase_date'      => '2012-09-18',
+			'purchase_cost'      => '3499.99',
+			'order_number'      => '09809809080',
+			'created_at' => $date->modify('-10 day'),
+			'updated_at' => $date->modify('-3 day'),
+			'user_id' => 1,
+			'assigned_to' => 1,
+			'location_id' => 1,
+		);
+
+
+		$asset[] = array(
+			'name'      => 'Win8 Test Laptop',
+			'asset_tag'      => 'NNY879873497',
+			'model_id'      => 6,
+			'serial'      => '98708908098098',
+			'purchase_date'      => '2011-09-18',
+			'purchase_cost'      => '1299.99',
+			'order_number'      => '980908909',
+			'created_at' => $date->modify('-10 day'),
+			'updated_at' => $date->modify('-3 day'),
+			'user_id' => 1,
+			'assigned_to' => 1,
+			'location_id' => 1,
+		);
+
+
 
 
 
