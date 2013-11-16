@@ -59,11 +59,7 @@ User Management ::
 			<td>{{ $user->created_at->diffForHumans() }}</td>
 			<td>
 
-
-
-
-
-
+			@if ($user->id > 3)
 				@if ( ! is_null($user->deleted_at))
 				<a href="{{ route('restore/user', $user->id) }}" class="btn btn-mini btn-warning"><i class="icon-share-alt icon-white"></i> @lang('button.restore')</a>
 				@else
@@ -74,6 +70,7 @@ User Management ::
 				<span class="btn btn-mini btn-danger disabled"><i class="icon-remove icon-white"></i> @lang('button.delete')</span>
 				@endif
 				@endif
+			@endif
 			</td>
 		</tr>
 		@endforeach
