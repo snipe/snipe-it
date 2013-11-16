@@ -57,7 +57,7 @@ class AssetsController extends AdminController {
 		// Declare the rules for the form validation
 		$rules = array(
 			'name'   => 'required|min:3',
-			'asset_tag'   => 'required|min:3',
+			'asset_tag'   => 'required|min:3|unique:assets',
 			'model_id'   => 'required',
 			'serial'   => 'required|min:3',
 		);
