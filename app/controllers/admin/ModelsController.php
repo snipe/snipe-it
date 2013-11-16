@@ -14,13 +14,13 @@ use View;
 class ModelsController extends AdminController {
 
 	/**
-	 * Show a list of all the blog posts.
+	 * Show a list of all the models.
 	 *
 	 * @return View
 	 */
 	public function getIndex()
 	{
-		// Grab all the blog posts
+		// Grab all the models
 		$models = Model::orderBy('created_at', 'DESC')->paginate(10);
 
 		// Show the page
@@ -115,7 +115,7 @@ class ModelsController extends AdminController {
 	 */
 	public function postEdit($modelId = null)
 	{
-		// Check if the blog post exists
+		// Check if the model exists
 		if (is_null($model = Model::find($modelId)))
 		{
 			// Redirect to the blogs management page
@@ -161,17 +161,17 @@ class ModelsController extends AdminController {
 	 */
 	public function getDelete($modelId)
 	{
-		// Check if the blog post exists
+		// Check if the model exists
 		if (is_null($model = Model::find($modelId)))
 		{
 			// Redirect to the blogs management page
 			return Redirect::to('assets/models')->with('error', Lang::get('admin/models/message.not_found'));
 		}
 
-		// Delete the blog post
+		// Delete the model
 		$model->delete();
 
-		// Redirect to the blog posts management page
+		// Redirect to the models management page
 		return Redirect::to('assets/models')->with('success', Lang::get('admin/models/message.delete.success'));
 	}
 

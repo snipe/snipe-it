@@ -83,9 +83,6 @@ Create a Group ::
 	<div class="control-group">
 		<div class="controls">
 			<a class="btn btn-link" href="{{ route('groups') }}">Cancel</a>
-
-			<button type="reset" class="btn">Reset</button>
-
 			<button type="submit" class="btn btn-success">Create Group</button>
 		</div>
 	</div>

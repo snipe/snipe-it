@@ -16,9 +16,9 @@
 	<h3>
 		@if ($license->id)
 		Update License ::
-	@else
+		@else
 		Create License ::
-	@endif
+		@endif
 
 		<div class="pull-right">
 			<a href="{{ route('licenses') }}" class="btn btn-small btn-inverse"><i class="icon-circle-arrow-left icon-white"></i> Back</a>
@@ -104,7 +104,7 @@
 	<!-- Form actions -->
 	<div class="control-group">
 		<div class="controls">
-			<a class="btn btn-link" href="{{ route('blogs') }}">Cancel</a>
+			<a class="btn btn-link" href="{{ route('licenses') }}">Cancel</a>
 			<button type="submit" class="btn btn-success">Save Edits</button>
 		</div>
 	</div>

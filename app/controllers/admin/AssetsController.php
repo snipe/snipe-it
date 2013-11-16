@@ -185,7 +185,7 @@ class AssetsController extends AdminController {
 	 */
 	public function getDelete($assetId)
 	{
-		// Check if the blog post exists
+		// Check if the asset exists
 		if (is_null($asset = Asset::find($assetId)))
 		{
 			// Redirect to the asset management page with error

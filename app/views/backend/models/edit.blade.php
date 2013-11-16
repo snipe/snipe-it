@@ -68,7 +68,7 @@
 	<!-- Form Actions -->
 	<div class="control-group">
 		<div class="controls">
-			<a class="btn btn-link" href="{{ route('blogs') }}">Cancel</a>
+			<a class="btn btn-link" href="{{ route('models') }}">Cancel</a>
 			<button type="submit" class="btn btn-success">Save</button>
 		</div>
 	</div>

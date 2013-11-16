@@ -19,7 +19,7 @@ class ManufacturersController extends AdminController {
 	 */
 	public function getIndex()
 	{
-		// Grab all the blog posts
+		// Grab all the manufacturers
 		$manufacturers = Manufacturer::orderBy('created_at', 'DESC')->paginate(10);
 
 		// Show the page
@@ -106,7 +106,7 @@ class ManufacturersController extends AdminController {
 	 */
 	public function postEdit($manufacturerId = null)
 	{
-		// Check if the blog post exists
+		// Check if the manufacturer exists
 		if (is_null($manufacturer = Manufacturer::find($manufacturerId)))
 		{
 			// Redirect to the manufacturer  page
