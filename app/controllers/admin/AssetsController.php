@@ -6,6 +6,7 @@ use Lang;
 use Asset;
 use Redirect;
 use DB;
+use Model;
 use Sentry;
 use Str;
 use Validator;
@@ -36,9 +37,10 @@ class AssetsController extends AdminController {
 	 */
 	public function getCreate()
 	{
-		// Show the page
-		$asset_options = array('0' => 'Top Level') + Asset::lists('name', 'id');
-		return View::make('backend/assets/create')->with('asset_options',$asset_options);
+		// Grab the dropdown list of models
+		$model_list = array('0' => 'Select') + Model::lists('name', 'id');
+		return View::make('backend/assets/create')->with('model_list',$model_list);
+
 	}
 
 
@@ -109,11 +111,9 @@ class AssetsController extends AdminController {
 			return Redirect::to('admin/settings/assets')->with('error', Lang::get('admin/assets/message.does_not_exist'));
 		}
 
-		// Show the page
-		//$asset_options = array('' => 'Top Level') + Asset::lists('name', 'id');
-
-		$asset_options = array('' => 'Top Level') + DB::table('assets')->where('id', '!=', $assetId)->lists('name', 'id');
-		return View::make('backend/assets/edit', compact('asset'))->with('asset_options',$asset_options);
+		// Grab the dropdown list of models
+		$model_list = array('0' => 'Select') + Model::lists('name', 'id');
+		return View::make('backend/assets/edit', compact('asset'))->with('model_list',$model_list);
 	}
 
 
@@ -193,7 +193,6 @@ class AssetsController extends AdminController {
 		// Redirect to the blog posts management page
 		return Redirect::to('assets/assets')->with('success', Lang::get('admin/assets/message.delete.success'));
 	}
-
 
 
 }
