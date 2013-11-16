@@ -38,7 +38,7 @@ class DepreciationsController extends AdminController {
 	{
 		// Show the page
 		$depreciation_options = array('0' => 'Top Level') + Depreciation::lists('name', 'id');
-		return View::make('backend/depreciations/create')->with('depreciation_options',$depreciation_options);
+		return View::make('backend/depreciations/edit')->with('depreciation_options',$depreciation_options)->with('depreciation',new Depreciation);
 	}
 
 

@@ -13,7 +13,7 @@ use View;
 class ManufacturersController extends AdminController {
 
 	/**
-	 * Show a list of all the blog posts.
+	 * Show a list of all manufacturers
 	 *
 	 * @return View
 	 */
@@ -36,7 +36,7 @@ class ManufacturersController extends AdminController {
 	{
 		// Show the page
 		$manufacturer_options = array('0' => 'Top Level') + Manufacturer::lists('name', 'id');
-		return View::make('backend/manufacturers/create')->with('manufacturer_options',$manufacturer_options);
+		return View::make('backend/manufacturers/edit')->with('manufacturer_options',$manufacturer_options)->with('manufacturer', new Manufacturer);
 	}
 
 
@@ -141,7 +141,7 @@ class ManufacturersController extends AdminController {
 		}
 
 		// Redirect to the manufacturer management page
-		return Redirect::to("admin/settings/manufacturers/$manufacturerID/edit")->with('error', Lang::get('admin/manufacturers/message.update.error'));
+		return Redirect::to("admin/settings/manufacturers/$manufacturerId/edit")->with('error', Lang::get('admin/manufacturers/message.update.error'));
 	}
 
 	/**
@@ -159,7 +159,7 @@ class ManufacturersController extends AdminController {
 			return Redirect::to('admin/settings/manufacturers')->with('error', Lang::get('admin/manufacturers/message.not_found'));
 		}
 
-		// Delete the blog post
+		// Delete the manufacturer
 		$manufacturer->delete();
 
 		// Redirect to the manufacturers management page

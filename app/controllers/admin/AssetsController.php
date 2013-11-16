@@ -39,9 +39,10 @@ class AssetsController extends AdminController {
 	public function getCreate()
 	{
 		// Grab the dropdown list of models
-		$model_list = array('0' => 'Select') + Model::lists('name', 'id');
+		$model_list = array('' => 'Select') + Model::lists('name', 'id');
 		$depreciation_list = array('' => 'Do Not Depreciate') + Depreciation::lists('name', 'id');
-		return View::make('backend/assets/create')->with('model_list',$model_list)->with('depreciation_list',$depreciation_list);
+
+		return View::make('backend/assets/edit')->with('model_list',$model_list)->with('depreciation_list',$depreciation_list)->with('asset',new Asset);
 
 	}
 
@@ -57,7 +58,7 @@ class AssetsController extends AdminController {
 		$rules = array(
 			'name'   => 'required|min:3',
 			'asset_tag'   => 'required|min:3',
-			'model_id'   => 'required|min:1',
+			'model_id'   => 'required',
 			'serial'   => 'required|min:3',
 		);
 
@@ -74,8 +75,7 @@ class AssetsController extends AdminController {
 		// Create a new asset
 		$asset = new Asset;
 
-		// Update the asset data
-		// Update the asset data
+		// Save the asset data
 		$asset->name            		= e(Input::get('name'));
 		$asset->serial            		= e(Input::get('serial'));
 		$asset->model_id           		= e(Input::get('model_id'));
@@ -90,11 +90,11 @@ class AssetsController extends AdminController {
 		// Was the asset created?
 		if($asset->save())
 		{
-			// Redirect to the new asset  page
+			// Redirect to the asset listing page
 			return Redirect::to("assets/assets")->with('success', Lang::get('admin/assets/message.create.success'));
 		}
 
-		// Redirect to the asset create page
+		// Redirect to the asset create page with an error
 		return Redirect::to('assets/assets/create')->with('error', Lang::get('admin/assets/message.create.error'));
 	}
 
@@ -109,12 +109,14 @@ class AssetsController extends AdminController {
 		// Check if the asset exists
 		if (is_null($asset = Asset::find($assetId)))
 		{
-			// Redirect to the blogs management page
+			// Redirect to the asset management page
 			return Redirect::to('admin/settings/assets')->with('error', Lang::get('admin/assets/message.does_not_exist'));
 		}
 
 		// Grab the dropdown list of models
-		$model_list = array('0' => 'Select') + Model::lists('name', 'id');
+		$model_list = array('' => 'Select') + Model::lists('name', 'id');
+
+		// get depreciation list
 		$depreciation_list = array('' => 'Do Not Depreciate') + Depreciation::lists('name', 'id');
 		return View::make('backend/assets/edit', compact('asset'))->with('model_list',$model_list)->with('depreciation_list',$depreciation_list);
 	}
@@ -128,10 +130,10 @@ class AssetsController extends AdminController {
 	 */
 	public function postEdit($assetId = null)
 	{
-		// Check if the blog post exists
+		// Check if the asset exists
 		if (is_null($asset = Asset::find($assetId)))
 		{
-			// Redirect to the blogs management page
+			// Redirect to the asset management page with error
 			return Redirect::to('admin/assets')->with('error', Lang::get('admin/assets/message.does_not_exist'));
 		}
 
@@ -139,7 +141,7 @@ class AssetsController extends AdminController {
 		$rules = array(
 			'name'   => 'required|min:3',
 			'asset_tag'   => 'required|min:3',
-			'model_id'   => 'required|min:1',
+			'model_id'   => 'required',
 			'serial'   => 'required|min:3',
 		);
 
@@ -171,8 +173,8 @@ class AssetsController extends AdminController {
 			return Redirect::to("assets/assets/$assetId/edit")->with('success', Lang::get('admin/assets/message.update.success'));
 		}
 
-		// Redirect to the asset management page
-		return Redirect::to("assets/assets/$assetID/edit")->with('error', Lang::get('admin/assets/message.update.error'));
+		// Redirect to the asset management page with error
+		return Redirect::to("assets/assets/$assetId/edit")->with('error', Lang::get('admin/assets/message.update.error'));
 	}
 
 	/**
@@ -186,14 +188,14 @@ class AssetsController extends AdminController {
 		// Check if the blog post exists
 		if (is_null($asset = Asset::find($assetId)))
 		{
-			// Redirect to the blogs management page
+			// Redirect to the asset management page with error
 			return Redirect::to('assets/assets')->with('error', Lang::get('admin/assets/message.not_found'));
 		}
 
-		// Delete the blog post
+		// Delete the asset
 		$asset->delete();
 
-		// Redirect to the blog posts management page
+		// Redirect to the asset management page
 		return Redirect::to('assets/assets')->with('success', Lang::get('admin/assets/message.delete.success'));
 	}
 

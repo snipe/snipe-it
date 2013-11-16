@@ -18,7 +18,9 @@ Group Management ::
 	</h3>
 </div>
 
+@if (count($groups) > 10)
 {{ $groups->links() }}
+@endif
 
 <table class="table table-bordered table-striped table-hover">
 	<thead>
@@ -52,5 +54,8 @@ Group Management ::
 	</tbody>
 </table>
 
+@if (count($groups) > 10)
 {{ $groups->links() }}
+@endif
+
 @stop

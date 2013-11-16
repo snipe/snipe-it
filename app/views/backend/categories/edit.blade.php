@@ -2,7 +2,11 @@
 
 {{-- Page title --}}
 @section('title')
-Category Update ::
+@if ($category->id)
+	Category Update ::
+@else
+	Create Category ::
+	@endif
 @parent
 @stop
 
@@ -10,7 +14,11 @@ Category Update ::
 @section('content')
 <div class="page-header">
 	<h3>
-		Update Category
+		@if ($category->id)
+			Category Update
+		@else
+			Create Category
+		@endif
 
 		<div class="pull-right">
 			<a href="{{ route('categories') }}" class="btn btn-small btn-inverse"><i class="icon-circle-arrow-left icon-white"></i> Back</a>
@@ -49,7 +57,7 @@ Category Update ::
 	<div class="control-group">
 		<div class="controls">
 			<a class="btn btn-link" href="{{ route('blogs') }}">Cancel</a>
-			<button type="submit" class="btn btn-success">Publish</button>
+			<button type="submit" class="btn btn-success">Save</button>
 		</div>
 	</div>
 </form>

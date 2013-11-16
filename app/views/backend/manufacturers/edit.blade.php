@@ -2,7 +2,11 @@
 
 {{-- Page title --}}
 @section('title')
-Update Manufacturer ::
+	@if ($manufacturer->id)
+		Update Manufacturer
+	@else
+		Create manufacturer
+	@endif
 @parent
 @stop
 
@@ -10,7 +14,11 @@ Update Manufacturer ::
 @section('content')
 <div class="page-header">
 	<h3>
-		Update Category
+		@if ($manufacturer->id)
+		Update Manufacturer
+		@else
+			Create manufacturer
+		@endif
 
 		<div class="pull-right">
 			<a href="{{ route('manufacturers') }}" class="btn btn-small btn-inverse"><i class="icon-circle-arrow-left icon-white"></i> Back</a>
@@ -32,7 +40,7 @@ Update Manufacturer ::
 				<label class="control-label" for="name">Category Name</label>
 				<div class="controls">
 					<input type="text" name="name" id="name" value="{{ Input::old('name', $manufacturer->name) }}" />
-					{{ $errors->first('title', '<span class="help-inline">:message</span>') }}
+					{{ $errors->first('name', '<span class="help-inline">:message</span>') }}
 				</div>
 			</div>
 
@@ -41,8 +49,8 @@ Update Manufacturer ::
 	<!-- Form actions -->
 	<div class="control-group">
 		<div class="controls">
-			<a class="btn btn-link" href="{{ route('blogs') }}">Cancel</a>
-			<button type="submit" class="btn btn-success">Publish</button>
+			<a class="btn btn-link" href="{{ route('manufacturers') }}">Cancel</a>
+			<button type="submit" class="btn btn-success">Save</button>
 		</div>
 	</div>
 </form>

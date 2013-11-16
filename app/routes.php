@@ -110,16 +110,6 @@ Route::group(array('prefix' => 'admin'), function()
 			Route::get('{depreciationId}/delete', array('as' => 'delete/depreciations', 'uses' => 'Controllers\Admin\DepreciationsController@getDelete'));
 		});
 
-
-
-
-
-		# Depreciation
-		Route::group(array('prefix' => 'depreciation'), function()
-		{
-			Route::get('/', array('as' => 'depreciation', 'uses' => 'Controllers\Admin\ModelsController@getIndex'));
-
-		});
 	});
 
 

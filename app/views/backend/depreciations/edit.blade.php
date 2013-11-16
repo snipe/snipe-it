@@ -2,7 +2,13 @@
 
 {{-- Page title --}}
 @section('title')
-Update Depreciation Class ::
+
+	@if ($depreciation->id)
+		Update Depreciation
+	@else
+		Create Depreciation
+	@endif
+
 @parent
 @stop
 
@@ -10,7 +16,11 @@ Update Depreciation Class ::
 @section('content')
 <div class="page-header">
 	<h3>
-		Update Depreciation Class
+		@if ($depreciation->id)
+			Update Depreciation
+		@else
+			Create Depreciation
+		@endif
 
 		<div class="pull-right">
 			<a href="{{ route('depreciations') }}" class="btn btn-small btn-inverse"><i class="icon-circle-arrow-left icon-white"></i> Back</a>

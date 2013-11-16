@@ -2,7 +2,11 @@
 
 {{-- Page title --}}
 @section('title')
-License Update ::
+	@if ($license->id)
+		License Update ::
+	@else
+		Create License ::
+	@endif
 @parent
 @stop
 
@@ -10,7 +14,11 @@ License Update ::
 @section('content')
 <div class="page-header">
 	<h3>
-		Update License
+		@if ($license->id)
+		Update License ::
+	@else
+		Create License ::
+	@endif
 
 		<div class="pull-right">
 			<a href="{{ route('licenses') }}" class="btn btn-small btn-inverse"><i class="icon-circle-arrow-left icon-white"></i> Back</a>

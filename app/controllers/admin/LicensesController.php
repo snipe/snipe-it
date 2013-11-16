@@ -38,7 +38,7 @@ class LicensesController extends AdminController {
 	{
 		// Show the page
 		$license_options = array('0' => 'Top Level') + License::lists('name', 'id');
-		return View::make('backend/licenses/create')->with('license_options',$license_options);
+		return View::make('backend/licenses/edit')->with('license_options',$license_options)->with('license',new License);
 	}
 
 
@@ -87,7 +87,7 @@ class LicensesController extends AdminController {
 		}
 
 		// Redirect to the license create page
-		return Redirect::to('admin/licenses/create')->with('error', Lang::get('admin/licenses/message.create.error'));
+		return Redirect::to('admin/licenses/edit')->with('error', Lang::get('admin/licenses/message.create.error'))->with('license',new License);
 	}
 
 	/**
@@ -162,7 +162,7 @@ class LicensesController extends AdminController {
 		}
 
 		// Redirect to the license management page
-		return Redirect::to("admin/licenses/$licenseID/edit")->with('error', Lang::get('admin/licenses/message.update.error'));
+		return Redirect::to("admin/licenses/$licenseId/edit")->with('error', Lang::get('admin/licenses/message.update.error'));
 	}
 
 	/**

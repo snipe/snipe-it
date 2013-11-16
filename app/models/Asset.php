@@ -19,6 +19,8 @@ class Asset extends Eloquent {
 	public function depreciation()
 	{
 		$depreciation_id = Model::find($this->model_id)->depreciation_id;
+
+		if (isset($depreciation_id)) {
 		$depreciation_term = Depreciation::find($depreciation_id)->months;
 
 		$purchase_date = strtotime($this->purchase_date);
@@ -32,7 +34,10 @@ class Asset extends Eloquent {
 		if ($current_value < 0) {
 			$current_value = 0;
 		}
-        return $current_value;
+        	return $current_value;
+        } else {
+        	return $this->purchase_cost;
+        }
 
 	}
 

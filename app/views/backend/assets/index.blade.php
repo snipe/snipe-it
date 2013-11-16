@@ -41,8 +41,8 @@ Assets ::
 			<td>{{ $asset->serial }}</td>
 			<td>{{ $asset->status }}</td>
 			<td>{{ $asset->purchase_date }}</td>
-			<td>${{ $asset->purchase_cost }}</td>
-			<td>${{ $asset->depreciation() }}</td>
+			<td>${{ number_format($asset->purchase_cost) }}</td>
+			<td>${{ number_format($asset->depreciation()) }}</td>
 			<td>
 				<a href="{{ route('update/asset', $asset->id) }}" class="btn btn-mini">@lang('button.edit')</a>
 				<a href="{{ route('delete/asset', $asset->id) }}" class="btn btn-mini btn-danger">@lang('button.delete')</a>

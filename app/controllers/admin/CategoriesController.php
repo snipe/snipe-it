@@ -38,7 +38,7 @@ class CategoriesController extends AdminController {
 	{
 		// Show the page
 		$category_options = array('0' => 'Top Level') + Category::lists('name', 'id');
-		return View::make('backend/categories/create')->with('category_options',$category_options);
+		return View::make('backend/categories/edit')->with('category_options',$category_options)->with('category',new Category);
 	}
 
 

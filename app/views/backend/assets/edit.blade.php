@@ -2,7 +2,11 @@
 
 {{-- Page title --}}
 @section('title')
-Asset Update ::
+	@if ($asset->id)
+	Asset Update ::
+	@else
+	Create Asset ::
+	@endif
 @parent
 @stop
 
@@ -10,7 +14,11 @@ Asset Update ::
 @section('content')
 <div class="page-header">
 	<h3>
-		Update Asset
+	@if ($asset->id)
+	Asset Update
+	@else
+	Create Asset
+	@endif
 
 		<div class="pull-right">
 			<a href="{{ route('assets') }}" class="btn btn-small btn-inverse"><i class="icon-circle-arrow-left icon-white"></i> Back</a>
