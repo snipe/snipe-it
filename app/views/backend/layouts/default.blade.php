@@ -69,8 +69,8 @@
 							@if (Sentry::check())
 
 
-							<li{{ (Request::is('admin') ? ' class="active"' : '') }}><a href="{{ URL::to('admin') }}"><i class="icon-home icon-white"></i> Dashboard</a></li>
-							<li{{ (Request::is('assets/assets') ? ' class="active"' : '') }}><a href="{{ URL::to('assets/assets') }}"><i class="icon-barcode icon-white"></i> Assets</a></li>
+							<!-- <li{{ (Request::is('admin') ? ' class="active"' : '') }}><a href="{{ URL::to('admin') }}"><i class="icon-home icon-white"></i> Dashboard</a></li> -->
+							<li{{ (Request::is('admin') ? ' class="active"' : '') }}><a href="{{ URL::to('admin') }}"><i class="icon-barcode icon-white"></i> Assets</a></li>
 							<li{{ (Request::is('assets/models') ? ' class="active"' : '') }}><a href="{{ URL::to('assets/models') }}"><i class="icon-th-list icon-white"></i> Models</a></li>
 							<li{{ (Request::is('admin/users') ? ' class="active"' : '') }}><a href="{{ URL::to('admin/users') }}"><i class="icon-user icon-white"></i> People</a></li>
 							<li{{ (Request::is('admin/licenses') ? ' class="active"' : '') }}><a href="{{ URL::to('admin/licenses') }}"><i class="icon-certificate icon-white"></i> Licenses</a></li>

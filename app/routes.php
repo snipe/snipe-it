@@ -10,14 +10,17 @@
 */
 
 
+
 Route::group(array('prefix' => 'assets'), function()
 {
+
 
 
 # Assets
 Route::group(array('prefix' => 'assets'), function()
 	{
 	Route::get('/', array('as' => 'assets', 'uses' => 'Controllers\Admin\AssetsController@getIndex'));
+	Route::get('assets', array('as' => 'assets', 'uses' => 'Controllers\Admin\AssetsController@getIndex'));
 	Route::get('create', array('as' => 'create/asset', 'uses' => 'Controllers\Admin\AssetsController@getCreate'));
 	Route::post('create', 'Controllers\Admin\AssetsController@postCreate');
 	Route::get('{assetId}/edit', array('as' => 'update/asset', 'uses' => 'Controllers\Admin\AssetsController@getEdit'));
@@ -54,6 +57,7 @@ Route::group(array('prefix' => 'assets'), function()
 Route::group(array('prefix' => 'admin'), function()
 {
 
+
 	# Blog Management
 	Route::group(array('prefix' => 'blogs'), function()
 	{
@@ -77,6 +81,10 @@ Route::group(array('prefix' => 'admin'), function()
 			Route::post('{licenseId}/edit', 'Controllers\Admin\LicensesController@postEdit');
 			Route::get('{licenseId}/delete', array('as' => 'delete/license', 'uses' => 'Controllers\Admin\LicensesController@getDelete'));
 		});
+
+
+	// default admin screen until we get a fancy dashboard up
+	Route::get('/', array('as' => 'assets', 'uses' => 'Controllers\Admin\AssetsController@getIndex'));
 
 
 	# Admin Settings Routes (for categories, maufactureres, etc)
@@ -224,5 +232,4 @@ Route::group(array('prefix' => 'account'), function()
 |
 */
 
-
-Route::get('/', array('as' => 'home', 'uses' => 'AuthController@getSignin'));
+Route::get('/', array('as' => 'home', 'uses' => 'Controllers\Admin\AssetsController@getIndex'));
