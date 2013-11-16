@@ -4,6 +4,7 @@ use AdminController;
 use Input;
 use Lang;
 use License;
+use DB;
 use Redirect;
 use Sentry;
 use Str;
