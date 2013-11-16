@@ -113,7 +113,7 @@
 											<li{{ (Request::is('admin/groups*') ? ' class="active"' : '') }}><a href="{{ URL::to('admin/groups') }}"><i class="icon-user"></i> Groups</a></li>
 											<li{{ (Request::is('admin/settings/manufacturers*') ? ' class="active"' : '') }}><a href="{{ URL::to('admin/settings/manufacturers') }}"><i class="icon-briefcase"></i> Manufacturers</a></li>
 											<li{{ (Request::is('admin/settings/categories*') ? ' class="active"' : '') }}><a href="{{ URL::to('admin/settings/categories') }}"><i class="icon-th"></i> Categories</a></li>
-
+											<li{{ (Request::is('admin/settings/locations*') ? ' class="active"' : '') }}><a href="{{ URL::to('admin/settings/locations') }}"><i class="icon-globe"></i> Locations</a></li>
 											<li{{ (Request::is('admin/settings/depreciations*') ? ' class="active"' : '') }}><a href="{{ URL::to('admin/settings/depreciations') }}"><i class="icon-arrow-down"></i> Depreciation</a></li>
 
 

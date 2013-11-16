@@ -87,7 +87,7 @@
 			<div class="control-group {{ $errors->has('purchase_date') ? 'error' : '' }}">
 				<label class="control-label" for="purchase_date">Purchase Date</label>
 				<div class="controls">
-				<input type="text" class="datepicker span2" data-date-format="yyyy-mm-dd" placeholder="Select Date" name="purchase_date" id="purchase_date" value="{{ Input::old('purchase_date', $asset->purchase_date) }}"> <span class="add-on"><i class="icon-th"></i></span>
+				<input type="text" class="datepicker span2" data-date-format="yyyy-mm-dd" placeholder="Select Date" name="purchase_date" id="purchase_date" value="{{ Input::old('purchase_date', $asset->purchase_date) }}"> <span class="add-on"><i class="icon-calendar"></i></span>
 				{{ $errors->first('purchase_date', '<span class="help-inline">:message</span>') }}
 				</div>
 			</div>
