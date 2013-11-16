@@ -218,4 +218,4 @@ Route::group(array('prefix' => 'account'), function()
 */
 
 
-#Route::get('/', array('as' => 'home', 'uses' => 'BlogController@getIndex'));
+Route::get('/', array('as' => 'home', 'uses' => 'AuthController@getSignin'));
