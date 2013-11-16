@@ -89,6 +89,15 @@ Create a New Asset  ::
 				</div>
 			</div>
 
+			<!-- Depreciation -->
+			<div class="control-group {{ $errors->has('depreciation_id') ? 'error' : '' }}">
+				<label class="control-label" for="parent">Depreciation</label>
+				<div class="controls">
+					{{ Form::select('depreciation_id', $model_list , Input::old('depreciation_id')) }}
+					{{ $errors->first('depreciation_id', '<span class="help-inline">:message</span>') }}
+				</div>
+			</div>
+
 			<!-- Notes -->
 			<div class="control-group {{ $errors->has('notes') ? 'error' : '' }}">
 				<label class="control-label" for="notes">Notes</label>

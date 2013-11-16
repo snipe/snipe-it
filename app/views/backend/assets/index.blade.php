@@ -23,8 +23,8 @@ Assets ::
 <table class="table table-bordered table-striped table-hover">
 	<thead>
 		<tr>
-			<th class="span4">@lang('admin/assets/table.title')</th>
 			<th class="span2">@lang('admin/assets/table.asset_tag')</th>
+			<th class="span4">@lang('admin/assets/table.title')</th>
 			<th class="span2">@lang('admin/assets/table.serial')</th>
 			<th class="span2">@lang('admin/assets/table.status')</th>
 			<th class="span2">@lang('admin/assets/table.purchase_date')</th>
@@ -36,8 +36,8 @@ Assets ::
 	<tbody>
 		@foreach ($assets as $asset)
 		<tr>
-			<td>{{ $asset->name }}</td>
 			<td>{{ $asset->asset_tag }}</td>
+			<td>{{ $asset->name }}</td>
 			<td>{{ $asset->serial }}</td>
 			<td>{{ $asset->status }}</td>
 			<td>{{ $asset->purchase_date }}</td>

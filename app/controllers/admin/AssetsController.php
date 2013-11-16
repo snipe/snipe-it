@@ -7,6 +7,7 @@ use Asset;
 use Redirect;
 use DB;
 use Model;
+use Depreciation;
 use Sentry;
 use Str;
 use Validator;
@@ -39,7 +40,8 @@ class AssetsController extends AdminController {
 	{
 		// Grab the dropdown list of models
 		$model_list = array('0' => 'Select') + Model::lists('name', 'id');
-		return View::make('backend/assets/create')->with('model_list',$model_list);
+		$depreciation_list = array('' => 'Do Not Depreciate') + Depreciation::lists('name', 'id');
+		return View::make('backend/assets/create')->with('model_list',$model_list)->with('depreciation_list',$depreciation_list);
 
 	}
 
@@ -77,11 +79,11 @@ class AssetsController extends AdminController {
 		$asset->name            		= e(Input::get('name'));
 		$asset->serial            		= e(Input::get('serial'));
 		$asset->model_id           		= e(Input::get('model_id'));
-		$asset->purchase_date            = e(Input::get('purchase_date'));
-		$asset->purchase_cost            = e(Input::get('purchase_cost'));
+		$asset->purchase_date           = e(Input::get('purchase_date'));
+		$asset->purchase_cost           = e(Input::get('purchase_cost'));
 		$asset->order_number            = e(Input::get('order_number'));
 		$asset->notes            		= e(Input::get('notes'));
-		$asset->asset_tag            = e(Input::get('asset_tag'));
+		$asset->asset_tag            	= e(Input::get('asset_tag'));
 		$asset->user_id          		= Sentry::getId();
 
 
@@ -113,7 +115,8 @@ class AssetsController extends AdminController {
 
 		// Grab the dropdown list of models
 		$model_list = array('0' => 'Select') + Model::lists('name', 'id');
-		return View::make('backend/assets/edit', compact('asset'))->with('model_list',$model_list);
+		$depreciation_list = array('' => 'Do Not Depreciate') + Depreciation::lists('name', 'id');
+		return View::make('backend/assets/edit', compact('asset'))->with('model_list',$model_list)->with('depreciation_list',$depreciation_list);
 	}
 
 
@@ -154,10 +157,10 @@ class AssetsController extends AdminController {
 		$asset->name            		= e(Input::get('name'));
 		$asset->serial            		= e(Input::get('serial'));
 		$asset->model_id           		= e(Input::get('model_id'));
-		$asset->purchase_date            = e(Input::get('purchase_date'));
-		$asset->purchase_cost            = e(Input::get('purchase_cost'));
+		$asset->purchase_date           = e(Input::get('purchase_date'));
+		$asset->purchase_cost           = e(Input::get('purchase_cost'));
 		$asset->order_number            = e(Input::get('order_number'));
-		$asset->asset_tag            = e(Input::get('asset_tag'));
+		$asset->asset_tag           	= e(Input::get('asset_tag'));
 		$asset->notes            		= e(Input::get('notes'));
 
 

@@ -2,7 +2,7 @@
 
 use Illuminate\Database\Migrations\Migration;
 
-class AddLicenseNameToLicenses extends Migration {
+class AddDepreciationIdToModels extends Migration {
 
 	/**
 	 * Run the migrations.
@@ -11,7 +11,10 @@ class AddLicenseNameToLicenses extends Migration {
 	 */
 	public function up()
 	{
-
+		Schema::table('models', function($table)
+		{
+			$table->integer('depreciation_id')->nullable();
+		});
 	}
 
 	/**

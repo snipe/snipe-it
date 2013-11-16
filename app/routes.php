@@ -99,6 +99,18 @@ Route::group(array('prefix' => 'admin'), function()
 			Route::get('{categoryId}/delete', array('as' => 'delete/category', 'uses' => 'Controllers\Admin\CategoriesController@getDelete'));
 		});
 
+		# Depreciations
+		Route::group(array('prefix' => 'depreciations'), function()
+		{
+			Route::get('/', array('as' => 'depreciations', 'uses' => 'Controllers\Admin\DepreciationsController@getIndex'));
+			Route::get('create', array('as' => 'create/depreciations', 'uses' => 'Controllers\Admin\DepreciationsController@getCreate'));
+			Route::post('create', 'Controllers\Admin\DepreciationsController@postCreate');
+			Route::get('{depreciationId}/edit', array('as' => 'update/depreciations', 'uses' => 'Controllers\Admin\DepreciationsController@getEdit'));
+			Route::post('{depreciationId}/edit', 'Controllers\Admin\DepreciationsController@postEdit');
+			Route::get('{depreciationId}/delete', array('as' => 'delete/depreciations', 'uses' => 'Controllers\Admin\DepreciationsController@getDelete'));
+		});
+
+
 
 
 

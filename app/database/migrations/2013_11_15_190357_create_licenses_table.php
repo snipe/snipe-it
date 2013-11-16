@@ -18,6 +18,7 @@ class CreateLicensesTable extends Migration {
 		$table->integer('model_id');
 		$table->string('serial');
 		$table->string('license_email');
+		$table->string('license_name');
 		$table->date('purchase_date')->nullable();
 		$table->decimal('purchase_cost', 8, 2)->nullable();
 		$table->string('order_number');
