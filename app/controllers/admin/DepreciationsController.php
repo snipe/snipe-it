@@ -148,7 +148,7 @@ class DepreciationsController extends AdminController {
 		}
 
 		// Redirect to the depreciation management page
-		return Redirect::to("admin/settings/depreciations/$depreciationID/edit")->with('error', Lang::get('admin/depreciations/message.update.error'));
+		return Redirect::to("admin/settings/depreciations/$depreciationId/edit")->with('error', Lang::get('admin/depreciations/message.update.error'));
 	}
 
 	/**
