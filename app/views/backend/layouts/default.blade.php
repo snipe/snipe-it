@@ -74,6 +74,27 @@
 
 							<ul class="nav pull-right">
 
+							@if (Sentry::check())
+
+								<li class="dropdown{{ (Request::is('account*') ? ' active' : '') }}">
+									<a class="dropdown-toggle" id="dLabel" role="button" data-toggle="dropdown" data-target="#" href="{{ route('account') }}">
+										Welcome, {{ Sentry::getUser()->first_name }}
+										<b class="caret"></b>
+									</a>
+									<ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+										@if(Sentry::getUser()->hasAccess('admin'))
+										<li><a href="{{ route('admin') }}"><i class="icon-cog"></i> Settings</a></li>
+										@endif
+										<li{{ (Request::is('account/profile') ? ' class="active"' : '') }}><a href="{{ route('profile') }}"><i class="icon-user"></i> Your profile</a></li>
+										<li class="divider"></li>
+										<li><a href="{{ route('logout') }}"><i class="icon-off"></i> Logout</a></li>
+									</ul>
+								</li>
+								@else
+								<li {{ (Request::is('auth/signin') ? 'class="active"' : '') }}><a href="{{ route('signin') }}">Sign in</a></li>
+
+								@endif
+
 								<li class="divider-vertical"></li>
 
 
@@ -88,9 +109,10 @@
 
 											<li{{ (Request::is('admin/groups*') ? ' class="active"' : '') }}><a href="{{ URL::to('admin/groups') }}"><i class="icon-arrow-down"></i> Depreciation</a></li>
 
+
 										</ul>
 									</li>
-								<li><a href="{{ route('logout') }}"> <i class="icon-off icon-white"></i> Logout</a></li>
+
 
 
 							</ul>
@@ -104,6 +126,17 @@
 
 			<!-- Content -->
 			@yield('content')
+
+
+			<footer class="footer">
+			  <div class="container">
+				<p class="muted credit"><a href="http://snipeitapp.com">Snipe IT</a> is a free open source project - <a href="https://github.com/snipe/snipe-it/">fork it here</a>!</p>
+			  </div>
+			</footer>
+
+
+    </div>
+
 		</div>
 
 		<!-- Javascripts
@@ -117,5 +150,6 @@
     		$('.datepicker').datepicker();
 			});
 		</script>
+
 	</body>
 </html>
