@@ -62,7 +62,13 @@
 							<span class="icon-bar"></span>
 						</a>
 						<div class="nav-collapse collapse">
-							<ul class="nav">
+
+
+						<ul class="nav">
+
+							@if (Sentry::check())
+
+
 							<li{{ (Request::is('admin') ? ' class="active"' : '') }}><a href="{{ URL::to('admin') }}"><i class="icon-home icon-white"></i> Dashboard</a></li>
 							<li{{ (Request::is('assets/assets') ? ' class="active"' : '') }}><a href="{{ URL::to('assets/assets') }}"><i class="icon-barcode icon-white"></i> Assets</a></li>
 							<li{{ (Request::is('assets/models') ? ' class="active"' : '') }}><a href="{{ URL::to('assets/models') }}"><i class="icon-th-list icon-white"></i> Models</a></li>
@@ -74,7 +80,7 @@
 
 							<ul class="nav pull-right">
 
-							@if (Sentry::check())
+
 
 								<li class="dropdown{{ (Request::is('account*') ? ' active' : '') }}">
 									<a class="dropdown-toggle" id="dLabel" role="button" data-toggle="dropdown" data-target="#" href="{{ route('account') }}">
@@ -90,10 +96,6 @@
 										<li><a href="{{ route('logout') }}"><i class="icon-off"></i> Logout</a></li>
 									</ul>
 								</li>
-								@else
-								<li {{ (Request::is('auth/signin') ? 'class="active"' : '') }}><a href="{{ route('signin') }}">Sign in</a></li>
-
-								@endif
 
 								<li class="divider-vertical"></li>
 
@@ -112,6 +114,14 @@
 
 										</ul>
 									</li>
+
+
+
+								@else
+								<li {{ (Request::is('auth/signin') ? 'class="active"' : '') }}><a href="{{ route('signin') }}">Sign in</a></li>
+
+								@endif
+
 
 
 
