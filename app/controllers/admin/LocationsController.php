@@ -53,8 +53,8 @@ class LocationsController extends AdminController {
 		$rules = array(
 			'name'  		=> 'required|min:3',
 			'city'   		=> 'required|min:3',
-			'state'   		=> 'required|min:2|max:2',
-			'country'   	=> 'required|min:2|max:2',
+			'state'   		=> 'required|alpha|min:2|max:2',
+			'country'   	=> 'required|alpha|min:2|max:2',
 		);
 
 		// Create a new validator instance from our validation rules
@@ -130,8 +130,8 @@ class LocationsController extends AdminController {
 		$rules = array(
 			'name'   => 'required|min:3',
 			'city'   => 'required|min:3',
-			'state'   => 'required|min:2|max:2',
-			'country'   => 'required|min:2|max:2',
+			'state'   => 'required|alpha|min:2|max:2',
+			'country'   => 'required|alpha|min:2|max:2',
 		);
 
 		// Create a new validator instance from our validation rules
