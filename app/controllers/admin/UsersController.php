@@ -6,6 +6,7 @@ use Cartalyst\Sentry\Users\PasswordRequiredException;
 use Cartalyst\Sentry\Users\UserExistsException;
 use Cartalyst\Sentry\Users\UserNotFoundException;
 use Config;
+use DB;
 use Input;
 use Lang;
 use Redirect;
