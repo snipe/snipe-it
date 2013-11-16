@@ -75,7 +75,7 @@ Create a New Asset  ::
 			<div class="control-group {{ $errors->has('purchase_date') ? 'error' : '' }}">
 				<label class="control-label" for="purchase_date">Purchase Date</label>
 				<div class="controls">
-				<input type="text" class="datepicker span2" data-date-format="yyyy-mm-dd" placeholder="Select Date" name="purchase_date" id="purchase_date" value="{{ Input::old('purchase_date') }}">
+				<input type="text" class="datepicker span2" data-date-format="yyyy-mm-dd" placeholder="Select Date" name="purchase_date" id="purchase_date" value="{{ Input::old('purchase_date') }}"> <span class="add-on"><i class="icon-th"></i></span>
 				{{ $errors->first('purchase_date', '<span class="help-inline">:message</span>') }}
 				</div>
 			</div>
@@ -106,7 +106,7 @@ Create a New Asset  ::
 	<div class="control-group">
 		<div class="controls">
 			<a class="btn btn-link" href="{{ route('assets') }}">Cancel</a>
-			<button type="submit" class="btn btn-success">Publish</button>
+			<button type="submit" class="btn btn-success">Create New</button>
 		</div>
 	</div>
 </form>
