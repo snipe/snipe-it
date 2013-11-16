@@ -13,11 +13,26 @@
 Route::group(array('prefix' => 'assets'), function()
 {
 
+
+# Assets
+Route::group(array('prefix' => 'assets'), function()
+	{
+	Route::get('/', array('as' => 'assets', 'uses' => 'Controllers\Admin\AssetsController@getIndex'));
+	Route::get('create', array('as' => 'create/asset', 'uses' => 'Controllers\Admin\AssetsController@getCreate'));
+	Route::post('create', 'Controllers\Admin\AssetsController@postCreate');
+	Route::get('{assetId}/edit', array('as' => 'update/asset', 'uses' => 'Controllers\Admin\AssetsController@getEdit'));
+	Route::post('{assetId}/edit', 'Controllers\Admin\AssetsController@postEdit');
+	Route::get('{assetId}/delete', array('as' => 'delete/asset', 'uses' => 'Controllers\Admin\AssetsController@getDelete'));
+});
+
 # Asset Model Management
 	Route::group(array('prefix' => 'models'), function()
 	{
 		Route::get('/', array('as' => 'models', 'uses' => 'Controllers\Admin\ModelsController@getIndex'));
 	});
+
+
+
 
 });
 
@@ -45,6 +60,7 @@ Route::group(array('prefix' => 'admin'), function()
 		Route::get('{blogId}/delete', array('as' => 'delete/blog', 'uses' => 'Controllers\Admin\BlogsController@getDelete'));
 		Route::get('{blogId}/restore', array('as' => 'restore/blog', 'uses' => 'Controllers\Admin\BlogsController@getRestore'));
 	});
+
 
 	# Licenses
 		Route::group(array('prefix' => 'licenses'), function()
@@ -142,7 +158,7 @@ Route::group(array('prefix' => 'auth'), function()
 	Route::post('signin', 'AuthController@postSignin');
 
 	# Register
-	Route::get('signup', array('as' => 'signup', 'uses' => 'AuthController@getSignup'));
+	#Route::get('signup', array('as' => 'signup', 'uses' => 'AuthController@getSignup'));
 	Route::post('signup', 'AuthController@postSignup');
 
 	# Account Activation
@@ -201,16 +217,5 @@ Route::group(array('prefix' => 'account'), function()
 |
 */
 
-Route::get('about-us', function()
-{
-	//
-	return View::make('frontend/about-us');
-});
 
-Route::get('contact-us', array('as' => 'contact-us', 'uses' => 'ContactUsController@getIndex'));
-Route::post('contact-us', 'ContactUsController@postIndex');
-
-Route::get('blog/{postSlug}', array('as' => 'view-post', 'uses' => 'BlogController@getView'));
-Route::post('blog/{postSlug}', 'BlogController@postView');
-
-Route::get('/', array('as' => 'home', 'uses' => 'BlogController@getIndex'));
+#Route::get('/', array('as' => 'home', 'uses' => 'BlogController@getIndex'));
