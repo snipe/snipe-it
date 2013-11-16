@@ -80,6 +80,9 @@
 
 							<ul class="nav pull-right">
 
+							<form class="navbar-search pull-left">
+									<input type="text" class="search-query" placeholder="Search">
+								</form>
 
 
 								<li class="dropdown{{ (Request::is('account*') ? ' active' : '') }}">
@@ -100,6 +103,8 @@
 								<li class="divider-vertical"></li>
 
 
+
+
 									<li class="dropdown{{ (Request::is('admin/users*|admin/groups*') ? ' active' : '') }}">
 										<a class="dropdown-toggle" data-toggle="dropdown" href="{{ URL::to('admin/users') }}">
 											<i class="icon-wrench icon-white"></i> Admin <span class="caret"></span>
@@ -109,7 +114,7 @@
 											<li{{ (Request::is('admin/settings/manufacturers*') ? ' class="active"' : '') }}><a href="{{ URL::to('admin/settings/manufacturers') }}"><i class="icon-briefcase"></i> Manufacturers</a></li>
 											<li{{ (Request::is('admin/settings/categories*') ? ' class="active"' : '') }}><a href="{{ URL::to('admin/settings/categories') }}"><i class="icon-th"></i> Categories</a></li>
 
-											<li{{ (Request::is('admin/groups*') ? ' class="active"' : '') }}><a href="{{ URL::to('admin/groups') }}"><i class="icon-arrow-down"></i> Depreciation</a></li>
+											<li{{ (Request::is('admin/settings/depreciations*') ? ' class="active"' : '') }}><a href="{{ URL::to('admin/settings/depreciations') }}"><i class="icon-arrow-down"></i> Depreciation</a></li>
 
 
 										</ul>
