@@ -10,7 +10,7 @@ Asset Depreciations ::
 @section('content')
 <div class="page-header">
 	<h3>
-		Asset Depreciations
+		Locations
 
 		<div class="pull-right">
 			<a href="{{ route('create/location') }}" class="btn btn-small btn-info"><i class="icon-plus-sign icon-white"></i> Create</a>

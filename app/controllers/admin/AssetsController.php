@@ -91,11 +91,11 @@ class AssetsController extends AdminController {
 		if($asset->save())
 		{
 			// Redirect to the asset listing page
-			return Redirect::to("assets/assets")->with('success', Lang::get('admin/assets/message.create.success'));
+			return Redirect::to("admin")->with('success', Lang::get('admin/assets/message.create.success'));
 		}
 
 		// Redirect to the asset create page with an error
-		return Redirect::to('assets/assets/create')->with('error', Lang::get('admin/assets/message.create.error'));
+		return Redirect::to('assets/create')->with('error', Lang::get('admin/assets/message.create.error'));
 	}
 
 	/**
@@ -110,7 +110,7 @@ class AssetsController extends AdminController {
 		if (is_null($asset = Asset::find($assetId)))
 		{
 			// Redirect to the asset management page
-			return Redirect::to('admin/settings/assets')->with('error', Lang::get('admin/assets/message.does_not_exist'));
+			return Redirect::to('admin')->with('error', Lang::get('admin/assets/message.does_not_exist'));
 		}
 
 		// Grab the dropdown list of models
@@ -134,7 +134,7 @@ class AssetsController extends AdminController {
 		if (is_null($asset = Asset::find($assetId)))
 		{
 			// Redirect to the asset management page with error
-			return Redirect::to('admin/assets')->with('error', Lang::get('admin/assets/message.does_not_exist'));
+			return Redirect::to('admin')->with('error', Lang::get('admin/assets/message.does_not_exist'));
 		}
 
 		// Declare the rules for the form validation
@@ -170,11 +170,11 @@ class AssetsController extends AdminController {
 		if($asset->save())
 		{
 			// Redirect to the new asset page
-			return Redirect::to("assets/assets/$assetId/edit")->with('success', Lang::get('admin/assets/message.update.success'));
+			return Redirect::to("assets/$assetId/edit")->with('success', Lang::get('admin/assets/message.update.success'));
 		}
 
 		// Redirect to the asset management page with error
-		return Redirect::to("assets/assets/$assetId/edit")->with('error', Lang::get('admin/assets/message.update.error'));
+		return Redirect::to("assets/$assetId/edit")->with('error', Lang::get('admin/assets/message.update.error'));
 	}
 
 	/**
@@ -189,14 +189,14 @@ class AssetsController extends AdminController {
 		if (is_null($asset = Asset::find($assetId)))
 		{
 			// Redirect to the asset management page with error
-			return Redirect::to('assets/assets')->with('error', Lang::get('admin/assets/message.not_found'));
+			return Redirect::to('admin')->with('error', Lang::get('admin/assets/message.not_found'));
 		}
 
 		// Delete the asset
 		$asset->delete();
 
 		// Redirect to the asset management page
-		return Redirect::to('assets/assets')->with('success', Lang::get('admin/assets/message.delete.success'));
+		return Redirect::to('admin')->with('success', Lang::get('admin/assets/message.delete.success'));
 	}
 
 

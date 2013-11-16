@@ -14,11 +14,6 @@
 Route::group(array('prefix' => 'assets'), function()
 {
 
-
-
-# Assets
-Route::group(array('prefix' => 'assets'), function()
-	{
 	Route::get('/', array('as' => 'assets', 'uses' => 'Controllers\Admin\AssetsController@getIndex'));
 	Route::get('assets', array('as' => 'assets', 'uses' => 'Controllers\Admin\AssetsController@getIndex'));
 	Route::get('create', array('as' => 'create/asset', 'uses' => 'Controllers\Admin\AssetsController@getCreate'));
@@ -26,7 +21,7 @@ Route::group(array('prefix' => 'assets'), function()
 	Route::get('{assetId}/edit', array('as' => 'update/asset', 'uses' => 'Controllers\Admin\AssetsController@getEdit'));
 	Route::post('{assetId}/edit', 'Controllers\Admin\AssetsController@postEdit');
 	Route::get('{assetId}/delete', array('as' => 'delete/asset', 'uses' => 'Controllers\Admin\AssetsController@getDelete'));
-});
+
 
 # Asset Model Management
 	Route::group(array('prefix' => 'models'), function()
