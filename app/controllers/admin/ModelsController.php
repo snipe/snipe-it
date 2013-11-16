@@ -36,8 +36,6 @@ class ModelsController extends AdminController {
 	public function getCreate()
 	{
 		// Show the page
-		//$model_options = array('0' => 'Top Level') + Model::lists('name', 'id');
-		//return View::make('backend/models/edit')->with('model_options',$model_options)->with('model',new Model);
 		$depreciation_list = array('' => 'Do Not Depreciate') + Depreciation::lists('name', 'id');
 		return View::make('backend/models/edit')->with('depreciation_list',$depreciation_list)->with('model',new Model);
 	}
@@ -100,11 +98,9 @@ class ModelsController extends AdminController {
 			return Redirect::to('assets/models')->with('error', Lang::get('admin/models/message.does_not_exist'));
 		}
 
-		// Show the page
-		//$model_options = array('' => 'Top Level') + Model::lists('name', 'id');
-
+		$depreciation_list = array('' => 'Do Not Depreciate') + Depreciation::lists('name', 'id');
 		$model_options = array('' => 'Top Level') + DB::table('models')->where('id', '!=', $modelId)->lists('name', 'id');
-		return View::make('backend/models/edit', compact('model'))->with('model_options',$model_options);
+		return View::make('backend/models/edit', compact('model'))->with('model_options',$model_options)->with('depreciation_list',$depreciation_list);
 	}
 
 
