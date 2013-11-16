@@ -6,7 +6,7 @@ It is built on [Laravel 4](http://laravel.com) and uses the [Sentry 2](https://g
 
 Many thanks to the [Laravel 4 starter site](https://github.com/brunogaspar/laravel4-starter-kit) for a quick start.
 
-This isn't actually ready for anyone to use yet, as I'm still working out some of the basic functionality. Feel free to check out the [Snipe IT Trello board here](https://trello.com/b/WwZm4pwv/snipe-it) to check on progress.
+This isn't actually ready for anyone to use yet, as I'm still working out some of the basic functionality. Feel free to check out the [GitHub Issues for this project](https://github.com/snipe/snipe-it/issues) to check on progress, open a bug report, or see what open issues you can help with.
 
 -----
 
@@ -46,7 +46,7 @@ This isn't actually ready for anyone to use yet, as I'm still working out some o
 
 ### 3) Setup Database
 
-Now that you have the Starter Kit cloned and all the dependencies installed, you need to create a database and update the file `app/config/database.php`.
+Create a database and update the file `app/config/database.php` with your database name and credentials.
 
 -----
 
