@@ -38,15 +38,6 @@
 
 
 
-
-			<!-- Asset Title -->
-			<div class="control-group {{ $errors->has('name') ? 'error' : '' }}">
-				<label class="control-label" for="name">Asset Name</label>
-				<div class="controls">
-					<input class="span6" type="text" name="name" id="name" value="{{ Input::old('name', $asset->name) }}" />
-					{{ $errors->first('name', '<span class="help-inline">:message</span>') }}
-				</div>
-			</div>
 			<!-- Asset Tag -->
 			<div class="control-group {{ $errors->has('asset_tag') ? 'error' : '' }}">
 				<label class="control-label" for="asset_tag">Asset Tag</label>
@@ -55,6 +46,15 @@
 					{{ $errors->first('asset_tag', '<span class="help-inline">:message</span>') }}
 				</div>
 			</div>
+			<!-- Asset Title -->
+			<div class="control-group {{ $errors->has('name') ? 'error' : '' }}">
+				<label class="control-label" for="name">Asset Name</label>
+				<div class="controls">
+					<input class="span4" type="text" name="name" id="name" value="{{ Input::old('name', $asset->name) }}" />
+					{{ $errors->first('name', '<span class="help-inline">:message</span>') }}
+				</div>
+			</div>
+
 
 			<!-- Serial -->
 			<div class="control-group {{ $errors->has('serial') ? 'error' : '' }}">
