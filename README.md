@@ -1,3 +1,5 @@
+<a href='https://pledgie.com/campaigns/22899'><img alt='Click here to lend your support to: Snipe IT - Free Open Source Asset Management System and make a donation at pledgie.com !' src='https://pledgie.com/campaigns/22899.png?skin_name=chrome' border='0' ></a>
+
 ## Snipe-IT - Asset Management For the Rest of Us
 
 This is a FOSS project for asset management in IT Operations. Knowing who has which laptop, when it was purchased in order to depreciate it correctly, handling software licenses, etc.
