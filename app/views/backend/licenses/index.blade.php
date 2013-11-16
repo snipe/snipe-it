@@ -22,20 +22,18 @@ Licenses ::
 <table class="table table-bordered table-striped table-hover">
 	<thead>
 		<tr>
-			<th class="span1">@lang('admin/licenses/table.id')</th>
 			<th class="span4">@lang('admin/licenses/table.title')</th>
 			<th class="span4">@lang('admin/licenses/table.serial')</th>
-			<th class="span4">@lang('admin/licenses/table.license_name')</th>
-			<th class="span4">@lang('admin/licenses/table.license_email')</th>
+			<th class="span3">@lang('admin/licenses/table.license_name')</th>
+			<th class="span2">@lang('admin/licenses/table.license_email')</th>
 			<th class="span4">@lang('admin/licenses/table.purchase_date')</th>
 			<th class="span2">@lang('admin/licenses/table.assigned_to')</th>
-			<th class="span2">@lang('table.actions')</th>
+			<th class="span4">@lang('table.actions')</th>
 		</tr>
 	</thead>
 	<tbody>
 		@foreach ($licenses as $license)
 		<tr>
-			<td>{{ $license->id }}</td>
 			<td>{{ $license->name }}</td>
 			<td>{{ $license->serial }}</td>
 			<td>{{ $license->license_name }}</td>
