@@ -18,7 +18,7 @@ Asset Depreciations ::
 	</h3>
 </div>
 
-@if (count($locations) > 10)
+@if ($locations->getTotal() > 10)
 {{ $locations->links() }}
 @endif
 
@@ -46,7 +46,7 @@ Asset Depreciations ::
 	</tbody>
 </table>
 
-@if (count($locations) > 10)
+@if ($locations->getTotal() > 10)
 {{ $locations->links() }}
 @endif
 

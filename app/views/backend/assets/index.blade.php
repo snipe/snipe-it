@@ -17,8 +17,9 @@ Assets ::
 		</div>
 	</h3>
 </div>
-@if (count($assets) > 10)
-{{ $assets->links() }}
+
+@if ($assets->getTotal() > 10)
+	{{ $assets->links() }}
 @endif
 <table class="table table-bordered table-striped table-hover">
 	<thead>
@@ -52,7 +53,7 @@ Assets ::
 	</tbody>
 </table>
 
-@if (count($assets) > 10)
+@if ($assets->getTotal() > 10)
 {{ $assets->links() }}
 @endif
 @stop

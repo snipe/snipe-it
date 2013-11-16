@@ -16,7 +16,7 @@ Licenses ::
 		</div>
 	</h3>
 </div>
-@if (count($licenses) > 50)
+@if ($licenses->getTotal() > 10)
 {{ $licenses->links() }}
 @endif
 <table class="table table-bordered table-striped table-hover">
@@ -49,7 +49,7 @@ Licenses ::
 	</tbody>
 </table>
 
-@if (count($licenses) > 50)
+@if ($licenses->getTotal() > 10)
 {{ $licenses->links() }}
 @endif
 @stop

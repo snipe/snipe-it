@@ -18,7 +18,7 @@ Asset Manufacturers ::
 	</h3>
 </div>
 
-@if (count($manufacturers) > 10)
+@if ($manufacturers->getTotal() > 10)
 {{ $manufacturers->links() }}
 @endif
 
@@ -44,7 +44,7 @@ Asset Manufacturers ::
 	</tbody>
 </table>
 
-@if (count($manufacturers) > 10)
+@if ($manufacturers->getTotal() > 10)
 {{ $manufacturers->links() }}
 @endif
 
