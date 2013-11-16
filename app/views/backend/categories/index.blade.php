@@ -23,7 +23,6 @@ Asset Categories ::
 <table class="table table-bordered table-striped table-hover">
 	<thead>
 		<tr>
-			<th class="span1">@lang('admin/categories/table.id')</th>
 			<th class="span6">@lang('admin/categories/table.title')</th>
 			<th class="span2">@lang('admin/categories/table.parent')</th>
 			<th class="span2">@lang('table.actions')</th>
@@ -32,10 +31,8 @@ Asset Categories ::
 	<tbody>
 		@foreach ($categories as $category)
 		<tr>
-			<td>{{ $category->id }}</td>
 			<td>{{ $category->name }}</td>
 			<td>
-
 			@if (is_object($category->parentname))
 				{{ $category->parentname->name }}
 			@else
