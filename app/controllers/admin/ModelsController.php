@@ -6,6 +6,7 @@ use Lang;
 use Model;
 use Redirect;
 use Sentry;
+use DB;
 use Depreciation;
 use Str;
 use Validator;
