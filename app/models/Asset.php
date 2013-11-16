@@ -3,7 +3,7 @@
 class Asset extends Eloquent {
 
 	/**
-	 * Deletes an sset
+	 * Deletes an asset
 	 *
 	 * @return bool
 	 */
