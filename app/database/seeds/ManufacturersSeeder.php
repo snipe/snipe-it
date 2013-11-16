@@ -5,23 +5,29 @@ class ManufacturersSeeder extends Seeder {
 	public function run()
 	{
 
+		$date = date("Y-m-d");
+		$manufacturers[] = array(
+			'name'      => 'Apple',
+			'created_at' => $date,
+			'user_id' => 1,
+		);
+		$manufacturers[] = array(
+			'name'      => 'Microsoft',
+			'created_at' => $date,
+			'user_id' => 1,
+		);
+		$manufacturers[] = array(
+			'name'      => 'ASUS',
+			'created_at' => $date,
+			'user_id' => 1,
+		);
+		$manufacturers[] = array(
+			'name'      => 'Dell',
+			'created_at' => $date,
+			'user_id' => 1,
+		);
 
-		// Blog post 1
-		$date = new DateTime;
-		$manufacturers[] = array(
-			'name'      => 'Apple'		
-		);
-		$manufacturers[] = array(
-			'name'      => 'Microsoft'		
-		);
-		$manufacturers[] = array(
-			'name'      => 'ASUS'		
-		);
-		$manufacturers[] = array(
-			'name'      => 'Dell'		
-		);
 
-		
 		// Delete all the blog posts
 		DB::table('manufacturers')->truncate();
 
