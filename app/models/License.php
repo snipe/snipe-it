@@ -8,7 +8,7 @@ class License extends Eloquent {
 	 * @return bool
 	 */
 
-	protected $table = 'licenses';
+	protected $table = 'assets';
 
 	public function delete()
 	{
