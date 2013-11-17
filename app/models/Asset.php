@@ -16,6 +16,8 @@ class Asset extends Eloquent {
 		return parent::delete();
 	}
 
+
+
 	public function depreciation()
 	{
 		$depreciation_id = Model::find($this->model_id)->depreciation_id;
@@ -40,5 +42,11 @@ class Asset extends Eloquent {
         }
 
 	}
+
+
+	public function user()
+  	{
+    	return $this->belongsTo('User');
+  	}
 
 }

@@ -4,7 +4,10 @@
 	"keywords": ["framework", "laravel"],
 	"require": {
 		"laravel/framework": "4.0.*",
-		"cartalyst/sentry": "2.0.*"
+		"cartalyst/sentry": "2.0.*",
+		"barryvdh/laravel-debugbar": "dev-master",
+		"laravelbook/ardent": "dev-master"
+
 	},
 	"autoload": {
 		"classmap": [

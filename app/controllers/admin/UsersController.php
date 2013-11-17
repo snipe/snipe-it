@@ -8,6 +8,7 @@ use Cartalyst\Sentry\Users\UserNotFoundException;
 use Config;
 use DB;
 use Input;
+use Asset;
 use Lang;
 use Redirect;
 use Sentry;
@@ -49,6 +50,11 @@ class UsersController extends AdminController {
 			$users = $users->onlyTrashed();
 		}
 
+
+		// Get the user assets
+		//$assets = $users->assets();
+
+
 		// Paginate the users
 		$users = $users->paginate()
 			->appends(array(
@@ -56,8 +62,9 @@ class UsersController extends AdminController {
 				'onlyTrashed' => Input::get('onlyTrashed'),
 			));
 
+
 		// Show the page
-		return View::make('backend/users/index', compact('users'));
+		return View::make('backend/users/index', compact('users', 'assets'));
 	}
 
 	/**
