@@ -79,6 +79,30 @@ class ModelsSeeder extends Seeder {
 			'user_id' => 1,
 		);
 
+		$models[] = array(
+			'name'      => 'Git Tower',
+			'manufacturer_id'      => '5',
+			'category_id'      => '5',
+			'modelno'      => '78FNCWC16B',
+			'created_at' => $date->modify('-2 day'),
+			'updated_at' => $date,
+			'depreciation_id' => 1,
+			'user_id' => 1,
+		);
+
+
+		$models[] = array(
+			'name'      => 'Photoshop',
+			'manufacturer_id'      => '6',
+			'category_id'      => '5',
+			'modelno'      => '78FNCWC16B',
+			'created_at' => $date->modify('-2 day'),
+			'updated_at' => $date,
+			'depreciation_id' => 1,
+			'user_id' => 1,
+		);
+
+
 
 		// Delete all the old data
 		DB::table('models')->truncate();

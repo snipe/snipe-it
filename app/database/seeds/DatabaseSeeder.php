@@ -13,7 +13,6 @@ class DatabaseSeeder extends Seeder {
 
 		$this->call('AssetsSeeder');
 		$this->call('CategoriesSeeder');
-		$this->call('LicensesSeeder');
 		$this->call('LocationsSeeder');
 		$this->call('ManufacturersSeeder');
 		$this->call('ModelsSeeder');
