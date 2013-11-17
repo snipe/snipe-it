@@ -53,6 +53,7 @@ class LicensesController extends AdminController {
 		$rules = array(
 			'name'   => 'required|min:3',
 			'serial'   => 'required|min:5',
+			'license_email'   => 'email',
 		);
 
 		// Create a new validator instance from our validation rules
@@ -130,6 +131,7 @@ class LicensesController extends AdminController {
 		$rules = array(
 			'name'   => 'required|min:3',
 			'serial'   => 'required|min:5',
+			'license_email'   => 'email',
 		);
 
 		// Create a new validator instance from our validation rules
