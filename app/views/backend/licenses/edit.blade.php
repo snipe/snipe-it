@@ -15,9 +15,9 @@
 <div class="page-header">
 	<h3>
 		@if ($license->id)
-		Update License ::
+		Update License
 		@else
-		Create License ::
+		Create License
 		@endif
 
 		<div class="pull-right">
@@ -67,14 +67,6 @@
 				</div>
 			</div>
 
-			<div class="control-group {{ $errors->has('notes') ? 'error' : '' }}">
-				<label class="control-label" for="notes">Notes</label>
-				<div class="controls">
-					<input class="span6" type="text" name="notes" id="notes" value="{{ Input::old('notes', $license->notes) }}" />
-					{{ $errors->first('notes', '<span class="help-inline">:message</span>') }}
-				</div>
-			</div>
-
 			<div class="control-group {{ $errors->has('order_number') ? 'error' : '' }}">
 				<label class="control-label" for="order_number">Order Number</label>
 				<div class="controls">
@@ -93,10 +85,18 @@
 			</div>
 
 			<div class="control-group {{ $errors->has('purchase_date') ? 'error' : '' }}">
-				<label class="control-label" for="purchase_date">Purchase Date (YYYY-mm-dd)</label>
+				<label class="control-label" for="purchase_date">Purchase Date</label>
 				<div class="controls">
-					<input class="span4" type="text" name="purchase_date" id="purchase_date" value="{{ Input::old('purchase_date', $license->purchase_date) }}" />
-					{{ $errors->first('purchase_date', '<span class="help-inline">:message</span>') }}
+					<input type="text" class="datepicker span2" data-date-format="yyyy-mm-dd" placeholder="Select Date" name="purchase_date" id="purchase_date" value="{{ Input::old('purchase_date', $license->purchase_date) }}"> <span class="add-on"><i class="icon-calendar"></i></span>
+				{{ $errors->first('purchase_date', '<span class="help-inline">:message</span>') }}
+				</div>
+			</div>
+
+			<div class="control-group {{ $errors->has('notes') ? 'error' : '' }}">
+				<label class="control-label" for="notes">Notes</label>
+				<div class="controls">
+					<input class="span6" type="text" name="notes" id="notes" value="{{ Input::old('notes', $license->notes) }}" />
+					{{ $errors->first('notes', '<span class="help-inline">:message</span>') }}
 				</div>
 			</div>
 
@@ -105,7 +105,7 @@
 	<div class="control-group">
 		<div class="controls">
 			<a class="btn btn-link" href="{{ route('licenses') }}">Cancel</a>
-			<button type="submit" class="btn btn-success">Save Edits</button>
+			<button type="submit" class="btn btn-success">Save</button>
 		</div>
 	</div>
 </form>
