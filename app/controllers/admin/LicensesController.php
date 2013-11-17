@@ -22,7 +22,7 @@ class LicensesController extends AdminController {
 	public function getIndex()
 	{
 		// Grab all the licenses
-		$licenses = License::orderBy('created_at', 'DESC')->paginate(10);
+		$licenses = License::orderBy('created_at', 'DESC')->where('physical', '=', 0)->paginate(10);
 
 		// Show the page
 		return View::make('backend/licenses/index', compact('licenses'));
@@ -106,9 +106,7 @@ class LicensesController extends AdminController {
 		}
 
 		// Show the page
-		//$license_options = array('' => 'Top Level') + License::lists('name', 'id');
-
-		$license_options = array('' => 'Top Level') + DB::table('licenses')->where('id', '!=', $licenseId)->lists('name', 'id');
+		$license_options = array('' => 'Top Level') + DB::table('assets')->where('id', '!=', $licenseId)->lists('name', 'id');
 		return View::make('backend/licenses/edit', compact('license'))->with('license_options',$license_options);
 	}
 
@@ -121,7 +119,7 @@ class LicensesController extends AdminController {
 	 */
 	public function postEdit($licenseId = null)
 	{
-		// Check if the blog post exists
+		// Check if the license exists
 		if (is_null($license = License::find($licenseId)))
 		{
 			// Redirect to the blogs management page
@@ -173,17 +171,17 @@ class LicensesController extends AdminController {
 	 */
 	public function getDelete($licenseId)
 	{
-		// Check if the blog post exists
+		// Check if the license exists
 		if (is_null($license = License::find($licenseId)))
 		{
 			// Redirect to the blogs management page
 			return Redirect::to('admin/licenses')->with('error', Lang::get('admin/licenses/message.not_found'));
 		}
 
-		// Delete the blog post
+		// Delete the license
 		$license->delete();
 
-		// Redirect to the blog posts management page
+		// Redirect to the licenses management page
 		return Redirect::to('admin/licenses')->with('success', Lang::get('admin/licenses/message.delete.success'));
 	}
 
