@@ -15,7 +15,7 @@ class CreateAssetsTable extends Migration {
 		{
 			$table->increments('id');
 			$table->string('name');
-			$table->string('asset_tag');
+			$table->string('asset_tag')->nullable();
 	        $table->integer('model_id');
 	        $table->string('serial');
 	        $table->date('purchase_date')->nullable();
