@@ -68,8 +68,18 @@ Use the following command to create your default user, user groups and run all t
 
 	php artisan app:install
 
+-----
 
-### 6) License
+### 6) Set up the debugbar (optional)
+
+In dev mode, I use the fabulous [Laravel Debugbar](https://github.com/barryvdh/laravel-debugbar) by @barryvdh. After you've installed/updated composer, you'll need to publish the assets for the debugbar:
+
+	php artisan debugbar:publish
+
+The profiler is enabled by default if you have debug set to true in your app.php. You certainly don't have to use it, but it's pretty handy for troubleshooting queries, seeing how much memory your pages are using, etc.
+
+
+### 7) License
 
 	Copyright (C) 2013 Alison Gianotto
 
