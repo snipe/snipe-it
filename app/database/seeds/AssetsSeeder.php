@@ -81,7 +81,7 @@ class AssetsSeeder extends Seeder {
 			'created_at' => $date->modify('-10 day'),
 			'updated_at' => $date->modify('-3 day'),
 			'user_id' => 1,
-			'assigned_to' => 1,
+			'assigned_to' => 2,
 			'location_id' => 1,
 		);
 
@@ -156,8 +156,8 @@ class AssetsSeeder extends Seeder {
 			'order_number'      => '09809809080',
 			'created_at' => $date->modify('-10 day'),
 			'updated_at' => $date->modify('-3 day'),
-			'user_id' => 1,
-			'assigned_to' => 1,
+			'user_id' => 2,
+			'assigned_to' => 2,
 			'location_id' => 1,
 		);
 
@@ -173,7 +173,7 @@ class AssetsSeeder extends Seeder {
 			'created_at' => $date->modify('-10 day'),
 			'updated_at' => $date->modify('-3 day'),
 			'user_id' => 1,
-			'assigned_to' => 1,
+			'assigned_to' => 2,
 			'location_id' => 1,
 		);
 
