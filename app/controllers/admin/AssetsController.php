@@ -24,9 +24,7 @@ class AssetsController extends AdminController {
 	public function getIndex()
 	{
 		// Grab all the assets
-		$assets = Asset::orderBy('created_at', 'DESC')->paginate(10);
-
-		// Show the page
+		$assets = Asset::orderBy('created_at', 'DESC')->where('physical', '=', 1)->paginate(10);
 		return View::make('backend/assets/index', compact('assets'));
 	}
 
