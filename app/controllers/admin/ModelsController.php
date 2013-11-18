@@ -48,39 +48,41 @@ class ModelsController extends AdminController {
 	 */
 	public function postCreate()
 	{
-		// Declare the rules for the form validation
-		$rules = array(
-			'name'   => 'required|min:3',
-		);
 
-		// Create a new validator instance from our validation rules
-		$validator = Validator::make(Input::all(), $rules);
+		// get the POST data
+		$new = Input::all();
 
-		// If validation fails, we'll exit the operation now.
-		if ($validator->fails())
-		{
-			// Ooops.. something went wrong
-			return Redirect::back()->withInput()->withErrors($validator);
-		}
-
-		// Create a new model
+		// Create a new manufacturer
 		$model = new Model;
 
-		// Update the model data
-		$model->name            = e(Input::get('name'));
-		$model->modelno            = e(Input::get('modelno'));
-		$model->depreciation_id    = e(Input::get('depreciation_id'));
-		$model->user_id          = Sentry::getId();
-
-		// Was the model created?
-		if($model->save())
+		// attempt validation
+		if ($model->validate($new))
 		{
-			// Redirect to the new model  page
-			return Redirect::to("assets/models")->with('success', Lang::get('admin/models/message.create.success'));
+
+			// Save the model data
+			$model->name            = e(Input::get('name'));
+			$model->modelno            = e(Input::get('modelno'));
+			$model->depreciation_id    = e(Input::get('depreciation_id'));
+			$model->user_id          = Sentry::getId();
+
+
+			// Was it created?
+			if($model->save())
+			{
+				// Redirect to the new model  page
+				return Redirect::to("assets/models")->with('success', Lang::get('admin/models/message.create.success'));
+			}
+		}
+		else
+		{
+			// failure
+			$errors = $model->errors();
+			return Redirect::back()->withInput()->withErrors($errors);
 		}
 
 		// Redirect to the model create page
 		return Redirect::to('assets/models/create')->with('error', Lang::get('admin/models/message.create.error'));
+
 	}
 
 	/**
@@ -119,35 +121,36 @@ class ModelsController extends AdminController {
 			return Redirect::to('admin/models')->with('error', Lang::get('admin/models/message.does_not_exist'));
 		}
 
-		// Declare the rules for the form validation
-		$rules = array(
-			'name'   => 'required|min:3',
-		);
+		// get the POST data
+		$new = Input::all();
 
-		// Create a new validator instance from our validation rules
-		$validator = Validator::make(Input::all(), $rules);
-
-		// If validation fails, we'll exit the operation now.
-		if ($validator->fails())
+		// attempt validation
+		if ($model->validate($new))
 		{
-			// Ooops.. something went wrong
-			return Redirect::back()->withInput()->withErrors($validator);
+
+			// Update the model data
+			$model->name            = e(Input::get('name'));
+			$model->modelno            = e(Input::get('modelno'));
+			$model->depreciation_id    = e(Input::get('depreciation_id'));
+
+
+			// Was it created?
+			if($model->save())
+			{
+				// Redirect to the new model  page
+				return Redirect::to("assets/models/$modelId/edit")->with('success', Lang::get('admin/models/message.update.success'));
+			}
+		}
+		else
+		{
+			// failure
+			$errors = $model->errors();
+			return Redirect::back()->withInput()->withErrors($errors);
 		}
 
-		// Update the model data
-		$model->name            = e(Input::get('name'));
-		$model->modelno            = e(Input::get('modelno'));
-		$model->depreciation_id    = e(Input::get('depreciation_id'));
-
-		// Was the model updated?
-		if($model->save())
-		{
-			// Redirect to the new model page
-			return Redirect::to("assets/models/$modelId/edit")->with('success', Lang::get('admin/models/message.update.success'));
-		}
-
-		// Redirect to the model management page
+		// Redirect to the model create page
 		return Redirect::to("assets/models/$modelId/edit")->with('error', Lang::get('admin/models/message.update.error'));
+
 	}
 
 	/**

@@ -1,17 +1,10 @@
 <?php
 
-class Model extends Eloquent {
+class Model extends Elegant {
 
-	/**
-	 * Deletes the model
-	 *
-	 * @return bool
-	 */
-	public function delete()
-	{
-
-		// Delete the model
-		return parent::delete();
-	}
+		// Declare the rules for the form validation
+		protected $rules = array(
+			'name'   => 'required|min:3',
+		);
 
 }
