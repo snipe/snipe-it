@@ -49,38 +49,40 @@ class CategoriesController extends AdminController {
 	 */
 	public function postCreate()
 	{
-		// Declare the rules for the form validation
-		$rules = array(
-			'name'   => 'required|min:3',
-		);
 
-		// Create a new validator instance from our validation rules
-		$validator = Validator::make(Input::all(), $rules);
+		// get the POST data
+		$new = Input::all();
 
-		// If validation fails, we'll exit the operation now.
-		if ($validator->fails())
+		// create a new model instance
+		$category = new Category();
+
+		// attempt validation
+		if ($category->validate($new))
 		{
-			// Ooops.. something went wrong
-			return Redirect::back()->withInput()->withErrors($validator);
+
+			// Update the category data
+			$category->name            = e(Input::get('name'));
+			$category->parent    = e(Input::get('parent'));
+			$category->user_id          = Sentry::getId();
+
+			// Was the asset created?
+			if($category->save())
+			{
+				// Redirect to the new category  page
+				return Redirect::to("admin/settings/categories")->with('success', Lang::get('admin/categories/message.create.success'));
+			}
 		}
-
-		// Create a new category
-		$category = new Category;
-
-		// Update the category data
-		$category->name            = e(Input::get('name'));
-		$category->parent    = e(Input::get('parent'));
-		$category->user_id          = Sentry::getId();
-
-		// Was the category created?
-		if($category->save())
+		else
 		{
-			// Redirect to the new category  page
-			return Redirect::to("admin/settings/categories")->with('success', Lang::get('admin/categories/message.create.success'));
+			// failure
+			$errors = $category->errors();
+			return Redirect::back()->withInput()->withErrors($errors);
 		}
 
 		// Redirect to the category create page
 		return Redirect::to('admin/settings/categories/create')->with('error', Lang::get('admin/categories/message.create.error'));
+
+
 	}
 
 	/**
@@ -121,34 +123,35 @@ class CategoriesController extends AdminController {
 			return Redirect::to('admin/categories')->with('error', Lang::get('admin/categories/message.does_not_exist'));
 		}
 
-		// Declare the rules for the form validation
-		$rules = array(
-			'name'   => 'required|min:3',
-		);
 
-		// Create a new validator instance from our validation rules
-		$validator = Validator::make(Input::all(), $rules);
+		// get the POST data
+		$new = Input::all();
 
-		// If validation fails, we'll exit the operation now.
-		if ($validator->fails())
+		// attempt validation
+		if ($category->validate($new))
 		{
-			// Ooops.. something went wrong
-			return Redirect::back()->withInput()->withErrors($validator);
+
+			// Update the category data
+			$category->name            = e(Input::get('name'));
+			$category->parent    = e(Input::get('parent'));
+
+			// Was the asset created?
+			if($category->save())
+			{
+				// Redirect to the new category page
+				return Redirect::to("admin/settings/categories")->with('success', Lang::get('admin/categories/message.update.success'));
+			}
 		}
-
-		// Update the category data
-		$category->name            = e(Input::get('name'));
-		$category->parent    = e(Input::get('parent'));
-
-		// Was the category updated?
-		if($category->save())
+		else
 		{
-			// Redirect to the new category page
-			return Redirect::to("admin/settings/categories/$categoryId/edit")->with('success', Lang::get('admin/categories/message.update.success'));
+			// failure
+			$errors = $category->errors();
+			return Redirect::back()->withInput()->withErrors($errors);
 		}
 
 		// Redirect to the category management page
 		return Redirect::to("admin/settings/categories/$categoryID/edit")->with('error', Lang::get('admin/categories/message.update.error'));
+
 	}
 
 	/**
