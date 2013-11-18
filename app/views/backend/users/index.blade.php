@@ -32,11 +32,11 @@ User Management ::
 	<thead>
 		<tr>
 			<th class="span2">@lang('admin/users/table.name')</th>
-			<th class="span3">@lang('admin/users/table.email')</th>
-			<th class="span1">@lang('admin/users/table.checkedout')</th>
-			<th class="span1">@lang('admin/users/table.activated')</th>
-			<th class="span2">@lang('admin/users/table.last_login')</th>
-			<th class="span2">@lang('admin/users/table.created_at')</th>
+			<th class="span3"><span class="line"></span>@lang('admin/users/table.email')</th>
+			<th class="span1"><span class="line"></span>@lang('admin/users/table.checkedout')</th>
+			<th class="span1"><span class="line"></span>@lang('admin/users/table.activated')</th>
+			<th class="span2"><span class="line"></span>@lang('admin/users/table.last_login')</th>
+			<th class="span2"><span class="line"></span>@lang('admin/users/table.created_at')</th>
 			<th class="span2">@lang('table.actions')</th>
 		</tr>
 	</thead>

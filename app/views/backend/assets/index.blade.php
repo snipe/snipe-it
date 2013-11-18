@@ -26,15 +26,15 @@ Assets ::
 	<thead>
 		<tr>
 			<th class="span2">@lang('admin/assets/table.asset_tag')</th>
-			<th class="span2">@lang('admin/assets/table.title')</th>
-			<th class="span2">@lang('admin/assets/table.serial')</th>
-			<th class="span2">@lang('admin/assets/table.checkoutto')</th>
-			<th class="span2">@lang('admin/assets/table.location')</th>
-			<th class="span1">@lang('admin/assets/table.change')</th>
-			<th class="span2">@lang('admin/assets/table.purchase_date')</th>
-			<th class="span2">@lang('admin/assets/table.purchase_cost')</th>
-			<th class="span2">@lang('admin/assets/table.book_value')</th>
-			<th class="span2">@lang('table.actions')</th>
+			<th class="span2"><span class="line"></span>@lang('admin/assets/table.title')</th>
+			<th class="span2"><span class="line"></span>@lang('admin/assets/table.serial')</th>
+			<th class="span2"><span class="line"></span>@lang('admin/assets/table.checkoutto')</th>
+			<th class="span2"><span class="line"></span>@lang('admin/assets/table.location')</th>
+			<th class="span1"><span class="line"></span>@lang('admin/assets/table.change')</th>
+			<th class="span2"><span class="line"></span>@lang('admin/assets/table.purchase_date')</th>
+			<th class="span2"><span class="line"></span>@lang('admin/assets/table.purchase_cost')</th>
+			<th class="span2"><span class="line"></span>@lang('admin/assets/table.book_value')</th>
+			<th class="span2"><span class="line"></span>@lang('table.actions')</th>
 		</tr>
 	</thead>
 	<tbody>

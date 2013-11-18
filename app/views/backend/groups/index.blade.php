@@ -27,10 +27,10 @@ Group Management ::
 	<thead>
 		<tr>
 			<th class="span1">@lang('admin/groups/table.id')</th>
-			<th class="span6">@lang('admin/groups/table.name')</th>
-			<th class="span2">@lang('admin/groups/table.users')</th>
-			<th class="span2">@lang('admin/groups/table.created_at')</th>
-			<th class="span2">@lang('table.actions')</th>
+			<th class="span6"><span class="line"></span>@lang('admin/groups/table.name')</th>
+			<th class="span2"><span class="line"></span>@lang('admin/groups/table.users')</th>
+			<th class="span2"><span class="line"></span>@lang('admin/groups/table.created_at')</th>
+			<th class="span2"><span class="line"></span>@lang('table.actions')</th>
 		</tr>
 	</thead>
 	<tbody>
