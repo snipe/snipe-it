@@ -11,5 +11,6 @@ return array(
 	'checkedout'  	=> 'Assets',
 	'activated'  	=> 'Active',
 	'created_at' 	=> 'Created',
+	'noresults' 	=> 'There are no results that match your query.',
 
 );
