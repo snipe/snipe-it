@@ -117,7 +117,7 @@ The profiler is enabled by default if you have debug set to true in your app.php
 
 ### Purging the autoloader
 
-If you're doing any development on this, make sure you purge the auto-loader if you see any errors stating the new model you created can'tbe found, etc, otherwise your new models won't be grokked.
+If you're doing any development on this, make sure you purge the auto-loader if you see any errors stating the new model you created can't be found, etc, otherwise your new models won't be grokked.
 
 	php composer.phar dump-autoload
 
