@@ -36,15 +36,9 @@ class User extends SentryUserModel {
 		return "//gravatar.org/avatar/{$gravatar}";
 	}
 
-	public function assetcount()
+	public function assets()
 	{
-		return DB::table('assets')->where('assigned_to', $this->id)->count();
-
-	}
-
-	public function userassetlist()
-	{
-		return DB::table('assets')->where('assigned_to', $this->id)->get();
+		return $this->hasMany('Asset', 'assigned_to');
 
 	}
 
