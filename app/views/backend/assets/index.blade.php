@@ -44,6 +44,7 @@ Assets ::
 
 			@if ($asset->assigned_to != 0)
 				{{ $asset->assigned_to }}
+				<a href="{{ route('checkin/asset', $asset->id) }}" class="btn btn-mini">Checkin</a>
 			@else
 				<a href="{{ route('checkout/asset', $asset->id) }}" class="btn btn-mini">Checkout</a>
 			@endif
@@ -56,6 +57,7 @@ Assets ::
 			<td>
 				<a href="{{ route('update/asset', $asset->id) }}" class="btn btn-mini">@lang('button.edit')</a>
 				<a href="{{ route('delete/asset', $asset->id) }}" class="btn btn-mini btn-danger">@lang('button.delete')</a>
+
 			</td>
 		</tr>
 		@endforeach

@@ -23,6 +23,8 @@ Route::group(array('prefix' => 'assets'), function()
 	Route::get('{assetId}/delete', array('as' => 'delete/asset', 'uses' => 'Controllers\Admin\AssetsController@getDelete'));
 	Route::get('{assetId}/checkout', array('as' => 'checkout/asset', 'uses' => 'Controllers\Admin\AssetsController@getCheckout'));
 	Route::post('{assetId}/checkout', 'Controllers\Admin\AssetsController@postCheckout');
+	Route::get('{assetId}/checkin', array('as' => 'checkin/asset', 'uses' => 'Controllers\Admin\AssetsController@postCheckin'));
+
 
 
 

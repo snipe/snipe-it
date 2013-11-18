@@ -213,15 +213,17 @@ class AssetsController extends AdminController {
 		}
 
 		// Get the dropdown of users and then pass it to the checkout view
-		$users = DB::table('users')->select(DB::raw('concat (first_name," ",last_name) as full_name,id'))->lists('full_name', 'id');
-		return View::make('backend/assets/checkout', compact('asset'))->with('users',$users);
+		$users_list = array('' => 'Select a User') + DB::table('users')->select(DB::raw('concat (first_name," ",last_name) as full_name, id'))->lists('full_name', 'id');
+
+		//print_r($users);
+		return View::make('backend/assets/checkout', compact('asset'))->with('users_list',$users_list);
 
 	}
 
 	/**
 	* Check out the asset to a person
 	**/
-	public function postCheckout($assetId,$userId)
+	public function postCheckout($assetId)
 	{
 		// Check if the asset exists
 		if (is_null($asset = Asset::find($assetId)))
@@ -230,19 +232,69 @@ class AssetsController extends AdminController {
 			return Redirect::to('admin')->with('error', Lang::get('admin/assets/message.not_found'));
 		}
 
+		$user_id = e(Input::get('user_id'));
+
 		// Check if the asset exists
-		if (is_null($user = User::find($userId)))
+		if (is_null($user = User::find($user_id)))
 		{
 			// Redirect to the asset management page with error
-			return Redirect::to('admin')->with('error', Lang::get('admin/assets/message.does_not_exist'));
+			return Redirect::to('admin')->with('error', Lang::get('admin/assets/message.user_does_not_exist'));
 		}
 
-		echo 'bar';
-		// Delete the asset
-		//$asset->delete();
+		// Declare the rules for the form validation
+		$rules = array(
+			'user_id'   => 'required'
+		);
 
-		// Redirect to the asset management page
-		//return Redirect::to('admin')->with('success', Lang::get('admin/assets/message.checkout.success'));
+		// Create a new validator instance from our validation rules
+		$validator = Validator::make(Input::all(), $rules);
+
+		// If validation fails, we'll exit the operation now.
+		if ($validator->fails())
+		{
+			// Ooops.. something went wrong
+			return Redirect::back()->withInput()->withErrors($validator);
+		}
+
+		// Update the asset data
+		$asset->assigned_to            		= e(Input::get('user_id'));
+
+
+		// Was the asset updated?
+		if($asset->save())
+		{
+			// Redirect to the new asset page
+			return Redirect::to("admin")->with('success', Lang::get('admin/assets/message.checkout.success'));
+		}
+
+		// Redirect to the asset management page with error
+		return Redirect::to("assets/$assetId/checkout")->with('error', Lang::get('admin/assets/message.checkout.error'));
+	}
+
+	/**
+	* Check out the asset to a person
+	**/
+	public function postCheckin($assetId)
+	{
+		// Check if the asset exists
+		if (is_null($asset = Asset::find($assetId)))
+		{
+			// Redirect to the asset management page with error
+			return Redirect::to('admin')->with('error', Lang::get('admin/assets/message.not_found'));
+		}
+
+		// Update the asset data
+		$asset->assigned_to            		= '';
+
+		// Was the asset updated?
+		if($asset->save())
+		{
+			// Redirect to the new asset page
+			return Redirect::to("admin")->with('success', Lang::get('admin/assets/message.checkout.success'));
+		}
+
+		// Redirect to the asset management page with error
+		return Redirect::to("admin")->with('error', Lang::get('admin/assets/message.checkout.error'));
 	}
 
 

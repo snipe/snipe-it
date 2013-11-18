@@ -56,11 +56,10 @@
 			<div class="control-group {{ $errors->has('user_id') ? 'error' : '' }}">
 				<label class="control-label" for="parent">Checkout to</label>
 				<div class="controls">
-					{{ Form::select('user_id', $users , Input::old('user_id', $asset->user_id)) }}
+					{{ Form::select('user_id', $users_list , Input::old('user_id', $asset->assigned_to)) }}
 					{{ $errors->first('user_id', '<span class="help-inline">:message</span>') }}
 				</div>
 			</div>
-
 
 		</div>
 
