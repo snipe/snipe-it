@@ -49,38 +49,39 @@ class DepreciationsController extends AdminController {
 	 */
 	public function postCreate()
 	{
-		// Declare the rules for the form validation
-		$rules = array(
-			'name'   => 'required|min:3',
-		);
 
-		// Create a new validator instance from our validation rules
-		$validator = Validator::make(Input::all(), $rules);
+		// get the POST data
+		$new = Input::all();
 
-		// If validation fails, we'll exit the operation now.
-		if ($validator->fails())
+		// create a new instance
+		$depreciation = new Depreciation();
+
+		// attempt validation
+		if ($depreciation->validate($new))
 		{
-			// Ooops.. something went wrong
-			return Redirect::back()->withInput()->withErrors($validator);
+
+			// Depreciation data
+			$depreciation->name            = e(Input::get('name'));
+			$depreciation->months    = e(Input::get('months'));
+			$depreciation->user_id          = Sentry::getId();
+
+			// Was the asset created?
+			if($depreciation->save())
+			{
+				// Redirect to the new depreciation  page
+				return Redirect::to("admin/settings/depreciations")->with('success', Lang::get('admin/depreciations/message.create.success'));
+			}
 		}
-
-		// Create a new depreciation
-		$depreciation = new Depreciation;
-
-		// Update the depreciation data
-		$depreciation->name            = e(Input::get('name'));
-		$depreciation->months    = e(Input::get('months'));
-		$depreciation->user_id          = Sentry::getId();
-
-		// Was the depreciation created?
-		if($depreciation->save())
+		else
 		{
-			// Redirect to the new depreciation  page
-			return Redirect::to("admin/settings/depreciations")->with('success', Lang::get('admin/depreciations/message.create.success'));
+			// failure
+			$errors = $depreciation->errors();
+			return Redirect::back()->withInput()->withErrors($errors);
 		}
 
 		// Redirect to the depreciation create page
 		return Redirect::to('admin/settings/depreciations/create')->with('error', Lang::get('admin/depreciations/message.create.error'));
+
 	}
 
 	/**
@@ -114,41 +115,44 @@ class DepreciationsController extends AdminController {
 	 */
 	public function postEdit($depreciationId = null)
 	{
-		// Check if the blog post exists
+		// Check if the depreciation exists
 		if (is_null($depreciation = Depreciation::find($depreciationId)))
 		{
 			// Redirect to the blogs management page
 			return Redirect::to('admin/settings/depreciations')->with('error', Lang::get('admin/depreciations/message.does_not_exist'));
 		}
 
-		// Declare the rules for the form validation
-		$rules = array(
-			'name'   => 'required|min:3',
-		);
 
-		// Create a new validator instance from our validation rules
-		$validator = Validator::make(Input::all(), $rules);
 
-		// If validation fails, we'll exit the operation now.
-		if ($validator->fails())
+		// get the POST data
+		$new = Input::all();
+
+		// attempt validation
+		if ($depreciation->validate($new))
 		{
-			// Ooops.. something went wrong
-			return Redirect::back()->withInput()->withErrors($validator);
+
+			// Depreciation data
+			$depreciation->name            = e(Input::get('name'));
+			$depreciation->months    = e(Input::get('months'));
+
+			// Was the asset created?
+			if($depreciation->save())
+			{
+				// Redirect to the depreciation page
+				return Redirect::to("admin/settings/depreciations/$depreciationId/edit")->with('success', Lang::get('admin/depreciations/message.update.success'));
+			}
 		}
-
-		// Update the depreciation data
-		$depreciation->name            = e(Input::get('name'));
-		$depreciation->months    = e(Input::get('months'));
-
-		// Was the depreciation updated?
-		if($depreciation->save())
+		else
 		{
-			// Redirect to the new depreciation page
-			return Redirect::to("admin/settings/depreciations/$depreciationId/edit")->with('success', Lang::get('admin/depreciations/message.update.success'));
+			// failure
+			$errors = $depreciation->errors();
+			return Redirect::back()->withInput()->withErrors($errors);
 		}
 
 		// Redirect to the depreciation management page
 		return Redirect::to("admin/settings/depreciations/$depreciationId/edit")->with('error', Lang::get('admin/depreciations/message.update.error'));
+
+
 	}
 
 	/**
@@ -159,17 +163,17 @@ class DepreciationsController extends AdminController {
 	 */
 	public function getDelete($depreciationId)
 	{
-		// Check if the blog post exists
+		// Check if the depreciation exists
 		if (is_null($depreciation = Depreciation::find($depreciationId)))
 		{
 			// Redirect to the blogs management page
 			return Redirect::to('admin/settings/depreciations')->with('error', Lang::get('admin/depreciations/message.not_found'));
 		}
 
-		// Delete the blog post
+		// Delete the depreciation
 		$depreciation->delete();
 
-		// Redirect to the blog posts management page
+		// Redirect to the depreciations management page
 		return Redirect::to('admin/settings/depreciations')->with('success', Lang::get('admin/depreciations/message.delete.success'));
 	}
 

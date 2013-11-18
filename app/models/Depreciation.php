@@ -1,23 +1,12 @@
 <?php
 
-class Depreciation extends Eloquent {
+class Depreciation extends Elegant {
 
-	/**
-	 * Deletes a depreciation
-	 *
-	 * @return bool
-	 */
-
-	protected $table = 'depreciations';
-
-	public function delete()
-	{
-		// Delete the depreciation
-		return parent::delete();
-	}
-
-
-
+		// Declare the rules for the form validation
+		protected $rules = array(
+			'name'   => 'required|min:3',
+			'months'   => 'required|min:1|integer',
+		);
 
 
 }
