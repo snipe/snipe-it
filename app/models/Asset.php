@@ -1,23 +1,18 @@
 <?php
-
-class Asset extends Eloquent {
-
-	/**
-	 * Deletes an asset
-	 *
-	 * @return bool
-	 */
+class Asset extends Elegant {
 
 	protected $table = 'assets';
+	protected $rules = array(
+		'name'   => 'required|min:3',
+		'asset_tag'   => 'required|min:3|unique:assets',
+		'model_id'   => 'required',
+		'serial'   => 'required|min:3',
+    );
 
-	public function delete()
-	{
-		// Delete the asset
-		return parent::delete();
-	}
 
-
-
+	/**
+	* Handle depreciation
+	*/
 	public function depreciation()
 	{
 		$depreciation_id = Model::find($this->model_id)->depreciation_id;

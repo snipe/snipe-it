@@ -45,37 +45,38 @@ class ManufacturersController extends AdminController {
 	 */
 	public function postCreate()
 	{
-		// Declare the rules for the form validation
-		$rules = array(
-			'name'   => 'required|min:3',
-		);
 
-		// Create a new validator instance from our validation rules
-		$validator = Validator::make(Input::all(), $rules);
-
-		// If validation fails, we'll exit the operation now.
-		if ($validator->fails())
-		{
-			// Ooops.. something went wrong
-			return Redirect::back()->withInput()->withErrors($validator);
-		}
+		// get the POST data
+		$new = Input::all();
 
 		// Create a new manufacturer
 		$manufacturer = new Manufacturer;
 
-		// Update the manufacturer data
-		$manufacturer->name            = e(Input::get('name'));
-		$manufacturer->user_id          = Sentry::getId();
-
-		// Was the manufacturer created?
-		if($manufacturer->save())
+		// attempt validation
+		if ($manufacturer->validate($new))
 		{
-			// Redirect to the new manufacturer  page
-			return Redirect::to("admin/settings/manufacturers")->with('success', Lang::get('admin/manufacturers/message.create.success'));
+
+			// Save the location data
+			$manufacturer->name            = e(Input::get('name'));
+			$manufacturer->user_id          = Sentry::getId();
+
+			// Was it created?
+			if($manufacturer->save())
+			{
+				// Redirect to the new manufacturer  page
+				return Redirect::to("admin/settings/manufacturers")->with('success', Lang::get('admin/manufacturers/message.create.success'));
+			}
+		}
+		else
+		{
+			// failure
+			$errors = $manufacturer->errors();
+			return Redirect::back()->withInput()->withErrors($errors);
 		}
 
 		// Redirect to the manufacturer create page
 		return Redirect::to('admin/settings/manufacturers/create')->with('error', Lang::get('admin/manufacturers/message.create.error'));
+
 	}
 
 	/**
@@ -113,33 +114,34 @@ class ManufacturersController extends AdminController {
 			return Redirect::to('admin/settings/manufacturers')->with('error', Lang::get('admin/manufacturers/message.does_not_exist'));
 		}
 
-		// Declare the rules for the form validation
-		$rules = array(
-			'name'   => 'required|min:3',
-		);
 
-		// Create a new validator instance from our validation rules
-		$validator = Validator::make(Input::all(), $rules);
+		// get the POST data
+		$new = Input::all();
 
-		// If validation fails, we'll exit the operation now.
-		if ($validator->fails())
+		// attempt validation
+		if ($manufacturer->validate($new))
 		{
-			// Ooops.. something went wrong
-			return Redirect::back()->withInput()->withErrors($validator);
+
+			// Save the  data
+			$manufacturer->name 	= e(Input::get('name'));
+
+			// Was it created?
+			if($manufacturer->save())
+			{
+				// Redirect to the new manufacturer page
+				return Redirect::to("admin/settings/manufacturers")->with('success', Lang::get('admin/manufacturers/message.update.success'));
+			}
 		}
-
-		// Update the manufacturer data
-		$manufacturer->name  = e(Input::get('name'));
-
-		// Was the manufacturer updated?
-		if($manufacturer->save())
+		else
 		{
-			// Redirect to the new manufacturer page
-			return Redirect::to("admin/settings/manufacturers")->with('success', Lang::get('admin/manufacturers/message.update.success'));
+			// failure
+			$errors = $manufacturer->errors();
+			return Redirect::back()->withInput()->withErrors($errors);
 		}
 
 		// Redirect to the manufacturer management page
 		return Redirect::to("admin/settings/manufacturers/$manufacturerId/edit")->with('error', Lang::get('admin/manufacturers/message.update.error'));
+
 	}
 
 	/**

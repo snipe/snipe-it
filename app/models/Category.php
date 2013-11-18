@@ -1,20 +1,14 @@
 <?php
 
-class Category extends Eloquent {
+class Category extends Elegant {
 
 	/**
-	 * Deletes a category
-	 *
-	 * @return bool
-	 */
+	* Category validation rules
+	*/
+	protected $rules = array(
+		'name'   => 'required|min:2',
+    );
 
-	protected $table = 'categories';
-
-	public function delete()
-	{
-		// Delete the category
-		return parent::delete();
-	}
 
 
 	/**

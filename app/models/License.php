@@ -1,6 +1,6 @@
 <?php
 
-class License extends Eloquent {
+class License extends Elegant {
 
 	/**
 	 * Deletes a category
@@ -10,11 +10,11 @@ class License extends Eloquent {
 
 	protected $table = 'assets';
 
-	public function delete()
-	{
-		// Delete the license
-		return parent::delete();
-	}
+	protected $rules = array(
+			'name'   => 'required|min:3',
+			'serial'   => 'required|min:5',
+			'license_email'   => 'email',
+		);
 
 
 

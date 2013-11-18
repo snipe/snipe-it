@@ -49,44 +49,43 @@ class LocationsController extends AdminController {
 	 */
 	public function postCreate()
 	{
-		// Declare the rules for the form validation
-		$rules = array(
-			'name'  		=> 'required|min:3',
-			'city'   		=> 'required|min:3',
-			'state'   		=> 'required|alpha|min:2|max:2',
-			'country'   	=> 'required|alpha|min:2|max:2',
-		);
 
-		// Create a new validator instance from our validation rules
-		$validator = Validator::make(Input::all(), $rules);
+		// get the POST data
+		$new = Input::all();
 
-		// If validation fails, we'll exit the operation now.
-		if ($validator->fails())
+		// create a new model instance
+		$location = new Location();
+
+		// attempt validation
+		if ($location->validate($new))
 		{
-			// Ooops.. something went wrong
-			return Redirect::back()->withInput()->withErrors($validator);
+
+			// Save the location data
+			$location->name            	= e(Input::get('name'));
+			$location->city    			= e(Input::get('city'));
+			$location->state    		= e(Input::get('state'));
+			$location->country    		= e(Input::get('country'));
+			$location->user_id          = Sentry::getId();
+
+			// Was the asset created?
+			if($location->save())
+			{
+				// Redirect to the new location  page
+				return Redirect::to("admin/settings/locations")->with('success', Lang::get('admin/locations/message.create.success'));
+			}
 		}
-
-		// Create a new location
-		$location = new Location;
-
-		// Update the location data
-		$location->name            	= e(Input::get('name'));
-		$location->city    			= e(Input::get('city'));
-		$location->state    		= e(Input::get('state'));
-		$location->country    		= e(Input::get('country'));
-		$location->user_id          = Sentry::getId();
-
-		// Was the location created?
-		if($location->save())
+		else
 		{
-			// Redirect to the new location  page
-			return Redirect::to("admin/settings/locations")->with('success', Lang::get('admin/locations/message.create.success'));
+			// failure
+			$errors = $location->errors();
+			return Redirect::back()->withInput()->withErrors($errors);
 		}
 
 		// Redirect to the location create page
 		return Redirect::to('admin/settings/locations/create')->with('error', Lang::get('admin/locations/message.create.error'));
+
 	}
+
 
 	/**
 	 * Location update.
@@ -119,47 +118,46 @@ class LocationsController extends AdminController {
 	 */
 	public function postEdit($locationId = null)
 	{
-		// Check if the blog post exists
+		// Check if the location exists
 		if (is_null($location = Location::find($locationId)))
 		{
 			// Redirect to the blogs management page
 			return Redirect::to('admin/settings/locations')->with('error', Lang::get('admin/locations/message.does_not_exist'));
 		}
 
-		// Declare the rules for the form validation
-		$rules = array(
-			'name'   => 'required|min:3',
-			'city'   => 'required|min:3',
-			'state'   => 'required|alpha|min:2|max:2',
-			'country'   => 'required|alpha|min:2|max:2',
-		);
 
-		// Create a new validator instance from our validation rules
-		$validator = Validator::make(Input::all(), $rules);
 
-		// If validation fails, we'll exit the operation now.
-		if ($validator->fails())
+		// get the POST data
+		$new = Input::all();
+
+
+		// attempt validation
+		if ($location->validate($new))
 		{
-			// Ooops.. something went wrong
-			return Redirect::back()->withInput()->withErrors($validator);
+
+			// Update the location data
+			$location->name            	= e(Input::get('name'));
+			$location->city    			= e(Input::get('city'));
+			$location->state    		= e(Input::get('state'));
+			$location->country    		= e(Input::get('country'));
+
+			// Was the asset created?
+			if($location->save())
+			{
+				// Redirect to the saved location page
+				return Redirect::to("admin/settings/locations/$locationId/edit")->with('success', Lang::get('admin/locations/message.update.success'));
+			}
 		}
-
-		// Update the location data
-		$location->name            	= e(Input::get('name'));
-		$location->city    			= e(Input::get('city'));
-		$location->state    		= e(Input::get('state'));
-		$location->country    		= e(Input::get('country'));
-
-
-		// Was the location updated?
-		if($location->save())
+		else
 		{
-			// Redirect to the new location page
-			return Redirect::to("admin/settings/locations/$locationId/edit")->with('success', Lang::get('admin/locations/message.update.success'));
+			// failure
+			$errors = $location->errors();
+			return Redirect::back()->withInput()->withErrors($errors);
 		}
 
 		// Redirect to the location management page
 		return Redirect::to("admin/settings/locations/$locationId/edit")->with('error', Lang::get('admin/locations/message.update.error'));
+
 	}
 
 	/**
@@ -170,17 +168,17 @@ class LocationsController extends AdminController {
 	 */
 	public function getDelete($locationId)
 	{
-		// Check if the blog post exists
+		// Check if the location exists
 		if (is_null($location = Location::find($locationId)))
 		{
 			// Redirect to the blogs management page
 			return Redirect::to('admin/settings/locations')->with('error', Lang::get('admin/locations/message.not_found'));
 		}
 
-		// Delete the blog post
+		// Delete the location
 		$location->delete();
 
-		// Redirect to the blog posts management page
+		// Redirect to the locations management page
 		return Redirect::to('admin/settings/locations')->with('success', Lang::get('admin/locations/message.delete.success'));
 	}
 
