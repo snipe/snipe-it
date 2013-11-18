@@ -215,7 +215,7 @@
     <div id="footer">
       		<div class="container">
         		<p class="muted credit"><a href="http://snipeitapp.com">Snipe IT</a> is a free open source
-        		project by <a href="http://www.snipe.net">Alison Gianotto</a>. <a href="https://github.com/snipe/snipe-it">Fork it here</a>!</p>
+        		project by <a href="http://twitter.com/snipeyhead">@snipeyhead</a>. <a href="https://github.com/snipe/snipe-it">Fork it here</a>!</p>
       		</div>
     </div>
 	</footer>
