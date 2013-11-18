@@ -36,7 +36,7 @@ User Management ::
 			<th class="span1"><span class="line"></span>@lang('admin/users/table.checkedout')</th>
 			<th class="span1"><span class="line"></span>@lang('admin/users/table.activated')</th>
 			<th class="span2"><span class="line"></span>@lang('admin/users/table.last_login')</th>
-			<th class="span2"><span class="line"></span>@lang('admin/users/table.created_at')</th>
+			<th class="span1"><span class="line"></span>@lang('admin/users/table.created_at')</th>
 			<th class="span2">@lang('table.actions')</th>
 		</tr>
 	</thead>
