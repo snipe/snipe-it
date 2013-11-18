@@ -18,15 +18,15 @@ User Management ::
 	</h3>
 </div>
 
-<a class="btn btn-medium" href="{{ URL::to('admin/users?withTrashed=true') }}">Include Deleted Users</a>
-<a class="btn btn-medium" href="{{ URL::to('admin/users?onlyTrashed=true') }}">Include Only Deleted Users</a>
+<a class="btn-flat white" href="{{ URL::to('admin/users?withTrashed=true') }}">Include Deleted Users</a>
+<a class="btn-flat white" href="{{ URL::to('admin/users?onlyTrashed=true') }}">Include Only Deleted Users</a>
 <br><br>
 
-@if (count($users) > 10)
+@if ($users->getTotal() > 10)
 {{ $users->links() }}
 @endif
 
-
+@if ($users->getTotal() > 0)
 <div class="row-fluid table users-list">
 <table class="table table-hover">
 	<thead>
@@ -83,9 +83,18 @@ User Management ::
 	</tbody>
 </table>
 </div>
+@else
+<div class="col-md-6">
+	<div class="alert alert-warning alert-block">
+		<button type="button" class="close" data-dismiss="alert">&times;</button>
+		<i class="icon-warning-sign"></i>
+		@lang('admin/users/table.noresults')
 
+	</div>
+</div>
+@endif
 
-@if (count($users) > 10)
+@if ($users->getTotal() > 10)
 {{ $users->links() }}
 @endif
 
