@@ -50,7 +50,7 @@
 			<div class="control-group {{ $errors->has('months') ? 'error' : '' }}">
 				<label class="control-label" for="name">Number of Months</label>
 				<div class="controls">
-					<input class="span6" type="text" name="months" id="months" value="{{ Input::old('months', $depreciation->months) }}" />
+					<input class="span2" type="text" name="months" id="months" value="{{ Input::old('months', $depreciation->months) }}" />
 					{{ $errors->first('months', '<span class="help-inline">:message</span>') }}
 				</div>
 			</div>
