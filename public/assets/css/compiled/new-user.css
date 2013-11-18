@@ -1,0 +1,148 @@
+.new-user {
+  /* form sidebar*/
+}
+.new-user .form-wrapper .with-sidebar {
+  border-right: 1px solid #edeef1;
+  box-shadow: 4px 0px 3px -1px rgba(226, 226, 226, 0.1);
+}
+.new-user .form-wrapper .container {
+  width: 90%;
+  float: left;
+}
+.new-user .form-wrapper .field-box {
+  margin-bottom: 25px;
+  margin-left: 0;
+  float: left;
+  width: 100%;
+}
+.new-user .form-wrapper label {
+  display: inline-block;
+  float: left;
+  font-weight: 600;
+  font-size: 13px;
+  cursor: auto;
+  width: 120px;
+}
+.new-user .form-wrapper input[type="text"] {
+  margin: 0;
+  padding: 3px 6px;
+}
+.new-user .form-wrapper .address-fields {
+  margin-left: 0px;
+  float: left;
+  width: 75%;
+}
+.new-user .form-wrapper input.small {
+  width: 30%;
+  margin-top: 20px;
+  margin-right: 20px;
+}
+.new-user .form-wrapper input.last {
+  margin-right: 0;
+}
+.new-user .form-wrapper input:-moz-placeholder {
+  font-style: italic;
+}
+.new-user .form-wrapper input:-ms-input-placeholder {
+  font-style: italic;
+}
+.new-user .form-wrapper input::-webkit-input-placeholder {
+  font-style: italic;
+}
+.new-user .form-wrapper textarea {
+  height: 88px;
+}
+.new-user .textarea {
+  margin-top: 27px;
+}
+.new-user .textarea span.charactersleft {
+  display: block;
+  color: #9ba0a5;
+  text-align: left;
+  margin-left: 18%;
+  font-size: 13px;
+  font-style: italic;
+}
+.new-user .actions {
+  margin-top: 30px;
+  text-align: right;
+  padding-right: 40px;
+}
+.new-user .actions span {
+  text-transform: uppercase;
+  color: #7e91aa;
+  font-weight: 600;
+  display: inline-block;
+  vertical-align: middle;
+  margin: 0 2px 0 8px;
+}
+.new-user .actions input.reset {
+  color: #7e91aa;
+  font-weight: 500;
+}
+.new-user .form-sidebar .alert {
+  margin: 20px 0px 60px 0px;
+}
+.new-user .form-sidebar .alert i {
+  margin-bottom: 40px;
+}
+.new-user .form-sidebar h6 {
+  font-weight: 600;
+  text-transform: uppercase;
+}
+.new-user .form-sidebar p {
+  color: #777e86;
+}
+.new-user .form-sidebar ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.new-user .form-sidebar ul a {
+  text-decoration: underline;
+}
+
+/* responsive */
+@media (max-width: 767px) {
+  .new-user .form-wrapper .container {
+    width: 100%;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #edeef1;
+    box-shadow: 0px 4px 3px -1px rgba(226, 226, 226, 0.1);
+  }
+  .new-user .form-wrapper .with-sidebar {
+    border-right: 0 none;
+    box-shadow: none;
+  }
+  .new-user .form-wrapper label {
+    margin: 0;
+  }
+  .new-user .form-wrapper .textarea label {
+    width: 100%;
+    text-align: left;
+    margin-bottom: 10px;
+  }
+  .new-user .form-wrapper .textarea textarea {
+    width: 97%;
+  }
+  .new-user .textarea span.charactersleft {
+    display: inline-block;
+    margin-left: 0;
+  }
+  .new-user .actions {
+    margin-top: 0;
+  }
+  .new-user .form-sidebar {
+    margin-top: 40px;
+  }
+}
+@media (max-width: 979px) {
+  .new-user .form-wrapper .address-fields {
+    margin-top: 30px;
+    width: 100%;
+  }
+  .new-user .form-wrapper input.small {
+    width: inherit;
+    margin: 20px 0px 0px 0px;
+  }
+}

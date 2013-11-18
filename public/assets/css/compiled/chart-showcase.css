@@ -1,0 +1,28 @@
+/* Stats chart */
+#statsChart {
+  width: 97%;
+  height: 250px;
+  margin-top: 35px;
+}
+
+/* specific chart styles */
+.legendLabel {
+  font-size: 12px;
+  font-family: "Open Sans", Arial;
+  color: #9da3a9;
+}
+
+#pad-wrapper .section {
+  border-top: 1px solid #edeff1;
+  margin-top: 70px;
+  padding-top: 45px;
+  box-shadow: inset 0px 3px 4px -1px #fafafa;
+}
+#pad-wrapper h4.title {
+  margin-bottom: 45px;
+}
+#pad-wrapper .section .chart h5 {
+  margin-bottom: 10px;
+}
+
+/*Responsive*/

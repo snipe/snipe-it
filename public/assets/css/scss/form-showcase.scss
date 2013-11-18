@@ -1,0 +1,81 @@
+.form-page {
+	.form-wrapper {
+		margin-bottom: 40px;
+		.field-box{
+			margin-bottom: 30px;
+			margin-left: 0;
+			float: left;
+			width: 100%;
+		}
+		label{
+			display: inline-block;
+			float: left;
+			font-weight: 600;
+			cursor: auto;
+			font-size: 12px;
+			width: 140px;
+			text-align: left;
+		}
+		input:-moz-placeholder{font-style: italic;}
+		input:-ms-input-placeholder{font-style: italic;}
+		input::-webkit-input-placeholder{font-style: italic;}
+
+		.predefined {
+			position: relative;
+			input {	
+				padding-left: 40px;
+			}
+			.value {
+				position: absolute;
+				top: 6px;
+			}
+		}
+
+		label.checkbox {
+			cursor: pointer;
+			color: #555;
+		}
+		label.radio {
+			position: relative;
+			left: -20px;
+			width: 100%;
+			cursor: pointer;
+			color: #555;
+		}
+		label.checkbox,
+		label.radio {
+			padding-left: 0px;
+			font-weight: lighter;
+			input[type="checkbox"],
+			input[type="radio"] {
+				font-size: large;
+				margin-left: 0px;
+			}
+		}
+
+		.wysi-column {
+			float: left;
+			width: 75%;
+		}
+
+		.column.pull-right {
+			label {
+				display: block;
+				width: 100%;
+			}
+			.ui-select {
+				width: 250px;
+			}
+		}
+		.select2-container {
+			margin-left: 0px;
+		}
+	}
+}
+
+/*Responsive*/
+@media (max-width: 767px) {
+	.form-page .form-wrapper label.radio {
+		left: 0px;
+	}	
+}

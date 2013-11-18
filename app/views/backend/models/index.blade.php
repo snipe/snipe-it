@@ -13,7 +13,7 @@ Asset Models ::
 		Asset Models
 
 		<div class="pull-right">
-			<a href="{{ route('create/model') }}" class="btn btn-small btn-info"><i class="icon-plus-sign icon-white"></i> Create</a>
+			<a href="{{ route('create/model') }}" class="btn-flat success"><i class="icon-plus-sign icon-white"></i> Create New</a>
 		</div>
 	</h3>
 </div>
@@ -42,8 +42,8 @@ Asset Models ::
 			<td>{{ ($model->assets->count()) }}</td>
 			<td>{{ $model->created_at->diffForHumans() }}</td>
 			<td>
-				<a href="{{ route('update/model', $model->id) }}" class="btn btn-mini">@lang('button.edit')</a>
-				<a href="{{ route('delete/model', $model->id) }}" class="btn btn-mini btn-danger">@lang('button.delete')</a>
+				<a href="{{ route('update/model', $model->id) }}" class="btn-flat white">@lang('button.edit')</a>
+				<a href="{{ route('delete/model', $model->id) }}" class="btn-flat danger">@lang('button.delete')</a>
 			</td>
 		</tr>
 		@endforeach

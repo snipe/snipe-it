@@ -1,0 +1,95 @@
+#calendar {
+  width: 100%;
+  margin: 0 auto;
+  margin-top: -10px;
+}
+
+.calendar-wrapper {
+  position: relative;
+  /* calendar-wrapper popup */
+}
+.calendar-wrapper .popup {
+  position: absolute;
+  background: #fff;
+  text-align: left;
+  width: 260px;
+  border: 1px solid #b2b4b6;
+  box-shadow: 0px 0px 7px -1px rgba(0, 0, 0, 0.35);
+  border-radius: 4px;
+  padding: 14px 20px 14px 20px;
+  z-index: 999;
+  left: 635px;
+  top: 50px;
+}
+.calendar-wrapper .popup h5 {
+  text-transform: uppercase;
+  font-weight: 600;
+  margin: 0 0 21px 0;
+  font-size: 14px;
+  color: #7e91aa;
+}
+.calendar-wrapper .popup .field {
+  margin-bottom: 7px;
+}
+.calendar-wrapper .popup .field .date {
+  margin-left: 15px;
+}
+.calendar-wrapper .popup .field .event-input {
+  position: relative;
+  top: 5px;
+  margin-left: 10px;
+  width: 70%;
+}
+.calendar-wrapper .popup input[type="submit"] {
+  float: right;
+  margin-right: 15px;
+}
+.calendar-wrapper .popup i.close-pop {
+  position: absolute;
+  right: 11px;
+  cursor: pointer;
+  top: 12px;
+  opacity: 0.6;
+  transition: opacity .1s linear;
+  -moz-transition: opacity .1s linear;
+  -webkit-transition: opacity .1s linear;
+  -o-transition: opacity .1s linear;
+}
+.calendar-wrapper .popup i.close-pop:hover {
+  opacity: 1;
+}
+.calendar-wrapper .popup .pointer {
+  position: absolute;
+  bottom: 0;
+  left: 46%;
+}
+.calendar-wrapper .popup .pointer .arrow,
+.calendar-wrapper .popup .pointer .arrow_border {
+  border-color: #fff transparent transparent transparent;
+  border-width: 11px;
+  border-style: solid;
+  font-size: 0;
+  left: 50%;
+  line-height: 0;
+  margin: 0 auto;
+  position: absolute;
+  top: 0;
+  width: 0;
+  z-index: 1002;
+  left: 0;
+  margin-left: 45%;
+}
+.calendar-wrapper .popup .pointer .arrow_border {
+  border-color: #888888 transparent transparent transparent;
+  border-width: 12px;
+  margin-left: -1px;
+  border-style: solid;
+  z-index: 1001;
+  top: 0px;
+}
+
+@media (max-width: 1000px) {
+  .calendar-wrapper .popup {
+    display: none;
+  }
+}

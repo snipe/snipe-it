@@ -13,7 +13,7 @@ Assets ::
 		Assets
 
 		<div class="pull-right">
-			<a href="{{ route('create/asset') }}" class="btn btn-small btn-info"><i class="icon-plus-sign icon-white"></i> Create</a>
+			<a href="{{ route('create/asset') }}" class="btn-flat success"><i class="icon-plus-sign icon-white"></i> Create New</a>
 		</div>
 	</h3>
 </div>
@@ -48,17 +48,17 @@ Assets ::
 			</td>
 			<td>
 			@if ($asset->assigned_to != 0)
-				<a href="{{ route('checkin/asset', $asset->id) }}" class="btn btn-mini btn-info">Checkin</a>
+				<a href="{{ route('checkin/asset', $asset->id) }}" class="btn-flat info">Checkin</a>
 			@else
-				<a href="{{ route('checkout/asset', $asset->id) }}" class="btn btn-mini btn-success">Checkout</a>
+				<a href="{{ route('checkout/asset', $asset->id) }}" class="btn-flat success">Checkout</a>
 			@endif
 			</td>
 			<td>{{ $asset->purchase_date }}</td>
 			<td>${{ number_format($asset->purchase_cost) }}</td>
 			<td>${{ number_format($asset->depreciation()) }}</td>
 			<td>
-				<a href="{{ route('update/asset', $asset->id) }}" class="btn btn-mini">@lang('button.edit')</a>
-				<a href="{{ route('delete/asset', $asset->id) }}" class="btn btn-mini btn-danger">@lang('button.delete')</a>
+				<a href="{{ route('update/asset', $asset->id) }}" class="btn-flat white">@lang('button.edit')</a>
+				<a href="{{ route('delete/asset', $asset->id) }}" class="btn-flat danger">@lang('button.delete')</a>
 
 			</td>
 		</tr>

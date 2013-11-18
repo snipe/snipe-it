@@ -1,0 +1,186 @@
+.user-profile {
+	.header {
+		.avatar{
+			float: left;
+			margin-right: 25px;
+			border: 2px solid #e9ecee;
+			position: relative;
+			top: 3px;
+		}
+		.name {
+			font-weight: 600;
+			margin: 20px 0 8px 0;
+			line-height: 26px;
+			margin-bottom: 10px;
+			float: none;
+		}
+		span.area {
+			color: #7d848c;
+			font-style: italic;
+			font-size: 14px;
+		}
+		a.btn-flat {
+			margin-top: 18px;
+		}
+		a.delete-user {
+			margin-left: 10px;
+			font-size: 14px;
+		}
+	}
+	.profile {
+		.profile-box {
+			border-top: 1px solid #dde2e9;
+			padding-top: 23px;
+			width: 90%;
+		}
+		.section {
+			margin-bottom: 80px;
+
+			&.comment {
+				margin-bottom: 100px;
+				margin-top: 60px;
+			}
+		}
+		.bio {
+			box-shadow: 4px 0px 3px -1px rgba(226, 226, 226, 0.1);
+			border-right: 1px solid #edeef1;
+			.span12 {
+				margin-left: 0;
+			}
+			h6 {
+				font-weight: 600;
+				font-size: 14px;
+			}
+			p {
+				color: #777e86;
+			}
+			textarea {
+				width: 97%;
+				margin-bottom: 13px;
+				height: 80px;
+			}
+			.submit-box {
+				text-align: right;
+				input.btn-flat {
+					font-weight: 500;
+				}
+				span {
+					text-transform: uppercase;
+					color: #7e91aa;
+					font-weight: 600;
+					display: inline-block;
+					vertical-align: middle;
+					margin: 0 2px 0 8px;
+				}
+				input.reset {
+					color: #7e91aa;
+					font-weight: 500;
+				}
+			}
+		}
+	}
+	.address {
+		 h6 {
+			font-weight: 600;
+			font-size: 14px;
+			margin-bottom: 30px;
+			margin-left: 30px;
+		}
+		iframe {
+			width: 90%;
+			margin-bottom: 30px;
+			float: right;
+		}
+		ul {
+			padding: 0;
+			margin-left: 30px;
+			list-style: none;
+			li {
+				font-size: 13px;
+				line-height: 21px;
+				&.ico-li{
+					margin: 7px 0 7px;
+				}
+			}
+			i {
+				display: inline-block;
+				position: relative;
+				top: 4px;
+				margin-right: 7px;
+				&.ico-mail {
+					margin-right: 5px;
+				}
+			}
+		}
+	}
+}
+
+
+/* responsive */
+
+@media (min-width: 768px) and (max-width: 979px) { 
+	.user-profile .address ul {
+		margin-left: 18px;
+		i {
+			display: none;
+		}
+		li.ico-li{
+			font-weight: bold;
+			a {
+				font-weight: normal;
+			}
+		}
+	}
+}
+
+@media (max-width: 767px) {
+	.user-profile {
+		.profile {
+			.bio{
+				border-right: 0 none;
+				border-bottom: 1px solid #edeef1;
+				box-shadow: 0px 4px 3px -1px rgba(226, 226, 226, 0.1);
+				.span12{
+					width: auto;
+				}
+			}
+			.profile-box{
+				width: 100%;
+			}
+		}
+		.address {
+			margin-top: 44px;
+			iframe{
+				width: 100%;
+			}
+			h6 {
+				margin-left: 0;
+			}
+			ul {
+				margin: 0;
+			}
+		}
+		.header {
+			a.btn-flat {
+				margin: 0;
+			}
+			a.edit {
+				margin-right: 10px;
+			}
+		}
+	}
+}
+
+@media (max-width: 480px) {
+	.user-profile .header {
+		a.btn-flat {
+			margin: 0;
+		}
+		a.edit {
+			margin-right: 10px;
+		}
+	}
+}
+
+
+

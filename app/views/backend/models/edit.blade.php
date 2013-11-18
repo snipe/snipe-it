@@ -21,7 +21,7 @@
 		@endif
 
 		<div class="pull-right">
-			<a href="{{ route('models') }}" class="btn btn-small btn-inverse"><i class="icon-circle-arrow-left icon-white"></i> Back</a>
+			<a href="{{ route('models') }}" class="btn-flat gray"><i class="icon-circle-arrow-left icon-white"></i> Back</a>
 		</div>
 	</h3>
 </div>
@@ -56,7 +56,7 @@
 			<div class="control-group {{ $errors->has('depreciation_id') ? 'error' : '' }}">
 				<label class="control-label" for="parent">Depreciation</label>
 				<div class="controls">
-					{{ Form::select('depreciation_id', $depreciation_list , Input::old('depreciation_id', $model->depreciation_id)) }}
+					{{ Form::select('depreciation_id', $depreciation_list , Input::old('depreciation_id', $model->depreciation_id), array('class'=>'select2', 'style'=>'width:250px')) }}
 					{{ $errors->first('depreciation_id', '<span class="help-inline">:message</span>') }}
 				</div>
 			</div>
@@ -69,7 +69,7 @@
 	<div class="control-group">
 		<div class="controls">
 			<a class="btn btn-link" href="{{ route('models') }}">@lang('general.cancel')</a>
-			<button type="submit" class="btn btn-success">@lang('general.save')</button>
+			<button type="submit" class="btn-flat success"><i class="icon-ok icon-white"></i> @lang('general.save')</button>
 		</div>
 	</div>
 </form>

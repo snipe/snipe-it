@@ -1,0 +1,170 @@
+#fuelux-wizard {
+  margin-top: 60px;
+}
+
+.wizard-steps {
+  list-style: none;
+  display: block;
+  width: 100%;
+  padding: 0;
+  margin: 12px 0 0;
+  position: relative;
+  left: -40px;
+}
+.wizard-steps li {
+  display: block;
+  text-align: center;
+  float: left;
+  min-width: 25%;
+  max-width: 25%;
+}
+.wizard-steps li:before {
+  display: block;
+  content: "";
+  width: 100%;
+  height: 1px;
+  font-size: 0;
+  overflow: hidden;
+  border-top: 3px solid #e5e8ed;
+  position: relative;
+  top: 12px;
+  z-index: 1;
+}
+.wizard-steps li:first-child:before {
+  max-width: 50%;
+  left: 50%;
+}
+.wizard-steps li:last-child:before {
+  max-width: 50%;
+  width: 50%;
+}
+.wizard-steps li.active:before, .wizard-steps li.complete:before, .wizard-steps li.active .step, .wizard-steps li.complete .step {
+  border-color: #cbdeee;
+  color: #34a0ed;
+  background-color: #f2f7fb;
+  font-weight: bold;
+  box-shadow: inset 0px 0px 1px 2px #fff;
+}
+.wizard-steps li .step {
+  text-align: center;
+  border: 2px solid #e5e8ed;
+  color: #d8dce6;
+  font-size: 19px;
+  border-radius: 32px;
+  line-height: 12px;
+  padding: 7px 15px;
+  background-color: #FFF;
+  position: relative;
+  z-index: 2;
+  display: inline;
+}
+.wizard-steps li.complete .title, .wizard-steps li.active .title {
+  color: #2b3d53;
+}
+.wizard-steps li .title {
+  display: block;
+  max-width: 100%;
+  color: #b1bcc5;
+  font-size: 13px;
+  z-index: 104;
+  text-align: center;
+  table-layout: fixed;
+  word-wrap: break-word;
+  position: relative;
+  top: -76px;
+  line-height: 15px;
+}
+
+/* step content */
+.step-content {
+  margin-top: 40px;
+  margin-left: 60px;
+}
+.step-content .step-pane {
+  display: none;
+  min-height: 267px;
+}
+.step-content .active {
+  display: block;
+}
+
+/* step forms */
+.form-wrapper .field-box {
+  margin-bottom: 25px;
+  margin-left: 0;
+  float: left;
+  width: 100%;
+}
+.form-wrapper .field-box:last-child {
+  margin-bottom: 0px;
+}
+.form-wrapper label {
+  display: inline-block;
+  float: left;
+  font-weight: 600;
+  cursor: auto;
+  font-size: 12px;
+  width: 120px;
+  text-align: left;
+  position: relative;
+  top: 2px;
+}
+.form-wrapper.payment-info label {
+  width: 150px;
+}
+.form-wrapper .alert-msg {
+  display: block;
+  margin-left: 120px;
+  position: relative;
+  top: -2px;
+  margin-bottom: -4px;
+}
+.form-wrapper .alert-msg i {
+  font-size: 14px;
+}
+
+/*** Form states ***/
+.form-wrapper .field-box {
+  /* error */
+  /* success */
+}
+.form-wrapper .field-box.error label,
+.form-wrapper .field-box.error .alert-msg {
+  color: #c73939;
+}
+.form-wrapper .field-box.error input {
+  border-color: #c73939;
+}
+.form-wrapper .field-box.success label,
+.form-wrapper .field-box.success .alert-msg {
+  color: #379e48;
+}
+.form-wrapper .field-box.success input {
+  border-color: #379e48;
+}
+
+/* actions */
+.wizard-actions {
+  float: right;
+  margin-top: 30px;
+  margin-right: 130px;
+}
+.wizard-actions .btn-next {
+  margin-left: 15px;
+}
+.wizard-actions .btn-finish {
+  display: none;
+  margin-left: 15px;
+}
+
+/* responsive */
+@media (max-width: 979px) {
+  .step-content {
+    margin-left: 0px;
+  }
+}
+@media (max-width: 600px) {
+  .wizard-steps {
+    left: 0px;
+  }
+}

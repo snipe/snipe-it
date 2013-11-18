@@ -1,0 +1,125 @@
+i.tool {
+  height: 14px;
+  width: 14px;
+  background: url("../../img/btn-tool.png") no-repeat;
+  display: inline-block;
+  margin-top: 1px;
+  *margin-right: .3em;
+  line-height: 14px;
+  vertical-align: text-top;
+}
+
+i.arrow-down {
+  background: url("../../img/ico-arrow-black.png") no-repeat;
+  width: 9px;
+  height: 6px;
+  display: inline-block;
+  margin-top: 1px;
+  *margin-right: .3em;
+  line-height: 14px;
+  vertical-align: text-top;
+}
+
+i.shuffle {
+  background: url("../../img/btn-shuffle.png") no-repeat;
+  display: inline-block;
+  height: 13px;
+  width: 18px;
+  margin-top: 1px;
+  *margin-right: .3em;
+  line-height: 14px;
+  vertical-align: text-top;
+}
+
+i.setting {
+  background: url("../../img/btn-setting.png") no-repeat;
+  display: inline-block;
+  height: 16px;
+  width: 16px;
+  margin-top: 1px;
+  *margin-right: .3em;
+  line-height: 14px;
+  vertical-align: text-top;
+}
+
+i.attach {
+  background: url("../../img/btn-attach.png") no-repeat;
+  display: inline-block;
+  height: 16px;
+  width: 16px;
+  margin-top: 1px;
+  *margin-right: .3em;
+  line-height: 14px;
+  vertical-align: text-top;
+}
+
+i.ico-phone {
+  background: url("../../img/ico-phone.png") no-repeat;
+  height: 18px;
+  width: 13px;
+  margin-top: 1px;
+  *margin-right: .3em;
+  line-height: 14px;
+  vertical-align: text-top;
+}
+
+i.ico-mail {
+  background: url("../../img/ico-mail.png") no-repeat;
+  height: 11px;
+  width: 17px;
+  margin-top: 1px;
+  *margin-right: .3em;
+  line-height: 14px;
+  vertical-align: text-top;
+}
+
+i.gallery-edit {
+  background: url("../../img/ico-gallery-edit.png") no-repeat;
+  height: 20px;
+  width: 20px;
+  margin-top: 1px;
+  *margin-right: .3em;
+  line-height: 14px;
+  vertical-align: text-top;
+}
+
+i.gallery-trash {
+  background: url("../../img/ico-gallery-trash.png") no-repeat;
+  height: 19px;
+  width: 17px;
+  margin-top: 1px;
+  *margin-right: .3em;
+  line-height: 14px;
+  vertical-align: text-top;
+}
+
+i.table-edit {
+  background: url("../../img/ico-table-new.png") no-repeat;
+  width: 14px;
+  height: 13px;
+  display: inline-block;
+  margin-top: 1px;
+  *margin-right: .3em;
+  line-height: 14px;
+  vertical-align: text-top;
+}
+
+i.table-settings {
+  background: url("../../img/ico-table-edit.png") no-repeat;
+  width: 16px;
+  height: 16px;
+  display: inline-block;
+  position: relative;
+  top: 1px;
+}
+
+i.table-delete {
+  background: url("../../img/ico-table-delete.png") no-repeat;
+  width: 12px;
+  height: 12px;
+  display: inline-block;
+  margin-top: 1px;
+  *margin-right: .3em;
+  line-height: 14px;
+  vertical-align: text-top;
+}

@@ -1,0 +1,201 @@
+.gallery {
+  /* gallery popup */
+}
+.gallery .gallery-wrapper {
+  text-align: center;
+  padding-left: 45px;
+  position: relative;
+}
+.gallery .img-container {
+  margin-bottom: 50px;
+}
+.gallery .img-container .img-box {
+  display: inline-block;
+  position: relative;
+}
+.gallery .img-container .img-box:hover span {
+  visibility: visible;
+}
+.gallery .img-container img {
+  border: 4px solid #dff0fd;
+  border-radius: 3px;
+  cursor: pointer;
+}
+.gallery .img-container .title {
+  margin-top: 5px;
+  font-size: 13px;
+}
+.gallery .img-container .icon {
+  position: absolute;
+  background: rgba(56, 156, 240, 0.8);
+  height: 48px;
+  width: 48px;
+  visibility: hidden;
+  left: 41%;
+  border-radius: 100%;
+  cursor: pointer;
+  text-align: center;
+}
+.gallery .img-container i {
+  display: inline-block;
+  margin-top: 14px;
+}
+.gallery .img-container span.edit {
+  top: 23%;
+}
+.gallery .img-container span.trash {
+  top: 48%;
+}
+.gallery .new-img img {
+  border: 2px dashed #dee3e8;
+  cursor: pointer;
+  margin-bottom: 50px;
+}
+.gallery .new-img img:hover {
+  opacity: 0.8;
+  border-color: #ccc;
+}
+.gallery .popup {
+  position: absolute;
+  background: #fff;
+  text-align: left;
+  width: 260px;
+  border: 1px solid #2b3b48;
+  box-shadow: 0px 0px 12px -1px rgba(0, 0, 0, 0.45);
+  border-radius: 4px;
+  padding: 14px 20px 14px 20px;
+  z-index: 5;
+  left: 240px;
+  top: 285px;
+}
+.gallery .popup h5 {
+  text-transform: uppercase;
+  font-weight: 600;
+  margin: 0 0 21px 0;
+  font-size: 14px;
+  color: #7e91aa;
+}
+.gallery .popup .thumb {
+  float: left;
+}
+.gallery .popup img {
+  cursor: pointer;
+  border: 2px solid #dff0fd;
+  border-radius: 3px;
+}
+.gallery .popup .title {
+  float: right;
+  width: 58%;
+}
+.gallery .popup .title input {
+  display: inline-block;
+  width: 90%;
+  margin: 7px 0 18px;
+}
+.gallery .popup .title .ui-select {
+  width: 96%;
+}
+.gallery .popup .title input:-moz-placeholder {
+  font-style: italic;
+}
+.gallery .popup .title input:-ms-input-placeholder {
+  font-style: italic;
+}
+.gallery .popup .title input::-webkit-input-placeholder {
+  font-style: italic;
+}
+.gallery .popup .description {
+  width: 100%;
+  margin-top: 22px;
+  display: inline-block;
+}
+.gallery .popup .description h6 {
+  margin: 0 0 5px 0;
+  color: #364453;
+  font-weight: 600;
+  font-size: 13px;
+}
+.gallery .popup .description textarea {
+  width: 95%;
+  margin-bottom: 13px;
+  height: 60px;
+}
+.gallery .popup .description input[type="submit"] {
+  float: right;
+}
+.gallery .popup i.close-pop {
+  position: absolute;
+  right: 11px;
+  cursor: pointer;
+  top: 12px;
+  opacity: 0.6;
+  transition: opacity .1s linear;
+  -moz-transition: opacity .1s linear;
+  -webkit-transition: opacity .1s linear;
+  -o-transition: opacity .1s linear;
+}
+.gallery .popup i.close-pop:hover {
+  opacity: 1;
+}
+.gallery .popup .pointer {
+  position: absolute;
+  top: 35%;
+  left: -22px;
+}
+.gallery .popup .pointer .arrow,
+.gallery .popup .pointer .arrow_border {
+  border-color: transparent #fff transparent transparent;
+  border-width: 11px;
+  border-style: solid;
+  font-size: 0;
+  left: 50%;
+  line-height: 0;
+  margin: 0 auto;
+  position: absolute;
+  top: 0;
+  width: 0;
+  z-index: 1002;
+  left: 0;
+  margin-left: 45%;
+}
+.gallery .popup .pointer .arrow_border {
+  border-color: transparent #000 transparent transparent;
+  border-width: 11px;
+  margin-left: -1px;
+  border-style: solid;
+  z-index: 1001;
+  top: 0px;
+}
+
+/* gallery blank state */
+.no-gallery {
+  border-top: 1px solid #edeff1;
+  padding-top: 40px;
+  box-shadow: 0px 4px 9px -6px rgba(0, 0, 0, 0.12) inset;
+  margin-bottom: 100px;
+}
+.no-gallery .center {
+  margin: 0 auto;
+  text-align: center;
+  width: 42%;
+}
+.no-gallery .center h6 {
+  color: #364453;
+  font-weight: 600;
+  margin: 30px 0 9px;
+  font-size: 15px;
+}
+.no-gallery .center p {
+  color: #364453;
+  font-size: 13px;
+}
+.no-gallery .center a {
+  margin-top: 30px;
+}
+
+/*Responsive*/
+@media (max-width: 979px) {
+  .gallery .popup {
+    display: none;
+  }
+}

@@ -38,8 +38,8 @@ class AssetsController extends AdminController {
 	public function getCreate()
 	{
 		// Grab the dropdown list of models
-		$model_list = array('' => 'Select') + Model::lists('name', 'id');
-		$depreciation_list = array('' => 'Do Not Depreciate') + Depreciation::lists('name', 'id');
+		$model_list = array('' => '') + Model::lists('name', 'id');
+		$depreciation_list = array('' => '') + Depreciation::lists('name', 'id');
 
 		return View::make('backend/assets/edit')->with('model_list',$model_list)->with('depreciation_list',$depreciation_list)->with('asset',new Asset);
 
@@ -114,10 +114,10 @@ class AssetsController extends AdminController {
 		}
 
 		// Grab the dropdown list of models
-		$model_list = array('' => 'Select') + Model::lists('name', 'id');
+		$model_list = array('' => '') + Model::lists('name', 'id');
 
 		// get depreciation list
-		$depreciation_list = array('' => 'Do Not Depreciate') + Depreciation::lists('name', 'id');
+		$depreciation_list = array('' => '') + Depreciation::lists('name', 'id');
 		return View::make('backend/assets/edit', compact('asset'))->with('model_list',$model_list)->with('depreciation_list',$depreciation_list);
 	}
 
