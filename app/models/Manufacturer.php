@@ -1,18 +1,9 @@
 <?php
+class Manufacturer extends Elegant {
 
-class Manufacturer extends Eloquent {
-
-	/**
-	 * Deletes a manufacturer
-	 *
-	 * @return bool
-	 */
-	public function delete()
-	{
-		return parent::delete();
-	}
-
-
-
+	// Declare the rules for the form validation
+	protected $rules = array(
+		'name'   => 'required|min:2',
+	);
 
 }
