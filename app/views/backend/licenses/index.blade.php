@@ -43,7 +43,9 @@ Licenses ::
 
 			<td>
 			@if ($license->assigned_to != 0)
+				<a href="{{ route('view/user', $license->assigned_to) }}">
 				{{ $license->assigneduser->fullName() }}
+				</a>
 			@endif
 			</td>
 			<td>

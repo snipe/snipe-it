@@ -50,6 +50,35 @@ Create a User ::
 				</div>
 			</div>
 
+			<!-- Jobtitle -->
+			<div class="control-group {{ $errors->has('jobtitle') ? 'error' : '' }}">
+				<label class="control-label" for="jobtitle">Job Title</label>
+				<div class="controls">
+					<input type="text" name="jobtitle" id="jobtitle" value="{{ Input::old('jobtitle') }}" />
+					{{ $errors->first('jobtitle', '<span class="help-inline">:message</span>') }}
+				</div>
+			</div>
+
+			<!-- Location -->
+			<div class="control-group {{ $errors->has('phone') ? 'error' : '' }}">
+				<label class="control-label" for="location_id">Location</label>
+				<div class="controls">
+					<div class="field-box">
+					{{ Form::select('location_id', $location_list, Input::old('location_id'), array('class'=>'select2', 'style'=>'width:250px')) }}
+					{{ $errors->first('location_id', '<span class="help-inline">:message</span>') }}
+					</div>
+				</div>
+			</div>
+
+			<!-- Phone -->
+			<div class="control-group {{ $errors->has('phone') ? 'error' : '' }}">
+				<label class="control-label" for="jobtitle">Phone</label>
+				<div class="controls">
+					<input type="text" name="phone" id="phone" value="{{ Input::old('phone') }}" />
+					{{ $errors->first('phone', '<span class="help-inline">:message</span>') }}
+				</div>
+			</div>
+
 			<!-- Email -->
 			<div class="control-group {{ $errors->has('email') ? 'error' : '' }}">
 				<label class="control-label" for="email">Email</label>
