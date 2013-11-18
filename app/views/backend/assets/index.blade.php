@@ -27,7 +27,8 @@ Assets ::
 			<th class="span2">@lang('admin/assets/table.asset_tag')</th>
 			<th class="span4">@lang('admin/assets/table.title')</th>
 			<th class="span2">@lang('admin/assets/table.serial')</th>
-			<th class="span2">@lang('admin/assets/table.status')</th>
+			<th class="span2">@lang('admin/assets/table.checkoutto')</th>
+			<th class="span1">@lang('admin/assets/table.change')</th>
 			<th class="span2">@lang('admin/assets/table.purchase_date')</th>
 			<th class="span2">@lang('admin/assets/table.purchase_cost')</th>
 			<th class="span2">@lang('admin/assets/table.book_value')</th>
@@ -41,15 +42,16 @@ Assets ::
 			<td>{{ $asset->name }}</td>
 			<td>{{ $asset->serial }}</td>
 			<td>
-
 			@if ($asset->assigned_to != 0)
-				{{ $asset->assigned_to }}
-				<a href="{{ route('checkin/asset', $asset->id) }}" class="btn btn-mini">Checkin</a>
-			@else
-				<a href="{{ route('checkout/asset', $asset->id) }}" class="btn btn-mini">Checkout</a>
+				{{ $asset->assigneduser->fullName() }}
 			@endif
-
-
+			</td>
+			<td>
+			@if ($asset->assigned_to != 0)
+				<a href="{{ route('checkin/asset', $asset->id) }}" class="btn btn-mini btn-info">Checkin</a>
+			@else
+				<a href="{{ route('checkout/asset', $asset->id) }}" class="btn btn-mini btn-success">Checkout</a>
+			@endif
 			</td>
 			<td>{{ $asset->purchase_date }}</td>
 			<td>${{ number_format($asset->purchase_cost) }}</td>

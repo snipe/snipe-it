@@ -48,8 +48,7 @@ User Management ::
 			<td>{{ $user->last_name }}</td>
 			<td>{{ $user->email }}</td>
 			<td>
-
-			{{ ($user->assetcount()) }}
+			{{ ($user->assets->count()) }}
 			</td>
 
 			<td>{{ $user->isActivated() ? '<i class="icon-ok"></i>' : ''}}</td>
