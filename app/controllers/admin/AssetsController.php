@@ -137,13 +137,26 @@ class AssetsController extends AdminController {
 			return Redirect::to('admin')->with('error', Lang::get('admin/assets/message.does_not_exist'));
 		}
 
-		// get the POST data
-		$new = Input::all();
 
+		// Declare the rules for the form validation
+		$rules = array(
+		'name'   => 'required|min:3',
+		'asset_tag'   => 'required|min:3',
+		'model_id'   => 'required',
+		'serial'   => 'required|min:3',
+    	);
 
-		// attempt validation
-		if ($asset->validate($new))
+		// Create a new validator instance from our validation rules
+		$validator = Validator::make(Input::all(), $rules);
+
+		// If validation fails, we'll exit the operation now.
+		if ($validator->fails())
 		{
+			// Ooops.. something went wrong
+			return Redirect::back()->withInput()->withErrors($validator);
+		}
+
+
 			// Update the asset data
 			$asset->name            		= e(Input::get('name'));
 			$asset->serial            		= e(Input::get('serial'));
@@ -155,21 +168,12 @@ class AssetsController extends AdminController {
 			$asset->notes            		= e(Input::get('notes'));
 			$asset->physical            		= '1';
 
-			// Was the asset created?
+			// Was the asset updated?
 			if($asset->save())
 			{
-				// Redirect to the asset listing page
+				// Redirect to the new asset page
 				return Redirect::to("admin")->with('success', Lang::get('admin/assets/message.update.success'));
 			}
-
-		}
-		else
-		{
-
-			// Did not validate
-			$errors = $asset->errors();
-			return Redirect::back()->withInput()->withErrors($errors);
-		}
 
 
 		// Redirect to the asset management page with error

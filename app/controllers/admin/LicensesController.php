@@ -230,8 +230,6 @@ class LicensesController extends AdminController {
 
 		$assigned_to = e(Input::get('assigned_to'));
 
-
-
 		// Declare the rules for the form validation
 		$rules = array(
 			'assigned_to'   => 'required|min:1'
