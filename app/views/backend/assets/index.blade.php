@@ -40,7 +40,16 @@ Assets ::
 			<td>{{ $asset->asset_tag }}</td>
 			<td>{{ $asset->name }}</td>
 			<td>{{ $asset->serial }}</td>
-			<td>{{ $asset->status }}</td>
+			<td>
+
+			@if ($asset->assigned_to != 0)
+				{{ $asset->assigned_to }}
+			@else
+				<a href="{{ route('checkout/asset', $asset->id) }}" class="btn btn-mini">Checkout</a>
+			@endif
+
+
+			</td>
 			<td>{{ $asset->purchase_date }}</td>
 			<td>${{ number_format($asset->purchase_cost) }}</td>
 			<td>${{ number_format($asset->depreciation()) }}</td>
