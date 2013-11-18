@@ -10,5 +10,7 @@ return array(
 	'purchase_cost'   => 'Cost',
 	'book_value'   => 'Book Value',
 	'status'   => 'Status',
+	'checkoutto' => 'Checked Out',
+	'change' => 'In/Out',
 
 );
