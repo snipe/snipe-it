@@ -19,7 +19,7 @@ This isn't actually ready for anyone to use yet, as I'm still working out some o
 
 -----
 
-## How to Install (Don't do this yet - it's not ready for you)
+## How to Install
 
 ### 1) Downloading
 #### 1.1) Clone the Repository
@@ -141,7 +141,7 @@ To enable it by default after reboot, add this line to /etc/fstab:
 
 ## License
 
-	Copyright (C) 2013 Alison Gianotto
+	Copyright (C) 2013 Alison Gianotto - snipe@snipe.net
 
 	This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU Affero General Public License as published by
