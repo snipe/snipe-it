@@ -8,6 +8,7 @@ use Cartalyst\Sentry\Users\UserNotFoundException;
 use Config;
 use DB;
 use Input;
+use User;
 use Asset;
 use Lang;
 use Redirect;
@@ -395,5 +396,17 @@ class UsersController extends AdminController {
 			return Redirect::route('users')->with('error', $error);
 		}
 	}
+
+
+
+	public function getView($userId = null)
+	{
+		$user = User::find($userId);
+		// Show the page
+		return View::make('backend/users/view', compact('user'));
+	}
+
+
+
 
 }

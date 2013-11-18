@@ -45,8 +45,8 @@ User Management ::
 		@foreach ($users as $user)
 		<tr>
 			<td>
-			<img src="//secure.gravatar.com/avatar/{{ md5(strtolower(trim($user->gravatar))) }}" class="img-circle avatar hidden-phone" style="max-width: 45px;" />
-			<a href="#" class="name">{{ $user->fullName() }}</a>
+			<img src="{{ $user->gravatar() }}" class="img-circle avatar hidden-phone" style="max-width: 45px;" />
+			<a href="{{ route('view/user', $user->id) }}" class="name">{{ $user->fullName() }}</a>
 			<span class="subtext">Graphic Design</span>
 			</td>
 			<td>{{ $user->email }}</td>

@@ -44,8 +44,8 @@ Asset Models ::
 			<td>{{ ($model->assets->count()) }}</td>
 			<td>{{ $model->created_at->diffForHumans() }}</td>
 			<td nowrap="nowrap">
-				<a href="{{ route('update/model', $model->id) }}" class="btn-flat white  btn-sm">@lang('button.edit')</a>
-				<a href="{{ route('delete/model', $model->id) }}" class="btn-flat danger  btn-sm">@lang('button.delete')</a>
+				<a href="{{ route('update/model', $model->id) }}" class="btn-flat white">@lang('button.edit')</a>
+				<a href="{{ route('delete/model', $model->id) }}" class="btn-flat danger">@lang('button.delete')</a>
 			</td>
 		</tr>
 		@endforeach

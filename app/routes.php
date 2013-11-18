@@ -151,6 +151,7 @@ Route::group(array('prefix' => 'admin'), function()
 		Route::post('{userId}/edit', 'Controllers\Admin\UsersController@postEdit');
 		Route::get('{userId}/delete', array('as' => 'delete/user', 'uses' => 'Controllers\Admin\UsersController@getDelete'));
 		Route::get('{userId}/restore', array('as' => 'restore/user', 'uses' => 'Controllers\Admin\UsersController@getRestore'));
+		Route::get('{userId}/view', array('as' => 'view/user', 'uses' => 'Controllers\Admin\UsersController@getView'));
 	});
 
 	# Group Management
