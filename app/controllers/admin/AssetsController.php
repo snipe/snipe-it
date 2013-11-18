@@ -231,18 +231,13 @@ class AssetsController extends AdminController {
 			return Redirect::to('admin')->with('error', Lang::get('admin/assets/message.not_found'));
 		}
 
-		$user_id = e(Input::get('user_id'));
+		$assigned_to = e(Input::get('assigned_to'));
 
-		// Check if the asset exists
-		if (is_null($user = User::find($user_id)))
-		{
-			// Redirect to the asset management page with error
-			return Redirect::to('admin')->with('error', Lang::get('admin/assets/message.user_does_not_exist'));
-		}
+
 
 		// Declare the rules for the form validation
 		$rules = array(
-			'user_id'   => 'required'
+			'assigned_to'   => 'required|min:1'
 		);
 
 		// Create a new validator instance from our validation rules
@@ -255,8 +250,16 @@ class AssetsController extends AdminController {
 			return Redirect::back()->withInput()->withErrors($validator);
 		}
 
+
+		// Check if the user exists
+		if (is_null($assigned_to = User::find($assigned_to)))
+		{
+			// Redirect to the asset management page with error
+			return Redirect::to('admin')->with('error', Lang::get('admin/assets/message.user_does_not_exist'));
+		}
+
 		// Update the asset data
-		$asset->assigned_to            		= e(Input::get('user_id'));
+		$asset->assigned_to            		= e(Input::get('assigned_to'));
 
 
 		// Was the asset updated?
@@ -271,7 +274,7 @@ class AssetsController extends AdminController {
 	}
 
 	/**
-	* Check out the asset to a person
+	* Check in the item so that it can be checked out again to someone else
 	**/
 	public function postCheckin($assetId)
 	{
@@ -295,6 +298,10 @@ class AssetsController extends AdminController {
 		// Redirect to the asset management page with error
 		return Redirect::to("admin")->with('error', Lang::get('admin/assets/message.checkout.error'));
 	}
+
+
+
+
 
 
 }

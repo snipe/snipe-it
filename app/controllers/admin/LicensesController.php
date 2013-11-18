@@ -90,7 +90,7 @@ class LicensesController extends AdminController {
 			return Redirect::back()->withInput()->withErrors($errors);
 		}
 
-		// Redirect to the category create page
+		// Redirect to the license create page
 		return Redirect::to('admin/licenses/edit')->with('error', Lang::get('admin/licenses/message.create.error'))->with('license',new License);
 
 	}
@@ -228,18 +228,13 @@ class LicensesController extends AdminController {
 			return Redirect::to('admin/licenses')->with('error', Lang::get('admin/assets/message.not_found'));
 		}
 
-		$user_id = e(Input::get('user_id'));
+		$assigned_to = e(Input::get('assigned_to'));
 
-		// Check if the asset exists
-		if (is_null($user = User::find($user_id)))
-		{
-			// Redirect to the asset management page with error
-			return Redirect::to('admin/licenses')->with('error', Lang::get('admin/assets/message.user_does_not_exist'));
-		}
+
 
 		// Declare the rules for the form validation
 		$rules = array(
-			'user_id'   => 'required'
+			'assigned_to'   => 'required|min:1'
 		);
 
 		// Create a new validator instance from our validation rules
@@ -252,19 +247,28 @@ class LicensesController extends AdminController {
 			return Redirect::back()->withInput()->withErrors($validator);
 		}
 
+
+		// Check if the user exists
+		if (is_null($assigned_to = User::find($assigned_to)))
+		{
+			// Redirect to the asset management page with error
+			return Redirect::to('admin/licenses')->with('error', Lang::get('admin/licenses/message.user_does_not_exist'));
+		}
+
+
 		// Update the asset data
-		$license->assigned_to            		= e(Input::get('user_id'));
+		$license->assigned_to            		= e(Input::get('assigned_to'));
 
 
 		// Was the asset updated?
 		if($license->save())
 		{
 			// Redirect to the new asset page
-			return Redirect::to("admin/licenses")->with('success', Lang::get('admin/assets/message.checkout.success'));
+			return Redirect::to("admin/licenses")->with('success', Lang::get('admin/licenses/message.checkout.success'));
 		}
 
 		// Redirect to the asset management page with error
-		return Redirect::to("admin/licenses")->with('error', Lang::get('admin/assets/message.checkout.error'));
+		return Redirect::to('admin/licenses/$assetId/checkout')->with('error', Lang::get('admin/licenses/message.create.error'))->with('license',new License);
 	}
 
 	/**
