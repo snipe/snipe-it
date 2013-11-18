@@ -23,9 +23,9 @@ Licenses ::
 <table class="table table-hover">
 	<thead>
 		<tr>
-			<th class="span4">@lang('admin/licenses/table.title')</th>
-			<th class="span4"><span class="line"></span>@lang('admin/licenses/table.serial')</th>
-			<th class="span3"><span class="line"></span>@lang('admin/licenses/table.license_name')</th>
+			<th class="span2">@lang('admin/licenses/table.title')</th>
+			<th class="span2"><span class="line"></span>@lang('admin/licenses/table.serial')</th>
+			<th class="span2"><span class="line"></span>@lang('admin/licenses/table.license_name')</th>
 			<th class="span2"><span class="line"></span>@lang('admin/licenses/table.license_email')</th>
 			<th class="span2"><span class="line"></span>@lang('admin/licenses/table.assigned_to')</th>
 			<th class="span2"><span class="line"></span>@lang('admin/licenses/table.checkout')</th>
