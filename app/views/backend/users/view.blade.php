@@ -31,12 +31,13 @@ View User {{ $user->fullName() }} ::
 
                             <h6>Assets Checked Out to {{ $user->first_name }}</h6>
                             <br>
-                            <!-- recent orders table -->
+                            <!-- checked out assets table -->
+                            @if (count($user->assets) > 0)
                             <table class="table table-hover">
                                 <thead>
                                     <tr>
                                     	<th class="span3">Asset Type</th>
-                                        <th class="span3">Asset Tag</th>
+                                        <th class="span3"><span class="line"></span>Asset Tag</th>
                                         <th class="span4"><span class="line"></span>Name</th>
                                         <th class="span2"><span class="line"></span>Date</th>
                                         <th class="span2"><span class="line"></span>Actions</th>
@@ -60,6 +61,17 @@ View User {{ $user->fullName() }} ::
 									@endforeach
                                 </tbody>
                             </table>
+                            @else
+
+                            <div class="col-md-6">
+								<div class="alert alert-warning alert-block">
+
+									<i class="icon-warning-sign"></i>
+									@lang('admin/users/table.noresults')
+
+								</div>
+							</div>
+                            @endif
                         </div>
                     </div>
 

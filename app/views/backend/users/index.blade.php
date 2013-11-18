@@ -47,7 +47,7 @@ User Management ::
 			<td>
 			<img src="{{ $user->gravatar() }}" class="img-circle avatar hidden-phone" style="max-width: 45px;" />
 			<a href="{{ route('view/user', $user->id) }}" class="name">{{ $user->fullName() }}</a>
-			<span class="subtext">Graphic Design</span>
+			<span class="subtext">{{ $user->jobtitle }}</span>
 			</td>
 			<td>{{ $user->email }}</td>
 			<td>
@@ -86,7 +86,6 @@ User Management ::
 @else
 <div class="col-md-6">
 	<div class="alert alert-warning alert-block">
-		<button type="button" class="close" data-dismiss="alert">&times;</button>
 		<i class="icon-warning-sign"></i>
 		@lang('admin/users/table.noresults')
 
