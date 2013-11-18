@@ -137,18 +137,13 @@ class AssetsController extends AdminController {
 			return Redirect::to('admin')->with('error', Lang::get('admin/assets/message.does_not_exist'));
 		}
 
-
-
 		// get the POST data
 		$new = Input::all();
 
-		// create a new model instance
-		$asset = new Asset();
 
 		// attempt validation
 		if ($asset->validate($new))
 		{
-
 			// Update the asset data
 			$asset->name            		= e(Input::get('name'));
 			$asset->serial            		= e(Input::get('serial'));
@@ -166,10 +161,12 @@ class AssetsController extends AdminController {
 				// Redirect to the asset listing page
 				return Redirect::to("admin")->with('success', Lang::get('admin/assets/message.update.success'));
 			}
+
 		}
 		else
 		{
-			// failure
+
+			// Did not validate
 			$errors = $asset->errors();
 			return Redirect::back()->withInput()->withErrors($errors);
 		}
@@ -177,8 +174,6 @@ class AssetsController extends AdminController {
 
 		// Redirect to the asset management page with error
 		return Redirect::to("assets/$assetId/edit")->with('error', Lang::get('admin/assets/message.update.error'));
-
-
 
 	}
 
