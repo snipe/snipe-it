@@ -49,46 +49,48 @@ class LicensesController extends AdminController {
 	 */
 	public function postCreate()
 	{
-		// Declare the rules for the form validation
-		$rules = array(
-			'name'   => 'required|min:3',
-			'serial'   => 'required|min:5',
-			'license_email'   => 'email',
-		);
 
-		// Create a new validator instance from our validation rules
-		$validator = Validator::make(Input::all(), $rules);
 
-		// If validation fails, we'll exit the operation now.
-		if ($validator->fails())
+		// get the POST data
+		$new = Input::all();
+
+		// create a new model instance
+		$license = new License();
+
+		// attempt validation
+		if ($license->validate($new))
 		{
-			// Ooops.. something went wrong
-			return Redirect::back()->withInput()->withErrors($validator);
+
+			// Save the license data
+			$license->name 				= e(Input::get('name'));
+			$license->serial 			= e(Input::get('serial'));
+			$license->license_email 	= e(Input::get('license_email'));
+			$license->license_name 		= e(Input::get('license_name'));
+			$license->notes 			= e(Input::get('notes'));
+			$license->order_number 		= e(Input::get('order_number'));
+			$license->purchase_date 	= e(Input::get('purchase_date'));
+			$license->purchase_cost 	= e(Input::get('purchase_cost'));
+			$license->user_id 			= Sentry::getId();
+			$license->physical 			= '0';
+
+
+			// Was the asset created?
+			if($license->save())
+			{
+				// Redirect to the new license page
+				return Redirect::to("admin/licenses")->with('success', Lang::get('admin/licenses/message.create.success'));
+			}
+		}
+		else
+		{
+			// failure
+			$errors = $license->errors();
+			return Redirect::back()->withInput()->withErrors($errors);
 		}
 
-		// Create a new license
-		$license = new License;
-
-		// Update the license data
-		$license->name 				= e(Input::get('name'));
-		$license->serial 			= e(Input::get('serial'));
-		$license->license_email 	= e(Input::get('license_email'));
-		$license->license_name 		= e(Input::get('license_name'));
-		$license->notes 			= e(Input::get('notes'));
-		$license->order_number 		= e(Input::get('order_number'));
-		$license->purchase_date 	= e(Input::get('purchase_date'));
-		$license->purchase_cost 	= e(Input::get('purchase_cost'));
-		$license->user_id 			= Sentry::getId();
-
-		// Was the license created?
-		if($license->save())
-		{
-			// Redirect to the new license  page
-			return Redirect::to("admin/licenses")->with('success', Lang::get('admin/licenses/message.create.success'));
-		}
-
-		// Redirect to the license create page
+		// Redirect to the category create page
 		return Redirect::to('admin/licenses/edit')->with('error', Lang::get('admin/licenses/message.create.error'))->with('license',new License);
+
 	}
 
 	/**
@@ -127,42 +129,47 @@ class LicensesController extends AdminController {
 			return Redirect::to('admin/licenses')->with('error', Lang::get('admin/licenses/message.does_not_exist'));
 		}
 
-		// Declare the rules for the form validation
-		$rules = array(
-			'name'   => 'required|min:3',
-			'serial'   => 'required|min:5',
-			'license_email'   => 'email',
-		);
 
-		// Create a new validator instance from our validation rules
-		$validator = Validator::make(Input::all(), $rules);
 
-		// If validation fails, we'll exit the operation now.
-		if ($validator->fails())
+
+
+		// get the POST data
+		$new = Input::all();
+
+
+		// attempt validation
+		if ($license->validate($new))
 		{
-			// Ooops.. something went wrong
-			return Redirect::back()->withInput()->withErrors($validator);
+
+			// Update the license data
+			$license->name 				= e(Input::get('name'));
+			$license->serial 			= e(Input::get('serial'));
+			$license->license_email 	= e(Input::get('license_email'));
+			$license->license_name 		= e(Input::get('license_name'));
+			$license->notes 			= e(Input::get('notes'));
+			$license->order_number 		= e(Input::get('order_number'));
+			$license->purchase_date 	= e(Input::get('purchase_date'));
+			$license->purchase_cost 	= e(Input::get('purchase_cost'));
+			$license->physical 			= '0';
+
+
+			// Was the asset created?
+			if($license->save())
+			{
+				// Redirect to the new license page
+				return Redirect::to("admin/licenses/$licenseId/edit")->with('success', Lang::get('admin/licenses/message.update.success'));
+			}
+		}
+		else
+		{
+			// failure
+			$errors = $license->errors();
+			return Redirect::back()->withInput()->withErrors($errors);
 		}
 
-		// Update the license data
-		$license->name 				= e(Input::get('name'));
-		$license->serial 			= e(Input::get('serial'));
-		$license->license_email 	= e(Input::get('license_email'));
-		$license->license_name 		= e(Input::get('license_name'));
-		$license->notes 			= e(Input::get('notes'));
-		$license->order_number 		= e(Input::get('order_number'));
-		$license->purchase_date 	= e(Input::get('purchase_date'));
-		$license->purchase_cost 	= e(Input::get('purchase_cost'));
-
-		// Was the license updated?
-		if($license->save())
-		{
-			// Redirect to the new license page
-			return Redirect::to("admin/licenses/$licenseId/edit")->with('success', Lang::get('admin/licenses/message.update.success'));
-		}
-
-		// Redirect to the license management page
+		// Redirect to the category create page
 		return Redirect::to("admin/licenses/$licenseId/edit")->with('error', Lang::get('admin/licenses/message.update.error'));
+
 	}
 
 	/**
