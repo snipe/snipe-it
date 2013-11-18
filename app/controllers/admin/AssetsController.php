@@ -53,49 +53,49 @@ class AssetsController extends AdminController {
 	 */
 	public function postCreate()
 	{
-		// Declare the rules for the form validation
-		$rules = array(
-			'name'   => 'required|min:3',
-			'asset_tag'   => 'required|min:3|unique:assets',
-			'model_id'   => 'required',
-			'serial'   => 'required|min:3',
-		);
 
-		// Create a new validator instance from our validation rules
-		$validator = Validator::make(Input::all(), $rules);
+		// get the POST data
+		$new = Input::all();
 
-		// If validation fails, we'll exit the operation now.
-		if ($validator->fails())
+		// create a new model instance
+		$asset = new Asset();
+
+		// attempt validation
+		if ($asset->validate($new))
 		{
-			// Ooops.. something went wrong
-			return Redirect::back()->withInput()->withErrors($validator);
+
+			// Save the asset data
+			$asset->name            		= e(Input::get('name'));
+			$asset->serial            		= e(Input::get('serial'));
+			$asset->model_id           		= e(Input::get('model_id'));
+			$asset->purchase_date           = e(Input::get('purchase_date'));
+			$asset->purchase_cost           = e(Input::get('purchase_cost'));
+			$asset->order_number            = e(Input::get('order_number'));
+			$asset->notes            		= e(Input::get('notes'));
+			$asset->asset_tag            	= e(Input::get('asset_tag'));
+			$asset->user_id          		= Sentry::getId();
+			$asset->physical            		= '1';
+
+
+			// Was the asset created?
+			if($asset->save())
+			{
+				// Redirect to the asset listing page
+				return Redirect::to("admin")->with('success', Lang::get('admin/assets/message.create.success'));
+			}
+		}
+		else
+		{
+			// failure
+			$errors = $asset->errors();
+			return Redirect::back()->withInput()->withErrors($errors);
 		}
 
-		// Create a new asset
-		$asset = new Asset;
-
-		// Save the asset data
-		$asset->name            		= e(Input::get('name'));
-		$asset->serial            		= e(Input::get('serial'));
-		$asset->model_id           		= e(Input::get('model_id'));
-		$asset->purchase_date           = e(Input::get('purchase_date'));
-		$asset->purchase_cost           = e(Input::get('purchase_cost'));
-		$asset->order_number            = e(Input::get('order_number'));
-		$asset->notes            		= e(Input::get('notes'));
-		$asset->asset_tag            	= e(Input::get('asset_tag'));
-		$asset->user_id          		= Sentry::getId();
-		$asset->physical            		= '1';
-
-
-		// Was the asset created?
-		if($asset->save())
-		{
-			// Redirect to the asset listing page
-			return Redirect::to("admin")->with('success', Lang::get('admin/assets/message.create.success'));
-		}
 
 		// Redirect to the asset create page with an error
 		return Redirect::to('assets/create')->with('error', Lang::get('admin/assets/message.create.error'));
+
+
 	}
 
 	/**
@@ -137,45 +137,49 @@ class AssetsController extends AdminController {
 			return Redirect::to('admin')->with('error', Lang::get('admin/assets/message.does_not_exist'));
 		}
 
-		// Declare the rules for the form validation
-		$rules = array(
-			'name'   => 'required|min:3',
-			'asset_tag'   => 'required|min:3',
-			'model_id'   => 'required',
-			'serial'   => 'required|min:3',
-		);
 
-		// Create a new validator instance from our validation rules
-		$validator = Validator::make(Input::all(), $rules);
 
-		// If validation fails, we'll exit the operation now.
-		if ($validator->fails())
+		// get the POST data
+		$new = Input::all();
+
+		// create a new model instance
+		$asset = new Asset();
+
+		// attempt validation
+		if ($asset->validate($new))
 		{
-			// Ooops.. something went wrong
-			return Redirect::back()->withInput()->withErrors($validator);
+
+			// Update the asset data
+			$asset->name            		= e(Input::get('name'));
+			$asset->serial            		= e(Input::get('serial'));
+			$asset->model_id           		= e(Input::get('model_id'));
+			$asset->purchase_date           = e(Input::get('purchase_date'));
+			$asset->purchase_cost           = e(Input::get('purchase_cost'));
+			$asset->order_number            = e(Input::get('order_number'));
+			$asset->asset_tag           	= e(Input::get('asset_tag'));
+			$asset->notes            		= e(Input::get('notes'));
+			$asset->physical            		= '1';
+
+			// Was the asset created?
+			if($asset->save())
+			{
+				// Redirect to the asset listing page
+				return Redirect::to("admin")->with('success', Lang::get('admin/assets/message.update.success'));
+			}
+		}
+		else
+		{
+			// failure
+			$errors = $asset->errors();
+			return Redirect::back()->withInput()->withErrors($errors);
 		}
 
-		// Update the asset data
-		$asset->name            		= e(Input::get('name'));
-		$asset->serial            		= e(Input::get('serial'));
-		$asset->model_id           		= e(Input::get('model_id'));
-		$asset->purchase_date           = e(Input::get('purchase_date'));
-		$asset->purchase_cost           = e(Input::get('purchase_cost'));
-		$asset->order_number            = e(Input::get('order_number'));
-		$asset->asset_tag           	= e(Input::get('asset_tag'));
-		$asset->notes            		= e(Input::get('notes'));
-		$asset->physical            		= '1';
-
-
-		// Was the asset updated?
-		if($asset->save())
-		{
-			// Redirect to the new asset page
-			return Redirect::to("assets/$assetId/edit")->with('success', Lang::get('admin/assets/message.update.success'));
-		}
 
 		// Redirect to the asset management page with error
 		return Redirect::to("assets/$assetId/edit")->with('error', Lang::get('admin/assets/message.update.error'));
+
+
+
 	}
 
 	/**
