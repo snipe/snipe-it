@@ -1,19 +1,13 @@
 <?php
 
-class Location extends Eloquent {
-
-	/**
-	 * Deletes a location
-	 *
-	 * @return bool
-	 */
+class Location extends Elegant {
 
 	protected $table = 'locations';
-
-	public function delete()
-	{
-		// Delete the depreciation
-		return parent::delete();
-	}
+	protected $rules = array(
+			'name'  		=> 'required|min:3',
+			'city'   		=> 'required|min:3',
+			'state'   		=> 'required|alpha|min:2|max:2',
+			'country'   	=> 'required|alpha|min:2|max:2',
+		);
 
 }
