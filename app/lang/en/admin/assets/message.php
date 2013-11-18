@@ -17,6 +17,12 @@ return array(
 	'delete' => array(
 		'error'   => 'There was an issue deleting the asset. Please try again.',
 		'success' => 'The asset was deleted successfully.'
+	),
+
+	'checkout' => array(
+		'error'   => 'Asset was not checked out, please try again',
+		'success' => 'Asset checked out successfully.'
+		'user_does_not_exist' => 'That user is invalid. Please try again..'
 	)
 
 );
