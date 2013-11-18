@@ -43,7 +43,7 @@
 				</div>
 			</div>
 
-			<div class="control-group {{ $errors->has('name') ? 'error' : '' }}">
+			<div class="control-group {{ $errors->has('modelno') ? 'error' : '' }}">
 				<label class="control-label" for="modelno">Model No.</label>
 				<div class="controls">
 					<input type="text" name="modelno" id="modelno" value="{{ Input::old('modelno', $model->modelno) }}" />
