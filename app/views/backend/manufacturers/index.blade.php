@@ -22,11 +22,12 @@ Asset Manufacturers ::
 {{ $manufacturers->links() }}
 @endif
 
-<table class="table table-bordered table-striped table-hover">
+<div class="row-fluid table">
+<table class="table table-hover">
 	<thead>
 		<tr>
 			<th class="span10">@lang('admin/manufacturers/table.title')</th>
-			<th class="span2">@lang('table.actions')</th>
+			<th class="span2"><span class="line"></span>@lang('table.actions')</th>
 		</tr>
 	</thead>
 	<tbody>
@@ -41,6 +42,7 @@ Asset Manufacturers ::
 		@endforeach
 	</tbody>
 </table>
+</div>
 
 @if ($manufacturers->getTotal() > 10)
 {{ $manufacturers->links() }}
