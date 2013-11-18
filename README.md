@@ -93,10 +93,19 @@ The document root for the app should be set to the public directory. In a standa
     # Other directives here
 	</VirtualHost>
 
+-----
+
+### 8) Optional: Seed the Database
+
+Loading up the sample data will give you an idea of how this should look, how your info should be structured, etc. It only pre-loads a handful of items, so you won't have to spend an hour deleting sample data.
+
+	php artisan db:seed
 
 -----
 
-### 8) Set up the debugbar (optional)
+
+## Optional Development Stuff
+### Set up the debugbar
 
 In dev mode, I use the fabulous [Laravel Debugbar](https://github.com/barryvdh/laravel-debugbar) by @barryvdh. After you've installed/updated composer, you'll need to publish the assets for the debugbar:
 
@@ -106,7 +115,15 @@ The profiler is enabled by default if you have debug set to true in your app.php
 
 -----
 
-### 9) Thoughts
+### Purging the autoloader
+
+If you're doing any development on this, make sure you purge the auto-loader if you see any errors stating the new model you created can'tbe found, etc, otherwise your new models won't be grokked.
+
+	php composer.phar dump-autoload
+
+-----
+
+### Running this on an EC2 Micro Instance
 
 Depending on your needs, you could probably run this system in an EC2 micro instance. It doesn't take up very much memory and typically won't be a super-high-traffic application. EC2 micros fall into the free/dirt-cheap tier, which might make this a nice option. One thing to note though - composer can be a little memory-intensive while you're running updates, and you may have trouble with it failing on a micro. You can crank the memory_limit up in php.ini, but EC2 micros have swap disabled by default, so even that may not cut it. If you run into totally unhelpful error messages while running composer updates (like simply 'Killed') or fatal memory issues mentioning phar, your best bet will be to enable swap:
 
@@ -122,7 +139,7 @@ To enable it by default after reboot, add this line to /etc/fstab:
 
 -----
 
-### 10) License
+### License
 
 	Copyright (C) 2013 Alison Gianotto
 
