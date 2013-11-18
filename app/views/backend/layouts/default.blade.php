@@ -160,19 +160,19 @@
                     <span>Assets</span>
                 </a>
             </li>
-            <li{{ (Request::is('assets/models') ? ' class="active"><div class="pointer"><div class="arrow"></div><div class="arrow_border"></div></div>' : '>') }}
+            <li{{ (Request::is('assets/models*') ? ' class="active"><div class="pointer"><div class="arrow"></div><div class="arrow_border"></div></div>' : '>') }}
                 <a href="{{ URL::to('assets/models') }}">
                     <i class="icon-th-list"></i>
                     <span>Models</span>
                 </a>
             </li>
-            <li{{ (Request::is('admin/users') ? ' class="active"><div class="pointer"><div class="arrow"></div><div class="arrow_border"></div></div>' : '>') }}
+            <li{{ (Request::is('admin/users*') ? ' class="active"><div class="pointer"><div class="arrow"></div><div class="arrow_border"></div></div>' : '>') }}
             	<a href="{{ URL::to('admin/users') }}">
                     <i class="icon-group"></i>
                     <span>People</span>
                 </a>
             </li>
-            <li{{ (Request::is('admin/licenses') ? ' class="active"><div class="pointer"><div class="arrow"></div><div class="arrow_border"></div></div>' : '>') }}
+            <li{{ (Request::is('admin/licenses*') ? ' class="active"><div class="pointer"><div class="arrow"></div><div class="arrow_border"></div></div>' : '>') }}
             	<a href="{{ URL::to('admin/licenses') }}">
             		<i class="icon-certificate icon-white"></i>
             		 <span>Licenses</span>
