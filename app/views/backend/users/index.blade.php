@@ -67,13 +67,13 @@ User Management ::
 			<td>
 			@if ($user->id > 3)
 				@if ( ! is_null($user->deleted_at))
-				<a href="{{ route('restore/user', $user->id) }}" class="btn btn-mini btn-warning"><i class="icon-share-alt icon-white"></i> @lang('button.restore')</a>
+				<a href="{{ route('restore/user', $user->id) }}" class="btn-flat default"><i class="icon-share-alt icon-white"></i> @lang('button.restore')</a>
 				@else
-				<a href="{{ route('update/user', $user->id) }}" class="btn btn-mini"><i class="icon-pencil"></i> @lang('button.edit')</a>
+				<a href="{{ route('update/user', $user->id) }}" class="btn-flat white"><i class="icon-pencil"></i> @lang('button.edit')</a>
 				@if (Sentry::getId() !== $user->id)
-				<a href="{{ route('delete/user', $user->id) }}" class="btn btn-mini btn-danger"><i class="icon-remove icon-white"></i> @lang('button.delete')</a>
+				<a href="{{ route('delete/user', $user->id) }}" class="btn-flat danger"><i class="icon-remove icon-white"></i> @lang('button.delete')</a>
 				@else
-				<span class="btn btn-mini btn-danger disabled"><i class="icon-remove icon-white"></i> @lang('button.delete')</span>
+				<span class="btn-flat danger disabled"><i class="icon-remove icon-white"></i> @lang('button.delete')</span>
 				@endif
 				@endif
 			@endif
