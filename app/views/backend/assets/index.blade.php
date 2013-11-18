@@ -48,13 +48,12 @@ Assets ::
 			@if ($asset->assigned_to != 0)
 				<a href="{{ route('view/user', $asset->assigned_to) }}">
 				{{ $asset->assigneduser->fullName() }}
-
 				</a>
 			@endif
 			</td>
 			<td>
-			@if ($asset->assigneduser->location_id)
-			{{ $asset->assetloc($asset->assigneduser->location_id)->name }}
+			@if (($asset->assigned_to > 0) && ($asset->assigneduser->location_id > 0))
+					{{ Location::find($asset->assigneduser->location_id)->name }}
 			@endif
 			</td>
 			<td>
