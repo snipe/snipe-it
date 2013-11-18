@@ -26,8 +26,9 @@ Asset Depreciations ::
 <table class="table table-hover">
 	<thead>
 		<tr>
-			<th class="span6">@lang('admin/locations/table.name')</th>
-			<th class="span6">@lang('admin/locations/table.city'),
+			<th class="span4">@lang('admin/locations/table.name')</th>
+			<th class="span4">Address</th>
+			<th class="span4">@lang('admin/locations/table.city'),
 			 @lang('admin/locations/table.state')
 			@lang('admin/locations/table.country')</th>
 			<th class="span2">@lang('table.actions')</th>
@@ -37,6 +38,7 @@ Asset Depreciations ::
 		@foreach ($locations as $location)
 		<tr>
 			<td>{{ $location->name }}</td>
+			<td>{{ $location->address }}, {{ $location->address2 }}  </td>
 			<td>{{ $location->city }}, {{ $location->state }}  {{ $location->country }}  </td>
 			<td>
 				<a href="{{ route('update/location', $location->id) }}" class="btn-flat white"> @lang('button.edit')</a>
