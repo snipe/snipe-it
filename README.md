@@ -70,7 +70,33 @@ Use the following command to create your default user, user groups and run all t
 
 -----
 
-### 6) Set up the debugbar (optional)
+### 6) Fix permissions
+
+You'll need to make sure that the app/storage directory is writable by your webserver, since caches and log files get written there. You should use the minimum permissions available for writing, based on how you've got your webserver configured.
+
+	chown -R 755 app/storage
+
+If you still run into a permissions error, you may need to increase the permissions to 775, or twiddle your user/group permissions on your server.
+
+	chown -R 775 app/storage
+
+-----
+
+### 7) Set the correct document root for your server
+
+The document root for the app should be set to the public directory. In a standard Apache virtualhost setup, that might look something like this:
+
+	<VirtualHost *:80>
+    DocumentRoot /var/www/html/public
+    ServerName www.example.org
+
+    # Other directives here
+	</VirtualHost>
+
+
+-----
+
+### 8) Set up the debugbar (optional)
 
 In dev mode, I use the fabulous [Laravel Debugbar](https://github.com/barryvdh/laravel-debugbar) by @barryvdh. After you've installed/updated composer, you'll need to publish the assets for the debugbar:
 
@@ -80,7 +106,7 @@ The profiler is enabled by default if you have debug set to true in your app.php
 
 -----
 
-### 7) Thoughts
+### 9) Thoughts
 
 Depending on your needs, you could probably run this system in an EC2 micro instance. It doesn't take up very much memory and typically won't be a super-high-traffic application. EC2 micros fall into the free/dirt-cheap tier, which might make this a nice option. One thing to note though - composer can be a little memory-intensive while you're running updates, and you may have trouble with it failing on a micro. You can crank the memory_limit up in php.ini, but EC2 micros have swap disabled by default, so even that may not cut it. If you run into totally unhelpful error messages while running composer updates (like simply 'Killed') or fatal memory issues mentioning phar, your best bet will be to enable swap:
 
@@ -96,7 +122,7 @@ To enable it by default after reboot, add this line to /etc/fstab:
 
 -----
 
-### 8) License
+### 10) License
 
 	Copyright (C) 2013 Alison Gianotto
 
