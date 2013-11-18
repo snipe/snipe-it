@@ -296,11 +296,11 @@ class AssetsController extends AdminController {
 		if($asset->save())
 		{
 			// Redirect to the new asset page
-			return Redirect::to("admin")->with('success', Lang::get('admin/assets/message.checkout.success'));
+			return Redirect::to("admin")->with('success', Lang::get('admin/assets/message.checkin.success'));
 		}
 
 		// Redirect to the asset management page with error
-		return Redirect::to("admin")->with('error', Lang::get('admin/assets/message.checkout.error'));
+		return Redirect::to("admin")->with('error', Lang::get('admin/assets/message.checkin.error'));
 	}
 
 
