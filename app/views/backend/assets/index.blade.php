@@ -26,9 +26,10 @@ Assets ::
 	<thead>
 		<tr>
 			<th class="span2">@lang('admin/assets/table.asset_tag')</th>
-			<th class="span4">@lang('admin/assets/table.title')</th>
+			<th class="span2">@lang('admin/assets/table.title')</th>
 			<th class="span2">@lang('admin/assets/table.serial')</th>
 			<th class="span2">@lang('admin/assets/table.checkoutto')</th>
+			<th class="span2">@lang('admin/assets/table.location')</th>
 			<th class="span1">@lang('admin/assets/table.change')</th>
 			<th class="span2">@lang('admin/assets/table.purchase_date')</th>
 			<th class="span2">@lang('admin/assets/table.purchase_cost')</th>
@@ -47,7 +48,13 @@ Assets ::
 			@if ($asset->assigned_to != 0)
 				<a href="{{ route('view/user', $asset->assigned_to) }}">
 				{{ $asset->assigneduser->fullName() }}
+
 				</a>
+			@endif
+			</td>
+			<td>
+			@if ($asset->assigneduser->location_id)
+			{{ $asset->assetloc($asset->assigneduser->location_id)->name }}
 			@endif
 			</td>
 			<td>

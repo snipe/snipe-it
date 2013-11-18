@@ -8,9 +8,10 @@ return array(
 	'serial'   => 'Serial',
 	'purchase_date'   => 'Purchased',
 	'purchase_cost'   => 'Cost',
-	'book_value'   => 'Book Value',
+	'book_value'   => 'Value',
 	'status'   => 'Status',
 	'checkoutto' => 'Checked Out',
 	'change' => 'In/Out',
+	'location' => 'Location',
 
 );

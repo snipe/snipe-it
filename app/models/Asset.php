@@ -49,4 +49,10 @@ class Asset extends Elegant {
     	return $this->belongsTo('User', 'assigned_to');
   	}
 
+  	public function assetloc($locationId)
+  	{
+  		return Location::find($locationId);
+
+  	}
+
 }
