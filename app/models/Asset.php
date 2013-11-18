@@ -16,22 +16,26 @@ class Asset extends Elegant {
 	public function depreciation()
 	{
 		$depreciation_id = Model::find($this->model_id)->depreciation_id;
-
 		if (isset($depreciation_id)) {
-		$depreciation_term = Depreciation::find($depreciation_id)->months;
+			$depreciation_term = Depreciation::find($depreciation_id)->months;
+			if($depreciation_term>0) {
 
-		$purchase_date = strtotime($this->purchase_date);
-		$today  = mktime(0, 0, 0, date("m")  , date("d"), date("Y"));
-		$diff_days = ($today - $purchase_date) / 86400;
+				$purchase_date = strtotime($this->purchase_date);
 
-		// fraction of value left
-		// FIX ME - THIS SHIT IS BROKE AS HELL. Math is hard. :(
-		$current_value = round(((30 * $depreciation_term - $diff_days) / (30 * $depreciation_term)) * $this->purchase_cost,2);
+				$todaymonthnumber=date("Y")*12+(date("m")-1); //calculate the month number for today as YEAR*12 + (months-1) - number of months since January year 0
+				$purchasemonthnumber=date("Y",$purchase_date)*12+(date("m",$purchase_date)-1); //purchase date calculated similarly
+				$diff_months=$todaymonthnumber-$purchasemonthnumber;
 
-		if ($current_value < 0) {
-			$current_value = 0;
-		}
-        	return $current_value;
+				// fraction of value left
+				$current_value = round((( $depreciation_term - $diff_months) / ($depreciation_term)) * $this->purchase_cost,2);
+
+				if ($current_value < 0) {
+					$current_value = 0;
+				}
+	        	return $current_value;
+	        } else {
+	        	return $this->purchase_cost;
+	        }
         } else {
         	return $this->purchase_cost;
         }
