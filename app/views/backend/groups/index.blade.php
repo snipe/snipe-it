@@ -22,7 +22,8 @@ Group Management ::
 {{ $groups->links() }}
 @endif
 
-<table class="table table-bordered table-striped table-hover">
+<div class="row-fluid table">
+<table class="table table-hover">
 	<thead>
 		<tr>
 			<th class="span1">@lang('admin/groups/table.id')</th>
@@ -53,6 +54,7 @@ Group Management ::
 		@endif
 	</tbody>
 </table>
+</div>
 
 @if (count($groups) > 10)
 {{ $groups->links() }}

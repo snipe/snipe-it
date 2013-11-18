@@ -34,6 +34,7 @@
 
 		<!-- this page specific styles -->
 		<link rel="stylesheet" href="{{ asset('assets/css/compiled/index.css') }}" type="text/css" media="screen" />
+		<link rel="stylesheet" href="{{ asset('assets/css/compiled/user-list.css') }}" type="text/css" media="screen" />
 
 		<!-- open sans font -->
 		<link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
@@ -152,25 +153,25 @@
         <ul id="dashboard-menu">
 
 
-            <li{{ (Request::is('admin') ? ' class="active"' : '') }}>
+            <li{{ (Request::is('admin') ? ' class="active"><div class="pointer"><div class="arrow"></div><div class="arrow_border"></div></div>' : '>') }}
                 <a href="{{ URL::to('admin') }}">
                     <i class="icon-barcode"></i>
                     <span>Assets</span>
                 </a>
             </li>
-            <li{{ (Request::is('assets/models') ? ' class="active"' : '') }}>
+            <li{{ (Request::is('assets/models') ? ' class="active"><div class="pointer"><div class="arrow"></div><div class="arrow_border"></div></div>' : '>') }}
                 <a href="{{ URL::to('assets/models') }}">
                     <i class="icon-th-list"></i>
                     <span>Models</span>
                 </a>
             </li>
-            <li{{ (Request::is('admin/users') ? ' class="active"' : '') }}>
+            <li{{ (Request::is('admin/users') ? ' class="active"><div class="pointer"><div class="arrow"></div><div class="arrow_border"></div></div>' : '>') }}
             	<a href="{{ URL::to('admin/users') }}">
                     <i class="icon-group"></i>
                     <span>People</span>
                 </a>
             </li>
-            <li{{ (Request::is('admin/licenses') ? ' class="active"' : '') }}>
+            <li{{ (Request::is('admin/licenses') ? ' class="active"><div class="pointer"><div class="arrow"></div><div class="arrow_border"></div></div>' : '>') }}
             	<a href="{{ URL::to('admin/licenses') }}">
             		<i class="icon-certificate icon-white"></i>
             		 <span>Licenses</span>
@@ -180,7 +181,7 @@
             <li>
                 <a href="#">
                     <i class="icon-signal"></i>
-                    <span>Charts</span>
+                    <span>Reports</span>
                 </a>
             </li>
         </ul>
@@ -205,10 +206,23 @@
 
                     </div>
                 </div>
+
+
+
+
             </div>
+
+
         </div>
+
+    </div>
+    <div id="footer">
+      <div class="container">
+        <p class="muted credit"><a href="http://snipeitapp.com">Snipe IT</a> is a free open source project by <a href="http://www.snipe.net">Alison Gianotto</a>. <a href="https://github.com/snipe/snipe-it">Fork it here</a>!</p>
+      </div>
     </div>
     <!-- end main container -->
+
 
 
 	<!-- scripts -->

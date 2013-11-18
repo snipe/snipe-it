@@ -19,7 +19,8 @@ Licenses ::
 @if ($licenses->getTotal() > 10)
 {{ $licenses->links() }}
 @endif
-<table class="table table-bordered table-striped table-hover">
+<div class="row-fluid table">
+<table class="table table-hover">
 	<thead>
 		<tr>
 			<th class="span4">@lang('admin/licenses/table.title')</th>
@@ -60,6 +61,7 @@ Licenses ::
 		@endforeach
 	</tbody>
 </table>
+</div>
 
 @if ($licenses->getTotal() > 10)
 {{ $licenses->links() }}

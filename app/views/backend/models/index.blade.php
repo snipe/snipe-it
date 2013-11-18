@@ -20,7 +20,9 @@ Asset Models ::
 @if ($models->getTotal() > 10)
 {{ $models->links() }}
 @endif
-<table class="table table-bordered table-striped table-hover">
+
+<div class="row-fluid table">
+<table class="table table-hover">
 	<thead>
 		<tr>
 			<th class="span6">@lang('admin/models/table.title')</th>
@@ -49,6 +51,7 @@ Asset Models ::
 		@endforeach
 	</tbody>
 </table>
+
 
 @if ($models->getTotal() > 10)
 {{ $models->links() }}

@@ -21,7 +21,8 @@ Assets ::
 @if ($assets->getTotal() > 10)
 	{{ $assets->links() }}
 @endif
-<table class="table table-bordered table-striped table-hover">
+<div class="row-fluid table">
+<table class="table table-hover">
 	<thead>
 		<tr>
 			<th class="span2">@lang('admin/assets/table.asset_tag')</th>
@@ -36,6 +37,7 @@ Assets ::
 		</tr>
 	</thead>
 	<tbody>
+
 		@foreach ($assets as $asset)
 		<tr>
 			<td>{{ $asset->asset_tag }}</td>
@@ -65,6 +67,7 @@ Assets ::
 		@endforeach
 	</tbody>
 </table>
+</div>
 
 @if ($assets->getTotal() > 10)
 {{ $assets->links() }}

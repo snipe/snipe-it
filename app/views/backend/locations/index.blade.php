@@ -22,7 +22,8 @@ Asset Depreciations ::
 {{ $locations->links() }}
 @endif
 
-<table class="table table-bordered table-striped table-hover">
+<div class="row-fluid table">
+<table class="table table-hover">
 	<thead>
 		<tr>
 			<th class="span6">@lang('admin/locations/table.name')</th>
@@ -45,6 +46,7 @@ Asset Depreciations ::
 		@endforeach
 	</tbody>
 </table>
+</div>
 
 @if ($locations->getTotal() > 10)
 {{ $locations->links() }}

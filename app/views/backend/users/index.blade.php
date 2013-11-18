@@ -26,12 +26,12 @@ User Management ::
 {{ $users->links() }}
 @endif
 
-<table class="table table-bordered table-striped table-hover">
+
+<div class="row-fluid table users-list">
+<table class="table table-hover">
 	<thead>
 		<tr>
-			<th class="span1">@lang('admin/users/table.id')</th>
-			<th class="span2">@lang('admin/users/table.first_name')</th>
-			<th class="span2">@lang('admin/users/table.last_name')</th>
+			<th class="span2">@lang('admin/users/table.name')</th>
 			<th class="span3">@lang('admin/users/table.email')</th>
 			<th class="span1">@lang('admin/users/table.checkedout')</th>
 			<th class="span1">@lang('admin/users/table.activated')</th>
@@ -41,11 +41,14 @@ User Management ::
 		</tr>
 	</thead>
 	<tbody>
+
 		@foreach ($users as $user)
 		<tr>
-			<td>{{ $user->id }}</td>
-			<td>{{ $user->first_name }}</td>
-			<td>{{ $user->last_name }}</td>
+			<td>
+			<img src="//secure.gravatar.com/avatar/{{ md5(strtolower(trim($user->gravatar))) }}" class="img-circle avatar hidden-phone" style="max-width: 45px;" />
+			<a href="#" class="name">{{ $user->fullName() }}</a>
+			<span class="subtext">Graphic Design</span>
+			</td>
 			<td>{{ $user->email }}</td>
 			<td>
 			{{ ($user->assets->count()) }}
@@ -79,6 +82,8 @@ User Management ::
 		@endforeach
 	</tbody>
 </table>
+</div>
+
 
 @if (count($users) > 10)
 {{ $users->links() }}
