@@ -27,7 +27,7 @@ Asset Depreciations ::
 	<thead>
 		<tr>
 			<th class="span6">@lang('admin/depreciations/table.title')</th>
-			<th class="span6"><span class="line"></span>@lang('admin/depreciations/table.term')</th>
+			<th class="span2"><span class="line"></span>@lang('admin/depreciations/table.term')</th>
 			<th class="span2"><span class="line"></span>@lang('table.actions')</th>
 		</tr>
 	</thead>
