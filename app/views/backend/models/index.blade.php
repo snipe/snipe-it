@@ -24,7 +24,8 @@ Asset Models ::
 	<thead>
 		<tr>
 			<th class="span6">@lang('admin/models/table.title')</th>
-			<th class="span2">@lang('admin/models/table.modelnumber')</th>
+			<th class="span4">@lang('admin/models/table.modelnumber')</th>
+			<th class="span1">@lang('admin/models/table.numassets')</th>
 			<th class="span2">@lang('admin/models/table.created_at')</th>
 			<th class="span2">@lang('table.actions')</th>
 		</tr>
@@ -32,8 +33,13 @@ Asset Models ::
 	<tbody>
 		@foreach ($models as $model)
 		<tr>
-			<td>{{ $model->name }}</td>
+			<td>{{ $model->name }}
+
+
+
+			</td>
 			<td>{{ $model->modelno }}</td>
+			<td>{{ ($model->assets->count()) }}</td>
 			<td>{{ $model->created_at->diffForHumans() }}</td>
 			<td>
 				<a href="{{ route('update/model', $model->id) }}" class="btn btn-mini">@lang('button.edit')</a>
