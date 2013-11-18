@@ -4,6 +4,9 @@ return array(
 
 	'yes' => 'Yes',
 	'no'  => 'No',
-	'currency'  => '$'
+	'currency'  => '$',
+	'save'  => 'Save',
+	'checkout'  => 'Checkout',
+	'cancel'  => 'Cancel'
 
 );
