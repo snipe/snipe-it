@@ -64,7 +64,9 @@ class AppCommand extends Command {
 		// Let's ask the user some questions, shall we?
 		$this->askUserFirstName();
 		$this->askUserLastName();
+		$this->askUserJobTitle();
 		$this->askUserEmail();
+		$this->askUserPhone();
 		$this->askUserPassword();
 
 
@@ -174,6 +176,64 @@ class AppCommand extends Command {
 			$this->userData['email'] = $email;
 		}
 		while ( ! $email);
+	}
+
+	/**
+	 * Asks the user for the user phone number.
+	 *
+	 * @return void
+	 * @todo   Use the Laravel Validator
+	 */
+	protected function askUserPhone()
+	{
+		do
+		{
+			// Ask the user to input the user phone number
+			$phone = $this->ask('Please enter your phone number: ');
+
+			// Check if number is valid
+			if ($phone == '')
+			{
+				// Return an error message
+				$this->error('Password is invalid. Please try again.');
+			}
+
+			if (strlen($phone) < 10)
+			{
+				$this->error('Phone number must be at least 10 digits long.');
+				$phone = '';
+			}
+
+			// Store the number
+			$this->userData['phone'] = $phone;
+		}
+		while( ! $phone);
+	}
+
+	/**
+	 * Asks the user for the user job title.
+	 *
+	 * @return void
+	 * @todo   Use the Laravel Validator
+	 */
+	protected function askUserJobTitle()
+	{
+		do
+		{
+			// Ask the user to input the user job title
+			$title = $this->ask('Please enter your job title: ');
+
+			// Check if number is valid
+			if ($title == '')
+			{
+				// Return an error message
+				$this->error('Job title is invalid. Please try again.');
+			}
+
+			// Store the number
+			$this->userData['jobtitle'] = $title;
+		}
+		while( ! $title);
 	}
 
 	/**
@@ -289,6 +349,8 @@ class AppCommand extends Command {
 			'last_name'  => 'Doe',
 			'email'      => 'john.doe@example.com',
 			'password'   => 'johndoe',
+			'jobtitle'	 => 'Example User',
+			'phone'			 => '1234567890',
 			'activated'  => 1,
 		);
 

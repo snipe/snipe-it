@@ -26,6 +26,7 @@ class AssetsSeeder extends Seeder {
 			'physical' 		=> 1,
 			'license_name'	=> NULL,
 			'license_email'	=> NULL,
+			'notes'					=> 'test note',
 		);
 
 		$asset[] = array(
@@ -44,6 +45,7 @@ class AssetsSeeder extends Seeder {
 			'physical' 		=> 1,
 			'license_name'	=> NULL,
 			'license_email'	=> NULL,
+			'notes'					=> 'test note',
 		);
 
 		$asset[] = array(
@@ -62,6 +64,7 @@ class AssetsSeeder extends Seeder {
 			'physical' 		=> 1,
 			'license_name'	=> NULL,
 			'license_email'	=> NULL,
+			'notes'					=> 'test note',
 		);
 
 		$asset[] = array(
@@ -80,6 +83,7 @@ class AssetsSeeder extends Seeder {
 			'physical' 		=> 0,
 			'license_name'	=> 'Alison Giasnotto',
 			'license_email'	=> 'snipe@snipe.net',
+			'notes'					=> 'test note',
 		);
 
 		$asset[] = array(
@@ -98,6 +102,7 @@ class AssetsSeeder extends Seeder {
 			'physical' 		=> 0,
 			'license_name'	=> 'Alison Giasnotto',
 			'license_email'	=> 'me@example.com',
+			'notes'					=> 'test note',
 		);
 
 
