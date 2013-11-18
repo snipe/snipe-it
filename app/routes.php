@@ -21,6 +21,9 @@ Route::group(array('prefix' => 'assets'), function()
 	Route::get('{assetId}/edit', array('as' => 'update/asset', 'uses' => 'Controllers\Admin\AssetsController@getEdit'));
 	Route::post('{assetId}/edit', 'Controllers\Admin\AssetsController@postEdit');
 	Route::get('{assetId}/delete', array('as' => 'delete/asset', 'uses' => 'Controllers\Admin\AssetsController@getDelete'));
+	Route::get('{assetId}/checkout', array('as' => 'checkout/asset', 'uses' => 'Controllers\Admin\AssetsController@getCheckout'));
+	Route::post('{assetId}/checkout', 'Controllers\Admin\AssetsController@postCheckout');
+
 
 
 # Asset Model Management
