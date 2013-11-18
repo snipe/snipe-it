@@ -1,4 +1,5 @@
 <?php
+
 class Asset extends Elegant {
 
 	protected $table = 'assets';

@@ -16,6 +16,7 @@ class DatabaseSeeder extends Seeder {
 		$this->call('LocationsSeeder');
 		$this->call('ManufacturersSeeder');
 		$this->call('ModelsSeeder');
+		$this->call('DepreciationsSeeder');
 	}
 
 }
