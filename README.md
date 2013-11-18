@@ -139,7 +139,7 @@ To enable it by default after reboot, add this line to /etc/fstab:
 
 -----
 
-### License
+## License
 
 	Copyright (C) 2013 Alison Gianotto
 
