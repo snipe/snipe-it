@@ -55,9 +55,9 @@ return array(
 		'mysql' => array(
 			'driver'    => 'mysql',
 			'host'      => 'localhost',
-			'database'  => 'snipe-it',
-			'username'  => 'root',
-			'password'  => 'root',
+			'database'  => 'snipeit_laravel',
+			'username'  => 'snipeit_laravel',
+			'password'  => '',
 			'charset'   => 'utf8',
 			'collation' => 'utf8_unicode_ci',
 			'prefix'    => '',
