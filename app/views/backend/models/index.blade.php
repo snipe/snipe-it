@@ -25,11 +25,11 @@ Asset Models ::
 <table class="table table-hover">
 	<thead>
 		<tr>
-			<th class="span6">@lang('admin/models/table.title')</th>
-			<th class="span4">@lang('admin/models/table.modelnumber')</th>
+			<th class="span3">@lang('admin/models/table.title')</th>
+			<th class="span3">@lang('admin/models/table.modelnumber')</th>
 			<th class="span1">@lang('admin/models/table.numassets')</th>
 			<th class="span1">@lang('admin/models/table.created_at')</th>
-			<th class="span2">@lang('table.actions')</th>
+			<th class="span3">@lang('table.actions')</th>
 		</tr>
 	</thead>
 	<tbody>
