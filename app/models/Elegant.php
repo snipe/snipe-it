@@ -1,4 +1,4 @@
-<?
+<?php
 
 class Elegant extends Eloquent
 {
