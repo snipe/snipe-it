@@ -50,6 +50,7 @@
 		h3 {
 			padding: 10px;
 		}
+
 		@show
 		</style>
 
@@ -71,7 +72,7 @@
                 <span class="icon-bar"></span>
             </button>
 
-            <a class="brand" href="index.html">Snipe IT Asset Management</a>
+            <a class="brand" href="/">Snipe IT Asset Management</a>
 			</ul>
 
 
@@ -177,7 +178,7 @@
             </li>
 
             <li>
-                <a href="chart-showcase.html">
+                <a href="#">
                     <i class="icon-signal"></i>
                     <span>Charts</span>
                 </a>

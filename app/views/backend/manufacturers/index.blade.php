@@ -13,7 +13,7 @@ Asset Manufacturers ::
 		Asset Manufacturers
 
 		<div class="pull-right">
-			<a href="{{ route('create/manufacturer') }}" class="btn btn-small btn-info"><i class="icon-plus-sign icon-white"></i> Create</a>
+			<a href="{{ route('create/manufacturer') }}" class="btn-flat success"><i class="icon-plus-sign icon-white"></i> Create New</a>
 		</div>
 	</h3>
 </div>
@@ -25,19 +25,17 @@ Asset Manufacturers ::
 <table class="table table-bordered table-striped table-hover">
 	<thead>
 		<tr>
-			<th class="span2">@lang('admin/manufacturers/table.id')</th>
-			<th class="span6">@lang('admin/manufacturers/table.title')</th>
+			<th class="span10">@lang('admin/manufacturers/table.title')</th>
 			<th class="span2">@lang('table.actions')</th>
 		</tr>
 	</thead>
 	<tbody>
 		@foreach ($manufacturers as $manufacturer)
 		<tr>
-			<td>{{ $manufacturer->id }}</td>
 			<td>{{ $manufacturer->name }}</td>
 			<td>
-				<a href="{{ route('update/manufacturer', $manufacturer->id) }}" class="btn btn-mini">@lang('button.edit')</a>
-				<a href="{{ route('delete/manufacturer', $manufacturer->id) }}" class="btn btn-mini btn-danger">@lang('button.delete')</a>
+				<a href="{{ route('update/manufacturer', $manufacturer->id) }}" class="btn-flat white">@lang('button.edit')</a>
+				<a href="{{ route('delete/manufacturer', $manufacturer->id) }}" class="btn-flat danger">@lang('button.delete')</a>
 			</td>
 		</tr>
 		@endforeach

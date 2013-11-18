@@ -13,7 +13,7 @@ User Update ::
 		User Update
 
 		<div class="pull-right">
-			<a href="{{ route('users') }}" class="btn btn-small btn-inverse"><i class="icon-circle-arrow-left icon-white"></i> Back</a>
+			<a href="{{ route('users') }}" class="btn-flat gray"><i class="icon-circle-arrow-left icon-white"></i> Back</a>
 		</div>
 	</h3>
 </div>
@@ -159,7 +159,7 @@ User Update ::
 
 			<button type="reset" class="btn">Reset</button>
 
-			<button type="submit" class="btn btn-success">@lang('general.save')</button>
+			<button type="submit" class="btn-flat success"><i class="icon-ok icon-white"></i> @lang('general.save')</button>
 		</div>
 	</div>
 </form>

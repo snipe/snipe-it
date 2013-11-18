@@ -26,7 +26,7 @@ Asset Models ::
 			<th class="span6">@lang('admin/models/table.title')</th>
 			<th class="span4">@lang('admin/models/table.modelnumber')</th>
 			<th class="span1">@lang('admin/models/table.numassets')</th>
-			<th class="span2">@lang('admin/models/table.created_at')</th>
+			<th class="span1">@lang('admin/models/table.created_at')</th>
 			<th class="span2">@lang('table.actions')</th>
 		</tr>
 	</thead>
@@ -41,9 +41,9 @@ Asset Models ::
 			<td>{{ $model->modelno }}</td>
 			<td>{{ ($model->assets->count()) }}</td>
 			<td>{{ $model->created_at->diffForHumans() }}</td>
-			<td>
-				<a href="{{ route('update/model', $model->id) }}" class="btn-flat white">@lang('button.edit')</a>
-				<a href="{{ route('delete/model', $model->id) }}" class="btn-flat danger">@lang('button.delete')</a>
+			<td nowrap="nowrap">
+				<a href="{{ route('update/model', $model->id) }}" class="btn-flat white  btn-sm">@lang('button.edit')</a>
+				<a href="{{ route('delete/model', $model->id) }}" class="btn-flat danger  btn-sm">@lang('button.delete')</a>
 			</td>
 		</tr>
 		@endforeach

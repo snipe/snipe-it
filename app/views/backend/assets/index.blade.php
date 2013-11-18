@@ -56,7 +56,7 @@ Assets ::
 			<td>{{ $asset->purchase_date }}</td>
 			<td>${{ number_format($asset->purchase_cost) }}</td>
 			<td>${{ number_format($asset->depreciation()) }}</td>
-			<td>
+			<td nowrap="nowrap">
 				<a href="{{ route('update/asset', $asset->id) }}" class="btn-flat white">@lang('button.edit')</a>
 				<a href="{{ route('delete/asset', $asset->id) }}" class="btn-flat danger">@lang('button.delete')</a>
 

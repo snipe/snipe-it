@@ -13,7 +13,7 @@ Asset Depreciations ::
 		Locations
 
 		<div class="pull-right">
-			<a href="{{ route('create/location') }}" class="btn btn-small btn-info"><i class="icon-plus-sign icon-white"></i> Create</a>
+			<a href="{{ route('create/location') }}" class="btn-flat success"><i class="icon-plus-sign icon-white"></i> Create New</a>
 		</div>
 	</h3>
 </div>
@@ -38,8 +38,8 @@ Asset Depreciations ::
 			<td>{{ $location->name }}</td>
 			<td>{{ $location->city }}, {{ $location->state }}  {{ $location->country }}  </td>
 			<td>
-				<a href="{{ route('update/location', $location->id) }}" class="btn btn-mini">@lang('button.edit')</a>
-				<a href="{{ route('delete/location', $location->id) }}" class="btn btn-mini btn-danger">@lang('button.delete')</a>
+				<a href="{{ route('update/location', $location->id) }}" class="btn-flat white"> @lang('button.edit')</a>
+				<a href="{{ route('delete/location', $location->id) }}" class="btn-flat danger">@lang('button.delete')</a>
 			</td>
 		</tr>
 		@endforeach

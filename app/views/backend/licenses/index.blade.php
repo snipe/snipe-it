@@ -12,7 +12,7 @@ Licenses ::
 		Software Licenses
 
 		<div class="pull-right">
-			<a href="{{ route('create/licenses') }}" class="btn btn-small btn-info"><i class="icon-plus-sign icon-white"></i> Create</a>
+			<a href="{{ route('create/licenses') }}" class="btn-flat success"><i class="icon-plus-sign icon-white"></i> Create New</a>
 		</div>
 	</h3>
 </div>
@@ -28,7 +28,7 @@ Licenses ::
 			<th class="span2">@lang('admin/licenses/table.license_email')</th>
 			<th class="span2">@lang('admin/licenses/table.assigned_to')</th>
 			<th class="span2">@lang('admin/licenses/table.checkout')</th>
-			<th class="span4">@lang('table.actions')</th>
+			<th class="span2">@lang('table.actions')</th>
 		</tr>
 	</thead>
 	<tbody>
@@ -47,14 +47,14 @@ Licenses ::
 			</td>
 			<td>
 			@if ($license->assigned_to != 0)
-				<a href="{{ route('checkin/license', $license->id) }}" class="btn btn-mini btn-info">Checkin</a>
+				<a href="{{ route('checkin/license', $license->id) }}" class="btn-flat info">Checkin</a>
 			@else
-				<a href="{{ route('checkout/license', $license->id) }}" class="btn btn-mini btn-success">Checkout</a>
+				<a href="{{ route('checkout/license', $license->id) }}" class="btn-flat success">Checkout</a>
 			@endif
 			</td>
 			<td>
-				<a href="{{ route('update/license', $license->id) }}" class="btn btn-mini"><i class="icon-pencil"></i> @lang('button.edit')</a>
-				<a href="{{ route('delete/license', $license->id) }}" class="btn btn-mini btn-danger"><i class="icon-remove icon-white"></i> @lang('button.delete')</a>
+				<a href="{{ route('update/license', $license->id) }}" class="btn-flat white"> @lang('button.edit')</a>
+				<a href="{{ route('delete/license', $license->id) }}"  class="btn-flat danger"> @lang('button.delete')</a>
 			</td>
 		</tr>
 		@endforeach
