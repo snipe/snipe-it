@@ -155,11 +155,11 @@ User Update ::
 	<!-- Form Actions -->
 	<div class="control-group">
 		<div class="controls">
-			<a class="btn btn-link" href="{{ route('users') }}">Cancel</a>
+			<a class="btn btn-link" href="{{ route('users') }}">@lang('general.cancel')</a>
 
 			<button type="reset" class="btn">Reset</button>
 
-			<button type="submit" class="btn btn-success">Update User</button>
+			<button type="submit" class="btn btn-success">@lang('general.save')</button>
 		</div>
 	</div>
 </form>

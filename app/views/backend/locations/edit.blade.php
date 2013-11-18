@@ -74,8 +74,8 @@
 	<!-- Form actions -->
 	<div class="control-group">
 		<div class="controls">
-			<a class="btn btn-link" href="{{ route('locations') }}">Cancel</a>
-			<button type="submit" class="btn btn-success">Save</button>
+			<a class="btn btn-link" href="{{ route('locations') }}">@lang('general.cancel')</a>
+			<button type="submit" class="btn btn-success">@lang('general.save')</button>
 		</div>
 	</div>
 </form>

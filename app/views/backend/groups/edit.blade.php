@@ -82,11 +82,11 @@ Group Update ::
 	<!-- Form Actions -->
 	<div class="control-group">
 		<div class="controls">
-			<a class="btn btn-link" href="{{ route('groups') }}">Cancel</a>
+			<a class="btn btn-link" href="{{ route('groups') }}">@lang('general.cancel')</a>
 
 			<button type="reset" class="btn">Reset</button>
 
-			<button type="submit" class="btn btn-success">Update Group</button>
+			<button type="submit" class="btn btn-success">@lang('general.save')</button>
 		</div>
 	</div>
 </form>
