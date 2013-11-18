@@ -21,7 +21,7 @@
 		@endif
 
 		<div class="pull-right">
-			<a href="{{ route('licenses') }}" class="btn btn-small btn-inverse"><i class="icon-circle-arrow-left icon-white"></i> Back</a>
+			<a href="{{ route('licenses') }}" class="btn-flat gray"><i class="icon-circle-arrow-left icon-white"></i> Back</a>
 		</div>
 	</h3>
 </div>
@@ -105,7 +105,7 @@
 	<div class="control-group">
 		<div class="controls">
 			<a class="btn btn-link" href="{{ route('licenses') }}">@lang('general.cancel')</a>
-			<button type="submit" class="btn btn-success">@lang('general.save')</button>
+			<button type="submit" class="btn-flat success"><i class="icon-ok icon-white"></i> @lang('general.save')</button>
 		</div>
 	</div>
 </form>

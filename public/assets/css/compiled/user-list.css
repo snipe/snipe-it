@@ -1,0 +1,86 @@
+.users-list .header input.search {
+  padding: 5px 6px;
+  position: relative;
+  top: -1px;
+}
+.users-list .header input.search:focus {
+  box-shadow: none;
+  border: 1px solid #888;
+}
+.users-list .header .ui-select {
+  margin: 3px 40px 0 0;
+}
+.users-list .header .ui-dropdown {
+  margin-left: 20px;
+}
+.users-list .header a.btn-flat span {
+  font-size: 17px;
+  position: relative;
+  top: 2px;
+  margin-right: 4px;
+}
+.users-list .table td {
+  vertical-align: middle;
+  font-size: 13px;
+}
+.users-list .table img.avatar {
+  float: left;
+  margin-right: 14px;
+  max-width: 45px;
+  position: relative;
+  top: 8px;
+}
+.users-list .table a.name {
+  color: #3389d1;
+  display: block;
+  font-weight: 600;
+  font-size: 14px;
+  margin: 15px 0 0 0;
+}
+.users-list .table .subtext {
+  font-size: 12px;
+  margin-left: 0;
+  color: #778391;
+  font-style: italic;
+  margin-top: 0;
+}
+.users-list .pagination {
+  margin-top: 25px;
+}
+
+/* responsive */
+@media (max-width: 767px) {
+  .ui-dropdown .dialog .body {
+    width: 250px;
+    left: 58%;
+    position: relative;
+  }
+
+  .users-list .table a.name {
+    font-size: 12px;
+  }
+  .users-list .table td {
+    font-size: 12px;
+  }
+  .users-list h3 {
+    display: block;
+    float: none;
+    margin-bottom: 30px;
+  }
+  .users-list .header input.search {
+    margin-bottom: 18px;
+  }
+  .users-list .header .ui-dropdown {
+    float: left;
+    margin-left: 0;
+  }
+
+  .ui-dropdown .dialog .body .form input[type="text"] {
+    margin-top: 10px;
+  }
+
+  .ui-dropdown .dialog .body .form a {
+    margin-top: 10px;
+    margin-left: 18px;
+  }
+}

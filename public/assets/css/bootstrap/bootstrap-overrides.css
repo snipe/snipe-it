@@ -1,0 +1,369 @@
+/* Some overrides from default bootstrap styles */
+
+h1,h2,h3,h4,h5,h6{
+	font-weight: normal;
+}
+
+/* COMPONENTS */
+
+
+/* labels */
+.label, .badge {font-weight: lighter;}
+.label-success, .badge-success {
+	background-color: rgb(129, 189, 130);
+}
+.label-info, .badge-info {
+	background-color: rgb(104, 163, 213);
+}
+
+/* alerts */
+.alert [class^="icon-"], 
+.alert [class*=" icon-"] {
+	font-size: 27px;
+	position: relative;
+	top: 4px;
+	margin-bottom: 8px;
+	margin-right: 17px;
+	display: inline-block;
+	color: #f1c359;
+}
+.alert-success [class^="icon-"], 
+.alert-success [class*=" icon-"] {
+	color: #81ad53;
+}
+.alert-info [class^="icon-"], 
+.alert-info [class*=" icon-"] {
+	color: #4993c6;
+}
+.alert-error [class^="icon-"], 
+.alert-error [class*=" icon-"] {
+	color: #d5393e;
+}
+
+
+/* code*/
+code {
+	color: rgb(78, 153, 223);
+}
+
+
+/* HTML ELEMENTS */
+input,
+button,
+select,
+textarea {
+  font-family: "Open Sans", Arial;
+}
+input[type="text"],
+input[type="password"],
+textarea {	
+	font-size: 13px;
+	-webkit-box-shadow: inset 0 0px 1px rgba(0, 0, 0, 0.075);
+	   -moz-box-shadow: inset 0 0px 1px rgba(0, 0, 0, 0.075);
+			box-shadow: inset 0 0px 1px rgba(0, 0, 0, 0.075);
+
+	/*border: none;
+	-webkit-box-shadow: inset rgba(112, 112, 112, 0.3) 0 1px 1px,inset rgba(0,0,0,0.3) 0 0 1px,rgba(255,255,255,0.4) 0 1px 0;
+	-moz-box-shadow: inset rgba(112, 112, 112, 0.3) 0 1px 1px,inset rgba(0,0,0,0.3) 0 0 1px,rgba(255,255,255,0.4) 0 1px 0;
+	box-shadow: inset rgba(112, 112, 112, 0.3) 0 1px 1px,inset rgba(0,0,0,0.3) 0 0 1px,rgba(255,255,255,0.4) 0 1px 0;
+	-webkit-border-radius: 4px;
+	-moz-border-radius: 4px;
+	-ms-border-radius: 4px;
+	-o-border-radius: 4px;
+	border-radius: 4px;*/
+}
+.inline-input input[type="text"],
+.inline-input input[type="password"],
+input[type="text"].inline-input,
+input[type="password"].inline-input {
+	background: #fff;
+	border-top: 0 none;
+	border-left: 0 none;
+	border-right: 0 none;
+	border-bottom: 1px solid #d0dde9;
+	border-radius: 0;
+	box-shadow: none;
+	border-color: #dee3ea;
+}
+.inline-input input[type="text"]:focus,
+.inline-input input[type="password"]:focus,
+input[type="text"].inline-input:focus,
+input[type="password"].inline-input:focus {
+	box-shadow: none;
+	border-color: #5d6a80;
+}
+.inline-input input[type="text"]:hover,
+.inline-input input[type="password"]:hover,
+input[type="text"].inline-input:hover,
+input[type="password"].inline-input:hover {
+	border-color: #959fb0;
+}
+
+input[type="text"]:focus,
+input[type="password"]:focus,
+textarea:focus{	
+	border-color: #A2CEF0;
+	-webkit-box-shadow: inset 0 0px 1px rgba(0, 0, 0, 0.075), 0 0 4px rgba(82, 168, 236, 0.6);
+	   -moz-box-shadow: inset 0 0px 1px rgba(0, 0, 0, 0.075), 0 0 4px rgba(82, 168, 236, 0.6);
+			box-shadow: inset 0 0px 1px rgba(0, 0, 0, 0.075), 0 0 4px rgba(82, 168, 236, 0.6);
+
+	/*-webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 4px rgba(82, 168, 236, 0.6);
+	   -moz-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 4px rgba(82, 168, 236, 0.6);
+			box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 4px rgba(82, 168, 236, 0.6);*/
+}
+input[type="reset"]{
+	text-transform: uppercase;
+	border:0 none;
+	background: none;
+	text-decoration: underline;
+	font-size: 12px;
+}
+input[type="password"]{
+	font-size: 16px;
+	letter-spacing: 1px;
+}
+textarea{
+	background: #fff;
+	border-color: #dee3ea;
+}
+select{
+	margin: 0;
+	height: 24px;
+	border-color: #d0dde9;
+	border-radius: 2px;
+	font-size: 13px;
+}
+input[type="file"] {
+	font-size: 12px;
+	line-height: 12px;
+}
+
+input[disabled], textarea[disabled], input[readonly], textarea[readonly] {
+	color: rgb(177, 177, 177);
+}
+/* native placeholders */
+input:-moz-placeholder,
+textarea:-moz-placeholder {
+  color: #9ba0a5;
+  font-family: "Open Sans", Arial;
+  font-size: 13px;
+}
+
+input:-ms-input-placeholder,
+textarea:-ms-input-placeholder {
+  color: #9ba0a5;
+  font-family: "Open Sans", Arial;
+  font-size: 12px;
+}
+
+input::-webkit-input-placeholder,
+textarea::-webkit-input-placeholder {
+  color: #9ba0a5;
+  font-family: "Open Sans", Arial;
+  font-size: 12px;
+}
+
+
+/* PREPEND & APPEND INPUT */
+.input-append input, 
+.input-prepend input, 
+.input-append .uneditable-input, 
+.input-prepend .uneditable-input {
+	border: 1px solid #d6e2eb;
+}
+.input-append .add-on, 
+.input-prepend .add-on {
+	background-color: #f2f5f9;
+	border: 1px solid #d6e2eb;
+	padding: 4px 8px;
+	font-size: 13px;
+}
+
+/* NAVBAR */
+
+.navbar-inverse {
+	margin-bottom: 0px;
+}
+.navbar-inverse .navbar-inner {
+	border-radius: 0px;
+	border-bottom: 1px solid #191e23;
+
+	background: #2c3742; /* Old browsers */
+	background: -moz-linear-gradient(top,  #2c3742 0%, #28303a 100%); /* FF3.6+ */
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#2c3742), color-stop(100%,#28303a)); /* Chrome,Safari4+ */
+	background: -webkit-linear-gradient(top,  #2c3742 0%,#28303a 100%); /* Chrome10+,Safari5.1+ */
+	background: -o-linear-gradient(top,  #2c3742 0%,#28303a 100%); /* Opera 11.10+ */
+	background: -ms-linear-gradient(top,  #2c3742 0%,#28303a 100%); /* IE10+ */
+	background: linear-gradient(to bottom,  #2c3742 0%,#28303a 100%); /* W3C */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#2c3742', endColorstr='#28303a',GradientType=0 ); /* IE6-9 */
+}
+.navbar-inverse .btn-navbar {
+	float: left;
+	margin-top: 10px;
+}
+.navbar-inverse .brand {
+	color: #ffffff;
+	text-transform: uppercase;
+	font-weight: lighter;
+	padding: 12px 20px 12px;
+}
+.navbar-inverse .brand strong {
+	font-weight: normal;
+}
+.navbar-inverse .nav > li > a {
+	padding: 13px 15px 8px;
+	border-left: 1px solid #101417;
+	color: rgb(214, 214, 214);
+	outline: 0px;
+	height: 25px;
+	transition: background .1s linear;
+	-moz-transition: background .1s linear; /* Firefox 4 */
+	-webkit-transition: background .1s linear; /* Safari and Chrome */
+	-o-transition: background .1s linear;  /* Opera */
+}
+.navbar-inverse .nav > li > a:hover {
+	background: rgba(25, 31, 36,0.6);
+}
+/* TODO: deprecated mobile-menu, ya no se usa, remover despues de migrar todos los htmls al nuevo diseno */
+.navbar-inverse .mobile-menu .nav > li > a {
+	color: #fff;
+	border-left: 0px;
+}
+.dropdown-menu > li > a:hover,
+.dropdown-menu > li > a:focus,
+.dropdown-submenu:hover > a,
+.dropdown-submenu:focus > a {
+	background: rgb(60, 91, 121) !important;
+}
+
+
+/* PAGINATION */
+
+.pagination {
+	margin: 8px 0;
+}
+.pagination ul > li:last-child > a,
+.pagination ul > li:last-child > span,
+.pagination ul > li:first-child > a,
+.pagination ul > li:first-child > span{
+	font-size: 23px;
+	color: #bcc6d3;
+	padding: 1px 9px 3px 9px;
+}
+.pagination ul > li:last-child > a:hover,
+.pagination ul > li:last-child > span:hover,
+.pagination ul > li:first-child > a:hover,
+.pagination ul > li:first-child > span:hover{
+	color: #4f4f4f;
+}
+.pagination ul > li > a, .pagination ul > li > span{
+	border-color: #d0dde9;
+	color: #4f4f4f;
+	font-weight: 600;
+	padding: 2px 12px;
+	box-shadow: 0px 1px 0px 0px #efefef;
+	transition: background-color .1s linear;
+	-moz-transition: background-color .1s linear; /* Firefox 4 */
+	-webkit-transition: background-color .1s linear; /* Safari and Chrome */
+	-o-transition: background-color .1s linear;  /* Opera */
+}
+.pagination ul > li > a.active{
+	color: #3b9ff3;
+}
+.pagination ul > li > a:hover,
+.pagination ul > li > a:focus,
+.pagination ul > .active > a,
+.pagination ul > .active > span {
+	background-color: #f5f5f5;
+}
+
+/* pagination inverse */
+
+.pagination.inverse ul > li:last-child > a,
+.pagination.inverse ul > li:last-child > span,
+.pagination.inverse ul > li:first-child > a,
+.pagination.inverse ul > li:first-child > span{
+	font-size: 23px;
+	color: #fff;
+	padding: 1px 9px 3px 9px;
+}
+.pagination.inverse ul > li:last-child > a:hover,
+.pagination.inverse ul > li:last-child > span:hover,
+.pagination.inverse ul > li:first-child > a:hover,
+.pagination.inverse ul > li:first-child > span:hover{
+	color: #fff;
+}
+.pagination.inverse ul > li > a, .pagination.inverse ul > li > span{
+	border-top-color: #333e4a;
+	border-bottom-color: #333e4a;
+	border-right-color: #566676;
+	border-left: 0px;
+	color: rgb(241, 241, 241);
+	font-weight: 600;
+	padding: 2px 12px;
+	background: #333e4a;
+	transition: background-color .1s linear;
+	-moz-transition: background-color .1s linear; /* Firefox 4 */
+	-webkit-transition: background-color .1s linear; /* Safari and Chrome */
+	-o-transition: background-color .1s linear;  /* Opera */
+}
+.pagination.inverse ul > li > a.active{
+	color: #3b9ff3;
+	background-color: #212b36;
+	border-right-color: #212b36;
+	margin-left: -1px;
+}
+.pagination.inverse ul > li > a:hover,
+.pagination.inverse ul > li > a:focus,
+.pagination.inverse ul > .active > a,
+.pagination.inverse ul > .active > span {
+	background-color: #212b36;
+}
+
+
+/* TABLES*/
+
+.table thead{
+	border-top:1px solid #dee3ea;
+}
+.table-hover tbody tr:hover > td,
+.table-hover tbody tr:hover > th {
+  background-color: #f5fafc;
+}
+.table th.sortable {
+	cursor: pointer;
+}
+.table th.sortable:hover {
+	text-decoration: underline;
+}
+.table thead th{
+	font-weight: bold;
+	position: relative;
+	padding-bottom: 20px;
+	padding-top: 5px;
+	text-transform: uppercase;
+	font-size: 11px;
+	vertical-align: top;
+}
+.table td{
+	color: #526273;
+	border-top-color: #edf2f7;
+	vertical-align: middle;
+}
+.table th.align-right,
+.table td.align-right {
+	text-align: right;
+	padding-right: 10px !important;
+}
+table tr.first td{
+	border-top: 0 none;
+}
+table th span.line{
+	position: absolute;
+	top: 0;
+	left: -8px;
+	border-left: 1px solid #dee3ea;
+	height: 10px;
+}
+
+

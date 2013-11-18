@@ -1,0 +1,142 @@
+.settings-wrapper {
+	.wrapp{
+		margin-top: 100px;
+	}
+	.avatar-box {
+		img {
+			border: 3px solid #c3cddb;
+			margin-bottom: 28px;
+		}
+		p {
+			font-weight: 700;
+			margin-bottom: 12px;
+		}
+		input[type="file"] {
+			font-size: 11px;
+		}
+	}
+	.personal-info {
+		border-left: 1px solid #edeff1;
+		box-shadow: inset 3px 0px 4px -1px #fafafa;
+		.alert {
+			margin-bottom: 50px;
+			display: inline-block;
+			font-size: 13px;
+			i {
+				float: left;
+			}
+		}
+		h5.personal-title {
+			font-size: 22px;
+			margin: 0 0 50px 50px;
+			color: #696d73;
+			font-style: italic;
+		}
+		form {
+			margin-left: 50px;
+		}
+		.field-box {	
+			margin-bottom: 20px;
+		}
+		label {
+			display: inline-block;
+			float: left;
+			font-weight: 600;
+			font-size: 13px;
+			cursor: auto;
+			width:20%;
+			margin-right: 10px;
+		}
+		.input[type="text"] {
+			font-weight: 600;
+		}
+		.ui-select {
+			width: 50%;
+			margin-bottom: 10px;
+		}
+		.actions {
+			margin-bottom: 25px;
+			margin-left: 0;
+			margin-top: 30px;
+			float: left;
+			text-align: right;
+			span {
+				text-transform: uppercase;
+				color: #7e91aa;
+				font-weight: 600;
+				display: inline-block;
+				vertical-align: middle;
+				margin: 0 2px 0 8px;
+			}
+		}
+		input.reset {
+			color: #7e91aa;
+			font-weight: 500;
+		}
+	}
+}
+
+/* responsive */
+
+@media (max-width: 480px) {
+}
+
+@media (max-width: 767px) {
+	.settings-wrapper {
+		#pad-wrapper{
+			padding: 0px 20px;
+		}
+		.avatar-box{
+			text-align: center;
+		}
+		.personal-info {
+			border:0 none;
+			box-shadow: none;
+			margin-top: 40px;
+			h5.personal-title {
+				margin-left: 0;
+			}
+			.field-box {
+				margin-left: 0;
+			}
+			.ui-select {
+				width: 90%;
+			}
+			label {
+				width: 100%;
+			}
+			.actions {
+				text-align: center;
+			}
+			form {
+				margin-left: 0;
+				padding: 0px 10px 0px 10px;
+			}
+		}		
+	}
+}
+
+@media (min-width: 768px) and (max-width: 979px) { 
+	.settings-wrapper .personal-info .ui-select{
+		width: 77%;
+	}
+}
+@media (min-width: 768px){ 
+	.settings-wrapper .personal-info .alert {
+		margin-left: 50px;
+	}
+}
+@media (min-width: 980px) {
+	.settings-wrapper .personal-info .ui-select{
+		width: 60%;
+	}
+}
+
+@media (max-width: 979px) {
+}
+
+@media (min-width: 1200px) {
+}
+
+
+

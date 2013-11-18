@@ -1,0 +1,25 @@
+.icons-wrapper {
+	margin-bottom: 60px;
+	h4 {
+		margin-bottom: 40px !important;
+	}
+	ul {
+		list-style: none;
+		margin: 0;
+		li {
+			font-size: 13px;
+			line-height: 32px;
+			margin-right: 10px;
+		}
+		i {
+			width: 32px;
+			font-size: 16px;
+			margin-right: 13px;
+		}
+	}
+}
+.icons-wrapper-border{
+	border-top: 1px solid #edeff1;
+	padding-top: 60px;
+	box-shadow: 0px 4px 7px -5px rgba(68, 68, 68, 0.14) inset;
+}

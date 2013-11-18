@@ -282,6 +282,16 @@
 .datepicker tfoot tr:first-child th:hover {
   background: #eeeeee;
 }
+.datepicker .cw {
+  font-size: 10px;
+  width: 12px;
+  padding: 0 2px 0 5px;
+  vertical-align: middle;
+}
+.datepicker thead tr:first-child th.cw {
+  cursor: default;
+  background-color: transparent;
+}
 .input-append.date .add-on i,
 .input-prepend.date .add-on i {
   display: block;

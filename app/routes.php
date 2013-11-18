@@ -72,15 +72,18 @@ Route::group(array('prefix' => 'admin'), function()
 
 
 	# Licenses
-		Route::group(array('prefix' => 'licenses'), function()
-		{
-			Route::get('/', array('as' => 'licenses', 'uses' => 'Controllers\Admin\LicensesController@getIndex'));
-			Route::get('create', array('as' => 'create/licenses', 'uses' => 'Controllers\Admin\LicensesController@getCreate'));
-			Route::post('create', 'Controllers\Admin\LicensesController@postCreate');
-			Route::get('{licenseId}/edit', array('as' => 'update/license', 'uses' => 'Controllers\Admin\LicensesController@getEdit'));
-			Route::post('{licenseId}/edit', 'Controllers\Admin\LicensesController@postEdit');
-			Route::get('{licenseId}/delete', array('as' => 'delete/license', 'uses' => 'Controllers\Admin\LicensesController@getDelete'));
-		});
+	Route::group(array('prefix' => 'licenses'), function()
+	{
+		Route::get('/', array('as' => 'licenses', 'uses' => 'Controllers\Admin\LicensesController@getIndex'));
+		Route::get('create', array('as' => 'create/licenses', 'uses' => 'Controllers\Admin\LicensesController@getCreate'));
+		Route::post('create', 'Controllers\Admin\LicensesController@postCreate');
+		Route::get('{licenseId}/edit', array('as' => 'update/license', 'uses' => 'Controllers\Admin\LicensesController@getEdit'));
+		Route::post('{licenseId}/edit', 'Controllers\Admin\LicensesController@postEdit');
+		Route::get('{licenseId}/delete', array('as' => 'delete/license', 'uses' => 'Controllers\Admin\LicensesController@getDelete'));
+		Route::get('{licenseId}/checkout', array('as' => 'checkout/license', 'uses' => 'Controllers\Admin\LicensesController@getCheckout'));
+		Route::post('{licenseId}/checkout', 'Controllers\Admin\LicensesController@postCheckout');
+		Route::get('{licenseId}/checkin', array('as' => 'checkin/license', 'uses' => 'Controllers\Admin\LicensesController@postCheckin'));
+	});
 
 
 	// default admin screen until we get a fancy dashboard up
@@ -148,6 +151,7 @@ Route::group(array('prefix' => 'admin'), function()
 		Route::post('{userId}/edit', 'Controllers\Admin\UsersController@postEdit');
 		Route::get('{userId}/delete', array('as' => 'delete/user', 'uses' => 'Controllers\Admin\UsersController@getDelete'));
 		Route::get('{userId}/restore', array('as' => 'restore/user', 'uses' => 'Controllers\Admin\UsersController@getRestore'));
+		Route::get('{userId}/view', array('as' => 'view/user', 'uses' => 'Controllers\Admin\UsersController@getView'));
 	});
 
 	# Group Management

@@ -38,8 +38,8 @@ class AssetsController extends AdminController {
 	public function getCreate()
 	{
 		// Grab the dropdown list of models
-		$model_list = array('' => 'Select') + Model::lists('name', 'id');
-		$depreciation_list = array('' => 'Do Not Depreciate') + Depreciation::lists('name', 'id');
+		$model_list = array('' => '') + Model::lists('name', 'id');
+		$depreciation_list = array('' => '') + Depreciation::lists('name', 'id');
 
 		return View::make('backend/assets/edit')->with('model_list',$model_list)->with('depreciation_list',$depreciation_list)->with('asset',new Asset);
 
@@ -114,10 +114,10 @@ class AssetsController extends AdminController {
 		}
 
 		// Grab the dropdown list of models
-		$model_list = array('' => 'Select') + Model::lists('name', 'id');
+		$model_list = array('' => '') + Model::lists('name', 'id');
 
 		// get depreciation list
-		$depreciation_list = array('' => 'Do Not Depreciate') + Depreciation::lists('name', 'id');
+		$depreciation_list = array('' => '') + Depreciation::lists('name', 'id');
 		return View::make('backend/assets/edit', compact('asset'))->with('model_list',$model_list)->with('depreciation_list',$depreciation_list);
 	}
 
@@ -137,13 +137,26 @@ class AssetsController extends AdminController {
 			return Redirect::to('admin')->with('error', Lang::get('admin/assets/message.does_not_exist'));
 		}
 
-		// get the POST data
-		$new = Input::all();
 
+		// Declare the rules for the form validation
+		$rules = array(
+		'name'   => 'required|min:3',
+		'asset_tag'   => 'required|min:3',
+		'model_id'   => 'required',
+		'serial'   => 'required|min:3',
+    	);
 
-		// attempt validation
-		if ($asset->validate($new))
+		// Create a new validator instance from our validation rules
+		$validator = Validator::make(Input::all(), $rules);
+
+		// If validation fails, we'll exit the operation now.
+		if ($validator->fails())
 		{
+			// Ooops.. something went wrong
+			return Redirect::back()->withInput()->withErrors($validator);
+		}
+
+
 			// Update the asset data
 			$asset->name            		= e(Input::get('name'));
 			$asset->serial            		= e(Input::get('serial'));
@@ -155,21 +168,12 @@ class AssetsController extends AdminController {
 			$asset->notes            		= e(Input::get('notes'));
 			$asset->physical            		= '1';
 
-			// Was the asset created?
+			// Was the asset updated?
 			if($asset->save())
 			{
-				// Redirect to the asset listing page
+				// Redirect to the new asset page
 				return Redirect::to("admin")->with('success', Lang::get('admin/assets/message.update.success'));
 			}
-
-		}
-		else
-		{
-
-			// Did not validate
-			$errors = $asset->errors();
-			return Redirect::back()->withInput()->withErrors($errors);
-		}
 
 
 		// Redirect to the asset management page with error
@@ -231,18 +235,13 @@ class AssetsController extends AdminController {
 			return Redirect::to('admin')->with('error', Lang::get('admin/assets/message.not_found'));
 		}
 
-		$user_id = e(Input::get('user_id'));
+		$assigned_to = e(Input::get('assigned_to'));
 
-		// Check if the asset exists
-		if (is_null($user = User::find($user_id)))
-		{
-			// Redirect to the asset management page with error
-			return Redirect::to('admin')->with('error', Lang::get('admin/assets/message.user_does_not_exist'));
-		}
+
 
 		// Declare the rules for the form validation
 		$rules = array(
-			'user_id'   => 'required'
+			'assigned_to'   => 'required|min:1'
 		);
 
 		// Create a new validator instance from our validation rules
@@ -255,8 +254,16 @@ class AssetsController extends AdminController {
 			return Redirect::back()->withInput()->withErrors($validator);
 		}
 
+
+		// Check if the user exists
+		if (is_null($assigned_to = User::find($assigned_to)))
+		{
+			// Redirect to the asset management page with error
+			return Redirect::to('admin')->with('error', Lang::get('admin/assets/message.user_does_not_exist'));
+		}
+
 		// Update the asset data
-		$asset->assigned_to            		= e(Input::get('user_id'));
+		$asset->assigned_to            		= e(Input::get('assigned_to'));
 
 
 		// Was the asset updated?
@@ -271,7 +278,7 @@ class AssetsController extends AdminController {
 	}
 
 	/**
-	* Check out the asset to a person
+	* Check in the item so that it can be checked out again to someone else
 	**/
 	public function postCheckin($assetId)
 	{
@@ -289,12 +296,16 @@ class AssetsController extends AdminController {
 		if($asset->save())
 		{
 			// Redirect to the new asset page
-			return Redirect::to("admin")->with('success', Lang::get('admin/assets/message.checkout.success'));
+			return Redirect::to("admin")->with('success', Lang::get('admin/assets/message.checkin.success'));
 		}
 
 		// Redirect to the asset management page with error
-		return Redirect::to("admin")->with('error', Lang::get('admin/assets/message.checkout.error'));
+		return Redirect::to("admin")->with('error', Lang::get('admin/assets/message.checkin.error'));
 	}
+
+
+
+
 
 
 }

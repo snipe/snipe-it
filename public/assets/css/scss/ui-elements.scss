@@ -1,0 +1,162 @@
+#pad-wrapper {
+	.title {
+		margin-bottom: 30px;
+	}
+	.section {
+		margin-bottom: 40px;
+		
+		a.btn-flat,
+		a.btn-glow {
+			margin-right: 5px;
+		}
+		&.btns {
+			a.btn-flat,
+			a.btn-glow {
+				margin-bottom: 12px;
+			}
+		}
+		code {
+			margin-right: 25px;
+		}
+		.btn-group i {
+			color: rgb(125, 136, 146);
+		}
+		.btn-group.audio i {
+			color: #96a9b8;
+			font-size: 12px;
+		}
+	}
+	.ctrls {
+		margin-bottom: 20px;
+		.btn-glow {
+			margin-right: 8px;
+		}
+		.btn-flat.icon {
+			margin-right: 8px;
+		}
+		.btn-group.settings {
+			margin-left: 20px;
+		}
+		.btn-group.settings i {
+			font-size: 13px;
+			color: #444;
+		}
+		.slider-frame {
+			margin-right: 10px;
+		}
+		.pagination {
+			margin: 5px 0px;
+			&.inverse {
+				margin-left: 25px;
+			}
+		}
+		h4 {
+			margin: 20px 0px 20px 0px;
+		}
+	}
+	.sliders .slider {
+		margin-bottom: 20px;
+	}
+
+	/* separator */
+	.separator {
+		border-top: 1px solid #edeff1;
+		margin-top: 100px;
+		padding-top: 45px;
+		box-shadow: inset 0px 3px 4px -1px #fafafa;
+	}
+
+	/* pop dialogs specific styles */
+	.section.dialogs h4 {
+		margin-bottom: 30px;
+	}
+}
+
+
+
+/* for menu dialog sample */
+.pop-dialog {
+	.menu {
+		width: 200px;
+		margin: 5px -10px 0px -10px;
+		.item {
+			display: block;
+			padding: 5px 0px 5px 20px;
+			font-weight: 600;
+			color: #333;
+			text-decoration: none;
+			margin-bottom: 5px;
+
+			&:hover {
+				background-color: #30a1ec;
+				color: #fff;
+			}
+		}
+		.footer {
+			border-top: 1px solid #e6e8e9;
+			background-color: #eff4f7;
+			margin: 15px 0px -10px 0px;
+			border-radius: 0px 0px 5px 5px;
+			padding: 12px 20px;
+			.logout {
+				font-weight: 600;
+				color: #7d91a8;
+			}
+		}
+	}
+}
+
+
+/* styles for settings dialog sample */
+.pop-dialog.full {
+	width: 100%;
+}
+.pop-dialog .settings {
+	width: auto;
+	margin: 5px -10px 0px -10px;
+	position: relative;
+	.close-icon {
+		text-decoration: none;
+		position: absolute;
+		top: -18px;
+		right: 10px;
+	}
+	.icon-remove-sign {
+		font-size: 15px;
+		color: #95a8b7;
+		cursor: pointer;
+	}
+	.items {
+		margin-top: 15px;
+		.item {
+			display: block;
+			padding: 7px 0px 7px 20px;
+			color: #333;
+			font-size: 13px;
+			font-weight: 600;
+			border-top: 1px solid #e6e8e9;
+			&:hover {
+				color: rgb(97, 135, 192);
+			}
+			&:first-child {
+				border-top: 0px;
+			}
+			.check {
+				float: right;
+				margin-right: 30px;
+			}
+			.icon-reorder {
+				color: #d9e4ee;
+				font-size: 18px;
+				margin-right: 13px;
+			}
+		}
+	}
+}
+
+@media (min-width: 768px) and (max-width: 979px) {
+	#pad-wrapper .section.dialogs > .span4 {
+		width: 100%;
+		margin-bottom: 30px;
+	}	
+}

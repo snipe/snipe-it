@@ -1,0 +1,81 @@
+.form-page .form-wrapper {
+  margin-bottom: 40px;
+}
+.form-page .form-wrapper .field-box {
+  margin-bottom: 30px;
+  margin-left: 0;
+  float: left;
+  width: 100%;
+}
+.form-page .form-wrapper label {
+  display: inline-block;
+  float: left;
+  font-weight: 600;
+  cursor: auto;
+  font-size: 12px;
+  width: 140px;
+  text-align: left;
+}
+.form-page .form-wrapper input:-moz-placeholder {
+  font-style: italic;
+}
+.form-page .form-wrapper input:-ms-input-placeholder {
+  font-style: italic;
+}
+.form-page .form-wrapper input::-webkit-input-placeholder {
+  font-style: italic;
+}
+.form-page .form-wrapper .predefined {
+  position: relative;
+}
+.form-page .form-wrapper .predefined input {
+  padding-left: 40px;
+}
+.form-page .form-wrapper .predefined .value {
+  position: absolute;
+  top: 6px;
+}
+.form-page .form-wrapper label.checkbox {
+  cursor: pointer;
+  color: #555;
+}
+.form-page .form-wrapper label.radio {
+  position: relative;
+  left: -20px;
+  width: 100%;
+  cursor: pointer;
+  color: #555;
+}
+.form-page .form-wrapper label.checkbox,
+.form-page .form-wrapper label.radio {
+  padding-left: 0px;
+  font-weight: lighter;
+}
+.form-page .form-wrapper label.checkbox input[type="checkbox"],
+.form-page .form-wrapper label.checkbox input[type="radio"],
+.form-page .form-wrapper label.radio input[type="checkbox"],
+.form-page .form-wrapper label.radio input[type="radio"] {
+  font-size: large;
+  margin-left: 0px;
+}
+.form-page .form-wrapper .wysi-column {
+  float: left;
+  width: 75%;
+}
+.form-page .form-wrapper .column.pull-right label {
+  display: block;
+  width: 100%;
+}
+.form-page .form-wrapper .column.pull-right .ui-select {
+  width: 250px;
+}
+.form-page .form-wrapper .select2-container {
+  margin-left: 0px;
+}
+
+/*Responsive*/
+@media (max-width: 767px) {
+  .form-page .form-wrapper label.radio {
+    left: 0px;
+  }
+}

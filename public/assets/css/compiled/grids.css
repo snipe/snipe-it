@@ -1,0 +1,20 @@
+.grid-wrapper {
+  margin-bottom: 60px;
+}
+.grid-wrapper .head {
+  margin-bottom: 30px;
+}
+
+.show-grid {
+  margin-top: 10px;
+  margin-bottom: 20px;
+}
+.show-grid [class*="span"] {
+  background-color: #eee;
+  text-align: center;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
+  min-height: 40px;
+  line-height: 40px;
+}

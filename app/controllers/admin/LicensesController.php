@@ -4,6 +4,8 @@ use AdminController;
 use Input;
 use Lang;
 use License;
+use Asset;
+use User;
 use DB;
 use Redirect;
 use Sentry;
@@ -88,7 +90,7 @@ class LicensesController extends AdminController {
 			return Redirect::back()->withInput()->withErrors($errors);
 		}
 
-		// Redirect to the category create page
+		// Redirect to the license create page
 		return Redirect::to('admin/licenses/edit')->with('error', Lang::get('admin/licenses/message.create.error'))->with('license',new License);
 
 	}
@@ -189,6 +191,108 @@ class LicensesController extends AdminController {
 
 		// Redirect to the licenses management page
 		return Redirect::to('admin/licenses')->with('success', Lang::get('admin/licenses/message.delete.success'));
+	}
+
+
+	/**
+	* Check out the asset to a person
+	**/
+	public function getCheckout($assetId)
+	{
+		// Check if the asset exists
+		if (is_null($license = License::find($assetId)))
+		{
+			// Redirect to the asset management page with error
+			return Redirect::to('admin/licenses')->with('error', Lang::get('admin/assets/message.not_found'));
+		}
+
+		// Get the dropdown of users and then pass it to the checkout view
+		$users_list = array('' => 'Select a User') + DB::table('users')->select(DB::raw('concat (first_name," ",last_name) as full_name, id'))->lists('full_name', 'id');
+
+		//print_r($users);
+		return View::make('backend/licenses/checkout', compact('license'))->with('users_list',$users_list);
+
+	}
+
+
+
+		/**
+	* Check out the asset to a person
+	**/
+	public function postCheckout($assetId)
+	{
+		// Check if the asset exists
+		if (is_null($license = License::find($assetId)))
+		{
+			// Redirect to the asset management page with error
+			return Redirect::to('admin/licenses')->with('error', Lang::get('admin/assets/message.not_found'));
+		}
+
+		$assigned_to = e(Input::get('assigned_to'));
+
+		// Declare the rules for the form validation
+		$rules = array(
+			'assigned_to'   => 'required|min:1'
+		);
+
+		// Create a new validator instance from our validation rules
+		$validator = Validator::make(Input::all(), $rules);
+
+		// If validation fails, we'll exit the operation now.
+		if ($validator->fails())
+		{
+			// Ooops.. something went wrong
+			return Redirect::back()->withInput()->withErrors($validator);
+		}
+
+
+		// Check if the user exists
+		if (is_null($assigned_to = User::find($assigned_to)))
+		{
+			// Redirect to the asset management page with error
+			return Redirect::to('admin/licenses')->with('error', Lang::get('admin/licenses/message.user_does_not_exist'));
+		}
+
+
+		// Update the asset data
+		$license->assigned_to            		= e(Input::get('assigned_to'));
+
+
+		// Was the asset updated?
+		if($license->save())
+		{
+			// Redirect to the new asset page
+			return Redirect::to("admin/licenses")->with('success', Lang::get('admin/licenses/message.checkout.success'));
+		}
+
+		// Redirect to the asset management page with error
+		return Redirect::to('admin/licenses/$assetId/checkout')->with('error', Lang::get('admin/licenses/message.create.error'))->with('license',new License);
+	}
+
+	/**
+	* Check in the item so that it can be checked out again to someone else
+	**/
+	public function postCheckin($assetId)
+	{
+		// Check if the asset exists
+		if (is_null($license = License::find($assetId)))
+		{
+			// Redirect to the asset management page with error
+			return Redirect::to('admin/licenses')->with('error', Lang::get('admin/assets/message.not_found'));
+		}
+
+		// Update the asset data
+		$license->assigned_to            		= '';
+
+		// Was the asset updated?
+		if($license->save())
+		{
+			// Redirect to the new asset page
+			return Redirect::to("admin/licenses")->with('success', Lang::get('admin/assets/message.checkout.success'));
+		}
+
+		// Redirect to the asset management page with error
+		return Redirect::to("admin/licenses")->with('error', Lang::get('admin/assets/message.checkout.error'));
 	}
 
 

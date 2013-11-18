@@ -13,7 +13,7 @@ Group Management ::
 		Group Management
 
 		<div class="pull-right">
-			<a href="{{ route('create/group') }}" class="btn btn-small btn-info"><i class="icon-plus-sign icon-white"></i> Create</a>
+			<a href="{{ route('create/group') }}" class="btn-flat success"><i class="icon-plus-sign icon-white"></i> Create New</a>
 		</div>
 	</h3>
 </div>
@@ -22,7 +22,8 @@ Group Management ::
 {{ $groups->links() }}
 @endif
 
-<table class="table table-bordered table-striped table-hover">
+<div class="row-fluid table">
+<table class="table table-hover">
 	<thead>
 		<tr>
 			<th class="span1">@lang('admin/groups/table.id')</th>
@@ -41,8 +42,8 @@ Group Management ::
 			<td>{{ $group->users()->count() }}</td>
 			<td>{{ $group->created_at->diffForHumans() }}</td>
 			<td>
-				<a href="{{ route('update/group', $group->id) }}" class="btn btn-mini">@lang('button.edit')</a>
-				<a href="{{ route('delete/group', $group->id) }}" class="btn btn-mini btn-danger">@lang('button.delete')</a>
+				<a href="{{ route('update/group', $group->id) }}" class="btn-flat white">@lang('button.edit')</a>
+				<a href="{{ route('delete/group', $group->id) }}" class="btn-flat danger">@lang('button.delete')</a>
 			</td>
 		</tr>
 		@endforeach
@@ -53,6 +54,7 @@ Group Management ::
 		@endif
 	</tbody>
 </table>
+</div>
 
 @if (count($groups) > 10)
 {{ $groups->links() }}

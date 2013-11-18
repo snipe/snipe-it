@@ -8,8 +8,10 @@ use Cartalyst\Sentry\Users\UserNotFoundException;
 use Config;
 use DB;
 use Input;
+use User;
 use Asset;
 use Lang;
+use Location;
 use Redirect;
 use Sentry;
 use Validator;
@@ -88,8 +90,10 @@ class UsersController extends AdminController {
 		$selectedPermissions = Input::old('permissions', array('superuser' => -1));
 		$this->encodePermissions($selectedPermissions);
 
+		$location_list = array('' => '') + Location::lists('name', 'id');
+
 		// Show the page
-		return View::make('backend/users/create', compact('groups', 'selectedGroups', 'permissions', 'selectedPermissions'));
+		return View::make('backend/users/create', compact('groups', 'selectedGroups', 'permissions', 'selectedPermissions'))->with('location_list',$location_list);
 	}
 
 	/**
@@ -187,6 +191,11 @@ class UsersController extends AdminController {
 			// Get all the available permissions
 			$permissions = Config::get('permissions');
 			$this->encodeAllPermissions($permissions);
+
+			$location_list = array('' => '') + Location::lists('name', 'id');
+
+
+
 		}
 		catch (UserNotFoundException $e)
 		{
@@ -198,7 +207,7 @@ class UsersController extends AdminController {
 		}
 
 		// Show the page
-		return View::make('backend/users/edit', compact('user', 'groups', 'userGroups', 'permissions', 'userPermissions'));
+		return View::make('backend/users/edit', compact('user', 'groups', 'userGroups', 'permissions', 'userPermissions'))->with('location_list',$location_list);
 	}
 
 	/**
@@ -259,6 +268,10 @@ class UsersController extends AdminController {
 			$user->email       = Input::get('email');
 			$user->activated   = Input::get('activated', $user->activated);
 			$user->permissions = Input::get('permissions');
+			$user->jobtitle = Input::get('jobtitle');
+			$user->phone = Input::get('phone');
+			$user->location_id = Input::get('location_id');
+
 
 			// Do we want to update the user password?
 			if ($password)
@@ -395,5 +408,17 @@ class UsersController extends AdminController {
 			return Redirect::route('users')->with('error', $error);
 		}
 	}
+
+
+
+	public function getView($userId = null)
+	{
+		$user = User::find($userId);
+		// Show the page
+		return View::make('backend/users/view', compact('user'));
+	}
+
+
+
 
 }

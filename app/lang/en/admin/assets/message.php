@@ -23,6 +23,12 @@ return array(
 		'error'   => 'Asset was not checked out, please try again',
 		'success' => 'Asset checked out successfully.',
 		'user_does_not_exist' => 'That user is invalid. Please try again.'
+	),
+
+	'checkin' => array(
+		'error'   => 'Asset was not checked in, please try again',
+		'success' => 'Asset checked in successfully.',
+		'user_does_not_exist' => 'That user is invalid. Please try again.'
 	)
 
 );

@@ -1,0 +1,152 @@
+#pad-wrapper {
+  /* separator */
+  /* pop dialogs specific styles */
+}
+#pad-wrapper .title {
+  margin-bottom: 30px;
+}
+#pad-wrapper .section {
+  margin-bottom: 40px;
+}
+#pad-wrapper .section a.btn-flat,
+#pad-wrapper .section a.btn-glow {
+  margin-right: 5px;
+}
+#pad-wrapper .section.btns a.btn-flat,
+#pad-wrapper .section.btns a.btn-glow {
+  margin-bottom: 12px;
+}
+#pad-wrapper .section code {
+  margin-right: 25px;
+}
+#pad-wrapper .section .btn-group i {
+  color: #7d8892;
+}
+#pad-wrapper .section .btn-group.audio i {
+  color: #96a9b8;
+  font-size: 12px;
+}
+#pad-wrapper .ctrls {
+  margin-bottom: 20px;
+}
+#pad-wrapper .ctrls .btn-glow {
+  margin-right: 8px;
+}
+#pad-wrapper .ctrls .btn-flat.icon {
+  margin-right: 8px;
+}
+#pad-wrapper .ctrls .btn-group.settings {
+  margin-left: 20px;
+}
+#pad-wrapper .ctrls .btn-group.settings i {
+  font-size: 13px;
+  color: #444;
+}
+#pad-wrapper .ctrls .slider-frame {
+  margin-right: 10px;
+}
+#pad-wrapper .ctrls .pagination {
+  margin: 5px 0px;
+}
+#pad-wrapper .ctrls .pagination.inverse {
+  margin-left: 25px;
+}
+#pad-wrapper .ctrls h4 {
+  margin: 20px 0px 20px 0px;
+}
+#pad-wrapper .sliders .slider {
+  margin-bottom: 20px;
+}
+#pad-wrapper .separator {
+  border-top: 1px solid #edeff1;
+  margin-top: 100px;
+  padding-top: 45px;
+  box-shadow: inset 0px 3px 4px -1px #fafafa;
+}
+#pad-wrapper .section.dialogs h4 {
+  margin-bottom: 30px;
+}
+
+/* for menu dialog sample */
+.pop-dialog .menu {
+  width: 200px;
+  margin: 5px -10px 0px -10px;
+}
+.pop-dialog .menu .item {
+  display: block;
+  padding: 5px 0px 5px 20px;
+  font-weight: 600;
+  color: #333;
+  text-decoration: none;
+  margin-bottom: 5px;
+}
+.pop-dialog .menu .item:hover {
+  background-color: #30a1ec;
+  color: #fff;
+}
+.pop-dialog .menu .footer {
+  border-top: 1px solid #e6e8e9;
+  background-color: #eff4f7;
+  margin: 15px 0px -10px 0px;
+  border-radius: 0px 0px 5px 5px;
+  padding: 12px 20px;
+}
+.pop-dialog .menu .footer .logout {
+  font-weight: 600;
+  color: #7d91a8;
+}
+
+/* styles for settings dialog sample */
+.pop-dialog.full {
+  width: 100%;
+}
+
+.pop-dialog .settings {
+  width: auto;
+  margin: 5px -10px 0px -10px;
+  position: relative;
+}
+.pop-dialog .settings .close-icon {
+  text-decoration: none;
+  position: absolute;
+  top: -18px;
+  right: 10px;
+}
+.pop-dialog .settings .icon-remove-sign {
+  font-size: 15px;
+  color: #95a8b7;
+  cursor: pointer;
+}
+.pop-dialog .settings .items {
+  margin-top: 15px;
+}
+.pop-dialog .settings .items .item {
+  display: block;
+  padding: 7px 0px 7px 20px;
+  color: #333;
+  font-size: 13px;
+  font-weight: 600;
+  border-top: 1px solid #e6e8e9;
+}
+.pop-dialog .settings .items .item:hover {
+  color: #6187c0;
+}
+.pop-dialog .settings .items .item:first-child {
+  border-top: 0px;
+}
+.pop-dialog .settings .items .item .check {
+  float: right;
+  margin-right: 30px;
+}
+.pop-dialog .settings .items .item .icon-reorder {
+  color: #d9e4ee;
+  font-size: 18px;
+  margin-right: 13px;
+}
+
+@media (min-width: 768px) and (max-width: 979px) {
+  #pad-wrapper .section.dialogs > .span4 {
+    width: 100%;
+    margin-bottom: 30px;
+  }
+}

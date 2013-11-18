@@ -13,7 +13,7 @@ Create a User ::
 		Create a New User
 
 		<div class="pull-right">
-			<a href="{{ route('users') }}" class="btn btn-small btn-inverse"><i class="icon-circle-arrow-left icon-white"></i> Back</a>
+			<a href="{{ route('users') }}" class="btn-flat gray"><i class="icon-circle-arrow-left icon-white"></i> Back</a>
 		</div>
 	</h3>
 </div>
@@ -47,6 +47,35 @@ Create a User ::
 				<div class="controls">
 					<input type="text" name="last_name" id="last_name" value="{{ Input::old('last_name') }}" />
 					{{ $errors->first('last_name', '<span class="help-inline">:message</span>') }}
+				</div>
+			</div>
+
+			<!-- Jobtitle -->
+			<div class="control-group {{ $errors->has('jobtitle') ? 'error' : '' }}">
+				<label class="control-label" for="jobtitle">Job Title</label>
+				<div class="controls">
+					<input type="text" name="jobtitle" id="jobtitle" value="{{ Input::old('jobtitle') }}" />
+					{{ $errors->first('jobtitle', '<span class="help-inline">:message</span>') }}
+				</div>
+			</div>
+
+			<!-- Location -->
+			<div class="control-group {{ $errors->has('phone') ? 'error' : '' }}">
+				<label class="control-label" for="location_id">Location</label>
+				<div class="controls">
+					<div class="field-box">
+					{{ Form::select('location_id', $location_list, Input::old('location_id'), array('class'=>'select2', 'style'=>'width:250px')) }}
+					{{ $errors->first('location_id', '<span class="help-inline">:message</span>') }}
+					</div>
+				</div>
+			</div>
+
+			<!-- Phone -->
+			<div class="control-group {{ $errors->has('phone') ? 'error' : '' }}">
+				<label class="control-label" for="jobtitle">Phone</label>
+				<div class="controls">
+					<input type="text" name="phone" id="phone" value="{{ Input::old('phone') }}" />
+					{{ $errors->first('phone', '<span class="help-inline">:message</span>') }}
 				</div>
 			</div>
 
@@ -156,10 +185,7 @@ Create a User ::
 	<div class="control-group">
 		<div class="controls">
 			<a class="btn btn-link" href="{{ route('users') }}">Cancel</a>
-
-			<button type="reset" class="btn">Reset</button>
-
-			<button type="submit" class="btn btn-success">Create User</button>
+			<button type="submit" class="btn-flat success"><i class="icon-ok icon-white"></i> Create User</button>
 		</div>
 	</div>
 </form>

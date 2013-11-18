@@ -53,11 +53,11 @@
 			</div>
 
 			<!-- User -->
-			<div class="control-group {{ $errors->has('user_id') ? 'error' : '' }}">
+			<div class="control-group {{ $errors->has('assigned_to') ? 'error' : '' }}">
 				<label class="control-label" for="parent">Checkout to</label>
 				<div class="controls">
-					{{ Form::select('user_id', $users_list , Input::old('user_id', $asset->assigned_to)) }}
-					{{ $errors->first('user_id', '<span class="help-inline">:message</span>') }}
+					{{ Form::select('assigned_to', $users_list , Input::old('assigned_to', $asset->assigned_to)) }}
+					{{ $errors->first('assigned_to', '<span class="help-inline">:message</span>') }}
 				</div>
 			</div>
 
@@ -67,7 +67,7 @@
 	<div class="control-group">
 		<div class="controls">
 			<a class="btn btn-link" href="{{ route('assets') }}">@lang('general.cancel')</a>
-			<button type="submit" class="btn btn-success">@lang('general.checkout')</button>
+			<button type="submit" class="btn-flat success"><i class="icon-ok icon-white"></i>@lang('general.checkout')</button>
 		</div>
 	</div>
 </form>

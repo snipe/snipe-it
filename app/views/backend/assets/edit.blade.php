@@ -21,7 +21,7 @@
 	@endif
 
 		<div class="pull-right">
-			<a href="{{ route('assets') }}" class="btn btn-small btn-inverse"><i class="icon-circle-arrow-left icon-white"></i> Back</a>
+			<a href="{{ route('assets') }}" class="btn-flat gray"><i class="icon-circle-arrow-left icon-white"></i> Back</a>
 		</div>
 	</h3>
 </div>
@@ -78,17 +78,18 @@
 			<div class="control-group {{ $errors->has('model_id') ? 'error' : '' }}">
 				<label class="control-label" for="parent">Model</label>
 				<div class="controls">
-					{{ Form::select('model_id', $model_list , Input::old('model_id', $asset->model_id)) }}
+					{{ Form::select('model_id', $model_list , Input::old('model_id', $asset->model_id), array('class'=>'select2', 'style'=>'min-width:350px')) }}
 					{{ $errors->first('model_id', '<span class="help-inline">:message</span>') }}
 				</div>
 			</div>
 
 			<!-- Purchase Date -->
-			<div class="control-group {{ $errors->has('purchase_date') ? 'error' : '' }}">
+			<div class="control-group input-append {{ $errors->has('purchase_date') ? 'error' : '' }}" >
 				<label class="control-label" for="purchase_date">Purchase Date</label>
 				<div class="controls">
-				<input type="text" class="datepicker span2" data-date-format="yyyy-mm-dd" placeholder="Select Date" name="purchase_date" id="purchase_date" value="{{ Input::old('purchase_date', $asset->purchase_date) }}"> <span class="add-on"><i class="icon-calendar"></i></span>
+				<input type="text" class="datepicker span2" data-date-format="yyyy-mm-dd" placeholder="Select Date" name="purchase_date" id="purchase_date" value="{{ Input::old('purchase_date', $asset->purchase_date) }}">
 				{{ $errors->first('purchase_date', '<span class="help-inline">:message</span>') }}
+
 				</div>
 			</div>
 
@@ -96,17 +97,24 @@
 			<div class="control-group {{ $errors->has('purchase_cost') ? 'error' : '' }}">
 				<label class="control-label" for="purchase_cost">Purchase Cost</label>
 				<div class="controls">
-					$<input class="span2" type="text" name="purchase_cost" id="purchase_cost" value="{{ Input::old('purchase_cost', $asset->purchase_cost) }}" />
+				<div class="input-prepend">
+					<span class="add-on">$</span>
+					<input class="span2" type="text" name="purchase_cost" id="purchase_cost" value="{{ Input::old('purchase_cost', $asset->purchase_cost) }}" />
 					{{ $errors->first('purchase_cost', '<span class="help-inline">:message</span>') }}
 				</div>
+				 </div>
 			</div>
+
+
 
 			<!-- Depreciation -->
 			<div class="control-group {{ $errors->has('depreciation_id') ? 'error' : '' }}">
 				<label class="control-label" for="parent">Depreciation</label>
 				<div class="controls">
-					{{ Form::select('depreciation_id', $depreciation_list , Input::old('depreciation_id', $asset->depreciation_id)) }}
+					<div class="field-box">
+					{{ Form::select('depreciation_id', $depreciation_list , Input::old('depreciation_id', $asset->depreciation_id), array('class'=>'select2', 'style'=>'width:250px')) }}
 					{{ $errors->first('depreciation_id', '<span class="help-inline">:message</span>') }}
+					</div>
 				</div>
 			</div>
 
@@ -128,7 +136,7 @@
 	<div class="control-group">
 		<div class="controls">
 			<a class="btn btn-link" href="{{ route('assets') }}">Cancel</a>
-			<button type="submit" class="btn btn-success">Save Edits</button>
+			<button type="submit" class="btn-flat success"><i class="icon-ok icon-white"></i> Save </button>
 		</div>
 	</div>
 </form>

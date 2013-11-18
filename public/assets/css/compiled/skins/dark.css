@@ -1,0 +1,61 @@
+html {
+  background: transparent url(../../../img/bgs/back-orange.png) repeat-x 0 0;
+  min-height: 100%;
+  background-size: 100% 100%;
+  /*-webkit-background-size: cover;*/
+}
+
+body {
+  background: none;
+}
+
+.navbar-inverse .navbar-inner {
+  background: none;
+  border: 1px solid transparent;
+  box-shadow: none;
+}
+
+.navbar-inverse .notification-dropdown .count {
+  background: #fc827b;
+}
+
+/* sidebar */
+#sidebar-nav.display {
+  background: transparent url(../../../img/bgs/back-orange.png) repeat-x 0 0;
+  background-size: 100% 100%;
+  box-shadow: none;
+}
+
+#dashboard-menu > li.active > a,
+#dashboard-menu > li > a:hover {
+  color: #fff;
+  text-shadow: none;
+}
+
+#dashboard-menu > li > a {
+  color: #bebebe;
+  box-shadow: none;
+  border: 0px;
+}
+
+#dashboard-menu a i {
+  opacity: 0.6;
+}
+
+#dashboard-menu a i.icon-chevron-down {
+  color: #fff;
+}
+
+#dashboard-menu ul.submenu {
+  border-bottom: 0px;
+  box-shadow: 0 2px 1px -1px #4b6588;
+}
+
+#dashboard-menu ul.submenu a {
+  text-shadow: none;
+  color: lightgrey;
+}
+
+.content {
+  box-shadow: none;
+}

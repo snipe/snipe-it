@@ -13,7 +13,7 @@ Asset Depreciations ::
 		Locations
 
 		<div class="pull-right">
-			<a href="{{ route('create/location') }}" class="btn btn-small btn-info"><i class="icon-plus-sign icon-white"></i> Create</a>
+			<a href="{{ route('create/location') }}" class="btn-flat success"><i class="icon-plus-sign icon-white"></i> Create New</a>
 		</div>
 	</h3>
 </div>
@@ -22,11 +22,13 @@ Asset Depreciations ::
 {{ $locations->links() }}
 @endif
 
-<table class="table table-bordered table-striped table-hover">
+<div class="row-fluid table">
+<table class="table table-hover">
 	<thead>
 		<tr>
-			<th class="span6">@lang('admin/locations/table.name')</th>
-			<th class="span6">@lang('admin/locations/table.city'),
+			<th class="span4">@lang('admin/locations/table.name')</th>
+			<th class="span4">Address</th>
+			<th class="span4">@lang('admin/locations/table.city'),
 			 @lang('admin/locations/table.state')
 			@lang('admin/locations/table.country')</th>
 			<th class="span2">@lang('table.actions')</th>
@@ -36,15 +38,17 @@ Asset Depreciations ::
 		@foreach ($locations as $location)
 		<tr>
 			<td>{{ $location->name }}</td>
+			<td>{{ $location->address }}, {{ $location->address2 }}  </td>
 			<td>{{ $location->city }}, {{ $location->state }}  {{ $location->country }}  </td>
 			<td>
-				<a href="{{ route('update/location', $location->id) }}" class="btn btn-mini">@lang('button.edit')</a>
-				<a href="{{ route('delete/location', $location->id) }}" class="btn btn-mini btn-danger">@lang('button.delete')</a>
+				<a href="{{ route('update/location', $location->id) }}" class="btn-flat white"> @lang('button.edit')</a>
+				<a href="{{ route('delete/location', $location->id) }}" class="btn-flat danger">@lang('button.delete')</a>
 			</td>
 		</tr>
 		@endforeach
 	</tbody>
 </table>
+</div>
 
 @if ($locations->getTotal() > 10)
 {{ $locations->links() }}

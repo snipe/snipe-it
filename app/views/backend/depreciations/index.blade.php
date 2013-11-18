@@ -13,7 +13,7 @@ Asset Depreciations ::
 		Asset Depreciations
 
 		<div class="pull-right">
-			<a href="{{ route('create/depreciations') }}" class="btn btn-small btn-info"><i class="icon-plus-sign icon-white"></i> Create</a>
+			<a href="{{ route('create/depreciations') }}" class="btn-flat success"><i class="icon-plus-sign icon-white"></i> Create New</a>
 		</div>
 	</h3>
 </div>
@@ -22,7 +22,8 @@ Asset Depreciations ::
 {{ $depreciations->links() }}
 @endif
 
-<table class="table table-bordered table-striped table-hover">
+<div class="row-fluid table">
+<table class="table table-hover">
 	<thead>
 		<tr>
 			<th class="span6">@lang('admin/depreciations/table.title')</th>
@@ -36,13 +37,14 @@ Asset Depreciations ::
 			<td>{{ $depreciation->name }}</td>
 			<td>{{ $depreciation->months }} @lang('admin/depreciations/table.months') </td>
 			<td>
-				<a href="{{ route('update/depreciations', $depreciation->id) }}" class="btn btn-mini">@lang('button.edit')</a>
-				<a href="{{ route('delete/depreciations', $depreciation->id) }}" class="btn btn-mini btn-danger">@lang('button.delete')</a>
+				<a href="{{ route('update/depreciations', $depreciation->id) }}" class="btn-flat white">@lang('button.edit')</a>
+				<a href="{{ route('delete/depreciations', $depreciation->id) }}" class="btn-flat danger">@lang('button.delete')</a>
 			</td>
 		</tr>
 		@endforeach
 	</tbody>
 </table>
+</div>
 
 @if ($depreciations->getTotal() > 10)
 {{ $depreciations->links() }}
