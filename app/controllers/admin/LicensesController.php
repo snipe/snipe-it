@@ -130,9 +130,6 @@ class LicensesController extends AdminController {
 		}
 
 
-
-
-
 		// get the POST data
 		$new = Input::all();
 
