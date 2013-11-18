@@ -4,6 +4,7 @@ use AdminController;
 use Input;
 use Lang;
 use Asset;
+use User;
 use Redirect;
 use DB;
 use Model;
@@ -83,6 +84,7 @@ class AssetsController extends AdminController {
 		$asset->notes            		= e(Input::get('notes'));
 		$asset->asset_tag            	= e(Input::get('asset_tag'));
 		$asset->user_id          		= Sentry::getId();
+		$asset->physical            		= '1';
 
 
 		// Was the asset created?
@@ -162,6 +164,7 @@ class AssetsController extends AdminController {
 		$asset->order_number            = e(Input::get('order_number'));
 		$asset->asset_tag           	= e(Input::get('asset_tag'));
 		$asset->notes            		= e(Input::get('notes'));
+		$asset->physical            		= '1';
 
 
 		// Was the asset updated?
@@ -195,6 +198,51 @@ class AssetsController extends AdminController {
 
 		// Redirect to the asset management page
 		return Redirect::to('admin')->with('success', Lang::get('admin/assets/message.delete.success'));
+	}
+
+	/**
+	* Check out the asset to a person
+	**/
+	public function getCheckout($assetId)
+	{
+		// Check if the asset exists
+		if (is_null($asset = Asset::find($assetId)))
+		{
+			// Redirect to the asset management page with error
+			return Redirect::to('admin')->with('error', Lang::get('admin/assets/message.not_found'));
+		}
+
+		// Get the dropdown of users and then pass it to the checkout view
+		$users = DB::table('users')->select(DB::raw('concat (first_name," ",last_name) as full_name,id'))->lists('full_name', 'id');
+		return View::make('backend/assets/checkout', compact('asset'))->with('users',$users);
+
+	}
+
+	/**
+	* Check out the asset to a person
+	**/
+	public function postCheckout($assetId,$userId)
+	{
+		// Check if the asset exists
+		if (is_null($asset = Asset::find($assetId)))
+		{
+			// Redirect to the asset management page with error
+			return Redirect::to('admin')->with('error', Lang::get('admin/assets/message.not_found'));
+		}
+
+		// Check if the asset exists
+		if (is_null($user = User::find($userId)))
+		{
+			// Redirect to the asset management page with error
+			return Redirect::to('admin')->with('error', Lang::get('admin/assets/message.does_not_exist'));
+		}
+
+		echo 'bar';
+		// Delete the asset
+		//$asset->delete();
+
+		// Redirect to the asset management page
+		//return Redirect::to('admin')->with('success', Lang::get('admin/assets/message.checkout.success'));
 	}
 
 
