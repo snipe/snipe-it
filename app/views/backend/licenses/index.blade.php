@@ -26,8 +26,8 @@ Licenses ::
 			<th class="span4">@lang('admin/licenses/table.serial')</th>
 			<th class="span3">@lang('admin/licenses/table.license_name')</th>
 			<th class="span2">@lang('admin/licenses/table.license_email')</th>
-			<th class="span4">@lang('admin/licenses/table.purchase_date')</th>
 			<th class="span2">@lang('admin/licenses/table.assigned_to')</th>
+			<th class="span2">@lang('admin/licenses/table.checkout')</th>
 			<th class="span4">@lang('table.actions')</th>
 		</tr>
 	</thead>
@@ -36,10 +36,22 @@ Licenses ::
 		<tr>
 			<td>{{ $license->name }}</td>
 			<td>{{ $license->serial }}</td>
+
 			<td>{{ $license->license_name }}</td>
 			<td>{{ $license->license_email }}</td>
-			<td>{{ $license->purchase_date }}</td>
-			<td> </td>
+
+			<td>
+			@if ($license->assigned_to != 0)
+				{{ $license->assigneduser->fullName() }}
+			@endif
+			</td>
+			<td>
+			@if ($license->assigned_to != 0)
+				<a href="{{ route('checkin/license', $license->id) }}" class="btn btn-mini btn-info">Checkin</a>
+			@else
+				<a href="{{ route('checkout/license', $license->id) }}" class="btn btn-mini btn-success">Checkout</a>
+			@endif
+			</td>
 			<td>
 				<a href="{{ route('update/license', $license->id) }}" class="btn btn-mini"><i class="icon-pencil"></i> @lang('button.edit')</a>
 				<a href="{{ route('delete/license', $license->id) }}" class="btn btn-mini btn-danger"><i class="icon-remove icon-white"></i> @lang('button.delete')</a>

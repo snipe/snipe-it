@@ -16,7 +16,10 @@ class License extends Elegant {
 			'license_email'   => 'email',
 		);
 
-
+	public function assigneduser()
+  	{
+    	return $this->belongsTo('User', 'assigned_to');
+  	}
 
 
 
