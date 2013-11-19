@@ -38,9 +38,8 @@ View User {{ $user->fullName() }} ::
                                     <tr>
                                     	<th class="span3">Asset Type</th>
                                         <th class="span3"><span class="line"></span>Asset Tag</th>
-                                        <th class="span4"><span class="line"></span>Name</th>
-                                        <th class="span2"><span class="line"></span>Date</th>
-                                        <th class="span2"><span class="line"></span>Actions</th>
+                                        <th class="span3"><span class="line"></span>Name</th>
+                                        <th class="span3"><span class="line"></span>Actions</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -53,9 +52,9 @@ View User {{ $user->fullName() }} ::
 										Software
 										@endif
 										</td>
-										<td>{{ $asset->asset_tag }}</td>
-										<td>{{ $asset->name }}</td>
-										<td></td>
+										<td><a href="{{ route('view/asset', $asset->id) }}">{{ $asset->asset_tag }}</a></td>
+										<td><a href="{{ route('view/asset', $asset->id) }}">{{ $asset->name }}</a></td>
+
 										<td> <a href="{{ route('checkin/asset', $asset->id) }}" class="btn-flat info">Checkin</a></td>
 									</tr>
 									@endforeach
@@ -90,7 +89,7 @@ View User {{ $user->fullName() }} ::
 									<tr>
 										<td>{{ $log->added_on }}</td>
 										<td>{{ $log->action_type }}</td>
-										<td>{{ $log->assetlog->name }}</td>
+										<td><a href="{{ route('view/asset', $log->asset_id) }}">{{ $log->assetlog->name }}</a></td>
 										<td>{{ $log->adminlog->fullName() }}</td>
 									</tr>
 									@endforeach
