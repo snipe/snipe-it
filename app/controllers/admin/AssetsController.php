@@ -7,6 +7,7 @@ use Asset;
 use User;
 use Redirect;
 use DB;
+use Actionlog;
 use Model;
 use Depreciation;
 use Sentry;
@@ -29,6 +30,12 @@ class AssetsController extends AdminController {
 		return View::make('backend/assets/index', compact('assets'));
 	}
 
+	public function getReports()
+	{
+		// Grab all the assets
+		$assets = Asset::orderBy('created_at', 'DESC')->get();
+		return View::make('backend/reports/index', compact('assets'));
+	}
 
 	/**
 	 * Asset create.
@@ -90,7 +97,6 @@ class AssetsController extends AdminController {
 			$errors = $asset->errors();
 			return Redirect::back()->withInput()->withErrors($errors);
 		}
-
 
 		// Redirect to the asset create page with an error
 		return Redirect::to('assets/create')->with('error', Lang::get('admin/assets/message.create.error'));
@@ -238,7 +244,6 @@ class AssetsController extends AdminController {
 		$assigned_to = e(Input::get('assigned_to'));
 
 
-
 		// Declare the rules for the form validation
 		$rules = array(
 			'assigned_to'   => 'required|min:1'
@@ -265,10 +270,18 @@ class AssetsController extends AdminController {
 		// Update the asset data
 		$asset->assigned_to            		= e(Input::get('assigned_to'));
 
-
 		// Was the asset updated?
 		if($asset->save())
 		{
+			$logaction = new Actionlog();
+			$logaction->asset_id = $asset->id;
+			$logaction->checkedout_to = $asset->assigned_to;
+			$logaction->location_id = $assigned_to->location_id;
+			$logaction->user_id = Sentry::getUser()->id;
+			$log = $logaction->logaction('checkout');
+
+
+
 			// Redirect to the new asset page
 			return Redirect::to("admin")->with('success', Lang::get('admin/assets/message.checkout.success'));
 		}
@@ -279,6 +292,9 @@ class AssetsController extends AdminController {
 
 	/**
 	* Check in the item so that it can be checked out again to someone else
+	*
+	* @param  int  $assetId
+	* @return View
 	**/
 	public function postCheckin($assetId)
 	{
@@ -289,12 +305,26 @@ class AssetsController extends AdminController {
 			return Redirect::to('admin')->with('error', Lang::get('admin/assets/message.not_found'));
 		}
 
-		// Update the asset data
+		if (!is_null($asset->assigned_to)) {
+		 	$user = User::find($asset->assigned_to);
+		}
+
+		$logaction = new Actionlog();
+		$logaction->checkedout_to = $asset->assigned_to;
+
+		// Update the asset data to null, since it's being checked in
 		$asset->assigned_to            		= '';
 
 		// Was the asset updated?
 		if($asset->save())
 		{
+
+			$logaction->asset_id = $asset->id;
+
+			$logaction->location_id = NULL;
+			$logaction->user_id = Sentry::getUser()->id;
+			$log = $logaction->logaction('checkin from');
+
 			// Redirect to the new asset page
 			return Redirect::to("admin")->with('success', Lang::get('admin/assets/message.checkin.success'));
 		}
@@ -304,7 +334,28 @@ class AssetsController extends AdminController {
 	}
 
 
+	/**
+	*  Get the asset information to present to the asset view page
+	*
+	* @param  int  $assetId
+	* @return View
+	**/
+	public function getView($assetId = null)
+	{
+		$asset = Asset::find($assetId);
 
+		if (isset($asset->id)) {
+				return View::make('backend/assets/view', compact('asset'));
+		} else {
+			// Prepare the error message
+			$error = Lang::get('admin/assets/message.does_not_exist', compact('id' ));
+
+			// Redirect to the user management page
+			return Redirect::route('assets')->with('error', $error);
+		}
+
+
+	}
 
 
 

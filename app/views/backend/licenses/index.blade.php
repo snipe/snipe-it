@@ -35,8 +35,8 @@ Licenses ::
 	<tbody>
 		@foreach ($licenses as $license)
 		<tr>
-			<td>{{ $license->name }}</td>
-			<td>{{ $license->serial }}</td>
+			<td><a href="{{ route('view/license', $license->id) }}">{{ $license->name }}</a></td>
+			<td><a href="{{ route('view/license', $license->id) }}">{{ $license->serial }}</a></td>
 
 			<td>{{ $license->license_name }}</td>
 			<td>{{ $license->license_email }}</td>

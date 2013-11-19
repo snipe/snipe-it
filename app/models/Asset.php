@@ -49,10 +49,30 @@ class Asset extends Elegant {
     	return $this->belongsTo('User', 'assigned_to');
   	}
 
-  	public function assetloc($locationId)
+	/**
+	* Get the asset's location based on the assigned user
+	**/
+  	public function assetloc()
   	{
-  		return Location::find($locationId);
-
+  		return $this->assigneduser->hasOne('Location');
   	}
+
+  	/**
+	* Get action logs for this asset
+	*/
+	public function assetlog()
+	{
+		return $this->hasMany('Actionlog','asset_id')->orderBy('added_on', 'desc');
+	}
+
+	/**
+	* Get action logs for this asset
+	*/
+	public function adminuser()
+	{
+		return $this->belongsTo('User','id');
+	}
+
+
 
 }

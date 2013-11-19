@@ -67,7 +67,7 @@
 
 	 <!-- navbar -->
     <div class="navbar navbar-inverse">
-        <div class="navbar-inner navbar-fixed-top navbar-inverse">
+        <div class="navbar-inner navbar-inverse">
             <button type="button" class="btn btn-navbar visible-phone" id="menu-toggler">
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
@@ -166,21 +166,20 @@
                     <span>Models</span>
                 </a>
             </li>
+            <li{{ (Request::is('admin/licenses*') ? ' class="active"><div class="pointer"><div class="arrow"></div><div class="arrow_border"></div></div>' : '>') }}
+            	<a href="{{ URL::to('admin/licenses') }}">
+            		<i class="icon-certificate"></i>
+            		 <span>Licenses</span>
+            	</a>
+            </li>
             <li{{ (Request::is('admin/users*') ? ' class="active"><div class="pointer"><div class="arrow"></div><div class="arrow_border"></div></div>' : '>') }}
             	<a href="{{ URL::to('admin/users') }}">
                     <i class="icon-group"></i>
                     <span>People</span>
                 </a>
             </li>
-            <li{{ (Request::is('admin/licenses*') ? ' class="active"><div class="pointer"><div class="arrow"></div><div class="arrow_border"></div></div>' : '>') }}
-            	<a href="{{ URL::to('admin/licenses') }}">
-            		<i class="icon-certificate icon-white"></i>
-            		 <span>Licenses</span>
-            	</a>
-            </li>
-
-            <li>
-                <a href="#">
+            <li{{ (Request::is('reports*') ? ' class="active"><div class="pointer"><div class="arrow"></div><div class="arrow_border"></div></div>' : '>') }}
+                <a href="{{ URL::to('reports') }}">
                     <i class="icon-signal"></i>
                     <span>Reports</span>
                 </a>
@@ -196,6 +195,46 @@
 
 
         <div class="container-fluid">
+
+		@if ((Sentry::check()) && (Sentry::getUser()->hasAccess('admin')))
+        <!-- upper main stats -->
+            <div id="main-stats">
+                <div class="row-fluid stats-row">
+                    <div class="span3 stat">
+                        <div class="data">
+                            <span class="number">2,457</span>
+                            assets
+                        </div>
+						<span class="date">(placeholder)</span>
+                    </div>
+                    <div class="span3 stat">
+                        <div class="data">
+                            <span class="number">240</span>
+                            licenses
+                        </div>
+						<span class="date">(placeholder)</span>
+                    </div>
+                    <div class="span3 stat">
+                        <div class="data">
+                            <span class="number">36</span>
+                            assets available
+                        </div>
+                        <span class="date">(placeholder)</span>
+                    </div>
+                    <div class="span3 stat last">
+                        <div class="data">
+                            <span class="number">89</span>
+                            people
+                        </div>
+                        <span class="date">(placeholder)</span>
+                    </div>
+                </div>
+            </div>
+            <!-- end upper main stats -->
+            @endif
+
+
+
             <div id="pad-wrapper">
 
 

@@ -14,20 +14,6 @@
 Route::group(array('prefix' => 'assets'), function()
 {
 
-	Route::get('/', array('as' => 'assets', 'uses' => 'Controllers\Admin\AssetsController@getIndex'));
-	Route::get('assets', array('as' => 'assets', 'uses' => 'Controllers\Admin\AssetsController@getIndex'));
-	Route::get('create', array('as' => 'create/asset', 'uses' => 'Controllers\Admin\AssetsController@getCreate'));
-	Route::post('create', 'Controllers\Admin\AssetsController@postCreate');
-	Route::get('{assetId}/edit', array('as' => 'update/asset', 'uses' => 'Controllers\Admin\AssetsController@getEdit'));
-	Route::post('{assetId}/edit', 'Controllers\Admin\AssetsController@postEdit');
-	Route::get('{assetId}/delete', array('as' => 'delete/asset', 'uses' => 'Controllers\Admin\AssetsController@getDelete'));
-	Route::get('{assetId}/checkout', array('as' => 'checkout/asset', 'uses' => 'Controllers\Admin\AssetsController@getCheckout'));
-	Route::post('{assetId}/checkout', 'Controllers\Admin\AssetsController@postCheckout');
-	Route::get('{assetId}/checkin', array('as' => 'checkin/asset', 'uses' => 'Controllers\Admin\AssetsController@postCheckin'));
-
-
-
-
 # Asset Model Management
 	Route::group(array('prefix' => 'models'), function()
 	{
@@ -38,6 +24,17 @@ Route::group(array('prefix' => 'assets'), function()
 		Route::post('{modelId}/edit', 'Controllers\Admin\ModelsController@postEdit');
 		Route::get('{modelId}/delete', array('as' => 'delete/model', 'uses' => 'Controllers\Admin\ModelsController@getDelete'));
 	});
+
+	Route::get('/', array('as' => 'assets', 'uses' => 'Controllers\Admin\AssetsController@getIndex'));
+	Route::get('create', array('as' => 'create/asset', 'uses' => 'Controllers\Admin\AssetsController@getCreate'));
+	Route::post('create', 'Controllers\Admin\AssetsController@postCreate');
+	Route::get('{assetId}/edit', array('as' => 'update/asset', 'uses' => 'Controllers\Admin\AssetsController@getEdit'));
+	Route::post('{assetId}/edit', 'Controllers\Admin\AssetsController@postEdit');
+	Route::get('{assetId}/delete', array('as' => 'delete/asset', 'uses' => 'Controllers\Admin\AssetsController@getDelete'));
+	Route::get('{assetId}/checkout', array('as' => 'checkout/asset', 'uses' => 'Controllers\Admin\AssetsController@getCheckout'));
+	Route::post('{assetId}/checkout', 'Controllers\Admin\AssetsController@postCheckout');
+	Route::get('{assetId}/checkin', array('as' => 'checkin/asset', 'uses' => 'Controllers\Admin\AssetsController@postCheckin'));
+	Route::get('{assetId}/view', array('as' => 'view/asset', 'uses' => 'Controllers\Admin\AssetsController@getView'));
 
 
 
@@ -57,20 +54,6 @@ Route::group(array('prefix' => 'assets'), function()
 Route::group(array('prefix' => 'admin'), function()
 {
 
-
-	# Blog Management
-	Route::group(array('prefix' => 'blogs'), function()
-	{
-		Route::get('/', array('as' => 'blogs', 'uses' => 'Controllers\Admin\BlogsController@getIndex'));
-		Route::get('create', array('as' => 'create/blog', 'uses' => 'Controllers\Admin\BlogsController@getCreate'));
-		Route::post('create', 'Controllers\Admin\BlogsController@postCreate');
-		Route::get('{blogId}/edit', array('as' => 'update/blog', 'uses' => 'Controllers\Admin\BlogsController@getEdit'));
-		Route::post('{blogId}/edit', 'Controllers\Admin\BlogsController@postEdit');
-		Route::get('{blogId}/delete', array('as' => 'delete/blog', 'uses' => 'Controllers\Admin\BlogsController@getDelete'));
-		Route::get('{blogId}/restore', array('as' => 'restore/blog', 'uses' => 'Controllers\Admin\BlogsController@getRestore'));
-	});
-
-
 	# Licenses
 	Route::group(array('prefix' => 'licenses'), function()
 	{
@@ -83,6 +66,7 @@ Route::group(array('prefix' => 'admin'), function()
 		Route::get('{licenseId}/checkout', array('as' => 'checkout/license', 'uses' => 'Controllers\Admin\LicensesController@getCheckout'));
 		Route::post('{licenseId}/checkout', 'Controllers\Admin\LicensesController@postCheckout');
 		Route::get('{licenseId}/checkin', array('as' => 'checkin/license', 'uses' => 'Controllers\Admin\LicensesController@postCheckin'));
+		Route::get('{licenseId}/view', array('as' => 'view/license', 'uses' => 'Controllers\Admin\LicensesController@getView'));
 	});
 
 
@@ -248,3 +232,5 @@ Route::group(array('prefix' => 'account'), function()
 */
 
 Route::get('/', array('as' => 'home', 'uses' => 'Controllers\Admin\AssetsController@getIndex'));
+Route::get('reports', array('as' => 'reports', 'uses' => 'Controllers\Admin\AssetsController@getReports'));
+

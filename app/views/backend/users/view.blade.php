@@ -38,9 +38,8 @@ View User {{ $user->fullName() }} ::
                                     <tr>
                                     	<th class="span3">Asset Type</th>
                                         <th class="span3"><span class="line"></span>Asset Tag</th>
-                                        <th class="span4"><span class="line"></span>Name</th>
-                                        <th class="span2"><span class="line"></span>Date</th>
-                                        <th class="span2"><span class="line"></span>Actions</th>
+                                        <th class="span3"><span class="line"></span>Name</th>
+                                        <th class="span3"><span class="line"></span>Actions</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -53,9 +52,9 @@ View User {{ $user->fullName() }} ::
 										Software
 										@endif
 										</td>
-										<td>{{ $asset->asset_tag }}</td>
-										<td>{{ $asset->name }}</td>
-										<td></td>
+										<td><a href="{{ route('view/asset', $asset->id) }}">{{ $asset->asset_tag }}</a></td>
+										<td><a href="{{ route('view/asset', $asset->id) }}">{{ $asset->name }}</a></td>
+
 										<td> <a href="{{ route('checkin/asset', $asset->id) }}" class="btn-flat info">Checkin</a></td>
 									</tr>
 									@endforeach
@@ -65,38 +64,70 @@ View User {{ $user->fullName() }} ::
 
                             <div class="col-md-6">
 								<div class="alert alert-warning alert-block">
-
 									<i class="icon-warning-sign"></i>
 									@lang('admin/users/table.noresults')
-
 								</div>
 							</div>
                             @endif
+
+
+							<h6>History for {{ $user->first_name }}</h6>
+                            <br>
+                            <!-- checked out assets table -->
+                            @if (count($user->userlog) > 0)
+                            <table class="table table-hover">
+                                <thead>
+                                    <tr>
+                                        <th class="span3">Date</th>
+                                        <th class="span3"><span class="line"></span>Action</th>
+                                        <th class="span3"><span class="line"></span>Asset</th>
+                                        <th class="span3"><span class="line"></span>By</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+									@foreach ($user->userlog as $log)
+									<tr>
+										<td>{{ $log->added_on }}</td>
+										<td>{{ $log->action_type }}</td>
+										<td><a href="{{ route('view/asset', $log->asset_id) }}">{{ $log->assetlog->name }}</a></td>
+										<td>{{ $log->adminlog->fullName() }}</td>
+									</tr>
+									@endforeach
+                                </tbody>
+                            </table>
+                            @else
+
+                            <div class="col-md-6">
+								<div class="alert alert-warning alert-block">
+									<i class="icon-warning-sign"></i>
+									@lang('admin/users/table.noresults')
+								</div>
+							</div>
+                            @endif
+
                         </div>
                     </div>
 
                     <!-- side address column -->
                     <div class="span3 address pull-right">
-                    	@if ($user->last_login!='')
-                    	<ul>
-                    		<li><strong>Last Login:</strong></li>
-                            <li>{{ $user->last_login->diffForHumans() }}</li>
-                        </ul>
+
+
+                        <h6>Contact  {{ $user->first_name }}</h6>
+
+                        		@if (isset($user->location_id))
+                        			<iframe width="300" height="133" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.com/maps?&amp;q={{ $user->userloc->address }},{{ $user->userloc->city }},{{ $user->userloc->state }},{{ $user->userloc->country }}&amp;output=embed"></iframe>
+                        		@endif
+						<ul>
+                        <li>{{ $user->userloc->address }} {{ $user->userloc->address2 }}</li>
+                        <li>{{ $user->userloc->city }}, {{ $user->userloc->state }} {{ $user->userloc->zip }}<br /><br /></li>
+                        @if (isset($user->phone))
+                        	<li><i class="icon-phone"></i>{{ $user->phone }}</li>
                         @endif
-                        <h6>Address</h6>
-                        <iframe width="300" height="133" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.com.mx/?ie=UTF8&amp;t=m&amp;ll=19.715081,-155.071421&amp;spn=0.010746,0.025749&amp;z=14&amp;output=embed"></iframe>
-                        <ul>
-                            <li>2301 East Lamar Blvd. Suite 140. </li>
-                            <li>City, Arlington. United States,</li>
-                            <li>Zip Code, TX 76006.</li>
-                            <li class="ico-li">
-                                <i class="icon-phone"></i>
-                               {{ $user->phone }}
-                            </li>
-                             <li class="ico-li">
-                                <i class="icon-envelope-alt"></i>
-                                <a href="mailto:{{ $user->email }}">{{ $user->email }}</a>
-                            </li>
+	                    	<li><i class="icon-envelope-alt"></i><a href="mailto:{{ $user->email }}">{{ $user->email }}</a></li>
                         </ul>
+
+                        @if ($user->last_login!='')
+                    	<br /><h6>Last Login: {{ $user->last_login->diffForHumans() }}</h6>
+                        @endif
                     </div>
 @stop
