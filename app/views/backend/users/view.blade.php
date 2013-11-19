@@ -65,13 +65,47 @@ View User {{ $user->fullName() }} ::
 
                             <div class="col-md-6">
 								<div class="alert alert-warning alert-block">
-
 									<i class="icon-warning-sign"></i>
 									@lang('admin/users/table.noresults')
-
 								</div>
 							</div>
                             @endif
+
+
+							<h6>History for {{ $user->first_name }}</h6>
+                            <br>
+                            <!-- checked out assets table -->
+                            @if (count($user->userlog) > 0)
+                            <table class="table table-hover">
+                                <thead>
+                                    <tr>
+                                        <th class="span3">Date</th>
+                                        <th class="span3"><span class="line"></span>Action</th>
+                                        <th class="span3"><span class="line"></span>Asset</th>
+                                        <th class="span3"><span class="line"></span>By</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+									@foreach ($user->userlog as $log)
+									<tr>
+										<td>{{ $log->added_on }}</td>
+										<td>{{ $log->action_type }}</td>
+										<td>{{ $log->assetlog->name }}</td>
+										<td>{{ $log->adminlog->fullName() }}</td>
+									</tr>
+									@endforeach
+                                </tbody>
+                            </table>
+                            @else
+
+                            <div class="col-md-6">
+								<div class="alert alert-warning alert-block">
+									<i class="icon-warning-sign"></i>
+									@lang('admin/users/table.noresults')
+								</div>
+							</div>
+                            @endif
+
                         </div>
                     </div>
 

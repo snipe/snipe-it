@@ -55,4 +55,12 @@ class Asset extends Elegant {
 
   	}
 
+  	/**
+	* Get action logs for this asset
+	*/
+	public function asssetlog()
+	{
+		return $this->hasMany('Actionlog','asset_id');
+	}
+
 }

@@ -11,6 +11,7 @@ use Input;
 use User;
 use Asset;
 use Lang;
+use Actionlog;
 use Location;
 use Redirect;
 use Sentry;
@@ -414,7 +415,6 @@ class UsersController extends AdminController {
 	public function getView($userId = null)
 	{
 		$user = User::find($userId);
-		// Show the page
 		return View::make('backend/users/view', compact('user'));
 	}
 

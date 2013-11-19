@@ -39,9 +39,15 @@ class User extends SentryUserModel {
 	public function assets()
 	{
 		return $this->hasMany('Asset', 'assigned_to');
-
 	}
 
 
+	/**
+	* Get action logs for this user
+	*/
+	public function userlog()
+	{
+		return $this->hasMany('Actionlog','checkedout_to');
+	}
 
 }

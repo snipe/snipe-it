@@ -302,24 +302,25 @@ class AssetsController extends AdminController {
 			return Redirect::to('admin')->with('error', Lang::get('admin/assets/message.not_found'));
 		}
 
-		// Update the asset data
-		$asset->assigned_to            		= '';
-
-
 		if (!is_null($asset->assigned_to)) {
 		 	$user = User::find($asset->assigned_to);
 		}
 
+		$logaction = new Actionlog();
+		$logaction->checkedout_to = $asset->assigned_to;
+
+		// Update the asset data to null, since it's being checked in
+		$asset->assigned_to            		= '';
 
 		// Was the asset updated?
 		if($asset->save())
 		{
-			$logaction = new Actionlog();
+
 			$logaction->asset_id = $asset->id;
-			//$logaction->user_id = $loggedin->user_id ;
+
 			$logaction->location_id = NULL;
 			$logaction->user_id = Sentry::getUser()->id;
-			$log = $logaction->logaction('checkin');
+			$log = $logaction->logaction('checkin from');
 
 			// Redirect to the new asset page
 			return Redirect::to("admin")->with('success', Lang::get('admin/assets/message.checkin.success'));

@@ -5,21 +5,19 @@ class ActionLog extends Eloquent {
 	protected $table = 'asset_logs';
 	public $timestamps = false;
 
-	/**
-	* Get the parent category name
-	*/
-	public function assetlog()
-	{
 
+	public function assetlog() {
+		return $this->belongsTo('Asset','asset_id');
 	}
 
-	/**
-	* Get the parent category name
-	*/
-	public function userlog()
-	{
-
+	public function adminlog() {
+		return $this->belongsTo('User','user_id');
 	}
+
+	public function userlog() {
+		return $this->belongsTo('User','assigned_to');
+	}
+
 
 	/**
 	* Get the parent category name
