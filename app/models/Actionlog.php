@@ -10,7 +10,7 @@ class ActionLog extends Eloquent {
 	*/
 	public function assetlog()
 	{
-		return $this->belongsTo('Category','parent');
+
 	}
 
 	/**
@@ -18,7 +18,7 @@ class ActionLog extends Eloquent {
 	*/
 	public function userlog()
 	{
-		return $this->belongsTo('Category','parent');
+
 	}
 
 	/**
