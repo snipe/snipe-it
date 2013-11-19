@@ -41,9 +41,9 @@ Depreciation Report
 			<th class="span3"><span class="line"></span>@lang('admin/assets/table.checkoutto')</th>
 			<th class="span2"><span class="line"></span>@lang('admin/assets/table.location')</th>
 			<th class="span2"><span class="line"></span>@lang('admin/assets/table.purchase_date')</th>
-			<th class="span1 align-right"><span class="line"></span>@lang('admin/assets/table.purchase_cost')</th>
-			<th class="span1 align-rightt"><span class="line"></span>@lang('admin/assets/table.book_value')</th>
-			<th class="span1 align-right"><span class="line"></span>Diff</th>
+			<th class="span1"><span class="line"></span>@lang('admin/assets/table.purchase_cost')</th>
+			<th class="span1"><span class="line"></span>@lang('admin/assets/table.book_value')</th>
+			<th class="span1"><span class="line"></span>Diff</th>
 		</tr>
 	</thead>
 	<tbody>
@@ -70,7 +70,7 @@ Depreciation Report
 			<td>{{ $asset->purchase_date }}</td>
 			<td class="align-right">${{ number_format($asset->purchase_cost) }}</td>
 			<td class="align-right">${{ number_format($asset->depreciation()) }}</td>
-			<td class="align-right">-${{ ($asset->purchase_cost - $asset->depreciation()) }}</td>
+			<td class="align-right">-${{ number_format(($asset->purchase_cost - $asset->depreciation())) }}</td>
 
 		</tr>
 		@endforeach
