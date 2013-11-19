@@ -87,7 +87,7 @@ View License {{ $license->name }} ::
 									<tr>
 										<td></td>
 										<td>{{ $license->created_at }}</td>
-										<td>{{ $license->adminuser->fullName() }}</td>
+										<td>{{ $license->adminuser->id }}</td>
 										<td>created asset</td>
 										<td></td>
 									</tr>
