@@ -89,7 +89,11 @@ View Asset {{ $asset->asset_tag }} ::
 									<tr>
 										<td></td>
 										<td>{{ $asset->created_at }}</td>
-										<td>{{ $asset->adminuser->fullName() }}</td>
+										<td>
+										@if (isset($asset->adminuser->id))
+										{{ $asset->adminuser->fullName() }}
+										@endif
+										</td>
 										<td>created asset</td>
 										<td></td>
 

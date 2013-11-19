@@ -75,7 +75,7 @@ View License {{ $license->name }} ::
 										<td>{{ $log->action_type }}</td>
 
 										<td>
-											@if (isset($log->checkedout_to))
+											@if (isset($log->checkedout_to->id))
 											<a href="{{ route('view/user', $log->checkedout_to) }}">
 											{{ $log->userlog->fullName() }}
 											</a>
@@ -87,7 +87,11 @@ View License {{ $license->name }} ::
 									<tr>
 										<td></td>
 										<td>{{ $license->created_at }}</td>
-										<td>{{ $license->adminuser->id }}</td>
+										<td>
+										@if (isset($license->adminuser->id))
+										{{ $license->adminuser->fullName() }}
+										@endif
+										</td>
 										<td>created asset</td>
 										<td></td>
 									</tr>
