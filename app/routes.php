@@ -66,6 +66,7 @@ Route::group(array('prefix' => 'admin'), function()
 		Route::get('{licenseId}/checkout', array('as' => 'checkout/license', 'uses' => 'Controllers\Admin\LicensesController@getCheckout'));
 		Route::post('{licenseId}/checkout', 'Controllers\Admin\LicensesController@postCheckout');
 		Route::get('{licenseId}/checkin', array('as' => 'checkin/license', 'uses' => 'Controllers\Admin\LicensesController@postCheckin'));
+		Route::get('{licenseId}/view', array('as' => 'view/license', 'uses' => 'Controllers\Admin\LicensesController@getView'));
 	});
 
 
