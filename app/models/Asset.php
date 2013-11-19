@@ -65,6 +65,14 @@ class Asset extends Elegant {
 		return $this->hasMany('Actionlog','asset_id')->orderBy('added_on', 'desc');
 	}
 
+	/**
+	* Get action logs for this asset
+	*/
+	public function adminuser()
+	{
+		return $this->belongsTo('User','id');
+	}
+
 
 
 }
