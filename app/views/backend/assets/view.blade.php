@@ -10,12 +10,36 @@ View Asset {{ $asset->asset_tag }} ::
 @section('content')
 <div id="pad-wrapper" class="user-profile">
                 <!-- header -->
+				<h3 class="name">{{ $asset->asset_tag }} ({{ $asset->name }})
 
-                    <div class="span8">
-                        <h3 class="name">{{ $asset->asset_tag }} ({{ $asset->name }})</h3>
-                    </div>
 
-                <a href="{{ route('update/asset', $asset->id) }}" class="btn-flat white large pull-right edit"><i class="icon-pencil"></i> @lang('button.edit') This Asset</a>
+							<div class="btn-group pull-right">
+                                <button class="btn glow">Actions</button>
+                                <button class="btn glow dropdown-toggle" data-toggle="dropdown">
+                                    <span class="caret"></span>
+                                </button>
+                                <ul class="dropdown-menu">
+
+                                	@if ($asset->assigned_to != 0)
+										<li><a href="{{ route('checkin/asset', $asset->id) }}" class="btn-flat info">Checkin</a></li>
+									@else
+										<li><a href="{{ route('checkout/asset', $asset->id) }}" class="btn-flat success">Checkout</a></li>
+									@endif
+                                    <li><a href="{{ route('update/asset', $asset->id) }}">Edit Asset</a></li>
+                                    <li><a href="#">Out for Repair</a></li>
+                                    <li><a href="#">Mark as Lost/Stolen</a></li>
+
+                                </ul>
+                            </div>
+
+
+				</h3>
+
+
+
+
+
+
 
                 <div class="row-fluid profile">
                     <!-- bio, new note & orders column -->
@@ -28,7 +52,8 @@ View Asset {{ $asset->asset_tag }} ::
                             <table class="table table-hover">
                                 <thead>
                                     <tr>
-                                        <th class="span3">Date</th>
+                                    	<th class="span1"></th>
+                                        <th class="span3"><span class="line"></span>Date</th>
                                         <th class="span3"><span class="line"></span>Admin</th>
                                         <th class="span3"><span class="line"></span>Action</th>
                                         <th class="span3"><span class="line"></span>Asset</th>
@@ -38,6 +63,11 @@ View Asset {{ $asset->asset_tag }} ::
                                 <tbody>
 									@foreach ($asset->assetlog as $log)
 									<tr>
+										<td>
+										@if ((isset($log->checkedout_to)) && ($log->checkedout_to == $asset->assigned_to))
+										<i class="icon-star"></i>
+										@endif
+										</td>
 										<td>{{ $log->added_on }}</td>
 										<td>
 											@if (isset($log->user_id))
@@ -73,13 +103,36 @@ View Asset {{ $asset->asset_tag }} ::
                     <!-- side address column -->
                     <div class="span3 address pull-right">
 
-                        <h6>Address</h6>
-                        <iframe width="300" height="133" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.com.mx/?ie=UTF8&amp;t=m&amp;ll=19.715081,-155.071421&amp;spn=0.010746,0.025749&amp;z=14&amp;output=embed"></iframe>
-                        <ul>
-                            <li>2301 East Lamar Blvd. Suite 140. </li>
-                            <li>City, Arlington. United States,</li>
-                            <li>Zip Code, TX 76006.</li>
+						@if ((isset($asset->assigned_to ) && ($asset->assigned_to > 0)))
 
-                        </ul>
+                       <h6><br>Checked Out To:</h6>
+                       <ul>
+
+                        	<li><img src="{{ $asset->assigneduser->gravatar() }}" class="img-circle" style="width: 100px; margin-right: 20px;" /><br /><br /></li>
+                            <li>{{ $asset->assetloc->address }}</li>
+                            @if (isset($asset->assetloc->address2))
+                        	<li>{{ $asset->assetloc->address2 }}</li>
+                       		@endif
+                       		@if (isset($asset->assetloc->city))
+                        	<li>{{ $asset->assetloc->city }}, {{ $asset->assetloc->state }} {{ $asset->assetloc->zip }}</li>
+                       		@endif
+
+                       		@if (isset($asset->assigneduser->email))
+                        	<li>{{ $asset->assigneduser->email }}</li>
+                       		@endif
+                       		@if (isset($asset->assigneduser->phone))
+                        	<li>{{ $asset->assigneduser->phone }}</li>
+                       		@endif
+							<li><br /><a href="{{ route('checkin/asset', $asset->id) }}" class="btn-flat large info ">Checkin Asset</a></li>
+						@else
+							<ul>
+							<li><br><br />This asset is not currently assigned to anyone. You may check it into inventory using the button below, or mark it as
+							lost/stolen using the menu above.</li>
+							<li><br><br /><a href="{{ route('checkout/asset', $asset->id) }}" class="btn-flat large success">Checkout Asset</a></li>
+							</ul>
+                        @endif
+
+
+
                     </div>
 @stop
