@@ -10,7 +10,7 @@ View Asset {{ $asset->asset_tag }} ::
 @section('content')
 <div id="pad-wrapper" class="user-profile">
                 <!-- header -->
-				<h3 class="name">{{ $asset->asset_tag }} ({{ $asset->name }})
+				<h3 class="name">History for {{ $asset->asset_tag }} ({{ $asset->name }})
 
 
 							<div class="btn-group pull-right">
@@ -45,7 +45,6 @@ View Asset {{ $asset->asset_tag }} ::
                     <!-- bio, new note & orders column -->
                     <div class="span9 bio">
                         <div class="profile-box">
-							<h6>History for {{ $asset->asset_tag }}</h6>
                             <br>
                             <!-- checked out assets table -->
                             @if (count($asset->assetlog) > 0)
@@ -56,7 +55,7 @@ View Asset {{ $asset->asset_tag }} ::
                                         <th class="span3"><span class="line"></span>Date</th>
                                         <th class="span3"><span class="line"></span>Admin</th>
                                         <th class="span3"><span class="line"></span>Action</th>
-                                        <th class="span3"><span class="line"></span>Asset</th>
+
                                          <th class="span3"><span class="line"></span>User</th>
                                     </tr>
                                 </thead>
@@ -75,7 +74,7 @@ View Asset {{ $asset->asset_tag }} ::
 											@endif
 										</td>
 										<td>{{ $log->action_type }}</td>
-										<td>{{ $log->assetlog->name }}</td>
+
 										<td>
 											@if (isset($log->checkedout_to))
 											<a href="{{ route('view/user', $log->checkedout_to) }}">
@@ -85,6 +84,15 @@ View Asset {{ $asset->asset_tag }} ::
 										</td>
 									</tr>
 									@endforeach
+									<tr>
+										<td></td>
+										<td>{{ $asset->created_on }}</td>
+										<td>{{ $asset->user_id }}</td>
+										<td>asset created</td>
+										<td></td>
+
+
+									</tr>
                                 </tbody>
                             </table>
                             @else
@@ -105,30 +113,36 @@ View Asset {{ $asset->asset_tag }} ::
 
 						@if ((isset($asset->assigned_to ) && ($asset->assigned_to > 0)))
 
-                       <h6><br>Checked Out To:</h6>
-                       <ul>
+                       		<h6><br>Checked Out To:</h6>
+                       		<ul>
 
-                        	<li><img src="{{ $asset->assigneduser->gravatar() }}" class="img-circle" style="width: 100px; margin-right: 20px;" /><br /><br /></li>
-                            <li>{{ $asset->assetloc->address }}</li>
-                            @if (isset($asset->assetloc->address2))
-                        	<li>{{ $asset->assetloc->address2 }}</li>
-                       		@endif
-                       		@if (isset($asset->assetloc->city))
-                        	<li>{{ $asset->assetloc->city }}, {{ $asset->assetloc->state }} {{ $asset->assetloc->zip }}</li>
-                       		@endif
+								<li><img src="{{ $asset->assigneduser->gravatar() }}" class="img-circle" style="width: 100px; margin-right: 20px;" /><br /><br /></li>
+								<li>{{ $asset->assigneduser->fullName() }}</li>
+								<li>{{ $asset->assetloc->address }}
 
-                       		@if (isset($asset->assigneduser->email))
-                        	<li>{{ $asset->assigneduser->email }}</li>
-                       		@endif
-                       		@if (isset($asset->assigneduser->phone))
-                        	<li>{{ $asset->assigneduser->phone }}</li>
-                       		@endif
-							<li><br /><a href="{{ route('checkin/asset', $asset->id) }}" class="btn-flat large info ">Checkin Asset</a></li>
+								@if (isset($asset->assetloc->address2))
+									{{ $asset->assetloc->address2 }}
+								@endif
+
+								</li>
+								@if (isset($asset->assetloc->city))
+									<li>{{ $asset->assetloc->city }}, {{ $asset->assetloc->state }} {{ $asset->assetloc->zip }}</li>
+								@endif
+
+								@if (isset($asset->assigneduser->email))
+									<li><br /><i class="icon-envelope-alt"></i> <a href="mailto:{{ $asset->assigneduser->email }}">{{ $asset->assigneduser->email }}</a></li>
+								@endif
+
+								@if (isset($asset->assigneduser->phone))
+									<li><i class="icon-phone"></i> {{ $asset->assigneduser->phone }}</li>
+								@endif
+
+								<li><br /><a href="{{ route('checkin/asset', $asset->id) }}" class="btn-flat large info ">Checkin Asset</a></li>
 						@else
 							<ul>
-							<li><br><br />This asset is not currently assigned to anyone. You may check it into inventory using the button below, or mark it as
-							lost/stolen using the menu above.</li>
-							<li><br><br /><a href="{{ route('checkout/asset', $asset->id) }}" class="btn-flat large success">Checkout Asset</a></li>
+								<li><br><br />This asset is not currently assigned to anyone. You may check it into inventory
+								using the button below, or mark it as lost/stolen using the menu above.</li>
+								<li><br><br /><a href="{{ route('checkout/asset', $asset->id) }}" class="btn-flat large success">Checkout Asset</a></li>
 							</ul>
                         @endif
 
