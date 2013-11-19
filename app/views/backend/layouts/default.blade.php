@@ -174,7 +174,7 @@
             </li>
             <li{{ (Request::is('admin/licenses*') ? ' class="active"><div class="pointer"><div class="arrow"></div><div class="arrow_border"></div></div>' : '>') }}
             	<a href="{{ URL::to('admin/licenses') }}">
-            		<i class="icon-certificate icon-white"></i>
+            		<i class="icon-certificate"></i>
             		 <span>Licenses</span>
             	</a>
             </li>
