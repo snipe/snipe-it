@@ -13,11 +13,9 @@ View Asset {{ $asset->asset_tag }} ::
 
                     <div class="span8">
                         <h3 class="name">{{ $asset->asset_tag }} ({{ $asset->name }})</h3>
-
                     </div>
 
-                    <a href="{{ route('update/asset', $asset->id) }}" class="btn-flat white large pull-right edit"><i class="icon-pencil"></i> @lang('button.edit') This Asset</a>
-
+                <a href="{{ route('update/asset', $asset->id) }}" class="btn-flat white large pull-right edit"><i class="icon-pencil"></i> @lang('button.edit') This Asset</a>
 
                 <div class="row-fluid profile">
                     <!-- bio, new note & orders column -->
@@ -31,9 +29,9 @@ View Asset {{ $asset->asset_tag }} ::
                                 <thead>
                                     <tr>
                                         <th class="span3">Date</th>
+                                        <th class="span3"><span class="line"></span>Admin</th>
                                         <th class="span3"><span class="line"></span>Action</th>
                                         <th class="span3"><span class="line"></span>Asset</th>
-                                        <th class="span3"><span class="line"></span>Admin</th>
                                          <th class="span3"><span class="line"></span>User</th>
                                     </tr>
                                 </thead>
@@ -41,19 +39,19 @@ View Asset {{ $asset->asset_tag }} ::
 									@foreach ($asset->assetlog as $log)
 									<tr>
 										<td>{{ $log->added_on }}</td>
+										<td>
+											@if (isset($log->user_id))
+											{{ $log->adminlog->fullName() }}
+											@endif
+										</td>
 										<td>{{ $log->action_type }}</td>
 										<td>{{ $log->assetlog->name }}</td>
 										<td>
-										@if (isset($log->user_id))
-										<a href="{{ route('view/user', $log->checkedout_to) }}">
-										{{ $log->adminlog->fullName() }}
-										</a>
-										@endif
-										</td>
-										<td>
-										@if (isset($log->checkedout_to))
-										{{ $log->userlog->fullName() }}
-										@endif
+											@if (isset($log->checkedout_to))
+											<a href="{{ route('view/user', $log->checkedout_to) }}">
+											{{ $log->userlog->fullName() }}
+											</a>
+											@endif
 										</td>
 									</tr>
 									@endforeach
