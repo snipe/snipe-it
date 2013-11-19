@@ -26,6 +26,7 @@ View Asset {{ $asset->asset_tag }} ::
 										<li><a href="{{ route('checkout/asset', $asset->id) }}" class="btn-flat success">Checkout</a></li>
 									@endif
                                     <li><a href="{{ route('update/asset', $asset->id) }}">Edit Asset</a></li>
+                                    <li><a href="#">Out for Disagnostics</a></li>
                                     <li><a href="#">Out for Repair</a></li>
                                     <li><a href="#">Mark as Lost/Stolen</a></li>
 
@@ -55,7 +56,6 @@ View Asset {{ $asset->asset_tag }} ::
                                         <th class="span3"><span class="line"></span>Date</th>
                                         <th class="span3"><span class="line"></span>Admin</th>
                                         <th class="span3"><span class="line"></span>Action</th>
-
                                          <th class="span3"><span class="line"></span>User</th>
                                     </tr>
                                 </thead>
@@ -87,8 +87,8 @@ View Asset {{ $asset->asset_tag }} ::
 									<tr>
 										<td></td>
 										<td>{{ $asset->created_on }}</td>
-										<td>{{ $asset->user_id }}</td>
-										<td>asset created</td>
+										<td>{{ $asset->adminuser->fullName() }}</td>
+										<td>created asset</td>
 										<td></td>
 
 
@@ -112,22 +112,26 @@ View Asset {{ $asset->asset_tag }} ::
                     <div class="span3 address pull-right">
 
 						@if ((isset($asset->assigned_to ) && ($asset->assigned_to > 0)))
-
                        		<h6><br>Checked Out To:</h6>
                        		<ul>
 
 								<li><img src="{{ $asset->assigneduser->gravatar() }}" class="img-circle" style="width: 100px; margin-right: 20px;" /><br /><br /></li>
-								<li>{{ $asset->assigneduser->fullName() }}</li>
-								<li>{{ $asset->assetloc->address }}
+								<li><a href="{{ route('view/user', $asset->assigned_to) }}">{{ $asset->assigneduser->fullName() }}</a></li>
 
-								@if (isset($asset->assetloc->address2))
-									{{ $asset->assetloc->address2 }}
+
+								@if (isset($asset->assetloc->address))
+									<li>{{ $asset->assetloc->address }}
+									@if (isset($asset->assetloc->address2))
+										{{ $asset->assetloc->address2 }}
+									@endif
+									</li>
+									@if (isset($asset->assetloc->city))
+										<li>{{ $asset->assetloc->city }}, {{ $asset->assetloc->state }} {{ $asset->assetloc->zip }}</li>
+									@endif
+
 								@endif
 
-								</li>
-								@if (isset($asset->assetloc->city))
-									<li>{{ $asset->assetloc->city }}, {{ $asset->assetloc->state }} {{ $asset->assetloc->zip }}</li>
-								@endif
+
 
 								@if (isset($asset->assigneduser->email))
 									<li><br /><i class="icon-envelope-alt"></i> <a href="mailto:{{ $asset->assigneduser->email }}">{{ $asset->assigneduser->email }}</a></li>
@@ -138,6 +142,8 @@ View Asset {{ $asset->asset_tag }} ::
 								@endif
 
 								<li><br /><a href="{{ route('checkin/asset', $asset->id) }}" class="btn-flat large info ">Checkin Asset</a></li>
+								</ul>
+
 						@else
 							<ul>
 								<li><br><br />This asset is not currently assigned to anyone. You may check it into inventory
@@ -145,8 +151,5 @@ View Asset {{ $asset->asset_tag }} ::
 								<li><br><br /><a href="{{ route('checkout/asset', $asset->id) }}" class="btn-flat large success">Checkout Asset</a></li>
 							</ul>
                         @endif
-
-
-
                     </div>
 @stop
