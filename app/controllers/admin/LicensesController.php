@@ -6,6 +6,7 @@ use Lang;
 use License;
 use Asset;
 use User;
+use Actionlog;
 use DB;
 use Redirect;
 use Sentry;
@@ -261,6 +262,13 @@ class LicensesController extends AdminController {
 		// Was the asset updated?
 		if($license->save())
 		{
+			$logaction = new Actionlog();
+			$logaction->asset_id = $license->id;
+			$logaction->checkedout_to = $license->assigned_to;
+			$logaction->location_id = $assigned_to->location_id;
+			$logaction->user_id = Sentry::getUser()->id;
+			$log = $logaction->logaction('checkout');
+
 			// Redirect to the new asset page
 			return Redirect::to("admin/licenses")->with('success', Lang::get('admin/licenses/message.checkout.success'));
 		}
@@ -281,18 +289,50 @@ class LicensesController extends AdminController {
 			return Redirect::to('admin/licenses')->with('error', Lang::get('admin/assets/message.not_found'));
 		}
 
+		$logaction = new Actionlog();
+		$logaction->checkedout_to = $license->assigned_to;
+
 		// Update the asset data
 		$license->assigned_to            		= '';
 
 		// Was the asset updated?
 		if($license->save())
 		{
+			$logaction->asset_id = $license->id;
+
+			$logaction->location_id = NULL;
+			$logaction->user_id = Sentry::getUser()->id;
+			$log = $logaction->logaction('checkin from');
+
 			// Redirect to the new asset page
-			return Redirect::to("admin/licenses")->with('success', Lang::get('admin/assets/message.checkout.success'));
+			return Redirect::to("admin/licenses")->with('success', Lang::get('admin/licenses/message.checkout.success'));
 		}
 
 		// Redirect to the asset management page with error
-		return Redirect::to("admin/licenses")->with('error', Lang::get('admin/assets/message.checkout.error'));
+		return Redirect::to("admin/licenses")->with('error', Lang::get('admin/licenses/message.checkout.error'));
+	}
+
+	/**
+	*  Get the asset information to present to the asset view page
+	*
+	* @param  int  $assetId
+	* @return View
+	**/
+	public function getView($licenseId = null)
+	{
+		$license = Asset::find($licenseId);
+
+		if (isset($license->id)) {
+				return View::make('backend/licenses/view', compact('license'));
+		} else {
+			// Prepare the error message
+			$error = Lang::get('admin/licenses/message.does_not_exist', compact('id' ));
+
+			// Redirect to the user management page
+			return Redirect::route('licenses')->with('error', $error);
+		}
+
+
 	}
 
 
