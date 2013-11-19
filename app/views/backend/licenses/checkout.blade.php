@@ -65,8 +65,8 @@
 	<!-- Form actions -->
 	<div class="control-group">
 		<div class="controls">
-			<a class="btn btn-link" href="{{ route('assets') }}">@lang('general.cancel')</a>
-			<button type="submit" class="btn btn-success">@lang('general.checkout')</button>
+			<a class="btn btn-link" href="{{ route('licenses') }}">@lang('general.cancel')</a>
+			<button type="submit" class="btn-flat success">@lang('general.checkout')</button>
 		</div>
 	</div>
 </form>
