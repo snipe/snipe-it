@@ -178,8 +178,8 @@
                     <span>People</span>
                 </a>
             </li>
-            <li>
-                <a href="#">
+            <li{{ (Request::is('reports*') ? ' class="active"><div class="pointer"><div class="arrow"></div><div class="arrow_border"></div></div>' : '>') }}
+                <a href="{{ URL::to('reports') }}">
                     <i class="icon-signal"></i>
                     <span>Reports</span>
                 </a>
