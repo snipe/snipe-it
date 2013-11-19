@@ -46,7 +46,7 @@ View License {{ $license->name }} ::
                         <div class="profile-box">
                             <br>
                             <!-- checked out assets table -->
-                            @if (count($license->assetlog) > 0)
+
                             <table class="table table-hover">
                                 <thead>
                                     <tr>
@@ -58,6 +58,7 @@ View License {{ $license->name }} ::
                                     </tr>
                                 </thead>
                                 <tbody>
+                                	@if (count($license->assetlog) > 0)
 									@foreach ($license->assetlog as $log)
 									<tr>
 										<td>
@@ -82,26 +83,18 @@ View License {{ $license->name }} ::
 										</td>
 									</tr>
 									@endforeach
+									@endif
 									<tr>
 										<td></td>
-										<td>{{ $license->created_on }}</td>
+										<td>{{ $license->created_at }}</td>
 										<td>{{ $license->adminuser->fullName() }}</td>
 										<td>created asset</td>
 										<td></td>
-
-
 									</tr>
                                 </tbody>
                             </table>
-                            @else
 
-                            <div class="col-md-6">
-								<div class="alert alert-warning alert-block">
-									<i class="icon-warning-sign"></i>
-									@lang('admin/users/table.noresults')
-								</div>
-							</div>
-                            @endif
+
 
                         </div>
                     </div>

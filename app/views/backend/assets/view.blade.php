@@ -48,7 +48,7 @@ View Asset {{ $asset->asset_tag }} ::
                         <div class="profile-box">
                             <br>
                             <!-- checked out assets table -->
-                            @if (count($asset->assetlog) > 0)
+
                             <table class="table table-hover">
                                 <thead>
                                     <tr>
@@ -60,6 +60,7 @@ View Asset {{ $asset->asset_tag }} ::
                                     </tr>
                                 </thead>
                                 <tbody>
+                                @if (count($asset->assetlog) > 0)
 									@foreach ($asset->assetlog as $log)
 									<tr>
 										<td>
@@ -84,9 +85,10 @@ View Asset {{ $asset->asset_tag }} ::
 										</td>
 									</tr>
 									@endforeach
+									@endif
 									<tr>
 										<td></td>
-										<td>{{ $asset->created_on }}</td>
+										<td>{{ $asset->created_at }}</td>
 										<td>{{ $asset->adminuser->fullName() }}</td>
 										<td>created asset</td>
 										<td></td>
@@ -95,15 +97,6 @@ View Asset {{ $asset->asset_tag }} ::
 									</tr>
                                 </tbody>
                             </table>
-                            @else
-
-                            <div class="col-md-6">
-								<div class="alert alert-warning alert-block">
-									<i class="icon-warning-sign"></i>
-									@lang('admin/users/table.noresults')
-								</div>
-							</div>
-                            @endif
 
                         </div>
                     </div>
