@@ -29,6 +29,13 @@ class AssetsController extends AdminController {
 		return View::make('backend/assets/index', compact('assets'));
 	}
 
+	public function getReports()
+	{
+		// Grab all the assets
+		$assets = Asset::orderBy('created_at', 'DESC')->get();
+		return View::make('backend/reports/index', compact('assets'));
+	}
+
 
 	/**
 	 * Asset create.
