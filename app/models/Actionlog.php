@@ -15,7 +15,7 @@ class ActionLog extends Eloquent {
 	}
 
 	public function userlog() {
-		return $this->belongsTo('User','assigned_to');
+		return $this->belongsTo('User','checkedout_to');
 	}
 
 
