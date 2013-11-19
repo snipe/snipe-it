@@ -292,6 +292,9 @@ class AssetsController extends AdminController {
 
 	/**
 	* Check in the item so that it can be checked out again to someone else
+	*
+	* @param  int  $assetId
+	* @return View
 	**/
 	public function postCheckin($assetId)
 	{
@@ -331,7 +334,17 @@ class AssetsController extends AdminController {
 	}
 
 
-
+	/**
+	*  Get the asset information to present to the asset view page
+	*
+	* @param  int  $assetId
+	* @return View
+	**/
+	public function getView($assetId = null)
+	{
+		$asset = Asset::find($assetId);
+		return View::make('backend/assets/view', compact('asset'));
+	}
 
 
 
