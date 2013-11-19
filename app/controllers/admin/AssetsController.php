@@ -343,7 +343,18 @@ class AssetsController extends AdminController {
 	public function getView($assetId = null)
 	{
 		$asset = Asset::find($assetId);
-		return View::make('backend/assets/view', compact('asset'));
+
+		if (isset($asset->id)) {
+				return View::make('backend/assets/view', compact('asset'));
+		} else {
+			// Prepare the error message
+			$error = Lang::get('admin/assets/message.does_not_exist', compact('id' ));
+
+			// Redirect to the user management page
+			return Redirect::route('assets')->with('error', $error);
+		}
+
+
 	}
 
 
