@@ -197,6 +197,7 @@
 
         <div class="container-fluid">
 
+		@if ((Sentry::check()) && (Sentry::getUser()->hasAccess('admin')))
         <!-- upper main stats -->
             <div id="main-stats">
                 <div class="row-fluid stats-row">
@@ -231,6 +232,7 @@
                 </div>
             </div>
             <!-- end upper main stats -->
+            @endif
 
 
 
