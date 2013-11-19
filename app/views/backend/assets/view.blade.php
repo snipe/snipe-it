@@ -92,6 +92,8 @@ View Asset {{ $asset->asset_tag }} ::
 										<td>
 										@if (isset($asset->adminuser->id))
 										{{ $asset->adminuser->fullName() }}
+										@else
+										Unknown Admin
 										@endif
 										</td>
 										<td>created asset</td>

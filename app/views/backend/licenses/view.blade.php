@@ -90,6 +90,8 @@ View License {{ $license->name }} ::
 										<td>
 										@if (isset($license->adminuser->id))
 										{{ $license->adminuser->fullName() }}
+										@else
+										Unknown Admin
 										@endif
 										</td>
 										<td>created asset</td>
