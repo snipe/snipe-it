@@ -67,7 +67,7 @@
 
 	 <!-- navbar -->
     <div class="navbar navbar-inverse">
-        <div class="navbar-inner navbar-fixed-top navbar-inverse">
+        <div class="navbar-inner navbar-inverse">
             <button type="button" class="btn btn-navbar visible-phone" id="menu-toggler">
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
@@ -196,6 +196,44 @@
 
 
         <div class="container-fluid">
+
+        <!-- upper main stats -->
+            <div id="main-stats">
+                <div class="row-fluid stats-row">
+                    <div class="span3 stat">
+                        <div class="data">
+                            <span class="number">2,457</span>
+                            assets
+                        </div>
+						<span class="date">(placeholder)</span>
+                    </div>
+                    <div class="span3 stat">
+                        <div class="data">
+                            <span class="number">240</span>
+                            licenses
+                        </div>
+						<span class="date">(placeholder)</span>
+                    </div>
+                    <div class="span3 stat">
+                        <div class="data">
+                            <span class="number">36</span>
+                            assets available
+                        </div>
+                        <span class="date">(placeholder)</span>
+                    </div>
+                    <div class="span3 stat last">
+                        <div class="data">
+                            <span class="number">89</span>
+                            people
+                        </div>
+                        <span class="date">(placeholder)</span>
+                    </div>
+                </div>
+            </div>
+            <!-- end upper main stats -->
+
+
+
             <div id="pad-wrapper">
 
 
