@@ -110,26 +110,24 @@ View User {{ $user->fullName() }} ::
 
                     <!-- side address column -->
                     <div class="span3 address pull-right">
-                    	@if ($user->last_login!='')
-                    	<ul>
-                    		<li><strong>Last Login:</strong></li>
-                            <li>{{ $user->last_login->diffForHumans() }}</li>
-                        </ul>
+
+
+                        <h6>Contact  {{ $user->first_name }}</h6>
+
+                        		@if (isset($user->location_id))
+                        			<iframe width="300" height="133" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.com/maps?&amp;q={{ $user->userloc->address }},{{ $user->userloc->city }},{{ $user->userloc->state }},{{ $user->userloc->country }}&amp;output=embed"></iframe>
+                        		@endif
+						<ul>
+                        <li>{{ $user->userloc->address }} {{ $user->userloc->address2 }}</li>
+                        <li>{{ $user->userloc->city }}, {{ $user->userloc->state }} {{ $user->userloc->zip }}<br /><br /></li>
+                        @if (isset($user->phone))
+                        	<li><i class="icon-phone"></i>{{ $user->phone }}</li>
                         @endif
-                        <h6>Address</h6>
-                        <iframe width="300" height="133" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.com.mx/?ie=UTF8&amp;t=m&amp;ll=19.715081,-155.071421&amp;spn=0.010746,0.025749&amp;z=14&amp;output=embed"></iframe>
-                        <ul>
-                            <li>2301 East Lamar Blvd. Suite 140. </li>
-                            <li>City, Arlington. United States,</li>
-                            <li>Zip Code, TX 76006.</li>
-                            <li class="ico-li">
-                                <i class="icon-phone"></i>
-                               {{ $user->phone }}
-                            </li>
-                             <li class="ico-li">
-                                <i class="icon-envelope-alt"></i>
-                                <a href="mailto:{{ $user->email }}">{{ $user->email }}</a>
-                            </li>
+	                    	<li><i class="icon-envelope-alt"></i><a href="mailto:{{ $user->email }}">{{ $user->email }}</a></li>
                         </ul>
+
+                        @if ($user->last_login!='')
+                    	<br /><h6>Last Login: {{ $user->last_login->diffForHumans() }}</h6>
+                        @endif
                     </div>
 @stop
