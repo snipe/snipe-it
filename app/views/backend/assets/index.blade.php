@@ -43,8 +43,8 @@ Assets ::
 
 		@foreach ($assets as $asset)
 		<tr>
-			<td>{{ $asset->asset_tag }}</td>
-			<td>{{ $asset->name }}</td>
+			<td><a href="{{ route('view/asset', $asset->id) }}">{{ $asset->asset_tag }}</a></td>
+			<td><a href="{{ route('view/asset', $asset->id) }}">{{ $asset->name }}</a></td>
 			<td>{{ $asset->serial }}</td>
 			<td>
 			@if ($asset->assigned_to != 0)
