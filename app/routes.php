@@ -34,6 +34,7 @@ Route::group(array('prefix' => 'assets'), function()
 	Route::get('{assetId}/checkout', array('as' => 'checkout/asset', 'uses' => 'Controllers\Admin\AssetsController@getCheckout'));
 	Route::post('{assetId}/checkout', 'Controllers\Admin\AssetsController@postCheckout');
 	Route::get('{assetId}/checkin', array('as' => 'checkin/asset', 'uses' => 'Controllers\Admin\AssetsController@postCheckin'));
+	Route::get('{assetId}/view', array('as' => 'view/asset', 'uses' => 'Controllers\Admin\AssetsController@getView'));
 
 
 
@@ -52,20 +53,6 @@ Route::group(array('prefix' => 'assets'), function()
 
 Route::group(array('prefix' => 'admin'), function()
 {
-
-
-	# Blog Management
-	Route::group(array('prefix' => 'blogs'), function()
-	{
-		Route::get('/', array('as' => 'blogs', 'uses' => 'Controllers\Admin\BlogsController@getIndex'));
-		Route::get('create', array('as' => 'create/blog', 'uses' => 'Controllers\Admin\BlogsController@getCreate'));
-		Route::post('create', 'Controllers\Admin\BlogsController@postCreate');
-		Route::get('{blogId}/edit', array('as' => 'update/blog', 'uses' => 'Controllers\Admin\BlogsController@getEdit'));
-		Route::post('{blogId}/edit', 'Controllers\Admin\BlogsController@postEdit');
-		Route::get('{blogId}/delete', array('as' => 'delete/blog', 'uses' => 'Controllers\Admin\BlogsController@getDelete'));
-		Route::get('{blogId}/restore', array('as' => 'restore/blog', 'uses' => 'Controllers\Admin\BlogsController@getRestore'));
-	});
-
 
 	# Licenses
 	Route::group(array('prefix' => 'licenses'), function()
