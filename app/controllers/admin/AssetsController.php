@@ -7,6 +7,7 @@ use Asset;
 use User;
 use Redirect;
 use DB;
+use Actionlog;
 use Model;
 use Depreciation;
 use Sentry;
@@ -35,7 +36,6 @@ class AssetsController extends AdminController {
 		$assets = Asset::orderBy('created_at', 'DESC')->get();
 		return View::make('backend/reports/index', compact('assets'));
 	}
-
 
 	/**
 	 * Asset create.
@@ -97,7 +97,6 @@ class AssetsController extends AdminController {
 			$errors = $asset->errors();
 			return Redirect::back()->withInput()->withErrors($errors);
 		}
-
 
 		// Redirect to the asset create page with an error
 		return Redirect::to('assets/create')->with('error', Lang::get('admin/assets/message.create.error'));
@@ -245,7 +244,6 @@ class AssetsController extends AdminController {
 		$assigned_to = e(Input::get('assigned_to'));
 
 
-
 		// Declare the rules for the form validation
 		$rules = array(
 			'assigned_to'   => 'required|min:1'
@@ -272,10 +270,18 @@ class AssetsController extends AdminController {
 		// Update the asset data
 		$asset->assigned_to            		= e(Input::get('assigned_to'));
 
-
 		// Was the asset updated?
 		if($asset->save())
 		{
+			$logaction = new Actionlog();
+			$logaction->asset_id = $asset->id;
+			$logaction->checkedout_to = $asset->assigned_to;
+			$logaction->location_id = $assigned_to->location_id;
+			$logaction->user_id = Sentry::getUser()->id;
+			$log = $logaction->logaction('checkout');
+
+
+
 			// Redirect to the new asset page
 			return Redirect::to("admin")->with('success', Lang::get('admin/assets/message.checkout.success'));
 		}
@@ -299,9 +305,22 @@ class AssetsController extends AdminController {
 		// Update the asset data
 		$asset->assigned_to            		= '';
 
+
+		if (!is_null($asset->assigned_to)) {
+		 	$user = User::find($asset->assigned_to);
+		}
+
+
 		// Was the asset updated?
 		if($asset->save())
 		{
+			$logaction = new Actionlog();
+			$logaction->asset_id = $asset->id;
+			//$logaction->user_id = $loggedin->user_id ;
+			$logaction->location_id = NULL;
+			$logaction->user_id = Sentry::getUser()->id;
+			$log = $logaction->logaction('checkin');
+
 			// Redirect to the new asset page
 			return Redirect::to("admin")->with('success', Lang::get('admin/assets/message.checkin.success'));
 		}
