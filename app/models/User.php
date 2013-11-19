@@ -50,4 +50,13 @@ class User extends SentryUserModel {
 		return $this->hasMany('Actionlog','checkedout_to');
 	}
 
+
+	/**
+	* Get the asset's location based on the assigned user
+	**/
+  	public function userloc()
+  	{
+  		return $this->hasOne('Location','id');
+  	}
+
 }
