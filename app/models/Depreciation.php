@@ -8,5 +8,9 @@ class Depreciation extends Elegant {
 			'months'   => 'required|min:1|integer',
 		);
 
+	public function has_models()
+	{
+		return $this->hasMany('Model', 'depreciation_id')->count();
+	}
 
 }
