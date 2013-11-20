@@ -209,21 +209,19 @@
                             <span class="number">{{ number_format(Asset::assetcount()) }}</span>
                             total assets
                         </div>
-						<span class="date">(placeholder)</span>
+
                     </div>
                     <div class="span3 stat">
                         <div class="data">
                             <span class="number">{{ number_format(Asset::availassetcount()) }}</span>
                             assets available
                         </div>
-                        <span class="date">(placeholder)</span>
                     </div>
                     <div class="span3 stat">
                         <div class="data">
                             <span class="number">{{ number_format(License::assetcount()) }}</span>
                             total licenses
                         </div>
-						<span class="date">(placeholder)</span>
                     </div>
 
                     <div class="span3 stat last">
@@ -231,7 +229,6 @@
                             <span class="number">{{ number_format(License::availassetcount()) }}</span>
                             licenses available
                         </div>
-                        <span class="date">(placeholder)</span>
                     </div>
                 </div>
             </div>
