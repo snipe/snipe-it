@@ -89,7 +89,13 @@ View User {{ $user->fullName() }} ::
 									<tr>
 										<td>{{ $log->added_on }}</td>
 										<td>{{ $log->action_type }}</td>
-										<td><a href="{{ route('view/asset', $log->asset_id) }}">{{ $log->assetlog->name }}</a></td>
+										<td>
+										@if (isset($log->assetlog->name))
+										<a href="{{ route('view/asset', $log->asset_id) }}">{{ $log->assetlog->name }}</a>
+										@else
+										missing asset
+										@endif
+										</td>
 										<td>{{ $log->adminlog->fullName() }}</td>
 									</tr>
 									@endforeach
