@@ -40,6 +40,10 @@
   right: 50px;
 }
 
+#main-stats a:hover {
+text-decoration: none;
+}
+
 .section {
   border-top: 1px solid #edeff1;
   margin-top: 100px;

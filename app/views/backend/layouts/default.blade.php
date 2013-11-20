@@ -206,28 +206,35 @@
                 <div class="row-fluid stats-row">
                     <div class="span3 stat">
                         <div class="data">
-                            <span class="number">{{ number_format(Asset::assetcount()) }}</span>
-                            total assets
-                        </div>
-
-                    </div>
-                    <div class="span3 stat">
-                        <div class="data">
-                            <span class="number">{{ number_format(Asset::availassetcount()) }}</span>
-                            assets available
+                            <a href="{{ URL::to('admin') }}">
+                            	<span class="number">{{ number_format(Asset::assetcount()) }}</span>
+                           	 	<span style="color:black">total assets</span>
+                            </a>
                         </div>
                     </div>
                     <div class="span3 stat">
                         <div class="data">
-                            <span class="number">{{ number_format(License::assetcount()) }}</span>
-                            total licenses
+                            <a href="{{ URL::to('admin') }}">
+                            	<span class="number">{{ number_format(Asset::availassetcount()) }}</span>
+                            	<span style="color:black">assets available</span>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="span3 stat">
+                        <div class="data">
+                            <a href="{{ URL::to('admin/licenses') }}">
+                            	<span class="number">{{ number_format(License::assetcount()) }}</span>
+                            	<span style="color:black">total licenses</span>
+                            </a>
                         </div>
                     </div>
 
                     <div class="span3 stat last">
                         <div class="data">
-                            <span class="number">{{ number_format(License::availassetcount()) }}</span>
-                            licenses available
+                        	<a href="{{ URL::to('admin/licenses') }}">
+                            	<span class="number">{{ number_format(License::availassetcount()) }}</span>
+                            	<span style="color:black">licenses available</span>
+                            </a>
                         </div>
                     </div>
                 </div>
