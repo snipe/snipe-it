@@ -9,7 +9,7 @@ class License extends Elegant {
 	 */
 
 	protected $table = 'assets';
-
+	protected $softDelete = true;
 	protected $rules = array(
 			'name'   => 'required|min:3',
 			'serial'   => 'required|min:5',
