@@ -202,11 +202,19 @@ class AssetsController extends AdminController {
 			return Redirect::to('admin')->with('error', Lang::get('admin/assets/message.not_found'));
 		}
 
-		// Delete the asset
-		$asset->delete();
+		if (isset($asset->assigneduser->id) && ($asset->assigneduser->id!=0)) {
+			// Redirect to the asset management page
+			return Redirect::to('admin')->with('error', Lang::get('admin/assets/message.assoc_users'));
+		} else {
+			// Delete the asset
+			$asset->delete();
 
-		// Redirect to the asset management page
-		return Redirect::to('admin')->with('success', Lang::get('admin/assets/message.delete.success'));
+			// Redirect to the asset management page
+			return Redirect::to('admin')->with('success', Lang::get('admin/assets/message.delete.success'));
+		}
+
+
+
 	}
 
 	/**

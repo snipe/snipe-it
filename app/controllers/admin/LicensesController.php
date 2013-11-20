@@ -187,11 +187,18 @@ class LicensesController extends AdminController {
 			return Redirect::to('admin/licenses')->with('error', Lang::get('admin/licenses/message.not_found'));
 		}
 
-		// Delete the license
-		$license->delete();
+		if (isset($license->assigneduser->id) && ($license->assigneduser->id!=0)) {
+			// Redirect to the asset management page
+			return Redirect::to('admin/licenses')->with('error', Lang::get('admin/licenses/message.assoc_users'));
+		} else {
+			// Delete the license
+			$license->delete();
 
-		// Redirect to the licenses management page
-		return Redirect::to('admin/licenses')->with('success', Lang::get('admin/licenses/message.delete.success'));
+			// Redirect to the licenses management page
+			return Redirect::to('admin/licenses')->with('success', Lang::get('admin/licenses/message.delete.success'));
+		}
+
+
 	}
 
 

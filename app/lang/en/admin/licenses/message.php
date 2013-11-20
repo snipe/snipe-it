@@ -4,6 +4,8 @@ return array(
 
 	'does_not_exist' => 'License does not exist.',
 	'user_does_not_exist' => 'User does not exist.',
+	'assoc_users'	 => 'This license is currently checked out to a user and cannot be deleted. Please check the license in first, and then try deleting again. ',
+
 
 	'create' => array(
 		'error'   => 'License was not created, please try again.',

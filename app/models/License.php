@@ -30,7 +30,7 @@ class License extends Elegant {
   	}
 
   	/**
-	* Get action logs for this asset
+	* Get asset logs for this asset
 	*/
 	public function assetlog()
 	{
@@ -38,7 +38,7 @@ class License extends Elegant {
 	}
 
 	/**
-	* Get action logs for this asset
+	* Get admin user for this asset
 	*/
 	public function adminuser()
 	{

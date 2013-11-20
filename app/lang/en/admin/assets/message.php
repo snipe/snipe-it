@@ -3,6 +3,7 @@
 return array(
 
 	'does_not_exist' => 'Asset does not exist.',
+	'assoc_users'	 => 'This asset is currently checked out to a user and cannot be deleted. Please check the asset in first, and then try deleting again. ',
 
 	'create' => array(
 		'error'   => 'Asset was not created, please try again. :(',
