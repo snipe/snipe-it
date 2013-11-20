@@ -23,8 +23,10 @@ class AssetsSeeder extends Seeder {
 			'user_id' 		=> 1,
 			'assigned_to' 	=> 1,
 			'physical' 		=> 1,
+			'archived' 		=> 0,
 			'license_name'	=> NULL,
 			'license_email'	=> NULL,
+			'status_id'	=> NULL,
 		);
 
 		$asset[] = array(
@@ -40,8 +42,10 @@ class AssetsSeeder extends Seeder {
 			'user_id' 		=> 1,
 			'assigned_to' 	=> 1,
 			'physical' 		=> 1,
+			'archived' 		=> 0,
 			'license_name'	=> NULL,
 			'license_email'	=> NULL,
+			'status_id'	=> NULL,
 		);
 
 		$asset[] = array(
@@ -57,8 +61,10 @@ class AssetsSeeder extends Seeder {
 			'user_id' 		=> 2,
 			'assigned_to' 	=> 2,
 			'physical' 		=> 1,
+			'archived' 		=> 0,
 			'license_name'	=> NULL,
 			'license_email'	=> NULL,
+			'status_id'	=> NULL,
 		);
 
 		$asset[] = array(
@@ -74,8 +80,10 @@ class AssetsSeeder extends Seeder {
 			'user_id' 		=> 2,
 			'assigned_to' 	=> 2,
 			'physical' 		=> 0,
+			'archived' 		=> 0,
 			'license_name'	=> 'Alison Giasnotto',
 			'license_email'	=> 'snipe@snipe.net',
+			'status_id'	=> NULL,
 		);
 
 		$asset[] = array(
@@ -91,8 +99,10 @@ class AssetsSeeder extends Seeder {
 			'user_id' 		=> 2,
 			'assigned_to' 	=> 2,
 			'physical' 		=> 0,
+			'archived' 		=> 0,
 			'license_name'	=> 'Alison Giasnotto',
 			'license_email'	=> 'me@example.com',
+			'status_id'	=> NULL,
 		);
 
 		$asset[] = array(
@@ -108,8 +118,10 @@ class AssetsSeeder extends Seeder {
 			'user_id' 		=> 2,
 			'assigned_to' 	=> 2,
 			'physical' 		=> 1,
+			'archived' 		=> 0,
 			'license_name'	=> NULL,
 			'license_email'	=> NULL,
+			'status_id'	=> NULL,
 		);
 
 		$asset[] = array(
@@ -125,9 +137,89 @@ class AssetsSeeder extends Seeder {
 			'user_id' 		=> 2,
 			'assigned_to' 	=> 2,
 			'physical' 		=> 1,
+			'archived' 		=> 0,
 			'license_name'	=> NULL,
 			'license_email'	=> NULL,
+			'status_id'	=> NULL,
 		);
+
+		$asset[] = array(
+			'name'      	=> 'Broke-Ass Laptop',
+			'asset_tag'     => 'NNY67567775',
+			'model_id'      => 2,
+			'serial'      	=> 'WS89080890',
+			'purchase_date' => '2012-01-02',
+			'purchase_cost' => '1999.99',
+			'order_number'  => '657756',
+			'created_at' 	=> $date->modify('-10 day'),
+			'updated_at' 	=> $date->modify('-3 day'),
+			'user_id' 		=> 2,
+			'assigned_to' 	=> NULL,
+			'physical' 		=> 1,
+			'archived' 		=> 0,
+			'license_name'	=> NULL,
+			'license_email'	=> NULL,
+			'status_id'	=> '3',
+		);
+
+		$asset[] = array(
+			'name'      	=> 'Maybe Broke-Ass Laptop',
+			'asset_tag'     => 'NNY6755667775',
+			'model_id'      => 2,
+			'serial'      	=> 'WS45689080890',
+			'purchase_date' => '2012-01-02',
+			'purchase_cost' => '1999.99',
+			'order_number'  => '657756',
+			'created_at' 	=> $date->modify('-10 day'),
+			'updated_at' 	=> $date->modify('-3 day'),
+			'user_id' 		=> 1,
+			'assigned_to' 	=> NULL,
+			'physical' 		=> 1,
+			'archived' 		=> 0,
+			'license_name'	=> NULL,
+			'license_email'	=> NULL,
+			'status_id'	=> '2',
+		);
+
+
+		$asset[] = array(
+			'name'      	=> 'Completely Facacta Laptop',
+			'asset_tag'     => 'NNY6564567775',
+			'model_id'      => 2,
+			'serial'      	=> 'WS99689080890',
+			'purchase_date' => '2012-01-02',
+			'purchase_cost' => '1999.99',
+			'order_number'  => '657756',
+			'created_at' 	=> $date->modify('-10 day'),
+			'updated_at' 	=> $date->modify('-3 day'),
+			'user_id' 		=> 1,
+			'assigned_to' 	=> NULL,
+			'physical' 		=> 1,
+			'archived' 		=> 1,
+			'license_name'	=> NULL,
+			'license_email'	=> NULL,
+			'status_id'	=> '4',
+		);
+
+		$asset[] = array(
+			'name'      	=> 'Drunken Shanenigans Laptop',
+			'asset_tag'     => 'NNY6564567775',
+			'model_id'      => 2,
+			'serial'      	=> 'WS99689080890',
+			'purchase_date' => '2012-01-02',
+			'purchase_cost' => '1999.99',
+			'order_number'  => '657756',
+			'created_at' 	=> $date->modify('-10 day'),
+			'updated_at' 	=> $date->modify('-3 day'),
+			'user_id' 		=> 1,
+			'assigned_to' 	=> NULL,
+			'physical' 		=> 1,
+			'archived' 		=> 1,
+			'license_name'	=> NULL,
+			'license_email'	=> NULL,
+			'status_id'	=> '5',
+		);
+
 
 
 

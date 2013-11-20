@@ -1,5 +1,5 @@
 <?php
-class LocationsSeeder extends Seeder {
+class StatuslabelsSeeder extends Seeder {
 
 
 	public function run()
@@ -44,17 +44,21 @@ class LocationsSeeder extends Seeder {
 			'user_id' => 1,
 		);
 
-
-
-
+		$status[] = array(
+			'name'      => 'Lost/Stolen',
+			'deployable' => '0',
+			'created_at' => $date->modify('-10 day'),
+			'updated_at' => $date->modify('-3 day'),
+			'user_id' => 1,
+		);
 
 
 
 		// Delete all the old data
-		DB::table('status')->truncate();
+		DB::table('status_labels')->truncate();
 
 		// Insert the new posts
-		Location::insert($status);
+		Statuslabel::insert($status);
 	}
 
 }
