@@ -2,6 +2,8 @@
 
 class Location extends Elegant {
 
+
+	protected $softDelete = true;
 	protected $table = 'locations';
 	protected $rules = array(
 			'name'  		=> 'required|min:3',
@@ -9,5 +11,10 @@ class Location extends Elegant {
 			'state'   		=> 'required|alpha|min:2|max:2',
 			'country'   	=> 'required|alpha|min:2|max:2',
 		);
+
+	public function has_users()
+	{
+		return $this->hasMany('User', 'location_id')->count();
+	}
 
 }
