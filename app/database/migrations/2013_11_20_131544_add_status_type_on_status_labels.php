@@ -2,7 +2,7 @@
 
 use Illuminate\Database\Migrations\Migration;
 
-class AddStatusIdOnAssetsTable extends Migration {
+class AddStatusTypeOnStatusLabels extends Migration {
 
 	/**
 	 * Run the migrations.
@@ -11,9 +11,9 @@ class AddStatusIdOnAssetsTable extends Migration {
 	 */
 	public function up()
 	{
-		Schema::table('assets', function($table)
+		Schema::table('status_labels', function($table)
 		{
-			$table->integer('status_id')->nullable();
+			$table->boolean('deployable');
 		});
 	}
 
@@ -24,9 +24,9 @@ class AddStatusIdOnAssetsTable extends Migration {
 	 */
 	public function down()
 	{
-		Schema::table('assets', function($table)
+		Schema::table('status_labels', function($table)
 		{
-			$table->dropColumn('status_id');
+			$table->dropColumn('deployable');
 		});
 	}
 
