@@ -28,7 +28,7 @@
 
 		<!--alertify styles-->
 		<link rel="stylesheet" type="text/css" href="{{ asset('assets/css/lib/alertify.core.css') }}">
-		<link rel="stylesheet" type="text/css" href="{{ asset('assets/css/lib/alertify.default.css') }}"
+		<link rel="stylesheet" type="text/css" href="{{ asset('assets/css/lib/alertify.default.css') }}">
 
 		<!-- global styles -->
 		<link rel="stylesheet" type="text/css" href="{{ asset('assets/css/compiled/layout.css') }}">
@@ -36,8 +36,8 @@
 		<link rel="stylesheet" type="text/css" href="{{ asset('assets/css/compiled/icons.css') }}">
 		<link href="{{ asset('assets/css/lib/select2.css') }}" type="text/css" rel="stylesheet">
 
-		>
-		
+
+
 		<!-- this page specific styles -->
 		<link rel="stylesheet" href="{{ asset('assets/css/compiled/index.css') }}" type="text/css" media="screen" />
 		<link rel="stylesheet" href="{{ asset('assets/css/compiled/user-list.css') }}" type="text/css" media="screen" />
@@ -310,12 +310,12 @@
 				alertify.confirm('Are you sure?', function (e) {
 				    if (e) {
 				      // user clicked "ok"
-				      window.location = targetLink; 
+				      window.location = targetLink;
 				    } else {
 				      // user clicked "cancel", do nothing.
 				    }
 				});
-      });      
+      });
 
         });
 
