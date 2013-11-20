@@ -90,10 +90,12 @@ View User {{ $user->fullName() }} ::
 										<td>{{ $log->added_on }}</td>
 										<td>{{ $log->action_type }}</td>
 										<td>
-										@if (isset($log->assetlog->name))
-										<a href="{{ route('view/asset', $log->asset_id) }}">{{ $log->assetlog->name }}</a>
+										@if ((isset($log->assetlog->name)) && ($log->assetlog->deleted_at==''))
+											<a href="{{ route('view/asset', $log->asset_id) }}">{{ $log->assetlog->name }}</a>
+										@elseif ((isset($log->assetlog->name)) && ($log->assetlog->deleted_at!=''))
+											<del>{{ $log->assetlog->name }}</del> (deleted)
 										@else
-										missing asset
+										missing asset ({{ $log->assetlog->name }}) ({{ $log->assetlog->deleted_at }})
 										@endif
 										</td>
 										<td>{{ $log->adminlog->fullName() }}</td>
