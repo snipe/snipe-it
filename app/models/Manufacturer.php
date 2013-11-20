@@ -6,4 +6,9 @@ class Manufacturer extends Elegant {
 		'name'   => 'required|min:2',
 	);
 
+	public function has_models()
+	{
+		return $this->hasMany('Model', 'manufacturer_id')->count();
+	}
+
 }
