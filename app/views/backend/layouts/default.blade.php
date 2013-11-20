@@ -296,8 +296,26 @@
             // jQuery Knobs
             $(".knob").knob();
 
+            // confirm delete modal
+            $('.delete-asset').click(function(evnt) {
+			var href = $(this).attr('href');
+			var message = $(this).attr('data-content');
+            var title = $(this).attr('data-title');
+
+			if (!$('#dataConfirmModal').length) {
+				$('body').append('<div id="dataConfirmModal" class="modal" role="dialog" aria-labelledby="dataConfirmLabel" aria-hidden="true"><div class="modal-header"><button type="button" class="close " data-dismiss="modal" aria-hidden="true">×</button><h3 id="dataConfirmLabel">'+title+'</h3></div><div class="modal-body">'+message+'</div><div class="modal-footer"><button class="btn-flat white" data-dismiss="modal" aria-hidden="true">No</button> <a class="btn-flat danger" id="dataConfirmOK">Yes</a></div></div>');
+			}
+
+			$('#dataConfirmModal').find('.modal-body').text(message);
+			$('#dataConfirmOK').attr('href', href);
+			$('#dataConfirmModal').modal({show:true});
+})
+
 
         });
+
+
+
 
 
     </script>

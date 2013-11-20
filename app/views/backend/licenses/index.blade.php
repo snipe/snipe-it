@@ -57,7 +57,11 @@ Licenses ::
 			</td>
 			<td>
 				<a href="{{ route('update/license', $license->id) }}" class="btn-flat white"> @lang('button.edit')</a>
-				<a href="{{ route('delete/license', $license->id) }}"  class="btn-flat danger"> @lang('button.delete')</a>
+				<a class="btn-flat danger delete-asset" data-toggle="modal" href="{{ route('delete/license', $license->id) }}" data-content="Are you sure you wish to delete the  {{ $license->name }} license?" data-title="Delete {{ $license->name }}?" onClick="return false;">@lang('button.delete')</a>
+
+
+
+
 			</td>
 		</tr>
 		@endforeach
