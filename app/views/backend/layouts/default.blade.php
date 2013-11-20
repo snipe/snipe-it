@@ -26,12 +26,18 @@
 		<link href="{{ asset('assets/css/lib/jquery-ui-1.10.2.custom.css') }}" rel="stylesheet" type="text/css" />
 		<link href="{{ asset('assets/css/lib/font-awesome.css') }}" type="text/css" rel="stylesheet" />
 
+		<!--alertify styles-->
+		<link rel="stylesheet" type="text/css" href="{{ asset('assets/css/lib/alertify.core.css') }}">
+		<link rel="stylesheet" type="text/css" href="{{ asset('assets/css/lib/alertify.default.css') }}"
+
 		<!-- global styles -->
 		<link rel="stylesheet" type="text/css" href="{{ asset('assets/css/compiled/layout.css') }}">
 		<link rel="stylesheet" type="text/css" href="{{ asset('assets/css/compiled/elements.css') }}">
 		<link rel="stylesheet" type="text/css" href="{{ asset('assets/css/compiled/icons.css') }}">
 		<link href="{{ asset('assets/css/lib/select2.css') }}" type="text/css" rel="stylesheet">
 
+		>
+		
 		<!-- this page specific styles -->
 		<link rel="stylesheet" href="{{ asset('assets/css/compiled/index.css') }}" type="text/css" media="screen" />
 		<link rel="stylesheet" href="{{ asset('assets/css/compiled/user-list.css') }}" type="text/css" media="screen" />
@@ -235,6 +241,7 @@
     <script src="{{ asset('assets/js/select2.min.js') }}"></script>
     <script src="{{ asset('assets/js/jquery.uniform.min.js') }}"></script>
     <script src="{{ asset('assets/js/bootstrap.datepicker.js') }}"></script>
+    <script src="{{ asset('assets/js/alertify.min.js') }}"></script>
 
     <script type="text/javascript">
         $(function () {
@@ -256,7 +263,20 @@
 
             // jQuery Knobs
             $(".knob").knob();
-
+      //Prompt Deletes
+      $("table.table").on('click', 'a.btn-flat.danger', function(e){
+      	e.preventDefault();
+      	var targetLink = $(this).attr('href');
+      	// confirm dialog
+				alertify.confirm('Are you sure?', function (e) {
+				    if (e) {
+				      // user clicked "ok"
+				      window.location = targetLink; 
+				    } else {
+				      // user clicked "cancel", do nothing.
+				    }
+				});
+      });      
 
         });
 
