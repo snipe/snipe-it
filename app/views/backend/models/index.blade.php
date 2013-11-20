@@ -28,24 +28,21 @@ Asset Models ::
 			<th class="span3">@lang('admin/models/table.title')</th>
 			<th class="span3"><span class="line"></span>@lang('admin/models/table.modelnumber')</th>
 			<th class="span1"><span class="line"></span>@lang('admin/models/table.numassets')</th>
-			<th class="span1"><span class="line"></span>@lang('admin/models/table.created_at')</th>
+			<th class="span2"><span class="line"></span>@lang('admin/models/table.created_at')</th>
 			<th class="span3"><span class="line"></span>@lang('table.actions')</th>
 		</tr>
 	</thead>
 	<tbody>
 		@foreach ($models as $model)
 		<tr>
-			<td>{{ $model->name }}
-
-
-
-			</td>
+			<td>{{ $model->name }}</td>
 			<td>{{ $model->modelno }}</td>
 			<td>{{ ($model->assets->count()) }}</td>
 			<td>{{ $model->created_at->diffForHumans() }}</td>
 			<td>
 				<a href="{{ route('update/model', $model->id) }}" class="btn-flat white">@lang('button.edit')</a>
-				<a href="{{ route('delete/model', $model->id) }}" class="btn-flat danger">@lang('button.delete')</a>
+				<a class="btn-flat danger delete-asset" data-toggle="modal" href="{{ route('delete/model', $model->id) }}" data-content="Are you sure you wish to delete the  {{ $model->name }} model?" data-title="Delete {{ $model->name }}?" onClick="return false;">@lang('button.delete')</a>
+
 			</td>
 		</tr>
 		@endforeach

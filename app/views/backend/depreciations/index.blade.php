@@ -38,7 +38,7 @@ Asset Depreciations ::
 			<td>{{ $depreciation->months }} @lang('admin/depreciations/table.months') </td>
 			<td>
 				<a href="{{ route('update/depreciations', $depreciation->id) }}" class="btn-flat white">@lang('button.edit')</a>
-				<a href="{{ route('delete/depreciations', $depreciation->id) }}" class="btn-flat danger">@lang('button.delete')</a>
+				<a class="btn-flat danger delete-asset" data-toggle="modal" href="{{ route('delete/depreciations', $depreciation->id) }}" data-content="Are you sure you wish to delete the  {{ $depreciation->name }} depreciation class?" data-title="Delete {{ $depreciation->name }}?" onClick="return false;">@lang('button.delete')</a>
 			</td>
 		</tr>
 		@endforeach

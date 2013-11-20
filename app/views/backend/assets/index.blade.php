@@ -8,8 +8,6 @@ Assets ::
 
 {{-- Page content --}}
 @section('content')
-
-
 <div class="page-header">
 	<h3>
 		Assets
@@ -30,12 +28,9 @@ Assets ::
 			<th class="span2">@lang('admin/assets/table.asset_tag')</th>
 			<th class="span2"><span class="line"></span>@lang('admin/assets/table.title')</th>
 			<th class="span2"><span class="line"></span>@lang('admin/assets/table.serial')</th>
-			<th class="span3"><span class="line"></span>@lang('admin/assets/table.checkoutto')</th>
+			<th class="span2"><span class="line"></span>@lang('admin/assets/table.checkoutto')</th>
 			<th class="span2"><span class="line"></span>@lang('admin/assets/table.location')</th>
 			<th class="span1"><span class="line"></span>@lang('admin/assets/table.change')</th>
-			<th class="span2"><span class="line"></span>@lang('admin/assets/table.purchase_date')</th>
-			<!-- <th class="span2"><span class="line"></span>@lang('admin/assets/table.purchase_cost')</th> -->
-			<!-- <th class="span2"><span class="line"></span>@lang('admin/assets/table.book_value')</th> -->
 			<th class="span2"><span class="line"></span>@lang('table.actions')</th>
 		</tr>
 	</thead>
@@ -65,20 +60,16 @@ Assets ::
 				<a href="{{ route('checkout/asset', $asset->id) }}" class="btn-flat success">Checkout</a>
 			@endif
 			</td>
-			<td>{{ $asset->purchase_date }}</td>
-			<!-- <td>${{ number_format($asset->purchase_cost) }}</td> -->
-			<!-- <td>${{ number_format($asset->depreciation()) }}</td> -->
 			<td nowrap="nowrap">
-
 				<a href="{{ route('update/asset', $asset->id) }}" class="btn-flat white">@lang('button.edit')</a>
-				<a href="{{ route('delete/asset', $asset->id) }}" class="btn-flat danger">@lang('button.delete')</a>
-
+				<a class="btn-flat danger delete-asset" data-toggle="modal" href="{{ route('delete/asset', $asset->id) }}" data-content="Are you sure you wish to delete asset {{ $asset->asset_tag }}?" data-title="Delete {{ $asset->asset_tag }}?" onClick="return false;">@lang('button.delete')</a>
 			</td>
 		</tr>
 		@endforeach
 	</tbody>
 </table>
 </div>
+
 
 @if ($assets->getTotal() > 10)
 {{ $assets->links() }}

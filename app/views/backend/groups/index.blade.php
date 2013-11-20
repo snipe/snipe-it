@@ -43,7 +43,7 @@ Group Management ::
 			<td>{{ $group->created_at->diffForHumans() }}</td>
 			<td>
 				<a href="{{ route('update/group', $group->id) }}" class="btn-flat white">@lang('button.edit')</a>
-				<a href="{{ route('delete/group', $group->id) }}" class="btn-flat danger">@lang('button.delete')</a>
+				<a class="btn-flat danger delete-asset" data-toggle="modal" href="{{ route('delete/group', $group->id) }}" data-content="Are you sure you wish to delete the  {{ $group->name }} group?" data-title="Delete {{ $group->name }}?" onClick="return false;">@lang('button.delete')</a>
 			</td>
 		</tr>
 		@endforeach
