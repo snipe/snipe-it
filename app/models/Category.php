@@ -2,6 +2,8 @@
 
 class Category extends Elegant {
 
+	protected $softDelete = true;
+
 	/**
 	* Category validation rules
 	*/
@@ -19,6 +21,10 @@ class Category extends Elegant {
 		return $this->belongsTo('Category','parent');
 	}
 
+	public function has_models()
+	{
+		return $this->hasMany('Model', 'category_id')->count();
+	}
 
 
 

@@ -1,6 +1,7 @@
 <?php
 class Manufacturer extends Elegant {
 
+	protected $softDelete = true;
 	// Declare the rules for the form validation
 	protected $rules = array(
 		'name'   => 'required|min:2',

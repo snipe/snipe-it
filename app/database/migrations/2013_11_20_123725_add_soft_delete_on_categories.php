@@ -2,7 +2,7 @@
 
 use Illuminate\Database\Migrations\Migration;
 
-class AddSoftDeleteOnManufacturers extends Migration {
+class AddSoftDeleteOnCategories extends Migration {
 
 	/**
 	 * Run the migrations.
@@ -11,7 +11,7 @@ class AddSoftDeleteOnManufacturers extends Migration {
 	 */
 	public function up()
 	{
-		Schema::table('manufacturers', function($table)
+		Schema::table('categories', function($table)
 		{
 			$table->softDeletes();
 		});
