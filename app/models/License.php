@@ -45,5 +45,22 @@ class License extends Elegant {
 		return $this->belongsTo('User','id');
 	}
 
+	/**
+	* Get total licenses
+	*/
+	 public static function assetcount()
+	{
+		return Asset::where('physical', '==', 1)->count();
+	}
+
+	/**
+	* Get total licenses not checked out
+	*/
+	 public static function availassetcount()
+	{
+		return Asset::where('assigned_to', '==', 0)->count();
+	}
+
+
 
 }
