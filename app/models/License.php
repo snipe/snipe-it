@@ -50,7 +50,10 @@ class License extends Elegant {
 	*/
 	 public static function assetcount()
 	{
-		return Asset::where('physical', '==', 1)->count();
+		return DB::table('assets')
+                    ->where('physical', '=', '0')
+                    ->whereNull('deleted_at','and')
+                    ->count();
 	}
 
 	/**
@@ -58,7 +61,12 @@ class License extends Elegant {
 	*/
 	 public static function availassetcount()
 	{
-		return Asset::where('assigned_to', '==', 0)->count();
+		return DB::table('assets')
+                    ->where('physical', '=', '0')
+                    ->where('assigned_to', '=', '0')
+                    ->whereNull('deleted_at','and')
+                    ->count();
+
 	}
 
 

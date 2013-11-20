@@ -221,7 +221,7 @@
                     <div class="span3 stat">
                         <div class="data">
                             <span class="number">{{ number_format(License::assetcount()) }}</span>
-                            licenses
+                            total licenses
                         </div>
 						<span class="date">(placeholder)</span>
                     </div>
@@ -229,7 +229,7 @@
                     <div class="span3 stat last">
                         <div class="data">
                             <span class="number">{{ number_format(License::availassetcount()) }}</span>
-                            people
+                            licenses available
                         </div>
                         <span class="date">(placeholder)</span>
                     </div>
