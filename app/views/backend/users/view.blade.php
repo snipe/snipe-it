@@ -128,7 +128,7 @@ View User {{ $user->fullName() }} ::
 						<ul>
                         <li>{{ $user->userloc->address }} {{ $user->userloc->address2 }}</li>
                         <li>{{ $user->userloc->city }}, {{ $user->userloc->state }} {{ $user->userloc->zip }}<br /><br /></li>
-                        @if (isset($user->phone))
+                        @if ($user->phone)
                         	<li><i class="icon-phone"></i>{{ $user->phone }}</li>
                         @endif
 	                    	<li><i class="icon-envelope-alt"></i><a href="mailto:{{ $user->email }}">{{ $user->email }}</a></li>
