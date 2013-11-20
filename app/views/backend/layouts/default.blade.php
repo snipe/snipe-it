@@ -116,7 +116,11 @@
 						<i class="icon-wrench icon-white"></i> Admin <span class="caret"></span>
 					</a>
 					<ul class="dropdown-menu">
-						<li{{ (Request::is('admin/groups*') ? ' class="active"' : '') }}><a href="{{ URL::to('admin/groups') }}"><i class="icon-group"></i> Groups</a></li>
+						<li{{ (Request::is('admin/groups*') ? ' class="active"' : '') }}>
+							<a href="{{ URL::to('admin/groups') }}">
+								<i class="icon-group"></i> Groups
+							</a>
+							</li>
 						<li{{ (Request::is('admin/settings/manufacturers*') ? ' class="active"' : '') }}>
 							<a href="{{ URL::to('admin/settings/manufacturers') }}">
 								<i class="icon-briefcase"></i> Manufacturers
@@ -202,31 +206,36 @@
                 <div class="row-fluid stats-row">
                     <div class="span3 stat">
                         <div class="data">
-                            <span class="number">2,457</span>
-                            assets
+                            <a href="{{ URL::to('admin') }}">
+                            	<span class="number">{{ number_format(Asset::assetcount()) }}</span>
+                           	 	<span style="color:black">total assets</span>
+                            </a>
                         </div>
-						<span class="date">(placeholder)</span>
                     </div>
                     <div class="span3 stat">
                         <div class="data">
-                            <span class="number">240</span>
-                            licenses
+                            <a href="{{ URL::to('admin') }}">
+                            	<span class="number">{{ number_format(Asset::availassetcount()) }}</span>
+                            	<span style="color:black">assets available</span>
+                            </a>
                         </div>
-						<span class="date">(placeholder)</span>
                     </div>
                     <div class="span3 stat">
                         <div class="data">
-                            <span class="number">36</span>
-                            assets available
+                            <a href="{{ URL::to('admin/licenses') }}">
+                            	<span class="number">{{ number_format(License::assetcount()) }}</span>
+                            	<span style="color:black">total licenses</span>
+                            </a>
                         </div>
-                        <span class="date">(placeholder)</span>
                     </div>
+
                     <div class="span3 stat last">
                         <div class="data">
-                            <span class="number">89</span>
-                            people
+                        	<a href="{{ URL::to('admin/licenses') }}">
+                            	<span class="number">{{ number_format(License::availassetcount()) }}</span>
+                            	<span style="color:black">licenses available</span>
+                            </a>
                         </div>
-                        <span class="date">(placeholder)</span>
                     </div>
                 </div>
             </div>

@@ -74,6 +74,30 @@ class Asset extends Elegant {
 		return $this->belongsTo('User','id');
 	}
 
+	/**
+	* Get total assets
+	*/
+	 public static function assetcount()
+	{
+		return DB::table('assets')
+
+                    ->where('physical', '=', '1')
+                    ->whereNull('deleted_at','and')
+                    ->count();
+	}
+
+	/**
+	* Get total assets not checked out
+	*/
+	 public static function availassetcount()
+	{
+		return DB::table('assets')
+                    ->where('physical', '=', '1')
+                    ->where('assigned_to', '=', '0')
+                    ->whereNull('deleted_at','and')
+                    ->count();
+
+	}
 
 
 }
