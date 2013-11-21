@@ -4,6 +4,7 @@ use AdminController;
 use Input;
 use Lang;
 use Asset;
+use Statuslabel;
 use User;
 use Redirect;
 use DB;
@@ -48,7 +49,10 @@ class AssetsController extends AdminController {
 		$model_list = array('' => '') + Model::lists('name', 'id');
 		$depreciation_list = array('' => '') + Depreciation::lists('name', 'id');
 
-		return View::make('backend/assets/edit')->with('model_list',$model_list)->with('depreciation_list',$depreciation_list)->with('asset',new Asset);
+		// Grab the dropdown list of status
+		$statuslabel_list = array('' => 'Ready to Deploy') + Statuslabel::lists('name', 'id');
+
+		return View::make('backend/assets/edit')->with('model_list',$model_list)->with('statuslabel_list',$statuslabel_list)->with('depreciation_list',$depreciation_list)->with('asset',new Asset);
 
 	}
 
@@ -80,6 +84,7 @@ class AssetsController extends AdminController {
 			$asset->order_number            = e(Input::get('order_number'));
 			$asset->notes            		= e(Input::get('notes'));
 			$asset->asset_tag            	= e(Input::get('asset_tag'));
+			$asset->status_id            	= e(Input::get('status_id'));
 			$asset->user_id          		= Sentry::getId();
 			$asset->physical            		= '1';
 
@@ -122,9 +127,13 @@ class AssetsController extends AdminController {
 		// Grab the dropdown list of models
 		$model_list = array('' => '') + Model::lists('name', 'id');
 
+		// Grab the dropdown list of status
+		$statuslabel_list = array('' => '') + Statuslabel::lists('name', 'id');
+
 		// get depreciation list
 		$depreciation_list = array('' => '') + Depreciation::lists('name', 'id');
-		return View::make('backend/assets/edit', compact('asset'))->with('model_list',$model_list)->with('depreciation_list',$depreciation_list);
+
+		return View::make('backend/assets/edit', compact('asset'))->with('model_list',$model_list)->with('depreciation_list',$depreciation_list)->with('statuslabel_list',$statuslabel_list);
 	}
 
 
@@ -171,6 +180,7 @@ class AssetsController extends AdminController {
 			$asset->purchase_cost           = e(Input::get('purchase_cost'));
 			$asset->order_number            = e(Input::get('order_number'));
 			$asset->asset_tag           	= e(Input::get('asset_tag'));
+			$asset->status_id            	= e(Input::get('status_id'));
 			$asset->notes            		= e(Input::get('notes'));
 			$asset->physical            		= '1';
 
@@ -231,6 +241,9 @@ class AssetsController extends AdminController {
 
 		// Get the dropdown of users and then pass it to the checkout view
 		$users_list = array('' => 'Select a User') + DB::table('users')->select(DB::raw('concat (first_name," ",last_name) as full_name, id'))->lists('full_name', 'id');
+
+
+
 
 		//print_r($users);
 		return View::make('backend/assets/checkout', compact('asset'))->with('users_list',$users_list);

@@ -26,8 +26,6 @@ View License {{ $license->name }} ::
 										<li><a href="{{ route('checkout/license', $license->id) }}" class="btn-flat success">Checkout</a></li>
 									@endif
                                     <li><a href="{{ route('update/license', $license->id) }}">Edit License</a></li>
-                                    <li><a href="#">Mark as Lost/Stolen</a></li>
-
                                 </ul>
                             </div>
 

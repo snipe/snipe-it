@@ -2,7 +2,7 @@
 
 {{-- Page title --}}
 @section('title')
-Asset Depreciations ::
+Locations ::
 @parent
 @stop
 

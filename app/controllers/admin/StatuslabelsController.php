@@ -3,7 +3,7 @@
 use AdminController;
 use Input;
 use Lang;
-use Location;
+use Statuslabel;
 use Redirect;
 use DB;
 use Sentry;
@@ -11,39 +11,38 @@ use Str;
 use Validator;
 use View;
 
-class LocationsController extends AdminController {
+class StatuslabelsController extends AdminController {
 
 	/**
-	 * Show a list of all the locations.
+	 * Show a list of all the statuslabels.
 	 *
 	 * @return View
 	 */
 
 	public function getIndex()
 	{
-		// Grab all the locations
-		$locations = Location::orderBy('created_at', 'DESC')->paginate(10);
+		// Grab all the statuslabels
+		$statuslabels = Statuslabel::orderBy('created_at', 'DESC')->paginate(10);
 
 		// Show the page
-		return View::make('backend/locations/index', compact('locations'));
+		return View::make('backend/statuslabels/index', compact('statuslabels'));
 	}
 
 
 	/**
-	 * Location create.
+	 * Statuslabel create.
 	 *
 	 * @return View
 	 */
 	public function getCreate()
 	{
 		// Show the page
-		$location_options = array('0' => 'Top Level') + Location::lists('name', 'id');
-		return View::make('backend/locations/edit')->with('location_options',$location_options)->with('location',new Location);
+		return View::make('backend/statuslabels/edit')->with('statuslabel',new Statuslabel);
 	}
 
 
 	/**
-	 * Location create form processing.
+	 * Statuslabel create form processing.
 	 *
 	 * @return Redirect
 	 */
@@ -54,75 +53,69 @@ class LocationsController extends AdminController {
 		$new = Input::all();
 
 		// create a new model instance
-		$location = new Location();
+		$statuslabel = new Statuslabel();
 
 		// attempt validation
-		if ($location->validate($new))
+		if ($statuslabel->validate($new))
 		{
 
-			// Save the location data
-			$location->name            	= e(Input::get('name'));
-			$location->city    			= e(Input::get('city'));
-			$location->state    		= e(Input::get('state'));
-			$location->country    		= e(Input::get('country'));
-			$location->user_id          = Sentry::getId();
+			// Save the Statuslabel data
+			$statuslabel->name            	= e(Input::get('name'));
+			$statuslabel->user_id          = Sentry::getId();
 
 			// Was the asset created?
-			if($location->save())
+			if($statuslabel->save())
 			{
-				// Redirect to the new location  page
-				return Redirect::to("admin/settings/locations")->with('success', Lang::get('admin/locations/message.create.success'));
+				// Redirect to the new Statuslabel  page
+				return Redirect::to("admin/settings/statuslabels")->with('success', Lang::get('admin/statuslabels/message.create.success'));
 			}
 		}
 		else
 		{
 			// failure
-			$errors = $location->errors();
+			$errors = $statuslabel->errors();
 			return Redirect::back()->withInput()->withErrors($errors);
 		}
 
-		// Redirect to the location create page
-		return Redirect::to('admin/settings/locations/create')->with('error', Lang::get('admin/locations/message.create.error'));
+		// Redirect to the Statuslabel create page
+		return Redirect::to('admin/settings/statuslabels/create')->with('error', Lang::get('admin/statuslabels/message.create.error'));
 
 	}
 
 
 	/**
-	 * Location update.
+	 * Statuslabel update.
 	 *
-	 * @param  int  $locationId
+	 * @param  int  $statuslabelId
 	 * @return View
 	 */
-	public function getEdit($locationId = null)
+	public function getEdit($statuslabelId = null)
 	{
-		// Check if the location exists
-		if (is_null($location = Location::find($locationId)))
+		// Check if the Statuslabel exists
+		if (is_null($statuslabel = Statuslabel::find($statuslabelId)))
 		{
 			// Redirect to the blogs management page
-			return Redirect::to('admin/settings/locations')->with('error', Lang::get('admin/locations/message.does_not_exist'));
+			return Redirect::to('admin/settings/statuslabels')->with('error', Lang::get('admin/statuslabels/message.does_not_exist'));
 		}
 
-		// Show the page
-		//$location_options = array('' => 'Top Level') + Location::lists('name', 'id');
 
-		$location_options = array('' => 'Top Level') + DB::table('locations')->where('id', '!=', $locationId)->lists('name', 'id');
-		return View::make('backend/locations/edit', compact('location'))->with('location_options',$location_options);
+		return View::make('backend/statuslabels/edit', compact('statuslabel'));
 	}
 
 
 	/**
-	 * Location update form processing page.
+	 * Statuslabel update form processing page.
 	 *
-	 * @param  int  $locationId
+	 * @param  int  $statuslabelId
 	 * @return Redirect
 	 */
-	public function postEdit($locationId = null)
+	public function postEdit($statuslabelId = null)
 	{
-		// Check if the location exists
-		if (is_null($location = Location::find($locationId)))
+		// Check if the Statuslabel exists
+		if (is_null($statuslabel = Statuslabel::find($statuslabelId)))
 		{
 			// Redirect to the blogs management page
-			return Redirect::to('admin/settings/locations')->with('error', Lang::get('admin/locations/message.does_not_exist'));
+			return Redirect::to('admin/settings/statuslabels')->with('error', Lang::get('admin/statuslabels/message.does_not_exist'));
 		}
 
 
@@ -132,60 +125,57 @@ class LocationsController extends AdminController {
 
 
 		// attempt validation
-		if ($location->validate($new))
+		if ($statuslabel->validate($new))
 		{
 
-			// Update the location data
-			$location->name            	= e(Input::get('name'));
-			$location->city    			= e(Input::get('city'));
-			$location->state    		= e(Input::get('state'));
-			$location->country    		= e(Input::get('country'));
+			// Update the Statuslabel data
+			$statuslabel->name            	= e(Input::get('name'));
 
 			// Was the asset created?
-			if($location->save())
+			if($statuslabel->save())
 			{
-				// Redirect to the saved location page
-				return Redirect::to("admin/settings/locations/$locationId/edit")->with('success', Lang::get('admin/locations/message.update.success'));
+				// Redirect to the saved Statuslabel page
+				return Redirect::to("admin/settings/statuslabels/$statuslabelId/edit")->with('success', Lang::get('admin/statuslabels/message.update.success'));
 			}
 		}
 		else
 		{
 			// failure
-			$errors = $location->errors();
+			$errors = $statuslabel->errors();
 			return Redirect::back()->withInput()->withErrors($errors);
 		}
 
-		// Redirect to the location management page
-		return Redirect::to("admin/settings/locations/$locationId/edit")->with('error', Lang::get('admin/locations/message.update.error'));
+		// Redirect to the Statuslabel management page
+		return Redirect::to("admin/settings/statuslabels/$statuslabelId/edit")->with('error', Lang::get('admin/statuslabels/message.update.error'));
 
 	}
 
 	/**
-	 * Delete the given location.
+	 * Delete the given Statuslabel.
 	 *
-	 * @param  int  $locationId
+	 * @param  int  $statuslabelId
 	 * @return Redirect
 	 */
-	public function getDelete($locationId)
+	public function getDelete($statuslabelId)
 	{
-		// Check if the location exists
-		if (is_null($location = Location::find($locationId)))
+		// Check if the Statuslabel exists
+		if (is_null($statuslabel = Statuslabel::find($statuslabelId)))
 		{
 			// Redirect to the blogs management page
-			return Redirect::to('admin/settings/locations')->with('error', Lang::get('admin/locations/message.not_found'));
+			return Redirect::to('admin/settings/statuslabels')->with('error', Lang::get('admin/statuslabels/message.not_found'));
 		}
 
 
-		if ($location->has_users() > 0) {
+		if ($statuslabel->has_assets() > 0) {
 
 			// Redirect to the asset management page
-			return Redirect::to('admin/settings/locations')->with('error', Lang::get('admin/locations/message.assoc_users'));
+			return Redirect::to('admin/settings/statuslabels')->with('error', Lang::get('admin/statuslabels/message.assoc_users'));
 		} else {
 
-			$location->delete();
+			$statuslabel->delete();
 
-			// Redirect to the locations management page
-			return Redirect::to('admin/settings/locations')->with('success', Lang::get('admin/locations/message.delete.success'));
+			// Redirect to the statuslabels management page
+			return Redirect::to('admin/settings/statuslabels')->with('success', Lang::get('admin/statuslabels/message.delete.success'));
 		}
 
 
