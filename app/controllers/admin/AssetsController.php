@@ -6,6 +6,7 @@ use Lang;
 use Asset;
 use Statuslabel;
 use User;
+use Setting;
 use Redirect;
 use DB;
 use Actionlog;
@@ -51,7 +52,7 @@ class AssetsController extends AdminController {
 		}
 
 		// Paginate the users
-		$assets = $assets->paginate(10)
+		$assets = $assets->paginate(Setting::getSettings()->per_page)
 			->appends(array(
 				'Pending' => Input::get('Pending'),
 				'RTD' => Input::get('RTD'),

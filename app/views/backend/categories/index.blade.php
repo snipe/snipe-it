@@ -17,7 +17,7 @@ Asset Categories ::
 		</div>
 	</h3>
 </div>
-@if ($categories->getTotal() > 10)
+@if ($categories->getTotal() > Setting::getSettings()->per_page)
 {{ $categories->links() }}
 @endif
 <div class="row-fluid table">
@@ -51,7 +51,7 @@ Asset Categories ::
 </table>
 </div>
 
-@if ($categories->getTotal()  > 10)
+@if ($categories->getTotal()  > Setting::getSettings()->per_page)
 {{ $categories->links() }}
 @endif
 @stop

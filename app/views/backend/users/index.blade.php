@@ -22,7 +22,7 @@ User Management ::
 <a class="btn-flat white" href="{{ URL::to('admin/users?onlyTrashed=true') }}">Include Only Deleted Users</a>
 <br><br>
 
-@if ($users->getTotal() > 10)
+@if ($users->getTotal() > Setting::getSettings()->per_page)
 {{ $users->links() }}
 @endif
 
@@ -71,8 +71,7 @@ User Management ::
 				@else
 				<a href="{{ route('update/user', $user->id) }}" class="btn-flat white"><i class="icon-pencil"></i> @lang('button.edit')</a>
 				@if (Sentry::getId() !== $user->id)
-				<a class="btn-flat danger delete-asset" data-toggle="modal" href="{{ route('delete/user', $user->id) }}" data-content="Are you sure you wish to delete the user {{ $user->fullName() }}?" data-title="Delete {{ $user->first_name }}?" onClick="return false;"><i class="icon-remove icon-white"></i> @lang('button.delete')</a>
-
+				<a href="{{ route('delete/user', $user->id) }}" class="btn-flat danger"><i class="icon-remove icon-white"></i> @lang('button.delete')</a>
 				@else
 				<span class="btn-flat danger disabled"><i class="icon-remove icon-white"></i> @lang('button.delete')</span>
 				@endif
@@ -94,7 +93,7 @@ User Management ::
 </div>
 @endif
 
-@if ($users->getTotal() > 10)
+@if ($users->getTotal() > Setting::getSettings()->per_page)
 {{ $users->links() }}
 @endif
 

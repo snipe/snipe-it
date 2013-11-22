@@ -56,7 +56,7 @@ Assets ::
 <br><br>
 
 
-@if ($assets && $assets->getTotal() && $assets->getTotal() > 10)
+@if ($assets && $assets->getTotal() && $assets->getTotal() > Setting::getSettings()->per_page)
 	{{ $assets->links() }}
 @endif
 
@@ -147,7 +147,7 @@ Assets ::
 </div>
 
 
-@if ($assets && $assets->getTotal() && $assets->getTotal() > 10)
+@if ($assets && $assets->getTotal() && $assets->getTotal() > Setting::getSettings()->per_page)
 {{ $assets->links() }}
 @endif
 @stop

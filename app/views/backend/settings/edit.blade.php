@@ -28,14 +28,24 @@
                             <form class="form-horizontal" method="post" action="" autocomplete="off">
 								<!-- CSRF Token -->
 								<input type="hidden" name="_token" value="{{ csrf_token() }}" />
+
 								@foreach ($settings as $setting)
-									<div class="control-group {{ $errors->has('name') ? 'error' : '' }}">
-										<label class="control-label" for="option_value">{{ $setting->option_label }}</label>
+
+									<div class="control-group {{ $errors->has('site_name') ? 'error' : '' }}">
+										<label class="control-label" for="site_name">Site Name</label>
 										<div class="controls">
-											<input class="span9" type="text" name="option_value['{{ $setting->option_name }}']" id="option_value" value="{{ Input::old('option_value', $setting->option_value) }}" />
-											{{ $errors->first('option_value', '<span class="help-inline">:message</span>') }}
+											<input class="span9" type="text" name="site_name" id="site_name" value="{{ Input::old('site_name', $setting->site_name) }}" />
+											{{ $errors->first('site_name', '<span class="help-inline">:message</span>') }}
 										</div>
 									</div>
+									<div class="control-group {{ $errors->has('per_page') ? 'error' : '' }}">
+										<label class="control-label" for="per_page">Results Per Page</label>
+										<div class="controls">
+											<input class="span1" type="text" name="per_page" id="per_page" value="{{ Input::old('per_page', $setting->per_page) }}" />
+											{{ $errors->first('per_page', '<span class="help-inline">:message</span>') }}
+										</div>
+									</div>
+
 
 
 								@endforeach

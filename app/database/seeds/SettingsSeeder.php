@@ -11,18 +11,8 @@ class SettingsSeeder extends Seeder {
 
 		$date = new DateTime;
 		$setting[] = array(
-			'option_name'      	=> 'per_page',
-			'option_label'      	=> 'Results Per Page',
-			'option_value'     => '50',
-			'created_at' 	=> $date->modify('-10 day'),
-			'updated_at' 	=> $date->modify('-3 day'),
-			'user_id' 		=> 1,
-		);
-
-		$setting[] = array(
-			'option_name'      	=> 'site_name',
-			'option_label'      	=> 'Site Name',
-			'option_value'     => 'Snipe IT Asset Management System',
+			'per_page'      	=> '50',
+			'site_name'      	=> 'Snipe IT Asset Management',
 			'created_at' 	=> $date->modify('-10 day'),
 			'updated_at' 	=> $date->modify('-3 day'),
 			'user_id' 		=> 1,

@@ -5,6 +5,7 @@ use Input;
 use Lang;
 use Manufacturer;
 use Redirect;
+use Setting;
 use Sentry;
 use Str;
 use Validator;
@@ -20,7 +21,7 @@ class ManufacturersController extends AdminController {
 	public function getIndex()
 	{
 		// Grab all the manufacturers
-		$manufacturers = Manufacturer::orderBy('created_at', 'DESC')->paginate(10);
+		$manufacturers = Manufacturer::orderBy('created_at', 'DESC')->paginate(Setting::getSettings()->per_page);
 
 		// Show the page
 		return View::make('backend/manufacturers/index', compact('manufacturers'));

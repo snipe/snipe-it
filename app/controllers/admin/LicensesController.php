@@ -9,6 +9,7 @@ use User;
 use Actionlog;
 use DB;
 use Redirect;
+use Setting;
 use Sentry;
 use Str;
 use Validator;
@@ -25,7 +26,7 @@ class LicensesController extends AdminController {
 	public function getIndex()
 	{
 		// Grab all the licenses
-		$licenses = License::orderBy('created_at', 'DESC')->where('physical', '=', 0)->paginate(10);
+		$licenses = License::orderBy('created_at', 'DESC')->where('physical', '=', 0)->paginate(Setting::getSettings()->per_page);
 
 		// Show the page
 		return View::make('backend/licenses/index', compact('licenses'));

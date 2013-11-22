@@ -5,6 +5,7 @@ use Input;
 use Lang;
 use Depreciation;
 use Redirect;
+use Setting;
 use DB;
 use Sentry;
 use Str;
@@ -22,7 +23,7 @@ class DepreciationsController extends AdminController {
 	public function getIndex()
 	{
 		// Grab all the depreciations
-		$depreciations = Depreciation::orderBy('created_at', 'DESC')->paginate(10);
+		$depreciations = Depreciation::orderBy('created_at', 'DESC')->paginate(Setting::getSettings()->per_page);
 
 		// Show the page
 		return View::make('backend/depreciations/index', compact('depreciations'));

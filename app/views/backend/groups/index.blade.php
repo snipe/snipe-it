@@ -18,7 +18,7 @@ Group Management ::
 	</h3>
 </div>
 
-@if (count($groups) > 10)
+@if (count($groups) > Setting::getSettings()->per_page)
 {{ $groups->links() }}
 @endif
 
@@ -56,7 +56,7 @@ Group Management ::
 </table>
 </div>
 
-@if (count($groups) > 10)
+@if (count($groups) > Setting::getSettings()->per_page)
 {{ $groups->links() }}
 @endif
 

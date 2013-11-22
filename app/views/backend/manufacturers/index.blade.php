@@ -18,7 +18,7 @@ Asset Manufacturers ::
 	</h3>
 </div>
 
-@if ($manufacturers->getTotal() > 10)
+@if ($manufacturers->getTotal() > Setting::getSettings()->per_page)
 {{ $manufacturers->links() }}
 @endif
 
@@ -44,7 +44,7 @@ Asset Manufacturers ::
 </table>
 </div>
 
-@if ($manufacturers->getTotal() > 10)
+@if ($manufacturers->getTotal() > Setting::getSettings()->per_page)
 {{ $manufacturers->links() }}
 @endif
 

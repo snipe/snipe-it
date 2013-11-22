@@ -13,6 +13,7 @@ use Asset;
 use Lang;
 use Actionlog;
 use Location;
+use Setting;
 use Redirect;
 use Sentry;
 use Validator;

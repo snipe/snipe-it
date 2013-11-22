@@ -74,7 +74,7 @@
                 <span class="icon-bar"></span>
             </button>
 
-            <a class="brand" href="/">Snipe IT Asset Management</a>
+            <a class="brand" href="/">{{ Setting::getSettings()->site_name }}</a>
 			</ul>
 
 
