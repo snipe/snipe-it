@@ -13,10 +13,18 @@ Assets ::
 		Assets
 
 		<div class="pull-right">
+			<a class="btn-flat white" href="{{ URL::to('admin/users?Deployed=true') }}">Deployed</a>
+			<a class="btn-flat white" href="{{ URL::to('admin/users?RTD=true') }}">Ready to Deploy</a>
+			<a class="btn-flat white" href="{{ URL::to('admin/users?Undeployable=true') }}">Un-Deployable</a>
 			<a href="{{ route('create/asset') }}" class="btn-flat success"><i class="icon-plus-sign icon-white"></i> Create New</a>
+
 		</div>
 	</h3>
+
 </div>
+
+<br><br>
+
 
 @if ($assets->getTotal() > 10)
 	{{ $assets->links() }}
