@@ -65,7 +65,10 @@ Assets ::
 					@elseif (Input::get('RTD'))
 						Ready to Deploy
 					@elseif (Input::get('Undeployable'))
-						Undeployable
+						@if ($asset->assetstatus)
+						{{ $asset->assetstatus->name }}
+						@endif
+
 					@endif
 				</td>
 			@else

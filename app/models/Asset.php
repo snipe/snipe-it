@@ -95,5 +95,13 @@ class Asset extends Elegant {
 
 	}
 
+	/**
+	* Get total assets
+	*/
+	 public function assetstatus()
+	{
+		return $this->belongsTo('Statuslabel','status_id');
+	}
+
 
 }
