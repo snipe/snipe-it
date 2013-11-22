@@ -92,7 +92,7 @@
                     <ul class="dropdown-menu">
                        @if(Sentry::getUser()->hasAccess('admin'))
 						<li>
-							<a href="{{ route('admin') }}">
+							<a href="{{ route('app') }}">
 								<i class="icon-cog"></i> Settings
 							</a>
 						</li>

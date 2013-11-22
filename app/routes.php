@@ -54,6 +54,7 @@ Route::group(array('prefix' => 'assets'), function()
 Route::group(array('prefix' => 'admin'), function()
 {
 
+
 	# Licenses
 	Route::group(array('prefix' => 'licenses'), function()
 	{
@@ -77,6 +78,15 @@ Route::group(array('prefix' => 'admin'), function()
 	# Admin Settings Routes (for categories, maufactureres, etc)
 	Route::group(array('prefix' => 'settings'), function()
 	{
+
+		# Settings
+		Route::group(array('prefix' => 'app'), function()
+		{
+			Route::get('/', array('as' => 'app', 'uses' => 'Controllers\Admin\SettingsController@getIndex'));
+			Route::get('edit', array('as' => 'edit/settings', 'uses' => 'Controllers\Admin\SettingsController@getEdit'));
+			Route::post('edit', 'Controllers\Admin\SettingsController@postEdit');
+		});
+
 		# Manufacturers
 		Route::group(array('prefix' => 'manufacturers'), function()
 		{
