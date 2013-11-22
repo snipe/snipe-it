@@ -269,7 +269,7 @@ class AssetsSeeder extends Seeder {
 			'archived' 		=> 1,
 			'license_name'	=> NULL,
 			'license_email'	=> NULL,
-			'status_id'	=> '5',
+			'status_id'	=> '3',
 		);
 
 
