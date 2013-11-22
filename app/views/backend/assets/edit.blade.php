@@ -105,8 +105,6 @@
 				 </div>
 			</div>
 
-
-
 			<!-- Depreciation -->
 			<div class="control-group {{ $errors->has('depreciation_id') ? 'error' : '' }}">
 				<label class="control-label" for="parent">Depreciation</label>
@@ -117,6 +115,18 @@
 					</div>
 				</div>
 			</div>
+
+			<!-- Depreciation -->
+			<div class="control-group {{ $errors->has('status_id') ? 'error' : '' }}">
+				<label class="control-label" for="parent">Status</label>
+				<div class="controls">
+					<div class="field-box">
+					{{ Form::select('status_id', $statuslabel_list , Input::old('status_id', $asset->status_id), array('class'=>'select2', 'style'=>'width:250px')) }}
+					{{ $errors->first('depreciation_id', '<span class="help-inline">:message</span>') }}
+					</div>
+				</div>
+			</div>
+
 
 			<!-- Notes -->
 			<div class="control-group {{ $errors->has('notes') ? 'error' : '' }}">
@@ -136,7 +146,7 @@
 	<div class="control-group">
 		<div class="controls">
 			<a class="btn btn-link" href="{{ route('assets') }}">Cancel</a>
-			<button type="submit" class="btn-flat success"><i class="icon-ok icon-white"></i> Save </button>
+			<button type="submit" class="btn-flat success"><i class="icon-ok icon-white"></i> Save</button>
 		</div>
 	</div>
 </form>

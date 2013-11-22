@@ -169,11 +169,20 @@ class CategoriesController extends AdminController {
 			return Redirect::to('admin/settings/categories')->with('error', Lang::get('admin/categories/message.not_found'));
 		}
 
-		// Delete the blog post
-		$category->delete();
 
-		// Redirect to the blog posts management page
-		return Redirect::to('admin/settings/categories')->with('success', Lang::get('admin/categories/message.delete.success'));
+		if ($category->has_models() > 0) {
+
+			// Redirect to the asset management page
+			return Redirect::to('admin/settings/categories')->with('error', Lang::get('admin/categories/message.assoc_users'));
+		} else {
+
+			$category->delete();
+
+			// Redirect to the locations management page
+			return Redirect::to('admin/settings/categories')->with('success', Lang::get('admin/categories/message.delete.success'));
+		}
+
+
 	}
 
 

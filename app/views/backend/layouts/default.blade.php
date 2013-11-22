@@ -92,7 +92,7 @@
                     <ul class="dropdown-menu">
                        @if(Sentry::getUser()->hasAccess('admin'))
 						<li>
-							<a href="{{ route('admin') }}">
+							<a href="{{ route('app') }}">
 								<i class="icon-cog"></i> Settings
 							</a>
 						</li>
@@ -120,7 +120,12 @@
 							<a href="{{ URL::to('admin/groups') }}">
 								<i class="icon-group"></i> Groups
 							</a>
-							</li>
+						</li>
+						<li{{ (Request::is('admin/settings/statuslabels*') ? ' class="active"' : '') }}>
+							<a href="{{ URL::to('admin/settings/statuslabels') }}">
+								<i class="icon-list"></i> Status Labels
+							</a>
+						</li>
 						<li{{ (Request::is('admin/settings/manufacturers*') ? ' class="active"' : '') }}>
 							<a href="{{ URL::to('admin/settings/manufacturers') }}">
 								<i class="icon-briefcase"></i> Manufacturers
@@ -305,6 +310,10 @@
             // jQuery Knobs
             $(".knob").knob();
 
+
+			 $("#example").popover();
+
+
             // confirm delete modal
             $('.delete-asset').click(function(evnt) {
 			var href = $(this).attr('href');
@@ -322,6 +331,9 @@
 
 
         });
+
+
+
 
 
 

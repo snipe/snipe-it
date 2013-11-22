@@ -54,6 +54,7 @@ Route::group(array('prefix' => 'assets'), function()
 Route::group(array('prefix' => 'admin'), function()
 {
 
+
 	# Licenses
 	Route::group(array('prefix' => 'licenses'), function()
 	{
@@ -77,6 +78,15 @@ Route::group(array('prefix' => 'admin'), function()
 	# Admin Settings Routes (for categories, maufactureres, etc)
 	Route::group(array('prefix' => 'settings'), function()
 	{
+
+		# Settings
+		Route::group(array('prefix' => 'app'), function()
+		{
+			Route::get('/', array('as' => 'app', 'uses' => 'Controllers\Admin\SettingsController@getIndex'));
+			Route::get('edit', array('as' => 'edit/settings', 'uses' => 'Controllers\Admin\SettingsController@getEdit'));
+			Route::post('edit', 'Controllers\Admin\SettingsController@postEdit');
+		});
+
 		# Manufacturers
 		Route::group(array('prefix' => 'manufacturers'), function()
 		{
@@ -120,6 +130,18 @@ Route::group(array('prefix' => 'admin'), function()
 			Route::post('{locationId}/edit', 'Controllers\Admin\LocationsController@postEdit');
 			Route::get('{locationId}/delete', array('as' => 'delete/location', 'uses' => 'Controllers\Admin\LocationsController@getDelete'));
 		});
+
+		# Status Labels
+		Route::group(array('prefix' => 'statuslabels'), function()
+		{
+			Route::get('/', array('as' => 'statuslabels', 'uses' => 'Controllers\Admin\StatuslabelsController@getIndex'));
+			Route::get('create', array('as' => 'create/statuslabel', 'uses' => 'Controllers\Admin\StatuslabelsController@getCreate'));
+			Route::post('create', 'Controllers\Admin\StatuslabelsController@postCreate');
+			Route::get('{statuslabelId}/edit', array('as' => 'update/statuslabel', 'uses' => 'Controllers\Admin\StatuslabelsController@getEdit'));
+			Route::post('{statuslabelId}/edit', 'Controllers\Admin\StatuslabelsController@postEdit');
+			Route::get('{statuslabelId}/delete', array('as' => 'delete/statuslabel', 'uses' => 'Controllers\Admin\StatuslabelsController@getDelete'));
+		});
+
 
 	});
 

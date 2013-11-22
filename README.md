@@ -74,11 +74,11 @@ Use the following command to create your default user, user groups and run all t
 
 You'll need to make sure that the app/storage directory is writable by your webserver, since caches and log files get written there. You should use the minimum permissions available for writing, based on how you've got your webserver configured.
 
-	chown -R 755 app/storage
+	chmod -R 755 app/storage
 
 If you still run into a permissions error, you may need to increase the permissions to 775, or twiddle your user/group permissions on your server.
 
-	chown -R 775 app/storage
+	chmod -R 775 app/storage
 
 -----
 

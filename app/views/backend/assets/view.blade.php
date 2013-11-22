@@ -12,7 +12,6 @@ View Asset {{ $asset->asset_tag }} ::
                 <!-- header -->
 				<h3 class="name">History for {{ $asset->asset_tag }} ({{ $asset->name }})
 
-
 							<div class="btn-group pull-right">
                                 <button class="btn glow">Actions</button>
                                 <button class="btn glow dropdown-toggle" data-toggle="dropdown">
@@ -26,20 +25,9 @@ View Asset {{ $asset->asset_tag }} ::
 										<li><a href="{{ route('checkout/asset', $asset->id) }}" class="btn-flat success">Checkout</a></li>
 									@endif
                                     <li><a href="{{ route('update/asset', $asset->id) }}">Edit Asset</a></li>
-                                    <li><a href="#">Out for Disagnostics</a></li>
-                                    <li><a href="#">Out for Repair</a></li>
-                                    <li><a href="#">Mark as Lost/Stolen</a></li>
-
                                 </ul>
                             </div>
-
-
 				</h3>
-
-
-
-
-
 
 
                 <div class="row-fluid profile">
@@ -90,7 +78,7 @@ View Asset {{ $asset->asset_tag }} ::
 										<td></td>
 										<td>{{ $asset->created_at }}</td>
 										<td>
-										@if (isset($asset->adminuser->id))
+										@if ($asset->adminuser->id)
 										{{ $asset->adminuser->fullName() }}
 										@else
 										Unknown Admin

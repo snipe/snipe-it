@@ -53,7 +53,7 @@ class LocationsController extends AdminController {
 		// get the POST data
 		$new = Input::all();
 
-		// create a new model instance
+		// create a new location instance
 		$location = new Location();
 
 		// attempt validation
@@ -175,11 +175,21 @@ class LocationsController extends AdminController {
 			return Redirect::to('admin/settings/locations')->with('error', Lang::get('admin/locations/message.not_found'));
 		}
 
-		// Delete the location
-		$location->delete();
 
-		// Redirect to the locations management page
-		return Redirect::to('admin/settings/locations')->with('success', Lang::get('admin/locations/message.delete.success'));
+		if ($location->has_users() > 0) {
+
+			// Redirect to the asset management page
+			return Redirect::to('admin/settings/locations')->with('error', Lang::get('admin/locations/message.assoc_users'));
+		} else {
+
+			$location->delete();
+
+			// Redirect to the locations management page
+			return Redirect::to('admin/settings/locations')->with('success', Lang::get('admin/locations/message.delete.success'));
+		}
+
+
+
 	}
 
 

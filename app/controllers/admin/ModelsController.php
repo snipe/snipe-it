@@ -168,11 +168,20 @@ class ModelsController extends AdminController {
 			return Redirect::to('assets/models')->with('error', Lang::get('admin/models/message.not_found'));
 		}
 
-		// Delete the model
-		$model->delete();
+		if ($model->assets->count() > 0) {
+			// Throw an error that this model is associated with assets
+			return Redirect::to('assets/models')->with('error', Lang::get('admin/models/message.assoc_users'));
 
-		// Redirect to the models management page
-		return Redirect::to('assets/models')->with('success', Lang::get('admin/models/message.delete.success'));
+		} else {
+			// Delete the model
+			$model->delete();
+
+			// Redirect to the models management page
+			return Redirect::to('assets/models')->with('success', Lang::get('admin/models/message.delete.success'));
+		}
+
+
+
 	}
 
 

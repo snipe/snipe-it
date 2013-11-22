@@ -71,7 +71,7 @@ class Asset extends Elegant {
 	*/
 	public function adminuser()
 	{
-		return $this->belongsTo('User','id');
+		return $this->belongsTo('User','user_id');
 	}
 
 	/**
@@ -94,6 +94,7 @@ class Asset extends Elegant {
 		return DB::table('assets')
                     ->where('physical', '=', '1')
                     ->where('assigned_to', '=', '0')
+                    ->whereNull('status_id','and')
                     ->whereNull('deleted_at','and')
                     ->count();
 

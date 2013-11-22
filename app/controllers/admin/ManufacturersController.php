@@ -159,11 +159,24 @@ class ManufacturersController extends AdminController {
 			return Redirect::to('admin/settings/manufacturers')->with('error', Lang::get('admin/manufacturers/message.not_found'));
 		}
 
-		// Delete the manufacturer
-		$manufacturer->delete();
+		if ($manufacturer->has_models() > 0) {
 
-		// Redirect to the manufacturers management page
+			// Redirect to the asset management page
+			return Redirect::to('admin/settings/manufacturers')->with('error', Lang::get('admin/manufacturers/message.assoc_users'));
+		} else {
+
+			// Delete the manufacturer
+			$manufacturer->delete();
+
+			// Redirect to the manufacturers management page
 		return Redirect::to('admin/settings/manufacturers')->with('success', Lang::get('admin/manufacturers/message.delete.success'));
+		}
+
+
+
+
+
+
 	}
 
 

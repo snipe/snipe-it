@@ -170,11 +170,18 @@ class DepreciationsController extends AdminController {
 			return Redirect::to('admin/settings/depreciations')->with('error', Lang::get('admin/depreciations/message.not_found'));
 		}
 
-		// Delete the depreciation
-		$depreciation->delete();
+		if ($depreciation->has_models() > 0) {
 
-		// Redirect to the depreciations management page
-		return Redirect::to('admin/settings/depreciations')->with('success', Lang::get('admin/depreciations/message.delete.success'));
+			// Redirect to the asset management page
+			return Redirect::to('admin/settings/depreciations')->with('error', Lang::get('admin/depreciations/message.assoc_users'));
+		} else {
+
+			$depreciation->delete();
+
+			// Redirect to the depreciations management page
+			return Redirect::to('admin/settings/depreciations')->with('success', Lang::get('admin/depreciations/message.delete.success'));
+		}
+
 	}
 
 

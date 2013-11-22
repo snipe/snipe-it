@@ -90,10 +90,12 @@ View User {{ $user->fullName() }} ::
 										<td>{{ $log->added_on }}</td>
 										<td>{{ $log->action_type }}</td>
 										<td>
-										@if (isset($log->assetlog->name))
-										<a href="{{ route('view/asset', $log->asset_id) }}">{{ $log->assetlog->name }}</a>
+										@if ((isset($log->assetlog->name)) && ($log->assetlog->deleted_at==''))
+											<a href="{{ route('view/asset', $log->asset_id) }}">{{ $log->assetlog->name }}</a>
+										@elseif ((isset($log->assetlog->name)) && ($log->assetlog->deleted_at!=''))
+											<del>{{ $log->assetlog->name }}</del> (deleted)
 										@else
-										missing asset
+										missing asset ({{ $log->assetlog->name }}) ({{ $log->assetlog->deleted_at }})
 										@endif
 										</td>
 										<td>{{ $log->adminlog->fullName() }}</td>
@@ -126,7 +128,7 @@ View User {{ $user->fullName() }} ::
 						<ul>
                         <li>{{ $user->userloc->address }} {{ $user->userloc->address2 }}</li>
                         <li>{{ $user->userloc->city }}, {{ $user->userloc->state }} {{ $user->userloc->zip }}<br /><br /></li>
-                        @if (isset($user->phone))
+                        @if ($user->phone)
                         	<li><i class="icon-phone"></i>{{ $user->phone }}</li>
                         @endif
 	                    	<li><i class="icon-envelope-alt"></i><a href="mailto:{{ $user->email }}">{{ $user->email }}</a></li>
