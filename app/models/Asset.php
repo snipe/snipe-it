@@ -71,7 +71,7 @@ class Asset extends Elegant {
 	*/
 	public function adminuser()
 	{
-		return $this->belongsTo('User','id');
+		return $this->belongsTo('User','user_id');
 	}
 
 	/**
