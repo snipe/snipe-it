@@ -10,11 +10,12 @@ class AssetsSeeder extends Seeder {
 		$asset = array();
 
 		$date = new DateTime;
+
 		$asset[] = array(
-			'name'      	=> 'Alison MBP',
-			'asset_tag'     => 'NNY287958796',
+			'name'      	=> 'Shanen MBP',
+			'asset_tag'     => 'NNY2878796',
 			'model_id'      => 1,
-			'serial'      	=> 'WS905869046069',
+			'serial'      	=> 'WS90585666669',
 			'purchase_date' => '2013-10-02',
 			'purchase_cost' => '2435.99',
 			'order_number'  => '987698576946',
@@ -30,6 +31,45 @@ class AssetsSeeder extends Seeder {
 		);
 
 		$asset[] = array(
+			'name'      	=> 'Michael MBP',
+			'asset_tag'     => 'NNY28633396',
+			'model_id'      => 1,
+			'serial'      	=> 'WS905823226669',
+			'purchase_date' => '2013-10-02',
+			'purchase_cost' => '2435.99',
+			'order_number'  => '987698576946',
+			'created_at' 	=> $date->modify('-10 day'),
+			'updated_at' 	=> $date->modify('-3 day'),
+			'user_id' 		=> 1,
+			'assigned_to' 	=> 1,
+			'physical' 		=> 1,
+			'archived' 		=> 0,
+			'license_name'	=> NULL,
+			'license_email'	=> NULL,
+			'status_id'	=> NULL,
+		);
+
+
+		$asset[] = array(
+			'name'      	=> 'Alison MBP',
+			'asset_tag'     => 'NNY287958796',
+			'model_id'      => 1,
+			'serial'      	=> 'WS905869046069',
+			'purchase_date' => '2013-10-02',
+			'purchase_cost' => '2435.99',
+			'order_number'  => '987698576946',
+			'created_at' 	=> $date->modify('-10 day'),
+			'updated_at' 	=> $date->modify('-3 day'),
+			'user_id' 		=> 1,
+			'assigned_to' 	=> 0,
+			'physical' 		=> 1,
+			'archived' 		=> 0,
+			'license_name'	=> NULL,
+			'license_email'	=> NULL,
+			'status_id'	=> 0,
+		);
+
+		$asset[] = array(
 			'name'      	=> 'Brady MBP',
 			'asset_tag'     => 'NNY78795566',
 			'model_id'      => 2,
@@ -40,12 +80,12 @@ class AssetsSeeder extends Seeder {
 			'created_at' 	=> $date->modify('-10 day'),
 			'updated_at' 	=> $date->modify('-3 day'),
 			'user_id' 		=> 1,
-			'assigned_to' 	=> 1,
+			'assigned_to' 	=> 0,
 			'physical' 		=> 1,
 			'archived' 		=> 0,
 			'license_name'	=> NULL,
 			'license_email'	=> NULL,
-			'status_id'	=> NULL,
+			'status_id'	=> 0,
 		);
 
 		$asset[] = array(
@@ -64,7 +104,7 @@ class AssetsSeeder extends Seeder {
 			'archived' 		=> 0,
 			'license_name'	=> NULL,
 			'license_email'	=> NULL,
-			'status_id'	=> NULL,
+			'status_id'	=> 0,
 		);
 
 		$asset[] = array(
@@ -83,7 +123,7 @@ class AssetsSeeder extends Seeder {
 			'archived' 		=> 0,
 			'license_name'	=> 'Alison Giasnotto',
 			'license_email'	=> 'snipe@snipe.net',
-			'status_id'	=> NULL,
+			'status_id'	=> 0,
 		);
 
 		$asset[] = array(
@@ -102,7 +142,7 @@ class AssetsSeeder extends Seeder {
 			'archived' 		=> 0,
 			'license_name'	=> 'Alison Giasnotto',
 			'license_email'	=> 'me@example.com',
-			'status_id'	=> NULL,
+			'status_id'	=> 0,
 		);
 
 		$asset[] = array(
@@ -121,7 +161,7 @@ class AssetsSeeder extends Seeder {
 			'archived' 		=> 0,
 			'license_name'	=> NULL,
 			'license_email'	=> NULL,
-			'status_id'	=> NULL,
+			'status_id'	=> 0,
 		);
 
 		$asset[] = array(
@@ -140,7 +180,7 @@ class AssetsSeeder extends Seeder {
 			'archived' 		=> 0,
 			'license_name'	=> NULL,
 			'license_email'	=> NULL,
-			'status_id'	=> NULL,
+			'status_id'	=> 0,
 		);
 
 		$asset[] = array(

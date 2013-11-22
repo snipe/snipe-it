@@ -10,8 +10,8 @@ class Setting extends Elegant {
 
 	public function getsettings()
 	{
-		$foo = Setting::all();
-		print_r($foo);
+		//$foo = Setting::all();
+		//print_r($foo);
 	}
 
 }

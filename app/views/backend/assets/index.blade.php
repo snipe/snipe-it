@@ -13,9 +13,11 @@ Assets ::
 		Assets
 
 		<div class="pull-right">
-			<a class="btn-flat white" href="{{ URL::to('admin/users?Deployed=true') }}">Deployed</a>
-			<a class="btn-flat white" href="{{ URL::to('admin/users?RTD=true') }}">Ready to Deploy</a>
-			<a class="btn-flat white" href="{{ URL::to('admin/users?Undeployable=true') }}">Un-Deployable</a>
+			<a class="btn-flat white" href="{{ URL::to('admin?Deployed=true') }}">Deployed</a>
+			<a class="btn-flat white" href="{{ URL::to('admin?RTD=true') }}">Ready to Deploy</a>
+			<a class="btn-flat white" href="{{ URL::to('admin?Pending=true') }}">Pending</a>
+			<a class="btn-flat white" href="{{ URL::to('admin?Undeployable=true') }}">Un-Deployable</a>
+			<a class="btn-flat white" href="{{ URL::to('admin') }}">Show All</a>
 			<a href="{{ route('create/asset') }}" class="btn-flat success"><i class="icon-plus-sign icon-white"></i> Create New</a>
 
 		</div>
@@ -26,10 +28,12 @@ Assets ::
 <br><br>
 
 
-@if ($assets->getTotal() > 10)
+@if ($assets && $assets->getTotal() && $assets->getTotal() > 10)
 	{{ $assets->links() }}
 @endif
+
 <div class="row-fluid table">
+@if ($assets->getTotal() > 0)
 <table class="table table-hover">
 	<thead>
 		<tr>
@@ -76,10 +80,20 @@ Assets ::
 		@endforeach
 	</tbody>
 </table>
+@else
+<div class="col-md-6">
+	<div class="alert alert-info alert-block">
+		<button type="button" class="close" data-dismiss="alert">&times;</button>
+		<i class="icon-info-sign"></i>
+		There are no results for your query.
+	</div>
+</div>
+
+@endif
 </div>
 
 
-@if ($assets->getTotal() > 10)
+@if ($assets && $assets->getTotal() && $assets->getTotal() > 10)
 {{ $assets->links() }}
 @endif
 @stop
