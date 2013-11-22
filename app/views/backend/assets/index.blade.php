@@ -82,6 +82,10 @@ Assets ::
 				<td>
 				@if ($asset->assigneduser && $asset->assetloc)
 						{{ $asset->assetloc->name }}
+				@else
+					@if ($asset->assetstatus)
+						{{ $asset->assetstatus->name }}
+					@endif
 				@endif
 				</td>
 
