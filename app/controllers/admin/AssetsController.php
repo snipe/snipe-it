@@ -31,7 +31,7 @@ class AssetsController extends AdminController {
 		// Filter results
 		if (Input::get('Pending'))
 		{
-			$assets = Asset::orderBy('asset_tag', 'ASC')->whereNull('status_id','and')->where('physical', '=', 1);
+			$assets = Asset::orderBy('asset_tag', 'ASC')->whereNull('status_id','and')->where('assigned_to','=','0')->where('physical', '=', 1);
 		}
 		else if (Input::get('RTD'))
 		{

@@ -219,7 +219,7 @@
                     </div>
                     <div class="span3 stat">
                         <div class="data">
-                            <a href="{{ URL::to('admin') }}">
+                            <a href="{{ URL::to('admin?RTD=true') }}">
                             	<span class="number">{{ number_format(Asset::availassetcount()) }}</span>
                             	<span style="color:black">assets available</span>
                             </a>

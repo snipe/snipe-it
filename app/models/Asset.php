@@ -91,12 +91,7 @@ class Asset extends Elegant {
 	*/
 	 public static function availassetcount()
 	{
-		return DB::table('assets')
-                    ->where('physical', '=', '1')
-                    ->where('assigned_to', '=', '0')
-                    ->whereNull('status_id','and')
-                    ->whereNull('deleted_at','and')
-                    ->count();
+		return Asset::orderBy('asset_tag', 'ASC')->where('status_id', '=', 0)->where('assigned_to','=','0')->where('physical', '=', 1)->count();
 
 	}
 
