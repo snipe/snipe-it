@@ -53,7 +53,7 @@ class LocationsController extends AdminController {
 		// get the POST data
 		$new = Input::all();
 
-		// create a new model instance
+		// create a new location instance
 		$location = new Location();
 
 		// attempt validation
