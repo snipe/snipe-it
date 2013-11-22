@@ -27,7 +27,30 @@ class AssetsController extends AdminController {
 	public function getIndex()
 	{
 		// Grab all the assets
-		$assets = Asset::orderBy('created_at', 'DESC')->where('physical', '=', 1)->paginate(10);
+
+		// Filter results
+		if (Input::get('Pending'))
+		{
+			$assets = Asset::orderBy('asset_tag', 'ASC')->whereNull('status_id','and')->where('physical', '=', 1);
+		}
+		else if (Input::get('RTD'))
+		{
+			$assets = Asset::orderBy('asset_tag', 'ASC')->where('status_id', '=', 1)->where('physical', '=', 1);
+		} else if (Input::get('Undeployable'))
+		{
+			$assets = Asset::orderBy('asset_tag', 'ASC')->where('status_id', '>', 1)->where('physical', '=', 1);
+		} else {
+			$assets = Asset::orderBy('asset_tag', 'ASC')->where('status_id', '=', 0)->where('physical', '=', 1);
+		}
+
+		// Paginate the users
+		$assets = $assets->paginate(10)
+			->appends(array(
+				'Pending' => Input::get('Pending'),
+				'RTD' => Input::get('RTD'),
+				'Undeployable' => Input::get('Undeployable'),
+			));
+
 		return View::make('backend/assets/index', compact('assets'));
 	}
 
