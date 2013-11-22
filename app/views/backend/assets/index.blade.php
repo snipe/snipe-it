@@ -2,6 +2,20 @@
 
 {{-- Page title --}}
 @section('title')
+@if (Input::get('Pending') || Input::get('Undeployable') || Input::get('RTD')  || Input::get('Deployed'))
+	@if (Input::get('Pending'))
+		Pending
+	@elseif (Input::get('RTD'))
+		Ready to Deploy
+	@elseif (Input::get('Undeployable'))
+		Un-deployable
+	@elseif (Input::get('Deployed'))
+		Deployed
+	@endif
+@else
+		All
+@endif
+
 Assets ::
 @parent
 @stop
@@ -10,7 +24,21 @@ Assets ::
 @section('content')
 <div class="page-header">
 	<h3>
-		Assets
+				@if (Input::get('Pending') || Input::get('Undeployable') || Input::get('RTD')  || Input::get('Deployed'))
+					@if (Input::get('Pending'))
+						Pending
+					@elseif (Input::get('RTD'))
+						Ready to Deploy
+					@elseif (Input::get('Undeployable'))
+						Un-deployable
+					@elseif (Input::get('Deployed'))
+						Deployed
+					@endif
+				@else
+					All
+				@endif
+
+				Assets
 
 		<div class="pull-right">
 			<a class="btn-flat white" href="{{ URL::to('admin?Deployed=true') }}">Deployed</a>
