@@ -42,15 +42,15 @@ Assets ::
 			<td><a href="{{ route('view/asset', $asset->id) }}">{{ $asset->name }}</a></td>
 			<td>{{ $asset->serial }}</td>
 			<td>
-			@if ($asset->assigned_to != 0)
+			@if ($asset->assigneduser)
 				<a href="{{ route('view/user', $asset->assigned_to) }}">
 				{{ $asset->assigneduser->fullName() }}
 				</a>
 			@endif
 			</td>
 			<td>
-			@if (($asset->assigned_to > 0) && ($asset->assigneduser->location_id > 0))
-					{{ Location::find($asset->assigneduser->location_id)->name }}
+			@if ($asset->assigneduser && $asset->assetloc)
+					{{ $asset->assetloc->name }}
 			@endif
 			</td>
 			<td>
