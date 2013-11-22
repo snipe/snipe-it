@@ -78,7 +78,7 @@ View Asset {{ $asset->asset_tag }} ::
 										<td></td>
 										<td>{{ $asset->created_at }}</td>
 										<td>
-										@if (isset($asset->adminuser->id))
+										@if ($asset->adminuser->id)
 										{{ $asset->adminuser->fullName() }}
 										@else
 										Unknown Admin
