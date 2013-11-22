@@ -16,7 +16,7 @@ Licenses ::
 		</div>
 	</h3>
 </div>
-@if ($licenses->getTotal() > 10)
+@if ($licenses->getTotal() > Setting::getSettings()->per_page)
 {{ $licenses->links() }}
 @endif
 <div class="row-fluid table">
@@ -59,9 +59,6 @@ Licenses ::
 				<a href="{{ route('update/license', $license->id) }}" class="btn-flat white"> @lang('button.edit')</a>
 				<a class="btn-flat danger delete-asset" data-toggle="modal" href="{{ route('delete/license', $license->id) }}" data-content="Are you sure you wish to delete the  {{ $license->name }} license?" data-title="Delete {{ $license->name }}?" onClick="return false;">@lang('button.delete')</a>
 
-
-
-
 			</td>
 		</tr>
 		@endforeach
@@ -69,7 +66,7 @@ Licenses ::
 </table>
 </div>
 
-@if ($licenses->getTotal() > 10)
+@if ($licenses->getTotal() > Setting::getSettings()->per_page)
 {{ $licenses->links() }}
 @endif
 @stop

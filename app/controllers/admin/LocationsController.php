@@ -5,6 +5,7 @@ use Input;
 use Lang;
 use Location;
 use Redirect;
+use Setting;
 use DB;
 use Sentry;
 use Str;
@@ -22,7 +23,7 @@ class LocationsController extends AdminController {
 	public function getIndex()
 	{
 		// Grab all the locations
-		$locations = Location::orderBy('created_at', 'DESC')->paginate(10);
+		$locations = Location::orderBy('created_at', 'DESC')->paginate(Setting::getSettings()->per_page);
 
 		// Show the page
 		return View::make('backend/locations/index', compact('locations'));

@@ -49,7 +49,7 @@ Status Labels
 
                     <!-- side address column -->
                     <div class="span3 address pull-right">
-						<br><br>
+						<br /><br />
 						<h6>About Status Labels</h6>
 						<p>Status labels are used to describe the various reasons why an asset <strong><em>cannot</em></strong> be deployed. </p>
 

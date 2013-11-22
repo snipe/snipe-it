@@ -18,7 +18,7 @@ Asset Depreciations ::
 	</h3>
 </div>
 
-@if ($depreciations->getTotal()  > 10)
+@if ($depreciations->getTotal()  > Setting::getSettings()->per_page)
 {{ $depreciations->links() }}
 @endif
 
@@ -46,7 +46,7 @@ Asset Depreciations ::
 </table>
 </div>
 
-@if ($depreciations->getTotal() > 10)
+@if ($depreciations->getTotal() > Setting::getSettings()->per_page)
 {{ $depreciations->links() }}
 @endif
 

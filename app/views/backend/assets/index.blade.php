@@ -2,6 +2,20 @@
 
 {{-- Page title --}}
 @section('title')
+@if (Input::get('Pending') || Input::get('Undeployable') || Input::get('RTD')  || Input::get('Deployed'))
+	@if (Input::get('Pending'))
+		Pending
+	@elseif (Input::get('RTD'))
+		Ready to Deploy
+	@elseif (Input::get('Undeployable'))
+		Un-deployable
+	@elseif (Input::get('Deployed'))
+		Deployed
+	@endif
+@else
+		All
+@endif
+
 Assets ::
 @parent
 @stop
@@ -10,26 +24,57 @@ Assets ::
 @section('content')
 <div class="page-header">
 	<h3>
-		Assets
+				@if (Input::get('Pending') || Input::get('Undeployable') || Input::get('RTD')  || Input::get('Deployed'))
+					@if (Input::get('Pending'))
+						Pending
+					@elseif (Input::get('RTD'))
+						Ready to Deploy
+					@elseif (Input::get('Undeployable'))
+						Un-deployable
+					@elseif (Input::get('Deployed'))
+						Deployed
+					@endif
+				@else
+					All
+				@endif
+
+				Assets
 
 		<div class="pull-right">
+			<a class="btn-flat white" href="{{ URL::to('admin?Deployed=true') }}">Deployed</a>
+			<a class="btn-flat white" href="{{ URL::to('admin?RTD=true') }}">Ready to Deploy</a>
+			<a class="btn-flat white" href="{{ URL::to('admin?Pending=true') }}">Pending</a>
+			<a class="btn-flat white" href="{{ URL::to('admin?Undeployable=true') }}">Un-Deployable</a>
+			<a class="btn-flat white" href="{{ URL::to('admin') }}">Show All</a>
 			<a href="{{ route('create/asset') }}" class="btn-flat success"><i class="icon-plus-sign icon-white"></i> Create New</a>
+
 		</div>
 	</h3>
+
 </div>
 
-@if ($assets->getTotal() > 10)
+<br><br>
+
+
+@if ($assets && $assets->getTotal() && $assets->getTotal() > Setting::getSettings()->per_page)
 	{{ $assets->links() }}
 @endif
+
 <div class="row-fluid table">
+@if ($assets->getTotal() > 0)
 <table class="table table-hover">
 	<thead>
 		<tr>
 			<th class="span2">@lang('admin/assets/table.asset_tag')</th>
 			<th class="span2"><span class="line"></span>@lang('admin/assets/table.title')</th>
 			<th class="span2"><span class="line"></span>@lang('admin/assets/table.serial')</th>
+			@if (Input::get('Pending') || Input::get('Undeployable') || Input::get('RTD'))
+			<th class="span2"><span class="line"></span>Status</th>
+			@else
 			<th class="span2"><span class="line"></span>@lang('admin/assets/table.checkoutto')</th>
 			<th class="span2"><span class="line"></span>@lang('admin/assets/table.location')</th>
+			@endif
+
 			<th class="span1"><span class="line"></span>@lang('admin/assets/table.change')</th>
 			<th class="span2"><span class="line"></span>@lang('table.actions')</th>
 		</tr>
@@ -41,18 +86,39 @@ Assets ::
 			<td><a href="{{ route('view/asset', $asset->id) }}">{{ $asset->asset_tag }}</a></td>
 			<td><a href="{{ route('view/asset', $asset->id) }}">{{ $asset->name }}</a></td>
 			<td>{{ $asset->serial }}</td>
-			<td>
-			@if ($asset->assigneduser)
-				<a href="{{ route('view/user', $asset->assigned_to) }}">
-				{{ $asset->assigneduser->fullName() }}
-				</a>
+			@if (Input::get('Pending') || Input::get('Undeployable') || Input::get('RTD'))
+				<td>
+					@if (Input::get('Pending'))
+						Pending
+					@elseif (Input::get('RTD'))
+						Ready to Deploy
+					@elseif (Input::get('Undeployable'))
+						@if ($asset->assetstatus)
+						{{ $asset->assetstatus->name }}
+						@endif
+
+					@endif
+				</td>
+			@else
+				<td>
+				@if ($asset->assigneduser)
+					<a href="{{ route('view/user', $asset->assigned_to) }}">
+					{{ $asset->assigneduser->fullName() }}
+					</a>
+				@endif
+				</td>
+				<td>
+				@if ($asset->assigneduser && $asset->assetloc)
+						{{ $asset->assetloc->name }}
+				@else
+					@if ($asset->assetstatus)
+						{{ $asset->assetstatus->name }}
+					@endif
+				@endif
+				</td>
+
 			@endif
-			</td>
-			<td>
-			@if ($asset->assigneduser && $asset->assetloc)
-					{{ $asset->assetloc->name }}
-			@endif
-			</td>
+
 			<td>
 			@if ($asset->assigned_to != 0)
 				<a href="{{ route('checkin/asset', $asset->id) }}" class="btn-flat info">Checkin</a>
@@ -68,10 +134,20 @@ Assets ::
 		@endforeach
 	</tbody>
 </table>
+@else
+<div class="col-md-6">
+	<div class="alert alert-info alert-block">
+		<button type="button" class="close" data-dismiss="alert">&times;</button>
+		<i class="icon-info-sign"></i>
+		There are no results for your query.
+	</div>
+</div>
+
+@endif
 </div>
 
 
-@if ($assets->getTotal() > 10)
+@if ($assets && $assets->getTotal() && $assets->getTotal() > Setting::getSettings()->per_page)
 {{ $assets->links() }}
 @endif
 @stop

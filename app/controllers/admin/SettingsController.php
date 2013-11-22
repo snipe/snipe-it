@@ -22,7 +22,7 @@ class SettingsController extends AdminController {
 	public function getIndex()
 	{
 		// Grab all the settings
-		$settings = Setting::orderBy('created_at', 'DESC')->paginate(10);
+		$settings = Setting::all();
 
 		// Show the page
 		return View::make('backend/settings/index', compact('settings'));
@@ -51,35 +51,47 @@ class SettingsController extends AdminController {
 	public function postEdit()
 	{
 
+		// Check if the asset exists
+		if (is_null($setting = Setting::find(1)))
+		{
+			// Redirect to the asset management page with error
+			return Redirect::to('admin')->with('error', Lang::get('admin/settings/message.update.error'));
+		}
+
 		$new = Input::all();
 
-		// create a new model instance
-		$setting = new Location();
 
-		// attempt validation
-		if ($setting->validate($new))
+		// Declare the rules for the form validation
+		$rules = array(
+		"site_name" 	=> 'required|min:3',
+		"per_page"   		=> 'required|min:1|numeric',
+    	);
+
+		// Create a new validator instance from our validation rules
+		$validator = Validator::make(Input::all(), $rules);
+
+
+		// If validation fails, we'll exit the operation now.
+		if ($validator->fails())
 		{
+			// Ooops.. something went wrong
+			return Redirect::back()->withInput()->withErrors($validator);
+		}
 
-			// Update the setting data
-			$setting->option_value = e(Input::get('name'));
+		// Update the asset data
+			$setting->id = '1';
+			$setting->site_name = e(Input::get('site_name'));
+			$setting->per_page = e(Input::get('per_page'));
 
-
-			// Was the asset created?
+			// Was the asset updated?
 			if($setting->save())
 			{
-				// Redirect to the saved setting page
-				return Redirect::to("admin/settings/app/$settingId/edit")->with('success', Lang::get('admin/settings/message.update.success'));
+				// Redirect to the settings page
+				return Redirect::to("admin/settings/app")->with('success', Lang::get('admin/settings/message.update.success'));
 			}
-		}
-		else
-		{
-			// failure
-			$errors = $setting->errors();
-			return Redirect::back()->withInput()->withErrors($errors);
-		}
 
-		// Redirect to the setting management page
-		return Redirect::to("admin/settings/app/$settingId/edit")->with('error', Lang::get('admin/settings/message.update.error'));
+			// Redirect to the setting management page
+			return Redirect::to("admin/settings/app/edit")->with('error', Lang::get('admin/settings/message.update.error'));
 
 	}
 

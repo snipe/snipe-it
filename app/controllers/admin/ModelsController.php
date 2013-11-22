@@ -5,6 +5,7 @@ use Input;
 use Lang;
 use Model;
 use Redirect;
+use Setting;
 use Sentry;
 use DB;
 use Depreciation;
@@ -22,7 +23,7 @@ class ModelsController extends AdminController {
 	public function getIndex()
 	{
 		// Grab all the models
-		$models = Model::orderBy('created_at', 'DESC')->paginate(10);
+		$models = Model::orderBy('created_at', 'DESC')->paginate(Setting::getSettings()->per_page);
 
 		// Show the page
 		return View::make('backend/models/index', compact('models'));

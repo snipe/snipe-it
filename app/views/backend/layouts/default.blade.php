@@ -74,7 +74,7 @@
                 <span class="icon-bar"></span>
             </button>
 
-            <a class="brand" href="/">Snipe IT Asset Management</a>
+            <a class="brand" href="/">{{ Setting::getSettings()->site_name }}</a>
 			</ul>
 
 
@@ -219,7 +219,7 @@
                     </div>
                     <div class="span3 stat">
                         <div class="data">
-                            <a href="{{ URL::to('admin') }}">
+                            <a href="{{ URL::to('admin?RTD=true') }}">
                             	<span class="number">{{ number_format(Asset::availassetcount()) }}</span>
                             	<span style="color:black">assets available</span>
                             </a>

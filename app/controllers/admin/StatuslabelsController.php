@@ -7,6 +7,7 @@ use Statuslabel;
 use Redirect;
 use DB;
 use Sentry;
+use Setting;
 use Str;
 use Validator;
 use View;

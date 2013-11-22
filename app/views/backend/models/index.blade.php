@@ -17,7 +17,7 @@ Asset Models ::
 		</div>
 	</h3>
 </div>
-@if ($models->getTotal() > 10)
+@if ($models->getTotal() > Setting::getSettings()->per_page)
 {{ $models->links() }}
 @endif
 
@@ -50,7 +50,7 @@ Asset Models ::
 </table>
 
 
-@if ($models->getTotal() > 10)
+@if ($models->getTotal() > Setting::getSettings()->per_page)
 {{ $models->links() }}
 @endif
 

@@ -2,16 +2,10 @@
 
 class Setting extends Elegant {
 
-	protected $table = 'settings';
-	protected $rules = array(
-			"option_value['site_name']" 	=> 'required|min:3',
-			"option_value['per_page']"   		=> 'required|min:1|numeric',
-		);
 
-	public function getsettings()
+	public static function getSettings()
 	{
-		$foo = Setting::all();
-		print_r($foo);
+		return Setting::find(1);
 	}
 
 }

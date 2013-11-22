@@ -12,7 +12,7 @@ Settings ::
                 <!-- header -->
 				<h3 class="name">Settings
 						<div class="pull-right">
-							<!-- <a href="{{ route('edit/settings') }}" class="btn-flat white"> @lang('button.edit') Settings</a> -->
+							 <a href="{{ route('edit/settings') }}" class="btn-flat white"> @lang('button.edit') Settings</a>
 						</div>
 		</h3>
 
@@ -27,16 +27,19 @@ Settings ::
                             <table class="table table-hover">
 							<thead>
 								<tr>
-									<th class="span4">Setting</th>
-									<th class="span2"><span class="line"></span>Value</th>
+									<th class="span3">Setting</th>
+									<th class="span3"><span class="line"></span>Value</th>
 								</tr>
 							</thead>
 							<tbody>
 								@foreach ($settings as $setting)
 								<tr>
-									<td>{{ $setting->option_label }}</td>
-									<td>{{ $setting->option_value }}  </td>
-
+									<td>Site Name</td>
+									<td>{{ $setting->site_name }}  </td>
+								</tr>
+								<tr>
+									<td>Per Page</td>
+									<td>{{ $setting->per_page }}  </td>
 								</tr>
 								@endforeach
 							</tbody>

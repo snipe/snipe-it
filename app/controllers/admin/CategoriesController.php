@@ -5,6 +5,7 @@ use Input;
 use Lang;
 use Category;
 use Redirect;
+use Setting;
 use DB;
 use Sentry;
 use Str;
@@ -22,7 +23,7 @@ class CategoriesController extends AdminController {
 	public function getIndex()
 	{
 		// Grab all the categories
-		$categories = Category::orderBy('created_at', 'DESC')->paginate(10);
+		$categories = Category::orderBy('created_at', 'DESC')->paginate(Setting::getSettings()->per_page);
 
 		// Show the page
 		return View::make('backend/categories/index', compact('categories'));

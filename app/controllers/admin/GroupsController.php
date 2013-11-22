@@ -8,6 +8,7 @@ use Config;
 use Input;
 use Lang;
 use Redirect;
+use Setting;
 use Sentry;
 use Validator;
 use View;
