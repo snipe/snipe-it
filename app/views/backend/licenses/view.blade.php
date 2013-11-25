@@ -163,6 +163,9 @@ View License {{ $license->name }} ::
 								@if ($license->seats)
 								<li>Seats: {{ $license->seats }} </li>
 								@endif
+								@if ($license->seats)
+								<li>Depreciation: {{ $license->depreciation->name }} ({{ $license->depreciation->months }} months)</li>
+								@endif
 							</ul>
 
                     </div>

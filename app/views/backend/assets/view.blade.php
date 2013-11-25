@@ -114,6 +114,11 @@ View Asset {{ $asset->asset_tag }} ::
 								<li>Warranty: {{ $asset->warranty_months }} months</li>
 								<li>Expires: {{ $asset->warrantee_expires() }}</li>
 								@endif
+
+								@if ($asset->depreciation)
+								<li>Depreciation: {{ $asset->depreciation->name }} ({{ $asset->depreciation->months }} months)</li>
+								@endif
+
 							</ul>
 
 

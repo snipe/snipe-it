@@ -187,4 +187,29 @@ class ModelsController extends AdminController {
 	}
 
 
+	/**
+	*  Get the asset information to present to the model view page
+	*
+	* @param  int  $assetId
+	* @return View
+	**/
+	public function getView($modelId = null)
+	{
+		$model = Model::find($modelId);
+
+		if (isset($model->id)) {
+				return View::make('backend/models/view', compact('model'));
+		} else {
+			// Prepare the error message
+			$error = Lang::get('admin/models/message.does_not_exist', compact('id'));
+
+			// Redirect to the user management page
+			return Redirect::route('models')->with('error', $error);
+		}
+
+
+	}
+
+
+
 }

@@ -104,5 +104,10 @@ class License extends Elegant {
 		return $this->hasMany('LicenseSeat');
 	}
 
+	public function depreciation()
+	{
+		return $this->belongsTo('Depreciation','id');
+	}
+
 
 }

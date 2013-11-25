@@ -38,8 +38,7 @@ class CategoriesController extends AdminController {
 	public function getCreate()
 	{
 		// Show the page
-		$category_options = array('0' => 'Top Level') + Category::lists('name', 'id');
-		return View::make('backend/categories/edit')->with('category_options',$category_options)->with('category',new Category);
+		return View::make('backend/categories/edit')->with('category',new Category);
 	}
 
 
@@ -63,7 +62,6 @@ class CategoriesController extends AdminController {
 
 			// Update the category data
 			$category->name            = e(Input::get('name'));
-			$category->parent    = e(Input::get('parent'));
 			$category->user_id          = Sentry::getId();
 
 			// Was the asset created?
@@ -134,7 +132,6 @@ class CategoriesController extends AdminController {
 
 			// Update the category data
 			$category->name            = e(Input::get('name'));
-			$category->parent    = e(Input::get('parent'));
 
 			// Was the asset created?
 			if($category->save())

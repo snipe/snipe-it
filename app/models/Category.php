@@ -12,18 +12,15 @@ class Category extends Elegant {
     );
 
 
-
-	/**
-	* Get the parent category name
-	*/
-	public function parentname()
-	{
-		return $this->belongsTo('Category','parent');
-	}
-
 	public function has_models()
 	{
 		return $this->hasMany('Model', 'category_id')->count();
+	}
+
+	public function models()
+	{
+		return $this->hasMany('Model', 'category_id');
+
 	}
 
 
