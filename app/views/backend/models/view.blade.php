@@ -35,22 +35,28 @@ View Model {{ $model->model_tag }} ::
 								<tr role="row">
                                         <th class="span3">Name</th>
                                         <th class="span3">Asset Tag</th>
-                                         <th class="span3">User</th>
+                                        <th class="span3">User</th>
+                                        <th class="span2">Actions</th>
                                     </tr>
                                 </thead>
                                 <tbody>
 
-										@foreach ($model->assets as $modelassets)
+									@foreach ($model->assets as $modelassets)
 									<tr>
-										<td>{{ $modelassets->name }}</td>
-										<td>{{ $modelassets->asset_tag }}</td>
+										<td><a href="{{ route('view/asset', $modelassets->id) }}">{{ $modelassets->name }}</a></td>
+										<td><a href="{{ route('view/asset', $modelassets->id) }}">{{ $modelassets->asset_tag }}</a></td>
 										<td>
-										@if ($modelassets->assigned_to)
-											<a href="{{ route('view/user', $modelassets->assigned_to) }}">
-											{{ $modelassets->assigned_to }}
-											</a>
+										@if ($modelassets->assigneduser)
+										<a href="{{ route('view/user', $modelassets->assigned_to) }}">
+										{{ $modelassets->assigneduser->fullName() }}
+										</a>
+										@endif
+										</td>
+										<td>
+										@if ($modelassets->assigned_to != 0)
+											<a href="{{ route('checkin/asset', $modelassets->id) }}" class="btn-flat info">Checkin</a>
 										@else
-
+											<a href="{{ route('checkout/asset', $modelassets->id) }}" class="btn-flat success">Checkout</a>
 										@endif
 										</td>
 
@@ -79,18 +85,13 @@ View Model {{ $model->model_tag }} ::
                     <h6><br>More Info:</h6>
                        		<ul>
 
-								@if ($model->purchase_date)
-								<li>Purchase Date: {{ $model->purchase_date }} </li>
+
+								@if ($model->manufacturer)
+								<li>Manufacturer: {{ $model->manufacturer->name }}</li>
 								@endif
-								@if ($model->purchase_cost)
-								<li>Purchase Cost: ${{ number_format($model->purchase_cost) }} </li>
-								@endif
-								@if ($model->order_number)
-								<li>Order #: {{ $model->order_number }} </li>
-								@endif
-								@if ($model->warranty_months)
-								<li>Warranty: {{ $model->warranty_months }} months</li>
-								<li>Expires: {{ $model->warrantee_expires() }}</li>
+
+								@if ($model->modelno)
+								<li>Model No.: {{ $model->modelno }}</li>
 								@endif
 
 								@if ($model->depreciation)
@@ -102,8 +103,7 @@ View Model {{ $model->model_tag }} ::
 
 
 							<ul>
-								<li><br><br />This model is not currently assigned to anyone. You may check it into inventory
-								using the button below.</li>
+								<li><br><br />Blah blah blah.</li>
 							</ul>
 
                     </div>

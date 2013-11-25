@@ -27,5 +27,11 @@ class Model extends Elegant {
 		return $this->belongsTo('User','user_id');
 	}
 
+	public function manufacturer()
+	{
+		return $this->belongsTo('Manufacturer','manufacturer_id');
+	}
+
+
 
 }
