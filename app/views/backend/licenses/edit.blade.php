@@ -50,23 +50,27 @@
 					{{ $errors->first('serial', '<span class="help-inline">:message</span>') }}
 				</div>
 			</div>
-
-			<div class="control-group {{ $errors->has('license_email') ? 'error' : '' }}">
-				<label class="control-label" for="license_email">License Email</label>
-				<div class="controls">
-					<input class="span6" type="text" name="license_email" id="license_email" value="{{ Input::old('license_email', $license->license_email) }}" />
-					{{ $errors->first('license_email', '<span class="help-inline">:message</span>') }}
-				</div>
-			</div>
-
 			<div class="control-group {{ $errors->has('license_name') ? 'error' : '' }}">
-				<label class="control-label" for="license_name">License Name</label>
+				<label class="control-label" for="license_name">Licensed to Name</label>
 				<div class="controls">
 					<input class="span6" type="text" name="license_name" id="license_name" value="{{ Input::old('license_name', $license->license_name) }}" />
 					{{ $errors->first('license_name', '<span class="help-inline">:message</span>') }}
 				</div>
 			</div>
-
+			<div class="control-group {{ $errors->has('license_email') ? 'error' : '' }}">
+				<label class="control-label" for="license_email">Licensed to Email</label>
+				<div class="controls">
+					<input class="span6" type="text" name="license_email" id="license_email" value="{{ Input::old('license_email', $license->license_email) }}" />
+					{{ $errors->first('license_email', '<span class="help-inline">:message</span>') }}
+				</div>
+			</div>
+			<div class="control-group {{ $errors->has('seats') ? 'error' : '' }}">
+				<label class="control-label" for="seats">Seats</label>
+				<div class="controls">
+					<input class="span1" type="text" name="seats" id="seats" value="{{ Input::old('seats', $license->seats) }}" />
+					{{ $errors->first('seats', '<span class="help-inline">:message</span>') }}
+				</div>
+			</div>
 			<div class="control-group {{ $errors->has('order_number') ? 'error' : '' }}">
 				<label class="control-label" for="order_number">Order Number</label>
 				<div class="controls">
@@ -74,8 +78,6 @@
 					{{ $errors->first('order_number', '<span class="help-inline">:message</span>') }}
 				</div>
 			</div>
-
-
 			<div class="control-group {{ $errors->has('purchase_cost') ? 'error' : '' }}">
 				<label class="control-label" for="purchase_cost">Purchase Cost</label>
 				<div class="controls">

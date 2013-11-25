@@ -287,6 +287,7 @@ class LicensesController extends AdminController {
 			$logaction->asset_id = $license->id;
 			$logaction->checkedout_to = $license->assigned_to;
 			$logaction->location_id = $assigned_to->location_id;
+			$logaction->asset_type = 'software';
 			$logaction->user_id = Sentry::getUser()->id;
 			$log = $logaction->logaction('checkout');
 
@@ -320,8 +321,8 @@ class LicensesController extends AdminController {
 		if($license->save())
 		{
 			$logaction->asset_id = $license->id;
-
 			$logaction->location_id = NULL;
+			$logaction->asset_type = 'software';
 			$logaction->user_id = Sentry::getUser()->id;
 			$log = $logaction->logaction('checkin from');
 
@@ -341,13 +342,13 @@ class LicensesController extends AdminController {
 	**/
 	public function getView($licenseId = null)
 	{
-		$license = Asset::find($licenseId);
+		$license = License::find($licenseId);
 
 		if (isset($license->id)) {
 				return View::make('backend/licenses/view', compact('license'));
 		} else {
 			// Prepare the error message
-			$error = Lang::get('admin/licenses/message.does_not_exist', compact('id' ));
+			$error = Lang::get('admin/licenses/message.does_not_exist', compact('id'));
 
 			// Redirect to the user management page
 			return Redirect::route('licenses')->with('error', $error);

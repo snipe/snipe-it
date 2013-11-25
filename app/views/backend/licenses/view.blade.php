@@ -28,10 +28,27 @@ View License {{ $license->name }} ::
                                     <li><a href="{{ route('update/license', $license->id) }}">Edit License</a></li>
                                 </ul>
                             </div>
-
-
 				</h3>
 
+
+						<div class="span6 bio">
+							<div class="profile-box">
+							<br>
+								@if ($license->serial)
+								<p>Serial: {{ $license->serial }} <br>
+								@endif
+								@if ($license->license_name)
+								License Name: {{ $license->license_name }} <br>
+								@endif
+								@if ($license->license_email)
+								License Email: {{ $license->license_email }} <br>
+								@endif
+								@if ($license->purchase_date)
+								Purchase Date: {{ $license->purchase_date }} <br>
+								@endif
+								</p>
+							</div>
+                        </div>
 
 
 
@@ -105,6 +122,8 @@ View License {{ $license->name }} ::
 
                     <!-- side address column -->
                     <div class="span3 address pull-right">
+
+
 
 						@if ((isset($license->assigned_to ) && ($license->assigned_to > 0)))
                        		<h6><br>Checked Out To:</h6>

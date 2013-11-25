@@ -29,7 +29,7 @@ class License extends Elegant {
 	**/
   	public function assetloc()
   	{
-  		return $this->assigneduser->hasOne('Location');
+  		return $this->assignedusers->hasOne('Location');
   	}
 
   	/**
@@ -38,7 +38,7 @@ class License extends Elegant {
 	public function assetlog()
 	{
 		return $this->hasMany('Actionlog','asset_id')
-			->where('assigned_to', '=', '0')
+			->where('checkedout_to', '=', '0')
 			->orderBy('added_on', 'desc');
 	}
 
@@ -72,6 +72,37 @@ class License extends Elegant {
 
 	}
 
+	public function availcount()
+	{
+		return DB::table('license_seats')
+                    ->where('assigned_to', '=', '0')
+                    ->where('license_id', '=', $this->id)
+                    ->whereNull('deleted_at','and')
+                    ->count();
+	}
+
+
+	public function assignedcount()
+	{
+		return DB::table('license_seats')
+                    ->where('assigned_to', '>', '0')
+                    ->where('license_id', '=', $this->id)
+                    ->whereNull('deleted_at','and')
+                    ->count();
+	}
+
+	public function totalcount()
+	{
+		$avail =  $this->availcount();
+        $taken =  $this->assignedcount();
+        $diff =   ($avail + $taken);
+        return $diff;
+	}
+
+	public function licenseseats()
+	{
+		return $this->hasMany('LicenseSeat');
+	}
 
 
 }
