@@ -329,6 +329,7 @@ class AssetsController extends AdminController {
 			$logaction = new Actionlog();
 			$logaction->asset_id = $asset->id;
 			$logaction->checkedout_to = $asset->assigned_to;
+			$logaction->asset_type = 'hardware';
 			$logaction->location_id = $assigned_to->location_id;
 			$logaction->user_id = Sentry::getUser()->id;
 			$log = $logaction->logaction('checkout');
@@ -375,6 +376,7 @@ class AssetsController extends AdminController {
 			$logaction->asset_id = $asset->id;
 
 			$logaction->location_id = NULL;
+			$logaction->asset_type = 'hardware';
 			$logaction->user_id = Sentry::getUser()->id;
 			$log = $logaction->logaction('checkin from');
 
