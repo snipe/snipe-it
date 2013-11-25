@@ -9,7 +9,7 @@ class Asset extends Elegant {
 		'asset_tag'   => 'required|min:3|unique:assets',
 		'model_id'   => 'required',
 		'serial'   => 'required|min:3',
-		'warrantee_months'   => 'integer|min:1',
+		'warranty_months'   => 'integer|min:1',
     );
 
 
@@ -110,7 +110,7 @@ class Asset extends Elegant {
 
 
 			$date = date_create($this->purchase_date);
-			date_add($date, date_interval_create_from_date_string($this->warrantee_months.' months'));
+			date_add($date, date_interval_create_from_date_string($this->warranty_months.' months'));
 			return date_format($date, 'Y-m-d');
 
 	}

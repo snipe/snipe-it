@@ -106,11 +106,11 @@
 			</div>
 
 			<!-- Warrantee -->
-			<div class="control-group {{ $errors->has('warrantee_months') ? 'error' : '' }}">
-				<label class="control-label" for="serial">Warrantee</label>
+			<div class="control-group {{ $errors->has('warranty_months') ? 'error' : '' }}">
+				<label class="control-label" for="serial">Warranty</label>
 				<div class="controls">
-					<input class="span1" type="text" name="warrantee_months" id="warrantee_months" value="{{ Input::old('warrantee_months', $asset->warrantee_months) }}" />  months
-					{{ $errors->first('warrantee_months', '<span class="help-inline">:message</span>') }}
+					<input class="span1" type="text" name="warranty_months" id="warranty_months" value="{{ Input::old('warranty_months', $asset->warranty_months) }}" />  months
+					{{ $errors->first('warranty_months', '<span class="help-inline">:message</span>') }}
 				</div>
 			</div>
 

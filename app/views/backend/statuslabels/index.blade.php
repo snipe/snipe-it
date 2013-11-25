@@ -24,9 +24,9 @@ Status Labels
                             <br>
                             <!-- checked out assets table -->
 
-                            <table class="table table-hover">
+                            <table id="example">
 							<thead>
-								<tr>
+								<tr role="row">
 									<th class="span4">@lang('admin/statuslabels/table.name')</th>
 									<th class="span2"><span class="line"></span>@lang('table.actions')</th>
 								</tr>

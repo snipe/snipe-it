@@ -18,20 +18,16 @@ Locations ::
 	</h3>
 </div>
 
-@if ($locations->getTotal() > 10)
-{{ $locations->links() }}
-@endif
-
 <div class="row-fluid table">
-<table class="table table-hover">
+<table id="example">
 	<thead>
-		<tr>
+		<tr role="row">
 			<th class="span4">@lang('admin/locations/table.name')</th>
-			<th class="span2"><span class="line"></span>Address</th>
-			<th class="span2"><span class="line"></span>@lang('admin/locations/table.city'),
+			<th class="span2">Address</th>
+			<th class="span2">@lang('admin/locations/table.city'),
 			 @lang('admin/locations/table.state')
 			@lang('admin/locations/table.country')</th>
-			<th class="span2"><span class="line"></span>@lang('table.actions')</th>
+			<th class="span2">@lang('table.actions')</th>
 		</tr>
 	</thead>
 	<tbody>
@@ -50,8 +46,5 @@ Locations ::
 </table>
 </div>
 
-@if ($locations->getTotal() > 10)
-{{ $locations->links() }}
-@endif
 
 @stop

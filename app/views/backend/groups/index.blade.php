@@ -18,19 +18,16 @@ Group Management ::
 	</h3>
 </div>
 
-@if (count($groups) > Setting::getSettings()->per_page)
-{{ $groups->links() }}
-@endif
 
 <div class="row-fluid table">
-<table class="table table-hover">
+<table id="example">
 	<thead>
-		<tr>
+		<tr role="row">
 			<th class="span1">@lang('admin/groups/table.id')</th>
-			<th class="span6"><span class="line"></span>@lang('admin/groups/table.name')</th>
-			<th class="span2"><span class="line"></span>@lang('admin/groups/table.users')</th>
-			<th class="span2"><span class="line"></span>@lang('admin/groups/table.created_at')</th>
-			<th class="span2"><span class="line"></span>@lang('table.actions')</th>
+			<th class="span6">@lang('admin/groups/table.name')</th>
+			<th class="span2">@lang('admin/groups/table.users')</th>
+			<th class="span2">@lang('admin/groups/table.created_at')</th>
+			<th class="span2">@lang('table.actions')</th>
 		</tr>
 	</thead>
 	<tbody>
@@ -56,8 +53,5 @@ Group Management ::
 </table>
 </div>
 
-@if (count($groups) > Setting::getSettings()->per_page)
-{{ $groups->links() }}
-@endif
 
 @stop

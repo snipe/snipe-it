@@ -110,8 +110,8 @@ View Asset {{ $asset->asset_tag }} ::
 								@if ($asset->order_number)
 								<li>Order #: {{ $asset->order_number }} </li>
 								@endif
-								@if ($asset->warrantee_months)
-								<li>Warrantee: {{ $asset->warrantee_months }} months</li>
+								@if ($asset->warranty_months)
+								<li>Warranty: {{ $asset->warranty_months }} months</li>
 								<li>Expires: {{ $asset->warrantee_expires() }}</li>
 								@endif
 							</ul>
@@ -153,7 +153,7 @@ View Asset {{ $asset->asset_tag }} ::
 						@else
 							<ul>
 								<li><br><br />This asset is not currently assigned to anyone. You may check it into inventory
-								using the button below, or mark it as lost/stolen using the menu above.</li>
+								using the button below.</li>
 								<li><br><br /><a href="{{ route('checkout/asset', $asset->id) }}" class="btn-flat large success">Checkout Asset</a></li>
 							</ul>
                         @endif

@@ -32,33 +32,34 @@ class AssetsController extends AdminController {
 		// Filter results
 		if (Input::get('Pending'))
 		{
-			$assets = Asset::orderBy('asset_tag', 'ASC')->whereNull('status_id','and')->where('assigned_to','=','0')->where('physical', '=', 1);
+			$assets = Asset::orderBy('asset_tag', 'ASC')->whereNull('status_id','and')->where('assigned_to','=','0')->where('physical', '=', 1)->get();
 		}
 		else if (Input::get('RTD'))
 		{
-			$assets = Asset::orderBy('asset_tag', 'ASC')->where('status_id', '=', 0)->where('assigned_to','=','0')->where('physical', '=', 1);
+			$assets = Asset::orderBy('asset_tag', 'ASC')->where('status_id', '=', 0)->where('assigned_to','=','0')->where('physical', '=', 1)->get();
 		}
 		else if (Input::get('Undeployable'))
 		{
-			$assets = Asset::orderBy('asset_tag', 'ASC')->where('status_id', '>', 1)->where('physical', '=', 1);
+			$assets = Asset::orderBy('asset_tag', 'ASC')->where('status_id', '>', 1)->where('physical', '=', 1)->get();
 		}
 		else if (Input::get('Deployed'))
 		{
-			$assets = Asset::orderBy('asset_tag', 'ASC')->where('status_id', '=', 0)->where('assigned_to','>','0')->where('physical', '=', 1);
+			$assets = Asset::orderBy('asset_tag', 'ASC')->where('status_id', '=', 0)->where('assigned_to','>','0')->where('physical', '=', 1)->get();
 		}
 		else
 		{
-			$assets = Asset::orderBy('asset_tag', 'ASC')->where('physical', '=', 1);
+			$assets = Asset::orderBy('asset_tag', 'ASC')->where('physical', '=', 1)->get();
 		}
 
 		// Paginate the users
-		$assets = $assets->paginate(Setting::getSettings()->per_page)
+		/**$assets = $assets->paginate(Setting::getSettings()->per_page)
 			->appends(array(
 				'Pending' => Input::get('Pending'),
 				'RTD' => Input::get('RTD'),
 				'Undeployable' => Input::get('Undeployable'),
 				'Deployed' => Input::get('Deployed'),
 			));
+		**/
 
 		return View::make('backend/assets/index', compact('assets'));
 	}
@@ -117,7 +118,7 @@ class AssetsController extends AdminController {
 			$asset->notes            		= e(Input::get('notes'));
 			$asset->asset_tag            	= e(Input::get('asset_tag'));
 			$asset->status_id            	= e(Input::get('status_id'));
-			$asset->warrantee_months        = e(Input::get('warrantee_months'));
+			$asset->warranty_months        = e(Input::get('warranty_months'));
 			$asset->user_id          		= Sentry::getId();
 			$asset->physical            		= '1';
 
@@ -192,7 +193,7 @@ class AssetsController extends AdminController {
 		'asset_tag'   => 'required|min:3',
 		'model_id'   => 'required',
 		'serial'   => 'required|min:3',
-		'warrantee_months'   => 'integer|min:1',
+		'warranty_months'   => 'integer|min:1',
     	);
 
 		// Create a new validator instance from our validation rules
@@ -215,7 +216,7 @@ class AssetsController extends AdminController {
 			$asset->order_number            = e(Input::get('order_number'));
 			$asset->asset_tag           	= e(Input::get('asset_tag'));
 			$asset->status_id            	= e(Input::get('status_id'));
-			$asset->warrantee_months        = e(Input::get('warrantee_months'));
+			$asset->warranty_months        = e(Input::get('warranty_months'));
 			$asset->notes            		= e(Input::get('notes'));
 			$asset->physical            		= '1';
 

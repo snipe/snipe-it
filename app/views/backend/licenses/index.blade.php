@@ -16,31 +16,40 @@ Licenses ::
 		</div>
 	</h3>
 </div>
-@if ($licenses->getTotal() > Setting::getSettings()->per_page)
-{{ $licenses->links() }}
-@endif
-<div class="row-fluid table">
-<table class="table table-hover">
+
+<table id="example">
 	<thead>
-		<tr>
-			<th class="span1">@lang('admin/licenses/table.seats')</th>
-			<th class="span2"><span class="line"></span>@lang('admin/licenses/table.title')</th>
-			<th class="span2"><span class="line"></span>@lang('admin/licenses/table.serial')</th>
-			<th class="span2"><span class="line"></span>@lang('admin/licenses/table.assigned_to')</th>
-			<th class="span2"><span class="line"></span>@lang('table.actions')</th>
+		<tr role="row">
+			<th class="span3" tabindex="0" rowspan="1" colspan="1">@lang('admin/licenses/table.title')</th>
+			<th class="span3" tabindex="0" rowspan="1" colspan="1">@lang('admin/licenses/table.serial')</th>
+			<th class="span3" tabindex="0" rowspan="1" colspan="1">@lang('admin/licenses/table.assigned_to')</th>
+			<th class="span2" tabindex="0" rowspan="1" colspan="1">@lang('table.actions')</th>
 		</tr>
 	</thead>
+	<tfoot>
+		<tr>
+			<th class="span3" tabindex="0" rowspan="1" colspan="1">@lang('admin/licenses/table.title')</th>
+			<th class="span3" tabindex="0" rowspan="1" colspan="1">@lang('admin/licenses/table.serial')</th>
+			<th class="span3" tabindex="0" rowspan="1" colspan="1">@lang('admin/licenses/table.assigned_to')</th>
+			<th class="span2" tabindex="0" rowspan="1" colspan="1">@lang('table.actions')</th>
+		</tr>
+	</tfoot>
 	<tbody>
 
 
 		@foreach ($licenses as $license)
 
 			<tr>
-					<td>{{ $license->seats }}</td>
-					<td><a href="{{ route('view/license', $license->id) }}">{{ $license->name }}</a></td>
+
+					<td><a href="{{ route('view/license', $license->id) }}">{{ $license->name }}</a>
+					@if ($license->seats ==1)
+						({{ $license->seats }} seat)
+					@else
+						({{ $license->seats }} seats)
+					@endif
+
+					</td>
 					<td><a href="{{ route('view/license', $license->id) }}">{{ $license->serial }}</a></td>
-
-
 					<td></td>
 					<td>
 
@@ -51,12 +60,12 @@ Licenses ::
 					</td>
 				</tr>
 				@if ($license->licenseseats)
-
+				<?php $count=1; ?>
 				@foreach ($license->licenseseats as $licensedto)
 
 				<tr>
 
-					<td></td>
+
 					<td>
 					@if ($licensedto->assigned_to)
 						<a href="{{ route('checkin/license', $licensedto->id) }}" class="btn-flat info"> Checkin </a>
@@ -64,7 +73,7 @@ Licenses ::
 						<a href="{{ route('checkout/license', $licensedto->id) }}" class="btn-flat success">Checkout</a>
 					@endif
 					</td>
-					<td><i class="icon-arrow-right"></i> {{ $license->serial }}</td>
+					<td>{{ $license->name }} Seat {{ $count }}</td>
 
 
 
@@ -80,6 +89,7 @@ Licenses ::
 
 
 				</tr>
+				<?php $count++; ?>
 				@endforeach
 				@endif
 
@@ -94,9 +104,5 @@ Licenses ::
 
 	</tbody>
 </table>
-</div>
 
-@if ($licenses->getTotal() > Setting::getSettings()->per_page)
-{{ $licenses->links() }}
-@endif
 @stop
