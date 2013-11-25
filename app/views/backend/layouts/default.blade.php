@@ -298,10 +298,23 @@
 
 
 			$(document).ready(function() {
+
             $('#example').dataTable({
                 "sPaginationType": "full_numbers"
             });
         	});
+
+			$('#nosorting').dataTable({
+                "sPaginationType": "full_numbers",
+                "fnSort": [1,'asc'],
+                "aoColumns": [
+				{ "bSortable": false },
+				{ "bSortable": false },
+				{ "bSortable": false },
+				{ "bSortable": false }
+				]
+            });
+
 
 
 
