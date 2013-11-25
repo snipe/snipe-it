@@ -22,6 +22,7 @@
 		<link href="{{ asset('assets/css/lib/bootstrap.datepicker.css') }}" type="text/css" rel="stylesheet">
 
 
+
 		<!-- libraries -->
 		<link href="{{ asset('assets/css/lib/jquery-ui-1.10.2.custom.css') }}" rel="stylesheet" type="text/css" />
 		<link href="{{ asset('assets/css/lib/font-awesome.css') }}" type="text/css" rel="stylesheet" />
@@ -36,6 +37,8 @@
 		<link rel="stylesheet" href="{{ asset('assets/css/compiled/index.css') }}" type="text/css" media="screen" />
 		<link rel="stylesheet" href="{{ asset('assets/css/compiled/user-list.css') }}" type="text/css" media="screen" />
 		<link rel="stylesheet" href="{{ asset('assets/css/compiled/user-profile.css') }}" type="text/css" media="screen" />
+		<link rel="stylesheet" href="{{ asset('assets/css/lib/jquery.dataTables.css') }}" type="text/css" media="screen" />
+
 
 		<!-- open sans font -->
 		<link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
@@ -288,9 +291,18 @@
     <script src="{{ asset('assets/js/select2.min.js') }}"></script>
     <script src="{{ asset('assets/js/jquery.uniform.min.js') }}"></script>
     <script src="{{ asset('assets/js/bootstrap.datepicker.js') }}"></script>
+    <script src="{{ asset('assets/js/jquery.dataTables.js') }}"></script>
 
     <script type="text/javascript">
         $(function () {
+
+
+			$(document).ready(function() {
+            $('#example').dataTable({
+                "sPaginationType": "full_numbers"
+            });
+        	});
+
 
 
 			// add uniform plugin styles to html elements
@@ -327,19 +339,14 @@
 			$('#dataConfirmModal').find('.modal-body').text(message);
 			$('#dataConfirmOK').attr('href', href);
 			$('#dataConfirmModal').modal({show:true});
-})
+			})
 
 
-        });
+        	});
+
+ </script>
 
 
-
-
-
-
-
-
-    </script>
 
 
 

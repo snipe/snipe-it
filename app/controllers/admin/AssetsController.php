@@ -32,33 +32,34 @@ class AssetsController extends AdminController {
 		// Filter results
 		if (Input::get('Pending'))
 		{
-			$assets = Asset::orderBy('asset_tag', 'ASC')->whereNull('status_id','and')->where('assigned_to','=','0')->where('physical', '=', 1);
+			$assets = Asset::orderBy('asset_tag', 'ASC')->whereNull('status_id','and')->where('assigned_to','=','0')->where('physical', '=', 1)->get();
 		}
 		else if (Input::get('RTD'))
 		{
-			$assets = Asset::orderBy('asset_tag', 'ASC')->where('status_id', '=', 0)->where('assigned_to','=','0')->where('physical', '=', 1);
+			$assets = Asset::orderBy('asset_tag', 'ASC')->where('status_id', '=', 0)->where('assigned_to','=','0')->where('physical', '=', 1)->get();
 		}
 		else if (Input::get('Undeployable'))
 		{
-			$assets = Asset::orderBy('asset_tag', 'ASC')->where('status_id', '>', 1)->where('physical', '=', 1);
+			$assets = Asset::orderBy('asset_tag', 'ASC')->where('status_id', '>', 1)->where('physical', '=', 1)->get();
 		}
 		else if (Input::get('Deployed'))
 		{
-			$assets = Asset::orderBy('asset_tag', 'ASC')->where('status_id', '=', 0)->where('assigned_to','>','0')->where('physical', '=', 1);
+			$assets = Asset::orderBy('asset_tag', 'ASC')->where('status_id', '=', 0)->where('assigned_to','>','0')->where('physical', '=', 1)->get();
 		}
 		else
 		{
-			$assets = Asset::orderBy('asset_tag', 'ASC')->where('physical', '=', 1);
+			$assets = Asset::orderBy('asset_tag', 'ASC')->where('physical', '=', 1)->get();
 		}
 
 		// Paginate the users
-		$assets = $assets->paginate(Setting::getSettings()->per_page)
+		/**$assets = $assets->paginate(Setting::getSettings()->per_page)
 			->appends(array(
 				'Pending' => Input::get('Pending'),
 				'RTD' => Input::get('RTD'),
 				'Undeployable' => Input::get('Undeployable'),
 				'Deployed' => Input::get('Deployed'),
 			));
+		**/
 
 		return View::make('backend/assets/index', compact('assets'));
 	}

@@ -19,17 +19,28 @@ Licenses ::
 @if ($licenses->getTotal() > Setting::getSettings()->per_page)
 {{ $licenses->links() }}
 @endif
-<div class="row-fluid table">
-<table class="table table-hover">
-	<thead>
-		<tr>
+<div class="container-fluid">
+            <div id="pad-wrapper" class="datatables-page">
+                <div class="row-fluid">
+                    <div class="span12">
 
-			<th class="span3"><span class="line"></span>@lang('admin/licenses/table.title')</th>
-			<th class="span3"><span class="line"></span>@lang('admin/licenses/table.serial')</th>
-			<th class="span3"><span class="line"></span>@lang('admin/licenses/table.assigned_to')</th>
-			<th class="span2"><span class="line"></span>@lang('table.actions')</th>
+<table id="example">
+	<thead>
+		<tr role="row">
+			<th class="span3" tabindex="0" rowspan="1" colspan="1">@lang('admin/licenses/table.title')</th>
+			<th class="span3" tabindex="0" rowspan="1" colspan="1">@lang('admin/licenses/table.serial')</th>
+			<th class="span3" tabindex="0" rowspan="1" colspan="1">@lang('admin/licenses/table.assigned_to')</th>
+			<th class="span2" tabindex="0" rowspan="1" colspan="1">@lang('table.actions')</th>
 		</tr>
 	</thead>
+	<tfoot>
+		<tr>
+			<th class="span3" tabindex="0" rowspan="1" colspan="1">@lang('admin/licenses/table.title')</th>
+			<th class="span3" tabindex="0" rowspan="1" colspan="1">@lang('admin/licenses/table.serial')</th>
+			<th class="span3" tabindex="0" rowspan="1" colspan="1">@lang('admin/licenses/table.assigned_to')</th>
+			<th class="span2" tabindex="0" rowspan="1" colspan="1">@lang('table.actions')</th>
+		</tr>
+	</tfoot>
 	<tbody>
 
 
@@ -46,8 +57,6 @@ Licenses ::
 
 					</td>
 					<td><a href="{{ route('view/license', $license->id) }}">{{ $license->serial }}</a></td>
-
-
 					<td></td>
 					<td>
 
@@ -71,7 +80,7 @@ Licenses ::
 						<a href="{{ route('checkout/license', $licensedto->id) }}" class="btn-flat success">Checkout</a>
 					@endif
 					</td>
-					<td> Seat {{ $count }}</td>
+					<td>{{ $license->name }} Seat {{ $count }}</td>
 
 
 
@@ -103,6 +112,11 @@ Licenses ::
 	</tbody>
 </table>
 </div>
+ </div>
+
+            </div>
+        </div>
+
 
 @if ($licenses->getTotal() > Setting::getSettings()->per_page)
 {{ $licenses->links() }}

@@ -24,19 +24,19 @@ Assets ::
 @section('content')
 <div class="page-header">
 	<h3>
-				@if (Input::get('Pending') || Input::get('Undeployable') || Input::get('RTD')  || Input::get('Deployed'))
-					@if (Input::get('Pending'))
-						Pending
-					@elseif (Input::get('RTD'))
-						Ready to Deploy
-					@elseif (Input::get('Undeployable'))
-						Un-deployable
-					@elseif (Input::get('Deployed'))
-						Deployed
-					@endif
-				@else
-					All
-				@endif
+		@if (Input::get('Pending') || Input::get('Undeployable') || Input::get('RTD')  || Input::get('Deployed'))
+			@if (Input::get('Pending'))
+				Pending
+			@elseif (Input::get('RTD'))
+				Ready to Deploy
+			@elseif (Input::get('Undeployable'))
+				Un-deployable
+			@elseif (Input::get('Deployed'))
+				Deployed
+			@endif
+		@else
+			All
+		@endif
 
 				Assets
 
@@ -55,28 +55,24 @@ Assets ::
 
 <br><br>
 
+@if ($assets->count() > 0)
 
-@if ($assets && $assets->getTotal() && $assets->getTotal() > Setting::getSettings()->per_page)
-	{{ $assets->links() }}
-@endif
 
-<div class="row-fluid table">
-@if ($assets->getTotal() > 0)
-<table class="table table-hover">
+<table id="example">
 	<thead>
-		<tr>
-			<th class="span2">@lang('admin/assets/table.asset_tag')</th>
-			<th class="span2"><span class="line"></span>@lang('admin/assets/table.title')</th>
-			<th class="span2"><span class="line"></span>@lang('admin/assets/table.serial')</th>
+		<tr role="row">
+			<th class="span2" bSortable="true">@lang('admin/assets/table.asset_tag')</th>
+			<th class="span2" bSortable="true"><span class="line"></span>@lang('admin/assets/table.title')</th>
+			<th class="span2" bSortable="true"><span class="line"></span>@lang('admin/assets/table.serial')</th>
 			@if (Input::get('Pending') || Input::get('Undeployable') || Input::get('RTD'))
-			<th class="span2"><span class="line"></span>Status</th>
+			<th class="span2" bSortable="true">Status</th>
 			@else
-			<th class="span2"><span class="line"></span>@lang('admin/assets/table.checkoutto')</th>
-			<th class="span2"><span class="line"></span>@lang('admin/assets/table.location')</th>
+			<th class="span2" bSortable="true">@lang('admin/assets/table.checkoutto')</th>
+			<th class="span2" bSortable="true">@lang('admin/assets/table.location')</th>
 			@endif
 
-			<th class="span1"><span class="line"></span>@lang('admin/assets/table.change')</th>
-			<th class="span2"><span class="line"></span>@lang('table.actions')</th>
+			<th class="span1">@lang('admin/assets/table.change')</th>
+			<th class="span2" bSortable="false">@lang('table.actions')</th>
 		</tr>
 	</thead>
 	<tbody>
@@ -144,10 +140,6 @@ Assets ::
 </div>
 
 @endif
-</div>
 
 
-@if ($assets && $assets->getTotal() && $assets->getTotal() > Setting::getSettings()->per_page)
-{{ $assets->links() }}
-@endif
 @stop
