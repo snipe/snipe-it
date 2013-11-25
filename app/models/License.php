@@ -38,7 +38,7 @@ class License extends Elegant {
 	public function assetlog()
 	{
 		return $this->hasMany('Actionlog','asset_id')
-			->where('checkedout_to', '=', '0')
+			->where('asset_type', '=', 'software')
 			->orderBy('added_on', 'desc');
 	}
 

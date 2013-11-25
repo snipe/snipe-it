@@ -30,37 +30,53 @@ View License {{ $license->name }} ::
                             </div>
 				</h3>
 
-
-						<div class="span6 bio">
-							<div class="profile-box">
-							<br>
-								@if ($license->serial)
-								<p>Serial: {{ $license->serial }} <br>
-								@endif
-								@if ($license->license_name)
-								License Name: {{ $license->license_name }} <br>
-								@endif
-								@if ($license->license_email)
-								License Email: {{ $license->license_email }} <br>
-								@endif
-								@if ($license->purchase_date)
-								Purchase Date: {{ $license->purchase_date }} <br>
-								@endif
-								</p>
-							</div>
-                        </div>
-
-
-
-
-
-
                 <div class="row-fluid profile">
                     <!-- bio, new note & orders column -->
                     <div class="span9 bio">
                         <div class="profile-box">
                             <br>
                             <!-- checked out assets table -->
+
+							<h6>License Seats</h6>
+                            <table class="table table-hover">
+                                <thead>
+                                    <tr>
+
+
+                                         <th class="span6">User</th>
+                                         <th class="span2"><span class="line"></span> </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                	@if ($license->licenseseats)
+										@foreach ($license->licenseseats as $licensedto)
+
+										<tr>
+
+											<td>
+											@if ($licensedto->assigned_to)
+												<a href="{{ route('view/user', $licensedto->id) }}">
+											{{ $licensedto->user->fullName() }}
+											</a>
+											@endif
+											</td>
+											<td>
+											@if ($licensedto->assigned_to)
+												<a href="{{ route('checkin/license', $licensedto->id) }}" class="btn-flat info"> Checkin </a>
+											@else
+												<a href="{{ route('checkout/license', $licensedto->id) }}" class="btn-flat success">Checkout</a>
+											@endif
+											</td>
+
+										</tr>
+										@endforeach
+										@endif
+
+
+                                </tbody>
+                            </table>
+							<br>
+							<h6>Checkout History</h6>
 
                             <table class="table table-hover">
                                 <thead>
@@ -90,11 +106,13 @@ View License {{ $license->name }} ::
 										<td>{{ $log->action_type }}</td>
 
 										<td>
-											@if (isset($log->checkedout_to->id))
+											@if (isset($log->checkedout_to))
 											<a href="{{ route('view/user', $log->checkedout_to) }}">
 											{{ $log->userlog->fullName() }}
+
 											</a>
 											@endif
+
 										</td>
 									</tr>
 									@endforeach
@@ -122,48 +140,21 @@ View License {{ $license->name }} ::
 
                     <!-- side address column -->
                     <div class="span3 address pull-right">
-
-
-
-						@if ((isset($license->assigned_to ) && ($license->assigned_to > 0)))
-                       		<h6><br>Checked Out To:</h6>
+                    <h6><br>License Info:</h6>
                        		<ul>
-
-								<li><img src="{{ $license->assigneduser->gravatar() }}" class="img-circle" style="width: 100px; margin-right: 20px;" /><br /><br /></li>
-								<li><a href="{{ route('view/user', $license->assigned_to) }}">{{ $license->assigneduser->fullName() }}</a></li>
-
-
-								@if (isset($license->assetloc->address))
-									<li>{{ $license->assetloc->address }}
-									@if (isset($license->assetloc->address2))
-										{{ $license->assetloc->address2 }}
-									@endif
-									</li>
-									@if (isset($license->assetloc->city))
-										<li>{{ $license->assetloc->city }}, {{ $license->assetloc->state }} {{ $license->assetloc->zip }}</li>
-									@endif
-
+								@if ($license->serial)
+								<li>Serial: {{ $license->serial }} </li>
 								@endif
-
-
-
-								@if (isset($license->assigneduser->email))
-									<li><br /><i class="icon-envelope-alt"></i> <a href="mailto:{{ $license->assigneduser->email }}">{{ $license->assigneduser->email }}</a></li>
+								@if ($license->license_name)
+								<li>License Name: {{ $license->license_name }} </li>
 								@endif
-
-								@if (isset($license->assigneduser->phone))
-									<li><i class="icon-phone"></i> {{ $license->assigneduser->phone }}</li>
+								@if ($license->license_email)
+								<li>License Email: {{ $license->license_email }} </li>
 								@endif
-
-								<li><br /><a href="{{ route('checkin/license', $license->id) }}" class="btn-flat large info ">Checkin Asset</a></li>
-								</ul>
-
-						@else
-							<ul>
-								<li><br><br />This asset is not currently assigned to anyone. You may check it into inventory
-								using the button below, or mark it as lost/stolen using the menu above.</li>
-								<li><br><br /><a href="{{ route('checkout/license', $license->id) }}" class="btn-flat large success">Checkout Asset</a></li>
+								@if ($license->purchase_date)
+								<li>Purchase Date: {{ $license->purchase_date }} </li>
+								@endif
 							</ul>
-                        @endif
+
                     </div>
 @stop

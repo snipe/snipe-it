@@ -241,13 +241,13 @@ class LicensesController extends AdminController {
 		/**
 	* Check out the asset to a person
 	**/
-	public function postCheckout($assetId)
+	public function postCheckout($seatId)
 	{
 		// Check if the asset exists
-		if (is_null($license = License::find($assetId)))
+		if (is_null($licenseseat = LicenseSeat::find($seatId)))
 		{
 			// Redirect to the asset management page with error
-			return Redirect::to('admin/licenses')->with('error', Lang::get('admin/assets/message.not_found'));
+			return Redirect::to('admin/licenses')->with('error', Lang::get('admin/licenses/message.not_found'));
 		}
 
 		$assigned_to = e(Input::get('assigned_to'));
@@ -277,15 +277,15 @@ class LicensesController extends AdminController {
 
 
 		// Update the asset data
-		$license->assigned_to            		= e(Input::get('assigned_to'));
+		$licenseseat->assigned_to            		= e(Input::get('assigned_to'));
 
 
 		// Was the asset updated?
-		if($license->save())
+		if($licenseseat->save())
 		{
 			$logaction = new Actionlog();
-			$logaction->asset_id = $license->id;
-			$logaction->checkedout_to = $license->assigned_to;
+			$logaction->asset_id = $licenseseat->id;
+			$logaction->checkedout_to = $licenseseat->assigned_to;
 			$logaction->location_id = $assigned_to->location_id;
 			$logaction->asset_type = 'software';
 			$logaction->user_id = Sentry::getUser()->id;
@@ -302,25 +302,25 @@ class LicensesController extends AdminController {
 	/**
 	* Check in the item so that it can be checked out again to someone else
 	**/
-	public function postCheckin($assetId)
+	public function postCheckin($seatId)
 	{
 		// Check if the asset exists
-		if (is_null($license = License::find($assetId)))
+		if (is_null($licenseseat = LicenseSeat::find($seatId)))
 		{
 			// Redirect to the asset management page with error
 			return Redirect::to('admin/licenses')->with('error', Lang::get('admin/assets/message.not_found'));
 		}
 
 		$logaction = new Actionlog();
-		$logaction->checkedout_to = $license->assigned_to;
+		$logaction->checkedout_to = $licenseseat->assigned_to;
 
 		// Update the asset data
-		$license->assigned_to            		= '';
+		$licenseseat->assigned_to            		= '';
 
 		// Was the asset updated?
-		if($license->save())
+		if($licenseseat->save())
 		{
-			$logaction->asset_id = $license->id;
+			$logaction->asset_id = $licenseseat->id;
 			$logaction->location_id = NULL;
 			$logaction->asset_type = 'software';
 			$logaction->user_id = Sentry::getUser()->id;
