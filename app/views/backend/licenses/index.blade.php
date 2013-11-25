@@ -26,14 +26,6 @@ Licenses ::
 			<th class="span2" tabindex="0" rowspan="1" colspan="1">@lang('table.actions')</th>
 		</tr>
 	</thead>
-	<tfoot>
-		<tr>
-			<th class="span3" tabindex="0" rowspan="1" colspan="1">@lang('admin/licenses/table.title')</th>
-			<th class="span3" tabindex="0" rowspan="1" colspan="1">@lang('admin/licenses/table.serial')</th>
-			<th class="span3" tabindex="0" rowspan="1" colspan="1">@lang('admin/licenses/table.assigned_to')</th>
-			<th class="span2" tabindex="0" rowspan="1" colspan="1">@lang('table.actions')</th>
-		</tr>
-	</tfoot>
 	<tbody>
 
 
@@ -52,7 +44,6 @@ Licenses ::
 					<td><a href="{{ route('view/license', $license->id) }}">{{ $license->serial }}</a></td>
 					<td></td>
 					<td>
-
 					<a href="{{ route('update/license', $license->id) }}" class="btn-flat white"> @lang('button.edit')</a>
 						<a class="btn-flat danger delete-asset" data-toggle="modal" href="{{ route('delete/license', $license->id) }}" data-content="Are you sure you wish to delete the  {{ $license->name }} license?" data-title="Delete {{ $license->name }}?" onClick="return false;">@lang('button.delete')</a>
 
@@ -65,18 +56,9 @@ Licenses ::
 
 				<tr>
 
-
-					<td>
-					@if ($licensedto->assigned_to)
-						<a href="{{ route('checkin/license', $licensedto->id) }}" class="btn-flat info"> Checkin </a>
-					@else
-						<a href="{{ route('checkout/license', $licensedto->id) }}" class="btn-flat success">Checkout</a>
-					@endif
-					</td>
-					<td>{{ $license->name }} Seat {{ $count }}</td>
-
-
-
+					<td><a href="{{ route('view/license', $license->id) }}">{{ $license->name }}</a>
+					 (Seat {{ $count }})</td>
+					<td><a href="{{ route('view/license', $license->id) }}">{{ $license->serial }}</a></td>
 					<td>
 					@if ($licensedto->assigned_to)
 						<a href="{{ route('view/user', $licensedto->id) }}">
@@ -84,7 +66,13 @@ Licenses ::
 					</a>
 					@endif
 					</td>
-					<td></td>
+					<td>
+					@if ($licensedto->assigned_to)
+						<a href="{{ route('checkin/license', $licensedto->id) }}" class="btn-flat info"> Checkin </a>
+					@else
+						<a href="{{ route('checkout/license', $licensedto->id) }}" class="btn-flat success">Checkout</a>
+					@endif
+					</td>
 
 
 
