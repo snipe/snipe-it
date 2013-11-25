@@ -300,7 +300,9 @@
 			$(document).ready(function() {
 
             $('#example').dataTable({
-                "sPaginationType": "full_numbers"
+                "sPaginationType": "full_numbers",
+                "iDisplayLength": {{ Setting::getSettings()->per_page }},
+    			"aLengthMenu": [[{{ Setting::getSettings()->per_page }}, -1], [{{ Setting::getSettings()->per_page }}, "All"]]
             });
         	});
 
@@ -312,7 +314,9 @@
 				{ "bSortable": false },
 				{ "bSortable": false },
 				{ "bSortable": false }
-				]
+				],
+				"iDisplayLength": {{ Setting::getSettings()->per_page }},
+    			"aLengthMenu": [[{{ Setting::getSettings()->per_page }}, -1], [{{ Setting::getSettings()->per_page }}, "All"]]
             });
 
 
