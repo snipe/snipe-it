@@ -37,7 +37,6 @@ User Management ::
 			<th class="span1">Licenses</th>
 			<th class="span1">@lang('admin/users/table.activated')</th>
 			<th class="span2">@lang('admin/users/table.last_login')</th>
-			<th class="span1">@lang('admin/users/table.created_at')</th>
 			<th class="span2">@lang('table.actions')</th>
 		</tr>
 	</thead>
@@ -61,7 +60,7 @@ User Management ::
 				Never
 			@endif
 			</td>
-			<td>{{ $user->created_at->diffForHumans() }}</td>
+
 
 			<td>
 			@if ($user->id > 3)
