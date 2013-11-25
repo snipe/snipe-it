@@ -82,7 +82,7 @@ class AssetsController extends AdminController {
 		$depreciation_list = array('' => '') + Depreciation::lists('name', 'id');
 
 		// Grab the dropdown list of status
-		$statuslabel_list = array('' => 'Ready to Deploy') + Statuslabel::lists('name', 'id');
+		$statuslabel_list = array('' => 'Pending') + array('1' => 'Ready to Deploy') + Statuslabel::lists('name', 'id');
 
 		return View::make('backend/assets/edit')->with('model_list',$model_list)->with('statuslabel_list',$statuslabel_list)->with('depreciation_list',$depreciation_list)->with('asset',new Asset);
 
@@ -160,7 +160,7 @@ class AssetsController extends AdminController {
 		$model_list = array('' => '') + Model::lists('name', 'id');
 
 		// Grab the dropdown list of status
-		$statuslabel_list = array('' => '') + Statuslabel::lists('name', 'id');
+		$statuslabel_list = array('' => 'Pending') + array('1' => 'Ready to Deploy') + Statuslabel::lists('name', 'id');
 
 		// get depreciation list
 		$depreciation_list = array('' => '') + Depreciation::lists('name', 'id');
