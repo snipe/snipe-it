@@ -117,6 +117,7 @@ class AssetsController extends AdminController {
 			$asset->notes            		= e(Input::get('notes'));
 			$asset->asset_tag            	= e(Input::get('asset_tag'));
 			$asset->status_id            	= e(Input::get('status_id'));
+			$asset->warrantee_months        = e(Input::get('warrantee_months'));
 			$asset->user_id          		= Sentry::getId();
 			$asset->physical            		= '1';
 
@@ -191,6 +192,7 @@ class AssetsController extends AdminController {
 		'asset_tag'   => 'required|min:3',
 		'model_id'   => 'required',
 		'serial'   => 'required|min:3',
+		'warrantee_months'   => 'integer|min:1',
     	);
 
 		// Create a new validator instance from our validation rules
@@ -213,6 +215,7 @@ class AssetsController extends AdminController {
 			$asset->order_number            = e(Input::get('order_number'));
 			$asset->asset_tag           	= e(Input::get('asset_tag'));
 			$asset->status_id            	= e(Input::get('status_id'));
+			$asset->warrantee_months        = e(Input::get('warrantee_months'));
 			$asset->notes            		= e(Input::get('notes'));
 			$asset->physical            		= '1';
 

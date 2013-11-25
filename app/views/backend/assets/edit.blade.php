@@ -105,6 +105,15 @@
 				 </div>
 			</div>
 
+			<!-- Warrantee -->
+			<div class="control-group {{ $errors->has('warrantee_months') ? 'error' : '' }}">
+				<label class="control-label" for="serial">Warrantee</label>
+				<div class="controls">
+					<input class="span1" type="text" name="warrantee_months" id="warrantee_months" value="{{ Input::old('warrantee_months', $asset->warrantee_months) }}" />  months
+					{{ $errors->first('warrantee_months', '<span class="help-inline">:message</span>') }}
+				</div>
+			</div>
+
 			<!-- Depreciation -->
 			<div class="control-group {{ $errors->has('depreciation_id') ? 'error' : '' }}">
 				<label class="control-label" for="parent">Depreciation</label>
