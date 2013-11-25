@@ -413,7 +413,6 @@ class AssetsController extends AdminController {
 			return Redirect::route('assets')->with('error', $error);
 		}
 
-
 	}
 
 
