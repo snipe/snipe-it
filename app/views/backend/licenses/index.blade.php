@@ -29,7 +29,6 @@ Licenses ::
 			<th class="span2"><span class="line"></span>@lang('admin/licenses/table.license_name')</th>
 			<th class="span2"><span class="line"></span>@lang('admin/licenses/table.license_email')</th>
 			<th class="span2"><span class="line"></span>@lang('admin/licenses/table.assigned_to')</th>
-			<th class="span2"><span class="line"></span>@lang('admin/licenses/table.checkout')</th>
 			<th class="span2"><span class="line"></span>@lang('table.actions')</th>
 		</tr>
 	</thead>
@@ -44,7 +43,7 @@ Licenses ::
 					<td><a href="{{ route('view/license', $license->id) }}">{{ $license->serial }}</a></td>
 					<td>{{ $license->license_name }}</td>
 					<td>{{ $license->license_email }} </td>
-					<td></td>
+
 					<td></td>
 					<td>
 
@@ -61,8 +60,14 @@ Licenses ::
 				<tr>
 
 					<td></td>
-					<td></td>
-					<td><i class="icon-chevron-right"></i> {{ $license->serial }}</td>
+					<td>
+					@if ($licensedto->assigned_to)
+						<a href="{{ route('checkin/license', $licensedto->id) }}" class="btn-flat info"> Checkin </a>
+					@else
+						<a href="{{ route('checkout/license', $licensedto->id) }}" class="btn-flat success">Checkout</a>
+					@endif
+					</td>
+					<td><i class="icon-arrow-right"></i> {{ $license->serial }}</td>
 
 
 					<td>{{ $license->license_name }}</td>
@@ -74,15 +79,10 @@ Licenses ::
 					</a>
 					@endif
 					</td>
-					<td>
-					@if ($licensedto->assigned_to)
-						<a href="{{ route('checkin/license', $licensedto->id) }}" class="btn-flat info"> Checkin </a>
-					@else
-						<a href="{{ route('checkout/license', $licensedto->id) }}" class="btn-flat success">Checkout</a>
-					@endif
-					</td>
-					<td>
-					</td>
+					<td></td>
+
+
+
 				</tr>
 				@endforeach
 				@endif
