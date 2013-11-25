@@ -30,8 +30,7 @@
 	<!-- CSRF Token -->
 	<input type="hidden" name="_token" value="{{ csrf_token() }}" />
 
-	<!-- Tabs Content -->
-	<div class="tab-content">
+
 		<!-- General tab -->
 		<div class="tab-pane active" id="tab-general">
 			<!-- Model Title -->
@@ -60,7 +59,15 @@
 					{{ $errors->first('depreciation_id', '<span class="help-inline">:message</span>') }}
 				</div>
 			</div>
-		</div>
+
+			<!-- Category -->
+			<div class="control-group {{ $errors->has('category_id') ? 'error' : '' }}">
+				<label class="control-label" for="parent">Category</label>
+				<div class="controls">
+					{{ Form::select('category_id', $category_list , Input::old('category_id', $model->category_id), array('class'=>'select2', 'style'=>'width:250px')) }}
+					{{ $errors->first('category_id', '<span class="help-inline">:message</span>') }}
+				</div>
+			</div>
 
 
 	</div>

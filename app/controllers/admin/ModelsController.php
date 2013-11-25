@@ -38,7 +38,8 @@ class ModelsController extends AdminController {
 	{
 		// Show the page
 		$depreciation_list = array('' => 'Do Not Depreciate') + Depreciation::lists('name', 'id');
-		return View::make('backend/models/edit')->with('depreciation_list',$depreciation_list)->with('model',new Model);
+		$category_list = array('' => '') + DB::table('categories')->lists('name', 'id');
+		return View::make('backend/models/edit')->with('category_list',$category_list)->with('depreciation_list',$depreciation_list)->with('model',new Model);
 	}
 
 
@@ -102,8 +103,8 @@ class ModelsController extends AdminController {
 		}
 
 		$depreciation_list = array('' => 'Do Not Depreciate') + Depreciation::lists('name', 'id');
-		$model_options = array('' => 'Top Level') + DB::table('models')->where('id', '!=', $modelId)->lists('name', 'id');
-		return View::make('backend/models/edit', compact('model'))->with('model_options',$model_options)->with('depreciation_list',$depreciation_list);
+		$category_list = array('' => '') + DB::table('categories')->lists('name', 'id');
+		return View::make('backend/models/edit', compact('model'))->with('category_list',$category_list)->with('depreciation_list',$depreciation_list);
 	}
 
 
