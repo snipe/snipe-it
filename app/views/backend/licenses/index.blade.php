@@ -26,8 +26,6 @@ Licenses ::
 			<th class="span1">@lang('admin/licenses/table.seats')</th>
 			<th class="span2"><span class="line"></span>@lang('admin/licenses/table.title')</th>
 			<th class="span2"><span class="line"></span>@lang('admin/licenses/table.serial')</th>
-			<th class="span2"><span class="line"></span>@lang('admin/licenses/table.license_name')</th>
-			<th class="span2"><span class="line"></span>@lang('admin/licenses/table.license_email')</th>
 			<th class="span2"><span class="line"></span>@lang('admin/licenses/table.assigned_to')</th>
 			<th class="span2"><span class="line"></span>@lang('table.actions')</th>
 		</tr>
@@ -41,8 +39,7 @@ Licenses ::
 					<td>{{ $license->seats }}</td>
 					<td><a href="{{ route('view/license', $license->id) }}">{{ $license->name }}</a></td>
 					<td><a href="{{ route('view/license', $license->id) }}">{{ $license->serial }}</a></td>
-					<td>{{ $license->license_name }}</td>
-					<td>{{ $license->license_email }} </td>
+
 
 					<td></td>
 					<td>
@@ -70,8 +67,7 @@ Licenses ::
 					<td><i class="icon-arrow-right"></i> {{ $license->serial }}</td>
 
 
-					<td>{{ $license->license_name }}</td>
-					<td>{{ $license->license_email }} </td>
+
 					<td>
 					@if ($licensedto->assigned_to)
 						<a href="{{ route('view/user', $licensedto->id) }}">
