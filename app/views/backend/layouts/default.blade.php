@@ -83,9 +83,9 @@
 
             <ul class="nav pull-right">
             @if (Sentry::check())
-                <li class="hidden-phone">
+                <!-- <li class="hidden-phone">
                     <input class="search" type="text" />
-                </li>
+                </li> -->
 
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle hidden-phone" data-toggle="dropdown">
