@@ -8,17 +8,20 @@ class License extends Elegant {
 	 * @return bool
 	 */
 
-	protected $table = 'assets';
+ 	protected $guarded = 'id';
+	protected $table = 'licenses';
 	protected $softDelete = true;
 	protected $rules = array(
 			'name'   => 'required|min:3',
 			'serial'   => 'required|min:5',
+			'seats'   => 'required|min:1|integer',
 			'license_email'   => 'email',
 		);
 
-	public function assigneduser()
+	public function assignedusers()
   	{
-    	return $this->belongsTo('User', 'assigned_to');
+    	return $this->belongsToMany('User','license_seats','assigned_to','license_id');
+
   	}
 
 	/**
@@ -34,7 +37,9 @@ class License extends Elegant {
 	*/
 	public function assetlog()
 	{
-		return $this->hasMany('Actionlog','asset_id')->orderBy('added_on', 'desc');
+		return $this->hasMany('Actionlog','asset_id')
+			->where('assigned_to', '=', '0')
+			->orderBy('added_on', 'desc');
 	}
 
 	/**
@@ -50,8 +55,7 @@ class License extends Elegant {
 	*/
 	 public static function assetcount()
 	{
-		return DB::table('assets')
-                    ->where('physical', '=', '0')
+		return DB::table('license_seats')
                     ->whereNull('deleted_at','and')
                     ->count();
 	}
@@ -61,8 +65,7 @@ class License extends Elegant {
 	*/
 	 public static function availassetcount()
 	{
-		return DB::table('assets')
-                    ->where('physical', '=', '0')
+		return DB::table('license_seats')
                     ->where('assigned_to', '=', '0')
                     ->whereNull('deleted_at','and')
                     ->count();

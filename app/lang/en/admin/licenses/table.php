@@ -3,6 +3,7 @@
 return array(
 
 	'id'      => 'ID',
+	'seats'   => 'Seats',
 	'title'      => 'License',
 	'purchased'   => 'Purchased',
 	'serial'   => 'Serial',

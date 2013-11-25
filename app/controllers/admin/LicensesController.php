@@ -9,6 +9,7 @@ use User;
 use Actionlog;
 use DB;
 use Redirect;
+use LicenseSeat;
 use Setting;
 use Sentry;
 use Str;
@@ -26,7 +27,7 @@ class LicensesController extends AdminController {
 	public function getIndex()
 	{
 		// Grab all the licenses
-		$licenses = License::orderBy('created_at', 'DESC')->where('physical', '=', 0)->paginate(Setting::getSettings()->per_page);
+		$licenses = License::orderBy('created_at', 'DESC')->paginate(Setting::getSettings()->per_page);
 
 		// Show the page
 		return View::make('backend/licenses/index', compact('licenses'));
@@ -72,15 +73,28 @@ class LicensesController extends AdminController {
 			$license->license_name 		= e(Input::get('license_name'));
 			$license->notes 			= e(Input::get('notes'));
 			$license->order_number 		= e(Input::get('order_number'));
+			$license->seats 			= e(Input::get('seats'));
 			$license->purchase_date 	= e(Input::get('purchase_date'));
 			$license->purchase_cost 	= e(Input::get('purchase_cost'));
 			$license->user_id 			= Sentry::getId();
-			$license->physical 			= '0';
 
 
-			// Was the asset created?
+
+
+
+			// Was the license created?
 			if($license->save())
 			{
+				$insertedId = $license->id;
+				// Save the license seat data
+				for ($x=0; $x<$license->seats; $x++) {
+					$license_seat = new LicenseSeat();
+					$license_seat->license_id 		= $insertedId;
+					$license_seat->user_id 			= Sentry::getId();
+					$license_seat->save();
+				}
+
+
 				// Redirect to the new license page
 				return Redirect::to("admin/licenses")->with('success', Lang::get('admin/licenses/message.create.success'));
 			}
@@ -151,7 +165,6 @@ class LicensesController extends AdminController {
 			$license->order_number 		= e(Input::get('order_number'));
 			$license->purchase_date 	= e(Input::get('purchase_date'));
 			$license->purchase_cost 	= e(Input::get('purchase_cost'));
-			$license->physical 			= '0';
 
 
 			// Was the asset created?
