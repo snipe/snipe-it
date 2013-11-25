@@ -31,7 +31,7 @@
 			<div class="control-group">
 				<label class="control-label" for="asset_tag">Asset Tag</label>
 				<div class="controls">
-					<input class="span4" readonly="readonly" type="text" name="asset_tag" id="asset_tag" value="{{ $license->asset_tag }}" />
+					<input class="span4" readonly="readonly" type="text" name="asset_tag" id="asset_tag" value="{{ $licenseseat->license->asset_tag }}" />
 				</div>
 			</div>
 
@@ -39,14 +39,14 @@
 			<div class="control-group">
 				<label class="control-label" for="name">Asset Name</label>
 				<div class="controls">
-					<input class="span4" readonly="readonly" type="text" name="name" id="asset_name" value="{{ $license->name }}" />
+					<input class="span4" readonly="readonly" type="text" name="name" id="asset_name" value="{{ $licenseseat->license->name }}" />
 				</div>
 			</div>
 			<!-- Asset Name -->
 			<div class="control-group">
 				<label class="control-label" for="serial">Serial</label>
 				<div class="controls">
-					<input class="span4" readonly="readonly" type="text" name="serial" id="serial" value="{{ $license->serial }}" />
+					<input class="span4" readonly="readonly" type="text" name="serial" id="serial" value="{{ $licenseseat->license->serial }}" />
 				</div>
 			</div>
 
@@ -55,7 +55,7 @@
 			<div class="control-group {{ $errors->has('assigned_to') ? 'error' : '' }}">
 				<label class="control-label" for="parent">Checkout to</label>
 				<div class="controls">
-					{{ Form::select('assigned_to', $users_list , Input::old('assigned_to', $license->assigned_to)) }}
+					{{ Form::select('assigned_to', $users_list , Input::old('assigned_to')) }}
 					{{ $errors->first('user_id', '<span class="help-inline">:message</span>') }}
 				</div>
 			</div>

@@ -9,6 +9,7 @@ use User;
 use Actionlog;
 use DB;
 use Redirect;
+use LicenseSeat;
 use Setting;
 use Sentry;
 use Str;
@@ -26,7 +27,7 @@ class LicensesController extends AdminController {
 	public function getIndex()
 	{
 		// Grab all the licenses
-		$licenses = License::orderBy('created_at', 'DESC')->where('physical', '=', 0)->paginate(Setting::getSettings()->per_page);
+		$licenses = License::orderBy('created_at', 'DESC')->paginate(Setting::getSettings()->per_page);
 
 		// Show the page
 		return View::make('backend/licenses/index', compact('licenses'));
@@ -72,15 +73,28 @@ class LicensesController extends AdminController {
 			$license->license_name 		= e(Input::get('license_name'));
 			$license->notes 			= e(Input::get('notes'));
 			$license->order_number 		= e(Input::get('order_number'));
+			$license->seats 			= e(Input::get('seats'));
 			$license->purchase_date 	= e(Input::get('purchase_date'));
 			$license->purchase_cost 	= e(Input::get('purchase_cost'));
 			$license->user_id 			= Sentry::getId();
-			$license->physical 			= '0';
 
 
-			// Was the asset created?
+
+
+
+			// Was the license created?
 			if($license->save())
 			{
+				$insertedId = $license->id;
+				// Save the license seat data
+				for ($x=0; $x<$license->seats; $x++) {
+					$license_seat = new LicenseSeat();
+					$license_seat->license_id 		= $insertedId;
+					$license_seat->user_id 			= Sentry::getId();
+					$license_seat->save();
+				}
+
+
 				// Redirect to the new license page
 				return Redirect::to("admin/licenses")->with('success', Lang::get('admin/licenses/message.create.success'));
 			}
@@ -151,7 +165,6 @@ class LicensesController extends AdminController {
 			$license->order_number 		= e(Input::get('order_number'));
 			$license->purchase_date 	= e(Input::get('purchase_date'));
 			$license->purchase_cost 	= e(Input::get('purchase_cost'));
-			$license->physical 			= '0';
 
 
 			// Was the asset created?
@@ -188,7 +201,7 @@ class LicensesController extends AdminController {
 			return Redirect::to('admin/licenses')->with('error', Lang::get('admin/licenses/message.not_found'));
 		}
 
-		if (isset($license->assigneduser->id) && ($license->assigneduser->id!=0)) {
+		if (count($license->assignedusers) > 0) {
 			// Redirect to the asset management page
 			return Redirect::to('admin/licenses')->with('error', Lang::get('admin/licenses/message.assoc_users'));
 		} else {
@@ -206,20 +219,20 @@ class LicensesController extends AdminController {
 	/**
 	* Check out the asset to a person
 	**/
-	public function getCheckout($assetId)
+	public function getCheckout($seatId)
 	{
 		// Check if the asset exists
-		if (is_null($license = License::find($assetId)))
+		if (is_null($licenseseat = LicenseSeat::find($seatId)))
 		{
 			// Redirect to the asset management page with error
-			return Redirect::to('admin/licenses')->with('error', Lang::get('admin/assets/message.not_found'));
+			return Redirect::to('admin/licenses')->with('error', Lang::get('admin/licenses/message.not_found'));
 		}
 
 		// Get the dropdown of users and then pass it to the checkout view
 		$users_list = array('' => 'Select a User') + DB::table('users')->select(DB::raw('concat (first_name," ",last_name) as full_name, id'))->lists('full_name', 'id');
 
 		//print_r($users);
-		return View::make('backend/licenses/checkout', compact('license'))->with('users_list',$users_list);
+		return View::make('backend/licenses/checkout', compact('licenseseat'))->with('users_list',$users_list);
 
 	}
 
@@ -228,13 +241,13 @@ class LicensesController extends AdminController {
 		/**
 	* Check out the asset to a person
 	**/
-	public function postCheckout($assetId)
+	public function postCheckout($seatId)
 	{
 		// Check if the asset exists
-		if (is_null($license = License::find($assetId)))
+		if (is_null($licenseseat = LicenseSeat::find($seatId)))
 		{
 			// Redirect to the asset management page with error
-			return Redirect::to('admin/licenses')->with('error', Lang::get('admin/assets/message.not_found'));
+			return Redirect::to('admin/licenses')->with('error', Lang::get('admin/licenses/message.not_found'));
 		}
 
 		$assigned_to = e(Input::get('assigned_to'));
@@ -264,16 +277,17 @@ class LicensesController extends AdminController {
 
 
 		// Update the asset data
-		$license->assigned_to            		= e(Input::get('assigned_to'));
+		$licenseseat->assigned_to            		= e(Input::get('assigned_to'));
 
 
 		// Was the asset updated?
-		if($license->save())
+		if($licenseseat->save())
 		{
 			$logaction = new Actionlog();
-			$logaction->asset_id = $license->id;
-			$logaction->checkedout_to = $license->assigned_to;
+			$logaction->asset_id = $licenseseat->id;
+			$logaction->checkedout_to = $licenseseat->assigned_to;
 			$logaction->location_id = $assigned_to->location_id;
+			$logaction->asset_type = 'software';
 			$logaction->user_id = Sentry::getUser()->id;
 			$log = $logaction->logaction('checkout');
 
@@ -288,27 +302,27 @@ class LicensesController extends AdminController {
 	/**
 	* Check in the item so that it can be checked out again to someone else
 	**/
-	public function postCheckin($assetId)
+	public function postCheckin($seatId)
 	{
 		// Check if the asset exists
-		if (is_null($license = License::find($assetId)))
+		if (is_null($licenseseat = LicenseSeat::find($seatId)))
 		{
 			// Redirect to the asset management page with error
 			return Redirect::to('admin/licenses')->with('error', Lang::get('admin/assets/message.not_found'));
 		}
 
 		$logaction = new Actionlog();
-		$logaction->checkedout_to = $license->assigned_to;
+		$logaction->checkedout_to = $licenseseat->assigned_to;
 
 		// Update the asset data
-		$license->assigned_to            		= '';
+		$licenseseat->assigned_to            		= '';
 
 		// Was the asset updated?
-		if($license->save())
+		if($licenseseat->save())
 		{
-			$logaction->asset_id = $license->id;
-
+			$logaction->asset_id = $licenseseat->id;
 			$logaction->location_id = NULL;
+			$logaction->asset_type = 'software';
 			$logaction->user_id = Sentry::getUser()->id;
 			$log = $logaction->logaction('checkin from');
 
@@ -328,13 +342,13 @@ class LicensesController extends AdminController {
 	**/
 	public function getView($licenseId = null)
 	{
-		$license = Asset::find($licenseId);
+		$license = License::find($licenseId);
 
 		if (isset($license->id)) {
 				return View::make('backend/licenses/view', compact('license'));
 		} else {
 			// Prepare the error message
-			$error = Lang::get('admin/licenses/message.does_not_exist', compact('id' ));
+			$error = Lang::get('admin/licenses/message.does_not_exist', compact('id'));
 
 			// Redirect to the user management page
 			return Redirect::route('licenses')->with('error', $error);

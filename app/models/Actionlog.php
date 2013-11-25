@@ -7,7 +7,11 @@ class ActionLog extends Eloquent {
 
 
 	public function assetlog() {
-		return $this->belongsTo('Asset','asset_id')->withTrashed();
+		return $this->belongsTo('Asset','asset_id');
+	}
+
+	public function licenselog() {
+		return $this->belongsTo('License','asset_id');
 	}
 
 	public function adminlog() {

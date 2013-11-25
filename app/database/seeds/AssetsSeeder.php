@@ -112,45 +112,6 @@ class AssetsSeeder extends Seeder {
 			'status_id'	=> 0,
 		);
 
-		// Deployed (status_id =0, assigned_to > 0)
-		$asset[] = array(
-			'name'      	=> 'Photoshop CS6',
-			'asset_tag'     => 'NNY65756756775',
-			'model_id'      => 8,
-			'serial'      	=> 'OMG-WTF-SRSLY-BBQ',
-			'purchase_date' => '2012-01-02',
-			'purchase_cost' => '1999.99',
-			'order_number'  => '657756',
-			'created_at' 	=> $date->modify('-10 day'),
-			'updated_at' 	=> $date->modify('-3 day'),
-			'user_id' 		=> 2,
-			'assigned_to' 	=> 2,
-			'physical' 		=> 0,
-			'archived' 		=> 0,
-			'license_name'	=> 'Alison Giasnotto',
-			'license_email'	=> 'snipe@snipe.net',
-			'status_id'	=> 0,
-		);
-
-		// Deployed (status_id =0, assigned_to > 0)
-		$asset[] = array(
-			'name'      	=> 'Git Tower',
-			'asset_tag'     => 'NNY65756756775',
-			'model_id'      => 7,
-			'serial'      	=> 'OMG-WTF-SRSLY-BBQ',
-			'purchase_date' => '2012-01-02',
-			'purchase_cost' => '1999.99',
-			'order_number'  => '657756',
-			'created_at' 	=> $date->modify('-10 day'),
-			'updated_at' 	=> $date->modify('-3 day'),
-			'user_id' 		=> 2,
-			'assigned_to' 	=> 2,
-			'physical' 		=> 0,
-			'archived' 		=> 0,
-			'license_name'	=> 'Alison Giasnotto',
-			'license_email'	=> 'me@example.com',
-			'status_id'	=> 0,
-		);
 
 		// Deployed (status_id =0, assigned_to > 0)
 		$asset[] = array(
