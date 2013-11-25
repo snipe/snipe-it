@@ -37,7 +37,7 @@ View License {{ $license->name }} ::
                             <br>
                             <!-- checked out assets table -->
 
-							<h6>License Seats</h6>
+							<h6>{{ $license->seats }} License Seats</h6>
                             <table class="table table-hover">
                                 <thead>
                                     <tr>
