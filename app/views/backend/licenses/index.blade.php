@@ -23,10 +23,10 @@ Licenses ::
 <table class="table table-hover">
 	<thead>
 		<tr>
-			<th class="span1">@lang('admin/licenses/table.seats')</th>
-			<th class="span2"><span class="line"></span>@lang('admin/licenses/table.title')</th>
-			<th class="span2"><span class="line"></span>@lang('admin/licenses/table.serial')</th>
-			<th class="span2"><span class="line"></span>@lang('admin/licenses/table.assigned_to')</th>
+
+			<th class="span3"><span class="line"></span>@lang('admin/licenses/table.title')</th>
+			<th class="span3"><span class="line"></span>@lang('admin/licenses/table.serial')</th>
+			<th class="span3"><span class="line"></span>@lang('admin/licenses/table.assigned_to')</th>
 			<th class="span2"><span class="line"></span>@lang('table.actions')</th>
 		</tr>
 	</thead>
@@ -36,8 +36,15 @@ Licenses ::
 		@foreach ($licenses as $license)
 
 			<tr>
-					<td>{{ $license->seats }}</td>
-					<td><a href="{{ route('view/license', $license->id) }}">{{ $license->name }}</a></td>
+
+					<td><a href="{{ route('view/license', $license->id) }}">{{ $license->name }}</a>
+					@if ($license->seats ==1)
+						({{ $license->seats }} seat)
+					@else
+						({{ $license->seats }} seats)
+					@endif
+
+					</td>
 					<td><a href="{{ route('view/license', $license->id) }}">{{ $license->serial }}</a></td>
 
 
@@ -51,12 +58,12 @@ Licenses ::
 					</td>
 				</tr>
 				@if ($license->licenseseats)
-
+				<?php $count=1; ?>
 				@foreach ($license->licenseseats as $licensedto)
 
 				<tr>
 
-					<td></td>
+
 					<td>
 					@if ($licensedto->assigned_to)
 						<a href="{{ route('checkin/license', $licensedto->id) }}" class="btn-flat info"> Checkin </a>
@@ -64,7 +71,7 @@ Licenses ::
 						<a href="{{ route('checkout/license', $licensedto->id) }}" class="btn-flat success">Checkout</a>
 					@endif
 					</td>
-					<td><i class="icon-arrow-right"></i> {{ $license->serial }}</td>
+					<td> Seat {{ $count }}</td>
 
 
 
@@ -80,6 +87,7 @@ Licenses ::
 
 
 				</tr>
+				<?php $count++; ?>
 				@endforeach
 				@endif
 
