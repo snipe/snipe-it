@@ -23,6 +23,7 @@ Route::group(array('prefix' => 'assets'), function()
 		Route::get('{modelId}/edit', array('as' => 'update/model', 'uses' => 'Controllers\Admin\ModelsController@getEdit'));
 		Route::post('{modelId}/edit', 'Controllers\Admin\ModelsController@postEdit');
 		Route::get('{modelId}/delete', array('as' => 'delete/model', 'uses' => 'Controllers\Admin\ModelsController@getDelete'));
+		Route::get('{modelId}/view', array('as' => 'view/model', 'uses' => 'Controllers\Admin\ModelsController@getView'));
 	});
 
 	Route::get('/', array('as' => 'assets', 'uses' => 'Controllers\Admin\AssetsController@getIndex'));
