@@ -201,7 +201,7 @@ class LicensesController extends AdminController {
 			return Redirect::to('admin/licenses')->with('error', Lang::get('admin/licenses/message.not_found'));
 		}
 
-		if (isset($license->assigneduser->id) && ($license->assigneduser->id!=0)) {
+		if (count($license->assignedusers) > 0) {
 			// Redirect to the asset management page
 			return Redirect::to('admin/licenses')->with('error', Lang::get('admin/licenses/message.assoc_users'));
 		} else {
@@ -219,20 +219,20 @@ class LicensesController extends AdminController {
 	/**
 	* Check out the asset to a person
 	**/
-	public function getCheckout($assetId)
+	public function getCheckout($seatId)
 	{
 		// Check if the asset exists
-		if (is_null($license = License::find($assetId)))
+		if (is_null($licenseseat = LicenseSeat::find($seatId)))
 		{
 			// Redirect to the asset management page with error
-			return Redirect::to('admin/licenses')->with('error', Lang::get('admin/assets/message.not_found'));
+			return Redirect::to('admin/licenses')->with('error', Lang::get('admin/licenses/message.not_found'));
 		}
 
 		// Get the dropdown of users and then pass it to the checkout view
 		$users_list = array('' => 'Select a User') + DB::table('users')->select(DB::raw('concat (first_name," ",last_name) as full_name, id'))->lists('full_name', 'id');
 
 		//print_r($users);
-		return View::make('backend/licenses/checkout', compact('license'))->with('users_list',$users_list);
+		return View::make('backend/licenses/checkout', compact('licenseseat'))->with('users_list',$users_list);
 
 	}
 
