@@ -17,5 +17,15 @@ class Model extends Elegant {
 		return $this->belongsTo('Category', 'category_id');
 	}
 
+	public function depreciation()
+	{
+		return $this->belongsTo('Depreciation','id');
+	}
+
+	public function adminuser()
+	{
+		return $this->belongsTo('User','user_id');
+	}
+
 
 }

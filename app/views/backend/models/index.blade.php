@@ -22,18 +22,26 @@ Asset Models ::
 	<thead>
 		<tr role="row">
 			<th class="span3">@lang('admin/models/table.title')</th>
-			<th class="span3"><span class="line"></span>@lang('admin/models/table.modelnumber')</th>
-			<th class="span1"><span class="line"></span>@lang('admin/models/table.numassets')</th>
-			<th class="span1"><span class="line"></span>Category</th>
-			<th class="span3"><span class="line"></span>@lang('table.actions')</th>
+			<th class="span2">@lang('admin/models/table.modelnumber')</th>
+			<th class="span1">@lang('admin/models/table.numassets')</th>
+			<th class="span2">Depreciation</th>
+			<th class="span1">Category</th>
+			<th class="span2">@lang('table.actions')</th>
 		</tr>
 	</thead>
 	<tbody>
 		@foreach ($models as $model)
 		<tr>
-			<td>{{ $model->name }}</td>
+			<td><a href="{{ route('update/model', $model->id) }}">{{ $model->name }}</a></td>
 			<td>{{ $model->modelno }}</td>
-			<td>{{ ($model->assets->count()) }}</td>
+			<td><a href="{{ route('view/model', $model->id) }}">{{ ($model->assets->count()) }}</a></td>
+			<td>
+			@if ($model->depreciation)
+			{{ $model->depreciation->name }}
+			 ({{ $model->depreciation->months }} months)
+			@endif
+
+			</td>
 			<td>{{ $model->category->name }}</td>
 			<td>
 				<a href="{{ route('update/model', $model->id) }}" class="btn-flat white">@lang('button.edit')</a>

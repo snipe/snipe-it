@@ -86,6 +86,17 @@
 				</div>
 			</div>
 
+			<!-- Depreciation -->
+			<div class="control-group {{ $errors->has('depreciation_id') ? 'error' : '' }}">
+				<label class="control-label" for="parent">Depreciation</label>
+				<div class="controls">
+					<div class="field-box">
+					{{ Form::select('depreciation_id', $depreciation_list , Input::old('depreciation_id', $license->depreciation_id), array('class'=>'select2', 'style'=>'width:250px')) }}
+					{{ $errors->first('depreciation_id', '<span class="help-inline"><i class="icon-remove-sign"></i> :message</span>') }}
+					</div>
+				</div>
+			</div>
+
 			<div class="control-group {{ $errors->has('purchase_date') ? 'error' : '' }}">
 				<label class="control-label" for="purchase_date">Purchase Date</label>
 				<div class="controls">

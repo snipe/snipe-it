@@ -16,7 +16,7 @@ class Asset extends Elegant {
 	/**
 	* Handle depreciation
 	*/
-	public function depreciation()
+	public function depreciate()
 	{
 		$depreciation_id = Model::find($this->model_id)->depreciation_id;
 		if (isset($depreciation_id)) {
@@ -108,11 +108,15 @@ class Asset extends Elegant {
 	 public function warrantee_expires()
 	{
 
-
 			$date = date_create($this->purchase_date);
 			date_add($date, date_interval_create_from_date_string($this->warranty_months.' months'));
 			return date_format($date, 'Y-m-d');
 
+	}
+
+	public function depreciation()
+	{
+		return $this->belongsTo('Depreciation','id');
 	}
 
 
