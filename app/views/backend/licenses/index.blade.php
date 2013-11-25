@@ -39,7 +39,6 @@ Licenses ::
 					@else
 						({{ $license->seats }} seats)
 					@endif
-
 					</td>
 					<td><a href="{{ route('view/license', $license->id) }}">{{ $license->serial }}</a></td>
 					<td></td>
@@ -57,7 +56,8 @@ Licenses ::
 				<tr>
 
 					<td><a href="{{ route('view/license', $license->id) }}">{{ $license->name }}</a>
-					 (Seat {{ $count }})</td>
+					 (Seat {{ $count }})
+					 </td>
 					<td><a href="{{ route('view/license', $license->id) }}">{{ $license->serial }}</a></td>
 					<td>
 					@if ($licensedto->assigned_to)
