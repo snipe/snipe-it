@@ -98,6 +98,25 @@ View Asset {{ $asset->asset_tag }} ::
                     <!-- side address column -->
                     <div class="span3 address pull-right">
 
+                    <h6><br>More Info:</h6>
+                       		<ul>
+
+								@if ($asset->purchase_date)
+								<li>Purchase Date: {{ $asset->purchase_date }} </li>
+								@endif
+								@if ($asset->purchase_cost)
+								<li>Purchase Cost: ${{ number_format($asset->purchase_cost) }} </li>
+								@endif
+								@if ($asset->order_number)
+								<li>Order #: {{ $asset->order_number }} </li>
+								@endif
+								@if ($asset->warrantee_months)
+								<li>Warrantee: {{ $asset->warrantee_months }} months</li>
+								<li>Expires: {{ $asset->warrantee_expires() }}</li>
+								@endif
+							</ul>
+
+
 						@if ((isset($asset->assigned_to ) && ($asset->assigned_to > 0)))
                        		<h6><br>Checked Out To:</h6>
                        		<ul>

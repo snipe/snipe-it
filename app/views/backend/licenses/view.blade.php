@@ -154,6 +154,15 @@ View License {{ $license->name }} ::
 								@if ($license->purchase_date)
 								<li>Purchase Date: {{ $license->purchase_date }} </li>
 								@endif
+								@if ($license->purchase_cost)
+								<li>Purchase Cost: ${{ number_format($license->purchase_cost) }} </li>
+								@endif
+								@if ($license->order_number)
+								<li>Order #: {{ $license->order_number }} </li>
+								@endif
+								@if ($license->seats)
+								<li>Seats: {{ $license->seats }} </li>
+								@endif
 							</ul>
 
                     </div>
