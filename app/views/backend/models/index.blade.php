@@ -17,14 +17,10 @@ Asset Models ::
 		</div>
 	</h3>
 </div>
-@if ($models->getTotal() > Setting::getSettings()->per_page)
-{{ $models->links() }}
-@endif
 
-<div class="row-fluid table">
-<table class="table table-hover">
+<table id="example">
 	<thead>
-		<tr>
+		<tr role="row">
 			<th class="span3">@lang('admin/models/table.title')</th>
 			<th class="span3"><span class="line"></span>@lang('admin/models/table.modelnumber')</th>
 			<th class="span1"><span class="line"></span>@lang('admin/models/table.numassets')</th>
@@ -48,10 +44,5 @@ Asset Models ::
 		@endforeach
 	</tbody>
 </table>
-
-
-@if ($models->getTotal() > Setting::getSettings()->per_page)
-{{ $models->links() }}
-@endif
 
 @stop

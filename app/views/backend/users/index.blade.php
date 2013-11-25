@@ -22,21 +22,21 @@ User Management ::
 <a class="btn-flat white" href="{{ URL::to('admin/users?onlyTrashed=true') }}">Include Only Deleted Users</a>
 <br><br>
 
-@if ($users->getTotal() > Setting::getSettings()->per_page)
+@if ($users->getTotal() > 10)
 {{ $users->links() }}
 @endif
 
 @if ($users->getTotal() > 0)
 <div class="row-fluid table users-list">
-<table class="table table-hover">
+<table id="example">
 	<thead>
-		<tr>
+		<tr role="row">
 			<th class="span3">@lang('admin/users/table.name')</th>
-			<th class="span2"><span class="line"></span>@lang('admin/users/table.email')</th>
-			<th class="span1"><span class="line"></span>@lang('admin/users/table.checkedout')</th>
-			<th class="span1"><span class="line"></span>@lang('admin/users/table.activated')</th>
-			<th class="span2"><span class="line"></span>@lang('admin/users/table.last_login')</th>
-			<th class="span1"><span class="line"></span>@lang('admin/users/table.created_at')</th>
+			<th class="span2">@lang('admin/users/table.email')</th>
+			<th class="span1">@lang('admin/users/table.checkedout')</th>
+			<th class="span1">@lang('admin/users/table.activated')</th>
+			<th class="span2">@lang('admin/users/table.last_login')</th>
+			<th class="span1">@lang('admin/users/table.created_at')</th>
 			<th class="span2">@lang('table.actions')</th>
 		</tr>
 	</thead>
@@ -47,7 +47,7 @@ User Management ::
 			<td>
 			<img src="{{ $user->gravatar() }}" class="img-circle avatar hidden-phone" style="max-width: 45px;" />
 			<a href="{{ route('view/user', $user->id) }}" class="name">{{ $user->fullName() }}</a>
-			<span class="subtext">{{ $user->jobtitle }}</span>
+
 			</td>
 			<td>{{ $user->email }}</td>
 			<td>
@@ -71,7 +71,8 @@ User Management ::
 				@else
 				<a href="{{ route('update/user', $user->id) }}" class="btn-flat white"><i class="icon-pencil"></i> @lang('button.edit')</a>
 				@if (Sentry::getId() !== $user->id)
-				<a href="{{ route('delete/user', $user->id) }}" class="btn-flat danger"><i class="icon-remove icon-white"></i> @lang('button.delete')</a>
+				<a class="btn-flat danger delete-asset" data-toggle="modal" href="{{ route('delete/user', $user->id) }}" data-content="Are you sure you wish to delete the user {{ $user->fullName() }}?" data-title="Delete {{ $user->first_name }}?" onClick="return false;"><i class="icon-remove icon-white"></i> @lang('button.delete')</a>
+
 				@else
 				<span class="btn-flat danger disabled"><i class="icon-remove icon-white"></i> @lang('button.delete')</span>
 				@endif
@@ -93,7 +94,7 @@ User Management ::
 </div>
 @endif
 
-@if ($users->getTotal() > Setting::getSettings()->per_page)
+@if ($users->getTotal() > 10)
 {{ $users->links() }}
 @endif
 
