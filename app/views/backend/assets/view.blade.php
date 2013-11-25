@@ -153,7 +153,7 @@ View Asset {{ $asset->asset_tag }} ::
 						@else
 							<ul>
 								<li><br><br />This asset is not currently assigned to anyone. You may check it into inventory
-								using the button below, or mark it as lost/stolen using the menu above.</li>
+								using the button below.</li>
 								<li><br><br /><a href="{{ route('checkout/asset', $asset->id) }}" class="btn-flat large success">Checkout Asset</a></li>
 							</ul>
                         @endif
