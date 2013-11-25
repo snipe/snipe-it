@@ -36,9 +36,7 @@ User Management ::
 			<th class="span1">Assets</th>
 			<th class="span1">Licenses</th>
 			<th class="span1">@lang('admin/users/table.activated')</th>
-			<th class="span2">@lang('admin/users/table.last_login')</th>
-			<th class="span1">@lang('admin/users/table.created_at')</th>
-			<th class="span2">@lang('table.actions')</th>
+			<th class="span3">@lang('table.actions')</th>
 		</tr>
 	</thead>
 	<tbody>
@@ -54,15 +52,6 @@ User Management ::
 			<td>{{ $user->assets->count() }}</td>
 			<td>{{ $user->licenses->count() }}</td>
 			<td>{{ $user->isActivated() ? '<i class="icon-ok"></i>' : ''}}</td>
-			<td>
-			@if (is_object($user->last_login))
-				{{ $user->last_login->diffForHumans() }}
-			@else
-				Never
-			@endif
-			</td>
-			<td>{{ $user->created_at->diffForHumans() }}</td>
-
 			<td>
 			@if ($user->id > 3)
 				@if ( ! is_null($user->deleted_at))

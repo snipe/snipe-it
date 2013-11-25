@@ -103,7 +103,7 @@ View Model {{ $model->model_tag }} ::
 
 
 							<ul>
-								<li><br><br />Blah blah blah.</li>
+								<li><br><br /></li>
 							</ul>
 
                     </div>

@@ -93,10 +93,10 @@ View User {{ $user->fullName() }} ::
 										Software
 										@endif
 										</td>
-										<td><a href="{{ route('view/asset', $license->id) }}">{{ $license->serial }}</a></td>
-										<td><a href="{{ route('view/asset', $license->id) }}">{{ $license->name }}</a></td>
+										<td><a href="{{ route('view/license', $license->id) }}">{{ $license->serial }}</a></td>
+										<td><a href="{{ route('view/license', $license->id) }}">{{ $license->name }}</a></td>
 
-										<td> <a href="{{ route('checkin/asset', $asset->id) }}" class="btn-flat info">Checkin</a></td>
+										<td> <a href="{{ route('checkin/license', $asset->id) }}" class="btn-flat info">Checkin</a></td>
 									</tr>
 									@endforeach
                                 </tbody>
