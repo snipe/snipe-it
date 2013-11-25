@@ -10,7 +10,12 @@ class Model extends Elegant {
 	public function assets()
 	{
 		return $this->hasMany('Asset', 'model_id');
-
 	}
+
+	public function category()
+	{
+		return $this->belongsTo('Category', 'category_id');
+	}
+
 
 }
