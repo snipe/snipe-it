@@ -33,7 +33,8 @@ User Management ::
 		<tr role="row">
 			<th class="span3">@lang('admin/users/table.name')</th>
 			<th class="span2">@lang('admin/users/table.email')</th>
-			<th class="span1">@lang('admin/users/table.checkedout')</th>
+			<th class="span1">Assets</th>
+			<th class="span1">Licenses</th>
 			<th class="span1">@lang('admin/users/table.activated')</th>
 			<th class="span2">@lang('admin/users/table.last_login')</th>
 			<th class="span1">@lang('admin/users/table.created_at')</th>
@@ -50,10 +51,8 @@ User Management ::
 
 			</td>
 			<td>{{ $user->email }}</td>
-			<td>
-			{{ ($user->assets->count()) }}
-			</td>
-
+			<td>{{ $user->assets->count() }}</td>
+			<td>{{ $user->licenses->count() }}</td>
 			<td>{{ $user->isActivated() ? '<i class="icon-ok"></i>' : ''}}</td>
 			<td>
 			@if (is_object($user->last_login))

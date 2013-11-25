@@ -70,6 +70,48 @@ View User {{ $user->fullName() }} ::
 							</div>
                             @endif
 
+                             <h6>Software Checked Out to {{ $user->first_name }}</h6>
+                            <br>
+                            <!-- checked out assets table -->
+                            @if (count($user->licenses) > 0)
+                            <table class="table table-hover">
+                                <thead>
+                                    <tr>
+                                    	<th class="span3">Asset Type</th>
+                                    	<th class="span3">Serial</th>
+                                        <th class="span3"><span class="line"></span>Name</th>
+                                        <th class="span3"><span class="line"></span>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+									@foreach ($user->licenses as $license)
+									<tr>
+										<td>
+										@if ($license->physical=='0')
+										Hardware
+										@else
+										Software
+										@endif
+										</td>
+										<td><a href="{{ route('view/asset', $license->id) }}">{{ $license->serial }}</a></td>
+										<td><a href="{{ route('view/asset', $license->id) }}">{{ $license->name }}</a></td>
+
+										<td> <a href="{{ route('checkin/asset', $asset->id) }}" class="btn-flat info">Checkin</a></td>
+									</tr>
+									@endforeach
+                                </tbody>
+                            </table>
+                            @else
+
+                            <div class="col-md-6">
+								<div class="alert alert-warning alert-block">
+									<i class="icon-warning-sign"></i>
+									@lang('admin/users/table.noresults')
+								</div>
+							</div>
+                            @endif
+
+
 
 							<h6>History for {{ $user->first_name }}</h6>
                             <br>
