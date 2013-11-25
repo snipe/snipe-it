@@ -111,7 +111,7 @@ View Asset {{ $asset->asset_tag }} ::
 								<li>Order #: {{ $asset->order_number }} </li>
 								@endif
 								@if ($asset->warrantee_months)
-								<li>Warrantee: {{ $asset->warrantee_months }} months</li>
+								<li>Warranty: {{ $asset->warrantee_months }} months</li>
 								<li>Expires: {{ $asset->warrantee_expires() }}</li>
 								@endif
 							</ul>
