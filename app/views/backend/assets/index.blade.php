@@ -53,8 +53,6 @@ Assets ::
 
 </div>
 
-<br><br>
-
 @if ($assets->count() > 0)
 
 

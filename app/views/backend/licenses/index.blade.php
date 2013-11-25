@@ -16,13 +16,6 @@ Licenses ::
 		</div>
 	</h3>
 </div>
-@if ($licenses->getTotal() > Setting::getSettings()->per_page)
-{{ $licenses->links() }}
-@endif
-<div class="container-fluid">
-            <div id="pad-wrapper" class="datatables-page">
-                <div class="row-fluid">
-                    <div class="span12">
 
 <table id="example">
 	<thead>
@@ -111,14 +104,5 @@ Licenses ::
 
 	</tbody>
 </table>
-</div>
- </div>
 
-            </div>
-        </div>
-
-
-@if ($licenses->getTotal() > Setting::getSettings()->per_page)
-{{ $licenses->links() }}
-@endif
 @stop
