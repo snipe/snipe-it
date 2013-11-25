@@ -23,7 +23,6 @@ Licenses ::
 			<th class="span3" tabindex="0" rowspan="1" colspan="1">@lang('admin/licenses/table.title')</th>
 			<th class="span3" tabindex="0" rowspan="1" colspan="1">@lang('admin/licenses/table.serial')</th>
 			<th class="span3" tabindex="0" rowspan="1" colspan="1">@lang('admin/licenses/table.assigned_to')</th>
-			<th class="span2" tabindex="0" rowspan="1" colspan="1">In/Out</th>
 			<th class="span2" tabindex="0" rowspan="1" colspan="1">@lang('table.actions')</th>
 		</tr>
 	</thead>
@@ -43,7 +42,6 @@ Licenses ::
 
 					</td>
 					<td><a href="{{ route('view/license', $license->id) }}">{{ $license->serial }}</a></td>
-					<td></td>
 					<td></td>
 					<td>
 					<a href="{{ route('update/license', $license->id) }}" class="btn-flat white"> @lang('button.edit')</a>
@@ -76,7 +74,7 @@ Licenses ::
 					@endif
 					</td>
 
-					<td></td>
+
 
 				</tr>
 				<?php $count++; ?>
