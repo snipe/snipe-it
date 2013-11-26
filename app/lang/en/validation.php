@@ -64,6 +64,7 @@ return array(
 	"unique"           => "The :attribute has already been taken.",
 	"url"              => "The :attribute format is invalid.",
 
+
 	/*
 	|--------------------------------------------------------------------------
 	| Custom Validation Language Lines
@@ -76,6 +77,7 @@ return array(
 	*/
 
 	'custom' => array(),
+	'alpha_space' => "The :attribute field may only contain letters, commas, spaces and dashes.",
 
 	/*
 	|--------------------------------------------------------------------------
