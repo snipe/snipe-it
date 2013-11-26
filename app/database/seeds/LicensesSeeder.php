@@ -24,8 +24,8 @@ class LicensesSeeder extends Seeder {
 			'license_name'		=> '',
 			'license_email'		=> '',
 			'notes' 			=> '',
-			'user_id'			=>1,
-			'depreciation_id'	=>2,
+			'user_id'			=> 1,
+			'depreciation_id'	=> 2,
 			'deleted_at' 		=> NULL,
 			'depreciate' 		=> '0',
 		);
@@ -43,8 +43,8 @@ class LicensesSeeder extends Seeder {
 			'license_name'		=> 'Alison Gianotto',
 			'license_email'		=> 'snipe@snipe.net',
 			'notes' 			=> '',
-			'user_id'			=>1,
-			'depreciation_id'	=>2,
+			'user_id'			=> 1,
+			'depreciation_id'	=> 2,
 			'deleted_at' 		=> NULL,
 			'depreciate' 		=> '0',
 		);
