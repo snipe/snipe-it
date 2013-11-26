@@ -16,6 +16,7 @@ class StatuslabelsSeeder extends Seeder {
 			'created_at' => $date->modify('-10 day'),
 			'updated_at' => $date->modify('-3 day'),
 			'user_id' => 1,
+			'deleted_at' 		=> NULL,
 		);
 
 
@@ -24,6 +25,7 @@ class StatuslabelsSeeder extends Seeder {
 			'created_at' => $date->modify('-10 day'),
 			'updated_at' => $date->modify('-3 day'),
 			'user_id' => 1,
+			'deleted_at' 		=> NULL,
 		);
 
 
@@ -32,6 +34,7 @@ class StatuslabelsSeeder extends Seeder {
 			'created_at' => $date->modify('-10 day'),
 			'updated_at' => $date->modify('-3 day'),
 			'user_id' => 1,
+			'deleted_at' 		=> NULL,
 		);
 
 		$status[] = array(
@@ -39,6 +42,7 @@ class StatuslabelsSeeder extends Seeder {
 			'created_at' => $date->modify('-10 day'),
 			'updated_at' => $date->modify('-3 day'),
 			'user_id' => 1,
+			'deleted_at' 		=> NULL,
 		);
 
 
