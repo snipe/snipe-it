@@ -11,6 +11,9 @@
 
 
 
+Route::when('admin/*', 'crsf', array('post'));
+Route::when('assets/*', 'crsf', array('post'));
+
 Route::group(array('prefix' => 'assets'), function()
 {
 

@@ -5,7 +5,7 @@ class Statuslabel extends Elegant {
 	protected $softDelete = true;
 
 	protected $rules = array(
-		'name'  		=> 'required|min:2',
+		'name'  		=> 'required|alpha_space|min:2',
 	);
 
 	public function has_assets()

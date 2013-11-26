@@ -189,11 +189,11 @@ class AssetsController extends AdminController {
 
 		// Declare the rules for the form validation
 		$rules = array(
-		'name'   => 'required|alpha_dash|min:3',
+		'name'   => 'required|min:3',
 		'asset_tag'   => 'required|alpha_dash|min:3',
 		'model_id'   => 'required',
-		'serial'   => 'required|alpha_dash|min:3',
-		'warranty_months'   => 'integer|min:1',
+		'serial'   => 'required|alpha_space|min:3',
+		'warranty_months'   => 'required|integer',
     	);
 
 		// Create a new validator instance from our validation rules

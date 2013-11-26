@@ -5,8 +5,8 @@ class Asset extends Elegant {
 	protected $table = 'assets';
 	protected $softDelete = true;
 	protected $rules = array(
-		'name'   => 'required|min:3',
-		'asset_tag'   => 'required|min:3|unique:assets',
+		'name'   => 'required|alpha_space|min:3',
+		'asset_tag'   => 'required|alpha_space|min:3|unique:assets',
 		'model_id'   => 'required',
 		'serial'   => 'required|alpha_dash|min:3',
 		'warranty_months'   => 'integer|min:1',
