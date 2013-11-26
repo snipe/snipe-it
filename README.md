@@ -95,7 +95,7 @@ The document root for the app should be set to the public directory. In a standa
 
 -----
 
-### 8) Optional: Seed the Database
+### 8) Seed the Database
 
 Loading up the sample data will give you an idea of how this should look, how your info should be structured, etc. It only pre-loads a handful of items, so you won't have to spend an hour deleting sample data.
 
