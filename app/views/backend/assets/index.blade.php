@@ -122,7 +122,7 @@ Assets ::
 			</td>
 			<td nowrap="nowrap">
 				<a href="{{ route('update/asset', $asset->id) }}" class="btn-flat white">@lang('button.edit')</a>
-				<a class="btn-flat danger delete-asset" data-toggle="modal" href="{{ route('delete/asset', $asset->id) }}" data-content="Are you sure you wish to delete asset {{ $asset->asset_tag }}?" data-title="Delete {{ $asset->asset_tag }}?" onClick="return false;">@lang('button.delete')</a>
+				<a data-html="false" class="btn-flat danger delete-asset" data-toggle="modal" href="{{ route('delete/asset', $asset->id) }}" data-content="Are you sure you wish to delete this asset?" data-title="Delete {{ htmlspecialchars($asset->asset_tag) }}?" onClick="return false;">@lang('button.delete')</a>
 			</td>
 		</tr>
 		@endforeach

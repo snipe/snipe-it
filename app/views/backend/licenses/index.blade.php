@@ -39,12 +39,13 @@ Licenses ::
 					@else
 						({{ $license->seats }} seats)
 					@endif
+
 					</td>
 					<td><a href="{{ route('view/license', $license->id) }}">{{ $license->serial }}</a></td>
 					<td></td>
 					<td>
 					<a href="{{ route('update/license', $license->id) }}" class="btn-flat white"> @lang('button.edit')</a>
-						<a class="btn-flat danger delete-asset" data-toggle="modal" href="{{ route('delete/license', $license->id) }}" data-content="Are you sure you wish to delete the  {{ $license->name }} license?" data-title="Delete {{ $license->name }}?" onClick="return false;">@lang('button.delete')</a>
+						<a data-html="false" class="btn-flat danger delete-asset" data-toggle="modal" href="{{ route('delete/license', $license->id) }}" data-content="Are you sure you wish to delete this license?" data-title="Delete {{ htmlspecialchars($license->name) }}?" onClick="return false;">@lang('button.delete')</a>
 
 
 					</td>
