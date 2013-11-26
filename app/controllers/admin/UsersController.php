@@ -27,8 +27,8 @@ class UsersController extends AdminController {
 	 * @var array
 	 */
 	protected $validationRules = array(
-		'first_name'       => 'required|min:3',
-		'last_name'        => 'required|min:3',
+		'first_name'       => 'required|alpha_dash|min:3',
+		'last_name'        => 'required|alpha_dash|min:3',
 		'email'            => 'required|email|unique:users,email',
 		'password'         => 'required|between:3,32',
 		'password_confirm' => 'required|between:3,32|same:password',

@@ -258,7 +258,7 @@ class LicensesController extends AdminController {
 
 		// Declare the rules for the form validation
 		$rules = array(
-			'assigned_to'   => 'required|min:1'
+			'assigned_to'   => 'required|integer|min:1'
 		);
 
 		// Create a new validator instance from our validation rules
