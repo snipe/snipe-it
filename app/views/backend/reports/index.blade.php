@@ -32,18 +32,18 @@ Depreciation Report
 
 
 <div class="row-fluid table">
-<table class="table table-hover">
-	<thead>
-		<tr>
+<table id="example">
+		<thead>
+			<tr role="row">
 			<th class="span2">@lang('admin/assets/table.asset_tag')</th>
-			<th class="span2"><span class="line"></span>@lang('admin/assets/table.title')</th>
-			<th class="span2"><span class="line"></span>@lang('admin/assets/table.serial')</th>
-			<th class="span3"><span class="line"></span>@lang('admin/assets/table.checkoutto')</th>
-			<th class="span2"><span class="line"></span>@lang('admin/assets/table.location')</th>
-			<th class="span2"><span class="line"></span>@lang('admin/assets/table.purchase_date')</th>
-			<th class="span1"><span class="line"></span>@lang('admin/assets/table.purchase_cost')</th>
-			<th class="span1"><span class="line"></span>@lang('admin/assets/table.book_value')</th>
-			<th class="span1"><span class="line"></span>Diff</th>
+			<th class="span2">@lang('admin/assets/table.title')</th>
+			<th class="span2">@lang('admin/assets/table.serial')</th>
+			<th class="span3">@lang('admin/assets/table.checkoutto')</th>
+			<th class="span2">@lang('admin/assets/table.location')</th>
+			<th class="span2">@lang('admin/assets/table.purchase_date')</th>
+			<th class="span1">@lang('admin/assets/table.purchase_cost')</th>
+			<th class="span1">@lang('admin/assets/table.book_value')</th>
+			<th class="span1">Diff</th>
 		</tr>
 	</thead>
 	<tbody>
