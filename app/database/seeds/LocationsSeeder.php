@@ -30,7 +30,7 @@ class LocationsSeeder extends Seeder {
 			'address2'      	=> 'Suite 142',
 			'city'     	 		=> 'New York',
 			'state'      		=> 'NY',
-			'country'      		=> '10038',
+			'country'      		=> 'US',
 			'zip'      			=> '10004',
 			'created_at' 		=> $date->modify('-10 day'),
 			'updated_at' 		=> $date->modify('-3 day'),
