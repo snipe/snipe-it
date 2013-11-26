@@ -32,7 +32,7 @@ Asset Models ::
 	<tbody>
 		@foreach ($models as $model)
 		<tr>
-			<td><a href="{{ route('update/model', $model->id) }}">{{ $model->name }}</a></td>
+			<td><a href="{{ route('update/model', $model->id) }}">{{{ $model->name }}}</a></td>
 			<td>{{ $model->modelno }}</td>
 			<td><a href="{{ route('view/model', $model->id) }}">{{ ($model->assets->count()) }}</a></td>
 			<td>
@@ -48,7 +48,7 @@ Asset Models ::
 			@endif</td>
 			<td>
 				<a href="{{ route('update/model', $model->id) }}" class="btn-flat white">@lang('button.edit')</a>
-				<a class="btn-flat danger delete-asset" data-toggle="modal" href="{{ route('delete/model', $model->id) }}" data-content="Are you sure you wish to delete the  {{ $model->name }} model?" data-title="Delete {{ $model->name }}?" onClick="return false;">@lang('button.delete')</a>
+				<a data-html="false" class="btn-flat danger delete-asset" data-toggle="modal" href="{{ route('delete/model', $model->id) }}" data-content="Are you sure you wish to delete this model?" data-title="Delete {{ htmlspecialchars($model->name) }}}?" onClick="return false;">@lang('button.delete')</a>
 
 			</td>
 		</tr>

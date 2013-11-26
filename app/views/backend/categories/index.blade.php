@@ -37,7 +37,7 @@ Asset Categories ::
 								<td>{{ $category->name }}</td>
 								<td>
 									<a href="{{ route('update/category', $category->id) }}" class="btn-flat white"> @lang('button.edit')</a>
-									<a class="btn-flat danger delete-asset" data-toggle="modal" href="{{ route('delete/category', $category->id) }}" data-content="Are you sure you wish to delete the  {{ $category->name }} category?" data-title="Delete this category?" onClick="return false;">@lang('button.delete')</a>
+									<a data-html="false" class="btn-flat danger delete-asset" data-toggle="modal" href="{{ route('delete/category', $category->id) }}" data-content="Are you sure you wish to delete this category?" data-title="Delete the  {{ htmlspecialchars($category->name) }} category?" onClick="return false;">@lang('button.delete')</a>
 								</td>
 							</tr>
 							@endforeach

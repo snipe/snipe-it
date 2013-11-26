@@ -38,7 +38,7 @@ Locations ::
 			<td>{{ $location->city }}, {{ $location->state }}  {{ $location->country }}  </td>
 			<td>
 				<a href="{{ route('update/location', $location->id) }}" class="btn-flat white"> @lang('button.edit')</a>
-				<a class="btn-flat danger delete-asset" data-toggle="modal" href="{{ route('delete/location', $location->id) }}" data-content="Are you sure you wish to delete the  {{ $location->name }} location?" data-title="Delete {{ $location->name }}?" onClick="return false;">@lang('button.delete')</a>
+				<a data-html="false" class="btn-flat danger delete-asset" data-toggle="modal" href="{{ route('delete/location', $location->id) }}" data-content="Are you sure you wish to delete this location?" data-title="Delete {{ htmlspecialchars($location->name) }}?" onClick="return false;">@lang('button.delete')</a>
 			</td>
 		</tr>
 		@endforeach

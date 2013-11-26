@@ -37,7 +37,7 @@ Status Labels
 									<td>{{ $statuslabel->name }}</td>
 									<td>
 										<a href="{{ route('update/statuslabel', $statuslabel->id) }}" class="btn-flat white"> @lang('button.edit')</a>
-										<a class="btn-flat danger delete-asset" data-toggle="modal" href="{{ route('delete/statuslabel', $statuslabel->id) }}" data-content="Are you sure you wish to delete the  {{ $statuslabel->name }} status label?" data-title="Delete {{ $statuslabel->name }}?" onClick="return false;">@lang('button.delete')</a>
+										<a  data-html="false" class="btn-flat danger delete-asset" data-toggle="modal" href="{{ route('delete/statuslabel', $statuslabel->id) }}" data-content="Are you sure you wish to delete this status label?" data-title="Delete {{ htmlspecialchars($statuslabel->name) }}?" onClick="return false;">@lang('button.delete')</a>
 									</td>
 								</tr>
 								@endforeach
