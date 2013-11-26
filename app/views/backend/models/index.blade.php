@@ -48,7 +48,7 @@ Asset Models ::
 			@endif</td>
 			<td>
 				<a href="{{ route('update/model', $model->id) }}" class="btn-flat white">@lang('button.edit')</a>
-				<a data-html="false" class="btn-flat danger delete-asset" data-toggle="modal" href="{{ route('delete/model', $model->id) }}" data-content="Are you sure you wish to delete this model?" data-title="Delete {{ htmlspecialchars($model->name) }}}?" onClick="return false;">@lang('button.delete')</a>
+				<a data-html="false" class="btn-flat danger delete-asset" data-toggle="modal" href="{{ route('delete/model', $model->id) }}" data-content="Are you sure you wish to delete this model?" data-title="Delete {{ htmlspecialchars($model->name) }}?" onClick="return false;">@lang('button.delete')</a>
 
 			</td>
 		</tr>

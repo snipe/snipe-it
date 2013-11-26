@@ -56,7 +56,8 @@
 			<div class="control-group {{ $errors->has('assigned_to') ? 'error' : '' }}">
 				<label class="control-label" for="parent">Checkout to</label>
 				<div class="controls">
-					{{ Form::select('assigned_to', $users_list , Input::old('assigned_to', $asset->assigned_to)) }}
+
+					{{ Form::select('assigned_to', $users_list , Input::old('assigned_to', $asset->assigned_to), array('class'=>'select2', 'style'=>'min-width:350px')) }}
 					{{ $errors->first('assigned_to', '<span class="help-inline">:message</span>') }}
 				</div>
 			</div>
