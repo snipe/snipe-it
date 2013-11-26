@@ -15,51 +15,65 @@ class LicenseSeatsSeeder extends Seeder {
 		$license_seats[] = array(
 			'license_id'      	=> '1',
 			'assigned_to'      	=> '1',
-			'created_at' 	=> $date->modify('-10 day'),
-			'updated_at' 	=> $date->modify('-3 day'),
+			'created_at' 		=> $date->modify('-10 day'),
+			'updated_at' 		=> $date->modify('-3 day'),
+			'deleted_at'  		=> NULL,
+			'notes' 			=>'',
 		);
 
 		$license_seats[] = array(
 			'license_id'      	=> '1',
 			'assigned_to'      	=> NULL,
-			'created_at' 	=> $date->modify('-10 day'),
-			'updated_at' 	=> $date->modify('-3 day'),
+			'created_at' 		=> $date->modify('-10 day'),
+			'updated_at' 		=> $date->modify('-3 day'),
+			'deleted_at' 		=> NULL,
+			'notes' 			=>'',
 		);
 
 		$license_seats[] = array(
 			'license_id'      	=> '1',
 			'assigned_to'      	=> NULL,
-			'created_at' 	=> $date->modify('-10 day'),
-			'updated_at' 	=> $date->modify('-3 day'),
+			'created_at' 		=> $date->modify('-10 day'),
+			'updated_at' 		=> $date->modify('-3 day'),
+			'deleted_at' 		=> NULL,
+			'notes' 			=>'',
 		);
 
 		$license_seats[] = array(
 			'license_id'      	=> '1',
 			'assigned_to'      	=> NULL,
-			'created_at' 	=> $date->modify('-10 day'),
-			'updated_at' 	=> $date->modify('-3 day'),
+			'created_at' 		=> $date->modify('-10 day'),
+			'updated_at' 		=> $date->modify('-3 day'),
+			'deleted_at' 		=> NULL,
+			'notes' 			=>'',
 		);
 
 		$license_seats[] = array(
 			'license_id'      	=> '1',
 			'assigned_to'      	=> '2',
-			'created_at' 	=> $date->modify('-10 day'),
-			'updated_at' 	=> $date->modify('-3 day'),
+			'created_at' 		=> $date->modify('-10 day'),
+			'updated_at' 		=> $date->modify('-3 day'),
+			'deleted_at' 		=> NULL,
+			'notes' 			=>'',
 		);
 
 		$license_seats[] = array(
 			'license_id'      	=> '2',
 			'assigned_to'      	=> '1',
-			'created_at' 	=> $date->modify('-10 day'),
-			'updated_at' 	=> $date->modify('-3 day'),
+			'created_at' 		=> $date->modify('-10 day'),
+			'updated_at' 		=> $date->modify('-3 day'),
+			'deleted_at' 		=> NULL,
+			'notes' 			=>'',
 		);
 
 		// Pending (status_id is null, assigned_to = 0)
 		$license_seats[] = array(
 			'license_id'      	=> '2',
 			'assigned_to'      	=> NULL,
-			'created_at' 	=> $date->modify('-10 day'),
-			'updated_at' 	=> $date->modify('-3 day'),
+			'created_at' 		=> $date->modify('-10 day'),
+			'updated_at' 		=> $date->modify('-3 day'),
+			'deleted_at' 		=> NULL,
+			'notes' 			=>'',
 
 		);
 

@@ -26,12 +26,15 @@ class AssetsSeeder extends Seeder {
 			'assigned_to' 	=> 0,
 			'physical' 		=> 1,
 			'archived' 		=> 0,
-			'license_name'	=> NULL,
-			'license_email'	=> NULL,
-			'status_id'	=> NULL,
+			'status_id'		=> NULL,
+			'notes'			=> '',
+			'deleted_at' 	=> NULL,
+			'archived' 	=> '0',
+			'warranty_months' 	=> NULL,
+			'depreciate' 	=> '0',
 		);
 
-		// Pending (status_id is null, assigned_to = 0)
+
 		$asset[] = array(
 			'name'      	=> 'Michael MBP',
 			'asset_tag'     => 'NNY28633396',
@@ -46,9 +49,12 @@ class AssetsSeeder extends Seeder {
 			'assigned_to' 	=> 0,
 			'physical' 		=> 1,
 			'archived' 		=> 0,
-			'license_name'	=> NULL,
-			'license_email'	=> NULL,
 			'status_id'	=> NULL,
+			'notes'			=> '',
+			'deleted_at' 	=> NULL,
+			'archived' 	=> '0',
+			'warranty_months' 	=> NULL,
+			'depreciate' 	=> '0',
 		);
 
 
@@ -67,9 +73,12 @@ class AssetsSeeder extends Seeder {
 			'assigned_to' 	=> 0,
 			'physical' 		=> 1,
 			'archived' 		=> 0,
-			'license_name'	=> NULL,
-			'license_email'	=> NULL,
 			'status_id'	=> 0,
+			'notes'			=> '',
+			'deleted_at' 	=> NULL,
+			'archived' 	=> '0',
+			'warranty_months' 	=> NULL,
+			'depreciate' 	=> '0',
 		);
 
 		// RTD (status_id =0, assigned_to = 0)
@@ -87,9 +96,12 @@ class AssetsSeeder extends Seeder {
 			'assigned_to' 	=> 0,
 			'physical' 		=> 1,
 			'archived' 		=> 0,
-			'license_name'	=> NULL,
-			'license_email'	=> NULL,
 			'status_id'	=> 0,
+			'notes'			=> '',
+			'deleted_at' 	=> NULL,
+			'archived' 	=> '0',
+			'warranty_months' 	=> NULL,
+			'depreciate' 	=> '0',
 		);
 
 		// RTD (status_id =0, assigned_to = 0)
@@ -107,9 +119,12 @@ class AssetsSeeder extends Seeder {
 			'assigned_to' 	=> 0,
 			'physical' 		=> 1,
 			'archived' 		=> 0,
-			'license_name'	=> NULL,
-			'license_email'	=> NULL,
 			'status_id'	=> 0,
+			'notes'			=> '',
+			'deleted_at' 	=> NULL,
+			'archived' 	=> '0',
+			'warranty_months' 	=> NULL,
+			'depreciate' 	=> '0',
 		);
 
 
@@ -128,9 +143,12 @@ class AssetsSeeder extends Seeder {
 			'assigned_to' 	=> 2,
 			'physical' 		=> 1,
 			'archived' 		=> 0,
-			'license_name'	=> NULL,
-			'license_email'	=> NULL,
 			'status_id'	=> 0,
+			'notes'			=> '',
+			'deleted_at' 	=> NULL,
+			'archived' 	=> '0',
+			'warranty_months' 	=> NULL,
+			'depreciate' 	=> '0',
 		);
 
 		// Deployed (status_id =0, assigned_to > 0)
@@ -148,9 +166,12 @@ class AssetsSeeder extends Seeder {
 			'assigned_to' 	=> 2,
 			'physical' 		=> 1,
 			'archived' 		=> 0,
-			'license_name'	=> NULL,
-			'license_email'	=> NULL,
 			'status_id'	=> 0,
+			'notes'			=> '',
+			'deleted_at' 	=> NULL,
+			'archived' 	=> '0',
+			'warranty_months' 	=> NULL,
+			'depreciate' 	=> '0',
 		);
 
 		// Undeployable (status_id > 0, assigned_to = 0)
@@ -168,9 +189,12 @@ class AssetsSeeder extends Seeder {
 			'assigned_to' 	=> 0,
 			'physical' 		=> 1,
 			'archived' 		=> 0,
-			'license_name'	=> NULL,
-			'license_email'	=> NULL,
 			'status_id'	=> '3',
+			'notes'			=> '',
+			'deleted_at' 	=> NULL,
+			'archived' 	=> '0',
+			'warranty_months' 	=> NULL,
+			'depreciate' 	=> '0',
 		);
 
 		// Undeployable (status_id > 0, assigned_to = 0)
@@ -188,9 +212,12 @@ class AssetsSeeder extends Seeder {
 			'assigned_to' 	=> 0,
 			'physical' 		=> 1,
 			'archived' 		=> 0,
-			'license_name'	=> NULL,
-			'license_email'	=> NULL,
 			'status_id'	=> '2',
+			'notes'			=> '',
+			'deleted_at' 	=> NULL,
+			'archived' 	=> '0',
+			'warranty_months' 	=> NULL,
+			'depreciate' 	=> '0',
 		);
 
 		// Undeployable (status_id > 0, assigned_to = 0)
@@ -208,9 +235,12 @@ class AssetsSeeder extends Seeder {
 			'assigned_to' 	=> 0,
 			'physical' 		=> 1,
 			'archived' 		=> 1,
-			'license_name'	=> NULL,
-			'license_email'	=> NULL,
 			'status_id'	=> '4',
+			'notes'			=> '',
+			'deleted_at' 	=> NULL,
+			'archived' 	=> '0',
+			'warranty_months' 	=> NULL,
+			'depreciate' 	=> '0',
 		);
 
 		// Undeployable (status_id > 0, assigned_to = 0)
@@ -228,13 +258,13 @@ class AssetsSeeder extends Seeder {
 			'assigned_to' 	=> 0,
 			'physical' 		=> 1,
 			'archived' 		=> 1,
-			'license_name'	=> NULL,
-			'license_email'	=> NULL,
 			'status_id'	=> '3',
+			'notes'			=> '',
+			'deleted_at' 	=> NULL,
+			'archived' 	=> '0',
+			'warranty_months' 	=> NULL,
+			'depreciate' 	=> '0',
 		);
-
-
-
 
 		// Delete all the old data
 		DB::table('assets')->truncate();

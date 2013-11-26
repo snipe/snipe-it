@@ -13,8 +13,8 @@ class SettingsSeeder extends Seeder {
 		$setting[] = array(
 			'per_page'      	=> '50',
 			'site_name'      	=> 'Snipe IT Asset Management',
-			'created_at' 	=> $date->modify('-10 day'),
-			'updated_at' 	=> $date->modify('-3 day'),
+			'created_at' 	=> $date,
+			'updated_at' 	=> $date,
 			'user_id' 		=> 1,
 		);
 

@@ -7,36 +7,35 @@ class ManufacturersSeeder extends Seeder {
 
 		$date = date("Y-m-d");
 		$manufacturers[] = array(
-			'name'      => 'Apple',
-			'created_at' => $date,
-			'user_id' => 1,
-		);
-		$manufacturers[] = array(
-			'name'      => 'Microsoft',
-			'created_at' => $date,
-			'user_id' => 1,
-		);
-		$manufacturers[] = array(
-			'name'      => 'ASUS',
-			'created_at' => $date,
-			'user_id' => 1,
-		);
-		$manufacturers[] = array(
-			'name'      => 'Dell',
-			'created_at' => $date,
-			'user_id' => 1,
+			'name'     		 	=> 'Apple',
+			'created_at' 		=> $date,
+			'user_id' 			=> 1,
+			'updated_at' 		=> $date,
+			'deleted_at' 		=> NULL,
 		);
 
 		$manufacturers[] = array(
-			'name'      => 'Tower Software',
-			'created_at' => $date,
-			'user_id' => 1,
+			'name'     		 	=> 'Microsoft',
+			'created_at' 		=> $date,
+			'user_id' 			=> 1,
+			'updated_at' 		=> $date,
+			'deleted_at' 		=> NULL,
 		);
 
 		$manufacturers[] = array(
-			'name'      => 'Adobe',
-			'created_at' => $date,
-			'user_id' => 1,
+			'name'     		 	=> 'ASUS',
+			'created_at' 		=> $date,
+			'user_id' 			=> 1,
+			'updated_at' 		=> $date,
+			'deleted_at' 		=> NULL,
+		);
+
+		$manufacturers[] = array(
+			'name'     		 	=> 'Dell',
+			'created_at' 		=> $date,
+			'user_id' 			=> 1,
+			'updated_at' 		=> $date,
+			'deleted_at' 		=> NULL,
 		);
 
 
