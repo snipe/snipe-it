@@ -27,6 +27,7 @@ class LicensesSeeder extends Seeder {
 			'user_id'			=>1,
 			'depreciation_id'	=>2,
 			'deleted_at' 		=> NULL,
+			'depreciate' 	=> '0',
 		);
 
 		// Pending (status_id is null, assigned_to = 0)
@@ -45,6 +46,7 @@ class LicensesSeeder extends Seeder {
 			'user_id'			=>1,
 			'depreciation_id'	=>2,
 			'deleted_at' 		=> NULL,
+			'depreciate' 	=> '0',
 		);
 
 		// Delete all the old data
