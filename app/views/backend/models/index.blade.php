@@ -42,7 +42,10 @@ Asset Models ::
 			@endif
 
 			</td>
-			<td>{{ $model->category->name }}</td>
+			<td>
+			@if ($model->category)
+			{{ $model->category->name }}
+			@endif</td>
 			<td>
 				<a href="{{ route('update/model', $model->id) }}" class="btn-flat white">@lang('button.edit')</a>
 				<a class="btn-flat danger delete-asset" data-toggle="modal" href="{{ route('delete/model', $model->id) }}" data-content="Are you sure you wish to delete the  {{ $model->name }} model?" data-title="Delete {{ $model->name }}?" onClick="return false;">@lang('button.delete')</a>
