@@ -21,12 +21,13 @@ class LicensesSeeder extends Seeder {
 			'created_at' 		=> $date->modify('-10 day'),
 			'updated_at' 		=> $date->modify('-3 day'),
 			'seats' 			=> 5,
-			'license_name'		=> NULL,
-			'license_email'		=> NULL,
-			'notes' 			=>'',
+			'license_name'		=> '',
+			'license_email'		=> '',
+			'notes' 			=> '',
 			'user_id'			=>1,
 			'depreciation_id'	=>2,
 			'deleted_at' 		=> NULL,
+			'depreciate' 		=> '0',
 		);
 
 		// Pending (status_id is null, assigned_to = 0)
@@ -41,10 +42,11 @@ class LicensesSeeder extends Seeder {
 			'seats' 			=> 2,
 			'license_name'		=> 'Alison Gianotto',
 			'license_email'		=> 'snipe@snipe.net',
-			'notes' 			=>'',
+			'notes' 			=> '',
 			'user_id'			=>1,
 			'depreciation_id'	=>2,
 			'deleted_at' 		=> NULL,
+			'depreciate' 		=> '0',
 		);
 
 		// Delete all the old data
