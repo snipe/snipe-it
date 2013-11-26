@@ -25,6 +25,11 @@ return array(
 	'checkout' => array(
 		'error'   => 'There was an issue checking out the license. Please try again.',
 		'success' => 'The license was checked out successfully'
-	)
+	),
+
+	'checkin' => array(
+		'error'   => 'There was an issue checking in the license. Please try again.',
+		'success' => 'The license was checked in successfully'
+	),
 
 );

@@ -312,7 +312,7 @@ class LicensesController extends AdminController {
 		if (is_null($licenseseat = LicenseSeat::find($seatId)))
 		{
 			// Redirect to the asset management page with error
-			return Redirect::to('admin/licenses')->with('error', Lang::get('admin/assets/message.not_found'));
+			return Redirect::to('admin/licenses')->with('error', Lang::get('admin/licenses/message.not_found'));
 		}
 
 		$logaction = new Actionlog();
@@ -331,11 +331,11 @@ class LicensesController extends AdminController {
 			$log = $logaction->logaction('checkin from');
 
 			// Redirect to the new asset page
-			return Redirect::to("admin/licenses")->with('success', Lang::get('admin/licenses/message.checkout.success'));
+			return Redirect::to("admin/licenses")->with('success', Lang::get('admin/licenses/message.checkin.success'));
 		}
 
 		// Redirect to the asset management page with error
-		return Redirect::to("admin/licenses")->with('error', Lang::get('admin/licenses/message.checkout.error'));
+		return Redirect::to("admin/licenses")->with('error', Lang::get('admin/licenses/message.checkin.error'));
 	}
 
 	/**
