@@ -61,6 +61,14 @@
 				</div>
 			</div>
 
+			<div class="control-group {{ $errors->has('zip') ? 'error' : '' }}">
+				<label class="control-label" for="zip">Postal Code</label>
+				<div class="controls">
+					<input class="span2" type="text" name="zip" id="zip" value="{{ Input::old('zip', $location->zip) }}" />
+					{{ $errors->first('zip', '<span class="help-inline">:message</span>') }}
+				</div>
+			</div>
+
 			<div class="control-group {{ $errors->has('country') ? 'error' : '' }}">
 				<label class="control-label" for="state">Country Abbrev</label>
 				<div class="controls">

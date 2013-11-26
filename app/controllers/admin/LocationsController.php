@@ -66,6 +66,7 @@ class LocationsController extends AdminController {
 			$location->city    			= e(Input::get('city'));
 			$location->state    		= e(Input::get('state'));
 			$location->country    		= e(Input::get('country'));
+			$location->zip    		= e(Input::get('zip'));
 			$location->user_id          = Sentry::getId();
 
 			// Was the asset created?
@@ -141,6 +142,7 @@ class LocationsController extends AdminController {
 			$location->city    			= e(Input::get('city'));
 			$location->state    		= e(Input::get('state'));
 			$location->country    		= e(Input::get('country'));
+			$location->zip    		= e(Input::get('zip'));
 
 			// Was the asset created?
 			if($location->save())
