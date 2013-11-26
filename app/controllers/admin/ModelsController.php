@@ -65,6 +65,7 @@ class ModelsController extends AdminController {
 			$model->name            = e(Input::get('name'));
 			$model->modelno            = e(Input::get('modelno'));
 			$model->depreciation_id    = e(Input::get('depreciation_id'));
+			$model->category_id    = e(Input::get('category_id'));
 			$model->user_id          = Sentry::getId();
 
 
@@ -134,6 +135,7 @@ class ModelsController extends AdminController {
 			$model->name            = e(Input::get('name'));
 			$model->modelno            = e(Input::get('modelno'));
 			$model->depreciation_id    = e(Input::get('depreciation_id'));
+			$model->category_id    = e(Input::get('category_id'));
 
 
 			// Was it created?
