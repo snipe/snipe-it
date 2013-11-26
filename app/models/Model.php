@@ -5,6 +5,7 @@ class Model extends Elegant {
 	// Declare the rules for the form validation
 	protected $rules = array(
 		'name'   => 'required|alpha_dash|min:3',
+		'modelno'   => 'alpha_dash|min:1',
 		'category_id'   => 'required|integer',
 	);
 

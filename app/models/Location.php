@@ -10,6 +10,7 @@ class Location extends Elegant {
 			'city'   		=> 'required|alpha_dash|min:3',
 			'state'   		=> 'required|alpha|min:2|max:2',
 			'country'   	=> 'required|alpha|min:2|max:2',
+			'zip'   => 'alpha_dash|min:5',
 		);
 
 	public function has_users()
