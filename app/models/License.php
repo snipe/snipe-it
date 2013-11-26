@@ -12,7 +12,7 @@ class License extends Elegant {
 	protected $table = 'licenses';
 	protected $softDelete = true;
 	protected $rules = array(
-			'name'   => 'required|min:3',
+			'name'   => 'required|alpha_dash|min:3',
 			'serial'   => 'required|min:5',
 			'seats'   => 'required|min:1|integer',
 			'license_email'   => 'email',
