@@ -10,6 +10,7 @@ class Asset extends Elegant {
 		'model_id'   => 'required',
 		'serial'   => 'required|min:3',
 		'warranty_months'   => 'integer|min:1',
+		'purchase_cost'   => 'integer|min:1',
     );
 
 
