@@ -41,18 +41,19 @@ View License {{ $license->name }} ::
                             <table class="table table-hover">
                                 <thead>
                                     <tr>
-
-
+                                    	<th class="span2">Seat</th>
                                          <th class="span6">User</th>
                                          <th class="span2"><span class="line"></span> </th>
                                     </tr>
                                 </thead>
                                 <tbody>
+                                <?php $count=1; ?>
                                 	@if ($license->licenseseats)
 										@foreach ($license->licenseseats as $licensedto)
 
 										<tr>
 
+											<td>Seat {{ $count }} </td>
 											<td>
 											@if ($licensedto->assigned_to)
 												<a href="{{ route('view/user', $licensedto->id) }}">
@@ -69,6 +70,7 @@ View License {{ $license->name }} ::
 											</td>
 
 										</tr>
+										<?php $count++; ?>
 										@endforeach
 										@endif
 
