@@ -8,9 +8,8 @@ class Asset extends Elegant {
 		'name'   => 'required|alpha_dash|min:3',
 		'asset_tag'   => 'required|min:3|unique:assets',
 		'model_id'   => 'required',
-		'serial'   => 'required|min:3',
+		'serial'   => 'required|alpha_dash|min:3',
 		'warranty_months'   => 'integer|min:1',
-		'purchase_cost'   => 'integer|min:1',
     );
 
 
@@ -114,6 +113,30 @@ class Asset extends Elegant {
 			return date_format($date, 'Y-m-d');
 
 	}
+
+	 public function months_until_depreciated()
+	{
+
+			$today = date("Y-m-d");
+
+			// @link http://www.php.net/manual/en/class.datetime.php
+			$d1 = new DateTime($today);
+			$d2 = new DateTime($this->depreciated_date());
+
+			// @link http://www.php.net/manual/en/class.dateinterval.php
+			$interval = $d1->diff($d2);
+			return $interval;
+
+	}
+
+
+	 public function depreciated_date()
+	{
+			$date = date_create($this->purchase_date);
+			date_add($date, date_interval_create_from_date_string($this->depreciation->months.' months'));
+			return date_format($date, 'Y-m-d');
+	}
+
 
 	public function depreciation()
 	{

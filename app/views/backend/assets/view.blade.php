@@ -102,8 +102,9 @@ View Asset {{ $asset->asset_tag }} ::
                        		<ul>
 
 								@if ($asset->purchase_date)
-								<li>Purchase Date: {{ $asset->purchase_date }} </li>
+								<li>Purchased On: {{ $asset->purchase_date }} </li>
 								@endif
+
 								@if ($asset->purchase_cost)
 								<li>Purchase Cost: ${{ number_format($asset->purchase_cost) }} </li>
 								@endif
@@ -117,6 +118,8 @@ View Asset {{ $asset->asset_tag }} ::
 
 								@if ($asset->depreciation)
 								<li>Depreciation: {{ $asset->depreciation->name }} ({{ $asset->depreciation->months }} months)</li>
+								<li>Depreciates On: {{ $asset->depreciated_date() }} </li>
+								<li>Fully Depreciated: {{ $asset->months_until_depreciated()->m }} months, {{ $asset->months_until_depreciated()->y }} years</li>
 								@endif
 
 							</ul>
@@ -141,6 +144,8 @@ View Asset {{ $asset->asset_tag }} ::
 									@endif
 
 								@endif
+
+
 
 
 
