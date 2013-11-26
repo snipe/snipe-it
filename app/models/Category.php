@@ -8,7 +8,7 @@ class Category extends Elegant {
 	* Category validation rules
 	*/
 	protected $rules = array(
-		'name'   => 'required|min:2',
+		'name'   => 'required|alpha_dash|min:2',
     );
 
 
