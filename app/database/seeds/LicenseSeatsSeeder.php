@@ -18,7 +18,8 @@ class LicenseSeatsSeeder extends Seeder {
 			'created_at' 		=> $date->modify('-10 day'),
 			'updated_at' 		=> $date->modify('-3 day'),
 			'deleted_at'  		=> NULL,
-			'notes' 			=>'',
+			'notes' 			=> '',
+			'user_id' 			=> '1',
 		);
 
 		$license_seats[] = array(
@@ -27,7 +28,8 @@ class LicenseSeatsSeeder extends Seeder {
 			'created_at' 		=> $date->modify('-10 day'),
 			'updated_at' 		=> $date->modify('-3 day'),
 			'deleted_at' 		=> NULL,
-			'notes' 			=>'',
+			'notes' 			=> '',
+			'user_id' 			=> '1',
 		);
 
 		$license_seats[] = array(
@@ -36,7 +38,8 @@ class LicenseSeatsSeeder extends Seeder {
 			'created_at' 		=> $date->modify('-10 day'),
 			'updated_at' 		=> $date->modify('-3 day'),
 			'deleted_at' 		=> NULL,
-			'notes' 			=>'',
+			'notes' 			=> '',
+			'user_id' 			=> '1',
 		);
 
 		$license_seats[] = array(
@@ -45,7 +48,8 @@ class LicenseSeatsSeeder extends Seeder {
 			'created_at' 		=> $date->modify('-10 day'),
 			'updated_at' 		=> $date->modify('-3 day'),
 			'deleted_at' 		=> NULL,
-			'notes' 			=>'',
+			'notes' 			=> '',
+			'user_id' 			=> '1',
 		);
 
 		$license_seats[] = array(
@@ -54,7 +58,8 @@ class LicenseSeatsSeeder extends Seeder {
 			'created_at' 		=> $date->modify('-10 day'),
 			'updated_at' 		=> $date->modify('-3 day'),
 			'deleted_at' 		=> NULL,
-			'notes' 			=>'',
+			'notes' 			=> '',
+			'user_id' 			=> '1',
 		);
 
 		$license_seats[] = array(
@@ -63,7 +68,8 @@ class LicenseSeatsSeeder extends Seeder {
 			'created_at' 		=> $date->modify('-10 day'),
 			'updated_at' 		=> $date->modify('-3 day'),
 			'deleted_at' 		=> NULL,
-			'notes' 			=>'',
+			'notes' 			=> '',
+			'user_id' 			=> '1',
 		);
 
 		// Pending (status_id is null, assigned_to = 0)
@@ -73,7 +79,8 @@ class LicenseSeatsSeeder extends Seeder {
 			'created_at' 		=> $date->modify('-10 day'),
 			'updated_at' 		=> $date->modify('-3 day'),
 			'deleted_at' 		=> NULL,
-			'notes' 			=>'',
+			'notes' 			=> '',
+			'user_id' 			=> '1',
 
 		);
 
