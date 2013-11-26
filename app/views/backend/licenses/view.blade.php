@@ -43,7 +43,7 @@ View License {{ $license->name }} ::
                                     <tr>
                                     	<th class="span2">Seat</th>
                                          <th class="span6">User</th>
-                                         <th class="span2"><span class="line"></span> </th>
+                                         <th class="span2"></th>
                                     </tr>
                                 </thead>
                                 <tbody>
