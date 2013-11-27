@@ -22,7 +22,7 @@ Change your Email
 	<div class="control-group{{ $errors->first('email', ' error') }}">
 		<label class="control-label" for="email">New Email</label>
 		<div class="controls">
-			<input type="text" name="email" id="email" value="" />
+			<input type="email" name="email" id="email" value="" />
 			{{ $errors->first('email', '<span class="help-block">:message</span>') }}
 		</div>
 	</div>
@@ -31,7 +31,7 @@ Change your Email
 	<div class="control-group{{ $errors->first('email_confirm', ' error') }}">
 		<label class="control-label" for="email_confirm">Confirm New Email</label>
 		<div class="controls">
-			<input type="text" name="email_confirm" id="email_confirm" value="" />
+			<input type="email" name="email_confirm" id="email_confirm" value="" />
 			{{ $errors->first('email_confirm', '<span class="help-block">:message</span>') }}
 		</div>
 	</div>

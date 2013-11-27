@@ -19,7 +19,7 @@ Forgot Password ::
 	<div class="control-group{{ $errors->first('email', ' error') }}">
 		<label class="control-label" for="email">Email</label>
 		<div class="controls">
-			<input type="text" name="email" id="email" value="{{ Input::old('email') }}" />
+			<input type="email" name="email" id="email" value="{{ Input::old('email') }}" />
 			{{ $errors->first('email', '<span class="help-block">:message</span>') }}
 		</div>
 	</div>
