@@ -42,9 +42,10 @@ View Asset {{ $asset->asset_tag }} ::
                                     <tr>
                                     	<th class="span1"></th>
                                         <th class="span3"><span class="line"></span>Date</th>
-                                        <th class="span3"><span class="line"></span>Admin</th>
-                                        <th class="span3"><span class="line"></span>Action</th>
-                                         <th class="span3"><span class="line"></span>User</th>
+                                        <th class="span2"><span class="line"></span>Admin</th>
+                                        <th class="span2"><span class="line"></span>Action</th>
+                                        <th class="span2"><span class="line"></span>User</th>
+                                        <th class="span3"><span class="line"></span>Note</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -63,12 +64,16 @@ View Asset {{ $asset->asset_tag }} ::
 											@endif
 										</td>
 										<td>{{ $log->action_type }}</td>
-
 										<td>
 											@if (isset($log->checkedout_to))
 											<a href="{{ route('view/user', $log->checkedout_to) }}">
 											{{ $log->userlog->fullName() }}
 											</a>
+											@endif
+										</td>
+										<td>
+											@if ($log->note)
+											{{ $log->note }}
 											@endif
 										</td>
 									</tr>
@@ -86,8 +91,7 @@ View Asset {{ $asset->asset_tag }} ::
 										</td>
 										<td>created asset</td>
 										<td></td>
-
-
+										<td></td>
 									</tr>
                                 </tbody>
                             </table>

@@ -87,7 +87,8 @@ View License {{ $license->name }} ::
                                         <th class="span3"><span class="line"></span>Date</th>
                                         <th class="span3"><span class="line"></span>Admin</th>
                                         <th class="span3"><span class="line"></span>Action</th>
-                                         <th class="span3"><span class="line"></span>User</th>
+                                        <th class="span3"><span class="line"></span>User</th>
+                                        <th class="span3"><span class="line"></span>Note</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -114,7 +115,11 @@ View License {{ $license->name }} ::
 
 											</a>
 											@endif
-
+										</td>
+										<td>
+											@if ($log->note)
+											{{ $log->note }}
+											@endif
 										</td>
 									</tr>
 									@endforeach
@@ -130,6 +135,7 @@ View License {{ $license->name }} ::
 										@endif
 										</td>
 										<td>created asset</td>
+										<td></td>
 										<td></td>
 									</tr>
                                 </tbody>

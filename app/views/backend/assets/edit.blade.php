@@ -125,7 +125,7 @@
 				</div>
 			</div>
 
-			<!-- Depreciation -->
+			<!-- Status -->
 			<div class="control-group {{ $errors->has('status_id') ? 'error' : '' }}">
 				<label class="control-label" for="parent">Status</label>
 				<div class="controls">

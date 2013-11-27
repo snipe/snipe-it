@@ -278,9 +278,6 @@ class AssetsController extends AdminController {
 		// Get the dropdown of users and then pass it to the checkout view
 		$users_list = array('' => 'Select a User') + DB::table('users')->select(DB::raw('concat(first_name," ",last_name) as full_name, id'))->lists('full_name', 'id');
 
-
-
-
 		//print_r($users);
 		return View::make('backend/assets/checkout', compact('asset'))->with('users_list',$users_list);
 
@@ -303,7 +300,8 @@ class AssetsController extends AdminController {
 
 		// Declare the rules for the form validation
 		$rules = array(
-			'assigned_to'   => 'required|min:1'
+			'assigned_to'   => 'required|min:1',
+			'note'   => 'alpha_space',
 		);
 
 		// Create a new validator instance from our validation rules
@@ -336,9 +334,8 @@ class AssetsController extends AdminController {
 			$logaction->asset_type = 'hardware';
 			$logaction->location_id = $assigned_to->location_id;
 			$logaction->user_id = Sentry::getUser()->id;
+			$logaction->note = e(Input::get('note'));
 			$log = $logaction->logaction('checkout');
-
-
 
 			// Redirect to the new asset page
 			return Redirect::to("admin")->with('success', Lang::get('admin/assets/message.checkout.success'));
@@ -347,6 +344,26 @@ class AssetsController extends AdminController {
 		// Redirect to the asset management page with error
 		return Redirect::to("assets/$assetId/checkout")->with('error', Lang::get('admin/assets/message.checkout.error'));
 	}
+
+
+	/**
+	* Check the asset back into inventory
+	*
+	* @param  int  $assetId
+	* @return View
+	**/
+	public function getCheckin($assetId)
+	{
+		// Check if the asset exists
+		if (is_null($asset = Asset::find($assetId)))
+		{
+			// Redirect to the asset management page with error
+			return Redirect::to('admin')->with('error', Lang::get('admin/assets/message.not_found'));
+		}
+
+		return View::make('backend/assets/checkin', compact('asset'));
+	}
+
 
 	/**
 	* Check in the item so that it can be checked out again to someone else
@@ -371,16 +388,16 @@ class AssetsController extends AdminController {
 		$logaction->checkedout_to = $asset->assigned_to;
 
 		// Update the asset data to null, since it's being checked in
-		$asset->assigned_to            		= '';
+		$asset->assigned_to            		= '0';
 
 		// Was the asset updated?
 		if($asset->save())
 		{
 
 			$logaction->asset_id = $asset->id;
-
 			$logaction->location_id = NULL;
 			$logaction->asset_type = 'hardware';
+			$logaction->note = e(Input::get('note'));
 			$logaction->user_id = Sentry::getUser()->id;
 			$log = $logaction->logaction('checkin from');
 

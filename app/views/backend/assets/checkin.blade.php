@@ -3,9 +3,9 @@
 {{-- Page title --}}
 @section('title')
 	@if ($asset->id)
-	Checkout Asset to User::
+	Checkin Asset ::
 	@else
-	Checkout Asset to User ::
+	Checkin Asset ::
 	@endif
 @parent
 @stop
@@ -14,11 +14,7 @@
 @section('content')
 <div class="page-header">
 	<h3>
-	@if ($asset->id)
-	Checkout Asset to User
-	@else
-	Create Asset
-	@endif
+	Checkin Asset
 
 		<div class="pull-right">
 			<a href="{{ route('assets') }}" class="btn-flat gray"><i class="icon-circle-arrow-left icon-white"></i> Back</a>
@@ -26,15 +22,10 @@
 	</h3>
 </div>
 
-
 <form class="form-horizontal" method="post" action="" autocomplete="off">
 	<!-- CSRF Token -->
 	<input type="hidden" name="_token" value="{{ csrf_token() }}" />
 
-	<!-- Tabs Content -->
-	<div class="tab-content">
-
-		<div class="tab-pane active" id="tab-general">
 
 			<!-- Asset Tag -->
 			<div class="control-group">
@@ -52,34 +43,23 @@
 				</div>
 			</div>
 
-			<!-- User -->
-			<div class="control-group {{ $errors->has('assigned_to') ? 'error' : '' }}">
-				<label class="control-label" for="parent">Checkout to</label>
-				<div class="controls">
-
-					{{ Form::select('assigned_to', $users_list , Input::old('assigned_to', $asset->assigned_to), array('class'=>'select2', 'style'=>'min-width:350px')) }}
-					{{ $errors->first('assigned_to', '<span class="help-inline">:message</span>') }}
-				</div>
-			</div>
-
 			<!-- Notes -->
 			<div class="control-group {{ $errors->has('note') ? 'error' : '' }}">
 				<label class="control-label" for="note">Notes</label>
 				<div class="controls">
-					<input class="span6" type="text" name="note" id="note" value="{{ Input::old('notes', $asset->note) }}" />
+					<input class="span6" type="text" name="note" id="note" value="{{ Input::old('note', $asset->note) }}" />
 					{{ $errors->first('note', '<span class="help-inline"><i class="icon-remove-sign"></i> :message</span>') }}
 				</div>
 			</div>
 
-		</div>
+			<!-- Form actions -->
+			<div class="control-group">
+				<div class="controls">
+					<a class="btn btn-link" href="{{ route('assets') }}">@lang('general.cancel')</a>
+					<button type="submit" class="btn-flat success"><i class="icon-ok icon-white"></i>@lang('general.checkin')</button>
+				</div>
+			</div>
 
-	<!-- Form actions -->
-	<div class="control-group">
-		<div class="controls">
-			<a class="btn btn-link" href="{{ route('assets') }}">@lang('general.cancel')</a>
-			<button type="submit" class="btn-flat success"><i class="icon-ok icon-white"></i>@lang('general.checkout')</button>
-		</div>
-	</div>
 </form>
 
 

@@ -37,7 +37,8 @@ Route::group(array('prefix' => 'assets'), function()
 	Route::get('{assetId}/delete', array('as' => 'delete/asset', 'uses' => 'Controllers\Admin\AssetsController@getDelete'));
 	Route::get('{assetId}/checkout', array('as' => 'checkout/asset', 'uses' => 'Controllers\Admin\AssetsController@getCheckout'));
 	Route::post('{assetId}/checkout', 'Controllers\Admin\AssetsController@postCheckout');
-	Route::get('{assetId}/checkin', array('as' => 'checkin/asset', 'uses' => 'Controllers\Admin\AssetsController@postCheckin'));
+	Route::get('{assetId}/checkin', array('as' => 'checkin/asset', 'uses' => 'Controllers\Admin\AssetsController@getCheckin'));
+	Route::post('{assetId}/checkin', 'Controllers\Admin\AssetsController@postCheckin');
 	Route::get('{assetId}/view', array('as' => 'view/asset', 'uses' => 'Controllers\Admin\AssetsController@getView'));
 
 
@@ -70,7 +71,8 @@ Route::group(array('prefix' => 'admin'), function()
 		Route::get('{licenseId}/delete', array('as' => 'delete/license', 'uses' => 'Controllers\Admin\LicensesController@getDelete'));
 		Route::get('{licenseId}/checkout', array('as' => 'checkout/license', 'uses' => 'Controllers\Admin\LicensesController@getCheckout'));
 		Route::post('{licenseId}/checkout', 'Controllers\Admin\LicensesController@postCheckout');
-		Route::get('{licenseId}/checkin', array('as' => 'checkin/license', 'uses' => 'Controllers\Admin\LicensesController@postCheckin'));
+		Route::get('{licenseId}/checkin', array('as' => 'checkin/license', 'uses' => 'Controllers\Admin\LicensesController@getCheckin'));
+		Route::post('{licenseId}/checkin', 'Controllers\Admin\LicensesController@postCheckin');
 		Route::get('{licenseId}/view', array('as' => 'view/license', 'uses' => 'Controllers\Admin\LicensesController@getView'));
 	});
 
