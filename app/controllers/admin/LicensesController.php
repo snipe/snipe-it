@@ -201,16 +201,22 @@ class LicensesController extends AdminController {
 		// Check if the license exists
 		if (is_null($license = License::find($licenseId)))
 		{
-			// Redirect to the blogs management page
+			// Redirect to the license management page
 			return Redirect::to('admin/licenses')->with('error', Lang::get('admin/licenses/message.not_found'));
 		}
 
-		if (count($license->assignedusers) > 0) {
-			// Redirect to the asset management page
+		if (($license->assignedcount()) && ($license->assignedcount() > 0)) {
+
+			// Redirect to the license management page
 			return Redirect::to('admin/licenses')->with('error', Lang::get('admin/licenses/message.assoc_users'));
+
 		} else {
-			// Delete the license
+
+			// Delete the license and the associated license seats
+			$licenseseats = $license->licenseseats();
+			$licenseseats->delete();
 			$license->delete();
+
 
 			// Redirect to the licenses management page
 			return Redirect::to('admin/licenses')->with('success', Lang::get('admin/licenses/message.delete.success'));
