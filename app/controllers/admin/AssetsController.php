@@ -371,7 +371,7 @@ class AssetsController extends AdminController {
 		$logaction->checkedout_to = $asset->assigned_to;
 
 		// Update the asset data to null, since it's being checked in
-		$asset->assigned_to            		= '';
+		$asset->assigned_to            		= NULL;
 
 		// Was the asset updated?
 		if($asset->save())

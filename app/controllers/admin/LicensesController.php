@@ -319,7 +319,7 @@ class LicensesController extends AdminController {
 		$logaction->checkedout_to = $licenseseat->assigned_to;
 
 		// Update the asset data
-		$licenseseat->assigned_to            		= '';
+		$licenseseat->assigned_to            		= NULL;
 
 		// Was the asset updated?
 		if($licenseseat->save())
