@@ -145,5 +145,9 @@ class Asset extends Elegant {
 		return $this->belongsTo('Depreciation','id');
 	}
 
+	public function model()
+	{
+		return $this->belongsTo('Model','model_id');
+	}
 
 }

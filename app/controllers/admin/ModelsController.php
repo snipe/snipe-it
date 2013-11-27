@@ -9,6 +9,7 @@ use Setting;
 use Sentry;
 use DB;
 use Depreciation;
+use Manufacturer;
 use Str;
 use Validator;
 use View;
@@ -38,8 +39,14 @@ class ModelsController extends AdminController {
 	{
 		// Show the page
 		$depreciation_list = array('' => 'Do Not Depreciate') + Depreciation::lists('name', 'id');
+		$manufacturer_list = array('' => 'Select One') + Manufacturer::lists('name', 'id');
 		$category_list = array('' => '') + DB::table('categories')->lists('name', 'id');
-		return View::make('backend/models/edit')->with('category_list',$category_list)->with('depreciation_list',$depreciation_list)->with('model',new Model);
+		$view = View::make('backend/models/edit');
+		$view->with('category_list',$category_list);
+		$view->with('depreciation_list',$depreciation_list);
+		$view->with('manufacturer_list',$manufacturer_list);
+		$view->with('model',new Model); 
+		return $view;
 	}
 
 
@@ -65,6 +72,7 @@ class ModelsController extends AdminController {
 			$model->name            = e(Input::get('name'));
 			$model->modelno            = e(Input::get('modelno'));
 			$model->depreciation_id    = e(Input::get('depreciation_id'));
+			$model->manufacturer_id    = e(Input::get('manufacturer_id'));
 			$model->category_id    = e(Input::get('category_id'));
 			$model->user_id          = Sentry::getId();
 
@@ -99,13 +107,18 @@ class ModelsController extends AdminController {
 		// Check if the model exists
 		if (is_null($model = Model::find($modelId)))
 		{
-			// Redirect to the blogs management page
+			// Redirect to the model management page
 			return Redirect::to('assets/models')->with('error', Lang::get('admin/models/message.does_not_exist'));
 		}
 
 		$depreciation_list = array('' => 'Do Not Depreciate') + Depreciation::lists('name', 'id');
+		$manufacturer_list = array('' => 'Select One') + Manufacturer::lists('name', 'id');
 		$category_list = array('' => '') + DB::table('categories')->lists('name', 'id');
-		return View::make('backend/models/edit', compact('model'))->with('category_list',$category_list)->with('depreciation_list',$depreciation_list);
+		$view = View::make('backend/models/edit', compact('model'));
+		$view->with('category_list',$category_list);
+		$view->with('depreciation_list',$depreciation_list);
+		$view->with('manufacturer_list',$manufacturer_list);
+		return $view;
 	}
 
 
@@ -135,6 +148,7 @@ class ModelsController extends AdminController {
 			$model->name            = e(Input::get('name'));
 			$model->modelno            = e(Input::get('modelno'));
 			$model->depreciation_id    = e(Input::get('depreciation_id'));
+			$model->manufacturer_id    = e(Input::get('manufacturer_id'));
 			$model->category_id    = e(Input::get('category_id'));
 
 
@@ -183,9 +197,6 @@ class ModelsController extends AdminController {
 			// Redirect to the models management page
 			return Redirect::to('assets/models')->with('success', Lang::get('admin/models/message.delete.success'));
 		}
-
-
-
 	}
 
 
@@ -211,7 +222,6 @@ class ModelsController extends AdminController {
 
 
 	}
-
 
 
 }

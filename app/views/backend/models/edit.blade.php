@@ -50,6 +50,14 @@
 				</div>
 			</div>
 
+			<!-- Manufacturer -->
+			<div class="control-group {{ $errors->has('manufacturer_id') ? 'error' : '' }}">
+				<label class="control-label" for="parent">Manufacturer</label>
+				<div class="controls">
+					{{ Form::select('manufacturer_id', $manufacturer_list , Input::old('manufacturer_id', $model->manufacturer_id), array('class'=>'select2', 'style'=>'width:250px')) }}
+					{{ $errors->first('manufacturer_id', '<span class="help-inline">:message</span>') }}
+				</div>
+			</div>
 
 			<!-- Depreciation -->
 			<div class="control-group {{ $errors->has('depreciation_id') ? 'error' : '' }}">
