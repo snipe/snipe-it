@@ -39,7 +39,7 @@ class ModelsController extends AdminController {
 	{
 		// Show the page
 		$depreciation_list = array('' => 'Do Not Depreciate') + Depreciation::lists('name', 'id');
-		$manufacturer_list = array('' => 'N/A') + Manufacturer::lists('name', 'id');
+		$manufacturer_list = array('' => 'Select One') + Manufacturer::lists('name', 'id');
 		$category_list = array('' => '') + DB::table('categories')->lists('name', 'id');
 		$view = View::make('backend/models/edit');
 		$view->with('category_list',$category_list);
@@ -112,7 +112,7 @@ class ModelsController extends AdminController {
 		}
 
 		$depreciation_list = array('' => 'Do Not Depreciate') + Depreciation::lists('name', 'id');
-		$manufacturer_list = array('' => 'N/A') + Manufacturer::lists('name', 'id');
+		$manufacturer_list = array('' => 'Select One') + Manufacturer::lists('name', 'id');
 		$category_list = array('' => '') + DB::table('categories')->lists('name', 'id');
 		$view = View::make('backend/models/edit', compact('model'));
 		$view->with('category_list',$category_list);
@@ -197,9 +197,6 @@ class ModelsController extends AdminController {
 			// Redirect to the models management page
 			return Redirect::to('assets/models')->with('success', Lang::get('admin/models/message.delete.success'));
 		}
-
-
-
 	}
 
 
@@ -225,7 +222,6 @@ class ModelsController extends AdminController {
 
 
 	}
-
 
 
 }
