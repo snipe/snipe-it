@@ -105,6 +105,14 @@ View Asset {{ $asset->asset_tag }} ::
 
                     <h6><br>More Info:</h6>
                        		<ul>
+								@if ($asset->model->manufacturer)
+								<li>Manufacturer: {{ $asset->model->manufacturer->name }} </li>
+								<li>Model: {{ $asset->model->name }} / {{ $asset->model->modelno }}</li>
+								@endif
+
+								@if ($asset->purchase_date)
+								<li>Purchased On: {{ $asset->purchase_date }} </li>
+								@endif
 
 								@if ($asset->purchase_date)
 								<li>Purchased On: {{ $asset->purchase_date }} </li>

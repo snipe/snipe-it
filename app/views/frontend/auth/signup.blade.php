@@ -38,7 +38,7 @@ Account Sign up ::
 		<div class="control-group{{ $errors->first('email', ' error') }}">
 			<label class="control-label" for="email">Email</label>
 			<div class="controls">
-				<input type="text" name="email" id="email" value="{{ Input::old('email') }}" />
+				<input type="email" name="email" id="email" value="{{ Input::old('email') }}" />
 				{{ $errors->first('email', '<span class="help-block">:message</span>') }}
 			</div>
 		</div>
@@ -47,7 +47,7 @@ Account Sign up ::
 		<div class="control-group{{ $errors->first('email_confirm', ' error') }}">
 			<label class="control-label" for="email_confirm">Confirm Email</label>
 			<div class="controls">
-				<input type="text" name="email_confirm" id="email_confirm" value="{{ Input::old('email_confirm') }}" />
+				<input type="email" name="email_confirm" id="email_confirm" value="{{ Input::old('email_confirm') }}" />
 				{{ $errors->first('email_confirm', '<span class="help-block">:message</span>') }}
 			</div>
 		</div>

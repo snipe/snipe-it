@@ -63,6 +63,8 @@ class LocationsController extends AdminController {
 
 			// Save the location data
 			$location->name            	= e(Input::get('name'));
+			$location->address			= e(Input::get('address'));
+			$location->address2			= e(Input::get('address2'));
 			$location->city    			= e(Input::get('city'));
 			$location->state    		= e(Input::get('state'));
 			$location->country    		= e(Input::get('country'));
@@ -139,6 +141,8 @@ class LocationsController extends AdminController {
 
 			// Update the location data
 			$location->name            	= e(Input::get('name'));
+			$location->address			= e(Input::get('address'));
+			$location->address2			= e(Input::get('address2'));
 			$location->city    			= e(Input::get('city'));
 			$location->state    		= e(Input::get('state'));
 			$location->country    		= e(Input::get('country'));

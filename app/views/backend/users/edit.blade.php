@@ -84,7 +84,7 @@ Update User {{ $user->fullName() }} ::
 			<div class="control-group {{ $errors->has('email') ? 'error' : '' }}">
 				<label class="control-label" for="email">Email</label>
 				<div class="controls">
-					<input type="text" name="email" id="email" value="{{ Input::old('email', $user->email) }}" />
+					<input type="email" name="email" id="email" value="{{ Input::old('email', $user->email) }}" />
 					{{ $errors->first('email', '<span class="help-inline">:message</span>') }}
 				</div>
 			</div>
