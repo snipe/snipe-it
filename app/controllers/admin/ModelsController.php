@@ -117,7 +117,6 @@ class ModelsController extends AdminController {
 		$view->with('category_list',$category_list);
 		$view->with('depreciation_list',$depreciation_list);
 		$view->with('manufacturer_list',$manufacturer_list);
-		$view->with('model',new Model); 
 		return $view;
 	}
 
