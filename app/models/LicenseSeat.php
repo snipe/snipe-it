@@ -2,6 +2,7 @@
 
 class LicenseSeat extends Elegant {
 	protected $table = 'license_seats';
+	protected $softDelete = true;
 
 	public function license()
 	{
