@@ -16,6 +16,7 @@ class License extends Elegant {
 			'serial'   => 'required|alpha_dash|min:5',
 			'seats'   => 'required|min:1|integer',
 			'license_email'   => 'email',
+			'note'   => 'alpha_space',
 		);
 
 	public function assignedusers()

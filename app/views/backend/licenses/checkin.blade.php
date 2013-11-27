@@ -2,20 +2,21 @@
 
 {{-- Page title --}}
 @section('title')
-	Checkout License to User
+	Checkin License
 @parent
 @stop
 
 {{-- Page content --}}
 @section('content')
 <div class="page-header">
-	<h3>Checkout License to User</h3>
+	<h3>Checkin License</h3>
 
 		<div class="pull-right">
 			<a href="{{ route('assets') }}"  class="btn-flat gray"><i class="icon-circle-arrow-left icon-white"></i> Back</a>
 		</div>
 	</h3>
 </div>
+
 
 <form class="form-horizontal" method="post" action="" autocomplete="off">
 	<!-- CSRF Token -->
@@ -44,29 +45,22 @@
 				</div>
 			</div>
 
-			<!-- User -->
-			<div class="control-group {{ $errors->has('assigned_to') ? 'error' : '' }}">
-				<label class="control-label" for="parent">Checkout to</label>
-				<div class="controls">
-					{{ Form::select('assigned_to', $users_list , Input::old('assigned_to'), array('class'=>'select2', 'style'=>'min-width:350px')) }}
-					{{ $errors->first('user_id', '<span class="help-inline">:message</span>') }}
-				</div>
-			</div>
-
 			<!-- Notes -->
 			<div class="control-group {{ $errors->has('note') ? 'error' : '' }}">
 				<label class="control-label" for="note">Notes</label>
 				<div class="controls">
-					<input class="span6" type="text" name="note" id="note" value="{{ Input::old('notes', $licenseseat->note) }}" />
+					<input class="span6" type="text" name="note" id="note" value="{{ Input::old('note', $licenseseat->note) }}" />
 					{{ $errors->first('note', '<span class="help-inline"><i class="icon-remove-sign"></i> :message</span>') }}
 				</div>
 			</div>
+
+
 
 			<!-- Form actions -->
 			<div class="control-group">
 				<div class="controls">
 					<a class="btn btn-link" href="{{ route('licenses') }}">@lang('general.cancel')</a>
-					<button type="submit" class="btn-flat success">@lang('general.checkout')</button>
+					<button type="submit" class="btn-flat success">@lang('general.checkin')</button>
 				</div>
 			</div>
 </form>

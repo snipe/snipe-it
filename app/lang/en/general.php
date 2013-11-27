@@ -7,6 +7,7 @@ return array(
 	'currency'  => '$',
 	'save'  => 'Save',
 	'checkout'  => 'Checkout',
+	'checkin'  => 'Checkin',
 	'cancel'  => 'Cancel'
 
 );

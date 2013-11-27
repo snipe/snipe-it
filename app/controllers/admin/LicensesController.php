@@ -258,7 +258,8 @@ class LicensesController extends AdminController {
 
 		// Declare the rules for the form validation
 		$rules = array(
-			'assigned_to'   => 'required|integer|min:1'
+			'assigned_to'   => 'required|integer|min:1',
+			'note'   => 'alpha_space',
 		);
 
 		// Create a new validator instance from our validation rules
@@ -293,6 +294,7 @@ class LicensesController extends AdminController {
 			$logaction->location_id = $assigned_to->location_id;
 			$logaction->asset_type = 'software';
 			$logaction->user_id = Sentry::getUser()->id;
+			$logaction->note = e(Input::get('note'));
 			$log = $logaction->logaction('checkout');
 
 			// Redirect to the new asset page
@@ -302,6 +304,24 @@ class LicensesController extends AdminController {
 		// Redirect to the asset management page with error
 		return Redirect::to('admin/licenses/$assetId/checkout')->with('error', Lang::get('admin/licenses/message.create.error'))->with('license',new License);
 	}
+
+
+	/**
+	* Check the license back into inventory
+	**/
+	public function getCheckin($seatId)
+	{
+		// Check if the asset exists
+		if (is_null($licenseseat = LicenseSeat::find($seatId)))
+		{
+			// Redirect to the asset management page with error
+			return Redirect::to('admin/licenses')->with('error', Lang::get('admin/licenses/message.not_found'));
+		}
+		return View::make('backend/licenses/checkin', compact('licenseseat'));
+
+	}
+
+
 
 	/**
 	* Check in the item so that it can be checked out again to someone else
@@ -315,11 +335,26 @@ class LicensesController extends AdminController {
 			return Redirect::to('admin/licenses')->with('error', Lang::get('admin/licenses/message.not_found'));
 		}
 
+		// Declare the rules for the form validation
+		$rules = array(
+			'note'   => 'alpha_space',
+		);
+
+		// Create a new validator instance from our validation rules
+		$validator = Validator::make(Input::all(), $rules);
+
+		// If validation fails, we'll exit the operation now.
+		if ($validator->fails())
+		{
+			// Ooops.. something went wrong
+			return Redirect::back()->withInput()->withErrors($validator);
+		}
+
 		$logaction = new Actionlog();
 		$logaction->checkedout_to = $licenseseat->assigned_to;
 
 		// Update the asset data
-		$licenseseat->assigned_to            		= '';
+		$licenseseat->assigned_to            		= '0';
 
 		// Was the asset updated?
 		if($licenseseat->save())
@@ -327,14 +362,15 @@ class LicensesController extends AdminController {
 			$logaction->asset_id = $licenseseat->id;
 			$logaction->location_id = NULL;
 			$logaction->asset_type = 'software';
+			$logaction->note = e(Input::get('note'));
 			$logaction->user_id = Sentry::getUser()->id;
 			$log = $logaction->logaction('checkin from');
 
-			// Redirect to the new asset page
+			// Redirect to the license page
 			return Redirect::to("admin/licenses")->with('success', Lang::get('admin/licenses/message.checkin.success'));
 		}
 
-		// Redirect to the asset management page with error
+		// Redirect to the license page with error
 		return Redirect::to("admin/licenses")->with('error', Lang::get('admin/licenses/message.checkin.error'));
 	}
 
@@ -357,10 +393,7 @@ class LicensesController extends AdminController {
 			// Redirect to the user management page
 			return Redirect::route('licenses')->with('error', $error);
 		}
-
-
 	}
-
 
 
 }
