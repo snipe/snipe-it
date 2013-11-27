@@ -66,7 +66,7 @@ Assets ::
 			<th class="span2" bSortable="true">Status</th>
 			@else
 			<th class="span2" bSortable="true">@lang('admin/assets/table.checkoutto')</th>
-			<th class="span2" bSortable="true">@lang('admin/assets/table.location')</th>
+			<th class="span2" bSortable="true">@lang('admin/assets/table.status')</th>
 			@endif
 
 			<th class="span1">@lang('admin/assets/table.change')</th>
