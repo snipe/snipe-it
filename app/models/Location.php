@@ -7,10 +7,12 @@ class Location extends Elegant {
 	protected $table = 'locations';
 	protected $rules = array(
 			'name'  		=> 'required|alpha_space|min:3',
+			'address'		=> 'required|alpha_space|min:5',
+			'address2'		=> 'optional|alpha_space|min:5',
 			'city'   		=> 'required|alpha_space|min:3',
 			'state'   		=> 'required|alpha|min:2|max:2',
 			'country'   	=> 'required|alpha|min:2|max:2',
-			'zip'   => 'alpha_dash|min:5',
+			'zip'   		=> 'alpha_dash|min:5',
 		);
 
 	public function has_users()
