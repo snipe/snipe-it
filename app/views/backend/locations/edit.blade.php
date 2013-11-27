@@ -45,6 +45,20 @@
 					{{ $errors->first('name', '<span class="help-inline">:message</span>') }}
 				</div>
 			</div>
+			<div class="control-group {{ $errors->has('address') ? 'error' : '' }}">
+				<label class="control-label" for="address">Street Address 1</label>
+				<div class="controls">
+					<input class="span4" type="text" name="address" id="address" value="{{ Input::old('address', $location->address) }}" />
+					{{ $errors->first('address', '<span class="help-inline">:message</span>') }}
+				</div>
+			</div>
+			<div class="control-group {{ $errors->has('address2') ? 'error' : '' }}">
+				<label class="control-label" for="address2">Street Address 2</label>
+				<div class="controls">
+					<input class="span4" type="text" name="address2" id="address2" value="{{ Input::old('address2', $location->address2) }}" />
+					{{ $errors->first('address2', '<span class="help-inline">:message</span>') }}
+				</div>
+			</div>
 			<div class="control-group {{ $errors->has('city') ? 'error' : '' }}">
 				<label class="control-label" for="name">City</label>
 				<div class="controls">
