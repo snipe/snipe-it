@@ -25,6 +25,7 @@ View Asset {{ $asset->asset_tag }} ::
 										<li><a href="{{ route('checkout/asset', $asset->id) }}" class="btn-flat success">Checkout</a></li>
 									@endif
                                     <li><a href="{{ route('update/asset', $asset->id) }}">Edit Asset</a></li>
+                                    <li><a href="{{ route('clone/asset', $asset->id) }}">Clone Asset</a></li>
                                 </ul>
                             </div>
 				</h3>
@@ -110,7 +111,7 @@ View Asset {{ $asset->asset_tag }} ::
 								@endif
 
 								@if ($asset->purchase_cost)
-								<li>Purchase Cost: ${{ number_format($asset->purchase_cost) }} </li>
+								<li>Purchase Cost: ${{ number_format($asset->purchase_cost,2) }} </li>
 								@endif
 								@if ($asset->order_number)
 								<li>Order #: {{ $asset->order_number }} </li>
@@ -166,8 +167,6 @@ View Asset {{ $asset->asset_tag }} ::
 
 						@else
 							<ul>
-								<li><br><br />This asset is not currently assigned to anyone. You may check it into inventory
-								using the button below.</li>
 								<li><br><br /><a href="{{ route('checkout/asset', $asset->id) }}" class="btn-flat large success">Checkout Asset</a></li>
 							</ul>
                         @endif

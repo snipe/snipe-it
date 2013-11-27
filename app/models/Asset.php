@@ -9,8 +9,9 @@ class Asset extends Elegant {
 		'asset_tag'   => 'required|alpha_space|min:3|unique:assets',
 		'model_id'   => 'required',
 		'serial'   => 'required|alpha_dash|min:3',
-		'warranty_months'   => 'integer|min:1',
+		'warranty_months'   => 'integer',
 		'note'   => 'alpha_space',
+		'notes'   => 'alpha_space',
     );
 
 

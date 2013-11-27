@@ -108,19 +108,42 @@ class AssetsController extends AdminController {
 		if ($asset->validate($new))
 		{
 
+			if ( e(Input::get('status_id')) == '') {
+				$asset->status_id =  NULL;
+			} else {
+				$asset->status_id = e(Input::get('status_id'));
+			}
+
+			if (e(Input::get('warranty_months')) == '') {
+				$asset->warranty_months =  NULL;
+			} else {
+				$asset->warranty_months        = e(Input::get('warranty_months'));
+			}
+
+			if (e(Input::get('purchase_cost')) == '') {
+				$asset->purchase_cost =  NULL;
+			} else {
+				$asset->purchase_cost        = e(Input::get('purchase_cost'));
+			}
+
+			if (e(Input::get('purchase_date')) == '') {
+				$asset->purchase_date =  NULL;
+			} else {
+				$asset->purchase_date        = e(Input::get('purchase_date'));
+			}
+
 			// Save the asset data
 			$asset->name            		= e(Input::get('name'));
 			$asset->serial            		= e(Input::get('serial'));
 			$asset->model_id           		= e(Input::get('model_id'));
-			$asset->purchase_date           = e(Input::get('purchase_date'));
-			$asset->purchase_cost           = e(Input::get('purchase_cost'));
 			$asset->order_number            = e(Input::get('order_number'));
 			$asset->notes            		= e(Input::get('notes'));
 			$asset->asset_tag            	= e(Input::get('asset_tag'));
-			$asset->status_id            	= e(Input::get('status_id'));
-			$asset->warranty_months        = e(Input::get('warranty_months'));
 			$asset->user_id          		= Sentry::getId();
+			$asset->assigned_to          		= '0';
+			$asset->archived          			= '0';
 			$asset->physical            		= '1';
+			$asset->depreciate          		= '0';
 
 
 			// Was the asset created?
@@ -193,7 +216,8 @@ class AssetsController extends AdminController {
 		'asset_tag'   => 'required|alpha_dash|min:3',
 		'model_id'   => 'required',
 		'serial'   => 'required|alpha_space|min:3',
-		'warranty_months'   => 'required|integer',
+		'warranty_months'   => 'integer',
+		'notes'   => 'alpha_space',
     	);
 
 		// Create a new validator instance from our validation rules
@@ -206,17 +230,37 @@ class AssetsController extends AdminController {
 			return Redirect::back()->withInput()->withErrors($validator);
 		}
 
+			if ( e(Input::get('status_id')) == '') {
+				$asset->status_id =  NULL;
+			} else {
+				$asset->status_id = e(Input::get('status_id'));
+			}
+
+			if (e(Input::get('warranty_months')) == '') {
+				$asset->warranty_months =  NULL;
+			} else {
+				$asset->warranty_months        = e(Input::get('warranty_months'));
+			}
+
+			if (e(Input::get('purchase_cost')) == '') {
+				$asset->purchase_cost =  NULL;
+			} else {
+				$asset->purchase_cost        = e(Input::get('purchase_cost'));
+			}
+
+			if (e(Input::get('purchase_date')) == '') {
+				$asset->purchase_date =  NULL;
+			} else {
+				$asset->purchase_date        = e(Input::get('purchase_date'));
+			}
+
 
 			// Update the asset data
 			$asset->name            		= e(Input::get('name'));
 			$asset->serial            		= e(Input::get('serial'));
 			$asset->model_id           		= e(Input::get('model_id'));
-			$asset->purchase_date           = e(Input::get('purchase_date'));
-			$asset->purchase_cost           = e(Input::get('purchase_cost'));
 			$asset->order_number            = e(Input::get('order_number'));
 			$asset->asset_tag           	= e(Input::get('asset_tag'));
-			$asset->status_id            	= e(Input::get('status_id'));
-			$asset->warranty_months        = e(Input::get('warranty_months'));
 			$asset->notes            		= e(Input::get('notes'));
 			$asset->physical            		= '1';
 
@@ -432,6 +476,32 @@ class AssetsController extends AdminController {
 
 	}
 
+	/**
+	 * Asset update.
+	 *
+	 * @param  int  $assetId
+	 * @return View
+	 */
+	public function getClone($assetId = null)
+	{
+		// Check if the asset exists
+		if (is_null($asset = Asset::find($assetId)))
+		{
+			// Redirect to the asset management page
+			return Redirect::to('admin')->with('error', Lang::get('admin/assets/message.does_not_exist'));
+		}
+
+		// Grab the dropdown list of models
+		$model_list = array('' => '') + Model::lists('name', 'id');
+
+		// Grab the dropdown list of status
+		$statuslabel_list = array('' => 'Pending') + array('1' => 'Ready to Deploy') + Statuslabel::lists('name', 'id');
+
+		// get depreciation list
+		$depreciation_list = array('' => '') + Depreciation::lists('name', 'id');
+
+		return View::make('backend/assets/clone', compact('asset'))->with('model_list',$model_list)->with('depreciation_list',$depreciation_list)->with('statuslabel_list',$statuslabel_list);
+	}
 
 
 }
