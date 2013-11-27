@@ -22,8 +22,8 @@ Locations ::
 <table id="example">
 	<thead>
 		<tr role="row">
-			<th class="span4">@lang('admin/locations/table.name')</th>
-			<th class="span2">Address</th>
+			<th class="span3">@lang('admin/locations/table.name')</th>
+			<th class="span3">Address</th>
 			<th class="span2">@lang('admin/locations/table.city'),
 			 @lang('admin/locations/table.state')
 			@lang('admin/locations/table.country')</th>
