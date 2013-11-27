@@ -163,7 +163,7 @@ View License {{ $license->name }} ::
 								<li>Purchase Date: {{ $license->purchase_date }} </li>
 								@endif
 								@if ($license->purchase_cost)
-								<li>Purchase Cost: ${{ number_format($license->purchase_cost) }} </li>
+								<li>Purchase Cost: ${{ number_format($license->purchase_cost,2) }} </li>
 								@endif
 								@if ($license->order_number)
 								<li>Order #: {{ $license->order_number }} </li>
