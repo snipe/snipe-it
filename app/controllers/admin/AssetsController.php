@@ -276,7 +276,7 @@ class AssetsController extends AdminController {
 		}
 
 		// Get the dropdown of users and then pass it to the checkout view
-		$users_list = array('' => 'Select a User') + DB::table('users')->select(DB::raw('concat (first_name," ",last_name) as full_name, id'))->lists('full_name', 'id');
+		$users_list = array('' => 'Select a User') + DB::table('users')->select(DB::raw('concat(first_name," ",last_name) as full_name, id'))->lists('full_name', 'id');
 
 
 
