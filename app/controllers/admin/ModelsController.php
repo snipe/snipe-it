@@ -72,6 +72,7 @@ class ModelsController extends AdminController {
 			$model->name            = e(Input::get('name'));
 			$model->modelno            = e(Input::get('modelno'));
 			$model->depreciation_id    = e(Input::get('depreciation_id'));
+			$model->manufacturer_id    = e(Input::get('manufacturer_id'));
 			$model->category_id    = e(Input::get('category_id'));
 			$model->user_id          = Sentry::getId();
 
@@ -106,7 +107,7 @@ class ModelsController extends AdminController {
 		// Check if the model exists
 		if (is_null($model = Model::find($modelId)))
 		{
-			// Redirect to the blogs management page
+			// Redirect to the model management page
 			return Redirect::to('assets/models')->with('error', Lang::get('admin/models/message.does_not_exist'));
 		}
 
@@ -147,6 +148,7 @@ class ModelsController extends AdminController {
 			$model->name            = e(Input::get('name'));
 			$model->modelno            = e(Input::get('modelno'));
 			$model->depreciation_id    = e(Input::get('depreciation_id'));
+			$model->manufacturer_id    = e(Input::get('manufacturer_id'));
 			$model->category_id    = e(Input::get('category_id'));
 
 
