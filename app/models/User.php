@@ -33,7 +33,7 @@ class User extends SentryUserModel {
 		$gravatar = md5(strtolower(trim($this->gravatar)));
 
 		// Return the Gravatar url
-		return "//gravatar.org/avatar/{$gravatar}";
+		return "//gravatar.com/avatar/{$gravatar}";
 	}
 
 	public function assets()
