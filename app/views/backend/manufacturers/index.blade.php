@@ -23,8 +23,8 @@ Asset Manufacturers ::
 <table id="example">
 	<thead>
 		<tr role="row">
-			<th class="span10">@lang('admin/manufacturers/table.title')</th>
-			<th class="span2">@lang('table.actions')</th>
+			<th class="span6">@lang('admin/manufacturers/table.title')</th>
+			<th class="span3">@lang('table.actions')</th>
 		</tr>
 	</thead>
 	<tbody>
