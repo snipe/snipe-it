@@ -17,7 +17,7 @@
 	Checkin Asset
 
 		<div class="pull-right">
-			<a href="{{ route('assets') }}" class="btn-flat gray"><i class="icon-circle-arrow-left icon-white"></i> Back</a>
+			<a href="{{ route('hardware') }}" class="btn-flat gray"><i class="icon-circle-arrow-left icon-white"></i> Back</a>
 		</div>
 	</h3>
 </div>
@@ -55,7 +55,7 @@
 			<!-- Form actions -->
 			<div class="control-group">
 				<div class="controls">
-					<a class="btn btn-link" href="{{ route('assets') }}">@lang('general.cancel')</a>
+					<a class="btn btn-link" href="{{ route('hardware') }}">@lang('general.cancel')</a>
 					<button type="submit" class="btn-flat success"><i class="icon-ok icon-white"></i>@lang('general.checkin')</button>
 				</div>
 			</div>

@@ -7,7 +7,7 @@ class ActionLog extends Eloquent {
 
 
 	public function assetlog() {
-		return $this->belongsTo('Asset','asset_id');
+		return $this->belongsTo('Asset','asset_id')->withTrashed();
 	}
 
 	public function licenselog() {
@@ -19,7 +19,7 @@ class ActionLog extends Eloquent {
 	}
 
 	public function userlog() {
-		return $this->belongsTo('User','checkedout_to');
+		return $this->belongsTo('User','checkedout_to')->withTrashed();
 	}
 
 

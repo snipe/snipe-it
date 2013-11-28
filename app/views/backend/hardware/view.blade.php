@@ -19,15 +19,15 @@ View Asset {{ $asset->asset_tag }} ::
                                 </button>
                                 <ul class="dropdown-menu">
 
-                                	@if ($asset->assigned_to != 0)
-										<li><a href="{{ route('checkin/asset', $asset->id) }}" class="btn-flat info">Checkin</a></li>
-									@else
-										@if ($asset->status_id > 0)
-										<li><a href="{{ route('checkout/asset', $asset->id) }}" class="btn-flat success">Checkout</a></li>
+									@if ($asset->status_id == 1)
+										@if ($asset->assigned_to != 0)
+											<li><a href="{{ route('checkin/hardware', $asset->id) }}" class="btn-flat info">Checkin</a></li>
 										@endif
+									@elseif ($asset->status_id == 0)
+											<li><a href="{{ route('checkout/hardware', $asset->id) }}" class="btn-flat success">Checkout</a></li>
 									@endif
-                                    <li><a href="{{ route('update/asset', $asset->id) }}">Edit Asset</a></li>
-                                    <li><a href="{{ route('clone/asset', $asset->id) }}">Clone Asset</a></li>
+                                   	<li><a href="{{ route('update/hardware', $asset->id) }}">Edit Asset</a></li>
+                                    <li><a href="{{ route('clone/hardware', $asset->id) }}">Clone Asset</a></li>
                                 </ul>
                             </div>
 				</h3>
@@ -170,10 +170,10 @@ View Asset {{ $asset->asset_tag }} ::
 									<li><i class="icon-phone"></i> {{ $asset->assigneduser->phone }}</li>
 								@endif
 
-								<li><br /><a href="{{ route('checkin/asset', $asset->id) }}" class="btn-flat large info ">Checkin Asset</a></li>
+								<li><br /><a href="{{ route('checkin/hardware', $asset->id) }}" class="btn-flat large info ">Checkin Asset</a></li>
 								</ul>
 
-						@elseif (($asset->status_id ) && ($asset->status_id > 0))
+						@elseif (($asset->status_id ) && ($asset->status_id > 1))
 
 							@if ($asset->assetstatus)
 								<h6><br>{{ $asset->assetstatus->name }} Asset</h6>
@@ -181,16 +181,13 @@ View Asset {{ $asset->asset_tag }} ::
 								<div class="col-md-6">
 								<div class="alert alert-warning alert-block">
 									<i class="icon-warning-sign"></i>
-									<strong>Warning: </strong> This asset has been marked {{ $asset->assetstatus->name }} and is currently undeployable.
+									<strong>Warning: </strong> This asset has been marked <strong>{{ $asset->assetstatus->name }}</strong> and is currently undeployable.
 									If this status has changed, please update the asset status.
-
 								</div>
 							</div>
 							@endif
 
 						@elseif ($asset->status_id == NULL)
-
-
 								<h6><br>Pending Asset</h6>
 								<div class="col-md-6">
 								<div class="alert alert-info alert-block">
@@ -200,12 +197,11 @@ View Asset {{ $asset->asset_tag }} ::
 								</div>
 							</div>
 
-
 						@else
 						<h6><br>Checkout Asset</h6>
 							<ul>
 								<li>This asset is not checked out to anyone yet. Use the button below to check it out now.</li>
-								<li><br><br /><a href="{{ route('checkout/asset', $asset->id) }}" class="btn-flat large success">Checkout Asset</a></li>
+								<li><br><br /><a href="{{ route('checkout/hardware', $asset->id) }}" class="btn-flat large success">Checkout Asset</a></li>
 							</ul>
                         @endif
                     </div>

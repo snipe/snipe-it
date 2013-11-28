@@ -86,6 +86,37 @@
                 <!-- <li class="hidden-phone">
                     <input class="search" type="text" />
                 </li> -->
+				<!--
+				<li class="notification-dropdown hidden-phone">
+                    <a href="#" class="trigger">
+                        <i class="icon-warning-sign"></i>
+                        <span class="count">8</span>
+                    </a>
+                    <div class="pop-dialog">
+                        <div class="pointer right">
+                            <div class="arrow"></div>
+                            <div class="arrow_border"></div>
+                        </div>
+                        <div class="body">
+                            <a href="#" class="close-icon"><i class="icon-remove-sign"></i></a>
+                            <div class="notifications">
+                                <h3>You have 2 new notifications</h3>
+                                <a href="#" class="item">
+                                    <i class="icon-signin"></i> (these are placeholder)
+                                    <span class="time"><i class="icon-time"></i> 13 min.</span>
+                                </a>
+                                <a href="#" class="item">
+                                    <i class="icon-signin"></i> Warranty expiring!
+                                    <span class="time"><i class="icon-time"></i> 18 min.</span>
+                                </a>
+                                <div class="footer">
+                                    <a href="#" class="logout">View all notifications</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </li> -->
+
 
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle hidden-phone" data-toggle="dropdown">
@@ -114,7 +145,7 @@
 						</li>
                     </ul>
                 </li>
-                <li class="dropdown{{ (Request::is('admin/users*|admin/groups*') ? ' active' : '') }}">
+                <li class="dropdown{{ (Request::is('admin/users*|admin/groups*') ? ' active' : '') }}  hidden-phone">
 					<a class="dropdown-toggle" data-toggle="dropdown" href="{{ URL::to('admin/users') }}">
 						<i class="icon-wrench icon-white"></i> Admin <span class="caret"></span>
 					</a>
@@ -165,19 +196,24 @@
     <div id="sidebar-nav">
         <ul id="dashboard-menu">
 
-
-            <li{{ (Request::is('admin') ? ' class="active"><div class="pointer"><div class="arrow"></div><div class="arrow_border"></div></div>' : '>') }}
-                <a href="{{ URL::to('admin') }}">
+            <li{{ (Request::is('hardware') ? ' class="active"><div class="pointer"><div class="arrow"></div><div class="arrow_border"></div></div>' : '>') }}
+                <a href="#" class="dropdown-toggle">
                     <i class="icon-barcode"></i>
                     <span>Assets</span>
+                    <i class="icon-chevron-down"></i>
                 </a>
+
+                <ul class="submenu{{ (Request::is('hardware*') ? ' active' : '') }}">
+                    <li><a href="{{ URL::to('hardware?Deployed=true') }}" {{ (Request::query('Deployed') ? ' class="active"' : '') }} >Deployed</a></li>
+                    <li><a href="{{ URL::to('hardware?RTD=true') }}" {{ (Request::query('RTD') ? ' class="active"' : '') }} >Ready to Deploy</a></li>
+                    <li><a href="{{ URL::to('hardware?Pending=true') }}" {{ (Request::query('Pending') ? ' class="active"' : '') }} >Pending</a></li>
+                    <li><a href="{{ URL::to('hardware?Undeployable=true') }}" {{ (Request::query('Undeployable') ? ' class="active"' : '') }} >Un-Deployable</a></li>
+                    <li><a href="{{ URL::to('hardware') }}">List All</a></li>
+                    <li><a href="{{ URL::to('hardware/models') }}" {{ (Request::is('hardware/models*') ? ' class="active"' : '') }} >Asset Models</a></li>
+
+                </ul>
             </li>
-            <li{{ (Request::is('assets/models*') ? ' class="active"><div class="pointer"><div class="arrow"></div><div class="arrow_border"></div></div>' : '>') }}
-                <a href="{{ URL::to('assets/models') }}">
-                    <i class="icon-th-list"></i>
-                    <span>Models</span>
-                </a>
-            </li>
+
             <li{{ (Request::is('admin/licenses*') ? ' class="active"><div class="pointer"><div class="arrow"></div><div class="arrow_border"></div></div>' : '>') }}
             	<a href="{{ URL::to('admin/licenses') }}">
             		<i class="icon-certificate"></i>
@@ -292,6 +328,7 @@
     <script src="{{ asset('assets/js/jquery.uniform.min.js') }}"></script>
     <script src="{{ asset('assets/js/bootstrap.datepicker.js') }}"></script>
     <script src="{{ asset('assets/js/jquery.dataTables.js') }}"></script>
+    <script src="{{ asset('assets/js/theme.js') }}"></script>
 
     <script type="text/javascript">
         $(function () {

@@ -2,7 +2,11 @@
 
 {{-- Page title --}}
 @section('title')
-	Clone Asset
+	@if ($asset->id)
+	Asset Update ::
+	@else
+	Create Asset ::
+	@endif
 @parent
 @stop
 
@@ -10,10 +14,19 @@
 @section('content')
 <div class="page-header">
 	<h3>
-	Clone Asset
+	@if ($asset->id)
+	Asset Update
+	@else
+	Create Asset
+	@endif
 
 		<div class="pull-right">
-			<a href="{{ route('assets') }}" class="btn-flat gray"><i class="icon-circle-arrow-left icon-white"></i> Back</a>
+			@if ($asset->id)
+			<a href="{{ route('view/hardware',$asset->id) }}" class="btn-flat gray"><i class="icon-circle-arrow-left icon-white"></i> Back</a>
+			@else
+			<a href="{{ route('hardware') }}" class="btn-flat gray"><i class="icon-circle-arrow-left icon-white"></i> Back</a>
+			@endif
+
 		</div>
 	</h3>
 </div>
@@ -34,7 +47,7 @@
 			<div class="control-group {{ $errors->has('asset_tag') ? 'error' : '' }}">
 				<label class="control-label" for="asset_tag">Asset Tag</label>
 				<div class="controls">
-					<input class="span4" type="text" name="asset_tag" id="asset_tag" value="{{ Input::old('asset_tag') }}" />
+					<input class="span4" type="text" name="asset_tag" id="asset_tag" value="{{ Input::old('asset_tag', $asset->asset_tag) }}" />
 					{{ $errors->first('asset_tag', '<span class="help-inline"><i class="icon-remove-sign"></i> :message</span>') }}
 				</div>
 			</div>
@@ -146,7 +159,12 @@
 	<!-- Form actions -->
 	<div class="control-group">
 		<div class="controls">
-			<a class="btn btn-link" href="{{ route('assets') }}">Cancel</a>
+			@if ($asset->id)
+			<a class="btn btn-link" href="{{ route('view/hardware', $asset->id) }}">Cancel</a>
+			@else
+			<a class="btn btn-link" href="{{ route('hardware') }}">Cancel</a>
+			@endif
+
 			<button type="submit" class="btn-flat success"><i class="icon-ok icon-white"></i> Save</button>
 		</div>
 	</div>

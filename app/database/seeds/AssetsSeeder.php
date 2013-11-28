@@ -266,6 +266,31 @@ class AssetsSeeder extends Seeder {
 			'depreciate' 	=> '0',
 		);
 
+		// Almost out of warranty example
+		$asset[] = array(
+			'name'      	=> 'Noah MBP',
+			'asset_tag'     => 'NNY98056775',
+			'model_id'      => 2,
+			'serial'      	=> 'WS909098888',
+			'purchase_date' => '2011-12-20',
+			'purchase_cost' => '699.99',
+			'order_number'  => '657756',
+			'created_at' 	=> $date->modify('-10 day'),
+			'updated_at' 	=> $date->modify('-3 day'),
+			'user_id' 		=> 2,
+			'assigned_to' 	=> 0,
+			'physical' 		=> 1,
+			'archived' 		=> 0,
+			'status_id'	=> 0,
+			'notes'			=> '',
+			'deleted_at' 	=> NULL,
+			'archived' 	=> '0',
+			'warranty_months' 	=> '24',
+			'depreciate' 	=> '0',
+		);
+
+
+
 		// Delete all the old data
 		DB::table('assets')->truncate();
 

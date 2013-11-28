@@ -66,7 +66,7 @@ class Asset extends Elegant {
 	*/
 	public function assetlog()
 	{
-		return $this->hasMany('Actionlog','asset_id')->where('asset_type','=','hardware')->orderBy('added_on', 'desc');
+		return $this->hasMany('Actionlog','asset_id')->where('asset_type','=','hardware')->orderBy('added_on', 'desc')->withTrashed();
 	}
 
 	/**

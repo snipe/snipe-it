@@ -38,13 +38,13 @@ class User extends SentryUserModel {
 
 	public function assets()
 	{
-		return $this->hasMany('Asset', 'assigned_to');
+		return $this->hasMany('Asset', 'assigned_to')->withTrashed();
 	}
 
 
 	public function licenses()
 	{
-		return $this->belongsToMany('License', 'license_seats', 'assigned_to', 'license_id');
+		return $this->belongsToMany('License', 'license_seats', 'assigned_to', 'license_id')->withTrashed();
 	}
 
 
@@ -53,7 +53,7 @@ class User extends SentryUserModel {
 	*/
 	public function userlog()
 	{
-		return $this->hasMany('Actionlog','checkedout_to');
+		return $this->hasMany('Actionlog','checkedout_to')->withTrashed();
 	}
 
 
@@ -62,7 +62,7 @@ class User extends SentryUserModel {
 	**/
   	public function userloc()
   	{
-  		return $this->hasOne('Location','id');
+  		return $this->hasOne('Location','id')->withTrashed();
   	}
 
 }
