@@ -59,13 +59,19 @@ Forgetting to do this can mean your DB might end up out of sync with the new fil
 
 ### 3) Setup Database
 
-Create a database and update the file `app/config/database.php` with your database name and credentials.
+Copy the file `app/config/database.php` to `database.php`, and update `database.php` with your database name and credentials
+
+	cp app/config/database.example.php app/config/database.php
+    vi app/config/database.example.php
 
 -----
 
 ### 4) Setup Mail Settings
 
-Now, you need to setup your mail settings by just opening and updating the following file `app/config/mail.php`.
+Now, copy the file `app/config/mail.php` to `mail.php`, and update `mail.php` with your mail settings
+
+	cp app/config/mail.example.php app/config/mail.php
+    vi app/config/mail.example.php
 
 This will be used to send emails to your users, when they register and they request a password reset.
 
