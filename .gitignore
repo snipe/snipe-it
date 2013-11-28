@@ -2,7 +2,9 @@
 /vendor
 composer.phar
 .DS_Store
-
+/app/config/database.php
+/app/config/mail.php
+/app/database/*.sqlite
 /app/storage/logs/log-apache2handler-2013-11-13.txt
 /app/storage/logs/log-apache2handler-2013-11-15.txt
 /app/storage/logs/log-apache2handler-2013-11-16.txt
