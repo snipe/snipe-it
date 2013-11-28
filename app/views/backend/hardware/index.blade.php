@@ -41,12 +41,7 @@ Assets ::
 				Assets
 
 		<div class="pull-right">
-			<a class="btn-flat white" href="{{ URL::to('admin?Deployed=true') }}">Deployed</a>
-			<a class="btn-flat white" href="{{ URL::to('admin?RTD=true') }}">Ready to Deploy</a>
-			<a class="btn-flat white" href="{{ URL::to('admin?Pending=true') }}">Pending</a>
-			<a class="btn-flat white" href="{{ URL::to('admin?Undeployable=true') }}">Un-Deployable</a>
-			<a class="btn-flat white" href="{{ URL::to('admin') }}">Show All</a>
-			<a href="{{ route('create/asset') }}" class="btn-flat success"><i class="icon-plus-sign icon-white"></i> Create New</a>
+			<a href="{{ route('create/hardware') }}" class="btn-flat success"><i class="icon-plus-sign icon-white"></i> Create New</a>
 
 		</div>
 	</h3>
@@ -59,17 +54,17 @@ Assets ::
 <table id="example">
 	<thead>
 		<tr role="row">
-			<th class="span2" bSortable="true">@lang('admin/assets/table.asset_tag')</th>
-			<th class="span2" bSortable="true"><span class="line"></span>@lang('admin/assets/table.title')</th>
-			<th class="span2" bSortable="true"><span class="line"></span>@lang('admin/assets/table.serial')</th>
+			<th class="span2" bSortable="true">@lang('admin/hardware/table.asset_tag')</th>
+			<th class="span2" bSortable="true"><span class="line"></span>@lang('admin/hardware/table.title')</th>
+			<th class="span2" bSortable="true"><span class="line"></span>@lang('admin/hardware/table.serial')</th>
 			@if (Input::get('Pending') || Input::get('Undeployable') || Input::get('RTD'))
 			<th class="span2" bSortable="true">Status</th>
 			@else
-			<th class="span2" bSortable="true">@lang('admin/assets/table.checkoutto')</th>
-			<th class="span2" bSortable="true">@lang('admin/assets/table.location')</th>
+			<th class="span2" bSortable="true">@lang('admin/hardware/table.checkoutto')</th>
+			<th class="span2" bSortable="true">@lang('admin/hardware/table.location')</th>
 			@endif
 
-			<th class="span1">@lang('admin/assets/table.change')</th>
+			<th class="span1">@lang('admin/hardware/table.change')</th>
 			<th class="span2" bSortable="false">@lang('table.actions')</th>
 		</tr>
 	</thead>
@@ -77,8 +72,8 @@ Assets ::
 
 		@foreach ($assets as $asset)
 		<tr>
-			<td><a href="{{ route('view/asset', $asset->id) }}">{{ $asset->asset_tag }}</a></td>
-			<td><a href="{{ route('view/asset', $asset->id) }}">{{ $asset->name }}</a></td>
+			<td><a href="{{ route('view/hardware', $asset->id) }}">{{ $asset->asset_tag }}</a></td>
+			<td><a href="{{ route('view/hardware', $asset->id) }}">{{ $asset->name }}</a></td>
 			<td>{{ $asset->serial }}</td>
 			@if (Input::get('Pending') || Input::get('Undeployable') || Input::get('RTD'))
 				<td>
@@ -115,14 +110,14 @@ Assets ::
 
 			<td>
 			@if ($asset->assigned_to != 0)
-				<a href="{{ route('checkin/asset', $asset->id) }}" class="btn-flat info">Checkin</a>
+				<a href="{{ route('checkin/hardware', $asset->id) }}" class="btn-flat info">Checkin</a>
 			@else
-				<a href="{{ route('checkout/asset', $asset->id) }}" class="btn-flat success">Checkout</a>
+				<a href="{{ route('checkout/hardware', $asset->id) }}" class="btn-flat success">Checkout</a>
 			@endif
 			</td>
 			<td nowrap="nowrap">
-				<a href="{{ route('update/asset', $asset->id) }}" class="btn-flat white">@lang('button.edit')</a>
-				<a data-html="false" class="btn-flat danger delete-asset" data-toggle="modal" href="{{ route('delete/asset', $asset->id) }}" data-content="Are you sure you wish to delete this asset?" data-title="Delete {{ htmlspecialchars($asset->asset_tag) }}?" onClick="return false;">@lang('button.delete')</a>
+				<a href="{{ route('update/hardware', $asset->id) }}" class="btn-flat white">@lang('button.edit')</a>
+				<a data-html="false" class="btn-flat danger delete-asset" data-toggle="modal" href="{{ route('delete/hardware', $asset->id) }}" data-content="Are you sure you wish to delete this asset?" data-title="Delete {{ htmlspecialchars($asset->asset_tag) }}?" onClick="return false;">@lang('button.delete')</a>
 			</td>
 		</tr>
 		@endforeach

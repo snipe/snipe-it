@@ -196,18 +196,24 @@
     <div id="sidebar-nav">
         <ul id="dashboard-menu">
 
-            <li{{ (Request::is('admin') ? ' class="active"><div class="pointer"><div class="arrow"></div><div class="arrow_border"></div></div>' : '>') }}
-                <a href="{{ URL::to('admin') }}">
+            <li{{ (Request::is('hardware') ? ' class="active"><div class="pointer"><div class="arrow"></div><div class="arrow_border"></div></div>' : '>') }}
+                <a href="#" class="dropdown-toggle">
                     <i class="icon-barcode"></i>
                     <span>Assets</span>
+                    <i class="icon-chevron-down"></i>
                 </a>
+
+                <ul class="submenu{{ (Request::is('hardware*') ? ' active' : '') }}">
+                    <li><a href="{{ URL::to('hardware?Deployed=true') }}" {{ (Request::query('Deployed') ? ' class="active"' : '') }} >Deployed</a></li>
+                    <li><a href="{{ URL::to('hardware?RTD=true') }}" {{ (Request::query('RTD') ? ' class="active"' : '') }} >Ready to Deploy</a></li>
+                    <li><a href="{{ URL::to('hardware?Pending=true') }}" {{ (Request::query('Pending') ? ' class="active"' : '') }} >Pending</a></li>
+                    <li><a href="{{ URL::to('hardware?Undeployable=true') }}" {{ (Request::query('Undeployable') ? ' class="active"' : '') }} >Un-Deployable</a></li>
+                    <li><a href="{{ URL::to('hardware') }}">List All</a></li>
+                    <li><a href="{{ URL::to('hardware/models') }}" {{ (Request::is('hardware/models*') ? ' class="active"' : '') }} >Asset Models</a></li>
+
+                </ul>
             </li>
-            <li{{ (Request::is('assets/models*') ? ' class="active"><div class="pointer"><div class="arrow"></div><div class="arrow_border"></div></div>' : '>') }}
-                <a href="{{ URL::to('assets/models') }}">
-                    <i class="icon-th-list"></i>
-                    <span>Models</span>
-                </a>
-            </li>
+
             <li{{ (Request::is('admin/licenses*') ? ' class="active"><div class="pointer"><div class="arrow"></div><div class="arrow_border"></div></div>' : '>') }}
             	<a href="{{ URL::to('admin/licenses') }}">
             		<i class="icon-certificate"></i>

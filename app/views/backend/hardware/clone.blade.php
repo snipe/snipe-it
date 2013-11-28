@@ -2,11 +2,7 @@
 
 {{-- Page title --}}
 @section('title')
-	@if ($asset->id)
-	Asset Update ::
-	@else
-	Create Asset ::
-	@endif
+	Clone Asset
 @parent
 @stop
 
@@ -14,19 +10,10 @@
 @section('content')
 <div class="page-header">
 	<h3>
-	@if ($asset->id)
-	Asset Update
-	@else
-	Create Asset
-	@endif
+	Clone Asset
 
 		<div class="pull-right">
-			@if ($asset->id)
-			<a href="{{ route('view/asset',$asset->id) }}" class="btn-flat gray"><i class="icon-circle-arrow-left icon-white"></i> Back</a>
-			@else
-			<a href="{{ route('assets') }}" class="btn-flat gray"><i class="icon-circle-arrow-left icon-white"></i> Back</a>
-			@endif
-
+			<a href="{{ route('hardware') }}" class="btn-flat gray"><i class="icon-circle-arrow-left icon-white"></i> Back</a>
 		</div>
 	</h3>
 </div>
@@ -36,18 +23,11 @@
 	<!-- CSRF Token -->
 	<input type="hidden" name="_token" value="{{ csrf_token() }}" />
 
-	<!-- Tabs Content -->
-	<div class="tab-content">
-
-		<div class="tab-pane active" id="tab-general">
-
-
-
 			<!-- Asset Tag -->
 			<div class="control-group {{ $errors->has('asset_tag') ? 'error' : '' }}">
 				<label class="control-label" for="asset_tag">Asset Tag</label>
 				<div class="controls">
-					<input class="span4" type="text" name="asset_tag" id="asset_tag" value="{{ Input::old('asset_tag', $asset->asset_tag) }}" />
+					<input class="span4" type="text" name="asset_tag" id="asset_tag" value="{{ Input::old('asset_tag') }}" />
 					{{ $errors->first('asset_tag', '<span class="help-inline"><i class="icon-remove-sign"></i> :message</span>') }}
 				</div>
 			</div>
@@ -151,20 +131,10 @@
 				</div>
 			</div>
 
-
-
-
-		</div>
-
 	<!-- Form actions -->
 	<div class="control-group">
 		<div class="controls">
-			@if ($asset->id)
-			<a class="btn btn-link" href="{{ route('view/asset', $asset->id) }}">Cancel</a>
-			@else
-			<a class="btn btn-link" href="{{ route('assets') }}">Cancel</a>
-			@endif
-
+			<a class="btn btn-link" href="{{ route('hardware') }}">Cancel</a>
 			<button type="submit" class="btn-flat success"><i class="icon-ok icon-white"></i> Save</button>
 		</div>
 	</div>

@@ -12,10 +12,25 @@
 
 
 Route::when('admin/*', 'crsf', array('post'));
-Route::when('assets/*', 'crsf', array('post'));
+Route::when('hardware/*', 'crsf', array('post'));
 
-Route::group(array('prefix' => 'assets'), function()
+Route::group(array('prefix' => 'hardware'), function()
 {
+
+	Route::get('/', array('as' => '', 'uses' => 'Controllers\Admin\AssetsController@getIndex'));
+	Route::get('create', array('as' => 'create/hardware', 'uses' => 'Controllers\Admin\AssetsController@getCreate'));
+	Route::post('create', 'Controllers\Admin\AssetsController@postCreate');
+	Route::get('{assetId}/edit', array('as' => 'update/hardware', 'uses' => 'Controllers\Admin\AssetsController@getEdit'));
+	Route::post('{assetId}/edit', 'Controllers\Admin\AssetsController@postEdit');
+	Route::get('{assetId}/clone', array('as' => 'clone/hardware', 'uses' => 'Controllers\Admin\AssetsController@getClone'));
+	Route::post('{assetId}/clone', 'Controllers\Admin\AssetsController@postCreate');
+	Route::get('{assetId}/delete', array('as' => 'delete/hardware', 'uses' => 'Controllers\Admin\AssetsController@getDelete'));
+	Route::get('{assetId}/checkout', array('as' => 'checkout/hardware', 'uses' => 'Controllers\Admin\AssetsController@getCheckout'));
+	Route::post('{assetId}/checkout', 'Controllers\Admin\AssetsController@postCheckout');
+	Route::get('{assetId}/checkin', array('as' => 'checkin/hardware', 'uses' => 'Controllers\Admin\AssetsController@getCheckin'));
+	Route::post('{assetId}/checkin', 'Controllers\Admin\AssetsController@postCheckin');
+	Route::get('{assetId}/view', array('as' => 'view/hardware', 'uses' => 'Controllers\Admin\AssetsController@getView'));
+
 
 # Asset Model Management
 	Route::group(array('prefix' => 'models'), function()
@@ -28,22 +43,6 @@ Route::group(array('prefix' => 'assets'), function()
 		Route::get('{modelId}/delete', array('as' => 'delete/model', 'uses' => 'Controllers\Admin\ModelsController@getDelete'));
 		Route::get('{modelId}/view', array('as' => 'view/model', 'uses' => 'Controllers\Admin\ModelsController@getView'));
 	});
-
-	Route::get('/', array('as' => 'assets', 'uses' => 'Controllers\Admin\AssetsController@getIndex'));
-	Route::get('create', array('as' => 'create/asset', 'uses' => 'Controllers\Admin\AssetsController@getCreate'));
-	Route::post('create', 'Controllers\Admin\AssetsController@postCreate');
-	Route::get('{assetId}/edit', array('as' => 'update/asset', 'uses' => 'Controllers\Admin\AssetsController@getEdit'));
-	Route::post('{assetId}/edit', 'Controllers\Admin\AssetsController@postEdit');
-	Route::get('{assetId}/clone', array('as' => 'clone/asset', 'uses' => 'Controllers\Admin\AssetsController@getClone'));
-	Route::post('{assetId}/clone', 'Controllers\Admin\AssetsController@postCreate');
-	Route::get('{assetId}/delete', array('as' => 'delete/asset', 'uses' => 'Controllers\Admin\AssetsController@getDelete'));
-	Route::get('{assetId}/checkout', array('as' => 'checkout/asset', 'uses' => 'Controllers\Admin\AssetsController@getCheckout'));
-	Route::post('{assetId}/checkout', 'Controllers\Admin\AssetsController@postCheckout');
-	Route::get('{assetId}/checkin', array('as' => 'checkin/asset', 'uses' => 'Controllers\Admin\AssetsController@getCheckin'));
-	Route::post('{assetId}/checkin', 'Controllers\Admin\AssetsController@postCheckin');
-	Route::get('{assetId}/view', array('as' => 'view/asset', 'uses' => 'Controllers\Admin\AssetsController@getView'));
-
-
 
 
 });
@@ -77,10 +76,6 @@ Route::group(array('prefix' => 'admin'), function()
 		Route::post('{licenseId}/checkin', 'Controllers\Admin\LicensesController@postCheckin');
 		Route::get('{licenseId}/view', array('as' => 'view/license', 'uses' => 'Controllers\Admin\LicensesController@getView'));
 	});
-
-
-	// default admin screen until we get a fancy dashboard up
-	Route::get('/', array('as' => 'assets', 'uses' => 'Controllers\Admin\AssetsController@getIndex'));
 
 
 	# Admin Settings Routes (for categories, maufactureres, etc)
@@ -261,6 +256,7 @@ Route::group(array('prefix' => 'account'), function()
 |
 */
 
-Route::get('/', array('as' => 'home', 'uses' => 'Controllers\Admin\AssetsController@getIndex'));
+// default admin screen until we get a fancy dashboard up
+Route::get('/', array('as' => 'hardware', 'uses' => 'Controllers\Admin\AssetsController@getIndex'));
 Route::get('reports', array('as' => 'reports', 'uses' => 'Controllers\Admin\AssetsController@getReports'));
 
