@@ -61,7 +61,7 @@ Forgetting to do this can mean your DB might end up out of sync with the new fil
 
 Create a database and update the file `app/config/database.php.example` with your database name and credentials, then rename the file to `database.php`
 
-    nano app/config/database.php.example
+    vi app/config/database.php.example
     mv app/config/database.php.example app/config/database.php
 
 -----
@@ -70,7 +70,7 @@ Create a database and update the file `app/config/database.php.example` with you
 
 Now, you need to setup your mail settings by opening and updating the following file `app/config/mail.php.example`, then rename it to `mail.php`
 
-    nano app/config/mail.php.example
+    vi app/config/mail.php.example
     mv app/config/mail.php.example app/config/mail.php
 
 This will be used to send emails to your users, when they register and they request a password reset.
