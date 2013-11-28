@@ -185,7 +185,7 @@ class AssetsController extends AdminController {
 		$model_list = array('' => '') + Model::lists('name', 'id');
 
 		// Grab the dropdown list of status
-		$statuslabel_list = array('' => 'Pending') + array('1' => 'Ready to Deploy') + Statuslabel::lists('name', 'id');
+		$statuslabel_list = array('' => 'Pending') + array('0' => 'Ready to Deploy') + Statuslabel::lists('name', 'id');
 
 		// get depreciation list
 		$depreciation_list = array('' => '') + Depreciation::lists('name', 'id');
@@ -495,7 +495,7 @@ class AssetsController extends AdminController {
 		$model_list = array('' => '') + Model::lists('name', 'id');
 
 		// Grab the dropdown list of status
-		$statuslabel_list = array('' => 'Pending') + array('1' => 'Ready to Deploy') + Statuslabel::lists('name', 'id');
+		$statuslabel_list = array('' => 'Pending') + array('0' => 'Ready to Deploy') + Statuslabel::lists('name', 'id');
 
 		// get depreciation list
 		$depreciation_list = array('' => '') + Depreciation::lists('name', 'id');
