@@ -250,7 +250,7 @@
                 <div class="row-fluid stats-row">
                     <div class="span3 stat">
                         <div class="data">
-                            <a href="{{ URL::to('admin') }}">
+                            <a href="{{ URL::to('hardware') }}">
                             	<span class="number">{{ number_format(Asset::assetcount()) }}</span>
                            	 	<span style="color:black">total assets</span>
                             </a>
@@ -258,7 +258,7 @@
                     </div>
                     <div class="span3 stat">
                         <div class="data">
-                            <a href="{{ URL::to('admin?RTD=true') }}">
+                            <a href="{{ URL::to('hardware?RTD=true') }}">
                             	<span class="number">{{ number_format(Asset::availassetcount()) }}</span>
                             	<span style="color:black">assets available</span>
                             </a>
