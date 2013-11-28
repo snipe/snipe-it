@@ -21,7 +21,12 @@
 	@endif
 
 		<div class="pull-right">
+			@if ($asset->id)
+			<a href="{{ route('view/asset',$asset->id) }}" class="btn-flat gray"><i class="icon-circle-arrow-left icon-white"></i> Back</a>
+			@else
 			<a href="{{ route('assets') }}" class="btn-flat gray"><i class="icon-circle-arrow-left icon-white"></i> Back</a>
+			@endif
+
 		</div>
 	</h3>
 </div>
@@ -154,7 +159,12 @@
 	<!-- Form actions -->
 	<div class="control-group">
 		<div class="controls">
+			@if ($asset->id)
+			<a class="btn btn-link" href="{{ route('view/asset', $asset->id) }}">Cancel</a>
+			@else
 			<a class="btn btn-link" href="{{ route('assets') }}">Cancel</a>
+			@endif
+
 			<button type="submit" class="btn-flat success"><i class="icon-ok icon-white"></i> Save</button>
 		</div>
 	</div>
