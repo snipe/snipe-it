@@ -22,19 +22,58 @@ View Asset {{ $asset->asset_tag }} ::
                                 	@if ($asset->assigned_to != 0)
 										<li><a href="{{ route('checkin/asset', $asset->id) }}" class="btn-flat info">Checkin</a></li>
 									@else
+										@if ($asset->status_id > 0)
 										<li><a href="{{ route('checkout/asset', $asset->id) }}" class="btn-flat success">Checkout</a></li>
+										@endif
 									@endif
                                     <li><a href="{{ route('update/asset', $asset->id) }}">Edit Asset</a></li>
                                     <li><a href="{{ route('clone/asset', $asset->id) }}">Clone Asset</a></li>
                                 </ul>
                             </div>
 				</h3>
-
-
                 <div class="row-fluid profile">
                     <!-- bio, new note & orders column -->
                     <div class="span9 bio">
                         <div class="profile-box">
+
+						<!-- details snapshot box -->
+                        <div class="row-fluid show-grid">
+								<div class="span9"></div>
+
+
+								@if ($asset->model->manufacturer)
+									<div class="span4"><strong>Manufacturer: </strong> {{ $asset->model->manufacturer->name }} </div>
+									<div class="span6"><strong>Model:</strong> {{ $asset->model->name }} / {{ $asset->model->modelno }}</div>
+								@endif
+
+								@if ($asset->purchase_date)
+									<div class="span4"><strong>Purchased On: </strong>{{ $asset->purchase_date }} </div>
+								@endif
+
+								@if ($asset->purchase_cost)
+									<div class="span4"><strong>Purchase Cost:</strong> ${{ number_format($asset->purchase_cost,2) }} </div>
+								@endif
+
+								@if ($asset->order_number)
+									<div class="span4"><strong>Order #:</strong> {{ $asset->order_number }} </div>
+								@endif
+
+								@if ($asset->warranty_months)
+									<div class="span4"><strong>Warranty:</strong> {{ $asset->warranty_months }} months</div>
+									<div class="span4"><strong>Expires:</strong> {{ $asset->warrantee_expires() }}</div>
+								@endif
+
+								@if ($asset->depreciation)
+									<div class="span4"><strong>Depreciation: </strong>{{ $asset->depreciation->name }}
+										({{ $asset->depreciation->months }} months)</div>
+									<div class="span4"><strong>Depreciates On: </strong>{{ $asset->depreciated_date() }} </div>
+									<div class="span4"><strong>Fully Depreciated: </strong>{{ $asset->months_until_depreciated()->m }} months,
+									{{ $asset->months_until_depreciated()->y }} years</div>
+								@endif
+						</div>
+
+
+
                             <br>
                             <!-- checked out assets table -->
 
@@ -103,41 +142,6 @@ View Asset {{ $asset->asset_tag }} ::
                     <!-- side address column -->
                     <div class="span3 address pull-right">
 
-                    <h6><br>More Info:</h6>
-                       		<ul>
-								@if ($asset->model->manufacturer)
-								<li>Manufacturer: {{ $asset->model->manufacturer->name }} </li>
-								<li>Model: {{ $asset->model->name }} / {{ $asset->model->modelno }}</li>
-								@endif
-
-								@if ($asset->purchase_date)
-								<li>Purchased On: {{ $asset->purchase_date }} </li>
-								@endif
-
-								@if ($asset->purchase_date)
-								<li>Purchased On: {{ $asset->purchase_date }} </li>
-								@endif
-
-								@if ($asset->purchase_cost)
-								<li>Purchase Cost: ${{ number_format($asset->purchase_cost,2) }} </li>
-								@endif
-								@if ($asset->order_number)
-								<li>Order #: {{ $asset->order_number }} </li>
-								@endif
-								@if ($asset->warranty_months)
-								<li>Warranty: {{ $asset->warranty_months }} months</li>
-								<li>Expires: {{ $asset->warrantee_expires() }}</li>
-								@endif
-
-								@if ($asset->depreciation)
-								<li>Depreciation: {{ $asset->depreciation->name }} ({{ $asset->depreciation->months }} months)</li>
-								<li>Depreciates On: {{ $asset->depreciated_date() }} </li>
-								<li>Fully Depreciated: {{ $asset->months_until_depreciated()->m }} months, {{ $asset->months_until_depreciated()->y }} years</li>
-								@endif
-
-							</ul>
-
-
 						@if ((isset($asset->assigned_to ) && ($asset->assigned_to > 0)))
                        		<h6><br>Checked Out To:</h6>
                        		<ul>
@@ -158,10 +162,6 @@ View Asset {{ $asset->asset_tag }} ::
 
 								@endif
 
-
-
-
-
 								@if (isset($asset->assigneduser->email))
 									<li><br /><i class="icon-envelope-alt"></i> <a href="mailto:{{ $asset->assigneduser->email }}">{{ $asset->assigneduser->email }}</a></li>
 								@endif
@@ -173,8 +173,38 @@ View Asset {{ $asset->asset_tag }} ::
 								<li><br /><a href="{{ route('checkin/asset', $asset->id) }}" class="btn-flat large info ">Checkin Asset</a></li>
 								</ul>
 
+						@elseif (($asset->status_id ) && ($asset->status_id > 0))
+
+							@if ($asset->assetstatus)
+								<h6><br>{{ $asset->assetstatus->name }} Asset</h6>
+
+								<div class="col-md-6">
+								<div class="alert alert-warning alert-block">
+									<i class="icon-warning-sign"></i>
+									<strong>Warning: </strong> This asset has been marked {{ $asset->assetstatus->name }} and is currently undeployable.
+									If this status has changed, please update the asset status.
+
+								</div>
+							</div>
+							@endif
+
+						@elseif ($asset->status_id == NULL)
+
+
+								<h6><br>Pending Asset</h6>
+								<div class="col-md-6">
+								<div class="alert alert-info alert-block">
+									<i class="icon-info-sign"></i>
+									<strong>Warning: </strong> This asset has been marked as pending and is currently undeployable.
+									If this status has changed, please update the asset status.
+								</div>
+							</div>
+
+
 						@else
+						<h6><br>Checkout Asset</h6>
 							<ul>
+								<li>This asset is not checked out to anyone yet. Use the button below to check it out now.</li>
 								<li><br><br /><a href="{{ route('checkout/asset', $asset->id) }}" class="btn-flat large success">Checkout Asset</a></li>
 							</ul>
                         @endif
