@@ -35,14 +35,14 @@ Depreciation Report
 <table id="example">
 		<thead>
 			<tr role="row">
-			<th class="span2">@lang('admin/assets/table.asset_tag')</th>
-			<th class="span2">@lang('admin/assets/table.title')</th>
-			<th class="span2">@lang('admin/assets/table.serial')</th>
-			<th class="span3">@lang('admin/assets/table.checkoutto')</th>
-			<th class="span2">@lang('admin/assets/table.location')</th>
-			<th class="span2">@lang('admin/assets/table.purchase_date')</th>
-			<th class="span1">@lang('admin/assets/table.purchase_cost')</th>
-			<th class="span1">@lang('admin/assets/table.book_value')</th>
+			<th class="span2">@lang('admin/hardware/table.asset_tag')</th>
+			<th class="span2">@lang('admin/hardware/table.title')</th>
+			<th class="span2">@lang('admin/hardware/table.serial')</th>
+			<th class="span3">@lang('admin/hardware/table.checkoutto')</th>
+			<th class="span2">@lang('admin/hardware/table.location')</th>
+			<th class="span2">@lang('admin/hardware/table.purchase_date')</th>
+			<th class="span1">@lang('admin/hardware/table.purchase_cost')</th>
+			<th class="span1">@lang('admin/hardware/table.book_value')</th>
 			<th class="span1">Diff</th>
 		</tr>
 	</thead>

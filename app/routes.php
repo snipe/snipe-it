@@ -256,7 +256,11 @@ Route::group(array('prefix' => 'account'), function()
 |
 */
 
-// default admin screen until we get a fancy dashboard up
-Route::get('/', array('as' => 'hardware', 'uses' => 'Controllers\Admin\AssetsController@getIndex'));
-Route::get('reports', array('as' => 'reports', 'uses' => 'Controllers\Admin\AssetsController@getReports'));
 
+// Redirect requests to / to the hardware section until we get a fancy dashboard set up
+Route::get('/', function()
+{
+    return Redirect::to('hardware');
+});
+Route::get('/', array('as' => 'home', 'uses' => 'Controllers\Admin\AssetsController@getIndex'));
+Route::get('reports', array('as' => 'reports', 'uses' => 'Controllers\Admin\AssetsController@getReports'));
