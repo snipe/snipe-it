@@ -273,7 +273,7 @@ class AssetsController extends AdminController {
 
 
 		// Redirect to the asset management page with error
-		return Redirect::to("assets/$assetId/edit")->with('error', Lang::get('admin/hardware/message.update.error'));
+		return Redirect::to("hardware/$assetId/edit")->with('error', Lang::get('admin/hardware/message.update.error'));
 
 	}
 
@@ -320,7 +320,7 @@ class AssetsController extends AdminController {
 		}
 
 		// Get the dropdown of users and then pass it to the checkout view
-		$users_list = array('' => 'Select a User') + DB::table('users')->select(DB::raw('concat(first_name," ",last_name) as full_name, id'))->lists('full_name', 'id');
+		$users_list = array('' => 'Select a User') + DB::table('users')->select(DB::raw('concat(first_name," ",last_name) as full_name, id'))->whereNull('deleted_at')->lists('full_name', 'id');
 
 		//print_r($users);
 		return View::make('backend/hardware/checkout', compact('asset'))->with('users_list',$users_list);
@@ -386,7 +386,7 @@ class AssetsController extends AdminController {
 		}
 
 		// Redirect to the asset management page with error
-		return Redirect::to("assets/$assetId/checkout")->with('error', Lang::get('admin/hardware/message.checkout.error'));
+		return Redirect::to("hardware/$assetId/checkout")->with('error', Lang::get('admin/hardware/message.checkout.error'));
 	}
 
 

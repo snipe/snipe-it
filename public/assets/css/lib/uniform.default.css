@@ -49,8 +49,7 @@ textarea.uniform {
 div.checker input,
 input[type="search"],
 input[type="search"]:active {
-  -moz-appearance: none;
-  -webkit-appearance: none; }
+}
 
 /* Select */
 div.selector {

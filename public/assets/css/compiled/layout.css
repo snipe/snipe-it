@@ -52,9 +52,12 @@ input.search {
   top: 11px;
 }
 
+.alert-msg {
+color: #b94a48;
+}
 .header {
-  margin-bottom: 60px;
-  border-bottom: 1px #e8e9ee solid;
+  margin-bottom: 30px;
+  /* border-bottom: 1px #e8e9ee solid; */
 }
 .header h1, .header h2, .header h3, .header h4, .header h5 {
   float: left;
