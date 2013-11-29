@@ -109,10 +109,12 @@ Assets ::
 			@endif
 
 			<td>
+			@if ($asset->status_id < 1 )
 			@if ($asset->assigned_to != 0)
 				<a href="{{ route('checkin/hardware', $asset->id) }}" class="btn btn-primary">Checkin</a>
 			@else
 				<a href="{{ route('checkout/hardware', $asset->id) }}" class="btn btn-info">Checkout</a>
+			@endif
 			@endif
 			</td>
 			<td nowrap="nowrap">
