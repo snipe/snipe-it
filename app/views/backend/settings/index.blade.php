@@ -10,11 +10,13 @@ Settings ::
 @section('content')
 <div id="pad-wrapper" class="user-profile">
                 <!-- header -->
-				<h3 class="name">Settings
-						<div class="pull-right">
-							 <a href="{{ route('edit/settings') }}" class="btn-flat white"> @lang('button.edit') Settings</a>
-						</div>
-		</h3>
+
+                <div class="pull-right">
+					 <a href="{{ route('edit/settings') }}" class="btn-flat white"> @lang('button.edit') Settings</a>
+				</div>
+
+
+				<h3 class="name">Settings</h3>
 
 
                 <div class="row-fluid profile">

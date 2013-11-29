@@ -10,17 +10,17 @@ View Model {{ $model->model_tag }} ::
 @section('content')
 <div id="pad-wrapper" class="user-profile">
                 <!-- header -->
-				<h3 class="name">History for {{ $model->name }}
-					<div class="btn-group pull-right">
-						<button class="btn glow">Actions</button>
-						<button class="btn glow dropdown-toggle" data-toggle="dropdown">
-							<span class="caret"></span>
-						</button>
-						<ul class="dropdown-menu">
-							<li><a href="{{ route('update/model', $model->id) }}">Edit Asset</a></li>
-						</ul>
-					</div>
-				</h3>
+                <div class="btn-group pull-right">
+					<button class="btn glow">Actions</button>
+					<button class="btn glow dropdown-toggle" data-toggle="dropdown">
+						<span class="caret"></span>
+					</button>
+					<ul class="dropdown-menu">
+						<li><a href="{{ route('update/model', $model->id) }}">Edit Asset</a></li>
+					</ul>
+				</div>
+
+				<h3 class="name">History for {{ $model->name }} </h3>
 
 
                 <div class="row-fluid profile">

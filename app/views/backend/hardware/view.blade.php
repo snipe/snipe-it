@@ -10,26 +10,29 @@ View Asset {{ $asset->asset_tag }} ::
 @section('content')
 <div id="pad-wrapper" class="user-profile">
                 <!-- header -->
+
+				<div class="btn-group pull-right">
+					<button class="btn glow">Actions</button>
+					<button class="btn glow dropdown-toggle" data-toggle="dropdown">
+						<span class="caret"></span>
+					</button>
+					<ul class="dropdown-menu">
+
+						@if ($asset->status_id == 1)
+							@if ($asset->assigned_to != 0)
+								<li><a href="{{ route('checkin/hardware', $asset->id) }}" class="btn-flat info">Checkin</a></li>
+							@endif
+						@elseif ($asset->status_id == 0)
+								<li><a href="{{ route('checkout/hardware', $asset->id) }}" class="btn-flat success">Checkout</a></li>
+						@endif
+						<li><a href="{{ route('update/hardware', $asset->id) }}">Edit Asset</a></li>
+						<li><a href="{{ route('clone/hardware', $asset->id) }}">Clone Asset</a></li>
+					</ul>
+				</div>
+
 				<h3 class="name">History for {{ $asset->asset_tag }} ({{ $asset->name }})
 
-							<div class="btn-group pull-right">
-                                <button class="btn glow">Actions</button>
-                                <button class="btn glow dropdown-toggle" data-toggle="dropdown">
-                                    <span class="caret"></span>
-                                </button>
-                                <ul class="dropdown-menu">
 
-									@if ($asset->status_id == 1)
-										@if ($asset->assigned_to != 0)
-											<li><a href="{{ route('checkin/hardware', $asset->id) }}" class="btn-flat info">Checkin</a></li>
-										@endif
-									@elseif ($asset->status_id == 0)
-											<li><a href="{{ route('checkout/hardware', $asset->id) }}" class="btn-flat success">Checkout</a></li>
-									@endif
-                                   	<li><a href="{{ route('update/hardware', $asset->id) }}">Edit Asset</a></li>
-                                    <li><a href="{{ route('clone/hardware', $asset->id) }}">Clone Asset</a></li>
-                                </ul>
-                            </div>
 				</h3>
                 <div class="row-fluid profile">
                     <!-- bio, new note & orders column -->

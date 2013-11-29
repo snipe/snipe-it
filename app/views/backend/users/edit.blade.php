@@ -9,12 +9,12 @@ Update User {{ $user->fullName() }} ::
 {{-- Page content --}}
 @section('content')
 <div class="page-header">
-	<h3>
-		Update User {{ $user->fullName() }}
 
 		<div class="pull-right">
 			<a href="{{ route('users') }}" class="btn-flat gray"><i class="icon-circle-arrow-left icon-white"></i> Back</a>
 		</div>
+	<h3>
+		Update User {{ $user->fullName() }}
 	</h3>
 </div>
 

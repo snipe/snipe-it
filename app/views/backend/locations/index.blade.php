@@ -9,13 +9,12 @@ Locations ::
 {{-- Page content --}}
 @section('content')
 <div class="page-header">
-	<h3>
-		Locations
 
-		<div class="pull-right">
-			<a href="{{ route('create/location') }}" class="btn-flat success"><i class="icon-plus-sign icon-white"></i> Create New</a>
-		</div>
-	</h3>
+	<div class="pull-right">
+		<a href="{{ route('create/location') }}" class="btn-flat success"><i class="icon-plus-sign icon-white"></i> Create New</a>
+	</div>
+
+	<h3>Locations</h3>
 </div>
 
 <div class="row-fluid table">

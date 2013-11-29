@@ -10,12 +10,12 @@
 @section('content')
 <div id="pad-wrapper" class="user-profile">
                 <!-- header -->
-				<h3 class="name">Update Settings
-				<div class="pull-right">
+
+                <div class="pull-right">
 					<a href="{{ route('app') }}" class="btn-flat gray"><i class="icon-circle-arrow-left icon-white"></i> Back</a>
 				</div>
 
-				</h3>
+				<h3 class="name">Update Settings</h3>
 
 
                 <div class="row-fluid profile">

@@ -15,6 +15,11 @@
 {{-- Page content --}}
 @section('content')
 <div class="page-header">
+
+	<div class="pull-right">
+		<a href="{{ route('locations') }}" class="btn-flat gray"><i class="icon-circle-arrow-left icon-white"></i> Back</a>
+	</div>
+
 	<h3>
 		@if ($location->id)
 			Update Location
@@ -22,9 +27,7 @@
 			Create Location
 		@endif
 
-		<div class="pull-right">
-			<a href="{{ route('locations') }}" class="btn-flat gray"><i class="icon-circle-arrow-left icon-white"></i> Back</a>
-		</div>
+
 	</h3>
 </div>
 

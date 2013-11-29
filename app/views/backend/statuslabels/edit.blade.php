@@ -14,17 +14,16 @@
 @section('content')
 <div id="pad-wrapper" class="user-profile">
                 <!-- header -->
+                <div class="pull-right">
+					<a href="{{ route('statuslabels') }}" class="btn-flat gray"><i class="icon-circle-arrow-left icon-white"></i> Back</a>
+				</div>
+
 				<h3 class="name">
 					@if ($statuslabel->id)
 						Update Status Label
 					@else
 						Create New Status Label
 					@endif
-
-				<div class="pull-right">
-					<a href="{{ route('statuslabels') }}" class="btn-flat gray"><i class="icon-circle-arrow-left icon-white"></i> Back</a>
-				</div>
-
 				</h3>
 
 

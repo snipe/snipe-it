@@ -9,12 +9,13 @@ User Management ::
 {{-- Page content --}}
 @section('content')
 <div class="page-header">
+
+	<div class="pull-right">
+		<a href="{{ route('create/user') }}" class="btn-flat success"><i class="icon-plus-sign icon-white"></i> Create New</a>
+	</div>
+
 	<h3>
 		User Management
-
-		<div class="pull-right">
-			<a href="{{ route('create/user') }}" class="btn-flat success"><i class="icon-plus-sign icon-white"></i> Create New</a>
-		</div>
 	</h3>
 </div>
 

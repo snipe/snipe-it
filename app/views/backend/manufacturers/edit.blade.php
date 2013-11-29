@@ -13,6 +13,11 @@
 {{-- Page content --}}
 @section('content')
 <div class="page-header">
+
+	<div class="pull-right">
+		<a href="{{ route('manufacturers') }}" class="btn-flat gray"><i class="icon-circle-arrow-left icon-white"></i> Back</a>
+	</div>
+
 	<h3>
 		@if ($manufacturer->id)
 		Update Manufacturer
@@ -20,9 +25,6 @@
 			Create manufacturer
 		@endif
 
-		<div class="pull-right">
-			<a href="{{ route('manufacturers') }}" class="btn-flat gray"><i class="icon-circle-arrow-left icon-white"></i> Back</a>
-		</div>
 	</h3>
 </div>
 

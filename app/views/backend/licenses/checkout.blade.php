@@ -9,12 +9,13 @@
 {{-- Page content --}}
 @section('content')
 <div class="page-header">
+
+	<div class="pull-right">
+		<a href="{{ route('licenses') }}"  class="btn-flat gray"><i class="icon-circle-arrow-left icon-white"></i> Back</a>
+	</div>
+
 	<h3>Checkout License to User</h3>
 
-		<div class="pull-right">
-			<a href="{{ route('assets') }}"  class="btn-flat gray"><i class="icon-circle-arrow-left icon-white"></i> Back</a>
-		</div>
-	</h3>
 </div>
 
 <form class="form-horizontal" method="post" action="" autocomplete="off">

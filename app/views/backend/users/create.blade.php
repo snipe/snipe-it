@@ -9,12 +9,13 @@ Create a User ::
 {{-- Page content --}}
 @section('content')
 <div class="page-header">
+
+	<div class="pull-right">
+		<a href="{{ route('users') }}" class="btn-flat gray"><i class="icon-circle-arrow-left icon-white"></i> Back</a>
+	</div>
+
 	<h3>
 		Create a New User
-
-		<div class="pull-right">
-			<a href="{{ route('users') }}" class="btn-flat gray"><i class="icon-circle-arrow-left icon-white"></i> Back</a>
-		</div>
 	</h3>
 </div>
 
