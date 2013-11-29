@@ -14,57 +14,54 @@
 
 {{-- Page content --}}
 @section('content')
-<div class="page-header">
-	<h3>
+
+<div class="row header">
+    <div class="col-md-12">
+    	<a href="{{ route('depreciations') }}" class="btn-flat gray pull-right"><i class="icon-circle-arrow-left icon-white"></i> Back</a>
+		<h3>
 		@if ($depreciation->id)
 			Update Depreciation
 		@else
 			Create Depreciation
 		@endif
-
-		<div class="pull-right">
-			<a href="{{ route('depreciations') }}" class="btn-flat gray"><i class="icon-circle-arrow-left icon-white"></i> Back</a>
-		</div>
-	</h3>
+		</h3>
+	</div>
 </div>
-
+<div class="row form-wrapper">
 
 <form class="form-horizontal" method="post" action="" autocomplete="off">
 	<!-- CSRF Token -->
 	<input type="hidden" name="_token" value="{{ csrf_token() }}" />
 
-	<!-- Tabs Content -->
-	<div class="tab-content">
+			<!-- Name -->
+			<div class="form-group {{ $errors->has('name') ? ' has-error' : '' }}">
+				<label for="name" class="col-md-4 control-label">Depreciation Name</label>
+					<div class="col-md-6">
+						<input class="form-control" type="text" name="name" id="name" value="{{ Input::old('name', $depreciation->name) }}" />
+						{{ $errors->first('name', '<span class="alert-msg"><i class="icon-remove-sign"></i> :message</span>') }}
+					</div>
+			</div>
 
+			<!-- Name -->
+			<div class="form-group {{ $errors->has('months') ? ' has-error' : '' }}">
+				<label for="months" class="col-md-4 control-label">Number of Months</label>
+					<div class="col-md-1">
+						<input class="form-control" type="text" name="months" id="months" value="{{ Input::old('name', $depreciation->months) }}" />
+						{{ $errors->first('months', '<span class="alert-msg"><i class="icon-remove-sign"></i> :message</span>') }}
+					</div>
+			</div>
 
-	<div class="tab-pane active" id="tab-general">
-			<!-- Class Title -->
-			<div class="form-group {{ $errors->has('name') ? 'error' : '' }}">
-				<label class="control-label" for="name">Depreciation Class Name</label>
-				<div class="controls">
-					<input class="col-md-6" type="text" name="name" id="name" value="{{ Input::old('name', $depreciation->name) }}" />
-					{{ $errors->first('name', '<span class="help-inline">:message</span>') }}
+			<!-- Form actions -->
+			<div class="form-group">
+			<label class="col-md-4 control-label"></label>
+				<div class="col-md-7">
+					<a class="btn btn-link" href="{{ route('depreciations') }}">@lang('general.cancel')</a>
+					<button type="submit" class="btn btn-success"><i class="icon-ok icon-white"></i> @lang('general.save')</button>
 				</div>
 			</div>
-			<!-- Months -->
-			<div class="form-group {{ $errors->has('months') ? 'error' : '' }}">
-				<label class="control-label" for="name">Number of Months</label>
-				<div class="controls">
-					<input class="col-md-2" type="text" name="months" id="months" value="{{ Input::old('months', $depreciation->months) }}" />
-					{{ $errors->first('months', '<span class="help-inline">:message</span>') }}
-				</div>
-			</div>
-		</div>
 
+		</form>
 
-	<!-- Form actions -->
-	<div class="form-group">
-		<div class="controls">
-			<a class="btn btn-link" href="{{ route('depreciations') }}">@lang('general.cancel')</a>
-			<button type="submit" class="btn-flat success"><i class="icon-ok icon-white"></i> @lang('general.save')</button>
-		</div>
-	</div>
-</form>
-
+</div>
 
 @stop

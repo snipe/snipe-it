@@ -30,7 +30,7 @@
 						<input type="hidden" name="_token" value="{{ csrf_token() }}" />
 
 						<!-- Name -->
-						<div class="form-group {{ $errors->has('asset_tag') ? ' has-error' : '' }}">
+						<div class="form-group {{ $errors->has('name') ? ' has-error' : '' }}">
 							<label for="name" class="col-md-2 control-label">Category Name</label>
 								<div class="col-md-7">
 									<input class="form-control" type="text" name="name" id="name" value="{{ Input::old('name', $category->name) }}" />

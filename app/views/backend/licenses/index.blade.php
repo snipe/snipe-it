@@ -7,13 +7,16 @@ Licenses ::
 
 {{-- Page content --}}
 @section('content')
-<div class="page-header">
-	<div class="pull-right">
-		<a href="{{ route('create/licenses') }}" class="btn-flat success"><i class="icon-plus-sign icon-white"></i> Create New</a>
-	</div>
 
-	<h3>Software Licenses</h3>
+
+<div class="row header">
+    <div class="col-md-12">
+    	<a href="{{ route('create/licenses') }}" class="btn btn-success pull-right"><i class="icon-plus-sign icon-white"></i> Create New</a>
+		<h3>Software Licenses</h3>
+	</div>
 </div>
+
+<div class="row form-wrapper">
 
 <table id="example">
 	<thead>
@@ -67,9 +70,9 @@ Licenses ::
 					</td>
 					<td>
 					@if ($licensedto->assigned_to)
-						<a href="{{ route('checkin/license', $licensedto->id) }}" class="btn-flat info"> Checkin </a>
+						<a href="{{ route('checkin/license', $licensedto->id) }}" class="btn btn-primary">Checkin</a>
 					@else
-						<a href="{{ route('checkout/license', $licensedto->id) }}" class="btn-flat success">Checkout</a>
+						<a href="{{ route('checkout/license', $licensedto->id) }}" class="btn btn-info">Checkout</a>
 					@endif
 					</td>
 
