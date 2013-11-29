@@ -40,7 +40,7 @@ class ModelsController extends AdminController {
 		// Show the page
 		$depreciation_list = array('' => 'Do Not Depreciate') + Depreciation::lists('name', 'id');
 		$manufacturer_list = array('' => 'Select One') + Manufacturer::lists('name', 'id');
-		$category_list = array('' => '') + DB::table('categories')->lists('name', 'id');
+		$category_list = array('' => '') + DB::table('categories')->whereNull('deleted_at')->lists('name', 'id');
 		$view = View::make('backend/models/edit');
 		$view->with('category_list',$category_list);
 		$view->with('depreciation_list',$depreciation_list);
@@ -81,7 +81,7 @@ class ModelsController extends AdminController {
 			if($model->save())
 			{
 				// Redirect to the new model  page
-				return Redirect::to("assets/models")->with('success', Lang::get('admin/models/message.create.success'));
+				return Redirect::to("hardware/models")->with('success', Lang::get('admin/models/message.create.success'));
 			}
 		}
 		else
@@ -92,7 +92,7 @@ class ModelsController extends AdminController {
 		}
 
 		// Redirect to the model create page
-		return Redirect::to('assets/models/create')->with('error', Lang::get('admin/models/message.create.error'));
+		return Redirect::to('hardware/models/create')->with('error', Lang::get('admin/models/message.create.error'));
 
 	}
 
