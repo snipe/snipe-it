@@ -11,40 +11,39 @@
 		</title>
 
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-		<!-- Mobile Specific Metas
-		================================================== -->
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
 
 		<!-- bootstrap -->
 		<link href="{{ asset('assets/css/bootstrap/bootstrap.css') }}" rel="stylesheet" />
-		<link href="{{ asset('assets/css/bootstrap/bootstrap-responsive.css') }}" rel="stylesheet" />
 		<link href="{{ asset('assets/css/bootstrap/bootstrap-overrides.css') }}" type="text/css" rel="stylesheet" />
-		<link href="{{ asset('assets/css/lib/bootstrap.datepicker.css') }}" type="text/css" rel="stylesheet">
 
 
 
 		<!-- libraries -->
-		<link href="{{ asset('assets/css/lib/jquery-ui-1.10.2.custom.css') }}" rel="stylesheet" type="text/css" />
+		<link href="{{ asset('assets/css/lib/uniform.default.css') }}" rel="stylesheet" type="text/css" />
+		<link href="{{ asset('assets/css/lib/select2.css') }}" type="text/css" rel="stylesheet">
+		<link href="{{ asset('assets/css/lib/bootstrap.datepicker.css') }}" type="text/css" rel="stylesheet">
 		<link href="{{ asset('assets/css/lib/font-awesome.css') }}" type="text/css" rel="stylesheet" />
 
 		<!-- global styles -->
 		<link rel="stylesheet" type="text/css" href="{{ asset('assets/css/compiled/layout.css') }}">
 		<link rel="stylesheet" type="text/css" href="{{ asset('assets/css/compiled/elements.css') }}">
 		<link rel="stylesheet" type="text/css" href="{{ asset('assets/css/compiled/icons.css') }}">
-		<link href="{{ asset('assets/css/lib/select2.css') }}" type="text/css" rel="stylesheet">
+
 
 		<!-- this page specific styles -->
 		<link rel="stylesheet" href="{{ asset('assets/css/compiled/index.css') }}" type="text/css" media="screen" />
 		<link rel="stylesheet" href="{{ asset('assets/css/compiled/user-list.css') }}" type="text/css" media="screen" />
 		<link rel="stylesheet" href="{{ asset('assets/css/compiled/user-profile.css') }}" type="text/css" media="screen" />
+		<link rel="stylesheet" href="{{ asset('assets/css/compiled/form-showcase.css') }}" type="text/css" media="screen" />
 		<link rel="stylesheet" href="{{ asset('assets/css/lib/jquery.dataTables.css') }}" type="text/css" media="screen" />
+
 
 
 		<!-- open sans font -->
 		<link href='//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
-
-		<!-- lato font -->
-		<link href='//fonts.googleapis.com/css?family=Lato:300,400,700,900,300italic,400italic,700italic,900italic' rel='stylesheet' type='text/css'>
 
 		<!--[if lt IE 9]>
 		  <script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
@@ -66,60 +65,25 @@
 	<!-- navbar -->
 
 
+	<!-- navbar -->
+	<header class="navbar navbar-inverse" role="banner">
 
-
-	 <!-- navbar -->
     <div class="navbar navbar-inverse">
         <div class="navbar-inner navbar-inverse">
-            <button type="button" class="btn btn-navbar visible-phone" id="menu-toggler">
+        <div class="navbar-header">
+            <button class="navbar-toggle" type="button" data-toggle="collapse" id="menu-toggler">
+                <span class="sr-only">Toggle navigation</span>
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-
-            <a class="brand" href="/">{{ Setting::getSettings()->site_name }}</a>
-			</ul>
-
-
-            <ul class="nav pull-right">
+            <a class="navbar-brand" href="/">{{ Setting::getSettings()->site_name }}</a>
+        </div>
+        <ul class="nav navbar-nav pull-right hidden-xs">
             @if (Sentry::check())
-                <!-- <li class="hidden-phone">
-                    <input class="search" type="text" />
-                </li> -->
-				<!--
-				<li class="notification-dropdown hidden-phone">
-                    <a href="#" class="trigger">
-                        <i class="icon-warning-sign"></i>
-                        <span class="count">8</span>
-                    </a>
-                    <div class="pop-dialog">
-                        <div class="pointer right">
-                            <div class="arrow"></div>
-                            <div class="arrow_border"></div>
-                        </div>
-                        <div class="body">
-                            <a href="#" class="close-icon"><i class="icon-remove-sign"></i></a>
-                            <div class="notifications">
-                                <h3>You have 2 new notifications</h3>
-                                <a href="#" class="item">
-                                    <i class="icon-signin"></i> (these are placeholder)
-                                    <span class="time"><i class="icon-time"></i> 13 min.</span>
-                                </a>
-                                <a href="#" class="item">
-                                    <i class="icon-signin"></i> Warranty expiring!
-                                    <span class="time"><i class="icon-time"></i> 18 min.</span>
-                                </a>
-                                <div class="footer">
-                                    <a href="#" class="logout">View all notifications</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </li> -->
-
 
                 <li class="dropdown">
-                    <a href="#" class="dropdown-toggle hidden-phone" data-toggle="dropdown">
+                    <a href="#" class="dropdown-toggle hidden-xs hidden-sm" data-toggle="dropdown">
                         Welcome, {{ Sentry::getUser()->first_name }}
                         <b class="caret"></b>
                     </a>
@@ -189,14 +153,15 @@
             </ul>
         </div>
     </div>
+    </header>
     <!-- end navbar -->
 
 	@if (Sentry::check())
-	 <!-- sidebar -->
+	<!-- sidebar -->
     <div id="sidebar-nav">
         <ul id="dashboard-menu">
 
-            <li{{ (Request::is('hardware') ? ' class="active"><div class="pointer"><div class="arrow"></div><div class="arrow_border"></div></div>' : '>') }}
+            <li{{ (Request::is('hardware*') ? ' class="active"><div class="pointer"><div class="arrow"></div><div class="arrow_border"></div></div>' : '>') }}
                 <a href="#" class="dropdown-toggle">
                     <i class="icon-barcode"></i>
                     <span>Assets</span>
@@ -241,22 +206,19 @@
 <!-- main container -->
     <div class="content">
 
-
-        <div class="container-fluid">
-
 		@if ((Sentry::check()) && (Sentry::getUser()->hasAccess('admin')))
         <!-- upper main stats -->
             <div id="main-stats">
-                <div class="row-fluid stats-row">
-                    <div class="span3 stat">
-                        <div class="data">
+            <div class="row stats-row">
+                <div class="col-md-3 col-sm-3 stat">
+                    <div class="data">
                             <a href="{{ URL::to('hardware') }}">
                             	<span class="number">{{ number_format(Asset::assetcount()) }}</span>
                            	 	<span style="color:black">total assets</span>
                             </a>
                         </div>
                     </div>
-                    <div class="span3 stat">
+                    <div class="col-md-3 col-sm-3 stat">
                         <div class="data">
                             <a href="{{ URL::to('hardware?RTD=true') }}">
                             	<span class="number">{{ number_format(Asset::availassetcount()) }}</span>
@@ -264,7 +226,7 @@
                             </a>
                         </div>
                     </div>
-                    <div class="span3 stat">
+                    <div class="col-md-3 col-sm-3 stat">
                         <div class="data">
                             <a href="{{ URL::to('admin/licenses') }}">
                             	<span class="number">{{ number_format(License::assetcount()) }}</span>
@@ -272,8 +234,7 @@
                             </a>
                         </div>
                     </div>
-
-                    <div class="span3 stat last">
+                    <div class="col-md-3 col-sm-3 stat last">
                         <div class="data">
                         	<a href="{{ URL::to('admin/licenses') }}">
                             	<span class="number">{{ number_format(License::availassetcount()) }}</span>
@@ -292,7 +253,7 @@
 
 
                  <!-- Notifications -->
-			@include('frontend/notifications')
+				@include('frontend/notifications')
 
 			<!-- Content -->
 			@yield('content')
@@ -301,7 +262,7 @@
                 </div>
 		  </div>
        </div>
-    </div>
+
 
 	<footer>
     <div id="footer">
@@ -314,16 +275,10 @@
 
     <!-- end main container -->
 
-
-
 	<!-- scripts -->
     <script src="//code.jquery.com/jquery-latest.js"></script>
     <script src="{{ asset('assets/js/bootstrap.min.js') }}"></script>
-    <script src="{{ asset('assets/js/jquery-ui-1.10.2.custom.min.js') }}"></script>
-    <!-- knob -->
     <script src="{{ asset('assets/js/jquery.knob.js') }}"></script>
-
-
     <script src="{{ asset('assets/js/select2.min.js') }}"></script>
     <script src="{{ asset('assets/js/jquery.uniform.min.js') }}"></script>
     <script src="{{ asset('assets/js/bootstrap.datepicker.js') }}"></script>
@@ -387,8 +342,10 @@
             var title = $(this).attr('data-title');
 
 			if (!$('#dataConfirmModal').length) {
-				$('body').append('<div id="dataConfirmModal" class="modal" role="dialog" aria-labelledby="dataConfirmLabel" aria-hidden="true"><div class="modal-header"><button type="button" class="close " data-dismiss="modal" aria-hidden="true">×</button><h3 id="dataConfirmLabel">'+title+'</h3></div><div class="modal-body">'+message+'</div><div class="modal-footer"><button class="btn-flat white" data-dismiss="modal" aria-hidden="true">No</button> <a class="btn-flat danger" id="dataConfirmOK">Yes</a></div></div>');
+				$('body').append('<div class="modal fade" id="dataConfirmModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"><div class="modal-dialog"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button><h4 class="modal-title" id="myModalLabel">'+title+'</h4></div><div class="modal-body">'+message+'</div><div class="modal-footer"><button type="button" class="btn btn-default" data-dismiss="modal">Close</button><a class="btn btn-danger" id="dataConfirmOK">Yes</a></div></div></div></div>');
 			}
+
+
 
 			$('#dataConfirmModal').find('.modal-body').text(message);
 			$('#dataConfirmOK').attr('href', href);

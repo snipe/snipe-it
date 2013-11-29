@@ -21,7 +21,7 @@ Settings ::
 
                 <div class="row-fluid profile">
                     <!-- bio, new note & orders column -->
-                    <div class="span9 bio">
+                    <div class="col-md-9 bio">
                         <div class="profile-box">
                             <br>
                             <!-- checked out assets table -->
@@ -29,8 +29,8 @@ Settings ::
                             <table class="table table-hover">
 							<thead>
 								<tr>
-									<th class="span3">Setting</th>
-									<th class="span3"><span class="line"></span>Value</th>
+									<th class="col-md-3">Setting</th>
+									<th class="col-md-3"><span class="line"></span>Value</th>
 								</tr>
 							</thead>
 							<tbody>
@@ -51,7 +51,7 @@ Settings ::
                     </div>
 
                     <!-- side address column -->
-                    <div class="span3 address pull-right">
+                    <div class="col-md-3 address pull-right">
 						<br /><br />
 
 						<p>These settings let you customize certain aspects of your installation. </p>

@@ -8,7 +8,7 @@
 	margin-top: 10px;
 	margin-bottom: 20px;
 
-	[class*="span"] {
+	[class*="col-"] {
 		background-color: #eee;
 		text-align: center;
 		-webkit-border-radius: 3px;
@@ -16,5 +16,6 @@
 		border-radius: 3px;
 		min-height: 40px;
 		line-height: 40px;
+		border: 1px solid rgba(86,61,124,.2);
 	}
 }

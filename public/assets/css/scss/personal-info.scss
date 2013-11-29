@@ -34,10 +34,7 @@
 		}
 		form {
 			margin-left: 50px;
-		}
-		.field-box {	
-			margin-bottom: 20px;
-		}
+		}		
 		label {
 			display: inline-block;
 			float: left;
@@ -46,18 +43,20 @@
 			cursor: auto;
 			width:20%;
 			margin-right: 10px;
+			text-align: left;
 		}
 		.input[type="text"] {
 			font-weight: 600;
 		}
 		.ui-select {
-			width: 50%;
+			width: 100%;
 			margin-bottom: 10px;
 		}
 		.actions {
 			margin-bottom: 25px;
-			margin-left: 0;
 			margin-top: 30px;
+			width: 100%;
+			padding-right: 70px;
 			float: left;
 			text-align: right;
 			span {
@@ -81,7 +80,7 @@
 @media (max-width: 480px) {
 }
 
-@media (max-width: 767px) {
+@media (max-width: 768px) {
 	.settings-wrapper {
 		#pad-wrapper{
 			padding: 0px 20px;
@@ -95,10 +94,7 @@
 			margin-top: 40px;
 			h5.personal-title {
 				margin-left: 0;
-			}
-			.field-box {
-				margin-left: 0;
-			}
+			}			
 			.ui-select {
 				width: 90%;
 			}
@@ -120,16 +116,22 @@
 	.settings-wrapper .personal-info .ui-select{
 		width: 77%;
 	}
+	.avatar-box {
+		text-align: center;
+		margin-bottom: 20px;
+	}
+	.settings-wrapper .personal-info {
+		border-left: 0px;
+		box-shadow: none;
+	}
 }
 @media (min-width: 768px){ 
 	.settings-wrapper .personal-info .alert {
 		margin-left: 50px;
-	}
+	}	
 }
 @media (min-width: 980px) {
-	.settings-wrapper .personal-info .ui-select{
-		width: 60%;
-	}
+
 }
 
 @media (max-width: 979px) {

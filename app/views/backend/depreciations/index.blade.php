@@ -8,28 +8,24 @@ Asset Depreciations ::
 
 {{-- Page content --}}
 @section('content')
-<div id="pad-wrapper" class="user-profile">
-                <!-- header -->
-				<h3 class="name">Asset Depreciations
-				<div class="pull-right">
-					<a href="{{ route('create/depreciations') }}" class="btn-flat success"><i class="icon-plus-sign icon-white"></i>  Create New</a>
-				</div>
-		</h3>
 
+<div class="row header">
+    <div class="col-md-12">
+    	<a href="{{ route('create/depreciations') }}" class="btn btn-success pull-right"><i class="icon-plus-sign icon-white"></i> Create New</a>
+		<h3>Asset Depreciations</h3>
+	</div>
+</div>
 
-                <div class="row-fluid profile">
-                    <!-- bio, new note & orders column -->
-                    <div class="span9 bio">
-                        <div class="profile-box">
-                            <br>
-                            <!-- checked out assets table -->
+<div class="user-profile">
+<div class="row profile">
+<div class="col-md-9 bio">
 
-                            <table id="example">
+                    <table id="example">
 						<thead>
 							<tr role="row">
-								<th class="span4">@lang('admin/depreciations/table.title')</th>
-								<th class="span2">@lang('admin/depreciations/table.term')</th>
-								<th class="span3">@lang('table.actions')</th>
+								<th class="col-md-4">@lang('admin/depreciations/table.title')</th>
+								<th class="col-md-2">@lang('admin/depreciations/table.term')</th>
+								<th class="col-md-2">@lang('table.actions')</th>
 							</tr>
 						</thead>
 						<tbody>
@@ -38,8 +34,10 @@ Asset Depreciations ::
 								<td>{{ $depreciation->name }}</td>
 								<td>{{ $depreciation->months }} @lang('admin/depreciations/table.months') </td>
 								<td>
-									<a href="{{ route('update/depreciations', $depreciation->id) }}" class="btn-flat white">@lang('button.edit')</a>
-									<a data-html="false" class="btn-flat danger delete-asset" data-toggle="modal" href="{{ route('delete/depreciations', $depreciation->id) }}" data-content="Are you sure you wish to delete this depreciation class?" data-title="Delete {{ htmlspecialchars($depreciation->name) }}?" onClick="return false;">@lang('button.delete')</a>
+								<a href="{{ route('update/depreciations', $depreciation->id) }}" class="btn btn-warning"><i class="icon-pencil icon-white"></i></a>
+<a data-html="false" class="btn delete-asset btn-danger" data-toggle="modal" href="{{ route('delete/depreciations', $depreciation->id) }}" data-content="Are you sure you wish to delete this depreciation?" data-title="Delete {{ htmlspecialchars($depreciation->name) }}?" onClick="return false;"><i class="icon-trash icon-white"></i></a>
+
+
 								</td>
 							</tr>
 							@endforeach
@@ -48,13 +46,15 @@ Asset Depreciations ::
 
 
                         </div>
-                    </div>
+
 
                     <!-- side address column -->
-                    <div class="span3 address pull-right">
+                    <div class="col-md-3 col-xs-12 address pull-right">
 						<br /><br />
 						<h6>About Asset Depreciations</h6>
 						<p>You can set up asset depreciations to depreciate assets based on straight-line depreciation.  </p>
 
                     </div>
+ </div>
+  </div>
 @stop

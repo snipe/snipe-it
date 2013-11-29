@@ -1,7 +1,6 @@
 .gallery {
 	.gallery-wrapper {
 		text-align: center;
-		padding-left: 45px;
 		position: relative;
 	}
 	.img-container {
@@ -46,128 +45,15 @@
 			top: 48%;
 		}
 	}
-	.new-img img {
-		border: 2px dashed #dee3e8;
-		cursor: pointer;
-		margin-bottom: 50px;
-		&:hover {
-			opacity: 0.8;
-			border-color: #ccc;
-		}
-	}
-
-	/* gallery popup */
-	.popup {
-		position: absolute;
-		background: #fff;
-		text-align: left;
-		width: 260px;
-		border: 1px solid #2b3b48;
-		box-shadow: 0px 0px 12px -1px rgba(0, 0, 0, 0.45);
-		border-radius: 4px;
-		padding: 14px 20px 14px 20px;
-		z-index: 5;
-		left: 240px;
-		top: 285px;
-
-		h5 {
-			text-transform: uppercase;
-			font-weight: 600;
-			margin: 0 0 21px 0;
-			font-size: 14px;
-			color: #7e91aa;
-		}
-		.thumb{
-			float: left;
-		}
+	.new-img {
+		display: inline-block;
 		img {
+			border: 2px dashed #dee3e8;
 			cursor: pointer;
-			border:2px solid #dff0fd;
-			border-radius: 3px;
-		}
-		.title {
-			float: right;
-			width: 58%;
-			input {
-				display: inline-block;
-				width: 90%;
-				margin: 7px 0 18px 
-			}
-			.ui-select{
-				width: 96%;
-			}
-			input:-moz-placeholder{
-				font-style: italic;
-			}
-			input:-ms-input-placeholder{
-				font-style: italic;
-			}
-			input::-webkit-input-placeholder{
-				font-style: italic;
-			}
-		}
-		.description {
-			width: 100%;
-			margin-top: 22px;
-			display: inline-block;
-			h6 {
-				margin: 0 0 5px 0;
-				color: #364453;
-				font-weight:600;
-				font-size: 13px;
-			}
-			textarea {
-				width: 95%;
-				margin-bottom: 13px;
-				height: 60px;
-			}
-			input[type="submit"]{
-				float: right;
-			}
-		}
-		i.close-pop {
-			position: absolute;
-			right: 11px;
-			cursor: pointer;
-			top: 12px;
-			opacity: 0.6;
-
-			transition: opacity .1s linear;
-			-moz-transition: opacity .1s linear;
-			-webkit-transition: opacity .1s linear;
-			-o-transition: opacity .1s linear;
-
-			&:hover{
-				opacity: 1;
-			}
-		}
-		.pointer {
-			position: absolute;
-			top: 35%;
-			left: -22px;
-			.arrow,
-			.arrow_border {
-				border-color: transparent #fff transparent transparent;
-				border-width: 11px;
-				border-style: solid;
-				font-size: 0;
-				left: 50%;
-				line-height: 0;
-				margin: 0 auto;
-				position: absolute;
-				top: 0;
-				width: 0;
-				z-index: 1002;
-				left: 0;
-				margin-left: 45%;
-			}
-			.arrow_border {
-				border-color: transparent #000 transparent transparent;
-				border-width: 11px;
-				margin-left: -1px;
-				border-style: solid;
-				z-index: 1001;
-				top: 0px;
+			margin-bottom: 50px;
+			&:hover {
+				opacity: 0.8;
+				border-color: #ccc;
 			}
 		}
 	}

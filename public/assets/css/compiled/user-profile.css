@@ -3,7 +3,7 @@
   margin-right: 25px;
   border: 2px solid #e9ecee;
   position: relative;
-  top: 20px;
+  top: 3px;
 }
 .user-profile .header .name {
   font-weight: 600;
@@ -25,6 +25,7 @@
   font-size: 14px;
 }
 .user-profile .profile .profile-box {
+  border-top: 1px solid #dde2e9;
   padding-top: 23px;
   width: 90%;
 }
@@ -120,7 +121,7 @@
     font-weight: normal;
   }
 }
-@media (max-width: 767px) {
+@media (max-width: 768px) {
   .user-profile .profile .bio {
     border-right: 0 none;
     border-bottom: 1px solid #edeef1;

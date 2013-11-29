@@ -56,7 +56,7 @@ class GroupsController extends AdminController {
 	{
 		// Declare the rules for the form validation
 		$rules = array(
-			'name' => 'required|alpha_dash|min:2',
+			'name' => 'required|alpha_space|min:2',
 		);
 
 		// Create a new validator instance from our validation rules

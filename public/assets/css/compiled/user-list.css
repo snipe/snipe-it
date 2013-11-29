@@ -1,7 +1,10 @@
+.users-list .header h3 {
+  margin-top: 0px;
+}
 .users-list .header input.search {
   padding: 5px 6px;
   position: relative;
-  top: -1px;
+  top: 0px;
 }
 .users-list .header input.search:focus {
   box-shadow: none;
@@ -12,6 +15,12 @@
 }
 .users-list .header .ui-dropdown {
   margin-left: 20px;
+}
+.users-list .header .ui-dropdown input.form-control {
+  width: 60px;
+  display: inline-block;
+  height: 28px;
+  margin: 0px 8px;
 }
 .users-list .header a.btn-flat span {
   font-size: 17px;
@@ -61,6 +70,9 @@
   }
   .users-list .table td {
     font-size: 12px;
+  }
+  .users-list .table .avatar {
+    display: none;
   }
   .users-list h3 {
     display: block;
