@@ -52,6 +52,9 @@ input.search {
   top: 11px;
 }
 
+.alert-msg {
+color: #b94a48;
+}
 .header {
   margin-bottom: 30px;
   /* border-bottom: 1px #e8e9ee solid; */
