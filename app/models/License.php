@@ -26,13 +26,6 @@ class License extends Elegant {
 
   	}
 
-	/**
-	* Get the asset's location based on the assigned user
-	**/
-  	public function assetloc()
-  	{
-  		return $this->assignedusers->hasOne('Location');
-  	}
 
   	/**
 	* Get asset logs for this asset
