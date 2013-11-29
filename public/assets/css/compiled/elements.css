@@ -11,6 +11,7 @@
   font-size: 12px;
 }
 .btn-group button.glow {
+  float: left;
   font-size: 11px;
   font-family: "Open sans", Helvetica, Arial;
   color: #313d4c;
@@ -66,6 +67,7 @@
 }
 .btn-group > .btn.glow {
   font-size: 12px;
+  float: left;
   font-weight: 500;
   padding: 6px 14px;
   color: #313d4c;
@@ -85,15 +87,12 @@
 .btn-group > .btn.glow.dropdown-toggle {
   padding: 6px 9px;
 }
-.btn-group > .btn.glow .caret {
-  margin-top: 6px;
-}
 
 /* FLAT BUTTONS */
 .btn-flat {
   display: inline-block;
   margin: 0;
-  line-height: 11px;
+  line-height: 15px;
   vertical-align: middle;
   font-size: 12px;
   text-shadow: none;
@@ -359,7 +358,7 @@
 .slider-button {
   display: block;
   width: 37px;
-  height: 21px;
+  height: 23px;
   line-height: 23px;
   background: #fff;
   border: 1px solid #d0dde9;
@@ -410,7 +409,7 @@
   font-size: 12px;
   border: none;
   padding: 1px 30px 0px 7px;
-  height: 25px;
+  height: 21px;
   -webkit-appearance: none;
   color: #737f8d;
   text-shadow: 1px 1px 1px #fff;
@@ -420,7 +419,7 @@
 /* jQuery UI Slider overrides */
 .ui-slider {
   border: 1px solid #cfdde8;
-  height: 4px;
+  height: 7px;
   background: #edeeef;
   box-shadow: inset 0px -3px 7px 0px #fff;
 }

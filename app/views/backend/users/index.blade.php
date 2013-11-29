@@ -8,49 +8,40 @@ User Management ::
 
 {{-- Page content --}}
 @section('content')
-<div class="page-header">
 
-	<div class="pull-right">
-	@if (Input::get('onlyTrashed'))
-		<a class="btn-flat white" href="{{ URL::to('admin/users') }}">Show Current Users</a>
-	@else
-		<a class="btn-flat white" href="{{ URL::to('admin/users?onlyTrashed=true') }}">Show Deleted Users</a>
-	@endif
+<div class="row header">
+    <div class="col-md-12">
+    	<a href="{{ route('create/user') }}" class="btn btn-success pull-right"><i class="icon-plus-sign icon-white"></i> New User</a>
+    	@if (Input::get('onlyTrashed'))
+			<a class="btn btn-default pull-right" href="{{ URL::to('admin/users') }}">Show Current Users</a>
+		@else
+			<a class="btn btn-default pull-right" href="{{ URL::to('admin/users?onlyTrashed=true') }}">Show Deleted Users</a>
+		@endif
 
-		<a href="{{ route('create/user') }}" class="btn-flat success"><i class="icon-plus-sign icon-white"></i> New User</a>
-	</div>
-
-	<h3>
+		<h3>
 		@if (Input::get('onlyTrashed'))
 			Deleted
 		@else
 			Current
 		@endif
 
-		 Users
 	</h3>
+	</div>
 </div>
 
-
-
-
-<br><br>
-
-@if ($users->getTotal() > 10)
-{{ $users->links() }}
-@endif
+<div class="row form-wrapper">
 
 @if ($users->getTotal() > 0)
 <div class="row-fluid table users-list">
 <table id="example">
 	<thead>
 		<tr role="row">
-			<th class="span3">@lang('admin/users/table.name')</th>
-			<th class="span2">@lang('admin/users/table.email')</th>
-			<th class="span1">Assets</th>
-			<th class="span1">Licenses</th>
-			<th class="span1">@lang('admin/users/table.activated')</th>
-			<th class="span3">@lang('table.actions')</th>
+			<th class="col-md-4">@lang('admin/users/table.name')</th>
+			<th class="col-md-3">@lang('admin/users/table.email')</th>
+			<th class="col-md-1">Assets</th>
+			<th class="col-md-1">Licenses</th>
+			<th class="col-md-1">@lang('admin/users/table.activated')</th>
+			<th class="col-md-2">@lang('table.actions')</th>
 		</tr>
 	</thead>
 	<tbody>
@@ -69,17 +60,18 @@ User Management ::
 			<td>
 			@if ($user->id > 3)
 				@if ( ! is_null($user->deleted_at))
-				<a href="{{ route('restore/user', $user->id) }}" class="btn-flat default"><i class="icon-share-alt icon-white"></i> @lang('button.restore')</a>
+				<a href="{{ route('restore/user', $user->id) }}" class="btn btn-warning"><i class="icon-share-alt icon-white"></i></a>
 				@else
-				<a href="{{ route('update/user', $user->id) }}" class="btn-flat white"><i class="icon-pencil"></i> @lang('button.edit')</a>
+				<a href="{{ route('update/user', $user->id) }}" class="btn btn-warning"><i class="icon-pencil icon-white"></i></a>
 				@if (Sentry::getId() !== $user->id)
-				<a  data-html="false" class="btn-flat danger delete-asset" data-toggle="modal" href="{{ route('delete/user', $user->id) }}" data-content="Are you sure you wish to delete this user?" data-title="Delete {{ htmlspecialchars($user->first_name) }}?" onClick="return false;"><i class="icon-remove icon-white"></i> @lang('button.delete')</a>
+				<a data-html="false" class="btn delete-asset btn-danger" data-toggle="modal" href="{{ route('delete/user', $user->id) }}" data-content="Are you sure you wish to delete this user?" data-title="Delete {{ htmlspecialchars($user->first_name) }}?" onClick="return false;"><i class="icon-trash icon-white"></i></a>
 
 				@else
 				<span class="btn-flat danger disabled"><i class="icon-remove icon-white"></i> @lang('button.delete')</span>
 				@endif
 				@endif
 			@endif
+
 			</td>
 		</tr>
 		@endforeach
@@ -94,10 +86,6 @@ User Management ::
 
 	</div>
 </div>
-@endif
-
-@if ($users->getTotal() > 10)
-{{ $users->links() }}
 @endif
 
 @stop

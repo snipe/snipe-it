@@ -54,6 +54,18 @@
 #pad-wrapper .ctrls h4 {
   margin: 20px 0px 20px 0px;
 }
+#pad-wrapper .ctrls .dropdown .dropdown-menu {
+  margin-right: 10px;
+  position: static;
+  display: block;
+}
+#pad-wrapper .ctrls .nav-tabs {
+  margin-bottom: 15px;
+}
+#pad-wrapper .ctrls .tab-content {
+  padding: 0px 10px;
+  margin-bottom: 20px;
+}
 #pad-wrapper .sliders .slider {
   margin-bottom: 20px;
 }

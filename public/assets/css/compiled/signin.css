@@ -11,6 +11,8 @@
 .login-wrapper {
   position: absolute;
   top: 90px;
+  left: 0;
+  right: 0;
   text-align: center;
 }
 .login-wrapper .logo {
@@ -88,6 +90,7 @@
   float: left;
   color: #4a576a;
   font-size: 13px;
+  font-weight: 600;
 }
 .login-wrapper .box .login {
   text-transform: uppercase;

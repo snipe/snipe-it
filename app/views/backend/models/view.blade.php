@@ -25,7 +25,7 @@ View Model {{ $model->model_tag }} ::
 
                 <div class="row-fluid profile">
                     <!-- bio, new note & orders column -->
-                    <div class="span9 bio">
+                    <div class="col-md-9 bio">
                         <div class="profile-box">
                             <br>
                             <!-- checked out models table -->
@@ -33,10 +33,10 @@ View Model {{ $model->model_tag }} ::
                            <table id="example">
 							<thead>
 								<tr role="row">
-                                        <th class="span3">Name</th>
-                                        <th class="span3">Asset Tag</th>
-                                        <th class="span3">User</th>
-                                        <th class="span2">Actions</th>
+                                        <th class="col-md-3">Name</th>
+                                        <th class="col-md-3">Asset Tag</th>
+                                        <th class="col-md-3">User</th>
+                                        <th class="col-md-2">Actions</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -80,7 +80,7 @@ View Model {{ $model->model_tag }} ::
                     </div>
 
                     <!-- side address column -->
-                    <div class="span3 address pull-right">
+                    <div class="col-md-3 address pull-right">
 
                     <h6><br>More Info:</h6>
                        		<ul>

@@ -28,20 +28,20 @@ Depreciation Report
 	<h3>Depreciation Report</h3>
 </div>
 
-
-<div class="row-fluid table">
+<div class="row table">
+<div class="col-md-12">
 <table id="example">
 		<thead>
 			<tr role="row">
-			<th class="span2">@lang('admin/hardware/table.asset_tag')</th>
-			<th class="span2">@lang('admin/hardware/table.title')</th>
-			<th class="span2">@lang('admin/hardware/table.serial')</th>
-			<th class="span3">@lang('admin/hardware/table.checkoutto')</th>
-			<th class="span2">@lang('admin/hardware/table.location')</th>
-			<th class="span2">@lang('admin/hardware/table.purchase_date')</th>
-			<th class="span1">@lang('admin/hardware/table.purchase_cost')</th>
-			<th class="span1">@lang('admin/hardware/table.book_value')</th>
-			<th class="span1">Diff</th>
+			<th class="col-sm-2">@lang('admin/hardware/table.asset_tag')</th>
+			<th class="col-sm-2">@lang('admin/hardware/table.title')</th>
+			<th class="col-sm-2">@lang('admin/hardware/table.serial')</th>
+			<th class="col-sm-3">@lang('admin/hardware/table.checkoutto')</th>
+			<th class="col-sm-2">@lang('admin/hardware/table.location')</th>
+			<th class="col-sm-2">@lang('admin/hardware/table.purchase_date')</th>
+			<th class="col-sm-1">@lang('admin/hardware/table.purchase_cost')</th>
+			<th class="col-sm-1">@lang('admin/hardware/table.book_value')</th>
+			<th class="col-sm-1">Diff</th>
 		</tr>
 	</thead>
 	<tbody>

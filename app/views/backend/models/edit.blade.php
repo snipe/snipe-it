@@ -13,16 +13,16 @@
 {{-- Page content --}}
 @section('content')
 <div class="page-header">
-	<div class="pull-right">
-		<a href="{{ route('models') }}" class="btn-flat gray"><i class="icon-circle-arrow-left icon-white"></i> Back</a>
-	</div>
-
 	<h3>
 		@if ($model->id)
 		Update Model
 		@else
 			Create New Model
 		@endif
+
+		<div class="pull-right">
+			<a href="{{ route('models') }}" class="btn-flat gray"><i class="icon-circle-arrow-left icon-white"></i> Back</a>
+		</div>
 	</h3>
 </div>
 
@@ -34,7 +34,7 @@
 		<!-- General tab -->
 		<div class="tab-pane active" id="tab-general">
 			<!-- Model Title -->
-			<div class="control-group {{ $errors->has('name') ? 'error' : '' }}">
+			<div class="form-group {{ $errors->has('name') ? 'error' : '' }}">
 				<label class="control-label" for="name">Model Name</label>
 				<div class="controls">
 					<input type="text" name="name" id="name" value="{{ Input::old('name', $model->name) }}" />
@@ -42,7 +42,7 @@
 				</div>
 			</div>
 
-			<div class="control-group {{ $errors->has('modelno') ? 'error' : '' }}">
+			<div class="form-group {{ $errors->has('modelno') ? 'error' : '' }}">
 				<label class="control-label" for="modelno">Model No.</label>
 				<div class="controls">
 					<input type="text" name="modelno" id="modelno" value="{{ Input::old('modelno', $model->modelno) }}" />
@@ -51,7 +51,7 @@
 			</div>
 
 			<!-- Manufacturer -->
-			<div class="control-group {{ $errors->has('manufacturer_id') ? 'error' : '' }}">
+			<div class="form-group {{ $errors->has('manufacturer_id') ? 'error' : '' }}">
 				<label class="control-label" for="parent">Manufacturer</label>
 				<div class="controls">
 					{{ Form::select('manufacturer_id', $manufacturer_list , Input::old('manufacturer_id', $model->manufacturer_id), array('class'=>'select2', 'style'=>'width:250px')) }}
@@ -60,7 +60,7 @@
 			</div>
 
 			<!-- Depreciation -->
-			<div class="control-group {{ $errors->has('depreciation_id') ? 'error' : '' }}">
+			<div class="form-group {{ $errors->has('depreciation_id') ? 'error' : '' }}">
 				<label class="control-label" for="parent">Depreciation</label>
 				<div class="controls">
 					{{ Form::select('depreciation_id', $depreciation_list , Input::old('depreciation_id', $model->depreciation_id), array('class'=>'select2', 'style'=>'width:250px')) }}
@@ -69,7 +69,7 @@
 			</div>
 
 			<!-- Category -->
-			<div class="control-group {{ $errors->has('category_id') ? 'error' : '' }}">
+			<div class="form-group {{ $errors->has('category_id') ? 'error' : '' }}">
 				<label class="control-label" for="parent">Category</label>
 				<div class="controls">
 					{{ Form::select('category_id', $category_list , Input::old('category_id', $model->category_id), array('class'=>'select2', 'style'=>'width:250px')) }}
@@ -81,7 +81,7 @@
 	</div>
 
 	<!-- Form Actions -->
-	<div class="control-group">
+	<div class="form-group">
 		<div class="controls">
 			<a class="btn btn-link" href="{{ route('models') }}">@lang('general.cancel')</a>
 			<button type="submit" class="btn-flat success"><i class="icon-ok icon-white"></i> @lang('general.save')</button>

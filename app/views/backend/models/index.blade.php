@@ -20,12 +20,12 @@ Asset Models ::
 <table id="example">
 	<thead>
 		<tr role="row">
-			<th class="span3">@lang('admin/models/table.title')</th>
-			<th class="span2">@lang('admin/models/table.modelnumber')</th>
-			<th class="span1">@lang('admin/models/table.numassets')</th>
-			<th class="span2">Depreciation</th>
-			<th class="span1">Category</th>
-			<th class="span2">@lang('table.actions')</th>
+			<th class="col-md-3">@lang('admin/models/table.title')</th>
+			<th class="col-md-2">@lang('admin/models/table.modelnumber')</th>
+			<th class="col-md-1">@lang('admin/models/table.numassets')</th>
+			<th class="col-md-2">Depreciation</th>
+			<th class="col-md-1">Category</th>
+			<th class="col-md-2">@lang('table.actions')</th>
 		</tr>
 	</thead>
 	<tbody>

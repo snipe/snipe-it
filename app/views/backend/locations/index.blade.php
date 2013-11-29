@@ -8,25 +8,25 @@ Locations ::
 
 {{-- Page content --}}
 @section('content')
-<div class="page-header">
 
-	<div class="pull-right">
-		<a href="{{ route('create/location') }}" class="btn-flat success"><i class="icon-plus-sign icon-white"></i> Create New</a>
+<div class="row header">
+    <div class="col-md-12">
+    	<a href="{{ route('create/location') }}" class="btn btn-success pull-right"><i class="icon-plus-sign icon-white"></i> Create New</a>
+		<h3>Locations</h3>
 	</div>
-
-	<h3>Locations</h3>
 </div>
 
-<div class="row-fluid table">
+<div class="row form-wrapper">
+
 <table id="example">
 	<thead>
 		<tr role="row">
-			<th class="span3">@lang('admin/locations/table.name')</th>
-			<th class="span3">Address</th>
-			<th class="span2">@lang('admin/locations/table.city'),
+			<th class="col-md-3">@lang('admin/locations/table.name')</th>
+			<th class="col-md-3">Address</th>
+			<th class="col-md-2">@lang('admin/locations/table.city'),
 			 @lang('admin/locations/table.state')
 			@lang('admin/locations/table.country')</th>
-			<th class="span2">@lang('table.actions')</th>
+			<th class="col-md-2">@lang('table.actions')</th>
 		</tr>
 	</thead>
 	<tbody>
@@ -36,8 +36,9 @@ Locations ::
 			<td>{{ $location->address }}, {{ $location->address2 }}  </td>
 			<td>{{ $location->city }}, {{ $location->state }}  {{ $location->country }}  </td>
 			<td>
-				<a href="{{ route('update/location', $location->id) }}" class="btn-flat white"> @lang('button.edit')</a>
-				<a data-html="false" class="btn-flat danger delete-asset" data-toggle="modal" href="{{ route('delete/location', $location->id) }}" data-content="Are you sure you wish to delete this location?" data-title="Delete {{ htmlspecialchars($location->name) }}?" onClick="return false;">@lang('button.delete')</a>
+				<a href="{{ route('update/location', $location->id) }}" class="btn btn-warning"><i class="icon-pencil icon-white"></i></a>
+				<a data-html="false" class="btn delete-asset btn-danger" data-toggle="modal" href="{{ route('delete/location', $location->id) }}" data-content="Are you sure you wish to delete this location?" data-title="Delete {{ htmlspecialchars($location->name) }}?" onClick="return false;"><i class="icon-trash icon-white"></i></a>
+
 			</td>
 		</tr>
 		@endforeach

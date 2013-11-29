@@ -70,6 +70,7 @@ html .fc,
 .fc-header .fc-button {
 	margin-bottom: 1em;
 	vertical-align: top;
+	height: 29px;
 	}
 	
 /* buttons edges butting together */

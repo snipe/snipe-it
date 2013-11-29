@@ -1,16 +1,15 @@
 /* Main stats up of screen */
 #main-stats {
-  margin-left: -20px;
-  margin-right: -20px;
   background-color: #fdfdfd;
   border-bottom: 1px solid #efeef3;
 }
 #main-stats .stats-row {
   box-shadow: inset -1px 0px 5px 2px #f9f9f9;
+  margin: 0;
 }
 #main-stats .stat {
   text-align: right;
-  padding: 30px 0px 35px 0px;
+  padding: 25px 0px 30px 0px;
   border-right: 1px solid #e8e9ee;
   position: relative;
   box-shadow: 1px 0px 0px 0px white;
@@ -40,15 +39,6 @@
   right: 50px;
 }
 
-#main-stats a:hover {
-text-decoration: none;
-}
-
-#helpicon a:hover {
-text-decoration: none;
-}
-
-
 .section {
   border-top: 1px solid #edeff1;
   margin-top: 100px;
@@ -58,7 +48,6 @@ text-decoration: none;
 
 /* Stats chart */
 #statsChart {
-  width: 97%;
   height: 250px;
   margin-top: 35px;
 }
@@ -86,9 +75,6 @@ text-decoration: none;
 #pad-wrapper .ui-elements .ui-sliders {
   margin-top: 10px;
   margin-bottom: 50px;
-}
-#pad-wrapper .ui-elements .ui-sliders .ui-slider {
-  width: 95%;
 }
 #pad-wrapper .ui-elements .ui-sliders .ui-slider.slider-sample2, #pad-wrapper .ui-elements .ui-sliders .ui-slider.slider-sample3 {
   margin-top: 20px;
@@ -213,10 +199,10 @@ text-decoration: none;
 }
 
 /* responsive */
-@media (max-width: 767px) {
+@media (max-width: 768px) {
   #main-stats {
-    margin-left: 0px;
-    margin-right: 0px;
+    margin-left: -15px;
+    margin-right: -15px;
   }
 
   #pad-wrapper .ui-elements .knobs {
@@ -242,6 +228,9 @@ text-decoration: none;
   #main-stats .stat .data {
     padding-right: 17px;
   }
+  #main-stats .stat .data .number {
+    font-size: 18px;
+  }
 
   #pad-wrapper .knob-wrapper .info {
     display: none;
@@ -249,6 +238,10 @@ text-decoration: none;
 
   .pointer {
     top: 5%;
+  }
+
+  .table-products .head {
+    margin-bottom: 20px;
   }
 }
 @media (min-width: 980px) {

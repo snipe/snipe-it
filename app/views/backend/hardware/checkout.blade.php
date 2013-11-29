@@ -12,76 +12,77 @@
 
 {{-- Page content --}}
 @section('content')
-<div class="page-header">
 
-	<div class="pull-right">
-		<a href="{{ route('hardware') }}" class="btn-flat gray"><i class="icon-circle-arrow-left icon-white"></i> Back</a>
+<div class="row header">
+    <div class="col-md-12">
+		<a href="{{ route('hardware') }}" class="btn-flat gray pull-right"><i class="icon-circle-arrow-left icon-white"></i> Back</a>
+		<h3>
+		@if ($asset->id)
+			Checkout Asset to User
+		@else
+			Create Asset
+		@endif
+		</h3>
 	</div>
-
-	<h3>
-	@if ($asset->id)
-		Checkout Asset to User
-	@else
-		Create Asset
-	@endif
-	</h3>
 </div>
 
+<div class="row form-wrapper">
+<!-- left column -->
+<div class="col-md-10 column">
 
 <form class="form-horizontal" method="post" action="" autocomplete="off">
 	<!-- CSRF Token -->
 	<input type="hidden" name="_token" value="{{ csrf_token() }}" />
 
-	<!-- Tabs Content -->
-	<div class="tab-content">
-
-		<div class="tab-pane active" id="tab-general">
-
-			<!-- Asset Tag -->
-			<div class="control-group">
-				<label class="control-label" for="asset_tag">Asset Tag</label>
-				<div class="controls">
-					<input class="span4" readonly="readonly" type="text" name="asset_tag" id="asset_tag" value="{{ $asset->asset_tag }}" />
+			<!-- Asset tag -->
+			<div class="form-group">
+			<label class="col-sm-2 control-label">Asset Tag</label>
+				<div class="col-md-6">
+				  <p class="form-control-static">{{ $asset->asset_tag }}</p>
 				</div>
-			</div>
+		  	</div>
 
-			<!-- Asset Name -->
-			<div class="control-group">
-				<label class="control-label" for="name">Asset Name</label>
-				<div class="controls">
-					<input class="span4" readonly="readonly" type="text" name="name" id="asset_name" value="{{ $asset->name }}" />
+			<!-- Asset name -->
+		  	<div class="form-group">
+			<label class="col-sm-2 control-label">Asset Name</label>
+				<div class="col-md-6">
+				  <p class="form-control-static">{{ $asset->name }}</p>
 				</div>
-			</div>
-
+		  	</div>
 			<!-- User -->
-			<div class="control-group {{ $errors->has('assigned_to') ? 'error' : '' }}">
-				<label class="control-label" for="parent">Checkout to</label>
-				<div class="controls">
 
+			<div class="form-group {{ $errors->has('assigned_to') ? ' has-error' : '' }}">
+				<label for="assigned_to" class="col-md-2 control-label">Checkout to</label>
+				<div class="col-md-7">
 					{{ Form::select('assigned_to', $users_list , Input::old('assigned_to', $asset->assigned_to), array('class'=>'select2', 'style'=>'min-width:350px')) }}
-					{{ $errors->first('assigned_to', '<span class="help-inline">:message</span>') }}
+					{{ $errors->first('assigned_to', '<span class="alert-msg"><i class="icon-remove-sign"></i> :message</span>') }}
 				</div>
 			</div>
 
-			<!-- Notes -->
-			<div class="control-group {{ $errors->has('note') ? 'error' : '' }}">
-				<label class="control-label" for="note">Notes</label>
-				<div class="controls">
-					<input class="span6" type="text" name="note" id="note" value="{{ Input::old('notes', $asset->note) }}" />
-					{{ $errors->first('note', '<span class="help-inline"><i class="icon-remove-sign"></i> :message</span>') }}
+			<!-- Note -->
+			<div class="form-group {{ $errors->has('note') ? 'error' : '' }}">
+				<label for="note" class="col-md-2 control-label">Note</label>
+				<div class="col-md-7">
+					<input class="col-md-6 form-control" type="text" name="note" id="note" value="{{ Input::old('note', $asset->note) }}" />
+					{{ $errors->first('note', '<span class="alert-msg"><i class="icon-remove-sign"></i> :message</span>') }}
 				</div>
 			</div>
 
-		</div>
+			<!-- Form actions -->
+			<div class="form-group">
+			<label class="col-md-2 control-label"></label>
+				<div class="col-md-7">
+					@if ($asset->id)
+					<a class="btn btn-link" href="{{ route('view/hardware', $asset->id) }}">Cancel</a>
+					@else
+					<a class="btn btn-link" href="{{ route('hardware') }}">Cancel</a>
+					@endif
+					<button type="submit" class="btn-flat success"><i class="icon-ok icon-white"></i> Save</button>
+				</div>
+			</div>
 
-	<!-- Form actions -->
-	<div class="control-group">
-		<div class="controls">
-			<a class="btn btn-link" href="{{ route('hardware') }}">@lang('general.cancel')</a>
-			<button type="submit" class="btn-flat success"><i class="icon-ok icon-white"></i>@lang('general.checkout')</button>
-		</div>
-	</div>
 </form>
 
-
+</div>
+</div>
 @stop
