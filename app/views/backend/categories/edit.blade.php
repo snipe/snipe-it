@@ -12,48 +12,46 @@
 
 {{-- Page content --}}
 @section('content')
-<div id="pad-wrapper" class="user-profile">
-                <!-- header -->
-				<h3 class="name">Asset Categories
-				<div class="pull-right">
-					<a href="{{ route('categories') }}" class="btn-flat gray"><i class="icon-circle-arrow-left icon-white"></i> Back</a>
-				</div>
-		</h3>
 
 
-                <div class="row-fluid profile">
-                    <!-- bio, new note & orders column -->
-                    <div class="span9 bio">
-                        <div class="profile-box">
-                            <br>
+<div class="row header">
+    <div class="col-md-12">
+    	<a href="{{ route('categories') }}" class="btn-flat gray pull-right"><i class="icon-circle-arrow-left icon-white"></i> Back</a>
+		<h3>Asset Categories</h3>
+	</div>
+</div>
+
+<div class="user-profile">
+<div class="row profile">
+<div class="col-md-9 bio">
+
                         <form class="form-horizontal" method="post" action="" autocomplete="off">
 						<!-- CSRF Token -->
 						<input type="hidden" name="_token" value="{{ csrf_token() }}" />
 
-						<!-- Category Title -->
-						<div class="form-group {{ $errors->has('name') ? 'error' : '' }}">
-							<label class="control-label" for="name">Category Name</label>
-							<div class="controls">
-								<input type="text" name="name" id="name" value="{{ Input::old('name', $category->name) }}" />
-								{{ $errors->first('name', '<span class="help-inline">:message</span>') }}
-							</div>
+						<!-- Name -->
+						<div class="form-group {{ $errors->has('asset_tag') ? ' has-error' : '' }}">
+							<label for="name" class="col-md-2 control-label">Category Name</label>
+								<div class="col-md-7">
+									<input class="form-control" type="text" name="name" id="name" value="{{ Input::old('name', $category->name) }}" />
+									{{ $errors->first('name', '<span class="alert-msg"><i class="icon-remove-sign"></i> :message</span>') }}
+								</div>
 						</div>
 
 						<!-- Form actions -->
 						<div class="form-group">
-							<div class="controls">
+						<label class="col-md-2 control-label"></label>
+							<div class="col-md-7">
 								<a class="btn btn-link" href="{{ route('categories') }}">@lang('general.cancel')</a>
-								<button type="submit" class="btn-flat success"><i class="icon-ok icon-white"></i> @lang('general.save')</button>
+								<button type="submit" class="btn btn-success"><i class="icon-ok icon-white"></i> @lang('general.save')</button>
 							</div>
 						</div>
 					</form>
-
-
-                        </div>
-                    </div>
+					<br><br><br><br><br>
+					</div>
 
                     <!-- side address column -->
-                    <div class="span3 address pull-right">
+                    <div class="col-md-3 col-xs-12 address pull-right">
 						<br /><br />
 						<h6>About Asset Categories</h6>
 						<p>Asset categories help you organize your assets. Some
@@ -61,4 +59,6 @@
 						and so on, but you can use asset categories any way that makes sense for you.  </p>
 
                     </div>
+</div>
+</div>
 @stop
