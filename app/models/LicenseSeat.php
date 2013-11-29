@@ -11,7 +11,7 @@ class LicenseSeat extends Elegant {
 
 	public function user()
 	{
-		return $this->belongsTo('User','assigned_to');
+		return $this->belongsTo('User','assigned_to')->withTrashed();
 	}
 
 }

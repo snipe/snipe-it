@@ -62,10 +62,12 @@ Licenses ::
 					 </td>
 					<td><a href="{{ route('view/license', $license->id) }}">{{ $license->serial }}</a></td>
 					<td>
-					@if ($licensedto->assigned_to)
+					@if (($licensedto->assigned_to) && ($licensedto->deleted_at == NULL))
 						<a href="{{ route('view/user', $licensedto->assigned_to) }}">
 					{{ $licensedto->user->fullName() }}
 					</a>
+					@elseif (($licensedto->assigned_to) && ($licensedto->deleted_at != NULL))
+						<del>{{ $licensedto->user->fullName() }}</del>
 					@endif
 					</td>
 					<td>

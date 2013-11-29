@@ -58,7 +58,7 @@ User Management ::
 			<td>{{ $user->licenses->count() }}</td>
 			<td>{{ $user->isActivated() ? '<i class="icon-ok"></i>' : ''}}</td>
 			<td>
-			@if ($user->id > 3)
+			@if ($user->id > 2)
 				@if ( ! is_null($user->deleted_at))
 				<a href="{{ route('restore/user', $user->id) }}" class="btn btn-warning"><i class="icon-share-alt icon-white"></i></a>
 				@else
@@ -67,7 +67,7 @@ User Management ::
 				<a data-html="false" class="btn delete-asset btn-danger" data-toggle="modal" href="{{ route('delete/user', $user->id) }}" data-content="Are you sure you wish to delete this user?" data-title="Delete {{ htmlspecialchars($user->first_name) }}?" onClick="return false;"><i class="icon-trash icon-white"></i></a>
 
 				@else
-				<span class="btn-flat danger disabled"><i class="icon-remove icon-white"></i> @lang('button.delete')</span>
+				<span class="btn-flat danger disabled"><i class="icon-trash icon-white"></i></span>
 				@endif
 				@endif
 			@endif
