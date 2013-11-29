@@ -8,13 +8,11 @@ Licenses ::
 {{-- Page content --}}
 @section('content')
 <div class="page-header">
-	<h3>
-		Software Licenses
+	<div class="pull-right">
+		<a href="{{ route('create/licenses') }}" class="btn-flat success"><i class="icon-plus-sign icon-white"></i> Create New</a>
+	</div>
 
-		<div class="pull-right">
-			<a href="{{ route('create/licenses') }}" class="btn-flat success"><i class="icon-plus-sign icon-white"></i> Create New</a>
-		</div>
-	</h3>
+	<h3>Software Licenses</h3>
 </div>
 
 <table id="example">

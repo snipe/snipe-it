@@ -13,6 +13,15 @@
 {{-- Page content --}}
 @section('content')
 <div class="page-header">
+
+	<div class="pull-right">
+		@if ($license->id)
+			<a href="{{ route('view/license',$license->id) }}" class="btn-flat gray"><i class="icon-circle-arrow-left icon-white"></i> Back</a>
+		@else
+			<a href="{{ route('licenses') }}" class="btn-flat gray"><i class="icon-circle-arrow-left icon-white"></i> Back</a>
+		@endif
+	</div>
+
 	<h3>
 		@if ($license->id)
 		Update License
@@ -20,13 +29,7 @@
 		Create License
 		@endif
 
-		<div class="pull-right">
-			@if ($license->id)
-			<a href="{{ route('view/license',$license->id) }}" class="btn-flat gray"><i class="icon-circle-arrow-left icon-white"></i> Back</a>
-			@else
-			<a href="{{ route('licenses') }}" class="btn-flat gray"><i class="icon-circle-arrow-left icon-white"></i> Back</a>
-			@endif
-		</div>
+
 	</h3>
 </div>
 

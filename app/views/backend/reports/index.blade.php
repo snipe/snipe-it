@@ -11,10 +11,8 @@ Depreciation Report
 
 
 <div class="page-header">
-	<h3>
-		Depreciation Report
 
-		<div class="pull-right">
+	<div class="pull-right">
 			<div class="btn-group settings">
 				<button class="btn glow"><i class="icon-download-alt"></i></button>
 				<button class="btn glow dropdown-toggle" data-toggle="dropdown">
@@ -27,7 +25,7 @@ Depreciation Report
 			</div>
 		</div>
 
-	</h3>
+	<h3>Depreciation Report</h3>
 </div>
 
 

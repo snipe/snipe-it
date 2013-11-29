@@ -13,16 +13,17 @@
 {{-- Page content --}}
 @section('content')
 <div class="page-header">
+
+	<div class="pull-right">
+		<a href="{{ route('hardware') }}" class="btn-flat gray"><i class="icon-circle-arrow-left icon-white"></i> Back</a>
+	</div>
+
 	<h3>
 	@if ($asset->id)
-	Checkout Asset to User
+		Checkout Asset to User
 	@else
-	Create Asset
+		Create Asset
 	@endif
-
-		<div class="pull-right">
-			<a href="{{ route('hardware') }}" class="btn-flat gray"><i class="icon-circle-arrow-left icon-white"></i> Back</a>
-		</div>
 	</h3>
 </div>
 

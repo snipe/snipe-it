@@ -9,13 +9,12 @@ Asset Manufacturers ::
 {{-- Page content --}}
 @section('content')
 <div class="page-header">
-	<h3>
-		Asset Manufacturers
 
-		<div class="pull-right">
-			<a href="{{ route('create/manufacturer') }}" class="btn-flat success"><i class="icon-plus-sign icon-white"></i> Create New</a>
-		</div>
-	</h3>
+	<div class="pull-right">
+		<a href="{{ route('create/manufacturer') }}" class="btn-flat success"><i class="icon-plus-sign icon-white"></i> Create New</a>
+	</div>
+
+	<h3>Asset Manufacturers</h3>
 </div>
 
 

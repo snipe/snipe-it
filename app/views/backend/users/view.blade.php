@@ -20,9 +20,6 @@ View User {{ $user->fullName() }} ::
                     <a href="{{ route('update/user', $user->id) }}" class="btn-flat white large pull-right edit"><i class="icon-pencil"></i> @lang('button.edit') This User</a>
                 </div>
 
-
-
-
                 <div class="row-fluid profile">
                     <!-- bio, new note & orders column -->
                     <div class="span9 bio">
@@ -95,8 +92,8 @@ View User {{ $user->fullName() }} ::
 										</td>
 										<td><a href="{{ route('view/license', $license->id) }}">{{ $license->serial }}</a></td>
 										<td><a href="{{ route('view/license', $license->id) }}">{{ $license->name }}</a></td>
-
-										<td> <a href="{{ route('checkin/license', $license->id) }}" class="btn-flat info">Checkin</a></td>
+										<td> <a href="{{ route('checkin/license', $license->pivot->id) }}" class="btn-flat info">Checkin</a>
+										</td>
 									</tr>
 									@endforeach
                                 </tbody>
@@ -137,8 +134,7 @@ View User {{ $user->fullName() }} ::
 										@elseif ((isset($log->assetlog->name)) && ($log->assetlog->deleted_at!=''))
 											<del>{{ $log->assetlog->name }}</del> (deleted)
 										@else
-										missing asset
-										({{ $log->assetlog->name }}) ({{ $log->assetlog->deleted_at }})
+										missing asset ({{ $log->assetlog->name }}) ({{ $log->assetlog->deleted_at }})
 										@endif
 										</td>
 										<td>{{ $log->adminlog->fullName() }}</td>
@@ -165,12 +161,14 @@ View User {{ $user->fullName() }} ::
 
                         <h6>Contact  {{ $user->first_name }}</h6>
 
-                        		@if (isset($user->location_id))
+                        		@if ($user->location_id)
                         			<iframe width="300" height="133" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.com/maps?&amp;q={{ $user->userloc->address }},{{ $user->userloc->city }},{{ $user->userloc->state }},{{ $user->userloc->country }}&amp;output=embed"></iframe>
                         		@endif
 						<ul>
-                        <li>{{ $user->userloc->address }} {{ $user->userloc->address2 }}</li>
-                        <li>{{ $user->userloc->city }}, {{ $user->userloc->state }} {{ $user->userloc->zip }}<br /><br /></li>
+						@if ($user->location_id)
+							<li>{{ $user->userloc->address }} {{ $user->userloc->address2 }}</li>
+							<li>{{ $user->userloc->city }}, {{ $user->userloc->state }} {{ $user->userloc->zip }}<br /><br /></li>
+						@endif
                         @if ($user->phone)
                         	<li><i class="icon-phone"></i>{{ $user->phone }}</li>
                         @endif

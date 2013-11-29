@@ -9,17 +9,31 @@ User Management ::
 {{-- Page content --}}
 @section('content')
 <div class="page-header">
-	<h3>
-		User Management
 
-		<div class="pull-right">
-			<a href="{{ route('create/user') }}" class="btn-flat success"><i class="icon-plus-sign icon-white"></i> Create New</a>
-		</div>
+	<div class="pull-right">
+	@if (Input::get('onlyTrashed'))
+		<a class="btn-flat white" href="{{ URL::to('admin/users') }}">Show Current Users</a>
+	@else
+		<a class="btn-flat white" href="{{ URL::to('admin/users?onlyTrashed=true') }}">Show Deleted Users</a>
+	@endif
+
+		<a href="{{ route('create/user') }}" class="btn-flat success"><i class="icon-plus-sign icon-white"></i> New User</a>
+	</div>
+
+	<h3>
+		@if (Input::get('onlyTrashed'))
+			Deleted
+		@else
+			Current
+		@endif
+
+		 Users
 	</h3>
 </div>
 
-<a class="btn-flat white" href="{{ URL::to('admin/users?withTrashed=true') }}">Include Deleted Users</a>
-<a class="btn-flat white" href="{{ URL::to('admin/users?onlyTrashed=true') }}">Include Only Deleted Users</a>
+
+
+
 <br><br>
 
 @if ($users->getTotal() > 10)

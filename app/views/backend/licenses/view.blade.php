@@ -10,25 +10,24 @@ View License {{ $license->name }} ::
 @section('content')
 <div id="pad-wrapper" class="user-profile">
                 <!-- header -->
-				<h3 class="name">History for ({{ $license->name }})
 
+                <div class="btn-group pull-right">
+					<button class="btn glow">Actions</button>
+					<button class="btn glow dropdown-toggle" data-toggle="dropdown">
+						<span class="caret"></span>
+					</button>
+					<ul class="dropdown-menu">
 
-							<div class="btn-group pull-right">
-                                <button class="btn glow">Actions</button>
-                                <button class="btn glow dropdown-toggle" data-toggle="dropdown">
-                                    <span class="caret"></span>
-                                </button>
-                                <ul class="dropdown-menu">
+						@if ($license->assigned_to != 0)
+							<li><a href="{{ route('checkin/license', $license->id) }}" class="btn-flat info">Checkin</a></li>
+						@else
+							<li><a href="{{ route('checkout/license', $license->id) }}" class="btn-flat success">Checkout</a></li>
+						@endif
+						<li><a href="{{ route('update/license', $license->id) }}">Edit License</a></li>
+					</ul>
+				</div>
 
-                                	@if ($license->assigned_to != 0)
-										<li><a href="{{ route('checkin/license', $license->id) }}" class="btn-flat info">Checkin</a></li>
-									@else
-										<li><a href="{{ route('checkout/license', $license->id) }}" class="btn-flat success">Checkout</a></li>
-									@endif
-                                    <li><a href="{{ route('update/license', $license->id) }}">Edit License</a></li>
-                                </ul>
-                            </div>
-				</h3>
+				<h3 class="name">History for ({{ $license->name }})</h3>
 
                 <div class="row-fluid profile">
                     <!-- bio, new note & orders column -->
@@ -56,7 +55,7 @@ View License {{ $license->name }} ::
 											<td>Seat {{ $count }} </td>
 											<td>
 											@if ($licensedto->assigned_to)
-												<a href="{{ route('view/user', $licensedto->id) }}">
+												<a href="{{ route('view/user', $licensedto->assigned_to) }}">
 											{{ $licensedto->user->fullName() }}
 											</a>
 											@endif
@@ -109,10 +108,9 @@ View License {{ $license->name }} ::
 										<td>{{ $log->action_type }}</td>
 
 										<td>
-											@if (isset($log->checkedout_to))
+											@if (($log->checkedout_to) && ($log->checkedout_to > 0 ))
 											<a href="{{ route('view/user', $log->checkedout_to) }}">
-											{{ $log->userlog->fullName() }}
-
+												{{ $log->userlog->fullName() }}
 											</a>
 											@endif
 										</td>

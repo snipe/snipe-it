@@ -44,7 +44,7 @@ class User extends SentryUserModel {
 
 	public function licenses()
 	{
-		return $this->belongsToMany('License', 'license_seats', 'assigned_to', 'license_id')->withTrashed();
+		return $this->belongsToMany('License', 'license_seats', 'assigned_to', 'license_id')->withTrashed()->withPivot('id');
 	}
 
 
@@ -62,7 +62,7 @@ class User extends SentryUserModel {
 	**/
   	public function userloc()
   	{
-  		return $this->hasOne('Location','id')->withTrashed();
+  		return $this->belongsTo('Location','location_id')->withTrashed();
   	}
 
 }

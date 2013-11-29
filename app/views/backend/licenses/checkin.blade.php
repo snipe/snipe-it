@@ -9,12 +9,12 @@
 {{-- Page content --}}
 @section('content')
 <div class="page-header">
-	<h3>Checkin License</h3>
 
-		<div class="pull-right">
-			<a href="{{ route('assets') }}"  class="btn-flat gray"><i class="icon-circle-arrow-left icon-white"></i> Back</a>
-		</div>
-	</h3>
+	<div class="pull-right">
+		<a href="{{ route('licenses') }}"  class="btn-flat gray"><i class="icon-circle-arrow-left icon-white"></i> Back</a>
+	</div>
+
+	<h3>Checkin License</h3>
 </div>
 
 

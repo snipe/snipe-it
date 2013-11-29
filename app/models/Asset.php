@@ -58,7 +58,7 @@ class Asset extends Elegant {
 	**/
   	public function assetloc()
   	{
-  		return $this->assigneduser->hasOne('Location');
+  		return $this->assigneduser->userloc();
   	}
 
   	/**

@@ -13,16 +13,16 @@
 {{-- Page content --}}
 @section('content')
 <div class="page-header">
+	<div class="pull-right">
+		<a href="{{ route('models') }}" class="btn-flat gray"><i class="icon-circle-arrow-left icon-white"></i> Back</a>
+	</div>
+
 	<h3>
 		@if ($model->id)
 		Update Model
 		@else
 			Create New Model
 		@endif
-
-		<div class="pull-right">
-			<a href="{{ route('models') }}" class="btn-flat gray"><i class="icon-circle-arrow-left icon-white"></i> Back</a>
-		</div>
 	</h3>
 </div>
 

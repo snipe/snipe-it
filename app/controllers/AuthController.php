@@ -338,7 +338,7 @@ class AuthController extends BaseController {
 		Sentry::logout();
 
 		// Redirect to the users page
-		return Redirect::route('assets')->with('success', 'You have successfully logged out!');
+		return Redirect::route('home')->with('success', 'You have successfully logged out!');
 	}
 
 }

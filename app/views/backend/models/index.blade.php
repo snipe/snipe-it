@@ -9,13 +9,12 @@ Asset Models ::
 {{-- Page content --}}
 @section('content')
 <div class="page-header">
-	<h3>
-		Asset Models
 
-		<div class="pull-right">
+	<div class="pull-right">
 			<a href="{{ route('create/model') }}" class="btn-flat success"><i class="icon-plus-sign icon-white"></i> Create New</a>
 		</div>
-	</h3>
+
+	<h3>Asset Models</h3>
 </div>
 
 <table id="example">

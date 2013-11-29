@@ -18,6 +18,7 @@ Route::group(array('prefix' => 'hardware'), function()
 {
 
 	Route::get('/', array('as' => '', 'uses' => 'Controllers\Admin\AssetsController@getIndex'));
+	Route::get('/', array('as' => 'hardware', 'uses' => 'Controllers\Admin\AssetsController@getIndex'));
 	Route::get('create', array('as' => 'create/hardware', 'uses' => 'Controllers\Admin\AssetsController@getCreate'));
 	Route::post('create', 'Controllers\Admin\AssetsController@postCreate');
 	Route::get('{assetId}/edit', array('as' => 'update/hardware', 'uses' => 'Controllers\Admin\AssetsController@getEdit'));

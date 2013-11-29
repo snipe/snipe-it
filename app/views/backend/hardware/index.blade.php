@@ -23,7 +23,11 @@ Assets ::
 {{-- Page content --}}
 @section('content')
 <div class="page-header">
-	<h3>
+		<div class="pull-right">
+			<a href="{{ route('create/hardware') }}" class="btn-flat success"><i class="icon-plus-sign icon-white"></i> Create New</a>
+		</div>
+
+		<h3>
 		@if (Input::get('Pending') || Input::get('Undeployable') || Input::get('RTD')  || Input::get('Deployed'))
 			@if (Input::get('Pending'))
 				Pending
@@ -37,14 +41,8 @@ Assets ::
 		@else
 			All
 		@endif
-
 				Assets
-
-		<div class="pull-right">
-			<a href="{{ route('create/hardware') }}" class="btn-flat success"><i class="icon-plus-sign icon-white"></i> Create New</a>
-
-		</div>
-	</h3>
+		</h3>
 
 </div>
 

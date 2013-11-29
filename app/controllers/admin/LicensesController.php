@@ -344,6 +344,7 @@ class LicensesController extends AdminController {
 		// Declare the rules for the form validation
 		$rules = array(
 			'note'   => 'alpha_space',
+			'notes'   => 'alpha_space',
 		);
 
 		// Create a new validator instance from our validation rules

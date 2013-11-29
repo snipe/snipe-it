@@ -13,13 +13,10 @@
 {{-- Page content --}}
 @section('content')
 <div class="page-header">
-	<h3>
-	Checkin Asset
-
 		<div class="pull-right">
 			<a href="{{ route('hardware') }}" class="btn-flat gray"><i class="icon-circle-arrow-left icon-white"></i> Back</a>
 		</div>
-	</h3>
+		<h3> Checkin Asset </h3>
 </div>
 
 <form class="form-horizontal" method="post" action="" autocomplete="off">

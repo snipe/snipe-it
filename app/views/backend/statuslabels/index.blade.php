@@ -10,11 +10,11 @@ Status Labels
 @section('content')
 <div id="pad-wrapper" class="user-profile">
                 <!-- header -->
-				<h3 class="name">Status Labels
-				<div class="pull-right">
+                <div class="pull-right">
 					<a href="{{ route('create/statuslabel') }}" class="btn-flat success"><i class="icon-plus-sign icon-white"></i>  Create New</a>
 				</div>
-		</h3>
+
+				<h3 class="name">Status Labels</h3>
 
 
                 <div class="row-fluid profile">

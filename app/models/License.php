@@ -17,6 +17,7 @@ class License extends Elegant {
 			'seats'   => 'required|min:1|integer',
 			'license_email'   => 'email',
 			'note'   => 'alpha_space',
+			'notes'   => 'alpha_space',
 		);
 
 	public function assignedusers()
@@ -25,13 +26,6 @@ class License extends Elegant {
 
   	}
 
-	/**
-	* Get the asset's location based on the assigned user
-	**/
-  	public function assetloc()
-  	{
-  		return $this->assignedusers->hasOne('Location');
-  	}
 
   	/**
 	* Get asset logs for this asset

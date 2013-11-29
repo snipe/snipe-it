@@ -13,21 +13,23 @@
 {{-- Page content --}}
 @section('content')
 <div class="page-header">
+
+	<div class="pull-right">
+		@if ($asset->id)
+			<a href="{{ route('view/hardware',$asset->id) }}" class="btn-flat gray"><i class="icon-circle-arrow-left icon-white"></i> Back</a>
+		@else
+			<a href="{{ route('hardware') }}" class="btn-flat gray"><i class="icon-circle-arrow-left icon-white"></i> Back</a>
+		@endif
+	</div>
+
 	<h3>
 	@if ($asset->id)
-	Asset Update
+		Asset Update
 	@else
-	Create Asset
+		Create Asset
 	@endif
 
-		<div class="pull-right">
-			@if ($asset->id)
-			<a href="{{ route('view/hardware',$asset->id) }}" class="btn-flat gray"><i class="icon-circle-arrow-left icon-white"></i> Back</a>
-			@else
-			<a href="{{ route('hardware') }}" class="btn-flat gray"><i class="icon-circle-arrow-left icon-white"></i> Back</a>
-			@endif
 
-		</div>
 	</h3>
 </div>
 
