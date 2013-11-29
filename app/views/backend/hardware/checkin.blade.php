@@ -51,7 +51,6 @@
 					{{ $errors->first('note', '<span class="alert-msg"><i class="icon-remove-sign"></i> :message</span>') }}
 				</div>
 			</div>
-
 			<!-- Form actions -->
 				<div class="form-group">
 				<label class="col-md-2 control-label"></label>
