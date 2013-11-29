@@ -8,23 +8,41 @@ View User {{ $user->fullName() }} ::
 
 {{-- Page content --}}
 @section('content')
-<div id="pad-wrapper" class="user-profile">
-                <!-- header -->
-                <div class="row-fluid header">
-                    <div class="col-md-8">
-                        <img src="{{ $user->gravatar() }}" class="avatar img-circle">
-                        <h3 class="name">{{ $user->fullName() }}</h3>
-                        <span class="area">{{ $user->jobtitle }}</span>
-                    </div>
 
-                    <a href="{{ route('update/user', $user->id) }}" class="btn-flat white large pull-right edit"><i class="icon-pencil"></i> @lang('button.edit') This User</a>
+<div class="user-profile">
+            <!-- header -->
+            <div class="row header">
+                <div class="col-md-8">
+                    <img src="{{ $user->gravatar() }}" class="avatar img-circle">
+                    <h3 class="name">{{ $user->fullName() }}</h3>
+                    <span class="area">{{ $user->jobtitle }}</span>
                 </div>
+                @if ($user->deleted_at != NULL)
+                		    <a href="{{ route('restore/user', $user->id) }}" class="btn btn-warning pull-right edit"><i class="icon-pencil"></i> Restore This User</a>
 
-                <div class="row-fluid profile">
+                @else
+                	    <a href="{{ route('update/user', $user->id) }}" class="btn-flat white large pull-right edit"><i class="icon-pencil"></i> @lang('button.edit') This User</a>
+
+                @endif
+            </div>
+
+            <div class="row profile">
+
                     <!-- bio, new note & orders column -->
                     <div class="col-md-9 bio">
                         <div class="profile-box">
 
+						@if ($user->deleted_at != NULL)
+
+							<div class="col-md-12">
+								<div class="alert alert-danger">
+									<i class="icon-exclamation-sign"></i>
+									<strong>Warning: </strong>
+									 This user has been deleted. You will have to restore this user to edit them or assign them new assets.
+								</div>
+							</div>
+
+						@endif
 
                             <h6>Assets Checked Out to {{ $user->first_name }}</h6>
                             <br>
@@ -59,7 +77,7 @@ View User {{ $user->fullName() }} ::
                             </table>
                             @else
 
-                            <div class="col-md-6">
+                            <div class="col-md-12">
 								<div class="alert alert-warning alert-block">
 									<i class="icon-warning-sign"></i>
 									@lang('admin/users/table.noresults')
@@ -100,7 +118,7 @@ View User {{ $user->fullName() }} ::
                             </table>
                             @else
 
-                            <div class="col-md-6">
+                            <div class="col-md-12">
 								<div class="alert alert-warning alert-block">
 									<i class="icon-warning-sign"></i>
 									@lang('admin/users/table.noresults')
@@ -144,7 +162,8 @@ View User {{ $user->fullName() }} ::
                             </table>
                             @else
 
-                            <div class="col-md-6">
+
+                            <div class="col-md-12">
 								<div class="alert alert-warning alert-block">
 									<i class="icon-warning-sign"></i>
 									@lang('admin/users/table.noresults')
