@@ -24,7 +24,7 @@ Asset Models ::
 			<th class="col-md-2">@lang('admin/models/table.modelnumber')</th>
 			<th class="col-md-1">@lang('admin/models/table.numassets')</th>
 			<th class="col-md-2">Depreciation</th>
-			<th class="col-md-1">Category</th>
+			<th class="col-md-2">Category</th>
 			<th class="col-md-2">@lang('table.actions')</th>
 		</tr>
 	</thead>
@@ -46,9 +46,8 @@ Asset Models ::
 			{{ $model->category->name }}
 			@endif</td>
 			<td>
-				<a href="{{ route('update/model', $model->id) }}" class="btn-flat white">@lang('button.edit')</a>
-				<a data-html="false" class="btn-flat danger delete-asset" data-toggle="modal" href="{{ route('delete/model', $model->id) }}" data-content="Are you sure you wish to delete this model?" data-title="Delete {{ htmlspecialchars($model->name) }}?" onClick="return false;">@lang('button.delete')</a>
-
+				<a href="{{ route('update/model', $model->id) }}" class="btn btn-warning"><i class="icon-pencil icon-white"></i></a>
+				<a data-html="false" class="btn delete-asset btn-danger" data-toggle="modal" href="{{ route('delete/model', $model->id) }}" data-content="Are you sure you wish to delete this model?" data-title="Delete {{ htmlspecialchars($model->name) }}?" onClick="return false;"><i class="icon-trash icon-white"></i></a>
 			</td>
 		</tr>
 		@endforeach
