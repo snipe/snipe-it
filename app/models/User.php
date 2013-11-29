@@ -62,7 +62,7 @@ class User extends SentryUserModel {
 	**/
   	public function userloc()
   	{
-  		return $this->hasOne('Location','id')->withTrashed();
+  		return $this->belongsTo('Location','location_id')->withTrashed();
   	}
 
 }
