@@ -8,35 +8,35 @@ View License {{ $license->name }} ::
 
 {{-- Page content --}}
 @section('content')
-<div id="pad-wrapper" class="user-profile">
-                <!-- header -->
-				<h3 class="name">History for ({{ $license->name }})
+
+<div class="row header">
+    <div class="col-md-12">
+    	<div class="btn-group pull-right">
+					<button class="btn glow">Actions</button>
+					<button class="btn glow dropdown-toggle" data-toggle="dropdown">
+						<span class="caret"></span>
+					</button>
+					<ul class="dropdown-menu">
+
+						@if ($license->assigned_to != 0)
+							<li><a href="{{ route('checkin/license', $license->id) }}" class="btn-flat info">Checkin</a></li>
+						@else
+							<li><a href="{{ route('checkout/license', $license->id) }}" class="btn-flat success">Checkout</a></li>
+						@endif
+						<li><a href="{{ route('update/license', $license->id) }}">Edit License</a></li>
+					</ul>
+				</div>
+			<h3 class="name">History for ({{ $license->name }})</h3>
+
+	</div>
+</div>
+
+<div class="user-profile">
+<div class="row profile">
+<div class="col-md-9 bio">
 
 
-							<div class="btn-group pull-right">
-                                <button class="btn glow">Actions</button>
-                                <button class="btn glow dropdown-toggle" data-toggle="dropdown">
-                                    <span class="caret"></span>
-                                </button>
-                                <ul class="dropdown-menu">
-
-                                	@if ($license->assigned_to != 0)
-										<li><a href="{{ route('checkin/license', $license->id) }}" class="btn-flat info">Checkin</a></li>
-									@else
-										<li><a href="{{ route('checkout/license', $license->id) }}" class="btn-flat success">Checkout</a></li>
-									@endif
-                                    <li><a href="{{ route('update/license', $license->id) }}">Edit License</a></li>
-                                </ul>
-                            </div>
-				</h3>
-
-                <div class="row-fluid profile">
-                    <!-- bio, new note & orders column -->
-                    <div class="col-md-9 bio">
-                        <div class="profile-box">
-                            <br>
                             <!-- checked out assets table -->
-
 							<h6>{{ $license->seats }} License Seats</h6>
                             <table class="table table-hover">
                                 <thead>
@@ -141,13 +141,10 @@ View License {{ $license->name }} ::
                                 </tbody>
                             </table>
 
-
-
-                        </div>
                     </div>
 
                     <!-- side address column -->
-                    <div class="col-md-3 address pull-right">
+                    <div class="col-md-3 col-xs-12 address pull-right">
                     <h6><br>License Info:</h6>
                        		<ul>
 								@if ($license->serial)
