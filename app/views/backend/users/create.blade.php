@@ -34,7 +34,7 @@ Create a User ::
 		<!-- General tab -->
 		<div class="tab-pane active" id="tab-general">
 			<!-- First Name -->
-			<div class="control-group {{ $errors->has('first_name') ? 'error' : '' }}">
+			<div class="form-group {{ $errors->has('first_name') ? 'error' : '' }}">
 				<label class="control-label" for="first_name">First Name</label>
 				<div class="controls">
 					<input type="text" name="first_name" id="first_name" value="{{ Input::old('first_name') }}" />
@@ -43,7 +43,7 @@ Create a User ::
 			</div>
 
 			<!-- Last Name -->
-			<div class="control-group {{ $errors->has('last_name') ? 'error' : '' }}">
+			<div class="form-group {{ $errors->has('last_name') ? 'error' : '' }}">
 				<label class="control-label" for="last_name">Last Name</label>
 				<div class="controls">
 					<input type="text" name="last_name" id="last_name" value="{{ Input::old('last_name') }}" />
@@ -52,7 +52,7 @@ Create a User ::
 			</div>
 
 			<!-- Jobtitle -->
-			<div class="control-group {{ $errors->has('jobtitle') ? 'error' : '' }}">
+			<div class="form-group {{ $errors->has('jobtitle') ? 'error' : '' }}">
 				<label class="control-label" for="jobtitle">Job Title</label>
 				<div class="controls">
 					<input type="text" name="jobtitle" id="jobtitle" value="{{ Input::old('jobtitle') }}" />
@@ -61,7 +61,7 @@ Create a User ::
 			</div>
 
 			<!-- Location -->
-			<div class="control-group {{ $errors->has('phone') ? 'error' : '' }}">
+			<div class="form-group {{ $errors->has('phone') ? 'error' : '' }}">
 				<label class="control-label" for="location_id">Location</label>
 				<div class="controls">
 					<div class="field-box">
@@ -72,7 +72,7 @@ Create a User ::
 			</div>
 
 			<!-- Phone -->
-			<div class="control-group {{ $errors->has('phone') ? 'error' : '' }}">
+			<div class="form-group {{ $errors->has('phone') ? 'error' : '' }}">
 				<label class="control-label" for="jobtitle">Phone</label>
 				<div class="controls">
 					<input type="text" name="phone" id="phone" value="{{ Input::old('phone') }}" />
@@ -81,7 +81,7 @@ Create a User ::
 			</div>
 
 			<!-- Email -->
-			<div class="control-group {{ $errors->has('email') ? 'error' : '' }}">
+			<div class="form-group {{ $errors->has('email') ? 'error' : '' }}">
 				<label class="control-label" for="email">Email</label>
 				<div class="controls">
 					<input type="email" name="email" id="email" value="{{ Input::old('email') }}" />
@@ -90,7 +90,7 @@ Create a User ::
 			</div>
 
 			<!-- Password -->
-			<div class="control-group {{ $errors->has('password') ? 'error' : '' }}">
+			<div class="form-group {{ $errors->has('password') ? 'error' : '' }}">
 				<label class="control-label" for="password">Password</label>
 				<div class="controls">
 					<input type="password" name="password" id="password" value="" />
@@ -99,7 +99,7 @@ Create a User ::
 			</div>
 
 			<!-- Password Confirm -->
-			<div class="control-group {{ $errors->has('password_confirm') ? 'error' : '' }}">
+			<div class="form-group {{ $errors->has('password_confirm') ? 'error' : '' }}">
 				<label class="control-label" for="password_confirm">Confirm Password</label>
 				<div class="controls">
 					<input type="password" name="password_confirm" id="password_confirm" value="" />
@@ -108,7 +108,7 @@ Create a User ::
 			</div>
 
 			<!-- Activation Status -->
-			<div class="control-group {{ $errors->has('activated') ? 'error' : '' }}">
+			<div class="form-group {{ $errors->has('activated') ? 'error' : '' }}">
 				<label class="control-label" for="activated">User Activated</label>
 				<div class="controls">
 					<select name="activated" id="activated">
@@ -120,7 +120,7 @@ Create a User ::
 			</div>
 
 			<!-- Groups -->
-			<div class="control-group {{ $errors->has('groups') ? 'error' : '' }}">
+			<div class="form-group {{ $errors->has('groups') ? 'error' : '' }}">
 				<label class="control-label" for="groups">Groups</label>
 				<div class="controls">
 					<select name="groups[]" id="groups[]" multiple="multiple">
@@ -138,7 +138,7 @@ Create a User ::
 
 		<!-- Permissions tab -->
 		<div class="tab-pane" id="tab-permissions">
-			<div class="control-group">
+			<div class="form-group">
 				<div class="controls">
 
 					@foreach ($permissions as $area => $permissions)
@@ -146,8 +146,8 @@ Create a User ::
 						<legend>{{ $area }}</legend>
 
 						@foreach ($permissions as $permission)
-						<div class="control-group">
-							<label class="control-group">{{ $permission['label'] }}</label>
+						<div class="form-group">
+							<label class="form-group">{{ $permission['label'] }}</label>
 
 							<div class="radio inline">
 								<label for="{{ $permission['permission'] }}_allow" onclick="">
@@ -183,7 +183,7 @@ Create a User ::
 	</div>
 
 	<!-- Form Actions -->
-	<div class="control-group">
+	<div class="form-group">
 		<div class="controls">
 			<a class="btn btn-link" href="{{ route('users') }}">Cancel</a>
 			<button type="submit" class="btn-flat success"><i class="icon-ok icon-white"></i> Create User</button>

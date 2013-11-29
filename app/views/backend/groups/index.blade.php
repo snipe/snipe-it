@@ -23,11 +23,11 @@ Group Management ::
 <table id="example">
 	<thead>
 		<tr role="row">
-			<th class="span1">@lang('admin/groups/table.id')</th>
-			<th class="span6">@lang('admin/groups/table.name')</th>
-			<th class="span2">@lang('admin/groups/table.users')</th>
-			<th class="span2">@lang('admin/groups/table.created_at')</th>
-			<th class="span2">@lang('table.actions')</th>
+			<th class="col-md-1">@lang('admin/groups/table.id')</th>
+			<th class="col-md-6">@lang('admin/groups/table.name')</th>
+			<th class="col-md-2">@lang('admin/groups/table.users')</th>
+			<th class="col-md-2">@lang('admin/groups/table.created_at')</th>
+			<th class="col-md-2">@lang('table.actions')</th>
 		</tr>
 	</thead>
 	<tbody>

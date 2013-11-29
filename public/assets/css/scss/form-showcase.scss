@@ -44,7 +44,6 @@
 		}
 		label.checkbox,
 		label.radio {
-			padding-left: 0px;
 			font-weight: lighter;
 			input[type="checkbox"],
 			input[type="radio"] {
@@ -64,6 +63,13 @@
 				width: 100%;
 			}
 			.ui-select {
+				width: 250px;
+			}
+			.input-group {
+				margin-bottom: 10px;
+				width: 250px;
+			}
+			.input-datepicker {
 				width: 250px;
 			}
 		}

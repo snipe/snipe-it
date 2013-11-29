@@ -17,21 +17,22 @@
 
 		<!-- bootstrap -->
 		<link href="{{ asset('assets/css/bootstrap/bootstrap.css') }}" rel="stylesheet" />
-		<link href="{{ asset('assets/css/bootstrap/bootstrap-responsive.css') }}" rel="stylesheet" />
 		<link href="{{ asset('assets/css/bootstrap/bootstrap-overrides.css') }}" type="text/css" rel="stylesheet" />
 		<link href="{{ asset('assets/css/lib/bootstrap.datepicker.css') }}" type="text/css" rel="stylesheet">
 
 
 
 		<!-- libraries -->
+		<link href="{{ asset('assets/css/lib/uniform.default.css') }}" rel="stylesheet" type="text/css" />
 		<link href="{{ asset('assets/css/lib/jquery-ui-1.10.2.custom.css') }}" rel="stylesheet" type="text/css" />
 		<link href="{{ asset('assets/css/lib/font-awesome.css') }}" type="text/css" rel="stylesheet" />
+		<link href="{{ asset('assets/css/lib/select2.css') }}" type="text/css" rel="stylesheet">
 
 		<!-- global styles -->
 		<link rel="stylesheet" type="text/css" href="{{ asset('assets/css/compiled/layout.css') }}">
 		<link rel="stylesheet" type="text/css" href="{{ asset('assets/css/compiled/elements.css') }}">
 		<link rel="stylesheet" type="text/css" href="{{ asset('assets/css/compiled/icons.css') }}">
-		<link href="{{ asset('assets/css/lib/select2.css') }}" type="text/css" rel="stylesheet">
+
 
 		<!-- this page specific styles -->
 		<link rel="stylesheet" href="{{ asset('assets/css/compiled/index.css') }}" type="text/css" media="screen" />
@@ -66,60 +67,69 @@
 	<!-- navbar -->
 
 
+	<!-- navbar -->
+	<header class="navbar navbar-inverse" role="banner">
 
-
-	 <!-- navbar -->
     <div class="navbar navbar-inverse">
         <div class="navbar-inner navbar-inverse">
-            <button type="button" class="btn btn-navbar visible-phone" id="menu-toggler">
+        <div class="navbar-header">
+            <button class="navbar-toggle" type="button" data-toggle="collapse" id="menu-toggler">
+                <span class="sr-only">Toggle navigation</span>
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
+            <a class="navbar-brand" href="/">{{ Setting::getSettings()->site_name }}</a>
+        </div>
 
-            <a class="brand" href="/">{{ Setting::getSettings()->site_name }}</a>
-			</ul>
 
-
-            <ul class="nav pull-right">
+        <ul class="nav navbar-nav pull-right hidden-xs">
             @if (Sentry::check())
                 <!-- <li class="hidden-phone">
                     <input class="search" type="text" />
                 </li> -->
 				<!--
-				<li class="notification-dropdown hidden-phone">
-                    <a href="#" class="trigger">
-                        <i class="icon-warning-sign"></i>
-                        <span class="count">8</span>
-                    </a>
-                    <div class="pop-dialog">
-                        <div class="pointer right">
-                            <div class="arrow"></div>
-                            <div class="arrow_border"></div>
-                        </div>
-                        <div class="body">
-                            <a href="#" class="close-icon"><i class="icon-remove-sign"></i></a>
-                            <div class="notifications">
-                                <h3>You have 2 new notifications</h3>
-                                <a href="#" class="item">
-                                    <i class="icon-signin"></i> (these are placeholder)
-                                    <span class="time"><i class="icon-time"></i> 13 min.</span>
-                                </a>
-                                <a href="#" class="item">
-                                    <i class="icon-signin"></i> Warranty expiring!
-                                    <span class="time"><i class="icon-time"></i> 18 min.</span>
-                                </a>
-                                <div class="footer">
-                                    <a href="#" class="logout">View all notifications</a>
-                                </div>
+				<li class="notification-dropdown hidden-xs hidden-sm">
+                <a href="#" class="trigger">
+                    <i class="icon-warning-sign"></i>
+                    <span class="count">8</span>
+                </a>
+                <div class="pop-dialog">
+                    <div class="pointer right">
+                        <div class="arrow"></div>
+                        <div class="arrow_border"></div>
+                    </div>
+                    <div class="body">
+                        <a href="#" class="close-icon"><i class="icon-remove-sign"></i></a>
+                        <div class="notifications">
+                            <h3>You have 4 new notifications</h3>
+                            <a href="#" class="item">
+                                <i class="icon-signin"></i> New user registration
+                                <span class="time"><i class="icon-time"></i> 13 min.</span>
+                            </a>
+                            <a href="#" class="item">
+                                <i class="icon-signin"></i> New user registration
+                                <span class="time"><i class="icon-time"></i> 18 min.</span>
+                            </a>
+                            <a href="#" class="item">
+                                <i class="icon-signin"></i> New user registration
+                                <span class="time"><i class="icon-time"></i> 49 min.</span>
+                            </a>
+                            <a href="#" class="item">
+                                <i class="icon-download-alt"></i> New asset created
+                                <span class="time"><i class="icon-time"></i> 1 day.</span>
+                            </a>
+                            <div class="footer">
+                                <a href="#" class="logout">View all notifications</a>
                             </div>
                         </div>
                     </div>
-                </li> -->
+                </div>
+            </li> -->
 
 
                 <li class="dropdown">
-                    <a href="#" class="dropdown-toggle hidden-phone" data-toggle="dropdown">
+                    <a href="#" class="dropdown-toggle hidden-xs hidden-sm" data-toggle="dropdown">
                         Welcome, {{ Sentry::getUser()->first_name }}
                         <b class="caret"></b>
                     </a>
@@ -189,14 +199,15 @@
             </ul>
         </div>
     </div>
+    </header>
     <!-- end navbar -->
 
 	@if (Sentry::check())
-	 <!-- sidebar -->
+	<!-- sidebar -->
     <div id="sidebar-nav">
         <ul id="dashboard-menu">
 
-            <li{{ (Request::is('hardware') ? ' class="active"><div class="pointer"><div class="arrow"></div><div class="arrow_border"></div></div>' : '>') }}
+            <li{{ (Request::is('hardware*') ? ' class="active"><div class="pointer"><div class="arrow"></div><div class="arrow_border"></div></div>' : '>') }}
                 <a href="#" class="dropdown-toggle">
                     <i class="icon-barcode"></i>
                     <span>Assets</span>
@@ -241,22 +252,19 @@
 <!-- main container -->
     <div class="content">
 
-
-        <div class="container-fluid">
-
 		@if ((Sentry::check()) && (Sentry::getUser()->hasAccess('admin')))
         <!-- upper main stats -->
             <div id="main-stats">
-                <div class="row-fluid stats-row">
-                    <div class="span3 stat">
-                        <div class="data">
+            <div class="row stats-row">
+                <div class="col-md-3 col-sm-3 stat">
+                    <div class="data">
                             <a href="{{ URL::to('hardware') }}">
                             	<span class="number">{{ number_format(Asset::assetcount()) }}</span>
                            	 	<span style="color:black">total assets</span>
                             </a>
                         </div>
                     </div>
-                    <div class="span3 stat">
+                    <div class="col-md-3 col-sm-3 stat">
                         <div class="data">
                             <a href="{{ URL::to('hardware?RTD=true') }}">
                             	<span class="number">{{ number_format(Asset::availassetcount()) }}</span>
@@ -264,7 +272,7 @@
                             </a>
                         </div>
                     </div>
-                    <div class="span3 stat">
+                    <div class="col-md-3 col-sm-3 stat">
                         <div class="data">
                             <a href="{{ URL::to('admin/licenses') }}">
                             	<span class="number">{{ number_format(License::assetcount()) }}</span>
@@ -272,8 +280,7 @@
                             </a>
                         </div>
                     </div>
-
-                    <div class="span3 stat last">
+                    <div class="col-md-3 col-sm-3 stat last">
                         <div class="data">
                         	<a href="{{ URL::to('admin/licenses') }}">
                             	<span class="number">{{ number_format(License::availassetcount()) }}</span>
@@ -292,7 +299,7 @@
 
 
                  <!-- Notifications -->
-			@include('frontend/notifications')
+				@include('frontend/notifications')
 
 			<!-- Content -->
 			@yield('content')
@@ -316,14 +323,13 @@
 
 
 
+
+
 	<!-- scripts -->
     <script src="//code.jquery.com/jquery-latest.js"></script>
     <script src="{{ asset('assets/js/bootstrap.min.js') }}"></script>
     <script src="{{ asset('assets/js/jquery-ui-1.10.2.custom.min.js') }}"></script>
-    <!-- knob -->
     <script src="{{ asset('assets/js/jquery.knob.js') }}"></script>
-
-
     <script src="{{ asset('assets/js/select2.min.js') }}"></script>
     <script src="{{ asset('assets/js/jquery.uniform.min.js') }}"></script>
     <script src="{{ asset('assets/js/bootstrap.datepicker.js') }}"></script>

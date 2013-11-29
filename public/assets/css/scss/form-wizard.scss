@@ -120,15 +120,17 @@
 		position: relative;
 		top: 2px;
 	}
+	input[type="text"] {
+		width: 400px;
+	}
 	&.payment-info label {
 		width: 150px;
 	}
 	.alert-msg {
 		display: block;
 		margin-left: 120px;
-		position: relative;
-		top: -2px;
 		margin-bottom: -4px;
+		margin-top: 10px;
 		i {
 			font-size: 14px;
 		}
@@ -187,4 +189,7 @@
 	.wizard-steps {
 		left: 0px;
 	}	
+	.form-wrapper input[type="text"] {
+		width: 200px;
+	}
 }

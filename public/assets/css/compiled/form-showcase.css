@@ -48,7 +48,6 @@
 }
 .form-page .form-wrapper label.checkbox,
 .form-page .form-wrapper label.radio {
-  padding-left: 0px;
   font-weight: lighter;
 }
 .form-page .form-wrapper label.checkbox input[type="checkbox"],
@@ -67,6 +66,13 @@
   width: 100%;
 }
 .form-page .form-wrapper .column.pull-right .ui-select {
+  width: 250px;
+}
+.form-page .form-wrapper .column.pull-right .input-group {
+  margin-bottom: 10px;
+  width: 250px;
+}
+.form-page .form-wrapper .column.pull-right .input-datepicker {
   width: 250px;
 }
 .form-page .form-wrapper .select2-container {

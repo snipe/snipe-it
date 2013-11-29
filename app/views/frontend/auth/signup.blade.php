@@ -17,7 +17,7 @@ Account Sign up ::
 		<input type="hidden" name="_token" value="{{ csrf_token() }}" />
 
 		<!-- First Name -->
-		<div class="control-group{{ $errors->first('first_name', ' error') }}">
+		<div class="form-group{{ $errors->first('first_name', ' error') }}">
 		<label class="control-label" for="first_name">First Name</label>
 			<div class="controls">
 				<input type="text" name="first_name" id="first_name" value="{{ Input::old('first_name') }}" />
@@ -26,7 +26,7 @@ Account Sign up ::
 		</div>
 
 		<!-- Last Name -->
-		<div class="control-group{{ $errors->first('last_name', ' error') }}">
+		<div class="form-group{{ $errors->first('last_name', ' error') }}">
 			<label class="control-label" for="last_name">Last Name</label>
 			<div class="controls">
 				<input type="text" name="last_name" id="last_name" value="{{ Input::old('last_name') }}" />
@@ -35,7 +35,7 @@ Account Sign up ::
 		</div>
 
 		<!-- Email -->
-		<div class="control-group{{ $errors->first('email', ' error') }}">
+		<div class="form-group{{ $errors->first('email', ' error') }}">
 			<label class="control-label" for="email">Email</label>
 			<div class="controls">
 				<input type="email" name="email" id="email" value="{{ Input::old('email') }}" />
@@ -44,7 +44,7 @@ Account Sign up ::
 		</div>
 
 		<!-- Email Confirm -->
-		<div class="control-group{{ $errors->first('email_confirm', ' error') }}">
+		<div class="form-group{{ $errors->first('email_confirm', ' error') }}">
 			<label class="control-label" for="email_confirm">Confirm Email</label>
 			<div class="controls">
 				<input type="email" name="email_confirm" id="email_confirm" value="{{ Input::old('email_confirm') }}" />
@@ -53,7 +53,7 @@ Account Sign up ::
 		</div>
 
 		<!-- Password -->
-		<div class="control-group{{ $errors->first('password', ' error') }}">
+		<div class="form-group{{ $errors->first('password', ' error') }}">
 			<label class="control-label" for="password">Password</label>
 			<div class="controls">
 				<input type="password" name="password" id="password" value="" />
@@ -62,7 +62,7 @@ Account Sign up ::
 		</div>
 
 		<!-- Password Confirm -->
-		<div class="control-group{{ $errors->first('password_confirm', ' error') }}">
+		<div class="form-group{{ $errors->first('password_confirm', ' error') }}">
 			<label class="control-label" for="password_confirm">Confirm Password</label>
 			<div class="controls">
 				<input type="password" name="password_confirm" id="password_confirm" value="" />
@@ -73,7 +73,7 @@ Account Sign up ::
 		<hr>
 
 		<!-- Form actions -->
-		<div class="control-group">
+		<div class="form-group">
 			<div class="controls">
 				<a class="btn" href="{{ route('home') }}">Cancel</a>
 

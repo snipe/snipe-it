@@ -21,12 +21,12 @@ Locations ::
 <table id="example">
 	<thead>
 		<tr role="row">
-			<th class="span3">@lang('admin/locations/table.name')</th>
-			<th class="span3">Address</th>
-			<th class="span2">@lang('admin/locations/table.city'),
+			<th class="col-md-3">@lang('admin/locations/table.name')</th>
+			<th class="col-md-3">Address</th>
+			<th class="col-md-2">@lang('admin/locations/table.city'),
 			 @lang('admin/locations/table.state')
 			@lang('admin/locations/table.country')</th>
-			<th class="span2">@lang('table.actions')</th>
+			<th class="col-md-2">@lang('table.actions')</th>
 		</tr>
 	</thead>
 	<tbody>

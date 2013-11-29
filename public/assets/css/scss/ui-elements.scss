@@ -53,6 +53,21 @@
 		h4 {
 			margin: 20px 0px 20px 0px;
 		}
+
+		.dropdown {			
+			.dropdown-menu {
+				margin-right: 10px;
+				position: static;
+				display: block;
+			}			
+		}
+		.nav-tabs {
+			margin-bottom: 15px;
+		}
+		.tab-content {
+			padding: 0px 10px;
+			margin-bottom: 20px;
+		}
 	}
 	.sliders .slider {
 		margin-bottom: 20px;

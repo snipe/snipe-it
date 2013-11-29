@@ -25,14 +25,19 @@
 		input[type="text"] {
 			margin: 0;
 			padding: 3px 6px;
+			width: 75%;
+			display: inline-block;
 		}
 		.address-fields {
 			margin-left: 0px;
 			float: left;
 			width: 75%;
+			input[type="text"]:first-child {
+				width: 100%;
+			}
 		}
 		input.small {
-			width: 30%;
+			width: 27%;
 			margin-top: 20px;
 			margin-right: 20px;
 		}
@@ -50,10 +55,11 @@
 	.textarea {
 		margin-top: 27px;
 		span.charactersleft {
-			display: block;
 			color: #9ba0a5;
+			display: inline-block;
 			text-align: left;
-			margin-left: 18%;
+			margin-left: 20%;
+			margin-top: 8px;
 			font-size: 13px;
 			font-style: italic;
 		}

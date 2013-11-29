@@ -29,7 +29,7 @@
 
                 <div class="row-fluid profile">
                     <!-- bio, new note & orders column -->
-                    <div class="span9 bio">
+                    <div class="col-md-9 bio">
                         <div class="profile-box">
                             <br>
                             <!-- checked out assets table -->
@@ -38,16 +38,16 @@
 								<!-- CSRF Token -->
 								<input type="hidden" name="_token" value="{{ csrf_token() }}" />
 
-									<div class="control-group {{ $errors->has('name') ? 'error' : '' }}">
+									<div class="form-group {{ $errors->has('name') ? 'error' : '' }}">
 										<label class="control-label" for="name">Status Label</label>
 										<div class="controls">
-											<input class="span9" type="text" name="name" id="name" value="{{ Input::old('name', $statuslabel->name) }}" />
+											<input class="col-md-9" type="text" name="name" id="name" value="{{ Input::old('name', $statuslabel->name) }}" />
 											{{ $errors->first('name', '<span class="help-inline">:message</span>') }}
 										</div>
 									</div>
 
 									<!-- Form actions -->
-									<div class="control-group">
+									<div class="form-group">
 										<div class="controls">
 											<a class="btn btn-link" href="{{ route('statuslabels') }}">@lang('general.cancel')</a>
 											<button type="submit" class="btn-flat success"><i class="icon-ok icon-white"></i> @lang('general.save')</button>
@@ -59,7 +59,7 @@
 </div>
 
                     <!-- side address column -->
-                    <div class="span3 address pull-right">
+                    <div class="col-md-3 address pull-right">
 					<br /><br />
 						<h6>About Status Labels</h6>
 						<p>Status labels are used to describe the various reasons why an asset <strong><em>cannot</em></strong> be deployed. </p>

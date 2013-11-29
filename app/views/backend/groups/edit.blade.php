@@ -33,7 +33,7 @@ Group Update ::
 		<!-- General tab -->
 		<div class="tab-pane active" id="tab-general">
 			<!-- Name -->
-			<div class="control-group {{ $errors->has('name') ? 'error' : '' }}">
+			<div class="form-group {{ $errors->has('name') ? 'error' : '' }}">
 				<label class="control-label" for="name">Name</label>
 				<div class="controls">
 					<input type="text" name="name" id="name" value="{{ Input::old('name', $group->name) }}" />
@@ -45,15 +45,15 @@ Group Update ::
 		<!-- Permissions tab -->
 		<div class="tab-pane" id="tab-permissions">
 			<div class="controls">
-				<div class="control-group">
+				<div class="form-group">
 
 					@foreach ($permissions as $area => $permissions)
 					<fieldset>
 						<legend>{{ $area }}</legend>
 
 						@foreach ($permissions as $permission)
-						<div class="control-group">
-							<label class="control-group">{{ $permission['label'] }}</label>
+						<div class="form-group">
+							<label class="form-group">{{ $permission['label'] }}</label>
 
 							<div class="radio inline">
 								<label for="{{ $permission['permission'] }}_allow" onclick="">
@@ -80,7 +80,7 @@ Group Update ::
 	</div>
 
 	<!-- Form Actions -->
-	<div class="control-group">
+	<div class="form-group">
 		<div class="controls">
 			<a class="btn btn-link" href="{{ route('groups') }}">@lang('general.cancel')</a>
 			<button type="submit" class="btn-flat success"><i class="icon-ok icon-white"></i> @lang('general.save')</button>

@@ -19,7 +19,7 @@ Status Labels
 
                 <div class="row-fluid profile">
                     <!-- bio, new note & orders column -->
-                    <div class="span9 bio">
+                    <div class="col-md-9 bio">
                         <div class="profile-box">
                             <br>
                             <!-- checked out assets table -->
@@ -27,8 +27,8 @@ Status Labels
                             <table id="example">
 							<thead>
 								<tr role="row">
-									<th class="span4">@lang('admin/statuslabels/table.name')</th>
-									<th class="span2"><span class="line"></span>@lang('table.actions')</th>
+									<th class="col-md-4">@lang('admin/statuslabels/table.name')</th>
+									<th class="col-md-2"><span class="line"></span>@lang('table.actions')</th>
 								</tr>
 							</thead>
 							<tbody>
@@ -48,7 +48,7 @@ Status Labels
                     </div>
 
                     <!-- side address column -->
-                    <div class="span3 address pull-right">
+                    <div class="col-md-3 address pull-right">
 						<br /><br />
 						<h6>About Status Labels</h6>
 						<p>Status labels are used to describe the various reasons why an asset <strong><em>cannot</em></strong> be deployed. </p>

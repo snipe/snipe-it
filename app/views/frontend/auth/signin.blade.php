@@ -17,7 +17,7 @@ Account Sign in ::
 		<input type="hidden" name="_token" value="{{ csrf_token() }}" />
 
 		<!-- Email -->
-		<div class="control-group{{ $errors->first('email', ' error') }}">
+		<div class="form-group{{ $errors->first('email', ' error') }}">
 			<label class="control-label" for="email">Email</label>
 			<div class="controls">
 				<input type="email" name="email" id="email" value="{{ Input::old('email') }}" />
@@ -26,7 +26,7 @@ Account Sign in ::
 		</div>
 
 		<!-- Password -->
-		<div class="control-group{{ $errors->first('password', ' error') }}">
+		<div class="form-group{{ $errors->first('password', ' error') }}">
 			<label class="control-label" for="password">Password</label>
 			<div class="controls">
 				<input type="password" name="password" id="password" value="" />
@@ -35,7 +35,7 @@ Account Sign in ::
 		</div>
 
 		<!-- Remember me -->
-		<div class="control-group">
+		<div class="form-group">
 			<div class="controls">
 			<label class="checkbox">
 				<input type="checkbox" name="remember-me" id="remember-me" value="1" /> Remember me
@@ -46,7 +46,7 @@ Account Sign in ::
 		<hr>
 
 		<!-- Form actions -->
-		<div class="control-group">
+		<div class="form-group">
 			<div class="controls">
 				<a class="btn" href="{{ route('home') }}">Cancel</a>
 

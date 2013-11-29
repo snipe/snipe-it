@@ -23,30 +23,30 @@
 	<input type="hidden" name="_token" value="{{ csrf_token() }}" />
 
 			<!-- Asset Tag -->
-			<div class="control-group">
+			<div class="form-group">
 				<label class="control-label" for="asset_tag">Asset Tag</label>
 				<div class="controls">
-					<input class="span4" readonly="readonly" type="text" name="asset_tag" id="asset_tag" value="{{ $licenseseat->license->asset_tag }}" />
+					<input class="col-md-4" readonly="readonly" type="text" name="asset_tag" id="asset_tag" value="{{ $licenseseat->license->asset_tag }}" />
 				</div>
 			</div>
 
 			<!-- Asset Name -->
-			<div class="control-group">
+			<div class="form-group">
 				<label class="control-label" for="name">Asset Name</label>
 				<div class="controls">
-					<input class="span4" readonly="readonly" type="text" name="name" id="asset_name" value="{{ $licenseseat->license->name }}" />
+					<input class="col-md-4" readonly="readonly" type="text" name="name" id="asset_name" value="{{ $licenseseat->license->name }}" />
 				</div>
 			</div>
 			<!-- Serial -->
-			<div class="control-group">
+			<div class="form-group">
 				<label class="control-label" for="serial">Serial</label>
 				<div class="controls">
-					<input class="span4" readonly="readonly" type="text" name="serial" id="serial" value="{{ $licenseseat->license->serial }}" />
+					<input class="col-md-4" readonly="readonly" type="text" name="serial" id="serial" value="{{ $licenseseat->license->serial }}" />
 				</div>
 			</div>
 
 			<!-- User -->
-			<div class="control-group {{ $errors->has('assigned_to') ? 'error' : '' }}">
+			<div class="form-group {{ $errors->has('assigned_to') ? 'error' : '' }}">
 				<label class="control-label" for="parent">Checkout to</label>
 				<div class="controls">
 					{{ Form::select('assigned_to', $users_list , Input::old('assigned_to'), array('class'=>'select2', 'style'=>'min-width:350px')) }}
@@ -55,16 +55,16 @@
 			</div>
 
 			<!-- Notes -->
-			<div class="control-group {{ $errors->has('note') ? 'error' : '' }}">
+			<div class="form-group {{ $errors->has('note') ? 'error' : '' }}">
 				<label class="control-label" for="note">Notes</label>
 				<div class="controls">
-					<input class="span6" type="text" name="note" id="note" value="{{ Input::old('notes', $licenseseat->note) }}" />
+					<input class="col-md-6" type="text" name="note" id="note" value="{{ Input::old('notes', $licenseseat->note) }}" />
 					{{ $errors->first('note', '<span class="help-inline"><i class="icon-remove-sign"></i> :message</span>') }}
 				</div>
 			</div>
 
 			<!-- Form actions -->
-			<div class="control-group">
+			<div class="form-group">
 				<div class="controls">
 					<a class="btn btn-link" href="{{ route('licenses') }}">@lang('general.cancel')</a>
 					<button type="submit" class="btn-flat success">@lang('general.checkout')</button>

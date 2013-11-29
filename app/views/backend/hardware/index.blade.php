@@ -22,11 +22,11 @@ Assets ::
 
 {{-- Page content --}}
 @section('content')
-<div class="page-header">
-		<div class="pull-right">
-			<a href="{{ route('create/hardware') }}" class="btn-flat success"><i class="icon-plus-sign icon-white"></i> Create New</a>
-		</div>
 
+
+<div class="row header">
+    <div class="col-md-12">
+    	<a href="{{ route('create/hardware') }}" class="btn-flat success pull-right"><i class="icon-plus-sign icon-white"></i> Create New</a>
 		<h3>
 		@if (Input::get('Pending') || Input::get('Undeployable') || Input::get('RTD')  || Input::get('Deployed'))
 			@if (Input::get('Pending'))
@@ -43,8 +43,10 @@ Assets ::
 		@endif
 				Assets
 		</h3>
-
+	</div>
 </div>
+
+
 
 @if ($assets->count() > 0)
 
@@ -52,18 +54,18 @@ Assets ::
 <table id="example">
 	<thead>
 		<tr role="row">
-			<th class="span2" bSortable="true">@lang('admin/hardware/table.asset_tag')</th>
-			<th class="span2" bSortable="true"><span class="line"></span>@lang('admin/hardware/table.title')</th>
-			<th class="span2" bSortable="true"><span class="line"></span>@lang('admin/hardware/table.serial')</th>
+			<th class="col-md-2" bSortable="true">@lang('admin/hardware/table.asset_tag')</th>
+			<th class="col-md-2" bSortable="true"><span class="line"></span>@lang('admin/hardware/table.title')</th>
+			<th class="col-md-2" bSortable="true"><span class="line"></span>@lang('admin/hardware/table.serial')</th>
 			@if (Input::get('Pending') || Input::get('Undeployable') || Input::get('RTD'))
-			<th class="span2" bSortable="true">Status</th>
+			<th class="col-md-2" bSortable="true">Status</th>
 			@else
-			<th class="span2" bSortable="true">@lang('admin/hardware/table.checkoutto')</th>
-			<th class="span2" bSortable="true">@lang('admin/hardware/table.location')</th>
+			<th class="col-md-2" bSortable="true">@lang('admin/hardware/table.checkoutto')</th>
+			<th class="col-md-2" bSortable="true">@lang('admin/hardware/table.location')</th>
 			@endif
 
-			<th class="span1">@lang('admin/hardware/table.change')</th>
-			<th class="span2" bSortable="false">@lang('table.actions')</th>
+			<th class="col-md-1">@lang('admin/hardware/table.change')</th>
+			<th class="col-md-2" bSortable="false">@lang('table.actions')</th>
 		</tr>
 	</thead>
 	<tbody>

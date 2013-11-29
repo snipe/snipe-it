@@ -33,9 +33,6 @@
 .settings-wrapper .personal-info form {
   margin-left: 50px;
 }
-.settings-wrapper .personal-info .field-box {
-  margin-bottom: 20px;
-}
 .settings-wrapper .personal-info label {
   display: inline-block;
   float: left;
@@ -44,18 +41,20 @@
   cursor: auto;
   width: 20%;
   margin-right: 10px;
+  text-align: left;
 }
 .settings-wrapper .personal-info .input[type="text"] {
   font-weight: 600;
 }
 .settings-wrapper .personal-info .ui-select {
-  width: 50%;
+  width: 100%;
   margin-bottom: 10px;
 }
 .settings-wrapper .personal-info .actions {
   margin-bottom: 25px;
-  margin-left: 0;
   margin-top: 30px;
+  width: 100%;
+  padding-right: 70px;
   float: left;
   text-align: right;
 }
@@ -73,7 +72,7 @@
 }
 
 /* responsive */
-@media (max-width: 767px) {
+@media (max-width: 768px) {
   .settings-wrapper #pad-wrapper {
     padding: 0px 20px;
   }
@@ -86,9 +85,6 @@
     margin-top: 40px;
   }
   .settings-wrapper .personal-info h5.personal-title {
-    margin-left: 0;
-  }
-  .settings-wrapper .personal-info .field-box {
     margin-left: 0;
   }
   .settings-wrapper .personal-info .ui-select {
@@ -109,14 +105,19 @@
   .settings-wrapper .personal-info .ui-select {
     width: 77%;
   }
+
+  .avatar-box {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+
+  .settings-wrapper .personal-info {
+    border-left: 0px;
+    box-shadow: none;
+  }
 }
 @media (min-width: 768px) {
   .settings-wrapper .personal-info .alert {
     margin-left: 50px;
-  }
-}
-@media (min-width: 980px) {
-  .settings-wrapper .personal-info .ui-select {
-    width: 60%;
   }
 }

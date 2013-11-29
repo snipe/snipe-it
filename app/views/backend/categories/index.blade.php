@@ -19,7 +19,7 @@ Asset Categories ::
 
                 <div class="row-fluid profile">
                     <!-- bio, new note & orders column -->
-                    <div class="span9 bio">
+                    <div class="col-md-9 bio">
                         <div class="profile-box">
                             <br>
                             <!-- checked out assets table -->
@@ -27,8 +27,8 @@ Asset Categories ::
                         <table id="example">
 						<thead>
 							<tr role="row">
-								<th class="span6">@lang('admin/categories/table.title')</th>
-								<th class="span3">@lang('table.actions')</th>
+								<th class="col-md-6">@lang('admin/categories/table.title')</th>
+								<th class="col-md-3">@lang('table.actions')</th>
 							</tr>
 						</thead>
 						<tbody>
@@ -49,7 +49,7 @@ Asset Categories ::
                     </div>
 
                     <!-- side address column -->
-                    <div class="span3 address pull-right">
+                    <div class="col-md-3 address pull-right">
 						<br /><br />
 						<h6>About Asset Categories</h6>
 						<p>Asset categories help you organize your assets. Some

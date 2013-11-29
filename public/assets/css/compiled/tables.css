@@ -121,8 +121,12 @@
     top: 26.8%;
   }
 }
-@media (max-width: 767px) {
-  .table-wrapper .table .img {
+@media (max-width: 768px) {
+  .table-wrapper {
+    padding: 0px 15px;
+  }
+  .table-wrapper .table .img,
+  .table-wrapper .table .avatar {
     display: none;
   }
   .table-wrapper .table input[type="checkbox"] {

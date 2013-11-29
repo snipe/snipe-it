@@ -16,28 +16,26 @@ Change your Password
 	<input type="hidden" name="_token" value="{{ csrf_token() }}" />
 
 	<!-- Old Password -->
-	<div class="control-group{{ $errors->first('old_password', ' error') }}">
+	<div class="form-group{{ $errors->first('old_password', ' error') }}">
 		<label class="control-label" for="old_password">Old Password</label>
-		<div class="controls">
-			<input type="password" name="old_password" id="old_password" value="" />
+			<input type="password" name="old_password" id="old_password" class="form-control" value="" />
 			{{ $errors->first('old_password', '<span class="help-block">:message</span>') }}
-		</div>
 	</div>
 
 	<!-- New Password -->
-	<div class="control-group{{ $errors->first('password', ' error') }}">
+	<div class="form-group{{ $errors->first('password', ' error') }}">
 		<label class="control-label" for="password">New Password</label>
 		<div class="controls">
-			<input type="password" name="password" id="password" value="" />
+			<input type="password" name="password" id="password" class="form-control" value="" />
 			{{ $errors->first('password', '<span class="help-block">:message</span>') }}
 		</div>
 	</div>
 
 	<!-- Confirm New Password  -->
-	<div class="control-group{{ $errors->first('password_confirm', ' error') }}">
+	<div class="form-group{{ $errors->first('password_confirm', ' error') }}">
 		<label class="control-label" for="password_confirm">Confirm New Password</label>
 		<div class="controls">
-			<input type="password" name="password_confirm" id="password_confirm" value="" />
+			<input type="password" name="password_confirm" id="password_confirm" class="form-control" value="" />
 			{{ $errors->first('password_confirm', '<span class="help-block">:message</span>') }}
 		</div>
 	</div>
@@ -45,7 +43,7 @@ Change your Password
 	<hr>
 
 	<!-- Form actions -->
-	<div class="control-group">
+	<div class="form-group">
 		<div class="controls">
 			<button type="submit" class="btn">Update Password</button>
 
@@ -78,7 +76,7 @@ Change your Password
 				<input type="hidden" name="formType" value="change-email" />
 
 				<!-- Old Password -->
-				<div class="control-group{{ $errors->first('old_password', ' error') }}">
+				<div class="form-group{{ $errors->first('old_password', ' error') }}">
 					<label class="control-label" for="old_password">Old Password</label>
 					<div class="controls">
 						<input type="password" name="old_password" id="old_password" value="" />
@@ -87,7 +85,7 @@ Change your Password
 				</div>
 
 				<!-- New Email -->
-				<div class="control-group{{ $errors->first('email', ' error') }}">
+				<div class="form-group{{ $errors->first('email', ' error') }}">
 					<label class="control-label" for="email">New Email</label>
 					<div class="controls">
 						<input type="email" name="email" id="email" value="" />
@@ -96,7 +94,7 @@ Change your Password
 				</div>
 
 				<!-- Confirm New Email -->
-				<div class="control-group{{ $errors->first('email_confirm', ' error') }}">
+				<div class="form-group{{ $errors->first('email_confirm', ' error') }}">
 					<label class="control-label" for="email_confirm">Confirm New Email</label>
 					<div class="controls">
 						<input type="email" name="email_confirm" id="email_confirm" value="" />
@@ -105,7 +103,7 @@ Change your Password
 				</div>
 
 				<!-- Form actions -->
-				<div class="control-group">
+				<div class="form-group">
 					<div class="controls">
 						<a class="btn" href="{{ route('home') }}">Cancel</a>
 

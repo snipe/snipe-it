@@ -45,12 +45,12 @@ User Management ::
 <table id="example">
 	<thead>
 		<tr role="row">
-			<th class="span3">@lang('admin/users/table.name')</th>
-			<th class="span2">@lang('admin/users/table.email')</th>
-			<th class="span1">Assets</th>
-			<th class="span1">Licenses</th>
-			<th class="span1">@lang('admin/users/table.activated')</th>
-			<th class="span3">@lang('table.actions')</th>
+			<th class="col-md-3">@lang('admin/users/table.name')</th>
+			<th class="col-md-2">@lang('admin/users/table.email')</th>
+			<th class="col-md-1">Assets</th>
+			<th class="col-md-1">Licenses</th>
+			<th class="col-md-1">@lang('admin/users/table.activated')</th>
+			<th class="col-md-3">@lang('table.actions')</th>
 		</tr>
 	</thead>
 	<tbody>

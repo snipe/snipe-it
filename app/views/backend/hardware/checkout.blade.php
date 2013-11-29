@@ -38,23 +38,23 @@
 		<div class="tab-pane active" id="tab-general">
 
 			<!-- Asset Tag -->
-			<div class="control-group">
+			<div class="form-group">
 				<label class="control-label" for="asset_tag">Asset Tag</label>
 				<div class="controls">
-					<input class="span4" readonly="readonly" type="text" name="asset_tag" id="asset_tag" value="{{ $asset->asset_tag }}" />
+					<input class="col-md-4" readonly="readonly" type="text" name="asset_tag" id="asset_tag" value="{{ $asset->asset_tag }}" />
 				</div>
 			</div>
 
 			<!-- Asset Name -->
-			<div class="control-group">
+			<div class="form-group">
 				<label class="control-label" for="name">Asset Name</label>
 				<div class="controls">
-					<input class="span4" readonly="readonly" type="text" name="name" id="asset_name" value="{{ $asset->name }}" />
+					<input class="col-md-4" readonly="readonly" type="text" name="name" id="asset_name" value="{{ $asset->name }}" />
 				</div>
 			</div>
 
 			<!-- User -->
-			<div class="control-group {{ $errors->has('assigned_to') ? 'error' : '' }}">
+			<div class="form-group {{ $errors->has('assigned_to') ? 'error' : '' }}">
 				<label class="control-label" for="parent">Checkout to</label>
 				<div class="controls">
 
@@ -64,10 +64,10 @@
 			</div>
 
 			<!-- Notes -->
-			<div class="control-group {{ $errors->has('note') ? 'error' : '' }}">
+			<div class="form-group {{ $errors->has('note') ? 'error' : '' }}">
 				<label class="control-label" for="note">Notes</label>
 				<div class="controls">
-					<input class="span6" type="text" name="note" id="note" value="{{ Input::old('notes', $asset->note) }}" />
+					<input class="col-md-6" type="text" name="note" id="note" value="{{ Input::old('notes', $asset->note) }}" />
 					{{ $errors->first('note', '<span class="help-inline"><i class="icon-remove-sign"></i> :message</span>') }}
 				</div>
 			</div>
@@ -75,7 +75,7 @@
 		</div>
 
 	<!-- Form actions -->
-	<div class="control-group">
+	<div class="form-group">
 		<div class="controls">
 			<a class="btn btn-link" href="{{ route('hardware') }}">@lang('general.cancel')</a>
 			<button type="submit" class="btn-flat success"><i class="icon-ok icon-white"></i>@lang('general.checkout')</button>
