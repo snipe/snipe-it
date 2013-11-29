@@ -189,7 +189,7 @@ Update User {{ $user->fullName() }} ::
 
 			<button type="reset" class="btn">Reset</button>
 
-			<button type="submit" class="btn-flat success"><i class="icon-ok icon-white"></i> @lang('general.save')</button>
+			<button type="submit" class="btn btn-success"><i class="icon-ok icon-white"></i> @lang('general.save')</button>
 		</div>
 	</div>
 </form>
