@@ -7,6 +7,7 @@ class Model extends Elegant {
 		'name'   => 'required|alpha_space|min:3',
 		'modelno'   => 'alpha_space|min:1',
 		'category_id'   => 'required|integer',
+		'manufacturer_id'   => 'required|integer',
 	);
 
 	public function assets()

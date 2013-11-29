@@ -54,7 +54,7 @@
 				<label class="col-md-2 control-label"></label>
 					<div class="col-md-7">
 						<a class="btn btn-link" href="{{ route('licenses') }}">@lang('general.cancel')</a>
-						<button type="submit" class="btn-flat success">@lang('general.checkin')</button>
+						<button type="submit" class="btn btn-success"><i class="icon-ok icon-white"></i> @lang('general.checkin')</button>
 					</div>
 				</div>
 

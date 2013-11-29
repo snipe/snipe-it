@@ -239,7 +239,7 @@ class LicensesController extends AdminController {
 		}
 
 		// Get the dropdown of users and then pass it to the checkout view
-		$users_list = array('' => 'Select a User') + DB::table('users')->select(DB::raw('concat (first_name," ",last_name) as full_name, id'))->lists('full_name', 'id');
+		$users_list = array('' => 'Select a User') + DB::table('users')->select(DB::raw('concat (first_name," ",last_name) as full_name, id'))->whereNull('deleted_at')->lists('full_name', 'id');
 
 		//print_r($users);
 		return View::make('backend/licenses/checkout', compact('licenseseat'))->with('users_list',$users_list);
