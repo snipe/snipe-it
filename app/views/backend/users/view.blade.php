@@ -92,8 +92,8 @@ View User {{ $user->fullName() }} ::
 										</td>
 										<td><a href="{{ route('view/license', $license->id) }}">{{ $license->serial }}</a></td>
 										<td><a href="{{ route('view/license', $license->id) }}">{{ $license->name }}</a></td>
-
-										<td> <a href="{{ route('checkin/license', $license->id) }}" class="btn-flat info">Checkin</a></td>
+										<td> <a href="{{ route('checkin/license', $license->pivot->id) }}" class="btn-flat info">Checkin</a>
+										</td>
 									</tr>
 									@endforeach
                                 </tbody>
