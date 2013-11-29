@@ -60,7 +60,7 @@
 						@else
 						<a class="btn btn-link" href="{{ route('hardware') }}">Cancel</a>
 						@endif
-						<button type="submit" class="btn-flat success"><i class="icon-ok icon-white"></i>@lang('general.checkin')</button>
+						<button type="submit" class="btn btn-success"><i class="icon-ok icon-white"></i>@lang('general.checkin')</button>
 					</div>
 				</div>
 
