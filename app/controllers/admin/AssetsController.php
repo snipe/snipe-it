@@ -273,7 +273,7 @@ class AssetsController extends AdminController {
 
 
 		// Redirect to the asset management page with error
-		return Redirect::to("assets/$assetId/edit")->with('error', Lang::get('admin/hardware/message.update.error'));
+		return Redirect::to("hardware/$assetId/edit")->with('error', Lang::get('admin/hardware/message.update.error'));
 
 	}
 
@@ -386,7 +386,7 @@ class AssetsController extends AdminController {
 		}
 
 		// Redirect to the asset management page with error
-		return Redirect::to("assets/$assetId/checkout")->with('error', Lang::get('admin/hardware/message.checkout.error'));
+		return Redirect::to("hardware/$assetId/checkout")->with('error', Lang::get('admin/hardware/message.checkout.error'));
 	}
 
 

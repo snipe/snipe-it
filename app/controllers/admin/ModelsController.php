@@ -45,7 +45,7 @@ class ModelsController extends AdminController {
 		$view->with('category_list',$category_list);
 		$view->with('depreciation_list',$depreciation_list);
 		$view->with('manufacturer_list',$manufacturer_list);
-		$view->with('model',new Model); 
+		$view->with('model',new Model);
 		return $view;
 	}
 
@@ -156,7 +156,7 @@ class ModelsController extends AdminController {
 			if($model->save())
 			{
 				// Redirect to the new model  page
-				return Redirect::to("assets/models/$modelId/edit")->with('success', Lang::get('admin/models/message.update.success'));
+				return Redirect::to("hardware/models/$modelId/edit")->with('success', Lang::get('admin/models/message.update.success'));
 			}
 		}
 		else
@@ -167,7 +167,7 @@ class ModelsController extends AdminController {
 		}
 
 		// Redirect to the model create page
-		return Redirect::to("assets/models/$modelId/edit")->with('error', Lang::get('admin/models/message.update.error'));
+		return Redirect::to("hardware/models/$modelId/edit")->with('error', Lang::get('admin/models/message.update.error'));
 
 	}
 
@@ -183,19 +183,19 @@ class ModelsController extends AdminController {
 		if (is_null($model = Model::find($modelId)))
 		{
 			// Redirect to the blogs management page
-			return Redirect::to('assets/models')->with('error', Lang::get('admin/models/message.not_found'));
+			return Redirect::to('hardware/models')->with('error', Lang::get('admin/models/message.not_found'));
 		}
 
 		if ($model->assets->count() > 0) {
 			// Throw an error that this model is associated with assets
-			return Redirect::to('assets/models')->with('error', Lang::get('admin/models/message.assoc_users'));
+			return Redirect::to('hardware/models')->with('error', Lang::get('admin/models/message.assoc_users'));
 
 		} else {
 			// Delete the model
 			$model->delete();
 
 			// Redirect to the models management page
-			return Redirect::to('assets/models')->with('success', Lang::get('admin/models/message.delete.success'));
+			return Redirect::to('hardware/models')->with('success', Lang::get('admin/models/message.delete.success'));
 		}
 	}
 
