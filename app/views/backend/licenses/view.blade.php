@@ -55,7 +55,7 @@ View License {{ $license->name }} ::
 											<td>Seat {{ $count }} </td>
 											<td>
 											@if ($licensedto->assigned_to)
-												<a href="{{ route('view/user', $licensedto->id) }}">
+												<a href="{{ route('view/user', $licensedto->assigned_to) }}">
 											{{ $licensedto->user->fullName() }}
 											</a>
 											@endif
