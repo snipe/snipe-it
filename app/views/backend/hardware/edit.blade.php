@@ -14,8 +14,6 @@
 
 @section('content')
 
-
-
 <div class="row header">
     <div class="col-md-12">
     	@if ($asset->id)
@@ -156,7 +154,7 @@
 						@else
 						<a class="btn btn-link" href="{{ route('hardware') }}">Cancel</a>
 						@endif
-						<button type="submit" class="btn-flat success"><i class="icon-ok icon-white"></i> Save</button>
+						<button type="submit" class="btn btn-success"><i class="icon-ok icon-white"></i> Save</button>
 					</div>
 				</div>
 

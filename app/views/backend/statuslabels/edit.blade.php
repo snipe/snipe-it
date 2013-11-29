@@ -12,50 +12,47 @@
 
 {{-- Page content --}}
 @section('content')
-<div id="pad-wrapper" class="user-profile">
-                <!-- header -->
-                <div class="pull-right">
-					<a href="{{ route('statuslabels') }}" class="btn-flat gray"><i class="icon-circle-arrow-left icon-white"></i> Back</a>
+
+<div class="row header">
+    <div class="col-md-12">
+    	<a href="{{ route('statuslabels') }}" class="btn-flat gray pull-right right"><i class="icon-circle-arrow-left icon-white"></i> Back</a>
+		<h3>Status Labels</h3>
+	</div>
+</div>
+
+<div class="user-profile">
+<div class="row profile">
+<div class="col-md-9 bio">
+
+		<!-- checked out assets table -->
+
+		<form class="form-horizontal" method="post" action="" autocomplete="off">
+			<!-- CSRF Token -->
+			<input type="hidden" name="_token" value="{{ csrf_token() }}" />
+
+
+
+			<!-- Asset Title -->
+			<div class="form-group {{ $errors->has('name') ? ' has-error' : '' }}">
+				<label for="name" class="col-md-2 control-label">Asset Name</label>
+					<div class="col-md-7">
+						<input class="form-control" type="text" name="name" id="name" value="{{ Input::old('name', $statuslabel->name) }}" />
+						{{ $errors->first('name', '<span class="alert-msg"><i class="icon-remove-sign"></i> :message</span>') }}
+					</div>
+			</div>
+
+			<!-- Form actions -->
+				<div class="form-group">
+				<label class="col-md-2 control-label"></label>
+					<div class="col-md-7">
+						<a class="btn btn-link" href="{{ route('statuslabels') }}">Cancel</a>
+						<button type="submit" class="btn btn-success"><i class="icon-ok icon-white"></i> @lang('general.save')</button>
+					</div>
 				</div>
-
-				<h3 class="name">
-					@if ($statuslabel->id)
-						Update Status Label
-					@else
-						Create New Status Label
-					@endif
-				</h3>
+		</form>
+		<br><br><br><br>
 
 
-                <div class="row-fluid profile">
-                    <!-- bio, new note & orders column -->
-                    <div class="col-md-9 bio">
-                        <div class="profile-box">
-                            <br>
-                            <!-- checked out assets table -->
-
-                            <form class="form-horizontal" method="post" action="" autocomplete="off">
-								<!-- CSRF Token -->
-								<input type="hidden" name="_token" value="{{ csrf_token() }}" />
-
-									<div class="form-group {{ $errors->has('name') ? 'error' : '' }}">
-										<label class="control-label" for="name">Status Label</label>
-										<div class="controls">
-											<input class="col-md-9" type="text" name="name" id="name" value="{{ Input::old('name', $statuslabel->name) }}" />
-											{{ $errors->first('name', '<span class="help-inline">:message</span>') }}
-										</div>
-									</div>
-
-									<!-- Form actions -->
-									<div class="form-group">
-										<div class="controls">
-											<a class="btn btn-link" href="{{ route('statuslabels') }}">@lang('general.cancel')</a>
-											<button type="submit" class="btn-flat success"><i class="icon-ok icon-white"></i> @lang('general.save')</button>
-										</div>
-									</div>
-							</form>
-
-					 	</div>
 </div>
 
                     <!-- side address column -->

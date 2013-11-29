@@ -32,7 +32,7 @@ Licenses ::
 			<tr>
 
 					<td><a href="{{ route('view/license', $license->id) }}">{{ $license->name }}</a>
-					@if ($license->seats ==1)
+					@if ($license->seats == 1)
 						({{ $license->seats }} seat)
 					@else
 						({{ $license->seats }} seats)
@@ -42,8 +42,8 @@ Licenses ::
 					<td><a href="{{ route('view/license', $license->id) }}">{{ $license->serial }}</a></td>
 					<td></td>
 					<td>
-					<a href="{{ route('update/license', $license->id) }}" class="btn-flat white"> @lang('button.edit')</a>
-						<a data-html="false" class="btn-flat danger delete-asset" data-toggle="modal" href="{{ route('delete/license', $license->id) }}" data-content="Are you sure you wish to delete this license?" data-title="Delete {{ htmlspecialchars($license->name) }}?" onClick="return false;">@lang('button.delete')</a>
+					<a href="{{ route('update/license', $license->id) }}" class="btn btn-warning"><i class="icon-pencil icon-white"></i></a>
+						<a data-html="false" class="btn delete-asset btn-danger" data-toggle="modal" href="{{ route('delete/license', $license->id) }}" data-content="Are you sure you wish to delete this license?" data-title="Delete {{ htmlspecialchars($license->name) }}?" onClick="return false;"><i class="icon-trash icon-white"></i></a>
 
 
 					</td>
@@ -60,7 +60,7 @@ Licenses ::
 					<td><a href="{{ route('view/license', $license->id) }}">{{ $license->serial }}</a></td>
 					<td>
 					@if ($licensedto->assigned_to)
-						<a href="{{ route('view/user', $licensedto->id) }}">
+						<a href="{{ route('view/user', $licensedto->assigned_to) }}">
 					{{ $licensedto->user->fullName() }}
 					</a>
 					@endif
