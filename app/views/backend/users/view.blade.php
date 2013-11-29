@@ -17,7 +17,13 @@ View User {{ $user->fullName() }} ::
                     <h3 class="name">{{ $user->fullName() }}</h3>
                     <span class="area">{{ $user->jobtitle }}</span>
                 </div>
-                <a href="{{ route('update/user', $user->id) }}" class="btn-flat white large pull-right edit"><i class="icon-pencil"></i> @lang('button.edit') This User</a>
+                @if ($user->deleted_at != NULL)
+                		    <a href="{{ route('restore/user', $user->id) }}" class="btn btn-warning pull-right edit"><i class="icon-pencil"></i> Restore This User</a>
+
+                @else
+                	    <a href="{{ route('update/user', $user->id) }}" class="btn-flat white large pull-right edit"><i class="icon-pencil"></i> @lang('button.edit') This User</a>
+
+                @endif
             </div>
 
             <div class="row profile">
@@ -26,6 +32,17 @@ View User {{ $user->fullName() }} ::
                     <div class="col-md-9 bio">
                         <div class="profile-box">
 
+						@if ($user->deleted_at != NULL)
+
+							<div class="col-md-12">
+								<div class="alert alert-danger">
+									<i class="icon-exclamation-sign"></i>
+									<strong>Error: </strong>
+									 This user has been deleted. You will have to restore this user to edit them or assign them new assets.
+								</div>
+							</div>
+
+						@endif
 
                             <h6>Assets Checked Out to {{ $user->first_name }}</h6>
                             <br>
