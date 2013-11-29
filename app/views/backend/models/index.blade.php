@@ -8,15 +8,15 @@ Asset Models ::
 
 {{-- Page content --}}
 @section('content')
-<div class="page-header">
 
-	<div class="pull-right">
-			<a href="{{ route('create/model') }}" class="btn-flat success"><i class="icon-plus-sign icon-white"></i> Create New</a>
-		</div>
-
-	<h3>Asset Models</h3>
+<div class="row header">
+    <div class="col-md-12">
+    	<a href="{{ route('create/model') }}" class="btn btn-success pull-right"><i class="icon-plus-sign icon-white"></i> Create New</a>
+		<h3>Asset Models</h3>
+	</div>
 </div>
 
+<div class="row form-wrapper">
 <table id="example">
 	<thead>
 		<tr role="row">
@@ -24,7 +24,7 @@ Asset Models ::
 			<th class="col-md-2">@lang('admin/models/table.modelnumber')</th>
 			<th class="col-md-1">@lang('admin/models/table.numassets')</th>
 			<th class="col-md-2">Depreciation</th>
-			<th class="col-md-1">Category</th>
+			<th class="col-md-2">Category</th>
 			<th class="col-md-2">@lang('table.actions')</th>
 		</tr>
 	</thead>
@@ -44,11 +44,11 @@ Asset Models ::
 			<td>
 			@if ($model->category)
 			{{ $model->category->name }}
-			@endif</td>
+			@endif
+			</td>
 			<td>
-				<a href="{{ route('update/model', $model->id) }}" class="btn-flat white">@lang('button.edit')</a>
-				<a data-html="false" class="btn-flat danger delete-asset" data-toggle="modal" href="{{ route('delete/model', $model->id) }}" data-content="Are you sure you wish to delete this model?" data-title="Delete {{ htmlspecialchars($model->name) }}?" onClick="return false;">@lang('button.delete')</a>
-
+				<a href="{{ route('update/model', $model->id) }}" class="btn btn-warning"><i class="icon-pencil icon-white"></i></a>
+				<a data-html="false" class="btn delete-asset btn-danger" data-toggle="modal" href="{{ route('delete/model', $model->id) }}" data-content="Are you sure you wish to delete this model?" data-title="Delete {{ htmlspecialchars($model->name) }}?" onClick="return false;"><i class="icon-trash icon-white"></i></a>
 			</td>
 		</tr>
 		@endforeach

@@ -5,6 +5,7 @@ use Input;
 use Redirect;
 use Sentry;
 use Validator;
+use Location;
 use View;
 
 class ProfileController extends AuthorizedController {
@@ -20,7 +21,11 @@ class ProfileController extends AuthorizedController {
 		$user = Sentry::getUser();
 
 		// Show the page
-		return View::make('frontend/account/profile', compact('user'));
+
+		$location_list = array('' => 'Select One') + Location::lists('name', 'id');
+
+		// Show the page
+		return View::make('frontend/account/profile', compact('user'))->with('location_list',$location_list);
 	}
 
 	/**
@@ -34,6 +39,7 @@ class ProfileController extends AuthorizedController {
 		$rules = array(
 			'first_name' => 'required|min:3',
 			'last_name'  => 'required|min:3',
+			'location_id'  => 'required',
 			'website'    => 'url',
 			'gravatar'   => 'email',
 		);
@@ -55,7 +61,7 @@ class ProfileController extends AuthorizedController {
 		$user->first_name = Input::get('first_name');
 		$user->last_name  = Input::get('last_name');
 		$user->website    = Input::get('website');
-		$user->country    = Input::get('country');
+		$user->location_id    = Input::get('location_id');
 		$user->gravatar   = Input::get('gravatar');
 		$user->save();
 
