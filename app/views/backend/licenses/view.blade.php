@@ -108,10 +108,9 @@ View License {{ $license->name }} ::
 										<td>{{ $log->action_type }}</td>
 
 										<td>
-											@if (isset($log->checkedout_to))
+											@if (($log->checkedout_to) && ($log->checkedout_to > 0 ))
 											<a href="{{ route('view/user', $log->checkedout_to) }}">
-											{{ $log->userlog->fullName() }}
-
+												{{ $log->userlog->fullName() }}
 											</a>
 											@endif
 										</td>
