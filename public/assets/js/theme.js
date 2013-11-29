@@ -75,17 +75,20 @@ $(function () {
   // mobile side-menu slide toggler
   var $menu = $("#sidebar-nav");
   $("body").click(function () {
-    if ($menu.hasClass("display")) {
-      $menu.removeClass("display");
+    if ($(this).hasClass("menu")) {
+      $(this).removeClass("menu");
     }
   });
   $menu.click(function(e) {
     e.stopPropagation();
   });
   $("#menu-toggler").click(function (e) {
-    e.stopPropagation();    
-    $menu.toggleClass("display");    
-  });  
+    e.stopPropagation();
+    $("body").toggleClass("menu");
+  });
+  $(window).resize(function() { 
+    $(this).width() > 769 && $("body.menu").removeClass("menu")
+  })
 
 
 	// build all tooltips from data-attributes
@@ -141,6 +144,11 @@ $(function () {
   			$checks.prop("checked", false);
   		}  		
   	});
+
+    // quirk to fix dark skin sidebar menu because of B3 border-box
+    if ($("#sidebar-nav").height() > $(".content").height()) {
+      $("html").addClass("small");
+    }
 
 
 });
