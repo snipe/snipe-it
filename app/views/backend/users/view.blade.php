@@ -37,7 +37,7 @@ View User {{ $user->fullName() }} ::
 							<div class="col-md-12">
 								<div class="alert alert-danger">
 									<i class="icon-exclamation-sign"></i>
-									<strong>Error: </strong>
+									<strong>Warning: </strong>
 									 This user has been deleted. You will have to restore this user to edit them or assign them new assets.
 								</div>
 							</div>
