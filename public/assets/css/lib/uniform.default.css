@@ -49,8 +49,7 @@ textarea.uniform {
 div.checker input,
 input[type="search"],
 input[type="search"]:active {
-  -moz-appearance: none;
-  -webkit-appearance: none; }
+}
 
 /* Select */
 div.selector {
@@ -120,9 +119,7 @@ div.checker {
     div.checker span.checked {
       background-position: -76px -260px; }
   div.checker input {
-    opacity: 0;
-    filter: alpha(opacity=0);
-    -moz-opacity: 0;
+
     border: none;
     background: none;
     display: -moz-inline-box;
@@ -162,9 +159,8 @@ div.radio {
     div.radio span.checked {
       background-position: -72px -279px; }
   div.radio input {
-    opacity: 0;
-    filter: alpha(opacity=0);
-    -moz-opacity: 0;
+
+
     border: none;
     background: none;
     display: -moz-inline-box;

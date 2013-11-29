@@ -11,7 +11,7 @@ View User {{ $user->fullName() }} ::
 <div id="pad-wrapper" class="user-profile">
                 <!-- header -->
                 <div class="row-fluid header">
-                    <div class="span8">
+                    <div class="col-md-8">
                         <img src="{{ $user->gravatar() }}" class="avatar img-circle">
                         <h3 class="name">{{ $user->fullName() }}</h3>
                         <span class="area">{{ $user->jobtitle }}</span>
@@ -22,7 +22,7 @@ View User {{ $user->fullName() }} ::
 
                 <div class="row-fluid profile">
                     <!-- bio, new note & orders column -->
-                    <div class="span9 bio">
+                    <div class="col-md-9 bio">
                         <div class="profile-box">
 
 
@@ -33,10 +33,10 @@ View User {{ $user->fullName() }} ::
                             <table class="table table-hover">
                                 <thead>
                                     <tr>
-                                    	<th class="span3">Asset Type</th>
-                                        <th class="span3"><span class="line"></span>Asset Tag</th>
-                                        <th class="span3"><span class="line"></span>Name</th>
-                                        <th class="span3"><span class="line"></span>Actions</th>
+                                    	<th class="col-md-3">Asset Type</th>
+                                        <th class="col-md-3"><span class="line"></span>Asset Tag</th>
+                                        <th class="col-md-3"><span class="line"></span>Name</th>
+                                        <th class="col-md-3"><span class="line"></span>Actions</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -74,10 +74,10 @@ View User {{ $user->fullName() }} ::
                             <table class="table table-hover">
                                 <thead>
                                     <tr>
-                                    	<th class="span3">Asset Type</th>
-                                    	<th class="span3">Serial</th>
-                                        <th class="span3"><span class="line"></span>Name</th>
-                                        <th class="span3"><span class="line"></span>Actions</th>
+                                    	<th class="col-md-3">Asset Type</th>
+                                    	<th class="col-md-3">Serial</th>
+                                        <th class="col-md-3"><span class="line"></span>Name</th>
+                                        <th class="col-md-3"><span class="line"></span>Actions</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -117,10 +117,10 @@ View User {{ $user->fullName() }} ::
                             <table class="table table-hover">
                                 <thead>
                                     <tr>
-                                        <th class="span3">Date</th>
-                                        <th class="span3"><span class="line"></span>Action</th>
-                                        <th class="span3"><span class="line"></span>Asset</th>
-                                        <th class="span3"><span class="line"></span>By</th>
+                                        <th class="col-md-3">Date</th>
+                                        <th class="col-md-3"><span class="line"></span>Action</th>
+                                        <th class="col-md-3"><span class="line"></span>Asset</th>
+                                        <th class="col-md-3"><span class="line"></span>By</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -156,7 +156,7 @@ View User {{ $user->fullName() }} ::
                     </div>
 
                     <!-- side address column -->
-                    <div class="span3 address pull-right">
+                    <div class="col-md-3 address pull-right">
 
 
                         <h6>Contact  {{ $user->first_name }}</h6>

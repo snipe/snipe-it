@@ -1,9 +1,12 @@
 .users-list {
 	.header {
+		h3 {
+			margin-top: 0px;
+		}
 		input.search {
 			padding: 5px 6px;
 			position: relative;
-			top: -1px;
+			top: 0px;
 			&:focus {
 				box-shadow: none;
 				border: 1px solid #888;
@@ -14,6 +17,12 @@
 		}
 		.ui-dropdown {
 			margin-left: 20px;
+			input.form-control {
+				width: 60px;
+				display: inline-block;
+				height: 28px;
+				margin: 0px 8px;
+			}
 		}
 		a.btn-flat span {
 			font-size: 17px;
@@ -71,6 +80,9 @@
 			}
 			td {
 				font-size: 12px;
+			}
+			.avatar {
+				display: none;
 			}
 		}
 		h3 {

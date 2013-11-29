@@ -8,69 +8,72 @@
 
 {{-- Page content --}}
 @section('content')
-<div class="page-header">
 
-	<div class="pull-right">
-		<a href="{{ route('licenses') }}"  class="btn-flat gray"><i class="icon-circle-arrow-left icon-white"></i> Back</a>
+<div class="row header">
+    <div class="col-md-12">
+		<a href="{{ route('hardware') }}" class="btn-flat gray pull-right"><i class="icon-circle-arrow-left icon-white"></i> Back</a>
+		<h3>
+			Checkout License to User
+		</h3>
 	</div>
-
-	<h3>Checkout License to User</h3>
-
 </div>
+
+<div class="row form-wrapper">
+<!-- left column -->
+<div class="col-md-10 column">
 
 <form class="form-horizontal" method="post" action="" autocomplete="off">
 	<!-- CSRF Token -->
 	<input type="hidden" name="_token" value="{{ csrf_token() }}" />
 
-			<!-- Asset Tag -->
-			<div class="control-group">
-				<label class="control-label" for="asset_tag">Asset Tag</label>
-				<div class="controls">
-					<input class="span4" readonly="readonly" type="text" name="asset_tag" id="asset_tag" value="{{ $licenseseat->license->asset_tag }}" />
+			<!-- Asset name -->
+		  	<div class="form-group">
+			<label class="col-sm-2 control-label">Asset Name</label>
+				<div class="col-md-6">
+				  <p class="form-control-static">{{ $licenseseat->license->name }}</p>
 				</div>
-			</div>
+		  	</div>
 
-			<!-- Asset Name -->
-			<div class="control-group">
-				<label class="control-label" for="name">Asset Name</label>
-				<div class="controls">
-					<input class="span4" readonly="readonly" type="text" name="name" id="asset_name" value="{{ $licenseseat->license->name }}" />
-				</div>
-			</div>
 			<!-- Serial -->
-			<div class="control-group">
-				<label class="control-label" for="serial">Serial</label>
-				<div class="controls">
-					<input class="span4" readonly="readonly" type="text" name="serial" id="serial" value="{{ $licenseseat->license->serial }}" />
+		  	<div class="form-group">
+			<label class="col-sm-2 control-label">Serial</label>
+				<div class="col-md-6">
+				  <p class="form-control-static">{{ $licenseseat->license->serial }}</p>
 				</div>
-			</div>
+		  	</div>
 
 			<!-- User -->
-			<div class="control-group {{ $errors->has('assigned_to') ? 'error' : '' }}">
-				<label class="control-label" for="parent">Checkout to</label>
-				<div class="controls">
-					{{ Form::select('assigned_to', $users_list , Input::old('assigned_to'), array('class'=>'select2', 'style'=>'min-width:350px')) }}
-					{{ $errors->first('user_id', '<span class="help-inline">:message</span>') }}
+			<div class="form-group {{ $errors->has('assigned_to') ? ' has-error' : '' }}">
+				<label for="assigned_to" class="col-md-2 control-label">Checkout to</label>
+				<div class="col-md-7">
+					{{ Form::select('assigned_to', $users_list , Input::old('assigned_to', $licenseseat->assigned_to), array('class'=>'select2', 'style'=>'min-width:350px')) }}
+					{{ $errors->first('assigned_to', '<span class="alert-msg"><i class="icon-remove-sign"></i> :message</span>') }}
 				</div>
 			</div>
 
-			<!-- Notes -->
-			<div class="control-group {{ $errors->has('note') ? 'error' : '' }}">
-				<label class="control-label" for="note">Notes</label>
-				<div class="controls">
-					<input class="span6" type="text" name="note" id="note" value="{{ Input::old('notes', $licenseseat->note) }}" />
-					{{ $errors->first('note', '<span class="help-inline"><i class="icon-remove-sign"></i> :message</span>') }}
+			<!-- Note -->
+			<div class="form-group {{ $errors->has('note') ? 'error' : '' }}">
+				<label for="note" class="col-md-2 control-label">Note</label>
+				<div class="col-md-7">
+					<input class="col-md-6 form-control" type="text" name="note" id="note" value="{{ Input::old('note', $licenseseat->note) }}" />
+					{{ $errors->first('note', '<span class="alert-msg"><i class="icon-remove-sign"></i> :message</span>') }}
 				</div>
 			</div>
+
 
 			<!-- Form actions -->
-			<div class="control-group">
-				<div class="controls">
+			<div class="form-group">
+			<label class="col-md-2 control-label"></label>
+				<div class="col-md-7">
 					<a class="btn btn-link" href="{{ route('licenses') }}">@lang('general.cancel')</a>
-					<button type="submit" class="btn-flat success">@lang('general.checkout')</button>
+					<button type="submit"  class="btn btn-success"><i class="icon-ok icon-white"></i>  @lang('general.checkout')</button>
 				</div>
 			</div>
+
+
 </form>
 
+</div>
+</div>
 
 @stop

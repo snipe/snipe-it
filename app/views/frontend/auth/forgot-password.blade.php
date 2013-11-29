@@ -16,7 +16,7 @@ Forgot Password ::
 	<input type="hidden" name="_token" value="{{ csrf_token() }}" />
 
 	<!-- Email -->
-	<div class="control-group{{ $errors->first('email', ' error') }}">
+	<div class="form-group{{ $errors->first('email', ' error') }}">
 		<label class="control-label" for="email">Email</label>
 		<div class="controls">
 			<input type="email" name="email" id="email" value="{{ Input::old('email') }}" />
@@ -25,7 +25,7 @@ Forgot Password ::
 	</div>
 
 	<!-- Form actions -->
-	<div class="control-group">
+	<div class="form-group">
 		<div class="controls">
 			<a class="btn" href="{{ route('home') }}">Cancel</a>
 

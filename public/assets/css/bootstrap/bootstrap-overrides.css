@@ -2,13 +2,17 @@
 
 h1,h2,h3,h4,h5,h6{
 	font-weight: normal;
+	font-family: 'Open Sans', sans-serif;
 }
 
 /* COMPONENTS */
 
 
 /* labels */
-.label, .badge {font-weight: lighter;}
+.label, .badge {
+	font-weight: lighter;
+	font-size: 90%;
+}
 .label-success, .badge-success {
 	background-color: rgb(129, 189, 130);
 }
@@ -35,8 +39,8 @@ h1,h2,h3,h4,h5,h6{
 .alert-info [class*=" icon-"] {
 	color: #4993c6;
 }
-.alert-error [class^="icon-"], 
-.alert-error [class*=" icon-"] {
+.alert-danger [class^="icon-"], 
+.alert-danger [class*=" icon-"] {
 	color: #d5393e;
 }
 
@@ -136,6 +140,7 @@ select{
 input[type="file"] {
 	font-size: 12px;
 	line-height: 12px;
+	display: inline-block;
 }
 
 input[disabled], textarea[disabled], input[readonly], textarea[readonly] {
@@ -165,14 +170,13 @@ textarea::-webkit-input-placeholder {
 
 
 /* PREPEND & APPEND INPUT */
-.input-append input, 
-.input-prepend input, 
-.input-append .uneditable-input, 
-.input-prepend .uneditable-input {
+.input-group input, 
+.input-group input, 
+.input-group .uneditable-input, 
+.input-group .uneditable-input {
 	border: 1px solid #d6e2eb;
 }
-.input-append .add-on, 
-.input-prepend .add-on {
+.input-group .input-group-addon {
 	background-color: #f2f5f9;
 	border: 1px solid #d6e2eb;
 	padding: 4px 8px;
@@ -180,11 +184,9 @@ textarea::-webkit-input-placeholder {
 }
 
 /* NAVBAR */
-
 .navbar-inverse {
+	min-height: 48px;
 	margin-bottom: 0px;
-}
-.navbar-inverse .navbar-inner {
 	border-radius: 0px;
 	border-bottom: 1px solid #191e23;
 
@@ -197,25 +199,33 @@ textarea::-webkit-input-placeholder {
 	background: linear-gradient(to bottom,  #2c3742 0%,#28303a 100%); /* W3C */
 	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#2c3742', endColorstr='#28303a',GradientType=0 ); /* IE6-9 */
 }
-.navbar-inverse .btn-navbar {
+/* navbar-nav*/
+.navbar-inverse .navbar-nav {
+	padding-right: 20px;
+}
+/* menu toggler */
+.navbar-inverse .navbar-toggle {
 	float: left;
 	margin-top: 10px;
+	margin-left: 15px;
 }
-.navbar-inverse .brand {
+/* navbar brand*/
+.navbar-inverse .navbar-brand {
 	color: #ffffff;
 	text-transform: uppercase;
 	font-weight: lighter;
-	padding: 12px 20px 12px;
+	padding: 11px 20px;
 }
-.navbar-inverse .brand strong {
+.navbar-inverse .navbar-brand strong {
 	font-weight: normal;
 }
+/* navbar links */
 .navbar-inverse .nav > li > a {
 	padding: 13px 15px 8px;
 	border-left: 1px solid #101417;
 	color: rgb(214, 214, 214);
 	outline: 0px;
-	height: 25px;
+	height: 46px;
 	transition: background .1s linear;
 	-moz-transition: background .1s linear; /* Firefox 4 */
 	-webkit-transition: background .1s linear; /* Safari and Chrome */
@@ -224,10 +234,21 @@ textarea::-webkit-input-placeholder {
 .navbar-inverse .nav > li > a:hover {
 	background: rgba(25, 31, 36,0.6);
 }
-/* TODO: deprecated mobile-menu, ya no se usa, remover despues de migrar todos los htmls al nuevo diseno */
-.navbar-inverse .mobile-menu .nav > li > a {
-	color: #fff;
-	border-left: 0px;
+/* dropdown caret */
+.dropdown .caret {
+	position: relative;
+	top: -1px;	
+}
+/* dropdown active */
+.dropdown.open > a, 
+.dropdown.open > a:hover, 
+.dropdown.open > a:focus {
+	border-color: #101417;
+}
+/* dropdown menu */
+.dropdown-menu > li > a {
+	font-size: 13px;
+	outline: none;
 }
 .dropdown-menu > li > a:hover,
 .dropdown-menu > li > a:focus,
@@ -238,88 +259,28 @@ textarea::-webkit-input-placeholder {
 
 
 /* PAGINATION */
-
-.pagination {
-	margin: 8px 0;
-}
-.pagination ul > li:last-child > a,
-.pagination ul > li:last-child > span,
-.pagination ul > li:first-child > a,
-.pagination ul > li:first-child > span{
-	font-size: 23px;
-	color: #bcc6d3;
-	padding: 1px 9px 3px 9px;
-}
-.pagination ul > li:last-child > a:hover,
-.pagination ul > li:last-child > span:hover,
-.pagination ul > li:first-child > a:hover,
-.pagination ul > li:first-child > span:hover{
-	color: #4f4f4f;
-}
-.pagination ul > li > a, .pagination ul > li > span{
-	border-color: #d0dde9;
-	color: #4f4f4f;
+.pagination > li > a, .pagination > li > span {
 	font-weight: 600;
-	padding: 2px 12px;
-	box-shadow: 0px 1px 0px 0px #efefef;
-	transition: background-color .1s linear;
-	-moz-transition: background-color .1s linear; /* Firefox 4 */
-	-webkit-transition: background-color .1s linear; /* Safari and Chrome */
-	-o-transition: background-color .1s linear;  /* Opera */
 }
-.pagination ul > li > a.active{
-	color: #3b9ff3;
-}
-.pagination ul > li > a:hover,
-.pagination ul > li > a:focus,
-.pagination ul > .active > a,
-.pagination ul > .active > span {
-	background-color: #f5f5f5;
-}
-
-/* pagination inverse */
-
-.pagination.inverse ul > li:last-child > a,
-.pagination.inverse ul > li:last-child > span,
-.pagination.inverse ul > li:first-child > a,
-.pagination.inverse ul > li:first-child > span{
-	font-size: 23px;
+.pagination.inverse a,
+.pagination.inverse span {
+	background-color: #333e4a;
 	color: #fff;
-	padding: 1px 9px 3px 9px;
-}
-.pagination.inverse ul > li:last-child > a:hover,
-.pagination.inverse ul > li:last-child > span:hover,
-.pagination.inverse ul > li:first-child > a:hover,
-.pagination.inverse ul > li:first-child > span:hover{
-	color: #fff;
-}
-.pagination.inverse ul > li > a, .pagination.inverse ul > li > span{
 	border-top-color: #333e4a;
 	border-bottom-color: #333e4a;
 	border-right-color: #566676;
-	border-left: 0px;
-	color: rgb(241, 241, 241);
-	font-weight: 600;
-	padding: 2px 12px;
-	background: #333e4a;
-	transition: background-color .1s linear;
-	-moz-transition: background-color .1s linear; /* Firefox 4 */
-	-webkit-transition: background-color .1s linear; /* Safari and Chrome */
-	-o-transition: background-color .1s linear;  /* Opera */
+	border-left-color: #566676;
+} 
+.pagination.inverse a:hover,
+.pagination.inverse span:hover {
+	background-color: #000;
 }
-.pagination.inverse ul > li > a.active{
+.pagination.inverse > li.active > a {
 	color: #3b9ff3;
 	background-color: #212b36;
 	border-right-color: #212b36;
-	margin-left: -1px;
+	border-left-color: #212b36;
 }
-.pagination.inverse ul > li > a:hover,
-.pagination.inverse ul > li > a:focus,
-.pagination.inverse ul > .active > a,
-.pagination.inverse ul > .active > span {
-	background-color: #212b36;
-}
-
 
 /* TABLES*/
 
@@ -339,16 +300,17 @@ textarea::-webkit-input-placeholder {
 .table thead th{
 	font-weight: bold;
 	position: relative;
-	padding-bottom: 20px;
-	padding-top: 5px;
+	padding-bottom: 20px !important;
+	padding-top: 5px !important;
 	text-transform: uppercase;
 	font-size: 11px;
-	vertical-align: top;
+	vertical-align: top !important;
+	border-bottom: 0px !important;
 }
 .table td{
 	color: #526273;
-	border-top-color: #edf2f7;
-	vertical-align: middle;
+	border-top-color: #edf2f7 !important;
+	vertical-align: middle !important;
 }
 .table th.align-right,
 .table td.align-right {
@@ -364,6 +326,19 @@ table th span.line{
 	left: -8px;
 	border-left: 1px solid #dee3ea;
 	height: 10px;
+}
+
+/* modals */
+.modal-backdrop.in {
+	opacity: 0.5 !important;
+}
+
+
+/* override navbar toggle */
+@media (max-width: 768px) {
+  .navbar-toggle {
+    display: block !important;
+  }
 }
 
 

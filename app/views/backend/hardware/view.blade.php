@@ -10,67 +10,64 @@ View Asset {{ $asset->asset_tag }} ::
 @section('content')
 <div id="pad-wrapper" class="user-profile">
                 <!-- header -->
-
-				<div class="btn-group pull-right">
-					<button class="btn glow">Actions</button>
-					<button class="btn glow dropdown-toggle" data-toggle="dropdown">
-						<span class="caret"></span>
-					</button>
-					<ul class="dropdown-menu">
-
-						@if ($asset->status_id == 1)
-							@if ($asset->assigned_to != 0)
-								<li><a href="{{ route('checkin/hardware', $asset->id) }}" class="btn-flat info">Checkin</a></li>
-							@endif
-						@elseif ($asset->status_id == 0)
-								<li><a href="{{ route('checkout/hardware', $asset->id) }}" class="btn-flat success">Checkout</a></li>
-						@endif
-						<li><a href="{{ route('update/hardware', $asset->id) }}">Edit Asset</a></li>
-						<li><a href="{{ route('clone/hardware', $asset->id) }}">Clone Asset</a></li>
-					</ul>
-				</div>
-
 				<h3 class="name">History for {{ $asset->asset_tag }} ({{ $asset->name }})
 
+							<div class="btn-group pull-right">
+                                <button class="btn glow">Actions</button>
+                                <button class="btn glow dropdown-toggle" data-toggle="dropdown">
+                                    <span class="caret"></span>
+                                </button>
+                                <ul class="dropdown-menu">
 
+									@if ($asset->status_id == 1)
+										@if ($asset->assigned_to != 0)
+											<li><a href="{{ route('checkin/hardware', $asset->id) }}" class="btn-flat info">Checkin</a></li>
+										@endif
+									@elseif ($asset->status_id == 0)
+											<li><a href="{{ route('checkout/hardware', $asset->id) }}" class="btn-flat success">Checkout</a></li>
+									@endif
+                                   	<li><a href="{{ route('update/hardware', $asset->id) }}">Edit Asset</a></li>
+                                    <li><a href="{{ route('clone/hardware', $asset->id) }}">Clone Asset</a></li>
+                                </ul>
+                            </div>
 				</h3>
                 <div class="row-fluid profile">
                     <!-- bio, new note & orders column -->
-                    <div class="span9 bio">
+                    <div class="col-md-9 bio">
                         <div class="profile-box">
 
 						<!-- details snapshot box -->
                         <div class="row-fluid show-grid">
-								<div class="span9"></div>
+								<div class="col-md-9"></div>
 
 
 								@if ($asset->model->manufacturer)
-									<div class="span4"><strong>Manufacturer: </strong> {{ $asset->model->manufacturer->name }} </div>
-									<div class="span6"><strong>Model:</strong> {{ $asset->model->name }} / {{ $asset->model->modelno }}</div>
+									<div class="col-md-4"><strong>Manufacturer: </strong> {{ $asset->model->manufacturer->name }} </div>
+									<div class="col-md-6"><strong>Model:</strong> {{ $asset->model->name }} / {{ $asset->model->modelno }}</div>
 								@endif
 
 								@if ($asset->purchase_date)
-									<div class="span4"><strong>Purchased On: </strong>{{ $asset->purchase_date }} </div>
+									<div class="col-md-4"><strong>Purchased On: </strong>{{ $asset->purchase_date }} </div>
 								@endif
 
 								@if ($asset->purchase_cost)
-									<div class="span4"><strong>Purchase Cost:</strong> ${{ number_format($asset->purchase_cost,2) }} </div>
+									<div class="col-md-4"><strong>Purchase Cost:</strong> ${{ number_format($asset->purchase_cost,2) }} </div>
 								@endif
 
 								@if ($asset->order_number)
-									<div class="span4"><strong>Order #:</strong> {{ $asset->order_number }} </div>
+									<div class="col-md-4"><strong>Order #:</strong> {{ $asset->order_number }} </div>
 								@endif
 
 								@if ($asset->warranty_months)
-									<div class="span4"><strong>Warranty:</strong> {{ $asset->warranty_months }} months</div>
-									<div class="span4"><strong>Expires:</strong> {{ $asset->warrantee_expires() }}</div>
+									<div class="col-md-4"><strong>Warranty:</strong> {{ $asset->warranty_months }} months</div>
+									<div class="col-md-4"><strong>Expires:</strong> {{ $asset->warrantee_expires() }}</div>
 								@endif
 
 								@if ($asset->depreciation)
-									<div class="span4"><strong>Depreciation: </strong>{{ $asset->depreciation->name }}
+									<div class="col-md-4"><strong>Depreciation: </strong>{{ $asset->depreciation->name }}
 										({{ $asset->depreciation->months }} months)</div>
-									<div class="span4"><strong>Depreciates On: </strong>{{ $asset->depreciated_date() }} </div>
-									<div class="span4"><strong>Fully Depreciated: </strong>{{ $asset->months_until_depreciated()->m }} months,
+									<div class="col-md-4"><strong>Depreciates On: </strong>{{ $asset->depreciated_date() }} </div>
+									<div class="col-md-4"><strong>Fully Depreciated: </strong>{{ $asset->months_until_depreciated()->m }} months,
 									{{ $asset->months_until_depreciated()->y }} years</div>
 								@endif
 						</div>
@@ -83,12 +80,12 @@ View Asset {{ $asset->asset_tag }} ::
                             <table class="table table-hover">
                                 <thead>
                                     <tr>
-                                    	<th class="span1"></th>
-                                        <th class="span3"><span class="line"></span>Date</th>
-                                        <th class="span2"><span class="line"></span>Admin</th>
-                                        <th class="span2"><span class="line"></span>Action</th>
-                                        <th class="span2"><span class="line"></span>User</th>
-                                        <th class="span3"><span class="line"></span>Note</th>
+                                    	<th class="col-md-1"></th>
+                                        <th class="col-md-3"><span class="line"></span>Date</th>
+                                        <th class="col-md-2"><span class="line"></span>Admin</th>
+                                        <th class="col-md-2"><span class="line"></span>Action</th>
+                                        <th class="col-md-2"><span class="line"></span>User</th>
+                                        <th class="col-md-3"><span class="line"></span>Note</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -143,7 +140,7 @@ View Asset {{ $asset->asset_tag }} ::
                     </div>
 
                     <!-- side address column -->
-                    <div class="span3 address pull-right">
+                    <div class="col-md-3 address pull-right">
 
 						@if ((isset($asset->assigned_to ) && ($asset->assigned_to > 0)))
                        		<h6><br>Checked Out To:</h6>

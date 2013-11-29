@@ -126,10 +126,12 @@
 	}
 }
 
-@media (max-width: 767px) {
+@media (max-width: 768px) {
 	.table-wrapper {
+		padding: 0px 15px;
 		.table {
-			.img {
+			.img,
+			.avatar {
 				display: none;
 			}
 			input[type="checkbox"] {

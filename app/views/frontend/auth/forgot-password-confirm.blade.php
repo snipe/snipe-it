@@ -16,7 +16,7 @@ Forgot Password ::
 	<input type="hidden" name="_token" value="{{ csrf_token() }}" />
 
 	<!-- New Password -->
-	<div class="control-group{{ $errors->first('password', ' error') }}">
+	<div class="form-group{{ $errors->first('password', ' error') }}">
 		<label class="control-label" for="password">New Password</label>
 		<div class="controls">
 			<input type="password" name="password" id="password" value="{{ Input::old('password') }}" />
@@ -25,7 +25,7 @@ Forgot Password ::
 	</div>
 
 	<!-- Password Confirm -->
-	<div class="control-group{{ $errors->first('password_confirm', ' error') }}">
+	<div class="form-group{{ $errors->first('password_confirm', ' error') }}">
 		<label class="control-label" for="password_confirm">Password Confirmation</label>
 		<div class="controls">
 			<input type="password" name="password_confirm" id="password_confirm" value="{{ Input::old('password_confirm') }}" />
@@ -34,7 +34,7 @@ Forgot Password ::
 	</div>
 
 	<!-- Form actions -->
-	<div class="control-group">
+	<div class="form-group">
 		<div class="controls">
 			<a class="btn" href="{{ route('home') }}">Cancel</a>
 

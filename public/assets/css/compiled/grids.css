@@ -9,7 +9,7 @@
   margin-top: 10px;
   margin-bottom: 20px;
 }
-.show-grid [class*="span"] {
+.show-grid [class*="col-"] {
   background-color: #eee;
   text-align: center;
   -webkit-border-radius: 3px;
@@ -17,4 +17,5 @@
   border-radius: 3px;
   min-height: 40px;
   line-height: 40px;
+  border: 1px solid rgba(86, 61, 124, 0.2);
 }

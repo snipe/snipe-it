@@ -8,43 +8,36 @@ View Model {{ $model->model_tag }} ::
 
 {{-- Page content --}}
 @section('content')
-<div id="pad-wrapper" class="user-profile">
-                <!-- header -->
-                <div class="btn-group pull-right">
-					<button class="btn glow">Actions</button>
-					<button class="btn glow dropdown-toggle" data-toggle="dropdown">
-						<span class="caret"></span>
-					</button>
-					<ul class="dropdown-menu">
-						<li><a href="{{ route('update/model', $model->id) }}">Edit Asset</a></li>
-					</ul>
-				</div>
 
-				<h3 class="name">History for {{ $model->name }} </h3>
+<div class="row header">
+    <div class="col-md-12">
+    	<a href="{{ route('update/model', $model->id) }}" class="btn btn-default pull-right"><i class="icon-plus-sign icon-white"></i> Update Model</a>
+		<h3 class="name">History for {{ $model->name }} </h3>
+	</div>
+</div>
+
+<div class="user-profile">
+<div class="row profile">
+<div class="col-md-9 bio">
 
 
-                <div class="row-fluid profile">
-                    <!-- bio, new note & orders column -->
-                    <div class="span9 bio">
-                        <div class="profile-box">
-                            <br>
                             <!-- checked out models table -->
 							@if (count($model->assets) > 0)
                            <table id="example">
 							<thead>
 								<tr role="row">
-                                        <th class="span3">Name</th>
-                                        <th class="span3">Asset Tag</th>
-                                        <th class="span3">User</th>
-                                        <th class="span2">Actions</th>
+                                        <th class="col-md-3">Name</th>
+                                        <th class="col-md-3">Asset Tag</th>
+                                        <th class="col-md-3">User</th>
+                                        <th class="col-md-2">Actions</th>
                                     </tr>
                                 </thead>
                                 <tbody>
 
 									@foreach ($model->assets as $modelassets)
 									<tr>
-										<td><a href="{{ route('view/asset', $modelassets->id) }}">{{ $modelassets->name }}</a></td>
-										<td><a href="{{ route('view/asset', $modelassets->id) }}">{{ $modelassets->asset_tag }}</a></td>
+										<td><a href="{{ route('view/hardware', $modelassets->id) }}">{{ $modelassets->name }}</a></td>
+										<td><a href="{{ route('view/hardware', $modelassets->id) }}">{{ $modelassets->asset_tag }}</a></td>
 										<td>
 										@if ($modelassets->assigneduser)
 										<a href="{{ route('view/user', $modelassets->assigned_to) }}">
@@ -54,9 +47,9 @@ View Model {{ $model->model_tag }} ::
 										</td>
 										<td>
 										@if ($modelassets->assigned_to != 0)
-											<a href="{{ route('checkin/asset', $modelassets->id) }}" class="btn-flat info">Checkin</a>
+											<a href="{{ route('checkin/hardware', $modelassets->id) }}" class="btn-flat info">Checkin</a>
 										@else
-											<a href="{{ route('checkout/asset', $modelassets->id) }}" class="btn-flat success">Checkout</a>
+											<a href="{{ route('checkout/hardware', $modelassets->id) }}" class="btn-flat success">Checkout</a>
 										@endif
 										</td>
 
@@ -77,12 +70,11 @@ View Model {{ $model->model_tag }} ::
                             @endif
 
                         </div>
-                    </div>
+
 
                     <!-- side address column -->
-                    <div class="span3 address pull-right">
-
-                    <h6><br>More Info:</h6>
+                    <div class="col-md-3 col-xs-12 address pull-right">
+                    <h6>More Info:</h6>
                        		<ul>
 
 
