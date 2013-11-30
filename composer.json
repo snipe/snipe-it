@@ -20,6 +20,10 @@
 		]
 	},
 	"scripts": {
+		"post-install-cmd": [
+			"php artisan migrate --package=cartalyst/sentry"
+			"php artisan migrate"
+		]
 		"pre-update-cmd": [
 			"php artisan clear-compiled"
 		],
