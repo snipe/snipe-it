@@ -353,11 +353,24 @@ class UsersController extends AdminController {
 				return Redirect::route('users')->with('error', $error);
 			}
 
+
 			// Do we have permission to delete this user?
 			if ($user->isSuperUser() and ! Sentry::getUser()->isSuperUser())
 			{
 				// Redirect to the user management page
 				return Redirect::route('users')->with('error', 'Insufficient permissions!');
+			}
+
+			if (count($user->assets) > 0) {
+
+				// Redirect to the user management page
+				return Redirect::route('users')->with('error', 'This user still has '.count($user->assets).' assets associated with them.');
+			}
+
+			if (count($user->licenses) > 0) {
+
+				// Redirect to the user management page
+				return Redirect::route('users')->with('error', 'This user still has '.count($user->licenses).' licenses associated with them.');
 			}
 
 			// Delete the user

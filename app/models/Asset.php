@@ -83,7 +83,6 @@ class Asset extends Elegant {
 	 public static function assetcount()
 	{
 		return DB::table('assets')
-
                     ->where('physical', '=', '1')
                     ->whereNull('deleted_at','and')
                     ->count();
