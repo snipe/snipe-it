@@ -28,8 +28,9 @@ $app->redirectIfTrailingSlash();
 
 $env = $app->detectEnvironment(array(
 
-	'local' => array('your-machine-name'),
-
+	'local'		 	=> array('http://*.dev', 'http://*.local', '*.local*', '127.0.0.1', 'localhost*'),
+	'staging' 		=> array('http://staging.yourserver.com'),
+	'production' 	=> array('http://www.yourserver.com')
 ));
 
 /*
