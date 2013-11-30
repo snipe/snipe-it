@@ -8,7 +8,11 @@ It is built on [Laravel 4](http://laravel.com) and uses the [Sentry 2](https://g
 
 Many thanks to the [Laravel 4 starter site](https://github.com/brunogaspar/laravel4-starter-kit) for a quick start.
 
-This isn't actually ready for anyone to use yet, as I'm still working out some of the basic functionality. Feel free to check out the [GitHub Issues for this project](https://github.com/snipe/snipe-it/issues) to check on progress, open a bug report, or see what open issues you can help with.
+This project is being actively developed (at what seems like breakneck speed sometimes!) We're still in alpha release, so this is NOT recommended for production use yet, as many more things will likely change before v1.0-stable is ready - but we're [releasing quite frequently](https://github.com/snipe/snipe-it/releases).
+
+### Bug Reports and Feature Requests
+
+Feel free to check out the [GitHub Issues for this project](https://github.com/snipe/snipe-it/issues) to check on progress, open a bug report, request a feature, or see what open issues you can help with.
 
 -----
 
@@ -65,7 +69,7 @@ This will be used to send emails to your users, when they register and they requ
 
 Copy the example app config `app/config/local/app.example.php` to `app.php`.
 
-Update the file `app/config/local/app.php` with your setting URL settings.  
+Update the file `app/config/local/app.php` with your setting URL settings.
 
 	vi app/config/local/app.php
 
