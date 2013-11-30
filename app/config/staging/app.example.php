@@ -26,7 +26,7 @@ return array(
 	|
 	*/
 
-	'url' => 'http://www.yourserver.com',
+	'url' => 'http://staging.yourserver.com',
 
 	/*
 	|--------------------------------------------------------------------------
@@ -37,7 +37,7 @@ return array(
 	| to a random, 32 character string, otherwise these encrypted strings
 	| will not be safe. Please do this before deploying an application!
 	|
-	| Run a php artisand key:generate --env=production to create a random one
+	| Run a php artisand key:generate --env=staging to create a random one
 	*/
 
 	'key' => 'Change_this_key_or_snipe_will_get_ya',

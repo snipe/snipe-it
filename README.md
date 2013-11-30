@@ -47,12 +47,14 @@ Forgetting to do this can mean your DB might end up out of sync with the new fil
 
 #### 2.1) Setup Your Database
 
+Copy the example database config `app/config/local/database.example.php` to `database.php`.
 Update the file `app/config/local/database.php` with your database name and credentials.
 
     vi app/config/local/database.php
 
 #### 2.2) Setup Mail Settings
 
+Copy the example mail config `app/config/local/database.example.php` to `database.php`.
 Update the file `app/config/local/mail.php` with your mail settings.
 
     vi app/config/local/mail.php
@@ -61,7 +63,13 @@ This will be used to send emails to your users, when they register and they requ
 
 #### 2.3) Adjust the application settings.
 
-Update the file `app/config/local/app.php` with your setting URL settings.  You should also change your secret key here -- if you prefer to have your key randomly generated, run the artisan key:generate command from the application root.
+Copy the example app config `app/config/local/app.example.php` to `app.php`.
+
+Update the file `app/config/local/app.php` with your setting URL settings.  
+
+	vi app/config/local/app.php
+
+You should also change your secret key here -- if you prefer to have your key randomly generated, run the artisan key:generate command from the application root.
 
 	php artisan key:generate --env=local
 
