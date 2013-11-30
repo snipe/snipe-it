@@ -8,13 +8,17 @@ It is built on [Laravel 4](http://laravel.com) and uses the [Sentry 2](https://g
 
 Many thanks to the [Laravel 4 starter site](https://github.com/brunogaspar/laravel4-starter-kit) for a quick start.
 
-This isn't actually ready for anyone to use yet, as I'm still working out some of the basic functionality. Feel free to check out the [GitHub Issues for this project](https://github.com/snipe/snipe-it/issues) to check on progress, open a bug report, or see what open issues you can help with.
+This project is being actively developed (at what seems like breakneck speed sometimes!) We're still in alpha release, so this is NOT recommended for production use yet, as many more things will likely change before v1.0-stable is ready - but we're [releasing quite frequently](https://github.com/snipe/snipe-it/releases).
+
+### Bug Reports and Feature Requests
+
+Feel free to check out the [GitHub Issues for this project](https://github.com/snipe/snipe-it/issues) to check on progress, open a bug report, request a feature, or see what open issues you can help with.
 
 -----
 
 ## Requirements
 
-- PHP 5.3.7 or later
+- PHP 5.4 or later
 - MCrypt PHP Extension
 
 -----
@@ -43,41 +47,63 @@ Forgetting to do this can mean your DB might end up out of sync with the new fil
 
 -----
 
-### 2) Install the Dependencies via Composer
-##### 2.1) If you don't have composer installed globally
+### 2) Setup Database and Mail Settings
+
+#### 2.1) Setup Your Database
+
+Copy the example database config `app/config/local/database.example.php` to `database.php`.
+Update the file `app/config/local/database.php` with your database name and credentials.
+
+    vi app/config/local/database.php
+
+#### 2.2) Setup Mail Settings
+
+Copy the example mail config `app/config/local/database.example.php` to `database.php`.
+Update the file `app/config/local/mail.php` with your mail settings.
+
+    vi app/config/local/mail.php
+
+This will be used to send emails to your users, when they register and they request a password reset.
+
+#### 2.3) Adjust the application settings.
+
+Copy the example app config `app/config/local/app.example.php` to `app.php`.
+
+Update the file `app/config/local/app.php` with your setting URL settings.
+
+	vi app/config/local/app.php
+
+You should also change your secret key here -- if you prefer to have your key randomly generated, run the artisan key:generate command from the application root.
+
+	php artisan key:generate --env=local
+
+#### 2.4) Adjust Environments
+
+Update the file `boostrap/start.php' under the section `Detect The Application Environment`.
+
+	vi bootstrap/start.php
+
+#### 2.5) Additional Adjustments
+
+The app is configured to automatically detect if your in a local, staging, or production environment.  Before deploying to a staging or production environment, follow sets 2.1, 2.2, and 2.3 above to tweak each environment as nescessary.  Configuration files for each environment can be found in app/config/{environment} (local, staging, and production).
+
+-----
+
+### 3) Install the Dependencies via Composer
+##### 3.1) If you don't have composer installed globally
 
 	cd your-folder
 	curl -s http://getcomposer.org/installer | php
 	php composer.phar install
 
-##### 2.2) For globally composer installations
+##### 3.2) For global composer installations
 
 	cd your-folder
 	composer install
 
 -----
 
-### 3) Setup Database
-
-Copy the file `app/config/database.php` to `database.php`, and update `database.php` with your database name and credentials
-
-	cp app/config/database.example.php app/config/database.php
-    vi app/config/database.example.php
-
------
-
-### 4) Setup Mail Settings
-
-Now, copy the file `app/config/mail.php` to `mail.php`, and update `mail.php` with your mail settings
-
-	cp app/config/mail.example.php app/config/mail.php
-    vi app/config/mail.example.php
-
-This will be used to send emails to your users, when they register and they request a password reset.
-
------
-
-### 5) Use custom CLI Installer Command
+### 4) Use custom CLI Installer Command
 
 Now, you need to create yourself a user and finish the installation.
 
@@ -101,13 +127,26 @@ If you still run into a permissions error, you may need to increase the permissi
 
 ### 7) Set the correct document root for your server
 
-The document root for the app should be set to the public directory. In a standard Apache virtualhost setup, that might look something like this:
+The document root for the app should be set to the public directory. In a standard Apache virtualhost setup, that might look something like this on a standard linux LAMP stack:
 
 	<VirtualHost *:80>
     DocumentRoot /var/www/html/public
     ServerName www.example.org
 
     # Other directives here
+	</VirtualHost>
+
+An OS X virtualhost setup could look more like:
+
+	Directory "/Users/flashingcursor/Sites/snipe-it/public/">
+	Allow From All
+	AllowOverride All
+	Options +Indexes
+	</Directory>
+	<VirtualHost *:80>
+	        ServerName "snipe-it.dev"
+	        DocumentRoot "/Users/flashingcursor/Sites/snipe-it/public"
+	SetEnv LARAVEL_ENV development
 	</VirtualHost>
 
 -----
