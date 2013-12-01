@@ -85,7 +85,7 @@ Update the file `boostrap/start.php' under the section `Detect The Application E
 
 #### 2.5) Additional Adjustments
 
-The app is configured to automatically detect if your in a local, staging, or production environment.  Before deploying to a staging or production environment, follow sets 2.1, 2.2, and 2.3 above to tweak each environment as nescessary.  Configuration files for each environment can be found in app/config/{environment} (local, staging, and production).
+The app is configured to automatically detect if you're in a local, staging, or production environment.  Before deploying to a staging or production environment, follow sets 2.1, 2.2, and 2.3 above to tweak each environment as nescessary.  Configuration files for each environment can be found in app/config/{environment} (local, staging, and production).
 
 -----
 
@@ -163,7 +163,7 @@ Loading up the sample data will give you an idea of how this should look, how yo
 ## Optional Development Stuff
 ### Set up the debugbar
 
-In dev mode, I use the fabulous [Laravel Debugbar](https://github.com/barryvdh/laravel-debugbar) by @barryvdh. 
+In dev mode, I use the fabulous [Laravel Debugbar](https://github.com/barryvdh/laravel-debugbar) by @barryvdh.
 
 The profiler is enabled by default if you have debug set to true in your app.php. You certainly don't have to use it, but it's pretty handy for troubleshooting queries, seeing how much memory your pages are using, etc.
 
