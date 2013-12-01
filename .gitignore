@@ -12,3 +12,5 @@ composer.phar
 /app/config/*/mail.php
 /app/config/*/database.php
 /app/config/*/app.php
+
+/app/config/testing/database.php
