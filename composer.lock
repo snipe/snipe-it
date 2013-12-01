@@ -3,7 +3,7 @@
         "This file locks the dependencies of your project to a known state",
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
     ],
-    "hash": "68b57dc0e0b71bfac27b6218ac9e7f41",
+    "hash": "2ff29b285767430e11356a6316d24a84",
     "packages": [
         {
             "name": "barryvdh/laravel-debugbar",
@@ -149,6 +149,58 @@
                 "security"
             ],
             "time": "2013-11-27 22:30:58"
+        },
+        {
+            "name": "chumper/datatable",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Chumper/Datatable.git",
+                "reference": "8e8e29847f42e051d7f4dfb42ac7e01f8a23310b"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Chumper/Datatable/zipball/8e8e29847f42e051d7f4dfb42ac7e01f8a23310b",
+                "reference": "8e8e29847f42e051d7f4dfb42ac7e01f8a23310b",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/foundation": "4.0.*",
+                "illuminate/support": "4.0.x",
+                "illuminate/view": "4.0.x",
+                "php": ">=5.3.0"
+            },
+            "require-dev": {
+                "mockery/mockery": "dev-master",
+                "phpunit/phpunit": "3.7.*"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "Chumper\\Datatable": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Nils Plaschke",
+                    "email": "github@nilsplaschke.de",
+                    "homepage": "http://nilsplaschke.de",
+                    "role": "Developer"
+                }
+            ],
+            "description": "This is a laravel 4 package for the server and client side of datatablaes at http://datatables.net/",
+            "homepage": "http://github.com/Chumper/datatable",
+            "keywords": [
+                "ajax",
+                "datatables",
+                "jquery",
+                "laravel"
+            ],
+            "time": "2013-11-27 00:33:49"
         },
         {
             "name": "classpreloader/classpreloader",
@@ -310,7 +362,7 @@
             ],
             "authors": [
                 {
-                    "name": "Jonathan Wage",
+                    "name": "Jonathan H. Wage",
                     "email": "jonwage@gmail.com",
                     "homepage": "http://www.jwage.com/",
                     "role": "Creator"
@@ -329,7 +381,7 @@
                     "email": "kontakt@beberlei.de"
                 },
                 {
-                    "name": "Johannes Schmitt",
+                    "name": "Johannes M. Schmitt",
                     "email": "schmittjoh@gmail.com",
                     "homepage": "http://jmsyst.com",
                     "role": "Developer of wrapped JMSSerializerBundle"
@@ -927,65 +979,6 @@
                 "laravel"
             ],
             "time": "2013-11-27 15:45:20"
-        },
-        {
-            "name": "laravelbook/ardent",
-            "version": "dev-master",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/laravelbook/ardent.git",
-                "reference": "e98ed2d03a9bc824fd5f93880c0cb70130593067"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/laravelbook/ardent/zipball/e98ed2d03a9bc824fd5f93880c0cb70130593067",
-                "reference": "e98ed2d03a9bc824fd5f93880c0cb70130593067",
-                "shasum": ""
-            },
-            "require": {
-                "illuminate/database": "4.x",
-                "illuminate/support": "4.x",
-                "illuminate/validation": "4.x",
-                "php": ">=5.3.0"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-0": {
-                    "LaravelBook\\Ardent": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "BSD-3-Clause"
-            ],
-            "authors": [
-                {
-                    "name": "Max Ehsan",
-                    "email": "contact@laravelbook.com",
-                    "homepage": "http://laravelbook.com/",
-                    "role": "Developer"
-                },
-                {
-                    "name": "Igor Santos",
-                    "email": "igorsantos07@gmail.com",
-                    "homepage": "http://www.igorsantos.com.br",
-                    "role": "Developer"
-                }
-            ],
-            "description": "Self-validating smart models for Laravel 4's Eloquent O/RM",
-            "homepage": "http://laravelbook.com/",
-            "keywords": [
-                "Active Record",
-                "activerecord",
-                "database",
-                "eloquent",
-                "framework",
-                "laravel",
-                "orm",
-                "sql",
-                "validation"
-            ],
-            "time": "2013-11-22 22:41:14"
         },
         {
             "name": "maximebf/debugbar",
@@ -2667,7 +2660,7 @@
     "minimum-stability": "dev",
     "stability-flags": {
         "barryvdh/laravel-debugbar": 20,
-        "laravelbook/ardent": 20
+        "chumper/datatable": 20
     },
     "platform": [
 
