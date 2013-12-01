@@ -9,6 +9,6 @@ composer.phar
 /app/storage/meta/services.json
 /app/storage/sessions/*
 /app/storage/views/*
-
-/app/config/local/mail.php
-/app/config/local/database.php
+/app/config/*/mail.php
+/app/config/*/database.php
+/app/config/*/app.php
