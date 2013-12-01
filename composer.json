@@ -5,7 +5,8 @@
 	"require": {
 		"laravel/framework": "4.0.*",
 		"cartalyst/sentry": "2.0.*",
-		"barryvdh/laravel-debugbar": "dev-master"
+		"barryvdh/laravel-debugbar": "dev-master",
+		"chumper/datatable": "dev-master"
 	},
 	"require-dev": {
         "phpunit/phpunit": "*"
@@ -27,6 +28,10 @@
 		],
 		"post-update-cmd": [
 			"php artisan optimize"
+		    "php artisan debugbar:publish"
+		],
+		"post-install-cmd": [
+		    "php artisan debugbar:publish"
 		],
 		"post-create-project-cmd": [
 			"php artisan key:generate"
