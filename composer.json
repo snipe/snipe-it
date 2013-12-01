@@ -5,10 +5,12 @@
 	"require": {
 		"laravel/framework": "4.0.*",
 		"cartalyst/sentry": "2.0.*",
-		"barryvdh/laravel-debugbar": "dev-master",
-		"laravelbook/ardent": "dev-master"
-
+		"barryvdh/laravel-debugbar": "dev-master"
 	},
+	"require-dev": {
+        "phpunit/phpunit": "*"
+    },
+
 	"autoload": {
 		"classmap": [
 			"app/commands",
@@ -20,10 +22,6 @@
 		]
 	},
 	"scripts": {
-		"post-install-cmd": [
-			"php artisan migrate --package=cartalyst/sentry",
-			"php artisan migrate"
-		],
 		"pre-update-cmd": [
 			"php artisan clear-compiled"
 		],
@@ -35,7 +33,8 @@
 		]
 	},
 	"config": {
-		"preferred-install": "dist"
+		"preferred-install": "dist",
+		"bin-dir": "bin"
 	},
 	"minimum-stability": "dev"
 }
