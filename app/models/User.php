@@ -30,7 +30,7 @@ class User extends SentryUserModel {
 	public function gravatar()
 	{
 		// Generate the Gravatar hash
-		$gravatar = md5(strtolower(trim($this->gravatar)));
+		$gravatar = md5(strtolower(trim($this->email)));
 
 		// Return the Gravatar url
 		return "//gravatar.com/avatar/{$gravatar}";
