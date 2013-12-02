@@ -103,6 +103,14 @@ class AssetsController extends AdminController {
 			$row[] = $asset->serial;
 			$row[] = $asset->assigned_to;
 
+			if ($asset->assigned_to > 0) {
+			  $user = User::find($asset->assigned_to);
+			  $row[] = $user->fullName();
+		  }
+		  else {
+		  	$row[] = ''; // Empty string if unassigned
+		  }
+
 			if (($asset->assigned_to > 0) && ($asset->assigneduser->location_id > 0)) {
 				$location = Location::find($asset->assigneduser->location_id);
 				$row[] = $location->city . ', ' . $location->state;
