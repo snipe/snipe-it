@@ -32,7 +32,7 @@ User Management ::
 <div class="row form-wrapper">
 
 @if ($users->getTotal() > 0)
-<div class="row-fluid table users-list">
+<!-- <div class="row-fluid table users-list">
 <table id="example">
 	<thead>
 		<tr role="row">
@@ -78,7 +78,21 @@ User Management ::
 	</tbody>
 </table>
 </div>
+-->
+{{
+	Datatable::table()
+		->addColumn(Lang::get('name'))
+		->addColumn(Lang::get('email'))
+		->addColumn('Assets')
+		->addColumn('Licenses')
+		->addColumn(Lang::get('activated'))
+		->setUrl(route('api.users'))
+		->render()
+}}
+
 @else
+
+
 <div class="col-md-6">
 	<div class="alert alert-warning alert-block">
 		<i class="icon-warning-sign"></i>

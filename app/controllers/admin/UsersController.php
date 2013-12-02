@@ -5,6 +5,8 @@ use Cartalyst\Sentry\Users\LoginRequiredException;
 use Cartalyst\Sentry\Users\PasswordRequiredException;
 use Cartalyst\Sentry\Users\UserExistsException;
 use Cartalyst\Sentry\Users\UserNotFoundException;
+use HTML;
+use URL;
 use Config;
 use DB;
 use Input;
@@ -18,6 +20,7 @@ use Redirect;
 use Sentry;
 use Validator;
 use View;
+use Chumper\Datatable\Facades\Datatable;
 
 class UsersController extends AdminController {
 
@@ -447,5 +450,37 @@ class UsersController extends AdminController {
 			}
 
 	}
+
+	public function getDatatable()
+    {
+    	return Datatable::collection(User::all())
+		->addColumn('name',function($model)
+	        {
+				$name = HTML::image($model->gravatar(), $model->first_name, array('class'=>'img-circle avatar hidden-phone', 'style'=>'max-width: 45px'));
+	        	$name .= HTML::link(URL::action('Controllers\Admin\UsersController@getView', $model->id), $model->first_name . ' ' . $model->last_name, array('class' => 'name'));
+	            return $name;
+	        }
+        )
+    	->showColumns('email')
+		->addColumn('assets', function($model)
+			{
+				$assets = $model->assets->count();
+				return $assets;
+			}
+		)
+		->addColumn('licenses', function($model)
+			{
+				$licenses = $model->licenses->count();
+				return $licenses;
+			}
+		)
+		->addColumn('activated', function($model)
+			{
+				$activated = $model->isActivated() ? '<i class="icon-ok"></i>' : '';
+				return $activated;
+			}
+		)
+        ->make();
+    }
 
 }
