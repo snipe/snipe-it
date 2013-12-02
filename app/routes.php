@@ -162,6 +162,8 @@ Route::group(array('prefix' => 'admin'), function()
 		Route::get('{userId}/delete', array('as' => 'delete/user', 'uses' => 'Controllers\Admin\UsersController@getDelete'));
 		Route::get('{userId}/restore', array('as' => 'restore/user', 'uses' => 'Controllers\Admin\UsersController@getRestore'));
 		Route::get('{userId}/view', array('as' => 'view/user', 'uses' => 'Controllers\Admin\UsersController@getView'));
+
+		Route::get('datatable', array('as'=>'api.users', 'uses'=>'Controllers\Admin\UsersController@getDatatable'));
 	});
 
 	# Group Management
