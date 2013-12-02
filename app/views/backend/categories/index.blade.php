@@ -24,7 +24,7 @@ Asset Categories ::
 		<thead>
 			<tr role="row">
 				<th class="col-md-7">@lang('admin/categories/table.title')</th>
-				<th class="col-md-2">@lang('table.actions')</th>
+				<th class="col-md-2 actions">@lang('table.actions')</th>
 			</tr>
 		</thead>
 		<tbody>

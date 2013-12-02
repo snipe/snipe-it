@@ -28,7 +28,7 @@ Status Labels
 			<thead>
 				<tr role="row">
 					<th class="col-md-4">@lang('admin/statuslabels/table.name')</th>
-					<th class="col-md-2">@lang('table.actions')</th>
+					<th class="col-md-2 actions">@lang('table.actions')</th>
 				</tr>
 			</thead>
 			<tbody>

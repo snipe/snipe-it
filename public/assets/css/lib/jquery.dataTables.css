@@ -13,8 +13,7 @@ table.dataTable thead th {
 	padding: 10px 18px 15px 18px;
 	border-top: 1px solid #dee3ea;
 	font-weight: 600;
-	cursor: pointer;
-	*cursor: hand;
+
 }
 
 table.dataTable tfoot th {
@@ -228,13 +227,13 @@ table.dataTable tr.even td.sorting_3 { background-color: #F9F9FF; }
 /*
  * Sorting
  */
-.sorting { background: url('../../img/datatables/sort_both.png') no-repeat center right; }
-.sorting_asc { background: url('../../img/datatables/sort_asc.png') no-repeat center right; }
-.sorting_desc { background: url('../../img/datatables/sort_desc.png') no-repeat center right; }
+.sorting { background: url('../../img/datatables/sort_both.png') no-repeat center right; cursor: pointer; *cursor: hand; }
+.sorting_asc { background: url('../../img/datatables/sort_asc.png') no-repeat center right;  cursor: pointer; *cursor: hand;}
+.sorting_desc { background: url('../../img/datatables/sort_desc.png') no-repeat center right;  cursor: pointer; *cursor: hand;}
 
 .sorting_asc_disabled { background: url('../../img/datatables/sort_asc_disabled.png') no-repeat center right; }
 .sorting_desc_disabled { background: url('../../img/datatables/sort_desc_disabled.png') no-repeat center right; }
- 
+
 table.dataTable thead th:active,
 table.dataTable thead td:active {
 	outline: none;

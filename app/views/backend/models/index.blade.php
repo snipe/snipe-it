@@ -25,7 +25,7 @@ Asset Models ::
 			<th class="col-md-1">@lang('admin/models/table.numassets')</th>
 			<th class="col-md-2">Depreciation</th>
 			<th class="col-md-2">Category</th>
-			<th class="col-md-2">@lang('table.actions')</th>
+			<th class="col-md-2 actions">@lang('table.actions')</th>
 		</tr>
 	</thead>
 	<tbody>

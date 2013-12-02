@@ -26,7 +26,7 @@ Locations ::
 			<th class="col-md-2">@lang('admin/locations/table.city'),
 			 @lang('admin/locations/table.state')
 			@lang('admin/locations/table.country')</th>
-			<th class="col-md-2">@lang('table.actions')</th>
+			<th class="col-md-2 actions">@lang('table.actions')</th>
 		</tr>
 	</thead>
 	<tbody>
