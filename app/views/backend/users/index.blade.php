@@ -41,7 +41,7 @@ User Management ::
 			<th class="col-md-1">Assets</th>
 			<th class="col-md-1">Licenses</th>
 			<th class="col-md-1">@lang('admin/users/table.activated')</th>
-			<th class="col-md-2">@lang('table.actions')</th>
+			<th class="col-md-2 actions">@lang('table.actions')</th>
 		</tr>
 	</thead>
 	<tbody>
