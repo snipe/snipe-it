@@ -9,9 +9,8 @@
 		"chumper/datatable": "dev-master"
 	},
 	"require-dev": {
-        "phpunit/phpunit": "*"
-    },
-
+		"phpunit/phpunit": "*"
+	},
 	"autoload": {
 		"classmap": [
 			"app/commands",
@@ -27,11 +26,11 @@
 			"php artisan clear-compiled"
 		],
 		"post-update-cmd": [
-			"php artisan optimize"
-		    "php artisan debugbar:publish"
+			"php artisan optimize",
+			"php artisan debugbar:publish"
 		],
 		"post-install-cmd": [
-		    "php artisan debugbar:publish"
+			"php artisan debugbar:publish"
 		],
 		"post-create-project-cmd": [
 			"php artisan key:generate"
