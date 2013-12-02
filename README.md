@@ -85,7 +85,7 @@ Update the file `boostrap/start.php' under the section `Detect The Application E
 
 #### 2.5) Additional Adjustments
 
-The app is configured to automatically detect if your in a local, staging, or production environment.  Before deploying to a staging or production environment, follow sets 2.1, 2.2, and 2.3 above to tweak each environment as nescessary.  Configuration files for each environment can be found in app/config/{environment} (local, staging, and production).
+The app is configured to automatically detect if you're in a local, staging, or production environment.  Before deploying to a staging or production environment, follow sets 2.1, 2.2, and 2.3 above to tweak each environment as nescessary.  Configuration files for each environment can be found in app/config/{environment} (local, staging, and production).
 
 -----
 
