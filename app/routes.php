@@ -265,3 +265,4 @@ Route::get('/', function()
 });
 Route::get('/', array('as' => 'home', 'uses' => 'Controllers\Admin\AssetsController@getIndex'));
 Route::get('reports', array('as' => 'reports', 'uses' => 'Controllers\Admin\AssetsController@getReports'));
+Route::get('reports/export', array('as' => 'reports/export', 'uses' => 'Controllers\Admin\AssetsController@exportReports'));
