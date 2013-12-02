@@ -24,7 +24,7 @@ Licenses ::
 			<th class="col-md-3" tabindex="0" rowspan="1" colspan="1">@lang('admin/licenses/table.title')</th>
 			<th class="col-md-3" tabindex="0" rowspan="1" colspan="1">@lang('admin/licenses/table.serial')</th>
 			<th class="col-md-3" tabindex="0" rowspan="1" colspan="1">@lang('admin/licenses/table.assigned_to')</th>
-			<th class="col-md-2" tabindex="0" rowspan="1" colspan="1">@lang('table.actions')</th>
+			<th class="col-md-2 actions" tabindex="0" rowspan="1" colspan="1">@lang('table.actions')</th>
 		</tr>
 	</thead>
 	<tbody>

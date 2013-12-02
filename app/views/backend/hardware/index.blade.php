@@ -65,7 +65,7 @@ Assets ::
 			@endif
 
 			<th class="col-md-1">@lang('admin/hardware/table.change')</th>
-			<th class="col-md-2" bSortable="false">@lang('table.actions')</th>
+			<th class="col-md-2 actions" bSortable="false">@lang('table.actions')</th>
 		</tr>
 	</thead>
 	<tbody>

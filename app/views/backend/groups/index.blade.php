@@ -26,7 +26,7 @@ Group Management ::
 			<th class="col-md-6">@lang('admin/groups/table.name')</th>
 			<th class="col-md-1">@lang('admin/groups/table.users')</th>
 			<th class="col-md-2">@lang('admin/groups/table.created_at')</th>
-			<th class="col-md-3">@lang('table.actions')</th>
+			<th class="col-md-3 actions">@lang('table.actions')</th>
 		</tr>
 	</thead>
 	<tbody>
