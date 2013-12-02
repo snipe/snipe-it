@@ -19,7 +19,7 @@ Depreciation Report
 					<span class="caret"></span>
 				</button>
 				<ul class="dropdown-menu">
-					<li><a href="#">Download as CSV</a></li>
+					<li><a href="{{ route('reports/export') }}">Download as CSV</a></li>
 					<li><a href="#">Download as PDF</a></li>
 				</ul>
 			</div>
