@@ -6,9 +6,12 @@
 		"laravel/framework": "4.0.*",
 		"cartalyst/sentry": "2.0.*",
 		"barryvdh/laravel-debugbar": "dev-master",
-		"laravelbook/ardent": "dev-master"
-
+		"chumper/datatable": "dev-master"
 	},
+	"require-dev": {
+        "phpunit/phpunit": "*"
+    },
+
 	"autoload": {
 		"classmap": [
 			"app/commands",
@@ -20,22 +23,23 @@
 		]
 	},
 	"scripts": {
-		"post-install-cmd": [
-			"php artisan migrate --package=cartalyst/sentry",
-			"php artisan migrate"
-		],
 		"pre-update-cmd": [
 			"php artisan clear-compiled"
 		],
 		"post-update-cmd": [
 			"php artisan optimize"
+		    "php artisan debugbar:publish"
+		],
+		"post-install-cmd": [
+		    "php artisan debugbar:publish"
 		],
 		"post-create-project-cmd": [
 			"php artisan key:generate"
 		]
 	},
 	"config": {
-		"preferred-install": "dist"
+		"preferred-install": "dist",
+		"bin-dir": "bin"
 	},
 	"minimum-stability": "dev"
 }

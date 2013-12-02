@@ -58,7 +58,7 @@ Update the file `app/config/local/database.php` with your database name and cred
 
 #### 2.2) Setup Mail Settings
 
-Copy the example mail config `app/config/local/database.example.php` to `database.php`.
+Copy the example mail config `app/config/local/mail.example.php` to `mail.php`.
 Update the file `app/config/local/mail.php` with your mail settings.
 
     vi app/config/local/mail.php

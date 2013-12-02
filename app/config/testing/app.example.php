@@ -26,7 +26,7 @@ return array(
 	|
 	*/
 
-	'url' => 'http://snipe-it-laravel.local:8888',
+	'url' => 'http://staging.yourserver.com',
 
 	/*
 	|--------------------------------------------------------------------------

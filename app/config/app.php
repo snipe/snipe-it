@@ -29,19 +29,6 @@ return array(
 
 	/*
 	|--------------------------------------------------------------------------
-	| Application Debug Mode
-	|--------------------------------------------------------------------------
-	|
-	| When your application is in debug mode, detailed error messages with
-	| stack traces will be shown on every error that occurs within your
-	| application. If disabled, a simple generic error page is shown.
-	|
-	*/
-
-	'debug' => false,
-
-	/*
-	|--------------------------------------------------------------------------
 	| Autoloaded Service Providers
 	|--------------------------------------------------------------------------
 	|
@@ -89,6 +76,8 @@ return array(
 		'Barryvdh\Debugbar\ServiceProvider',
 
 		'Cartalyst\Sentry\SentryServiceProvider',
+
+		'Chumper\Datatable\DatatableServiceProvider',
 
 	),
 
@@ -156,6 +145,8 @@ return array(
 		'View'            => 'Illuminate\Support\Facades\View',
 
 		'Sentry'          => 'Cartalyst\Sentry\Facades\Laravel\Sentry',
+
+		'Datatable' => 'Chumper\Datatable\Facades\Datatable',
 
 	),
 

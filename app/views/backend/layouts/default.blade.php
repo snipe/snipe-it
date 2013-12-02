@@ -40,7 +40,9 @@
 		<link rel="stylesheet" href="{{ asset('assets/css/compiled/form-showcase.css') }}" type="text/css" media="screen" />
 		<link rel="stylesheet" href="{{ asset('assets/css/lib/jquery.dataTables.css') }}" type="text/css" media="screen" />
 
-
+        <!-- global header javascripts -->
+        <script src="//code.jquery.com/jquery-latest.js"></script>
+        <script src="{{ asset('assets/js/jquery.dataTables.js') }}"></script>
 
 		<!-- open sans font -->
 		<link href='//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
@@ -276,13 +278,11 @@
     <!-- end main container -->
 
 	<!-- scripts -->
-    <script src="//code.jquery.com/jquery-latest.js"></script>
     <script src="{{ asset('assets/js/bootstrap.min.js') }}"></script>
     <script src="{{ asset('assets/js/jquery.knob.js') }}"></script>
     <script src="{{ asset('assets/js/select2.min.js') }}"></script>
     <script src="{{ asset('assets/js/jquery.uniform.min.js') }}"></script>
     <script src="{{ asset('assets/js/bootstrap.datepicker.js') }}"></script>
-    <script src="{{ asset('assets/js/jquery.dataTables.js') }}"></script>
     <script src="{{ asset('assets/js/theme.js') }}"></script>
 
     <script type="text/javascript">
