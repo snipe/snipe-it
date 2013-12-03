@@ -55,7 +55,7 @@ Assets ::
 	<thead>
 		<tr role="row">
 			<th class="col-md-2" bSortable="true">@lang('admin/hardware/table.asset_tag')</th>
-			<th class="col-md-2" bSortable="true">@lang('admin/hardware/table.title')</th>
+			<th class="col-md-3" bSortable="true">@lang('admin/hardware/table.title')</th>
 			<th class="col-md-2" bSortable="true">@lang('admin/hardware/table.serial')</th>
 			@if (Input::get('Pending') || Input::get('Undeployable') || Input::get('RTD'))
 			<th class="col-md-2" bSortable="true">Status</th>
