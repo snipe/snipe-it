@@ -50,7 +50,7 @@ class UsersController extends AdminController {
 		// Do we want to include the deleted users?
 		if (Input::get('withTrashed'))
 		{
-			$users = $users->withTrashed();
+
 		}
 		else if (Input::get('onlyTrashed'))
 		{
@@ -58,12 +58,8 @@ class UsersController extends AdminController {
 		}
 
 
-		// Get the user assets
-		//$assets = $users->assets();
-
-
 		// Paginate the users
-		$users = $users->paginate()
+		$users = $users->paginate(100000)
 			->appends(array(
 				'withTrashed' => Input::get('withTrashed'),
 				'onlyTrashed' => Input::get('onlyTrashed'),
@@ -71,7 +67,7 @@ class UsersController extends AdminController {
 
 
 		// Show the page
-		return View::make('backend/users/index', compact('users', 'assets'));
+		return View::make('backend/users/index', compact('users'));
 	}
 
 	/**
