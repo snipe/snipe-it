@@ -145,13 +145,13 @@ class AssetsController extends AdminController {
 	public function getCreate()
 	{
 		// Grab the dropdown list of models
-		$model_list = array('' => '') + Model::lists('name', 'id');
-		$depreciation_list = array('' => '') + Depreciation::lists('name', 'id');
+
+		$model_list = array('' => '') + Model::orderBy('name', 'desc')->lists('name', 'id');
 
 		// Grab the dropdown list of status
-		$statuslabel_list = array('' => 'Pending') + array('0' => 'Ready to Deploy') + Statuslabel::lists('name', 'id');
+		$statuslabel_list = array('' => 'Pending') + array('0' => 'Ready to Deploy') + Statuslabel::orderBy('name', 'desc')->lists('name', 'id');
 
-		return View::make('backend/hardware/edit')->with('model_list',$model_list)->with('statuslabel_list',$statuslabel_list)->with('depreciation_list',$depreciation_list)->with('asset',new Asset);
+		return View::make('backend/hardware/edit')->with('model_list',$model_list)->with('statuslabel_list',$statuslabel_list)->with('asset',new Asset);
 
 	}
 
@@ -248,15 +248,12 @@ class AssetsController extends AdminController {
 		}
 
 		// Grab the dropdown list of models
-		$model_list = array('' => '') + Model::lists('name', 'id');
+		$model_list = array('' => '') + Model::orderBy('name', 'desc')->lists('name', 'id');
 
 		// Grab the dropdown list of status
-		$statuslabel_list = array('' => 'Pending') + array('0' => 'Ready to Deploy') + Statuslabel::lists('name', 'id');
+		$statuslabel_list = array('' => 'Pending') + array('0' => 'Ready to Deploy') + Statuslabel::orderBy('name', 'desc')->lists('name', 'id');
 
-		// get depreciation list
-		$depreciation_list = array('' => '') + Depreciation::lists('name', 'id');
-
-		return View::make('backend/hardware/edit', compact('asset'))->with('model_list',$model_list)->with('depreciation_list',$depreciation_list)->with('statuslabel_list',$statuslabel_list);
+		return View::make('backend/hardware/edit', compact('asset'))->with('model_list',$model_list)->with('statuslabel_list',$statuslabel_list);
 	}
 
 
