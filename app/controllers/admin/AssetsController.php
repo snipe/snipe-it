@@ -277,7 +277,7 @@ class AssetsController extends AdminController {
 		'name'   => 'alpha_space|min:3',
 		'asset_tag'   => 'required|alpha_space|min:3',
 		'model_id'   => 'required',
-		'serial'   => 'alpha_space|min:3',
+		'serial'   => 'alpha_space|min:3|unique:assets',
 		'warranty_months'   => 'integer',
 		'notes'   => 'alpha_space',
     	);
