@@ -22,7 +22,7 @@ class Model extends Elegant {
 
 	public function depreciation()
 	{
-		return $this->belongsTo('Depreciation','id');
+		return $this->belongsTo('Depreciation','depreciation_id');
 	}
 
 	public function adminuser()

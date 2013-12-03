@@ -35,9 +35,13 @@ Asset Models ::
 			<td>{{ $model->modelno }}</td>
 			<td><a href="{{ route('view/model', $model->id) }}">{{ ($model->assets->count()) }}</a></td>
 			<td>
-			@if ($model->depreciation)
-			{{ $model->depreciation->name }}
-			 ({{ $model->depreciation->months }} months)
+
+
+			@if (($model->depreciation) && ($model->depreciation->id > 0))
+				{{ $model->depreciation->name }}
+			 	({{ $model->depreciation->months }} months)
+			@else
+			 No Depreciation
 			@endif
 
 			</td>
