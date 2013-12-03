@@ -73,7 +73,7 @@ Assets ::
 		@foreach ($assets as $asset)
 		<tr>
 			<td><a href="{{ route('view/hardware', $asset->id) }}">{{ $asset->asset_tag }}</a></td>
-			<td><a href="{{ route('view/hardware', $asset->id) }}">{{ $asset->name }}</a></td>
+			<td><a href="{{ route('view/hardware', $asset->id) }}">{{ $asset->model->name }}</a></td>
 			<td>{{ $asset->serial }}</td>
 			@if (Input::get('Pending') || Input::get('Undeployable') || Input::get('RTD'))
 				<td>

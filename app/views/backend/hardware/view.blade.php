@@ -71,7 +71,6 @@ View Asset {{ $asset->asset_tag }} ::
 			{{ $asset->months_until_depreciated()->y }} years</div>
 		@endif
 
-
 	</div>
 
 
