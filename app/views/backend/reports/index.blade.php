@@ -49,7 +49,7 @@ Depreciation Report
 		@foreach ($assets as $asset)
 		<tr>
 			<td>{{ $asset->asset_tag }}</td>
-			<td>{{ $asset->name }}</td>
+			<td>{{ $asset->model->name }}</td>
 			<td>{{ $asset->serial }}</td>
 			<td>
 			@if ($asset->assigned_to != 0)

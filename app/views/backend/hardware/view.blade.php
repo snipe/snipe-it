@@ -30,7 +30,10 @@ View Asset {{ $asset->asset_tag }} ::
 			</ul>
 		</div>
 		<h3>
-		<h3 class="name">History for {{ $asset->asset_tag }} ({{ $asset->name }})
+		<h3 class="name">History for {{ $asset->asset_tag }}
+		@if ($asset->name)
+		({{ $asset->name }})
+		@endif
 	</h3>
 	</div>
 </div>

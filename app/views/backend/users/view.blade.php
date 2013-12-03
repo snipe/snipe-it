@@ -52,9 +52,9 @@ View User {{ $user->fullName() }} ::
                                 <thead>
                                     <tr>
                                     	<th class="col-md-3">Asset Type</th>
-                                        <th class="col-md-3"><span class="line"></span>Asset Tag</th>
-                                        <th class="col-md-3"><span class="line"></span>Name</th>
-                                        <th class="col-md-3"><span class="line"></span>Actions</th>
+                                        <th class="col-md-2"><span class="line"></span>Asset Tag</th>
+                                        <th class="col-md-2"><span class="line"></span>Name</th>
+                                        <th class="col-md-1"><span class="line"></span>Actions</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -62,9 +62,7 @@ View User {{ $user->fullName() }} ::
 									<tr>
 										<td>
 										@if ($asset->physical=='1')
-										Hardware
-										@else
-										Software
+										{{ $asset->model->name }}
 										@endif
 										</td>
 										<td><a href="{{ route('view/hardware', $asset->id) }}">{{ $asset->asset_tag }}</a></td>
@@ -92,24 +90,16 @@ View User {{ $user->fullName() }} ::
                             <table class="table table-hover">
                                 <thead>
                                     <tr>
-                                    	<th class="col-md-3">Asset Type</th>
-                                    	<th class="col-md-3">Serial</th>
-                                        <th class="col-md-3"><span class="line"></span>Name</th>
-                                        <th class="col-md-3"><span class="line"></span>Actions</th>
+                                    	<th class="col-md-4"><span class="line"></span>Name</th>
+                                    	<th class="col-md-4"><span class="line"></span>Serial</th>
+                                        <th class="col-md-1"><span class="line"></span>Actions</th>
                                     </tr>
                                 </thead>
                                 <tbody>
 									@foreach ($user->licenses as $license)
 									<tr>
-										<td>
-										@if ($license->physical=='0')
-										Hardware
-										@else
-										Software
-										@endif
-										</td>
-										<td><a href="{{ route('view/license', $license->id) }}">{{ $license->serial }}</a></td>
 										<td><a href="{{ route('view/license', $license->id) }}">{{ $license->name }}</a></td>
+										<td><a href="{{ route('view/license', $license->id) }}">{{ $license->serial }}</a></td>
 										<td> <a href="{{ route('checkin/license', $license->pivot->id) }}" class="btn-flat info">Checkin</a>
 										</td>
 									</tr>
@@ -148,7 +138,7 @@ View User {{ $user->fullName() }} ::
 										<td>{{ $log->action_type }}</td>
 										<td>
 										@if ((isset($log->assetlog->name)) && ($log->assetlog->deleted_at==''))
-											<a href="{{ route('view/hardware', $log->asset_id) }}">{{ $log->assetlog->name }}</a>
+											<a href="{{ route('view/hardware', $log->asset_id) }}">{{ $log->assetlog->asset_tag }}</a>
 										@elseif ((isset($log->assetlog->name)) && ($log->assetlog->deleted_at!=''))
 											<del>{{ $log->assetlog->name }}</del> (deleted)
 										@else

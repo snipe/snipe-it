@@ -6,7 +6,7 @@ class LicenseSeat extends Elegant {
 
 	public function license()
 	{
-		return $this->belongsTo('License');
+		return $this->belongsTo('License','license_id');
 	}
 
 	public function user()

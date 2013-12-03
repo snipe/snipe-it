@@ -55,7 +55,7 @@ Assets ::
 	<thead>
 		<tr role="row">
 			<th class="col-md-2" bSortable="true">@lang('admin/hardware/table.asset_tag')</th>
-			<th class="col-md-2" bSortable="true">@lang('admin/hardware/table.title')</th>
+			<th class="col-md-3" bSortable="true">@lang('admin/hardware/table.title')</th>
 			<th class="col-md-2" bSortable="true">@lang('admin/hardware/table.serial')</th>
 			@if (Input::get('Pending') || Input::get('Undeployable') || Input::get('RTD'))
 			<th class="col-md-2" bSortable="true">Status</th>
@@ -126,9 +126,8 @@ Assets ::
 	</tbody>
 </table>
 @else
-<div class="col-md-6">
+<div class="col-md-9">
 	<div class="alert alert-info alert-block">
-		<button type="button" class="close" data-dismiss="alert">&times;</button>
 		<i class="icon-info-sign"></i>
 		There are no results for your query.
 	</div>

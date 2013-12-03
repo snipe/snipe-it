@@ -6,7 +6,7 @@
 		<meta charset="utf-8" />
 		<title>
 			@section('title')
-			Snipe IT Asset Manager
+			 {{ Setting::getSettings()->site_name }}
 			@show
 		</title>
 
@@ -83,6 +83,30 @@
         </div>
         <ul class="nav navbar-nav pull-right hidden-xs">
             @if (Sentry::check())
+
+				 <li class="dropdown">
+                    <a href="#" class="dropdown-toggle hidden-xs hidden-sm" data-toggle="dropdown">
+                        <i class="icon-plus"></i> Create New
+                        <b class="caret"></b>
+                    </a>
+                    <ul class="dropdown-menu">
+                       <li {{ (Request::is('hardware/create') ? 'class="active"' : '') }}>
+                       		<a href="{{ route('create/hardware') }}">
+                       			<i class="icon-plus"></i>
+                       			Asset</a>
+                       	</li>
+						<li {{ (Request::is('admin/licenses/create') ? 'class="active"' : '') }}>
+							<a href="{{ route('create/licenses') }}">
+								<i class="icon-plus"></i>
+								License</a>
+						</li>
+						<li {{ (Request::is('admin/users/create') ? 'class="active"' : '') }}>
+							<a href="{{ route('create/user') }}">
+							<i class="icon-plus"></i>
+							User</a>
+						</li>
+                    </ul>
+                </li>
 
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle hidden-xs hidden-sm" data-toggle="dropdown">
