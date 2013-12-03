@@ -145,10 +145,10 @@ class AssetsController extends AdminController {
 	public function getCreate()
 	{
 		// Grab the dropdown list of models
-		$model_list = array('' => '') + Model::orderBy('name', 'desc')->lists('name', 'id');
+		$model_list = array('' => '') + Model::orderBy('name', 'asc')->lists('name', 'id');
 
 		// Grab the dropdown list of status
-		$statuslabel_list = array('' => 'Pending') + array('0' => 'Ready to Deploy') + Statuslabel::orderBy('name', 'desc')->lists('name', 'id');
+		$statuslabel_list = array('' => 'Pending') + array('0' => 'Ready to Deploy') + Statuslabel::orderBy('name', 'asc')->lists('name', 'id');
 
 		return View::make('backend/hardware/edit')->with('model_list',$model_list)->with('statuslabel_list',$statuslabel_list)->with('asset',new Asset);
 
@@ -247,10 +247,10 @@ class AssetsController extends AdminController {
 		}
 
 		// Grab the dropdown list of models
-		$model_list = array('' => '') + Model::orderBy('name', 'desc')->lists('name', 'id');
+		$model_list = array('' => '') + Model::orderBy('name', 'asc')->lists('name', 'id');
 
 		// Grab the dropdown list of status
-		$statuslabel_list = array('' => 'Pending') + array('0' => 'Ready to Deploy') + Statuslabel::orderBy('name', 'desc')->lists('name', 'id');
+		$statuslabel_list = array('' => 'Pending') + array('0' => 'Ready to Deploy') + Statuslabel::orderBy('name', 'asc')->lists('name', 'id');
 
 		return View::make('backend/hardware/edit', compact('asset'))->with('model_list',$model_list)->with('statuslabel_list',$statuslabel_list);
 	}
@@ -277,7 +277,7 @@ class AssetsController extends AdminController {
 		'name'   => 'alpha_space|min:3',
 		'asset_tag'   => 'required|alpha_space|min:3',
 		'model_id'   => 'required',
-		'serial'   => 'alpha_space|min:3|unique:assets',
+		'serial'   => 'alpha_space|min:3',
 		'warranty_months'   => 'integer',
 		'notes'   => 'alpha_space',
     	);
