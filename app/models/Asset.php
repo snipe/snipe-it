@@ -21,7 +21,7 @@ class Asset extends Elegant {
 	public function depreciate()
 	{
 		$depreciation_id = Model::find($this->model_id)->depreciation_id;
-		if (isset($depreciation_id)) {
+		if ($depreciation_id) {
 			$depreciation_term = Depreciation::find($depreciation_id)->months;
 			if($depreciation_term>0) {
 
