@@ -6,7 +6,7 @@
 		<meta charset="utf-8" />
 		<title>
 			@section('title')
-			Snipe IT Asset Manager
+			 {{ Setting::getSettings()->site_name }}
 			@show
 		</title>
 
