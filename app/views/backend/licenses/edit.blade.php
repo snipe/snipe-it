@@ -46,15 +46,6 @@
 					</div>
 			</div>
 
-
-			<div class="form-group {{ $errors->has('serial') ? ' has-error' : '' }}">
-				<label for="serial" class="col-md-3 control-label">Serial</label>
-					<div class="col-md-7">
-						<input class="form-control" type="text" name="serial" id="serial" value="{{ Input::old('serial', $license->serial) }}" />
-						{{ $errors->first('serial', '<span class="alert-msg"><i class="icon-remove-sign"></i> :message</span>') }}
-					</div>
-			</div>
-
 			<div class="form-group {{ $errors->has('serial') ? ' has-error' : '' }}">
 				<label for="serial" class="col-md-3 control-label">Serial</label>
 					<div class="col-md-7">
