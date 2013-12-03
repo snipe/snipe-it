@@ -138,7 +138,7 @@ View User {{ $user->fullName() }} ::
 										<td>{{ $log->action_type }}</td>
 										<td>
 										@if ((isset($log->assetlog->name)) && ($log->assetlog->deleted_at==''))
-											<a href="{{ route('view/hardware', $log->asset_id) }}">{{ $log->assetlog->name }}</a>
+											<a href="{{ route('view/hardware', $log->asset_id) }}">{{ $log->assetlog->asset_tag }}</a>
 										@elseif ((isset($log->assetlog->name)) && ($log->assetlog->deleted_at!=''))
 											<del>{{ $log->assetlog->name }}</del> (deleted)
 										@else
