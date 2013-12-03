@@ -126,9 +126,8 @@ Assets ::
 	</tbody>
 </table>
 @else
-<div class="col-md-6">
+<div class="col-md-9">
 	<div class="alert alert-info alert-block">
-		<button type="button" class="close" data-dismiss="alert">&times;</button>
 		<i class="icon-info-sign"></i>
 		There are no results for your query.
 	</div>
