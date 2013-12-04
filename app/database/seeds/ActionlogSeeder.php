@@ -21,6 +21,7 @@ class ActionlogSeeder extends Seeder {
 			'added_on' 			=> $date->modify('-10 day'),
 			'asset_type' 		=> 'hardware',
 			'note'				=> NULL,
+			'filename'			=> NULL,
 		);
 
 		// Pending (status_id is null, assigned_to = 0)
@@ -33,6 +34,7 @@ class ActionlogSeeder extends Seeder {
 			'added_on' 			=> $date->modify('-10 day'),
 			'asset_type' 		=> 'hardware',
 			'note'				=> NULL,
+			'filename'			=> NULL,
 		);
 
 		// Pending (status_id is null, assigned_to = 0)
@@ -45,6 +47,7 @@ class ActionlogSeeder extends Seeder {
 			'added_on' 			=> $date->modify('-10 day'),
 			'asset_type' 		=> 'software',
 			'note'				=> NULL,
+			'filename'			=> NULL,
 		);
 
 		// Pending (status_id is null, assigned_to = 0)
@@ -57,6 +60,7 @@ class ActionlogSeeder extends Seeder {
 			'added_on' 			=> $date->modify('-10 day'),
 			'asset_type' 		=> 'software',
 			'note'				=> NULL,
+			'filename'			=> NULL,
 		);
 
 
