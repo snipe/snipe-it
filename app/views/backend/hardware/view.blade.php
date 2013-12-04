@@ -180,11 +180,11 @@ View Asset {{ $asset->asset_tag }} ::
 				@if ($asset->assetstatus)
 					<h6><br>{{ $asset->assetstatus->name }} Asset</h6>
 
-					<div class="col-md-6">
+					<div class="col-md-12">
 					<div class="alert alert-warning alert-block">
 						<i class="icon-warning-sign"></i>
 						<strong>Warning: </strong> This asset has been marked <strong>{{ $asset->assetstatus->name }}</strong> and is currently undeployable.
-						If this status has changed, please update the asset status.
+						If this status has changed, please update the asset status by <a href="{{ route('update/hardware', $asset->id) }}">editing the asset</a>.
 					</div>
 				</div>
 				@endif
