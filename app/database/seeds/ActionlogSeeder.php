@@ -16,11 +16,12 @@ class ActionlogSeeder extends Seeder {
 			'user_id'      		=> '1',
 			'action_type'      	=> 'checkout',
 			'asset_id' 			=> '1',
-			'checkedout_to' 	=> '3',
+			'checkedout_to' 	=> '2',
 			'location_id'  		=> '3',
 			'added_on' 			=> $date->modify('-10 day'),
 			'asset_type' 		=> 'hardware',
 			'note'				=> NULL,
+			'filename'			=> NULL,
 		);
 
 		// Pending (status_id is null, assigned_to = 0)
@@ -28,11 +29,12 @@ class ActionlogSeeder extends Seeder {
 			'user_id'      		=> '1',
 			'action_type'      	=> 'checkin from',
 			'asset_id' 			=> '1',
-			'checkedout_to' 	=> '3',
+			'checkedout_to' 	=> '2',
 			'location_id'  		=> NULL,
 			'added_on' 			=> $date->modify('-10 day'),
 			'asset_type' 		=> 'hardware',
 			'note'				=> NULL,
+			'filename'			=> NULL,
 		);
 
 		// Pending (status_id is null, assigned_to = 0)
@@ -40,11 +42,12 @@ class ActionlogSeeder extends Seeder {
 			'user_id'      		=> '1',
 			'action_type'      	=> 'checkout',
 			'asset_id' 			=> '1',
-			'checkedout_to' 	=> '3',
+			'checkedout_to' 	=> '1',
 			'location_id'  		=> '3',
 			'added_on' 			=> $date->modify('-10 day'),
 			'asset_type' 		=> 'software',
 			'note'				=> NULL,
+			'filename'			=> NULL,
 		);
 
 		// Pending (status_id is null, assigned_to = 0)
@@ -52,11 +55,12 @@ class ActionlogSeeder extends Seeder {
 			'user_id'      		=> '1',
 			'action_type'      	=> 'checkin from',
 			'asset_id' 			=> '1',
-			'checkedout_to' 	=> '3',
+			'checkedout_to' 	=> '2',
 			'location_id'  		=> NULL,
 			'added_on' 			=> $date->modify('-10 day'),
 			'asset_type' 		=> 'software',
 			'note'				=> NULL,
+			'filename'			=> NULL,
 		);
 
 

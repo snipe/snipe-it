@@ -245,6 +245,49 @@ class AppCommand extends Command {
 		{
 			$this->error('Group already exists.');
 		}
+
+
+
+		try
+		{
+			// Create the reporting group
+			$group = Sentry::getGroupProvider()->create(array(
+				'name'        => 'Reporting',
+				'permissions' => array(
+					'admin' => 0,
+					'users' => 1
+				)
+			));
+
+			// Show the success message.
+			$this->comment('');
+			$this->info('Reporting group created successfully.');
+		}
+		catch (Cartalyst\Sentry\Groups\GroupExistsException $e)
+		{
+			$this->error('Group already exists.');
+		}
+
+
+		try
+		{
+			// Create the general users group
+			$group = Sentry::getGroupProvider()->create(array(
+				'name'        => 'Users',
+				'permissions' => array(
+					'admin' => 0,
+					'users' => 1
+				)
+			));
+
+			// Show the success message.
+			$this->comment('');
+			$this->info('Users group created successfully.');
+		}
+		catch (Cartalyst\Sentry\Groups\GroupExistsException $e)
+		{
+			$this->error('Group already exists.');
+		}
 	}
 
 	/**

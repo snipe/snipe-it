@@ -81,9 +81,13 @@ class LicensesController extends AdminController {
 			$license->purchase_cost 	= e(Input::get('purchase_cost'));
 			$license->user_id 			= Sentry::getId();
 
+			if ($license->purchase_date == "0000-00-00") {
+				$license->purchase_date = NULL;
+			}
 
-
-
+			if ($license->purchase_cost == "0.00") {
+				$license->purchase_cost = NULL;
+			}
 
 			// Was the license created?
 			if($license->save())
@@ -129,6 +133,14 @@ class LicensesController extends AdminController {
 			return Redirect::to('admin/licenses')->with('error', Lang::get('admin/licenses/message.does_not_exist'));
 		}
 
+			if ($license->purchase_date == "0000-00-00") {
+				$license->purchase_date = NULL;
+			}
+
+			if ($license->purchase_cost == "0.00") {
+				$license->purchase_cost = NULL;
+			}
+
 		// Show the page
 		$license_options = array('' => 'Top Level') + DB::table('assets')->where('id', '!=', $licenseId)->lists('name', 'id');
 		$depreciation_list = array('0' => 'Do Not Depreciate') + Depreciation::lists('name', 'id');
@@ -156,6 +168,7 @@ class LicensesController extends AdminController {
 		$new = Input::all();
 
 
+
 		// attempt validation
 		if ($license->validate($new))
 		{
@@ -170,12 +183,11 @@ class LicensesController extends AdminController {
 			$license->purchase_date 	= e(Input::get('purchase_date'));
 			$license->purchase_cost 	= e(Input::get('purchase_cost'));
 
-
 			// Was the asset created?
 			if($license->save())
 			{
 				// Redirect to the new license page
-				return Redirect::to("admin/licenses/$licenseId/edit")->with('success', Lang::get('admin/licenses/message.update.success'));
+				return Redirect::to("admin/licenses/$licenseId/view")->with('success', Lang::get('admin/licenses/message.update.success'));
 			}
 		}
 		else
@@ -185,7 +197,7 @@ class LicensesController extends AdminController {
 			return Redirect::back()->withInput()->withErrors($errors);
 		}
 
-		// Redirect to the category create page
+		// Redirect to the license edit page
 		return Redirect::to("admin/licenses/$licenseId/edit")->with('error', Lang::get('admin/licenses/message.update.error'));
 
 	}
@@ -248,7 +260,7 @@ class LicensesController extends AdminController {
 
 
 
-		/**
+	/**
 	* Check out the asset to a person
 	**/
 	public function postCheckout($seatId)
@@ -295,7 +307,7 @@ class LicensesController extends AdminController {
 		if($licenseseat->save())
 		{
 			$logaction = new Actionlog();
-			$logaction->asset_id = $licenseseat->id;
+			$logaction->asset_id = $licenseseat->license_id;
 			$logaction->checkedout_to = $licenseseat->assigned_to;
 			$logaction->location_id = $assigned_to->location_id;
 			$logaction->asset_type = 'software';
@@ -366,7 +378,7 @@ class LicensesController extends AdminController {
 		// Was the asset updated?
 		if($licenseseat->save())
 		{
-			$logaction->asset_id = $licenseseat->id;
+			$logaction->asset_id = $licenseseat->license_id;
 			$logaction->location_id = NULL;
 			$logaction->asset_type = 'software';
 			$logaction->note = e(Input::get('note'));
