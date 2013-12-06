@@ -2,12 +2,6 @@
 
 class License extends Elegant {
 
-	/**
-	 * Deletes a category
-	 *
-	 * @return bool
-	 */
-
  	protected $guarded = 'id';
 	protected $table = 'licenses';
 	protected $softDelete = true;
@@ -20,6 +14,10 @@ class License extends Elegant {
 			'notes'   => 'alpha_space',
 		);
 
+	/**
+	 * Get the assigned user
+	 *
+	 */
 	public function assignedusers()
   	{
     	return $this->belongsToMany('User','license_seats','assigned_to','license_id');
@@ -67,6 +65,10 @@ class License extends Elegant {
 
 	}
 
+	/**
+	 * Get the number of available seats
+	 *
+	 */
 	public function availcount()
 	{
 		return DB::table('license_seats')
@@ -76,7 +78,10 @@ class License extends Elegant {
                     ->count();
 	}
 
-
+	/**
+	 * Get the number of assigned seats
+	 *
+	 */
 	public function assignedcount()
 	{
 		return DB::table('license_seats')
@@ -86,6 +91,10 @@ class License extends Elegant {
                     ->count();
 	}
 
+	/**
+	 * Get the total number of seats
+	 *
+	 */
 	public function totalcount()
 	{
 		$avail =  $this->availcount();
@@ -94,11 +103,19 @@ class License extends Elegant {
         return $diff;
 	}
 
+	/**
+	 * Get license seat data
+	 *
+	 */
 	public function licenseseats()
 	{
 		return $this->hasMany('LicenseSeat');
 	}
 
+	/**
+	 * Get depreciation class
+	 *
+	 */
 	public function depreciation()
 	{
 		return $this->belongsTo('Depreciation','id');
