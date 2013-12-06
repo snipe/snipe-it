@@ -295,7 +295,7 @@ class LicensesController extends AdminController {
 		if($licenseseat->save())
 		{
 			$logaction = new Actionlog();
-			$logaction->asset_id = $licenseseat->id;
+			$logaction->asset_id = $licenseseat->license_id;
 			$logaction->checkedout_to = $licenseseat->assigned_to;
 			$logaction->location_id = $assigned_to->location_id;
 			$logaction->asset_type = 'software';
@@ -366,7 +366,7 @@ class LicensesController extends AdminController {
 		// Was the asset updated?
 		if($licenseseat->save())
 		{
-			$logaction->asset_id = $licenseseat->id;
+			$logaction->asset_id = $licenseseat->license_id;
 			$logaction->location_id = NULL;
 			$logaction->asset_type = 'software';
 			$logaction->note = e(Input::get('note'));
