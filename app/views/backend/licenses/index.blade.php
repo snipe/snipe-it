@@ -32,25 +32,6 @@ Licenses ::
 
 		@foreach ($licenses as $license)
 
-			<tr>
-
-					<td><a href="{{ route('view/license', $license->id) }}">{{ $license->name }}</a>
-					@if ($license->seats == 1)
-						({{ $license->seats }} seat)
-					@else
-						({{ $license->seats }} seats)
-					@endif
-
-					</td>
-					<td><a href="{{ route('view/license', $license->id) }}">{{ $license->serial }}</a></td>
-					<td></td>
-					<td>
-					<a href="{{ route('update/license', $license->id) }}" class="btn btn-warning"><i class="icon-pencil icon-white"></i></a>
-						<a data-html="false" class="btn delete-asset btn-danger" data-toggle="modal" href="{{ route('delete/license', $license->id) }}" data-content="Are you sure you wish to delete this license?" data-title="Delete {{ htmlspecialchars($license->name) }}?" onClick="return false;"><i class="icon-trash icon-white"></i></a>
-
-
-					</td>
-				</tr>
 				@if ($license->licenseseats)
 				<?php $count=1; ?>
 				@foreach ($license->licenseseats as $licensedto)
@@ -76,6 +57,13 @@ Licenses ::
 					@else
 						<a href="{{ route('checkout/license', $licensedto->id) }}" class="btn btn-info">Checkout</a>
 					@endif
+					</td>
+					<td>
+					@if ($count==1)
+					<a href="{{ route('update/license', $license->id) }}" class="btn btn-warning"><i class="icon-pencil icon-white"></i></a>
+						<a data-html="false" class="btn delete-asset btn-danger" data-toggle="modal" href="{{ route('delete/license', $license->id) }}" data-content="Are you sure you wish to delete this license?" data-title="Delete {{ htmlspecialchars($license->name) }}?" onClick="return false;"><i class="icon-trash icon-white"></i></a>
+					@endif
+
 					</td>
 
 
