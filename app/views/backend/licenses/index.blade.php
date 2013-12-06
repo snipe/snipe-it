@@ -23,8 +23,9 @@ Licenses ::
 		<tr role="row">
 			<th class="col-md-3" tabindex="0" rowspan="1" colspan="1">@lang('admin/licenses/table.title')</th>
 			<th class="col-md-3" tabindex="0" rowspan="1" colspan="1">@lang('admin/licenses/table.serial')</th>
-			<th class="col-md-3" tabindex="0" rowspan="1" colspan="1">@lang('admin/licenses/table.assigned_to')</th>
-			<th class="col-md-2 actions" tabindex="0" rowspan="1" colspan="1">@lang('table.actions')</th>
+			<th class="col-md-2" tabindex="0" rowspan="1" colspan="1">@lang('admin/licenses/table.assigned_to')</th>
+			<th class="col-md-1 actions" tabindex="0" rowspan="1" colspan="1">In/Out</th>
+			<th class="col-md-1 actions" tabindex="0" rowspan="1" colspan="1">@lang('table.actions')</th>
 		</tr>
 	</thead>
 	<tbody>
@@ -41,7 +42,8 @@ Licenses ::
 					<td><a href="{{ route('view/license', $license->id) }}">{{ $license->name }}</a>
 					 (Seat {{ $count }})
 					 </td>
-					<td><a href="{{ route('view/license', $license->id) }}">{{ $license->serial }}</a></td>
+					<td><a href="{{ route('view/license', $license->id) }}">{{ Str::limit($license->serial, 40); }}</a>
+					</td>
 					<td>
 					@if (($licensedto->assigned_to) && ($licensedto->deleted_at == NULL))
 						<a href="{{ route('view/user', $licensedto->assigned_to) }}">
