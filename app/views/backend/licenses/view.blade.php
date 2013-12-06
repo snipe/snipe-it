@@ -11,23 +11,8 @@ View License {{ $license->name }} ::
 
 <div class="row header">
     <div class="col-md-12">
-    	<div class="btn-group pull-right">
-					<button class="btn glow">Actions</button>
-					<button class="btn glow dropdown-toggle" data-toggle="dropdown">
-						<span class="caret"></span>
-					</button>
-					<ul class="dropdown-menu">
-
-						@if ($license->assigned_to != 0)
-							<li><a href="{{ route('checkin/license', $license->id) }}" class="btn-flat info">Checkin</a></li>
-						@else
-							<li><a href="{{ route('checkout/license', $license->id) }}" class="btn-flat success">Checkout</a></li>
-						@endif
-						<li><a href="{{ route('update/license', $license->id) }}">Edit License</a></li>
-					</ul>
-				</div>
-			<h3 class="name">History for ({{ $license->name }})</h3>
-
+    	<a href="{{ route('update/license', $license->id) }}" class="btn-flat white pull-right"> Edit License</a>
+			<h3 class="name">History for {{ $license->name }}</h3>
 	</div>
 </div>
 
@@ -128,7 +113,7 @@ View License {{ $license->name }} ::
 							<td></td>
 							<td>{{ $license->created_at }}</td>
 							<td>
-							@if (isset($license->adminuser->id))
+							@if ($license->adminuser)
 							{{ $license->adminuser->fullName() }}
 							@else
 							Unknown Admin
@@ -155,16 +140,16 @@ View License {{ $license->name }} ::
 					@if ($license->license_email)
 					<li>License Email: {{ $license->license_email }} </li>
 					@endif
-					@if ($license->purchase_date)
+					@if ($license->purchase_date > 0)
 					<li>Purchase Date: {{ $license->purchase_date }} </li>
 					@endif
-					@if ($license->purchase_cost)
+					@if ($license->purchase_cost > 0)
 					<li>Purchase Cost: ${{ number_format($license->purchase_cost,2) }} </li>
 					@endif
 					@if ($license->order_number)
 					<li>Order #: {{ $license->order_number }} </li>
 					@endif
-					@if ($license->seats)
+					@if (($license->seats) && ($license->seats) > 0)
 					<li>Seats: {{ $license->seats }} </li>
 					@endif
 					@if ($license->depreciation)
