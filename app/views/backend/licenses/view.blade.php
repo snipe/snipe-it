@@ -20,6 +20,31 @@ View License {{ $license->name }} ::
 <div class="row profile">
 <div class="col-md-9 bio">
 
+<h6>License Info</h6>
+
+<div class="col-md-12">
+@if ($license->serial)
+<div class="col-md-6"><strong>Serial: </strong> {{ $license->serial }} </div>
+@endif
+
+@if ($license->license_name)
+<div class="col-md-6"><strong>Licensed To: </strong> {{ $license->license_name }} </div>
+@endif
+
+@if ($license->license_email)
+<div class="col-md-6"><strong>Licensed Email: </strong> {{ $license->license_email }} </div>
+@endif
+
+@if ($license->notes)
+<div class="col-md-6"><strong>Notes: </strong>{{ $license->notes }}</div>
+@endif
+
+
+<br><br><br>
+</div>
+
+
+
 
 				<!-- checked out assets table -->
 				<h6>{{ $license->seats }} License Seats</h6>
@@ -37,7 +62,6 @@ View License {{ $license->name }} ::
 							@foreach ($license->licenseseats as $licensedto)
 
 							<tr>
-
 								<td>Seat {{ $count }} </td>
 								<td>
 								@if ($licensedto->assigned_to)
@@ -129,17 +153,9 @@ View License {{ $license->name }} ::
 
 		<!-- side address column -->
 		<div class="col-md-3 col-xs-12 address pull-right">
-		<h6><br>License Info:</h6>
+		<h6><br>More Info:</h6>
 				<ul>
-					@if ($license->serial)
-					<li>Serial: {{ $license->serial }} </li>
-					@endif
-					@if ($license->license_name)
-					<li>License Name: {{ $license->license_name }} </li>
-					@endif
-					@if ($license->license_email)
-					<li>License Email: {{ $license->license_email }} </li>
-					@endif
+
 					@if ($license->purchase_date > 0)
 					<li>Purchase Date: {{ $license->purchase_date }} </li>
 					@endif
@@ -156,7 +172,6 @@ View License {{ $license->name }} ::
 					<li>Depreciation: {{ $license->depreciation->name }} ({{ $license->depreciation->months }} months)</li>
 					@endif
 				</ul>
-
 		</div>
 	</div>
 </div>
