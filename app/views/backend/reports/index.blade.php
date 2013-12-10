@@ -33,12 +33,13 @@ Depreciation Report
 <table id="example">
 		<thead>
 			<tr role="row">
-			<th class="col-sm-2">@lang('admin/hardware/table.asset_tag')</th>
-			<th class="col-sm-2">@lang('admin/hardware/table.title')</th>
-			<th class="col-sm-2">@lang('admin/hardware/table.serial')</th>
-			<th class="col-sm-3">@lang('admin/hardware/table.checkoutto')</th>
-			<th class="col-sm-2">@lang('admin/hardware/table.location')</th>
-			<th class="col-sm-2">@lang('admin/hardware/table.purchase_date')</th>
+			<th class="col-sm-1">@lang('admin/hardware/table.asset_tag')</th>
+			<th class="col-sm-1">@lang('admin/hardware/table.title')</th>
+			<th class="col-sm-1">@lang('admin/hardware/table.serial')</th>
+			<th class="col-sm-1">@lang('admin/hardware/table.checkoutto')</th>
+			<th class="col-sm-1">@lang('admin/hardware/table.location')</th>
+			<th class="col-sm-1">@lang('admin/hardware/table.purchase_date')</th>
+			<th class="col-sm-1">@lang('admin/hardware/table.eol')</th>
 			<th class="col-sm-1">@lang('admin/hardware/table.purchase_cost')</th>
 			<th class="col-sm-1">@lang('admin/hardware/table.book_value')</th>
 			<th class="col-sm-1">Diff</th>
@@ -66,6 +67,12 @@ Depreciation Report
 			@endif
 			</td>
 			<td>{{ $asset->purchase_date }}</td>
+
+			<td>
+			@if ($asset->model->eol)
+				{{ $asset->eol_date() }}
+			@endif
+			</td>
 
 			@if ($asset->purchase_cost > 0)
 			<td class="align-right">${{ number_format($asset->purchase_cost) }}</td>
