@@ -13,5 +13,6 @@ return array(
 	'checkoutto' => 'Checked Out',
 	'change' => 'In/Out',
 	'location' => 'Location',
+	'eol' => 'EOL',
 
 );

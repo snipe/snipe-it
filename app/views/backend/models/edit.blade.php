@@ -78,6 +78,19 @@
 					</div>
 			</div>
 
+			<!-- EOL -->
+			<div class="form-group {{ $errors->has('eol') ? ' has-error' : '' }}">
+				<label for="eol" class="col-md-2 control-label">EOL</label>
+				<div class="col-md-2">
+					<div class="input-group">
+					<input class="col-md-1 form-control" type="text" name="eol" id="eol" value="{{ Input::old('eol', $model->eol) }}" />   <span class="input-group-addon">months</span>
+					{{ $errors->first('eol', '<span class="alert-msg"><i class="icon-remove-sign"></i> :message</span>') }}
+					</div>
+				</div>
+			</div>
+
+
+
 			<!-- Form actions -->
 			<div class="form-group">
 			<label class="col-md-2 control-label"></label>

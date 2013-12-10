@@ -74,6 +74,16 @@ View Asset {{ $asset->asset_tag }} ::
 			{{ $asset->months_until_depreciated()->y }} years</div>
 		@endif
 
+		@if ($asset->model->eol)
+			<div class="col-md-6"><strong>EOL Rate: </strong> {{ $asset->model->eol }} months </div>
+			<div class="col-md-6"><strong>EOL Date: </strong> {{ $asset->eol_date() }}
+			@if ($asset->months_until_eol())
+				 ({{ $asset->months_until_eol()->y }} years,
+				{{ $asset->months_until_eol()->m }} months)
+			@endif
+			</div>
+		@endif
+
 	</div>
 
 

@@ -4,10 +4,11 @@ class Model extends Elegant {
 
 	// Declare the rules for the form validation
 	protected $rules = array(
-		'name'   => 'required|alpha_space|min:3',
-		'modelno'   => 'alpha_space|min:1',
-		'category_id'   => 'required|integer',
+		'name'   		=> 'required|alpha_space|min:3',
+		'modelno'   		=> 'alpha_space|min:1',
+		'category_id'   	=> 'required|integer',
 		'manufacturer_id'   => 'required|integer',
+		'eol'   => 'integer',
 	);
 
 	public function assets()
@@ -34,7 +35,5 @@ class Model extends Elegant {
 	{
 		return $this->belongsTo('Manufacturer','manufacturer_id');
 	}
-
-
 
 }
