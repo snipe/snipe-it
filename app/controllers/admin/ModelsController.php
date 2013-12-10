@@ -134,7 +134,7 @@ class ModelsController extends AdminController {
 		// Check if the model exists
 		if (is_null($model = Model::find($modelId)))
 		{
-			// Redirect to the blogs management page
+			// Redirect to the models management page
 			return Redirect::to('admin/models')->with('error', Lang::get('admin/models/message.does_not_exist'));
 		}
 
@@ -158,7 +158,7 @@ class ModelsController extends AdminController {
 			if($model->save())
 			{
 				// Redirect to the new model  page
-				return Redirect::to("hardware/models/$modelId/edit")->with('success', Lang::get('admin/models/message.update.success'));
+				return Redirect::to("hardware/models")->with('success', Lang::get('admin/models/message.update.success'));
 			}
 		}
 		else
