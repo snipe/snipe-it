@@ -90,6 +90,10 @@ View Model {{ $model->model_tag }} ::
 								<li>Depreciation: {{ $model->depreciation->name }} ({{ $model->depreciation->months }} months)</li>
 								@endif
 
+								@if ($model->eol)
+								<li>EOL: {{ $model->eol }} months</li>
+								@endif
+
 							</ul>
 
 

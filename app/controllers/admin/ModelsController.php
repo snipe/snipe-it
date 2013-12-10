@@ -69,12 +69,13 @@ class ModelsController extends AdminController {
 		{
 
 			// Save the model data
-			$model->name            = e(Input::get('name'));
-			$model->modelno            = e(Input::get('modelno'));
-			$model->depreciation_id    = e(Input::get('depreciation_id'));
-			$model->manufacturer_id    = e(Input::get('manufacturer_id'));
-			$model->category_id    = e(Input::get('category_id'));
-			$model->user_id          = Sentry::getId();
+			$model->name            	= e(Input::get('name'));
+			$model->modelno            	= e(Input::get('modelno'));
+			$model->depreciation_id    	= e(Input::get('depreciation_id'));
+			$model->manufacturer_id    	= e(Input::get('manufacturer_id'));
+			$model->category_id    		= e(Input::get('category_id'));
+			$model->user_id          	= Sentry::getId();
+			$model->eol    				= e(Input::get('eol'));
 
 
 			// Was it created?
@@ -133,7 +134,7 @@ class ModelsController extends AdminController {
 		// Check if the model exists
 		if (is_null($model = Model::find($modelId)))
 		{
-			// Redirect to the blogs management page
+			// Redirect to the models management page
 			return Redirect::to('admin/models')->with('error', Lang::get('admin/models/message.does_not_exist'));
 		}
 
@@ -145,18 +146,19 @@ class ModelsController extends AdminController {
 		{
 
 			// Update the model data
-			$model->name            = e(Input::get('name'));
-			$model->modelno            = e(Input::get('modelno'));
-			$model->depreciation_id    = e(Input::get('depreciation_id'));
-			$model->manufacturer_id    = e(Input::get('manufacturer_id'));
-			$model->category_id    = e(Input::get('category_id'));
+			$model->name            	= e(Input::get('name'));
+			$model->modelno            	= e(Input::get('modelno'));
+			$model->depreciation_id    	= e(Input::get('depreciation_id'));
+			$model->manufacturer_id    	= e(Input::get('manufacturer_id'));
+			$model->category_id    		= e(Input::get('category_id'));
+			$model->eol    				= e(Input::get('eol'));
 
 
 			// Was it created?
 			if($model->save())
 			{
 				// Redirect to the new model  page
-				return Redirect::to("hardware/models/$modelId/edit")->with('success', Lang::get('admin/models/message.update.success'));
+				return Redirect::to("hardware/models")->with('success', Lang::get('admin/models/message.update.success'));
 			}
 		}
 		else
