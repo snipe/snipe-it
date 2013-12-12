@@ -36,8 +36,9 @@ User Management ::
 <table id="example">
 	<thead>
 		<tr role="row">
-			<th class="col-md-4">@lang('admin/users/table.name')</th>
-			<th class="col-md-3">@lang('admin/users/table.email')</th>
+			<th class="col-md-3">@lang('admin/users/table.name')</th>
+			<th class="col-md-2">@lang('admin/users/table.email')</th>
+			<th class="col-md-2">Manager</th>
 			<th class="col-md-1">Assets</th>
 			<th class="col-md-1">Licenses</th>
 			<th class="col-md-1">@lang('admin/users/table.activated')</th>
@@ -54,23 +55,29 @@ User Management ::
 
 			</td>
 			<td>{{ $user->email }}</td>
+			<td>
+			@if ($user->manager)
+				{{ $user->manager->fullName() }}
+			@endif
+			</td>
 			<td>{{ $user->assets->count() }}</td>
 			<td>{{ $user->licenses->count() }}</td>
 			<td>{{ $user->isActivated() ? '<i class="icon-ok"></i>' : ''}}</td>
 			<td>
-			@if ($user->id > 2)
+
 				@if ( ! is_null($user->deleted_at))
 				<a href="{{ route('restore/user', $user->id) }}" class="btn btn-warning"><i class="icon-share-alt icon-white"></i></a>
 				@else
 				<a href="{{ route('update/user', $user->id) }}" class="btn btn-warning"><i class="icon-pencil icon-white"></i></a>
+
 				@if (Sentry::getId() !== $user->id)
 				<a data-html="false" class="btn delete-asset btn-danger" data-toggle="modal" href="{{ route('delete/user', $user->id) }}" data-content="Are you sure you wish to delete this user?" data-title="Delete {{ htmlspecialchars($user->first_name) }}?" onClick="return false;"><i class="icon-trash icon-white"></i></a>
 
 				@else
-				<span class="btn-flat danger disabled"><i class="icon-trash icon-white"></i></span>
+				<span class="btn delete-asset btn-danger disabled"><i class="icon-trash icon-white"></i></span>
 				@endif
 				@endif
-			@endif
+
 
 			</td>
 		</tr>

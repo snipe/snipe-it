@@ -51,12 +51,25 @@ Create a User ::
 				</div>
 			</div>
 
+
+
 			<!-- Jobtitle -->
 			<div class="form-group {{ $errors->has('jobtitle') ? 'error' : '' }}">
 				<label class="control-label" for="jobtitle">Job Title</label>
 				<div class="controls">
 					<input type="text" name="jobtitle" id="jobtitle" value="{{ Input::old('jobtitle') }}" />
 					{{ $errors->first('jobtitle', '<span class="help-inline">:message</span>') }}
+				</div>
+			</div>
+
+			<!-- Manager -->
+			<div class="form-group {{ $errors->has('manager_id') ? 'error' : '' }}">
+				<label class="control-label" for="manager_id">Manager</label>
+				<div class="controls">
+					<div class="field-box">
+					{{ Form::select('manager_id', $manager_list , Input::old('manager_id'), array('class'=>'select2', 'style'=>'width:250px')) }}
+					{{ $errors->first('manager_id', '<span class="help-inline">:message</span>') }}
+					</div>
 				</div>
 			</div>
 

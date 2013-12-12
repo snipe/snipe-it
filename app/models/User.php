@@ -65,4 +65,13 @@ class User extends SentryUserModel {
   		return $this->belongsTo('Location','location_id')->withTrashed();
   	}
 
+
+	/**
+	* Get the user's manager based on the assigned user
+	**/
+  	public function manager()
+  	{
+  		return $this->belongsTo('User','manager_id')->withTrashed();
+  	}
+
 }

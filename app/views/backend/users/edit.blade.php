@@ -11,7 +11,7 @@ Update User {{ $user->fullName() }} ::
 <div class="page-header">
 
 		<div class="pull-right">
-			<a href="{{ route('users') }}" class="btn-flat gray"><i class="icon-circle-arrow-left icon-white"></i> Back</a>
+			<a href="{{ URL::previous() }}" class="btn-flat gray"><i class="icon-circle-arrow-left icon-white"></i> Back</a>
 		</div>
 	<h3>
 		Update User {{ $user->fullName() }}
@@ -59,8 +59,19 @@ Update User {{ $user->fullName() }} ::
 				</div>
 			</div>
 
+			<!-- Manager -->
+			<div class="form-group {{ $errors->has('manager_id') ? 'error' : '' }}">
+				<label class="control-label" for="manager_id">Manager</label>
+				<div class="controls">
+					<div class="field-box">
+					{{ Form::select('manager_id', $manager_list , Input::old('manager_id', $user->manager_id), array('class'=>'select2', 'style'=>'width:250px')) }}
+					{{ $errors->first('manager_id', '<span class="help-inline">:message</span>') }}
+					</div>
+				</div>
+			</div>
+
 			<!-- Location -->
-			<div class="form-group {{ $errors->has('phone') ? 'error' : '' }}">
+			<div class="form-group {{ $errors->has('location_id') ? 'error' : '' }}">
 				<label class="control-label" for="location_id">Location</label>
 				<div class="controls">
 					<div class="field-box">
@@ -185,7 +196,7 @@ Update User {{ $user->fullName() }} ::
 	<!-- Form Actions -->
 	<div class="form-group">
 		<div class="controls">
-			<a class="btn btn-link" href="{{ route('users') }}">@lang('general.cancel')</a>
+			<a class="btn btn-link" href="{{ URL::previous() }}">@lang('general.cancel')</a>
 
 			<button type="reset" class="btn">Reset</button>
 
