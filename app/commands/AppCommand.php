@@ -300,6 +300,7 @@ class AppCommand extends Command {
 		// Prepare the user data array.
 		$data = array_merge($this->userData, array(
 			'activated'   => 1,
+			'manager_id'  => NULL,
 			'permissions' => array(
 				'admin' => 1,
 				'user'  => 1,
@@ -333,6 +334,7 @@ class AppCommand extends Command {
 			'email'      => 'john.doe@example.com',
 			'password'   => 'johndoe',
 			'activated'  => 1,
+			'manager_id'  => 1,
 		);
 
 		// Create the user
