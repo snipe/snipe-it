@@ -11,7 +11,7 @@
 
 <div class="row header">
     <div class="col-md-12">
-		<a href="{{ route('hardware') }}" class="btn-flat gray pull-right"><i class="icon-circle-arrow-left icon-white"></i> Back</a>
+		<a href="{{ URL::previous() }}" class="btn-flat gray pull-right"><i class="icon-circle-arrow-left icon-white"></i> Back</a>
 		<h3>
 			Checkout License to User
 		</h3>

@@ -17,7 +17,7 @@
 
 <div class="row header">
     <div class="col-md-12">
-    	<a href="{{ route('locations') }}" class="btn-flat gray pull-right"><i class="icon-circle-arrow-left icon-white"></i> Back</a>
+    	<a href="{{ URL::previous() }}" class="btn-flat gray pull-right"><i class="icon-circle-arrow-left icon-white"></i> Back</a>
 		<h3>
 		@if ($location->id)
 			Update Location
@@ -115,7 +115,7 @@
 			<div class="form-group">
 			<label class="col-md-2 control-label"></label>
 				<div class="col-md-7">
-					<a class="btn btn-link" href="{{ route('locations') }}">@lang('general.cancel')</a>
+					<a class="btn btn-link" href="{{ URL::previous() }}">@lang('general.cancel')</a>
 					<button type="submit" class="btn btn-success"><i class="icon-ok icon-white"></i> @lang('general.save')</button>
 				</div>
 			</div>

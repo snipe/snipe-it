@@ -16,12 +16,7 @@
 
 <div class="row header">
     <div class="col-md-12">
-    	@if ($asset->id)
-			<a href="{{ route('view/hardware',$asset->id) }}" class="btn-flat gray pull-right"><i class="icon-circle-arrow-left icon-white"></i> Back</a>
-		@else
-			<a href="{{ route('hardware') }}" class="btn-flat gray pull-right right"><i class="icon-circle-arrow-left icon-white"></i> Back</a>
-		@endif
-
+			<a href="{{ URL::previous() }}" class="btn-flat gray pull-right right"><i class="icon-circle-arrow-left icon-white"></i> Back</a>
 		<h3>
 		@if ($asset->id)
 		Asset Update
@@ -139,11 +134,7 @@
 				<div class="form-group">
 				<label class="col-md-2 control-label"></label>
 					<div class="col-md-7">
-						@if ($asset->id)
-						<a class="btn btn-link" href="{{ route('view/hardware', $asset->id) }}">Cancel</a>
-						@else
-						<a class="btn btn-link" href="{{ route('hardware') }}">Cancel</a>
-						@endif
+						<a class="btn btn-link" href="{{ URL::previous() }}">Cancel</a>
 						<button type="submit" class="btn btn-success"><i class="icon-ok icon-white"></i> Save</button>
 					</div>
 				</div>

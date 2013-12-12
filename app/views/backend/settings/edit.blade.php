@@ -12,7 +12,7 @@
                 <!-- header -->
 
                 <div class="pull-right">
-					<a href="{{ route('app') }}" class="btn-flat gray"><i class="icon-circle-arrow-left icon-white"></i> Back</a>
+					<a href="{{ URL::previous() }}" class="btn-flat gray"><i class="icon-circle-arrow-left icon-white"></i> Back</a>
 				</div>
 
 				<h3 class="name">Update Settings</h3>
@@ -53,7 +53,7 @@
 								<!-- Form actions -->
 									<div class="form-group">
 										<div class="controls">
-											<a class="btn btn-link" href="{{ route('app') }}">@lang('general.cancel')</a>
+											<a class="btn btn-link" href="{{ URL::previous() }}">@lang('general.cancel')</a>
 											<button type="submit" class="btn-flat success"><i class="icon-ok icon-white"></i> @lang('general.save')</button>
 										</div>
 								</div>

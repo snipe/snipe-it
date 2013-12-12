@@ -15,7 +15,7 @@
 
 <div class="row header">
     <div class="col-md-12">
-    	<a href="{{ route('manufacturers') }}" class="btn-flat gray pull-right"><i class="icon-plus-sign icon-white"></i> Back</a>
+    	<a href="{{ URL::previous() }}" class="btn-flat gray pull-right"><i class="icon-plus-sign icon-white"></i> Back</a>
 		<h3>
 		@if ($manufacturer->id)
 		Update Manufacturer
@@ -52,7 +52,7 @@
 		<label class="col-md-2 control-label"></label>
 			<div class="col-md-7">
 				@if ($manufacturer->id)
-				<a class="btn btn-link" href="{{ route('view/manufacturer', $manufacturer->id) }}">@lang('general.cancel')</a>
+				<a class="btn btn-link" href="{{ URL::previous() }}">@lang('general.cancel')</a>
 				@else
 				<a class="btn btn-link" href="{{ route('manufacturers') }}">@lang('general.cancel')</a>
 				@endif
