@@ -170,10 +170,15 @@ View User {{ $user->fullName() }} ::
 
                         <h6>Contact  {{ $user->first_name }}</h6>
 
-                        		@if ($user->location_id)
-                        			<iframe width="300" height="133" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.com/maps?&amp;q={{ $user->userloc->address }},{{ $user->userloc->city }},{{ $user->userloc->state }},{{ $user->userloc->country }}&amp;output=embed"></iframe>
-                        		@endif
+
+						@if ($user->location_id)
+							<iframe width="300" height="133" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.com/maps?&amp;q={{ $user->userloc->address }},{{ $user->userloc->city }},{{ $user->userloc->state }},{{ $user->userloc->country }}&amp;output=embed"></iframe>
+						@endif
 						<ul>
+						@if ($user->manager)
+							<strong>Manager:</strong> {{ $user->manager->fullName() }}
+						@endif
+
 						@if ($user->location_id)
 							<li>{{ $user->userloc->address }} {{ $user->userloc->address2 }}</li>
 							<li>{{ $user->userloc->city }}, {{ $user->userloc->state }} {{ $user->userloc->zip }}<br /><br /></li>

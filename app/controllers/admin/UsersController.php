@@ -92,9 +92,15 @@ class UsersController extends AdminController {
 		$this->encodePermissions($selectedPermissions);
 
 		$location_list = array('' => '') + Location::lists('name', 'id');
+		$manager_list = array('' => 'Select a User') + DB::table('users')
+			->select(DB::raw('concat(first_name," ",last_name) as full_name, id'))
+			->whereNull('deleted_at','and')
+			->orderBy('last_name', 'asc')
+			->orderBy('first_name', 'asc')
+			->lists('full_name', 'id');
 
 		// Show the page
-		return View::make('backend/users/create', compact('groups', 'selectedGroups', 'permissions', 'selectedPermissions'))->with('location_list',$location_list);
+		return View::make('backend/users/create', compact('groups', 'selectedGroups', 'permissions', 'selectedPermissions'))->with('location_list',$location_list)->with('manager_list',$manager_list);
 	}
 
 	/**
@@ -194,8 +200,13 @@ class UsersController extends AdminController {
 			$this->encodeAllPermissions($permissions);
 
 			$location_list = array('' => '') + Location::lists('name', 'id');
-
-
+			$manager_list = array('' => 'Select a User') + DB::table('users')
+			->select(DB::raw('concat(first_name," ",last_name) as full_name, id'))
+			->whereNull('deleted_at')
+			->where('id','!=',$id)
+			->orderBy('last_name', 'asc')
+			->orderBy('first_name', 'asc')
+			->lists('full_name', 'id');
 
 		}
 		catch (UserNotFoundException $e)
@@ -208,7 +219,9 @@ class UsersController extends AdminController {
 		}
 
 		// Show the page
-		return View::make('backend/users/edit', compact('user', 'groups', 'userGroups', 'permissions', 'userPermissions'))->with('location_list',$location_list);
+		return View::make('backend/users/edit', compact('user', 'groups', 'userGroups', 'permissions', 'userPermissions'))
+		->with('location_list',$location_list)
+		->with('manager_list',$manager_list);
 	}
 
 	/**
@@ -272,6 +285,7 @@ class UsersController extends AdminController {
 			$user->jobtitle = Input::get('jobtitle');
 			$user->phone = Input::get('phone');
 			$user->location_id = Input::get('location_id');
+			$user->manager_id = Input::get('manager_id');
 
 
 			// Do we want to update the user password?

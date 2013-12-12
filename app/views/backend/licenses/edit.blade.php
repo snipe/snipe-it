@@ -15,12 +15,7 @@
 
 <div class="row header">
     <div class="col-md-12">
-    	@if ($license->id)
-			<a href="{{ route('view/license',$license->id) }}" class="btn-flat gray pull-right"><i class="icon-circle-arrow-left icon-white"></i> Back</a>
-		@else
-			<a href="{{ route('licenses') }}" class="btn-flat gray pull-right right"><i class="icon-circle-arrow-left icon-white"></i> Back</a>
-		@endif
-
+			<a href="{{ URL::previous() }}" class="btn-flat gray pull-right right"><i class="icon-circle-arrow-left icon-white"></i> Back</a>
 		<h3>
 		@if ($license->id)
 			Update License
@@ -130,11 +125,8 @@
 				<div class="form-group">
 				<label class="col-md-3 control-label"></label>
 					<div class="col-md-7">
-						@if ($license->id)
-						<a class="btn btn-link" href="{{ route('view/license', $license->id) }}">Cancel</a>
-						@else
-						<a class="btn btn-link" href="{{ route('licenses') }}">Cancel</a>
-						@endif
+
+						<a class="btn btn-link" href="{{ URL::previous() }}">Cancel</a>
 						<button type="submit" class="btn btn-success"><i class="icon-ok icon-white"></i> Save</button>
 					</div>
 				</div>

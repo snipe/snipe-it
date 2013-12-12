@@ -11,7 +11,7 @@
 <div class="page-header">
 
 		<div class="pull-right">
-			<a href="{{ route('hardware') }}" class="btn-flat gray"><i class="icon-circle-arrow-left icon-white"></i> Back</a>
+			<a href="{{ URL::previous() }}" class="btn-flat gray"><i class="icon-circle-arrow-left icon-white"></i> Back</a>
 		</div>
 
 		<h3>Clone Asset</h3>
@@ -133,7 +133,7 @@
 	<!-- Form actions -->
 	<div class="form-group">
 		<div class="controls">
-			<a class="btn btn-link" href="{{ route('hardware') }}">Cancel</a>
+			<a class="btn btn-link" href="{{ URL::previous() }}">Cancel</a>
 			<button type="submit" class="btn-flat success"><i class="icon-ok icon-white"></i> Save</button>
 		</div>
 	</div>
