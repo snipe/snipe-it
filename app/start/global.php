@@ -95,5 +95,10 @@ App::down(function()
 |
 */
 
+App::error(function(\Illuminate\Session\TokenMismatchException $exception)
+{
+    return Redirect::route('signin')->with('error','Your login session has expired. Please try logging in again.');
+});
+
 require app_path().'/filters.php';
 require app_path().'/validators.php';
