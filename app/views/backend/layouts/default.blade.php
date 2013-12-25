@@ -234,72 +234,83 @@
 
 		@if ((Sentry::check()) && (Sentry::getUser()->hasAccess('admin')))
         <!-- upper main stats -->
-            <div id="main-stats">
+        <div id="main-stats">
             <div class="row stats-row">
                 <div class="col-md-3 col-sm-3 stat">
                     <div class="data">
-                            <a href="{{ URL::to('hardware') }}">
-                            	<span class="number">{{ number_format(Asset::assetcount()) }}</span>
-                           	 	<span style="color:black">total assets</span>
-                            </a>
-                        </div>
+                        <a href="{{ URL::to('hardware') }}">
+                            <span class="number">{{ number_format(Asset::assetcount()) }}</span>
+                            <span style="color:black">total assets</span>
+                        </a>
                     </div>
-                    <div class="col-md-3 col-sm-3 stat">
-                        <div class="data">
-                            <a href="{{ URL::to('hardware?RTD=true') }}">
-                            	<span class="number">{{ number_format(Asset::availassetcount()) }}</span>
-                            	<span style="color:black">assets available</span>
-                            </a>
-                        </div>
+                </div>
+                <div class="col-md-3 col-sm-3 stat">
+                    <div class="data">
+                        <a href="{{ URL::to('hardware?RTD=true') }}">
+                            <span class="number">{{ number_format(Asset::availassetcount()) }}</span>
+                            <span style="color:black">assets available</span>
+                        </a>
                     </div>
-                    <div class="col-md-3 col-sm-3 stat">
-                        <div class="data">
-                            <a href="{{ URL::to('admin/licenses') }}">
-                            	<span class="number">{{ number_format(License::assetcount()) }}</span>
-                            	<span style="color:black">total licenses</span>
-                            </a>
-                        </div>
+                </div>
+                <div class="col-md-3 col-sm-3 stat">
+                    <div class="data">
+                        <a href="{{ URL::to('admin/licenses') }}">
+                            <span class="number">{{ number_format(License::assetcount()) }}</span>
+                            <span style="color:black">total licenses</span>
+                        </a>
                     </div>
-                    <div class="col-md-3 col-sm-3 stat last">
-                        <div class="data">
-                        	<a href="{{ URL::to('admin/licenses') }}">
-                            	<span class="number">{{ number_format(License::availassetcount()) }}</span>
-                            	<span style="color:black">licenses available</span>
-                            </a>
-                        </div>
+                </div>
+                <div class="col-md-3 col-sm-3 stat last">
+                    <div class="data">
+                        <a href="{{ URL::to('admin/licenses') }}">
+                            <span class="number">{{ number_format(License::availassetcount()) }}</span>
+                            <span style="color:black">licenses available</span>
+                        </a>
                     </div>
                 </div>
             </div>
-            <!-- end upper main stats -->
-            @endif
+        </div>
+        <!-- end upper main stats -->
+        @endif
 
+        <div id="pad-wrapper">
 
-
-            <div id="pad-wrapper">
-
-
-                 <!-- Notifications -->
-				@include('frontend/notifications')
+            <!-- Notifications -->
+            @include('frontend/notifications')
 
 			<!-- Content -->
 			@yield('content')
 
-                    </div>
-                </div>
-		  </div>
-       </div>
+            </div>
+		</div>
+    </div>
 
 
 	<footer>
-    <div id="footer">
+        <div id="footer">
       		<div class="container">
         		<p class="muted credit"><a href="http://snipeitapp.com">Snipe IT</a> is a free open source
         		project by <a href="http://twitter.com/snipeyhead">@snipeyhead</a>. <a href="https://github.com/snipe/snipe-it">Fork it here</a>!</p>
       		</div>
-    </div>
+        </div>
 	</footer>
 
     <!-- end main container -->
+    
+    <div class="modal fade" id="dataConfirmModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title" id="myModalLabel"></h4>
+                </div>
+                <div class="modal-body"></div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button><a class="btn btn-danger" id="dataConfirmOK">@lang('general.yes')</a>
+                </div>
+            </div>
+        </div>
+    </div>
 
 	<!-- scripts -->
     <script src="{{ asset('assets/js/bootstrap.min.js') }}"></script>
@@ -312,16 +323,12 @@
     <script type="text/javascript">
         $(function () {
 
-
-			$(document).ready(function() {
-
             $('#example').dataTable({
                 "sPaginationType": "full_numbers",
                 "iDisplayLength": {{ Setting::getSettings()->per_page }},
                 "aLengthMenu": [[{{ Setting::getSettings()->per_page }}, -1], [{{ Setting::getSettings()->per_page }}, "All"]],
                 "aoColumnDefs": [{ 'bSortable': false, 'aTargets': [ 'actions' ] }]
             });
-        	});
 
 			$('#nosorting').dataTable({
                 "sPaginationType": "full_numbers",
@@ -362,30 +369,20 @@
 
             // confirm delete modal
             $('.delete-asset').click(function(evnt) {
-			var href = $(this).attr('href');
-			var message = $(this).attr('data-content');
-            var title = $(this).attr('data-title');
+                var href = $(this).attr('href');
+                var message = $(this).attr('data-content');
+                var title = $(this).attr('data-title');
 
-			if (!$('#dataConfirmModal').length) {
-				$('body').append('<div class="modal fade" id="dataConfirmModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"><div class="modal-dialog"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button><h4 class="modal-title" id="myModalLabel">'+title+'</h4></div><div class="modal-body">'+message+'</div><div class="modal-footer"><button type="button" class="btn btn-default" data-dismiss="modal">Close</button><a class="btn btn-danger" id="dataConfirmOK">Yes</a></div></div></div></div>');
-			}
-
-
-
-			$('#dataConfirmModal').find('.modal-body').text(message);
-			$('#dataConfirmOK').attr('href', href);
-			$('#dataConfirmModal').modal({show:true});
-			})
-
-
+                $('#myModalLabel').text(title);
+                $('#dataConfirmModal .modal-body').text(message);
+                $('#dataConfirmOK').attr('href', href);
+                $('#dataConfirmModal').modal({show:true});
+                
+                return false;
         	});
+        });
 
- </script>
-
-
-
-
-
+    </script>
 
 	</body>
 </html>
