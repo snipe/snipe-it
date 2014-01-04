@@ -1,23 +1,26 @@
 @extends('backend/layouts/default')
 
+@section('title0')
+    @if (Input::get('Pending') || Input::get('Undeployable') || Input::get('RTD')  || Input::get('Deployed'))
+        @if (Input::get('Pending'))
+            @lang('general.pending')
+        @elseif (Input::get('RTD'))
+            @lang('general.ready_to_deploy')
+        @elseif (Input::get('Undeployable'))
+            @lang('general.undeployable')
+        @elseif (Input::get('Deployed'))
+            @lang('general.deployed')
+        @endif
+    @else
+            @lang('general.all')
+    @endif
+    
+    @lang('general.assets')
+@stop
+
 {{-- Page title --}}
 @section('title')
-@if (Input::get('Pending') || Input::get('Undeployable') || Input::get('RTD')  || Input::get('Deployed'))
-	@if (Input::get('Pending'))
-		Pending
-	@elseif (Input::get('RTD'))
-		Ready to Deploy
-	@elseif (Input::get('Undeployable'))
-		Un-deployable
-	@elseif (Input::get('Deployed'))
-		Deployed
-	@endif
-@else
-		All
-@endif
-
-Assets ::
-@parent
+    @yield('title0') :: @parent
 @stop
 
 {{-- Page content --}}
@@ -26,23 +29,8 @@ Assets ::
 
 <div class="row header">
     <div class="col-md-12">
-    	<a href="{{ route('create/hardware') }}" class="btn btn-success pull-right"><i class="icon-plus-sign icon-white"></i> Create New</a>
-		<h3>
-		@if (Input::get('Pending') || Input::get('Undeployable') || Input::get('RTD')  || Input::get('Deployed'))
-			@if (Input::get('Pending'))
-				Pending
-			@elseif (Input::get('RTD'))
-				Ready to Deploy
-			@elseif (Input::get('Undeployable'))
-				Un-deployable
-			@elseif (Input::get('Deployed'))
-				Deployed
-			@endif
-		@else
-			All
-		@endif
-				Assets
-		</h3>
+    	<a href="{{ route('create/hardware') }}" class="btn btn-success pull-right"><i class="icon-plus-sign icon-white"></i> @lang('general.create')</a>
+		<h3>@yield('title0')</h3>
 	</div>
 </div>
 
@@ -58,7 +46,7 @@ Assets ::
 			<th class="col-md-3" bSortable="true">@lang('admin/hardware/table.title')</th>
 			<th class="col-md-2" bSortable="true">@lang('admin/hardware/table.serial')</th>
 			@if (Input::get('Pending') || Input::get('Undeployable') || Input::get('RTD'))
-			<th class="col-md-2" bSortable="true">Status</th>
+			<th class="col-md-2" bSortable="true">@lang('general.status')</th>
 			@else
 			<th class="col-md-2" bSortable="true">@lang('admin/hardware/table.checkoutto')</th>
 			<th class="col-md-2" bSortable="true">@lang('admin/hardware/table.location')</th>
@@ -78,15 +66,14 @@ Assets ::
 			@if (Input::get('Pending') || Input::get('Undeployable') || Input::get('RTD'))
 				<td>
 					@if (Input::get('Pending'))
-						Pending
+						@lang('general.pending')
 					@elseif (Input::get('RTD'))
-						Ready to Deploy
+						@lang('general.ready_to_deploy')
 					@elseif (Input::get('Undeployable'))
 						@if ($asset->assetstatus)
 						{{ $asset->assetstatus->name }}
 						@endif
-
-					@endif
+                    @endif
 				</td>
 			@else
 				<td>
@@ -117,9 +104,9 @@ Assets ::
 			<td>
 			@if ($asset->status_id < 1 )
 			@if ($asset->assigned_to != 0)
-				<a href="{{ route('checkin/hardware', $asset->id) }}" class="btn btn-primary">Checkin</a>
+				<a href="{{ route('checkin/hardware', $asset->id) }}" class="btn btn-primary">@lang('general.checkin')</a>
 			@else
-				<a href="{{ route('checkout/hardware', $asset->id) }}" class="btn btn-info">Checkout</a>
+				<a href="{{ route('checkout/hardware', $asset->id) }}" class="btn btn-info">@lang('general.checkout')</a>
 			@endif
 			@endif
 			</td>

@@ -86,95 +86,95 @@
 
 				 <li class="dropdown">
                     <a href="#" class="dropdown-toggle hidden-xs hidden-sm" data-toggle="dropdown">
-                        <i class="icon-plus"></i> Create New
+                        <i class="icon-plus"></i> @lang('general.create')
                         <b class="caret"></b>
                     </a>
                     <ul class="dropdown-menu">
                        <li {{ (Request::is('hardware/create') ? 'class="active"' : '') }}>
                        		<a href="{{ route('create/hardware') }}">
                        			<i class="icon-plus"></i>
-                       			Asset</a>
+                       			@lang('general.asset')</a>
                        	</li>
 						<li {{ (Request::is('admin/licenses/create') ? 'class="active"' : '') }}>
 							<a href="{{ route('create/licenses') }}">
 								<i class="icon-plus"></i>
-								License</a>
+								@lang('general.license')</a>
 						</li>
 						<li {{ (Request::is('admin/users/create') ? 'class="active"' : '') }}>
 							<a href="{{ route('create/user') }}">
 							<i class="icon-plus"></i>
-							User</a>
+							@lang('general.user')</a>
 						</li>
                     </ul>
                 </li>
 
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle hidden-xs hidden-sm" data-toggle="dropdown">
-                        Welcome, {{ Sentry::getUser()->first_name }}
+                        {{ Lang::get('general.welcome', array('name' => Sentry::getUser()->first_name)) }}
                         <b class="caret"></b>
                     </a>
                     <ul class="dropdown-menu">
                        @if(Sentry::getUser()->hasAccess('admin'))
 						<li>
 							<a href="{{ route('app') }}">
-								<i class="icon-cog"></i> Settings
+								<i class="icon-cog"></i> @lang('general.settings')
 							</a>
 						</li>
 						@endif
 						<li{{ (Request::is('account/profile') ? ' class="active"' : '') }}>
 							<a href="{{ route('profile') }}">
-								<i class="icon-user"></i> Your profile
+								<i class="icon-user"></i> @lang('general.profile')
 							</a>
 						</li>
 						<li class="divider"></li>
 						<li>
 							<a href="{{ route('logout') }}">
 								<i class="icon-off"></i>
-								Logout
+								@lang('general.logout')
 							</a>
 						</li>
                     </ul>
                 </li>
                 <li class="dropdown{{ (Request::is('admin/users*|admin/groups*') ? ' active' : '') }}  hidden-phone">
 					<a class="dropdown-toggle" data-toggle="dropdown" href="{{ URL::to('admin/users') }}">
-						<i class="icon-wrench icon-white"></i> Admin <span class="caret"></span>
+						<i class="icon-wrench icon-white"></i> @lang('general.admin') <span class="caret"></span>
 					</a>
 					<ul class="dropdown-menu">
 						<li{{ (Request::is('admin/groups*') ? ' class="active"' : '') }}>
 							<a href="{{ URL::to('admin/groups') }}">
-								<i class="icon-group"></i> Groups
+								<i class="icon-group"></i> @lang('general.groups')
 							</a>
 						</li>
 						<li{{ (Request::is('admin/settings/statuslabels*') ? ' class="active"' : '') }}>
 							<a href="{{ URL::to('admin/settings/statuslabels') }}">
-								<i class="icon-list"></i> Status Labels
+								<i class="icon-list"></i> @lang('general.status_labels')
 							</a>
 						</li>
 						<li{{ (Request::is('admin/settings/manufacturers*') ? ' class="active"' : '') }}>
 							<a href="{{ URL::to('admin/settings/manufacturers') }}">
-								<i class="icon-briefcase"></i> Manufacturers
+								<i class="icon-briefcase"></i> @lang('general.manufacturers')
 							</a>
 						</li>
 						<li{{ (Request::is('admin/settings/categories*') ? ' class="active"' : '') }}>
 							<a href="{{ URL::to('admin/settings/categories') }}">
-								<i class="icon-th"></i> Categories
+								<i class="icon-th"></i> @lang('general.categories')
 							</a>
 						</li>
 						<li{{ (Request::is('admin/settings/locations*') ? ' class="active"' : '') }}>
 							<a href="{{ URL::to('admin/settings/locations') }}">
-								<i class="icon-globe"></i> Locations
+								<i class="icon-globe"></i> @lang('general.locations')
 							</a>
 						</li>
 						<li{{ (Request::is('admin/settings/depreciations*') ? ' class="active"' : '') }}>
 							<a href="{{ URL::to('admin/settings/depreciations') }}">
-								<i class="icon-arrow-down"></i> Depreciation
+								<i class="icon-arrow-down"></i> @lang('general.depreciation')
 							</a>
 						</li>
 					</ul>
 				</li>
 
 			@else
-					<li {{ (Request::is('auth/signin') ? 'class="active"' : '') }}><a href="{{ route('signin') }}">Sign in</a></li>
+					<li {{ (Request::is('auth/signin') ? 'class="active"' : '') }}><a href="{{ route('signin') }}">@lang('general.sign_in')</a></li>
             @endif
             </ul>
         </div>
@@ -190,17 +190,17 @@
             <li{{ (Request::is('hardware*') ? ' class="active"><div class="pointer"><div class="arrow"></div><div class="arrow_border"></div></div>' : '>') }}
                 <a href="#" class="dropdown-toggle">
                     <i class="icon-barcode"></i>
-                    <span>Assets</span>
+                    <span>@lang('general.assets')</span>
                     <i class="icon-chevron-down"></i>
                 </a>
 
                 <ul class="submenu{{ (Request::is('hardware*') ? ' active' : '') }}">
-                    <li><a href="{{ URL::to('hardware?Deployed=true') }}" {{ (Request::query('Deployed') ? ' class="active"' : '') }} >Deployed</a></li>
-                    <li><a href="{{ URL::to('hardware?RTD=true') }}" {{ (Request::query('RTD') ? ' class="active"' : '') }} >Ready to Deploy</a></li>
-                    <li><a href="{{ URL::to('hardware?Pending=true') }}" {{ (Request::query('Pending') ? ' class="active"' : '') }} >Pending</a></li>
-                    <li><a href="{{ URL::to('hardware?Undeployable=true') }}" {{ (Request::query('Undeployable') ? ' class="active"' : '') }} >Un-Deployable</a></li>
-                    <li><a href="{{ URL::to('hardware') }}">List All</a></li>
-                    <li><a href="{{ URL::to('hardware/models') }}" {{ (Request::is('hardware/models*') ? ' class="active"' : '') }} >Asset Models</a></li>
+                    <li><a href="{{ URL::to('hardware?Deployed=true') }}" {{ (Request::query('Deployed') ? ' class="active"' : '') }} >@lang('general.deployed')</a></li>
+                    <li><a href="{{ URL::to('hardware?RTD=true') }}" {{ (Request::query('RTD') ? ' class="active"' : '') }} >@lang('general.ready_to_deploy')</a></li>
+                    <li><a href="{{ URL::to('hardware?Pending=true') }}" {{ (Request::query('Pending') ? ' class="active"' : '') }} >@lang('general.pending')</a></li>
+                    <li><a href="{{ URL::to('hardware?Undeployable=true') }}" {{ (Request::query('Undeployable') ? ' class="active"' : '') }} >@lang('general.undeployable')</a></li>
+                    <li><a href="{{ URL::to('hardware') }}">@lang('general.list_all')</a></li>
+                    <li><a href="{{ URL::to('hardware/models') }}" {{ (Request::is('hardware/models*') ? ' class="active"' : '') }} >@lang('general.asset_models')</a></li>
 
                 </ul>
             </li>
@@ -208,19 +208,19 @@
             <li{{ (Request::is('admin/licenses*') ? ' class="active"><div class="pointer"><div class="arrow"></div><div class="arrow_border"></div></div>' : '>') }}
             	<a href="{{ URL::to('admin/licenses') }}">
             		<i class="icon-certificate"></i>
-            		 <span>Licenses</span>
+            		 <span>@lang('general.licenses')</span>
             	</a>
             </li>
             <li{{ (Request::is('admin/users*') ? ' class="active"><div class="pointer"><div class="arrow"></div><div class="arrow_border"></div></div>' : '>') }}
             	<a href="{{ URL::to('admin/users') }}">
                     <i class="icon-group"></i>
-                    <span>People</span>
+                    <span>@lang('general.people')</span>
                 </a>
             </li>
             <li{{ (Request::is('reports*') ? ' class="active"><div class="pointer"><div class="arrow"></div><div class="arrow_border"></div></div>' : '>') }}
                 <a href="{{ URL::to('reports') }}">
                     <i class="icon-signal"></i>
-                    <span>Reports</span>
+                    <span>@lang('general.reports')</span>
                 </a>
             </li>
         </ul>
@@ -238,38 +238,38 @@
             <div class="row stats-row">
                 <div class="col-md-3 col-sm-3 stat">
                     <div class="data">
-                        <a href="{{ URL::to('hardware') }}">
-                            <span class="number">{{ number_format(Asset::assetcount()) }}</span>
-                            <span style="color:black">total assets</span>
-                        </a>
+                            <a href="{{ URL::to('hardware') }}">
+                            	<span class="number">{{ number_format(Asset::assetcount()) }}</span>
+                           	 	<span style="color:black">@lang('general.total_assets')</span>
+                            </a>
+                        </div>
                     </div>
-                </div>
-                <div class="col-md-3 col-sm-3 stat">
-                    <div class="data">
-                        <a href="{{ URL::to('hardware?RTD=true') }}">
-                            <span class="number">{{ number_format(Asset::availassetcount()) }}</span>
-                            <span style="color:black">assets available</span>
-                        </a>
+                    <div class="col-md-3 col-sm-3 stat">
+                        <div class="data">
+                            <a href="{{ URL::to('hardware?RTD=true') }}">
+                            	<span class="number">{{ number_format(Asset::availassetcount()) }}</span>
+                            	<span style="color:black">@lang('general.assets_available')</span>
+                            </a>
+                        </div>
                     </div>
-                </div>
-                <div class="col-md-3 col-sm-3 stat">
-                    <div class="data">
-                        <a href="{{ URL::to('admin/licenses') }}">
-                            <span class="number">{{ number_format(License::assetcount()) }}</span>
-                            <span style="color:black">total licenses</span>
-                        </a>
+                    <div class="col-md-3 col-sm-3 stat">
+                        <div class="data">
+                            <a href="{{ URL::to('admin/licenses') }}">
+                            	<span class="number">{{ number_format(License::assetcount()) }}</span>
+                            	<span style="color:black">@lang('general.total_licenses')</span>
+                            </a>
+                        </div>
                     </div>
-                </div>
-                <div class="col-md-3 col-sm-3 stat last">
-                    <div class="data">
-                        <a href="{{ URL::to('admin/licenses') }}">
-                            <span class="number">{{ number_format(License::availassetcount()) }}</span>
-                            <span style="color:black">licenses available</span>
-                        </a>
+                    <div class="col-md-3 col-sm-3 stat last">
+                        <div class="data">
+                        	<a href="{{ URL::to('admin/licenses') }}">
+                            	<span class="number">{{ number_format(License::availassetcount()) }}</span>
+                            	<span style="color:black">@lang('general.licenses_available')</span>
+                            </a>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
         <!-- end upper main stats -->
         @endif
 
@@ -296,7 +296,7 @@
 	</footer>
 
     <!-- end main container -->
-    
+
     <div class="modal fade" id="dataConfirmModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -377,7 +377,7 @@
                 $('#dataConfirmModal .modal-body').text(message);
                 $('#dataConfirmOK').attr('href', href);
                 $('#dataConfirmModal').modal({show:true});
-                
+
                 return false;
         	});
         });
