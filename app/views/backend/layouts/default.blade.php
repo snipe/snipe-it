@@ -270,21 +270,22 @@
                     </div>
                 </div>
             </div>
+
         <!-- end upper main stats -->
         @endif
 
-        <div id="pad-wrapper">
+				<div id="pad-wrapper">
 
-            <!-- Notifications -->
-            @include('frontend/notifications')
+						<!-- Notifications -->
+						@include('frontend/notifications')
 
-			<!-- Content -->
-			@yield('content')
+						<!-- Content -->
+						@yield('content')
 
-            </div>
-		</div>
-    </div>
-
+				</div>
+			</div>
+    	</div>
+	</div>
 
 	<footer>
         <div id="footer">
