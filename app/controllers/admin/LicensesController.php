@@ -45,7 +45,7 @@ class LicensesController extends AdminController {
 		// Show the page
 		$license_options = array('0' => 'Top Level') + License::lists('name', 'id');
 		// Show the page
-		$depreciation_list = array('0' => 'Do Not Depreciate') + Depreciation::lists('name', 'id');
+		$depreciation_list = array('0' => Lang::get('admin/licenses/form.no_depreciation')) + Depreciation::lists('name', 'id');
 		return View::make('backend/licenses/edit')->with('license_options',$license_options)->with('depreciation_list',$depreciation_list)->with('license',new License);
 	}
 
@@ -143,7 +143,7 @@ class LicensesController extends AdminController {
 
 		// Show the page
 		$license_options = array('' => 'Top Level') + DB::table('assets')->where('id', '!=', $licenseId)->lists('name', 'id');
-		$depreciation_list = array('0' => 'Do Not Depreciate') + Depreciation::lists('name', 'id');
+		$depreciation_list = array('0' => Lang::get('admin/licenses/form.no_depreciation')) + Depreciation::lists('name', 'id');
 		return View::make('backend/licenses/edit', compact('license'))->with('license_options',$license_options)->with('depreciation_list',$depreciation_list);
 	}
 
