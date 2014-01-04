@@ -9,11 +9,6 @@
 |
 */
 
-
-
-Route::when('admin/*', 'crsf', array('post'));
-Route::when('hardware/*', 'crsf', array('post'));
-
 Route::group(array('prefix' => 'hardware'), function()
 {
 
