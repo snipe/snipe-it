@@ -99,7 +99,7 @@ This will be used to send emails to your users, when they register and they requ
 
 Copy the example app config `app/config/local/app.example.php` to `app.php`.
 
-Update the file `app/config/local/app.php` with your setting URL settings.
+Update the file `app/config/local/app.php` with your URL settings.
 
 	vi app/config/local/app.php
 
