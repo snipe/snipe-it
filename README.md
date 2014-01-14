@@ -80,7 +80,7 @@ your environmental variable section of `bootstrap/start.php` might look like thi
 
 #### 2.2) Setup Your Database
 
-Copy the example database config `app/config/local/database.example.php` to `database.php`.
+Copy the example database config `app/config/local/database.example.php` to `app/config/local/database.php`.
 Update the file `app/config/local/database.php` with your database name and credentials.
 
     vi app/config/local/database.php
@@ -88,7 +88,7 @@ Update the file `app/config/local/database.php` with your database name and cred
 
 #### 2.3) Setup Mail Settings
 
-Copy the example mail config `app/config/local/mail.example.php` to `mail.php`.
+Copy the example mail config `app/config/local/mail.example.php` to `app/config/local/mail.php`.
 Update the file `app/config/local/mail.php` with your mail settings.
 
     vi app/config/local/mail.php
@@ -97,7 +97,7 @@ This will be used to send emails to your users, when they register and they requ
 
 #### 2.4) Adjust the application settings.
 
-Copy the example app config `app/config/local/app.example.php` to `app.php`.
+Copy the example app config `app/config/local/app.example.php` to `app/config/local/app.php`.
 
 Update the file `app/config/local/app.php` with your URL settings.
 
