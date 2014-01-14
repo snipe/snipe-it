@@ -51,7 +51,7 @@ Forgetting to do this can mean your DB might end up out of sync with the new fil
 
 #### 2.1) Adjust Environments
 
-Update the file `boostrap/start.php' under the section `Detect The Application Environment`.
+Update the file `boostrap/start.php` under the section `Detect The Application Environment`.
 
 	vi bootstrap/start.php
 
