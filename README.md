@@ -47,16 +47,46 @@ Forgetting to do this can mean your DB might end up out of sync with the new fil
 
 -----
 
-### 2) Setup Database and Mail Settings
+### 2) Setup Environment, Database and Mail Settings
 
-#### 2.1) Setup Your Database
+#### 2.1) Adjust Environments
+
+Update the file `boostrap/start.php' under the section `Detect The Application Environment`.
+
+	vi bootstrap/start.php
+
+-----
+
+*IMPORTANT*: Since the initial install is done via command line (which cannot grok your apache hostname), it's important
+to include your machine name in the environmental array, or to pass the environmental override as a command line argument (using ` --env=local`).
+Otherwise, your configs will default to production (as Laravel does).
+
+To find out your local machine's hostname, type `hostname` from a terminal prompt on the machine you're installing it on. If you
+encounter an error on your install, saying that the `driver` variable isn't defined, something got botched in your
+environmental settings and it's defaulting to production.
+
+So for example, if you're installing this locally on your Mac named SnipeMBP and with a local Apache hostname of http://snipe-it.local:8888,
+your environmental variable section of `bootstrap/start.php` might look like this:
+
+	$env = $app->detectEnvironment(array(
+
+		'local'		 	=> array('SnipeMBP','http://*.local', '*.local*', '127.0.0.1', 'localhost*'),
+		'staging' 		=> array('http://staging.yourserver.com'),
+		'production' 	=> array('http://www.yourserver.com')
+	));
+
+
+-----
+
+#### 2.2) Setup Your Database
 
 Copy the example database config `app/config/local/database.example.php` to `database.php`.
 Update the file `app/config/local/database.php` with your database name and credentials.
 
     vi app/config/local/database.php
 
-#### 2.2) Setup Mail Settings
+
+#### 2.3) Setup Mail Settings
 
 Copy the example mail config `app/config/local/mail.example.php` to `mail.php`.
 Update the file `app/config/local/mail.php` with your mail settings.
@@ -65,7 +95,7 @@ Update the file `app/config/local/mail.php` with your mail settings.
 
 This will be used to send emails to your users, when they register and they request a password reset.
 
-#### 2.3) Adjust the application settings.
+#### 2.4) Adjust the application settings.
 
 Copy the example app config `app/config/local/app.example.php` to `app.php`.
 
@@ -77,15 +107,10 @@ You should also change your secret key here -- if you prefer to have your key ra
 
 	php artisan key:generate --env=local
 
-#### 2.4) Adjust Environments
-
-Update the file `boostrap/start.php' under the section `Detect The Application Environment`.
-
-	vi bootstrap/start.php
 
 #### 2.5) Additional Adjustments
 
-The app is configured to automatically detect if you're in a local, staging, or production environment.  Before deploying to a staging or production environment, follow sets 2.1, 2.2, and 2.3 above to tweak each environment as nescessary.  Configuration files for each environment can be found in app/config/{environment} (local, staging, and production).
+The app is configured to automatically detect if you're in a local, staging, or production environment.  Before deploying to a staging or production environment, follow sets 2.1, 2.2, and 2.3 above to tweak each environment as necessary.  Configuration files for each environment can be found in app/config/{environment} (local, staging, and production).
 
 -----
 
@@ -176,6 +201,13 @@ The profiler is enabled by default if you have debug set to true in your app.php
 If you're doing any development on this, make sure you purge the auto-loader if you see any errors stating the new model you created can't be found, etc, otherwise your new models won't be grokked.
 
 	php composer.phar dump-autoload
+
+
+-----
+
+### Application logs
+
+Application logs for this app are found in `app/storage/logs`, as is customary of Laravel.
 
 -----
 
