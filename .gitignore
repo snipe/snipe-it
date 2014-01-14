@@ -5,12 +5,8 @@ composer.phar
 /app/config/database.php
 /app/config/mail.php
 /app/database/*.sqlite
-
 /app/storage/meta/services.json
-
 /app/config/*/mail.php
 /app/config/*/database.php
 /app/config/*/app.php
-
-/app/config/testing/database.php
 public/packages/barryvdh/*
