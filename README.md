@@ -140,7 +140,7 @@ Use the following command to create your default user, user groups and run all t
 
 ### 6) Fix permissions
 
-You'll need to make sure that the app/storage directory is writable by your webserver, since caches and log files get written there. You should use the minimum permissions available for writing, based on how you've got your webserver configured.
+You'll need to make sure that the `app/storage` directory is writable by your webserver, since caches and log files get written there. You should use the minimum permissions available for writing, based on how you've got your webserver configured.
 
 	chmod -R 755 app/storage
 
