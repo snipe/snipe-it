@@ -10,3 +10,5 @@ composer.phar
 /app/config/*/database.php
 /app/config/*/app.php
 public/packages/barryvdh/*
+/app/storage/views/*
+/app/storage/logs/*
