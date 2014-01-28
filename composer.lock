@@ -3,8 +3,50 @@
         "This file locks the dependencies of your project to a known state",
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
     ],
-    "hash": "2ff29b285767430e11356a6316d24a84",
+    "hash": "59df281fac2656a9009c1e5a84946add",
     "packages": [
+        {
+            "name": "bacon/bacon-qr-code",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Bacon/BaconQrCode.git",
+                "reference": "0537ed27917f5ae26e5837ac4bfd837171d0b848"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Bacon/BaconQrCode/zipball/0537ed27917f5ae26e5837ac4bfd837171d0b848",
+                "reference": "0537ed27917f5ae26e5837ac4bfd837171d0b848",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.3"
+            },
+            "suggest": {
+                "ext-gd": "to generate QR code images"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "BaconQrCode": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-2-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Ben Scholzen 'DASPRiD'",
+                    "email": "mail@dasprids.de",
+                    "homepage": "http://www.dasprids.de",
+                    "role": "Developer"
+                }
+            ],
+            "description": "BaconQrCode is a QR code generator for PHP.",
+            "homepage": "https://github.com/Bacon/BaconQrCode",
+            "time": "2013-08-27 10:20:42"
+        },
         {
             "name": "barryvdh/laravel-debugbar",
             "version": "dev-master",
@@ -2660,7 +2702,8 @@
     "minimum-stability": "dev",
     "stability-flags": {
         "barryvdh/laravel-debugbar": 20,
-        "chumper/datatable": 20
+        "chumper/datatable": 20,
+        "bacon/bacon-qr-code": 20
     },
     "platform": [
 

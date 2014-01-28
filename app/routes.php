@@ -26,6 +26,7 @@ Route::group(array('prefix' => 'hardware'), function()
 	Route::get('{assetId}/checkin', array('as' => 'checkin/hardware', 'uses' => 'Controllers\Admin\AssetsController@getCheckin'));
 	Route::post('{assetId}/checkin', 'Controllers\Admin\AssetsController@postCheckin');
 	Route::get('{assetId}/view', array('as' => 'view/hardware', 'uses' => 'Controllers\Admin\AssetsController@getView'));
+	Route::get('{assetId}_qr_code.png', array('as' => 'qr_code/hardware', 'uses' => 'Controllers\Admin\AssetsController@getQrCode'));
 
 
 # Asset Model Management
