@@ -38,7 +38,8 @@ class SettingsController extends AdminController {
 	public function getEdit()
 	{
 		$settings = Setting::orderBy('created_at', 'DESC')->paginate(10);
-		return View::make('backend/settings/edit', compact('settings'));
+		$is_gd_installed = !!extension_loaded('gd');
+		return View::make('backend/settings/edit', compact('settings', 'is_gd_installed'));
 	}
 
 
@@ -82,6 +83,7 @@ class SettingsController extends AdminController {
 			$setting->id = '1';
 			$setting->site_name = e(Input::get('site_name'));
 			$setting->per_page = e(Input::get('per_page'));
+			$setting->qr_code = e(Input::get('qr_code', '0'));
 
 			// Was the asset updated?
 			if($setting->save())

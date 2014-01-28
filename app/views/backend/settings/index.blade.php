@@ -43,6 +43,14 @@ Settings ::
 									<td>Per Page</td>
 									<td>{{ $setting->per_page }}  </td>
 								</tr>
+								<tr>
+									<td>Display QR Codes</td>
+@if ($setting->qr_code === '1')
+								<td>Yes</td>
+@else
+								<td>No</td>
+@endif
+								</tr>
 								@endforeach
 							</tbody>
 						</table>

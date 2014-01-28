@@ -6,7 +6,8 @@
 		"laravel/framework": "4.0.*",
 		"cartalyst/sentry": "2.0.*",
 		"barryvdh/laravel-debugbar": "dev-master",
-		"chumper/datatable": "dev-master"
+		"chumper/datatable": "dev-master",
+		"bacon/bacon-qr-code": "dev-master"
 	},
 	"require-dev": {
 		"phpunit/phpunit": "*"
