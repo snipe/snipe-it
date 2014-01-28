@@ -154,6 +154,13 @@ View Asset {{ $asset->asset_tag }} ::
 		<!-- side address column -->
 		<div class="col-md-3 col-xs-12 address pull-right">
 
+			@if ($qr_code->display)
+			<h6>QR Code</h6>
+			<p>
+				<img src="{{ $qr_code->url }}" height="{{ $qr_code->height }}" width="{{ $qr_code->width }}" />
+			</p>
+			@endif
+
 			@if ((isset($asset->assigned_to ) && ($asset->assigned_to > 0)))
 				<h6><br>Checked Out To:</h6>
 				<ul>
