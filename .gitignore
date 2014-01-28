@@ -6,9 +6,12 @@ composer.phar
 /app/config/mail.php
 /app/database/*.sqlite
 /app/storage/logs/*
+!/app/storage/logs/.gitkeep
 /app/storage/meta/services.json
 /app/storage/sessions/*
+!/app/storage/sessions/.gitkeep
 /app/storage/views/*
+!/app/storage/views/.gitkeep
 /app/config/*/mail.php
 /app/config/*/database.php
 /app/config/*/app.php
