@@ -44,7 +44,7 @@
 			<div class="form-group {{ $errors->has('serial') ? ' has-error' : '' }}">
 				<label for="serial" class="col-md-3 control-label">@lang('admin/licenses/form.serial')</label>
 					<div class="col-md-7">
-						<input class="form-control" type="text" name="serial" id="serial" value="{{ Input::old('serial', $license->serial) }}" />
+						<textarea class="form-control" type="text" name="serial" id="serial">{{ Input::old('serial', $license->serial) }}</textarea>
 						{{ $errors->first('serial', '<span class="alert-msg"><i class="icon-remove-sign"></i> :message</span>') }}
 					</div>
 			</div>
