@@ -564,7 +564,8 @@ class AssetsController extends AdminController {
 			$asset = Asset::find($assetId);			
 			if (isset($asset->id)) {
 				$renderer = new \BaconQrCode\Renderer\Image\Png;
-				$renderer->setWidth(120)->setHeight(120);
+				$renderer->setWidth($this->qrCodeDimensions['height'])
+					->setHeight($this->qrCodeDimensions['height']);
 				$writer = new \BaconQrCode\Writer($renderer);
 				$content = $writer->writeString(route('view/hardware', $asset->id));
 
