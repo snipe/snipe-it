@@ -38,7 +38,7 @@ class SettingsController extends AdminController {
 	public function getEdit()
 	{
 		$settings = Setting::orderBy('created_at', 'DESC')->paginate(10);
-		$is_gd_installed = !!extension_loaded('gd');
+		$is_gd_installed = extension_loaded('gd');
 		return View::make('backend/settings/edit', compact('settings', 'is_gd_installed'));
 	}
 

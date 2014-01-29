@@ -533,7 +533,7 @@ class AssetsController extends AdminController {
 			$settings = Setting::getSettings();
 
 			$qr_code = (object) array(
-				'display' => $settings->qr_code === '1',
+				'display' => $settings->qr_code == '1',
 				'height' => $this->qrCodeDimensions['height'],
 				'width' => $this->qrCodeDimensions['width'],
 				'url' => route('qr_code/hardware', $asset->id)
@@ -561,7 +561,7 @@ class AssetsController extends AdminController {
 		$settings = Setting::getSettings();
 
 		if ($settings->qr_code === '1') {
-			$asset = Asset::find($assetId);			
+			$asset = Asset::find($assetId);
 			if (isset($asset->id)) {
 				$renderer = new \BaconQrCode\Renderer\Image\Png;
 				$renderer->setWidth($this->qrCodeDimensions['height'])
