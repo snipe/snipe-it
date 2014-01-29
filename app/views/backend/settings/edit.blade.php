@@ -46,6 +46,22 @@
 										</div>
 									</div>
 
+									<div class="form-group {{ $errors->has('qr_code') ? 'error' : '' }}">
+										<label class="control-label" for="qr_code">Display QR Codes</label>
+										<div class="controls">
+									@if ($is_gd_installed)
+											<input class="col-md-1" type="checkbox" name="qr_code" id="qr_code" value="1" {{ $setting->qr_code === '1' ? 'checked' : '' }} />
+									@else
+											<span class="help-inline">
+												PHP Image Processing and GD plugin is NOT installed.
+												<br>
+												You must install php-gd to display QR codes, see <a href="http://www.php.net/manual/en/image.installation.php">install instructions</a>.
+											</span>
+									@endif
+											{{ $errors->first('qr_code', '<span class="help-inline">:message</span>') }}
+											</div>
+									</div>
+
 
 
 								@endforeach

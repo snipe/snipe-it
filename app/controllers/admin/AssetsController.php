@@ -20,6 +20,8 @@ use Response;
 
 class AssetsController extends AdminController {
 
+	protected $qrCodeDimensions = array( 'height' => 160, 'width' => 160);
+
 	/**
 	 * Show a list of all the assets.
 	 *
@@ -527,15 +529,54 @@ class AssetsController extends AdminController {
 		$asset = Asset::find($assetId);
 
 		if (isset($asset->id)) {
-				return View::make('backend/hardware/view', compact('asset'));
+
+			$settings = Setting::getSettings();
+
+			$qr_code = (object) array(
+				'display' => $settings->qr_code == '1',
+				'height' => $this->qrCodeDimensions['height'],
+				'width' => $this->qrCodeDimensions['width'],
+				'url' => route('qr_code/hardware', $asset->id)
+			);
+
+			return View::make('backend/hardware/view', compact('asset', 'qr_code'));
 		} else {
 			// Prepare the error message
-			$error = Lang::get('admin/hardware/message.does_not_exist', compact('id' ));
+			$error = Lang::get('admin/hardware/message.does_not_exist', compact('id'));
 
 			// Redirect to the user management page
 			return Redirect::route('assets')->with('error', $error);
 		}
 
+	}
+
+	/**
+	*  Get the QR code representing the asset
+	*
+	* @param  int  $assetId
+	* @return View
+	**/
+	public function getQrCode($assetId = null)
+	{
+		$settings = Setting::getSettings();
+
+		if ($settings->qr_code == '1') {
+			$asset = Asset::find($assetId);
+			if (isset($asset->id)) {
+				$renderer = new \BaconQrCode\Renderer\Image\Png;
+				$renderer->setWidth($this->qrCodeDimensions['height'])
+					->setHeight($this->qrCodeDimensions['height']);
+				$writer = new \BaconQrCode\Writer($renderer);
+				$content = $writer->writeString(route('view/hardware', $asset->id));
+
+				$response = Response::make($content, 200);
+				$response->header('Content-Type', 'image/png');
+				return $response;
+			}
+		}
+
+		$response = Response::make('', 404);
+		return $response;
 	}
 
 	/**
