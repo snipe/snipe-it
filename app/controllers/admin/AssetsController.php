@@ -560,7 +560,7 @@ class AssetsController extends AdminController {
 	{
 		$settings = Setting::getSettings();
 
-		if ($settings->qr_code === '1') {
+		if ($settings->qr_code == '1') {
 			$asset = Asset::find($assetId);
 			if (isset($asset->id)) {
 				$renderer = new \BaconQrCode\Renderer\Image\Png;
