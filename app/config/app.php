@@ -146,7 +146,7 @@ return array(
 
 		'Sentry'          => 'Cartalyst\Sentry\Facades\Laravel\Sentry',
 
-		'Datatable' => 'Chumper\Datatable\Facades\Datatable',
+		'Datatable' => 'Chumper\Datatable\Facades\DatatableFacade',
 
 	),
 
