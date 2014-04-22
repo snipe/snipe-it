@@ -39,7 +39,7 @@ Forgetting to do this can mean your DB might end up out of sync with the new fil
 ### 1) Downloading
 #### 1.1) Clone the Repository
 
-	git clone http://github.com/snipe/snipe-it your-folder
+	git clone https://github.com/snipe/snipe-it your-folder
 
 #### 1.2) Download the Repository
 
@@ -118,7 +118,7 @@ The app is configured to automatically detect if you're in a local, staging, or 
 ##### 3.1) If you don't have composer installed globally
 
 	cd your-folder
-	curl -s http://getcomposer.org/installer | php
+	curl -sS https://getcomposer.org/installer | php
 	php composer.phar install
 
 ##### 3.2) For global composer installations
@@ -154,12 +154,15 @@ If you still run into a permissions error, you may need to increase the permissi
 
 The document root for the app should be set to the public directory. In a standard Apache virtualhost setup, that might look something like this on a standard linux LAMP stack:
 
-	<VirtualHost *:80>
-    DocumentRoot /var/www/html/public
-    ServerName www.example.org
+<VirtualHost *:80>
+	<Directory /var/www/html/public>
+		AllowOverride All
+	</Directory>
+	DocumentRoot /var/www/html/public
+    	ServerName www.example.org
 
-    # Other directives here
-	</VirtualHost>
+    	# Other directives here
+</VirtualHost>
 
 An OS X virtualhost setup could look more like:
 
