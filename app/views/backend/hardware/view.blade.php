@@ -157,7 +157,7 @@ View Asset {{ $asset->asset_tag }} ::
 			@if ($qr_code->display)
 			<h6>QR Code</h6>
 			<p>
-				<img src="{{ $qr_code->url }}" height="{{ $qr_code->height }}" width="{{ $qr_code->width }}" />
+				<img src="{{ $qr_code->url }}" />
 			</p>
 			@endif
 

@@ -17,10 +17,14 @@ use Str;
 use Validator;
 use View;
 use Response;
+use Config;
+use Log;
+
+use BaconQrCode\Renderer\Image as QrImage;
 
 class AssetsController extends AdminController {
 
-	protected $qrCodeDimensions = array( 'height' => 160, 'width' => 160);
+	protected $qrCodeDimensions = array( 'height' => 170, 'width' => 170);
 
 	/**
 	 * Show a list of all the assets.
@@ -563,14 +567,28 @@ class AssetsController extends AdminController {
 		if ($settings->qr_code == '1') {
 			$asset = Asset::find($assetId);
 			if (isset($asset->id)) {
-				$renderer = new \BaconQrCode\Renderer\Image\Png;
-				$renderer->setWidth($this->qrCodeDimensions['height'])
-					->setHeight($this->qrCodeDimensions['height']);
+
+				$qr_text = !empty($settings->qr_text) ?
+					$settings->qr_text : $settings->site_name;
+
+				$text = new QrImage\Decorator\Text;
+				$text->setText($asset->asset_tag, 'top')
+					->setText($qr_text, 'bottom');
+
+				$renderer = new QrImage\Png;
+				$renderer->setRoundDimensions(true)
+					->setWidth($this->qrCodeDimensions['width'])
+					->setHeight($this->qrCodeDimensions['height'])
+					->setMargin(0)
+					->addDecorator($text);
+ 
 				$writer = new \BaconQrCode\Writer($renderer);
 				$content = $writer->writeString(route('view/hardware', $asset->id));
 
+				$content_disposition = sprintf('attachment;filename=qr_code_%s.png', preg_replace('/\W/', '', $asset->asset_tag));
 				$response = Response::make($content, 200);
 				$response->header('Content-Type', 'image/png');
+				$response->header('Content-Disposition', $content_disposition);
 				return $response;
 			}
 		}

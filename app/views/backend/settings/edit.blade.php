@@ -62,6 +62,20 @@
 											</div>
 									</div>
 
+									<div class="form-group {{ $errors->has('qr_text') ? 'error' : '' }}">
+										<label class="control-label" for="qr_text">QR Code Text</label>
+										<div class="controls">
+									@if ($setting->qr_code === '1')
+											<input class="col-md-9" type="text" name="qr_text" id="qr_text" value="{{ Input::old('qr_text', $setting->qr_text) }}" />
+									@else
+											<span class="help-inline">
+												Enable QR Codes first to set this
+											</span>
+									@endif
+											{{ $errors->first('qr_text', '<span class="help-inline">:message</span>') }}
+											</div>
+									</div>
+
 
 
 								@endforeach
