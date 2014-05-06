@@ -51,6 +51,10 @@ Settings ::
 								<td>No</td>
 @endif
 								</tr>
+<tr>
+									<td>QR Code Text</td>
+									<td>{{ $setting->qr_text }}</td>
+								</tr>
 								@endforeach
 							</tbody>
 						</table>

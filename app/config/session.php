@@ -122,4 +122,6 @@ return array(
 
 	'domain' => null,
 
+	'expire_on_close' => false,
+
 );
