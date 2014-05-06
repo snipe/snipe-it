@@ -576,19 +576,10 @@ class AssetsController extends AdminController {
 			$asset = Asset::find($assetId);
 			if (isset($asset->id)) {
 
-				$qr_text = !empty($settings->qr_text) ?
-					$settings->qr_text : $settings->site_name;
 
-				$text = new QrImage\Decorator\Text;
-				$text->setText($asset->asset_tag, 'top')
-					->setText($qr_text, 'bottom');
-
-				$renderer = new QrImage\Png;
-				$renderer->setRoundDimensions(true)
-					->setWidth($this->qrCodeDimensions['width'])
-					->setHeight($this->qrCodeDimensions['height'])
-					->setMargin(0)
-					->addDecorator($text);
+				$renderer = new \BaconQrCode\Renderer\Image\Png;
+				$renderer->setWidth($this->qrCodeDimensions['height'])
+				->setHeight($this->qrCodeDimensions['height']);
 
 				$writer = new \BaconQrCode\Writer($renderer);
 				$content = $writer->writeString(route('view/hardware', $asset->id));
