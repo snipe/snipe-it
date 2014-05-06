@@ -15,6 +15,7 @@ env:
 before_script:
   - if [[ "$DB" == "mysql" ]]; then mysql -e "create database IF NOT EXISTS snipeit_laravel;" -utravis; fi
   - curl -s http://getcomposer.org/installer | php
+  - cp app/config/production/database.example.php app/config/production/database.php
   - php composer.phar self-update
   - php composer.phar install --prefer-source --no-interaction --dev
   - php artisan key:generate
