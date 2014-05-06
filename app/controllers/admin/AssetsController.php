@@ -136,9 +136,9 @@ class AssetsController extends AdminController {
 			$depreciation = $asset->depreciate();
 
 			$row[] = $asset->purchase_date;
-			$row[] = '$'.$asset->purchase_cost;
-			$row[] = '$'.$depreciation;
-			$row[] = '$'.($asset->purchase_cost - $depreciation);
+			$row[] = '"'.number_format($asset->purchase_cost).'"';
+			$row[] = '"'.number_format($depreciation).'"';
+			$row[] = '"'.number_format($asset->purchase_cost - $depreciation).'"';
 			$rows[] = implode($row, ',');
 		}
 

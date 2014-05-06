@@ -13,7 +13,7 @@ Group Update ::
 <div class="row header">
     <div class="col-md-12">
 			<a href="{{ URL::previous() }}" class="btn btn-flat gray pull-right"><i class="icon-circle-arrow-left icon-white"></i> Back</a>
-		<h3>Group Update</h3>
+		<h3>@lang('admin/groups/titles.edit_group')</h3>
 	</div>
 </div>
 
@@ -26,7 +26,7 @@ Group Update ::
 
 			<!-- Name -->
 			<div class="form-group {{ $errors->has('name') ? ' has-error' : '' }}">
-				<label for="name" class="col-md-2 control-label">Group Name</label>
+				<label for="name" class="col-md-2 control-label">@lang('admin/groups/titles.group_name')</label>
 					<div class="col-md-6">
 						<input class="form-control" type="text" name="name" id="name" value="{{ Input::old('name', $group->name) }}" />
 						{{ $errors->first('name', '<span class="alert-msg"><i class="icon-remove-sign"></i> :message</span>') }}
@@ -43,11 +43,11 @@ Group Update ::
                             <label for="name" class="col-md-2 control-label">{{ $permission['label'] }}</label>
                             <div class="col-md-8">
                                 <label class="radio-inline">
-                                    <input type="radio" value="1" id="{{ $permission['permission'] }}_allow" name="permissions[{{ $permission['permission'] }}]"{{ (array_get($groupPermissions, $permission['permission']) === 1 ? ' checked="checked"' : '') }}> Allow
+                                    <input type="radio" value="1" id="{{ $permission['permission'] }}_allow" name="permissions[{{ $permission['permission'] }}]"{{ (array_get($groupPermissions, $permission['permission']) === 1 ? ' checked="checked"' : '') }}> @lang('admin/groups/titles.allow')
                                 </label>
 
                                 <label class="radio-inline">
-                                    <input type="radio" value="0" id="{{ $permission['permission'] }}_deny" name="permissions[{{ $permission['permission'] }}]"{{ ( ! array_get($groupPermissions, $permission['permission']) ? ' checked="checked"' : '') }}> Deny
+                                    <input type="radio" value="0" id="{{ $permission['permission'] }}_deny" name="permissions[{{ $permission['permission'] }}]"{{ ( ! array_get($groupPermissions, $permission['permission']) ? ' checked="checked"' : '') }}> @lang('admin/groups/titles.deny')
                                 </label>
                             </div>
                         </div>

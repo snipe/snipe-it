@@ -12,8 +12,8 @@ Group Management ::
 
 <div class="row header">
     <div class="col-md-12">
-    	<a href="{{ route('create/group') }}" class="btn btn-success pull-right"><i class="icon-plus-sign icon-white"></i> Create New</a>
-		<h3>Group Management</h3>
+    	<a href="{{ route('create/group') }}" class="btn btn-success pull-right"><i class="icon-plus-sign icon-white"></i> @lang('general.create')</a>
+		<h3>@lang('admin/groups/titles.group_management')</h3>
 	</div>
 </div>
 
