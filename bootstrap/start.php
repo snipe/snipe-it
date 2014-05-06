@@ -13,8 +13,6 @@
 
 $app = new Illuminate\Foundation\Application;
 
-$app->redirectIfTrailingSlash();
-
 /*
 |--------------------------------------------------------------------------
 | Detect The Application Environment
@@ -28,7 +26,7 @@ $app->redirectIfTrailingSlash();
 
 $env = $app->detectEnvironment(array(
 
-	'local'		 	=> array('http://*.dev', 'http://*.local', '*.local*', '127.0.0.1', 'localhost*'),
+	'local'		 	=> array('http://*.dev', 'http://*.local', '*.local*', '127.0.0.1', 'localhost*','AlisonMBP'),
 	'staging' 		=> array('http://staging.yourserver.com'),
 	'production' 	=> array('http://www.yourserver.com')
 ));

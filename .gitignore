@@ -9,6 +9,7 @@ composer.phar
 /app/config/*/mail.php
 /app/config/*/database.php
 /app/config/*/app.php
-public/packages/barryvdh/*
+public/packages/*
 /app/storage/views/*
 /app/storage/logs/*
+/app/storage/debugbar/
