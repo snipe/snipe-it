@@ -4,7 +4,7 @@
 
 This is a FOSS project for asset management in IT Operations. Knowing who has which laptop, when it was purchased in order to depreciate it correctly, handling software licenses, etc.
 
-It is built on [Laravel 4](http://laravel.com) and uses the [Sentry 2](https://github.com/cartalyst/sentry) package.
+It is built on [Laravel 4.1](http://laravel.com) and uses the [Sentry 2](https://github.com/cartalyst/sentry) package.
 
 Many thanks to the [Laravel 4 starter site](https://github.com/brunogaspar/laravel4-starter-kit) for a quick start.
 
@@ -57,24 +57,22 @@ Update the file `boostrap/start.php` under the section `Detect The Application E
 
 -----
 
-*IMPORTANT*: Since the initial install is done via command line (which cannot grok your apache hostname), it's important
-to include your machine name in the environmental array, or to pass the environmental override as a command line argument (using ` --env=local`).
-Otherwise, your configs will default to production (as Laravel does).
+__AS OF LARAVEL 4.1__
+Per the [Laravel 4.1 upgrade docs](http://laravel.com/docs/upgrade):
 
-To find out your local machine's hostname, type `hostname` from a terminal prompt on the machine you're installing it on. If you
-encounter an error on your install, saying that the `driver` variable isn't defined, something got botched in your
-environmental settings and it's defaulting to production.
+__*"For security reasons, URL domains may no longer be used to detect your application environment. These values are easily spoofable and allow attackers to modify the environment for a request. You should convert your environment detection to use machine host names (hostname command on Mac & Ubuntu)."*__
 
-So for example, if you're installing this locally on your Mac named SnipeMBP and with a local Apache hostname of http://snipe-it.local:8888,
-your environmental variable section of `bootstrap/start.php` might look like this:
+To find out your local machine's hostname, type `hostname` from a terminal prompt on the machine you're installing it on. The command-line response is that machine's hostname. Please note that the hostname is NOT always the same as the domain name.
+
+So for example, if you're installing this locally on your Mac named SnipeMBP, the environmental variable section of `bootstrap/start.php` might look like this:
 
 	$env = $app->detectEnvironment(array(
-
-		'local'		 	=> array('SnipeMBP','http://*.local', '*.local*', '127.0.0.1', 'localhost*'),
-		'staging' 		=> array('http://staging.yourserver.com'),
-		'production' 	=> array('http://www.yourserver.com')
+		'local'		 	=> array('SnipeMBP'),
+		'staging' 		=> array('staging.mysite.com'),
+		'production' 	=> array('www.mysite.com')
 	));
 
+If your development, staging and production sites all run on the same server (which is generally a terrible idea), [see this example](http://words.weareloring.com/development/setting-up-multiple-environments-in-laravel-4-1/) of how to configure the app using environmental variables.
 
 -----
 
