@@ -18,6 +18,7 @@ use Validator;
 use View;
 use Response;
 use Config;
+use Location;
 use Log;
 
 use BaconQrCode\Renderer\Image as QrImage;
@@ -96,7 +97,8 @@ class AssetsController extends AdminController {
 			Lang::get('admin/hardware/table.location'),
 			Lang::get('admin/hardware/table.purchase_date'),
 			Lang::get('admin/hardware/table.purchase_cost'),
-			Lang::get('admin/hardware/table.book_value')
+			Lang::get('admin/hardware/table.book_value'),
+			Lang::get('admin/hardware/table.diff')
 		);
 		$header = array_map('trim', $header);
 		$rows[] = implode($header, ',');
@@ -107,19 +109,25 @@ class AssetsController extends AdminController {
 			$row[] = $asset->asset_tag;
 			$row[] = $asset->name;
 			$row[] = $asset->serial;
-			$row[] = $asset->assigned_to;
+
 
 			if ($asset->assigned_to > 0) {
 			  $user = User::find($asset->assigned_to);
 			  $row[] = $user->fullName();
-		  }
-		  else {
-		  	$row[] = ''; // Empty string if unassigned
-		  }
+			  }
+			else {
+				$row[] = ''; // Empty string if unassigned
+			}
 
 			if (($asset->assigned_to > 0) && ($asset->assigneduser->location_id > 0)) {
 				$location = Location::find($asset->assigneduser->location_id);
-				$row[] = $location->city . ', ' . $location->state;
+				if ($location->city) {
+					$row[] = '"'.$location->city . ', ' . $location->state.'"';
+				} elseif ($location->name) {
+					$row[] = $location->name;
+				} else {
+					$row[] = '';
+				}
 			}
 			else {
 				$row[] = '';  // Empty string if location is not set
@@ -128,9 +136,9 @@ class AssetsController extends AdminController {
 			$depreciation = $asset->depreciate();
 
 			$row[] = $asset->purchase_date;
-			$row[] = number_format($asset->purchase_cost);
-			$row[] = number_format($depreciation);
-			$row[] = number_format(($asset->purchase_cost - $depreciation));
+			$row[] = '$'.$asset->purchase_cost;
+			$row[] = '$'.$depreciation;
+			$row[] = '$'.($asset->purchase_cost - $depreciation);
 			$rows[] = implode($row, ',');
 		}
 
@@ -568,20 +576,11 @@ class AssetsController extends AdminController {
 			$asset = Asset::find($assetId);
 			if (isset($asset->id)) {
 
-				$qr_text = !empty($settings->qr_text) ?
-					$settings->qr_text : $settings->site_name;
 
-				$text = new QrImage\Decorator\Text;
-				$text->setText($asset->asset_tag, 'top')
-					->setText($qr_text, 'bottom');
+				$renderer = new \BaconQrCode\Renderer\Image\Png;
+				$renderer->setWidth($this->qrCodeDimensions['height'])
+				->setHeight($this->qrCodeDimensions['height']);
 
-				$renderer = new QrImage\Png;
-				$renderer->setRoundDimensions(true)
-					->setWidth($this->qrCodeDimensions['width'])
-					->setHeight($this->qrCodeDimensions['height'])
-					->setMargin(0)
-					->addDecorator($text);
- 
 				$writer = new \BaconQrCode\Writer($renderer);
 				$content = $writer->writeString(route('view/hardware', $asset->id));
 

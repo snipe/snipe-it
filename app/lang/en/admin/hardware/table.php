@@ -14,5 +14,6 @@ return array(
 	'change' => 'In/Out',
 	'location' => 'Location',
 	'eol' => 'EOL',
+	'diff' => 'Diff',
 
 );
