@@ -29,7 +29,7 @@ class AuthController extends BaseController {
 		// Declare the rules for the form validation
 		$rules = array(
 			'email'    => 'required|email',
-			'password' => 'required|between:3,32',
+			'password' => 'required|between:8,32',
 		);
 
 		// Create a new validator instance from our validation rules
@@ -107,7 +107,7 @@ class AuthController extends BaseController {
 			'last_name'        => 'required|min:3',
 			'email'            => 'required|email|unique:users',
 			'email_confirm'    => 'required|email|same:email',
-			'password'         => 'required|between:3,32',
+			'password'         => 'required|between:8,32',
 			'password_confirm' => 'required|same:password',
 		);
 
