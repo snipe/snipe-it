@@ -1,4 +1,4 @@
-<a href='https://pledgie.com/campaigns/22899'><img alt='Click here to lend your support to: Snipe IT - Free Open Source Asset Management System and make a donation at pledgie.com !' src='https://pledgie.com/campaigns/22899.png?skin_name=chrome' border='0' ></a>
+[![Click here to lend your support to: Snipe IT - Free Open Source Asset Management System and make a donation at pledgie.com](https://pledgie.com/campaigns/22899.png?skin_name=chrome)](https://pledgie.com/campaigns/22899) [![Build Status](https://travis-ci.org/snipe/snipe-it.svg?branch=develop)](https://travis-ci.org/snipe/snipe-it)
 
 ## Snipe-IT - Asset Management For the Rest of Us
 
