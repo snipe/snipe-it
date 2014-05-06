@@ -116,13 +116,6 @@
                         <b class="caret"></b>
                     </a>
                     <ul class="dropdown-menu">
-                       @if(Sentry::getUser()->hasAccess('admin'))
-						<li>
-							<a href="{{ route('app') }}">
-								<i class="icon-cog"></i> @lang('general.settings')
-							</a>
-						</li>
-						@endif
 						<li{{ (Request::is('account/profile') ? ' class="active"' : '') }}>
 							<a href="{{ route('profile') }}">
 								<i class="icon-user"></i> @lang('general.profile')
