@@ -1,0 +1,32 @@
+# see http://about.travis-ci.org/docs/user/languages/php/ for more hints
+language: php
+
+# list any PHP version you want to test against
+php:
+  - 5.4
+  - 5.5
+  - 5.6
+
+# optionally specify a list of environments, for example to test different RDBMS
+env:
+  - DB=mysql
+
+# execute any number of scripts before the test run, custom env's are available as variables
+before_script:
+  - if [[ "$DB" == "mysql" ]]; then mysql -e "create database IF NOT EXISTS snipeit_laravel;" -utravis; fi
+  - curl -s http://getcomposer.org/installer | php
+  - php composer.phar self-update
+  - php composer.phar install --prefer-source --no-interaction --dev
+  - php artisan key:generate
+  - php artisan migrate:install
+  - php artisan migrate --package cartalyst/sentry
+  - php artisan migrate
+  - php artisan db:seed
+
+# omitting "script:" will default to phpunit
+# use the $DB env variable to determine the phpunit.xml to use
+script: phpunit
+
+# configure notifications (email, IRC, campfire etc)
+notifications:
+  slack: snipe:F6LWbfP6vhr3aRBoeARFG6Ti
