@@ -289,7 +289,7 @@ class AuthController extends BaseController {
 	{
 		// Declare the rules for the form validation
 		$rules = array(
-			'password'         => 'required',
+			'password'         => 'required|between:8,32',
 			'password_confirm' => 'required|same:password'
 		);
 
