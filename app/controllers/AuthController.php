@@ -103,8 +103,8 @@ class AuthController extends BaseController {
 	{
 		// Declare the rules for the form validation
 		$rules = array(
-			'first_name'       => 'required|min:3',
-			'last_name'        => 'required|min:3',
+			'first_name'       => 'required|min:2',
+			'last_name'        => 'required|min:2',
 			'email'            => 'required|email|unique:users',
 			'email_confirm'    => 'required|email|same:email',
 			'password'         => 'required|between:8,32',
