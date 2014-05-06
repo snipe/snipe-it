@@ -42,7 +42,7 @@ Depreciation Report
 			<th class="col-sm-1">@lang('admin/hardware/table.eol')</th>
 			<th class="col-sm-1">@lang('admin/hardware/table.purchase_cost')</th>
 			<th class="col-sm-1">@lang('admin/hardware/table.book_value')</th>
-			<th class="col-sm-1">Diff</th>
+			<th class="col-sm-1">@lang('admin/hardware/table.diff')</th>
 		</tr>
 	</thead>
 	<tbody>
