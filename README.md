@@ -4,7 +4,7 @@
 
 This is a FOSS project for asset management in IT Operations. Knowing who has which laptop, when it was purchased in order to depreciate it correctly, handling software licenses, etc.
 
-It is built on [Laravel 4](http://laravel.com) and uses the [Sentry 2](https://github.com/cartalyst/sentry) package.
+It is built on [Laravel 4.1](http://laravel.com) and uses the [Sentry 2](https://github.com/cartalyst/sentry) package.
 
 Many thanks to the [Laravel 4 starter site](https://github.com/brunogaspar/laravel4-starter-kit) for a quick start.
 
