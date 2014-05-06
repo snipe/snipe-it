@@ -190,7 +190,7 @@
     </div>
     </header>
     <!-- end navbar -->
-
+	@if (Sentry::check())
 	@if(Sentry::getUser()->hasAccess('admin'))
 	<!-- sidebar -->
     <div id="sidebar-nav">
@@ -235,6 +235,7 @@
         </ul>
     </div>
     <!-- end sidebar -->
+	@endif
 	@endif
 
 
