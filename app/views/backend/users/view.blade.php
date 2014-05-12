@@ -141,8 +141,6 @@ View User {{ $user->fullName() }} ::
 											<a href="{{ route('view/hardware', $log->asset_id) }}">{{ $log->assetlog->asset_tag }}</a>
 										@elseif ((isset($log->assetlog->name)) && ($log->assetlog->deleted_at!=''))
 											<del>{{ $log->assetlog->name }}</del> (deleted)
-										@else
-										missing asset ({{ $log->assetlog->name }}) ({{ $log->assetlog->deleted_at }})
 										@endif
 										</td>
 										<td>{{ $log->adminlog->fullName() }}</td>
