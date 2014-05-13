@@ -187,7 +187,7 @@ class AppCommand extends Command {
 		do
 		{
 			// Ask the user to input the user password
-			$password = $this->ask('Please enter your user password: ');
+			$password = $this->ask('Please enter your user password (at least 8 characters): ');
 
 			// Check if email is valid
 			if ($password == '')
