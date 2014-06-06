@@ -267,6 +267,7 @@ class UsersController extends AdminController {
 		// Create a new validator instance from our validation rules
 		$validator = Validator::make(Input::all(), $this->validationRules);
 
+
 		// If validation fails, we'll exit the operation now.
 		if ($validator->fails())
 		{
@@ -286,6 +287,14 @@ class UsersController extends AdminController {
 			$user->phone = Input::get('phone');
 			$user->location_id = Input::get('location_id');
 			$user->manager_id = Input::get('manager_id');
+
+			if ($user->manager_id == "") {
+				$user->manager_id = NULL;
+			}
+
+			if ($user->location_id == "") {
+					$user->location_id = NULL;
+			}
 
 
 			// Do we want to update the user password?
