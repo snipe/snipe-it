@@ -82,14 +82,19 @@
 		@if ($asset->depreciation)
 			<div class="col-md-6"><strong>@lang('admin/hardware/form.depreciation'): </strong>
 			{{ $asset->depreciation->name }}
-				({{ $asset->depreciation->months }} months)</div>
+				({{ $asset->depreciation->months }}
+				@lang('admin/hardware/form.months')
+				)</div>
 			<div class="col-md-6"><strong>@lang('admin/hardware/form.depreciates_on'): </strong>
 			{{ $asset->depreciated_date() }} </div>
 			<div class="col-md-6"><strong>@lang('admin/hardware/form.fully_depreciated'): </strong>
 			{{ $asset->months_until_depreciated()->m }}
-			@lang('admin/hardware/form.months'),
-			{{ $asset->months_until_depreciated()->y }}
-			@lang('admin/hardware/form.years')</div>
+			@lang('admin/hardware/form.months')
+			 @if ($asset->months_until_depreciated()->y > 0)
+			, {{ $asset->months_until_depreciated()->y }}
+			@lang('admin/hardware/form.years')
+			 @endif
+			 </div>
 		@endif
 
 		@if ($asset->model->eol)
@@ -99,8 +104,15 @@
 			<div class="col-md-6"><strong>@lang('admin/hardware/form.eol_date'): </strong>
 			{{ $asset->eol_date() }}
 			@if ($asset->months_until_eol())
-				 ({{ $asset->months_until_eol()->y }} years,
-				{{ $asset->months_until_eol()->m }} months)
+				 (
+				 @if ($asset->months_until_eol()->y > 0)
+				 {{ $asset->months_until_eol()->y }}
+				  @lang('admin/hardware/form.years'),
+				 @endif
+
+				{{ $asset->months_until_eol()->m }}
+				@lang('admin/hardware/form.months')
+				)
 			@endif
 			</div>
 		@endif
