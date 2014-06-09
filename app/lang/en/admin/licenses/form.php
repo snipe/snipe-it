@@ -16,6 +16,9 @@ return array(
 	'no_depreciation'	=> 'Do Not Depreciate',
 	'notes'		=> 'Notes',
 	'checkin'	=> 'Checkin',
+	'checkin'	=> 'Checkin',
+	'date'				=> 'Purchase Date',
+	'cost'				=> 'Purchase Cost',
 
 )
 ;

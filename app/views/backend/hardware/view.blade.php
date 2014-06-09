@@ -91,8 +91,8 @@
 			{{ $asset->months_until_depreciated()->m }}
 			@lang('admin/hardware/form.months')
 			 @if ($asset->months_until_depreciated()->y > 0)
-			, {{ $asset->months_until_depreciated()->y }}
-			@lang('admin/hardware/form.years')
+				, {{ $asset->months_until_depreciated()->y }}
+				@lang('admin/hardware/form.years')
 			 @endif
 			 </div>
 		@endif
@@ -174,7 +174,7 @@
 					@lang('general.unknown_admin')
 					@endif
 					</td>
-					<td>@lang('admin/hardware/general.created_asset')</td>
+					<td>@lang('general.created_asset')</td>
 					<td></td>
 					<td></td>
 				</tr>
@@ -228,24 +228,24 @@
 			@elseif (($asset->status_id ) && ($asset->status_id > 1))
 
 				@if ($asset->assetstatus)
-					<h6><br>{{ $asset->assetstatus->name }} Asset</h6>
+					<h6><br>{{ $asset->assetstatus->name }}
+					@lang('admin/hardware/general.asset')</h6>
 
 					<div class="col-md-12">
 					<div class="alert alert-warning alert-block">
 						<i class="icon-warning-sign"></i>
-						<strong>Warning: </strong> This asset has been marked <strong>{{ $asset->assetstatus->name }}</strong> and is currently undeployable.
-						If this status has changed, please update the asset status by <a href="{{ route('update/hardware', $asset->id) }}">editing the asset</a>.
+						@lang('admin/hardware/message.undeployable')
+
 					</div>
 				</div>
 				@endif
 
 			@elseif ($asset->status_id == NULL)
-					<h6><br>Pending Asset</h6>
+					<h6><br>@lang('admin/hardware/general.pending')</h6>
 					<div class="col-md-12">
 					<div class="alert alert-info alert-block">
 						<i class="icon-info-sign"></i>
-						<strong>Warning: </strong> This asset has been marked as pending and is currently undeployable.
-						If this status has changed, please update the asset status.
+						@lang('admin/hardware/message.undeployable')
 					</div>
 				</div>
 

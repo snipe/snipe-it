@@ -46,5 +46,8 @@ return array(
 	'asset_models'			=> 'Asset Models',
 	'currency_symbol'		=> '$',
 	'no_results'			=> 'No Results.',
+	'date'					=> 'Date',
 	'unknown_admin'			=> 'Unknown Admin',
+	'created_asset'			=> 'created asset',
+	'moreinfo'				=> 'More Info',
 );

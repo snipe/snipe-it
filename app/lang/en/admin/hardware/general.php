@@ -6,5 +6,6 @@ return array(
 	'clone'  					=> 'Clone Asset',
 	'view'  					=> 'View Asset',
 	'edit'  					=> 'Edit Asset',
-	'created_asset'  			=> 'created asset',
+	'asset'  					=> 'Asset',
+	'pending'  					=> 'Pending Asset',
 );
