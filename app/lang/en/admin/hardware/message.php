@@ -16,6 +16,7 @@ return array(
 	),
 
 	'delete' => array(
+		'confirm'   => 'Are you sure you wish to delete this asset?',
 		'error'   => 'There was an issue deleting the asset. Please try again.',
 		'success' => 'The asset was deleted successfully.'
 	),
