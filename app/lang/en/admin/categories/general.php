@@ -2,6 +2,7 @@
 
 return array(
 	'update_category'  					=> 'Update Category',
+	'create_category'  					=> 'Create Category',
 	'asset_categories' 					=> 'Asset Categories',
 	'about_asset_categories' 			=> 'About Asset Categories',
 	'category_name'  					=> 'Category Name',

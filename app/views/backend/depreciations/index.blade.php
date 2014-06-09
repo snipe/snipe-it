@@ -35,7 +35,11 @@ Asset Depreciations ::
 								<td>{{ $depreciation->months }} @lang('admin/depreciations/table.months') </td>
 								<td>
 								<a href="{{ route('update/depreciations', $depreciation->id) }}" class="btn btn-warning"><i class="icon-pencil icon-white"></i></a>
-<a data-html="false" class="btn delete-asset btn-danger" data-toggle="modal" href="{{ route('delete/depreciations', $depreciation->id) }}" data-content="Are you sure you wish to delete this depreciation?" data-title="Delete {{ htmlspecialchars($depreciation->name) }}?" onClick="return false;"><i class="icon-trash icon-white"></i></a>
+<a data-html="false" class="btn delete-asset btn-danger" data-toggle="modal" href="{{ route('delete/depreciations', $depreciation->id) }}" data-content="
+@lang('admin/depreciations/message.delete.confirm')
+" data-title="
+@lang('general.delete')
+ {{ htmlspecialchars($depreciation->name) }}?" onClick="return false;"><i class="icon-trash icon-white"></i></a>
 
 
 								</td>
@@ -51,9 +55,8 @@ Asset Depreciations ::
                     <!-- side address column -->
                     <div class="col-md-3 col-xs-12 address pull-right">
 						<br /><br />
-						<h6>About Asset Depreciations</h6>
-						<p>You can set up asset depreciations to depreciate assets based on straight-line depreciation.  </p>
-
+						<h6>@lang('admin/depreciations/general.about_asset_depreciations')</h6>
+						<p>@lang('admin/depreciations/general.about_depreciations') </p>
                     </div>
  </div>
   </div>

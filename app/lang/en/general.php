@@ -6,6 +6,7 @@ return array(
 	'no'  					=> 'No',
 	'currency'  			=> '$',
 	'save'  				=> 'Save',
+	'delete'  				=> 'Delete',
 	'checkout'  			=> 'Checkout',
 	'checkin'  				=> 'Checkin',
 	'cancel'  				=> 'Cancel',

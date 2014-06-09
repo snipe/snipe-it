@@ -3,9 +3,9 @@
 {{-- Page title --}}
 @section('title')
 @if ($category->id)
-	Category Update ::
+	@lang('admin/categories/general.update_category') ::
 @else
-	Create Category ::
+	@lang('admin/categories/general.create_category') ::
 	@endif
 @parent
 @stop
