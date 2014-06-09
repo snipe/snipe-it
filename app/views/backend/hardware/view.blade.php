@@ -107,11 +107,11 @@
 				 (
 				 @if ($asset->months_until_eol()->y > 0)
 				 {{ $asset->months_until_eol()->y }}
-				  @lang('admin/hardware/form.years'),
+				  @lang('general.years'),
 				 @endif
 
 				{{ $asset->months_until_eol()->m }}
-				@lang('admin/hardware/form.months')
+				@lang('general.months')
 				)
 			@endif
 			</div>

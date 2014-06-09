@@ -2,10 +2,10 @@
 
 {{-- Page title --}}
 @section('title')
-@if ($category->id)
-	@lang('admin/categories/general.update_category') ::
-@else
-	@lang('admin/categories/general.create_category') ::
+	@if ($category->id)
+		@lang('admin/categories/general.update') ::
+	@else
+		@lang('admin/categories/general.create') ::
 	@endif
 @parent
 @stop
@@ -17,7 +17,13 @@
 <div class="row header">
     <div class="col-md-12">
     	<a href="{{ URL::previous() }}" class="btn-flat gray pull-right"><i class="icon-circle-arrow-left icon-white"></i> @lang('general.back')</a>
-		<h3>@lang('admin/categories/general.asset_categories')</h3>
+		<h3>
+		@if ($category->id)
+			@lang('admin/categories/general.update')
+		@else
+			@lang('admin/categories/general.create')
+		@endif
+</h3>
 	</div>
 </div>
 

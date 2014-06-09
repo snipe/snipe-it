@@ -2,7 +2,7 @@
 
 {{-- Page title --}}
 @section('title')
-Asset Models ::
+@lang('admin/models/table.title') ::
 @parent
 @stop
 

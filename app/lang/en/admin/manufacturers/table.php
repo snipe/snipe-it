@@ -2,7 +2,10 @@
 
 return array(
 
-	'title'      => 'Manufacturer Name',
-	'id'   => 'ID',
+	'asset_manufacturers'	=> 'Asset Manufacturers',
+	'create'				=> 'Create Manufacturer',
+	'id'   					=> 'ID',
+	'name'      			=> 'Manufacturer Name',
+	'update'				=> 'Update Manufacturer',
 
 );

@@ -25,7 +25,7 @@
 		<tr role="row">
 			<th class="col-md-3">@lang('admin/groups/table.name')</th>
 			<th class="col-md-2">@lang('admin/groups/table.users')</th>
-			<th class="col-md-2">@lang('admin/groups/table.created_at')</th>
+			<th class="col-md-2">@lang('general.created_at')</th>
 			<th class="col-md-1 actions">@lang('table.actions')</th>
 		</tr>
 	</thead>

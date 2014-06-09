@@ -103,7 +103,7 @@ User Management ::
 <div class="col-md-6">
 	<div class="alert alert-warning alert-block">
 		<i class="icon-warning-sign"></i>
-		@lang('admin/users/table.noresults')
+		@lang('general.no_results')
 
 	</div>
 </div>

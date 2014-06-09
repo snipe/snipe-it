@@ -2,19 +2,19 @@
 
 return array(
 
-	'id'      		=> 'ID',
-	'title'      	=> 'Asset ',
 	'asset_tag'   	=> 'Asset Tag',
-	'serial'   		=> 'Serial',
-	'purchase_date'	=> 'Purchased',
-	'purchase_cost'	=> 'Cost',
 	'book_value'  	=> 'Value',
-	'status'   		=> 'Status',
-	'checkoutto' 	=> 'Checked Out',
 	'change' 		=> 'In/Out',
-	'location' 		=> 'Location',
-	'eol' 			=> 'EOL',
+	'checkoutto' 	=> 'Checked Out',
 	'diff' 			=> 'Diff',
 	'dl_csv' 		=> 'Download CSV',
+	'eol' 			=> 'EOL',
+	'id'      		=> 'ID',
+	'location' 		=> 'Location',
+	'purchase_cost'	=> 'Cost',
+	'purchase_date'	=> 'Purchased',
+	'serial'   		=> 'Serial',
+	'status'   		=> 'Status',
+	'title'      	=> 'Asset ',
 
 );
