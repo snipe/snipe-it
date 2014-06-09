@@ -2,11 +2,7 @@
 
 {{-- Page title --}}
 @section('title')
-	@if ($asset->id)
-	Checkin Asset ::
-	@else
-	Checkin Asset ::
-	@endif
+	 @lang('admin/hardware/general.checkin') ::
 @parent
 @stop
 
@@ -16,7 +12,7 @@
 <div class="row header">
     <div class="col-md-12">
 		<a href="{{ URL::previous() }}" class="btn-flat gray pull-right"><i class="icon-circle-arrow-left icon-white"></i>  @lang('general.back')</a>
-		<h3> Checkin Asset </h3>
+		<h3> @lang('admin/hardware/general.checkin')</h3>
 	</div>
 </div>
 
@@ -30,7 +26,7 @@
 
 			<!-- Asset tag -->
 			<div class="form-group">
-			<label class="col-sm-2 control-label">Asset Tag</label>
+			<label class="col-sm-2 control-label">@lang('admin/hardware/form.tag')</label>
 				<div class="col-md-6">
 				  <p class="form-control-static">{{ $asset->asset_tag }}</p>
 				</div>
@@ -38,14 +34,14 @@
 
 			<!-- Asset name -->
 		  	<div class="form-group">
-			<label class="col-sm-2 control-label">Asset Name</label>
+			<label class="col-sm-2 control-label">@lang('admin/hardware/form.name')</label>
 				<div class="col-md-6">
 				  <p class="form-control-static">{{ $asset->name }}</p>
 				</div>
 		  	</div>
 			<!-- Note -->
 			<div class="form-group {{ $errors->has('note') ? 'error' : '' }}">
-				<label for="note" class="col-md-2 control-label">Note</label>
+				<label for="note" class="col-md-2 control-label">@lang('admin/hardware/form.notes')</label>
 				<div class="col-md-7">
 					<input class="col-md-6 form-control" type="text" name="note" id="note" value="{{ Input::old('note', $asset->note) }}" />
 					{{ $errors->first('note', '<span class="alert-msg"><i class="icon-remove-sign"></i> :message</span>') }}

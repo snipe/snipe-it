@@ -45,4 +45,5 @@ return array(
 	'list_all'				=> 'List All',
 	'asset_models'			=> 'Asset Models',
 	'currency_symbol'		=> '$',
+	'no_results'			=> 'No Results.',
 );

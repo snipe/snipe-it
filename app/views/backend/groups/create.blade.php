@@ -2,7 +2,7 @@
 
 {{-- Web site Title --}}
 @section('title')
-Create Group ::
+@lang('admin/groups/titles.create_group') ::
 @parent
 @stop
 

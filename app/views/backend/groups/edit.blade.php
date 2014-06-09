@@ -2,7 +2,7 @@
 
 {{-- Web site Title --}}
 @section('title')
-Group Update ::
+@lang('admin/groups/titles.edit_group')< ::
 @parent
 @stop
 
