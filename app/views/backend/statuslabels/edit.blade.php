@@ -15,7 +15,7 @@
 
 <div class="row header">
     <div class="col-md-12">
-    	<a href="{{ URL::previous() }}" class="btn-flat gray pull-right right"><i class="icon-circle-arrow-left icon-white"></i> Back</a>
+    	<a href="{{ URL::previous() }}" class="btn-flat gray pull-right right"><i class="icon-circle-arrow-left icon-white"></i>  @lang('general.back')</a>
 		<h3>Status Labels</h3>
 	</div>
 </div>

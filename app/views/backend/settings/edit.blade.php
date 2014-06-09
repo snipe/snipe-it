@@ -12,7 +12,7 @@
                 <!-- header -->
 
                 <div class="pull-right">
-					<a href="{{ URL::previous() }}" class="btn-flat gray"><i class="icon-circle-arrow-left icon-white"></i> Back</a>
+					<a href="{{ URL::previous() }}" class="btn-flat gray"><i class="icon-circle-arrow-left icon-white"></i>  @lang('general.back')</a>
 				</div>
 
 				<h3 class="name">Update Settings</h3>

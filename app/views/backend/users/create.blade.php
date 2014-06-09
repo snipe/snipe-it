@@ -11,7 +11,7 @@ Create a User ::
 <div class="page-header">
 
 	<div class="pull-right">
-		<a href="{{ route('users') }}" class="btn-flat gray"><i class="icon-circle-arrow-left icon-white"></i> Back</a>
+		<a href="{{ route('users') }}" class="btn-flat gray"><i class="icon-circle-arrow-left icon-white"></i>  @lang('general.back')</a>
 	</div>
 
 	<h3>

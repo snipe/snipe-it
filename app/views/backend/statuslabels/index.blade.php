@@ -12,7 +12,7 @@ Status Labels
 
 <div class="row header">
     <div class="col-md-12">
-    	<a href="{{ route('create/statuslabel') }}" class="btn btn-success pull-right"><i class="icon-plus-sign icon-white"></i> Create New</a>
+    	<a href="{{ route('create/statuslabel') }}" class="btn btn-success pull-right"><i class="icon-plus-sign icon-white"></i>  @lang('general.create')</a>
 		<h3>Status Labels</h3>
 	</div>
 </div>

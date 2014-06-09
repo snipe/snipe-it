@@ -16,8 +16,8 @@
 
 <div class="row header">
     <div class="col-md-12">
-    	<a href="{{ URL::previous() }}" class="btn-flat gray pull-right"><i class="icon-circle-arrow-left icon-white"></i> Back</a>
-		<h3>Asset Categories</h3>
+    	<a href="{{ URL::previous() }}" class="btn-flat gray pull-right"><i class="icon-circle-arrow-left icon-white"></i> @lang('general.back')</a>
+		<h3>@lang('admin/categories/general.asset_categories')</h3>
 	</div>
 </div>
 
@@ -31,7 +31,7 @@
 
 						<!-- Name -->
 						<div class="form-group {{ $errors->has('name') ? ' has-error' : '' }}">
-							<label for="name" class="col-md-2 control-label">Category Name</label>
+							<label for="name" class="col-md-2 control-label">@lang('admin/categories/general.category_name')</label>
 								<div class="col-md-7">
 									<input class="form-control" type="text" name="name" id="name" value="{{ Input::old('name', $category->name) }}" />
 									{{ $errors->first('name', '<span class="alert-msg"><i class="icon-remove-sign"></i> :message</span>') }}
@@ -53,10 +53,8 @@
                     <!-- side address column -->
                     <div class="col-md-3 col-xs-12 address pull-right">
 						<br /><br />
-						<h6>About Asset Categories</h6>
-						<p>Asset categories help you organize your assets. Some
-						example categories might be &quot;Desktops&quot;, &quot;Laptops&quot;, &quot;Mobile Phones&quot;, &quot;Tablets&quot;,
-						and so on, but you can use asset categories any way that makes sense for you.  </p>
+						<h6>@lang('admin/categories/general.about_asset_categories')</h6>
+						<p>@lang('admin/categories/general.about_categories') </p>
 
                     </div>
 </div>
