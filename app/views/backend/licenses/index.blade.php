@@ -1,7 +1,7 @@
 @extends('backend/layouts/default')
 
 {{-- Page title --}}
-Licenses ::
+@lang('admin/licenses/general.software_licenses') ::
 @parent
 @stop
 
@@ -12,7 +12,7 @@ Licenses ::
 <div class="row header">
     <div class="col-md-12">
     	<a href="{{ route('create/licenses') }}" class="btn btn-success pull-right"><i class="icon-plus-sign icon-white"></i> Create New</a>
-		<h3>Software Licenses</h3>
+		<h3>@lang('admin/licenses/general.software_licenses')</h3>
 	</div>
 </div>
 
@@ -24,7 +24,7 @@ Licenses ::
 			<th class="col-md-3" tabindex="0" rowspan="1" colspan="1">@lang('admin/licenses/table.title')</th>
 			<th class="col-md-3" tabindex="0" rowspan="1" colspan="1">@lang('admin/licenses/table.serial')</th>
 			<th class="col-md-2" tabindex="0" rowspan="1" colspan="1">@lang('admin/licenses/table.assigned_to')</th>
-			<th class="col-md-1 actions" tabindex="0" rowspan="1" colspan="1">In/Out</th>
+			<th class="col-md-1 actions" tabindex="0" rowspan="1" colspan="1">@lang('admin/licenses/general.in_out')</th>
 			<th class="col-md-1 actions" tabindex="0" rowspan="1" colspan="1">@lang('table.actions')</th>
 		</tr>
 	</thead>
@@ -55,15 +55,20 @@ Licenses ::
 					</td>
 					<td>
 					@if ($licensedto->assigned_to)
-						<a href="{{ route('checkin/license', $licensedto->id) }}" class="btn btn-primary">Checkin</a>
+						<a href="{{ route('checkin/license', $licensedto->id) }}" class="btn btn-primary">
+						@lang('general.checkin')</a>
 					@else
-						<a href="{{ route('checkout/license', $licensedto->id) }}" class="btn btn-info">Checkout</a>
+						<a href="{{ route('checkout/license', $licensedto->id) }}" class="btn btn-info">
+						@lang('general.checkout')</a>
 					@endif
 					</td>
 					<td>
 					@if ($count==1)
 					<a href="{{ route('update/license', $license->id) }}" class="btn btn-warning"><i class="icon-pencil icon-white"></i></a>
-						<a data-html="false" class="btn delete-asset btn-danger" data-toggle="modal" href="{{ route('delete/license', $license->id) }}" data-content="Are you sure you wish to delete this license?" data-title="Delete {{ htmlspecialchars($license->name) }}?" onClick="return false;"><i class="icon-trash icon-white"></i></a>
+						<a data-html="false" class="btn delete-asset btn-danger" data-toggle="modal" href="{{ route('delete/license', $license->id) }}"
+						data-content="@lang('admin/licenses/message.delete.confirm')"
+						data-title="@lang('general.delete')
+						 {{ htmlspecialchars($license->name) }}?" onClick="return false;"><i class="icon-trash icon-white"></i></a>
 					@endif
 
 					</td>

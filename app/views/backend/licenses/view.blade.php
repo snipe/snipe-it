@@ -2,7 +2,7 @@
 
 {{-- Page title --}}
 @section('title')
-View License {{ $license->name }} ::
+@lang('admin/licenses/general.view') {{ $license->name }} ::
 @parent
 @stop
 
@@ -12,7 +12,7 @@ View License {{ $license->name }} ::
 <div class="row header">
     <div class="col-md-12">
     	<a href="{{ route('update/license', $license->id) }}" class="btn-flat white pull-right"> Edit License</a>
-			<h3 class="name">History for {{ $license->name }}</h3>
+			<h3 class="name">@lang('admin/licenses/general.history_for') {{ $license->name }}</h3>
 	</div>
 </div>
 
@@ -24,19 +24,19 @@ View License {{ $license->name }} ::
 
 <div class="col-md-12">
 @if ($license->serial)
-<div class="col-md-6"><strong>Serial: </strong> {{ $license->serial }} </div>
+<div class="col-md-6"><strong>@lang('admin/licenses/form.serial'): </strong> {{ $license->serial }} </div>
 @endif
 
 @if ($license->license_name)
-<div class="col-md-6"><strong>Licensed To: </strong> {{ $license->license_name }} </div>
+<div class="col-md-6"><strong>@lang('admin/licenses/form.to_name'): </strong> {{ $license->license_name }} </div>
 @endif
 
 @if ($license->license_email)
-<div class="col-md-6"><strong>Licensed Email: </strong> {{ $license->license_email }} </div>
+<div class="col-md-6"><strong>@lang('admin/licenses/form.to_email'): </strong> {{ $license->license_email }} </div>
 @endif
 
 @if ($license->notes)
-<div class="col-md-6"><strong>Notes: </strong>{{ $license->notes }}</div>
+<div class="col-md-6"><strong>@lang('admin/licenses/form.notes'): </strong>{{ $license->notes }}</div>
 @endif
 
 

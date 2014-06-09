@@ -15,6 +15,7 @@ return array(
 	'depreciation'	=> 'Depreciation',
 	'no_depreciation'	=> 'Do Not Depreciate',
 	'notes'		=> 'Notes',
+	'checkin'	=> 'Checkin',
 
 )
 ;

@@ -2,7 +2,7 @@
 
 {{-- Page title --}}
 @section('title')
-	Checkout License to User
+	 @lang('admin/licenses/general.checkout') ::
 @parent
 @stop
 
@@ -11,9 +11,10 @@
 
 <div class="row header">
     <div class="col-md-12">
-		<a href="{{ URL::previous() }}" class="btn-flat gray pull-right"><i class="icon-circle-arrow-left icon-white"></i> Back</a>
+		<a href="{{ URL::previous() }}" class="btn-flat gray pull-right">
+		<i class="icon-circle-arrow-left icon-white"></i> @lang('general.back')</a>
 		<h3>
-			Checkout License to User
+			@lang('admin/licenses/general.checkout')
 		</h3>
 	</div>
 </div>
@@ -28,7 +29,7 @@
 
 			<!-- Asset name -->
 		  	<div class="form-group">
-			<label class="col-sm-2 control-label">Asset Name</label>
+			<label class="col-sm-2 control-label">@lang('admin/hardware/form.name')</label>
 				<div class="col-md-6">
 				  <p class="form-control-static">{{ $licenseseat->license->name }}</p>
 				</div>
@@ -36,7 +37,7 @@
 
 			<!-- Serial -->
 		  	<div class="form-group">
-			<label class="col-sm-2 control-label">Serial</label>
+			<label class="col-sm-2 control-label">@lang('admin/hardware/form.serial')</label>
 				<div class="col-md-6">
 				  <p class="form-control-static">{{ $licenseseat->license->serial }}</p>
 				</div>
@@ -44,7 +45,7 @@
 
 			<!-- User -->
 			<div class="form-group {{ $errors->has('assigned_to') ? ' has-error' : '' }}">
-				<label for="assigned_to" class="col-md-2 control-label">Checkout to</label>
+				<label for="assigned_to" class="col-md-2 control-label">@lang('admin/hardware/form.checkout_to')</label>
 				<div class="col-md-7">
 					{{ Form::select('assigned_to', $users_list , Input::old('assigned_to', $licenseseat->assigned_to), array('class'=>'select2', 'style'=>'min-width:350px')) }}
 					{{ $errors->first('assigned_to', '<span class="alert-msg"><i class="icon-remove-sign"></i> :message</span>') }}
@@ -53,7 +54,7 @@
 
 			<!-- Note -->
 			<div class="form-group {{ $errors->has('note') ? 'error' : '' }}">
-				<label for="note" class="col-md-2 control-label">Note</label>
+				<label for="note" class="col-md-2 control-label">@lang('admin/hardware/form.notes')</label>
 				<div class="col-md-7">
 					<input class="col-md-6 form-control" type="text" name="note" id="note" value="{{ Input::old('note', $licenseseat->note) }}" />
 					{{ $errors->first('note', '<span class="alert-msg"><i class="icon-remove-sign"></i> :message</span>') }}

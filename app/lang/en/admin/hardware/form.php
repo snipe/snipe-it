@@ -18,7 +18,6 @@ return array(
 	'years'				=> 'years',
 	'checkout_to'		=> 'Checkout to',
 	'checkedout_to'		=> 'Checked Out To',
-	'checkin'			=> 'Checkin',
 	'depreciation'		=> 'Depreciation',
 	'depreciates_on'	=> 'Depreciates On',
 	'fully_depreciated'	=> 'Fully Depreciated',

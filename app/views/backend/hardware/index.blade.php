@@ -124,7 +124,7 @@
 <div class="col-md-9">
 	<div class="alert alert-info alert-block">
 		<i class="icon-info-sign"></i>
-		There are no results for your query.
+		@lang('general.no_results')
 	</div>
 </div>
 
