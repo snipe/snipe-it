@@ -17,7 +17,7 @@ Depreciation Report
 		@lang('admin/hardware/table.dl_csv')</a>
 		</div>
 
-	<h3>Depreciation Report</h3>
+	<h3>@lang('general.depreciation_report')</h3>
 </div>
 
 <div class="row table">

@@ -2,7 +2,8 @@
 
 {{-- Page title --}}
 @section('title')
-View Model {{ $model->model_tag }} ::
+@lang('admin/models/table.view')
+{{ $model->model_tag }} ::
 @parent
 @stop
 
@@ -11,8 +12,9 @@ View Model {{ $model->model_tag }} ::
 
 <div class="row header">
     <div class="col-md-12">
-    	<a href="{{ route('update/model', $model->id) }}" class="btn btn-default pull-right"><i class="icon-plus-sign icon-white"></i> Update Model</a>
-		<h3 class="name">History for {{ $model->name }} </h3>
+    	<a href="{{ route('update/model', $model->id) }}" class="btn-flat white pull-right">
+    	@lang('admin/models/table.update')</a>
+		<h3 class="name">@lang('general.history_for') {{ $model->name }} </h3>
 	</div>
 </div>
 
@@ -61,10 +63,10 @@ View Model {{ $model->model_tag }} ::
                             </table>
 
                             @else
-                            <div class="col-md-6">
+                            <div class="col-md-9">
 								<div class="alert alert-info alert-block">
 									<i class="icon-info-sign"></i>
-									There are no results for your query.
+									@lang('general.no_results')
 								</div>
 							</div>
                             @endif
@@ -79,19 +81,23 @@ View Model {{ $model->model_tag }} ::
 
 
 								@if ($model->manufacturer)
-								<li>Manufacturer: {{ $model->manufacturer->name }}</li>
+								<li>@lang('general.manufacturer'):
+								{{ $model->manufacturer->name }}</li>
 								@endif
 
 								@if ($model->modelno)
-								<li>Model No.: {{ $model->modelno }}</li>
+								<li>@lang('general.model_no'):
+								{{ $model->modelno }}</li>
 								@endif
 
 								@if ($model->depreciation)
-								<li>Depreciation: {{ $model->depreciation->name }} ({{ $model->depreciation->months }} months)</li>
+								<li>@lang('general.depreciation'):
+								{{ $model->depreciation->name }} ({{ $model->depreciation->months }} months)</li>
 								@endif
 
 								@if ($model->eol)
-								<li>EOL: {{ $model->eol }} months</li>
+								<li>@lang('general.eol'):
+								{{ $model->eol }} months</li>
 								@endif
 
 							</ul>

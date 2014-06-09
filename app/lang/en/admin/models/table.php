@@ -10,4 +10,6 @@ return array(
 	'numassets' 			=> 'Assets',
 	'title'					=> 'Asset Models',
 	'update'				=> 'Update Asset Model',
+	'view'					=> 'View Asset Model',
+	'update'				=> 'Update Model',
 );

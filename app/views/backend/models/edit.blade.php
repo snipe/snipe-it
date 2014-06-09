@@ -45,7 +45,7 @@
 
 			<!-- Model No. -->
 			<div class="form-group {{ $errors->has('modelno') ? ' has-error' : '' }}">
-				<label for="modelno" class="col-md-2 control-label">@lang('admin/models/table.modelnumber')</label>
+				<label for="modelno" class="col-md-2 control-label">@lang('general.model_no')</label>
 					<div class="col-md-7">
 						<input class="form-control" type="text" name="modelno" id="modelno" value="{{ Input::old('modelno', $model->modelno) }}" />
 						{{ $errors->first('modelno', '<span class="alert-msg"><i class="icon-remove-sign"></i> :message</span>') }}
@@ -53,7 +53,7 @@
 			</div>
 
 			<div class="form-group {{ $errors->has('manufacturer_id') ? ' has-error' : '' }}">
-				<label for="manufacturer_id" class="col-md-2 control-label">@lang('admin/models/table.manufacturer')</label>
+				<label for="manufacturer_id" class="col-md-2 control-label">@lang('general.manufacturer')</label>
 					<div class="col-md-7">
 						{{ Form::select('manufacturer_id', $manufacturer_list , Input::old('manufacturer_id', $model->manufacturer_id), array('class'=>'select2', 'style'=>'width:350px')) }}
 						{{ $errors->first('manufacturer_id', '<span class="alert-msg"><i class="icon-remove-sign"></i> :message</span>') }}
@@ -62,7 +62,7 @@
 
 			<!-- Depreciation -->
 			<div class="form-group {{ $errors->has('depreciation_id') ? ' has-error' : '' }}">
-				<label for="depreciation_id" class="col-md-2 control-label">@lang('admin/models/general.depreciation')</label>
+				<label for="depreciation_id" class="col-md-2 control-label">@lang('general.depreciation')</label>
 					<div class="col-md-7">
 						{{ Form::select('depreciation_id', $depreciation_list , Input::old('depreciation_id', $model->depreciation_id), array('class'=>'select2', 'style'=>'width:350px')) }}
 						{{ $errors->first('depreciation_id', '<span class="alert-msg"><i class="icon-remove-sign"></i> :message</span>') }}
@@ -71,7 +71,7 @@
 
 			<!-- Category -->
 			<div class="form-group {{ $errors->has('category_id') ? ' has-error' : '' }}">
-				<label for="category_id" class="col-md-2 control-label">@lang('admin/models/table.category')</label>
+				<label for="category_id" class="col-md-2 control-label">@lang('general.category')</label>
 					<div class="col-md-7">
 						{{ Form::select('category_id', $category_list , Input::old('category_id', $model->category_id), array('class'=>'select2', 'style'=>'width:350px')) }}
 						{{ $errors->first('category_id', '<span class="alert-msg"><i class="icon-remove-sign"></i> :message</span>') }}
@@ -97,7 +97,7 @@
 			<div class="form-group">
 			<label class="col-md-2 control-label"></label>
 				<div class="col-md-7">
-					<a class="btn btn-link" href="{{ URL::previous() }}">Cancel</a>
+					<a class="btn btn-link" href="{{ URL::previous() }}">@lang('general.cancel')</a>
 					<button type="submit" class="btn btn-success"><i class="icon-ok icon-white"></i> @lang('general.save')</button>
 				</div>
 			</div>

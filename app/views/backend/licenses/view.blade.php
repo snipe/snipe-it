@@ -12,7 +12,7 @@
 <div class="row header">
     <div class="col-md-12">
     	<a href="{{ route('update/license', $license->id) }}" class="btn-flat white pull-right"> @lang('admin/licenses/form.update')</a>
-			<h3 class="name">@lang('admin/licenses/general.history_for') {{ $license->name }}</h3>
+			<h3 class="name">@lang('general.history_for') {{ $license->name }}</h3>
 	</div>
 </div>
 
