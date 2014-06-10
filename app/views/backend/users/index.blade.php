@@ -20,9 +20,9 @@
 
 		<h3>
 		@if (Input::get('onlyTrashed'))
-			Deleted
+			@lang('general.deleted')
 		@else
-			Current
+			@lang('general.current')
 		@endif
 
 	</h3>
