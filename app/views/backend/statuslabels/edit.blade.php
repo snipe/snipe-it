@@ -3,9 +3,9 @@
 {{-- Page title --}}
 @section('title')
 	@if ($statuslabel->id)
-		Update Status Label ::
+		@lang('admin/statuslabels/table.update') ::
 	@else
-		Create New Status Label ::
+		@lang('admin/statuslabels/table.create') ::
 	@endif
 @parent
 @stop
@@ -15,8 +15,15 @@
 
 <div class="row header">
     <div class="col-md-12">
-    	<a href="{{ URL::previous() }}" class="btn-flat gray pull-right right"><i class="icon-circle-arrow-left icon-white"></i>  @lang('general.back')</a>
-		<h3>Status Labels</h3>
+    	<a href="{{ URL::previous() }}" class="btn-flat gray pull-right right">
+    	<i class="icon-circle-arrow-left icon-white"></i>  @lang('general.back')</a>
+		<h3>
+		@if ($statuslabel->id)
+			@lang('admin/statuslabels/table.update')
+		@else
+			@lang('admin/statuslabels/table.create')
+		@endif
+		</h3>
 	</div>
 </div>
 
@@ -55,16 +62,13 @@
 
 </div>
 
-                    <!-- side address column -->
-                    <div class="col-md-3 address pull-right">
-					<br /><br />
-						<h6>About Status Labels</h6>
-						<p>Status labels are used to describe the various reasons why an asset <strong><em>cannot</em></strong> be deployed. </p>
+			<!-- side address column -->
+			<div class="col-md-3 address pull-right">
+			<br /><br />
+				<h6>@lang('admin/statuslabels/table.about')</h6>
+				<p>@lang('admin/statuslabels/table.info')</p>
 
-						<p>It could be broken, out for diagnostics, out for
-						repair, lost or stolen, etc. Status labels allow your team to show the progression.</p>
-
-                    </div>
+			</div>
 
 
 @stop

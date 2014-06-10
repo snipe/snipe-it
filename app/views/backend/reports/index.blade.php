@@ -2,7 +2,7 @@
 
 {{-- Page title --}}
 @section('title')
-Depreciation Report
+@lang('general.depreciation_report') ::
 @parent
 @stop
 

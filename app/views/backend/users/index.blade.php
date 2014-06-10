@@ -2,7 +2,7 @@
 
 {{-- Page title --}}
 @section('title')
-User Management ::
+@lang('admin/users/table.title') ::
 @parent
 @stop
 
@@ -38,9 +38,9 @@ User Management ::
 		<tr role="row">
 			<th class="col-md-3">@lang('admin/users/table.name')</th>
 			<th class="col-md-2">@lang('admin/users/table.email')</th>
-			<th class="col-md-2">Manager</th>
-			<th class="col-md-1">Assets</th>
-			<th class="col-md-1">Licenses</th>
+			<th class="col-md-2">@lang('admin/users/table.manager')</th>
+			<th class="col-md-1">@lang('general.assets')</th>
+			<th class="col-md-1">@lang('general.licenses')</th>
 			<th class="col-md-1">@lang('admin/users/table.activated')</th>
 			<th class="col-md-2 actions">@lang('table.actions')</th>
 		</tr>

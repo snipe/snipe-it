@@ -11,6 +11,7 @@ return array(
 	'last_login'  	=> 'Last Login',
 	'last_name'  	=> 'Last Name',
 	'name' 			=> 'Name',
-
-
+	'manager' 		=> 'Manager',
+	'job' 			=> 'Job Title',
+	'title' 		=> 'User Manager',
 );
