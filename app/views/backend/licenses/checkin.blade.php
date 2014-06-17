@@ -2,7 +2,7 @@
 
 {{-- Page title --}}
 @section('title')
-	Checkin License
+	 @lang('admin/licenses/general.checkin') ::
 @parent
 @stop
 
@@ -11,8 +11,9 @@
 
 <div class="row header">
     <div class="col-md-12">
-		<a href="{{ URL::previous() }}" class="btn-flat gray pull-right"><i class="icon-circle-arrow-left icon-white"></i> Back</a>
-		<h3> Checkin License </h3>
+		<a href="{{ URL::previous() }}" class="btn-flat gray pull-right">
+		<i class="icon-circle-arrow-left icon-white"></i> @lang('general.back')</a>
+		<h3> @lang('admin/licenses/general.checkin') </h3>
 	</div>
 </div>
 
@@ -27,7 +28,7 @@
 
 			<!-- Asset name -->
 		  	<div class="form-group">
-			<label class="col-sm-2 control-label">Asset Name</label>
+			<label class="col-sm-2 control-label">@lang('admin/hardware/form.name')</label>
 				<div class="col-md-6">
 				  <p class="form-control-static">{{ $licenseseat->license->name }}</p>
 				</div>
@@ -35,7 +36,7 @@
 
 		  	<!-- Serial -->
 		  	<div class="form-group">
-			<label class="col-sm-2 control-label">Serial</label>
+			<label class="col-sm-2 control-label">@lang('admin/hardware/form.serial')</label>
 				<div class="col-md-6">
 				  <p class="form-control-static">{{ $licenseseat->license->serial }}</p>
 				</div>
@@ -43,7 +44,7 @@
 
 			<!-- Note -->
 			<div class="form-group {{ $errors->has('note') ? 'error' : '' }}">
-				<label for="note" class="col-md-2 control-label">Note</label>
+				<label for="note" class="col-md-2 control-label">@lang('admin/hardware/form.notes')</label>
 				<div class="col-md-7">
 					<input class="col-md-6 form-control" type="text" name="note" id="note" value="{{ Input::old('note', $licenseseat->note) }}" />
 					{{ $errors->first('note', '<span class="alert-msg"><i class="icon-remove-sign"></i> :message</span>') }}

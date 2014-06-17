@@ -1,7 +1,13 @@
 {
-	"name": "laravel/laravel",
-	"description": "The Laravel Framework.",
-	"keywords": ["framework", "laravel"],
+	"name": "snipe/snipe-it",
+	"description": "A free open source IT asset/license management system built in PHP on Laravel 4.1 and Bootstrap 3.",
+	"keywords": ["framework", "laravel", "assets", "IT", "management"],
+	"homepage": "http://snipeitapp.com/",
+	"license": "AGPL-3.0",
+	"support": {
+		"issues": "https://github.com/snipe/snipe-it/issues",
+		"source": "https://github.com/snipe/snipe-it"
+	},
 	"require": {
 		"laravel/framework": "4.1.*",
 		"cartalyst/sentry": "2.0.*",

@@ -17,6 +17,7 @@ return array(
 	),
 
 	'delete' => array(
+		'confirm'   => 'Are you sure you wish to delete this status label?',
 		'error'   => 'There was an issue deleting the location. Please try again.',
 		'success' => 'The location was deleted successfully.'
 	)

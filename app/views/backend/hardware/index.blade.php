@@ -14,7 +14,7 @@
     @else
             @lang('general.all')
     @endif
-    
+
     @lang('general.assets')
 @stop
 
@@ -112,7 +112,9 @@
 			</td>
 			<td nowrap="nowrap">
 				<a href="{{ route('update/hardware', $asset->id) }}" class="btn btn-warning"><i class="icon-pencil icon-white"></i></a>
-				<a data-html="false" class="btn delete-asset btn-danger" data-toggle="modal" href="{{ route('delete/hardware', $asset->id) }}" data-content="Are you sure you wish to delete this asset?" data-title="Delete {{ htmlspecialchars($asset->asset_tag) }}?" onClick="return false;"><i class="icon-trash icon-white"></i></a>
+				<a data-html="false" class="btn delete-asset btn-danger" data-toggle="modal" href="{{ route('delete/hardware', $asset->id) }}" data-content="@lang('admin/hardware/message.delete.confirm')"
+				data-title="@lang('general.delete')
+				 {{ htmlspecialchars($asset->asset_tag) }}?" onClick="return false;"><i class="icon-trash icon-white"></i></a>
 			</td>
 		</tr>
 		@endforeach
@@ -122,7 +124,7 @@
 <div class="col-md-9">
 	<div class="alert alert-info alert-block">
 		<i class="icon-info-sign"></i>
-		There are no results for your query.
+		@lang('general.no_results')
 	</div>
 </div>
 

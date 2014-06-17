@@ -2,7 +2,7 @@
 
 {{-- Page title --}}
 @section('title')
-Depreciation Report
+@lang('general.depreciation_report') ::
 @parent
 @stop
 
@@ -17,7 +17,7 @@ Depreciation Report
 		@lang('admin/hardware/table.dl_csv')</a>
 		</div>
 
-	<h3>Depreciation Report</h3>
+	<h3>@lang('general.depreciation_report')</h3>
 </div>
 
 <div class="row table">
@@ -67,11 +67,11 @@ Depreciation Report
 			</td>
 
 			@if ($asset->purchase_cost > 0)
-			<td class="align-right">@lang('general.currency_symbol')
+			<td class="align-right">@lang('general.currency')
 			{{ number_format($asset->purchase_cost) }}</td>
-			<td class="align-right">@lang('general.currency_symbol')
+			<td class="align-right">@lang('general.currency')
 			{{ number_format($asset->depreciate()) }}</td>
-			<td class="align-right">@lang('general.currency_symbol')
+			<td class="align-right">@lang('general.currency')
 			-{{ number_format(($asset->purchase_cost - $asset->depreciate())) }}</td>
 			@else
 			<td></td>

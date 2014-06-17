@@ -2,7 +2,7 @@
 
 {{-- Web site Title --}}
 @section('title')
-Group Management ::
+@lang('admin/groups/titles.group_management') ::
 @parent
 @stop
 
@@ -25,7 +25,7 @@ Group Management ::
 		<tr role="row">
 			<th class="col-md-3">@lang('admin/groups/table.name')</th>
 			<th class="col-md-2">@lang('admin/groups/table.users')</th>
-			<th class="col-md-2">@lang('admin/groups/table.created_at')</th>
+			<th class="col-md-2">@lang('general.created_at')</th>
 			<th class="col-md-1 actions">@lang('table.actions')</th>
 		</tr>
 	</thead>
@@ -38,13 +38,15 @@ Group Management ::
 			<td>{{ $group->created_at->diffForHumans() }}</td>
 			<td>
 				<a href="{{ route('update/group', $group->id) }}" class="btn btn-warning"><i class="icon-pencil icon-white"></i></a>
-				<a data-html="false" class="btn delete-asset btn-danger" data-toggle="modal" href="{{ route('delete/group', $group->id) }}" data-content="Are you sure you wish to delete this group?" data-title="Delete {{ htmlspecialchars($group->name) }}?" onClick="return false;"><i class="icon-trash icon-white"></i></a>
+				<a data-html="false" class="btn delete-asset btn-danger" data-toggle="modal" href="{{ route('delete/group', $group->id) }}" data-content="@lang('admin/groups/message.delete.confirm')"
+data-title="@lang('general.delete')"
+{{ htmlspecialchars($group->name) }}?" onClick="return false;"><i class="icon-trash icon-white"></i></a>
 			</td>
 		</tr>
 		@endforeach
 		@else
 		<tr>
-			<td colspan="5">No results</td>
+			<td colspan="5">@lang('general.no_results')</td>
 		</tr>
 		@endif
 	</tbody>

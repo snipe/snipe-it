@@ -2,7 +2,7 @@
 
 {{-- Page title --}}
 @section('title')
-User Management ::
+@lang('admin/users/table.title') ::
 @parent
 @stop
 
@@ -11,7 +11,7 @@ User Management ::
 
 <div class="row header">
     <div class="col-md-12">
-    	<a href="{{ route('create/user') }}" class="btn btn-success pull-right"><i class="icon-plus-sign icon-white"></i> New User</a>
+    	<a href="{{ route('create/user') }}" class="btn btn-success pull-right"><i class="icon-plus-sign icon-white"></i>  @lang('general.create')</a>
     	@if (Input::get('onlyTrashed'))
 			<a class="btn btn-default pull-right" href="{{ URL::to('admin/users') }}">Show Current Users</a>
 		@else
@@ -20,9 +20,9 @@ User Management ::
 
 		<h3>
 		@if (Input::get('onlyTrashed'))
-			Deleted
+			@lang('general.deleted')
 		@else
-			Current
+			@lang('general.current')
 		@endif
 
 	</h3>
@@ -38,9 +38,9 @@ User Management ::
 		<tr role="row">
 			<th class="col-md-3">@lang('admin/users/table.name')</th>
 			<th class="col-md-2">@lang('admin/users/table.email')</th>
-			<th class="col-md-2">Manager</th>
-			<th class="col-md-1">Assets</th>
-			<th class="col-md-1">Licenses</th>
+			<th class="col-md-2">@lang('admin/users/table.manager')</th>
+			<th class="col-md-1">@lang('general.assets')</th>
+			<th class="col-md-1">@lang('general.licenses')</th>
 			<th class="col-md-1">@lang('admin/users/table.activated')</th>
 			<th class="col-md-2 actions">@lang('table.actions')</th>
 		</tr>
@@ -103,7 +103,7 @@ User Management ::
 <div class="col-md-6">
 	<div class="alert alert-warning alert-block">
 		<i class="icon-warning-sign"></i>
-		@lang('admin/users/table.noresults')
+		@lang('general.no_results')
 
 	</div>
 </div>

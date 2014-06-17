@@ -2,15 +2,16 @@
 
 return array(
 
-	'id'         	=> 'Id',
+	'activated'  	=> 'Active',
+	'checkedout'  	=> 'Assets',
+	'created_at' 	=> 'Created',
+	'email'      	=> 'Email',
 	'first_name' 	=> 'First Name',
+	'id'         	=> 'Id',
+	'last_login'  	=> 'Last Login',
 	'last_name'  	=> 'Last Name',
 	'name' 			=> 'Name',
-	'email'      	=> 'Email',
-	'last_login'  	=> 'Last Login',
-	'checkedout'  	=> 'Assets',
-	'activated'  	=> 'Active',
-	'created_at' 	=> 'Created',
-	'noresults' 	=> 'There are no results that match your query.',
-
+	'manager' 		=> 'Manager',
+	'job' 			=> 'Job Title',
+	'title' 		=> 'User Manager',
 );

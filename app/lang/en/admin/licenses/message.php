@@ -18,6 +18,7 @@ return array(
 	),
 
 	'delete' => array(
+		'confirm'   => 'Are you sure you wish to delete this license?',
 		'error'   => 'There was an issue deleting the license. Please try again.',
 		'success' => 'The license was deleted successfully.'
 	),

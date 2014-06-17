@@ -3,9 +3,9 @@
 {{-- Page title --}}
 @section('title')
 	@if ($manufacturer->id)
-		Update Manufacturer
+		@lang('admin/manufacturers/table.update') ::
 	@else
-		Create manufacturer
+		@lang('admin/manufacturers/table.create') ::
 	@endif
 @parent
 @stop
@@ -15,12 +15,12 @@
 
 <div class="row header">
     <div class="col-md-12">
-    	<a href="{{ URL::previous() }}" class="btn-flat gray pull-right"><i class="icon-plus-sign icon-white"></i> Back</a>
+    	<a href="{{ URL::previous() }}" class="btn-flat gray pull-right"><i class="icon-plus-sign icon-white"></i>  @lang('general.back')</a>
 		<h3>
 		@if ($manufacturer->id)
-		Update Manufacturer
+			@lang('admin/manufacturers/table.update')
 		@else
-			Create manufacturer
+			@lang('admin/manufacturers/table.create')
 		@endif
 	</h3>
 	</div>
@@ -39,8 +39,8 @@
 
 			<!-- Name -->
 			<div class="form-group {{ $errors->has('name') ? ' has-error' : '' }}">
-				<label for="name" class="col-md-2 control-label">Manufacturer Name</label>
-					<div class="col-md-7">
+				<label for="name" class="col-md-3 control-label">@lang('admin/manufacturers/table.name')</label>
+					<div class="col-md-6">
 						<input class="form-control" type="text" name="name" id="name" value="{{ Input::old('name', $manufacturer->name) }}" />
 						{{ $errors->first('name', '<span class="alert-msg"><i class="icon-remove-sign"></i> :message</span>') }}
 					</div>

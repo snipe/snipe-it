@@ -2,7 +2,7 @@
 
 {{-- Page title --}}
 @section('title')
-View License {{ $license->name }} ::
+@lang('admin/licenses/general.view') {{ $license->name }} ::
 @parent
 @stop
 
@@ -11,8 +11,8 @@ View License {{ $license->name }} ::
 
 <div class="row header">
     <div class="col-md-12">
-    	<a href="{{ route('update/license', $license->id) }}" class="btn-flat white pull-right"> Edit License</a>
-			<h3 class="name">History for {{ $license->name }}</h3>
+    	<a href="{{ route('update/license', $license->id) }}" class="btn-flat white pull-right"> @lang('admin/licenses/form.update')</a>
+			<h3 class="name">@lang('general.history_for') {{ $license->name }}</h3>
 	</div>
 </div>
 
@@ -20,23 +20,23 @@ View License {{ $license->name }} ::
 <div class="row profile">
 <div class="col-md-9 bio">
 
-<h6>License Info</h6>
+<h6>@lang('admin/licenses/general.info')</h6>
 
 <div class="col-md-12">
 @if ($license->serial)
-<div class="col-md-6"><strong>Serial: </strong> {{ $license->serial }} </div>
+<div class="col-md-6"><strong>@lang('admin/licenses/form.serial'): </strong> {{ $license->serial }} </div>
 @endif
 
 @if ($license->license_name)
-<div class="col-md-6"><strong>Licensed To: </strong> {{ $license->license_name }} </div>
+<div class="col-md-6"><strong>@lang('admin/licenses/form.to_name'): </strong> {{ $license->license_name }} </div>
 @endif
 
 @if ($license->license_email)
-<div class="col-md-6"><strong>Licensed Email: </strong> {{ $license->license_email }} </div>
+<div class="col-md-6"><strong>@lang('admin/licenses/form.to_email'): </strong> {{ $license->license_email }} </div>
 @endif
 
 @if ($license->notes)
-<div class="col-md-6"><strong>Notes: </strong>{{ $license->notes }}</div>
+<div class="col-md-6"><strong>@lang('admin/licenses/form.notes'): </strong>{{ $license->notes }}</div>
 @endif
 
 
@@ -47,12 +47,12 @@ View License {{ $license->name }} ::
 
 
 				<!-- checked out assets table -->
-				<h6>{{ $license->seats }} License Seats</h6>
+				<h6>{{ $license->seats }} @lang('admin/licenses/general.license_seats')</h6>
 				<table class="table table-hover">
 					<thead>
 						<tr>
-							<th class="col-md-2">Seat</th>
-							 <th class="col-md-6">User</th>
+							<th class="col-md-2">@lang('admin/licenses/general.seat')</th>
+							 <th class="col-md-6">@lang('admin/licenses/general.user')</th>
 							 <th class="col-md-2"></th>
 						</tr>
 					</thead>
@@ -72,9 +72,9 @@ View License {{ $license->name }} ::
 								</td>
 								<td>
 								@if ($licensedto->assigned_to)
-									<a href="{{ route('checkin/license', $licensedto->id) }}" class="btn-flat info"> Checkin </a>
+									<a href="{{ route('checkin/license', $licensedto->id) }}" class="btn-flat info"> @lang('general.checkin') </a>
 								@else
-									<a href="{{ route('checkout/license', $licensedto->id) }}" class="btn-flat success">Checkout</a>
+									<a href="{{ route('checkout/license', $licensedto->id) }}" class="btn-flat success">@lang('general.checkout')</a>
 								@endif
 								</td>
 
@@ -87,17 +87,17 @@ View License {{ $license->name }} ::
 					</tbody>
 				</table>
 				<br>
-				<h6>Checkout History</h6>
+				<h6>@lang('admin/licenses/general.checkout_history')</h6>
 
 				<table class="table table-hover">
 					<thead>
 						<tr>
 							<th class="col-md-1"></th>
-							<th class="col-md-3"><span class="line"></span>Date</th>
-							<th class="col-md-3"><span class="line"></span>Admin</th>
-							<th class="col-md-3"><span class="line"></span>Action</th>
-							<th class="col-md-3"><span class="line"></span>User</th>
-							<th class="col-md-3"><span class="line"></span>Note</th>
+							<th class="col-md-3"><span class="line"></span>@lang('general.date')</th>
+							<th class="col-md-3"><span class="line"></span>@lang('general.admin')</th>
+							<th class="col-md-3"><span class="line"></span>@lang('button.actions')</th>
+							<th class="col-md-3"><span class="line"></span>@lang('admin/licenses/general.user')</th>
+							<th class="col-md-3"><span class="line"></span>@lang('admin/licenses/form.notes')</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -140,10 +140,10 @@ View License {{ $license->name }} ::
 							@if ($license->adminuser)
 							{{ $license->adminuser->fullName() }}
 							@else
-							Unknown Admin
+							@lang('general.unknown_admin')
 							@endif
 							</td>
-							<td>created asset</td>
+							<td>@lang('general.created_asset')</td>
 							<td></td>
 							<td></td>
 						</tr>
@@ -153,23 +153,28 @@ View License {{ $license->name }} ::
 
 		<!-- side address column -->
 		<div class="col-md-3 col-xs-12 address pull-right">
-		<h6><br>More Info:</h6>
+		<h6><br>@lang('general.moreinfo'):</h6>
 				<ul>
 
 					@if ($license->purchase_date > 0)
-					<li>Purchase Date: {{ $license->purchase_date }} </li>
+					<li>@lang('admin/licenses/form.date'): {{ $license->purchase_date }} </li>
 					@endif
 					@if ($license->purchase_cost > 0)
-					<li>Purchase Cost: ${{ number_format($license->purchase_cost,2) }} </li>
+					<li>@lang('admin/licenses/form.cost'):
+					@lang('general.currency')
+					{{ number_format($license->purchase_cost,2) }} </li>
 					@endif
 					@if ($license->order_number)
-					<li>Order #: {{ $license->order_number }} </li>
+					<li>@lang('admin/licenses/form.order'):
+					{{ $license->order_number }} </li>
 					@endif
 					@if (($license->seats) && ($license->seats) > 0)
-					<li>Seats: {{ $license->seats }} </li>
+					<li>@lang('admin/licenses/form.seats'):
+					{{ $license->seats }} </li>
 					@endif
 					@if ($license->depreciation)
-					<li>Depreciation: {{ $license->depreciation->name }} ({{ $license->depreciation->months }} months)</li>
+					<li>@lang('admin/licenses/form.depreciation'):
+					{{ $license->depreciation->name }} ({{ $license->depreciation->months }} months)</li>
 					@endif
 				</ul>
 		</div>

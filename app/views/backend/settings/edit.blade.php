@@ -2,7 +2,7 @@
 
 {{-- Page title --}}
 @section('title')
-		Update Settings ::
+		@lang('admin/settings/general.update') ::
 @parent
 @stop
 
@@ -12,10 +12,11 @@
                 <!-- header -->
 
                 <div class="pull-right">
-					<a href="{{ URL::previous() }}" class="btn-flat gray"><i class="icon-circle-arrow-left icon-white"></i> Back</a>
+					<a href="{{ URL::previous() }}" class="btn-flat gray">
+					<i class="icon-circle-arrow-left icon-white"></i>  @lang('general.back')</a>
 				</div>
 
-				<h3 class="name">Update Settings</h3>
+				<h3 class="name">@lang('admin/settings/general.update')</h3>
 
 
                 <div class="row-fluid profile">
@@ -47,15 +48,17 @@
 									</div>
 
 									<div class="form-group {{ $errors->has('qr_code') ? 'error' : '' }}">
-										<label class="control-label" for="qr_code">Display QR Codes</label>
+										<label class="control-label" for="qr_code">
+										@lang('admin/settings/general.display_qr')
+										Display QR Codes</label>
 										<div class="controls">
 									@if ($is_gd_installed)
 											<input class="col-md-1" type="checkbox" name="qr_code" id="qr_code" value="1" {{ $setting->qr_code === '1' ? 'checked' : '' }} />
 									@else
 											<span class="help-inline">
-												PHP Image Processing and GD plugin is NOT installed.
+												@lang('admin/settings/general.php_gd_warning')
 												<br>
-												You must install php-gd to display QR codes, see <a href="http://www.php.net/manual/en/image.installation.php">install instructions</a>.
+												@lang('admin/settings/general.php_gd_info')
 											</span>
 									@endif
 											{{ $errors->first('qr_code', '<span class="help-inline">:message</span>') }}
@@ -63,13 +66,14 @@
 									</div>
 
 									<div class="form-group {{ $errors->has('qr_text') ? 'error' : '' }}">
-										<label class="control-label" for="qr_text">QR Code Text</label>
+										<label class="control-label" for="qr_text"> @lang('admin/settings/general.qr_text')</label>
 										<div class="controls">
 									@if ($setting->qr_code === '1')
 											<input class="col-md-9" type="text" name="qr_text" id="qr_text" value="{{ Input::old('qr_text', $setting->qr_text) }}" />
 									@else
 											<span class="help-inline">
-												Enable QR Codes first to set this
+												@lang('admin/settings/general.qr_help')
+
 											</span>
 									@endif
 											{{ $errors->first('qr_text', '<span class="help-inline">:message</span>') }}
@@ -95,7 +99,7 @@
                     <!-- side address column -->
                     <div class="col-md-3 address pull-right">
 					<br /><br />
-						<p>These settings let you customize certain aspects of your installation. </p>
+						<p>@lang('admin/settings/general.info')</p>
 
                     </div>
 

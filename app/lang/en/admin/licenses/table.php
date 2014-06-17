@@ -2,15 +2,15 @@
 
 return array(
 
-	'id'      => 'ID',
-	'seats'   => 'Seats',
-	'title'      => 'License',
-	'purchased'   => 'Purchased',
-	'serial'   => 'Serial',
-	'assigned_to'   => 'Assigned To',
-	'license_name'   => 'Licensed To',
-	'license_email'   => 'License Email',
-	'purchase_date'   => 'Purchase Date',
-	'checkout'   => 'In/Out',
+	'assigned_to'   	=> 'Assigned To',
+	'checkout'   		=> 'In/Out',
+	'id'      			=> 'ID',
+	'license_email'   	=> 'License Email',
+	'license_name'   	=> 'Licensed To',
+	'purchase_date'   	=> 'Purchase Date',
+	'purchased'   		=> 'Purchased',
+	'seats'   			=> 'Seats',
+	'serial'   			=> 'Serial',
+	'title'      		=> 'License',
 
 );

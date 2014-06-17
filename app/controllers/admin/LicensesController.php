@@ -79,15 +79,21 @@ class LicensesController extends AdminController {
 			$license->seats 			= e(Input::get('seats'));
 			$license->purchase_date 	= e(Input::get('purchase_date'));
 			$license->purchase_cost 	= e(Input::get('purchase_cost'));
+			$license->depreciate 		= e(Input::get('depreciate'));
 			$license->user_id 			= Sentry::getId();
 
-			if ($license->purchase_date == "0000-00-00") {
+			if (($license->purchase_date == "") || ($license->purchase_date == "0000-00-00")) {
 				$license->purchase_date = NULL;
 			}
 
-			if ($license->purchase_cost == "0.00") {
+			if (($license->purchase_cost == "") || ($license->purchase_cost == "0.00")) {
 				$license->purchase_cost = NULL;
 			}
+
+			if ($license->depreciate == "") {
+				$license->depreciate = 0;
+			}
+
 
 			// Was the license created?
 			if($license->save())
@@ -98,6 +104,8 @@ class LicensesController extends AdminController {
 					$license_seat = new LicenseSeat();
 					$license_seat->license_id 		= $insertedId;
 					$license_seat->user_id 			= Sentry::getId();
+					$license_seat->assigned_to 		= 0;
+					$license_seat->notes 			= NULL;
 					$license_seat->save();
 				}
 

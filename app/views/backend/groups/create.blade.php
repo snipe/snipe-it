@@ -2,7 +2,7 @@
 
 {{-- Web site Title --}}
 @section('title')
-Create Group ::
+@lang('admin/groups/titles.create_group') ::
 @parent
 @stop
 
@@ -12,7 +12,7 @@ Create Group ::
 
 <div class="row header">
     <div class="col-md-12">
-			<a href="{{ URL::previous() }}" class="btn btn-flat gray pull-right"><i class="icon-circle-arrow-left icon-white"></i> Back</a>
+			<a href="{{ URL::previous() }}" class="btn btn-flat gray pull-right"><i class="icon-circle-arrow-left icon-white"></i> @lang('general.back')</a>
 			<h3>@lang('admin/groups/titles.create_group')</h3>
 	</div>
 </div>
