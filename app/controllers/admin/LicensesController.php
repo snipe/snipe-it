@@ -191,6 +191,62 @@ class LicensesController extends AdminController {
 			$license->purchase_date 	= e(Input::get('purchase_date'));
 			$license->purchase_cost 	= e(Input::get('purchase_cost'));
 
+			//Are we changing the total number of seats?
+			if( $license->seats != e(Input::get('seats')))
+			{
+				//Determine how many seats we are dealing with
+				$difference = e(Input::get('seats')) - $license->licenseseats()->count();
+
+				if( $difference < 0 )
+				{
+					//Filter out any license which have a user attached;
+					$seats = $license->licenseseats->filter(function($seat)
+					{
+						return is_null($seat->user);
+					});
+
+					//If the remaining collection is as large or larger than the number of seats we want to delete
+					if($seats->count() >= abs($difference))
+					{
+						for ($i=1; $i <= abs($difference); $i++) {
+							//Delete the appropriate number of seats
+							$seats->first()->delete();
+						}
+
+						//Log the deletion of seats to the log
+						$logaction = new Actionlog();
+						$logaction->asset_id = $license->id;
+						$logaction->asset_type = 'software';
+						$logaction->user_id = Sentry::getUser()->id;
+						$logaction->note = abs($difference)." seats";
+						$log = $logaction->logaction('delete seats');
+					} else {
+						// Redirect to the license edit page
+						return Redirect::to("admin/licenses/$licenseId/edit")->with('error', Lang::get('admin/licenses/message.assoc_users'));
+					}
+				} else {
+
+					for ($i=1; $i <= $difference; $i++) {
+						//Create a seat for this license
+						$license_seat = new LicenseSeat();
+						$license_seat->license_id 		= $license->id;
+						$license_seat->user_id 			= Sentry::getId();
+						$license_seat->assigned_to 		= 0;
+						$license_seat->notes 			= NULL;
+						$license_seat->save();
+					}
+
+					//Log the addition of license to the log.
+					$logaction = new Actionlog();
+					$logaction->asset_id = $license->id;
+					$logaction->asset_type = 'software';
+					$logaction->user_id = Sentry::getUser()->id;
+					$logaction->note = abs($difference)." seats";
+					$log = $logaction->logaction('add seats');
+				}
+				$license->seats 			= e(Input::get('seats'));
+			}
+
 			// Was the asset created?
 			if($license->save())
 			{
