@@ -1,4 +1,4 @@
-[![Click here to lend your support to: Snipe IT - Free Open Source Asset Management System and make a donation at pledgie.com](https://pledgie.com/campaigns/22899.png?skin_name=chrome)](https://pledgie.com/campaigns/22899) [![Build Status](https://travis-ci.org/snipe/snipe-it.svg?branch=develop)](https://travis-ci.org/snipe/snipe-it)
+[![Click here to lend your support to: Snipe IT - Free Open Source Asset Management System and make a donation at pledgie.com](https://pledgie.com/campaigns/22899.png?skin_name=chrome)](https://pledgie.com/campaigns/22899) [![Build Status](https://travis-ci.org/snipe/snipe-it.svg?branch=develop)](https://travis-ci.org/snipe/snipe-it) [![Stories in Ready](https://badge.waffle.io/snipe/snipe-it.png?label=ready&title=Ready)](http://waffle.io/snipe/snipe-it)
 
 ## Snipe-IT - Asset Management For the Rest of Us
 
@@ -10,9 +10,13 @@ Many thanks to the [Laravel 4 starter site](https://github.com/brunogaspar/larav
 
 This project is being actively developed (at what seems like breakneck speed sometimes!) We're still in alpha release, so this is NOT recommended for production use yet, as many more things will likely change before v1.0-stable is ready - but we're [releasing quite frequently](https://github.com/snipe/snipe-it/releases).
 
-### Bug Reports and Feature Requests
+### Bug Reports & Feature Requests
 
-Feel free to check out the [GitHub Issues for this project](https://github.com/snipe/snipe-it/issues) to check on progress, open a bug report, request a feature, or see what open issues you can help with.
+Feel free to check out the [GitHub Issues for this project](https://github.com/snipe/snipe-it/issues) to open a bug report or see what open issues you can help with. Please search through existing issues (open and closed) to see if your question hasn't already been answered before opening a new issue.
+
+We use Waffle.io to help better communicate our roadmap with users. This will show you the backlog, what's ready to be worked on, what's in progress, and what's completed.
+
+[![Stories in Ready](https://badge.waffle.io/snipe/snipe-it.png?label=ready&title=Ready)](http://waffle.io/snipe/snipe-it)
 
 -----
 
