@@ -14,7 +14,7 @@ This project is being actively developed (at what seems like breakneck speed som
 
 Feel free to check out the [GitHub Issues for this project](https://github.com/snipe/snipe-it/issues) to open a bug report or see what open issues you can help with. Please search through existing issues (open and closed) to see if your question hasn't already been answered before opening a new issue.
 
-We use Waffle.io to help better communicate our roadmap with users. This will show you the backlog, what's ready to be worked on, what's in progress, and what's completed.
+We use Waffle.io to help better communicate our roadmap with users. Our [project page there](http://waffle.io/snipe/snipe-it) will show you the backlog, what's ready to be worked on, what's in progress, and what's completed.
 
 [![Stories in Ready](https://badge.waffle.io/snipe/snipe-it.png?label=ready&title=Ready)](http://waffle.io/snipe/snipe-it)
 
