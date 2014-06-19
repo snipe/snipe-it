@@ -27,6 +27,9 @@
 			<tr role="row">
 			<th class="col-sm-1">@lang('admin/hardware/table.asset_tag')</th>
 			<th class="col-sm-1">@lang('admin/hardware/table.title')</th>
+			@if (Setting::getSettings()->display_asset_name)
+				<th class="col-sm-1">@lang('general.name')</th>
+			@endif
 			<th class="col-sm-1">@lang('admin/hardware/table.serial')</th>
 			<th class="col-sm-1">@lang('admin/hardware/table.checkoutto')</th>
 			<th class="col-sm-1">@lang('admin/hardware/table.location')</th>
@@ -43,6 +46,9 @@
 		<tr>
 			<td>{{ $asset->asset_tag }}</td>
 			<td>{{ $asset->model->name }}</td>
+			@if (Setting::getSettings()->display_asset_name)
+				<td>{{ $asset->name }}</td>
+			@endif
 			<td>{{ $asset->serial }}</td>
 			<td>
 			@if ($asset->assigned_to != 0)

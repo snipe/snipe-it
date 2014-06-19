@@ -44,6 +44,9 @@
 		<tr role="row">
 			<th class="col-md-1" bSortable="true">@lang('admin/hardware/table.asset_tag')</th>
 			<th class="col-md-3" bSortable="true">@lang('admin/hardware/table.title')</th>
+			@if (Setting::getSettings()->display_asset_name)
+			<th class="col-md-3" bSortable="true">@lang('general.name')</th>
+			@endif
 			<th class="col-md-2" bSortable="true">@lang('admin/hardware/table.serial')</th>
 			@if (Input::get('Pending') || Input::get('Undeployable') || Input::get('RTD'))
 			<th class="col-md-2" bSortable="true">@lang('general.status')</th>
@@ -62,6 +65,9 @@
 		<tr>
 			<td><a href="{{ route('view/hardware', $asset->id) }}">{{ $asset->asset_tag }}</a></td>
 			<td><a href="{{ route('view/hardware', $asset->id) }}">{{ $asset->model->name }}</a></td>
+			@if (Setting::getSettings()->display_asset_name)
+				<td><a href="{{ route('view/hardware', $asset->id) }}">{{ $asset->name }}</a></td>
+			@endif
 			<td>{{ $asset->serial }}</td>
 			@if (Input::get('Pending') || Input::get('Undeployable') || Input::get('RTD'))
 				<td>

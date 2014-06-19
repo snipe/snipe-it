@@ -2,7 +2,7 @@
 
 {{-- Page title --}}
 @section('title')
-@lang('admin/settings/general.title') ::
+Settings ::
 @parent
 @stop
 
@@ -16,7 +16,7 @@
 				</div>
 
 
-				<h3 class="name">@lang('admin/settings/general.title')</h3>
+				<h3 class="name">Settings</h3>
 
 
                 <div class="row-fluid profile">
@@ -29,22 +29,33 @@
                             <table class="table table-hover">
 							<thead>
 								<tr>
-									<th class="col-md-3">@lang('admin/settings/general.setting')</th>
-									<th class="col-md-3"><span class="line"></span>@lang('admin/settings/general.value')</th>
+									<th class="col-md-3">Setting</th>
+									<th class="col-md-3"><span class="line"></span>Value</th>
 								</tr>
 							</thead>
 							<tbody>
 								@foreach ($settings as $setting)
 								<tr>
-									<td>@lang('general.site_name')</td>
+									<td>Site Name</td>
 									<td>{{ $setting->site_name }}  </td>
 								</tr>
 								<tr>
-									<td>@lang('general.per_page')</td>
+									<td>@lang('admin/settings/general.display_asset_name')</td>
+
+
+@if ($setting->display_asset_name === '1')
+								<td>Yes</td>
+@else
+								<td>No</td>
+@endif
+								</tr>
+
+								<tr>
+									<td>Per Page</td>
 									<td>{{ $setting->per_page }}  </td>
 								</tr>
 								<tr>
-									<td>@lang('admin/settings/general.display_qr')</td>
+									<td>Display QR Codes</td>
 @if ($setting->qr_code === '1')
 								<td>Yes</td>
 @else
@@ -52,7 +63,7 @@
 @endif
 								</tr>
 <tr>
-									<td>@lang('admin/settings/general.qr_text')</td>
+									<td>QR Code Text</td>
 									<td>{{ $setting->qr_text }}</td>
 								</tr>
 								@endforeach
@@ -66,7 +77,7 @@
                     <div class="col-md-3 address pull-right">
 						<br /><br />
 
-						<p>@lang('admin/settings/general.info')</p>
+						<p>These settings let you customize certain aspects of your installation. </p>
 
                     </div>
 @stop
