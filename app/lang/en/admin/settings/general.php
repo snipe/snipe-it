@@ -10,5 +10,6 @@ return array(
 	'setting'					=> 'Setting',
 	'title'  					=> 'Settings',
 	'update'  					=> 'Update Settings',
-	'value'					=> 'Value',
+	'value'						=> 'Value',
+	'display_asset_name'		=> 'Display Asset Name',
 );

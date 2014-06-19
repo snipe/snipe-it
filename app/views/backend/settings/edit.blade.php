@@ -39,6 +39,21 @@
 											{{ $errors->first('site_name', '<span class="help-inline">:message</span>') }}
 										</div>
 									</div>
+
+									<div class="form-group {{ $errors->has('display_asset_name') ? 'error' : '' }}">
+										<label class="control-label" for="display_asset_name">
+										@lang('admin/settings/general.display_asset_name')
+										</label>
+										<div class="controls">
+
+											<input class="col-md-1" type="checkbox" name="display_asset_name" id="display_asset_name" value="1" {{ $setting->display_asset_name === '1' ? 'checked' : '' }} />
+
+											{{ $errors->first('display_asset_name', '<span class="help-inline">:message</span>') }}
+											</div>
+									</div>
+
+
+
 									<div class="form-group {{ $errors->has('per_page') ? 'error' : '' }}">
 										<label class="control-label" for="per_page">Results Per Page</label>
 										<div class="controls">
