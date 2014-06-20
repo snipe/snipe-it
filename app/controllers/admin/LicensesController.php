@@ -188,8 +188,20 @@ class LicensesController extends AdminController {
 			$license->license_name 		= e(Input::get('license_name'));
 			$license->notes 			= e(Input::get('notes'));
 			$license->order_number 		= e(Input::get('order_number'));
-			$license->purchase_date 	= e(Input::get('purchase_date'));
-			$license->purchase_cost 	= e(Input::get('purchase_cost'));
+
+			// Update the asset data
+			if ( e(Input::get('purchase_date')) == '') {
+					$license->purchase_date =  NULL;
+			} else {
+					$license->purchase_date = e(Input::get('purchase_date'));
+			}
+
+			if ( e(Input::get('purchase_cost')) == '') {
+					$license->purchase_cost =  NULL;
+			} else {
+					$license->purchase_cost = e(Input::get('purchase_cost'));
+			}
+
 
 			//Are we changing the total number of seats?
 			if( $license->seats != e(Input::get('seats')))
@@ -205,12 +217,15 @@ class LicensesController extends AdminController {
 						return is_null($seat->user);
 					});
 
+
 					//If the remaining collection is as large or larger than the number of seats we want to delete
 					if($seats->count() >= abs($difference))
 					{
 						for ($i=1; $i <= abs($difference); $i++) {
 							//Delete the appropriate number of seats
-							$seats->first()->delete();
+							//$seats->first()->delete();
+							$license->licenseseats->pop()->delete();
+							echo '<li>'.$i;
 						}
 
 						//Log the deletion of seats to the log
@@ -219,7 +234,9 @@ class LicensesController extends AdminController {
 						$logaction->asset_type = 'software';
 						$logaction->user_id = Sentry::getUser()->id;
 						$logaction->note = abs($difference)." seats";
+						$logaction->checkedout_to =  NULL;
 						$log = $logaction->logaction('delete seats');
+
 					} else {
 						// Redirect to the license edit page
 						return Redirect::to("admin/licenses/$licenseId/edit")->with('error', Lang::get('admin/licenses/message.assoc_users'));
@@ -364,20 +381,33 @@ class LicensesController extends AdminController {
 
 
 		// Update the asset data
-		$licenseseat->assigned_to            		= e(Input::get('assigned_to'));
-
+		if ( e(Input::get('assigned_to')) == '') {
+				$licenseseat->assigned_to =  NULL;
+		} else {
+				$licenseseat->assigned_to = e(Input::get('assigned_to'));
+		}
 
 		// Was the asset updated?
 		if($licenseseat->save())
 		{
+
 			$logaction = new Actionlog();
 			$logaction->asset_id = $licenseseat->license_id;
-			$logaction->checkedout_to = $licenseseat->assigned_to;
 			$logaction->location_id = $assigned_to->location_id;
 			$logaction->asset_type = 'software';
 			$logaction->user_id = Sentry::getUser()->id;
 			$logaction->note = e(Input::get('note'));
+
+
+			// Update the asset data
+			if ( e(Input::get('assigned_to')) == '') {
+					$logaction->checkedout_to = NULL;
+			} else {
+					$logaction->checkedout_to = e(Input::get('assigned_to'));
+			}
+
 			$log = $logaction->logaction('checkout');
+
 
 			// Redirect to the new asset page
 			return Redirect::to("admin/licenses")->with('success', Lang::get('admin/licenses/message.checkout.success'));
