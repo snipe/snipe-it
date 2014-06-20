@@ -223,8 +223,7 @@ class LicensesController extends AdminController {
 					{
 						for ($i=1; $i <= abs($difference); $i++) {
 							//Delete the appropriate number of seats
-							$license->licenseseats->pop()->delete();
-							echo '<li>'.$i;
+							$seats->pop()->delete();
 						}
 
 						//Log the deletion of seats to the log
