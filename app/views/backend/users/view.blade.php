@@ -76,8 +76,8 @@ View User {{ $user->fullName() }} ::
                             @else
 
                             <div class="col-md-12">
-								<div class="alert alert-warning alert-block">
-									<i class="icon-warning-sign"></i>
+								<div class="alert alert-info alert-block">
+									<i class="icon-info-sign"></i>
 									@lang('general.no_results')
 								</div>
 							</div>
@@ -109,10 +109,10 @@ View User {{ $user->fullName() }} ::
                             @else
 
                             <div class="col-md-12">
-								<div class="alert alert-warning alert-block">
-									<i class="icon-warning-sign"></i>
-									@lang('general.no_results')
-								</div>
+								<div class="alert alert-info alert-block">
+                                    <i class="icon-info-sign"></i>
+                                    @lang('general.no_results')
+                                </div>
 							</div>
                             @endif
 
@@ -152,10 +152,10 @@ View User {{ $user->fullName() }} ::
 
 
                             <div class="col-md-12">
-								<div class="alert alert-warning alert-block">
-									<i class="icon-warning-sign"></i>
-									@lang('general.no_results')
-								</div>
+								<div class="alert alert-info alert-block">
+                                    <i class="icon-info-sign"></i>
+                                    @lang('general.no_results')
+                                </div>
 							</div>
                             @endif
 
