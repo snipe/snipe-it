@@ -78,7 +78,7 @@ View User {{ $user->fullName() }} ::
                             <div class="col-md-12">
 								<div class="alert alert-warning alert-block">
 									<i class="icon-warning-sign"></i>
-									@lang('admin/users/table.noresults')
+									@lang('general.no_results')
 								</div>
 							</div>
                             @endif
@@ -111,7 +111,7 @@ View User {{ $user->fullName() }} ::
                             <div class="col-md-12">
 								<div class="alert alert-warning alert-block">
 									<i class="icon-warning-sign"></i>
-									@lang('admin/users/table.noresults')
+									@lang('general.no_results')
 								</div>
 							</div>
                             @endif
@@ -154,7 +154,7 @@ View User {{ $user->fullName() }} ::
                             <div class="col-md-12">
 								<div class="alert alert-warning alert-block">
 									<i class="icon-warning-sign"></i>
-									@lang('admin/users/table.noresults')
+									@lang('general.no_results')
 								</div>
 							</div>
                             @endif
