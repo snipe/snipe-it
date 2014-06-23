@@ -39,7 +39,7 @@
 				<label for="name" class="col-md-2 control-label">@lang('admin/locations/table.name')</label>
 					<div class="col-md-12">
 						<div class="col-xs-8">
-						<input class="form-control" type="text" name="name" id="name" value="{{ Input::old('name', $location->name) }}" />
+						<input class="form-control" type="text" name="name" id="name" value="{{{ Input::old('name', $location->name) }}}" />
 					</div>
 					{{ $errors->first('name', '<span class="alert-msg"><i class="icon-remove-sign"></i> :message</span>') }}
 					</div>
@@ -50,7 +50,7 @@
 				<label for="address" class="col-md-2 control-label">@lang('admin/locations/table.address')</label>
 					<div class="col-md-12">
 						<div class="col-xs-8">
-						<input class="form-control" type="text" name="address" id="address" value="{{ Input::old('address', $location->address) }}" />
+						<input class="form-control" type="text" name="address" id="address" value="{{{ Input::old('address', $location->address) }}}" />
 					</div>
 					{{ $errors->first('address', '<span class="alert-msg"><i class="icon-remove-sign"></i> :message</span>') }}
 					</div>
@@ -61,7 +61,7 @@
 				<label for="address2" class="col-md-2 control-label"></label>
 					<div class="col-md-12">
 						<div class="col-xs-8">
-						<input class="form-control" type="text" name="address2" id="address2" value="{{ Input::old('address2', $location->address2) }}" />
+						<input class="form-control" type="text" name="address2" id="address2" value="{{{ Input::old('address2', $location->address2) }}}" />
 					</div>
 					{{ $errors->first('address2', '<span class="alert-msg"><i class="icon-remove-sign"></i> :message</span>') }}
 					</div>
@@ -72,7 +72,7 @@
 				<label for="city" class="col-md-2 control-label">@lang('admin/locations/table.city')</label>
 					<div class="col-md-12">
 						<div class="col-xs-8">
-						<input class="form-control" type="text" name="city" id="city" value="{{ Input::old('city', $location->city) }}" />
+						<input class="form-control" type="text" name="city" id="city" value="{{{ Input::old('city', $location->city) }}}" />
 					</div>
 					{{ $errors->first('city', '<span class="alert-msg"><i class="icon-remove-sign"></i> :message</span>') }}
 					</div>
@@ -83,7 +83,7 @@
 				<label for="state" class="col-md-2 control-label">@lang('admin/locations/table.state')</label>
 					<div class="col-md-12">
 						<div class="col-xs-2">
-						<input class="form-control" type="text" name="state" id="state" value="{{ Input::old('state', $location->state) }}" />
+						<input class="form-control" type="text" name="state" id="state" value="{{{ Input::old('state', $location->state) }}}" />
 					</div>
 					{{ $errors->first('state', '<span class="alert-msg"><i class="icon-remove-sign"></i> :message</span>') }}
 					</div>
@@ -94,7 +94,7 @@
 				<label for="zip" class="col-md-2 control-label">@lang('admin/locations/table.zip')</label>
 					<div class="col-md-12">
 						<div class="col-xs-3">
-						<input class="form-control" type="text" name="zip" id="zip" value="{{ Input::old('zip', $location->zip) }}" />
+						<input class="form-control" type="text" name="zip" id="zip" value="{{{ Input::old('zip', $location->zip) }}}" />
 					</div>
 					{{ $errors->first('zip', '<span class="alert-msg"><i class="icon-remove-sign"></i> :message</span>') }}
 					</div>
@@ -105,7 +105,7 @@
 				<label for="country" class="col-md-2 control-label">@lang('admin/locations/table.country')</label>
 					<div class="col-md-12">
 						<div class="col-xs-2">
-						<input class="form-control" type="text" name="country" id="country" value="{{ Input::old('country', $location->country) }}" />
+						<input class="form-control" type="text" name="country" id="country" value="{{{ Input::old('country', $location->country) }}}" />
 						</div>
 						{{ $errors->first('country', '<span class="alert-msg"><i class="icon-remove-sign"></i> :message</span>') }}
 					</div>

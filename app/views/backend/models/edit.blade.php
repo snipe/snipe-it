@@ -38,7 +38,7 @@
 			<div class="form-group {{ $errors->has('name') ? ' has-error' : '' }}">
 				<label for="name" class="col-md-2 control-label">@lang('admin/models/table.name')</label>
 					<div class="col-md-7">
-						<input class="form-control" type="text" name="name" id="name" value="{{ Input::old('name', $model->name) }}" />
+						<input class="form-control" type="text" name="name" id="name" value="{{{ Input::old('name', $model->name) }}}" />
 						{{ $errors->first('name', '<span class="alert-msg"><i class="icon-remove-sign"></i> :message</span>') }}
 					</div>
 			</div>
@@ -47,7 +47,7 @@
 			<div class="form-group {{ $errors->has('modelno') ? ' has-error' : '' }}">
 				<label for="modelno" class="col-md-2 control-label">@lang('general.model_no')</label>
 					<div class="col-md-7">
-						<input class="form-control" type="text" name="modelno" id="modelno" value="{{ Input::old('modelno', $model->modelno) }}" />
+						<input class="form-control" type="text" name="modelno" id="modelno" value="{{{ Input::old('modelno', $model->modelno) }}}" />
 						{{ $errors->first('modelno', '<span class="alert-msg"><i class="icon-remove-sign"></i> :message</span>') }}
 					</div>
 			</div>
@@ -83,7 +83,7 @@
 				<label for="eol" class="col-md-2 control-label">@lang('general.eol')</label>
 				<div class="col-md-2">
 					<div class="input-group">
-					<input class="col-md-1 form-control" type="text" name="eol" id="eol" value="{{ Input::old('eol', $model->eol) }}" />   <span class="input-group-addon">
+					<input class="col-md-1 form-control" type="text" name="eol" id="eol" value="{{{ Input::old('eol', $model->eol) }}}" />   <span class="input-group-addon">
 					@lang('general.months')
 					</span>
 					{{ $errors->first('eol', '<span class="alert-msg"><i class="icon-remove-sign"></i> :message</span>') }}

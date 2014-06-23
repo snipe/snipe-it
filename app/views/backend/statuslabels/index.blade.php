@@ -34,7 +34,7 @@
 			<tbody>
 				@foreach ($statuslabels as $statuslabel)
 				<tr>
-					<td>{{ $statuslabel->name }}</td>
+					<td>{{{ $statuslabel->name }}}</td>
 					<td>
 						<a href="{{ route('update/statuslabel', $statuslabel->id) }}" class="btn btn-warning"><i class="icon-pencil icon-white"></i></a>
 <a data-html="false" class="btn delete-asset btn-danger" data-toggle="modal" href="{{ route('delete/statuslabel', $statuslabel->id) }}" data-content="@lang('admin/statuslabels/message.delete.confirm')"

@@ -44,41 +44,41 @@
 
 		@foreach ($assets as $asset)
 		<tr>
-			<td>{{ $asset->asset_tag }}</td>
-			<td>{{ $asset->model->name }}</td>
+			<td>{{{ $asset->asset_tag }}}</td>
+			<td>{{{ $asset->model->name }}}</td>
 			@if (Setting::getSettings()->display_asset_name)
-				<td>{{ $asset->name }}</td>
+				<td>{{{ $asset->name }}}</td>
 			@endif
 			<td>{{ $asset->serial }}</td>
 			<td>
 			@if ($asset->assigned_to != 0)
 				<a href="{{ route('view/user', $asset->assigned_to) }}">
-				{{ $asset->assigneduser->fullName() }}
+				{{{ $asset->assigneduser->fullName() }}}
 				</a>
 			@endif
 			</td>
 			<td>
 			@if (($asset->assigned_to > 0) && ($asset->assigneduser->location_id > 0))
-					{{ Location::find($asset->assigneduser->location_id)->city }}
+					{{{ Location::find($asset->assigneduser->location_id)->city }}}
 					,
-					{{ Location::find($asset->assigneduser->location_id)->state }}
+					{{{ Location::find($asset->assigneduser->location_id)->state }}}
 			@endif
 			</td>
-			<td>{{ $asset->purchase_date }}</td>
+			<td>{{{ $asset->purchase_date }}}</td>
 
 			<td>
 			@if ($asset->model->eol)
-				{{ $asset->eol_date() }}
+				{{{ $asset->eol_date() }}}
 			@endif
 			</td>
 
 			@if ($asset->purchase_cost > 0)
 			<td class="align-right">@lang('general.currency')
-			{{ number_format($asset->purchase_cost) }}</td>
+			{{{ number_format($asset->purchase_cost) }}}</td>
 			<td class="align-right">@lang('general.currency')
-			{{ number_format($asset->depreciate()) }}</td>
+			{{{ number_format($asset->depreciate()) }}}</td>
 			<td class="align-right">@lang('general.currency')
-			-{{ number_format(($asset->purchase_cost - $asset->depreciate())) }}</td>
+			-{{{ number_format(($asset->purchase_cost - $asset->depreciate())) }}}</td>
 			@else
 			<td></td>
 			<td></td>

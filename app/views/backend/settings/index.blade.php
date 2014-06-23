@@ -37,34 +37,34 @@ Settings ::
 								@foreach ($settings as $setting)
 								<tr>
 									<td>Site Name</td>
-									<td>{{ $setting->site_name }}  </td>
+									<td>{{{ $setting->site_name }}} </td>
 								</tr>
 								<tr>
 									<td>@lang('admin/settings/general.display_asset_name')</td>
 
 
-@if ($setting->display_asset_name === '1')
-								<td>Yes</td>
-@else
-								<td>No</td>
-@endif
+									@if ($setting->display_asset_name === '1')
+										<td>Yes</td>
+									@else
+										<td>No</td>
+									@endif
 								</tr>
 
 								<tr>
 									<td>Per Page</td>
-									<td>{{ $setting->per_page }}  </td>
+									<td>{{{ $setting->per_page }}}  </td>
 								</tr>
 								<tr>
 									<td>Display QR Codes</td>
-@if ($setting->qr_code === '1')
-								<td>Yes</td>
-@else
-								<td>No</td>
-@endif
+										@if ($setting->qr_code === '1')
+											<td>Yes</td>
+										@else
+											<td>No</td>
+										@endif
 								</tr>
-<tr>
+								<tr>
 									<td>QR Code Text</td>
-									<td>{{ $setting->qr_text }}</td>
+									<td>{{{ $setting->qr_text }}}</td>
 								</tr>
 								@endforeach
 							</tbody>

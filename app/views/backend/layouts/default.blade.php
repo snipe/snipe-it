@@ -6,7 +6,7 @@
 		<meta charset="utf-8" />
 		<title>
 			@section('title')
-			 {{ Setting::getSettings()->site_name }}
+			 {{{ Setting::getSettings()->site_name }}}
 			@show
 		</title>
 
@@ -79,7 +79,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="/">{{ Setting::getSettings()->site_name }}</a>
+            <a class="navbar-brand" href="/">{{{ Setting::getSettings()->site_name }}}</a>
         </div>
 
         <ul class="nav navbar-nav pull-right hidden-xs">
@@ -92,17 +92,17 @@
                         <b class="caret"></b>
                     </a>
                     <ul class="dropdown-menu">
-                       <li {{ (Request::is('hardware/create') ? 'class="active"' : '') }}>
+                       <li {{{ (Request::is('hardware/create') ? 'class="active"' : '') }}}>
                        		<a href="{{ route('create/hardware') }}">
                        			<i class="icon-plus"></i>
                        			@lang('general.asset')</a>
                        	</li>
-						<li {{ (Request::is('admin/licenses/create') ? 'class="active"' : '') }}>
+						<li {{{ (Request::is('admin/licenses/create') ? 'class="active"' : '') }}}>
 							<a href="{{ route('create/licenses') }}">
 								<i class="icon-plus"></i>
 								@lang('general.license')</a>
 						</li>
-						<li {{ (Request::is('admin/users/create') ? 'class="active"' : '') }}>
+						<li {{{ (Request::is('admin/users/create') ? 'class="active"' : '') }}}>
 							<a href="{{ route('create/user') }}">
 							<i class="icon-plus"></i>
 							@lang('general.user')</a>
@@ -112,11 +112,11 @@
 				@endif
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle hidden-xs hidden-sm" data-toggle="dropdown">
-                        {{ Lang::get('general.welcome', array('name' => Sentry::getUser()->first_name)) }}
+                        {{{ Lang::get('general.welcome', array('name' => Sentry::getUser()->first_name)) }}}
                         <b class="caret"></b>
                     </a>
                     <ul class="dropdown-menu">
-						<li{{ (Request::is('account/profile') ? ' class="active"' : '') }}>
+						<li{{{ (Request::is('account/profile') ? ' class="active"' : '') }}}>
 							<a href="{{ route('profile') }}">
 								<i class="icon-user"></i> @lang('general.profile')
 							</a>
@@ -131,7 +131,7 @@
                     </ul>
                 </li>
                 @if(Sentry::getUser()->hasAccess('admin'))
-                <li class="dropdown{{ (Request::is('admin/users*|admin/groups*') ? ' active' : '') }}  hidden-phone">
+                <li class="dropdown{{ (Request::is('admin/users*|admin/groups*') ? ' active' : '') }}}  hidden-phone">
 					<a class="dropdown-toggle" data-toggle="dropdown" href="{{ URL::to('admin/users') }}">
 						<i class="icon-wrench icon-white"></i> @lang('general.admin') <span class="caret"></span>
 					</a>
@@ -176,7 +176,7 @@
 				@endif
 
 			@else
-					<li {{ (Request::is('auth/signin') ? 'class="active"' : '') }}><a href="{{ route('signin') }}">@lang('general.sign_in')</a></li>
+					<li {{{ (Request::is('auth/signin') ? 'class="active"' : '') }}}><a href="{{ route('signin') }}">@lang('general.sign_in')</a></li>
             @endif
             </ul>
         </div>
@@ -197,12 +197,12 @@
                 </a>
 
                 <ul class="submenu{{ (Request::is('hardware*') ? ' active' : '') }}">
-                    <li><a href="{{ URL::to('hardware?Deployed=true') }}" {{ (Request::query('Deployed') ? ' class="active"' : '') }} >@lang('general.deployed')</a></li>
-                    <li><a href="{{ URL::to('hardware?RTD=true') }}" {{ (Request::query('RTD') ? ' class="active"' : '') }} >@lang('general.ready_to_deploy')</a></li>
-                    <li><a href="{{ URL::to('hardware?Pending=true') }}" {{ (Request::query('Pending') ? ' class="active"' : '') }} >@lang('general.pending')</a></li>
-                    <li><a href="{{ URL::to('hardware?Undeployable=true') }}" {{ (Request::query('Undeployable') ? ' class="active"' : '') }} >@lang('general.undeployable')</a></li>
+                    <li><a href="{{ URL::to('hardware?Deployed=true') }}" {{{ (Request::query('Deployed') ? ' class="active"' : '') }}} >@lang('general.deployed')</a></li>
+                    <li><a href="{{ URL::to('hardware?RTD=true') }}" {{{ (Request::query('RTD') ? ' class="active"' : '') }}} >@lang('general.ready_to_deploy')</a></li>
+                    <li><a href="{{ URL::to('hardware?Pending=true') }}" {{{ (Request::query('Pending') ? ' class="active"' : '') }}} >@lang('general.pending')</a></li>
+                    <li><a href="{{ URL::to('hardware?Undeployable=true') }}" {{{ (Request::query('Undeployable') ? ' class="active"' : '') }}} >@lang('general.undeployable')</a></li>
                     <li><a href="{{ URL::to('hardware') }}">@lang('general.list_all')</a></li>
-                    <li><a href="{{ URL::to('hardware/models') }}" {{ (Request::is('hardware/models*') ? ' class="active"' : '') }} >@lang('general.asset_models')</a></li>
+                    <li><a href="{{ URL::to('hardware/models') }}" {{{ (Request::is('hardware/models*') ? ' class="active"' : '') }}} >@lang('general.asset_models')</a></li>
 
                 </ul>
             </li>
@@ -329,8 +329,8 @@
 
             $('#example').dataTable({
                 "sPaginationType": "full_numbers",
-                "iDisplayLength": {{ Setting::getSettings()->per_page }},
-                "aLengthMenu": [[{{ Setting::getSettings()->per_page }}, -1], [{{ Setting::getSettings()->per_page }}, "All"]],
+                "iDisplayLength": {{{ Setting::getSettings()->per_page }}},
+                "aLengthMenu": [[{{{ Setting::getSettings()->per_page }}}, -1], [{{{ Setting::getSettings()->per_page }}}, "All"]],
                 "aoColumnDefs": [{ 'bSortable': false, 'aTargets': [ 'actions' ] }]
             });
 
@@ -343,8 +343,8 @@
 				{ "bSortable": false },
 				{ "bSortable": false }
 				],
-				"iDisplayLength": {{ Setting::getSettings()->per_page }},
-    			"aLengthMenu": [[{{ Setting::getSettings()->per_page }}, -1], [{{ Setting::getSettings()->per_page }}, "All"]]
+				"iDisplayLength": {{{ Setting::getSettings()->per_page }}},
+    			"aLengthMenu": [[{{{ Setting::getSettings()->per_page }}}, -1], [{{{ Setting::getSettings()->per_page }}}, "All"]]
             });
 
 

@@ -31,11 +31,10 @@
 		</div>
 		<h3>
 		<h3 class="name">
-		@lang('admin/hardware/general.view') {{ $asset->asset_tag }}
-
-		{{ $asset->asset_tag }}
+		@lang('admin/hardware/general.view')
+		{{{ $asset->asset_tag }}}
 		@if ($asset->name)
-		({{ $asset->name }})
+		({{{ $asset->name }}})
 		@endif
 	</h3>
 	</div>
@@ -49,49 +48,49 @@
 
 		@if ($asset->model->manufacturer)
 			<div class="col-md-6"><strong>@lang('admin/hardware/form.manufacturer'): </strong>
-			{{ $asset->model->manufacturer->name }} </div>
+			{{{ $asset->model->manufacturer->name }}} </div>
 			<div class="col-md-6"><strong>@lang('admin/hardware/form.model'):</strong>
-			{{ $asset->model->name }} / {{ $asset->model->modelno }}</div>
+			{{{ $asset->model->name }}} / {{{ $asset->model->modelno }}}</div>
 		@endif
 
 		@if ($asset->purchase_date)
 			<div class="col-md-6"><strong>@lang('admin/hardware/form.date'): </strong>
-			{{ $asset->purchase_date }} </div>
+			{{{ $asset->purchase_date }}} </div>
 		@endif
 
 		@if ($asset->purchase_cost)
 			<div class="col-md-6"><strong>@lang('admin/hardware/form.cost'):</strong>
 			@lang('general.currency')
-			{{ number_format($asset->purchase_cost,2) }} </div>
+			{{{ number_format($asset->purchase_cost,2) }}} </div>
 		@endif
 
 		@if ($asset->order_number)
 			<div class="col-md-6"><strong>@lang('admin/hardware/form.order'):</strong>
-			{{ $asset->order_number }} </div>
+			{{{ $asset->order_number }}} </div>
 		@endif
 
 		@if ($asset->warranty_months)
 			<div class="col-md-6"><strong>@lang('admin/hardware/form.warranty'):</strong>
-			{{ $asset->warranty_months }}
+			{{{ $asset->warranty_months }}}
 			@lang('admin/hardware/form.months')
 			</div>
 			<div class="col-md-6"><strong>@lang('admin/hardware/form.expires'):</strong>
-			{{ $asset->warrantee_expires() }}</div>
+			{{{ $asset->warrantee_expires() }}}</div>
 		@endif
 
 		@if ($asset->depreciation)
 			<div class="col-md-6"><strong>@lang('admin/hardware/form.depreciation'): </strong>
 			{{ $asset->depreciation->name }}
-				({{ $asset->depreciation->months }}
+				({{{ $asset->depreciation->months }}}
 				@lang('admin/hardware/form.months')
 				)</div>
 			<div class="col-md-6"><strong>@lang('admin/hardware/form.depreciates_on'): </strong>
-			{{ $asset->depreciated_date() }} </div>
+			{{{ $asset->depreciated_date() }}} </div>
 			<div class="col-md-6"><strong>@lang('admin/hardware/form.fully_depreciated'): </strong>
-			{{ $asset->months_until_depreciated()->m }}
+			{{{ $asset->months_until_depreciated()->m }}}
 			@lang('admin/hardware/form.months')
 			 @if ($asset->months_until_depreciated()->y > 0)
-				, {{ $asset->months_until_depreciated()->y }}
+				, {{{ $asset->months_until_depreciated()->y }}}
 				@lang('admin/hardware/form.years')
 			 @endif
 			 </div>
@@ -99,18 +98,18 @@
 
 		@if ($asset->model->eol)
 			<div class="col-md-6"><strong>@lang('admin/hardware/form.eol_rate'): </strong>
-			{{ $asset->model->eol }}
+			{{{ $asset->model->eol }}}
 			@lang('admin/hardware/form.months') </div>
 			<div class="col-md-6"><strong>@lang('admin/hardware/form.eol_date'): </strong>
-			{{ $asset->eol_date() }}
+			{{{ $asset->eol_date() }}}
 			@if ($asset->months_until_eol())
 				 (
 				 @if ($asset->months_until_eol()->y > 0)
-				 {{ $asset->months_until_eol()->y }}
+				 {{{ $asset->months_until_eol()->y }}}
 				  @lang('general.years'),
 				 @endif
 
-				{{ $asset->months_until_eol()->m }}
+				{{{ $asset->months_until_eol()->m }}}
 				@lang('general.months')
 				)
 			@endif
@@ -142,23 +141,23 @@
 					<i class="icon-star"></i>
 					@endif
 					</td>
-					<td>{{ $log->added_on }}</td>
+					<td>{{{ $log->added_on }}}</td>
 					<td>
 						@if (isset($log->user_id))
-						{{ $log->adminlog->fullName() }}
+						{{{ $log->adminlog->fullName() }}}
 						@endif
 					</td>
 					<td>{{ $log->action_type }}</td>
 					<td>
 						@if (isset($log->checkedout_to))
 						<a href="{{ route('view/user', $log->checkedout_to) }}">
-						{{ $log->userlog->fullName() }}
+						{{{ $log->userlog->fullName() }}}
 						</a>
 						@endif
 					</td>
 					<td>
 						@if ($log->note)
-						{{ $log->note }}
+						{{{ $log->note }}}
 						@endif
 					</td>
 				</tr>
@@ -169,7 +168,7 @@
 					<td>{{ $asset->created_at }}</td>
 					<td>
 					@if ($asset->adminuser->id)
-					{{ $asset->adminuser->fullName() }}
+					{{{ $asset->adminuser->fullName() }}}
 					@else
 					@lang('general.unknown_admin')
 					@endif
@@ -190,7 +189,7 @@
 			@if ($qr_code->display)
 			<h6>@lang('admin/hardware/form.qr')</h6>
 			<p>
-				<img src="{{ $qr_code->url }}" />
+				<img src="{{{ $qr_code->url }}}" />
 			</p>
 			@endif
 
@@ -198,28 +197,28 @@
 				<h6><br>@lang('admin/hardware/form.checkedout_to')</h6>
 				<ul>
 
-					<li><img src="{{ $asset->assigneduser->gravatar() }}" class="img-circle" style="width: 100px; margin-right: 20px;" /><br /><br /></li>
+					<li><img src="{{{ $asset->assigneduser->gravatar() }}}" class="img-circle" style="width: 100px; margin-right: 20px;" /><br /><br /></li>
 					<li><a href="{{ route('view/user', $asset->assigned_to) }}">{{ $asset->assigneduser->fullName() }}</a></li>
 
 
 					@if (isset($asset->assetloc->address))
-						<li>{{ $asset->assetloc->address }}
+						<li>{{{ $asset->assetloc->address }}}
 						@if (isset($asset->assetloc->address2))
-							{{ $asset->assetloc->address2 }}
+							{{{ $asset->assetloc->address2 }}}
 						@endif
 						</li>
 						@if (isset($asset->assetloc->city))
-							<li>{{ $asset->assetloc->city }}, {{ $asset->assetloc->state }} {{ $asset->assetloc->zip }}</li>
+							<li>{{{ $asset->assetloc->city }}}, {{{ $asset->assetloc->state }}} {{{ $asset->assetloc->zip }}}</li>
 						@endif
 
 					@endif
 
 					@if (isset($asset->assigneduser->email))
-						<li><br /><i class="icon-envelope-alt"></i> <a href="mailto:{{ $asset->assigneduser->email }}">{{ $asset->assigneduser->email }}</a></li>
+						<li><br /><i class="icon-envelope-alt"></i> <a href="mailto:{{{ $asset->assigneduser->email }}}">{{{ $asset->assigneduser->email }}}</a></li>
 					@endif
 
-					@if (isset($asset->assigneduser->phone))
-						<li><i class="icon-phone"></i> {{ $asset->assigneduser->phone }}</li>
+					@if ((isset($asset->assigneduser->phone)) && ($asset->assigneduser->phone!=''))
+						<li><i class="icon-phone"></i> {{{ $asset->assigneduser->phone }}}</li>
 					@endif
 
 					<li><br /><a href="{{ route('checkin/hardware', $asset->id) }}" class="btn-flat large info ">@lang('admin/hardware/general.checkin')</a></li>
@@ -228,7 +227,7 @@
 			@elseif (($asset->status_id ) && ($asset->status_id > 1))
 
 				@if ($asset->assetstatus)
-					<h6><br>{{ $asset->assetstatus->name }}
+					<h6><br>{{{ $asset->assetstatus->name }}}
 					@lang('admin/hardware/general.asset')</h6>
 
 					<div class="col-md-12">

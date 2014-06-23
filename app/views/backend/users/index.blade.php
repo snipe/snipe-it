@@ -54,14 +54,14 @@
 			<a href="{{ route('view/user', $user->id) }}" class="name">{{ $user->fullName() }}</a>
 
 			</td>
-			<td>{{ $user->email }}</td>
+			<td>{{{ $user->email }}}</td>
 			<td>
 			@if ($user->manager)
-				{{ $user->manager->fullName() }}
+				{{{ $user->manager->fullName() }}}
 			@endif
 			</td>
-			<td>{{ $user->assets->count() }}</td>
-			<td>{{ $user->licenses->count() }}</td>
+			<td>{{{ $user->assets->count() }}}</td>
+			<td>{{{ $user->licenses->count() }}}</td>
 			<td>{{ $user->isActivated() ? '<i class="icon-ok"></i>' : ''}}</td>
 			<td>
 

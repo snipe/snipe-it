@@ -2,7 +2,7 @@
 
 {{-- Page title --}}
 @section('title')
-View User {{ $user->fullName() }} ::
+View User {{{ $user->fullName() }}} ::
 @parent
 @stop
 
@@ -13,9 +13,9 @@ View User {{ $user->fullName() }} ::
             <!-- header -->
             <div class="row header">
                 <div class="col-md-8">
-                    <img src="{{ $user->gravatar() }}" class="avatar img-circle">
-                    <h3 class="name">{{ $user->fullName() }}</h3>
-                    <span class="area">{{ $user->jobtitle }}</span>
+                    <img src="{{{ $user->gravatar() }}}" class="avatar img-circle">
+                    <h3 class="name">{{{ $user->fullName() }}}</h3>
+                    <span class="area">{{{ $user->jobtitle }}}</span>
                 </div>
                 @if ($user->deleted_at != NULL)
                 		    <a href="{{ route('restore/user', $user->id) }}" class="btn btn-warning pull-right edit"><i class="icon-pencil"></i> Restore This User</a>
@@ -62,11 +62,11 @@ View User {{ $user->fullName() }} ::
 									<tr>
 										<td>
 										@if ($asset->physical=='1')
-										{{ $asset->model->name }}
+										{{{ $asset->model->name }}}
 										@endif
 										</td>
-										<td><a href="{{ route('view/hardware', $asset->id) }}">{{ $asset->asset_tag }}</a></td>
-										<td><a href="{{ route('view/hardware', $asset->id) }}">{{ $asset->name }}</a></td>
+										<td><a href="{{ route('view/hardware', $asset->id) }}">{{{ $asset->asset_tag }}}</a></td>
+										<td><a href="{{ route('view/hardware', $asset->id) }}">{{{ $asset->name }}}</a></td>
 
 										<td> <a href="{{ route('checkin/hardware', $asset->id) }}" class="btn-flat info">Checkin</a></td>
 									</tr>
@@ -98,8 +98,8 @@ View User {{ $user->fullName() }} ::
                                 <tbody>
 									@foreach ($user->licenses as $license)
 									<tr>
-										<td><a href="{{ route('view/license', $license->id) }}">{{ $license->name }}</a></td>
-										<td><a href="{{ route('view/license', $license->id) }}">{{ $license->serial }}</a></td>
+										<td><a href="{{ route('view/license', $license->id) }}">{{{ $license->name }}}</a></td>
+										<td><a href="{{ route('view/license', $license->id) }}">{{{ $license->serial }}}</a></td>
 										<td> <a href="{{ route('checkin/license', $license->pivot->id) }}" class="btn-flat info">Checkin</a>
 										</td>
 									</tr>
@@ -138,12 +138,12 @@ View User {{ $user->fullName() }} ::
 										<td>{{ $log->action_type }}</td>
 										<td>
 										@if ((isset($log->assetlog->name)) && ($log->assetlog->deleted_at==''))
-											<a href="{{ route('view/hardware', $log->asset_id) }}">{{ $log->assetlog->asset_tag }}</a>
+											<a href="{{ route('view/hardware', $log->asset_id) }}">{{{ $log->assetlog->asset_tag }}}</a>
 										@elseif ((isset($log->assetlog->name)) && ($log->assetlog->deleted_at!=''))
-											<del>{{ $log->assetlog->name }}</del> (deleted)
+											<del>{{{ $log->assetlog->name }}}</del> (deleted)
 										@endif
 										</td>
-										<td>{{ $log->adminlog->fullName() }}</td>
+										<td>{{{ $log->adminlog->fullName() }}}</td>
 									</tr>
 									@endforeach
                                 </tbody>
@@ -174,17 +174,17 @@ View User {{ $user->fullName() }} ::
 						@endif
 						<ul>
 						@if ($user->manager)
-							<strong>Manager:</strong> {{ $user->manager->fullName() }}
+							<strong>Manager:</strong> {{{ $user->manager->fullName() }}}
 						@endif
 
 						@if ($user->location_id)
-							<li>{{ $user->userloc->address }} {{ $user->userloc->address2 }}</li>
-							<li>{{ $user->userloc->city }}, {{ $user->userloc->state }} {{ $user->userloc->zip }}<br /><br /></li>
+							<li>{{{ $user->userloc->address }}} {{{ $user->userloc->address2 }}}</li>
+							<li>{{{ $user->userloc->city }}}, {{{ $user->userloc->state }}} {{{ $user->userloc->zip }}}<br /><br /></li>
 						@endif
                         @if ($user->phone)
-                        	<li><i class="icon-phone"></i>{{ $user->phone }}</li>
+                        	<li><i class="icon-phone"></i>{{{ $user->phone }}}</li>
                         @endif
-	                    	<li><i class="icon-envelope-alt"></i><a href="mailto:{{ $user->email }}">{{ $user->email }}</a></li>
+	                    	<li><i class="icon-envelope-alt"></i><a href="mailto:{{{ $user->email }}}">{{{ $user->email }}}</a></li>
                         </ul>
 
                         @if ($user->last_login!='')

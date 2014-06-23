@@ -41,7 +41,7 @@
 			<div class="form-group {{ $errors->has('name') ? ' has-error' : '' }}">
 				<label for="name" class="col-md-3 control-label">@lang('admin/manufacturers/table.name')</label>
 					<div class="col-md-6">
-						<input class="form-control" type="text" name="name" id="name" value="{{ Input::old('name', $manufacturer->name) }}" />
+						<input class="form-control" type="text" name="name" id="name" value="{{{ Input::old('name', $manufacturer->name) }}}" />
 						{{ $errors->first('name', '<span class="alert-msg"><i class="icon-remove-sign"></i> :message</span>') }}
 					</div>
 			</div>

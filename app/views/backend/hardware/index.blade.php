@@ -77,7 +77,7 @@
 						@lang('general.ready_to_deploy')
 					@elseif (Input::get('Undeployable'))
 						@if ($asset->assetstatus)
-						{{ $asset->assetstatus->name }}
+						{{{ $asset->assetstatus->name }}}
 						@endif
                     @endif
 				</td>
@@ -85,16 +85,16 @@
 				<td>
 				@if ($asset->assigneduser)
 					<a href="{{ route('view/user', $asset->assigned_to) }}">
-					{{ $asset->assigneduser->fullName() }}
+					{{{ $asset->assigneduser->fullName() }}}
 					</a>
 				@endif
 				</td>
 				<td>
 				@if ($asset->assigneduser && $asset->assetloc)
-						{{ $asset->assetloc->name }}
+						{{{ $asset->assetloc->name }}}
 				@else
 					@if ($asset->assetstatus)
-						{{ $asset->assetstatus->name }}
+						{{{ $asset->assetstatus->name }}}
 					@endif
 				@endif
 				</td>
@@ -103,7 +103,7 @@
 
 			<td>
 			@if ($asset->model->eol)
-				{{ $asset->eol_date() }}
+				{{{ $asset->eol_date() }}}
 			@endif
 			</td>
 

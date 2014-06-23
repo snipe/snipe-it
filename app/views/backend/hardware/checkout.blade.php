@@ -29,7 +29,7 @@
 			<div class="form-group">
 			<label class="col-sm-2 control-label">@lang('admin/hardware/form.tag')</label>
 				<div class="col-md-6">
-				  <p class="form-control-static">{{ $asset->asset_tag }}</p>
+				  <p class="form-control-static">{{{ $asset->asset_tag }}}</p>
 				</div>
 		  	</div>
 
@@ -37,7 +37,7 @@
 		  	<div class="form-group">
 			<label class="col-sm-2 control-label">@lang('admin/hardware/form.name')</label>
 				<div class="col-md-6">
-				  <p class="form-control-static">{{ $asset->name }}</p>
+				  <p class="form-control-static">{{{ $asset->name }}}</p>
 				</div>
 		  	</div>
 			<!-- User -->
@@ -54,7 +54,7 @@
 			<div class="form-group {{ $errors->has('note') ? 'error' : '' }}">
 				<label for="note" class="col-md-2 control-label">@lang('admin/hardware/form.notes')</label>
 				<div class="col-md-7">
-					<input class="col-md-6 form-control" type="text" name="note" id="note" value="{{ Input::old('note', $asset->note) }}" />
+					<input class="col-md-6 form-control" type="text" name="note" id="note" value="{{{ Input::old('note', $asset->note) }}}" />
 					{{ $errors->first('note', '<span class="alert-msg"><i class="icon-remove-sign"></i> :message</span>') }}
 				</div>
 			</div>

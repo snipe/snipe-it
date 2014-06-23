@@ -39,7 +39,7 @@
 						<div class="form-group {{ $errors->has('name') ? ' has-error' : '' }}">
 							<label for="name" class="col-md-2 control-label">@lang('admin/categories/general.category_name')</label>
 								<div class="col-md-7">
-									<input class="form-control" type="text" name="name" id="name" value="{{ Input::old('name', $category->name) }}" />
+									<input class="form-control" type="text" name="name" id="name" value="{{{ Input::old('name', $category->name) }}}" />
 									{{ $errors->first('name', '<span class="alert-msg"><i class="icon-remove-sign"></i> :message</span>') }}
 								</div>
 						</div>
