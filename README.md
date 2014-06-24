@@ -20,7 +20,7 @@ We use Waffle.io to help better communicate our roadmap with users. Our [project
 
 ### Announcement List
 
-To be notified of important news (such as new releases, security advisories, etc), [sign up for our list](http://eepurl.com/XyVXD). We'll never sell or give away your info, and we'll only email you when it's important.
+To be notified of important news (such as new releases, security advisories, etc), [sign up for our list](http://eepurl.com/XyZKz). We'll never sell or give away your info, and we'll only email you when it's important.
 
 -----
 
