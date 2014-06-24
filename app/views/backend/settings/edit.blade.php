@@ -46,7 +46,7 @@
 										</label>
 										<div class="controls">
 
-											<input class="col-md-1" type="checkbox" name="display_asset_name" id="display_asset_name" value="1" {{{ $setting->display_asset_name === '1' ? 'checked' : '' }}} />
+											<input class="col-md-1" type="checkbox" name="display_asset_name" id="display_asset_name" value="1" {{{ $setting->display_asset_name == '1' ? 'checked' : '' }}} />
 
 											{{ $errors->first('display_asset_name', '<span class="help-inline">:message</span>') }}
 											</div>
@@ -68,7 +68,7 @@
 										Display QR Codes</label>
 										<div class="controls">
 									@if ($is_gd_installed)
-											<input class="col-md-1" type="checkbox" name="qr_code" id="qr_code" value="1" {{ $setting->qr_code === '1' ? 'checked' : '' }} />
+											<input class="col-md-1" type="checkbox" name="qr_code" id="qr_code" value="1" {{ $setting->qr_code == '1' ? 'checked' : '' }} />
 									@else
 											<span class="help-inline">
 												@lang('admin/settings/general.php_gd_warning')
@@ -83,7 +83,7 @@
 									<div class="form-group {{ $errors->has('qr_text') ? 'error' : '' }}">
 										<label class="control-label" for="qr_text"> @lang('admin/settings/general.qr_text')</label>
 										<div class="controls">
-									@if ($setting->qr_code === '1')
+									@if ($setting->qr_code == '1')
 											<input class="col-md-9" type="text" name="qr_text" id="qr_text" value="{{{ Input::old('qr_text', $setting->qr_text) }}}" />
 									@else
 											<span class="help-inline">
