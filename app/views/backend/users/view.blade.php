@@ -83,7 +83,7 @@ View User {{{ $user->fullName() }}} ::
 							</div>
                             @endif
 
-                             <h6>Software Checked Out to {{ $user->first_name }}</h6>
+                             <h6>Software Checked Out to {{{ $user->first_name }}}</h6>
                             <br>
                             <!-- checked out assets table -->
                             @if (count($user->licenses) > 0)
@@ -118,7 +118,7 @@ View User {{{ $user->fullName() }}} ::
 
 
 
-							<h6>History for {{ $user->first_name }}</h6>
+							<h6>History for {{{ $user->first_name }}}</h6>
                             <br>
                             <!-- checked out assets table -->
                             @if (count($user->userlog) > 0)
@@ -134,8 +134,8 @@ View User {{{ $user->fullName() }}} ::
                                 <tbody>
 									@foreach ($user->userlog as $log)
 									<tr>
-										<td>{{ $log->added_on }}</td>
-										<td>{{ $log->action_type }}</td>
+										<td>{{{ $log->added_on }}}</td>
+										<td>{{{ $log->action_type }}}</td>
 										<td>
 										@if ((isset($log->assetlog->name)) && ($log->assetlog->deleted_at==''))
 											<a href="{{ route('view/hardware', $log->asset_id) }}">{{{ $log->assetlog->asset_tag }}}</a>
@@ -166,7 +166,7 @@ View User {{{ $user->fullName() }}} ::
                     <div class="col-md-3 address pull-right">
 
 
-                        <h6>Contact  {{ $user->first_name }}</h6>
+                        <h6>Contact  {{{ $user->first_name }}}</h6>
 
 
 						@if ($user->location_id)
