@@ -24,7 +24,7 @@ Your Profile
 	<div class="form-group {{ $errors->has('first_name') ? ' has-error' : '' }}">
 		<label for="first_name" class="col-md-2 control-label">First Name</label>
 		<div class="col-md-5">
-			<input class="form-control" type="text" name="first_name" id="first_name" value="{{ Input::old('first_name', $user->first_name) }}" />
+			<input class="form-control" type="text" name="first_name" id="first_name" value="{{{ Input::old('first_name', $user->first_name) }}}" />
 			{{ $errors->first('first_name', '<span class="alert-msg"><i class="icon-remove-sign"></i> :message</span>') }}
 		</div>
 	</div>
@@ -33,7 +33,7 @@ Your Profile
 	<div class="form-group {{ $errors->has('last_name') ? ' has-error' : '' }}">
 		<label for="last_name" class="col-md-2 control-label">Last Name</label>
 		<div class="col-md-5">
-			<input class="form-control" type="text" name="last_name" id="last_name" value="{{ Input::old('last_name', $user->last_name) }}" />
+			<input class="form-control" type="text" name="last_name" id="last_name" value="{{{ Input::old('last_name', $user->last_name) }}}" />
 			{{ $errors->first('last_name', '<span class="alert-msg"><i class="icon-remove-sign"></i> :message</span>') }}
 		</div>
 	</div>
@@ -42,7 +42,7 @@ Your Profile
 	<div class="form-group {{ $errors->has('website') ? ' has-error' : '' }}">
 		<label for="website" class="col-md-2 control-label">Website</label>
 		<div class="col-md-5">
-			<input class="form-control" type="text" name="website" id="website" value="{{ Input::old('website', $user->website) }}" />
+			<input class="form-control" type="text" name="website" id="website" value="{{{ Input::old('website', $user->website) }}}" />
 			{{ $errors->first('website', '<span class="alert-msg"><i class="icon-remove-sign"></i> :message</span>') }}
 		</div>
 	</div>
@@ -62,7 +62,7 @@ Your Profile
 	<div class="form-group {{ $errors->has('gravatar') ? ' has-error' : '' }}">
 		<label for="gravatar" class="col-md-2 control-label">Gravatar Email <small>(Private)</small></label>
 		<div class="col-md-5">
-			<input class="form-control" type="text" name="gravatar" id="gravatar" value="{{ Input::old('gravatar', $user->gravatar) }}" />
+			<input class="form-control" type="text" name="gravatar" id="gravatar" value="{{{ Input::old('gravatar', $user->gravatar) }}}" />
 			{{ $errors->first('gravatar', '<span class="alert-msg"><i class="icon-remove-sign"></i> :message</span>') }}
 			<p><img src="//secure.gravatar.com/avatar/{{ md5(strtolower(trim($user->gravatar))) }}" width="30" height="30" />
 			<a href="http://gravatar.com"><small>Change your avatar at Gravatar.com</small></a>.

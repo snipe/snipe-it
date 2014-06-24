@@ -170,7 +170,7 @@ View User {{{ $user->fullName() }}} ::
 
 
 						@if ($user->location_id)
-							<iframe width="300" height="133" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.com/maps?&amp;q={{ $user->userloc->address }},{{ $user->userloc->city }},{{ $user->userloc->state }},{{ $user->userloc->country }}&amp;output=embed"></iframe>
+							<iframe width="300" height="133" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.com/maps?&amp;q={{{ $user->userloc->address }}},{{{ $user->userloc->city }}},{{{ $user->userloc->state }}},{{{ $user->userloc->country }}}&amp;output=embed"></iframe>
 						@endif
 						<ul>
 						@if ($user->manager)
@@ -188,7 +188,7 @@ View User {{{ $user->fullName() }}} ::
                         </ul>
 
                         @if ($user->last_login!='')
-                    	<br /><h6>Last Login: {{ $user->last_login->diffForHumans() }}</h6>
+                    	<br /><h6>Last Login: {{{ $user->last_login->diffForHumans() }}}</h6>
                         @endif
                     </div>
 @stop
