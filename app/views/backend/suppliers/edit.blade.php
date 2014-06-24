@@ -87,6 +87,15 @@
 					</div>
 			</div>
 
+			<div class="form-group {{ $errors->has('zip') ? ' has-error' : '' }}">
+				<label for="zip" class="col-md-3 control-label">@lang('admin/suppliers/table.zip')</label>
+					<div class="col-md-6">
+						<input class="form-control" type="text" name="zip" id="zip" value="{{{ Input::old('zip', $supplier->zip) }}}" />
+						{{ $errors->first('zip', '<span class="alert-msg"><i class="icon-remove-sign"></i> :message</span>') }}
+					</div>
+			</div>
+
+
 			<div class="form-group {{ $errors->has('contact') ? ' has-error' : '' }}">
 				<label for="contact" class="col-md-3 control-label">@lang('admin/suppliers/table.contact')</label>
 					<div class="col-md-6">

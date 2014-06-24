@@ -11,6 +11,7 @@ return array(
 	'fax'      				=> 'Fax',
 	'id'   					=> 'ID',
 	'name'      			=> 'Supplier Name',
+	'notes'      			=> 'Notes',
 	'phone'      			=> 'Phone',
 	'state'      			=> 'State',
 	'suppliers'				=> 'Suppliers',
