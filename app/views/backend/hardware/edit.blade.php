@@ -29,7 +29,7 @@
 
 <div class="row form-wrapper">
             <!-- left column -->
-            <div class="col-md-10 column">
+            <div class="col-md-12 column">
 
             <form class="form-horizontal" method="post" action="" autocomplete="off" role="form">
             <!-- CSRF Token -->
