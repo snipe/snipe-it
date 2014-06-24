@@ -26,7 +26,7 @@
 			<div class="form-group {{ $errors->has('asset_tag') ? 'error' : '' }}">
 				<label class="control-label" for="asset_tag">@lang('admin/hardware/form.tag')</label>
 				<div class="controls">
-					<input class="col-md-4" type="text" name="asset_tag" id="asset_tag" value="{{ Input::old('asset_tag') }}" />
+					<input class="col-md-4" type="text" name="asset_tag" id="asset_tag" value="{{{ Input::old('asset_tag') }}}" />
 					{{ $errors->first('asset_tag', '<span class="help-inline"><i class="icon-remove-sign"></i> :message</span>') }}
 				</div>
 			</div>
@@ -34,7 +34,7 @@
 			<div class="form-group {{ $errors->has('name') ? 'error' : '' }}">
 				<label class="control-label" for="name">@lang('admin/hardware/form.name')</label>
 				<div class="controls">
-					<input class="col-md-4" type="text" name="name" id="name" value="{{ Input::old('name', $asset->name) }}" />
+					<input class="col-md-4" type="text" name="name" id="name" value="{{{ Input::old('name', $asset->name) }}}" />
 					{{ $errors->first('name', '<span class="help-inline"><i class="icon-remove-sign"></i> :message</span>') }}
 				</div>
 			</div>
@@ -44,7 +44,7 @@
 			<div class="form-group {{ $errors->has('serial') ? 'error' : '' }}">
 				<label class="control-label" for="serial">@lang('admin/hardware/form.serial')</label>
 				<div class="controls">
-					<input class="col-md-4" type="text" name="serial" id="serial" value="{{ Input::old('serial', $asset->serial) }}" />
+					<input class="col-md-4" type="text" name="serial" id="serial" value="{{{ Input::old('serial', $asset->serial) }}}" />
 					{{ $errors->first('serial', '<span class="help-inline"><i class="icon-remove-sign"></i> :message</span>') }}
 				</div>
 			</div>
@@ -53,7 +53,7 @@
 			<div class="form-group {{ $errors->has('order_number') ? 'error' : '' }}">
 				<label class="control-label" for="order_number">@lang('admin/hardware/form.order')</label>
 				<div class="controls">
-					<input class="col-md-4" type="text" name="order_number" id="order_number" value="{{ Input::old('order_number', $asset->order_number) }}" />
+					<input class="col-md-4" type="text" name="order_number" id="order_number" value="{{{ Input::old('order_number', $asset->order_number) }}}" />
 					{{ $errors->first('order_number', '<span class="help-inline"><i class="icon-remove-sign"></i> :message</span>') }}
 				</div>
 			</div>
@@ -71,7 +71,7 @@
 			<div class="form-group input-append {{ $errors->has('purchase_date') ? 'error' : '' }}" >
 				<label class="control-label" for="purchase_date">@lang('admin/hardware/form.date')</label>
 				<div class="controls">
-				<input type="text" class="datepicker span2" data-date-format="yyyy-mm-dd" placeholder="Select Date" name="purchase_date" id="purchase_date" value="{{ Input::old('purchase_date', $asset->purchase_date) }}">
+				<input type="text" class="datepicker span2" data-date-format="yyyy-mm-dd" placeholder="Select Date" name="purchase_date" id="purchase_date" value="{{{ Input::old('purchase_date', $asset->purchase_date) }}}">
 				{{ $errors->first('purchase_date', '<span class="help-inline"><i class="icon-remove-sign"></i> :message</span>') }}
 
 				</div>
@@ -83,7 +83,7 @@
 				<div class="controls">
 				<div class="input-prepend">
 					<span class="add-on">$</span>
-					<input class="col-md-2" type="text" name="purchase_cost" id="purchase_cost" value="{{ Input::old('purchase_cost', $asset->purchase_cost) }}" />
+					<input class="col-md-2" type="text" name="purchase_cost" id="purchase_cost" value="{{{ Input::old('purchase_cost', $asset->purchase_cost) }}}" />
 					{{ $errors->first('purchase_cost', '<span class="help-inline"><i class="icon-remove-sign"></i> :message</span>') }}
 				</div>
 				 </div>
@@ -93,7 +93,7 @@
 			<div class="form-group {{ $errors->has('warranty_months') ? 'error' : '' }}">
 				<label class="control-label" for="serial">@lang('admin/hardware/form.warranty')</label>
 				<div class="controls">
-					<input class="col-md-1" type="text" name="warranty_months" id="warranty_months" value="{{ Input::old('warranty_months', $asset->warranty_months) }}" />
+					<input class="col-md-1" type="text" name="warranty_months" id="warranty_months" value="{{{ Input::old('warranty_months', $asset->warranty_months) }}}" />
 					@lang('admin/hardware/form.months')
 					{{ $errors->first('warranty_months', '<span class="help-inline"><i class="icon-remove-sign"></i> :message</span>') }}
 				</div>
@@ -126,7 +126,7 @@
 			<div class="form-group {{ $errors->has('notes') ? 'error' : '' }}">
 				<label class="control-label" for="notes">@lang('admin/hardware/form.notes')</label>
 				<div class="controls">
-					<input class="col-md-6" type="text" name="notes" id="notes" value="{{ Input::old('notes', $asset->notes) }}" />
+					<input class="col-md-6" type="text" name="notes" id="notes" value="{{{ Input::old('notes', $asset->notes) }}}" />
 					{{ $errors->first('notes', '<span class="help-inline"><i class="icon-remove-sign"></i> :message</span>') }}
 				</div>
 			</div>

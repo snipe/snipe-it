@@ -37,7 +37,7 @@ Create a User ::
 			<div class="form-group {{ $errors->has('first_name') ? 'error' : '' }}">
 				<label class="control-label" for="first_name">First Name</label>
 				<div class="controls">
-					<input type="text" name="first_name" id="first_name" value="{{ Input::old('first_name') }}" />
+					<input type="text" name="first_name" id="first_name" value="{{{ Input::old('first_name') }}}" />
 					{{ $errors->first('first_name', '<span class="help-inline">:message</span>') }}
 				</div>
 			</div>
@@ -46,7 +46,7 @@ Create a User ::
 			<div class="form-group {{ $errors->has('last_name') ? 'error' : '' }}">
 				<label class="control-label" for="last_name">Last Name</label>
 				<div class="controls">
-					<input type="text" name="last_name" id="last_name" value="{{ Input::old('last_name') }}" />
+					<input type="text" name="last_name" id="last_name" value="{{{ Input::old('last_name') }}}" />
 					{{ $errors->first('last_name', '<span class="help-inline">:message</span>') }}
 				</div>
 			</div>
@@ -57,7 +57,7 @@ Create a User ::
 			<div class="form-group {{ $errors->has('jobtitle') ? 'error' : '' }}">
 				<label class="control-label" for="jobtitle">Job Title</label>
 				<div class="controls">
-					<input type="text" name="jobtitle" id="jobtitle" value="{{ Input::old('jobtitle') }}" />
+					<input type="text" name="jobtitle" id="jobtitle" value="{{{ Input::old('jobtitle') }}}" />
 					{{ $errors->first('jobtitle', '<span class="help-inline">:message</span>') }}
 				</div>
 			</div>
@@ -88,7 +88,7 @@ Create a User ::
 			<div class="form-group {{ $errors->has('phone') ? 'error' : '' }}">
 				<label class="control-label" for="jobtitle">Phone</label>
 				<div class="controls">
-					<input type="text" name="phone" id="phone" value="{{ Input::old('phone') }}" />
+					<input type="text" name="phone" id="phone" value="{{{ Input::old('phone') }}}" />
 					{{ $errors->first('phone', '<span class="help-inline">:message</span>') }}
 				</div>
 			</div>
@@ -97,7 +97,7 @@ Create a User ::
 			<div class="form-group {{ $errors->has('email') ? 'error' : '' }}">
 				<label class="control-label" for="email">Email</label>
 				<div class="controls">
-					<input type="email" name="email" id="email" value="{{ Input::old('email') }}" />
+					<input type="email" name="email" id="email" value="{{{ Input::old('email') }}}" />
 					{{ $errors->first('email', '<span class="help-inline">:message</span>') }}
 				</div>
 			</div>
@@ -163,15 +163,15 @@ Create a User ::
 							<label class="form-group">{{ $permission['label'] }}</label>
 
 							<div class="radio inline">
-								<label for="{{ $permission['permission'] }}_allow" onclick="">
-									<input type="radio" value="1" id="{{ $permission['permission'] }}_allow" name="permissions[{{ $permission['permission'] }}]"{{ (array_get($selectedPermissions, $permission['permission']) === 1 ? ' checked="checked"' : '') }}>
+								<label for="{{{ $permission['permission'] }}}_allow" onclick="">
+									<input type="radio" value="1" id="{{ $permission['permission'] }}_allow" name="permissions[{{{ $permission['permission'] }}}]"{{ (array_get($selectedPermissions, $permission['permission']) === 1 ? ' checked="checked"' : '') }}>
 									Allow
 								</label>
 							</div>
 
 							<div class="radio inline">
 								<label for="{{ $permission['permission'] }}_deny" onclick="">
-									<input type="radio" value="-1" id="{{ $permission['permission'] }}_deny" name="permissions[{{ $permission['permission'] }}]"{{ (array_get($selectedPermissions, $permission['permission']) === -1 ? ' checked="checked"' : '') }}>
+									<input type="radio" value="-1" id="{{{ $permission['permission'] }}}_deny" name="permissions[{{{ $permission['permission'] }}}]"{{ (array_get($selectedPermissions, $permission['permission']) === -1 ? ' checked="checked"' : '') }}>
 									Deny
 								</label>
 							</div>
@@ -179,7 +179,7 @@ Create a User ::
 							@if ($permission['can_inherit'])
 							<div class="radio inline">
 								<label for="{{ $permission['permission'] }}_inherit" onclick="">
-									<input type="radio" value="0" id="{{ $permission['permission'] }}_inherit" name="permissions[{{ $permission['permission'] }}]"{{ ( ! array_get($selectedPermissions, $permission['permission']) ? ' checked="checked"' : '') }}>
+									<input type="radio" value="0" id="{{{ $permission['permission'] }}}_inherit" name="permissions[{{{ $permission['permission'] }}}]"{{ ( ! array_get($selectedPermissions, $permission['permission']) ? ' checked="checked"' : '') }}>
 									Inherit
 								</label>
 							</div>

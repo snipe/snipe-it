@@ -33,13 +33,15 @@
 		@foreach ($models as $model)
 		<tr>
 			<td><a href="{{ route('view/model', $model->id) }}">{{{ $model->name }}}</a></td>
-			<td>{{ $model->modelno }}</td>
+			<td>{{{ $model->modelno }}}</td>
 			<td><a href="{{ route('view/model', $model->id) }}">{{ ($model->assets->count()) }}</a></td>
 			<td>
 
 			@if (($model->depreciation) && ($model->depreciation->id > 0))
-				{{ $model->depreciation->name }}
-			 	({{ $model->depreciation->months }} months)
+				{{{ $model->depreciation->name }}}
+			 	({{{ $model->depreciation->months }}}
+			 	@lang('general.months')
+			 	)
 			@else
 			 @lang('general.no_depreciation')
 			@endif
@@ -47,14 +49,14 @@
 			</td>
 			<td>
 			@if ($model->category)
-			{{ $model->category->name }}
+				{{{ $model->category->name }}}
 			@endif
 			</td>
 
 			<td>
 
 			@if ($model->eol)
-			 	{{ $model->eol }}
+			 	{{{ $model->eol }}}
 			 	@lang('general.months')
 			@else
 			 --

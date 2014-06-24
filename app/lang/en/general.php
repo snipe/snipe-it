@@ -63,6 +63,7 @@ return array(
 	'state'  				=> 'State',
 	'status_labels'			=> 'Status Labels',
 	'status'    			=> 'Status',
+	'suppliers'  			=> 'Suppliers',
 	'total_assets'			=> 'total assets',
 	'total_licenses'		=> 'total licenses',
 	'undeployable'			=> 'Un-deployable',

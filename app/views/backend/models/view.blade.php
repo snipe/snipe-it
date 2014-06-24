@@ -3,7 +3,7 @@
 {{-- Page title --}}
 @section('title')
 @lang('admin/models/table.view')
-{{ $model->model_tag }} ::
+{{{ $model->model_tag }}} ::
 @parent
 @stop
 
@@ -14,7 +14,8 @@
     <div class="col-md-12">
     	<a href="{{ route('update/model', $model->id) }}" class="btn-flat white pull-right">
     	@lang('admin/models/table.update')</a>
-		<h3 class="name">@lang('general.history_for') {{ $model->name }} </h3>
+		<h3 class="name">@lang('general.history_for')
+		{{{ $model->name }}} </h3>
 	</div>
 </div>
 
@@ -38,12 +39,12 @@
 
 									@foreach ($model->assets as $modelassets)
 									<tr>
-										<td><a href="{{ route('view/hardware', $modelassets->id) }}">{{ $modelassets->name }}</a></td>
-										<td><a href="{{ route('view/hardware', $modelassets->id) }}">{{ $modelassets->asset_tag }}</a></td>
+										<td><a href="{{ route('view/hardware', $modelassets->id) }}">{{{ $modelassets->name }}}</a></td>
+										<td><a href="{{ route('view/hardware', $modelassets->id) }}">{{{ $modelassets->asset_tag }}}</a></td>
 										<td>
 										@if ($modelassets->assigneduser)
 										<a href="{{ route('view/user', $modelassets->assigned_to) }}">
-										{{ $modelassets->assigneduser->fullName() }}
+										{{{ $modelassets->assigneduser->fullName() }}}
 										</a>
 										@endif
 										</td>

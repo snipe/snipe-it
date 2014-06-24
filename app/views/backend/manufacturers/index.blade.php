@@ -31,7 +31,7 @@
 	<tbody>
 		@foreach ($manufacturers as $manufacturer)
 		<tr>
-			<td>{{ $manufacturer->name }}</td>
+			<td>{{{ $manufacturer->name }}}</td>
 			<td>
 
 				<a href="{{ route('update/manufacturer', $manufacturer->id) }}" class="btn btn-warning"><i class="icon-pencil icon-white"></i></a>
