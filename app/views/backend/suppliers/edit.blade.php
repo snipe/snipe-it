@@ -15,7 +15,7 @@
 
 <div class="row header">
     <div class="col-md-12">
-    	<a href="{{ URL::previous() }}" class="btn-flat gray pull-right"><i class="icon-plus-sign icon-white"></i>  @lang('general.back')</a>
+    	<a href="{{ URL::previous() }}" class="btn-flat gray pull-right"><i class="icon-circle-arrow-left icon-white"></i>  @lang('general.back')</a>
 		<h3>
 		@if ($supplier->id)
 			@lang('admin/suppliers/table.update')
