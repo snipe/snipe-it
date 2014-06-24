@@ -18,6 +18,10 @@ We use Waffle.io to help better communicate our roadmap with users. Our [project
 
 [![Stories in Ready](https://badge.waffle.io/snipe/snipe-it.png?label=ready&title=Ready)](http://waffle.io/snipe/snipe-it)
 
+### Announcement List
+
+To be notified of important news (such as new releases, security advisories, etc), [sign up for our list](http://eepurl.com/XyVXD). We'll never sell or give away your info, and we'll only email you when it's important.
+
 -----
 
 ## Requirements
