@@ -1609,7 +1609,7 @@ textarea.form-control {
 .checkbox input[type="checkbox"],
 .checkbox-inline input[type="checkbox"] {
   float: left;
-  margin-left: -20px;
+  margin-left: 0;
 }
 .radio + .radio,
 .checkbox + .checkbox {
@@ -1765,8 +1765,8 @@ textarea.input-lg {
 .form-horizontal .checkbox,
 .form-horizontal .radio-inline,
 .form-horizontal .checkbox-inline {
-  margin-top: 0;
-  margin-bottom: 0;
+  margin-top: 5px;
+  margin-bottom: 5px;
   padding-top: 7px;
 }
 .form-horizontal .form-group {

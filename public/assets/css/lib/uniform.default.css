@@ -11,7 +11,7 @@ http://uniformjs.com/
 */
 /* General settings */
 div.selector, div.selector span, div.checker span, div.radio span, div.uploader, div.uploader span.action, div.button, div.button span {
-  background-image: url("../../img/uniform/sprite.png");
+  background-image: url("../../../img/uniform/sprite.png");
   background-repeat: no-repeat;
   -webkit-font-smoothing: antialiased; }
 div.selector, div.checker, div.button, div.radio, div.uploader {
@@ -28,7 +28,7 @@ div.selector, div.selector *, div.radio, div.radio *, div.checker, div.checker *
   padding: 0; }
 
 .highContrastDetect {
-  background: url("../../img/uniform/bg-input.png") repeat-x 0 0;
+  background: url("../../../img/uniform/bg-input.png") repeat-x 0 0;
   width: 0px;
   height: 0px; }
 
@@ -37,12 +37,12 @@ input.uniform-input,
 select.uniform-multiselect,
 textarea.uniform {
   padding: 3px;
-  background: url("../../img/uniform/bg-input.png") repeat-x 0 0;
+  background: url("../../../img/uniform/bg-input.png") repeat-x 0 0;
   outline: 0; }
   input.uniform-input.active,
   select.uniform-multiselect.active,
   textarea.uniform.active {
-    background: url("../../img/uniform/bg-input-focus.png") repeat-x 0 0; }
+    background: url("../../../img/uniform/bg-input-focus.png") repeat-x 0 0; }
 
 /* Remove default webkit and possible mozilla .search styles.
  * Keeping this as :active to remove browser styles */
@@ -340,7 +340,7 @@ div.checker {
 
 /* Radio */
 div.radio {
-  margin-right: 3px; }
+  margin-right: 20px; }
 
 /* Uploader */
 div.uploader span.action {
