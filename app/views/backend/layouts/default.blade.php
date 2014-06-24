@@ -82,12 +82,12 @@
             <a class="navbar-brand" href="/">{{{ Setting::getSettings()->site_name }}}</a>
         </div>
 
-        <ul class="nav navbar-nav pull-right hidden-xs">
+        <ul class="nav navbar-nav navbar-right">
             @if (Sentry::check())
 
                  @if(Sentry::getUser()->hasAccess('admin'))
                  <li class="dropdown">
-                    <a href="#" class="dropdown-toggle hidden-xs hidden-sm" data-toggle="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                         <i class="icon-plus"></i> @lang('general.create')
                         <b class="caret"></b>
                     </a>
@@ -111,7 +111,7 @@
                 </li>
                 @endif
                 <li class="dropdown">
-                    <a href="#" class="dropdown-toggle hidden-xs hidden-sm" data-toggle="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                         {{{ Lang::get('general.welcome', array('name' => Sentry::getUser()->first_name)) }}}
                         <b class="caret"></b>
                     </a>
@@ -131,9 +131,10 @@
                     </ul>
                 </li>
                 @if(Sentry::getUser()->hasAccess('admin'))
-                <li class="dropdown{{ (Request::is('admin/users*|admin/groups*') ? ' active' : '') }}}  hidden-phone">
-                    <a class="dropdown-toggle" data-toggle="dropdown" href="{{ URL::to('admin/users') }}">
-                        <i class="icon-wrench icon-white"></i> @lang('general.admin') <span class="caret"></span>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                        <i class="icon-wrench icon-white"></i> @lang('general.admin')
+                        <b class="caret"></b>
                     </a>
                     <ul class="dropdown-menu">
                         <li>
