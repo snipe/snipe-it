@@ -16,6 +16,7 @@ return array(
 	'suppliers'				=> 'Suppliers',
 	'update'				=> 'Update Supplier',
 	'view'      			=> 'View Supplier',
+	'view_assets_for'      	=> 'View Assets for',
 	'zip'      				=> 'Postal Code',
 
 );

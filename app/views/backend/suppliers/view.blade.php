@@ -14,7 +14,8 @@
     <div class="col-md-12">
     	<a href="{{ route('update/supplier', $supplier->id) }}" class="btn-flat white pull-right">
     	@lang('admin/suppliers/table.update')</a>
-		<h3 class="name">@lang('general.history_for')
+		<h3 class="name">
+		@lang('admin/suppliers/table.view_assets_for')
 		{{{ $supplier->name }}} </h3>
 	</div>
 </div>
@@ -91,7 +92,9 @@
 								@endif
 
 								@if ($supplier->email)
-									<li><i class="icon-envelope-alt"></i>{{{ $supplier->email }}}</li>
+									<li><i class="icon-envelope-alt"></i><a href="mailto:{{{ $supplier->email }}}">
+									{{{ $supplier->email }}}
+									</a></li>
 								@endif
 
 								@if ($supplier->address)
