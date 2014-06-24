@@ -2,29 +2,28 @@
 
 use Illuminate\Database\Migrations\Migration;
 
-class AddCheckedoutToToAssets extends Migration {
+class AddCheckedoutToToAssets extends Migration
+{
+    /**
+     * Run the migrations.
+     *
+     * @return void
+     */
+    public function up()
+    {
+        Schema::table('assets', function ($table) {
+            $table->integer('checkedout_to');
+        });
+    }
 
-	/**
-	 * Run the migrations.
-	 *
-	 * @return void
-	 */
-	public function up()
-	{
-		Schema::table('assets', function($table)
-		{
-			$table->integer('checkedout_to');
-		});
-	}
-
-	/**
-	 * Reverse the migrations.
-	 *
-	 * @return void
-	 */
-	public function down()
-	{
-		//
-	}
+    /**
+     * Reverse the migrations.
+     *
+     * @return void
+     */
+    public function down()
+    {
+        //
+    }
 
 }

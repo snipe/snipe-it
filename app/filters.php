@@ -11,15 +11,13 @@
 |
 */
 
-App::before(function($request)
-{
-	//
+App::before(function ($request) {
+    //
 });
 
 
-App::after(function($request, $response)
-{
-	//
+App::after(function ($request, $response) {
+    //
 });
 
 /*
@@ -33,23 +31,20 @@ App::after(function($request, $response)
 |
 */
 
-Route::filter('auth', function()
-{
-	// Check if the user is logged in
-	if ( ! Sentry::check())
-	{
-		// Store the current uri in the session
-		Session::put('loginRedirect', Request::url());
+Route::filter('auth', function () {
+    // Check if the user is logged in
+    if ( ! Sentry::check()) {
+        // Store the current uri in the session
+        Session::put('loginRedirect', Request::url());
 
-		// Redirect to the login page
-		return Redirect::route('signin');
-	}
+        // Redirect to the login page
+        return Redirect::route('signin');
+    }
 });
 
 
-Route::filter('auth.basic', function()
-{
-	return Auth::basic();
+Route::filter('auth.basic', function () {
+    return Auth::basic();
 });
 
 /*
@@ -63,9 +58,8 @@ Route::filter('auth.basic', function()
 |
 */
 
-Route::filter('guest', function()
-{
-	if (Auth::check()) return Redirect::to('/');
+Route::filter('guest', function () {
+    if (Auth::check()) return Redirect::to('/');
 });
 
 /*
@@ -78,9 +72,8 @@ Route::filter('guest', function()
 |
 */
 
-Route::filter('admin-auth', function()
-{
-	 // Check if the user is logged in
+Route::filter('admin-auth', function () {
+     // Check if the user is logged in
     if ( ! Sentry::check()) {
         // Store the current uri in the session
         Session::put('loginRedirect', Request::url());
@@ -108,10 +101,8 @@ Route::filter('admin-auth', function()
 |
 */
 
-Route::filter('csrf', function()
-{
-	if (Session::token() != Input::get('_token'))
-	{
-		throw new Illuminate\Session\TokenMismatchException;
-	}
+Route::filter('csrf', function () {
+    if (Session::token() != Input::get('_token')) {
+        throw new Illuminate\Session\TokenMismatchException;
+    }
 });

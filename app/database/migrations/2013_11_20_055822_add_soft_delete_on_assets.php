@@ -2,29 +2,28 @@
 
 use Illuminate\Database\Migrations\Migration;
 
-class AddSoftDeleteOnAssets extends Migration {
+class AddSoftDeleteOnAssets extends Migration
+{
+    /**
+     * Run the migrations.
+     *
+     * @return void
+     */
+    public function up()
+    {
+        Schema::table('assets', function ($table) {
+            $table->softDeletes();
+        });
+    }
 
-	/**
-	 * Run the migrations.
-	 *
-	 * @return void
-	 */
-	public function up()
-	{
-		Schema::table('assets', function($table)
-		{
-			$table->softDeletes();
-		});
-	}
-
-	/**
-	 * Reverse the migrations.
-	 *
-	 * @return void
-	 */
-	public function down()
-	{
-		//
-	}
+    /**
+     * Reverse the migrations.
+     *
+     * @return void
+     */
+    public function down()
+    {
+        //
+    }
 
 }

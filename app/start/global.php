@@ -13,10 +13,10 @@
 
 ClassLoader::addDirectories(array(
 
-	app_path().'/commands',
-	app_path().'/controllers',
-	app_path().'/models',
-	app_path().'/database/seeds',
+    app_path().'/commands',
+    app_path().'/controllers',
+    app_path().'/models',
+    app_path().'/database/seeds',
 
 ));
 
@@ -48,24 +48,21 @@ Log::useDailyFiles(storage_path().'/logs/'.$logFile);
 |
 */
 
-App::error(function(Exception $exception, $code)
-{
-	Log::error($exception);
+App::error(function (Exception $exception, $code) {
+    Log::error($exception);
 
-	if ( ! Config::get('app.debug'))
-	{
-		switch ($code)
-		{
-			case 403:
-				return Response::make(View::make('error/403'), 403);
+    if ( ! Config::get('app.debug')) {
+        switch ($code) {
+            case 403:
+                return Response::make(View::make('error/403'), 403);
 
-			case 500:
-				return Response::make(View::make('error/500'), 500);
+            case 500:
+                return Response::make(View::make('error/500'), 500);
 
-			default:
-				return Response::make(View::make('error/404'), 404);
-		}
-	}
+            default:
+                return Response::make(View::make('error/404'), 404);
+        }
+    }
 });
 
 /*
@@ -79,9 +76,8 @@ App::error(function(Exception $exception, $code)
 |
 */
 
-App::down(function()
-{
-	return Response::make(View::make('error/503'), 503);
+App::down(function () {
+    return Response::make(View::make('error/503'), 503);
 });
 
 /*
@@ -95,8 +91,7 @@ App::down(function()
 |
 */
 
-App::error(function(\Illuminate\Session\TokenMismatchException $exception)
-{
+App::error(function (\Illuminate\Session\TokenMismatchException $exception) {
     return Redirect::route('signin')->with('error','Your login session has expired. Please try logging in again.');
 });
 
