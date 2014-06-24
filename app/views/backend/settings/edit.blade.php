@@ -64,8 +64,7 @@
 
 									<div class="form-group {{ $errors->has('qr_code') ? 'error' : '' }}">
 										<label class="control-label" for="qr_code">
-										@lang('admin/settings/general.display_qr')
-										Display QR Codes</label>
+										@lang('admin/settings/general.display_qr')</label>
 										<div class="controls">
 									@if ($is_gd_installed)
 											<input class="col-md-1" type="checkbox" name="qr_code" id="qr_code" value="1" {{ $setting->qr_code == '1' ? 'checked' : '' }} />
