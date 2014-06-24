@@ -23,7 +23,7 @@ Change your Password
 	<div class="form-group {{ $errors->has('old_password') ? ' has-error' : '' }}">
 		<label for="old_password" class="col-md-2 control-label">Old Password</label>
 		<div class="col-md-5">
-			<input class="form-control" type="text" name="old_password" id="old_password" />
+			<input class="form-control" type="password" name="old_password" id="old_password" />
 			{{ $errors->first('old_password', '<span class="alert-msg"><i class="icon-remove-sign"></i> :message</span>') }}
 		</div>
 	</div>
