@@ -48,9 +48,14 @@
 
 		@if ($asset->model->manufacturer)
 			<div class="col-md-6"><strong>@lang('admin/hardware/form.manufacturer'): </strong>
-			{{{ $asset->model->manufacturer->name }}} </div>
+			<a href="{{ route('update/manufacturer', $asset->model->manufacturer->id) }}">
+			{{{ $asset->model->manufacturer->name }}}
+			</a> </div>
 			<div class="col-md-6"><strong>@lang('admin/hardware/form.model'):</strong>
-			{{{ $asset->model->name }}} / {{{ $asset->model->modelno }}}</div>
+			<a href="{{ route('view/model', $asset->model->id) }}">
+			{{{ $asset->model->name }}}
+			</a>
+			 / {{{ $asset->model->modelno }}}</div>
 		@endif
 
 		@if ($asset->purchase_date)
@@ -114,6 +119,14 @@
 				)
 			@endif
 			</div>
+		@endif
+
+		@if ($asset->supplier_id)
+			<div class="col-md-6"><strong>@lang('admin/hardware/form.supplier'): </strong>
+			<a href="{{ route('view/supplier', $asset->supplier_id) }}">
+			{{{ $asset->supplier->name }}}
+			</a> </div>
+
 		@endif
 
 	</div>

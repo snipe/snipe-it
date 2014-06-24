@@ -149,6 +149,11 @@ class Asset extends Elegant {
 		return $this->belongsTo('Model','model_id');
 	}
 
+	public function supplier()
+	{
+		return $this->belongsTo('Supplier','supplier_id');
+	}
+
 	public function months_until_eol()
 	{
 			$today = date("Y-m-d");
