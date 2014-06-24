@@ -2,8 +2,8 @@
 
 {{-- Page title --}}
 @section('title')
-@lang('admin/suppliers/table.view')
-{{{ $supplier->supplier_tag }}} ::
+@lang('admin/suppliers/table.view') -
+{{{ $supplier->name }}} ::
 @parent
 @stop
 

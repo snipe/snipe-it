@@ -15,6 +15,7 @@ return array(
 	'state'      			=> 'State',
 	'suppliers'				=> 'Suppliers',
 	'update'				=> 'Update Supplier',
+	'view'      			=> 'View Supplier',
 	'zip'      				=> 'Postal Code',
 
 );
