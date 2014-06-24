@@ -156,6 +156,11 @@
 								<i class="icon-briefcase"></i> @lang('general.manufacturers')
 							</a>
 						</li>
+						<li{{ (Request::is('admin/settings/suppliers*') ? ' class="active"' : '') }}>
+							<a href="{{ URL::to('admin/settings/suppliers') }}">
+								<i class="icon-credit-card"></i> @lang('general.suppliers')
+							</a>
+						</li>
 						<li{{ (Request::is('admin/settings/categories*') ? ' class="active"' : '') }}>
 							<a href="{{ URL::to('admin/settings/categories') }}">
 								<i class="icon-th"></i> @lang('general.categories')

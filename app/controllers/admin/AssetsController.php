@@ -4,6 +4,7 @@ use AdminController;
 use Input;
 use Lang;
 use Asset;
+use Supplier;
 use Statuslabel;
 use User;
 use Setting;
@@ -160,11 +161,12 @@ class AssetsController extends AdminController {
 	{
 		// Grab the dropdown list of models
 		$model_list = array('' => '') + Model::orderBy('name', 'asc')->lists('name', 'id');
+		$supplier_list = array('' => '') + Supplier::orderBy('name', 'asc')->lists('name', 'id');
 
 		// Grab the dropdown list of status
 		$statuslabel_list = array('' => Lang::get('general.pending')) + array('0' => Lang::get('general.ready_to_deploy')) + Statuslabel::orderBy('name', 'asc')->lists('name', 'id');
 
-		return View::make('backend/hardware/edit')->with('model_list',$model_list)->with('statuslabel_list',$statuslabel_list)->with('asset',new Asset);
+		return View::make('backend/hardware/edit')->with('supplier_list',$supplier_list)->with('model_list',$model_list)->with('statuslabel_list',$statuslabel_list)->with('asset',new Asset);
 
 	}
 
@@ -218,6 +220,7 @@ class AssetsController extends AdminController {
 			$asset->order_number            = e(Input::get('order_number'));
 			$asset->notes            		= e(Input::get('notes'));
 			$asset->asset_tag            	= e(Input::get('asset_tag'));
+			$asset->supplier_id            	= e(Input::get('supplier_id'));
 			$asset->user_id          		= Sentry::getId();
 			$asset->assigned_to          		= '0';
 			$asset->archived          			= '0';
@@ -262,11 +265,12 @@ class AssetsController extends AdminController {
 
 		// Grab the dropdown list of models
 		$model_list = array('' => '') + Model::orderBy('name', 'asc')->lists('name', 'id');
+		$supplier_list = array('' => '') + Supplier::orderBy('name', 'asc')->lists('name', 'id');
 
 		// Grab the dropdown list of status
 		$statuslabel_list = array('' => Lang::get('general.pending')) + array('0' => Lang::get('general.ready_to_deploy')) + Statuslabel::orderBy('name', 'asc')->lists('name', 'id');
 
-		return View::make('backend/hardware/edit', compact('asset'))->with('model_list',$model_list)->with('statuslabel_list',$statuslabel_list);
+		return View::make('backend/hardware/edit', compact('asset'))->with('model_list',$model_list)->with('supplier_list',$supplier_list)->with('statuslabel_list',$statuslabel_list);
 	}
 
 
@@ -338,6 +342,7 @@ class AssetsController extends AdminController {
 			$asset->order_number            = e(Input::get('order_number'));
 			$asset->asset_tag           	= e(Input::get('asset_tag'));
 			$asset->notes            		= e(Input::get('notes'));
+			$asset->supplier_id            	= e(Input::get('supplier_id'));
 			$asset->physical            		= '1';
 
 			// Was the asset updated?
