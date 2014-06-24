@@ -91,10 +91,15 @@
 									<li><i class="icon-print"></i>{{{ $supplier->fax }}}</li>
 								@endif
 
+
 								@if ($supplier->email)
 									<li><i class="icon-envelope-alt"></i><a href="mailto:{{{ $supplier->email }}}">
 									{{{ $supplier->email }}}
 									</a></li>
+								@endif
+
+								@if ($supplier->url)
+									<li><i class="icon-globe"></i><a href="{{{ $supplier->url }}}" target="_new">{{{ $supplier->url }}}</a></li>
 								@endif
 
 								@if ($supplier->address)

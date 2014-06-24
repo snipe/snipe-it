@@ -11,6 +11,7 @@ class Supplier extends Elegant {
 		'fax'   			=> 'alpha_space|min:7',
 		'phone'   			=> 'alpha_space|min:7',
 		'email'   			=> 'email|min:5',
+		'url'   			=> 'url|min:5',
 	);
 
 	public function assets()

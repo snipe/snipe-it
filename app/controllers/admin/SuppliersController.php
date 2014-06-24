@@ -70,6 +70,7 @@ class SuppliersController extends AdminController {
 			$supplier->fax          = e(Input::get('fax'));
 			$supplier->email          = e(Input::get('email'));
 			$supplier->notes          = e(Input::get('notes'));
+			$supplier->url          = e(Input::get('url'));
 			$supplier->user_id          = Sentry::getId();
 
 			// Was it created?
@@ -148,6 +149,7 @@ class SuppliersController extends AdminController {
 			$supplier->phone          = e(Input::get('phone'));
 			$supplier->fax          = e(Input::get('fax'));
 			$supplier->email          = e(Input::get('email'));
+			$supplier->url          = e(Input::get('url'));
 			$supplier->notes          = e(Input::get('notes'));
 
 

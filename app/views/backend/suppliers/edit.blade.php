@@ -129,6 +129,15 @@
 					</div>
 			</div>
 
+			<div class="form-group {{ $errors->has('url') ? ' has-error' : '' }}">
+				<label for="url" class="col-md-3 control-label">@lang('admin/suppliers/table.url')</label>
+					<div class="col-md-6">
+						<input class="form-control" type="text" name="url" id="url" value="{{{ Input::old('url', $supplier->url) }}}" />
+						{{ $errors->first('url', '<span class="alert-msg"><i class="icon-remove-sign"></i> :message</span>') }}
+					</div>
+			</div>
+
+
 			<div class="form-group {{ $errors->has('notes') ? ' has-error' : '' }}">
 				<label for="notes" class="col-md-3 control-label">@lang('admin/suppliers/table.notes')</label>
 					<div class="col-md-6">
@@ -136,6 +145,7 @@
 						{{ $errors->first('notes', '<span class="alert-msg"><i class="icon-remove-sign"></i> :message</span>') }}
 					</div>
 			</div>
+
 
 
 
