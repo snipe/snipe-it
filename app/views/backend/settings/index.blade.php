@@ -43,7 +43,7 @@ Settings ::
 									<td>@lang('admin/settings/general.display_asset_name')</td>
 
 
-									@if ($setting->display_asset_name === '1')
+									@if ($setting->display_asset_name == '1')
 										<td>Yes</td>
 									@else
 										<td>No</td>
@@ -56,7 +56,7 @@ Settings ::
 								</tr>
 								<tr>
 									<td>Display QR Codes</td>
-										@if ($setting->qr_code === '1')
+										@if ($setting->qr_code == '1')
 											<td>Yes</td>
 										@else
 											<td>No</td>
