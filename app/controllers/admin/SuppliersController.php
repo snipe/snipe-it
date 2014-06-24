@@ -58,20 +58,20 @@ class SuppliersController extends AdminController {
 		{
 
 			// Save the location data
-			$supplier->name            = e(Input::get('name'));
-			$supplier->address          = e(Input::get('address'));
-			$supplier->address2          = e(Input::get('address2'));
-			$supplier->city          = e(Input::get('city'));
-			$supplier->state          = e(Input::get('state'));
-			$supplier->country          = e(Input::get('country'));
-			$supplier->zip          = e(Input::get('zip'));
-			$supplier->contact          = e(Input::get('contact'));
-			$supplier->phone          = e(Input::get('phone'));
-			$supplier->fax          = e(Input::get('fax'));
-			$supplier->email          = e(Input::get('email'));
-			$supplier->notes          = e(Input::get('notes'));
-			$supplier->url          = e(Input::get('url'));
-			$supplier->user_id          = Sentry::getId();
+			$supplier->name            		= e(Input::get('name'));
+			$supplier->address          	= e(Input::get('address'));
+			$supplier->address2          	= e(Input::get('address2'));
+			$supplier->city          		= e(Input::get('city'));
+			$supplier->state          		= e(Input::get('state'));
+			$supplier->country          	= e(Input::get('country'));
+			$supplier->zip          		= e(Input::get('zip'));
+			$supplier->contact          	= e(Input::get('contact'));
+			$supplier->phone          		= e(Input::get('phone'));
+			$supplier->fax         	 		= e(Input::get('fax'));
+			$supplier->email          		= e(Input::get('email'));
+			$supplier->notes          		= e(Input::get('notes'));
+			$supplier->url          		= $supplier->addhttp(e(Input::get('url')));
+			$supplier->user_id          	= Sentry::getId();
 
 			// Was it created?
 			if($supplier->save())
@@ -131,26 +131,25 @@ class SuppliersController extends AdminController {
 		// get the POST data
 		$new = Input::all();
 
+
 		// attempt validation
 		if ($supplier->validate($new))
 		{
 
-
-
 			// Save the  data
-			$supplier->name            = e(Input::get('name'));
-			$supplier->address          = e(Input::get('address'));
-			$supplier->address2          = e(Input::get('address2'));
-			$supplier->city          = e(Input::get('city'));
-			$supplier->state          = e(Input::get('state'));
-			$supplier->country          = e(Input::get('country'));
-			$supplier->zip          = e(Input::get('zip'));
-			$supplier->contact          = e(Input::get('contact'));
-			$supplier->phone          = e(Input::get('phone'));
-			$supplier->fax          = e(Input::get('fax'));
-			$supplier->email          = e(Input::get('email'));
-			$supplier->url          = e(Input::get('url'));
-			$supplier->notes          = e(Input::get('notes'));
+			$supplier->name            		= e(Input::get('name'));
+			$supplier->address          	= e(Input::get('address'));
+			$supplier->address2          	= e(Input::get('address2'));
+			$supplier->city          		= e(Input::get('city'));
+			$supplier->state          		= e(Input::get('state'));
+			$supplier->country          	= e(Input::get('country'));
+			$supplier->zip          		= e(Input::get('zip'));
+			$supplier->contact          	= e(Input::get('contact'));
+			$supplier->phone          		= e(Input::get('phone'));
+			$supplier->fax          		= e(Input::get('fax'));
+			$supplier->email          		= e(Input::get('email'));
+			$supplier->url          		= $supplier->addhttp(e(Input::get('url')));
+			$supplier->notes          		= e(Input::get('notes'));
 
 
 			// Was it created?
