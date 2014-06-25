@@ -140,7 +140,7 @@ Now, you need to create yourself a user and finish the installation.
 
 Use the following command to create your default user, user groups and run all the necessary migrations automatically.
 
-	php artisan app:install
+	php artisan app:install --env=local
 
 -----
 
