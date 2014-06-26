@@ -1,10 +1,10 @@
 <!DOCTYPE HTML>
 <html lang="en-US">
 <head>
-	<meta charset="UTF-8">
-	<title></title>
+    <meta charset="UTF-8">
+    <title></title>
 </head>
 <body>
-	@yield('content')
+    @yield('content')
 </body>
 </html>

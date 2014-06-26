@@ -2,33 +2,32 @@
 
 use Illuminate\Database\Migrations\Migration;
 
-class CreateHistoryTable extends Migration {
+class CreateHistoryTable extends Migration
+{
+    /**
+     * Run the migrations.
+     *
+     * @return void
+     */
+    public function up()
+    {
+        Schema::create('history', function ($table) {
+            $table->increments('id');
+            $table->integer('checkedout_to')->nullable;
+            $table->integer('location_id')->nullable;
+            $table->timestamps();
+            $table->integer('user_id');
+        });
+    }
 
-	/**
-	 * Run the migrations.
-	 *
-	 * @return void
-	 */
-	public function up()
-	{
-		Schema::create('history', function($table)
-		{
-			$table->increments('id');
-			$table->integer('checkedout_to')->nullable;
-			$table->integer('location_id')->nullable;
-			$table->timestamps();
-			$table->integer('user_id');
-		});
-	}
-
-	/**
-	 * Reverse the migrations.
-	 *
-	 * @return void
-	 */
-	public function down()
-	{
-		Schema::drop('history');
-	}
+    /**
+     * Reverse the migrations.
+     *
+     * @return void
+     */
+    public function down()
+    {
+        Schema::drop('history');
+    }
 
 }
