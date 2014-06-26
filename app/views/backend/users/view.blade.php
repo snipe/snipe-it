@@ -44,7 +44,7 @@ View User {{{ $user->fullName() }}} ::
 
                         @endif
 
-                            <h6>Assets Checked Out to {{ $user->first_name }}</h6>
+                            <h6>Assets Checked Out to {{{ $user->first_name }}}</h6>
                             <br>
                             <!-- checked out assets table -->
                             @if (count($user->assets) > 0)
