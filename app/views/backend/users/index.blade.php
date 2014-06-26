@@ -51,7 +51,7 @@
         <tr>
             <td>
             <img src="{{ $user->gravatar() }}" class="img-circle avatar hidden-phone" style="max-width: 45px;" />
-            <a href="{{ route('view/user', $user->id) }}" class="name">{{ $user->fullName() }}</a>
+            <a href="{{ route('view/user', $user->id) }}" class="name">{{{ $user->fullName() }}}</a>
 
             </td>
             <td>{{{ $user->email }}}</td>
