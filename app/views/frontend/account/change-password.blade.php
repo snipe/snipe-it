@@ -10,7 +10,7 @@ Change your Password
 <div class="row header">
 
     <div class="col-md-12">
-        <h3>Change Your Password</h3>
+        <h3>@lang('general.changepassword')</h3>
     </div>
 </div>
 
