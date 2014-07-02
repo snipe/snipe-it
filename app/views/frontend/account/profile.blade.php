@@ -10,7 +10,7 @@ Your Profile
 <div class="row header">
 
     <div class="col-md-12">
-        <h3>Update Profile</h3>
+        <h3>@lang('general.editprofile')</h3>
     </div>
 </div>
 

@@ -10,7 +10,7 @@ Change your Email
 <div class="row header">
 
     <div class="col-md-12">
-        <h3>Change Your Email</h3>
+        <h3>@lang('general.changeemail')</h3>
     </div>
 </div>
 
