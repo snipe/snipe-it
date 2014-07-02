@@ -117,8 +117,17 @@
                     </a>
                     <ul class="dropdown-menu">
                         <li{{{ (Request::is('account/profile') ? ' class="active"' : '') }}}>
-                            <a href="{{ route('profile') }}">
-                                <i class="icon-user"></i> @lang('general.profile')
+                         	<a href="{{ route('view-assets') }}">
+                                <i class="icon-check"></i> @lang('general.viewassets')
+                        	</a>
+                             <a href="{{ route('profile') }}">
+                                <i class="icon-user"></i> @lang('general.editprofile')
+                            </a>
+                             <a href="{{ route('change-password') }}">
+                                <i class="icon-lock"></i> @lang('general.changepassword')
+                            </a>
+                            <a href="{{ route('change-email') }}">
+                                <i class="icon-envelope"></i> @lang('general.changeemail')
                             </a>
                         </li>
                         <li class="divider"></li>
