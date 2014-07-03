@@ -24,6 +24,21 @@ To be notified of important news (such as new releases, security advisories, etc
 
 -----
 
+### Contents
+
+- [Requirements](https://github.com/snipe/snipe-it#requirements)
+- [Important Notes on Updating](https://github.com/snipe/snipe-it#important-notes-on-updating)
+- [How to Install in Production](https://github.com/snipe/snipe-it#how-to-install-in-production)
+	- [Downloading](https://github.com/snipe/snipe-it#1-downloading)
+	- [Set Up Environment Database and Email Settings](https://github.com/snipe/snipe-it#2-setup-environment-database-and-mail-settings)
+	- [Install Dependencies via Composer](https://github.com/snipe/snipe-it#3-install-the-dependencies-via-composer)
+	- [Use Custom CLI Installer Command](https://github.com/snipe/snipe-it#4-use-custom-cli-installer-command)
+	- [Fix Permissions](https://github.com/snipe/snipe-it#6-fix-permissions)
+	- [Set the correct document root for your server](https://github.com/snipe/snipe-it#7-set-the-correct-document-root-for-your-server)
+	- [Seed the Database](https://github.com/snipe/snipe-it#8-seed-the-database)
+- [Developing & Contributing](https://github.com/snipe/snipe-it#developing--contributing)
+
+-----
 ## Requirements
 
 - PHP 5.4 or later
@@ -222,6 +237,8 @@ To enable it by default after reboot, add this line to /etc/fstab:
 -----
 
 ## Developing & Contributing
+
+Please be sure to see the [contributing guidelines](https://github.com/snipe/snipe-it/blob/develop/CONTRIBUTING.md) before submitting pull requests.
 
 The only real difference in setting Snipe-IT up for local development versus setting it up for production usage is the configuration files, and remembering to add the local environment flag on the artisan commands.
 
