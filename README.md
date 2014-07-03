@@ -37,6 +37,8 @@ To be notified of important news (such as new releases, security advisories, etc
 	- [Set the correct document root for your server](https://github.com/snipe/snipe-it#7-set-the-correct-document-root-for-your-server)
 	- [Seed the Database](https://github.com/snipe/snipe-it#8-seed-the-database)
 - [Developing & Contributing](https://github.com/snipe/snipe-it#developing--contributing)
+- [Application Logs](https://github.com/snipe/snipe-it#application-logs)
+- [Running this on an EC2 Micro Instance](https://github.com/snipe/snipe-it#running-this-on-an-ec2-micro-instance)
 
 -----
 ## Requirements
@@ -80,7 +82,7 @@ or
 
 #### 2.1) Adjust Environments
 
-Update the file `boostrap/start.php` under the section `Detect The Application Environment`.
+Update the file `bootstrap/start.php` under the section `Detect The Application Environment`.
 
 __AS OF LARAVEL 4.1__
 Per the [Laravel 4.1 upgrade docs](http://laravel.com/docs/upgrade):
@@ -177,28 +179,27 @@ If you still run into a permissions error, you may need to increase the permissi
 
 ### 7) Set the correct document root for your server
 
-The document root for the app should be set to the public directory. In a standard Apache virtualhost setup, that might look something like this on a standard linux LAMP stack:
+The document root for the app should be set to the `public` directory. In a standard Apache virtualhost setup, that might look something like this on a standard linux LAMP stack:
 
 	<VirtualHost *:80>
 		<Directory /var/www/html/public>
 			AllowOverride All
 		</Directory>
 		DocumentRoot /var/www/html/public
-	    	ServerName www.example.org
-
+	    	ServerName www.yourserver.com
 	    	# Other directives here
 	</VirtualHost>
 
 An OS X virtualhost setup could look more like:
 
-	Directory "/Users/flashingcursor/Sites/snipe-it/public/">
-	Allow From All
-	AllowOverride All
-	Options +Indexes
+	<Directory "/Users/youruser/Sites/snipe-it/public/">
+		Allow From All
+		AllowOverride All
+		Options +Indexes
 	</Directory>
 	<VirtualHost *:80>
-	        ServerName "snipe-it.dev"
-	        DocumentRoot "/Users/flashingcursor/Sites/snipe-it/public"
+		ServerName "www.yourserver.com"
+		DocumentRoot "/Users/youruser/Sites/snipe-it/public"
 	SetEnv LARAVEL_ENV development
 	</VirtualHost>
 
@@ -228,7 +229,7 @@ Depending on your needs, you could probably run this system in an EC2 micro inst
 	sudo /sbin/mkswap /var/swap.1
 	sudo /sbin/swapon /var/swap.1
 
-If you need more than 1024 then change that to something higher.
+If you need more than 1024MB then change that to something higher.
 
 To enable it by default after reboot, add this line to /etc/fstab:
 
