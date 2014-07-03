@@ -1,5 +1,12 @@
 
 
+###  v0.3.9-alpha - Released Jul 03, 2014 04:08:38
+#### This is a pre-release 
+* <a href="http://github.com/snipe/snipe-it/commit/2825bcb4310899e89ccbc73dfa8b59ade28018da">view</a> &bull; Fixed #179 - account page to show assets checked out to the logged in user 
+* <a href="http://github.com/snipe/snipe-it/commit/c782f29f5aae752a6246be9778d418df172dd4f6">view</a> &bull; Pulled account sub-nav into top menu to free up UI space. #changelog 
+* <a href="http://github.com/snipe/snipe-it/commit/fad2ec66fa9abe0b34baf16cce453a7e9fc9e4d4">view</a> &bull; More README fixes and refinement 
+
+
 ###  v0.3.8-alpha - Released Jun 27, 2014 11:28:22
 #### This is a pre-release 
 * <a href="http://github.com/snipe/snipe-it/commit/3e7a9e45d1954531bbc3b73f2ed59dd16d59c657">view</a> &bull; Fixes PR #168 and #167 
