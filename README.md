@@ -6,9 +6,9 @@ This is a FOSS project for asset management in IT Operations. Knowing who has wh
 
 It is built on [Laravel 4.1](http://laravel.com) and uses the [Sentry 2](https://github.com/cartalyst/sentry) package.
 
-Many thanks to the [Laravel 4 starter site](https://github.com/brunogaspar/laravel4-starter-kit) for a quick start.
-
 This project is being actively developed (at what seems like breakneck speed sometimes!) We're still in alpha release, so this is NOT recommended for production use yet, as many more things will likely change before v1.0-stable is ready - but we're [releasing quite frequently](https://github.com/snipe/snipe-it/releases).
+
+__This is web-based software__. This means there there is no executable file (aka no .exe files), and it must be run on a web server and accessed through a web browser. It runs on any Mac OSX, flavor of Linux, as well as Windows.
 
 ### Bug Reports & Feature Requests
 
@@ -31,7 +31,7 @@ To be notified of important news (such as new releases, security advisories, etc
 
 -----
 
-## Important Note on Updating
+## Important Notes on Updating
 
 Whenever you pull down a new version from master or develop, when you grab the [latest official release](https://github.com/snipe/snipe-it/releases), make sure to run the following commands via command line:
 
@@ -42,16 +42,22 @@ Forgetting to do this can mean your DB might end up out of sync with the new fil
 
 -----
 
-## How to Install
+## How to Install in Production
+
+Bear in mind that Snipe-IT is still in pre-release. While it's generally pretty stable, installing this in a production environment is generally not recommended. We do our best to make sure future changes won't hoark your install, but you should always back up your databases when you upgrade to newer releases.
+
+Note: Installation for Windows IIS [can be found here](https://gist.github.com/madd15/e48a9c4aaa4b14b6f69a).
 
 ### 1) Downloading
-#### 1.1) Clone the Repository
+#### Clone the Repository
 
 	git clone https://github.com/snipe/snipe-it your-folder
 
-#### 1.2) Download the Repository
+or
 
-	https://github.com/snipe/snipe-it/archive/master.zip
+#### Download the source from [https://github.com/snipe/snipe-it/archive/master.zip](https://github.com/snipe/snipe-it/archive/master.zip)
+
+
 
 -----
 
@@ -61,10 +67,6 @@ Forgetting to do this can mean your DB might end up out of sync with the new fil
 
 Update the file `boostrap/start.php` under the section `Detect The Application Environment`.
 
-	vi bootstrap/start.php
-
------
-
 __AS OF LARAVEL 4.1__
 Per the [Laravel 4.1 upgrade docs](http://laravel.com/docs/upgrade):
 
@@ -72,12 +74,11 @@ __*"For security reasons, URL domains may no longer be used to detect your appli
 
 To find out your local machine's hostname, type `hostname` from a terminal prompt on the machine you're installing it on. The command-line response is that machine's hostname. Please note that the hostname is NOT always the same as the domain name.
 
-So for example, if you're installing this locally on your Mac named SnipeMBP, the environmental variable section of `bootstrap/start.php` might look like this:
+So for example, if you're installing this on your server named www.yourserver.com, the environmental variable section of `bootstrap/start.php` might look like this:
 
 	$env = $app->detectEnvironment(array(
-		'local'		 	=> array('SnipeMBP'),
-		'staging' 		=> array('staging.mysite.com'),
-		'production' 	=> array('www.mysite.com')
+		...
+		'production' 	=> array('www.yourserver.com')
 	));
 
 If your development, staging and production sites all run on the same server (which is generally a terrible idea), [see this example](http://words.weareloring.com/development/setting-up-multiple-environments-in-laravel-4-1/) of how to configure the app using environmental variables.
@@ -86,37 +87,40 @@ If your development, staging and production sites all run on the same server (wh
 
 #### 2.2) Setup Your Database
 
-Copy the example database config `app/config/local/database.example.php` to `app/config/local/database.php`.
-Update the file `app/config/local/database.php` with your database name and credentials.
+Copy the example database config `app/config/production/database.example.php` to `app/config/production/database.php`.
+Update the file `app/config/production/database.php` with your database name and credentials:
 
-    vi app/config/local/database.php
+        'mysql' => array(
+            'driver'    => 'mysql',
+            'host'      => 'localhost',
+            'database'  => 'snipeit_laravel',
+            'username'  => 'travis',
+            'password'  => '',
+            'charset'   => 'utf8',
+            'collation' => 'utf8_unicode_ci',
+            'prefix'    => '',
+        ),
+
 
 
 #### 2.3) Setup Mail Settings
 
-Copy the example mail config `app/config/local/mail.example.php` to `app/config/local/mail.php`.
-Update the file `app/config/local/mail.php` with your mail settings.
+Copy the example mail config `app/config/production/mail.example.php` to `app/config/production/mail.php`.
+Update the file `app/config/production/mail.php` with your mail settings.
 
-    vi app/config/local/mail.php
-
-This will be used to send emails to your users, when they register and they request a password reset.
+This will be used to send emails to your users, when they register and when they request a password reset.
 
 #### 2.4) Adjust the application settings.
 
-Copy the example app config `app/config/local/app.example.php` to `app/config/local/app.php`.
+Copy the example app config `app/config/production/app.example.php` to `app/config/production/app.php`.
 
-Update the file `app/config/local/app.php` with your URL settings.
+Update the file `app/config/production/app.php` with your URL settings.
 
-	vi app/config/local/app.php
+    'url' => 'http://www.yourserver.com',
 
 You should also change your secret key here -- if you prefer to have your key randomly generated, run the artisan key:generate command from the application root.
 
-	php artisan key:generate --env=local
-
-
-#### 2.5) Additional Adjustments
-
-The app is configured to automatically detect if you're in a local, staging, or production environment.  Before deploying to a staging or production environment, follow sets 2.1, 2.2, and 2.3 above to tweak each environment as necessary.  Configuration files for each environment can be found in app/config/{environment} (local, staging, and production).
+	php artisan key:generate --env=production
 
 -----
 
@@ -140,7 +144,7 @@ Now, you need to create yourself a user and finish the installation.
 
 Use the following command to create your default user, user groups and run all the necessary migrations automatically.
 
-	php artisan app:install --env=local
+	php artisan app:install
 
 -----
 
@@ -191,26 +195,7 @@ Loading up the sample data will give you an idea of how this should look, how yo
 
 	php artisan db:seed
 
------
-
-
-## Optional Development Stuff
-### Set up the debugbar
-
-In dev mode, I use the fabulous [Laravel Debugbar](https://github.com/barryvdh/laravel-debugbar) by @barryvdh. After you've installed/updated composer, you'll need to publish the assets for the debugbar:
-
-	php artisan debugbar:publish
-
-The profiler is enabled by default if you have debug set to true in your app.php. You certainly don't have to use it, but it's pretty handy for troubleshooting queries, seeing how much memory your pages are using, etc.
-
------
-
-### Purging the autoloader
-
-If you're doing any development on this, make sure you purge the auto-loader if you see any errors stating the new model you created can't be found, etc, otherwise your new models won't be grokked.
-
-	php composer.phar dump-autoload
-
+__If you run this command on a database that already has your own asset data in it, it will over-write your database. ALL of your data will be gone. NEVER run the db seeder on production after on your initial install.__
 
 -----
 
@@ -235,6 +220,38 @@ To enable it by default after reboot, add this line to /etc/fstab:
 	/var/swap.1 swap swap defaults 0 0
 
 -----
+
+## Developing & Contributing
+
+The only real difference in setting Snipe-IT up for local development versus setting it up for production usage is the configuration files, and remembering to add the local environment flag on the artisan commands.
+
+You'll notice in your `app/config` directory, you have directories such as `local`, `staging`, and `production`. (The `testing` directory is reserved for unit tests, so don't mess with that one.)
+
+You'll want to make sure you have the configuration files updated for whichever environment you're in, which will most likely be `local`.
+
+If you run the command line tools without the local flag, it will default to the production environment, so you'll want to make sure you run the commands as:
+
+	php artisan key:generate --env=local
+	php artisan app:install --env=local
+
+### Set up the debugbar
+
+In dev mode, I use the fabulous [Laravel Debugbar](https://github.com/barryvdh/laravel-debugbar) by @barryvdh. After you've installed/updated composer, you'll need to publish the assets for the debugbar:
+
+	php artisan debugbar:publish
+
+The profiler is enabled by default if you have debug set to true in your app.php. You certainly don't have to use it, but it's pretty handy for troubleshooting queries, seeing how much memory your pages are using, etc.
+
+-----
+
+### Purging the autoloader
+
+If you're doing any development on this, make sure you purge the auto-loader if you see any errors stating the new model you created can't be found, etc, otherwise your new models won't be grokked.
+
+	php composer.phar dump-autoload
+
+-----
+
 
 ## License
 
