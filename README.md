@@ -63,7 +63,7 @@ Forgetting to do this can mean your DB might end up out of sync with the new fil
 
 Bear in mind that Snipe-IT is still in pre-release. While it's generally pretty stable, installing this in a production environment is generally not recommended. We do our best to make sure future changes won't hoark your install, but you should always back up your databases when you upgrade to newer releases.
 
-Note: Installation for Windows IIS [can be found here](https://gist.github.com/madd15/e48a9c4aaa4b14b6f69a).
+Note: Installation for Windows IIS [can be found here](https://gist.github.com/madd15/e48a9c4aaa4b14b6f69a) (thanks, [madd15](https://github.com/madd15)!)
 
 ### 1) Downloading
 #### Clone the Repository
@@ -254,7 +254,7 @@ If you run the command line tools without the local flag, it will default to the
 
 ### Set up the debugbar
 
-In dev mode, I use the fabulous [Laravel Debugbar](https://github.com/barryvdh/laravel-debugbar) by @barryvdh. After you've installed/updated composer, you'll need to publish the assets for the debugbar:
+In dev mode, I use the fabulous [Laravel Debugbar](https://github.com/barryvdh/laravel-debugbar) by [barryvdh](https://github.com/barryvdh). After you've installed/updated composer, you'll need to publish the assets for the debugbar:
 
 	php artisan debugbar:publish
 
