@@ -2,7 +2,13 @@
 
 {{-- Page title --}}
 @section('title')
-Update User {{ $user->fullName() }} ::
+	@if ($user->id)
+		@lang('admin/users/table.updateuser')
+		{{ $user->fullName() }} ::
+	@else
+		@lang('admin/users/table.createuser') ::
+	@endif
+
 @parent
 @stop
 
@@ -14,7 +20,12 @@ Update User {{ $user->fullName() }} ::
             <a href="{{ URL::previous() }}" class="btn-flat gray"><i class="icon-circle-arrow-left icon-white"></i>  @lang('general.back')</a>
         </div>
     <h3>
-        Update User {{{ $user->fullName() }}}
+        @if ($user->id)
+		@lang('admin/users/table.updateuser')
+		{{ $user->fullName() }}
+	@else
+		@lang('admin/users/table.createuser')
+	@endif
     </h3>
 </div>
 
