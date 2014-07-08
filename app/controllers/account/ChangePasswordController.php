@@ -33,7 +33,7 @@ class ChangePasswordController extends AuthorizedController
         // Declare the rules for the form validation
         $rules = array(
             'old_password'     => 'required|between:3,32',
-            'password'         => 'required|between:3,32',
+            'password'         => 'required|between:10,32',
             'password_confirm' => 'required|same:password',
         );
 
