@@ -78,26 +78,36 @@ class UsersController extends AdminController
         $groups = Sentry::getGroupProvider()->findAll();
 
         // Selected groups
-        $selectedGroups = Input::old('groups', array());
+        $userGroups = Input::old('groups', array());
 
         // Get all the available permissions
         $permissions = Config::get('permissions');
         $this->encodeAllPermissions($permissions);
 
         // Selected permissions
-        $selectedPermissions = Input::old('permissions', array('superuser' => -1));
-        $this->encodePermissions($selectedPermissions);
+        $userPermissions = Input::old('permissions', array('superuser' => -1));
+        $this->encodePermissions($userPermissions);
 
         $location_list = array('' => '') + Location::lists('name', 'id');
-        $manager_list = array('' => 'Select a User') + DB::table('users')
+        $manager_list = array('' => '') + DB::table('users')
             ->select(DB::raw('concat(first_name," ",last_name) as full_name, id'))
             ->whereNull('deleted_at','and')
             ->orderBy('last_name', 'asc')
             ->orderBy('first_name', 'asc')
             ->lists('full_name', 'id');
 
+		/*echo '<pre>';
+		print_r($userPermissions);
+		echo '</pre>';
+		exit;
+		*/
+
         // Show the page
-        return View::make('backend/users/create', compact('groups', 'selectedGroups', 'permissions', 'selectedPermissions'))->with('location_list',$location_list)->with('manager_list',$manager_list);
+        return View::make('backend/users/edit', compact('groups', 'userGroups', 'permissions', 'userPermissions'))
+        ->with('location_list',$location_list)
+        ->with('manager_list',$manager_list)
+        ->with('user',new User);
+
     }
 
     /**
@@ -109,29 +119,38 @@ class UsersController extends AdminController
     {
         // Create a new validator instance from our validation rules
         $validator = Validator::make(Input::all(), $this->validationRules);
+		$permissions = Input::get('permissions', array());
+		$this->decodePermissions($permissions);
+        app('request')->request->set('permissions', $permissions);
 
         // If validation fails, we'll exit the operation now.
         if ($validator->fails()) {
             // Ooops.. something went wrong
-            return Redirect::back()->withInput()->withErrors($validator);
+            return Redirect::back()->withInput()->withErrors($validator)->with('permissions',$permissions);
         }
 
         try {
             // We need to reverse the UI specific logic for our
             // permissions here before we create the user.
-            $permissions = Input::get('permissions', array());
-            $this->decodePermissions($permissions);
-            app('request')->request->set('permissions', $permissions);
 
             // Get the inputs, with some exceptions
             $inputs = Input::except('csrf_token', 'password_confirm', 'groups');
 
+			// @TODO: Figure out WTF I need to do this.
+            if ($inputs['manager_id']=='') {
+            	unset($inputs['manager_id']);
+            }
+
+            if ($inputs['location_id']=='') {
+            	unset($inputs['location_id']);
+            }
+
             // Was the user created?
             if ($user = Sentry::getUserProvider()->create($inputs)) {
+
                 // Assign the selected groups to this user
                 foreach (Input::get('groups', array()) as $groupId) {
                     $group = Sentry::getGroupProvider()->findById($groupId);
-
                     $user->addGroup($group);
                 }
 
@@ -141,6 +160,8 @@ class UsersController extends AdminController
                 // Redirect to the new user page
                 return Redirect::route('update/user', $user->id)->with('success', $success);
             }
+
+
 
             // Prepare the error message
             $error = Lang::get('admin/users/message.error.create');
@@ -256,15 +277,16 @@ class UsersController extends AdminController
 
         try {
             // Update the user
-            $user->first_name  = Input::get('first_name');
-            $user->last_name   = Input::get('last_name');
-            $user->email       = Input::get('email');
-            $user->activated   = Input::get('activated', $user->activated);
-            $user->permissions = Input::get('permissions');
-            $user->jobtitle = Input::get('jobtitle');
-            $user->phone = Input::get('phone');
-            $user->location_id = Input::get('location_id');
-            $user->manager_id = Input::get('manager_id');
+            $user->first_name  		= Input::get('first_name');
+            $user->last_name   		= Input::get('last_name');
+            $user->email       		= Input::get('email');
+            $user->employee_num		= Input::get('employee_num');
+            $user->activated   		= Input::get('activated', $user->activated);
+            $user->permissions 		= Input::get('permissions');
+            $user->jobtitle 		= Input::get('jobtitle');
+            $user->phone 			= Input::get('phone');
+            $user->location_id 		= Input::get('location_id');
+            $user->manager_id 		= Input::get('manager_id');
 
             if ($user->manager_id == "") {
                 $user->manager_id = NULL;
