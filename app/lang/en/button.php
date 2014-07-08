@@ -6,5 +6,6 @@ return array(
     'delete'  => 'Delete',
     'restore' => 'Restore',
     'actions' => 'Actions',
+    'submit'  => 'Submit',
 
 );
