@@ -25,4 +25,5 @@ return array(
     'phone'  				=> 'Phone',
     'title' 				=> 'Title',
     'updateuser' 			=> 'Update User',
+    'viewusers' 			=> 'View Users',
 );
