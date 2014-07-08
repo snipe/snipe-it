@@ -2,7 +2,7 @@
 
 {{-- Page title --}}
 @section('title')
-@lang('admin/users/table.title') ::
+@lang('admin/users/table.viewusers') ::
 @parent
 @stop
 
