@@ -14,8 +14,13 @@ View User {{{ $user->fullName() }}} ::
             <div class="row header">
                 <div class="col-md-8">
                     <img src="{{{ $user->gravatar() }}}" class="avatar img-circle">
-                    <h3 class="name">{{{ $user->fullName() }}}</h3>
-                    <span class="area">{{{ $user->jobtitle }}}</span>
+                    <h3 class="name">{{{ $user->fullName() }}}
+                    @if ($user->employee_num)
+                    		({{{ $user->employee_num }}})
+                        @endif</h3>
+                    <span class="area">{{{ $user->jobtitle }}}
+
+                        </span>
                 </div>
                 @if ($user->deleted_at != NULL)
                             <a href="{{ route('restore/user', $user->id) }}" class="btn btn-warning pull-right edit"><i class="icon-pencil"></i> Restore This User</a>
