@@ -35,7 +35,9 @@
 
             <!-- Asset Tag -->
             <div class="form-group {{ $errors->has('name') ? ' has-error' : '' }}">
-                <label for="name" class="col-md-3 control-label">@lang('admin/licenses/form.name')</label>
+                <label for="name" class="col-md-3 control-label">@lang('admin/licenses/form.name')
+                 <i class='icon-asterisk'></i></label>
+                 </label>
                     <div class="col-md-7">
                         <input class="form-control" type="text" name="name" id="name" value="{{ Input::old('name', $license->name) }}" />
                         {{ $errors->first('name', '<span class="alert-msg"><i class="icon-remove-sign"></i> :message</span>') }}
@@ -43,7 +45,9 @@
             </div>
 
             <div class="form-group {{ $errors->has('serial') ? ' has-error' : '' }}">
-                <label for="serial" class="col-md-3 control-label">@lang('admin/licenses/form.serial')</label>
+                <label for="serial" class="col-md-3 control-label">@lang('admin/licenses/form.serial')
+                 <i class='icon-asterisk'></i></label>
+                 </label>
                     <div class="col-md-7">
                         <textarea class="form-control" type="text" name="serial" id="serial">{{ Input::old('serial', $license->serial) }}</textarea>
                         {{ $errors->first('serial', '<span class="alert-msg"><i class="icon-remove-sign"></i> :message</span>') }}
@@ -67,7 +71,9 @@
             </div>
 
             <div class="form-group {{ $errors->has('seats') ? ' has-error' : '' }}">
-                <label for="seats" class="col-md-3 control-label">@lang('admin/licenses/form.seats')</label>
+                <label for="seats" class="col-md-3 control-label">@lang('admin/licenses/form.seats')
+                 <i class='icon-asterisk'></i></label>
+                 </label>
                     <div class="col-md-3">
                         <input class="form-control" type="text" name="seats" id="seats" value="{{ Input::old('seats', $license->seats) }}" />
                         {{ $errors->first('seats', '<span class="alert-msg"><i class="icon-remove-sign"></i> :message</span>') }}

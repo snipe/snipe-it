@@ -50,7 +50,8 @@
 
             <!-- First Name -->
             <div class="form-group {{ $errors->has('first_name') ? 'has-error' : '' }}">
-                <label class="col-md-3 control-label" for="first_name">@lang('general.first_name')</label>
+                <label class="col-md-3 control-label" for="first_name">@lang('general.first_name')
+                <i class='icon-asterisk'></i></label>
                 <div class="col-md-7">
                     <input class="form-control" type="text" name="first_name" id="first_name" value="{{{ Input::old('first_name', $user->first_name) }}}" />
                     {{ $errors->first('first_name', '<span class="alert-msg">:message</span>') }}
@@ -59,7 +60,7 @@
 
             <!-- Last Name -->
             <div class="form-group {{ $errors->has('last_name') ? 'has-error' : '' }}">
-                <label class="col-md-3 control-label" for="first_name">@lang('general.last_name')</label>
+                <label class="col-md-3 control-label" for="first_name">@lang('general.last_name') <i class='icon-asterisk'></i></label>
                 <div class="col-md-7">
                     <input class="form-control" type="text" name="last_name" id="last_name" value="{{{ Input::old('last_name', $user->last_name) }}}" />
                     {{ $errors->first('last_name', '<span class="alert-msg">:message</span>') }}
@@ -68,7 +69,7 @@
 
 			<!-- Email -->
             <div class="form-group {{ $errors->has('email') ? 'has-error' : '' }}">
-                <label class="col-md-3 control-label" for="email">@lang('admin/users/table.email')</label>
+                <label class="col-md-3 control-label" for="email">@lang('admin/users/table.email') <i class='icon-asterisk'></i></label>
                 <div class="col-md-7">
                     <input class="form-control" type="text" name="email" id="email" value="{{{ Input::old('email', $user->email) }}}" />
                     {{ $errors->first('email', '<span class="alert-msg">:message</span>') }}
@@ -124,7 +125,11 @@
 
             <!-- Password -->
             <div class="form-group {{ $errors->has('password') ? 'has-error' : '' }}">
-                <label class="col-md-3 control-label" for="password">@lang('admin/users/table.password')</label>
+                <label class="col-md-3 control-label" for="password">@lang('admin/users/table.password')
+                @if (!$user->id)
+                <i class='icon-asterisk'></i>
+                @endif
+                </label>
                 <div class="col-md-5">
                    <input type="password" name="password" class="form-control" id="password" value="" />
                     {{ $errors->first('password', '<span class="alert-msg">:message</span>') }}
@@ -133,7 +138,11 @@
 
             <!-- Password Confirm -->
             <div class="form-group {{ $errors->has('password_confirm') ? 'has-error' : '' }}">
-                <label class="col-md-3 control-label" for="password_confirm">@lang('admin/users/table.password_confirm')</label>
+                <label class="col-md-3 control-label" for="password_confirm">@lang('admin/users/table.password_confirm')
+                @if (!$user->id)
+                <i class='icon-asterisk'></i>
+                @endif
+                </label>
                 <div class="col-md-5">
                    <input type="password" name="password_confirm" id="password_confirm"  class="form-control" value="" />
                     {{ $errors->first('password_confirm', '<span class="alert-msg">:message</span>') }}
