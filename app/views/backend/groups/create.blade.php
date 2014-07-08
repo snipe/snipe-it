@@ -26,7 +26,9 @@
 
             <!-- Name -->
             <div class="form-group {{ $errors->has('name') ? ' has-error' : '' }}">
-                <label for="name" class="col-md-2 control-label">@lang('admin/groups/titles.group_name')</label>
+                <label for="name" class="col-md-2 control-label">@lang('admin/groups/titles.group_name')
+                 <i class='icon-asterisk'></i></label>
+                 </label>
                     <div class="col-md-6">
                         <input class="form-control" type="text" name="name" id="name" value="{{{ Input::old('name') }}}" />
                         {{ $errors->first('name', '<span class="alert-msg"><i class="icon-remove-sign"></i> :message</span>') }}

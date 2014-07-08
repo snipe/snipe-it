@@ -35,7 +35,9 @@
 
             <!-- Name -->
             <div class="form-group {{ $errors->has('name') ? ' has-error' : '' }}">
-                <label for="name" class="col-md-4 control-label">@lang('admin/depreciations/general.depreciation_name')</label>
+                <label for="name" class="col-md-4 control-label">@lang('admin/depreciations/general.depreciation_name')
+                 <i class='icon-asterisk'></i></label>
+                 </label>
                     <div class="col-md-6">
                         <input class="form-control" type="text" name="name" id="name" value="{{{ Input::old('name', $depreciation->name) }}}" />
                         {{ $errors->first('name', '<span class="alert-msg"><i class="icon-remove-sign"></i> :message</span>') }}
@@ -44,7 +46,9 @@
 
             <!-- Name -->
             <div class="form-group {{ $errors->has('months') ? ' has-error' : '' }}">
-                <label for="months" class="col-md-4 control-label">@lang('admin/depreciations/general.number_of_months')</label>
+                <label for="months" class="col-md-4 control-label">@lang('admin/depreciations/general.number_of_months')
+                 <i class='icon-asterisk'></i></label>
+                 </label>
                     <div class="col-md-1">
                         <input class="form-control" type="text" name="months" id="months" value="{{{ Input::old('name', $depreciation->months) }}}" />
                         {{ $errors->first('months', '<span class="alert-msg"><i class="icon-remove-sign"></i> :message</span>') }}

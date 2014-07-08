@@ -25,7 +25,9 @@ Change your Email
 
     <!-- New Email -->
     <div class="form-group {{ $errors->has('email') ? ' has-error' : '' }}">
-        <label for="email" class="col-md-2 control-label">New Email</label>
+        <label for="email" class="col-md-2 control-label">New Email
+         <i class='icon-asterisk'></i>
+         </label>
         <div class="col-md-5">
             <input class="form-control" type="email" name="email" id="email" value="{{{ Input::old('email', $user->email) }}}" />
             {{ $errors->first('email', '<span class="alert-msg"><i class="icon-remove-sign"></i> :message</span>') }}
@@ -33,7 +35,9 @@ Change your Email
     </div>
     <!-- Confirm New Email -->
     <div class="form-group {{ $errors->has('email_confirm') ? ' has-error' : '' }}">
-        <label for="email_confirm" class="col-md-2 control-label">New Email</label>
+        <label for="email_confirm" class="col-md-2 control-label">Confirm New Email
+        <i class='icon-asterisk'></i>
+        </label>
         <div class="col-md-5">
             <input class="form-control" type="email" name="email_confirm" id="email_confirm" />
             {{ $errors->first('email_confirm', '<span class="alert-msg"><i class="icon-remove-sign"></i> :message</span>') }}
@@ -42,7 +46,9 @@ Change your Email
 
     <!-- Current Password -->
     <div class="form-group {{ $errors->has('current_password') ? ' has-error' : '' }}">
-        <label for="current_password" class="col-md-2 control-label">Current Password</label>
+        <label for="current_password" class="col-md-2 control-label">Current Password
+        <i class='icon-asterisk'></i>
+        </label>
         <div class="col-md-5">
             <input class="form-control" type="password" name="current_password" id="current_password" />
             {{ $errors->first('current_password', '<span class="alert-msg"><i class="icon-remove-sign"></i> :message</span>') }}

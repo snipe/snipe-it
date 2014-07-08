@@ -36,7 +36,9 @@
 
             <!-- Location Name -->
             <div class="form-group {{ $errors->has('name') ? ' has-error' : '' }}">
-                <label for="name" class="col-md-2 control-label">@lang('admin/locations/table.name')</label>
+                <label for="name" class="col-md-2 control-label">@lang('admin/locations/table.name')
+                 <i class='icon-asterisk'></i></label>
+                 </label>
                     <div class="col-md-12">
                         <div class="col-xs-8">
                         <input class="form-control" type="text" name="name" id="name" value="{{{ Input::old('name', $location->name) }}}" />
@@ -47,7 +49,8 @@
 
             <!-- Address -->
             <div class="form-group {{ $errors->has('address') ? ' has-error' : '' }}">
-                <label for="address" class="col-md-2 control-label">@lang('admin/locations/table.address')</label>
+                <label for="address" class="col-md-2 control-label">@lang('admin/locations/table.address')
+                 <i class='icon-asterisk'></i></label></label>
                     <div class="col-md-12">
                         <div class="col-xs-8">
                         <input class="form-control" type="text" name="address" id="address" value="{{{ Input::old('address', $location->address) }}}" />
@@ -69,7 +72,9 @@
 
             <!-- City -->
             <div class="form-group {{ $errors->has('city') ? ' has-error' : '' }}">
-                <label for="city" class="col-md-2 control-label">@lang('admin/locations/table.city')</label>
+                <label for="city" class="col-md-2 control-label">@lang('admin/locations/table.city')
+                 <i class='icon-asterisk'></i></label>
+                 </label>
                     <div class="col-md-12">
                         <div class="col-xs-8">
                         <input class="form-control" type="text" name="city" id="city" value="{{{ Input::old('city', $location->city) }}}" />
@@ -80,7 +85,9 @@
 
             <!-- City -->
             <div class="form-group {{ $errors->has('state') ? ' has-error' : '' }}">
-                <label for="state" class="col-md-2 control-label">@lang('admin/locations/table.state')</label>
+                <label for="state" class="col-md-2 control-label">@lang('admin/locations/table.state')
+                 <i class='icon-asterisk'></i></label>
+                 </label>
                     <div class="col-md-12">
                         <div class="col-xs-2">
                         <input class="form-control" type="text" name="state" id="state" value="{{{ Input::old('state', $location->state) }}}" />
@@ -102,7 +109,9 @@
 
             <!-- Country -->
             <div class="form-group {{ $errors->has('country') ? ' has-error' : '' }}">
-                <label for="country" class="col-md-2 control-label">@lang('admin/locations/table.country')</label>
+                <label for="country" class="col-md-2 control-label">@lang('admin/locations/table.country')
+                 <i class='icon-asterisk'></i></label>
+                 </label>
                     <div class="col-md-12">
                         <div class="col-xs-2">
                         <input class="form-control" type="text" name="country" id="country" value="{{{ Input::old('country', $location->country) }}}" />

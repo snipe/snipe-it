@@ -37,7 +37,9 @@
 
             <!-- Asset Tag -->
             <div class="form-group {{ $errors->has('asset_tag') ? ' has-error' : '' }}">
-                <label for="asset_tag" class="col-md-2 control-label">@lang('admin/hardware/form.tag')</label>
+                <label for="asset_tag" class="col-md-2 control-label">@lang('admin/hardware/form.tag')
+                 <i class='icon-asterisk'></i></label>
+                 </label>
                     <div class="col-md-7">
                         <input class="form-control" type="text" name="asset_tag" id="asset_tag" value="{{{ Input::old('asset_tag', $asset->asset_tag) }}}" />
                         {{ $errors->first('asset_tag', '<span class="alert-msg"><i class="icon-remove-sign"></i> :message</span>') }}
@@ -72,7 +74,9 @@
 
             <!-- Model -->
             <div class="form-group {{ $errors->has('model_id') ? ' has-error' : '' }}">
-                <label for="parent" class="col-md-2 control-label">@lang('admin/hardware/form.model')</label>
+                <label for="parent" class="col-md-2 control-label">@lang('admin/hardware/form.model')
+                 <i class='icon-asterisk'></i></label>
+                 </label>
                 <div class="col-md-7">
                     {{ Form::select('model_id', $model_list , Input::old('model_id', $asset->model_id), array('class'=>'select2', 'style'=>'min-width:350px')) }}
                     {{ $errors->first('model_id', '<span class="alert-msg"><i class="icon-remove-sign"></i> :message</span>') }}
