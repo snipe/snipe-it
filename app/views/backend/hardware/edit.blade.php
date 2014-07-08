@@ -3,9 +3,9 @@
 {{-- Page title --}}
 @section('title')
     @if ($asset->id)
-    @lang('admin/hardware/form.update') ::
+    	@lang('admin/hardware/form.update') ::
     @else
-    @lang('admin/hardware/form.create') ::
+    	@lang('admin/hardware/form.create') ::
     @endif
 @parent
 @stop
@@ -19,10 +19,10 @@
             <a href="{{ URL::previous() }}" class="btn-flat gray pull-right right"><i class="icon-circle-arrow-left icon-white"></i> @lang('general.back')</a>
         <h3>
         @if ($asset->id)
-        @lang('admin/hardware/form.update')
-            @else
-                @lang('admin/hardware/form.create')
-            @endif
+        	@lang('admin/hardware/form.update')
+        @else
+            @lang('admin/hardware/form.create')
+        @endif
         </h3>
     </div>
 </div>
