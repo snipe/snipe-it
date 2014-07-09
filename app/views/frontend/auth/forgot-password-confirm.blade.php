@@ -17,7 +17,7 @@ Forgot Password ::
 
     <!-- New Password -->
 	<div class="form-group {{ $errors->has('password') ? ' has-error' : '' }}">
-        <label for="password" class="col-md-2 control-label">New Password
+        <label for="password" class="col-md-3 control-label">New Password
          <i class='icon-asterisk'></i>
          </label>
         <div class="col-md-5">
@@ -28,7 +28,7 @@ Forgot Password ::
 
     <!-- Password Confirm -->
     <div class="form-group {{ $errors->has('password_confirm') ? ' has-error' : '' }}">
-        <label for="password_confirm" class="col-md-2 control-label">Password Confirmation
+        <label for="password_confirm" class="col-md-3 control-label">Password Confirmation
          <i class='icon-asterisk'></i>
          </label>
         <div class="col-md-5">
