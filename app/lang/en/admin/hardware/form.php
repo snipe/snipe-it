@@ -19,6 +19,7 @@ return array(
     'notes'				=> 'Notes',
     'order'				=> 'Order Number',
     'qr'				=> 'QR Code',
+    'requestable'		=> 'Users may request this asset',
     'serial'			=> 'Serial',
     'status'			=> 'Status',
     'supplier'			=> 'Supplier',
