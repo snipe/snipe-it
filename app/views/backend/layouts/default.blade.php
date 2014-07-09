@@ -306,11 +306,16 @@
     </div>
 
     <footer>
+    	<div class="col-md-2">
+        </div>
         <div id="footer">
+        <div class="col-md-9">
               <div class="container">
+
                 <p class="muted credit"><a href="http://snipeitapp.com">Snipe IT</a> is a free open source
-                project by <a href="http://twitter.com/snipeyhead">@snipeyhead</a>. <a href="https://github.com/snipe/snipe-it">Fork it here</a>!</p>
+                project by <a href="http://twitter.com/snipeyhead">@snipeyhead</a>. <a href="https://github.com/snipe/snipe-it">Fork it</a> | <a href="http://docs.snipeitapp.com/">Documentation</a> | <a href="https://github.com/snipe/snipe-it/issues?state=open">Report a Bug</a></p>
               </div>
+        </div>
         </div>
     </footer>
 
