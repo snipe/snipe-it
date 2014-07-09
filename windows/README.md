@@ -47,8 +47,8 @@ Your site will now appear in the list
     2. Update `database.php` with your database name and credentials
 
 4. Copy `app/config/local/mail.example.php`  to `app/config/local/mail.php`.
-4.1. Open `app/config/local/mail.php` in notepad++
-4.2. Update `mail.php` with your mail settings
+	1. Open `app/config/local/mail.php` in notepad++
+	2. Update `mail.php` with your mail settings
 
 5. Copy `app/config/local/app.example.php` to `app/config/local/app.php`
     1. Open `app/config/local/app.php` in notepad++
