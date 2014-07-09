@@ -11,12 +11,14 @@ This project is being actively developed (at what seems like breakneck speed som
 
 __This is web-based software__. This means there there is no executable file (aka no .exe files), and it must be run on a web server and accessed through a web browser. It runs on any Mac OSX, flavor of Linux, as well as Windows.
 
+-----
 ### Documentation & Installation
 
 __Installation and configuration documentation for this project has been moved to http://docs.snipeitapp.com.__ This provides a more easily navigated, organized view of the documentation, and is based off of the [documentation branch](https://github.com/snipe/snipe-it/tree/documentation) in this repo. Contributions and bugfixes to the documentation are always welcome!
 
 We'll be adding a long-overdue user's manual soon as well.
 
+-----
 ### Bug Reports & Feature Requests
 
 Feel free to check out the [GitHub Issues for this project](https://github.com/snipe/snipe-it/issues) to open a bug report or see what open issues you can help with. Please search through existing issues (open and closed) to see if your question hasn't already been answered before opening a new issue.
@@ -25,6 +27,7 @@ We use Waffle.io to help better communicate our roadmap with users. Our [project
 
 [![Stories in Ready](https://badge.waffle.io/snipe/snipe-it.png?label=ready&title=Ready)](http://waffle.io/snipe/snipe-it)
 
+-----
 ### Announcement List
 
 To be notified of important news (such as new releases, security advisories, etc), [sign up for our list](http://eepurl.com/XyZKz). We'll never sell or give away your info, and we'll only email you when it's important.
