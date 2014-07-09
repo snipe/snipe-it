@@ -193,7 +193,7 @@ class UsersController extends AdminController
             $user = Sentry::getUserProvider()->findById($id);
 
             // Get this user groups
-            $userGroups = $user->groups()->lists('name', 'group_id');
+            $userGroups = $user->groups()->lists('group_id', 'name');
 
             // Get this user permissions
             $userPermissions = array_merge(Input::old('permissions', array('superuser' => -1)), $user->getPermissions());
