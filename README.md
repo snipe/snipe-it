@@ -13,7 +13,7 @@ __This is web-based software__. This means there there is no executable file (ak
 
 ### Documentation & Installation
 
-__Installation and configuration documentation for this project has been moved to http://docs.snipeitapp.com.__ This provides a more broken down, organized view of the documentation, and is based off of the [documentation](https://github.com/snipe/snipe-it/tree/documentation) branch in this repo. Contributions and bugfixes to the documentation are always welcome!
+__Installation and configuration documentation for this project has been moved to http://docs.snipeitapp.com.__ This provides a more easily navigated, organized view of the documentation, and is based off of the [documentation branch](https://github.com/snipe/snipe-it/tree/documentation) in this repo. Contributions and bugfixes to the documentation are always welcome!
 
 We'll be adding a long-overdue user's manual soon as well.
 
