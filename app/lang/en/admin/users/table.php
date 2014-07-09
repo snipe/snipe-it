@@ -6,7 +6,7 @@ return array(
     'allow'  				=> 'Allow',
     'checkedout'  			=> 'Assets',
     'created_at' 			=> 'Created',
-    'createuser' 			=> 'Edit User',
+    'createuser' 			=> 'Create User',
     'deny'  				=> 'Deny',
     'email'      			=> 'Email',
     'employee_num'      	=> 'Employee No.',

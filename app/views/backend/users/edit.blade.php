@@ -175,12 +175,15 @@
             <!-- Groups -->
             <div class="form-group {{ $errors->has('groups') ? 'has-error' : '' }}">
                 <label class="col-md-3 control-label" for="groups">@lang('general.groups')</label>
-                <div class="col-md-7">
+                <div class="col-md-5">
                    <div class="controls">
 
-                    <select name="groups[]" id="groups[]" multiple="multiple">
+                    <select name="groups[]" id="groups[]" multiple="multiple" class="form-control">
                         @foreach ($groups as $group)
-                        <option value="{{ $group->id }}"{{ (in_array($group->id, $userGroups) ? ' selected="selected"' : '') }}>{{{ $group->name }}}</option>
+                        <option value="{{ $group->id }}"
+                        {{ (in_array($group->id, $userGroups) ? ' selected="selected"' : '') }}>
+                        {{{ $group->name }}}
+                        </option>
                         @endforeach
                     </select>
 
