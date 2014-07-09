@@ -214,6 +214,7 @@ class AssetsController extends AdminController
             $asset->archived          			= '0';
             $asset->physical            		= '1';
             $asset->depreciate          		= '0';
+            $asset->requestable            	= e(Input::get('requestable'));
 
 
             // Was the asset created?
@@ -316,6 +317,12 @@ class AssetsController extends AdminController
                 $asset->purchase_date        = e(Input::get('purchase_date'));
             }
 
+            if (e(Input::get('supplier_id')) == '') {
+                $asset->supplier_id =  NULL;
+            } else {
+                $asset->supplier_id        = e(Input::get('supplier_id'));
+            }
+
 
             // Update the asset data
             $asset->name            		= e(Input::get('name'));
@@ -324,8 +331,8 @@ class AssetsController extends AdminController
             $asset->order_number            = e(Input::get('order_number'));
             $asset->asset_tag           	= e(Input::get('asset_tag'));
             $asset->notes            		= e(Input::get('notes'));
-            $asset->supplier_id            	= e(Input::get('supplier_id'));
-            $asset->physical            		= '1';
+            $asset->requestable            	= e(Input::get('requestable'));
+            $asset->physical            	= '1';
 
             // Was the asset updated?
             if($asset->save()) {

@@ -144,6 +144,17 @@
                 </div>
             </div>
 
+			<!-- Requestable -->
+			<div class="form-group">
+				<div class="col-sm-offset-2 col-sm-10">
+				  <div class="checkbox">
+					<label>
+					  <input type="checkbox" value="1" name="requestable" id="requestable" {{ Input::old('requestable', $asset->requestable) == '1' ? ' checked="checked"' : '' }}> @lang('admin/hardware/form.requestable')
+					</label>
+				  </div>
+				</div>
+		  	</div>
+
             <!-- Form actions -->
                 <div class="form-group">
                 <label class="col-md-2 control-label"></label>

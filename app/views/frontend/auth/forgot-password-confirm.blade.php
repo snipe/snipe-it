@@ -17,7 +17,7 @@ Forgot Password ::
 
     <!-- New Password -->
 	<div class="form-group {{ $errors->has('password') ? ' has-error' : '' }}">
-        <label for="password" class="col-md-2 control-label">New Password
+        <label for="password" class="col-md-3 control-label">New Password
          <i class='icon-asterisk'></i>
          </label>
         <div class="col-md-5">
@@ -28,7 +28,7 @@ Forgot Password ::
 
     <!-- Password Confirm -->
     <div class="form-group {{ $errors->has('password_confirm') ? ' has-error' : '' }}">
-        <label for="password_confirm" class="col-md-2 control-label">Password Confirmation
+        <label for="password_confirm" class="col-md-3 control-label">Password Confirmation
          <i class='icon-asterisk'></i>
          </label>
         <div class="col-md-5">
@@ -43,7 +43,7 @@ Forgot Password ::
         <label class="col-md-3 control-label"></label>
             <div class="col-md-7">
                 <a class="btn btn-link" href="{{ route('home') }}">@lang('general.cancel')</a>
-                <button type="submit" class="btn btn-success"><i class="icon-ok icon-white"></i> @lang('button.save')</button>
+                <button type="submit" class="btn btn-success"><i class="icon-ok icon-white"></i> @lang('button.submit')</button>
             </div>
         </div>
 
