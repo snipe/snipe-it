@@ -78,7 +78,7 @@ class LicensesController extends AdminController
             $license->seats 			= e(Input::get('seats'));
             $license->purchase_date 	= e(Input::get('purchase_date'));
             $license->purchase_cost 	= e(Input::get('purchase_cost'));
-            $license->depreciate 		= e(Input::get('depreciate'));
+            $license->depreciation_id 	= e(Input::get('depreciation_id'));
             $license->user_id 			= Sentry::getId();
 
             if (($license->purchase_date == "") || ($license->purchase_date == "0000-00-00")) {
@@ -181,6 +181,7 @@ class LicensesController extends AdminController
             $license->license_name 		= e(Input::get('license_name'));
             $license->notes 			= e(Input::get('notes'));
             $license->order_number 		= e(Input::get('order_number'));
+            $license->depreciation_id 	= e(Input::get('depreciation_id'));
 
             // Update the asset data
             if ( e(Input::get('purchase_date')) == '') {

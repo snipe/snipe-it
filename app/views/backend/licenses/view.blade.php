@@ -39,6 +39,23 @@
 <div class="col-md-6"><strong>@lang('admin/licenses/form.notes'): </strong>{{ $license->notes }}</div>
 @endif
 
+ @if ($license->depreciation)
+            <div class="col-md-6"><strong>@lang('admin/hardware/form.depreciation'): </strong>
+            {{ $license->depreciation->name }}
+                ({{{ $license->depreciation->months }}}
+                @lang('admin/hardware/form.months')
+                )</div>
+            <div class="col-md-6"><strong>@lang('admin/hardware/form.depreciates_on'): </strong>
+            {{{ $license->depreciated_date() }}} </div>
+            <div class="col-md-6"><strong>@lang('admin/hardware/form.fully_depreciated'): </strong>
+            {{{ $license->months_until_depreciated()->m }}}
+            @lang('admin/hardware/form.months')
+             @if ($license->months_until_depreciated()->y > 0)
+                , {{{ $license->months_until_depreciated()->y }}}
+                @lang('admin/hardware/form.years')
+             @endif
+             </div>
+        @endif
 
 <br><br><br>
 </div>
