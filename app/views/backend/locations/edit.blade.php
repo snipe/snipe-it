@@ -112,13 +112,14 @@
                 <label for="country" class="col-md-2 control-label">@lang('admin/locations/table.country')
                  <i class='icon-asterisk'></i></label>
                  </label>
-                    <div class="col-md-12">
-                        <div class="col-xs-2">
-                        <input class="form-control" type="text" name="country" id="country" value="{{{ Input::old('country', $location->country) }}}" />
+                    <div class="col-md-5">
+
+                         {{ Form::countries('country', Input::old('country', $location->country), 'select2') }}
                         </div>
                         {{ $errors->first('country', '<span class="alert-msg"><i class="icon-remove-sign"></i> :message</span>') }}
                     </div>
             </div>
+
 
             <!-- Form actions -->
             <div class="form-group">
