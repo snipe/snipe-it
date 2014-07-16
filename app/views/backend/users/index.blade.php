@@ -42,6 +42,7 @@
             <th class="col-md-1">@lang('general.assets')</th>
             <th class="col-md-1">@lang('general.licenses')</th>
             <th class="col-md-1">@lang('admin/users/table.activated')</th>
+            <th></th>
             <th class="col-md-2 actions">@lang('table.actions')</th>
         </tr>
     </thead>
@@ -62,6 +63,13 @@
             <td>{{{ $user->assets->count() }}}</td>
             <td>{{{ $user->licenses->count() }}}</td>
             <td>{{ $user->isActivated() ? '<i class="icon-ok"></i>' : ''}}</td>
+            <td>
+
+
+				@if ($user->accountStatus()=='suspended')
+                      <a href="{{ route('unsuspend/user', $user->id) }}" class="btn btn-warning"><span class="icon-time icon-white"></span></a>
+				@endif
+			</td>
             <td>
 
                 @if ( ! is_null($user->deleted_at))

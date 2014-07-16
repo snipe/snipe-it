@@ -74,4 +74,18 @@ class User extends SentryUserModel
         return $this->belongsTo('User','manager_id')->withTrashed();
     }
 
+    public function accountStatus()
+    {
+        $throttle = Sentry::findThrottlerByUserId($this->id);
+
+        if ($throttle->isBanned()) {
+            return 'banned';
+        } elseif ($throttle->isSuspended()) {
+            return 'suspended';
+        } else {
+            return '';
+        }
+
+    }
+
 }
