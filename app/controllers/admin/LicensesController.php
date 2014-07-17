@@ -89,11 +89,6 @@ class LicensesController extends AdminController
                 $license->purchase_cost = NULL;
             }
 
-            if ($license->depreciate == "") {
-                $license->depreciate = 0;
-            }
-
-
             // Was the license created?
             if($license->save()) {
                 $insertedId = $license->id;
