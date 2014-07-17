@@ -128,8 +128,50 @@
 
         @endif
 
+        @if ($asset->licenses)
+            <div class="col-md-6"><strong>@lang('admin/hardware/form.licenses'): </strong>
+
+            {{{ $asset->licenses->id }}}
+             </div>
+
+        @endif
+
+
+
     </div>
 
+		<!-- Licenses assets table -->
+
+        <h6>Software Assigned to {{{ $asset->name }}}</h6>
+		<br>
+		<!-- checked out assets table -->
+		@if (count($asset->licenseseats) > 0)
+		<table class="table table-hover">
+			<thead>
+				<tr>
+					<th class="col-md-4"><span class="line"></span>@lang('general.name')</th>
+					<th class="col-md-1"><span class="line"></span>@lang('table.actions')</th>
+				</tr>
+			</thead>
+			<tbody>
+				@foreach ($asset->licenseseats as $license)
+				<tr>
+					<td><a href="{{ route('view/license', $license->license_id) }}">{{{ $license->license_id->license()->name }}}</a></td>
+					<td> <a href="{{ route('checkin/license', $license->id) }}" class="btn-flat info">@lang('general.checkin')</a>
+					</td>
+				</tr>
+				@endforeach
+			</tbody>
+		</table>
+		@else
+
+		<div class="col-md-12">
+			<div class="alert alert-info alert-block">
+				<i class="icon-info-sign"></i>
+				@lang('general.no_results')
+			</div>
+		</div>
+		@endif
 
         <!-- checked out assets table -->
 

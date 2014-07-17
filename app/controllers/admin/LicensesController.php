@@ -1,5 +1,6 @@
 <?php namespace Controllers\Admin;
 
+use Assets;
 use AdminController;
 use Input;
 use Lang;
@@ -16,6 +17,7 @@ use Sentry;
 use Str;
 use Validator;
 use View;
+
 
 class LicensesController extends AdminController
 {
@@ -44,6 +46,7 @@ class LicensesController extends AdminController
     {
         // Show the page
         $license_options = array('0' => 'Top Level') + License::lists('name', 'id');
+
         // Show the page
         $depreciation_list = array('0' => Lang::get('admin/licenses/form.no_depreciation')) + Depreciation::lists('name', 'id');
         return View::make('backend/licenses/edit')->with('license_options',$license_options)->with('depreciation_list',$depreciation_list)->with('license',new License);
@@ -79,6 +82,7 @@ class LicensesController extends AdminController
             $license->purchase_date 	= e(Input::get('purchase_date'));
             $license->purchase_cost 	= e(Input::get('purchase_cost'));
             $license->depreciation_id 	= e(Input::get('depreciation_id'));
+            $license->asset_id 			= e(Input::get('asset_id'));
             $license->user_id 			= Sentry::getId();
 
             if (($license->purchase_date == "") || ($license->purchase_date == "0000-00-00")) {
@@ -182,6 +186,7 @@ class LicensesController extends AdminController
             $license->notes 			= e(Input::get('notes'));
             $license->order_number 		= e(Input::get('order_number'));
             $license->depreciation_id 	= e(Input::get('depreciation_id'));
+            $license->asset_id 			= e(Input::get('asset_id'));
 
             // Update the asset data
             if ( e(Input::get('purchase_date')) == '') {
@@ -317,8 +322,10 @@ class LicensesController extends AdminController
         // Get the dropdown of users and then pass it to the checkout view
         $users_list = array('' => 'Select a User') + DB::table('users')->select(DB::raw('concat (first_name," ",last_name) as full_name, id'))->whereNull('deleted_at')->lists('full_name', 'id');
 
+		$asset_list = array('' => '') + Asset::orderBy('name', 'asc')->lists('name', 'id');
+
         //print_r($users);
-        return View::make('backend/licenses/checkout', compact('licenseseat'))->with('users_list',$users_list);
+        return View::make('backend/licenses/checkout', compact('licenseseat'))->with('users_list',$users_list)->with('asset_list',$asset_list);
 
     }
 

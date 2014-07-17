@@ -2,6 +2,7 @@
 
 return array(
 
+    'asset'				=> 'Asset',
     'checkin'			=> 'Checkin',
     'checkin'			=> 'Checkin',
     'cost'				=> 'Purchase Cost',

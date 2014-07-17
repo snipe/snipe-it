@@ -54,6 +54,17 @@
                 </div>
             </div>
 
+             <!-- Asset -->
+            <div class="form-group {{ $errors->has('asset_id') ? ' has-error' : '' }}">
+                <label for="asset_id" class="col-md-2 control-label">@lang('admin/licenses/form.asset')
+                 </label>
+                 </label>
+                <div class="col-md-7">
+                    {{ Form::select('asset_id', $asset_list , Input::old('asset_id', $licenseseat->asset_id), array('class'=>'select2', 'style'=>'min-width:350px')) }}
+                    {{ $errors->first('asset_id', '<span class="alert-msg"><i class="icon-remove-sign"></i> :message</span>') }}
+                </div>
+            </div>
+
             <!-- Note -->
             <div class="form-group {{ $errors->has('note') ? 'error' : '' }}">
                 <label for="note" class="col-md-2 control-label">@lang('admin/hardware/form.notes')</label>
