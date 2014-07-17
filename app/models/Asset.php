@@ -152,20 +152,18 @@ class Asset extends Elegant
 	/**
 	* Get the license seat information
 	**/
-     public function licenseseats()
+     public function licenses()
     {
-       return $this->hasMany('LicenseSeat','id')->withTrashed();
+       	return $this->belongsToMany('License', 'license_seats', 'asset_id', 'license_id');
+
     }
 
-	/**
-	* Info on the license seat's parent licenses
-	* ?????????
-	**/
-    public function licenses()
+     public function licenseseat()
     {
-		return LicenseSeat::license();
-      // return $this->belongsTo('LicenseSeat','id')->withTrashed();
+       	return $this->hasMany('LicenseSeat', 'asset_id');
+
     }
+
 
 
     public function supplier()

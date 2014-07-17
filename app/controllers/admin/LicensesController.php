@@ -343,10 +343,11 @@ class LicensesController extends AdminController
         }
 
         $assigned_to = e(Input::get('assigned_to'));
+        $asset_id = e(Input::get('asset_id'));
 
         // Declare the rules for the form validation
         $rules = array(
-            'assigned_to'   => 'required|integer|min:1',
+
             'note'   => 'alpha_space',
         );
 
@@ -359,17 +360,38 @@ class LicensesController extends AdminController
             return Redirect::back()->withInput()->withErrors($validator);
         }
 
-
+		if ($assigned_to!='') {
         // Check if the user exists
-        if (is_null($assigned_to = User::find($assigned_to))) {
-            // Redirect to the asset management page with error
-            return Redirect::to('admin/licenses')->with('error', Lang::get('admin/licenses/message.user_does_not_exist'));
+			if (is_null($is_assigned_to = User::find($assigned_to))) {
+				// Redirect to the asset management page with error
+				return Redirect::to('admin/licenses')->with('error', Lang::get('admin/licenses/message.user_does_not_exist'));
+			}
         }
 
+        if ($asset_id!='') {
+
+			if (is_null($is_asset_id = Asset::find($asset_id))) {
+				// Redirect to the asset management page with error
+				return Redirect::to('admin/licenses')->with('error', Lang::get('admin/licenses/message.asset_does_not_exist'));
+			}
+
+			if ($is_asset_id->assigned_to!=$assigned_to) {
+				//echo 'asset assigned to: '.$is_asset_id->assigned_to.'<br>license assigned to: '.$assigned_to;
+				return Redirect::to('admin/licenses')->with('error', Lang::get('admin/licenses/message.owner_doesnt_match_asset'));
+			}
+
+        }
+
+
+
+
+
+		 $licenseseat->asset_id = e(Input::get('asset_id'));
 
         // Update the asset data
         if ( e(Input::get('assigned_to')) == '') {
                 $licenseseat->assigned_to =  NULL;
+
         } else {
                 $licenseseat->assigned_to = e(Input::get('assigned_to'));
         }
@@ -378,8 +400,8 @@ class LicensesController extends AdminController
         if($licenseseat->save()) {
 
             $logaction = new Actionlog();
-            $logaction->asset_id = $licenseseat->license_id;
-            $logaction->location_id = $assigned_to->location_id;
+
+            //$logaction->location_id = $assigned_to->location_id;
             $logaction->asset_type = 'software';
             $logaction->user_id = Sentry::getUser()->id;
             $logaction->note = e(Input::get('note'));
@@ -454,7 +476,7 @@ class LicensesController extends AdminController
 
         // Was the asset updated?
         if($licenseseat->save()) {
-            $logaction->asset_id = $licenseseat->license_id;
+            $logaction->asset_id = NULL;
             $logaction->location_id = NULL;
             $logaction->asset_type = 'software';
             $logaction->note = e(Input::get('note'));

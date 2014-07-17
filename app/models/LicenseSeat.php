@@ -2,6 +2,7 @@
 
 class LicenseSeat extends Elegant
 {
+    protected $guarded = 'id';
     protected $table = 'license_seats';
     protected $softDelete = true;
 
