@@ -1,5 +1,9 @@
 
 
+###  v0.3.10-alpha - Released Jul 17, 2014 07:54:10
+#### This is a pre-release 
+
+
 ###  v0.3.9-alpha - Released Jul 03, 2014 04:08:38
 #### This is a pre-release 
 * <a href="http://github.com/snipe/snipe-it/commit/2825bcb4310899e89ccbc73dfa8b59ade28018da">view</a> &bull; Fixed #179 - account page to show assets checked out to the logged in user 
