@@ -130,6 +130,10 @@ An OS X virtualhost setup could look more like:
 	SetEnv LARAVEL_ENV development
 	</VirtualHost>
 
+Snipe-IT requires `mod_rewrite` to be installed and enabled on systems running Apache. For more information on how to set up `mod_rewrite`, [click here](http://xmodulo.com/2013/01/how-to-enable-mod_rewrite-in-apache2-on-debian-ubuntu.html).
+
+Note that in Apache 2.4, you may need to use `Require all granted` instead of `Allow From All`.
+
 -----
 
 ### 8) Seed the Database
