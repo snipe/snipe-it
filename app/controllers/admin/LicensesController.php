@@ -317,10 +317,28 @@ class LicensesController extends AdminController
         // Get the dropdown of users and then pass it to the checkout view
         $users_list = array('' => 'Select a User') + DB::table('users')->select(DB::raw('concat (first_name," ",last_name) as full_name, id'))->whereNull('deleted_at')->lists('full_name', 'id');
 
-		$asset_list = array('' => 'Select a Asset') + DB::table('assets')->select(DB::raw('concat (asset_tag," - ",name) as name, id'))->whereNull('deleted_at')->lists('name', 'id');
+		// Left join to get a list of assets and some other helpful info
+		$asset = DB::table('assets')
+			->leftJoin('users', 'users.id', '=', 'assets.assigned_to')
+			->select('assets.id', 'name', 'first_name', 'last_name','asset_tag',
+			DB::raw('concat (first_name," ",last_name) as full_name, assets.id as id'))
+			->whereNull('assets.deleted_at')
+			->get();
 
-        //print_r($users);
-        return View::make('backend/licenses/checkout', compact('licenseseat'))->with('users_list',$users_list)->with('asset_list',$asset_list);
+			$asset_array = json_decode(json_encode($asset), true);
+
+			// Build a list out of the data results
+			for ($x=0; $x<count($asset_array); $x++) {
+
+				if ($asset_array[$x]['full_name']!='') {
+					$full_name = ' ('.$asset_array[$x]['full_name'].')';
+				} else {
+					$full_name = ' (Unassigned)';
+				}
+				$asset_element[$asset_array[$x]['id']] = $asset_array[$x]['asset_tag'].' - '.$asset_array[$x]['name'].$full_name;
+			}
+
+        return View::make('backend/licenses/checkout', compact('licenseseat'))->with('users_list',$users_list)->with('asset_list',$asset_element);
 
     }
 
