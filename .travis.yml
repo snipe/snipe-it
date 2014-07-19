@@ -17,9 +17,9 @@ before_script:
   - curl -s http://getcomposer.org/installer | php
   - cp app/config/production/database.example.php app/config/database.php
   - cp app/config/production/mail.example.php app/config/mail.php
-  - php /home/travis/.phpenv/versions/5.6/bin/composer self-update
-  - php composer.phar validate
-  - php composer.phar install --prefer-source --no-interaction --dev
+  - php composer self-update
+  - php composer validate
+  - php composer install --prefer-source --no-interaction --dev
   - php artisan key:generate
   - php artisan migrate:install
   - php artisan migrate --package cartalyst/sentry
