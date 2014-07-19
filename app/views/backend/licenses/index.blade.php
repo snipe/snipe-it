@@ -23,6 +23,7 @@
         <tr role="row">
             <th class="col-md-3" tabindex="0" rowspan="1" colspan="1">@lang('admin/licenses/table.title')</th>
             <th class="col-md-3" tabindex="0" rowspan="1" colspan="1">@lang('admin/licenses/table.serial')</th>
+            <th class="col-md-2" tabindex="0" rowspan="1" colspan="1">@lang('admin/licenses/table.hardware')</th>
             <th class="col-md-2" tabindex="0" rowspan="1" colspan="1">@lang('admin/licenses/table.assigned_to')</th>
             <th class="col-md-1 actions" tabindex="0" rowspan="1" colspan="1">@lang('admin/licenses/general.in_out')</th>
             <th class="col-md-1 actions" tabindex="0" rowspan="1" colspan="1">@lang('table.actions')</th>
@@ -45,6 +46,13 @@
                     <td><a href="{{ route('view/license', $license->id) }}">{{ Str::limit($license->serial, 40); }}</a>
                     </td>
                     <td>
+                     @if ($licensedto->asset_id)
+                        <a href="{{ route('view/hardware', $licensedto->asset_id) }}">
+                    {{ $licensedto->asset->name }}
+                    </a>
+                    @endif
+                    </td>
+                    <td>
                     @if (($licensedto->assigned_to) && ($licensedto->deleted_at == NULL))
                         <a href="{{ route('view/user', $licensedto->assigned_to) }}">
                     {{ $licensedto->user->fullName() }}
@@ -52,9 +60,11 @@
                     @elseif (($licensedto->assigned_to) && ($licensedto->deleted_at != NULL))
                         <del>{{ $licensedto->user->fullName() }}</del>
                     @endif
+
+
                     </td>
                     <td>
-                    @if ($licensedto->assigned_to)
+                    @if (($licensedto->assigned_to) || ($licensedto->asset_id))
                         <a href="{{ route('checkin/license', $licensedto->id) }}" class="btn btn-primary">
                         @lang('general.checkin')</a>
                     @else

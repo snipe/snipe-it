@@ -2,6 +2,7 @@
 
 class LicenseSeat extends Elegant
 {
+    protected $guarded = 'id';
     protected $table = 'license_seats';
     protected $softDelete = true;
 
@@ -13,6 +14,11 @@ class LicenseSeat extends Elegant
     public function user()
     {
         return $this->belongsTo('User','assigned_to')->withTrashed();
+    }
+
+    public function asset()
+    {
+        return $this->belongsTo('Asset','asset_id')->withTrashed();
     }
 
 }

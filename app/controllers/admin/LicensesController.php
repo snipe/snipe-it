@@ -1,5 +1,6 @@
 <?php namespace Controllers\Admin;
 
+use Assets;
 use AdminController;
 use Input;
 use Lang;
@@ -16,6 +17,7 @@ use Sentry;
 use Str;
 use Validator;
 use View;
+
 
 class LicensesController extends AdminController
 {
@@ -44,6 +46,7 @@ class LicensesController extends AdminController
     {
         // Show the page
         $license_options = array('0' => 'Top Level') + License::lists('name', 'id');
+
         // Show the page
         $depreciation_list = array('0' => Lang::get('admin/licenses/form.no_depreciation')) + Depreciation::lists('name', 'id');
         return View::make('backend/licenses/edit')->with('license_options',$license_options)->with('depreciation_list',$depreciation_list)->with('license',new License);
@@ -79,6 +82,7 @@ class LicensesController extends AdminController
             $license->purchase_date 	= e(Input::get('purchase_date'));
             $license->purchase_cost 	= e(Input::get('purchase_cost'));
             $license->depreciation_id 	= e(Input::get('depreciation_id'));
+            $license->asset_id 			= e(Input::get('asset_id'));
             $license->user_id 			= Sentry::getId();
 
             if (($license->purchase_date == "") || ($license->purchase_date == "0000-00-00")) {
@@ -177,6 +181,7 @@ class LicensesController extends AdminController
             $license->notes 			= e(Input::get('notes'));
             $license->order_number 		= e(Input::get('order_number'));
             $license->depreciation_id 	= e(Input::get('depreciation_id'));
+            $license->asset_id 			= e(Input::get('asset_id'));
 
             // Update the asset data
             if ( e(Input::get('purchase_date')) == '') {
@@ -312,8 +317,10 @@ class LicensesController extends AdminController
         // Get the dropdown of users and then pass it to the checkout view
         $users_list = array('' => 'Select a User') + DB::table('users')->select(DB::raw('concat (first_name," ",last_name) as full_name, id'))->whereNull('deleted_at')->lists('full_name', 'id');
 
+		$asset_list = array('' => '') + Asset::orderBy('name', 'asc')->lists('name', 'id');
+
         //print_r($users);
-        return View::make('backend/licenses/checkout', compact('licenseseat'))->with('users_list',$users_list);
+        return View::make('backend/licenses/checkout', compact('licenseseat'))->with('users_list',$users_list)->with('asset_list',$asset_list);
 
     }
 
@@ -331,11 +338,13 @@ class LicensesController extends AdminController
         }
 
         $assigned_to = e(Input::get('assigned_to'));
+        $asset_id = e(Input::get('asset_id'));
 
         // Declare the rules for the form validation
         $rules = array(
-            'assigned_to'   => 'required|integer|min:1',
+
             'note'   => 'alpha_space',
+            'asset_id'	=> 'required_without:assigned_to',
         );
 
         // Create a new validator instance from our validation rules
@@ -347,17 +356,38 @@ class LicensesController extends AdminController
             return Redirect::back()->withInput()->withErrors($validator);
         }
 
-
+		if ($assigned_to!='') {
         // Check if the user exists
-        if (is_null($assigned_to = User::find($assigned_to))) {
-            // Redirect to the asset management page with error
-            return Redirect::to('admin/licenses')->with('error', Lang::get('admin/licenses/message.user_does_not_exist'));
+			if (is_null($is_assigned_to = User::find($assigned_to))) {
+				// Redirect to the asset management page with error
+				return Redirect::to('admin/licenses')->with('error', Lang::get('admin/licenses/message.user_does_not_exist'));
+			}
         }
 
+        if ($asset_id!='') {
+
+			if (is_null($is_asset_id = Asset::find($asset_id))) {
+				// Redirect to the asset management page with error
+				return Redirect::to('admin/licenses')->with('error', Lang::get('admin/licenses/message.asset_does_not_exist'));
+			}
+
+			if (($is_asset_id->assigned_to!=$assigned_to) && ($assigned_to!=''))  {
+				//echo 'asset assigned to: '.$is_asset_id->assigned_to.'<br>license assigned to: '.$assigned_to;
+				return Redirect::to('admin/licenses')->with('error', Lang::get('admin/licenses/message.owner_doesnt_match_asset'));
+			}
+
+        }
+
+
+
+
+
+		 $licenseseat->asset_id = e(Input::get('asset_id'));
 
         // Update the asset data
         if ( e(Input::get('assigned_to')) == '') {
                 $licenseseat->assigned_to =  NULL;
+
         } else {
                 $licenseseat->assigned_to = e(Input::get('assigned_to'));
         }
@@ -366,8 +396,8 @@ class LicensesController extends AdminController
         if($licenseseat->save()) {
 
             $logaction = new Actionlog();
-            $logaction->asset_id = $licenseseat->license_id;
-            $logaction->location_id = $assigned_to->location_id;
+
+            //$logaction->location_id = $assigned_to->location_id;
             $logaction->asset_type = 'software';
             $logaction->user_id = Sentry::getUser()->id;
             $logaction->note = e(Input::get('note'));
@@ -439,10 +469,11 @@ class LicensesController extends AdminController
 
         // Update the asset data
         $licenseseat->assigned_to            		= '0';
+        $licenseseat->asset_id            			= NULL;
 
         // Was the asset updated?
         if($licenseseat->save()) {
-            $logaction->asset_id = $licenseseat->license_id;
+            $logaction->asset_id = NULL;
             $logaction->location_id = NULL;
             $logaction->asset_type = 'software';
             $logaction->note = e(Input::get('note'));

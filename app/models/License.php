@@ -24,7 +24,6 @@ class License extends Elegant
 
     }
 
-
     /**
     * Get asset logs for this asset
     */
