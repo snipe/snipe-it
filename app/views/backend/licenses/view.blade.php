@@ -69,7 +69,8 @@
                     <thead>
                         <tr>
                             <th class="col-md-2">@lang('admin/licenses/general.seat')</th>
-                             <th class="col-md-6">@lang('admin/licenses/general.user')</th>
+                             <th class="col-md-2">@lang('admin/licenses/general.user')</th>
+                             <th class="col-md-4">@lang('admin/licenses/form.asset')</th>
                              <th class="col-md-2"></th>
                         </tr>
                     </thead>
@@ -84,6 +85,13 @@
                                 @if ($licensedto->assigned_to)
                                     <a href="{{ route('view/user', $licensedto->assigned_to) }}">
                                 {{ $licensedto->user->fullName() }}
+                                </a>
+                                @endif
+                                </td>
+                                <td>
+                                @if ($licensedto->asset_id)
+                                    <a href="{{ route('view/hardware', $licensedto->asset_id) }}">
+                                	{{ $licensedto->asset->name }} {{ $licensedto->asset->asset_tag }}
                                 </a>
                                 @endif
                                 </td>

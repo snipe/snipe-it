@@ -1,5 +1,22 @@
 
 
+###  v0.3.10-alpha - Released Jul 17, 2014 07:54:10
+#### This is a pre-release 
+* <a href="http://github.com/snipe/snipe-it/commit/89a8f3c277d2482b2cd04c4c5c582c9e507770f8">view</a> &bull; Fixes #183 - added employee number to users 
+* <a href="http://github.com/snipe/snipe-it/commit/a7b809cb91f49fb2c8eaecc67822fa155a0f20ce">view</a> &bull; Updated title/header for users, additional fixes for #151 
+* <a href="http://github.com/snipe/snipe-it/commit/5266d9a30a9663fa80ff764b25ff71726e5c4f4c">view</a> &bull; Fixed title tag for user list view 
+* <a href="http://github.com/snipe/snipe-it/commit/43485e1a51330ef585a65b469d7eb85ae7bde13a">view</a> &bull; Fixed language definition 
+* <a href="http://github.com/snipe/snipe-it/commit/6b5a552d95ff6f6d5567275b50fcd487fb793820">view</a> &bull; Fixed #186 - Bug with select box not retaining selections on edit screen 
+* <a href="http://github.com/snipe/snipe-it/commit/90eb883b671919ea360122c2bf44433995a12144">view</a> &bull; Fixed #187 - replaced dummy site name with site name from admin panel preferences 
+* <a href="http://github.com/snipe/snipe-it/commit/f22f23f21dc11d393854849580f0c1229cec9827">view</a> &bull; Fixed button label on forgotten password page 
+* <a href="http://github.com/snipe/snipe-it/commit/2b9494ed8271254f8f84e016f238d518e6109842">view</a> &bull; Fixed inconsistent password requirements across admin user creation, user profile and forgotten password 
+* <a href="http://github.com/snipe/snipe-it/commit/9dc40a3a9c161267fd8c88aacc1fbf536c1ec2de">view</a> &bull; Fixed a few CSS quirks 
+* <a href="http://github.com/snipe/snipe-it/commit/99003e126a8fd0ad9aaea5a550e0af5e306fc1bb">view</a> &bull; Fixed bug with edit (supplier_id), added requestable field for assets 
+* <a href="http://github.com/snipe/snipe-it/commit/21251b462308f2d783b83be1a331a0faf0813d16">view</a> &bull; Fixed #190, where depreciation on licenses would not be saved 
+* <a href="http://github.com/snipe/snipe-it/commit/89000440f344f766a31adc69718d7f66df235abf">view</a> &bull; Added admin ability to unsuspend locked accounts #changelog 
+* <a href="http://github.com/snipe/snipe-it/commit/e203fc516fadf6218f5ce87c070d0cdba9fca188">view</a> &bull; Fixes #194 
+
+
 ###  v0.3.9-alpha - Released Jul 03, 2014 04:08:38
 #### This is a pre-release 
 * <a href="http://github.com/snipe/snipe-it/commit/2825bcb4310899e89ccbc73dfa8b59ade28018da">view</a> &bull; Fixed #179 - account page to show assets checked out to the logged in user 

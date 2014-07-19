@@ -128,8 +128,41 @@
 
         @endif
 
+
     </div>
 
+		<!-- Licenses assets table -->
+
+        <h6>Software Assigned to {{{ $asset->name }}}</h6>
+		<br>
+		<!-- checked out assets table -->
+		@if (count($asset->licenses) > 0)
+		<table class="table table-hover">
+			<thead>
+				<tr>
+					<th class="col-md-4"><span class="line"></span>@lang('general.name')</th>
+					<th class="col-md-1"><span class="line"></span>@lang('table.actions')</th>
+				</tr>
+			</thead>
+			<tbody>
+				@foreach ($asset->licenseseats as $seat)
+				<tr>
+					<td><a href="{{ route('view/license', $seat->license->id) }}">{{{ $seat->license->name }}}</a></td>
+					<td><a href="{{ route('checkin/license', $seat->id) }}" class="btn-flat info">@lang('general.checkin')</a>
+					</td>
+				</tr>
+				@endforeach
+			</tbody>
+		</table>
+		@else
+
+		<div class="col-md-12">
+			<div class="alert alert-info alert-block">
+				<i class="icon-info-sign"></i>
+				@lang('general.no_results')
+			</div>
+		</div>
+		@endif
 
         <!-- checked out assets table -->
 
@@ -137,11 +170,11 @@
             <thead>
                 <tr>
                     <th class="col-md-1"></th>
-                    <th class="col-md-3"><span class="line"></span>Date</th>
-                    <th class="col-md-2"><span class="line"></span>Admin</th>
-                    <th class="col-md-2"><span class="line"></span>Action</th>
-                    <th class="col-md-2"><span class="line"></span>User</th>
-                    <th class="col-md-3"><span class="line"></span>Note</th>
+                    <th class="col-md-3"><span class="line"></span>@lang('general.date')</th>
+                    <th class="col-md-2"><span class="line"></span>@lang('general.admin')</th>
+                    <th class="col-md-2"><span class="line"></span>@lang('table.action')</th>
+                    <th class="col-md-2"><span class="line"></span>@lang('general.user')</th>
+                    <th class="col-md-3"><span class="line"></span>@lang('general.notes')</th>
                 </tr>
             </thead>
             <tbody>

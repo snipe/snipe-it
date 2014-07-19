@@ -53,6 +53,7 @@ return array(
     'no_depreciation'		=> 'No Derepciation',
     'no_results'			=> 'No Results.',
     'no'  					=> 'No',
+    'notes'  				=> 'Notes',
     'pending'				=> 'Pending',
     'people'				=> 'People',
     'per_page'				=> 'Results Per Page',

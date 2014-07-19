@@ -10,6 +10,7 @@ return array(
     'purchase_date'   	=> 'Purchase Date',
     'purchased'   		=> 'Purchased',
     'seats'   			=> 'Seats',
+    'hardware'   		=> 'Hardware',
     'serial'   			=> 'Serial',
     'title'      		=> 'License',
 
