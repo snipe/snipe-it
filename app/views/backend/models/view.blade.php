@@ -29,10 +29,10 @@
                            <table id="example">
                             <thead>
                                 <tr role="row">
-                                        <th class="col-md-3">Name</th>
-                                        <th class="col-md-3">Asset Tag</th>
-                                        <th class="col-md-3">User</th>
-                                        <th class="col-md-2">Actions</th>
+                                        <th class="col-md-3">@lang('general.name')</th>
+                                        <th class="col-md-3">@lang('general.asset_tag')</th>
+                                        <th class="col-md-3">@lang('general.user')</th>
+                                        <th class="col-md-2">@lang('table.actions')</th>
                                     </tr>
                                 </thead>
                                 <tbody>

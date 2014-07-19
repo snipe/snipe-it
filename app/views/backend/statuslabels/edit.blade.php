@@ -41,7 +41,7 @@
 
             <!-- Asset Title -->
             <div class="form-group {{ $errors->has('name') ? ' has-error' : '' }}">
-                <label for="name" class="col-md-3 control-label">Status Label Name
+                <label for="name" class="col-md-3 control-label">@lang('general.name')
                 <i class='icon-asterisk'></i></label>
                 </label>
                     <div class="col-md-6">
@@ -54,7 +54,7 @@
                 <div class="form-group">
                 <label class="col-md-2 control-label"></label>
                     <div class="col-md-7">
-                        <a class="btn btn-link" href="{{ URL::previous() }}">Cancel</a>
+                        <a class="btn btn-link" href="{{ URL::previous() }}">@lang('general.cancel')</a>
                         <button type="submit" class="btn btn-success"><i class="icon-ok icon-white"></i> @lang('general.save')</button>
                     </div>
                 </div>
