@@ -317,7 +317,7 @@ class LicensesController extends AdminController
         // Get the dropdown of users and then pass it to the checkout view
         $users_list = array('' => 'Select a User') + DB::table('users')->select(DB::raw('concat (first_name," ",last_name) as full_name, id'))->whereNull('deleted_at')->lists('full_name', 'id');
 
-		$asset_list = array('' => '') + Asset::orderBy('name', 'asc')->lists('name', 'id');
+		$asset_list = array('' => 'Select a Asset') + DB::table('assets')->select(DB::raw('concat (asset_tag," - ",name) as name, id'))->whereNull('deleted_at')->lists('name', 'id');
 
         //print_r($users);
         return View::make('backend/licenses/checkout', compact('licenseseat'))->with('users_list',$users_list)->with('asset_list',$asset_list);
