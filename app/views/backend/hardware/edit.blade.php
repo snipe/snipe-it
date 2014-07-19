@@ -144,6 +144,19 @@
                 </div>
             </div>
 
+			@if (!$asset->id)
+             <!-- Assigned To -->
+            <div class="form-group {{ $errors->has('assigned_to') ? ' has-error' : '' }}">
+                <label for="parent" class="col-md-2 control-label">@lang('admin/hardware/form.checkout_to')
+                 </label>
+                <div class="col-md-7">
+                    {{ Form::select('assigned_to', $assigned_to , Input::old('assigned_to', $asset->assigned_to), array('class'=>'select2', 'style'=>'min-width:350px')) }}
+                    <p class="help-block">@lang('admin/hardware/form.help_checkout')</p>
+                    {{ $errors->first('assigned_to', '<span class="alert-msg"><i class="icon-remove-sign"></i> :message</span>') }}
+                </div>
+            </div>
+			@endif
+
 			<!-- Requestable -->
 			<div class="form-group">
 				<div class="col-sm-offset-2 col-sm-10">
@@ -154,6 +167,7 @@
 				  </div>
 				</div>
 		  	</div>
+
 
             <!-- Form actions -->
                 <div class="form-group">

@@ -151,11 +151,12 @@ class AssetsController extends AdminController
         // Grab the dropdown list of models
         $model_list = array('' => '') + Model::orderBy('name', 'asc')->lists('name', 'id');
         $supplier_list = array('' => '') + Supplier::orderBy('name', 'asc')->lists('name', 'id');
+        $assigned_to = array('' => 'Select a User') + DB::table('users')->select(DB::raw('concat (first_name," ",last_name) as full_name, id'))->whereNull('deleted_at')->lists('full_name', 'id');
 
         // Grab the dropdown list of status
         $statuslabel_list = array('' => Lang::get('general.pending')) + array('0' => Lang::get('general.ready_to_deploy')) + Statuslabel::orderBy('name', 'asc')->lists('name', 'id');
 
-        return View::make('backend/hardware/edit')->with('supplier_list',$supplier_list)->with('model_list',$model_list)->with('statuslabel_list',$statuslabel_list)->with('asset',new Asset);
+        return View::make('backend/hardware/edit')->with('supplier_list',$supplier_list)->with('model_list',$model_list)->with('statuslabel_list',$statuslabel_list)->with('assigned_to',$assigned_to)->with('asset',new Asset);
 
     }
 
@@ -201,6 +202,12 @@ class AssetsController extends AdminController
                 $asset->purchase_date        = e(Input::get('purchase_date'));
             }
 
+            if (e(Input::get('assigned_to')) == '') {
+                $asset->assigned_to =  0;
+            } else {
+                $asset->assigned_to        = e(Input::get('assigned_to'));
+            }
+
             // Save the asset data
             $asset->name            		= e(Input::get('name'));
             $asset->serial            		= e(Input::get('serial'));
@@ -210,7 +217,6 @@ class AssetsController extends AdminController
             $asset->asset_tag            	= e(Input::get('asset_tag'));
             $asset->supplier_id            	= e(Input::get('supplier_id'));
             $asset->user_id          		= Sentry::getId();
-            $asset->assigned_to          		= '0';
             $asset->archived          			= '0';
             $asset->physical            		= '1';
             $asset->depreciate          		= '0';

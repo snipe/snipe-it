@@ -12,6 +12,7 @@ return array(
     'eol_date'			=> 'EOL Date',
     'eol_rate'			=> 'EOL Rate',
     'fully_depreciated'	=> 'Fully Depreciated',
+    'help_checkout'		=> 'If you wish to assign this asset immediately, you should select "Ready to Deploy" from the status list above, or unexpected things may happen. ',
     'manufacturer'		=> 'Manufacturer',
     'model'				=> 'Model',
     'months'			=> 'months',
