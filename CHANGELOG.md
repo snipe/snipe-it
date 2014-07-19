@@ -1,5 +1,9 @@
 
 
+###  v0.3.11-alpha - Released Jul 19, 2014 07:16:53
+#### This is a pre-release 
+
+
 ###  v0.3.10-alpha - Released Jul 17, 2014 07:54:10
 #### This is a pre-release 
 * <a href="http://github.com/snipe/snipe-it/commit/89a8f3c277d2482b2cd04c4c5c582c9e507770f8">view</a> &bull; Fixes #183 - added employee number to users 
