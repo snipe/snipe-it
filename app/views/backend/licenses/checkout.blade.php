@@ -43,27 +43,35 @@
                 </div>
             </div>
 
-            <!-- User -->
-            <div class="form-group {{ $errors->has('assigned_to') ? ' has-error' : '' }}">
-                <label for="assigned_to" class="col-md-2 control-label">@lang('admin/hardware/form.checkout_to')
-                 <i class='icon-asterisk'></i></label>
-                 </label>
-                <div class="col-md-7">
-                    {{ Form::select('assigned_to', $users_list , Input::old('assigned_to', $licenseseat->assigned_to), array('class'=>'select2', 'style'=>'min-width:350px')) }}
-                    {{ $errors->first('assigned_to', '<span class="alert-msg"><i class="icon-remove-sign"></i> :message</span>') }}
-                </div>
-            </div>
-
-             <!-- Asset -->
+			<!-- Asset -->
             <div class="form-group {{ $errors->has('asset_id') ? ' has-error' : '' }}">
                 <label for="asset_id" class="col-md-2 control-label">@lang('admin/licenses/form.asset')
+                 <i class='icon-asterisk'></i>
                  </label>
-                 </label>
-                <div class="col-md-7">
+
+                <div class="col-md-9">
                     {{ Form::select('asset_id', $asset_list , Input::old('asset_id', $licenseseat->asset_id), array('class'=>'select2', 'style'=>'min-width:350px')) }}
                     {{ $errors->first('asset_id', '<span class="alert-msg"><i class="icon-remove-sign"></i> :message</span>') }}
                 </div>
             </div>
+
+
+            <!-- User -->
+            <div class="form-group {{ $errors->has('assigned_to') ? ' has-error' : '' }}">
+                <label for="assigned_to" class="col-md-2 control-label">@lang('admin/hardware/form.checkout_to')
+				</label>
+
+                <div class="col-md-9">
+                    {{ Form::select('assigned_to', $users_list , Input::old('assigned_to', $licenseseat->assigned_to), array('class'=>'select2', 'style'=>'min-width:350px')) }}
+                    {{ $errors->first('assigned_to', '<span class="alert-msg"><i class="icon-remove-sign"></i> :message</span>') }}
+
+                    <p class="help-block">
+                    @lang('admin/licenses/form.checkout_help')
+                    </p>
+
+                </div>
+            </div>
+
 
             <!-- Note -->
             <div class="form-group {{ $errors->has('note') ? 'error' : '' }}">

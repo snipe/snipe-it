@@ -4,7 +4,7 @@ return array(
 
     'checkin'  					=> 'Checkin License Seat',
     'checkout_history'  		=> 'Checkout History',
-    'checkout'  				=> 'Checkout License Seat to User',
+    'checkout'  				=> 'Checkout License Seat',
     'edit'  					=> 'Edit License',
     'history_for'  				=> 'History for ',
     'in_out'  					=> 'In/Out',

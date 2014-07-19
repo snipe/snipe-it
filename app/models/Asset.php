@@ -158,12 +158,10 @@ class Asset extends Elegant
 
     }
 
-     public function licenseseat()
+     public function licenseseats()
     {
-       	return $this->hasMany('LicenseSeat', 'asset_id');
-
+    		return $this->hasMany('LicenseSeat', 'asset_id');
     }
-
 
 
     public function supplier()

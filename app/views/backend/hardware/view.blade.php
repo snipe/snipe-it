@@ -145,11 +145,10 @@
 				</tr>
 			</thead>
 			<tbody>
-				@foreach ($asset->licenses as $license)
-
+				@foreach ($asset->licenseseats as $seat)
 				<tr>
-					<td><a href="{{ route('view/license', $license->id) }}">{{{ $license->name }}}</a></td>
-					<td><a href="{{ route('checkin/license', $asset->licenseseat->id) }}" class="btn-flat info">@lang('general.checkin')</a>
+					<td><a href="{{ route('view/license', $seat->license->id) }}">{{{ $seat->license->name }}}</a></td>
+					<td><a href="{{ route('checkin/license', $seat->id) }}" class="btn-flat info">@lang('general.checkin')</a>
 					</td>
 				</tr>
 				@endforeach
@@ -171,11 +170,11 @@
             <thead>
                 <tr>
                     <th class="col-md-1"></th>
-                    <th class="col-md-3"><span class="line"></span>Date</th>
-                    <th class="col-md-2"><span class="line"></span>Admin</th>
-                    <th class="col-md-2"><span class="line"></span>Action</th>
-                    <th class="col-md-2"><span class="line"></span>User</th>
-                    <th class="col-md-3"><span class="line"></span>Note</th>
+                    <th class="col-md-3"><span class="line"></span>@lang('general.date')</th>
+                    <th class="col-md-2"><span class="line"></span>@lang('general.admin')</th>
+                    <th class="col-md-2"><span class="line"></span>@lang('table.action')</th>
+                    <th class="col-md-2"><span class="line"></span>@lang('general.user')</th>
+                    <th class="col-md-3"><span class="line"></span>@lang('general.notes')</th>
                 </tr>
             </thead>
             <tbody>
