@@ -48,8 +48,12 @@
                     <td>
                      @if ($licensedto->asset_id)
                         <a href="{{ route('view/hardware', $licensedto->asset_id) }}">
-                    {{ $licensedto->asset->name }}
-                    </a>
+                    	{{ $licensedto->asset->asset_tag }}
+
+                    	@if (Setting::getSettings()->display_asset_name)
+							({{ $licensedto->asset->name }})
+                    	@endif
+                    	</a>
                     @endif
                     </td>
                     <td>
