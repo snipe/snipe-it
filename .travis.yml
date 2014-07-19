@@ -16,7 +16,6 @@ before_script:
   - curl -s http://getcomposer.org/installer | php
   - cp app/config/production/database.example.php app/config/database.php
   - cp app/config/production/mail.example.php app/config/mail.php
-  - php composer.phar validate
   - php composer.phar install --prefer-source --no-interaction --dev
   - php artisan key:generate
   - php artisan migrate:install
