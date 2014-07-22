@@ -13,3 +13,4 @@ public/packages/*
 /app/storage/views/*
 /app/storage/logs/*
 /app/storage/debugbar/
+/bin/
