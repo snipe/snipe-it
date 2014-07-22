@@ -43,6 +43,15 @@
         <!-- global header javascripts -->
         <script src="//code.jquery.com/jquery-latest.js"></script>
         <script src="{{ asset('assets/js/jquery.dataTables.js') }}"></script>
+        <script>
+            window.snipeit = {
+                settings: {
+                    "per_page": {{{ Setting::getSettings()->per_page }}}
+                }
+            };
+        </script>
+
+
 
         <!-- open sans font -->
         <link href='//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
@@ -343,70 +352,8 @@
     <script src="{{ asset('assets/js/jquery.uniform.min.js') }}"></script>
     <script src="{{ asset('assets/js/bootstrap.datepicker.js') }}"></script>
     <script src="{{ asset('assets/js/theme.js') }}"></script>
+    <script src="{{ asset('assets/js/snipeit.js') }}"></script>
 
-    <script type="text/javascript">
-        $(function () {
-
-            $('#example').dataTable({
-                "sPaginationType": "full_numbers",
-                "iDisplayLength": {{{ Setting::getSettings()->per_page }}},
-                "aLengthMenu": [[{{{ Setting::getSettings()->per_page }}}, -1], [{{{ Setting::getSettings()->per_page }}}, "All"]],
-                "aoColumnDefs": [{ 'bSortable': false, 'aTargets': [ 'actions' ] }]
-            });
-
-            $('#nosorting').dataTable({
-                "sPaginationType": "full_numbers",
-                "fnSort": [1,'asc'],
-                "aoColumns": [
-                { "bSortable": false },
-                { "bSortable": false },
-                { "bSortable": false },
-                { "bSortable": false }
-                ],
-                "iDisplayLength": {{{ Setting::getSettings()->per_page }}},
-                "aLengthMenu": [[{{{ Setting::getSettings()->per_page }}}, -1], [{{{ Setting::getSettings()->per_page }}}, "All"]]
-            });
-
-
-
-
-            // add uniform plugin styles to html elements
-            $("input:checkbox, input:radio").uniform();
-
-
-            // datepicker plugin
-            $('.datepicker').datepicker().on('changeDate', function (ev) {
-                $(this).datepicker('hide');
-            });
-
-            // select2 plugin for select elements
-            $(".select2").select2({
-                placeholder: "Select"
-            });
-
-            // jQuery Knobs
-            $(".knob").knob();
-
-
-             $("#example").popover();
-
-
-            // confirm delete modal
-            $('.delete-asset').click(function (evnt) {
-                var href = $(this).attr('href');
-                var message = $(this).attr('data-content');
-                var title = $(this).attr('data-title');
-
-                $('#myModalLabel').text(title);
-                $('#dataConfirmModal .modal-body').text(message);
-                $('#dataConfirmOK').attr('href', href);
-                $('#dataConfirmModal').modal({show:true});
-
-                return false;
-            });
-        });
-
-    </script>
 
     </body>
 </html>
