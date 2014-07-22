@@ -181,7 +181,7 @@ class LicensesController extends AdminController
             $license->notes 			= e(Input::get('notes'));
             $license->order_number 		= e(Input::get('order_number'));
             $license->depreciation_id 	= e(Input::get('depreciation_id'));
-            $license->asset_id 			= e(Input::get('asset_id'));
+
 
             // Update the asset data
             if ( e(Input::get('purchase_date')) == '') {

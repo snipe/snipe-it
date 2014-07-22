@@ -117,7 +117,6 @@
                 <table class="table table-hover">
                     <thead>
                         <tr>
-                            <th class="col-md-1"></th>
                             <th class="col-md-3"><span class="line"></span>@lang('general.date')</th>
                             <th class="col-md-3"><span class="line"></span>@lang('general.admin')</th>
                             <th class="col-md-3"><span class="line"></span>@lang('button.actions')</th>
@@ -129,11 +128,6 @@
                         @if (count($license->assetlog) > 0)
                         @foreach ($license->assetlog as $log)
                         <tr>
-                            <td>
-                            @if ((isset($log->checkedout_to)) && ($log->checkedout_to == $license->assigned_to))
-                            <i class="icon-star"></i>
-                            @endif
-                            </td>
                             <td>{{ $log->added_on }}</td>
                             <td>
                                 @if (isset($log->user_id)) {{ $log->adminlog->fullName() }}
@@ -157,7 +151,6 @@
                         @endforeach
                         @endif
                         <tr>
-                            <td></td>
                             <td>{{ $license->created_at }}</td>
                             <td>
                             @if ($license->adminuser) {{ $license->adminuser->fullName() }}
@@ -167,7 +160,11 @@
                             </td>
                             <td>@lang('general.created_asset')</td>
                             <td></td>
-                            <td></td>
+                            <td>
+                            @if ($license->notes)
+                            {{ $license->notes }}
+                            @endif
+                            </td>
                         </tr>
                     </tbody>
                 </table>
@@ -197,6 +194,9 @@
                     @if ($license->depreciation)
                     <li>@lang('admin/licenses/form.depreciation'):
                     {{ $license->depreciation->name }} ({{ $license->depreciation->months }} months)</li>
+                    @endif
+                    @if ($license->notes)
+                        <li>{{ $license->notes }}</li>
                     @endif
                 </ul>
         </div>
