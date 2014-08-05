@@ -161,7 +161,7 @@
                         <option value="0"{{ ( ! $user->isActivated() ? ' selected="selected"' : '') }}>@lang('general.no')</option>
                     @else
                     	<option value="1"{{ (Input::old('activated') == 1 ? ' selected="selected"' : '') }}>@lang('general.yes')</option>
-                        <option value="0"{{ (Input::old('activated') == 0 ? ' selected="selected"' : '') }}>@lang('general.no')</option>
+                        <option value="0">@lang('general.no')</option>
                     @endif
 
                     </select>

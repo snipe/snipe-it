@@ -82,7 +82,7 @@ class LicensesController extends AdminController
             $license->purchase_date 	= e(Input::get('purchase_date'));
             $license->purchase_cost 	= e(Input::get('purchase_cost'));
             $license->depreciation_id 	= e(Input::get('depreciation_id'));
-            $license->asset_id 			= e(Input::get('asset_id'));
+            //$license->asset_id 			= e(Input::get('asset_id'));
             $license->user_id 			= Sentry::getId();
 
             if (($license->purchase_date == "") || ($license->purchase_date == "0000-00-00")) {
