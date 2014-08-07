@@ -11,7 +11,7 @@
 
 <div class="row header">
     <div class="col-md-12">
-        <a href="{{ route('update/license', $license->id) }}" class="btn-flat white pull-right"> @lang('admin/licenses/form.update')</a>
+        <a href="{{ route('update/license', $license->id) }}" class="btn btn-warning pull-right"> @lang('admin/licenses/form.update')</a>
             <h3 class="name">@lang('general.history_for') {{ $license->name }}</h3>
     </div>
 </div>
@@ -81,12 +81,17 @@
 
                             <tr>
                                 <td>Seat {{ $count }} </td>
-                                <td>
-                                @if ($licensedto->assigned_to)
-                                    <a href="{{ route('view/user', $licensedto->assigned_to) }}">
-                                {{ $licensedto->user->fullName() }}
-                                </a>
-                                @endif
+                                <td> 
+                                    
+                                    @if ($licensedto->asset_id)
+                                        @if ($licensedto->asset->assigned_to != 0)
+                                            <a href="{{ route('view/user', $licensedto->asset->assigned_to) }}">
+                                                {{ $licensedto->asset->assigneduser->fullName() }}
+                                            </a>
+                                        @endif
+                                    @endif
+                                    
+                                 
                                 </td>
                                 <td>
                                 @if ($licensedto->asset_id)
@@ -96,7 +101,8 @@
                                 @endif
                                 </td>
                                 <td>
-                                @if ($licensedto->assigned_to)
+                             
+                                @if ($licensedto->asset_id)
                                     <a href="{{ route('checkin/license', $licensedto->id) }}" class="btn-flat info"> @lang('general.checkin') </a>
                                 @else
                                     <a href="{{ route('checkout/license', $licensedto->id) }}" class="btn-flat success">@lang('general.checkout')</a>

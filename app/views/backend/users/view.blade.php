@@ -5,7 +5,7 @@
 View User {{{ $user->fullName() }}} ::
 @parent
 @stop
-
+xxx
 {{-- Page content --}}
 @section('content')
 
@@ -23,14 +23,14 @@ View User {{{ $user->fullName() }}} ::
                         </span>
                 </div>
                 @if ($user->deleted_at != NULL)
-                            <a href="{{ route('restore/user', $user->id) }}" class="btn btn-warning pull-right edit"><i class="icon-pencil"></i> Restore This User</a>
+                            <a href="{{ route('restore/user', $user->id) }}" class="btn-flat white large pull-right edit"><i class="icon-pencil"></i> Restore This User</a>
 
                 @else
-                        <a href="{{ route('update/user', $user->id) }}" class="btn-flat white large pull-right edit"><i class="icon-pencil"></i> @lang('button.edit') This User</a>
+                        <a href="{{ route('update/user', $user->id) }}" class="btn btn-warning pull-right edit"><i class="icon-pencil"></i> @lang('button.edit') This User</a>
 
                 @endif
             </div>
-
+            <div>All the users!</div>
             <div class="row profile">
 
                     <!-- bio, new note & orders column -->

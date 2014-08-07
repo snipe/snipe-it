@@ -314,7 +314,7 @@ class AssetsController extends AdminController
             if (e(Input::get('purchase_cost')) == '') {
                 $asset->purchase_cost =  NULL;
             } else {
-                $asset->purchase_cost        = e(Input::get('purchase_cost'));
+                $asset->purchase_cost = ParseFloat(e(Input::get('purchase_cost')));
             }
 
             if (e(Input::get('purchase_date')) == '') {
@@ -328,6 +328,12 @@ class AssetsController extends AdminController
             } else {
                 $asset->supplier_id        = e(Input::get('supplier_id'));
             }
+            
+             if (e(Input::get('requestable')) == '') {
+                $asset->requestable =  0;
+            } else {
+                $asset->requestable        = e(Input::get('requestable'));
+            }
 
 
             // Update the asset data
@@ -337,7 +343,7 @@ class AssetsController extends AdminController
             $asset->order_number            = e(Input::get('order_number'));
             $asset->asset_tag           	= e(Input::get('asset_tag'));
             $asset->notes            		= e(Input::get('notes'));
-            $asset->requestable            	= e(Input::get('requestable'));
+            //$asset->requestable            	= e(Input::get('requestable'));
             $asset->physical            	= '1';
 
             // Was the asset updated?

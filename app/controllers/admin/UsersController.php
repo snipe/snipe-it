@@ -45,14 +45,29 @@ class UsersController extends AdminController
      */
     public function getIndex()
     {
-        // Grab all the users
+        // Grab all the users - depending on the scope to include
         $users = Sentry::getUserProvider()->createModel();
-
+       
         // Do we want to include the deleted users?
+	// the with and onlyTrashed calls currently do not work - returns an 
+	// inconsistent array which cannot be displayed by the blade output
+
         if (Input::get('withTrashed')) {
+            
+            $users = $users->withTrashed();
+            //$users = Sentry::getUserProvider()->createModel()->paginate();
 
         } elseif (Input::get('onlyTrashed')) {
-            $users = $users->onlyTrashed();
+
+	// this is a tempoary 'fix' to display NO deleted users.
+            //$users = Sentry::getUserProvider()->createModel()->whereNotNull('deleted_at')->paginate();
+            //$users = Sentry::findAllUsers();
+            //$users = users::deletedUsers()->paginate();
+            $users = Sentry::getUserProvider()->createModel()->onlyTrashed();
+            //$users = users::whereNotNull('deleted_at')->paginate();
+            //$users = $users->onlyTrashed();
+            //$users = Users::onlyTrashed()->get();
+            //$users = Sentry::getUserProvider()->createModel();
         }
 
 
@@ -62,7 +77,6 @@ class UsersController extends AdminController
                 'withTrashed' => Input::get('withTrashed'),
                 'onlyTrashed' => Input::get('onlyTrashed'),
             ));
-
 
         // Show the page
         return View::make('backend/users/index', compact('users'));
@@ -159,7 +173,8 @@ class UsersController extends AdminController
                 $success = Lang::get('admin/users/message.success.create');
 
                 // Redirect to the new user page
-                return Redirect::route('update/user', $user->id)->with('success', $success);
+                //return Redirect::route('update/user', $user->id)->with('success', $success);
+                return Redirect::route('users')->with('success', $success);
             }
 
 

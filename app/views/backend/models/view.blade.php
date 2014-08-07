@@ -12,7 +12,7 @@
 
 <div class="row header">
     <div class="col-md-12">
-        <a href="{{ route('update/model', $model->id) }}" class="btn-flat white pull-right">
+        <a href="{{ route('update/model', $model->id) }}" class="btn btn-warning pull-right">
         @lang('admin/models/table.update')</a>
         <h3 class="name">@lang('general.history_for')
         {{{ $model->name }}} </h3>

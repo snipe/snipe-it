@@ -26,9 +26,13 @@ class LicensesController extends AdminController
      *
      * @return View
      */
+    
+     
+
 
     public function getIndex()
     {
+
         // Grab all the licenses
         $licenses = License::orderBy('created_at', 'DESC')->paginate(Setting::getSettings()->per_page);
 
@@ -325,8 +329,8 @@ class LicensesController extends AdminController
 			->whereNull('assets.deleted_at')
 			->get();
 
-			$asset_array = json_decode(json_encode($asset), true);
-
+			$asset_array = json_decode(json_encode($asset), true);   
+                        
 			// Build a list out of the data results
 			for ($x=0; $x<count($asset_array); $x++) {
 
@@ -336,7 +340,11 @@ class LicensesController extends AdminController
 					$full_name = ' (Unassigned)';
 				}
 				$asset_element[$asset_array[$x]['id']] = $asset_array[$x]['asset_tag'].' - '.$asset_array[$x]['name'].$full_name;
+                                
+                               
 			}
+                        //add label
+                         array_splice($asset_element, 0, 0, "Please select an Asset");
 
         return View::make('backend/licenses/checkout', compact('licenseseat'))->with('users_list',$users_list)->with('asset_list',$asset_element);
 
@@ -349,11 +357,7 @@ class LicensesController extends AdminController
     **/
     public function postCheckout($seatId)
     {
-        // Check if the asset exists
-        if (is_null($licenseseat = LicenseSeat::find($seatId))) {
-            // Redirect to the asset management page with error
-            return Redirect::to('admin/licenses')->with('error', Lang::get('admin/licenses/message.not_found'));
-        }
+        
 
         $assigned_to = e(Input::get('assigned_to'));
         $asset_id = e(Input::get('asset_id'));
@@ -362,7 +366,7 @@ class LicensesController extends AdminController
         $rules = array(
 
             'note'   => 'alpha_space',
-            'asset_id'	=> 'required_without:assigned_to',
+            'asset_id'	=> 'required_without:assigned_to:min:1',
         );
 
         // Create a new validator instance from our validation rules
@@ -398,7 +402,11 @@ class LicensesController extends AdminController
 
 
 
-
+// Check if the asset exists
+        if (is_null($licenseseat = LicenseSeat::find($seatId))) {
+            // Redirect to the asset management page with error
+            return Redirect::to('admin/licenses')->with('error', Lang::get('admin/licenses/message.not_found'));
+        }
 
 		 $licenseseat->asset_id = e(Input::get('asset_id'));
 

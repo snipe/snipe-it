@@ -12,7 +12,7 @@
 <div class="row header">
     <div class="col-md-12">
         <div class="btn-group pull-right">
-            <button class="btn glow">@lang('button.actions')</button>
+            <button class="btn gray">@lang('button.actions')</button>
             <button class="btn glow dropdown-toggle" data-toggle="dropdown">
                 <span class="caret"></span>
             </button>
@@ -77,9 +77,9 @@
         @if ($asset->warranty_months)
             <div class="col-md-6"><strong>@lang('admin/hardware/form.warranty'):</strong>
             {{{ $asset->warranty_months }}}
-            @lang('admin/hardware/form.months')
+            @lang('admin/hardware/form.months') 
             </div>
-            <div class="col-md-6"><strong>@lang('admin/hardware/form.expires'):</strong>
+            <div class="col-md-6 {{{ $asset->warrantee_expires() < date("Y-m-d H:i:s") ? 'ui-state-highlight' : '' }}}"   ><strong>@lang('admin/hardware/form.expires'):</strong>
             {{{ $asset->warrantee_expires() }}}</div>
         @endif
 

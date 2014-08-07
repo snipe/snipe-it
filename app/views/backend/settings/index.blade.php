@@ -12,7 +12,7 @@ Settings ::
                 <!-- header -->
 
                 <div class="pull-right">
-                     <a href="{{ route('edit/settings') }}" class="btn-flat white"> @lang('button.edit') Settings</a>
+                     <a href="{{ route('edit/settings') }}" class="btn btn-warning"> @lang('button.edit') Settings</a>
                 </div>
 
 

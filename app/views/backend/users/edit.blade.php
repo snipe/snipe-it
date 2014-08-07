@@ -179,6 +179,7 @@
                    <div class="controls">
 
                     <select name="groups[]" id="groups[]" multiple="multiple" class="form-control">
+                        
                         @foreach ($groups as $group)
                         <option value="{{ $group->id }}"
                         {{ (in_array($group->id, $userGroups) ? ' selected="selected"' : '') }}>

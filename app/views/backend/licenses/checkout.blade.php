@@ -56,7 +56,7 @@
             </div>
 
 
-            <!-- User -->
+            <!-- User 
             <div class="form-group {{ $errors->has('assigned_to') ? ' has-error' : '' }}">
                 <label for="assigned_to" class="col-md-2 control-label">@lang('admin/hardware/form.checkout_to')
 				</label>
@@ -70,7 +70,7 @@
                     </p>
 
                 </div>
-            </div>
+            </div>-->
 
 
             <!-- Note -->
