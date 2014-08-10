@@ -2,6 +2,10 @@ SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='TRADITIONAL,ALLOW_INVALID_DATES';
 
+UPDATE assets SET status_id=0 where status_id is null;
+UPDATE assets SET purchase_cost=0 where purchase_cost is null;
+UPDATE models SET eol=0 where eol is null;
+
 ALTER TABLE `snipeit`.`assets` 
 CHANGE COLUMN `name` `name` VARCHAR(255) CHARACTER SET 'utf8' COLLATE 'utf8_unicode_ci' NULL DEFAULT NULL ,
 CHANGE COLUMN `asset_tag` `asset_tag` VARCHAR(255) CHARACTER SET 'utf8' COLLATE 'utf8_unicode_ci' NOT NULL ,
