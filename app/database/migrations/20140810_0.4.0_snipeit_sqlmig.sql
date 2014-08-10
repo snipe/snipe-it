@@ -82,7 +82,6 @@ CHANGE COLUMN `supplier_id` `supplier_id` INT(11) NULL DEFAULT NULL ,
 CHANGE COLUMN `requestable` `requestable` TINYINT(4) NOT NULL DEFAULT '0' ;
 
 ALTER TABLE `licenses` 
-DROP COLUMN `asset_id`,
 CHANGE COLUMN `purchase_cost` `purchase_cost` DECIMAL(13,4) NULL DEFAULT NULL ,
 CHANGE COLUMN `depreciate` `depreciate` TINYINT(1) NULL DEFAULT '0' ;
 
