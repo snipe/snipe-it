@@ -9,6 +9,10 @@
 {{-- Page content --}}
 @section('content')
 
+PAGE OF USERS
+
+
+
 <div class="row header">
     <div class="col-md-12">
         <a href="{{ route('create/user') }}" class="btn btn-success pull-right"><i class="icon-plus-sign icon-white"></i>  @lang('general.create')</a>
@@ -46,14 +50,15 @@
             <th class="col-md-2 actions">@lang('table.actions')</th>
         </tr>
     </thead>
-    <tbody>
-
-        @foreach ($users as $user)
+    <tbody>START OF LIST BODY
+  
+TOTAL USERS: {{{ $users->getTotal() }}}
+    @foreach ($users as $user)
         <tr>
             <td>
-            <img src="{{ $user->gravatar() }}" class="img-circle avatar hidden-phone" style="max-width: 45px;" />
+          <img src="{{ $user->gravatar() }}" class="img-circle avatar hidden-phone" style="max-width: 45px;" />
             <a href="{{ route('view/user', $user->id) }}" class="name">{{{ $user->fullName() }}}</a>
-
+ 
             </td>
             <td>{{{ $user->email }}}</td>
             <td>
@@ -65,12 +70,10 @@
             <td>{{ $user->isActivated() ? '<i class="icon-ok"></i>' : ''}}</td>
             <td>
 
-            <!-- If the user account is suspended - show the UNSUSPEND button.  Do NOT evaluate if soft deleted! -->
-            @if (is_null($user->deleted_at))
-		@if ($user->accountStatus()=='suspended')
-                <a href="{{ route('unsuspend/user', $user->id) }}" class="btn btn-warning"><span class="icon-time icon-white"></span></a>
-		@endif
-            @endif
+
+				@if ($user->accountStatus()=='suspended')
+                      <a href="{{ route('unsuspend/user', $user->id) }}" class="btn btn-warning"><span class="icon-time icon-white"></span></a>
+				@endif
 			</td>
             <td>
 
@@ -79,19 +82,18 @@
                 @else
                 <a href="{{ route('update/user', $user->id) }}" class="btn btn-warning"><i class="icon-pencil icon-white"></i></a>
 
-                @if (Sentry::getId() !== $user->id)
-                <a data-html="false" class="btn delete-asset btn-danger" data-toggle="modal" href="{{ route('delete/user', $user->id) }}" data-content="Are you sure you wish to delete this user?" data-title="Delete {{ htmlspecialchars($user->first_name) }}?" onClick="return false;"><i class="icon-trash icon-white"></i></a>
 
-                @else
-                <span class="btn delete-asset btn-danger disabled"><i class="icon-trash icon-white"></i></span>
                 @endif
-                @endif
+
+
             </td>
         </tr>
         @endforeach
+
     </tbody>
 </table>
 </div>
+
 
 <!-- {{
     Datatable::table()
@@ -117,3 +119,6 @@
 @endif
 
 @stop
+@$queries = DB::getQueryLog();
+@$last_query = end($queries);
+{{{ $last_query }}}

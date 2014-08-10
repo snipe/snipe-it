@@ -113,28 +113,25 @@ class StatuslabelsController extends AdminController
             return Redirect::to('admin/settings/statuslabels')->with('error', Lang::get('admin/statuslabels/message.does_not_exist'));
         }
 
+        //attempt to validate
+        $validator = Validator::make(Input::all(), $statuslabel->validationRules($statuslabelId));
 
-
-        // get the POST data
-        $new = Input::all();
-
-
+        if ($validator->fails())
+        {
+            // The given data did not pass validation            
+            return Redirect::back()->withInput()->withErrors($validator->messages());
+        }
         // attempt validation
-        if ($statuslabel->validate($new)) {
-
+        else {
             // Update the Statuslabel data
             $statuslabel->name            	= e(Input::get('name'));
 
             // Was the asset created?
             if($statuslabel->save()) {
                 // Redirect to the saved Statuslabel page
-                return Redirect::to("admin/settings/statuslabels/$statuslabelId/edit")->with('success', Lang::get('admin/statuslabels/message.update.success'));
+                return Redirect::to("admin/settings/statuslabels/")->with('success', Lang::get('admin/statuslabels/message.update.success'));
             }
-        } else {
-            // failure
-            $errors = $statuslabel->errors();
-            return Redirect::back()->withInput()->withErrors($errors);
-        }
+        } 
 
         // Redirect to the Statuslabel management page
         return Redirect::to("admin/settings/statuslabels/$statuslabelId/edit")->with('error', Lang::get('admin/statuslabels/message.update.error'));

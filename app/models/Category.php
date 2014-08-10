@@ -2,13 +2,15 @@
 
 class Category extends Elegant
 {
+    protected $table = 'categories';
     protected $softDelete = true;
 
     /**
     * Category validation rules
     */
-    protected $rules = array(
-        'name'   => 'required|alpha_space|min:2',
+    public $rules = array(
+        'user_id' => 'numeric',
+        'name'   => 'required|alpha_dash|min:3|max:255|unique:categories,name,{id}',
     );
 
 

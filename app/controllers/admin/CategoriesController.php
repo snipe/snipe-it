@@ -50,14 +50,17 @@ class CategoriesController extends AdminController
     public function postCreate()
     {
 
-        // get the POST data
-        $new = Input::all();
-
         // create a new model instance
         $category = new Category();
+        
+        $validator = Validator::make(Input::all(), $category->rules);
 
-        // attempt validation
-        if ($category->validate($new)) {
+        if ($validator->fails())
+        {
+            // The given data did not pass validation            
+            return Redirect::back()->withInput()->withErrors($validator->messages());
+        }
+        else{
 
             // Update the category data
             $category->name            = e(Input::get('name'));
@@ -68,11 +71,7 @@ class CategoriesController extends AdminController
                 // Redirect to the new category  page
                 return Redirect::to("admin/settings/categories")->with('success', Lang::get('admin/categories/message.create.success'));
             }
-        } else {
-            // failure
-            $errors = $category->errors();
-            return Redirect::back()->withInput()->withErrors($errors);
-        }
+        } 
 
         // Redirect to the category create page
         return Redirect::to('admin/settings/categories/create')->with('error', Lang::get('admin/categories/message.create.error'));
@@ -120,8 +119,17 @@ class CategoriesController extends AdminController
         // get the POST data
         $new = Input::all();
 
+        // attempt validation       
+        $validator = Validator::make(Input::all(), $category->validationRules($categoryId));
+       
+
+        if ($validator->fails())
+        {
+            // The given data did not pass validation
+            return Redirect::back()->withInput()->withErrors($validator->messages());
+        }
         // attempt validation
-        if ($category->validate($new)) {
+        else {
 
             // Update the category data
             $category->name            = e(Input::get('name'));
@@ -131,11 +139,7 @@ class CategoriesController extends AdminController
                 // Redirect to the new category page
                 return Redirect::to("admin/settings/categories")->with('success', Lang::get('admin/categories/message.update.success'));
             }
-        } else {
-            // failure
-            $errors = $category->errors();
-            return Redirect::back()->withInput()->withErrors($errors);
-        }
+        } 
 
         // Redirect to the category management page
         return Redirect::to("admin/settings/categories/$categoryID/edit")->with('error', Lang::get('admin/categories/message.update.error'));

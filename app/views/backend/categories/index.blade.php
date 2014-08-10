@@ -35,7 +35,7 @@
                 <a href="{{ route('update/category', $category->id) }}" class="btn btn-warning"><i class="icon-pencil icon-white"></i></a>
 <a data-html="false" class="btn delete-asset btn-danger" data-toggle="modal" href="{{ route('delete/category', $category->id) }}" data-content="@lang('admin/categories/message.delete.confirm')"
 data-title="@lang('general.delete')
-{{{ htmlspecialchars($category->name) }}}?" onClick="return false;"><i class="icon-trash icon-white"></i></a>
+{{{ htmlspecialchars($category->name) }}}?" onClick="return false;"><i class="icon-trash icon-white"></i></a> 
 
                 </td>
             </tr>

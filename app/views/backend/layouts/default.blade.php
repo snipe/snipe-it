@@ -165,7 +165,7 @@
                         </li>
                         <li{{ (Request::is('admin/settings/categories*') ? ' class="active"' : '') }}>
                             <a href="{{ URL::to('admin/settings/categories') }}">
-                                <i class="icon-list"></i> @lang('general.categories')
+                                <i class="icon-check"></i> @lang('general.categories')
                             </a>
                         </li>
                         <li{{ (Request::is('admin/settings/manufacturers*') ? ' class="active"' : '') }}>
@@ -332,8 +332,8 @@
         <div class="col-md-9">
               <div class="container">
 
-                <p class="muted credit"><a href="http://snipeitapp.com">Snipe IT</a> is a free open source
-                project by <a href="http://twitter.com/snipeyhead">@snipeyhead</a>. <a href="https://github.com/snipe/snipe-it">Fork it</a> | <a href="http://docs.snipeitapp.com/">Documentation</a> | <a href="https://github.com/snipe/snipe-it/issues?state=open">Report a Bug</a></p>
+                  <p class="muted credit"><a target="_blank" href="http://snipeitapp.com">Snipe IT</a> is a free open source
+                project by <a target="_blank" href="http://twitter.com/snipeyhead">@snipeyhead</a>. <a target="_blank" href="https://github.com/snipe/snipe-it">Fork it</a> | <a target="_blank" href="http://docs.snipeitapp.com/">Documentation</a> | <a target="_blank" href="https://github.com/snipe/snipe-it/issues?state=open">Report a Bug</a></p>
               </div>
         </div>
         </div>

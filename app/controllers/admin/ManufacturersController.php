@@ -109,13 +109,15 @@ class ManufacturersController extends AdminController
             return Redirect::to('admin/settings/manufacturers')->with('error', Lang::get('admin/manufacturers/message.does_not_exist'));
         }
 
+        $validator = Validator::make(Input::all(), $manufacturer->validationRules($manufacturerId));
 
-        // get the POST data
-        $new = Input::all();
-
+        if ($validator->fails())
+        {
+            // The given data did not pass validation           
+            return Redirect::back()->withInput()->withErrors($validator->messages());
+        }
         // attempt validation
-        if ($manufacturer->validate($new)) {
-
+        else {
             // Save the  data
             $manufacturer->name 	= e(Input::get('name'));
 
@@ -124,11 +126,7 @@ class ManufacturersController extends AdminController
                 // Redirect to the new manufacturer page
                 return Redirect::to("admin/settings/manufacturers")->with('success', Lang::get('admin/manufacturers/message.update.success'));
             }
-        } else {
-            // failure
-            $errors = $manufacturer->errors();
-            return Redirect::back()->withInput()->withErrors($errors);
-        }
+        } 
 
         // Redirect to the manufacturer management page
         return Redirect::to("admin/settings/manufacturers/$manufacturerId/edit")->with('error', Lang::get('admin/manufacturers/message.update.error'));

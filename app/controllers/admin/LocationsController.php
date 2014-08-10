@@ -123,14 +123,16 @@ class LocationsController extends AdminController
             return Redirect::to('admin/settings/locations')->with('error', Lang::get('admin/locations/message.does_not_exist'));
         }
 
+        //attempt to validate
+        $validator = Validator::make(Input::all(), $location->validationRules($locationId));
 
-
-        // get the POST data
-        $new = Input::all();
-
-
+        if ($validator->fails())
+        {
+            // The given data did not pass validation            
+            return Redirect::back()->withInput()->withErrors($validator->messages());
+        }
         // attempt validation
-        if ($location->validate($new)) {
+        else {
 
             // Update the location data
             $location->name            	= e(Input::get('name'));
@@ -144,13 +146,9 @@ class LocationsController extends AdminController
             // Was the asset created?
             if($location->save()) {
                 // Redirect to the saved location page
-                return Redirect::to("admin/settings/locations/$locationId/edit")->with('success', Lang::get('admin/locations/message.update.success'));
+                return Redirect::to("admin/settings/locations/")->with('success', Lang::get('admin/locations/message.update.success'));
             }
-        } else {
-            // failure
-            $errors = $location->errors();
-            return Redirect::back()->withInput()->withErrors($errors);
-        }
+        } 
 
         // Redirect to the location management page
         return Redirect::to("admin/settings/locations/$locationId/edit")->with('error', Lang::get('admin/locations/message.update.error'));

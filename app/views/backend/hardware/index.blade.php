@@ -52,7 +52,7 @@ $debugbar["messages"]->addMessage("hello world!");
     <thead>
         <tr role="row">
             <th class="col-md-1" bSortable="true">@lang('admin/hardware/table.asset_tag')</th>
-            <th class="col-md-3" bSortable="true">@lang('admin/hardware/table.title')</th>
+            <th class="col-md-3" bSortable="true">@lang('admin/hardware/table.asset_model')</th>
             @if (Setting::getSettings()->display_asset_name)
             <th class="col-md-3" bSortable="true">@lang('general.name')</th>
             @endif
@@ -73,7 +73,7 @@ $debugbar["messages"]->addMessage("hello world!");
         @foreach ($assets as $asset)
         <tr>
             <td><a href="{{ route('view/hardware', $asset->id) }}">{{ $asset->asset_tag }}</a></td>
-            <td><a href="{{ route('view/hardware', $asset->id) }}">{{ $asset->model->name }}</a></td>
+            <td><a href="{{ route('view/model', $asset->model->id) }}">{{ $asset->model->name }}</a></td>
             @if (Setting::getSettings()->display_asset_name)
                 <td><a href="{{ route('view/hardware', $asset->id) }}">{{ $asset->name }}</a></td>
             @endif
@@ -98,7 +98,7 @@ $debugbar["messages"]->addMessage("hello world!");
                 @endif
                 </td>
                 <td>
-                @if ($asset->assigneduser && $asset->assetloc) {{{ $asset->assetloc->name }}}
+                    @if ($asset->assigneduser && $asset->assetloc) <a href="{{ route('update/location', $asset->assetloc->id) }}">{{{ $asset->assetloc->name }}}</a>
                 @else
                     @if ($asset->assetstatus) {{{ $asset->assetstatus->name }}}
                     @endif
