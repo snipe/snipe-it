@@ -63,12 +63,14 @@
         <![endif]-->
 
         <style>
+
         @section('styles')
         h3 {
             padding: 10px;
         }
 
         @show
+        
         </style>
  
 
