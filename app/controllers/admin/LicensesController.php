@@ -554,9 +554,10 @@ class LicensesController extends AdminController
           // Show the page
         $license_options = array('0' => 'Top Level') + License::lists('name', 'id');
 
+        //clone the orig
         $license = clone $license_to_clone;
-        $license->id = null;
-        $license->serial = null;       
+        $license->id = null; 
+        $license->serial = null;        
         
         // Show the page
         $depreciation_list = array('0' => Lang::get('admin/licenses/form.no_depreciation')) + Depreciation::lists('name', 'id');
