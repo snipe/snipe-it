@@ -62,6 +62,8 @@ Route::group(array('prefix' => 'admin'), function () {
         Route::post('create', 'Controllers\Admin\LicensesController@postCreate');
         Route::get('{licenseId}/edit', array('as' => 'update/license', 'uses' => 'Controllers\Admin\LicensesController@getEdit'));
         Route::post('{licenseId}/edit', 'Controllers\Admin\LicensesController@postEdit');
+        Route::get('{licenseId}/clone', array('as' => 'clone/license', 'uses' => 'Controllers\Admin\LicensesController@getClone'));
+        Route::post('{licenseId}/clone', 'Controllers\Admin\LicensesController@postCreate');
         Route::get('{licenseId}/delete', array('as' => 'delete/license', 'uses' => 'Controllers\Admin\LicensesController@getDelete'));
         Route::get('{licenseId}/checkout', array('as' => 'checkout/license', 'uses' => 'Controllers\Admin\LicensesController@getCheckout'));
         Route::post('{licenseId}/checkout', 'Controllers\Admin\LicensesController@postCheckout');

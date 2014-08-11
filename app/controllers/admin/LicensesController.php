@@ -75,6 +75,13 @@ class LicensesController extends AdminController
         // attempt validation
         if ($license->validate($new)) {
 
+                        if ( e(Input::get('purchase_cost')) == '') {
+                    $license->purchase_cost =  NULL;
+            } else {
+                    $license->purchase_cost = ParseFloat(e(Input::get('purchase_cost')));
+                    //$license->purchase_cost = e(Input::get('purchase_cost'));
+            }
+
             // Save the license data
             $license->name 				= e(Input::get('name'));
             $license->serial 			= e(Input::get('serial'));
@@ -84,7 +91,7 @@ class LicensesController extends AdminController
             $license->order_number 		= e(Input::get('order_number'));
             $license->seats 			= e(Input::get('seats'));
             $license->purchase_date 	= e(Input::get('purchase_date'));
-            $license->purchase_cost 	= e(Input::get('purchase_cost'));
+            //$license->purchase_cost 	= e(Input::get('purchase_cost'));
             $license->depreciation_id 	= e(Input::get('depreciation_id'));
             //$license->asset_id 			= e(Input::get('asset_id'));
             $license->user_id 			= Sentry::getId();
@@ -535,6 +542,25 @@ class LicensesController extends AdminController
             return Redirect::route('licenses')->with('error', $error);
         }
     }
+    
+    public function getClone($licenseId = null)
+    {
+         // Check if the license exists
+        if (is_null($license_to_clone = License::find($licenseId))) {
+            // Redirect to the blogs management page
+            return Redirect::to('admin/licenses')->with('error', Lang::get('admin/licenses/message.does_not_exist'));
+        }
+        
+          // Show the page
+        $license_options = array('0' => 'Top Level') + License::lists('name', 'id');
 
-
+        $license = clone $license_to_clone;
+        $license->id = null;
+        $license->serial = null;       
+        
+        // Show the page
+        $depreciation_list = array('0' => Lang::get('admin/licenses/form.no_depreciation')) + Depreciation::lists('name', 'id');
+        return View::make('backend/licenses/edit')->with('license_options',$license_options)->with('depreciation_list',$depreciation_list)->with('license',$license);
+    
+    }
 }

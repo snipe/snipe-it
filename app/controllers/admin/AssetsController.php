@@ -197,7 +197,7 @@ class AssetsController extends AdminController
             if (e(Input::get('purchase_cost')) == '') {
                 $asset->purchase_cost =  NULL;
             } else {
-                $asset->purchase_cost        = e(Input::get('purchase_cost'));
+                $asset->purchase_cost = ParseFloat(e(Input::get('purchase_cost')));
             }
 
             if (e(Input::get('purchase_date')) == '') {
@@ -341,7 +341,7 @@ class AssetsController extends AdminController
             $asset->name            		= e(Input::get('name'));
             $asset->serial            		= e(Input::get('serial'));
             $asset->model_id           		= e(Input::get('model_id'));
-            $asset->order_number            = e(Input::get('order_number'));
+            $asset->order_number                = e(Input::get('order_number'));
             $asset->asset_tag           	= e(Input::get('asset_tag'));
             $asset->notes            		= e(Input::get('notes'));           
             $asset->physical            	= '1';
@@ -606,7 +606,7 @@ class AssetsController extends AdminController
     public function getClone($assetId = null)
     {
         // Check if the asset exists
-        if (is_null($asset = Asset::find($assetId))) {
+        if (is_null($asset_to_clone = Asset::find($assetId))) {
             // Redirect to the asset management page
             return Redirect::to('hardware')->with('error', Lang::get('admin/hardware/message.does_not_exist'));
         }
@@ -619,9 +619,13 @@ class AssetsController extends AdminController
 
         // get depreciation list
         $depreciation_list = array('' => '') + Depreciation::lists('name', 'id');
+        $supplier_list = array('' => '') + Supplier::orderBy('name', 'asc')->lists('name', 'id');
+        $assigned_to = array('' => 'Select a User') + DB::table('users')->select(DB::raw('concat (first_name," ",last_name) as full_name, id'))->whereNull('deleted_at')->lists('full_name', 'id');
 
-        return View::make('backend/hardware/clone', compact('asset'))->with('model_list',$model_list)->with('depreciation_list',$depreciation_list)->with('statuslabel_list',$statuslabel_list);
+        $asset = clone $asset_to_clone;
+        $asset->id = null;
+        $asset->asset_tag = '';
+        return View::make('backend/hardware/edit')->with('supplier_list',$supplier_list)->with('model_list',$model_list)->with('statuslabel_list',$statuslabel_list)->with('assigned_to',$assigned_to)->with('asset',$asset);
+
     }
-
-
 }
