@@ -1,4 +1,3 @@
-
 ALTER TABLE `asset_uploads` 
 CHANGE COLUMN `created_at` `created_at` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ,
 CHANGE COLUMN `updated_at` `updated_at` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ;
@@ -58,7 +57,6 @@ CHANGE COLUMN `updated_at` `updated_at` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMES
 ALTER TABLE `users` 
 CHANGE COLUMN `created_at` `created_at` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ,
 CHANGE COLUMN `updated_at` `updated_at` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ;
-
 
 UPDATE assets SET status_id=0 where status_id is null;
 UPDATE assets SET purchase_cost=0 where purchase_cost is null;
