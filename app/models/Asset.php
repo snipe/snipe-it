@@ -12,10 +12,11 @@ class Asset extends Elegant
         'warranty_months'   => 'integer|min:0|max:240',
         'note'   => 'alpha_space',
         'notes'   => 'alpha_space',
-        'pysical' => 'interger',
-        'supplier_id' => 'interger',
+        'pysical' => 'integer',
+        'supplier_id' => 'integer',
         'asset_tag'   => 'required|alpha_space|min:3|max:255|unique:assets,asset_tag,{id}',
         'serial'   => 'required|alpha_dash|min:3|max:255|unique:assets,serial,{id}',
+        'status' => 'integer'
         );
 
     /**

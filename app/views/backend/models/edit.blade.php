@@ -78,8 +78,7 @@
 
             <!-- Depreciation -->
             <div class="form-group {{ $errors->has('depreciation_id') ? ' has-error' : '' }}">
-                <label for="depreciation_id" class="col-md-2 control-label">@lang('general.depreciation') 
-                <i class='icon-asterisk'></label>
+                <label for="depreciation_id" class="col-md-2 control-label">@lang('general.depreciation')</label>
                     <div class="col-md-7">
                         {{ Form::select('depreciation_id', $depreciation_list , Input::old('depreciation_id', $model->depreciation_id), array('class'=>'select2', 'style'=>'width:350px')) }}
                         {{ $errors->first('depreciation_id', '<span class="alert-msg"><i class="icon-remove-sign"></i> :message</span>') }}
@@ -87,13 +86,14 @@
             </div>
 
             <!-- EOL -->
+            
             <div class="form-group {{ $errors->has('eol') ? ' has-error' : '' }}">
-                <label for="eol" class="col-md-2 control-label">@lang('general.eol') 
-                <i class='icon-asterisk'></label>
+                <label for="eol" class="col-md-2 control-label">@lang('general.eol')</label>
                 <div class="col-md-2">
                     <div class="input-group">
-                    <input class="col-md-1 form-control" type="text" name="eol" id="eol" value="{{{ Input::old('eol', $model->eol) }}}" />   <span class="input-group-addon">
+                    <input class="col-md-1 form-control" type="text" name="eol" id="eol" value="{{{ Input::old('eol', isset($model->eol)) ? $model->eol : 0  }}}" />   <span class="input-group-addon">
                     @lang('general.months')
+
                     </span>
                     {{ $errors->first('eol', '<span class="alert-msg"><i class="icon-remove-sign"></i> :message</span>') }}
                     </div>

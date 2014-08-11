@@ -75,7 +75,7 @@ CHANGE COLUMN `purchase_cost` `purchase_cost` DECIMAL(13,4) NOT NULL DEFAULT '0.
 CHANGE COLUMN `order_number` `order_number` VARCHAR(255) CHARACTER SET 'utf8' COLLATE 'utf8_unicode_ci' NULL DEFAULT NULL ,
 CHANGE COLUMN `assigned_to` `assigned_to` INT(11) NULL DEFAULT NULL ,
 CHANGE COLUMN `notes` `notes` TEXT CHARACTER SET 'utf8' COLLATE 'utf8_unicode_ci' NULL DEFAULT NULL ,
-CHANGE COLUMN `status_id` `status_id` INT(11) NOT NULL DEFAULT '0' ,
+CHANGE COLUMN `status_id` `status_id` INT(11) NULL DEFAULT NULL ;
 CHANGE COLUMN `archived` `archived` TINYINT(1) NOT NULL DEFAULT '0' ,
 CHANGE COLUMN `depreciate` `depreciate` TINYINT(1) NOT NULL DEFAULT '0' ,
 CHANGE COLUMN `supplier_id` `supplier_id` INT(11) NULL DEFAULT NULL ,

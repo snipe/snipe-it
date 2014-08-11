@@ -301,7 +301,7 @@ class AssetsController extends AdminController
         else {
 
 
-            if ( e(Input::get('status_id')) == '') {
+            if ( e(Input::get('status_id')) == '' ) {
                 $asset->status_id =  NULL;
             } else {
                 $asset->status_id = e(Input::get('status_id'));
@@ -337,15 +337,13 @@ class AssetsController extends AdminController
                 $asset->requestable        = e(Input::get('requestable'));
             }
 
-
             // Update the asset data
             $asset->name            		= e(Input::get('name'));
             $asset->serial            		= e(Input::get('serial'));
             $asset->model_id           		= e(Input::get('model_id'));
             $asset->order_number            = e(Input::get('order_number'));
             $asset->asset_tag           	= e(Input::get('asset_tag'));
-            $asset->notes            		= e(Input::get('notes'));
-            //$asset->requestable            	= e(Input::get('requestable'));
+            $asset->notes            		= e(Input::get('notes'));           
             $asset->physical            	= '1';
 
             // Was the asset updated?
