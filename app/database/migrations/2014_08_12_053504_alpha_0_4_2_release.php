@@ -37,28 +37,28 @@ class Alpha042Release extends Migration {
                     . 'MODIFY COLUMN depreciate TINYINT(1) NOT NULL DEFAULT "0"');
 
                 DB::statement('ALTER TABLE licenses '
-                       . 'MODIFY COLUMN purchase_cost DECIMAL(13,4) NULL , '
-                       . 'MODIFY COLUMN depreciate TINYINT(1) NULL DEFAULT "0"');
+                    . 'MODIFY COLUMN purchase_cost DECIMAL(13,4) NULL , '
+                    . 'MODIFY COLUMN depreciate TINYINT(1) NULL DEFAULT "0"');
 
                 DB::statement('ALTER TABLE license_seats '
-                        . 'MODIFY COLUMN assigned_to INT(11) NULL ');
+                    . 'MODIFY COLUMN assigned_to INT(11) NULL ');
 
                 DB::statement('ALTER TABLE locations '
-                        . 'MODIFY COLUMN state VARCHAR(255) NOT NULL ,'
-                        . 'MODIFY COLUMN address2 VARCHAR(255) NULL ,'
-                        . 'MODIFY COLUMN zip VARCHAR(10) NULL ');
+                    . 'MODIFY COLUMN state VARCHAR(255) NOT NULL ,'
+                    . 'MODIFY COLUMN address2 VARCHAR(255) NULL ,'
+                    . 'MODIFY COLUMN zip VARCHAR(10) NULL ');
 
                 DB::statement('ALTER TABLE models '
-                        . 'MODIFY COLUMN modelno VARCHAR(255) NULL , '
-                        . 'MODIFY COLUMN manufacturer_id INT(11) NOT NULL , '
-                        . 'MODIFY COLUMN category_id INT(11) NOT NULL , '
-                        . 'MODIFY COLUMN depreciation_id INT(11) NOT NULL DEFAULT "0" , '
-                                . 'MODIFY COLUMN eol INT(11) NULL DEFAULT "0"');
+                    . 'MODIFY COLUMN modelno VARCHAR(255) NULL , '
+                    . 'MODIFY COLUMN manufacturer_id INT(11) NOT NULL , '
+                    . 'MODIFY COLUMN category_id INT(11) NOT NULL , '
+                    . 'MODIFY COLUMN depreciation_id INT(11) NOT NULL DEFAULT "0" , '
+                    . 'MODIFY COLUMN eol INT(11) NULL DEFAULT "0"');
 
                 DB::statement('ALTER TABLE users '
-                        . 'MODIFY COLUMN first_name VARCHAR(255) NOT NULL , '
-                        . 'MODIFY COLUMN last_name VARCHAR(255) NOT NULL , '
-                        . 'MODIFY COLUMN location_id INT(11) NOT NULL');
+                    . 'MODIFY COLUMN first_name VARCHAR(255) NOT NULL , '
+                    . 'MODIFY COLUMN last_name VARCHAR(255) NOT NULL , '
+                    . 'MODIFY COLUMN location_id INT(11) NOT NULL');
 	}
 
 	/**
