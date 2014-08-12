@@ -13,7 +13,7 @@ env:
 
 # execute any number of scripts before the test run, custom env's are available as variables
 before_script:
-  - if [[ "$DB" == "mysql" ]]; then mysql -e "create database IF NOT EXISTS snipeit_laravel;" -utravis; fi
+  - if [[ "$DB" == "mysql" ]]; then mysql -e "create database IF NOT EXISTS snipeitdev;" -utravis; fi
   - curl -s http://getcomposer.org/installer | php
   - cp app/config/production/database.example.php app/config/database.php
   - cp app/config/production/mail.example.php app/config/mail.php
