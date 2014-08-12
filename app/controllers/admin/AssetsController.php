@@ -168,15 +168,19 @@ class AssetsController extends AdminController
      */
     public function postCreate()
     {
-
-        // get the POST data
-        $new = Input::all();
-
         // create a new model instance
         $asset = new Asset();
+ 
+        //attempt to validate
+        $validator = Validator::make(Input::all(), $asset->validationRules());
 
+        if ($validator->fails())
+        {
+            // The given data did not pass validation            
+            return Redirect::back()->withInput()->withErrors($validator->messages());
+        }
         // attempt validation
-        if ($asset->validate($new)) {
+        else {
 
             if ( e(Input::get('status_id')) == '') {
                 $asset->status_id =  NULL;
@@ -193,7 +197,7 @@ class AssetsController extends AdminController
             if (e(Input::get('purchase_cost')) == '') {
                 $asset->purchase_cost =  NULL;
             } else {
-                $asset->purchase_cost        = e(Input::get('purchase_cost'));
+                $asset->purchase_cost = ParseFloat(e(Input::get('purchase_cost')));
             }
 
             if (e(Input::get('purchase_date')) == '') {
@@ -207,6 +211,18 @@ class AssetsController extends AdminController
             } else {
                 $asset->assigned_to        = e(Input::get('assigned_to'));
             }
+            
+            if (e(Input::get('supplier_id')) == '') {
+                $asset->supplier_id =  0;
+            } else {
+                $asset->supplier_id        = e(Input::get('supplier_id'));
+            }
+
+            if (e(Input::get('requestable')) == '') {
+                $asset->requestable =  0;
+            } else {
+                $asset->requestable        = e(Input::get('requestable'));
+            }
 
             // Save the asset data
             $asset->name            		= e(Input::get('name'));
@@ -215,24 +231,18 @@ class AssetsController extends AdminController
             $asset->order_number            = e(Input::get('order_number'));
             $asset->notes            		= e(Input::get('notes'));
             $asset->asset_tag            	= e(Input::get('asset_tag'));
-            $asset->supplier_id            	= e(Input::get('supplier_id'));
+    
             $asset->user_id          		= Sentry::getId();
             $asset->archived          			= '0';
             $asset->physical            		= '1';
             $asset->depreciate          		= '0';
-            $asset->requestable            	= e(Input::get('requestable'));
-
 
             // Was the asset created?
             if($asset->save()) {
                 // Redirect to the asset listing page
                 return Redirect::to("hardware")->with('success', Lang::get('admin/hardware/message.create.success'));
             }
-        } else {
-            // failure
-            $errors = $asset->errors();
-            return Redirect::back()->withInput()->withErrors($errors);
-        }
+        } 
 
         // Redirect to the asset create page with an error
         return Redirect::to('assets/create')->with('error', Lang::get('admin/hardware/message.create.error'));
@@ -277,29 +287,21 @@ class AssetsController extends AdminController
         if (is_null($asset = Asset::find($assetId))) {
             // Redirect to the asset management page with error
             return Redirect::to('hardware')->with('error', Lang::get('admin/hardware/message.does_not_exist'));
+        }       
+       
+        //attempt to validate
+        $validator = Validator::make(Input::all(), $asset->validationRules($assetId));
+
+        if ($validator->fails())
+        {
+            // The given data did not pass validation            
+            return Redirect::back()->withInput()->withErrors($validator->messages());
         }
+        // attempt validation
+        else {
 
 
-        // Declare the rules for the form validation
-        $rules = array(
-        'name'   => 'alpha_space|min:3',
-        'asset_tag'   => 'required|alpha_space|min:3',
-        'model_id'   => 'required',
-        'serial'   => 'alpha_space|min:3',
-        'warranty_months'   => 'integer',
-        'notes'   => 'alpha_space',
-        );
-
-        // Create a new validator instance from our validation rules
-        $validator = Validator::make(Input::all(), $rules);
-
-        // If validation fails, we'll exit the operation now.
-        if ($validator->fails()) {
-            // Ooops.. something went wrong
-            return Redirect::back()->withInput()->withErrors($validator);
-        }
-
-            if ( e(Input::get('status_id')) == '') {
+            if ( e(Input::get('status_id')) == '' ) {
                 $asset->status_id =  NULL;
             } else {
                 $asset->status_id = e(Input::get('status_id'));
@@ -314,7 +316,7 @@ class AssetsController extends AdminController
             if (e(Input::get('purchase_cost')) == '') {
                 $asset->purchase_cost =  NULL;
             } else {
-                $asset->purchase_cost        = e(Input::get('purchase_cost'));
+                $asset->purchase_cost = ParseFloat(e(Input::get('purchase_cost')));
             }
 
             if (e(Input::get('purchase_date')) == '') {
@@ -328,23 +330,32 @@ class AssetsController extends AdminController
             } else {
                 $asset->supplier_id        = e(Input::get('supplier_id'));
             }
-
+            
+             if (e(Input::get('requestable')) == '') {
+                $asset->requestable =  0;
+            } else {
+                $asset->requestable        = e(Input::get('requestable'));
+            }
 
             // Update the asset data
             $asset->name            		= e(Input::get('name'));
             $asset->serial            		= e(Input::get('serial'));
             $asset->model_id           		= e(Input::get('model_id'));
-            $asset->order_number            = e(Input::get('order_number'));
+            $asset->order_number                = e(Input::get('order_number'));
             $asset->asset_tag           	= e(Input::get('asset_tag'));
-            $asset->notes            		= e(Input::get('notes'));
-            $asset->requestable            	= e(Input::get('requestable'));
+            $asset->notes            		= e(Input::get('notes'));           
             $asset->physical            	= '1';
 
             // Was the asset updated?
             if($asset->save()) {
                 // Redirect to the new asset page
-                return Redirect::to("hardware")->with('success', Lang::get('admin/hardware/message.update.success'));
+                return Redirect::to("hardware/$assetId/view")->with('success', Lang::get('admin/hardware/message.update.success'));
             }
+            else
+            {
+                 return Redirect::to('hardware')->with('error', Lang::get('admin/hardware/message.does_not_exist'));
+             }
+        }      
 
 
         // Redirect to the asset management page with error
@@ -595,7 +606,7 @@ class AssetsController extends AdminController
     public function getClone($assetId = null)
     {
         // Check if the asset exists
-        if (is_null($asset = Asset::find($assetId))) {
+        if (is_null($asset_to_clone = Asset::find($assetId))) {
             // Redirect to the asset management page
             return Redirect::to('hardware')->with('error', Lang::get('admin/hardware/message.does_not_exist'));
         }
@@ -608,9 +619,13 @@ class AssetsController extends AdminController
 
         // get depreciation list
         $depreciation_list = array('' => '') + Depreciation::lists('name', 'id');
+        $supplier_list = array('' => '') + Supplier::orderBy('name', 'asc')->lists('name', 'id');
+        $assigned_to = array('' => 'Select a User') + DB::table('users')->select(DB::raw('concat (first_name," ",last_name) as full_name, id'))->whereNull('deleted_at')->lists('full_name', 'id');
 
-        return View::make('backend/hardware/clone', compact('asset'))->with('model_list',$model_list)->with('depreciation_list',$depreciation_list)->with('statuslabel_list',$statuslabel_list);
+        $asset = clone $asset_to_clone;
+        $asset->id = null;
+        $asset->asset_tag = '';
+        return View::make('backend/hardware/edit')->with('supplier_list',$supplier_list)->with('model_list',$model_list)->with('statuslabel_list',$statuslabel_list)->with('assigned_to',$assigned_to)->with('asset',$asset);
+
     }
-
-
 }

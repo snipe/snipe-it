@@ -63,7 +63,14 @@
                     </a>
                     @elseif (($licensedto->assigned_to) && ($licensedto->deleted_at != NULL))
                         <del>{{ $licensedto->user->fullName() }}</del>
-                    @endif
+                    @elseif ($licensedto->asset_id)
+                                        @if ($licensedto->asset->assigned_to != 0)
+                                            <a href="{{ route('view/user', $licensedto->asset->assigned_to) }}">
+                                                {{ $licensedto->asset->assigneduser->fullName() }}
+                                            </a>
+                                        @endif
+                                    @endif
+                    
 
 
                     </td>

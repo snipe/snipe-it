@@ -3,6 +3,7 @@
 return array(
 
     'asset_tag'   	=> 'Asset Tag',
+    'asset_model'       => 'Model',
     'book_value'  	=> 'Value',
     'change' 		=> 'In/Out',
     'checkoutto' 	=> 'Checked Out',

@@ -6,6 +6,7 @@ return array(
     'checkout_history'  		=> 'Checkout History',
     'checkout'  				=> 'Checkout License Seat',
     'edit'  					=> 'Edit License',
+    'clone'  					=> 'Clone License',
     'history_for'  				=> 'History for ',
     'in_out'  					=> 'In/Out',
     'info'  					=> 'License Info',

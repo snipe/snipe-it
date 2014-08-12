@@ -118,27 +118,26 @@ class DepreciationsController extends AdminController
         }
 
 
+//attempt to validate
+        $validator = Validator::make(Input::all(), $depreciation->validationRules($depreciationId));
 
-        // get the POST data
-        $new = Input::all();
-
+        if ($validator->fails())
+        {
+            // The given data did not pass validation            
+            return Redirect::back()->withInput()->withErrors($validator->messages());
+        }
         // attempt validation
-        if ($depreciation->validate($new)) {
-
+        else {
             // Depreciation data
-            $depreciation->name            = e(Input::get('name'));
+            $depreciation->name      = e(Input::get('name'));
             $depreciation->months    = e(Input::get('months'));
 
             // Was the asset created?
             if($depreciation->save()) {
                 // Redirect to the depreciation page
-                return Redirect::to("admin/settings/depreciations/$depreciationId/edit")->with('success', Lang::get('admin/depreciations/message.update.success'));
+                return Redirect::to("admin/settings/depreciations/")->with('success', Lang::get('admin/depreciations/message.update.success'));
             }
-        } else {
-            // failure
-            $errors = $depreciation->errors();
-            return Redirect::back()->withInput()->withErrors($errors);
-        }
+        } 
 
         // Redirect to the depreciation management page
         return Redirect::to("admin/settings/depreciations/$depreciationId/edit")->with('error', Lang::get('admin/depreciations/message.update.error'));

@@ -98,3 +98,4 @@ App::error(function (\Illuminate\Session\TokenMismatchException $exception) {
 require app_path().'/filters.php';
 require app_path().'/macros.php';
 require app_path().'/validators.php';
+require app_path().'/helpers.php';

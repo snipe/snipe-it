@@ -10,12 +10,31 @@
 {{-- Page content --}}
 @section('content')
 
-<div class="row header">
+<!--<div class="row header">
     <div class="col-md-12">
-        <a href="{{ route('update/model', $model->id) }}" class="btn-flat white pull-right">
+        <a href="{{ route('update/model', $model->id) }}" class="btn btn-warning pull-right">
         @lang('admin/models/table.update')</a>
         <h3 class="name">@lang('general.history_for')
         {{{ $model->name }}} </h3>
+    </div>
+</div>-->
+<div class="row header">
+    <div class="col-md-12">
+        <div class="btn-group pull-right">
+            <button class="btn gray">@lang('button.actions')</button>
+            <button class="btn glow dropdown-toggle" data-toggle="dropdown">
+                <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu">    
+                    <li><a href="{{ route('update/model', $model->id) }}">@lang('admin/models/table.edit')</a></li>  
+                    <li><a href="{{ route('clone/model', $model->id) }}">@lang('admin/models/table.clone')</a></li>    
+            </ul>
+        </div>
+        <h3>
+        
+            @lang('admin/models/table.view')        
+        
+        </h3>
     </div>
 </div>
 

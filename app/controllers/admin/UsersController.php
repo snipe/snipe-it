@@ -32,9 +32,10 @@ class UsersController extends AdminController
     protected $validationRules = array(
         'first_name'       => 'required|alpha_space|min:2',
         'last_name'        => 'required|alpha_space|min:2',
+	'location_id'      => 'required',
         'email'            => 'required|email|unique:users,email',
-        'password'         => 'required|between:10,32',
-        'password_confirm' => 'required|between:10,32|same:password',
+        'password'         => 'required|between:6,12',
+        'password_confirm' => 'required|between:6,12|same:password',
     );
 
     /**
@@ -44,14 +45,29 @@ class UsersController extends AdminController
      */
     public function getIndex()
     {
-        // Grab all the users
+        // Grab all the users - depending on the scope to include
         $users = Sentry::getUserProvider()->createModel();
-
+       
         // Do we want to include the deleted users?
+	// the with and onlyTrashed calls currently do not work - returns an 
+	// inconsistent array which cannot be displayed by the blade output
+
         if (Input::get('withTrashed')) {
+            
+            $users = $users->withTrashed();
+            //$users = Sentry::getUserProvider()->createModel()->paginate();
 
         } elseif (Input::get('onlyTrashed')) {
-            $users = $users->onlyTrashed();
+
+	// this is a tempoary 'fix' to display NO deleted users.
+            //$users = Sentry::getUserProvider()->createModel()->whereNotNull('deleted_at')->paginate();
+            //$users = Sentry::findAllUsers();
+            //$users = users::deletedUsers()->paginate();
+            $users = Sentry::getUserProvider()->createModel()->onlyTrashed();
+            //$users = users::whereNotNull('deleted_at')->paginate();
+            //$users = $users->onlyTrashed();
+            //$users = Users::onlyTrashed()->get();
+            //$users = Sentry::getUserProvider()->createModel();
         }
 
 
@@ -61,7 +77,6 @@ class UsersController extends AdminController
                 'withTrashed' => Input::get('withTrashed'),
                 'onlyTrashed' => Input::get('onlyTrashed'),
             ));
-
 
         // Show the page
         return View::make('backend/users/index', compact('users'));
@@ -158,7 +173,8 @@ class UsersController extends AdminController
                 $success = Lang::get('admin/users/message.success.create');
 
                 // Redirect to the new user page
-                return Redirect::route('update/user', $user->id)->with('success', $success);
+                //return Redirect::route('update/user', $user->id)->with('success', $success);
+                return Redirect::route('users')->with('success', $success);
             }
 
 
@@ -333,7 +349,7 @@ class UsersController extends AdminController
                 $success = Lang::get('admin/users/message.success.update');
 
                 // Redirect to the user page
-                return Redirect::route('update/user', $id)->with('success', $success);
+                return Redirect::route('view/user', $id)->with('success', $success);
             }
 
             // Prepare the error message
@@ -523,6 +539,63 @@ class UsersController extends AdminController
         } catch (UserNotFoundException $e) {
             // Prepare the error message
             $error = Lang::get('admin/users/message.user_not_found', compact('id' ));
+
+            // Redirect to the user management page
+            return Redirect::route('users')->with('error', $error);
+        }
+    }
+    
+    public function getClone($id = null)
+    {
+        // We need to reverse the UI specific logic for our
+        // permissions here before we update the user.
+        $permissions = Input::get('permissions', array());
+        $this->decodePermissions($permissions);
+        app('request')->request->set('permissions', $permissions);
+       
+
+        try {
+            // Get the user information
+            $user_to_clone = Sentry::getUserProvider()->findById($id);
+            $user = clone $user_to_clone;
+            $user->first_name = '';
+            $user->last_name = '';
+            $user->email = substr($user->email, ($pos = strpos($user->email, '@')) !== false ? $pos  : 0);;
+            $user->id = null;
+            
+            // Get this user groups
+            $userGroups = $user_to_clone->groups()->lists('group_id', 'name');
+
+            // Get this user permissions
+            $userPermissions = array_merge(Input::old('permissions', array('superuser' => -1)), $user_to_clone->getPermissions());
+            $this->encodePermissions($userPermissions);
+
+            // Get a list of all the available groups
+            $groups = Sentry::getGroupProvider()->findAll();
+
+            // Get all the available permissions
+            $permissions = Config::get('permissions');
+            $this->encodeAllPermissions($permissions);
+
+            $location_list = array('' => '') + Location::lists('name', 'id');
+            $manager_list = array('' => 'Select a User') + DB::table('users')
+            ->select(DB::raw('concat(first_name," ",last_name) as full_name, id'))
+            ->whereNull('deleted_at')
+            ->where('id','!=',$id)
+            ->orderBy('last_name', 'asc')
+            ->orderBy('first_name', 'asc')
+            ->lists('full_name', 'id');
+        
+                // Show the page
+            return View::make('backend/users/edit', compact('groups', 'userGroups', 'permissions', 'userPermissions'))
+                ->with('location_list',$location_list)
+                ->with('manager_list',$manager_list)
+                ->with('user',$user)
+                ->with('clone_user',$user_to_clone);
+        
+        } catch (UserNotFoundException $e) {
+            // Prepare the error message
+            $error = Lang::get('admin/users/message.user_not_found', compact('id'));
 
             // Redirect to the user management page
             return Redirect::route('users')->with('error', $error);

@@ -25,4 +25,9 @@ class Elegant extends Eloquent
     {
         return $this->errors;
     }
+    
+    public function validationRules($id = '0')
+    {
+        return str_replace("{id}", $id, $this->rules);
+    } 
 }

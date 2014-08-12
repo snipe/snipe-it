@@ -14,10 +14,17 @@
 @section('content')
 <div class="row header">
     <div class="col-md-12">
-            <a href="{{ URL::previous() }}" class="btn-flat gray pull-right"><i class="icon-circle-arrow-left icon-white"></i>  @lang('general.back')</a>
+            <!--<a href="{{ URL::previous() }}" class="btn-flat gray pull-right"><i class="icon-circle-arrow-left icon-white"></i>  @lang('general.back')</a>-->
+        @if(isset($clone_model))
+            <a href="{{{ URL::route('view/model', $clone_model->id) }}}" class="btn-flat gray pull-right"><i class="icon-circle-arrow-left icon-white"></i>  @lang('general.back')</a>
+        @else
+            <a href="{{{ URL::route('view/model', $model->id) }}}" class="btn-flat gray pull-right"><i class="icon-circle-arrow-left icon-white"></i>  @lang('general.back')</a>
+        @endif
         <h3>
         @if ($model->id)
             @lang('admin/models/table.update')
+        @elseif(isset($clone_model))
+            @lang('admin/models/table.clone')
         @else
             @lang('admin/models/table.create')
         @endif
@@ -86,12 +93,14 @@
             </div>
 
             <!-- EOL -->
+            
             <div class="form-group {{ $errors->has('eol') ? ' has-error' : '' }}">
                 <label for="eol" class="col-md-2 control-label">@lang('general.eol')</label>
                 <div class="col-md-2">
                     <div class="input-group">
-                    <input class="col-md-1 form-control" type="text" name="eol" id="eol" value="{{{ Input::old('eol', $model->eol) }}}" />   <span class="input-group-addon">
+                    <input class="col-md-1 form-control" type="text" name="eol" id="eol" value="{{{ Input::old('eol', isset($model->eol)) ? $model->eol : 0  }}}" />   <span class="input-group-addon">
                     @lang('general.months')
+
                     </span>
                     {{ $errors->first('eol', '<span class="alert-msg"><i class="icon-remove-sign"></i> :message</span>') }}
                     </div>
@@ -104,7 +113,11 @@
             <div class="form-group">
             <label class="col-md-2 control-label"></label>
                 <div class="col-md-7">
-                    <a class="btn btn-link" href="{{ URL::previous() }}">@lang('general.cancel')</a>
+                    @if(isset($clone_model))
+                        <a class="btn btn-link" href="{{ URL::route('view/model', $clone_model->id) }}">@lang('general.cancel')</a>
+                    @else
+                        <a class="btn btn-link" href="{{ URL::route('view/model', $model->id) }}">@lang('general.cancel')</a>
+                    @endif                    
                     <button type="submit" class="btn btn-success"><i class="icon-ok icon-white"></i> @lang('general.save')</button>
                 </div>
             </div>

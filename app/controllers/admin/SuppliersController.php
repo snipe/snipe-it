@@ -122,12 +122,16 @@ class SuppliersController extends AdminController
         }
 
 
-        // get the POST data
-        $new = Input::all();
+          //attempt to validate
+        $validator = Validator::make(Input::all(), $supplier->validationRules($supplierId));
 
-
+        if ($validator->fails())
+        {
+            // The given data did not pass validation           
+            return Redirect::back()->withInput()->withErrors($validator->messages());
+        }
         // attempt validation
-        if ($supplier->validate($new)) {
+        else {
 
             // Save the  data
             $supplier->name            		= e(Input::get('name'));
@@ -150,11 +154,7 @@ class SuppliersController extends AdminController
                 // Redirect to the new supplier page
                 return Redirect::to("admin/settings/suppliers")->with('success', Lang::get('admin/suppliers/message.update.success'));
             }
-        } else {
-            // failure
-            $errors = $supplier->errors();
-            return Redirect::back()->withInput()->withErrors($errors);
-        }
+        } 
 
         // Redirect to the supplier management page
         return Redirect::to("admin/settings/suppliers/$supplierId/edit")->with('error', Lang::get('admin/suppliers/message.update.error'));

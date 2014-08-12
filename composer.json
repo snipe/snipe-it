@@ -11,7 +11,7 @@
 	"require": {
 		"laravel/framework": "4.1.*",
 		"cartalyst/sentry": "2.0.*",
-		"barryvdh/laravel-debugbar": "dev-master",
+		"barryvdh/laravel-debugbar": "1.x",
 		"chumper/datatable": "dev-master",
 		"bacon/bacon-qr-code": "dev-master"
 	},
@@ -46,6 +46,7 @@
 	"config": {
 		"preferred-install": "dist",
 		"bin-dir": "bin"
+                
 	},
 	"minimum-stability": "dev"
 }

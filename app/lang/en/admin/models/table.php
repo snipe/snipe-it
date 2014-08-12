@@ -12,4 +12,6 @@ return array(
     'update'				=> 'Update Asset Model',
     'view'					=> 'View Asset Model',
     'update'				=> 'Update Model',
+    'clone'				=> 'Clone Model',
+    'edit'				=> 'Edit Model',
 );

@@ -16,7 +16,7 @@ class User extends SentryUserModel
      * the user first and last name.
      *
      * @return string
-     */
+     */  
     public function fullName()
     {
         return "{$this->first_name} {$this->last_name}";

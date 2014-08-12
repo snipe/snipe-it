@@ -21,10 +21,12 @@
         </div>
     <h3>
         @if ($user->id)
-		@lang('admin/users/table.updateuser')
-		{{ $user->fullName() }}
-	@else
-		@lang('admin/users/table.createuser')
+            @lang('admin/users/table.updateuser')
+            {{ $user->fullName() }}
+	@elseif(isset($clone_user))
+            @lang('admin/users/table.cloneuser')
+        @else
+            @lang('admin/users/table.createuser')
 	@endif
     </h3>
 </div>
@@ -107,7 +109,8 @@
 
 			<!-- Location -->
             <div class="form-group {{ $errors->has('location_id') ? 'has-error' : '' }}">
-                <label class="col-md-3 control-label" for="location_id">@lang('admin/users/table.location')</label>
+                <label class="col-md-3 control-label" for="location_id">@lang('admin/users/table.location') 
+                    <i class='icon-asterisk'></i></label>
                 <div class="col-md-7">
                     {{ Form::select('location_id', $location_list , Input::old('location_id', $user->location_id), array('class'=>'select2', 'style'=>'width:250px')) }}
                     {{ $errors->first('location_id', '<span class="alert-msg">:message</span>') }}
@@ -161,7 +164,7 @@
                         <option value="0"{{ ( ! $user->isActivated() ? ' selected="selected"' : '') }}>@lang('general.no')</option>
                     @else
                     	<option value="1"{{ (Input::old('activated') == 1 ? ' selected="selected"' : '') }}>@lang('general.yes')</option>
-                        <option value="0"{{ (Input::old('activated') == 0 ? ' selected="selected"' : '') }}>@lang('general.no')</option>
+                        <option value="0">@lang('general.no')</option>
                     @endif
 
                     </select>
@@ -179,6 +182,7 @@
                    <div class="controls">
 
                     <select name="groups[]" id="groups[]" multiple="multiple" class="form-control">
+                        
                         @foreach ($groups as $group)
                         <option value="{{ $group->id }}"
                         {{ (in_array($group->id, $userGroups) ? ' selected="selected"' : '') }}>
