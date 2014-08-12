@@ -544,5 +544,62 @@ class UsersController extends AdminController
             return Redirect::route('users')->with('error', $error);
         }
     }
+    
+    public function getClone($id = null)
+    {
+        // We need to reverse the UI specific logic for our
+        // permissions here before we update the user.
+        $permissions = Input::get('permissions', array());
+        $this->decodePermissions($permissions);
+        app('request')->request->set('permissions', $permissions);
+       
+
+        try {
+            // Get the user information
+            $user_to_clone = Sentry::getUserProvider()->findById($id);
+            $user = clone $user_to_clone;
+            $user->first_name = '';
+            $user->last_name = '';
+            $user->email = substr($user->email, ($pos = strpos($user->email, '@')) !== false ? $pos  : 0);;
+            $user->id = null;
+            
+            // Get this user groups
+            $userGroups = $user_to_clone->groups()->lists('group_id', 'name');
+
+            // Get this user permissions
+            $userPermissions = array_merge(Input::old('permissions', array('superuser' => -1)), $user_to_clone->getPermissions());
+            $this->encodePermissions($userPermissions);
+
+            // Get a list of all the available groups
+            $groups = Sentry::getGroupProvider()->findAll();
+
+            // Get all the available permissions
+            $permissions = Config::get('permissions');
+            $this->encodeAllPermissions($permissions);
+
+            $location_list = array('' => '') + Location::lists('name', 'id');
+            $manager_list = array('' => 'Select a User') + DB::table('users')
+            ->select(DB::raw('concat(first_name," ",last_name) as full_name, id'))
+            ->whereNull('deleted_at')
+            ->where('id','!=',$id)
+            ->orderBy('last_name', 'asc')
+            ->orderBy('first_name', 'asc')
+            ->lists('full_name', 'id');
+        
+                // Show the page
+            return View::make('backend/users/edit', compact('groups', 'userGroups', 'permissions', 'userPermissions'))
+                ->with('location_list',$location_list)
+                ->with('manager_list',$manager_list)
+                ->with('user',$user)
+                ->with('clone_user',$user_to_clone);
+        
+        } catch (UserNotFoundException $e) {
+            // Prepare the error message
+            $error = Lang::get('admin/users/message.user_not_found', compact('id'));
+
+            // Redirect to the user management page
+            return Redirect::route('users')->with('error', $error);
+        }
+    }
 
 }

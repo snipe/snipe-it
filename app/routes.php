@@ -35,6 +35,8 @@ Route::group(array('prefix' => 'hardware'), function () {
         Route::post('create', 'Controllers\Admin\ModelsController@postCreate');
         Route::get('{modelId}/edit', array('as' => 'update/model', 'uses' => 'Controllers\Admin\ModelsController@getEdit'));
         Route::post('{modelId}/edit', 'Controllers\Admin\ModelsController@postEdit');
+        Route::get('{modelId}/clone', array('as' => 'clone/model', 'uses' => 'Controllers\Admin\ModelsController@getClone'));
+        Route::post('{modelId}/clone', 'Controllers\Admin\ModelsController@postCreate');
         Route::get('{modelId}/delete', array('as' => 'delete/model', 'uses' => 'Controllers\Admin\ModelsController@getDelete'));
         Route::get('{modelId}/view', array('as' => 'view/model', 'uses' => 'Controllers\Admin\ModelsController@getView'));
     });
@@ -156,6 +158,8 @@ Route::group(array('prefix' => 'admin'), function () {
         Route::post('create', 'Controllers\Admin\UsersController@postCreate');
         Route::get('{userId}/edit', array('as' => 'update/user', 'uses' => 'Controllers\Admin\UsersController@getEdit'));
         Route::post('{userId}/edit', 'Controllers\Admin\UsersController@postEdit');
+        Route::get('{userId}/clone', array('as' => 'clone/user', 'uses' => 'Controllers\Admin\UsersController@getClone'));
+        Route::post('{userId}/clone', 'Controllers\Admin\UsersController@postCreate');
         Route::get('{userId}/delete', array('as' => 'delete/user', 'uses' => 'Controllers\Admin\UsersController@getDelete'));
         Route::get('{userId}/restore', array('as' => 'restore/user', 'uses' => 'Controllers\Admin\UsersController@getRestore'));
         Route::get('{userId}/view', array('as' => 'view/user', 'uses' => 'Controllers\Admin\UsersController@getView'));

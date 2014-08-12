@@ -9,13 +9,6 @@
 {{-- Page content --}}
 @section('content')
 
-<!--<div class="row header">
-    <div class="col-md-12">
-        <a href="{{ route('update/license', $license->id) }}" class="btn btn-warning pull-right"> @lang('admin/licenses/form.update')</a>
-            <h3 class="name">@lang('general.history_for') {{ $license->name }}</h3>
-    </div>
-</div>-->
-
 <div class="row header">
     <div class="col-md-12">
         <div class="btn-group pull-right">

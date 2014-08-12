@@ -12,9 +12,35 @@
 
 {{-- Page content --}}
 @section('content')
-<div class="row header">
+<!--<div class="row header">
     <div class="col-md-12">
             <a href="{{ URL::previous() }}" class="btn-flat gray pull-right"><i class="icon-circle-arrow-left icon-white"></i>  @lang('general.back')</a>
+        <h3>
+        @if ($model->id)
+            @lang('admin/models/table.update')
+        @else
+            @lang('admin/models/table.create')
+        @endif
+        </h3>
+    </div>
+</div>-->
+
+<div class="row header">
+    <div class="col-md-12">
+        <div class="btn-group pull-right">
+            <button class="btn gray">@lang('button.actions')</button>
+            <button class="btn glow dropdown-toggle" data-toggle="dropdown">
+                <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu">    
+                
+                @if ($model->id)
+                    
+                    <li><a href="{{ route('clone/model', $model->id) }}">@lang('admin/models/table.clone')</a></li>                
+                @endif
+                    <li><a href="{{ URL::previous() }}">@lang('general.cancel')</a></li>
+            </ul>
+        </div>
         <h3>
         @if ($model->id)
             @lang('admin/models/table.update')

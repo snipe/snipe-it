@@ -235,6 +235,30 @@ class ModelsController extends AdminController
 
 
     }
+    
+        public function getClone($modelId = null)
+    {
+        // Check if the model exists
+        if (is_null($model_to_clone = Model::find($modelId))) {
+            // Redirect to the model management page
+            return Redirect::to('assets/models')->with('error', Lang::get('admin/models/message.does_not_exist'));
+        }
+        
+        $model = clone $model_to_clone;
+        $model->id = null;
+        
+        // Show the page
+        $depreciation_list = array('' => 'Do Not Depreciate') + Depreciation::lists('name', 'id');
+        $manufacturer_list = array('' => 'Select One') + Manufacturer::lists('name', 'id');
+        $category_list = array('' => '') + DB::table('categories')->whereNull('deleted_at')->lists('name', 'id');
+        $view = View::make('backend/models/edit');
+        $view->with('category_list',$category_list);
+        $view->with('depreciation_list',$depreciation_list);
+        $view->with('manufacturer_list',$manufacturer_list);
+        $view->with('model',$model);
+        return $view;
+        
+    }
 
 
 }

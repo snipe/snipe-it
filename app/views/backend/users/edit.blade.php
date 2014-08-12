@@ -21,10 +21,12 @@
         </div>
     <h3>
         @if ($user->id)
-		@lang('admin/users/table.updateuser')
-		{{ $user->fullName() }}
-	@else
-		@lang('admin/users/table.createuser')
+            @lang('admin/users/table.updateuser')
+            {{ $user->fullName() }}
+	@elseif(isset($clone_user))
+            @lang('admin/users/table.cloneuser')
+        @else
+            @lang('admin/users/table.createuser')
 	@endif
     </h3>
 </div>

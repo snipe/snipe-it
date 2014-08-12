@@ -25,5 +25,6 @@ return array(
     'phone'  				=> 'Phone',
     'title' 				=> 'Title',
     'updateuser' 			=> 'Update User',
+    'cloneuser'                         => 'Clone User',
     'viewusers' 			=> 'View Users',
 );
