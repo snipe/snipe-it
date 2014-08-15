@@ -28,23 +28,22 @@ View User {{{ $user->fullName() }}} ::
                 @else
                         <!--<a href="{{ route('update/user', $user->id) }}" class="btn btn-warning pull-right edit"><i class="icon-pencil"></i> @lang('button.edit') This User</a>-->
                     <div class="row header">
-    
+
                         <div class="btn-group pull-right">
                             <button class="btn gray">@lang('button.actions')</button>
                             <!--  Height being thrown off by sub-container  -->
                             <button class="btn glow dropdown-toggle" style="height: 27.5" data-toggle="dropdown">
                                 <span class="caret"></span>
                             </button>
-                            <ul class="dropdown-menu">    
+                            <ul class="dropdown-menu">
                                 <li><a href="{{ route('update/user', $user->id) }}">@lang('admin/users/general.edit')</a></li>
                                 <li><a href="{{ route('clone/user', $user->id) }}">@lang('admin/users/general.clone')</a></li>
                             </ul>
                         </div>
-   
+
                     </div>
                 @endif
             </div>
-            <div>All the users!</div>
             <div class="row profile">
 
                     <!-- bio, new note & orders column -->
