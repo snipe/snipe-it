@@ -40,18 +40,18 @@
 
                 <tr>
 
-                    <td><a href="{{ route('view/license', $license->id) }}">{{ $license->name }}</a>
+                    <td><a href="{{ route('view/license', $license->id) }}">{{{ $license->name }}}</a>
                      (Seat {{ $count }})
                      </td>
-                    <td><a href="{{ route('view/license', $license->id) }}">{{ Str::limit($license->serial, 40); }}</a>
+                    <td><a href="{{ route('view/license', $license->id) }}">{{ Str::limit(e($license->serial, 40)); }}</a>
                     </td>
                     <td>
                      @if ($licensedto->asset_id)
                         <a href="{{ route('view/hardware', $licensedto->asset_id) }}">
-                    	{{ $licensedto->asset->asset_tag }}
+                    	{{{ $licensedto->asset->asset_tag }}}
 
                     	@if (Setting::getSettings()->display_asset_name)
-							({{ $licensedto->asset->name }})
+							({{{ $licensedto->asset->name }}})
                     	@endif
                     	</a>
                     @endif
@@ -59,18 +59,18 @@
                     <td>
                     @if (($licensedto->assigned_to) && ($licensedto->deleted_at == NULL))
                         <a href="{{ route('view/user', $licensedto->assigned_to) }}">
-                    {{ $licensedto->user->fullName() }}
+                    {{{ $licensedto->user->fullName() }}}
                     </a>
                     @elseif (($licensedto->assigned_to) && ($licensedto->deleted_at != NULL))
-                        <del>{{ $licensedto->user->fullName() }}</del>
+                        <del>{{{ $licensedto->user->fullName() }}}</del>
                     @elseif ($licensedto->asset_id)
                                         @if ($licensedto->asset->assigned_to != 0)
                                             <a href="{{ route('view/user', $licensedto->asset->assigned_to) }}">
-                                                {{ $licensedto->asset->assigneduser->fullName() }}
+                                                {{{ $licensedto->asset->assigneduser->fullName() }}}
                                             </a>
                                         @endif
                                     @endif
-                    
+
 
 
                     </td>

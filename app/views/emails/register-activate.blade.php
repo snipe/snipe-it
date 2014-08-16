@@ -1,7 +1,7 @@
 @extends('emails/layouts/default')
 
 @section('content')
-<p>Hello {{ $user->first_name }},</p>
+<p>Hello {{{ $user->first_name }}},</p>
 
 <p>Welcome to {{{ Setting::getSettings()->site_name }}}! Please click on the following link to confirm your {{{ Setting::getSettings()->site_name }}} account:</p>
 

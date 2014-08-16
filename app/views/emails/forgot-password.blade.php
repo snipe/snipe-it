@@ -1,7 +1,7 @@
 @extends('emails/layouts/default')
 
 @section('content')
-<p>Hello {{ $user->first_name }},</p>
+<p>Hello {{{ $user->first_name }}},</p>
 
 <p>Please click on the following link to update your {{{ Setting::getSettings()->site_name }}} password:</p>
 
