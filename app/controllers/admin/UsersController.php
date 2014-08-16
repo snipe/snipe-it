@@ -34,8 +34,8 @@ class UsersController extends AdminController
         'last_name'        => 'required|alpha_space|min:2',
 	'location_id'      => 'required',
         'email'            => 'required|email|unique:users,email',
-        'password'         => 'required|between:6,12',
-        'password_confirm' => 'required|between:6,12|same:password',
+        'password'         => 'required|between:6,50',
+        'password_confirm' => 'required|between:6,50|same:password',
     );
 
     /**
@@ -47,13 +47,13 @@ class UsersController extends AdminController
     {
         // Grab all the users - depending on the scope to include
         $users = Sentry::getUserProvider()->createModel();
-       
+
         // Do we want to include the deleted users?
-	// the with and onlyTrashed calls currently do not work - returns an 
+	// the with and onlyTrashed calls currently do not work - returns an
 	// inconsistent array which cannot be displayed by the blade output
 
         if (Input::get('withTrashed')) {
-            
+
             $users = $users->withTrashed();
             //$users = Sentry::getUserProvider()->createModel()->paginate();
 
@@ -544,7 +544,7 @@ class UsersController extends AdminController
             return Redirect::route('users')->with('error', $error);
         }
     }
-    
+
     public function getClone($id = null)
     {
         // We need to reverse the UI specific logic for our
@@ -552,7 +552,7 @@ class UsersController extends AdminController
         $permissions = Input::get('permissions', array());
         $this->decodePermissions($permissions);
         app('request')->request->set('permissions', $permissions);
-       
+
 
         try {
             // Get the user information
@@ -562,7 +562,7 @@ class UsersController extends AdminController
             $user->last_name = '';
             $user->email = substr($user->email, ($pos = strpos($user->email, '@')) !== false ? $pos  : 0);;
             $user->id = null;
-            
+
             // Get this user groups
             $userGroups = $user_to_clone->groups()->lists('group_id', 'name');
 
@@ -585,14 +585,14 @@ class UsersController extends AdminController
             ->orderBy('last_name', 'asc')
             ->orderBy('first_name', 'asc')
             ->lists('full_name', 'id');
-        
+
                 // Show the page
             return View::make('backend/users/edit', compact('groups', 'userGroups', 'permissions', 'userPermissions'))
                 ->with('location_list',$location_list)
                 ->with('manager_list',$manager_list)
                 ->with('user',$user)
                 ->with('clone_user',$user_to_clone);
-        
+
         } catch (UserNotFoundException $e) {
             // Prepare the error message
             $error = Lang::get('admin/users/message.user_not_found', compact('id'));
