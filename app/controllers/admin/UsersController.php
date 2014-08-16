@@ -32,7 +32,7 @@ class UsersController extends AdminController
     protected $validationRules = array(
         'first_name'       => 'required|alpha_space|min:2',
         'last_name'        => 'required|alpha_space|min:2',
-	'location_id'      => 'required',
+		'location_id'      => 'required',
         'email'            => 'required|email|unique:users,email',
         'password'         => 'required|between:6,50',
         'password_confirm' => 'required|between:6,50|same:password',
