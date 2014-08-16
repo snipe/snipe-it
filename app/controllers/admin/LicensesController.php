@@ -347,7 +347,7 @@ class LicensesController extends AdminController
 				} else {
 					$full_name = ' (Unassigned)';
 				}
-				$asset_element[$asset_array[$x]['id']] = $asset_array[$x]['asset_tag'].' - '.$asset_array[$x]['name'].$full_name.' - '.$asset_array[$x]['id'];
+				$asset_element[$asset_array[$x]['id']] = $asset_array[$x]['asset_tag'].' - '.$asset_array[$x]['name'].$full_name;
 
 			}
 
