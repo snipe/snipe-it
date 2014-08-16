@@ -34,8 +34,8 @@ class UsersController extends AdminController
         'last_name'        => 'required|alpha_space|min:2',
 		'location_id'      => 'required',
         'email'            => 'required|email|unique:users,email',
-        'password'         => 'required|between:6,50',
-        'password_confirm' => 'required|between:6,50|same:password',
+        'password'         => 'required|min:6',
+        'password_confirm' => 'required|min:6|same:password',
     );
 
     /**
