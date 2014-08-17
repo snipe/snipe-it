@@ -336,12 +336,12 @@
         <div class="col-md-9">
               <div class="container">
 
-                  <div class="muted credit" style="position:absolute;margin-top:1px;left:80px;margin-right:100px;"><a target="_blank" href="http://snipeitapp.com">Snipe IT</a> is a free open source
-                      project by <a target="_blank" href="http://twitter.com/snipeyhead">@snipeyhead</a>.</div>
-                  <div class="muted credit" style="position:absolute;margin-top:1px;right:80px;margin-left:100px;"><a target="_blank" href="https://github.com/snipe/snipe-it">Fork it</a> | <a target="_blank" href="http://docs.snipeitapp.com/">Documentation</a> | 
-                      <a target="_blank" href="https://github.com/snipe/snipe-it/issues?state=open">Report a Bug</a> &nbsp; &nbsp; (alpha-0.4.3)</p>
+                  <div class="muted credit" style="position:absolute;margin-top:1px;left:40px;"><a target="_blank" href="http://snipeitapp.com">Snipe IT</a> is a free open source
+                      project by <a target="_blank" href="http://twitter.com/snipeyhead">@snipeyhead</a>. <br>
+                  <a target="_blank" href="https://github.com/snipe/snipe-it">Fork it</a> | <a target="_blank" href="http://docs.snipeitapp.com/">Documentation</a> | 
+                      <a target="_blank" href="https://github.com/snipe/snipe-it/issues?state=open">Report a Bug</a>
                   </div>
-                  </div>
+              </div>
         </div>
         </div>
     </footer>

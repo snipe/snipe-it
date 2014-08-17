@@ -52,9 +52,9 @@ class SettingsController extends AdminController
     public function postEdit()
     {
 
-        // Check if the asset exists
+        // Check if the applications settings exists
         if (is_null($setting = Setting::find(1))) {
-            // Redirect to the asset management page with error
+            // Redirect to the settings page with error
             return Redirect::to('admin')->with('error', Lang::get('admin/settings/message.update.error'));
         }
 
@@ -63,7 +63,7 @@ class SettingsController extends AdminController
 
         // Declare the rules for the form validation
         $rules = array(
-        "site_name" 	=> 'required|min:3',
+        "site_name"             => 'required|min:3',
         "per_page"   		=> 'required|min:1|numeric',
         "qr_text"		=> 'min:1|max:31'
         );
@@ -78,15 +78,16 @@ class SettingsController extends AdminController
             return Redirect::back()->withInput()->withErrors($validator);
         }
 
-        // Update the asset data
+        // Update the application settings
             $setting->id = '1';
             $setting->site_name = e(Input::get('site_name'));
             $setting->display_asset_name = e(Input::get('display_asset_name', '0'));
             $setting->per_page = e(Input::get('per_page'));
             $setting->qr_code = e(Input::get('qr_code', '0'));
             $setting->qr_text = e(Input::get('qr_text'));
+            $setting->showsysinfo = e(Input::get('showsysinfo', '0'));
 
-            // Was the asset updated?
+            // Were the application settings updated?
             if($setting->save()) {
                 // Redirect to the settings page
                 return Redirect::to("admin/settings/app")->with('success', Lang::get('admin/settings/message.update.success'));
