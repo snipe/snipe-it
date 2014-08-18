@@ -20,6 +20,7 @@ return array(
     'view'      			=> 'View Supplier',
     'view_supplier'                     => 'Supplier',
     'zip'      				=> 'Postal Code',
+    'hw-sw'                             => 'HW/SW',
     'supplier_info'                     => 'Record important contact information for suppliers.',
 
 );
