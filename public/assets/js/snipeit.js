@@ -4,6 +4,7 @@
  * @param  {JSON} settings Insulated `window.snipeit.settings` object.
  * @return {IIFE}          Immediately invoked. Returns self.
  * Added multiple pagination setting functions to provide pagination for multiple table on the same page
+ * public\assets\js\snipeit.js
  */
 
 (function($, settings) {
