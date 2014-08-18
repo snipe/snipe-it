@@ -98,7 +98,7 @@
             </div>
 
 
-			<!-- Manager -->
+            <!-- Manager -->
             <div class="form-group {{ $errors->has('manager_id') ? 'has-error' : '' }}">
                 <label class="col-md-3 control-label" for="manager_id">@lang('admin/users/table.manager')</label>
                 <div class="col-md-7">
@@ -107,7 +107,7 @@
                 </div>
             </div>
 
-			<!-- Location -->
+            <!-- Location -->
             <div class="form-group {{ $errors->has('location_id') ? 'has-error' : '' }}">
                 <label class="col-md-3 control-label" for="location_id">@lang('admin/users/table.location') 
                     <i class='icon-asterisk'></i></label>

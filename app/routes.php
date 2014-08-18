@@ -135,6 +135,16 @@ Route::group(array('prefix' => 'admin'), function () {
             Route::post('{locationId}/edit', 'Controllers\Admin\LocationsController@postEdit');
             Route::get('{locationId}/delete', array('as' => 'delete/location', 'uses' => 'Controllers\Admin\LocationsController@getDelete'));
         });
+        
+        # Entities
+        Route::group(array('prefix' => 'entities'), function () {
+            Route::get('/', array('as' => 'entities', 'uses' => 'Controllers\Admin\EntitiesController@getIndex'));
+            Route::get('create', array('as' => 'create/entity', 'uses' => 'Controllers\Admin\EntitiesController@getCreate'));
+            Route::post('create', 'Controllers\Admin\EntitiesController@postCreate');
+            Route::get('{entityId}/edit', array('as' => 'update/entity', 'uses' => 'Controllers\Admin\EntitiesController@getEdit'));
+            Route::post('{entityId}/edit', 'Controllers\Admin\EntitiesController@postEdit');
+            Route::get('{entityId}/delete', array('as' => 'delete/entity', 'uses' => 'Controllers\Admin\EntitiesController@getDelete'));
+        });
 
         # Status Labels
         Route::group(array('prefix' => 'statuslabels'), function () {

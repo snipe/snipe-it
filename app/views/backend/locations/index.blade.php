@@ -22,9 +22,10 @@ Locations ::
     <thead>
         <tr role="row">
             <th class="col-md-3">@lang('admin/locations/table.name')</th>
+            <th class="col-md-3">@lang('general.entity')</th>
             <th class="col-md-3">@lang('admin/locations/table.address')</th>
             <th class="col-md-2">@lang('admin/locations/table.city'),
-             @lang('admin/locations/table.state')
+            @lang('admin/locations/table.state')
             @lang('admin/locations/table.country')</th>
             <th class="col-md-2 actions">@lang('table.actions')</th>
         </tr>
@@ -33,6 +34,8 @@ Locations ::
         @foreach ($locations as $location)
         <tr>
             <td>{{{ $location->name }}}</td>
+            <td>@if ($location->entity_id) {{{ $location->entity->common_name }}} 
+                @endif</td>
             <td>{{{ $location->address }}}, {{{ $location->address2 }}}  </td>
             <td>{{{ $location->city }}}, {{{ $location->state }}}  {{{ $location->country }}}  </td>
             <td>

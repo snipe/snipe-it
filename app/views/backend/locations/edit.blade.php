@@ -46,7 +46,16 @@
                     {{ $errors->first('name', '<span class="alert-msg"><i class="icon-remove-sign"></i> :message</span>') }}
                     </div>
             </div>
-
+            
+            <!-- Entity -->
+            <div class="form-group {{ $errors->has('entity_id') ? 'has-error' : '' }}">
+                <label class="col-md-2 control-label" for="entity_id">@lang('general.entity')</label>
+                <div class="col-md-5">
+                    {{ Form::select('entity_id', $entity_list , Input::old('entity_id', $location->entity_id), array('class'=>'select2', 'style'=>'width:250px')) }}
+                    {{ $errors->first('entity_id', '<span class="alert-msg">:message</span>') }}
+                </div>
+            </div>
+            
             <!-- Address -->
             <div class="form-group {{ $errors->has('address') ? ' has-error' : '' }}">
                 <label for="address" class="col-md-2 control-label">@lang('admin/locations/table.address')

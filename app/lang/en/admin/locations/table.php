@@ -8,8 +8,9 @@ return array(
     'country'   	=> 'Country',
     'create'		=> 'Create Location',
     'update'		=> 'Update Location',
-    'name'			=> 'Location Name',
+    'name'		=> 'Location Name',
     'address'		=> 'Address',
-    'zip'			=> 'Postal Code',
+    'zip'		=> 'Postal Code',
     'locations'		=> 'Locations',
+    'entity'            => 'Entity',
 );

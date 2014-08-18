@@ -4,6 +4,7 @@ use AdminController;
 use Input;
 use Lang;
 use Location;
+use Entity;
 use Redirect;
 use Setting;
 use DB;
@@ -39,7 +40,11 @@ class LocationsController extends AdminController
     {
         // Show the page
         $location_options = array('0' => 'Top Level') + Location::lists('name', 'id');
-        return View::make('backend/locations/edit')->with('location_options',$location_options)->with('location',new Location);
+        $entity_list = array('' => '') + Entity::lists('common_name', 'id');
+        return View::make('backend/locations/edit')
+                ->with('location_options',$location_options)
+                ->with('entity_list',$entity_list)
+                ->with('location',new Location);
     }
 
 
@@ -62,11 +67,18 @@ class LocationsController extends AdminController
 
             // Save the location data
             $location->name            	= e(Input::get('name'));
-            $location->address			= e(Input::get('address'));
-            $location->address2			= e(Input::get('address2'));
-            $location->city    			= e(Input::get('city'));
-            $location->state    		= e(Input::get('state'));
-            $location->country    		= e(Input::get('country'));
+
+            if ( e(Input::get('entity_id')) == '' ) {
+                $location->entity_id =  NULL;
+            } else {
+                $location->entity_id = e(Input::get('entity_id','0'));
+            }
+            
+            $location->address		= e(Input::get('address'));
+            $location->address2		= e(Input::get('address2'));
+            $location->city    		= e(Input::get('city'));
+            $location->state    	= e(Input::get('state'));
+            $location->country    	= e(Input::get('country'));
             $location->zip    		= e(Input::get('zip'));
             $location->user_id          = Sentry::getId();
 
@@ -105,7 +117,11 @@ class LocationsController extends AdminController
         //$location_options = array('' => 'Top Level') + Location::lists('name', 'id');
 
         $location_options = array('' => 'Top Level') + DB::table('locations')->where('id', '!=', $locationId)->lists('name', 'id');
-        return View::make('backend/locations/edit', compact('location'))->with('location_options',$location_options);
+        $entity_list = array('' => '') + Entity::lists('common_name', 'id');
+        
+        return View::make('backend/locations/edit', compact('location'))
+                ->with('entity_list',$entity_list)
+                ->with('location_options',$location_options);
     }
 
 
@@ -136,11 +152,18 @@ class LocationsController extends AdminController
 
             // Update the location data
             $location->name            	= e(Input::get('name'));
-            $location->address			= e(Input::get('address'));
-            $location->address2			= e(Input::get('address2'));
-            $location->city    			= e(Input::get('city'));
-            $location->state    		= e(Input::get('state'));
-            $location->country    		= e(Input::get('country'));
+            
+            if ( e(Input::get('entity_id')) == '' ) {
+                $location->entity_id =  NULL;
+            } else {
+                $location->entity_id = e(Input::get('entity_id','0'));
+            }
+            
+            $location->address		= e(Input::get('address'));
+            $location->address2		= e(Input::get('address2'));
+            $location->city    		= e(Input::get('city'));
+            $location->state    	= e(Input::get('state'));
+            $location->country    	= e(Input::get('country'));
             $location->zip    		= e(Input::get('zip'));
 
             // Was the asset created?

@@ -195,6 +195,11 @@
                                 <i class="icon-globe"></i> @lang('general.locations')
                             </a>
                         </li>
+                        <li{{ (Request::is('admin/settings/entities*') ? ' class="active"' : '') }}>
+                            <a href="{{ URL::to('admin/settings/entities') }}">
+                                <i class="icon-tasks"></i> @lang('general.entities')
+                            </a>
+                        </li>
                         <li{{ (Request::is('admin/groups*') ? ' class="active"' : '') }}>
                             <a href="{{ URL::to('admin/groups') }}">
                                 <i class="icon-group"></i> @lang('general.groups')
