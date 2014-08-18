@@ -3,7 +3,9 @@
  * @param  {jQuery} $        Insulated jQuery object
  * @param  {JSON} settings Insulated `window.snipeit.settings` object.
  * @return {IIFE}          Immediately invoked. Returns self.
+ * Added multiple pagination setting functions to provide pagination for multiple table on the same page
  */
+
 (function($, settings) {
     var Components = {};
     Components.modals = {};
@@ -35,6 +37,84 @@
     };
 
 
+    Components.pgtable1 = function() {
+        var paginationType = 'full_numbers';
+        var $el = $('#pgtable1');
+
+        var render = function() {
+            $el.dataTable({
+                "sPaginationType": paginationType,
+                "iDisplayLength": settings.per_page,
+                "aLengthMenu": [
+                    [settings.per_page, -1],
+                    [settings.per_page, "All"]
+                ],
+                "aoColumnDefs": [{
+                    'bSortable': false,
+                    'aTargets': ['actions']
+                }]
+            });
+
+            $el.popover();
+        };
+
+        return {
+            render: render
+        };
+    };
+
+    Components.pgtable2 = function() {
+        var paginationType = 'full_numbers';
+        var $el = $('#pgtable2');
+
+        var render = function() {
+            $el.dataTable({
+                "sPaginationType": paginationType,
+                "iDisplayLength": settings.per_page,
+                "aLengthMenu": [
+                    [settings.per_page, -1],
+                    [settings.per_page, "All"]
+                ],
+                "aoColumnDefs": [{
+                    'bSortable': false,
+                    'aTargets': ['actions']
+                }]
+            });
+
+            $el.popover();
+        };
+
+        return {
+            render: render
+        };
+    };
+    
+    Components.pgtable3 = function() {
+        var paginationType = 'full_numbers';
+        var $el = $('#pgtable3');
+
+        var render = function() {
+            $el.dataTable({
+                "sPaginationType": paginationType,
+                "iDisplayLength": settings.per_page,
+                "aLengthMenu": [
+                    [settings.per_page, -1],
+                    [settings.per_page, "All"]
+                ],
+                "aoColumnDefs": [{
+                    'bSortable': false,
+                    'aTargets': ['actions']
+                }]
+            });
+
+            $el.popover();
+        };
+
+        return {
+            render: render
+        };
+    };
+    
     Components.nosorting = function() {
         var paginationType = 'full_numbers';
         var $el = $('#nosorting');
@@ -164,6 +244,9 @@
      */
     $(function() {
         new Components.example().render();
+        new Components.pgtable1().render();
+        new Components.pgtable2().render();
+        new Components.pgtable3().render();
         new Components.nosorting().render();
         new Components.pluginStyles().render();
         new Components.datepicker().render();

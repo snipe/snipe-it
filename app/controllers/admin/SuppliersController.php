@@ -66,7 +66,7 @@ class SuppliersController extends AdminController
             $supplier->zip          		= e(Input::get('zip'));
             $supplier->contact          	= e(Input::get('contact'));
             $supplier->phone          		= e(Input::get('phone'));
-            $supplier->fax         	 		= e(Input::get('fax'));
+            $supplier->fax         	 	= e(Input::get('fax'));
             $supplier->email          		= e(Input::get('email'));
             $supplier->notes          		= e(Input::get('notes'));
             $supplier->url          		= $supplier->addhttp(e(Input::get('url')));

@@ -198,6 +198,14 @@
                     @lang('general.currency')
                     {{ number_format($license->purchase_cost,2) }} </li>
                     @endif
+                    
+                    @if ($license->supplier_id)
+                    <li>
+                        @lang('admin/hardware/form.supplier')
+                        : <a href="{{{ route('view/supplier', $license->supplier_id) }}}">
+                    {{ $license->supplier->name }} </a></li>
+                    @endif
+                    
                     @if ($license->order_number)
                     <li>@lang('admin/licenses/form.order'):
                     {{ $license->order_number }} </li>

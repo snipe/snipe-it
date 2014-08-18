@@ -2,13 +2,11 @@
 
 {{-- Page title --}}
 @section('title')
-
     @if ($location->id)
         @lang('admin/locations/table.update') ::
     @else
         @lang('admin/locations/table.create') ::
     @endif
-
 @parent
 @stop
 

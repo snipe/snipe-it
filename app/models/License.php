@@ -121,7 +121,15 @@ class License extends Elegant
         return $this->belongsTo('Depreciation','depreciation_id');
     }
 
-
+    /**
+     * Get suppliers class
+     *
+     */
+    public function supplier()
+    {
+        return $this->belongsTo('Supplier','supplier_id');
+    }
+    
      public function months_until_depreciated()
     {
 

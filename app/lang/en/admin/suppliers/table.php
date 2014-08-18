@@ -9,7 +9,7 @@ return array(
     'create'				=> 'Create Supplier',
     'email'      			=> 'Email',
     'fax'      				=> 'Fax',
-    'id'   					=> 'ID',
+    'id'   				=> 'ID',
     'name'      			=> 'Supplier Name',
     'notes'      			=> 'Notes',
     'phone'      			=> 'Phone',
@@ -18,7 +18,8 @@ return array(
     'update'				=> 'Update Supplier',
     'url'      				=> 'URL',
     'view'      			=> 'View Supplier',
-    'view_assets_for'      	=> 'View Assets for',
+    'view_supplier'                     => 'Supplier',
     'zip'      				=> 'Postal Code',
+    'supplier_info'                     => 'Record important contact information for suppliers.',
 
 );

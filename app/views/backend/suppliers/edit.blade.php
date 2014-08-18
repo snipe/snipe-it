@@ -80,7 +80,21 @@
                         {{ $errors->first('state', '<span class="alert-msg"><i class="icon-remove-sign"></i> :message</span>') }}
                     </div>
             </div>
+            
+            <!-- Country -->
+            <div class="form-group {{ $errors->has('country') ? ' has-error' : '' }}">
+                <label for="country" class="col-md-3 control-label">@lang('general.country')
+                </label>
+                 </label>
+                    <div class="col-md-6">
 
+                         {{ Form::countries('country', Input::old('country', $supplier->country), 'select2') }}
+                        
+                        {{ $errors->first('country', '<span class="alert-msg"><i class="icon-remove-sign"></i> :message</span>') }}
+                    </div>
+            </div>
+    
+            <!--
             <div class="form-group {{ $errors->has('country') ? ' has-error' : '' }}">
                 <label for="country" class="col-md-3 control-label">@lang('admin/suppliers/table.country')</label>
                     <div class="col-md-6">
@@ -88,7 +102,7 @@
                         {{ $errors->first('country', '<span class="alert-msg"><i class="icon-remove-sign"></i> :message</span>') }}
                     </div>
             </div>
-
+-->
             <div class="form-group {{ $errors->has('zip') ? ' has-error' : '' }}">
                 <label for="zip" class="col-md-3 control-label">@lang('admin/suppliers/table.zip')</label>
                     <div class="col-md-6">
@@ -174,10 +188,8 @@
     <!-- side address column -->
    <div class="col-md-3 col-xs-12 address pull-right">
         <br /><br />
-        <h6>Have Some Haiku</h6>
-        <p>Serious error.<br>
-        All shortcuts have disappeared.<br>
-        Screen. Mind. Both are blank.</p>
+        
+        @lang('admin/suppliers/table.supplier_info')
 
 
     </div>

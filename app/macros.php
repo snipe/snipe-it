@@ -79,7 +79,7 @@ Form::macro('countries', function ($name = "country", $selected = null, $class =
     'er'=>'Eritrea',
     'es'=>'Spain',
     'et'=>'Ethiopia',
-    'eU'=>'European Union',
+    'eu'=>'European Union',
     'fi'=>'Finland',
     'fj'=>'Fiji',
     'fk'=>'Falkland Islands (Malvinas)',

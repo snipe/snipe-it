@@ -53,6 +53,15 @@
                         {{ $errors->first('serial', '<span class="alert-msg"><i class="icon-remove-sign"></i> :message</span>') }}
                     </div>
             </div>
+            
+            <!-- Supplier -->
+            <div class="form-group {{ $errors->has('supplier_id') ? ' has-error' : '' }}">
+                <label for="supplier_id" class="col-md-3 control-label">@lang('admin/hardware/form.supplier')</label>
+                <div class="col-md-7">
+                    {{ Form::select('supplier_id', $supplier_list , Input::old('supplier_id', $license->supplier_id), array('class'=>'select2', 'style'=>'min-width:350px')) }}
+                    {{ $errors->first('supplier_id', '<span class="alert-msg"><i class="icon-remove-sign"></i> :message</span>') }}
+                </div>
+            </div>
 
             <div class="form-group {{ $errors->has('license_name') ? ' has-error' : '' }}">
                 <label for="license_name" class="col-md-3 control-label">@lang('admin/licenses/form.to_name')</label>

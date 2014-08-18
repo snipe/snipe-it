@@ -15,6 +15,7 @@ use Depreciation;
 use Setting;
 use Sentry;
 use Str;
+use Supplier;
 use Validator;
 use View;
 
@@ -49,10 +50,15 @@ class LicensesController extends AdminController
     {
         // Show the page
         $license_options = array('0' => 'Top Level') + License::lists('name', 'id');
+        $supplier_list = array('' => '') + Supplier::orderBy('name', 'asc')->lists('name', 'id');
 
         // Show the page
         $depreciation_list = array('0' => Lang::get('admin/licenses/form.no_depreciation')) + Depreciation::lists('name', 'id');
-        return View::make('backend/licenses/edit')->with('license_options',$license_options)->with('depreciation_list',$depreciation_list)->with('license',new License);
+        return View::make('backend/licenses/edit')
+                ->with('license_options',$license_options)
+                ->with('supplier_list',$supplier_list)
+                ->with('depreciation_list',$depreciation_list)
+                ->with('license',new License);
     }
 
 
@@ -74,13 +80,18 @@ class LicensesController extends AdminController
         // attempt validation
         if ($license->validate($new)) {
 
-                        if ( e(Input::get('purchase_cost')) == '') {
+            if ( e(Input::get('purchase_cost')) == '') {
                     $license->purchase_cost =  NULL;
             } else {
                     $license->purchase_cost = ParseFloat(e(Input::get('purchase_cost')));
-                    //$license->purchase_cost = e(Input::get('purchase_cost'));
             }
 
+            if ( e(Input::get('supplier_id')) == '') {
+                    $license->supplier_id =  NULL;
+            } else {
+                    $license->supplier_id = e(Input::get('supplier_id'));
+            }
+            
             // Save the license data
             $license->name 				= e(Input::get('name'));
             $license->serial 			= e(Input::get('serial'));
@@ -153,10 +164,15 @@ class LicensesController extends AdminController
                 $license->purchase_cost = NULL;
             }
 
+        $supplier_list = array('' => '') + Supplier::orderBy('name', 'asc')->lists('name', 'id');
+        
         // Show the page
         $license_options = array('' => 'Top Level') + DB::table('assets')->where('id', '!=', $licenseId)->lists('name', 'id');
         $depreciation_list = array('0' => Lang::get('admin/licenses/form.no_depreciation')) + Depreciation::lists('name', 'id');
-        return View::make('backend/licenses/edit', compact('license'))->with('license_options',$license_options)->with('depreciation_list',$depreciation_list);
+        return View::make('backend/licenses/edit', compact('license'))
+                ->with('license_options',$license_options)
+                ->with('supplier_list',$supplier_list)
+                ->with('depreciation_list',$depreciation_list);
     }
 
 
@@ -207,6 +223,11 @@ class LicensesController extends AdminController
                     //$license->purchase_cost = e(Input::get('purchase_cost'));
             }
 
+            if ( e(Input::get('supplier_id')) == '') {
+                    $license->supplier_id =  NULL;
+            } else {
+                    $license->supplier_id = e(Input::get('supplier_id'));
+            }
 
             //Are we changing the total number of seats?
             if( $license->seats != e(Input::get('seats'))) {
