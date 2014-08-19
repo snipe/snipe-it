@@ -12,9 +12,7 @@ class AdminController extends AuthorizedController
         // Apply the admin auth filter
         $this->beforeFilter('admin-auth');
     }
-
-
-
+    
     /**
      * Encodes the permissions so that they are form friendly.
      *

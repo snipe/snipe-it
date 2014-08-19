@@ -36,6 +36,8 @@ return array(
     'eol'                               => 'EOL',
     'entities'                          => 'Entities',
     'entity'                            => 'Entity',
+    'family'                            => 'Software Family',
+    'families'                          => 'Software Families',
     'first_name'			=> 'First Name',
     'groups'				=> 'Groups',
     'history_for'  			=> 'History for',

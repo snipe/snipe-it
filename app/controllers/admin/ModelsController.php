@@ -82,11 +82,11 @@ class ModelsController extends AdminController
             // Save the model data
             $model->name            	= e(Input::get('name'));
             $model->modelno            	= e(Input::get('modelno'));
-            //$model->depreciation_id    	= e(Input::get('depreciation_id'));
+            //$model->depreciation_id    = e(Input::get('depreciation_id'));
             $model->manufacturer_id    	= e(Input::get('manufacturer_id'));
-            $model->category_id    		= e(Input::get('category_id'));
+            $model->category_id    	= e(Input::get('category_id'));
             $model->user_id          	= Sentry::getId();
-            //$model->eol    				= e(Input::get('eol'));
+            //$model->eol    		= e(Input::get('eol'));
 
 
             // Was it created?
@@ -171,7 +171,7 @@ class ModelsController extends AdminController
             $model->name            	= e(Input::get('name'));
             $model->modelno            	= e(Input::get('modelno'));           
             $model->manufacturer_id    	= e(Input::get('manufacturer_id'));
-            $model->category_id    		= e(Input::get('category_id'));
+            $model->category_id    	= e(Input::get('category_id'));
       
             // Was it created?
             if($model->save()) {

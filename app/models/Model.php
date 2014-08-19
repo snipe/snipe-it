@@ -9,9 +9,9 @@ class Model extends Elegant
         'name'   		=> 'required|alpha_space|min:3|max:255|unique:models,name,{id}',
         'modelno'   		=> 'alpha_space|min:1|max:255|unique:models,modelno,{id}',
         'category_id'   	=> 'required|integer',
-        'manufacturer_id'   => 'required|integer',
-        'eol'   => 'required|integer:min:0|max:240',
-        'user_id' => 'integer',
+        'manufacturer_id'       => 'required|integer',
+        'eol'                   => 'required|integer:min:0|max:240',
+        'user_id'               => 'integer',
         
     );
 

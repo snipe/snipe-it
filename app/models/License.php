@@ -2,17 +2,17 @@
 
 class License extends Elegant
 {
-    protected $guarded = 'id';
+    //protected $guarded = 'id';
     protected $table = 'licenses';
     protected $softDelete = true;
     protected $rules = array(
-            'name'   => 'required|alpha_space|min:3|max:255',
-            'serial'   => 'required|alpha_space|min:5|max:255',
-            'seats'   => 'required|min:1|max:10000|integer',
-            'license_email'   => 'email|min:0|max:120',
-            'license_name'   => 'alpha_space|min:0|max:100',
-            'note'   => 'alpha_space',
-            'notes'   => 'alpha_space|min:0|max:255',
+            'name'              => 'required|alpha_space|min:3|max:255',
+            'serial'            => 'required|alpha_space|min:3|max:255|unique:licenses,serial,{id}',
+            'seats'             => 'required|min:1|max:10000|integer',
+            'license_email'     => 'email|min:0|max:120',
+            'license_name'      => 'alpha_space|min:0|max:100',
+            'note'              => 'alpha_space',
+            'notes'             => 'alpha_space|min:0|max:255',
         );
 
     /**
@@ -125,9 +125,27 @@ class License extends Elegant
      * Get suppliers class
      *
      */
+    public function family()
+    {
+        return $this->belongsTo('Family','family_id');
+    }
+    
+    /**
+     * Get suppliers class
+     *
+     */
     public function supplier()
     {
         return $this->belongsTo('Supplier','supplier_id');
+    }
+    
+    /**
+     * Get manufacturer class
+     *
+     */
+    public function manufacturer()
+    {
+        return $this->belongsTo('Manufacturer','manufacturer_id');
     }
     
      public function months_until_depreciated()

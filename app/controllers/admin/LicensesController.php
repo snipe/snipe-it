@@ -1,21 +1,21 @@
 <?php namespace Controllers\Admin;
 
-use Assets;
+use Actionlog;
 use AdminController;
+use Asset;
+use DB;
+use Depreciation;
+use Family;
 use Input;
 use Lang;
 use License;
-use Asset;
-use User;
-use Actionlog;
-use DB;
-use Redirect;
 use LicenseSeat;
-use Depreciation;
+use Manufacturer;
+use Redirect;
 use Setting;
 use Sentry;
-use Str;
 use Supplier;
+use User;
 use Validator;
 use View;
 
@@ -27,9 +27,6 @@ class LicensesController extends AdminController
      *
      * @return View
      */
-
-
-
 
     public function getIndex()
     {
@@ -51,12 +48,16 @@ class LicensesController extends AdminController
         // Show the page
         $license_options = array('0' => 'Top Level') + License::lists('name', 'id');
         $supplier_list = array('' => '') + Supplier::orderBy('name', 'asc')->lists('name', 'id');
+        $manufacturer_list = array('' => '') + Manufacturer::orderBy('name', 'asc')->lists('name', 'id');
+        $family_list = array('' => '') + Family::orderBy('common_name', 'asc')->lists('common_name', 'id');
 
         // Show the page
         $depreciation_list = array('0' => Lang::get('admin/licenses/form.no_depreciation')) + Depreciation::lists('name', 'id');
         return View::make('backend/licenses/edit')
                 ->with('license_options',$license_options)
                 ->with('supplier_list',$supplier_list)
+                ->with('family_list',$family_list)
+                ->with('manufacturer_list',$manufacturer_list)
                 ->with('depreciation_list',$depreciation_list)
                 ->with('license',new License);
     }
@@ -80,6 +81,20 @@ class LicensesController extends AdminController
         // attempt validation
         if ($license->validate($new)) {
 
+            // Save the license data
+            $license->name 				= e(Input::get('name'));
+            $license->serial 			= e(Input::get('serial'));
+            $license->license_email 	= e(Input::get('license_email'));
+            $license->license_name 		= e(Input::get('license_name'));
+            $license->notes 			= e(Input::get('notes'));
+            $license->order_number 		= e(Input::get('order_number'));
+            $license->seats 			= e(Input::get('seats'));
+            $license->purchase_date 	= e(Input::get('purchase_date'));
+            $license->depreciation_id 	= e(Input::get('depreciation_id'));
+            $license->user_id 			= Sentry::getId();
+            
+            // Values that need to be cleansed before saving
+            
             if ( e(Input::get('purchase_cost')) == '') {
                     $license->purchase_cost =  NULL;
             } else {
@@ -92,19 +107,17 @@ class LicensesController extends AdminController
                     $license->supplier_id = e(Input::get('supplier_id'));
             }
             
-            // Save the license data
-            $license->name 				= e(Input::get('name'));
-            $license->serial 			= e(Input::get('serial'));
-            $license->license_email 	= e(Input::get('license_email'));
-            $license->license_name 		= e(Input::get('license_name'));
-            $license->notes 			= e(Input::get('notes'));
-            $license->order_number 		= e(Input::get('order_number'));
-            $license->seats 			= e(Input::get('seats'));
-            $license->purchase_date 	= e(Input::get('purchase_date'));
-            //$license->purchase_cost 	= e(Input::get('purchase_cost'));
-            $license->depreciation_id 	= e(Input::get('depreciation_id'));
-            //$license->asset_id 			= e(Input::get('asset_id'));
-            $license->user_id 			= Sentry::getId();
+            if ( e(Input::get('family_id')) == '') {
+                    $license->family_id =  NULL;
+            } else {
+                    $license->family_id = e(Input::get('family_id'));
+            }
+            
+            if ( e(Input::get('manufacturer_id')) == '') {
+                    $license->manufacturer_id =  NULL;
+            } else {
+                    $license->manufacturer_id = e(Input::get('manufacturer_id'));
+            }
 
             if (($license->purchase_date == "") || ($license->purchase_date == "0000-00-00")) {
                 $license->purchase_date = NULL;
@@ -165,6 +178,8 @@ class LicensesController extends AdminController
             }
 
         $supplier_list = array('' => '') + Supplier::orderBy('name', 'asc')->lists('name', 'id');
+        $manufacturer_list = array('' => '') + Manufacturer::orderBy('name', 'asc')->lists('name', 'id');
+        $family_list = array('' => '') + Family::orderBy('common_name', 'asc')->lists('common_name', 'id');
         
         // Show the page
         $license_options = array('' => 'Top Level') + DB::table('assets')->where('id', '!=', $licenseId)->lists('name', 'id');
@@ -172,6 +187,8 @@ class LicensesController extends AdminController
         return View::make('backend/licenses/edit', compact('license'))
                 ->with('license_options',$license_options)
                 ->with('supplier_list',$supplier_list)
+                ->with('family_list',$family_list)
+                ->with('manufacturer_list',$manufacturer_list)
                 ->with('depreciation_list',$depreciation_list);
     }
 
@@ -190,26 +207,31 @@ class LicensesController extends AdminController
             return Redirect::to('admin/licenses')->with('error', Lang::get('admin/licenses/message.does_not_exist'));
         }
 
-
         // get the POST data
         $new = Input::all();
 
-
-
         // attempt validation
-        if ($license->validate($new)) {
+        $validator = Validator::make(Input::all(), $license->validationRules($licenseId));
 
+        if ($validator->fails())
+        {
+            // The given data did not pass validation            
+            return Redirect::back()->withInput()->withErrors($validator->messages());
+        }
+        //  validation succeeds
+        else {
+        
             // Update the license data
-            $license->name 				= e(Input::get('name'));
+            $license->name 			= e(Input::get('name'));
             $license->serial 			= e(Input::get('serial'));
-            $license->license_email 	= e(Input::get('license_email'));
+            $license->license_email             = e(Input::get('license_email'));
             $license->license_name 		= e(Input::get('license_name'));
             $license->notes 			= e(Input::get('notes'));
             $license->order_number 		= e(Input::get('order_number'));
-            $license->depreciation_id 	= e(Input::get('depreciation_id'));
-
-
-            // Update the asset data
+            $license->depreciation_id           = e(Input::get('depreciation_id'));
+            
+            // Values that need to be cleansed before saving
+            
             if ( e(Input::get('purchase_date')) == '') {
                     $license->purchase_date =  NULL;
             } else {
@@ -220,13 +242,24 @@ class LicensesController extends AdminController
                     $license->purchase_cost =  NULL;
             } else {
                     $license->purchase_cost = ParseFloat(e(Input::get('purchase_cost')));
-                    //$license->purchase_cost = e(Input::get('purchase_cost'));
             }
 
             if ( e(Input::get('supplier_id')) == '') {
                     $license->supplier_id =  NULL;
             } else {
                     $license->supplier_id = e(Input::get('supplier_id'));
+            }
+
+            if ( e(Input::get('family_id')) == '') {
+                    $license->family_id =  NULL;
+            } else {
+                    $license->family_id = e(Input::get('family_id'));
+            }
+            
+            if ( e(Input::get('manufacturer_id')) == '') {
+                    $license->manufacturer_id =  NULL;
+            } else {
+                    $license->manufacturer_id = e(Input::get('manufacturer_id'));
             }
 
             //Are we changing the total number of seats?
@@ -289,10 +322,6 @@ class LicensesController extends AdminController
                 // Redirect to the new license page
                 return Redirect::to("admin/licenses/$licenseId/view")->with('success', Lang::get('admin/licenses/message.update.success'));
             }
-        } else {
-            // failure
-            $errors = $license->errors();
-            return Redirect::back()->withInput()->withErrors($errors);
         }
 
         // Redirect to the license edit page
@@ -573,6 +602,8 @@ class LicensesController extends AdminController
           // Show the page
         $license_options = array('0' => 'Top Level') + License::lists('name', 'id');
         $supplier_list = array('' => '') + Supplier::orderBy('name', 'asc')->lists('name', 'id');
+        $manufacturer_list = array('' => '') + Manufacturer::orderBy('name', 'asc')->lists('name', 'id');
+        $family_list = array('' => '') + Family::orderBy('common_name', 'asc')->lists('common_name', 'id');
 
         //clone the orig
         $license = clone $license_to_clone;
@@ -584,6 +615,8 @@ class LicensesController extends AdminController
         return View::make('backend/licenses/edit')
                 ->with('license_options',$license_options)
                 ->with('supplier_list',$supplier_list)
+                ->with('family_list',$family_list)                
+                ->with('manufacturer_list',$manufacturer_list)
                 ->with('depreciation_list',$depreciation_list)
                 ->with('license',$license);
 

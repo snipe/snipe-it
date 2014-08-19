@@ -86,7 +86,7 @@ Settings ::
                         <p><h4 class="name">@lang('admin/settings/general.systeminfo')</h4></p>
 
                         <div class="profile-box">
-                            <p>Application Version: Alpha 0.3.12</p>
+                            <p>Application Version: &nbsp; &nbsp; {{ appVersion() }} </p>
                             
                             <!-- display detailed system info if showsysinfo set true -->
                             @if ($setting->showsysinfo === 1)

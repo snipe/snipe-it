@@ -21,7 +21,7 @@
                 <li><a href="{{ route('clone/license', $license->id) }}">@lang('admin/licenses/general.clone')</a></li>
             </ul>
         </div>
-       <h3 class="name">@lang('general.history_for') {{ $license->name }}</h3>
+       <h3 class="name">{{ $license->name }}</h3>
     </div>
 </div>
 
@@ -198,7 +198,22 @@
                     @lang('general.currency')
                     {{ number_format($license->purchase_cost,2) }} </li>
                     @endif
+
+                    <!-- // Display the manufacturer -->
+                    @if ($license->manufacturer_id)
+                    <li>
+                        @lang('admin/hardware/form.manufacturer')
+                        : {{ $license->manufacturer->name }} </li>
+                    @endif
                     
+                    <!-- // Display the family -->
+                    @if ($license->family_id)
+                    <li>
+                        @lang('general.family')
+                        : {{ $license->family->common_name }} </li>
+                    @endif
+                    
+                    <!-- // Display the supplier -->
                     @if ($license->supplier_id)
                     <li>
                         @lang('admin/hardware/form.supplier')

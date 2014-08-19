@@ -145,7 +145,17 @@ Route::group(array('prefix' => 'admin'), function () {
             Route::post('{entityId}/edit', 'Controllers\Admin\EntitiesController@postEdit');
             Route::get('{entityId}/delete', array('as' => 'delete/entity', 'uses' => 'Controllers\Admin\EntitiesController@getDelete'));
         });
-
+        
+        # Families
+        Route::group(array('prefix' => 'families'), function () {
+            Route::get('/', array('as' => 'families', 'uses' => 'Controllers\Admin\FamiliesController@getIndex'));
+            Route::get('create', array('as' => 'create/family', 'uses' => 'Controllers\Admin\FamiliesController@getCreate'));
+            Route::post('create', 'Controllers\Admin\FamiliesController@postCreate');
+            Route::get('{entityId}/edit', array('as' => 'update/family', 'uses' => 'Controllers\Admin\FamiliesController@getEdit'));
+            Route::post('{entityId}/edit', 'Controllers\Admin\FamiliesController@postEdit');
+            Route::get('{entityId}/delete', array('as' => 'delete/family', 'uses' => 'Controllers\Admin\FamiliesController@getDelete'));
+        });
+        
         # Status Labels
         Route::group(array('prefix' => 'statuslabels'), function () {
             Route::get('/', array('as' => 'statuslabels', 'uses' => 'Controllers\Admin\StatuslabelsController@getIndex'));

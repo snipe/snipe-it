@@ -53,6 +53,24 @@
                         {{ $errors->first('serial', '<span class="alert-msg"><i class="icon-remove-sign"></i> :message</span>') }}
                     </div>
             </div>
+ 
+            <!-- Manufacturer -->
+            <div class="form-group {{ $errors->has('manufacturer_id') ? ' has-error' : '' }}">
+                <label for="manufacturer_id" class="col-md-3 control-label">@lang('admin/hardware/form.manufacturer')</label>
+                <div class="col-md-7">
+                    {{ Form::select('manufacturer_id', $manufacturer_list , Input::old('manufacturer_id', $license->manufacturer_id), array('class'=>'select2', 'style'=>'min-width:350px')) }}
+                    {{ $errors->first('manufacturer_id', '<span class="alert-msg"><i class="icon-remove-sign"></i> :message</span>') }}
+                </div>
+            </div>
+            
+            <!-- Family -->
+            <div class="form-group {{ $errors->has('family_id') ? ' has-error' : '' }}">
+                <label for="family_id" class="col-md-3 control-label">@lang('general.family')</label>
+                <div class="col-md-7">
+                    {{ Form::select('family_id', $family_list , Input::old('family_id', $license->family_id), array('class'=>'select2', 'style'=>'min-width:350px')) }}
+                    {{ $errors->first('family_id', '<span class="alert-msg"><i class="icon-remove-sign"></i> :message</span>') }}
+                </div>
+            </div>
             
             <!-- Supplier -->
             <div class="form-group {{ $errors->has('supplier_id') ? ' has-error' : '' }}">

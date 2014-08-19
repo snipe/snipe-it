@@ -15,4 +15,20 @@ function ParseFloat($floatString){
     $floatString = str_replace("," , "", $floatString); 
     $floatString = str_replace($LocaleInfo["decimal_point"] , ".", $floatString); 
     return floatval($floatString); 
+    
 } 
+
+function appVersion() {
+    
+    $version = array(
+        "level" => "alpha",
+        "major"=>0,
+        "minor"=>3,
+        "build"=>12
+    );
+    
+    $appVersionString = implode(".", $version);
+
+    return $appVersionString;
+    
+}

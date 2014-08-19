@@ -1585,12 +1585,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/HttpFoundation.git",
-                "reference": "deca55eba3f356558431f97ef72fa1d276a107a1"
+                "reference": "a25a309e046871c0bb092124160d86e2adfd6262"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/HttpFoundation/zipball/deca55eba3f356558431f97ef72fa1d276a107a1",
-                "reference": "deca55eba3f356558431f97ef72fa1d276a107a1",
+                "url": "https://api.github.com/repos/symfony/HttpFoundation/zipball/a25a309e046871c0bb092124160d86e2adfd6262",
+                "reference": "a25a309e046871c0bb092124160d86e2adfd6262",
                 "shasum": ""
             },
             "require": {
@@ -1629,7 +1629,7 @@
             ],
             "description": "Symfony HttpFoundation Component",
             "homepage": "http://symfony.com",
-            "time": "2014-08-14 14:51:32"
+            "time": "2014-08-18 09:01:24"
         },
         {
             "name": "symfony/http-kernel",
@@ -1940,12 +1940,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/instantiator.git",
-                "reference": "bbb57e04abb15f4a4eb3778158f01280bbb982cd"
+                "reference": "337e8722b8f1e2666ab24fdbdf659c719f39c3fd"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/instantiator/zipball/bbb57e04abb15f4a4eb3778158f01280bbb982cd",
-                "reference": "bbb57e04abb15f4a4eb3778158f01280bbb982cd",
+                "url": "https://api.github.com/repos/doctrine/instantiator/zipball/337e8722b8f1e2666ab24fdbdf659c719f39c3fd",
+                "reference": "337e8722b8f1e2666ab24fdbdf659c719f39c3fd",
                 "shasum": ""
             },
             "require": {
@@ -1986,7 +1986,7 @@
                 "constructor",
                 "instantiate"
             ],
-            "time": "2014-08-14 14:51:48"
+            "time": "2014-08-18 20:15:24"
         },
         {
             "name": "phpunit/php-code-coverage",
@@ -2236,12 +2236,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/phpunit.git",
-                "reference": "de4ebadc9129c97fde6c48c8b2b44f4eb784dd3b"
+                "reference": "5cc03b0dc34070ac8238f7a86eec97509bb8b2b6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/de4ebadc9129c97fde6c48c8b2b44f4eb784dd3b",
-                "reference": "de4ebadc9129c97fde6c48c8b2b44f4eb784dd3b",
+                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/5cc03b0dc34070ac8238f7a86eec97509bb8b2b6",
+                "reference": "5cc03b0dc34070ac8238f7a86eec97509bb8b2b6",
                 "shasum": ""
             },
             "require": {
@@ -2298,7 +2298,7 @@
                 "testing",
                 "xunit"
             ],
-            "time": "2014-08-18 00:55:50"
+            "time": "2014-08-19 04:57:13"
         },
         {
             "name": "phpunit/phpunit-mock-objects",
@@ -2306,16 +2306,16 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/phpunit-mock-objects.git",
-                "reference": "1ff75202cbce1e0b6812a39564d0456a7bb3e028"
+                "reference": "36e147c955bc34ab63156e9d3a1f1d23538fdfc7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/phpunit-mock-objects/zipball/1ff75202cbce1e0b6812a39564d0456a7bb3e028",
-                "reference": "1ff75202cbce1e0b6812a39564d0456a7bb3e028",
+                "url": "https://api.github.com/repos/sebastianbergmann/phpunit-mock-objects/zipball/36e147c955bc34ab63156e9d3a1f1d23538fdfc7",
+                "reference": "36e147c955bc34ab63156e9d3a1f1d23538fdfc7",
                 "shasum": ""
             },
             "require": {
-                "doctrine/instantiator": "~1.0",
+                "doctrine/instantiator": "~1.0,>=1.0.1",
                 "php": ">=5.3.3",
                 "phpunit/php-text-template": "~1.2"
             },
@@ -2353,7 +2353,7 @@
                 "mock",
                 "xunit"
             ],
-            "time": "2014-08-14 17:33:22"
+            "time": "2014-08-18 20:24:14"
         },
         {
             "name": "sebastian/comparator",

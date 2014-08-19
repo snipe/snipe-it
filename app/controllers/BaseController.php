@@ -2,6 +2,7 @@
 
 class BaseController extends Controller
 {
+    
     /**
      * Message bag.
      *

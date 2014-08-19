@@ -42,7 +42,7 @@
         <link rel="stylesheet" href="{{ asset('assets/css/compiled/form-showcase.css') }}" type="text/css" media="screen" />
         <link rel="stylesheet" href="{{ asset('assets/css/lib/jquery.dataTables.css') }}" type="text/css" media="screen" />
 
-        <!-- global header javascripts -->
+        <!-- global header Java scripts -->
         <script src="//code.jquery.com/jquery-latest.js"></script>
         <script src="{{ asset('assets/js/jquery.dataTables.js') }}"></script>
         <script>
@@ -100,6 +100,9 @@
             @if (Sentry::check())
 
                  @if(Sentry::getUser()->hasAccess('admin'))
+                 
+                 <!--  OBJECT CREATE DROPDOWN -->
+                 
                  <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                         <i class="icon-plus"></i> @lang('general.create')
@@ -124,35 +127,10 @@
                     </ul>
                 </li>
                 @endif
-                <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                        {{{ Lang::get('general.welcome', array('name' => Sentry::getUser()->first_name)) }}}
-                        <b class="caret"></b>
-                    </a>
-                    <ul class="dropdown-menu">
-                        <li{{{ (Request::is('account/profile') ? ' class="active"' : '') }}}>
-                         	<a href="{{ route('view-assets') }}">
-                                <i class="icon-check"></i> @lang('general.viewassets')
-                        	</a>
-                             <a href="{{ route('profile') }}">
-                                <i class="icon-user"></i> @lang('general.editprofile')
-                            </a>
-                             <a href="{{ route('change-password') }}">
-                                <i class="icon-lock"></i> @lang('general.changepassword')
-                            </a>
-                            <a href="{{ route('change-email') }}">
-                                <i class="icon-envelope"></i> @lang('general.changeemail')
-                            </a>
-                        </li>
-                        <li class="divider"></li>
-                        <li>
-                            <a href="{{ route('logout') }}">
-                                <i class="icon-off"></i>
-                                @lang('general.logout')
-                            </a>
-                        </li>
-                    </ul>
-                </li>
+
+                
+                <!--  ADMIN FUNCTIONS DROPDOWN -->
+                
                 @if(Sentry::getUser()->hasAccess('admin'))
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
@@ -173,6 +151,11 @@
                         <li{{ (Request::is('admin/settings/manufacturers*') ? ' class="active"' : '') }}>
                             <a href="{{ URL::to('admin/settings/manufacturers') }}">
                                 <i class="icon-briefcase"></i> @lang('general.manufacturers')
+                            </a>
+                        </li>
+                        <li{{ (Request::is('admin/settings/families*') ? ' class="active"' : '') }}>
+                            <a href="{{ URL::to('admin/settings/families') }}">
+                                <i class="icon-flag"></i> @lang('general.families')
                             </a>
                         </li>
                         <li{{ (Request::is('admin/settings/suppliers*') ? ' class="active"' : '') }}>
@@ -215,7 +198,47 @@
                     </ul>
                 </li>
                 @endif
+                
+                
+                <!--  USER ADMIN DROPDOWN -->
+                
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                        {{{ Lang::get('general.welcome', array('name' => Sentry::getUser()->first_name)) }}}
+                        <b class="caret"></b>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li{{{ (Request::is('account/profile') ? ' class="active"' : '') }}}>
+                         	<a href="{{ route('view-assets') }}">
+                                <i class="icon-check"></i> @lang('general.viewassets')
+                        	</a>
+                             <a href="{{ route('profile') }}">
+                                <i class="icon-user"></i> @lang('general.editprofile')
+                            </a>
+                             <a href="{{ route('change-password') }}">
+                                <i class="icon-lock"></i> @lang('general.changepassword')
+                            </a>
+                            <a href="{{ route('change-email') }}">
+                                <i class="icon-envelope"></i> @lang('general.changeemail')
+                            </a>
+                        </li>
+                        <li class="divider"></li>
+                        <li>
+                            <a href="{{ route('logout') }}">
+                                <i class="icon-off"></i>
+                                @lang('general.logout')
+                            </a>
+                        </li>
+                    </ul>
+                </li>
 
+                <li>
+                            <a href="{{ route('logout') }}">
+                                <i class="icon-off" alt="Logout"></i>
+                                <!-- @lang('general.logout') -->
+                            </a>
+                </li>
+                
             @else
                     <li {{{ (Request::is('auth/signin') ? 'class="active"' : '') }}}><a href="{{ route('signin') }}">@lang('general.sign_in')</a></li>
             @endif
@@ -224,6 +247,7 @@
     </div>
     </header>
     <!-- end navbar -->
+    
     @if (Sentry::check())
     @if(Sentry::getUser()->hasAccess('admin'))
     <!-- sidebar -->

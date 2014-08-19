@@ -12,7 +12,7 @@ Entities ::
 <div class="row header">
     <div class="col-md-12">
         <a href="{{ route('create/entity') }}" class="btn btn-success pull-right"><i class="icon-plus-sign icon-white"></i>  @lang('general.create')</a>
-        <h3>@lang('admin/entities/table.entities')</h3>
+        <h3>@lang('general.entities')</h3>
     </div>
 </div>
 
