@@ -63,7 +63,10 @@ This will install the dependencies. Once completed move to next step
     1. Goto `C:\inetpub\wwwroot\snipe-it\app`
     2. Right Click `Storage` -> `Properties`
     3. Goto `Security Tab` -> `Edit`
-    4. Find `IIS_IUSRS` and set to `Full Control`
-    5. Click `OK` twice
+    4. Click `Add` and change location to local machine
+    5. Type `IUSR` in object name box
+    6. Click `OK`
+    7. Give `IUSR` full control
+    8. Click `OK` twice
 
 Special thanks to [@madd15](http://github.com/madd15) for writing up the Windows installation guide!
