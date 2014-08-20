@@ -30,7 +30,7 @@ Entities ::
     <tbody>
         @foreach ($entities as $entity)
         <tr>
-            <td>{{{ $entity->common_name }}}</td>
+            <td><a href="{{ route('view/entity', $entity->id) }}">{{{ $entity->common_name }}}</a></td>
             <td>{{{ $entity->name }}}</td>
             <td>{{{ $entity->notes }}}</td>
             <td>

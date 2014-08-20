@@ -123,9 +123,9 @@ $debugbar["messages"]->addMessage("hello world!");
             </td>
             <td nowrap="nowrap">
                 <a href="{{ route('update/hardware', $asset->id) }}" class="btn btn-warning"><i class="icon-pencil icon-white" alt="Edit"></i></a>
-                <a data-html="false" class="btn delete-asset btn-danger" data-toggle="modal" href="{{ route('delete/hardware', $asset->id) }}" data-content="@lang('admin/hardware/message.delete.confirm')"
-                data-title="@lang('general.delete')
-                 {{ htmlspecialchars($asset->asset_tag) }}?" onClick="return false;"><i class="icon-trash icon-white" alt="delete"></i></a>
+                <a data-html="false" class="btn delete-asset btn-danger" data-toggle="modal" href="{{ route('delete/hardware', $asset->id) }}" data-content="@lang('admin/hardware/message.delete.confirm')" 
+                data-title="@lang('general.delete') 
+                {{ htmlspecialchars($asset->asset_tag) }}?" onClick="return false;"><i class="icon-trash icon-white" alt="delete"></i></a>
             </td>
         </tr>
         @endforeach

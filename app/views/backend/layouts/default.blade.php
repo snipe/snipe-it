@@ -190,9 +190,15 @@
                         </li>
                         <li class="divider"></li>
                         <li>
+                            <a href="{{ route('defaultsettings') }}">
+                                <i class="icon-keyboard"></i> @lang('general.default_settings')
+                            </a>
+                        </li>
+                        <li class="divider"></li>
+                        <li>
                             <a href="{{ route('app') }}">
                                 <i class="icon-cog"></i> @lang('general.settings')
-                            </a>
+                            </a>                            
                         </li>
                         
                     </ul>

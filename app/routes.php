@@ -84,6 +84,13 @@ Route::group(array('prefix' => 'admin'), function () {
             Route::get('edit', array('as' => 'edit/settings', 'uses' => 'Controllers\Admin\SettingsController@getEdit'));
             Route::post('edit', 'Controllers\Admin\SettingsController@postEdit');
         });
+        
+        # Default Settings
+       Route::group(array('prefix' => 'defaultsettings'), function () {
+            Route::get('/', array('as' => 'defaultsettings', 'uses' => 'Controllers\Admin\DefaultSettingsController@getIndex'));  
+            Route::get('{defautlsettingId}/edit', array('as' => 'edit/defaultsettings', 'uses' => 'Controllers\Admin\DefaultSettingsController@getEdit'));
+            Route::post('{defautlsettingId}/edit', 'Controllers\Admin\DefaultSettingsController@postEdit');
+        });
 
         # Manufacturers
         Route::group(array('prefix' => 'manufacturers'), function () {
@@ -144,6 +151,7 @@ Route::group(array('prefix' => 'admin'), function () {
             Route::get('{entityId}/edit', array('as' => 'update/entity', 'uses' => 'Controllers\Admin\EntitiesController@getEdit'));
             Route::post('{entityId}/edit', 'Controllers\Admin\EntitiesController@postEdit');
             Route::get('{entityId}/delete', array('as' => 'delete/entity', 'uses' => 'Controllers\Admin\EntitiesController@getDelete'));
+            Route::get('{entityId}/view', array('as' => 'view/entity', 'uses' => 'Controllers\Admin\EntitiesController@getView'));
         });
         
         # Families

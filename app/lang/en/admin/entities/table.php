@@ -10,6 +10,7 @@ return array(
     'notes'             => 'Notes',
     'create'		=> 'Create Entity',
     'update'		=> 'Update Entity',
-    'entities'          => 'Entities'
+    'entities'          => 'Entities',
+    'general_info'      => 'General Entity Information'
     
 );

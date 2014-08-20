@@ -11,6 +11,12 @@ class User extends SentryUserModel
      */
     protected $softDelete = true;
 
+        //get defaults
+    public function __construct($attributes = array())  {
+        parent::__construct($attributes); // Eloquent       
+        $this->location_id = DB::table('defaults')->where('name', 'location')->pluck('value');
+    }
+    
     /**
      * Returns the user full name, it simply concatenates
      * the user first and last name.

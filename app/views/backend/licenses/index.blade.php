@@ -86,10 +86,9 @@
                     <td>
                     @if ($count==1)
                     <a href="{{ route('update/license', $license->id) }}" class="btn btn-warning"><i class="icon-pencil icon-white"></i></a>
-                        <a data-html="false" class="btn delete-asset btn-danger" data-toggle="modal" href="{{ route('delete/license', $license->id) }}"
-                        data-content="@lang('admin/licenses/message.delete.confirm')"
+                        <a data-html="false" class="btn delete-asset btn-danger" data-toggle="modal" href="{{ route('delete/license', $license->id) }}" data-content="@lang('admin/licenses/message.delete.confirm')" 
                         data-title="@lang('general.delete')
-                         {{ htmlspecialchars($license->name) }}?" onClick="return false;"><i class="icon-trash icon-white"></i></a>
+                        {{ htmlspecialchars($license->name) }}?" onClick="return false;"><i class="icon-trash icon-white"></i></a>
                     @endif
 
                     </td>

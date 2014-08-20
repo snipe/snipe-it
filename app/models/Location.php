@@ -13,6 +13,13 @@ class Location extends Elegant
             'address2'		=> 'alpha_space|min:5|max:80',
             'zip'   		=> 'alpha_dash|min:3|max:10',
         );
+    
+    //get defaults
+    public function __construct($attributes = array())  {
+        parent::__construct($attributes); // Eloquent
+        $this->entity_id = DB::table('defaults')->where('name', 'location_entity')->pluck('value');
+    }
+
 
     public function has_users()
     {

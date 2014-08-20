@@ -87,23 +87,22 @@ Settings ::
 
                         <div class="profile-box">
                             <p>Application Version: &nbsp; &nbsp; {{ appVersion() }} </p>
-                            
-                            <!-- display detailed system info if showsysinfo set true -->
-                            @if ($setting->showsysinfo === 1)
                             <p>
                             <?php 
                             $laravel = app();
                             $version = $laravel::VERSION;
                             ?>
-                            Laravel Version: {{{ $version }}}
-                            </p>
+                            Laravel Version: &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; {{{ $version }}}
+                            </p>                            
+                            <!-- display detailed system info if showsysinfo set true -->
+                            @if ($setting->showsysinfo === 1)
                             
                             <p>PHP Information:</p>
                            
                             <p>
                             <?php
                             ob_start();
-                            phpinfo(9);
+                            phpinfo(5);
 
                             preg_match ('%<style type="text/css">(.*?)</style>.*?<body>(.*?)</body>%s', ob_get_clean(), $matches);
 

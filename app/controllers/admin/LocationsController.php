@@ -38,6 +38,7 @@ class LocationsController extends AdminController
      */
     public function getCreate()
     {
+
         // Show the page
         $location_options = array('0' => 'Top Level') + Location::lists('name', 'id');
         $entity_list = array('' => '') + Entity::lists('common_name', 'id');

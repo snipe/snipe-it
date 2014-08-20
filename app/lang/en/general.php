@@ -27,6 +27,8 @@ return array(
     'currency'  			=> '$',
     'current'  				=> 'Current',
     'date'				=> 'Date',
+    'default_setting'                   => 'Default',
+    'default_settings'                  => 'Defaults',
     'delete'  				=> 'Delete',
     'deleted'  				=> 'Deleted',
     'deployed'				=> 'Deployed',

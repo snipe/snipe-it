@@ -176,7 +176,15 @@ class EntitiesController extends AdminController
 
 
     }
-
-
-
+    
+    public function getView($entityId)
+    {
+        // Check if the entity exists
+        if (is_null($entity = Entity::find($entityId))) {
+            // Redirect to the error page
+            return Redirect::to('admin/settings/entities')->with('error', Lang::get('admin/entities/message.not_found'));
+        }
+        
+        return View::make('backend/entities/view', compact('entity'));
+    }
 }

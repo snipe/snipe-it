@@ -14,6 +14,11 @@ class Model extends Elegant
         'user_id'               => 'integer',
         
     );
+    
+    public function __construct($attributes = array())  {
+        parent::__construct($attributes); // Eloquent       
+        $this->depreciation_id = DB::table('defaults')->where('name', 'depr_asset')->pluck('value');
+    }
 
     public function assets()
     {

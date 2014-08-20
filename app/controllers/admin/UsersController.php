@@ -117,6 +117,8 @@ class UsersController extends AdminController
 		exit;
 		*/
 
+       
+        
         // Show the page
         return View::make('backend/users/edit', compact('groups', 'userGroups', 'permissions', 'userPermissions'))
         ->with('location_list',$location_list)

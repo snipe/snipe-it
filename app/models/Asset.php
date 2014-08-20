@@ -18,6 +18,11 @@ class Asset extends Elegant
         'status'            => 'integer'
         );
 
+    public function __construct($attributes = array())  {
+        parent::__construct($attributes); // Eloquent       
+        $this->supplier_id = DB::table('defaults')->where('name', 'supplier_asset')->pluck('value');
+        $this->status_id = DB::table('defaults')->where('name', 'asset_status')->pluck('value');
+    }
     /**
     * Handle depreciation
     */

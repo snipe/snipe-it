@@ -14,6 +14,12 @@ class License extends Elegant
             'note'              => 'alpha_space',
             'notes'             => 'alpha_space|min:0|max:255',
         );
+    
+    public function __construct($attributes = array())  {
+        parent::__construct($attributes); // Eloquent       
+        $this->depreciation_id = DB::table('defaults')->where('name', 'depr_software')->pluck('value');
+        $this->supplier_id = DB::table('defaults')->where('name', 'supplier_software')->pluck('value');
+    }
 
     /**
      * Get the assigned user
