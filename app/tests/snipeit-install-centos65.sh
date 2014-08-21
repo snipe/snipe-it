@@ -38,7 +38,7 @@ export SNIPEITDBUSER=travis
 
 # Change this if you want to pull a different fork/branch of application code
 export SNIPEITGITFORK=/cordeos/snipe-it
-export SNIPEITGITBRANCH=master
+export SNIPEITGITBRANCH=develop
 
 # DEFINITELY CHANGE THESE PASSWORDS!!!
 export MYSQLROOTPW=MyPassw0rd
@@ -234,7 +234,7 @@ chmod -R 774 $SNIPEITDIR/app/storage/
 
 
 #cd $SNIPEITDIR
-#php artisan key:generate --env=production
+php artisan key:generate --env=production
 
 service httpd restart
 
@@ -249,3 +249,4 @@ echo "Snipe INSTALLATION complete.  Please change to the install directory (cd $
 
 cd $SNIPEITDIR
 php artisan app:install
+
