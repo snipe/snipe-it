@@ -145,7 +145,7 @@ yum -y --enablerepo=remi update
 chkconfig httpd on
 service httpd start
 
-yum --enablerepo=remi,remi-php55 install php php-xml php-mcrypt php-pdo php-mysqlnd php-gd
+yum -y --enablerepo=remi,remi-php55 install php php-xml php-mcrypt php-pdo php-mysqlnd php-gd
 
 # ENABLE HTTP PERMISSION CHANGE TO SELINUX SECURITY - NEW FOR CENTOS 7.0
 setsebool -P httpd_unified 1
@@ -154,10 +154,10 @@ setsebool -P httpd_unified 1
 # To reduce conflicts, eliminate uneccessary modules and reduce security exposure, 
 # rename any unneeded Apache conf files
 
-mv autoindex.conf autoindex.bak
-mv fcgid.conf fcgid.bak
-mv userdir.conf userdir.bak
-mv welcome.conf welcome.bak
+mv -f autoindex.conf autoindex.bak
+mv -f fcgid.conf fcgid.bak
+mv -f userdir.conf userdir.bak
+mv -f welcome.conf welcome.bak
 
 echo "PHP5.5 and modules installed, continuing..."
 sleep 5s
