@@ -24,6 +24,11 @@ class Model extends Elegant
     {
         return $this->hasMany('Asset', 'model_id');
     }
+    
+        public function has_assets()
+    {
+        return $this->hasMany('Asset', 'model_id')->count();
+    }
 
     public function category()
     {

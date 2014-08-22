@@ -28,6 +28,16 @@ class FamiliesController extends AdminController
         // Show the page
         return View::make('backend/families/index', compact('families'));
     }
+    
+    public function getView($familyId = null)
+    {
+         if (is_null($family = Family::find($familyId))) {
+            // Redirect to the blogs management page
+            return Redirect::to('admin/settings/families')->with('error', Lang::get('admin/families/message.does_not_exist'));
+        }
+        // Show the page
+        return View::make('backend/families/view', compact('family'));
+    }
 
 
     /**

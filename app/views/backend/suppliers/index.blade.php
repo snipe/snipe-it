@@ -24,12 +24,12 @@
 <table id="example">
     <thead>
         <tr role="row">
-            <th class="col-md-3">@lang('admin/suppliers/table.name')</th>
-            <th class="col-md-3">@lang('admin/suppliers/table.address')</th>
-            <th class="col-md-3">@lang('admin/suppliers/table.contact')</th>
-            <th class="col-md-3">@lang('admin/suppliers/table.phone')</th>
-            <th class="col-md-3">@lang('admin/suppliers/table.hw-sw')</th>
-            <th class="col-md-2 actions">@lang('table.actions')</th>
+            <th class="col-md-2">@lang('admin/suppliers/table.name')</th>
+            <th class="col-md-2">@lang('admin/suppliers/table.address')</th>
+            <th class="col-md-2">@lang('admin/suppliers/table.contact')</th>
+            <th class="col-md-2">@lang('admin/suppliers/table.phone')</th>
+            <th class="col-md-2">@lang('admin/suppliers/table.hw-sw')</th>
+            <th class="col-md-1 actions">@lang('table.actions')</th>
         </tr>
     </thead>
     <tbody>
@@ -58,9 +58,15 @@
             <td>{{{ $supplier->num_assets() }}} / {{{ $supplier->num_licenses() }}}</td>
             <td>
                 <a href="{{ route('update/supplier', $supplier->id) }}" class="btn btn-warning"><i class="icon-pencil icon-white"></i></a>
-                <a data-html="false" class="btn delete-asset btn-danger" data-toggle="modal" href="{{ route('delete/supplier', $supplier->id) }}" data-content="@lang('admin/suppliers/message.delete.confirm')"
-                data-title="@lang('general.delete')
-                 {{ htmlspecialchars($supplier->name) }}?" onClick="return false;"><i class="icon-trash icon-white"></i></a>
+                <a data-html="false" 
+                   @if($supplier->num_assets() || $supplier->num_licenses())
+                        disabled="true"
+                   @endif
+                   class="btn delete-asset btn-danger" 
+                   data-toggle="modal" href="{{ route('delete/supplier', $supplier->id) }}" 
+                   data-content="@lang('admin/suppliers/message.delete.confirm')"
+                   data-title="@lang('general.delete')
+                   {{ htmlspecialchars($supplier->name) }}?" onClick="return false;"><i class="icon-trash icon-white"></i></a>
 
 
             </td>

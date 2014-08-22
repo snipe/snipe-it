@@ -44,7 +44,7 @@
                 @if ($entity->locations)
                     @foreach ($entity->locations as $location)
                         <tr> 
-                            <td>{{{ $location->name }}}</td>
+                            <td><a href="{{ route('view/location', $location->id) }}" class="name">{{{ $location->name }}}</a></td>
                             <td>{{{ $location->address }}}, {{{ $location->address2 }}}  </td>
                             <td>{{{ $location->city }}}, {{{ $location->state }}}  {{{ $location->country }}}  </td>
                         </tr>

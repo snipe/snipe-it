@@ -190,9 +190,14 @@ View User {{{ $user->fullName() }}} ::
                         @if ($user->location_id)
                             <iframe width="300" height="133" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.com/maps?&amp;q={{{ $user->userloc->address }}},{{{ $user->userloc->city }}},{{{ $user->userloc->state }}},{{{ $user->userloc->country }}}&amp;output=embed"></iframe>
                         @endif
+                        
                         <ul>
+                        @if ($user->location_id)
+                        <li><a href="{{ route('view/location', $user->userloc->id) }}" >{{{ $user->userloc->name }}}</a></li>
+                        @endif
+                        
                         @if ($user->manager)
-                            <strong>Manager:</strong> {{{ $user->manager->fullName() }}}
+                        <li><strong>Manager:</strong> <a href="{{ route('view/user', $user->manager->id) }}" class="name">{{{ $user->manager->fullName() }}}</a></li>
                         @endif
 
                         @if ($user->location_id)
@@ -202,7 +207,7 @@ View User {{{ $user->fullName() }}} ::
                         @if ($user->phone)
                             <li><i class="icon-phone"></i>{{{ $user->phone }}}</li>
                         @endif
-                            <li><i class="icon-envelope-alt"></i><a href="mailto:{{{ $user->email }}}">{{{ $user->email }}}</a></li>
+                            <li><i class="icon-envelope-alt"></i>{{HTML::mailto($user->email)}}</li>
                         </ul>
 
                         @if ($user->last_login!='')

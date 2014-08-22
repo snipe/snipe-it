@@ -205,11 +205,17 @@ class LocationsController extends AdminController
             // Redirect to the locations management page
             return Redirect::to('admin/settings/locations')->with('success', Lang::get('admin/locations/message.delete.success'));
         }
-
-
-
     }
-
-
+    
+    public function getView($locationId = null)
+    {
+         // Check if the location exists
+        if (is_null($location = Location::find($locationId))) {
+            // Redirect to the blogs management page
+            return Redirect::to('admin/settings/locations')->with('error', Lang::get('admin/locations/message.does_not_exist'));
+        }
+        
+         return View::make('backend/locations/view', compact('location'));               
+    }
 
 }

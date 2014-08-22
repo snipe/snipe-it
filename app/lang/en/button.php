@@ -7,5 +7,6 @@ return array(
     'restore' => 'Restore',
     'actions' => 'Actions',
     'submit'  => 'Submit',
+    'update'  => 'Update',
 
 );

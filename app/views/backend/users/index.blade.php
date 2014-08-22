@@ -55,9 +55,10 @@
             <a href="{{ route('view/user', $user->id) }}" class="name">{{{ $user->fullName() }}}</a>
 
             </td>
-            <td>{{{ $user->email }}}</td>
+            <td>{{ HTML::mailto($user->email) }} </td>
             <td>
-            @if ($user->manager) {{{ $user->manager->fullName() }}}
+            @if ($user->manager) 
+                <a href="{{ route('view/user', $user->manager->id) }}" class="name">{{{ $user->manager->fullName() }}}                
             @endif
             </td>
             <td>{{{ $user->assets->count() }}}</td>

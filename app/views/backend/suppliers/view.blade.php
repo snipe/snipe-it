@@ -109,32 +109,14 @@
                                     @foreach ($supplier->licenses as $supplierlicenses)
                                     <tr>
                                         <td><a href="{{ route('view/license', $supplierlicenses->id) }}">{{{ $supplierlicenses->name }}}</a></td>
-                                        <td> {{{ $supplierlicenses->serial }}} <!-- <a href="{{ route('view/hardware', $supplierlicenses->id) }}">{{{ $supplierlicenses->asset_tag }}}</a> --></td>
-                                        <td> {{{ $supplierlicenses->seats }}}
-                                            <!--
-                                        @if ($supplierlicenses->assignedasset)
-                                        <a href="{{ route('view/user', $supplierassets->assigned_to) }}">
-                                        {{{ $supplierassets->assigneduser->fullName() }}}
-                                        </a>
-                                        @endif
-                                        -->
-                                        </td>
+                                        <td> {{{ $supplierlicenses->serial }}}</td>
+                                        <td> {{{ $supplierlicenses->seats }}}</td>
                                         <td>
-                                            
                                             <a href="{{ route('update/license', $supplierlicenses->id) }}" class="btn btn-warning"><i class="icon-pencil icon-white"></i></a>
                                             <a data-html="false" class="btn delete-asset btn-danger" data-toggle="modal" href="{{ route('delete/license', $supplierlicenses->id) }}"
                                             data-content="@lang('admin/licenses/message.delete.confirm')"
                                             data-title="@lang('general.delete')
-                                            {{ htmlspecialchars($supplierlicenses->name) }}?" onClick="return false;"><i class="icon-trash icon-white"></i></a>                                            
-                                            
-                                            
-                                        <!--
-                                        @if ($supplierassets->assigned_to != 0)
-                                            <a href="{{ route('checkin/hardware', $supplierassets->id) }}" class="btn-flat info">Checkin</a>
-                                        @else
-                                            <a href="{{ route('checkout/hardware', $supplierassets->id) }}" class="btn-flat success">Checkout</a>
-                                        @endif
-                                        -->
+                                            {{ htmlspecialchars($supplierlicenses->name) }}?" onClick="return false;"><i class="icon-trash icon-white"></i></a>   
                                         </td>
 
                                     </tr>

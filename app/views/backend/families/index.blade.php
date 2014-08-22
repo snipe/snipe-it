@@ -30,7 +30,7 @@ Families ::
     <tbody>
         @foreach ($families as $family)
         <tr>
-            <td>{{{ $family->common_name }}}</td>
+            <td>{{ HTML::linkAction('view/family', $family->common_name, array($family->id)) }} ({{ $family->has_licenses() }})</td>
             <td>{{{ $family->name }}}</td>
             <td>{{{ $family->notes }}}</td>
             <td>

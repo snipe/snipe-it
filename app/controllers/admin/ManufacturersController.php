@@ -159,15 +159,17 @@ class ManufacturersController extends AdminController
             // Redirect to the manufacturers management page
         return Redirect::to('admin/settings/manufacturers')->with('success', Lang::get('admin/manufacturers/message.delete.success'));
         }
-
-
-
-
-
-
     }
+    
+    public function getView($manufacturerId = null)
+    {
+        // Check if the manufacturer exists
+        if (is_null($manufacturer = Manufacturer::find($manufacturerId))) {
+            // Redirect to the manufacturer  page
+            return Redirect::to('admin/settings/manufacturers')->with('error', Lang::get('admin/manufacturers/message.does_not_exist'));
+        }
 
-
-
-
+        // Show the page
+        return View::make('backend/manufacturers/view', compact('manufacturer'));
+    }
 }

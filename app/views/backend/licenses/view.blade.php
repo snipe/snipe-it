@@ -203,14 +203,14 @@
                     @if ($license->manufacturer_id)
                     <li>
                         @lang('admin/hardware/form.manufacturer')
-                        : {{ $license->manufacturer->name }} </li>
+                        : {{ HTML::linkAction('view/manufacturer', $license->manufacturer->name, array($license->manufacturer->id)) }}</li>
                     @endif
                     
                     <!-- // Display the family -->
                     @if ($license->family_id)
                     <li>
                         @lang('general.family')
-                        : {{ $license->family->common_name }} </li>
+                        : {{ HTML::linkAction('view/family', $license->family->name, array($license->family->id)) }}</li>
                     @endif
                     
                     <!-- // Display the supplier -->

@@ -48,7 +48,7 @@
 
         @if ($asset->model->manufacturer)
             <div class="col-md-6"><strong>@lang('admin/hardware/form.manufacturer'): </strong>
-            <a href="{{ route('update/manufacturer', $asset->model->manufacturer->id) }}">
+            <a href="{{ route('view/manufacturer', $asset->model->manufacturer->id) }}">
             {{{ $asset->model->manufacturer->name }}}
             </a> </div>
             <div class="col-md-6"><strong>@lang('admin/hardware/form.model'):</strong>
@@ -172,7 +172,7 @@
                     <th class="col-md-3"><span class="line"></span>@lang('general.date')</th>
                     <th class="col-md-2"><span class="line"></span>@lang('general.admin')</th>
                     <th class="col-md-2"><span class="line"></span>@lang('table.action')</th>
-                    <th class="col-md-2"><span class="line"></span>@lang('general.user')</th>
+                    <th class="col-md-2"><span class="line"></span>@choice('general.user',1)</th>
                     <th class="col-md-3"><span class="line"></span>@lang('general.notes')</th>
                 </tr>
             </thead>

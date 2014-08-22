@@ -100,6 +100,7 @@ Route::group(array('prefix' => 'admin'), function () {
             Route::get('{manufacturerId}/edit', array('as' => 'update/manufacturer', 'uses' => 'Controllers\Admin\ManufacturersController@getEdit'));
             Route::post('{manufacturerId}/edit', 'Controllers\Admin\ManufacturersController@postEdit');
             Route::get('{manufacturerId}/delete', array('as' => 'delete/manufacturer', 'uses' => 'Controllers\Admin\ManufacturersController@getDelete'));
+            Route::get('{manufacturerId}/view', array('as' => 'view/manufacturer', 'uses' => 'Controllers\Admin\ManufacturersController@getView'));
         });
 
         # Suppliers
@@ -141,6 +142,7 @@ Route::group(array('prefix' => 'admin'), function () {
             Route::get('{locationId}/edit', array('as' => 'update/location', 'uses' => 'Controllers\Admin\LocationsController@getEdit'));
             Route::post('{locationId}/edit', 'Controllers\Admin\LocationsController@postEdit');
             Route::get('{locationId}/delete', array('as' => 'delete/location', 'uses' => 'Controllers\Admin\LocationsController@getDelete'));
+            Route::get('{locationId}/view', array('as' => 'view/location', 'uses' => 'Controllers\Admin\LocationsController@getView'));
         });
         
         # Entities
@@ -162,6 +164,7 @@ Route::group(array('prefix' => 'admin'), function () {
             Route::get('{entityId}/edit', array('as' => 'update/family', 'uses' => 'Controllers\Admin\FamiliesController@getEdit'));
             Route::post('{entityId}/edit', 'Controllers\Admin\FamiliesController@postEdit');
             Route::get('{entityId}/delete', array('as' => 'delete/family', 'uses' => 'Controllers\Admin\FamiliesController@getDelete'));
+            Route::get('{entityId}/view', array('as' => 'view/family', 'uses' => 'Controllers\Admin\FamiliesController@getView'));
         });
         
         # Status Labels

@@ -17,7 +17,7 @@ class Location extends Elegant
     //get defaults
     public function __construct($attributes = array())  {
         parent::__construct($attributes); // Eloquent
-        $this->entity_id = DB::table('defaults')->where('name', 'location_entity')->pluck('value');
+        $this->entity_id = DB::table('defaults')->where('name', 'entity')->pluck('value');
     }
 
 
@@ -25,6 +25,12 @@ class Location extends Elegant
     {
         return $this->hasMany('User', 'location_id')->count();
     }
+    
+    public function users()
+    {
+        return $this->hasMany('User', 'location_id');
+    }
+    
     
     public function entity()
     {

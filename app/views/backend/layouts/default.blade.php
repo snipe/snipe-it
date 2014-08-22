@@ -122,7 +122,7 @@
                         <li {{{ (Request::is('admin/users/create') ? 'class="active"' : '') }}}>
                             <a href="{{ route('create/user') }}">
                             <i class="icon-plus"></i>
-                            @lang('general.user')</a>
+                            @choice('general.user',1)</a>
                         </li>
                     </ul>
                 </li>
