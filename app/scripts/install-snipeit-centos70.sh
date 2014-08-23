@@ -29,34 +29,115 @@ sleep 2s
 ###############################################################################
 
 # do not change unless you have a good reason to store elsewhere
-export APACHEHOME=/var/www
-export SNIPEITNAME=snipeit
-export SNIPEITDIR="$APACHEHOME/$SNIPEITNAME"
+APACHEHOME=/var/www
+read -e -i "$APACHEHOME" -p "Confirm your Apache root directory: " input
+APACHEHOME="${input:-$APACHEHOME}"
+
+SNIPEITNAME=snipeit
+read -e -i "$SNIPEITNAME" -p "Confirm your Snipe IT database and site name: " input
+SNIPEITNAME="${input:-$SNIPEITNAME}"
+
+SNIPEITDIR="$APACHEHOME/$SNIPEITNAME"
+read -e -i "$SNIPEITDIR" -p "Confirm your Snipe IT install directory: " input
+SNIPEITDIR="${input:-$SNIPEITDIR}"
 
 # do not change - install will break
-export SNIPEITDBUSER=travis
+SNIPEITDBUSER=travis
+read -e -i "$SNIPEITDBUSER" -p "Confirm your Snipe IT database user: " input
+SNIPEITDBUSER="${input:-$SNIPEITDBUSER}"
 
 # Change this if you want to pull a different fork/branch of application code
-export SNIPEITGITFORK=/cordeos/snipe-it
-export SNIPEITGITBRANCH=develop
+SNIPEITGITFORK=/cordeos/snipe-it
+read -e -i "$SNIPEITGITFORK" -p "Confirm your Snipe IT code fork to pull: " input
+SNIPEITGITFORK="${input:-$SNIPEITGITFORK}"
+
+SNIPEITGITBRANCH=develop
+read -e -i "$SNIPEITGITBRANCH" -p "Confirm Snipe IT code branch to pull: " input
+SNIPEITGITBRANCH="${input:-$SNIPEITGITBRANCH}"
+
+echo ''
 
 # DEFINITELY CHANGE THESE PASSWORDS!!!
-export MYSQLROOTPW=MyPassw0rd
-export SNIPEITDBPW=MyPassw0rd
+MYSQLROOTPW=''
+while true; do
+    read -e -i "$MYSQLROOTPW" -p "Please enter a new MySQL root password (REQUIRED): " input
+    MYSQLROOTPW="${input:-$MYSQLROOTPW}"
+    LEN=$(echo ${#MYSQLROOTPW})
+    # echo $LEN
+    if [ $LEN -lt 6 ] 
+    then
+        echo "Password must be at least 6 characters"
+    else
+        break
+    fi
+done
+
+
+SNIPEITDBPW=''
+while true; do
+    read -e -i "$SNIPEITDBPW" -p "Please enter your Snipe IT database password (REQUIRED): " input
+    SNIPEITDBPW="${input:-$SNIPEITDBPW}"
+    LEN=$(echo ${#SNIPEITDBPW})
+    # echo $LEN
+    if [ $LEN -lt 6 ]
+    then
+        echo "Password must be at least 6 characters"
+    else
+        break
+    fi
+done
+
+echo ''
 
 # Leave as is to get your currently set hostname and localhost, or change to custom DNS host
-export SERVERNAME=$(hostname -s)
-export DOMAINNAME=$(hostname -d)
-export FULLSERVERNAME=$HOSTNAME
+SERVERNAME=$(hostname -s)
+read -e -i "$SERVERNAME" -p "Confirm your server host name: " input
+SERVERNAME="${input:-$SERVERNAME}"
 
+DOMAINNAME=$(hostname -d)
+read -e -i "$DOMAINNAME" -p "Confirm your domain name: " input
+DOMAINNAME="${input:-$DOMAINNAME}"
+
+FULLSERVERNAME=$HOSTNAME
+read -e -i "$FULLSERVERNAME" -p "Confirm your full server network name: " input
+FULLSERVERNAME="${input:-$FULLSERVERNAME}"
+
+clear
+
+echo ''
+echo "Please confirm your settings are correct:"
+echo ''
+echo "Apache home directory: $APACHEHOME"
+echo "Snipe IT site name: $SNIPEITNAME"
+echo "Snipe IT install directory: $SNIPEITDIR"
+echo "Snipe IT code fork: $SNIPEITGITFORK"
+echo "Snipe IT code branch: $SNIPEITGITBRANCH"
+echo "MySQL root password: $MYSQLROOTPW"
+echo "Snipe IT database user: $SNIPEITDBUSER"
+echo "Snipe IT database password: $SNIPEITDBPW"
+echo "Server host name: $SERVERNAME"
+echo "Domain name: $DOMAINNAME"
+echo "Site URL: $FULLSERVERNAME"
+echo ''
+
+echo "Do you wish to Snipe IT with these settings?"
+select yn in "Yes" "No"; do
+    case $yn in
+        Yes ) break;;
+        No ) exit;;
+    esac
+done
+
+clear
+echo ''
+echo "Install settings saved, continuing..."
+echo ''
+sleep 5s
 
 ###############################################################################
 # END OF SETTINGS 
 ###############################################################################
 
-
-echo "Environment variables set, continuing..."
-sleep 5s
 
 echo "Running YUM clean and update..."
 sleep 2s
