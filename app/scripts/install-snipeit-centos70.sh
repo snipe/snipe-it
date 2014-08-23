@@ -405,12 +405,12 @@ service httpd restart
 echo "Laravel installed, configured and updated, continuing..."
 sleep 5s
 
-#clear
+clear
 
-echo "Begin basic software install/setup..."
 sleep 2s
 echo "Snipe INSTALLATION complete.  Please change to the install directory (cd $SNIPEITDIR) and run [php artisan app:install] to setup the application."
-
+echo ''
+echo "Begin basic software setup..."
 cd $SNIPEITDIR
 php artisan app:install
 
