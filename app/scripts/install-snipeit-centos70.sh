@@ -120,7 +120,7 @@ echo "Domain name: $DOMAINNAME"
 echo "Site URL: $FULLSERVERNAME"
 echo ''
 
-echo "Do you wish to Snipe IT with these settings?"
+echo "Do you wish to install Snipe IT with these settings?"
 select yn in "Yes" "No"; do
     case $yn in
         Yes ) break;;
@@ -194,6 +194,7 @@ echo "Installing MySQL 5.6..."
 sleep 2s
 
 cd $HOME
+rm -f mysql-community-release-el6-5.noarch.rpm
 wget http://dev.mysql.com/get/mysql-community-release-el6-5.noarch.rpm
 yum -y localinstall mysql-community-release-el6-*.noarch.rpm
 yum -y install mysql-community-server
@@ -216,8 +217,10 @@ sleep 2s
 # These packages and repositories are specific to 
 # RHEL/CentOS 7 64-Bit - do not mistakenly use the 6.4 or 6.5 ones!
 cd $HOME
+rm -f epel-release-7-0.2.noarch.rpm
 wget http://dl.fedoraproject.org/pub/epel/beta/7/x86_64/epel-release-7-0.2.noarch.rpm
 rpm -Uvh epel-release-7-0.2.noarch.rpm
+rm -f remi-release-7.rpm
 wget http://rpms.famillecollet.com/enterprise/remi-release-7.rpm
 rpm -Uvh remi-release-7*.rpm
 
@@ -248,6 +251,8 @@ sleep 5s
 echo "Creating and cloning the SNIPE-IT application from GITHUB..."
 sleep 2s
 
+cp -rfau $SNIPEITDIR $SNIPEITDIR_BAK
+rm -rf $SNIPEITDIR
 mkdir $SNIPEITDIR
 cd $SNIPEITDIR
 git clone -b $SNIPEITGITBRANCH https://github.com/$SNIPEITGITFORK $SNIPEITDIR
@@ -259,7 +264,8 @@ sleep 5s
 
 echo "Creating the APACHE configuration file for Snipe IT..."
 sleep 2s
-
+cp -ua /etc/httpd/conf.d/snipeit.conf /etc/httpd/conf.d/snipeit.conf.bak
+rm -f /etc/httpd/conf.d/snipeit.conf
 echo "#*****************************************************************" >> /etc/httpd/conf.d/snipeit.conf
 echo "# SNIPEIT APACHE SITE CONFIG" >> /etc/httpd/conf.d/snipeit.conf
 echo "# http://www.cordeos.com    support@cordeos.com" >> /etc/httpd/conf.d/snipeit.conf
@@ -300,7 +306,7 @@ sleep 5s
 
 echo "Creating the GITHUB update script file for Snipe IT..."
 sleep 2s
-
+rm -f $HOME/snipeit-git-update.sh
 echo "#*****************************************************************" >> $HOME/snipeit-git-update.sh
 echo "# SNIPEIT GITHUB UPDATE SCRIPT" >> $HOME/snipeit-git-update.sh
 echo "# http://www.cordeos.com    support@cordeos.com" >> $HOME/snipeit-git-update.sh
@@ -326,7 +332,7 @@ sleep 5s
 
 echo "Creating the Snipe IT backup script..."
 sleep 2s
-
+rm -f $HOME/snipeit-backup.sh
 echo "#*****************************************************************" >> $HOME/snipeit-backup.sh
 echo "# SNIPEIT BACKUP SCRIPT" >> $HOME/snipeit-backup.sh
 echo "# http://www.cordeos.com    support@cordeos.com" >> $HOME/snipeit-backup.sh
@@ -367,9 +373,16 @@ sleep 5s
 echo "Editing Snipe IT configuration files..."
 sleep 2s
 
-cp $SNIPEITDIR/app/config/production/database.example.php $SNIPEITDIR/app/config/production/database.php
-cp $SNIPEITDIR/app/config/production/mail.example.php $SNIPEITDIR/app/config/production/mail.php
-cp $SNIPEITDIR/app/config/production/app.example.php $SNIPEITDIR/app/config/production/app.php
+cp -au $SNIPEITDIR/app/config/production/database.php.bak
+rm -f $SNIPEITDIR/app/config/production/database.php
+cp -au $SNIPEITDIR/app/config/production/mail.php.bak
+rm -f $SNIPEITDIR/app/config/production/mail.php
+cp -au $SNIPEITDIR/app/config/production/app.php.bak
+rm -f $SNIPEITDIR/app/config/production/app.php
+
+cp -au $SNIPEITDIR/app/config/production/database.example.php $SNIPEITDIR/app/config/production/database.php
+cp -au $SNIPEITDIR/app/config/production/mail.example.php $SNIPEITDIR/app/config/production/mail.php
+cp -au $SNIPEITDIR/app/config/production/app.example.php $SNIPEITDIR/app/config/production/app.php
 
 sed -i "s/staging.yourserver.com/$FULLSERVERNAME/g" $SNIPEITDIR/app/config/production/app.php
 sed -i "s/\x27debug\x27 => true/\x27debug\x27 => false/g" $SNIPEITDIR/app/config/production/app.php
@@ -386,6 +399,7 @@ echo "Installing and updating Laravel Framework..."
 sleep 2s
 
 cd $SNIPEITDIR
+rm -f composer.phar
 curl -sS https://getcomposer.org/installer | php
 php composer.phar install
 php composer.phar update

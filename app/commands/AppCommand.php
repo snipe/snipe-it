@@ -53,9 +53,8 @@ class AppCommand extends Command
         $this->comment('');
         $this->info('  Step: 1');
         $this->comment('');
-        $this->info('    Please follow the following');
-        $this->info('    instructions to create your');
-        $this->info('    default user.');
+        $this->info('    Please answer the following');
+        $this->info('    to create an initial admin user:');
         $this->comment('');
         $this->comment('-------------------------------------');
         $this->comment('');
@@ -80,7 +79,7 @@ class AppCommand extends Command
         $this->comment('');
 
         // Generate the Application Encryption key
-        $this->call('key:generate');
+        $this->call('key:generate --env=production');
 
         // Create the migrations table
         $this->call('migrate:install');
@@ -193,6 +192,60 @@ class AppCommand extends Command
         } while( ! $password);
     }
 
+    
+    protected function askLocationName()
+    {
+        do {
+            // Ask the user to input the initial location
+            $location = $this->ask('Please enter an initial location name (at least 3 characters): ', 'Our Office');
+
+            // Check if email is valid
+            if ($location == '') {
+                // Return an error message
+                $this->error('Location name is invalid. Please try again.');
+            }
+
+            // Store the password
+            $this->userData['location'] = $location;
+        } while( ! $location);
+    }
+    
+    protected function askEntityName()
+    {
+        do {
+            // Ask the user to input the initial location
+            $entity = $this->ask('Please enter an initial entity name (at least 3 characters): ', 'My Company');
+
+            // Check if email is valid
+            if ($entity == '') {
+                // Return an error message
+                $this->error('Entity name is invalid. Please try again.');
+            }
+
+            // Store the password
+            $this->userData['entity'] = $entity;
+        } while( ! $entity);
+    }
+    
+    protected function askEntityCommonName()
+    {
+        do {
+            
+            // Ask the user to input the initial location
+            $entitycommon = $this->ask('Please enter entity common or short name (at least 3 characters): ', $this->userData['entity'] );
+
+            // Check if email is valid
+            if ($entitycommon == '') {
+                // Return an error message
+                $this->error('Entity common name is invalid. Please try again.');
+            }
+
+            // Store the password
+            $this->userData['entitycommon'] = $entitycommon;
+        } while( ! $entitycommon);
+    }
+    
+    
     /**
      * Runs all the necessary Sentry commands.
      *
