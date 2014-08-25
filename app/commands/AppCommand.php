@@ -42,7 +42,7 @@ class AppCommand extends Command
     
     protected $entityData = array(
         'name' => null,
-        'commonname'  => null,
+        'common_name'  => null,
     );
 
     /**
@@ -81,18 +81,18 @@ class AppCommand extends Command
 
         $this->comment('');
         $this->info('    Please answer the following');
-        $this->info('    to add your entity and location:');
+        $this->info('    to setup your company information:');
         $this->comment('');
         $this->comment('-------------------------------------');
         $this->comment('');
         
+        $this->askEntityName();
+        $this->askEntityCommonName();   
         $this->askLocationName();
         $this->askLocationAddress();
         $this->askLocationCity();
         $this->askLocationState();
-        $this->askLocationCountry();
-        $this->askEntityName();
-        $this->askEntityCommonName();     
+        $this->askLocationCountry();  
         
         $this->comment('');
         $this->comment('');
@@ -100,13 +100,13 @@ class AppCommand extends Command
         $this->comment('');
         $this->info('  Step: 2');
         $this->comment('');
-        $this->info('    Preparing your Application');
+        $this->info('    Preparing the application');
         $this->comment('');
         $this->comment('-------------------------------------');
         $this->comment('');
 
         // Generate the Application Encryption key
-        $this->call('key:generate --env=production');
+        $this->call('key:generate');
 
         // Create the migrations table
         $this->call('migrate:install');
@@ -188,7 +188,7 @@ class AppCommand extends Command
     {
         do {
             // Ask the user to input the email address
-            $email = $this->ask('Please enter your user email: ');
+            $email = $this->ask('Please enter your logon email: ');
 
             // Check if email is valid
             if ($email == '') {
@@ -212,7 +212,7 @@ class AppCommand extends Command
     {
         do {
             // Ask the user to input the user password
-            $password = $this->ask('Please enter your user password (at least 8 characters): ');
+            $password = $this->ask('Please enter your logon password (at least 8 characters): ');
 
             // Check if email is valid
             if ($password == '') {
@@ -230,7 +230,7 @@ class AppCommand extends Command
     {
         do {
             // Ask the user to input the initial location
-            $location = $this->ask('Please enter an initial location name (at least 3 characters): ', 'Main Office');
+            $location = $this->ask('Please enter a short, descriptive name for your location (at least 3 characters): ', 'Main Office');
 
             // Check if email is valid
             if ($location == '') {
@@ -247,12 +247,12 @@ class AppCommand extends Command
     {
         do {
             // Ask the user to input the initial location
-            $address = $this->ask('Please enter location address (at least 3 characters): ');
+            $address = $this->ask('Please enter your location address (at least 3 characters): ');
 
             // Check if email is valid
             if ($address == '') {
                 // Return an error message
-                $this->error('Location address is invalid. Please try again.');
+                $this->error('The address you entered is invalid. Please try again.');
             }
 
             // Store the password
@@ -264,12 +264,12 @@ class AppCommand extends Command
     {
         do {
             // Ask the user to input the initial location
-            $city = $this->ask('Please enter location city (at least 3 characters): ');
+            $city = $this->ask('Please enter your location city (at least 3 characters): ');
 
             // Check if email is valid
             if ($city == '') {
                 // Return an error message
-                $this->error('Location city is invalid. Please try again.');
+                $this->error('The city you entered is invalid. Please try again.');
             }
 
             // Store the password
@@ -281,12 +281,12 @@ class AppCommand extends Command
     {
         do {
             // Ask the user to input the initial location
-            $state = $this->ask('Please enter location state/province (at least 2 characters): ', 'NY');
+            $state = $this->ask('Please enter your state or province (at least 2 characters): ', $default = 'NY');
 
             // Check if email is valid
             if ($state == '') {
                 // Return an error message
-                $this->error('Location state is invalid. Please try again.');
+                $this->error('The state you entered is invalid. Please try again.');
             }
 
             // Store the password
@@ -298,12 +298,12 @@ class AppCommand extends Command
     {
         do {
             // Ask the user to input the initial location
-            $country = $this->ask('Please enter country 2-letter ISO code (exactly 2 lowercase characters): ', 'us');
+            $country = $this->ask('Please enter your 2-letter country ISO code (exactly 2 lowercase characters): ', $default = 'us');
 
             // Check if email is valid
             if ($country == '') {
                 // Return an error message
-                $this->error('Location name is invalid. Please try again.');
+                $this->error('The country code you entered is invalid. Please try again.');
             }
 
             // Store the password
@@ -316,16 +316,17 @@ class AppCommand extends Command
     {
         do {
             // Ask the user to input the initial location
-            $entity = $this->ask('Please enter an initial entity name (at least 3 characters): ', 'My Company');
+            $entity = $this->ask('Please enter your full company name (at least 3 characters): ', $default = 'My Company Enterprises Ltd.');
 
             // Check if email is valid
             if ($entity == '') {
                 // Return an error message
-                $this->error('Entity name is invalid. Please try again.');
+                $this->error('The company name you entered is invalid. Please try again.');
             }
 
             // Store the password
             $this->entityData['name'] = $entity;
+            
         } while( ! $entity);
     }
     
@@ -334,7 +335,7 @@ class AppCommand extends Command
         do {
             
             // Ask the user to input the initial location
-            $entitycommon = $this->ask('Please enter entity common or short name (at least 3 characters): ', $this->userData['entity'] );
+            $entitycommon = $this->ask('Please enter a short common name for your company (at least 3 characters): ', $default = $this->entityData['name'] );
 
             // Check if email is valid
             if ($entitycommon == '') {
@@ -343,7 +344,8 @@ class AppCommand extends Command
             }
 
             // Store the password
-            $this->entityData['commonname'] = $entitycommon;
+            $this->entityData['common_name'] = $entitycommon;
+            
         } while( ! $entitycommon);
     }
     
