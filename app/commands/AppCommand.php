@@ -31,6 +31,19 @@ class AppCommand extends Command
         'email'      => null,
         'password'   => null
     );
+    
+    protected $locationData = array(
+        'name' => null,
+        'address' => null,
+        'city' => null,
+        'state' => null,
+        'country' => null
+    );
+    
+    protected $entityData = array(
+        'name' => null,
+        'commonname'  => null,
+    );
 
     /**
      * Create a new command instance.
@@ -66,7 +79,21 @@ class AppCommand extends Command
         $this->askUserEmail();
         $this->askUserPassword();
 
-
+        $this->comment('');
+        $this->info('    Please answer the following');
+        $this->info('    to add your entity and location:');
+        $this->comment('');
+        $this->comment('-------------------------------------');
+        $this->comment('');
+        
+        $this->askLocationName();
+        $this->askLocationAddress();
+        $this->askLocationCity();
+        $this->askLocationState();
+        $this->askLocationCountry();
+        $this->askEntityName();
+        $this->askEntityCommonName();     
+        
         $this->comment('');
         $this->comment('');
         $this->comment('=====================================');
@@ -90,6 +117,12 @@ class AppCommand extends Command
         // Run the Migrations
         $this->call('migrate');
 
+        // Add the initial entity information
+        $this->addEntity();
+        
+        // Add the initial location information
+        $this->addLocation();
+        
         // Create the default user and default groups.
         $this->sentryRunner();
 
@@ -197,7 +230,7 @@ class AppCommand extends Command
     {
         do {
             // Ask the user to input the initial location
-            $location = $this->ask('Please enter an initial location name (at least 3 characters): ', 'Our Office');
+            $location = $this->ask('Please enter an initial location name (at least 3 characters): ', 'Main Office');
 
             // Check if email is valid
             if ($location == '') {
@@ -206,9 +239,78 @@ class AppCommand extends Command
             }
 
             // Store the password
-            $this->userData['location'] = $location;
+            $this->locationData['name'] = $location;
         } while( ! $location);
     }
+
+    protected function askLocationAddress()
+    {
+        do {
+            // Ask the user to input the initial location
+            $address = $this->ask('Please enter location address (at least 3 characters): ');
+
+            // Check if email is valid
+            if ($address == '') {
+                // Return an error message
+                $this->error('Location address is invalid. Please try again.');
+            }
+
+            // Store the password
+            $this->locationData['address'] = $address;
+        } while( ! $address);
+    }
+
+    protected function askLocationCity()
+    {
+        do {
+            // Ask the user to input the initial location
+            $city = $this->ask('Please enter location city (at least 3 characters): ');
+
+            // Check if email is valid
+            if ($city == '') {
+                // Return an error message
+                $this->error('Location city is invalid. Please try again.');
+            }
+
+            // Store the password
+            $this->locationData['city'] = $city;
+        } while( ! $city);
+    }
+
+    protected function askLocationState()
+    {
+        do {
+            // Ask the user to input the initial location
+            $state = $this->ask('Please enter location state/province (at least 2 characters): ', 'NY');
+
+            // Check if email is valid
+            if ($state == '') {
+                // Return an error message
+                $this->error('Location state is invalid. Please try again.');
+            }
+
+            // Store the password
+            $this->locationData['state'] = $state;
+        } while( ! $state);
+    }
+ 
+    protected function askLocationCountry()
+    {
+        do {
+            // Ask the user to input the initial location
+            $country = $this->ask('Please enter country 2-letter ISO code (exactly 2 lowercase characters): ', 'us');
+
+            // Check if email is valid
+            if ($country == '') {
+                // Return an error message
+                $this->error('Location name is invalid. Please try again.');
+            }
+
+            // Store the password
+            $this->locationData['country'] = $country;
+        } while( ! $country);
+    }
+    
     
     protected function askEntityName()
     {
@@ -223,7 +325,7 @@ class AppCommand extends Command
             }
 
             // Store the password
-            $this->userData['entity'] = $entity;
+            $this->entityData['name'] = $entity;
         } while( ! $entity);
     }
     
@@ -241,7 +343,7 @@ class AppCommand extends Command
             }
 
             // Store the password
-            $this->userData['entitycommon'] = $entitycommon;
+            $this->entityData['commonname'] = $entitycommon;
         } while( ! $entitycommon);
     }
     
@@ -261,6 +363,41 @@ class AppCommand extends Command
 
         // Create dummy user
         $this->sentryCreateDummyUser();
+    }
+
+    /**
+     * Add the initial location
+     *
+     * @return void
+     */
+    protected function addLocation()
+    {
+
+        // Prepare the location data array.
+        $data = array_merge($this->locationData, array(
+                'entity_id' => '1',
+                'user_id' => '1'
+            ));
+        DB::table('locations')->insert($data);
+        
+    }
+    
+    /**
+     * Add the initial entity
+     *
+     * @return void
+     */
+    protected function addEntity()
+    {
+    
+        // Prepare the location data array.
+        $data = array_merge($this->entityData, array(
+                'user_id' => '1',
+                'notes' => 'Added by installation'
+            ));
+        
+        DB::table('entities')->insert($data);
+        
     }
 
     /**
@@ -337,8 +474,8 @@ class AppCommand extends Command
             'activated'   => 1,
             'manager_id'  => NULL,
             'permissions' => array(
-                'admin' => 1,
-                'user'  => 1,
+            'admin' => 1,
+            'user'  => 1,
             ),
         ));
 
