@@ -13,7 +13,8 @@ class DatabaseSeeder extends Seeder
 
         $this->call('AssetsSeeder');
         $this->call('CategoriesSeeder');
-        $this->call('LocationsSeeder');
+        // Location now created during installation
+        // $this->call('LocationsSeeder');
         $this->call('ManufacturersSeeder');
         $this->call('ModelsSeeder');
         $this->call('DepreciationsSeeder');
@@ -22,6 +23,7 @@ class DatabaseSeeder extends Seeder
         $this->call('LicensesSeeder');
         $this->call('LicenseSeatsSeeder');
         $this->call('ActionlogSeeder');
+        // Entity now created during installation
         // $this->call('EntitiesSeeder');
         $this->call('DefaultsSeeder');
     }
