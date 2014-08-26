@@ -71,34 +71,46 @@ class AppCommand extends Command
         $this->comment('');
         $this->comment('-------------------------------------');
         $this->comment('');
-
-
+        
         // Let's ask the user some questions, shall we?
         $this->askUserFirstName();
         $this->askUserLastName();
         $this->askUserEmail();
         $this->askUserPassword();
 
+        
+        $this->comment('');
+        $this->comment('=====================================');
+        $this->comment('');
+        $this->info('  Step: 2');
         $this->comment('');
         $this->info('    Please answer the following');
         $this->info('    to setup your company information:');
         $this->comment('');
         $this->comment('-------------------------------------');
         $this->comment('');
-        
         $this->askEntityName();
+        $this->comment('');
         $this->askEntityCommonName();   
+        $this->comment('');
+        $this->comment('-------------------------------------');
+        $this->comment('');
         $this->askLocationName();
+        $this->comment('');
         $this->askLocationAddress();
+        $this->comment('');
         $this->askLocationCity();
+        $this->comment('');
         $this->askLocationState();
+        $this->comment('');
         $this->askLocationCountry();  
+        $this->comment('');
+        $this->comment('');
         
-        $this->comment('');
-        $this->comment('');
+        
         $this->comment('=====================================');
         $this->comment('');
-        $this->info('  Step: 2');
+        $this->info('  Step: 3');
         $this->comment('');
         $this->info('    Preparing the application');
         $this->comment('');
