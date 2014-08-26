@@ -5,11 +5,11 @@ class DefaultsSeeder extends Seeder
     {
 
         // Initialize empty array
-        $default = array();
+        $defaultSetting = array();
 
         $date = new DateTime;
         
-        $default[] = array(
+        $defaultSetting[] = array(
             'name'      		=> 'entity',
             'table_name'     	 	=> 'locations',
             'column_name'               => 'entity_id',
@@ -21,7 +21,7 @@ class DefaultsSeeder extends Seeder
             'deleted_at' 		=> NULL,
         );
 
-        $default[] = array(
+        $defaultSetting[] = array(
             'name'      		=> 'location',
             'table_name'     	 	=> 'users',
             'column_name'               => 'location_id',
@@ -33,7 +33,7 @@ class DefaultsSeeder extends Seeder
             'deleted_at' 		=> NULL,
         );
 
-        $default[] = array(
+        $defaultSetting[] = array(
             'name'      		=> 'depr_software',
             'table_name'     	 	=> 'licenses',
             'column_name'               => 'depreciation_id',
@@ -45,7 +45,7 @@ class DefaultsSeeder extends Seeder
             'deleted_at' 		=> NULL,
         );
 
-        $default[] = array(
+        $defaultSetting[] = array(
             'name'      		=> 'depr_asset',
             'table_name'     	 	=> 'assets',
             'column_name'               => 'depreciation_id',
@@ -57,7 +57,7 @@ class DefaultsSeeder extends Seeder
             'deleted_at' 		=> NULL,
         );
 
-        $default[] = array(
+        $defaultSetting[] = array(
             'name'      		=> 'asset_status',
             'table_name'     	 	=> 'assets',
             'column_name'               => 'stats_id',
@@ -69,7 +69,7 @@ class DefaultsSeeder extends Seeder
             'deleted_at' 		=> NULL,
         );
 
-        $default[] = array(
+        $defaultSetting[] = array(
             'name'      		=> 'supplier_software',
             'table_name'     	 	=> 'licenses',
             'column_name'               => 'supplier_id',
@@ -81,7 +81,7 @@ class DefaultsSeeder extends Seeder
             'deleted_at' 		=> NULL,
         );
 
-        $default[] = array(
+        $defaultSetting[] = array(
             'name'      		=> 'supplier_asset',
             'table_name'     	 	=> 'assets',
             'column_name'               => 'supplier_id',
@@ -97,7 +97,7 @@ class DefaultsSeeder extends Seeder
         DB::table('defaults')->truncate();
 
         // Insert the new posts
-        Default::insert($default);
+        DefaultSetting::insert($defaultSetting);
     }
 
 }
