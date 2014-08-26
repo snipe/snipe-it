@@ -11,7 +11,7 @@ return array(
     'update'        => 'Update Settings',
     
     'values' => array(
-        'entity'   => 'Default Entity',
+        'entity'            => 'Default Entity',
         'location'          => 'Default Location',
         'depr_software'     => 'Default Software Depreciation',
         'depr_asset'        => 'Default Asset Depreciation',
