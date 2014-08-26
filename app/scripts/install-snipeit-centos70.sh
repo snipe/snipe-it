@@ -421,10 +421,35 @@ sleep 5s
 
 clear
 
-sleep 2s
-echo "Snipe INSTALLATION complete.  Please change to the install directory (cd $SNIPEITDIR) and run [php artisan app:install] to setup the application."
+###############################################################################
+# END OF BASIC SETUP 
+###############################################################################
+
+echo "The basic system setup is complete.  Do you want to setup Snipe IT now?"
 echo ''
-echo "Begin basic software setup..."
+echo "If you choose not to setup Snipe IT now, the application will not"
+echo "function until you complete this final step.  To proceed with setup"
+echo "later please change to the Snipe IT install directory (cd $SNIPEITDIR)"
+echo "then run [php artisan app:install] to setup the application."
+echo ''
+echo "Proceed with final setup?"
+echo ''
+select yn in "Yes" "No"; do
+    case $yn in
+        Yes ) break;;
+        No ) exit;;
+    esac
+done
+
+clear
+
+
+###############################################################################
+# APP INSTALL 
+###############################################################################
+
 cd $SNIPEITDIR
 php artisan app:install
+
+
 
