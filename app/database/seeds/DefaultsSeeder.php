@@ -97,7 +97,7 @@ class DefaultsSeeder extends Seeder
         DB::table('defaults')->truncate();
 
         // Insert the new posts
-        Location::insert($default);
+        Default::insert($default);
     }
 
 }
