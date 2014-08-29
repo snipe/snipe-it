@@ -66,6 +66,19 @@ class AppCommand extends Command
      */
     public function fire()
     {
+        // Generate the Application Encryption key
+        $this->call('key:generate');
+
+        // Create the migrations table
+        $this->call('migrate:install');
+
+        // Run the Sentry Migrations
+        $this->call('migrate', array('--package' => 'cartalyst/sentry'));
+
+        // Run the Migrations
+        $this->call('migrate');
+        
+        
         $this->comment('=====================================');
         $this->comment('');
         $this->info('  Step: 1');
@@ -120,18 +133,6 @@ class AppCommand extends Command
         $this->comment('');
         $this->comment('-------------------------------------');
         $this->comment('');
-
-        // Generate the Application Encryption key
-        $this->call('key:generate');
-
-        // Create the migrations table
-        $this->call('migrate:install');
-
-        // Run the Sentry Migrations
-        $this->call('migrate', array('--package' => 'cartalyst/sentry'));
-
-        // Run the Migrations
-        $this->call('migrate');
 
         // Add the initial entity information
         $this->addEntity();
@@ -319,16 +320,17 @@ class AppCommand extends Command
             // Ask the user to input the initial location
             $country = $this->ask('Please enter your 2-letter country ISO code (exactly 2 UPPERCASE characters): ', $default = 'US');
 
-            // Check if email is valid
+            // Check if country is entered
             if ($country == '') {
                 // Return an error message
                 $this->error('Country code is required. Please enter a country code.');
             }
             
-            $country_id = DB::select('select id from countries where code = ?', $country);
+            $country_id = DB::select('select id from countries where code = ?', array($country));
             
-            if ($country_id == NULL) {
+            if (! $country_id ) {
                 // Return an error message
+                $country = NULL;
                 $this->error('The country code you entered is invalid. Please try again.');
             }
             else {
