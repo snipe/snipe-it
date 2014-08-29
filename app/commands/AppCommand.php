@@ -44,6 +44,10 @@ class AppCommand extends Command
         'name' => null,
         'common_name'  => null,
     );
+    
+    protected $countryData = array(
+        'value' => null,
+    );
 
     /**
      * Create a new command instance.
@@ -134,6 +138,9 @@ class AppCommand extends Command
         
         // Add the initial location information
         $this->addLocation();
+        
+        // Add default country record
+        $this->addDefaultCountry();
         
         // Create the default user and default groups.
         $this->sentryRunner();
@@ -310,16 +317,25 @@ class AppCommand extends Command
     {
         do {
             // Ask the user to input the initial location
-            $country = $this->ask('Please enter your 2-letter country ISO code (exactly 2 lowercase characters): ', $default = 'us');
+            $country = $this->ask('Please enter your 2-letter country ISO code (exactly 2 UPPERCASE characters): ', $default = 'US');
 
             // Check if email is valid
             if ($country == '') {
                 // Return an error message
+                $this->error('Country code is required. Please enter a country code.');
+            }
+            
+            $country_id = DB::select('select id from countries where code = ?', $country);
+            
+            if ($country_id == NULL) {
+                // Return an error message
                 $this->error('The country code you entered is invalid. Please try again.');
             }
-
-            // Store the password
-            $this->locationData['country'] = $country;
+            else {
+                $this->locationData['country'] = $country;
+                $this->countryData['value'] = $country_id;
+            }    
+            
         } while( ! $country);
     }
     
@@ -379,6 +395,26 @@ class AppCommand extends Command
         $this->sentryCreateDummyUser();
     }
 
+    /**
+     * Add the country default
+     *
+     * @return void
+     */
+    protected function addDefaultCountry()
+    {
+
+        // Prepare the location data array.
+        $data = array_merge($this->countryData, array(
+                'name' => 'country',
+                'table_name' => 'locations',
+                'column_name' => 'country',
+                'source_table' => 'countries',
+                'user_id' => '1',
+            ));
+        DB::table('defaults')->insert($data);
+        
+    }
+    
     /**
      * Add the initial location
      *

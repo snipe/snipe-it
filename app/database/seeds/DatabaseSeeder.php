@@ -26,6 +26,7 @@ class DatabaseSeeder extends Seeder
         // Entity now created during installation
         // $this->call('EntitiesSeeder');
         $this->call('DefaultsSeeder');
+        $this->call('CountriesSeeder');
     }
 
 }

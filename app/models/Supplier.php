@@ -1,7 +1,7 @@
 <?php
 class Supplier extends Elegant
 {
-    protected $softDelete = true;
+    protected $softDelete = false;
     // Declare the rules for the form validation
     protected $rules = array(
         'name'   			=> 'required|alpha_space|min:3|max:255|unique:suppliers,name,{id}',
@@ -19,6 +19,14 @@ class Supplier extends Elegant
         'url'   			=> 'alpha_space|min:3|max:250',
         
     );
+    
+        //get defaults
+    public function __construct($attributes = array())  {
+        parent::__construct($attributes); // Eloquent
+       
+        $country_id = DB::table('defaults')->where('name', 'country')->pluck('value');
+        $this->country = DB::table('countries')->where('id', $country_id)->pluck('code'); 
+    }
 
     public function assets()
     {

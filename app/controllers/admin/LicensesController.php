@@ -31,8 +31,15 @@ class LicensesController extends AdminController
     public function getIndex()
     {
         // Grab all the licenses
-        $licenses = License::orderBy('created_at', 'DESC')->paginate(Setting::getSettings()->per_page);
-
+        $licenses = License::orderBy('created_at', 'DESC');
+        
+        if (Input::get('withTrashed')) {
+            $licenses = $licenses->withTrashed();    
+        } elseif (Input::get('onlyTrashed')) {	
+            $licenses = $licenses->onlyTrashed();  
+        }
+        $licenses = $licenses->paginate(Setting::getSettings()->per_page);  
+        
         // Show the page
         return View::make('backend/licenses/index', compact('licenses'));
     }
@@ -338,7 +345,7 @@ class LicensesController extends AdminController
     public function getDelete($licenseId)
     {
         // Check if the license exists
-        if (is_null($license = License::find($licenseId))) {
+        if (is_null($license = License::withTrashed()->find($licenseId))) {
             // Redirect to the license management page
             return Redirect::to('admin/licenses')->with('error', Lang::get('admin/licenses/message.not_found'));
         }
@@ -349,20 +356,42 @@ class LicensesController extends AdminController
             return Redirect::to('admin/licenses')->with('error', Lang::get('admin/licenses/message.assoc_users'));
 
         } else {
-
-            // Delete the license and the associated license seats
             $licenseseats = $license->licenseseats();
-            $licenseseats->delete();
-            $license->delete();
-
+            
+            if($license->trashed())
+            {                
+                $licenseseats->forceDelete();
+                $license->forceDelete();
+               
+            } else {
+                // Delete the license and the associated license seats                
+                $licenseseats->delete();
+                $license->delete();
+            }
 
             // Redirect to the licenses management page
-            return Redirect::to('admin/licenses')->with('success', Lang::get('admin/licenses/message.delete.success'));
+            return Redirect::to('admin/licenses')->with('success', $license ? Lang::get('message.delete.success') : Lang::get('message.purge.success'));
         }
 
 
     }
-
+    
+    public function getRestore($licenseId)
+    {
+    
+        if (is_null($license = License::withTrashed()->find($licenseId))) {
+            // Redirect to the license management page
+            return Redirect::to('admin/licenses')->with('error', Lang::get('admin/licenses/message.not_found'));
+        }
+        
+        $license->restore();
+        
+        
+        LicenseSeat::withTrashed()->where('license_id', $license->id)->restore();
+        
+        
+        return Redirect::to('admin/licenses')->with('success', Lang::get('message.restore.success'));
+    }
 
     /**
     * Check out the asset to a person
@@ -547,14 +576,10 @@ class LicensesController extends AdminController
         }
 
         $logaction = new Actionlog();
-        $logaction->checkedout_to = $licenseseat->assigned_to;
-
-        // Update the asset data
-        $licenseseat->assigned_to            		= '0';
-        $licenseseat->asset_id            			= NULL;
+        $logaction->checkedout_to = $licenseseat->assigned_to;     
 
         // Was the asset updated?
-        if($licenseseat->save()) {
+        if($licenseseat->checkin()) {
             $logaction->asset_id = NULL;
             $logaction->location_id = NULL;
             $logaction->asset_type = 'software';
@@ -620,5 +645,16 @@ class LicensesController extends AdminController
                 ->with('depreciation_list',$depreciation_list)
                 ->with('license',$license);
 
+    }
+    
+    public function getPurge()
+    {
+        //delete all licenses
+        $licenses=License::onlyTrashed()->forceDelete();
+        
+        //delete all seats
+        $licenceseats=LicenseSeat::onlyTrashed()->forceDelete();
+        
+        return Redirect::to('admin/licenses')->with('success', 'Purge Submitted');
     }
 }

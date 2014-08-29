@@ -10,12 +10,25 @@
 @section('content')
 
 <div class="row header">
-    <div class="col-md-12">
-        <a href="{{ route('create/user') }}" class="btn btn-success pull-right"><i class="icon-plus-sign icon-white"></i>  @lang('general.create')</a>
+    <div class="col-md-12">        
         @if (Input::get('onlyTrashed'))
-            <a class="btn btn-default pull-right" href="{{ URL::to('admin/users') }}">Show Current Users</a>
+            <a data-html="false" 
+               class="btn delete-asset btn-danger pull-right" 
+               data-toggle="modal" 
+               href="{{ route('purge/users', null) }}" 
+               data-content="@choice('message.purge.confirm', $users->count())" 
+               title="@choice('message.purge.confirm', $users->count())"
+               data-title="@lang('button.purge')?" onClick="return false;"><i class="icon-trash icon-white"></i>
+               @lang('button.purge')
+            </a>
+            <a class="btn btn-default pull-right" href="{{ URL::to('admin/users') }}">
+                {{ Lang::get('button.show_deleted')}}</a>
         @else
-            <a class="btn btn-default pull-right" href="{{ URL::to('admin/users?onlyTrashed=true') }}">Show Deleted Users</a>
+            <a href="{{ route('create/user') }}" title="@lang('button.create')" class="btn btn-success pull-right">
+                <i class="icon-plus-sign icon-white"></i>
+                @lang('button.create')
+            </a>
+            <a class="btn btn-default pull-right" href="{{ URL::to('admin/users?onlyTrashed=true') }}">@lang('button.show_current')</a>
         @endif
 
         <h3>
@@ -77,6 +90,9 @@
 
                 @if ( ! is_null($user->deleted_at))
                 <a href="{{ route('restore/user', $user->id) }}" class="btn btn-warning"><i class="icon-share-alt icon-white"></i></a>
+                <a data-html="false" class="btn delete-asset btn-danger" data-toggle="modal" href="{{ route('delete/user', $user->id) }}" data-content="@choice('message.purge.confirm',1)" 
+                            data-title="@lang('general.purge')
+                            {{ htmlspecialchars($user->fullname()) }}?" onClick="return false;"><i class="icon-remove icon-white"></i></a>
                 @else
                 <a href="{{ route('update/user', $user->id) }}" class="btn btn-warning"><i class="icon-pencil icon-white"></i></a>
 

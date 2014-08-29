@@ -115,7 +115,7 @@ class License extends Elegant
      */
     public function licenseseats()
     {
-        return $this->hasMany('LicenseSeat');
+        return $this->hasMany('LicenseSeat')->withTrashed();
     }
 
     /**

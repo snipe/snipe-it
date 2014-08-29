@@ -64,6 +64,7 @@ return array(
     'no'  				=> 'No',
     'notes'  				=> 'Notes',
     'pending'				=> 'Pending',
+    'purge'				=> 'Purge',
     'people'				=> 'People',
     'per_page'				=> 'Results Per Page',
     'profile'				=> 'Your profile',

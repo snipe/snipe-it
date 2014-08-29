@@ -3,7 +3,7 @@
 class Category extends Elegant
 {
     protected $table = 'categories';
-    protected $softDelete = true;
+    protected $softDelete = false;
 
     /**
     * Category validation rules

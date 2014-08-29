@@ -3,7 +3,7 @@
 class Statuslabel extends Elegant
 {
     protected $table = 'status_labels';
-    protected $softDelete = true;
+    protected $softDelete = false;
 
     protected $rules = array(
         'name'  => 'required|alpha_space|min:2|max:100|unique:status_labels,name,{id}',

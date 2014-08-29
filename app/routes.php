@@ -26,6 +26,8 @@ Route::group(array('prefix' => 'hardware'), function () {
     Route::post('{assetId}/checkin', 'Controllers\Admin\AssetsController@postCheckin');
     Route::get('{assetId}/view', array('as' => 'view/hardware', 'uses' => 'Controllers\Admin\AssetsController@getView'));
     Route::get('{assetId}/qr_code', array('as' => 'qr_code/hardware', 'uses' => 'Controllers\Admin\AssetsController@getQrCode'));
+    Route::get('{assetId}/restore', array('as' => 'restore/hardware', 'uses' => 'Controllers\Admin\AssetsController@getRestore'));
+    Route::get('purge', array('as' => 'purge/hardware', 'uses' => 'Controllers\Admin\AssetsController@getPurge'));
 
 
 # Asset Model Management
@@ -72,6 +74,8 @@ Route::group(array('prefix' => 'admin'), function () {
         Route::get('{licenseId}/checkin', array('as' => 'checkin/license', 'uses' => 'Controllers\Admin\LicensesController@getCheckin'));
         Route::post('{licenseId}/checkin', 'Controllers\Admin\LicensesController@postCheckin');
         Route::get('{licenseId}/view', array('as' => 'view/license', 'uses' => 'Controllers\Admin\LicensesController@getView'));
+        Route::get('purge',  array('as' => 'purge/license', 'uses' => 'Controllers\Admin\LicensesController@getPurge'));
+        Route::get('{licenseId}/restore',  array('as' => 'restore/license', 'uses' => 'Controllers\Admin\LicensesController@getRestore'));
     });
 
 
@@ -83,6 +87,12 @@ Route::group(array('prefix' => 'admin'), function () {
             Route::get('/', array('as' => 'app', 'uses' => 'Controllers\Admin\SettingsController@getIndex'));
             Route::get('edit', array('as' => 'edit/settings', 'uses' => 'Controllers\Admin\SettingsController@getEdit'));
             Route::post('edit', 'Controllers\Admin\SettingsController@postEdit');
+        });
+        
+        # Countries
+        Route::group(array('prefix' => 'countries'), function () {
+            Route::get('/', array('as' => 'countries', 'uses' => 'Controllers\Admin\CountriesController@getIndex'));       
+            Route::get('{countryId}/view', array('as' => 'view/country', 'uses' => 'Controllers\Admin\CountriesController@getView'));
         });
         
         # Default Settings
@@ -143,6 +153,8 @@ Route::group(array('prefix' => 'admin'), function () {
             Route::post('{locationId}/edit', 'Controllers\Admin\LocationsController@postEdit');
             Route::get('{locationId}/delete', array('as' => 'delete/location', 'uses' => 'Controllers\Admin\LocationsController@getDelete'));
             Route::get('{locationId}/view', array('as' => 'view/location', 'uses' => 'Controllers\Admin\LocationsController@getView'));
+            Route::get('purge', array('as' => 'purge/locations', 'uses' => 'Controllers\Admin\LocationsController@getPurge'));
+            Route::get('{locationId}/restore', array('as' => 'restore/location', 'uses' => 'Controllers\Admin\LocationsController@getRestore'));
         });
         
         # Entities
@@ -195,7 +207,7 @@ Route::group(array('prefix' => 'admin'), function () {
         Route::get('{userId}/restore', array('as' => 'restore/user', 'uses' => 'Controllers\Admin\UsersController@getRestore'));
         Route::get('{userId}/view', array('as' => 'view/user', 'uses' => 'Controllers\Admin\UsersController@getView'));
         Route::get('{userId}/unsuspend', array('as' => 'unsuspend/user', 'uses' => 'Controllers\Admin\UsersController@getUnsuspend'));
-
+        Route::get('purge', array('as' => 'purge/users', 'uses' => 'Controllers\Admin\UsersController@getPurge'));
 
         Route::get('datatable', array('as'=>'api.users', 'uses'=>'Controllers\Admin\UsersController@getDatatable'));
     });

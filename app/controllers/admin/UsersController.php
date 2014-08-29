@@ -374,7 +374,8 @@ class UsersController extends AdminController
     {
         try {
             // Get user information
-            $user = Sentry::getUserProvider()->findById($id);
+            $users = Sentry::getUserProvider()->createModel();
+            $user = $users->withTrashed()->find($id);
 
             // Check if we are not trying to delete ourselves
             if ($user->id === Sentry::getId()) {
@@ -405,11 +406,17 @@ class UsersController extends AdminController
             }
 
             // Delete the user
-            $user->delete();
-
-            // Prepare the success message
-            $success = Lang::get('admin/users/message.success.delete');
-
+            if($user->trashed())
+            {
+                $user->forceDelete();
+                $success = Lang::get('message.purge.success');
+            }
+            else
+            {
+                $user->delete();
+                $success = Lang::get('admin/users/message.success.delete');
+            }
+            
             // Redirect to the user management page
             return Redirect::route('users')->with('success', $success);
         } catch (UserNotFoundException $e) {
@@ -545,6 +552,15 @@ class UsersController extends AdminController
             // Redirect to the user management page
             return Redirect::route('users')->with('error', $error);
         }
+    }
+    
+    public function getPurge()
+    {
+        
+        //delete all licenses
+        $users=User::onlyTrashed()->forceDelete();  
+        
+        return Redirect::to('admin/users')->with('success', Lang::get('message.purge.success'));
     }
 
     public function getClone($id = null)

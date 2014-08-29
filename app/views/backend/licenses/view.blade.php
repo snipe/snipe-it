@@ -92,7 +92,7 @@
                                 <td>Seat {{ $count }} </td>
                                 <td> 
                                     
-                                    @if ($licensedto->asset_id)
+                                    @if ($licensedto->asset)
                                         @if ($licensedto->asset->assigned_to != 0)
                                             <a href="{{ route('view/user', $licensedto->asset->assigned_to) }}">
                                                 {{ $licensedto->asset->assigneduser->fullName() }}
@@ -103,7 +103,7 @@
                                  
                                 </td>
                                 <td>
-                                @if ($licensedto->asset_id)
+                                @if ($licensedto->asset)
                                     <a href="{{ route('view/hardware', $licensedto->asset_id) }}">
                                 	{{ $licensedto->asset->name }} {{ $licensedto->asset->asset_tag }}
                                 </a>
@@ -111,7 +111,7 @@
                                 </td>
                                 <td>
                              
-                                @if ($licensedto->asset_id)
+                                @if ($licensedto->asset)
                                     <a href="{{ route('checkin/license', $licensedto->id) }}" class="btn-flat info"> @lang('general.checkin') </a>
                                 @else
                                     <a href="{{ route('checkout/license', $licensedto->id) }}" class="btn-flat success">@lang('general.checkout')</a>

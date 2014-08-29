@@ -24,8 +24,15 @@ class ModelsController extends AdminController
     public function getIndex()
     {
         // Grab all the models
-        $models = Model::orderBy('created_at', 'DESC')->paginate(Setting::getSettings()->per_page);
-
+        $models = Model::orderBy('created_at', 'DESC');
+                
+        if (Input::get('withTrashed')) {
+            $models = $models->withTrashed();    
+        } elseif (Input::get('onlyTrashed')) {	
+            $models = $models->onlyTrashed();  
+        }
+        $models = $models->paginate(Setting::getSettings()->per_page);
+        
         // Show the page
         return View::make('backend/models/index', compact('models'));
     }

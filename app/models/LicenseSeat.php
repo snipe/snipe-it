@@ -20,5 +20,14 @@ class LicenseSeat extends Elegant
     {
         return $this->belongsTo('Asset','asset_id')->withTrashed();
     }
+    
+    public function checkin()
+    {
+        $this->assigned_to   = '0';
+        $this->asset_id  = NULL;
+        
+        return $this->save();
+        
+    }
 
 }

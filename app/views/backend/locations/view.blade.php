@@ -11,19 +11,13 @@
 
 <div class="row header">
     <div class="col-md-12">
-        <div class="btn-group pull-right">
-            <button class="btn gray">@lang('button.actions')</button>
-            <button class="btn glow dropdown-toggle" data-toggle="dropdown">
-                <span class="caret"></span>
-            </button>
-            <ul class="dropdown-menu">    
-                <li><a href="{{ route('update/location', $location->id) }}">@lang('admin/locations/general.edit')</a></li>
-               
-            </ul>
-        </div>
-       <h3 class="name">{{ $location->name }}</h3>
+        <a href="{{ route('update/location', $location->id) }}" class="btn btn-warning pull-right">
+        @lang('button.update')</a>
+        <h3 class="name">        
+        {{{ $location->name }}} </h3>
     </div>
 </div>
+
 
 <div class="user-profile">
 <div class="row profile">

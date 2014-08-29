@@ -11,7 +11,26 @@
 
 <div class="row header">
     <div class="col-md-12">
-        <a href="{{ route('create/licenses') }}" class="btn btn-success pull-right"><i class="icon-plus-sign icon-white"></i> Create New</a>
+        
+         @if (Input::get('onlyTrashed'))
+            <a data-html="false" 
+               class="btn delete-asset btn-danger pull-right" 
+               data-toggle="modal" 
+               href="{{ route('purge/license', null) }}" 
+               data-content="@choice('message.purge.confirm', $licenses->count())" 
+               title="@choice('message.purge.confirm', $licenses->count())"
+               data-title="@lang('button.purge')?" onClick="return false;"><i class="icon-trash icon-white"></i>
+               @lang('button.purge')
+            </a>
+            <a class="btn btn-default pull-right" href="{{ URL::to('admin/licenses') }}">
+                {{ Lang::get('button.show_deleted')}}</a>
+        @else
+            <a href="{{ route('create/licenses') }}" title="@lang('button.create')" class="btn btn-success pull-right">
+                <i class="icon-plus-sign icon-white"></i>
+                @lang('button.create')
+            </a>
+            <a class="btn btn-default pull-right" href="{{ URL::to('admin/licenses?onlyTrashed=true') }}">@lang('button.show_current')</a>
+        @endif
         <h3>@lang('admin/licenses/general.software_licenses')</h3>
     </div>
 </div>
@@ -33,7 +52,7 @@
 
 
         @foreach ($licenses as $license)
-
+                
                 @if ($license->licenseseats)
                 <?php $count=1; ?>
                 @foreach ($license->licenseseats as $licensedto)
@@ -48,11 +67,13 @@
                     <td>
                      @if ($licensedto->asset_id)
                         <a href="{{ route('view/hardware', $licensedto->asset_id) }}">
-                    	{{{ $licensedto->asset->asset_tag }}}
+                        @if($licensedto->asset)                      
+                            {{{ $licensedto->asset->asset_tag }}}
 
-                    	@if (Setting::getSettings()->display_asset_name)
-							({{{ $licensedto->asset->name }}})
-                    	@endif
+                            @if (Setting::getSettings()->display_asset_name)
+                                                            ({{{ $licensedto->asset->name }}})
+                            @endif
+                        @endif
                     	</a>
                     @endif
                     </td>
@@ -63,34 +84,46 @@
                     </a>
                     @elseif (($licensedto->assigned_to) && ($licensedto->deleted_at != NULL))
                         <del>{{{ $licensedto->user->fullName() }}}</del>
-                    @elseif ($licensedto->asset_id)
+                    @elseif ($licensedto->asset)
                                         @if ($licensedto->asset->assigned_to != 0)
                                             <a href="{{ route('view/user', $licensedto->asset->assigned_to) }}">
                                                 {{{ $licensedto->asset->assigneduser->fullName() }}}
                                             </a>
                                         @endif
+                                        @else 
+                                        
                                     @endif
+                                    
 
 
 
                     </td>
                     <td>
-                    @if (($licensedto->assigned_to) || ($licensedto->asset_id))
-                        <a href="{{ route('checkin/license', $licensedto->id) }}" class="btn btn-primary">
-                        @lang('general.checkin')</a>
-                    @else
-                        <a href="{{ route('checkout/license', $licensedto->id) }}" class="btn btn-info">
-                        @lang('general.checkout')</a>
+                    @if (is_null($licensedto->deleted_at))                         
+                        @if (($licensedto->assigned_to) || ($licensedto->asset_id))
+                            <a href="{{ route('checkin/license', $licensedto->id) }}" class="btn btn-primary">
+                            @lang('general.checkin')</a>
+                        @else
+                            <a href="{{ route('checkout/license', $licensedto->id) }}" class="btn btn-info">
+                            @lang('general.checkout')</a>
+                        @endif
                     @endif
+                    
                     </td>
                     <td>
                     @if ($count==1)
-                    <a href="{{ route('update/license', $license->id) }}" class="btn btn-warning"><i class="icon-pencil icon-white"></i></a>
-                        <a data-html="false" class="btn delete-asset btn-danger" data-toggle="modal" href="{{ route('delete/license', $license->id) }}" data-content="@lang('admin/licenses/message.delete.confirm')" 
-                        data-title="@lang('general.delete')
-                        {{ htmlspecialchars($license->name) }}?" onClick="return false;"><i class="icon-trash icon-white"></i></a>
+                        @if (is_null($licensedto->deleted_at))
+                            <a href="{{ route('update/license', $license->id) }}" class="btn btn-warning"><i class="icon-pencil icon-white"></i></a>
+                            <a data-html="false" class="btn delete-asset btn-danger" data-toggle="modal" href="{{ route('delete/license', $license->id) }}" data-content="@lang('admin/licenses/message.delete.confirm')" 
+                            data-title="@lang('general.delete')
+                            {{ htmlspecialchars($license->name) }}?" onClick="return false;"><i class="icon-trash icon-white"></i></a>
+                        @else
+                            <a href="{{ route('restore/license', $license->id) }}" class="btn btn-warning"><i class="icon-share-alt icon-white"></i></a>
+                            <a data-html="false" class="btn delete-asset btn-danger" data-toggle="modal" href="{{ route('delete/license', $license->id) }}" data-content="@choice('message.purge.confirm',1)" 
+                            data-title="@lang('general.purge')
+                            {{ htmlspecialchars($license->name) }}?" onClick="return false;"><i class="icon-remove icon-white"></i></a>
+                        @endif
                     @endif
-
                     </td>
 
 

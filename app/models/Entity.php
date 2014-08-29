@@ -4,7 +4,7 @@
 
 class Entity extends Elegant
 {
-    protected $softDelete = true;
+    protected $softDelete = false;
     protected $table = 'entities';
     
     protected $rules = array(

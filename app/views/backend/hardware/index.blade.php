@@ -10,8 +10,10 @@ $debugbar["messages"]->addMessage("hello world!");
 ?>
 
 @section('title0')
-    @if (Input::get('Pending') || Input::get('Undeployable') || Input::get('RTD')  || Input::get('Deployed'))
-        @if (Input::get('Pending'))
+    @if (Input::get('Pending') || Input::get('Undeployable') || Input::get('RTD')  || Input::get('Deployed') || Input::get('onlyTrashed'))
+        @if (Input::get('onlyTrashed'))
+            @lang('general.deleted')
+        @elseif (Input::get('Pending'))
             @lang('general.pending')
         @elseif (Input::get('RTD'))
             @lang('general.ready_to_deploy')
@@ -38,14 +40,33 @@ $debugbar["messages"]->addMessage("hello world!");
 
 <div class="row header">
     <div class="col-md-12">
-        <a href="{{ route('create/hardware') }}" class="btn btn-success pull-right"><i class="icon-plus-sign icon-white"></i> @lang('general.create')</a>
+       
+        @if (Input::get('onlyTrashed'))
+            <a data-html="false" 
+               class="btn delete-asset btn-danger pull-right" 
+               data-toggle="modal" 
+               href="{{ route('purge/hardware', null) }}" 
+               data-content="@choice('message.purge.confirm', $assets->count())" 
+               title="@choice('message.purge.confirm', $assets->count())"
+               data-title="@lang('button.purge')?" onClick="return false;"><i class="icon-trash icon-white"></i>
+               @lang('button.purge')
+            </a>
+            <a class="btn btn-default pull-right" href="{{ URL::to('hardware') }}">
+                {{ Lang::get('button.show_deleted')}}</a>
+        @else
+            <a href="{{ route('create/hardware') }}" class="btn btn-success pull-right"><i class="icon-plus-sign icon-white"></i> @lang('general.create')</a>
+            <a class="btn btn-default pull-right" href="{{ URL::to('hardware?onlyTrashed=true') }}">@lang('button.show_current')</a>
+        @endif
+
+        
         <h3>@yield('title0')</h3>
     </div>
 </div>
 
 <div class="row form-wrapper">
     <div class="col-md-12">
-        @if ($assets->count() > 0)
+        @if ($assets->count() > 0) 
+       
         <table id="example">
             <thead>
                 <tr role="row">
@@ -75,7 +96,7 @@ $debugbar["messages"]->addMessage("hello world!");
                         <td><a href="{{ route('view/hardware', $asset->id) }}">{{ $asset->name }}</a></td>
                     @endif
                     <td>{{ $asset->serial }}</td>
-                    @if (Input::get('Pending') || Input::get('Undeployable') || Input::get('RTD'))
+                    @if (Input::get('Pending') || Input::get('Undeployable') || Input::get('RTD') )
                         <td>
                             @if (Input::get('Pending'))
                                 @lang('general.pending')
@@ -111,7 +132,9 @@ $debugbar["messages"]->addMessage("hello world!");
 
                     <td>
                     @if ($asset->status_id < 1 )
-                    @if ($asset->assigned_to != 0)
+                    @if ($asset->deleted_at)
+                        &nbsp;
+                    @elseif ($asset->assigned_to != 0)
                         <a href="{{ route('checkin/hardware', $asset->id) }}" class="btn btn-primary">@lang('general.checkin')</a>
                     @else
                         <a href="{{ route('checkout/hardware', $asset->id) }}" class="btn btn-info">@lang('general.checkout')</a>
@@ -119,7 +142,13 @@ $debugbar["messages"]->addMessage("hello world!");
                     @endif
                     </td>
                     <td nowrap="nowrap">
+                        
+                        <!-- If the deleted show restore  -->
+                        @if (!is_null($asset->deleted_at))
+                        <a href="{{ route('restore/hardware', $asset->id) }}" class="btn btn-warning"><span class="icon-share-alt icon-white"></span></a>
+                        @else
                         <a href="{{ route('update/hardware', $asset->id) }}" class="btn btn-warning"><i class="icon-pencil icon-white" alt="Edit"></i></a>
+                        @endif
                         <a data-html="false"                             
                             class="btn delete-asset btn-danger" 
                             data-toggle="modal" 
@@ -130,7 +159,13 @@ $debugbar["messages"]->addMessage("hello world!");
                             onClick="return false;"
                             @if($asset->assigned_to != 0)
                                 disabled="true"
-                            @endif><i class="icon-trash icon-white" alt="delete"></i>
+                            @endif>
+                            @if (!is_null($asset->deleted_at))
+                            <i class="icon-remove icon-white"></i>
+                            @else
+                            <i class="icon-trash icon-white"></i>
+                            @endif
+            </a>
                             </a>
                     </td>
                 </tr>

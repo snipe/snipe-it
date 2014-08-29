@@ -4,7 +4,7 @@
 
 class Family extends Elegant
 {
-    protected $softDelete = true;
+    protected $softDelete = false;
     protected $table = 'families';
     
     protected $rules = array(

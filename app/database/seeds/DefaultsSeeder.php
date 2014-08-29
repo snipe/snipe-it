@@ -92,6 +92,20 @@ class DefaultsSeeder extends Seeder
             'user_id' 			=> 1,
             'deleted_at' 		=> NULL,
         );
+
+        /**
+        $defaultSetting[] = array(
+            'name'      		=> 'country',
+            'table_name'     	 	=> 'locations',
+            'column_name'               => 'country',
+            'value'      		=> '1',
+            'source_table'      	=> 'countries',
+            'created_at' 		=> $date->modify('-10 day'),
+            'updated_at' 		=> $date->modify('-1 day'),
+            'user_id' 			=> 1,
+            'deleted_at' 		=> NULL,
+        );
+         **/   
         
         // Delete all the old data
         DB::table('defaults')->truncate();

@@ -23,9 +23,15 @@ class LocationsController extends AdminController
 
     public function getIndex()
     {
-        // Grab all the locations
-        $locations = Location::orderBy('created_at', 'DESC')->paginate(Setting::getSettings()->per_page);
-
+        $locations = Location::orderBy('created_at', 'DESC');
+        
+        if (Input::get('withTrashed')) {
+            $locations = $locations->withTrashed();    
+        } elseif (Input::get('onlyTrashed')) {	
+            $locations = $locations->onlyTrashed();  
+        }
+        $locations = $locations->paginate(Setting::getSettings()->per_page);
+        
         // Show the page
         return View::make('backend/locations/index', compact('locations'));
     }
@@ -187,8 +193,9 @@ class LocationsController extends AdminController
      */
     public function getDelete($locationId)
     {
+        
         // Check if the location exists
-        if (is_null($location = Location::find($locationId))) {
+        if (is_null($location = Location::withTrashed()->find($locationId))) {
             // Redirect to the blogs management page
             return Redirect::to('admin/settings/locations')->with('error', Lang::get('admin/locations/message.not_found'));
         }
@@ -199,9 +206,15 @@ class LocationsController extends AdminController
             // Redirect to the asset management page
             return Redirect::to('admin/settings/locations')->with('error', Lang::get('admin/locations/message.assoc_users'));
         } else {
-
-            $location->delete();
-
+            
+            if($location->deleted_at) //already soft deleted - force a delete
+            {
+                $location->forceDelete();
+            }
+            else
+            {
+                $location->delete();
+            }
             // Redirect to the locations management page
             return Redirect::to('admin/settings/locations')->with('success', Lang::get('admin/locations/message.delete.success'));
         }
@@ -216,6 +229,27 @@ class LocationsController extends AdminController
         }
         
          return View::make('backend/locations/view', compact('location'));               
+    }
+    
+    public function getPurge()
+    {
+        $locations=Location::onlyTrashed()->forceDelete();
+                
+        return Redirect::to('admin/settings/locations')->with('success', Lang::get('message.purge.success'));
+    }
+    
+    public function getRestore($locationId = null)
+    {
+        // Check if the location exists
+        if (is_null($location = Location::onlyTrashed()->find($locationId))) {
+            // Redirect to the blogs management page
+            return Redirect::to('admin/settings/locations')->with('error', Lang::get('admin/locations/message.does_not_exist'));
+        }
+        
+        $location->deleted_at = null;
+        $location->save();
+        
+        return Redirect::to('admin/settings/locations')->with('success', 'Location Restored');
     }
 
 }

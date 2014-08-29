@@ -36,10 +36,17 @@ class AssetsController extends AdminController
 
     public function getIndex()
     {
+       
         // Grab all the assets
-
+        if (Input::get('withTrashed')) {
+            $assets = Asset::orderBy('asset_tag', 'DESC');
+            $assets = $assets->withTrashed()->paginate(Setting::getSettings()->per_page);;           
+        } elseif (Input::get('onlyTrashed')) {	
+            $assets = Asset::orderBy('asset_tag', 'DESC');
+            $assets = $assets->onlyTrashed()->paginate(Setting::getSettings()->per_page);;
+        }
         // Filter results
-        if (Input::get('Pending')) {
+        elseif (Input::get('Pending')) {
             $assets = Asset::orderBy('asset_tag', 'ASC')->whereNull('status_id','and')->where('assigned_to','=','0')->where('physical', '=', 1)->get();
         } elseif (Input::get('RTD')) {
             $assets = Asset::orderBy('asset_tag', 'ASC')->where('status_id', '=', 0)->where('assigned_to','=','0')->where('physical', '=', 1)->get();
@@ -372,7 +379,7 @@ class AssetsController extends AdminController
     public function getDelete($assetId)
     {
         // Check if the asset exists
-        if (is_null($asset = Asset::find($assetId))) {
+        if (is_null($asset = Asset::withTrashed()->find($assetId))) {
             // Redirect to the asset management page with error
             return Redirect::to('hardware')->with('error', Lang::get('admin/hardware/message.not_found'));
         }
@@ -381,9 +388,21 @@ class AssetsController extends AdminController
             // Redirect to the asset management page
             return Redirect::to('hardware')->with('error', Lang::get('admin/hardware/message.assoc_users'));
         } else {
+            
+            //check in all licences 
+            foreach($asset->licenseseats as $seat)
+            {                
+                $seat->checkin();
+            }
             // Delete the asset
-            $asset->delete();
-
+            if($asset->deleted_at)
+            {
+                $asset->forceDelete();  
+            }
+            else
+            {
+                $asset->delete();                
+            }
             // Redirect to the asset management page
             return Redirect::to('hardware')->with('success', Lang::get('admin/hardware/message.delete.success'));
         }
@@ -628,4 +647,26 @@ class AssetsController extends AdminController
         return View::make('backend/hardware/edit')->with('supplier_list',$supplier_list)->with('model_list',$model_list)->with('statuslabel_list',$statuslabel_list)->with('assigned_to',$assigned_to)->with('asset',$asset);
 
     }
+    
+    public function getRestore($assetID = null)
+    {
+        // Check if the location exists
+        if (is_null($asset = Asset::onlyTrashed()->find($assetID))) {
+            // Redirect to the blogs management page
+            return Redirect::to('hardware')->with('error', Lang::get('admin/locations/message.does_not_exist'));
+        }
+        
+        $asset->deleted_at = null;
+        $asset->save();
+        
+        return Redirect::to('hardware')->with('success', Lang::get('message.restore.success'));
+    }
+    
+    public function getPurge()
+    {
+        $assets=Asset::onlyTrashed()->forceDelete();
+                
+        return Redirect::to('hardware')->with('success', Lang::get('message.purge.success'));
+    }
+
 }

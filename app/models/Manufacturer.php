@@ -1,7 +1,7 @@
 <?php
 class Manufacturer extends Elegant
 {
-    protected $softDelete = true;
+    protected $softDelete = false;
     protected $table = 'manufacturers';
     
     // Declare the rules for the form validation
