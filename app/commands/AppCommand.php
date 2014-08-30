@@ -326,16 +326,16 @@ class AppCommand extends Command
                 $this->error('Country code is required. Please enter a country code.');
             }
             
-            $country_id = DB::select('select id from countries where code = ?', array($country));
-            
-            if (! $country_id ) {
+            $results = DB::select('select id from countries where code = ?', array($country));
+                    
+            if ( $results->isEmpty() ) {
                 // Return an error message
                 $country = NULL;
                 $this->error('The country code you entered is invalid. Please try again.');
             }
             else {
                 $this->locationData['country'] = $country;
-                $this->countryData['value'] = $country_id;
+                $this->countryData['value'] = $results[0]->id;
             }    
             
         } while( ! $country);
