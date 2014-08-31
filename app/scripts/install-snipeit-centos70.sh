@@ -22,7 +22,6 @@ clear
 echo "Setting up the environment variables..."
 sleep 2s
 
-
 ###############################################################################
 # HERE ARE THE SETTINGS YOU CAN CHANGE
 # Some should be changed with CAUTION!
@@ -218,8 +217,8 @@ sleep 2s
 # RHEL/CentOS 7 64-Bit - do not mistakenly use the 6.4 or 6.5 ones!
 cd $HOME
 rm -f epel-release-7-0.2.noarch.rpm
-wget http://dl.fedoraproject.org/pub/epel/beta/7/x86_64/epel-release-7-0.2.noarch.rpm
-rpm -Uvh epel-release-7-0.2.noarch.rpm
+wget http://dl.fedoraproject.org/pub/epel/beta/7/x86_64/epel-release-7-1.noarch.rpm
+rpm -Uvh epel-release-7-1.noarch.rpm 
 rm -f remi-release-7.rpm
 wget http://rpms.famillecollet.com/enterprise/remi-release-7.rpm
 rpm -Uvh remi-release-7*.rpm
@@ -373,11 +372,11 @@ sleep 5s
 echo "Editing Snipe IT configuration files..."
 sleep 2s
 
-cp -au $SNIPEITDIR/app/config/production/database.php.bak
+cp -au $SNIPEITDIR/app/config/production/database.php $SNIPEITDIR/app/config/production/database.php.bak
 rm -f $SNIPEITDIR/app/config/production/database.php
-cp -au $SNIPEITDIR/app/config/production/mail.php.bak
+cp -au $SNIPEITDIR/app/config/production/mail.php $SNIPEITDIR/app/config/production/mail.php.bak
 rm -f $SNIPEITDIR/app/config/production/mail.php
-cp -au $SNIPEITDIR/app/config/production/app.php.bak
+cp -au $SNIPEITDIR/app/config/production/app.php $SNIPEITDIR/app/config/production/app.php.bak
 rm -f $SNIPEITDIR/app/config/production/app.php
 
 cp -au $SNIPEITDIR/app/config/production/database.example.php $SNIPEITDIR/app/config/production/database.php

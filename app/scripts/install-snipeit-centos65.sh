@@ -22,7 +22,6 @@ clear
 echo "Setting up the environment variables..."
 sleep 2s
 
-
 ###############################################################################
 # HERE ARE THE SETTINGS YOU CAN CHANGE
 # Some should be changed with CAUTION!
@@ -356,11 +355,11 @@ sleep 5s
 echo "Editing Snipe IT configuration files..."
 sleep 2s
 
-cp -au $SNIPEITDIR/app/config/production/database.php.bak
+cp -au $SNIPEITDIR/app/config/production/database.php $SNIPEITDIR/app/config/production/database.php.bak
 rm -f $SNIPEITDIR/app/config/production/database.php
-cp -au $SNIPEITDIR/app/config/production/mail.php.bak
+cp -au $SNIPEITDIR/app/config/production/mail.php $SNIPEITDIR/app/config/production/mail.php.bak
 rm -f $SNIPEITDIR/app/config/production/mail.php
-cp -au $SNIPEITDIR/app/config/production/app.php.bak
+cp -au $SNIPEITDIR/app/config/production/app.php $SNIPEITDIR/app/config/production/app.php.bak
 rm -f $SNIPEITDIR/app/config/production/app.php
 
 cp -au $SNIPEITDIR/app/config/production/database.example.php $SNIPEITDIR/app/config/production/database.php
