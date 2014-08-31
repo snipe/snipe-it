@@ -251,7 +251,7 @@ class AppCommand extends Command
     {
         do {
             // Ask the user to input the initial location
-            $location = $this->ask('Please enter descriptive name for your location (min 3 characters, eg. \'Main Office\'): ');
+            $location = $this->ask('Please enter descriptive location name (min 3 characters, eg. \'Main Office\'): ');
 
             // Check if email is valid
             if ($location == '') {
@@ -270,14 +270,14 @@ class AppCommand extends Command
             // Ask the user to input the initial location
             $address = $this->ask('Please enter your location address (optional): ');
 
-            // Check if email is valid
+            // Check if address is valid
             if ($address == '') {
                 // Return an error message
                 //$this->error('The address you entered is invalid. Please try again.');
-                $this->locationData['address'] = ' ';
+                $address = ' ';
             }
 
-            // Store the password
+            // Store the address
             $this->locationData['address'] = $address;
         } while( ! $address);
     }
@@ -288,14 +288,14 @@ class AppCommand extends Command
             // Ask the user to input the initial location
             $city = $this->ask('Please enter your location city (optional): ');
 
-            // Check if email is valid
+            // Check if city is valid
             if ($city == '') {
                 // Return an error message
                 //$this->error('The city you entered is invalid. Please try again.');
-                $this->locationData['city'] = ' ';
+                $city = ' ';
             }
 
-            // Store the password
+            // Store the city
             $this->locationData['city'] = $city;
         } while( ! $city);
     }
@@ -306,14 +306,14 @@ class AppCommand extends Command
             // Ask the user to input the initial location
             $state = $this->ask('Please enter your state or province (optional): ');
 
-            // Check if email is valid
+            // Check if state is valid
             if ($state == '') {
                 // Return an error message
                 //$this->error('The state you entered is invalid. Please try again.');
-                $this->locationData['state'] = ' ';
+                $state = ' ';
             }
 
-            // Store the password
+            // Store the state
             $this->locationData['state'] = $state;
         } while( ! $state);
     }
@@ -322,7 +322,7 @@ class AppCommand extends Command
     {
           do {
             // Ask the user to input the initial location
-            $country = $this->ask('Please enter your country 2-letter ISO code (exactly 2 characters): ');
+            $country = $this->ask('Please enter your country 2-letter ISO code (2 characters): ');
 
             // Check if country is entered
             if ($country == '') {
@@ -336,7 +336,7 @@ class AppCommand extends Command
             if ( ! $countryid ) {
                 // Return an error message
                 $country = NULL;
-                $this->error('The country code entered is invalid. Please enter an ISO country code.');
+                $this->error('The country code entered is invalid. Please enter a valid ISO country code.');
             }
             else {
                 $this->locationData['country'] = $country;
@@ -351,7 +351,7 @@ class AppCommand extends Command
     {
         do {
             // Ask the user to input the initial location
-            $entity = $this->ask('Please enter your full company name (3 characters, eg. \'Venture Enterprises Ltd.\'): ');
+            $entity = $this->ask('Please enter full company name (min 3 characters, eg. \'Venture Enterprises Ltd.\'): ');
 
             // Check if email is valid
             if ($entity == '') {
@@ -359,7 +359,7 @@ class AppCommand extends Command
                 $this->error('Company name is required. Please enter min 3 characters.');
             }
 
-            // Store the password
+            // Store the entity name
             $this->entityData['name'] = $entity;
             
         } while( ! $entity);
@@ -376,10 +376,10 @@ class AppCommand extends Command
             if ($entitycommon == '') {
                 // Return an error message
                 //$this->error('Entity common name is invalid. Please try again.');
-                $this->entityData['common_name'] = $this->entityData['name'];
+                $entitycommon = $this->entityData['name'];
             }
 
-            // Store the password
+            // Store the entity common name
             $this->entityData['common_name'] = $entitycommon;
             
         } while( ! $entitycommon);
