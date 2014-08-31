@@ -25,7 +25,7 @@ class AddEolOnModelsTable extends Migration
     public function down()
     {
         Schema::table('models', function ($table) {
-            $table->dropColumn('old');
+            $table->dropColumn('eol');
         });
     }
 
