@@ -339,6 +339,8 @@ class AppCommand extends Command
                 $this->error('The country code entered is invalid. Please enter a valid ISO country code.');
             }
             else {
+                $countryname = DB::table('countries')->where('id','=',$countryid)->pluck('name');
+                $this->comment('Country selected is... ' . $countryname);
                 $this->locationData['country'] = $country;
                 $this->countryData['value'] = $countryid;
             }
