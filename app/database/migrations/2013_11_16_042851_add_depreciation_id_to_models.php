@@ -24,6 +24,10 @@ class AddDepreciationIdToModels extends Migration
     public function down()
     {
         //
+        Schema::table('models', function ($table) {
+            $table->dropColumn('depreciation_id');
+            
+        });
     }
 
 }

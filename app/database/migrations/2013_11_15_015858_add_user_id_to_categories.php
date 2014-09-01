@@ -24,6 +24,9 @@ class AddUserIdToCategories extends Migration
     public function down()
     {
         //
+        Schema::table('categories', function ($table) {
+            $table->dropColumn('user_id');
+        });
     }
 
 }

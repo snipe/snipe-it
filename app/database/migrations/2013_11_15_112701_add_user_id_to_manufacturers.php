@@ -24,6 +24,9 @@ class AddUserIdToManufacturers extends Migration
     public function down()
     {
         //
+        Schema::table('manufacturers', function ($table) {
+            $table->dropColumn('user_id');
+        });   
     }
 
 }

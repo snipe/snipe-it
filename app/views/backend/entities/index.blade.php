@@ -35,9 +35,16 @@ Entities ::
             <td>{{{ $entity->notes }}}</td>
             <td>
                 <a href="{{ route('update/entity', $entity->id) }}" class="btn btn-warning"><i class="icon-pencil icon-white"></i></a>
-                <a data-html="false" class="btn delete-asset btn-danger" data-toggle="modal" href="{{ route('delete/entity', $entity->id) }}" data-content="@lang('admin/entities/message.delete.confirm')"
-                data-title="@lang('general.delete')
-                 {{ htmlspecialchars($entity->name) }}?" onClick="return false;"><i class="icon-trash icon-white"></i></a>
+                <a data-html="false" class="btn delete-asset btn-danger"
+                    @if($entity->isRequired())
+                    disabled='true'
+                    @endif
+                    data-toggle="modal" 
+                    href="{{ route('delete/entity', $entity->id) }}" 
+                    data-content="@lang('admin/entities/message.delete.confirm')"
+                    data-title="@lang('general.delete')
+                    {{ htmlspecialchars($entity->name) }}?" 
+                    onClick="return false;"><i class="icon-trash icon-white"></i></a>
 
             </td>
         </tr>

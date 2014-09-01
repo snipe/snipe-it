@@ -24,6 +24,9 @@ class AddUserIdToModels extends Migration
     public function down()
     {
         //
+        Schema::table('models', function ($table) {
+            $table->dropColumn('user_id');
+        });
     }
 
 }
