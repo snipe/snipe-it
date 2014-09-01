@@ -37,8 +37,13 @@
                     <td>{{{ $statuslabel->name }}}</td>
                     <td>
                         <a href="{{ route('update/statuslabel', $statuslabel->id) }}" class="btn btn-warning"><i class="icon-pencil icon-white"></i></a>
-<a data-html="false" class="btn delete-asset btn-danger" data-toggle="modal" href="{{ route('delete/statuslabel', $statuslabel->id) }}" data-content="@lang('admin/statuslabels/message.delete.confirm')"
-                data-title="@lang('general.delete')
+                        <a data-html="false" 
+                            @if($statuslabel->isRequired())
+                            disabled='true'
+                            @endif
+                            class="btn delete-asset btn-danger" 
+                            data-toggle="modal" href="{{ route('delete/statuslabel', $statuslabel->id) }}" data-content="@lang('admin/statuslabels/message.delete.confirm')"
+                            data-title="@lang('general.delete')
                  {{ htmlspecialchars($statuslabel->name) }}?" onClick="return false;"><i class="icon-trash icon-white"></i></a>
                     </td>
                 </tr>

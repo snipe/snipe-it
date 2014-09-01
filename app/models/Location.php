@@ -14,6 +14,8 @@ class Location extends Elegant
             'zip'   		=> 'alpha_dash|min:3|max:10',
         );
     
+    protected $required_id = array(1);
+    
     //get defaults
     public function __construct($attributes = array())  {
         parent::__construct($attributes); // Eloquent
@@ -38,6 +40,37 @@ class Location extends Elegant
     public function entity()
     {
         return $this->belongsTo('Entity','entity_id')->withTrashed();
+    }
+    
+     
+    
+    public static function boot()
+    {
+        parent::boot();
+
+        static::deleting( function($object) {            
+            
+            if ($object->isRequired())  
+            {
+                return false;
+            }
+        });
+
+    } 
+    
+    public function requiredIds()
+    {
+        return $this->required_id;
+    }
+    
+    public function isRequired()
+    {
+        if (in_array($this->id, $this->requiredIds() ))  
+        {
+            return true;
+        } 
+
+        return false;
     }
 
 }

@@ -67,13 +67,21 @@ Locations ::
                             <a data-html="false" class="btn delete-asset btn-danger" data-toggle="modal" 
                                href="{{ route('delete/location', $location->id) }}" data-content="@lang('message.delete.confirm')" 
                                 data-title="@lang('general.delete')
-                            {{ htmlspecialchars($location->name) }}?" onClick="return false;"><i class="icon-trash icon-white"></i></a>
+                            {{ htmlspecialchars($location->name) }}?" 
+                            @if($location->isRequired())
+                            disabled='true'
+                            @endif
+                            onClick="return false;"><i class="icon-trash icon-white"></i></a>
                 @else
                             <a href="{{ route('restore/location', $location->id) }}" class="btn btn-warning"><i class="icon-share-alt icon-white"></i></a>
                             <a data-html="false" class="btn delete-asset btn-danger" 
                                data-toggle="modal" href="{{ route('delete/location', $location->id) }}" data-content="@choice('message.purge.confirm',1)" 
                             data-title="@lang('general.purge')
-                            {{ htmlspecialchars($location->name) }}?" onClick="return false;"><i class="icon-remove icon-white"></i></a>
+                            {{ htmlspecialchars($location->name) }}?" 
+                            @if($location->isRequired())
+                            disabled='true'
+                            @endif
+                            onClick="return false;"><i class="icon-remove icon-white"></i></a>
                 @endif           
 
             </td>
