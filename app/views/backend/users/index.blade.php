@@ -97,7 +97,13 @@
                 <a href="{{ route('update/user', $user->id) }}" class="btn btn-warning"><i class="icon-pencil icon-white"></i></a>
 
                 @if (Sentry::getId() !== $user->id)
-                <a data-html="false" class="btn delete-asset btn-danger" data-toggle="modal" href="{{ route('delete/user', $user->id) }}" data-content="Are you sure you wish to delete this user?" data-title="Delete {{ htmlspecialchars($user->first_name) }}?" onClick="return false;"><i class="icon-trash icon-white"></i></a>
+                <a data-html="false" class="btn delete-asset btn-danger" data-toggle="modal" href="{{ route('delete/user', $user->id) }}" 
+                    data-content="Are you sure you wish to delete this user?" 
+                    data-title="Delete {{ htmlspecialchars($user->first_name) }}?" 
+                    @if($statuslabel->isRequired())
+                            disabled='true'
+                    @endif
+                   onClick="return false;"><i class="icon-trash icon-white"></i></a>
 
                 @else
                 <span class="btn delete-asset btn-danger disabled"><i class="icon-trash icon-white"></i></span>
