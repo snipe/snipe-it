@@ -11,6 +11,7 @@ class User extends SentryUserModel
      */
     protected $softDelete = true;
     protected $required_id = array(1);
+    
         //get defaults
     public function __construct($attributes = array())  {
         parent::__construct($attributes); // Eloquent       
