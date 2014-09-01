@@ -92,6 +92,36 @@ class User extends SentryUserModel
             return '';
         }
 
+    }  
+    
+    
+    public static function boot()
+    {
+        parent::boot();
+
+        static::deleting( function($object) {            
+            
+            if ($object->isRequired())  
+            {
+                return false;
+            }
+        });
+
+    } 
+    
+    public function requiredIds()
+    {
+        return $this->required_id;
+    }
+    
+    public function isRequired()
+    {
+        if (in_array($this->id, $this->requiredIds() ))  
+        {
+            return true;
+        } 
+
+        return false;
     }
 
 }
