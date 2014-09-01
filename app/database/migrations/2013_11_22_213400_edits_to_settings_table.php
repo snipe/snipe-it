@@ -12,7 +12,6 @@ class EditsToSettingsTable extends Migration
     public function up()
     {
         Schema::table('settings', function ($table) {
-            $table->dropColumn('option_label');
             $table->dropColumn('option_name');
             $table->dropColumn('option_value');
             $table->integer('per_page')->default(20);
@@ -30,6 +29,12 @@ class EditsToSettingsTable extends Migration
     public function down()
     {
         //
+        Schema::table('settings', function ($table) {
+            $table->string('option_name',100);
+            $table->string('option_value',100);
+            
+        });
+                    
     }
 
 }

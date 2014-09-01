@@ -13,7 +13,7 @@ class AddWarranteeToAssetsTable extends Migration
     {
         //
         Schema::table('assets', function ($table) {
-            $table->integer('warrantee_months')->nullable();
+            $table->integer('warranty_months')->nullable();
         });
     }
 
@@ -26,7 +26,7 @@ class AddWarranteeToAssetsTable extends Migration
     {
         //
         Schema::table('assets', function ($table) {
-            $table->dropColumn('warrantee_months');
+            $table->dropColumn('warranty_months');
         });
     }
 

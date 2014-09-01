@@ -31,6 +31,7 @@ class CreateLicenseSeatsTable extends Migration
     public function down()
     {
         //
+        Schema::drop('license_seats');
     }
 
 }

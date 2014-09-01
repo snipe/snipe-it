@@ -22,6 +22,20 @@ class DeleteBadLicensesTable extends Migration
     public function down()
     {
         //
+        Schema::create('licenses', function ($table) {
+            $table->increments('id');
+            $table->string('name');
+            $table->string('serial');
+            $table->date('purchase_date')->nullable();
+            $table->decimal('purchase_cost', 8, 2)->nullable();
+            $table->string('order_number');
+            $table->integer('seats');
+            $table->text('notes');
+            $table->integer('user_id');
+            $table->integer('depreciation_id');
+            $table->timestamps();
+            $table->softDeletes();
+        });
     }
 
 }
