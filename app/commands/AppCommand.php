@@ -341,7 +341,7 @@ class AppCommand extends Command
             else {
                 $countryname = DB::table('countries')->where('id','=',$countryid)->pluck('name');
                 $this->comment('Country selected is... ' . $countryname);
-                $this->locationData['country'] = $country;
+                $this->locationData['country'] = Str::upper($country);
                 $this->countryData['value'] = $countryid;
             }
 
