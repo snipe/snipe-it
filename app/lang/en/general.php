@@ -51,7 +51,7 @@ return array(
     'months'				=> 'months',
     'moreinfo'				=> 'More Info',
     'name'					=> 'Name',
-    'no_depreciation'		=> 'No Derepciation',
+    'no_depreciation'		=> 'No Depreciation',
     'no_results'			=> 'No Results.',
     'no'  					=> 'No',
     'notes'  				=> 'Notes',
