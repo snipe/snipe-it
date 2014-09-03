@@ -100,9 +100,9 @@ class User extends SentryUserModel
     {
         parent::boot();
 
-        static::deleting( function($object) {            
+        static::deleting( function($user) {            
             
-            if ($object->isRequired())  
+            if ($user->isRequired())  
             {
                 return false;
             }

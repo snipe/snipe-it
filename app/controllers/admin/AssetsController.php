@@ -47,26 +47,16 @@ class AssetsController extends AdminController
         }
         // Filter results
         elseif (Input::get('Pending')) {
-            $assets = Asset::orderBy('asset_tag', 'ASC')->whereNull('status_id','and')->where('assigned_to','=','0')->where('physical', '=', 1)->get();
+            $assets = Asset::Pending()->orderBy('asset_tag', 'ASC')->get();
         } elseif (Input::get('RTD')) {
-            $assets = Asset::orderBy('asset_tag', 'ASC')->where('status_id', '=', 0)->where('assigned_to','=','0')->where('physical', '=', 1)->get();
+            $assets = Asset::ReadyToDeploy()->orderBy('asset_tag', 'ASC')->get();
         } elseif (Input::get('Undeployable')) {
-            $assets = Asset::orderBy('asset_tag', 'ASC')->where('status_id', '>', 1)->where('physical', '=', 1)->get();
+            $assets = Asset::Undelpoyable()->orderBy('asset_tag', 'ASC')->get();
         } elseif (Input::get('Deployed')) {
-            $assets = Asset::orderBy('asset_tag', 'ASC')->where('status_id', '=', 0)->where('assigned_to','>','0')->where('physical', '=', 1)->get();
+            $assets = Asset::deployed()->orderBy('asset_tag', 'ASC')->get();
         } else {
             $assets = Asset::orderBy('asset_tag', 'ASC')->where('physical', '=', 1)->get();
         }
-
-        // Paginate the users
-        /**$assets = $assets->paginate(Setting::getSettings()->per_page)
-            ->appends(array(
-                'Pending' => Input::get('Pending'),
-                'RTD' => Input::get('RTD'),
-                'Undeployable' => Input::get('Undeployable'),
-                'Deployed' => Input::get('Deployed'),
-            ));
-        **/
 
         return View::make('backend/hardware/index', compact('assets'));
     }
@@ -161,7 +151,9 @@ class AssetsController extends AdminController
         $assigned_to = array('' => 'Select a User') + DB::table('users')->select(DB::raw('concat (first_name," ",last_name) as full_name, id'))->whereNull('deleted_at')->lists('full_name', 'id');
 
         // Grab the dropdown list of status
-        $statuslabel_list = array('' => Lang::get('general.pending')) + array('0' => Lang::get('general.ready_to_deploy')) + Statuslabel::orderBy('name', 'asc')->lists('name', 'id');
+        //$statuslabel_list = array('' => Lang::get('general.pending')) + array('0' => Lang::get('general.ready_to_deploy')) + Statuslabel::orderBy('name', 'asc')->lists('name', 'id');
+        // only use database values
+        $statuslabel_list = Statuslabel::orderBy('id', 'asc')->lists('name', 'id');
 
         return View::make('backend/hardware/edit')->with('supplier_list',$supplier_list)->with('model_list',$model_list)->with('statuslabel_list',$statuslabel_list)->with('assigned_to',$assigned_to)->with('asset',new Asset);
 
@@ -276,7 +268,9 @@ class AssetsController extends AdminController
         $supplier_list = array('' => '') + Supplier::orderBy('name', 'asc')->lists('name', 'id');
 
         // Grab the dropdown list of status
-        $statuslabel_list = array('' => Lang::get('general.pending')) + array('0' => Lang::get('general.ready_to_deploy')) + Statuslabel::orderBy('name', 'asc')->lists('name', 'id');
+        //$statuslabel_list = array('' => Lang::get('general.pending')) + array('0' => Lang::get('general.ready_to_deploy')) + Statuslabel::orderBy('name', 'asc')->lists('name', 'id');
+        // only use database values
+        $statuslabel_list = Statuslabel::orderBy('id', 'asc')->lists('name', 'id');
 
         return View::make('backend/hardware/edit', compact('asset'))->with('model_list',$model_list)->with('supplier_list',$supplier_list)->with('statuslabel_list',$statuslabel_list);
     }
@@ -290,11 +284,17 @@ class AssetsController extends AdminController
      */
     public function postEdit($assetId = null)
     {
+        
+        
         // Check if the asset exists
         if (is_null($asset = Asset::find($assetId))) {
             // Redirect to the asset management page with error
             return Redirect::to('hardware')->with('error', Lang::get('admin/hardware/message.does_not_exist'));
         }       
+        
+        //cannot set to deployed
+        if(e(Input::get('status_id')) == 3)
+            return Redirect::to('hardware/'.$assetId.'/edit')->with('error', 'cannot deploy without user');
        
         //attempt to validate
         $validator = Validator::make(Input::all(), $asset->validationRules($assetId));
@@ -311,7 +311,7 @@ class AssetsController extends AdminController
             if ( e(Input::get('status_id')) == '' ) {
                 $asset->status_id =  NULL;
             } else {
-                $asset->status_id = e(Input::get('status_id'));
+                $asset->setState(e(Input::get('status_id')));
             }
 
             if (e(Input::get('warranty_months')) == '') {
@@ -395,16 +395,15 @@ class AssetsController extends AdminController
                 $seat->checkin();
             }
             // Delete the asset
-            if($asset->deleted_at)
+            if($asset->state->delete())  
             {
-                $asset->forceDelete();  
+            // Redirect to the asset management page
+            return Redirect::to('hardware')->with('success', Lang::get('admin/hardware/message.delete.success'));
             }
             else
             {
-                $asset->delete();                
+                return Redirect::to('hardware')->with('error', Lang::get('admin/hardware/message.delete.error'));
             }
-            // Redirect to the asset management page
-            return Redirect::to('hardware')->with('success', Lang::get('admin/hardware/message.delete.success'));
         }
 
 
@@ -467,10 +466,10 @@ class AssetsController extends AdminController
         }
 
         // Update the asset data
-        $asset->assigned_to            		= e(Input::get('assigned_to'));
+        //$asset->assigned_to            		= e(Input::get('assigned_to'));
 
         // Was the asset updated?
-        if($asset->save()) {
+        if($asset->state->checkout($assigned_to->id)) {
             $logaction = new Actionlog();
             $logaction->asset_id = $asset->id;
             $logaction->checkedout_to = $asset->assigned_to;
@@ -526,15 +525,13 @@ class AssetsController extends AdminController
         }
 
         $logaction = new Actionlog();
-        $logaction->checkedout_to = $asset->assigned_to;
-
-        // Update the asset data to null, since it's being checked in
-        $asset->assigned_to            		= '0';
+        if($user)
+            $logaction->checkedout_to = $user->id;	
 
         // Was the asset updated?
-        if($asset->save()) {
+        if($asset->state->checkin()) {
 
-            $logaction->asset_id = $asset->id;
+            $logaction->asset_id = $asset->id;            
             $logaction->location_id = NULL;
             $logaction->asset_type = 'hardware';
             $logaction->note = e(Input::get('note'));
@@ -657,6 +654,9 @@ class AssetsController extends AdminController
         }
         
         $asset->deleted_at = null;
+        
+        //set back to pedning
+        $asset->setState(1);
         $asset->save();
         
         return Redirect::to('hardware')->with('success', Lang::get('message.restore.success'));

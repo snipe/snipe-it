@@ -7,4 +7,17 @@ return array(
     'create'      	=> 'Create Status Label',
     'about'      	=> 'About Status Labels',
     'info'      	=> 'Status labels are used to describe the various reasons why an asset <strong><em>cannot</em></strong> be deployed. It could be broken, out for diagnostics, out for repair, lost or stolen, etc. Status labels allow your team to show the progression.',
+    'state'             => array(
+               
+               'preparing'          =>  'In Preparations',
+               'readyToDeploy'      =>  'Ready to Deploy',
+               'assigned'           =>  'Assigned In Use',
+               'outForDiagnostics'  =>  'Out for Diagnostics',
+               'outForRepair'       =>  'Out for Repair',
+               'broken'             =>  'Broken - Not Fixable',
+               'lost'               =>  'Lost/Stolen',
+               'decommissioned'     =>  'Decommissioned',
+               'unknown'            =>  'Unknown',
+               'delete'            =>  'Pending Delete',
+    )
 );

@@ -34,7 +34,7 @@
             <tbody>
                 @foreach ($statuslabels as $statuslabel)
                 <tr>
-                    <td>{{{ $statuslabel->name }}}</td>
+                    <td><span style="visibility: hidden;">{{$statuslabel->id }}</span>{{{ $statuslabel->name }}}</td>
                     <td>
                         <a href="{{ route('update/statuslabel', $statuslabel->id) }}" class="btn btn-warning"><i class="icon-pencil icon-white"></i></a>
                         <a data-html="false" 

@@ -38,6 +38,7 @@ $debugbar["messages"]->addMessage("hello world!");
 @section('content')
 
 
+
 <div class="row header">
     <div class="col-md-12">
        
@@ -73,15 +74,11 @@ $debugbar["messages"]->addMessage("hello world!");
                     <th class="col-md-1" bSortable="true">@lang('admin/hardware/table.asset_tag')</th>
                     <th class="col-md-1" bSortable="true">@lang('admin/hardware/table.asset_model')</th>
                     @if (Setting::getSettings()->display_asset_name)
-                    <th class="col-md-1" bSortable="true">@lang('general.name')</th>
+                    <th class="col-md-1" bSortable="true">@lang('general.name')</th>                
                     @endif
-                    <th class="col-md-1" bSortable="true">@lang('admin/hardware/table.serial')</th>
-                    @if (Input::get('Pending') || Input::get('Undeployable') || Input::get('RTD'))
-                    <th class="col-md-1" bSortable="true">@lang('general.status')</th>
-                    @else
+                    <th class="col-md-1" bSortable="true">@lang('admin/hardware/table.serial')</th>                    
                     <th class="col-md-1" bSortable="true">@lang('admin/hardware/table.checkoutto')</th>
-                    <th class="col-md-1" bSortable="true">@lang('admin/hardware/table.location')</th>
-                    @endif
+                    <th class="col-md-1" bSortable="true">@lang('admin/hardware/table.status')</th>                    
                     <th class="col-md-1">@lang('admin/hardware/table.eol')</th>
                     <th class="col-md-1">@lang('admin/hardware/table.change')</th>
                     <th class="col-md-1 actions" bSortable="false">@lang('table.actions')</th>
@@ -96,77 +93,24 @@ $debugbar["messages"]->addMessage("hello world!");
                         <td><a href="{{ route('view/hardware', $asset->id) }}">{{ $asset->name }}</a></td>
                     @endif
                     <td>{{ $asset->serial }}</td>
-                    @if (Input::get('Pending') || Input::get('Undeployable') || Input::get('RTD') )
-                        <td>
-                            @if (Input::get('Pending'))
-                                @lang('general.pending')
-                            @elseif (Input::get('RTD'))
-                                @lang('general.ready_to_deploy')
-                            @elseif (Input::get('Undeployable'))
-                                @if ($asset->assetstatus) {{{ $asset->assetstatus->name }}}
-                                @endif
-                            @endif
-                        </td>
-                    @else
-                        <td>
+                    <td>
                         @if ($asset->assigneduser)
                             <a href="{{ route('view/user', $asset->assigned_to) }}">
                             {{{ $asset->assigneduser->fullName() }}}
                             </a>
-                        @endif
-                        </td>
-                        <td>
-                            @if ($asset->assigneduser && $asset->assetloc) <a href="{{ route('update/location', $asset->assetloc->id) }}">{{{ $asset->assetloc->name }}}</a>
-                        @else
-                            @if ($asset->assetstatus) {{{ $asset->assetstatus->name }}}
-                            @endif
-                        @endif
-                        </td>
-
-                    @endif
-
+                         @endif 
+                    </td>
+                    <td>{{ $asset->state->getStateText(); }} </td>
                     <td>
                     @if ($asset->model->eol) {{{ $asset->eol_date() }}}
                     @endif
                     </td>
 
                     <td>
-                    @if ($asset->status_id < 1 )
-                    @if ($asset->deleted_at)
-                        &nbsp;
-                    @elseif ($asset->assigned_to != 0)
-                        <a href="{{ route('checkin/hardware', $asset->id) }}" class="btn btn-primary">@lang('general.checkin')</a>
-                    @else
-                        <a href="{{ route('checkout/hardware', $asset->id) }}" class="btn btn-info">@lang('general.checkout')</a>
-                    @endif
-                    @endif
+                        {{ $asset->state->getCheckoutButton() }}                    
                     </td>
                     <td nowrap="nowrap">
-                        
-                        <!-- If the deleted show restore  -->
-                        @if (!is_null($asset->deleted_at))
-                        <a href="{{ route('restore/hardware', $asset->id) }}" class="btn btn-warning"><span class="icon-share-alt icon-white"></span></a>
-                        @else
-                        <a href="{{ route('update/hardware', $asset->id) }}" class="btn btn-warning"><i class="icon-pencil icon-white" alt="Edit"></i></a>
-                        @endif
-                        <a data-html="false"                             
-                            class="btn delete-asset btn-danger" 
-                            data-toggle="modal" 
-                            href="{{ route('delete/hardware', $asset->id) }}" 
-                            data-content="@lang('admin/hardware/message.delete.confirm')" 
-                            data-title="@lang('general.delete') 
-                            {{ htmlspecialchars($asset->asset_tag) }}?" 
-                            onClick="return false;"
-                            @if($asset->assigned_to != 0)
-                                disabled="true"
-                            @endif>
-                            @if (!is_null($asset->deleted_at))
-                            <i class="icon-remove icon-white"></i>
-                            @else
-                            <i class="icon-trash icon-white"></i>
-                            @endif
-            </a>
-                            </a>
+                        {{ $asset->state->getStatusButton() }}                        
                     </td>
                 </tr>
                 @endforeach

@@ -187,7 +187,7 @@
                     </td>
                     <td>{{ $log->action_type }}</td>
                     <td>
-                        @if (isset($log->checkedout_to))
+                        @if ($log->checkedout_to)
                         <a href="{{ route('view/user', $log->checkedout_to) }}">
                         {{{ $log->userlog->fullName() }}}
                         </a>
@@ -231,25 +231,16 @@
                 <img src="{{{ $qr_code->url }}}" />
             </p>
             @endif
-
+             <h6>{{ $asset->state->getStateText() }}</h6>
+            <ul>                
+                 <li>{{ $asset->state->getCheckoutButton() }}</li>
+             </ul>
             @if ((isset($asset->assigned_to ) && ($asset->assigned_to > 0)))
                 <h6><br>@lang('admin/hardware/form.checkedout_to')</h6>
                 <ul>
 
                     <li><img src="{{{ $asset->assigneduser->gravatar() }}}" class="img-circle" style="width: 100px; margin-right: 20px;" /><br /><br /></li>
                     <li><a href="{{ route('view/user', $asset->assigned_to) }}">{{ $asset->assigneduser->fullName() }}</a></li>
-
-
-                    @if (isset($asset->assetloc->address))
-                        <li>{{{ $asset->assetloc->address }}}
-                        @if (isset($asset->assetloc->address2)) {{{ $asset->assetloc->address2 }}}
-                        @endif
-                        </li>
-                        @if (isset($asset->assetloc->city))
-                            <li>{{{ $asset->assetloc->city }}}, {{{ $asset->assetloc->state }}} {{{ $asset->assetloc->zip }}}</li>
-                        @endif
-
-                    @endif
 
                     @if (isset($asset->assigneduser->email))
                         <li><br /><i class="icon-envelope-alt"></i> <a href="mailto:{{{ $asset->assigneduser->email }}}">{{{ $asset->assigneduser->email }}}</a></li>
@@ -259,40 +250,11 @@
                         <li><i class="icon-phone"></i> {{{ $asset->assigneduser->phone }}}</li>
                     @endif
 
-                    <li><br /><a href="{{ route('checkin/hardware', $asset->id) }}" class="btn-flat large info ">@lang('admin/hardware/general.checkin')</a></li>
+                   
                     </ul>
-
-            @elseif (($asset->status_id ) && ($asset->status_id > 1))
-
-                @if ($asset->assetstatus)
-                    <h6><br>{{{ $asset->assetstatus->name }}}
-                    @lang('admin/hardware/general.asset')</h6>
-
-                    <div class="col-md-12">
-                    <div class="alert alert-warning alert-block">
-                        <i class="icon-warning-sign"></i>
-                        @lang('admin/hardware/message.undeployable')
-
-                    </div>
-                </div>
-                @endif
-
-            @elseif ($asset->status_id == NULL)
-                    <h6><br>@lang('admin/hardware/general.pending')</h6>
-                    <div class="col-md-12">
-                    <div class="alert alert-info alert-block">
-                        <i class="icon-info-sign"></i>
-                        @lang('admin/hardware/message.undeployable')
-                    </div>
-                </div>
-
-            @else
-            <h6><br>@lang('admin/hardware/general.checkout')</h6>
-                <ul>
-                    <li>This asset is not checked out to anyone yet. Use the button below to check it out now.</li>
-                    <li><br><br /><a href="{{ route('checkout/hardware', $asset->id) }}" class="btn-flat large success">Checkout Asset</a></li>
-                </ul>
+            
             @endif
+             
         </div>
     </div>
 </div>

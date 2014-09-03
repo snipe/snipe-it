@@ -92,7 +92,11 @@
                 <a href="{{ route('restore/user', $user->id) }}" class="btn btn-warning"><i class="icon-share-alt icon-white"></i></a>
                 <a data-html="false" class="btn delete-asset btn-danger" data-toggle="modal" href="{{ route('delete/user', $user->id) }}" data-content="@choice('message.purge.confirm',1)" 
                             data-title="@lang('general.purge')
-                            {{ htmlspecialchars($user->fullname()) }}?" onClick="return false;"><i class="icon-remove icon-white"></i></a>
+                            {{ htmlspecialchars($user->fullname()) }}?" 
+                            @if($user->isRequired())
+                            disabled='true'
+                            @endif
+                            onClick="return false;"><i class="icon-remove icon-white"></i></a>
                 @else
                 <a href="{{ route('update/user', $user->id) }}" class="btn btn-warning"><i class="icon-pencil icon-white"></i></a>
 
@@ -100,7 +104,7 @@
                 <a data-html="false" class="btn delete-asset btn-danger" data-toggle="modal" href="{{ route('delete/user', $user->id) }}" 
                     data-content="Are you sure you wish to delete this user?" 
                     data-title="Delete {{ htmlspecialchars($user->first_name) }}?" 
-                    @if($statuslabel->isRequired())
+                    @if($user->isRequired())
                             disabled='true'
                     @endif
                    onClick="return false;"><i class="icon-trash icon-white"></i></a>
