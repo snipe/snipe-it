@@ -37,7 +37,7 @@
                 <tr>
                     <td><span style="visibility: hidden;">{{$statuslabel->id }}</span>{{{ $statuslabel->name }}}</td>
                     <td>@if($statuslabel->inventory_state)
-                            @lang('table.inventory_state.values.'. $statuslabel->inventory_state->name)  
+                            {{  $statuslabel->inventory_state->name }}  
                         @endif
                         
                     </td>
