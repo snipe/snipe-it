@@ -68,7 +68,7 @@ class FamiliesSeeder extends Seeder
         DB::table('families')->truncate();
 
         // Insert the blog posts
-        Category::insert($family);
+        Family::insert($family);
     }
 
 }
