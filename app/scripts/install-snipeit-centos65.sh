@@ -17,15 +17,38 @@
 #
 ###############################################################################
 
-clear
-
-echo "Setting up the environment variables..."
-sleep 2s
 
 ###############################################################################
 # HERE ARE THE SETTINGS YOU CAN CHANGE
 # Some should be changed with CAUTION!
 ###############################################################################
+
+MYSQLREPO='http://dev.mysql.com/get/'
+MYSQLRPM='mysql-community-release-el6-5.noarch.rpm'
+EPELREPO='http://download.fedoraproject.org/pub/epel/6/x86_64/'
+EPELRPM='epel-release-6-8.noarch.rpm'
+REMIREPO='http://rpms.famillecollet.com/enterprise/'
+REMIRPM='remi-release-6.rpm'
+
+clear
+
+echo ''
+
+echo "This will install Snipe IT Asset Management for CentOS 6.5..."
+echo "Are you sure your server is CentOS 6.5? Do you want to continue?"
+select yn in "Yes" "No"; do
+    case $yn in
+        Yes ) break;;
+        No ) exit;;
+    esac
+done
+
+echo ''
+echo ''
+
+echo "Setting up the environment variables..."
+sleep 2s
+
 
 # do not change unless you have a good reason to store elsewhere
 APACHEHOME=/var/www
@@ -192,18 +215,40 @@ echo "Installing MySQL 5.6..."
 sleep 2s
 
 cd $HOME
-rm -f mysql-community-release-el6-5.noarch.rpm
-wget http://dev.mysql.com/get/mysql-community-release-el6-5.noarch.rpm
-yum -y localinstall mysql-community-release-el6-*.noarch.rpm
-yum -y install mysql-community-server
-service mysqld start
-chkconfig mysqld on
+rm -f $MYSQLRPM
 
+echo "Downloading MYSQL install files... $MYSQLREPO$MYSQLRPM"
+echo ''
+wget $MYSQLREPO$MYSQLRPM
 
-mysql -u root -e "UPDATE mysql.user SET Password = PASSWORD('$MYSQLROOTPW') WHERE User = 'root';create database $SNIPEITNAME;create user 
-'$SNIPEITDBUSER'@'localhost' IDENTIFIED BY '$SNIPEITDBPW';grant all privileges on $SNIPEITNAME.* to '$SNIPEITDBUSER'@'localhost';flush privileges;"
+if [ $? -ne 0 ]; then
+    echo 'MySQL RPM download failed, will try again...'
+    sleep 10
+    wget $MYSQLREPO$MYSQLRPM
+
+        if [ $? -ne 0 ]; then
+            echo 'MySQL RPM download failed, will try again...'
+            sleep 10
+            wget $MYSQLREPO$MYSQLRPM
+            
+            if [ $? -ne 0 ]; then
+                echo 'MySQL RPM download failed, script aborted.'
+                exit
+            fi
+        fi
+else
+    echo 'MySQL RPM download successful.'
+    yum -y localinstall $MYSQLRPM
+    yum -y install mysql-community-server
+    service mysqld start
+    chkconfig mysqld on
+
+    mysql -u root -e "UPDATE mysql.user SET Password = PASSWORD('$MYSQLROOTPW') WHERE User = 'root';create database $SNIPEITNAME;create user '$SNIPEITDBUSER'@'localhost' IDENTIFIED BY '$SNIPEITDBPW';grant all privileges on $SNIPEITNAME.* to '$SNIPEITDBUSER'@'localhost';flush privileges;"
 
 echo "MySQL 5.6 installed and configured, continuing..."
+
+fi
+
 sleep 5s
 
 #clear
@@ -212,12 +257,65 @@ echo "Setup PHP5.5 and related PHP modules..."
 sleep 2s
 
 cd $HOME
-rm -f epel-release-6-8.noarch.rpm
-wget http://download.fedoraproject.org/pub/epel/6/x86_64/epel-release-6-8.noarch.rpm
-rpm -ivh epel-release-6-8.noarch.rpm
-rm -f remi-release-6.rpm
-wget http://rpms.famillecollet.com/enterprise/remi-release-6.rpm
-rpm -Uvh remi-release-6*.rpm
+rm -f $EPELRPM
+rm -f $REMIRPM
+
+echo "Downloading EPEL Repository files... $EPELREPO$EPELRPM"
+echo ''
+
+wget $EPELREPO$EPELRPM
+
+if [ $? -ne 0 ]; then
+    echo 'EPEL RPM download failed, will try again...'
+    sleep 10
+
+    wget $EPELREPO$EPELRPM
+
+        if [ $? -ne 0 ]; then
+            echo 'EPEL RPM download failed, will try again...'
+            sleep 10
+
+            wget $EPELREPO$EPELRPM
+            
+            if [ $? -ne 0 ]; then
+                echo 'EPEL RPM download failed, script aborted.'
+                exit
+            fi
+        fi
+else
+    echo 'EPEL RPM download successful.'
+    rpm -Uvh $EPELRPM 
+fi
+
+sleep 10
+
+echo "Downloading REMI Repository files... $REMIREPO$REMIRPM"
+echo ''
+
+wget $REMIREPO$REMIRPM
+
+if [ $? -ne 0 ]; then
+    echo 'REMI RPM download failed, will try again...'
+    sleep 10
+
+    wget $REMIREPO$REMIRPM
+
+        if [ $? -ne 0 ]; then
+            echo 'REMI RPM download failed, will try again...'
+            sleep 10
+
+            wget $REMIREPO$REMIRPM
+            
+            if [ $? -ne 0 ]; then
+                echo 'REMI RPM download failed, script aborted.'
+                exit
+            fi
+        fi
+else
+    echo 'REMI RPM download successful.'
+    rpm -Uvh $REMIRPM
+fi
+
 yum -y --enablerepo=remi update
 
 chkconfig httpd on
