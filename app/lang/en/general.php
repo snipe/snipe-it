@@ -43,6 +43,8 @@ return array(
     'first_name'			=> 'First Name',
     'groups'				=> 'Groups',
     'history_for'  			=> 'History for',
+    'inventory_state'                   => 'Inventory state',
+    'inventory_states'                  => 'Inventory states',
     'id'                                => 'ID',
     'last_name'				=> 'Last Name',
     'license'				=> 'License',

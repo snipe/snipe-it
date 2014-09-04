@@ -2,6 +2,7 @@
 
 use AdminController;
 use Input;
+use InventoryState;
 use Lang;
 use Statuslabel;
 use Redirect;
@@ -37,8 +38,11 @@ class StatuslabelsController extends AdminController
      */
     public function getCreate()
     {
+        
+        $inventory_state_list = array('' => '') + InventoryState::orderBy('id', 'asc')->lists('name', 'id');
+        
         // Show the page
-        return View::make('backend/statuslabels/edit')->with('statuslabel',new Statuslabel);
+        return View::make('backend/statuslabels/edit')->with('inventory_state_list',$inventory_state_list)->with('statuslabel',new Statuslabel);
     }
 
 
@@ -61,7 +65,8 @@ class StatuslabelsController extends AdminController
 
             // Save the Statuslabel data
             $statuslabel->name            	= e(Input::get('name'));
-            $statuslabel->user_id          = Sentry::getId();
+            $statuslabel->inventory_state_id    = e(Input::get('inventory_state_id'));
+            $statuslabel->user_id               = Sentry::getId();
 
             // Was the asset created?
             if($statuslabel->save()) {
@@ -94,8 +99,9 @@ class StatuslabelsController extends AdminController
             return Redirect::to('admin/settings/statuslabels')->with('error', Lang::get('admin/statuslabels/message.does_not_exist'));
         }
 
-
-        return View::make('backend/statuslabels/edit', compact('statuslabel'));
+        $inventory_state_list = array('' => '') + InventoryState::orderBy('id', 'asc')->lists('name', 'id');
+        
+        return View::make('backend/statuslabels/edit', compact('statuslabel'))->with('inventory_state_list',$inventory_state_list);
     }
 
 
@@ -125,6 +131,7 @@ class StatuslabelsController extends AdminController
         else {
             // Update the Statuslabel data
             $statuslabel->name            	= e(Input::get('name'));
+            $statuslabel->inventory_state_id    = e(Input::get('inventory_state_id'));
 
             // Was the asset created?
             if($statuslabel->save()) {

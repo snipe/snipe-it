@@ -49,6 +49,15 @@
                         {{ $errors->first('name', '<span class="alert-msg"><i class="icon-remove-sign"></i> :message</span>') }}
                     </div>
             </div>
+            
+            <div class="form-group {{ $errors->has('inventory_state_id') ? ' has-error' : '' }}">
+                <label for="inventory_state_id" class="col-md-3 control-label">@lang('general.inventory_state')
+                <i class='icon-asterisk'></i></label>
+                <div class="col-md-6">
+                    {{ Form::select('inventory_state_id', $inventory_state_list , Input::old('inventory_state_id', $statuslabel->inventory_state_id), array('class'=>'select2', 'style'=>'min-width:350px')) }}
+                    {{ $errors->first('inventory_state_id', '<span class="alert-msg"><i class="icon-remove-sign"></i> :message</span>') }}
+                </div>
+            </div>
 
             <!-- Form actions -->
                 <div class="form-group">

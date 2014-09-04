@@ -7,6 +7,7 @@ class Statuslabel extends Elegant
 
     protected $rules = array(
         'name'  => 'required|alpha_space|min:2|max:100|unique:status_labels,name,{id}',
+        'inventory_id' => 'required'
     );
 
     public function has_assets()
@@ -45,4 +46,9 @@ class Statuslabel extends Elegant
         return false;
     }
 
+    public function inventorystates()
+    {
+        return $this->belongsTo('InventoryState','inventory_state_id');
+    }
+    
 }

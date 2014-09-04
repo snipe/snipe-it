@@ -27,6 +27,7 @@ class DatabaseSeeder extends Seeder
         // $this->call('EntitiesSeeder');
         $this->call('DefaultsSeeder');
         $this->call('CountriesSeeder');
+        $this->call('InventoryStatesSeeder');
     }
 
 }
