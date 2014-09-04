@@ -37,12 +37,67 @@ class ManufacturersSeeder extends Seeder
             'updated_at' 		=> $date,
             'deleted_at' 		=> NULL,
         );
+        
+        $manufacturers[] = array(
+            'name'     		 	=> 'IBM',
+            'created_at' 		=> $date,
+            'user_id' 			=> 1,
+            'updated_at' 		=> $date,
+            'deleted_at' 		=> NULL,
+        );
 
+        $manufacturers[] = array(
+            'name'     		 	=> 'Lenovo',
+            'created_at' 		=> $date,
+            'user_id' 			=> 1,
+            'updated_at' 		=> $date,
+            'deleted_at' 		=> NULL,
+        );
+        
+        $manufacturers[] = array(
+            'name'     		 	=> 'Symantec',
+            'created_at' 		=> $date,
+            'user_id' 			=> 1,
+            'updated_at' 		=> $date,
+            'deleted_at' 		=> NULL,
+        );
+        
+        $manufacturers[] = array(
+            'name'     		 	=> 'Toshiba',
+            'created_at' 		=> $date,
+            'user_id' 			=> 1,
+            'updated_at' 		=> $date,
+            'deleted_at' 		=> NULL,
+        );
+        
+        $manufacturers[] = array(
+            'name'     		 	=> 'Cisco',
+            'created_at' 		=> $date,
+            'user_id' 			=> 1,
+            'updated_at' 		=> $date,
+            'deleted_at' 		=> NULL,
+        );
+        
+        $manufacturers[] = array(
+            'name'     		 	=> 'HP',
+            'created_at' 		=> $date,
+            'user_id' 			=> 1,
+            'updated_at' 		=> $date,
+            'deleted_at' 		=> NULL,
+        );
 
-        // Delete all the blog posts
+        $manufacturers[] = array(
+            'name'     		 	=> 'Adobe Systems',
+            'created_at' 		=> $date,
+            'user_id' 			=> 1,
+            'updated_at' 		=> $date,
+            'deleted_at' 		=> NULL,
+        );        
+        
+        // Delete all current entries
         DB::table('manufacturers')->truncate();
 
-        // Insert the blog posts
+        // Insert the seeds
         Manufacturer::insert($manufacturers);
     }
 

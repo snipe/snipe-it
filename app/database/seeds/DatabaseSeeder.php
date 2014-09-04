@@ -28,6 +28,8 @@ class DatabaseSeeder extends Seeder
         $this->call('DefaultsSeeder');
         $this->call('CountriesSeeder');
         $this->call('InventoryStatesSeeder');
+        $this->call('FamiliesSeeder');
+        
     }
 
 }

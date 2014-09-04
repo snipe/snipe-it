@@ -9,9 +9,9 @@ class InventoryState extends Elegant
         'name'  => 'required|alpha_space|min:2|max:100|unique:inventory_states,name,{id}',
     );
 
-    public function has_statuslabels()
+    public function statuslabels()
     {
-        return $this->hasMany('Statuslabel', 'inventory_state_id')->count();
+        return $this->hasMany('Statuslabel', 'inventory_state_id');
     }
     
     protected $required_id = array(1,2,3);

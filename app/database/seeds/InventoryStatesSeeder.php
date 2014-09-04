@@ -4,7 +4,6 @@ class InventoryStatesSeeder extends Seeder
     public function run()
     {
 
-
         // Initialize empty array
         $inventory = array();
 

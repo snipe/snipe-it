@@ -28,6 +28,7 @@
             <thead>
                 <tr role="row">
                     <th class="col-md-4">@lang('admin/statuslabels/table.name')</th>
+                    <th class="col-md-4">@lang('general.inventory_state')</th>
                     <th class="col-md-2 actions">@lang('table.actions')</th>
                 </tr>
             </thead>
@@ -35,6 +36,11 @@
                 @foreach ($statuslabels as $statuslabel)
                 <tr>
                     <td><span style="visibility: hidden;">{{$statuslabel->id }}</span>{{{ $statuslabel->name }}}</td>
+                    <td>@if($statuslabel->inventory_state)
+                            @lang('table.inventory_state.values.'. $statuslabel->inventory_state->name)  
+                        @endif
+                        
+                    </td>
                     <td>
                         <a href="{{ route('update/statuslabel', $statuslabel->id) }}" class="btn btn-warning"><i class="icon-pencil icon-white"></i></a>
                         <a data-html="false" 
