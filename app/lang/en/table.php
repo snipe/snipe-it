@@ -13,7 +13,7 @@ return array(
       'status_label' => array(
           'name' => 'Status Label',
           'values'  => array (
-              'In Preparations' => 'in prep',
+              'In Preparations' => 'In Preparations',
           ),
       ),
     ),
