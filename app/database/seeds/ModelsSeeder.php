@@ -24,7 +24,7 @@ class ModelsSeeder extends Seeder
 
         $models[] = array(
             'name'      		=> 'MacBook Pro (Retina, 13-inch, Early 2013)',
-            'manufacturer_id'           => '2',
+            'manufacturer_id'           => '1',
             'category_id'               => '1',
             'modelno'      		=> 'MacBookPro10,2',
             'created_at' 		=> $date->modify('-2 day'),

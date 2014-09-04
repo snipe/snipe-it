@@ -29,6 +29,12 @@ EPELREPO='http://download.fedoraproject.org/pub/epel/6/x86_64/'
 EPELRPM='epel-release-6-8.noarch.rpm'
 REMIREPO='http://rpms.famillecollet.com/enterprise/'
 REMIRPM='remi-release-6.rpm'
+LOG_FILE='snipeit_install_log.txt'
+
+
+exec > >(tee -a ${LOG_FILE} )
+exec 2> >(tee -a ${LOG_FILE} >&2)
+
 
 clear
 

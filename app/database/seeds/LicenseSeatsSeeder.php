@@ -35,35 +35,13 @@ class LicenseSeatsSeeder extends Seeder
 
         $license_seats[] = array(
             'license_id'      	=> '1',
-            'assigned_to'      	=> '2',
-            'created_at' 		=> $date->modify('-10 day')->format('Y-m-d H:i:s'),
-            'updated_at' 		=> $date->modify('-3 day')->format('Y-m-d H:i:s'),
-            'deleted_at' 		=> NULL,
-            'notes' 			=> '',
-            'user_id' 			=> '1',
-            'asset_id' 			=> '3',
-        );
-
-        $license_seats[] = array(
-            'license_id'      	=> '1',
             'assigned_to'      	=> '0',
             'created_at' 		=> $date->modify('-10 day')->format('Y-m-d H:i:s'),
             'updated_at' 		=> $date->modify('-3 day')->format('Y-m-d H:i:s'),
             'deleted_at' 		=> NULL,
             'notes' 			=> '',
             'user_id' 			=> '1',
-            'asset_id' 			=> NULL,
-        );
-
-        $license_seats[] = array(
-            'license_id'      	=> '1',
-            'assigned_to'      	=> '2',
-            'created_at' 		=> $date->modify('-10 day')->format('Y-m-d H:i:s'),
-            'updated_at' 		=> $date->modify('-3 day')->format('Y-m-d H:i:s'),
-            'deleted_at' 		=> NULL,
-            'notes' 			=> '',
-            'user_id' 			=> '1',
-            'asset_id' 			=> NULL,
+            'asset_id' 			=> '3',
         );
 
         $license_seats[] = array(
@@ -77,7 +55,28 @@ class LicenseSeatsSeeder extends Seeder
             'asset_id' 			=> NULL,
         );
 
-        // Pending (status_id is null, assigned_to = 0)
+        $license_seats[] = array(
+            'license_id'      	=> '2',
+            'assigned_to'      	=> '2',
+            'created_at' 		=> $date->modify('-10 day')->format('Y-m-d H:i:s'),
+            'updated_at' 		=> $date->modify('-3 day')->format('Y-m-d H:i:s'),
+            'deleted_at' 		=> NULL,
+            'notes' 			=> '',
+            'user_id' 			=> '1',
+            'asset_id' 			=> NULL,
+        );
+
+        $license_seats[] = array(
+            'license_id'      	=> '2',
+            'assigned_to'      	=> '0',
+            'created_at' 		=> $date->modify('-10 day')->format('Y-m-d H:i:s'),
+            'updated_at' 		=> $date->modify('-3 day')->format('Y-m-d H:i:s'),
+            'deleted_at' 		=> NULL,
+            'notes' 			=> '',
+            'user_id' 			=> '1',
+            'asset_id' 			=> NULL,
+        );
+
         $license_seats[] = array(
             'license_id'      	=> '2',
             'assigned_to'      	=> '0',
@@ -90,6 +89,78 @@ class LicenseSeatsSeeder extends Seeder
 
         );
 
+        $license_seats[] = array(
+            'license_id'      	=> '3',
+            'assigned_to'      	=> '1',
+            'created_at' 		=> $date->modify('-10 day')->format('Y-m-d H:i:s'),
+            'updated_at' 		=> $date->modify('-3 day')->format('Y-m-d H:i:s'),
+            'deleted_at' 		=> NULL,
+            'notes' 			=> '',
+            'user_id' 			=> '1',
+            'asset_id' 			=> NULL,
+
+        );
+
+        $license_seats[] = array(
+            'license_id'      	=> '3',
+            'assigned_to'      	=> '0',
+            'created_at' 		=> $date->modify('-10 day')->format('Y-m-d H:i:s'),
+            'updated_at' 		=> $date->modify('-3 day')->format('Y-m-d H:i:s'),
+            'deleted_at' 		=> NULL,
+            'notes' 			=> '',
+            'user_id' 			=> '1',
+            'asset_id' 			=> NULL,
+
+        );
+        
+        $license_seats[] = array(
+            'license_id'      	=> '4',
+            'assigned_to'      	=> '2',
+            'created_at' 		=> $date->modify('-10 day')->format('Y-m-d H:i:s'),
+            'updated_at' 		=> $date->modify('-3 day')->format('Y-m-d H:i:s'),
+            'deleted_at' 		=> NULL,
+            'notes' 			=> '',
+            'user_id' 			=> '1',
+            'asset_id' 			=> NULL,
+
+        );        
+
+                $license_seats[] = array(
+            'license_id'      	=> '4',
+            'assigned_to'      	=> '0',
+            'created_at' 		=> $date->modify('-10 day')->format('Y-m-d H:i:s'),
+            'updated_at' 		=> $date->modify('-3 day')->format('Y-m-d H:i:s'),
+            'deleted_at' 		=> NULL,
+            'notes' 			=> '',
+            'user_id' 			=> '1',
+            'asset_id' 			=> NULL,
+
+        );
+        
+        $license_seats[] = array(
+            'license_id'      	=> '5',
+            'assigned_to'      	=> '1',
+            'created_at' 		=> $date->modify('-10 day')->format('Y-m-d H:i:s'),
+            'updated_at' 		=> $date->modify('-3 day')->format('Y-m-d H:i:s'),
+            'deleted_at' 		=> NULL,
+            'notes' 			=> '',
+            'user_id' 			=> '1',
+            'asset_id' 			=> NULL,
+
+        ); 
+
+        $license_seats[] = array(
+            'license_id'      	=> '5',
+            'assigned_to'      	=> '0',
+            'created_at' 		=> $date->modify('-10 day')->format('Y-m-d H:i:s'),
+            'updated_at' 		=> $date->modify('-3 day')->format('Y-m-d H:i:s'),
+            'deleted_at' 		=> NULL,
+            'notes' 			=> '',
+            'user_id' 			=> '1',
+            'asset_id' 			=> NULL,
+
+        ); 
+        
         // Delete all the old data
         DB::table('license_seats')->truncate();
 
