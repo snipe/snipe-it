@@ -18,16 +18,11 @@ class Asset extends Elegant
         'status'            => 'integer'
         );
     
-    private $inPreparationsState;
-    private $readyToDeployState;
-    private $assignedState;
-    private $outForDiagnosticsState;
-    private $outForRepairState;
-    private $brokenState;
-    private $lostState;
-    private $decommissionedState;
+    private $unavailableState;
+    private $stockState;
+    private $availableState;
+    private $otherState;
     private $deletedState;
-    private $unknownState;
     
     public  $state;
 
@@ -37,23 +32,17 @@ class Asset extends Elegant
         $this->supplier_id = DB::table('defaults')->where('name', 'supplier_asset')->pluck('value');
         $this->status_id = DB::table('defaults')->where('name', 'asset_status')->pluck('value');        
         
-        $this->inPreparationsState = new inPreparationsState($this);
-        $this->readyToDeployState = new readyToDeployState($this);
-        $this->assignedState = new assignedState($this);
-        $this->outForDiagnosticsState = new outForDiagnosticsState($this);
-        $this->outForRepairState = new outForRepairState($this);
-        $this->brokenState = new brokenState($this);
-        $this->lostState = new lostState($this);
-        $this->decommissionedState = new decommissionedState($this);
+        $this->unavailableState = new unavailableState($this);
+        $this->stockState = new stockState($this);
+        $this->availableState = new availableState($this);
+        $this->otherState = new otherState($this);
         $this->deletedState = new deletedState($this);
-        $this->unknownState = new unknownState($this); 
-        $this->state = $this->inPreparationsState;
     }
     
     public function newFromBuilder($attributes = array())
     {
         $instance = parent::newFromBuilder($attributes);
-        $instance->state = $instance->determineState($instance->status_id);
+        $instance->state = $instance->determineState($instance);
         return $instance;
     }
     
@@ -63,7 +52,7 @@ class Asset extends Elegant
 
         static::updated(function($asset)
         {
-           $asset->state = $asset->determineState($asset->status_id);
+           $asset->state = $asset->determineState($asset);
         });       
     }
     
@@ -95,45 +84,31 @@ class Asset extends Elegant
         $this->state->checkOut();
     } 
     
-    public function setState($state_in) {
-        $this->state = $this->determineState($state_in);
-        $this->state->set();
-    }   
-    
-    private function determineState($status_id_in)
+    private function determineState($asset)
     {
-        switch ($status_id_in) {
-            case 1:
-                return $this->inPreparationsState;
-                break;
-            case 2:
-                return $this->readyToDeployState;
-                break;
-            case 3:
-                return $this->assignedState;
-                break;
-            case 4:
-                return $this->outForDiagnosticsState;
-                break;
-            case 5:
-                return $this->outForRepairState;
-                break;
-            case 6:
-                return $this->brokenState;
-                break;
-            case 7:
-                return $this->lostState;
-                break;
-            case 8:
-                return $this->decommissionedState;
-                break;
-            case 9:
-                return $this->deletedState;
-                break;
-            default:
-                return  $this->unknownState;
-                
+      
+        //if the asset is pending delete
+        if($asset->deleted_at != null ||  $asset->status_id == null)
+        {
+            return $this->deletedState;
         }
+        else {
+            switch ($asset->assetstatus->inventory_state_id) {
+            
+                case 1:
+                    return $this->unavailableState;
+                    break;
+                case 2:
+                    return $this->stockState;
+                    break;
+                case 3:
+                    return $this->availableState;
+                    break;                           
+                default:
+                    return  $this->otherState;
+            }        
+        }
+     
     }
     /**
     * Handle depreciation
@@ -212,8 +187,7 @@ class Asset extends Elegant
     */
      public static function availassetcount()
     {
-        return Asset::orderBy('asset_tag', 'ASC')->where('status_id', '=', 0)->where('assigned_to','=','0')->where('physical', '=', 1)->count();
-
+        return Asset::orderBy('asset_tag', 'ASC')->where('status_id', '=', 2)->where('assigned_to','=','0')->where('physical', '=', 1)->count();
     }
 
     /**
@@ -223,7 +197,6 @@ class Asset extends Elegant
     {
         return $this->belongsTo('Statuslabel','status_id');
     }
-
 
      public function warrantee_expires()
     {
@@ -249,14 +222,12 @@ class Asset extends Elegant
 
     }
 
-
      public function depreciated_date()
     {
             $date = date_create($this->purchase_date);
             date_add($date, date_interval_create_from_date_string($this->depreciation->months.' months'));
             return date_format($date, 'Y-m-d');
     }
-
 
     public function depreciation()
     {
@@ -268,10 +239,10 @@ class Asset extends Elegant
         return $this->belongsTo('Model','model_id');
     }
 
-	/**
-	* Get the license seat information
-	**/
-     public function licenses()
+    /**
+    * Get the license seat information
+    **/
+    public function licenses()
     {
        	return $this->belongsToMany('License', 'license_seats', 'asset_id', 'license_id');
 
@@ -281,7 +252,6 @@ class Asset extends Elegant
     {
     		return $this->hasMany('LicenseSeat', 'asset_id');
     }
-
 
     public function supplier()
     {
@@ -305,64 +275,72 @@ class Asset extends Elegant
 
     public function eol_date()
     {
-            $date = date_create($this->purchase_date);
-            date_add($date, date_interval_create_from_date_string($this->model->eol.' months'));
-            return date_format($date, 'Y-m-d');
+        $date = date_create($this->purchase_date);
+        date_add($date, date_interval_create_from_date_string($this->model->eol.' months'));
+        return date_format($date, 'Y-m-d');
     }
 }
 
-interface AssetState {
+interface StateInterface {
     public function checkIn();
     public function checkOut($user_id);
     public function delete();    
     public function getCheckoutButton();
-    public function getStatusButton();
-    public function getStateText();
-    public function getStateID();
-    public function set();
+    public function getStatusButton();   
+    public function getSelect();
+   
 }
 
-class inPreparationsState implements AssetState{
-    private $asset;    
-    private $state_id = 1;
+abstract class StateBase implements StateInterface{
     
-    public function __construct(Asset $asset_in){
-        $this->asset = $asset_in;
-    }
+    protected $asset; 
     
-    public function getStateID()
+    public function __construct($asset_in)
     {
-        return $this->state_id;
-    }
+        $this->asset = $asset_in;
+    }  
     
     public function delete()
     {
-        $this->asset->status_id = 9; 
-        $this->asset->save();
-        return $this->asset->delete();
+        return false;
     }
     
-    public function set()
-    {
-        $this->asset->status_id = $this->state_id;
-        $this->asset->save();          
-    }
-    
-    public function checkOut($user_id) {
-        
+    public function checkOut($user_id) 
+    {    
        return false;
     }
 
-    public function checkIn() {
-        
+    public function checkIn() 
+    {    
         return false;
     }   
-   
+    
+    public function prepare()
+    {
+       return false;
+    }
+    
+    public function getSelect()
+    {
+        return Form::select('status_id', Statuslabel::where('id' , '!=' , 3)->orderBy('id', 'asc')->lists('name', 'id') , Input::old('status_id', $this->asset->status_id), array('class'=>'select2', 'style'=>'width:350px'));
+       
+    }
     
     public function getCheckoutButton()
     {
-        return "";
+        return '';
     }
+}
+
+class unavailableState extends StateBase{
+    
+    public function delete()
+    {
+        $this->asset->status_id = null; 
+        $this->asset->save();
+        
+        return $this->asset->delete();
+    }   
     
      public function getStatusButton()
     {
@@ -376,69 +354,49 @@ class inPreparationsState implements AssetState{
                             onClick="return false;" ><i class="icon-trash icon-white"></i></a>';
     }
     
-    public function getStateText()
+    public function getCheckoutButton()
+    {    
+        
+        if($this->asset->status_id == 1)
+        {
+            return '<a href="' . route('prepare/hardware', $this->asset->id) .'" class="btn btn-success">'.Lang::get('general.ready').'</a> ';
+        }
+        else 
+            {
+            return '';
+            }
+    }
+    
+        public function prepare()
     {
-        return Lang::get('/admin/statuslabels/table.state.preparing');
+
+        $this->asset->status_id = 2;
+        return $this->asset->save();
+  
     }
 }
 
-class readyToDeployState implements AssetState{
-    private $asset; 
-    private $state_id = 2;
-    
-    public function getStateID()
-    {
-        return $this->state_id;
-    }
-    
+class availableState extends StateBase
+{    
     public function delete()
     {
-        $this->asset->status_id = 9; 
+        $this->asset->status_id = null; 
         $this->asset->save();
+        
         return $this->asset->delete();
     }
     
-        public function set()
+    public function checkout($user_id) 
     {
-        $this->asset->status_id = $this->state_id;
-        return($this->asset->save());      
-        
-        
-    }
-    
-    
-    
-    public function __construct(Asset $asset_in){
-        $this->asset = $asset_in;
-    }
-   
-    
-    public function checkout($user_id) {
-        
         $this->asset->assigned_to = $user_id;
         $this->asset->status_id = 3;
         
-        if($this->asset->save())
-        {            
-            $this->asset->setState(3);
-            return true;
-        }
-        else
-        {
-            return false;
-        }
-    }
-
-    public function checkIn() {
-        return false;
-    }
-    
-
+        return ($this->asset->save());       
+    }  
     
     public function getCheckoutButton()
     {
-        
-        return '<a href="' . route('checkout/hardware', $this->asset->id) .'" class="btn btn-primary">'.Lang::get('general.checkout').'</a> ';
+        return '<a href="' . route('checkout/hardware', $this->asset->id) .'" class="btn btn-info">'.Lang::get('general.checkout').'</a> ';
     }
     
     public function getStatusButton()
@@ -451,57 +409,23 @@ class readyToDeployState implements AssetState{
                             data-content="' . Lang::get('admin/hardware/message.delete.confirm') . '" 
                             data-title="' . Lang::get('general.delete') . htmlspecialchars($this->asset->asset_tag) . '?" 
                             onClick="return false;" ><i class="icon-trash icon-white"></i></a>';
-    }
-    
-    public function getStateText()
-    {
-        return  Lang::get('/admin/statuslabels/table.state.readyToDeploy');
-    }
+    }  
 }
 
-class assignedState implements AssetState{
-    private $asset; 
-    private $state_id = 3;
+class stockState extends StateBase{
     
-    public function getStateID()
+    public function getSelect()
     {
-        return $this->state_id;
+        return '<a href="' . route('checkin/hardware', $this->asset->id) .'" class="btn btn-primary">'.Lang::get('general.checkin').'</a> ';
     }
     
-    public function delete()
-    {
-        //canot delete checked out asset
-        return false;
-    }
-    
-    public function set()
-    {
-        $this->asset->status_id = $this->state_id;
-        $this->asset->save();          
-    }
-    
-    public function __construct(Asset $asset_in){
-        $this->asset = $asset_in;
-    }
-    
-    public function checkOut($user_id) {
-        return false;
-        //check out asset
-    }
-
     public function checkIn() {
+        
         $this->asset->assigned_to = 0;
         $this->asset->status_id = 2;
+        $this->asset->inventory_status_id = 3;
         
-        if($this->asset->save())
-        {            
-            $this->asset->setState(2);
-            return true;
-        }
-        else
-        {
-            return false;
-        }
+        return $this->asset->save();
     }
     
     public function getCheckoutButton()
@@ -510,7 +434,7 @@ class assignedState implements AssetState{
         return '<a href="' . route('checkin/hardware', $this->asset->id) .'" class="btn btn-primary">'.Lang::get('general.checkin').'</a> ';
     }
     
-        public function getStatusButton()
+    public function getStatusButton()
     {
         return '<a href="' . route('update/hardware', $this->asset->id) . '" class="btn btn-warning"><i class="icon-pencil icon-white" alt="Edit"></i></a> '                 
                 . ' <a data-html="false"                             
@@ -521,21 +445,10 @@ class assignedState implements AssetState{
                             data-title="' . Lang::get('general.delete') . htmlspecialchars($this->asset->asset_tag) . '?" 
                             onClick="return false;" ><i class="icon-trash icon-white"></i></a>';
     }
-    
-    public function getStateText()
-    {
-        return  Lang::get('/admin/statuslabels/table.state.assigned');
-    }
+
 }
 
-class outForDiagnosticsState implements AssetState{
-    private $asset;    
-    private $state_id = 4;
-    
-    public function getStateID()
-    {
-        return $this->state_id;
-    }
+class otherState extends StateBase{
     
     public function delete()
     {
@@ -543,35 +456,8 @@ class outForDiagnosticsState implements AssetState{
         $this->asset->save();
         return $this->asset->delete();
     }
-    
-    public function set()
-    {
-        $this->asset->status_id = $this->state_id;
-        $this->asset->save();          
-    }
-    
-    public function __construct(Asset $asset_in){
-        $this->asset = $asset_in;
-    }
-    
-    public function checkOut($user_id) {
-        
-        return false;
-    }
-
-    public function checkIn() {
-        
-        return false;
-    }
-    
-
-    
-    public function getCheckoutButton()
-    {
-        return "";
-    }
-    
-        public function getStatusButton()
+ 
+    public function getStatusButton()
     {
          return '<a href="' . route('update/hardware', $this->asset->id) . '" class="btn btn-warning"><i class="icon-pencil icon-white" alt="Edit"></i></a> '                 
                 . ' <a data-html="false"                             
@@ -582,296 +468,16 @@ class outForDiagnosticsState implements AssetState{
                             data-title="' . Lang::get('general.delete') . htmlspecialchars($this->asset->asset_tag) . '?" 
                             onClick="return false;" ><i class="icon-trash icon-white"></i></a>';
     }
-    
-    public function getStateText()
-    {
-        return  Lang::get('/admin/statuslabels/table.state.outForDiagnostics');
-    }
+
 }
 
-class outForRepairState implements AssetState{
-    private $asset;        
-    private $state_id = 5;
-    
-    public function getStateID()
-    {
-        return $this->state_id;
-    }
-    
-    public function delete()
-    {
-        $this->asset->status_id = 9; 
-        $this->asset->save();
-        return $this->asset->delete();
-    }
-    
-    public function set()
-    {
-        $this->asset->status_id = $this->state_id;
-        $this->asset->save();          
-    }
-    
-    public function __construct(Asset $asset_in){
-        $this->asset = $asset_in;
-    }
-    
-    public function checkOut($user_id) {
-        
-        return false;
-    }
-
-    public function checkIn() {
-        return false;
-    }
-
-    
-    public function getCheckoutButton()
-    {
-        return "";
-    }
-    
-        public function getStatusButton()
-    {
-         return '<a href="' . route('update/hardware', $this->asset->id) . '" class="btn btn-warning"><i class="icon-pencil icon-white" alt="Edit"></i></a> '                 
-                . ' <a data-html="false"  
-                            title="Delete Asset ' . $this->asset->asset_tag . '?"
-                            class="btn delete-asset btn-danger" 
-                            data-toggle="modal" 
-                            href="' . route('delete/hardware', $this->asset->id)  . '" 
-                            data-content="' . Lang::get('admin/hardware/message.delete.confirm') . '" 
-                            data-title="' . Lang::get('general.delete') . htmlspecialchars($this->asset->asset_tag) . '?" 
-                            onClick="return false;" ><i class="icon-trash icon-white"></i></a>';
-    }
-    
-        public function getStateText()
-    {
-        return  Lang::get('/admin/statuslabels/table.state.outForRepair');
-    }
-}
-
-class brokenState implements AssetState{
-    private $asset;    
-    private $state_id = 6;
-    
-    public function getStateID()
-    {
-        return $this->state_id;
-    }
-    
-    public function delete()
-    {
-        $this->asset->status_id = 9; 
-        $this->asset->save();
-        return $this->asset->delete();
-    }
-    
-    public function set()
-    {
-        $this->asset->status_id = $this->state_id;
-        $this->asset->save();          
-    }
-    
-    public function __construct(Asset $asset_in){
-        $this->asset = $asset_in;
-    }
-    
-    public function checkOut($user_id) {
-        
-        return false;
-    }
-
-    public function checkIn() {
-        return false;
-    }
-
-    
-    public function getCheckoutButton()
-    {
-        return "";
-    }
-    
-        public function getStatusButton()
-    {
-         return '<a href="' . route('update/hardware', $this->asset->id) . '" class="btn btn-warning"><i class="icon-pencil icon-white" alt="Edit"></i></a> '                 
-                . '<a data-html="false"                             
-                            class="btn delete-asset btn-danger" 
-                            data-toggle="modal" 
-                            href="' . route('delete/hardware', $this->asset->id)  . '" 
-                            data-content="' . Lang::get('admin/hardware/message.delete.confirm') . '" 
-                            data-title="' . Lang::get('general.delete') . htmlspecialchars($this->asset->asset_tag) . '?" 
-                            onClick="return false;" ><i class="icon-trash icon-white"></i></a>';
-    }
-    
-    public function getStateText()
-    {
-        return  Lang::get('/admin/statuslabels/table.state.broken');
+class deletedState extends StateBase{
        
-    }
-}
-
-class lostState implements AssetState{
-    private $asset;    
-    private $state_id = 7;
-    
-    public function getStateID()
-    {
-        return $this->state_id;
-    }
-    
-    public function set()
-    {
-        $this->asset->status_id = $this->state_id;
-        $this->asset->save();          
-    }
-    
-    public function delete()
-    {
-        $this->asset->status_id = 9; 
-        $this->asset->save();
-        return $this->asset->delete();
-    }
-    
-    public function __construct(Asset $asset_in){
-        $this->asset = $asset_in;
-    }
-    
-    public function checkOut($user_id) {
-        return false;
-    }
-
-    public function checkIn() {
-        return false;
-    }
-    
-
-    
-    public function getCheckoutButton()
-    {
-        return "";
-    }
-    
-        public function getStatusButton()
-    {
-         return '<a href="' . route('update/hardware', $this->asset->id) . '" class="btn btn-warning"><i class="icon-pencil icon-white" alt="Edit"></i></a> '                 
-                . ' <a data-html="false"                             
-                            class="btn delete-asset btn-danger" 
-                            data-toggle="modal" 
-                            href="' . route('delete/hardware', $this->asset->id)  . '" 
-                            data-content="' . Lang::get('admin/hardware/message.delete.confirm') . '" 
-                            data-title="' . Lang::get('general.delete') . htmlspecialchars($this->asset->asset_tag) . '?" 
-                            onClick="return false;" ><i class="icon-trash icon-white"></i></a>';
-    }
-        
-    public function getStateText()
-    {
-        return  Lang::get('/admin/statuslabels/table.state.lost');
-    }
-    
-}
-
-class decommissionedState implements AssetState{
-    private $asset;    
-    private $state_id = 8;
-    
-    public function getStateID()
-    {
-        return $this->state_id;
-    }
-    
-    public function delete()
-    {
-        $this->asset->status_id = 9; 
-        $this->asset->save();
-        return $this->asset->delete();
-    }
-    
-    public function set()
-    {
-        $this->asset->status_id = $this->state_id;
-        $this->asset->save();          
-    }
-    
-    public function __construct(Asset $asset_in){
-        $this->asset = $asset_in;
-    }
-    
-    public function checkOut($user_id) {
-        
-        //check out asset
-        return false;
-    }
-
-    public function checkIn() {
-        return false;        
-    }
-    
-
-    
-    public function getCheckoutButton()
-    {
-        return "";
-    }
-    
-        public function getStatusButton()
-    {
-         return '<a href="' . route('update/hardware', $this->asset->id) . '" class="btn btn-warning"><i class="icon-pencil icon-white" alt="Edit"></i></a> '                 
-                . ' <a data-html="false"                             
-                            class="btn delete-asset btn-danger" 
-                            data-toggle="modal" 
-                            href="' . route('delete/hardware', $this->asset->id)  . '" 
-                            data-content="' . Lang::get('admin/hardware/message.delete.confirm') . '" 
-                            data-title="' . Lang::get('general.delete') . htmlspecialchars($this->asset->asset_tag) . '?" 
-                            onClick="return false;" ><i class="icon-trash icon-white"></i></a>';
-    }
-    
-     public function getStateText()
-    {
-        return  Lang::get('/admin/statuslabels/table.state.decommissioned');
-    }
-}
-
-class deletedState implements AssetState{
-    private $asset;   
-    private $state_id = 9;
-    
-    public function getStateID()
-    {
-        return $this->state_id;
-    }
-    
     public function delete()
     {
        //completely delete the item
         $this->asset->forceDelete();
         return true;
-    }
-    
-    public function set()
-    {
-        $this->asset->status_id = $this->state_id;
-        
-        $this->asset->delete();
-                  
-    }
-    
-    public function __construct(Asset $asset_in){
-        $this->asset = $asset_in;
-    }
-    
-    public function checkOut($user_id) {
-        
-        //check out asset
-        return false;
-    }
-
-    public function checkIn() {
-        return false;
-    }
-
-    
-    public function getCheckoutButton()
-    {
-        return "";
     }
     
      public function getStatusButton()
@@ -889,62 +495,5 @@ class deletedState implements AssetState{
                             </a>';
     }
     
-    public function getStateText()
-    {
-        return Lang::get('/admin/statuslabels/table.state.delete');
-    }
 }
-
-class unknownState implements AssetState{
-    private $asset;    
-    private $state_id;
-    
-    public function getStateID()
-    {
-        return $this->state_id;
-    }
-    public function __construct(Asset $asset_in){
-        $this->asset = $asset_in;
-    }
-    
-    public function delete()
-    {
-        $this->asset->status_id = 9; 
-        $this->asset->save();
-        return $this->asset->delete();
-    }
-    
-    public function set()
-    {
-        $this->asset->status_id = $this->state_id;
-        $this->asset->save();          
-    }
-    
-    public function checkOut($user_id) {
-        
-        //check out asset
-        return false;
-    }
-
-    public function checkIn() {
-        return false;
-    }
-    
-
-    public function getCheckoutButton()
-    {
-        return "";
-    }
-    
-        public function getStatusButton()
-    {
-        return '<a href="' . route('update/hardware', $this->asset->id) . '" class="btn btn-warning"><i class="icon-pencil icon-white" alt="Edit"></i></a> ';
-    }
-    
-    public function getStateText()
-    {
-        return  Lang::get('/admin/statuslabels/table.state.unknown');
-    }
-}
-
 

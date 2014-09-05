@@ -80,6 +80,7 @@ $debugbar["messages"]->addMessage("hello world!");
                     <th class="col-md-1" bSortable="true">@lang('admin/hardware/table.checkoutto')</th>
                     <th class="col-md-1" bSortable="true">@lang('admin/hardware/table.status')</th>                    
                     <th class="col-md-1">@lang('admin/hardware/table.eol')</th>
+                    <th class="col-md-1">@lang('admin/categories/table.title')</th>
                     <th class="col-md-1">@lang('admin/hardware/table.change')</th>
                     <th class="col-md-1 actions" bSortable="false">@lang('table.actions')</th>
                 </tr>
@@ -100,17 +101,32 @@ $debugbar["messages"]->addMessage("hello world!");
                             </a>
                          @endif 
                     </td>
-                    <td>{{ $asset->state->getStateText(); }} </td>
+                    <td>
+                        @if($asset->assetstatus)
+                        {{ $asset->assetstatus->name; }}
+                        @endif
+                    </td>
                     <td>
                     @if ($asset->model->eol) {{{ $asset->eol_date() }}}
                     @endif
                     </td>
-
                     <td>
-                        {{ $asset->state->getCheckoutButton() }}                    
+                        @if($asset->model->category)
+                        {{ $asset->model->category->name }}
+                        @endif
+                    </td>
+                    <td>
+                        @if($asset->state)
+                        {{ $asset->state->getCheckoutButton() }}     
+                        @else
+                        no state
+                        @endif
+                        
                     </td>
                     <td nowrap="nowrap">
-                        {{ $asset->state->getStatusButton() }}                        
+                        @if($asset->state)
+                        {{ $asset->state->getStatusButton() }}   
+                        @endif
                     </td>
                 </tr>
                 @endforeach

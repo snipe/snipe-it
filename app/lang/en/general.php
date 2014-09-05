@@ -70,6 +70,7 @@ return array(
     'people'				=> 'People',
     'per_page'				=> 'Results Per Page',
     'profile'				=> 'Your profile',
+    'ready'                             => 'Ready',
     'ready_to_deploy'                   => 'Ready to Deploy',
     'reports'				=> 'Reports',
     'save'  				=> 'Save',

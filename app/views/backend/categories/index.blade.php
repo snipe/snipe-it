@@ -23,14 +23,16 @@
         <table id="example">
         <thead>
             <tr role="row">
-                <th class="col-md-7">@lang('admin/categories/table.title')</th>
-                <th class="col-md-2 actions">@lang('table.actions')</th>
+                <th class="col-md-4">@lang('admin/categories/table.title')</th>
+                <th class="col-md-3">Model Count</th>
+                <th class="col-md-1 actions">@lang('table.actions')</th>
             </tr>
         </thead>
         <tbody>
             @foreach ($categories as $category)
             <tr>
-                <td>{{{ $category->name }}}</td>
+                <td>{{ HTML::linkAction('view/category', $category->name, array($category->id))  }}</td>
+                <td>{{ $category->has_models() }}</td>
                 <td>
                 <a href="{{ route('update/category', $category->id) }}" class="btn btn-warning"><i class="icon-pencil icon-white"></i></a>
                 <a data-html="false" 

@@ -130,7 +130,8 @@
             <div class="form-group {{ $errors->has('status_id') ? ' has-error' : '' }}">
                 <label for="status_id" class="col-md-2 control-label">@lang('admin/hardware/form.status') <i class='icon-asterisk'></i></label>
                     <div class="col-md-7">
-                        {{ Form::select('status_id', $statuslabel_list , Input::old('status_id', $asset->status_id), array('class'=>'select2', 'style'=>'width:350px')) }}
+                        {{ $asset->state->getSelect() }}
+                        
                         {{ $errors->first('status_id', '<span class="alert-msg"><i class="icon-remove-sign"></i> :message</span>') }}
                     </div>
             </div>

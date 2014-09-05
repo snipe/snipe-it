@@ -120,6 +120,11 @@
             </div>
         @endif
 
+            <div class="col-md-6"><strong>@lang('admin/categories/general.category_name'): </strong>
+            
+            {{ $asset->model->category->name }} 
+          </div>
+        
         @if ($asset->supplier_id)
             <div class="col-md-6"><strong>@lang('admin/hardware/form.supplier'): </strong>
             <a href="{{ route('view/supplier', $asset->supplier_id) }}">
@@ -172,7 +177,7 @@
                     <th class="col-md-3"><span class="line"></span>@lang('general.date')</th>
                     <th class="col-md-2"><span class="line"></span>@lang('general.admin')</th>
                     <th class="col-md-2"><span class="line"></span>@lang('table.action')</th>
-                    <th class="col-md-2"><span class="line"></span>@choice('general.user',1)</th>
+                    <th class="col-md-2"><span class="line"></span>@choice('general.user',1)</th>                   
                     <th class="col-md-3"><span class="line"></span>@lang('general.notes')</th>
                 </tr>
             </thead>
@@ -193,6 +198,7 @@
                         </a>
                         @endif
                     </td>
+                    <td></td>
                     <td>
                         @if ($log->note) {{{ $log->note }}}
                         @endif
@@ -209,7 +215,7 @@
                     @endif
                     </td>
                     <td>@lang('general.created_asset')</td>
-                    <td></td>
+                    
                     <td>
                     @if ($asset->notes)
                     {{{ $asset->notes }}}
@@ -231,7 +237,7 @@
                 <img src="{{{ $qr_code->url }}}" />
             </p>
             @endif
-             <h6>{{ $asset->state->getStateText() }}</h6>
+             <h6>{{ $asset->assetstatus->name }}</h6>
             <ul>                
                  <li>{{ $asset->state->getCheckoutButton() }}</li>
              </ul>

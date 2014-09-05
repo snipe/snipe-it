@@ -6,6 +6,11 @@ class LicenseSeat extends Elegant
     protected $table = 'license_seats';
     protected $softDelete = true;
 
+    public function scopeAvailable($query)
+    {
+        return $query->where('asset_id', '=', null);
+    } 
+    
     public function license()
     {
         return $this->belongsTo('License','license_id');

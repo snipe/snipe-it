@@ -20,11 +20,8 @@ class Category extends Elegant
     }
 
     public function models()
-    {
+    {        
         return $this->hasMany('Model', 'category_id');
-
     }
-
-
 
 }

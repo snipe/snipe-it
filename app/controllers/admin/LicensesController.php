@@ -38,6 +38,7 @@ class LicensesController extends AdminController
         } elseif (Input::get('onlyTrashed')) {	
             $licenses = $licenses->onlyTrashed();  
         }
+        
         $licenses = $licenses->paginate(Setting::getSettings()->per_page);  
         
         // Show the page

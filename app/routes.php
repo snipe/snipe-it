@@ -28,6 +28,7 @@ Route::group(array('prefix' => 'hardware'), function () {
     Route::get('{assetId}/qr_code', array('as' => 'qr_code/hardware', 'uses' => 'Controllers\Admin\AssetsController@getQrCode'));
     Route::get('{assetId}/restore', array('as' => 'restore/hardware', 'uses' => 'Controllers\Admin\AssetsController@getRestore'));
     Route::get('purge', array('as' => 'purge/hardware', 'uses' => 'Controllers\Admin\AssetsController@getPurge'));
+    Route::get('{assetId}/prepare', array('as' => 'prepare/hardware', 'uses' => 'Controllers\Admin\AssetsController@getPrepare'));
 
 
 # Asset Model Management
@@ -76,6 +77,11 @@ Route::group(array('prefix' => 'admin'), function () {
         Route::get('{licenseId}/view', array('as' => 'view/license', 'uses' => 'Controllers\Admin\LicensesController@getView'));
         Route::get('purge',  array('as' => 'purge/license', 'uses' => 'Controllers\Admin\LicensesController@getPurge'));
         Route::get('{licenseId}/restore',  array('as' => 'restore/license', 'uses' => 'Controllers\Admin\LicensesController@getRestore'));
+    });
+    
+    # License Seats
+    Route::group(array('prefix' => 'licenseseats'), function () {
+        Route::get('/', array('as' => 'licenseseats', 'uses' => 'Controllers\Admin\LicenseSeatsController@getIndex'));      
     });
 
 
@@ -132,6 +138,7 @@ Route::group(array('prefix' => 'admin'), function () {
             Route::get('{categoryId}/edit', array('as' => 'update/category', 'uses' => 'Controllers\Admin\CategoriesController@getEdit'));
             Route::post('{categoryId}/edit', 'Controllers\Admin\CategoriesController@postEdit');
             Route::get('{categoryId}/delete', array('as' => 'delete/category', 'uses' => 'Controllers\Admin\CategoriesController@getDelete'));
+            Route::get('{categoryId}/view', array('as' => 'view/category', 'uses' => 'Controllers\Admin\CategoriesController@getView'));
         });
 
         # Depreciations

@@ -28,6 +28,17 @@ class CategoriesController extends AdminController
         // Show the page
         return View::make('backend/categories/index', compact('categories'));
     }
+    
+    public function getView($categoryId = null)
+    {
+        // Check if the category exists
+        if (is_null($category = Category::find($categoryId))) {
+            // Redirect to the blogs management page
+            return Redirect::to('admin/settings/categories')->with('error', Lang::get('admin/categories/message.does_not_exist'));
+        }
+        
+        return View::make('backend/categories/view', compact('category'));
+    }
 
 
     /**

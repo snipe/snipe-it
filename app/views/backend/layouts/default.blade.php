@@ -339,7 +339,7 @@
                     </div>
                     <div class="col-md-3 col-sm-3 stat last">
                         <div class="data">
-                            <a href="{{ URL::to('admin/licenses') }}">
+                            <a href="{{ URL::to('admin/licenseseats?available=true') }}">
                                 <span class="number">{{ number_format(License::availassetcount()) }}</span>
                                 <span style="color:black">@lang('general.licenses_available')</span>
                             </a>

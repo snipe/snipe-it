@@ -42,8 +42,8 @@ class AssetsController extends AdminController
             $assets = Asset::orderBy('asset_tag', 'DESC');
             $assets = $assets->withTrashed()->paginate(Setting::getSettings()->per_page);;           
         } elseif (Input::get('onlyTrashed')) {	
-            $assets = Asset::orderBy('asset_tag', 'DESC');
-            $assets = $assets->onlyTrashed()->paginate(Setting::getSettings()->per_page);;
+            $assets = Asset::onlyTrashed()->orderBy('asset_tag', 'DESC');
+            $assets = $assets->paginate(Setting::getSettings()->per_page);;
         }
         // Filter results
         elseif (Input::get('Pending')) {
@@ -157,6 +157,28 @@ class AssetsController extends AdminController
 
         return View::make('backend/hardware/edit')->with('supplier_list',$supplier_list)->with('model_list',$model_list)->with('statuslabel_list',$statuslabel_list)->with('assigned_to',$assigned_to)->with('asset',new Asset);
 
+    }
+    
+    public function getPrepare($assetId = null)
+    {
+        // Check if the asset exists
+        if (is_null($asset = Asset::find($assetId))) {
+            // Redirect to the asset management page
+            return Redirect::to('hardware')->with('error', Lang::get('admin/hardware/message.does_not_exist'));
+        }
+        
+        if($asset->state->prepare())
+        {
+            $logaction = new Actionlog();
+            $logaction->asset_id = $asset->id;            
+            $logaction->asset_type = 'hardware';            
+            $logaction->user_id = Sentry::getUser()->id;            
+            $log = $logaction->logaction('prepare');
+            
+            return Redirect::to("hardware")->with('success', Lang::get('message.ready.success'));
+        }
+        
+        return Redirect::to('hardware')->with('error', Lang::get('general.error'));
     }
 
 
@@ -311,7 +333,7 @@ class AssetsController extends AdminController
             if ( e(Input::get('status_id')) == '' ) {
                 $asset->status_id =  NULL;
             } else {
-                $asset->setState(e(Input::get('status_id')));
+                $asset->status_id = (e(Input::get('status_id')));
             }
 
             if (e(Input::get('warranty_months')) == '') {
@@ -654,9 +676,9 @@ class AssetsController extends AdminController
         }
         
         $asset->deleted_at = null;
+        $asset->status_id = 1;
         
-        //set back to pedning
-        $asset->setState(1);
+        //set back to pedning        
         $asset->save();
         
         return Redirect::to('hardware')->with('success', Lang::get('message.restore.success'));
