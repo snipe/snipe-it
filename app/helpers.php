@@ -24,7 +24,7 @@ function appVersion() {
         "level" => "alpha",
         "major"=>0,
         "minor"=>3,
-        "build"=>16
+        "build"=>18
     );
     
     $appVersionString = implode(".", $version);
