@@ -175,7 +175,7 @@ class AssetsController extends AdminController
             $logaction->user_id = Sentry::getUser()->id;            
             $log = $logaction->logaction('prepare');
             
-            return Redirect::to("hardware")->with('success', Lang::get('message.ready.success'));
+            return Redirect::to("hardware")->with('success', Lang::get('message.update.success'));
         }
         
         return Redirect::to('hardware')->with('error', Lang::get('general.error'));
@@ -202,13 +202,13 @@ class AssetsController extends AdminController
         }
         // attempt validation
         else {
-
+/**
             if ( e(Input::get('status_id')) == '') {
-                $asset->status_id =  NULL;
+                $asset->status_id =  1;
             } else {
                 $asset->status_id = e(Input::get('status_id'));
             }
-
+**/
             if (e(Input::get('warranty_months')) == '') {
                 $asset->warranty_months =  NULL;
             } else {
@@ -249,7 +249,7 @@ class AssetsController extends AdminController
             $asset->name            		= e(Input::get('name'));
             $asset->serial            		= e(Input::get('serial'));
             $asset->model_id           		= e(Input::get('model_id'));
-            $asset->order_number            = e(Input::get('order_number'));
+            $asset->order_number                = e(Input::get('order_number'));
             $asset->notes            		= e(Input::get('notes'));
             $asset->asset_tag            	= e(Input::get('asset_tag'));
     
@@ -257,6 +257,7 @@ class AssetsController extends AdminController
             $asset->archived          			= '0';
             $asset->physical            		= '1';
             $asset->depreciate          		= '0';
+            $asset->status_id                           =  1;
 
             // Was the asset created?
             if($asset->save()) {
@@ -315,7 +316,7 @@ class AssetsController extends AdminController
         }       
         
         //cannot set to deployed
-        if(e(Input::get('status_id')) == 3)
+        if(e(Input::get('status_id')) == 3 && e(Input::get('assigned_to')) < 1)
             return Redirect::to('hardware/'.$assetId.'/edit')->with('error', 'cannot deploy without user');
        
         //attempt to validate
@@ -328,7 +329,6 @@ class AssetsController extends AdminController
         }
         // attempt validation
         else {
-
 
             if ( e(Input::get('status_id')) == '' ) {
                 $asset->status_id =  NULL;
@@ -660,10 +660,29 @@ class AssetsController extends AdminController
         $supplier_list = array('' => '') + Supplier::orderBy('name', 'asc')->lists('name', 'id');
         $assigned_to = array('' => 'Select a User') + DB::table('users')->select(DB::raw('concat (first_name," ",last_name) as full_name, id'))->whereNull('deleted_at')->lists('full_name', 'id');
 
-        $asset = clone $asset_to_clone;
-        $asset->id = null;
-        $asset->asset_tag = '';
-        return View::make('backend/hardware/edit')->with('supplier_list',$supplier_list)->with('model_list',$model_list)->with('statuslabel_list',$statuslabel_list)->with('assigned_to',$assigned_to)->with('asset',$asset);
+          
+        $asset = new Asset();
+        
+        //columns to copy
+        $asset->name =              $asset_to_clone->name;
+        $asset->serial =            $asset_to_clone->serial;
+        $asset->order_number =      $asset_to_clone->order_number;
+        $asset->model_id =          $asset_to_clone->model_id;
+        $asset->purchase_date =     $asset_to_clone->purchase_date; 
+        $asset->purchase_cost =     $asset_to_clone->purchase_cost; 
+        $asset->order_number =      $asset_to_clone->order_number; 
+        $asset->physical =          $asset_to_clone->physical; 
+        $asset->warranty_months =   $asset_to_clone->warranty_months; 
+        $asset->depreciate =        $asset_to_clone->depreciate; 
+        $asset->supplier_id =       $asset_to_clone->supplier_id; 
+        $asset->requestable =       $asset_to_clone->requestable;  
+        
+        return View::make('backend/hardware/edit')
+                ->with('supplier_list',$supplier_list)
+                ->with('model_list',$model_list)
+                ->with('statuslabel_list',$statuslabel_list)
+                ->with('assigned_to',$assigned_to)
+                ->with('asset',$asset);
 
     }
     

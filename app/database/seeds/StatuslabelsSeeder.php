@@ -15,7 +15,7 @@ class StatuslabelsSeeder extends Seeder
             'name'      => 'Ready to Deploy',
             'created_at' => $date->modify('-10 day'),
             'updated_at' => $date->modify('-3 day'),
-            'inventory_state_id' => '3',
+            'inventory_state_id' => '2',
             'user_id' => 1,
             'deleted_at' 		=> NULL,
         );
@@ -25,7 +25,7 @@ class StatuslabelsSeeder extends Seeder
             'name'      => 'Assigned In Use',
             'created_at' => $date->modify('-10 day'),
             'updated_at' => $date->modify('-3 day'),
-            'inventory_state_id' => '2',
+            'inventory_state_id' => '3',
             'user_id' => 1,
             'deleted_at' 		=> NULL,
         );
@@ -35,7 +35,7 @@ class StatuslabelsSeeder extends Seeder
             'name'      => 'In Preparations',
             'created_at' => $date->modify('-10 day'),
             'updated_at' => $date->modify('-3 day'),
-            'inventory_state_id' => '2',
+            'inventory_state_id' => '1',
             'user_id' => 1,
             'deleted_at' 		=> NULL,
         );
@@ -45,7 +45,7 @@ class StatuslabelsSeeder extends Seeder
             'name'      => 'Out for Diagnostics',
             'created_at' => $date->modify('-10 day'),
             'updated_at' => $date->modify('-3 day'),
-            'inventory_state_id' => '1',
+            'inventory_state_id' => '4',
             'user_id' => 1,
             'deleted_at' 		=> NULL,
         );
@@ -56,7 +56,7 @@ class StatuslabelsSeeder extends Seeder
             'name'      => 'Out for Repair',
             'created_at' => $date->modify('-10 day'),
             'updated_at' => $date->modify('-3 day'),
-            'inventory_state_id' => '1',
+            'inventory_state_id' => '4',
             'user_id' => 1,
             'deleted_at' 		=> NULL,
         );
@@ -67,7 +67,7 @@ class StatuslabelsSeeder extends Seeder
             'name'      => 'Broken - Not Fixable',
             'created_at' => $date->modify('-10 day'),
             'updated_at' => $date->modify('-3 day'),
-            'inventory_state_id' => '1',
+            'inventory_state_id' => '4',
             'user_id' => 1,
             'deleted_at' 		=> NULL,
         );
@@ -77,7 +77,7 @@ class StatuslabelsSeeder extends Seeder
             'name'      => 'Lost/Stolen',
             'created_at' => $date->modify('-10 day'),
             'updated_at' => $date->modify('-3 day'),
-            'inventory_state_id' => '1',
+            'inventory_state_id' => '4',
             'user_id' => 1,
             'deleted_at' 		=> NULL,
         );
@@ -87,7 +87,7 @@ class StatuslabelsSeeder extends Seeder
             'name'      => 'Decommissioned',
             'created_at' => $date->modify('-10 day'),
             'updated_at' => $date->modify('-3 day'),
-            'inventory_state_id' => '1',
+            'inventory_state_id' => '4',
             'user_id' => 1,
             'deleted_at' 		=> NULL,
         );

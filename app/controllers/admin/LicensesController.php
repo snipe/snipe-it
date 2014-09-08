@@ -488,13 +488,13 @@ class LicensesController extends AdminController
 
 
 
-// Check if the asset exists
+        // Check if the asset exists
         if (is_null($licenseseat = LicenseSeat::find($seatId))) {
             // Redirect to the asset management page with error
             return Redirect::to('admin/licenses')->with('error', Lang::get('admin/licenses/message.not_found'));
         }
 
-		 $licenseseat->asset_id = e(Input::get('asset_id'));
+	$licenseseat->asset_id = e(Input::get('asset_id'));
 
         // Update the asset data
         if ( e(Input::get('assigned_to')) == '') {
@@ -513,7 +513,7 @@ class LicensesController extends AdminController
             $logaction->asset_type = 'software';
             $logaction->user_id = Sentry::getUser()->id;
             $logaction->note = e(Input::get('note'));
-
+            $logaction->asset_id = $licenseseat->license->id;
 
             // Update the asset data
             if ( e(Input::get('assigned_to')) == '') {
@@ -578,10 +578,11 @@ class LicensesController extends AdminController
 
         $logaction = new Actionlog();
         $logaction->checkedout_to = $licenseseat->assigned_to;     
-
+        $logaction->asset_id = $licenseseat->license->id;
+        
         // Was the asset updated?
         if($licenseseat->checkin()) {
-            $logaction->asset_id = NULL;
+            $logaction->asset_id = $licenseseat->license->id;
             $logaction->location_id = NULL;
             $logaction->asset_type = 'software';
             $logaction->note = e(Input::get('note'));

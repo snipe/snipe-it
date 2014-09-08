@@ -27,7 +27,7 @@
             <th class="col-md-2" tabindex="0" rowspan="1" colspan="1">@lang('admin/licenses/table.hardware')</th>
             <th class="col-md-2" tabindex="0" rowspan="1" colspan="1">@lang('admin/licenses/table.assigned_to')</th>
             <th class="col-md-1 actions" tabindex="0" rowspan="1" colspan="1">@lang('admin/licenses/general.in_out')</th>
-            <th class="col-md-1 actions" tabindex="0" rowspan="1" colspan="1">@lang('table.actions')</th>
+            
         </tr>
     </thead>
     <tbody>
@@ -59,11 +59,11 @@
                     </td>
                     <td>
                     @if (($seat->assigned_to) && ($seat->deleted_at == NULL))
-                        <a href="{{ route('view/user', $licensedto->assigned_to) }}">
+                        <a href="{{ route('view/user', $seat->assigned_to) }}">
                     {{{ $seat->user->fullName() }}}
                     </a>
                     @elseif (($seat->assigned_to) && ($seat->deleted_at != NULL))
-                        <del>{{{ $licensedto->user->fullName() }}}</del>
+                        <del>{{{ $seat->user->fullName() }}}</del>
                     @elseif ($seat->asset)
                                         @if ($seat->asset->assigned_to != 0)
                                             <a href="{{ route('view/user', $seat->asset->assigned_to) }}">
@@ -90,36 +90,8 @@
                     @endif
                     
                     </td>
-                    <td>
-                    
-                        @if (is_null($seat->deleted_at))
-                            <a href="{{ route('update/license', $seat->license->id) }}" class="btn btn-warning"><i class="icon-pencil icon-white"></i></a>
-                            <a data-html="false" class="btn delete-asset btn-danger" data-toggle="modal" href="{{ route('delete/license', $seat->license->id) }}" data-content="@lang('admin/licenses/message.delete.confirm')" 
-                            data-title="@lang('general.delete')
-                            {{ htmlspecialchars($seat->license->name) }}?" onClick="return false;"><i class="icon-trash icon-white"></i></a>
-                        @else
-                            <a href="{{ route('restore/license', $seat->license->id) }}" class="btn btn-warning"><i class="icon-share-alt icon-white"></i></a>
-                            <a data-html="false" class="btn delete-asset btn-danger" data-toggle="modal" href="{{ route('delete/license', $seat->license->id) }}" data-content="@choice('message.purge.confirm',1)" 
-                            data-title="@lang('general.purge')
-                            {{ htmlspecialchars($seat->license->name) }}?" onClick="return false;"><i class="icon-remove icon-white"></i></a>
-                        @endif
-                    
-                    </td>
-
-
-
                 </tr>
-               
-
-
         @endforeach
-
-
-
-
-
-
-
     </tbody>
 </table>
 
