@@ -26,7 +26,7 @@
             <div class="form-group {{ $errors->has('asset_tag') ? 'error' : '' }}">
                 <label class="control-label" for="asset_tag">@lang('admin/hardware/form.tag')</label>
                 <div class="controls">
-                    <input class="col-md-4" type="text" name="asset_tag" id="asset_tag" value="{{{ Input::old('asset_tag') }}}" />
+                    <input class="col-md-4" type="text" name="asset_tag" id="asset_tag" value="{{{ Input::old('asset_tag') }}}" placeholder="{{{ Input::old('asset_tag', $asset->asset_tag) }}}" />
                     {{ $errors->first('asset_tag', '<span class="help-inline"><i class="icon-remove-sign"></i> :message</span>') }}
                 </div>
             </div>
