@@ -61,7 +61,7 @@ read -e -i "$APACHEHOME" -p "Confirm your Apache root directory: " input
 APACHEHOME="${input:-$APACHEHOME}"
 
 SNIPEITNAME=snipeit
-read -e -i "$SNIPEITNAME" -p "Confirm Snipe IT database and site name (no special chars!): " input
+read -e -i "$SNIPEITNAME" -p "Confirm Snipe IT database/site name (no special chars!): " input
 SNIPEITNAME="${input:-$SNIPEITNAME}"
 
 SNIPEITDIR="$APACHEHOME/$SNIPEITNAME"
@@ -69,7 +69,7 @@ read -e -i "$SNIPEITDIR" -p "Confirm your Snipe IT install directory: " input
 SNIPEITDIR="${input:-$SNIPEITDIR}"
 
 # do not change - install will break
-SNIPEITDBUSER=travis
+SNIPEITDBUSER=snipeit
 read -e -i "$SNIPEITDBUSER" -p "Confirm your Snipe IT database user: " input
 SNIPEITDBUSER="${input:-$SNIPEITDBUSER}"
 
@@ -82,27 +82,55 @@ SNIPEITGITBRANCH=develop
 read -e -i "$SNIPEITGITBRANCH" -p "Confirm Snipe IT code branch to pull: " input
 SNIPEITGITBRANCH="${input:-$SNIPEITGITBRANCH}"
 
-echo ''
-
 # DEFINITELY CHANGE THESE PASSWORDS!!!
 MYSQLROOTPW=''
-while true; do
-    read -e -i "$MYSQLROOTPW" -p "Please enter a new MySQL root password (REQUIRED): " input
-    MYSQLROOTPW="${input:-$MYSQLROOTPW}"
-    LEN=$(echo ${#MYSQLROOTPW})
-    # echo $LEN
-    if [ $LEN -lt 6 ] 
-    then
-        echo "Password must be at least 6 characters"
-    else
-        break
-    fi
+MYSQLNEW=''
+
+echo ''
+
+echo "Is MySQL already configured with a ROOT password (select 'NO' if this is a fresh server installation)?"
+select yn in "Yes" "No"; do
+    case $yn in
+        Yes)    MYSQLNEW='No'
+                while true; do
+                    read -e -i "$MYSQLROOTPW" -p "Please enter your current MySQL root password (REQUIRED): " input
+                    MYSQLROOTPW="${input:-$MYSQLROOTPW}"
+                    LEN=$(echo ${#MYSQLROOTPW})
+                    # echo $LEN
+                    if [ $LEN -lt 6 ] 
+                    then
+                        echo "Password must be at least 6 characters"
+                    else
+                        break
+                    fi
+                done
+
+                break;;
+
+        No)     MYSQLNEW='Yes'
+                while true; do
+                    read -e -i "$MYSQLROOTPW" -p "Please enter a new MySQL root password (REQUIRED): " input
+                    MYSQLROOTPW="${input:-$MYSQLROOTPW}"
+                    LEN=$(echo ${#MYSQLROOTPW})
+                    # echo $LEN
+                    if [ $LEN -lt 6 ] 
+                    then
+                        echo "Password must be at least 6 characters"
+                    else
+                        break
+                    fi
+                done
+
+                exit;;
+    esac
 done
+
+echo ''
 
 
 SNIPEITDBPW=''
 while true; do
-    read -e -i "$SNIPEITDBPW" -p "Please enter your Snipe IT database password (REQUIRED): " input
+    read -e -i "$SNIPEITDBPW" -p "Please enter a new Snipe IT database password (REQUIRED): " input
     SNIPEITDBPW="${input:-$SNIPEITDBPW}"
     LEN=$(echo ${#SNIPEITDBPW})
     # echo $LEN
@@ -139,6 +167,7 @@ echo "Snipe IT site name: $SNIPEITNAME"
 echo "Snipe IT install directory: $SNIPEITDIR"
 echo "Snipe IT code fork: $SNIPEITGITFORK"
 echo "Snipe IT code branch: $SNIPEITGITBRANCH"
+echo "New MYSQL Installation: $MYSQLNEW"
 echo "MySQL root password: $MYSQLROOTPW"
 echo "Snipe IT database user: $SNIPEITDBUSER"
 echo "Snipe IT database password: $SNIPEITDBPW"
@@ -250,7 +279,12 @@ fi
     service mysqld start
     chkconfig mysqld on
 
-    mysql -u root -e "UPDATE mysql.user SET Password = PASSWORD('$MYSQLROOTPW') WHERE User = 'root';create database $SNIPEITNAME;create user '$SNIPEITDBUSER'@'localhost' IDENTIFIED BY '$SNIPEITDBPW';grant all privileges on $SNIPEITNAME.* to '$SNIPEITDBUSER'@'localhost';flush privileges;"
+if [ "$MYSQLNEW" == 'Yes' ] 
+    then
+        mysql -u root -e "UPDATE mysql.user SET Password = PASSWORD('$MYSQLROOTPW') WHERE User = 'root';create database $SNIPEITNAME;create user '$SNIPEITDBUSER'@'localhost' IDENTIFIED BY '$SNIPEITDBPW';grant all privileges on $SNIPEITNAME.* to '$SNIPEITDBUSER'@'localhost';flush privileges;"
+    else
+        mysql -u root -p$MYSQLROOTPW -e "create database $SNIPEITNAME;create user '$SNIPEITDBUSER'@'localhost' IDENTIFIED BY '$SNIPEITDBPW';grant all privileges on $SNIPEITNAME.* to '$SNIPEITDBUSER'@'localhost';flush privileges;"
+    fi
 
 echo "MySQL 5.6 installed and configured, continuing..."
 

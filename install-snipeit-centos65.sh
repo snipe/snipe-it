@@ -62,7 +62,7 @@ read -e -i "$APACHEHOME" -p "Confirm your Apache root directory: " input
 APACHEHOME="${input:-$APACHEHOME}"
 
 SNIPEITNAME=snipeit
-read -e -i "$SNIPEITNAME" -p "Confirm Snipe IT database/site name (no special chars!): " input
+read -e -i "$SNIPEITNAME" -p "Confirm your Snipe IT database and site name: " input
 SNIPEITNAME="${input:-$SNIPEITNAME}"
 
 SNIPEITDIR="$APACHEHOME/$SNIPEITNAME"
@@ -79,7 +79,7 @@ read -e -i "$SNIPEITGITBRANCH" -p "Confirm Snipe IT code branch to pull: " input
 SNIPEITGITBRANCH="${input:-$SNIPEITGITBRANCH}"
 
 # do not change - install will break
-SNIPEITDBUSER=snipeit
+SNIPEITDBUSER=travis
 read -e -i "$SNIPEITDBUSER" -p "Confirm your Snipe IT database user: " input
 SNIPEITDBUSER="${input:-$SNIPEITDBUSER}"
 
@@ -87,51 +87,23 @@ echo ''
 
 # DEFINITELY CHANGE THESE PASSWORDS!!!
 MYSQLROOTPW=''
-MYSQLNEW=''
-
-echo "Is MySQL already configured with a ROOT password (select 'NO' if this is a fresh server installation)?"
-select yn in "Yes" "No"; do
-    case $yn in
-        Yes)    MYSQLNEW='No'
-                while true; do
-                    read -e -i "$MYSQLROOTPW" -p "Please enter your current MySQL root password (REQUIRED): " input
-                    MYSQLROOTPW="${input:-$MYSQLROOTPW}"
-                    LEN=$(echo ${#MYSQLROOTPW})
-                    # echo $LEN
-                    if [ $LEN -lt 6 ] 
-                    then
-                        echo "Password must be at least 6 characters"
-                    else
-                        break
-                    fi
-                done
-
-                break;;
-
-        No)     MYSQLNEW='Yes'
-                while true; do
-                    read -e -i "$MYSQLROOTPW" -p "Please enter a new MySQL root password (REQUIRED): " input
-                    MYSQLROOTPW="${input:-$MYSQLROOTPW}"
-                    LEN=$(echo ${#MYSQLROOTPW})
-                    # echo $LEN
-                    if [ $LEN -lt 6 ] 
-                    then
-                        echo "Password must be at least 6 characters"
-                    else
-                        break
-                    fi
-                done
-
-                exit;;
-    esac
+while true; do
+    read -e -i "$MYSQLROOTPW" -p "Please enter a new MySQL root password (REQUIRED): " input
+    MYSQLROOTPW="${input:-$MYSQLROOTPW}"
+    LEN=$(echo ${#MYSQLROOTPW})
+    # echo $LEN
+    if [ $LEN -lt 6 ] 
+    then
+        echo "Password must be at least 6 characters"
+    else
+        break
+    fi
 done
-
-echo ''
 
 
 SNIPEITDBPW=''
 while true; do
-    read -e -i "$SNIPEITDBPW" -p "Please enter a new Snipe IT database password (REQUIRED): " input
+    read -e -i "$SNIPEITDBPW" -p "Please enter your Snipe IT database password (REQUIRED): " input
     SNIPEITDBPW="${input:-$SNIPEITDBPW}"
     LEN=$(echo ${#SNIPEITDBPW})
     # echo $LEN
@@ -168,7 +140,6 @@ echo "Snipe IT site name: $SNIPEITNAME"
 echo "Snipe IT install directory: $SNIPEITDIR"
 echo "Snipe IT code fork: $SNIPEITGITFORK"
 echo "Snipe IT code branch: $SNIPEITGITBRANCH"
-echo "New MYSQL Installation: $MYSQLNEW"
 echo "MySQL root password: $MYSQLROOTPW"
 echo "Snipe IT database user: $SNIPEITDBUSER"
 echo "Snipe IT database password: $SNIPEITDBPW"
@@ -279,12 +250,7 @@ fi
     service mysqld start
     chkconfig mysqld on
 
-if [ "$MYSQLNEW" == 'Yes' ] 
-    then
-        mysql -u root -e "UPDATE mysql.user SET Password = PASSWORD('$MYSQLROOTPW') WHERE User = 'root';create database $SNIPEITNAME;create user '$SNIPEITDBUSER'@'localhost' IDENTIFIED BY '$SNIPEITDBPW';grant all privileges on $SNIPEITNAME.* to '$SNIPEITDBUSER'@'localhost';flush privileges;"
-    else
-        mysql -u root -p$MYSQLROOTPW -e "create database $SNIPEITNAME;create user '$SNIPEITDBUSER'@'localhost' IDENTIFIED BY '$SNIPEITDBPW';grant all privileges on $SNIPEITNAME.* to '$SNIPEITDBUSER'@'localhost';flush privileges;"
-    fi
+    mysql -u root -e "UPDATE mysql.user SET Password = PASSWORD('$MYSQLROOTPW') WHERE User = 'root';create database $SNIPEITNAME;create user '$SNIPEITDBUSER'@'localhost' IDENTIFIED BY '$SNIPEITDBPW';grant all privileges on $SNIPEITNAME.* to '$SNIPEITDBUSER'@'localhost';flush privileges;"
 
 echo "MySQL 5.6 installed and configured, continuing..."
 
@@ -383,40 +349,40 @@ sleep 5s
 
 echo "Creating the APACHE configuration file for Snipe IT..."
 sleep 2s
-cp -ua /etc/httpd/conf.d/$SNIPEITNAME.conf /etc/httpd/conf.d/$SNIPEITNAME.conf.bak
-rm -f /etc/httpd/conf.d/$SNIPEITNAME.conf
-echo "#*****************************************************************" >> /etc/httpd/conf.d/$SNIPEITNAME.conf
-echo "# SNIPEIT APACHE SITE CONFIG" >> /etc/httpd/conf.d/$SNIPEITNAME.conf
-echo "# http://www.cordeos.com    support@cordeos.com" >> /etc/httpd/conf.d/$SNIPEITNAME.conf
-echo "#" >> /etc/httpd/conf.d/$SNIPEITNAME.conf
-echo "" >> /etc/httpd/conf.d/$SNIPEITNAME.conf
-echo "# Listen for virtual host requests on all IP addresses" >> /etc/httpd/conf.d/$SNIPEITNAME.conf
-echo "NameVirtualHost *:80" >> /etc/httpd/conf.d/$SNIPEITNAME.conf
-echo "" >> /etc/httpd/conf.d/$SNIPEITNAME.conf
-echo "<VirtualHost *:80>" >> /etc/httpd/conf.d/$SNIPEITNAME.conf
-echo "" >> /etc/httpd/conf.d/$SNIPEITNAME.conf
-echo "# This directory parameter is needed for mod_rewrite to work properly" >> /etc/httpd/conf.d/$SNIPEITNAME.conf
-echo "<Directory $SNIPEITDIR/public>" >> /etc/httpd/conf.d/$SNIPEITNAME.conf
-echo "	AllowOverride All" >> /etc/httpd/conf.d/$SNIPEITNAME.conf
-echo "</Directory>" >> /etc/httpd/conf.d/$SNIPEITNAME.conf
-echo "" >> /etc/httpd/conf.d/$SNIPEITNAME.conf
-echo "# Your application-public root folder" >> /etc/httpd/conf.d/$SNIPEITNAME.conf
-echo "DocumentRoot $SNIPEITDIR/public" >> /etc/httpd/conf.d/$SNIPEITNAME.conf
-echo "" >> /etc/httpd/conf.d/$SNIPEITNAME.conf
-echo "ServerName "$FULLSERVERNAME >> /etc/httpd/conf.d/$SNIPEITNAME.conf
-echo "ServerAlias "$SERVERNAME >> /etc/httpd/conf.d/$SNIPEITNAME.conf
-echo "#if using a simply/common server short name as well..." >> /etc/httpd/conf.d/$SNIPEITNAME.conf
-echo "ServerAlias localhost" >> /etc/httpd/conf.d/$SNIPEITNAME.conf
-echo "ServerAlias localhost.$DOMAINNAME" >> /etc/httpd/conf.d/$SNIPEITNAME.conf
-echo "ServerAlias $SNIPEITNAME.$DOMAINNAME" >> /etc/httpd/conf.d/$SNIPEITNAME.conf
-echo "ServerAlias $SNIPEITNAME" >> /etc/httpd/conf.d/$SNIPEITNAME.conf
-echo "" >> /etc/httpd/conf.d/$SNIPEITNAME.conf
-echo "# Other directives here" >> /etc/httpd/conf.d/$SNIPEITNAME.conf
-echo "" >> /etc/httpd/conf.d/$SNIPEITNAME.conf
-echo "</VirtualHost>" >> /etc/httpd/conf.d/$SNIPEITNAME.conf
-echo "" >> /etc/httpd/conf.d/$SNIPEITNAME.conf
-echo "#*****************************************************************" >> /etc/httpd/conf.d/$SNIPEITNAME.conf
-echo "" >> /etc/httpd/conf.d/$SNIPEITNAME.conf
+cp -ua /etc/httpd/conf.d/snipeit.conf /etc/httpd/conf.d/snipeit.conf.bak
+rm -f /etc/httpd/conf.d/snipeit.conf
+echo "#*****************************************************************" >> /etc/httpd/conf.d/snipeit.conf
+echo "# SNIPEIT APACHE SITE CONFIG" >> /etc/httpd/conf.d/snipeit.conf
+echo "# http://www.cordeos.com    support@cordeos.com" >> /etc/httpd/conf.d/snipeit.conf
+echo "#" >> /etc/httpd/conf.d/snipeit.conf
+echo "" >> /etc/httpd/conf.d/snipeit.conf
+echo "# Listen for virtual host requests on all IP addresses" >> /etc/httpd/conf.d/snipeit.conf
+echo "NameVirtualHost *:80" >> /etc/httpd/conf.d/snipeit.conf
+echo "" >> /etc/httpd/conf.d/snipeit.conf
+echo "<VirtualHost *:80>" >> /etc/httpd/conf.d/snipeit.conf
+echo "" >> /etc/httpd/conf.d/snipeit.conf
+echo "# This directory parameter is needed for mod_rewrite to work properly" >> /etc/httpd/conf.d/snipeit.conf
+echo "<Directory $SNIPEITDIR/public>" >> /etc/httpd/conf.d/snipeit.conf
+echo "	AllowOverride All" >> /etc/httpd/conf.d/snipeit.conf
+echo "</Directory>" >> /etc/httpd/conf.d/snipeit.conf
+echo "" >> /etc/httpd/conf.d/snipeit.conf
+echo "# Your application-public root folder" >> /etc/httpd/conf.d/snipeit.conf
+echo "DocumentRoot $SNIPEITDIR/public" >> /etc/httpd/conf.d/snipeit.conf
+echo "" >> /etc/httpd/conf.d/snipeit.conf
+echo "ServerName "$FULLSERVERNAME >> /etc/httpd/conf.d/snipeit.conf
+echo "ServerAlias "$SERVERNAME >> /etc/httpd/conf.d/snipeit.conf
+echo "#if using a simply/common server short name as well..." >> /etc/httpd/conf.d/snipeit.conf
+echo "ServerAlias localhost" >> /etc/httpd/conf.d/snipeit.conf
+echo "ServerAlias localhost.$DOMAINNAME" >> /etc/httpd/conf.d/snipeit.conf
+echo "ServerAlias $SNIPEITNAME.$DOMAINNAME" >> /etc/httpd/conf.d/snipeit.conf
+echo "ServerAlias $SNIPEITNAME" >> /etc/httpd/conf.d/snipeit.conf
+echo "" >> /etc/httpd/conf.d/snipeit.conf
+echo "# Other directives here" >> /etc/httpd/conf.d/snipeit.conf
+echo "" >> /etc/httpd/conf.d/snipeit.conf
+echo "</VirtualHost>" >> /etc/httpd/conf.d/snipeit.conf
+echo "" >> /etc/httpd/conf.d/snipeit.conf
+echo "#*****************************************************************" >> /etc/httpd/conf.d/snipeit.conf
+echo "" >> /etc/httpd/conf.d/snipeit.conf
 
 echo "Apache configuration file created, continuing..."
 sleep 5s
