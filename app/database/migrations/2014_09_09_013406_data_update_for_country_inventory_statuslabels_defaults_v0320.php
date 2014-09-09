@@ -75,7 +75,14 @@ class DataUpdateForCountryInventoryStatuslabelsDefaultsV0320 extends Migration {
                 //update id by +3
                 $nextLabel->id = ($label->id + 3);        
                 $nextLabel->inventory_state_id = 4;
-                $nextLabel->name = $label->name;
+                
+                //Add "deleted" text if the status was previously soft deleted
+                if ($label->deleted_at) {
+                    $nextLabel->name = $label->name.' (DELETED)';                                    
+                } else {
+                    $nextLabel->name = $label->name; 
+                }
+                   
                 $nextLabel->user_id = $label->user_id;
                 $nextLabel->created_at = $label->created_at;
                 $nextLabel->deleted_at = $label->deleted_at;
@@ -125,6 +132,14 @@ class DataUpdateForCountryInventoryStatuslabelsDefaultsV0320 extends Migration {
                     //update id by -3
                     $nextLabel->id = ($label->id - 3);        
                     $nextLabel->inventory_state_id = 4;
+
+                    //Remove "deleted" text if the status was previously soft deleted
+                    if ($label->deleted_at) {
+                        $nextLabel->name = str_replace(' (DELETED)','',$label->name);                                    
+                    } else {
+                        $nextLabel->name = $label->name; 
+                    }
+                       
                     $nextLabel->name = $label->name;
                     $nextLabel->user_id = $label->user_id;
                     $nextLabel->created_at = $label->created_at;
