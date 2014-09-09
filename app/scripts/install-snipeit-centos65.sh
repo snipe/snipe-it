@@ -3,7 +3,7 @@
 # Should also work on Fedora, Red Hat, openSUSE or any other
 # standard APACHE2 and RPM based distros
 #
-# Created by Cordeos Corp. 2014/08/20
+# Created by Cordeos Corp. 2014/09/08
 # http://www.cordeos.com  support@cordeos.com
 #
 #  Important - Your server IP address, hostname should be properly set
@@ -39,7 +39,8 @@ LOG_FILE='snipeit_install_log.txt'
 clear
 
 echo ''
-
+echo 'Snipe IT Automated Install Script: 6.5-3.21'
+echo ''
 echo "This will install Snipe IT Asset Management for CentOS 6.5..."
 echo "Are you sure your server is CentOS 6.5? Do you want to continue?"
 select yn in "Yes" "No"; do
@@ -122,7 +123,7 @@ select yn in "Yes" "No"; do
                     fi
                 done
 
-                exit;;
+                break;;
     esac
 done
 
@@ -285,6 +286,11 @@ if [ "$MYSQLNEW" == 'Yes' ]
     else
         mysql -u root -p$MYSQLROOTPW -e "create database $SNIPEITNAME;create user '$SNIPEITDBUSER'@'localhost' IDENTIFIED BY '$SNIPEITDBPW';grant all privileges on $SNIPEITNAME.* to '$SNIPEITDBUSER'@'localhost';flush privileges;"
     fi
+
+if [ $? -ne 0 ]; then
+    echo 'MySQL database or user create failed, script aborted.'
+    exit
+fi
 
 echo "MySQL 5.6 installed and configured, continuing..."
 

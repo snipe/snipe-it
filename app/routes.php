@@ -8,7 +8,6 @@
 | Register all the asset routes.
 |
 */
-
 Route::group(array('prefix' => 'hardware'), function () {
 
     Route::get('/', array('as' => '', 'uses' => 'Controllers\Admin\AssetsController@getIndex'));

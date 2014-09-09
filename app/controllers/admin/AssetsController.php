@@ -675,7 +675,8 @@ class AssetsController extends AdminController
         $asset->warranty_months =   $asset_to_clone->warranty_months; 
         $asset->depreciate =        $asset_to_clone->depreciate; 
         $asset->supplier_id =       $asset_to_clone->supplier_id; 
-        $asset->requestable =       $asset_to_clone->requestable;  
+        $asset->requestable =       $asset_to_clone->requestable;
+        $asset->asset_tag =         $asset_to_clone->asset_tag;
         
         return View::make('backend/hardware/edit')
                 ->with('supplier_list',$supplier_list)
