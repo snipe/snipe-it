@@ -457,10 +457,10 @@ echo "cd $SNIPEITDIR" >> $HOME/snipeit-git-update.sh
 echo "git remote add cordeos git://github.com$SNIPEITGITFORK.git" >> $HOME/snipeit-git-update.sh
 echo "git fetch cordeos" >> $HOME/snipeit-git-update.sh
 echo "git reset --hard cordeos/$SNIPEITGITBRANCH" >> $HOME/snipeit-git-update.sh
-echo "php artisan migrate" >> $HOME/snipeit-git-update.sh
+echo "php composer.phar update" >> $HOME/snipeit-git-update.sh
 echo "php composer.phar dump-autoload" >> $HOME/snipeit-git-update.sh
 echo "php artisan clear-compiled" >> $HOME/snipeit-git-update.sh
-echo "php composer.phar update" >> $HOME/snipeit-git-update.sh
+echo "php artisan migrate" >> $HOME/snipeit-git-update.sh
 echo "#*****************************************************************" >> $HOME/snipeit-git-update.sh
 echo "" >> $HOME/snipeit-git-update.sh
 
