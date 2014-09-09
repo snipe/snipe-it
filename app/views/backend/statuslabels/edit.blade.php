@@ -75,9 +75,9 @@
 
             <!-- side address column -->
             <div class="col-md-3 address pull-right">
-            <br /><br />
-                <h6>@lang('admin/statuslabels/table.about')</h6>
-                <p>@lang('admin/statuslabels/table.info')</p>
+
+        <h6>@lang('admin/statuslabels/general.about_statuslabels')</h6>
+        <p>@lang('admin/statuslabels/general.about_statuslabels_message')</p>
 
             </div>
 
