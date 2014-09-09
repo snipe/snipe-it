@@ -21,6 +21,7 @@
 <div class="col-md-12">
 
 @if ($suppliers->count() >= 1)
+
 <table id="example">
     <thead>
         <tr role="row">

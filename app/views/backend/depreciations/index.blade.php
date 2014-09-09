@@ -52,9 +52,9 @@ data-title="@lang('general.delete')
 
                     <!-- side address column -->
                     <div class="col-md-3 col-xs-12 address pull-right">
-                        <br /><br />
+                        <br />
                         <h6>@lang('admin/depreciations/general.about_asset_depreciations')</h6>
-                        <p>@lang('admin/depreciations/general.about_depreciations') </p>
+                        <p>@lang('admin/depreciations/general.about_asset_depreciations_message') </p>
                     </div>
  </div>
   </div>

@@ -21,7 +21,7 @@ class SuppliersController extends AdminController
     public function getIndex()
     {
         // Grab all the suppliers
-        $suppliers = Supplier::orderBy('created_at', 'DESC')->paginate(Setting::getSettings()->per_page);
+        $suppliers = Supplier::orderBy('created_at', 'DESC')->get();
 
         // Show the page
         return View::make('backend/suppliers/index', compact('suppliers'));

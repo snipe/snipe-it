@@ -1,13 +1,5 @@
 @extends('backend/layouts/default')
 
-<?php
-use DebugBar\StandardDebugBar;
-
-$debugbar = new StandardDebugBar();
-$debugbarRenderer = $debugbar->getJavascriptRenderer();
-
-$debugbar["messages"]->addMessage("hello world!");
-?>
 
 @section('title0')
     @if (Input::get('Pending') || Input::get('Undeployable') || Input::get('RTD')  || Input::get('Deployed') || Input::get('onlyTrashed'))

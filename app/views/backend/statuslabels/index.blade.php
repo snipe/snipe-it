@@ -9,7 +9,6 @@
 {{-- Page content --}}
 @section('content')
 
-
 <div class="row header">
     <div class="col-md-12">
         <a href="{{ route('create/statuslabel') }}" class="btn btn-success pull-right"><i class="icon-plus-sign icon-white"></i>  @lang('general.create')</a>
@@ -17,14 +16,10 @@
     </div>
 </div>
 
-<div class="user-profile">
-<div class="row profile">
-<div class="col-md-9 bio">
-
-            <br>
-            <!-- checked out assets table -->
-
-            <table id="example">
+<div class="row form-wrapper">
+    <div class="col-md-9">
+        @if ($statuslabels->count() > 0) 
+        <table id="example">
             <thead>
                 <tr role="row">
                     <th class="col-md-4">@lang('admin/statuslabels/table.name')</th>
@@ -32,32 +27,36 @@
                     <th class="col-md-2 actions">@lang('table.actions')</th>
                 </tr>
             </thead>
-            <tbody>
-                @foreach ($statuslabels as $statuslabel)
-                <tr>
-                    <td><span style="visibility: hidden;">{{$statuslabel->id }}</span>{{{ $statuslabel->name }}}</td>
-                    <td>@if($statuslabel->inventory_state)
-                            {{  $statuslabel->inventory_state->name }}  
-                        @endif
-                        
-                    </td>
-                    <td>
-                        <a href="{{ route('update/statuslabel', $statuslabel->id) }}" class="btn btn-warning"><i class="icon-pencil icon-white"></i></a>
-                        <a data-html="false" 
-                            @if($statuslabel->isRequired())
-                            disabled='true'
-                            @endif
-                            class="btn delete-asset btn-danger" 
-                            data-toggle="modal" href="{{ route('delete/statuslabel', $statuslabel->id) }}" data-content="@lang('admin/statuslabels/message.delete.confirm')"
-                            data-title="@lang('general.delete')
-                 {{ htmlspecialchars($statuslabel->name) }}?" onClick="return false;"><i class="icon-trash icon-white"></i></a>
-                    </td>
-                </tr>
-                @endforeach
-            </tbody>
-        </table>
+        <tbody>
+           
+            @foreach($statuslabels as $label)
+            <tr>
+                <td><span style="visibility: hidden;">{{$label->id }}</span>{{{ $label->name }}}</td>
+                <td>@if($label->inventory_state)
+                        {{  $label->inventory_state->name }}  
+                    @endif
 
-        </div>
+                </td>
+                <td>
+                    <a href="{{ route('update/statuslabel', $label->id) }}" class="btn btn-warning"><i class="icon-pencil icon-white"></i></a>
+                    <a data-html="false" 
+                        @if($label->isRequired())
+                        disabled='true'
+                        @endif
+                        class="btn delete-asset btn-danger" 
+                        data-toggle="modal" href="{{ route('delete/statuslabel', $label->id) }}" data-content="@lang('admin/statuslabels/message.delete.confirm')"
+                        data-title="@lang('general.delete')
+                        {{ htmlspecialchars($label->name) }}?" onClick="return false;"><i class="icon-trash icon-white"></i></a>
+                </td>
+            </tr>
+            @endforeach
+        </tbody>
+        </table>
+    @else
+        @lang('general.no_results') 
+Im in the else
+    @endif
+    </div>
 
     <!-- side address column -->
    <div class="col-md-3 col-xs-12 address pull-right">

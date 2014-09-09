@@ -66,7 +66,10 @@
         <!-- side address column -->
         <div class="col-md-3 col-xs-12 address pull-right">
 
-           
+               <br />
+    <h6>@lang('admin/categories/general.about_asset_categories')</h6>
+    <p>@lang('admin/categories/general.about_asset_categories_message') </p>
+    
         </div>
     </div>
 </div>

@@ -62,7 +62,9 @@
 
         <!-- side address column -->
         <div class="col-md-3 col-xs-12 address pull-right">
-
+    <br />
+    <h6>@lang('admin/families/general.about_families')</h6>
+    <p>@lang('admin/families/general.about_families_message') </p>
            
         </div>
     </div>

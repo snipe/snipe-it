@@ -133,9 +133,10 @@ Settings ::
                 
                     <!-- side address column -->
                     <div class="col-md-3 address pull-right">
-                        <br /><br />
 
-                        <p>@lang('admin/settings/general.settings_info')</p>
+                                    <br />
+            <h6>@lang('admin/settings/general.about_settings')</h6>
+            <p>@lang('admin/settings/general.about_settings_message') </p>
 
                     </div>
 @stop
