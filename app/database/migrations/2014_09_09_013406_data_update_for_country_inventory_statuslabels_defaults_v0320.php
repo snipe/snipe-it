@@ -22,8 +22,8 @@ class DataUpdateForCountryInventoryStatuslabelsDefaultsV0320 extends Migration {
             $seeder->call('FamiliesSeeder');
             //Populate default settings
             $seeder->call('DefaultsSeeder');
-            //Populate NEW asset_status_label items
-            $seeder->call('StatuslabelsSeeder');
+            //Populate NEW asset_status_label items - NOT NEEDED, adds duplicates
+            //$seeder->call('StatuslabelsSeeder');
               
             //Update the asset status_ids to match the new 'table' values
             //DB::table('assets')->whereNull('status_id')->update(array('status_id' => 1));
