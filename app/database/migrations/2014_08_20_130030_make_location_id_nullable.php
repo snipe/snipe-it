@@ -14,6 +14,8 @@ class MakeLocationIdNullable extends Migration {
 	{
 		//
             DB::statement('ALTER TABLE users MODIFY column location_id int NULL');
+            
+            DB::statement('ALTER TABLE suppliers MODIFY COLUMN state VARCHAR(64) NULL');
 	}
 
 	/**

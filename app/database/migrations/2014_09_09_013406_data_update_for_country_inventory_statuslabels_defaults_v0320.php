@@ -135,7 +135,7 @@ class DataUpdateForCountryInventoryStatuslabelsDefaultsV0320 extends Migration {
 
                     //Remove "deleted" text if the status was previously soft deleted
                     if ($label->deleted_at) {
-                        $nextLabel->name = str_replace(' (DELETED)','',$label->name);                                    
+                        $nextLabel->name = str_replace(" (DELETED)","",$label->name);                                    
                     } else {
                         $nextLabel->name = $label->name; 
                     }
