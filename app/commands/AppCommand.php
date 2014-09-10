@@ -139,15 +139,14 @@ class AppCommand extends Command
         // Add the initial location information
         $this->addLocation();
         
-        // Add default country record
-        $this->addDefaultCountry();
-        
         // Create the default user and default groups.
         $this->sentryRunner();
         
         // Seed the tables with dummy data
         $this->call('db:seed');
-
+        
+        // Add default country record - must be after SEED
+        $this->addDefaultCountry();
     }
 
     /**
@@ -413,6 +412,8 @@ class AppCommand extends Command
     {
 
         // Prepare the location data array.
+        
+        /**
         $data = array_merge($this->countryData, array(
                 'name' => 'country',
                 'table_name' => 'locations',
@@ -420,7 +421,9 @@ class AppCommand extends Command
                 'source_table' => 'countries',
                 'user_id' => '1',
             ));
-        DB::table('defaults')->insert($data);
+        **/
+        DB::table('defaults')->where('name', 'country')->update(array('value' => $this->countryData['value']));
+        //DB::table('defaults')->insert($data);
         
     }
     
