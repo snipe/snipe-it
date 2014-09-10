@@ -438,9 +438,13 @@ echo "# http://www.cordeos.com    support@cordeos.com" >> $HOME/snipeit-git-upda
 echo "#" >> $HOME/snipeit-git-update.sh
 echo "" >> $HOME/snipeit-git-update.sh
 echo "cd $SNIPEITDIR" >> $HOME/snipeit-git-update.sh
+echo "git remote rm cordeos" >> $HOME/snipeit-git-update.sh
 echo "git remote add cordeos git://github.com$SNIPEITGITFORK.git" >> $HOME/snipeit-git-update.sh
+echo "git remote rm master" >> $HOME/snipeit-git-update.sh
+echo "git remote add master git://github.com/snipe/snipe-it.git" >> $HOME/snipeit-git-update.sh
 echo "git fetch cordeos" >> $HOME/snipeit-git-update.sh
 echo "git reset --hard cordeos/$SNIPEITGITBRANCH" >> $HOME/snipeit-git-update.sh
+echo "php composer.phar self-update" >> $HOME/snipeit-git-update.sh
 echo "php composer.phar update" >> $HOME/snipeit-git-update.sh
 echo "php composer.phar dump-autoload" >> $HOME/snipeit-git-update.sh
 echo "php artisan clear-compiled" >> $HOME/snipeit-git-update.sh
