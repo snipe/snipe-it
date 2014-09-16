@@ -33,6 +33,8 @@ class DatabaseSeeder extends Seeder
         $this->call('CountriesSeeder');
         $this->call('InventoryStatesSeeder');
         $this->call('FamiliesSeeder');
+        $this->call('ServiceAgreementsSeeder');
+        $this->call('ServiceAgreementTypesSeeder');
         
     }
 
