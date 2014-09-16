@@ -53,7 +53,7 @@ class ServiceAgreementTypesSeeder extends Seeder
         DB::table('service_agreement_type')->truncate();
 
         // Insert the new posts
-        InventoryState::insert($servicetype);
+        ServiceAgreementType::insert($servicetype);
     }
 
 }
