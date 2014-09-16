@@ -16,7 +16,6 @@ class ServiceAgreementTypesSeeder extends Seeder
             'created_at' 		=> $date->modify('-10 day'),
             'updated_at' 		=> $date->modify('-1 day'),
             'user_id' 			=> 1,
-            'deleted_at' 		=> NULL,
         );
                 
         $servicetype[] = array(
@@ -26,7 +25,6 @@ class ServiceAgreementTypesSeeder extends Seeder
             'created_at' 		=> $date->modify('-10 day'),
             'updated_at' 		=> $date->modify('-1 day'),
             'user_id' 			=> 1,
-            'deleted_at' 		=> NULL,
         );
         
         $servicetype[] = array(
@@ -36,7 +34,6 @@ class ServiceAgreementTypesSeeder extends Seeder
             'created_at' 		=> $date->modify('-10 day'),
             'updated_at' 		=> $date->modify('-1 day'),
             'user_id' 			=> 1,
-            'deleted_at' 		=> NULL,
         );
         
         $servicetype[] = array(
@@ -46,7 +43,7 @@ class ServiceAgreementTypesSeeder extends Seeder
             'created_at' 		=> $date->modify('-10 day'),
             'updated_at' 		=> $date->modify('-1 day'),
             'user_id' 			=> 1,
-            'deleted_at' 		=> NULL,
+
         );
 
         // Delete all the old data
