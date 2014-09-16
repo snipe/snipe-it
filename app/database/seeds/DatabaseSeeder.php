@@ -34,9 +34,6 @@ class DatabaseSeeder extends Seeder
         $this->call('InventoryStatesSeeder');
         $this->call('FamiliesSeeder');
         
-        $this->call('AssignmentDefinitionsSeeder');
-        $this->call('AssignmentTypesSeeder');
-        
     }
 
 }
