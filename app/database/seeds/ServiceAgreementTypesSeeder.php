@@ -11,7 +11,7 @@ class ServiceAgreementTypesSeeder extends Seeder
 
         $servicetype[] = array(
             'id'                        => '4',
-            'name'      		=> 'Unavailable',
+            'name'      		=> 'Software Assurance',
             'notes'                     => 'Automatic seeded entry',
             'created_at' 		=> $date->modify('-10 day'),
             'updated_at' 		=> $date->modify('-1 day'),
@@ -20,7 +20,7 @@ class ServiceAgreementTypesSeeder extends Seeder
                 
         $servicetype[] = array(
             'id'                        => '3',
-            'name'      		=> 'Assigned',
+            'name'      		=> 'Support Contract',
             'notes'                     => 'Automatic seeded entry',
             'created_at' 		=> $date->modify('-10 day'),
             'updated_at' 		=> $date->modify('-1 day'),
@@ -29,7 +29,7 @@ class ServiceAgreementTypesSeeder extends Seeder
         
         $servicetype[] = array(
             'id'                        => '2',
-            'name'      		=> 'Available',
+            'name'      		=> 'Hardware Extended Warrantee',
             'notes'                     => 'Automatic seeded entry',
             'created_at' 		=> $date->modify('-10 day'),
             'updated_at' 		=> $date->modify('-1 day'),
@@ -38,7 +38,7 @@ class ServiceAgreementTypesSeeder extends Seeder
         
         $servicetype[] = array(
             'id'                        => '1',
-            'name'      		=> 'Pending',
+            'name'      		=> 'Maintenance',
             'notes'                     => 'Automatic seeded entry',
             'created_at' 		=> $date->modify('-10 day'),
             'updated_at' 		=> $date->modify('-1 day'),

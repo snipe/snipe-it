@@ -11,90 +11,74 @@ class ServiceAgreementsSeeder extends Seeder
 
         // Pending (status_id is null, assigned_to = 0)
         $service[] = array(
-            'name'      		=> 'Adobe Photoshop CS6',
-            'serial'      		=> 'Z68544SSQRM',
+            'name'      		=> 'Office 2013 Assurance',
+            'contract_number'           => 'Z68544SSQRM',
+            'purchase_date'             => '2014-10-02',
+            'purchase_cost'             => '135.00',
+            'created_at' 		=> $date->modify('-10 day'),
+            'updated_at' 		=> $date->modify('-3 day'),
+            'term_months'               => 12,
+            'service_agreement_type_id' => 4,
+            'notes' 			=> 'Seeded entry',
+            'location_id'		=> 1,
+            'strict_assignment'         => 1,
+            'deleted_at' 		=> NULL,
+            'user_id'                   => 1,
+        );
+
+        $service[] = array(
+            'name'      		=> 'HP CarePaq - DL380',
+            'contract_number'           => 'Q5324-244',
             'purchase_date'             => '2013-10-02',
-            'purchase_cost'             => '2435.00',
-            'order_number'              => '1451855',
+            'purchase_cost'             => '980.00',
             'created_at' 		=> $date->modify('-10 day'),
             'updated_at' 		=> $date->modify('-3 day'),
-            'seats' 			=> 3,
-            'license_name'		=> '',
-            'license_email'		=> '',
-            'manufacturer_id'           => 11,
-            'family_id'                 => 4,
-            'notes' 			=> '',
-            'user_id'			=> 1,
-            'depreciation_id'           => 2,
+            'term_months'               => 36,
+            'service_agreement_type_id' => 2,
+            'notes' 			=> 'Seeded entry',
+            'location_id'		=> 1,
+            'strict_assignment'         => 1,
             'deleted_at' 		=> NULL,
-            'depreciate' 		=> '0',
+            'user_id'                   => 1,
         );
 
         $service[] = array(
-            'name'      		=> 'Office 2010 Professional',
-            'serial'      		=> '78YN-56RT-FQ9B-8GYB',
-            'purchase_date'             => '2012-05-22',
-            'purchase_cost'             => '1295.20',
-            'order_number'              => '1452005',
+            'name'      		=> 'Cisco SmartNet 2960',
+            'contract_number'           => '2424-4321-866',
+            'purchase_date'             => '2014-04-26',
+            'purchase_cost'             => '328.00',
             'created_at' 		=> $date->modify('-10 day'),
             'updated_at' 		=> $date->modify('-3 day'),
-            'seats' 			=> 4,
-            'license_name'		=> '',
-            'license_email'		=> '',
-            'manufacturer_id'           => 2,
-            'family_id'                 => 1,
-            'notes' 			=> '',
-            'user_id'			=> 1,
-            'depreciation_id'           => 2,
+            'term_months'               => 24,
+            'service_agreement_type_id' => 3,
+            'notes' 			=> 'Seeded entry',
+            'location_id'		=> 1,
+            'strict_assignment'         => 1,
             'deleted_at' 		=> NULL,
-            'depreciate' 		=> '0',
-        );
-
-        $service[] = array(
-            'name'      		=> 'Office 2011 for Mac',
-            'serial'      		=> '9804989-3404',
-            'purchase_date'             => '2013-02-01',
-            'purchase_cost'             => '642.00',
-            'order_number'              => '1452082',
-            'created_at' 		=> $date->modify('-10 day'),
-            'updated_at' 		=> $date->modify('-3 day'),
-            'seats' 			=> 2,
-            'license_name'		=> '',
-            'license_email'		=> '',
-            'manufacturer_id'           => 2,
-            'family_id'                 => 1,
-            'notes' 			=> '',
-            'user_id'			=> 1,
-            'depreciation_id'           => 2,
-            'deleted_at' 		=> NULL,
-            'depreciate' 		=> '0',
-        );        
+            'user_id'                   => 1,
+        );      
  
         $service[] = array(
-            'name'      		=> 'Office 2013 Standard',
-            'serial'      		=> 'F8M8-DMQ2-F6TY-4PYQ',
-            'purchase_date'             => '2013-10-02',
-            'purchase_cost'             => '858.50',
-            'order_number'              => '1452124',
+            'name'      		=> 'SAP Support and Maintenance',
+            'contract_number'           => '982.25487',
+            'purchase_date'             => '2013-04-26',
+            'purchase_cost'             => '2496.00',
             'created_at' 		=> $date->modify('-10 day'),
             'updated_at' 		=> $date->modify('-3 day'),
-            'seats' 			=> 2,
-            'license_name'		=> '',
-            'license_email'		=> '',
-            'manufacturer_id'           => 2,
-            'family_id'                 => 1,
-            'notes' 			=> '',
-            'user_id'			=> 1,
-            'depreciation_id'           => 2,
+            'term_months'               => 12,
+            'service_agreement_type_id' => 1,
+            'notes' 			=> 'Seeded entry',
+            'location_id'		=> 1,
+            'strict_assignment'         => 1,
             'deleted_at' 		=> NULL,
-            'depreciate' 		=> '0',
-        );                 
+            'user_id'                   => 1,
+        );              
         
         // Delete all the old data
         DB::table('service_agreements')->truncate();
 
         // Insert the new posts
-        License::insert($service);
+        ServiceAgreement::insert($service);
     }
 
 }

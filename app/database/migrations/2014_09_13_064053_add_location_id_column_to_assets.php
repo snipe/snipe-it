@@ -25,7 +25,7 @@ class AddLocationIdColumnToAssets extends Migration {
                 
                 Schema::table('licenses', function(Blueprint $table)
 		{
-		// Add location_id to assets table
+		// Add location_id to licenses table
                     $table->smallInteger('location_id')->default(1);
                     $table->tinyInteger('strict_assignment')->default(1);
 		});
@@ -56,7 +56,7 @@ class AddLocationIdColumnToAssets extends Migration {
                 Schema::table('locations', function(Blueprint $table)
 		{
 		// Add location_id to assets table
-                    $table->text('locations');
+                    $table->text('notes');
 		});
                 
         }
@@ -100,7 +100,7 @@ class AddLocationIdColumnToAssets extends Migration {
                 Schema::table('locations', function(Blueprint $table)
 		{
 		// Add location_id to assets table
-                    $table->dropColumn('locations');
+                    $table->dropColumn('notes');
 		});
 	}
 
