@@ -36,6 +36,7 @@ class CreateServiceAgreementsTable extends Migration {
 		{
 			$table->increments('id');
                         $table->string('name');
+                        $table->integer('user_id');
                         $table->text('notes');
 			$table->timestamps();
                         $table->softDeletes();
