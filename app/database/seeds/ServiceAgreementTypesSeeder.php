@@ -47,7 +47,7 @@ class ServiceAgreementTypesSeeder extends Seeder
         );
 
         // Delete all the old data
-        DB::table('service_agreement_type')->truncate();
+        DB::table('service_agreement_types')->truncate();
 
         // Insert the new posts
         ServiceAgreementType::insert($servicetype);

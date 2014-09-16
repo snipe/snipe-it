@@ -32,7 +32,7 @@ class CreateServiceAgreementsTable extends Migration {
 		});
             
             // Add the service agreements type table
-                Schema::create('service_agreement_type', function(Blueprint $table)
+                Schema::create('service_agreement_types', function(Blueprint $table)
 		{
 			$table->increments('id');
                         $table->string('name');
@@ -51,7 +51,7 @@ class CreateServiceAgreementsTable extends Migration {
 	public function down()
 	{
 		Schema::drop('service_agreements');
-                Schema::drop('service_agreement_type');
+                Schema::drop('service_agreement_types');
 	}
 
 }
