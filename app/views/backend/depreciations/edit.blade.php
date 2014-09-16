@@ -4,9 +4,9 @@
 @section('title')
 
     @if ($depreciation->id)
-        @lang('admin/depreciations/general.update_depreciation') ::
+        @lang('base.depreciation') ::
     @else
-        @lang('admin/depreciations/general.update_depreciation') ::
+        @lang('base.depreciation') ::
     @endif
 
 @parent
@@ -16,18 +16,26 @@
 @section('content')
 
 <div class="row header">
-    <div class="col-md-12">
-        <a href="{{ URL::previous() }}" class="btn-flat gray pull-right"><i class="icon-circle-arrow-left icon-white"></i>  @lang('general.back')</a>
+    <div class="col-md-10">
+            
+        <button type="submit" class="btn btn-success pull-right"><i class="icon-ok icon-white"></i> @lang('actions.save')</button>            
+        <a href="{{ URL::previous() }}" class="btn btn-default pull-right"><i class="icon-circle-arrow-left icon-white"></i> @lang('actions.cancel')</a>
+            
         <h3>
         @if ($depreciation->id)
-            @lang('admin/depreciations/general.update_depreciation')
+            @lang('base.depreciation_update')
+        @elseif(isset($clone_deprecation))
+            @lang('base.depreciation_clone')
         @else
-            @lang('admin/depreciations/general.update_depreciation')
+            @lang('base.depreciation_create')
         @endif
         </h3>
-    </div>
+            
+    </div>                            
 </div>
-<div class="row form-wrapper">
+
+
+<div class="col-md-12">
 
 <form class="form-horizontal" method="post" action="" autocomplete="off">
     <!-- CSRF Token -->
@@ -35,10 +43,10 @@
 
             <!-- Name -->
             <div class="form-group {{ $errors->has('name') ? ' has-error' : '' }}">
-                <label for="name" class="col-md-4 control-label">@lang('admin/depreciations/general.depreciation_name')
+                <label for="name" class="col-md-2 control-label">@lang('admin/depreciations/form.name')
                  <i class='icon-asterisk'></i></label>
                  </label>
-                    <div class="col-md-6">
+                    <div class="col-md-5">
                         <input class="form-control" type="text" name="name" id="name" value="{{{ Input::old('name', $depreciation->name) }}}" />
                         {{ $errors->first('name', '<span class="alert-msg"><i class="icon-remove-sign"></i> :message</span>') }}
                     </div>
@@ -46,10 +54,9 @@
 
             <!-- Name -->
             <div class="form-group {{ $errors->has('months') ? ' has-error' : '' }}">
-                <label for="months" class="col-md-4 control-label">@lang('admin/depreciations/general.number_of_months')
+                <label for="months" class="col-md-2 control-label">@lang('admin/depreciations/form.months')
                  <i class='icon-asterisk'></i></label>
-                 </label>
-                    <div class="col-md-1">
+                    <div class="col-md-2">
                         <input class="form-control" type="text" name="months" id="months" value="{{{ Input::old('name', $depreciation->months) }}}" />
                         {{ $errors->first('months', '<span class="alert-msg"><i class="icon-remove-sign"></i> :message</span>') }}
                     </div>
@@ -57,10 +64,10 @@
 
             <!-- Form actions -->
             <div class="form-group">
-            <label class="col-md-4 control-label"></label>
+                <label class="col-md-2 control-label"></label>
                 <div class="col-md-7">
-                    <a class="btn btn-link" href="{{ URL::previous() }}">@lang('general.cancel')</a>
-                    <button type="submit" class="btn btn-success"><i class="icon-ok icon-white"></i> @lang('general.save')</button>
+                        <a href="{{ URL::previous() }}" class="btn btn-default"><i class="icon-circle-arrow-left icon-white"></i> @lang('actions.cancel')</a>
+                        <button type="submit" class="btn btn-success"><i class="icon-ok icon-white"></i> @lang('actions.save')</button>
                 </div>
             </div>
 

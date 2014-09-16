@@ -17,7 +17,7 @@ class CreateEntityTable extends Migration {
 			$table->increments('id');
                         $table->string('name');
                         $table->string('common_name');
-                        $table->string('notes')->nullable();
+                        $table->text('notes');
                         $table->unique('name');
                         $table->unique('common_name');
                         $table->integer('user_id');

@@ -3,9 +3,9 @@
 {{-- Page title --}}
 @section('title')
     @if ($manufacturer->id)
-        @lang('admin/manufacturers/table.update') ::
+        @lang('base.manufacturer_update') ::
     @else
-        @lang('admin/manufacturers/table.create') ::
+        @lang('base.manufacturer_create') ::
     @endif
 @parent
 @stop
@@ -14,24 +14,25 @@
 @section('content')
 
 <div class="row header">
-    <div class="col-md-12">
-        <a href="{{ URL::previous() }}" class="btn-flat gray pull-right"><i class="icon-plus-sign icon-white"></i>  @lang('general.back')</a>
+    <div class="col-md-10">
+            
+        <button type="submit" class="btn btn-success pull-right"><i class="icon-ok icon-white"></i> @lang('actions.save')</button>            
+        <a href="{{ URL::previous() }}" class="btn btn-default pull-right"><i class="icon-circle-arrow-left icon-white"></i> @lang('actions.cancel')</a>
+            
         <h3>
         @if ($manufacturer->id)
-            @lang('admin/manufacturers/table.update')
+            @lang('base.manufacturer_update')
+        @elseif(isset($clone_manufacturer))
+            @lang('base.manufacturer_clone')
         @else
-            @lang('admin/manufacturers/table.create')
+            @lang('base.manufacturer_create')
         @endif
-    </h3>
-    </div>
+        </h3>
+            
+    </div>                            
 </div>
 
-<div class="user-profile">
-<div class="row profile">
-<div class="col-md-9 bio">
-
-
-
+<div class="col-md-12">
 
 <form class="form-horizontal" method="post" action="" autocomplete="off">
     <!-- CSRF Token -->
@@ -39,45 +40,27 @@
 
             <!-- Name -->
             <div class="form-group {{ $errors->has('name') ? ' has-error' : '' }}">
-                <label for="name" class="col-md-3 control-label">@lang('admin/manufacturers/table.name')
+                <label for="name" class="col-md-2 control-label">@lang('general.name')
                  <i class='icon-asterisk'></i></label>
                  </label>
-                    <div class="col-md-6">
+                    <div class="col-md-5">
                         <input class="form-control" type="text" name="name" id="name" value="{{{ Input::old('name', $manufacturer->name) }}}" />
                         {{ $errors->first('name', '<span class="alert-msg"><i class="icon-remove-sign"></i> :message</span>') }}
                     </div>
             </div>
 
-
-        <!-- Form actions -->
-        <div class="form-group">
-        <label class="col-md-2 control-label"></label>
-            <div class="col-md-7">
-                @if ($manufacturer->id)
-                <a class="btn btn-link" href="{{ URL::previous() }}">@lang('general.cancel')</a>
-                @else
-                <a class="btn btn-link" href="{{ route('manufacturers') }}">@lang('general.cancel')</a>
-                @endif
-                <button type="submit" class="btn btn-success"><i class="icon-ok icon-white"></i> @lang('general.save')</button>
+            <!-- Form actions -->
+            <div class="form-group">
+                <label class="col-md-2 control-label"></label>
+                <div class="col-md-7">
+                        <a href="{{ URL::previous() }}" class="btn btn-default"><i class="icon-circle-arrow-left icon-white"></i> @lang('actions.cancel')</a>
+                        <button type="submit" class="btn btn-success"><i class="icon-ok icon-white"></i> @lang('actions.save')</button>
+                </div>
             </div>
-        </div>
 
 </form>
-<br><br><br><br>
 
 </div>
 
-    <!-- side address column -->
-   <div class="col-md-3 col-xs-12 address pull-right">
-        <br /><br />
-        <h6>Have Some Haiku</h6>
-        <p>Serious error.<br>
-        All shortcuts have disappeared.<br>
-        Screen. Mind. Both are blank.</p>
-
-
-    </div>
-
-</div>
 
 @stop

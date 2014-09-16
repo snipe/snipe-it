@@ -2,7 +2,7 @@
 
 {{-- Page title --}}
 @section('title')
-Default Settings ::
+@lang('base.defaultsettings') ::
 @parent
 @stop
 
@@ -15,25 +15,22 @@ Default Settings ::
           
 
 
-                <h3 class="name">@lang('admin/settings/general.title')</h3>
+                <h3 class="name">@lang('base.defaultsettings')</h3>
 
 
                 <div class="row-fluid profile">
                     <!-- information column -->
                     <div class="col-md-9 bio">
-                     
-                    <!-- display current application settings table -->
-                    <p><h4 class="name">@lang('admin/defaultsettings/general.default_settings')</h4></p>
                     
-                        <div class="profile-box">   
-
+                        <div class="">   
+                            <br>
                             <table class="table table-hover">
                             <thead>
                                 <tr>
-                                    <th class="col-md-3">@lang('admin/settings/general.setting')</th>
-                                    <th class="col-md-3"><span class="line"></span>@lang('admin/settings/general.value')</th>
+                                    <th class="col-md-3">@lang('general.setting')</th>
+                                    <th class="col-md-3"><span class="line"></span>@lang('general.value')</th>
                                     
-                                    <th class="col-md-2 actions">@lang('table.actions')</th>
+                                    <th class="col-md-2 actions">@lang('actions.actions')</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -41,7 +38,7 @@ Default Settings ::
                                 
                                 @foreach ($default_settings as $setting)
                                 <tr>
-                                    <td>@lang('admin/defaultsettings/table.values.' . $setting->name)</td>
+                                    <td>@lang('admin/defaultsettings/form.values.' . $setting->name)</td>
                                     <td>{{{ $setting->value }}}</td>                                   
                                     <td>
                                         <a href="{{ route('edit/defaultsettings', $setting->id) }}" class="btn btn-warning"><i class="icon-pencil icon-white"></i></a>
@@ -54,7 +51,7 @@ Default Settings ::
                    
                 <!-- show current system information -->
                 <br>
-                        <p><h4 class="name">@lang('admin/settings/general.systeminfo')</h4></p>
+                        <p><h4 class="name">@lang('general.systeminfo')</h4></p>
 
                         <div class="profile-box">
                             <p>Application Version: &nbsp; &nbsp; {{ appVersion() }} </p>
@@ -75,8 +72,8 @@ Default Settings ::
                     <!-- side address column -->
                     <div class="col-md-3 address pull-right">
     <br />
-    <h6>@lang('admin/defaultsettings/general.about_default_settings')</h6>
-    <p>@lang('admin/defaultsettings/general.about_default_settings_message') </p>
+    <h6>@lang('base.defaultsetting_about')</h6>
+    <p>@lang('admin/defaultsettings/message.about') </p>
 
                     </div>
 @stop

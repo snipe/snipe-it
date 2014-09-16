@@ -23,3 +23,33 @@ Form::macro('countries', function ($name = "country", $selected = null, $class =
     return $select;
 
 });
+
+Form::macro('label_for', function ($class, $field, $label_text = null, $options = null)
+{
+    if($class->is_required($field))
+    {
+        $options['class'] = $options['class'] . ' required';
+    }
+    
+    $output = Form::label($field, $label_text, $options);
+         
+    return HTML::decode($output);
+        
+});
+
+Form::macro('text_for', function ($class, $field, $options = null, $errors = null)
+{
+    if($class->max_length($field))
+    {
+        $options['maxlength'] = $class->max_length($field);       
+    }
+    
+    $output = Form::text($field, Input::old($field, $class->$field), $options);
+    
+    if($errors)
+    {
+        $output = $output . $errors->first($field, '<span class="alert-msg"><i class="icon-remove-sign"></i> :message</span>');
+    }
+    
+    return $output;
+});

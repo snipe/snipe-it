@@ -19,6 +19,8 @@ return array(
         'confirm'   => 'Are you sure you wish to delete this supplier?',
         'error'   => 'There was an issue deleting the supplier. Please try again.',
         'success' => 'Supplier was deleted successfully.'
-    )
+    ),
+    
+    'about'     => 'Record important contact information for suppliers.',
 
 );

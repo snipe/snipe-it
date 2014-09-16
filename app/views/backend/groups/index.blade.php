@@ -2,7 +2,7 @@
 
 {{-- Web site Title --}}
 @section('title')
-@lang('admin/groups/titles.group_management') ::
+@lang('base.groups') ::
 @parent
 @stop
 
@@ -12,21 +12,23 @@
 
 <div class="row header">
     <div class="col-md-12">
-        <a href="{{ route('create/group') }}" class="btn btn-success pull-right"><i class="icon-plus-sign icon-white"></i> @lang('general.create')</a>
-        <h3>@lang('admin/groups/titles.group_management')</h3>
+        <a href="{{ route('create/group') }}" class="btn btn-success pull-right"><i class="icon-plus-sign icon-white"></i> @lang('actions.create')</a>
+        <h3>@lang('base.groups')</h3>
     </div>
 </div>
 
 
 
-<div class="row form-wrapper">
+<div class="user-profile">
+<div class="row profile">
+    <div class="col-md-9 bio">
 <table id="example">
     <thead>
         <tr role="row">
-            <th class="col-md-3">@lang('admin/groups/table.name')</th>
-            <th class="col-md-2">@lang('admin/groups/table.users')</th>
-            <th class="col-md-2">@lang('general.created_at')</th>
-            <th class="col-md-1 actions">@lang('table.actions')</th>
+            <th class="col-md-3">@lang('general.name')</th>
+            <th class="col-md-2">@lang('base.users')</th>
+            <th class="col-md-2">@lang('general.created')</th>
+            <th class="col-md-1 actions">@lang('actions.actions')</th>
         </tr>
     </thead>
     <tbody>
@@ -39,7 +41,7 @@
             <td>
                 <a href="{{ route('update/group', $group->id) }}" class="btn btn-warning"><i class="icon-pencil icon-white"></i></a>
                 <a data-html="false" class="btn delete-asset btn-danger" data-toggle="modal" href="{{ route('delete/group', $group->id) }}" data-content="@lang('admin/groups/message.delete.confirm')"
-data-title="@lang('general.delete')"
+data-title="@lang('actions.delete')"
 {{ htmlspecialchars($group->name) }}?" onClick="return false;"><i class="icon-trash icon-white"></i></a>
             </td>
         </tr>
@@ -51,7 +53,17 @@ data-title="@lang('general.delete')"
         @endif
     </tbody>
 </table>
-</div>
+        
+    </div>
 
+<!-- side address column -->
+<div class="col-md-3 col-xs-12 address pull-right">
+    <br />
+    <h6>@lang('base.group_about')</h6>
+    <p>@lang('admin/groups/message.about') </p>
+
+</div>
+</div>
+</div>
 
 @stop

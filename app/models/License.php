@@ -144,6 +144,11 @@ class License extends Elegant
     {
         return $this->belongsTo('Supplier','supplier_id');
     }
+
+    public function location()
+    {
+        return $this->belongsTo('Location','location_id');
+    }
     
     /**
      * Get manufacturer class

@@ -2,7 +2,7 @@
 
 {{-- Page title --}}
 @section('title')
-@lang('admin/entities/table.general_info') {{ $entity->name }} ::
+@lang('base.entity') {{ $entity->name }} ::
 @parent
 @stop
 
@@ -12,41 +12,34 @@
 <div class="row header">
     <div class="col-md-12">
         <a href="{{ route('update/entity', $entity->id) }}" class="btn btn-warning pull-right">
-        @lang('admin/entities/table.update')</a>
-        <h3 class="name">        
-        {{{ $entity->name }}} </h3>
+        @lang('actions.update')</a>
+        <h3 class="name">@lang('base.entity') 
+            : 
+            {{{ $entity->name }}} </h3>
     </div>
 </div>
 
 <div class="user-profile">
     <div class="row profile">
-        <div class="col-md-9 bio">
 
-            <h6>@lang('admin/entities/table.general_info')</h6>
-
-                <div class="col-md-12">
-                                  
-                </div>
-        </div>
         <div class="col-md-9 bio">
                <!-- checked out assets table -->
-            <h6> @lang('admin/locations/table.locations')</h6>
+        <h6>[ {{{Lang::get('base.entity_use')}}} : {{$entity->has_locations()}} ]</h6>
+        
             <table class="table table-hover">
                 <thead>
                     <tr>
-                        <th class="col-md-2">@lang('admin/locations/table.name')</th>
-                        <th class="col-md-3">@lang('admin/locations/table.address')</th>
-                        <th class="col-md-2">@lang('admin/locations/table.city'),
-                        @lang('admin/locations/table.state')
-                        @lang('admin/locations/table.country')</th>
+                        <th class="col-md-2">@lang('general.name')</th>
+                        <th class="col-md-3">@lang('general.common_name')</th>
+                        <th class="col-md-2">@lang('general.city')</th>
                     </tr>
                 </thead>
                 @if ($entity->locations)
                     @foreach ($entity->locations as $location)
                         <tr> 
                             <td><a href="{{ route('view/location', $location->id) }}" class="name">{{{ $location->name }}}</a></td>
-                            <td>{{{ $location->address }}}, {{{ $location->address2 }}}  </td>
-                            <td>{{{ $location->city }}}, {{{ $location->state }}}  {{{ $location->country }}}  </td>
+                            <td>{{{ $location->common_name }}} </td>
+                            <td>{{{ $location->city }}} </td>
                         </tr>
                     @endforeach
                 @endif
@@ -61,15 +54,18 @@
         <h6><br>@lang('general.moreinfo'):</h6>
         <ul>
             @if ($entity->name)
-                <li>@lang('admin/entities/table.name'): {{ $entity->name }} </li>
+                <li>@lang('general.name'): {{ $entity->name }} </li>
             @endif
             @if ($entity->common_name)
-                <li>@lang('admin/entities/table.common_name'): {{ $entity->common_name }} </li>
+                <li>@lang('general.common_name'): {{ $entity->common_name }} </li>
             @endif
             @if ($entity->name)
-                <li>@lang('admin/entities/table.notes'): {{ $entity->notes }} </li>
+                <li>@lang('general.notes'): {{ $entity->notes }} </li>
             @endif
-            
+        </ul>
+        <br>
+            <h6>@lang('base.entity_about')</h6>
+            <p>@lang('admin/entities/message.about') </p>
         </div>
     </div>
 </div>

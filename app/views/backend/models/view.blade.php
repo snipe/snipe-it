@@ -2,8 +2,8 @@
 
 {{-- Page title --}}
 @section('title')
-@lang('admin/models/table.view')
-{{{ $model->model_tag }}} ::
+@lang('base.model')
+{{{ $model->name }}} ::
 @parent
 @stop
 
@@ -14,25 +14,26 @@
     <div class="col-md-12">
         <a href="{{ route('update/model', $model->id) }}" class="btn btn-warning pull-right">
         @lang('admin/models/table.update')</a>
-        <h3 class="name">@lang('general.history_for')
+        <h3 class="name">@lang('general.history')
         {{{ $model->name }}} </h3>
     </div>
 </div>-->
 <div class="row header">
     <div class="col-md-12">
         <div class="btn-group pull-right">
-            <button class="btn gray">@lang('button.actions')</button>
+            <button class="btn gray">@lang('actions.actions')</button>
             <button class="btn glow dropdown-toggle" data-toggle="dropdown">
                 <span class="caret"></span>
             </button>
             <ul class="dropdown-menu">    
-                    <li><a href="{{ route('update/model', $model->id) }}">@lang('admin/models/table.edit')</a></li>  
-                    <li><a href="{{ route('clone/model', $model->id) }}">@lang('admin/models/table.clone')</a></li>    
+                    <li><a href="{{ route('update/model', $model->id) }}">@lang('base.model_update')</a></li>  
+                    <li><a href="{{ route('clone/model', $model->id) }}">@lang('base.model_clone')</a></li>    
             </ul>
         </div>
         <h3>
         
-            @lang('admin/models/table.view')        
+            @lang('base.model') : 
+            {{{ $model->name }}}
         
         </h3>
     </div>
@@ -49,9 +50,9 @@
                             <thead>
                                 <tr role="row">
                                         <th class="col-md-3">@lang('general.name')</th>
-                                        <th class="col-md-3">@lang('general.asset_tag')</th>
-                                        <th class="col-md-3">@lang('general.user')</th>
-                                        <th class="col-md-2">@lang('table.actions')</th>
+                                        <th class="col-md-3">@lang('base.asset_tag')</th>
+                                        <th class="col-md-3">@lang('base.user')</th>
+                                        <th class="col-md-2">@lang('actions.actions')</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -69,9 +70,9 @@
                                         </td>
                                         <td>
                                         @if ($modelassets->assigned_to != 0)
-                                            <a href="{{ route('checkin/hardware', $modelassets->id) }}" class="btn-flat info">Checkin</a>
+                                            <a href="{{ route('checkin/hardware', $modelassets->id) }}" class="btn btn-primary">@lang('actions.checkin')</a>
                                         @else
-                                            <a href="{{ route('checkout/hardware', $modelassets->id) }}" class="btn-flat success">Checkout</a>
+                                            <a href="{{ route('checkout/hardware', $modelassets->id) }}" class="btn btn-info">@lang('actions.checkout')</a>
                                         @endif
                                         </td>
 
@@ -101,17 +102,17 @@
 
 
                                 @if ($model->manufacturer)
-                                <li>@lang('general.manufacturer'):
+                                <li>@lang('base.manufacturer'):
                                 {{ $model->manufacturer->name }}</li>
                                 @endif
 
                                 @if ($model->modelno)
-                                <li>@lang('general.model_no'):
+                                <li>@lang('general.modelnumber'):
                                 {{ $model->modelno }}</li>
                                 @endif
 
                                 @if ($model->depreciation)
-                                <li>@lang('general.depreciation'):
+                                <li>@lang('base.depreciation'):
                                 {{ $model->depreciation->name }} ({{ $model->depreciation->months }} months)</li>
                                 @endif
 
@@ -122,11 +123,9 @@
 
                             </ul>
 
-
-
-                            <ul>
-                                <li><br><br /></li>
-                            </ul>
+    <br />
+    <h6>@lang('base.model_about')</h6>
+    <p>@lang('admin/models/message.about') </p>
 
                     </div>
 @stop

@@ -2,7 +2,7 @@
 
 {{-- Page title --}}
 @section('title')
-@lang('admin/suppliers/table.view') -
+@lang('base.supplier') -
 {{{ $supplier->name }}} ::
 @parent
 @stop
@@ -13,9 +13,9 @@
 <div class="row header">
     <div class="col-md-12">
         <a href="{{ route('update/supplier', $supplier->id) }}" class="btn btn-warning pull-right">
-        @lang('admin/suppliers/table.update')</a>
+        @lang('actions.update')</a>
         <h3 class="name">
-        @lang('admin/suppliers/table.view_supplier')
+        @lang('base.supplier') : 
         {{{ $supplier->name }}} </h3>
     </div>
 </div>
@@ -28,8 +28,8 @@
 
 <!-- Tabs -->
 <ul class="nav nav-tabs">
-    <li class="active"><a href="#tab-hardware" data-toggle="tab"><strong>Hardware</strong></a></li>
-    <li><a href="#tab-software" data-toggle="tab"><strong>Software</strong></a></li>
+    <li class="active"><a href="#tab-hardware" data-toggle="tab"><strong>@lang('general.hardware')</strong></a></li>
+    <li><a href="#tab-software" data-toggle="tab"><strong>@lang('general.software')</strong></a></li>
 </ul>
 
 <!-- Tabs Content -->
@@ -44,10 +44,10 @@
                            <table id='pgtable1'>
                             <thead>
                                 <tr role="row">
-                                        <th class="col-md-3">Name</th>
-                                        <th class="col-md-3">Asset Tag</th>
-                                        <th class="col-md-3">User</th>
-                                        <th class="col-md-2">Actions</th>
+                                        <th class="col-md-3">@lang('general.name')</th>
+                                        <th class="col-md-3">@lang('general.asset_tag')</th>
+                                        <th class="col-md-3">@lang('base.user')</th>
+                                        <th class="col-md-2">@lang('actions.actions')</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -65,9 +65,9 @@
                                         </td>
                                         <td>
                                         @if ($supplierassets->assigned_to != 0)
-                                            <a href="{{ route('checkin/hardware', $supplierassets->id) }}" class="btn-flat info">Checkin</a>
+                                            <a href="{{ route('checkin/hardware', $supplierassets->id) }}" class="btn btn-primary">Checkin</a>
                                         @else
-                                            <a href="{{ route('checkout/hardware', $supplierassets->id) }}" class="btn-flat success">Checkout</a>
+                                            <a href="{{ route('checkout/hardware', $supplierassets->id) }}" class="btn btn-info">Checkout</a>
                                         @endif
                                         </td>
 
@@ -98,10 +98,10 @@
                            <table id='pgtable2'>
                             <thead>
                                 <tr role="row">
-                                        <th class="col-md-3">Name</th>
-                                        <th class="col-md-3">Serial</th>
-                                        <th class="col-md-3">Seats</th>
-                                        <th class="col-md-2">Actions</th>
+                                        <th class="col-md-3">@lang('general.name')</th>
+                                        <th class="col-md-3">@lang('general.serialnumber')</th>
+                                        <th class="col-md-3">@lang('base.licenseseats_shortname')</th>
+                                        <th class="col-md-2">@lang('actions.actions')</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -115,7 +115,7 @@
                                             <a href="{{ route('update/license', $supplierlicenses->id) }}" class="btn btn-warning"><i class="icon-pencil icon-white"></i></a>
                                             <a data-html="false" class="btn delete-asset btn-danger" data-toggle="modal" href="{{ route('delete/license', $supplierlicenses->id) }}"
                                             data-content="@lang('admin/licenses/message.delete.confirm')"
-                                            data-title="@lang('general.delete')
+                                            data-title="@lang('actions.delete')
                                             {{ htmlspecialchars($supplierlicenses->name) }}?" onClick="return false;"><i class="icon-trash icon-white"></i></a>   
                                         </td>
 
@@ -144,13 +144,10 @@
 </div>
                     
 </div>
-    
-    
-
 
                     <!-- side address column -->
                     <div class="col-md-3 col-xs-12 address pull-right">
-                    <h6>Contact:</h6>
+                    <h6>@lang('general.contact'):</h6>
                                <ul>
 
                                 @if ($supplier->contact)
@@ -192,21 +189,12 @@
                                 @if ($supplier->notes)
                                     <li><i class="icon-comment"></i>{{{ $supplier->notes }}}</li>
                                 @endif
-
-                                </ul>
-
-
-
                             </ul>
-
-
-
-                            <ul>
-                                <li><br><br /></li>
-                            </ul>
-
-                    </div>
                     
+                                   <br />
+                    <h6>@lang('base.supplier_about')</h6>
+                    <p>@lang('admin/suppliers/message.about') </p>                   
+                    </div>
                     
 </div>
 </div>

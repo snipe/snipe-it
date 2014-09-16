@@ -584,3 +584,8 @@ input.search{
 		float: left;
 	}
 }
+
+.required:after { 
+    color: red;
+    content: " *"; 
+}

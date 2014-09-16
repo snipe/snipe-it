@@ -15,6 +15,8 @@ class SettingsSeeder extends Seeder
             'created_at' 	=> $date,
             'updated_at' 	=> $date,
             'user_id' 		=> 1,
+            'showsysinfo'       => 0,
+            'multiplelogons'    => 0,
         );
 
 

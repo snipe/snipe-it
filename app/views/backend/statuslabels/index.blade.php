@@ -2,7 +2,7 @@
 
 {{-- Page title --}}
 @section('title')
-@lang('admin/statuslabels/table.title') ::
+@lang('base.statuslabels') ::
 @parent
 @stop
 
@@ -12,8 +12,8 @@
 
 <div class="row header">
     <div class="col-md-12">
-        <a href="{{ route('create/statuslabel') }}" class="btn btn-success pull-right"><i class="icon-plus-sign icon-white"></i>  @lang('general.create')</a>
-        <h3>@lang('admin/statuslabels/table.title')</h3>
+        <a href="{{ route('create/statuslabel') }}" class="btn btn-success pull-right"><i class="icon-plus-sign icon-white"></i> @lang('actions.create')</a>
+        <h3>@lang('base.statuslabels')</h3>
     </div>
 </div>
 
@@ -27,9 +27,9 @@
             <table id="example">
             <thead>
                 <tr role="row">
-                    <th class="col-md-4">@lang('admin/statuslabels/table.name')</th>
-                    <th class="col-md-4">@lang('general.inventory_state')</th>
-                    <th class="col-md-2 actions">@lang('table.actions')</th>
+                    <th class="col-md-4">@lang('general.name')</th>
+                    <th class="col-md-4">@lang('base.inventorystate')</th>
+                    <th class="col-md-2 actions">@lang('actions.actions')</th>
                 </tr>
             </thead>
             <tbody>
@@ -49,7 +49,7 @@
                             @endif
                             class="btn delete-asset btn-danger" 
                             data-toggle="modal" href="{{ route('delete/statuslabel', $statuslabel->id) }}" data-content="@lang('admin/statuslabels/message.delete.confirm')"
-                            data-title="@lang('general.delete')
+                            data-title="@lang('actions.delete')
                  {{ htmlspecialchars($statuslabel->name) }}?" onClick="return false;"><i class="icon-trash icon-white"></i></a>
                     </td>
                 </tr>
@@ -62,8 +62,8 @@
     <!-- side address column -->
    <div class="col-md-3 col-xs-12 address pull-right">
 
-        <h6>@lang('admin/statuslabels/general.about_statuslabels')</h6>
-        <p>@lang('admin/statuslabels/general.about_statuslabels_message')</p>
+        <h6>@lang('base.statuslabel_about')</h6>
+        <p>@lang('admin/statuslabels/message.about')</p>
     </div>
 
 </div>

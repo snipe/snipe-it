@@ -2,7 +2,7 @@
 
 {{-- Page title --}}
 @section('title')
-     @lang('admin/licenses/general.checkin') ::
+     @lang('base.licenseseat_checkin') ::
 @parent
 @stop
 
@@ -10,10 +10,9 @@
 @section('content')
 
 <div class="row header">
-    <div class="col-md-12">
-        <a href="{{ URL::previous() }}" class="btn-flat gray pull-right">
-        <i class="icon-circle-arrow-left icon-white"></i> @lang('general.back')</a>
-        <h3> @lang('admin/licenses/general.checkin') </h3>
+    <div class="col-md-9">
+        <a href="{{ URL::previous() }}" class="btn btn-default pull-right"><i class="icon-circle-arrow-left icon-white"></i> @lang('actions.cancel')</a>
+        <h3> @lang('base.licenseseat_checkin')</h3>
     </div>
 </div>
 
@@ -28,7 +27,7 @@
 
             <!-- Asset name -->
             <div class="form-group">
-            <label class="col-sm-2 control-label">@lang('admin/hardware/form.name')</label>
+            <label class="col-sm-2 control-label">@lang('general.name')</label>
                 <div class="col-md-6">
                   <p class="form-control-static">{{{ $licenseseat->license->name }}}</p>
                 </div>
@@ -44,20 +43,21 @@
 
             <!-- Note -->
             <div class="form-group {{ $errors->has('note') ? 'error' : '' }}">
-                <label for="note" class="col-md-2 control-label">@lang('admin/hardware/form.notes')</label>
+                <label for="note" class="col-md-2 control-label">@lang('general.notes')</label>
                 <div class="col-md-7">
-                    <input class="col-md-6 form-control" type="text" name="note" id="note" value="{{ Input::old('note', $licenseseat->note) }}" />
+                    <textarea class="col-md-6 form-control" type="text" name="note" id="note" >{{ Input::old('note', $licenseseat->note) }}</textarea>
                     {{ $errors->first('note', '<span class="alert-msg"><i class="icon-remove-sign"></i> :message</span>') }}
                 </div>
             </div>
+
             <!-- Form actions -->
-                <div class="form-group">
+            <div class="form-group">
                 <label class="col-md-2 control-label"></label>
                     <div class="col-md-7">
-                        <a class="btn btn-link" href="{{ route('licenses') }}">@lang('general.cancel')</a>
-                        <button type="submit" class="btn btn-success"><i class="icon-ok icon-white"></i> @lang('general.checkin')</button>
+                        <a href="{{ URL::previous() }}" class="btn btn-default"><i class="icon-circle-arrow-left icon-white"></i> @lang('actions.cancel')</a>
+                        <button type="submit" class="btn btn-primary"><i class="icon-ok icon-white"></i> @lang('actions.checkin')</button>
                     </div>
-                </div>
+            </div>
 
 
 </form>

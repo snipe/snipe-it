@@ -2,47 +2,52 @@
 
 {{-- Page title --}}
 @section('title')
-Settings ::
+@lang('base.settings') ::
 @parent
 @stop
 
 {{-- Page content --}}
 @section('content')
+
 <div id="pad-wrapper" class="user-profile">
                 <!-- header -->
 
                 <div class="pull-right">
-                     <a href="{{ route('edit/settings') }}" class="btn btn-warning">@lang('admin/settings/general.edit_settings')</a>
+                     <a href="{{ route('edit/settings') }}" class="btn btn-warning">@lang('actions.update')</a>
                 </div>
 
 
-                <h3 class="name">@lang('admin/settings/general.title')</h3>
+                <h3 class="name">@lang('base.settings')</h3>
 
 
                 <div class="row-fluid profile">
-                    <!-- information column -->
                     <div class="col-md-9 bio">
                      
                     <!-- display current application settings table -->
-                    <p><h4 class="name">@lang('admin/settings/general.appsettings')</h4></p>
                     
-                        <div class="profile-box">   
-
+                        <div class="">   
+                            <br>
                             <table class="table table-hover">
                             <thead>
                                 <tr>
-                                    <th class="col-md-3">@lang('admin/settings/general.setting')</th>
-                                    <th class="col-md-3"><span class="line"></span>@lang('admin/settings/general.value')</th>
+                                    <th class="col-md-3">@lang('base.setting_shortname')</th>
+                                    <th class="col-md-3"><span class="line"></span>@lang('general.value')</th>
                                 </tr>
                             </thead>
                             <tbody>
+                                
+                                <!-- Loop through for each - but there should ONLY be one settings row in the table -->
                                 @foreach ($settings as $setting)
+                                
+                                <!-- site name -->
                                 <tr>
-                                    <td>@lang('admin/settings/general.sitename')</td>
+                                    <td>@lang('admin/settings/form.sitename')</td>
                                     <td>{{{ $setting->site_name }}} </td>
                                 </tr>
+                                
+                                <!-- Show asset names -->
                                 <tr>
-                                    <td>@lang('admin/settings/general.display_asset_name')</td>
+                                    <td>@lang('admin/settings/form.display_asset_name')</td>
 
 
                                     @if ($setting->display_asset_name === 1)
@@ -52,30 +57,48 @@ Settings ::
                                     @endif
                                 </tr>
 
+                                <!-- Rows per page -->
                                 <tr>
-                                    <td>@lang('admin/settings/general.rowsperpage')</td>
+                                    <td>@lang('admin/settings/form.rowsperpage')</td>
                                     <td>{{{ $setting->per_page }}}  </td>
                                 </tr>
+                                
+                                <!-- allow multiple logons -->
                                 <tr>
-                                    <td>@lang('admin/settings/general.displayqrcodes')</td>
+                                    <td>@lang('admin/settings/form.multiplelogons')</td>
+                                    @if ($setting->multiplelogons === 1)
+                                        <td>Yes</td>
+                                    @else
+                                        <td>No</td>
+                                    @endif
+                                </tr>
+                                
+                                <!-- Display QR codes -->
+                                <tr>
+                                    <td>@lang('admin/settings/form.displayqrcodes')</td>
                                         @if ($setting->qr_code === 1)
                                             <td>Yes</td>
                                         @else
                                             <td>No</td>
                                         @endif
                                 </tr>
+                                
+                                <!-- QR code text -->
                                 <tr>
-                                    <td>@lang('admin/settings/general.qrcodetext')</td>
+                                    <td>@lang('admin/settings/form.qrcodetext')</td>
                                     <td>{{{ $setting->qr_text }}}</td>
                                 </tr>
+                                
+                                <!-- show detailed system info -->
                                 <tr>
-                                    <td>@lang('admin/settings/general.showsysinfo')</td>
+                                    <td>@lang('admin/settings/form.showsysinfo')</td>
                                     @if ($setting->showsysinfo === 1)
                                         <td>Yes</td>
                                     @else
                                         <td>No</td>
                                     @endif
                                 </tr>
+                                
                                 @endforeach
                             </tbody>
                         </table>
@@ -83,7 +106,7 @@ Settings ::
                    
                 <!-- show current system information -->
                 <br>
-                        <p><h4 class="name">@lang('admin/settings/general.systeminfo')</h4></p>
+                        <p><h4 class="name">@lang('general.systeminfo')</h4></p>
 
                         <div class="profile-box">
                             <p>Application Version: &nbsp; &nbsp; {{ appVersion() }} </p>
@@ -135,8 +158,8 @@ Settings ::
                     <div class="col-md-3 address pull-right">
 
                                     <br />
-            <h6>@lang('admin/settings/general.about_settings')</h6>
-            <p>@lang('admin/settings/general.about_settings_message') </p>
+            <h6>@lang('base.setting_about')</h6>
+            <p>@lang('admin/settings/message.about') </p>
 
                     </div>
 @stop

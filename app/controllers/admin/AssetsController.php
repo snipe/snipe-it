@@ -149,13 +149,20 @@ class AssetsController extends AdminController
         $model_list = array('' => '') + Model::orderBy('name', 'asc')->lists('name', 'id');
         $supplier_list = array('' => '') + Supplier::orderBy('name', 'asc')->lists('name', 'id');
         $assigned_to = array('' => 'Select a User') + DB::table('users')->select(DB::raw('concat (first_name," ",last_name) as full_name, id'))->whereNull('deleted_at')->lists('full_name', 'id');
-
+        $location_list = array('' => '') + Location::orderBy('name', 'asc')->lists('name', 'id');
+        
         // Grab the dropdown list of status
         //$statuslabel_list = array('' => Lang::get('general.pending')) + array('0' => Lang::get('general.ready_to_deploy')) + Statuslabel::orderBy('name', 'asc')->lists('name', 'id');
         // only use database values
         $statuslabel_list = Statuslabel::orderBy('id', 'asc')->lists('name', 'id');
 
-        return View::make('backend/hardware/edit')->with('supplier_list',$supplier_list)->with('model_list',$model_list)->with('statuslabel_list',$statuslabel_list)->with('assigned_to',$assigned_to)->with('asset',new Asset);
+        return View::make('backend/hardware/edit')
+                ->with('supplier_list',$supplier_list)
+                ->with('model_list',$model_list)
+                ->with('statuslabel_list',$statuslabel_list)
+                ->with('assigned_to',$assigned_to)
+                ->with('location_list',$location_list)
+                ->with('asset',new Asset);
 
     }
     
@@ -239,6 +246,12 @@ class AssetsController extends AdminController
                 $asset->supplier_id        = e(Input::get('supplier_id'));
             }
 
+            if (e(Input::get('location_id')) == '') {
+                $asset->location_id =  0;
+            } else {
+                $asset->location_id        = e(Input::get('location_id'));
+            }
+            
             if (e(Input::get('requestable')) == '') {
                 $asset->requestable =  0;
             } else {
@@ -252,6 +265,7 @@ class AssetsController extends AdminController
             $asset->order_number                = e(Input::get('order_number'));
             $asset->notes            		= e(Input::get('notes'));
             $asset->asset_tag            	= e(Input::get('asset_tag'));
+            $asset->strict_assignment           = e(Input::get('strict_assignment'));
     
             $asset->user_id          		= Sentry::getId();
             $asset->archived          			= '0';
@@ -289,13 +303,18 @@ class AssetsController extends AdminController
         // Grab the dropdown list of models
         $model_list = array('' => '') + Model::orderBy('name', 'asc')->lists('name', 'id');
         $supplier_list = array('' => '') + Supplier::orderBy('name', 'asc')->lists('name', 'id');
+        $location_list = array('' => '') + Location::orderBy('name', 'asc')->lists('name', 'id');
 
         // Grab the dropdown list of status
         //$statuslabel_list = array('' => Lang::get('general.pending')) + array('0' => Lang::get('general.ready_to_deploy')) + Statuslabel::orderBy('name', 'asc')->lists('name', 'id');
         // only use database values
         $statuslabel_list = Statuslabel::orderBy('id', 'asc')->lists('name', 'id');
 
-        return View::make('backend/hardware/edit', compact('asset'))->with('model_list',$model_list)->with('supplier_list',$supplier_list)->with('statuslabel_list',$statuslabel_list);
+        return View::make('backend/hardware/edit', compact('asset'))
+                ->with('model_list',$model_list)
+                ->with('supplier_list',$supplier_list)
+                ->with('location_list',$location_list)
+                ->with('statuslabel_list',$statuslabel_list);
     }
 
 
@@ -316,9 +335,9 @@ class AssetsController extends AdminController
         }       
         
         //cannot set to deployed
-        if(e(Input::get('status_id')) == 3 && e(Input::get('assigned_to')) < 1)
+        if(e(Input::get('status_id')) == 3 && e(Input::get('assigned_to')) < 1) {
             return Redirect::to('hardware/'.$assetId.'/edit')->with('error', 'cannot deploy without user');
-       
+        }
         //attempt to validate
         $validator = Validator::make(Input::all(), $asset->validationRules($assetId));
 
@@ -360,6 +379,12 @@ class AssetsController extends AdminController
                 $asset->supplier_id        = e(Input::get('supplier_id'));
             }
             
+            if (e(Input::get('location_id')) == '') {
+                $asset->location_id =  NULL;
+            } else {
+                $asset->location_id        = e(Input::get('location_id'));
+            }
+            
              if (e(Input::get('requestable')) == '') {
                 $asset->requestable =  0;
             } else {
@@ -372,6 +397,7 @@ class AssetsController extends AdminController
             $asset->model_id           		= e(Input::get('model_id'));
             $asset->order_number                = e(Input::get('order_number'));
             $asset->asset_tag           	= e(Input::get('asset_tag'));
+            $asset->strict_assignment     	= e(Input::get('strict_assignment')); 
             $asset->notes            		= e(Input::get('notes'));           
             $asset->physical            	= '1';
 
@@ -547,8 +573,9 @@ class AssetsController extends AdminController
         }
 
         $logaction = new Actionlog();
-        if($user)
+        if($user){
             $logaction->checkedout_to = $user->id;	
+        }
 
         // Was the asset updated?
         if($asset->state->checkin()) {
@@ -659,7 +686,7 @@ class AssetsController extends AdminController
         $depreciation_list = array('' => '') + Depreciation::lists('name', 'id');
         $supplier_list = array('' => '') + Supplier::orderBy('name', 'asc')->lists('name', 'id');
         $assigned_to = array('' => 'Select a User') + DB::table('users')->select(DB::raw('concat (first_name," ",last_name) as full_name, id'))->whereNull('deleted_at')->lists('full_name', 'id');
-
+        $location_list = array('' => '') + Location::orderBy('name', 'asc')->lists('name', 'id');
           
         $asset = new Asset();
         
@@ -674,15 +701,19 @@ class AssetsController extends AdminController
         $asset->physical =          $asset_to_clone->physical; 
         $asset->warranty_months =   $asset_to_clone->warranty_months; 
         $asset->depreciate =        $asset_to_clone->depreciate; 
-        $asset->supplier_id =       $asset_to_clone->supplier_id; 
+        $asset->supplier_id =       $asset_to_clone->supplier_id;
+        $asset->location_id =       $asset_to_clone->location_id;         
         $asset->requestable =       $asset_to_clone->requestable;
         $asset->asset_tag =         $asset_to_clone->asset_tag;
+        $asset->strict_assignment = $asset_to_clone->strict_assignment;        
         
         return View::make('backend/hardware/edit')
                 ->with('supplier_list',$supplier_list)
                 ->with('model_list',$model_list)
                 ->with('statuslabel_list',$statuslabel_list)
                 ->with('assigned_to',$assigned_to)
+                ->with('depreciation_list',$depreciation_list)
+                ->with('location_list',$location_list)
                 ->with('asset',$asset);
 
     }

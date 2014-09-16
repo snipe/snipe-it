@@ -2,7 +2,7 @@
 
 {{-- Page title --}}
 @section('title')
-@lang('admin/users/table.viewusers') ::
+@lang('base.users') ::
 @parent
 @stop
 
@@ -18,17 +18,17 @@
                href="{{ route('purge/users', null) }}" 
                data-content="@choice('message.purge.confirm', $users->count())" 
                title="@choice('message.purge.confirm', $users->count())"
-               data-title="@lang('button.purge')?" onClick="return false;"><i class="icon-trash icon-white"></i>
-               @lang('button.purge')
+               data-title="@lang('actions.purge')?" onClick="return false;"><i class="icon-trash icon-white"></i>
+               @lang('actions.purge')
             </a>
             <a class="btn btn-default pull-right" href="{{ URL::to('admin/users') }}">
-                {{ Lang::get('button.show_deleted')}}</a>
+                {{ Lang::get('actions.showcurrent')}}</a>
         @else
-            <a href="{{ route('create/user') }}" title="@lang('button.create')" class="btn btn-success pull-right">
+            <a href="{{ route('create/user') }}" title="@lang('actions.create')" class="btn btn-success pull-right">
                 <i class="icon-plus-sign icon-white"></i>
-                @lang('button.create')
+                @lang('actions.create')
             </a>
-            <a class="btn btn-default pull-right" href="{{ URL::to('admin/users?onlyTrashed=true') }}">@lang('button.show_current')</a>
+            <a class="btn btn-default pull-right" href="{{ URL::to('admin/users?onlyTrashed=true') }}">@lang('actions.showdeleted')</a>
         @endif
 
         <h3>
@@ -37,7 +37,9 @@
         @else
             @lang('general.current')
         @endif
-
+        
+        @lang('base.users')
+        
     </h3>
     </div>
 </div>
@@ -49,14 +51,14 @@
 <table id="example">
     <thead>
         <tr role="row">
-            <th class="col-md-3">@lang('admin/users/table.name')</th>
-            <th class="col-md-2">@lang('admin/users/table.email')</th>
-            <th class="col-md-2">@lang('admin/users/table.manager')</th>
-            <th class="col-md-1">@lang('general.assets')</th>
-            <th class="col-md-1">@lang('general.licenses')</th>
-            <th class="col-md-1">@lang('admin/users/table.activated')</th>
+            <th class="col-md-3">@lang('general.name')</th>
+            <th class="col-md-2">@lang('general.email')</th>
+            <th class="col-md-2">@lang('admin/users/form.manager')</th>
+            <th class="col-md-1">@lang('base.assets_shortname')</th>
+            <th class="col-md-1">@lang('base.licenses_shortname')</th>
+            <th class="col-md-1">@lang('admin/users/form.activated')</th>
             <th></th>
-            <th class="col-md-2 actions">@lang('table.actions')</th>
+            <th class="col-md-2 actions">@lang('actions.actions')</th>
         </tr>
     </thead>
     <tbody>
@@ -91,7 +93,7 @@
                 @if ( ! is_null($user->deleted_at))
                 <a href="{{ route('restore/user', $user->id) }}" class="btn btn-warning"><i class="icon-share-alt icon-white"></i></a>
                 <a data-html="false" class="btn delete-asset btn-danger" data-toggle="modal" href="{{ route('delete/user', $user->id) }}" data-content="@choice('message.purge.confirm',1)" 
-                            data-title="@lang('general.purge')
+                            data-title="@lang('actions.purge')
                             {{ htmlspecialchars($user->fullname()) }}?" 
                             @if($user->isRequired())
                             disabled='true'

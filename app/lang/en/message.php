@@ -31,4 +31,12 @@ return array(
         'success' => 'Update successful.',
         'confirm' => 'Are you sure you want to update this item',
     ),
+    
+    'reminders' => array(
+        "password" => "Passwords must be minimum six characters and match the confirmation.",
+        "user"     => "Username or email address is incorrect",
+        "token"    => "This password reset token is invalid.",
+        "sent"     => "If a matching email address was found, a password reminder was sent!",
+        
+    )
 );

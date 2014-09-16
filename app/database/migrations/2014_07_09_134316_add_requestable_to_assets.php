@@ -14,7 +14,7 @@ class AddRequestableToAssets extends Migration {
 	{
 		//
 		 Schema::table('assets', function ($table) {
-            $table->tinyInteger('requestable')->default(0);
+                $table->tinyInteger('requestable')->default(0);
         });
 
 	}
@@ -28,7 +28,7 @@ class AddRequestableToAssets extends Migration {
 	{
 		//
 		Schema::table('assets', function ($table) {
-            $table->dropColumn('requestable');
+                $table->dropColumn('requestable');
         });
 
 	}

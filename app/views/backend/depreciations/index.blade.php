@@ -2,7 +2,7 @@
 
 {{-- Page title --}}
 @section('title')
-Asset Depreciations ::
+@lang('base.depreciations') ::
 @parent
 @stop
 
@@ -11,8 +11,10 @@ Asset Depreciations ::
 
 <div class="row header">
     <div class="col-md-12">
-        <a href="{{ route('create/depreciations') }}" class="btn btn-success pull-right"><i class="icon-plus-sign icon-white"></i> Create New</a>
-        <h3>Asset Depreciations</h3>
+        <a href="{{ route('create/depreciations') }}" class="btn btn-success pull-right"><i class="icon-plus-sign icon-white"></i>@lang('actions.create')</a>
+        <h3>
+            @lang('base.depreciations')
+        </h3>
     </div>
 </div>
 
@@ -23,20 +25,20 @@ Asset Depreciations ::
                     <table id="example">
                         <thead>
                             <tr role="row">
-                                <th class="col-md-4">@lang('admin/depreciations/table.title')</th>
+                                <th class="col-md-4">@lang('admin/depreciations/form.name')</th>
                                 <th class="col-md-2">@lang('admin/depreciations/table.term')</th>
-                                <th class="col-md-2 actions">@lang('table.actions')</th>
+                                <th class="col-md-2 actions">@lang('actions.actions')</th>
                             </tr>
                         </thead>
                         <tbody>
                             @foreach ($depreciations as $depreciation)
                             <tr>
                                 <td>{{ $depreciation->name }}</td>
-                                <td>{{ $depreciation->months }} @lang('admin/depreciations/table.months') </td>
+                                <td>{{ $depreciation->months }} @lang('admin/depreciations/form.months') </td>
                                 <td>
                                 <a href="{{ route('update/depreciations', $depreciation->id) }}" class="btn btn-warning"><i class="icon-pencil icon-white"></i></a>
 <a data-html="false" class="btn delete-asset btn-danger" data-toggle="modal" href="{{ route('delete/depreciations', $depreciation->id) }}" data-content="@lang('admin/depreciations/message.delete.confirm')"
-data-title="@lang('general.delete')
+data-title="@lang('actions.delete')
  {{{ htmlspecialchars($depreciation->name) }}}?" onClick="return false;"><i class="icon-trash icon-white"></i></a>
 
 
@@ -49,12 +51,11 @@ data-title="@lang('general.delete')
 
                         </div>
 
-
                     <!-- side address column -->
                     <div class="col-md-3 col-xs-12 address pull-right">
                         <br />
-                        <h6>@lang('admin/depreciations/general.about_asset_depreciations')</h6>
-                        <p>@lang('admin/depreciations/general.about_asset_depreciations_message') </p>
+                        <h6>@lang('base.depreciation_about')</h6>
+                        <p>@lang('admin/depreciations/message.about') </p>
                     </div>
  </div>
   </div>

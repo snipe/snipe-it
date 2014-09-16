@@ -2,7 +2,8 @@
 
 {{-- Page title --}}
 @section('title')
-View User {{{ $user->fullName() }}} ::
+@lang('base.user') 
+{{{ $user->fullName() }}} ::
 @parent
 @stop
 
@@ -23,21 +24,21 @@ View User {{{ $user->fullName() }}} ::
                         </span>
                 </div>
                 @if ($user->deleted_at != NULL)
-                            <a href="{{ route('restore/user', $user->id) }}" class="btn-flat white large pull-right edit"><i class="icon-pencil"></i> Restore This User</a>
+                            <a href="{{ route('restore/user', $user->id) }}" class="btn-flat white large pull-right edit"><i class="icon-pencil"></i>@lang('actions.restore')</a>
 
                 @else
-                        <!--<a href="{{ route('update/user', $user->id) }}" class="btn btn-warning pull-right edit"><i class="icon-pencil"></i> @lang('button.edit') This User</a>-->
+                        <!--<a href="{{ route('update/user', $user->id) }}" class="btn btn-warning pull-right edit"><i class="icon-pencil"></i> @lang('actions.edit') This User</a>-->
                     <div class="row header">
 
                         <div class="btn-group pull-right">
-                            <button class="btn gray">@lang('button.actions')</button>
+                            <button class="btn gray">@lang('actions.actions')</button>
                             <!--  Height being thrown off by sub-container  -->
                             <button class="btn glow dropdown-toggle" style="height: 27.5" data-toggle="dropdown">
                                 <span class="caret"></span>
                             </button>
                             <ul class="dropdown-menu">
-                                <li><a href="{{ route('update/user', $user->id) }}">@lang('admin/users/general.edit')</a></li>
-                                <li><a href="{{ route('clone/user', $user->id) }}">@lang('admin/users/general.clone')</a></li>
+                                <li><a href="{{ route('update/user', $user->id) }}">@lang('base.user_update')</a></li>
+                                <li><a href="{{ route('clone/user', $user->id) }}">@lang('base.user_clone')</a></li>
                             </ul>
                         </div>
 
@@ -55,14 +56,14 @@ View User {{{ $user->fullName() }}} ::
                             <div class="col-md-12">
                                 <div class="alert alert-danger">
                                     <i class="icon-exclamation-sign"></i>
-                                    <strong>Warning: </strong>
-                                     This user has been deleted. You will have to restore this user to edit them or assign them new assets.
+                                    <strong>[Warning:]</strong>
+                                     [This user has been deleted. You will have to restore this user to edit them or assign them new assets.]
                                 </div>
                             </div>
 
                         @endif
 
-                            <h6>Assets Checked Out to {{{ $user->first_name }}}</h6>
+                            <h6>@lang('base.assets')</h6>
                             <br>
                             <!-- checked out assets table -->
                             @if (count($user->assets) > 0)
@@ -70,9 +71,9 @@ View User {{{ $user->fullName() }}} ::
                                 <thead>
                                     <tr>
                                         <th class="col-md-3">Asset Type</th>
-                                        <th class="col-md-2"><span class="line"></span>Asset Tag</th>
-                                        <th class="col-md-2"><span class="line"></span>Name</th>
-                                        <th class="col-md-1"><span class="line"></span>Actions</th>
+                                        <th class="col-md-2"><span class="line"></span>@lang('general.asset_tag')</th>
+                                        <th class="col-md-2"><span class="line"></span>@lang('general.name')</th>
+                                        <th class="col-md-1"><span class="line"></span>@lang('actions.actions')</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -85,7 +86,7 @@ View User {{{ $user->fullName() }}} ::
                                         <td><a href="{{ route('view/hardware', $asset->id) }}">{{{ $asset->asset_tag }}}</a></td>
                                         <td><a href="{{ route('view/hardware', $asset->id) }}">{{{ $asset->name }}}</a></td>
 
-                                        <td> <a href="{{ route('checkin/hardware', $asset->id) }}" class="btn-flat info">Checkin</a></td>
+                                        <td> <a href="{{ route('checkin/hardware', $asset->id) }}" class="btn btn-primary">@lang('actions.checkin')</a></td>
                                     </tr>
                                     @endforeach
                                 </tbody>
@@ -100,16 +101,16 @@ View User {{{ $user->fullName() }}} ::
                             </div>
                             @endif
 
-                             <h6>Software Checked Out to {{{ $user->first_name }}}</h6>
+                             <h6>@lang('base.licenses')</h6>
                             <br>
                             <!-- checked out assets table -->
                             @if (count($user->licenses) > 0)
                             <table class="table table-hover">
                                 <thead>
                                     <tr>
-                                        <th class="col-md-4"><span class="line"></span>Name</th>
-                                        <th class="col-md-4"><span class="line"></span>Serial</th>
-                                        <th class="col-md-1"><span class="line"></span>Actions</th>
+                                        <th class="col-md-4"><span class="line"></span>@lang('general.name')</th>
+                                        <th class="col-md-4"><span class="line"></span>@lang('general.serialnumber')</th>
+                                        <th class="col-md-1"><span class="line"></span>@lang('actions.actions')</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -117,7 +118,7 @@ View User {{{ $user->fullName() }}} ::
                                     <tr>
                                         <td><a href="{{ route('view/license', $license->id) }}">{{{ $license->name }}}</a></td>
                                         <td><a href="{{ route('view/license', $license->id) }}">{{{ $license->serial }}}</a></td>
-                                        <td> <a href="{{ route('checkin/license', $license->pivot->id) }}" class="btn-flat info">Checkin</a>
+                                        <td> <a href="{{ route('checkin/license', $license->pivot->id) }}" class="btn btn-primary">@lang('actions.checkin')</a>
                                         </td>
                                     </tr>
                                     @endforeach
@@ -135,7 +136,7 @@ View User {{{ $user->fullName() }}} ::
 
 
 
-                            <h6>History for {{{ $user->first_name }}}</h6>
+                            <h6>@lang('general.history')</h6>
                             <br>
                             <!-- checked out assets table -->
                             @if (count($user->userlog) > 0)
@@ -143,9 +144,9 @@ View User {{{ $user->fullName() }}} ::
                                 <thead>
                                     <tr>
                                         <th class="col-md-3">Date</th>
-                                        <th class="col-md-3"><span class="line"></span>Action</th>
-                                        <th class="col-md-3"><span class="line"></span>Asset</th>
-                                        <th class="col-md-3"><span class="line"></span>By</th>
+                                        <th class="col-md-3"><span class="line"></span>@lang('actions.actions')</th>
+                                        <th class="col-md-3"><span class="line"></span>@lang('base.asset_shortname')</th>
+                                        <th class="col-md-3"><span class="line"></span>[By]</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -184,7 +185,7 @@ View User {{{ $user->fullName() }}} ::
                     <div class="col-md-3 address pull-right">
 
 
-                        <h6>Contact  {{{ $user->first_name }}}</h6>
+                        <h6>@lang('general.contact'):</h6>
 
 
                         @if ($user->location_id)
@@ -211,7 +212,8 @@ View User {{{ $user->fullName() }}} ::
                         </ul>
 
                         @if ($user->last_login!='')
-                        <br /><h6>Last Login: {{{ $user->last_login->diffForHumans() }}}</h6>
+                        <br /><h6>@lang('admin/users/form.last_login') : 
+                            {{{ $user->last_login->diffForHumans() }}}</h6>
                         @endif
                     </div>
 @stop

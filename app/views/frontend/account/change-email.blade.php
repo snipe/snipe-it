@@ -61,8 +61,8 @@ Change your Email
         <div class="form-group">
         <label class="col-md-2 control-label"></label>
             <div class="col-md-7">
-                <a class="btn btn-link" href="{{ route('view-assets') }}">@lang('general.cancel')</a>
-                <button type="submit" class="btn btn-success"><i class="icon-ok icon-white"></i> @lang('general.save')</button>
+                <a class="btn btn-link" href="{{ route('view-assets') }}">@lang('actions.cancel')</a>
+                <button type="submit" class="btn btn-success"><i class="icon-ok icon-white"></i> @lang('actions.save')</button>
                 <a href="{{ route('forgot-password') }}" class="btn btn-link">I forgot my password</a>
             </div>
         </div>

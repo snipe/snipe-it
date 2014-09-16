@@ -3,33 +3,38 @@
 {{-- Page title --}}
 @section('title')
     @if ($category->id)
-        @lang('admin/categories/general.update') ::
+        @lang('base.category_update') ::
     @else
-        @lang('admin/categories/general.create') ::
+        @lang('base.category_create') ::
     @endif
 @parent
 @stop
 
 {{-- Page content --}}
+
 @section('content')
 
-
 <div class="row header">
-    <div class="col-md-12">
-        <a href="{{ URL::previous() }}" class="btn-flat gray pull-right"><i class="icon-circle-arrow-left icon-white"></i> @lang('general.back')</a>
+    <div class="col-md-10">
+            
+        <button type="submit" class="btn btn-success pull-right"><i class="icon-ok icon-white"></i> @lang('actions.save')</button>            
+        <a href="{{ URL::previous() }}" class="btn btn-default pull-right"><i class="icon-circle-arrow-left icon-white"></i> @lang('actions.cancel')</a>
+            
         <h3>
         @if ($category->id)
-            @lang('admin/categories/general.update')
+            @lang('base.category_update')
+        @elseif(isset($clone_category))
+            @lang('base.category_clone')
         @else
-            @lang('admin/categories/general.create')
+            @lang('base.category_create')
         @endif
-</h3>
-    </div>
+        </h3>
+            
+    </div>                            
 </div>
 
-<div class="user-profile">
-<div class="row profile">
-<div class="col-md-9 bio">
+
+<div class="col-md-12">
 
                         <form class="form-horizontal" method="post" action="" autocomplete="off">
                         <!-- CSRF Token -->
@@ -37,32 +42,25 @@
 
                         <!-- Name -->
                         <div class="form-group {{ $errors->has('name') ? ' has-error' : '' }}">
-                            <label for="name" class="col-md-2 control-label">@lang('admin/categories/general.category_name')</label>
-                                <div class="col-md-7">
-                                    <input class="form-control" type="text" name="name" id="name" value="{{{ Input::old('name', $category->name) }}}" />
-                                    {{ $errors->first('name', '<span class="alert-msg"><i class="icon-remove-sign"></i> :message</span>') }}
+                             {{ Form::label_for($category, 'name', Lang::get('general.name'), array('class' => 'col-md-2 control-label')); }}
+
+                                <div class="col-md-5">
+                                    {{ Form::text_for($category, 'name',array('class' => 'form-control'),$errors  ) }}                                   
                                 </div>
                         </div>
 
-                        <!-- Form actions -->
-                        <div class="form-group">
-                        <label class="col-md-2 control-label"></label>
-                            <div class="col-md-7">
-                                <a class="btn btn-link" href="{{ URL::previous() }}">@lang('general.cancel')</a>
-                                <button type="submit" class="btn btn-success"><i class="icon-ok icon-white"></i> @lang('general.save')</button>
-                            </div>
-                        </div>
-                    </form>
-                    <br><br><br><br><br>
+            <!-- Form actions -->
+            <div class="form-group">
+                <label class="col-md-2 control-label"></label>
+                    <div class="col-md-7">
+                        <a href="{{ URL::previous() }}" class="btn btn-default"><i class="icon-circle-arrow-left icon-white"></i> @lang('actions.cancel')</a>
+                        <button type="submit" class="btn btn-success"><i class="icon-ok icon-white"></i> @lang('actions.save')</button>
                     </div>
+            </div>
+            
+    </form>
 
-                    <!-- side address column -->
-                    <div class="col-md-3 col-xs-12 address pull-right">
-                        <br /><br />
-                        <h6>@lang('admin/categories/general.about_asset_categories')</h6>
-                        <p>@lang('admin/categories/general.about_categories') </p>
+</div>
 
-                    </div>
-</div>
-</div>
+
 @stop

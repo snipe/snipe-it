@@ -20,6 +20,8 @@ return array(
         'confirm'   	=> 'Are you sure you wish to delete this location?',
         'error'   => 'There was an issue deleting the location. Please try again.',
         'success' => 'The location was deleted successfully.'
-    )
+    ),
+    
+    'about' => 'Locations define the physical locations within your entity where items are stored, owned or associated with.',
 
 );

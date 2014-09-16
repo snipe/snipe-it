@@ -3,38 +3,41 @@
 {{-- Page title --}}
 @section('title')
     @if ($model->id)
-        @lang('admin/models/table.update') ::
+        @lang('base.model_update') ::
     @else
-        @lang('admin/models/table.create') ::
+        @lang('base.model_create') ::
     @endif
 @parent
 @stop
 
 {{-- Page content --}}
+
 @section('content')
+
 <div class="row header">
-    <div class="col-md-12">
-            <!--<a href="{{ URL::previous() }}" class="btn-flat gray pull-right"><i class="icon-circle-arrow-left icon-white"></i>  @lang('general.back')</a>-->
-        @if(isset($clone_model))
-            <a href="{{{ URL::route('view/model', $clone_model->id) }}}" class="btn-flat gray pull-right"><i class="icon-circle-arrow-left icon-white"></i>  @lang('general.back')</a>
-        @else
-            <a href="{{{ URL::route('view/model', $model->id) }}}" class="btn-flat gray pull-right"><i class="icon-circle-arrow-left icon-white"></i>  @lang('general.back')</a>
-        @endif
+    <div class="col-md-10">
+            
+        <button type="submit" class="btn btn-success pull-right"><i class="icon-ok icon-white"></i> @lang('actions.save')</button>            
+        <a href="{{ URL::previous() }}" class="btn btn-default pull-right"><i class="icon-circle-arrow-left icon-white"></i> @lang('actions.cancel')</a>
+            
         <h3>
         @if ($model->id)
-            @lang('admin/models/table.update')
+            @lang('base.model_update')
         @elseif(isset($clone_model))
-            @lang('admin/models/table.clone')
+            @lang('base.model_clone')
         @else
-            @lang('admin/models/table.create')
+            @lang('base.model_create')
         @endif
         </h3>
-    </div>
+            
+    </div>                            
 </div>
 
 <div class="row form-wrapper">
 
 
+<div class="col-md-12 column">
+    
 <form class="form-horizontal" method="post" action="" autocomplete="off">
     <!-- CSRF Token -->
     <input type="hidden" name="_token" value="{{ csrf_token() }}" />
@@ -43,7 +46,7 @@
 
             <!-- Model name -->
             <div class="form-group {{ $errors->has('name') ? ' has-error' : '' }}">
-                <label for="name" class="col-md-2 control-label">@lang('admin/models/table.name')
+                <label for="name" class="col-md-2 control-label">@lang('general.name')
                  <i class='icon-asterisk'></i></label>
                  </label>
                     <div class="col-md-7">
@@ -52,19 +55,18 @@
                     </div>
             </div>
 
-			 <div class="form-group {{ $errors->has('manufacturer_id') ? ' has-error' : '' }}">
-				<label for="manufacturer_id" class="col-md-2 control-label">@lang('general.manufacturer')
-				 <i class='icon-asterisk'></i></label>
-				 </label>
-					<div class="col-md-7">
-						{{ Form::select('manufacturer_id', $manufacturer_list , Input::old('manufacturer_id', $model->manufacturer_id), array('class'=>'select2', 'style'=>'width:350px')) }}
-						{{ $errors->first('manufacturer_id', '<span class="alert-msg"><i class="icon-remove-sign"></i> :message</span>') }}
-					</div>
-			</div>
+            <div class="form-group {{ $errors->has('manufacturer_id') ? ' has-error' : '' }}">
+		<label for="manufacturer_id" class="col-md-2 control-label">@lang('base.manufacturer')
+                    <i class='icon-asterisk'></i></label>
+		<div class="col-md-7">
+		{{ Form::select('manufacturer_id', $manufacturer_list , Input::old('manufacturer_id', $model->manufacturer_id), array('class'=>'select2', 'style'=>'width:350px')) }}
+		{{ $errors->first('manufacturer_id', '<span class="alert-msg"><i class="icon-remove-sign"></i> :message</span>') }}
+                </div>
+            </div>
 
-			<!-- Category -->
+            <!-- Category -->
             <div class="form-group {{ $errors->has('category_id') ? ' has-error' : '' }}">
-                <label for="category_id" class="col-md-2 control-label">@lang('general.category')
+                <label for="category_id" class="col-md-2 control-label">@lang('base.category')
                  <i class='icon-asterisk'></i></label>
                  </label>
                     <div class="col-md-7">
@@ -73,19 +75,18 @@
                     </div>
             </div>
 
-
             <!-- Model No. -->
             <div class="form-group {{ $errors->has('modelno') ? ' has-error' : '' }}">
-                <label for="modelno" class="col-md-2 control-label">@lang('general.model_no')</label>
-                    <div class="col-md-7">
+                <label for="modelno" class="col-md-2 control-label">@lang('general.modelnumber')</label>
+                <div class="col-md-3">
                         <input class="form-control" type="text" name="modelno" id="modelno" value="{{{ Input::old('modelno', $model->modelno) }}}" />
                         {{ $errors->first('modelno', '<span class="alert-msg"><i class="icon-remove-sign"></i> :message</span>') }}
-                    </div>
+                </div>
             </div>
 
             <!-- Depreciation -->
             <div class="form-group {{ $errors->has('depreciation_id') ? ' has-error' : '' }}">
-                <label for="depreciation_id" class="col-md-2 control-label">@lang('general.depreciation')</label>
+                <label for="depreciation_id" class="col-md-2 control-label">@lang('base.depreciation')</label>
                     <div class="col-md-7">
                         {{ Form::select('depreciation_id', $depreciation_list , Input::old('depreciation_id', $model->depreciation_id), array('class'=>'select2', 'style'=>'width:350px')) }}
                         {{ $errors->first('depreciation_id', '<span class="alert-msg"><i class="icon-remove-sign"></i> :message</span>') }}
@@ -98,29 +99,32 @@
                 <label for="eol" class="col-md-2 control-label">@lang('general.eol')</label>
                 <div class="col-md-2">
                     <div class="input-group">
-                    <input class="col-md-1 form-control" type="text" name="eol" id="eol" value="{{{ Input::old('eol', isset($model->eol)) ? $model->eol : 0  }}}" />   <span class="input-group-addon">
-                    @lang('general.months')
-
-                    </span>
+                    <input class="col-md-1 form-control" type="text" name="eol" id="eol" value="{{{ Input::old('eol', isset($model->eol)) ? $model->eol : 0  }}}" /><span class="input-group-addon">
+                    @lang('general.months')</span>
                     {{ $errors->first('eol', '<span class="alert-msg"><i class="icon-remove-sign"></i> :message</span>') }}
                     </div>
                 </div>
             </div>
 
-
-
-            <!-- Form actions -->
-            <div class="form-group">
-            <label class="col-md-2 control-label"></label>
+            <!-- Notes -->
+            <div class="form-group {{ $errors->has('notes') ? ' has-error' : '' }}">
+                <label for="notes" class="col-md-2 control-label">@lang('general.notes')</label>
                 <div class="col-md-7">
-                    @if(isset($clone_model))
-                        <a class="btn btn-link" href="{{ URL::route('view/model', $clone_model->id) }}">@lang('general.cancel')</a>
-                    @else
-                        <a class="btn btn-link" href="{{ URL::route('view/model', $model->id) }}">@lang('general.cancel')</a>
-                    @endif                    
-                    <button type="submit" class="btn btn-success"><i class="icon-ok icon-white"></i> @lang('general.save')</button>
+                    <textarea class="col-md-6 form-control" type="text" name="notes" id="notes">{{{ Input::old('notes', $model->notes) }}}</textarea>
+                    {{ $errors->first('notes', '<span class="alert-msg"><i class="icon-remove-sign"></i> :message</span>') }}
                 </div>
             </div>
+
+            <!-- Form actions -->
+                <div class="form-group">
+                <label class="col-md-2 control-label"></label>
+                    <div class="col-md-7">
+                        <a href="{{ URL::previous() }}" class="btn btn-default"><i class="icon-circle-arrow-left icon-white"></i> @lang('actions.cancel')</a>
+                        <button type="submit" class="btn btn-success"><i class="icon-ok icon-white"></i> @lang('actions.save')</button>
+                    </div>
+                </div>
+            
 </form>
+</div>
 </div>
 @stop

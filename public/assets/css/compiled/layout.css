@@ -571,3 +571,7 @@ color: #b94a48;
   }
 }
 
+.required:after { 
+    color: red;
+    content: " *"; 
+}

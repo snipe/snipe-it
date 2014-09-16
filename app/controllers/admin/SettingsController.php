@@ -5,9 +5,6 @@ use Input;
 use Lang;
 use Setting;
 use Redirect;
-use DB;
-use Sentry;
-use Str;
 use Validator;
 use View;
 
@@ -81,12 +78,13 @@ class SettingsController extends AdminController
 
         // Update the application settings
             $setting->id = '1';
-            $setting->site_name = e(Input::get('site_name'));
-            $setting->display_asset_name = e(Input::get('display_asset_name', '0'));
-            $setting->per_page = e(Input::get('per_page'));
-            $setting->qr_code = e(Input::get('qr_code', '0'));
-            $setting->qr_text = e(Input::get('qr_text'));
-            $setting->showsysinfo = e(Input::get('showsysinfo', '0'));
+            $setting->site_name             = e(Input::get('site_name'));
+            $setting->display_asset_name    = e(Input::get('display_asset_name', '0'));
+            $setting->per_page              = e(Input::get('per_page'));
+            $setting->qr_code               = e(Input::get('qr_code', '0'));
+            $setting->qr_text               = e(Input::get('qr_text'));
+            $setting->showsysinfo           = e(Input::get('showsysinfo', '0'));
+            $setting->multiplelogons        = e(Input::get('multiplelogons', '0'));
 
             // Were the application settings updated?
             if($setting->save()) {

@@ -34,5 +34,7 @@ return array(
         'error'   => 'There was an issue checking in the license. Please try again.',
         'success' => 'The license was checked in successfully'
     ),
+    
+    'checkout_help'  => 'You must check a license out to a hardware asset or a person. You can select both, but the owner of the asset must match the person you\'re checking the asset out to.',
 
 );

@@ -2,7 +2,7 @@
 
 {{-- Page title --}}
 @section('title')
-@lang('admin/families/general.view') {{ $family->name }} ::
+@lang('base.family') {{ $family->name }} ::
 @parent
 @stop
 
@@ -11,7 +11,7 @@
 
 <div class="row header">
         <div class="col-md-12">
-            {{ HTML::linkAction('update/family', Lang::get('button.update'), array($family->id), array('class' => 'btn btn-warning pull-right')) }}
+            {{ HTML::linkAction('update/family', Lang::get('actions.update'), array($family->id), array('class' => 'btn btn-warning pull-right')) }}
         
         <h3 class="name">        
         {{{ $family->name }}} </h3>
@@ -22,16 +22,9 @@
 <div class="row profile">
 <div class="col-md-9 bio">
 
-    <div class="col-md-12" style="min-height: 130px;">
-
-      
-
-
-    </div>
-
     <!-- Software  table -->
 
-        <h6>Software Assigned to {{{ $family->name }}}</h6>
+        <h6>[ {{{Lang::get('base.family_use')}}} : {{$family->has_licenses()}} ]</h6>
 		<br>
 		<!-- checked out family table -->
 		@if ($family->has_licenses() > 0)
@@ -63,8 +56,8 @@
         <!-- side address column -->
         <div class="col-md-3 col-xs-12 address pull-right">
     <br />
-    <h6>@lang('admin/families/general.about_families')</h6>
-    <p>@lang('admin/families/general.about_families_message') </p>
+    <h6>@lang('base.family_about')</h6>
+    <p>@lang('admin/families/message.about') </p>
            
         </div>
     </div>

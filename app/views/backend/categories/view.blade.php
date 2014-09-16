@@ -2,7 +2,7 @@
 
 {{-- Page title --}}
 @section('title')
-@lang('admin/categories/general.view') {{ $category->name }} ::
+@lang('base.category') {{ $category->name }} ::
 @parent
 @stop
 
@@ -11,9 +11,9 @@
 
 <div class="row header">
         <div class="col-md-12">
-            {{ HTML::linkAction('update/category', Lang::get('button.update'), array($category->id), array('class' => 'btn btn-warning pull-right')) }}
+            {{ HTML::linkAction('update/category', Lang::get('actions.update'), array($category->id), array('class' => 'btn btn-warning pull-right')) }}
         
-        <h3 class="name">        
+        <h3 class="name">@lang('base.category')     :
         {{{ $category->name }}} </h3>
     </div>
 </div>
@@ -22,24 +22,17 @@
 <div class="row profile">
 <div class="col-md-9 bio">
 
-    <div class="col-md-12" style="min-height: 130px;">
-
-      
-
-
-    </div>
-
     <!-- Software  table -->
 
-        <h6>Category Assigned to {{{ $category->name }}}: ({{$category->has_models()}})</h6>
+        <h6>[ {{{Lang::get('base.category_use')}}} : {{$category->has_models()}} ]</h6>
 		<br> 
 		<!-- checked out family table -->
 		@if ($category->has_models() > 0)
 		<table class="table table-hover">
 			<thead>
 				<tr>
-                                    <th class="col-md-4"><span class="line"></span>@lang('general.name')</th>
-                                    <th class="col-md-4"><span class="line"></span>Asset Count</th>
+                                    <th class="col-md-4"><span class="line"></span>@lang('admin/categories/form.name')</th>
+                                    <th class="col-md-4"><span class="line"></span>@lang('admin/categories/form.count')</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -67,8 +60,8 @@
         <div class="col-md-3 col-xs-12 address pull-right">
 
                <br />
-    <h6>@lang('admin/categories/general.about_asset_categories')</h6>
-    <p>@lang('admin/categories/general.about_asset_categories_message') </p>
+            <h6>@lang('base.category_about')</h6>
+            <p>@lang('admin/categories/message.about') </p>
     
         </div>
     </div>

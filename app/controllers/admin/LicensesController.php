@@ -18,6 +18,7 @@ use Supplier;
 use User;
 use Validator;
 use View;
+use Location;
 
 
 class LicensesController extends AdminController
@@ -58,13 +59,15 @@ class LicensesController extends AdminController
         $supplier_list = array('' => '') + Supplier::orderBy('name', 'asc')->lists('name', 'id');
         $manufacturer_list = array('' => '') + Manufacturer::orderBy('name', 'asc')->lists('name', 'id');
         $family_list = array('' => '') + Family::orderBy('common_name', 'asc')->lists('common_name', 'id');
-
+        $location_list = array('' => '') + Location::orderBy('name', 'asc')->lists('name', 'id');
+        
         // Show the page
         $depreciation_list = array('0' => Lang::get('admin/licenses/form.no_depreciation')) + Depreciation::lists('name', 'id');
         return View::make('backend/licenses/edit')
                 ->with('license_options',$license_options)
                 ->with('supplier_list',$supplier_list)
                 ->with('family_list',$family_list)
+                ->with('location_list',$location_list)
                 ->with('manufacturer_list',$manufacturer_list)
                 ->with('depreciation_list',$depreciation_list)
                 ->with('license',new License);
@@ -119,6 +122,12 @@ class LicensesController extends AdminController
                     $license->family_id =  NULL;
             } else {
                     $license->family_id = e(Input::get('family_id'));
+            }
+            
+            if ( e(Input::get('location_id')) == '') {
+                    $license->location_id =  NULL;
+            } else {
+                    $license->location_id = e(Input::get('location_id'));
             }
             
             if ( e(Input::get('manufacturer_id')) == '') {
@@ -188,7 +197,8 @@ class LicensesController extends AdminController
         $supplier_list = array('' => '') + Supplier::orderBy('name', 'asc')->lists('name', 'id');
         $manufacturer_list = array('' => '') + Manufacturer::orderBy('name', 'asc')->lists('name', 'id');
         $family_list = array('' => '') + Family::orderBy('common_name', 'asc')->lists('common_name', 'id');
-        
+        $location_list = array('' => '') + Location::orderBy('name', 'asc')->lists('name', 'id');
+         
         // Show the page
         $license_options = array('' => 'Top Level') + DB::table('assets')->where('id', '!=', $licenseId)->lists('name', 'id');
         $depreciation_list = array('0' => Lang::get('admin/licenses/form.no_depreciation')) + Depreciation::lists('name', 'id');
@@ -196,6 +206,7 @@ class LicensesController extends AdminController
                 ->with('license_options',$license_options)
                 ->with('supplier_list',$supplier_list)
                 ->with('family_list',$family_list)
+                ->with('location_list',$location_list)
                 ->with('manufacturer_list',$manufacturer_list)
                 ->with('depreciation_list',$depreciation_list);
     }
@@ -263,6 +274,12 @@ class LicensesController extends AdminController
             } else {
                     $license->family_id = e(Input::get('family_id'));
             }
+                    
+            if ( e(Input::get('location_id')) == '') {
+                    $license->location_id =  NULL;
+            } else {
+                    $license->location_id = e(Input::get('location_id'));
+            }           
             
             if ( e(Input::get('manufacturer_id')) == '') {
                     $license->manufacturer_id =  NULL;
@@ -631,7 +648,8 @@ class LicensesController extends AdminController
         $supplier_list = array('' => '') + Supplier::orderBy('name', 'asc')->lists('name', 'id');
         $manufacturer_list = array('' => '') + Manufacturer::orderBy('name', 'asc')->lists('name', 'id');
         $family_list = array('' => '') + Family::orderBy('common_name', 'asc')->lists('common_name', 'id');
-
+        $location_list = array('' => '') + Location::orderBy('name', 'asc')->lists('name', 'id');
+        
         //clone the orig
         $license = clone $license_to_clone;
         $license->id = null;
@@ -642,7 +660,8 @@ class LicensesController extends AdminController
         return View::make('backend/licenses/edit')
                 ->with('license_options',$license_options)
                 ->with('supplier_list',$supplier_list)
-                ->with('family_list',$family_list)                
+                ->with('family_list',$family_list)     
+                ->with('location_list',$location_list)
                 ->with('manufacturer_list',$manufacturer_list)
                 ->with('depreciation_list',$depreciation_list)
                 ->with('license',$license);

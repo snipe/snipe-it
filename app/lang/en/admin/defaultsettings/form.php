@@ -2,13 +2,8 @@
 
 return array(
 
-    'id'            => 'ID',
-    'title'         => 'Default Settings',
-    'name'          => 'Name',
     'table_name'    => 'Table Name',
     'column_name'   => 'Column Name',
-    'value'         => 'Value ',
-    'update'        => 'Update Settings',
     
     'values' => array(
         'entity'            => 'Default Entity',

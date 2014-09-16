@@ -8,7 +8,7 @@
         @elseif (Input::get('Pending'))
             @lang('general.pending')
         @elseif (Input::get('RTD'))
-            @lang('general.ready_to_deploy')
+            @lang('general.readytodeploy')
         @elseif (Input::get('Undeployable'))
             @lang('general.undeployable')
         @elseif (Input::get('Deployed'))
@@ -18,7 +18,7 @@
             @lang('general.all')
     @endif
 
-    @lang('general.assets')
+    @lang('base.assets')
 @stop
 
 {{-- Page title --}}
@@ -41,14 +41,14 @@
                href="{{ route('purge/hardware', null) }}" 
                data-content="@choice('message.purge.confirm', $assets->count())" 
                title="@choice('message.purge.confirm', $assets->count())"
-               data-title="@lang('button.purge')?" onClick="return false;"><i class="icon-trash icon-white"></i>
-               @lang('button.purge')
+               data-title="@lang('actions.purge')?" onClick="return false;"><i class="icon-trash icon-white"></i>
+               @lang('actions.purge')
             </a>
             <a class="btn btn-default pull-right" href="{{ URL::to('hardware') }}">
-                {{ Lang::get('button.show_deleted')}}</a>
+                {{ Lang::get('actions.showcurrent')}}</a>
         @else
-            <a href="{{ route('create/hardware') }}" class="btn btn-success pull-right"><i class="icon-plus-sign icon-white"></i> @lang('general.create')</a>
-            <a class="btn btn-default pull-right" href="{{ URL::to('hardware?onlyTrashed=true') }}">@lang('button.show_current')</a>
+            <a href="{{ route('create/hardware') }}" class="btn btn-success pull-right"><i class="icon-plus-sign icon-white"></i> @lang('actions.create')</a>
+            <a class="btn btn-default pull-right" href="{{ URL::to('hardware?onlyTrashed=true') }}">@lang('actions.showdeleted')</a>
         @endif
 
         
@@ -63,18 +63,18 @@
         <table id="example">
             <thead>
                 <tr role="row">
-                    <th class="col-md-1" bSortable="true">@lang('admin/hardware/table.asset_tag')</th>
-                    <th class="col-md-1" bSortable="true">@lang('admin/hardware/table.asset_model')</th>
+                    <th class="col-md-1" bSortable="true">@lang('general.asset_tag')</th>
+                    <th class="col-md-1" bSortable="true">@lang('base.model')</th>
                     @if (Setting::getSettings()->display_asset_name)
                     <th class="col-md-1" bSortable="true">@lang('general.name')</th>                
                     @endif
-                    <th class="col-md-1" bSortable="true">@lang('admin/hardware/table.serial')</th>                    
-                    <th class="col-md-1" bSortable="true">@lang('admin/hardware/table.checkoutto')</th>
-                    <th class="col-md-1" bSortable="true">@lang('admin/hardware/table.status')</th>                    
-                    <th class="col-md-1">@lang('admin/hardware/table.eol')</th>
-                    <th class="col-md-1">@lang('admin/categories/table.title')</th>
-                    <th class="col-md-1">@lang('admin/hardware/table.change')</th>
-                    <th class="col-md-1 actions" bSortable="false">@lang('table.actions')</th>
+                    <th class="col-md-1" bSortable="true">@lang('admin/hardware/form.serial')</th>                    
+                    <th class="col-md-1" bSortable="true">@lang('admin/hardware/form.checkoutto')</th>
+                    <th class="col-md-1" bSortable="true">@lang('base.statuslabels')</th>                    
+                    <th class="col-md-1">@lang('general.eol')</th>
+                    <th class="col-md-1">@lang('base.category')</th>
+                    <th class="col-md-1">@lang('admin/hardware/form.change')</th>
+                    <th class="col-md-1 actions" bSortable="false">@lang('actions.actions')</th>
                 </tr>
             </thead>
             <tbody>

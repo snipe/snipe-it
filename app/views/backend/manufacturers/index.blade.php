@@ -2,7 +2,7 @@
 
 {{-- Page title --}}
 @section('title')
-@lang('admin/manufacturers/table.asset_manufacturers') ::
+@lang('base.manufacturers') ::
 @parent
 @stop
 
@@ -11,8 +11,8 @@
 
 <div class="row header">
     <div class="col-md-12">
-        <a href="{{ route('create/manufacturer') }}" class="btn btn-success pull-right"><i class="icon-plus-sign icon-white"></i>  @lang('general.create')</a>
-        <h3>@lang('admin/manufacturers/table.asset_manufacturers')</h3>
+        <a href="{{ route('create/manufacturer') }}" class="btn btn-success pull-right"><i class="icon-plus-sign icon-white"></i>  @lang('actions.create')</a>
+        <h3>@lang('base.manufacturers')</h3>
     </div>
 </div>
 
@@ -22,10 +22,10 @@
             <table id="example">
                 <thead>
                     <tr role="row">
-                        <th class="col-md-4">@lang('admin/manufacturers/table.name')</th>
-                        <th class="col-md-2">@lang('admin/manufacturers/general.hardware_count')</th>
-                        <th class="col-md-2">@lang('admin/manufacturers/general.software_count')</th>
-                        <th class="col-md-1 actions">@lang('table.actions')</th>
+                        <th class="col-md-4">@lang('general.name')</th>
+                        <th class="col-md-2">@lang('admin/manufacturers/form.hardware_count')</th>
+                        <th class="col-md-2">@lang('admin/manufacturers/form.software_count')</th>
+                        <th class="col-md-1 actions">@lang('actions.actions')</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -43,7 +43,7 @@
                                class="btn delete-asset btn-danger" 
                                data-toggle="modal" href="{{ route('delete/manufacturer', $manufacturer->id) }}" 
                                data-content="@lang('admin/manufacturers/message.delete.confirm')"
-                               data-title="@lang('general.delete')
+                               data-title="@lang('actions.delete')
                                 {{ htmlspecialchars($manufacturer->name) }}?" onClick="return false;"><i class="icon-trash icon-white"></i></a>
                         </td>
                     </tr>
@@ -55,8 +55,8 @@
         <!-- side address column -->
         <div class="col-md-3 col-xs-12 address pull-right">
             <br />
-            <h6>@lang('admin/manufacturers/general.about_manufacturers')</h6>
-            <p>@lang('admin/manufacturers/general.about_manufacturers_message') </p>
+            <h6>@lang('base.manufacturer_about')</h6>
+            <p>@lang('admin/manufacturers/message.about') </p>
 
         </div>
 

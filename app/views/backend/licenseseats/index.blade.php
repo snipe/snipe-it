@@ -1,8 +1,29 @@
 @extends('backend/layouts/default')
 
+@section('title0')
+    @if (Input::get('Pending') || Input::get('Undeployable') || Input::get('available')  || Input::get('Deployed') || Input::get('onlyTrashed'))
+        @if (Input::get('onlyTrashed'))
+            @lang('actions.deleted')
+        @elseif (Input::get('Pending'))
+            @lang('general.pending')
+        @elseif (Input::get('available'))
+            @lang('general.readytodeploy')
+        @elseif (Input::get('Undeployable'))
+            @lang('general.undeployable')
+        @elseif (Input::get('Deployed'))
+            @lang('general.deployed')
+        @endif
+    @else
+            @lang('general.all')
+    @endif
+
+    @lang('base.licenseseats')
+    
+@stop
+
 {{-- Page title --}}
-@lang('admin/licenses/general.software_licenses') ::
-@parent
+@section('title')
+    @yield('title0') :: @parent
 @stop
 
 {{-- Page content --}}
@@ -13,7 +34,7 @@
     <div class="col-md-12">
         
          
-        <h3>@lang('admin/licenses/general.license_seats')</h3>
+        <h3>@yield('title0')</h3>
     </div>
 </div>
 
@@ -22,11 +43,11 @@
 <table id="example">
     <thead>
         <tr role="row">
-            <th class="col-md-3" tabindex="0" rowspan="1" colspan="1">@lang('admin/licenses/table.title')</th>
-            <th class="col-md-3" tabindex="0" rowspan="1" colspan="1">@lang('admin/licenses/table.serial')</th>
-            <th class="col-md-2" tabindex="0" rowspan="1" colspan="1">@lang('admin/licenses/table.hardware')</th>
-            <th class="col-md-2" tabindex="0" rowspan="1" colspan="1">@lang('admin/licenses/table.assigned_to')</th>
-            <th class="col-md-1 actions" tabindex="0" rowspan="1" colspan="1">@lang('admin/licenses/general.in_out')</th>
+            <th class="col-md-3" tabindex="0" rowspan="1" colspan="1">@lang('general.name')</th>
+            <th class="col-md-3" tabindex="0" rowspan="1" colspan="1">@lang('admin/licenses/form.serial')</th>
+            <th class="col-md-2" tabindex="0" rowspan="1" colspan="1">@lang('admin/licenses/form.hardware')</th>
+            <th class="col-md-2" tabindex="0" rowspan="1" colspan="1">@lang('admin/licenses/form.assigned_to')</th>
+            <th class="col-md-1 actions" tabindex="0" rowspan="1" colspan="1">@lang('general.in_out')</th>
             
         </tr>
     </thead>
@@ -82,10 +103,10 @@
                     @if (is_null($seat->deleted_at))                         
                         @if (($seat->assigned_to) || ($seat->asset_id))
                             <a href="{{ route('checkin/license', $seat->id) }}" class="btn btn-primary">
-                            @lang('general.checkin')</a>
+                            @lang('actions.checkin')</a>
                         @else
                             <a href="{{ route('checkout/license', $seat->id) }}" class="btn btn-info">
-                            @lang('general.checkout')</a>
+                            @lang('actions.checkout')</a>
                         @endif
                     @endif
                     

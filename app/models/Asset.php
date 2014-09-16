@@ -16,7 +16,8 @@ class Asset extends Elegant
         'supplier_id'       => 'integer',
         'asset_tag'         => 'required|alpha_space|min:3|max:255|unique:assets,asset_tag,{id}',
         'serial'            => 'required|alpha_dash|min:3|max:255|unique:assets,serial,{id}',
-        'status'            => 'integer'
+        'status'            => 'integer',
+        'location_id'       => 'required'
         );
     
     private $pendingState;
@@ -30,16 +31,19 @@ class Asset extends Elegant
     public function __construct($attributes = array())  {
         parent::__construct($attributes); // Eloquent   
         
+        // Collect the default values
         $this->supplier_id = DB::table('defaults')->where('name', 'supplier_asset')->pluck('value');
-        $this->status_id = DB::table('defaults')->where('name', 'asset_status')->pluck('value');        
+        $this->status_id = DB::table('defaults')->where('name', 'asset_status')->pluck('value');
+        $this->location_id = DB::table('defaults')->where('name', 'location')->pluck('value');
         
+        // Initialize the asset states
         $this->pendingState = new PendingState($this);        
         $this->availableState = new AvailableState($this);
         $this->assignedState = new AssingedState($this);
         $this->unavailableState = new UnavailableState($this);        
         $this->deletedState = new DeletedState($this);
         
-        //initial state 
+        // Set the initial state 
         $this->state = $this->pendingState;
     }
     
@@ -255,6 +259,11 @@ class Asset extends Elegant
     public function supplier()
     {
         return $this->belongsTo('Supplier','supplier_id');
+    }
+    
+    public function location()
+    {
+        return $this->belongsTo('Location','location_id');
     }
 
     public function months_until_eol()

@@ -2,7 +2,7 @@
 
 {{-- Page title --}}
 @section('title')
-Locations ::
+@lang('base.locations') ::
 @parent
 @stop
 
@@ -18,37 +18,38 @@ Locations ::
                href="{{ route('purge/locations', null) }}" 
                data-content="@choice('message.purge.confirm', $locations->count())" 
                title="@choice('message.purge.confirm', $locations->count())"
-               data-title="@lang('button.purge')?" onClick="return false;"><i class="icon-trash icon-white"></i>
-               @lang('button.purge')
+               data-title="@lang('actions.purge')?" onClick="return false;"><i class="icon-trash icon-white"></i>
+               @lang('actions.purge')
             </a>
             <a class="btn btn-default pull-right" href="{{ URL::to('/admin/settings/locations') }}">
-                {{ Lang::get('button.show_deleted')}}</a>
+                {{ Lang::get('actions.showcurrent')}}</a>
         @else
-            <a href="{{ route('create/location') }}" class="btn btn-success pull-right"><i class="icon-plus-sign icon-white"></i>  @lang('general.create')</a>
-            <a class="btn btn-default pull-right" href="{{ URL::to('admin/settings/locations?onlyTrashed=true') }}">@lang('button.show_current')</a>
+            <a href="{{ route('create/location') }}" class="btn btn-success pull-right"><i class="icon-plus-sign icon-white"></i>  @lang('actions.create')</a>
+            <a class="btn btn-default pull-right" href="{{ URL::to('admin/settings/locations?onlyTrashed=true') }}">@lang('actions.showdeleted')</a>
         @endif
 
         <h3>
         @if (Input::get('onlyTrashed'))
+            @lang('base.locations')
+            :
             @lang('general.deleted')
         @else
-            @lang('general.locations')
+            @lang('base.locations')
         @endif
     </div>
 </div>
 
-<div class="row form-wrapper">
+<div class="user-profile">
+    <div class="row profile">
+        <div class="col-md-9 bio">
 
 <table id="example">
     <thead>
         <tr role="row">
-            <th class="col-md-3">@lang('admin/locations/table.name')</th>
-            <th class="col-md-3">@lang('general.entity')</th>
-            <th class="col-md-3">@lang('admin/locations/table.address')</th>
-            <th class="col-md-2">@lang('admin/locations/table.city'),
-            @lang('admin/locations/table.state')
-            @lang('admin/locations/table.country')</th>
-            <th class="col-md-2 actions">@lang('table.actions')</th>
+            <th class="col-md-3">@lang('general.name')</th>
+            <th class="col-md-3">@lang('base.entity')</th>
+            <th class="col-md-3">@lang('general.city')</th>
+            <th class="col-md-2 actions">@lang('actions.actions')</th>
         </tr>
     </thead>
     <tbody>
@@ -56,17 +57,15 @@ Locations ::
         <tr>
             <td><a href="{{ route('view/location', $location->id) }}" class="name">{{{ $location->name }}}</a></td>
             <td>@if ($location->entity_id) 
-                <a href="{{ route('view/entity', $location->entity->id) }}" class="name">{{{ $location->entity->common_name }}}</a>
-                 
+                <a href="{{ route('view/entity', $location->entity->id) }}" class="name">{{{ $location->entity->common_name }}}</a> 
                 @endif</td>
-            <td>{{{ $location->address }}}, {{{ $location->address2 }}}  </td>
-            <td>{{{ $location->city }}}, {{{ $location->state }}}  {{{ $location->country }}}  </td>
+            <td>{{{ $location->city }}}</td>
             <td>
                 @if (is_null($location->deleted_at))
                             <a href="{{ route('update/location', $location->id) }}" class="btn btn-warning"><i class="icon-pencil icon-white"></i></a>
                             <a data-html="false" class="btn delete-asset btn-danger" data-toggle="modal" 
                                href="{{ route('delete/location', $location->id) }}" data-content="@lang('message.delete.confirm')" 
-                                data-title="@lang('general.delete')
+                                data-title="@lang('actions.delete')
                             {{ htmlspecialchars($location->name) }}?" 
                             @if($location->isRequired())
                             disabled='true'
@@ -76,7 +75,7 @@ Locations ::
                             <a href="{{ route('restore/location', $location->id) }}" class="btn btn-warning"><i class="icon-share-alt icon-white"></i></a>
                             <a data-html="false" class="btn delete-asset btn-danger" 
                                data-toggle="modal" href="{{ route('delete/location', $location->id) }}" data-content="@choice('message.purge.confirm',1)" 
-                            data-title="@lang('general.purge')
+                            data-title="@lang('actions.purge')
                             {{ htmlspecialchars($location->name) }}?" 
                             @if($location->isRequired())
                             disabled='true'
@@ -89,6 +88,17 @@ Locations ::
         @endforeach
     </tbody>
 </table>
+</div>
+
+        <!-- side address column -->
+        <div class="col-md-3 col-xs-12 address pull-right">
+            <br />
+            <h6>@lang('base.location_about')</h6>
+            <p>@lang('admin/locations/message.about') </p>
+
+        </div>
+
+    </div>
 </div>
 
 

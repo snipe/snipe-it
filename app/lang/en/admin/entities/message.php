@@ -22,6 +22,9 @@ return array(
         'confirm'   	=> 'Are you sure you wish to delete this entity?',
         'error'   => 'There was an issue deleting the entity. Please try again.',
         'success' => 'The entity was deleted successfully.'
-    )
+    ),
+    
+    'about' => 'This is the top level organization group.  Normally this would be'
+                . ' used for your general company information.'
 
 );

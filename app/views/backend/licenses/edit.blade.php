@@ -3,60 +3,66 @@
 {{-- Page title --}}
 @section('title')
     @if ($license->id)
-        @lang('admin/licenses/form.update') ::
+        @lang('base.license_update') ::
     @else
-        @lang('admin/licenses/form.create') ::
+        @lang('base.license_create') ::
     @endif
 @parent
 @stop
 
 {{-- Page content --}}
+
 @section('content')
 
 <div class="row header">
-    <div class="col-md-12">
-            <a href="{{ URL::previous() }}" class="btn-flat gray pull-right right">
-            <i class="icon-circle-arrow-left icon-white"></i> @lang('general.back')</a>
+    <div class="col-md-10">
+            
+        <button type="submit" class="btn btn-success pull-right"><i class="icon-ok icon-white"></i> @lang('actions.save')</button>            
+        <a href="{{ URL::previous() }}" class="btn btn-default pull-right"><i class="icon-circle-arrow-left icon-white"></i> @lang('actions.cancel')</a>
+            
         <h3>
         @if ($license->id)
-            @lang('admin/licenses/form.update')
+            @lang('base.license_update')
+        @elseif(isset($clone_license))
+            @lang('base.license_clone')
         @else
-            @lang('admin/licenses/form.create')
+            @lang('base.license_create')
         @endif
         </h3>
-    </div>
+            
+    </div>                            
 </div>
 
 <div class="row form-wrapper">
 
-<form class="form-horizontal" method="post" action="" autocomplete="off">
+    <div class="col-md-12 column">
+    <form class="form-horizontal" method="post" action="" autocomplete="off">
     <!-- CSRF Token -->
     <input type="hidden" name="_token" value="{{ csrf_token() }}" />
 
             <!-- Asset Tag -->
             <div class="form-group {{ $errors->has('name') ? ' has-error' : '' }}">
-                <label for="name" class="col-md-3 control-label">@lang('admin/licenses/form.name')
-                 <i class='icon-asterisk'></i></label>
-                 </label>
+                 {{ Form::label_for($license, 'name', Lang::get('general.name'), array('class' => 'col-md-2 control-label')); }} 
+                
                     <div class="col-md-7">
                         <input class="form-control" type="text" name="name" id="name" value="{{ Input::old('name', $license->name) }}" />
                         {{ $errors->first('name', '<span class="alert-msg"><i class="icon-remove-sign"></i> :message</span>') }}
                     </div>
             </div>
 
+            <!-- Serial NumberTag -->
             <div class="form-group {{ $errors->has('serial') ? ' has-error' : '' }}">
-                <label for="serial" class="col-md-3 control-label">@lang('admin/licenses/form.serial')
-                 <i class='icon-asterisk'></i></label>
-                 </label>
+                {{ Form::label_for($license, 'serial', Lang::get('admin/licenses/form.serial'), array('class' => 'col-md-2 control-label')); }} 
+                
                     <div class="col-md-7">
-                        <textarea class="form-control" type="text" name="serial" id="serial">{{ Input::old('serial', $license->serial) }}</textarea>
+                        <input class="form-control" type="text" name="serial" id="serial" value="{{ Input::old('serial', $license->serial) }}" />
                         {{ $errors->first('serial', '<span class="alert-msg"><i class="icon-remove-sign"></i> :message</span>') }}
                     </div>
             </div>
  
             <!-- Manufacturer -->
             <div class="form-group {{ $errors->has('manufacturer_id') ? ' has-error' : '' }}">
-                <label for="manufacturer_id" class="col-md-3 control-label">@lang('admin/hardware/form.manufacturer')</label>
+                {{ Form::label_for($license, 'manufacturer_id', Lang::get('base.manufacturer'), array('class' => 'col-md-2 control-label')); }}                 
                 <div class="col-md-7">
                     {{ Form::select('manufacturer_id', $manufacturer_list , Input::old('manufacturer_id', $license->manufacturer_id), array('class'=>'select2', 'style'=>'min-width:350px')) }}
                     {{ $errors->first('manufacturer_id', '<span class="alert-msg"><i class="icon-remove-sign"></i> :message</span>') }}
@@ -65,51 +71,78 @@
             
             <!-- Family -->
             <div class="form-group {{ $errors->has('family_id') ? ' has-error' : '' }}">
-                <label for="family_id" class="col-md-3 control-label">@lang('general.family')</label>
+                {{ Form::label_for($license, 'family_id', Lang::get('base.family'), array('class' => 'col-md-2 control-label')); }} 
+                
                 <div class="col-md-7">
                     {{ Form::select('family_id', $family_list , Input::old('family_id', $license->family_id), array('class'=>'select2', 'style'=>'min-width:350px')) }}
                     {{ $errors->first('family_id', '<span class="alert-msg"><i class="icon-remove-sign"></i> :message</span>') }}
                 </div>
             </div>
             
+            <!-- Location -->
+            <div class="form-group {{ $errors->has('location_id') ? ' has-error' : '' }}">
+                {{ Form::label_for($license, 'location_id', Lang::get('base.location'), array('class' => 'col-md-2 control-label')); }} 
+               
+                <div class="col-md-7">
+                    {{ Form::select('location_id', $location_list , Input::old('location_id', $license->location_id), array('class'=>'select2', 'style'=>'min-width:350px')) }}
+                    {{ $errors->first('location_id', '<span class="alert-msg"><i class="icon-remove-sign"></i> :message</span>') }}
+                    
+        		<!-- Strict Assignment -->
+                        &nbsp;&nbsp;<label>
+			<input type="checkbox" value="1" name="strict_assignment" id="strict_assignment" {{ Input::old('strict_assignment', $license->strict_assignment) == '1' ? ' checked="checked"' : '' }}> @lang('general.strict_assignment')
+			</label>
+                </div>
+                <div class="checkbox">
+
+		</div>
+            </div>
+                        
             <!-- Supplier -->
             <div class="form-group {{ $errors->has('supplier_id') ? ' has-error' : '' }}">
-                <label for="supplier_id" class="col-md-3 control-label">@lang('admin/hardware/form.supplier')</label>
+                {{ Form::label_for($license, 'supplier_id', Lang::get('base.supplier'), array('class' => 'col-md-2 control-label')); }} 
+                
                 <div class="col-md-7">
                     {{ Form::select('supplier_id', $supplier_list , Input::old('supplier_id', $license->supplier_id), array('class'=>'select2', 'style'=>'min-width:350px')) }}
                     {{ $errors->first('supplier_id', '<span class="alert-msg"><i class="icon-remove-sign"></i> :message</span>') }}
                 </div>
             </div>
 
+            <!-- Licensed to Name -->
             <div class="form-group {{ $errors->has('license_name') ? ' has-error' : '' }}">
-                <label for="license_name" class="col-md-3 control-label">@lang('admin/licenses/form.to_name')</label>
-                    <div class="col-md-7">
+                {{ Form::label_for($license, 'license_name', Lang::get('admin/licenses/form.to_name'), array('class' => 'col-md-2 control-label')); }} 
+                
+                <div class="col-md-7">
                         <input class="form-control" type="text" name="license_name" id="license_name" value="{{ Input::old('license_name', $license->license_name) }}" />
                         {{ $errors->first('license_name', '<span class="alert-msg"><i class="icon-remove-sign"></i> :message</span>') }}
                     </div>
             </div>
 
+            <!-- Licensed to Email -->
             <div class="form-group {{ $errors->has('license_email') ? ' has-error' : '' }}">
-                <label for="license_email" class="col-md-3 control-label">@lang('admin/licenses/form.to_email')</label>
-                    <div class="col-md-7">
+                {{ Form::label_for($license, 'license_email', Lang::get('admin/licenses/form.to_email'), array('class' => 'col-md-2 control-label')); }} 
+                
+                <div class="col-md-7">
                         <input class="form-control" type="text" name="license_email" id="license_email" value="{{ Input::old('license_email', $license->license_email) }}" />
                         {{ $errors->first('license_email', '<span class="alert-msg"><i class="icon-remove-sign"></i> :message</span>') }}
                     </div>
             </div>
 
+            <!-- License Seats -->
             <div class="form-group {{ $errors->has('seats') ? ' has-error' : '' }}">
-                <label for="seats" class="col-md-3 control-label">@lang('admin/licenses/form.seats')
-                 <i class='icon-asterisk'></i></label>
+                {{ Form::label_for($license, 'seats', Lang::get('base.licenseseats_shortname'), array('class' => 'col-md-2 control-label')); }} 
+                
                  </label>
-                    <div class="col-md-3">
+                    <div class="col-md-2">
                         <input class="form-control" type="text" name="seats" id="seats" value="{{ Input::old('seats', $license->seats) }}" />
                         {{ $errors->first('seats', '<span class="alert-msg"><i class="icon-remove-sign"></i> :message</span>') }}
                     </div>
             </div>
 
+            <!-- Order Number -->
             <div class="form-group {{ $errors->has('order_number') ? ' has-error' : '' }}">
-                <label for="order_number" class="col-md-3 control-label">@lang('admin/licenses/form.order')</label>
-                    <div class="col-md-7">
+                {{ Form::label_for($license, 'order_number', Lang::get('admin/licenses/form.order'), array('class' => 'col-md-2 control-label')); }} 
+                
+                <div class="col-md-7">
                         <input class="form-control" type="text" name="order_number" id="order_number" value="{{ Input::old('order_number', $license->order_number) }}" />
                         {{ $errors->first('order_number', '<span class="alert-msg"><i class="icon-remove-sign"></i> :message</span>') }}
                     </div>
@@ -117,7 +150,8 @@
 
             <!-- Purchase Date -->
             <div class="form-group {{ $errors->has('purchase_date') ? ' has-error' : '' }}">
-                <label for="purchase_date" class="col-md-3 control-label">@lang('admin/licenses/form.date')</label>
+                {{ Form::label_for($license, 'purchase_date', Lang::get('general.purchasedate'), array('class' => 'col-md-2 control-label')); }} 
+                
                 <div class="input-group col-md-2">
                     <input type="date" class="datepicker form-control" data-date-format="yyyy-mm-dd" placeholder="Select Date" name="purchase_date" id="purchase_date" value="{{ Input::old('purchase_date', $license->purchase_date) }}">
                     <span class="input-group-addon"><i class="icon-calendar"></i></span>
@@ -127,7 +161,8 @@
 
             <!-- Purchase Cost -->
             <div class="form-group {{ $errors->has('purchase_cost') ? ' has-error' : '' }}">
-                <label for="purchase_cost" class="col-md-3 control-label">@lang('admin/licenses/form.cost')</label>
+                {{ Form::label_for($license, 'purchase_cost', Lang::get('general.purchasecost'), array('class' => 'col-md-2 control-label')); }} 
+                
                 <div class="col-md-2">
                     <div class="input-group">
                         <span class="input-group-addon">@lang('general.currency')</span>
@@ -139,33 +174,35 @@
 
             <!-- Depreciation -->
             <div class="form-group {{ $errors->has('depreciation_id') ? ' has-error' : '' }}">
-                <label for="parent" class="col-md-3 control-label">@lang('admin/licenses/form.depreciation')</label>
-                    <div class="col-md-7">
+                {{ Form::label_for($license, 'parent', Lang::get('base.depreciation'), array('class' => 'col-md-2 control-label')); }} 
+                
+                <div class="col-md-7">
                         {{ Form::select('depreciation_id', $depreciation_list , Input::old('depreciation_id', $license->depreciation_id), array('class'=>'select2', 'style'=>'width:350px')) }}
                         {{ $errors->first('depreciation_id', '<span class="alert-msg"><i class="icon-remove-sign"></i> :message</span>') }}
                     </div>
             </div>
 
-<!-- Notes -->
+            <!-- Notes -->
             <div class="form-group {{ $errors->has('notes') ? ' has-error' : '' }}">
-                <label for="notes" class="col-md-3 control-label">@lang('admin/licenses/form.notes')</label>
+                {{ Form::label_for($license, 'notes', Lang::get('general.notes'), array('class' => 'col-md-2 control-label')); }} 
+                
                 <div class="col-md-7">
-                    <input class="col-md-6 form-control" type="text" name="notes" id="notes" value="{{ Input::old('notes', $license->notes) }}" />
+                    <textarea class="col-md-6 form-control" type="text" name="notes" id="notes">{{{ Input::old('notes', $license->notes) }}}</textarea>
                     {{ $errors->first('notes', '<span class="alert-msg"><i class="icon-remove-sign"></i> :message</span>') }}
                 </div>
             </div>
 
             <!-- Form actions -->
-                <div class="form-group">
-                <label class="col-md-3 control-label"></label>
+            <div class="form-group">
+                <label class="col-md-2 control-label"></label>
                     <div class="col-md-7">
-
-                        <a class="btn btn-link" href="{{ URL::previous() }}">@lang('general.cancel')</a>
-                        <button type="submit" class="btn btn-success"><i class="icon-ok icon-white"></i> @lang('general.save')</button>
+                        <a href="{{ URL::previous() }}" class="btn btn-default"><i class="icon-circle-arrow-left icon-white"></i> @lang('actions.cancel')</a>
+                        <button type="submit" class="btn btn-success"><i class="icon-ok icon-white"></i> @lang('actions.save')</button>
                     </div>
-                </div>
+            </div>
 
-</form>
+    </form>
+</div>
 </div>
 
 @stop

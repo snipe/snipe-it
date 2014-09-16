@@ -2,7 +2,7 @@
 
 {{-- Page title --}}
 @section('title')
-@lang('general.depreciation_report') ::
+@lang('base.depreciation_report') ::
 @parent
 @stop
 
@@ -17,7 +17,7 @@
         @lang('admin/hardware/table.dl_csv')</a>
         </div>
 
-    <h3>@lang('general.depreciation_report')</h3>
+    <h3>@lang('base.depreciation_report')</h3>
 </div>
 
 <div class="row table">

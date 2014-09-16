@@ -62,6 +62,7 @@
           <script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
         <![endif]-->
 
+        <!--  Unknown code >
         <style>
 
         @section('styles')
@@ -72,7 +73,7 @@
         @show
         
         </style>
- 
+        <! Unknown code -->
 
     </head>
 
@@ -105,24 +106,24 @@
                  
                  <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                        <i class="icon-plus"></i> @lang('general.create')
+                        <i class="icon-plus"></i> @lang('actions.create')
                         <b class="caret"></b>
                     </a>
                     <ul class="dropdown-menu">
                        <li {{{ (Request::is('hardware/create') ? 'class="active"' : '') }}}>
                                <a href="{{ route('create/hardware') }}">
                                    <i class="icon-plus"></i>
-                                   @lang('general.asset')</a>
+                                   @lang('base.asset')</a>
                            </li>
                         <li {{{ (Request::is('admin/licenses/create') ? 'class="active"' : '') }}}>
                             <a href="{{ route('create/licenses') }}">
                                 <i class="icon-plus"></i>
-                                @lang('general.license')</a>
+                                @lang('base.license')</a>
                         </li>
                         <li {{{ (Request::is('admin/users/create') ? 'class="active"' : '') }}}>
                             <a href="{{ route('create/user') }}">
                             <i class="icon-plus"></i>
-                            @choice('general.user',1)</a>
+                            @lang('base.user')</a>
                         </li>
                     </ul>
                 </li>
@@ -140,64 +141,64 @@
                     <ul class="dropdown-menu">
                         <li{{ (Request::is('hardware/models*') ? ' class="active"' : '') }}>
                             <a href="{{ URL::to('hardware/models') }}">
-                                <i class="icon-th"></i> @lang('general.asset_models')
+                                <i class="icon-th"></i> @lang('base.models')
                             </a>
                         </li>
                         <li{{ (Request::is('admin/settings/categories*') ? ' class="active"' : '') }}>
                             <a href="{{ URL::to('admin/settings/categories') }}">
-                                <i class="icon-check"></i> @lang('general.categories')
+                                <i class="icon-check"></i> @lang('base.categories')
                             </a>
                         </li>
                         <li{{ (Request::is('admin/settings/manufacturers*') ? ' class="active"' : '') }}>
                             <a href="{{ URL::to('admin/settings/manufacturers') }}">
-                                <i class="icon-briefcase"></i> @lang('general.manufacturers')
+                                <i class="icon-briefcase"></i> @lang('base.manufacturers')
                             </a>
                         </li>
                         <li{{ (Request::is('admin/settings/families*') ? ' class="active"' : '') }}>
                             <a href="{{ URL::to('admin/settings/families') }}">
-                                <i class="icon-flag"></i> @lang('general.families')
+                                <i class="icon-flag"></i> @lang('base.families')
                             </a>
                         </li>
                         <li{{ (Request::is('admin/settings/suppliers*') ? ' class="active"' : '') }}>
                             <a href="{{ URL::to('admin/settings/suppliers') }}">
-                                <i class="icon-credit-card"></i> @lang('general.suppliers')
+                                <i class="icon-credit-card"></i> @lang('base.suppliers')
                             </a>
                         </li>
                         <li{{ (Request::is('admin/settings/statuslabels*') ? ' class="active"' : '') }}>
                             <a href="{{ URL::to('admin/settings/statuslabels') }}">
-                                <i class="icon-list"></i> @lang('general.status_labels')
+                                <i class="icon-list"></i> @lang('base.statuslabels')
                             </a>
                         </li>
                         <li{{ (Request::is('admin/settings/depreciations*') ? ' class="active"' : '') }}>
                             <a href="{{ URL::to('admin/settings/depreciations') }}">
-                                <i class="icon-arrow-down"></i> @lang('general.depreciation')
+                                <i class="icon-arrow-down"></i> @lang('base.depreciations')
                             </a>
                         </li>
                         <li{{ (Request::is('admin/settings/locations*') ? ' class="active"' : '') }}>
                             <a href="{{ URL::to('admin/settings/locations') }}">
-                                <i class="icon-globe"></i> @lang('general.locations')
+                                <i class="icon-globe"></i> @lang('base.locations')
                             </a>
                         </li>
                         <li{{ (Request::is('admin/settings/entities*') ? ' class="active"' : '') }}>
                             <a href="{{ URL::to('admin/settings/entities') }}">
-                                <i class="icon-tasks"></i> @lang('general.entities')
+                                <i class="icon-tasks"></i> @lang('base.entities')
                             </a>
                         </li>
                         <li{{ (Request::is('admin/groups*') ? ' class="active"' : '') }}>
                             <a href="{{ URL::to('admin/groups') }}">
-                                <i class="icon-group"></i> @lang('general.groups')
+                                <i class="icon-group"></i> @lang('base.groups')
                             </a>
                         </li>
                         <li class="divider"></li>
                         <li>
                             <a href="{{ route('defaultsettings') }}">
-                                <i class="icon-keyboard"></i> @lang('general.default_settings')
+                                <i class="icon-keyboard"></i> @lang('base.defaultsettings')
                             </a>
                         </li>
                         <li class="divider"></li>
                         <li>
                             <a href="{{ route('app') }}">
-                                <i class="icon-cog"></i> @lang('general.settings')
+                                <i class="icon-cogs"></i> @lang('base.settings')
                             </a>                            
                         </li>
                         
@@ -232,7 +233,7 @@
                         <li>
                             <a href="{{ route('logout') }}">
                                 <i class="icon-off"></i>
-                                @lang('general.logout')
+                                @lang('actions.logout')
                             </a>
                         </li>
                     </ul>
@@ -241,12 +242,12 @@
                 <li>
                             <a href="{{ route('logout') }}">
                                 <i class="icon-off" alt="Logout"></i>
-                                <!-- @lang('general.logout') -->
+                                <!-- @lang('actions.logout') -->
                             </a>
                 </li>
                 
             @else
-                    <li {{{ (Request::is('auth/signin') ? 'class="active"' : '') }}}><a href="{{ route('signin') }}">@lang('general.sign_in')</a></li>
+                    <li {{{ (Request::is('auth/signin') ? 'class="active"' : '') }}}><a href="{{ route('signin') }}">@lang('actions.signin')</a></li>
             @endif
             </ul>
         </div>
@@ -262,41 +263,52 @@
 
             <li{{ (Request::is('hardware*') ? ' class="active"><div class="pointer"><div class="arrow"></div><div class="arrow_border"></div></div>' : '>') }}
                 <a href="{{ URL::to('hardware?RTD=true') }}" class="dropdown-toggle">
-                    <i class="icon-barcode"></i>
-                    <span>@lang('general.assets')</span>
+                    <i class="icon-laptop"></i>
+                    <span>@lang('base.assets_shortname')</span>
                     <i class="icon-chevron-down"></i>
                 </a>
 
                 <ul class="submenu{{ (Request::is('hardware*') ? ' active' : '') }}">
                     <li><a href="{{ URL::to('hardware?Deployed=true') }}" {{{ (Request::query('Deployed') ? ' class="active"' : '') }}} >@lang('general.deployed')</a></li>
-                    <li><a href="{{ URL::to('hardware?RTD=true') }}" {{{ (Request::query('RTD') ? ' class="active"' : '') }}} >@lang('general.ready_to_deploy')</a></li>
+                    <li><a href="{{ URL::to('hardware?RTD=true') }}" {{{ (Request::query('RTD') ? ' class="active"' : '') }}} >@lang('general.readytodeploy')</a></li>
                     <li><a href="{{ URL::to('hardware?Pending=true') }}" {{{ (Request::query('Pending') ? ' class="active"' : '') }}} >@lang('general.pending')</a></li>
                     <li><a href="{{ URL::to('hardware?Undeployable=true') }}" {{{ (Request::query('Undeployable') ? ' class="active"' : '') }}} >@lang('general.undeployable')</a></li>
-                    <li><a href="{{ URL::to('hardware') }}">@lang('general.list_all')</a></li>
+                    <li><a href="{{ URL::to('hardware') }}">@lang('actions.listall')</a></li>
+                    
+                    <!-- REMOVE ASSET MODELS FROM LEFT MENU 
                     <li class="divider">&nbsp;</li>
-                    <li><a href="{{ URL::to('hardware/models') }}" {{{ (Request::is('hardware/models*') ? ' class="active"' : '') }}} >@lang('general.asset_models')</a></li>
+                    <li><a href="{{ URL::to('hardware/models') }}" {{{ (Request::is('hardware/models*') ? ' class="active"' : '') }}} >@lang('base.models')</a></li>
+                    
+                    -->
 
                 </ul>
             </li>
 
             <li{{ (Request::is('admin/licenses*') ? ' class="active"><div class="pointer"><div class="arrow"></div><div class="arrow_border"></div></div>' : '>') }}
                 <a href="{{ URL::to('admin/licenses') }}"  >
-                    <i class="icon-certificate"></i>
-                     <span>@lang('general.licenses')</span>
+                    <i class="icon-tags"></i>
+                     <span>@lang('base.licenses_shortname')</span>
                     
                 </a>
-               
+            </li>
+            <li{{ (Request::is('admin/serviceagreements*') ? ' class="active"><div class="pointer"><div class="arrow"></div><div class="arrow_border"></div></div>' : '>') }}
+                <a href="{{ URL::to('admin/serviceagreements') }}"  >
+                    <i class="icon-certificate"></i>
+                     <span>@lang('base.serviceagreements_shortname')</span>
+                    
+                </a>
+                
             </li>
             <li{{ (Request::is('admin/users*') ? ' class="active"><div class="pointer"><div class="arrow"></div><div class="arrow_border"></div></div>' : '>') }}
                 <a href="{{ URL::to('admin/users') }}">
                     <i class="icon-group"></i>
-                    <span>@lang('general.people')</span>
+                    <span>@lang('base.users_shortname')</span>
                 </a>
             </li>
             <li{{ (Request::is('reports*') ? ' class="active"><div class="pointer"><div class="arrow"></div><div class="arrow_border"></div></div>' : '>') }}
                 <a href="{{ URL::to('reports') }}">
-                    <i class="icon-signal"></i>
-                    <span>@lang('general.reports')</span>
+                    <i class="icon-bar-chart"></i>
+                    <span>@lang('base.reports_shortname')</span>
                 </a>
             </li>
         </ul>
@@ -317,7 +329,7 @@
                     <div class="data">
                             <a href="{{ URL::to('hardware') }}">
                                 <span class="number">{{ number_format(Asset::assetcount()) }}</span>
-                                   <span style="color:black">@lang('general.total_assets')</span>
+                                   <span style="color:black">@lang('base.asset_total')</span>
                             </a>
                         </div>
                     </div>
@@ -325,7 +337,7 @@
                         <div class="data">
                             <a href="{{ URL::to('hardware?RTD=true') }}">
                                 <span class="number">{{ number_format(Asset::availassetcount()) }}</span>
-                                <span style="color:black">@lang('general.assets_available')</span>
+                                <span style="color:black">@lang('base.asset_available')</span>
                             </a>
                         </div>
                     </div>
@@ -333,7 +345,7 @@
                         <div class="data">
                             <a href="{{ URL::to('admin/licenses') }}">
                                 <span class="number">{{ number_format(License::assetcount()) }}</span>
-                                <span style="color:black">@lang('general.total_licenses')</span>
+                                <span style="color:black">@lang('base.license_total')</span>
                             </a>
                         </div>
                     </div>
@@ -341,7 +353,7 @@
                         <div class="data">
                             <a href="{{ URL::to('admin/licenseseats?available=true') }}">
                                 <span class="number">{{ number_format(License::availassetcount()) }}</span>
-                                <span style="color:black">@lang('general.licenses_available')</span>
+                                <span style="color:black">@lang('base.license_available')</span>
                             </a>
                         </div>
                     </div>
@@ -371,11 +383,13 @@
         <div class="col-md-9">
               <div class="container">
 
-                  <div class="muted credit" style="position:absolute;margin-top:1px;left:40px;"><a target="_blank" href="http://snipeitapp.com">Snipe IT</a> is a free open source
-                      project by <a target="_blank" href="http://twitter.com/snipeyhead">@snipeyhead</a>. <br>
-                  <a target="_blank" href="https://github.com/snipe/snipe-it">Fork it</a> | <a target="_blank" href="http://docs.snipeitapp.com/">Documentation</a> | 
+                  <div class="muted credit" style="position:absolute;margin-top:1px;left:40px;"><a target="_blank" href="http://snipeitapp.com">Snipe IT</a> is an open source
+                      project developed by <a target="_blank" href="http://twitter.com/snipeyhead">@snipeyhead</a> and supported by 
+                      <a target="_blank" href="http://www.cordeos.com">Cordeos Corp</a>.<br>
+                  <a target="_blank" href="https://github.com/snipe/snipe-it">Fork it</a> | <a target="_blank" href="http://cordeos.com/snipeit/">Documentation</a> | 
                       <a target="_blank" href="https://github.com/snipe/snipe-it/issues?state=open">Report a Bug</a>
                   </div>
+                  
               </div>
         </div>
         </div>
@@ -392,7 +406,7 @@
                 </div>
                 <div class="modal-body"></div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button><a class="btn btn-danger" id="dataConfirmOK">@lang('general.yes')</a>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button><a class="btn btn-danger" id="dataConfirmOK">@lang('actions.yes')</a>
                 </div>
             </div>
         </div>

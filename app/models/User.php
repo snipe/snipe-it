@@ -12,10 +12,35 @@ class User extends SentryUserModel
     protected $softDelete = true;
     protected $required_id = array(1);
     
-        //get defaults
+    //get defaults
     public function __construct($attributes = array())  {
         parent::__construct($attributes); // Eloquent       
         $this->location_id = DB::table('defaults')->where('name', 'location')->pluck('value');
+    }
+
+    // Override the SentryUser getPersistCode method to allow multiple logons
+    public function getPersistCode()
+    {
+        
+        $allowmultiplelogons =  DB::table('settings')->where('id','=','1')->pluck('multiplelogons');
+
+        if (!$this->persist_code || $allowmultiplelogons == 0)
+        {
+            $this->persist_code = $this->getRandomString();
+
+            // Our code got hashed
+            $persistCode = $this->persist_code;
+
+            $this->save();
+
+            return $persistCode;            
+        }
+        
+        else
+        {
+            return $this->persist_code;
+        }
+        
     }
     
     /**

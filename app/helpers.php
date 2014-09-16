@@ -21,10 +21,10 @@ function ParseFloat($floatString){
 function appVersion() {
     
     $version = array(
-        "level" => "alpha",
+        "level" => "beta",
         "major"=>0,
-        "minor"=>3,
-        "build"=>22
+        "minor"=>4,
+        "build"=>05
     );
     
     $appVersionString = implode(".", $version);

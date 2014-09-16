@@ -33,6 +33,8 @@ return array(
         'error'   		=> 'Asset was not checked in, please try again',
         'success' 		=> 'Asset checked in successfully.',
         'user_does_not_exist' => 'That user is invalid. Please try again.'
-    )
+    ),
+    
+    'about' => 'Physical assets represent the hardware and equipment you own.',
 
 );

@@ -2,7 +2,7 @@
 
 {{-- Page title --}}
 @section('title')
-@choice('general.manufacturer',1) : {{ $manufacturer->name }} ::
+@lang('base.manufacturer') : {{ $manufacturer->name }} ::
 @parent
 @stop
 
@@ -11,9 +11,8 @@
 
 <div class="row header">
     <div class="col-md-12">
-        <a href="{{ route('update/manufacturer', $manufacturer->id) }}" class="btn btn-warning pull-right">
-        @lang('button.update')</a>
-        <h3 class="name">        
+        <a href="{{ route('update/manufacturer', $manufacturer->id) }}" class="btn btn-warning pull-right">@lang('actions.update')</a>
+        <h3 class="name">@lang('base.manufacturer') :      
         {{{ $manufacturer->name }}} </h3>
     </div>
 </div>
@@ -35,11 +34,11 @@
                     <!-- suppliers hardware asset list table -->
                     @if ($manufacturer->has_models() > 0)
                     <table id='pgtable1'>
-                    <thead>
-                        <tr role="row">
-                                <th class="col-md-3">Name</th>
-                                <th class="col-md-3">Model Number</th>
-                                <th class="col-md-3">Asset Count</th>
+                        <thead>
+                            <tr role="row">
+                                <th class="col-md-4">@lang('general.name')</th>
+                                <th class="col-md-2">@lang('general.modelnumber')</th>
+                                <th class="col-md-2">@lang('general.count')</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -47,7 +46,7 @@
                             @foreach ($manufacturer->models as $model)
                             <tr>
                                 <td><a href="{{ route('view/model', $model->id) }}">{{{ $model->name }}}</a></td>
-                                <td><a href="{{ route('view/model', $model->id) }}">{{{ $model->modelno }}}</a></td>  
+                                <td>{{{ $model->modelno }}}</td>  
                                 <td>{{$model->has_assets()}}</td>  
                             </tr>
                             @endforeach
@@ -76,10 +75,10 @@
                     <table id='pgtable2'>
                         <thead>
                             <tr role="row">
-                                <th class="col-md-3">Name</th>
-                                <th class="col-md-3">Serial</th>
-                                <th class="col-md-3">Seats</th>
-                                <th class="col-md-3">Family</th>
+                                <th class="col-md-3">@lang('general.name')</th>
+                                <th class="col-md-3">@lang('general.serialnumber')</th>
+                                <th class="col-md-3">@lang('base.licenseseats_shortname')</th>
+                                <th class="col-md-3">@lang('base.family')</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -115,9 +114,9 @@
         </div> 
         <!-- side address column -->
         <div class="col-md-3 col-xs-12 address pull-right">
-            <h6><br>@lang('general.moreinfo'):</h6> 
+            <h6><br>@lang('base.manufacturer_about'):</h6> 
             <ul>
-                <li>@lang('general.manufacturer'): {{ $manufacturer->name }}</li>           
+                <li>@lang('admin/manufacturers/message.about')</li>           
             </ul>               
         </div>
     </div>

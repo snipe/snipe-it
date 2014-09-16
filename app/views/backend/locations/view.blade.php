@@ -2,7 +2,7 @@
 
 {{-- Page title --}}
 @section('title')
-@choice('general.location',1) : {{ $location->name }} ::
+@lang('base.location') : {{ $location->name }} ::
 @parent
 @stop
 
@@ -11,9 +11,8 @@
 
 <div class="row header">
     <div class="col-md-12">
-        <a href="{{ route('update/location', $location->id) }}" class="btn btn-warning pull-right">
-        @lang('button.update')</a>
-        <h3 class="name">        
+        <a href="{{ route('update/location', $location->id) }}" class="btn btn-warning pull-right">@lang('actions.update')</a>
+        <h3 class="name">@lang('base.location') :      
         {{{ $location->name }}} </h3>
     </div>
 </div>
@@ -25,20 +24,20 @@
 
  
                 <!-- checked out assets table -->
-                <h6>@choice('general.user', $location->has_users())
+                <h6>[@lang('base.location_use')
                     @if($location->has_users() > 0) 
-                        : ( {{ $location->has_users() }} ) 
-                    @endif </h6>
+                        : {{ $location->has_users() }}  
+                    @endif]</h6>
                <div class="row-fluid table users-list">
 <table id="example">
     <thead>
         <tr role="row">
-            <th class="col-md-3">@lang('admin/users/table.name')</th>
-            <th class="col-md-2">@lang('admin/users/table.email')</th>
-            <th class="col-md-2">@lang('admin/users/table.manager')</th>
-            <th class="col-md-1">@lang('general.assets')</th>
-            <th class="col-md-1">@lang('general.licenses')</th>
-            <th class="col-md-1">@lang('admin/users/table.activated')</th>
+            <th class="col-md-3">@lang('general.name')</th>
+            <th class="col-md-2">@lang('general.email')</th>
+            <th class="col-md-2">@lang('admin/users/form.manager')</th>
+            <th class="col-md-1">@lang('base.asset_shortname')</th>
+            <th class="col-md-1">@lang('base.license_shortname')</th>
+            <th class="col-md-1">@lang('admin/users/form.activated')</th>
             
         </tr>
     </thead>
@@ -82,7 +81,7 @@
                     </tr>
                     @if($location->entity)
                     <tr>
-                        <td><strong>@lang('general.entity'):</strong></td>
+                        <td><strong>@lang('base.entity'):</strong></td>
                         <td><a href="{{ route('view/entity', $location->entity->id) }}" class="name">{{{ $location->entity->common_name }}}</a></td></tr>
                     @endif
                     @if($location->address)
@@ -106,7 +105,7 @@
                     <tr><td><strong>@lang('general.country'):</strong></td><td> {{$location->country }}</td></tr>
                     @endif
                      @if($location->zip)
-                    <tr><td><strong>@lang('general.zip'):</strong></td><td> {{$location->zip }}</td></tr>
+                    <tr><td><strong>@lang('general.postalcode'):</strong></td><td> {{$location->zip }}</td></tr>
                     @endif
                 </table>
         </div>

@@ -58,7 +58,19 @@ Route::group(array('prefix' => 'hardware'), function () {
 
 Route::group(array('prefix' => 'admin'), function () {
 
-
+    # Service Agreements
+    Route::group(array('prefix' => 'serviceagreements'), function () {
+        Route::get('/', array('as' => 'serviceagreements', 'uses' => 'Controllers\Admin\ServiceAgreementsController@getIndex'));
+        Route::get('{serviceagreementId}/edit', array('as' => 'update/serviceagreement', 'uses' => 'Controllers\Admin\ServiceAgreementsController@getEdit'));
+        Route::post('{serviceagreementId}/edit', 'Controllers\Admin\ServiceAgreementsController@postEdit');
+        Route::get('{serviceagreementId}/view', array('as' => 'view/serviceagreement', 'uses' => 'Controllers\Admin\ServiceAgreementsController@getView'));
+        Route::get('{serviceagreementId}/delete', array('as' => 'delete/serviceagreement', 'uses' => 'Controllers\Admin\ServiceAgreementsController@getDelete'));
+    
+        Route::get('create', array('as' => 'create/serviceagreement', 'uses' => 'Controllers\Admin\ServiceAgreementsController@getCreate'));
+        Route::post('create', 'Controllers\Admin\ServiceAgreementsController@postCreate');
+        
+    });
+    
     # Licenses
     Route::group(array('prefix' => 'licenses'), function () {
         Route::get('/', array('as' => 'licenses', 'uses' => 'Controllers\Admin\LicensesController@getIndex'));

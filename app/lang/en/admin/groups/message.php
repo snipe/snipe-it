@@ -18,5 +18,7 @@ return array(
         'update' => 'There was an issue updating the group. Please try again.',
         'delete' => 'There was an issue deleting the group. Please try again.',
     ),
+    
+    'about'     => 'Setting up groups will allow you to contol and standardize permissions for groups of users.',
 
 );

@@ -25,5 +25,10 @@ return array(
         'delete' => 'There was an issue deleting the user. Please try again.',
         'unsuspend' => 'There was an issue unsuspending the user. Please try again.'
     ),
+    
+    'groupnotes'    => 'Select a group to assign to the user, remember that a user '
+                    . 'takes on the permissions of the group they are assigned.',
+    
+    'about'        => 'About users...',
 
 );

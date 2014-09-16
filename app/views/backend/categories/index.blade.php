@@ -2,7 +2,7 @@
 
 {{-- Page title --}}
 @section('title')
-@lang('admin/categories/general.asset_categories') ::
+@lang('base.categories') ::
 @parent
 @stop
 
@@ -11,8 +11,8 @@
 
 <div class="row header">
     <div class="col-md-12">
-        <a href="{{ route('create/category') }}" class="btn btn-success pull-right"><i class="icon-plus-sign icon-white"></i> @lang('general.create')</a>
-        <h3>@lang('admin/categories/general.asset_categories')</h3>
+        <a href="{{ route('create/category') }}" class="btn btn-success pull-right"><i class="icon-plus-sign icon-white"></i> @lang('actions.create')</a>
+        <h3>@lang('base.categories')</h3>
     </div>
 </div>
 
@@ -23,9 +23,9 @@
         <table id="example">
         <thead>
             <tr role="row">
-                <th class="col-md-4">@lang('admin/categories/table.title')</th>
-                <th class="col-md-3">Model Count</th>
-                <th class="col-md-1 actions">@lang('table.actions')</th>
+                <th class="col-md-4">@lang('admin/categories/form.name')</th>
+                <th class="col-md-3">@lang('admin/categories/form.count')</th>
+                <th class="col-md-1 actions">@lang('actions.actions')</th>
             </tr>
         </thead>
         <tbody>
@@ -40,7 +40,7 @@
                     data-toggle="modal" 
                     href="{{ route('delete/category', $category->id) }}" 
                     data-content="@lang('admin/categories/message.delete.confirm')" 
-                    data-title="@lang('general.delete')
+                    data-title="@lang('actions.delete')
                     {{{ htmlspecialchars($category->name) }}}
                     ?" 
                     @if($category->has_models())
@@ -54,15 +54,13 @@
         </tbody>
         </table>
 
-
     </div>
-
 
 <!-- side address column -->
 <div class="col-md-3 col-xs-12 address pull-right">
     <br />
-    <h6>@lang('admin/categories/general.about_asset_categories')</h6>
-    <p>@lang('admin/categories/general.about_asset_categories_message') </p>
+    <h6>@lang('base.category_about')</h6>
+    <p>@lang('admin/categories/message.about') </p>
 
 </div>
 </div>
