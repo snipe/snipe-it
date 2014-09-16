@@ -91,7 +91,7 @@ class ServiceAgreementsSeeder extends Seeder
         );                 
         
         // Delete all the old data
-        DB::table('serviceagreements')->truncate();
+        DB::table('service_agreements')->truncate();
 
         // Insert the new posts
         License::insert($service);
