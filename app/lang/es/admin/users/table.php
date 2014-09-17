@@ -1,0 +1,30 @@
+<?php
+
+return array(
+
+    'activated'  			=> 'Activo',
+    'allow'  				=> 'Permitir',
+    'checkedout'  			=> 'Equipos',
+    'created_at' 			=> 'Creado',
+    'createuser' 			=> 'Crear Usuario',
+    'deny'  				=> 'Denegar',
+    'email'      			=> 'Email',
+    'employee_num'      	=> 'No. Empleado',
+    'first_name' 			=> 'Nombre',
+    'groupnotes'			=> 'Selecciona grupo que se asigna al usuario, recuerda que el usuario tiene los permisos del grupo al que se asigna.',
+    'id'         			=> 'Id',
+    'inherit'  				=> 'Hereda de',
+    'job' 					=> 'Departamento',
+    'last_login'  			=> 'Ultimo Login',
+    'last_name'  			=> 'Apellidos',
+    'location'  			=> 'Localización',
+    'manager' 				=> 'Responsable',
+    'name' 					=> 'Usuario',
+    'password_confirm' 		=> 'Confirmar Password',
+    'password' 				=> 'Password',
+    'phone'  				=> 'Teléfono',
+    'title' 				=> 'Puesto',
+    'updateuser' 			=> 'Actualizar Usuario',
+    'cloneuser'                         => 'Clonar Usuario',
+    'viewusers' 			=> 'Ver Usuarios',
+);

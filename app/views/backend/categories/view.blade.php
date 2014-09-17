@@ -29,8 +29,7 @@
 		<!-- checked out family table -->
 		@if ($category->has_models() > 0)
 		<table id="example">
-            <thead>
-                
+                    <thead>
 			<thead>
 				<tr role="row">
                                     <th class="col-md-4"><span class="line"></span>@lang('base.model_shortname')</th>
