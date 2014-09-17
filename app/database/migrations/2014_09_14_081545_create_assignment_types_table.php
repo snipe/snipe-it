@@ -45,6 +45,8 @@ class CreateAssignmentTypesTable extends Migration {
 		// Add family_id to licenses table
                     $table->integer('assignment_type_id')->nullable();
 		});
+                
+                DB::statement('ALTER TABLE models MODIFY column notes text NULL');
 	}
 
 	/**

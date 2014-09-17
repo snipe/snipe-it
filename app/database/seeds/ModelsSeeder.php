@@ -20,6 +20,7 @@ class ModelsSeeder extends Seeder
             'depreciation_id'           => 1,
             'user_id'	 		=> 1,
             'eol' 			=> '36',
+            'notes'                     => 'Added by seeder.',
         );
 
         $models[] = array(
@@ -32,6 +33,7 @@ class ModelsSeeder extends Seeder
             'depreciation_id'           => 1,
             'user_id' 			=> 1,
             'eol' 			=> '36',
+            'notes'                     => 'Added by seeder.',
         );
 
         $models[] = array(
@@ -44,6 +46,7 @@ class ModelsSeeder extends Seeder
             'depreciation_id'           => 1,
             'user_id' 			=> 1,
             'eol' 			=> '48',
+            'notes'                     => 'Added by seeder.',            
         );
 
         $models[] = array(
@@ -56,6 +59,7 @@ class ModelsSeeder extends Seeder
             'depreciation_id'           => 1,
             'user_id' 			=> 1,
             'eol' 			=> '36',
+            'notes'                     => 'Added by seeder.',            
         );
 
         $models[] = array(
@@ -68,6 +72,7 @@ class ModelsSeeder extends Seeder
             'depreciation_id'           => 1,
             'user_id' 			=> 1,
             'eol' 			=> '60',
+            'notes'                     => 'Added by seeder.',            
         );
 
         $models[] = array(
@@ -80,6 +85,7 @@ class ModelsSeeder extends Seeder
             'depreciation_id'           => 1,
             'user_id' 			=> 1,
             'eol' 			=> '60',
+            'notes'                     => 'Added by seeder.',            
         );
 
         $models[] = array(
@@ -92,6 +98,7 @@ class ModelsSeeder extends Seeder
             'depreciation_id'           => 1,
             'user_id' 			=> 1,
             'eol' 			=> '60',
+            'notes'                     => 'Added by seeder.',            
         );
 
         $models[] = array(
@@ -104,6 +111,7 @@ class ModelsSeeder extends Seeder
             'depreciation_id'           => 1,
             'user_id' 			=> 1,
             'eol' 			=> '60',
+            'notes'                     => 'Added by seeder.',
         );
                 
         // Delete all the old data

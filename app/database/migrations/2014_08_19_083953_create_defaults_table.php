@@ -27,7 +27,7 @@ class CreateDefaultsTable extends Migration {
                 
 		Schema::table('models', function(Blueprint $table)
 		{
-                        $table->text('notes');
+                        $table->text('notes')->nullable();
 
 		});
                 
