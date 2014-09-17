@@ -14,7 +14,7 @@
 
     <div class="pull-right">
         <a href="{{ route('reports/export') }}" class="btn btn-flat gray pull-right"><i class="icon-download-alt"></i>
-        @lang('admin/hardware/table.dl_csv')</a>
+        @lang('actions.download')</a>
         </div>
 
     <h3>@lang('base.depreciation_report')</h3>
@@ -25,19 +25,19 @@
 <table id="example">
         <thead>
             <tr role="row">
-            <th class="col-sm-1">@lang('admin/hardware/table.asset_tag')</th>
-            <th class="col-sm-1">@lang('admin/hardware/table.title')</th>
+            <th class="col-sm-1">@lang('general.asset_tag')</th>
+            <th class="col-sm-1">@lang('general.hardware')</th>
             @if (Setting::getSettings()->display_asset_name)
                 <th class="col-sm-1">@lang('general.name')</th>
             @endif
-            <th class="col-sm-1">@lang('admin/hardware/table.serial')</th>
-            <th class="col-sm-1">@lang('admin/hardware/table.checkoutto')</th>
-            <th class="col-sm-1">@lang('admin/hardware/table.location')</th>
-            <th class="col-sm-1">@lang('admin/hardware/table.purchase_date')</th>
-            <th class="col-sm-1">@lang('admin/hardware/table.eol')</th>
-            <th class="col-sm-1">@lang('admin/hardware/table.purchase_cost')</th>
-            <th class="col-sm-1">@lang('admin/hardware/table.book_value')</th>
-            <th class="col-sm-1">@lang('admin/hardware/table.diff')</th>
+            <th class="col-sm-1">@lang('general.serialnumber')</th>
+            <th class="col-sm-1">@lang('general.assignedto')</th>
+            <th class="col-sm-1">@lang('base.location')</th>
+            <th class="col-sm-1">@lang('general.purchasedate')</th>
+            <th class="col-sm-1">@lang('general.eol')</th>
+            <th class="col-sm-1">@lang('general.purchasecost')</th>
+            <th class="col-sm-1">@lang('admin/hardware/form.book_value')</th>
+            <th class="col-sm-1">@lang('admin/hardware/form.diff')</th>
         </tr>
     </thead>
     <tbody>

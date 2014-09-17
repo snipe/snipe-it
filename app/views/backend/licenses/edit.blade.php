@@ -152,7 +152,7 @@
 
             <!-- Order Number -->
             <div class="form-group {{ $errors->has('order_number') ? ' has-error' : '' }}">
-                {{ Form::label_for($license, 'order_number', Lang::get('admin/licenses/form.order'), array('class' => 'col-md-2 control-label')); }} 
+                {{ Form::label_for($license, 'order_number', Lang::get('general.ordernumber'), array('class' => 'col-md-2 control-label')); }} 
                 
                 <div class="col-md-7">
                         <input class="form-control" type="text" name="order_number" id="order_number" value="{{ Input::old('order_number', $license->order_number) }}" />
