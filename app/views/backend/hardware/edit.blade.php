@@ -74,7 +74,7 @@
 
             <!-- Serial -->
             <div class="form-group {{ $errors->has('serial') ? ' has-error' : '' }}">
-                {{ Form::label_for($asset, 'serial', Lang::get('admin/hardware/form.serial'), array('class' => 'col-md-2 control-label')); }} 
+                {{ Form::label_for($asset, 'serial', Lang::get('general.serialnumber'), array('class' => 'col-md-2 control-label')); }} 
                 
                 <div class="col-md-7">
                     <input class="form-control" type="text" name="serial" id="serial" value="{{{ Input::old('serial', $asset->serial) }}}" />
@@ -107,6 +107,16 @@
                 <div class="col-md-7">
                     {{ Form::select('supplier_id', $supplier_list , Input::old('supplier_id', $asset->supplier_id), array('class'=>'select2', 'style'=>'min-width:350px')) }}
                     {{ $errors->first('supplier_id', '<span class="alert-msg"><i class="icon-remove-sign"></i> :message</span>') }}
+                </div>
+            </div>
+            
+            <!-- Service Agreement -->
+            <div class="form-group {{ $errors->has('service_agreement_id') ? ' has-error' : '' }}">
+                {{ Form::label_for($asset, 'service_agreement_id', Lang::get('base.serviceagreement'), array('class' => 'col-md-2 control-label')); }} 
+                
+                <div class="col-md-7">
+                    {{ Form::select('service_agreement_id', $service_agreement_list , Input::old('service_agreement_id', $asset->service_agreement_id), array('class'=>'select2', 'style'=>'min-width:350px')) }}
+                    {{ $errors->first('service_agreement_id', '<span class="alert-msg"><i class="icon-remove-sign"></i> :message</span>') }}
                 </div>
             </div>
 

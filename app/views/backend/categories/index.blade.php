@@ -23,8 +23,8 @@
         <table id="example">
         <thead>
             <tr role="row">
-                <th class="col-md-4">@lang('admin/categories/form.name')</th>
-                <th class="col-md-3">@lang('admin/categories/form.count')</th>
+                <th class="col-md-4">@lang('base.category_shortname')</th>
+                <th class="col-md-3">@lang('general.count')</th>
                 <th class="col-md-1 actions">@lang('actions.actions')</th>
             </tr>
         </thead>

@@ -141,17 +141,17 @@
                     <ul class="dropdown-menu">
                         <li{{ (Request::is('hardware/models*') ? ' class="active"' : '') }}>
                             <a href="{{ URL::to('hardware/models') }}">
-                                <i class="icon-th"></i> @lang('base.models')
+                                <i class="icon-desktop"></i> @lang('base.models')
                             </a>
                         </li>
                         <li{{ (Request::is('admin/settings/categories*') ? ' class="active"' : '') }}>
                             <a href="{{ URL::to('admin/settings/categories') }}">
-                                <i class="icon-check"></i> @lang('base.categories')
+                                <i class="icon-sitemap"></i> @lang('base.categories')
                             </a>
                         </li>
                         <li{{ (Request::is('admin/settings/manufacturers*') ? ' class="active"' : '') }}>
                             <a href="{{ URL::to('admin/settings/manufacturers') }}">
-                                <i class="icon-briefcase"></i> @lang('base.manufacturers')
+                                <i class="icon-cog"></i> @lang('base.manufacturers')
                             </a>
                         </li>
                         <li{{ (Request::is('admin/settings/families*') ? ' class="active"' : '') }}>
@@ -159,14 +159,19 @@
                                 <i class="icon-flag"></i> @lang('base.families')
                             </a>
                         </li>
+                        <li{{ (Request::is('admin/serviceagreementtypes*') ? ' class="active"' : '') }}>
+                            <a href="{{ URL::to('admin/serviceagreementtypes') }}">
+                                <i class="icon-dashboard"></i> @lang('base.serviceagreementtypes_shortname')
+                            </a>
+                        </li>                        
                         <li{{ (Request::is('admin/settings/suppliers*') ? ' class="active"' : '') }}>
                             <a href="{{ URL::to('admin/settings/suppliers') }}">
-                                <i class="icon-credit-card"></i> @lang('base.suppliers')
+                                <i class="icon-truck"></i> @lang('base.suppliers')
                             </a>
                         </li>
                         <li{{ (Request::is('admin/settings/statuslabels*') ? ' class="active"' : '') }}>
                             <a href="{{ URL::to('admin/settings/statuslabels') }}">
-                                <i class="icon-list"></i> @lang('base.statuslabels')
+                                <i class="icon-check"></i> @lang('base.statuslabels')
                             </a>
                         </li>
                         <li{{ (Request::is('admin/settings/depreciations*') ? ' class="active"' : '') }}>
@@ -181,7 +186,7 @@
                         </li>
                         <li{{ (Request::is('admin/settings/entities*') ? ' class="active"' : '') }}>
                             <a href="{{ URL::to('admin/settings/entities') }}">
-                                <i class="icon-tasks"></i> @lang('base.entities')
+                                <i class="icon-building"></i> @lang('base.entities')
                             </a>
                         </li>
                         <li{{ (Request::is('admin/groups*') ? ' class="active"' : '') }}>
@@ -198,7 +203,7 @@
                         <li class="divider"></li>
                         <li>
                             <a href="{{ route('app') }}">
-                                <i class="icon-cogs"></i> @lang('base.settings')
+                                <i class="icon-wrench"></i> @lang('base.settings')
                             </a>                            
                         </li>
                         
@@ -301,7 +306,7 @@
             </li>
             <li{{ (Request::is('admin/users*') ? ' class="active"><div class="pointer"><div class="arrow"></div><div class="arrow_border"></div></div>' : '>') }}
                 <a href="{{ URL::to('admin/users') }}">
-                    <i class="icon-group"></i>
+                    <i class="icon-user"></i>
                     <span>@lang('base.users_shortname')</span>
                 </a>
             </li>

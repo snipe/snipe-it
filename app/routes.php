@@ -65,9 +65,21 @@ Route::group(array('prefix' => 'admin'), function () {
         Route::post('{serviceagreementId}/edit', 'Controllers\Admin\ServiceAgreementsController@postEdit');
         Route::get('{serviceagreementId}/view', array('as' => 'view/serviceagreement', 'uses' => 'Controllers\Admin\ServiceAgreementsController@getView'));
         Route::get('{serviceagreementId}/delete', array('as' => 'delete/serviceagreement', 'uses' => 'Controllers\Admin\ServiceAgreementsController@getDelete'));
-    
         Route::get('create', array('as' => 'create/serviceagreement', 'uses' => 'Controllers\Admin\ServiceAgreementsController@getCreate'));
         Route::post('create', 'Controllers\Admin\ServiceAgreementsController@postCreate');
+        Route::get('purge',  array('as' => 'purge/serviceagreements', 'uses' => 'Controllers\Admin\ServiceAgreementsController@getPurge'));
+        Route::get('{serviceagreementId}/restore',  array('as' => 'restore/serviceagreement', 'uses' => 'Controllers\Admin\ServiceAgreementsController@getRestore'));
+    });
+    
+    # Service Agreement Types
+    Route::group(array('prefix' => 'serviceagreementtypes'), function () {
+        Route::get('/', array('as' => 'serviceagreementtypes', 'uses' => 'Controllers\Admin\ServiceAgreementTypesController@getIndex'));
+        Route::get('{serviceagreementtypeId}/edit', array('as' => 'update/serviceagreementtype', 'uses' => 'Controllers\Admin\ServiceAgreementTypesController@getEdit'));
+        Route::post('{serviceagreementtypeId}/edit', 'Controllers\Admin\ServiceAgreementTypesController@postEdit');
+        Route::get('{serviceagreementtypeId}/view', array('as' => 'view/serviceagreementtype', 'uses' => 'Controllers\Admin\ServiceAgreementTypesController@getView'));
+        Route::get('{serviceagreementtypeId}/delete', array('as' => 'delete/serviceagreementtype', 'uses' => 'Controllers\Admin\ServiceAgreementTypesController@getDelete'));  
+        Route::get('create', array('as' => 'create/serviceagreementtype', 'uses' => 'Controllers\Admin\ServiceAgreementTypesController@getCreate'));
+        Route::post('create', 'Controllers\Admin\ServiceAgreementTypesController@postCreate');
         
     });
     

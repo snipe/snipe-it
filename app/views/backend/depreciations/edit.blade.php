@@ -15,6 +15,8 @@
 {{-- Page content --}}
 @section('content')
 
+<form class="form-horizontal" method="post" action="" autocomplete="off">
+    
 <div class="row header">
     <div class="col-md-10">
             
@@ -37,13 +39,12 @@
 
 <div class="col-md-12">
 
-<form class="form-horizontal" method="post" action="" autocomplete="off">
     <!-- CSRF Token -->
     <input type="hidden" name="_token" value="{{ csrf_token() }}" />
 
             <!-- Name -->
             <div class="form-group {{ $errors->has('name') ? ' has-error' : '' }}">
-                <label for="name" class="col-md-2 control-label">@lang('admin/depreciations/form.name')
+                <label for="name" class="col-md-2 control-label">@lang('general.name')
                  <i class='icon-asterisk'></i></label>
                  </label>
                     <div class="col-md-5">
@@ -54,10 +55,10 @@
 
             <!-- Name -->
             <div class="form-group {{ $errors->has('months') ? ' has-error' : '' }}">
-                <label for="months" class="col-md-2 control-label">@lang('admin/depreciations/form.months')
+                <label for="months" class="col-md-2 control-label">@lang('general.months')
                  <i class='icon-asterisk'></i></label>
-                    <div class="col-md-2">
-                        <input class="form-control" type="text" name="months" id="months" value="{{{ Input::old('name', $depreciation->months) }}}" />
+                    <div class="col-md-1">
+                        <input class="col-md-1 form-control" type="text" name="months" id="months" value="{{{ Input::old('name', $depreciation->months) }}}" />
                         {{ $errors->first('months', '<span class="alert-msg"><i class="icon-remove-sign"></i> :message</span>') }}
                     </div>
             </div>
@@ -71,8 +72,10 @@
                 </div>
             </div>
 
-        </form>
+
 
 </div>
+
+</form>
 
 @stop

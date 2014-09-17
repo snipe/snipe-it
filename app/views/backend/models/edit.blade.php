@@ -14,6 +14,8 @@
 
 @section('content')
 
+<form class="form-horizontal" method="post" action="" autocomplete="off">
+    
 <div class="row header">
     <div class="col-md-10">
             
@@ -38,7 +40,7 @@
 
 <div class="col-md-12 column">
     
-<form class="form-horizontal" method="post" action="" autocomplete="off">
+
     <!-- CSRF Token -->
     <input type="hidden" name="_token" value="{{ csrf_token() }}" />
 
@@ -124,7 +126,9 @@
                     </div>
                 </div>
             
+</div>
+</div>
+    
 </form>
-</div>
-</div>
+
 @stop

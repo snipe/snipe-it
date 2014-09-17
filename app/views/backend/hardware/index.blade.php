@@ -68,12 +68,12 @@
                     @if (Setting::getSettings()->display_asset_name)
                     <th class="col-md-1" bSortable="true">@lang('general.name')</th>                
                     @endif
-                    <th class="col-md-1" bSortable="true">@lang('admin/hardware/form.serial')</th>                    
-                    <th class="col-md-1" bSortable="true">@lang('admin/hardware/form.checkoutto')</th>
-                    <th class="col-md-1" bSortable="true">@lang('base.statuslabels')</th>                    
+                    <th class="col-md-1" bSortable="true">@lang('general.serialnumber')</th>                    
+                    <th class="col-md-1" bSortable="true">@lang('general.assignedto')</th>
+                    <th class="col-md-1" bSortable="true">@lang('base.statuslabels_shortname')</th>                    
                     <th class="col-md-1">@lang('general.eol')</th>
-                    <th class="col-md-1">@lang('base.category')</th>
-                    <th class="col-md-1">@lang('admin/hardware/form.change')</th>
+                    <th class="col-md-1">@lang('base.category_shortname')</th>
+                    <th class="col-md-1">@lang('general.in_out')</th>
                     <th class="col-md-1 actions" bSortable="false">@lang('actions.actions')</th>
                 </tr>
             </thead>

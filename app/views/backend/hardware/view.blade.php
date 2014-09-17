@@ -67,7 +67,7 @@
             @if ($asset->model->eol)
                 <strong>@lang('admin/hardware/form.eol_rate'): </strong>
                 {{{ $asset->model->eol }}}
-                @lang('admin/hardware/form.months') <br>
+                @lang('general.months') <br>
                 <strong>@lang('admin/hardware/form.eol_date'): </strong>
                 {{{ $asset->eol_date() }}} <br.
                 @if ($asset->months_until_eol())
@@ -93,7 +93,7 @@
             @endif
             
             @if ($asset->order_number)
-                <strong>@lang('admin/hardware/form.order'):</strong>
+                <strong>@lang('general.ordernumber'):</strong>
                 {{{ $asset->order_number }}} <br>
             @endif
             
@@ -145,7 +145,7 @@
 
 		<!-- Licenses assets table -->
 
-        <h6>Software Assigned to {{{ $asset->name }}}</h6>
+        <h6>@lang('base.licenses')</h6>
 		<br>
 		<!-- checked out assets table -->
 		@if (count($asset->licenses) > 0)
@@ -177,7 +177,8 @@
 		@endif
 
         <!-- checked out assets table -->
-
+        <h6>@lang('general.history')</h6>
+		<br>
         <table class="table table-hover">
             <thead>
                 <tr>
@@ -216,7 +217,7 @@
                 <tr>
                     <td>{{ $asset->created_at }}</td>
                     <td>
-                    @if ($asset->adminuser->id) {{{ $asset->adminuser->fullName() }}}
+                    @if ($asset->adminuser) {{{ $asset->adminuser->fullName() }}}
                     @else
                     @lang('general.unknown_admin')
                     @endif

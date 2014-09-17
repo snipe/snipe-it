@@ -9,6 +9,8 @@
 return array(
 
     'actions'                   => 'Actions',
+    'allow'                     => 'Allow',
+    'deny'                      => 'Deny',
     'save'                      => 'Save',
     'submit'                    => 'Save',
     'restore'                   => 'Restore',

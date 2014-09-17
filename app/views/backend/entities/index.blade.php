@@ -24,9 +24,9 @@
 <table id="example">
     <thead>
         <tr role="row">
-            <th class="col-md-3">@lang('general.common_name')</th>
+            <th class="col-md-3">@lang('base.entity')</th>
             <th class="col-md-3">@lang('general.name')</th>
-            <th class="col-md-2">@lang('base.entity_use')</th>
+            <th class="col-md-2">@lang('base.locations')</th>
             <th class="col-md-2 actions">@lang('actions.actions')</th>
         </tr>
     </thead>

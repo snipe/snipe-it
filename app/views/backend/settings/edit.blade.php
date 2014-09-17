@@ -10,8 +10,9 @@
 {{-- Page content --}}
 @section('content')
 
-    <form class="form-horizontal" method="post" action="" autocomplete="off">
-<!-- header -->
+<form class="form-horizontal" method="post" action="" autocomplete="off">
+
+    <!-- header -->
 <div class="row header">
     <div class="col-md-10">
             

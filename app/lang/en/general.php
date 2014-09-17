@@ -29,6 +29,7 @@ return array(
     'password'                          => 'Password',
     'password_confirm'                  => 'Confirm Password',
     'permissions'                       => 'Permissions',
+    'assignedto'                        => 'Assigned to',
     
     // Common form elements    
     'id'                                => 'ID',
@@ -50,7 +51,9 @@ return array(
     'moreinfo'				=> 'More Info',
     'strict_assignment'                 => 'Strict Assignment',
     'notes'  				=> 'Notes',
-    'eol'                               => 'EOL',   
+    'eol'                               => 'EOL',
+    'contractnumber'                    => 'Contract Number',
+    'ordernumber'                       => 'Order Number',
     'asset_tag'				=> 'Asset Tag',
     'purchasedate'                      => 'Purchase Date',
     'purchasecost'                      => 'Purchase Cost',

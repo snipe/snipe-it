@@ -22,9 +22,9 @@
             <table id="example">
                 <thead>
                     <tr role="row">
-                        <th class="col-md-4">@lang('general.name')</th>
-                        <th class="col-md-2">@lang('admin/manufacturers/form.hardware_count')</th>
-                        <th class="col-md-2">@lang('admin/manufacturers/form.software_count')</th>
+                        <th class="col-md-4">@lang('base.manufacturer')</th>
+                        <th class="col-md-2">@lang('base.assets_shortname')</th>
+                        <th class="col-md-2">@lang('base.licenses_shortname')</th>
                         <th class="col-md-1 actions">@lang('actions.actions')</th>
                     </tr>
                 </thead>

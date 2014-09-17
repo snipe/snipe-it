@@ -199,6 +199,21 @@ return array(
     'serviceagreement_checkout'     => 'Check-out Service Agreement',
     'serviceagreement_checkin'      => 'Check-in Service Agreement',
     
+    // Service Agreement Type Types Types
+    'serviceagreementtype'              => 'Service Agreement Type',
+    'serviceagreementtypes'             => 'Service Agreement Types',
+    'serviceagreementtype_create'       => 'Add New Service Agreement Type',
+    'serviceagreementtype_update'       => 'Edit Service Agreement Type',    
+    'serviceagreementtype_clone'        => 'Copy Service Agreement Type', 
+    'serviceagreementtype_about'        => 'About Service Types',
+    'serviceagreementtype_use'          => 'Used by this service agreement type',
+    'serviceagreementtype_all'          => 'All Service Agreement Types',
+    'serviceagreementtype_total'        => 'Total Service Agreement Type',
+    'serviceagreementtype_available'    => 'Service Agreement Types Available',
+    'serviceagreementtype_shortname'    => 'Service Type',
+    'serviceagreementtypes_shortname'   => 'Service Types',
+    'serviceagreementtype_report'       => 'Service Agreement Type Report',  
+    
     // Asset Statuses
     'statuslabel'              => 'Asset Status',
     'statuslabels'             => 'Asset Statuses',

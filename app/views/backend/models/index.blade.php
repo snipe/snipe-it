@@ -22,11 +22,11 @@
 <table id="example">
     <thead>
         <tr role="row">
-            <th class="col-md-3">@lang('base.models')</th>
+            <th class="col-md-3">@lang('base.model_shortname')</th>
             <th class="col-md-2">@lang('general.modelnumber')</th>
             <th class="col-md-1">@lang('general.count')</th>
             <!--<th class="col-md-2">@lang('base.depreciation')</th>-->
-            <th class="col-md-2">@lang('base.category')</th>
+            <th class="col-md-2">@lang('base.category_shortname')</th>
             <!--<th class="col-md-2">@lang('general.eol')</th>-->
             <th class="col-md-2 actions">@lang('actions.actions')</th>
         </tr>

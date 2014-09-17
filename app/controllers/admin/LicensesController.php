@@ -60,6 +60,7 @@ class LicensesController extends AdminController
         $manufacturer_list = array('' => '') + Manufacturer::orderBy('name', 'asc')->lists('name', 'id');
         $family_list = array('' => '') + Family::orderBy('common_name', 'asc')->lists('common_name', 'id');
         $location_list = array('' => '') + Location::orderBy('name', 'asc')->lists('name', 'id');
+        $service_agreement_list = array('' => '') + \ServiceAgreement::orderBy('name', 'asc')->lists('name', 'id');
         
         // Show the page
         $depreciation_list = array('0' => Lang::get('admin/licenses/form.no_depreciation')) + Depreciation::lists('name', 'id');
@@ -70,6 +71,7 @@ class LicensesController extends AdminController
                 ->with('location_list',$location_list)
                 ->with('manufacturer_list',$manufacturer_list)
                 ->with('depreciation_list',$depreciation_list)
+                ->with('service_agreement_list',$service_agreement_list)
                 ->with('license',new License);
     }
 
@@ -143,6 +145,12 @@ class LicensesController extends AdminController
             if (($license->purchase_cost == "") || ($license->purchase_cost == "0.00")) {
                 $license->purchase_cost = NULL;
             }
+            
+            if (e(Input::get('service_agreement_id')) == '') {
+                $license->service_agreement_id =  0;
+            } else {
+                $license->service_agreement_id        = e(Input::get('service_agreement_id'));
+            }
 
             // Was the license created?
             if($license->save()) {
@@ -198,7 +206,8 @@ class LicensesController extends AdminController
         $manufacturer_list = array('' => '') + Manufacturer::orderBy('name', 'asc')->lists('name', 'id');
         $family_list = array('' => '') + Family::orderBy('common_name', 'asc')->lists('common_name', 'id');
         $location_list = array('' => '') + Location::orderBy('name', 'asc')->lists('name', 'id');
-         
+        $service_agreement_list = array('' => '') + \ServiceAgreement::orderBy('name', 'asc')->lists('name', 'id');
+        
         // Show the page
         $license_options = array('' => 'Top Level') + DB::table('assets')->where('id', '!=', $licenseId)->lists('name', 'id');
         $depreciation_list = array('0' => Lang::get('admin/licenses/form.no_depreciation')) + Depreciation::lists('name', 'id');
@@ -208,6 +217,7 @@ class LicensesController extends AdminController
                 ->with('family_list',$family_list)
                 ->with('location_list',$location_list)
                 ->with('manufacturer_list',$manufacturer_list)
+                ->with('service_agreement_list',$service_agreement_list)
                 ->with('depreciation_list',$depreciation_list);
     }
 
@@ -285,6 +295,12 @@ class LicensesController extends AdminController
                     $license->manufacturer_id =  NULL;
             } else {
                     $license->manufacturer_id = e(Input::get('manufacturer_id'));
+            }
+            
+            if (e(Input::get('service_agreement_id')) == '') {
+                $license->service_agreement_id =  0;
+            } else {
+                $license->service_agreement_id        = e(Input::get('service_agreement_id'));
             }
 
             //Are we changing the total number of seats?
@@ -409,6 +425,17 @@ class LicensesController extends AdminController
         
         
         return Redirect::to('admin/licenses')->with('success', Lang::get('message.restore.success'));
+    }
+    
+    public function getPurge()
+    {
+        //delete all licenses
+        $licenses=License::onlyTrashed()->forceDelete();
+        
+        //delete all seats
+        $licenceseats=LicenseSeat::onlyTrashed()->forceDelete();
+        
+        return Redirect::to('admin/licenses')->with('success', 'Purge Submitted');
     }
 
     /**
@@ -664,18 +691,9 @@ class LicensesController extends AdminController
                 ->with('location_list',$location_list)
                 ->with('manufacturer_list',$manufacturer_list)
                 ->with('depreciation_list',$depreciation_list)
+                ->with('clone_license',$license_to_clone)
                 ->with('license',$license);
 
     }
     
-    public function getPurge()
-    {
-        //delete all licenses
-        $licenses=License::onlyTrashed()->forceDelete();
-        
-        //delete all seats
-        $licenceseats=LicenseSeat::onlyTrashed()->forceDelete();
-        
-        return Redirect::to('admin/licenses')->with('success', 'Purge Submitted');
-    }
 }

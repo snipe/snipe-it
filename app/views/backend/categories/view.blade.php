@@ -28,11 +28,13 @@
 		<br> 
 		<!-- checked out family table -->
 		@if ($category->has_models() > 0)
-		<table class="table table-hover">
+		<table id="example">
+            <thead>
+                
 			<thead>
-				<tr>
-                                    <th class="col-md-4"><span class="line"></span>@lang('admin/categories/form.name')</th>
-                                    <th class="col-md-4"><span class="line"></span>@lang('admin/categories/form.count')</th>
+				<tr role="row">
+                                    <th class="col-md-4"><span class="line"></span>@lang('base.model_shortname')</th>
+                                    <th class="col-md-4"><span class="line"></span>@lang('general.count')</th>
 				</tr>
 			</thead>
 			<tbody>

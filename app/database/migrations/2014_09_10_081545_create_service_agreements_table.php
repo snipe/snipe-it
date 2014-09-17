@@ -41,6 +41,21 @@ class CreateServiceAgreementsTable extends Migration {
 			$table->timestamps();
                         $table->softDeletes();
 		});
+                
+                
+            //Add service agreement id to assets table
+                Schema::table('assets', function(Blueprint $table)
+		{
+		// Add location_id to assets table
+                    $table->smallInteger('service_agreement_id')->nullable();
+		});
+            
+            //Add service agreement id to licenses table
+                Schema::table('licenses', function(Blueprint $table)
+		{
+		// Add location_id to assets table
+                    $table->smallInteger('service_agreement_id')->nullable();
+		});
 	}
 
 	/**
@@ -52,6 +67,20 @@ class CreateServiceAgreementsTable extends Migration {
 	{
 		Schema::drop('service_agreements');
                 Schema::drop('service_agreement_types');
-	}
 
+            //Add service agreement id to assets table
+                Schema::table('assets', function(Blueprint $table)
+		{
+		// Add location_id to assets table
+                    $table->dropColumn('service_agreement_id');
+		});
+            
+            //Add service agreement id to licenses table
+                Schema::table('licenses', function(Blueprint $table)
+		{
+		// Add location_id to assets table
+                    $table->dropColumn('service_agreement_id');
+		});
+                
+        }
 }

@@ -64,9 +64,9 @@
     <thead>
         <tr role="row">
             <th class="col-md-3" tabindex="0" rowspan="1" colspan="1">@lang('general.name')</th>
-            <th class="col-md-3" tabindex="0" rowspan="1" colspan="1">@lang('admin/licenses/form.serial')</th>
-            <th class="col-md-2" tabindex="0" rowspan="1" colspan="1">@lang('admin/licenses/form.hardware')</th>
-            <th class="col-md-2" tabindex="0" rowspan="1" colspan="1">@lang('admin/licenses/form.assigned_to')</th>
+            <th class="col-md-3" tabindex="0" rowspan="1" colspan="1">@lang('general.serialnumber')</th>
+            <th class="col-md-2" tabindex="0" rowspan="1" colspan="1">@lang('general.hardware')</th>
+            <th class="col-md-2" tabindex="0" rowspan="1" colspan="1">@lang('general.assignedto')</th>
             <th class="col-md-1 actions" tabindex="0" rowspan="1" colspan="1">@lang('general.in_out')</th>
             <th class="col-md-1 actions" tabindex="0" rowspan="1" colspan="1">@lang('actions.actions')</th>
         </tr>

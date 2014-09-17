@@ -6,7 +6,7 @@ class ServiceAgreement extends Elegant
     protected $softDelete = true;
     // Declare the rules for the form validation
     protected $rules = array(
-        'name'                      => 'required|alpha_space|min:3|max:255|unique:models,name,{id}',       
+        'name'                      => 'required|alpha_space|min:3|max:255|unique:service_agreements,name,{id}',       
         'user_id'                   => 'integer',  
         'term_months'               => 'required|integer|max:100',  
         'supplier_id'               => 'integer', 
@@ -23,6 +23,21 @@ class ServiceAgreement extends Elegant
     public function location()
     {
         return $this->belongsTo('Location','location_id');
+    }
+    
+    public function serviceagreementtype()
+    {
+        return $this->belongsTo('ServiceAgreementType','service_agreement_type_id');
+    }
+    
+    public function asset()
+    {
+        return $this->hasMany('Asset', 'service_agreement_id');
+    }
+    
+     public function license()
+    {
+        return $this->hasMany('License', 'service_agreement_id');
     }
     
 }

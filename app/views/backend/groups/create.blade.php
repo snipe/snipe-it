@@ -56,13 +56,13 @@
                                 <label class="radio-inline">
                                     <input type="radio" value="1" id="{{{ $permission['permission'] }}}_allow" 
                                            name="permissions[{{{ $permission['permission'] }}}]"{{ (array_get($selectedPermissions, $permission['permission']) === 1 ? ' 
-                                           checked="checked"' : '') }}> @lang('admin/groups/form.allow')
+                                           checked="checked"' : '') }}> @lang('actions.allow')
                                 </label>
 
                                 <label class="radio-inline">
                                     <input type="radio" value="0" id="{{{ $permission['permission'] }}}_deny" 
                                            name="permissions[{{{ $permission['permission'] }}}]"{{ ( ! array_get($selectedPermissions, $permission['permission']) ? ' 
-                                           checked="checked"' : '') }}> @lang('admin/groups/form.deny')
+                                           checked="checked"' : '') }}> @lang('actions.deny')
                                 </label>
                             </div>
                         </div>

@@ -25,7 +25,7 @@
         <tr role="row">
             <th class="col-md-4">@lang('general.common_name')</th>
             <th class="col-md-2">@lang('general.name')</th>
-            <th class="col-md-2">@lang('base.family_use')</th>
+            <th class="col-md-2">@lang('general.count')</th>
             <th class="col-md-1 actions">@lang('actions.actions')</th>
         </tr>
     </thead>

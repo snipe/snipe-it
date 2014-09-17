@@ -50,7 +50,7 @@
                             <thead>
                                 <tr role="row">
                                         <th class="col-md-3">@lang('general.name')</th>
-                                        <th class="col-md-3">@lang('base.asset_tag')</th>
+                                        <th class="col-md-3">@lang('general.asset_tag')</th>
                                         <th class="col-md-3">@lang('base.user')</th>
                                         <th class="col-md-2">@lang('actions.actions')</th>
                                     </tr>

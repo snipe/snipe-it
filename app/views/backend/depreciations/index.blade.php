@@ -25,8 +25,8 @@
                     <table id="example">
                         <thead>
                             <tr role="row">
-                                <th class="col-md-4">@lang('admin/depreciations/form.name')</th>
-                                <th class="col-md-2">@lang('admin/depreciations/table.term')</th>
+                                <th class="col-md-4">@lang('general.name')</th>
+                                <th class="col-md-2">@lang('base.depreciation_shortname')</th>
                                 <th class="col-md-2 actions">@lang('actions.actions')</th>
                             </tr>
                         </thead>
@@ -34,7 +34,7 @@
                             @foreach ($depreciations as $depreciation)
                             <tr>
                                 <td>{{ $depreciation->name }}</td>
-                                <td>{{ $depreciation->months }} @lang('admin/depreciations/form.months') </td>
+                                <td>{{ $depreciation->months }} @lang('general.months') </td>
                                 <td>
                                 <a href="{{ route('update/depreciations', $depreciation->id) }}" class="btn btn-warning"><i class="icon-pencil icon-white"></i></a>
 <a data-html="false" class="btn delete-asset btn-danger" data-toggle="modal" href="{{ route('delete/depreciations', $depreciation->id) }}" data-content="@lang('admin/depreciations/message.delete.confirm')"

@@ -59,7 +59,7 @@
                 
                 @if ($serviceagreement->service_agreement_type_id)
                     <div class="col-md-6"><strong>@lang('admin/serviceagreements/form.service_agreement_type_id'): </strong> 
-                        {{ $serviceagreement->service_agreement_type_id }}
+                        {{ $serviceagreement->serviceagreementtype->name }}
                     </div>
                 @endif
                 
@@ -74,9 +74,57 @@
                         {{ $serviceagreement->purchase_cost }}
                     </div>
                 @endif
+                
+                @if ($serviceagreement->notes)
+                    <div class="col-md-6"><strong>@lang('admin/serviceagreements/form.notes'): </strong> 
+                        {{ $serviceagreement->notes }}
+                    </div>
+                @endif
             </div>       
             
         </div>
+        
+        <div class="col-md-9 bio">
+            
+             @if ($serviceagreement->license()->count() > 0)
+             <hr>
+                <h6 class="name">@lang('base.licenses')</h6>
+		<table class="table table-hover">
+			<thead>
+				<tr>
+                                    <th class="col-md-4"><span class="line"></span>@lang('general.name')</th>					
+				</tr>
+			</thead>
+			<tbody>
+				@foreach ($serviceagreement->license as $license)
+				<tr>
+					<td>{{ HTML::linkAction('view/license', $license->name, array($license->id)) }} </td>
+				</tr>
+				@endforeach
+			</tbody>
+		</table>
+             @endif
+             
+             
+             @if ($serviceagreement->asset()->count() > 0)
+             <hr>
+                <h6 class="name">@lang('base.assets') </h6>
+		<table class="table table-hover">
+			<thead>
+				<tr>
+                                    <th class="col-md-4"><span class="line"></span>@lang('general.name')</th>					
+				</tr>
+			</thead>
+			<tbody>
+				@foreach ($serviceagreement->asset as $asset)
+				<tr>
+					<td>{{ HTML::linkAction('view/hardware', $asset->name, array($asset->id)) }} </td>
+				</tr>
+				@endforeach
+			</tbody>
+		</table>
+             @endif
+         </div>
     </div>
 </div>
 @stop

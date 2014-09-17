@@ -14,6 +14,8 @@
 
 @section('content')
 
+<form class="form-horizontal" method="post" action="" autocomplete="off">
+    
 <div class="row header">
     <div class="col-md-10">
             
@@ -36,7 +38,7 @@
 
 <div class="col-md-12">
 
-                        <form class="form-horizontal" method="post" action="" autocomplete="off">
+
                         <!-- CSRF Token -->
                         <input type="hidden" name="_token" value="{{ csrf_token() }}" />
 
@@ -51,6 +53,7 @@
 
             <!-- Form actions -->
             <div class="form-group">
+                <br>
                 <label class="col-md-2 control-label"></label>
                     <div class="col-md-7">
                         <a href="{{ URL::previous() }}" class="btn btn-default"><i class="icon-circle-arrow-left icon-white"></i> @lang('actions.cancel')</a>
@@ -58,9 +61,10 @@
                     </div>
             </div>
             
-    </form>
+    
 
 </div>
 
+</form>
 
 @stop

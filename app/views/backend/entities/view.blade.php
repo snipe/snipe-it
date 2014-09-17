@@ -29,8 +29,7 @@
             <table class="table table-hover">
                 <thead>
                     <tr>
-                        <th class="col-md-2">@lang('general.name')</th>
-                        <th class="col-md-3">@lang('general.common_name')</th>
+                        <th class="col-md-2">@lang('base.location')</th>
                         <th class="col-md-2">@lang('general.city')</th>
                     </tr>
                 </thead>
@@ -38,15 +37,12 @@
                     @foreach ($entity->locations as $location)
                         <tr> 
                             <td><a href="{{ route('view/location', $location->id) }}" class="name">{{{ $location->name }}}</a></td>
-                            <td>{{{ $location->common_name }}} </td>
                             <td>{{{ $location->city }}} </td>
                         </tr>
                     @endforeach
                 @endif
                 </table>
-                <br>
-            
-                
+                <br> 
         </div>
 
         <!-- side address column -->

@@ -13,7 +13,7 @@ return array(
                'lost'               =>  'Lost/Stolen',
                'decommissioned'     =>  'Decommissioned',
                'unknown'            =>  'Unknown',
-               'delete'            =>  'Pending Delete',
+               'delete'             =>  'Pending Delete',
     )
 
 );

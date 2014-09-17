@@ -33,7 +33,7 @@
 
 <div class="col-md-12">
 @if ($license->serial)
-<div class="col-md-6"><strong>@lang('admin/licenses/form.serial'): </strong> {{ $license->serial }} </div>
+<div class="col-md-6"><strong>@lang('general.serialnumber'): </strong> {{ $license->serial }} </div>
 @endif
 
 @if ($license->license_name)
@@ -73,7 +73,9 @@
 
 
                 <!-- checked out assets table -->
-                <h6>{{ $license->seats }} @lang('base.licenseseats')</h6>
+                <h6>@lang('base.licenseseats')
+                 ( {{ $license->seats }} )
+                </h6>
                 <table class="table table-hover">
                     <thead>
                         <tr>
@@ -89,7 +91,8 @@
                             @foreach ($license->licenseseats as $licensedto)
 
                             <tr>
-                                <td>Seat {{ $count }} </td>
+                                <td>@lang('base.licenseseats_shortname') :
+                                     {{ $count }} </td>
                                 <td> 
                                     
                                     @if ($licensedto->asset)
@@ -127,7 +130,7 @@
                     </tbody>
                 </table>
                 <br>
-                <h6>@lang('admin/licenses/form.checkout_history')</h6>
+                <h6>@lang('general.history')</h6>
 
                 <table class="table table-hover">
                     <thead>
@@ -222,7 +225,7 @@
                     @endif
                     
                     @if ($license->order_number)
-                    <li>@lang('admin/licenses/form.order'):
+                    <li>@lang('general.ordernumber'):
                     {{ $license->order_number }} </li>
                     @endif
                     @if (($license->seats) && ($license->seats) > 0)

@@ -150,6 +150,7 @@ class AssetsController extends AdminController
         $supplier_list = array('' => '') + Supplier::orderBy('name', 'asc')->lists('name', 'id');
         $assigned_to = array('' => 'Select a User') + DB::table('users')->select(DB::raw('concat (first_name," ",last_name) as full_name, id'))->whereNull('deleted_at')->lists('full_name', 'id');
         $location_list = array('' => '') + Location::orderBy('name', 'asc')->lists('name', 'id');
+        $service_agreement_list = array('' => '') + \ServiceAgreement::orderBy('name', 'asc')->lists('name', 'id');
         
         // Grab the dropdown list of status
         //$statuslabel_list = array('' => Lang::get('general.pending')) + array('0' => Lang::get('general.ready_to_deploy')) + Statuslabel::orderBy('name', 'asc')->lists('name', 'id');
@@ -162,6 +163,7 @@ class AssetsController extends AdminController
                 ->with('statuslabel_list',$statuslabel_list)
                 ->with('assigned_to',$assigned_to)
                 ->with('location_list',$location_list)
+                ->with('service_agreement_list',$service_agreement_list)
                 ->with('asset',new Asset);
 
     }
@@ -257,6 +259,12 @@ class AssetsController extends AdminController
             } else {
                 $asset->requestable        = e(Input::get('requestable'));
             }
+            
+            if (e(Input::get('service_agreement_id')) == '') {
+                $asset->service_agreement_id =  0;
+            } else {
+                $asset->service_agreement_id        = e(Input::get('service_agreement_id'));
+            }
 
             // Save the asset data
             $asset->name            		= e(Input::get('name'));
@@ -265,8 +273,7 @@ class AssetsController extends AdminController
             $asset->order_number                = e(Input::get('order_number'));
             $asset->notes            		= e(Input::get('notes'));
             $asset->asset_tag            	= e(Input::get('asset_tag'));
-            $asset->strict_assignment           = e(Input::get('strict_assignment'));
-    
+            $asset->strict_assignment           = e(Input::get('strict_assignment'));   
             $asset->user_id          		= Sentry::getId();
             $asset->archived          			= '0';
             $asset->physical            		= '1';
@@ -304,7 +311,8 @@ class AssetsController extends AdminController
         $model_list = array('' => '') + Model::orderBy('name', 'asc')->lists('name', 'id');
         $supplier_list = array('' => '') + Supplier::orderBy('name', 'asc')->lists('name', 'id');
         $location_list = array('' => '') + Location::orderBy('name', 'asc')->lists('name', 'id');
-
+        $service_agreement_list = array('' => '') + \ServiceAgreement::orderBy('name', 'asc')->lists('name', 'id');
+        
         // Grab the dropdown list of status
         //$statuslabel_list = array('' => Lang::get('general.pending')) + array('0' => Lang::get('general.ready_to_deploy')) + Statuslabel::orderBy('name', 'asc')->lists('name', 'id');
         // only use database values
@@ -314,6 +322,7 @@ class AssetsController extends AdminController
                 ->with('model_list',$model_list)
                 ->with('supplier_list',$supplier_list)
                 ->with('location_list',$location_list)
+                ->with('service_agreement_list',$service_agreement_list)
                 ->with('statuslabel_list',$statuslabel_list);
     }
 
@@ -390,6 +399,12 @@ class AssetsController extends AdminController
             } else {
                 $asset->requestable        = e(Input::get('requestable'));
             }
+            
+            if (e(Input::get('service_agreement_id')) == '') {
+                $asset->service_agreement_id =  0;
+            } else {
+                $asset->service_agreement_id        = e(Input::get('service_agreement_id'));
+            }
 
             // Update the asset data
             $asset->name            		= e(Input::get('name'));
@@ -400,6 +415,9 @@ class AssetsController extends AdminController
             $asset->strict_assignment     	= e(Input::get('strict_assignment')); 
             $asset->notes            		= e(Input::get('notes'));           
             $asset->physical            	= '1';
+            $asset->user_id          		= Sentry::getId();
+            $asset->assigned_to                 = $asset->assigned_to;
+            $asset->user_id                     = $asset->assigned_to;
 
             // Was the asset updated?
             if($asset->save()) {

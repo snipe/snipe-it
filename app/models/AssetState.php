@@ -151,6 +151,7 @@ class AssingedState extends AssetState{
     {
         return '<input type="hidden" id="status_id" name="status_id" value="'.$this->asset->status_id .'" />'
                 . '<input type="hidden" id="assigned_to" name="assigned_to" value="'.$this->asset->assigned_to .'" />'
+                . '<input type="hidden" id="user_id" name="user_id" value="'.$this->asset->user_id .'" />'
                 . '<a href="' . route('checkin/hardware', $this->asset->id) .'" class="btn btn-primary">'.Lang::get('actions.checkin').'</a> ';
     }
     

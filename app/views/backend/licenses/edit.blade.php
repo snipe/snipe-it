@@ -14,6 +14,8 @@
 
 @section('content')
 
+<form class="form-horizontal" method="post" action="" autocomplete="off">
+    
 <div class="row header">
     <div class="col-md-10">
             
@@ -36,7 +38,7 @@
 <div class="row form-wrapper">
 
     <div class="col-md-12 column">
-    <form class="form-horizontal" method="post" action="" autocomplete="off">
+    
     <!-- CSRF Token -->
     <input type="hidden" name="_token" value="{{ csrf_token() }}" />
 
@@ -52,7 +54,7 @@
 
             <!-- Serial NumberTag -->
             <div class="form-group {{ $errors->has('serial') ? ' has-error' : '' }}">
-                {{ Form::label_for($license, 'serial', Lang::get('admin/licenses/form.serial'), array('class' => 'col-md-2 control-label')); }} 
+                {{ Form::label_for($license, 'serial', Lang::get('general.serialnumber'), array('class' => 'col-md-2 control-label')); }} 
                 
                     <div class="col-md-7">
                         <input class="form-control" type="text" name="serial" id="serial" value="{{ Input::old('serial', $license->serial) }}" />
@@ -104,6 +106,16 @@
                 <div class="col-md-7">
                     {{ Form::select('supplier_id', $supplier_list , Input::old('supplier_id', $license->supplier_id), array('class'=>'select2', 'style'=>'min-width:350px')) }}
                     {{ $errors->first('supplier_id', '<span class="alert-msg"><i class="icon-remove-sign"></i> :message</span>') }}
+                </div>
+            </div>
+            
+            <!-- Service Agreement -->
+            <div class="form-group {{ $errors->has('service_agreement_id') ? ' has-error' : '' }}">
+                {{ Form::label_for($license, 'service_agreement_id', Lang::get('base.serviceagreement'), array('class' => 'col-md-2 control-label')); }} 
+                
+                <div class="col-md-7">
+                    {{ Form::select('service_agreement_id', $service_agreement_list , Input::old('service_agreement_id', $license->service_agreement_id), array('class'=>'select2', 'style'=>'min-width:350px')) }}
+                    {{ $errors->first('service_agreement_id', '<span class="alert-msg"><i class="icon-remove-sign"></i> :message</span>') }}
                 </div>
             </div>
 
@@ -201,8 +213,10 @@
                     </div>
             </div>
 
-    </form>
+
 </div>
 </div>
+
+</form>
 
 @stop

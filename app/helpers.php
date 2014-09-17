@@ -24,7 +24,7 @@ function appVersion() {
         "level" => "beta",
         "major"=>0,
         "minor"=>4,
-        "build"=>05
+        "build"=>07
     );
     
     $appVersionString = implode(".", $version);
