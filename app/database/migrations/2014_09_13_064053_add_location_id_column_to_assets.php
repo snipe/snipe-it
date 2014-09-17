@@ -56,7 +56,7 @@ class AddLocationIdColumnToAssets extends Migration {
                 Schema::table('locations', function(Blueprint $table)
 		{
 		// Add location_id to assets table
-                    $table->text('notes');
+                    $table->text('notes')->nullable();
 		});
                 
         }
