@@ -39,8 +39,8 @@
 
 <!-- Tabs -->
 <ul class="nav nav-tabs">
-    <li class="active"><a href="#tab-general" data-toggle="tab">@lang('admin/users/form.general')</a></li>
-    <li><a href="#tab-permissions" data-toggle="tab">@lang('admin/users/form.permissions')</a></li>
+    <li class="active"><a href="#tab-general" data-toggle="tab">@lang('general.general')</a></li>
+    <li><a href="#tab-permissions" data-toggle="tab">@lang('general.permissions')</a></li>
 </ul>
 
     <!-- CSRF Token -->

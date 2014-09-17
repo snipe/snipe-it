@@ -30,6 +30,7 @@ return array(
     'password_confirm'                  => 'Confirm Password',
     'permissions'                       => 'Permissions',
     'assignedto'                        => 'Assigned to',
+    'general'                           => 'General',
     
     // Common form elements    
     'id'                                => 'ID',
