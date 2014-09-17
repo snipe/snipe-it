@@ -167,7 +167,11 @@ class LicensesController extends AdminController
 
 
                 // Redirect to the new license page
-                return Redirect::to("admin/licenses")->with('success', Lang::get('admin/licenses/message.create.success'));
+                $licenseID = $license->id;
+
+            // Redirect to the new asset page
+                return Redirect::to("admin/licenses/$licenseID/view")->with('success', Lang::get('admin/licenses/message.checkout.success'));
+                //return Redirect::to("admin/licenses")->with('success', Lang::get('admin/licenses/message.create.success'));
             }
         } else {
             // failure
@@ -566,9 +570,11 @@ class LicensesController extends AdminController
 
             $log = $logaction->logaction('checkout');
 
+            $licenseID = $licenseseat->license->id;
 
             // Redirect to the new asset page
-            return Redirect::to("admin/licenses")->with('success', Lang::get('admin/licenses/message.checkout.success'));
+            return Redirect::to("admin/licenses/$licenseID/view")->with('success', Lang::get('admin/licenses/message.checkout.success'));
+            //return Redirect::to("admin/licenses")->with('success', Lang::get('admin/licenses/message.checkout.success'));
         }
 
         // Redirect to the asset management page with error
@@ -629,10 +635,14 @@ class LicensesController extends AdminController
             $logaction->user_id = Sentry::getUser()->id;
             $log = $logaction->logaction('checkin from');
 
-            // Redirect to the license page
-            return Redirect::to("admin/licenses")->with('success', Lang::get('admin/licenses/message.checkin.success'));
+            $licenseID = $licenseseat->license->id;
+
+            // Redirect to the new asset page
+            return Redirect::to("admin/licenses/$licenseID/view")->with('success', Lang::get('admin/licenses/message.checkout.success'));
+        
         }
 
+        
         // Redirect to the license page with error
         return Redirect::to("admin/licenses")->with('error', Lang::get('admin/licenses/message.checkin.error'));
     }
@@ -672,6 +682,7 @@ class LicensesController extends AdminController
         $manufacturer_list = array('' => '') + Manufacturer::orderBy('name', 'asc')->lists('name', 'id');
         $family_list = array('' => '') + Family::orderBy('common_name', 'asc')->lists('common_name', 'id');
         $location_list = array('' => '') + Location::orderBy('name', 'asc')->lists('name', 'id');
+        $service_agreement_list = array('' => '') + \ServiceAgreement::orderBy('name', 'asc')->lists('name', 'id');
         
         //clone the orig
         $license = clone $license_to_clone;
@@ -688,6 +699,7 @@ class LicensesController extends AdminController
                 ->with('manufacturer_list',$manufacturer_list)
                 ->with('depreciation_list',$depreciation_list)
                 ->with('clone_license',$license_to_clone)
+                ->with('service_agreement_list',$service_agreement_list)
                 ->with('license',$license);
 
     }

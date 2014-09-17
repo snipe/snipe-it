@@ -122,7 +122,7 @@
 
             <!-- Order Number -->
             <div class="form-group {{ $errors->has('order_number') ? ' has-error' : '' }}">
-                {{ Form::label_for($asset, 'order_number', Lang::get('admin/hardware/form.order'), array('class' => 'col-md-2 control-label')); }} 
+                {{ Form::label_for($asset, 'order_number', Lang::get('general.ordernumber'), array('class' => 'col-md-2 control-label')); }} 
                 <div class="col-md-7">
                     <input class="form-control" type="text" name="order_number" id="order_number" value="{{{ Input::old('order_number', $asset->order_number) }}}" />
                     {{ $errors->first('order_number', '<span class="alert-msg"><i class="icon-remove-sign"></i> :message</span>') }}
@@ -181,9 +181,9 @@
 			</label>
                     </div>
             </div>
-                        
+            
             @if (!$asset->id)
-             <!-- Assigned To -->
+             <!-- Assigned To   // REMOVED due to logic concerns - next version!
             <div class="form-group {{ $errors->has('assigned_to') ? ' has-error' : '' }}">
                 {{ Form::label_for($asset, 'assigned_to', Lang::get('admin/hardware/form.checkout_to'), array('class' => 'col-md-2 control-label')); }} 
                 
@@ -193,6 +193,7 @@
                     {{ $errors->first('assigned_to', '<span class="alert-msg"><i class="icon-remove-sign"></i> :message</span>') }}
                 </div>
             </div>
+             -->
             @endif
 
             <!-- Notes -->

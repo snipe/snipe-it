@@ -91,7 +91,7 @@
                     
         		<!-- Strict Assignment -->
                         &nbsp;&nbsp;<label>
-			<input type="checkbox" value="1" name="strict_assignment" id="strict_assignment" {{ Input::old('strict_assignment', $license->strict_assignment) == '1' ? ' checked="checked"' : '' }}> @lang('general.strict_assignment')
+			<input type="checkbox" value="1" name="strict_assignment" id="strict_assignment" {{ Input::old('strict_assignment', $license->strict_assignment) == '1'  || empty($asset->id) ? ' checked="checked"' : '' }}> @lang('general.strict_assignment')
 			</label>
                 </div>
                 <div class="checkbox">

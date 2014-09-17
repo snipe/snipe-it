@@ -283,7 +283,10 @@ class AssetsController extends AdminController
             // Was the asset created?
             if($asset->save()) {
                 // Redirect to the asset listing page
-                return Redirect::to("hardware")->with('success', Lang::get('admin/hardware/message.create.success'));
+                if($asset->id)
+                    return Redirect::to("hardware/$asset->id/view")->with('success', Lang::get('admin/hardware/message.create.success'));
+                else
+                    return Redirect::to("hardware")->with('success', Lang::get('admin/hardware/message.create.success'));
             }
         } 
 
@@ -546,7 +549,7 @@ class AssetsController extends AdminController
             $log = $logaction->logaction('checkout');
 
             // Redirect to the new asset page
-            return Redirect::to("hardware")->with('success', Lang::get('admin/hardware/message.checkout.success'));
+            return Redirect::to("hardware/$assetId/view")->with('success', Lang::get('admin/hardware/message.checkout.success'));
         }
 
         // Redirect to the asset management page with error
@@ -606,7 +609,8 @@ class AssetsController extends AdminController
             $log = $logaction->logaction('checkin from');
 
             // Redirect to the new asset page
-            return Redirect::to("hardware")->with('success', Lang::get('admin/hardware/message.checkin.success'));
+            return Redirect::to("hardware/$assetId/view")->with('success', Lang::get('admin/hardware/message.checkin.success'));
+           
         }
 
         // Redirect to the asset management page with error
@@ -700,12 +704,12 @@ class AssetsController extends AdminController
         // Grab the dropdown list of status
         $statuslabel_list = array('' => 'Pending') + array('0' => 'Ready to Deploy') + Statuslabel::lists('name', 'id');
 
-        // get depreciation list
-        $depreciation_list = array('' => '') + Depreciation::lists('name', 'id');
+        // get dropdown lists
         $supplier_list = array('' => '') + Supplier::orderBy('name', 'asc')->lists('name', 'id');
         $assigned_to = array('' => 'Select a User') + DB::table('users')->select(DB::raw('concat (first_name," ",last_name) as full_name, id'))->whereNull('deleted_at')->lists('full_name', 'id');
         $location_list = array('' => '') + Location::orderBy('name', 'asc')->lists('name', 'id');
-          
+        $service_agreement_list = array('' => '') + \ServiceAgreement::orderBy('name', 'asc')->lists('name', 'id');
+        
         $asset = new Asset();
         
         //columns to copy
@@ -723,17 +727,18 @@ class AssetsController extends AdminController
         $asset->location_id =       $asset_to_clone->location_id;         
         $asset->requestable =       $asset_to_clone->requestable;
         $asset->asset_tag =         $asset_to_clone->asset_tag;
-        $asset->strict_assignment = $asset_to_clone->strict_assignment;        
+        $asset->strict_assignment = $asset_to_clone->strict_assignment;
+        $asset->service_agreement_id = $asset_to_clone->service_agreement_id;
+        $asset->notes       =       $asset_to_clone->notes;
         
         return View::make('backend/hardware/edit')
                 ->with('supplier_list',$supplier_list)
                 ->with('model_list',$model_list)
                 ->with('statuslabel_list',$statuslabel_list)
                 ->with('assigned_to',$assigned_to)
-                ->with('depreciation_list',$depreciation_list)
+                ->with('service_agreement_list',$service_agreement_list)                
                 ->with('location_list',$location_list)
                 ->with('asset',$asset);
-
     }
     
     public function getRestore($assetID = null)

@@ -81,16 +81,20 @@
                                            {{ Form::text_for($serviceagreement, 'registered_to',array('class' => 'form-control'),$errors  ) }}
                                         </div>
                                     </div> 
-                                
-                                <!-- Term Months -->
-                                    <div class="form-group {{ $errors->has('term_months') ? ' has-error' : '' }}">
-                                        {{ Form::label_for($serviceagreement, 'term_months', Lang::get('general.lengthmonths'), array('class' => 'col-md-2 control-label')); }} 
-
-                                        <div class="col-md-2">
-                                           {{ Form::text_for($serviceagreement, 'term_months',array('class' => 'form-control'),$errors  ) }}
-                                        </div>
-                                    </div>                                                               
-                                
+                                                                                             
+            <!-- Warrantee -->
+            <div class="form-group {{ $errors->has('term_months') ? ' has-error' : '' }}">
+                {{ Form::label_for($serviceagreement, 'term_months', Lang::get('general.lengthmonths'), array('class' => 'col-md-2 control-label')); }} 
+                
+                <div class="col-md-2">
+                    <div class="input-group">
+                    <input class="col-md-2 form-control" type="text" name="term_months" id="term_months" value="{{{ Input::old('term_months', $serviceagreement->term_months) }}}" />
+                    <span class="input-group-addon">@lang('general.months')</span>
+                    {{ $errors->first('term_months', '<span class="alert-msg"><i class="icon-remove-sign"></i> :message</span>') }}
+                    </div>
+                </div>
+            </div>
+            
                                 <!-- Location -->
                                     <div class="form-group {{ $errors->has('location_id') ? ' has-error' : '' }}">
                                         {{ Form::label_for($serviceagreement, 'location_id', Lang::get('base.location'), array('class' => 'col-md-2 control-label')); }}
@@ -101,7 +105,7 @@
 
                                                 <!-- Strict Assignment -->
                                                 &nbsp;&nbsp;<label>
-                                                <input type="checkbox" value="1" name="strict_assignment" id="strict_assignment" {{ Input::old('strict_assignment', $serviceagreement->strict_assignment) == '1' ? ' checked="checked"' : '' }}> @lang('general.strict_assignment')
+                                                <input type="checkbox" value="1" name="strict_assignment" id="strict_assignment" {{ Input::old('strict_assignment', $serviceagreement->strict_assignment) == '1' || empty($asset->id) ? ' checked="checked"' : '' }}> @lang('general.strict_assignment')
                                                 </label>
                                         </div>
                                         <div class="checkbox">
@@ -130,15 +134,19 @@
                                         </div>
                                     </div>
                                 
-                                <!-- Purchase Cost -->
-                                    <div class="form-group {{ $errors->has('purchase_cost') ? ' has-error' : '' }}">
-                                        {{ Form::label_for($serviceagreement, 'purchase_cost', Lang::get('general.purchasecost'), array('class' => 'col-md-2 control-label')); }} 
-
-                                        <div class="col-md-2">
-                                               {{ Form::text_for($serviceagreement, 'purchase_cost',array('class' => 'form-control'),$errors  ) }}
-                                        </div>
-                                    </div>                                
-
+            <!-- Purchase Cost -->
+            <div class="form-group {{ $errors->has('purchase_cost') ? ' has-error' : '' }}">
+                    {{ Form::label_for($serviceagreement, 'purchase_cost', Lang::get('general.purchasecost'), array('class' => 'col-md-2 control-label')); }} 
+                
+                    <div class="col-md-2">
+                            <div class="input-group">
+                                    <span class="input-group-addon">@lang('general.currency')</span>
+                                    <input class="col-md-2 form-control" type="text" name="purchase_cost" id="purchase_cost" value="{{ Input::old('purchase_cost', number_format($serviceagreement->purchase_cost,2)) }}" />
+                                    {{ $errors->first('purchase_cost', '<span class="alert-msg"><i class="icon-remove-sign"></i> :message</span>') }}
+                             </div>
+                     </div>
+            </div>
+            
                                 <!-- Notes -->
                                 <div class="form-group {{ $errors->has('notes') ? ' has-error' : '' }}">
                                     <label for="notes" class="col-md-2 control-label">@lang('general.notes')</label>
