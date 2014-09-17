@@ -16,6 +16,7 @@ class FamiliesSeeder extends Seeder
             'created_at' => $date->modify('-10 day'),
             'updated_at' => $date->modify('-3 day'),
             'user_id' => 1,
+            'notes'      => 'Added by seeder',
             'deleted_at' => NULL,
         );
 
@@ -25,6 +26,7 @@ class FamiliesSeeder extends Seeder
             'created_at' => $date->modify('-10 day'),
             'updated_at' => $date->modify('-3 day'),
             'user_id' => 1,
+            'notes'      => 'Added by seeder',
             'deleted_at' => NULL,
         );
 
@@ -34,6 +36,7 @@ class FamiliesSeeder extends Seeder
             'created_at' => $date->modify('-10 day'),
             'updated_at' => $date->modify('-3 day'),
             'user_id' => 1,
+            'notes'      => 'Added by seeder',
             'deleted_at' => NULL,
         );
                 
@@ -42,7 +45,8 @@ class FamiliesSeeder extends Seeder
             'common_name'=> 'Master Suite',            
             'created_at' => $date->modify('-10 day'),
             'updated_at' => $date->modify('-3 day'),
-            'user_id' => 1,
+            'user_id'       => 1,
+            'notes'      => 'Added by seeder',
             'deleted_at' => NULL,
         );
 
@@ -52,6 +56,7 @@ class FamiliesSeeder extends Seeder
             'created_at' => $date->modify('-10 day'),
             'updated_at' => $date->modify('-3 day'),
             'user_id' => 1,
+            'notes'      => 'Added by seeder',
             'deleted_at' => NULL,
         );
 
@@ -61,6 +66,7 @@ class FamiliesSeeder extends Seeder
             'created_at' => $date->modify('-10 day'),
             'updated_at' => $date->modify('-3 day'),
             'user_id' => 1,
+            'notes'      => 'Added by seeder',
             'deleted_at' => NULL,
         );
                 
