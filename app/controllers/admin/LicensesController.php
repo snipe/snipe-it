@@ -479,8 +479,6 @@ class LicensesController extends AdminController
 
     }
 
-
-
     /**
     * Check out the asset to a person
     **/
@@ -591,8 +589,6 @@ class LicensesController extends AdminController
         return View::make('backend/licenses/checkin', compact('licenseseat'));
 
     }
-
-
 
     /**
     * Check in the item so that it can be checked out again to someone else

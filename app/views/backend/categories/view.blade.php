@@ -18,18 +18,15 @@
     </div>
 </div>
 
-<div class="user-profile">
-<div class="row profile">
-<div class="col-md-9 bio">
 
-    <!-- Software  table -->
+<div class="row form-wrapper">
+    <div class="col-md-9">
 
-        <h6>[ {{{Lang::get('base.category_use')}}} : {{$category->has_models()}} ]</h6>
+     <h6>[ {{{Lang::get('base.category_use')}}} : {{$category->has_models()}} ]</h6>
 		<br> 
-		<!-- checked out family table -->
 		@if ($category->has_models() > 0)
 		<table id="example">
-                    <thead>
+                    
 			<thead>
 				<tr role="row">
                                     <th class="col-md-4"><span class="line"></span>@lang('base.model_shortname')</th>
@@ -65,6 +62,6 @@
             <p>@lang('admin/categories/message.about') </p>
     
         </div>
-    </div>
 </div>
+
 @stop

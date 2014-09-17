@@ -40,8 +40,9 @@
     <thead>
         <tr role="row">
            <th class="col-md-3">@lang('general.name')</th>
-           <th class="col-md-3">@lang('admin/serviceagreements/form.contract_number')</th> 
-           <th class="col-md-3">@lang('general.purchasedate')</th> 
+           <th class="col-md-2">@lang('admin/serviceagreements/form.contract_number')</th> 
+           <th class="col-md-2">@lang('general.purchasedate')</th> 
+            <th class="col-md-2">@lang('admin/suppliers/form.hw-sw')</th> 
            <th class="col-md-1 actions">@lang('actions.actions')</th>
         </tr>
     </thead>
@@ -51,6 +52,7 @@
             <td><a href="{{ route('view/serviceagreement', $serviceagreement->id) }}">{{{ $serviceagreement->name }}}</a></td> 
             <td>{{{ $serviceagreement->contract_number }}}</a></td> 
             <td>{{{ $serviceagreement->purchase_date }}}</a></td> 
+            <td>{{$serviceagreement->has_assets()}} / {{$serviceagreement->has_licenses()}}</td>
             <td>
                            
             

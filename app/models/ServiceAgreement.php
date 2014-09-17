@@ -30,9 +30,19 @@ class ServiceAgreement extends Elegant
         return $this->belongsTo('ServiceAgreementType','service_agreement_type_id');
     }
     
+    public function has_assets()
+    {
+        return $this->hasMany('Asset', 'service_agreement_id')->count();
+    }
+    
     public function asset()
     {
         return $this->hasMany('Asset', 'service_agreement_id');
+    }
+    
+    public function has_licenses()
+    {
+        return $this->hasMany('License', 'service_agreement_id')->count();
     }
     
      public function license()

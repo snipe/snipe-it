@@ -14,15 +14,15 @@ use Actionlog;
 use Model;
 use Depreciation;
 use Sentry;
-use Str;
+//use Str;
 use Validator;
 use View;
 use Response;
-use Config;
+//use Config;
 use Location;
-use Log;
+//use Log;
 
-use BaconQrCode\Renderer\Image as QrImage;
+//use BaconQrCode\Renderer\Image as QrImage;
 
 class AssetsController extends AdminController
 {
@@ -79,15 +79,15 @@ class AssetsController extends AdminController
 
         // Create the header row
         $header = array(
-            Lang::get('admin/hardware/table.asset_tag'),
-            Lang::get('admin/hardware/table.title'),
-            Lang::get('admin/hardware/table.serial'),
-            Lang::get('admin/hardware/table.checkoutto'),
-            Lang::get('admin/hardware/table.location'),
-            Lang::get('admin/hardware/table.purchase_date'),
-            Lang::get('admin/hardware/table.purchase_cost'),
-            Lang::get('admin/hardware/table.book_value'),
-            Lang::get('admin/hardware/table.diff')
+            Lang::get('general.asset_tag'),
+            Lang::get('general.hardware'),
+            Lang::get('general.serialnumber'),
+            Lang::get('general.assignedto'),
+            Lang::get('base.location'),
+            Lang::get('general.purchasedate'),
+            Lang::get('general.purchasecost'),
+            Lang::get('admin/hardware/form.book_value'),
+            Lang::get('admin/hardware/form.diff')
         );
         $header = array_map('trim', $header);
         $rows[] = implode($header, ',');

@@ -22,7 +22,8 @@
         <table id="example">
             <thead>
                 <tr role="row">
-                   <th class="col-md-3">@lang('general.name')</th>          
+                   <th class="col-md-3">@lang('general.name')</th>  
+                   <th class="col-md-3">@lang('general.count')</th>  
                    <th class="col-md-1 actions">@lang('actions.actions')</th>
                 </tr>
             </thead>
@@ -30,7 +31,7 @@
                 @foreach ($serviceagreementtypes as $serviceagreementtype)
                 <tr>
                     <td><a href="{{ route('view/serviceagreementtype', $serviceagreementtype->id) }}">{{{ $serviceagreementtype->name }}}</a></td> 
-
+                    <td>{{$serviceagreementtype->has_serviceagreements()}}</td>
                     <td>
                                     <a href="{{ route('update/serviceagreementtype', $serviceagreementtype->id) }}" class="btn btn-warning"><i class="icon-pencil icon-white"></i></a>
                                     <a data-html="false" 

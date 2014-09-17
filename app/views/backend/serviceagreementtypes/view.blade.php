@@ -24,9 +24,9 @@
     </div>
 </div>
 
-<div class="user-profile">
-    <div class="row profile">
-        <div class="col-md-9 bio">
+<div class="row form-wrapper">
+    <div class="col-md-9">
+
 
             <div class="col-md-12">
 
@@ -38,9 +38,9 @@
          <div class="col-md-9 bio">
        
              @if ($serviceagreementtype->serviceagreements()->count() > 0)
-		<table class="table table-hover">
-			<thead>
-				<tr>
+		<table id="example">
+                    <thead>
+                        <tr role="row">
                                     <th class="col-md-4"><span class="line"></span>@lang('general.name')</th>					
 				</tr>
 			</thead>
@@ -48,6 +48,7 @@
 				@foreach ($serviceagreementtype->serviceagreements as $serviceagreement)
 				<tr>
 					<td>{{ HTML::linkAction('view/serviceagreement', $serviceagreement->name, array($serviceagreement->id)) }} </td>
+                                        
 				</tr>
 				@endforeach
 			</tbody>
@@ -67,5 +68,5 @@
         
 </div>       
     </div>
-</div>
+
 @stop

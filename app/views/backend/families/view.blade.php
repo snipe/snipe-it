@@ -18,9 +18,9 @@
     </div>
 </div>
 
-<div class="user-profile">
-<div class="row profile">
-<div class="col-md-9 bio">
+<div class="row form-wrapper">
+    <div class="col-md-9">
+
 
     <!-- Software  table -->
 
@@ -28,9 +28,9 @@
 		<br>
 		<!-- checked out family table -->
 		@if ($family->has_licenses() > 0)
-		<table class="table table-hover">
-			<thead>
-				<tr>
+		<table id="example">
+                    <thead>
+                        <tr role="row">
                                     <th class="col-md-4"><span class="line"></span>@lang('general.name')</th>					
 				</tr>
 			</thead>
@@ -61,5 +61,5 @@
            
         </div>
     </div>
-</div>
+
 @stop

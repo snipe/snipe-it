@@ -69,6 +69,9 @@ Route::group(array('prefix' => 'admin'), function () {
         Route::post('create', 'Controllers\Admin\ServiceAgreementsController@postCreate');
         Route::get('purge',  array('as' => 'purge/serviceagreements', 'uses' => 'Controllers\Admin\ServiceAgreementsController@getPurge'));
         Route::get('{serviceagreementId}/restore',  array('as' => 'restore/serviceagreement', 'uses' => 'Controllers\Admin\ServiceAgreementsController@getRestore'));
+    
+        Route::get('{serviceagreementId}/clone', array('as' => 'clone/serviceagreement', 'uses' => 'Controllers\Admin\ServiceAgreementsController@getClone'));
+        Route::post('{serviceagreementId}/clone', 'Controllers\Admin\ServiceAgreementsController@postCreate');
     });
     
     # Service Agreement Types

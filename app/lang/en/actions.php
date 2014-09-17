@@ -43,6 +43,7 @@ return array(
     'list'                      => 'List',
     'listall'                   => 'List All',
     'ready'                     => 'Ready',
+    'download'                  => 'Download',
 
 );
 

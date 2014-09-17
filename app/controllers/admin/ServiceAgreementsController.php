@@ -262,4 +262,30 @@ class ServiceAgreementsController extends AdminController
         
         return Redirect::to('admin/serviceagreements')->with('success', 'Purge Submitted');
     }
+    
+    public function getClone($serviceagreementId = null)
+    {
+         // Check if the license exists
+        if (is_null($serviceagreement_to_clone = \ServiceAgreement::withTrashed()->find($serviceagreementId))) {
+            // Redirect to the license management page
+            return Redirect::to('admin/serviceagreements')->with('error', Lang::get('admin/serviceagreements/message.not_found'));
+        }
+
+        $supplier_list = array('' => '') + \Supplier::orderBy('name', 'asc')->lists('name', 'id');
+        $service_agreement_type_list = array('' => '') + \ServiceAgreementType::orderBy('name', 'asc')->lists('name', 'id');
+        $location_list = array('' => '') + Location::orderBy('name', 'asc')->lists('name', 'id');        
+        
+        
+        //clone the orig
+        $serviceagreement = clone $serviceagreement_to_clone;
+        $serviceagreement->id = null;
+        $serviceagreement->serial = null;
+
+        // Show the page
+        return View::make('backend/serviceagreements/edit')->with('serviceagreement', $serviceagreement)
+            ->with('supplier_list',$supplier_list)
+            ->with('location_list',$location_list)
+            ->with('service_agreement_type_list',$service_agreement_type_list);
+
+    }
 }
