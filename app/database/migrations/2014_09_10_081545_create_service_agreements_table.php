@@ -42,7 +42,9 @@ class CreateServiceAgreementsTable extends Migration {
                         $table->softDeletes();
 		});
                 
-                
+            //Populate services agreement types table
+            $seeder->call('CountriesSeeder');
+            
             //Add service agreement id to assets table
                 Schema::table('assets', function(Blueprint $table)
 		{
@@ -56,6 +58,13 @@ class CreateServiceAgreementsTable extends Migration {
 		// Add location_id to assets table
                     $table->smallInteger('service_agreement_id')->nullable();
 		});
+                
+            //Add notes to models
+                Schema::table('models', function(Blueprint $table)
+		{
+		// Add notes to models table
+                    $table->text('notes')->nullable();
+		}); 
 	}
 
 	/**
@@ -82,5 +91,11 @@ class CreateServiceAgreementsTable extends Migration {
                     $table->dropColumn('service_agreement_id');
 		});
                 
+             //Drop notes from models
+                Schema::table('models', function(Blueprint $table)
+		{
+		// Add notes to models table
+                    $table->dropColumn('notes');
+		});                
         }
 }
