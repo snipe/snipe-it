@@ -62,7 +62,7 @@
                     <i class='icon-asterisk'></i></label>
 		<div class="col-md-7">
 		{{ Form::select('manufacturer_id', $manufacturer_list , Input::old('manufacturer_id', $model->manufacturer_id), array('class'=>'select2', 'style'=>'width:350px')) }}
-		{{ $errors->first('manufacturer_id', '<span class="alert-msg"><i class="icon-remove-sign"></i> :message</span>') }}
+		{{ $errors->first('manufacturer_id', '&nbsp;<span class="alert-msg"><i class="icon-remove-sign"></i> :message</span>') }}
                 </div>
             </div>
 
@@ -73,7 +73,7 @@
                  </label>
                     <div class="col-md-7">
                         {{ Form::select('category_id', $category_list , Input::old('category_id', $model->category_id), array('class'=>'select2', 'style'=>'width:350px')) }}
-                        {{ $errors->first('category_id', '<span class="alert-msg"><i class="icon-remove-sign"></i> :message</span>') }}
+                        {{ $errors->first('category_id', '&nbsp;<span class="alert-msg"><i class="icon-remove-sign"></i> :message</span>') }}
                     </div>
             </div>
 

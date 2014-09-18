@@ -61,6 +61,7 @@ class AssignmentDefinitionsSeeder extends Seeder
 
         // Insert the new posts
         AssignmentDefinition::insert($assignmentDefinitions);
+        
     }
 }
     

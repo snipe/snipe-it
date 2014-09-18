@@ -29,10 +29,10 @@
                             <br>
                             <table class="table table-hover">
                             <thead>
-                                <tr>
+                               <!-- <tr>
                                     <th class="col-md-3">@lang('base.setting_shortname')</th>
                                     <th class="col-md-3"><span class="line"></span>@lang('general.value')</th>
-                                </tr>
+                                </tr> -->
                             </thead>
                             <tbody>
                                 
