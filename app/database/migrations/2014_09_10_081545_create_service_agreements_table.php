@@ -43,7 +43,7 @@ class CreateServiceAgreementsTable extends Migration {
 		});
                 
             //Populate services agreement types table
-            $seeder->call('CountriesSeeder');
+            $seeder->call('ServiceAgreementTypesSeeder');
             
             //Add service agreement id to assets table
                 Schema::table('assets', function(Blueprint $table)

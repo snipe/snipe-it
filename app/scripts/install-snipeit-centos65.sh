@@ -75,7 +75,7 @@ SNIPEITGITFORK=/cordeos/snipe-it
 read -e -i "$SNIPEITGITFORK" -p "Confirm your Snipe IT code fork to pull: " input
 SNIPEITGITFORK="${input:-$SNIPEITGITFORK}"
 
-SNIPEITGITBRANCH=develop
+SNIPEITGITBRANCH=beta1
 read -e -i "$SNIPEITGITBRANCH" -p "Confirm Snipe IT code branch to pull: " input
 SNIPEITGITBRANCH="${input:-$SNIPEITGITBRANCH}"
 
