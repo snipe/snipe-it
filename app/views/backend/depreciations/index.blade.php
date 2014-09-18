@@ -53,8 +53,8 @@ data-title="@lang('actions.delete')
 
                     <!-- side address column -->
                     <div class="col-md-3 col-xs-12 address pull-right">
-                        <br />
-                        <h6>@lang('base.depreciation_about')</h6>
+                        <h4>@lang('base.depreciation_about')</h4>
+                        <br>
                         <p>@lang('admin/depreciations/message.about') </p>
                     </div>
  </div>

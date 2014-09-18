@@ -28,7 +28,7 @@
 
    
         <div class="col-md-3 col-xs-12 address pull-right">
- <h6>@lang('base.serviceagreement'):</h6>
+ <h6>@lang('general.moreinfo'):</h6>
             <ul>
                 @if ($serviceagreement->contract_number)
                     <li><strong>@lang('admin/serviceagreements/form.contract_number'): </strong> {{ $serviceagreement->contract_number }} </li>
@@ -111,7 +111,7 @@
                                </tbody>
                        </table>
                     @else
-                     <div class="col-md-9"><br>
+                     <div class="col-md-10"><br>
                         <div class="alert alert-info alert-block">
                             <i class="icon-info-sign"></i>
                             @lang('general.no_results')
@@ -138,14 +138,16 @@
 				@endforeach
 			</tbody>
 		</table>
-                @else
-                 <div class="col-md-9"><br>
+                
+            @else
+                 <div class="col-md-10"><br>
                         <div class="alert alert-info alert-block">
                             <i class="icon-info-sign"></i>
                             @lang('general.no_results')
                         </div>
                     </div>
              @endif
+             
          </div>
     </div>
 

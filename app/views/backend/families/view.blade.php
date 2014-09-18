@@ -42,24 +42,25 @@
 				@endforeach
 			</tbody>
 		</table>
+                
 		@else
-
-		<div class="col-md-12">
+		<div class="col-md-10">
 			<div class="alert alert-info alert-block">
 				<i class="icon-info-sign"></i>
 				@lang('general.no_results')
 			</div>
 		</div>
 		@endif
+                
         </div>
 
         <!-- side address column -->
         <div class="col-md-3 col-xs-12 address pull-right">
-    <br />
-    <h6>@lang('base.family_about')</h6>
-    <p>@lang('admin/families/message.about') </p>
-           
+            <h4>@lang('base.family_about')</h4>
+            <br>
+            <p>@lang('admin/families/message.about') </p>
         </div>
-    </div>
+
+</div>
 
 @stop

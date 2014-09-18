@@ -37,7 +37,7 @@
         </div>
          <div class="col-md-9 bio">
        
-             @if ($serviceagreementtype->serviceagreements()->count() > 0)
+            @if ($serviceagreementtype->serviceagreements()->count() > 0)
 		<table id="example">
                     <thead>
                         <tr role="row">
@@ -53,17 +53,20 @@
 				@endforeach
 			</tbody>
 		</table>
+             
+            @else
+                    <div class="col-md-10"><br>
+                        <div class="alert alert-info alert-block">
+                            <i class="icon-info-sign"></i>
+                            @lang('general.no_results')
+                        </div>
+                    </div>
              @endif
          </div>
     <div class="col-md-3 col-xs-12 address pull-right">
-    <br />
-    @if ($serviceagreementtype->notes)
-        <strong>@lang('general.notes'): </strong> {{ $serviceagreementtype->notes }}
-        <br>
-    @endif
-    <br />
     <h4>@lang('base.serviceagreementtype_about')</h4>
-    <p>@lang('admin/serviceagreementtypes/message.about') </p>
+    <br>
+    <p>@lang('admin/serviceagreementtypes/message.about')</p>
         
         
 </div>       

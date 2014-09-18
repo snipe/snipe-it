@@ -24,8 +24,8 @@
 
         <div class="col-md-9 bio">
                <!-- checked out assets table -->
-        <h6>[ {{{Lang::get('base.entity_use')}}} : {{$entity->has_locations()}} ]</h6>
-        
+        <h6>{{{Lang::get('base.entity_use')}}} : {{$entity->has_locations()}}</h6>
+        @if ($entity->locations)
             <table class="table table-hover">
                 <thead>
                     <tr>
@@ -33,21 +33,31 @@
                         <th class="col-md-2">@lang('general.city')</th>
                     </tr>
                 </thead>
-                @if ($entity->locations)
                     @foreach ($entity->locations as $location)
                         <tr> 
                             <td><a href="{{ route('view/location', $location->id) }}" class="name">{{{ $location->name }}}</a></td>
                             <td>{{{ $location->city }}} </td>
                         </tr>
                     @endforeach
-                @endif
+                    
                 </table>
-                <br> 
+        
+                            @else
+                    <div class="col-md-10"><br>
+                        <div class="alert alert-info alert-block">
+                            <i class="icon-info-sign"></i>
+                            @lang('general.no_results')
+                        </div>
+                    </div>        
+                    
+        @endif
+        
+        <br> 
         </div>
 
         <!-- side address column -->
         <div class="col-md-3 col-xs-12 address pull-right">
-        <h6><br>@lang('general.moreinfo'):</h6>
+        <h6>@lang('general.moreinfo'):</h6>
         <ul>
             @if ($entity->name)
                 <li>@lang('general.name'): {{ $entity->name }} </li>
@@ -59,9 +69,6 @@
                 <li>@lang('general.notes'): {{ $entity->notes }} </li>
             @endif
         </ul>
-        <br>
-            <h6>@lang('base.entity_about')</h6>
-            <p>@lang('admin/entities/message.about') </p>
         </div>
     </div>
 </div>

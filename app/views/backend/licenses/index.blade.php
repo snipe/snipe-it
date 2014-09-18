@@ -149,21 +149,12 @@
                     @endif
                     </td>
 
-
-
                 </tr>
                 <?php $count++; ?>
                 @endforeach
                 @endif
 
-
         @endforeach
-
-
-
-
-
-
 
     </tbody>
 </table>

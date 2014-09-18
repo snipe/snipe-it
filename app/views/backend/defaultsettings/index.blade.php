@@ -71,8 +71,9 @@
                 
                     <!-- side address column -->
                     <div class="col-md-3 address pull-right">
-    <br />
-    <h6>@lang('base.defaultsetting_about')</h6>
+                        <br>
+    <h4>@lang('base.defaultsetting_about')</h4>
+    <br.
     <p>@lang('admin/defaultsettings/message.about') </p>
 
                     </div>

@@ -119,6 +119,7 @@
 
             <!-- Form actions -->
                 <div class="form-group">
+                    <br>
                 <label class="col-md-2 control-label"></label>
                     <div class="col-md-7">
                         <a href="{{ URL::previous() }}" class="btn btn-default"><i class="icon-circle-arrow-left icon-white"></i> @lang('actions.cancel')</a>

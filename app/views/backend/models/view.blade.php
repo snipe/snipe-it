@@ -84,7 +84,7 @@
                             </table>
 
                             @else
-                            <div class="col-md-9">
+                            <div class="col-md-10">
                                 <div class="alert alert-info alert-block">
                                     <i class="icon-info-sign"></i>
                                     @lang('general.no_results')
@@ -123,9 +123,5 @@
 
                             </ul>
 
-    <br />
-    <h6>@lang('base.model_about')</h6>
-    <p>@lang('admin/models/message.about') </p>
-
-                    </div>
+    </div>
 @stop

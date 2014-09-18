@@ -22,7 +22,7 @@
 <div class="row form-wrapper">
     <div class="col-md-9">
 
-     <h6>[ {{{Lang::get('base.category_use')}}} : {{$category->has_models()}} ]</h6>
+     <h6>{{{Lang::get('base.category_use')}}} : {{$category->has_models()}}</h6>
 		<br> 
 		@if ($category->has_models() > 0)
 		<table id="example">
@@ -44,20 +44,20 @@
 		</table>
 		@else
 
-		<div class="col-md-12">
+		<div class="col-md-10">
 			<div class="alert alert-info alert-block">
 				<i class="icon-info-sign"></i>
 				@lang('general.no_results')
 			</div>
 		</div>
-		@endif 
+		@endif
                 
         </div>
 
         <!-- side address column -->
         <div class="col-md-3 col-xs-12 address pull-right">
-        <br />
             <h4>@lang('base.category_about')</h4>
+            <br>
             <p>@lang('admin/categories/message.about') </p>
     
         </div>

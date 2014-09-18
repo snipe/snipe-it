@@ -126,7 +126,6 @@
                             @endforeach
                             @endif
 
-
                     </tbody>
                 </table>
                 <br>

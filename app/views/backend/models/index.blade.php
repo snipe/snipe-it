@@ -19,6 +19,7 @@
 <div class="user-profile">
 <div class="row profile">
     <div class="col-md-9 bio">
+        
 <table id="example">
     <thead>
         <tr role="row">
@@ -76,8 +77,8 @@
 
 <!-- side address column -->
 <div class="col-md-3 col-xs-12 address pull-right">
-    <br />
-    <h6>@lang('base.model_about')</h6>
+    <h4>@lang('base.model_about')</h4>
+        <br />
     <p>@lang('admin/models/message.about') </p>
 
 </div>

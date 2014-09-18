@@ -256,6 +256,20 @@ return array(
     'user_shortname'    => 'Person',
     'users_shortname'   => 'People',
     'user_report'       => 'User Report',
+   
+    // Groups
+    'group'              => 'User Group',
+    'groups'             => 'User Groups',
+    'group_create'       => 'Add New Group',
+    'group_update'       => 'Edit User Group',    
+    'group_clone'        => 'Copy User Group', 
+    'group_about'        => 'About User Groups',
+    'group_use'          => 'Used by this group',
+    'group_all'          => 'All User Groups',
+    'group_total'        => 'Total User Group',   
+    'group_report'       => 'User Group Report',
+    'group_shortname'    => 'Group',
+    'groups_shortname'    => 'Groups',
     
     // Reports
     'report'              => 'Report',
@@ -269,18 +283,6 @@ return array(
     'report_total'        => 'Total Report',
     'report_shortname'    => 'Report',
     'reports_shortname'   => 'Reports',
-    
-    // Groups
-    'group'              => 'Group',
-    'groups'             => 'Groups',
-    'group_create'       => 'Add New Group',
-    'group_update'       => 'Edit Group',    
-    'group_clone'        => 'Copy Group', 
-    'group_about'        => 'About Groups',
-    'group_use'          => 'Used by this group',
-    'group_all'          => 'All Groups',
-    'group_total'        => 'Total Group',   
-    'group_report'       => 'Group Report',
-    
+     
 );
 

@@ -22,13 +22,9 @@
 <div class="row profile">
 <div class="col-md-9 bio">
 
- 
-                <!-- checked out assets table -->
-                <h6>[@lang('base.location_use')
-                    @if($location->has_users() > 0) 
-                        : {{ $location->has_users() }}  
-                    @endif]</h6>
-               <div class="row-fluid table users-list">
+<div class="row-fluid table users-list">
+    
+@if($location->has_users() > 0)
 <table id="example">
     <thead>
         <tr role="row">
@@ -42,7 +38,7 @@
         </tr>
     </thead>
     <tbody>
-        @if($location->has_users() > 0)
+
         @foreach ($location->users as $user)
         <tr>
             <td>
@@ -60,13 +56,21 @@
             <td>{{{ $user->licenses->count() }}}</td>
             <td>{{ $user->isActivated() ? '<i class="icon-ok"></i>' : ''}}</td>
            
-
-           
         </tr>
         @endforeach
-        @endif
+        
     </tbody>
 </table>
+
+@else
+                    <div class="col-md-10"><br>
+                        <div class="alert alert-info alert-block">
+                            <i class="icon-info-sign"></i>
+                            @lang('general.no_results')
+                        </div>
+                    </div>
+@endif
+
 </div>
                 <br>             
         </div>

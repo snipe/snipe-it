@@ -51,8 +51,8 @@
 
     <!-- side address column -->
     <div class="col-md-3 col-xs-12 address pull-right">
-    <br />
     <h4>@lang('base.serviceagreementtype_about')</h4>
+        <br />
     <p>@lang('admin/serviceagreementtypes/message.about') </p>
         
         

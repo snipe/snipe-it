@@ -50,8 +50,8 @@
 
         <!-- side address column -->
         <div class="col-md-3 col-xs-12 address pull-right">
-            <br />
-            <h6>@lang('base.family_about')</h6>
+            <h4>@lang('base.family_about')</h4>
+            <br>
             <p>@lang('admin/families/message.about') </p>
         </div>
         

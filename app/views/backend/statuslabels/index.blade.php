@@ -61,8 +61,8 @@
 
     <!-- side address column -->
    <div class="col-md-3 col-xs-12 address pull-right">
-
-        <h6>@lang('base.statuslabel_about')</h6>
+        <h4>@lang('base.statuslabel_about')</h4>
+        <br>
         <p>@lang('admin/statuslabels/message.about')</p>
     </div>
 

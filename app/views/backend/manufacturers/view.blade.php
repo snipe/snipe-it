@@ -56,7 +56,7 @@
                     </table>
 
                     @else
-                    <div class="col-md-9"><br>
+                    <div class="col-md-10"><br>
                         <div class="alert alert-info alert-block">
                             <i class="icon-info-sign"></i>
                             @lang('general.no_results')
@@ -98,7 +98,7 @@
                         </tbody>
                     </table>
                     @else
-                    <div class="col-md-9"><br>
+                    <div class="col-md-10"><br>
                         <div class="alert alert-info alert-block">
                             <i class="icon-info-sign"></i>
                             @lang('general.no_results')
@@ -112,13 +112,15 @@
 
             </div>
         </div> 
+
         <!-- side address column -->
         <div class="col-md-3 col-xs-12 address pull-right">
-            <h6><br>@lang('base.manufacturer_about'):</h6> 
-            <ul>
-                <li>@lang('admin/manufacturers/message.about')</li>           
-            </ul>               
+            <h4>@lang('base.manufacturer_about')</h4>
+            <br>
+            <p>@lang('admin/manufacturers/message.about') </p>
+
         </div>
+                
     </div>
 </div>
 @stop

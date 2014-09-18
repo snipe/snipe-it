@@ -79,7 +79,7 @@
                             </table>
 
                             @else
-                            <div class="col-md-9"><br>
+                            <div class="col-md-10"><br>
                                 <div class="alert alert-info alert-block">
                                     <i class="icon-info-sign"></i>
                                     @lang('general.no_results')
@@ -128,7 +128,7 @@
                             </table>
 
                             @else
-                            <div class="col-md-9"><br>
+                            <div class="col-md-10"><br>
                                 <div class="alert alert-info alert-block">
                                     <i class="icon-info-sign"></i>
                                     @lang('general.no_results')
@@ -190,11 +190,8 @@
                                     <li><i class="icon-comment"></i>{{{ $supplier->notes }}}</li>
                                 @endif
                             </ul>
-                    
-                                   <br />
-                    <h6>@lang('base.supplier_about')</h6>
-                    <p>@lang('admin/suppliers/message.about') </p>                   
-                    </div>
+                                     
+        </div>
                     
 </div>
 </div>

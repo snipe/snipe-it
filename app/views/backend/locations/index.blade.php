@@ -92,8 +92,8 @@
 
         <!-- side address column -->
         <div class="col-md-3 col-xs-12 address pull-right">
+            <h4>@lang('base.location_about')</h4>
             <br />
-            <h6>@lang('base.location_about')</h6>
             <p>@lang('admin/locations/message.about') </p>
 
         </div>
