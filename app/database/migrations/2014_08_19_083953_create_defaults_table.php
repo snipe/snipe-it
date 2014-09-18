@@ -24,13 +24,7 @@ class CreateDefaultsTable extends Migration {
                         $table->string('source_table');
                         $table->integer('user_id');
 		});
-                
-		Schema::table('models', function(Blueprint $table)
-		{
-                        $table->text('notes')->nullable();
-
-		});
-                
+                               
 	}
 
 	/**
@@ -41,12 +35,6 @@ class CreateDefaultsTable extends Migration {
 	public function down()
 	{
 		Schema::drop('defaults');
-                
-                Schema::table('models', function(Blueprint $table)
-		{
-                        $table->dropColumn('notes');
-
-		});
                 
 	}
 
