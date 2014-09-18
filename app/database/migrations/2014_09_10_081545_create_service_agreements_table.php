@@ -43,6 +43,7 @@ class CreateServiceAgreementsTable extends Migration {
 		});
                 
             //Populate services agreement types table
+            $seeder = new Seeder();
             $seeder->call('ServiceAgreementTypesSeeder');
             
             //Add service agreement id to assets table
