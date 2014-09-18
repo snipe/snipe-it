@@ -87,16 +87,13 @@
                
                 <div class="col-md-7">
                     {{ Form::select('location_id', $location_list , Input::old('location_id', $license->location_id), array('class'=>'select2', 'style'=>'min-width:350px')) }}
-                    {{ $errors->first('location_id', '<span class="alert-msg"><i class="icon-remove-sign"></i> :message</span>') }}
                     
         		<!-- Strict Assignment -->
                         &nbsp;&nbsp;<label>
 			<input type="checkbox" value="1" name="strict_assignment" id="strict_assignment" {{ Input::old('strict_assignment', $license->strict_assignment) == '1'  || empty($asset->id) ? ' checked="checked"' : '' }}> @lang('general.strict_assignment')
 			</label>
+                        {{ $errors->first('location_id', '<br><span class="alert-msg"><i class="icon-remove-sign"></i> :message</span>') }}
                 </div>
-                <div class="checkbox">
-
-		</div>
             </div>
                         
             <!-- Supplier -->
@@ -146,8 +143,8 @@
                  </label>
                     <div class="col-md-2">
                         <input class="form-control" type="text" name="seats" id="seats" value="{{ Input::old('seats', $license->seats) }}" />
-                        {{ $errors->first('seats', '<span class="alert-msg"><i class="icon-remove-sign"></i> :message</span>') }}
                     </div>
+                {{ $errors->first('seats', '<span class="alert-msg"><i class="icon-remove-sign"></i> :message</span>') }}
             </div>
 
             <!-- Order Number -->
@@ -179,9 +176,9 @@
                     <div class="input-group">
                         <span class="input-group-addon">@lang('general.currency')</span>
                         <input class="col-md-2 form-control" type="text" name="purchase_cost" id="purchase_cost" value="{{ Input::old('purchase_cost', number_format($license->purchase_cost,2)) }}" />
-                        {{ $errors->first('purchase_cost', '<span class="alert-msg"><i class="icon-remove-sign"></i> :message</span>') }}
                      </div>
                  </div>
+                {{ $errors->first('purchase_cost', '<span class="alert-msg"><i class="icon-remove-sign"></i> :message</span>') }}
             </div>
 
             <!-- Depreciation -->

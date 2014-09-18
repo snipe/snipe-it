@@ -8,17 +8,21 @@ class License extends Elegant
     protected $rules = array(
             'name'              => 'required|alpha_space|min:3|max:255',
             'serial'            => 'required|alpha_space|min:3|max:255|unique:licenses,serial,{id}',
-            'seats'             => 'required|min:1|max:10000|integer',
+            'seats'             => 'required|min:1|max:1000|integer',
             'license_email'     => 'email|min:0|max:120',
             'license_name'      => 'alpha_space|min:0|max:100',
             'note'              => 'alpha_space',
             'notes'             => 'alpha_space|min:0|max:255',
+            'purchase_date'     => 'date', 
+            'purchase_cost'     => 'numeric|max:1,000,000',
+            'location_id'          => 'required|integer',
         );
     
     public function __construct($attributes = array())  {
         parent::__construct($attributes); // Eloquent       
         $this->depreciation_id = DB::table('defaults')->where('name', 'depr_software')->pluck('value');
         $this->supplier_id = DB::table('defaults')->where('name', 'supplier_software')->pluck('value');
+        $this->location_id = DB::table('defaults')->where('name', 'location')->pluck('value');
     }
 
     /**

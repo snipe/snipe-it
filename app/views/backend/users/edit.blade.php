@@ -141,8 +141,8 @@
                 </label>
                 <div class="col-md-2">
                    <input type="password" name="password" class="form-control" id="password" value="" />
-                    {{ $errors->first('password', '<span class="alert-msg">:message</span>') }}
                 </div>
+                {{ $errors->first('password', '<span class="alert-msg">:message</span>') }}
             </div>
 
             <!-- Password Confirm -->
@@ -154,8 +154,8 @@
                 </label>
                 <div class="col-md-2">
                    <input type="password" name="password_confirm" id="password_confirm"  class="form-control" value="" />
-                    {{ $errors->first('password_confirm', '<span class="alert-msg">:message</span>') }}
                 </div>
+                {{ $errors->first('password_confirm', '<span class="alert-msg">:message</span>') }}
             </div>
 
 

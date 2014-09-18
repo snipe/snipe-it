@@ -68,7 +68,7 @@
                 
                 <div class="col-md-7">
                     {{ Form::select('model_id', $model_list , Input::old('model_id', $asset->model_id), array('class'=>'select2', 'style'=>'min-width:350px')) }}
-                    {{ $errors->first('model_id', '<span class="alert-msg"><i class="icon-remove-sign"></i> :message</span>') }}
+                    {{ $errors->first('model_id', '&nbsp;<span class="alert-msg"><i class="icon-remove-sign"></i> :message</span>') }}
                 </div>
             </div>
 
@@ -148,9 +148,9 @@
                             <div class="input-group">
                                     <span class="input-group-addon">@lang('general.currency')</span>
                                     <input class="col-md-2 form-control" type="text" name="purchase_cost" id="purchase_cost" value="{{ Input::old('purchase_cost', number_format($asset->purchase_cost,2)) }}" />
-                                    {{ $errors->first('purchase_cost', '<span class="alert-msg"><i class="icon-remove-sign"></i> :message</span>') }}
                              </div>
                      </div>
+                    {{ $errors->first('purchase_cost', '<span class="alert-msg"><i class="icon-remove-sign"></i> :message</span>') }}
             </div>
  
             <!-- Warrantee -->
@@ -161,9 +161,9 @@
                     <div class="input-group">
                     <input class="col-md-2 form-control" type="text" name="warranty_months" id="warranty_months" value="{{{ Input::old('warranty_months', $asset->warranty_months) }}}" />
                     <span class="input-group-addon">@lang('general.months')</span>
-                    {{ $errors->first('warranty_months', '<span class="alert-msg"><i class="icon-remove-sign"></i> :message</span>') }}
                     </div>
                 </div>
+                {{ $errors->first('warranty_months', '<span class="alert-msg"><i class="icon-remove-sign"></i> :message</span>') }}
             </div>
 
             <!-- Status -->

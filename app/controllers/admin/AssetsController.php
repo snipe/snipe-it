@@ -145,16 +145,12 @@ class AssetsController extends AdminController
      */
     public function getCreate()
     {
-        // Grab the dropdown list of models
+        // Grab the dropdown lists
         $model_list = array('' => '') + Model::orderBy('name', 'asc')->lists('name', 'id');
         $supplier_list = array('' => '') + Supplier::orderBy('name', 'asc')->lists('name', 'id');
         $assigned_to = array('' => 'Select a User') + DB::table('users')->select(DB::raw('concat (first_name," ",last_name) as full_name, id'))->whereNull('deleted_at')->lists('full_name', 'id');
         $location_list = array('' => '') + Location::orderBy('name', 'asc')->lists('name', 'id');
         $service_agreement_list = array('' => '') + \ServiceAgreement::orderBy('name', 'asc')->lists('name', 'id');
-        
-        // Grab the dropdown list of status
-        //$statuslabel_list = array('' => Lang::get('general.pending')) + array('0' => Lang::get('general.ready_to_deploy')) + Statuslabel::orderBy('name', 'asc')->lists('name', 'id');
-        // only use database values
         $statuslabel_list = Statuslabel::orderBy('id', 'asc')->lists('name', 'id');
 
         return View::make('backend/hardware/edit')

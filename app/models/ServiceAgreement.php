@@ -8,17 +8,22 @@ class ServiceAgreement extends Elegant
     protected $rules = array(
         'name'                      => 'required|alpha_space|min:3|max:255|unique:service_agreements,name,{id}',       
         'user_id'                   => 'integer',  
-        'term_months'               => 'required|integer|max:100',  
+        'term_months'               => 'required|integer|max:240',  
         'supplier_id'               => 'integer', 
         'service_agreement_type_id' => 'integer', 
         'purchase_date'             => 'date', 
-        'purchase_cost'             => 'numeric', 
+        'purchase_cost'             => 'numeric|max:1,000,000', 
         'contract_number'           => 'max:255',
         'management_url'            => 'max:100',
-        'registered_to'            => 'max:255',
-        'location_id'                  => 'required|integer'
+        'registered_to'             => 'max:255',
+        'location_id'               => 'required|integer'
     );
 
+    public function __construct($attributes = array())  {
+        parent::__construct($attributes); // Eloquent       
+        $this->supplier_id = DB::table('defaults')->where('name', 'supplier_software')->pluck('value');
+        $this->location_id = DB::table('defaults')->where('name', 'location')->pluck('value');
+    }
     
     public function location()
     {

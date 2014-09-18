@@ -90,9 +90,9 @@
                     <div class="input-group">
                     <input class="col-md-2 form-control" type="text" name="term_months" id="term_months" value="{{{ Input::old('term_months', $serviceagreement->term_months) }}}" />
                     <span class="input-group-addon">@lang('general.months')</span>
-                    {{ $errors->first('term_months', '<span class="alert-msg"><i class="icon-remove-sign"></i> :message</span>') }}
                     </div>
                 </div>
+                {{ $errors->first('term_months', '<span class="alert-msg"><i class="icon-remove-sign"></i> :message</span>') }}
             </div>
             
                                 <!-- Location -->
@@ -101,16 +101,13 @@
                                        
                                         <div class="col-md-7">
                                             {{ Form::select('location_id', $location_list , Input::old('location_id', $serviceagreement->location_id), array('class'=>'select2', 'style'=>'min-width:350px')) }}
-                                            {{ $errors->first('location_id', '<span class="alert-msg"><i class="icon-remove-sign"></i> :message</span>') }}
 
                                                 <!-- Strict Assignment -->
                                                 &nbsp;&nbsp;<label>
                                                 <input type="checkbox" value="1" name="strict_assignment" id="strict_assignment" {{ Input::old('strict_assignment', $serviceagreement->strict_assignment) == '1' || empty($asset->id) ? ' checked="checked"' : '' }}> @lang('general.strict_assignment')
                                                 </label>
-                                        </div>
-                                        <div class="checkbox">
-
-                                        </div>
+                                                {{ $errors->first('location_id', '<br><span class="alert-msg"><i class="icon-remove-sign"></i> :message</span>') }} 
+                                                </div>
                                     </div>
                                 
                                 <!-- Maker/Manufacturer -->
@@ -142,9 +139,9 @@
                             <div class="input-group">
                                     <span class="input-group-addon">@lang('general.currency')</span>
                                     <input class="col-md-2 form-control" type="text" name="purchase_cost" id="purchase_cost" value="{{ Input::old('purchase_cost', number_format($serviceagreement->purchase_cost,2)) }}" />
-                                    {{ $errors->first('purchase_cost', '<span class="alert-msg"><i class="icon-remove-sign"></i> :message</span>') }}
                              </div>
                      </div>
+                    {{ $errors->first('purchase_cost', '<span class="alert-msg"><i class="icon-remove-sign"></i> :message</span>') }}
             </div>
             
                                 <!-- Notes -->

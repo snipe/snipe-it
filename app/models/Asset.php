@@ -17,7 +17,9 @@ class Asset extends Elegant
         'asset_tag'         => 'required|alpha_space|min:3|max:255|unique:assets,asset_tag,{id}',
         'serial'            => 'required|alpha_dash|min:3|max:255|unique:assets,serial,{id}',
         'status'            => 'integer',
-        'location_id'       => 'required'
+        'location_id'       => 'required',
+        'purchase_date'     => 'date', 
+        'purchase_cost'     => 'numeric|max:1,000,000', 
         );
     
     private $pendingState;
