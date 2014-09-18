@@ -154,11 +154,12 @@
                 </div>
 
                 
-                    <!-- side address column -->
-                    <div class="col-md-3 address pull-right">
+        <!-- side address column -->
+        <div class="col-md-3 address pull-right">
+            <br>
             <h4>@lang('base.setting_about')</h4>
-                        <br />
+            <br />
             <p>@lang('admin/settings/message.about') </p>
-
-                    </div>
+        </div>
+        
 @stop
