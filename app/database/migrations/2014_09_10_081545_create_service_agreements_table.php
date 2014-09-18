@@ -60,12 +60,6 @@ class CreateServiceAgreementsTable extends Migration {
                     $table->smallInteger('service_agreement_id')->nullable();
 		});
                 
-            //Add notes to models
-                Schema::table('models', function(Blueprint $table)
-		{
-		// Add notes to models table
-                    $table->text('notes')->nullable();
-		}); 
 	}
 
 	/**
@@ -91,12 +85,6 @@ class CreateServiceAgreementsTable extends Migration {
 		// Add location_id to assets table
                     $table->dropColumn('service_agreement_id');
 		});
-                
-             //Drop notes from models
-                Schema::table('models', function(Blueprint $table)
-		{
-		// Add notes to models table
-                    $table->dropColumn('notes');
-		});                
+                             
         }
 }
