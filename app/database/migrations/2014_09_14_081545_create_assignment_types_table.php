@@ -46,7 +46,12 @@ class CreateAssignmentTypesTable extends Migration {
                     $table->integer('assignment_type_id')->nullable();
 		});
                 
-                DB::statement('ALTER TABLE models MODIFY column notes text NULL');
+                Schema::table('models', function(Blueprint $table)
+		{
+		// Add notes to models table
+                    $table->text('notes')->nullable();
+		});                
+
 	}
 
 	/**
@@ -71,6 +76,11 @@ class CreateAssignmentTypesTable extends Migration {
                     $table->dropColumn('assignment_type_id');
 		});
                 
+                Schema::table('models', function(Blueprint $table)
+		{
+		// Remove the family_id column
+                    $table->dropColumn('notes');
+		});
 	}
 
 }
