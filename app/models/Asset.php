@@ -19,7 +19,7 @@ class Asset extends Elegant
         'status'            => 'integer',
         'location_id'       => 'required',
         'purchase_date'     => 'date', 
-        'purchase_cost'     => 'numeric|max:1,000,000', 
+        'purchase_cost'     => 'numeric|max:10000000', 
         );
     
     private $pendingState;

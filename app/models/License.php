@@ -14,8 +14,8 @@ class License extends Elegant
             'note'              => 'alpha_space',
             'notes'             => 'alpha_space|min:0|max:255',
             'purchase_date'     => 'date', 
-            'purchase_cost'     => 'numeric|max:1,000,000',
-            'location_id'          => 'required|integer',
+            'purchase_cost'     => 'numeric|max:10000000',
+            'location_id'       => 'required|integer',
         );
     
     public function __construct($attributes = array())  {

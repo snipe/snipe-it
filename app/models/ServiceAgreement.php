@@ -12,7 +12,7 @@ class ServiceAgreement extends Elegant
         'supplier_id'               => 'integer', 
         'service_agreement_type_id' => 'integer', 
         'purchase_date'             => 'date', 
-        'purchase_cost'             => 'numeric|max:1,000,000', 
+        'purchase_cost'             => 'numeric|max:10000000', 
         'contract_number'           => 'max:255',
         'management_url'            => 'max:100',
         'registered_to'             => 'max:255',

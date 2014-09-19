@@ -23,8 +23,8 @@ function appVersion() {
     $version = array(
         "level" => "beta",
         "major"=>0,
-        "minor"=>5,
-        "build"=>0,
+        "minor"=>4,
+        "build"=>12,
     );
     
     $appVersionString = implode(".", $version);
