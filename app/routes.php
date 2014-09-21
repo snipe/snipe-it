@@ -57,11 +57,6 @@ Route::group(array('prefix' => 'hardware'), function () {
 */
 
 Route::group(array('prefix' => 'admin'), function () {
-
-    # Service Agreements
-    Route::group(array('prefix' => 'assignmentdefinitions'), function () {
-        Route::get('/', array('as' => 'assignmentdefinitions', 'uses' => 'Controllers\Admin\AssignmentDefinitionsController@getIndex'));
-     });   
         
     # Service Agreements
     Route::group(array('prefix' => 'serviceagreements'), function () {

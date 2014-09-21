@@ -84,15 +84,22 @@ class LicensesController extends AdminController
     public function postCreate()
     {
 
-
-        // get the POST data
-        $new = Input::all();
-
         // create a new model instance
         $license = new License();
 
+        // Cleans the currency input value before validation
+        Input::merge(array_map('ParseFloat', Input::only('purchase_cost')));        
+        
+        //attempt to validate
+        $validator = Validator::make(Input::all(), $license->validationRules());
+        
         // attempt validation
-        if ($license->validate($new)) {
+        if ($validator->fails())
+        {
+            // The given data did not pass validation            
+            return Redirect::back()->withInput()->withErrors($validator->messages());
+        }
+        else {
 
             // Save the license data
             $license->name 				= e(Input::get('name'));
@@ -173,10 +180,6 @@ class LicensesController extends AdminController
                 return Redirect::to("admin/licenses/$licenseID/view")->with('success', Lang::get('admin/licenses/message.checkout.success'));
                 //return Redirect::to("admin/licenses")->with('success', Lang::get('admin/licenses/message.create.success'));
             }
-        } else {
-            // failure
-            $errors = $license->errors();
-            return Redirect::back()->withInput()->withErrors($errors);
         }
 
         // Redirect to the license create page
@@ -240,8 +243,8 @@ class LicensesController extends AdminController
             return Redirect::to('admin/licenses')->with('error', Lang::get('admin/licenses/message.does_not_exist'));
         }
 
-        // get the POST data
-        $new = Input::all();
+        // Cleans the currency input value before validation
+        Input::merge(array_map('ParseFloat', Input::only('purchase_cost'))); 
 
         // attempt validation
         $validator = Validator::make(Input::all(), $license->validationRules($licenseId));
@@ -251,6 +254,7 @@ class LicensesController extends AdminController
             // The given data did not pass validation            
             return Redirect::back()->withInput()->withErrors($validator->messages());
         }
+        
         //  validation succeeds
         else {
         

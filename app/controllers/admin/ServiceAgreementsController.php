@@ -3,18 +3,19 @@
 use AdminController;
 use Input;
 use Lang;
-use Model;
+//use Model;
 use Redirect;
-use Setting;
+//use Setting;
 use Sentry;
-use DB;
-use Depreciation;
-use Manufacturer;
-use Str;
+//use DB;
+//use Depreciation;
+//use Manufacturer;
+//use Str;
 use Validator;
 use View;
-use License;
+//use License;
 use Location;
+use ServiceAgreement;
 
 
 class ServiceAgreementsController extends AdminController 
@@ -22,12 +23,12 @@ class ServiceAgreementsController extends AdminController
     public function getIndex()
     {
         if (Input::get('withTrashed')) {
-            $serviceagreements = \ServiceAgreement::withTrashed()->get();;    
+            $serviceagreements = ServiceAgreement::withTrashed()->get();  
         } elseif (Input::get('onlyTrashed')) {	
-            $serviceagreements = \ServiceAgreement::onlyTrashed()->get();  
+            $serviceagreements = ServiceAgreement::onlyTrashed()->get();  
         }    
         else {
-            $serviceagreements = \ServiceAgreement::all();
+            $serviceagreements = ServiceAgreement::all();
         }
 
         // Show the page
@@ -36,7 +37,7 @@ class ServiceAgreementsController extends AdminController
     
     public function getEdit($serviceagreementId = null)
     {        
-        if (is_null($serviceagreement = \ServiceAgreement::find($serviceagreementId))) {
+        if (is_null($serviceagreement = ServiceAgreement::find($serviceagreementId))) {
             // Redirect to the blogs management page
             return Redirect::to('backend/serviceagreements/index')->with('error', Lang::get('admin/serviceagreements/message.does_not_exist'));
         }
@@ -52,7 +53,7 @@ class ServiceAgreementsController extends AdminController
     
     public function getView($serviceagreementId = null)
     {
-        if (is_null($serviceagreement = \ServiceAgreement::find($serviceagreementId))) {
+        if (is_null($serviceagreement = ServiceAgreement::find($serviceagreementId))) {
             // Redirect to the blogs management page
             return Redirect::to('backend/serviceagreements/index')->with('error', Lang::get('admin/serviceagreements/message.does_not_exist'));
         }
@@ -63,11 +64,14 @@ class ServiceAgreementsController extends AdminController
      public function postEdit($serviceagreementId = null)
     {
         // Check if the model exists
-        if (is_null($serviceagreement = \ServiceAgreement::find($serviceagreementId))) {
+        if (is_null($serviceagreement = ServiceAgreement::find($serviceagreementId))) {
             // Redirect to the models management page
             return Redirect::to('backend/serviceagreements/index')->with('error', Lang::get('admin/serviceagreements/message.does_not_exist'));
         }
 
+        // Cleans the currency input value before validation
+        Input::merge(array_map('ParseFloat', Input::only('purchase_cost')));         
+        
           //attempt to validate
         $validator = Validator::make(Input::all(), $serviceagreement->validationRules($serviceagreementId));
 
@@ -136,7 +140,7 @@ class ServiceAgreementsController extends AdminController
     
     public function getDelete($serviceagreementId = null)
     {
-        if (is_null($serviceagreement = \ServiceAgreement::withTrashed()->find($serviceagreementId))) {
+        if (is_null($serviceagreement = ServiceAgreement::withTrashed()->find($serviceagreementId))) {
             // Redirect to the license management page
             return Redirect::to('admin/serviceagreements')->with('error', Lang::get('admin/serviceagreements/message.not_found'));
         }
@@ -169,14 +173,22 @@ class ServiceAgreementsController extends AdminController
     public function postCreate()
     {
 
-        // get the POST data
-        $new = Input::all();
-
         // Create a new manufacturer
-        $serviceagreement = new \ServiceAgreement;
-
+        $serviceagreement = new ServiceAgreement();
+        
+        // Cleans the currency input value before validation
+        Input::merge(array_map('ParseFloat', Input::only('purchase_cost'))); 
+        
+        //attempt to validate
+        $validator = Validator::make(Input::all(), $serviceagreement->validationRules());
+        
         // attempt validation
-        if ($serviceagreement->validate($new)) {
+        if ($validator->fails())
+        {
+            // The given data did not pass validation            
+            return Redirect::back()->withInput()->withErrors($validator->messages());
+        }
+        else {
 
             // Save the location data            
             $serviceagreement->user_id                      = Sentry::getId();
@@ -226,10 +238,6 @@ class ServiceAgreementsController extends AdminController
                 // Redirect to the new manufacturer  page
                 return Redirect::to('admin/serviceagreements/')->with('success', Lang::get('message.delete.success'));
             }
-        } else {
-            // failure
-            $errors = $serviceagreement->errors();
-            return Redirect::back()->withInput()->withErrors($errors);
         }
 
         // Redirect to the manufacturer create page
@@ -240,7 +248,7 @@ class ServiceAgreementsController extends AdminController
     public function getRestore($serviceagreementId)
     {
     
-        if (is_null($serviceagreement = \ServiceAgreement::withTrashed()->find($serviceagreementId))) {
+        if (is_null($serviceagreement = ServiceAgreement::withTrashed()->find($serviceagreementId))) {
             // Redirect to the license management page
             return Redirect::to('admin/serviceagreements')->with('error', Lang::get('admin/serviceagreements/message.not_found'));
         }
@@ -248,7 +256,7 @@ class ServiceAgreementsController extends AdminController
         $serviceagreement->restore();
         
         
-        \ServiceAgreement::withTrashed()->where('id', $serviceagreement->id)->restore();
+        ServiceAgreement::withTrashed()->where('id', $serviceagreement->id)->restore();
         
         
         return Redirect::to('admin/serviceagreements')->with('success', Lang::get('message.restore.success'));
@@ -257,7 +265,7 @@ class ServiceAgreementsController extends AdminController
     public function getPurge()
     {
         //delete all licenses
-        \ServiceAgreement::onlyTrashed()->forceDelete();      
+        ServiceAgreement::onlyTrashed()->forceDelete();      
      
         
         return Redirect::to('admin/serviceagreements')->with('success', 'Purge Submitted');
@@ -266,7 +274,7 @@ class ServiceAgreementsController extends AdminController
     public function getClone($serviceagreementId = null)
     {
          // Check if the license exists
-        if (is_null($serviceagreement_to_clone = \ServiceAgreement::withTrashed()->find($serviceagreementId))) {
+        if (is_null($serviceagreement_to_clone = ServiceAgreement::withTrashed()->find($serviceagreementId))) {
             // Redirect to the license management page
             return Redirect::to('admin/serviceagreements')->with('error', Lang::get('admin/serviceagreements/message.not_found'));
         }

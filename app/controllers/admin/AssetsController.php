@@ -196,7 +196,10 @@ class AssetsController extends AdminController
     {
         // create a new model instance
         $asset = new Asset();
- 
+
+        // Cleans the currency input value before validation
+        Input::merge(array_map('ParseFloat', Input::only('purchase_cost')));        
+        
         //attempt to validate
         $validator = Validator::make(Input::all(), $asset->validationRules());
 
@@ -346,6 +349,10 @@ class AssetsController extends AdminController
         if(e(Input::get('status_id')) == 3 && e(Input::get('assigned_to')) < 1) {
             return Redirect::to('hardware/'.$assetId.'/edit')->with('error', 'cannot deploy without user');
         }
+
+        // Cleans the currency input value before validation
+        Input::merge(array_map('ParseFloat', Input::only('purchase_cost')));        
+        
         //attempt to validate
         $validator = Validator::make(Input::all(), $asset->validationRules($assetId));
 

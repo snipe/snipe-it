@@ -138,7 +138,7 @@
                     <div class="col-md-2">
                             <div class="input-group">
                                     <span class="input-group-addon">@lang('general.currency')</span>
-                                    <input class="col-md-2 form-control" type="text" name="purchase_cost" id="purchase_cost" value="{{ Input::old('purchase_cost', number_format($serviceagreement->purchase_cost,2,'.','')) }}" />
+                                    <input class="col-md-2 form-control" type="text" name="purchase_cost" id="purchase_cost" value="{{ Input::old('purchase_cost', number_format($serviceagreement->purchase_cost,2)) }}" />
                              </div>
                      </div>
                     {{ $errors->first('purchase_cost', '<span class="alert-msg"><i class="icon-remove-sign"></i> :message</span>') }}
