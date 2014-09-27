@@ -104,7 +104,9 @@ If you still run into a permissions error, you may need to increase the permissi
 
 -----
 
-### 7) Set the correct document root for your server
+### 7) Settings up your web server
+
+##### 7.1) Set the correct document root for your server with Apache
 
 The document root for the app should be set to the `public` directory. In a standard Apache virtualhost setup, that might look something like this on a standard linux LAMP stack:
 
@@ -133,6 +135,69 @@ An OS X virtualhost setup could look more like:
 Snipe-IT requires `mod_rewrite` to be installed and enabled on systems running Apache. For more information on how to set up `mod_rewrite`, [click here](http://xmodulo.com/2013/01/how-to-enable-mod_rewrite-in-apache2-on-debian-ubuntu.html).
 
 Note that in Apache 2.4, you may need to use `Require all granted` instead of `Allow From All`.
+
+##### 7.2) Setting up the site configuration for your server with Nginx and PHP-FPM
+
+In order to work, PHP-FPM will need to be installed and setup to listen on a socket.  For more information on how to setup PHP-FPM, [click here](https://www.digitalocean.com/community/tutorials/how-to-install-linux-nginx-mysql-php-lemp-stack-on-ubuntu-12-04#step-five—configure-php).
+
+	server {
+	    listen 80;
+	    server_name localhost;
+	
+	    root /Users/youruser/Sites/snipe-it/public/;
+	    index index.php index.html index.htm;
+
+	    location / {
+	        try_files $uri $uri/ /index.php$is_args$args;
+	    }
+	 
+	    location ~ \.php$ {
+	        try_files $uri $uri/ =404;
+	        fastcgi_pass unix:/var/run/php5-fpm-www.sock;
+	        fastcgi_index index.php;
+	        fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+	        include fastcgi_params;
+	    }
+	}
+	
+If you prefer to use a forced SSL setup, you can use the following configuration instead.
+
+	server {
+	    listen 80;
+	    server_name localhost;
+	    
+	    return 301 https://$server_name$request_uri;
+	}
+	 
+	server {
+	    listen 443 ssl;
+	    server_name localhost;
+	    
+	    ssl_certificate /path/to/your.crt;
+	    ssl_certificate_key /path/to/your.key;
+	    ssl_protocols SSLv3 TLSv1 TLSv1.1 TLSv1.2;
+	    ssl_prefer_server_ciphers on;
+	    ssl_ciphers ECDHE-RSA-AES256-GCM-SHA384:ECDHE-RSA-AES128-GCM-SHA256:ECDHE-RSA-AES256-SHA384:ECDHE-RSA-AES128-SHA256:ECDHE-RSA-RC4-SHA:ECDHE-RSA-AES256-SHA:DHE-RSA-AES256-SHA:DHE-RSA-AES128-SHA:RC4-SHA:!aNULL:!eNULL:!EXPORT:!DES:!3DES:!MD5:!DSS:!PKS;
+	    ssl_session_timeout 5m;
+	    ssl_session_cache builtin:1000 shared:SSL:10m;
+	    
+	    root /Users/youruser/Sites/snipe-it/public/;
+	    index index.php index.html index.htm;
+	 
+	    location / {
+	        try_files $uri $uri/ /index.php$is_args$args;
+	    }
+	 
+	    location ~ \.php$ {
+	        try_files $uri $uri/ =404;
+	        fastcgi_pass unix:/var/run/php5-fpm-www.sock;
+	        fastcgi_index index.php;
+	        fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+	        include fastcgi_params;
+	    }
+	}
+	
+Note that with the SSL configuration you will need to adjust the path to your SSL certificate or it will not work.  You can use a proper certificate generated from a CA or a self-signed certificate.  For more information on creating a self-signed certificate, [click here](https://www.digitalocean.com/community/tutorials/how-to-create-a-ssl-certificate-on-nginx-for-ubuntu-12-04).
 
 -----
 
