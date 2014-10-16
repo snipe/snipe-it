@@ -47,7 +47,7 @@ $debugbar["messages"]->addMessage("hello world!");
 
 @if ($assets->count() > 0)
 
-
+<div class="table-responsive">
 <table id="example">
     <thead>
         <tr role="row">
@@ -57,12 +57,10 @@ $debugbar["messages"]->addMessage("hello world!");
             <th class="col-md-3" bSortable="true">@lang('general.name')</th>
             @endif
             <th class="col-md-2" bSortable="true">@lang('admin/hardware/table.serial')</th>
-            @if (Input::get('Pending') || Input::get('Undeployable') || Input::get('RTD'))
+
             <th class="col-md-2" bSortable="true">@lang('general.status')</th>
-            @else
-            <th class="col-md-2" bSortable="true">@lang('admin/hardware/table.checkoutto')</th>
+
             <th class="col-md-2" bSortable="true">@lang('admin/hardware/table.location')</th>
-            @endif
             <th class="col-md-2">@lang('admin/hardware/table.eol')</th>
             <th class="col-md-1">@lang('admin/hardware/table.change')</th>
             <th class="col-md-2 actions" bSortable="false">@lang('table.actions')</th>
@@ -72,43 +70,53 @@ $debugbar["messages"]->addMessage("hello world!");
 
         @foreach ($assets as $asset)
         <tr>
-            <td><a href="{{ route('view/hardware', $asset->id) }}">{{ $asset->asset_tag }}</a></td>
-            <td><a href="{{ route('view/model', $asset->model->id) }}">{{ $asset->model->name }}</a></td>
+            <td><a href="{{ route('view/hardware', $asset->id) }}">{{{ $asset->asset_tag }}}</a></td>
+            <td><a href="{{ route('view/model', $asset->model->id) }}">{{{ $asset->model->name }}}</a></td>
+
             @if (Setting::getSettings()->display_asset_name)
-                <td><a href="{{ route('view/hardware', $asset->id) }}">{{ $asset->name }}</a></td>
+                <td><a href="{{ route('view/hardware', $asset->id) }}">{{{ $asset->name }}}</a></td>
             @endif
-            <td>{{ $asset->serial }}</td>
-            @if (Input::get('Pending') || Input::get('Undeployable') || Input::get('RTD'))
+
+            <td>{{{ $asset->serial }}}</td>
+
+
                 <td>
                     @if (Input::get('Pending'))
                         @lang('general.pending')
                     @elseif (Input::get('RTD'))
                         @lang('general.ready_to_deploy')
                     @elseif (Input::get('Undeployable'))
-                        @if ($asset->assetstatus) {{{ $asset->assetstatus->name }}}
+                        @if ($asset->assetstatus)
+                        	{{{ $asset->assetstatus->name }}}
                         @endif
+                    @else
+                    	@if ($asset->assigneduser)
+							<a href="{{ route('view/user', $asset->assigned_to) }}">
+							{{{ $asset->assigneduser->fullName() }}}
+							</a>
+						@else
+							@if ($asset->assetstatus)
+                        	{{{ $asset->assetstatus->name }}}
+                        	@endif
+						@endif
                     @endif
-                </td>
-            @else
-                <td>
-                @if ($asset->assigneduser)
-                    <a href="{{ route('view/user', $asset->assigned_to) }}">
-                    {{{ $asset->assigneduser->fullName() }}}
-                    </a>
-                @endif
-                </td>
-                <td>
-                    @if ($asset->assigneduser && $asset->assetloc) <a href="{{ route('update/location', $asset->assetloc->id) }}">{{{ $asset->assetloc->name }}}</a>
-                @else
-                    @if ($asset->assetstatus) {{{ $asset->assetstatus->name }}}
-                    @endif
-                @endif
                 </td>
 
-            @endif
+
 
             <td>
-            @if ($asset->model->eol) {{{ $asset->eol_date() }}}
+                @if ($asset->assigneduser && $asset->assetloc)
+                    	<a href="{{ route('update/location', $asset->assetloc->id) }}">{{{ $asset->assetloc->name }}}</a>
+                @elseif ($asset->defaultLoc)
+                    	<a href="{{ route('update/location', $asset->defaultLoc->id) }}">{{{ $asset->defaultLoc->name }}}</a>
+
+                @endif
+
+            </td>
+
+            <td>
+            @if ($asset->model->eol)
+            	{{{ $asset->eol_date() }}}
             @endif
             </td>
 
@@ -131,6 +139,7 @@ $debugbar["messages"]->addMessage("hello world!");
         @endforeach
     </tbody>
 </table>
+</div>
 @else
 <div class="col-md-9">
     <div class="alert alert-info alert-block">
@@ -140,6 +149,7 @@ $debugbar["messages"]->addMessage("hello world!");
 </div>
 
 </div>
+
 @endif
 
 

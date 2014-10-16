@@ -20,8 +20,9 @@
     <h3>@lang('general.depreciation_report')</h3>
 </div>
 
-<div class="row table">
-<div class="col-md-12">
+<div class="row">
+
+<div class="table-responsive">
 <table id="example">
         <thead>
             <tr role="row">
@@ -88,7 +89,7 @@
         @endforeach
     </tbody>
 </table>
-</div>
 
+</div>
 
 @stop

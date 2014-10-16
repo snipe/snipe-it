@@ -33,6 +33,7 @@
 
 @if ($users->getTotal() > 0)
 <div class="row-fluid table users-list">
+<div class="table-responsive">
 <table id="example">
     <thead>
         <tr role="row">
@@ -92,7 +93,7 @@
     </tbody>
 </table>
 </div>
-
+</div>
 <!-- {{
     Datatable::table()
         ->addColumn(Lang::get('name'))

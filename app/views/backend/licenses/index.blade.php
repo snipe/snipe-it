@@ -17,7 +17,7 @@
 </div>
 
 <div class="row form-wrapper">
-
+<div class="table-responsive">
 <table id="example">
     <thead>
         <tr role="row">
@@ -112,5 +112,5 @@
 
     </tbody>
 </table>
-
+</div>
 @stop

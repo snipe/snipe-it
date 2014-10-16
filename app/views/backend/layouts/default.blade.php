@@ -2,7 +2,7 @@
 
 <html lang="en">
     <head>
-      
+
         <!-- Basic Page Needs
         ================================================== -->
         <meta charset="utf-8" />
@@ -41,10 +41,15 @@
         <link rel="stylesheet" href="{{ asset('assets/css/compiled/user-profile.css') }}" type="text/css" media="screen" />
         <link rel="stylesheet" href="{{ asset('assets/css/compiled/form-showcase.css') }}" type="text/css" media="screen" />
         <link rel="stylesheet" href="{{ asset('assets/css/lib/jquery.dataTables.css') }}" type="text/css" media="screen" />
+        <link rel="stylesheet" href="//cdn.datatables.net/responsive/1.0.2/css/dataTables.responsive.css" type="text/css" media="screen" />
+
+
 
         <!-- global header javascripts -->
         <script src="//code.jquery.com/jquery-latest.js"></script>
-        <script src="{{ asset('assets/js/jquery.dataTables.js') }}"></script>
+        <script src="//cdn.datatables.net/1.10.3/js/jquery.dataTables.min.js"></script>
+        <script src="//cdn.datatables.net/responsive/1.0.2/js/dataTables.responsive.js"></script>
+
         <script>
             window.snipeit = {
                 settings: {
@@ -70,14 +75,14 @@
         }
 
         @show
-        
+
         </style>
- 
+
 
     </head>
 
     <body>
-       
+
     <!-- navbar -->
 
 
@@ -206,7 +211,7 @@
                                 <i class="icon-cog"></i> @lang('general.settings')
                             </a>
                         </li>
-                        
+
                     </ul>
                 </li>
                 @endif
@@ -248,9 +253,9 @@
                 <a href="{{ URL::to('admin/licenses') }}"  >
                     <i class="icon-certificate"></i>
                      <span>@lang('general.licenses')</span>
-                    
+
                 </a>
-               
+
             </li>
             <li{{ (Request::is('admin/users*') ? ' class="active"><div class="pointer"><div class="arrow"></div><div class="arrow_border"></div></div>' : '>') }}
                 <a href="{{ URL::to('admin/users') }}">
@@ -338,7 +343,7 @@
 
                   <div class="muted credit" style="position:absolute;margin-top:1px;left:80px;margin-right:100px;"><a target="_blank" href="http://snipeitapp.com">Snipe IT</a> is a free open source
                       project by <a target="_blank" href="http://twitter.com/snipeyhead">@snipeyhead</a>.</div>
-                  <div class="muted credit" style="position:absolute;margin-top:1px;right:80px;margin-left:100px;"><a target="_blank" href="https://github.com/snipe/snipe-it">Fork it</a> | <a target="_blank" href="http://docs.snipeitapp.com/">Documentation</a> | 
+                  <div class="muted credit" style="position:absolute;margin-top:1px;right:80px;margin-left:100px;"><a target="_blank" href="https://github.com/snipe/snipe-it">Fork it</a> | <a target="_blank" href="http://docs.snipeitapp.com/">Documentation</a> |
                       <a target="_blank" href="https://github.com/snipe/snipe-it/issues?state=open">Report a Bug</a> &nbsp; &nbsp; (alpha-0.4.3)</p>
                   </div>
                   </div>
@@ -371,6 +376,7 @@
     <script src="{{ asset('assets/js/bootstrap.datepicker.js') }}"></script>
     <script src="{{ asset('assets/js/theme.js') }}"></script>
     <script src="{{ asset('assets/js/snipeit.js') }}"></script>
+
 
 
     </body>
