@@ -76,7 +76,8 @@ $debugbar["messages"]->addMessage("hello world!");
                                         @lang('admin/settings/general.display_qr')</label>
                                         <div class="controls">
                                     @if ($is_gd_installed)
-                                            <input class="col-md-1" type="checkbox" name="qr_code" id="qr_code" value="1" {{ $setting->qr_code === 1 ? 'checked' : '' }} />
+                                    		{{ Form::checkbox('qr_code', '1', Input::old('qr_code', $setting->qr_code)) }}
+
                                     @else
                                             <span class="help-inline">
                                                 @lang('admin/settings/general.php_gd_warning')
