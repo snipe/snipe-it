@@ -4,11 +4,11 @@ class Asset extends Elegant
 {
     protected $table = 'assets';
     protected $softDelete = true;
-    
+
     protected $errors;
     protected $rules = array(
-        'name'   => 'alpha_space|min:6|max:255',        
-        'model_id'   => 'required',        
+        'name'   => 'alpha_space|min:6|max:255',
+        'model_id'   => 'required',
         'warranty_months'   => 'integer|min:0|max:240',
         'note'   => 'alpha_space',
         'notes'   => 'alpha_space',
@@ -63,6 +63,16 @@ class Asset extends Elegant
     {
         return $this->assigneduser->userloc();
     }
+
+
+    /**
+    * Get the asset's location based on the assigned user
+    **/
+    public function defaultLoc()
+    {
+        return $this->hasOne('Location', 'id', 'rtd_location_id');
+    }
+
 
     /**
     * Get action logs for this asset

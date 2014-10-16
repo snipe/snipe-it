@@ -11,11 +11,28 @@
 
 Route::group(array('prefix' => 'hardware'), function () {
 
-    Route::get('/', array('as' => '', 'uses' => 'Controllers\Admin\AssetsController@getIndex'));
-    Route::get('/', array('as' => 'hardware', 'uses' => 'Controllers\Admin\AssetsController@getIndex'));
-    Route::get('create', array('as' => 'create/hardware', 'uses' => 'Controllers\Admin\AssetsController@getCreate'));
-    Route::post('create', 'Controllers\Admin\AssetsController@postCreate');
-    Route::get('{assetId}/edit', array('as' => 'update/hardware', 'uses' => 'Controllers\Admin\AssetsController@getEdit'));
+
+
+    Route::get('/', array(
+    	'as' => 'hardware',
+    	'uses' => 'Controllers\Admin\AssetsController@getIndex')
+    );
+
+    Route::get('create', array(
+    	'as' => 'create/hardware',
+    	'uses' => 'Controllers\Admin\AssetsController@getCreate')
+    );
+
+    Route::post('create', array(
+    	'as' => 'savenew/hardware',
+    	'uses' => 'Controllers\Admin\AssetsController@postCreate')
+    );
+
+    Route::get('{assetId}/edit', array(
+    	'as' => 'update/hardware',
+    	'uses' => 'Controllers\Admin\AssetsController@getEdit')
+    );
+
     Route::post('{assetId}/edit', 'Controllers\Admin\AssetsController@postEdit');
     Route::get('{assetId}/clone', array('as' => 'clone/hardware', 'uses' => 'Controllers\Admin\AssetsController@getClone'));
     Route::post('{assetId}/clone', 'Controllers\Admin\AssetsController@postCreate');

@@ -31,7 +31,12 @@
             <!-- left column -->
             <div class="col-md-12 column">
 
-            <form class="form-horizontal" method="post" action="" autocomplete="off" role="form">
+			 @if ($asset->id)
+				 <form class="form-horizontal" method="post" action="{{ route('update/hardware',$asset->id) }}" autocomplete="off" role="form">
+			 @else
+				 <form class="form-horizontal" method="post" action="{{ route('savenew/hardware') }}" autocomplete="off" role="form">
+			 @endif
+
             <!-- CSRF Token -->
             <input type="hidden" name="_token" value="{{ csrf_token() }}" />
 
@@ -114,7 +119,7 @@
                              </div>
                      </div>
             </div>
- 
+
             <!-- Warrantee -->
             <div class="form-group {{ $errors->has('warranty_months') ? ' has-error' : '' }}">
                 <label for="warranty_months" class="col-md-2 control-label">@lang('admin/hardware/form.warranty')</label>
@@ -143,6 +148,16 @@
                     {{ $errors->first('notes', '<span class="alert-msg"><i class="icon-remove-sign"></i> :message</span>') }}
                 </div>
             </div>
+
+            <!-- Default Location -->
+            <div class="form-group {{ $errors->has('status_id') ? ' has-error' : '' }}">
+                <label for="status_id" class="col-md-2 control-label">@lang('admin/hardware/form.default_location')</label>
+                    <div class="col-md-7">
+                        {{ Form::select('rtd_location_id', $location_list , Input::old('rtd_location_id', $asset->rtd_location_id), array('class'=>'select2', 'style'=>'width:350px')) }}
+                        {{ $errors->first('status_id', '<span class="alert-msg"><i class="icon-remove-sign"></i> :message</span>') }}
+                    </div>
+            </div>
+
 
 			@if (!$asset->id)
              <!-- Assigned To -->
