@@ -26,3 +26,6 @@ Remember that if you're running this as anything other than `production`, you sh
     php artisan key:generate --env=local
 
 
+### Error message: Error Output: PHP Fatal error:  Call to undefined method Illuminate\Foundation\Application::registerCoreContainerAliases() in /var/www/html/vendor/laravel/framework/src/Illuminate/Foundation/start.php on line 106
+
+Remove `bootstrap/compiled.php` and your vendors dir, and try re-running `php composer.phar update`.
