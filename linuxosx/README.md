@@ -5,9 +5,9 @@ Note: Installation for Windows IIS [can be found here](https://gist.github.com/m
 
 -----
 
-### 2) Setup Environment, Database and Mail Settings
+### 1) Setup Environment, Database and Mail Settings
 
-#### 2.1) Adjust Environments
+#### 1.1) Adjust Environments
 
 Update the file `bootstrap/start.php` under the section `Detect The Application Environment`.
 
@@ -29,7 +29,7 @@ If your development, staging and production sites all run on the same server (wh
 
 -----
 
-#### 2.2) Setup Your Database
+#### 1.2) Setup Your Database
 
 Copy the example database config `app/config/production/database.example.php` to `app/config/production/database.php`.
 Update the file `app/config/production/database.php` with your database name and credentials:
@@ -47,14 +47,14 @@ Update the file `app/config/production/database.php` with your database name and
 
 
 
-#### 2.3) Setup Mail Settings
+#### 1.3) Setup Mail Settings
 
 Copy the example mail config `app/config/production/mail.example.php` to `app/config/production/mail.php`.
 Update the file `app/config/production/mail.php` with your mail settings.
 
 This will be used to send emails to your users, when they register and when they request a password reset.
 
-#### 2.4) Adjust the application settings.
+#### 1.4) Adjust the application settings.
 
 Copy the example app config `app/config/production/app.example.php` to `app/config/production/app.php`.
 
@@ -68,21 +68,21 @@ You should also change your secret key here -- if you prefer to have your key ra
 
 -----
 
-### 3) Install the Dependencies via Composer
-##### 3.1) If you don't have composer installed globally
+### 2) Install the Dependencies via Composer
+##### 2.1) If you don't have composer installed globally
 
 	cd your-folder
 	curl -sS https://getcomposer.org/installer | php
 	php composer.phar install
 
-##### 3.2) For global composer installations
+##### 2.2) For global composer installations
 
 	cd your-folder
 	composer install
 
 -----
 
-### 4) Use custom CLI Installer Command
+### 3) Use custom CLI Installer Command
 
 Now, you need to create yourself a user and finish the installation.
 
@@ -92,7 +92,7 @@ Use the following command to create your default user, user groups and run all t
 
 -----
 
-### 5) Fix permissions
+### 4) Fix permissions
 
 You'll need to make sure that the `app/storage` directory is writable by your webserver, since caches and log files get written there. You should use the minimum permissions available for writing, based on how you've got your webserver configured.
 
@@ -104,9 +104,9 @@ If you still run into a permissions error, you may need to increase the permissi
 
 -----
 
-### 6) Settings up your web server
+### 5) Settings up your web server
 
-##### 6.1) Set the correct document root for your server with Apache
+##### 5.1) Set the correct document root for your server with Apache
 
 The document root for the app should be set to the `public` directory. In a standard Apache virtualhost setup, that might look something like this on a standard linux LAMP stack:
 
@@ -136,7 +136,7 @@ Snipe-IT requires `mod_rewrite` to be installed and enabled on systems running A
 
 Note that in Apache 2.4, you may need to use `Require all granted` instead of `Allow From All`.
 
-##### 6.2) Setting up the site configuration for your server with Nginx and PHP-FPM
+##### 5.2) Setting up the site configuration for your server with Nginx and PHP-FPM
 
 In order to work, PHP-FPM will need to be installed and setup to listen on a socket.  For more information on how to setup PHP-FPM, [click here](https://www.digitalocean.com/community/tutorials/how-to-install-linux-nginx-mysql-php-lemp-stack-on-ubuntu-12-04#step-five—configure-php).
 
@@ -201,7 +201,7 @@ Note that with the SSL configuration you will need to adjust the path to your SS
 
 -----
 
-### 7) Seed the Database
+### 6) Seed the Database
 
 Loading up the sample data will give you an idea of how this should look, how your info should be structured, etc. It only pre-loads a handful of items, so you won't have to spend an hour deleting sample data.
 

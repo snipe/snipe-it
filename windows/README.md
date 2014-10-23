@@ -63,7 +63,7 @@ Your site will now appear in the list
 3. Copy `app/config/local/database.example.php` to `app/config/local/database.php`
     1. Open `app/config/local/database.php` in notepad++
     2. Update `database.php` with your database name and credentials
-		
+
 		```
 		'mysql' => array(
 			'driver'    => 'mysql',
@@ -83,16 +83,16 @@ Your site will now appear in the list
 5. Copy `app/config/local/app.example.php` to `app/config/local/app.php`
     1. Open `app/config/local/app.php` in notepad++
     2. Update the file `app/config/production/app.php` with your URL settings.
-    		
+
 	```
 	'url' => 'http://www.yourserver.com',
 	```
-	
+
 	You should also change your secret key here -- if you prefer to have your key randomly generated, run the 		artisan key:generate command from the application root.
-	
-	
+
+
 		php artisan key:generate --env=production
-	
+
 
 6. Open `C:\inetpub\wwwroot\snipe-it` in Windows Explorer
     1. Right Click and select `Composer Install`.
