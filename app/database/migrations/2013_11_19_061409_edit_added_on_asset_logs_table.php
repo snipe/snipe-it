@@ -11,7 +11,7 @@ class EditAddedOnAssetLogsTable extends Migration
      */
     public function up()
     {
-        DB::statement('ALTER TABLE asset_logs MODIFY added_on timestamp null');
+        DB::statement('ALTER TABLE  ' . DB::getTablePrefix() . 'asset_logs MODIFY added_on timestamp null');
 
     }
 
