@@ -43,7 +43,7 @@
                                     <td>@lang('admin/settings/general.display_asset_name')</td>
 
 
-                                    @if ($setting->display_asset_name === 1)
+                                    @if ($setting->display_asset_name == 1)
                                         <td>Yes</td>
                                     @else
                                         <td>No</td>
@@ -53,7 +53,7 @@
                                     <td>@lang('admin/settings/general.display_checkout_date')</td>
 
 
-                                    @if ($setting->display_checkout_date === 1)
+                                    @if ($setting->display_checkout_date == 1)
                                         <td>Yes</td>
                                     @else
                                         <td>No</td>
@@ -65,7 +65,7 @@
                                 </tr>
                                 <tr>
                                     <td>@lang('admin/settings/general.display_qr')</td>
-                                        @if ($setting->qr_code === 1)
+                                        @if ($setting->qr_code == 1)
                                             <td>Yes</td>
                                         @else
                                             <td>No</td>
