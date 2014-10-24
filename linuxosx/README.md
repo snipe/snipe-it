@@ -46,6 +46,8 @@ Update the file `app/config/production/database.php` with your database name and
         ),
 
 
+Note: You must create the database youself. Snipe-IT does not create the database or database users for you.
+
 
 #### 1.3) Setup Mail Settings
 
@@ -101,6 +103,9 @@ You'll need to make sure that the `app/storage` directory is writable by your we
 If you still run into a permissions error, you may need to increase the permissions to 775, or twiddle your user/group permissions on your server.
 
 	chmod -R 775 app/storage
+	
+Note: It should go without saying, but make sure the Snipe-IT project directory is not owned by `root`. Your webserver should be running as your webserver's user (often `apache`, `nobody`, or `www-data`). But never, ever `root`. Ever.
+
 
 -----
 
