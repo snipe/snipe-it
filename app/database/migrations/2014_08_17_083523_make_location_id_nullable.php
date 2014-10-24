@@ -13,7 +13,7 @@ class MakeLocationIdNullable extends Migration {
 	public function up()
 	{
 		//
-		DB::statement('ALTER TABLE users MODIFY column location_id int NULL');
+		DB::statement('ALTER TABLE ' . DB::getTablePrefix() . 'users MODIFY column location_id int NULL');
 	}
 
 	/**

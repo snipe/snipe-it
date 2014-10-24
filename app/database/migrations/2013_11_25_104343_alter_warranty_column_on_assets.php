@@ -11,7 +11,7 @@ class AlterWarrantyColumnOnAssets extends Migration
      */
     public function up()
     {
-        DB::statement('ALTER TABLE assets CHANGE warrantee_months warranty_months int (3)');
+        DB::statement('ALTER TABLE ' . DB::getTablePrefix() . 'assets CHANGE warrantee_months warranty_months int (3)');
     }
 
     /**

@@ -13,7 +13,7 @@ class MakeAssetLogCheckedoutToNullable extends Migration
     public function up()
     {
         //
-        DB::statement('ALTER TABLE asset_logs MODIFY column checkedout_to int(11) NULL');
+        DB::statement('ALTER TABLE ' . DB::getTablePrefix() . 'asset_logs MODIFY column checkedout_to int(11) NULL');
     }
 
     /**

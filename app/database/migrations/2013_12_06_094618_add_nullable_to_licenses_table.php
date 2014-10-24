@@ -11,11 +11,11 @@ class AddNullableToLicensesTable extends Migration
      */
     public function up()
     {
-        //
-        DB::statement('ALTER TABLE licenses MODIFY order_number varchar(50) null');
-        DB::statement('ALTER TABLE licenses MODIFY notes varchar(255) null');
-        DB::statement('ALTER TABLE licenses MODIFY license_name varchar(100) null');
-        DB::statement('ALTER TABLE licenses MODIFY license_email varchar(120) null');
+        $prefix = DB::getTablePrefix();
+        DB::statement('ALTER TABLE ' . $prefix . 'licenses MODIFY order_number varchar(50) null');
+        DB::statement('ALTER TABLE ' . $prefix . 'licenses MODIFY notes varchar(255) null');
+        DB::statement('ALTER TABLE ' . $prefix . 'licenses MODIFY license_name varchar(100) null');
+        DB::statement('ALTER TABLE ' . $prefix . 'licenses MODIFY license_email varchar(120) null');
     }
 
     /**

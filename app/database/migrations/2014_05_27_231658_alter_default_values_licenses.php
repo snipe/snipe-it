@@ -13,7 +13,7 @@ class AlterDefaultValuesLicenses extends Migration
     public function up()
     {
         //
-        DB::statement('ALTER TABLE license_seats MODIFY column notes text NULL');
+        DB::statement('ALTER TABLE ' . DB::getTablePrefix() . 'license_seats MODIFY column notes text NULL');
     }
 
     /**
