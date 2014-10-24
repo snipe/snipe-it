@@ -13,7 +13,7 @@ class MakeAssetIdInLogsNullable extends Migration {
 	public function up()
 	{
 		//
-		DB::statement('ALTER TABLE asset_logs MODIFY column asset_id int NULL');
+		DB::statement('ALTER TABLE ' . DB::getTablePrefix() . 'asset_logs MODIFY column asset_id int NULL');
 	}
 
 	/**

@@ -13,7 +13,7 @@ class AlterDefaultLicenseDepreciationId extends Migration
     public function up()
     {
         //
-        DB::statement('ALTER TABLE licenses MODIFY column depreciation_id tinyint(1) NOT NULL DEFAULT "0"');
+        DB::statement('ALTER TABLE '.DB::getTablePrefix().'licenses MODIFY column depreciation_id tinyint(1) NOT NULL DEFAULT "0"');
 
     }
 
