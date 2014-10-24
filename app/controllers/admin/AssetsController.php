@@ -224,6 +224,12 @@ class AssetsController extends AdminController
             } else {
                 $asset->requestable        = e(Input::get('requestable'));
             }
+            
+            if (e(Input::get('rtd_location_id')) == '') {
+                $asset->rtd_location_id = 0;
+            } else {
+                $asset->rtd_location_id     = e(Input::get('rtd_location_id'));
+            }
 
             // Save the asset data
             $asset->name            		= e(Input::get('name'));
@@ -232,7 +238,6 @@ class AssetsController extends AdminController
             $asset->order_number            = e(Input::get('order_number'));
             $asset->notes            		= e(Input::get('notes'));
             $asset->asset_tag            	= e(Input::get('asset_tag'));
-            $asset->rtd_location_id         = e(Input::get('rtd_location_id'));
 
             $asset->user_id          		= Sentry::getId();
             $asset->archived          			= '0';
