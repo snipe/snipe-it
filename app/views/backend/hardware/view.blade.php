@@ -171,7 +171,7 @@
                 <tr>
                     <th class="col-md-3"><span class="line"></span>@lang('general.date')</th>
                     <th class="col-md-2"><span class="line"></span>@lang('general.admin')</th>
-                    <th class="col-md-2"><span class="line"></span>@lang('table.action')</th>
+                    <th class="col-md-2"><span class="line"></span>@lang('table.actions')</th>
                     <th class="col-md-2"><span class="line"></span>@lang('general.user')</th>
                     <th class="col-md-3"><span class="line"></span>@lang('general.notes')</th>
                 </tr>

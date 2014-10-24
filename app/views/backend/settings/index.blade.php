@@ -2,7 +2,7 @@
 
 {{-- Page title --}}
 @section('title')
-Settings ::
+    @lang('admin/settings/general.settings') ::
 @parent
 @stop
 
@@ -16,7 +16,7 @@ Settings ::
                 </div>
 
 
-                <h3 class="name">Settings</h3>
+                <h3 class="name">@lang('admin/settings/general.settings')</h3>
 
 
                 <div class="row-fluid profile">
@@ -29,41 +29,50 @@ Settings ::
                             <table class="table table-hover">
                             <thead>
                                 <tr>
-                                    <th class="col-md-3">Setting</th>
-                                    <th class="col-md-3"><span class="line"></span>Value</th>
+                                    <th class="col-md-3">@lang('admin/settings/general.setting')</th>
+                                    <th class="col-md-3"><span class="line"></span>@lang('admin/settings/general.value')</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 @foreach ($settings as $setting)
                                 <tr>
-                                    <td>Site Name</td>
+                                    <td>@lang('admin/settings/general.site_name')</td>
                                     <td>{{{ $setting->site_name }}} </td>
                                 </tr>
                                 <tr>
                                     <td>@lang('admin/settings/general.display_asset_name')</td>
 
 
-                                    @if ($setting->display_asset_name === 1)
+                                    @if ($setting->display_asset_name == 1)
                                         <td>Yes</td>
                                     @else
                                         <td>No</td>
                                     @endif
                                 </tr>
-
                                 <tr>
-                                    <td>Per Page</td>
+                                    <td>@lang('admin/settings/general.display_checkout_date')</td>
+
+
+                                    @if ($setting->display_checkout_date == 1)
+                                        <td>Yes</td>
+                                    @else
+                                        <td>No</td>
+                                    @endif
+                                </tr>
+                                <tr>
+                                    <td>@lang('admin/settings/general.per_page')</td>
                                     <td>{{{ $setting->per_page }}}  </td>
                                 </tr>
                                 <tr>
-                                    <td>Display QR Codes</td>
-                                        @if ($setting->qr_code === 1)
+                                    <td>@lang('admin/settings/general.display_qr')</td>
+                                        @if ($setting->qr_code == 1)
                                             <td>Yes</td>
                                         @else
                                             <td>No</td>
                                         @endif
                                 </tr>
                                 <tr>
-                                    <td>QR Code Text</td>
+                                    <td>@lang('admin/settings/general.qr_text')</td>
                                     <td>{{{ $setting->qr_text }}}</td>
                                 </tr>
                                 @endforeach

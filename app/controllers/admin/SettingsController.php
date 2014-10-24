@@ -82,6 +82,7 @@ class SettingsController extends AdminController
             $setting->id = '1';
             $setting->site_name = e(Input::get('site_name'));
             $setting->display_asset_name = e(Input::get('display_asset_name', '0'));
+            $setting->display_checkout_date = e(Input::get('display_checkout_date', '0'));
             $setting->per_page = e(Input::get('per_page'));
             $setting->qr_code = e(Input::get('qr_code', '0'));
             $setting->qr_text = e(Input::get('qr_text'));

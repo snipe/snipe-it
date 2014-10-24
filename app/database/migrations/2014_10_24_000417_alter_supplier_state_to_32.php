@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class MakeLocationIdNullable extends Migration {
+class AlterSupplierStateTo32 extends Migration {
 
 	/**
 	 * Run the migrations.
@@ -12,8 +12,7 @@ class MakeLocationIdNullable extends Migration {
 	 */
 	public function up()
 	{
-		//
-		DB::statement('ALTER TABLE ' . DB::getTablePrefix() . 'users MODIFY column location_id int NULL');
+		DB::statement('ALTER TABLE ' . DB::getTablePrefix() . 'suppliers MODIFY column state varchar(32) null');
 	}
 
 	/**
@@ -23,7 +22,7 @@ class MakeLocationIdNullable extends Migration {
 	 */
 	public function down()
 	{
-		//
+		DB::statement('ALTER TABLE ' . DB::getTablePrefix() . 'suppliers MODIFY column state varchar(2) null');
 	}
 
 }

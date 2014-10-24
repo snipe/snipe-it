@@ -13,7 +13,7 @@ class MakeAssetLogPurchasedateToNullable extends Migration
     public function up()
     {
         //
-        DB::statement('ALTER TABLE licenses MODIFY column purchase_date date NULL');
+        DB::statement('ALTER TABLE ' . DB::getTablePrefix() . 'licenses MODIFY column purchase_date date NULL');
     }
 
     /**
