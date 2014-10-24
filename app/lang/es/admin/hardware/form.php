@@ -9,6 +9,7 @@ return array(
     'date'				=> 'Fecha Compra',
     'depreciates_on'	=> 'Depreciates On',
     'depreciation'		=> 'Depreciation',
+    'default_location'	=> 'Ubicación Predeterminada',
     'eol_date'			=> 'EOL Date',
     'eol_rate'			=> 'EOL Rate',
     'expires'			=> 'Expires',
