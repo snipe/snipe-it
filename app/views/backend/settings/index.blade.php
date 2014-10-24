@@ -49,7 +49,16 @@
                                         <td>No</td>
                                     @endif
                                 </tr>
+                                <tr>
+                                    <td>@lang('admin/settings/general.display_checkout_date')</td>
 
+
+                                    @if ($setting->display_checkout_date === 1)
+                                        <td>Yes</td>
+                                    @else
+                                        <td>No</td>
+                                    @endif
+                                </tr>
                                 <tr>
                                     <td>@lang('admin/settings/general.per_page')</td>
                                     <td>{{{ $setting->per_page }}}  </td>
