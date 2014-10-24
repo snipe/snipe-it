@@ -57,7 +57,13 @@ $debugbar["messages"]->addMessage("hello world!");
                                             </div>
                                     </div>
 
-
+                                    <div class="form-group {{ $errors->has('display_checkout_date') ? 'error' : '' }}">
+                                        {{ Form::label('display_checkout_date', Lang::get('admin/settings/general.display_checkout_date'), array('class' => 'control-label')) }}
+                                        <div class="controls">
+                                            {{ Form::checkbox('display_checkout_date', '1', Input::old('display_checkout_date', $setting->display_checkout_date)) }}
+                                            {{ $errors->first('display_checkout_date', '<span class="help-inline">:message</span>') }}
+                                            </div>
+                                    </div>
 
                                     <div class="form-group {{ $errors->has('per_page') ? 'error' : '' }}">
                                         {{ Form::label('per_page', Lang::get('admin/settings/general.per_page'), array('class' => 'control-label')) }}
@@ -71,7 +77,7 @@ $debugbar["messages"]->addMessage("hello world!");
                                         {{ Form::label('qr_code', Lang::get('admin/settings/general.display_qr'), array('class' => 'control-label')) }}
                                         <div class="controls">
                                     @if ($is_gd_installed)
-                                    		{{ Form::checkbox('qr_code', '1', Input::old('qr_code', $setting->qr_code)) }}
+                                            {{ Form::checkbox('qr_code', '1', Input::old('qr_code', $setting->qr_code)) }}
 
                                     @else
                                             <span class="help-inline">
@@ -121,6 +127,5 @@ $debugbar["messages"]->addMessage("hello world!");
                         <p>@lang('admin/settings/general.info')</p>
 
                     </div>
-
 
 @stop
