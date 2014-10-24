@@ -8,7 +8,7 @@ class Supplier extends Elegant
         'address'   		=> 'alpha_space|min:3|max:50',
         'address2'   		=> 'alpha_space|min:2|max:50',
         'city'   			=> 'alpha_space|min:3|max:255',
-        'state'                         => 'alpha_space|min:0|max:2',
+        'state'                         => 'alpha_space|min:0|max:32',
         'country'                       => 'alpha_space|min:0|max:2',
         'fax'   			=> 'alpha_space|min:7|max:20',
         'phone'   			=> 'alpha_space|min:7|max:20',
