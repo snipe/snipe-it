@@ -345,6 +345,12 @@ class AssetsController extends AdminController
             } else {
                 $asset->requestable        = e(Input::get('requestable'));
             }
+            
+            if (e(Input::get('rtd_location_id')) == '') {
+                $asset->rtd_location_id = 0;
+            } else {
+                $asset->rtd_location_id     = e(Input::get('rtd_location_id'));
+            }
 
             // Update the asset data
             $asset->name            		= e(Input::get('name'));
@@ -354,7 +360,6 @@ class AssetsController extends AdminController
             $asset->asset_tag           	= e(Input::get('asset_tag'));
             $asset->notes            		= e(Input::get('notes'));
             $asset->physical            	= '1';
-            $asset->rtd_location_id         = e(Input::get('rtd_location_id'));
 
             // Was the asset updated?
             if($asset->save()) {
