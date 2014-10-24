@@ -119,11 +119,7 @@ $debugbar["messages"]->addMessage("hello world!");
 		@if (Input::get('Deployed') && Setting::getSettings()->display_checkout_date)
 	            <td>
 	                @if (count($asset->assetlog) > 0)
-	                    @foreach ($asset->assetlog as $log)
-	                        @if ($log->action_type == "checkout")
-	                            {{{ $log->added_on }}}
-	                        @endif
-	                    @endforeach
+                        {{{ $asset->assetlog->first()->added_on }}}
 	                @endif
 	            </td>
             	@endif
