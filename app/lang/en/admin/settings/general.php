@@ -2,6 +2,7 @@
 
 return array(
     'display_asset_name'        => 'Display Asset Name',
+    'display_checkout_date'     => 'Display Checkout Date',
     'display_qr'				=> 'Display QR Codes',
     'info'  					=> 'These settings let you customize certain aspects of your installation.',
     'per_page'                  => 'Results Per Page',
