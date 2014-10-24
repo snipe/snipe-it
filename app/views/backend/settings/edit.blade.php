@@ -93,7 +93,7 @@ $debugbar["messages"]->addMessage("hello world!");
                                     <div class="form-group {{ $errors->has('qr_text') ? 'error' : '' }}">
                                         {{ Form::label('qr_text', Lang::get('admin/settings/general.qr_text'), array('class' => 'control-label')) }}
                                         <div class="controls">
-                                    @if ($setting->qr_code === 1)
+                                    @if ($setting->qr_code == 1)
                                             {{ Form::text('qr_text', Input::old('qr_text', $setting->qr_text), array('class' => 'col-md-9')) }}
                                     @else
                                             <span class="help-inline">
