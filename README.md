@@ -34,6 +34,11 @@ We use Waffle.io to help better communicate our roadmap with users. Our [project
 
 To be notified of important news (such as new releases, security advisories, etc), [sign up for our list](http://eepurl.com/XyZKz). We'll never sell or give away your info, and we'll only email you when it's important.
 
+
+### Translations!
+
+If you're not a coder but want to give back to the project and you're fluent in other languages, consider helping out with the translations. We use [CrowdIn](https://crowdin.com) to manage translations, and it makes it super-simple for you to add translations to the project without messing with code. Check out [the Snipe-IT CrowdIn translation project here](https://crowdin.com/project/snipe-it/).
+
 -----
 ## Requirements
 
