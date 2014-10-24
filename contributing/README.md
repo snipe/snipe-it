@@ -22,4 +22,6 @@ To do so:
 
 **If you've translated Snipe IT into another language already for your own usage, please consider contributing those translation files back to the project so that everyone can benefit.**
 
+If you're not a coder but want to give back to the project and you're fluent in other languages, that's okay too. We use [CrowdIn](https://crowdin.com) to manage translations, and it makes it super-simple for you to add translations (or validate proposed translations) to the project without messing with code. __Check out [the Snipe-IT CrowdIn translation project here](https://crowdin.com/project/snipe-it/)__.
+
 Thanks!
