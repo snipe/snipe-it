@@ -24,7 +24,7 @@ class ModelsController extends AdminController
     public function getIndex()
     {
         // Grab all the models
-        $models = Model::orderBy('created_at', 'DESC')->paginate(Setting::getSettings()->per_page);
+        $models = Model::orderBy('created_at', 'DESC')->get();
 
         // Show the page
         return View::make('backend/models/index', compact('models'));

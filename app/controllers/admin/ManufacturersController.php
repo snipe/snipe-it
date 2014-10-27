@@ -21,7 +21,7 @@ class ManufacturersController extends AdminController
     public function getIndex()
     {
         // Grab all the manufacturers
-        $manufacturers = Manufacturer::orderBy('created_at', 'DESC')->paginate(Setting::getSettings()->per_page);
+        $manufacturers = Manufacturer::orderBy('created_at', 'DESC')->get();
 
         // Show the page
         return View::make('backend/manufacturers/index', compact('manufacturers'));

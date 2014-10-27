@@ -23,7 +23,7 @@ class CategoriesController extends AdminController
     public function getIndex()
     {
         // Grab all the categories
-        $categories = Category::orderBy('created_at', 'DESC')->paginate(Setting::getSettings()->per_page);
+        $categories = Category::orderBy('created_at', 'DESC')->get();
 
         // Show the page
         return View::make('backend/categories/index', compact('categories'));

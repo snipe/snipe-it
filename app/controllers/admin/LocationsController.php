@@ -23,7 +23,7 @@ class LocationsController extends AdminController
     public function getIndex()
     {
         // Grab all the locations
-        $locations = Location::orderBy('created_at', 'DESC')->paginate(Setting::getSettings()->per_page);
+        $locations = Location::orderBy('created_at', 'DESC')->get();
 
         // Show the page
         return View::make('backend/locations/index', compact('locations'));
