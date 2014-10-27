@@ -23,7 +23,7 @@ class DepreciationsController extends AdminController
     public function getIndex()
     {
         // Grab all the depreciations
-        $depreciations = Depreciation::orderBy('created_at', 'DESC')->paginate(Setting::getSettings()->per_page);
+        $depreciations = Depreciation::orderBy('created_at', 'DESC')->get();
 
         // Show the page
         return View::make('backend/depreciations/index', compact('depreciations'));

@@ -33,7 +33,7 @@ class LicensesController extends AdminController
     public function getIndex()
     {
         // Grab all the licenses
-        $licenses = License::orderBy('created_at', 'DESC')->paginate(Setting::getSettings()->per_page);
+        $licenses = License::orderBy('created_at', 'DESC')->get();
 
         // Show the page
         return View::make('backend/licenses/index', compact('licenses'));

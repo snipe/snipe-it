@@ -23,7 +23,7 @@ class StatuslabelsController extends AdminController
     public function getIndex()
     {
         // Grab all the statuslabels
-        $statuslabels = Statuslabel::orderBy('created_at', 'DESC')->paginate(10);
+        $statuslabels = Statuslabel::orderBy('created_at', 'DESC')->get();
 
         // Show the page
         return View::make('backend/statuslabels/index', compact('statuslabels'));
