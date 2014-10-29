@@ -39,6 +39,8 @@ To be notified of important news (such as new releases, security advisories, etc
 
 If you're not a coder but want to give back to the project and you're fluent in other languages, consider helping out with the translations. We use [CrowdIn](https://crowdin.com) to manage translations, and it makes it super-simple for you to add translations to the project without messing with code. Check out [the Snipe-IT CrowdIn translation project here](https://crowdin.com/project/snipe-it/).
 
+We currently have English and Spanish completed, and are looking for lots more!
+
 -----
 ## Requirements
 
@@ -46,7 +48,7 @@ If you're not a coder but want to give back to the project and you're fluent in 
 - MCrypt PHP Extension
 - Fileinfo Extension
 
-And _one_ of the following image libraries (for asset model image and user avatar image uploads).
+And _one_ of the following image libraries (for QR codes, asset model image and user avatar image uploads).
 
 - GD Library (>=2.0) … or …
 - Imagick PHP extension (>=6.3.8)
