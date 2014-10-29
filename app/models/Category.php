@@ -10,7 +10,7 @@ class Category extends Elegant
     */
     public $rules = array(
         'user_id' => 'numeric',
-        'name'   => 'required|alpha_dash|min:3|max:255|unique:categories,name,{id}',
+        'name'   => 'required|alpha_space|min:3|max:255|unique:categories,name,{id}',
     );
 
 
