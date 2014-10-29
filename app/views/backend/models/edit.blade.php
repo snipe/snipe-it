@@ -113,7 +113,7 @@
                     <label class="col-md-2 control-label" for="image_delete">Delete Image</label>
                     <div class="col-md-5">
                         {{ Form::checkbox('image_delete') }}
-                        <img src="/uploads/models/{{{ $model->image }}}" class="avatar img-circle">
+                        <img src="/uploads/models/{{{ $model->image }}}" />
                         {{ $errors->first('image_delete', '<span class="alert-msg">:message</span>') }}
                     </div>
                 </div>
