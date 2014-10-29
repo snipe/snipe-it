@@ -10,6 +10,8 @@ composer.phar
 /app/config/*/database.php
 /app/config/*/app.php
 public/packages/*
+public/uploads/models/*
+public/uploads/avatars/*
 /app/storage/views/*
 /app/storage/logs/*
 /app/storage/debugbar/
