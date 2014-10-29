@@ -22,7 +22,7 @@ Your Profile
 
     <!-- First Name -->
     <div class="form-group {{ $errors->has('first_name') ? ' has-error' : '' }}">
-        <label for="first_name" class="col-md-2 control-label">First Name
+        <label for="first_name" class="col-md-2 control-label">@lang('general.first_name')
         <i class='icon-asterisk'></i></label>
         </label>
         <div class="col-md-5">
@@ -33,7 +33,7 @@ Your Profile
 
     <!-- Last Name -->
     <div class="form-group {{ $errors->has('last_name') ? ' has-error' : '' }}">
-        <label for="last_name" class="col-md-2 control-label">Last Name
+        <label for="last_name" class="col-md-2 control-label">@lang('general.last_name')
         <i class='icon-asterisk'></i></label>
         </label>
         <div class="col-md-5">
@@ -44,7 +44,7 @@ Your Profile
 
     <!-- Location -->
         <div class="form-group {{ $errors->has('phone') ? 'error' : '' }}">
-            <label class="col-md-2 control-label" for="location_id">Location
+            <label class="col-md-2 control-label" for="location_id">@lang('general.location')
             <i class='icon-asterisk'></i></label>
             </label>
             <div class="col-md-5">
@@ -57,7 +57,7 @@ Your Profile
 
 	<!-- Website URL -->
     <div class="form-group {{ $errors->has('website') ? ' has-error' : '' }}">
-        <label for="website" class="col-md-2 control-label">Website</label>
+        <label for="website" class="col-md-2 control-label">@lang('general.website')</label>
         <div class="col-md-5">
             <input class="form-control" type="text" name="website" id="website" value="{{{ Input::old('website', $user->website) }}}" />
             {{ $errors->first('website', '<span class="alert-msg"><i class="icon-remove-sign"></i> :message</span>') }}
@@ -66,7 +66,7 @@ Your Profile
 
     <!-- Gravatar Email -->
     <div class="form-group {{ $errors->has('gravatar') ? ' has-error' : '' }}">
-        <label for="gravatar" class="col-md-2 control-label">Gravatar Email <small>(Private)</small></label>
+        <label for="gravatar" class="col-md-2 control-label">@lang('general.gravatar_email') <small>(Private)</small></label>
         <div class="col-md-5">
             <input class="form-control" type="text" name="gravatar" id="gravatar" value="{{{ Input::old('gravatar', $user->gravatar) }}}" />
             {{ $errors->first('gravatar', '<span class="alert-msg"><i class="icon-remove-sign"></i> :message</span>') }}
@@ -79,7 +79,7 @@ Your Profile
 	<!-- Avatar -->
     @if ($user->avatar)
         <div class="form-group {{ $errors->has('avatar_delete') ? 'has-error' : '' }}">
-            <label class="col-md-2 control-label" for="avatar_delete">Delete Avatar</label>
+            <label class="col-md-2 control-label" for="avatar_delete">@lang('general.avatar_delete')</label>
             <div class="col-md-5">
                 {{ Form::checkbox('avatar_delete') }}
                 <img src="/uploads/avatars/{{{ $user->avatar }}}" class="avatar img-circle">
@@ -89,7 +89,7 @@ Your Profile
     @endif
 	
 	<div class="form-group {{ $errors->has('avatar') ? 'has-error' : '' }}">
-		<label class="col-md-2 control-label" for="avatar">Upload Avatar</label>
+		<label class="col-md-2 control-label" for="avatar">@lang('general.avatar_upload')</label>
 		<div class="col-md-5">
 			{{ Form::file('avatar') }}
 			{{ $errors->first('avatar', '<span class="alert-msg">:message</span>') }}
