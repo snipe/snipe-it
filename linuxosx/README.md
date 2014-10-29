@@ -96,13 +96,12 @@ Use the following command to create your default user, user groups and run all t
 
 ### 4) Fix permissions
 
-You'll need to make sure that the `app/storage` directory is writable by your webserver, since caches and log files get written there. You should use the minimum permissions available for writing, based on how you've got your webserver configured.
+You'll need to make sure that the `app/storage` directory is writable by your webserver, since caches and log files get written there. You should use the minimum permissions available for writing, based on how you've got your webserver configured. You also need to change permissions for your uploads directory for user avatars and model images.
 
 	chmod -R 755 app/storage
+	chmod -R 755 public/uploads
 
 If you still run into a permissions error, you may need to increase the permissions to 775, or twiddle your user/group permissions on your server.
-
-	chmod -R 775 app/storage
 	
 Note: It should go without saying, but make sure the Snipe-IT project directory is not owned by `root`. Your webserver should be running as your webserver's user (often `apache`, `nobody`, or `www-data`). But never, ever `root`. Ever.
 
