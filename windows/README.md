@@ -57,7 +57,7 @@ Your site will now appear in the list
 			'production' 	=> array('www.yourserver.com')
 		));
 
-	If your development, staging and production sites all run on the same server (which is generally a terrible 		idea), [see this example](http://words.weareloring.com/development/setting-up-multiple-environments-in-laravel-4-1/) of how to configure the app using environmental variables.
+	If your development, staging and production sites all run on the same server (which is generally a terrible idea), [see this example](http://words.weareloring.com/development/setting-up-multiple-environments-in-laravel-4-1/) of how to configure the app using environmental variables.
 
 
 3. Copy `app/config/local/database.example.php` to `app/config/local/database.php`
@@ -88,7 +88,7 @@ Your site will now appear in the list
 	'url' => 'http://www.yourserver.com',
 	```
 
-	You should also change your secret key here -- if you prefer to have your key randomly generated, run the 		artisan key:generate command from the application root.
+	You should also change your secret key here -- if you prefer to have your key randomly generated, run the artisan key:generate command from the application root.
 
 
 		php artisan key:generate --env=production
@@ -101,12 +101,21 @@ This will install the dependencies. Once completed move to next step
     3. Type `php artisan app:install` and follow the prompts
 7. Add permissions for the IIS user for the `storage` folder:
     1. Goto `C:\inetpub\wwwroot\snipe-it\app`
-    2. Right Click `Storage` -> `Properties`
+    2. Right Click `storage` -> `Properties`
     3. Goto `Security Tab` -> `Edit`
     4. Click `Add` and change location to local machine
     5. Type `IUSR` in object name box
     6. Click `OK`
     7. Give `IUSR` full control
     8. Click `OK` twice
-
+8. Add permissions for the IIS user for the `uploads` folder:
+    1. Goto `C:\inetpub\wwwroot\snipe-it\app`
+    2. Right Click `uploads` -> `Properties`
+    3. Goto `Security Tab` -> `Edit`
+    4. Click `Add` and change location to local machine
+    5. Type `IUSR` in object name box
+    6. Click `OK`
+    7. Give `IUSR` full control
+    8. Click `OK` twice
+    
 Special thanks to [@madd15](http://github.com/madd15) for writing up the Windows installation guide!
