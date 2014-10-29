@@ -16,7 +16,7 @@ Your Profile
 
 <div class="row form-wrapper">
 
-<form method="post"  class="form-horizontal" action="" class="form-vertical" autocomplete="off">
+{{ Form::open(['method' => 'POST', 'files' => true, 'class' => 'form-horizontal', 'autocomplete' => 'off']) }}
     <!-- CSRF Token -->
     <input type="hidden" name="_token" value="{{ csrf_token() }}" />
 
@@ -75,6 +75,26 @@ Your Profile
         </p>
         </div>
     </div>
+	
+	<!-- Avatar -->
+    @if ($user->avatar)
+        <div class="form-group {{ $errors->has('avatar_delete') ? 'has-error' : '' }}">
+            <label class="col-md-2 control-label" for="avatar_delete">Delete Avatar</label>
+            <div class="col-md-5">
+                {{ Form::checkbox('avatar_delete') }}
+                <img src="/uploads/avatars/{{{ $user->avatar_file_name }}}" class="avatar img-circle">
+                {{ $errors->first('avatar_delete', '<span class="alert-msg">:message</span>') }}
+            </div>
+        </div>
+    @endif
+	
+	<div class="form-group {{ $errors->has('avatar') ? 'has-error' : '' }}">
+		<label class="col-md-2 control-label" for="avatar">Upload Avatar</label>
+		<div class="col-md-5">
+			{{ Form::file('avatar') }}
+			{{ $errors->first('avatar', '<span class="alert-msg">:message</span>') }}
+		</div>
+	</div>
 
     <!-- Form Actions -->
     <div class="form-group">

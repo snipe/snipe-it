@@ -9,13 +9,18 @@ View Assets for  {{{ $user->fullName() }}} ::
 {{-- Account page content --}}
 @section('account-content')
 
-<div class="row profile">
+<div class="row user-profile">
             <!-- header -->
             <div class="row header">
-                <div class="col-md-9">
-                    <img src="{{{ $user->gravatar() }}}" class="avatar img-circle">
+                <div class="col-md-8">
+                    @if ($user->avatar)
+                        <img src="/uploads/avatars/{{{ $user->avatar }}}" class="avatar img-circle">
+                    @else
+                        <img src="{{{ $user->gravatar() }}}" class="avatar img-circle">
+                    @endif
                     <h3 class="name">{{{ $user->fullName() }}}</h3>
-                    <span class="area">{{{ $user->jobtitle }}}</span>
+                    <span class="area">{{{ $user->jobtitle }}}
+                        </span>
                 </div>
         	</div>
 

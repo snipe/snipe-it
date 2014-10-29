@@ -52,7 +52,11 @@
         @foreach ($users as $user)
         <tr>
             <td>
-            <img src="{{ $user->gravatar() }}" class="img-circle avatar hidden-phone" style="max-width: 45px;" />
+            @if ($user->avatar)
+				<img src="/uploads/avatars/{{{ $user->avatar }}}" class="img-circle avatar hidden-phone" style="max-width: 45px;" />
+			@else
+				<img src="{{ $user->gravatar() }}" class="img-circle avatar hidden-phone" style="max-width: 45px;" />
+			@endif
             <a href="{{ route('view/user', $user->id) }}" class="name">{{{ $user->fullName() }}}</a>
 
             </td>
