@@ -13,7 +13,11 @@ View User {{{ $user->fullName() }}} ::
             <!-- header -->
             <div class="row header">
                 <div class="col-md-8">
-                    <img src="{{{ $user->gravatar() }}}" class="avatar img-circle">
+                    @if ($user->avatar)
+                        <img src="/uploads/avatars/{{{ $user->avatar }}}" class="avatar img-circle">
+                    @else
+                        <img src="{{{ $user->gravatar() }}}" class="avatar img-circle">
+                    @endif
                     <h3 class="name">{{{ $user->fullName() }}}
                     @if ($user->employee_num)
                     		({{{ $user->employee_num }}})

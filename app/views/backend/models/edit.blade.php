@@ -35,7 +35,7 @@
 <div class="row form-wrapper">
 
 
-<form class="form-horizontal" method="post" action="" autocomplete="off">
+{{ Form::open(['method' => 'POST', 'files' => true, 'class' => 'form-horizontal' ]) }}
     <!-- CSRF Token -->
     <input type="hidden" name="_token" value="{{ csrf_token() }}" />
 
@@ -104,6 +104,26 @@
                     </span>
                     {{ $errors->first('eol', '<span class="alert-msg"><i class="icon-remove-sign"></i> :message</span>') }}
                     </div>
+                </div>
+            </div>
+
+            <!-- Image -->
+            @if ($model->image)
+                <div class="form-group {{ $errors->has('image_delete') ? 'has-error' : '' }}">
+                    <label class="col-md-2 control-label" for="image_delete">@lang('general.image_delete')</label>
+                    <div class="col-md-5">
+                        {{ Form::checkbox('image_delete') }}
+                        <img src="/uploads/models/{{{ $model->image }}}" />
+                        {{ $errors->first('image_delete', '<span class="alert-msg">:message</span>') }}
+                    </div>
+                </div>
+            @endif
+            
+            <div class="form-group {{ $errors->has('image') ? 'has-error' : '' }}">
+                <label class="col-md-2 control-label" for="image">@lang('general.image_upload')</label>
+                <div class="col-md-5">
+                    {{ Form::file('image') }}
+                    {{ $errors->first('image', '<span class="alert-msg">:message</span>') }}
                 </div>
             </div>
 

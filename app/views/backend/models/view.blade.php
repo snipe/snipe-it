@@ -120,12 +120,10 @@
                                 {{ $model->eol }} months</li>
                                 @endif
 
-                            </ul>
+                                @if ($model->image)
+                                <li><br /><img src="/uploads/models/{{{ $model->image }}}" /></li>
+                                @endif
 
-
-
-                            <ul>
-                                <li><br><br /></li>
                             </ul>
 
                     </div>

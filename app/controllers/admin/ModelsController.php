@@ -1,6 +1,7 @@
 <?php namespace Controllers\Admin;
 
 use AdminController;
+use Image;
 use Input;
 use Lang;
 use Model;
@@ -88,6 +89,13 @@ class ModelsController extends AdminController
             $model->user_id          	= Sentry::getId();
             //$model->eol    				= e(Input::get('eol'));
 
+            if (Input::file('image')) {
+                $image = Input::file('image');
+                $file_name = $model->manufacturer_id."-".$model->modelno.".".$image->getClientOriginalExtension();
+                $path = public_path('uploads/models/'.$file_name);
+                Image::make($image->getRealPath())->resize(300, null, function ($constraint) {$constraint->aspectRatio();})->save($path);
+                $model->image = $file_name;
+            }
 
             // Was it created?
             if($model->save()) {
@@ -172,6 +180,18 @@ class ModelsController extends AdminController
             $model->modelno            	= e(Input::get('modelno'));           
             $model->manufacturer_id    	= e(Input::get('manufacturer_id'));
             $model->category_id    		= e(Input::get('category_id'));
+
+            if (Input::file('image')) {
+                $image = Input::file('image');
+                $file_name = $model->manufacturer_id."-".$model->modelno.".".$image->getClientOriginalExtension();
+                $path = public_path('uploads/models/'.$file_name);
+                Image::make($image->getRealPath())->resize(300, null, function ($constraint) {$constraint->aspectRatio();})->save($path);
+                $model->image = $file_name;
+            }
+
+            if (Input::get('image_delete') == 1 && Input::file('image') == "") {
+                $model->image = NULL;
+            }
       
             // Was it created?
             if($model->save()) {

@@ -1,6 +1,7 @@
 <?php namespace Controllers\Account;
 
 use AuthorizedController;
+use Image;
 use Input;
 use Redirect;
 use Sentry;
@@ -62,6 +63,19 @@ class ProfileController extends AuthorizedController
         $user->website    = Input::get('website');
         $user->location_id    = Input::get('location_id');
         $user->gravatar   = Input::get('gravatar');
+		
+		if (Input::file('avatar')) {
+            $image = Input::file('avatar');
+            $file_name = $user->first_name."-".$user->last_name.".".$image->getClientOriginalExtension();
+            $path = public_path('uploads/avatars/'.$file_name);
+            Image::make($image->getRealPath())->resize(84, 84)->save($path);
+            $user->avatar = $file_name;
+        }
+
+        if (Input::get('avatar_delete') == 1 && Input::file('avatar') == "") {
+            $user->avatar = NULL;
+        }
+		
         $user->save();
 
         // Redirect to the settings page
