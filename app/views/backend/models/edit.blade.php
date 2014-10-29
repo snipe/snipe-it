@@ -110,7 +110,7 @@
             <!-- Image -->
             @if ($model->image)
                 <div class="form-group {{ $errors->has('image_delete') ? 'has-error' : '' }}">
-                    <label class="col-md-2 control-label" for="image_delete">Delete Image</label>
+                    <label class="col-md-2 control-label" for="image_delete">@lang('general.image_delete')</label>
                     <div class="col-md-5">
                         {{ Form::checkbox('image_delete') }}
                         <img src="/uploads/models/{{{ $model->image }}}" />
@@ -120,7 +120,7 @@
             @endif
             
             <div class="form-group {{ $errors->has('image') ? 'has-error' : '' }}">
-                <label class="col-md-2 control-label" for="image">Upload Image</label>
+                <label class="col-md-2 control-label" for="image">@lang('general.image_upload')</label>
                 <div class="col-md-5">
                     {{ Form::file('image') }}
                     {{ $errors->first('image', '<span class="alert-msg">:message</span>') }}
