@@ -82,7 +82,7 @@ Your Profile
             <label class="col-md-2 control-label" for="avatar_delete">Delete Avatar</label>
             <div class="col-md-5">
                 {{ Form::checkbox('avatar_delete') }}
-                <img src="/uploads/avatars/{{{ $user->avatar_file_name }}}" class="avatar img-circle">
+                <img src="/uploads/avatars/{{{ $user->avatar }}}" class="avatar img-circle">
                 {{ $errors->first('avatar_delete', '<span class="alert-msg">:message</span>') }}
             </div>
         </div>
