@@ -1,0 +1,30 @@
+<?php
+
+return array(
+
+    'activated'  			=> 'crwdns762:0crwdne762:0',
+    'allow'  				=> 'crwdns763:0crwdne763:0',
+    'checkedout'  			=> 'crwdns764:0crwdne764:0',
+    'created_at' 			=> 'crwdns765:0crwdne765:0',
+    'createuser' 			=> 'crwdns766:0crwdne766:0',
+    'deny'  				=> 'crwdns767:0crwdne767:0',
+    'email'      			=> 'crwdns768:0crwdne768:0',
+    'employee_num'      	=> 'crwdns769:0crwdne769:0',
+    'first_name' 			=> 'crwdns770:0crwdne770:0',
+    'groupnotes'			=> 'crwdns771:0crwdne771:0',
+    'id'         			=> 'crwdns772:0crwdne772:0',
+    'inherit'  				=> 'crwdns773:0crwdne773:0',
+    'job' 					=> 'crwdns774:0crwdne774:0',
+    'last_login'  			=> 'crwdns775:0crwdne775:0',
+    'last_name'  			=> 'crwdns776:0crwdne776:0',
+    'location'  			=> 'crwdns777:0crwdne777:0',
+    'manager' 				=> 'crwdns778:0crwdne778:0',
+    'name' 					=> 'crwdns779:0crwdne779:0',
+    'password_confirm' 		=> 'crwdns780:0crwdne780:0',
+    'password' 				=> 'crwdns781:0crwdne781:0',
+    'phone'  				=> 'crwdns782:0crwdne782:0',
+    'title' 				=> 'crwdns783:0crwdne783:0',
+    'updateuser' 			=> 'crwdns784:0crwdne784:0',
+    'cloneuser'                         => 'crwdns785:0crwdne785:0',
+    'viewusers' 			=> 'crwdns786:0crwdne786:0',
+);
