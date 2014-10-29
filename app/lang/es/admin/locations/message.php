@@ -17,7 +17,7 @@ return array(
     ),
 
     'delete' => array(
-        'confirm'   	=> 'Are you sure you wish to delete this location?',
+        'confirm'   	=> '¿Está seguro que desea eliminar esta ubicación?',
         'error'   => 'Localización no eliminada por un problema. Intentalo de nuevo.',
         'success' => 'Localización eliminada.'
     )

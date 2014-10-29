@@ -2,8 +2,7 @@
 
 return array(
 
-    'undeployable' 		=> '<strong>Atención: </strong> Este equipo está marcado como no isntalabre.
-                        Si no es correcto, actualiza su estado.',
+    'undeployable' 		=> 'Atención:  Este equipo está marcado como no isntalabre. Si no es correcto, actualiza su estado.',
     'does_not_exist' 	=> 'Equipo inexistente.',
     'assoc_users'	 	=> 'Equipo asignado a un usuario, no se puede eliminar.',
 

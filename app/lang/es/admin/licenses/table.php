@@ -12,6 +12,6 @@ return array(
     'seats'   			=> 'Instalaciones',
     'hardware'   		=> 'Equipo',
     'serial'   			=> 'N. Serie',
-    'title'      		=> 'Licencia',
+    'title'      		=> 'Categoría de equipo',
 
 );
