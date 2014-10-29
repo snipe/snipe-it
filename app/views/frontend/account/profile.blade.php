@@ -66,7 +66,8 @@ Your Profile
 
     <!-- Gravatar Email -->
     <div class="form-group {{ $errors->has('gravatar') ? ' has-error' : '' }}">
-        <label for="gravatar" class="col-md-2 control-label">@lang('general.gravatar_email') <small>(Private)</small></label>
+        <label for="gravatar" class="col-md-2 control-label">@lang('general.gravatar_email')
+         <small>(Private)</small></label>
         <div class="col-md-5">
             <input class="form-control" type="text" name="gravatar" id="gravatar" value="{{{ Input::old('gravatar', $user->gravatar) }}}" />
             {{ $errors->first('gravatar', '<span class="alert-msg"><i class="icon-remove-sign"></i> :message</span>') }}
