@@ -2,23 +2,23 @@
 
 return array(
 
-    'does_not_exist' => 'Category does not exist.',
-    'assoc_users'	 => 'This category is currently associated with at least one model and cannot be deleted. Please update your models to no longer reference this category and try again. ',
+    'does_not_exist' => 'Kategorin existerar inte. ',
+    'assoc_users'	 => 'Den här kategorin är associerat med åtmintone en modell och kan därför inte raderas. Var vänlig uppdatera dina modeller så att de inte refererar till denna kategori, och försök igen. ',
 
     'create' => array(
-        'error'   => 'Category was not created, please try again.',
-        'success' => 'Category created successfully.'
+        'error'   => 'Kategorin blev inte skapad, försök igen.',
+        'success' => 'Kategorin skapades.'
     ),
 
     'update' => array(
-        'error'   => 'Category was not updated, please try again',
-        'success' => 'Category updated successfully.'
+        'error'   => 'Kategorin uppdaterades inte, vänligen försök igen.',
+        'success' => 'kategorin uppdaterad.'
     ),
 
     'delete' => array(
-        'confirm'   => 'Are you sure you wish to delete this category?',
-        'error'   => 'There was an issue deleting the category. Please try again.',
-        'success' => 'The category was deleted successfully.'
+        'confirm'   => 'Är du säker på att du vill radera denna kategori?',
+        'error'   => 'Ett problem uppstod vid kategoriraderingen. Försök igen.',
+        'success' => 'Kategorin raderades.'
     )
 
 );

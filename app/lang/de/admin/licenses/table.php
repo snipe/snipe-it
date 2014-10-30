@@ -12,6 +12,6 @@ return array(
     'seats'   			=> 'Seats',
     'hardware'   		=> 'Hardware',
     'serial'   			=> 'Serial',
-    'title'      		=> 'License',
+    'title'      		=> 'Name der Asset-Kategorie',
 
 );

@@ -38,6 +38,7 @@ return array(
     'eol'					=> 'EOL',
     'first_name'			=> 'First Name',
     'groups'				=> 'Groups',
+    'gravatar_email'        => 'Gravatar Email Address',
     'history_for'  			=> 'History for',
     'id'  					=> 'ID',
     'image_delete'         => 'Delete Image',

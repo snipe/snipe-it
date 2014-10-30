@@ -1,12 +1,12 @@
 <?php
 
 return array(
-    'about_asset_depreciations'  			=> 'About Asset Depreciations',
-    'about_depreciations'  					=> 'You can set up asset depreciations to depreciate assets based on straight-line depreciation.',
-    'asset_depreciations'  					=> 'Asset Depreciations',
-    'create_depreciation'  					=> 'Create Depreciation',
-    'depreciation_name'  					=> 'Depreciation Name',
-    'number_of_months'  					=> 'Number of Months',
-    'update_depreciation'  					=> 'Update Depreciation',
+    'about_asset_depreciations'  			=> 'Über Asset-Abschreibungen',
+    'about_depreciations'  					=> 'Sie können Asset-Abschreibungen einrichten, um Assets linear abzuschreiben.',
+    'asset_depreciations'  					=> 'Asset-Abschreibungen',
+    'create_depreciation'  					=> 'Abschreibung erstellen',
+    'depreciation_name'  					=> 'AfA-Name',
+    'number_of_months'  					=> 'Anzahl der Monate',
+    'update_depreciation'  					=> 'Abschreibung aktualisieren',
 
 );

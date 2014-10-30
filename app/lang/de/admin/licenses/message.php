@@ -2,37 +2,37 @@
 
 return array(
 
-    'does_not_exist' => 'License does not exist.',
+    'does_not_exist' => 'Die Kategorie existiert nicht.',
     'user_does_not_exist' => 'User does not exist.',
     'asset_does_not_exist' 	=> 'The asset you are trying to associate with this license does not exist.',
     'owner_doesnt_match_asset' => 'The asset you are trying to associate with this license is owned by somene other than the person selected in the assigned to dropdown.',
-    'assoc_users'	 => 'This license is currently checked out to a user and cannot be deleted. Please check the license in first, and then try deleting again. ',
+    'assoc_users'	 => 'Diese Kategorie ist derzeit mindestens einem Modell zugeordnet und kann nicht gelöscht werden. Bitte aktualisieren Sie Ihre Modelle, um nicht mehr auf diese Kategorie zu verweisen und versuchen Sie es erneut.',
 
 
     'create' => array(
-        'error'   => 'License was not created, please try again.',
-        'success' => 'License created successfully.'
+        'error'   => 'Die Kategorie wurde nicht erstellt, bitte versuchen Sie es erneut.',
+        'success' => 'Die Kategorie wurde erfolgreich erstellt.'
     ),
 
     'update' => array(
-        'error'   => 'License was not updated, please try again',
-        'success' => 'License updated successfully.'
+        'error'   => 'Die Kategorie wurde nicht aktualisiert, bitte versuchen Sie es erneut.',
+        'success' => 'Die Kategorie wurde erfolgreich aktualisiert.'
     ),
 
     'delete' => array(
-        'confirm'   => 'Are you sure you wish to delete this license?',
-        'error'   => 'There was an issue deleting the license. Please try again.',
-        'success' => 'The license was deleted successfully.'
+        'confirm'   => 'Sind Sie sicher, dass Sie diese Kategorie löschen wollen?',
+        'error'   => 'Beim Löschen der Kategorie ist ein Problem aufgetreten. Bitte versuchen Sie es erneut.',
+        'success' => 'Die Kategorie wurde erfolgreich gelöscht.'
     ),
 
     'checkout' => array(
-        'error'   => 'There was an issue checking out the license. Please try again.',
-        'success' => 'The license was checked out successfully'
+        'error'   => 'Asset was not checked out, please try again',
+        'success' => 'Asset checked out successfully.'
     ),
 
     'checkin' => array(
-        'error'   => 'There was an issue checking in the license. Please try again.',
-        'success' => 'The license was checked in successfully'
+        'error'   => 'Asset was not checked in, please try again',
+        'success' => 'Asset checked in successfully.'
     ),
 
 );

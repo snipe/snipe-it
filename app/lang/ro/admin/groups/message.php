@@ -2,21 +2,21 @@
 
 return array(
 
-    'group_exists'        => 'Group already exists!',
-    'group_not_found'     => 'Group [:id] does not exist.',
-    'group_name_required' => 'The name field is required',
+    'group_exists'        => 'Grupul exista deja!',
+    'group_not_found'     => 'Grupul [:id] nu exista.',
+    'group_name_required' => 'Campul "Nume" este obligatoriu',
 
     'success' => array(
-        'create' => 'Group was successfully created.',
-        'update' => 'Group was successfully updated.',
-        'delete' => 'Group was successfully deleted.',
+        'create' => 'Grupul a fost creat.',
+        'update' => 'Grupul a fost actualizat.',
+        'delete' => 'Grupul a fost sters.',
     ),
 
     'delete' => array(
-        'confirm'   => 'Are you sure you wish to delete this group?',
-        'create' => 'There was an issue creating the group. Please try again.',
-        'update' => 'There was an issue updating the group. Please try again.',
-        'delete' => 'There was an issue deleting the group. Please try again.',
+        'confirm'   => 'Sunteti sigur ca vreti sa stergeti acest grup?',
+        'create' => 'S-a intampinat o problema la stergerea grupului. Va rugam incercati iar.',
+        'update' => 'S-a intampinat o problema la actualizarea grupului. Va rugam incercati iar.',
+        'delete' => 'S-a intampinat o problema la stergerea grupului. Va rugam incercati iar.',
     ),
 
 );

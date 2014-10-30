@@ -1,9 +1,9 @@
 <?php
 
 return array(
-    'asset'  					=> 'Asset',
-    'checkin'  					=> 'Checkin Asset',
-    'checkout'  				=> 'Checkout Asset to User',
+    'asset'  					=> 'Activ',
+    'checkin'  					=> 'Verifica activ',
+    'checkout'  				=> 'Checkout activ catre utilizator',
     'clone'  					=> 'Clone Asset',
     'edit'  					=> 'Edit Asset',
     'pending'  					=> 'Pending Asset',

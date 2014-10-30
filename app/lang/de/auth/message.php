@@ -2,20 +2,20 @@
 
 return array(
 
-    'account_already_exists' => 'An account with the this email already exists.',
-    'account_not_found'      => 'The email account or password is incorrect.',
-    'account_not_activated'  => 'This user account is not activated.',
-    'account_suspended'      => 'This user account is suspended.',
-    'account_banned'         => 'This user account is banned.',
+    'account_already_exists' => 'Ein Konto mit dieser Email-Adresse existiert bereits.',
+    'account_not_found'      => 'Email-Konto oder Passwort ist falsch.',
+    'account_not_activated'  => 'Das Benutzerkonto ist nicht aktiviert.',
+    'account_suspended'      => 'Dieses Benutzerkonto ist gesperrt.',
+    'account_banned'         => 'Dieses Benutzerkonto wurde ausgeschlossen.',
 
     'signin' => array(
-        'error'   => 'There was a problem while trying to log you in, please try again.',
-        'success' => 'You have successfully logged in.',
+        'error'   => 'Bei der Anmeldung ist ein Problem aufgetreten, bitte versuchen Sie es erneut.',
+        'success' => 'Sie haben sich erfolgreich eingeloggt.',
     ),
 
     'signup' => array(
-        'error'   => 'There was a problem while trying to create your account, please try again.',
-        'success' => 'Account sucessfully created.',
+        'error'   => 'Bei der Erstellung Ihres Kontos ist ein Problem aufgetreten, bitte versuchen Sie es erneut.',
+        'success' => 'Die Erstellung des Kontos war erfolgreich.',
     ),
 
         'forgot-password' => array(
@@ -29,8 +29,8 @@ return array(
         ),
 
     'activate' => array(
-        'error'   => 'There was a problem while trying to activate your account, please try again.',
-        'success' => 'Your account has been successfully activated.',
+        'error'   => 'Beim Aktivieren Ihres Accounts ist ein Fehler aufgetreten. Bitte probieren Sie es noch einmal.',
+        'success' => 'Ihr Account wurde erfolgreich aktiviert.',
     ),
 
 );

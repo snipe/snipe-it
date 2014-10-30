@@ -2,24 +2,24 @@
 
 return array(
 
-    'does_not_exist' => 'Depreciation class does not exist.',
-    'assoc_users'	 => 'This depreciation is currently associated with one or more models and cannot be deleted. Please delete the models, and then try deleting again. ',
+    'does_not_exist' => 'Clasa de deprecieri nu exista.',
+    'assoc_users'	 => 'Aceasta depreciere este momentan asociata cu unul sau mai multe modele si nu poate fi stearsa. Va rugam stergeti modelele asociate si incercati iar stergerea. ',
 
 
     'create' => array(
-        'error'   => 'Depreciation class was not created, please try again. :(',
-        'success' => 'Depreciation class created successfully. :)'
+        'error'   => 'Clasa de deprecieri nu a fost creata, va rugam incercati iar. :(',
+        'success' => 'Clasa de depreciere a fost creata. :)'
     ),
 
     'update' => array(
-        'error'   => 'Depreciation class was not updated, please try again',
-        'success' => 'Depreciation class updated successfully.'
+        'error'   => 'Clasa de depreciere nu a fost actualizata. Incercati iar',
+        'success' => 'Clasa de deprecieri a fost creata.'
     ),
 
     'delete' => array(
-        'confirm'   => 'Are you sure you wish to delete this depreciation class?',
-        'error'   => 'There was an issue deleting the depreciation class. Please try again.',
-        'success' => 'The depreciation class was deleted successfully.'
+        'confirm'   => 'Esti sigur ca vrei sa stergi clasa de deprecieri?',
+        'error'   => 'S-a intampinat o problema la stergerea clasei de deprecieri. Va rugam incercati iar.',
+        'success' => 'Clasa de deprecieri a fost creata cu succes.'
     )
 
 );
