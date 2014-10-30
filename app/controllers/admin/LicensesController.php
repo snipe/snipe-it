@@ -371,8 +371,7 @@ class LicensesController extends AdminController
         $rules = array(
 
             'note'   => 'alpha_space',
-//            'asset_id'	=> 'required_without:assigned_to:min:1',
-            'asset_id'	=> 'required',
+            'asset_id'	=> 'required_without:assigned_to',
         );
 
         // Create a new validator instance from our validation rules
