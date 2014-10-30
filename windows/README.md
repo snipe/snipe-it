@@ -4,8 +4,8 @@
 Prereq (Install all of these prior to continuing)
 * IIS
 * IIS URL Rewrite
-* [PHP 5.3 for Windows Server via WPM](http://www.microsoft.com/web/platform/phponwindows.aspx)
-* [MariaDB 5.5 for Windows Server 64-bit](https://downloads.mariadb.org/interstitial/mariadb-5.5.37/winx64-packages/mariadb-5.5.37-winx64.msi/from/http://mirror.jmu.edu/pub/mariadb) | [32-bit](https://downloads.mariadb.org/interstitial/mariadb-5.5.37/win32-packages/mariadb-5.5.37-win32.msi/from/http://mirror.jmu.edu/pub/mariadb)
+* [PHP 5.4](http://www.microsoft.com/web/gallery/install.aspx?appid=PHP54)
+* MariaDB 10.0.14 for Windows [64-bit](https://downloads.mariadb.org/interstitial/mariadb-10.0.14/winx64-packages/mariadb-10.0.14-winx64.msi/from/http%3A//mirror.aarnet.edu.au/pub/MariaDB) | [32-bit](https://downloads.mariadb.org/interstitial/mariadb-10.0.14/win32-packages/mariadb-10.0.14-win32.msi/from/http%3A//mirror.aarnet.edu.au/pub/MariaDB)
 * [PHP Manager for IIS](http://phpmanager.codeplex.com/) (makes managing PHP on IIS much easier)
 * [Composer install with the shell menus](https://getcomposer.org/Composer-Setup.exe )
 * [Notepad++](http://www.notepad-plus-plus.org/download/v6.6.6.html ) for editing files
