@@ -73,13 +73,13 @@ You should also change your secret key here -- if you prefer to have your key ra
 ### 2) Install the Dependencies via Composer
 ##### 2.1) If you don't have composer installed globally
 
-	cd your-folder
+	cd <install-dir>
 	curl -sS https://getcomposer.org/installer | php
 	php composer.phar install
 
 ##### 2.2) For global composer installations
 
-	cd your-folder
+	cd <install-dir>
 	composer install
 
 -----
