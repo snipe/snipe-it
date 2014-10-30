@@ -91,9 +91,12 @@ class ModelsController extends AdminController
 
             if (Input::file('image')) {
                 $image = Input::file('image');
-                $file_name = $model->manufacturer_id."-".$model->modelno.".".$image->getClientOriginalExtension();
+                $file_name = str_random(25).".".$image->getClientOriginalExtension();
                 $path = public_path('uploads/models/'.$file_name);
-                Image::make($image->getRealPath())->resize(300, null, function ($constraint) {$constraint->aspectRatio();})->save($path);
+                Image::make($image->getRealPath())->resize(300, null, function ($constraint) {
+                    $constraint->aspectRatio();
+                    $constraint->upsize();
+                })->save($path);
                 $model->image = $file_name;
             }
 
@@ -183,9 +186,12 @@ class ModelsController extends AdminController
 
             if (Input::file('image')) {
                 $image = Input::file('image');
-                $file_name = $model->manufacturer_id."-".$model->modelno.".".$image->getClientOriginalExtension();
+                $file_name = str_random(25).".".$image->getClientOriginalExtension();
                 $path = public_path('uploads/models/'.$file_name);
-                Image::make($image->getRealPath())->resize(300, null, function ($constraint) {$constraint->aspectRatio();})->save($path);
+                Image::make($image->getRealPath())->resize(300, null, function ($constraint) {
+                    $constraint->aspectRatio();
+                    $constraint->upsize();
+                })->save($path);
                 $model->image = $file_name;
             }
 
