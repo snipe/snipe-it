@@ -12,11 +12,10 @@
 <div class="row header">
     <div class="col-md-12">
         <div class="btn-group pull-right">
-            <button class="btn gray">@lang('button.actions')</button>
-            <button class="btn glow dropdown-toggle" data-toggle="dropdown">
+            <button class="btn btn-default dropdown-toggle" data-toggle="dropdown">@lang('button.actions')
                 <span class="caret"></span>
             </button>
-            <ul class="dropdown-menu">    
+            <ul class="dropdown-menu">
                 <li><a href="{{ route('update/license', $license->id) }}">@lang('admin/licenses/general.edit')</a></li>
                 <li><a href="{{ route('clone/license', $license->id) }}">@lang('admin/licenses/general.clone')</a></li>
             </ul>
@@ -90,8 +89,8 @@
 
                             <tr>
                                 <td>Seat {{ $count }} </td>
-                                <td> 
-                                    
+                                <td>
+
                                     @if ($licensedto->asset_id)
                                         @if ($licensedto->asset->assigned_to != 0)
                                             <a href="{{ route('view/user', $licensedto->asset->assigned_to) }}">
@@ -99,8 +98,8 @@
                                             </a>
                                         @endif
                                     @endif
-                                    
-                                 
+
+
                                 </td>
                                 <td>
                                 @if ($licensedto->asset_id)
@@ -110,7 +109,7 @@
                                 @endif
                                 </td>
                                 <td>
-                             
+
                                 @if ($licensedto->asset_id)
                                     <a href="{{ route('checkin/license', $licensedto->id) }}" class="btn-flat info"> @lang('general.checkin') </a>
                                 @else

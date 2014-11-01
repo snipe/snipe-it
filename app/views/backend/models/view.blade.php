@@ -14,8 +14,7 @@
 <div class="row header">
     <div class="col-md-12">
         <div class="btn-group pull-right">
-            <button class="btn gray">@lang('button.actions')</button>
-            <button class="btn glow dropdown-toggle" data-toggle="dropdown">
+           <button class="btn btn-default dropdown-toggle" data-toggle="dropdown">@lang('button.actions')
                 <span class="caret"></span>
             </button>
             <ul class="dropdown-menu">
