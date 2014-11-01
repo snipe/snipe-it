@@ -106,7 +106,8 @@
 
                                 @if ($model->depreciation)
                                 <li>@lang('general.depreciation'):
-                                {{ $model->depreciation->name }} ({{ $model->depreciation->months }} months)</li>
+                                {{ $model->depreciation->name }} ({{ $model->depreciation->months }}
+                                @lang('general.months')</li>
                                 @endif
 
                                 @if ($model->eol)
