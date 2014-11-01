@@ -10,14 +10,7 @@
 {{-- Page content --}}
 @section('content')
 
-<div class="row header">
-    <div class="col-md-12">
-        <a href="{{ route('update/model', $model->id) }}" class="btn btn-warning pull-right">
-        @lang('admin/models/table.update')</a>
-        <h3 class="name">@lang('general.history_for')
-        {{{ $model->name }}} </h3>
-    </div>
-</div>
+
 <div class="row header">
     <div class="col-md-12">
         <div class="btn-group pull-right">
@@ -32,7 +25,8 @@
         </div>
         <h3>
 
-            @lang('admin/models/table.view')
+            @lang('admin/models/table.view') -
+            {{{ $model->name }}}
 
         </h3>
     </div>
