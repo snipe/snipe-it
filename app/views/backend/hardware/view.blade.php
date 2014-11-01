@@ -11,32 +11,34 @@
 
 <div class="row header">
     <div class="col-md-12">
-        <div class="btn-group pull-right">
-            <button class="btn gray">@lang('button.actions')</button>
-            <button class="btn glow dropdown-toggle" data-toggle="dropdown">
-                <span class="caret"></span>
-            </button>
-            <ul class="dropdown-menu">
-
-                @if ($asset->status_id == 1)
-                    @if ($asset->assigned_to != 0)
-                        <li><a href="{{ route('checkin/hardware', $asset->id) }}">@lang('admin/hardware/general.checkin')</a></li>
-                    @endif
-                @elseif ($asset->status_id == 0)
-                        <li><a href="{{ route('checkout/hardware', $asset->id) }}">@lang('admin/hardware/general.checkout')</a></li>
-                @endif
-                <li><a href="{{ route('update/hardware', $asset->id) }}">@lang('admin/hardware/general.edit')</a></li>
-                <li><a href="{{ route('clone/hardware', $asset->id) }}">@lang('admin/hardware/general.clone')</a></li>
-            </ul>
-        </div>
-        <h3>
-        <h3 class="name">
+     <h3 class="name">
         @lang('admin/hardware/general.view')
         {{{ $asset->asset_tag }}}
         @if ($asset->name)
         ({{{ $asset->name }}})
         @endif
     </h3>
+
+        <div class="btn-group pull-right">
+
+		<div class="dropdown">
+            <button class="btn btn-default dropdown-toggle" data-toggle="dropdown">@lang('button.actions')
+                <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+                @if ($asset->status_id == 1)
+                    @if ($asset->assigned_to != 0)
+                        <li role="presentation"><a href="{{ route('checkin/hardware', $asset->id) }}">@lang('admin/hardware/general.checkin')</a></li>
+                    @endif
+                @elseif ($asset->status_id == 0)
+                        <li role="presentation"><a href="{{ route('checkout/hardware', $asset->id) }}">@lang('admin/hardware/general.checkout')</a></li>
+                @endif
+                <li role="presentation"><a href="{{ route('update/hardware', $asset->id) }}">@lang('admin/hardware/general.edit')</a></li>
+                <li role="presentation"><a href="{{ route('clone/hardware', $asset->id) }}">@lang('admin/hardware/general.clone')</a></li>
+            </ul>
+        </div>
+
+
     </div>
 </div>
 
@@ -77,7 +79,7 @@
         @if ($asset->warranty_months)
             <div class="col-md-6"><strong>@lang('admin/hardware/form.warranty'):</strong>
             {{{ $asset->warranty_months }}}
-            @lang('admin/hardware/form.months') 
+            @lang('admin/hardware/form.months')
             </div>
             <div class="col-md-6 {{{ $asset->warrantee_expires() < date("Y-m-d H:i:s") ? 'ui-state-highlight' : '' }}}"   ><strong>@lang('admin/hardware/form.expires'):</strong>
             {{{ $asset->warrantee_expires() }}}</div>
