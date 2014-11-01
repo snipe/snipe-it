@@ -4,6 +4,6 @@ return array(
 
     'id'      => 'ID',
     'parent'   => 'Förälder',
-    'title'      => 'Tillgångar kategorinamn',
+    'title'      => 'Tillgångskategori',
 
 );

@@ -1,7 +1,7 @@
 <?php
 
 return array(
-    'name'      	=> 'Status Name',
+    'name'      	=> 'Nome do Status',
     'title'      	=> 'Status Labels',
     'update'      	=> 'Update Status Label',
     'create'      	=> 'Create Status Label',

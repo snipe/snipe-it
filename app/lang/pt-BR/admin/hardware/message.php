@@ -26,13 +26,13 @@ return array(
     'checkout' => array(
         'error'   		=> 'Asset was not checked out, please try again',
         'success' 		=> 'Asset checked out successfully.',
-        'user_does_not_exist' => 'That user is invalid. Please try again.'
+        'user_does_not_exist' => 'Este usuário é inválido. Por favor, tente novamente.'
     ),
 
     'checkin' => array(
         'error'   		=> 'Asset was not checked in, please try again',
         'success' 		=> 'Asset checked in successfully.',
-        'user_does_not_exist' => 'That user is invalid. Please try again.'
+        'user_does_not_exist' => 'Este usuário é inválido. Por favor, tente novamente.'
     )
 
 );

@@ -1,10 +1,10 @@
 <?php
 
 return array(
-    'display_asset_name'        => 'Display asset name in table view',
-    'display_checkout_date'     => 'Display checkout date in table view',
+    'display_asset_name'        => 'Display Asset Name',
+    'display_checkout_date'     => 'Display Checkout Date',
     'display_eol'     			=> 'Display EOL in table view',
-    'display_qr'				=> 'Display QR codes on asset views',
+    'display_qr'				=> 'Display QR Codes',
     'info'  					=> 'These settings let you customize certain aspects of your installation.',
     'per_page'                  => 'Results Per Page',
     'php_gd_info'				=> 'You must install php-gd to display QR codes, see install instructions.',

@@ -2,23 +2,23 @@
 
 return array(
 
-    'does_not_exist' => 'Supplier does not exist.',
-    'assoc_users'	 => 'This supplier is currently associated with at least one model and cannot be deleted. Please update your models to no longer reference this supplier and try again. ',
+    'does_not_exist' => 'O fornecedor não existe.',
+    'assoc_users'	 => 'Este fornecedor está no momento associado com pelo menos um modelo e não pode ser deletado. Por favor, atualize seus modelos para não referenciarem mais este fornecedor e tente novamente. ',
 
     'create' => array(
-        'error'   => 'Supplier was not created, please try again.',
-        'success' => 'Supplier created successfully.'
+        'error'   => 'O fornecedor não foi criado, por favor, tente novamente.',
+        'success' => 'Fornecedor criado com sucesso.'
     ),
 
     'update' => array(
-        'error'   => 'Supplier was not updated, please try again',
-        'success' => 'Supplier updated successfully.'
+        'error'   => 'O fornecedor não foi atualizado, por favor, tente novamente',
+        'success' => 'Fornecedor atualizado com sucesso.'
     ),
 
     'delete' => array(
-        'confirm'   => 'Are you sure you wish to delete this supplier?',
-        'error'   => 'There was an issue deleting the supplier. Please try again.',
-        'success' => 'Supplier was deleted successfully.'
+        'confirm'   => 'Tem certeza que deseja deletar este fornecedor?',
+        'error'   => 'Houve um problema ao deletar o fornecedor. Por favor, tente novamente.',
+        'success' => 'O fornecedor foi deletado com sucesso.'
     )
 
 );

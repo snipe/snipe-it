@@ -2,27 +2,27 @@
 
 return array(
 
-    'does_not_exist' => 'License does not exist.',
-    'user_does_not_exist' => 'User does not exist.',
+    'does_not_exist' => 'A licença não existe.',
+    'user_does_not_exist' => 'O usuário não existe.',
     'asset_does_not_exist' 	=> 'The asset you are trying to associate with this license does not exist.',
     'owner_doesnt_match_asset' => 'The asset you are trying to associate with this license is owned by somene other than the person selected in the assigned to dropdown.',
     'assoc_users'	 => 'This license is currently checked out to a user and cannot be deleted. Please check the license in first, and then try deleting again. ',
 
 
     'create' => array(
-        'error'   => 'License was not created, please try again.',
-        'success' => 'License created successfully.'
+        'error'   => 'A licença não foi criada, por favor, tente novamente.',
+        'success' => 'Licença criada com sucesso.'
     ),
 
     'update' => array(
-        'error'   => 'License was not updated, please try again',
-        'success' => 'License updated successfully.'
+        'error'   => 'A licença não foi atualizada, por favor, tente novamente',
+        'success' => 'Licença atualizada com sucesso.'
     ),
 
     'delete' => array(
-        'confirm'   => 'Are you sure you wish to delete this license?',
-        'error'   => 'There was an issue deleting the license. Please try again.',
-        'success' => 'The license was deleted successfully.'
+        'confirm'   => 'Tem certeza que deseja deletar esta licença?',
+        'error'   => 'Houve um problema ao deletar esta licença. Por favor, tente novamente.',
+        'success' => 'A licença foi deletada com sucesso.'
     ),
 
     'checkout' => array(

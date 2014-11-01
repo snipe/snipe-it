@@ -3,6 +3,7 @@
 return array(
     'display_asset_name'        => 'Mostrar Nombre Equipo',
     'display_checkout_date'     => 'Mostrar Fecha de Salida',
+    'display_eol'     			=> 'Mostrar EOL',
     'display_qr'				=> 'Mostrar Códigos QR',
     'info'  					=> 'Estos parámetros permirten personalizar ciertos aspectos de la aplicación.',
     'per_page'                  => 'Resultados por página',

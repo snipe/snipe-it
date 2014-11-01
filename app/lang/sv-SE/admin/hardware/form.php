@@ -4,9 +4,9 @@ return array(
 
     'checkedout_to'		=> 'Checked Out To',
     'checkout_to'		=> 'Checkout to',
-    'cost'				=> 'Purchase Cost',
-    'create'			=> 'Create Asset',
-    'date'				=> 'Purchase Date',
+    'cost'				=> 'Inköpskostnad',
+    'create'			=> 'Skapa Tillgång',
+    'date'				=> 'Köpdatum',
     'depreciates_on'	=> 'Depreciates On',
     'depreciation'		=> 'Depreciation',
     'default_location'	=> 'Default Location',

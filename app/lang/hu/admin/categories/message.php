@@ -2,23 +2,23 @@
 
 return array(
 
-    'does_not_exist' => 'Category does not exist.',
-    'assoc_users'	 => 'This category is currently associated with at least one model and cannot be deleted. Please update your models to no longer reference this category and try again. ',
+    'does_not_exist' => 'A kategória nem létezik.',
+    'assoc_users'	 => 'Ez a kategória jelenleg legalább egy modellel társítva van, így nem lehet törölni. Kérjük, frissítse a modellt úgy, hogy ne hivatkozzon erre a kategóriára, és próbálkozzon újra.',
 
     'create' => array(
-        'error'   => 'Category was not created, please try again.',
-        'success' => 'Category created successfully.'
+        'error'   => 'Nem sikerült a kategória létrehozása, kérjük, próbálja újra.',
+        'success' => 'Sikeresen létrehozta a kategóriát.'
     ),
 
     'update' => array(
-        'error'   => 'Category was not updated, please try again',
-        'success' => 'Category updated successfully.'
+        'error'   => 'Nem sikerült a kategória módosítása, kérjük, próbálja újra',
+        'success' => 'Sikeresen módosította a kategóriát.'
     ),
 
     'delete' => array(
-        'confirm'   => 'Are you sure you wish to delete this category?',
-        'error'   => 'There was an issue deleting the category. Please try again.',
-        'success' => 'The category was deleted successfully.'
+        'confirm'   => 'Biztos benne, hogy törölni szeretné a kategóriát?',
+        'error'   => 'A kategória törlése közben probléma merült fel, kérjük, próbálja újra.',
+        'success' => 'Sikeresen törölte a kategóriát.'
     )
 
 );
