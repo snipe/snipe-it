@@ -64,7 +64,9 @@ $debugbar["messages"]->addMessage("hello world!");
             @if (Input::get('Deployed') && Setting::getSettings()->display_checkout_date)
             <th class="col-md-2" bSortable="true">@lang('admin/hardware/table.checkout_date')</th>
             @endif
-            <th class="col-md-2">@lang('admin/hardware/table.eol')</th>
+            @if (Setting::getSettings()->display_eol)
+           	<th class="col-md-2">@lang('admin/hardware/table.eol')</th>
+            @endif
             <th class="col-md-1">@lang('admin/hardware/table.change')</th>
             <th class="col-md-2 actions" bSortable="false">@lang('table.actions')</th>
         </tr>
@@ -116,18 +118,20 @@ $debugbar["messages"]->addMessage("hello world!");
                 @endif
 
             </td>
-		@if (Input::get('Deployed') && Setting::getSettings()->display_checkout_date)
+			@if (Input::get('Deployed') && Setting::getSettings()->display_checkout_date)
 	            <td>
 	                @if (count($asset->assetlog) > 0)
                         {{{ $asset->assetlog->first()->added_on }}}
 	                @endif
 	            </td>
-            	@endif
-            <td>
-            @if ($asset->model->eol)
-            	{{{ $asset->eol_date() }}}
             @endif
-            </td>
+            @if (Setting::getSettings()->display_eol)
+				<td>
+				@if ($asset->model->eol)
+					{{{ $asset->eol_date() }}}
+				@endif
+           		</td>
+            @endif
 
             <td>
             @if ($asset->status_id < 1 )

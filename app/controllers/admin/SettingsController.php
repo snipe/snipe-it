@@ -85,6 +85,7 @@ class SettingsController extends AdminController
             $setting->display_checkout_date = e(Input::get('display_checkout_date', '0'));
             $setting->per_page = e(Input::get('per_page'));
             $setting->qr_code = e(Input::get('qr_code', '0'));
+            $setting->display_eol = e(Input::get('display_eol', '0'));
             $setting->qr_text = e(Input::get('qr_text'));
 
             // Was the asset updated?

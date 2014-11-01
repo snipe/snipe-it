@@ -42,13 +42,24 @@
                                 <tr>
                                     <td>@lang('admin/settings/general.display_asset_name')</td>
 
-
                                     @if ($setting->display_asset_name == 1)
                                         <td>Yes</td>
                                     @else
                                         <td>No</td>
                                     @endif
                                 </tr>
+
+                                 <tr>
+                                    <td>@lang('admin/settings/general.display_eol')</td>
+
+                                    @if ($setting->display_eol == 1)
+                                        <td>Yes</td>
+                                    @else
+                                        <td>No</td>
+                                    @endif
+                                </tr>
+
+
                                 <tr>
                                     <td>@lang('admin/settings/general.display_checkout_date')</td>
 
