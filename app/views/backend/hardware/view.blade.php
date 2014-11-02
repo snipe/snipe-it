@@ -17,11 +17,11 @@
         @if ($asset->name)
         ({{{ $asset->name }}})
         @endif
-        <br>
+     </h3>
+
         @if ($asset->serial)
-        <h4 small class="name">[{{{ $asset->serial }}}]</h4>
+        <br><br><h4 small class="name">[{{{ $asset->serial }}}]</h4>
         @endif
-    </h3>
 
         <div class="btn-group pull-right">
 
@@ -134,8 +134,8 @@
 
         <!-- Asset notes -->
         @if ($asset->notes)
-            <div class="col-md-6"><strong>@lang('admin/hardware/form.notes'):</strong>
-        {{{ $asset->notes }}} </div>
+            <br><br><div class="col-md-6"><strong>@lang('admin/hardware/form.notes'):</strong>
+        {{{ $asset->notes }}} </div><br><br>
         @endif
 
     </div>
