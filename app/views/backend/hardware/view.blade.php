@@ -43,7 +43,7 @@
 </div>
 
     @if ($asset->serial)
-            <div class="col-md-12">
+            <div>
              <h4 small>[{{{ $asset->serial }}}]</h4>
             </div>
     @endif
