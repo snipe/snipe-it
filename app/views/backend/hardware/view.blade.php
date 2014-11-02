@@ -19,9 +19,9 @@
         @endif
      </h3>
 
-        @if ($asset->serial)
-        <br><br><h4 small class="name">[{{{ $asset->serial }}}]</h4>
-        @endif
+    @if ($asset->serial)
+        <h4 small>[{{{ $asset->serial }}}]</h4>
+    @endif
 
         <div class="btn-group pull-right">
 
@@ -134,8 +134,8 @@
 
         <!-- Asset notes -->
         @if ($asset->notes)
-            <br><br><div class="col-md-6"><strong>@lang('admin/hardware/form.notes'):</strong>
-        {{{ $asset->notes }}} </div><br><br>
+            <p><div class="col-md-6"><strong>@lang('admin/hardware/form.notes'):</strong>
+            {{{ $asset->notes }}} </div></p>
         @endif
 
     </div>
@@ -143,7 +143,7 @@
 		<!-- Licenses assets table -->
 
         <h6>Software Assigned to {{{ $asset->name }}}</h6>
-		<br>
+
 		<!-- checked out assets table -->
 		@if (count($asset->licenses) > 0)
 		<table class="table table-hover">
