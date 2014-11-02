@@ -137,7 +137,7 @@
         <!-- Asset notes -->
         @if ($asset->notes)
             <div class="col-md-6"><strong>@lang('admin/hardware/form.notes'):</strong>
-        {{{ $asset->notes }}} </div>
+        {{{ $asset->notes }}} </div><br>
         @endif
 
 		<!-- Licenses assets table -->
@@ -220,9 +220,9 @@
                     <td>@lang('general.created_asset')</td>
                     <td></td>
                     <td>
-                    @if ($asset->notes)
+<!--                    @if ($asset->notes)
                     {{{ $asset->notes }}}
-                    @endif
+                    @endif -->
                     </td>
                 </tr>
             </tbody>
