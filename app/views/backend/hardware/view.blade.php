@@ -19,7 +19,7 @@
         @endif
         <br>
         @if ($asset->serial)
-        [{{{ $asset->serial }}}]
+        <emphasis>[{{{ $asset->serial }}}]</emphasis>
         @endif
     </h3>
 
@@ -137,7 +137,9 @@
         <!-- Asset notes -->
         @if ($asset->notes)
             <div class="col-md-6"><strong>@lang('admin/hardware/form.notes'):</strong>
-        {{{ $asset->notes }}} </div><br>
+             {{{ $asset->notes }}} 
+             <br>
+            </div>
         @endif
 
 		<!-- Licenses assets table -->
