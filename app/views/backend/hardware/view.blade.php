@@ -17,9 +17,6 @@
         @if ($asset->name)
         ({{{ $asset->name }}})
         @endif
-        @if ($asset->serial)
-        <br><em>[{{{ $asset->serial }}}]</em>
-        @endif
     </h3>
 
         <div class="btn-group pull-right">
@@ -50,6 +47,12 @@
 <div class="col-md-9 bio">
 
     <div class="col-md-12" style="min-height: 130px;">
+
+        @if ($asset->serial)
+            <div class="col-md-6"><strong>@lang('admin/hardware/form.serial'): </strong>
+            <strong><em>[{{{ $asset->serial }}}]</em></strong>
+            <div class="col-md-6"><strong></strong></div>
+        @endif
 
         @if ($asset->model->manufacturer)
             <div class="col-md-6"><strong>@lang('admin/hardware/form.manufacturer'): </strong>
@@ -130,7 +133,7 @@
             @endif
             </div>
         @endif
-        
+
         <!-- Asset notes -->
         @if ($asset->notes)
                 <div class="col-md-6"><strong>@lang('admin/hardware/form.notes'):</strong>
