@@ -25,7 +25,7 @@
             <button class="btn btn-default dropdown-toggle" data-toggle="dropdown">@lang('button.actions')
                 <span class="caret"></span>
             </button>
-            <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+            <ul class="dropdown-menu pull-right" role="menu" aria-labelledby="dropdownMenu1">
                 @if ($asset->status_id == 1)
                     @if ($asset->assigned_to != 0)
                         <li role="presentation"><a href="{{ route('checkin/hardware', $asset->id) }}">@lang('admin/hardware/general.checkin')</a></li>
@@ -40,6 +40,7 @@
 
 
     </div>
+</div>
 </div>
 
 <div class="user-profile">
