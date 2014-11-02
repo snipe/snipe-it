@@ -17,7 +17,11 @@
         @if ($asset->name)
         ({{{ $asset->name }}})
         @endif
-     </h3>
+        <br>
+        @if ($asset->serial)
+        [{{{ $asset->serial }}}]
+        @endif
+    </h3>
 
         <div class="btn-group pull-right">
 
@@ -41,12 +45,6 @@
 
     </div>
 </div>
-
-    @if ($asset->serial)
-            <div>
-             <h4 small>[{{{ $asset->serial }}}]</h4>
-            </div>
-    @endif
 
 <div class="user-profile">
 <div class="row profile">
@@ -134,20 +132,18 @@
             </div>
         @endif
 
+    </div>
+
         <!-- Asset notes -->
         @if ($asset->notes)
-            <hr>
             <div class="col-md-6"><strong>@lang('admin/hardware/form.notes'):</strong>
-            {{{ $asset->notes }}} </div>
-            <hr>
+        {{{ $asset->notes }}} </div><br>
         @endif
-
-    </div>
 
 		<!-- Licenses assets table -->
 
         <h6>Software Assigned to {{{ $asset->name }}}</h6>
-
+		<br>
 		<!-- checked out assets table -->
 		@if (count($asset->licenses) > 0)
 		<table class="table table-hover">
