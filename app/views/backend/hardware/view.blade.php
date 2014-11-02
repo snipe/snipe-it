@@ -134,14 +134,14 @@
             </div>
         @endif
 
+    </div>
+
         <!-- Asset notes -->
         @if ($asset->notes)
-                <div class="col-md-6"><strong>@lang('admin/hardware/form.notes'):</strong>
-                 {{{ $asset->notes }}} 
+                <div class="col-md-12"><br><strong>@lang('admin/hardware/form.notes'):</strong>
+                 {{{ $asset->notes }}} <br>
                 </div>
         @endif
-
-    </div>
 
 		<!-- Licenses assets table -->
         <h6>Software Assigned to {{{ $asset->name }}}</h6>
