@@ -18,7 +18,7 @@
         ({{{ $asset->name }}})
         @endif
         @if ($asset->serial)
-        <small><em>[{{{ $asset->serial }}}]</em></small>
+        <br><small><em>[{{{ $asset->serial }}}]</em></small>
         @endif
     </h3>
 
@@ -139,11 +139,9 @@
                  {{{ $asset->notes }}} 
                 </div>
         @endif
-
+        <br>
 		<!-- Licenses assets table -->
-<p>
         <h6>Software Assigned to {{{ $asset->name }}}</h6>
-</p>
 		<br>
 		<!-- checked out assets table -->
 		@if (count($asset->licenses) > 0)
