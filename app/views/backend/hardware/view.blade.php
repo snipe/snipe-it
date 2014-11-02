@@ -19,10 +19,6 @@
         @endif
      </h3>
 
-    @if ($asset->serial)
-        <h4 small>[{{{ $asset->serial }}}]</h4>
-    @endif
-
         <div class="btn-group pull-right">
 
 		<div class="dropdown">
@@ -49,6 +45,10 @@
 <div class="user-profile">
 <div class="row profile">
 <div class="col-md-9 bio">
+
+    @if ($asset->serial)
+        <h4 small>[{{{ $asset->serial }}}]</h4>
+    @endif
 
     <div class="col-md-12" style="min-height: 130px;">
 
@@ -134,10 +134,10 @@
 
         <!-- Asset notes -->
         @if ($asset->notes)
-            <div> </div>
+            <hr>
             <div class="col-md-6"><strong>@lang('admin/hardware/form.notes'):</strong>
             {{{ $asset->notes }}} </div>
-            <div> </div>
+            <hr>
         @endif
 
     </div>
