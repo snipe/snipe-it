@@ -42,13 +42,13 @@
     </div>
 </div>
 
-<div class="user-profile">
-<div class="row profile">
-<div class="col-md-9 bio">
-
     @if ($asset->serial)
         <h4 small>[{{{ $asset->serial }}}]</h4>
     @endif
+
+<div class="user-profile">
+<div class="row profile">
+<div class="col-md-9 bio">
 
     <div class="col-md-12" style="min-height: 130px;">
 
