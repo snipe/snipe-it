@@ -51,7 +51,7 @@
         @if ($asset->serial)
             <div class="col-md-6"><strong>@lang('admin/hardware/form.serial'): </strong>
             <em>{{{ $asset->serial }}}</em></div>
-            <div class="col-md-6"><strong>     </strong></div>
+            <div class="col-md-6"><strong> </strong></div>
         @endif
 
         @if ($asset->model->manufacturer)
