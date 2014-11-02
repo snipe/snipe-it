@@ -17,6 +17,10 @@
         @if ($asset->name)
         ({{{ $asset->name }}})
         @endif
+        <br>
+        @if ($asset->serial)
+        [{{{ $asset->serial }}}]
+        @endif
     </h3>
 
         <div class="btn-group pull-right">
@@ -76,6 +80,13 @@
             {{{ $asset->order_number }}} </div>
         @endif
 
+        @if ($asset->supplier_id)
+            <div class="col-md-6"><strong>@lang('admin/hardware/form.supplier'): </strong>
+            <a href="{{ route('view/supplier', $asset->supplier_id) }}">
+            {{{ $asset->supplier->name }}}
+            </a> </div>
+        @endif
+
         @if ($asset->warranty_months)
             <div class="col-md-6"><strong>@lang('admin/hardware/form.warranty'):</strong>
             {{{ $asset->warranty_months }}}
@@ -91,8 +102,6 @@
                 ({{{ $asset->depreciation->months }}}
                 @lang('admin/hardware/form.months')
                 )</div>
-            <div class="col-md-6"><strong>@lang('admin/hardware/form.depreciates_on'): </strong>
-            {{{ $asset->depreciated_date() }}} </div>
             <div class="col-md-6"><strong>@lang('admin/hardware/form.fully_depreciated'): </strong>
             {{{ $asset->months_until_depreciated()->m }}}
             @lang('admin/hardware/form.months')
@@ -100,6 +109,7 @@
                 , {{{ $asset->months_until_depreciated()->y }}}
                 @lang('admin/hardware/form.years')
              @endif
+              ({{{ $asset->depreciated_date() }}})
              </div>
         @endif
 
@@ -122,16 +132,13 @@
             </div>
         @endif
 
-        @if ($asset->supplier_id)
-            <div class="col-md-6"><strong>@lang('admin/hardware/form.supplier'): </strong>
-            <a href="{{ route('view/supplier', $asset->supplier_id) }}">
-            {{{ $asset->supplier->name }}}
-            </a> </div>
-
-        @endif
-
-
     </div>
+
+        <!-- Asset notes -->
+        @if ($asset->notes)
+            <div class="col-md-6"><strong>@lang('admin/hardware/form.notes'):</strong>
+        {{{ $asset->notes }}} </div>
+        @endif
 
 		<!-- Licenses assets table -->
 
