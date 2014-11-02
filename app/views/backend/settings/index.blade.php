@@ -43,9 +43,9 @@
                                     <td>@lang('admin/settings/general.display_asset_name')</td>
 
                                     @if ($setting->display_asset_name == 1)
-                                        <td>Yes</td>
+                                        <td>@lang('general.yes')</td>
                                     @else
-                                        <td>No</td>
+                                        <td>@lang('general.no')</td>
                                     @endif
                                 </tr>
 
@@ -53,9 +53,9 @@
                                     <td>@lang('admin/settings/general.display_eol')</td>
 
                                     @if ($setting->display_eol == 1)
-                                        <td>Yes</td>
+                                        <td>@lang('general.yes')</td>
                                     @else
-                                        <td>No</td>
+                                        <td>@lang('general.no')</td>
                                     @endif
                                 </tr>
 
@@ -65,9 +65,9 @@
 
 
                                     @if ($setting->display_checkout_date == 1)
-                                        <td>Yes</td>
+                                        <td>@lang('general.yes')</td>
                                     @else
-                                        <td>No</td>
+                                        <td>@lang('general.no')</td>
                                     @endif
                                 </tr>
                                 <tr>
@@ -77,9 +77,9 @@
                                 <tr>
                                     <td>@lang('admin/settings/general.display_qr')</td>
                                         @if ($setting->qr_code == 1)
-                                            <td>Yes</td>
+                                            <td>@lang('general.yes')</td>
                                         @else
-                                            <td>No</td>
+                                            <td>@lang('general.no')</td>
                                         @endif
                                 </tr>
                                 <tr>
