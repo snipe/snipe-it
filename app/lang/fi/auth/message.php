@@ -2,35 +2,35 @@
 
 return array(
 
-    'account_already_exists' => 'An account with the this email already exists.',
-    'account_not_found'      => 'The email account or password is incorrect.',
-    'account_not_activated'  => 'This user account is not activated.',
-    'account_suspended'      => 'This user account is suspended.',
-    'account_banned'         => 'This user account is banned.',
+    'account_already_exists' => 'Tällä email-osoitteella löytyy jo käyttäjätili.',
+    'account_not_found'      => 'Sähköpostiosoite tai salasana väärin.',
+    'account_not_activated'  => 'Käyttäjätiliä ei ole aktivoitu.',
+    'account_suspended'      => 'Käyttäjätili on jäädytetty.',
+    'account_banned'         => 'Käyttäjätili on estetty.',
 
     'signin' => array(
-        'error'   => 'There was a problem while trying to log you in, please try again.',
-        'success' => 'You have successfully logged in.',
+        'error'   => 'Sisäänkirjautumisessa tapahtui virhe, yritä uudelleen.',
+        'success' => 'Sisäänkirjautuminen onnistui.',
     ),
 
     'signup' => array(
-        'error'   => 'There was a problem while trying to create your account, please try again.',
-        'success' => 'Account sucessfully created.',
+        'error'   => 'Käyttäjätilin luonnissa tapahtui virhe, yritä uudelleen.',
+        'success' => 'Käyttäjätili luotu onnistuneesti.',
     ),
 
         'forgot-password' => array(
-            'error'   => 'There was a problem while trying to get a reset password code, please try again.',
-            'success' => 'Password recovery email successfully sent.',
+            'error'   => 'Salasanan nollauksessa tapahtui virhe, yritä uudelleen.',
+            'success' => 'Salasanan nollausviesti lähetetty onnistuneesti.',
         ),
 
         'forgot-password-confirm' => array(
-            'error'   => 'There was a problem while trying to reset your password, please try again.',
-            'success' => 'Your password has been successfully reset.',
+            'error'   => 'Salasanan nollauksessa tapahtui virhe, yritä uudelleen.',
+            'success' => 'Salasana on nollattu onnistuneesti.',
         ),
 
     'activate' => array(
-        'error'   => 'There was a problem while trying to activate your account, please try again.',
-        'success' => 'Your account has been successfully activated.',
+        'error'   => 'Käyttäjätilin aktivoinnissa tapahtui virhe, yritä uudelleen.',
+        'success' => 'Käyttäjätili aktivoitu onnistuneesti.',
     ),
 
 );

@@ -2,24 +2,24 @@
 
 return array(
 
-    'does_not_exist' => 'Location does not exist.',
-    'assoc_users'	 => 'This location is currently associated with at least one user and cannot be deleted. Please update your users to no longer reference this location and try again. ',
+    'does_not_exist' => 'Sijaintia ei löydy.',
+    'assoc_users'	 => 'Sijainti on määritetty käyttöön yhdelle tai useammalle käyttäjälle joten sitä ei voida poistaa. Poista sijainti käytöstä kaikilta käyttäjiltä ja yritä uudelleen. ',
 
 
     'create' => array(
-        'error'   => 'Location was not created, please try again.',
-        'success' => 'Location created successfully.'
+        'error'   => 'Sijaintia ei luotu, yritä uudelleen.',
+        'success' => 'Sijainti luotiin onnistuneesti.'
     ),
 
     'update' => array(
-        'error'   => 'Location was not updated, please try again',
-        'success' => 'Location updated successfully.'
+        'error'   => 'Sijaintia ei päivitetty, yritä uudelleen',
+        'success' => 'Sijainti päivitettiin onnistuneesti.'
     ),
 
     'delete' => array(
-        'confirm'   => 'Are you sure you wish to delete this status label?',
-        'error'   => 'There was an issue deleting the location. Please try again.',
-        'success' => 'The location was deleted successfully.'
+        'confirm'   => 'Oletko varma että haluat poistaa tämän tilamerkinnän?',
+        'error'   => 'Sijainnin poistossa tapahtui virhe. Yritä uudelleen.',
+        'success' => 'Sijainti poistettiin onnistuneesti.'
     )
 
 );

@@ -2,14 +2,14 @@
 
 return array(
 
-    'id'      		=> 'ID',
-    'city'   		=> 'City',
-    'state'   		=> 'State',
-    'country'   	=> 'Country',
-    'create'		=> 'Create Location',
-    'update'		=> 'Update Location',
-    'name'			=> 'Location Name',
-    'address'		=> 'Address',
-    'zip'			=> 'Postal Code',
-    'locations'		=> 'Locations',
+    'id'      		=> 'Tunnus',
+    'city'   		=> 'Kaupunki',
+    'state'   		=> 'Lääni',
+    'country'   	=> 'Maa',
+    'create'		=> 'Uusi Sijainti',
+    'update'		=> 'Päivitä Sijainti',
+    'name'			=> 'Sijainnin Nimi',
+    'address'		=> 'Osoite',
+    'zip'			=> 'Postinumero',
+    'locations'		=> 'Sijainnit',
 );

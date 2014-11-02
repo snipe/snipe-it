@@ -2,23 +2,23 @@
 
 return array(
 
-    'does_not_exist' => 'Category does not exist.',
-    'assoc_users'	 => 'This category is currently associated with at least one model and cannot be deleted. Please update your models to no longer reference this category and try again. ',
+    'does_not_exist' => 'Luokkaa ei löydy.',
+    'assoc_users'	 => 'Luokka on määritettynä vähintään yhdelle mallille eikä sitä voi poistaa. Poista luokka käytöstä kaikilta malleilta ja yritä uudelleen. ',
 
     'create' => array(
-        'error'   => 'Category was not created, please try again.',
-        'success' => 'Category created successfully.'
+        'error'   => 'Luokkaa ei luotu, yritä uudelleen.',
+        'success' => 'Luokka luotiin onnistuneesti.'
     ),
 
     'update' => array(
-        'error'   => 'Category was not updated, please try again',
-        'success' => 'Category updated successfully.'
+        'error'   => 'Luokkaa ei päivitetty, yritä uudelleen',
+        'success' => 'Luokka päivitettiin onnistuneesti.'
     ),
 
     'delete' => array(
-        'confirm'   => 'Are you sure you wish to delete this category?',
-        'error'   => 'There was an issue deleting the category. Please try again.',
-        'success' => 'The category was deleted successfully.'
+        'confirm'   => 'Oletko varma että haluat poistaa tämän luokan?',
+        'error'   => 'Luokan poistossa tapahtui virhe. Yritä uudelleen.',
+        'success' => 'Luokka poistettiin onnistuneesti.'
     )
 
 );

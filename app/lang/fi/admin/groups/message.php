@@ -2,21 +2,21 @@
 
 return array(
 
-    'group_exists'        => 'Group already exists!',
-    'group_not_found'     => 'Group [:id] does not exist.',
-    'group_name_required' => 'The name field is required',
+    'group_exists'        => 'Ryhmä on jo olemassa!',
+    'group_not_found'     => 'Ryhmää [:id] ei löydy.',
+    'group_name_required' => 'Nimi on pakollinen',
 
     'success' => array(
-        'create' => 'Group was successfully created.',
-        'update' => 'Group was successfully updated.',
-        'delete' => 'Group was successfully deleted.',
+        'create' => 'Ryhmä luotiin onnistuneesti.',
+        'update' => 'Ryhmä päivitettiin onnistuneesti.',
+        'delete' => 'Ryhmä poistettiin onnistuneesti.',
     ),
 
     'delete' => array(
-        'confirm'   => 'Are you sure you wish to delete this group?',
-        'create' => 'There was an issue creating the group. Please try again.',
-        'update' => 'There was an issue updating the group. Please try again.',
-        'delete' => 'There was an issue deleting the group. Please try again.',
+        'confirm'   => 'Oletko varma että haluat poistaa tämän ryhmän?',
+        'create' => 'Ryhmän luonnissa tapahtui virhe. Yritä uudelleen.',
+        'update' => 'Ryhmän päivityksessä tapahtui virhe. Yritä uudelleen.',
+        'delete' => 'Ryhmän poistossa tapahtui virhe. Yritä uudelleen.',
     ),
 
 );

@@ -2,10 +2,10 @@
 
 return array(
 
-    'edit'    => 'Edit',
-    'delete'  => 'Delete',
-    'restore' => 'Restore',
-    'actions' => 'Actions',
-    'submit'  => 'Submit',
+    'edit'    => 'Muokkaa',
+    'delete'  => 'Poista',
+    'restore' => 'Palauta',
+    'actions' => 'Toiminnot',
+    'submit'  => 'Lähetä',
 
 );

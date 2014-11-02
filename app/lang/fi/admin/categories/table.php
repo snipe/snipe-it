@@ -2,8 +2,8 @@
 
 return array(
 
-    'id'      => 'ID',
-    'parent'   => 'Parent',
-    'title'      => 'Asset Category Name',
+    'id'      => 'Tunnus',
+    'parent'   => 'Ylempi',
+    'title'      => 'Laiteluokan Nimi',
 
 );

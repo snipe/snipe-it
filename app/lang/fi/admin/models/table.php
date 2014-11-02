@@ -2,16 +2,16 @@
 
 return array(
 
-    'create'				=> 'Create Asset Model',
-    'created_at' 			=> 'Created at',
-    'eol'	 				=> 'EOL',
-    'modelnumber'   		=> 'Model No.',
-    'name'      			=> 'Asset Model Name',
-    'numassets' 			=> 'Assets',
-    'title'					=> 'Asset Models',
-    'update'				=> 'Update Asset Model',
-    'view'					=> 'View Asset Model',
-    'update'				=> 'Update Asset Model',
-    'clone'				=> 'Clone Model',
-    'edit'				=> 'Edit Model',
+    'create'				=> 'Uusi Laitemalli',
+    'created_at' 			=> 'Luontiaika',
+    'eol'	 				=> 'Elinaika',
+    'modelnumber'   		=> 'Mallinumero',
+    'name'      			=> 'Laitemallin Nimi',
+    'numassets' 			=> 'Laitelkm',
+    'title'					=> 'Laitemallit',
+    'update'				=> 'Päivitä Laitemalli',
+    'view'					=> 'Näytä Laitemalli',
+    'update'				=> 'Päivitä Laitemalli',
+    'clone'				=> 'Monista Malli',
+    'edit'				=> 'Muokkaa Mallia',
 );

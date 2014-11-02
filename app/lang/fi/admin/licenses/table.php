@@ -2,16 +2,16 @@
 
 return array(
 
-    'assigned_to'   	=> 'Assigned To',
-    'checkout'   		=> 'In/Out',
-    'id'      			=> 'ID',
-    'license_email'   	=> 'License Email',
-    'license_name'   	=> 'Licensed To',
-    'purchase_date'   	=> 'Purchase Date',
-    'purchased'   		=> 'Purchased',
-    'seats'   			=> 'Seats',
-    'hardware'   		=> 'Hardware',
-    'serial'   			=> 'Serial',
-    'title'      		=> 'License',
+    'assigned_to'   	=> 'Luovutettu',
+    'checkout'   		=> 'Toiminto',
+    'id'      			=> 'Tunnus',
+    'license_email'   	=> 'Lisenssille määritetty Email',
+    'license_name'   	=> 'Lisenssille Määritetty Nimi',
+    'purchase_date'   	=> 'Ostopäivämäärä',
+    'purchased'   		=> 'Ostopäivämäärä',
+    'seats'   			=> 'Käyttäjämäärä',
+    'hardware'   		=> 'Kone',
+    'serial'   			=> 'Sarjanumero',
+    'title'      		=> 'Lisenssi',
 
 );

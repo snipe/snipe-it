@@ -2,23 +2,23 @@
 
 return array(
 
-    'does_not_exist' => 'Manufacturer does not exist.',
-    'assoc_users'	 => 'This manufacturer is currently associated with at least one model and cannot be deleted. Please update your models to no longer reference this manufacturer and try again. ',
+    'does_not_exist' => 'Valmistajaa ei löydy.',
+    'assoc_users'	 => 'Valmistaja on määritetty käyttöön yhdelle tai useammalle mallille joten sitä ei voida poistaa. Poista valmistaja käytöstä kaikilta malleilta ja yritä uudelleen. ',
 
     'create' => array(
-        'error'   => 'Manufacturer was not created, please try again.',
-        'success' => 'Manufacturer created successfully.'
+        'error'   => 'Valmistajaa ei luotu, yritä uudelleen.',
+        'success' => 'Valmistaja luotiin onnistuneesti.'
     ),
 
     'update' => array(
-        'error'   => 'Manufacturer was not updated, please try again',
-        'success' => 'Manufacturer updated successfully.'
+        'error'   => 'Valmistajaa ei päivitetty, yritä uudelleen',
+        'success' => 'Valmistaja päivitettiin onnistuneesti.'
     ),
 
     'delete' => array(
-        'confirm'   => 'Are you sure you wish to delete this manufacturer?',
-        'error'   => 'There was an issue deleting the blog post. Please try again.',
-        'success' => 'The Manufacturer was deleted successfully.'
+        'confirm'   => 'Oletko varma että haluat poistaa tämän valmistajan?',
+        'error'   => 'Blogiviestin poistossa tapahtui virhe. Yritä uudelleen.',
+        'success' => 'Valmistaja poistettiin onnistuneesti.'
     )
 
 );

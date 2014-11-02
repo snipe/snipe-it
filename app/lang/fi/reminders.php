@@ -13,12 +13,12 @@ return array(
     |
     */
 
-    "password" => "Passwords must be six characters and match the confirmation.",
+    "password" => "Salasanan tulee olla 6 merkkiä pitkä ja sen tulee täsmätä vahvistukseen.",
 
-    "user"     => "Username or email address is incorrect",
+    "user"     => "Käyttäjätunnus tai Email-osoite on virheellinen",
 
-    "token"    => "This password reset token is invalid.",
+    "token"    => "Tämä salasanan nollauspoletti on virheellinen.",
 
-    "sent" => "If a matching email address was found, a password reminder has been sent!",
+    "sent" => "Jos Email-osoite löytyi, salasanan muistutusviesti lähetettiin!",
 
 );

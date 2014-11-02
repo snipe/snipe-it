@@ -2,23 +2,23 @@
 
 return array(
 
-    'does_not_exist' => 'Supplier does not exist.',
-    'assoc_users'	 => 'This supplier is currently associated with at least one model and cannot be deleted. Please update your models to no longer reference this supplier and try again. ',
+    'does_not_exist' => 'Toimittajaa ei löydy.',
+    'assoc_users'	 => 'Toimittaja on määritettynä yhdelle tai useammalle mallille eikä sitä voida poistaa. Poista toimittaja käytöstä kaikilta malleilta ja yritä uudelleen. ',
 
     'create' => array(
-        'error'   => 'Supplier was not created, please try again.',
-        'success' => 'Supplier created successfully.'
+        'error'   => 'Toimittajaa ei luotu, yritä uudelleen.',
+        'success' => 'Toimittaja luotiin onnistuneesti.'
     ),
 
     'update' => array(
-        'error'   => 'Supplier was not updated, please try again',
-        'success' => 'Supplier updated successfully.'
+        'error'   => 'Toimittajaa ei päivitetty, yritä uudelleen',
+        'success' => 'Toimittaja päivitettiin onnistuneesti.'
     ),
 
     'delete' => array(
-        'confirm'   => 'Are you sure you wish to delete this supplier?',
-        'error'   => 'There was an issue deleting the supplier. Please try again.',
-        'success' => 'Supplier was deleted successfully.'
+        'confirm'   => 'Oletko varma että haluat poistaa tämän toimittajan?',
+        'error'   => 'Toimittajan poistossa tapahtui virhe. Yritä uudelleen.',
+        'success' => 'Toimittaja poistettiin onnistuneesti.'
     )
 
 );

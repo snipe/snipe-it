@@ -2,9 +2,9 @@
 
 return array(
 
-    'id'      => 'ID',
-    'months'   => 'Months',
-    'term'   => 'Term',
-    'title'      => 'Name ',
+    'id'      => 'Tunnus',
+    'months'   => 'Kuukautta',
+    'term'   => 'Ajanjakso',
+    'title'      => 'Nimi ',
 
 );

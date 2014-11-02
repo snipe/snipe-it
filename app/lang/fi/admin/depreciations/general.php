@@ -1,12 +1,12 @@
 <?php
 
 return array(
-    'about_asset_depreciations'  			=> 'About Asset Depreciations',
-    'about_depreciations'  					=> 'You can set up asset depreciations to depreciate assets based on straight-line depreciation.',
-    'asset_depreciations'  					=> 'Asset Depreciations',
-    'create_depreciation'  					=> 'Create Depreciation',
-    'depreciation_name'  					=> 'Depreciation Name',
-    'number_of_months'  					=> 'Number of Months',
-    'update_depreciation'  					=> 'Update Depreciation',
+    'about_asset_depreciations'  			=> 'Lisätietoja Laitteiden Poistoista',
+    'about_depreciations'  					=> 'Voit määrittää laitteelle poistoluokan poistaaksesi laitteen laitekannastasi määritetyn ajan jälkeen.',
+    'asset_depreciations'  					=> 'Laitteiden Poistot',
+    'create_depreciation'  					=> 'Uusi Poisto',
+    'depreciation_name'  					=> 'Poiston Nimi',
+    'number_of_months'  					=> 'Kuukausien Lukumäärä',
+    'update_depreciation'  					=> 'Päivitä Poisto',
 
 );

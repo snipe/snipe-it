@@ -3,6 +3,6 @@
 
 return array(
 
-    'edit'  			=> 'Edit User',
-    'clone'  			=> 'Clone User',
+    'edit'  			=> 'Muokkaa käyttäjää',
+    'clone'  			=> 'Monista Käyttäjä',
     );

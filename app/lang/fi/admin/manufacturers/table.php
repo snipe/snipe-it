@@ -2,10 +2,10 @@
 
 return array(
 
-    'asset_manufacturers'	=> 'Asset Manufacturers',
-    'create'				=> 'Create Manufacturer',
-    'id'   					=> 'ID',
-    'name'      			=> 'Manufacturer Name',
-    'update'				=> 'Update Manufacturer',
+    'asset_manufacturers'	=> 'Laitevalmistajat',
+    'create'				=> 'Uusi Valmistaja',
+    'id'   					=> 'Tunnus',
+    'name'      			=> 'Valmistajan Nimi',
+    'update'				=> 'Päivitä Valmistaja',
 
 );

@@ -2,37 +2,37 @@
 
 return array(
 
-    'undeployable' 		=> '<strong>Warning: </strong> This asset has been marked as currently undeployable.
-                        If this status has changed, please update the asset status.',
-    'does_not_exist' 	=> 'Asset does not exist.',
-    'assoc_users'	 	=> 'This asset is currently checked out to a user and cannot be deleted. Please check the asset in first, and then try deleting again. ',
+    'undeployable' 		=> '<strong>Varoitus: </strong> Tämä laite on määritetty käyttökunnottomaksi.
+                        Jos laitteen tila on muuttunut, päivitä laitteen tila sen asetuksista.',
+    'does_not_exist' 	=> 'Laitetta ei löydy.',
+    'assoc_users'	 	=> 'Tämä laite on luovutettu käyttäjälle joten sitä ei voida poistaa. Palauta laite ensin käyttäjältä ja yritä uudelleen. ',
 
     'create' => array(
-        'error'   		=> 'Asset was not created, please try again. :(',
-        'success' 		=> 'Asset created successfully. :)'
+        'error'   		=> 'Laitetta ei luotu, yritä uudelleen. :(',
+        'success' 		=> 'Laite luotiin onnistuneesti. :)'
     ),
 
     'update' => array(
-        'error'   		=> 'Asset was not updated, please try again',
-        'success' 		=> 'Asset updated successfully.'
+        'error'   		=> 'Laitetta ei päivitetty, yritä uudelleen',
+        'success' 		=> 'Laite päivitetty onnistuneesti.'
     ),
 
     'delete' => array(
-        'confirm'   	=> 'Are you sure you wish to delete this asset?',
-        'error'   		=> 'There was an issue deleting the asset. Please try again.',
-        'success' 		=> 'The asset was deleted successfully.'
+        'confirm'   	=> 'Oletko varma että haluat poistaa tämän laitteen?',
+        'error'   		=> 'Laitteen poistamisessa tapahtui virhe. Yritä uudelleen.',
+        'success' 		=> 'Laite poistettu onnistuneesti.'
     ),
 
     'checkout' => array(
-        'error'   		=> 'Asset was not checked out, please try again',
-        'success' 		=> 'Asset checked out successfully.',
-        'user_does_not_exist' => 'That user is invalid. Please try again.'
+        'error'   		=> 'Laitteen luovutus epäonnistui, yritä uudelleen',
+        'success' 		=> 'Laite luovutettu onnistuneesti.',
+        'user_does_not_exist' => 'Käyttäjä on virheellinen. Yritä uudelleen.'
     ),
 
     'checkin' => array(
-        'error'   		=> 'Asset was not checked in, please try again',
-        'success' 		=> 'Asset checked in successfully.',
-        'user_does_not_exist' => 'That user is invalid. Please try again.'
+        'error'   		=> 'Laitteen palautus epäonnistui, yritä uudelleen',
+        'success' 		=> 'Laite palautettu onnistuneesti.',
+        'user_does_not_exist' => 'Käyttäjä on virheellinen. Yritä uudelleen.'
     )
 
 );

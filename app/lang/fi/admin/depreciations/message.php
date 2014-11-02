@@ -2,24 +2,24 @@
 
 return array(
 
-    'does_not_exist' => 'Depreciation class does not exist.',
-    'assoc_users'	 => 'This depreciation is currently associated with one or more models and cannot be deleted. Please delete the models, and then try deleting again. ',
+    'does_not_exist' => 'Poistoluokkaa ei löydy.',
+    'assoc_users'	 => 'Tämä poisto on määritetty käyttöön yhdelle tai useammalle mallille eikä sitä voida poistaa. Poista kaikki mallit ja yritä uudelleen. ',
 
 
     'create' => array(
-        'error'   => 'Depreciation class was not created, please try again. :(',
-        'success' => 'Depreciation class created successfully. :)'
+        'error'   => 'Poistoluokkaa ei luotu, yritä uudelleen. :(',
+        'success' => 'Poistoluokka luotiin onnistuneesti. :)'
     ),
 
     'update' => array(
-        'error'   => 'Depreciation class was not updated, please try again',
-        'success' => 'Depreciation class updated successfully.'
+        'error'   => 'Poistoluokkaa ei päivitetty, yritä uudelleen',
+        'success' => 'Poistoluokka päivitettiin onnistuneesti.'
     ),
 
     'delete' => array(
-        'confirm'   => 'Are you sure you wish to delete this depreciation class?',
-        'error'   => 'There was an issue deleting the depreciation class. Please try again.',
-        'success' => 'The depreciation class was deleted successfully.'
+        'confirm'   => 'Oletko varma että haluat poistaa tämän poistoluokan?',
+        'error'   => 'Poistoluokan poistamisessa tapahtui virhe. Yritä uudelleen.',
+        'success' => 'Poistoluokka poistettiin onnistuneesti.'
     )
 
 );

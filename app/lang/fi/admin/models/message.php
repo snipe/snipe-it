@@ -2,24 +2,24 @@
 
 return array(
 
-    'does_not_exist' => 'Model does not exist.',
-    'assoc_users'	 => 'This model is currently associated with one or more assets and cannot be deleted. Please delete the assets, and then try deleting again. ',
+    'does_not_exist' => 'Malli ei löydy.',
+    'assoc_users'	 => 'Tämä malli on määritetty käyttöön yhdelle tai useammalle laitteelle joten sitä ei voida poistaa. Poista malli käytöstä kaikilta laitteilta ja yritä uudelleen. ',
 
 
     'create' => array(
-        'error'   => 'Model was not created, please try again.',
-        'success' => 'Model created successfully.'
+        'error'   => 'Mallia ei luotu, yritä uudelleen.',
+        'success' => 'Malli luotiin onnistuneesti.'
     ),
 
     'update' => array(
-        'error'   => 'Model was not updated, please try again',
-        'success' => 'Model updated successfully.'
+        'error'   => 'Mallia ei päivitetty, yritä uudelleen',
+        'success' => 'Malli päivitettiin onnistuneesti.'
     ),
 
     'delete' => array(
-        'confirm'   => 'Are you sure you wish to delete this asset model?',
-        'error'   => 'There was an issue deleting the model. Please try again.',
-        'success' => 'The model was deleted successfully.'
+        'confirm'   => 'Oletko varma että haluat poistaa tämän laitemallin?',
+        'error'   => 'Laitemallin poistossa tapahtui virhe. Yritä uudelleen.',
+        'success' => 'Malli poistettiin onnistuneesti.'
     )
 
 );
