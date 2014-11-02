@@ -41,6 +41,7 @@
 
     </div>
 </div>
+</div>
 
 <div class="user-profile">
 <div class="row profile">
