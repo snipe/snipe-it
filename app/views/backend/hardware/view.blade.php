@@ -138,8 +138,8 @@
 
         <!-- Asset notes -->
         @if ($asset->notes)
-                <div class="col-md-12"><br><strong>@lang('admin/hardware/form.notes'):</strong>
-                 {{{ $asset->notes }}} <br>
+                <div class="col-md-12"><strong>@lang('admin/hardware/form.notes'):</strong>
+                 {{{ $asset->notes }}} <br><br>
                 </div>
         @endif
 
