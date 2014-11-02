@@ -17,7 +17,6 @@
         @if ($asset->name)
         ({{{ $asset->name }}})
         @endif
-        <br>
         @if ($asset->serial)
         <small><em>[{{{ $asset->serial }}}]</em></small>
         @endif
@@ -136,16 +135,15 @@
 
         <!-- Asset notes -->
         @if ($asset->notes)
-            <p>
                 <div class="col-md-6"><strong>@lang('admin/hardware/form.notes'):</strong>
                  {{{ $asset->notes }}} 
                 </div>
-            </p>
         @endif
 
 		<!-- Licenses assets table -->
-
+<p>
         <h6>Software Assigned to {{{ $asset->name }}}</h6>
+</p>
 		<br>
 		<!-- checked out assets table -->
 		@if (count($asset->licenses) > 0)
