@@ -43,7 +43,11 @@
 </div>
 
     @if ($asset->serial)
-        <h4 small>[{{{ $asset->serial }}}]</h4>
+        <div class="row header">
+            <div class="col-md-12">
+             <h4 small>[{{{ $asset->serial }}}]</h4>
+            </div>
+        </div>
     @endif
 
 <div class="user-profile">
