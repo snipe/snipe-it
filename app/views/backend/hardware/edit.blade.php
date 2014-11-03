@@ -51,14 +51,6 @@
                     </div>
             </div>
 
-            <!-- Asset Title -->
-            <div class="form-group {{ $errors->has('name') ? ' has-error' : '' }}">
-                <label for="name" class="col-md-2 control-label">@lang('admin/hardware/form.name')</label>
-                    <div class="col-md-7">
-                        <input class="form-control" type="text" name="name" id="name" value="{{{ Input::old('name', $asset->name) }}}" />
-                        {{ $errors->first('name', '<span class="alert-msg"><i class="icon-remove-sign"></i> :message</span>') }}
-                    </div>
-            </div>
             <!-- Serial -->
             <div class="form-group {{ $errors->has('serial') ? ' has-error' : '' }}">
                 <label for="serial" class="col-md-2 control-label">@lang('admin/hardware/form.serial') <i class='icon-asterisk'></i></label>
@@ -68,13 +60,13 @@
                 </div>
             </div>
 
-            <!-- Order Number -->
-            <div class="form-group {{ $errors->has('order_number') ? ' has-error' : '' }}">
-                <label for="order_number" class="col-md-2 control-label">@lang('admin/hardware/form.order')</label>
-                <div class="col-md-7">
-                    <input class="form-control" type="text" name="order_number" id="order_number" value="{{{ Input::old('order_number', $asset->order_number) }}}" />
-                    {{ $errors->first('order_number', '<span class="alert-msg"><i class="icon-remove-sign"></i> :message</span>') }}
-                </div>
+            <!-- Asset Name -->
+            <div class="form-group {{ $errors->has('name') ? ' has-error' : '' }}">
+                <label for="name" class="col-md-2 control-label">@lang('admin/hardware/form.name')</label>
+                    <div class="col-md-7">
+                        <input class="form-control" type="text" name="name" id="name" value="{{{ Input::old('name', $asset->name) }}}" />
+                        {{ $errors->first('name', '<span class="alert-msg"><i class="icon-remove-sign"></i> :message</span>') }}
+                    </div>
             </div>
 
             <!-- Model -->
@@ -107,6 +99,14 @@
                 </div>
             </div>
 
+            <!-- Order Number -->
+            <div class="form-group {{ $errors->has('order_number') ? ' has-error' : '' }}">
+                <label for="order_number" class="col-md-2 control-label">@lang('admin/hardware/form.order')</label>
+                <div class="col-md-7">
+                    <input class="form-control" type="text" name="order_number" id="order_number" value="{{{ Input::old('order_number', $asset->order_number) }}}" />
+                    {{ $errors->first('order_number', '<span class="alert-msg"><i class="icon-remove-sign"></i> :message</span>') }}
+                </div>
+            </div>
 
             <!-- Purchase Cost -->
             <div class="form-group {{ $errors->has('purchase_cost') ? ' has-error' : '' }}">
@@ -120,7 +120,7 @@
                      </div>
             </div>
 
-            <!-- Warrantee -->
+            <!-- Warranty -->
             <div class="form-group {{ $errors->has('warranty_months') ? ' has-error' : '' }}">
                 <label for="warranty_months" class="col-md-2 control-label">@lang('admin/hardware/form.warranty')</label>
                 <div class="col-md-2">

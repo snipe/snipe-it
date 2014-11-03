@@ -49,6 +49,12 @@
 
     <div class="col-md-12" style="min-height: 130px;">
 
+        @if ($asset->serial)
+            <div class="col-md-6"><strong>@lang('admin/hardware/form.serial'): </strong>
+            <em>{{{ $asset->serial }}}</em></div>
+            <div class="col-md-6"><strong><br></strong></div>
+        @endif
+
         @if ($asset->model->manufacturer)
             <div class="col-md-6"><strong>@lang('admin/hardware/form.manufacturer'): </strong>
             <a href="{{ route('update/manufacturer', $asset->model->manufacturer->id) }}">
@@ -77,6 +83,13 @@
             {{{ $asset->order_number }}} </div>
         @endif
 
+        @if ($asset->supplier_id)
+            <div class="col-md-6"><strong>@lang('admin/hardware/form.supplier'): </strong>
+            <a href="{{ route('view/supplier', $asset->supplier_id) }}">
+            {{{ $asset->supplier->name }}}
+            </a> </div>
+        @endif
+
         @if ($asset->warranty_months)
             <div class="col-md-6"><strong>@lang('admin/hardware/form.warranty'):</strong>
             {{{ $asset->warranty_months }}}
@@ -92,8 +105,6 @@
                 ({{{ $asset->depreciation->months }}}
                 @lang('admin/hardware/form.months')
                 )</div>
-            <div class="col-md-6"><strong>@lang('admin/hardware/form.depreciates_on'): </strong>
-            {{{ $asset->depreciated_date() }}} </div>
             <div class="col-md-6"><strong>@lang('admin/hardware/form.fully_depreciated'): </strong>
             {{{ $asset->months_until_depreciated()->m }}}
             @lang('admin/hardware/form.months')
@@ -101,6 +112,7 @@
                 , {{{ $asset->months_until_depreciated()->y }}}
                 @lang('admin/hardware/form.years')
              @endif
+              ({{{ $asset->depreciated_date() }}})
              </div>
         @endif
 
@@ -123,19 +135,16 @@
             </div>
         @endif
 
-        @if ($asset->supplier_id)
-            <div class="col-md-6"><strong>@lang('admin/hardware/form.supplier'): </strong>
-            <a href="{{ route('view/supplier', $asset->supplier_id) }}">
-            {{{ $asset->supplier->name }}}
-            </a> </div>
-
-        @endif
-
-
     </div>
 
-		<!-- Licenses assets table -->
+        <!-- Asset notes -->
+        @if ($asset->notes)
+                <div class="col-md-12"><strong>@lang('admin/hardware/form.notes'):</strong>
+                 {{{ $asset->notes }}} <br><br>
+                </div>
+        @endif
 
+		<!-- Licenses assets table -->
         <h6>Software Assigned to {{{ $asset->name }}}</h6>
 		<br>
 		<!-- checked out assets table -->
@@ -214,9 +223,9 @@
                     <td>@lang('general.created_asset')</td>
                     <td></td>
                     <td>
-                    @if ($asset->notes)
+<!--                    @if ($asset->notes)
                     {{{ $asset->notes }}}
-                    @endif
+                    @endif -->
                     </td>
                 </tr>
             </tbody>
