@@ -412,8 +412,12 @@ class LicensesController extends AdminController
             // Redirect to the asset management page with error
             return Redirect::to('admin/licenses')->with('error', Lang::get('admin/licenses/message.not_found'));
         }
-
-		 $licenseseat->asset_id = e(Input::get('asset_id'));
+	
+	if ( e(Input::get('asset_id')) == '') {
+            $licenseseat->asset_id = NULL;
+        } else {
+            $licenseseat->asset_id = e(Input::get('asset_id'));
+        }
 
         // Update the asset data
         if ( e(Input::get('assigned_to')) == '') {

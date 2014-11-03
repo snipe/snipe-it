@@ -46,7 +46,6 @@
 			<!-- Asset -->
             <div class="form-group {{ $errors->has('asset_id') ? ' has-error' : '' }}">
                 <label for="asset_id" class="col-md-2 control-label">@lang('admin/licenses/form.asset')
-                 <i class='icon-asterisk'></i>
                  </label>
 
                 <div class="col-md-9">
