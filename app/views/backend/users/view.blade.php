@@ -34,10 +34,8 @@ View User {{{ $user->fullName() }}} ::
                     <div class="row header">
 
                         <div class="btn-group pull-right">
-                            <button class="btn gray">@lang('button.actions')</button>
-                            <!--  Height being thrown off by sub-container  -->
-                            <button class="btn glow dropdown-toggle" style="height: 27.5" data-toggle="dropdown">
-                                <span class="caret"></span>
+                            <button class="btn btn-default" data-toggle="dropdown">@lang('button.actions')
+                            <span class="caret"></span>
                             </button>
                             <ul class="dropdown-menu">
                                 <li><a href="{{ route('update/user', $user->id) }}">@lang('admin/users/general.edit')</a></li>
@@ -188,15 +186,18 @@ View User {{{ $user->fullName() }}} ::
                     <div class="col-md-3 address pull-right">
 
 
+
                         <h6>Contact  {{{ $user->first_name }}}</h6>
 
 
                         @if ($user->location_id)
-                            <iframe width="300" height="133" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.com/maps?&amp;q={{{ $user->userloc->address }}},{{{ $user->userloc->city }}},{{{ $user->userloc->state }}},{{{ $user->userloc->country }}}&amp;output=embed"></iframe>
+                        	<div class="col-md-12">
+                            <iframe width="300" height="133" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.com/maps?&amp;q={{{ $user->userloc->address }}},{{{ $user->userloc->city }}},{{{ $user->userloc->state }}},{{{ $user->userloc->country }}}&amp;output=embed" style="float: none;"></iframe>
+                            </div>
                         @endif
                         <ul>
                         @if ($user->manager)
-                            <strong>Manager:</strong> {{{ $user->manager->fullName() }}}
+                            <li><strong>Manager:</strong> {{{ $user->manager->fullName() }}}</li>
                         @endif
 
                         @if ($user->location_id)
