@@ -129,7 +129,7 @@
 
     // confirm delete modal
     Components.modals.confirmDelete = function() {
-        var $el = $('.delete-asset');
+        var $el = $('#example');
 
         var events = {
             'click': function(evnt) {
@@ -149,7 +149,7 @@
         };
 
         var render = function() {
-            $el.on('click', events['click']);
+            $el.on('click', '.delete-asset', events['click']);
         };
 
         return {
