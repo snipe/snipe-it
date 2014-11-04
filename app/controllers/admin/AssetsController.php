@@ -48,7 +48,11 @@ class AssetsController extends AdminController
         } elseif (Input::get('Deployed')) {
             $assets = Asset::orderBy('asset_tag', 'ASC')->where('status_id', '=', 0)->where('assigned_to','>','0')->where('physical', '=', 1)->get();
         } else {
-            $assets = Asset::orderBy('asset_tag', 'ASC')->where('physical', '=', 1)->get();
+			// ADDED Eager Loading params for Model, Assigned User, Asset Location - decreases load time significantly
+			// Note the addition of AssetsStatus to complete the loading improvement.
+			// Debug Mode still has overhead, but much more manageable
+			$assets = Asset::with('model','assigneduser','assetloc','assetstatus')->orderBy('asset_tag', 'ASC')->where('physical', '=', 1)->get();
+
         }
 
         // Paginate the users
@@ -224,7 +228,7 @@ class AssetsController extends AdminController
             } else {
                 $asset->requestable        = e(Input::get('requestable'));
             }
-            
+
             if (e(Input::get('rtd_location_id')) == '') {
                 $asset->rtd_location_id = 0;
             } else {
@@ -345,7 +349,7 @@ class AssetsController extends AdminController
             } else {
                 $asset->requestable        = e(Input::get('requestable'));
             }
-            
+
             if (e(Input::get('rtd_location_id')) == '') {
                 $asset->rtd_location_id = 0;
             } else {
