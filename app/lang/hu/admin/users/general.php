@@ -3,6 +3,6 @@
 
 return array(
 
-    'edit'  			=> 'Edit User',
+    'edit'  			=> 'Felhasználó szerkesztése',
     'clone'  			=> 'Clone User',
     );

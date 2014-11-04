@@ -2,15 +2,15 @@
 
 return array(
 
-    'account_already_exists' => 'An account with the this email already exists.',
+    'account_already_exists' => 'Már létezik ezzel az e-mail címmel felhasználó.',
     'account_not_found'      => 'The email account or password is incorrect.',
-    'account_not_activated'  => 'This user account is not activated.',
+    'account_not_activated'  => 'Ez a felhasználó nincs aktiválva.',
     'account_suspended'      => 'This user account is suspended.',
     'account_banned'         => 'This user account is banned.',
 
     'signin' => array(
         'error'   => 'There was a problem while trying to log you in, please try again.',
-        'success' => 'You have successfully logged in.',
+        'success' => 'Sikeresen bejelentkezett.',
     ),
 
     'signup' => array(

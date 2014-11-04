@@ -15,7 +15,7 @@ return array(
 
     "password" => "Passwords must be six characters and match the confirmation.",
 
-    "user"     => "Username or email address is incorrect",
+    "user"     => "A felhasználónév vagy az e-mail cím téves",
 
     "token"    => "This password reset token is invalid.",
 

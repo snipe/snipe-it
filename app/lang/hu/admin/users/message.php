@@ -10,8 +10,8 @@ return array(
 
     'success' => array(
         'create'    => 'User was successfully created.',
-        'update'    => 'User was successfully updated.',
-        'delete'    => 'User was successfully deleted.',
+        'update'    => 'A felhasználó módosítása sikeresen megtörtént.',
+        'delete'    => 'A felhasználó törlése sikeresen megtörtént.',
         'ban'       => 'User was successfully banned.',
         'unban'     => 'User was successfully unbanned.',
         'suspend'   => 'User was successfully suspended.',

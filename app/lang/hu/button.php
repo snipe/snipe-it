@@ -2,10 +2,10 @@
 
 return array(
 
-    'edit'    => 'Edit',
-    'delete'  => 'Delete',
-    'restore' => 'Restore',
-    'actions' => 'Actions',
-    'submit'  => 'Submit',
+    'edit'    => 'Szerkesztés',
+    'delete'  => 'Törlés',
+    'restore' => 'Visszaállítás',
+    'actions' => 'Műveletek',
+    'submit'  => 'Küldés',
 
 );
