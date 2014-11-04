@@ -16,4 +16,12 @@ return array(
         ),
     ),
 
+    'Reporting' => array(
+        array(
+            'permission' => 'reports',
+            'label'      => 'View Reports',
+        ),
+    ),
+
+
 );

@@ -89,6 +89,34 @@ Route::filter('admin-auth', function () {
     }
 });
 
+/*
+|--------------------------------------------------------------------------
+| Reporting authentication filter.
+|--------------------------------------------------------------------------
+|
+| This filter does the same as the 'auth' filter but it checks if the user
+| has 'reports' privileges.
+|
+*/
+
+Route::filter('reporting-auth', function () {
+     // Check if the user is logged in
+    if ( ! Sentry::check()) {
+        // Store the current uri in the session
+        Session::put('loginRedirect', Request::url());
+
+        // Redirect to the login page
+        return Redirect::route('signin');
+    }
+
+    // Check if the user has access to the admin pages
+    if ( ! Sentry::getUser()->hasAccess('reports')) {
+        // Show the insufficient permissions page
+        return Redirect::route('profile')->with("error","You do not have permission to view this page.");
+    }
+});
+
+
 
 /*
 |--------------------------------------------------------------------------

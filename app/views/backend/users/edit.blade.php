@@ -109,7 +109,7 @@
 
 			<!-- Location -->
             <div class="form-group {{ $errors->has('location_id') ? 'has-error' : '' }}">
-                <label class="col-md-3 control-label" for="location_id">@lang('admin/users/table.location') 
+                <label class="col-md-3 control-label" for="location_id">@lang('admin/users/table.location')
                     <i class='icon-asterisk'></i></label>
                 <div class="col-md-7">
                     {{ Form::select('location_id', $location_list , Input::old('location_id', $user->location_id), array('class'=>'select2', 'style'=>'width:250px')) }}
@@ -182,7 +182,7 @@
                    <div class="controls">
 
                     <select name="groups[]" id="groups[]" multiple="multiple" class="form-control">
-                        
+
                         @foreach ($groups as $group)
                         <option value="{{ $group->id }}"
                         {{ (in_array($group->id, $userGroups) ? ' selected="selected"' : '') }}>

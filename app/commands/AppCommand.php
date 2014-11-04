@@ -223,7 +223,8 @@ class AppCommand extends Command
                 'name'        => 'Admin',
                 'permissions' => array(
                     'admin' => 1,
-                    'users' => 1
+                    'users' => 1,
+                    'reports' => 1
                 )
             ));
 
@@ -242,7 +243,8 @@ class AppCommand extends Command
                 'name'        => 'Reporting',
                 'permissions' => array(
                     'admin' => 0,
-                    'users' => 1
+                    'users' => 1,
+                    'reports' => 1,
                 )
             ));
 
@@ -260,7 +262,8 @@ class AppCommand extends Command
                 'name'        => 'Users',
                 'permissions' => array(
                     'admin' => 0,
-                    'users' => 1
+                    'users' => 1,
+                    'reports' => 0,
                 )
             ));
 

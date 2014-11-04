@@ -7,10 +7,13 @@ class AdminController extends AuthorizedController
      *
      * @return void
      */
+
     public function __construct()
     {
+    	// These have been moved into the routes for more granular control
         // Apply the admin auth filter
-        $this->beforeFilter('admin-auth');
+        //$this->beforeFilter('admin-auth', array('except' => $this->whitelist));
+
     }
 
 

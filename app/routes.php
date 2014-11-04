@@ -9,7 +9,7 @@
 |
 */
 
-Route::group(array('prefix' => 'hardware'), function () {
+Route::group(array('prefix' => 'hardware', 'before' => 'admin-auth'), function () {
 
 
 
@@ -46,7 +46,7 @@ Route::group(array('prefix' => 'hardware'), function () {
 
 
 # Asset Model Management
-    Route::group(array('prefix' => 'models'), function () {
+    Route::group(array('prefix' => 'models', 'before' => 'admin-auth'), function () {
         Route::get('/', array('as' => 'models', 'uses' => 'Controllers\Admin\ModelsController@getIndex'));
         Route::get('create', array('as' => 'create/model', 'uses' => 'Controllers\Admin\ModelsController@getCreate'));
         Route::post('create', 'Controllers\Admin\ModelsController@postCreate');
@@ -71,7 +71,7 @@ Route::group(array('prefix' => 'hardware'), function () {
 |
 */
 
-Route::group(array('prefix' => 'admin'), function () {
+Route::group(array('prefix' => 'admin', 'before' => 'admin-auth'), function () {
 
 
     # Licenses
@@ -246,7 +246,7 @@ Route::group(array('prefix' => 'auth'), function () {
 |
 */
 
-Route::group(array('prefix' => 'account'), function () {
+Route::group(array('prefix' => 'account', 'before' => 'auth'), function () {
 
     # Account Dashboard
     Route::get('/', array('as' => 'account', 'uses' => 'Controllers\Account\DashboardController@getIndex'));
@@ -279,12 +279,16 @@ Route::group(array('prefix' => 'account'), function () {
 |
 */
 
+Route::get('reports', array('as' => 'reports', 'before' => 'reporting-auth', 'uses' => 'Controllers\Admin\AssetsController@getReports'));
+
+Route::get('reports/export', array('as' => 'reports/export', 'before' => 'reporting-auth', 'uses' => 'Controllers\Admin\AssetsController@exportReports'));
+
 
 // Redirect requests to / to the hardware section until we get a fancy dashboard set up
 Route::get('/', function () {
     return Redirect::to('hardware');
 });
-Route::get('/', array('as' => 'home', 'uses' => 'Controllers\Admin\AssetsController@getIndex'));
-Route::get('reports', array('as' => 'reports', 'uses' => 'Controllers\Admin\AssetsController@getReports'));
-Route::get('reports/export', array('as' => 'reports/export', 'uses' => 'Controllers\Admin\AssetsController@exportReports'));
+Route::get('/', array('as' => 'home', 'before' => 'admin-auth', 'uses' => 'Controllers\Admin\AssetsController@getIndex'));
+
+
 
