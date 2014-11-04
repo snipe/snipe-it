@@ -4,7 +4,7 @@ return array(
 
     'does_not_exist' => 'A licença não existe.',
     'user_does_not_exist' => 'O usuário não existe.',
-    'asset_does_not_exist' 	=> 'The asset you are trying to associate with this license does not exist.',
+    'asset_does_not_exist' 	=> 'O bem que você está tentando associar com esta licença não existe.',
     'owner_doesnt_match_asset' => 'The asset you are trying to associate with this license is owned by somene other than the person selected in the assigned to dropdown.',
     'assoc_users'	 => 'This license is currently checked out to a user and cannot be deleted. Please check the license in first, and then try deleting again. ',
 

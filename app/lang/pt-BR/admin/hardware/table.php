@@ -2,21 +2,21 @@
 
 return array(
 
-    'asset_tag'   	=> 'Asset Tag',
+    'asset_tag'   	=> 'Marcação do Bem',
     'asset_model'       => 'Modelo',
     'book_value'  	=> 'Valor',
     'change' 		=> 'In/Out',
     'checkout_date' => 'Checkout Date',
     'checkoutto' 	=> 'Checked Out',
-    'diff' 			=> 'Diff',
-    'dl_csv' 		=> 'Download CSV',
+    'diff' 			=> 'Diferença',
+    'dl_csv' 		=> 'Baixar CSV',
     'eol' 			=> 'EOL',
     'id'      		=> 'ID',
-    'location' 		=> 'Location',
+    'location' 		=> 'Local',
     'purchase_cost'	=> 'Custo',
     'purchase_date'	=> 'Comprado',
     'serial'   		=> 'Serial',
     'status'   		=> 'Status',
-    'title'      	=> 'Asset ',
+    'title'      	=> 'Bem ',
 
 );

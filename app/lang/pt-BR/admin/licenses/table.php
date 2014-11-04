@@ -2,11 +2,11 @@
 
 return array(
 
-    'assigned_to'   	=> 'Assigned To',
+    'assigned_to'   	=> 'Atribuído A',
     'checkout'   		=> 'In/Out',
     'id'      			=> 'ID',
-    'license_email'   	=> 'License Email',
-    'license_name'   	=> 'Licensed To',
+    'license_email'   	=> 'E-mail da Licença',
+    'license_name'   	=> 'Licenciado A',
     'purchase_date'   	=> 'Data da Compra',
     'purchased'   		=> 'Comprado',
     'seats'   			=> 'Seats',

@@ -7,7 +7,7 @@ return array(
     'checkout'  				=> 'Checkout License Seat',
     'edit'  					=> 'Editar Licença',
     'clone'  					=> 'Clonar Licença',
-    'history_for'  				=> 'History for ',
+    'history_for'  				=> 'Histórico para ',
     'in_out'  					=> 'In/Out',
     'info'  					=> 'Informações da Licença',
     'license_seats'  			=> 'License Seats',

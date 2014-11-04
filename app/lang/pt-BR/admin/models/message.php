@@ -3,7 +3,7 @@
 return array(
 
     'does_not_exist' => 'O modelo não existe.',
-    'assoc_users'	 => 'This model is currently associated with one or more assets and cannot be deleted. Please delete the assets, and then try deleting again. ',
+    'assoc_users'	 => 'Este modelo está no momento associado com um ou mais bens e não pode ser deletado. Por favor, delete os bens, e então tente deletar novamente. ',
 
 
     'create' => array(
@@ -17,7 +17,7 @@ return array(
     ),
 
     'delete' => array(
-        'confirm'   => 'Are you sure you wish to delete this asset model?',
+        'confirm'   => 'Tem certeza de que quer deletar este modelo de bem?',
         'error'   => 'Houve um problema ao deletar o modelo. Por favor, tente novamente.',
         'success' => 'O modelo foi deletado com sucesso.'
     )

@@ -1,9 +1,9 @@
 <?php
 
 return array(
-    'about_asset_depreciations'  			=> 'About Asset Depreciations',
-    'about_depreciations'  					=> 'You can set up asset depreciations to depreciate assets based on straight-line depreciation.',
-    'asset_depreciations'  					=> 'Asset Depreciations',
+    'about_asset_depreciations'  			=> 'Sobre as Depreciações de Bens',
+    'about_depreciations'  					=> 'Você pode configurar depreciações para depreciar bens baseados na depreciação linear.',
+    'asset_depreciations'  					=> 'Depreciações de Bens',
     'create_depreciation'  					=> 'Criar Depreciação',
     'depreciation_name'  					=> 'Nome da Depreciação',
     'number_of_months'  					=> 'Número de Meses',
