@@ -51,7 +51,7 @@ class AssetsController extends AdminController
 			// ADDED Eager Loading params for Model, Assigned User, Asset Location - decreases load time significantly
 			// Note the addition of AssetsStatus to complete the loading improvement.
 			// Debug Mode still has overhead, but much more manageable
-			$assets = Asset::with('model','assigneduser','assetloc','assetstatus','defaultLoc')->orderBy('asset_tag', 'ASC')->where('physical', '=', 1)->get();
+			$assets = Asset::with('model','assigneduser','assetstatus','defaultLoc')->orderBy('asset_tag', 'ASC')->where('physical', '=', 1)->get();
 
         }
 
