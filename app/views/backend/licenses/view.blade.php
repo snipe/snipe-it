@@ -43,6 +43,17 @@
 <div class="col-md-6"><strong>@lang('admin/licenses/form.to_email'): </strong> {{ $license->license_email }} </div>
 @endif
 
+@if ($license->supplier_id)
+    <div class="col-md-6"><strong>@lang('admin/licenses/form.supplier'): </strong>
+    <a href="{{ route('view/supplier', $license->supplier_id) }}">
+    {{{ $license->supplier->name }}}
+    </a> </div>
+@endif
+
+@if ($license->expiration_date > 0)
+<div class="col-md-6"><strong>@lang('admin/licenses/form.expiration'): </strong> {{ $license->expiration_date }} </div>
+@endif
+
 @if ($license->notes)
 <div class="col-md-6"><strong>@lang('admin/licenses/form.notes'): </strong>{{ $license->notes }}</div>
 @endif
@@ -104,7 +115,7 @@
                                 <td>
                                 @if ($licensedto->asset_id)
                                     <a href="{{ route('view/hardware', $licensedto->asset_id) }}">
-                                	{{ $licensedto->asset->name }} {{ $licensedto->asset->asset_tag }}
+                                    {{ $licensedto->asset->name }} {{ $licensedto->asset->asset_tag }}
                                 </a>
                                 @endif
                                 </td>
@@ -188,7 +199,9 @@
         <div class="col-md-3 col-xs-12 address pull-right">
         <h6><br>@lang('general.moreinfo'):</h6>
                 <ul>
-
+                    @if ($license->purchase_order)
+                    <li>@lang('admin/licenses/form.purchase_order'): {{ $license->purchase_order }} </li>
+                    @endif
                     @if ($license->purchase_date > 0)
                     <li>@lang('admin/licenses/form.date'): {{ $license->purchase_date }} </li>
                     @endif

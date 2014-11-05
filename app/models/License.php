@@ -112,6 +112,11 @@ class License extends Elegant
         return $this->hasMany('LicenseSeat');
     }
 
+    public function supplier()
+    {
+        return $this->belongsTo('Supplier','supplier_id');
+    }
+
     /**
      * Get depreciation class
      *
@@ -147,7 +152,7 @@ class License extends Elegant
 
 
 
-	/**
+    /**
     * Handle depreciation
     */
     public function depreciate()

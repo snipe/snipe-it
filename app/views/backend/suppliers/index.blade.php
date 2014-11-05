@@ -29,6 +29,7 @@
             <th class="col-md-3">@lang('admin/suppliers/table.contact')</th>
             <th class="col-md-3">@lang('admin/suppliers/table.phone')</th>
             <th class="col-md-3">@lang('admin/suppliers/table.assets')</th>
+            <th class="col-md-3">@lang('admin/suppliers/table.licenses')</th>
             <th class="col-md-2 actions">@lang('table.actions')</th>
         </tr>
     </thead>
@@ -56,6 +57,7 @@
             </td>
             <td>{{{ $supplier->phone }}}</td>
             <td>{{{ $supplier->num_assets() }}}</td>
+            <td>{{{ $supplier->num_licenses() }}}</td>
             <td>
                 <a href="{{ route('update/supplier', $supplier->id) }}" class="btn btn-warning"><i class="icon-pencil icon-white"></i></a>
                 <a data-html="false" class="btn delete-asset btn-danger" data-toggle="modal" href="{{ route('delete/supplier', $supplier->id) }}" data-content="@lang('admin/suppliers/message.delete.confirm')"

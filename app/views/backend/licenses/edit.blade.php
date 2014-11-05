@@ -33,7 +33,7 @@
     <!-- CSRF Token -->
     <input type="hidden" name="_token" value="{{ csrf_token() }}" />
 
-            <!-- Asset Tag -->
+            <!-- License -->
             <div class="form-group {{ $errors->has('name') ? ' has-error' : '' }}">
                 <label for="name" class="col-md-3 control-label">@lang('admin/licenses/form.name')
                  <i class='icon-asterisk'></i></label>
@@ -44,6 +44,7 @@
                     </div>
             </div>
 
+            <!-- Serial -->
             <div class="form-group {{ $errors->has('serial') ? ' has-error' : '' }}">
                 <label for="serial" class="col-md-3 control-label">@lang('admin/licenses/form.serial')
                  <i class='icon-asterisk'></i></label>
@@ -54,6 +55,7 @@
                     </div>
             </div>
 
+            <!-- Licensed to name -->
             <div class="form-group {{ $errors->has('license_name') ? ' has-error' : '' }}">
                 <label for="license_name" class="col-md-3 control-label">@lang('admin/licenses/form.to_name')</label>
                     <div class="col-md-7">
@@ -62,6 +64,7 @@
                     </div>
             </div>
 
+            <!-- Licensed to email -->
             <div class="form-group {{ $errors->has('license_email') ? ' has-error' : '' }}">
                 <label for="license_email" class="col-md-3 control-label">@lang('admin/licenses/form.to_email')</label>
                     <div class="col-md-7">
@@ -70,6 +73,7 @@
                     </div>
             </div>
 
+            <!-- Seats -->
             <div class="form-group {{ $errors->has('seats') ? ' has-error' : '' }}">
                 <label for="seats" class="col-md-3 control-label">@lang('admin/licenses/form.seats')
                  <i class='icon-asterisk'></i></label>
@@ -80,6 +84,26 @@
                     </div>
             </div>
 
+            <!-- Expiration Date -->
+            <div class="form-group {{ $errors->has('expiration_date') ? ' has-error' : '' }}">
+                <label for="expiration_date" class="col-md-3 control-label">@lang('admin/licenses/form.expiration')</label>
+                <div class="input-group col-md-2">
+                    <input type="date" class="datepicker form-control" data-date-format="yyyy-mm-dd" placeholder="Select Date" name="expiration_date" id="expiration_date" value="{{ Input::old('expiration_date', $license->expiration_date) }}">
+                    <span class="input-group-addon"><i class="icon-calendar"></i></span>
+                {{ $errors->first('expiration_date', '<span class="alert-msg"><i class="icon-remove-sign"></i> :message</span>') }}
+                </div>
+            </div>
+
+            <!-- Supplier -->
+            <div class="form-group {{ $errors->has('supplier_id') ? ' has-error' : '' }}">
+                <label for="supplier_id" class="col-md-3 control-label">@lang('admin/licenses/form.supplier')</label>
+                <div class="col-md-7">
+                    {{ Form::select('supplier_id', $supplier_list , Input::old('supplier_id', $license->supplier_id), array('class'=>'select2', 'style'=>'min-width:350px')) }}
+                    {{ $errors->first('supplier_id', '<span class="alert-msg"><i class="icon-remove-sign"></i> :message</span>') }}
+                </div>
+            </div>
+
+            <!-- Order Number -->
             <div class="form-group {{ $errors->has('order_number') ? ' has-error' : '' }}">
                 <label for="order_number" class="col-md-3 control-label">@lang('admin/licenses/form.order')</label>
                     <div class="col-md-7">
@@ -110,6 +134,15 @@
                  </div>
             </div>
 
+            <!-- Purchase Order -->
+            <div class="form-group {{ $errors->has('purchase_order') ? ' has-error' : '' }}">
+                <label for="purchase_order" class="col-md-3 control-label">@lang('admin/licenses/form.purchase_order')</label>
+                    <div class="col-md-7">
+                        <input class="form-control" type="text" name="purchase_order" id="purchase_order" value="{{ Input::old('purchase_order', $license->purchase_order) }}" />
+                        {{ $errors->first('purchase_order', '<span class="alert-msg"><i class="icon-remove-sign"></i> :message</span>') }}
+                    </div>
+            </div>
+
             <!-- Depreciation -->
             <div class="form-group {{ $errors->has('depreciation_id') ? ' has-error' : '' }}">
                 <label for="parent" class="col-md-3 control-label">@lang('admin/licenses/form.depreciation')</label>
@@ -119,7 +152,7 @@
                     </div>
             </div>
 
-<!-- Notes -->
+            <!-- Notes -->
             <div class="form-group {{ $errors->has('notes') ? ' has-error' : '' }}">
                 <label for="notes" class="col-md-3 control-label">@lang('admin/licenses/form.notes')</label>
                 <div class="col-md-7">
