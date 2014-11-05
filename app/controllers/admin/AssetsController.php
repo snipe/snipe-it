@@ -40,19 +40,19 @@ class AssetsController extends AdminController
 
         // Filter results
         if (Input::get('Pending')) {
-            $assets = Asset::with('model','assigneduser','assetstatus','defaultLoc')
+            $assets = Asset::with('model','assigneduser','assetstatus','defaultLoc','assetlog')
             ->whereNull('status_id','and')
         	->where('assigned_to','=','0')
         	->where('physical', '=', 1)
         	->get();
         } elseif (Input::get('RTD')) {
-        	$assets = Asset::with('model','assigneduser','assetstatus','defaultLoc')
+        	$assets = Asset::with('model','assigneduser','assetstatus','defaultLoc','assetlog')
         	->where('status_id', '=', 0)
         	->where('physical', '=', 1)
         	->orderBy('asset_tag', 'ASC')
         	->get();
         } elseif (Input::get('Undeployable')) {
-           $assets = Asset::with('model','assigneduser','assetstatus','defaultLoc')
+           $assets = Asset::with('model','assigneduser','assetstatus','defaultLoc','assetlog')
            ->where('physical', '=', 1)
            ->where('assigned_to','>','1')
            ->orderBy('asset_tag', 'ASC')
