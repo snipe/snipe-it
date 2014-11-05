@@ -2,21 +2,21 @@
 
 return array(
 
-    'group_exists'        => 'Group already exists!',
-    'group_not_found'     => 'Group [:id] does not exist.',
-    'group_name_required' => 'The name field is required',
+    'group_exists'        => 'المجموعة موجودة بالفعل!',
+    'group_not_found'     => 'المجموعة [:id] غير موجودة.',
+    'group_name_required' => 'حقل الإسم مطلوب',
 
     'success' => array(
-        'create' => 'Group was successfully created.',
-        'update' => 'Group was successfully updated.',
-        'delete' => 'Group was successfully deleted.',
+        'create' => 'تم إنشاء المجموعة بنجاح.',
+        'update' => 'تم تحديث المجموعة بنجاح.',
+        'delete' => 'تم حذف المجموعة بنجاح.',
     ),
 
     'delete' => array(
-        'confirm'   => 'Are you sure you wish to delete this group?',
-        'create' => 'There was an issue creating the group. Please try again.',
-        'update' => 'There was an issue updating the group. Please try again.',
-        'delete' => 'There was an issue deleting the group. Please try again.',
+        'confirm'   => 'هل أنت متأكد من رغبتك في حذف المجموعة ؟',
+        'create' => 'حدث خطأ أثناء إنشاء هذه المجموعة. فضلاً حاول مرة أخرى.',
+        'update' => 'حدث خطأ أثناء تحديث هذه المجموعة. فضلاً حاول مرة أخرى.',
+        'delete' => 'حدث خطأ أثناء حذف هذه المجموعة. فضلاً حاول مرة أخرى.',
     ),
 
 );

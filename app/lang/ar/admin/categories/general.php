@@ -1,11 +1,11 @@
 <?php
 
 return array(
-    'about_asset_categories' 			=> 'About Asset Categories',
-    'about_categories'  				=> 'Asset categories help you organize your assets. Some example categories might be &quot;Desktops&quot;, &quot;Laptops&quot;, &quot;Mobile Phones&quot;, &quot;Tablets&quot;, and so on, but you can use asset categories any way that makes sense for you. ',
-    'asset_categories' 					=> 'Asset Categories',
-    'category_name'  					=> 'Category Name',
-    'create'  							=> 'Create Category',
-    'update'  							=> 'Update Category',
+    'about_asset_categories' 			=> 'عن تصنيفات الأصول',
+    'about_categories'  				=> 'تصنيفات الأصول تساعدك على ترتيب الأصول. من الأمثلة على التصنيفات &quot; مكاتب &quot;،  &quot;أجهزة الكمبيوتر المحمولة &quot;،  &quot;الهواتف النقالة &quot;،  &quot;أجهزة لوحية &quot; وهكذا، كما يمكنك استخدام التصنيفات بأي طريقة تناسبك. ',
+    'asset_categories' 					=> 'التصنيفات',
+    'category_name'  					=> 'اسم التصنيف',
+    'create'  							=> 'إنشاء تصنيف',
+    'update'  							=> 'تحديث التصنيف',
 
 );

@@ -2,8 +2,8 @@
 
 return array(
 
-    'id'      => 'ID',
-    'parent'   => 'Parent',
-    'title'      => 'Asset Category Name',
+    'id'      => 'الرقم',
+    'parent'   => 'التصنيف الأب',
+    'title'      => 'اسم التصنيف',
 
 );
