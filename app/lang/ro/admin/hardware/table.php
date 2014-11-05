@@ -2,21 +2,21 @@
 
 return array(
 
-    'asset_tag'   	=> 'Asset Tag',
+    'asset_tag'   	=> 'Eticheta activ',
     'asset_model'       => 'Model',
-    'book_value'  	=> 'Value',
-    'change' 		=> 'In/Out',
-    'checkout_date' => 'Checkout Date',
-    'checkoutto' 	=> 'Checked Out',
-    'diff' 			=> 'Diff',
-    'dl_csv' 		=> 'Download CSV',
+    'book_value'  	=> 'Valoare',
+    'change' 		=> 'Predat/Primit',
+    'checkout_date' => 'Data predare',
+    'checkoutto' 	=> 'Predat',
+    'diff' 			=> 'Diferenta',
+    'dl_csv' 		=> 'Descarca CSV',
     'eol' 			=> 'EOL',
     'id'      		=> 'ID',
-    'location' 		=> 'Location',
+    'location' 		=> 'Locatie',
     'purchase_cost'	=> 'Cost',
-    'purchase_date'	=> 'Purchased',
-    'serial'   		=> 'Serial',
-    'status'   		=> 'Status',
-    'title'      	=> 'Asset ',
+    'purchase_date'	=> 'Achizitionat',
+    'serial'   		=> 'Serie',
+    'status'   		=> 'Statut',
+    'title'      	=> 'Activ ',
 
 );

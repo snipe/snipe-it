@@ -2,37 +2,36 @@
 
 return array(
 
-    'undeployable' 		=> '<strong>Warning: </strong> This asset has been marked as currently undeployable.
-                        If this status has changed, please update the asset status.',
-    'does_not_exist' 	=> 'Asset does not exist.',
-    'assoc_users'	 	=> 'This asset is currently checked out to a user and cannot be deleted. Please check the asset in first, and then try deleting again. ',
+    'undeployable' 		=> '<strong>ATENTIE:</strong> Acest activ a fost marcat ca momentan neimplementabil. Daca acest status s-a schimbat, va rugam sa schimbati starea activului.',
+    'does_not_exist' 	=> 'Activul nu exista.',
+    'assoc_users'	 	=> 'Acest activ este predat catre un utilizator si nu se poate sterge. Va rugam verificati activul, dupa care incercati sa-l stergeti iar. ',
 
     'create' => array(
-        'error'   		=> 'Asset was not created, please try again. :(',
-        'success' 		=> 'Asset created successfully. :)'
+        'error'   		=> 'Activul nu a fost creat, va rugam incercati iar. :(',
+        'success' 		=> 'Activul a fost creat. :)'
     ),
 
     'update' => array(
-        'error'   		=> 'Asset was not updated, please try again',
-        'success' 		=> 'Asset updated successfully.'
+        'error'   		=> 'Activul nu a fost actualizat, va rugam incercati iar',
+        'success' 		=> 'Activul a fost actualizat.'
     ),
 
     'delete' => array(
-        'confirm'   	=> 'Are you sure you wish to delete this asset?',
-        'error'   		=> 'There was an issue deleting the asset. Please try again.',
-        'success' 		=> 'The asset was deleted successfully.'
+        'confirm'   	=> 'Sunteti sigur ca vreti sa stergeti acest activ?',
+        'error'   		=> 'S-a intampinat o problema la stergerea activului. Va rugam incercati iar.',
+        'success' 		=> 'Activul a fost sters.'
     ),
 
     'checkout' => array(
-        'error'   		=> 'Asset was not checked out, please try again',
-        'success' 		=> 'Asset checked out successfully.',
-        'user_does_not_exist' => 'That user is invalid. Please try again.'
+        'error'   		=> 'Activul nu a fost predat, va rugam incercati iar',
+        'success' 		=> 'Activul a fost predat.',
+        'user_does_not_exist' => 'Utilizatorul este invalid. Va rugam incercati iar.'
     ),
 
     'checkin' => array(
-        'error'   		=> 'Asset was not checked in, please try again',
-        'success' 		=> 'Asset checked in successfully.',
-        'user_does_not_exist' => 'That user is invalid. Please try again.'
+        'error'   		=> 'Activul nu a fost primit, va rugam incercati iar',
+        'success' 		=> 'Activul a fost primit.',
+        'user_does_not_exist' => 'Utilizatorul este invalid. Va rugam incercati iar.'
     )
 
 );
