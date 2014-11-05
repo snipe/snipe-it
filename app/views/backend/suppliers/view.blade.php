@@ -23,9 +23,11 @@
 <div class="user-profile">
 <div class="row profile">
 <div class="col-md-9 bio">
-
+    <div class="profile-box">
 
                             <!-- checked out suppliers table -->
+                            <h6>Assets</h6>
+                            <br>
                             @if (count($supplier->assets) > 0)
                            <table id="example">
                             <thead>
@@ -65,15 +67,46 @@
                             </table>
 
                             @else
-                            <div class="col-md-9">
+                            <div class="col-md-12">
                                 <div class="alert alert-info alert-block">
                                     <i class="icon-info-sign"></i>
                                     @lang('general.no_results')
                                 </div>
                             </div>
                             @endif
+                            <br>
+                            <br>
+                            <h6>Software</h6>
+                            <br>
+                            @if (count($supplier->licenses) > 0)
+                            <table class="table table-hover">
+                                <thead>
+                                    <tr>
+                                        <th class="col-md-4"><span class="line"></span>Name</th>
+                                        <th class="col-md-4"><span class="line"></span>Serial</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach ($supplier->licenses as $license)
+                                    <tr>
+                                        <td><a href="{{ route('view/license', $license->id) }}">{{{ $license->name }}}</a></td>
+                                        <td><a href="{{ route('view/license', $license->id) }}">{{{ $license->serial }}}</a></td>
+                                        </td>
+                                    </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
+                            @else
 
-                        </div>
+                            <div class="col-md-12">
+                                <div class="alert alert-info alert-block">
+                                    <i class="icon-info-sign"></i>
+                                    @lang('general.no_results')
+                                </div>
+                            </div>
+                            @endif
+    </div>
+</div>
 
 
                     <!-- side address column -->
