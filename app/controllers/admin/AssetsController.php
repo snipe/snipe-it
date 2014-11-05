@@ -40,18 +40,34 @@ class AssetsController extends AdminController
 
         // Filter results
         if (Input::get('Pending')) {
-            $assets = Asset::orderBy('asset_tag', 'ASC')->whereNull('status_id','and')->where('assigned_to','=','0')->where('physical', '=', 1)->get();
+            $assets = Asset::with('model','assigneduser','assetstatus','defaultLoc')
+            ->whereNull('status_id','and')
+        	->where('assigned_to','=','0')
+        	->where('physical', '=', 1)
+        	->get();
         } elseif (Input::get('RTD')) {
-            $assets = Asset::orderBy('asset_tag', 'ASC')->where('status_id', '=', 0)->where('assigned_to','=','0')->where('physical', '=', 1)->get();
+        	$assets = Asset::with('model','assigneduser','assetstatus','defaultLoc')
+        	->where('status_id', '=', 0)
+        	->where('physical', '=', 1)
+        	->orderBy('asset_tag', 'ASC')
+        	->get();
         } elseif (Input::get('Undeployable')) {
-            $assets = Asset::orderBy('asset_tag', 'ASC')->where('status_id', '>', 1)->where('physical', '=', 1)->get();
+           $assets = Asset::with('model','assigneduser','assetstatus','defaultLoc')
+           ->where('physical', '=', 1)
+           ->where('assigned_to','>','1')
+           ->orderBy('asset_tag', 'ASC')
+           ->get();
         } elseif (Input::get('Deployed')) {
-            $assets = Asset::orderBy('asset_tag', 'ASC')->where('status_id', '=', 0)->where('assigned_to','>','0')->where('physical', '=', 1)->get();
+            $assets = Asset::with('model','assigneduser','assetstatus','defaultLoc')
+            ->where('physical', '=', 1)
+            ->where('assigned_to','>','0')
+            ->orderBy('asset_tag', 'ASC')
+            ->get();
         } else {
-			// ADDED Eager Loading params for Model, Assigned User, Asset Location - decreases load time significantly
-			// Note the addition of AssetsStatus to complete the loading improvement.
-			// Debug Mode still has overhead, but much more manageable
-			$assets = Asset::with('model','assigneduser','assetstatus','defaultLoc')->orderBy('asset_tag', 'ASC')->where('physical', '=', 1)->get();
+			$assets = Asset::with('model','assigneduser','assetstatus','defaultLoc')
+			->where('physical', '=', 1)
+			->orderBy('asset_tag', 'ASC')
+			->get();
 
         }
 
