@@ -13,15 +13,15 @@ return array(
     |
     */
 
-    "accepted"         => "The :attribute must be accepted.",
-    "active_url"       => "The :attribute is not a valid URL.",
-    "after"            => "The :attribute must be a date after :date.",
-    "alpha"            => "The :attribute may only contain letters.",
-    "alpha_dash"       => "The :attribute may only contain letters, numbers, and dashes.",
-    "alpha_num"        => "The :attribute may only contain letters and numbers.",
-    "before"           => "The :attribute must be a date before :date.",
+    "accepted"         => "Arrr, ye must accept them thar :attribute.",
+    "active_url"       => "Avast! :attribute be not a valid URL, matey.",
+    "after"            => "Arr, :attribute must be a date after :date.",
+    "alpha"            => "Arr, only letters be allowed in :attribute.",
+    "alpha_dash"       => "Arr, only letters, numbers and dashes be allowed in :attribute.",
+    "alpha_num"        => "Arr, only letters and numbers be allowed in :attribute.",
+    "before"           => "Arr, the :attribute must be a date before :date.",
     "between"          => array(
-        "numeric" => "The :attribute must be between :min - :max.",
+        "numeric" => "Arr, the :attribute must be between :min - :max.",
         "file"    => "The :attribute must be between :min - :max kilobytes.",
         "string"  => "The :attribute must be between :min - :max characters.",
     ),
