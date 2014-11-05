@@ -58,7 +58,7 @@ class AssetsController extends AdminController
            ->orderBy('asset_tag', 'ASC')
            ->get();
         } elseif (Input::get('Deployed')) {
-            $assets = Asset::with('model','assigneduser','assetstatus','defaultLoc')
+            $assets = Asset::with('model','assigneduser','assetstatus','defaultLoc','assetlog')
             ->where('physical', '=', 1)
             ->where('assigned_to','>','0')
             ->orderBy('asset_tag', 'ASC')
