@@ -110,7 +110,7 @@
 
             <!-- Purchase Cost -->
             <div class="form-group {{ $errors->has('purchase_cost') ? ' has-error' : '' }}">
-                    <label for="purchase_cost" class="col-md-2 control-label">@lang('admin/hardware/form.cost') <i class='icon-asterisk'></i></label>
+                    <label for="purchase_cost" class="col-md-2 control-label">@lang('admin/hardware/form.cost') </label>
                     <div class="col-md-2">
                             <div class="input-group">
                                     <span class="input-group-addon">@lang('general.currency')</span>
