@@ -246,7 +246,7 @@ class AssetsController extends AdminController
             }
 
             if (e(Input::get('rtd_location_id')) == '') {
-                $asset->rtd_location_id = 0;
+                $asset->rtd_location_id = NULL;
             } else {
                 $asset->rtd_location_id     = e(Input::get('rtd_location_id'));
             }
