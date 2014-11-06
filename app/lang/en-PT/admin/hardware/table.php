@@ -13,7 +13,7 @@ return array(
     'eol' 			=> 'EOL',
     'id'      		=> 'ID',
     'location' 		=> 'Location',
-    'purchase_cost'	=> 'Cost',
+    'purchase_cost'	=> 'Booty',
     'purchase_date'	=> 'Purchased',
     'serial'   		=> 'Serial',
     'status'   		=> 'Status',

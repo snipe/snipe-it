@@ -50,7 +50,7 @@ return array(
     'list_all'				=> 'List All',
     'location'              => 'Location',
     'locations'				=> 'Locations',
-    'logout'				=> 'Logout',
+    'logout'				=> 'Weigh anchor',
     'manufacturer'			=> 'Manufacturer',
     'manufacturers'			=> 'Manufacturers',
     'model_no'				=> 'Model No.',
