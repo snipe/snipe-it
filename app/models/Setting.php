@@ -13,4 +13,10 @@ class Setting extends Elegant
 
     }
 
+    public function lar_ver()
+    {
+    	$app = App::getFacadeApplication();
+        return $app::VERSION;
+    }
+
 }
