@@ -83,8 +83,14 @@
                         </div>
                     </div>
 
-                    
-                
+                     <!-- side address column -->
+                    <div class="col-md-3 address pull-right">
+                        <br /><br />
+
+                        <p>These settings let you customize certain aspects of your installation. </p>
+
+                    </div>
+
                     <div class="col-md-9 bio">
                         <h3 class="name">@lang('admin/settings/general.system')</h3>
                         <div class="profile-box">
@@ -104,13 +110,5 @@
                                 </tbody>
                             </table>
                         </div>
-                    </div>
-
-                    <!-- side address column -->
-                    <div class="col-md-3 address pull-right">
-                        <br /><br />
-
-                        <p>These settings let you customize certain aspects of your installation. </p>
-
                     </div>
 @stop
