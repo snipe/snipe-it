@@ -40,35 +40,36 @@ class AssetsController extends AdminController
 
         // Filter results
         if (Input::get('Pending')) {
-            $assets = Asset::with('model','assigneduser','assetstatus','defaultLoc','assetlog')
-            ->whereNull('status_id','and')
+        	$assets = Asset::with('model','assigneduser','assetstatus','defaultLoc','assetlog')
+        	->whereNull('status_id','and')
         	->where('assigned_to','=','0')
         	->where('physical', '=', 1)
         	->get();
         } elseif (Input::get('RTD')) {
         	$assets = Asset::with('model','assigneduser','assetstatus','defaultLoc','assetlog')
         	->where('status_id', '=', 0)
+        	->where('assigned_to', '=', '0')
         	->where('physical', '=', 1)
         	->orderBy('asset_tag', 'ASC')
         	->get();
         } elseif (Input::get('Undeployable')) {
-           $assets = Asset::with('model','assigneduser','assetstatus','defaultLoc','assetlog')
-           ->where('physical', '=', 1)
-           ->where('assigned_to','>','1')
-           ->orderBy('asset_tag', 'ASC')
-           ->get();
+        	$assets = Asset::with('model','assigneduser','assetstatus','defaultLoc','assetlog')
+        	->where('status_id', '>', 1)
+        	->where('physical', '=', 1)
+        	->orderBy('asset_tag', 'ASC')
+        	->get();
         } elseif (Input::get('Deployed')) {
-            $assets = Asset::with('model','assigneduser','assetstatus','defaultLoc','assetlog')
-            ->where('physical', '=', 1)
-            ->where('assigned_to','>','0')
-            ->orderBy('asset_tag', 'ASC')
-            ->get();
+        	$assets = Asset::with('model','assigneduser','assetstatus','defaultLoc','assetlog')
+        	->where('status_id', '=', 0)
+        	->where('physical', '=', 1)
+        	->where('assigned_to','>','0')
+        	->orderBy('asset_tag', 'ASC')
+        	->get();
         } else {
-			$assets = Asset::with('model','assigneduser','assetstatus','defaultLoc')
-			->where('physical', '=', 1)
-			->orderBy('asset_tag', 'ASC')
-			->get();
-
+        	$assets = Asset::with('model','assigneduser','assetstatus','defaultLoc')
+        	->where('physical', '=', 1)
+        	->orderBy('asset_tag', 'ASC')
+        	->get();
         }
 
         // Paginate the users
