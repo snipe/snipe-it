@@ -30,7 +30,7 @@
     <div class="row profile">
         <div class="col-md-9">
 
-            <form class="form-horizontal" method="post" action="" autocomplete="off">
+           {{ Form::open(['method' => 'POST', 'files' => true, 'class' => 'form-horizontal', 'autocomplete' => 'off' ]) }}
                 <!-- CSRF Token -->
                 {{ Form::token() }}
 
@@ -142,6 +142,26 @@
                                 </div>
                         </div>
 
+                        <!-- Image -->
+                        @if ($supplier->image)
+                            <div class="form-group {{ $errors->has('image_delete') ? 'has-error' : '' }}">
+                                <label class="col-md-3 control-label" for="image_delete">@lang('general.image_delete')</label>
+                                <div class="col-md-5">
+                                    {{ Form::checkbox('image_delete') }}
+                                    <img src="/uploads/suppliers/{{{ $supplier->image }}}" />
+                                {{ $errors->first('image_delete', '<span class="alert-msg">:message</span>') }}
+                                </div>
+                            </div>
+                        @endif
+            
+                        <div class="form-group {{ $errors->has('image') ? 'has-error' : '' }}">
+                            <label class="col-md-3 control-label" for="image">@lang('general.image_upload')</label>
+                            <div class="col-md-5">
+                                {{ Form::file('image') }}
+                                {{ $errors->first('image', '<span class="alert-msg">:message</span>') }}
+                            </div>
+                        </div>
+                        
                     <!-- Form actions -->
                     <div class="form-group">
                     {{ Form::label('', ' ', array('class' => 'col-md-3 control-label')) }}

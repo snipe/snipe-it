@@ -1,6 +1,7 @@
 <?php namespace Controllers\Admin;
 
 use AdminController;
+use Image;
 use Input;
 use Lang;
 use Supplier;
@@ -57,20 +58,31 @@ class SuppliersController extends AdminController
         if ($supplier->validate($new)) {
 
             // Save the location data
-            $supplier->name            		= e(Input::get('name'));
-            $supplier->address          	= e(Input::get('address'));
-            $supplier->address2          	= e(Input::get('address2'));
-            $supplier->city          		= e(Input::get('city'));
-            $supplier->state          		= e(Input::get('state'));
-            $supplier->country          	= e(Input::get('country'));
-            $supplier->zip          		= e(Input::get('zip'));
-            $supplier->contact          	= e(Input::get('contact'));
-            $supplier->phone          		= e(Input::get('phone'));
-            $supplier->fax         	 		= e(Input::get('fax'));
-            $supplier->email          		= e(Input::get('email'));
-            $supplier->notes          		= e(Input::get('notes'));
-            $supplier->url          		= $supplier->addhttp(e(Input::get('url')));
-            $supplier->user_id          	= Sentry::getId();
+            $supplier->name                 = e(Input::get('name'));
+            $supplier->address              = e(Input::get('address'));
+            $supplier->address2             = e(Input::get('address2'));
+            $supplier->city                 = e(Input::get('city'));
+            $supplier->state                = e(Input::get('state'));
+            $supplier->country              = e(Input::get('country'));
+            $supplier->zip                  = e(Input::get('zip'));
+            $supplier->contact              = e(Input::get('contact'));
+            $supplier->phone                = e(Input::get('phone'));
+            $supplier->fax                  = e(Input::get('fax'));
+            $supplier->email                = e(Input::get('email'));
+            $supplier->notes                = e(Input::get('notes'));
+            $supplier->url                  = $supplier->addhttp(e(Input::get('url')));
+            $supplier->user_id              = Sentry::getId();
+
+            if (Input::file('image')) {
+                $image = Input::file('image');
+                $file_name = str_random(25).".".$image->getClientOriginalExtension();
+                $path = public_path('uploads/suppliers/'.$file_name);
+                Image::make($image->getRealPath())->resize(300, null, function ($constraint) {
+                    $constraint->aspectRatio();
+                    $constraint->upsize();
+                })->save($path);
+                $supplier->image = $file_name;
+            }
 
             // Was it created?
             if($supplier->save()) {
@@ -134,20 +146,34 @@ class SuppliersController extends AdminController
         else {
 
             // Save the  data
-            $supplier->name            		= e(Input::get('name'));
-            $supplier->address          	= e(Input::get('address'));
-            $supplier->address2          	= e(Input::get('address2'));
-            $supplier->city          		= e(Input::get('city'));
-            $supplier->state          		= e(Input::get('state'));
-            $supplier->country          	= e(Input::get('country'));
-            $supplier->zip          		= e(Input::get('zip'));
-            $supplier->contact          	= e(Input::get('contact'));
-            $supplier->phone          		= e(Input::get('phone'));
-            $supplier->fax          		= e(Input::get('fax'));
-            $supplier->email          		= e(Input::get('email'));
-            $supplier->url          		= $supplier->addhttp(e(Input::get('url')));
-            $supplier->notes          		= e(Input::get('notes'));
+            $supplier->name                 = e(Input::get('name'));
+            $supplier->address              = e(Input::get('address'));
+            $supplier->address2             = e(Input::get('address2'));
+            $supplier->city                 = e(Input::get('city'));
+            $supplier->state                = e(Input::get('state'));
+            $supplier->country              = e(Input::get('country'));
+            $supplier->zip                  = e(Input::get('zip'));
+            $supplier->contact              = e(Input::get('contact'));
+            $supplier->phone                = e(Input::get('phone'));
+            $supplier->fax                  = e(Input::get('fax'));
+            $supplier->email                = e(Input::get('email'));
+            $supplier->url                  = $supplier->addhttp(e(Input::get('url')));
+            $supplier->notes                = e(Input::get('notes'));
 
+            if (Input::file('image')) {
+                $image = Input::file('image');
+                $file_name = str_random(25).".".$image->getClientOriginalExtension();
+                $path = public_path('uploads/suppliers/'.$file_name);
+                Image::make($image->getRealPath())->resize(300, null, function ($constraint) {
+                    $constraint->aspectRatio();
+                    $constraint->upsize();
+                })->save($path);
+                $supplier->image = $file_name;
+            }
+
+            if (Input::get('image_delete') == 1 && Input::file('image') == "") {
+                $supplier->image = NULL;
+            }
 
             // Was it created?
             if($supplier->save()) {

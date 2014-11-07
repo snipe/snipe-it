@@ -154,6 +154,10 @@
                                     <li><i class="icon-comment"></i>{{{ $supplier->notes }}}</li>
                                 @endif
 
+                                @if ($supplier->image)
+                                <li><br /><img src="/uploads/suppliers/{{{ $supplier->image }}}" /></li>
+                                @endif
+
                                 </ul>
 
 
