@@ -106,12 +106,14 @@
                                 @if ($model->depreciation)
                                 <li>@lang('general.depreciation'):
                                 {{ $model->depreciation->name }} ({{ $model->depreciation->months }}
-                                @lang('general.months')</li>
+                                @lang('general.months')
+                                )</li>
                                 @endif
 
                                 @if ($model->eol)
                                 <li>@lang('general.eol'):
-                                {{ $model->eol }} months</li>
+                                {{ $model->eol }} 
+                                @lang('general.months')</li>
                                 @endif
 
                                 @if ($model->image)
