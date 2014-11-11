@@ -12,6 +12,122 @@ use Response;
 class ReportsController extends AdminController
 {
     /**
+     * Show Asset Report
+     *
+     * @return View
+     */
+    public function getAssetsReport()
+    {
+        // Grab all the assets
+        $assets = Asset::with('model','assigneduser.userLoc','assetstatus','defaultLoc','assetlog','supplier','model.manufacturer')->orderBy('created_at', 'DESC')->get();
+        return View::make('backend/reports/asset', compact('assets'));
+    }
+
+    /**
+     * Export Asset Report as CSV
+     *
+     * @return file download
+     */
+    public function exportAssetReport()
+    {
+        // Grab all the assets
+        $assets = Asset::orderBy('created_at', 'DESC')->get();
+
+        $rows = array();
+
+        // Create the header row
+        $header = array(
+            Lang::get('admin/hardware/table.asset_tag'),
+            Lang::get('admin/hardware/form.manufacturer'),
+            Lang::get('admin/hardware/form.model'),
+            Lang::get('general.model_no'),
+            Lang::get('general.name'),
+            Lang::get('admin/hardware/table.serial'),
+            Lang::get('admin/hardware/table.purchase_date'),
+            Lang::get('admin/hardware/table.purchase_cost'),
+            Lang::get('admin/hardware/form.order'),
+            Lang::get('admin/hardware/form.supplier'),
+            Lang::get('admin/hardware/table.checkoutto'),
+            Lang::get('admin/hardware/table.location'),
+            Lang::get('general.status')
+        );
+        $header = array_map('trim', $header);
+        $rows[] = implode($header, ',');
+
+        // Create a row per asset
+        foreach ($assets as $asset) {
+            $row = array();
+            $row[] = $asset->asset_tag;
+            if ($asset->model->manufacturer) {
+                $row[] = $asset->model->manufacturer->name;
+            } else {
+                $row[] = '';
+            }
+            $row[] = '"'.$asset->model->name.'"';
+            $row[] = '"'.$asset->model->modelno.'"';
+            $row[] = $asset->name;
+            $row[] = $asset->serial;
+            $row[] = $asset->purchase_date;
+            $row[] = '"'.number_format($asset->purchase_cost).'"';
+            if ($asset->order_number) {
+                $row[] = $asset->order_number;
+            } else {
+                $row[] = '';
+            }
+            if ($asset->supplier_id) {
+                $row[] = $asset->supplier->name;
+            } else {
+                $row[] = '';
+            }
+
+            if ($asset->assigned_to > 0) {
+                $user = User::find($asset->assigned_to);
+                $row[] = $user->fullName();
+            } else {
+                $row[] = ''; // Empty string if unassigned
+            }
+
+            if (($asset->assigned_to > 0) && ($asset->assigneduser->location_id > 0)) {
+                $location = Location::find($asset->assigneduser->location_id);
+                if ($location->name) {
+                    $row[] = $location->name;
+                } else {
+                    $row[] = '';
+                }
+            } elseif ($asset->rtd_location_id) {
+                $location = Location::find($asset->rtd_location_id);
+                if ($location->name) {
+                    $row[] = $location->name;
+                } else {
+                    $row[] = '';
+                }
+            } else {
+                $row[] = '';  // Empty string if location is not set
+            }
+
+            if (($asset->status_id == '0') && ($asset->assigned_to == '0')) {
+                $row[] = Lang::get('general.ready_to_deploy');
+            } elseif (($asset->status_id == '') && ($asset->assigned_to == '0')) {
+                $row[] = Lang::get('general.pending');
+            } elseif ($asset->assetstatus) {
+                $row[] = $asset->assetstatus->name;
+            } else {
+                $row[] = '';
+            }
+
+            $rows[] = implode($row, ',');
+        }
+
+        // spit out a csv
+        $csv = implode($rows, "\n");
+        $response = Response::make($csv, 200);
+        $response->header('Content-Type', 'text/csv');
+        $response->header('Content-disposition', 'attachment;filename=report.csv');
+
+        return $response;
+    }
+
+    /**
      * Show Depreciation Report for Assets
      *
      * @return View

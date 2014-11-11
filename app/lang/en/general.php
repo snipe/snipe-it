@@ -8,6 +8,7 @@ return array(
     'all'       			=> 'All',
     'asset_models'			=> 'Asset Models',
     'asset'					=> 'Asset',
+    'asset_report'          => 'Asset Report',
     'asset_tag'				=> 'Asset Tag',
     'assets_available'		=> 'assets available',
     'assets'				=> 'Assets',
