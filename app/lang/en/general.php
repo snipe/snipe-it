@@ -45,6 +45,7 @@ return array(
     'image_upload'         => 'Upload Image',
     'last_name'				=> 'Last Name',
     'license'				=> 'License',
+    'license_report'        => 'License Report',
     'licenses_available'	=> 'licenses available',
     'licenses'				=> 'Licenses',
     'list_all'				=> 'List All',
