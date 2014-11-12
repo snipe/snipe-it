@@ -8,6 +8,7 @@ use Asset;
 use User;
 use View;
 use Location;
+use Redirect;
 use Response;
 
 class ReportsController extends AdminController
@@ -445,11 +446,14 @@ class ReportsController extends AdminController
 
         // spit out a csv
         $csv = implode($rows, "\n");
-        $response = Response::make($csv, 200);
-        $response->header('Content-Type', 'text/csv');
-        $response->header('Content-disposition', 'attachment;filename=report.csv');
-
-        return $response;
+        if ($csv == '') {
+            $response = Response::make($csv, 200);
+            $response->header('Content-Type', 'text/csv');
+            $response->header('Content-disposition', 'attachment;filename=report.csv');
+            return $csv;
+        } else {
+            return Redirect::to("reports/custom")->with('error', Lang::get('admin/reports/message.error'));
+        }
     }
 }
 
