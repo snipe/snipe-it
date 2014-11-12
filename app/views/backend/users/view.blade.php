@@ -2,7 +2,7 @@
 
 {{-- Page title --}}
 @section('title')
-View User {{{ $user->fullName() }}} ::
+@lang('admin/users/general.view_user', array('name' => $user->first_name)) ::
 @parent
 @stop
 
@@ -57,14 +57,15 @@ View User {{{ $user->fullName() }}} ::
                             <div class="col-md-12">
                                 <div class="alert alert-danger">
                                     <i class="icon-exclamation-sign"></i>
-                                    <strong>Warning: </strong>
-                                     This user has been deleted. You will have to restore this user to edit them or assign them new assets.
+
+                                    @lang('admin/users/messages.user_deleted_warning')
+
                                 </div>
                             </div>
 
                         @endif
 
-                            <h6>Assets Checked Out to {{{ $user->first_name }}}</h6>
+                            <h6>@lang('admin/users/general.assets_user', array('name' => $user->first_name))</h6>
                             <br>
                             <!-- checked out assets table -->
                             @if (count($user->assets) > 0)
@@ -102,7 +103,7 @@ View User {{{ $user->fullName() }}} ::
                             </div>
                             @endif
 
-                             <h6>Software Checked Out to {{{ $user->first_name }}}</h6>
+                             <h6>@lang('admin/users/general.software_user', array('name' => $user->first_name))</h6>
                             <br>
                             <!-- checked out assets table -->
                             @if (count($user->licenses) > 0)
@@ -137,7 +138,7 @@ View User {{{ $user->fullName() }}} ::
 
 
 
-                            <h6>History for {{{ $user->first_name }}}</h6>
+                            <h6>@lang('admin/users/general.history_user', array('name' => $user->first_name))</h6>
                             <br>
                             <!-- checked out assets table -->
                             @if (count($user->userlog) > 0)
@@ -145,9 +146,9 @@ View User {{{ $user->fullName() }}} ::
                                 <thead>
                                     <tr>
                                         <th class="col-md-3">Date</th>
-                                        <th class="col-md-3"><span class="line"></span>Action</th>
-                                        <th class="col-md-3"><span class="line"></span>Asset</th>
-                                        <th class="col-md-3"><span class="line"></span>By</th>
+                                        <th class="col-md-3"><span class="line"></span>@lang('table.action')</th>
+                                        <th class="col-md-3"><span class="line"></span>@lang('general.asset')</th>
+                                        <th class="col-md-3"><span class="line"></span>@lang('table.by')</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -187,7 +188,7 @@ View User {{{ $user->fullName() }}} ::
 
 
 
-                        <h6>Contact  {{{ $user->first_name }}}</h6>
+                        <h6> @lang('admin/users/general.contact_user', array('name' => $user->first_name)) </h6>
 
 
                         @if ($user->location_id)
@@ -197,7 +198,8 @@ View User {{{ $user->fullName() }}} ::
                         @endif
                         <ul>
                         @if ($user->manager)
-                            <li><strong>Manager:</strong> {{{ $user->manager->fullName() }}}</li>
+                            <li><strong> @lang('admin/users/table.manager'):</strong><br>
+                            {{{ $user->manager->fullName() }}}</li>
                         @endif
 
                         @if ($user->location_id)
@@ -211,7 +213,8 @@ View User {{{ $user->fullName() }}} ::
                         </ul>
 
                         @if ($user->last_login!='')
-                        <br /><h6>Last Login: {{{ $user->last_login->diffForHumans() }}}</h6>
+                        <br /><h6>@lang('admin/users/general.last_login')
+                        {{{ $user->last_login->diffForHumans() }}}</h6>
                         @endif
                     </div>
 @stop
