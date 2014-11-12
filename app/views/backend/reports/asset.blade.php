@@ -2,7 +2,7 @@
 
 {{-- Page title --}}
 @section('title')
-Asset Report ::
+@lang('general.asset_report') ::
 @parent
 @stop
 
@@ -17,7 +17,7 @@ Asset Report ::
         @lang('admin/hardware/table.dl_csv')</a>
     </div>
 
-    <h3>Asset Report</h3>
+    <h3>@lang('general.asset_report')</h3>
 </div>
 
 <div class="row">
