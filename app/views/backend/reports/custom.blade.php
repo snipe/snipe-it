@@ -16,61 +16,92 @@
             <div class="profile-box">
                 {{ Form::open(['method' => 'post', 'class' => 'form-horizontal']) }}
 
-                    <div class="form-group {{ $errors->has('asset_name') ? 'has-error' : '' }}">
-                        {{ Form::label('asset_name', 'Asset Name', array('class' => 'col-md-2 control-label')) }}
-                        {{ Form::checkbox('asset_name', '1') }}
+
+                    <div class="checkbox col-md-12">
+                    	<label>
+                     	{{ Form::checkbox('asset_name', '1') }}
+                        @lang('admin/settings/general.display_asset_name')
+                        </label>
+
                     </div>
-                    <div class="form-group {{ $errors->has('asset_tag') ? 'has-error' : '' }}">
-                        {{ Form::label('asset_tag', 'Asset Tag', array('class' => 'col-md-2 control-label')) }}
-                        {{ Form::checkbox('asset_tag', '1') }}
+                    <div class="checkbox col-md-12">
+                    	<label>
+                    	{{ Form::checkbox('asset_tag', '1') }}
+                        @lang('general.asset_tag')
+						</label>
                     </div>
-                    <div class="form-group {{ $errors->has('manufacturer') ? 'has-error' : '' }}">
-                        {{ Form::label('manufacturer', 'Manufacturer', array('class' => 'col-md-2 control-label')) }}
-                        {{ Form::checkbox('manufacturer', '1') }}
+                    <div class="checkbox col-md-12">
+                    	<label>
+                    	 {{ Form::checkbox('manufacturer', '1') }}
+                       	@lang('general.manufacturer')
+						</label>
                     </div>
-                    <div class="form-group {{ $errors->has('model') ? 'has-error' : '' }}">
-                        {{ Form::label('model', 'Model', array('class' => 'col-md-2 control-label')) }}
+                    <div class="checkbox col-md-12">
+                    	<label>
                         {{ Form::checkbox('model', '1') }}
+                        @lang('general.asset_models')
+                        </label>
                     </div>
-                    <div class="form-group {{ $errors->has('serial') ? 'has-error' : '' }}">
-                        {{ Form::label('serial', 'Serial', array('class' => 'col-md-2 control-label')) }}
+                    <div class="checkbox col-md-12">
+                    	<label>
                         {{ Form::checkbox('serial', '1') }}
+                        @lang('admin/hardware/table.serial')
+                        </label>
                     </div>
-                    <div class="form-group {{ $errors->has('purchase_date') ? 'has-error' : '' }}">
-                        {{ Form::label('purchase_date', 'Purchase Date', array('class' => 'col-md-2 control-label')) }}
+                    <div class="checkbox col-md-12">
+                    	<label>
+
                         {{ Form::checkbox('purchase_date', '1') }}
+                          @lang('admin/licenses/table.purchase_date')
+                        </label>
                     </div>
-                    <div class="form-group {{ $errors->has('purchase_cost') ? 'has-error' : '' }}">
-                        {{ Form::label('purchase_cost', 'Purchase Cost', array('class' => 'col-md-2 control-label')) }}
+                    <div class="checkbox col-md-12">
+                    	<label>
                         {{ Form::checkbox('purchase_cost', '1') }}
+                         @lang('admin/hardware/form.cost')
+                        </label>
                     </div>
-                    <div class="form-group {{ $errors->has('order') ? 'has-error' : '' }}">
-                        {{ Form::label('order', 'Order Number', array('class' => 'col-md-2 control-label')) }}
+                    <div class="checkbox col-md-12">
+                    	<label>
                         {{ Form::checkbox('order', '1') }}
+                        @lang('admin/hardware/form.order')
+                        </label>
                     </div>
-                     <div class="form-group {{ $errors->has('supplier') ? 'has-error' : '' }}">
-                        {{ Form::label('supplier', 'Supplier', array('class' => 'col-md-2 control-label')) }}
+                    <div class="checkbox col-md-12">
+                    	<label>
                         {{ Form::checkbox('supplier', '1') }}
+                        @lang('general.suppliers')
+                        </label>
                     </div>
-                    <div class="form-group {{ $errors->has('location') ? 'has-error' : '' }}">
-                        {{ Form::label('location', 'Location', array('class' => 'col-md-2 control-label')) }}
+                    <div class="checkbox col-md-12">
+                    	<label>
                         {{ Form::checkbox('location', '1') }}
+                        @lang('general.location')
+                        </label>
                     </div>
-                    <div class="form-group {{ $errors->has('assigned_to') ? 'has-error' : '' }}">
-                        {{ Form::label('assigned_to', 'Assigned To', array('class' => 'col-md-2 control-label')) }}
+                    <div class="checkbox col-md-12">
+                    	<label>
                         {{ Form::checkbox('assigned_to', '1') }}
+                        @lang('admin/licenses/table.assigned_to')
+                        </label>
                     </div>
-                    <div class="form-group {{ $errors->has('status') ? 'has-error' : '' }}">
-                        {{ Form::label('status', 'Status', array('class' => 'col-md-2 control-label')) }}
+                    <div class="checkbox col-md-12">
+                    	<label>
                         {{ Form::checkbox('status', '1') }}
+                        @lang('general.status')
+                        </label>
                     </div>
-                    <div class="form-group {{ $errors->has('warranty') ? 'has-error' : '' }}">
-                        {{ Form::label('warranty', 'Warranty', array('class' => 'col-md-2 control-label')) }}
+                    <div class="checkbox col-md-12">
+                    	<label>
                         {{ Form::checkbox('warranty', '1') }}
+                        @lang('admin/hardware/form.warranty')
+                        </label>
                     </div>
-                    <div class="form-group {{ $errors->has('depreciation') ? 'has-error' : '' }}">
-                        {{ Form::label('depreciation', 'Depreciation', array('class' => 'col-md-2 control-label')) }}
+                    <div class="checkbox col-md-12">
+                    	<label>
                         {{ Form::checkbox('depreciation', '1') }}
+                        @lang('general.depreciation')
+                        </label>
                     </div>
 
                     <!-- Form actions -->
