@@ -85,83 +85,6 @@ class AssetsController extends AdminController
         return View::make('backend/hardware/index', compact('assets'));
     }
 
-    public function getReports()
-    {
-        // Grab all the assets
-        $assets = Asset::orderBy('created_at', 'DESC')->get();
-        return View::make('backend/reports/index', compact('assets'));
-    }
-
-    public function exportReports()
-    {
-        // @todo - It may be worthwhile creating a separate controller for reporting
-
-        // Grab all the assets
-        $assets = Asset::orderBy('created_at', 'DESC')->get();
-
-        $rows = array();
-
-        // Create the header row
-        $header = array(
-            Lang::get('admin/hardware/table.asset_tag'),
-            Lang::get('admin/hardware/table.title'),
-            Lang::get('admin/hardware/table.serial'),
-            Lang::get('admin/hardware/table.checkoutto'),
-            Lang::get('admin/hardware/table.location'),
-            Lang::get('admin/hardware/table.purchase_date'),
-            Lang::get('admin/hardware/table.purchase_cost'),
-            Lang::get('admin/hardware/table.book_value'),
-            Lang::get('admin/hardware/table.diff')
-        );
-        $header = array_map('trim', $header);
-        $rows[] = implode($header, ',');
-
-        // Create a row per asset
-        foreach ($assets as $asset) {
-            $row = array();
-            $row[] = $asset->asset_tag;
-            $row[] = $asset->name;
-            $row[] = $asset->serial;
-
-
-            if ($asset->assigned_to > 0) {
-              $user = User::find($asset->assigned_to);
-              $row[] = $user->fullName();
-              } else {
-                $row[] = ''; // Empty string if unassigned
-            }
-
-            if (($asset->assigned_to > 0) && ($asset->assigneduser->location_id > 0)) {
-                $location = Location::find($asset->assigneduser->location_id);
-                if ($location->city) {
-                    $row[] = '"'.$location->city . ', ' . $location->state.'"';
-                } elseif ($location->name) {
-                    $row[] = $location->name;
-                } else {
-                    $row[] = '';
-                }
-            } else {
-                $row[] = '';  // Empty string if location is not set
-            }
-
-            $depreciation = $asset->depreciate();
-
-            $row[] = $asset->purchase_date;
-            $row[] = '"'.number_format($asset->purchase_cost).'"';
-            $row[] = '"'.number_format($depreciation).'"';
-            $row[] = '"'.number_format($asset->purchase_cost - $depreciation).'"';
-            $rows[] = implode($row, ',');
-        }
-
-        // spit out a csv
-        $csv = implode($rows, "\n");
-        $response = Response::make($csv, 200);
-        $response->header('Content-Type', 'text/csv');
-        $response->header('Content-disposition', 'attachment;filename=report.csv');
-
-        return $response;
-    }
-
     /**
      * Asset create.
      *
@@ -181,7 +104,6 @@ class AssetsController extends AdminController
         return View::make('backend/hardware/edit')->with('supplier_list',$supplier_list)->with('model_list',$model_list)->with('statuslabel_list',$statuslabel_list)->with('assigned_to',$assigned_to)->with('location_list',$location_list)->with('asset',new Asset);
 
     }
-
 
     /**
      * Asset create form processing.

@@ -73,6 +73,7 @@ class License extends Elegant
     {
         return DB::table('license_seats')
                     ->where('assigned_to', '=', '0')
+                    ->where('asset_id', '=', NULL)
                     ->where('license_id', '=', $this->id)
                     ->whereNull('deleted_at','and')
                     ->count();
@@ -86,9 +87,18 @@ class License extends Elegant
     {
         return DB::table('license_seats')
                     ->where('assigned_to', '>', '0')
+                    ->where('asset_id', '>', '0')
                     ->where('license_id', '=', $this->id)
                     ->whereNull('deleted_at','and')
                     ->count();
+    }
+
+    public function remaincount()
+    {
+        $avail =  $this->availcount();
+        $taken =  $this->assignedcount();
+        $diff =   ($avail - $taken);
+        return $diff;
     }
 
     /**

@@ -279,9 +279,12 @@ Route::group(array('prefix' => 'account', 'before' => 'auth'), function () {
 |
 */
 
-Route::get('reports', array('as' => 'reports', 'before' => 'reporting-auth', 'uses' => 'Controllers\Admin\AssetsController@getReports'));
-
-Route::get('reports/export', array('as' => 'reports/export', 'before' => 'reporting-auth', 'uses' => 'Controllers\Admin\AssetsController@exportReports'));
+Route::get('reports/depreciation', array('as' => 'reports/depreciation', 'before' => 'reporting-auth', 'uses' => 'Controllers\Admin\ReportsController@getDeprecationReport'));
+Route::get('reports/export/depreciation', array('as' => 'reports/export/depreciation', 'before' => 'reporting-auth', 'uses' => 'Controllers\Admin\ReportsController@exportDeprecationReport'));
+Route::get('reports/licenses', array('as' => 'reports/licenses', 'before' => 'reporting-auth', 'uses' => 'Controllers\Admin\ReportsController@getLicenseReport'));
+Route::get('reports/export/licenses', array('as' => 'reports/export/licenses', 'before' => 'reporting-auth', 'uses' => 'Controllers\Admin\ReportsController@exportLicenseReport'));
+Route::get('reports/assets', array('as' => 'reports/assets', 'before' => 'reporting-auth', 'uses' => 'Controllers\Admin\ReportsController@getAssetsReport'));
+Route::get('reports/export/assets', array('as' => 'reports/export/assets', 'before' => 'reporting-auth', 'uses' => 'Controllers\Admin\ReportsController@exportAssetReport'));
 
 
 // Redirect requests to / to the hardware section until we get a fancy dashboard set up
