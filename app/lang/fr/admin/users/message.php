@@ -7,7 +7,7 @@ return array(
     'user_login_required'      	=> 'Le champ identifiant est obligatoire',
     'user_password_required'   	=> 'Le mot de passe est obligatoire.',
     'insufficient_permissions' 	=> 'Droits insuffisants.',
-    'user_deleted_warning' 		=> 'This user has been deleted. You will have to restore this user to edit them or assign them new assets.',
+    'user_deleted_warning' 		=> 'Cet utilisateur a été supprimé. Vous devez le restaurer pour pouvoir l\'éditer ou lui assigner de nouveaux actifs.',
 
 
     'success' => array(

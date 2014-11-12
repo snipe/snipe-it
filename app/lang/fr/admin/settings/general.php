@@ -15,8 +15,8 @@ return array(
     'qr_text'                   => 'Texte du QR Code',
     'setting'                   => 'Paramètre',
     'settings'                  => 'Paramètres',
-    'site_name'                 => 'Site Name',
-    'system'                    => 'System Information',
-    'update'                    => 'Update Settings',
-    'value'                     => 'Value',
+    'site_name'                 => 'Nom du site',
+    'system'                    => 'Information du système',
+    'update'                    => 'Mettre à jour les paramètres',
+    'value'                     => 'Valeur',
 );

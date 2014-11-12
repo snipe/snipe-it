@@ -3,7 +3,7 @@
 
 return array(
 
-    'assets_user'  		=> 'Assets asigned to :name',
+    'assets_user'  		=> 'Assets assigned to :name',
     'clone'  			=> 'Cloneaza utilizator',
     'contact_user'  	=> 'Contact :name',
     'edit'  			=> 'Editeaza utilizator',
