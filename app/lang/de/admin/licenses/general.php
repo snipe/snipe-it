@@ -13,7 +13,7 @@ return array(
     'license_seats'  			=> 'License Seats',
     'seat'  					=> 'Seat',
     'seats'  					=> 'Seats',
-    'software_licenses'  		=> 'Software Licenses',
-    'user'  					=> 'User',
-    'view'  					=> 'View License',
+    'software_licenses'  		=> 'Software Lizenzen',
+    'user'  					=> 'Nutzer',
+    'view'  					=> 'Lizenz ansehen',
 );

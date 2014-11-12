@@ -19,13 +19,13 @@ return array(
     ),
 
         'forgot-password' => array(
-            'error'   => 'There was a problem while trying to get a reset password code, please try again.',
-            'success' => 'Password recovery email successfully sent.',
+            'error'   => 'Beim abrufen des Codes zur Passwortzurücksetzung ist ein Fehler aufgetreten, bitte versuchen sie es erneut.',
+            'success' => 'Die Email zum zurücksetzen des Passworts wurde erfolgreich gesendet.',
         ),
 
         'forgot-password-confirm' => array(
-            'error'   => 'There was a problem while trying to reset your password, please try again.',
-            'success' => 'Your password has been successfully reset.',
+            'error'   => 'Beim zurücksetzen Ihres Passworts ist ein Fehler aufgetreten, bitte versuchen sie es erneut.',
+            'success' => 'Ihr Passwort wurde erfolgreich zurückgesetzt.',
         ),
 
     'activate' => array(
