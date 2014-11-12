@@ -134,7 +134,7 @@ class ReportsController extends AdminController
      *
      * @return View
      */
-	public function getDeprecationReport()
+    public function getDeprecationReport()
     {
         // Grab all the assets
         $assets = Asset::with('model','assigneduser','assetstatus','defaultLoc','assetlog')->orderBy('created_at', 'DESC')->get();
@@ -445,15 +445,14 @@ class ReportsController extends AdminController
         }
 
         // spit out a csv
-        $csv = implode($rows, "\n");
-        if ($csv == '') {
+        if (!empty(array_filter($rows))) {
+            $csv = implode($rows, "\n");
             $response = Response::make($csv, 200);
             $response->header('Content-Type', 'text/csv');
             $response->header('Content-disposition', 'attachment;filename=report.csv');
-            return $csv;
+            return $response;
         } else {
             return Redirect::to("reports/custom")->with('error', Lang::get('admin/reports/message.error'));
         }
     }
 }
-
