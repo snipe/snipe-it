@@ -29,6 +29,7 @@ return array(
     'created_at' 			=> 'Created at',
     'currency'  			=> '$',
     'current'  				=> 'Current',
+    'custom_report'         => 'Custom Asset Report',
     'date'					=> 'Date',
     'delete'  				=> 'Delete',
     'deleted'  				=> 'Deleted',
