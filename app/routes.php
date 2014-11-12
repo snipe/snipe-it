@@ -285,6 +285,8 @@ Route::get('reports/licenses', array('as' => 'reports/licenses', 'before' => 're
 Route::get('reports/export/licenses', array('as' => 'reports/export/licenses', 'before' => 'reporting-auth', 'uses' => 'Controllers\Admin\ReportsController@exportLicenseReport'));
 Route::get('reports/assets', array('as' => 'reports/assets', 'before' => 'reporting-auth', 'uses' => 'Controllers\Admin\ReportsController@getAssetsReport'));
 Route::get('reports/export/assets', array('as' => 'reports/export/assets', 'before' => 'reporting-auth', 'uses' => 'Controllers\Admin\ReportsController@exportAssetReport'));
+Route::get('reports/custom', array('as' => 'reports/custom', 'before' => 'reporting-auth', 'uses' => 'Controllers\Admin\ReportsController@getCustomReport'));
+Route::post('reports/custom', 'Controllers\Admin\ReportsController@postCustom');
 
 
 // Redirect requests to / to the hardware section until we get a fancy dashboard set up

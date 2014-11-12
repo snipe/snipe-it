@@ -1,6 +1,7 @@
 <?php namespace Controllers\Admin;
 
 use AdminController;
+use Input;
 use Lang;
 use License;
 use Asset;
@@ -261,6 +262,188 @@ class ReportsController extends AdminController
             $rows[] = implode($row, ',');
         }
 
+        $csv = implode($rows, "\n");
+        $response = Response::make($csv, 200);
+        $response->header('Content-Type', 'text/csv');
+        $response->header('Content-disposition', 'attachment;filename=report.csv');
+
+        return $response;
+    }
+
+    public function getCustomReport()
+    {
+        return View::make('backend/reports/custom');
+    }
+
+    public function postCustom()
+    {
+        $assets = Asset::orderBy('created_at', 'DESC')->get();
+        $rows = array();
+        $header = array();
+
+        if (e(Input::get('asset_name')) == '1')
+        {
+            $header[] = 'Asset Name';
+        }
+        if (e(Input::get('asset_tag')) == '1')
+        {
+            $header[] = 'Asset Tag';
+        }
+        if (e(Input::get('manufacturer')) == '1')
+        {
+            $header[] = 'Manufacturer';
+        }
+        if (e(Input::get('model')) == '1')
+        {
+            $header[] = 'Model';
+            $header[] = 'Model Number';
+        }
+        if (e(Input::get('serial')) == '1')
+        {
+            $header[] = 'Serial';
+        }
+        if (e(Input::get('purchase_date')) == '1')
+        {
+            $header[] = 'Purchase Date';
+        }
+        if ((e(Input::get('purchase_cost')) == '1') && (e(Input::get('depreciation')) == '0'))
+        {
+            $header[] = 'Purchase Cost';
+        }
+        if (e(Input::get('order')) == '1')
+        {
+            $header[] = 'Order Number';
+        }
+        if (e(Input::get('supplier')) == '1')
+        {
+            $header[] = 'Supplier';
+        }
+        if (e(Input::get('location')) == '1')
+        {
+            $header[] = 'Location';
+        }
+        if (e(Input::get('assigned_to')) == '1')
+        {
+            $header[] = 'Assigned To';
+        }
+        if (e(Input::get('status')) == '1')
+        {
+            $header[] = 'Status';
+        }
+        if (e(Input::get('warranty')) == '1')
+        {
+            $header[] = 'Warranty';
+            $header[] = 'Warranty Expires';
+        }
+        if (e(Input::get('depreciation')) == '1')
+        {
+            $header[] = 'Purchase Cost';
+            $header[] = 'Value';
+            $header[] = 'Diff';
+        }
+
+        $header = array_map('trim', $header);
+        $rows[] = implode($header, ',');
+
+        foreach($assets as $asset) {
+            $row = array();
+            if (e(Input::get('asset_name')) == '1') {
+                $row[] = $asset->name;
+            }
+            if (e(Input::get('asset_tag')) == '1') {
+                $row[] = $asset->asset_tag;
+            }
+            if (e(Input::get('manufacturer')) == '1') {
+                if ($asset->model->manufacturer) {
+                    $row[] = $asset->model->manufacturer->name;
+                } else {
+                    $row[] = '';
+                }
+            }
+            if (e(Input::get('model')) == '1') {
+                $row[] = '"'.$asset->model->name.'"';
+                $row[] = '"'.$asset->model->modelno.'"';
+            }
+            if (e(Input::get('serial')) == '1') {
+                $row[] = $asset->serial;
+            }
+            if (e(Input::get('purchase_date')) == '1') {
+                $row[] = $asset->purchase_date;
+            }
+            if ((e(Input::get('purchase_cost')) == '1') && (e(Input::get('depreciation')) == '0')) {
+                $row[] = '"'.number_format($asset->purchase_cost).'"';
+            }
+            if (e(Input::get('order')) == '1') {
+                if ($asset->order_number) {
+                    $row[] = $asset->order_number;
+                } else {
+                    $row[] = '';
+                }
+            }
+            if (e(Input::get('supplier')) == '1') {
+                if ($asset->supplier_id) {
+                    $row[] = $asset->supplier->name;
+                } else {
+                    $row[] = '';
+                }
+            }
+            if (e(Input::get('location')) == '1') {
+                if (($asset->assigned_to > 0) && ($asset->assigneduser->location_id > 0)) {
+                    $location = Location::find($asset->assigneduser->location_id);
+                    if ($location->name) {
+                        $row[] = $location->name;
+                    } else {
+                        $row[] = '';
+                    }
+                } elseif ($asset->rtd_location_id) {
+                    $location = Location::find($asset->rtd_location_id);
+                    if ($location->name) {
+                        $row[] = $location->name;
+                    } else {
+                        $row[] = '';
+                    }
+                } else {
+                    $row[] = '';  // Empty string if location is not set
+                }
+            }
+            if (e(Input::get('assigned_to')) == '1') {
+                if ($asset->assigned_to > 0) {
+                    $user = User::find($asset->assigned_to);
+                    $row[] = $user->fullName();
+                } else {
+                    $row[] = ''; // Empty string if unassigned
+                }
+            }
+            if (e(Input::get('status')) == '1') {
+                if (($asset->status_id == '0') && ($asset->assigned_to == '0')) {
+                    $row[] = Lang::get('general.ready_to_deploy');
+                } elseif (($asset->status_id == '') && ($asset->assigned_to == '0')) {
+                    $row[] = Lang::get('general.pending');
+                } elseif ($asset->assetstatus) {
+                    $row[] = $asset->assetstatus->name;
+                } else {
+                    $row[] = '';
+                }
+            }
+            if (e(Input::get('warranty')) == '1') {
+                if ($asset->warranty_months) {
+                    $row[] = $asset->warranty_months;
+                    $row[] = $asset->warrantee_expires();
+                } else {
+                    $row[] = '';
+                    $row[] = '';
+                }
+            }
+            if (e(Input::get('depreciation')) == '1') {
+                $depreciation = $asset->depreciate();
+                $row[] = '"'.number_format($asset->purchase_cost).'"';
+                $row[] = '"'.number_format($depreciation).'"';
+                $row[] = '"'.number_format($asset->purchase_cost - $depreciation).'"';
+            }
+            $rows[] = implode($row, ',');
+        }
+
+        // spit out a csv
         $csv = implode($rows, "\n");
         $response = Response::make($csv, 200);
         $response->header('Content-Type', 'text/csv');
