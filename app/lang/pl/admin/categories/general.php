@@ -1,11 +1,11 @@
 <?php
 
 return array(
-    'about_asset_categories' 			=> 'About Asset Categories',
-    'about_categories'  				=> 'Asset categories help you organize your assets. Some example categories might be &quot;Desktops&quot;, &quot;Laptops&quot;, &quot;Mobile Phones&quot;, &quot;Tablets&quot;, and so on, but you can use asset categories any way that makes sense for you. ',
-    'asset_categories' 					=> 'Asset Categories',
-    'category_name'  					=> 'Category Name',
-    'create'  							=> 'Create Category',
-    'update'  							=> 'Update Category',
+    'about_asset_categories' 			=> 'Kategorie aktywów opis',
+    'about_categories'  				=> 'Kategorie pozwolą lepiej zorganizować twoje aktywa. Przykłady grup &quot; Desktop&quot;, &quot;Laptopy&quot;, &quot;Telefony&quot;, &quot;Tablety&quot;, i inne dowolnie przez Ciebie wymyślone. ',
+    'asset_categories' 					=> 'Kategorie aktywów',
+    'category_name'  					=> 'Nazwa kategorii',
+    'create'  							=> 'Stwórz Kategorię',
+    'update'  							=> 'Aktualizuj kategorię',
 
 );

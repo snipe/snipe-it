@@ -2,23 +2,23 @@
 
 return array(
 
-    'does_not_exist' => 'Manufacturer does not exist.',
-    'assoc_users'	 => 'This manufacturer is currently associated with at least one model and cannot be deleted. Please update your models to no longer reference this manufacturer and try again. ',
+    'does_not_exist' => 'Producatorul nu exista.',
+    'assoc_users'	 => 'Acest producator este momentan asociat cu cel putin inca un model si nu poate fi sters. Va rugam actualizati modelele care nu mai au legatura cu acest producator si incercati iar. ',
 
     'create' => array(
-        'error'   => 'Manufacturer was not created, please try again.',
-        'success' => 'Manufacturer created successfully.'
+        'error'   => 'Producatorul nu a fost creat, incercati iar.',
+        'success' => 'Producatorul a fost creat.'
     ),
 
     'update' => array(
-        'error'   => 'Manufacturer was not updated, please try again',
-        'success' => 'Manufacturer updated successfully.'
+        'error'   => 'Producatorul nu a fost actualizat, incercati iar',
+        'success' => 'Producatorul a fost actualizat.'
     ),
 
     'delete' => array(
-        'confirm'   => 'Are you sure you wish to delete this manufacturer?',
-        'error'   => 'There was an issue deleting the blog post. Please try again.',
-        'success' => 'The Manufacturer was deleted successfully.'
+        'confirm'   => 'Sunteti sigur ca vreti sa stergeti producatorul?',
+        'error'   => 'There was an issue deleting the manufacturer. Please try again.',
+        'success' => 'Producatorul a fost sters.'
     )
 
 );

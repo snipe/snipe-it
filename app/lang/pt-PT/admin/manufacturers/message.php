@@ -17,7 +17,7 @@ return array(
 
     'delete' => array(
         'confirm'   => 'Are you sure you wish to delete this manufacturer?',
-        'error'   => 'There was an issue deleting the blog post. Please try again.',
+        'error'   => 'There was an issue deleting the manufacturer. Please try again.',
         'success' => 'The Manufacturer was deleted successfully.'
     )
 

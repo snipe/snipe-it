@@ -2,6 +2,8 @@
 
 return array(
 
-    'actions' => 'Actions'
+    'actions'	 	=> 'Actions',
+    'action' 		=> 'Action',
+    'by'      		=> 'By',
 
 );

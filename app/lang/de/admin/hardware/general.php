@@ -3,9 +3,9 @@
 return array(
     'asset'  					=> 'Asset',
     'checkin'  					=> 'Checkin Asset',
-    'checkout'  				=> 'Checkout Asset to User',
-    'clone'  					=> 'Clone Asset',
-    'edit'  					=> 'Edit Asset',
+    'checkout'  				=> 'Asset an Benutzer herausgeben',
+    'clone'  					=> 'Asset duplizieren',
+    'edit'  					=> 'Asset editieren',
     'pending'  					=> 'Pending Asset',
-    'view'  					=> 'View Asset',
+    'view'  					=> 'Asset ansehen',
 );

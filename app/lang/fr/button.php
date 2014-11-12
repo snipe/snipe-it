@@ -2,10 +2,10 @@
 
 return array(
 
-    'edit'    => 'Edit',
-    'delete'  => 'Delete',
-    'restore' => 'Restore',
+    'edit'    => 'Éditer',
+    'delete'  => 'Supprimer',
+    'restore' => 'Restaurer',
     'actions' => 'Actions',
-    'submit'  => 'Submit',
+    'submit'  => 'Soumettre',
 
 );

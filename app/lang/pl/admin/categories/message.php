@@ -2,8 +2,8 @@
 
 return array(
 
-    'does_not_exist' => 'Category does not exist.',
-    'assoc_users'	 => 'This category is currently associated with at least one model and cannot be deleted. Please update your models to no longer reference this category and try again. ',
+    'does_not_exist' => 'Nie ma takiej kategorii.',
+    'assoc_users'	 => 'Wybrana kategoria jest powiązana z przynajmniej jednym urządzeniem. Proszę przepiać powiązane urządzenia do innej Kategorii i spróbować ponownie. ',
 
     'create' => array(
         'error'   => 'Category was not created, please try again.',

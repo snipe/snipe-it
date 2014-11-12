@@ -2,23 +2,23 @@
 
 return array(
 
-    'does_not_exist' => 'Category does not exist.',
-    'assoc_users'	 => 'This category is currently associated with at least one model and cannot be deleted. Please update your models to no longer reference this category and try again. ',
+    'does_not_exist' => 'Категория не существует.',
+    'assoc_users'	 => 'Эта категория на данный момент связанна по крайней мере с одной моделью и не может быть удалена. Пожалуйста измените информацию о ваших моделях не ссылаясь на данную категорию и попробуйте снова. ',
 
     'create' => array(
-        'error'   => 'Category was not created, please try again.',
-        'success' => 'Category created successfully.'
+        'error'   => 'Категория не создана, пожалуйста попробуйте снова.',
+        'success' => 'Категория успешно создана.'
     ),
 
     'update' => array(
-        'error'   => 'Category was not updated, please try again',
-        'success' => 'Category updated successfully.'
+        'error'   => 'Категория не изменена, пожалуйста попробуйте снова',
+        'success' => 'Категория успешно изменена.'
     ),
 
     'delete' => array(
-        'confirm'   => 'Are you sure you wish to delete this category?',
-        'error'   => 'There was an issue deleting the category. Please try again.',
-        'success' => 'The category was deleted successfully.'
+        'confirm'   => 'Вы уверены что хотите удалить категорию?',
+        'error'   => 'При удалении категории возникла проблема. Пожалуйста попробуйте снова.',
+        'success' => 'Категория успешно удалена.'
     )
 
 );

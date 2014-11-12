@@ -3,13 +3,13 @@
 return array(
 
     'id'      		=> 'ID',
-    'city'   		=> 'City',
-    'state'   		=> 'State',
-    'country'   	=> 'Country',
-    'create'		=> 'Create Location',
-    'update'		=> 'Update Location',
-    'name'			=> 'Location Name',
-    'address'		=> 'Address',
-    'zip'			=> 'Postal Code',
-    'locations'		=> 'Locations',
+    'city'   		=> 'Oras',
+    'state'   		=> 'Judet',
+    'country'   	=> 'Tara',
+    'create'		=> 'Creeaza locatie',
+    'update'		=> 'Actualizeaza locatie',
+    'name'			=> 'Nume locatie',
+    'address'		=> 'Adresa',
+    'zip'			=> 'Cod postal',
+    'locations'		=> 'Locatii',
 );

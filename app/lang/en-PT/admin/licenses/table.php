@@ -8,7 +8,7 @@ return array(
     'license_email'   	=> 'License Email',
     'license_name'   	=> 'Licensed To',
     'purchase_date'   	=> 'Purchase Date',
-    'purchased'   		=> 'Purchased',
+    'purchased'   		=> 'Plundered',
     'seats'   			=> 'Seats',
     'hardware'   		=> 'Hardware',
     'serial'   			=> 'Serial',

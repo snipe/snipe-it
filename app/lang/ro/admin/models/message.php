@@ -2,24 +2,24 @@
 
 return array(
 
-    'does_not_exist' => 'Model does not exist.',
-    'assoc_users'	 => 'This model is currently associated with one or more assets and cannot be deleted. Please delete the assets, and then try deleting again. ',
+    'does_not_exist' => 'Modelul nu exista.',
+    'assoc_users'	 => 'Acest model este momentan asociat cu cel putin unul sau mai multe active si nu poate fi sters. Va rugam sa stergeti activul si dupa incercati iar. ',
 
 
     'create' => array(
-        'error'   => 'Model was not created, please try again.',
-        'success' => 'Model created successfully.'
+        'error'   => 'Modelul nu a fost creat, incercati iar.',
+        'success' => 'Modelul a fost creat.'
     ),
 
     'update' => array(
-        'error'   => 'Model was not updated, please try again',
-        'success' => 'Model updated successfully.'
+        'error'   => 'Modelul nu a fost actualizat, va rugam incercati iar',
+        'success' => 'Modelul a fost actualizat.'
     ),
 
     'delete' => array(
-        'confirm'   => 'Are you sure you wish to delete this asset model?',
-        'error'   => 'There was an issue deleting the model. Please try again.',
-        'success' => 'The model was deleted successfully.'
+        'confirm'   => 'Sunteti sigur ca doriti sa stergeti acest model de activ?',
+        'error'   => 'A aparut o problema la stergerea modelului. Incercati iar.',
+        'success' => 'Modelul a fost sters.'
     )
 
 );

@@ -17,7 +17,7 @@ return array(
 
     'delete' => array(
         'confirm'   => 'Tem certeza que deseja deletar este fabricante?',
-        'error'   => 'Houve um problema ao apagar a postagem do blog. Por favor, tente novamente.',
+        'error'   => 'There was an issue deleting the manufacturer. Please try again.',
         'success' => 'O Fabricante foi deletado com sucesso.'
     )
 

@@ -2,24 +2,24 @@
 
 return array(
 
-    'does_not_exist' => 'Location does not exist.',
-    'assoc_users'	 => 'This location is currently associated with at least one user and cannot be deleted. Please update your users to no longer reference this location and try again. ',
+    'does_not_exist' => 'Locatia nu exista.',
+    'assoc_users'	 => 'Aceasta locatie este momentan asociata cu cel putin inca un alt utilizator si nu poate fi stearsa. Va rugam actualizati utilizatorii care nu mai apartin de aceasta locatie si incercati iar. ',
 
 
     'create' => array(
-        'error'   => 'Location was not created, please try again.',
-        'success' => 'Location created successfully.'
+        'error'   => 'Locatia nu a fost creata, va rugam incercati iar.',
+        'success' => 'Locatia a fost creata.'
     ),
 
     'update' => array(
-        'error'   => 'Location was not updated, please try again',
-        'success' => 'Location updated successfully.'
+        'error'   => 'Locatia nu a fost actualizata, va rugam incercati iar',
+        'success' => 'Locatia a fost actualizata.'
     ),
 
     'delete' => array(
-        'confirm'   	=> 'Are you sure you wish to delete this location?',
-        'error'   => 'There was an issue deleting the location. Please try again.',
-        'success' => 'The location was deleted successfully.'
+        'confirm'   	=> 'Sunteti sigur ca vreti sa stergeti aceasta locatie?',
+        'error'   => 'A aparut o problema la stergerea locatiei. Va rugam incercati iar.',
+        'success' => 'Locatia a fost stearsa.'
     )
 
 );

@@ -2,16 +2,16 @@
 
 return array(
 
-    'assigned_to'   	=> 'Assigned To',
-    'checkout'   		=> 'In/Out',
+    'assigned_to'   	=> 'Desemnata catre',
+    'checkout'   		=> 'Predat/Primit',
     'id'      			=> 'ID',
-    'license_email'   	=> 'License Email',
-    'license_name'   	=> 'Licensed To',
-    'purchase_date'   	=> 'Purchase Date',
-    'purchased'   		=> 'Purchased',
-    'seats'   			=> 'Seats',
+    'license_email'   	=> 'E-mail licenta',
+    'license_name'   	=> 'Licentiat catre',
+    'purchase_date'   	=> 'Data achizitie',
+    'purchased'   		=> 'Achizitionat',
+    'seats'   			=> 'Locuri',
     'hardware'   		=> 'Hardware',
     'serial'   			=> 'Serial',
-    'title'      		=> 'License',
+    'title'      		=> 'Licenta',
 
 );

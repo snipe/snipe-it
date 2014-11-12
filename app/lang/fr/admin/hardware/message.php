@@ -2,37 +2,37 @@
 
 return array(
 
-    'undeployable' 		=> '<strong>Warning: </strong> This asset has been marked as currently undeployable.
-                        If this status has changed, please update the asset status.',
-    'does_not_exist' 	=> 'Asset does not exist.',
-    'assoc_users'	 	=> 'This asset is currently checked out to a user and cannot be deleted. Please check the asset in first, and then try deleting again. ',
+    'undeployable' 		=> '<strong>Attention: </strong> Ce bien a été marqué indisponible.
+                        Si ce statut a changé, veuillez l\'actualiser.',
+    'does_not_exist' 	=> 'Ce bien n\'existe pas.',
+    'assoc_users'	 	=> 'Ce bien est marqué sorti par un utilisateur et ne peut être supprimé. Veuillez d\'abord cliquer sur Retour de Biens, et réessayer.',
 
     'create' => array(
-        'error'   		=> 'Asset was not created, please try again. :(',
-        'success' 		=> 'Asset created successfully. :)'
+        'error'   		=> 'Ce bien n\'a pas été créé, veuillez réessayer. :(',
+        'success' 		=> 'Bien créé correctement. :)'
     ),
 
     'update' => array(
-        'error'   		=> 'Asset was not updated, please try again',
-        'success' 		=> 'Asset updated successfully.'
+        'error'   		=> 'Ce bien n\'a pas été actualisé, veuillez réessayer',
+        'success' 		=> 'Bien actualisé correctement.'
     ),
 
     'delete' => array(
-        'confirm'   	=> 'Are you sure you wish to delete this asset?',
-        'error'   		=> 'There was an issue deleting the asset. Please try again.',
-        'success' 		=> 'The asset was deleted successfully.'
+        'confirm'   	=> 'Etes-vous sûr de vouloir supprimer ce bien?',
+        'error'   		=> 'Il y a eu un problème en supprimant ce bien. Veuillez réessayer.',
+        'success' 		=> 'Ce bien a été supprimé correctement.'
     ),
 
     'checkout' => array(
-        'error'   		=> 'Asset was not checked out, please try again',
-        'success' 		=> 'Asset checked out successfully.',
-        'user_does_not_exist' => 'That user is invalid. Please try again.'
+        'error'   		=> 'Ce bien n\'a pas été sorti, veuillez réessayer',
+        'success' 		=> 'Ce bien a été sorti correctement.',
+        'user_does_not_exist' => 'Cet utilisateur est invalide. Veuillez réessayer.'
     ),
 
     'checkin' => array(
-        'error'   		=> 'Asset was not checked in, please try again',
-        'success' 		=> 'Asset checked in successfully.',
-        'user_does_not_exist' => 'That user is invalid. Please try again.'
+        'error'   		=> 'Ce bien n\'a pas été retourné, veuillez réessayer',
+        'success' 		=> 'Ce bien a été retourné correctement.',
+        'user_does_not_exist' => 'Cet utilisateur est invalide. Veuillez réessayer.'
     )
 
 );

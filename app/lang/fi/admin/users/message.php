@@ -2,11 +2,13 @@
 
 return array(
 
-    'user_exists'              => 'Käyttäjää on jo luotu!',
-    'user_not_found'           => 'Käyttäjää [:id] ei löydy.',
-    'user_login_required'      => 'Käyttäjätunnus vaaditaan',
-    'user_password_required'   => 'Salasana vaaditaan.',
-    'insufficient_permissions' => 'Riittämättömät Oikeudet.',
+    'user_exists'              	=> 'Käyttäjää on jo luotu!',
+    'user_not_found'           	=> 'Käyttäjää [:id] ei löydy.',
+    'user_login_required'      	=> 'Käyttäjätunnus vaaditaan',
+    'user_password_required'   	=> 'Salasana vaaditaan.',
+    'insufficient_permissions' 	=> 'Riittämättömät Oikeudet.',
+    'user_deleted_warning' 		=> 'This user has been deleted. You will have to restore this user to edit them or assign them new assets.',
+
 
     'success' => array(
         'create'    => 'Käyttäjä luotiin onnistuneesti.',

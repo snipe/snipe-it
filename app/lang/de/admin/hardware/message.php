@@ -2,37 +2,36 @@
 
 return array(
 
-    'undeployable' 		=> '<strong>Warning: </strong> This asset has been marked as currently undeployable.
-                        If this status has changed, please update the asset status.',
-    'does_not_exist' 	=> 'Asset does not exist.',
-    'assoc_users'	 	=> 'This asset is currently checked out to a user and cannot be deleted. Please check the asset in first, and then try deleting again. ',
+    'undeployable' 		=> '<b>Warnung:</b> Dieses Asset wurde als nicht zur Herausgabe bereit markiert. Falls sich dieser Status geändert hat, aktualisieren Sie bitte den Asset Status.',
+    'does_not_exist' 	=> 'Asset existiert nicht.',
+    'assoc_users'	 	=> 'Dieses Asset ist im Moment an einen Benutzer herausgegeben und kann nicht entfernt werden. Bitte buchen sie das Asset wieder ein und versuchen Sie dann erneut es zu entfernen. ',
 
     'create' => array(
-        'error'   		=> 'Asset was not created, please try again. :(',
-        'success' 		=> 'Asset created successfully. :)'
+        'error'   		=> 'Asset wurde nicht erstellt. Bitte versuchen Sie es erneut. :(',
+        'success' 		=> 'Asset wurde erfolgreich erstellt. :)'
     ),
 
     'update' => array(
-        'error'   		=> 'Asset was not updated, please try again',
-        'success' 		=> 'Asset updated successfully.'
+        'error'   		=> 'Asset wurde nicht aktualisiert. Bitte versuchen Sie es erneut',
+        'success' 		=> 'Asset wurde erfolgreich aktualisiert.'
     ),
 
     'delete' => array(
-        'confirm'   	=> 'Are you sure you wish to delete this asset?',
-        'error'   		=> 'There was an issue deleting the asset. Please try again.',
-        'success' 		=> 'The asset was deleted successfully.'
+        'confirm'   	=> 'Sind Sie sicher, dass Sie dieses Asset entfernen möchten?',
+        'error'   		=> 'Beim Entfernen dieses Assets ist ein Fehler aufgetreten. Bitte versuchen Sie es erneut.',
+        'success' 		=> 'Dieses Asset wurde erfolgreich entfernt.'
     ),
 
     'checkout' => array(
-        'error'   		=> 'Asset was not checked out, please try again',
-        'success' 		=> 'Asset checked out successfully.',
-        'user_does_not_exist' => 'That user is invalid. Please try again.'
+        'error'   		=> 'Asset konnte nicht herausgegeben werden. Bitte versuchen Sie es erneut',
+        'success' 		=> 'Asset wurde erfolgreich herausgegeben.',
+        'user_does_not_exist' => 'Dieser Benutzer existiert nicht. Bitte versuchen Sie es erneut.'
     ),
 
     'checkin' => array(
-        'error'   		=> 'Asset was not checked in, please try again',
-        'success' 		=> 'Asset checked in successfully.',
-        'user_does_not_exist' => 'That user is invalid. Please try again.'
+        'error'   		=> 'Asset konnte nicht eingebucht werden. Bitte versuchen Sie es erneut',
+        'success' 		=> 'Asset wurde erfolgreich eingebucht.',
+        'user_does_not_exist' => 'Dieser Benutzer existiert nicht. Bitte versuchen Sie es erneut.'
     )
 
 );

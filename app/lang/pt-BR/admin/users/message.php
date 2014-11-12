@@ -2,11 +2,13 @@
 
 return array(
 
-    'user_exists'              => 'O usuário já existe!',
-    'user_not_found'           => 'O usuário [:id] não existe.',
-    'user_login_required'      => 'O campo entrar é requerido',
-    'user_password_required'   => 'A senha é requerida.',
-    'insufficient_permissions' => 'Permissões Insuficientes.',
+    'user_exists'              	=> 'O usuário já existe!',
+    'user_not_found'           	=> 'O usuário [:id] não existe.',
+    'user_login_required'      	=> 'O campo entrar é requerido',
+    'user_password_required'   	=> 'A senha é requerida.',
+    'insufficient_permissions' 	=> 'Permissões Insuficientes.',
+    'user_deleted_warning' 		=> 'This user has been deleted. You will have to restore this user to edit them or assign them new assets.',
+
 
     'success' => array(
         'create'    => 'O usuário foi criado com sucesso.',

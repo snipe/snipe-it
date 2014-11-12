@@ -4,8 +4,8 @@ return array(
 
 
     'update' => array(
-        'error'   => 'An error has occurred while updating. ',
-        'success' => 'Settings updated successfully.'
+        'error'   => 'Une erreur a eu lieu pendant la mise à jour. ',
+        'success' => 'Les paramètres ont été mis à jour avec succès.'
     ),
 
 );

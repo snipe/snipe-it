@@ -81,10 +81,10 @@ return array(
     'unknown_admin'			=> 'Administrador Desconhecido',
     'user'					=> 'Usuário',
     'viewassets'  			=> 'Ver Bens Atribuídos',
-    'website'               => 'Website',
-    'welcome'				=> 'Welcome, :name',
-    'years'					=> 'years',
-    'yes' 					=> 'Yes',
+    'website'               => 'Site',
+    'welcome'				=> 'Bem-vindo, :name',
+    'years'					=> 'anos',
+    'yes' 					=> 'Sim',
     'zip'  					=> 'Zip',
 
 );

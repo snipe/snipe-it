@@ -71,7 +71,7 @@ return array(
     'settings'				=> 'الإعدادات',
     'sign_in'				=> 'تسجيل الدخول',
     'site_name'				=> 'إسم الموقع',
-    'state'  				=> 'State',
+    'state'  				=> 'المنطقة / الولاية',
     'status_labels'			=> 'بطاقات الحالة',
     'status'    			=> 'الحالة',
     'suppliers'  			=> 'الموردون',

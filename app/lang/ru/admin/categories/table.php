@@ -4,6 +4,6 @@ return array(
 
     'id'      => 'ID',
     'parent'   => 'Parent',
-    'title'      => 'Asset Category Name',
+    'title'      => 'Имя категории актива',
 
 );

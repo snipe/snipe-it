@@ -3,7 +3,7 @@
 return array(
 
     'does_not_exist' => 'Category does not exist.',
-    'assoc_users'	 => 'This category is currently associated with at least one model and cannot be deleted. Please update your models to no longer reference this category and try again. ',
+    'assoc_users'	 => '‘tis category be currently associated wit\' at least one model \'n cannot be scuttled. update yer models t\' no longer reference ‘tis category \'n try give a go\' again. ',
 
     'create' => array(
         'error'   => 'Category was not created, please try again.',

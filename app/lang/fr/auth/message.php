@@ -2,35 +2,35 @@
 
 return array(
 
-    'account_already_exists' => 'An account with the this email already exists.',
-    'account_not_found'      => 'The email account or password is incorrect.',
-    'account_not_activated'  => 'This user account is not activated.',
-    'account_suspended'      => 'This user account is suspended.',
-    'account_banned'         => 'This user account is banned.',
+    'account_already_exists' => 'Un compte avec cet e-mail existe déjà.',
+    'account_not_found'      => 'L\'e-mail ou le mot de passe est incorrect.',
+    'account_not_activated'  => 'Ce compte n\'est pas activé.',
+    'account_suspended'      => 'Ce compte est suspendu.',
+    'account_banned'         => 'Ce compte est banni.',
 
     'signin' => array(
-        'error'   => 'There was a problem while trying to log you in, please try again.',
-        'success' => 'You have successfully logged in.',
+        'error'   => 'Un problème a eu lieu pendant votre connexion, veuillez essayer à nouveau.',
+        'success' => 'Vous avez été connecté avec succès.',
     ),
 
     'signup' => array(
-        'error'   => 'There was a problem while trying to create your account, please try again.',
-        'success' => 'Account sucessfully created.',
+        'error'   => 'Un problème a eu lieu pendant la création de votre compte, veuillez essayer à nouveau.',
+        'success' => 'Le compte a été créé avec succès.',
     ),
 
         'forgot-password' => array(
-            'error'   => 'There was a problem while trying to get a reset password code, please try again.',
-            'success' => 'Password recovery email successfully sent.',
+            'error'   => 'Un problème a eu lieu pendant la récupération du code de réinitialisation de mot de passe, veuillez essayer à nouveau.',
+            'success' => 'L\'e-mail de réinitialisation de mot de passe a été envoyé avec succès.',
         ),
 
         'forgot-password-confirm' => array(
-            'error'   => 'There was a problem while trying to reset your password, please try again.',
-            'success' => 'Your password has been successfully reset.',
+            'error'   => 'Un problème a eu lieu pendant la réinitialisation de votre mot de passe, veuillez essayer à nouveau.',
+            'success' => 'Votre mot de passe a été réinitialisé avec succès.',
         ),
 
     'activate' => array(
-        'error'   => 'There was a problem while trying to activate your account, please try again.',
-        'success' => 'Your account has been successfully activated.',
+        'error'   => 'Un problème a eu lieu pendant l\'activation de votre compte, veuillez essayer à nouveau.',
+        'success' => 'Votre compte a été activé avec succès.',
     ),
 
 );

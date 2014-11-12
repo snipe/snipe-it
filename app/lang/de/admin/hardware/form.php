@@ -2,9 +2,9 @@
 
 return array(
 
-    'checkedout_to'		=> 'Checked Out To',
-    'checkout_to'		=> 'Checkout to',
-    'cost'				=> 'Purchase Cost',
+    'checkedout_to'		=> 'Herausgegeben an',
+    'checkout_to'		=> 'Herausgeben an',
+    'cost'				=> 'Einkaufspreis',
     'create'			=> 'Asset erstellen',
     'date'				=> 'Kaufdatum',
     'depreciates_on'	=> 'Depreciates On',
@@ -19,11 +19,11 @@ return array(
     'model'				=> 'Modell',
     'months'			=> 'Monate',
     'name'				=> 'Asset Name',
-    'notes'				=> 'Notes',
+    'notes'				=> 'Notizen',
     'order'				=> 'Bestellnummer',
     'qr'				=> 'QR-Code',
-    'requestable'		=> 'Users may request this asset',
-    'serial'			=> 'Serial',
+    'requestable'		=> 'Benutzer dürfen dieses Asset anfordern',
+    'serial'			=> 'Seriennummer',
     'status'			=> 'Status',
     'supplier'			=> 'Lieferant',
     'tag'				=> 'Asset Tag',
