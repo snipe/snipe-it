@@ -108,7 +108,7 @@
                     <div class="form-group">
                         <label class="col-md-2 control-label"></label>
                         <div class="controls">
-                            <button type="submit" class="btn-flat success"><i class="icon-download-alt icon-white"></i> Generate</button>
+                            <button type="submit" class="btn-flat success"><i class="icon-download-alt icon-white"></i> @lang('general.generate')</button>
                         </div>
                     </div>
                 </form>

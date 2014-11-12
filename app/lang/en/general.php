@@ -39,6 +39,7 @@ return array(
     'editprofile'  			=> 'Edit Your Profile',
     'eol'					=> 'EOL',
     'first_name'			=> 'First Name',
+    'generate'				=> 'Generate',
     'groups'				=> 'Groups',
     'gravatar_email'        => 'Gravatar Email Address',
     'history_for'  			=> 'History for',
