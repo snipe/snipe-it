@@ -36,8 +36,8 @@ Asset Report ::
             <th class="col-sm-1">@lang('admin/hardware/table.serial')</th>
             <th class="col-sm-1">@lang('admin/hardware/table.purchase_date')</th>
             <th class="col-sm-1">@lang('admin/hardware/table.purchase_cost')</th>
-            <th class=""col-sm-1">@lang('admin/hardware/form.order')</th>
-            <th class=""col-sm-1">@lang('admin/hardware/form.supplier')</th>
+            <th class="col-sm-1">@lang('admin/hardware/form.order')</th>
+            <th class="col-sm-1">@lang('admin/hardware/form.supplier')</th>
             <th class="col-sm-1">@lang('admin/hardware/table.checkoutto')</th>
             <th class="col-sm-1">@lang('admin/hardware/table.location')</th>
             <th class="col-sm-1">@lang('general.status')</th>
