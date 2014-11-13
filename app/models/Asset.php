@@ -7,7 +7,7 @@ class Asset extends Elegant
 
     protected $errors;
     protected $rules = array(
-        'name'   => 'alpha_space|min:6|max:255',
+        'name'   => 'alpha_space|min:2|max:255',
         'model_id'   => 'required',
         'warranty_months'   => 'integer|min:0|max:240',
         'note'   => 'alpha_space',
