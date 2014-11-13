@@ -3,7 +3,7 @@
 return array(
 
     'actions'	 	=> 'Ações',
-    'action' 		=> 'Action',
-    'by'      		=> 'By',
+    'action' 		=> 'Ação',
+    'by'      		=> 'Por',
 
 );

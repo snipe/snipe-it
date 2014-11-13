@@ -2,10 +2,10 @@
 
 return array(
 
-    'address'				=> 'Address',
+    'address'				=> 'Adres',
     'admin'					=> 'Admin',
-    'all_assets'			=> 'All Assets',
-    'all'       			=> 'All',
+    'all_assets'			=> 'Wszystkie aktywa',
+    'all'       			=> 'Wszystko',
     'asset_models'			=> 'Asset Models',
     'asset'					=> 'Asset',
     'asset_report'          => 'Asset Report',
