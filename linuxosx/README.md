@@ -64,9 +64,13 @@ Update the file `app/config/production/app.php` with your URL settings.
 
     'url' => 'http://www.yourserver.com',
 
-You should also change your secret key here -- if you prefer to have your key randomly generated, run the artisan key:generate command from the application root.
+You should also change your secret key here. If you prefer to have your key randomly generated, run the artisan key:generate command from the application root.
 
 	php artisan key:generate --env=production
+
+__after__ step 4 below.
+
+If you opt to manually enter a key in `app.php`, __be sure it is exactly 32 characters__, or you will encounter an error when trying to load the app.
 
 -----
 
@@ -102,7 +106,7 @@ You'll need to make sure that the `app/storage` directory is writable by your we
 	chmod -R 755 public/uploads
 
 If you still run into a permissions error, you may need to increase the permissions to 775, or twiddle your user/group permissions on your server.
-	
+
 Note: It should go without saying, but make sure the Snipe-IT project directory is not owned by `root`. Your webserver should be running as your webserver's user (often `apache`, `nobody`, or `www-data`). But never, ever `root`. Ever.
 
 
