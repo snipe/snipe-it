@@ -3,7 +3,7 @@
 return array(
 
     'id'      => 'ID',
-    'parent'   => 'Parent',
+    'parent'   => 'Родительская категория',
     'title'      => 'Имя категории актива',
 
 );

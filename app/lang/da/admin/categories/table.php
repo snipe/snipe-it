@@ -3,7 +3,7 @@
 return array(
 
     'id'      => 'ID',
-    'parent'   => 'Parent',
+    'parent'   => 'Forælder',
     'title'      => 'Asset Category Name',
 
 );

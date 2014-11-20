@@ -2,23 +2,24 @@
 
 return array(
 
-    'does_not_exist' => 'Category does not exist.',
-    'assoc_users'	 => 'This category is currently associated with at least one model and cannot be deleted. Please update your models to no longer reference this category and try again. ',
+    'does_not_exist' => 'Kategorien eksisterer ikke.',
+    'assoc_users'	 => 'Denne kategorien er koblet til minst èn modell og kan ikke slettes. Vennligst oppdater dine modeller til å ikke referere til denne kategorien og prøv igjen.',
 
     'create' => array(
-        'error'   => 'Category was not created, please try again.',
-        'success' => 'Category created successfully.'
+        'error'   => 'Kategorien ble ikke opprettet, vennligst prøv igjen.',
+        'success' => 'Kategorien ble opprettet.'
     ),
 
     'update' => array(
-        'error'   => 'Category was not updated, please try again',
-        'success' => 'Category updated successfully.'
+        'error'   => 'Kategorien ble ikke opprettet, vennligst prøv igjen',
+        'success' => 'Kategorien ble oppdatert.'
     ),
 
     'delete' => array(
-        'confirm'   => 'Are you sure you wish to delete this category?',
-        'error'   => 'There was an issue deleting the category. Please try again.',
-        'success' => 'The category was deleted successfully.'
+        'confirm'   => 'Er du sikker på du vil slette denne kategorien?',
+        'error'   => 'Det oppsto et problem ved sletting av kategorien. Vennligst prøv igjen.
+',
+        'success' => 'Kategorien ble slettet.'
     )
 
 );

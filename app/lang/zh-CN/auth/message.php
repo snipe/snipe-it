@@ -2,35 +2,35 @@
 
 return array(
 
-    'account_already_exists' => 'An account with the this email already exists.',
-    'account_not_found'      => 'The email account or password is incorrect.',
-    'account_not_activated'  => 'This user account is not activated.',
-    'account_suspended'      => 'This user account is suspended.',
-    'account_banned'         => 'This user account is banned.',
+    'account_already_exists' => '此邮箱已经被注册。',
+    'account_not_found'      => '邮箱或密码不符',
+    'account_not_activated'  => '用户还未激活',
+    'account_suspended'      => '账户已经被停用',
+    'account_banned'         => '账户已经被禁用',
 
     'signin' => array(
-        'error'   => 'There was a problem while trying to log you in, please try again.',
-        'success' => 'You have successfully logged in.',
+        'error'   => '登陆过程中出现了一点儿问题，请重试。',
+        'success' => '恭喜，登陆成功。',
     ),
 
     'signup' => array(
-        'error'   => 'There was a problem while trying to create your account, please try again.',
-        'success' => 'Account sucessfully created.',
+        'error'   => '在创建您的账户的过程中出现了一点儿问题，请重试。',
+        'success' => '账户创建成功。',
     ),
 
         'forgot-password' => array(
-            'error'   => 'There was a problem while trying to get a reset password code, please try again.',
-            'success' => 'Password recovery email successfully sent.',
+            'error'   => '重置密码过程中出现了一点儿问题，请重试。',
+            'success' => '密码找回邮件已经发送成功，请查收。',
         ),
 
         'forgot-password-confirm' => array(
-            'error'   => 'There was a problem while trying to reset your password, please try again.',
-            'success' => 'Your password has been successfully reset.',
+            'error'   => '再重置密码过程中出现了一点儿问题，请重试。',
+            'success' => '密码重置成功。',
         ),
 
     'activate' => array(
-        'error'   => 'There was a problem while trying to activate your account, please try again.',
-        'success' => 'Your account has been successfully activated.',
+        'error'   => '账户激活过程中出现了一点儿问题，请重试。',
+        'success' => '账户已经成功被激活。',
     ),
 
 );

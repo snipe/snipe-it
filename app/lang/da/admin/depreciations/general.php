@@ -6,7 +6,7 @@ return array(
     'asset_depreciations'  					=> 'Asset Depreciations',
     'create_depreciation'  					=> 'Create Depreciation',
     'depreciation_name'  					=> 'Depreciation Name',
-    'number_of_months'  					=> 'Number of Months',
+    'number_of_months'  					=> 'Antal måneder',
     'update_depreciation'  					=> 'Update Depreciation',
 
 );

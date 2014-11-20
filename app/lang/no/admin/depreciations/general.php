@@ -1,12 +1,12 @@
 <?php
 
 return array(
-    'about_asset_depreciations'  			=> 'About Asset Depreciations',
-    'about_depreciations'  					=> 'You can set up asset depreciations to depreciate assets based on straight-line depreciation.',
-    'asset_depreciations'  					=> 'Asset Depreciations',
-    'create_depreciation'  					=> 'Create Depreciation',
-    'depreciation_name'  					=> 'Depreciation Name',
-    'number_of_months'  					=> 'Number of Months',
-    'update_depreciation'  					=> 'Update Depreciation',
+    'about_asset_depreciations'  			=> 'Om avskrivninger',
+    'about_depreciations'  					=> 'Du kan sette opp avskrivninger for å kostnadsføre eiendeler basert på en lineær avskrivning i perioden.',
+    'asset_depreciations'  					=> 'Avskrivninger',
+    'create_depreciation'  					=> 'Opprett avskrivning',
+    'depreciation_name'  					=> 'Avskrivningsnavn',
+    'number_of_months'  					=> 'Antall måneder',
+    'update_depreciation'  					=> 'Oppdater avskrivninger',
 
 );

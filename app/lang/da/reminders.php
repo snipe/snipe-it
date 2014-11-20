@@ -13,12 +13,12 @@ return array(
     |
     */
 
-    "password" => "Passwords must be six characters and match the confirmation.",
+    "password" => "Adgangskoder skal være seks tegn og svare til bekræftelsen.",
 
-    "user"     => "Username or email address is incorrect",
+    "user"     => "Brugernavn eller email adresse er forkert",
 
     "token"    => "This password reset token is invalid.",
 
-    "sent" => "If a matching email address was found, a password reminder has been sent!",
+    "sent" => "Hvis en tilsvarende email adresse blev fundet, er der afsendt en påmindelse om adgangskode!",
 
 );

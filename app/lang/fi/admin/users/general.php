@@ -3,12 +3,12 @@
 
 return array(
 
-    'assets_user'  		=> 'Assets assigned to :name',
+    'assets_user'  		=> 'Käyttäjälle :name luovutetut laitteet',
     'clone'  			=> 'Monista Käyttäjä',
-    'contact_user'  	=> 'Contact :name',
+    'contact_user'  	=> 'Ota yhteyttä käyttäjään :name',
     'edit'  			=> 'Muokkaa käyttäjää',
-    'history_user'  	=> 'History for :name',
-    'last_login'  		=> 'Last Login',
-    'software_user'  	=> 'Software Checked out to :name',
-    'view_user'  		=> 'View User :name',
+    'history_user'  	=> 'Historia käyttäjälle :name',
+    'last_login'  		=> 'Viimeisin kirjautuminen',
+    'software_user'  	=> 'Käyttäjälle :name luovutetut ohjelmistot',
+    'view_user'  		=> 'Näytä Käyttäjä :name',
     );

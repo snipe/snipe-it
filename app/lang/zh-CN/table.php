@@ -2,8 +2,8 @@
 
 return array(
 
-    'actions'	 	=> 'Actions',
-    'action' 		=> 'Action',
-    'by'      		=> 'By',
+    'actions'	 	=> '操作',
+    'action' 		=> '操作',
+    'by'      		=> '经由',
 
 );

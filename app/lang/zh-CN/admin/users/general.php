@@ -3,12 +3,12 @@
 
 return array(
 
-    'assets_user'  		=> 'Assets assigned to :name',
-    'clone'  			=> 'Clone User',
-    'contact_user'  	=> 'Contact :name',
-    'edit'  			=> 'Edit User',
-    'history_user'  	=> 'History for :name',
-    'last_login'  		=> 'Last Login',
-    'software_user'  	=> 'Software Checked out to :name',
-    'view_user'  		=> 'View User :name',
+    'assets_user'  		=> '分配给:name的资产',
+    'clone'  			=> '克隆用户',
+    'contact_user'  	=> '联系 :name',
+    'edit'  			=> '编辑用户',
+    'history_user'  	=> ':name的历史',
+    'last_login'  		=> '上一次登陆',
+    'software_user'  	=> ':name 借走的软件',
+    'view_user'  		=> '查看用户： :name',
     );

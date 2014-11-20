@@ -14,12 +14,12 @@ return array(
     'notes'             => 'Примечания',
     'order'             => 'Номер заказа',
     'purchase_order'    => 'Номер заказа на поставку',
-    'remaining_seats'   => 'Remaining Seats',
+    'remaining_seats'   => 'Осталось лицезий',
     'seats'             => 'Количество рабочих мест',
     'serial'            => 'Серийный номер',
     'supplier'          => 'Поставщик',
     'to_email'          => 'Лицензирован на E-mail',
     'to_name'           => 'Лицензировано на имя',
     'update'            => 'Обновить лицензию',
-    'checkout_help'     => 'You must check a license out to a hardware asset or a person. You can select both, but the owner of the asset must match the person you\'re checking the asset out to.'
+    'checkout_help'     => 'Вы должны привязать лицензию к физическому активу или человеку. Вы можете выбрать оба варианта, но владелец актива должен соответствовать человеку привязанному к этому активу.'
 );

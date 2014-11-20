@@ -2,37 +2,37 @@
 
 return array(
 
-    'undeployable' 		=> '<strong>Warning: </strong> This asset has been marked as currently undeployable.
-                        If this status has changed, please update the asset status.',
-    'does_not_exist' 	=> 'Asset does not exist.',
-    'assoc_users'	 	=> 'This asset is currently checked out to a user and cannot be deleted. Please check the asset in first, and then try deleting again. ',
+    'undeployable' 		=> '<strong>Внимание: </strong> Этот актив в настоящее время помечен как не подлежащий установке.
+                        Если этот статус изменился , пожалуйста обновите статус актива.',
+    'does_not_exist' 	=> 'Актив не существует.',
+    'assoc_users'	 	=> 'Этот актив в настоящее время привязан к пользователю и не может быть удален. Пожалуйста сначала снимите привязку, и затем попробуйте удалить снова. ',
 
     'create' => array(
-        'error'   		=> 'Asset was not created, please try again. :(',
-        'success' 		=> 'Asset created successfully. :)'
+        'error'   		=> 'Актив не был создан, пожалуйста попробуйте снова. :(',
+        'success' 		=> 'Актив успешно создан. :)'
     ),
 
     'update' => array(
-        'error'   		=> 'Asset was not updated, please try again',
-        'success' 		=> 'Asset updated successfully.'
+        'error'   		=> 'Актив не был изменен, пожалуйста попробуйте снова',
+        'success' 		=> 'Актив успешно изменен.'
     ),
 
     'delete' => array(
-        'confirm'   	=> 'Are you sure you wish to delete this asset?',
-        'error'   		=> 'There was an issue deleting the asset. Please try again.',
-        'success' 		=> 'The asset was deleted successfully.'
+        'confirm'   	=> 'Вы уверены что хотите удалить этот актив?',
+        'error'   		=> 'При удалении актива возникла проблема. Пожалуйста попробуйте снова.',
+        'success' 		=> 'Актив был успешно удален.'
     ),
 
     'checkout' => array(
-        'error'   		=> 'Asset was not checked out, please try again',
-        'success' 		=> 'Asset checked out successfully.',
-        'user_does_not_exist' => 'That user is invalid. Please try again.'
+        'error'   		=> 'Актив не был привязан, пожалуйста попробуйте снова',
+        'success' 		=> 'Актив успешно привязан.',
+        'user_does_not_exist' => 'Этот пользователь является недопустимым. Пожалуйста, попробуйте еще раз.'
     ),
 
     'checkin' => array(
-        'error'   		=> 'Asset was not checked in, please try again',
-        'success' 		=> 'Asset checked in successfully.',
-        'user_does_not_exist' => 'That user is invalid. Please try again.'
+        'error'   		=> 'Актив не был отвязан, пожалуйста попробуйте снова',
+        'success' 		=> 'Актив успешно отвязан.',
+        'user_does_not_exist' => 'Этот пользователь является недопустимым. Пожалуйста, попробуйте еще раз.'
     )
 
 );

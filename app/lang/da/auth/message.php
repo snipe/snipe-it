@@ -2,35 +2,35 @@
 
 return array(
 
-    'account_already_exists' => 'An account with the this email already exists.',
-    'account_not_found'      => 'The email account or password is incorrect.',
-    'account_not_activated'  => 'This user account is not activated.',
-    'account_suspended'      => 'This user account is suspended.',
-    'account_banned'         => 'This user account is banned.',
+    'account_already_exists' => 'En konto med denne e-mail eksisterer allerede.',
+    'account_not_found'      => 'E-mail konto eller adgangskode er forkert.',
+    'account_not_activated'  => 'Denne brugerkonto er ikke aktiveret.',
+    'account_suspended'      => 'Denne brugerkonto er suspenderet.',
+    'account_banned'         => 'Denne brugerkonto er blokeret.',
 
     'signin' => array(
-        'error'   => 'There was a problem while trying to log you in, please try again.',
-        'success' => 'You have successfully logged in.',
+        'error'   => 'Der opstod et problem, ved forsøg på at logge dig ind, prøv igen.',
+        'success' => 'Du er blevet logget ind.',
     ),
 
     'signup' => array(
-        'error'   => 'There was a problem while trying to create your account, please try again.',
-        'success' => 'Account sucessfully created.',
+        'error'   => 'Der opstod et problem, ved forsøg på at oprette din konto, prøv igen.',
+        'success' => 'Konto oprettet med succes.',
     ),
 
         'forgot-password' => array(
-            'error'   => 'There was a problem while trying to get a reset password code, please try again.',
-            'success' => 'Password recovery email successfully sent.',
+            'error'   => 'Der opstod et problem, ved forsøg på at nulstille din adgangkode, prøv igen.',
+            'success' => 'En e-mail til gendannelse af adgangskoden er afsendt.',
         ),
 
         'forgot-password-confirm' => array(
-            'error'   => 'There was a problem while trying to reset your password, please try again.',
-            'success' => 'Your password has been successfully reset.',
+            'error'   => 'Der opstod et problem, ved forsøg på at nulstille din adgangskode, prøv venligst igen.',
+            'success' => 'Din adgangskode er blevet nulstillet.',
         ),
 
     'activate' => array(
-        'error'   => 'There was a problem while trying to activate your account, please try again.',
-        'success' => 'Your account has been successfully activated.',
+        'error'   => 'Der opstod et problem, ved forsøg på at aktivere din konto, prøv igen.',
+        'success' => 'Din konto er blevet aktiveret.',
     ),
 
 );

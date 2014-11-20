@@ -7,7 +7,7 @@ return array(
     'user_login_required'      	=> 'Käyttäjätunnus vaaditaan',
     'user_password_required'   	=> 'Salasana vaaditaan.',
     'insufficient_permissions' 	=> 'Riittämättömät Oikeudet.',
-    'user_deleted_warning' 		=> 'This user has been deleted. You will have to restore this user to edit them or assign them new assets.',
+    'user_deleted_warning' 		=> 'Käyttäjä on jo poistettu. Mikäli haluat muokata tai luovuttaa laitteita hänelle sinun tulee palauttaa käyttäjä.',
 
 
     'success' => array(

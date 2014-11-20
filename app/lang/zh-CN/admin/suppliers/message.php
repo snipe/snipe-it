@@ -2,23 +2,23 @@
 
 return array(
 
-    'does_not_exist' => 'Supplier does not exist.',
-    'assoc_users'	 => 'This supplier is currently associated with at least one model and cannot be deleted. Please update your models to no longer reference this supplier and try again. ',
+    'does_not_exist' => '供应商不存在。',
+    'assoc_users'	 => '此供应商下至少还有一个相关模板，目前不能被删除，请你确定您的所有资产不在此分类下，然后重试。',
 
     'create' => array(
-        'error'   => 'Supplier was not created, please try again.',
-        'success' => 'Supplier created successfully.'
+        'error'   => '供应商没有被创建，请重试。',
+        'success' => '供应商创建成功。'
     ),
 
     'update' => array(
-        'error'   => 'Supplier was not updated, please try again',
-        'success' => 'Supplier updated successfully.'
+        'error'   => '供应商没有被更新，请重试。',
+        'success' => '供应商更新成功。'
     ),
 
     'delete' => array(
-        'confirm'   => 'Are you sure you wish to delete this supplier?',
-        'error'   => 'There was an issue deleting the supplier. Please try again.',
-        'success' => 'Supplier was deleted successfully.'
+        'confirm'   => '你确定要删除这个供应商吗？',
+        'error'   => '删除供应商的过程中出现了一点儿问题，请重试。',
+        'success' => '供应商成功被删除。'
     )
 
 );

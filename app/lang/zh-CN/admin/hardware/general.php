@@ -1,11 +1,11 @@
 <?php
 
 return array(
-    'asset'  					=> 'Asset',
-    'checkin'  					=> 'Checkin Asset',
-    'checkout'  				=> 'Checkout Asset to User',
-    'clone'  					=> 'Clone Asset',
-    'edit'  					=> 'Edit Asset',
-    'pending'  					=> 'Pending Asset',
-    'view'  					=> 'View Asset',
+    'asset'  					=> '资产',
+    'checkin'  					=> '借入资产',
+    'checkout'  				=> '借出资产给某人',
+    'clone'  					=> '复制资产',
+    'edit'  					=> '编辑资产',
+    'pending'  					=> '待定资产',
+    'view'  					=> '查看资产',
 );

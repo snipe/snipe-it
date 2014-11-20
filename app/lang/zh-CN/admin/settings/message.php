@@ -4,8 +4,8 @@ return array(
 
 
     'update' => array(
-        'error'   => 'An error has occurred while updating. ',
-        'success' => 'Settings updated successfully.'
+        'error'   => '更新过程中出现了问题。',
+        'success' => '设置配置信息更新成功。'
     ),
 
 );

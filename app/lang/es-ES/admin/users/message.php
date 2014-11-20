@@ -7,7 +7,7 @@ return array(
     'user_login_required'      	=> 'El campo Usuario es obligatorio',
     'user_password_required'   	=> 'El password es obligatorio.',
     'insufficient_permissions' 	=> 'No tiene permiso.',
-    'user_deleted_warning' 		=> 'This user has been deleted. You will have to restore this user to edit them or assign them new assets.',
+    'user_deleted_warning' 		=> 'Este usuario ha sido eliminado. Deberá restaurarlo para editarlo o asignarle nuevos Equipos.',
 
 
     'success' => array(

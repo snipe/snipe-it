@@ -2,30 +2,30 @@
 
 return array(
 
-    'user_exists'              	=> 'User already exists!',
-    'user_not_found'           	=> 'User [:id] does not exist.',
-    'user_login_required'      	=> 'The login field is required',
-    'user_password_required'   	=> 'The password is required.',
-    'insufficient_permissions' 	=> 'Insufficient Permissions.',
-    'user_deleted_warning' 		=> 'This user has been deleted. You will have to restore this user to edit them or assign them new assets.',
+    'user_exists'              	=> '用户已经存在!',
+    'user_not_found'           	=> '用户[:id] 不存在',
+    'user_login_required'      	=> '登陆字段是必须的',
+    'user_password_required'   	=> '密码为必填项',
+    'insufficient_permissions' 	=> '权限不足',
+    'user_deleted_warning' 		=> '用户已经被删除，你需要恢复这个用户编辑他或者重新指定新资产。',
 
 
     'success' => array(
-        'create'    => 'User was successfully created.',
-        'update'    => 'User was successfully updated.',
-        'delete'    => 'User was successfully deleted.',
-        'ban'       => 'User was successfully banned.',
-        'unban'     => 'User was successfully unbanned.',
-        'suspend'   => 'User was successfully suspended.',
-        'unsuspend' => 'User was successfully unsuspended.',
-        'restored'  => 'User was successfully restored.'
+        'create'    => '用户创建成功',
+        'update'    => '用户更新成功。',
+        'delete'    => '用户已经被删除',
+        'ban'       => '用户禁止成功',
+        'unban'     => '用户成功解禁',
+        'suspend'   => '用户已经成功停用',
+        'unsuspend' => '用户解除停用',
+        'restored'  => '用户成功被恢复。'
     ),
 
     'error' => array(
-        'create' => 'There was an issue creating the user. Please try again.',
-        'update' => 'There was an issue updating the user. Please try again.',
-        'delete' => 'There was an issue deleting the user. Please try again.',
-        'unsuspend' => 'There was an issue unsuspending the user. Please try again.'
+        'create' => '创建用户过程中出现了一些问题，请重试。',
+        'update' => '更新用户过程中出现了一些问题，请重试。',
+        'delete' => '删除用户过程中出现了一点儿问题，请重试。',
+        'unsuspend' => '恢复停用用户的过程中出现了一点儿问题，请重试。'
     ),
 
 );

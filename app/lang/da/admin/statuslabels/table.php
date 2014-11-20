@@ -1,10 +1,10 @@
 <?php
 
 return array(
-    'name'      	=> 'Status Name',
-    'title'      	=> 'Status Labels',
-    'update'      	=> 'Update Status Label',
-    'create'      	=> 'Create Status Label',
-    'about'      	=> 'About Status Labels',
-    'info'      	=> 'Status labels are used to describe the various reasons why an asset <strong><em>cannot</em></strong> be deployed. It could be broken, out for diagnostics, out for repair, lost or stolen, etc. Status labels allow your team to show the progression.',
+    'name'      	=> 'Status navn',
+    'title'      	=> 'Status labels',
+    'update'      	=> 'Opdater status label',
+    'create'      	=> 'Opret status label',
+    'about'      	=> 'Om status labels',
+    'info'      	=> 'Status labels bruges til at beskrive de forskellige grunde til, hvorfor et aktiv <strong><em>ikke</em></strong> kan blive anvendt. Det kan være i stykker, sendt til diagnose, sendt til reparation, mistet eller stjålet, osv. Status labels gør det muligt for dit team at vise udviklingen.',
 );

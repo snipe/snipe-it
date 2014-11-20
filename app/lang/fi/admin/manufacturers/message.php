@@ -17,7 +17,7 @@ return array(
 
     'delete' => array(
         'confirm'   => 'Oletko varma että haluat poistaa tämän valmistajan?',
-        'error'   => 'There was an issue deleting the manufacturer. Please try again.',
+        'error'   => 'Valmistajan poistamisessa tapahtui virhe. Ole hyvä ja yritä uudelleen.',
         'success' => 'Valmistaja poistettiin onnistuneesti.'
     )
 

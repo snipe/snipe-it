@@ -25,6 +25,8 @@ return array(
     'phone'  				=> 'Telefon',
     'title' 				=> 'Titlu',
     'updateuser' 			=> 'Actualizeaza utilizator',
+    'username' 				=> 'Username',
+    'username_note' 		=> '(This is used for Active Directory binding only, not for login.)',
     'cloneuser'                         => 'Cloneaza utilizator',
     'viewusers' 			=> 'Vezi utilizatori',
 );

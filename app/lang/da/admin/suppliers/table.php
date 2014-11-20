@@ -3,7 +3,7 @@
 return array(
     'address'               => 'Supplier Address',
     'assets'                => 'Assets',
-    'city'                  => 'City',
+    'city'                  => 'By',
     'contact'               => 'Contact Name',
     'country'               => 'Country',
     'create'                => 'Create Supplier',

@@ -1,11 +1,11 @@
 <?php
 
 return array(
-    'about_asset_categories' 			=> 'About Asset Categories',
-    'about_categories'  				=> 'Asset categories help you organize your assets. Some example categories might be &quot;Desktops&quot;, &quot;Laptops&quot;, &quot;Mobile Phones&quot;, &quot;Tablets&quot;, and so on, but you can use asset categories any way that makes sense for you. ',
-    'asset_categories' 					=> 'Asset Categories',
-    'category_name'  					=> 'Category Name',
-    'create'  							=> 'Create Category',
-    'update'  							=> 'Update Category',
+    'about_asset_categories' 			=> 'Om kategorier',
+    'about_categories'  				=> 'Kategorier hjelper deg å organisere dine eiendeler. Noen eksempler på kategorier kan være &quot;Stasjonære PC\'er&quot;, &quot;Bærbare&quot;, &quot;Mobiltelefoner&quot;, &quot;Tablets&quot; osv. Du kan bruke kategoriene til det som passer best for deg.',
+    'asset_categories' 					=> 'Kategorier',
+    'category_name'  					=> 'Navn',
+    'create'  							=> 'Opprett kategori',
+    'update'  							=> 'Oppdatere kategori',
 
 );

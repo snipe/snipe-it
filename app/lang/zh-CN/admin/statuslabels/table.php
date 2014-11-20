@@ -1,10 +1,10 @@
 <?php
 
 return array(
-    'name'      	=> 'Status Name',
-    'title'      	=> 'Status Labels',
-    'update'      	=> 'Update Status Label',
-    'create'      	=> 'Create Status Label',
-    'about'      	=> 'About Status Labels',
-    'info'      	=> 'Status labels are used to describe the various reasons why an asset <strong><em>cannot</em></strong> be deployed. It could be broken, out for diagnostics, out for repair, lost or stolen, etc. Status labels allow your team to show the progression.',
+    'name'      	=> '状态名称',
+    'title'      	=> '状态标签',
+    'update'      	=> '更新状态标签',
+    'create'      	=> '创建状态标签',
+    'about'      	=> '关于状态标签',
+    'info'      	=> '状态标签用来记录资产<strong><em>不能</em></strong被分配的愿意。它可能损坏了，被检测，被修理，遗失或被盗等等。状态标签给你的团队展示这些状态。',
 );
