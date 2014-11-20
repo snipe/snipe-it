@@ -7,7 +7,7 @@ class License extends Elegant
     protected $softDelete = true;
     protected $rules = array(
             'name'   => 'required|alpha_space|min:3|max:255',
-            'serial'   => 'required|alpha_space|min:5|max:255',
+            'serial'   => 'required|min:5|max:255',
             'seats'   => 'required|min:1|max:10000|integer',
             'license_email'   => 'email|min:0|max:120',
             'license_name'   => 'alpha_space|min:0|max:100',
