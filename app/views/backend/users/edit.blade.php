@@ -153,6 +153,19 @@
             </div>
 
 
+            <!-- Username -->
+            <div class="form-group {{ $errors->has('username') ? 'has-error' : '' }}">
+                <label class="col-md-3 control-label" for="username">@lang('admin/users/table.username')</label>
+                <div class="col-md-5">
+                    <input class="form-control" type="text" name="username" id="username" value="{{{ Input::old('username', $user->username) }}}" disabled />
+
+                    {{ $errors->first('username', '<span class="alert-msg">:message</span>') }}
+                    <p class="help-block">@lang('admin/users/table.username_note')</p>
+                </div>
+            </div>
+
+
+
 			<!-- Activation Status -->
             <div class="form-group {{ $errors->has('activated') ? 'has-error' : '' }}">
                 <label class="col-md-3 control-label" for="activated">@lang('admin/users/table.activated')</label>
