@@ -61,6 +61,23 @@
                                             <td>@lang('general.no')</td>
                                         @endif
                                     </tr>
+
+                                    <tr>
+                                        <td>@lang('admin/settings/general.auto_increment_assets')</td>
+
+                                        @if ($setting->auto_increment_assets == 1)
+                                            <td>@lang('general.yes')</td>
+                                        @else
+                                            <td>@lang('general.no')</td>
+                                        @endif
+                                    </tr>
+
+                                    <tr>
+                                        <td>@lang('admin/settings/general.auto_increment_prefix')</td>
+                                        <td>{{{ $setting->auto_increment_prefix }}}</td>
+                                    </tr>
+
+
                                     <tr>
                                         <td>@lang('admin/settings/general.per_page')</td>
                                         <td>{{{ $setting->per_page }}}  </td>

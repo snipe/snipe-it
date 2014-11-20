@@ -1,6 +1,8 @@
 <?php
 
 return array(
+	'auto_increment_assets'     => 'Auto-generate asset tags',
+	'auto_increment_prefix'     => 'Auto-generated asset tag prefix',
     'display_asset_name'        => 'Display Asset Name',
     'display_checkout_date'     => 'Display Checkout Date',
     'display_eol'               => 'Display EOL in table view',

@@ -87,6 +87,8 @@ class SettingsController extends AdminController
             $setting->qr_code = e(Input::get('qr_code', '0'));
             $setting->display_eol = e(Input::get('display_eol', '0'));
             $setting->qr_text = e(Input::get('qr_text'));
+            $setting->auto_increment_prefix = e(Input::get('auto_increment_prefix'));
+            $setting->auto_increment_assets = e(Input::get('auto_increment_assets', '0'));
 
             // Was the asset updated?
             if($setting->save()) {

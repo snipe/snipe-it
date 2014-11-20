@@ -203,4 +203,23 @@ class Asset extends Elegant
             date_add($date, date_interval_create_from_date_string($this->model->eol.' months'));
             return date_format($date, 'Y-m-d');
     }
+
+
+    /**
+    * Get total assets
+    */
+     public static function autoincrement_asset()
+    {
+        $settings = Setting::getSettings();
+		if ($settings->auto_increment_assets == '1') {
+			$asset_tag = DB::table('assets')
+                    ->where('physical', '=', '1')
+                    ->orderBy('created_at','desc')
+                    ->first();
+			return $settings->auto_increment_prefix.($asset_tag->id + 1);
+		} else {
+			return false;
+		}
+
+    }
 }

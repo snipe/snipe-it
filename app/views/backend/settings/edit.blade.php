@@ -38,7 +38,7 @@ padding: 0px 20px;
                 <h3 class="name">@lang('admin/settings/general.update')</h3>
 
 
-                <div class="row-fluid profile">
+                <div class="profile">
                     <!-- bio, new note & orders column -->
                     <div class="col-md-9 bio">
                         <div class="profile-box">
@@ -86,6 +86,33 @@ padding: 0px 20px;
 											@lang('admin/settings/general.display_checkout_date')
 										</label>
                                     </div>
+                                    <hr>
+
+                                    <div class="checkbox">
+										<label>
+											{{ Form::checkbox('auto_increment_assets', '1', Input::old('auto_increment_assets', $setting->auto_increment_assets)) }}
+											@lang('admin/settings/general.auto_increment_assets')
+										</label>
+                                    </div>
+
+                                    <div class="form-group {{ $errors->has('auto_increment_prefix') ? 'error' : '' }}">
+                                            {{ Form::label('auto_increment_prefix', Lang::get('admin/settings/general.auto_increment_prefix')) }}
+
+                                         @if ($setting->auto_increment_assets == 1)
+											{{ Form::text('auto_increment_prefix', Input::old('auto_increment_prefix', $setting->auto_increment_prefix), array('class' => 'form-control', 'style'=>'width: 100px;')) }}
+											{{ $errors->first('auto_increment_prefix', '<span class="help-inline">:message</span>') }}
+										@else
+											{{ Form::text('auto_increment_prefix', Input::old('auto_increment_prefix', $setting->auto_increment_prefix), array('class' => 'form-control', 'disabled'=>'disabled', 'style'=>'width: 100px;')) }}
+											<p class="help-inline">
+                                                @lang('admin/settings/general.qr_help')
+                                            </p>
+										@endif
+
+
+                                    </div>
+
+
+
 									<hr>
 
                                     @if ($is_gd_installed)
