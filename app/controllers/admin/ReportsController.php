@@ -445,7 +445,7 @@ class ReportsController extends AdminController
         }
 
         // spit out a csv
-        if (!empty(array_filter($rows))) {
+        if (array_filter($rows)) {
             $csv = implode($rows, "\n");
             $response = Response::make($csv, 200);
             $response->header('Content-Type', 'text/csv');
