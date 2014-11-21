@@ -43,7 +43,7 @@
                     <td><a href="{{ route('view/license', $license->id) }}">{{{ $license->name }}}</a>
                      (Seat {{ $count }})
                      </td>
-                    <td><a href="{{ route('view/license', $license->id) }}">{{ Str::limit(e($license->serial, 40)); }}</a>
+                    <td><a href="{{ route('view/license', $license->id) }}">{{{ mb_strimwidth($license->serial, 0, 50, "...") }}}</a>
                     </td>
                     <td>
                      @if ($licensedto->asset_id)

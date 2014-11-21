@@ -13,7 +13,8 @@ class ChangeLicenceType extends Migration {
 	public function up()
 	{
 		//
-		 DB::statement('ALTER TABLE licenses MODIFY COLUMN serial TEXT');
+		$prefix = DB::getTablePrefix();
+		 DB::statement('ALTER TABLE '.$prefix.'licenses MODIFY COLUMN serial TEXT');
 	}
 
 	/**
@@ -24,7 +25,8 @@ class ChangeLicenceType extends Migration {
 	public function down()
 	{
 		//
-		 DB::statement('ALTER TABLE licenses MODIFY COLUMN serial VARCHAR(255)');
+		 $prefix = DB::getTablePrefix();
+		 DB::statement('ALTER TABLE '.$prefix.'licenses MODIFY COLUMN serial VARCHAR(255)');
 	}
 
 }

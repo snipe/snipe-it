@@ -119,7 +119,7 @@
                                     @foreach ($user->licenses as $license)
                                     <tr>
                                         <td><a href="{{ route('view/license', $license->id) }}">{{{ $license->name }}}</a></td>
-                                        <td><a href="{{ route('view/license', $license->id) }}">{{{ $license->serial }}}</a></td>
+                                        <td><a href="{{ route('view/license', $license->id) }}">{{{ mb_strimwidth($license->serial, 0, 50, "...") }}}</a></td>
                                         <td> <a href="{{ route('checkin/license', $license->pivot->id) }}" class="btn-flat info">Checkin</a>
                                         </td>
                                     </tr>

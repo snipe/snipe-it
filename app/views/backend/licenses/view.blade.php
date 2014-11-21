@@ -2,7 +2,8 @@
 
 {{-- Page title --}}
 @section('title')
-@lang('admin/licenses/general.view') {{ $license->name }} ::
+@lang('admin/licenses/general.view')
+{{{ $license->name }}} ::
 @parent
 @stop
 
@@ -20,7 +21,8 @@
                 <li><a href="{{ route('clone/license', $license->id) }}">@lang('admin/licenses/general.clone')</a></li>
             </ul>
         </div>
-       <h3 class="name">@lang('general.history_for') {{ $license->name }}</h3>
+       <h3 class="name">@lang('general.history_for')
+       {{{ $license->name }}}</h3>
     </div>
 </div>
 
@@ -31,16 +33,15 @@
 <h6>@lang('admin/licenses/general.info')</h6>
 
 <div class="col-md-12">
-@if ($license->serial)
-<div class="col-md-6"><strong>@lang('admin/licenses/form.serial'): </strong> {{ $license->serial }} </div>
-@endif
 
 @if ($license->license_name)
-<div class="col-md-6"><strong>@lang('admin/licenses/form.to_name'): </strong> {{ $license->license_name }} </div>
+<div class="col-md-6"><strong>@lang('admin/licenses/form.to_name'): </strong>
+{{{ $license->license_name }}} </div>
 @endif
 
 @if ($license->license_email)
-<div class="col-md-6"><strong>@lang('admin/licenses/form.to_email'): </strong> {{ $license->license_email }} </div>
+<div class="col-md-6"><strong>@lang('admin/licenses/form.to_email'): </strong>
+{{{ $license->license_email }}} </div>
 @endif
 
 @if ($license->supplier_id)
@@ -51,16 +52,18 @@
 @endif
 
 @if ($license->expiration_date > 0)
-<div class="col-md-6"><strong>@lang('admin/licenses/form.expiration'): </strong> {{ $license->expiration_date }} </div>
+<div class="col-md-6"><strong>@lang('admin/licenses/form.expiration'): </strong>
+{{{ $license->expiration_date }}} </div>
 @endif
 
 @if ($license->notes)
-<div class="col-md-6"><strong>@lang('admin/licenses/form.notes'): </strong>{{ $license->notes }}</div>
+<div class="col-md-6"><strong>@lang('admin/licenses/form.notes'): </strong>
+{{{ $license->notes }}}</div>
 @endif
 
  @if ($license->depreciation)
             <div class="col-md-6"><strong>@lang('admin/hardware/form.depreciation'): </strong>
-            {{ $license->depreciation->name }}
+            {{{ $license->depreciation->name }}}
                 ({{{ $license->depreciation->months }}}
                 @lang('admin/hardware/form.months')
                 )</div>
@@ -76,8 +79,14 @@
              </div>
         @endif
 
+
 <br><br><br>
 </div>
+
+@if ($license->serial)
+<div class="col-md-12"><strong>@lang('admin/licenses/form.serial'): </strong>
+{{{ wordwrap($license->serial, 10, "\n", true) }}} </div>
+@endif
 
 
 
@@ -105,7 +114,7 @@
                                     @if ($licensedto->asset_id)
                                         @if ($licensedto->asset->assigned_to != 0)
                                             <a href="{{ route('view/user', $licensedto->asset->assigned_to) }}">
-                                                {{ $licensedto->asset->assigneduser->fullName() }}
+                                                {{{ $licensedto->asset->assigneduser->fullName() }}}
                                             </a>
                                         @endif
                                     @endif
@@ -115,7 +124,7 @@
                                 <td>
                                 @if ($licensedto->asset_id)
                                     <a href="{{ route('view/hardware', $licensedto->asset_id) }}">
-                                    {{ $licensedto->asset->name }} {{ $licensedto->asset->asset_tag }}
+                                    {{{ $licensedto->asset->name }}} {{{ $licensedto->asset->asset_tag }}}
                                 </a>
                                 @endif
                                 </td>
@@ -155,7 +164,8 @@
                         <tr>
                             <td>{{ $log->added_on }}</td>
                             <td>
-                                @if (isset($log->user_id)) {{ $log->adminlog->fullName() }}
+                                @if (isset($log->user_id))
+                                {{{ $log->adminlog->fullName() }}}
                                 @endif
                             </td>
                             <td>{{ $log->action_type }}</td>
@@ -163,22 +173,22 @@
                             <td>
                                 @if ($log->userlog)
                                 <a href="{{ route('view/user', $log->checkedout_to) }}">
-                                {{ $log->userlog->fullName() }}
+                                {{{ $log->userlog->fullName() }}}
                                 </a>
                                 @endif
 
                             </td>
                             <td>
-                                @if ($log->note) {{ $log->note }}
+                                @if ($log->note) {{{ $log->note }}}
                                 @endif
                             </td>
                         </tr>
                         @endforeach
                         @endif
                         <tr>
-                            <td>{{ $license->created_at }}</td>
+                            <td>{{{ $license->created_at }}}</td>
                             <td>
-                            @if ($license->adminuser) {{ $license->adminuser->fullName() }}
+                            @if ($license->adminuser) {{{ $license->adminuser->fullName() }}}
                             @else
                             @lang('general.unknown_admin')
                             @endif
@@ -187,7 +197,7 @@
                             <td></td>
                             <td>
                             @if ($license->notes)
-                            {{ $license->notes }}
+                            {{{ $license->notes }}}
                             @endif
                             </td>
                         </tr>
@@ -200,30 +210,33 @@
         <h6><br>@lang('general.moreinfo'):</h6>
                 <ul>
                     @if ($license->purchase_order)
-                    <li>@lang('admin/licenses/form.purchase_order'): {{ $license->purchase_order }} </li>
+                    <li>@lang('admin/licenses/form.purchase_order'):
+                    {{{ $license->purchase_order }}} </li>
                     @endif
                     @if ($license->purchase_date > 0)
-                    <li>@lang('admin/licenses/form.date'): {{ $license->purchase_date }} </li>
+                    <li>@lang('admin/licenses/form.date'):
+                    {{{ $license->purchase_date }}} </li>
                     @endif
                     @if ($license->purchase_cost > 0)
                     <li>@lang('admin/licenses/form.cost'):
                     @lang('general.currency')
-                    {{ number_format($license->purchase_cost,2) }} </li>
+                    {{{ number_format($license->purchase_cost,2) }}} </li>
                     @endif
                     @if ($license->order_number)
                     <li>@lang('admin/licenses/form.order'):
-                    {{ $license->order_number }} </li>
+                    {{{ $license->order_number }}} </li>
                     @endif
                     @if (($license->seats) && ($license->seats) > 0)
                     <li>@lang('admin/licenses/form.seats'):
-                    {{ $license->seats }} </li>
+                    {{{ $license->seats }}} </li>
                     @endif
                     @if ($license->depreciation)
                     <li>@lang('admin/licenses/form.depreciation'):
-                    {{ $license->depreciation->name }} ({{ $license->depreciation->months }} months)</li>
+                    {{{ $license->depreciation->name }}}
+                    ({{{ $license->depreciation->months }}} months)</li>
                     @endif
                     @if ($license->notes)
-                        <li>{{ $license->notes }}</li>
+                        <li>{{{ $license->notes }}}</li>
                     @endif
                 </ul>
         </div>
