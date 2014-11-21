@@ -94,7 +94,14 @@ class AssetsController extends AdminController
     {
 
         // Grab the dropdown list of models
-        $model_list = array('' => '') + Model::orderBy('name', 'asc')->lists('name', 'id');
+        //$model_list = array('' => 'Select a Model') + Model::orderBy('name', 'asc')->lists('name'.' '. 'modelno', 'id');
+
+        $model_list = array('' => 'Select a Model') + DB::table('models')
+        ->select(DB::raw('concat(name," / ",modelno) as name, id'))->orderBy('name', 'asc')
+        ->orderBy('modelno', 'asc')
+        ->lists('name', 'id');
+
+
         $supplier_list = array('' => '') + Supplier::orderBy('name', 'asc')->lists('name', 'id');
         $assigned_to = array('' => 'Select a User') + DB::table('users')->select(DB::raw('concat (first_name," ",last_name) as full_name, id'))->whereNull('deleted_at')->lists('full_name', 'id');
         $location_list = array('' => '') + Location::orderBy('name', 'asc')->lists('name', 'id');
