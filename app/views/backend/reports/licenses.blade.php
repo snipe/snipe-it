@@ -40,7 +40,7 @@
         @foreach ($licenses as $license)
         <tr>
             <td>{{{ $license->name }}}</td>
-            <td>{{{ $license->serial }}}</td>
+            <td>{{{ mb_strimwidth($license->serial, 0, 50, "...") }}}</td>
             <td>{{ $license->seats }}</td>
             <td>{{ $license->remaincount() }}</td>
             <td>{{ $license->expiration_date }}</td>
