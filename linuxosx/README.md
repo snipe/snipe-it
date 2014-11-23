@@ -64,26 +64,20 @@ Update the file `app/config/production/app.php` with your URL settings.
 
     'url' => 'http://www.yourserver.com',
 
-You should also change your secret key here. If you prefer to have your key randomly generated, run the artisan key:generate command from the application root.
+You should also change your secret key here. If you prefer to have your key randomly generated, run the artisan key:generate command from the application root, __after__ step 4 below.
 
-	php artisan key:generate --env=production
-
-__after__ step 4 below.
-
-If you opt to manually enter a key in `app.php`, __be sure it is exactly 32 characters__, or you will encounter an error when trying to load the app.
+If you opt to manually enter a key in `app.php`, __be sure it is exactly 32 characters__, or you will encounter an mcrypt_encrypt() error when trying to load the app.
 
 -----
 
-### 2) Install the Dependencies via Composer
-##### 2.1) If you don't have composer installed globally
+### 2) Install  Dependencies into Snipe-IT application root using Composer 
+##### 2.1) If you don't have composer installed
 
-	cd <install-dir>
 	curl -sS https://getcomposer.org/installer | php
 	php composer.phar install
 
-##### 2.2) For global composer installations
+##### 2.2) If composer installed globally:
 
-	cd <install-dir>
 	composer install
 
 -----
@@ -105,10 +99,15 @@ You'll need to make sure that the `app/storage` directory is writable by your we
 	chmod -R 755 app/storage
 	chmod -R 755 public/uploads
 
-If you still run into a permissions error, you may need to increase the permissions to 775, or twiddle your user/group permissions on your server.
+If you still run into a permissions error, you may need to increase the permissions to 775, or twiddle your user/group permissions on your server. For CentOS (or other *NIX with SELinux enabled) you will need to issue the following command:
+
+	setsebool -P httpd_unified 1
 
 Note: It should go without saying, but make sure the Snipe-IT project directory is not owned by `root`. Your webserver should be running as your webserver's user (often `apache`, `nobody`, or `www-data`). But never, ever `root`. Ever.
 
+If you still need to set the application key in app.php, you may now use artisan:
+
+	php artisan key:generate --env=production
 
 -----
 
