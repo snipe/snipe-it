@@ -110,31 +110,35 @@
                             <tr>
                                 <td>Seat {{ $count }} </td>
                                 <td>
-
-                                    @if ($licensedto->asset_id)
+                                    @if (($licensedto->assigned_to) && ($licensedto->deleted_at == NULL))
+                                        <a href="{{ route('view/user', $licensedto->assigned_to) }}">
+                                    {{{ $licensedto->user->fullName() }}}
+                                    </a>
+                                    @elseif (($licensedto->assigned_to) && ($licensedto->deleted_at != NULL))
+                                        <del>{{{ $licensedto->user->fullName() }}}</del>
+                                    @elseif ($licensedto->asset_id)
                                         @if ($licensedto->asset->assigned_to != 0)
                                             <a href="{{ route('view/user', $licensedto->asset->assigned_to) }}">
                                                 {{{ $licensedto->asset->assigneduser->fullName() }}}
                                             </a>
                                         @endif
                                     @endif
-
-
                                 </td>
                                 <td>
-                                @if ($licensedto->asset_id)
-                                    <a href="{{ route('view/hardware', $licensedto->asset_id) }}">
-                                    {{{ $licensedto->asset->name }}} {{{ $licensedto->asset->asset_tag }}}
-                                </a>
-                                @endif
+                                    @if ($licensedto->asset_id)
+                                        <a href="{{ route('view/hardware', $licensedto->asset_id) }}">
+                                        {{{ $licensedto->asset->name }}} {{{ $licensedto->asset->asset_tag }}}
+                                    </a>
+                                    @endif
                                 </td>
                                 <td>
-
-                                @if ($licensedto->asset_id)
-                                    <a href="{{ route('checkin/license', $licensedto->id) }}" class="btn-flat info"> @lang('general.checkin') </a>
-                                @else
-                                    <a href="{{ route('checkout/license', $licensedto->id) }}" class="btn-flat success">@lang('general.checkout')</a>
-                                @endif
+                                    @if (($licensedto->assigned_to) || ($licensedto->asset_id))
+                                        <a href="{{ route('checkin/license', $licensedto->id) }}" class="btn btn-primary">
+                                        @lang('general.checkin')</a>
+                                    @else
+                                        <a href="{{ route('checkout/license', $licensedto->id) }}" class="btn btn-info">
+                                        @lang('general.checkout')</a>
+                                    @endif
                                 </td>
 
                             </tr>
