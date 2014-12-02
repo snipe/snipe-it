@@ -16,3 +16,4 @@ public/uploads/avatars/*
 /app/storage/logs/*
 /app/storage/debugbar/
 /bin/
+.idea
