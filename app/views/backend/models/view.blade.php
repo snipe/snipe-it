@@ -20,6 +20,7 @@
             <ul class="dropdown-menu">
                     <li><a href="{{ route('update/model', $model->id) }}">@lang('admin/models/table.edit')</a></li>
                     <li><a href="{{ route('clone/model', $model->id) }}">@lang('admin/models/table.clone')</a></li>
+                    <li><a href="{{ route('create/model', $model->id) }}">@lang('admin/models/table.create')</a></li>
             </ul>
         </div>
         <h3>
