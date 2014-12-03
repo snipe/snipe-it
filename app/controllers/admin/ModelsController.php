@@ -31,12 +31,13 @@ class ModelsController extends AdminController
         return View::make('backend/models/index', compact('models'));
     }
 
-/**
-     * Model create.
+    /**
+     * Model Create
      *
+     * @param null $model_id
      * @return View
      */
-    public function getCreate()
+    public function getCreate($model_id = null)
     {
         // Show the page
         $depreciation_list = array('' => 'Do Not Depreciate') + Depreciation::lists('name', 'id');
@@ -46,7 +47,12 @@ class ModelsController extends AdminController
         $view->with('category_list',$category_list);
         $view->with('depreciation_list',$depreciation_list);
         $view->with('manufacturer_list',$manufacturer_list);
-        $view->with('model',new Model);
+        if (!is_null($model_id)) {
+            $model = Model::find($model_id);
+        } else {
+            $model = new Model;
+        }
+        $view->with('model', $model);
         return $view;
     }
 

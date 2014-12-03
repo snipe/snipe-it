@@ -48,7 +48,7 @@ Route::group(array('prefix' => 'hardware', 'before' => 'admin-auth'), function (
 # Asset Model Management
     Route::group(array('prefix' => 'models', 'before' => 'admin-auth'), function () {
         Route::get('/', array('as' => 'models', 'uses' => 'Controllers\Admin\ModelsController@getIndex'));
-        Route::get('create', array('as' => 'create/model', 'uses' => 'Controllers\Admin\ModelsController@getCreate'));
+        Route::get('create/{model?}', array('as' => 'create/model', 'uses' => 'Controllers\Admin\ModelsController@getCreate'));
         Route::post('create', 'Controllers\Admin\ModelsController@postCreate');
         Route::get('{modelId}/edit', array('as' => 'update/model', 'uses' => 'Controllers\Admin\ModelsController@getEdit'));
         Route::post('{modelId}/edit', 'Controllers\Admin\ModelsController@postEdit');
