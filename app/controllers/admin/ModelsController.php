@@ -32,6 +32,8 @@ class ModelsController extends AdminController
     }
 
     /**
+     * Model Create
+     *
      * @param null $model_id
      * @return View
      */
