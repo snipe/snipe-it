@@ -88,9 +88,11 @@ class AssetsController extends AdminController
     /**
      * Asset create.
      *
+     * @param null $model_id
+     *
      * @return View
      */
-    public function getCreate()
+    public function getCreate($model_id = null)
     {
 
         // Grab the dropdown list of models
@@ -110,10 +112,20 @@ class AssetsController extends AdminController
         // Grab the dropdown list of status
         $statuslabel_list = array('' => Lang::get('general.pending')) + array('0' => Lang::get('general.ready_to_deploy')) + Statuslabel::orderBy('name', 'asc')->lists('name', 'id');
 
+        $view = View::make('backend/hardware/edit');
+        $view->with('supplier_list',$supplier_list);
+        $view->with('model_list',$model_list);
+        $view->with('statuslabel_list',$statuslabel_list);
+        $view->with('assigned_to',$assigned_to);
+        $view->with('location_list',$location_list);
+        $view->with('asset',new Asset);
 
+        if (!is_null($model_id)) {
+            $selected_model = Model::find($model_id);
+            $view->with('selected_model',$selected_model);
+        }
 
-        return View::make('backend/hardware/edit')->with('supplier_list',$supplier_list)->with('model_list',$model_list)->with('statuslabel_list',$statuslabel_list)->with('assigned_to',$assigned_to)->with('location_list',$location_list)->with('asset',new Asset);
-
+        return $view;
     }
 
     /**

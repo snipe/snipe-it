@@ -80,7 +80,11 @@
                  <i class='icon-asterisk'></i></label>
                  </label>
                 <div class="col-md-7">
-                    {{ Form::select('model_id', $model_list , Input::old('model_id', $asset->model_id), array('class'=>'select2', 'style'=>'min-width:400px')) }}
+                    @if (isset($selected_model))
+                        {{ Form::select('model_id', $model_list , $selected_model->id, array('class'=>'select2', 'style'=>'min-width:400px')) }}
+                    @else
+                        {{ Form::select('model_id', $model_list , Input::old('model_id', $asset->model_id), array('class'=>'select2', 'style'=>'min-width:400px')) }}
+                    @endif
                     {{ $errors->first('model_id', '<span class="alert-msg"><i class="icon-remove-sign"></i> :message</span>') }}
                 </div>
             </div>

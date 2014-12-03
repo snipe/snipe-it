@@ -18,7 +18,7 @@ Route::group(array('prefix' => 'hardware', 'before' => 'admin-auth'), function (
     	'uses' => 'Controllers\Admin\AssetsController@getIndex')
     );
 
-    Route::get('create', array(
+    Route::get('create/{model?}', array(
     	'as' => 'create/hardware',
     	'uses' => 'Controllers\Admin\AssetsController@getCreate')
     );
