@@ -215,7 +215,7 @@
                 <tr>
                     <td>{{ $asset->created_at }}</td>
                     <td>
-                    @if ($asset->adminuser->id) {{{ $asset->adminuser->fullName() }}}
+                    @if (isset($asset->adminuser->id)) {{{ $asset->adminuser->fullName() }}}
                     @else
                     @lang('general.unknown_admin')
                     @endif
