@@ -152,6 +152,25 @@
                     </div>
             </div>
 
+            <!-- Maintained -->
+            <div class="form-group {{ $errors->has('maintained') ? ' has-error' : '' }}">
+                <label for="maintained" class="col-md-3 control-label">@lang('admin/licenses/form.maintained')</label>
+                <div class="col-md-7">
+                    {{ Form::select('maintained', $maintained_list , Input::old('maintained', $license->maintained), array('class'=>'select2', 'style'=>'min-width:350px')) }}
+                    {{ $errors->first('maintained', '<span class="alert-msg"><i class="icon-remove-sign"></i> :message</span>') }}
+                </div>
+            </div>
+
+            <!-- Purchase Date -->
+            <div class="form-group {{ $errors->has('termination_date') ? ' has-error' : '' }}">
+                <label for="termination_date" class="col-md-3 control-label">@lang('admin/licenses/form.termination_date')</label>
+                <div class="input-group col-md-2">
+                    <input type="date" class="datepicker form-control" data-date-format="yyyy-mm-dd" placeholder="Select Date" name="termination_date" id="termination_date" value="{{ Input::old('termination_date', $license->termination_date) }}">
+                    <span class="input-group-addon"><i class="icon-calendar"></i></span>
+                    {{ $errors->first('termination_date', '<span class="alert-msg"><i class="icon-remove-sign"></i> :message</span>') }}
+                </div>
+            </div>
+
             <!-- Notes -->
             <div class="form-group {{ $errors->has('notes') ? ' has-error' : '' }}">
                 <label for="notes" class="col-md-3 control-label">@lang('admin/licenses/form.notes')</label>
