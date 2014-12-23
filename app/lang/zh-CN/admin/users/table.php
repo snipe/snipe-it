@@ -25,8 +25,8 @@ return array(
     'phone'  				=> '电话',
     'title' 				=> '职位',
     'updateuser' 			=> '更新用户',
-    'username' 				=> 'Username',
-    'username_note' 		=> '(This is used for Active Directory binding only, not for login.)',
+    'username' 				=> '用户名',
+    'username_note' 		=> '（这个是用来活动目录「Active Directory」的绑定，非用来登录）',
     'cloneuser'                         => '克隆用户',
     'viewusers' 			=> '查看用户',
 );

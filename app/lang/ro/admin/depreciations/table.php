@@ -4,7 +4,7 @@ return array(
 
     'id'      => 'ID',
     'months'   => 'Luni',
-    'term'   => 'Term',
+    'term'   => 'Perioada',
     'title'      => 'Nume ',
 
 );

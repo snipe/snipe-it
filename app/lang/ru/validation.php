@@ -13,10 +13,10 @@ return array(
     |
     */
 
-    "accepted"         => "The :attribute must be accepted.",
-    "active_url"       => "The :attribute is not a valid URL.",
-    "after"            => "The :attribute must be a date after :date.",
-    "alpha"            => "The :attribute may only contain letters.",
+    "accepted"         => ":attribute должен быть принят.",
+    "active_url"       => ":attribute некорректный URL.",
+    "after"            => "The :attribute должен быть после :date.",
+    "alpha"            => ":attribute может содержать только символы.",
     "alpha_dash"       => "The :attribute may only contain letters, numbers, and dashes.",
     "alpha_num"        => "The :attribute may only contain letters and numbers.",
     "before"           => "The :attribute must be a date before :date.",

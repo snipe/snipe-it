@@ -3,8 +3,8 @@
 return array(
 
     'id'      => 'ID',
-    'months'   => 'Months',
-    'term'   => 'Term',
+    'months'   => 'Monate',
+    'term'   => 'Laufzeit',
     'title'      => 'Name ',
 
 );

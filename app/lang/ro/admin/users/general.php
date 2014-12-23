@@ -3,12 +3,12 @@
 
 return array(
 
-    'assets_user'  		=> 'Assets assigned to :name',
+    'assets_user'  		=> 'Activul desemnat catre :name',
     'clone'  			=> 'Cloneaza utilizator',
     'contact_user'  	=> 'Contact :name',
     'edit'  			=> 'Editeaza utilizator',
-    'history_user'  	=> 'History for :name',
-    'last_login'  		=> 'Last Login',
-    'software_user'  	=> 'Software Checked out to :name',
-    'view_user'  		=> 'View User :name',
+    'history_user'  	=> 'Istoric pentru :name',
+    'last_login'  		=> 'Ultima logare',
+    'software_user'  	=> 'Software predat catre :name',
+    'view_user'  		=> 'Vezi utilizator :name',
     );

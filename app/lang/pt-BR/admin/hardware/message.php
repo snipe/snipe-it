@@ -4,7 +4,7 @@ return array(
 
     'undeployable' 		=> '<strong>Aviso:</strong> Este bem foi marcado como atualmente não implementável.                        Se este status mudou, por favor, atualize o status do bem.',
     'does_not_exist' 	=> 'O bem não existe.',
-    'assoc_users'	 	=> 'This asset is currently checked out to a user and cannot be deleted. Please check the asset in first, and then try deleting again. ',
+    'assoc_users'	 	=> 'Este bem está no momento associado com pelo menos um usuário e não pode ser deletado. Por favor, atualize seu bem para que não referencie mais este usuário e tente novamente. ',
 
     'create' => array(
         'error'   		=> 'O bem não foi criado, por favor, tente novamente. :(',

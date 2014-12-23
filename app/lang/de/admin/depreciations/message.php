@@ -2,24 +2,24 @@
 
 return array(
 
-    'does_not_exist' => 'Depreciation class does not exist.',
-    'assoc_users'	 => 'This depreciation is currently associated with one or more models and cannot be deleted. Please delete the models, and then try deleting again. ',
+    'does_not_exist' => 'Die Abschreibungsklasse existiert nicht.',
+    'assoc_users'	 => 'Diese Abschreibung ist derzeit einem oder mehreren Modellen zugeordnet und kann nicht gelöscht werden. Bitte löschen Sie erst die Modelle und versuchen es dann erneut. ',
 
 
     'create' => array(
-        'error'   => 'Depreciation class was not created, please try again. :(',
-        'success' => 'Depreciation class created successfully. :)'
+        'error'   => 'Abschreibungsklasse wurde nicht erstellt, bitte versuchen Sie es erneut. :(',
+        'success' => 'Abschreibungsklasse wurde erfolgreich erstellt. :)'
     ),
 
     'update' => array(
-        'error'   => 'Depreciation class was not updated, please try again',
-        'success' => 'Depreciation class updated successfully.'
+        'error'   => 'Abschreibungsklasse wurde nicht aktualisiert, bitte versuchen Sie es erneut',
+        'success' => 'Abschreibungsklasse wurde erfolgreich aktualisiert.'
     ),
 
     'delete' => array(
-        'confirm'   => 'Are you sure you wish to delete this depreciation class?',
-        'error'   => 'There was an issue deleting the depreciation class. Please try again.',
-        'success' => 'The depreciation class was deleted successfully.'
+        'confirm'   => 'Sind Sie sicher, dass Sie diese Abschreibungsklasse löschen wollen?',
+        'error'   => 'Beim Löschen der Abschreibungsklasse ist ein Problem aufgetreten. Bitte versuchen Sie es erneut.',
+        'success' => 'Die Abschreibungsklasse wurde erfolgreich gelöscht.'
     )
 
 );

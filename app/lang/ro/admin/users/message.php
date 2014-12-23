@@ -7,7 +7,7 @@ return array(
     'user_login_required'      	=> 'Campul de login este necesar',
     'user_password_required'   	=> 'Este necesara parola.',
     'insufficient_permissions' 	=> 'Nu aveti permisiuni suficiente.',
-    'user_deleted_warning' 		=> 'This user has been deleted. You will have to restore this user to edit them or assign them new assets.',
+    'user_deleted_warning' 		=> 'Acest utilizator a fost sters. Trebuie sa restaurati utilizator ca sa-l editati sau sa-i desemnati active noi.',
 
 
     'success' => array(
