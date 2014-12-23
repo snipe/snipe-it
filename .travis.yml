@@ -17,7 +17,7 @@ before_script:
   - curl -s http://getcomposer.org/installer | php
   - cp app/config/production/database.example.php app/config/database.php
   - cp app/config/production/mail.example.php app/config/mail.php
-  - composer install --prefer-source --no-interaction --dev
+  - composer install --prefer-source --no-interaction --no-dev
   - php artisan key:generate
   - php artisan migrate:install
   - php artisan migrate --package cartalyst/sentry
