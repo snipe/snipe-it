@@ -53,7 +53,13 @@ class LicensesController extends AdminController
         // Show the page
         $depreciation_list = array('0' => Lang::get('admin/licenses/form.no_depreciation')) + Depreciation::lists('name', 'id');
         $supplier_list = array('' => 'Select Supplier') + Supplier::orderBy('name', 'asc')->lists('name', 'id');
-        return View::make('backend/licenses/edit')->with('license_options',$license_options)->with('depreciation_list',$depreciation_list)->with('supplier_list',$supplier_list)->with('license',new License);
+        $maintained_list = array('' => 'Maintained', '1' => 'Yes', '0' => 'No');
+        return View::make('backend/licenses/edit')
+            ->with('license_options',$license_options)
+            ->with('depreciation_list',$depreciation_list)
+            ->with('supplier_list',$supplier_list)
+            ->with('maintained_list',$maintained_list)
+            ->with('license',new License);
     }
 
 
@@ -170,7 +176,12 @@ class LicensesController extends AdminController
         $license_options = array('' => 'Top Level') + DB::table('assets')->where('id', '!=', $licenseId)->lists('name', 'id');
         $depreciation_list = array('0' => Lang::get('admin/licenses/form.no_depreciation')) + Depreciation::lists('name', 'id');
         $supplier_list = array('' => 'Select Supplier') + Supplier::orderBy('name', 'asc')->lists('name', 'id');
-        return View::make('backend/licenses/edit', compact('license'))->with('license_options',$license_options)->with('depreciation_list',$depreciation_list)->with('supplier_list',$supplier_list);
+        $maintained_list = array('' => 'Maintained', '1' => 'Yes', '0' => 'No');
+        return View::make('backend/licenses/edit', compact('license'))
+            ->with('license_options',$license_options)
+            ->with('depreciation_list',$depreciation_list)
+            ->with('supplier_list',$supplier_list)
+            ->with('maintained_list',$maintained_list);
     }
 
 
@@ -206,6 +217,7 @@ class LicensesController extends AdminController
             $license->order_number      = e(Input::get('order_number'));
             $license->depreciation_id   = e(Input::get('depreciation_id'));
             $license->purchase_order    = e(Input::get('purchase_order'));
+            $license->maintained        = e(Input::get('maintained'));
 
             if ( e(Input::get('supplier_id')) == '') {
                 $license->supplier_id = NULL;
@@ -224,6 +236,13 @@ class LicensesController extends AdminController
                 $license->expiration_date = NULL;
             } else {
                 $license->expiration_date = e(Input::get('expiration_date'));
+            }
+
+            // Update the asset data
+            if ( e(Input::get('termination_date')) == '') {
+                $license->termination_date =  NULL;
+            } else {
+                $license->termination_date = e(Input::get('termination_date'));
             }
 
             if ( e(Input::get('purchase_cost')) == '') {
