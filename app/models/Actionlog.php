@@ -40,8 +40,4 @@ class Actionlog extends Eloquent
             return false;
         }
     }
-
-
-
-
 }

@@ -13,5 +13,4 @@ class Statuslabel extends Elegant
     {
         return $this->hasMany('Asset', 'status_id')->count();
     }
-
 }

@@ -17,12 +17,10 @@ class License extends Elegant
 
     /**
      * Get the assigned user
-     *
      */
     public function assignedusers()
     {
         return $this->belongsToMany('User','license_seats','assigned_to','license_id');
-
     }
 
     /**
@@ -62,12 +60,10 @@ class License extends Elegant
                     ->where('assigned_to', '=', '0')
                     ->whereNull('deleted_at','and')
                     ->count();
-
     }
 
     /**
      * Get the number of available seats
-     *
      */
     public function availcount()
     {
@@ -103,7 +99,6 @@ class License extends Elegant
 
     /**
      * Get the total number of seats
-     *
      */
     public function totalcount()
     {
@@ -115,7 +110,6 @@ class License extends Elegant
 
     /**
      * Get license seat data
-     *
      */
     public function licenseseats()
     {
@@ -129,38 +123,31 @@ class License extends Elegant
 
     /**
      * Get depreciation class
-     *
      */
     public function depreciation()
     {
         return $this->belongsTo('Depreciation','depreciation_id');
     }
 
-
      public function months_until_depreciated()
     {
+        $today = date("Y-m-d");
 
-            $today = date("Y-m-d");
+        // @link http://www.php.net/manual/en/class.datetime.php
+        $d1 = new DateTime($today);
+        $d2 = new DateTime($this->depreciated_date());
 
-            // @link http://www.php.net/manual/en/class.datetime.php
-            $d1 = new DateTime($today);
-            $d2 = new DateTime($this->depreciated_date());
-
-            // @link http://www.php.net/manual/en/class.dateinterval.php
-            $interval = $d1->diff($d2);
-            return $interval;
-
+        // @link http://www.php.net/manual/en/class.dateinterval.php
+        $interval = $d1->diff($d2);
+        return $interval;
     }
-
 
      public function depreciated_date()
     {
-            $date = date_create($this->purchase_date);
-            date_add($date, date_interval_create_from_date_string($this->depreciation->months.' months'));
-            return date_format($date, 'Y-m-d');
+        $date = date_create($this->purchase_date);
+        date_add($date, date_interval_create_from_date_string($this->depreciation->months . ' months'));
+        return date_format($date, 'Y-m-d');
     }
-
-
 
     /**
     * Handle depreciation
@@ -191,8 +178,5 @@ class License extends Elegant
         } else {
             return $this->purchase_cost;
         }
-
     }
-
-
 }

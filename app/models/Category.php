@@ -13,7 +13,6 @@ class Category extends Elegant
         'name'   => 'required|alpha_space|min:3|max:255|unique:categories,name,{id}',
     );
 
-
     public function has_models()
     {
         return $this->hasMany('Model', 'category_id')->count();
@@ -22,9 +21,5 @@ class Category extends Elegant
     public function models()
     {
         return $this->hasMany('Model', 'category_id');
-
     }
-
-
-
 }

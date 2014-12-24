@@ -41,12 +41,10 @@ class User extends SentryUserModel
         return $this->hasMany('Asset', 'assigned_to')->withTrashed();
     }
 
-
     public function licenses()
     {
         return $this->belongsToMany('License', 'license_seats', 'assigned_to', 'license_id')->withTrashed()->withPivot('id');
     }
-
 
     /**
     * Get action logs for this user
@@ -56,7 +54,6 @@ class User extends SentryUserModel
         return $this->hasMany('Actionlog','checkedout_to')->withTrashed();
     }
 
-
     /**
     * Get the asset's location based on the assigned user
     **/
@@ -64,7 +61,6 @@ class User extends SentryUserModel
     {
         return $this->belongsTo('Location','location_id')->withTrashed();
     }
-
 
     /**
     * Get the user's manager based on the assigned user
@@ -85,7 +81,5 @@ class User extends SentryUserModel
         } else {
             return '';
         }
-
     }
-
 }
