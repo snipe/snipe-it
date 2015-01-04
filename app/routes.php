@@ -9,53 +9,53 @@
 |
 */
 
-Route::group(array('prefix' => 'hardware', 'before' => 'admin-auth'), function () {
+Route::group(array('prefix' => 'hardware', 'namespace' => 'Controllers\Admin', 'before' => 'admin-auth'), function () {
 
 
 
     Route::get('/', array(
     	'as' => 'hardware',
-    	'uses' => 'Controllers\Admin\AssetsController@getIndex')
+    	'uses' => 'AssetsController@getIndex')
     );
 
     Route::get('create/{model?}', array(
     	'as' => 'create/hardware',
-    	'uses' => 'Controllers\Admin\AssetsController@getCreate')
+    	'uses' => 'AssetsController@getCreate')
     );
 
     Route::post('create', array(
     	'as' => 'savenew/hardware',
-    	'uses' => 'Controllers\Admin\AssetsController@postCreate')
+    	'uses' => 'AssetsController@postCreate')
     );
 
     Route::get('{assetId}/edit', array(
     	'as' => 'update/hardware',
-    	'uses' => 'Controllers\Admin\AssetsController@getEdit')
+    	'uses' => 'AssetsController@getEdit')
     );
 
-    Route::post('{assetId}/edit', 'Controllers\Admin\AssetsController@postEdit');
-    Route::get('{assetId}/clone', array('as' => 'clone/hardware', 'uses' => 'Controllers\Admin\AssetsController@getClone'));
-    Route::post('{assetId}/clone', 'Controllers\Admin\AssetsController@postCreate');
-    Route::get('{assetId}/delete', array('as' => 'delete/hardware', 'uses' => 'Controllers\Admin\AssetsController@getDelete'));
-    Route::get('{assetId}/checkout', array('as' => 'checkout/hardware', 'uses' => 'Controllers\Admin\AssetsController@getCheckout'));
-    Route::post('{assetId}/checkout', 'Controllers\Admin\AssetsController@postCheckout');
-    Route::get('{assetId}/checkin', array('as' => 'checkin/hardware', 'uses' => 'Controllers\Admin\AssetsController@getCheckin'));
-    Route::post('{assetId}/checkin', 'Controllers\Admin\AssetsController@postCheckin');
-    Route::get('{assetId}/view', array('as' => 'view/hardware', 'uses' => 'Controllers\Admin\AssetsController@getView'));
-    Route::get('{assetId}/qr_code', array('as' => 'qr_code/hardware', 'uses' => 'Controllers\Admin\AssetsController@getQrCode'));
+    Route::post('{assetId}/edit', 'AssetsController@postEdit');
+    Route::get('{assetId}/clone', array('as' => 'clone/hardware', 'uses' => 'AssetsController@getClone'));
+    Route::post('{assetId}/clone', 'AssetsController@postCreate');
+    Route::get('{assetId}/delete', array('as' => 'delete/hardware', 'uses' => 'AssetsController@getDelete'));
+    Route::get('{assetId}/checkout', array('as' => 'checkout/hardware', 'uses' => 'AssetsController@getCheckout'));
+    Route::post('{assetId}/checkout', 'AssetsController@postCheckout');
+    Route::get('{assetId}/checkin', array('as' => 'checkin/hardware', 'uses' => 'AssetsController@getCheckin'));
+    Route::post('{assetId}/checkin', 'AssetsController@postCheckin');
+    Route::get('{assetId}/view', array('as' => 'view/hardware', 'uses' => 'AssetsController@getView'));
+    Route::get('{assetId}/qr_code', array('as' => 'qr_code/hardware', 'uses' => 'AssetsController@getQrCode'));
 
 
 # Asset Model Management
     Route::group(array('prefix' => 'models', 'before' => 'admin-auth'), function () {
-        Route::get('/', array('as' => 'models', 'uses' => 'Controllers\Admin\ModelsController@getIndex'));
-        Route::get('create', array('as' => 'create/model', 'uses' => 'Controllers\Admin\ModelsController@getCreate'));
-        Route::post('create', 'Controllers\Admin\ModelsController@postCreate');
-        Route::get('{modelId}/edit', array('as' => 'update/model', 'uses' => 'Controllers\Admin\ModelsController@getEdit'));
-        Route::post('{modelId}/edit', 'Controllers\Admin\ModelsController@postEdit');
-        Route::get('{modelId}/clone', array('as' => 'clone/model', 'uses' => 'Controllers\Admin\ModelsController@getClone'));
-        Route::post('{modelId}/clone', 'Controllers\Admin\ModelsController@postCreate');
-        Route::get('{modelId}/delete', array('as' => 'delete/model', 'uses' => 'Controllers\Admin\ModelsController@getDelete'));
-        Route::get('{modelId}/view', array('as' => 'view/model', 'uses' => 'Controllers\Admin\ModelsController@getView'));
+        Route::get('/', array('as' => 'models', 'uses' => 'ModelsController@getIndex'));
+        Route::get('create', array('as' => 'create/model', 'uses' => 'ModelsController@getCreate'));
+        Route::post('create', 'ModelsController@postCreate');
+        Route::get('{modelId}/edit', array('as' => 'update/model', 'uses' => 'ModelsController@getEdit'));
+        Route::post('{modelId}/edit', 'ModelsController@postEdit');
+        Route::get('{modelId}/clone', array('as' => 'clone/model', 'uses' => 'ModelsController@getClone'));
+        Route::post('{modelId}/clone', 'ModelsController@postCreate');
+        Route::get('{modelId}/delete', array('as' => 'delete/model', 'uses' => 'ModelsController@getDelete'));
+        Route::get('{modelId}/view', array('as' => 'view/model', 'uses' => 'ModelsController@getView'));
     });
 
 
@@ -71,24 +71,24 @@ Route::group(array('prefix' => 'hardware', 'before' => 'admin-auth'), function (
 |
 */
 
-Route::group(array('prefix' => 'admin', 'before' => 'admin-auth'), function () {
+Route::group(array('prefix' => 'admin', 'before' => 'admin-auth', 'namespace' => 'Controllers\Admin'), function () {
 
 
     # Licenses
     Route::group(array('prefix' => 'licenses'), function () {
-        Route::get('/', array('as' => 'licenses', 'uses' => 'Controllers\Admin\LicensesController@getIndex'));
-        Route::get('create', array('as' => 'create/licenses', 'uses' => 'Controllers\Admin\LicensesController@getCreate'));
-        Route::post('create', 'Controllers\Admin\LicensesController@postCreate');
-        Route::get('{licenseId}/edit', array('as' => 'update/license', 'uses' => 'Controllers\Admin\LicensesController@getEdit'));
-        Route::post('{licenseId}/edit', 'Controllers\Admin\LicensesController@postEdit');
-        Route::get('{licenseId}/clone', array('as' => 'clone/license', 'uses' => 'Controllers\Admin\LicensesController@getClone'));
-        Route::post('{licenseId}/clone', 'Controllers\Admin\LicensesController@postCreate');
-        Route::get('{licenseId}/delete', array('as' => 'delete/license', 'uses' => 'Controllers\Admin\LicensesController@getDelete'));
-        Route::get('{licenseId}/checkout', array('as' => 'checkout/license', 'uses' => 'Controllers\Admin\LicensesController@getCheckout'));
-        Route::post('{licenseId}/checkout', 'Controllers\Admin\LicensesController@postCheckout');
-        Route::get('{licenseId}/checkin', array('as' => 'checkin/license', 'uses' => 'Controllers\Admin\LicensesController@getCheckin'));
-        Route::post('{licenseId}/checkin', 'Controllers\Admin\LicensesController@postCheckin');
-        Route::get('{licenseId}/view', array('as' => 'view/license', 'uses' => 'Controllers\Admin\LicensesController@getView'));
+        Route::get('/', array('as' => 'licenses', 'uses' => 'LicensesController@getIndex'));
+        Route::get('create', array('as' => 'create/licenses', 'uses' => 'LicensesController@getCreate'));
+        Route::post('create', 'LicensesController@postCreate');
+        Route::get('{licenseId}/edit', array('as' => 'update/license', 'uses' => 'LicensesController@getEdit'));
+        Route::post('{licenseId}/edit', 'LicensesController@postEdit');
+        Route::get('{licenseId}/clone', array('as' => 'clone/license', 'uses' => 'LicensesController@getClone'));
+        Route::post('{licenseId}/clone', 'LicensesController@postCreate');
+        Route::get('{licenseId}/delete', array('as' => 'delete/license', 'uses' => 'LicensesController@getDelete'));
+        Route::get('{licenseId}/checkout', array('as' => 'checkout/license', 'uses' => 'LicensesController@getCheckout'));
+        Route::post('{licenseId}/checkout', 'LicensesController@postCheckout');
+        Route::get('{licenseId}/checkin', array('as' => 'checkin/license', 'uses' => 'LicensesController@getCheckin'));
+        Route::post('{licenseId}/checkin', 'LicensesController@postCheckin');
+        Route::get('{licenseId}/view', array('as' => 'view/license', 'uses' => 'LicensesController@getView'));
     });
 
 
@@ -97,70 +97,70 @@ Route::group(array('prefix' => 'admin', 'before' => 'admin-auth'), function () {
 
         # Settings
         Route::group(array('prefix' => 'app'), function () {
-            Route::get('/', array('as' => 'app', 'uses' => 'Controllers\Admin\SettingsController@getIndex'));
-            Route::get('edit', array('as' => 'edit/settings', 'uses' => 'Controllers\Admin\SettingsController@getEdit'));
-            Route::post('edit', 'Controllers\Admin\SettingsController@postEdit');
+            Route::get('/', array('as' => 'app', 'uses' => 'SettingsController@getIndex'));
+            Route::get('edit', array('as' => 'edit/settings', 'uses' => 'SettingsController@getEdit'));
+            Route::post('edit', 'SettingsController@postEdit');
         });
 
         # Manufacturers
         Route::group(array('prefix' => 'manufacturers'), function () {
-            Route::get('/', array('as' => 'manufacturers', 'uses' => 'Controllers\Admin\ManufacturersController@getIndex'));
-            Route::get('create', array('as' => 'create/manufacturer', 'uses' => 'Controllers\Admin\ManufacturersController@getCreate'));
-            Route::post('create', 'Controllers\Admin\ManufacturersController@postCreate');
-            Route::get('{manufacturerId}/edit', array('as' => 'update/manufacturer', 'uses' => 'Controllers\Admin\ManufacturersController@getEdit'));
-            Route::post('{manufacturerId}/edit', 'Controllers\Admin\ManufacturersController@postEdit');
-            Route::get('{manufacturerId}/delete', array('as' => 'delete/manufacturer', 'uses' => 'Controllers\Admin\ManufacturersController@getDelete'));
+            Route::get('/', array('as' => 'manufacturers', 'uses' => 'ManufacturersController@getIndex'));
+            Route::get('create', array('as' => 'create/manufacturer', 'uses' => 'ManufacturersController@getCreate'));
+            Route::post('create', 'ManufacturersController@postCreate');
+            Route::get('{manufacturerId}/edit', array('as' => 'update/manufacturer', 'uses' => 'ManufacturersController@getEdit'));
+            Route::post('{manufacturerId}/edit', 'ManufacturersController@postEdit');
+            Route::get('{manufacturerId}/delete', array('as' => 'delete/manufacturer', 'uses' => 'ManufacturersController@getDelete'));
         });
 
         # Suppliers
         Route::group(array('prefix' => 'suppliers'), function () {
-            Route::get('/', array('as' => 'suppliers', 'uses' => 'Controllers\Admin\SuppliersController@getIndex'));
-            Route::get('create', array('as' => 'create/supplier', 'uses' => 'Controllers\Admin\SuppliersController@getCreate'));
-            Route::post('create', 'Controllers\Admin\SuppliersController@postCreate');
-            Route::get('{supplierId}/edit', array('as' => 'update/supplier', 'uses' => 'Controllers\Admin\SuppliersController@getEdit'));
-            Route::post('{supplierId}/edit', 'Controllers\Admin\SuppliersController@postEdit');
-            Route::get('{supplierId}/delete', array('as' => 'delete/supplier', 'uses' => 'Controllers\Admin\SuppliersController@getDelete'));
-            Route::get('{supplierId}/view', array('as' => 'view/supplier', 'uses' => 'Controllers\Admin\SuppliersController@getView'));
+            Route::get('/', array('as' => 'suppliers', 'uses' => 'SuppliersController@getIndex'));
+            Route::get('create', array('as' => 'create/supplier', 'uses' => 'SuppliersController@getCreate'));
+            Route::post('create', 'SuppliersController@postCreate');
+            Route::get('{supplierId}/edit', array('as' => 'update/supplier', 'uses' => 'SuppliersController@getEdit'));
+            Route::post('{supplierId}/edit', 'SuppliersController@postEdit');
+            Route::get('{supplierId}/delete', array('as' => 'delete/supplier', 'uses' => 'SuppliersController@getDelete'));
+            Route::get('{supplierId}/view', array('as' => 'view/supplier', 'uses' => 'SuppliersController@getView'));
         });
 
         # Categories
         Route::group(array('prefix' => 'categories'), function () {
-            Route::get('/', array('as' => 'categories', 'uses' => 'Controllers\Admin\CategoriesController@getIndex'));
-            Route::get('create', array('as' => 'create/category', 'uses' => 'Controllers\Admin\CategoriesController@getCreate'));
-            Route::post('create', 'Controllers\Admin\CategoriesController@postCreate');
-            Route::get('{categoryId}/edit', array('as' => 'update/category', 'uses' => 'Controllers\Admin\CategoriesController@getEdit'));
-            Route::post('{categoryId}/edit', 'Controllers\Admin\CategoriesController@postEdit');
-            Route::get('{categoryId}/delete', array('as' => 'delete/category', 'uses' => 'Controllers\Admin\CategoriesController@getDelete'));
+            Route::get('/', array('as' => 'categories', 'uses' => 'CategoriesController@getIndex'));
+            Route::get('create', array('as' => 'create/category', 'uses' => 'CategoriesController@getCreate'));
+            Route::post('create', 'CategoriesController@postCreate');
+            Route::get('{categoryId}/edit', array('as' => 'update/category', 'uses' => 'CategoriesController@getEdit'));
+            Route::post('{categoryId}/edit', 'CategoriesController@postEdit');
+            Route::get('{categoryId}/delete', array('as' => 'delete/category', 'uses' => 'CategoriesController@getDelete'));
         });
 
         # Depreciations
         Route::group(array('prefix' => 'depreciations'), function () {
-            Route::get('/', array('as' => 'depreciations', 'uses' => 'Controllers\Admin\DepreciationsController@getIndex'));
-            Route::get('create', array('as' => 'create/depreciations', 'uses' => 'Controllers\Admin\DepreciationsController@getCreate'));
-            Route::post('create', 'Controllers\Admin\DepreciationsController@postCreate');
-            Route::get('{depreciationId}/edit', array('as' => 'update/depreciations', 'uses' => 'Controllers\Admin\DepreciationsController@getEdit'));
-            Route::post('{depreciationId}/edit', 'Controllers\Admin\DepreciationsController@postEdit');
-            Route::get('{depreciationId}/delete', array('as' => 'delete/depreciations', 'uses' => 'Controllers\Admin\DepreciationsController@getDelete'));
+            Route::get('/', array('as' => 'depreciations', 'uses' => 'DepreciationsController@getIndex'));
+            Route::get('create', array('as' => 'create/depreciations', 'uses' => 'DepreciationsController@getCreate'));
+            Route::post('create', 'DepreciationsController@postCreate');
+            Route::get('{depreciationId}/edit', array('as' => 'update/depreciations', 'uses' => 'DepreciationsController@getEdit'));
+            Route::post('{depreciationId}/edit', 'DepreciationsController@postEdit');
+            Route::get('{depreciationId}/delete', array('as' => 'delete/depreciations', 'uses' => 'DepreciationsController@getDelete'));
         });
 
         # Locations
         Route::group(array('prefix' => 'locations'), function () {
-            Route::get('/', array('as' => 'locations', 'uses' => 'Controllers\Admin\LocationsController@getIndex'));
-            Route::get('create', array('as' => 'create/location', 'uses' => 'Controllers\Admin\LocationsController@getCreate'));
-            Route::post('create', 'Controllers\Admin\LocationsController@postCreate');
-            Route::get('{locationId}/edit', array('as' => 'update/location', 'uses' => 'Controllers\Admin\LocationsController@getEdit'));
-            Route::post('{locationId}/edit', 'Controllers\Admin\LocationsController@postEdit');
-            Route::get('{locationId}/delete', array('as' => 'delete/location', 'uses' => 'Controllers\Admin\LocationsController@getDelete'));
+            Route::get('/', array('as' => 'locations', 'uses' => 'LocationsController@getIndex'));
+            Route::get('create', array('as' => 'create/location', 'uses' => 'LocationsController@getCreate'));
+            Route::post('create', 'LocationsController@postCreate');
+            Route::get('{locationId}/edit', array('as' => 'update/location', 'uses' => 'LocationsController@getEdit'));
+            Route::post('{locationId}/edit', 'LocationsController@postEdit');
+            Route::get('{locationId}/delete', array('as' => 'delete/location', 'uses' => 'LocationsController@getDelete'));
         });
 
         # Status Labels
         Route::group(array('prefix' => 'statuslabels'), function () {
-            Route::get('/', array('as' => 'statuslabels', 'uses' => 'Controllers\Admin\StatuslabelsController@getIndex'));
-            Route::get('create', array('as' => 'create/statuslabel', 'uses' => 'Controllers\Admin\StatuslabelsController@getCreate'));
-            Route::post('create', 'Controllers\Admin\StatuslabelsController@postCreate');
-            Route::get('{statuslabelId}/edit', array('as' => 'update/statuslabel', 'uses' => 'Controllers\Admin\StatuslabelsController@getEdit'));
-            Route::post('{statuslabelId}/edit', 'Controllers\Admin\StatuslabelsController@postEdit');
-            Route::get('{statuslabelId}/delete', array('as' => 'delete/statuslabel', 'uses' => 'Controllers\Admin\StatuslabelsController@getDelete'));
+            Route::get('/', array('as' => 'statuslabels', 'uses' => 'StatuslabelsController@getIndex'));
+            Route::get('create', array('as' => 'create/statuslabel', 'uses' => 'StatuslabelsController@getCreate'));
+            Route::post('create', 'StatuslabelsController@postCreate');
+            Route::get('{statuslabelId}/edit', array('as' => 'update/statuslabel', 'uses' => 'StatuslabelsController@getEdit'));
+            Route::post('{statuslabelId}/edit', 'StatuslabelsController@postEdit');
+            Route::get('{statuslabelId}/delete', array('as' => 'delete/statuslabel', 'uses' => 'StatuslabelsController@getDelete'));
         });
 
 
@@ -170,35 +170,35 @@ Route::group(array('prefix' => 'admin', 'before' => 'admin-auth'), function () {
 
     # User Management
     Route::group(array('prefix' => 'users'), function () {
-        Route::get('/', array('as' => 'users', 'uses' => 'Controllers\Admin\UsersController@getIndex'));
-        Route::get('create', array('as' => 'create/user', 'uses' => 'Controllers\Admin\UsersController@getCreate'));
-        Route::post('create', 'Controllers\Admin\UsersController@postCreate');
-        Route::get('{userId}/edit', array('as' => 'update/user', 'uses' => 'Controllers\Admin\UsersController@getEdit'));
-        Route::post('{userId}/edit', 'Controllers\Admin\UsersController@postEdit');
-        Route::get('{userId}/clone', array('as' => 'clone/user', 'uses' => 'Controllers\Admin\UsersController@getClone'));
-        Route::post('{userId}/clone', 'Controllers\Admin\UsersController@postCreate');
-        Route::get('{userId}/delete', array('as' => 'delete/user', 'uses' => 'Controllers\Admin\UsersController@getDelete'));
-        Route::get('{userId}/restore', array('as' => 'restore/user', 'uses' => 'Controllers\Admin\UsersController@getRestore'));
-        Route::get('{userId}/view', array('as' => 'view/user', 'uses' => 'Controllers\Admin\UsersController@getView'));
-        Route::get('{userId}/unsuspend', array('as' => 'unsuspend/user', 'uses' => 'Controllers\Admin\UsersController@getUnsuspend'));
+        Route::get('/', array('as' => 'users', 'uses' => 'UsersController@getIndex'));
+        Route::get('create', array('as' => 'create/user', 'uses' => 'UsersController@getCreate'));
+        Route::post('create', 'UsersController@postCreate');
+        Route::get('{userId}/edit', array('as' => 'update/user', 'uses' => 'UsersController@getEdit'));
+        Route::post('{userId}/edit', 'UsersController@postEdit');
+        Route::get('{userId}/clone', array('as' => 'clone/user', 'uses' => 'UsersController@getClone'));
+        Route::post('{userId}/clone', 'UsersController@postCreate');
+        Route::get('{userId}/delete', array('as' => 'delete/user', 'uses' => 'UsersController@getDelete'));
+        Route::get('{userId}/restore', array('as' => 'restore/user', 'uses' => 'UsersController@getRestore'));
+        Route::get('{userId}/view', array('as' => 'view/user', 'uses' => 'UsersController@getView'));
+        Route::get('{userId}/unsuspend', array('as' => 'unsuspend/user', 'uses' => 'UsersController@getUnsuspend'));
 
 
-        Route::get('datatable', array('as'=>'api.users', 'uses'=>'Controllers\Admin\UsersController@getDatatable'));
+        Route::get('datatable', array('as' => 'api.users', 'uses' => 'UsersController@getDatatable'));
     });
 
     # Group Management
     Route::group(array('prefix' => 'groups'), function () {
-        Route::get('/', array('as' => 'groups', 'uses' => 'Controllers\Admin\GroupsController@getIndex'));
-        Route::get('create', array('as' => 'create/group', 'uses' => 'Controllers\Admin\GroupsController@getCreate'));
-        Route::post('create', 'Controllers\Admin\GroupsController@postCreate');
-        Route::get('{groupId}/edit', array('as' => 'update/group', 'uses' => 'Controllers\Admin\GroupsController@getEdit'));
-        Route::post('{groupId}/edit', 'Controllers\Admin\GroupsController@postEdit');
-        Route::get('{groupId}/delete', array('as' => 'delete/group', 'uses' => 'Controllers\Admin\GroupsController@getDelete'));
-        Route::get('{groupId}/restore', array('as' => 'restore/group', 'uses' => 'Controllers\Admin\GroupsController@getRestore'));
+        Route::get('/', array('as' => 'groups', 'uses' => 'GroupsController@getIndex'));
+        Route::get('create', array('as' => 'create/group', 'uses' => 'GroupsController@getCreate'));
+        Route::post('create', 'GroupsController@postCreate');
+        Route::get('{groupId}/edit', array('as' => 'update/group', 'uses' => 'GroupsController@getEdit'));
+        Route::post('{groupId}/edit', 'GroupsController@postEdit');
+        Route::get('{groupId}/delete', array('as' => 'delete/group', 'uses' => 'GroupsController@getDelete'));
+        Route::get('{groupId}/restore', array('as' => 'restore/group', 'uses' => 'GroupsController@getRestore'));
     });
 
     # Dashboard
-    Route::get('/', array('as' => 'admin', 'uses' => 'Controllers\Admin\DashboardController@getIndex'));
+    Route::get('/', array('as' => 'admin', 'uses' => 'DashboardController@getIndex'));
 
 });
 
@@ -246,25 +246,25 @@ Route::group(array('prefix' => 'auth'), function () {
 |
 */
 
-Route::group(array('prefix' => 'account', 'before' => 'auth'), function () {
+Route::group(array('prefix' => 'account', 'before' => 'auth', 'namespace' => 'Controllers\Account'), function () {
 
     # Account Dashboard
-    Route::get('/', array('as' => 'account', 'uses' => 'Controllers\Account\DashboardController@getIndex'));
+    Route::get('/', array('as' => 'account', 'uses' => 'DashboardController@getIndex'));
 
     # Profile
-    Route::get('profile', array('as' => 'profile', 'uses' => 'Controllers\Account\ProfileController@getIndex'));
-    Route::post('profile', 'Controllers\Account\ProfileController@postIndex');
+    Route::get('profile', array('as' => 'profile', 'uses' => 'ProfileController@getIndex'));
+    Route::post('profile', 'ProfileController@postIndex');
 
     # Change Password
-    Route::get('change-password', array('as' => 'change-password', 'uses' => 'Controllers\Account\ChangePasswordController@getIndex'));
-    Route::post('change-password', 'Controllers\Account\ChangePasswordController@postIndex');
+    Route::get('change-password', array('as' => 'change-password', 'uses' => 'ChangePasswordController@getIndex'));
+    Route::post('change-password', 'ChangePasswordController@postIndex');
 
      # View Assets
-    Route::get('view-assets', array('as' => 'view-assets', 'uses' => 'Controllers\Account\ViewAssetsController@getIndex'));
+    Route::get('view-assets', array('as' => 'view-assets', 'uses' => 'ViewAssetsController@getIndex'));
 
     # Change Email
-    Route::get('change-email', array('as' => 'change-email', 'uses' => 'Controllers\Account\ChangeEmailController@getIndex'));
-    Route::post('change-email', 'Controllers\Account\ChangeEmailController@postIndex');
+    Route::get('change-email', array('as' => 'change-email', 'uses' => 'ChangeEmailController@getIndex'));
+    Route::post('change-email', 'ChangeEmailController@postIndex');
 
 });
 
@@ -279,14 +279,18 @@ Route::group(array('prefix' => 'account', 'before' => 'auth'), function () {
 |
 */
 
-Route::get('reports/depreciation', array('as' => 'reports/depreciation', 'before' => 'reporting-auth', 'uses' => 'Controllers\Admin\ReportsController@getDeprecationReport'));
-Route::get('reports/export/depreciation', array('as' => 'reports/export/depreciation', 'before' => 'reporting-auth', 'uses' => 'Controllers\Admin\ReportsController@exportDeprecationReport'));
-Route::get('reports/licenses', array('as' => 'reports/licenses', 'before' => 'reporting-auth', 'uses' => 'Controllers\Admin\ReportsController@getLicenseReport'));
-Route::get('reports/export/licenses', array('as' => 'reports/export/licenses', 'before' => 'reporting-auth', 'uses' => 'Controllers\Admin\ReportsController@exportLicenseReport'));
-Route::get('reports/assets', array('as' => 'reports/assets', 'before' => 'reporting-auth', 'uses' => 'Controllers\Admin\ReportsController@getAssetsReport'));
-Route::get('reports/export/assets', array('as' => 'reports/export/assets', 'before' => 'reporting-auth', 'uses' => 'Controllers\Admin\ReportsController@exportAssetReport'));
-Route::get('reports/custom', array('as' => 'reports/custom', 'before' => 'reporting-auth', 'uses' => 'Controllers\Admin\ReportsController@getCustomReport'));
-Route::post('reports/custom', 'Controllers\Admin\ReportsController@postCustom');
+Route::group(array('before' => 'reporting-auth', 'namespace' => 'Controllers\Admin'), function () {
+
+    Route::get('reports/depreciation', array('as' => 'reports/depreciation', 'uses' => 'ReportsController@getDeprecationReport'));
+    Route::get('reports/export/depreciation', array('as' => 'reports/export/depreciation', 'uses' => 'ReportsController@exportDeprecationReport'));
+    Route::get('reports/licenses', array('as' => 'reports/licenses', 'uses' => 'ReportsController@getLicenseReport'));
+    Route::get('reports/export/licenses', array('as' => 'reports/export/licenses', 'uses' => 'ReportsController@exportLicenseReport'));
+    Route::get('reports/assets', array('as' => 'reports/assets', 'uses' => 'ReportsController@getAssetsReport'));
+    Route::get('reports/export/assets', array('as' => 'reports/export/assets', 'uses' => 'ReportsController@exportAssetReport'));
+
+    Route::get('reports/custom', array('as' => 'reports/custom', 'uses' => 'ReportsController@getCustomReport'));
+    Route::post('reports/custom', 'ReportsController@postCustom');
+});
 
 
 // Redirect requests to / to the hardware section until we get a fancy dashboard set up
