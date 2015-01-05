@@ -18,5 +18,4 @@ class Location extends Elegant
     {
         return $this->hasMany('User', 'location_id')->count();
     }
-
 }

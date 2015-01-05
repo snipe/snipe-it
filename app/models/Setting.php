@@ -10,7 +10,6 @@ class Setting extends Elegant
             $static_cache = Setting::find(1);
         }
         return $static_cache;
-
     }
 
     public function lar_ver()
@@ -18,5 +17,4 @@ class Setting extends Elegant
     	$app = App::getFacadeApplication();
         return $app::VERSION;
     }
-
 }

@@ -20,5 +20,4 @@ class LicenseSeat extends Elegant
     {
         return $this->belongsTo('Asset','asset_id')->withTrashed();
     }
-
 }
