@@ -25,8 +25,8 @@ return array(
     'phone'  				=> 'Puhelin',
     'title' 				=> 'Titteli',
     'updateuser' 			=> 'Päivitä Käyttäjä',
-    'username' 				=> 'Username',
-    'username_note' 		=> '(This is used for Active Directory binding only, not for login.)',
+    'username' 				=> 'Käyttäjätunnus',
+    'username_note' 		=> '(Tätä käytetään vain Active Directory synkronointiin, ei kirjautumista varten.)',
     'cloneuser'                         => 'Monista Käyttäjä',
     'viewusers' 			=> 'Näytä Käyttäjät',
 );

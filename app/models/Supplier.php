@@ -17,7 +17,6 @@ class Supplier extends Elegant
         'email'             => 'email|min:5|max:150',
         'zip'                       => 'alpha_space|min:0|max:10',
         'url'               => 'alpha_space|min:3|max:250',
-        
     );
 
     public function assets()
@@ -47,5 +46,4 @@ class Supplier extends Elegant
         }
     return $url;
     }
-
 }

@@ -2,30 +2,30 @@
 
 return array(
 
-    'user_exists'              	=> 'User already exists!',
-    'user_not_found'           	=> 'User [:id] does not exist.',
-    'user_login_required'      	=> 'The login field is required',
-    'user_password_required'   	=> 'The password is required.',
-    'insufficient_permissions' 	=> 'Insufficient Permissions.',
-    'user_deleted_warning' 		=> 'This user has been deleted. You will have to restore this user to edit them or assign them new assets.',
+    'user_exists'              	=> 'Пользователь уже существует!',
+    'user_not_found'           	=> 'Пользователь [:id] не существует.',
+    'user_login_required'      	=> 'Поле "Логин" является обязательным',
+    'user_password_required'   	=> 'Поле "Пароль" является обязательным.',
+    'insufficient_permissions' 	=> 'Недостаточно прав.',
+    'user_deleted_warning' 		=> 'Этот пользователь был удален. Вы должны его восстановить чтобы иметь возможность его редактировать или привязывать новые активы.',
 
 
     'success' => array(
-        'create'    => 'User was successfully created.',
-        'update'    => 'User was successfully updated.',
-        'delete'    => 'User was successfully deleted.',
-        'ban'       => 'User was successfully banned.',
-        'unban'     => 'User was successfully unbanned.',
-        'suspend'   => 'User was successfully suspended.',
-        'unsuspend' => 'User was successfully unsuspended.',
-        'restored'  => 'User was successfully restored.'
+        'create'    => 'Пользователь успешно создан.',
+        'update'    => 'Пользователь успешно изменен.',
+        'delete'    => 'Пользователь успешно удален.',
+        'ban'       => 'Пользователь успешно заблокирован.',
+        'unban'     => 'Пользователь успешно разблокирован.',
+        'suspend'   => 'Пользователь успешно заморожен.',
+        'unsuspend' => 'Пользователь успешно разморожен.',
+        'restored'  => 'Пользователь успешно восстановлен.'
     ),
 
     'error' => array(
-        'create' => 'There was an issue creating the user. Please try again.',
-        'update' => 'There was an issue updating the user. Please try again.',
-        'delete' => 'There was an issue deleting the user. Please try again.',
-        'unsuspend' => 'There was an issue unsuspending the user. Please try again.'
+        'create' => 'При создании пользователя возникла проблема. Пожалуйста попробуйте снова.',
+        'update' => 'При изменении пользователя возникла проблема. Пожалуйста попробуйте снова.',
+        'delete' => 'При удалении пользователя возникла проблема. Пожалуйста попробуйте снова.',
+        'unsuspend' => 'При разморозке пользователя возникла проблема. Пожалуйста попробуйте снова.'
     ),
 
 );

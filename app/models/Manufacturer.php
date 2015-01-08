@@ -14,5 +14,4 @@ class Manufacturer extends Elegant
     {
         return $this->hasMany('Model', 'manufacturer_id')->count();
     }
-
 }

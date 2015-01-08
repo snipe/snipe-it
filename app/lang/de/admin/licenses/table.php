@@ -2,16 +2,16 @@
 
 return array(
 
-    'assigned_to'   	=> 'Assigned To',
-    'checkout'   		=> 'In/Out',
+    'assigned_to'   	=> 'Zugewiesen an',
+    'checkout'   		=> 'Zurücknehmen/Herausgeben',
     'id'      			=> 'ID',
     'license_email'   	=> 'License Email',
     'license_name'   	=> 'Licensed To',
-    'purchase_date'   	=> 'Purchase Date',
-    'purchased'   		=> 'Purchased',
-    'seats'   			=> 'Seats',
+    'purchase_date'   	=> 'Kaufdatum',
+    'purchased'   		=> 'Gekauft',
+    'seats'   			=> 'Anzahl Aktivierungen',
     'hardware'   		=> 'Hardware',
-    'serial'   			=> 'Serial',
+    'serial'   			=> 'Seriennummer',
     'title'      		=> 'Name der Asset-Kategorie',
 
 );

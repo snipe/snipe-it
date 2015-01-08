@@ -76,7 +76,7 @@
             <div class="form-group {{ $errors->has('note') ? 'error' : '' }}">
                 <label for="note" class="col-md-2 control-label">@lang('admin/hardware/form.notes')</label>
                 <div class="col-md-7">
-                    <input class="col-md-6 form-control" type="text" name="note" id="note" value="{{ Input::old('note', $licenseseat->note) }}" />
+                    <textarea class="col-md-6 form-control" id="note" name="note">{{{ Input::old('note', $licenseseat->note) }}}</textarea>
                     {{ $errors->first('note', '<span class="alert-msg"><i class="icon-remove-sign"></i> :message</span>') }}
                 </div>
             </div>

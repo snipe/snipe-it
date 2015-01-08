@@ -13,12 +13,12 @@ return array(
     |
     */
 
-    "password" => "Passwords must be six characters and match the confirmation.",
+    "password" => "Parolele trebuie sa fie de cel putin 6 caractere si sa fie la fel ca si confirmarea.",
 
-    "user"     => "Username or email address is incorrect",
+    "user"     => "Utilizator sau e-mail gresit",
 
-    "token"    => "This password reset token is invalid.",
+    "token"    => "Acest token este invalid.",
 
-    "sent" => "If a matching email address was found, a password reminder has been sent!",
+    "sent" => "Daca s-a gasit adresa de e-mail, atunci veti primi un reminder la parola!",
 
 );

@@ -2,15 +2,15 @@
 
 return array(
 
-    'checkin'  					=> 'Checkin License Seat',
-    'checkout_history'  		=> 'Checkout History',
-    'checkout'  				=> 'Checkout License Seat',
+    'checkin'  					=> 'Lizenzaktivierung zurücknehmen',
+    'checkout_history'  		=> 'Zuweisungsverlauf',
+    'checkout'  				=> 'Lizenzaktivierung herausgeben',
     'edit'  					=> 'Edit User',
     'clone'  					=> 'Clone User',
-    'history_for'  				=> 'History for ',
-    'in_out'  					=> 'In/Out',
-    'info'  					=> 'License Info',
-    'license_seats'  			=> 'License Seats',
+    'history_for'  				=> 'Verlauf für ',
+    'in_out'  					=> 'Zurücknehmen/Herausgeben',
+    'info'  					=> 'Lizenzinfo',
+    'license_seats'  			=> 'Lizenzaktivierungen',
     'seat'  					=> 'Seat',
     'seats'  					=> 'Seats',
     'software_licenses'  		=> 'Software Lizenzen',

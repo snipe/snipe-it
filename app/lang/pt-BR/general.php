@@ -5,7 +5,7 @@ return array(
     'address'				=> 'Endereço',
     'admin'					=> 'Administrador',
     'all_assets'			=> 'Todos os Bens',
-    'all'       			=> 'All',
+    'all'       			=> 'Todos',
     'asset_models'			=> 'Modelos de Bens',
     'asset'					=> 'Bem',
     'asset_report'          => 'Relatório de Bens',
@@ -51,7 +51,7 @@ return array(
     'license_report'        => 'Relatório da Licença',
     'licenses_available'	=> 'licenças disponíveis',
     'licenses'				=> 'Licenças',
-    'list_all'				=> 'List All',
+    'list_all'				=> 'Listar Todos',
     'location'              => 'Local',
     'locations'				=> 'Locais',
     'logout'				=> 'Sair',
@@ -89,6 +89,6 @@ return array(
     'welcome'				=> 'Bem-vindo, :name',
     'years'					=> 'anos',
     'yes' 					=> 'Sim',
-    'zip'  					=> 'Zip',
+    'zip'  					=> 'Cep',
 
 );

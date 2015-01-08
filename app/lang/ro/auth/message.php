@@ -2,35 +2,35 @@
 
 return array(
 
-    'account_already_exists' => 'An account with the this email already exists.',
-    'account_not_found'      => 'The email account or password is incorrect.',
-    'account_not_activated'  => 'This user account is not activated.',
-    'account_suspended'      => 'This user account is suspended.',
-    'account_banned'         => 'This user account is banned.',
+    'account_already_exists' => 'Exista deja un cont cu aceasta adresa de e-mail.',
+    'account_not_found'      => 'E-mail sau parola incorecta.',
+    'account_not_activated'  => 'Acest utilizator nu a fost activat.',
+    'account_suspended'      => 'Acest utilizator este suspendat.',
+    'account_banned'         => 'Acest utilizator este banat.',
 
     'signin' => array(
-        'error'   => 'There was a problem while trying to log you in, please try again.',
-        'success' => 'You have successfully logged in.',
+        'error'   => 'A aparut o problema la logare, va rugam incercati iar.',
+        'success' => 'V-ati logat cu succes.',
     ),
 
     'signup' => array(
-        'error'   => 'There was a problem while trying to create your account, please try again.',
-        'success' => 'Account sucessfully created.',
+        'error'   => 'A aparut o problema in timp ce incercam sa va creem contul, incercati iar.',
+        'success' => 'Cont creat.',
     ),
 
         'forgot-password' => array(
-            'error'   => 'There was a problem while trying to get a reset password code, please try again.',
-            'success' => 'Password recovery email successfully sent.',
+            'error'   => 'A aparut o problema in timp ce se crea un cod de resetare parola, va rugam incercati iar.',
+            'success' => 'S-a trimis un e-mail de recuperare parola.',
         ),
 
         'forgot-password-confirm' => array(
-            'error'   => 'There was a problem while trying to reset your password, please try again.',
-            'success' => 'Your password has been successfully reset.',
+            'error'   => 'A aparut o problema in timp ce incercam sa resetam parola, incercati iar.',
+            'success' => 'Parola a fost schimbata.',
         ),
 
     'activate' => array(
-        'error'   => 'There was a problem while trying to activate your account, please try again.',
-        'success' => 'Your account has been successfully activated.',
+        'error'   => 'A aparut o problema in timp ce incercam sa va activam contul, incercati iar.',
+        'success' => 'Contul a fost creat.',
     ),
 
 );

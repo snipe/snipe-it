@@ -2,10 +2,10 @@
 
 return array(
     'asset'  					=> 'Asset',
-    'checkin'  					=> 'Checkin Asset',
+    'checkin'  					=> 'Asset zurücknehmen',
     'checkout'  				=> 'Asset an Benutzer herausgeben',
     'clone'  					=> 'Asset duplizieren',
     'edit'  					=> 'Asset editieren',
-    'pending'  					=> 'Pending Asset',
+    'pending'  					=> 'Unerledigter Asset',
     'view'  					=> 'Asset ansehen',
 );

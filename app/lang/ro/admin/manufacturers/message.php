@@ -17,7 +17,7 @@ return array(
 
     'delete' => array(
         'confirm'   => 'Sunteti sigur ca vreti sa stergeti producatorul?',
-        'error'   => 'There was an issue deleting the manufacturer. Please try again.',
+        'error'   => 'A aparut o problema la stergerea producatorului. Va rugam incercati iar.',
         'success' => 'Producatorul a fost sters.'
     )
 

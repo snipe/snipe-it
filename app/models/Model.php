@@ -12,7 +12,6 @@ class Model extends Elegant
         'manufacturer_id'   => 'required|integer',
         'eol'   => 'required|integer:min:0|max:240',
         'user_id' => 'integer',
-        
     );
 
     public function assets()
@@ -39,5 +38,4 @@ class Model extends Elegant
     {
         return $this->belongsTo('Manufacturer','manufacturer_id');
     }
-
 }
