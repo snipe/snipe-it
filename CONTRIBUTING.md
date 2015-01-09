@@ -18,5 +18,3 @@ We use Waffle.io to help better communicate our roadmap with users. Our [project
 If you're not a coder but want to give back to the project and you're fluent in other languages, that's okay too. We use [CrowdIn](https://crowdin.com) to manage translations, and it makes it super-simple for you to add translations (or validate proposed translations) to the project without messing with code. __Check out [the Snipe-IT CrowdIn translation project here](https://crowdin.com/project/snipe-it/)__.
 
 Thanks!
-
-Thanks!
