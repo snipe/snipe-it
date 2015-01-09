@@ -3,7 +3,7 @@
 return array(
 
     'id'      => 'ID',
-    'parent'   => 'Parent',
-    'title'      => 'Asset Category Name',
+    'parent'   => 'Bovenliggend',
+    'title'      => 'Materiaal Categorie Naam',
 
 );

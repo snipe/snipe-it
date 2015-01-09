@@ -2,29 +2,29 @@
 
 return array(
 
-    'user_exists'              	=> 'User already exists!',
-    'user_not_found'           	=> 'User [:id] does not exist.',
-    'user_login_required'      	=> 'The login field is required',
-    'user_password_required'   	=> 'The password is required.',
-    'insufficient_permissions' 	=> 'Insufficient Permissions.',
-    'user_deleted_warning' 		=> 'This user has been deleted. You will have to restore this user to edit them or assign them new assets.',
+    'user_exists'              	=> 'Benutzer existiert bereits!',
+    'user_not_found'           	=> 'Benutzer [:id] existiert nicht.',
+    'user_login_required'      	=> 'Das Loginfeld ist erforderlich',
+    'user_password_required'   	=> 'Das Passswortfeld ist erforderlich.',
+    'insufficient_permissions' 	=> 'Unzureichende Berechtigungen.',
+    'user_deleted_warning' 		=> 'Dieser Benutzer wurde gelöscht. Sie müssen ihn wiederherstellen, um ihn zu bearbeiten oder neue Assets zuzuweisen.',
 
 
     'success' => array(
-        'create'    => 'User was successfully created.',
-        'update'    => 'User was successfully updated.',
-        'delete'    => 'User was successfully deleted.',
-        'ban'       => 'User was successfully banned.',
-        'unban'     => 'User was successfully unbanned.',
+        'create'    => 'Benutzer wurde erfolgreich erstellt.',
+        'update'    => 'Benutzer wurde erfolgreich bearbeitet.',
+        'delete'    => 'Benutzer wurde erfolgreich gelöscht.',
+        'ban'       => 'Benutzer wurde erfolgreich ausgeschlossen.',
+        'unban'     => 'Benutzer wurde erfolgreich wieder eingeschlossen.',
         'suspend'   => 'User was successfully suspended.',
         'unsuspend' => 'User was successfully unsuspended.',
-        'restored'  => 'User was successfully restored.'
+        'restored'  => 'Benutzer wurde erfolgreich wiederhergestellt.'
     ),
 
     'error' => array(
-        'create' => 'There was an issue creating the user. Please try again.',
-        'update' => 'There was an issue updating the user. Please try again.',
-        'delete' => 'There was an issue deleting the user. Please try again.',
+        'create' => 'Beim Erstellen des Benutzers ist ein Fehler aufgetreten. Bitte probieren Sie es noch einmal.',
+        'update' => 'Beim Aktualisieren des Benutzers ist ein Fehler aufgetreten. Bitte probieren Sie es noch einmal.',
+        'delete' => 'Beim Entfernen des Benutzers ist ein Fehler aufgetreten. Bitte versuchen Sie es erneut.',
         'unsuspend' => 'There was an issue unsuspending the user. Please try again.'
     ),
 

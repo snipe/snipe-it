@@ -13,12 +13,12 @@ return array(
     |
     */
 
-    "password" => "Passwords must be six characters and match the confirmation.",
+    "password" => "Paswoorden moeten 6 karakters lang zijn en gelijk zijn in beide paswoordvelden.",
 
-    "user"     => "Username or email address is incorrect",
+    "user"     => "Gebruikersnaam of e-mailadres is niet correct",
 
-    "token"    => "This password reset token is invalid.",
+    "token"    => "De token voor paswoordherstel is niet correct.",
 
-    "sent" => "If a matching email address was found, a password reminder has been sent!",
+    "sent" => "Indien het e-mailadres bestaat, werd een paswoordhint verstuurd",
 
 );

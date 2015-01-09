@@ -1,12 +1,12 @@
 <?php
 
 return array(
-    'about_asset_depreciations'  			=> 'About Asset Depreciations',
-    'about_depreciations'  					=> 'You can set up asset depreciations to depreciate assets based on straight-line depreciation.',
-    'asset_depreciations'  					=> 'Asset Depreciations',
-    'create_depreciation'  					=> 'Create Depreciation',
-    'depreciation_name'  					=> 'Depreciation Name',
-    'number_of_months'  					=> 'Number of Months',
-    'update_depreciation'  					=> 'Update Depreciation',
+    'about_asset_depreciations'  			=> 'Over afschrijving van materiaal',
+    'about_depreciations'  					=> 'U kan de materiaalafschrijving instellen om materiaal af te schrijven op basis van lineaire afschrijving.',
+    'asset_depreciations'  					=> 'Materiaalafschrijvingen',
+    'create_depreciation'  					=> 'Maak afschrijving',
+    'depreciation_name'  					=> 'Afschrijvingsnaam',
+    'number_of_months'  					=> 'Aantal maanden',
+    'update_depreciation'  					=> 'Afschrijving aanpassen',
 
 );

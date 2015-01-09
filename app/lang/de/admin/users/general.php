@@ -3,12 +3,12 @@
 
 return array(
 
-    'assets_user'  		=> 'Assets assigned to :name',
-    'clone'  			=> 'Clone User',
-    'contact_user'  	=> 'Contact :name',
-    'edit'  			=> 'Edit User',
-    'history_user'  	=> 'History for :name',
-    'last_login'  		=> 'Last Login',
-    'software_user'  	=> 'Software Checked out to :name',
-    'view_user'  		=> 'View User :name',
+    'assets_user'  		=> 'Assets zugewiesen an :name',
+    'clone'  			=> 'Benutzer kopieren',
+    'contact_user'  	=> 'Kontakt :name',
+    'edit'  			=> 'Benutzer bearbeiten',
+    'history_user'  	=> 'Historie von :name',
+    'last_login'  		=> 'Letzte Anmeldung',
+    'software_user'  	=> 'Software herausgegeben an :name',
+    'view_user'  		=> 'Benutze :name ansehen',
     );
