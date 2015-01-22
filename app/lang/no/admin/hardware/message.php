@@ -2,36 +2,36 @@
 
 return array(
 
-    'undeployable' 		=> '<strong>Warning: </strong> This asset has been marked as currently undeployable. If this status has changed, please update the asset status.',
-    'does_not_exist' 	=> 'Asset does not exist.',
-    'assoc_users'	 	=> 'This asset is currently checked out to a user and cannot be deleted. Please check the asset in first, and then try deleting again. ',
+    'undeployable' 		=> '<strong>Advarsel:</strong> Denne eiendelen er merket som ikke utplasserbar. Vennligst endre status for eiendel dette har endret seg.',
+    'does_not_exist' 	=> 'Eiendel eksisterer ikke.',
+    'assoc_users'	 	=> 'Denne eiendelen er merket som utsjekket til en bruker og kan ikke slettes. Vennligst sjekk inn eiendelen først, og forsøk sletting på nytt. ',
 
     'create' => array(
-        'error'   		=> 'Asset was not created, please try again. :(',
-        'success' 		=> 'Asset created successfully. :)'
+        'error'   		=> 'Eiendelen ble ikke opprettet, prøv igjen :(',
+        'success' 		=> 'Eiendelen ble opprettet :)'
     ),
 
     'update' => array(
-        'error'   		=> 'Asset was not updated, please try again',
-        'success' 		=> 'Asset updated successfully.'
+        'error'   		=> 'Eiendelen ble ikke oppdatert, prøv igjen',
+        'success' 		=> 'Oppdatering av eiendel vellykket.'
     ),
 
     'delete' => array(
-        'confirm'   	=> 'Are you sure you wish to delete this asset?',
-        'error'   		=> 'There was an issue deleting the asset. Please try again.',
-        'success' 		=> 'The asset was deleted successfully.'
+        'confirm'   	=> 'Er du sikker på at du vil slette eiendelen?',
+        'error'   		=> 'Det oppstod et problem under sletting av eiendel. Vennligst prøv igjen.',
+        'success' 		=> 'Vellykket sletting av eiendel.'
     ),
 
     'checkout' => array(
-        'error'   		=> 'Asset was not checked out, please try again',
-        'success' 		=> 'Asset checked out successfully.',
-        'user_does_not_exist' => 'That user is invalid. Please try again.'
+        'error'   		=> 'Eiendel ble ikke sjekket ut. Prøv igjen',
+        'success' 		=> 'Vellykket utsjekk av eiendel.',
+        'user_does_not_exist' => 'Denne brukeren er ugyldig. Vennligst prøv igjen.'
     ),
 
     'checkin' => array(
-        'error'   		=> 'Asset was not checked in, please try again',
-        'success' 		=> 'Asset checked in successfully.',
-        'user_does_not_exist' => 'That user is invalid. Please try again.'
+        'error'   		=> 'Eiendel ble ikke sjekket inn. Prøv igjen',
+        'success' 		=> 'Vellykket innsjekk av eiendel.',
+        'user_does_not_exist' => 'Denne brukeren er ugyldig. Vennligst prøv igjen.'
     )
 
 );

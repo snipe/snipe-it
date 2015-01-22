@@ -2,24 +2,24 @@
 
 return array(
 
-    'does_not_exist' => 'Location does not exist.',
-    'assoc_users'	 => 'This location is currently associated with at least one user and cannot be deleted. Please update your users to no longer reference this location and try again. ',
+    'does_not_exist' => 'Lokasjon eksisterer ikke.',
+    'assoc_users'	 => 'Denne lokasjonen er i bruk av minst en bruker, og kan ikke slettes. Fjern brukernes kobling mot lokasjonen og prøv igjen. ',
 
 
     'create' => array(
-        'error'   => 'Location was not created, please try again.',
-        'success' => 'Location created successfully.'
+        'error'   => 'Lokasjon ble ikke opprettet, prøv igjen.',
+        'success' => 'Vellykket opprettelse av lokasjon.'
     ),
 
     'update' => array(
-        'error'   => 'Location was not updated, please try again',
-        'success' => 'Location updated successfully.'
+        'error'   => 'Lokasjon ble ikke oppdatert, prøv igjen',
+        'success' => 'Vellykket oppdatering av plassering.'
     ),
 
     'delete' => array(
-        'confirm'   	=> 'Are you sure you wish to delete this location?',
-        'error'   => 'There was an issue deleting the location. Please try again.',
-        'success' => 'The location was deleted successfully.'
+        'confirm'   	=> 'Er du sikker på at du vil slette denne plasseringen?',
+        'error'   => 'Det oppstod et problem under sletting av plassering. Vennligst prøv igjen.',
+        'success' => 'Vellykket sletting av plassering.'
     )
 
 );
