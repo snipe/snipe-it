@@ -212,6 +212,15 @@ class AssetsController extends AdminController
 
             // Was the asset created?
             if($asset->save()) {
+
+				$logaction = new Actionlog();
+				$logaction->asset_id = $asset->id;
+				$logaction->checkedout_to = $asset->assigned_to;
+				$logaction->asset_type = 'hardware';
+				$logaction->user_id = Sentry::getUser()->id;
+				$logaction->note = e(Input::get('note'));
+				$log = $logaction->logaction('checkout');
+
                 // Redirect to the asset listing page
                 return Redirect::to("hardware")->with('success', Lang::get('admin/hardware/message.create.success'));
             }
