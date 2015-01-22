@@ -43,6 +43,17 @@
             </div>
             @endif
 
+            @if ($asset->model->name)
+            <!-- Asset name -->
+            <div class="form-group">
+            <label class="col-sm-2 control-label">@lang('admin/hardware/form.model')</label>
+                <div class="col-md-6">
+                  <p class="form-control-static">{{{ $asset->model->name }}}</p>
+                </div>
+            </div>
+            @endif
+
+
             <!-- User -->
 
             <div class="form-group {{ $errors->has('assigned_to') ? ' has-error' : '' }}">

@@ -31,15 +31,15 @@
             <div class="form-group">
             <label class="col-sm-2 control-label">@lang('admin/hardware/form.name')</label>
                 <div class="col-md-6">
-                  <p class="form-control-static">{{ $licenseseat->license->name }}</p>
+                  <p class="form-control-static">{{{ $licenseseat->license->name }}}</p>
                 </div>
             </div>
 
             <!-- Serial -->
             <div class="form-group">
             <label class="col-sm-2 control-label">@lang('admin/hardware/form.serial')</label>
-                <div class="col-md-6">
-                  <p class="form-control-static">{{ $licenseseat->license->serial }}</p>
+                <div class="col-md-10">
+                  <p class="form-control-static" style="word-wrap: break-word;">{{{ $licenseseat->license->serial }}}</p>
                 </div>
             </div>
 
@@ -48,8 +48,8 @@
                 <label for="asset_id" class="col-md-2 control-label">@lang('admin/licenses/form.asset')
                  </label>
 
-                <div class="col-md-9">
-                    {{ Form::select('asset_id', $asset_list , Input::old('asset_id', $licenseseat->asset_id), array('class'=>'select2', 'style'=>'min-width:350px')) }}
+                <div class="col-md-10">
+                    {{ Form::select('asset_id', $asset_list , Input::old('asset_id', $licenseseat->asset_id), array('class'=>'select2', 'style'=>'min-width:600px')) }}
                     {{ $errors->first('asset_id', '<span class="alert-msg"><i class="icon-remove-sign"></i> :message</span>') }}
                 </div>
             </div>

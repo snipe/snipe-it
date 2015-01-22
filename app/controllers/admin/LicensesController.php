@@ -377,8 +377,9 @@ class LicensesController extends AdminController
         // Left join to get a list of assets and some other helpful info
         $asset = DB::table('assets')
             ->leftJoin('users', 'users.id', '=', 'assets.assigned_to')
-            ->select('assets.id', 'name', 'first_name', 'last_name','asset_tag',
-            DB::raw('concat (first_name," ",last_name) as full_name, assets.id as id'))
+            ->leftJoin('models', 'assets.model_id', '=', 'models.id')
+            ->select('assets.id', 'assets.name', 'first_name', 'last_name','asset_tag',
+            DB::raw('concat (first_name," ",last_name) as full_name, assets.id as id, models.name as modelname'))
             ->whereNull('assets.deleted_at')
             ->get();
 
@@ -389,9 +390,9 @@ class LicensesController extends AdminController
             for ($x=0; $x<count($asset_array); $x++) {
 
                 if ($asset_array[$x]['full_name']!='') {
-                    $full_name = ' ('.$asset_array[$x]['full_name'].')';
+                    $full_name = ' ('.$asset_array[$x]['full_name'].') '.$asset_array[$x]['modelname'];
                 } else {
-                    $full_name = ' (Unassigned)';
+                    $full_name = ' (Unassigned) '.$asset_array[$x]['modelname'];
                 }
                 $asset_element[$asset_array[$x]['id']] = $asset_array[$x]['asset_tag'].' - '.$asset_array[$x]['name'].$full_name;
 

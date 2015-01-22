@@ -91,7 +91,7 @@
                                             @endif
                                     </tr>
                                     <tr>
-                                        <td>@lang('admin/settings/general.qr_text')</td>
+                                        <td>@lang('admin/settings/general.auti_incrementing_help')</td>
                                         <td>{{{ $setting->qr_text }}}</td>
                                     </tr>
                                     @endforeach
