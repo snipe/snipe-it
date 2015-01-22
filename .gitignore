@@ -17,3 +17,4 @@ public/uploads/avatars/*
 /app/storage/debugbar/
 /bin/
 .idea
+crowdin.yaml
