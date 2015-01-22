@@ -13,12 +13,12 @@ return array(
     |
     */
 
-    "password" => "Passwords must be six characters and match the confirmation.",
+    "password" => "Das Passwort muss Sechs Zeichen haben und übereinstimmen.",
 
-    "user"     => "Username or email address is incorrect",
+    "user"     => "Benutzername oder Email-Adresse sind falsch",
 
     "token"    => "This password reset token is invalid.",
 
-    "sent" => "If a matching email address was found, a password reminder has been sent!",
+    "sent" => "Wenn eine passende Email-Adresse gefunden wurde, wurde eine Passworterinnerung verschickt!",
 
 );

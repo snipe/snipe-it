@@ -2,7 +2,7 @@
 
 return array(
 
-    'checkedout_to'		=> 'Checked Out To',
+    'checkedout_to'		=> 'Alocado para',
     'checkout_to'		=> 'Alocado para',
     'cost'				=> 'Custo da Compra',
     'create'			=> 'Criar Bem',

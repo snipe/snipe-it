@@ -31,8 +31,8 @@ return array(
     ),
 
     'checkin' => array(
-        'error'   => 'There was an issue checking in the license. Please try again.',
-        'success' => 'The license was checked in successfully'
+        'error'   => 'Houve um problema de registro na licença. Favor tentar novamente.',
+        'success' => 'A licença foi registrada com sucesso.'
     ),
 
 );

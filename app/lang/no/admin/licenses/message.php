@@ -2,37 +2,37 @@
 
 return array(
 
-    'does_not_exist' => 'License does not exist.',
-    'user_does_not_exist' => 'User does not exist.',
-    'asset_does_not_exist' 	=> 'The asset you are trying to associate with this license does not exist.',
-    'owner_doesnt_match_asset' => 'The asset you are trying to associate with this license is owned by somene other than the person selected in the assigned to dropdown.',
-    'assoc_users'	 => 'This license is currently checked out to a user and cannot be deleted. Please check the license in first, and then try deleting again. ',
+    'does_not_exist' => 'Lisens eksisterer ikke.',
+    'user_does_not_exist' => 'Bruker eksisterer ikke.',
+    'asset_does_not_exist' 	=> 'Eiendelen du prøver å koble til denne lisensen eksisterer ikke.',
+    'owner_doesnt_match_asset' => 'Eiendelen du prøver å koble til denne lisensen er eid av noen andre enn personen du har valgt i tildelt til-nedtrekkslista.',
+    'assoc_users'	 => 'Denne lisensen er sjekket ut til en bruker og kan ikke slettes. Vennligst sjekk inn lisensen først, og forsøk sletting på nytt. ',
 
 
     'create' => array(
-        'error'   => 'License was not created, please try again.',
-        'success' => 'License created successfully.'
+        'error'   => 'Lisens ble ikke opprettet, prøv igjen.',
+        'success' => 'Vellykket opprettelse av lisens.'
     ),
 
     'update' => array(
-        'error'   => 'License was not updated, please try again',
-        'success' => 'License updated successfully.'
+        'error'   => 'Lisens ble ikke oppdatert, prøv igjen',
+        'success' => 'Vellykket oppdatering av lisens.'
     ),
 
     'delete' => array(
-        'confirm'   => 'Are you sure you wish to delete this license?',
-        'error'   => 'There was an issue deleting the license. Please try again.',
-        'success' => 'The license was deleted successfully.'
+        'confirm'   => 'Er du sikker på at du vil slette denne lisensen?',
+        'error'   => 'Det oppstod et problem under sletting av lisens. Vennligst prøv igjen.',
+        'success' => 'Vellykket sletting av lisens.'
     ),
 
     'checkout' => array(
-        'error'   => 'There was an issue checking out the license. Please try again.',
-        'success' => 'The license was checked out successfully'
+        'error'   => 'Det oppstod et problem under utsjekk av lisens. Vennligst prøv igjen.',
+        'success' => 'Vellykket utsjekk av lisens'
     ),
 
     'checkin' => array(
-        'error'   => 'There was an issue checking in the license. Please try again.',
-        'success' => 'The license was checked in successfully'
+        'error'   => 'Det oppstod et problem under innsjekk av lisens. Vennligst prøv igjen.',
+        'success' => 'Vellykket innsjekk av lisens'
     ),
 
 );

@@ -2,8 +2,8 @@
 
 return array(
     'asset'  					=> 'Bem',
-    'checkin'  					=> 'Checkin Asset',
-    'checkout'  				=> 'Checkout Asset to User',
+    'checkin'  					=> 'Retornar Ativo',
+    'checkout'  				=> 'Registrar Ativo ao Usuário',
     'clone'  					=> 'Clonar Bem',
     'edit'  					=> 'Editar Bem',
     'pending'  					=> 'Bem Pendente',

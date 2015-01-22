@@ -23,14 +23,14 @@ return array(
     ),
 
     'checkout' => array(
-        'error'   		=> 'Asset was not checked out, please try again',
-        'success' 		=> 'Asset checked out successfully.',
+        'error'   		=> 'Ativo não foi registrado, favor tentar novamente',
+        'success' 		=> 'Ativo registrado com sucesso.',
         'user_does_not_exist' => 'Este usuário é inválido. Por favor, tente novamente.'
     ),
 
     'checkin' => array(
-        'error'   		=> 'Asset was not checked in, please try again',
-        'success' 		=> 'Asset checked in successfully.',
+        'error'   		=> 'Ativo não foi retornado, favor tentar novamente',
+        'success' 		=> 'Ativo retornado com sucesso.',
         'user_does_not_exist' => 'Este usuário é inválido. Por favor, tente novamente.'
     )
 

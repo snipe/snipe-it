@@ -371,7 +371,8 @@ class LicensesController extends AdminController
         }
 
         // Get the dropdown of users and then pass it to the checkout view
-        $users_list = array('' => 'Select a User') + DB::table('users')->select(DB::raw('concat (first_name," ",last_name) as full_name, id'))->whereNull('deleted_at')->lists('full_name', 'id');
+         $users_list = array('' => 'Select a User') + DB::table('users')->select(DB::raw('concat(last_name,", ",first_name) as full_name, id'))->whereNull('deleted_at')->orderBy('last_name', 'asc')->orderBy('first_name', 'asc')->lists('full_name', 'id');
+
 
         // Left join to get a list of assets and some other helpful info
         $asset = DB::table('assets')
@@ -457,7 +458,7 @@ class LicensesController extends AdminController
             // Redirect to the asset management page with error
             return Redirect::to('admin/licenses')->with('error', Lang::get('admin/licenses/message.not_found'));
         }
-    
+
     if ( e(Input::get('asset_id')) == '') {
             $licenseseat->asset_id = NULL;
         } else {
@@ -599,7 +600,7 @@ class LicensesController extends AdminController
 
           // Show the page
         $license_options = array('0' => 'Top Level') + License::lists('name', 'id');
-
+		$maintained_list = array('' => 'Maintained', '1' => 'Yes', '0' => 'No');
         //clone the orig
         $license = clone $license_to_clone;
         $license->id = null;
@@ -608,7 +609,7 @@ class LicensesController extends AdminController
         // Show the page
         $depreciation_list = array('0' => Lang::get('admin/licenses/form.no_depreciation')) + Depreciation::lists('name', 'id');
         $supplier_list = array('' => 'Select Supplier') + Supplier::orderBy('name', 'asc')->lists('name', 'id');
-        return View::make('backend/licenses/edit')->with('license_options',$license_options)->with('depreciation_list',$depreciation_list)->with('supplier_list',$supplier_list)->with('license',$license);
+        return View::make('backend/licenses/edit')->with('license_options',$license_options)->with('depreciation_list',$depreciation_list)->with('supplier_list',$supplier_list)->with('license',$license)->with('maintained_list',$maintained_list);
 
     }
 }
