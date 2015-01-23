@@ -191,6 +191,7 @@
             <tbody>
             @if (count($asset->assetlog) > 0)
                 @foreach ($asset->assetlog as $log)
+                 @if ((isset($log->checkedout_to)) && ($log->checkedout_to!=0))
                 <tr>
                     <td>{{{ $log->added_on }}}</td>
                     <td>
@@ -199,7 +200,7 @@
                     </td>
                     <td>{{ $log->action_type }}</td>
                     <td>
-                        @if (isset($log->checkedout_to))
+                        @if ((isset($log->checkedout_to)) && ($log->checkedout_to!=0))
                         <a href="{{ route('view/user', $log->checkedout_to) }}">
                         {{{ $log->userlog->fullName() }}}
                         </a>
@@ -210,6 +211,7 @@
                         @endif
                     </td>
                 </tr>
+                 @endif
                 @endforeach
                 @endif
                 <tr>
