@@ -195,12 +195,13 @@
                 <tr>
                     <td>{{{ $log->added_on }}}</td>
                     <td>
-                        @if (isset($log->user_id)) {{{ $log->adminlog->fullName() }}}
+                        @if (isset($log->user_id))
+                        {{{ $log->adminlog->fullName() }}}
                         @endif
                     </td>
                     <td>{{ $log->action_type }}</td>
                     <td>
-                        @if ((isset($log->checkedout_to)) && ($log->checkedout_to!=0))
+                        @if ((isset($log->checkedout_to)) && ($log->checkedout_to!=0) && ($log->checkedout_to!=''))
                         <a href="{{ route('view/user', $log->checkedout_to) }}">
                         {{{ $log->userlog->fullName() }}}
                         </a>
