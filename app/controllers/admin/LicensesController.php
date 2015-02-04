@@ -94,6 +94,18 @@ class LicensesController extends AdminController
                 $license->supplier_id = e(Input::get('supplier_id'));
             }
 
+            if ( e(Input::get('maintained')) == '') {
+                $license->maintained = 0;
+            } else {
+                $license->maintained = e(Input::get('maintained'));
+            }
+
+            if ( e(Input::get('purchase_order')) == '') {
+                $license->purchase_order = '';
+            } else {
+                $license->purchase_order = e(Input::get('purchase_order'));
+            }
+
             // Save the license data
             $license->name              = e(Input::get('name'));
             $license->serial            = e(Input::get('serial'));
@@ -250,6 +262,18 @@ class LicensesController extends AdminController
             } else {
                     $license->purchase_cost = ParseFloat(e(Input::get('purchase_cost')));
                     //$license->purchase_cost = e(Input::get('purchase_cost'));
+            }
+
+            if ( e(Input::get('maintained')) == '') {
+                $license->maintained = 0;
+            } else {
+                $license->maintained = e(Input::get('maintained'));
+            }
+
+            if ( e(Input::get('purchase_order')) == '') {
+                $license->purchase_order = '';
+            } else {
+                $license->purchase_order = e(Input::get('purchase_order'));
             }
 
 
