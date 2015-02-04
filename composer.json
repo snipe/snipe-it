@@ -9,7 +9,7 @@
 		"source": "https://github.com/snipe/snipe-it"
 	},
 	"require": {
-		"laravel/framework": "4.1.*",
+		"laravel/framework": "4.2.*",
 		"cartalyst/sentry": "2.0.*",
 		"barryvdh/laravel-debugbar": "1.x",
 		"chumper/datatable": "dev-master",
