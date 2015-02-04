@@ -26,71 +26,72 @@
     </div>
 </div>
 
-<div class="user-profile">
+<div class="user-profile ">
 <div class="row profile">
 <div class="col-md-9 bio">
 
-<h6>@lang('admin/licenses/general.info')</h6>
+@if ($license->serial)
+	<div class="col-md-12" style="padding-bottom: 10px; margin-left: 15px;">
+	<strong>@lang('admin/licenses/form.serial'): </strong>
+	{{{ wordwrap($license->serial, 10, "\n", true) }}}
+	</div>
+@endif
 
-<div class="col-md-12">
+<div class="col-md-12" style="padding-bottom: 20px">
 
 @if ($license->license_name)
-<div class="col-md-6"><strong>@lang('admin/licenses/form.to_name'): </strong>
+<div class="col-md-6" style="padding-bottom: 5px"><strong>@lang('admin/licenses/form.to_name'): </strong>
 {{{ $license->license_name }}} </div>
 @endif
 
 @if ($license->license_email)
-<div class="col-md-6"><strong>@lang('admin/licenses/form.to_email'): </strong>
+<div class="col-md-6" style="padding-bottom: 5px"><strong>@lang('admin/licenses/form.to_email'): </strong>
 {{{ $license->license_email }}} </div>
 @endif
 
 @if ($license->supplier_id)
-    <div class="col-md-6"><strong>@lang('admin/licenses/form.supplier'): </strong>
+    <div class="col-md-6" style="padding-bottom: 5px"><strong>@lang('admin/licenses/form.supplier'): </strong>
     <a href="{{ route('view/supplier', $license->supplier_id) }}">
     {{{ $license->supplier->name }}}
     </a> </div>
 @endif
 
 @if ($license->expiration_date > 0)
-<div class="col-md-6"><strong>@lang('admin/licenses/form.expiration'): </strong>
+<div class="col-md-6" style="padding-bottom: 5px"><strong>@lang('admin/licenses/form.expiration'): </strong>
 {{{ $license->expiration_date }}} </div>
 @endif
 
-@if ($license->notes)
-<div class="col-md-6"><strong>@lang('admin/licenses/form.notes'): </strong>
-{{{ $license->notes }}}</div>
-@endif
 
  @if ($license->depreciation)
-            <div class="col-md-6"><strong>@lang('admin/hardware/form.depreciation'): </strong>
-            {{{ $license->depreciation->name }}}
-                ({{{ $license->depreciation->months }}}
-                @lang('admin/hardware/form.months')
-                )</div>
-            <div class="col-md-6"><strong>@lang('admin/hardware/form.depreciates_on'): </strong>
-            {{{ $license->depreciated_date() }}} </div>
-            <div class="col-md-6"><strong>@lang('admin/hardware/form.fully_depreciated'): </strong>
-            {{{ $license->months_until_depreciated()->m }}}
-            @lang('admin/hardware/form.months')
-             @if ($license->months_until_depreciated()->y > 0)
-                , {{{ $license->months_until_depreciated()->y }}}
-                @lang('admin/hardware/form.years')
-             @endif
-             </div>
-        @endif
+	<div class="col-md-6" style="padding-bottom: 5px">
+	<strong>@lang('admin/hardware/form.depreciation'): </strong>
+	{{{ $license->depreciation->name }}}
+		({{{ $license->depreciation->months }}}
+		@lang('admin/hardware/form.months')
+		)
+	</div>
 
+	<div class="col-md-6" style="padding-bottom: 5px">
+		<strong>@lang('admin/hardware/form.depreciates_on'): </strong>
+		{{{ $license->depreciated_date() }}}
+	</div>
 
-<br><br><br>
-</div>
+	<div class="col-md-6" style="padding-bottom: 5px">
+		<strong>@lang('admin/hardware/form.fully_depreciated'): </strong>
+		{{{ $license->months_until_depreciated()->m }}}
+		@lang('admin/hardware/form.months')
 
-@if ($license->serial)
-<div class="col-md-12"><strong>@lang('admin/licenses/form.serial'): </strong>
-{{{ wordwrap($license->serial, 10, "\n", true) }}} </div>
+		@if ($license->months_until_depreciated()->y > 0)
+			, {{{ $license->months_until_depreciated()->y }}}
+			@lang('admin/hardware/form.years')
+		@endif
+	 </div>
 @endif
 
+</div>
 
 
-
+<div class="col-md-12" style="padding-top: 60px;">
                 <!-- checked out assets table -->
                 <h6>{{ $license->seats }} @lang('admin/licenses/general.license_seats')</h6>
                 <table class="table table-hover">
@@ -149,7 +150,8 @@
 
                     </tbody>
                 </table>
-                <br>
+</div>
+<div class="col-md-12">
                 <h6>@lang('admin/licenses/general.checkout_history')</h6>
 
                 <table class="table table-hover">
@@ -208,39 +210,36 @@
                     </tbody>
                 </table>
         </div>
-
+</div>
         <!-- side address column -->
         <div class="col-md-3 col-xs-12 address pull-right">
         <h6><br>@lang('general.moreinfo'):</h6>
                 <ul>
                     @if ($license->purchase_order)
-                    <li>@lang('admin/licenses/form.purchase_order'):
+                    <li><strong>@lang('admin/licenses/form.purchase_order'):</strong>
                     {{{ $license->purchase_order }}} </li>
                     @endif
                     @if ($license->purchase_date > 0)
-                    <li>@lang('admin/licenses/form.date'):
+                    <li><strong>@lang('admin/licenses/form.date'):</strong>
                     {{{ $license->purchase_date }}} </li>
                     @endif
                     @if ($license->purchase_cost > 0)
-                    <li>@lang('admin/licenses/form.cost'):
+                    <li><strong>@lang('admin/licenses/form.cost'):</strong>
                     @lang('general.currency')
                     {{{ number_format($license->purchase_cost,2) }}} </li>
                     @endif
                     @if ($license->order_number)
-                    <li>@lang('admin/licenses/form.order'):
+                    <li><strong>@lang('admin/licenses/form.order'):</strong>
                     {{{ $license->order_number }}} </li>
                     @endif
                     @if (($license->seats) && ($license->seats) > 0)
-                    <li>@lang('admin/licenses/form.seats'):
+                    <li><strong>@lang('admin/licenses/form.seats'):</strong>
                     {{{ $license->seats }}} </li>
                     @endif
-                    @if ($license->depreciation)
-                    <li>@lang('admin/licenses/form.depreciation'):
-                    {{{ $license->depreciation->name }}}
-                    ({{{ $license->depreciation->months }}} months)</li>
-                    @endif
+
                     @if ($license->notes)
-                        <li>{{{ $license->notes }}}</li>
+                    	 <li><strong>@lang('admin/licenses/form.notes'):</strong>
+                        <li>{{ nl2br(e($license->notes)) }}</li>
                     @endif
                 </ul>
         </div>
