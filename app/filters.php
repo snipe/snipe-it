@@ -85,7 +85,7 @@ Route::filter('admin-auth', function () {
     // Check if the user has access to the admin pages
     if ( ! Sentry::getUser()->hasAccess('admin')) {
         // Show the insufficient permissions page
-        return Redirect::route('profile');
+        return Redirect::route('view-assets');
     }
 });
 
