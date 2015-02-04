@@ -2,8 +2,10 @@
 
 class Statuslabel extends Elegant
 {
+	use SoftDeletingTrait;
+    protected $dates = ['deleted_at'];
     protected $table = 'status_labels';
-    protected $softDelete = true;
+
 
     protected $rules = array(
         'name'  => 'required|alpha_space|min:2|max:100|unique:status_labels,name,{id}',

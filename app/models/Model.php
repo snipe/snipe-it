@@ -3,7 +3,7 @@
 class Model extends Elegant
 {
     protected $table = 'models';
-    
+
     // Declare the rules for the form validation
     protected $rules = array(
         'name'   		=> 'required|alpha_space|min:3|max:255|unique:models,name,{id}',

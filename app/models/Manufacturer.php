@@ -1,9 +1,10 @@
 <?php
 class Manufacturer extends Elegant
 {
-    protected $softDelete = true;
+    use SoftDeletingTrait;
+    protected $dates = ['deleted_at'];
     protected $table = 'manufacturers';
-    
+
     // Declare the rules for the form validation
     protected $rules = array(
         'name'   => 'required|alpha_space|min:2|max:255|unique:manufacturers,name,{id}',

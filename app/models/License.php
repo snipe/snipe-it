@@ -2,9 +2,11 @@
 
 class License extends Elegant
 {
+	use SoftDeletingTrait;
+    protected $dates = ['deleted_at'];
+
     protected $guarded = 'id';
     protected $table = 'licenses';
-    protected $softDelete = true;
     protected $rules = array(
             'name'   => 'required|alpha_space|min:3|max:255',
             'serial'   => 'required|min:5',

@@ -2,6 +2,9 @@
 
 class Actionlog extends Eloquent
 {
+	use SoftDeletingTrait;
+    protected $dates = ['deleted_at'];
+
     protected $table = 'asset_logs';
     public $timestamps = false;
 

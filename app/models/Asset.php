@@ -2,9 +2,10 @@
 
 class Asset extends Elegant
 {
-    protected $table = 'assets';
-    protected $softDelete = true;
+	use SoftDeletingTrait;
+    protected $dates = ['deleted_at'];
 
+    protected $table = 'assets';
     protected $errors;
     protected $rules = array(
         'name'   			=> 'alpha_space|min:2|max:255',
