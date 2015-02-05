@@ -13,6 +13,10 @@
 	},
 	"require": {
 		"classpreloader/classpreloader": "1.2.0",
+		"symfony/console": "~2",
+        "symfony/yaml": "~2",
+        "symfony/config": "~2",
+        "symfony/stopwatch": "~2",
 		"laravel/framework": "4.2.*",
 		"cartalyst/sentry": "2.0.*",
 		"barryvdh/laravel-debugbar": "1.x",
