@@ -22,12 +22,12 @@ before_script:
   - cp app/config/production/database.example.php app/config/database.php
   - cp app/config/production/mail.example.php app/config/mail.php
   - composer self-update
-  - composer install --prefer-source --no-interaction --no-dev
-  - php artisan key:generate
-  - php artisan migrate:install
-  - php artisan migrate --package cartalyst/sentry
-  - php artisan migrate
-  - php artisan db:seed
+  - composer install --dev --prefer-source --no-interaction
+  - php artisan key:generate --env=testing
+  - php artisan migrate:install --env=testing --no-interaction -vvv
+  - php artisan migrate --package cartalyst/sentry --env=testing --no-interaction -vvv
+  - php artisan migrate --env=testing --no-interaction -vvv
+  - php artisan db:seed --env=testing --no-interaction -vvv
 
 # omitting "script:" will default to phpunit
 # use the $DB env variable to determine the phpunit.xml to use
