@@ -1,3 +1,7 @@
+addons:
+  hosts:
+    - AlisonMBP
+
 # see http://about.travis-ci.org/docs/user/languages/php/ for more hints
 language: php
 
@@ -20,9 +24,9 @@ before_script:
   - composer self-update
   - composer install --prefer-source --no-interaction --no-dev
   - php artisan key:generate
-  - php artisan migrate:install --force
-  - php artisan migrate --package cartalyst/sentry --force
-  - php artisan migrate --force
+  - php artisan migrate:install
+  - php artisan migrate --package cartalyst/sentry
+  - php artisan migrate
   - php artisan db:seed
 
 # omitting "script:" will default to phpunit
