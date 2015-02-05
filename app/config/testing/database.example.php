@@ -26,7 +26,7 @@ return array(
     |
     */
 
-    'default' => 'sqlite',
+    'default' => 'mysql',
 
     /*
     |--------------------------------------------------------------------------
@@ -50,6 +50,18 @@ return array(
             'database' => ':memory:',
             'prefix'   => ''
         ),
+
+        'mysql' => array(
+            'driver'    => 'mysql',
+            'host'      => 'localhost',
+            'database'  => 'snipeit_laravel',
+            'username'  => 'travis',
+            'password'  => '',
+            'charset'   => 'utf8',
+            'collation' => 'utf8_unicode_ci',
+            'prefix'    => '',
+        ),
+
     ),
 
     /*
