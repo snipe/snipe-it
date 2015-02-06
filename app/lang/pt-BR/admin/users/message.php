@@ -7,7 +7,7 @@ return array(
     'user_login_required'      	=> 'O campo entrar é requerido',
     'user_password_required'   	=> 'A senha é requerida.',
     'insufficient_permissions' 	=> 'Permissões Insuficientes.',
-    'user_deleted_warning' 		=> 'This user has been deleted. You will have to restore this user to edit them or assign them new assets.',
+    'user_deleted_warning' 		=> 'Este usuário foi deletado. Você terá que restaurar este usuário para editá-los ou atribui-lós novos bens.',
 
 
     'success' => array(

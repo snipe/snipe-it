@@ -26,7 +26,7 @@ return array(
     'title' 				=> 'Título',
     'updateuser' 			=> 'Atualizar Usuário',
     'username' 				=> 'Usuário',
-    'username_note' 		=> '(This is used for Active Directory binding only, not for login.)',
+    'username_note' 		=> '(Istó é usado somente para conexão do Active Directory, não para login.)',
     'cloneuser'                         => 'Clonar Usuário',
     'viewusers' 			=> 'Ver Usuários',
 );

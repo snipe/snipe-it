@@ -3,11 +3,11 @@
 return array(
 
     'group_management' 	 	=> 'Group Management',
-    'create_group' 	 		=> 'Create New Group',
-    'edit_group' 	 		=> 'Edit Group',
-    'group_name' 	 		=> 'Group Name',
+    'create_group' 	 		=> 'Új csoport létrehozása',
+    'edit_group' 	 		=> 'Csoport szerkesztése',
+    'group_name' 	 		=> 'Csoport neve',
     'group_admin' 	 		=> 'Group Admin',
-    'allow' 	 			=> 'Allow',
-    'deny' 	 				=> 'Deny',
+    'allow' 	 			=> 'Engedélyezés',
+    'deny' 	 				=> 'Elutasítás',
 
 );

@@ -2,7 +2,7 @@
 
 return array(
 
-    'does_not_exist' => 'Depreciation class does not exist.',
+    'does_not_exist' => 'Amortizační skupina neexistuje.',
     'assoc_users'	 => 'This depreciation is currently associated with one or more models and cannot be deleted. Please delete the models, and then try deleting again. ',
 
 

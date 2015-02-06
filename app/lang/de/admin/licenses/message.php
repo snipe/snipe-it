@@ -3,9 +3,9 @@
 return array(
 
     'does_not_exist' => 'Die Kategorie existiert nicht.',
-    'user_does_not_exist' => 'User does not exist.',
-    'asset_does_not_exist' 	=> 'The asset you are trying to associate with this license does not exist.',
-    'owner_doesnt_match_asset' => 'The asset you are trying to associate with this license is owned by somene other than the person selected in the assigned to dropdown.',
+    'user_does_not_exist' => 'Benutzer existiert nicht.',
+    'asset_does_not_exist' 	=> 'Der Gegenstand den du mit dieser Lizenz verknüpfen willst existiert nicht.',
+    'owner_doesnt_match_asset' => 'Der Gegenstand den du mit dieser Lizenz verknüpfen willst gehört jemand anderem als der im Dropdown-Feld ausgewählten Person.',
     'assoc_users'	 => 'Diese Kategorie ist derzeit mindestens einem Modell zugeordnet und kann nicht gelöscht werden. Bitte aktualisieren Sie Ihre Modelle, um nicht mehr auf diese Kategorie zu verweisen und versuchen Sie es erneut.',
 
 

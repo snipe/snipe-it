@@ -4,7 +4,7 @@ return array(
     'address'               => 'Lieferantenadressen',
     'assets'                => 'Assets',
     'city'                  => 'Stadt',
-    'contact'               => 'Contact Name',
+    'contact'               => 'Kontakt',
     'country'               => 'Land',
     'create'                => 'Lieferanten erstellen',
     'email'                 => 'Email',

@@ -6,7 +6,7 @@ return array(
     'checkout'   		=> 'Zurücknehmen/Herausgeben',
     'id'      			=> 'ID',
     'license_email'   	=> 'License Email',
-    'license_name'   	=> 'Licensed To',
+    'license_name'   	=> 'Lizenziert für',
     'purchase_date'   	=> 'Kaufdatum',
     'purchased'   		=> 'Gekauft',
     'seats'   			=> 'Anzahl Aktivierungen',

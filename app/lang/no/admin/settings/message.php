@@ -4,8 +4,8 @@ return array(
 
 
     'update' => array(
-        'error'   => 'An error has occurred while updating. ',
-        'success' => 'Settings updated successfully.'
+        'error'   => 'En feil oppstod under oppdatering. ',
+        'success' => 'Oppdatering av innstillinger vellykket.'
     ),
 
 );

@@ -1,6 +1,9 @@
 <?php
 
 return array(
+	'auto_increment_assets'		=> 'Generate auto-incrementing asset IDs',
+	'auto_increment_prefix'		=> 'Prefix (optional)',
+	'auti_incrementing_help'    => 'Enable auto-incrementing asset IDs first to set this',
     'display_asset_name'        => 'Display Asset Name',
     'display_checkout_date'     => 'Display Checkout Date',
     'display_eol'               => 'Display EOL in table view',

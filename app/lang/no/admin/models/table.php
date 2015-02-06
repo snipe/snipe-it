@@ -2,16 +2,16 @@
 
 return array(
 
-    'create'				=> 'Create Asset Model',
-    'created_at' 			=> 'Created at',
-    'eol'	 				=> 'EOL',
-    'modelnumber'   		=> 'Model No.',
-    'name'      			=> 'Asset Model Name',
-    'numassets' 			=> 'Assets',
-    'title'					=> 'Asset Models',
-    'update'				=> 'Update Asset Model',
-    'view'					=> 'View Asset Model',
-    'update'				=> 'Update Asset Model',
-    'clone'				=> 'Clone Model',
-    'edit'				=> 'Edit Model',
+    'create'				=> 'Opprett modell',
+    'created_at' 			=> 'Opprettet',
+    'eol'	 				=> 'Levetid',
+    'modelnumber'   		=> 'Modellnummer',
+    'name'      			=> 'Modellnavn',
+    'numassets' 			=> 'Eiendeler',
+    'title'					=> 'Modeller',
+    'update'				=> 'Endre modell',
+    'view'					=> 'Vis modell',
+    'update'				=> 'Endre modell',
+    'clone'				=> 'Klon modell',
+    'edit'				=> 'Endre modell',
 );

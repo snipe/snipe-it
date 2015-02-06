@@ -2,24 +2,24 @@
 
 return array(
 
-    'does_not_exist' => 'Model does not exist.',
-    'assoc_users'	 => 'This model is currently associated with one or more assets and cannot be deleted. Please delete the assets, and then try deleting again. ',
+    'does_not_exist' => 'Modell eksisterer ikke.',
+    'assoc_users'	 => 'Denne modellen er tilknyttet en eller flere eiendeler og kan ikke slettes. Slett eiendelene, og prøv å slette modellen igjen. ',
 
 
     'create' => array(
-        'error'   => 'Model was not created, please try again.',
-        'success' => 'Model created successfully.'
+        'error'   => 'Modellen ble ikke opprettet. Prøv igjen.',
+        'success' => 'Opprettelse av modell var vellykket.'
     ),
 
     'update' => array(
-        'error'   => 'Model was not updated, please try again',
-        'success' => 'Model updated successfully.'
+        'error'   => 'Modell ble ikke oppdatert. Prøv igjen',
+        'success' => 'Oppdatering av modell vellykket.'
     ),
 
     'delete' => array(
-        'confirm'   => 'Are you sure you wish to delete this asset model?',
-        'error'   => 'There was an issue deleting the model. Please try again.',
-        'success' => 'The model was deleted successfully.'
+        'confirm'   => 'Er du sikker på at du vil slette denne modellen?',
+        'error'   => 'Det oppstod et problem under sletting av modellen. Prøv igjen.',
+        'success' => 'Sletting av modell vellykket.'
     )
 
 );

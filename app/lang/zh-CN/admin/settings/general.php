@@ -1,6 +1,9 @@
 <?php
 
 return array(
+	'auto_increment_assets'		=> '生成自动递增资产ID',
+	'auto_increment_prefix'		=> '前缀（可选）',
+	'auti_incrementing_help'    => '启用自动递增的资产ID之前，请先设置这个',
     'display_asset_name'        => '显示资产名称',
     'display_checkout_date'     => '显示借出日期',
     'display_eol'               => '以表格形式显示寿命期限',

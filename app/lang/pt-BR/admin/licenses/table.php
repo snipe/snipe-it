@@ -3,13 +3,13 @@
 return array(
 
     'assigned_to'   	=> 'Atribuído A',
-    'checkout'   		=> 'In/Out',
+    'checkout'   		=> 'Entrada/Saída',
     'id'      			=> 'ID',
     'license_email'   	=> 'E-mail da Licença',
     'license_name'   	=> 'Licenciado A',
     'purchase_date'   	=> 'Data da Compra',
     'purchased'   		=> 'Comprado',
-    'seats'   			=> 'Seats',
+    'seats'   			=> 'Número de usuário',
     'hardware'   		=> 'Hardware',
     'serial'   			=> 'Serial',
     'title'      		=> 'Licença',

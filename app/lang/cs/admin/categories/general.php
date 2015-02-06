@@ -1,11 +1,11 @@
 <?php
 
 return array(
-    'about_asset_categories' 			=> 'About Asset Categories',
-    'about_categories'  				=> 'Asset categories help you organize your assets. Some example categories might be &quot;Desktops&quot;, &quot;Laptops&quot;, &quot;Mobile Phones&quot;, &quot;Tablets&quot;, and so on, but you can use asset categories any way that makes sense for you. ',
-    'asset_categories' 					=> 'Asset Categories',
-    'category_name'  					=> 'Category Name',
-    'create'  							=> 'Create Category',
-    'update'  							=> 'Update Category',
+    'about_asset_categories' 			=> 'O kategoriích majetku',
+    'about_categories'  				=> 'Kategorie pomáhají organizovat majetek. Takovou kategorii může být např. &quot;Desktopy&quot;, &quot;Notebooky&quot;, &quot;Mobilní telefony&quot;, &quot;Tablety&quot;, apod., kategorie můžete ale používat jakkoliv Vám to bude dávat smysl. ',
+    'asset_categories' 					=> 'Kategorie majetku',
+    'category_name'  					=> 'Jméno kategorie',
+    'create'  							=> 'Vytvořit kategorii',
+    'update'  							=> 'Upravit kategorii',
 
 );

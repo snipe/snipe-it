@@ -3,12 +3,12 @@
 
 return array(
 
-    'assets_user'  		=> 'Assets assigned to :name',
-    'clone'  			=> 'Clone User',
-    'contact_user'  	=> 'Contact :name',
-    'edit'  			=> 'Edit User',
-    'history_user'  	=> 'History for :name',
-    'last_login'  		=> 'Last Login',
-    'software_user'  	=> 'Software Checked out to :name',
-    'view_user'  		=> 'View User :name',
+    'assets_user'  		=> 'Eiendeler tildelt :name',
+    'clone'  			=> 'Klon bruker',
+    'contact_user'  	=> 'Kontakt :navn',
+    'edit'  			=> 'Rediger bruker',
+    'history_user'  	=> 'Historikk for :name',
+    'last_login'  		=> 'Siste innlogging',
+    'software_user'  	=> 'Programvare utsjekket til :name',
+    'view_user'  		=> 'Vis bruker :name',
     );

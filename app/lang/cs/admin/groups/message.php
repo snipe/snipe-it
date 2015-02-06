@@ -2,18 +2,18 @@
 
 return array(
 
-    'group_exists'        => 'Group already exists!',
-    'group_not_found'     => 'Group [:id] does not exist.',
-    'group_name_required' => 'The name field is required',
+    'group_exists'        => 'Skupina již existuje!',
+    'group_not_found'     => 'Skupina [:id] neexistuje.',
+    'group_name_required' => 'Název je vyžadován',
 
     'success' => array(
-        'create' => 'Group was successfully created.',
-        'update' => 'Group was successfully updated.',
-        'delete' => 'Group was successfully deleted.',
+        'create' => 'Skupina byla úspěšně vytvořena.',
+        'update' => 'Skupina byla úspěšně upravena.',
+        'delete' => 'Skupina byla úspěšně odstraněna.',
     ),
 
     'delete' => array(
-        'confirm'   => 'Are you sure you wish to delete this group?',
+        'confirm'   => 'Určitě chcete odstranit tuto skupinu?',
         'create' => 'There was an issue creating the group. Please try again.',
         'update' => 'There was an issue updating the group. Please try again.',
         'delete' => 'There was an issue deleting the group. Please try again.',

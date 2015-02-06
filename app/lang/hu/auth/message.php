@@ -3,18 +3,18 @@
 return array(
 
     'account_already_exists' => 'Már létezik ezzel az e-mail címmel felhasználó.',
-    'account_not_found'      => 'The email account or password is incorrect.',
+    'account_not_found'      => 'Téves e-mail cím vagy a jelszó.',
     'account_not_activated'  => 'Ez a felhasználó nincs aktiválva.',
-    'account_suspended'      => 'This user account is suspended.',
-    'account_banned'         => 'This user account is banned.',
+    'account_suspended'      => 'Ez a felhasználói fiók fel van függesztve.',
+    'account_banned'         => 'Ez a felhasználó ki van tiltva.',
 
     'signin' => array(
-        'error'   => 'There was a problem while trying to log you in, please try again.',
+        'error'   => 'Bejelentkezés közben probléma lépett fel, kérjük próbálja újra.',
         'success' => 'Sikeresen bejelentkezett.',
     ),
 
     'signup' => array(
-        'error'   => 'There was a problem while trying to create your account, please try again.',
+        'error'   => 'Felhasználói fiók létrehozása közben probléma lépett fel, kérjük próbálja újra.',
         'success' => 'Account sucessfully created.',
     ),
 
