@@ -637,4 +637,107 @@ class LicensesController extends AdminController
         return View::make('backend/licenses/edit')->with('license_options',$license_options)->with('depreciation_list',$depreciation_list)->with('supplier_list',$supplier_list)->with('license',$license)->with('maintained_list',$maintained_list);
 
     }
+
+
+    /**
+    *  Upload the file to the server
+    *
+    * @param  int  $assetId
+    * @return View
+    **/
+    public function postUpload($licenseId = null)
+    {
+        $license = License::find($licenseId);
+
+		// the license is valid
+		$destinationPath = app_path().'/private_uploads';
+
+        if (isset($license->id)) {
+
+        	if (Input::hasFile('licensefile')) {
+
+				foreach(Input::file('licensefile') as $file) {
+
+				$rules = array(
+				   'licensefile' => 'required|mimes:png,gif,jpg,jpeg,doc,docx,pdf,txt|max:2000'
+				);
+				$validator = Validator::make(array('licensefile'=> $file), $rules);
+
+					if($validator->passes()){
+
+						$extension = $file->getClientOriginalExtension();
+						$filename = 'license-'.$license->id.'-'.str_random(8);
+						$filename .= '-'.Str::slug($file->getClientOriginalName()).'.'.$extension;
+						$upload_success = $file->move($destinationPath, $filename);
+
+						//Log the deletion of seats to the log
+						$logaction = new Actionlog();
+						$logaction->asset_id = $license->id;
+						$logaction->asset_type = 'software';
+						$logaction->user_id = Sentry::getUser()->id;
+						$logaction->note = e(Input::get('notes'));
+						$logaction->checkedout_to =  NULL;
+						$logaction->filename =  $filename;
+						$log = $logaction->logaction('uploaded');
+					} else {
+						 return Redirect::back()->with('error', Lang::get('admin/licenses/message.upload.invalidfiles'));
+					}
+
+
+				}
+
+				if ($upload_success) {
+				  	return Redirect::back()->with('success', Lang::get('admin/licenses/message.upload.success'));
+				} else {
+				   return Redirect::back()->with('success', Lang::get('admin/licenses/message.upload.error'));
+				}
+
+			} else {
+				 return Redirect::back()->with('success', Lang::get('admin/licenses/message.upload.nofiles'));
+			}
+
+
+
+
+
+        } else {
+            // Prepare the error message
+            $error = Lang::get('admin/licenses/message.does_not_exist', compact('id'));
+
+            // Redirect to the licence management page
+            return Redirect::route('licenses')->with('error', $error);
+        }
+    }
+
+
+    /**
+    *  Upload the file to the server
+    *
+    * @param  int  $assetId
+    * @return View
+    **/
+    public function getDeleteFile($licenseId = null, $fileId = null)
+    {
+        $license = License::find($licenseId);
+        $destinationPath = app_path().'/private_uploads';
+
+		// the license is valid
+        if (isset($license->id)) {
+
+			$log = Actionlog::find($fileId);
+			$full_filename = $destinationPath.'/'.$log->filename;
+			if (file_exists($full_filename)) {
+				unlink($destinationPath.'/'.$log->filename);
+			}
+			$log->delete();
+			return Redirect::back()->with('success', Lang::get('admin/licenses/message.deletefile.success'));
+
+        } else {
+            // Prepare the error message
+            $error = Lang::get('admin/licenses/message.does_not_exist', compact('id'));
+
+            // Redirect to the licence management page
+            return Redirect::route('licenses')->with('error', $error);
+        }
+    }
 }

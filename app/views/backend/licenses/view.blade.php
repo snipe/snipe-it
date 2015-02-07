@@ -176,10 +176,12 @@
                             </td>
 
                             <td>
-                                @if ($file->filename) {{{ $file->filename }}}
+                                @if ($file->filename)
+                                <a href="{{{ $file->filename }}}">{{{ $file->filename }}}</a>
                                 @endif
                             </td>
                             <td>
+                            	<a class="btn delete-asset btn-danger" href="{{ route('delete/licensefile', [$license->id, $file->id]) }}"><i class="icon-trash icon-white"></i></a>
                             </td>
                         </tr>
                         @endforeach
@@ -198,9 +200,13 @@
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
         <h4 class="modal-title" id="uploadFileModalLabel">Upload File</h4>
       </div>
+      {{ Form::open([
+      'method' => 'POST',
+      'route' => ['upload/license', $license->id],
+      'files' => true, 'class' => 'form-horizontal' ]) }}
       <div class="modal-body">
-        {{ Form::open(['method' => 'POST', 'files' => true, 'class' => 'form-horizontal' ]) }}
 
+		<p>Allowed filetypes are png, gif, jpg, doc, docx, pdf, and txt.</p>
 
 		 <div class="form-group col-md-12">
 		 <div class="input-group col-md-12">
@@ -209,15 +215,17 @@
 		</div>
 		<div class="form-group col-md-12">
 		 <div class="input-group col-md-12">
-			{{ Form::file('image') }}
+			{{ Form::file('licensefile[]', ['multiple' => 'multiple']) }}
 		</div>
 		</div>
-		</form>
+
+
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">@lang('button.cancel')</button>
-        <button type="button" class="btn btn-primary">@lang('button.upload')</button>
+        <button type="submit" class="btn btn-primary">@lang('button.upload')</button>
       </div>
+      {{ Form::close() }}
     </div>
   </div>
 </div>
