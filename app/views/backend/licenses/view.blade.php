@@ -157,7 +157,7 @@
 
  	<h6>@lang('general.file_uploads') [ <a href="#" data-toggle="modal" data-target="#uploadFileModal">@lang('button.add')</a> ]</h6>
 
-	@if (count($license->uploads) > 0)
+
  	<table class="table table-hover">
                     <thead>
                         <tr>
@@ -169,30 +169,37 @@
                     </thead>
                     <tbody>
                         @if (count($license->uploads) > 0)
-                        @foreach ($license->uploads as $file)
-                        <tr>
-                            <td>
-                                @if ($file->note) {{{ $file->note }}}
-                                @endif
-                            </td>
-							<td>
-							{{{ $file->filename }}}
-							</td>
-                            <td>
-                                @if ($file->filename)
-                                <a href="{{ route('show/licensefile', [$license->id, $file->id]) }}" class="btn btn-default">Download</a>
-                                @endif
-                            </td>
-                            <td>
-                            	<a class="btn delete-asset btn-danger" href="{{ route('delete/licensefile', [$license->id, $file->id]) }}"><i class="icon-trash icon-white"></i></a>
-                            </td>
-                        </tr>
-                        @endforeach
+							@foreach ($license->uploads as $file)
+							<tr>
+								<td>
+									@if ($file->note) {{{ $file->note }}}
+									@endif
+								</td>
+								<td>
+								{{{ $file->filename }}}
+								</td>
+								<td>
+									@if ($file->filename)
+									<a href="{{ route('show/licensefile', [$license->id, $file->id]) }}" class="btn btn-default">Download</a>
+									@endif
+								</td>
+								<td>
+									<a class="btn delete-asset btn-danger" href="{{ route('delete/licensefile', [$license->id, $file->id]) }}"><i class="icon-trash icon-white"></i></a>
+								</td>
+							</tr>
+							@endforeach
+						@else
+							<tr>
+								<td colspan="4">
+									No files uploaded
+								</td>
+							</tr>
+
                         @endif
 
                     </tbody>
         </table>
-        @endif
+
 </div>
 
 <!-- Modal -->
