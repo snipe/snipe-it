@@ -154,8 +154,8 @@
 
 <div class="col-md-12">
 
- 	<div class="col-md-12">
- 	<h6>@lang('general.file_uploads') [ <a href="#" data-toggle="modal" data-target="#uploadFileModal">add new</a> ]</h6>
+
+ 	<h6>@lang('general.file_uploads') [ <a href="#" data-toggle="modal" data-target="#uploadFileModal">@lang('button.add')</a> ]</h6>
 
 	@if (count($license->uploads) > 0)
  	<table class="table table-hover">
@@ -215,8 +215,8 @@
 		</form>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Upload</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal">@lang('button.cancel')</button>
+        <button type="button" class="btn btn-primary">@lang('button.upload')</button>
       </div>
     </div>
   </div>

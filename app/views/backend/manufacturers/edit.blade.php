@@ -54,9 +54,9 @@
         <label class="col-md-2 control-label"></label>
             <div class="col-md-7">
                 @if ($manufacturer->id)
-                <a class="btn btn-link" href="{{ URL::previous() }}">@lang('general.cancel')</a>
+                <a class="btn btn-link" href="{{ URL::previous() }}">@lang('button.cancel')</a>
                 @else
-                <a class="btn btn-link" href="{{ route('manufacturers') }}">@lang('general.cancel')</a>
+                <a class="btn btn-link" href="{{ route('manufacturers') }}">@lang('button.cancel')</a>
                 @endif
                 <button type="submit" class="btn btn-success"><i class="icon-ok icon-white"></i> @lang('general.save')</button>
             </div>

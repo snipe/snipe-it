@@ -134,7 +134,7 @@
     <!-- Form actions -->
     <div class="form-group">
         <div class="controls">
-            <a class="btn btn-link" href="{{ URL::previous() }}">@lang('general.cancel')</a>
+            <a class="btn btn-link" href="{{ URL::previous() }}">@lang('button.cancel')</a>
             <button type="submit" class="btn-flat success"><i class="icon-ok icon-white"></i> @lang('general.save')</button>
         </div>
     </div>
