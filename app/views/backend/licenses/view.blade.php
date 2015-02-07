@@ -261,10 +261,15 @@
                             <td>{{ $log->action_type }}</td>
 
                             <td>
-                                @if ($log->userlog)
+                                @if (($log->userlog) && ($log->userlog->id!='0'))
                                 <a href="{{ route('view/user', $log->checkedout_to) }}">
                                 {{{ $log->userlog->fullName() }}}
                                 </a>
+
+                                @elseif ($log->action_type=='uploaded')
+
+                                		{{ $log->filename }}
+
                                 @endif
 
                             </td>
