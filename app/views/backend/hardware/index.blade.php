@@ -112,7 +112,7 @@
 			@if (Input::get('Deployed') && Setting::getSettings()->display_checkout_date)
 	            <td>
 	                @if (count($asset->assetlog) > 0)
-                        {{{ $asset->assetlog->first()->added_on }}}
+                        {{{ $asset->assetlog->first()->created_at }}}
 	                @endif
 	            </td>
             @endif

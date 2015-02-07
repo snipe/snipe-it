@@ -190,7 +190,7 @@
                 @foreach ($asset->assetlog as $log)
                  @if ((isset($log->checkedout_to)) && ($log->checkedout_to!=0))
                 <tr>
-                    <td>{{{ $log->added_on }}}</td>
+                    <td>{{{ $log->created_at }}}</td>
                     <td>
                         @if (isset($log->user_id))
                         {{{ $log->adminlog->fullName() }}}
