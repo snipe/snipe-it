@@ -32,7 +32,19 @@ class License extends Elegant
     {
         return $this->hasMany('Actionlog','asset_id')
             ->where('asset_type', '=', 'software')
-            ->orderBy('added_on', 'desc');
+            ->orderBy('created_at', 'desc');
+    }
+
+    /**
+    * Get uploads for this asset
+    */
+    public function uploads()
+    {
+        return $this->hasMany('Actionlog','asset_id')
+            ->where('asset_type', '=', 'software')
+            ->where('action_type', '=', 'uploaded')
+            ->whereNotNull('filename')
+            ->orderBy('created_at', 'desc');
     }
 
     /**
