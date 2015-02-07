@@ -677,6 +677,7 @@ class LicensesController extends AdminController
 						$logaction->user_id = Sentry::getUser()->id;
 						$logaction->note = e(Input::get('notes'));
 						$logaction->checkedout_to =  NULL;
+						$logaction->created_at =  date("Y-m-d h:i:s");
 						$logaction->filename =  $filename;
 						$log = $logaction->logaction('uploaded');
 					} else {
