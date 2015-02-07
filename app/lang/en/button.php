@@ -2,6 +2,7 @@
 
 return array(
 
+    'add'    => 'Add New',
     'edit'    => 'Edit',
     'delete'  => 'Delete',
     'restore' => 'Restore',
