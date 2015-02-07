@@ -151,13 +151,86 @@
                     </tbody>
                 </table>
 </div>
+
+<div class="col-md-12">
+
+ 	<div class="col-md-12">
+ 	<h6>@lang('general.file_uploads') [ <a href="#" data-toggle="modal" data-target="#uploadFileModal">add new</a> ]</h6>
+
+	@if (count($license->uploads) > 0)
+ 	<table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th class="col-md-5">@lang('admin/licenses/form.notes')</th>
+                            <th class="col-md-5"><span class="line"></span>@lang('general.file_name')</th>
+                            <th class="col-md-2"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @if (count($license->uploads) > 0)
+                        @foreach ($license->uploads as $file)
+                        <tr>
+                            <td>
+                                @if ($file->note) {{{ $file->note }}}
+                                @endif
+                            </td>
+
+                            <td>
+                                @if ($file->filename) {{{ $file->filename }}}
+                                @endif
+                            </td>
+                            <td>
+                            </td>
+                        </tr>
+                        @endforeach
+                        @endif
+
+                    </tbody>
+        </table>
+        @endif
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="uploadFileModal" tabindex="-1" role="dialog" aria-labelledby="uploadFileModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="uploadFileModalLabel">Upload File</h4>
+      </div>
+      <div class="modal-body">
+        {{ Form::open(['method' => 'POST', 'files' => true, 'class' => 'form-horizontal' ]) }}
+
+
+		 <div class="form-group col-md-12">
+		 <div class="input-group col-md-12">
+		 	<input class="col-md-12 form-control" type="text" name="notes" id="notes" placeholder="Notes">
+		</div>
+		</div>
+		<div class="form-group col-md-12">
+		 <div class="input-group col-md-12">
+			{{ Form::file('image') }}
+		</div>
+		</div>
+		</form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Upload</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
 <div class="col-md-12">
                 <h6>@lang('admin/licenses/general.checkout_history')</h6>
 
                 <table class="table table-hover">
                     <thead>
                         <tr>
-                            <th class="col-md-3"><span class="line"></span>@lang('general.date')</th>
+                            <th class="col-md-3">@lang('general.date')</th>
                             <th class="col-md-3"><span class="line"></span>@lang('general.admin')</th>
                             <th class="col-md-3"><span class="line"></span>@lang('button.actions')</th>
                             <th class="col-md-3"><span class="line"></span>@lang('admin/licenses/general.user')</th>
@@ -168,7 +241,7 @@
                         @if (count($license->assetlog) > 0)
                         @foreach ($license->assetlog as $log)
                         <tr>
-                            <td>{{ $log->added_on }}</td>
+                            <td>{{ $log->created_at }}</td>
                             <td>
                                 @if (isset($log->user_id))
                                 {{{ $log->adminlog->fullName() }}}
