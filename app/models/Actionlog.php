@@ -2,7 +2,8 @@
 
 class Actionlog extends Eloquent
 {
-
+	use SoftDeletingTrait;
+    protected $dates = ['deleted_at'];
 
     protected $table = 'asset_logs';
     public $timestamps = false;
@@ -11,6 +12,11 @@ class Actionlog extends Eloquent
     public function assetlog()
     {
         return $this->belongsTo('Asset','asset_id')->withTrashed();
+    }
+
+     public function uploads()
+    {
+        return $this->belongsTo('Asset','asset_id')->where('action_type','=','uploaded')->withTrashed();
     }
 
     public function licenselog()
