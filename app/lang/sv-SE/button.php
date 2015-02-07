@@ -2,10 +2,13 @@
 
 return array(
 
-    'edit'    => 'Ändra',
-    'delete'  => 'Radera',
-    'restore' => 'Återställ',
-    'actions' => 'Åtgärder',
-    'submit'  => 'Skicka',
+    'actions' 	=> 'Åtgärder',
+    'add'    	=> 'Add New',
+    'cancel'    => 'Cancel',
+    'delete'  	=> 'Radera',
+    'edit'    	=> 'Ändra',
+    'restore' 	=> 'Återställ',
+    'submit'  	=> 'Skicka',
+    'upload'    => 'Upload',
 
 );

@@ -2,6 +2,7 @@
 
 return array(
 
+
     'address'				=> 'Supplier Address',
     'admin'					=> 'Administrator',
     'all_assets'			=> 'Alle Assets',
@@ -39,6 +40,8 @@ return array(
     'editprofile'  			=> 'Profil bearbeiten',
     'eol'					=> 'EOL',
     'first_name'			=> 'Vorname',
+    'file_name'				=> 'File',
+    'file_uploads'			=> 'File Uploads',
     'generate'				=> 'Generieren',
     'groups'				=> 'Gruppen',
     'gravatar_email'        => 'Gravatar E-Mail Adresse',

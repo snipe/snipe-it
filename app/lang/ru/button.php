@@ -2,10 +2,13 @@
 
 return array(
 
-    'edit'    => 'Редактировать',
-    'delete'  => 'Удалить',
-    'restore' => 'Восстановить',
-    'actions' => 'Действия',
-    'submit'  => 'Принять',
+    'actions' 	=> 'Действия',
+    'add'    	=> 'Add New',
+    'cancel'    => 'Cancel',
+    'delete'  	=> 'Удалить',
+    'edit'    	=> 'Редактировать',
+    'restore' 	=> 'Восстановить',
+    'submit'  	=> 'Принять',
+    'upload'    => 'Upload',
 
 );

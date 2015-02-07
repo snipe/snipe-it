@@ -2,6 +2,7 @@
 
 return array(
 
+
     'address'				=> '地址',
     'admin'					=> '管理员',
     'all_assets'			=> '所有资产',
@@ -39,6 +40,8 @@ return array(
     'editprofile'  			=> '修改简介',
     'eol'					=> '寿命',
     'first_name'			=> '名字',
+    'file_name'				=> 'File',
+    'file_uploads'			=> 'File Uploads',
     'generate'				=> '生成',
     'groups'				=> '分组',
     'gravatar_email'        => 'Gravatar头像邮件地址',

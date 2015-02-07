@@ -2,6 +2,7 @@
 
 return array(
 
+
     'address'				=> 'Cím',
     'admin'					=> 'Admin',
     'all_assets'			=> 'All Assets',
@@ -39,6 +40,8 @@ return array(
     'editprofile'  			=> 'Profil szerkeztése',
     'eol'					=> 'EOL',
     'first_name'			=> 'Keresztnév',
+    'file_name'				=> 'File',
+    'file_uploads'			=> 'File Uploads',
     'generate'				=> 'Generate',
     'groups'				=> 'Groups',
     'gravatar_email'        => 'Gravatar Email Address',

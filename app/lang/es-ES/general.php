@@ -2,6 +2,7 @@
 
 return array(
 
+
     'address'				=> 'Dirección',
     'admin'					=> 'Admin',
     'all_assets'			=> 'Todos los Equipos',
@@ -39,6 +40,8 @@ return array(
     'editprofile'  			=> 'Editar Perfil',
     'eol'					=> 'EOL',
     'first_name'			=> 'Nombre',
+    'file_name'				=> 'File',
+    'file_uploads'			=> 'File Uploads',
     'generate'				=> 'Generar',
     'groups'				=> 'Grupos',
     'gravatar_email'        => 'Gravatar Email',

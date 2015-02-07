@@ -2,6 +2,7 @@
 
 return array(
 
+
     'address'				=> 'Adresa',
     'admin'					=> 'Admin',
     'all_assets'			=> 'Všechna zařízení',
@@ -39,6 +40,8 @@ return array(
     'editprofile'  			=> 'Upravit profil',
     'eol'					=> 'Konec životnosti',
     'first_name'			=> 'Jméno',
+    'file_name'				=> 'File',
+    'file_uploads'			=> 'File Uploads',
     'generate'				=> 'Vytvořit',
     'groups'				=> 'Skupiny',
     'gravatar_email'        => 'Emailová adresa Gravatar',

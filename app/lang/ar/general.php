@@ -2,6 +2,7 @@
 
 return array(
 
+
     'address'				=> 'العنوان',
     'admin'					=> 'الإدارة',
     'all_assets'			=> 'كل الأصول',
@@ -39,6 +40,8 @@ return array(
     'editprofile'  			=> 'تعديل الملف الشخصي',
     'eol'					=> 'الحياة',
     'first_name'			=> 'الإسم الأول',
+    'file_name'				=> 'File',
+    'file_uploads'			=> 'File Uploads',
     'generate'				=> 'Generate',
     'groups'				=> 'المجموعات',
     'gravatar_email'        => 'البريد الإلكتروني لخدمة Gravatar',

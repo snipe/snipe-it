@@ -2,10 +2,13 @@
 
 return array(
 
-    'edit'    => 'Szerkesztés',
-    'delete'  => 'Törlés',
-    'restore' => 'Visszaállítás',
-    'actions' => 'Műveletek',
-    'submit'  => 'Küldés',
+    'actions' 	=> 'Műveletek',
+    'add'    	=> 'Add New',
+    'cancel'    => 'Cancel',
+    'delete'  	=> 'Törlés',
+    'edit'    	=> 'Szerkesztés',
+    'restore' 	=> 'Visszaállítás',
+    'submit'  	=> 'Küldés',
+    'upload'    => 'Upload',
 
 );

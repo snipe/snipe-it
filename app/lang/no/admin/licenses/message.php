@@ -14,6 +14,18 @@ return array(
         'success' => 'Vellykket opprettelse av lisens.'
     ),
 
+    'deletefile' => array(
+        'error'   => 'File not deleted. Please try again.',
+        'success' => 'File successfully deleted.',
+    ),
+
+    'upload' => array(
+        'error'   => 'File(s) not uploaded. Please try again.',
+        'success' => 'File(s) successfully uploaded.',
+        'nofiles' => 'You did not select any files for upload',
+        'invalidfiles' => 'One or more of your files is too large or is a filetype that is not allowed. Allowed filetypes are png, gif, jpg, doc, docx, pdf, and txt.',
+    ),
+
     'update' => array(
         'error'   => 'Lisens ble ikke oppdatert, prøv igjen',
         'success' => 'Vellykket oppdatering av lisens.'

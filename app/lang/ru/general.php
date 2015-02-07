@@ -2,6 +2,7 @@
 
 return array(
 
+
     'address'				=> 'Адрес',
     'admin'					=> 'Администратор',
     'all_assets'			=> 'Все активы',
@@ -39,6 +40,8 @@ return array(
     'editprofile'  			=> 'Редактировать свой профиль',
     'eol'					=> 'EOL',
     'first_name'			=> 'Имя',
+    'file_name'				=> 'File',
+    'file_uploads'			=> 'File Uploads',
     'generate'				=> 'Сгенерировать',
     'groups'				=> 'Группы',
     'gravatar_email'        => 'Адрес электронной почты Gravatar',

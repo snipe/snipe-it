@@ -19,7 +19,7 @@ return array(
     'seats'             => 'Anzahl Aktivierungen',
     'serial'            => 'Seriennummer',
     'supplier'          => 'Lieferant',
-    'termination_date'  => 'Termination Date',
+    'termination_date'  => 'Ablaufdatum',
     'to_email'          => 'E-Mail des Lizenzerwerbers',
     'to_name'           => 'Name des Lizenzerwerbers',
     'update'            => 'Lizenz aktualisieren',
