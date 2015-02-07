@@ -18,6 +18,7 @@
         "symfony/config": "~2",
         "symfony/stopwatch": "~2",
 		"laravel/framework": "4.2.*",
+		"doctrine/dbal": "v2.4.2",
 		"cartalyst/sentry": "2.0.*",
 		"barryvdh/laravel-debugbar": "1.x",
 		"chumper/datatable": "dev-master",
