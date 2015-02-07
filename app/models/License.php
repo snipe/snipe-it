@@ -47,6 +47,7 @@ class License extends Elegant
             ->orderBy('created_at', 'desc');
     }
 
+
     /**
     * Get admin user for this asset
     */

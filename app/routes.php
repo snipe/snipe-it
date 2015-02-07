@@ -91,6 +91,7 @@ Route::group(array('prefix' => 'admin', 'before' => 'admin-auth', 'namespace' =>
         Route::get('{licenseId}/view', array('as' => 'view/license', 'uses' => 'LicensesController@getView'));
         Route::post('{licenseId}/upload', array('as' => 'upload/license', 'uses' => 'LicensesController@postUpload'));
         Route::get('{licenseId}/deletefile/{fileId}', array('as' => 'delete/licensefile', 'uses' => 'LicensesController@getDeleteFile'));
+        Route::get('{licenseId}/showfile/{fileId}', array('as' => 'show/licensefile', 'uses' => 'LicensesController@displayFile'));
         Route::get('/', array('as' => 'licenses', 'uses' => 'LicensesController@getIndex'));
     });
 

@@ -164,6 +164,7 @@
                             <th class="col-md-5">@lang('admin/licenses/form.notes')</th>
                             <th class="col-md-5"><span class="line"></span>@lang('general.file_name')</th>
                             <th class="col-md-2"></th>
+                            <th class="col-md-2"></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -174,10 +175,12 @@
                                 @if ($file->note) {{{ $file->note }}}
                                 @endif
                             </td>
-
+							<td>
+							{{{ $file->filename }}}
+							</td>
                             <td>
                                 @if ($file->filename)
-                                <a href="{{{ $file->filename }}}">{{{ $file->filename }}}</a>
+                                <a href="{{ route('show/licensefile', [$license->id, $file->id]) }}" class="btn btn-default">Download</a>
                                 @endif
                             </td>
                             <td>

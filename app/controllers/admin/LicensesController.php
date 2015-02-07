@@ -18,7 +18,7 @@ use Str;
 use Supplier;
 use Validator;
 use View;
-
+use Response;
 
 class LicensesController extends AdminController
 {
@@ -711,7 +711,7 @@ class LicensesController extends AdminController
 
 
     /**
-    *  Upload the file to the server
+    *  Delete the associated file
     *
     * @param  int  $assetId
     * @return View
@@ -732,6 +732,33 @@ class LicensesController extends AdminController
 			$log->delete();
 			return Redirect::back()->with('success', Lang::get('admin/licenses/message.deletefile.success'));
 
+        } else {
+            // Prepare the error message
+            $error = Lang::get('admin/licenses/message.does_not_exist', compact('id'));
+
+            // Redirect to the licence management page
+            return Redirect::route('licenses')->with('error', $error);
+        }
+    }
+
+
+
+    /**
+    *  Display/download the uploaded file
+    *
+    * @param  int  $assetId
+    * @return View
+    **/
+    public function displayFile($licenseId = null, $fileId = null)
+    {
+
+        $license = License::find($licenseId);
+
+		// the license is valid
+        if (isset($license->id)) {
+				$log = Actionlog::find($fileId);
+				$file = $log->get_src();
+				return Response::download($file);
         } else {
             // Prepare the error message
             $error = Lang::get('admin/licenses/message.does_not_exist', compact('id'));

@@ -36,6 +36,18 @@ class Actionlog extends Eloquent
 
 
     /**
+	* Check if the file exists, and if it does, force a download
+	**/
+    public function get_src() {
+
+			$file = app_path().'/private_uploads/'.$this->filename;
+			return $file;
+
+    }
+
+
+
+    /**
     * Get the parent category name
     */
     public function logaction($actiontype)
