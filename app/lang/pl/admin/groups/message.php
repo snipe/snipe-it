@@ -2,21 +2,21 @@
 
 return array(
 
-    'group_exists'        => 'Group already exists!',
-    'group_not_found'     => 'Group [:id] does not exist.',
-    'group_name_required' => 'The name field is required',
+    'group_exists'        => 'Taka grupa już istnieje!',
+    'group_not_found'     => 'Grupa [:id] nie istnieje.',
+    'group_name_required' => 'Nazwa jest polem obowiązkowym',
 
     'success' => array(
-        'create' => 'Group was successfully created.',
-        'update' => 'Group was successfully updated.',
-        'delete' => 'Group was successfully deleted.',
+        'create' => 'Grupa została poprawnie utworzona.',
+        'update' => 'Grupa została poprawnie zaktualizowana.',
+        'delete' => 'Grupa została usunięta.',
     ),
 
     'delete' => array(
-        'confirm'   => 'Are you sure you wish to delete this group?',
-        'create' => 'There was an issue creating the group. Please try again.',
-        'update' => 'There was an issue updating the group. Please try again.',
-        'delete' => 'There was an issue deleting the group. Please try again.',
+        'confirm'   => 'Czy na pewno chcesz usunąć tą grupę ?',
+        'create' => 'Wystąpił problem podczas tworzenia grupy. Proszę spróbować ponownie.',
+        'update' => 'Wystąpił problem podczas aktualizacji grupy. Proszę spróbować ponownie.',
+        'delete' => 'Wystąpił problem podczas usuwania grupy. Proszę spróbować ponownie.',
     ),
 
 );

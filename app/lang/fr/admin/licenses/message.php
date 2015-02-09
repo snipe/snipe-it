@@ -15,15 +15,15 @@ return array(
     ),
 
     'deletefile' => array(
-        'error'   => 'File not deleted. Please try again.',
-        'success' => 'File successfully deleted.',
+        'error'   => 'Le fichier n\'a pas pu être supprimé. Merci de réessayer.',
+        'success' => 'Le fichier a bien été supprimé.',
     ),
 
     'upload' => array(
-        'error'   => 'File(s) not uploaded. Please try again.',
-        'success' => 'File(s) successfully uploaded.',
-        'nofiles' => 'You did not select any files for upload',
-        'invalidfiles' => 'One or more of your files is too large or is a filetype that is not allowed. Allowed filetypes are png, gif, jpg, doc, docx, pdf, and txt.',
+        'error'   => 'Le(s) fichier(s) n\'a pas pu être uploadé. Merci de réessayer.',
+        'success' => 'Le(s) fichier(s) a bien été uploadé.',
+        'nofiles' => 'Vous n\'avez pas sélectionné de fichier pour l\'upload',
+        'invalidfiles' => 'Un ou plusieurs de vos fichiers sont trop lourds, ou sont d\'un type non autorisé. Les types de fichiers autorisés sont png, gif, jpg, doc, docx, pdf et txt.',
     ),
 
     'update' => array(
