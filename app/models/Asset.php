@@ -200,4 +200,78 @@ class Asset extends Elegant
 			return false;
 		}
     }
+
+
+	/**
+	-----------------------------------------------
+	BEGIN QUERY SCOPES
+	-----------------------------------------------
+	**/
+
+
+	/**
+	* Query builder scope for hardware
+	*
+	* @param  Illuminate\Database\Query\Builder  $query  Query builder instance
+	* @return Illuminate\Database\Query\Builder          Modified query builder
+	*/
+
+	public function scopeHardware($query)
+	{
+		return $query->where('physical','=','1');
+	}
+
+
+	/**
+	* Query builder scope for pending assets
+	*
+	* @param  Illuminate\Database\Query\Builder  $query  Query builder instance
+	* @return Illuminate\Database\Query\Builder          Modified query builder
+	*/
+
+	public function scopePending($query)
+	{
+		return $query->whereNull('status_id','and')->where('assigned_to','=','0');
+	}
+
+
+	/**
+	* Query builder scope for RTD assets
+	*
+	* @param  Illuminate\Database\Query\Builder  $query  Query builder instance
+	* @return Illuminate\Database\Query\Builder          Modified query builder
+	*/
+
+	public function scopeRTD($query)
+	{
+		return $query->where('status_id','=','0')->where('assigned_to','=','0');
+	}
+
+
+	/**
+	* Query builder scope for Undeployable assets
+	*
+	* @param  Illuminate\Database\Query\Builder  $query  Query builder instance
+	* @return Illuminate\Database\Query\Builder          Modified query builder
+	*/
+
+	public function scopeUndeployable($query)
+	{
+		return $query->where('status_id','>',1)->where('assigned_to','=','0');
+	}
+
+
+	/**
+	* Query builder scope for Deployed assets
+	*
+	* @param  Illuminate\Database\Query\Builder  $query  Query builder instance
+	* @return Illuminate\Database\Query\Builder          Modified query builder
+	*/
+
+	public function scopeDeployed($query)
+	{
+		return $query->where('assigned_to','>','0');
+	}
+
+
 }
