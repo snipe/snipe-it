@@ -2,10 +2,13 @@
 
 return array(
 
-    'edit'    => 'Bewerk',
-    'delete'  => 'Verwijder',
-    'restore' => 'Herstel',
-    'actions' => 'Acties',
-    'submit'  => 'Verzenden',
+    'actions' 	=> 'Acties',
+    'add'    	=> 'Add New',
+    'cancel'    => 'Cancel',
+    'delete'  	=> 'Verwijder',
+    'edit'    	=> 'Bewerk',
+    'restore' 	=> 'Herstel',
+    'submit'  	=> 'Verzenden',
+    'upload'    => 'Upload',
 
 );

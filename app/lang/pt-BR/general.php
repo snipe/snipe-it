@@ -2,6 +2,7 @@
 
 return array(
 
+
     'address'				=> 'Endereço',
     'admin'					=> 'Administrador',
     'all_assets'			=> 'Todos os Bens',
@@ -20,8 +21,8 @@ return array(
     'category'				=> 'Categoria do Bem',
     'changeemail'  			=> 'Alterar Endereço de E-mail',
     'changepassword'  		=> 'Alterar Senha',
-    'checkin'  				=> 'Checkin',
-    'checkout'  			=> 'Checkout',
+    'checkin'  				=> 'Check-in',
+    'checkout'  			=> 'Check-out',
     'city'  				=> 'Cidade',
     'country'  				=> 'País',
     'create'				=> 'Criar Novo',
@@ -39,6 +40,8 @@ return array(
     'editprofile'  			=> 'Editar Seu Perfil',
     'eol'					=> 'EOL',
     'first_name'			=> 'Primeiro Nome',
+    'file_name'				=> 'File',
+    'file_uploads'			=> 'File Uploads',
     'generate'				=> 'Gerar',
     'groups'				=> 'Grupos',
     'gravatar_email'        => 'Endereço de E-mail do Gravatar',

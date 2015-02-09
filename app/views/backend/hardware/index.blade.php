@@ -1,14 +1,5 @@
 @extends('backend/layouts/default')
 
-<?php
-use DebugBar\StandardDebugBar;
-
-$debugbar = new StandardDebugBar();
-$debugbarRenderer = $debugbar->getJavascriptRenderer();
-
-$debugbar["messages"]->addMessage("hello world!");
-?>
-
 @section('title0')
     @if (Input::get('Pending') || Input::get('Undeployable') || Input::get('RTD')  || Input::get('Deployed'))
         @if (Input::get('Pending'))
@@ -121,7 +112,7 @@ $debugbar["messages"]->addMessage("hello world!");
 			@if (Input::get('Deployed') && Setting::getSettings()->display_checkout_date)
 	            <td>
 	                @if (count($asset->assetlog) > 0)
-                        {{{ $asset->assetlog->first()->added_on }}}
+                        {{{ $asset->assetlog->first()->created_at }}}
 	                @endif
 	            </td>
             @endif

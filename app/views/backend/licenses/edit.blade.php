@@ -155,9 +155,15 @@
             <!-- Maintained -->
             <div class="form-group {{ $errors->has('maintained') ? ' has-error' : '' }}">
                 <label for="maintained" class="col-md-3 control-label">@lang('admin/licenses/form.maintained')</label>
-                <div class="col-md-7">
-                    {{ Form::select('maintained', $maintained_list , Input::old('maintained', $license->maintained), array('class'=>'select2', 'style'=>'min-width:350px')) }}
-                    {{ $errors->first('maintained', '<span class="alert-msg"><i class="icon-remove-sign"></i> :message</span>') }}
+
+
+                <div class="col-md-7 input-group">
+					{{ Form::Checkbox('maintained', '1', Input::old('maintained', $license->maintained)) }}
+					@lang('general.yes')
+
+
+
+
                 </div>
             </div>
 
@@ -185,7 +191,7 @@
                 <label class="col-md-3 control-label"></label>
                     <div class="col-md-7">
 
-                        <a class="btn btn-link" href="{{ URL::previous() }}">@lang('general.cancel')</a>
+                        <a class="btn btn-link" href="{{ URL::previous() }}">@lang('button.cancel')</a>
                         <button type="submit" class="btn btn-success"><i class="icon-ok icon-white"></i> @lang('general.save')</button>
                     </div>
                 </div>

@@ -1,8 +1,9 @@
 <?php
 class Supplier extends Elegant
 {
-    protected $softDelete = true;
-    // Declare the rules for the form validation
+	use SoftDeletingTrait;
+	protected $dates = ['deleted_at'];
+
     protected $rules = array(
         'name'              => 'required|alpha_space|min:3|max:255|unique:suppliers,name,{id}',
         'address'           => 'alpha_space|min:3|max:50',

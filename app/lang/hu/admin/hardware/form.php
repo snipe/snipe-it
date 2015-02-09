@@ -6,7 +6,7 @@ return array(
     'checkout_to'		=> 'Checkout to',
     'cost'				=> 'Purchase Cost',
     'create'			=> 'Create Asset',
-    'date'				=> 'Purchase Date',
+    'date'				=> 'Vásárlás dátuma',
     'depreciates_on'	=> 'Depreciates On',
     'depreciation'		=> 'Depreciation',
     'default_location'	=> 'Default Location',
@@ -16,7 +16,7 @@ return array(
     'fully_depreciated'	=> 'Fully Depreciated',
     'help_checkout'		=> 'If you wish to assign this asset immediately, you should select "Ready to Deploy" from the status list above, or unexpected things may happen. ',
     'manufacturer'		=> 'Manufacturer',
-    'model'				=> 'Model',
+    'model'				=> 'Modell',
     'months'			=> 'months',
     'name'				=> 'Asset Name',
     'notes'				=> 'Notes',
@@ -28,7 +28,7 @@ return array(
     'supplier'			=> 'Supplier',
     'tag'				=> 'Asset Tag',
     'update'			=> 'Asset Update',
-    'warranty'			=> 'Warranty',
+    'warranty'			=> 'Garancia',
     'years'				=> 'years',
 )
 ;

@@ -1,10 +1,10 @@
 <?php
 
 return array(
-    'name'      	=> 'Status Name',
-    'title'      	=> 'Status Labels',
-    'update'      	=> 'Update Status Label',
-    'create'      	=> 'Create Status Label',
-    'about'      	=> 'About Status Labels',
-    'info'      	=> 'Status labels are used to describe the various reasons why an asset <strong><em>cannot</em></strong> be deployed. It could be broken, out for diagnostics, out for repair, lost or stolen, etc. Status labels allow your team to show the progression.',
+    'name'      	=> 'Název stavu',
+    'title'      	=> 'Označení stavu',
+    'update'      	=> 'Upravit označení stavu',
+    'create'      	=> 'Vytvořit označení stavu',
+    'about'      	=> 'O označení stavu',
+    'info'      	=> 'Označení stavu se používá k popisu různých důvodů proč majetek <strong><em>nemůže</em></strong> být přidělen. Může být pokažený, pryč na opravě, na diagnostice, ztracený nebo ukradený, apod. Označení stavu umožňuje členům týmu zobrazovat postup.',
 );

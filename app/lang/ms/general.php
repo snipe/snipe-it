@@ -2,6 +2,7 @@
 
 return array(
 
+
     'address'				=> 'Alamat',
     'admin'					=> 'Pentadbir',
     'all_assets'			=> 'Semua Harta',
@@ -39,6 +40,8 @@ return array(
     'editprofile'  			=> 'Kemaskini Profail Anda',
     'eol'					=> 'EOL',
     'first_name'			=> 'Nama pertama',
+    'file_name'				=> 'File',
+    'file_uploads'			=> 'File Uploads',
     'generate'				=> 'Laksanakan',
     'groups'				=> 'Kumpulan',
     'gravatar_email'        => 'Alam e-mel gravatar',

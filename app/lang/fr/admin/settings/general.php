@@ -1,6 +1,9 @@
 <?php
 
 return array(
+	'auto_increment_assets'		=> 'Générer des identifiants d\'actifs auto-incrémentés',
+	'auto_increment_prefix'		=> 'Préfixe (optionnel)',
+	'auti_incrementing_help'    => 'Activez les identifiants d\'actifs auto-incrémentés avant d\'activer ceci',
     'display_asset_name'        => 'Afficher le nom des actifs',
     'display_checkout_date'     => 'Afficher la date d\'association',
     'display_eol'               => 'Afficher la fin de vie dans les tables',

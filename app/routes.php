@@ -76,7 +76,7 @@ Route::group(array('prefix' => 'admin', 'before' => 'admin-auth', 'namespace' =>
 
     # Licenses
     Route::group(array('prefix' => 'licenses'), function () {
-        Route::get('/', array('as' => 'licenses', 'uses' => 'LicensesController@getIndex'));
+
         Route::get('create', array('as' => 'create/licenses', 'uses' => 'LicensesController@getCreate'));
         Route::post('create', 'LicensesController@postCreate');
         Route::get('{licenseId}/edit', array('as' => 'update/license', 'uses' => 'LicensesController@getEdit'));
@@ -89,6 +89,10 @@ Route::group(array('prefix' => 'admin', 'before' => 'admin-auth', 'namespace' =>
         Route::get('{licenseId}/checkin', array('as' => 'checkin/license', 'uses' => 'LicensesController@getCheckin'));
         Route::post('{licenseId}/checkin', 'LicensesController@postCheckin');
         Route::get('{licenseId}/view', array('as' => 'view/license', 'uses' => 'LicensesController@getView'));
+        Route::post('{licenseId}/upload', array('as' => 'upload/license', 'uses' => 'LicensesController@postUpload'));
+        Route::get('{licenseId}/deletefile/{fileId}', array('as' => 'delete/licensefile', 'uses' => 'LicensesController@getDeleteFile'));
+        Route::get('{licenseId}/showfile/{fileId}', array('as' => 'show/licensefile', 'uses' => 'LicensesController@displayFile'));
+        Route::get('/', array('as' => 'licenses', 'uses' => 'LicensesController@getIndex'));
     });
 
 

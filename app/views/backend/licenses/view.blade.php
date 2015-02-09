@@ -26,71 +26,72 @@
     </div>
 </div>
 
-<div class="user-profile">
+<div class="user-profile ">
 <div class="row profile">
 <div class="col-md-9 bio">
 
-<h6>@lang('admin/licenses/general.info')</h6>
+@if ($license->serial)
+	<div class="col-md-12" style="padding-bottom: 10px; margin-left: 15px;">
+	<strong>@lang('admin/licenses/form.serial'): </strong>
+	{{{ wordwrap($license->serial, 10, "\n", true) }}}
+	</div>
+@endif
 
-<div class="col-md-12">
+<div class="col-md-12" style="padding-bottom: 20px">
 
 @if ($license->license_name)
-<div class="col-md-6"><strong>@lang('admin/licenses/form.to_name'): </strong>
+<div class="col-md-6" style="padding-bottom: 5px"><strong>@lang('admin/licenses/form.to_name'): </strong>
 {{{ $license->license_name }}} </div>
 @endif
 
 @if ($license->license_email)
-<div class="col-md-6"><strong>@lang('admin/licenses/form.to_email'): </strong>
+<div class="col-md-6" style="padding-bottom: 5px"><strong>@lang('admin/licenses/form.to_email'): </strong>
 {{{ $license->license_email }}} </div>
 @endif
 
 @if ($license->supplier_id)
-    <div class="col-md-6"><strong>@lang('admin/licenses/form.supplier'): </strong>
+    <div class="col-md-6" style="padding-bottom: 5px"><strong>@lang('admin/licenses/form.supplier'): </strong>
     <a href="{{ route('view/supplier', $license->supplier_id) }}">
     {{{ $license->supplier->name }}}
     </a> </div>
 @endif
 
 @if ($license->expiration_date > 0)
-<div class="col-md-6"><strong>@lang('admin/licenses/form.expiration'): </strong>
+<div class="col-md-6" style="padding-bottom: 5px"><strong>@lang('admin/licenses/form.expiration'): </strong>
 {{{ $license->expiration_date }}} </div>
 @endif
 
-@if ($license->notes)
-<div class="col-md-6"><strong>@lang('admin/licenses/form.notes'): </strong>
-{{{ $license->notes }}}</div>
-@endif
 
  @if ($license->depreciation)
-            <div class="col-md-6"><strong>@lang('admin/hardware/form.depreciation'): </strong>
-            {{{ $license->depreciation->name }}}
-                ({{{ $license->depreciation->months }}}
-                @lang('admin/hardware/form.months')
-                )</div>
-            <div class="col-md-6"><strong>@lang('admin/hardware/form.depreciates_on'): </strong>
-            {{{ $license->depreciated_date() }}} </div>
-            <div class="col-md-6"><strong>@lang('admin/hardware/form.fully_depreciated'): </strong>
-            {{{ $license->months_until_depreciated()->m }}}
-            @lang('admin/hardware/form.months')
-             @if ($license->months_until_depreciated()->y > 0)
-                , {{{ $license->months_until_depreciated()->y }}}
-                @lang('admin/hardware/form.years')
-             @endif
-             </div>
-        @endif
+	<div class="col-md-6" style="padding-bottom: 5px">
+	<strong>@lang('admin/hardware/form.depreciation'): </strong>
+	{{{ $license->depreciation->name }}}
+		({{{ $license->depreciation->months }}}
+		@lang('admin/hardware/form.months')
+		)
+	</div>
 
+	<div class="col-md-6" style="padding-bottom: 5px">
+		<strong>@lang('admin/hardware/form.depreciates_on'): </strong>
+		{{{ $license->depreciated_date() }}}
+	</div>
 
-<br><br><br>
-</div>
+	<div class="col-md-6" style="padding-bottom: 5px">
+		<strong>@lang('admin/hardware/form.fully_depreciated'): </strong>
+		{{{ $license->months_until_depreciated()->m }}}
+		@lang('admin/hardware/form.months')
 
-@if ($license->serial)
-<div class="col-md-12"><strong>@lang('admin/licenses/form.serial'): </strong>
-{{{ wordwrap($license->serial, 10, "\n", true) }}} </div>
+		@if ($license->months_until_depreciated()->y > 0)
+			, {{{ $license->months_until_depreciated()->y }}}
+			@lang('admin/hardware/form.years')
+		@endif
+	 </div>
 @endif
 
+</div>
 
 
-
+<div class="col-md-12" style="padding-top: 60px;">
                 <!-- checked out assets table -->
                 <h6>{{ $license->seats }} @lang('admin/licenses/general.license_seats')</h6>
                 <table class="table table-hover">
@@ -149,13 +150,105 @@
 
                     </tbody>
                 </table>
-                <br>
+</div>
+
+<div class="col-md-12">
+
+
+ 	<h6>@lang('general.file_uploads') [ <a href="#" data-toggle="modal" data-target="#uploadFileModal">@lang('button.add')</a> ]</h6>
+
+
+ 	<table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th class="col-md-5">@lang('admin/licenses/form.notes')</th>
+                            <th class="col-md-5"><span class="line"></span>@lang('general.file_name')</th>
+                            <th class="col-md-2"></th>
+                            <th class="col-md-2"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @if (count($license->uploads) > 0)
+							@foreach ($license->uploads as $file)
+							<tr>
+								<td>
+									@if ($file->note) {{{ $file->note }}}
+									@endif
+								</td>
+								<td>
+								{{{ $file->filename }}}
+								</td>
+								<td>
+									@if ($file->filename)
+									<a href="{{ route('show/licensefile', [$license->id, $file->id]) }}" class="btn btn-default">Download</a>
+									@endif
+								</td>
+								<td>
+									<a class="btn delete-asset btn-danger" href="{{ route('delete/licensefile', [$license->id, $file->id]) }}"><i class="icon-trash icon-white"></i></a>
+								</td>
+							</tr>
+							@endforeach
+						@else
+							<tr>
+								<td colspan="4">
+									No files uploaded
+								</td>
+							</tr>
+
+                        @endif
+
+                    </tbody>
+        </table>
+
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="uploadFileModal" tabindex="-1" role="dialog" aria-labelledby="uploadFileModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="uploadFileModalLabel">Upload File</h4>
+      </div>
+      {{ Form::open([
+      'method' => 'POST',
+      'route' => ['upload/license', $license->id],
+      'files' => true, 'class' => 'form-horizontal' ]) }}
+      <div class="modal-body">
+
+		<p>Allowed filetypes are png, gif, jpg, doc, docx, pdf, and txt.</p>
+
+		 <div class="form-group col-md-12">
+		 <div class="input-group col-md-12">
+		 	<input class="col-md-12 form-control" type="text" name="notes" id="notes" placeholder="Notes">
+		</div>
+		</div>
+		<div class="form-group col-md-12">
+		 <div class="input-group col-md-12">
+			{{ Form::file('licensefile[]', ['multiple' => 'multiple']) }}
+		</div>
+		</div>
+
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">@lang('button.cancel')</button>
+        <button type="submit" class="btn btn-primary">@lang('button.upload')</button>
+      </div>
+      {{ Form::close() }}
+    </div>
+  </div>
+</div>
+
+
+
+<div class="col-md-12">
                 <h6>@lang('admin/licenses/general.checkout_history')</h6>
 
                 <table class="table table-hover">
                     <thead>
                         <tr>
-                            <th class="col-md-3"><span class="line"></span>@lang('general.date')</th>
+                            <th class="col-md-3">@lang('general.date')</th>
                             <th class="col-md-3"><span class="line"></span>@lang('general.admin')</th>
                             <th class="col-md-3"><span class="line"></span>@lang('button.actions')</th>
                             <th class="col-md-3"><span class="line"></span>@lang('admin/licenses/general.user')</th>
@@ -166,7 +259,7 @@
                         @if (count($license->assetlog) > 0)
                         @foreach ($license->assetlog as $log)
                         <tr>
-                            <td>{{ $log->added_on }}</td>
+                            <td>{{ $log->created_at }}</td>
                             <td>
                                 @if (isset($log->user_id))
                                 {{{ $log->adminlog->fullName() }}}
@@ -175,10 +268,15 @@
                             <td>{{ $log->action_type }}</td>
 
                             <td>
-                                @if ($log->userlog)
+                                @if (($log->userlog) && ($log->userlog->id!='0'))
                                 <a href="{{ route('view/user', $log->checkedout_to) }}">
                                 {{{ $log->userlog->fullName() }}}
                                 </a>
+
+                                @elseif ($log->action_type=='uploaded')
+
+                                		{{ $log->filename }}
+
                                 @endif
 
                             </td>
@@ -208,39 +306,36 @@
                     </tbody>
                 </table>
         </div>
-
+</div>
         <!-- side address column -->
         <div class="col-md-3 col-xs-12 address pull-right">
         <h6><br>@lang('general.moreinfo'):</h6>
                 <ul>
                     @if ($license->purchase_order)
-                    <li>@lang('admin/licenses/form.purchase_order'):
+                    <li><strong>@lang('admin/licenses/form.purchase_order'):</strong>
                     {{{ $license->purchase_order }}} </li>
                     @endif
                     @if ($license->purchase_date > 0)
-                    <li>@lang('admin/licenses/form.date'):
+                    <li><strong>@lang('admin/licenses/form.date'):</strong>
                     {{{ $license->purchase_date }}} </li>
                     @endif
                     @if ($license->purchase_cost > 0)
-                    <li>@lang('admin/licenses/form.cost'):
+                    <li><strong>@lang('admin/licenses/form.cost'):</strong>
                     @lang('general.currency')
                     {{{ number_format($license->purchase_cost,2) }}} </li>
                     @endif
                     @if ($license->order_number)
-                    <li>@lang('admin/licenses/form.order'):
+                    <li><strong>@lang('admin/licenses/form.order'):</strong>
                     {{{ $license->order_number }}} </li>
                     @endif
                     @if (($license->seats) && ($license->seats) > 0)
-                    <li>@lang('admin/licenses/form.seats'):
+                    <li><strong>@lang('admin/licenses/form.seats'):</strong>
                     {{{ $license->seats }}} </li>
                     @endif
-                    @if ($license->depreciation)
-                    <li>@lang('admin/licenses/form.depreciation'):
-                    {{{ $license->depreciation->name }}}
-                    ({{{ $license->depreciation->months }}} months)</li>
-                    @endif
+
                     @if ($license->notes)
-                        <li>{{{ $license->notes }}}</li>
+                    	 <li><strong>@lang('admin/licenses/form.notes'):</strong>
+                        <li>{{ nl2br(e($license->notes)) }}</li>
                     @endif
                 </ul>
         </div>

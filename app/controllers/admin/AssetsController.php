@@ -38,39 +38,20 @@ class AssetsController extends AdminController
     {
         // Grab all the assets
 
+		$assets = Asset::with('model','assigneduser','assetstatus','defaultLoc','assetlog')->Hardware();
         // Filter results
         if (Input::get('Pending')) {
-        	$assets = Asset::with('model','assigneduser','assetstatus','defaultLoc','assetlog')
-        	->whereNull('status_id','and')
-        	->where('assigned_to','=','0')
-        	->where('physical', '=', 1)
-        	->get();
+        	$assets->Pending();
         } elseif (Input::get('RTD')) {
-        	$assets = Asset::with('model','assigneduser','assetstatus','defaultLoc','assetlog')
-        	->where('status_id', '=', 0)
-        	->where('assigned_to', '=', '0')
-        	->where('physical', '=', 1)
-        	->orderBy('asset_tag', 'ASC')
-        	->get();
+        	$assets->RTD();
         } elseif (Input::get('Undeployable')) {
-        	$assets = Asset::with('model','assigneduser','assetstatus','defaultLoc','assetlog')
-        	->where('status_id', '>', 1)
-        	->where('physical', '=', 1)
-        	->orderBy('asset_tag', 'ASC')
-        	->get();
+        	$assets->Undeployable();
         } elseif (Input::get('Deployed')) {
-        	$assets = Asset::with('model','assigneduser','assetstatus','defaultLoc','assetlog')
-        	->where('status_id', '=', 0)
-        	->where('physical', '=', 1)
-        	->where('assigned_to','>','0')
-        	->orderBy('asset_tag', 'ASC')
-        	->get();
-        } else {
-        	$assets = Asset::with('model','assigneduser','assetstatus','defaultLoc')
-        	->where('physical', '=', 1)
-        	->orderBy('asset_tag', 'ASC')
-        	->get();
+        	$assets->Deployed();
         }
+
+        $assets = $assets->orderBy('asset_tag', 'ASC')->get();
+
 
         // Paginate the users
         /**$assets = $assets->paginate(Setting::getSettings()->per_page)
@@ -84,6 +65,8 @@ class AssetsController extends AdminController
 
         return View::make('backend/hardware/index', compact('assets'));
     }
+
+
 
     /**
      * Asset create.
@@ -174,7 +157,7 @@ class AssetsController extends AdminController
             }
 
             if (e(Input::get('assigned_to')) == '') {
-                $asset->assigned_to =  0;
+                $asset->assigned_to =  NULL;
             } else {
                 $asset->assigned_to        = e(Input::get('assigned_to'));
             }
@@ -213,13 +196,15 @@ class AssetsController extends AdminController
             // Was the asset created?
             if($asset->save()) {
 
-				$logaction = new Actionlog();
-				$logaction->asset_id = $asset->id;
-				$logaction->checkedout_to = $asset->assigned_to;
-				$logaction->asset_type = 'hardware';
-				$logaction->user_id = Sentry::getUser()->id;
-				$logaction->note = e(Input::get('note'));
-				$log = $logaction->logaction('checkout');
+            	if (Input::get('assigned_to')!='') {
+					$logaction = new Actionlog();
+					$logaction->asset_id = $asset->id;
+					$logaction->checkedout_to = $asset->assigned_to;
+					$logaction->asset_type = 'hardware';
+					$logaction->user_id = Sentry::getUser()->id;
+					$logaction->note = e(Input::get('note'));
+					$log = $logaction->logaction('checkout');
+				}
 
                 // Redirect to the asset listing page
                 return Redirect::to("hardware")->with('success', Lang::get('admin/hardware/message.create.success'));

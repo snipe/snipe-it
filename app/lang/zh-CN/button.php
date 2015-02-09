@@ -2,10 +2,13 @@
 
 return array(
 
-    'edit'    => '编辑',
-    'delete'  => '刪除',
-    'restore' => '恢复',
-    'actions' => '操作',
-    'submit'  => '提交',
+    'actions' 	=> '操作',
+    'add'    	=> 'Add New',
+    'cancel'    => 'Cancel',
+    'delete'  	=> '刪除',
+    'edit'    	=> '编辑',
+    'restore' 	=> '恢复',
+    'submit'  	=> '提交',
+    'upload'    => 'Upload',
 
 );

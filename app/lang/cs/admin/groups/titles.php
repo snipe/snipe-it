@@ -2,12 +2,12 @@
 
 return array(
 
-    'group_management' 	 	=> 'Group Management',
-    'create_group' 	 		=> 'Create New Group',
-    'edit_group' 	 		=> 'Edit Group',
-    'group_name' 	 		=> 'Group Name',
-    'group_admin' 	 		=> 'Group Admin',
-    'allow' 	 			=> 'Allow',
-    'deny' 	 				=> 'Deny',
+    'group_management' 	 	=> 'Správa skupin',
+    'create_group' 	 		=> 'Vytvořit novou skupinu',
+    'edit_group' 	 		=> 'Upravit skupinu',
+    'group_name' 	 		=> 'Název skupiny',
+    'group_admin' 	 		=> 'Správce skupiny',
+    'allow' 	 			=> 'Povolit',
+    'deny' 	 				=> 'Zakázat',
 
 );

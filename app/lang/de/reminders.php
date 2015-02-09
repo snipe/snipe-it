@@ -17,7 +17,7 @@ return array(
 
     "user"     => "Benutzername oder Email-Adresse sind falsch",
 
-    "token"    => "This password reset token is invalid.",
+    "token"    => "Das Token um das Passwort zurückzusetzen ist ungültig.",
 
     "sent" => "Wenn eine passende Email-Adresse gefunden wurde, wurde eine Passworterinnerung verschickt!",
 

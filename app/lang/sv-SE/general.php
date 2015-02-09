@@ -2,6 +2,7 @@
 
 return array(
 
+
     'address'				=> 'Adress',
     'admin'					=> 'Administratör',
     'all_assets'			=> 'Alla Tillgångar',
@@ -39,6 +40,8 @@ return array(
     'editprofile'  			=> 'Ändra Din Profil',
     'eol'					=> 'EOL',
     'first_name'			=> 'Förnamn',
+    'file_name'				=> 'File',
+    'file_uploads'			=> 'File Uploads',
     'generate'				=> 'Generate',
     'groups'				=> 'Grupper',
     'gravatar_email'        => 'Gravatar Email Address',

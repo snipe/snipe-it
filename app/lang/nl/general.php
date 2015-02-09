@@ -2,6 +2,7 @@
 
 return array(
 
+
     'address'				=> 'Adres',
     'admin'					=> 'Beheerder',
     'all_assets'			=> 'Alle materialen',
@@ -39,6 +40,8 @@ return array(
     'editprofile'  			=> 'Bewerk jouw profiel',
     'eol'					=> 'EOL',
     'first_name'			=> 'Voornaam',
+    'file_name'				=> 'File',
+    'file_uploads'			=> 'File Uploads',
     'generate'				=> 'Genereer',
     'groups'				=> 'Groepen',
     'gravatar_email'        => 'Gravatar E-mailadres',

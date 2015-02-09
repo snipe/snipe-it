@@ -2,6 +2,7 @@
 
 return array(
 
+
     'address'				=> 'Osoite',
     'admin'					=> 'Ylläpitäjä',
     'all_assets'			=> 'Kaikki Laitteet',
@@ -39,6 +40,8 @@ return array(
     'editprofile'  			=> 'Muokkaa Profiilia',
     'eol'					=> 'Elinikä',
     'first_name'			=> 'Etunimi',
+    'file_name'				=> 'File',
+    'file_uploads'			=> 'File Uploads',
     'generate'				=> 'Luo',
     'groups'				=> 'Ryhmät',
     'gravatar_email'        => 'Gravatarin Email-osoite',

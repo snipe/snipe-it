@@ -2,9 +2,11 @@
 
 class License extends Elegant
 {
+	use SoftDeletingTrait;
+    protected $dates = ['deleted_at'];
+
     protected $guarded = 'id';
     protected $table = 'licenses';
-    protected $softDelete = true;
     protected $rules = array(
             'name'   => 'required|alpha_space|min:3|max:255',
             'serial'   => 'required|min:5',
@@ -30,8 +32,21 @@ class License extends Elegant
     {
         return $this->hasMany('Actionlog','asset_id')
             ->where('asset_type', '=', 'software')
-            ->orderBy('added_on', 'desc');
+            ->orderBy('created_at', 'desc');
     }
+
+    /**
+    * Get uploads for this asset
+    */
+    public function uploads()
+    {
+        return $this->hasMany('Actionlog','asset_id')
+            ->where('asset_type', '=', 'software')
+            ->where('action_type', '=', 'uploaded')
+            ->whereNotNull('filename')
+            ->orderBy('created_at', 'desc');
+    }
+
 
     /**
     * Get admin user for this asset

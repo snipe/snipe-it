@@ -1,6 +1,9 @@
 <?php
 
 return array(
+	'auto_increment_assets'		=> 'Genereaza ID-uri crescatoare de active',
+	'auto_increment_prefix'		=> 'Prefix (optional)',
+	'auti_incrementing_help'    => 'Activeaza ID-uri crescatoare pentru active',
     'display_asset_name'        => 'Afiseaza nume activ',
     'display_checkout_date'     => 'Arata data predare',
     'display_eol'               => 'Arata EOL in tabel',

@@ -154,7 +154,7 @@
                                 <tbody>
                                     @foreach ($user->userlog as $log)
                                     <tr>
-                                        <td>{{{ $log->added_on }}}</td>
+                                        <td>{{{ $log->created_at }}}</td>
                                         <td>{{{ $log->action_type }}}</td>
                                         <td>
 

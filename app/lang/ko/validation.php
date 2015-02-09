@@ -13,7 +13,8 @@ return array(
     |
     */
 
-    "accepted"         => "The :attribute must be accepted.",
+    "accepted"         => "
+",
     "active_url"       => "The :attribute is not a valid URL.",
     "after"            => "The :attribute must be a date after :date.",
     "alpha"            => "The :attribute may only contain letters.",

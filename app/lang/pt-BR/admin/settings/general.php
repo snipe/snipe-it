@@ -1,14 +1,17 @@
 <?php
 
 return array(
+	'auto_increment_assets'		=> 'Gerar ID de ativo crescente',
+	'auto_increment_prefix'		=> 'Prefixo (opcional)',
+	'auti_incrementing_help'    => 'Ativar ID crescente de ativos, primeiro definir este',
     'display_asset_name'        => 'Exibir modelo de bens na visualização tabela',
-    'display_checkout_date'     => 'Display Checkout Date',
+    'display_checkout_date'     => 'Mostrar data de check-out',
     'display_eol'               => 'Exibir EOL na visualização tabela',
     'display_qr'                => 'Exibir Códigos QR',
     'info'                      => 'Estas configurações lhe deixam personalizar certos aspectos da sua instalação.',
-    'laravel'                   => 'Laravel Version',
+    'laravel'                   => 'Versão do Laravel',
     'per_page'                  => 'Resultados Por Página',
-    'php'                       => 'PHP Version',
+    'php'                       => 'Versão do PHP',
     'php_gd_info'               => 'Você deve instalar o php-gd para exibir códigos QR, veja as <a href="http://www.php.net/manual/en/image.installation.php">instruções de instalação</a>.',
     'php_gd_warning'            => 'O plugin PHP Image Processing and GD NÃO está instalado.',
     'qr_help'                   => 'Habilite os Códigos QR primeiro para definir isto',
@@ -16,7 +19,7 @@ return array(
     'setting'                   => 'Configuração',
     'settings'                  => 'Configurações',
     'site_name'                 => 'Nome do Site',
-    'system'                    => 'System Information',
+    'system'                    => 'Informação do sistema',
     'update'                    => 'Atualizar Configurações',
     'value'                     => 'Valor',
 );

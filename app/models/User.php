@@ -9,14 +9,16 @@ class User extends SentryUserModel
      *
      * @var bool
      */
-    protected $softDelete = true;
+    use SoftDeletingTrait;
+	protected $dates = ['deleted_at'];
+
 
     /**
      * Returns the user full name, it simply concatenates
      * the user first and last name.
      *
      * @return string
-     */  
+     */
     public function fullName()
     {
         return "{$this->first_name} {$this->last_name}";

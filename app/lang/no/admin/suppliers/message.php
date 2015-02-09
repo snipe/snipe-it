@@ -2,23 +2,23 @@
 
 return array(
 
-    'does_not_exist' => 'Supplier does not exist.',
-    'assoc_users'	 => 'This supplier is currently associated with at least one model and cannot be deleted. Please update your models to no longer reference this supplier and try again. ',
+    'does_not_exist' => 'Leverandør finnes ikke.',
+    'assoc_users'	 => 'Denne leverandøren er tilknyttet minst en modell og kan ikke slettes. Oppdater modellene dine til ikke å bruke denne leverandøren og prøv igjen. ',
 
     'create' => array(
-        'error'   => 'Supplier was not created, please try again.',
-        'success' => 'Supplier created successfully.'
+        'error'   => 'Leverandør ble ikke opprettet. Prøv igjen.',
+        'success' => 'Opprettelse av leverandør vellykket.'
     ),
 
     'update' => array(
-        'error'   => 'Supplier was not updated, please try again',
-        'success' => 'Supplier updated successfully.'
+        'error'   => 'Leverandør ble ikke oppdatert. Prøv igjen',
+        'success' => 'Oppdatering av leverandør vellykket.'
     ),
 
     'delete' => array(
-        'confirm'   => 'Are you sure you wish to delete this supplier?',
-        'error'   => 'There was an issue deleting the supplier. Please try again.',
-        'success' => 'Supplier was deleted successfully.'
+        'confirm'   => 'Er du sikker på at du vil slette denne leverandøren?',
+        'error'   => 'Det oppstod et problem under sletting av leverandør. Prøv igjen.',
+        'success' => 'Sletting av leverandør vellykket.'
     )
 
 );

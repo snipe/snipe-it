@@ -16,8 +16,8 @@ return array(
         'delete'    => 'Benutzer wurde erfolgreich gelöscht.',
         'ban'       => 'Benutzer wurde erfolgreich ausgeschlossen.',
         'unban'     => 'Benutzer wurde erfolgreich wieder eingeschlossen.',
-        'suspend'   => 'User was successfully suspended.',
-        'unsuspend' => 'User was successfully unsuspended.',
+        'suspend'   => 'Der Benutzer wurde erfolgreich deaktiviert.',
+        'unsuspend' => 'Der Benutzer wurde erfolgreich reaktiviert.',
         'restored'  => 'Benutzer wurde erfolgreich wiederhergestellt.'
     ),
 
@@ -25,7 +25,7 @@ return array(
         'create' => 'Beim Erstellen des Benutzers ist ein Fehler aufgetreten. Bitte probieren Sie es noch einmal.',
         'update' => 'Beim Aktualisieren des Benutzers ist ein Fehler aufgetreten. Bitte probieren Sie es noch einmal.',
         'delete' => 'Beim Entfernen des Benutzers ist ein Fehler aufgetreten. Bitte versuchen Sie es erneut.',
-        'unsuspend' => 'There was an issue unsuspending the user. Please try again.'
+        'unsuspend' => 'Es gab ein Problem beim reaktivieren des Benutzers. Bitte versuche es erneut.'
     ),
 
 );

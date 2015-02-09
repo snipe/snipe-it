@@ -2,10 +2,13 @@
 
 return array(
 
-    'edit'    => 'تعديل',
-    'delete'  => 'حذف',
-    'restore' => 'إستعادة',
-    'actions' => 'الإجراءات',
-    'submit'  => 'إرسال',
+    'actions' 	=> 'الإجراءات',
+    'add'    	=> 'Add New',
+    'cancel'    => 'Cancel',
+    'delete'  	=> 'حذف',
+    'edit'    	=> 'تعديل',
+    'restore' 	=> 'إستعادة',
+    'submit'  	=> 'إرسال',
+    'upload'    => 'Upload',
 
 );

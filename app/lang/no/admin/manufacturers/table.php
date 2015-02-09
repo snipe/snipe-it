@@ -2,10 +2,10 @@
 
 return array(
 
-    'asset_manufacturers'	=> 'Asset Manufacturers',
-    'create'				=> 'Create Manufacturer',
+    'asset_manufacturers'	=> 'Eiendelsprodusenter',
+    'create'				=> 'Opprett produsent',
     'id'   					=> 'ID',
-    'name'      			=> 'Manufacturer Name',
-    'update'				=> 'Update Manufacturer',
+    'name'      			=> 'Produsentnavn',
+    'update'				=> 'Endre produsent',
 
 );

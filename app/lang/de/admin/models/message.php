@@ -3,7 +3,7 @@
 return array(
 
     'does_not_exist' => 'Modell existiert nicht.',
-    'assoc_users'	 => 'This model is currently associated with one or more assets and cannot be deleted. Please delete the assets, and then try deleting again. ',
+    'assoc_users'	 => 'Dieses Modell ist zur Zeit mit einem oder mehreren Assets verknüpft und kann nicht gelöscht werden. Bitte lösche die Assets und versuche dann erneut das Modell zu löschen. ',
 
 
     'create' => array(

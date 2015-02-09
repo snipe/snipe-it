@@ -2,6 +2,9 @@
 
 class Actionlog extends Eloquent
 {
+	use SoftDeletingTrait;
+    protected $dates = ['deleted_at'];
+
     protected $table = 'asset_logs';
     public $timestamps = false;
 
@@ -9,6 +12,11 @@ class Actionlog extends Eloquent
     public function assetlog()
     {
         return $this->belongsTo('Asset','asset_id')->withTrashed();
+    }
+
+     public function uploads()
+    {
+        return $this->belongsTo('Asset','asset_id')->where('action_type','=','uploaded')->withTrashed();
     }
 
     public function licenselog()
@@ -25,6 +33,18 @@ class Actionlog extends Eloquent
     {
         return $this->belongsTo('User','checkedout_to')->withTrashed();
     }
+
+
+    /**
+	* Check if the file exists, and if it does, force a download
+	**/
+    public function get_src() {
+
+			$file = app_path().'/private_uploads/'.$this->filename;
+			return $file;
+
+    }
+
 
 
     /**

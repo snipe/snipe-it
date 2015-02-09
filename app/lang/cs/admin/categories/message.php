@@ -2,7 +2,7 @@
 
 return array(
 
-    'does_not_exist' => 'Category does not exist.',
+    'does_not_exist' => 'Kategorie neexistuje.',
     'assoc_users'	 => 'This category is currently associated with at least one model and cannot be deleted. Please update your models to no longer reference this category and try again. ',
 
     'create' => array(

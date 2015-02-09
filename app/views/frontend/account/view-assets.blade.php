@@ -114,7 +114,7 @@ View Assets for  {{{ $user->fullName() }}} ::
                                 <tbody>
                                     @foreach ($user->userlog as $log)
                                     <tr>
-                                        <td>{{{ $log->added_on }}}</td>
+                                        <td>{{{ $log->created_at }}}</td>
                                         <td>{{{ $log->action_type }}}</td>
                                         <td>
                                         @if ((isset($log->assetlog->name)) && ($log->assetlog->deleted_at==''))

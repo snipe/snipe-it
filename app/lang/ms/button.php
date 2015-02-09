@@ -2,10 +2,13 @@
 
 return array(
 
-    'edit'    => 'Kemaskini',
-    'delete'  => 'Hapuskan',
-    'restore' => 'Masukkan Semula',
-    'actions' => 'Tindakan',
-    'submit'  => 'Hantar',
+    'actions' 	=> 'Tindakan',
+    'add'    	=> 'Add New',
+    'cancel'    => 'Cancel',
+    'delete'  	=> 'Hapuskan',
+    'edit'    	=> 'Kemaskini',
+    'restore' 	=> 'Masukkan Semula',
+    'submit'  	=> 'Hantar',
+    'upload'    => 'Upload',
 
 );

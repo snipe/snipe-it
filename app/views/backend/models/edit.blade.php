@@ -93,7 +93,7 @@
             </div>
 
             <!-- EOL -->
-            
+
             <div class="form-group {{ $errors->has('eol') ? ' has-error' : '' }}">
                 <label for="eol" class="col-md-2 control-label">@lang('general.eol')</label>
                 <div class="col-md-2">
@@ -118,7 +118,7 @@
                     </div>
                 </div>
             @endif
-            
+
             <div class="form-group {{ $errors->has('image') ? 'has-error' : '' }}">
                 <label class="col-md-2 control-label" for="image">@lang('general.image_upload')</label>
                 <div class="col-md-5">
@@ -134,10 +134,10 @@
             <label class="col-md-2 control-label"></label>
                 <div class="col-md-7">
                     @if(isset($clone_model))
-                        <a class="btn btn-link" href="{{ URL::route('view/model', $clone_model->id) }}">@lang('general.cancel')</a>
+                        <a class="btn btn-link" href="{{ URL::route('view/model', $clone_model->id) }}">@lang('button.cancel')</a>
                     @else
-                        <a class="btn btn-link" href="{{ URL::route('view/model', $model->id) }}">@lang('general.cancel')</a>
-                    @endif                    
+                        <a class="btn btn-link" href="{{ URL::route('view/model', $model->id) }}">@lang('button.cancel')</a>
+                    @endif
                     <button type="submit" class="btn btn-success"><i class="icon-ok icon-white"></i> @lang('general.save')</button>
                 </div>
             </div>

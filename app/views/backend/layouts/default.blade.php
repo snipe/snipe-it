@@ -244,6 +244,7 @@
                     <li><a href="{{ URL::to('hardware') }}">@lang('general.list_all')</a></li>
                     <li class="divider">&nbsp;</li>
                     <li><a href="{{ URL::to('hardware/models') }}" {{{ (Request::is('hardware/models*') ? ' class="active"' : '') }}} >@lang('general.asset_models')</a></li>
+                    <li><a href="{{ URL::to('admin/settings/categories') }}" {{{ (Request::is('admin/settings/categories*') ? ' class="active"' : '') }}} >@lang('general.categories')</a></li>
 
                 </ul>
             </li>
@@ -359,7 +360,7 @@
 						  		<a target="_blank" href="http://docs.snipeitapp.com/">Documentation</a> |
 						  		<a href="https://crowdin.com/project/snipe-it">Help Translate It! </a> |
 						  		<a target="_blank" href="https://github.com/snipe/snipe-it/issues?state=open">Report a Bug</a>
-						  		 &nbsp; &nbsp; (v1.1)</p>
+						  		 &nbsp; &nbsp; (v1.2.2)</p>
                   	</div>
               </div>
         </div>

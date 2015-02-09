@@ -2,6 +2,7 @@
 
 return array(
 
+
     'address'				=> 'Adresa',
     'admin'					=> 'Admin',
     'all_assets'			=> 'Toate activele',
@@ -39,6 +40,8 @@ return array(
     'editprofile'  			=> 'Editeaza propriul profil',
     'eol'					=> 'EOL',
     'first_name'			=> 'Prenume',
+    'file_name'				=> 'File',
+    'file_uploads'			=> 'File Uploads',
     'generate'				=> 'Genereaza',
     'groups'				=> 'Grupuri',
     'gravatar_email'        => 'Adresa E-mail Gravatar',

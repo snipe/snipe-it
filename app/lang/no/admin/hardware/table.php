@@ -2,7 +2,7 @@
 
 return array(
 
-    'asset_tag'   	=> 'Asset Tag',
+    'asset_tag'   	=> 'Eiendelsmerke',
     'asset_model'       => 'Modell',
     'book_value'  	=> 'Verdi',
     'change' 		=> 'Inne/ute',

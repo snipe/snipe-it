@@ -26,7 +26,7 @@ return array(
     'serial'			=> 'Serienummer',
     'status'			=> 'Status',
     'supplier'			=> 'Leverandør',
-    'tag'				=> 'Asset Tag',
+    'tag'				=> 'Eiendelsmerke',
     'update'			=> 'Oppdater eiendel',
     'warranty'			=> 'Garanti',
     'years'				=> 'år',

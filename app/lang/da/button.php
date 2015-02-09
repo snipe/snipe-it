@@ -2,10 +2,13 @@
 
 return array(
 
-    'edit'    => 'Rediger',
-    'delete'  => 'Slet',
-    'restore' => 'Gendan',
-    'actions' => 'Handlinger',
-    'submit'  => 'Send',
+    'actions' 	=> 'Handlinger',
+    'add'    	=> 'Add New',
+    'cancel'    => 'Cancel',
+    'delete'  	=> 'Slet',
+    'edit'    	=> 'Rediger',
+    'restore' 	=> 'Gendan',
+    'submit'  	=> 'Send',
+    'upload'    => 'Upload',
 
 );

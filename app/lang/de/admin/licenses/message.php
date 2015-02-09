@@ -3,15 +3,27 @@
 return array(
 
     'does_not_exist' => 'Die Kategorie existiert nicht.',
-    'user_does_not_exist' => 'User does not exist.',
-    'asset_does_not_exist' 	=> 'The asset you are trying to associate with this license does not exist.',
-    'owner_doesnt_match_asset' => 'The asset you are trying to associate with this license is owned by somene other than the person selected in the assigned to dropdown.',
+    'user_does_not_exist' => 'Benutzer existiert nicht.',
+    'asset_does_not_exist' 	=> 'Der Gegenstand den du mit dieser Lizenz verknüpfen willst existiert nicht.',
+    'owner_doesnt_match_asset' => 'Der Gegenstand den du mit dieser Lizenz verknüpfen willst gehört jemand anderem als der im Dropdown-Feld ausgewählten Person.',
     'assoc_users'	 => 'Diese Kategorie ist derzeit mindestens einem Modell zugeordnet und kann nicht gelöscht werden. Bitte aktualisieren Sie Ihre Modelle, um nicht mehr auf diese Kategorie zu verweisen und versuchen Sie es erneut.',
 
 
     'create' => array(
         'error'   => 'Die Kategorie wurde nicht erstellt, bitte versuchen Sie es erneut.',
         'success' => 'Die Kategorie wurde erfolgreich erstellt.'
+    ),
+
+    'deletefile' => array(
+        'error'   => 'File not deleted. Please try again.',
+        'success' => 'File successfully deleted.',
+    ),
+
+    'upload' => array(
+        'error'   => 'File(s) not uploaded. Please try again.',
+        'success' => 'File(s) successfully uploaded.',
+        'nofiles' => 'You did not select any files for upload',
+        'invalidfiles' => 'One or more of your files is too large or is a filetype that is not allowed. Allowed filetypes are png, gif, jpg, doc, docx, pdf, and txt.',
     ),
 
     'update' => array(

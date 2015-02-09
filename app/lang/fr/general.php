@@ -2,6 +2,7 @@
 
 return array(
 
+
     'address'				=> 'Adresse',
     'admin'					=> 'Admin',
     'all_assets'			=> 'Tous les actifs',
@@ -39,6 +40,8 @@ return array(
     'editprofile'  			=> 'Éditer votre profile',
     'eol'					=> 'Fin de vie',
     'first_name'			=> 'Prénom',
+    'file_name'				=> 'File',
+    'file_uploads'			=> 'File Uploads',
     'generate'				=> 'Générer',
     'groups'				=> 'Groupes',
     'gravatar_email'        => 'E-mail adresse Gravatar',

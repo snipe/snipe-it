@@ -47,20 +47,19 @@
 <div class="row profile">
 <div class="col-md-9 bio">
 
-    <div class="col-md-12" style="min-height: 130px;">
 
         @if ($asset->serial)
-            <div class="col-md-6"><strong>@lang('admin/hardware/form.serial'): </strong>
+            <div class="col-md-12" style="padding-bottom: 5px;"><strong>@lang('admin/hardware/form.serial'): </strong>
             <em>{{{ $asset->serial }}}</em></div>
-            <div class="col-md-6"><strong><br></strong></div>
+
         @endif
 
         @if ($asset->model->manufacturer)
-            <div class="col-md-6"><strong>@lang('admin/hardware/form.manufacturer'): </strong>
+            <div class="col-md-12" style="padding-bottom: 5px;"><strong>@lang('admin/hardware/form.manufacturer'): </strong>
             <a href="{{ route('update/manufacturer', $asset->model->manufacturer->id) }}">
             {{{ $asset->model->manufacturer->name }}}
             </a> </div>
-            <div class="col-md-6"><strong>@lang('admin/hardware/form.model'):</strong>
+            <div class="col-md-12" style="padding-bottom: 5px;"><strong>@lang('admin/hardware/form.model'):</strong>
             <a href="{{ route('view/model', $asset->model->id) }}">
             {{{ $asset->model->name }}}
             </a>
@@ -68,44 +67,44 @@
         @endif
 
         @if ($asset->purchase_date)
-            <div class="col-md-6"><strong>@lang('admin/hardware/form.date'): </strong>
+            <div class="col-md-12" style="padding-bottom: 5px;"><strong>@lang('admin/hardware/form.date'): </strong>
             {{{ $asset->purchase_date }}} </div>
         @endif
 
         @if ($asset->purchase_cost)
-            <div class="col-md-6"><strong>@lang('admin/hardware/form.cost'):</strong>
+            <div class="col-md-12" style="padding-bottom: 5px;"><strong>@lang('admin/hardware/form.cost'):</strong>
             @lang('general.currency')
             {{{ number_format($asset->purchase_cost,2) }}} </div>
         @endif
 
         @if ($asset->order_number)
-            <div class="col-md-6"><strong>@lang('admin/hardware/form.order'):</strong>
+            <div class="col-md-12" style="padding-bottom: 5px;"><strong>@lang('admin/hardware/form.order'):</strong>
             {{{ $asset->order_number }}} </div>
         @endif
 
         @if ($asset->supplier_id)
-            <div class="col-md-6"><strong>@lang('admin/hardware/form.supplier'): </strong>
+            <div class="col-md-6" style="padding-bottom: 5px;"><strong>@lang('admin/hardware/form.supplier'): </strong>
             <a href="{{ route('view/supplier', $asset->supplier_id) }}">
             {{{ $asset->supplier->name }}}
             </a> </div>
         @endif
 
         @if ($asset->warranty_months)
-            <div class="col-md-6"><strong>@lang('admin/hardware/form.warranty'):</strong>
+            <div class="col-md-12" style="padding-bottom: 5px;"><strong>@lang('admin/hardware/form.warranty'):</strong>
             {{{ $asset->warranty_months }}}
             @lang('admin/hardware/form.months')
             </div>
-            <div class="col-md-6 {{{ $asset->warrantee_expires() < date("Y-m-d H:i:s") ? 'ui-state-highlight' : '' }}}"   ><strong>@lang('admin/hardware/form.expires'):</strong>
+            <div class="col-md-12 {{{ $asset->warrantee_expires() < date("Y-m-d H:i:s") ? 'ui-state-highlight' : '' }}}"  style="padding-bottom: 5px;"><strong>@lang('admin/hardware/form.expires'):</strong>
             {{{ $asset->warrantee_expires() }}}</div>
         @endif
 
         @if ($asset->depreciation)
-            <div class="col-md-6"><strong>@lang('admin/hardware/form.depreciation'): </strong>
+            <div class="col-md-12" style="padding-bottom: 5px;"><strong>@lang('admin/hardware/form.depreciation'): </strong>
             {{ $asset->depreciation->name }}
                 ({{{ $asset->depreciation->months }}}
                 @lang('admin/hardware/form.months')
                 )</div>
-            <div class="col-md-6"><strong>@lang('admin/hardware/form.fully_depreciated'): </strong>
+            <div class="col-md-12" style="padding-bottom: 5px;"><strong>@lang('admin/hardware/form.fully_depreciated'): </strong>
             {{{ $asset->months_until_depreciated()->m }}}
             @lang('admin/hardware/form.months')
              @if ($asset->months_until_depreciated()->y > 0)
@@ -117,10 +116,12 @@
         @endif
 
         @if ($asset->model->eol)
-            <div class="col-md-6"><strong>@lang('admin/hardware/form.eol_rate'): </strong>
+            <div class="col-md-12" style="padding-bottom: 5px;">
+            <strong>@lang('admin/hardware/form.eol_rate'): </strong>
             {{{ $asset->model->eol }}}
             @lang('admin/hardware/form.months') </div>
-            <div class="col-md-6"><strong>@lang('admin/hardware/form.eol_date'): </strong>
+            <div class="col-md-12" style="padding-bottom: 5px;">
+            <strong>@lang('admin/hardware/form.eol_date'): </strong>
             {{{ $asset->eol_date() }}}
             @if ($asset->months_until_eol())
                  (
@@ -135,17 +136,13 @@
             </div>
         @endif
 
-    </div>
 
-        <!-- Asset notes -->
-        @if ($asset->notes)
-                <div class="col-md-12"><strong>@lang('admin/hardware/form.notes'):</strong>
-                 {{{ $asset->notes }}} <br><br>
-                </div>
-        @endif
 
-		<!-- Licenses assets table -->
-        <h6>Software Assigned to {{{ $asset->name }}}</h6>
+
+
+<div class="col-md-12">
+  		<!-- Licenses assets table -->
+        <h6>Software Assigned </h6>
 		<br>
 		<!-- checked out assets table -->
 		@if (count($asset->licenses) > 0)
@@ -191,15 +188,17 @@
             <tbody>
             @if (count($asset->assetlog) > 0)
                 @foreach ($asset->assetlog as $log)
+                 @if ((isset($log->checkedout_to)) && ($log->checkedout_to!=0))
                 <tr>
-                    <td>{{{ $log->added_on }}}</td>
+                    <td>{{{ $log->created_at }}}</td>
                     <td>
-                        @if (isset($log->user_id)) {{{ $log->adminlog->fullName() }}}
+                        @if (isset($log->user_id))
+                        {{{ $log->adminlog->fullName() }}}
                         @endif
                     </td>
                     <td>{{ $log->action_type }}</td>
                     <td>
-                        @if (isset($log->checkedout_to))
+                        @if ((isset($log->checkedout_to)) && ($log->checkedout_to!=0) && ($log->checkedout_to!=''))
                         <a href="{{ route('view/user', $log->checkedout_to) }}">
                         {{{ $log->userlog->fullName() }}}
                         </a>
@@ -210,6 +209,7 @@
                         @endif
                     </td>
                 </tr>
+                 @endif
                 @endforeach
                 @endif
                 <tr>
@@ -233,9 +233,17 @@
 
 
         </div>
-
+</div>
         <!-- side address column -->
         <div class="col-md-3 col-xs-12 address pull-right">
+
+        	<!-- Asset notes -->
+@if ($asset->notes)
+
+		<h6>@lang('admin/hardware/form.notes'):</h6>
+		 {{ nl2br(e($asset->notes)) }}
+
+@endif
 
             @if ($qr_code->display)
             <h6>@lang('admin/hardware/form.qr')</h6>

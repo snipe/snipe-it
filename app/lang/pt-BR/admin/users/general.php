@@ -9,6 +9,6 @@ return array(
     'edit'  			=> 'Editar Usuário',
     'history_user'  	=> 'Histórico para :name',
     'last_login'  		=> 'Último Login',
-    'software_user'  	=> 'Software Checked out to :name',
+    'software_user'  	=> 'Check-out de software para :name',
     'view_user'  		=> 'Ver Usuário :name',
     );

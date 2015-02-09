@@ -52,16 +52,20 @@
             @endif
             <td>{{ $asset->serial }}</td>
             <td>
-            @if ($asset->assigned_to != 0)
-                <a href="{{ route('view/user', $asset->assigned_to) }}">
-                {{{ $asset->assigneduser->fullName() }}}
-                </a>
+            @if (isset($asset->assigned_to))
+				@if ($asset->assigned_to != 0)
+					<a href="{{ route('view/user', $asset->assigned_to) }}">
+					{{{ $asset->assigneduser->fullName() }}}
+					</a>
+				@endif
             @endif
             </td>
             <td>
-            @if (($asset->assigned_to > 0) && ($asset->assigneduser->location_id > 0)) {{{ Location::find($asset->assigneduser->location_id)->city }}}
-                    ,
-                    {{{ Location::find($asset->assigneduser->location_id)->state }}}
+            @if (isset($asset->assigned_to))
+				@if (($asset->assigned_to > 0) && ($asset->assigneduser->location_id > 0)) {{{ Location::find($asset->assigneduser->location_id)->city }}}
+						,
+						{{{ Location::find($asset->assigneduser->location_id)->state }}}
+				@endif
             @endif
             </td>
             <td>{{{ $asset->purchase_date }}}</td>

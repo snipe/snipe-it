@@ -1,3 +1,7 @@
+addons:
+  hosts:
+    - AlisonMBP
+
 # see http://about.travis-ci.org/docs/user/languages/php/ for more hints
 language: php
 
@@ -15,14 +19,16 @@ env:
 before_script:
   - if [[ "$DB" == "mysql" ]]; then mysql -e "create database IF NOT EXISTS snipeit_laravel;" -utravis; fi
   - curl -s http://getcomposer.org/installer | php
-  - cp app/config/production/database.example.php app/config/database.php
-  - cp app/config/production/mail.example.php app/config/mail.php
-  - composer install --prefer-source --no-interaction --no-dev
-  - php artisan key:generate
-  - php artisan migrate:install
-  - php artisan migrate --package cartalyst/sentry
-  - php artisan migrate
-  - php artisan db:seed
+  - cp app/config/testing/app.example.php app/config/testing/app.php
+  - cp app/config/testing/database.example.php app/config/testing/database.php
+  - cp app/config/testing/mail.example.php app/config/testing/mail.php
+  - composer self-update
+  - composer install --prefer-source --no-interaction
+  - php artisan key:generate --env=testing
+  - php artisan migrate:install --env=testing --no-interaction -vvv
+  - php artisan migrate --package cartalyst/sentry --env=testing --no-interaction -vvv
+  - php artisan migrate --env=testing --no-interaction -vvv
+  - php artisan db:seed --env=testing --no-interaction -vvv
 
 # omitting "script:" will default to phpunit
 # use the $DB env variable to determine the phpunit.xml to use

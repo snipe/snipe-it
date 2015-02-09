@@ -2,7 +2,8 @@
 
 class Location extends Elegant
 {
-    protected $softDelete = true;
+    use SoftDeletingTrait;
+    protected $dates = ['deleted_at'];
     protected $table = 'locations';
     protected $rules = array(
             'name'  		=> 'required|alpha_space|min:3|max:255|unique:locations,name,{id}',

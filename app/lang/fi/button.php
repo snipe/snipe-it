@@ -2,10 +2,13 @@
 
 return array(
 
-    'edit'    => 'Muokkaa',
-    'delete'  => 'Poista',
-    'restore' => 'Palauta',
-    'actions' => 'Toiminnot',
-    'submit'  => 'Lähetä',
+    'actions' 	=> 'Toiminnot',
+    'add'    	=> 'Add New',
+    'cancel'    => 'Cancel',
+    'delete'  	=> 'Poista',
+    'edit'    	=> 'Muokkaa',
+    'restore' 	=> 'Palauta',
+    'submit'  	=> 'Lähetä',
+    'upload'    => 'Upload',
 
 );

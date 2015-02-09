@@ -167,9 +167,9 @@
                     {{ Form::label('', ' ', array('class' => 'col-md-3 control-label')) }}
                         <div class="col-md-7">
                             @if ($supplier->id)
-                            <a class="btn btn-link" href="{{ URL::previous() }}">@lang('general.cancel')</a>
+                            <a class="btn btn-link" href="{{ URL::previous() }}">@lang('button.cancel')</a>
                             @else
-                            <a class="btn btn-link" href="{{ route('suppliers') }}">@lang('general.cancel')</a>
+                            <a class="btn btn-link" href="{{ route('suppliers') }}">@lang('button.cancel')</a>
                             @endif
                             <button type="submit" class="btn btn-success"><i class="icon-ok icon-white"></i> @lang('general.save')</button>
                         </div>

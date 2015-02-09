@@ -5,13 +5,25 @@ return array(
     'does_not_exist' => 'A licença não existe.',
     'user_does_not_exist' => 'O usuário não existe.',
     'asset_does_not_exist' 	=> 'O bem que você está tentando associar com esta licença não existe.',
-    'owner_doesnt_match_asset' => 'The asset you are trying to associate with this license is owned by somene other than the person selected in the assigned to dropdown.',
-    'assoc_users'	 => 'This license is currently checked out to a user and cannot be deleted. Please check the license in first, and then try deleting again. ',
+    'owner_doesnt_match_asset' => 'O bem que você está tentando associar a está licença é propriedade de alguma outra pessoa que não está selecionada na lista suspensa.',
+    'assoc_users'	 => 'Esta licença é atualmente check-out para um usuário e não pode ser excluído. Por favor, atualize seu bem para que não referencie mais este usuário e, em seguida, tente apagar novamente. ',
 
 
     'create' => array(
         'error'   => 'A licença não foi criada, por favor, tente novamente.',
         'success' => 'Licença criada com sucesso.'
+    ),
+
+    'deletefile' => array(
+        'error'   => 'File not deleted. Please try again.',
+        'success' => 'File successfully deleted.',
+    ),
+
+    'upload' => array(
+        'error'   => 'File(s) not uploaded. Please try again.',
+        'success' => 'File(s) successfully uploaded.',
+        'nofiles' => 'You did not select any files for upload',
+        'invalidfiles' => 'One or more of your files is too large or is a filetype that is not allowed. Allowed filetypes are png, gif, jpg, doc, docx, pdf, and txt.',
     ),
 
     'update' => array(
@@ -26,8 +38,8 @@ return array(
     ),
 
     'checkout' => array(
-        'error'   => 'There was an issue checking out the license. Please try again.',
-        'success' => 'The license was checked out successfully'
+        'error'   => 'Houve um problema de registro na licença. Favor tentar novamente.',
+        'success' => 'A licença foi registrada com sucesso'
     ),
 
     'checkin' => array(

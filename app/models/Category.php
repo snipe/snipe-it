@@ -2,8 +2,9 @@
 
 class Category extends Elegant
 {
+    use SoftDeletingTrait;
+    protected $dates = ['deleted_at'];
     protected $table = 'categories';
-    protected $softDelete = true;
 
     /**
     * Category validation rules

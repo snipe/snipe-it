@@ -10,6 +10,7 @@ If you don't have a feature in mind, but would like to contribute back to the pr
 
 [![Stories in Ready](https://badge.waffle.io/snipe/snipe-it.png?label=ready&title=Ready)](http://waffle.io/snipe/snipe-it)
 
+The labels we use in GitHub Issues and Waffle.io indicate whether we've confirmed an issue as a bug, whether we're considering the issue as a potential feature, and whether it's ready for someone to work on it. We also provide labels such as "n00b", "intermediate" and "advanced" for the experience level we think it requires for contributors who want to help.
 
 
 ## Translations!
