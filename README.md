@@ -7,7 +7,7 @@
 
 This is a FOSS project for asset management in IT Operations. Knowing who has which laptop, when it was purchased in order to depreciate it correctly, handling software licenses, etc.
 
-It is built on [Laravel 4.1](http://laravel.com) and uses the [Sentry 2](https://github.com/cartalyst/sentry) package.
+It is built on [Laravel 4.2](http://laravel.com) and uses the [Sentry 2](https://github.com/cartalyst/sentry) package.
 
 This project is being actively developed and we're [releasing quite frequently](https://github.com/snipe/snipe-it/releases). ([Check out the live demo here](http://snipeitapp.com/demo.php).)
 
