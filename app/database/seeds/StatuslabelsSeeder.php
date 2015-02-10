@@ -10,12 +10,41 @@ class StatuslabelsSeeder extends Seeder
 
         $date = new DateTime;
 
+		 $status[] = array(
+            'name'      => 'Ready to Deploy',
+            'created_at' => $date->modify('-10 day'),
+            'updated_at' => $date->modify('-3 day'),
+            'user_id' => 1,
+            'deleted_at' 		=> NULL,
+            'deployable'	=> 1,
+            'pending'	=> 0,
+            'archived' => 0,
+            'notes' => ''
+        );
+
+         $status[] = array(
+            'name'      => 'Pending',
+            'created_at' => $date->modify('-10 day'),
+            'updated_at' => $date->modify('-3 day'),
+            'user_id' => 1,
+            'deleted_at' 		=> NULL,
+            'deployable'	=> 0,
+            'pending'	=> 1,
+            'archived' => 0,
+            'notes' => ''
+        );
+
+
         $status[] = array(
             'name'      => 'Out for Diagnostics',
             'created_at' => $date->modify('-10 day'),
             'updated_at' => $date->modify('-3 day'),
             'user_id' => 1,
             'deleted_at' 		=> NULL,
+            'deployable'	=> 0,
+            'pending'	=> 0,
+            'archived' => 0,
+            'notes' => ''
         );
 
 
@@ -25,6 +54,10 @@ class StatuslabelsSeeder extends Seeder
             'updated_at' => $date->modify('-3 day'),
             'user_id' => 1,
             'deleted_at' 		=> NULL,
+            'deployable'	=> 0,
+            'pending'	=> 0,
+            'archived' => 0,
+             'notes' => ''
         );
 
 
@@ -34,6 +67,10 @@ class StatuslabelsSeeder extends Seeder
             'updated_at' => $date->modify('-3 day'),
             'user_id' => 1,
             'deleted_at' 		=> NULL,
+            'deployable'	=> 0,
+            'pending'	=> 0,
+            'archived' => 1,
+             'notes' => ''
         );
 
         $status[] = array(
@@ -42,6 +79,10 @@ class StatuslabelsSeeder extends Seeder
             'updated_at' => $date->modify('-3 day'),
             'user_id' => 1,
             'deleted_at' 		=> NULL,
+            'deployable'	=> 0,
+            'pending'	=> 0,
+            'archived' => 1,
+            'notes' => '',
         );
 
 

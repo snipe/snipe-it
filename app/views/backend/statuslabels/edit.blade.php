@@ -50,6 +50,32 @@
                     </div>
             </div>
 
+
+            <!-- Note -->
+            <div class="form-group {{ $errors->has('notes') ? 'error' : '' }}">
+                <label for="notes" class="col-md-3 control-label">@lang('admin/hardware/form.notes')</label>
+                <div class="col-md-7">
+                    <textarea class="col-md-6 form-control" id="notes" name="notes">{{{ Input::old('notes', $statuslabel->notes) }}}</textarea>
+                    {{ $errors->first('notes', '<span class="alert-msg"><i class="icon-remove-sign"></i> :message</span>') }}
+                </div>
+            </div>
+
+
+            <!-- Label type -->
+            <div class="form-group {{ $errors->has('status_type_bool') ? 'error' : '' }}">
+                <label for="notes" class="col-md-3 control-label">@lang('admin/statuslabels/table.status_type')
+                <i class='icon-asterisk'></i></label>
+                </label>
+                <div class="col-md-7">
+                  {{ Form::select('statuslabel_types', $statuslabel_types , $use_statuslabel_type, array('class'=>'select2', 'style'=>'min-width:400px')) }}
+                    {{ $errors->first('notes', '<span class="alert-msg"><i class="icon-remove-sign"></i> :message</span>') }}
+                    {{ $errors->first('status_type', '<span class="alert-msg"><i class="icon-remove-sign"></i> :message</span>') }}
+                </div>
+            </div>
+
+
+
+
             <!-- Form actions -->
                 <div class="form-group">
                 <label class="col-md-2 control-label"></label>

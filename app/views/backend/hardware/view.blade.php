@@ -283,37 +283,27 @@
                     <li><br /><a href="{{ route('checkin/hardware', $asset->id) }}" class="btn-flat large info ">@lang('admin/hardware/general.checkin')</a></li>
                     </ul>
 
+			 @endif
 
-            @elseif (($asset->status_id ) && ($asset->status_id > 1))
-			<!-- Status ID is greater than 1, Asset is Undeployable-->
+            @if (($asset->status_id ) && ($asset->status_id > 1))
+			<!-- Status Info -->
 
                 @if ($asset->assetstatus)
                     <h6><br>{{{ $asset->assetstatus->name }}}
                     @lang('admin/hardware/general.asset')</h6>
 
+					@if ($asset->assetstatus->notes)
                     <div class="col-md-12">
-                    <div class="alert alert-warning alert-block">
-                        <i class="icon-warning-sign"></i>
-                        @lang('admin/hardware/message.undeployable')
+                    <div class="alert alert-info alert-block">
+                        <i class="icon-info-sign"></i>
+                        {{{ $asset->assetstatus->notes }}}
 
                     </div>
+                    @endif
                 </div>
-                @endif
-
-
-            @elseif ($asset->status_id == NULL)
-            <!-- Status ID is NULL, Asset is pending-->
-                    <h6><br>@lang('admin/hardware/general.pending')</h6>
-
-
-            @elseif ($asset->status_id == 0)
-            <!-- Status ID is 0, Asset is RTD -->
-            <h6><br>@lang('admin/hardware/general.checkout')</h6>
-                <ul>
-                    <li>This asset is not checked out to anyone yet. Use the button below to check it out now.</li>
-                    <li><br><br /><a href="{{ route('checkout/hardware', $asset->id) }}" class="btn-flat large success">Checkout Asset</a></li>
-                </ul>
+                 @endif
             @endif
+
         </div>
     </div>
 </div>

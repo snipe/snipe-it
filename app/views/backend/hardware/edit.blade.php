@@ -82,6 +82,7 @@
                 <div class="col-md-7">
                     @if (isset($selected_model))
                         {{ Form::select('model_id', $model_list , $selected_model->id, array('class'=>'select2', 'style'=>'min-width:400px')) }}
+
                     @else
                         {{ Form::select('model_id', $model_list , Input::old('model_id', $asset->model_id), array('class'=>'select2', 'style'=>'min-width:400px')) }}
                     @endif

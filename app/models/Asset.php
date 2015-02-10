@@ -231,7 +231,10 @@ class Asset extends Elegant
 
 	public function scopePending($query)
 	{
-		return $query->whereNull('status_id','and')->where('assigned_to','=','0');
+		return $query->whereHas('assetstatus',function($query)
+		{
+			$query->where('pending','=',1);
+		});
 	}
 
 
@@ -244,8 +247,13 @@ class Asset extends Elegant
 
 	public function scopeRTD($query)
 	{
-		return $query->where('status_id','=','0')->whereNull('assigned_to');
+		return $query->whereHas('assetstatus',function($query)
+		{
+			$query->where('deployable','=',1);
+		});
 	}
+
+
 
 
 	/**
@@ -257,7 +265,10 @@ class Asset extends Elegant
 
 	public function scopeUndeployable($query)
 	{
-		return $query->where('status_id','>',1)->where('assigned_to','=','0');
+		return $query->whereHas('assetstatus',function($query)
+		{
+			$query->where('deployable','=',0);
+		});
 	}
 
 

@@ -14,7 +14,17 @@ class FixBadAssignedToIds extends Migration {
 	{
 		//
 		DB::statement('update ' . DB::getTablePrefix() . 'assets SET assigned_to=NULL where assigned_to=0');
-		DB::statement('update ' . DB::getTablePrefix() . 'licenses SET assigned_to=NULL where assigned_to=0');
+
+		Schema::table('status_labels', function ($table) {
+			$table->boolean('deployable')->default(0);
+			$table->boolean('pending')->default(0);
+			$table->boolean('archived')->default(0);
+			$table->text('notes')->nullable();
+		});
+
+		DB::statement('INSERT into ' . DB::getTablePrefix() . 'status_labels (name, deployable, pending, archived, notes) VALUES ("Pending",0,1,0,"These assets are not yet ready to be depoloyed, usually because of configuration or waiting on parts.")');
+		DB::statement('INSERT into ' . DB::getTablePrefix() . 'status_labels (name, deployable, pending, archived, notes) VALUES ("Ready to Deploy",1,0,0,"These assets are ready to deploy.")');
+		DB::statement('INSERT into ' . DB::getTablePrefix() . 'status_labels (name, deployable, pending, archived, notes) VALUES ("Archived",0,0,1,"These assets are no longer in circulation or viable.")');
 
 	}
 
@@ -26,6 +36,13 @@ class FixBadAssignedToIds extends Migration {
 	public function down()
 	{
 		//
+		Schema::table('status_labels', function ($table) {
+			$table->dropColumn('deployable');
+			$table->dropColumn('pending');
+			$table->dropColumn('archived');
+			$table->dropColumn('notes');
+
+		});
 	}
 
 }
