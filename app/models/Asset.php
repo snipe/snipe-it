@@ -90,7 +90,7 @@ class Asset extends Elegant
     */
      public static function availassetcount()
     {
-        return Asset::orderBy('asset_tag', 'ASC')->where('status_id', '=', 0)->where('physical', '=', 1)->count();
+        return Asset::orderBy('asset_tag', 'ASC')->where('status_id', '=', 0)->whereNull('assigned_to')->where('physical', '=', 1)->count();
     }
 
     /**
@@ -244,7 +244,7 @@ class Asset extends Elegant
 
 	public function scopeRTD($query)
 	{
-		return $query->where('status_id','=','0');
+		return $query->where('status_id','=','0')->whereNull('assigned_to');
 	}
 
 
