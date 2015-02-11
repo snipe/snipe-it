@@ -52,7 +52,7 @@
                                         @endif
                                         </td>
                                         <td>
-                                        @if ($supplierassets->assigned_to != 0)
+                                        @if ($supplierassets->assigned_to != '')
                                             <a href="{{ route('checkin/hardware', $supplierassets->id) }}" class="btn-flat info">Checkin</a>
                                         @else
                                             <a href="{{ route('checkout/hardware', $supplierassets->id) }}" class="btn-flat success">Checkout</a>

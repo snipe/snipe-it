@@ -72,7 +72,7 @@ class License extends Elegant
      public static function availassetcount()
     {
         return DB::table('license_seats')
-                    ->where('assigned_to', '=', '0')
+                    ->whereNull('assigned_to')
                     ->whereNull('deleted_at','and')
                     ->count();
     }
@@ -83,8 +83,8 @@ class License extends Elegant
     public function availcount()
     {
         return DB::table('license_seats')
-                    ->where('assigned_to', '=', '0')
-                    ->where('asset_id', '=', NULL)
+                    ->whereNull('assigned_to')
+                    ->whereNull('asset_id')
                     ->where('license_id', '=', $this->id)
                     ->whereNull('deleted_at','and')
                     ->count();
