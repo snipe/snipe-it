@@ -233,7 +233,7 @@ class Asset extends Elegant
 	{
 		return $query->whereHas('assetstatus',function($query)
 		{
-			$query->where('pending','=',1);
+			$query->where('deployable','=',0)->where('pending','=',1)->where('archived','=',0);
 		});
 	}
 
@@ -249,7 +249,7 @@ class Asset extends Elegant
 	{
 		return $query->whereHas('assetstatus',function($query)
 		{
-			$query->where('deployable','=',1);
+			$query->where('deployable','=',1)->where('pending','=',0)->where('archived','=',0);
 		});
 	}
 
@@ -267,9 +267,26 @@ class Asset extends Elegant
 	{
 		return $query->whereHas('assetstatus',function($query)
 		{
-			$query->where('deployable','=',0);
+			$query->where('deployable','=',0)->where('pending','=',0)->where('archived','=',0);
 		});
 	}
+
+
+	/**
+	* Query builder scope for Archived assets
+	*
+	* @param  Illuminate\Database\Query\Builder  $query  Query builder instance
+	* @return Illuminate\Database\Query\Builder          Modified query builder
+	*/
+
+	public function scopeArchived($query)
+	{
+		return $query->whereHas('assetstatus',function($query)
+		{
+			$query->where('deployable','=',0)->where('pending','=',0)->where('archived','=',1);
+		});
+	}
+
 
 
 	/**
