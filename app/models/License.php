@@ -88,7 +88,8 @@ class License extends Elegant
     {
         return DB::table('license_seats')
                     ->whereNull('assigned_to')
-                    ->whereNull('deleted_at','and')
+                    ->whereNull('asset_id')
+                    ->whereNull('deleted_at')
                     ->count();
     }
 
@@ -124,6 +125,7 @@ class License extends Elegant
     	$total = $this->totalSeatsByLicenseID();
         $taken =  $this->assignedcount();
         $diff =   ($total - $taken);
+
         return $diff;
     }
 
