@@ -142,7 +142,7 @@ class LicensesController extends AdminController
                     $license_seat = new LicenseSeat();
                     $license_seat->license_id       = $insertedId;
                     $license_seat->user_id          = Sentry::getId();
-                    $license_seat->assigned_to      = 0;
+                    $license_seat->assigned_to      = NULL;
                     $license_seat->notes            = NULL;
                     $license_seat->save();
                 }
@@ -316,7 +316,7 @@ class LicensesController extends AdminController
                         $license_seat = new LicenseSeat();
                         $license_seat->license_id       = $license->id;
                         $license_seat->user_id          = Sentry::getId();
-                        $license_seat->assigned_to      = 0;
+                        $license_seat->assigned_to      = NULL;
                         $license_seat->notes            = NULL;
                         $license_seat->save();
                     }
