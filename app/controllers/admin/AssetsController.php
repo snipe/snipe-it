@@ -49,7 +49,7 @@ class AssetsController extends AdminController
         } elseif (Input::get('Archived')) {
         	$assets->Archived();
         } elseif (Input::get('Requestable')) {
-        	$assets->Requestable();
+        	$assets->RequestableAssets();
         } elseif (Input::get('Deployed')) {
         	$assets->Deployed();
         } elseif (Input::get('Deleted')) {

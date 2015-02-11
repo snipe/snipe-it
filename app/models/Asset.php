@@ -98,7 +98,7 @@ class Asset extends Elegant
     /**
     * Get requestable assets
     */
-     public static function requestable()
+     public static function getRequestable()
     {
     	return Asset::Requestable()->whereNull('deleted_at')->count();
 
@@ -319,7 +319,7 @@ class Asset extends Elegant
 	* @return Illuminate\Database\Query\Builder          Modified query builder
 	*/
 
-	public function scopeRequestable($query)
+	public function scopeRequestableAssets($query)
 	{
 		return $query->where('requestable','=',1)->whereNULL('assigned_to')->whereHas('assetstatus',function($query)
 		{
