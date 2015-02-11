@@ -1,7 +1,7 @@
 @extends('backend/layouts/default')
 
 @section('title0')
-    @if (Input::get('Pending') || Input::get('Undeployable') || Input::get('RTD')  || Input::get('Deployed'))
+    @if (Input::get('Pending') || Input::get('Undeployable') || Input::get('RTD')  || Input::get('Deployed') || Input::get('Archived'))
         @if (Input::get('Pending'))
             @lang('general.pending')
         @elseif (Input::get('RTD'))
@@ -10,6 +10,8 @@
             @lang('general.undeployable')
         @elseif (Input::get('Deployed'))
             @lang('general.deployed')
+        @elseif (Input::get('Archived'))
+            @lang('general.archived')
         @endif
     @else
             @lang('general.all')
