@@ -361,6 +361,12 @@ class AssetsController extends AdminController
             return Redirect::to('hardware')->with('error', Lang::get('admin/hardware/message.assoc_users'));
         } else {
             // Delete the asset
+
+            DB::table('assets')
+            ->where('id', $asset->id)
+            ->update(array('assigned_to' => NULL));
+
+
             $asset->delete();
 
             // Redirect to the asset management page
