@@ -252,7 +252,7 @@
             </p>
             @endif
 
-            @if ((isset($asset->assigned_to ) && ($asset->assigned_to > 0)))
+            @if ((isset($asset->assigneduser) && ($asset->assigned_to > 0)))
                 <h6><br>@lang('admin/hardware/form.checkedout_to')</h6>
                 <ul>
 
@@ -285,12 +285,23 @@
 
 			 @endif
 
-            @if (($asset->status_id ) && ($asset->status_id > 1))
+            @if (($asset->status_id ) && ($asset->status_id > 0))
 			<!-- Status Info -->
 
                 @if ($asset->assetstatus)
                     <h6><br>{{{ $asset->assetstatus->name }}}
                     @lang('admin/hardware/general.asset')</h6>
+
+                    <ul>
+                    	 @if (($asset->assetstatus->deployable=='1') && ($asset->assigned_to > 0))
+                    	<li><br /><a href="{{ route('checkin/hardware', $asset->id) }}" class="btn-flat large info ">@lang('admin/hardware/general.checkin')</a></li>
+                    	@elseif (($asset->assetstatus->deployable=='1') &&  (($asset->assigned_to=='') || ($asset->assigned_to==0)))
+                    	<li><br /><a href="{{ route('checkout/hardware', $asset->id) }}" class="btn-flat large info ">@lang('admin/hardware/general.checkout')</a></li>
+                    	@else
+                    	popo
+                    	{{ $asset->assigned_to }}
+                    	@endif
+                    </ul>
 
 					@if ($asset->assetstatus->notes)
                     <div class="col-md-12">
