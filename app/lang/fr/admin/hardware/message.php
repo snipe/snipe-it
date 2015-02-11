@@ -2,8 +2,8 @@
 
 return array(
 
-    'undeployable' 		=> '<strong>Attention: </strong> Ce bien a été marqué indisponible.
-                        Si ce statut a changé, veuillez l\'actualiser.',
+    'undeployable' 		=> '<strong>Warning: </strong> This asset has been marked as currently undeployable.
+                        If this status has changed, please update the asset status.',
     'does_not_exist' 	=> 'Ce bien n\'existe pas.',
     'assoc_users'	 	=> 'Ce bien est marqué sorti par un utilisateur et ne peut être supprimé. Veuillez d\'abord cliquer sur Retour de Biens, et réessayer.',
 
@@ -15,6 +15,11 @@ return array(
     'update' => array(
         'error'   		=> 'Ce bien n\'a pas été actualisé, veuillez réessayer',
         'success' 		=> 'Bien actualisé correctement.'
+    ),
+
+    'restore' => array(
+        'error'   		=> 'Asset was not restored, please try again',
+        'success' 		=> 'Asset restored successfully.'
     ),
 
     'delete' => array(

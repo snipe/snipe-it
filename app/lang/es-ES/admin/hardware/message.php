@@ -2,7 +2,8 @@
 
 return array(
 
-    'undeployable' 		=> 'Atención:  Este equipo está marcado como no isntalabre. Si no es correcto, actualiza su estado.',
+    'undeployable' 		=> '<strong>Warning: </strong> This asset has been marked as currently undeployable.
+                        If this status has changed, please update the asset status.',
     'does_not_exist' 	=> 'Equipo inexistente.',
     'assoc_users'	 	=> 'Equipo asignado a un usuario, no se puede eliminar.',
 
@@ -14,6 +15,11 @@ return array(
     'update' => array(
         'error'   		=> 'Equipo no actualizado, intentalo de nuevo',
         'success' 		=> 'Equipo actualizado.'
+    ),
+
+    'restore' => array(
+        'error'   		=> 'Asset was not restored, please try again',
+        'success' 		=> 'Asset restored successfully.'
     ),
 
     'delete' => array(

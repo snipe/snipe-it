@@ -2,7 +2,8 @@
 
 return array(
 
-    'undeployable' 		=> '<b>Warnung:</b> Dieses Asset wurde als nicht zur Herausgabe bereit markiert. Falls sich dieser Status geändert hat, aktualisieren Sie bitte den Asset Status.',
+    'undeployable' 		=> '<strong>Warning: </strong> This asset has been marked as currently undeployable.
+                        If this status has changed, please update the asset status.',
     'does_not_exist' 	=> 'Asset existiert nicht.',
     'assoc_users'	 	=> 'Dieses Asset ist im Moment an einen Benutzer herausgegeben und kann nicht entfernt werden. Bitte buchen sie das Asset wieder ein und versuchen Sie dann erneut es zu entfernen. ',
 
@@ -14,6 +15,11 @@ return array(
     'update' => array(
         'error'   		=> 'Asset wurde nicht aktualisiert. Bitte versuchen Sie es erneut',
         'success' 		=> 'Asset wurde erfolgreich aktualisiert.'
+    ),
+
+    'restore' => array(
+        'error'   		=> 'Asset was not restored, please try again',
+        'success' 		=> 'Asset restored successfully.'
     ),
 
     'delete' => array(

@@ -2,7 +2,8 @@
 
 return array(
 
-    'undeployable' 		=> '<strong>ATENTIE:</strong> Acest activ a fost marcat ca momentan neimplementabil. Daca acest status s-a schimbat, va rugam sa schimbati starea activului.',
+    'undeployable' 		=> '<strong>Warning: </strong> This asset has been marked as currently undeployable.
+                        If this status has changed, please update the asset status.',
     'does_not_exist' 	=> 'Activul nu exista.',
     'assoc_users'	 	=> 'Acest activ este predat catre un utilizator si nu se poate sterge. Va rugam verificati activul, dupa care incercati sa-l stergeti iar. ',
 
@@ -14,6 +15,11 @@ return array(
     'update' => array(
         'error'   		=> 'Activul nu a fost actualizat, va rugam incercati iar',
         'success' 		=> 'Activul a fost actualizat.'
+    ),
+
+    'restore' => array(
+        'error'   		=> 'Asset was not restored, please try again',
+        'success' 		=> 'Asset restored successfully.'
     ),
 
     'delete' => array(

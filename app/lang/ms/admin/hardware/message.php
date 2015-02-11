@@ -2,7 +2,8 @@
 
 return array(
 
-    'undeployable' 		=> '<strong>Amaran: </strong> Harta ini sekarang ditanda sebagai tidak boleh agih. Jika statusnya telah berubah, sila kemaskini staus harta.',
+    'undeployable' 		=> '<strong>Warning: </strong> This asset has been marked as currently undeployable.
+                        If this status has changed, please update the asset status.',
     'does_not_exist' 	=> 'Harta tidak wujud.',
     'assoc_users'	 	=> 'Harta ini sekarang telah diagihkan kepada pengguna dan tidak boleh dihapuskan. Sila semak status harta ini dahulu, dan kemudian cuba semula. ',
 
@@ -14,6 +15,11 @@ return array(
     'update' => array(
         'error'   		=> 'Harta gagal dikemaskini, sila cuba semula',
         'success' 		=> 'Harta berjaya dikemaskini.'
+    ),
+
+    'restore' => array(
+        'error'   		=> 'Asset was not restored, please try again',
+        'success' 		=> 'Asset restored successfully.'
     ),
 
     'delete' => array(

@@ -23,7 +23,7 @@ return array(
     'order'				=> 'Numar ordine',
     'qr'				=> 'Cod QR',
     'requestable'		=> 'Utilizatorii pot cere acest activ',
-    'select_statustype'	=> 'Select Status Type',
+    'select_statustype'	=> 'Selecteaza tip status',
     'serial'			=> 'Serie',
     'status'			=> 'Stare',
     'supplier'			=> 'Furnizor',

@@ -2,8 +2,8 @@
 
 return array(
 
-    'undeployable' 		=> '<strong>Внимание: </strong> Этот актив в настоящее время помечен как не подлежащий установке.
-                        Если этот статус изменился , пожалуйста обновите статус актива.',
+    'undeployable' 		=> '<strong>Warning: </strong> This asset has been marked as currently undeployable.
+                        If this status has changed, please update the asset status.',
     'does_not_exist' 	=> 'Актив не существует.',
     'assoc_users'	 	=> 'Этот актив в настоящее время привязан к пользователю и не может быть удален. Пожалуйста сначала снимите привязку, и затем попробуйте удалить снова. ',
 
@@ -15,6 +15,11 @@ return array(
     'update' => array(
         'error'   		=> 'Актив не был изменен, пожалуйста попробуйте снова',
         'success' 		=> 'Актив успешно изменен.'
+    ),
+
+    'restore' => array(
+        'error'   		=> 'Asset was not restored, please try again',
+        'success' 		=> 'Asset restored successfully.'
     ),
 
     'delete' => array(

@@ -2,7 +2,8 @@
 
 return array(
 
-    'undeployable' 		=> '<strong>Uwaga:</strong> Ten nabytek został oznaczony jako obecnie nie przypisany. Jeśli jego status uległ zmianie proszę zaktualizować status nabytku.',
+    'undeployable' 		=> '<strong>Warning: </strong> This asset has been marked as currently undeployable.
+                        If this status has changed, please update the asset status.',
     'does_not_exist' 	=> 'Nabytek/zasób nie istnieje.',
     'assoc_users'	 	=> 'Ten nabytek/zasób jest przypisany do użytkownika i nie może być usunięty. Proszę sprawdzić przypisanie nabytków/zasobów a następnie spróbować ponownie.',
 
@@ -14,6 +15,11 @@ return array(
     'update' => array(
         'error'   		=> 'Nie zaktualizowano nabytku/zasobu, proszę spróbować ponownie',
         'success' 		=> 'Aktualizacja poprawna.'
+    ),
+
+    'restore' => array(
+        'error'   		=> 'Asset was not restored, please try again',
+        'success' 		=> 'Asset restored successfully.'
     ),
 
     'delete' => array(

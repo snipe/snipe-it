@@ -7,7 +7,7 @@ return array(
     'admin'					=> 'Admin',
     'all_assets'			=> 'Todos los Equipos',
     'all'       			=> 'Todos los',
-    'archived'              => 'Archived',
+    'archived'              => 'Archivado',
     'asset_models'			=> 'Modelos',
     'asset'					=> 'Equipo',
     'asset_report'          => 'Reporte de Equipos',
