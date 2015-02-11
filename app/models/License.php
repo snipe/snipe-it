@@ -5,6 +5,8 @@ class License extends Elegant
 	use SoftDeletingTrait;
     protected $dates = ['deleted_at'];
 
+     public $timestamps = true;
+
     protected $guarded = 'id';
     protected $table = 'licenses';
     protected $rules = array(
@@ -62,9 +64,22 @@ class License extends Elegant
      public static function assetcount()
     {
         return DB::table('license_seats')
-                    ->whereNull('deleted_at','and')
+                    ->whereNull('deleted_at')
                     ->count();
     }
+
+
+    /**
+    * Get total licenses
+    */
+     public function totalSeatsByLicenseID()
+    {
+        return DB::table('license_seats')
+        			->where('license_id', '=', $this->id)
+                    ->whereNull('deleted_at')
+                    ->count();
+    }
+
 
     /**
     * Get total licenses not checked out
@@ -86,7 +101,7 @@ class License extends Elegant
                     ->whereNull('assigned_to')
                     ->whereNull('asset_id')
                     ->where('license_id', '=', $this->id)
-                    ->whereNull('deleted_at','and')
+                    ->whereNull('deleted_at')
                     ->count();
     }
 
@@ -97,18 +112,18 @@ class License extends Elegant
     public function assignedcount()
     {
         return DB::table('license_seats')
-                    ->where('assigned_to', '>', '0')
-                    ->where('asset_id', '>', '0')
+                    ->whereNotNull('assigned_to')
+                    ->whereNotNull('asset_id')
                     ->where('license_id', '=', $this->id)
-                    ->whereNull('deleted_at','and')
+                    ->whereNull('deleted_at')
                     ->count();
     }
 
     public function remaincount()
     {
-        $avail =  $this->availcount();
+    	$total = $this->totalSeatsByLicenseID();
         $taken =  $this->assignedcount();
-        $diff =   ($avail - $taken);
+        $diff =   ($total - $taken);
         return $diff;
     }
 
