@@ -135,6 +135,7 @@ Route::group(array('prefix' => 'admin', 'before' => 'admin-auth', 'namespace' =>
             Route::get('{categoryId}/edit', array('as' => 'update/category', 'uses' => 'CategoriesController@getEdit'));
             Route::post('{categoryId}/edit', 'CategoriesController@postEdit');
             Route::get('{categoryId}/delete', array('as' => 'delete/category', 'uses' => 'CategoriesController@getDelete'));
+            Route::get('{categoryId}/view', array('as' => 'view/category', 'uses' => 'CategoriesController@getView'));
         });
 
         # Depreciations
