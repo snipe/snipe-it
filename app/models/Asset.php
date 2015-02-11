@@ -94,6 +94,16 @@ class Asset extends Elegant
 
     }
 
+
+    /**
+    * Get requestable assets
+    */
+     public static function requestable()
+    {
+    	return Asset::Requestable()->whereNull('deleted_at')->count();
+
+    }
+
     /**
     * Get total assets
     */
@@ -300,6 +310,21 @@ class Asset extends Elegant
 	public function scopeDeployed($query)
 	{
 		return $query->where('assigned_to','>','0');
+	}
+
+	/**
+	* Query builder scope for Requestable assets
+	*
+	* @param  Illuminate\Database\Query\Builder  $query  Query builder instance
+	* @return Illuminate\Database\Query\Builder          Modified query builder
+	*/
+
+	public function scopeRequestable($query)
+	{
+		return $query->where('requestable','=',1)->whereNULL('assigned_to')->whereHas('assetstatus',function($query)
+		{
+			$query->where('deployable','=',1)->where('pending','=',0)->where('archived','=',0);
+		});
 	}
 
 

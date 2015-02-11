@@ -10,7 +10,7 @@ class AssetsSeeder extends Seeder
 
         $date = new DateTime;
 
-        // Pending (status_id is null, assigned_to = 0)
+
         $asset[] = array(
             'name'      	=> 'Shanen MBP',
             'asset_tag'     => 'NNY2878796',
@@ -57,7 +57,7 @@ class AssetsSeeder extends Seeder
         );
 
 
-        // RTD (status_id =0, assigned_to = 0)
+
         $asset[] = array(
             'name'      	=> 'Alison MBP',
             'asset_tag'     => 'NNY287958796',
@@ -80,7 +80,7 @@ class AssetsSeeder extends Seeder
             'depreciate' 	=> '0',
         );
 
-        // RTD (status_id =0, assigned_to = 0)
+
         $asset[] = array(
             'name'      	=> 'Brady MBP',
             'asset_tag'     => 'NNY78795566',
@@ -103,7 +103,7 @@ class AssetsSeeder extends Seeder
             'depreciate' 	=> '0',
         );
 
-        // RTD (status_id =0, assigned_to = 0)
+
         $asset[] = array(
             'name'      	=> 'Deborah MBP',
             'asset_tag'     => 'NNY65756756775',
@@ -127,7 +127,7 @@ class AssetsSeeder extends Seeder
         );
 
 
-        // Deployed (status_id =0, assigned_to > 0)
+
         $asset[] = array(
             'name'      	=> 'Sara MBP',
             'asset_tag'     => 'NNY6897856775',
@@ -150,7 +150,7 @@ class AssetsSeeder extends Seeder
             'depreciate' 	=> '0',
         );
 
-        // Deployed (status_id =0, assigned_to > 0)
+
         $asset[] = array(
             'name'      	=> 'Ben MBP',
             'asset_tag'     => 'NNY67567775',
@@ -173,7 +173,7 @@ class AssetsSeeder extends Seeder
             'depreciate' 	=> '0',
         );
 
-        // Undeployable (status_id > 0, assigned_to = 0)
+
         $asset[] = array(
             'name'      	=> 'Broke-Ass Laptop',
             'asset_tag'     => 'NNY67567775',
@@ -196,7 +196,7 @@ class AssetsSeeder extends Seeder
             'depreciate' 	=> '0',
         );
 
-        // Undeployable (status_id > 0, assigned_to = 0)
+
         $asset[] = array(
             'name'      	=> 'Maybe Broke-Ass Laptop',
             'asset_tag'     => 'NNY6755667775',
@@ -219,7 +219,7 @@ class AssetsSeeder extends Seeder
             'depreciate' 	=> '0',
         );
 
-        // Undeployable (status_id > 0, assigned_to = 0)
+
         $asset[] = array(
             'name'      	=> 'Completely Facacta Laptop',
             'asset_tag'     => 'NNY6564567775',
@@ -242,7 +242,7 @@ class AssetsSeeder extends Seeder
             'depreciate' 	=> '0',
         );
 
-        // Undeployable (status_id > 0, assigned_to = 0)
+
         $asset[] = array(
             'name'      	=> 'Drunken Shanenigans Laptop',
             'asset_tag'     => 'NNY6564567775',

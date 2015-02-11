@@ -1,10 +1,15 @@
 <?php
 
 return array(
-    'name'      	=> 'Název stavu',
-    'title'      	=> 'Označení stavu',
-    'update'      	=> 'Upravit označení stavu',
-    'create'      	=> 'Vytvořit označení stavu',
     'about'      	=> 'O označení stavu',
-    'info'      	=> 'Označení stavu se používá k popisu různých důvodů proč majetek <strong><em>nemůže</em></strong> být přidělen. Může být pokažený, pryč na opravě, na diagnostice, ztracený nebo ukradený, apod. Označení stavu umožňuje členům týmu zobrazovat postup.',
+    'archived'      	=> 'Archived',
+    'create'      	=> 'Vytvořit označení stavu',
+    'deployable'      	=> 'Deployable',
+    'info'      	=> 'Status labels are used to describe the various states your assets could be in. They may be out for repair, lost/stolen, etc. You can create new status labels for deployable, pending and archived assets.',
+    'name'      	=> 'Název stavu',
+    'pending'      	=> 'Pending',
+    'status_type'   => 'Status Type',
+    'title'      	=> 'Označení stavu',
+    'undeployable'  => 'Undeployable',
+    'update'      	=> 'Upravit označení stavu',
 );

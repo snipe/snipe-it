@@ -23,6 +23,7 @@ return array(
     'order'				=> 'Ordernummer',
     'qr'				=> 'QR-code',
     'requestable'		=> 'Gebruikers mogen dit materiaal aanvragen',
+    'select_statustype'	=> 'Select Status Type',
     'serial'			=> 'Serienummer',
     'status'			=> 'Status',
     'supplier'			=> 'Leverancier',

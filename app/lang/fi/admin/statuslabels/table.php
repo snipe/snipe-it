@@ -1,10 +1,15 @@
 <?php
 
 return array(
-    'name'      	=> 'Tilan Nimi',
-    'title'      	=> 'Tilamerkinnät',
-    'update'      	=> 'Päivitä Tilamerkinnät',
-    'create'      	=> 'Uusi Tilamerkintä',
     'about'      	=> 'Lisätietoja Tilamerkinnöistä',
-    'info'      	=> 'Tilamerkintöjä käytetään erilaisina syinä siihen miksi laitetta  <strong><em>ei voida</em></strong> ottaa käyttöön. Laite voi olla rikki, lähetetty vianhakuun, korjattavana, hävinnyt, varastettu jne. Tilamerkintöjen avulla tiimisi voi seurata laitteen edistymistä.',
+    'archived'      	=> 'Archived',
+    'create'      	=> 'Uusi Tilamerkintä',
+    'deployable'      	=> 'Deployable',
+    'info'      	=> 'Status labels are used to describe the various states your assets could be in. They may be out for repair, lost/stolen, etc. You can create new status labels for deployable, pending and archived assets.',
+    'name'      	=> 'Tilan Nimi',
+    'pending'      	=> 'Pending',
+    'status_type'   => 'Status Type',
+    'title'      	=> 'Tilamerkinnät',
+    'undeployable'  => 'Undeployable',
+    'update'      	=> 'Päivitä Tilamerkinnät',
 );

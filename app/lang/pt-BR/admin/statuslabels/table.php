@@ -1,10 +1,15 @@
 <?php
 
 return array(
-    'name'      	=> 'Nome do Status',
-    'title'      	=> 'Rótulos de Status',
-    'update'      	=> 'Atualizar Rótulo de Status',
-    'create'      	=> 'Criar Rótulo de Status',
     'about'      	=> 'Sobre os Rótulos de Status',
-    'info'      	=> 'Os rótulos de status são usados para descrever as várias razões de por que um bem <strong><em>não pode</em></strong> ser implementado. Elas podem ser quebrado, ausente para diagnósticos, ausentes para reparos, perdidos ou robados, etc. Os rótulos de status permitem a sua equipe de ver o progresso.',
+    'archived'      	=> 'Arquivado',
+    'create'      	=> 'Criar Rótulo de Status',
+    'deployable'      	=> 'Deployable',
+    'info'      	=> 'Status labels are used to describe the various states your assets could be in. They may be out for repair, lost/stolen, etc. You can create new status labels for deployable, pending and archived assets.',
+    'name'      	=> 'Nome do Status',
+    'pending'      	=> 'Pending',
+    'status_type'   => 'Status Type',
+    'title'      	=> 'Rótulos de Status',
+    'undeployable'  => 'Undeployable',
+    'update'      	=> 'Atualizar Rótulo de Status',
 );

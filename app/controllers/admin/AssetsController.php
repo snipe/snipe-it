@@ -48,6 +48,8 @@ class AssetsController extends AdminController
         	$assets->Undeployable();
         } elseif (Input::get('Archived')) {
         	$assets->Archived();
+        } elseif (Input::get('Requestable')) {
+        	$assets->Requestable();
         } elseif (Input::get('Deployed')) {
         	$assets->Deployed();
         }
@@ -359,6 +361,12 @@ class AssetsController extends AdminController
             return Redirect::to('hardware')->with('error', Lang::get('admin/hardware/message.assoc_users'));
         } else {
             // Delete the asset
+
+            DB::table('assets')
+            ->where('id', $asset->id)
+            ->update(array('assigned_to' => NULL));
+
+
             $asset->delete();
 
             // Redirect to the asset management page
@@ -486,7 +494,7 @@ class AssetsController extends AdminController
         $logaction->checkedout_to = $asset->assigned_to;
 
         // Update the asset data to null, since it's being checked in
-        $asset->assigned_to            		= '0';
+        $asset->assigned_to            		= NULL;
 
         // Was the asset updated?
         if($asset->save()) {

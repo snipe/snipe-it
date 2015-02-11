@@ -23,6 +23,7 @@ return array(
     'order'				=> 'Č. objednávky',
     'qr'				=> 'QR kód',
     'requestable'		=> 'Uživatelé můžou požádat o tento majetek',
+    'select_statustype'	=> 'Select Status Type',
     'serial'			=> 'Sériové číslo',
     'status'			=> 'Stav',
     'supplier'			=> 'Dodavatel',

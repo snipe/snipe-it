@@ -270,6 +270,11 @@ Route::group(array('prefix' => 'account', 'before' => 'auth', 'namespace' => 'Co
     Route::get('change-email', array('as' => 'change-email', 'uses' => 'ChangeEmailController@getIndex'));
     Route::post('change-email', 'ChangeEmailController@postIndex');
 
+    # Profile
+    Route::get('requestable-assets', array('as' => 'requestable-assets', 'uses' => 'ViewAssetsController@getRequestableIndex'));
+    Route::get('request-asset/{assetId}', array('as' => 'account/request-asset', 'uses' => 'ViewAssetsController@getRequestAsset'));
+
+
 });
 
 /*

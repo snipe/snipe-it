@@ -7,6 +7,7 @@ return array(
     'admin'					=> '管理员',
     'all_assets'			=> '所有资产',
     'all'       			=> '所有',
+    'archived'              => 'Archived',
     'asset_models'			=> '资产型号',
     'asset'					=> '资产',
     'asset_report'          => '资产报备',

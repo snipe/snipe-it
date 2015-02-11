@@ -15,15 +15,15 @@ return array(
     ),
 
     'deletefile' => array(
-        'error'   => 'File not deleted. Please try again.',
-        'success' => 'File successfully deleted.',
+        'error'   => 'Fisierul n-a fost sters. Incercati iar.',
+        'success' => 'Fisierul a fost sters.',
     ),
 
     'upload' => array(
-        'error'   => 'File(s) not uploaded. Please try again.',
-        'success' => 'File(s) successfully uploaded.',
-        'nofiles' => 'You did not select any files for upload',
-        'invalidfiles' => 'One or more of your files is too large or is a filetype that is not allowed. Allowed filetypes are png, gif, jpg, doc, docx, pdf, and txt.',
+        'error'   => 'Fisierul/Fisierele nu au fost uploadate. Incecati iar.',
+        'success' => 'Fisierul/Fisierele au fost uploadate.',
+        'nofiles' => 'N-ati selectat fisiere pentru upload',
+        'invalidfiles' => 'Unul sau mai multe fisiere sunt prea mari sau tipul de fisier este interzis. Tipurile de fisiere permise sunt png, gif, jpg, doc, docx, pdf si txt.',
     ),
 
     'update' => array(

@@ -23,6 +23,7 @@ return array(
     'order'				=> 'Номер заказа',
     'qr'				=> 'QR-код',
     'requestable'		=> 'Пользователи могут запросить этот актив',
+    'select_statustype'	=> 'Select Status Type',
     'serial'			=> 'Серийный номер',
     'status'			=> 'Статус',
     'supplier'			=> 'Поставщик',

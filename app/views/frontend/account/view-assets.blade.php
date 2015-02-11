@@ -1,4 +1,4 @@
-@extends('frontend/layouts/account')
+@extends('frontend/layouts/default')
 
 {{-- Page title --}}
 @section('title')
@@ -7,7 +7,7 @@ View Assets for  {{{ $user->fullName() }}} ::
 @stop
 
 {{-- Account page content --}}
-@section('account-content')
+@section('content')
 
 <div class="row user-profile">
             <!-- header -->

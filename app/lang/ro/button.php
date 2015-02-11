@@ -3,12 +3,12 @@
 return array(
 
     'actions' 	=> 'Actiuni',
-    'add'    	=> 'Add New',
-    'cancel'    => 'Cancel',
+    'add'    	=> 'Adauga',
+    'cancel'    => 'Anuleaza',
     'delete'  	=> 'Sterge',
     'edit'    	=> 'Editeaza',
     'restore' 	=> 'Restaureaza',
     'submit'  	=> 'Trimiteti',
-    'upload'    => 'Upload',
+    'upload'    => 'Incarca',
 
 );

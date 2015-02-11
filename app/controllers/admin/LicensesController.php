@@ -116,10 +116,8 @@ class LicensesController extends AdminController
             $license->seats             = e(Input::get('seats'));
             $license->purchase_date     = e(Input::get('purchase_date'));
             $license->purchase_order    = e(Input::get('purchase_order'));
-            //$license->purchase_cost   = e(Input::get('purchase_cost'));
             $license->depreciation_id   = e(Input::get('depreciation_id'));
             $license->expiration_date   = e(Input::get('expiration_date'));
-            //$license->asset_id            = e(Input::get('asset_id'));
             $license->user_id           = Sentry::getId();
 
             if (($license->purchase_date == "") || ($license->purchase_date == "0000-00-00")) {
@@ -142,7 +140,7 @@ class LicensesController extends AdminController
                     $license_seat = new LicenseSeat();
                     $license_seat->license_id       = $insertedId;
                     $license_seat->user_id          = Sentry::getId();
-                    $license_seat->assigned_to      = 0;
+                    $license_seat->assigned_to      = NULL;
                     $license_seat->notes            = NULL;
                     $license_seat->save();
                 }
@@ -316,7 +314,7 @@ class LicensesController extends AdminController
                         $license_seat = new LicenseSeat();
                         $license_seat->license_id       = $license->id;
                         $license_seat->user_id          = Sentry::getId();
-                        $license_seat->assigned_to      = 0;
+                        $license_seat->assigned_to      = NULL;
                         $license_seat->notes            = NULL;
                         $license_seat->save();
                     }
@@ -370,9 +368,15 @@ class LicensesController extends AdminController
         } else {
 
             // Delete the license and the associated license seats
+            DB::table('license_seats')
+            ->where('id', $asset->id)
+            ->update(array('assigned_to' => NULL));
+
             $licenseseats = $license->licenseseats();
             $licenseseats->delete();
             $license->delete();
+
+
 
 
             // Redirect to the licenses management page

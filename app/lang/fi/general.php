@@ -7,6 +7,7 @@ return array(
     'admin'					=> 'Ylläpitäjä',
     'all_assets'			=> 'Kaikki Laitteet',
     'all'       			=> 'Kaikki',
+    'archived'              => 'Archived',
     'asset_models'			=> 'Laitemallit',
     'asset'					=> 'Laite',
     'asset_report'          => 'Laiteraportti',

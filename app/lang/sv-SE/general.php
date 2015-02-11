@@ -7,6 +7,7 @@ return array(
     'admin'					=> 'Administratör',
     'all_assets'			=> 'Alla Tillgångar',
     'all'       			=> 'Alla',
+    'archived'              => 'Archived',
     'asset_models'			=> 'Asset Models',
     'asset'					=> 'Asset',
     'asset_report'          => 'Asset Report',

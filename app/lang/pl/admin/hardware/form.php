@@ -23,6 +23,7 @@ return array(
     'order'				=> 'Numer zamówienia',
     'qr'				=> 'Kod QR',
     'requestable'		=> 'Użytkownicy mogą wymagać tego zasobu',
+    'select_statustype'	=> 'Select Status Type',
     'serial'			=> 'Numer seryjny',
     'status'			=> 'Status',
     'supplier'			=> 'Sprzedawca',

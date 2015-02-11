@@ -23,6 +23,7 @@ return array(
     'order'				=> 'Tilausnumero',
     'qr'				=> 'QR-koodi',
     'requestable'		=> 'Käyttäjät voivat pyytää tätä laitetta',
+    'select_statustype'	=> 'Select Status Type',
     'serial'			=> 'Sarjanumero',
     'status'			=> 'Tila',
     'supplier'			=> 'Toimittaja',

@@ -7,6 +7,7 @@ return array(
     'admin'					=> 'Admin',
     'all_assets'			=> 'Wszystkie aktywa',
     'all'       			=> 'Wszystko',
+    'archived'              => 'Archived',
     'asset_models'			=> 'Typy aktywów',
     'asset'					=> 'Aktywa',
     'asset_report'          => 'Raporty Aktywów',

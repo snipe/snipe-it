@@ -23,6 +23,7 @@ return array(
     'order'				=> 'Nombor Pesanan',
     'qr'				=> 'Kod QR',
     'requestable'		=> 'Pengguna dibenarkan untuk memohon harta ini',
+    'select_statustype'	=> 'Select Status Type',
     'serial'			=> 'Siri',
     'status'			=> 'Status',
     'supplier'			=> 'Pembekal',

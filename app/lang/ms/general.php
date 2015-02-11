@@ -7,6 +7,7 @@ return array(
     'admin'					=> 'Pentadbir',
     'all_assets'			=> 'Semua Harta',
     'all'       			=> 'Semua',
+    'archived'              => 'Archived',
     'asset_models'			=> 'Model Harta',
     'asset'					=> 'Harta',
     'asset_report'          => 'Laporan Harta',

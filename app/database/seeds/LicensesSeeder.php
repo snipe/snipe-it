@@ -10,7 +10,7 @@ class LicensesSeeder extends Seeder
 
         $date = new DateTime;
 
-        // Pending (status_id is null, assigned_to = 0)
+
         $license[] = array(
             'name'      		=> 'Adobe Photoshop CS6',
             'serial'      		=> 'ZOMG-WtF-BBQ-SRSLY',
@@ -31,7 +31,7 @@ class LicensesSeeder extends Seeder
             'depreciate' 		=> '0',
         );
 
-        // Pending (status_id is null, assigned_to = 0)
+
         $license[] = array(
             'name'      		=> 'Git Tower',
             'serial'      		=> '98049890394-340485934',

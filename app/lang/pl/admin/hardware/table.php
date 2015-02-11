@@ -2,21 +2,21 @@
 
 return array(
 
-    'asset_tag'   	=> 'Asset Tag',
+    'asset_tag'   	=> 'Kod',
     'asset_model'       => 'Model',
-    'book_value'  	=> 'Value',
+    'book_value'  	=> 'Treść',
     'change' 		=> 'In/Out',
-    'checkout_date' => 'Checkout Date',
-    'checkoutto' 	=> 'Checked Out',
-    'diff' 			=> 'Diff',
-    'dl_csv' 		=> 'Download CSV',
-    'eol' 			=> 'EOL',
+    'checkout_date' => 'Data przypisania',
+    'checkoutto' 	=> 'Data wypisania',
+    'diff' 			=> 'Różnica',
+    'dl_csv' 		=> 'Pobierz CSV',
+    'eol' 			=> 'Koniec licencji',
     'id'      		=> 'ID',
-    'location' 		=> 'Location',
-    'purchase_cost'	=> 'Cost',
-    'purchase_date'	=> 'Purchased',
-    'serial'   		=> 'Serial',
+    'location' 		=> 'Lokalizacja',
+    'purchase_cost'	=> 'Koszt',
+    'purchase_date'	=> 'Zakup',
+    'serial'   		=> 'Nr. seryjny',
     'status'   		=> 'Status',
-    'title'      	=> 'Asset ',
+    'title'      	=> 'Nabytek',
 
 );

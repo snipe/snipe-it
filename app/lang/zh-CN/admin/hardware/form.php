@@ -23,6 +23,7 @@ return array(
     'order'				=> '订单号',
     'qr'				=> '二维码',
     'requestable'		=> '用户可能申请了该资产',
+    'select_statustype'	=> 'Select Status Type',
     'serial'			=> '序列号',
     'status'			=> '状态',
     'supplier'			=> '供应商',

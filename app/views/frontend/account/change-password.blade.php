@@ -1,4 +1,4 @@
-@extends('frontend/layouts/account')
+@extends('frontend/layouts/default')
 
 {{-- Page title --}}
 @section('title')
@@ -6,7 +6,7 @@ Change your Password
 @stop
 
 {{-- Account page content --}}
-@section('account-content')
+@section('content')
 <div class="row header">
 
     <div class="col-md-12">
