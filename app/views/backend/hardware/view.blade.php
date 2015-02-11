@@ -298,7 +298,7 @@
                     	@elseif (($asset->assetstatus->deployable=='1') &&  (($asset->assigned_to=='') || ($asset->assigned_to==0)))
                     	<li><br /><a href="{{ route('checkout/hardware', $asset->id) }}" class="btn-flat large info ">@lang('admin/hardware/general.checkout')</a></li>
                     	@else
-                    	popo
+
                     	{{ $asset->assigned_to }}
                     	@endif
                     </ul>
