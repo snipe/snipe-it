@@ -13,7 +13,7 @@ class FixBadAssignedToIds extends Migration {
 	public function up()
 	{
 		//
-		DB::statement('update ' . DB::getTablePrefix() . 'assets SET assigned_to=NULL where assigned_to=0');
+		DB::update('update ' . DB::getTablePrefix() . 'assets SET assigned_to=NULL where assigned_to=0');
 
 		Schema::table('status_labels', function ($table) {
 			$table->boolean('deployable')->default(0);
