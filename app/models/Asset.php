@@ -90,7 +90,7 @@ class Asset extends Elegant
     */
      public static function availassetcount()
     {
-    	return Asset::RTD()->count();
+    	return Asset::RTD()->whereNull('deleted_at')->count();
 
     }
 
