@@ -10,7 +10,7 @@ class ActionlogSeeder extends Seeder
 
         $date = new DateTime;
 
-        // Pending (status_id is null, assigned_to = 0)
+
         $assetlog[] = array(
             'user_id'      		=> '1',
             'action_type'      	=> 'checkout',
@@ -23,7 +23,7 @@ class ActionlogSeeder extends Seeder
             'filename'			=> NULL,
         );
 
-        // Pending (status_id is null, assigned_to = 0)
+
         $assetlog[] = array(
             'user_id'      		=> '1',
             'action_type'      	=> 'checkin from',
@@ -36,7 +36,7 @@ class ActionlogSeeder extends Seeder
             'filename'			=> NULL,
         );
 
-        // Pending (status_id is null, assigned_to = 0)
+
         $assetlog[] = array(
             'user_id'      		=> '1',
             'action_type'      	=> 'checkout',
@@ -49,7 +49,7 @@ class ActionlogSeeder extends Seeder
             'filename'			=> NULL,
         );
 
-        // Pending (status_id is null, assigned_to = 0)
+
         $assetlog[] = array(
             'user_id'      		=> '1',
             'action_type'      	=> 'checkin from',
