@@ -113,13 +113,13 @@ class License extends Elegant
     public function assignedcount()
     {
 
-			return LicenseSeat::where('license_id', '=', $this->id)
+		return LicenseSeat::where('license_id', '=', $this->id)
 			->where( function ( $query )
 			{
 			$query->whereNotNull('assigned_to')
-                    ->orWhereNotNull('asset_id');
+			->orWhereNotNull('asset_id');
 			})
-			->count();
+		->count();
 
 
     }
