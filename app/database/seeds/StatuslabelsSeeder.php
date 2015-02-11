@@ -34,6 +34,18 @@ class StatuslabelsSeeder extends Seeder
             'notes' => ''
         );
 
+        $status[] = array(
+            'name'      => 'Archived',
+            'created_at' => $date->modify('-10 day'),
+            'updated_at' => $date->modify('-3 day'),
+            'user_id' => 1,
+            'deleted_at' 		=> NULL,
+            'deployable'	=> 0,
+            'pending'	=> 0,
+            'archived' => 1,
+            'notes' => 'These assets are permanently undeployable'
+        );
+
 
         $status[] = array(
             'name'      => 'Out for Diagnostics',
