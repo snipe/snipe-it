@@ -84,16 +84,6 @@
                     </div>
             </div>
 
-            <!-- Expiration Date -->
-            <div class="form-group {{ $errors->has('expiration_date') ? ' has-error' : '' }}">
-                <label for="expiration_date" class="col-md-3 control-label">@lang('admin/licenses/form.expiration')</label>
-                <div class="input-group col-md-2">
-                    <input type="date" class="datepicker form-control" data-date-format="yyyy-mm-dd" placeholder="Select Date" name="expiration_date" id="expiration_date" value="{{ Input::old('expiration_date', $license->expiration_date) }}">
-                    <span class="input-group-addon"><i class="icon-calendar"></i></span>
-                {{ $errors->first('expiration_date', '<span class="alert-msg"><i class="icon-remove-sign"></i> :message</span>') }}
-                </div>
-            </div>
-
             <!-- Supplier -->
             <div class="form-group {{ $errors->has('supplier_id') ? ' has-error' : '' }}">
                 <label for="supplier_id" class="col-md-3 control-label">@lang('admin/licenses/form.supplier')</label>
@@ -141,6 +131,17 @@
                         <input class="form-control" type="text" name="purchase_order" id="purchase_order" value="{{ Input::old('purchase_order', $license->purchase_order) }}" />
                         {{ $errors->first('purchase_order', '<span class="alert-msg"><i class="icon-remove-sign"></i> :message</span>') }}
                     </div>
+            </div>
+
+
+            <!-- Expiration Date -->
+            <div class="form-group {{ $errors->has('expiration_date') ? ' has-error' : '' }}">
+                <label for="expiration_date" class="col-md-3 control-label">@lang('admin/licenses/form.expiration')</label>
+                <div class="input-group col-md-2">
+                    <input type="date" class="datepicker form-control" data-date-format="yyyy-mm-dd" placeholder="Select Date" name="expiration_date" id="expiration_date" value="{{ Input::old('expiration_date', $license->expiration_date) }}">
+                    <span class="input-group-addon"><i class="icon-calendar"></i></span>
+                {{ $errors->first('expiration_date', '<span class="alert-msg"><i class="icon-remove-sign"></i> :message</span>') }}
+                </div>
             </div>
 
             <!-- Depreciation -->

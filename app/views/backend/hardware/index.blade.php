@@ -134,18 +134,20 @@
             @endif
 
             <td>
-            @if (($asset->assetstatus->deployable == 1 ) && ($asset->deleted_at==''))
+
+            @if (($asset->assetstatus) && (($asset->assetstatus->deployable == 1 ) && ($asset->deleted_at=='')))
 				@if (($asset->assigned_to !='') && ($asset->assigned_to > 0))
 					<a href="{{ route('checkin/hardware', $asset->id) }}" class="btn btn-primary">@lang('general.checkin')</a>
 				@else
 					<a href="{{ route('checkout/hardware', $asset->id) }}" class="btn btn-info">@lang('general.checkout')</a>
 				@endif
             @endif
+
             </td>
             <td nowrap="nowrap">
-                <a href="{{ route('update/hardware', $asset->id) }}" class="btn btn-warning"><i class="icon-pencil icon-white"></i></a>
 
             @if ($asset->deleted_at=='')
+             	<a href="{{ route('update/hardware', $asset->id) }}" class="btn btn-warning"><i class="icon-pencil icon-white"></i></a>
             	 <a data-html="false" class="btn delete-asset btn-danger" data-toggle="modal" href="{{ route('delete/hardware', $asset->id) }}" data-content="@lang('admin/hardware/message.delete.confirm')"
                 data-title="@lang('general.delete')
                  {{ htmlspecialchars($asset->asset_tag) }}?" onClick="return false;"><i class="icon-trash icon-white"></i></a>
