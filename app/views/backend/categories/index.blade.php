@@ -20,12 +20,13 @@
 <div class="row profile">
 <div class="col-md-9 bio">
 
-        <table id="example">
+        <div class="table-responsive">
+		<table id="example">
         <thead>
             <tr role="row">
-                <th class="col-md-5">@lang('admin/categories/table.title')</th>
-                 <th class="col-md-5 actions">@lang('general.assets')</th>
-                <th class="col-md-2 actions">@lang('table.actions')</th>
+                <th class="col-md-5" bSortable="true">@lang('admin/categories/table.title')</th>
+                 <th class="col-md-5" bSortable="true">@lang('general.assets')</th>
+                <th class="col-md-2 actions" bSortable="true">@lang('table.actions')</th>
             </tr>
         </thead>
         <tbody>
@@ -46,6 +47,7 @@ data-title="@lang('general.delete')
         </table>
 
 
+    </div>
     </div>
 
 

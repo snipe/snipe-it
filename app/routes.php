@@ -115,6 +115,7 @@ Route::group(array('prefix' => 'admin', 'before' => 'admin-auth', 'namespace' =>
             Route::get('{manufacturerId}/edit', array('as' => 'update/manufacturer', 'uses' => 'ManufacturersController@getEdit'));
             Route::post('{manufacturerId}/edit', 'ManufacturersController@postEdit');
             Route::get('{manufacturerId}/delete', array('as' => 'delete/manufacturer', 'uses' => 'ManufacturersController@getDelete'));
+            Route::get('{manufacturerId}/view', array('as' => 'view/manufacturer', 'uses' => 'ManufacturersController@getView'));
         });
 
         # Suppliers
