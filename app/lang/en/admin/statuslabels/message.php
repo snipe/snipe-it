@@ -2,18 +2,18 @@
 
 return array(
 
-    'does_not_exist' => 'Location does not exist.',
-    'assoc_users'	 => 'This location is currently associated with at least one user and cannot be deleted. Please update your users to no longer reference this location and try again. ',
+    'does_not_exist' => 'Status label does not exist.',
+    'assoc_users'	 => 'This status label is currently associated with at least one user and cannot be deleted. Please update your users to no longer reference this location and try again. ',
 
 
     'create' => array(
-        'error'   => 'Location was not created, please try again.',
-        'success' => 'Location created successfully.'
+        'error'   => 'Status label was not created, please try again.',
+        'success' => 'Status label created successfully.'
     ),
 
     'update' => array(
-        'error'   => 'Location was not updated, please try again',
-        'success' => 'Location updated successfully.'
+        'error'   => 'Status label was not updated, please try again',
+        'success' => 'Status label updated successfully.'
     ),
 
     'delete' => array(
