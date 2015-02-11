@@ -249,7 +249,7 @@ class Asset extends Elegant
 	{
 		return $query->whereHas('assetstatus',function($query)
 		{
-			$query->where('deployable','=',1)->where('pending','=',0)->where('archived','=',0);
+			$query->where('deployable','=',1)->where('pending','=',0)->where('archived','=',0)->whereNULL('assigned_to');
 		});
 	}
 
