@@ -17,6 +17,11 @@ return array(
         'success' 		=> 'Asset updated successfully.'
     ),
 
+    'restore' => array(
+        'error'   		=> 'Asset was not restored, please try again',
+        'success' 		=> 'Asset restored successfully.'
+    ),
+
     'delete' => array(
         'confirm'   	=> 'Are you sure you wish to delete this asset?',
         'error'   		=> 'There was an issue deleting the asset. Please try again.',

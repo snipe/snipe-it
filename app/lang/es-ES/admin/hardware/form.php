@@ -23,7 +23,7 @@ return array(
     'order'				=> 'Nº Pedido',
     'qr'				=> 'Código QR',
     'requestable'		=> 'Los usuarios pueden solicitarlo',
-    'select_statustype'	=> 'Select Status Type',
+    'select_statustype'	=> 'Selecciona estado',
     'serial'			=> 'N. Serie',
     'status'			=> 'Estado',
     'supplier'			=> 'Proveedor',

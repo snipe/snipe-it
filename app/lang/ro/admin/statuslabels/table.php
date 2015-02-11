@@ -2,14 +2,14 @@
 
 return array(
     'about'      	=> 'Despre etichete status',
-    'archived'      	=> 'Archived',
+    'archived'      	=> 'Arhivat',
     'create'      	=> 'Creeaza eticheta status',
-    'deployable'      	=> 'Deployable',
-    'info'      	=> 'Status labels are used to describe the various states your assets could be in. They may be out for repair, lost/stolen, etc. You can create new status labels for deployable, pending and archived assets.',
+    'deployable'      	=> 'Lansabil',
+    'info'      	=> 'Etichetele de status sunt folosite pentru a descrie diferite statusuri in care se pot afla activele. Ele pot fi trimise la reparat, pierdut/furat, etc. Poti crea noi etichete de status pentru active lansabile, in asteptare sau arhivate.',
     'name'      	=> 'Nume status',
-    'pending'      	=> 'Pending',
-    'status_type'   => 'Status Type',
+    'pending'      	=> 'In asteptare',
+    'status_type'   => 'Tip status',
     'title'      	=> 'Etichete status',
-    'undeployable'  => 'Undeployable',
+    'undeployable'  => 'Nelansabil',
     'update'      	=> 'Actualizeaza eticheta status',
 );

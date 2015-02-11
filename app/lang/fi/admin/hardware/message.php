@@ -2,8 +2,8 @@
 
 return array(
 
-    'undeployable' 		=> '<strong>Varoitus: </strong> Tämä laite on määritetty käyttökunnottomaksi.
-                        Jos laitteen tila on muuttunut, päivitä laitteen tila sen asetuksista.',
+    'undeployable' 		=> '<strong>Warning: </strong> This asset has been marked as currently undeployable.
+                        If this status has changed, please update the asset status.',
     'does_not_exist' 	=> 'Laitetta ei löydy.',
     'assoc_users'	 	=> 'Tämä laite on luovutettu käyttäjälle joten sitä ei voida poistaa. Palauta laite ensin käyttäjältä ja yritä uudelleen. ',
 
@@ -15,6 +15,11 @@ return array(
     'update' => array(
         'error'   		=> 'Laitetta ei päivitetty, yritä uudelleen',
         'success' 		=> 'Laite päivitetty onnistuneesti.'
+    ),
+
+    'restore' => array(
+        'error'   		=> 'Asset was not restored, please try again',
+        'success' 		=> 'Asset restored successfully.'
     ),
 
     'delete' => array(

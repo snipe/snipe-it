@@ -2,7 +2,8 @@
 
 return array(
 
-    'undeployable' 		=> '<strong>Advarsel:</strong> Denne eiendelen er merket som ikke utplasserbar. Vennligst endre status for eiendel dette har endret seg.',
+    'undeployable' 		=> '<strong>Warning: </strong> This asset has been marked as currently undeployable.
+                        If this status has changed, please update the asset status.',
     'does_not_exist' 	=> 'Eiendel eksisterer ikke.',
     'assoc_users'	 	=> 'Denne eiendelen er merket som utsjekket til en bruker og kan ikke slettes. Vennligst sjekk inn eiendelen først, og forsøk sletting på nytt. ',
 
@@ -14,6 +15,11 @@ return array(
     'update' => array(
         'error'   		=> 'Eiendelen ble ikke oppdatert, prøv igjen',
         'success' 		=> 'Oppdatering av eiendel vellykket.'
+    ),
+
+    'restore' => array(
+        'error'   		=> 'Asset was not restored, please try again',
+        'success' 		=> 'Asset restored successfully.'
     ),
 
     'delete' => array(
