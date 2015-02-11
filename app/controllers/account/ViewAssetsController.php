@@ -50,7 +50,7 @@ class ViewAssetsController extends AuthorizedController
         } else {
 
 
-			 //return View::make('frontend/account/view-asset', compact('asset'));
+			 return View::make('frontend/account/view-asset', compact('asset'));
         }
 
 
