@@ -52,6 +52,8 @@ class AssetsController extends AdminController
         	$assets->Requestable();
         } elseif (Input::get('Deployed')) {
         	$assets->Deployed();
+        } elseif (Input::get('Deleted')) {
+        	$assets->withTrashed()->Deleted();
         }
 
         $assets = $assets->orderBy('asset_tag', 'ASC')->get();
@@ -523,7 +525,7 @@ class AssetsController extends AdminController
     **/
     public function getView($assetId = null)
     {
-        $asset = Asset::find($assetId);
+        $asset = Asset::withTrashed()->find($assetId);
 
         if (isset($asset->id)) {
 
@@ -542,7 +544,7 @@ class AssetsController extends AdminController
             $error = Lang::get('admin/hardware/message.does_not_exist', compact('id'));
 
             // Redirect to the user management page
-            return Redirect::route('assets')->with('error', $error);
+            return Redirect::route('hardware')->with('error', $error);
         }
 
     }
@@ -612,6 +614,30 @@ class AssetsController extends AdminController
         $asset->id = null;
         $asset->asset_tag = '';
         return View::make('backend/hardware/edit')->with('supplier_list',$supplier_list)->with('model_list',$model_list)->with('statuslabel_list',$statuslabel_list)->with('assigned_to',$assigned_to)->with('asset',$asset)->with('location_list',$location_list);
+
+    }
+
+
+    public function getRestore($assetId = null)
+    {
+
+		// Get user information
+		$asset = Asset::withTrashed()->find($assetId);
+
+		 if (isset($asset->id)) {
+
+			// Restore the user
+			$asset->restore();
+
+			// Prepare the success message
+			$success = Lang::get('admin/hardware/message.restore.success');
+
+			// Redirect to the user management page
+			return Redirect::route('hardware')->with('success', $success);
+
+		 } else {
+			 return Redirect::to('hardware')->with('error', Lang::get('admin/hardware/message.not_found'));
+		 }
 
     }
 }

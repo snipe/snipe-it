@@ -243,11 +243,13 @@
                     <li><a href="{{ URL::to('hardware?Undeployable=true') }}" {{{ (Request::query('Undeployable') ? ' class="active"' : '') }}} >@lang('general.undeployable')</a></li>
                      <li><a href="{{ URL::to('hardware?Archived=true') }}" {{{ (Request::query('Archived') ? ' class="active"' : '') }}} >@lang('admin/hardware/general.archived')</a></li>
                      <li><a href="{{ URL::to('hardware?Requestable=true') }}" {{{ (Request::query('Requestable') ? ' class="active"' : '') }}} >@lang('admin/hardware/general.requestable')</a></li>
+
                     <li><a href="{{ URL::to('hardware') }}">@lang('general.list_all')</a></li>
 
                     <li class="divider">&nbsp;</li>
                     <li><a href="{{ URL::to('hardware/models') }}" {{{ (Request::is('hardware/models*') ? ' class="active"' : '') }}} >@lang('general.asset_models')</a></li>
                     <li><a href="{{ URL::to('admin/settings/categories') }}" {{{ (Request::is('admin/settings/categories*') ? ' class="active"' : '') }}} >@lang('general.categories')</a></li>
+                    <li><a href="{{ URL::to('hardware?Deleted=true') }}" {{{ (Request::query('Deleted') ? ' class="active"' : '') }}} >@lang('general.deleted')</a></li>
 
                 </ul>
             </li>

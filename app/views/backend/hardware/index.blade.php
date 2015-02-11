@@ -1,7 +1,7 @@
 @extends('backend/layouts/default')
 
 @section('title0')
-    @if (Input::get('Pending') || Input::get('Undeployable') || Input::get('Requestable') || Input::get('RTD')  || Input::get('Deployed') || Input::get('Archived'))
+    @if (Input::get('Pending') || Input::get('Undeployable') || Input::get('Deleted') || Input::get('Requestable') || Input::get('RTD')  || Input::get('Deployed') || Input::get('Archived'))
         @if (Input::get('Pending'))
             @lang('general.pending')
         @elseif (Input::get('RTD'))
@@ -14,6 +14,8 @@
             @lang('admin/hardware/general.requestable')
         @elseif (Input::get('Archived'))
             @lang('general.archived')
+         @elseif (Input::get('Deleted'))
+            @lang('general.deleted')
         @endif
     @else
             @lang('general.all')
@@ -132,7 +134,7 @@
             @endif
 
             <td>
-            @if ($asset->assetstatus->deployable == 1 )
+            @if (($asset->assetstatus->deployable == 1 ) && ($asset->deleted_at==''))
 				@if (($asset->assigned_to !='') && ($asset->assigned_to > 0))
 					<a href="{{ route('checkin/hardware', $asset->id) }}" class="btn btn-primary">@lang('general.checkin')</a>
 				@else
@@ -142,9 +144,15 @@
             </td>
             <td nowrap="nowrap">
                 <a href="{{ route('update/hardware', $asset->id) }}" class="btn btn-warning"><i class="icon-pencil icon-white"></i></a>
-                <a data-html="false" class="btn delete-asset btn-danger" data-toggle="modal" href="{{ route('delete/hardware', $asset->id) }}" data-content="@lang('admin/hardware/message.delete.confirm')"
+
+            @if ($asset->deleted_at=='')
+            	 <a data-html="false" class="btn delete-asset btn-danger" data-toggle="modal" href="{{ route('delete/hardware', $asset->id) }}" data-content="@lang('admin/hardware/message.delete.confirm')"
                 data-title="@lang('general.delete')
                  {{ htmlspecialchars($asset->asset_tag) }}?" onClick="return false;"><i class="icon-trash icon-white"></i></a>
+        	@else
+        		 <a href="{{ route('restore/hardware', $asset->id) }}" class="btn btn-warning"><i class="icon-share-alt icon-white"></i></a>
+        	@endif
+
             </td>
         </tr>
         @endforeach

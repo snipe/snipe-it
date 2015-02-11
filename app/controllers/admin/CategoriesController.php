@@ -52,12 +52,12 @@ class CategoriesController extends AdminController
 
         // create a new model instance
         $category = new Category();
-        
+
         $validator = Validator::make(Input::all(), $category->rules);
 
         if ($validator->fails())
         {
-            // The given data did not pass validation            
+            // The given data did not pass validation
             return Redirect::back()->withInput()->withErrors($validator->messages());
         }
         else{
@@ -71,7 +71,7 @@ class CategoriesController extends AdminController
                 // Redirect to the new category  page
                 return Redirect::to("admin/settings/categories")->with('success', Lang::get('admin/categories/message.create.success'));
             }
-        } 
+        }
 
         // Redirect to the category create page
         return Redirect::to('admin/settings/categories/create')->with('error', Lang::get('admin/categories/message.create.error'));
@@ -119,9 +119,9 @@ class CategoriesController extends AdminController
         // get the POST data
         $new = Input::all();
 
-        // attempt validation       
+        // attempt validation
         $validator = Validator::make(Input::all(), $category->validationRules($categoryId));
-       
+
 
         if ($validator->fails())
         {
@@ -139,7 +139,7 @@ class CategoriesController extends AdminController
                 // Redirect to the new category page
                 return Redirect::to("admin/settings/categories")->with('success', Lang::get('admin/categories/message.update.success'));
             }
-        } 
+        }
 
         // Redirect to the category management page
         return Redirect::to("admin/settings/categories/$categoryID/edit")->with('error', Lang::get('admin/categories/message.update.error'));
@@ -179,7 +179,7 @@ class CategoriesController extends AdminController
 
 
     /**
-    *  Get the asset information to present to the model view page
+    *  Get the asset information to present to the category view page
     *
     * @param  int  $assetId
     * @return View

@@ -43,6 +43,7 @@ Route::group(array('prefix' => 'hardware', 'namespace' => 'Controllers\Admin', '
     Route::post('{assetId}/checkin', 'AssetsController@postCheckin');
     Route::get('{assetId}/view', array('as' => 'view/hardware', 'uses' => 'AssetsController@getView'));
     Route::get('{assetId}/qr_code', array('as' => 'qr_code/hardware', 'uses' => 'AssetsController@getQrCode'));
+    Route::get('{assetId}/restore', array('as' => 'restore/hardware', 'uses' => 'AssetsController@getRestore'));
 
 
 # Asset Model Management
@@ -114,6 +115,7 @@ Route::group(array('prefix' => 'admin', 'before' => 'admin-auth', 'namespace' =>
             Route::get('{manufacturerId}/edit', array('as' => 'update/manufacturer', 'uses' => 'ManufacturersController@getEdit'));
             Route::post('{manufacturerId}/edit', 'ManufacturersController@postEdit');
             Route::get('{manufacturerId}/delete', array('as' => 'delete/manufacturer', 'uses' => 'ManufacturersController@getDelete'));
+            Route::get('{manufacturerId}/view', array('as' => 'view/manufacturer', 'uses' => 'ManufacturersController@getView'));
         });
 
         # Suppliers

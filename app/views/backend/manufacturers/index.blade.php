@@ -21,10 +21,12 @@
 <div class="col-md-9 bio">
 
 
+<div class="table-responsive">
 <table id="example">
     <thead>
         <tr role="row">
-            <th class="col-md-7">@lang('admin/manufacturers/table.name')</th>
+            <th class="col-md-7" bSortable="true">@lang('admin/manufacturers/table.name')</th>
+            <th bSortable="true">@lang('general.assets')</th>
             <th class="col-md-2 actions">@lang('table.actions')</th>
         </tr>
     </thead>
@@ -32,6 +34,7 @@
         @foreach ($manufacturers as $manufacturer)
         <tr>
             <td>{{{ $manufacturer->name }}}</td>
+            <td><a href="{{ route('view/manufacturer',$manufacturer->id) }}">{{ $manufacturer->assetscount() }}</a></td>
             <td>
 
                 <a href="{{ route('update/manufacturer', $manufacturer->id) }}" class="btn btn-warning"><i class="icon-pencil icon-white"></i></a>
@@ -45,6 +48,7 @@
         @endforeach
     </tbody>
 </table>
+</div>
 </div>
 
     <!-- side address column -->

@@ -113,7 +113,7 @@ class ManufacturersController extends AdminController
 
         if ($validator->fails())
         {
-            // The given data did not pass validation           
+            // The given data did not pass validation
             return Redirect::back()->withInput()->withErrors($validator->messages());
         }
         // attempt validation
@@ -126,7 +126,7 @@ class ManufacturersController extends AdminController
                 // Redirect to the new manufacturer page
                 return Redirect::to("admin/settings/manufacturers")->with('success', Lang::get('admin/manufacturers/message.update.success'));
             }
-        } 
+        }
 
         // Redirect to the manufacturer management page
         return Redirect::to("admin/settings/manufacturers/$manufacturerId/edit")->with('error', Lang::get('admin/manufacturers/message.update.error'));
@@ -163,6 +163,31 @@ class ManufacturersController extends AdminController
 
 
 
+
+
+    }
+
+
+
+    /**
+    *  Get the asset information to present to the category view page
+    *
+    * @param  int  $assetId
+    * @return View
+    **/
+    public function getView($manufacturerID = null)
+    {
+        $manufacturer = Manufacturer::find($manufacturerID);
+
+        if (isset($manufacturer->id)) {
+                return View::make('backend/manufacturers/view', compact('manufacturer'));
+        } else {
+            // Prepare the error message
+            $error = Lang::get('admin/manufacturers/message.does_not_exist', compact('id'));
+
+            // Redirect to the user management page
+            return Redirect::route('manufacturers')->with('error', $error);
+        }
 
 
     }

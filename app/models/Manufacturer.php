@@ -15,4 +15,15 @@ class Manufacturer extends Elegant
     {
         return $this->hasMany('Model', 'manufacturer_id')->count();
     }
+
+     public function assetscount()
+    {
+        return $this->hasManyThrough('Asset', 'Model')->count();
+    }
+
+    public function assets()
+    {
+        return $this->hasManyThrough('Asset', 'Model');
+    }
+
 }

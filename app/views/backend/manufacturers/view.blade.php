@@ -3,8 +3,8 @@
 {{-- Page title --}}
 @section('title')
 
- {{{ $category->name }}}
- @lang('general.category') ::
+ {{{ $manufacturer->name }}}
+ @lang('general.manufacturer') ::
 @parent
 @stop
 
@@ -19,14 +19,14 @@
                 <span class="caret"></span>
             </button>
             <ul class="dropdown-menu">
-                    <li><a href="{{ route('update/model', $category->id) }}">@lang('admin/categories/table.edit')</a></li>
-                    <li><a href="{{ route('clone/model', $category->id) }}">@lang('admin/categories/table.clone')</a></li>
-                    <li><a href="{{ route('create/hardware', $category->id) }}">@lang('admin/hardware/form.create')</a></li>
+                    <li><a href="{{ route('update/model', $manufacturer->id) }}">@lang('admin/categories/table.edit')</a></li>
+                    <li><a href="{{ route('clone/model', $manufacturer->id) }}">@lang('admin/categories/table.clone')</a></li>
+                    <li><a href="{{ route('create/hardware', $manufacturer->id) }}">@lang('admin/hardware/form.create')</a></li>
             </ul>
         </div>
         <h3>
-            {{{ $category->name }}}
- @lang('general.category')
+            {{{ $manufacturer->name }}}
+ @lang('general.manufacturer')
 
         </h3>
     </div>
@@ -38,7 +38,7 @@
 
 
                             <!-- checked out categories table -->
-                            @if (count($category->assets) > 0)
+                            @if (count($manufacturer->assets) > 0)
                            <table id="example">
                             <thead>
                                 <tr role="row">
@@ -50,7 +50,7 @@
                                 </thead>
                                 <tbody>
 
-                                    @foreach ($category->assets as $modelassets)
+                                    @foreach ($manufacturer->assets as $modelassets)
                                     <tr>
                                         <td><a href="{{ route('view/hardware', $modelassets->id) }}">{{{ $modelassets->name }}}</a></td>
                                         <td><a href="{{ route('view/hardware', $modelassets->id) }}">{{{ $modelassets->asset_tag }}}</a></td>
@@ -86,6 +86,7 @@
                             @endif
 
                         </div>
+
 
 
 @stop
