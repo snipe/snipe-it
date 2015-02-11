@@ -134,13 +134,15 @@
             @endif
 
             <td>
-            @if (($asset->assetstatus->deployable == 1 ) && ($asset->deleted_at==''))
+
+            @if (($asset->assetstatus) && (($asset->assetstatus->deployable == 1 ) && ($asset->deleted_at=='')))
 				@if (($asset->assigned_to !='') && ($asset->assigned_to > 0))
 					<a href="{{ route('checkin/hardware', $asset->id) }}" class="btn btn-primary">@lang('general.checkin')</a>
 				@else
 					<a href="{{ route('checkout/hardware', $asset->id) }}" class="btn btn-info">@lang('general.checkout')</a>
 				@endif
             @endif
+
             </td>
             <td nowrap="nowrap">
 
