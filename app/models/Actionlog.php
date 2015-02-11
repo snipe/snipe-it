@@ -26,7 +26,7 @@ class Actionlog extends Eloquent
 
     public function adminlog()
     {
-        return $this->belongsTo('User','user_id');
+        return $this->belongsTo('User','user_id')->withTrashed();
     }
 
     public function userlog()
