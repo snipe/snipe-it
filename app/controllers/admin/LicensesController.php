@@ -370,9 +370,15 @@ class LicensesController extends AdminController
         } else {
 
             // Delete the license and the associated license seats
+            DB::table('license_seats')
+            ->where('id', 1)
+            ->update(array('assigned_to' => NULL));
+
             $licenseseats = $license->licenseseats();
             $licenseseats->delete();
             $license->delete();
+
+
 
 
             // Redirect to the licenses management page
