@@ -22,7 +22,7 @@ class FixBadAssignedToIds extends Migration {
 			$table->text('notes')->nullable();
 		});
 
-		DB::statement('INSERT into ' . DB::getTablePrefix() . 'status_labels (user_id, name, deployable, pending, archived, notes) VALUES (1,"Pending",0,1,0,"These assets are not yet ready to be depoloyed, usually because of configuration or waiting on parts.")');
+		DB::statement('INSERT into ' . DB::getTablePrefix() . 'status_labels (user_id, name, deployable, pending, archived, notes) VALUES (1,"Pending",0,1,0,"These assets are not yet ready to be deployed, usually because of configuration or waiting on parts.")');
 		DB::statement('INSERT into ' . DB::getTablePrefix() . 'status_labels (user_id, name, deployable, pending, archived, notes) VALUES (1,"Ready to Deploy",1,0,0,"These assets are ready to deploy.")');
 		DB::statement('INSERT into ' . DB::getTablePrefix() . 'status_labels (user_id, name, deployable, pending, archived, notes) VALUES (1,"Archived",0,0,1,"These assets are no longer in circulation or viable.")');
 
