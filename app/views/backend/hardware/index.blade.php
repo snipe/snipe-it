@@ -38,8 +38,11 @@
 
 @if ($assets->count() > 0)
 
+
+
 <div class="table-responsive">
 <table id="example">
+
     <thead>
         <tr role="row">
             <th class="col-md-1" bSortable="true">@lang('admin/hardware/table.asset_tag')</th>
@@ -125,7 +128,7 @@
             @endif
 
             <td>
-            @if ($asset->status_id < 1 )
+            @if ($asset->assetstatus->deployable ==1 )
             @if ($asset->assigned_to != 0)
                 <a href="{{ route('checkin/hardware', $asset->id) }}" class="btn btn-primary">@lang('general.checkin')</a>
             @else
