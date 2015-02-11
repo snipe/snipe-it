@@ -48,6 +48,8 @@ class AssetsController extends AdminController
         	$assets->Undeployable();
         } elseif (Input::get('Archived')) {
         	$assets->Archived();
+        } elseif (Input::get('Requestable')) {
+        	$assets->Requestable();
         } elseif (Input::get('Deployed')) {
         	$assets->Deployed();
         }

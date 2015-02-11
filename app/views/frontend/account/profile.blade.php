@@ -1,4 +1,4 @@
-@extends('frontend/layouts/account')
+@extends('frontend/layouts/default')
 
 {{-- Page title --}}
 @section('title')
@@ -6,7 +6,7 @@ Your Profile
 @stop
 
 {{-- Account page content --}}
-@section('account-content')
+@section('content')
 <div class="row header">
 
     <div class="col-md-12">
@@ -76,7 +76,7 @@ Your Profile
         </p>
         </div>
     </div>
-	
+
 	<!-- Avatar -->
     @if ($user->avatar)
         <div class="form-group {{ $errors->has('avatar_delete') ? 'has-error' : '' }}">
@@ -88,7 +88,7 @@ Your Profile
             </div>
         </div>
     @endif
-	
+
 	<div class="form-group {{ $errors->has('avatar') ? 'has-error' : '' }}">
 		<label class="col-md-2 control-label" for="avatar">@lang('general.avatar_upload')</label>
 		<div class="col-md-5">

@@ -8,6 +8,7 @@ return array(
     'clone'  					=> 'Clone Asset',
     'deployable'  				=> 'Deployable',
     'edit'  					=> 'Edit Asset',
+    'requestable'				=> 'Requestable',
     'pending'  					=> 'Pending',
     'undeployable'  			=> 'Undeployable',
     'view'  					=> 'View Asset',
