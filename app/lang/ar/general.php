@@ -7,6 +7,7 @@ return array(
     'admin'					=> 'الإدارة',
     'all_assets'			=> 'كل الأصول',
     'all'       			=> 'الكل',
+    'archived'              => 'Archived',
     'asset_models'			=> 'نماذج الأصول',
     'asset'					=> 'الأصول',
     'asset_report'          => 'Asset Report',

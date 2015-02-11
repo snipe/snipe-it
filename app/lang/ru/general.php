@@ -7,6 +7,7 @@ return array(
     'admin'					=> 'Администратор',
     'all_assets'			=> 'Все активы',
     'all'       			=> 'Все',
+    'archived'              => 'Archived',
     'asset_models'			=> 'Модели активов',
     'asset'					=> 'Актив',
     'asset_report'          => 'Отчет по активам',

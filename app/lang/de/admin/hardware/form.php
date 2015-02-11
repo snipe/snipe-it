@@ -23,6 +23,7 @@ return array(
     'order'				=> 'Bestellnummer',
     'qr'				=> 'QR-Code',
     'requestable'		=> 'Benutzer dürfen dieses Asset anfordern',
+    'select_statustype'	=> 'Select Status Type',
     'serial'			=> 'Seriennummer',
     'status'			=> 'Status',
     'supplier'			=> 'Lieferant',

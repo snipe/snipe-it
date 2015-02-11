@@ -7,6 +7,7 @@ return array(
     'admin'					=> 'Beheerder',
     'all_assets'			=> 'Alle materialen',
     'all'       			=> 'Alle',
+    'archived'              => 'Archived',
     'asset_models'			=> 'Materiaalmodel',
     'asset'					=> 'Materiaal',
     'asset_report'          => 'Materiaalrapport',

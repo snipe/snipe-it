@@ -7,6 +7,7 @@ return array(
     'admin'					=> 'Admin',
     'all_assets'			=> 'Všechna zařízení',
     'all'       			=> 'Vše',
+    'archived'              => 'Archived',
     'asset_models'			=> 'Modely majetku',
     'asset'					=> 'Zařízeni',
     'asset_report'          => 'Report majetku',

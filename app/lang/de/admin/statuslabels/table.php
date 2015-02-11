@@ -1,10 +1,15 @@
 <?php
 
 return array(
-    'name'      	=> 'Statusname',
-    'title'      	=> 'Statusbezeichnungen',
-    'update'      	=> 'Statusbezeichnung bearbeiten',
-    'create'      	=> 'Statusbezeichnung erstellen',
     'about'      	=> 'Info Statusbezeichnung',
-    'info'      	=> 'Status Label werden benutzt um die diversen Gründe zu beschreiben warum ein Asset <strong><em>nicht</em></strong> ausgerollt werden kann. Es könnte kaputt sein, in der Diagnose, in der Reparatur, verloren oder gestohlen, etc. Status Label ermöglichen es deinem Team den Fortschritt anzuzeigen.',
+    'archived'      	=> 'Archived',
+    'create'      	=> 'Statusbezeichnung erstellen',
+    'deployable'      	=> 'Deployable',
+    'info'      	=> 'Status labels are used to describe the various states your assets could be in. They may be out for repair, lost/stolen, etc. You can create new status labels for deployable, pending and archived assets.',
+    'name'      	=> 'Statusname',
+    'pending'      	=> 'Pending',
+    'status_type'   => 'Status Type',
+    'title'      	=> 'Statusbezeichnungen',
+    'undeployable'  => 'Undeployable',
+    'update'      	=> 'Statusbezeichnung bearbeiten',
 );

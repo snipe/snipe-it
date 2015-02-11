@@ -3,12 +3,12 @@
 return array(
 
     'actions' 	=> 'Handlinger',
-    'add'    	=> 'Add New',
-    'cancel'    => 'Cancel',
+    'add'    	=> 'Opprett ny',
+    'cancel'    => 'Avbryt',
     'delete'  	=> 'Slett',
     'edit'    	=> 'Rediger',
     'restore' 	=> 'Gjenopprett',
     'submit'  	=> 'Send',
-    'upload'    => 'Upload',
+    'upload'    => 'Last opp',
 
 );

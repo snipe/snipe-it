@@ -2,36 +2,36 @@
 
 return array(
 
-    'undeployable' 		=> '<strong>Warning: </strong> This asset has been marked as currently undeployable. If this status has changed, please update the asset status.',
-    'does_not_exist' 	=> 'Asset does not exist.',
-    'assoc_users'	 	=> 'This asset is currently checked out to a user and cannot be deleted. Please check the asset in first, and then try deleting again. ',
+    'undeployable' 		=> '<strong>Uwaga:</strong> Ten nabytek został oznaczony jako obecnie nie przypisany. Jeśli jego status uległ zmianie proszę zaktualizować status nabytku.',
+    'does_not_exist' 	=> 'Nabytek/zasób nie istnieje.',
+    'assoc_users'	 	=> 'Ten nabytek/zasób jest przypisany do użytkownika i nie może być usunięty. Proszę sprawdzić przypisanie nabytków/zasobów a następnie spróbować ponownie.',
 
     'create' => array(
-        'error'   		=> 'Asset was not created, please try again. :(',
-        'success' 		=> 'Asset created successfully. :)'
+        'error'   		=> 'Nabytek nie został utworzony, proszę spróbować ponownie. :(',
+        'success' 		=> 'Nowy nabytek został utworzony. :)'
     ),
 
     'update' => array(
-        'error'   		=> 'Asset was not updated, please try again',
-        'success' 		=> 'Asset updated successfully.'
+        'error'   		=> 'Nie zaktualizowano nabytku/zasobu, proszę spróbować ponownie',
+        'success' 		=> 'Aktualizacja poprawna.'
     ),
 
     'delete' => array(
-        'confirm'   	=> 'Are you sure you wish to delete this asset?',
-        'error'   		=> 'There was an issue deleting the asset. Please try again.',
-        'success' 		=> 'The asset was deleted successfully.'
+        'confirm'   	=> 'Czy na pewno chcesz usunąć?',
+        'error'   		=> 'Nie można usunąć. Proszę spróbować ponownie.',
+        'success' 		=> 'Nabytek został usunięty.'
     ),
 
     'checkout' => array(
-        'error'   		=> 'Asset was not checked out, please try again',
-        'success' 		=> 'Asset checked out successfully.',
-        'user_does_not_exist' => 'That user is invalid. Please try again.'
+        'error'   		=> 'Nie mogę wypisać nabytku/zasobu, proszę spróbować ponownie.',
+        'success' 		=> 'Przypisano nabytek/zasób.',
+        'user_does_not_exist' => 'Nieprawidłowy użytkownik. Proszę spróbować ponownie.'
     ),
 
     'checkin' => array(
-        'error'   		=> 'Asset was not checked in, please try again',
-        'success' 		=> 'Asset checked in successfully.',
-        'user_does_not_exist' => 'That user is invalid. Please try again.'
+        'error'   		=> 'Nie można przypisać nabytku/zasobu, proszę spróbować ponownie',
+        'success' 		=> 'Nabytek/zasób przypisany.',
+        'user_does_not_exist' => 'Nieprawidłowy użytkownik. Proszę spróbować ponownie.'
     )
 
 );

@@ -1,10 +1,15 @@
 <?php
 
 return array(
-    'name'      	=> '状态名称',
-    'title'      	=> '状态标签',
-    'update'      	=> '更新状态标签',
-    'create'      	=> '创建状态标签',
     'about'      	=> '关于状态标签',
-    'info'      	=> '状态标签用来记录资产<strong><em>不能</em></strong被分配的愿意。它可能损坏了，被检测，被修理，遗失或被盗等等。状态标签给你的团队展示这些状态。',
+    'archived'      	=> 'Archived',
+    'create'      	=> '创建状态标签',
+    'deployable'      	=> 'Deployable',
+    'info'      	=> 'Status labels are used to describe the various states your assets could be in. They may be out for repair, lost/stolen, etc. You can create new status labels for deployable, pending and archived assets.',
+    'name'      	=> '状态名称',
+    'pending'      	=> 'Pending',
+    'status_type'   => 'Status Type',
+    'title'      	=> '状态标签',
+    'undeployable'  => 'Undeployable',
+    'update'      	=> '更新状态标签',
 );
