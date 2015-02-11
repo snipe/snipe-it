@@ -1,11 +1,11 @@
 <?php
 
 return array(
-    'asset'  					=> 'Asset',
-    'checkin'  					=> 'Checkin Asset',
-    'checkout'  				=> 'Checkout Asset to User',
-    'clone'  					=> 'Clone Asset',
-    'edit'  					=> 'Edit Asset',
-    'pending'  					=> 'Pending Asset',
-    'view'  					=> 'View Asset',
+    'asset'  					=> 'Nabytek',
+    'checkin'  					=> 'Potwierdzanie zasobu/aktywa',
+    'checkout'  				=> 'Przypisanie aktywa do Użytkownika',
+    'clone'  					=> 'Klonuj zasób',
+    'edit'  					=> 'Edytuj zasób',
+    'pending'  					=> 'Oczekujący nabytek',
+    'view'  					=> 'Wyświetl nabytki',
 );

@@ -252,7 +252,7 @@
             </p>
             @endif
 
-            @if ((isset($asset->assigned_to ) && ($asset->assigned_to > 0)))
+            @if ((isset($asset->assigneduser) && ($asset->assigned_to > 0)))
                 <h6><br>@lang('admin/hardware/form.checkedout_to')</h6>
                 <ul>
 
@@ -279,40 +279,42 @@
                         <li><i class="icon-phone"></i> {{{ $asset->assigneduser->phone }}}</li>
                     @endif
 
+
                     <li><br /><a href="{{ route('checkin/hardware', $asset->id) }}" class="btn-flat large info ">@lang('admin/hardware/general.checkin')</a></li>
                     </ul>
 
-            @elseif (($asset->status_id ) && ($asset->status_id > 1))
+			 @endif
+
+            @if (($asset->status_id ) && ($asset->status_id > 0))
+			<!-- Status Info -->
 
                 @if ($asset->assetstatus)
                     <h6><br>{{{ $asset->assetstatus->name }}}
                     @lang('admin/hardware/general.asset')</h6>
 
+                    <ul>
+                    	 @if (($asset->assetstatus->deployable=='1') && ($asset->assigned_to > 0))
+                    	<li><br /><a href="{{ route('checkin/hardware', $asset->id) }}" class="btn-flat large info ">@lang('admin/hardware/general.checkin')</a></li>
+                    	@elseif (($asset->assetstatus->deployable=='1') &&  (($asset->assigned_to=='') || ($asset->assigned_to==0)))
+                    	<li><br /><a href="{{ route('checkout/hardware', $asset->id) }}" class="btn-flat large info ">@lang('admin/hardware/general.checkout')</a></li>
+
+
+                    	@endif
+                    </ul>
+
+					@if ($asset->assetstatus->notes)
                     <div class="col-md-12">
-                    <div class="alert alert-warning alert-block">
-                        <i class="icon-warning-sign"></i>
-                        @lang('admin/hardware/message.undeployable')
+						<div class="alert alert-info alert-block">
+							<i class="icon-info-sign"></i>
+							{{{ $asset->assetstatus->notes }}}
 
+						</div>
                     </div>
-                </div>
-                @endif
+                    @endif
 
-            @elseif ($asset->status_id == NULL)
-                    <h6><br>@lang('admin/hardware/general.pending')</h6>
-                    <div class="col-md-12">
-                    <div class="alert alert-info alert-block">
-                        <i class="icon-info-sign"></i>
-                        @lang('admin/hardware/message.undeployable')
-                    </div>
-                </div>
-
-            @else
-            <h6><br>@lang('admin/hardware/general.checkout')</h6>
-                <ul>
-                    <li>This asset is not checked out to anyone yet. Use the button below to check it out now.</li>
-                    <li><br><br /><a href="{{ route('checkout/hardware', $asset->id) }}" class="btn-flat large success">Checkout Asset</a></li>
-                </ul>
+                 @endif
             @endif
+
         </div>
     </div>
 </div>

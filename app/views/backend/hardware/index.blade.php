@@ -1,7 +1,7 @@
 @extends('backend/layouts/default')
 
 @section('title0')
-    @if (Input::get('Pending') || Input::get('Undeployable') || Input::get('RTD')  || Input::get('Deployed'))
+    @if (Input::get('Pending') || Input::get('Undeployable') || Input::get('RTD')  || Input::get('Deployed') || Input::get('Archived'))
         @if (Input::get('Pending'))
             @lang('general.pending')
         @elseif (Input::get('RTD'))
@@ -10,6 +10,8 @@
             @lang('general.undeployable')
         @elseif (Input::get('Deployed'))
             @lang('general.deployed')
+        @elseif (Input::get('Archived'))
+            @lang('general.archived')
         @endif
     @else
             @lang('general.all')
@@ -38,8 +40,11 @@
 
 @if ($assets->count() > 0)
 
+
+
 <div class="table-responsive">
 <table id="example">
+
     <thead>
         <tr role="row">
             <th class="col-md-1" bSortable="true">@lang('admin/hardware/table.asset_tag')</th>
@@ -125,12 +130,12 @@
             @endif
 
             <td>
-            @if ($asset->status_id < 1 )
-            @if ($asset->assigned_to != 0)
-                <a href="{{ route('checkin/hardware', $asset->id) }}" class="btn btn-primary">@lang('general.checkin')</a>
-            @else
-                <a href="{{ route('checkout/hardware', $asset->id) }}" class="btn btn-info">@lang('general.checkout')</a>
-            @endif
+            @if ($asset->assetstatus->deployable == 1 )
+				@if (($asset->assigned_to !='') && ($asset->assigned_to > 0))
+					<a href="{{ route('checkin/hardware', $asset->id) }}" class="btn btn-primary">@lang('general.checkin')</a>
+				@else
+					<a href="{{ route('checkout/hardware', $asset->id) }}" class="btn btn-info">@lang('general.checkout')</a>
+				@endif
             @endif
             </td>
             <td nowrap="nowrap">

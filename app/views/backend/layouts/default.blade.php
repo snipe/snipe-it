@@ -241,6 +241,7 @@
                     <li><a href="{{ URL::to('hardware?RTD=true') }}" {{{ (Request::query('RTD') ? ' class="active"' : '') }}} >@lang('general.ready_to_deploy')</a></li>
                     <li><a href="{{ URL::to('hardware?Pending=true') }}" {{{ (Request::query('Pending') ? ' class="active"' : '') }}} >@lang('general.pending')</a></li>
                     <li><a href="{{ URL::to('hardware?Undeployable=true') }}" {{{ (Request::query('Undeployable') ? ' class="active"' : '') }}} >@lang('general.undeployable')</a></li>
+                     <li><a href="{{ URL::to('hardware?Archived=true') }}" {{{ (Request::query('Archived') ? ' class="active"' : '') }}} >@lang('admin/hardware/general.archived')</a></li>
                     <li><a href="{{ URL::to('hardware') }}">@lang('general.list_all')</a></li>
                     <li class="divider">&nbsp;</li>
                     <li><a href="{{ URL::to('hardware/models') }}" {{{ (Request::is('hardware/models*') ? ' class="active"' : '') }}} >@lang('general.asset_models')</a></li>
@@ -360,7 +361,7 @@
 						  		<a target="_blank" href="http://docs.snipeitapp.com/">Documentation</a> |
 						  		<a href="https://crowdin.com/project/snipe-it">Help Translate It! </a> |
 						  		<a target="_blank" href="https://github.com/snipe/snipe-it/issues?state=open">Report a Bug</a>
-						  		 &nbsp; &nbsp; (v1.2.3)</p>
+						  		 &nbsp; &nbsp; (v1.2.4)</p>
                   	</div>
               </div>
         </div>

@@ -34,6 +34,7 @@
                 <th class="col-sm-1">@lang('general.name')</th>
             @endif
             <th class="col-sm-1">@lang('admin/hardware/table.serial')</th>
+             <th class="col-sm-1">@lang('admin/hardware/table.status')</th>
             <th class="col-sm-1">@lang('admin/hardware/table.purchase_date')</th>
             <th class="col-sm-1">@lang('admin/hardware/table.purchase_cost')</th>
             <th class="col-sm-1">@lang('admin/hardware/form.order')</th>
@@ -54,11 +55,19 @@
             @endif
             </td>
             <td>{{{ $asset->model->name }}}</td>
-                                                               <td>{{{ $asset->model->modelno }}}</td>
+            <td>{{{ $asset->model->modelno }}}</td>
             @if (Setting::getSettings()->display_asset_name)
                 <td>{{{ $asset->name }}}</td>
             @endif
             <td>{{ $asset->serial }}</td>
+            <td>
+
+            @if ($asset->assetstatus)
+            	{{{ $asset->assetstatus->name }}}
+            @elseif ($asset->assigneduser)
+				{{{ $asset->assigneduser->fullName() }}}
+            @endif
+            </td>
             <td>{{{ $asset->purchase_date }}}</td>
             <td class="align-right">@lang('general.currency')
                 {{{ number_format($asset->purchase_cost) }}}

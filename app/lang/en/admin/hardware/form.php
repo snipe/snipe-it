@@ -23,6 +23,7 @@ return array(
     'order'				=> 'Order Number',
     'qr'				=> 'QR Code',
     'requestable'		=> 'Users may request this asset',
+    'select_statustype'	=> 'Select Status Type',
     'serial'			=> 'Serial',
     'status'			=> 'Status',
     'supplier'			=> 'Supplier',

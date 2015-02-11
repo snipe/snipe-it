@@ -6,7 +6,7 @@ class Actionlog extends Eloquent
     protected $dates = ['deleted_at'];
 
     protected $table = 'asset_logs';
-    public $timestamps = false;
+    public $timestamps = true;
 
 
     public function assetlog()
@@ -26,7 +26,7 @@ class Actionlog extends Eloquent
 
     public function adminlog()
     {
-        return $this->belongsTo('User','user_id');
+        return $this->belongsTo('User','user_id')->withTrashed();
     }
 
     public function userlog()

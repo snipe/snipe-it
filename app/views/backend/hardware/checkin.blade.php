@@ -32,6 +32,7 @@
                 </div>
             </div>
 
+			@if ($asset->name)
             <!-- Asset name -->
             <div class="form-group">
             <label class="col-sm-2 control-label">@lang('admin/hardware/form.name')</label>
@@ -39,11 +40,12 @@
                   <p class="form-control-static">{{{ $asset->name }}}</p>
                 </div>
             </div>
+            @endif
+
             <!-- Note -->
             <div class="form-group {{ $errors->has('note') ? 'error' : '' }}">
                 <label for="note" class="col-md-2 control-label">@lang('admin/hardware/form.notes')</label>
                 <div class="col-md-7">
-                    <input class="col-md-6 form-control" type="text" name="note" id="note" value="{{{ Input::old('note', $asset->note) }}}" />
                     <textarea class="col-md-6 form-control" id="note" name="note">{{{ Input::old('note', $asset->note) }}}</textarea>
                     {{ $errors->first('note', '<span class="alert-msg"><i class="icon-remove-sign"></i> :message</span>') }}
                 </div>

@@ -46,6 +46,8 @@ class AssetsController extends AdminController
         	$assets->RTD();
         } elseif (Input::get('Undeployable')) {
         	$assets->Undeployable();
+        } elseif (Input::get('Archived')) {
+        	$assets->Archived();
         } elseif (Input::get('Deployed')) {
         	$assets->Deployed();
         }
@@ -93,7 +95,7 @@ class AssetsController extends AdminController
 
 
         // Grab the dropdown list of status
-        $statuslabel_list = array('' => Lang::get('general.pending')) + array('0' => Lang::get('general.ready_to_deploy')) + Statuslabel::orderBy('name', 'asc')->lists('name', 'id');
+        $statuslabel_list = Statuslabel::orderBy('name', 'asc')->lists('name', 'id');
 
         $view = View::make('backend/hardware/edit');
         $view->with('supplier_list',$supplier_list);
@@ -238,7 +240,7 @@ class AssetsController extends AdminController
         $location_list = array('' => '') + Location::orderBy('name', 'asc')->lists('name', 'id');
 
         // Grab the dropdown list of status
-        $statuslabel_list = array('' => Lang::get('general.pending')) + array('0' => Lang::get('general.ready_to_deploy')) + Statuslabel::orderBy('name', 'asc')->lists('name', 'id');
+        $statuslabel_list = Statuslabel::orderBy('name', 'asc')->lists('name', 'id');
 
         return View::make('backend/hardware/edit', compact('asset'))->with('model_list',$model_list)->with('supplier_list',$supplier_list)->with('location_list',$location_list)->with('statuslabel_list',$statuslabel_list);
     }
@@ -589,7 +591,7 @@ class AssetsController extends AdminController
         $model_list = array('' => '') + Model::lists('name', 'id');
 
         // Grab the dropdown list of status
-        $statuslabel_list = array('' => 'Pending') + array('0' => 'Ready to Deploy') + Statuslabel::lists('name', 'id');
+        $statuslabel_list = Statuslabel::lists('name', 'id');
 
          $location_list = array('' => '') + Location::lists('name', 'id');
 

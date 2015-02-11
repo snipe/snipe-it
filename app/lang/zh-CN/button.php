@@ -3,12 +3,12 @@
 return array(
 
     'actions' 	=> '操作',
-    'add'    	=> 'Add New',
-    'cancel'    => 'Cancel',
+    'add'    	=> '新增',
+    'cancel'    => '取消',
     'delete'  	=> '刪除',
     'edit'    	=> '编辑',
     'restore' 	=> '恢复',
     'submit'  	=> '提交',
-    'upload'    => 'Upload',
+    'upload'    => '上传',
 
 );

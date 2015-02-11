@@ -90,7 +90,8 @@ class Asset extends Elegant
     */
      public static function availassetcount()
     {
-        return Asset::orderBy('asset_tag', 'ASC')->where('status_id', '=', 0)->where('assigned_to','=','0')->where('physical', '=', 1)->count();
+    	return Asset::RTD()->whereNull('deleted_at')->count();
+
     }
 
     /**
@@ -231,7 +232,10 @@ class Asset extends Elegant
 
 	public function scopePending($query)
 	{
-		return $query->whereNull('status_id','and')->where('assigned_to','=','0');
+		return $query->whereHas('assetstatus',function($query)
+		{
+			$query->where('deployable','=',0)->where('pending','=',1)->where('archived','=',0);
+		});
 	}
 
 
@@ -244,8 +248,13 @@ class Asset extends Elegant
 
 	public function scopeRTD($query)
 	{
-		return $query->where('status_id','=','0')->where('assigned_to','=','0');
+		return $query->whereNULL('assigned_to')->whereHas('assetstatus',function($query)
+		{
+			$query->where('deployable','=',1)->where('pending','=',0)->where('archived','=',0);
+		});
 	}
+
+
 
 
 	/**
@@ -257,8 +266,28 @@ class Asset extends Elegant
 
 	public function scopeUndeployable($query)
 	{
-		return $query->where('status_id','>',1)->where('assigned_to','=','0');
+		return $query->whereHas('assetstatus',function($query)
+		{
+			$query->where('deployable','=',0)->where('pending','=',0)->where('archived','=',0);
+		});
 	}
+
+
+	/**
+	* Query builder scope for Archived assets
+	*
+	* @param  Illuminate\Database\Query\Builder  $query  Query builder instance
+	* @return Illuminate\Database\Query\Builder          Modified query builder
+	*/
+
+	public function scopeArchived($query)
+	{
+		return $query->whereHas('assetstatus',function($query)
+		{
+			$query->where('deployable','=',0)->where('pending','=',0)->where('archived','=',1);
+		});
+	}
+
 
 
 	/**

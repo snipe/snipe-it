@@ -28,6 +28,7 @@
             <thead>
                 <tr role="row">
                     <th class="col-md-4">@lang('admin/statuslabels/table.name')</th>
+                    <th class="col-md-4">@lang('admin/statuslabels/table.status_type')</th>
                     <th class="col-md-2 actions">@lang('table.actions')</th>
                 </tr>
             </thead>
@@ -35,6 +36,17 @@
                 @foreach ($statuslabels as $statuslabel)
                 <tr>
                     <td>{{{ $statuslabel->name }}}</td>
+                    <td>
+                    @if ($statuslabel->deployable == 1)
+						@lang('admin/statuslabels/table.deployable')
+                    @elseif ($statuslabel->pending == 1)
+						@lang('admin/statuslabels/table.pending')
+                    @elseif ($statuslabel->archived == 1)
+						@lang('admin/statuslabels/table.archived')
+					@else
+						@lang('admin/statuslabels/table.undeployable')
+                    @endif
+                    </td>
                     <td>
                         <a href="{{ route('update/statuslabel', $statuslabel->id) }}" class="btn btn-warning"><i class="icon-pencil icon-white"></i></a>
 <a data-html="false" class="btn delete-asset btn-danger" data-toggle="modal" href="{{ route('delete/statuslabel', $statuslabel->id) }}" data-content="@lang('admin/statuslabels/message.delete.confirm')"
