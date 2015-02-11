@@ -23,7 +23,8 @@
         <table id="example">
         <thead>
             <tr role="row">
-                <th class="col-md-7">@lang('admin/categories/table.title')</th>
+                <th class="col-md-5">@lang('admin/categories/table.title')</th>
+                 <th class="col-md-5 actions">@lang('general.assets')</th>
                 <th class="col-md-2 actions">@lang('table.actions')</th>
             </tr>
         </thead>
@@ -31,11 +32,12 @@
             @foreach ($categories as $category)
             <tr>
                 <td>{{{ $category->name }}}</td>
+                <td><a href="{{ route('view/category',$category->id) }}">{{ $category->assetscount() }}</a></td>
                 <td>
                 <a href="{{ route('update/category', $category->id) }}" class="btn btn-warning"><i class="icon-pencil icon-white"></i></a>
 <a data-html="false" class="btn delete-asset btn-danger" data-toggle="modal" href="{{ route('delete/category', $category->id) }}" data-content="@lang('admin/categories/message.delete.confirm')"
 data-title="@lang('general.delete')
-{{{ htmlspecialchars($category->name) }}}?" onClick="return false;"><i class="icon-trash icon-white"></i></a> 
+{{{ htmlspecialchars($category->name) }}}?" onClick="return false;"><i class="icon-trash icon-white"></i></a>
 
                 </td>
             </tr>

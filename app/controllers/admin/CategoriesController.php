@@ -178,4 +178,30 @@ class CategoriesController extends AdminController
 
 
 
+    /**
+    *  Get the asset information to present to the model view page
+    *
+    * @param  int  $assetId
+    * @return View
+    **/
+    public function getView($categoryID = null)
+    {
+        $category = Category::find($categoryID);
+
+        if (isset($category->id)) {
+                return View::make('backend/categories/view', compact('category'));
+        } else {
+            // Prepare the error message
+            $error = Lang::get('admin/categories/message.does_not_exist', compact('id'));
+
+            // Redirect to the user management page
+            return Redirect::route('categories')->with('error', $error);
+        }
+
+
+    }
+
+
+
+
 }
