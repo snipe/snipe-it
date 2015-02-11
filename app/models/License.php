@@ -112,12 +112,16 @@ class License extends Elegant
      */
     public function assignedcount()
     {
-        return DB::table('license_seats')
-                    ->whereNotNull('assigned_to')
-                    ->whereNotNull('asset_id')
-                    ->where('license_id', '=', $this->id)
-                    ->whereNull('deleted_at')
-                    ->count();
+
+			return LicenseSeat::where('license_id', '=', $this->id)
+			->where( function ( $query )
+			{
+			$query->whereNotNull('assigned_to')
+                    ->orWhereNotNull('asset_id');
+			})
+			->count();
+
+
     }
 
     public function remaincount()
@@ -125,7 +129,6 @@ class License extends Elegant
     	$total = $this->totalSeatsByLicenseID();
         $taken =  $this->assignedcount();
         $diff =   ($total - $taken);
-
         return $diff;
     }
 
