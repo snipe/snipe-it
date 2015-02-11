@@ -129,7 +129,7 @@
 
             <td>
             @if ($asset->assetstatus->deployable ==1 )
-            @if ($asset->assigned_to != 0)
+            @if ($asset->assigned_to !='')
                 <a href="{{ route('checkin/hardware', $asset->id) }}" class="btn btn-primary">@lang('general.checkin')</a>
             @else
                 <a href="{{ route('checkout/hardware', $asset->id) }}" class="btn btn-info">@lang('general.checkout')</a>
