@@ -247,9 +247,9 @@ class Asset extends Elegant
 
 	public function scopeRTD($query)
 	{
-		return $query->whereHas('assetstatus',function($query)
+		return $query->whereNULL('assigned_to')->whereHas('assetstatus',function($query)
 		{
-			$query->where('deployable','=',1)->where('pending','=',0)->where('archived','=',0)->whereNULL('assigned_to');
+			$query->where('deployable','=',1)->where('pending','=',0)->where('archived','=',0);
 		});
 	}
 
