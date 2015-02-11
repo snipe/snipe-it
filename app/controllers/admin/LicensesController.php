@@ -116,10 +116,8 @@ class LicensesController extends AdminController
             $license->seats             = e(Input::get('seats'));
             $license->purchase_date     = e(Input::get('purchase_date'));
             $license->purchase_order    = e(Input::get('purchase_order'));
-            //$license->purchase_cost   = e(Input::get('purchase_cost'));
             $license->depreciation_id   = e(Input::get('depreciation_id'));
             $license->expiration_date   = e(Input::get('expiration_date'));
-            //$license->asset_id            = e(Input::get('asset_id'));
             $license->user_id           = Sentry::getId();
 
             if (($license->purchase_date == "") || ($license->purchase_date == "0000-00-00")) {
@@ -371,7 +369,7 @@ class LicensesController extends AdminController
 
             // Delete the license and the associated license seats
             DB::table('license_seats')
-            ->where('id', 1)
+            ->where('id', $asset->id)
             ->update(array('assigned_to' => NULL));
 
             $licenseseats = $license->licenseseats();
