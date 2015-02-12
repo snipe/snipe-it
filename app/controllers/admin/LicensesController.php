@@ -369,8 +369,8 @@ class LicensesController extends AdminController
 
             // Delete the license and the associated license seats
             DB::table('license_seats')
-            ->where('id', $asset->id)
-            ->update(array('assigned_to' => NULL));
+            ->where('id', $license->id)
+            ->update(array('assigned_to' => NULL,'asset_id' => NULL));
 
             $licenseseats = $license->licenseseats();
             $licenseseats->delete();
@@ -578,7 +578,7 @@ class LicensesController extends AdminController
         $logaction->checkedout_to = $licenseseat->assigned_to;
 
         // Update the asset data
-        $licenseseat->assigned_to                   = '0';
+        $licenseseat->assigned_to                   = NULL;
         $licenseseat->asset_id                      = NULL;
 
         // Was the asset updated?
