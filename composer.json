@@ -26,7 +26,8 @@
 		"intervention/image": "dev-master"
 	},
 	"require-dev": {
-		"phpunit/phpunit": "*"
+		"phpunit/phpunit": "*",
+		"mockery/mockery": "0.9.*"
 	},
 	"autoload": {
 		"classmap": [

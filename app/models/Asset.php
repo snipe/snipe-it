@@ -201,6 +201,12 @@ class Asset extends Elegant
      public static function autoincrement_asset()
     {
         $settings = Setting::getSettings();
+
+        if (isset($asset_tag->id)) {
+        	$asset_id = $asset_tag->id;
+        } else {
+        	$asset_id = 1;
+        }
 		if ($settings->auto_increment_assets == '1') {
 			$asset_tag = DB::table('assets')
                     ->where('physical', '=', '1')
