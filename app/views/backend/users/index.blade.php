@@ -13,9 +13,9 @@
     <div class="col-md-12">
         <a href="{{ route('create/user') }}" class="btn btn-success pull-right"><i class="icon-plus-sign icon-white"></i>  @lang('general.create')</a>
         @if (Input::get('onlyTrashed'))
-            <a class="btn btn-default pull-right" href="{{ URL::to('admin/users') }}">Show Current Users</a>
+            <a class="btn btn-default pull-right" href="{{ URL::to('admin/users') }}" style="margin-right: 5px;">Show Current Users</a>
         @else
-            <a class="btn btn-default pull-right" href="{{ URL::to('admin/users?onlyTrashed=true') }}">Show Deleted Users</a>
+            <a class="btn btn-default pull-right" href="{{ URL::to('admin/users?onlyTrashed=true') }}" style="margin-right: 5px;">Show Deleted Users</a>
         @endif
 
         <h3>
