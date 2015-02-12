@@ -16,7 +16,7 @@ class License extends Elegant
             'license_email'   => 'email|min:0|max:120',
             'license_name'   => 'alpha_space|min:0|max:100',
             'note'   => 'alpha_space',
-            'notes'   => 'alpha_space|min:0|max:255',
+            'notes'   => 'alpha_space|min:0',
         );
 
     /**

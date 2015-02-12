@@ -190,7 +190,7 @@
 
         <!-- checked out assets table -->
 
-        <table class="table table-hover">
+        <table class="table table-hover table-fixed break-word">
             <thead>
                 <tr>
                     <th class="col-md-3"><span class="line"></span>@lang('general.date')</th>
@@ -262,7 +262,7 @@
 @if ($asset->notes)
 
 		<h6>@lang('admin/hardware/form.notes'):</h6>
-		 {{ nl2br(e($asset->notes)) }}
+		 <div class="break-word">{{ nl2br(e($asset->notes)) }}</div>
 
 @endif
 
