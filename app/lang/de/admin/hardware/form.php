@@ -15,6 +15,7 @@ return array(
     'expires'			=> 'Gültig bis',
     'fully_depreciated'	=> 'Komplett Abgeschrieben',
     'help_checkout'		=> 'Wenn du dieses Asset sofort zuweisen möchtest, solltest du "Ready to Deploy" im Statusfeld auswählen oder es könnten unerwartete Probleme auftreten. ',
+    'mac_address'		=> 'MAC Address',
     'manufacturer'		=> 'Hersteller',
     'model'				=> 'Modell',
     'months'			=> 'Monate',

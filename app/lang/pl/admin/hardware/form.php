@@ -15,6 +15,7 @@ return array(
     'expires'			=> 'Wygasa',
     'fully_depreciated'	=> 'Fully Depreciated',
     'help_checkout'		=> 'If you wish to assign this asset immediately, you should select "Ready to Deploy" from the status list above, or unexpected things may happen. ',
+    'mac_address'		=> 'MAC Address',
     'manufacturer'		=> 'Producent',
     'model'				=> 'Model',
     'months'			=> 'miesiąc',

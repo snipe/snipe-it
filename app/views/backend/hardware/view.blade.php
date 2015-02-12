@@ -62,6 +62,12 @@
 
         @endif
 
+        @if ($asset->mac_address!='')
+            <div class="col-md-12" style="padding-bottom: 5px;"><strong>@lang('admin/hardware/form.mac_address'):</strong>
+            {{{ $asset->mac_address }}}
+            </div>
+        @endif
+
         @if ($asset->model->manufacturer)
             <div class="col-md-12" style="padding-bottom: 5px;"><strong>@lang('admin/hardware/form.manufacturer'): </strong>
             <a href="{{ route('update/manufacturer', $asset->model->manufacturer->id) }}">
@@ -122,6 +128,7 @@
               ({{{ $asset->depreciated_date() }}})
              </div>
         @endif
+
 
         @if ($asset->model->eol)
             <div class="col-md-12" style="padding-bottom: 5px;">

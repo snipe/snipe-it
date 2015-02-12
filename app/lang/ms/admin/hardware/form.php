@@ -15,6 +15,7 @@ return array(
     'expires'			=> 'Luput',
     'fully_depreciated'	=> 'Susut Nilai Penuh',
     'help_checkout'		=> 'Jika anda mahu agihkan harta ini dengan segera, anda sepatunya pilih "Sedia Untuk Agihan" Dari senarai status diatas, atau sesuatu perkara yang tidak dijangka mungkin akan berlaku. ',
+    'mac_address'		=> 'MAC Address',
     'manufacturer'		=> 'Pengeluar',
     'model'				=> 'Model',
     'months'			=> 'bulan',

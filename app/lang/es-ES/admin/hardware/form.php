@@ -15,6 +15,7 @@ return array(
     'expires'			=> 'Expira',
     'fully_depreciated'	=> 'Totalmente amortizado',
     'help_checkout'		=> 'Si desea asignar a este activo inmediatamente, deberá seleccionar "Listo para desplegar" de la lista de estado anterior, o pueden ocurrir cosas inesperadas. ',
+    'mac_address'		=> 'MAC Address',
     'manufacturer'		=> 'Fabricante',
     'model'				=> 'Modelo',
     'months'			=> 'meses',

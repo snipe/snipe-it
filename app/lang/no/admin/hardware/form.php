@@ -15,6 +15,7 @@ return array(
     'expires'			=> 'Utløper',
     'fully_depreciated'	=> 'Ferdig nedskrevet',
     'help_checkout'		=> 'Hvis du vil tilordne denne eiendelen øyeblikkelig, velger du "Klar for distribusjon" fra statuslista over. Hvis ikke kan uventede ting skje. ',
+    'mac_address'		=> 'MAC Address',
     'manufacturer'		=> 'Produsent',
     'model'				=> 'Modell',
     'months'			=> 'måneder',

@@ -15,6 +15,7 @@ return array(
     'expires'			=> 'Vanhenee',
     'fully_depreciated'	=> 'Kokonaan Poistettu',
     'help_checkout'		=> 'Jos haluat määrittää laitteen käyttöön jollekulle samantien, sinun tulee valita laitteen tilaksi "luovutusvalmis" tai järjestelmä saattaa toimia odottamattomasti. ',
+    'mac_address'		=> 'MAC Address',
     'manufacturer'		=> 'Valmistaja',
     'model'				=> 'Malli',
     'months'			=> 'kuukautta',

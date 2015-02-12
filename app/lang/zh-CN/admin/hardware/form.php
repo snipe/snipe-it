@@ -15,6 +15,7 @@ return array(
     'expires'			=> '到期',
     'fully_depreciated'	=> '足折旧',
     'help_checkout'		=> '如果你想立即转让该资产，你应该选择“待分配”状态，不然可能会出现异常。',
+    'mac_address'		=> 'MAC Address',
     'manufacturer'		=> '生产厂家',
     'model'				=> '型号',
     'months'			=> '月数',

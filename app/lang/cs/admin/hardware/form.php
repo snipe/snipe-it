@@ -15,6 +15,7 @@ return array(
     'expires'			=> 'Expiruje',
     'fully_depreciated'	=> 'Plně odepsané',
     'help_checkout'		=> 'Pokud si přejete přiřadit majetek okamžitě, měli by jste ze seznamu stavů zvolit "Připraveno k přiděleni", nebo se může něco pokazit. ',
+    'mac_address'		=> 'MAC Address',
     'manufacturer'		=> 'Výrobce',
     'model'				=> 'Model',
     'months'			=> 'měsíce',
