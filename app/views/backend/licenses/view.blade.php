@@ -245,7 +245,7 @@
 <div class="col-md-12">
                 <h6>@lang('admin/licenses/general.checkout_history')</h6>
 
-                <table class="table table-hover">
+                <table class="table table-hover table-fixed break-word">
                     <thead>
                         <tr>
                             <th class="col-md-3">@lang('general.date')</th>
@@ -335,7 +335,7 @@
 
                     @if ($license->notes)
                     	 <li><strong>@lang('admin/licenses/form.notes'):</strong>
-                        <li>{{ nl2br(e($license->notes)) }}</li>
+                        <li class="break-word">{{ nl2br(e($license->notes)) }}</li>
                     @endif
                 </ul>
         </div>
