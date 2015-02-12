@@ -15,6 +15,7 @@ return array(
     'expires'			=> 'Vervalt op',
     'fully_depreciated'	=> 'Volledig afgeschreven',
     'help_checkout'		=> 'Als u dit materiaal onmiddellijk wil toekennen, dan moet u "Klaar Voor Gebruik" selecteren uit bovenstaande lijst met statussen, of er kunnen onverwachte dingen gebeuren. ',
+    'mac_address'		=> 'MAC Address',
     'manufacturer'		=> 'Fabrikant',
     'model'				=> 'Model',
     'months'			=> 'maanden',

@@ -1,17 +1,17 @@
 <?php
 
 return array(
-	'archived'  				=> 'Archived',
+	'archived'  				=> 'Arquivado',
     'asset'  					=> 'Bem',
     'checkin'  					=> 'Retornar Ativo',
     'checkout'  				=> 'Registrar Ativo ao Usuário',
     'clone'  					=> 'Clonar Bem',
-    'deployable'  				=> 'Deployable',
-    'deleted'  					=> 'This asset has been deleted. <a href="/hardware/:asset_id/restore">Click here to restore it</a>.',
+    'deployable'  				=> 'Implementável',
+    'deleted'  					=> 'Este bem foi deletado. <a href="/hardware/:asset_id/restore">Clique aqui para restaurá-lo</a>.',
     'edit'  					=> 'Editar Bem',
-    'requestable'				=> 'Requestable',
-    'restore'  					=> 'Restore Asset',
-    'pending'  					=> 'Pending',
-    'undeployable'  			=> 'Undeployable',
+    'requestable'				=> 'Solicitável',
+    'restore'  					=> 'Restaurar Bem',
+    'pending'  					=> 'Pendente',
+    'undeployable'  			=> 'Não implementável',
     'view'  					=> 'Ver Bem',
 );

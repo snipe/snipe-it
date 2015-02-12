@@ -15,6 +15,7 @@ return array(
     'expires'			=> 'Expira',
     'fully_depreciated'	=> 'Depreciere completa',
     'help_checkout'		=> 'Daca doriti sa asociati acest activ imediat, trebuie sa selectati "Gata de lansare" din lista de statusuri de deasupra, altfel se pot intampla lucruri neasteptate. ',
+    'mac_address'		=> 'MAC Address',
     'manufacturer'		=> 'Producator',
     'model'				=> 'Model',
     'months'			=> 'Luni',

@@ -15,6 +15,7 @@ return array(
     'expires'			=> 'Expire',
     'fully_depreciated'	=> 'Entièrement amortis',
     'help_checkout'		=> 'Si vous souhaitez assigner cet actif immédiatement, vous devez sélectionner « Prêt à déployer » dans la liste statut ci-dessus, ou des choses inattendues peuvent se produire. ',
+    'mac_address'		=> 'MAC Address',
     'manufacturer'		=> 'Fabricant',
     'model'				=> 'Modèle',
     'months'			=> 'Mois',
