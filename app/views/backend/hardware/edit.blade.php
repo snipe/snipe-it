@@ -90,7 +90,7 @@
                 </div>
             </div>
 
-			@if ($asset->model->show_mac_address != 0)
+			@if (isset($asset->model)) && ($asset->model->show_mac_address != 0)
             <!-- MAC Address -->
             <div class="form-group {{ $errors->has('mac_address') ? ' has-error' : '' }}">
                 <label for="mac_address" class="col-md-2 control-label">@lang('admin/hardware/form.mac_address')</label>
