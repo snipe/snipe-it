@@ -90,6 +90,17 @@
                 </div>
             </div>
 
+			@if ($asset->model->show_mac_address != 0)
+            <!-- MAC Address -->
+            <div class="form-group {{ $errors->has('mac_address') ? ' has-error' : '' }}">
+                <label for="mac_address" class="col-md-2 control-label">@lang('admin/hardware/form.mac_address')</label>
+                    <div class="col-md-7">
+                        <input class="form-control" type="text" name="mac_address" id="mac_address" value="{{{ Input::old('mac_address', $asset->mac_address) }}}" />
+                        {{ $errors->first('mac_address', '<span class="alert-msg"><i class="icon-remove-sign"></i> :message</span>') }}
+                    </div>
+            </div>
+            @endif
+
             <!-- Purchase Date -->
             <div class="form-group {{ $errors->has('purchase_date') ? ' has-error' : '' }}">
                 <label for="purchase_date" class="col-md-2 control-label">@lang('admin/hardware/form.date')</label>

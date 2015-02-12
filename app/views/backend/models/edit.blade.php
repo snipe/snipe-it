@@ -107,6 +107,15 @@
                 </div>
             </div>
 
+			<div class="form-group {{ $errors->has('eol') ? ' has-error' : '' }}">
+				<div class="checkbox col-md-offset-2">
+					<label>
+						{{ Form::checkbox('show_mac_address', '1', Input::old('show_mac_address', $model->show_mac_address)) }}
+						@lang('admin/models/general.show_mac_address')
+					</label>
+				</div>
+			</div>
+
             <!-- Image -->
             @if ($model->image)
                 <div class="form-group {{ $errors->has('image_delete') ? 'has-error' : '' }}">

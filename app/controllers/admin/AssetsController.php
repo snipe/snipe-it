@@ -193,7 +193,7 @@ class AssetsController extends AdminController
             $asset->order_number            = e(Input::get('order_number'));
             $asset->notes            		= e(Input::get('notes'));
             $asset->asset_tag            	= e(Input::get('asset_tag'));
-
+            $asset->mac_address 			= e(Input::get('mac_address'));
             $asset->user_id          		= Sentry::getId();
             $asset->archived          			= '0';
             $asset->physical            		= '1';
@@ -322,10 +322,11 @@ class AssetsController extends AdminController
             $asset->name            		= e(Input::get('name'));
             $asset->serial            		= e(Input::get('serial'));
             $asset->model_id           		= e(Input::get('model_id'));
-            $asset->order_number                = e(Input::get('order_number'));
+            $asset->order_number            = e(Input::get('order_number'));
             $asset->asset_tag           	= e(Input::get('asset_tag'));
             $asset->notes            		= e(Input::get('notes'));
             $asset->physical            	= '1';
+            $asset->mac_address 			= e(Input::get('mac_address'));
 
             // Was the asset updated?
             if($asset->save()) {

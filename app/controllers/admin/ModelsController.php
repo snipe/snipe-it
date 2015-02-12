@@ -67,13 +67,13 @@ class ModelsController extends AdminController
 
         // attempt validation
         if ($model->validate($new)) {
-             
+
             if ( e(Input::get('depreciation_id')) == '') {
                 $model->depreciation_id =  0;
             } else {
                 $model->depreciation_id = e(Input::get('depreciation_id'));
             }
-            
+
              if ( e(Input::get('eol')) == '') {
                 $model->eol =  0;
             } else {
@@ -83,11 +83,11 @@ class ModelsController extends AdminController
             // Save the model data
             $model->name            	= e(Input::get('name'));
             $model->modelno            	= e(Input::get('modelno'));
-            //$model->depreciation_id    	= e(Input::get('depreciation_id'));
             $model->manufacturer_id    	= e(Input::get('manufacturer_id'));
             $model->category_id    		= e(Input::get('category_id'));
             $model->user_id          	= Sentry::getId();
-            //$model->eol    				= e(Input::get('eol'));
+            $model->show_mac_address 	= e(Input::get('show_mac_address', '0'));
+
 
             if (Input::file('image')) {
                 $image = Input::file('image');
@@ -160,18 +160,18 @@ class ModelsController extends AdminController
 
         if ($validator->fails())
         {
-            // The given data did not pass validation           
+            // The given data did not pass validation
             return Redirect::back()->withInput()->withErrors($validator->messages());
         }
         // attempt validation
         else {
-            
+
             if ( e(Input::get('depreciation_id')) == '') {
                 $model->depreciation_id =  0;
             } else {
                 $model->depreciation_id = e(Input::get('depreciation_id'));
             }
-            
+
              if ( e(Input::get('eol')) == '') {
                 $model->eol =  0;
             } else {
@@ -180,9 +180,10 @@ class ModelsController extends AdminController
 
             // Update the model data
             $model->name            	= e(Input::get('name'));
-            $model->modelno            	= e(Input::get('modelno'));           
+            $model->modelno            	= e(Input::get('modelno'));
             $model->manufacturer_id    	= e(Input::get('manufacturer_id'));
             $model->category_id    		= e(Input::get('category_id'));
+            $model->show_mac_address 	= e(Input::get('show_mac_address', '0'));
 
             if (Input::file('image')) {
                 $image = Input::file('image');
@@ -198,13 +199,13 @@ class ModelsController extends AdminController
             if (Input::get('image_delete') == 1 && Input::file('image') == "") {
                 $model->image = NULL;
             }
-      
+
             // Was it created?
             if($model->save()) {
                 // Redirect to the new model  page
                 return Redirect::to("hardware/models")->with('success', Lang::get('admin/models/message.update.success'));
             }
-        } 
+        }
 
         // Redirect to the model create page
         return Redirect::to("hardware/models/$modelId/edit")->with('error', Lang::get('admin/models/message.update.error'));
@@ -261,7 +262,7 @@ class ModelsController extends AdminController
 
 
     }
-    
+
         public function getClone($modelId = null)
     {
         // Check if the model exists
@@ -269,10 +270,10 @@ class ModelsController extends AdminController
             // Redirect to the model management page
             return Redirect::to('assets/models')->with('error', Lang::get('admin/models/message.does_not_exist'));
         }
-        
+
         $model = clone $model_to_clone;
         $model->id = null;
-        
+
         // Show the page
         $depreciation_list = array('' => 'Do Not Depreciate') + Depreciation::lists('name', 'id');
         $manufacturer_list = array('' => 'Select One') + Manufacturer::lists('name', 'id');
@@ -284,7 +285,7 @@ class ModelsController extends AdminController
         $view->with('model',$model);
         $view->with('clone_model',$model_to_clone);
         return $view;
-        
+
     }
 
 
