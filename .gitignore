@@ -18,3 +18,10 @@ public/uploads/avatars/*
 /bin/
 .idea
 crowdin.yaml
+app/config/local/app.example.php
+
+app/config/local/database.example.php
+
+public/uploads/suppliers/.gitkeep
+
+composer.lock
