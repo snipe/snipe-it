@@ -1,6 +1,6 @@
 <?php
 
-class Asset extends Elegant
+class Asset extends Depreciatable
 {
 	use SoftDeletingTrait;
     protected $dates = ['deleted_at'];
@@ -20,17 +20,6 @@ class Asset extends Elegant
         'status' 			=> 'integer'
         );
 
-    /**
-    * Handle depreciation
-    */
-    public function depreciate()
-    {
-        return $this->getCurrentValue(
-            Model::find($this->model_id)->depreciation_id,
-            $this->purchase_cost,
-            $this->purchase_date
-        );
-    }
     
     /**
     * Get uploads for this asset
@@ -129,33 +118,6 @@ class Asset extends Elegant
             return date_format($date, 'Y-m-d');
     }
 
-     public function months_until_depreciated()
-    {
-            $today = date("Y-m-d");
-
-            // @link http://www.php.net/manual/en/class.datetime.php
-            $d1 = new DateTime($today);
-            $d2 = new DateTime($this->depreciated_date());
-
-            // @link http://www.php.net/manual/en/class.dateinterval.php
-            $interval = $d1->diff($d2);
-            return $interval;
-    }
-
-
-     public function depreciated_date()
-    {
-            $date = date_create($this->purchase_date);
-            date_add($date, date_interval_create_from_date_string($this->depreciation->months.' months'));
-            return date_format($date, 'Y-m-d');
-    }
-
-
-    public function depreciation()
-    {
-        return $this->model->belongsTo('Depreciation','depreciation_id');
-    }
-
     public function model()
     {
         return $this->belongsTo('Model','model_id');
@@ -164,13 +126,13 @@ class Asset extends Elegant
 	/**
 	* Get the license seat information
 	**/
-     public function licenses()
+    public function licenses()
     {
        	return $this->belongsToMany('License', 'license_seats', 'asset_id', 'license_id');
 
     }
 
-     public function licenseseats()
+    public function licenseseats()
     {
     		return $this->hasMany('LicenseSeat', 'asset_id');
     }
@@ -207,7 +169,7 @@ class Asset extends Elegant
     /**
     * Get total assets
     */
-     public static function autoincrement_asset()
+    public static function autoincrement_asset()
     {
         $settings = Setting::getSettings();
 

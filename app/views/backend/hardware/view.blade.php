@@ -125,7 +125,7 @@
                 , {{{ $asset->months_until_depreciated()->y }}}
                 @lang('admin/hardware/form.years')
              @endif
-              ({{{ $asset->depreciated_date() }}})
+              ({{{ $asset->depreciation->depreciated_date() }}})
              </div>
         @endif
 
