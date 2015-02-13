@@ -12,7 +12,7 @@ class Location extends Elegant
             'country'   	=> 'required|alpha_space|min:2|max:2|max:2',
             'address'		=> 'required|alpha_space|min:5|max:80',
             'address2'		=> 'alpha_space|min:5|max:80',
-            'zip'   		=> 'alpha_dash|min:3|max:10',
+            'zip'   		=> 'alpha_space|min:3|max:10',
         );
 
     public function has_users()
