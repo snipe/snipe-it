@@ -37,6 +37,7 @@ return array(
     'deleted'  				=> 'Deleted',
     'deployed'				=> 'Deployed',
     'depreciation_report'	=> 'Depreciation Report',
+    'download'				=> 'Download',
     'depreciation'			=> 'Depreciation',
     'editprofile'  			=> 'Edit Your Profile',
     'eol'					=> 'EOL',

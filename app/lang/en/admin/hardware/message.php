@@ -21,6 +21,19 @@ return array(
         'error'   		=> 'Asset was not restored, please try again',
         'success' 		=> 'Asset restored successfully.'
     ),
+    
+    'deletefile' => array(
+        'error'   => 'File not deleted. Please try again.',
+        'success' => 'File successfully deleted.',
+    ),
+
+    'upload' => array(
+        'error'   => 'File(s) not uploaded. Please try again.',
+        'success' => 'File(s) successfully uploaded.',
+        'nofiles' => 'You did not select any files for upload',
+        'invalidfiles' => 'One or more of your files is too large or is a filetype that is not allowed. Allowed filetypes are png, gif, jpg, doc, docx, pdf, and txt.',
+    ),
+
 
     'delete' => array(
         'confirm'   	=> 'Are you sure you wish to delete this asset?',

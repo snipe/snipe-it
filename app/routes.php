@@ -33,7 +33,6 @@ Route::group(array('prefix' => 'hardware', 'namespace' => 'Controllers\Admin', '
     	'uses' => 'AssetsController@getEdit')
     );
 
-    Route::post('{assetId}/edit', 'AssetsController@postEdit');
     Route::get('{assetId}/clone', array('as' => 'clone/hardware', 'uses' => 'AssetsController@getClone'));
     Route::post('{assetId}/clone', 'AssetsController@postCreate');
     Route::get('{assetId}/delete', array('as' => 'delete/hardware', 'uses' => 'AssetsController@getDelete'));
@@ -44,6 +43,12 @@ Route::group(array('prefix' => 'hardware', 'namespace' => 'Controllers\Admin', '
     Route::get('{assetId}/view', array('as' => 'view/hardware', 'uses' => 'AssetsController@getView'));
     Route::get('{assetId}/qr_code', array('as' => 'qr_code/hardware', 'uses' => 'AssetsController@getQrCode'));
     Route::get('{assetId}/restore', array('as' => 'restore/hardware', 'uses' => 'AssetsController@getRestore'));
+    Route::post('{assetId}/upload', array('as' => 'upload/asset', 'uses' => 'AssetsController@postUpload'));
+    Route::get('{assetId}/deletefile/{fileId}', array('as' => 'delete/assetfile', 'uses' => 'AssetsController@getDeleteFile'));
+    Route::get('{assetId}/showfile/{fileId}', array('as' => 'show/assetfile', 'uses' => 'AssetsController@displayFile'));
+    Route::post('{assetId}/edit', 'AssetsController@postEdit');
+
+
 
 
 # Asset Model Management

@@ -641,4 +641,135 @@ class AssetsController extends AdminController
 		 }
 
     }
+    
+    
+       /**
+    *  Upload the file to the server
+    *
+    * @param  int  $assetId
+    * @return View
+    **/
+    public function postUpload($assetID = null)
+    {
+        $asset = Asset::find($assetID);
+
+		// the asset is valid
+		$destinationPath = app_path().'/private_uploads';
+
+        if (isset($asset->id)) {
+
+        	if (Input::hasFile('assetfile')) {
+
+				foreach(Input::file('assetfile') as $file) {
+
+				$rules = array(
+				   'assetfile' => 'required|mimes:png,gif,jpg,jpeg,doc,docx,pdf,txt|max:2000'
+				);
+				$validator = Validator::make(array('assetfile'=> $file), $rules);
+
+					if($validator->passes()){
+
+						$extension = $file->getClientOriginalExtension();
+						$filename = 'hardware-'.$asset->id.'-'.str_random(8);
+						$filename .= '-'.Str::slug($file->getClientOriginalName()).'.'.$extension;
+						$upload_success = $file->move($destinationPath, $filename);
+
+						//Log the deletion of seats to the log
+						$logaction = new Actionlog();
+						$logaction->asset_id = $asset->id;
+						$logaction->asset_type = 'hardware';
+						$logaction->user_id = Sentry::getUser()->id;
+						$logaction->note = e(Input::get('notes'));
+						$logaction->checkedout_to =  NULL;
+						$logaction->created_at =  date("Y-m-d h:i:s");
+						$logaction->filename =  $filename;
+						$log = $logaction->logaction('uploaded');
+					} else {
+						 return Redirect::back()->with('error', Lang::get('admin/hardware/message.upload.invalidfiles'));
+					}
+
+
+				}
+
+				if ($upload_success) {
+				  	return Redirect::back()->with('success', Lang::get('admin/hardware/message.upload.success'));
+				} else {
+				   return Redirect::back()->with('success', Lang::get('admin/hardware/message.upload.error'));
+				}
+
+			} else {
+				 return Redirect::back()->with('success', Lang::get('admin/hardware/message.upload.nofiles'));
+			}
+
+
+
+
+
+        } else {
+            // Prepare the error message
+            $error = Lang::get('admin/hardware/message.does_not_exist', compact('id'));
+
+            // Redirect to the hardware management page
+            return Redirect::route('hardware')->with('error', $error);
+        }
+    }
+
+
+    /**
+    *  Delete the associated file
+    *
+    * @param  int  $assetId
+    * @return View
+    **/
+    public function getDeleteFile($assetID = null, $fileId = null)
+    {
+        $asset = Asset::find($assetID);
+        $destinationPath = app_path().'/private_uploads';
+
+		// the asset is valid
+        if (isset($asset->id)) {
+
+			$log = Actionlog::find($fileId);
+			$full_filename = $destinationPath.'/'.$log->filename;
+			if (file_exists($full_filename)) {
+				unlink($destinationPath.'/'.$log->filename);
+			}
+			$log->delete();
+			return Redirect::back()->with('success', Lang::get('admin/hardware/message.deletefile.success'));
+
+        } else {
+            // Prepare the error message
+            $error = Lang::get('admin/hardware/message.does_not_exist', compact('id'));
+
+            // Redirect to the hardware management page
+            return Redirect::route('hardware')->with('error', $error);
+        }
+    }
+
+
+
+    /**
+    *  Display/download the uploaded file
+    *
+    * @param  int  $assetId
+    * @return View
+    **/
+    public function displayFile($assetID = null, $fileId = null)
+    {
+
+        $asset = Asset::find($assetID);
+
+		// the asset is valid
+        if (isset($asset->id)) {
+				$log = Actionlog::find($fileId);
+				$file = $log->get_src();
+				return Response::download($file);
+        } else {
+            // Prepare the error message
+            $error = Lang::get('admin/hardware/message.does_not_exist', compact('id'));
+
+            // Redirect to the hardware management page
+            return Redirect::route('hardware')->with('error', $error);
+        }
+    }
 }

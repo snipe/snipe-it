@@ -34,6 +34,18 @@ class Asset extends Elegant
             $this->purchase_date
         );
     }
+    
+    /**
+    * Get uploads for this asset
+    */
+    public function uploads()
+    {
+        return $this->hasMany('Actionlog','asset_id')
+            ->where('asset_type', '=', 'hardware')
+            ->where('action_type', '=', 'uploaded')
+            ->whereNotNull('filename')
+            ->orderBy('created_at', 'desc');
+    }
 
     public function assigneduser()
     {
