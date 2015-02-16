@@ -37,7 +37,7 @@ class Asset extends Elegant
 
     public function assigneduser()
     {
-        return $this->belongsTo('User', 'assigned_to');
+        return $this->belongsTo('User', 'assigned_to')->withTrashed();
     }
 
     /**

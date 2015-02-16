@@ -285,6 +285,9 @@
                 </ul>
             </li>
              @endif
+             
+              <li><a href="{{ route('requestable-assets') }}" {{{ (Request::is('view-requestable*') ? ' class="active"' : '') }}} >@lang('admin/hardware/general.requestable') </a></li>
+
         </ul>
     </div>
     <!-- end sidebar -->
