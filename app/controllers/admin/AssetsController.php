@@ -853,7 +853,7 @@ class AssetsController extends AdminController
 
 			// no values given, nothing to update	
 			} else {
-				return Redirect::to("hardware")->with('info','Nothing was updated');
+				return Redirect::to("hardware")->with('info',Lang::get('admin/hardware/message.update.nothing_updated'));
 				
 			}
 

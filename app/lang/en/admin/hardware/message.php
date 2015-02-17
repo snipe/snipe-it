@@ -13,8 +13,9 @@ return array(
     ),
 
     'update' => array(
-        'error'   		=> 'Asset was not updated, please try again',
-        'success' 		=> 'Asset updated successfully.'
+        'error'   			=> 'Asset was not updated, please try again',
+        'success' 			=> 'Asset updated successfully.',
+        'nothing_updated'	=>  'No fields were selected, so nothing was updated.',
     ),
 
     'restore' => array(
