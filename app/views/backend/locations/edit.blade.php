@@ -86,7 +86,7 @@
             <!-- City -->
             <div class="form-group {{ $errors->has('state') ? ' has-error' : '' }}">
                 <label for="state" class="col-md-2 control-label">@lang('admin/locations/table.state')
-                 <i class='icon-asterisk'></i></label>
+
                  </label>
                     <div class="col-md-12">
                         <div class="col-xs-2">

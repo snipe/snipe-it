@@ -187,6 +187,60 @@
 			</div>
 		</div>
 		@endif
+		
+		
+		<div class="col-md-12">
+
+
+ 	<h6>@lang('general.file_uploads') [ <a href="#" data-toggle="modal" data-target="#uploadFileModal">@lang('button.add')</a> ]</h6>
+
+
+ 	<table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th class="col-md-5">@lang('general.notes')</th>
+                            <th class="col-md-5"><span class="line"></span>@lang('general.file_name')</th>
+                            <th class="col-md-2"></th>
+                            <th class="col-md-2"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @if (count($asset->uploads) > 0)
+							@foreach ($asset->uploads as $file)
+							<tr>
+								<td>
+									@if ($file->note) {{{ $file->note }}}
+									@endif
+								</td>
+								<td>
+								{{{ $file->filename }}}
+								</td>
+								<td>
+									@if ($file->filename)
+									<a href="{{ route('show/assetfile', [$asset->id, $file->id]) }}" class="btn btn-default">@lang('general.download')</a>
+									@endif
+								</td>
+								<td>
+									<a class="btn delete-asset btn-danger" href="{{ route('delete/assetfile', [$asset->id, $file->id]) }}"><i class="icon-trash icon-white"></i></a>
+								</td>
+							</tr>
+							@endforeach
+						@else
+							<tr>
+								<td colspan="4">
+									@lang('general.no_results')
+								</td>
+							</tr>
+
+                        @endif
+
+                    </tbody>
+        </table>
+
+</div>
+
+
+
 
         <!-- checked out assets table -->
 
@@ -203,7 +257,7 @@
             <tbody>
             @if (count($asset->assetlog) > 0)
                 @foreach ($asset->assetlog as $log)
-                 @if ((isset($log->checkedout_to)) && ($log->checkedout_to!=0))
+                 
                 <tr>
                     <td>{{{ $log->created_at }}}</td>
                     <td>
@@ -215,13 +269,13 @@
                     <td>
                         @if ((isset($log->checkedout_to)) && ($log->checkedout_to!=0) && ($log->checkedout_to!=''))
 
-                        @if ($log->userlog->deleted_at=='')
-                        <a href="{{ route('view/user', $log->checkedout_to) }}">
-                        {{{ $log->userlog->fullName() }}}
-                         </a>
-                        @else
- 						<del>{{{ $log->userlog->fullName() }}}</del>
-                        @endif
+	                        @if ($log->userlog->deleted_at=='')
+		                        <a href="{{ route('view/user', $log->checkedout_to) }}">
+		                        {{{ $log->userlog->fullName() }}}
+		                         </a>
+		                    @else
+		 						<del>{{{ $log->userlog->fullName() }}}</del>
+	                        @endif
 
                         @endif
                     </td>
@@ -230,7 +284,7 @@
                         @endif
                     </td>
                 </tr>
-                 @endif
+       
                 @endforeach
                 @endif
                 <tr>
@@ -341,4 +395,43 @@
         </div>
     </div>
 </div>
+
+<!-- Modal -->
+<div class="modal fade" id="uploadFileModal" tabindex="-1" role="dialog" aria-labelledby="uploadFileModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="uploadFileModalLabel">Upload File</h4>
+      </div>
+      {{ Form::open([
+      'method' => 'POST',
+      'route' => ['upload/asset', $asset->id],
+      'files' => true, 'class' => 'form-horizontal' ]) }}
+      <div class="modal-body">
+
+		<p>Allowed filetypes are png, gif, jpg, doc, docx, pdf, and txt.</p>
+
+		 <div class="form-group col-md-12">
+		 <div class="input-group col-md-12">
+		 	<input class="col-md-12 form-control" type="text" name="notes" id="notes" placeholder="Notes">
+		</div>
+		</div>
+		<div class="form-group col-md-12">
+		 <div class="input-group col-md-12">
+			{{ Form::file('assetfile[]', ['multiple' => 'multiple']) }}
+		</div>
+		</div>
+
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">@lang('button.cancel')</button>
+        <button type="submit" class="btn btn-primary">@lang('button.upload')</button>
+      </div>
+      {{ Form::close() }}
+    </div>
+  </div>
+</div>
+
 @stop

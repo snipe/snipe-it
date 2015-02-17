@@ -42,7 +42,16 @@
 
 <div class="row form-wrapper">
 
+<?php $spanrows = 8; ?>
+
+
 @if ($assets->count() > 0)
+
+
+ {{ Form::open([
+      'method' => 'POST',
+      'route' => ['hardware/bulkedit'],
+	  'class' => 'form-horizontal' ]) }}
 
 
 
@@ -51,30 +60,38 @@
 
     <thead>
         <tr role="row">
+	        <th class="col-md-1" bSortable="false"></th>
             <th class="col-md-1" bSortable="true">@lang('admin/hardware/table.asset_tag')</th>
             <th class="col-md-3" bSortable="true">@lang('admin/hardware/table.asset_model')</th>
             @if (Setting::getSettings()->display_asset_name)
             <th class="col-md-3" bSortable="true">@lang('general.name')</th>
+            <?php $spanrows++; ?>
             @endif
             <th class="col-md-2" bSortable="true">@lang('admin/hardware/table.serial')</th>
-
             <th class="col-md-2" bSortable="true">@lang('general.status')</th>
-
             <th class="col-md-2" bSortable="true">@lang('admin/hardware/table.location')</th>
             @if (Input::get('Deployed') && Setting::getSettings()->display_checkout_date)
             <th class="col-md-2" bSortable="true">@lang('admin/hardware/table.checkout_date')</th>
+            <?php $spanrows++; ?>
             @endif
             @if (Setting::getSettings()->display_eol)
            	<th class="col-md-2">@lang('admin/hardware/table.eol')</th>
+           	<?php $spanrows++; ?>
             @endif
             <th class="col-md-1">@lang('admin/hardware/table.change')</th>
             <th class="col-md-2 actions" bSortable="false">@lang('table.actions')</th>
         </tr>
     </thead>
+    <tfoot>
+    <tr>
+      <td colspan="{{{ $spanrows }}}"><button class="btn btn-default" id="bulkEdit" disabled>Bulk Edit</button></td>
+    </tr>
+  </tfoot>
     <tbody>
 
         @foreach ($assets as $asset)
         <tr>
+	        <td><input type="checkbox" name="edit_asset[{{ $asset->id }}]" class="one_required"></td>
             <td><a href="{{ route('view/hardware', $asset->id) }}">{{{ $asset->asset_tag }}}</a></td>
             <td><a href="{{ route('view/model', $asset->model->id) }}">{{{ $asset->model->name }}}</a></td>
 
@@ -160,7 +177,25 @@
         @endforeach
     </tbody>
 </table>
+ {{ Form::close() }}
+
 </div>
+<script>
+	$(function() {
+		
+	    $('input.one_required').change(function() {
+		    
+	        var check_checked = $('input.one_required:checked').length;
+	        console.warn(check_checked);
+	        if (check_checked > 0) {
+	            $('#bulkEdit').removeAttr('disabled');
+	        }
+	        else {
+	            $('#bulkEdit').attr('disabled', 'disabled');
+	        }
+	    });
+	});
+</script>
 @else
 <div class="col-md-9">
     <div class="alert alert-info alert-block">

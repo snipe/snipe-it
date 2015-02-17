@@ -306,7 +306,7 @@ class AssetsController extends AdminController
                 $asset->supplier_id        = e(Input::get('supplier_id'));
             }
 
-             if (e(Input::get('requestable')) == '') {
+            if (e(Input::get('requestable')) == '') {
                 $asset->requestable =  0;
             } else {
                 $asset->requestable        = e(Input::get('requestable'));
@@ -604,7 +604,7 @@ class AssetsController extends AdminController
         // Grab the dropdown list of status
         $statuslabel_list = Statuslabel::lists('name', 'id');
 
-         $location_list = array('' => '') + Location::lists('name', 'id');
+        $location_list = array('' => '') + Location::lists('name', 'id');
 
         // get depreciation list
         $depreciation_list = array('' => '') + Depreciation::lists('name', 'id');
@@ -641,4 +641,228 @@ class AssetsController extends AdminController
 		 }
 
     }
+    
+    
+       /**
+    *  Upload the file to the server
+    *
+    * @param  int  $assetId
+    * @return View
+    **/
+    public function postUpload($assetID = null)
+    {
+        $asset = Asset::find($assetID);
+
+		// the asset is valid
+		$destinationPath = app_path().'/private_uploads';
+
+        if (isset($asset->id)) {
+
+        	if (Input::hasFile('assetfile')) {
+
+				foreach(Input::file('assetfile') as $file) {
+
+				$rules = array(
+				   'assetfile' => 'required|mimes:png,gif,jpg,jpeg,doc,docx,pdf,txt|max:2000'
+				);
+				$validator = Validator::make(array('assetfile'=> $file), $rules);
+
+					if($validator->passes()){
+
+						$extension = $file->getClientOriginalExtension();
+						$filename = 'hardware-'.$asset->id.'-'.str_random(8);
+						$filename .= '-'.Str::slug($file->getClientOriginalName()).'.'.$extension;
+						$upload_success = $file->move($destinationPath, $filename);
+
+						//Log the deletion of seats to the log
+						$logaction = new Actionlog();
+						$logaction->asset_id = $asset->id;
+						$logaction->asset_type = 'hardware';
+						$logaction->user_id = Sentry::getUser()->id;
+						$logaction->note = e(Input::get('notes'));
+						$logaction->checkedout_to =  NULL;
+						$logaction->created_at =  date("Y-m-d h:i:s");
+						$logaction->filename =  $filename;
+						$log = $logaction->logaction('uploaded');
+					} else {
+						 return Redirect::back()->with('error', Lang::get('admin/hardware/message.upload.invalidfiles'));
+					}
+
+
+				}
+
+				if ($upload_success) {
+				  	return Redirect::back()->with('success', Lang::get('admin/hardware/message.upload.success'));
+				} else {
+				   return Redirect::back()->with('success', Lang::get('admin/hardware/message.upload.error'));
+				}
+
+			} else {
+				 return Redirect::back()->with('success', Lang::get('admin/hardware/message.upload.nofiles'));
+			}
+
+
+
+
+
+        } else {
+            // Prepare the error message
+            $error = Lang::get('admin/hardware/message.does_not_exist', compact('id'));
+
+            // Redirect to the hardware management page
+            return Redirect::route('hardware')->with('error', $error);
+        }
+    }
+
+
+    /**
+    *  Delete the associated file
+    *
+    * @param  int  $assetId
+    * @return View
+    **/
+    public function getDeleteFile($assetID = null, $fileId = null)
+    {
+        $asset = Asset::find($assetID);
+        $destinationPath = app_path().'/private_uploads';
+
+		// the asset is valid
+        if (isset($asset->id)) {
+
+			$log = Actionlog::find($fileId);
+			$full_filename = $destinationPath.'/'.$log->filename;
+			if (file_exists($full_filename)) {
+				unlink($destinationPath.'/'.$log->filename);
+			}
+			$log->delete();
+			return Redirect::back()->with('success', Lang::get('admin/hardware/message.deletefile.success'));
+
+        } else {
+            // Prepare the error message
+            $error = Lang::get('admin/hardware/message.does_not_exist', compact('id'));
+
+            // Redirect to the hardware management page
+            return Redirect::route('hardware')->with('error', $error);
+        }
+    }
+
+
+
+    /**
+    *  Display/download the uploaded file
+    *
+    * @param  int  $assetId
+    * @return View
+    **/
+    public function displayFile($assetID = null, $fileId = null)
+    {
+
+        $asset = Asset::find($assetID);
+
+		// the asset is valid
+        if (isset($asset->id)) {
+				$log = Actionlog::find($fileId);
+				$file = $log->get_src();
+				return Response::download($file);
+        } else {
+            // Prepare the error message
+            $error = Lang::get('admin/hardware/message.does_not_exist', compact('id'));
+
+            // Redirect to the hardware management page
+            return Redirect::route('hardware')->with('error', $error);
+        }
+    }
+    
+    
+    
+    
+    /**
+    *  Display bulk edit screen
+    *
+    * @return View
+    **/
+    public function postBulkEdit($assets = null)
+    {
+
+		if (Input::has('edit_asset')) {
+			
+			$assets = Input::get('edit_asset');
+			
+			$supplier_list = array('' => '') + Supplier::orderBy('name', 'asc')->lists('name', 'id');
+	        $statuslabel_list = array('' => '') + Statuslabel::lists('name', 'id');
+	        $location_list = array('' => '') + Location::lists('name', 'id');
+		}
+
+		return View::make('backend/hardware/bulk')->with('assets',$assets)->with('supplier_list',$supplier_list)->with('statuslabel_list',$statuslabel_list)->with('location_list',$location_list);
+			 
+    }
+    
+    
+     
+    /**
+    *  Save bulk edits
+    *
+    * @return View
+    **/
+    public function postBulkSave($assets = null)
+    {
+
+		if (Input::has('bulk_edit')) {
+			
+			$assets = Input::get('bulk_edit');
+			
+			if ( (Input::has('purchase_date')) ||  (Input::has('rtd_location_id')) ||  (Input::has('status_id')) )  {
+			
+				foreach ($assets as $key => $value) {
+					
+					$update_array = array();
+					
+					if (Input::has('purchase_date')) {				
+						$update_array['purchase_date'] =  e(Input::get('purchase_date'));
+					}
+					
+					if (Input::has('rtd_location_id')) {				
+						$update_array['rtd_location_id'] = e(Input::get('rtd_location_id'));
+					}
+					
+					if (Input::has('status_id')) {				
+						$update_array['status_id'] = e(Input::get('status_id'));
+					}
+								
+					
+					if (DB::table('assets')
+		            ->where('id', $key)
+		            ->update($update_array)) {		
+			            
+			            $logaction = new Actionlog();
+			            $logaction->asset_id = $key;
+			            $logaction->asset_type = 'hardware';
+			            $logaction->created_at =  date("Y-m-d h:i:s");
+			            
+			            if (Input::has('rtd_location_id')) {	
+			            	$logaction->location_id = e(Input::get('rtd_location_id'));
+			            }
+			            $logaction->user_id = Sentry::getUser()->id;
+			            $log = $logaction->logaction('update');
+	                        
+		            }
+			          					
+				} // endforeach
+				
+				return Redirect::to("hardware")->with('success', Lang::get('admin/hardware/message.update.success'));
+
+			// no values given, nothing to update	
+			} else {
+				return Redirect::to("hardware")->with('info',Lang::get('admin/hardware/message.update.nothing_updated'));
+				
+			}
+
+
+		} // endif
+
+		return Redirect::to("hardware");	
+				 
+    }
+
+
 }

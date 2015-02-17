@@ -85,10 +85,15 @@
                 @endif
             </td>
             <td>
-            @if ($asset->assigned_to != 0)
-                <a href="{{ route('view/user', $asset->assigned_to) }}">
-                {{{ $asset->assigneduser->fullName() }}}
-                </a>
+             @if ($asset->assigneduser)
+            	 @if ($asset->assigneduser->deleted_at!='')
+            	 	<del>{{{ $asset->assigneduser->fullName() }}}</del>
+            	 @else
+            	 	<a href="{{ route('view/user', $asset->assigned_to) }}">
+					{{{ $asset->assigneduser->fullName() }}}
+					</a>
+            	 @endif
+					
             @endif
             </td>
             <td>

@@ -45,19 +45,29 @@
 
         @foreach ($assets as $asset)
         <tr>
-            <td>{{{ $asset->asset_tag }}}</td>
+            <td>
+	            @if ($asset->deleted_at!='')
+	            	 <del>{{{ $asset->asset_tag }}}</del>
+	            @else
+	            	 {{{ $asset->asset_tag }}}
+	            @endif
+	           
+	        </td>
             <td>{{{ $asset->model->name }}}</td>
             @if (Setting::getSettings()->display_asset_name)
                 <td>{{{ $asset->name }}}</td>
             @endif
             <td>{{ $asset->serial }}</td>
             <td>
-            @if (isset($asset->assigned_to))
-				@if ($asset->assigned_to != 0)
-					<a href="{{ route('view/user', $asset->assigned_to) }}">
+            @if ($asset->assigneduser)
+            	 @if ($asset->assigneduser->deleted_at!='')
+            	 	<del>{{{ $asset->assigneduser->fullName() }}}</del>
+            	 @else
+            	 	<a href="{{ route('view/user', $asset->assigned_to) }}">
 					{{{ $asset->assigneduser->fullName() }}}
 					</a>
-				@endif
+            	 @endif
+					
             @endif
             </td>
             <td>

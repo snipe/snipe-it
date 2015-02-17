@@ -191,7 +191,7 @@
 						@else
 							<tr>
 								<td colspan="4">
-									No files uploaded
+									@lang('general.no_results')
 								</td>
 							</tr>
 

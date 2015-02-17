@@ -44,7 +44,8 @@
                                 <tr role="row">
                                         <th class="col-md-3">@lang('general.name')</th>
                                         <th class="col-md-3">@lang('general.asset_tag')</th>
-                                        <th class="col-md-3">@lang('general.user')</th>
+                                        <th class="col-md-3">@lang('admin/hardware/table.serial')</th>
+                                         <th class="col-md-3">@lang('general.user')</th>
                                         <th class="col-md-2">@lang('table.actions')</th>
                                     </tr>
                                 </thead>
@@ -54,6 +55,13 @@
                                     <tr>
                                         <td><a href="{{ route('view/hardware', $modelassets->id) }}">{{{ $modelassets->name }}}</a></td>
                                         <td><a href="{{ route('view/hardware', $modelassets->id) }}">{{{ $modelassets->asset_tag }}}</a></td>
+                                        <td>
+                                        @if ($modelassets->serial)
+                                        
+                                        {{{ $modelassets->serial }}}
+                                        
+                                        @endif
+                                        </td>
                                         <td>
                                         @if ($modelassets->assigneduser)
                                         <a href="{{ route('view/user', $modelassets->assigned_to) }}">
