@@ -1,4 +1,4 @@
-@extends('frontend/backend/default')
+@extends('backend/layouts/default')
 
 @section('title0')
             @lang('admin/hardware/general.requestable')
