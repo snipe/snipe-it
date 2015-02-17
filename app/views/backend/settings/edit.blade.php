@@ -86,6 +86,12 @@ padding: 0px 20px;
 											@lang('admin/settings/general.display_checkout_date')
 										</label>
                                     </div>
+                                    <div class="checkbox">
+										<label>
+											{{ Form::checkbox('load_remote', '1', Input::old('load_remote', $setting->load_remote)) }}
+											@lang('admin/settings/general.load_remote')
+										</label>
+                                    </div>
                                     <hr>
 
                                     <div class="checkbox">
@@ -94,6 +100,9 @@ padding: 0px 20px;
 											@lang('admin/settings/general.auto_increment_assets')
 										</label>
                                     </div>
+                                    
+                                    
+                                    
 
                                     <div class="form-group {{ $errors->has('auto_increment_prefix') ? 'error' : '' }}">
                                             {{ Form::label('auto_increment_prefix', Lang::get('admin/settings/general.auto_increment_prefix')) }}
