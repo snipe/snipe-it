@@ -30,13 +30,25 @@ docker exec -i -t snipeit php artisan app:install
 
 (Go ahead and answer the questions however you like. Type 'yes' when asked whether or not you want to run migrations.)
 
+#NOTE:
+
+You may have to run:
+
+```sh
+docker exec -i -t snipeit php artisan key:generate --env=production
+```
+
+to get the production application key set correctly; I'm not yet sure why this is (I think it's a bug?)
+
 # If you want to seed #
 
-You can load out some initial data into the DB if you like by doing this:
+-You can load out some initial data into the DB if you like by doing this:
 
 ```sh
 docker -p $(boot2docker ip):8000:80 --link mysql:mysql php artisan db:seed
 ```
+
+This already happens-
 
 ### For Development ###
 
