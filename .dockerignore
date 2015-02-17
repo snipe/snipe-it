@@ -1,0 +1,6 @@
+.git
+Dockerfile
+.dockerignore
+app/storage/logs/*
+app/storage/views/*
+vendor/*
