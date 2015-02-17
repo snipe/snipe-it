@@ -306,7 +306,7 @@ class AssetsController extends AdminController
                 $asset->supplier_id        = e(Input::get('supplier_id'));
             }
 
-             if (e(Input::get('requestable')) == '') {
+            if (e(Input::get('requestable')) == '') {
                 $asset->requestable =  0;
             } else {
                 $asset->requestable        = e(Input::get('requestable'));
@@ -604,7 +604,7 @@ class AssetsController extends AdminController
         // Grab the dropdown list of status
         $statuslabel_list = Statuslabel::lists('name', 'id');
 
-         $location_list = array('' => '') + Location::lists('name', 'id');
+        $location_list = array('' => '') + Location::lists('name', 'id');
 
         // get depreciation list
         $depreciation_list = array('' => '') + Depreciation::lists('name', 'id');
@@ -772,4 +772,97 @@ class AssetsController extends AdminController
             return Redirect::route('hardware')->with('error', $error);
         }
     }
+    
+    
+    
+    
+    /**
+    *  Display bulk edit screen
+    *
+    * @return View
+    **/
+    public function postBulkEdit($assets = null)
+    {
+
+		if (Input::has('edit_asset')) {
+			
+			$assets = Input::get('edit_asset');
+			
+			$supplier_list = array('' => '') + Supplier::orderBy('name', 'asc')->lists('name', 'id');
+	        $statuslabel_list = array('' => '') + Statuslabel::lists('name', 'id');
+	        $location_list = array('' => '') + Location::lists('name', 'id');
+		}
+
+		return View::make('backend/hardware/bulk')->with('assets',$assets)->with('supplier_list',$supplier_list)->with('statuslabel_list',$statuslabel_list)->with('location_list',$location_list);
+			 
+    }
+    
+    
+     
+    /**
+    *  Save bulk edits
+    *
+    * @return View
+    **/
+    public function postBulkSave($assets = null)
+    {
+
+		if (Input::has('bulk_edit')) {
+			
+			$assets = Input::get('bulk_edit');
+			
+			if ( (Input::has('purchase_date')) ||  (Input::has('rtd_location_id')) ||  (Input::has('status_id')) )  {
+			
+				foreach ($assets as $key => $value) {
+					
+					$update_array = array();
+					
+					if (Input::has('purchase_date')) {				
+						$update_array['purchase_date'] =  e(Input::get('purchase_date'));
+					}
+					
+					if (Input::has('rtd_location_id')) {				
+						$update_array['rtd_location_id'] = e(Input::get('rtd_location_id'));
+					}
+					
+					if (Input::has('status_id')) {				
+						$update_array['status_id'] = e(Input::get('status_id'));
+					}
+								
+					
+					if (DB::table('assets')
+		            ->where('id', $key)
+		            ->update($update_array)) {		
+			            
+			            $logaction = new Actionlog();
+			            $logaction->asset_id = $key;
+			            $logaction->asset_type = 'hardware';
+			            $logaction->created_at =  date("Y-m-d h:i:s");
+			            
+			            if (Input::has('rtd_location_id')) {	
+			            	$logaction->location_id = e(Input::get('rtd_location_id'));
+			            }
+			            $logaction->user_id = Sentry::getUser()->id;
+			            $log = $logaction->logaction('update');
+	                        
+		            }
+			          					
+				} // endforeach
+				
+				return Redirect::to("hardware")->with('success', Lang::get('admin/hardware/message.update.success'));
+
+			// no values given, nothing to update	
+			} else {
+				return Redirect::to("hardware")->with('info','Nothing was updated');
+				
+			}
+
+
+		} // endif
+
+		return Redirect::to("hardware");	
+				 
+    }
+
+
 }

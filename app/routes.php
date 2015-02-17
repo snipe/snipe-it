@@ -47,6 +47,14 @@ Route::group(array('prefix' => 'hardware', 'namespace' => 'Controllers\Admin', '
     Route::get('{assetId}/deletefile/{fileId}', array('as' => 'delete/assetfile', 'uses' => 'AssetsController@getDeleteFile'));
     Route::get('{assetId}/showfile/{fileId}', array('as' => 'show/assetfile', 'uses' => 'AssetsController@displayFile'));
     Route::post('{assetId}/edit', 'AssetsController@postEdit');
+    
+    Route::post('bulkedit', 
+    	array('as' => 'hardware/bulkedit', 
+    	'uses' => 'AssetsController@postBulkEdit'));
+    Route::post('bulksave', 
+    	array('as' => 'hardware/bulksave', 
+    	'uses' => 'AssetsController@postBulkSave'));
+
 
 
 
