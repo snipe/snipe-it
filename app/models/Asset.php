@@ -15,11 +15,8 @@ class Asset extends Elegant
         'notes'   			=> 'alpha_space',
         'pysical' 			=> 'integer',
         'supplier_id' 		=> 'integer',
-        //'asset_tag'   => 'required|alpha_space|min:3|max:255|unique:assets,asset_tag,{id},deleted_at,NULL',
-        //'email' => 'required|email|unique:users,email,NULL,id,deleted_at,NULL',
-        //'asset_tag' => 'required|alpha_space|min:2|max:255|unique:assets,asset_tag,deleted_at,NULL',
         'asset_tag'   => 'required|alpha_space|min:3|max:255|unique:assets,asset_tag,{id}',
-        'serial'   			=> 'required|alpha_dash|min:3|max:255|unique:assets,serial,{id}',
+        //'serial'   			=> 'required|alpha_dash|min:3|max:255|unique:assets,serial,{id}',
         'status' 			=> 'integer'
         );
 
