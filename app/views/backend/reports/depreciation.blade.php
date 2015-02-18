@@ -89,9 +89,9 @@
             <td class="align-right">@lang('general.currency')
             {{{ number_format($asset->purchase_cost) }}}</td>
             <td class="align-right">@lang('general.currency')
-            {{{ number_format($asset->depreciate()) }}}</td>
+            {{{ number_format($asset->getDepreciatedValue()) }}}</td>
             <td class="align-right">@lang('general.currency')
-            -{{{ number_format(($asset->purchase_cost - $asset->depreciate())) }}}</td>
+            -{{{ number_format(($asset->purchase_cost - $asset->getDepreciatedValue())) }}}</td>
             @else
             <td></td>
             <td></td>

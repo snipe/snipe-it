@@ -24,6 +24,11 @@ class Asset extends Depreciable
     {
         return $this->model->belongsTo('Depreciation','depreciation_id');
     }
+
+    public function get_depreciation()
+    {
+        return $this->model->depreciation;
+    }
     
     /**
     * Get uploads for this asset

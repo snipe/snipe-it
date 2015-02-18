@@ -19,11 +19,6 @@ class License extends Depreciable
             'notes'   => 'alpha_space|min:0',
         );
 
-    public function depreciation()
-    {
-        return $this->belongsTo('Depreciation','depreciation_id');
-    }
-    
     /**
      * Get the assigned user
      */

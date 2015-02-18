@@ -9,24 +9,47 @@ class Depreciable extends Elegant
     //REQUIRES a purchase_date field
     //     and a purchase_cost field
 
+    //REQUIRES a get_depreciation method, 
+    //which will return the deprecation.
+    //this is needed because assets get 
+    //their depreciation from a model, 
+    //whereas licenses have deprecations
+    //directly associated with them.
+
+    //assets will override the following
+    //two methods in order to inherit from
+    //their model instead of directly (like
+    //here)
+
+    public function depreciation()
+    {
+        return $this->belongsTo('Depreciation','depreciation_id');
+    }
+
+    public function get_depreciation()
+    {
+        return $this->depreciation;
+    }
+
      /**
      * @param $purchase_cost
      * @param $purchase_date1
      * @return float|int
      */
 
-    protected function getCurrentValue()
+    public function getDepreciatedValue()
     {
-        if (!$this->depreciation) { // will never happen
+        if (!$this->get_depreciation()) { // will never happen
             return $this->purchase_cost;
         }
 
-        if ($this->depreciation->months <= 0) {
+        if ($this->get_depreciation()->months <= 0) {
             return $this->purchase_cost;
         }
 
         // fraction of value left
-        $current_value = round(($this->time_until_depreciated() / ($this->depreciation->months)) * $this->purchase_cost, 2);
+        $months_remaining = $this->time_until_depreciated()->m + $this->time_until_depreciated()->y; //UGlY
+        $current_value = round(($months_remaining/ $this->get_depreciation()->months) * $this->purchase_cost, 2);
 
         if ($current_value < 0) {
             $current_value = 0;
@@ -52,7 +75,7 @@ class Depreciable extends Elegant
     public function depreciated_date()
     {
         $date = date_create($this->purchase_date);
-        date_add($date, date_interval_create_from_date_string($this->depreciation->months . ' months'));
+        date_add($date, date_interval_create_from_date_string($this->get_depreciation()->months . ' months'));
         return $date; //date_format($date, 'Y-m-d'); //don't bake-in format, for internationalization
     }    
 }
