@@ -31,6 +31,8 @@ class AppCommand extends Command
         'email'      => null,
         'password'   => null
     );
+	
+	protected $dummyData = true;
 
     /**
      * Create a new command instance.
@@ -67,6 +69,7 @@ class AppCommand extends Command
         $this->askUserEmail();
         $this->askUserPassword();
 
+		$this->askUserDummyData();
 
         $this->comment('');
         $this->comment('');
@@ -95,7 +98,15 @@ class AppCommand extends Command
         $this->sentryRunner();
 
         // Seed the tables with dummy data
-        $this->call('db:seed');
+		if( $this->dummyData === true )
+		{
+			$this->call('db:seed');
+		}
+		else
+		{	
+			// Seeding Settings table is mandatory
+			$this->call('db:seed', array('--class' => 'SettingsSeeder'));
+		}
     }
 
     /**
@@ -192,6 +203,20 @@ class AppCommand extends Command
             $this->userData['password'] = $password;
         } while( ! $password);
     }
+	
+	/**
+	 * Asks the user to create dummy data
+	 *
+	 * @return void
+	 * @todo   Use the Laravel Validator
+	 */
+	protected function askUserDummyData()
+	{
+		// Ask the user to input the user password
+		$dummydata = $this->ask('Do you want to seed your database with dummy data? (deafult is yes): ');
+
+		$this->dummyData = ( strstr($dummydata, 'y' ) || empty($dummydata) ) ? true : false;
+	}
 
     /**
      * Runs all the necessary Sentry commands.
@@ -207,7 +232,10 @@ class AppCommand extends Command
         $this->sentryCreateUser();
 
         // Create dummy user
-        $this->sentryCreateDummyUser();
+		if( $this->dummyData === true )
+		{
+			$this->sentryCreateDummyUser();
+		}
     }
 
     /**
