@@ -20,6 +20,10 @@ class Asset extends Depreciable
         'status' 			=> 'integer'
         );
 
+    public function depreciation()
+    {
+        return $this->model->belongsTo('Depreciation','depreciation_id');
+    }
     
     /**
     * Get uploads for this asset

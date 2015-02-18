@@ -9,12 +9,7 @@ class Depreciable extends Elegant
     //REQUIRES a purchase_date field
     //     and a purchase_cost field
 
-    public function depreciation()
-    {
-        return $this->belongsTo('Depreciation','depreciation_id');
-    }
-
-    /**
+     /**
      * @param $purchase_cost
      * @param $purchase_date1
      * @return float|int
