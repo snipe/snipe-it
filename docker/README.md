@@ -25,9 +25,20 @@ docker run --name mysql -e MYSQL_ROOT_PASSWORD=SUPERDUPERSECRETPASSWORD -e MYSQL
 
 That should set you up with your database to use. (You can also use an environment file using ```--env-file```; see ```docker run --help``` for details)
 
+You'll want to handle E-Mail - you can do this with a Docker container (not documented here), or point to any other external mail server. If you did want to do it using Docker, make sure to expose port 587 for mail submission, and use ```--link mail:...```. Regardless, the environment variables necessary are:
+
+ * MAIL_PORT_587_TCP_ADDR - the hostname/IP address of your mailserver
+ * MAIL_PORT_587_TCP_PORT - the port for the mailserver (probably 587, could be another)
+ * MAIL_ENV_FROM_ADDR, MAIL_ENV_FROM_NAME - the default from address, and from name for emails
+ * MAIL_ENV_ENCRYPTION - pick 'tls' for SMTP-over-SSL, 'tcp' for unencrypted
+ * MAIL_ENV_USERNAME - SMTP username
+ * MAIL_ENV_PASSWORD - SMTP password
+
+You can assemble these options into an env-file, or specify them on the command line when you run your Snipe-IT container.
+
 Now you can start your Snipe-IT container -
 ```sh
-docker run -d -p $(boot2docker ip)::80 --name="snipeit" --link mysql:mysql snipeit 
+docker run -d -p $(boot2docker ip)::80 --name="snipeit" --link mysql:mysql [--env-file or -e options...] snipeit 
 ```
 
 You can find out what port Snipe-IT is running on with:

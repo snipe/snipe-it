@@ -60,6 +60,8 @@ RUN patch -p1 < /tmp/app_start.patch
 #RUN cp -n /var/www/html/app/config/production/database.example.php /var/www/html/app/config/production/database.php
 COPY docker/database.php /var/www/html/app/config/production/database.php
 
+COPY docker/mail.php /var/www/html/app/config/production/mail.php
+
 #change DB file user
 #RUN sed -i s/travis/snipe_it/ /var/www/html/app/config/production/database.php
 
