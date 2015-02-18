@@ -1,5 +1,13 @@
 #### How to use the Snipe-IT docker image #####
 
+Build the snipeit image using the ```Dockerfile``` at the root directory of Snipe-IT by doing this:
+
+```sh
+docker build -t snipeit .
+```
+
+Then you can use your newly built image as ```snipeit```
+
 ### How to get up and running ###
 
 * First get a MySQL container running
