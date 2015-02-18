@@ -1138,12 +1138,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/thephpleague/csv.git",
-                "reference": "0d3c28bf20ad26e1e23599e1746aaf7c680c0477"
+                "reference": "959ede56075fec54891fad13744aeed6d42ad345"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/thephpleague/csv/zipball/0d3c28bf20ad26e1e23599e1746aaf7c680c0477",
-                "reference": "0d3c28bf20ad26e1e23599e1746aaf7c680c0477",
+                "url": "https://api.github.com/repos/thephpleague/csv/zipball/959ede56075fec54891fad13744aeed6d42ad345",
+                "reference": "959ede56075fec54891fad13744aeed6d42ad345",
                 "shasum": ""
             },
             "require": {
@@ -1185,7 +1185,7 @@
                 "read",
                 "write"
             ],
-            "time": "2015-02-17 13:59:21"
+            "time": "2015-02-18 16:45:52"
         },
         {
             "name": "maximebf/debugbar",
@@ -2796,12 +2796,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/padraic/mockery.git",
-                "reference": "f699a69af1f0a5a314107455e6150cfadce33e6b"
+                "reference": "a450aa28455781c7a72e50794b0f9d954cf8decb"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/padraic/mockery/zipball/f699a69af1f0a5a314107455e6150cfadce33e6b",
-                "reference": "f699a69af1f0a5a314107455e6150cfadce33e6b",
+                "url": "https://api.github.com/repos/padraic/mockery/zipball/a450aa28455781c7a72e50794b0f9d954cf8decb",
+                "reference": "a450aa28455781c7a72e50794b0f9d954cf8decb",
                 "shasum": ""
             },
             "require": {
@@ -2810,8 +2810,7 @@
             },
             "require-dev": {
                 "hamcrest/hamcrest-php": "~1.1",
-                "phpunit/phpunit": "~4.0",
-                "satooshi/php-coveralls": "~0.7@dev"
+                "phpunit/phpunit": "~4.0"
             },
             "type": "library",
             "extra": {
@@ -2854,7 +2853,7 @@
                 "test double",
                 "testing"
             ],
-            "time": "2015-02-15 16:05:06"
+            "time": "2015-02-18 18:54:04"
         },
         {
             "name": "phpdocumentor/reflection-docblock",
