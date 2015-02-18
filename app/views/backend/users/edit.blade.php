@@ -214,6 +214,7 @@
             </div>
             
             <!-- Email user -->
+            @if (!$user->id)
 			<div class="form-group">
 				<div class="col-sm-3 ">
 				</div>
@@ -221,6 +222,7 @@
 					{{ Form::checkbox('email_user', '1', Input::old('email_user')) }} Email this user their credentials?
 				</div>
 			</div>
+			@endif
 
 
 
