@@ -9,7 +9,7 @@ return array(
     'date'              => 'Kaufdatum',
     'depreciation'      => 'Abschreibung',
     'expiration'        => 'Ablaufdatum',
-    'maintained'        => 'Maintained',
+    'maintained'        => 'Verwaltet',
     'name'              => 'Software Name',
     'no_depreciation'   => 'Nicht abschreiben',
     'notes'             => 'Notizen',

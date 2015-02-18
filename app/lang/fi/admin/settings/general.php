@@ -10,6 +10,7 @@ return array(
     'display_qr'                => 'Näytä QR-koodit laitteen tiedoissa',
     'info'                      => 'Näiden asetusten avulla voit mukauttaa tiettyjä toimintoja.',
     'laravel'                   => 'Versio Laravel',
+    'load_remote'				=> 'This Snipe-IT install can load scripts from the outside world.',
     'per_page'                  => 'Tuloksia Per Sivu',
     'php'                       => 'Versio PHP',
     'php_gd_info'               => 'Sinun tulee asentaa php-gd paketti näyttääksesi QR-koodit, katso lisätietoja asennusohjeista.',

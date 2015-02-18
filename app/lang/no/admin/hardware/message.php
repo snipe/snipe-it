@@ -2,8 +2,8 @@
 
 return array(
 
-    'undeployable' 		=> '<strong>Warning: </strong> This asset has been marked as currently undeployable.
-                        If this status has changed, please update the asset status.',
+    'undeployable' 		=> '<strong>Advarsel:</strong> Denne eiendelen er merket som ikke utleverbar.
+                        Oppdater eiendelsstatus hvis situasjonen har endret seg.',
     'does_not_exist' 	=> 'Eiendel eksisterer ikke.',
     'assoc_users'	 	=> 'Denne eiendelen er merket som utsjekket til en bruker og kan ikke slettes. Vennligst sjekk inn eiendelen først, og forsøk sletting på nytt. ',
 
@@ -13,14 +13,28 @@ return array(
     ),
 
     'update' => array(
-        'error'   		=> 'Eiendelen ble ikke oppdatert, prøv igjen',
-        'success' 		=> 'Oppdatering av eiendel vellykket.'
+        'error'   			=> 'Eiendelen ble ikke oppdatert, prøv igjen',
+        'success' 			=> 'Oppdatering av eiendel vellykket.',
+        'nothing_updated'	=>  'No fields were selected, so nothing was updated.',
     ),
 
     'restore' => array(
-        'error'   		=> 'Asset was not restored, please try again',
-        'success' 		=> 'Asset restored successfully.'
+        'error'   		=> 'Eiendel ble ikke gjenopprettet. Prøv igjen',
+        'success' 		=> 'Vellykket gjenoppretting av eiendel.'
     ),
+    
+    'deletefile' => array(
+        'error'   => 'File not deleted. Please try again.',
+        'success' => 'File successfully deleted.',
+    ),
+
+    'upload' => array(
+        'error'   => 'File(s) not uploaded. Please try again.',
+        'success' => 'File(s) successfully uploaded.',
+        'nofiles' => 'You did not select any files for upload',
+        'invalidfiles' => 'One or more of your files is too large or is a filetype that is not allowed. Allowed filetypes are png, gif, jpg, doc, docx, pdf, and txt.',
+    ),
+
 
     'delete' => array(
         'confirm'   	=> 'Er du sikker på at du vil slette eiendelen?',

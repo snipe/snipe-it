@@ -10,6 +10,7 @@ return array(
     'display_qr'                => 'Zeige QR-Codes',
     'info'                      => 'Mit diesen Einstellungen können Sie verschieden Aspekte Ihrer Installation bearbeiten.',
     'laravel'                   => 'Laravel Version',
+    'load_remote'				=> 'This Snipe-IT install can load scripts from the outside world.',
     'per_page'                  => 'Ergebnisse pro Seite',
     'php'                       => 'PHP Version',
     'php_gd_info'               => 'Um QR-Codes anzeigen zu können muss php-gd installiert sein, siehe Installationshinweise.',

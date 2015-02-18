@@ -2,13 +2,13 @@
 
 return array(
 
-    'actions' 	=> 'Actions',
-    'add'    	=> 'Add New',
-    'cancel'    => 'Cancel',
-    'delete'  	=> 'Delete',
-    'edit'    	=> 'Edit',
-    'restore' 	=> 'Restore',
-    'submit'  	=> 'Submit',
-    'upload'    => 'Upload',
+    'actions' 	=> 'アクション',
+    'add'    	=> '新規追加',
+    'cancel'    => 'キャンセル',
+    'delete'  	=> '削除',
+    'edit'    	=> '編集',
+    'restore' 	=> '復元',
+    'submit'  	=> '送信',
+    'upload'    => 'アップロード',
 
 );

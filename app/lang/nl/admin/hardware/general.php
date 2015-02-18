@@ -1,17 +1,17 @@
 <?php
 
 return array(
-	'archived'  				=> 'Archived',
+	'archived'  				=> 'Gearchiveerd',
     'asset'  					=> 'Materiaal',
     'checkin'  					=> 'Materiaal uitlenen',
     'checkout'  				=> 'Leen materiaal uit aan deze gebruiker',
     'clone'  					=> 'Kloon Materiaal',
-    'deployable'  				=> 'Deployable',
-    'deleted'  					=> 'This asset has been deleted. <a href="/hardware/:asset_id/restore">Click here to restore it</a>.',
+    'deployable'  				=> 'Uitrolbaar',
+    'deleted'  					=> 'Dit materiaal is verwijderd. <a href="/hardware/:asset_id/restore">Klik hier om te herstellen</a>.',
     'edit'  					=> 'Materiaal Bewerken',
-    'requestable'				=> 'Requestable',
-    'restore'  					=> 'Restore Asset',
-    'pending'  					=> 'Pending',
-    'undeployable'  			=> 'Undeployable',
+    'requestable'				=> 'Beschikbaar',
+    'restore'  					=> 'Herstel materiaal',
+    'pending'  					=> 'In behandeling',
+    'undeployable'  			=> 'Niet uitrolbaar',
     'view'  					=> 'Bekijk Materiaal',
 );

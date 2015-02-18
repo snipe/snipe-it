@@ -2,6 +2,9 @@
 
 return array(
 
+	'bulk_update'		=> 'Bulk Update Assets',
+	'bulk_update_help'	=> 'This form allows you to update multiple assets at once. Only fill in the fields you need to change. Any fields left blank will remain unchanged. ',
+	'bulk_update_warn'	=> 'You are about to edit the properties of :asset_count assets.',
     'checkedout_to'		=> 'Asignado a',
     'checkout_to'		=> 'Asignar a',
     'cost'				=> 'Precio Compra',
@@ -15,7 +18,7 @@ return array(
     'expires'			=> 'Expira',
     'fully_depreciated'	=> 'Totalmente amortizado',
     'help_checkout'		=> 'Si desea asignar a este activo inmediatamente, deberá seleccionar "Listo para desplegar" de la lista de estado anterior, o pueden ocurrir cosas inesperadas. ',
-    'mac_address'		=> 'MAC Address',
+    'mac_address'		=> 'MAC Dirección',
     'manufacturer'		=> 'Fabricante',
     'model'				=> 'Modelo',
     'months'			=> 'meses',

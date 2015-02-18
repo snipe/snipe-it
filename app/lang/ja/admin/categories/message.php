@@ -2,23 +2,23 @@
 
 return array(
 
-    'does_not_exist' => 'Category does not exist.',
-    'assoc_users'	 => 'This category is currently associated with at least one model and cannot be deleted. Please update your models to no longer reference this category and try again. ',
+    'does_not_exist' => 'カテゴリーが存在しません。',
+    'assoc_users'	 => 'このカテゴリーは１つ以上のモデルに関連付けられているため削除できません。このカテゴリーを参照しないようにモデルを更新して再度実行してください。 ',
 
     'create' => array(
-        'error'   => 'Category was not created, please try again.',
-        'success' => 'Category created successfully.'
+        'error'   => 'カテゴリーが作成されていません。再度実行してください。',
+        'success' => 'カテゴリーの作成に成功しました。'
     ),
 
     'update' => array(
-        'error'   => 'Category was not updated, please try again',
-        'success' => 'Category updated successfully.'
+        'error'   => 'カテゴリーは更新されませんでした。再度実行してください。',
+        'success' => 'カテゴリーの更新に成功しました。'
     ),
 
     'delete' => array(
-        'confirm'   => 'Are you sure you wish to delete this category?',
-        'error'   => 'There was an issue deleting the category. Please try again.',
-        'success' => 'The category was deleted successfully.'
+        'confirm'   => 'このカテゴリーを本当に削除しますか？',
+        'error'   => 'このカテゴリーを削除する際に問題がおきました。再度実行してください。',
+        'success' => 'カテゴリーの削除に成功しました。'
     )
 
 );

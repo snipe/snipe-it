@@ -2,24 +2,24 @@
 
 return array(
 
-    'does_not_exist' => 'Depreciation class does not exist.',
-    'assoc_users'	 => 'This depreciation is currently associated with one or more models and cannot be deleted. Please delete the models, and then try deleting again. ',
+    'does_not_exist' => '減価償却クラスがありません。',
+    'assoc_users'	 => 'この減価償却は複数のモデルに関係付けられているため削除することができません。モデルを削除してから再度実行してください。 ',
 
 
     'create' => array(
-        'error'   => 'Depreciation class was not created, please try again. :(',
-        'success' => 'Depreciation class created successfully. :)'
+        'error'   => '減価償却クラスが作成できませんでした。再度実行してください。',
+        'success' => '減価償却クラスの作成に成功しました。'
     ),
 
     'update' => array(
-        'error'   => 'Depreciation class was not updated, please try again',
-        'success' => 'Depreciation class updated successfully.'
+        'error'   => '減価償却クラスの更新ができませんでした。再度実行してください。',
+        'success' => '減価償却クラスの更新に成功しました。'
     ),
 
     'delete' => array(
-        'confirm'   => 'Are you sure you wish to delete this depreciation class?',
-        'error'   => 'There was an issue deleting the depreciation class. Please try again.',
-        'success' => 'The depreciation class was deleted successfully.'
+        'confirm'   => '本当に減価償却クラスを削除しますか？',
+        'error'   => '減価償却クラスを削除する際に問題がおきました。再度実行してください。',
+        'success' => '減価償却クラスの削除に成功しました。'
     )
 
 );

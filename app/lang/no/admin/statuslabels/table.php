@@ -2,14 +2,14 @@
 
 return array(
     'about'      	=> 'Om statusmerker',
-    'archived'      	=> 'Archived',
+    'archived'      	=> 'Arkivert',
     'create'      	=> 'Opprett statusmerke',
-    'deployable'      	=> 'Deployable',
-    'info'      	=> 'Status labels are used to describe the various states your assets could be in. They may be out for repair, lost/stolen, etc. You can create new status labels for deployable, pending and archived assets.',
+    'deployable'      	=> 'Utleverbar',
+    'info'      	=> 'Statusmerker brukes for å beskrive de forskjellige statusene dine eiendeler kan ha. De kan være under reparasjon, tapt/stjålet, osv. Du kan opprette nye statusmerker for utleverbare, under arbeid eller arkiverte eiendeler.',
     'name'      	=> 'Statusnavn',
-    'pending'      	=> 'Pending',
-    'status_type'   => 'Status Type',
+    'pending'      	=> 'Under arbeid',
+    'status_type'   => 'Statustype',
     'title'      	=> 'Statusmerke',
-    'undeployable'  => 'Undeployable',
+    'undeployable'  => 'Ikke utleverbar',
     'update'      	=> 'Oppdater statusmerke',
 );

@@ -1,17 +1,17 @@
 <?php
 
 return array(
-	'archived'  				=> 'Archived',
+	'archived'  				=> 'Archiviert',
     'asset'  					=> 'Asset',
     'checkin'  					=> 'Asset zurücknehmen',
     'checkout'  				=> 'Asset an Benutzer herausgeben',
     'clone'  					=> 'Asset duplizieren',
-    'deployable'  				=> 'Deployable',
-    'deleted'  					=> 'This asset has been deleted. <a href="/hardware/:asset_id/restore">Click here to restore it</a>.',
+    'deployable'  				=> 'Einsetzbar',
+    'deleted'  					=> 'Dieses Asset wurde gelöscht. <a href="/hardware/:asset_id/restore">Zur Wiederherstellung hier klicken</a>.',
     'edit'  					=> 'Asset editieren',
-    'requestable'				=> 'Requestable',
-    'restore'  					=> 'Restore Asset',
-    'pending'  					=> 'Pending',
-    'undeployable'  			=> 'Undeployable',
+    'requestable'				=> 'Anforderbar',
+    'restore'  					=> 'Asset wiederherstellen',
+    'pending'  					=> 'Ausstehend',
+    'undeployable'  			=> 'nicht einsetzbar',
     'view'  					=> 'Asset ansehen',
 );
