@@ -11,4 +11,5 @@ return array(
     'last_login'  		=> 'Last Login',
     'software_user'  	=> 'Software Checked out to :name',
     'view_user'  		=> 'View User :name',
+    'usercsv'			=> 'CSV file',
     );

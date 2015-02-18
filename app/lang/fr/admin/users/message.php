@@ -18,14 +18,16 @@ return array(
         'unban'     => 'L’utilisateur a été réhabilité avec succès.',
         'suspend'   => 'L’utilisateur a été suspendu avec succès.',
         'unsuspend' => 'L’utilisateur a été activé avec succès.',
-        'restored'  => 'L’utilisateur a été restauré avec succès.'
+        'restored'  => 'L’utilisateur a été restauré avec succès.',
++       'import'    => 'Users imported successfully.',
     ),
 
     'error' => array(
         'create' => 'Un problème a eu lieu pendant la création de l\'utilisateur. Veuillez essayer à nouveau.',
         'update' => 'Un problème a eu lieu pendant la mise à jour de l\'utilisateur. Veuillez essayer à nouveau.',
         'delete' => 'Un problème a eu lieu pendant la suppression de l\'utilisateur. Veuillez essayer à nouveau.',
-        'unsuspend' => 'Un problème a eu lieu pendant la réhabilitation de l\'utilisateur. Veuillez essayer à nouveau.'
+        'unsuspend' => 'Un problème a eu lieu pendant la réhabilitation de l\'utilisateur. Veuillez essayer à nouveau.',
+        'import'    => 'There was an issue importing users. Please try again.',
     ),
 
 );

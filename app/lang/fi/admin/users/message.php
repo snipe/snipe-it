@@ -18,14 +18,16 @@ return array(
         'unban'     => 'Käyttäjän esto poistettiin onnistuneesti.',
         'suspend'   => 'Käyttäjä jäädytettiin onnistuneesti.',
         'unsuspend' => 'Käyttäjän jäädytys poistettiin onnistuneesti.',
-        'restored'  => 'Käyttäjä palautettiin onnistuneesti.'
+        'restored'  => 'Käyttäjä palautettiin onnistuneesti.',
++       'import'    => 'Users imported successfully.',
     ),
 
     'error' => array(
         'create' => 'Käyttäjä luonnissa tapahtui virhe. Yritä uudelleen.',
         'update' => 'Käyttäjän päivityksessä tapahtui virhe. Yritä uudelleen.',
         'delete' => 'Käyttäjän poistamisessa tapahtui virhe. Yritä uudelleen.',
-        'unsuspend' => 'Käyttäjän jäädytyksen poistossa tapahtui virhe. Yritä uudelleen.'
+        'unsuspend' => 'Käyttäjän jäädytyksen poistossa tapahtui virhe. Yritä uudelleen.',
+        'import'    => 'There was an issue importing users. Please try again.',
     ),
 
 );

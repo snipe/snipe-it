@@ -18,14 +18,16 @@ return array(
         'unban'     => '用户成功解禁',
         'suspend'   => '用户已经成功停用',
         'unsuspend' => '用户解除停用',
-        'restored'  => '用户成功被恢复。'
+        'restored'  => '用户成功被恢复。',
++       'import'    => 'Users imported successfully.',
     ),
 
     'error' => array(
         'create' => '创建用户过程中出现了一些问题，请重试。',
         'update' => '更新用户过程中出现了一些问题，请重试。',
         'delete' => '删除用户过程中出现了一点儿问题，请重试。',
-        'unsuspend' => '恢复停用用户的过程中出现了一点儿问题，请重试。'
+        'unsuspend' => '恢复停用用户的过程中出现了一点儿问题，请重试。',
+        'import'    => 'There was an issue importing users. Please try again.',
     ),
 
 );

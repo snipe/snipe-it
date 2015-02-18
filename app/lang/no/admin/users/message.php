@@ -18,14 +18,16 @@ return array(
         'unban'     => 'Forbud av bruker ble opphevet.',
         'suspend'   => 'Vellykket deaktivering av bruker.',
         'unsuspend' => 'Vellykket aktivering av bruker.',
-        'restored'  => 'Vellykket gjenopprettelse av bruker.'
+        'restored'  => 'Vellykket gjenopprettelse av bruker.',
++       'import'    => 'Users imported successfully.',
     ),
 
     'error' => array(
         'create' => 'Det oppstod et problem under opprettelse av bruker. Prøv igjen.',
         'update' => 'Det oppstod et problem under oppdatering av bruker. Prøv igjen.',
         'delete' => 'Det oppstod et problem under sletting av bruker. Prøv igjen.',
-        'unsuspend' => 'Det oppstod et problem under aktivering av bruker. Prøv igjen.'
+        'unsuspend' => 'Det oppstod et problem under aktivering av bruker. Prøv igjen.',
+        'import'    => 'There was an issue importing users. Please try again.',
     ),
 
 );

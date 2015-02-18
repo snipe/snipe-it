@@ -18,14 +18,16 @@ return array(
         'unban'     => 'Gebruiker succesvol opnieuw toegang verleend.',
         'suspend'   => 'Gebruiker werd succesvol uitgeschakeld.',
         'unsuspend' => 'Gebruiker werd succesvol ingeschakeld.',
-        'restored'  => 'Gebruiker werd succesvol opnieuw geactiveerd.'
+        'restored'  => 'Gebruiker werd succesvol opnieuw geactiveerd.',
++       'import'    => 'Users imported successfully.',
     ),
 
     'error' => array(
         'create' => 'Er was een probleem tijdens het aanmaken van de gebruiker. Probeer opnieuw, aub.',
         'update' => 'Er was een probleem tijdens het bijwerken van de gebruiker. Probeer opnieuw, aub.',
         'delete' => 'Er was een probleem tijdens het verwijderen van de gebruiker. Probeer opnieuw, aub.',
-        'unsuspend' => 'Er was een probleem tijdens het opnieuw inschakelen van de gebruiker. Probeer opnieuw, aub.'
+        'unsuspend' => 'Er was een probleem tijdens het opnieuw inschakelen van de gebruiker. Probeer opnieuw, aub.',
+        'import'    => 'There was an issue importing users. Please try again.',
     ),
 
 );

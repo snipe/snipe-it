@@ -2,9 +2,9 @@
 
 return array(
 
-	'bulk_update'		=> 'Bulk Update Assets',
-	'bulk_update_help'	=> 'This form allows you to update multiple assets at once. Only fill in the fields you need to change. Any fields left blank will remain unchanged. ',
-	'bulk_update_warn'	=> 'You are about to edit the properties of :asset_count assets.',
+	'bulk_update'		=> 'Masseoppdater eiendeler',
+	'bulk_update_help'	=> 'Dette skjemaet lar deg oppdatere flere eiendeler på en gang. Fyll kun ut feltene du ønsker å endre. Tomme felter forblir uendret. ',
+	'bulk_update_warn'	=> 'Du er på vei til å endre egenskapene til :asset_count eiendeler.',
     'checkedout_to'		=> 'Utsjekket til',
     'checkout_to'		=> 'Sjekk ut til',
     'cost'				=> 'Innkjøpskostnad',

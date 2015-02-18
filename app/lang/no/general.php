@@ -37,7 +37,7 @@ return array(
     'deleted'  				=> 'Slettet',
     'deployed'				=> 'Utlevert',
     'depreciation_report'	=> 'Avskrivningsrapport',
-    'download'				=> 'Download',
+    'download'				=> 'Last ned',
     'depreciation'			=> 'Avskrivning',
     'editprofile'  			=> 'Rediger din profil',
     'eol'					=> 'Livstid',
