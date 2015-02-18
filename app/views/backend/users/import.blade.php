@@ -38,8 +38,7 @@ Create a User ::
 			@endif
 
 			<p>
-				Upload a CSV file with one or more users.  Passwords will be auto-generated.  Selecting a group will add that group to all imported users.  Follow this format, new line per user: <br />
-				firstName,lastName,email
+				Upload a CSV file with one or more users.  Passwords will be auto-generated.  The CSV should have the <strong>first</strong> fields as: <strong>firstName,lastName,email</strong>. Any additional fields to the right of those fields will be ignored.
 			</p>
 
             <div class="form-group {{ $errors->first('user_import_csv', 'has-error') }}">
