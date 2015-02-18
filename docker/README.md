@@ -15,7 +15,7 @@ Figure out what you want for your:
 docker run --name mysql -e MYSQL_ROOT_PASSWORD=SUPERDUPERSECRETPASSWORD -e MYSQL_DATABASE=snipeit -e MYSQL_USER=snipeit -e MYSQL_PASSWORD=tinglewingler -d -p $(boot2docker ip)::3306 mysql
 ```
 
-That should set you up with your database to use. (You can also use an environment file using --env-file; see docker run --help for details)
+That should set you up with your database to use. (You can also use an environment file using ```--env-file```; see ```docker run --help``` for details)
 
 Now you can start your Snipe-IT container -
 ```sh
@@ -83,3 +83,10 @@ And you may still need to generate the key with -
 ```sh
 docker exec -i -t snipeit php artisan key:generate --env=production
 ```
+While you're developing, you may need to occasionally run -
+
+```sh
+docker exec snipeit composer dump-autoload
+```
+
+To fix the autoloading cache (if, for example, your class names change, or you add new ones...)
