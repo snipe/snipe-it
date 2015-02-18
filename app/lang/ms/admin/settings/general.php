@@ -10,6 +10,7 @@ return array(
     'display_qr'                => 'Papar Kod QR',
     'info'                      => 'Tetapan ini membenarkan anda menyesuaikan sesetengah aspek pemasangan anda.',
     'laravel'                   => 'Versi Laravel',
+    'load_remote'				=> 'This Snipe-IT install can load scripts from the outside world.',
     'per_page'                  => 'Senarai Setiap Mukasurat',
     'php'                       => 'Versi PHP',
     'php_gd_info'               => 'Anda mesti pasangkan php-gd untuk paparkan kod QR, lihat arahan pemasangan.',

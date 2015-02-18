@@ -13,14 +13,28 @@ return array(
     ),
 
     'update' => array(
-        'error'   		=> 'Activul nu a fost actualizat, va rugam incercati iar',
-        'success' 		=> 'Activul a fost actualizat.'
+        'error'   			=> 'Activul nu a fost actualizat, va rugam incercati iar',
+        'success' 			=> 'Activul a fost actualizat.',
+        'nothing_updated'	=>  'No fields were selected, so nothing was updated.',
     ),
 
     'restore' => array(
         'error'   		=> 'Asset was not restored, please try again',
         'success' 		=> 'Asset restored successfully.'
     ),
+    
+    'deletefile' => array(
+        'error'   => 'File not deleted. Please try again.',
+        'success' => 'File successfully deleted.',
+    ),
+
+    'upload' => array(
+        'error'   => 'File(s) not uploaded. Please try again.',
+        'success' => 'File(s) successfully uploaded.',
+        'nofiles' => 'You did not select any files for upload',
+        'invalidfiles' => 'One or more of your files is too large or is a filetype that is not allowed. Allowed filetypes are png, gif, jpg, doc, docx, pdf, and txt.',
+    ),
+
 
     'delete' => array(
         'confirm'   	=> 'Sunteti sigur ca vreti sa stergeti acest activ?',

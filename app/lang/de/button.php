@@ -3,12 +3,12 @@
 return array(
 
     'actions' 	=> 'Aktionen',
-    'add'    	=> 'Add New',
-    'cancel'    => 'Cancel',
+    'add'    	=> 'Hinzufügen',
+    'cancel'    => 'Abbrechen',
     'delete'  	=> 'Löschen',
     'edit'    	=> 'Bearbeiten',
     'restore' 	=> 'Wiederherstellen',
     'submit'  	=> 'Abschicken',
-    'upload'    => 'Upload',
+    'upload'    => 'Hochladen',
 
 );

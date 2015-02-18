@@ -2,25 +2,38 @@
 
 return array(
 
-    'undeployable' 		=> '<strong>Warning: </strong> This asset has been marked as currently undeployable.
-                        If this status has changed, please update the asset status.',
-    'does_not_exist' 	=> 'Asset does not exist.',
-    'assoc_users'	 	=> 'This asset is currently checked out to a user and cannot be deleted. Please check the asset in first, and then try deleting again. ',
+    'undeployable' 		=> '<strong>Waarschuwing: </strong>Het gereedschap is gemarkeerd als niet uitrolbaar. Als de status is veranderd, verander dan de status van het gereedschap.',
+    'does_not_exist' 	=> 'Dit gereedschap bestaat niet.',
+    'assoc_users'	 	=> 'Dit gereedschap is op dit moment toegewezen aan een gebruiker en kan niet verwijderd worden. Verwijder het gereedschap eerst, en probeer op nieuw.',
 
     'create' => array(
-        'error'   		=> 'Asset was not created, please try again. :(',
-        'success' 		=> 'Asset created successfully. :)'
+        'error'   		=> 'Aanmaken van gereedschap is mislukt. Probeer opnieuw :(',
+        'success' 		=> 'Gereedschap is succesvol aangemaakt :)'
     ),
 
     'update' => array(
-        'error'   		=> 'Asset was not updated, please try again',
-        'success' 		=> 'Asset updated successfully.'
+        'error'   			=> 'Gereedschap is niet aangepast. Probeer opnieuw',
+        'success' 			=> 'Gereedschap is succesvol aangepast.',
+        'nothing_updated'	=>  'No fields were selected, so nothing was updated.',
     ),
 
     'restore' => array(
-        'error'   		=> 'Asset was not restored, please try again',
-        'success' 		=> 'Asset restored successfully.'
+        'error'   		=> 'Gereedschap is niet hersteld. Probeer opnieuw',
+        'success' 		=> 'Gereedschap is succesvol hersteld.'
     ),
+    
+    'deletefile' => array(
+        'error'   => 'File not deleted. Please try again.',
+        'success' => 'File successfully deleted.',
+    ),
+
+    'upload' => array(
+        'error'   => 'File(s) not uploaded. Please try again.',
+        'success' => 'File(s) successfully uploaded.',
+        'nofiles' => 'You did not select any files for upload',
+        'invalidfiles' => 'One or more of your files is too large or is a filetype that is not allowed. Allowed filetypes are png, gif, jpg, doc, docx, pdf, and txt.',
+    ),
+
 
     'delete' => array(
         'confirm'   	=> 'Are you sure you wish to delete this asset?',

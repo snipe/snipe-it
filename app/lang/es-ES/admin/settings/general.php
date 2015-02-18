@@ -10,6 +10,7 @@ return array(
     'display_qr'                => 'Mostrar Códigos QR',
     'info'                      => 'Estos parámetros permirten personalizar ciertos aspectos de la aplicación.',
     'laravel'                   => 'Versión de Laravel',
+    'load_remote'				=> 'This Snipe-IT install can load scripts from the outside world.',
     'per_page'                  => 'Resultados por página',
     'php'                       => 'Versión de PHP',
     'php_gd_info'               => 'Debes instalar php-gd para mostrar Códigos QR, ver instrucciones de instalación en <a href="http://www.php.net/manual/en/image.installation.php"></a>.',

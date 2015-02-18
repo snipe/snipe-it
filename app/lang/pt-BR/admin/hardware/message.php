@@ -12,14 +12,28 @@ return array(
     ),
 
     'update' => array(
-        'error'   		=> 'O bem não foi atualizado, por favor, tente novamente',
-        'success' 		=> 'Bem atualizado com sucesso.'
+        'error'   			=> 'O bem não foi atualizado, por favor, tente novamente',
+        'success' 			=> 'Bem atualizado com sucesso.',
+        'nothing_updated'	=>  'No fields were selected, so nothing was updated.',
     ),
 
     'restore' => array(
         'error'   		=> 'O bem não foi restaurado, por favor, tente novamente',
         'success' 		=> 'Bem restaurado com sucesso.'
     ),
+    
+    'deletefile' => array(
+        'error'   => 'File not deleted. Please try again.',
+        'success' => 'File successfully deleted.',
+    ),
+
+    'upload' => array(
+        'error'   => 'File(s) not uploaded. Please try again.',
+        'success' => 'File(s) successfully uploaded.',
+        'nofiles' => 'You did not select any files for upload',
+        'invalidfiles' => 'One or more of your files is too large or is a filetype that is not allowed. Allowed filetypes are png, gif, jpg, doc, docx, pdf, and txt.',
+    ),
+
 
     'delete' => array(
         'confirm'   	=> 'Tem certeza de que deseja deletar este bem?',

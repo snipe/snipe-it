@@ -1,17 +1,17 @@
 <?php
 
 return array(
-	'archived'  				=> 'Archived',
+	'archived'  				=> 'Arkivert',
     'asset'  					=> 'Eiendel',
     'checkin'  					=> 'Sjekk inn eiendel',
     'checkout'  				=> 'Sjekk ut eiendel til bruker',
     'clone'  					=> 'Klon eiendel',
-    'deployable'  				=> 'Deployable',
-    'deleted'  					=> 'This asset has been deleted. <a href="/hardware/:asset_id/restore">Click here to restore it</a>.',
+    'deployable'  				=> 'Utleverbar',
+    'deleted'  					=> 'Denne eiendelen har blitt slettet. <a href="/hardware/:asset_id/restore">Klikk for å gjenopprette den</a>.',
     'edit'  					=> 'Rediger eiendel',
-    'requestable'				=> 'Requestable',
-    'restore'  					=> 'Restore Asset',
-    'pending'  					=> 'Pending',
-    'undeployable'  			=> 'Undeployable',
+    'requestable'				=> 'Forespørrbar',
+    'restore'  					=> 'Gjenopprett eiendel',
+    'pending'  					=> 'Under arbeid',
+    'undeployable'  			=> 'Ikke utleverbar',
     'view'  					=> 'Vis eiendel',
 );

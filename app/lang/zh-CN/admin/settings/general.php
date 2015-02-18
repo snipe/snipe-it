@@ -10,6 +10,7 @@ return array(
     'display_qr'                => '显示二维码',
     'info'                      => '这些设置允许您自定义安装的某些方面',
     'laravel'                   => 'Laravel版本',
+    'load_remote'				=> 'This Snipe-IT install can load scripts from the outside world.',
     'per_page'                  => '每页搜索结果',
     'php'                       => 'PHP版本',
     'php_gd_info'               => '您必须安装php-gd显示二维码，请参阅安装说明。',

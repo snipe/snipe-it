@@ -2,6 +2,9 @@
 
 return array(
 
+	'bulk_update'		=> 'Bulk Update Assets',
+	'bulk_update_help'	=> 'This form allows you to update multiple assets at once. Only fill in the fields you need to change. Any fields left blank will remain unchanged. ',
+	'bulk_update_warn'	=> 'You are about to edit the properties of :asset_count assets.',
     'checkedout_to'		=> 'Herausgegeben an',
     'checkout_to'		=> 'Herausgeben an',
     'cost'				=> 'Einkaufspreis',
@@ -15,7 +18,7 @@ return array(
     'expires'			=> 'Gültig bis',
     'fully_depreciated'	=> 'Komplett Abgeschrieben',
     'help_checkout'		=> 'Wenn du dieses Asset sofort zuweisen möchtest, solltest du "Ready to Deploy" im Statusfeld auswählen oder es könnten unerwartete Probleme auftreten. ',
-    'mac_address'		=> 'MAC Address',
+    'mac_address'		=> 'MAC Adresse',
     'manufacturer'		=> 'Hersteller',
     'model'				=> 'Modell',
     'months'			=> 'Monate',
@@ -24,7 +27,7 @@ return array(
     'order'				=> 'Bestellnummer',
     'qr'				=> 'QR-Code',
     'requestable'		=> 'Benutzer dürfen dieses Asset anfordern',
-    'select_statustype'	=> 'Select Status Type',
+    'select_statustype'	=> 'Status Typ auswählen',
     'serial'			=> 'Seriennummer',
     'status'			=> 'Status',
     'supplier'			=> 'Lieferant',

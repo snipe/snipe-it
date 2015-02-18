@@ -2,6 +2,6 @@
 
 return array(
 
-	'show_mac_address'			=> 'Show MAC address field in assets in this model',
+	'show_mac_address'			=> 'Vis felt for MAC-adresse for denne modellen',
 
 );

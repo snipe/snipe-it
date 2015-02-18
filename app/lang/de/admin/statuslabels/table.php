@@ -2,14 +2,14 @@
 
 return array(
     'about'      	=> 'Info Statusbezeichnung',
-    'archived'      	=> 'Archived',
+    'archived'      	=> 'Archiviert',
     'create'      	=> 'Statusbezeichnung erstellen',
-    'deployable'      	=> 'Deployable',
-    'info'      	=> 'Status labels are used to describe the various states your assets could be in. They may be out for repair, lost/stolen, etc. You can create new status labels for deployable, pending and archived assets.',
+    'deployable'      	=> 'Einsetzbar',
+    'info'      	=> 'Status Label werden eingesetzt um diverse Stati Ihrer Assets zu beschreiben. Diese können zB. in Reparatur sein, Gestohlen oder Verlohren worden sein. Sie können neue Status Labels für Einsetzbare, Unerledigte und Archivierte Assets erstellen.',
     'name'      	=> 'Statusname',
-    'pending'      	=> 'Pending',
-    'status_type'   => 'Status Type',
+    'pending'      	=> 'Unerledigt',
+    'status_type'   => 'Statustyp',
     'title'      	=> 'Statusbezeichnungen',
-    'undeployable'  => 'Undeployable',
+    'undeployable'  => 'nicht Einsetzbar',
     'update'      	=> 'Statusbezeichnung bearbeiten',
 );

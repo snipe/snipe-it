@@ -2,8 +2,8 @@
 
 return array(
 
-    'undeployable' 		=> '<strong>Warning: </strong> This asset has been marked as currently undeployable.
-                        If this status has changed, please update the asset status.',
+    'undeployable' 		=> '<strong>Achtung:</strong>Dieses Asset wurde kürzlich als nicht verteilbar markiert.
+                        Falls sich dieser Status verändert hat, aktualisieren Sie bitte den Asset Status.',
     'does_not_exist' 	=> 'Asset existiert nicht.',
     'assoc_users'	 	=> 'Dieses Asset ist im Moment an einen Benutzer herausgegeben und kann nicht entfernt werden. Bitte buchen sie das Asset wieder ein und versuchen Sie dann erneut es zu entfernen. ',
 
@@ -13,14 +13,28 @@ return array(
     ),
 
     'update' => array(
-        'error'   		=> 'Asset wurde nicht aktualisiert. Bitte versuchen Sie es erneut',
-        'success' 		=> 'Asset wurde erfolgreich aktualisiert.'
+        'error'   			=> 'Asset wurde nicht aktualisiert. Bitte versuchen Sie es erneut',
+        'success' 			=> 'Asset wurde erfolgreich aktualisiert.',
+        'nothing_updated'	=>  'No fields were selected, so nothing was updated.',
     ),
 
     'restore' => array(
-        'error'   		=> 'Asset was not restored, please try again',
-        'success' 		=> 'Asset restored successfully.'
+        'error'   		=> 'Asset wurde nicht wiederhergestellt, bitte versuchen Sie es noch einmal',
+        'success' 		=> 'Asset erfolgreich wiederhergestellt.'
     ),
+    
+    'deletefile' => array(
+        'error'   => 'File not deleted. Please try again.',
+        'success' => 'File successfully deleted.',
+    ),
+
+    'upload' => array(
+        'error'   => 'File(s) not uploaded. Please try again.',
+        'success' => 'File(s) successfully uploaded.',
+        'nofiles' => 'You did not select any files for upload',
+        'invalidfiles' => 'One or more of your files is too large or is a filetype that is not allowed. Allowed filetypes are png, gif, jpg, doc, docx, pdf, and txt.',
+    ),
+
 
     'delete' => array(
         'confirm'   	=> 'Sind Sie sicher, dass Sie dieses Asset entfernen möchten?',
