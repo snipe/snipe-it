@@ -12,4 +12,9 @@ class Depreciation extends Elegant
     {
         return $this->hasMany('Model', 'depreciation_id')->count();
     }
+
+    public function has_licenses()
+    {
+      return $this->hasMany('License','depreciation_id')->count();
+    }
 }

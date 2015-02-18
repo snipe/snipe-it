@@ -1,11 +1,11 @@
 <?php
 
-class License extends Elegant
+class License extends Depreciable
 {
 	use SoftDeletingTrait;
     protected $dates = ['deleted_at'];
 
-     public $timestamps = true;
+    public $timestamps = true;
 
     protected $guarded = 'id';
     protected $table = 'licenses';
@@ -154,45 +154,5 @@ class License extends Elegant
     public function supplier()
     {
         return $this->belongsTo('Supplier','supplier_id');
-    }
-
-    /**
-     * Get depreciation class
-     */
-    public function depreciation()
-    {
-        return $this->belongsTo('Depreciation','depreciation_id');
-    }
-
-     public function months_until_depreciated()
-    {
-        $today = date("Y-m-d");
-
-        // @link http://www.php.net/manual/en/class.datetime.php
-        $d1 = new DateTime($today);
-        $d2 = new DateTime($this->depreciated_date());
-
-        // @link http://www.php.net/manual/en/class.dateinterval.php
-        $interval = $d1->diff($d2);
-        return $interval;
-    }
-
-     public function depreciated_date()
-    {
-        $date = date_create($this->purchase_date);
-        date_add($date, date_interval_create_from_date_string($this->depreciation->months . ' months'));
-        return date_format($date, 'Y-m-d');
-    }
-
-    /**
-    * Handle depreciation
-    */
-    public function depreciate()
-    {
-        return $this->getCurrentValue(
-            License::find($this->license_id)->depreciation_id,
-            $this->purchase_cost,
-            $this->purchase_date
-        );
     }
 }
