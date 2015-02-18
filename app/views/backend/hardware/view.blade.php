@@ -119,13 +119,13 @@
                 @lang('admin/hardware/form.months')
                 )</div>
             <div class="col-md-12" style="padding-bottom: 5px;"><strong>@lang('admin/hardware/form.fully_depreciated'): </strong>
-            {{{ $asset->months_until_depreciated()->m }}}
-            @lang('admin/hardware/form.months')
-             @if ($asset->months_until_depreciated()->y > 0)
-                , {{{ $asset->months_until_depreciated()->y }}}
-                @lang('admin/hardware/form.years')
+             @if ($asset->time_until_depreciated()->y > 0)
+                {{{ $asset->time_until_depreciated()->y }}}
+                @lang('admin/hardware/form.years'), 
              @endif
-              ({{{ $asset->depreciated_date() }}})
+           {{{ $asset->time_until_depreciated()->m }}}
+            @lang('admin/hardware/form.months')
+               ({{{ $asset->depreciated_date()->format('Y-m-d') }}})
              </div>
         @endif
 

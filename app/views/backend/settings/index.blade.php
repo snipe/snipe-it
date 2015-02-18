@@ -71,6 +71,16 @@
                                             <td>@lang('general.no')</td>
                                         @endif
                                     </tr>
+                                    
+                                    <tr>
+                                        <td>@lang('admin/settings/general.load_remote')</td>
+
+                                        @if ($setting->load_remote == 1)
+                                            <td>@lang('general.yes')</td>
+                                        @else
+                                            <td>@lang('general.no')</td>
+                                        @endif
+                                    </tr>
 
                                     <tr>
                                         <td>@lang('admin/settings/general.auto_increment_prefix')</td>

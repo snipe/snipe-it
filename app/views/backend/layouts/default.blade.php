@@ -41,14 +41,14 @@
         <link rel="stylesheet" href="{{ asset('assets/css/compiled/user-profile.css') }}" type="text/css" media="screen" />
         <link rel="stylesheet" href="{{ asset('assets/css/compiled/form-showcase.css') }}" type="text/css" media="screen" />
         <link rel="stylesheet" href="{{ asset('assets/css/lib/jquery.dataTables.css') }}" type="text/css" media="screen" />
-        <link rel="stylesheet" href="//cdn.datatables.net/responsive/1.0.2/css/dataTables.responsive.css" type="text/css" media="screen" />
+        <link rel="stylesheet" href="{{ asset('assets/css/compiled/dataTables.responsive.css') }}" type="text/css" media="screen" />
 
 
 
         <!-- global header javascripts -->
-        <script src="//code.jquery.com/jquery-latest.js"></script>
-        <script src="//cdn.datatables.net/1.10.3/js/jquery.dataTables.min.js"></script>
-        <script src="//cdn.datatables.net/responsive/1.0.2/js/dataTables.responsive.js"></script>
+        <script src="{{ asset('assets/js/jquery-latest.js') }}"></script>
+        <script src="{{ asset('assets/js/jquery.dataTables.min.js') }}"></script>
+        <script src="{{ asset('assets/js/dataTables.responsive.js') }}"></script>
 
         <script>
             window.snipeit = {
@@ -60,13 +60,15 @@
 
 
 
+		@if (Setting::getSettings()->load_remote=='1')
         <!-- open sans font -->
         <link href='//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+		@endif
 
         <!--[if lt IE 9]>
-          <script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
+          <script src="{{ asset('assets/js/html5.js') }}"></script>
         <![endif]-->
-
+        
         <style>
 
         @section('styles')
@@ -368,7 +370,7 @@
 						  		<a target="_blank" href="http://docs.snipeitapp.com/">Documentation</a> |
 						  		<a href="https://crowdin.com/project/snipe-it">Help Translate It! </a> |
 						  		<a target="_blank" href="https://github.com/snipe/snipe-it/issues?state=open">Report a Bug</a>
-						  		 &nbsp; &nbsp; (v1.2.4)</p>
+						  		 &nbsp; &nbsp; (v1.2.5)</p>
                   	</div>
               </div>
         </div>
