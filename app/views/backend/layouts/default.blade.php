@@ -288,7 +288,14 @@
             </li>
              @endif
              
-              <li><a href="{{ route('requestable-assets') }}" {{{ (Request::is('view-requestable*') ? ' class="active"' : '') }}} >@lang('admin/hardware/general.requestable') </a></li>
+              <li{{ (Request::is('account/requestable-assets') ? ' class="active"><div class="pointer"><div class="arrow"></div><div class="arrow_border"></div></div>' : '>') }}
+                <a href="{{ route('requestable-assets') }}">
+                    <i class="fa fa-laptop"></i>
+                    <span>@lang('admin/hardware/general.requestable')</span>
+                </a>
+            </li>
+            
+            
 
         </ul>
     </div>

@@ -21,6 +21,8 @@ use Sentry;
 use Validator;
 use View;
 use Chumper\Datatable\Facades\Datatable;
+use League\Csv\Reader;
+use Mail;
 
 class UsersController extends AdminController
 {
@@ -149,7 +151,7 @@ class UsersController extends AdminController
             // permissions here before we create the user.
 
             // Get the inputs, with some exceptions
-            $inputs = Input::except('csrf_token', 'password_confirm', 'groups');
+            $inputs = Input::except('csrf_token', 'password_confirm', 'groups','email_user');
 
 			// @TODO: Figure out WTF I need to do this.
             if ($inputs['manager_id']=='') {
@@ -174,6 +176,22 @@ class UsersController extends AdminController
 
                 // Redirect to the new user page
                 //return Redirect::route('update/user', $user->id)->with('success', $success);
+                
+                if (Input::get('email_user')==1) {
+					// Send the credentials through email
+					
+					$data = array();
+					$data['email'] = e(Input::get('email'));
+					$data['first_name'] = e(Input::get('first_name'));
+					$data['password'] = e(Input::get('password'));
+					
+		            Mail::send('emails.send-login', $data, function ($m) use ($user) {
+		                $m->to($user->email, $user->first_name . ' ' . $user->last_name);
+		                $m->subject('Welcome ' . $user->first_name);
+		            });
+				}
+						
+						
                 return Redirect::route('users')->with('success', $success);
             }
 
@@ -601,5 +619,122 @@ class UsersController extends AdminController
             return Redirect::route('users')->with('error', $error);
         }
     }
+    
+    /**
+	 * User import.
+	 *
+	 * @return View
+	 */
+	public function getImport()
+	{
+		// Get all the available groups
+		$groups = Sentry::getGroupProvider()->findAll();
+		// Selected groups
+		$selectedGroups = Input::old('groups', array());
+		// Get all the available permissions
+		$permissions = Config::get('permissions');
+		$this->encodeAllPermissions($permissions);
+		// Selected permissions
+		$selectedPermissions = Input::old('permissions', array('superuser' => -1));
+		$this->encodePermissions($selectedPermissions);
+		// Show the page
+		return View::make('backend/users/import', compact('groups', 'selectedGroups', 'permissions', 'selectedPermissions'));
+	}
+	
+	
+	/**
+	 * User import form processing.
+	 *
+	 * @return Redirect
+	 */
+	public function postImport()
+	{
+		
+		if (! ini_get("auto_detect_line_endings")) {
+			ini_set("auto_detect_line_endings", '1');
+		}
+		
+		$csv = Reader::createFromPath(Input::file('user_import_csv'));	
+		$csv->setNewline("\r\n");
+		
+		if (Input::get('has_header')==1) {
+			$csv->setOffset(1); 
+		}
+		
+		$duplicates = '';	
+		
+		$nbInsert = $csv->each(function ($row) use ($duplicates) {
+			
+			if (Input::get('activate')==1) {
+				$activated = '1'; 
+			} else {
+				$activated = ''; 
+			}
+
+
+			if (Input::get('generate_password')==1) {
+				$pass = substr(str_shuffle("0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"), 0, 10);
+			} else {
+				$pass = '';
+			}
+					
+					
+			try {	
+					// Check if this email already exists in the system
+					$user = DB::table('users')->where('email', $row[2])->first();
+					if ($user) {					
+						$duplicates .= $row[2].', ';
+					} else {
+						
+						$newuser = array(
+							'first_name' => $row[0],
+							'last_name' => $row[1],
+							'email' => $row[2],
+							'password' => $pass,
+							'activated' => $activated,
+							'permissions'	=> '{"user":1}'
+						);
+							
+						DB::table('users')->insert($newuser);
+						
+						$udpateuser = Sentry::findUserByLogin($row[2]);
+
+					    // Update the user details
+					    $udpateuser->password = $pass;
+					
+					    // Update the user
+					    $udpateuser->save();
+    
+						
+						if (Input::get('email_user')==1) {
+							// Send the credentials through email
+							
+							$data = array();
+							$data['email'] = $row[2];
+							$data['first_name'] = $row[0];
+							$data['password'] = $pass;
+							
+				            Mail::send('emails.send-login', $data, function ($m) use ($newuser) {
+				                $m->to($newuser['email'], $newuser['first_name'] . ' ' . $newuser['last_name']);
+				                $m->subject('Welcome ' . $newuser['first_name']);
+				            });
+						}
+					}
+							
+				
+			} catch (Exception $e) {
+				echo 'Caught exception: ',  $e->getMessage(), "\n";
+			}
+			return true;
+			
+			
+		});	
+		
+		return Redirect::route('users')->with('duplicates',$duplicates)->with('success', 'Success');
+		
+	}
+
+    
+    
 
 }

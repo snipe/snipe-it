@@ -186,6 +186,7 @@
                 </div>
                 </div>
             </div>
+            
 
 
             <!-- Groups -->
@@ -211,6 +212,16 @@
                 </div>
                 </div>
             </div>
+            
+            <!-- Email user -->
+			<div class="form-group">
+				<div class="col-sm-3 ">
+				</div>
+				<div class="col-sm-5">
+					{{ Form::checkbox('email_user', '1', Input::old('email_user')) }} Email this user their credentials?
+				</div>
+			</div>
+
 
 
         </div>
