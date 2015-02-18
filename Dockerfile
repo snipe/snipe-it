@@ -11,8 +11,11 @@ php5-mysql \
 patch \
 curl \
 git \
-php5-mcrypt \
-expect
+php5-mcrypt
+
+#expect
+
+# stopped using expect (!)
 
 RUN php5enmod mcrypt
 

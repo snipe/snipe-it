@@ -12,14 +12,20 @@ Figure out what you want for your:
 * MySQL Password for that user
 
 ```sh
-docker run --name mysql -e MYSQL_ROOT_PASSWORD=SUPERDUPERSECRETPASSWORD -e MYSQL_DATABASE=snipeit -e MYSQL_USER=snipeit -e MYSQL_PASSWORD=tinglewingler -d -p $(boot2docker ip):33060:3306 mysql
+docker run --name mysql -e MYSQL_ROOT_PASSWORD=SUPERDUPERSECRETPASSWORD -e MYSQL_DATABASE=snipeit -e MYSQL_USER=snipeit -e MYSQL_PASSWORD=tinglewingler -d -p $(boot2docker ip)::3306 mysql
 ```
 
-That should set you up with your database to use.
+That should set you up with your database to use. (You can also use an environment file using --env-file; see docker run --help for details)
 
 Now you can start your Snipe-IT container -
 ```sh
-docker run -d -p $(boot2docker ip):8000:80 --name="snipeit" --link mysql:mysql snipeit 
+docker run -d -p $(boot2docker ip)::80 --name="snipeit" --link mysql:mysql snipeit 
+```
+
+You can find out what port Snipe-IT is running on with:
+
+```sh
+docker port snipeit
 ```
 
 And finally, you can initialize the application and database like this:
@@ -55,7 +61,25 @@ This already happens-
 When you call ```docker run``` - make sure to mount your own snipe-it directory *over* the /var/www/html directory. Something like:
 
 ```sh
-docker run -v /Path/To/My/snipe-it/checkout:/var/www/html
+docker run -d -v /Path/To/My/snipe-it/checkout:/var/www/html -p $(boot2docker ip)::80  --name="snipeit" --link mysql:mysql snipeit
 ```
 
-Then your local changes to the code will be reflected.
+Then your local changes to the code will be reflected. You will have to re-run ```composer install``` - 
+
+```sh
+docker exec -i -t snipeit composer install
+```
+
+You'll need to copy the docker/database.php file to ```app/config/production/``` , and copy the ```app/config/production/app.example.php to app/config/production/app.php```
+
+And also app:install - 
+
+```sh
+docker exec -i -t snipeit php artisan app:install
+```
+
+And you may still need to generate the key with - 
+
+```sh
+docker exec -i -t snipeit php artisan key:generate --env=production
+```
