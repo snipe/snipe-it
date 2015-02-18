@@ -73,18 +73,18 @@
 
 	<div class="col-md-6" style="padding-bottom: 5px">
 		<strong>@lang('admin/hardware/form.depreciates_on'): </strong>
-		{{{ $license->depreciated_date() }}}
+		{{{ $license->depreciated_date()->format("Y-m-d") }}}
 	</div>
 
 	<div class="col-md-6" style="padding-bottom: 5px">
 		<strong>@lang('admin/hardware/form.fully_depreciated'): </strong>
-		{{{ $license->months_until_depreciated()->m }}}
+        @if ($license->time_until_depreciated()->y > 0)
+            {{{ $license->time_until_depreciated()->y }}}
+            @lang('admin/hardware/form.years'), 
+        @endif
+		{{{ $license->time_until_depreciated()->m }}}
 		@lang('admin/hardware/form.months')
 
-		@if ($license->months_until_depreciated()->y > 0)
-			, {{{ $license->months_until_depreciated()->y }}}
-			@lang('admin/hardware/form.years')
-		@endif
 	 </div>
 @endif
 

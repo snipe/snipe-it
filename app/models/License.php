@@ -1,6 +1,6 @@
 <?php
 
-class License extends Depreciatable
+class License extends Depreciable
 {
 	use SoftDeletingTrait;
     protected $dates = ['deleted_at'];

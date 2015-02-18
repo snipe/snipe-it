@@ -1,14 +1,17 @@
 <?php
 
-class Depreciatable extends Elegant
+class Depreciable extends Elegant
 {
     /**
     * Depreciation Relation, and associated helper methods
     */
 
+    //REQUIRES a purchase_date field
+    //     and a purchase_cost field
+
     public function depreciation()
     {
-        return $this->model->belongsTo('Depreciation','depreciation_id');
+        return $this->belongsTo('Depreciation','depreciation_id');
     }
 
     /**
@@ -28,7 +31,7 @@ class Depreciatable extends Elegant
         }
 
         // fraction of value left
-        $current_value = round(($this->months_until_depreciated() / ($this->depreciation->months)) * $this->purchase_cost, 2);
+        $current_value = round(($this->time_until_depreciated() / ($this->depreciation->months)) * $this->purchase_cost, 2);
 
         if ($current_value < 0) {
             $current_value = 0;
@@ -36,15 +39,19 @@ class Depreciatable extends Elegant
         return $current_value;
     }
 
-    public function months_until_depreciated()
+    public function time_until_depreciated()
     {
         // @link http://www.php.net/manual/en/class.datetime.php
         $d1 = new DateTime();
-        $d2 = new DateTime($this->depreciated_date());
+        $d2 = $this->depreciated_date();
 
         // @link http://www.php.net/manual/en/class.dateinterval.php
         $interval = $d1->diff($d2);
-        return $interval;
+        if(!$interval->invert) {
+            return $interval;
+        } else {
+            return new DateInterval("PT0S"); //null interval (zero seconds from now)
+        }
     }
 
     public function depreciated_date()

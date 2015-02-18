@@ -1,6 +1,6 @@
 <?php
 
-class Asset extends Depreciatable
+class Asset extends Depreciable
 {
 	use SoftDeletingTrait;
     protected $dates = ['deleted_at'];
