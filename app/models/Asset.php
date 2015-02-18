@@ -307,7 +307,7 @@ class Asset extends Depreciable
 
 	public function scopeRequestableAssets($query)
 	{
-		return $query->where('requestable','=',1)->whereNULL('assigned_to')->whereHas('assetstatus',function($query)
+		return $query->where('requestable','=',1)->whereHas('assetstatus',function($query)
 		{
 			$query->where('deployable','=',1)->where('pending','=',0)->where('archived','=',0);
 		});
