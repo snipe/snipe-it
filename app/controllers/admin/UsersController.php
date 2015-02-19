@@ -665,70 +665,73 @@ class UsersController extends AdminController
 		
 		$nbInsert = $csv->each(function ($row) use ($duplicates) {
 			
-			if (Input::get('activate')==1) {
-				$activated = '1'; 
-			} else {
-				$activated = ''; 
-			}
-
-
-			if (Input::get('generate_password')==1) {
-				$pass = substr(str_shuffle("0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"), 0, 10);
-			} else {
-				$pass = '';
-			}
-					
-					
-			try {	
-					// Check if this email already exists in the system
-					$user = DB::table('users')->where('email', $row[2])->first();
-					if ($user) {					
-						$duplicates .= $row[2].', ';
-					} else {
+			if (array_key_exists(2, $row)) {
+			
+				if (Input::get('activate')==1) {
+					$activated = '1'; 
+				} else {
+					$activated = ''; 
+				}
+	
+	
+				if (Input::get('generate_password')==1) {
+					$pass = substr(str_shuffle("0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"), 0, 10);
+				} else {
+					$pass = '';
+				}
 						
-						$newuser = array(
-							'first_name' => $row[0],
-							'last_name' => $row[1],
-							'email' => $row[2],
-							'password' => $pass,
-							'activated' => $activated,
-							'permissions'	=> '{"user":1}'
-						);
-							
-						DB::table('users')->insert($newuser);
 						
-						$udpateuser = Sentry::findUserByLogin($row[2]);
-
-					    // Update the user details
-					    $udpateuser->password = $pass;
-					
-					    // Update the user
-					    $udpateuser->save();
-    
+				try {	
+						// Check if this email already exists in the system
+						$user = DB::table('users')->where('email', $row[2])->first();
+						if ($user) {					
+							$duplicates .= $row[2].', ';
+						} else {
+							
+							$newuser = array(
+								'first_name' => $row[0],
+								'last_name' => $row[1],
+								'email' => $row[2],
+								'password' => $pass,
+								'activated' => $activated,
+								'permissions'	=> '{"user":1}'
+							);
+								
+							DB::table('users')->insert($newuser);
+							
+							$udpateuser = Sentry::findUserByLogin($row[2]);
+	
+						    // Update the user details
+						    $udpateuser->password = $pass;
 						
-						if (Input::get('email_user')==1) {
-							// Send the credentials through email
+						    // Update the user
+						    $udpateuser->save();
+	    
 							
-							$data = array();
-							$data['email'] = $row[2];
-							$data['first_name'] = $row[0];
-							$data['password'] = $pass;
-							
-				            Mail::send('emails.send-login', $data, function ($m) use ($newuser) {
-				                $m->to($newuser['email'], $newuser['first_name'] . ' ' . $newuser['last_name']);
-				                $m->subject('Welcome ' . $newuser['first_name']);
-				            });
+							if (Input::get('email_user')==1) {
+								// Send the credentials through email
+								
+								$data = array();
+								$data['email'] = $row[2];
+								$data['first_name'] = $row[0];
+								$data['password'] = $pass;
+								
+					            Mail::send('emails.send-login', $data, function ($m) use ($newuser) {
+					                $m->to($newuser['email'], $newuser['first_name'] . ' ' . $newuser['last_name']);
+					                $m->subject('Welcome ' . $newuser['first_name']);
+					            });
+							}
 						}
-					}
-							
-				
-			} catch (Exception $e) {
-				echo 'Caught exception: ',  $e->getMessage(), "\n";
+								
+					
+				} catch (Exception $e) {
+					echo 'Caught exception: ',  $e->getMessage(), "\n";
+				}
+				return true;
 			}
-			return true;
-			
-			
+				
 		});	
+		
 		
 		return Redirect::route('users')->with('duplicates',$duplicates)->with('success', 'Success');
 		
