@@ -44,8 +44,7 @@ padding: 0px 20px;
                         <div class="profile-box">
                             <br>
 
-
-                            <form class="form-horizontal" method="post" action="" autocomplete="off" role="form">
+							{{ Form::open(['method' => 'POST', 'files' => true, 'class' => 'form-horizontal', 'role' => 'form' ]) }}
                                 <!-- CSRF Token -->
                                 {{ Form::hidden('_token', csrf_token()) }}
 
@@ -56,6 +55,22 @@ padding: 0px 20px;
                                         {{ Form::label('site_name', Lang::get('admin/settings/general.site_name')) }}
 										{{ Form::text('site_name', Input::old('site_name', $setting->site_name), array('class' => 'form-control')) }}
 										{{ $errors->first('site_name', '<span class="help-inline">:message</span>') }}
+                                    </div>
+                                    
+                                    <div class="form-group {{ $errors->has('logo') ? 'has-error' : '' }}">
+						                <label class="control-label" for="logo">@lang('admin/settings/general.logo')</label>
+						             
+						                    {{ Form::file('logo') }}
+						                    {{ $errors->first('logo', '<span class="alert-msg">:message</span>') }}
+						                    {{ Form::checkbox('clear_logo', '1', Input::old('clear_logo')) }} Remove
+
+						                
+						            </div>
+
+									<div class="form-group {{ $errors->has('header_color') ? 'error' : '' }}">
+                                        {{ Form::label('header_color', Lang::get('admin/settings/general.header_color')) }}
+										{{ Form::text('header_color', Input::old('header_color', $setting->header_color), array('class' => 'form-control', 'style' => 'width: 100px;')) }}
+										{{ $errors->first('header_color', '<span class="help-inline">:message</span>') }}
                                     </div>
 
 									 <div class="form-group {{ $errors->has('per_page') ? 'error' : '' }}">

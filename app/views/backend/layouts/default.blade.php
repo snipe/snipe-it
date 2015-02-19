@@ -78,6 +78,14 @@
 
         @show
 
+		@if (Setting::getSettings()->header_color)
+			.navbar-inverse {
+				background-color: {{{ Setting::getSettings()->header_color }}};		
+				background: -webkit-linear-gradient(top,  {{{ Setting::getSettings()->header_color }}} 0%,{{{ Setting::getSettings()->header_color }}} 100%);	
+				border-color: {{{ Setting::getSettings()->header_color }}};
+			}
+		@endif
+		
         </style>
 
 
@@ -100,7 +108,18 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="/">{{{ Setting::getSettings()->site_name }}}</a>
+            
+	            
+	            @if (Setting::getSettings()->logo)
+	            	<a class="navbar-brand" href="/" style="padding: 5px;">
+	            	<img src="/uploads/{{{ Setting::getSettings()->logo }}}">
+	            	</a>
+	            @else
+	            	<a class="navbar-brand" href="/">
+	            	{{{ Setting::getSettings()->site_name }}}
+	            	</a>
+	            @endif
+	            
         </div>
 
         <ul class="nav navbar-nav navbar-right">
