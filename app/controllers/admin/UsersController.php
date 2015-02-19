@@ -657,7 +657,7 @@ class UsersController extends AdminController
 		$csv = Reader::createFromPath(Input::file('user_import_csv'));	
 		$csv->setNewline("\r\n");
 		
-		if (Input::get('has_header')==1) {
+		if (Input::get('has_headers')==1) {
 			$csv->setOffset(1); 
 		}
 		
