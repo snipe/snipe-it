@@ -18,3 +18,5 @@ public/uploads/avatars/*
 /bin/
 .idea
 crowdin.yaml
+public/uploads/logo.gif
+public/uploads/logo.png
