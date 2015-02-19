@@ -30,6 +30,15 @@
                                         <td>@lang('admin/settings/general.site_name')</td>
                                         <td>{{{ $setting->site_name }}} </td>
                                     </tr>
+                                     <tr>
+                                        <td>@lang('admin/settings/general.header_color')</td>
+
+                                        @if ($setting->header_color)
+                                            <td>{{ $setting->header_color }}</td>
+                                        @else
+                                            <td>default</td>
+                                        @endif
+                                    </tr>
                                     <tr>
                                         <td>@lang('admin/settings/general.display_asset_name')</td>
 

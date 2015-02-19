@@ -78,6 +78,14 @@
 
         @show
 
+		@if (Setting::getSettings()->header_color)
+			.navbar-inverse {
+				background-color: {{{ Setting::getSettings()->header_color }}};		
+				background: -webkit-linear-gradient(top,  {{{ Setting::getSettings()->header_color }}} 0%,{{{ Setting::getSettings()->header_color }}} 100%);	
+				border-color: {{{ Setting::getSettings()->header_color }}};
+			}
+		@endif
+		
         </style>
 
 
@@ -100,7 +108,18 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="/">{{{ Setting::getSettings()->site_name }}}</a>
+            
+	            
+	            @if (Setting::getSettings()->logo)
+	            	<a class="navbar-brand" href="/" style="padding: 5px;">
+	            	<img src="/uploads/{{{ Setting::getSettings()->logo }}}">
+	            	</a>
+	            @else
+	            	<a class="navbar-brand" href="/">
+	            	{{{ Setting::getSettings()->site_name }}}
+	            	</a>
+	            @endif
+	            
         </div>
 
         <ul class="nav navbar-nav navbar-right">
@@ -288,7 +307,14 @@
             </li>
              @endif
              
-              <li><a href="{{ route('requestable-assets') }}" {{{ (Request::is('view-requestable*') ? ' class="active"' : '') }}} >@lang('admin/hardware/general.requestable') </a></li>
+              <li{{ (Request::is('account/requestable-assets') ? ' class="active"><div class="pointer"><div class="arrow"></div><div class="arrow_border"></div></div>' : '>') }}
+                <a href="{{ route('requestable-assets') }}">
+                    <i class="fa fa-laptop"></i>
+                    <span>@lang('admin/hardware/general.requestable')</span>
+                </a>
+            </li>
+            
+            
 
         </ul>
     </div>

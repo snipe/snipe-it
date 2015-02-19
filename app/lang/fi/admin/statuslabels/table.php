@@ -2,14 +2,14 @@
 
 return array(
     'about'      	=> 'Lisätietoja Tilamerkinnöistä',
-    'archived'      	=> 'Archived',
+    'archived'      	=> 'Arkistoitu',
     'create'      	=> 'Uusi Tilamerkintä',
-    'deployable'      	=> 'Deployable',
-    'info'      	=> 'Status labels are used to describe the various states your assets could be in. They may be out for repair, lost/stolen, etc. You can create new status labels for deployable, pending and archived assets.',
+    'deployable'      	=> 'Käyttööotettavissa',
+    'info'      	=> 'Tilamerkintöjä käytetään kuvailemaan laitteidesi eri tiloja. Ne voivat olla korjauksessa, hävinneitä/varastettuja jne. Voit luoa uusia tilamerkintöjä käyttöönotettaville, odottaville sekä arkistoiduille laitteille.',
     'name'      	=> 'Tilan Nimi',
-    'pending'      	=> 'Pending',
-    'status_type'   => 'Status Type',
+    'pending'      	=> 'Odottaa',
+    'status_type'   => 'Tilatyyppi',
     'title'      	=> 'Tilamerkinnät',
-    'undeployable'  => 'Undeployable',
+    'undeployable'  => 'Käyttökelvoton',
     'update'      	=> 'Päivitä Tilamerkinnät',
 );

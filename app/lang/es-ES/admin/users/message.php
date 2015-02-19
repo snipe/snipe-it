@@ -18,14 +18,16 @@ return array(
         'unban'     => 'Usuario correctamente desbloqueado.',
         'suspend'   => 'Usuario correctamente suspendido.',
         'unsuspend' => 'Usuario correctamente no suspendido.',
-        'restored'  => 'Usuario correctamente restaurado.'
+        'restored'  => 'Usuario correctamente restaurado.',
++       'import'    => 'Users imported successfully.',
     ),
 
     'error' => array(
         'create' => 'Ha habido un problema creando el Usuario. Intentalo de nuevo.',
         'update' => 'Ha habido un problema actualizando el Usuario. Intentalo de nuevo.',
         'delete' => 'Ha habido un problema eliminando el  Usuario. Intentalo de nuevo.',
-        'unsuspend' => 'Ha habido un problema marcando como no suspendido el Usuario. Intentalo de nuevo.'
+        'unsuspend' => 'Ha habido un problema marcando como no suspendido el Usuario. Intentalo de nuevo.',
+        'import'    => 'There was an issue importing users. Please try again.',
     ),
 
 );

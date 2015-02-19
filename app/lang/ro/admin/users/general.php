@@ -11,4 +11,5 @@ return array(
     'last_login'  		=> 'Ultima logare',
     'software_user'  	=> 'Software predat catre :name',
     'view_user'  		=> 'Vezi utilizator :name',
+    'usercsv'			=> 'CSV file',
     );

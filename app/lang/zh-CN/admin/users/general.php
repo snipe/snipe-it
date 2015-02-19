@@ -11,4 +11,5 @@ return array(
     'last_login'  		=> '上一次登陆',
     'software_user'  	=> ':name 借走的软件',
     'view_user'  		=> '查看用户： :name',
+    'usercsv'			=> 'CSV file',
     );

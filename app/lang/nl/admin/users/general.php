@@ -11,4 +11,5 @@ return array(
     'last_login'  		=> 'Laatst aangemeld',
     'software_user'  	=> 'Software toegekend aan :name',
     'view_user'  		=> 'Bekijk gebruiker :name',
+    'usercsv'			=> 'CSV file',
     );

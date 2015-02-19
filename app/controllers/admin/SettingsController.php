@@ -10,6 +10,7 @@ use Sentry;
 use Str;
 use Validator;
 use View;
+use Image;
 
 class SettingsController extends AdminController
 {
@@ -65,7 +66,8 @@ class SettingsController extends AdminController
         $rules = array(
         "site_name" 	=> 'required|min:3',
         "per_page"   		=> 'required|min:1|numeric',
-        "qr_text"		=> 'min:1|max:31'
+        "qr_text"		=> 'min:1|max:31',
+        "logo"   		=> 'mimes:jpeg,bmp,png,gif',
         );
 
         // Create a new validator instance from our validation rules
@@ -77,6 +79,20 @@ class SettingsController extends AdminController
             // Ooops.. something went wrong
             return Redirect::back()->withInput()->withErrors($validator);
         }
+        
+        if (Input::get('clear_logo')=='1') {
+	        $setting->logo = NULL;
+        } elseif (Input::file('logo')) {
+                $image = Input::file('logo');
+                $file_name = "logo.".$image->getClientOriginalExtension();
+                $path = public_path('uploads/'.$file_name);
+                Image::make($image->getRealPath())->resize(null, 40, function ($constraint) {
+                    $constraint->aspectRatio();
+                    $constraint->upsize();
+                })->save($path);
+                $setting->logo = $file_name;
+        }
+            
 
         // Update the asset data
             $setting->id = '1';
@@ -90,6 +106,8 @@ class SettingsController extends AdminController
             $setting->qr_text = e(Input::get('qr_text'));
             $setting->auto_increment_prefix = e(Input::get('auto_increment_prefix'));
             $setting->auto_increment_assets = e(Input::get('auto_increment_assets', '0'));
+            $setting->header_color = e(Input::get('header_color'));
+            
 
             // Was the asset updated?
             if($setting->save()) {

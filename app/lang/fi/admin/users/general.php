@@ -11,4 +11,5 @@ return array(
     'last_login'  		=> 'Viimeisin kirjautuminen',
     'software_user'  	=> 'Käyttäjälle :name luovutetut ohjelmistot',
     'view_user'  		=> 'Näytä Käyttäjä :name',
+    'usercsv'			=> 'CSV file',
     );

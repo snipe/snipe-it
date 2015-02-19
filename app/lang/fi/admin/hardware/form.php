@@ -2,9 +2,9 @@
 
 return array(
 
-	'bulk_update'		=> 'Bulk Update Assets',
-	'bulk_update_help'	=> 'This form allows you to update multiple assets at once. Only fill in the fields you need to change. Any fields left blank will remain unchanged. ',
-	'bulk_update_warn'	=> 'You are about to edit the properties of :asset_count assets.',
+	'bulk_update'		=> 'Massapäivitä Laitteita',
+	'bulk_update_help'	=> 'Tämän lomakkeen avulla voit päivittää useita laitteita kerralla. Täytä vain ne kentät joita haluat muuttaa. Tyhjäksi jätetyt kenttyihin kenttiä ei päivitetä. ',
+	'bulk_update_warn'	=> 'Olet päivittämässä :asset_count laitteen ominaisuuksia.',
     'checkedout_to'		=> 'Jotka Luovutettuna Käyttäjälle',
     'checkout_to'		=> 'Luovuta Käyttäjälle',
     'cost'				=> 'Ostohinta',
@@ -18,7 +18,7 @@ return array(
     'expires'			=> 'Vanhenee',
     'fully_depreciated'	=> 'Kokonaan Poistettu',
     'help_checkout'		=> 'Jos haluat määrittää laitteen käyttöön jollekulle samantien, sinun tulee valita laitteen tilaksi "luovutusvalmis" tai järjestelmä saattaa toimia odottamattomasti. ',
-    'mac_address'		=> 'MAC Address',
+    'mac_address'		=> 'MAC-osoite',
     'manufacturer'		=> 'Valmistaja',
     'model'				=> 'Malli',
     'months'			=> 'kuukautta',
@@ -27,7 +27,7 @@ return array(
     'order'				=> 'Tilausnumero',
     'qr'				=> 'QR-koodi',
     'requestable'		=> 'Käyttäjät voivat pyytää tätä laitetta',
-    'select_statustype'	=> 'Select Status Type',
+    'select_statustype'	=> 'Valitse Tilan Tyyppi',
     'serial'			=> 'Sarjanumero',
     'status'			=> 'Tila',
     'supplier'			=> 'Toimittaja',

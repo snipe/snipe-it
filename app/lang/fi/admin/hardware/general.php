@@ -1,17 +1,17 @@
 <?php
 
 return array(
-	'archived'  				=> 'Archived',
+	'archived'  				=> 'Arkistoitu',
     'asset'  					=> 'Laite',
     'checkin'  					=> 'Palauta Laite',
     'checkout'  				=> 'Luovuta Laite Käyttäjälle',
     'clone'  					=> 'Monista Laite',
-    'deployable'  				=> 'Deployable',
-    'deleted'  					=> 'This asset has been deleted. <a href="/hardware/:asset_id/restore">Click here to restore it</a>.',
+    'deployable'  				=> 'Käyttööotettavissa',
+    'deleted'  					=> 'Tämä laite on poistettu. <a href="/hardware/:asset_id/restore">Klikkaa tästä palauttaaksesi sen</a>.',
     'edit'  					=> 'Muokkaa Laitetta',
-    'requestable'				=> 'Requestable',
-    'restore'  					=> 'Restore Asset',
-    'pending'  					=> 'Pending',
-    'undeployable'  			=> 'Undeployable',
+    'requestable'				=> 'Pyydettävissä',
+    'restore'  					=> 'Palauta Laite',
+    'pending'  					=> 'Odottaa',
+    'undeployable'  			=> 'Käyttökelvoton',
     'view'  					=> 'Näytä Laite',
 );

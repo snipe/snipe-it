@@ -18,14 +18,16 @@ return array(
         'unban'     => 'Benutzer wurde erfolgreich wieder eingeschlossen.',
         'suspend'   => 'Der Benutzer wurde erfolgreich deaktiviert.',
         'unsuspend' => 'Der Benutzer wurde erfolgreich reaktiviert.',
-        'restored'  => 'Benutzer wurde erfolgreich wiederhergestellt.'
+        'restored'  => 'Benutzer wurde erfolgreich wiederhergestellt.',
++       'import'    => 'Users imported successfully.',
     ),
 
     'error' => array(
         'create' => 'Beim Erstellen des Benutzers ist ein Fehler aufgetreten. Bitte probieren Sie es noch einmal.',
         'update' => 'Beim Aktualisieren des Benutzers ist ein Fehler aufgetreten. Bitte probieren Sie es noch einmal.',
         'delete' => 'Beim Entfernen des Benutzers ist ein Fehler aufgetreten. Bitte versuchen Sie es erneut.',
-        'unsuspend' => 'Es gab ein Problem beim reaktivieren des Benutzers. Bitte versuche es erneut.'
+        'unsuspend' => 'Es gab ein Problem beim reaktivieren des Benutzers. Bitte versuche es erneut.',
+        'import'    => 'There was an issue importing users. Please try again.',
     ),
 
 );

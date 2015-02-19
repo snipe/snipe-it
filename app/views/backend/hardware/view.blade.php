@@ -326,8 +326,9 @@
                 <img src="{{{ $qr_code->url }}}" />
             </p>
             @endif
-
-            @if ((isset($asset->assigneduser) && ($asset->assigned_to > 0)) && ($asset->deleted_at==''))
+			
+			
+            @if (($asset->assigneduser) && ($asset->assigned_to > 0) && ($asset->deleted_at==''))
                 <h6><br>@lang('admin/hardware/form.checkedout_to')</h6>
                 <ul>
 
@@ -355,7 +356,6 @@
                     @endif
 
 
-                    <li><br /><a href="{{ route('checkin/hardware', $asset->id) }}" class="btn-flat large info ">@lang('admin/hardware/general.checkin')</a></li>
                     </ul>
 
 			 @endif
@@ -368,10 +368,11 @@
                     @lang('admin/hardware/general.asset')</h6>
 
                     <ul>
+	                    
                     	 @if (($asset->assetstatus->deployable=='1') && ($asset->assigned_to > 0) && ($asset->deleted_at==''))
-                    	<li><br /><a href="{{ route('checkin/hardware', $asset->id) }}" class="btn-flat large info ">@lang('admin/hardware/general.checkin')</a></li>
+                    	<li><br /><a href="{{ route('checkin/hardware', $asset->id) }}" class="btn btn-primary">@lang('admin/hardware/general.checkin')</a></li>
                     	@elseif ((($asset->assetstatus->deployable=='1') &&  (($asset->assigned_to=='') || ($asset->assigned_to==0))) && ($asset->deleted_at==''))
-                    	<li><br /><a href="{{ route('checkout/hardware', $asset->id) }}" class="btn-flat large info ">@lang('admin/hardware/general.checkout')</a></li>
+                    	<li><br /><a href="{{ route('checkout/hardware', $asset->id) }}" class="btn btn-info">@lang('admin/hardware/general.checkout')</a></li>
 						@elseif  ($asset->deleted_at!='')
 
 						<li><br /><a href="{{ route('restore/hardware', $asset->id) }}" class="btn-flat large info ">@lang('admin/hardware/general.restore')</a></li>

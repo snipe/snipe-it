@@ -15,7 +15,7 @@ return array(
     'update' => array(
         'error'   			=> 'Asset wurde nicht aktualisiert. Bitte versuchen Sie es erneut',
         'success' 			=> 'Asset wurde erfolgreich aktualisiert.',
-        'nothing_updated'	=>  'No fields were selected, so nothing was updated.',
+        'nothing_updated'	=>  'Es wurden keine Felder ausgewählt, somit wurde auch nichts aktualisiert.',
     ),
 
     'restore' => array(
@@ -24,15 +24,15 @@ return array(
     ),
     
     'deletefile' => array(
-        'error'   => 'File not deleted. Please try again.',
-        'success' => 'File successfully deleted.',
+        'error'   => 'Datei wurde nicht gelöscht. Bitte noch einmal Probieren.',
+        'success' => 'Datei erfolgreich gelöscht.',
     ),
 
     'upload' => array(
-        'error'   => 'File(s) not uploaded. Please try again.',
-        'success' => 'File(s) successfully uploaded.',
-        'nofiles' => 'You did not select any files for upload',
-        'invalidfiles' => 'One or more of your files is too large or is a filetype that is not allowed. Allowed filetypes are png, gif, jpg, doc, docx, pdf, and txt.',
+        'error'   => 'Datei(en) wurde nicht hochgeladen. Bitte noch einmal Probieren.',
+        'success' => 'Datei(en) erfolgreich hochgeladen.',
+        'nofiles' => 'Sie haben keine Datei zum hochladen ausgewählt',
+        'invalidfiles' => 'Eine oder mehrere Ihrer Dateien ist zu groß oder deren Dateityp ist nicht zugelassen. Zugelassene Dateitypen sind png, gif, jpg, doc, docx, pdf, und txt.',
     ),
 
 

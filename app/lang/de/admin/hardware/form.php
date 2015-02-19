@@ -2,9 +2,9 @@
 
 return array(
 
-	'bulk_update'		=> 'Bulk Update Assets',
-	'bulk_update_help'	=> 'This form allows you to update multiple assets at once. Only fill in the fields you need to change. Any fields left blank will remain unchanged. ',
-	'bulk_update_warn'	=> 'You are about to edit the properties of :asset_count assets.',
+	'bulk_update'		=> 'Massenaktualisierung von Assets',
+	'bulk_update_help'	=> 'Diese Eingabemaske erlaubt Ihnen die Aktualisierung von mehrere Assets zugleich. Füllen Sie die Felder aus welche Sie ändern möchten. Alle leeren Felder bleiben unverändert. ',
+	'bulk_update_warn'	=> 'Sie sind dabei die Eigenschaften von :asset_count assets zu bearbeiten.',
     'checkedout_to'		=> 'Herausgegeben an',
     'checkout_to'		=> 'Herausgeben an',
     'cost'				=> 'Einkaufspreis',

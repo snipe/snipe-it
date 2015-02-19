@@ -182,17 +182,11 @@ class Asset extends Depreciable
     {
         $settings = Setting::getSettings();
 
-        if (isset($asset_tag->id)) {
-        	$asset_id = $asset_tag->id;
-        } else {
-        	$asset_id = 1;
-        }
 		if ($settings->auto_increment_assets == '1') {
 			$asset_tag = DB::table('assets')
-                    ->where('physical', '=', '1')
-                    ->orderBy('created_at','desc')
-                    ->first();
-			return $settings->auto_increment_prefix.($asset_tag->id + 1);
+				->where('physical', '=', '1')
+				->max('id');
+			return $settings->auto_increment_prefix.($asset_tag + 1);
 		} else {
 			return false;
 		}
@@ -307,7 +301,7 @@ class Asset extends Depreciable
 
 	public function scopeRequestableAssets($query)
 	{
-		return $query->where('requestable','=',1)->whereNULL('assigned_to')->whereHas('assetstatus',function($query)
+		return $query->where('requestable','=',1)->whereHas('assetstatus',function($query)
 		{
 			$query->where('deployable','=',1)->where('pending','=',0)->where('archived','=',0);
 		});

@@ -15,7 +15,7 @@ return array(
     'update' => array(
         'error'   			=> 'Eiendelen ble ikke oppdatert, prøv igjen',
         'success' 			=> 'Oppdatering av eiendel vellykket.',
-        'nothing_updated'	=>  'No fields were selected, so nothing was updated.',
+        'nothing_updated'	=>  'Ingen felter er valgt, så ingenting ble endret.',
     ),
 
     'restore' => array(
@@ -24,15 +24,15 @@ return array(
     ),
     
     'deletefile' => array(
-        'error'   => 'File not deleted. Please try again.',
-        'success' => 'File successfully deleted.',
+        'error'   => 'Fil ble ikke slettet. Prøv igjen.',
+        'success' => 'Vellykket sletting av fil.',
     ),
 
     'upload' => array(
-        'error'   => 'File(s) not uploaded. Please try again.',
-        'success' => 'File(s) successfully uploaded.',
-        'nofiles' => 'You did not select any files for upload',
-        'invalidfiles' => 'One or more of your files is too large or is a filetype that is not allowed. Allowed filetypes are png, gif, jpg, doc, docx, pdf, and txt.',
+        'error'   => 'Fil(er) ble ikke lastet opp. Prøv igjen.',
+        'success' => 'Vellykket opplasting av fil(er).',
+        'nofiles' => 'Du valgte ingen filer for opplasting',
+        'invalidfiles' => 'En eller flere av filene dine er for store eller av en ikke tillatt filtype. Tillatte filtyper er png, gif, jpg, doc, docx, pdf og txt.',
     ),
 
 

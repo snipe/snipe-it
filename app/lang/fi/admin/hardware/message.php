@@ -2,8 +2,8 @@
 
 return array(
 
-    'undeployable' 		=> '<strong>Warning: </strong> This asset has been marked as currently undeployable.
-                        If this status has changed, please update the asset status.',
+    'undeployable' 		=> '<strong>Varoitus: </strong> Tämä laite on määritetty käyttökunnottomaksi.
+                        Jos laitteen tila on muuttunut, päivitä laitteen tila sen asetuksista.',
     'does_not_exist' 	=> 'Laitetta ei löydy.',
     'assoc_users'	 	=> 'Tämä laite on luovutettu käyttäjälle joten sitä ei voida poistaa. Palauta laite ensin käyttäjältä ja yritä uudelleen. ',
 
@@ -15,24 +15,24 @@ return array(
     'update' => array(
         'error'   			=> 'Laitetta ei päivitetty, yritä uudelleen',
         'success' 			=> 'Laite päivitetty onnistuneesti.',
-        'nothing_updated'	=>  'No fields were selected, so nothing was updated.',
+        'nothing_updated'	=>  'Mitään kenttiä ei valittu, joten mitään ei päivitetty.',
     ),
 
     'restore' => array(
-        'error'   		=> 'Asset was not restored, please try again',
-        'success' 		=> 'Asset restored successfully.'
+        'error'   		=> 'Laitetta ei palautettu, ole hyvä ja yritä uudelleen',
+        'success' 		=> 'Laite palautettiin onnistuneesti.'
     ),
     
     'deletefile' => array(
-        'error'   => 'File not deleted. Please try again.',
-        'success' => 'File successfully deleted.',
+        'error'   => 'Tiedostoa ei poistettu. Ole hyvä ja yritä uudelleen.',
+        'success' => 'Tiedosto poistettiin onnistuneesti.',
     ),
 
     'upload' => array(
-        'error'   => 'File(s) not uploaded. Please try again.',
-        'success' => 'File(s) successfully uploaded.',
-        'nofiles' => 'You did not select any files for upload',
-        'invalidfiles' => 'One or more of your files is too large or is a filetype that is not allowed. Allowed filetypes are png, gif, jpg, doc, docx, pdf, and txt.',
+        'error'   => 'Tiedostoja ei lähetetty. Ole hyvä ja yritä uudelleen.',
+        'success' => 'Tiedostot lähetettiin onnistuneesti.',
+        'nofiles' => 'Et valinnut yhtään tiedostoa lähetettäväksi',
+        'invalidfiles' => 'Yksi tai useampia tiedostoja on liian iso tai sen tiedostotyyppi ei ole sallittu. Sallitut tiedostotyypit ovat png, gif, jpg, doc, docx, pdf, ja txt.',
     ),
 
 

@@ -1,16 +1,16 @@
 <?php
 
 return array(
-	'auto_increment_assets'		=> 'Generate auto-incrementing asset IDs',
-	'auto_increment_prefix'		=> 'Prefix (optional)',
-	'auti_incrementing_help'    => 'Enable auto-incrementing asset IDs first to set this',
+	'auto_increment_assets'		=> 'Luo automaattisesti kasvavat laite-ID:t',
+	'auto_increment_prefix'		=> 'Etuliite (valinnainen)',
+	'auti_incrementing_help'    => 'Ota ensin käyttöön automaattisesti kasvavat laite ID:t valitaksesi tämän',
     'display_asset_name'        => 'Näytä laitteen nimi listauksessa',
     'display_checkout_date'     => 'Näytä luovutuspäivämäärä listauksessa',
     'display_eol'               => 'Näytä elinaika listauksessa',
     'display_qr'                => 'Näytä QR-koodit laitteen tiedoissa',
     'info'                      => 'Näiden asetusten avulla voit mukauttaa tiettyjä toimintoja.',
     'laravel'                   => 'Versio Laravel',
-    'load_remote'				=> 'This Snipe-IT install can load scripts from the outside world.',
+    'load_remote'				=> 'Tämä Snipe-IT asennus voi ladata scriptejä ulkopuolisesta maailmasta.',
     'per_page'                  => 'Tuloksia Per Sivu',
     'php'                       => 'Versio PHP',
     'php_gd_info'               => 'Sinun tulee asentaa php-gd paketti näyttääksesi QR-koodit, katso lisätietoja asennusohjeista.',

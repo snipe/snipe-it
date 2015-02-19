@@ -2,7 +2,7 @@
 
 return array(
 
-    'does_not_exist' => 'Location does not exist.',
+    'does_not_exist' => 'Lokalizacja nie istnieje.',
     'assoc_users'	 => 'This location is currently associated with at least one user and cannot be deleted. Please update your users to no longer reference this location and try again. ',
 
 

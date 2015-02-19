@@ -193,6 +193,8 @@ Route::group(array('prefix' => 'admin', 'before' => 'admin-auth', 'namespace' =>
         Route::get('/', array('as' => 'users', 'uses' => 'UsersController@getIndex'));
         Route::get('create', array('as' => 'create/user', 'uses' => 'UsersController@getCreate'));
         Route::post('create', 'UsersController@postCreate');
+        Route::get('import', array('as' => 'import/user', 'uses' => 'UsersController@getImport'));
+        Route::post('import', 'UsersController@postImport');
         Route::get('{userId}/edit', array('as' => 'update/user', 'uses' => 'UsersController@getEdit'));
         Route::post('{userId}/edit', 'UsersController@postEdit');
         Route::get('{userId}/clone', array('as' => 'clone/user', 'uses' => 'UsersController@getClone'));

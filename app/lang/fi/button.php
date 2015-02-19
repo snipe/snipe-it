@@ -3,12 +3,12 @@
 return array(
 
     'actions' 	=> 'Toiminnot',
-    'add'    	=> 'Add New',
-    'cancel'    => 'Cancel',
+    'add'    	=> 'Lisää uusi',
+    'cancel'    => 'Peruuta',
     'delete'  	=> 'Poista',
     'edit'    	=> 'Muokkaa',
     'restore' 	=> 'Palauta',
     'submit'  	=> 'Lähetä',
-    'upload'    => 'Upload',
+    'upload'    => 'Lähetä',
 
 );

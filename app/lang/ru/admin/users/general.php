@@ -11,4 +11,5 @@ return array(
     'last_login'  		=> 'Последний вход',
     'software_user'  	=> 'Программное обеспечение привязано к :name',
     'view_user'  		=> 'Показать пользователя :name',
+    'usercsv'			=> 'CSV file',
     );

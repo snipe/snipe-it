@@ -2,6 +2,6 @@
 
 return array(
 
-	'show_mac_address'			=> 'Show MAC address field in assets in this model',
+	'show_mac_address'			=> 'Näytä MAC-osoitekenttä tämän mallin laitteille',
 
 );

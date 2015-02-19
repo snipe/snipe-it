@@ -23,7 +23,8 @@
 		"barryvdh/laravel-debugbar": "1.x",
 		"chumper/datatable": "dev-master",
 		"bacon/bacon-qr-code": "dev-master",
-		"intervention/image": "dev-master"
+		"intervention/image": "dev-master",
+		"league/csv": "~7.0"
 	},
 	"require-dev": {
 		"phpunit/phpunit": "*",

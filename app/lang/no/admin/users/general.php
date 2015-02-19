@@ -11,4 +11,5 @@ return array(
     'last_login'  		=> 'Siste innlogging',
     'software_user'  	=> 'Programvare utsjekket til :name',
     'view_user'  		=> 'Vis bruker :name',
+    'usercsv'			=> 'CSV file',
     );

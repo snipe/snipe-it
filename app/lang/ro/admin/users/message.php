@@ -18,14 +18,16 @@ return array(
         'unban'     => 'Utilizatorul a fost debanat.',
         'suspend'   => 'Utilizatorul a fost suspendat.',
         'unsuspend' => 'Utilizatorul a fost activat.',
-        'restored'  => 'Utilizatorul a fost restaurat.'
+        'restored'  => 'Utilizatorul a fost restaurat.',
++       'import'    => 'Users imported successfully.',
     ),
 
     'error' => array(
         'create' => 'A aparut o problema la crearea utilizatorului. Incercati iar.',
         'update' => 'A aparut o problema la actualizarea utilizatorului. Incercati iar.',
         'delete' => 'A aparut o problema la stergerea utilizatorului. Incercati iar.',
-        'unsuspend' => 'A aparut o problema la reactivarea utilizatorului. Incercati iar.'
+        'unsuspend' => 'A aparut o problema la reactivarea utilizatorului. Incercati iar.',
+        'import'    => 'There was an issue importing users. Please try again.',
     ),
 
 );

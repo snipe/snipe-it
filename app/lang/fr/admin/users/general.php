@@ -11,4 +11,5 @@ return array(
     'last_login'  		=> 'Dernière connexion',
     'software_user'  	=> 'Logiciels associés avec :name',
     'view_user'  		=> 'Voir l\'utilisateur :name',
+    'usercsv'			=> 'CSV file',
     );
