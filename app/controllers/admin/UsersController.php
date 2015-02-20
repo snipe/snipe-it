@@ -670,7 +670,7 @@ class UsersController extends AdminController
 				if (Input::get('activate')==1) {
 					$activated = '1'; 
 				} else {
-					$activated = ''; 
+					$activated = '0'; 
 				}
 	
 	
