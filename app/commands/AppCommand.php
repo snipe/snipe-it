@@ -100,16 +100,12 @@ class AppCommand extends Command
         // Seed the tables with dummy data
 		if( $this->dummyData === true )
 		{
-			$this->call('db:seed', array('--force'=>true));
+			$this->call('db:seed');
 		}
 		else
 		{	
 			// Seeding Settings table is mandatory
-			$this->call('db:seed', array('--class' => 'SettingsSeeder', '--force'=>true));
-			// Seeding Statuslabels is strongly recommended
-			$this->call('db:seed', array('--class' => 'StatuslabelsSeeder', '--force'=>true));
-			// Seeding Categories is good to have
-			$this->call('db:seed', array('--class' => 'CategoriesSeeder', '--force'=>true));
+			$this->call('db:seed', array('--class' => 'SettingsSeeder'));
 		}
     }
 
