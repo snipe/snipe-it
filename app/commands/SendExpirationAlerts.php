@@ -37,12 +37,28 @@ class SendExpirationAlerts extends Command {
 	 */
 	public function fire()
 	{
-		$expiring_assets = Asset::getExpiringWarrantee();
+		$expiring_assets = Asset::getExpiringWarrantee(60);
 				
 		$data['count'] =  count($expiring_assets);
 		$data['email_content'] ='';
+
+		
+		
 		foreach ($expiring_assets as $asset) {
-			$data['email_content'] .= '<tr><td><a href="'.Config::get('app.url').'/hardware/'.$asset->id.'/view">'.$asset->name.'</a></td><td>'.$asset->asset_tag.'</td><td>'.$asset->warrantee_expires().'</td></tr>';
+			$now = date("Y-m-d");
+			$expires = $asset->warrantee_expires();
+			$difference =  round(abs(strtotime($expires) - strtotime($now))/86400);
+			
+			if ($difference > 30) {
+				$data['email_content'] .= '<tr style="background-color: #fcffa3;">';
+			} else {
+				$data['email_content'] .= '<tr style="background-color:#d9534f;">';
+			}
+				$data['email_content'] .= '<td><a href="'.Config::get('app.url').'/hardware/'.$asset->id.'/view">';
+				$data['email_content'] .= $asset->name.'</a></td><td>'.$asset->asset_tag.'</td>';
+				$data['email_content'] .= '<td>'.$asset->warrantee_expires().'</td>';
+				$data['email_content'] .= '<td>'.$difference.' days</td>';
+				$data['email_content'] .= '</tr>';			
 		}
 
 		if ((Setting::getSettings()->alert_email!='')  && (Setting::getSettings()->alerts_enabled==1)){
