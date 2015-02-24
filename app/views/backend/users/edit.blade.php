@@ -134,7 +134,7 @@
                 @endif
                 </label>
                 <div class="col-md-5">
-                   <input type="password" name="password" class="form-control" id="password" value="" {{ (Config::get('app.lock_passwords') ? ' disabled' : '') }}>
+                   <input type="password" name="password" class="form-control" id="password" value="" {{ ((Config::get('app.lock_passwords') && ($user->id)) ? ' disabled' : '') }}>
                     {{ $errors->first('password', '<span class="alert-msg">:message</span>') }}
                 </div>
             </div>
@@ -147,8 +147,8 @@
                 @endif
                 </label>
                 <div class="col-md-5">
-                   <input type="password" name="password_confirm" id="password_confirm"  class="form-control" value="" {{ (Config::get('app.lock_passwords') ? ' disabled' : '') }}>
-                   @if (Config::get('app.lock_passwords'))
+                   <input type="password" name="password_confirm" id="password_confirm"  class="form-control" value="" {{ ((Config::get('app.lock_passwords') && ($user->id)) ? ' disabled' : '') }}>
+                   @if (Config::get('app.lock_passwords') && ($user->id)) 
                     <p class="help-block">@lang('admin/users/table.lock_passwords')</p>
                    @endif
                     {{ $errors->first('password_confirm', '<span class="alert-msg">:message</span>') }}
