@@ -6,12 +6,13 @@ Please submit all issues and pull requests to the [snipe/snipe-it](http://github
 
 If you don't have a feature in mind, but would like to contribute back to the project, check out the [open issues](https://github.com/snipe/snipe-it/issues?state=open) and see if there are any you can tackle.
 
------
+We use Waffle.io to help better communicate our roadmap with users. Our [project page there](http://waffle.io/snipe/snipe-it) will show you the backlog, what's ready to be worked on, what's in progress, and what's completed.
 
 [![Stories in Ready](https://badge.waffle.io/snipe/snipe-it.png?label=ready&title=Ready)](http://waffle.io/snipe/snipe-it)
 
 The labels we use in GitHub Issues and Waffle.io indicate whether we've confirmed an issue as a bug, whether we're considering the issue as a potential feature, and whether it's ready for someone to work on it. We also provide labels such as "n00b", "intermediate" and "advanced" for the experience level we think it requires for contributors who want to help.
 
+-----
 
 ## Translations!
 
