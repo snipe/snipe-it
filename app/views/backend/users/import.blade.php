@@ -67,16 +67,6 @@ Create a User ::
 				</div>
 			</div>
 			
-			
-			<!-- Generate Password -->
-			<div class="form-group">
-				<div class="col-sm-2 ">
-				</div>
-				<div class="col-sm-5">
-					{{ Form::checkbox('generate_password', '1', Input::old('generate_password')) }} Auto-generate passwords?
-				</div>
-			</div>
-			
 			<!-- Activate -->
 			<div class="form-group">
 				<div class="col-sm-2 ">
