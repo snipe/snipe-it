@@ -1,6 +1,8 @@
 <?php
 
 return array(
+	'alert_email'				=> 'Send alerts to',
+	'alerts_enabled'			=> 'Alerts enabled',
 	'auto_increment_assets'		=> 'Générer des identifiants d\'actifs auto-incrémentés',
 	'auto_increment_prefix'		=> 'Préfixe (optionnel)',
 	'auti_incrementing_help'    => 'Activez les identifiants d\'actifs auto-incrémentés avant d\'activer ceci',

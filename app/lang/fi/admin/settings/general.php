@@ -1,6 +1,8 @@
 <?php
 
 return array(
+	'alert_email'				=> 'Send alerts to',
+	'alerts_enabled'			=> 'Alerts enabled',
 	'auto_increment_assets'		=> 'Luo automaattisesti kasvavat laite-ID:t',
 	'auto_increment_prefix'		=> 'Etuliite (valinnainen)',
 	'auti_incrementing_help'    => 'Ota ensin käyttöön automaattisesti kasvavat laite ID:t valitaksesi tämän',

@@ -1,6 +1,8 @@
 <?php
 
 return array(
+	'alert_email'				=> 'Send alerts to',
+	'alerts_enabled'			=> 'Alerts enabled',
 	'auto_increment_assets'		=> 'Generar IDs de equipo autoincrementales',
 	'auto_increment_prefix'		=> 'Prefijo (opcional)',
 	'auti_incrementing_help'    => 'Activa la generación automática de IDs de equipo antes de fijar esto',

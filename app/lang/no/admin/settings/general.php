@@ -1,6 +1,8 @@
 <?php
 
 return array(
+	'alert_email'				=> 'Send alerts to',
+	'alerts_enabled'			=> 'Alerts enabled',
 	'auto_increment_assets'		=> 'Generer automatisk økende eiendels-IDer',
 	'auto_increment_prefix'		=> 'Prefiks (valgfritt)',
 	'auti_incrementing_help'    => 'Aktiver automatisk øking av eiendels-IDer først for å velge dette alternativet',
