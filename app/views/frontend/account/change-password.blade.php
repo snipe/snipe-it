@@ -25,7 +25,7 @@ Change your Password
         <i class='icon-asterisk'></i>
         </label>
         <div class="col-md-5">
-            <input class="form-control" type="password" name="old_password" id="old_password" />
+            <input class="form-control" type="password" name="old_password" id="old_password" {{ (Config::get('app.lock_passwords') ? ' disabled' : '') }}>
             {{ $errors->first('old_password', '<span class="alert-msg"><i class="icon-remove-sign"></i> :message</span>') }}
         </div>
     </div>
@@ -34,7 +34,7 @@ Change your Password
         <label for="password" class="col-md-2 control-label">New Password
         <i class='icon-asterisk'></i></label>
         <div class="col-md-5">
-            <input class="form-control" type="password" name="password" id="password" />
+            <input class="form-control" type="password" name="password" id="password" {{ (Config::get('app.lock_passwords') ? ' disabled' : '') }}>
             {{ $errors->first('password', '<span class="alert-msg"><i class="icon-remove-sign"></i> :message</span>') }}
         </div>
     </div>
@@ -45,8 +45,11 @@ Change your Password
         <i class='icon-asterisk'></i>
         </label>
         <div class="col-md-5">
-            <input class="form-control" type="password" name="password_confirm" id="password_confirm" />
+            <input class="form-control" type="password" name="password_confirm" id="password_confirm"  {{ (Config::get('app.lock_passwords') ? ' disabled' : '') }}>
             {{ $errors->first('password_confirm', '<span class="alert-msg"><i class="icon-remove-sign"></i> :message</span>') }}
+            @if (Config::get('app.lock_passwords'))
+            	<p class="help-block">@lang('admin/users/table.lock_passwords')</p>
+            @endif
         </div>
     </div>
 

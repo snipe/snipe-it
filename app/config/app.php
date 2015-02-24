@@ -43,6 +43,20 @@ return array(
     */
 
     'cipher' => MCRYPT_RIJNDAEL_256,
+    
+    /*
+    |--------------------------------------------------------------------------
+    | Prevent Password changes
+    |--------------------------------------------------------------------------
+    |
+    | If for some reason you do not wish for admins to be able to edit the password
+    | for any user (including themselves), set this to true.
+    |
+    */
+
+    'lock_passwords' => false,
+
+
 
     /*
     |--------------------------------------------------------------------------
