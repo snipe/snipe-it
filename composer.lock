@@ -4,50 +4,8 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "87a0ca65213f42cd56a20d1409bb1a37",
+    "hash": "955b11a15803a272f3345c13776dae8f",
     "packages": [
-        {
-            "name": "bacon/bacon-qr-code",
-            "version": "dev-master",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/Bacon/BaconQrCode.git",
-                "reference": "f2937bc90179125ae7c708233c7a2927b2a35033"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/Bacon/BaconQrCode/zipball/f2937bc90179125ae7c708233c7a2927b2a35033",
-                "reference": "f2937bc90179125ae7c708233c7a2927b2a35033",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.3.3"
-            },
-            "suggest": {
-                "ext-gd": "to generate QR code images"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-0": {
-                    "BaconQrCode": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "BSD-2-Clause"
-            ],
-            "authors": [
-                {
-                    "name": "Ben Scholzen 'DASPRiD'",
-                    "email": "mail@dasprids.de",
-                    "homepage": "http://www.dasprids.de",
-                    "role": "Developer"
-                }
-            ],
-            "description": "BaconQrCode is a QR code generator for PHP.",
-            "homepage": "https://github.com/Bacon/BaconQrCode",
-            "time": "2014-12-24 13:14:29"
-        },
         {
             "name": "barryvdh/laravel-debugbar",
             "version": "1.x-dev",
@@ -348,6 +306,58 @@
             },
             "notification-url": "https://packagist.org/downloads/",
             "time": "2014-01-17 12:21:18"
+        },
+        {
+            "name": "dinesh/barcode",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/dineshrabara/barcode.git",
+                "reference": "9a7380a7ccb92e47329b298e9ceb64453af6731d"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/dineshrabara/barcode/zipball/9a7380a7ccb92e47329b298e9ceb64453af6731d",
+                "reference": "9a7380a7ccb92e47329b298e9ceb64453af6731d",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/support": "4.*|5.*",
+                "php": ">=5.3.0"
+            },
+            "type": "library",
+            "autoload": {
+                "classmap": [
+                    "src/migrations"
+                ],
+                "psr-0": {
+                    "Dinesh\\Barcode": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Dinesh Rabara",
+                    "email": "dinesh.rabara@gmail.com"
+                }
+            ],
+            "description": "Barcode generator like Qr Code , PDF417,C39, C39+,C39E,C39E+,C93,S25,S25+,I25,I25+,C128,C128A,C128B,C128C,2-Digits UPC-Based Extention,5-Digits UPC-Based Extention,EAN 8,EAN 13,UPC-A,UPC-E,MSI (Variation of Plessey code) ",
+            "keywords": [
+                "CODABAR",
+                "CODE 128",
+                "CODE 39",
+                "barcode",
+                "datamatrix",
+                "ean",
+                "laravel",
+                "pdf417",
+                "qr code",
+                "qrcode"
+            ],
+            "time": "2014-11-22 04:58:23"
         },
         {
             "name": "doctrine/annotations",
@@ -3771,7 +3781,7 @@
     "minimum-stability": "dev",
     "stability-flags": {
         "chumper/datatable": 20,
-        "bacon/bacon-qr-code": 20,
+        "dinesh/barcode": 20,
         "intervention/image": 20,
         "erusev/parsedown": 20
     },
