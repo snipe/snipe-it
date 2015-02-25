@@ -245,7 +245,7 @@ Route::group(array('prefix' => 'auth'), function () {
 
     # Account Activation
     Route::get('activate/{activationCode}', array('as' => 'activate', 'uses' => 'AuthController@getActivate'));
-
+    
     # Forgot Password
     Route::get('forgot-password', array('as' => 'forgot-password', 'uses' => 'AuthController@getForgotPassword'));
     Route::post('forgot-password', 'AuthController@postForgotPassword');
@@ -270,9 +270,7 @@ Route::group(array('prefix' => 'auth'), function () {
 
 Route::group(array('prefix' => 'account', 'before' => 'auth', 'namespace' => 'Controllers\Account'), function () {
 
-    # Account Dashboard
-    Route::get('/', array('as' => 'account', 'uses' => 'DashboardController@getIndex'));
-
+   
     # Profile
     Route::get('profile', array('as' => 'profile', 'uses' => 'ProfileController@getIndex'));
     Route::post('profile', 'ProfileController@postIndex');
@@ -287,10 +285,17 @@ Route::group(array('prefix' => 'account', 'before' => 'auth', 'namespace' => 'Co
     # Change Email
     Route::get('change-email', array('as' => 'change-email', 'uses' => 'ChangeEmailController@getIndex'));
     Route::post('change-email', 'ChangeEmailController@postIndex');
+    
+     # Accept Asset
+    Route::get('accept-asset/{assetId}', array('as' => 'account/accept-assets', 'uses' => 'ViewAssetsController@getAcceptAsset'));
+    Route::post('accept-asset/{assetId}', array('as' => 'account/asset-accepted', 'uses' => 'ViewAssetsController@postAcceptAsset'));
 
     # Profile
     Route::get('requestable-assets', array('as' => 'requestable-assets', 'uses' => 'ViewAssetsController@getRequestableIndex'));
     Route::get('request-asset/{assetId}', array('as' => 'account/request-asset', 'uses' => 'ViewAssetsController@getRequestAsset'));
+    
+    # Account Dashboard
+    Route::get('/', array('as' => 'account', 'uses' => 'DashboardController@getIndex'));
 
 
 });

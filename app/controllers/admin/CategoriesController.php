@@ -63,8 +63,11 @@ class CategoriesController extends AdminController
         else{
 
             // Update the category data
-            $category->name            = e(Input::get('name'));
-            $category->user_id          = Sentry::getId();
+            $category->name            		= e(Input::get('name'));
+            $category->eula_text            = e(Input::get('eula_text'));
+            $category->use_default_eula     = e(Input::get('use_default_eula', '1'));  
+            $category->require_acceptance   = e(Input::get('require_acceptance', '0')); 
+            $category->user_id          	= Sentry::getId();
 
             // Was the asset created?
             if($category->save()) {
@@ -133,6 +136,9 @@ class CategoriesController extends AdminController
 
             // Update the category data
             $category->name            = e(Input::get('name'));
+            $category->eula_text            = e(Input::get('eula_text'));
+            $category->use_default_eula     = e(Input::get('use_default_eula', '1'));  
+            $category->require_acceptance   = e(Input::get('require_acceptance', '0')); 
 
             // Was the asset created?
             if($category->save()) {

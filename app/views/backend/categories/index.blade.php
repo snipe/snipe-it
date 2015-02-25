@@ -25,7 +25,9 @@
         <thead>
             <tr role="row">
                 <th class="col-md-5" bSortable="true">@lang('admin/categories/table.title')</th>
-                 <th class="col-md-5" bSortable="true">@lang('general.assets')</th>
+                 <th class="col-md-2" bSortable="true">@lang('general.assets')</th>
+                 <th class="col-md-3" bSortable="true">@lang('admin/categories/table.require_acceptance')</th>
+                 <th class="col-md-2" bSortable="true">@lang('admin/categories/table.eula_text')</th>
                 <th class="col-md-2 actions" bSortable="true">@lang('table.actions')</th>
             </tr>
         </thead>
@@ -34,6 +36,8 @@
             <tr>
                 <td>{{{ $category->name }}}</td>
                 <td><a href="{{ route('view/category',$category->id) }}">{{ $category->assetscount() }}</a></td>
+                <td>{{ ($category->require_acceptance=='1') ? '<i class="icon-ok"></i>' : ''}}</td>
+                <td>{{ ($category->eula_text!='') ? '<i class="icon-ok"></i>' : ''}}</td>
                 <td>
                 <a href="{{ route('update/category', $category->id) }}" class="btn btn-warning"><i class="icon-pencil icon-white"></i></a>
 <a data-html="false" class="btn delete-asset btn-danger" data-toggle="modal" href="{{ route('delete/category', $category->id) }}" data-content="@lang('admin/categories/message.delete.confirm')"

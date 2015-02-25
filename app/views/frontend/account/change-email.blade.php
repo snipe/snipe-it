@@ -15,6 +15,10 @@ Change your Email
 </div>
 
 <div class="row form-wrapper">
+	@if (Config::get('app.lock_passwords') && ($user->id)) 
+ 	<p class="help-block">@lang('admin/users/table.lock_passwords')</p>
+ 	@endif
+
 
 <form method="post" action="" class="form-horizontal" autocomplete="off">
     <!-- CSRF Token -->
@@ -29,7 +33,7 @@ Change your Email
          <i class='icon-asterisk'></i>
          </label>
         <div class="col-md-5">
-            <input class="form-control" type="email" name="email" id="email" value="{{{ Input::old('email', $user->email) }}}" />
+            <input class="form-control" type="email" name="email" id="email" value="{{{ Input::old('email', $user->email) }}}" {{ ((Config::get('app.lock_passwords') && ($user->id)) ? ' disabled' : '') }}>
             {{ $errors->first('email', '<span class="alert-msg"><i class="icon-remove-sign"></i> :message</span>') }}
         </div>
     </div>
@@ -39,7 +43,7 @@ Change your Email
         <i class='icon-asterisk'></i>
         </label>
         <div class="col-md-5">
-            <input class="form-control" type="email" name="email_confirm" id="email_confirm" />
+            <input class="form-control" type="email" name="email_confirm" id="email_confirm" {{ ((Config::get('app.lock_passwords') && ($user->id)) ? ' disabled' : '') }}>
             {{ $errors->first('email_confirm', '<span class="alert-msg"><i class="icon-remove-sign"></i> :message</span>') }}
         </div>
     </div>
@@ -50,7 +54,7 @@ Change your Email
         <i class='icon-asterisk'></i>
         </label>
         <div class="col-md-5">
-            <input class="form-control" type="password" name="current_password" id="current_password" />
+            <input class="form-control" type="password" name="current_password" id="current_password" {{ ((Config::get('app.lock_passwords') && ($user->id)) ? ' disabled' : '') }}>
             {{ $errors->first('current_password', '<span class="alert-msg"><i class="icon-remove-sign"></i> :message</span>') }}
         </div>
     </div>

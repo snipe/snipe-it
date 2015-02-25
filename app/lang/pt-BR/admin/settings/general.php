@@ -1,6 +1,8 @@
 <?php
 
 return array(
+	'alert_email'				=> 'Send alerts to',
+	'alerts_enabled'			=> 'Alerts enabled',
 	'auto_increment_assets'		=> 'Gerar ID de ativo crescente',
 	'auto_increment_prefix'		=> 'Prefixo (opcional)',
 	'auti_incrementing_help'    => 'Ativar ID crescente de ativos, primeiro definir este',

@@ -1,6 +1,8 @@
 <?php
 
 return array(
+	'alert_email'				=> 'Send alerts to',
+	'alerts_enabled'			=> 'Alerts enabled',
 	'auto_increment_assets'		=> 'Generate auto-incrementing asset IDs',
 	'auto_increment_prefix'		=> 'Prefix (optional)',
 	'auti_incrementing_help'    => 'Enable auto-incrementing asset IDs first to set this',

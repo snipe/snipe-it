@@ -6,6 +6,8 @@ use Redirect;
 use Sentry;
 use Validator;
 use View;
+use Config;
+use Lang;
 
 class ChangePasswordController extends AuthorizedController
 {
@@ -37,6 +39,9 @@ class ChangePasswordController extends AuthorizedController
             'password_confirm' => 'required|same:password',
         );
 
+		if (Config::get('app.lock_passwords')) {
+			return Redirect::route('change-password')->with('error',  Lang::get('admin/users/table.lock_passwords'));
+		} else {
         // Create a new validator instance from our validation rules
         $validator = Validator::make(Input::all(), $rules);
 
@@ -61,6 +66,7 @@ class ChangePasswordController extends AuthorizedController
         // Update the user password
         $user->password = Input::get('password');
         $user->save();
+        }
 
         // Redirect to the change-password page
         return Redirect::route('change-password')->with('success', 'Password successfully updated');

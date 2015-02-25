@@ -131,6 +131,18 @@ class Asset extends Depreciable
     {
         return $this->belongsTo('Model','model_id');
     }
+    
+    public static function getExpiringWarrantee($days = 30) {
+	    
+	    return Asset::where('archived','=','0')
+		->whereNotNUll('warranty_months')
+		->whereNotNUll('purchase_date')
+		->whereRaw(DB::raw('DATE_ADD(`purchase_date`,INTERVAL `warranty_months` MONTH) <= DATE(NOW() + INTERVAL '.$days .' DAY) AND DATE_ADD(`purchase_date`,INTERVAL `warranty_months` MONTH) > NOW()'))
+		->orderBy('purchase_date', 'ASC')
+		->get();
+
+
+    }
 
 	/**
 	* Get the license seat information
@@ -191,6 +203,25 @@ class Asset extends Depreciable
 			return false;
 		}
     }
+    
+    public function requireAcceptance() {    
+	    return $this->model->category->require_acceptance;
+    }
+    
+    public function getEula() { 
+	      
+	    if ($this->model->category->eula_text) {
+		    return $this->model->category->eula_text;
+	    } elseif (Setting::getSettings()->default_eula_text) {
+		    return Setting::getSettings()->default_eula_text;
+	    } else {
+		    return null;
+	    } 
+	    
+    }
+
+    
+    
 
 
 	/**

@@ -31,10 +31,29 @@
                                         <td>{{{ $setting->site_name }}} </td>
                                     </tr>
                                      <tr>
+                                        <td>@lang('admin/settings/general.alert_email')</td>
+
+                                        @if ($setting->alert_email)
+                                            <td>{{{ $setting->alert_email }}}</td>
+                                        @else
+                                            <td>--</td>
+                                        @endif
+                                    </tr>
+                                    <tr>
+                                        <td>@lang('admin/settings/general.alerts_enabled')</td>
+
+                                        @if ($setting->alerts_enabled == 1)
+                                            <td>@lang('general.yes')</td>
+                                        @else
+                                            <td>@lang('general.no')</td>
+                                        @endif
+                                    </tr>
+
+                                     <tr>
                                         <td>@lang('admin/settings/general.header_color')</td>
 
                                         @if ($setting->header_color)
-                                            <td>{{ $setting->header_color }}</td>
+                                            <td>{{{ $setting->header_color }}}</td>
                                         @else
                                             <td>default</td>
                                         @endif
@@ -104,14 +123,22 @@
                                     <tr>
                                         <td>@lang('admin/settings/general.display_qr')</td>
                                             @if ($setting->qr_code == 1)
-                                                <td>@lang('general.yes')</td>
+                                                <td>@lang('general.yes')
+	                                                {{{ $setting->qr_text }}}
+	                                                
+                                                </td>
                                             @else
                                                 <td>@lang('general.no')</td>
                                             @endif
-                                    </tr>
+                                    </tr>                                    
                                     <tr>
-                                        <td>@lang('admin/settings/general.auti_incrementing_help')</td>
-                                        <td>{{{ $setting->qr_text }}}</td>
+                                        <td>@lang('admin/settings/general.default_eula_text')</td>
+
+                                        @if ($setting->default_eula_text!='')
+                                            <td>@lang('general.yes')</td>
+                                        @else
+                                            <td>@lang('general.no')</td>
+                                        @endif
                                     </tr>
                                     @endforeach
                                 </tbody>

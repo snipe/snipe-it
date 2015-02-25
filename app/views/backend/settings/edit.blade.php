@@ -57,14 +57,14 @@ padding: 0px 20px;
 	                                    </div>
 	                                    <div class="col-md-9">
 										{{ Form::text('site_name', Input::old('site_name', $setting->site_name), array('class' => 'form-control')) }}
-										{{ $errors->first('site_name', '<span class="help-inline">:message</span>') }}
+										{{ $errors->first('site_name', '<span class="alert-msg">:message</span>') }}
 	                                    </div>
                                     </div>
                                     
                                     <div class="form-group {{ $errors->has('logo') ? 'has-error' : '' }}">
 	                                    
 	                                    <div class="col-md-3">
-										 	{{ Form::label('site_name', Lang::get('admin/settings/general.logo')) }}
+										 	{{ Form::label('logo', Lang::get('admin/settings/general.logo')) }}
 	                                    </div>
 	                                    <div class="col-md-9">				                						             
 						                    {{ Form::file('logo') }}
@@ -73,6 +73,24 @@ padding: 0px 20px;
 	                                    </div>
 						                
 						            </div>
+						            
+						            
+						            <div class="form-group {{ $errors->has('site_name') ? 'error' : '' }}">
+	                                    <div class="col-md-3">
+                                        {{ Form::label('alert_email', Lang::get('admin/settings/general.alert_email')) }}
+	                                    </div>
+	                                    <div class="col-md-9">
+										{{ Form::text('alert_email', Input::old('alert_email', $setting->alert_email), array('class' => 'form-control')) }}
+										
+										
+										{{ Form::checkbox('alerts_enabled', '1', Input::old('alerts_enabled', $setting->alerts_enabled)) }}
+										@Lang('admin/settings/general.alerts_enabled')
+
+										
+										{{ $errors->first('alert_email', '<span class="alert-msg">:message</span>') }}
+	                                    </div>
+                                    </div>
+                                    
 
 									<div class="form-group {{ $errors->has('header_color') ? 'error' : '' }}">
 										<div class="col-md-3">
@@ -81,7 +99,7 @@ padding: 0px 20px;
 	                                    <div class="col-md-9">
 
 										{{ Form::text('header_color', Input::old('header_color', $setting->header_color), array('class' => 'form-control', 'style' => 'width: 100px;')) }}
-										{{ $errors->first('header_color', '<span class="help-inline">:message</span>') }}
+										{{ $errors->first('header_color', '<span class="alert-msg">:message</span>') }}
 	                                    </div>
                                     </div>
 
@@ -91,7 +109,7 @@ padding: 0px 20px;
 										</div>
 	                                    <div class="col-md-9">
 										{{ Form::text('per_page', Input::old('per_page', $setting->per_page), array('class' => 'form-control', 'style'=>'width: 100px;')) }}
-										{{ $errors->first('per_page', '<span class="help-inline">:message</span>') }}
+										{{ $errors->first('per_page', '<span class="alert-msg">:message</span>') }}
 										</div>
                                     </div>
 
@@ -139,7 +157,7 @@ padding: 0px 20px;
 	                                    <div class="col-md-9">
                                          @if ($setting->auto_increment_assets == 1)
 											{{ Form::text('auto_increment_prefix', Input::old('auto_increment_prefix', $setting->auto_increment_prefix), array('class' => 'form-control', 'style'=>'width: 100px;')) }}
-											{{ $errors->first('auto_increment_prefix', '<span class="help-inline">:message</span>') }}
+											{{ $errors->first('auto_increment_prefix', '<span class="alert-msg">:message</span>') }}
 										@else
 											{{ Form::text('auto_increment_prefix', Input::old('auto_increment_prefix', $setting->auto_increment_prefix), array('class' => 'form-control', 'disabled'=>'disabled', 'style'=>'width: 100px;')) }}
 										@endif
@@ -176,7 +194,7 @@ padding: 0px 20px;
 	                                    <div class="col-md-9">
                                          @if ($setting->qr_code == 1)
 											{{ Form::text('qr_text', Input::old('qr_text', $setting->qr_text), array('class' => 'form-control')) }}
-											{{ $errors->first('qr_text', '<span class="help-inline">:message</span>') }}
+											{{ $errors->first('qr_text', '<span class="alert-msg">:message</span>') }}
 										@else
 											{{ Form::text('qr_text', Input::old('qr_text', $setting->qr_text), array('class' => 'form-control', 'disabled'=>'disabled')) }}
 											<p class="help-inline">
@@ -186,7 +204,22 @@ padding: 0px 20px;
 	                                    </div>
 
                                     </div>
+									
+									<hr>
+									<div class="form-group {{ $errors->has('default_eula_text') ? 'error' : '' }}">
+	                                    <div class="col-md-3">
+                                        {{ Form::label('default_eula_text', Lang::get('admin/settings/general.default_eula_text')) }}
+	                                    </div>
+	                                    <div class="col-md-9">
+										{{ Form::textarea('default_eula_text', Input::old('default_eula_text', $setting->default_eula_text), array('class' => 'form-control')) }}
+										{{ $errors->first('default_eula_text', '<span class="alert-msg">:message</span>') }}
+										
+										 <p class="help-inline">@lang('admin/settings/general.default_eula_help_text')</p>
+										 
+	                                    </div>
+	                                   
 
+                                    </div>
 
                                 @endforeach
 

@@ -73,7 +73,11 @@
             <div class="form-group {{ $errors->has('email') ? 'has-error' : '' }}">
                 <label class="col-md-3 control-label" for="email">@lang('admin/users/table.email') <i class='icon-asterisk'></i></label>
                 <div class="col-md-7">
-                    <input class="form-control" type="text" name="email" id="email" value="{{{ Input::old('email', $user->email) }}}" />
+                    <input class="form-control" type="text" name="email" id="email" value="{{{ Input::old('email', $user->email) }}}"  {{ ((Config::get('app.lock_passwords') && ($user->id)) ? ' disabled' : '') }}>
+                     @if (Config::get('app.lock_passwords') && ($user->id)) 
+					 	<p class="help-block">@lang('admin/users/table.lock_passwords')</p>
+					 @endif
+
                     {{ $errors->first('email', '<span class="alert-msg">:message</span>') }}
                 </div>
             </div>
@@ -134,7 +138,7 @@
                 @endif
                 </label>
                 <div class="col-md-5">
-                   <input type="password" name="password" class="form-control" id="password" value="" />
+                   <input type="password" name="password" class="form-control" id="password" value="" {{ ((Config::get('app.lock_passwords') && ($user->id)) ? ' disabled' : '') }}>
                     {{ $errors->first('password', '<span class="alert-msg">:message</span>') }}
                 </div>
             </div>
@@ -147,7 +151,10 @@
                 @endif
                 </label>
                 <div class="col-md-5">
-                   <input type="password" name="password_confirm" id="password_confirm"  class="form-control" value="" />
+                   <input type="password" name="password_confirm" id="password_confirm"  class="form-control" value="" {{ ((Config::get('app.lock_passwords') && ($user->id)) ? ' disabled' : '') }}>
+                   @if (Config::get('app.lock_passwords') && ($user->id)) 
+                    <p class="help-block">@lang('admin/users/table.lock_passwords')</p>
+                   @endif
                     {{ $errors->first('password_confirm', '<span class="alert-msg">:message</span>') }}
                 </div>
             </div>
@@ -171,7 +178,7 @@
                 <label class="col-md-3 control-label" for="activated">@lang('admin/users/table.activated')</label>
                 <div class="col-md-7">
                    <div class="controls">
-                    <select{{ ($user->id === Sentry::getId() ? ' disabled="disabled"' : '') }} name="activated" id="activated">
+                    <select{{ ($user->id === Sentry::getId() ? ' disabled="disabled"' : '') }} name="activated" id="activated" {{ ((Config::get('app.lock_passwords') && ($user->id)) ? ' disabled' : '') }}>
                     @if ($user->id)
                     	<option value="1"{{ ($user->isActivated() ? ' selected="selected"' : '') }}>@lang('general.yes')</option>
                         <option value="0"{{ ( ! $user->isActivated() ? ' selected="selected"' : '') }}>@lang('general.no')</option>
@@ -195,7 +202,7 @@
                 <div class="col-md-5">
                    <div class="controls">
 
-                    <select name="groups[]" id="groups[]" multiple="multiple" class="form-control">
+                    <select name="groups[]" id="groups[]" multiple="multiple" class="form-control" {{ ((Config::get('app.lock_passwords') && ($user->id)) ? ' disabled' : '') }}>
 
                         @foreach ($groups as $group)
                         <option value="{{ $group->id }}"
@@ -235,6 +242,10 @@
         <div class="row form-wrapper">
             <div class="col-md-12 column">
             <br><br>
+            
+            @if (Config::get('app.lock_passwords') && ($user->id)) 
+		 	<p class="help-block">@lang('admin/users/table.lock_passwords')</p>
+		 	@endif
 
                  @foreach ($permissions as $area => $permissions)
                     <fieldset>
@@ -248,7 +259,7 @@
                              <div class="col-md-2">
                              <div class="radio inline">
                                 <label for="{{{ $permission['permission'] }}}_allow" onclick="">
-                                    <input type="radio" value="1" id="{{{ $permission['permission'] }}}_allow" name="permissions[{{{ $permission['permission'] }}}]"{{ (array_get($userPermissions, $permission['permission']) == '1' ? ' checked="checked"' : '') }}>
+                                    <input type="radio" value="1" id="{{{ $permission['permission'] }}}_allow" name="permissions[{{{ $permission['permission'] }}}]"{{ (array_get($userPermissions, $permission['permission']) == '1' ? ' checked="checked"' : '') }}{{ ((Config::get('app.lock_passwords') && ($user->id)) ? ' disabled' : '') }}>
                                     @lang('admin/users/table.allow')
                                 </label>
                             </div>

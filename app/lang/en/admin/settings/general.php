@@ -1,9 +1,13 @@
 <?php
 
 return array(
+	'alert_email'				=> 'Send alerts to',
+	'alerts_enabled'			=> 'Alerts enabled',
 	'auto_increment_assets'		=> 'Generate auto-incrementing asset IDs',
 	'auto_increment_prefix'		=> 'Prefix (optional)',
-	'auti_incrementing_help'    => 'Enable auto-incrementing asset IDs first to set this',
+	'auto_incrementing_help'    => 'Enable auto-incrementing asset IDs first to set this',
+	'default_eula_text'			=> 'Default EULA',
+	'default_eula_help_text'	=> 'You can also associate custom EULAs to specific asset categories.',
     'display_asset_name'        => 'Display Asset Name',
     'display_checkout_date'     => 'Display Checkout Date',
     'display_eol'               => 'Display EOL in table view',

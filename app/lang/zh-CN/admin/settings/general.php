@@ -1,6 +1,8 @@
 <?php
 
 return array(
+	'alert_email'				=> 'Send alerts to',
+	'alerts_enabled'			=> 'Alerts enabled',
 	'auto_increment_assets'		=> '生成自动递增资产ID',
 	'auto_increment_prefix'		=> '前缀（可选）',
 	'auti_incrementing_help'    => '启用自动递增的资产ID之前，请先设置这个',

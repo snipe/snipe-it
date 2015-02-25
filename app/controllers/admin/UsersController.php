@@ -672,13 +672,9 @@ class UsersController extends AdminController
 				} else {
 					$activated = '0'; 
 				}
-	
-	
-				if (Input::get('generate_password')==1) {
-					$pass = substr(str_shuffle("0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"), 0, 10);
-				} else {
-					$pass = '';
-				}
+				
+				$pass = substr(str_shuffle("0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"), 0, 10);
+				
 						
 						
 				try {	
@@ -736,6 +732,7 @@ class UsersController extends AdminController
 		return Redirect::route('users')->with('duplicates',$duplicates)->with('success', 'Success');
 		
 	}
+	
 
     
     

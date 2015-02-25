@@ -1,6 +1,8 @@
 <?php
 
 return array(
+	'alert_email'				=> 'Send alerts to',
+	'alerts_enabled'			=> 'Alerts enabled',
 	'auto_increment_assets'		=> 'Genereaza ID-uri crescatoare de active',
 	'auto_increment_prefix'		=> 'Prefix (optional)',
 	'auti_incrementing_help'    => 'Activeaza ID-uri crescatoare pentru active',
