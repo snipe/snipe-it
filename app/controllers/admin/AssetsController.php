@@ -21,6 +21,7 @@ use Response;
 use Config;
 use Location;
 use Log;
+use Mail;
 
 use BaconQrCode\Renderer\Image as QrImage;
 
@@ -432,7 +433,7 @@ class AssetsController extends AdminController
 
 
         // Check if the user exists
-        if (is_null($assigned_to = User::find($assigned_to))) {
+        if (is_null($user = User::find($assigned_to))) {
             // Redirect to the asset management page with error
             return Redirect::to('hardware')->with('error', Lang::get('admin/hardware/message.user_does_not_exist'));
         }
@@ -446,10 +447,23 @@ class AssetsController extends AdminController
             $logaction->asset_id = $asset->id;
             $logaction->checkedout_to = $asset->assigned_to;
             $logaction->asset_type = 'hardware';
-            $logaction->location_id = $assigned_to->location_id;
+            $logaction->location_id = $user->location_id;
             $logaction->user_id = Sentry::getUser()->id;
             $logaction->note = e(Input::get('note'));
             $log = $logaction->logaction('checkout');
+            
+            $data['asset_id'] = $asset->id;
+            $data['eula'] = $asset->getEula();
+            $data['first_name'] = $user->first_name;
+            
+             
+            if ($asset->requireAcceptance()=='1') {
+				
+	            Mail::send('emails.accept-asset', $data, function ($m) use ($user) {
+	                $m->to($user->email, $user->first_name . ' ' . $user->last_name);
+	                $m->subject('Confirm asset delivery');
+	            });
+            } 
 
             // Redirect to the new asset page
             return Redirect::to("hardware")->with('success', Lang::get('admin/hardware/message.checkout.success'));
@@ -866,6 +880,8 @@ class AssetsController extends AdminController
 		return Redirect::to("hardware");	
 				 
     }
-
-
+    
+    
+    
+  
 }

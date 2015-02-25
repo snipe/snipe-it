@@ -203,6 +203,25 @@ class Asset extends Depreciable
 			return false;
 		}
     }
+    
+    public function requireAcceptance() {    
+	    return $this->model->category->require_acceptance;
+    }
+    
+    public function getEula() { 
+	      
+	    if ($this->model->category->eula_text) {
+		    return $this->model->category->eula_text;
+	    } elseif (Setting::getSettings()->default_eula_text) {
+		    return Setting::getSettings()->default_eula_text;
+	    } else {
+		    return null;
+	    } 
+	    
+    }
+
+    
+    
 
 
 	/**

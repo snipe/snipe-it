@@ -110,6 +110,7 @@ class SettingsController extends AdminController
             $setting->alert_email = e(Input::get('alert_email'));
             $setting->alerts_enabled = e(Input::get('alerts_enabled', '0'));
             $setting->header_color = e(Input::get('header_color'));
+            $setting->default_eula_text = e(Input::get('default_eula_text'));
             
 
             // Was the asset updated?

@@ -204,7 +204,22 @@ padding: 0px 20px;
 	                                    </div>
 
                                     </div>
+									
+									<hr>
+									<div class="form-group {{ $errors->has('default_eula_text') ? 'error' : '' }}">
+	                                    <div class="col-md-3">
+                                        {{ Form::label('default_eula_text', Lang::get('admin/settings/general.default_eula_text')) }}
+	                                    </div>
+	                                    <div class="col-md-9">
+										{{ Form::textarea('default_eula_text', Input::old('default_eula_text', $setting->default_eula_text), array('class' => 'form-control')) }}
+										{{ $errors->first('default_eula_text', '<span class="alert-msg">:message</span>') }}
+										
+										 <p class="help-inline">@lang('admin/settings/general.default_eula_help_text')</p>
+										 
+	                                    </div>
+	                                   
 
+                                    </div>
 
                                 @endforeach
 
