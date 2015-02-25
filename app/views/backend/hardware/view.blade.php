@@ -322,9 +322,11 @@
 
             @if ($qr_code->display)
             <h6>@lang('admin/hardware/form.qr')</h6>
-            <p>
-                <img src="{{{ $qr_code->url }}}" />
-            </p>
+            <ul>
+                <li>
+                    <img src="{{{ $qr_code->url }}}" />
+                </li>
+            </ul>
             @endif
 			
 			

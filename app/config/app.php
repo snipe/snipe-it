@@ -101,6 +101,7 @@ return array(
         'Barryvdh\Debugbar\ServiceProvider',
         'Cartalyst\Sentry\SentryServiceProvider',
         'Chumper\Datatable\DatatableServiceProvider',
+        'Dinesh\Barcode\BarcodeServiceProvider',
 
     ),
 
@@ -172,6 +173,8 @@ return array(
             'Validator'       		=> 'Illuminate\Support\Facades\Validator',
             'View'            		=> 'Illuminate\Support\Facades\View',
             'Reader'				=> 'League\Csv\Reader',
+            'DNS1D'                 => 'Dinesh\Barcode\Facades\DNS1DFacade',
+            'DNS2D'                 => 'Dinesh\Barcode\Facades\DNS2DFacade',
 
     ),
 

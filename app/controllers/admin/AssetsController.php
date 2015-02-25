@@ -21,13 +21,12 @@ use Response;
 use Config;
 use Location;
 use Log;
+use DNS2D;
 use Mail;
-
-use BaconQrCode\Renderer\Image as QrImage;
 
 class AssetsController extends AdminController
 {
-    protected $qrCodeDimensions = array( 'height' => 170, 'width' => 170);
+    protected $qrCodeDimensions = array( 'height' => 4, 'width' => 4);
 
     /**
      * Show a list of all the assets.
@@ -551,8 +550,6 @@ class AssetsController extends AdminController
 
             $qr_code = (object) array(
                 'display' => $settings->qr_code == '1',
-                'height' => $this->qrCodeDimensions['height'],
-                'width' => $this->qrCodeDimensions['width'],
                 'url' => route('qr_code/hardware', $asset->id)
             );
 
@@ -579,15 +576,15 @@ class AssetsController extends AdminController
 
         if ($settings->qr_code == '1') {
             $asset = Asset::find($assetId);
-            if (isset($asset->id)) {
+            
+            if (isset($asset->asset_tag)) {
 
+                $content = DNS2D::getBarcodePNG($asset->asset_tag, "QRCODE",
+                    $this->qrCodeDimensions['height'],$this->qrCodeDimensions['width']);
 
-                $renderer = new \BaconQrCode\Renderer\Image\Png;
-                $renderer->setWidth($this->qrCodeDimensions['height'])
-                ->setHeight($this->qrCodeDimensions['height']);
-
-                $writer = new \BaconQrCode\Writer($renderer);
-                $content = $writer->writeString(route('view/hardware', $asset->id));
+                $img = imagecreatefromstring(base64_decode($content));
+                imagepng($img);
+                imagedestroy($img);
 
                 $content_disposition = sprintf('attachment;filename=qr_code_%s.png', preg_replace('/\W/', '', $asset->asset_tag));
                 $response = Response::make($content, 200);
