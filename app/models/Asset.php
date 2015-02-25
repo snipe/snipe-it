@@ -210,19 +210,19 @@ class Asset extends Depreciable
     
     public function getEula() { 
 	      
+	    $Parsedown = new Parsedown();
+        
 	    if ($this->model->category->eula_text) {
-		    return $this->model->category->eula_text;
+		    return $Parsedown->text(e($this->model->category->eula_text));
 	    } elseif (Setting::getSettings()->default_eula_text) {
-		    return Setting::getSettings()->default_eula_text;
+		    return $Parsedown->text(e(Setting::getSettings()->default_eula_text));
 	    } else {
 		    return null;
 	    } 
 	    
     }
-
     
     
-
 
 	/**
 	-----------------------------------------------

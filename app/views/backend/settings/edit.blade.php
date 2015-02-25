@@ -215,6 +215,7 @@ padding: 0px 20px;
 										{{ $errors->first('default_eula_text', '<span class="alert-msg">:message</span>') }}
 										
 										 <p class="help-inline">@lang('admin/settings/general.default_eula_help_text')</p>
+										 <p class="help-inline">@lang('admin/settings/general.eula_markdown')</p>
 										 
 	                                    </div>
 	                                   
