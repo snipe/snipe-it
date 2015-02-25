@@ -12,6 +12,7 @@ return array(
     'display_checkout_date'     => 'Display Checkout Date',
     'display_eol'               => 'Display EOL in table view',
     'display_qr'                => 'Display QR Codes',
+    'eula_markdown'				=> 'This EULA allows <a href="https://help.github.com/articles/github-flavored-markdown/">Github flavored markdown</a>.',
     'header_color'              => 'Header Color',
     'info'                      => 'These settings let you customize certain aspects of your installation.',
     'laravel'                   => 'Laravel Version',

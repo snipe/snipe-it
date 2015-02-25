@@ -54,6 +54,8 @@
 	                        <div class="col-md-9">
 								{{ Form::textarea('eula_text', Input::old('eula_text', $category->eula_text), array('class' => 'form-control')) }}
 								<p class="help-block">@lang('admin/categories/general.eula_text_help') </p>
+								<p class="help-block">@lang('admin/settings/general.eula_markdown') </p>
+								
 								{{ $errors->first('eula_text', '<span class="alert-msg">:message</span>') }}						
 	                        </div>
                     	</div>
@@ -115,7 +117,7 @@
         <h4 class="modal-title" id="eulaModalLabel">@lang('admin/settings/general.default_eula_text')</h4>
       </div>
       <div class="modal-body">
-        {{ nl2br(e(Setting::getSettings()->default_eula_text)) }}
+        {{ Setting::getDefaultEula() }}
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">@lang('button.cancel')</button>

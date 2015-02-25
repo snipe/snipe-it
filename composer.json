@@ -24,7 +24,8 @@
 		"chumper/datatable": "dev-master",
 		"dinesh/barcode": "dev-master",
 		"intervention/image": "dev-master",
-		"league/csv": "~7.0"
+		"league/csv": "~7.0",
+		"erusev/parsedown": "dev-master"
 	},
 	"require-dev": {
 		"phpunit/phpunit": "*",
