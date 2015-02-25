@@ -31,10 +31,29 @@
                                         <td>{{{ $setting->site_name }}} </td>
                                     </tr>
                                      <tr>
+                                        <td>@lang('admin/settings/general.alert_email')</td>
+
+                                        @if ($setting->alert_email)
+                                            <td>{{{ $setting->alert_email }}}</td>
+                                        @else
+                                            <td>--</td>
+                                        @endif
+                                    </tr>
+                                    <tr>
+                                        <td>@lang('admin/settings/general.alerts_enabled')</td>
+
+                                        @if ($setting->alerts_enabled == 1)
+                                            <td>@lang('general.yes')</td>
+                                        @else
+                                            <td>@lang('general.no')</td>
+                                        @endif
+                                    </tr>
+
+                                     <tr>
                                         <td>@lang('admin/settings/general.header_color')</td>
 
                                         @if ($setting->header_color)
-                                            <td>{{ $setting->header_color }}</td>
+                                            <td>{{{ $setting->header_color }}}</td>
                                         @else
                                             <td>default</td>
                                         @endif

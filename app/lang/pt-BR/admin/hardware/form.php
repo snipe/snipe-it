@@ -3,8 +3,8 @@
 return array(
 
 	'bulk_update'		=> 'Bulk Update Assets',
-	'bulk_update_help'	=> 'This form allows you to update multiple assets at once. Only fill in the fields you need to change. Any fields left blank will remain unchanged. ',
-	'bulk_update_warn'	=> 'You are about to edit the properties of :asset_count assets.',
+	'bulk_update_help'	=> 'Este formulário lhe permite atualizar múltiplos bens de uma vez só. Apenas preencha os campos que você precisa alterá-los. Qualquer campo deixado em branco permanecerá inalterado. ',
+	'bulk_update_warn'	=> 'Você está prestes a editar as propriedades de :asset_count bens.',
     'checkedout_to'		=> 'Alocado para',
     'checkout_to'		=> 'Alocado para',
     'cost'				=> 'Custo da Compra',
@@ -18,7 +18,7 @@ return array(
     'expires'			=> 'Expira',
     'fully_depreciated'	=> 'Totalmente Depreciado',
     'help_checkout'		=> 'Se você deseja atribuir este bem imediatamente, você deve selecionar "Pronto para Implantar" da lista de status acima, ou coisas inesperadas podem acontecer. ',
-    'mac_address'		=> 'MAC Address',
+    'mac_address'		=> 'Endereço MAC',
     'manufacturer'		=> 'Fabricante',
     'model'				=> 'Modelo',
     'months'			=> 'meses',

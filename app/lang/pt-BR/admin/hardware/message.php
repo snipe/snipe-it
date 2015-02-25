@@ -14,7 +14,7 @@ return array(
     'update' => array(
         'error'   			=> 'O bem não foi atualizado, por favor, tente novamente',
         'success' 			=> 'Bem atualizado com sucesso.',
-        'nothing_updated'	=>  'No fields were selected, so nothing was updated.',
+        'nothing_updated'	=>  'Nenhum campo foi selecionado, então nada foi atualizado.',
     ),
 
     'restore' => array(
@@ -23,15 +23,15 @@ return array(
     ),
     
     'deletefile' => array(
-        'error'   => 'File not deleted. Please try again.',
-        'success' => 'File successfully deleted.',
+        'error'   => 'O arquivo não foi deletado. Tente novamente.',
+        'success' => 'Arquivo deletado com sucesso.',
     ),
 
     'upload' => array(
-        'error'   => 'File(s) not uploaded. Please try again.',
-        'success' => 'File(s) successfully uploaded.',
-        'nofiles' => 'You did not select any files for upload',
-        'invalidfiles' => 'One or more of your files is too large or is a filetype that is not allowed. Allowed filetypes are png, gif, jpg, doc, docx, pdf, and txt.',
+        'error'   => 'O(s) arquivo(s) não foi/foram carregado(s). Tente novamente.',
+        'success' => 'Arquivo(s) carregado(s) com sucesso.',
+        'nofiles' => 'Você não selecionou nenhum arquivo para carregar',
+        'invalidfiles' => 'Um ou mais de seus arquivos é muito grande ou está em um tipo de arquivo não permitido. Os tipos permitidos são png, gif, jpg, doc, docx, pdf, e txt.',
     ),
 
 

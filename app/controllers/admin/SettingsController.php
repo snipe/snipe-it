@@ -65,9 +65,10 @@ class SettingsController extends AdminController
         // Declare the rules for the form validation
         $rules = array(
         "site_name" 	=> 'required|min:3',
-        "per_page"   		=> 'required|min:1|numeric',
+        "per_page"   	=> 'required|min:1|numeric',
         "qr_text"		=> 'min:1|max:31',
         "logo"   		=> 'mimes:jpeg,bmp,png,gif',
+        "alert_email"   => 'email',
         );
 
         // Create a new validator instance from our validation rules
@@ -106,6 +107,8 @@ class SettingsController extends AdminController
             $setting->qr_text = e(Input::get('qr_text'));
             $setting->auto_increment_prefix = e(Input::get('auto_increment_prefix'));
             $setting->auto_increment_assets = e(Input::get('auto_increment_assets', '0'));
+            $setting->alert_email = e(Input::get('alert_email'));
+            $setting->alerts_enabled = e(Input::get('alerts_enabled', '0'));
             $setting->header_color = e(Input::get('header_color'));
             
 

@@ -131,6 +131,18 @@ class Asset extends Depreciable
     {
         return $this->belongsTo('Model','model_id');
     }
+    
+    public static function getExpiringWarrantee($days = 30) {
+	    
+	    return Asset::where('archived','=','0')
+		->whereNotNUll('warranty_months')
+		->whereNotNUll('purchase_date')
+		->whereRaw(DB::raw('DATE_ADD(`purchase_date`,INTERVAL `warranty_months` MONTH) <= DATE(NOW() + INTERVAL '.$days .' DAY) AND DATE_ADD(`purchase_date`,INTERVAL `warranty_months` MONTH) > NOW()'))
+		->orderBy('purchase_date', 'ASC')
+		->get();
+
+
+    }
 
 	/**
 	* Get the license seat information

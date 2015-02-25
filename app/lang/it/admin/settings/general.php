@@ -1,6 +1,8 @@
 <?php
 
 return array(
+	'alert_email'				=> 'Send alerts to',
+	'alerts_enabled'			=> 'Alerts enabled',
 	'auto_increment_assets'		=> 'Generate auto-incrementing asset IDs',
 	'auto_increment_prefix'		=> 'Prefix (optional)',
 	'auti_incrementing_help'    => 'Enable auto-incrementing asset IDs first to set this',
@@ -8,9 +10,11 @@ return array(
     'display_checkout_date'     => 'Display Checkout Date',
     'display_eol'               => 'Display EOL in table view',
     'display_qr'                => 'Display QR Codes',
+    'header_color'              => 'Header Color',
     'info'                      => 'These settings let you customize certain aspects of your installation.',
     'laravel'                   => 'Laravel Version',
     'load_remote'				=> 'This Snipe-IT install can load scripts from the outside world.',
+    'logo'                    	=> 'Logo',
     'per_page'                  => 'Results Per Page',
     'php'                       => 'PHP Version',
     'php_gd_info'               => 'You must install php-gd to display QR codes, see install instructions.',
