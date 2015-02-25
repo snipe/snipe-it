@@ -12,8 +12,8 @@ class CategoriesSeeder extends Seeder
             'created_at' => $date->modify('-10 day'),
             'updated_at' => $date->modify('-3 day'),
             'user_id' => 1,
-            'use_default_eula'	=	0;
-            'require_acceptance'	= 0;
+            'use_default_eula'	=>	0;
+            'require_acceptance'	=> 0;
             'deleted_at' => NULL,
         );
 
@@ -23,8 +23,8 @@ class CategoriesSeeder extends Seeder
             'created_at' => $date->modify('-10 day'),
             'updated_at' => $date->modify('-3 day'),
             'user_id' => 1,
-            'use_default_eula'	=	0;
-            'require_acceptance'	= 0;
+            'use_default_eula'	=>	0;
+            'require_acceptance'	=> 0;
             'deleted_at' => NULL,
         );
 
@@ -34,8 +34,8 @@ class CategoriesSeeder extends Seeder
             'created_at' => $date->modify('-10 day'),
             'updated_at' => $date->modify('-3 day'),
             'user_id' => 1,
-            'use_default_eula'	=	0;
-            'require_acceptance'	= 0;
+            'use_default_eula'	=>	0;
+            'require_acceptance'	=> 0;
             'deleted_at' => NULL,
         );
 
@@ -45,8 +45,8 @@ class CategoriesSeeder extends Seeder
             'created_at' => $date->modify('-10 day'),
             'updated_at' => $date->modify('-3 day'),
             'user_id' => 1,
-            'use_default_eula'	=	0;
-            'require_acceptance'	= 0;
+            'use_default_eula'	=>	0;
+            'require_acceptance'	=> 0;
             'deleted_at' => NULL,
         );
 
@@ -56,8 +56,8 @@ class CategoriesSeeder extends Seeder
             'created_at' => $date->modify('-10 day'),
             'updated_at' => $date->modify('-3 day'),
             'user_id' => 1,
-            'use_default_eula'	=	0;
-            'require_acceptance'	= 0;
+            'use_default_eula'	=>	0;
+            'require_acceptance'	=> 0;
             'deleted_at' => NULL,
         );
 
