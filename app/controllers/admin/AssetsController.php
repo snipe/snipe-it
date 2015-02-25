@@ -26,7 +26,7 @@ use Mail;
 
 class AssetsController extends AdminController
 {
-    protected $qrCodeDimensions = array( 'height' => 4, 'width' => 4);
+    protected $qrCodeDimensions = array( 'height' => 3.5, 'width' => 3.5);
 
     /**
      * Show a list of all the assets.
@@ -577,9 +577,9 @@ class AssetsController extends AdminController
         if ($settings->qr_code == '1') {
             $asset = Asset::find($assetId);
             
-            if (isset($asset->asset_tag)) {
+            if (isset($asset->id,$asset->asset_tag)) {
 
-                $content = DNS2D::getBarcodePNG($asset->asset_tag, "QRCODE",
+                $content = DNS2D::getBarcodePNG(route('view/hardware', $asset->id), "QRCODE",
                     $this->qrCodeDimensions['height'],$this->qrCodeDimensions['width']);
 
                 $img = imagecreatefromstring(base64_decode($content));
