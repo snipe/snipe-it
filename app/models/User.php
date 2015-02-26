@@ -45,7 +45,7 @@ class User extends SentryUserModel
     
      public function accessories()
     {
-        return $this->belongsToMany('Accessories', 'accessories_users', 'accessory_id', 'assigned_to')->withTrashed();
+        return $this->belongsToMany('Accessory', 'accessories_users', 'assigned_to','accessory_id')->withPivot('id')->withTrashed();
     }
 
     public function licenses()
