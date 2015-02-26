@@ -11,7 +11,7 @@
 
 <div class="row header">
     <div class="col-md-12">
-        <a href="{{ route('create/accessory') }}" class="btn btn-success pull-right"><i class="glyphicon glyphicon-plus-sign icon-white"></i> @lang('general.create')</a>
+        <a href="{{ route('create/accessory') }}" class="btn btn-success pull-right"><i class="fa fa-plus icon-white"></i> @lang('general.create')</a>
         <h3>@lang('general.accessories')</h3>
     </div>
 </div>
