@@ -34,7 +34,7 @@ Change your Email
          </label>
         <div class="col-md-5">
             <input class="form-control" type="email" name="email" id="email" value="{{{ Input::old('email', $user->email) }}}" {{ ((Config::get('app.lock_passwords') && ($user->id)) ? ' disabled' : '') }}>
-            {{ $errors->first('email', '<br><span class="alert-msg"><i class="fa fa-remove-sign"></i> :message</span>') }}
+            {{ $errors->first('email', '<br><span class="alert-msg"><i class="fa fa-times"></i> :message</span>') }}
         </div>
     </div>
     <!-- Confirm New Email -->
@@ -44,7 +44,7 @@ Change your Email
         </label>
         <div class="col-md-5">
             <input class="form-control" type="email" name="email_confirm" id="email_confirm" {{ ((Config::get('app.lock_passwords') && ($user->id)) ? ' disabled' : '') }}>
-            {{ $errors->first('email_confirm', '<br><span class="alert-msg"><i class="fa fa-remove-sign"></i> :message</span>') }}
+            {{ $errors->first('email_confirm', '<br><span class="alert-msg"><i class="fa fa-times"></i> :message</span>') }}
         </div>
     </div>
 
@@ -55,7 +55,7 @@ Change your Email
         </label>
         <div class="col-md-5">
             <input class="form-control" type="password" name="current_password" id="current_password" {{ ((Config::get('app.lock_passwords') && ($user->id)) ? ' disabled' : '') }}>
-            {{ $errors->first('current_password', '<br><span class="alert-msg"><i class="fa fa-remove-sign"></i> :message</span>') }}
+            {{ $errors->first('current_password', '<br><span class="alert-msg"><i class="fa fa-times"></i> :message</span>') }}
         </div>
     </div>
 

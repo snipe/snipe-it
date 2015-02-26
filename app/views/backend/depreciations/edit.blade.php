@@ -40,7 +40,7 @@
                  </label>
                     <div class="col-md-6">
                         <input class="form-control" type="text" name="name" id="name" value="{{{ Input::old('name', $depreciation->name) }}}" />
-                        {{ $errors->first('name', '<br><span class="alert-msg"><i class="fa fa-remove-sign"></i> :message</span>') }}
+                        {{ $errors->first('name', '<br><span class="alert-msg"><i class="fa fa-times"></i> :message</span>') }}
                     </div>
             </div>
 
@@ -51,7 +51,7 @@
                  </label>
                     <div class="col-md-1">
                         <input class="form-control" type="text" name="months" id="months" value="{{{ Input::old('name', $depreciation->months) }}}" />
-                        {{ $errors->first('months', '<br><span class="alert-msg"><i class="fa fa-remove-sign"></i> :message</span>') }}
+                        {{ $errors->first('months', '<br><span class="alert-msg"><i class="fa fa-times"></i> :message</span>') }}
                     </div>
             </div>
 

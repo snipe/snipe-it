@@ -22,7 +22,7 @@ Forgot Password ::
          </label>
         <div class="col-md-5">
             <input class="form-control" type="password" name="password" id="password" />
-            {{ $errors->first('password', '<br><span class="alert-msg"><i class="fa fa-remove-sign"></i> :message</span>') }}
+            {{ $errors->first('password', '<br><span class="alert-msg"><i class="fa fa-times"></i> :message</span>') }}
         </div>
     </div>
 
@@ -33,7 +33,7 @@ Forgot Password ::
          </label>
         <div class="col-md-5">
             <input class="form-control" type="password" name="password_confirm" id="password_confirm" />
-            {{ $errors->first('password_confirm', '<br><span class="alert-msg"><i class="fa fa-remove-sign"></i> :message</span>') }}
+            {{ $errors->first('password_confirm', '<br><span class="alert-msg"><i class="fa fa-times"></i> :message</span>') }}
         </div>
     </div>
 

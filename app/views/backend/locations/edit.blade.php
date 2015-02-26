@@ -43,7 +43,7 @@
                         <div class="col-xs-8">
                         <input class="form-control" type="text" name="name" id="name" value="{{{ Input::old('name', $location->name) }}}" />
                     </div>
-                    {{ $errors->first('name', '<br><span class="alert-msg"><i class="fa fa-remove-sign"></i> :message</span>') }}
+                    {{ $errors->first('name', '<br><span class="alert-msg"><i class="fa fa-times"></i> :message</span>') }}
                     </div>
             </div>
 
@@ -55,7 +55,7 @@
                         <div class="col-xs-8">
                         <input class="form-control" type="text" name="address" id="address" value="{{{ Input::old('address', $location->address) }}}" />
                     </div>
-                    {{ $errors->first('address', '<br><span class="alert-msg"><i class="fa fa-remove-sign"></i> :message</span>') }}
+                    {{ $errors->first('address', '<br><span class="alert-msg"><i class="fa fa-times"></i> :message</span>') }}
                     </div>
             </div>
 
@@ -66,7 +66,7 @@
                         <div class="col-xs-8">
                         <input class="form-control" type="text" name="address2" id="address2" value="{{{ Input::old('address2', $location->address2) }}}" />
                     </div>
-                    {{ $errors->first('address2', '<br><span class="alert-msg"><i class="fa fa-remove-sign"></i> :message</span>') }}
+                    {{ $errors->first('address2', '<br><span class="alert-msg"><i class="fa fa-times"></i> :message</span>') }}
                     </div>
             </div>
 
@@ -79,7 +79,7 @@
                         <div class="col-xs-8">
                         <input class="form-control" type="text" name="city" id="city" value="{{{ Input::old('city', $location->city) }}}" />
                     </div>
-                    {{ $errors->first('city', '<br><span class="alert-msg"><i class="fa fa-remove-sign"></i> :message</span>') }}
+                    {{ $errors->first('city', '<br><span class="alert-msg"><i class="fa fa-times"></i> :message</span>') }}
                     </div>
             </div>
 
@@ -92,7 +92,7 @@
                         <div class="col-xs-2">
                         <input class="form-control" type="text" name="state" id="state" value="{{{ Input::old('state', $location->state) }}}" />
                     </div>
-                    {{ $errors->first('state', '<br><span class="alert-msg"><i class="fa fa-remove-sign"></i> :message</span>') }}
+                    {{ $errors->first('state', '<br><span class="alert-msg"><i class="fa fa-times"></i> :message</span>') }}
                     </div>
             </div>
 
@@ -103,7 +103,7 @@
                         <div class="col-xs-3">
                         <input class="form-control" type="text" name="zip" id="zip" value="{{{ Input::old('zip', $location->zip) }}}" />
                     </div>
-                    {{ $errors->first('zip', '<br><span class="alert-msg"><i class="fa fa-remove-sign"></i> :message</span>') }}
+                    {{ $errors->first('zip', '<br><span class="alert-msg"><i class="fa fa-times"></i> :message</span>') }}
                     </div>
             </div>
 
@@ -116,7 +116,7 @@
 
                          {{ Form::countries('country', Input::old('country', $location->country), 'select2') }}
                         </div>
-                        {{ $errors->first('country', '<br><span class="alert-msg"><i class="fa fa-remove-sign"></i> :message</span>') }}
+                        {{ $errors->first('country', '<br><span class="alert-msg"><i class="fa fa-times"></i> :message</span>') }}
                     </div>
             </div>
 
