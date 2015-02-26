@@ -169,7 +169,9 @@
                 data-title="@lang('general.delete')
                  {{ htmlspecialchars($asset->asset_tag) }}?" onClick="return false;"><i class="fa fa-trash icon-white"></i></a>
         	@else
+                @if ($asset->model->deleted_at=='')
         		 <a href="{{ route('restore/hardware', $asset->id) }}" class="btn btn-warning"><i class="fa fa-recycle icon-white"></i></a>
+                @endif
         	@endif
 
             </td>

@@ -276,7 +276,7 @@ class ModelsController extends AdminController
     **/
     public function getView($modelId = null)
     {
-        $model = Model::find($modelId);
+        $model = Model::withTrashed()->find($modelId);
 
         if (isset($model->id)) {
                 return View::make('backend/models/view', compact('model'));
