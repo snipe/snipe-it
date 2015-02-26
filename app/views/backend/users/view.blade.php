@@ -69,13 +69,14 @@
                             <br>
                             <!-- checked out assets table -->
                             @if (count($user->assets) > 0)
-                            <table class="table table-hover">
+                            <div class="table-responsive">
+							<table class="display">
                                 <thead>
                                     <tr>
                                         <th class="col-md-3">Asset Type</th>
-                                        <th class="col-md-2"><span class="line"></span>Asset Tag</th>
-                                        <th class="col-md-2"><span class="line"></span>Name</th>
-                                        <th class="col-md-1"><span class="line"></span>Actions</th>
+                                        <th class="col-md-2">Asset Tag</th>
+                                        <th class="col-md-2">Name</th>
+                                        <th class="col-md-1">Actions</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -105,14 +106,15 @@
 
                              <h6>@lang('admin/users/general.software_user', array('name' => $user->first_name))</h6>
                             <br>
-                            <!-- checked out assets table -->
+                            <!-- checked out licenses table -->
                             @if (count($user->licenses) > 0)
-                            <table class="table table-hover">
+                            <div class="table-responsive">
+							<table class="display">
                                 <thead>
                                     <tr>
-                                        <th class="col-md-4"><span class="line"></span>Name</th>
-                                        <th class="col-md-4"><span class="line"></span>Serial</th>
-                                        <th class="col-md-1"><span class="line"></span>Actions</th>
+                                        <th class="col-md-5">Name</th>
+                                        <th class="col-md-6">Serial</th>
+                                        <th class="col-md-1">Actions</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -126,6 +128,8 @@
                                     @endforeach
                                 </tbody>
                             </table>
+                            </div>
+                            </div>
                             @else
 
                             <div class="col-md-12">
@@ -217,4 +221,6 @@
                         {{{ $user->last_login->diffForHumans() }}}</h6>
                         @endif
                     </div>
+                    
+                   
 @stop

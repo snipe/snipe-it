@@ -47,12 +47,13 @@ View Assets for  {{{ $user->fullName() }}} ::
                             @if (count($user->assets) > 0)
                             <h4>Assets Checked Out to You</h4>
                             <br>
-                            <table class="table table-hover">
+							<div class="table-responsive">
+							<table class="display">
                                 <thead>
                                     <tr>
                                         <th class="col-md-3">Asset Type</th>
-                                        <th class="col-md-2"><span class="line"></span>Asset Tag</th>
-                                        <th class="col-md-2"><span class="line"></span>Name</th>
+                                        <th class="col-md-2">Asset Tag</th>
+                                        <th class="col-md-2">Name</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -68,6 +69,7 @@ View Assets for  {{{ $user->fullName() }}} ::
                                     @endforeach
                                 </tbody>
                             </table>
+							</div>
                             @endif
 
 
@@ -75,11 +77,12 @@ View Assets for  {{{ $user->fullName() }}} ::
                             @if (count($user->licenses) > 0)
                             <h4>Software Checked Out to You</h4>
                             <br>
-                            <table class="table table-hover">
-                                <thead>
+                            <div class="table-responsive">
+							<table class="display">                                
+								<thead>
                                     <tr>
-                                        <th class="col-md-4"><span class="line"></span>Name</th>
-                                        <th class="col-md-4"><span class="line"></span>Serial</th>
+                                        <th class="col-md-4">Name</th>
+                                        <th class="col-md-4">Serial</th>
 
                                     </tr>
                                 </thead>
@@ -93,6 +96,7 @@ View Assets for  {{{ $user->fullName() }}} ::
                                     @endforeach
                                 </tbody>
                             </table>
+                            </div>
                             @endif
 
 

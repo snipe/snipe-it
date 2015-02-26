@@ -414,7 +414,7 @@
                 </div>
                 <div class="modal-body"></div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button><a class="btn btn-danger" id="dataConfirmOK">@lang('general.yes')</a>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button><a class="btn btn-danger btn-sm" id="dataConfirmOK">@lang('general.yes')</a>
                 </div>
             </div>
         </div>
@@ -429,7 +429,11 @@
     <script src="{{ asset('assets/js/theme.js') }}"></script>
     <script src="{{ asset('assets/js/snipeit.js') }}"></script>
 
-
+	 <script>
+	$(document).ready(function() {
+	    $('table.display').dataTable();
+	} );
+	</script>
 
     </body>
 </html>
