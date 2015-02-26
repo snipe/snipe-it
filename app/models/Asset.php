@@ -129,7 +129,7 @@ class Asset extends Depreciable
 
     public function model()
     {
-        return $this->belongsTo('Model','model_id');
+        return $this->belongsTo('Model','model_id')->withTrashed();
     }
     
     public static function getExpiringWarrantee($days = 30) {
