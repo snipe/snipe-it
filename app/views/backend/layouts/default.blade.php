@@ -29,7 +29,6 @@
 	    <link rel="stylesheet" href="{{ asset('assets/css/lib/jquery-ui-1.10.2.custom.css') }}" rel="stylesheet" type="text/css" />
 	    <link rel="stylesheet" href="{{ asset('assets/css/lib/font-awesome.min.css') }}" type="text/css" rel="stylesheet" />
 	    <link rel="stylesheet" href="{{ asset('assets/css/lib/morris.css') }}" type="text/css" rel="stylesheet" />
-	    <link rel="stylesheet" href="{{ asset('assets/css/lib/uniform.default.css') }}" rel="stylesheet" type="text/css" />
         <link rel="stylesheet" href="{{ asset('assets/css/lib/select2.css') }}" type="text/css" rel="stylesheet">
         <link rel="stylesheet" href="{{ asset('assets/css/lib/bootstrap.datepicker.css') }}" type="text/css" rel="stylesheet">
         <link rel="stylesheet" href="{{ asset('assets/css/compiled/index.css') }}" type="text/css" media="screen" />
@@ -133,17 +132,17 @@
                     <ul class="dropdown-menu">
                        <li {{{ (Request::is('hardware/create') ? 'class="active"' : '') }}}>
                                <a href="{{ route('create/hardware') }}">
-                                   <i class="fa fa-plus"></i>
+                                   <i class="fa fa-barcode"></i>
                                    @lang('general.asset')</a>
                            </li>
                         <li {{{ (Request::is('admin/licenses/create') ? 'class="active"' : '') }}}>
                             <a href="{{ route('create/licenses') }}">
-                                <i class="fa fa-plus"></i>
+                                <i class="fa fa-certificate"></i>
                                 @lang('general.license')</a>
                         </li>
                         <li {{{ (Request::is('admin/users/create') ? 'class="active"' : '') }}}>
                             <a href="{{ route('create/user') }}">
-                            <i class="fa fa-plus"></i>
+                            <i class="fa fa-user"></i>
                             @lang('general.user')</a>
                         </li>
                     </ul>
@@ -172,7 +171,7 @@
                         <li class="divider"></li>
                         <li>
                             <a href="{{ route('logout') }}">
-                                <i class="fa fa-off"></i>
+                                <i class="fa fa-sign-out"></i>
                                 @lang('general.logout')
                             </a>
                         </li>
@@ -253,7 +252,7 @@
                 <a href="{{ URL::to('hardware?RTD=true') }}" class="dropdown-toggle">
                     <i class="fa fa-barcode"></i>
                     <span>@lang('general.assets')</span>
-                    <i class="fa fa-chevron-down"></i>
+                    <b class="fa fa-chevron-down"></b>
                 </a>
 
                 <ul class="submenu{{ (Request::is('hardware*') ? ' active' : '') }}">
@@ -299,8 +298,9 @@
             <li{{ (Request::is('reports*') ? ' class="active"><div class="pointer"><div class="arrow"></div><div class="arrow_border"></div></div>' : '>') }}
                 <a href="{{ URL::to('reports') }}"  class="dropdown-toggle">
                     <i class="fa fa-bar-chart"></i>
-                    <span>@lang('general.reports')</span>
-                    <i class="fa fa-chevron-down"></i>
+                    <span>@lang('general.reports') 
+                    <b class="fa fa-chevron-down"></b></span>
+                    
                 </a>
 
                 <ul class="submenu{{ (Request::is('reports*') ? ' active' : '') }}">
