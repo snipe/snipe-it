@@ -17,7 +17,7 @@
 <div class="page-header">
 
         <div class="pull-right">
-            <a href="{{ URL::previous() }}" class="btn-flat gray"><i class="fa fa-circle-arrow-left icon-white"></i>  @lang('general.back')</a>
+            <a href="{{ URL::previous() }}" class="btn-flat gray"><i class="fa fa-arrow-circle-left icon-white"></i>  @lang('general.back')</a>
         </div>
     <h3>
         @if ($user->id)
@@ -53,7 +53,7 @@
             <!-- First Name -->
             <div class="form-group {{ $errors->has('first_name') ? 'has-error' : '' }}">
                 <label class="col-md-3 control-label" for="first_name">@lang('general.first_name')
-                <i class='icon-asterisk'></i></label>
+                <i class='fa fa-asterisk'></i></label>
                 <div class="col-md-7">
                     <input class="form-control" type="text" name="first_name" id="first_name" value="{{{ Input::old('first_name', $user->first_name) }}}" />
                     {{ $errors->first('first_name', '<span class="alert-msg">:message</span>') }}
@@ -62,7 +62,7 @@
 
             <!-- Last Name -->
             <div class="form-group {{ $errors->has('last_name') ? 'has-error' : '' }}">
-                <label class="col-md-3 control-label" for="first_name">@lang('general.last_name') <i class='icon-asterisk'></i></label>
+                <label class="col-md-3 control-label" for="first_name">@lang('general.last_name') <i class='fa fa-asterisk'></i></label>
                 <div class="col-md-7">
                     <input class="form-control" type="text" name="last_name" id="last_name" value="{{{ Input::old('last_name', $user->last_name) }}}" />
                     {{ $errors->first('last_name', '<span class="alert-msg">:message</span>') }}
@@ -71,7 +71,7 @@
 
 			<!-- Email -->
             <div class="form-group {{ $errors->has('email') ? 'has-error' : '' }}">
-                <label class="col-md-3 control-label" for="email">@lang('admin/users/table.email') <i class='icon-asterisk'></i></label>
+                <label class="col-md-3 control-label" for="email">@lang('admin/users/table.email') <i class='fa fa-asterisk'></i></label>
                 <div class="col-md-7">
                     <input class="form-control" type="text" name="email" id="email" value="{{{ Input::old('email', $user->email) }}}"  {{ ((Config::get('app.lock_passwords') && ($user->id)) ? ' disabled' : '') }}>
                      @if (Config::get('app.lock_passwords') && ($user->id)) 
@@ -114,7 +114,7 @@
 			<!-- Location -->
             <div class="form-group {{ $errors->has('location_id') ? 'has-error' : '' }}">
                 <label class="col-md-3 control-label" for="location_id">@lang('admin/users/table.location')
-                    <i class='icon-asterisk'></i></label>
+                    <i class='fa fa-asterisk'></i></label>
                 <div class="col-md-7">
                     {{ Form::select('location_id', $location_list , Input::old('location_id', $user->location_id), array('class'=>'select2', 'style'=>'width:250px')) }}
                     {{ $errors->first('location_id', '<span class="alert-msg">:message</span>') }}
@@ -134,7 +134,7 @@
             <div class="form-group {{ $errors->has('password') ? 'has-error' : '' }}">
                 <label class="col-md-3 control-label" for="password">@lang('admin/users/table.password')
                 @if (!$user->id)
-                <i class='icon-asterisk'></i>
+                <i class='fa fa-asterisk'></i>
                 @endif
                 </label>
                 <div class="col-md-5">
@@ -147,7 +147,7 @@
             <div class="form-group {{ $errors->has('password_confirm') ? 'has-error' : '' }}">
                 <label class="col-md-3 control-label" for="password_confirm">@lang('admin/users/table.password_confirm')
                 @if (!$user->id)
-                <i class='icon-asterisk'></i>
+                <i class='fa fa-asterisk'></i>
                 @endif
                 </label>
                 <div class="col-md-5">
@@ -302,7 +302,7 @@
 			<div class="col-md-7">
 				<a class="btn btn-link" href="{{ URL::previous() }}">@lang('button.cancel')</a>
 				<button type="reset" class="btn">Reset</button>
-				<button type="submit" class="btn btn-success"><i class="fa fa-ok icon-white"></i> @lang('general.save')</button>
+				<button type="submit" class="btn btn-success"><i class="fa fa-check icon-white"></i> @lang('general.save')</button>
 			</div>
 		</div>
 

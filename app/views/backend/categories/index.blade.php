@@ -11,7 +11,7 @@
 
 <div class="row header">
     <div class="col-md-12">
-        <a href="{{ route('create/category') }}" class="btn btn-success pull-right"><i class="fa fa-plus-sign icon-white"></i> @lang('general.create')</a>
+        <a href="{{ route('create/category') }}" class="btn btn-success pull-right"><i class="fa fa-plus icon-white"></i> @lang('general.create')</a>
         <h3>@lang('admin/categories/general.asset_categories')</h3>
     </div>
 </div>
@@ -36,8 +36,8 @@
             <tr>
                 <td>{{{ $category->name }}}</td>
                 <td><a href="{{ route('view/category',$category->id) }}">{{ $category->assetscount() }}</a></td>
-                <td>{{ ($category->require_acceptance=='1') ? '<i class="fa fa-ok"></i>' : ''}}</td>
-                <td>{{ ($category->eula_text!='') ? '<i class="fa fa-ok"></i>' : ''}}</td>
+                <td>{{ ($category->require_acceptance=='1') ? '<i class="fa fa-check"></i>' : ''}}</td>
+                <td>{{ ($category->eula_text!='') ? '<i class="fa fa-check"></i>' : ''}}</td>
                 <td>
                 <a href="{{ route('update/category', $category->id) }}" class="btn btn-warning"><i class="fa fa-pencil icon-white"></i></a>
 <a data-html="false" class="btn delete-asset btn-danger" data-toggle="modal" href="{{ route('delete/category', $category->id) }}" data-content="@lang('admin/categories/message.delete.confirm')"

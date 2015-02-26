@@ -19,7 +19,7 @@ Forgot Password ::
 	<!-- Email -->
 	<div class="form-group {{ $errors->has('email') ? 'has-error' : '' }}">
 		<label class="col-md-3 control-label" for="email">@lang('admin/users/table.email')
-		<i class='icon-asterisk'></i>
+		<i class='fa fa-asterisk'></i>
 		</label>
 		<div class="col-md-5">
 			<input class="form-control" type="text" name="email" id="email" value="{{{ Input::old('email') }}}" />
@@ -33,7 +33,7 @@ Forgot Password ::
         <label class="col-md-3 control-label"></label>
             <div class="col-md-7">
                 <a class="btn btn-link" href="{{ route('home') }}">@lang('button.cancel')</a>
-                <button type="submit" class="btn btn-success"><i class="fa fa-ok icon-white"></i> @lang('button.submit')</button>
+                <button type="submit" class="btn btn-success"><i class="fa fa-check icon-white"></i> @lang('button.submit')</button>
             </div>
         </div>
 </form>
