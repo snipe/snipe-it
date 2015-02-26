@@ -262,7 +262,9 @@ class AccessoriesController extends AdminController
         // Update the accessory data
         $accessory->assigned_to            		= e(Input::get('assigned_to'));
 
-        $accessory->users()->attach($accessoryId, array('assigned_to' => e(Input::get('assigned_to'))));
+        $accessory->users()->attach($accessory->id, array(
+        'accessory_id' => $accessory->id, 
+        'assigned_to' => e(Input::get('assigned_to'))));
         
             $logaction = new Actionlog();
             $logaction->accessory_id = $accessory->id;
