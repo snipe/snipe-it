@@ -70,6 +70,7 @@ Route::group(array('prefix' => 'hardware', 'namespace' => 'Controllers\Admin', '
         Route::post('{modelId}/clone', 'ModelsController@postCreate');
         Route::get('{modelId}/delete', array('as' => 'delete/model', 'uses' => 'ModelsController@getDelete'));
         Route::get('{modelId}/view', array('as' => 'view/model', 'uses' => 'ModelsController@getView'));
+        Route::get('{modelID}/restore', array('as' => 'restore/model', 'uses' => 'ModelsController@getRestore'));
     });
 
 

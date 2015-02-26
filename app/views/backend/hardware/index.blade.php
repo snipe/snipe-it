@@ -35,7 +35,7 @@
 
 <div class="row header">
     <div class="col-md-12">
-        <a href="{{ route('create/hardware') }}" class="btn btn-success pull-right"><i class="fa fa-plus-sign icon-white"></i> @lang('general.create')</a>
+        <a href="{{ route('create/hardware') }}" class="btn btn-success pull-right"><i class="fa fa-plus icon-white"></i> @lang('general.create')</a>
         <h3>@yield('title0')</h3>
     </div>
 </div>
@@ -169,7 +169,9 @@
                 data-title="@lang('general.delete')
                  {{ htmlspecialchars($asset->asset_tag) }}?" onClick="return false;"><i class="fa fa-trash icon-white"></i></a>
         	@else
-        		 <a href="{{ route('restore/hardware', $asset->id) }}" class="btn btn-warning"><i class="fa fa-share-alt icon-white"></i></a>
+                @if ($asset->model->deleted_at=='')
+        		 <a href="{{ route('restore/hardware', $asset->id) }}" class="btn btn-warning"><i class="fa fa-recycle icon-white"></i></a>
+                @endif
         	@endif
 
             </td>
@@ -199,7 +201,7 @@
 @else
 <div class="col-md-9">
     <div class="alert alert-info alert-block">
-        <i class="fa fa-info-sign"></i>
+        <i class="fa fa-info-circle"></i>
         @lang('general.no_results')
     </div>
 </div>

@@ -12,7 +12,7 @@
 <div class="row header">
     <div class="col-md-12">
 	    <a href="{{ route('import/user') }}" class="btn btn-default pull-right"><span class="fa fa-upload"></span> Import</a>
-        <a href="{{ route('create/user') }}" class="btn btn-success pull-right"><i class="fa fa-plus-sign icon-white"></i>  @lang('general.create')</a>
+        <a href="{{ route('create/user') }}" class="btn btn-success pull-right"><i class="fa fa-plus icon-white"></i>  @lang('general.create')</a>
         @if (Input::get('onlyTrashed'))
             <a class="btn btn-default pull-right" href="{{ URL::to('admin/users') }}" style="margin-right: 5px;">Show Current Users</a>
         @else
@@ -67,7 +67,7 @@
             </td>
             <td>{{{ $user->assets->count() }}}</td>
             <td>{{{ $user->licenses->count() }}}</td>
-            <td>{{ $user->isActivated() ? '<i class="fa fa-ok"></i>' : ''}}</td>
+            <td>{{ $user->isActivated() ? '<i class="fa fa-check"></i>' : ''}}</td>
             
             <td nowrap="nowrap">
 	            

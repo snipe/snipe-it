@@ -12,7 +12,7 @@
 
 <div class="row header">
     <div class="col-md-12">
-        <a href="{{ route('create/group') }}" class="btn btn-success pull-right"><i class="fa fa-plus-sign icon-white"></i> @lang('general.create')</a>
+        <a href="{{ route('create/group') }}" class="btn btn-success pull-right"><i class="fa fa-plus icon-white"></i> @lang('general.create')</a>
         <h3>@lang('admin/groups/titles.group_management')</h3>
     </div>
 </div>

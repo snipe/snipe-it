@@ -19,8 +19,8 @@
                 <span class="caret"></span>
             </button>
             <ul class="dropdown-menu">
-                    <li><a href="{{ route('update/model', $category->id) }}">@lang('admin/categories/table.edit')</a></li>
-                    <li><a href="{{ route('clone/model', $category->id) }}">@lang('admin/categories/table.clone')</a></li>
+                    <li><a href="{{ route('update/model', $category->id) }}">@lang('admin/categories/general.edit')</a></li>
+                    <li><a href="{{ route('clone/model', $category->id) }}">@lang('admin/categories/general.clone')</a></li>
                     <li><a href="{{ route('create/hardware', $category->id) }}">@lang('admin/hardware/form.create')</a></li>
             </ul>
         </div>

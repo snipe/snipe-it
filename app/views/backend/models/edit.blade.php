@@ -14,11 +14,11 @@
 @section('content')
 <div class="row header">
     <div class="col-md-12">
-            <!--<a href="{{ URL::previous() }}" class="btn-flat gray pull-right"><i class="fa fa-circle-arrow-left icon-white"></i>  @lang('general.back')</a>-->
+            <!--<a href="{{ URL::previous() }}" class="btn-flat gray pull-right"><i class="fa fa-arrow-circle-left icon-white"></i>  @lang('general.back')</a>-->
         @if(isset($clone_model))
-            <a href="{{{ URL::route('view/model', $clone_model->id) }}}" class="btn-flat gray pull-right"><i class="fa fa-circle-arrow-left icon-white"></i>  @lang('general.back')</a>
+            <a href="{{{ URL::route('view/model', $clone_model->id) }}}" class="btn-flat gray pull-right"><i class="fa fa-arrow-circle-left icon-white"></i>  @lang('general.back')</a>
         @else
-            <a href="{{{ URL::route('view/model', $model->id) }}}" class="btn-flat gray pull-right"><i class="fa fa-circle-arrow-left icon-white"></i>  @lang('general.back')</a>
+            <a href="{{{ URL::route('view/model', $model->id) }}}" class="btn-flat gray pull-right"><i class="fa fa-arrow-circle-left icon-white"></i>  @lang('general.back')</a>
         @endif
         <h3>
         @if ($model->id)
@@ -44,32 +44,32 @@
             <!-- Model name -->
             <div class="form-group {{ $errors->has('name') ? ' has-error' : '' }}">
                 <label for="name" class="col-md-2 control-label">@lang('admin/models/table.name')
-                 <i class='icon-asterisk'></i></label>
+                 <i class='fa fa-asterisk'></i></label>
                  </label>
                     <div class="col-md-7">
                         <input class="form-control" type="text" name="name" id="name" value="{{{ Input::old('name', $model->name) }}}" />
-                        {{ $errors->first('name', '<span class="alert-msg"><i class="fa fa-remove-sign"></i> :message</span>') }}
+                        {{ $errors->first('name', '<span class="alert-msg"><i class="fa fa-times"></i> :message</span>') }}
                     </div>
             </div>
 
 			 <div class="form-group {{ $errors->has('manufacturer_id') ? ' has-error' : '' }}">
 				<label for="manufacturer_id" class="col-md-2 control-label">@lang('general.manufacturer')
-				 <i class='icon-asterisk'></i></label>
+				 <i class='fa fa-asterisk'></i></label>
 				 </label>
 					<div class="col-md-7">
 						{{ Form::select('manufacturer_id', $manufacturer_list , Input::old('manufacturer_id', $model->manufacturer_id), array('class'=>'select2', 'style'=>'width:350px')) }}
-						{{ $errors->first('manufacturer_id', '<span class="alert-msg"><i class="fa fa-remove-sign"></i> :message</span>') }}
+						{{ $errors->first('manufacturer_id', '<span class="alert-msg"><i class="fa fa-times"></i> :message</span>') }}
 					</div>
 			</div>
 
 			<!-- Category -->
             <div class="form-group {{ $errors->has('category_id') ? ' has-error' : '' }}">
                 <label for="category_id" class="col-md-2 control-label">@lang('general.category')
-                 <i class='icon-asterisk'></i></label>
+                 <i class='fa fa-asterisk'></i></label>
                  </label>
                     <div class="col-md-7">
                         {{ Form::select('category_id', $category_list , Input::old('category_id', $model->category_id), array('class'=>'select2', 'style'=>'width:350px')) }}
-                        {{ $errors->first('category_id', '<span class="alert-msg"><i class="fa fa-remove-sign"></i> :message</span>') }}
+                        {{ $errors->first('category_id', '<span class="alert-msg"><i class="fa fa-times"></i> :message</span>') }}
                     </div>
             </div>
 
@@ -79,7 +79,7 @@
                 <label for="modelno" class="col-md-2 control-label">@lang('general.model_no')</label>
                     <div class="col-md-7">
                         <input class="form-control" type="text" name="modelno" id="modelno" value="{{{ Input::old('modelno', $model->modelno) }}}" />
-                        {{ $errors->first('modelno', '<span class="alert-msg"><i class="fa fa-remove-sign"></i> :message</span>') }}
+                        {{ $errors->first('modelno', '<span class="alert-msg"><i class="fa fa-times"></i> :message</span>') }}
                     </div>
             </div>
 
@@ -88,7 +88,7 @@
                 <label for="depreciation_id" class="col-md-2 control-label">@lang('general.depreciation')</label>
                     <div class="col-md-7">
                         {{ Form::select('depreciation_id', $depreciation_list , Input::old('depreciation_id', $model->depreciation_id), array('class'=>'select2', 'style'=>'width:350px')) }}
-                        {{ $errors->first('depreciation_id', '<span class="alert-msg"><i class="fa fa-remove-sign"></i> :message</span>') }}
+                        {{ $errors->first('depreciation_id', '<span class="alert-msg"><i class="fa fa-times"></i> :message</span>') }}
                     </div>
             </div>
 
@@ -102,7 +102,7 @@
                     @lang('general.months')
 
                     </span>
-                    {{ $errors->first('eol', '<span class="alert-msg"><i class="fa fa-remove-sign"></i> :message</span>') }}
+                    {{ $errors->first('eol', '<span class="alert-msg"><i class="fa fa-times"></i> :message</span>') }}
                     </div>
                 </div>
             </div>
@@ -147,7 +147,7 @@
                     @else
                         <a class="btn btn-link" href="{{ URL::route('view/model', $model->id) }}">@lang('button.cancel')</a>
                     @endif
-                    <button type="submit" class="btn btn-success"><i class="fa fa-ok icon-white"></i> @lang('general.save')</button>
+                    <button type="submit" class="btn btn-success"><i class="fa fa-check icon-white"></i> @lang('general.save')</button>
                 </div>
             </div>
 </form>
