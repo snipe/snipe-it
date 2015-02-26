@@ -1,8 +1,8 @@
 <?php
 
 return array(
-    'about_accessories' 				=> 'About Accessories',
-    'about_categories'  				=> 'Asset categories help you organize your assets. Some example categories might be &quot;Desktops&quot;, &quot;Laptops&quot;, &quot;Mobile Phones&quot;, &quot;Tablets&quot;, and so on, but you can use asset categories any way that makes sense for you.',
+    'about_accessories_title' 			=> 'About Accessories',
+    'about_accessories_text'  			=> 'Accessories are anything you issue to users but that do not have a serial number (or you do not care about tracking them uniquely). For example, computer mice or keyboards.',
     'accessory_category' 				=> 'Accessory Category',
     'accessory_name'  					=> 'Accessory Name',
     'create'  							=> 'Create Category',
