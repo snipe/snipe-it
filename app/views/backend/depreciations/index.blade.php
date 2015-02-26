@@ -11,7 +11,7 @@ Asset Depreciations ::
 
 <div class="row header">
     <div class="col-md-12">
-        <a href="{{ route('create/depreciations') }}" class="btn btn-success pull-right"><i class="fa fa-plus-sign icon-white"></i> Create New</a>
+        <a href="{{ route('create/depreciations') }}" class="btn btn-success pull-right"><i class="fa fa-plus icon-white"></i> Create New</a>
         <h3>Asset Depreciations</h3>
     </div>
 </div>

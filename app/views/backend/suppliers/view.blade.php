@@ -69,7 +69,7 @@
                             @else
                             <div class="col-md-12">
                                 <div class="alert alert-info alert-block">
-                                    <i class="fa fa-info-sign"></i>
+                                    <i class="fa fa-info-circle"></i>
                                     @lang('general.no_results')
                                 </div>
                             </div>
@@ -100,7 +100,7 @@
 
                             <div class="col-md-12">
                                 <div class="alert alert-info alert-block">
-                                    <i class="fa fa-info-sign"></i>
+                                    <i class="fa fa-info-circle"></i>
                                     @lang('general.no_results')
                                 </div>
                             </div>

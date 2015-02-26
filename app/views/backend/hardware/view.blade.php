@@ -49,7 +49,7 @@
 
 		@if ($asset->deleted_at!='')
 			<div class="alert alert-warning alert-block">
-				<i class="icon-warning-sign"></i>
+				<i class="fa fa-warning"></i>
 				@lang('admin/hardware/general.deleted', array('asset_id' => $asset->id))
 
 			</div>
