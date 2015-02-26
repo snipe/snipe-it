@@ -24,13 +24,7 @@
     <!-- CSRF Token -->
     <input type="hidden" name="_token" value="{{ csrf_token() }}" />
 
-            <!-- accessory tag -->
-            <div class="form-group">
-            <label class="col-sm-2 control-label">@lang('admin/hardware/form.tag')</label>
-                <div class="col-md-6">
-                  <p class="form-control-static">{{{ $accessory->accessory_tag }}}</p>
-                </div>
-            </div>
+            
 
 			@if ($accessory->name)
             <!-- accessory name -->
