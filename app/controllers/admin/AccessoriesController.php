@@ -69,7 +69,7 @@ class AccessoriesController extends AdminController
             $accessory->qty            			= e(Input::get('qty'));
             $accessory->user_id          		= Sentry::getId();
 
-            // Was the asset created?
+            // Was the accessory created?
             if($accessory->save()) {
                 // Redirect to the new accessory  page
                 return Redirect::to("admin/accessories")->with('success', Lang::get('admin/accessories/message.create.success'));
@@ -136,7 +136,7 @@ class AccessoriesController extends AdminController
             $accessory->category_id            	= e(Input::get('category_id'));
             $accessory->qty            			= e(Input::get('qty'));
 
-            // Was the asset created?
+            // Was the accessory created?
             if($accessory->save()) {
                 // Redirect to the new accessory page
                 return Redirect::to("admin/accessories")->with('success', Lang::get('admin/accessories/message.update.success'));
@@ -165,7 +165,7 @@ class AccessoriesController extends AdminController
 
         if ($accessory->has_models() > 0) {
 
-            // Redirect to the asset management page
+            // Redirect to the accessory management page
             return Redirect::to('admin/accessories')->with('error', Lang::get('admin/accessories/message.assoc_users'));
         } else {
 
@@ -181,9 +181,9 @@ class AccessoriesController extends AdminController
 
 
     /**
-    *  Get the asset information to present to the accessory view page
+    *  Get the accessory information to present to the accessory view page
     *
-    * @param  int  $assetId
+    * @param  int  $accessoryId
     * @return View
     **/
     public function getView($accessoryID = null)
@@ -201,6 +201,156 @@ class AccessoriesController extends AdminController
         }
 
 
+    }
+    
+    /**
+    * Check out the accessory to a person
+    **/
+    public function getCheckout($accessoryId)
+    {
+        // Check if the accessory exists
+        if (is_null($accessory = Accessory::find($accessoryId))) {
+            // Redirect to the accessory management page with error
+            return Redirect::to('accessories')->with('error', Lang::get('admin/accessories/message.not_found'));
+        }
+
+        // Get the dropdown of users and then pass it to the checkout view
+        $users_list = array('' => 'Select a User') + DB::table('users')->select(DB::raw('concat(last_name,", ",first_name) as full_name, id'))->whereNull('deleted_at')->orderBy('last_name', 'asc')->orderBy('first_name', 'asc')->lists('full_name', 'id');
+
+        return View::make('backend/accessories/checkout', compact('accessory'))->with('users_list',$users_list);
+
+    }
+
+    /**
+    * Check out the accessory to a person
+    **/
+    public function postCheckout($accessoryId)
+    {
+        // Check if the accessory exists
+        if (is_null($accessory = Accessory::find($accessoryId))) {
+            // Redirect to the accessory management page with error
+            return Redirect::to('accessories')->with('error', Lang::get('admin/accessories/message.not_found'));
+        }
+
+        $assigned_to = e(Input::get('assigned_to'));
+
+
+        // Declare the rules for the form validation
+        $rules = array(
+            'assigned_to'   => 'required|min:1',
+            'note'   => 'alpha_space',
+        );
+
+        // Create a new validator instance from our validation rules
+        $validator = Validator::make(Input::all(), $rules);
+
+        // If validation fails, we'll exit the operation now.
+        if ($validator->fails()) {
+            // Ooops.. something went wrong
+            return Redirect::back()->withInput()->withErrors($validator);
+        }
+
+
+        // Check if the user exists
+        if (is_null($user = User::find($assigned_to))) {
+            // Redirect to the accessory management page with error
+            return Redirect::to('accessories')->with('error', Lang::get('admin/accessories/message.user_does_not_exist'));
+        }
+
+        // Update the accessory data
+        $accessory->assigned_to            		= e(Input::get('assigned_to'));
+
+        // Was the accessory updated?
+        if($accessory->save()) {
+            $logaction = new Actionlog();
+            $logaction->accessory_id = $accessory->id;
+            $logaction->checkedout_to = $accessory->assigned_to;
+            $logaction->accessory_type = 'hardware';
+            $logaction->location_id = $user->location_id;
+            $logaction->user_id = Sentry::getUser()->id;
+            $logaction->note = e(Input::get('note'));
+            $log = $logaction->logaction('checkout');
+            
+            $data['accessory_id'] = $accessory->id;
+            $data['eula'] = $accessory->getEula();
+            $data['first_name'] = $user->first_name;
+            
+             
+            if ($accessory->requireAcceptance()=='1') {
+				
+	            Mail::send('emails.accept-accessory', $data, function ($m) use ($user) {
+	                $m->to($user->email, $user->first_name . ' ' . $user->last_name);
+	                $m->subject('Confirm accessory delivery');
+	            });
+            } 
+
+            // Redirect to the new accessory page
+            return Redirect::to("accessories")->with('success', Lang::get('admin/accessories/message.checkout.success'));
+        }
+
+        // Redirect to the accessory management page with error
+        return Redirect::to("accessories/$accessoryId/checkout")->with('error', Lang::get('admin/accessories/message.checkout.error'));
+    }
+
+
+    /**
+    * Check the accessory back into inventory
+    *
+    * @param  int  $accessoryId
+    * @return View
+    **/
+    public function getCheckin($accessoryId)
+    {
+        // Check if the accessory exists
+        if (is_null($accessory = Accessory::find($accessoryId))) {
+            // Redirect to the accessory management page with error
+            return Redirect::to('hardware')->with('error', Lang::get('admin/accessories/message.not_found'));
+        }
+
+        return View::make('backend/accessories/checkin', compact('accessory'));
+    }
+
+
+    /**
+    * Check in the item so that it can be checked out again to someone else
+    *
+    * @param  int  $accessoryId
+    * @return View
+    **/
+    public function postCheckin($accessoryId)
+    {
+        // Check if the accessory exists
+        if (is_null($accessory = Accessory::find($accessoryId))) {
+            // Redirect to the accessory management page with error
+            return Redirect::to('hardware')->with('error', Lang::get('admin/hardware/message.not_found'));
+        }
+
+        if (!is_null($accessory->assigned_to)) {
+            $user = User::find($accessory->assigned_to);
+        }
+
+        $logaction = new Actionlog();
+        $logaction->checkedout_to = $accessory->assigned_to;
+
+        // Update the accessory data to null, since it's being checked in
+        $accessory->assigned_to            		= NULL;
+
+        // Was the accessory updated?
+        if($accessory->save()) {
+
+            $logaction->accessory_id = $accessory->id;
+            $logaction->location_id = NULL;
+            $logaction->accessory_type = 'hardware';
+            $logaction->note = e(Input::get('note'));
+            $logaction->user_id = Sentry::getUser()->id;
+            $log = $logaction->logaction('checkin from');
+
+            // Redirect to the new accessory page
+            return Redirect::to("hardware")->with('success', Lang::get('admin/hardware/message.checkin.success'));
+        }
+
+        // Redirect to the accessory management page with error
+        return Redirect::to("hardware")->with('error', Lang::get('admin/hardware/message.checkin.error'));
     }
 
 
