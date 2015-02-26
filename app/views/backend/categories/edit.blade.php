@@ -43,7 +43,7 @@
 	                        </div>                        
                             <div class="col-md-9">
                                 <input class="form-control" type="text" name="name" id="name" value="{{{ Input::old('name', $category->name) }}}" />
-                                {{ $errors->first('name', '<br><span class="alert-msg"><i class="fa fa-remove-sign"></i> :message</span>') }}
+                                {{ $errors->first('name', '<br><span class="alert-msg"><i class="fa fa-times"></i> :message</span>') }}
                             </div>
                         </div>
                         
@@ -55,7 +55,7 @@
 				            </div>
 			                <div class="col-md-7">				                
 			                    {{ Form::select('category_type', $category_types , Input::old('category_type', $category->category_type), array('class'=>'select2', 'style'=>'min-width:350px')) }}
-			                    {{ $errors->first('category_type', '<br><span class="alert-msg"><i class="fa fa-remove-sign"></i> :message</span>') }}
+			                    {{ $errors->first('category_type', '<br><span class="alert-msg"><i class="fa fa-times"></i> :message</span>') }}
 			                </div>
 			            </div>
                         						
