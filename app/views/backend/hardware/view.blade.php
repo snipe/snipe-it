@@ -47,13 +47,16 @@
 <div class="row profile">
 <div class="col-md-9 bio">
 
-		@if ($asset->deleted_at!='')
+		@if ($asset->model->deleted_at!='')
+            <div class="alert alert-warning alert-block">
+				<i class="fa fa-warning"></i>
+				@lang('admin/hardware/general.model_deleted', array('model_id' => $asset->model->id))
+			</div>
+        @elseif ($asset->deleted_at!='')
 			<div class="alert alert-warning alert-block">
 				<i class="fa fa-warning"></i>
 				@lang('admin/hardware/general.deleted', array('asset_id' => $asset->id))
-
 			</div>
-
 		@endif
 
         @if ($asset->serial)
@@ -375,7 +378,7 @@
                     	<li><br /><a href="{{ route('checkin/hardware', $asset->id) }}" class="btn btn-primary btn-sm">@lang('admin/hardware/general.checkin')</a></li>
                     	@elseif ((($asset->assetstatus->deployable=='1') &&  (($asset->assigned_to=='') || ($asset->assigned_to==0))) && ($asset->deleted_at==''))
                     	<li><br /><a href="{{ route('checkout/hardware', $asset->id) }}" class="btn btn-info btn-sm">@lang('admin/hardware/general.checkout')</a></li>
-						@elseif  ($asset->deleted_at!='')
+						@elseif  (($asset->deleted_at!='') && ($asset->model->deleted_at==''))
 
 						<li><br /><a href="{{ route('restore/hardware', $asset->id) }}" class="btn-flat large info ">@lang('admin/hardware/general.restore')</a></li>
 
