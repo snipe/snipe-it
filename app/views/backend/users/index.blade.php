@@ -51,7 +51,7 @@
 
         @foreach ($users as $user)
         <tr>
-            <td>
+            <td nowrap="nowrap">
             @if ($user->avatar)
 				<img src="/uploads/avatars/{{{ $user->avatar }}}" class="img-circle avatar hidden-phone" style="max-width: 45px;" />
 			@else
@@ -69,7 +69,7 @@
             <td>{{{ $user->licenses->count() }}}</td>
             <td>{{ $user->isActivated() ? '<i class="fa fa-ok"></i>' : ''}}</td>
             
-            <td>
+            <td nowrap="nowrap">
 	            
 	            <!-- If the user account is suspended - show the UNSUSPEND button.  Do NOT evaluate if soft deleted! -->
 				@if (is_null($user->deleted_at))

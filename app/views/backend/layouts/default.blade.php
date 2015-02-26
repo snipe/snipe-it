@@ -26,11 +26,11 @@
         <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/compiled/icons.css') }}">
 	
 	    <!-- libraries -->
-	    <link rel="stylesheet" href="{{ asset('assets/css/lib/jquery-ui-1.10.2.custom.css') }}" rel="stylesheet" type="text/css" />
-	    <link rel="stylesheet" href="{{ asset('assets/css/lib/font-awesome.min.css') }}" type="text/css" rel="stylesheet" />
-	    <link rel="stylesheet" href="{{ asset('assets/css/lib/morris.css') }}" type="text/css" rel="stylesheet" />
-        <link rel="stylesheet" href="{{ asset('assets/css/lib/select2.css') }}" type="text/css" rel="stylesheet">
-        <link rel="stylesheet" href="{{ asset('assets/css/lib/bootstrap.datepicker.css') }}" type="text/css" rel="stylesheet">
+	    <link rel="stylesheet" href="{{ asset('assets/css/lib/jquery-ui-1.10.2.custom.css') }}" type="text/css">
+	    <link rel="stylesheet" href="{{ asset('assets/css/lib/font-awesome.min.css') }}" type="text/css">
+	    <link rel="stylesheet" href="{{ asset('assets/css/lib/morris.css') }}" type="text/css">
+        <link rel="stylesheet" href="{{ asset('assets/css/lib/select2.css') }}" type="text/css">
+        <link rel="stylesheet" href="{{ asset('assets/css/lib/bootstrap.datepicker.css') }}" type="text/css">
         <link rel="stylesheet" href="{{ asset('assets/css/compiled/index.css') }}" type="text/css" media="screen" />
         <link rel="stylesheet" href="{{ asset('assets/css/compiled/user-list.css') }}" type="text/css" media="screen" />
         <link rel="stylesheet" href="{{ asset('assets/css/compiled/user-profile.css') }}" type="text/css" media="screen" />
@@ -103,7 +103,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="/">
+    
 	            
 	            @if (Setting::getSettings()->logo)
 	            	<a class="navbar-brand" href="/" style="padding: 5px;">
@@ -114,8 +114,6 @@
 	            	{{{ Setting::getSettings()->site_name }}}
 	            	</a>
 	            @endif
-	            
-            </a>
         </div>
 
 
@@ -238,9 +236,9 @@
                     <li {{{ (Request::is('auth/signin') ? 'class="active"' : '') }}}><a href="{{ route('signin') }}">@lang('general.sign_in')</a></li>
             @endif
             </ul>
-        </div>
-    </div>
     </header>
+    
+    
     <!-- end navbar -->
     @if (Sentry::check())
     <!-- sidebar -->
@@ -330,7 +328,9 @@
 <!-- main container -->
     <div class="content">
 
-        @if ((Sentry::check()) && (Sentry::getUser()->hasAccess('admin')))
+        @if ((Sentry::check()) && (Sentry::getUser()->hasAccess('admin'))) 
+        @if (Request::is('/'))
+      
         <!-- upper main stats -->
         <div id="main-stats">
             <div class="row stats-row">
@@ -367,10 +367,12 @@
                         </div>
                     </div>
                 </div>
-            </div>
+    
 
         <!-- end upper main stats -->
         @endif
+        @endif
+      
 
                 <div id="pad-wrapper">
 
@@ -386,25 +388,18 @@
     </div>
 
     <footer>
-    	<div class="col-md-2">
-        </div>
-        <div id="footer">
-        <div class="col-md-9 col-sm-12 col-xs-12">
-              <div class="container">
 
-                 
-	                  <div class="col-md-12">
+        <div id="footer" class="col-md-offset-2 col-md-9 col-sm-12 col-xs-12 text-center">
 		                <div class="muted credit">
-	                  		<a target="_blank" href="http://snipeitapp.com">Snipe IT</a> is a free open source
-					  		project by <a target="_blank" href="http://twitter.com/snipeyhead">@snipeyhead</a>. 			
+	                  			<a target="_blank" href="http://snipeitapp.com">Snipe IT</a> is a free open source
+					  		project by 
+					  			<a target="_blank" href="http://twitter.com/snipeyhead">@snipeyhead</a>. 			
 						  		<a target="_blank" href="https://github.com/snipe/snipe-it">Fork it</a> |
 						  		<a target="_blank" href="http://docs.snipeitapp.com/">Documentation</a> |
 						  		<a href="https://crowdin.com/project/snipe-it">Help Translate It! </a> |
 						  		<a target="_blank" href="https://github.com/snipe/snipe-it/issues?state=open">Report a Bug</a>
-						  		 &nbsp; &nbsp; (v1.2.5)</p>                
-                  	</div>
-              </div>
-        </div>
+						  		 &nbsp; &nbsp; (v1.2.5)               
+                  		</div>         	
         </div>
     </footer>
 
