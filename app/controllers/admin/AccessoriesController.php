@@ -275,7 +275,10 @@ class AccessoriesController extends AdminController
             $logaction->note = e(Input::get('note'));
             $log = $logaction->logaction('checkout');
             
-            $data['accessory_id'] = $accessory->id;
+            $accessory_user = DB::table('accessories_users')->where('assigned_to','=',$accessory->assigned_to)->where('accessory_id','=',$accessory->id)->first();
+            
+            print_r($accessory_user);
+            //$data['accessory_user_id'] = $accessory_user->id;
             $data['eula'] = $accessory->getEula();
             $data['first_name'] = $user->first_name;
             
@@ -302,14 +305,15 @@ class AccessoriesController extends AdminController
     * @param  int  $accessoryId
     * @return View
     **/
-    public function getCheckin($accessoryId)
+    public function getCheckin($accessoryUserId)
     {
         // Check if the accessory exists
-        if (is_null($accessory = Accessory::find($accessoryId))) {
+        if (is_null($accessory_user = DB::table('accessories_users')->find($accessoryUserId))) {
             // Redirect to the accessory management page with error
             return Redirect::to('admin/accessories')->with('error', Lang::get('admin/accessories/message.not_found'));
         }
 
+		$accessory = Accessory::find($accessory_user->accessory_id);
         return View::make('backend/accessories/checkin', compact('accessory'));
     }
 
@@ -320,20 +324,16 @@ class AccessoriesController extends AdminController
     * @param  int  $accessoryId
     * @return View
     **/
-    public function postCheckin($accessoryId)
+    public function postCheckin($accessoryUserId)
     {
         // Check if the accessory exists
-        if (is_null($accessory = Accessory::find($accessoryId))) {
+        if (is_null($accessory_user = DB::table('accessories_users')->find($accessoryUserId))) {
             // Redirect to the accessory management page with error
-            return Redirect::to('admin/accessories')->with('error', Lang::get('admin/accessory/message.not_found'));
+            return Redirect::to('admin/accessories')->with('error', Lang::get('admin/accessories/message.not_found'));
         }
 
-        if (!is_null($accessory->assigned_to)) {
-            $user = User::find($accessory->assigned_to);
-        }
-
-	
-
+       
+		$accessory = Accessory::find($accessory_user->accessory_id);
         $logaction = new Actionlog();
         $logaction->checkedout_to = $accessory->assigned_to;
 
@@ -341,21 +341,20 @@ class AccessoriesController extends AdminController
         $accessory->assigned_to            		= NULL;
 
         // Was the accessory updated?
-        if($accessory->users()->detach($accessoryId)) {
+        if(DB::table('accessories_users')->where('id', '=', $accessory_user->id)->delete()) {
 
             $logaction->accessory_id = $accessory->id;
             $logaction->location_id = NULL;
-            $logaction->accessory_type = 'accessory';
-            $logaction->note = e(Input::get('note'));
+            $logaction->asset_type = 'accessory';
             $logaction->user_id = Sentry::getUser()->id;
             $log = $logaction->logaction('checkin from');
 
             // Redirect to the new accessory page
-            return Redirect::to("admin/accessories")->with('success', Lang::get('admin/accessory/message.checkin.success'));
-        }
+            return Redirect::to("admin/accessories")->with('success', Lang::get('admin/accessories/message.checkin.success'));
+        } 
 
         // Redirect to the accessory management page with error
-        return Redirect::to("admin/accessories")->with('error', Lang::get('admin/accessory/message.checkin.error'));
+        return Redirect::to("admin/accessories")->with('error', Lang::get('admin/accessories/message.checkin.error'));
     }
 
 
