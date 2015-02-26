@@ -103,9 +103,9 @@
         <div class="navbar-header">
             <button class="navbar-toggle" type="button" data-toggle="collapse" id="menu-toggler">
                 <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
+                <span class="fa fa-bar"></span>
+                <span class="fa fa-bar"></span>
+                <span class="fa fa-bar"></span>
             </button>
             
 	            
@@ -127,23 +127,23 @@
                  @if(Sentry::getUser()->hasAccess('admin'))
                  <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                        <i class="icon-plus"></i> @lang('general.create')
+                        <i class="fa fa-plus"></i> @lang('general.create')
                         <b class="caret"></b>
                     </a>
                     <ul class="dropdown-menu">
                        <li {{{ (Request::is('hardware/create') ? 'class="active"' : '') }}}>
                                <a href="{{ route('create/hardware') }}">
-                                   <i class="icon-plus"></i>
+                                   <i class="fa fa-plus"></i>
                                    @lang('general.asset')</a>
                            </li>
                         <li {{{ (Request::is('admin/licenses/create') ? 'class="active"' : '') }}}>
                             <a href="{{ route('create/licenses') }}">
-                                <i class="icon-plus"></i>
+                                <i class="fa fa-plus"></i>
                                 @lang('general.license')</a>
                         </li>
                         <li {{{ (Request::is('admin/users/create') ? 'class="active"' : '') }}}>
                             <a href="{{ route('create/user') }}">
-                            <i class="icon-plus"></i>
+                            <i class="fa fa-plus"></i>
                             @lang('general.user')</a>
                         </li>
                     </ul>
@@ -157,22 +157,22 @@
                     <ul class="dropdown-menu">
                         <li{{{ (Request::is('account/profile') ? ' class="active"' : '') }}}>
                          	<a href="{{ route('view-assets') }}">
-                                <i class="icon-check"></i> @lang('general.viewassets')
+                                <i class="fa fa-check"></i> @lang('general.viewassets')
                         	</a>
                              <a href="{{ route('profile') }}">
-                                <i class="icon-user"></i> @lang('general.editprofile')
+                                <i class="fa fa-user"></i> @lang('general.editprofile')
                             </a>
                              <a href="{{ route('change-password') }}">
-                                <i class="icon-lock"></i> @lang('general.changepassword')
+                                <i class="fa fa-lock"></i> @lang('general.changepassword')
                             </a>
                             <a href="{{ route('change-email') }}">
-                                <i class="icon-envelope"></i> @lang('general.changeemail')
+                                <i class="fa fa-envelope"></i> @lang('general.changeemail')
                             </a>
                         </li>
                         <li class="divider"></li>
                         <li>
                             <a href="{{ route('logout') }}">
-                                <i class="icon-off"></i>
+                                <i class="fa fa-off"></i>
                                 @lang('general.logout')
                             </a>
                         </li>
@@ -181,54 +181,54 @@
                 @if(Sentry::getUser()->hasAccess('admin'))
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                        <i class="icon-wrench icon-white"></i> @lang('general.admin')
+                        <i class="fa fa-wrench icon-white"></i> @lang('general.admin')
                         <b class="caret"></b>
                     </a>
                     <ul class="dropdown-menu">
                         <li{{ (Request::is('hardware/models*') ? ' class="active"' : '') }}>
                             <a href="{{ URL::to('hardware/models') }}">
-                                <i class="icon-th"></i> @lang('general.asset_models')
+                                <i class="fa fa-th"></i> @lang('general.asset_models')
                             </a>
                         </li>
                         <li{{ (Request::is('admin/settings/categories*') ? ' class="active"' : '') }}>
                             <a href="{{ URL::to('admin/settings/categories') }}">
-                                <i class="icon-check"></i> @lang('general.categories')
+                                <i class="fa fa-check"></i> @lang('general.categories')
                             </a>
                         </li>
                         <li{{ (Request::is('admin/settings/manufacturers*') ? ' class="active"' : '') }}>
                             <a href="{{ URL::to('admin/settings/manufacturers') }}">
-                                <i class="icon-briefcase"></i> @lang('general.manufacturers')
+                                <i class="fa fa-briefcase"></i> @lang('general.manufacturers')
                             </a>
                         </li>
                         <li{{ (Request::is('admin/settings/suppliers*') ? ' class="active"' : '') }}>
                             <a href="{{ URL::to('admin/settings/suppliers') }}">
-                                <i class="icon-credit-card"></i> @lang('general.suppliers')
+                                <i class="fa fa-credit-card"></i> @lang('general.suppliers')
                             </a>
                         </li>
                         <li{{ (Request::is('admin/settings/statuslabels*') ? ' class="active"' : '') }}>
                             <a href="{{ URL::to('admin/settings/statuslabels') }}">
-                                <i class="icon-list"></i> @lang('general.status_labels')
+                                <i class="fa fa-list"></i> @lang('general.status_labels')
                             </a>
                         </li>
                         <li{{ (Request::is('admin/settings/depreciations*') ? ' class="active"' : '') }}>
                             <a href="{{ URL::to('admin/settings/depreciations') }}">
-                                <i class="icon-arrow-down"></i> @lang('general.depreciation')
+                                <i class="fa fa-arrow-down"></i> @lang('general.depreciation')
                             </a>
                         </li>
                         <li{{ (Request::is('admin/settings/locations*') ? ' class="active"' : '') }}>
                             <a href="{{ URL::to('admin/settings/locations') }}">
-                                <i class="icon-globe"></i> @lang('general.locations')
+                                <i class="fa fa-globe"></i> @lang('general.locations')
                             </a>
                         </li>
                         <li{{ (Request::is('admin/groups*') ? ' class="active"' : '') }}>
                             <a href="{{ URL::to('admin/groups') }}">
-                                <i class="icon-group"></i> @lang('general.groups')
+                                <i class="fa fa-group"></i> @lang('general.groups')
                             </a>
                         </li>
                         <li class="divider"></li>
                         <li>
                             <a href="{{ route('app') }}">
-                                <i class="icon-cog"></i> @lang('general.settings')
+                                <i class="fa fa-cog"></i> @lang('general.settings')
                             </a>
                         </li>
 
@@ -253,7 +253,7 @@
                 <a href="{{ URL::to('hardware?RTD=true') }}" class="dropdown-toggle">
                     <i class="fa fa-barcode"></i>
                     <span>@lang('general.assets')</span>
-                    <i class="icon-chevron-down"></i>
+                    <i class="fa fa-chevron-down"></i>
                 </a>
 
                 <ul class="submenu{{ (Request::is('hardware*') ? ' active' : '') }}">
@@ -300,7 +300,7 @@
                 <a href="{{ URL::to('reports') }}"  class="dropdown-toggle">
                     <i class="fa fa-bar-chart"></i>
                     <span>@lang('general.reports')</span>
-                    <i class="icon-chevron-down"></i>
+                    <i class="fa fa-chevron-down"></i>
                 </a>
 
                 <ul class="submenu{{ (Request::is('reports*') ? ' active' : '') }}">

@@ -511,7 +511,7 @@ class UsersController extends AdminController
             }
         )
         ->addColumn('activated', function ($model) {
-                $activated = $model->isActivated() ? '<i class="icon-ok"></i>' : '';
+                $activated = $model->isActivated() ? '<i class="fa fa-ok"></i>' : '';
                 return $activated;
             }
         )

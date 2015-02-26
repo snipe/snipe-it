@@ -15,7 +15,7 @@
 
 <div class="row header">
     <div class="col-md-12">
-        <a href="{{ URL::previous() }}" class="btn-flat gray pull-right"><i class="icon-plus-sign icon-white"></i>  @lang('general.back')</a>
+        <a href="{{ URL::previous() }}" class="btn-flat gray pull-right"><i class="fa fa-plus-sign icon-white"></i>  @lang('general.back')</a>
         <h3>
         @if ($manufacturer->id)
             @lang('admin/manufacturers/table.update')
@@ -44,7 +44,7 @@
                  </label>
                     <div class="col-md-6">
                         <input class="form-control" type="text" name="name" id="name" value="{{{ Input::old('name', $manufacturer->name) }}}" />
-                        {{ $errors->first('name', '<span class="alert-msg"><i class="icon-remove-sign"></i> :message</span>') }}
+                        {{ $errors->first('name', '<span class="alert-msg"><i class="fa fa-remove-sign"></i> :message</span>') }}
                     </div>
             </div>
 
@@ -58,7 +58,7 @@
                 @else
                 <a class="btn btn-link" href="{{ route('manufacturers') }}">@lang('button.cancel')</a>
                 @endif
-                <button type="submit" class="btn btn-success"><i class="icon-ok icon-white"></i> @lang('general.save')</button>
+                <button type="submit" class="btn btn-success"><i class="fa fa-ok icon-white"></i> @lang('general.save')</button>
             </div>
         </div>
 

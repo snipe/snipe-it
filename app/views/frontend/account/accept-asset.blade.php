@@ -12,7 +12,7 @@
 
 <div class="row header">
     <div class="col-md-12">
-        <a href="{{ URL::previous() }}" class="btn-flat gray pull-right"><i class="icon-circle-arrow-left icon-white"></i> @lang('general.back')</a>
+        <a href="{{ URL::previous() }}" class="btn-flat gray pull-right"><i class="fa fa-circle-arrow-left icon-white"></i> @lang('general.back')</a>
         <h3>
         Accept {{{ $asset->name }}}</h3>
     </div>
@@ -31,7 +31,7 @@
                        
                             <div class="col-md-7 col-md-offset-3">
                                 <a class="btn btn-link" href="{{ route('account') }}">@lang('button.cancel')</a>
-                                <button type="submit" class="btn btn-success"><i class="icon-ok icon-white"></i> Accept </button>
+                                <button type="submit" class="btn btn-success"><i class="fa fa-ok icon-white"></i> Accept </button>
                             </div>
                         </div>
                     </form>

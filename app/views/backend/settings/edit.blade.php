@@ -32,7 +32,7 @@ padding: 0px 20px;
 
                 <div class="pull-right">
                     <a href="{{ URL::previous() }}" class="btn-flat gray">
-                    <i class="icon-circle-arrow-left icon-white"></i>  @lang('general.back')</a>
+                    <i class="fa fa-circle-arrow-left icon-white"></i>  @lang('general.back')</a>
                 </div>
 
                 <h3 class="name">@lang('admin/settings/general.update')</h3>
@@ -228,7 +228,7 @@ padding: 0px 20px;
                                     <div class="form-group">
                                         <div class="controls col-md-offset-3">
                                             <a class="btn btn-link" href="{{ URL::previous() }}">@lang('button.cancel')</a>
-                                            <button type="submit" class="btn-flat success"><i class="icon-ok icon-white"></i> @lang('general.save')</button>
+                                            <button type="submit" class="btn-flat success"><i class="fa fa-ok icon-white"></i> @lang('general.save')</button>
                                         </div>
                                 </div>
                             </form>

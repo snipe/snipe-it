@@ -16,7 +16,7 @@
 
 <div class="row header">
     <div class="col-md-12">
-            <a href="{{ URL::previous() }}" class="btn-flat gray pull-right right"><i class="icon-circle-arrow-left icon-white"></i> @lang('general.back')</a>
+            <a href="{{ URL::previous() }}" class="btn-flat gray pull-right right"><i class="fa fa-circle-arrow-left icon-white"></i> @lang('general.back')</a>
         <h3>
         @if ($asset->id)
         	@lang('admin/hardware/form.update')
@@ -52,7 +52,7 @@
 							<input class="form-control" type="text" name="asset_tag" id="asset_tag" value="{{{ Input::old('asset_tag', Asset::autoincrement_asset()) }}}" />
 						@endif
 
-                        {{ $errors->first('asset_tag', '<span class="alert-msg"><i class="icon-remove-sign"></i> :message</span>') }}
+                        {{ $errors->first('asset_tag', '<span class="alert-msg"><i class="fa fa-remove-sign"></i> :message</span>') }}
                     </div>
             </div>
 
@@ -61,7 +61,7 @@
                 <label for="serial" class="col-md-2 control-label">@lang('admin/hardware/form.serial') <i class='icon-asterisk'></i></label>
                 <div class="col-md-7">
                     <input class="form-control" type="text" name="serial" id="serial" value="{{{ Input::old('serial', $asset->serial) }}}" />
-                    {{ $errors->first('serial', '<span class="alert-msg"><i class="icon-remove-sign"></i> :message</span>') }}
+                    {{ $errors->first('serial', '<span class="alert-msg"><i class="fa fa-remove-sign"></i> :message</span>') }}
                 </div>
             </div>
 
@@ -70,7 +70,7 @@
                 <label for="name" class="col-md-2 control-label">@lang('admin/hardware/form.name')</label>
                     <div class="col-md-7">
                         <input class="form-control" type="text" name="name" id="name" value="{{{ Input::old('name', $asset->name) }}}" />
-                        {{ $errors->first('name', '<span class="alert-msg"><i class="icon-remove-sign"></i> :message</span>') }}
+                        {{ $errors->first('name', '<span class="alert-msg"><i class="fa fa-remove-sign"></i> :message</span>') }}
                     </div>
             </div>
 
@@ -86,7 +86,7 @@
                     @else
                         {{ Form::select('model_id', $model_list , Input::old('model_id', $asset->model_id), array('class'=>'select2', 'style'=>'min-width:400px')) }}
                     @endif
-                    {{ $errors->first('model_id', '<span class="alert-msg"><i class="icon-remove-sign"></i> :message</span>') }}
+                    {{ $errors->first('model_id', '<span class="alert-msg"><i class="fa fa-remove-sign"></i> :message</span>') }}
                 </div>
             </div>
 
@@ -97,7 +97,7 @@
                 <label for="mac_address" class="col-md-2 control-label">@lang('admin/hardware/form.mac_address')</label>
                     <div class="col-md-7">
                         <input class="form-control" type="text" name="mac_address" id="mac_address" value="{{{ Input::old('mac_address', $asset->mac_address) }}}" />
-                        {{ $errors->first('mac_address', '<span class="alert-msg"><i class="icon-remove-sign"></i> :message</span>') }}
+                        {{ $errors->first('mac_address', '<span class="alert-msg"><i class="fa fa-remove-sign"></i> :message</span>') }}
                     </div>
             </div>
             @endif
@@ -107,8 +107,8 @@
                 <label for="purchase_date" class="col-md-2 control-label">@lang('admin/hardware/form.date')</label>
                 <div class="input-group col-md-3">
                     <input type="date" class="datepicker form-control" data-date-format="yyyy-mm-dd" placeholder="Select Date" name="purchase_date" id="purchase_date" value="{{{ Input::old('purchase_date', $asset->purchase_date) }}}">
-                    <span class="input-group-addon"><i class="icon-calendar"></i></span>
-                {{ $errors->first('purchase_date', '<span class="alert-msg"><i class="icon-remove-sign"></i> :message</span>') }}
+                    <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                {{ $errors->first('purchase_date', '<span class="alert-msg"><i class="fa fa-remove-sign"></i> :message</span>') }}
                 </div>
             </div>
 
@@ -117,7 +117,7 @@
                 <label for="supplier_id" class="col-md-2 control-label">@lang('admin/hardware/form.supplier')</label>
                 <div class="col-md-7">
                     {{ Form::select('supplier_id', $supplier_list , Input::old('supplier_id', $asset->supplier_id), array('class'=>'select2', 'style'=>'min-width:350px')) }}
-                    {{ $errors->first('supplier_id', '<span class="alert-msg"><i class="icon-remove-sign"></i> :message</span>') }}
+                    {{ $errors->first('supplier_id', '<span class="alert-msg"><i class="fa fa-remove-sign"></i> :message</span>') }}
                 </div>
             </div>
 
@@ -126,7 +126,7 @@
                 <label for="order_number" class="col-md-2 control-label">@lang('admin/hardware/form.order')</label>
                 <div class="col-md-7">
                     <input class="form-control" type="text" name="order_number" id="order_number" value="{{{ Input::old('order_number', $asset->order_number) }}}" />
-                    {{ $errors->first('order_number', '<span class="alert-msg"><i class="icon-remove-sign"></i> :message</span>') }}
+                    {{ $errors->first('order_number', '<span class="alert-msg"><i class="fa fa-remove-sign"></i> :message</span>') }}
                 </div>
             </div>
 
@@ -137,7 +137,7 @@
                             <div class="input-group">
                                     <span class="input-group-addon">@lang('general.currency')</span>
                                     <input class="col-md-2 form-control" type="text" name="purchase_cost" id="purchase_cost" value="{{ Input::old('purchase_cost', number_format($asset->purchase_cost,2)) }}" />
-                                    {{ $errors->first('purchase_cost', '<span class="alert-msg"><i class="icon-remove-sign"></i> :message</span>') }}
+                                    {{ $errors->first('purchase_cost', '<span class="alert-msg"><i class="fa fa-remove-sign"></i> :message</span>') }}
                              </div>
                      </div>
             </div>
@@ -148,7 +148,7 @@
                 <div class="col-md-2">
                     <div class="input-group">
                     <input class="col-md-2 form-control" type="text" name="warranty_months" id="warranty_months" value="{{{ Input::old('warranty_months', $asset->warranty_months) }}}" />   <span class="input-group-addon">@lang('admin/hardware/form.months')</span>
-                    {{ $errors->first('warranty_months', '<span class="alert-msg"><i class="icon-remove-sign"></i> :message</span>') }}
+                    {{ $errors->first('warranty_months', '<span class="alert-msg"><i class="fa fa-remove-sign"></i> :message</span>') }}
                     </div>
                 </div>
             </div>
@@ -158,7 +158,7 @@
                 <label for="status_id" class="col-md-2 control-label">@lang('admin/hardware/form.status') <i class='icon-asterisk'></i></label>
                     <div class="col-md-7">
                         {{ Form::select('status_id', $statuslabel_list , Input::old('status_id', $asset->status_id), array('class'=>'select2', 'style'=>'width:350px')) }}
-                        {{ $errors->first('status_id', '<span class="alert-msg"><i class="icon-remove-sign"></i> :message</span>') }}
+                        {{ $errors->first('status_id', '<span class="alert-msg"><i class="fa fa-remove-sign"></i> :message</span>') }}
                     </div>
             </div>
 
@@ -167,7 +167,7 @@
                 <label for="notes" class="col-md-2 control-label">@lang('admin/hardware/form.notes')</label>
                 <div class="col-md-7">
                     <textarea class="col-md-6 form-control" id="notes" name="notes">{{{ Input::old('notes', $asset->notes) }}}</textarea>
-                    {{ $errors->first('notes', '<span class="alert-msg"><i class="icon-remove-sign"></i> :message</span>') }}
+                    {{ $errors->first('notes', '<span class="alert-msg"><i class="fa fa-remove-sign"></i> :message</span>') }}
                 </div>
             </div>
 
@@ -176,7 +176,7 @@
                 <label for="status_id" class="col-md-2 control-label">@lang('admin/hardware/form.default_location')</label>
                     <div class="col-md-7">
                         {{ Form::select('rtd_location_id', $location_list , Input::old('rtd_location_id', $asset->rtd_location_id), array('class'=>'select2', 'style'=>'width:350px')) }}
-                        {{ $errors->first('status_id', '<span class="alert-msg"><i class="icon-remove-sign"></i> :message</span>') }}
+                        {{ $errors->first('status_id', '<span class="alert-msg"><i class="fa fa-remove-sign"></i> :message</span>') }}
                     </div>
             </div>
 
@@ -189,7 +189,7 @@
                 <div class="col-md-7">
                     {{ Form::select('assigned_to', $assigned_to , Input::old('assigned_to', $asset->assigned_to), array('class'=>'select2', 'style'=>'min-width:350px')) }}
                     <p class="help-block">@lang('admin/hardware/form.help_checkout')</p>
-                    {{ $errors->first('assigned_to', '<span class="alert-msg"><i class="icon-remove-sign"></i> :message</span>') }}
+                    {{ $errors->first('assigned_to', '<span class="alert-msg"><i class="fa fa-remove-sign"></i> :message</span>') }}
                 </div>
             </div>
 			@endif
@@ -211,7 +211,7 @@
                 <label class="col-md-2 control-label"></label>
                     <div class="col-md-7">
                         <a class="btn btn-link" href="{{ URL::previous() }}">@lang('button.cancel')</a>
-                        <button type="submit" class="btn btn-success"><i class="icon-ok icon-white"></i> @lang('general.save')</button>
+                        <button type="submit" class="btn btn-success"><i class="fa fa-ok icon-white"></i> @lang('general.save')</button>
                     </div>
                 </div>
 

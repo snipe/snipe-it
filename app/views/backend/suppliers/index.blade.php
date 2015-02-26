@@ -11,7 +11,7 @@
 
 <div class="row header">
     <div class="col-md-12">
-        <a href="{{ route('create/supplier') }}" class="btn btn-success pull-right"><i class="icon-plus-sign icon-white"></i>  @lang('general.create')</a>
+        <a href="{{ route('create/supplier') }}" class="btn btn-success pull-right"><i class="fa fa-plus-sign icon-white"></i>  @lang('general.create')</a>
         <h3>@lang('admin/suppliers/table.suppliers')</h3>
     </div>
 </div>
@@ -59,10 +59,10 @@
             <td>{{{ $supplier->num_assets() }}}</td>
             <td>{{{ $supplier->num_licenses() }}}</td>
             <td>
-                <a href="{{ route('update/supplier', $supplier->id) }}" class="btn btn-warning"><i class="icon-pencil icon-white"></i></a>
+                <a href="{{ route('update/supplier', $supplier->id) }}" class="btn btn-warning"><i class="fa fa-pencil icon-white"></i></a>
                 <a data-html="false" class="btn delete-asset btn-danger" data-toggle="modal" href="{{ route('delete/supplier', $supplier->id) }}" data-content="@lang('admin/suppliers/message.delete.confirm')"
                 data-title="@lang('general.delete')
-                 {{ htmlspecialchars($supplier->name) }}?" onClick="return false;"><i class="icon-trash icon-white"></i></a>
+                 {{ htmlspecialchars($supplier->name) }}?" onClick="return false;"><i class="fa fa-trash icon-white"></i></a>
 
 
             </td>

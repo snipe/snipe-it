@@ -69,7 +69,7 @@
                             @else
                             <div class="col-md-12">
                                 <div class="alert alert-info alert-block">
-                                    <i class="icon-info-sign"></i>
+                                    <i class="fa fa-info-sign"></i>
                                     @lang('general.no_results')
                                 </div>
                             </div>
@@ -100,7 +100,7 @@
 
                             <div class="col-md-12">
                                 <div class="alert alert-info alert-block">
-                                    <i class="icon-info-sign"></i>
+                                    <i class="fa fa-info-sign"></i>
                                     @lang('general.no_results')
                                 </div>
                             </div>
@@ -115,24 +115,24 @@
                                <ul>
 
                                 @if ($supplier->contact)
-                                    <li><i class="icon-user"></i>{{{ $supplier->contact }}}</li>
+                                    <li><i class="fa fa-user"></i>{{{ $supplier->contact }}}</li>
                                 @endif
                                 @if ($supplier->phone)
-                                    <li><i class="icon-phone"></i>{{{ $supplier->phone }}}</li>
+                                    <li><i class="fa fa-phone"></i>{{{ $supplier->phone }}}</li>
                                 @endif
                                 @if ($supplier->fax)
-                                    <li><i class="icon-print"></i>{{{ $supplier->fax }}}</li>
+                                    <li><i class="fa fa-print"></i>{{{ $supplier->fax }}}</li>
                                 @endif
 
 
                                 @if ($supplier->email)
-                                    <li><i class="icon-envelope-alt"></i><a href="mailto:{{{ $supplier->email }}}">
+                                    <li><i class="fa fa-envelope-alt"></i><a href="mailto:{{{ $supplier->email }}}">
                                     {{{ $supplier->email }}}
                                     </a></li>
                                 @endif
 
                                 @if ($supplier->url)
-                                    <li><i class="icon-globe"></i><a href="{{{ $supplier->url }}}" target="_new">{{{ $supplier->url }}}</a></li>
+                                    <li><i class="fa fa-globe"></i><a href="{{{ $supplier->url }}}" target="_new">{{{ $supplier->url }}}</a></li>
                                 @endif
 
                                 @if ($supplier->address)
@@ -151,7 +151,7 @@
                                 @endif
 
                                 @if ($supplier->notes)
-                                    <li><i class="icon-comment"></i>{{{ $supplier->notes }}}</li>
+                                    <li><i class="fa fa-comment"></i>{{{ $supplier->notes }}}</li>
                                 @endif
 
                                 @if ($supplier->image)

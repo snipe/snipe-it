@@ -103,7 +103,7 @@
     -moz-transition: all .1s linear;
     transition: all .1s linear;
 
-    [class^="icon-"],
+    [class^="fa fa-"],
 	[class*=" icon-"] {
 		margin-right: 3px;
 	}
@@ -248,7 +248,7 @@
 		-moz-box-shadow:0 1px 0 rgba(0,0,0,0.2) inset !important;
 		box-shadow:0 1px 0 rgba(0,0,0,0.2) inset !important;
 	}
-	[class^="icon-"],
+	[class^="fa fa-"],
 	[class*=" icon-"] {
 		margin-right: 3px;
 	}

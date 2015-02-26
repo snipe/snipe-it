@@ -27,10 +27,10 @@
                         </span>
                 </div>
                 @if ($user->deleted_at != NULL)
-                            <a href="{{ route('restore/user', $user->id) }}" class="btn-flat white large pull-right edit"><i class="icon-pencil"></i> Restore This User</a>
+                            <a href="{{ route('restore/user', $user->id) }}" class="btn-flat white large pull-right edit"><i class="fa fa-pencil"></i> Restore This User</a>
 
                 @else
-                        <!--<a href="{{ route('update/user', $user->id) }}" class="btn btn-warning pull-right edit"><i class="icon-pencil"></i> @lang('button.edit') This User</a>-->
+                        <!--<a href="{{ route('update/user', $user->id) }}" class="btn btn-warning pull-right edit"><i class="fa fa-pencil"></i> @lang('button.edit') This User</a>-->
                     <div class="row header">
 
                         <div class="btn-group pull-right">
@@ -56,7 +56,7 @@
 
                             <div class="col-md-12">
                                 <div class="alert alert-danger">
-                                    <i class="icon-exclamation-sign"></i>
+                                    <i class="fa fa-exclamation-sign"></i>
 
                                     @lang('admin/users/messages.user_deleted_warning')
 
@@ -97,7 +97,7 @@
 
                             <div class="col-md-12">
                                 <div class="alert alert-info alert-block">
-                                    <i class="icon-info-sign"></i>
+                                    <i class="fa fa-info-sign"></i>
                                     @lang('general.no_results')
                                 </div>
                             </div>
@@ -130,7 +130,7 @@
 
                             <div class="col-md-12">
                                 <div class="alert alert-info alert-block">
-                                    <i class="icon-info-sign"></i>
+                                    <i class="fa fa-info-sign"></i>
                                     @lang('general.no_results')
                                 </div>
                             </div>
@@ -174,7 +174,7 @@
 
                             <div class="col-md-12">
                                 <div class="alert alert-info alert-block">
-                                    <i class="icon-info-sign"></i>
+                                    <i class="fa fa-info-sign"></i>
                                     @lang('general.no_results')
                                 </div>
                             </div>
@@ -207,9 +207,9 @@
                             <li>{{{ $user->userloc->city }}}, {{{ $user->userloc->state }}} {{{ $user->userloc->zip }}}<br /><br /></li>
                         @endif
                         @if ($user->phone)
-                            <li><i class="icon-phone"></i>{{{ $user->phone }}}</li>
+                            <li><i class="fa fa-phone"></i>{{{ $user->phone }}}</li>
                         @endif
-                            <li><i class="icon-envelope-alt"></i><a href="mailto:{{{ $user->email }}}">{{{ $user->email }}}</a></li>
+                            <li><i class="fa fa-envelope-alt"></i><a href="mailto:{{{ $user->email }}}">{{{ $user->email }}}</a></li>
                         </ul>
 
                         @if ($user->last_login!='')

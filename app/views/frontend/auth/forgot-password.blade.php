@@ -33,7 +33,7 @@ Forgot Password ::
         <label class="col-md-3 control-label"></label>
             <div class="col-md-7">
                 <a class="btn btn-link" href="{{ route('home') }}">@lang('button.cancel')</a>
-                <button type="submit" class="btn btn-success"><i class="icon-ok icon-white"></i> @lang('button.submit')</button>
+                <button type="submit" class="btn btn-success"><i class="fa fa-ok icon-white"></i> @lang('button.submit')</button>
             </div>
         </div>
 </form>

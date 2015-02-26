@@ -34,7 +34,7 @@ Change your Email
          </label>
         <div class="col-md-5">
             <input class="form-control" type="email" name="email" id="email" value="{{{ Input::old('email', $user->email) }}}" {{ ((Config::get('app.lock_passwords') && ($user->id)) ? ' disabled' : '') }}>
-            {{ $errors->first('email', '<span class="alert-msg"><i class="icon-remove-sign"></i> :message</span>') }}
+            {{ $errors->first('email', '<span class="alert-msg"><i class="fa fa-remove-sign"></i> :message</span>') }}
         </div>
     </div>
     <!-- Confirm New Email -->
@@ -44,7 +44,7 @@ Change your Email
         </label>
         <div class="col-md-5">
             <input class="form-control" type="email" name="email_confirm" id="email_confirm" {{ ((Config::get('app.lock_passwords') && ($user->id)) ? ' disabled' : '') }}>
-            {{ $errors->first('email_confirm', '<span class="alert-msg"><i class="icon-remove-sign"></i> :message</span>') }}
+            {{ $errors->first('email_confirm', '<span class="alert-msg"><i class="fa fa-remove-sign"></i> :message</span>') }}
         </div>
     </div>
 
@@ -55,7 +55,7 @@ Change your Email
         </label>
         <div class="col-md-5">
             <input class="form-control" type="password" name="current_password" id="current_password" {{ ((Config::get('app.lock_passwords') && ($user->id)) ? ' disabled' : '') }}>
-            {{ $errors->first('current_password', '<span class="alert-msg"><i class="icon-remove-sign"></i> :message</span>') }}
+            {{ $errors->first('current_password', '<span class="alert-msg"><i class="fa fa-remove-sign"></i> :message</span>') }}
         </div>
     </div>
 
@@ -66,7 +66,7 @@ Change your Email
         <label class="col-md-2 control-label"></label>
             <div class="col-md-7">
                 <a class="btn btn-link" href="{{ route('view-assets') }}">@lang('button.cancel')</a>
-                <button type="submit" class="btn btn-success"><i class="icon-ok icon-white"></i> @lang('general.save')</button>
+                <button type="submit" class="btn btn-success"><i class="fa fa-ok icon-white"></i> @lang('general.save')</button>
                 <a href="{{ route('forgot-password') }}" class="btn btn-link">I forgot my password</a>
             </div>
         </div>

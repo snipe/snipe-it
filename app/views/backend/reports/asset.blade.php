@@ -13,7 +13,7 @@
 <div class="page-header">
 
     <div class="pull-right">
-        <a href="{{ route('reports/export/assets') }}" class="btn btn-flat gray pull-right"><i class="icon-download-alt"></i>
+        <a href="{{ route('reports/export/assets') }}" class="btn btn-flat gray pull-right"><i class="fa fa-download-alt"></i>
         @lang('admin/hardware/table.dl_csv')</a>
     </div>
 

@@ -79,7 +79,7 @@
                             @else
                             <div class="col-md-9">
                                 <div class="alert alert-info alert-block">
-                                    <i class="icon-info-sign"></i>
+                                    <i class="fa fa-info-sign"></i>
                                     @lang('general.no_results')
                                 </div>
                             </div>

@@ -12,7 +12,7 @@
 
 <div class="row header">
     <div class="col-md-12">
-            <a href="{{ URL::previous() }}" class="btn btn-flat gray pull-right"><i class="icon-circle-arrow-left icon-white"></i> @lang('general.back')</a>
+            <a href="{{ URL::previous() }}" class="btn btn-flat gray pull-right"><i class="fa fa-circle-arrow-left icon-white"></i> @lang('general.back')</a>
             <h3>@lang('admin/groups/titles.create_group')</h3>
     </div>
 </div>
@@ -31,7 +31,7 @@
                  </label>
                     <div class="col-md-6">
                         <input class="form-control" type="text" name="name" id="name" value="{{{ Input::old('name') }}}" />
-                        {{ $errors->first('name', '<span class="alert-msg"><i class="icon-remove-sign"></i> :message</span>') }}
+                        {{ $errors->first('name', '<span class="alert-msg"><i class="fa fa-remove-sign"></i> :message</span>') }}
                     </div>
             </div>
             <br><br>
@@ -69,7 +69,7 @@
                 <label class="col-md-2 control-label"></label>
                     <div class="col-md-7">
                         <a class="btn btn-link" href="{{ URL::previous() }}">@lang('button.cancel')</a>
-                        <button type="submit" class="btn btn-success"><i class="icon-ok icon-white"></i> @lang('general.save')</button>
+                        <button type="submit" class="btn btn-success"><i class="fa fa-ok icon-white"></i> @lang('general.save')</button>
                     </div>
                 </div>
 

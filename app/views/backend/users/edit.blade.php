@@ -17,7 +17,7 @@
 <div class="page-header">
 
         <div class="pull-right">
-            <a href="{{ URL::previous() }}" class="btn-flat gray"><i class="icon-circle-arrow-left icon-white"></i>  @lang('general.back')</a>
+            <a href="{{ URL::previous() }}" class="btn-flat gray"><i class="fa fa-circle-arrow-left icon-white"></i>  @lang('general.back')</a>
         </div>
     <h3>
         @if ($user->id)
@@ -302,7 +302,7 @@
 			<div class="col-md-7">
 				<a class="btn btn-link" href="{{ URL::previous() }}">@lang('button.cancel')</a>
 				<button type="reset" class="btn">Reset</button>
-				<button type="submit" class="btn btn-success"><i class="icon-ok icon-white"></i> @lang('general.save')</button>
+				<button type="submit" class="btn btn-success"><i class="fa fa-ok icon-white"></i> @lang('general.save')</button>
 			</div>
 		</div>
 

@@ -11,7 +11,7 @@
 
 <div class="row header">
     <div class="col-md-12">
-        <a href="{{ route('create/model') }}" class="btn btn-success pull-right"><i class="icon-plus-sign icon-white"></i>  @lang('general.create')</a>
+        <a href="{{ route('create/model') }}" class="btn btn-success pull-right"><i class="fa fa-plus-sign icon-white"></i>  @lang('general.create')</a>
         <h3>@lang('admin/models/table.title')</h3>
     </div>
 </div>
@@ -62,10 +62,10 @@
             </td>
 
             <td>
-                <a href="{{ route('update/model', $model->id) }}" class="btn btn-warning"><i class="icon-pencil icon-white"></i></a>
+                <a href="{{ route('update/model', $model->id) }}" class="btn btn-warning"><i class="fa fa-pencil icon-white"></i></a>
                 <a data-html="false" class="btn delete-asset btn-danger" data-toggle="modal" href="{{ route('delete/model', $model->id) }}" data-content="@lang('admin/models/message.delete.confirm')"
                 data-title="@lang('general.delete')
-                {{ htmlspecialchars($model->name) }}?" onClick="return false;"><i class="icon-trash icon-white"></i></a>
+                {{ htmlspecialchars($model->name) }}?" onClick="return false;"><i class="fa fa-trash icon-white"></i></a>
             </td>
         </tr>
         @endforeach
