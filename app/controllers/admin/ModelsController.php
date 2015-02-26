@@ -252,17 +252,17 @@ class ModelsController extends AdminController
 
 		 if (isset($model->id)) {
 
-			// Restore the user
+			// Restore the model
 			$model->restore();
 
 			// Prepare the success message
 			$success = Lang::get('admin/models/message.restore.success');
 
-			// Redirect to the user management page
-			return Redirect::to('hardware/models')->with('success', $success);
+			// Redirect back
+			return Redirect::back()->with('success', $success);
 
 		 } else {
-			 return Redirect::to('hardware/models')->with('error', Lang::get('admin/models/message.not_found'));
+			 return Redirect::back()->with('error', Lang::get('admin/models/message.not_found'));
 		 }
 
     }
