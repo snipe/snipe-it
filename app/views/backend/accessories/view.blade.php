@@ -15,15 +15,7 @@
 <div class="row header">
     <div class="col-md-12">
         <div class="btn-group pull-right">
-           <button class="btn btn-default dropdown-toggle" data-toggle="dropdown">@lang('button.actions')
-                <span class="caret"></span>
-            </button>
-            <ul class="dropdown-menu">
-                    <li><a href="{{ route('update/model', $accessory->id) }}">@lang('admin/accessories/table.edit')</a></li>
-                    <li><a href="{{ route('clone/model', $accessory->id) }}">@lang('admin/accessories/table.clone')</a></li>
-                    <li><a href="{{ route('create/hardware', $accessory->id) }}">@lang('admin/hardware/form.create')</a></li>
-            </ul>
-        </div>
+           <a href="{{ URL::previous() }}" class="btn-flat gray pull-right"><i class="fa fa-arrow-left icon-white"></i>  @lang('general.back')</a>        </div>
         <h3>
             {{{ $accessory->name }}}
  @lang('general.accessory')
@@ -34,39 +26,31 @@
 
 <div class="user-profile">
 <div class="row profile">
-<div class="col-md-12 bio">
+<div class="col-md-9 bio">
 
 
                             <!-- checked out accessories table -->
-                            @if (count($accessory->assets) > 0)
+                            @if ($accessory->users->count() > 0)
                            <table id="example">
                             <thead>
                                 <tr role="row">
-                                        <th class="col-md-3">@lang('general.name')</th>
-                                        <th class="col-md-3">@lang('general.asset_tag')</th>
                                         <th class="col-md-3">@lang('general.user')</th>
                                         <th class="col-md-2">@lang('table.actions')</th>
                                     </tr>
                                 </thead>
                                 <tbody>
 
-                                    @foreach ($accessory->assets as $modelassets)
+                                    @foreach ($accessory->users as $accessory_users)
                                     <tr>
-                                        <td><a href="{{ route('view/hardware', $modelassets->id) }}">{{{ $modelassets->name }}}</a></td>
-                                        <td><a href="{{ route('view/hardware', $modelassets->id) }}">{{{ $modelassets->asset_tag }}}</a></td>
                                         <td>
-                                        @if ($modelassets->assigneduser)
-                                        <a href="{{ route('view/user', $modelassets->assigned_to) }}">
-                                        {{{ $modelassets->assigneduser->fullName() }}}
+
+                                        <a href="{{ route('view/user', $accessory_users->assigned_to) }}">
+                                        {{{ $accessory_users->fullName() }}}
                                         </a>
-                                        @endif
+                                       
                                         </td>
                                         <td>
-                                        @if ($modelassets->assigned_to != 0)
-                                            <a href="{{ route('checkin/hardware', $modelassets->id) }}" class="btn-flat info">Checkin</a>
-                                        @else
-                                            <a href="{{ route('checkout/hardware', $modelassets->id) }}" class="btn-flat success">Checkout</a>
-                                        @endif
+                                            <a href="{{ route('checkin/hardware', $accessory_users->id) }}" class="btn-flat info">Checkin</a>
                                         </td>
 
                                     </tr>
@@ -79,7 +63,7 @@
                             @else
                             <div class="col-md-9">
                                 <div class="alert alert-info alert-block">
-                                    <i class="icon-info-sign"></i>
+                                    <i class="fa fa-info-sign"></i>
                                     @lang('general.no_results')
                                 </div>
                             </div>
@@ -87,5 +71,12 @@
 
                         </div>
 
+<!-- side address column -->
+<div class="col-md-3 col-xs-12 address pull-right">
+    <br /><br />
+    <h6>@lang('admin/accessories/general.about_accessories_title')</h6>
+    <p>@lang('admin/accessories/general.about_accessories_text') </p>
+
+</div>
 
 @stop

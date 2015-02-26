@@ -16,7 +16,7 @@
 <div class="row header">
     <div class="col-md-12">
         <a href="{{ URL::previous() }}" class="btn-flat gray pull-right right">
-        <i class="fa fa-circle-arrow-left icon-white"></i>  @lang('general.back')</a>
+        <i class="fa fa-arrow-left icon-white"></i>  @lang('general.back')</a>
         <h3>
         @if ($statuslabel->id)
             @lang('admin/statuslabels/table.update')

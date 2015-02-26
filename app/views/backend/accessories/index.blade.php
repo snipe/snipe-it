@@ -33,7 +33,7 @@
         <tbody>
             @foreach ($accessories as $accessory)
             <tr>
-                <td>{{{ $accessory->name }}}</td>
+                <td><a href="{{ route('view/accessory', $accessory->id) }}">{{{ $accessory->name }}}</a></td>
                 <td>{{{ $accessory->qty }}} </td>
                 <td>{{{ $accessory->numRemaining() }}} </td>
                 <td>

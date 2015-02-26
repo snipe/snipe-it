@@ -12,7 +12,7 @@
 <div class="row header">
     <div class="col-md-12">
         <a href="{{ URL::previous() }}" class="btn-flat gray pull-right">
-        <i class="fa fa-circle-arrow-left icon-white"></i> @lang('general.back')</a>
+        <i class="fa fa-arrow-left icon-white"></i> @lang('general.back')</a>
         <h3> @lang('admin/licenses/general.checkin') </h3>
     </div>
 </div>
