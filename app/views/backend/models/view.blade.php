@@ -17,13 +17,15 @@
            <button class="btn btn-default dropdown-toggle" data-toggle="dropdown">@lang('button.actions')
                 <span class="caret"></span>
             </button>
-            @if ($model->deleted_at=='')
             <ul class="dropdown-menu">
+                @if ($model->deleted_at=='')
                     <li><a href="{{ route('update/model', $model->id) }}">@lang('admin/models/table.edit')</a></li>
                     <li><a href="{{ route('clone/model', $model->id) }}">@lang('admin/models/table.clone')</a></li>
                     <li><a href="{{ route('create/hardware', $model->id) }}">@lang('admin/hardware/form.create')</a></li>
+                @else
+                    <li><a href="{{ route('restore/model', $model->id) }}">@lang('admin/models/general.restore')</a></li>
+                @endif
             </ul>
-            @endif
         </div>
         <h3>
 
