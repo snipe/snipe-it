@@ -252,7 +252,7 @@
 			@if(Sentry::getUser()->hasAccess('admin'))
             <li{{ (Request::is('hardware*') ? ' class="active"><div class="pointer"><div class="arrow"></div><div class="arrow_border"></div></div>' : '>') }}
                 <a href="{{ URL::to('hardware?RTD=true') }}" class="dropdown-toggle">
-                    <i class="icon-barcode"></i>
+                    <i class="fa fa-barcode"></i>
                     <span>@lang('general.assets')</span>
                     <i class="icon-chevron-down"></i>
                 </a>
@@ -283,7 +283,7 @@
 
             <li{{ (Request::is('admin/licenses*') ? ' class="active"><div class="pointer"><div class="arrow"></div><div class="arrow_border"></div></div>' : '>') }}
                 <a href="{{ URL::to('admin/licenses') }}"  >
-                    <i class="icon-certificate"></i>
+                    <i class="fa fa-certificate"></i>
                      <span>@lang('general.licenses')</span>
 
                 </a>
@@ -291,7 +291,7 @@
             </li>
             <li{{ (Request::is('admin/users*') ? ' class="active"><div class="pointer"><div class="arrow"></div><div class="arrow_border"></div></div>' : '>') }}
                 <a href="{{ URL::to('admin/users') }}">
-                    <i class="icon-group"></i>
+                    <i class="fa fa-users"></i>
                     <span>@lang('general.people')</span>
                 </a>
             </li>
@@ -299,7 +299,7 @@
         	 @if(Sentry::getUser()->hasAccess('reports'))
             <li{{ (Request::is('reports*') ? ' class="active"><div class="pointer"><div class="arrow"></div><div class="arrow_border"></div></div>' : '>') }}
                 <a href="{{ URL::to('reports') }}"  class="dropdown-toggle">
-                    <i class="icon-signal"></i>
+                    <i class="fa fa-bar-chart"></i>
                     <span>@lang('general.reports')</span>
                     <i class="icon-chevron-down"></i>
                 </a>
