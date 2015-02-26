@@ -11,6 +11,7 @@ use Sentry;
 use Str;
 use Validator;
 use View;
+use User;
 
 class AccessoriesController extends AdminController
 {
@@ -265,7 +266,7 @@ class AccessoriesController extends AdminController
             $logaction = new Actionlog();
             $logaction->accessory_id = $accessory->id;
             $logaction->checkedout_to = $accessory->assigned_to;
-            $logaction->accessory_type = 'hardware';
+            $logaction->accessory_type = 'accessory';
             $logaction->location_id = $user->location_id;
             $logaction->user_id = Sentry::getUser()->id;
             $logaction->note = e(Input::get('note'));
@@ -278,7 +279,7 @@ class AccessoriesController extends AdminController
              
             if ($accessory->requireAcceptance()=='1') {
 				
-	            Mail::send('emails.accept-accessory', $data, function ($m) use ($user) {
+	            Mail::send('emails.accept-asset', $data, function ($m) use ($user) {
 	                $m->to($user->email, $user->first_name . ' ' . $user->last_name);
 	                $m->subject('Confirm accessory delivery');
 	            });

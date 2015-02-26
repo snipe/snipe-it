@@ -29,4 +29,10 @@ class Accessory extends Elegant
     }
     
     
+    public function users()
+    {
+        return $this->belongsToMany('User', 'users', 'id')->withTrashed();
+    }
+    
+    
 }

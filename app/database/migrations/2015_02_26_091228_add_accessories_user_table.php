@@ -15,7 +15,8 @@ class AddAccessoriesUserTable extends Migration {
 		//
 		Schema::create('accessories_users', function ($table) {
             $table->increments('id');
-            $table->integer('user_id')->nullable()->default(NULL);    
+            $table->integer('user_id')->nullable()->default(NULL); 
+            $table->integer('accessory_id')->nullable()->default(NULL);    
             $table->integer('assigned_to')->nullable()->default(NULL);       
             $table->timestamps();
         });
