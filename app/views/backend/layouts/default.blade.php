@@ -27,6 +27,7 @@
 	
 	    <!-- libraries -->
 	    <link rel="stylesheet" href="{{ asset('assets/css/lib/jquery-ui-1.10.2.custom.css') }}" rel="stylesheet" type="text/css" />
+	    <link rel="stylesheet" href="{{ asset('assets/css/lib/font-awesome.min.css') }}" type="text/css" rel="stylesheet" />
 	    <link rel="stylesheet" href="{{ asset('assets/css/lib/morris.css') }}" type="text/css" rel="stylesheet" />
 	    <link rel="stylesheet" href="{{ asset('assets/css/lib/uniform.default.css') }}" rel="stylesheet" type="text/css" />
         <link rel="stylesheet" href="{{ asset('assets/css/lib/select2.css') }}" type="text/css" rel="stylesheet">
