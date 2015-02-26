@@ -52,7 +52,12 @@
 		               	
 		               	</td> 
 		           <td>{{{ $activity->action_type }}}</td> 
-	               <td>{{{ $activity->userlog->fullName() }}}</td> 
+	               <td>
+		               @if ($activity->userlog) 
+		               		{{{ $activity->userlog->fullName() }}}
+		               	@endif
+		               	
+		               </td> 
 	               
 	               
                 </tr>
