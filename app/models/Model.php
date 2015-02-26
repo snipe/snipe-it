@@ -20,11 +20,6 @@ class Model extends Elegant
     {
         return $this->hasMany('Asset', 'model_id');
     }
-    
-    public function trashedAssets()
-    {
-        return $this->hasMany('Asset', 'model_id')->withTrashed();
-    }
 
     public function category()
     {
