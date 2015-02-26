@@ -113,10 +113,15 @@ Route::group(array('prefix' => 'admin', 'before' => 'admin-auth', 'namespace' =>
         Route::group(array('prefix' => 'accessories'), function () {         
             Route::get('create', array('as' => 'create/accessory', 'uses' => 'AccessoriesController@getCreate'));
             Route::post('create', 'AccessoriesController@postCreate');
-            Route::get('{categoryId}/edit', array('as' => 'update/accessory', 'uses' => 'AccessoriesController@getEdit'));
-            Route::post('{categoryId}/edit', 'AccessoriesController@postEdit');
-            Route::get('{categoryId}/delete', array('as' => 'delete/accessory', 'uses' => 'AccessoriesController@getDelete'));
-            Route::get('{categoryId}/view', array('as' => 'view/accessory', 'uses' => 'AccessoriesController@getView'));
+            Route::get('{accessoryID}/edit', array('as' => 'update/accessory', 'uses' => 'AccessoriesController@getEdit'));
+            Route::post('{accessoryID}/edit', 'AccessoriesController@postEdit');
+            Route::get('{accessoryID}/delete', array('as' => 'delete/accessory', 'uses' => 'AccessoriesController@getDelete'));
+            Route::get('{accessoryID}/view', array('as' => 'view/accessory', 'uses' => 'AccessoriesController@getView'));
+            Route::get('{accessoryID}/checkout', array('as' => 'checkout/accessory', 'uses' => 'AccessoriesController@getCheckout'));
+		    Route::post('{accessoryID}/checkout', 'AccessoriesController@postCheckout');
+		    Route::get('{accessoryID}/checkin', array('as' => 'checkin/accessory', 'uses' => 'AccessoriesController@getCheckin'));
+		    Route::post('{accessoryID}/checkin', 'AccessoriesController@postCheckin');
+
             Route::get('/', array('as' => 'accessories', 'uses' => 'AccessoriesController@getIndex'));
         });
 
