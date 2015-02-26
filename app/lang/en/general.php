@@ -3,6 +3,8 @@
 return array(
 
 
+    'accessories'			=> 'Accessories',
+    'accessory'				=> 'Accessory',
     'address'				=> 'Address',
     'admin'					=> 'Admin',
     'all_assets'			=> 'All Assets',
@@ -32,6 +34,7 @@ return array(
     'currency'  			=> '$',
     'current'  				=> 'Current',
     'custom_report'         => 'Custom Asset Report',
+    'dashboard'				=> 'Dashboard',
     'date'					=> 'Date',
     'delete'  				=> 'Delete',
     'deleted'  				=> 'Deleted',

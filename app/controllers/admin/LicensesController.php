@@ -511,6 +511,7 @@ class LicensesController extends AdminController
             $logaction->asset_type = 'software';
             $logaction->user_id = Sentry::getUser()->id;
             $logaction->note = e(Input::get('note'));
+            $logaction->asset_id = $licenseseat->license_id;
 
 
             // Update the asset data
@@ -583,7 +584,7 @@ class LicensesController extends AdminController
 
         // Was the asset updated?
         if($licenseseat->save()) {
-            $logaction->asset_id = NULL;
+            $logaction->asset_id = $licenseseat->license_id;
             $logaction->location_id = NULL;
             $logaction->asset_type = 'software';
             $logaction->note = e(Input::get('note'));

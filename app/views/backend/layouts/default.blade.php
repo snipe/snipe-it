@@ -274,6 +274,12 @@
 
                 </ul>
             </li>
+            <li{{ (Request::is('admin/accessories*') ? ' class="active"><div class="pointer"><div class="arrow"></div><div class="arrow_border"></div></div>' : '>') }}
+                <a href="{{ URL::to('admin/accessories') }}">
+                    <i class="fa fa-keyboard-o"></i>
+                    <span>@lang('general.accessories')</span>
+                </a>
+            </li>
 
             <li{{ (Request::is('admin/licenses*') ? ' class="active"><div class="pointer"><div class="arrow"></div><div class="arrow_border"></div></div>' : '>') }}
                 <a href="{{ URL::to('admin/licenses') }}"  >

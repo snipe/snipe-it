@@ -108,6 +108,18 @@ Route::group(array('prefix' => 'admin', 'before' => 'admin-auth', 'namespace' =>
         Route::get('{licenseId}/showfile/{fileId}', array('as' => 'show/licensefile', 'uses' => 'LicensesController@displayFile'));
         Route::get('/', array('as' => 'licenses', 'uses' => 'LicensesController@getIndex'));
     });
+    
+    # Accessories
+        Route::group(array('prefix' => 'accessories'), function () {         
+            Route::get('create', array('as' => 'create/accessory', 'uses' => 'AccessoriesController@getCreate'));
+            Route::post('create', 'AccessoriesController@postCreate');
+            Route::get('{categoryId}/edit', array('as' => 'update/accessory', 'uses' => 'AccessoriesController@getEdit'));
+            Route::post('{categoryId}/edit', 'AccessoriesController@postEdit');
+            Route::get('{categoryId}/delete', array('as' => 'delete/accessory', 'uses' => 'AccessoriesController@getDelete'));
+            Route::get('{categoryId}/view', array('as' => 'view/accessory', 'uses' => 'AccessoriesController@getView'));
+            Route::get('/', array('as' => 'accessories', 'uses' => 'AccessoriesController@getIndex'));
+        });
+
 
 
     # Admin Settings Routes (for categories, maufactureres, etc)
@@ -140,18 +152,19 @@ Route::group(array('prefix' => 'admin', 'before' => 'admin-auth', 'namespace' =>
             Route::post('{supplierId}/edit', 'SuppliersController@postEdit');
             Route::get('{supplierId}/delete', array('as' => 'delete/supplier', 'uses' => 'SuppliersController@getDelete'));
             Route::get('{supplierId}/view', array('as' => 'view/supplier', 'uses' => 'SuppliersController@getView'));
-        });
-
-        # Categories
-        Route::group(array('prefix' => 'categories'), function () {
-            Route::get('/', array('as' => 'categories', 'uses' => 'CategoriesController@getIndex'));
+        });        
+        
+         # Categories
+        Route::group(array('prefix' => 'categories'), function () {          
             Route::get('create', array('as' => 'create/category', 'uses' => 'CategoriesController@getCreate'));
             Route::post('create', 'CategoriesController@postCreate');
             Route::get('{categoryId}/edit', array('as' => 'update/category', 'uses' => 'CategoriesController@getEdit'));
             Route::post('{categoryId}/edit', 'CategoriesController@postEdit');
             Route::get('{categoryId}/delete', array('as' => 'delete/category', 'uses' => 'CategoriesController@getDelete'));
             Route::get('{categoryId}/view', array('as' => 'view/category', 'uses' => 'CategoriesController@getView'));
+            Route::get('/', array('as' => 'categories', 'uses' => 'CategoriesController@getIndex'));
         });
+
 
         # Depreciations
         Route::group(array('prefix' => 'depreciations'), function () {
@@ -325,11 +338,8 @@ Route::group(array('before' => 'reporting-auth', 'namespace' => 'Controllers\Adm
 });
 
 
-// Redirect requests to / to the hardware section until we get a fancy dashboard set up
-Route::get('/', function () {
-    return Redirect::to('hardware');
-});
-Route::get('/', array('as' => 'home', 'before' => 'admin-auth', 'uses' => 'Controllers\Admin\AssetsController@getIndex'));
+
+Route::get('/', array('as' => 'home', 'before' => 'admin-auth', 'uses' => 'Controllers\Admin\DashboardController@getIndex'));
 
 
 
