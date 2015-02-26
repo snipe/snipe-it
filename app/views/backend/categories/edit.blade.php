@@ -39,12 +39,25 @@
                         <div class="form-group {{ $errors->has('name') ? ' has-error' : '' }}">
 	                        <div class="col-md-3">
 	                        	{{ Form::label('name', Lang::get('admin/categories/general.category_name')) }}
+	                        	<i class='fa fa-asterisk'></i>
 	                        </div>                        
                             <div class="col-md-9">
                                 <input class="form-control" type="text" name="name" id="name" value="{{{ Input::old('name', $category->name) }}}" />
                                 {{ $errors->first('name', '<br><span class="alert-msg"><i class="fa fa-remove-sign"></i> :message</span>') }}
                             </div>
                         </div>
+                        
+                        <!-- Type -->
+			            <div class="form-group {{ $errors->has('category_type') ? ' has-error' : '' }}">
+				            <div class="col-md-3">
+			               	{{ Form::label('category_type', Lang::get('general.type')) }}
+			               	<i class='fa fa-asterisk'></i>
+				            </div>
+			                <div class="col-md-7">				                
+			                    {{ Form::select('category_type', $category_types , Input::old('category_type', $category->category_type), array('class'=>'select2', 'style'=>'min-width:350px')) }}
+			                    {{ $errors->first('category_type', '<br><span class="alert-msg"><i class="fa fa-remove-sign"></i> :message</span>') }}
+			                </div>
+			            </div>
                         						
 						 <!-- EULA text -->
 						<div class="form-group {{ $errors->has('eula_text') ? 'error' : '' }}">

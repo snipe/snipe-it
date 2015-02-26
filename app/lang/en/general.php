@@ -89,6 +89,7 @@ return array(
     'suppliers'  			=> 'Suppliers',
     'total_assets'			=> 'total assets',
     'total_licenses'		=> 'total licenses',
+    'type'  				=> 'Type',
     'undeployable'			=> 'Un-deployable',
     'unknown_admin'			=> 'Unknown Admin',
     'user'					=> 'User',

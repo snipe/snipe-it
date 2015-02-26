@@ -12,6 +12,7 @@ class Category extends Elegant
     public $rules = array(
         'user_id' => 'numeric',
         'name'   => 'required|alpha_space|min:3|max:255|unique:categories,name,{id}',
+        'category_type'   => 'required',
     );
 
     public function has_models()
