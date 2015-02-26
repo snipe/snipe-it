@@ -96,17 +96,14 @@
 
     <!-- navbar -->
     <header class="navbar navbar-inverse" role="banner">
-
-    <div class="navbar navbar-inverse">
-        <div class="navbar-inner navbar-inverse">
-        <div class="navbar-header">
+	    <div class="navbar-header">
             <button class="navbar-toggle" type="button" data-toggle="collapse" id="menu-toggler">
                 <span class="sr-only">Toggle navigation</span>
-                <span class="fa fa-bar"></span>
-                <span class="fa fa-bar"></span>
-                <span class="fa fa-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
             </button>
-            
+            <a class="navbar-brand" href="/">
 	            
 	            @if (Setting::getSettings()->logo)
 	            	<a class="navbar-brand" href="/" style="padding: 5px;">
@@ -118,7 +115,9 @@
 	            	</a>
 	            @endif
 	            
+            </a>
         </div>
+
 
         <ul class="nav navbar-nav navbar-right">
             @if (Sentry::check())
@@ -390,18 +389,19 @@
     	<div class="col-md-2">
         </div>
         <div id="footer">
-        <div class="col-md-9">
+        <div class="col-md-9 col-sm-12 col-xs-12">
               <div class="container">
 
-                  <div class="muted credit" style="position:absolute;margin-top:1px;left:80px;margin-right:100px;">
-	                  	<a target="_blank" href="http://snipeitapp.com">Snipe IT</a> is a free open source
-					  	project by <a target="_blank" href="http://twitter.com/snipeyhead">@snipeyhead</a>.</div>
-					  	<div class="muted credit" style="position:absolute;margin-top:1px;right:80px;margin-left:100px;">
+                 
+	                  <div class="col-md-12">
+		                <div class="muted credit">
+	                  		<a target="_blank" href="http://snipeitapp.com">Snipe IT</a> is a free open source
+					  		project by <a target="_blank" href="http://twitter.com/snipeyhead">@snipeyhead</a>. 			
 						  		<a target="_blank" href="https://github.com/snipe/snipe-it">Fork it</a> |
 						  		<a target="_blank" href="http://docs.snipeitapp.com/">Documentation</a> |
 						  		<a href="https://crowdin.com/project/snipe-it">Help Translate It! </a> |
 						  		<a target="_blank" href="https://github.com/snipe/snipe-it/issues?state=open">Report a Bug</a>
-						  		 &nbsp; &nbsp; (v1.2.5)</p>
+						  		 &nbsp; &nbsp; (v1.2.5)</p>                
                   	</div>
               </div>
         </div>
