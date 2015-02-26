@@ -52,6 +52,13 @@ class Accessory extends Elegant
 	    } 
 	    
     }
+    
+    public function numRemaining() {    
+	    $checkedout = $this->users->count();
+	    $total = $this->qty;
+	    $remaining = $total - $checkedout;
+	    return $remaining;
+    }
 
     
 }
