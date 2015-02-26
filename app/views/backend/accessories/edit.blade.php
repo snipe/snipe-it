@@ -85,37 +85,19 @@
         </div>
     </div>
 </form>
-<br><br><br><br><br>
+<br><br><br>
 </div>
 
-                    <!-- side address column -->
-                    <div class="col-md-3 col-xs-12 address pull-right">
-                        <br /><br />
-                        <h6>@lang('admin/accessories/general.about_asset_accessories')</h6>
-                        <p>@lang('admin/accessories/general.about_accessories') </p>
+    <!-- side address column -->
+    <div class="col-md-3 col-xs-12 address pull-right">
+        
+        <h6>@lang('admin/accessories/general.about_accessories_title')</h6>
+        <p>@lang('admin/accessories/general.about_accessories_text') </p>
 
-                    </div>
-</div>
-</div>
-
-@if (Setting::getSettings()->default_eula_text!='')
-<!-- Modal -->
-<div class="modal fade" id="eulaModal" tabindex="-1" role="dialog" aria-labelledby="eulaModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title" id="eulaModalLabel">@lang('admin/settings/general.default_eula_text')</h4>
-      </div>
-      <div class="modal-body">
-        {{ Setting::getDefaultEula() }}
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">@lang('button.cancel')</button>
-      </div>
     </div>
-  </div>
 </div>
-@endif
+</div>
+
+
 
 @stop
