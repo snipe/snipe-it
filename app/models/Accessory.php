@@ -31,7 +31,7 @@ class Accessory extends Elegant
     
     public function users()
     {
-        return $this->belongsToMany('User', 'accessories_users', 'accessory_id','assigned_to')->withTrashed();
+        return $this->belongsToMany('User', 'accessories_users', 'accessory_id','assigned_to')->withPivot('id')->withTrashed();
     }
     
     
