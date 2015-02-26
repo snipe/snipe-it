@@ -65,6 +65,7 @@
 
                         @endif
 
+							
                             <h6>@lang('admin/users/general.assets_user', array('name' => $user->first_name))</h6>
                             <br>
                             <!-- checked out assets table -->
@@ -104,7 +105,8 @@
                             </div>
                             @endif
 
-                             <h6>@lang('admin/users/general.software_user', array('name' => $user->first_name))</h6>
+							<br><br><br>
+                            <h6>@lang('admin/users/general.software_user', array('name' => $user->first_name))</h6>
                             <br>
                             <!-- checked out licenses table -->
                             @if (count($user->licenses) > 0)

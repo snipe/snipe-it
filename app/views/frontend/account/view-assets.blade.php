@@ -45,6 +45,7 @@ View Assets for  {{{ $user->fullName() }}} ::
 
                             <!-- checked out assets table -->
                             @if (count($user->assets) > 0)
+                            
                             <h4>Assets Checked Out to You</h4>
                             <br>
 							<div class="table-responsive">
@@ -75,6 +76,7 @@ View Assets for  {{{ $user->fullName() }}} ::
 
                             <!-- checked out assets table -->
                             @if (count($user->licenses) > 0)
+                            <br><br><br>
                             <h4>Software Checked Out to You</h4>
                             <br>
                             <div class="table-responsive">
@@ -103,6 +105,7 @@ View Assets for  {{{ $user->fullName() }}} ::
 
 
                             <!-- checked out assets table -->
+                            <br><br><br>
                             <h4>History </h4>
                             <br>
                             @if (count($user->userlog) > 0)
