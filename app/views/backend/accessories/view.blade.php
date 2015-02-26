@@ -34,8 +34,8 @@
                            <table id="example">
                             <thead>
                                 <tr role="row">
-                                        <th class="col-md-3">@lang('general.user')</th>
-                                        <th class="col-md-2">@lang('table.actions')</th>
+                                        <th class="col-md-11">@lang('general.user')</th>
+                                        <th class="col-md-1">@lang('table.actions')</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -44,13 +44,14 @@
                                     <tr>
                                         <td>
 
-                                        <a href="{{ route('view/user', $accessory_users->assigned_to) }}">
+                                        <a href="{{ route('view/user', $accessory_users->id) }}">
                                         {{{ $accessory_users->fullName() }}}
+                                        
                                         </a>
                                        
                                         </td>
                                         <td>
-                                            <a href="{{ route('checkin/hardware', $accessory_users->id) }}" class="btn-flat info">Checkin</a>
+                                            <a href="{{ route('checkin/accessory', $accessory_users->pivot->id) }}" class="btn-flat info">Checkin</a>
                                         </td>
 
                                     </tr>
