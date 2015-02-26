@@ -2,7 +2,7 @@
 
 {{-- Page title --}}
 @section('title')
-@lang('admin/accessories/general.asset_accessories') ::
+@lang('general.accessories') ::
 @parent
 @stop
 
