@@ -13,6 +13,7 @@ use Validator;
 use View;
 use User;
 use Actionlog;
+use Mail;
 
 class AccessoriesController extends AdminController
 {
@@ -279,7 +280,7 @@ class AccessoriesController extends AdminController
              
             if ($accessory->requireAcceptance()=='1') {
 				
-	            Mail::send('emails.accept-asset', $data, function ($m) use ($user) {
+	            Mail::send('emails.accept-accessory', $data, function ($m) use ($user) {
 	                $m->to($user->email, $user->first_name . ' ' . $user->last_name);
 	                $m->subject('Confirm accessory delivery');
 	            });
