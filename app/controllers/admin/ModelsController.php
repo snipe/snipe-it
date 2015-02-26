@@ -30,7 +30,7 @@ class ModelsController extends AdminController
         	$models->withTrashed()->Deleted();
         }
         
-        $models = $models->get();
+        $models = $models->with('category','assets','depreciation')->get();
 
         // Show the page
         return View::make('backend/models/index', compact('models'));
