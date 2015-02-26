@@ -19,11 +19,11 @@ Forgot Password ::
 	<!-- Email -->
 	<div class="form-group {{ $errors->has('email') ? 'has-error' : '' }}">
 		<label class="col-md-3 control-label" for="email">@lang('admin/users/table.email')
-		<i class='icon-asterisk'></i>
+		<i class='fa fa-asterisk'></i>
 		</label>
 		<div class="col-md-5">
 			<input class="form-control" type="text" name="email" id="email" value="{{{ Input::old('email') }}}" />
-			{{ $errors->first('email', '<span class="alert-msg">:message</span>') }}
+			{{ $errors->first('email', '<br><span class="alert-msg">:message</span>') }}
 		</div>
     </div>
 

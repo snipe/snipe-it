@@ -42,7 +42,7 @@
 	                        </div>                        
                             <div class="col-md-9">
                                 <input class="form-control" type="text" name="name" id="name" value="{{{ Input::old('name', $category->name) }}}" />
-                                {{ $errors->first('name', '<span class="alert-msg"><i class="fa fa-remove-sign"></i> :message</span>') }}
+                                {{ $errors->first('name', '<br><span class="alert-msg"><i class="fa fa-remove-sign"></i> :message</span>') }}
                             </div>
                         </div>
                         						
@@ -56,7 +56,7 @@
 								<p class="help-block">@lang('admin/categories/general.eula_text_help') </p>
 								<p class="help-block">@lang('admin/settings/general.eula_markdown') </p>
 								
-								{{ $errors->first('eula_text', '<span class="alert-msg">:message</span>') }}						
+								{{ $errors->first('eula_text', '<br><span class="alert-msg">:message</span>') }}						
 	                        </div>
                     	</div>
                         

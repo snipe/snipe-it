@@ -44,7 +44,7 @@
             <!-- Model name -->
             <div class="form-group {{ $errors->has('name') ? ' has-error' : '' }}">
                 <label for="name" class="col-md-2 control-label">@lang('admin/models/table.name')
-                 <i class='icon-asterisk'></i></label>
+                 <i class='fa fa-asterisk'></i></label>
                  </label>
                     <div class="col-md-7">
                         <input class="form-control" type="text" name="name" id="name" value="{{{ Input::old('name', $model->name) }}}" />
@@ -54,22 +54,22 @@
 
 			 <div class="form-group {{ $errors->has('manufacturer_id') ? ' has-error' : '' }}">
 				<label for="manufacturer_id" class="col-md-2 control-label">@lang('general.manufacturer')
-				 <i class='icon-asterisk'></i></label>
+				 <i class='fa fa-asterisk'></i></label>
 				 </label>
 					<div class="col-md-7">
 						{{ Form::select('manufacturer_id', $manufacturer_list , Input::old('manufacturer_id', $model->manufacturer_id), array('class'=>'select2', 'style'=>'width:350px')) }}
-						{{ $errors->first('manufacturer_id', '<span class="alert-msg"><i class="fa fa-remove-sign"></i> :message</span>') }}
+						{{ $errors->first('manufacturer_id', '<br><span class="alert-msg"><i class="fa fa-remove-sign"></i> :message</span>') }}
 					</div>
 			</div>
 
 			<!-- Category -->
             <div class="form-group {{ $errors->has('category_id') ? ' has-error' : '' }}">
                 <label for="category_id" class="col-md-2 control-label">@lang('general.category')
-                 <i class='icon-asterisk'></i></label>
+                 <i class='fa fa-asterisk'></i></label>
                  </label>
                     <div class="col-md-7">
                         {{ Form::select('category_id', $category_list , Input::old('category_id', $model->category_id), array('class'=>'select2', 'style'=>'width:350px')) }}
-                        {{ $errors->first('category_id', '<span class="alert-msg"><i class="fa fa-remove-sign"></i> :message</span>') }}
+                        {{ $errors->first('category_id', '<br><span class="alert-msg"><i class="fa fa-remove-sign"></i> :message</span>') }}
                     </div>
             </div>
 
@@ -79,7 +79,7 @@
                 <label for="modelno" class="col-md-2 control-label">@lang('general.model_no')</label>
                     <div class="col-md-7">
                         <input class="form-control" type="text" name="modelno" id="modelno" value="{{{ Input::old('modelno', $model->modelno) }}}" />
-                        {{ $errors->first('modelno', '<span class="alert-msg"><i class="fa fa-remove-sign"></i> :message</span>') }}
+                        {{ $errors->first('modelno', '<br><span class="alert-msg"><i class="fa fa-remove-sign"></i> :message</span>') }}
                     </div>
             </div>
 
@@ -88,7 +88,7 @@
                 <label for="depreciation_id" class="col-md-2 control-label">@lang('general.depreciation')</label>
                     <div class="col-md-7">
                         {{ Form::select('depreciation_id', $depreciation_list , Input::old('depreciation_id', $model->depreciation_id), array('class'=>'select2', 'style'=>'width:350px')) }}
-                        {{ $errors->first('depreciation_id', '<span class="alert-msg"><i class="fa fa-remove-sign"></i> :message</span>') }}
+                        {{ $errors->first('depreciation_id', '<br><span class="alert-msg"><i class="fa fa-remove-sign"></i> :message</span>') }}
                     </div>
             </div>
 
@@ -102,7 +102,7 @@
                     @lang('general.months')
 
                     </span>
-                    {{ $errors->first('eol', '<span class="alert-msg"><i class="fa fa-remove-sign"></i> :message</span>') }}
+                    {{ $errors->first('eol', '<br><span class="alert-msg"><i class="fa fa-remove-sign"></i> :message</span>') }}
                     </div>
                 </div>
             </div>
@@ -123,7 +123,7 @@
                     <div class="col-md-5">
                         {{ Form::checkbox('image_delete') }}
                         <img src="/uploads/models/{{{ $model->image }}}" />
-                        {{ $errors->first('image_delete', '<span class="alert-msg">:message</span>') }}
+                        {{ $errors->first('image_delete', '<br><span class="alert-msg">:message</span>') }}
                     </div>
                 </div>
             @endif
@@ -132,7 +132,7 @@
                 <label class="col-md-2 control-label" for="image">@lang('general.image_upload')</label>
                 <div class="col-md-5">
                     {{ Form::file('image') }}
-                    {{ $errors->first('image', '<span class="alert-msg">:message</span>') }}
+                    {{ $errors->first('image', '<br><span class="alert-msg">:message</span>') }}
                 </div>
             </div>
 

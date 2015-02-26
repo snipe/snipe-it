@@ -42,11 +42,11 @@
             <!-- Asset Title -->
             <div class="form-group {{ $errors->has('name') ? ' has-error' : '' }}">
                 <label for="name" class="col-md-3 control-label">@lang('general.name')
-                <i class='icon-asterisk'></i></label>
+                <i class='fa fa-asterisk'></i></label>
                 </label>
                     <div class="col-md-6">
                         <input class="form-control" type="text" name="name" id="name" value="{{{ Input::old('name', $statuslabel->name) }}}" />
-                        {{ $errors->first('name', '<span class="alert-msg"><i class="fa fa-remove-sign"></i> :message</span>') }}
+                        {{ $errors->first('name', '<br><span class="alert-msg"><i class="fa fa-remove-sign"></i> :message</span>') }}
                     </div>
             </div>
 
@@ -56,7 +56,7 @@
                 <label for="notes" class="col-md-3 control-label">@lang('admin/hardware/form.notes')</label>
                 <div class="col-md-7">
                     <textarea class="col-md-6 form-control" id="notes" name="notes">{{{ Input::old('notes', $statuslabel->notes) }}}</textarea>
-                    {{ $errors->first('notes', '<span class="alert-msg"><i class="fa fa-remove-sign"></i> :message</span>') }}
+                    {{ $errors->first('notes', '<br><span class="alert-msg"><i class="fa fa-remove-sign"></i> :message</span>') }}
                 </div>
             </div>
 
@@ -64,12 +64,12 @@
             <!-- Label type -->
             <div class="form-group {{ $errors->has('status_type_bool') ? 'error' : '' }}">
                 <label for="notes" class="col-md-3 control-label">@lang('admin/statuslabels/table.status_type')
-                <i class='icon-asterisk'></i></label>
+                <i class='fa fa-asterisk'></i></label>
                 </label>
                 <div class="col-md-7">
                   {{ Form::select('statuslabel_types', $statuslabel_types , $use_statuslabel_type, array('class'=>'select2', 'style'=>'min-width:400px')) }}
-                    {{ $errors->first('notes', '<span class="alert-msg"><i class="fa fa-remove-sign"></i> :message</span>') }}
-                    {{ $errors->first('status_type', '<span class="alert-msg"><i class="fa fa-remove-sign"></i> :message</span>') }}
+                    {{ $errors->first('notes', '<br><span class="alert-msg"><i class="fa fa-remove-sign"></i> :message</span>') }}
+                    {{ $errors->first('status_type', '<br><span class="alert-msg"><i class="fa fa-remove-sign"></i> :message</span>') }}
                 </div>
             </div>
 

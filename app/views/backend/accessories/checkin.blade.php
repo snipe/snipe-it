@@ -24,20 +24,20 @@
     <!-- CSRF Token -->
     <input type="hidden" name="_token" value="{{ csrf_token() }}" />
 
-            <!-- Asset tag -->
+            <!-- accessory tag -->
             <div class="form-group">
             <label class="col-sm-2 control-label">@lang('admin/hardware/form.tag')</label>
                 <div class="col-md-6">
-                  <p class="form-control-static">{{{ $asset->asset_tag }}}</p>
+                  <p class="form-control-static">{{{ $accessory->accessory_tag }}}</p>
                 </div>
             </div>
 
-			@if ($asset->name)
-            <!-- Asset name -->
+			@if ($accessory->name)
+            <!-- accessory name -->
             <div class="form-group">
             <label class="col-sm-2 control-label">@lang('admin/hardware/form.name')</label>
                 <div class="col-md-6">
-                  <p class="form-control-static">{{{ $asset->name }}}</p>
+                  <p class="form-control-static">{{{ $accessory->name }}}</p>
                 </div>
             </div>
             @endif
@@ -46,8 +46,8 @@
             <div class="form-group {{ $errors->has('note') ? 'error' : '' }}">
                 <label for="note" class="col-md-2 control-label">@lang('admin/hardware/form.notes')</label>
                 <div class="col-md-7">
-                    <textarea class="col-md-6 form-control" id="note" name="note">{{{ Input::old('note', $asset->note) }}}</textarea>
-                    {{ $errors->first('note', '<br><span class="alert-msg"><i class="fa fa-remove-sign"></i> :message</span>') }}
+                    <textarea class="col-md-6 form-control" id="note" name="note">{{{ Input::old('note', $accessory->note) }}}</textarea>
+                    {{ $errors->first('note', '<span class="alert-msg"><i class="fa fa-remove-sign"></i> :message</span>') }}
                 </div>
             </div>
             <!-- Form actions -->

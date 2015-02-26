@@ -22,31 +22,31 @@ Change your Password
     <!-- Old Password -->
     <div class="form-group {{ $errors->has('old_password') ? ' has-error' : '' }}">
         <label for="old_password" class="col-md-2 control-label">Old Password
-        <i class='icon-asterisk'></i>
+        <i class='fa fa-asterisk'></i>
         </label>
         <div class="col-md-5">
             <input class="form-control" type="password" name="old_password" id="old_password" {{ (Config::get('app.lock_passwords') ? ' disabled' : '') }}>
-            {{ $errors->first('old_password', '<span class="alert-msg"><i class="fa fa-remove-sign"></i> :message</span>') }}
+            {{ $errors->first('old_password', '<br><span class="alert-msg"><i class="fa fa-remove-sign"></i> :message</span>') }}
         </div>
     </div>
 
     <div class="form-group {{ $errors->has('password') ? ' has-error' : '' }}">
         <label for="password" class="col-md-2 control-label">New Password
-        <i class='icon-asterisk'></i></label>
+        <i class='fa fa-asterisk'></i></label>
         <div class="col-md-5">
             <input class="form-control" type="password" name="password" id="password" {{ (Config::get('app.lock_passwords') ? ' disabled' : '') }}>
-            {{ $errors->first('password', '<span class="alert-msg"><i class="fa fa-remove-sign"></i> :message</span>') }}
+            {{ $errors->first('password', '<br><span class="alert-msg"><i class="fa fa-remove-sign"></i> :message</span>') }}
         </div>
     </div>
 
 
     <div class="form-group {{ $errors->has('password_confirm') ? ' has-error' : '' }}">
         <label for="password_confirm" class="col-md-2 control-label">New Password
-        <i class='icon-asterisk'></i>
+        <i class='fa fa-asterisk'></i>
         </label>
         <div class="col-md-5">
             <input class="form-control" type="password" name="password_confirm" id="password_confirm"  {{ (Config::get('app.lock_passwords') ? ' disabled' : '') }}>
-            {{ $errors->first('password_confirm', '<span class="alert-msg"><i class="fa fa-remove-sign"></i> :message</span>') }}
+            {{ $errors->first('password_confirm', '<br><span class="alert-msg"><i class="fa fa-remove-sign"></i> :message</span>') }}
             @if (Config::get('app.lock_passwords'))
             	<p class="help-block">@lang('admin/users/table.lock_passwords')</p>
             @endif

@@ -41,16 +41,16 @@
                 <div class="input-group col-md-3">
                     <input type="date" class="datepicker form-control" data-date-format="yyyy-mm-dd" placeholder="Select Date" name="purchase_date" id="purchase_date" value="{{{ Input::old('purchase_date') }}}">
                     <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
-                {{ $errors->first('purchase_date', '<span class="alert-msg"><i class="fa fa-remove-sign"></i> :message</span>') }}
+                {{ $errors->first('purchase_date', '<br><span class="alert-msg"><i class="fa fa-remove-sign"></i> :message</span>') }}
                 </div>
             </div>
 
             <!-- Status -->
             <div class="form-group {{ $errors->has('status_id') ? ' has-error' : '' }}">
-                <label for="status_id" class="col-md-2 control-label">@lang('admin/hardware/form.status') <i class='icon-asterisk'></i></label>
+                <label for="status_id" class="col-md-2 control-label">@lang('admin/hardware/form.status') <i class='fa fa-asterisk'></i></label>
                     <div class="col-md-7">
                         {{ Form::select('status_id', $statuslabel_list , Input::old('status_id'), array('class'=>'select2', 'style'=>'width:350px')) }}
-                        {{ $errors->first('status_id', '<span class="alert-msg"><i class="fa fa-remove-sign"></i> :message</span>') }}
+                        {{ $errors->first('status_id', '<br><span class="alert-msg"><i class="fa fa-remove-sign"></i> :message</span>') }}
                     </div>
             </div>
 
@@ -59,7 +59,7 @@
                 <label for="status_id" class="col-md-2 control-label">@lang('admin/hardware/form.default_location')</label>
                     <div class="col-md-7">
                         {{ Form::select('rtd_location_id', $location_list , Input::old('rtd_location_id'), array('class'=>'select2', 'style'=>'width:350px')) }}
-                        {{ $errors->first('status_id', '<span class="alert-msg"><i class="fa fa-remove-sign"></i> :message</span>') }}
+                        {{ $errors->first('status_id', '<br><span class="alert-msg"><i class="fa fa-remove-sign"></i> :message</span>') }}
                     </div>
             </div>
             

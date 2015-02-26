@@ -33,7 +33,7 @@ Account Sign in ::
                 <label for="email" class="col-md-3 control-label">Email</label>
                     <div class="col-md-5">
                         <input class="form-control" type="email" name="email" id="email" value="{{{ Input::old('email') }}}" />
-                        {{ $errors->first('email', '<span class="alert-msg"><i class="fa fa-remove-sign"></i> :message</span>') }}
+                        {{ $errors->first('email', '<br><span class="alert-msg"><i class="fa fa-remove-sign"></i> :message</span>') }}
                     </div>
             </div>
 
@@ -42,7 +42,7 @@ Account Sign in ::
                 <label for="password" class="col-md-3 control-label">Password</label>
                     <div class="col-md-5">
                         <input class="form-control" type="password" name="password" id="password" value="{{{ Input::old('password') }}}" />
-                        {{ $errors->first('password', '<span class="alert-msg"><i class="fa fa-remove-sign"></i> :message</span>') }}
+                        {{ $errors->first('password', '<br><span class="alert-msg"><i class="fa fa-remove-sign"></i> :message</span>') }}
                     </div>
             </div>
 

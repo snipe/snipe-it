@@ -36,22 +36,22 @@
             <!-- License -->
             <div class="form-group {{ $errors->has('name') ? ' has-error' : '' }}">
                 <label for="name" class="col-md-3 control-label">@lang('admin/licenses/form.name')
-                 <i class='icon-asterisk'></i></label>
+                 <i class='fa fa-asterisk'></i></label>
                  </label>
                     <div class="col-md-7">
                         <input class="form-control" type="text" name="name" id="name" value="{{ Input::old('name', $license->name) }}" />
-                        {{ $errors->first('name', '<span class="alert-msg"><i class="fa fa-remove-sign"></i> :message</span>') }}
+                        {{ $errors->first('name', '<br><span class="alert-msg"><i class="fa fa-remove-sign"></i> :message</span>') }}
                     </div>
             </div>
 
             <!-- Serial -->
             <div class="form-group {{ $errors->has('serial') ? ' has-error' : '' }}">
                 <label for="serial" class="col-md-3 control-label">@lang('admin/licenses/form.serial')
-                 <i class='icon-asterisk'></i></label>
+                 <i class='fa fa-asterisk'></i></label>
                  </label>
                     <div class="col-md-7">
                         <textarea class="form-control" type="text" name="serial" id="serial">{{ Input::old('serial', $license->serial) }}</textarea>
-                        {{ $errors->first('serial', '<span class="alert-msg"><i class="fa fa-remove-sign"></i> :message</span>') }}
+                        {{ $errors->first('serial', '<br><span class="alert-msg"><i class="fa fa-remove-sign"></i> :message</span>') }}
                     </div>
             </div>
 
@@ -60,7 +60,7 @@
                 <label for="license_name" class="col-md-3 control-label">@lang('admin/licenses/form.to_name')</label>
                     <div class="col-md-7">
                         <input class="form-control" type="text" name="license_name" id="license_name" value="{{ Input::old('license_name', $license->license_name) }}" />
-                        {{ $errors->first('license_name', '<span class="alert-msg"><i class="fa fa-remove-sign"></i> :message</span>') }}
+                        {{ $errors->first('license_name', '<br><span class="alert-msg"><i class="fa fa-remove-sign"></i> :message</span>') }}
                     </div>
             </div>
 
@@ -69,18 +69,18 @@
                 <label for="license_email" class="col-md-3 control-label">@lang('admin/licenses/form.to_email')</label>
                     <div class="col-md-7">
                         <input class="form-control" type="text" name="license_email" id="license_email" value="{{ Input::old('license_email', $license->license_email) }}" />
-                        {{ $errors->first('license_email', '<span class="alert-msg"><i class="fa fa-remove-sign"></i> :message</span>') }}
+                        {{ $errors->first('license_email', '<br><span class="alert-msg"><i class="fa fa-remove-sign"></i> :message</span>') }}
                     </div>
             </div>
 
             <!-- Seats -->
             <div class="form-group {{ $errors->has('seats') ? ' has-error' : '' }}">
                 <label for="seats" class="col-md-3 control-label">@lang('admin/licenses/form.seats')
-                 <i class='icon-asterisk'></i></label>
+                 <i class='fa fa-asterisk'></i></label>
                  </label>
                     <div class="col-md-3">
                         <input class="form-control" type="text" name="seats" id="seats" value="{{ Input::old('seats', $license->seats) }}" />
-                        {{ $errors->first('seats', '<span class="alert-msg"><i class="fa fa-remove-sign"></i> :message</span>') }}
+                        {{ $errors->first('seats', '<br><span class="alert-msg"><i class="fa fa-remove-sign"></i> :message</span>') }}
                     </div>
             </div>
 
@@ -89,7 +89,7 @@
                 <label for="supplier_id" class="col-md-3 control-label">@lang('admin/licenses/form.supplier')</label>
                 <div class="col-md-7">
                     {{ Form::select('supplier_id', $supplier_list , Input::old('supplier_id', $license->supplier_id), array('class'=>'select2', 'style'=>'min-width:350px')) }}
-                    {{ $errors->first('supplier_id', '<span class="alert-msg"><i class="fa fa-remove-sign"></i> :message</span>') }}
+                    {{ $errors->first('supplier_id', '<br><span class="alert-msg"><i class="fa fa-remove-sign"></i> :message</span>') }}
                 </div>
             </div>
 
@@ -98,7 +98,7 @@
                 <label for="order_number" class="col-md-3 control-label">@lang('admin/licenses/form.order')</label>
                     <div class="col-md-7">
                         <input class="form-control" type="text" name="order_number" id="order_number" value="{{ Input::old('order_number', $license->order_number) }}" />
-                        {{ $errors->first('order_number', '<span class="alert-msg"><i class="fa fa-remove-sign"></i> :message</span>') }}
+                        {{ $errors->first('order_number', '<br><span class="alert-msg"><i class="fa fa-remove-sign"></i> :message</span>') }}
                     </div>
             </div>
 
@@ -108,7 +108,7 @@
                 <div class="input-group col-md-2">
                     <input type="date" class="datepicker form-control" data-date-format="yyyy-mm-dd" placeholder="Select Date" name="purchase_date" id="purchase_date" value="{{ Input::old('purchase_date', $license->purchase_date) }}">
                     <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
-                {{ $errors->first('purchase_date', '<span class="alert-msg"><i class="fa fa-remove-sign"></i> :message</span>') }}
+                {{ $errors->first('purchase_date', '<br><span class="alert-msg"><i class="fa fa-remove-sign"></i> :message</span>') }}
                 </div>
             </div>
 
@@ -119,7 +119,7 @@
                     <div class="input-group">
                         <span class="input-group-addon">@lang('general.currency')</span>
                         <input class="col-md-2 form-control" type="text" name="purchase_cost" id="purchase_cost" value="{{ Input::old('purchase_cost', number_format($license->purchase_cost,2)) }}" />
-                        {{ $errors->first('purchase_cost', '<span class="alert-msg"><i class="fa fa-remove-sign"></i> :message</span>') }}
+                        {{ $errors->first('purchase_cost', '<br><span class="alert-msg"><i class="fa fa-remove-sign"></i> :message</span>') }}
                      </div>
                  </div>
             </div>
@@ -129,7 +129,7 @@
                 <label for="purchase_order" class="col-md-3 control-label">@lang('admin/licenses/form.purchase_order')</label>
                     <div class="col-md-7">
                         <input class="form-control" type="text" name="purchase_order" id="purchase_order" value="{{ Input::old('purchase_order', $license->purchase_order) }}" />
-                        {{ $errors->first('purchase_order', '<span class="alert-msg"><i class="fa fa-remove-sign"></i> :message</span>') }}
+                        {{ $errors->first('purchase_order', '<br><span class="alert-msg"><i class="fa fa-remove-sign"></i> :message</span>') }}
                     </div>
             </div>
 
@@ -140,7 +140,7 @@
                 <div class="input-group col-md-2">
                     <input type="date" class="datepicker form-control" data-date-format="yyyy-mm-dd" placeholder="Select Date" name="expiration_date" id="expiration_date" value="{{ Input::old('expiration_date', $license->expiration_date) }}">
                     <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
-                {{ $errors->first('expiration_date', '<span class="alert-msg"><i class="fa fa-remove-sign"></i> :message</span>') }}
+                {{ $errors->first('expiration_date', '<br><span class="alert-msg"><i class="fa fa-remove-sign"></i> :message</span>') }}
                 </div>
             </div>
 
@@ -149,7 +149,7 @@
                 <label for="parent" class="col-md-3 control-label">@lang('admin/licenses/form.depreciation')</label>
                     <div class="col-md-7">
                         {{ Form::select('depreciation_id', $depreciation_list , Input::old('depreciation_id', $license->depreciation_id), array('class'=>'select2', 'style'=>'width:350px')) }}
-                        {{ $errors->first('depreciation_id', '<span class="alert-msg"><i class="fa fa-remove-sign"></i> :message</span>') }}
+                        {{ $errors->first('depreciation_id', '<br><span class="alert-msg"><i class="fa fa-remove-sign"></i> :message</span>') }}
                     </div>
             </div>
 
@@ -174,7 +174,7 @@
                 <div class="input-group col-md-2">
                     <input type="date" class="datepicker form-control" data-date-format="yyyy-mm-dd" placeholder="Select Date" name="termination_date" id="termination_date" value="{{ Input::old('termination_date', $license->termination_date) }}">
                     <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
-                    {{ $errors->first('termination_date', '<span class="alert-msg"><i class="fa fa-remove-sign"></i> :message</span>') }}
+                    {{ $errors->first('termination_date', '<br><span class="alert-msg"><i class="fa fa-remove-sign"></i> :message</span>') }}
                 </div>
             </div>
 
@@ -183,7 +183,7 @@
                 <label for="notes" class="col-md-3 control-label">@lang('admin/licenses/form.notes')</label>
                 <div class="col-md-7">
                     <textarea class="col-md-6 form-control" id="notes" name="notes">{{{ Input::old('notes', $license->notes) }}}</textarea>
-                    {{ $errors->first('notes', '<span class="alert-msg"><i class="fa fa-remove-sign"></i> :message</span>') }}
+                    {{ $errors->first('notes', '<br><span class="alert-msg"><i class="fa fa-remove-sign"></i> :message</span>') }}
                 </div>
             </div>
 

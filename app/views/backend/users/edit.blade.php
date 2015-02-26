@@ -53,32 +53,32 @@
             <!-- First Name -->
             <div class="form-group {{ $errors->has('first_name') ? 'has-error' : '' }}">
                 <label class="col-md-3 control-label" for="first_name">@lang('general.first_name')
-                <i class='icon-asterisk'></i></label>
+                <i class='fa fa-asterisk'></i></label>
                 <div class="col-md-7">
                     <input class="form-control" type="text" name="first_name" id="first_name" value="{{{ Input::old('first_name', $user->first_name) }}}" />
-                    {{ $errors->first('first_name', '<span class="alert-msg">:message</span>') }}
+                    {{ $errors->first('first_name', '<br><span class="alert-msg">:message</span>') }}
                 </div>
             </div>
 
             <!-- Last Name -->
             <div class="form-group {{ $errors->has('last_name') ? 'has-error' : '' }}">
-                <label class="col-md-3 control-label" for="first_name">@lang('general.last_name') <i class='icon-asterisk'></i></label>
+                <label class="col-md-3 control-label" for="first_name">@lang('general.last_name') <i class='fa fa-asterisk'></i></label>
                 <div class="col-md-7">
                     <input class="form-control" type="text" name="last_name" id="last_name" value="{{{ Input::old('last_name', $user->last_name) }}}" />
-                    {{ $errors->first('last_name', '<span class="alert-msg">:message</span>') }}
+                    {{ $errors->first('last_name', '<br><span class="alert-msg">:message</span>') }}
                 </div>
             </div>
 
 			<!-- Email -->
             <div class="form-group {{ $errors->has('email') ? 'has-error' : '' }}">
-                <label class="col-md-3 control-label" for="email">@lang('admin/users/table.email') <i class='icon-asterisk'></i></label>
+                <label class="col-md-3 control-label" for="email">@lang('admin/users/table.email') <i class='fa fa-asterisk'></i></label>
                 <div class="col-md-7">
                     <input class="form-control" type="text" name="email" id="email" value="{{{ Input::old('email', $user->email) }}}"  {{ ((Config::get('app.lock_passwords') && ($user->id)) ? ' disabled' : '') }}>
                      @if (Config::get('app.lock_passwords') && ($user->id)) 
 					 	<p class="help-block">@lang('admin/users/table.lock_passwords')</p>
 					 @endif
 
-                    {{ $errors->first('email', '<span class="alert-msg">:message</span>') }}
+                    {{ $errors->first('email', '<br><span class="alert-msg">:message</span>') }}
                 </div>
             </div>
 
@@ -87,7 +87,7 @@
                 <label class="col-md-3 control-label" for="employee_num">@lang('admin/users/table.employee_num')</label>
                 <div class="col-md-7">
                     <input class="form-control" type="text" name="employee_num" id="employee_num" value="{{{ Input::old('employee_num', $user->employee_num) }}}" />
-                    {{ $errors->first('employee_num', '<span class="alert-msg">:message</span>') }}
+                    {{ $errors->first('employee_num', '<br><span class="alert-msg">:message</span>') }}
                 </div>
             </div>
 
@@ -97,7 +97,7 @@
                 <label class="col-md-3 control-label" for="jobtitle">@lang('admin/users/table.title')</label>
                 <div class="col-md-7">
                     <input class="form-control" type="text" name="jobtitle" id="jobtitle" value="{{{ Input::old('jobtitle', $user->jobtitle) }}}" />
-                    {{ $errors->first('jobtitle', '<span class="alert-msg">:message</span>') }}
+                    {{ $errors->first('jobtitle', '<br><span class="alert-msg">:message</span>') }}
                 </div>
             </div>
 
@@ -107,17 +107,17 @@
                 <label class="col-md-3 control-label" for="manager_id">@lang('admin/users/table.manager')</label>
                 <div class="col-md-7">
                     {{ Form::select('manager_id', $manager_list , Input::old('manager_id', $user->manager_id), array('class'=>'select2', 'style'=>'width:250px')) }}
-                    {{ $errors->first('manager_id', '<span class="alert-msg">:message</span>') }}
+                    {{ $errors->first('manager_id', '<br><span class="alert-msg">:message</span>') }}
                 </div>
             </div>
 
 			<!-- Location -->
             <div class="form-group {{ $errors->has('location_id') ? 'has-error' : '' }}">
                 <label class="col-md-3 control-label" for="location_id">@lang('admin/users/table.location')
-                    <i class='icon-asterisk'></i></label>
+                    <i class='fa fa-asterisk'></i></label>
                 <div class="col-md-7">
                     {{ Form::select('location_id', $location_list , Input::old('location_id', $user->location_id), array('class'=>'select2', 'style'=>'width:250px')) }}
-                    {{ $errors->first('location_id', '<span class="alert-msg">:message</span>') }}
+                    {{ $errors->first('location_id', '<br><span class="alert-msg">:message</span>') }}
                 </div>
             </div>
 
@@ -126,7 +126,7 @@
                 <label class="col-md-3 control-label" for="phone">@lang('admin/users/table.phone')</label>
                 <div class="col-md-4">
                     <input class="form-control" type="text" name="phone" id="phone" value="{{{ Input::old('phone', $user->phone) }}}" />
-                    {{ $errors->first('phone', '<span class="alert-msg">:message</span>') }}
+                    {{ $errors->first('phone', '<br><span class="alert-msg">:message</span>') }}
                 </div>
             </div>
 
@@ -134,12 +134,12 @@
             <div class="form-group {{ $errors->has('password') ? 'has-error' : '' }}">
                 <label class="col-md-3 control-label" for="password">@lang('admin/users/table.password')
                 @if (!$user->id)
-                <i class='icon-asterisk'></i>
+                <i class='fa fa-asterisk'></i>
                 @endif
                 </label>
                 <div class="col-md-5">
                    <input type="password" name="password" class="form-control" id="password" value="" {{ ((Config::get('app.lock_passwords') && ($user->id)) ? ' disabled' : '') }}>
-                    {{ $errors->first('password', '<span class="alert-msg">:message</span>') }}
+                    {{ $errors->first('password', '<br><span class="alert-msg">:message</span>') }}
                 </div>
             </div>
 
@@ -147,7 +147,7 @@
             <div class="form-group {{ $errors->has('password_confirm') ? 'has-error' : '' }}">
                 <label class="col-md-3 control-label" for="password_confirm">@lang('admin/users/table.password_confirm')
                 @if (!$user->id)
-                <i class='icon-asterisk'></i>
+                <i class='fa fa-asterisk'></i>
                 @endif
                 </label>
                 <div class="col-md-5">
@@ -155,7 +155,7 @@
                    @if (Config::get('app.lock_passwords') && ($user->id)) 
                     <p class="help-block">@lang('admin/users/table.lock_passwords')</p>
                    @endif
-                    {{ $errors->first('password_confirm', '<span class="alert-msg">:message</span>') }}
+                    {{ $errors->first('password_confirm', '<br><span class="alert-msg">:message</span>') }}
                 </div>
             </div>
 
@@ -166,7 +166,7 @@
                 <div class="col-md-5">
                     <input class="form-control" type="text" name="username" id="username" value="{{{ Input::old('username', $user->username) }}}" disabled />
 
-                    {{ $errors->first('username', '<span class="alert-msg">:message</span>') }}
+                    {{ $errors->first('username', '<br><span class="alert-msg">:message</span>') }}
                     <p class="help-block">@lang('admin/users/table.username_note')</p>
                 </div>
             </div>
@@ -189,7 +189,7 @@
 
                     </select>
 
-                    {{ $errors->first('activated', '<span class="alert-msg">:message</span>') }}
+                    {{ $errors->first('activated', '<br><span class="alert-msg">:message</span>') }}
                 </div>
                 </div>
             </div>

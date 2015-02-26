@@ -47,7 +47,7 @@
                 <label for="note" class="col-md-2 control-label">@lang('admin/hardware/form.notes')</label>
                 <div class="col-md-7">
                     <textarea class="col-md-6 form-control" id="note" name="note">{{{ Input::old('note', $licenseseat->note) }}}</textarea>
-                    {{ $errors->first('note', '<span class="alert-msg"><i class="fa fa-remove-sign"></i> :message</span>') }}
+                    {{ $errors->first('note', '<br><span class="alert-msg"><i class="fa fa-remove-sign"></i> :message</span>') }}
                 </div>
             </div>
             <!-- Form actions -->

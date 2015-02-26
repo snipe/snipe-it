@@ -58,10 +58,10 @@
 
             <div class="form-group {{ $errors->has('assigned_to') ? ' has-error' : '' }}">
                 <label for="assigned_to" class="col-md-2 control-label">@lang('admin/hardware/form.checkout_to')
-                 <i class='icon-asterisk'></i></label>
+                 <i class='fa fa-asterisk'></i></label>
                 <div class="col-md-9">
                     {{ Form::select('assigned_to', $users_list , Input::old('assigned_to', $asset->assigned_to), array('class'=>'select2', 'style'=>'min-width:350px')) }}
-                    {{ $errors->first('assigned_to', '<span class="alert-msg"><i class="fa fa-remove-sign"></i> :message</span>') }}
+                    {{ $errors->first('assigned_to', '<br><span class="alert-msg"><i class="fa fa-remove-sign"></i> :message</span>') }}
                 </div>
             </div>
 
@@ -70,7 +70,7 @@
                 <label for="note" class="col-md-2 control-label">@lang('admin/hardware/form.notes')</label>
                 <div class="col-md-7">
                     <textarea class="col-md-6 form-control" id="note" name="note">{{{ Input::old('note', $asset->note) }}}</textarea>
-                    {{ $errors->first('note', '<span class="alert-msg"><i class="fa fa-remove-sign"></i> :message</span>') }}
+                    {{ $errors->first('note', '<br><span class="alert-msg"><i class="fa fa-remove-sign"></i> :message</span>') }}
                 </div>
             </div>
 
