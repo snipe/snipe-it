@@ -54,8 +54,8 @@ data-title="@lang('general.delete')
 <!-- side address column -->
 <div class="col-md-3 col-xs-12 address pull-right">
     <br /><br />
-    <h6>@lang('admin/accessories/general.about_asset_accessories')</h6>
-    <p>@lang('admin/accessories/general.about_accessories') </p>
+    <h6>@lang('admin/accessories/general.about_accessories_title')</h6>
+    <p>@lang('admin/accessories/general.about_accessories_text') </p>
 
 </div>
 </div>
