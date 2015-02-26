@@ -12,6 +12,7 @@ use Str;
 use Validator;
 use View;
 use User;
+use Actionlog;
 
 class AccessoriesController extends AdminController
 {
@@ -238,8 +239,7 @@ class AccessoriesController extends AdminController
 
         // Declare the rules for the form validation
         $rules = array(
-            'assigned_to'   => 'required|min:1',
-            'note'   => 'alpha_space',
+            'assigned_to'   => 'required|min:1'
         );
 
         // Create a new validator instance from our validation rules
@@ -255,18 +255,18 @@ class AccessoriesController extends AdminController
         // Check if the user exists
         if (is_null($user = User::find($assigned_to))) {
             // Redirect to the accessory management page with error
-            return Redirect::to('accessories')->with('error', Lang::get('admin/accessories/message.user_does_not_exist'));
+            return Redirect::to('admin/accessories')->with('error', Lang::get('admin/accessories/message.user_does_not_exist'));
         }
 
         // Update the accessory data
         $accessory->assigned_to            		= e(Input::get('assigned_to'));
 
-        // Was the accessory updated?
-        if($accessory->save()) {
+        $accessory->users()->attach($accessoryId, array('assigned_to' => e(Input::get('assigned_to'))));
+        
             $logaction = new Actionlog();
             $logaction->accessory_id = $accessory->id;
             $logaction->checkedout_to = $accessory->assigned_to;
-            $logaction->accessory_type = 'accessory';
+            $logaction->asset_type = 'accessory';
             $logaction->location_id = $user->location_id;
             $logaction->user_id = Sentry::getUser()->id;
             $logaction->note = e(Input::get('note'));
@@ -286,11 +286,10 @@ class AccessoriesController extends AdminController
             } 
 
             // Redirect to the new accessory page
-            return Redirect::to("accessories")->with('success', Lang::get('admin/accessories/message.checkout.success'));
-        }
+            return Redirect::to("admin/accessories")->with('success', Lang::get('admin/accessories/message.checkout.success'));
+        
 
-        // Redirect to the accessory management page with error
-        return Redirect::to("accessories/$accessoryId/checkout")->with('error', Lang::get('admin/accessories/message.checkout.error'));
+        
     }
 
 
@@ -305,7 +304,7 @@ class AccessoriesController extends AdminController
         // Check if the accessory exists
         if (is_null($accessory = Accessory::find($accessoryId))) {
             // Redirect to the accessory management page with error
-            return Redirect::to('hardware')->with('error', Lang::get('admin/accessories/message.not_found'));
+            return Redirect::to('admin/accessories')->with('error', Lang::get('admin/accessories/message.not_found'));
         }
 
         return View::make('backend/accessories/checkin', compact('accessory'));
@@ -323,12 +322,14 @@ class AccessoriesController extends AdminController
         // Check if the accessory exists
         if (is_null($accessory = Accessory::find($accessoryId))) {
             // Redirect to the accessory management page with error
-            return Redirect::to('hardware')->with('error', Lang::get('admin/hardware/message.not_found'));
+            return Redirect::to('admin/accessories')->with('error', Lang::get('admin/accessory/message.not_found'));
         }
 
         if (!is_null($accessory->assigned_to)) {
             $user = User::find($accessory->assigned_to);
         }
+
+	
 
         $logaction = new Actionlog();
         $logaction->checkedout_to = $accessory->assigned_to;
@@ -337,21 +338,21 @@ class AccessoriesController extends AdminController
         $accessory->assigned_to            		= NULL;
 
         // Was the accessory updated?
-        if($accessory->save()) {
+        if($accessory->users()->detach($accessoryId)) {
 
             $logaction->accessory_id = $accessory->id;
             $logaction->location_id = NULL;
-            $logaction->accessory_type = 'hardware';
+            $logaction->accessory_type = 'accessory';
             $logaction->note = e(Input::get('note'));
             $logaction->user_id = Sentry::getUser()->id;
             $log = $logaction->logaction('checkin from');
 
             // Redirect to the new accessory page
-            return Redirect::to("hardware")->with('success', Lang::get('admin/hardware/message.checkin.success'));
+            return Redirect::to("admin/accessories")->with('success', Lang::get('admin/accessory/message.checkin.success'));
         }
 
         // Redirect to the accessory management page with error
-        return Redirect::to("hardware")->with('error', Lang::get('admin/hardware/message.checkin.error'));
+        return Redirect::to("admin/accessories")->with('error', Lang::get('admin/accessory/message.checkin.error'));
     }
 
 
