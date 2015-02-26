@@ -11,7 +11,7 @@
 
 <div class="row header">
     <div class="col-md-12">
-        <a href="{{ route('create/accessory') }}" class="btn btn-success pull-right"><i class="icon-plus-sign icon-white"></i> @lang('general.create')</a>
+        <a href="{{ route('create/accessory') }}" class="btn btn-success pull-right"><i class="glyphicon glyphicon-plus-sign icon-white"></i> @lang('general.create')</a>
         <h3>@lang('general.accessories')</h3>
     </div>
 </div>
@@ -35,10 +35,10 @@
                 <td>{{{ $accessory->name }}}</td>
                 <td>{{{ $accessory->qty }}}</td>
                 <td>
-                <a href="{{ route('update/accessory', $accessory->id) }}" class="btn btn-warning"><i class="icon-pencil icon-white"></i></a>
+                <a href="{{ route('update/accessory', $accessory->id) }}" class="btn btn-warning"><i class="glyphicon glyphicon-pencil icon-white"></i></a>
 <a data-html="false" class="btn delete-asset btn-danger" data-toggle="modal" href="{{ route('delete/accessory', $accessory->id) }}" data-content="@lang('admin/accessories/message.delete.confirm')"
 data-title="@lang('general.delete')
-{{{ htmlspecialchars($accessory->name) }}}?" onClick="return false;"><i class="icon-trash icon-white"></i></a>
+{{{ htmlspecialchars($accessory->name) }}}?" onClick="return false;"><i class="glyphicon glyphicon-delete icon-white"></i></a>
 
                 </td>
             </tr>

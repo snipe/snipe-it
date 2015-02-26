@@ -1,0 +1,707 @@
+{
+  "id" : "00000000-0000-0000-0000-000000000000",
+  "javascriptIndentation" : 4,
+  "files" : {
+    "public\/assets\/css\/lib\/bootstrap-wysihtml5.css" : {
+      "output" : "public\/assets\/css\/lib\/bootstrap-wysihtml5.out.css"
+    },
+    "vendor\/maximebf\/debugbar\/src\/DebugBar\/Resources\/vendor\/font-awesome\/css\/font-awesome.min.css" : {
+      "output" : "vendor\/maximebf\/debugbar\/src\/DebugBar\/Resources\/vendor\/font-awesome\/css\/font-awesome.min.out.css"
+    },
+    "public\/assets\/css\/scss\/ui-elements.scss" : {
+      "output" : "public\/assets\/css\/compiled\/ui-elements.css",
+      "isUserOutput" : true,
+      "profiles" : {
+        "sass" : "00000000-0000-0000-0000-000000000000"
+      }
+    },
+    "vendor\/maximebf\/debugbar\/src\/DebugBar\/Resources\/widgets.js" : {
+      "output" : "vendor\/maximebf\/debugbar\/src\/DebugBar\/Resources\/widgets.out.js",
+      "profiles" : {
+        "uglify" : "00000000-0000-0000-0000-000000000000",
+        "jshint" : "00000000-0000-0000-0000-000000000000"
+      }
+    },
+    "public\/assets\/css\/compiled\/form-wizard.css" : {
+      "output" : "public\/assets\/css\/compiled\/form-wizard.out.css"
+    },
+    "public\/assets\/css\/compiled\/chart-showcase.css" : {
+      "output" : "public\/assets\/css\/compiled\/chart-showcase.out.css"
+    },
+    "vendor\/phpunit\/php-code-coverage\/src\/CodeCoverage\/Report\/HTML\/Renderer\/Template\/css\/bootstrap.min.css" : {
+      "output" : "vendor\/phpunit\/php-code-coverage\/src\/CodeCoverage\/Report\/HTML\/Renderer\/Template\/css\/bootstrap.min.out.css"
+    },
+    "public\/assets\/css\/scss\/new-user.scss" : {
+      "output" : "public\/assets\/css\/compiled\/new-user.css",
+      "isUserOutput" : true,
+      "profiles" : {
+        "sass" : "00000000-0000-0000-0000-000000000000"
+      }
+    },
+    "vendor\/maximebf\/debugbar\/src\/DebugBar\/Resources\/widgets.css" : {
+      "output" : "vendor\/maximebf\/debugbar\/src\/DebugBar\/Resources\/widgets.out.css"
+    },
+    "public\/assets\/css\/compiled\/signup.css" : {
+      "output" : "public\/assets\/css\/compiled\/signup.out.css"
+    },
+    "vendor\/filp\/whoops\/src\/Whoops\/Resources\/js\/whoops.base.js" : {
+      "output" : "vendor\/filp\/whoops\/src\/Whoops\/Resources\/js\/whoops.base.out.js",
+      "profiles" : {
+        "uglify" : "00000000-0000-0000-0000-000000000000",
+        "jshint" : "00000000-0000-0000-0000-000000000000"
+      }
+    },
+    "public\/assets\/css\/compiled\/personal-info.css" : {
+      "output" : "public\/assets\/css\/compiled\/personal-info.out.css"
+    },
+    "vendor\/maximebf\/debugbar\/src\/DebugBar\/Resources\/vendor\/jquery\/dist\/jquery.min.js" : {
+      "output" : "vendor\/maximebf\/debugbar\/src\/DebugBar\/Resources\/vendor\/jquery\/dist\/jquery.min.out.js",
+      "profiles" : {
+        "uglify" : "00000000-0000-0000-0000-000000000000",
+        "jshint" : "00000000-0000-0000-0000-000000000000"
+      }
+    },
+    "public\/assets\/css\/lib\/select2.css" : {
+      "output" : "public\/assets\/css\/lib\/select2.out.css"
+    },
+    "vendor\/barryvdh\/laravel-debugbar\/src\/Resources\/vendor\/font-awesome\/style.css" : {
+      "output" : "vendor\/barryvdh\/laravel-debugbar\/src\/Resources\/vendor\/font-awesome\/style.out.css"
+    },
+    "vendor\/phpunit\/php-code-coverage\/src\/CodeCoverage\/Report\/HTML\/Renderer\/Template\/js\/bootstrap.min.js" : {
+      "output" : "vendor\/phpunit\/php-code-coverage\/src\/CodeCoverage\/Report\/HTML\/Renderer\/Template\/js\/bootstrap.min.out.js",
+      "profiles" : {
+        "uglify" : "00000000-0000-0000-0000-000000000000",
+        "jshint" : "00000000-0000-0000-0000-000000000000"
+      }
+    },
+    "public\/assets\/css\/lib\/font-awesome.css" : {
+      "output" : "public\/assets\/css\/lib\/font-awesome.out.css"
+    },
+    "vendor\/maximebf\/debugbar\/src\/DebugBar\/Resources\/widgets\/templates\/widget.css" : {
+      "output" : "vendor\/maximebf\/debugbar\/src\/DebugBar\/Resources\/widgets\/templates\/widget.out.css"
+    },
+    "public\/assets\/css\/scss\/layout.scss" : {
+      "output" : "public\/assets\/css\/compiled\/layout.css",
+      "isUserOutput" : true,
+      "profiles" : {
+        "sass" : "00000000-0000-0000-0000-000000000000"
+      }
+    },
+    "public\/assets\/css\/scss\/user-profile.scss" : {
+      "output" : "public\/assets\/css\/compiled\/user-profile.css",
+      "isUserOutput" : true,
+      "profiles" : {
+        "sass" : "00000000-0000-0000-0000-000000000000"
+      }
+    },
+    "public\/assets\/css\/scss\/form-wizard.scss" : {
+      "output" : "public\/assets\/css\/compiled\/form-wizard.css",
+      "isUserOutput" : true,
+      "profiles" : {
+        "sass" : "00000000-0000-0000-0000-000000000000"
+      }
+    },
+    "public\/assets\/css\/scss\/code-editor.scss" : {
+      "output" : "public\/assets\/css\/compiled\/code-editor.css",
+      "isUserOutput" : true,
+      "profiles" : {
+        "sass" : "00000000-0000-0000-0000-000000000000"
+      }
+    },
+    "public\/assets\/css\/bootstrap\/bootstrap.min.css" : {
+      "output" : "public\/assets\/css\/bootstrap\/bootstrap.min.out.css"
+    },
+    "public\/assets\/css\/scss\/gallery.scss" : {
+      "output" : "public\/assets\/css\/compiled\/gallery.css",
+      "isUserOutput" : true,
+      "profiles" : {
+        "sass" : "00000000-0000-0000-0000-000000000000"
+      }
+    },
+    "public\/assets\/css\/compiled\/layout.css" : {
+      "output" : "public\/assets\/css\/compiled\/layout.out.css"
+    },
+    "public\/assets\/css\/lib\/fullcalendar.css" : {
+      "output" : "public\/assets\/css\/lib\/fullcalendar.out.css"
+    },
+    "public\/assets\/js\/jquery.flot.js" : {
+      "output" : "public\/assets\/js\/jquery.flot.out.js",
+      "profiles" : {
+        "uglify" : "00000000-0000-0000-0000-000000000000",
+        "jshint" : "00000000-0000-0000-0000-000000000000"
+      }
+    },
+    "public\/assets\/css\/scss\/datatables.scss" : {
+      "output" : "public\/assets\/css\/compiled\/datatables.css",
+      "isUserOutput" : true,
+      "profiles" : {
+        "sass" : "00000000-0000-0000-0000-000000000000"
+      }
+    },
+    "public\/assets\/css\/lib\/morris.css" : {
+      "output" : "public\/assets\/css\/lib\/morris.out.css"
+    },
+    "public\/assets\/css\/scss\/calendar.scss" : {
+      "output" : "public\/assets\/css\/compiled\/calendar.css",
+      "isUserOutput" : true,
+      "profiles" : {
+        "sass" : "00000000-0000-0000-0000-000000000000"
+      }
+    },
+    "public\/assets\/js\/morris.min.js" : {
+      "output" : "public\/assets\/js\/morris.min.out.js",
+      "profiles" : {
+        "uglify" : "00000000-0000-0000-0000-000000000000",
+        "jshint" : "00000000-0000-0000-0000-000000000000"
+      }
+    },
+    "vendor\/barryvdh\/laravel-debugbar\/src\/Resources\/laravel-debugbar.css" : {
+      "output" : "vendor\/barryvdh\/laravel-debugbar\/src\/Resources\/laravel-debugbar.out.css"
+    },
+    "public\/assets\/css\/bootstrap\/bootstrap-responsive.css" : {
+      "output" : "public\/assets\/css\/bootstrap\/bootstrap-responsive.out.css"
+    },
+    "vendor\/maximebf\/debugbar\/src\/DebugBar\/Resources\/vendor\/highlightjs\/styles\/github.css" : {
+      "output" : "vendor\/maximebf\/debugbar\/src\/DebugBar\/Resources\/vendor\/highlightjs\/styles\/github.out.css"
+    },
+    "vendor\/maximebf\/debugbar\/src\/DebugBar\/Resources\/openhandler.css" : {
+      "output" : "vendor\/maximebf\/debugbar\/src\/DebugBar\/Resources\/openhandler.out.css"
+    },
+    "vendor\/maximebf\/debugbar\/src\/DebugBar\/Resources\/debugbar.css" : {
+      "output" : "vendor\/maximebf\/debugbar\/src\/DebugBar\/Resources\/debugbar.out.css"
+    },
+    "public\/assets\/css\/lib\/fullcalendar.print.css" : {
+      "output" : "public\/assets\/css\/lib\/fullcalendar.print.out.css"
+    },
+    "public\/assets\/css\/scss\/grids.scss" : {
+      "output" : "public\/assets\/css\/compiled\/grids.css",
+      "isUserOutput" : true,
+      "profiles" : {
+        "sass" : "00000000-0000-0000-0000-000000000000"
+      }
+    },
+    "public\/assets\/js\/jquery-ui-1.10.2.custom.min.js" : {
+      "output" : "public\/assets\/js\/jquery-ui-1.10.2.custom.min.out.js",
+      "profiles" : {
+        "uglify" : "00000000-0000-0000-0000-000000000000",
+        "jshint" : "00000000-0000-0000-0000-000000000000"
+      }
+    },
+    "public\/assets\/css\/compiled\/index.css" : {
+      "output" : "public\/assets\/css\/compiled\/index.out.css"
+    },
+    "public\/assets\/js\/jquery-latest.js" : {
+      "output" : "public\/assets\/js\/jquery-latest.out.js",
+      "profiles" : {
+        "uglify" : "00000000-0000-0000-0000-000000000000",
+        "jshint" : "00000000-0000-0000-0000-000000000000"
+      }
+    },
+    "public\/assets\/css\/compiled\/signin.css" : {
+      "output" : "public\/assets\/css\/compiled\/signin.out.css"
+    },
+    "public\/assets\/js\/ace\/ace.js" : {
+      "output" : "public\/assets\/js\/ace\/ace.out.js",
+      "profiles" : {
+        "uglify" : "00000000-0000-0000-0000-000000000000",
+        "jshint" : "00000000-0000-0000-0000-000000000000"
+      }
+    },
+    "public\/assets\/css\/lib\/uniform.default.css" : {
+      "output" : "public\/assets\/css\/lib\/uniform.default.out.css"
+    },
+    "public\/assets\/css\/compiled\/elements.css" : {
+      "output" : "public\/assets\/css\/compiled\/elements.out.css"
+    },
+    "public\/assets\/js\/wysihtml5-0.3.0.js" : {
+      "output" : "public\/assets\/js\/wysihtml5-0.3.0.out.js",
+      "profiles" : {
+        "uglify" : "00000000-0000-0000-0000-000000000000",
+        "jshint" : "00000000-0000-0000-0000-000000000000"
+      }
+    },
+    "public\/assets\/js\/theme.js" : {
+      "output" : "public\/assets\/js\/theme.out.js",
+      "profiles" : {
+        "uglify" : "00000000-0000-0000-0000-000000000000",
+        "jshint" : "00000000-0000-0000-0000-000000000000"
+      }
+    },
+    "public\/assets\/js\/jquery.flot.resize.js" : {
+      "output" : "public\/assets\/js\/jquery.flot.resize.out.js",
+      "profiles" : {
+        "uglify" : "00000000-0000-0000-0000-000000000000",
+        "jshint" : "00000000-0000-0000-0000-000000000000"
+      }
+    },
+    "public\/assets\/js\/jquery.uniform.min.js" : {
+      "output" : "public\/assets\/js\/jquery.uniform.min.out.js",
+      "profiles" : {
+        "uglify" : "00000000-0000-0000-0000-000000000000",
+        "jshint" : "00000000-0000-0000-0000-000000000000"
+      }
+    },
+    "vendor\/maximebf\/debugbar\/src\/DebugBar\/Resources\/widgets\/mails\/widget.css" : {
+      "output" : "vendor\/maximebf\/debugbar\/src\/DebugBar\/Resources\/widgets\/mails\/widget.out.css"
+    },
+    "public\/assets\/js\/gcal.js" : {
+      "output" : "public\/assets\/js\/gcal.out.js",
+      "profiles" : {
+        "uglify" : "00000000-0000-0000-0000-000000000000",
+        "jshint" : "00000000-0000-0000-0000-000000000000"
+      }
+    },
+    "public\/assets\/css\/scss\/personal-info.scss" : {
+      "output" : "public\/assets\/css\/compiled\/personal-info.css",
+      "isUserOutput" : true,
+      "profiles" : {
+        "sass" : "00000000-0000-0000-0000-000000000000"
+      }
+    },
+    "vendor\/phpunit\/php-code-coverage\/src\/CodeCoverage\/Report\/HTML\/Renderer\/Template\/js\/nv.d3.min.js" : {
+      "output" : "vendor\/phpunit\/php-code-coverage\/src\/CodeCoverage\/Report\/HTML\/Renderer\/Template\/js\/nv.d3.min.out.js",
+      "profiles" : {
+        "uglify" : "00000000-0000-0000-0000-000000000000",
+        "jshint" : "00000000-0000-0000-0000-000000000000"
+      }
+    },
+    "vendor\/phpunit\/php-code-coverage\/src\/CodeCoverage\/Report\/HTML\/Renderer\/Template\/js\/holder.js" : {
+      "output" : "vendor\/phpunit\/php-code-coverage\/src\/CodeCoverage\/Report\/HTML\/Renderer\/Template\/js\/holder.out.js",
+      "profiles" : {
+        "uglify" : "00000000-0000-0000-0000-000000000000",
+        "jshint" : "00000000-0000-0000-0000-000000000000"
+      }
+    },
+    "public\/assets\/js\/jquery.tmpl.min.js" : {
+      "output" : "public\/assets\/js\/jquery.tmpl.min.out.js",
+      "profiles" : {
+        "uglify" : "00000000-0000-0000-0000-000000000000",
+        "jshint" : "00000000-0000-0000-0000-000000000000"
+      }
+    },
+    "public\/assets\/css\/scss\/web-app-icons.scss" : {
+      "output" : "public\/assets\/css\/compiled\/web-app-icons.css",
+      "isUserOutput" : true,
+      "profiles" : {
+        "sass" : "00000000-0000-0000-0000-000000000000"
+      }
+    },
+    "public\/assets\/css\/lib\/jquery-ui-1.10.2.custom.css" : {
+      "output" : "public\/assets\/css\/lib\/jquery-ui-1.10.2.custom.out.css"
+    },
+    "public\/assets\/css\/compiled\/dataTables.responsive.css" : {
+      "output" : "public\/assets\/css\/compiled\/dataTables.responsive.out.css"
+    },
+    "vendor\/maximebf\/debugbar\/src\/DebugBar\/Resources\/widgets\/templates\/widget.js" : {
+      "output" : "vendor\/maximebf\/debugbar\/src\/DebugBar\/Resources\/widgets\/templates\/widget.out.js",
+      "profiles" : {
+        "uglify" : "00000000-0000-0000-0000-000000000000",
+        "jshint" : "00000000-0000-0000-0000-000000000000"
+      }
+    },
+    "public\/assets\/css\/compiled\/ui-elements.css" : {
+      "output" : "public\/assets\/css\/compiled\/ui-elements.out.css"
+    },
+    "public\/assets\/css\/bootstrap\/bootstrap.css" : {
+      "output" : "public\/assets\/css\/bootstrap\/bootstrap.out.css"
+    },
+    "public\/assets\/js\/bootstrap.datepicker.js" : {
+      "output" : "public\/assets\/js\/bootstrap.datepicker.out.js",
+      "profiles" : {
+        "uglify" : "00000000-0000-0000-0000-000000000000",
+        "jshint" : "00000000-0000-0000-0000-000000000000"
+      }
+    },
+    "public\/assets\/css\/bootstrap\/bootstrap-overrides.css" : {
+      "output" : "public\/assets\/css\/bootstrap\/bootstrap-overrides.out.css"
+    },
+    "public\/assets\/css\/scss\/signin.scss" : {
+      "output" : "public\/assets\/css\/compiled\/signin.css",
+      "isUserOutput" : true,
+      "profiles" : {
+        "sass" : "00000000-0000-0000-0000-000000000000"
+      }
+    },
+    "public\/assets\/css\/scss\/user-list.scss" : {
+      "output" : "public\/assets\/css\/compiled\/user-list.css",
+      "isUserOutput" : true,
+      "profiles" : {
+        "sass" : "00000000-0000-0000-0000-000000000000"
+      }
+    },
+    "vendor\/phpunit\/php-code-coverage\/src\/CodeCoverage\/Report\/HTML\/Renderer\/Template\/css\/nv.d3.css" : {
+      "output" : "vendor\/phpunit\/php-code-coverage\/src\/CodeCoverage\/Report\/HTML\/Renderer\/Template\/css\/nv.d3.out.css"
+    },
+    "public\/assets\/js\/ace\/mode-javascript.js" : {
+      "output" : "public\/assets\/js\/ace\/mode-javascript.out.js",
+      "profiles" : {
+        "uglify" : "00000000-0000-0000-0000-000000000000",
+        "jshint" : "00000000-0000-0000-0000-000000000000"
+      }
+    },
+    "public\/assets\/css\/scss\/elements.scss" : {
+      "output" : "public\/assets\/css\/compiled\/elements.css",
+      "isUserOutput" : true,
+      "profiles" : {
+        "sass" : "00000000-0000-0000-0000-000000000000"
+      }
+    },
+    "public\/assets\/js\/jquery.knob.js" : {
+      "output" : "public\/assets\/js\/jquery.knob.out.js",
+      "profiles" : {
+        "uglify" : "00000000-0000-0000-0000-000000000000",
+        "jshint" : "00000000-0000-0000-0000-000000000000"
+      }
+    },
+    "public\/assets\/css\/compiled\/code-editor.css" : {
+      "output" : "public\/assets\/css\/compiled\/code-editor.out.css"
+    },
+    "public\/assets\/css\/compiled\/tables.css" : {
+      "output" : "public\/assets\/css\/compiled\/tables.out.css"
+    },
+    "public\/assets\/css\/lib\/bootstrap.datepicker.css" : {
+      "output" : "public\/assets\/css\/lib\/bootstrap.datepicker.out.css"
+    },
+    "vendor\/phpunit\/php-code-coverage\/src\/CodeCoverage\/Report\/HTML\/Renderer\/Template\/js\/html5shiv.min.js" : {
+      "output" : "vendor\/phpunit\/php-code-coverage\/src\/CodeCoverage\/Report\/HTML\/Renderer\/Template\/js\/html5shiv.min.out.js",
+      "profiles" : {
+        "uglify" : "00000000-0000-0000-0000-000000000000",
+        "jshint" : "00000000-0000-0000-0000-000000000000"
+      }
+    },
+    "public\/assets\/css\/scss\/tables.scss" : {
+      "output" : "public\/assets\/css\/compiled\/tables.css",
+      "isUserOutput" : true,
+      "profiles" : {
+        "sass" : "00000000-0000-0000-0000-000000000000"
+      }
+    },
+    "public\/assets\/css\/compiled\/new-user.css" : {
+      "output" : "public\/assets\/css\/compiled\/new-user.out.css"
+    },
+    "public\/assets\/js\/jquery.dataTables.min.js" : {
+      "output" : "public\/assets\/js\/jquery.dataTables.min.out.js",
+      "profiles" : {
+        "uglify" : "00000000-0000-0000-0000-000000000000",
+        "jshint" : "00000000-0000-0000-0000-000000000000"
+      }
+    },
+    "public\/assets\/css\/lib\/jquery.dataTables.css" : {
+      "output" : "public\/assets\/css\/lib\/jquery.dataTables.out.css"
+    },
+    "public\/assets\/css\/scss\/icons.scss" : {
+      "output" : "public\/assets\/css\/compiled\/icons.css",
+      "isUserOutput" : true,
+      "profiles" : {
+        "sass" : "00000000-0000-0000-0000-000000000000"
+      }
+    },
+    "public\/assets\/css\/compiled\/user-profile.css" : {
+      "output" : "public\/assets\/css\/compiled\/user-profile.out.css"
+    },
+    "public\/assets\/css\/compiled\/icons.css" : {
+      "output" : "public\/assets\/css\/compiled\/icons.out.css"
+    },
+    "public\/assets\/js\/raphael-min.js" : {
+      "output" : "public\/assets\/js\/raphael-min.out.js",
+      "profiles" : {
+        "uglify" : "00000000-0000-0000-0000-000000000000",
+        "jshint" : "00000000-0000-0000-0000-000000000000"
+      }
+    },
+    "vendor\/phpunit\/php-code-coverage\/src\/CodeCoverage\/Report\/HTML\/Renderer\/Template\/js\/d3.min.js" : {
+      "output" : "vendor\/phpunit\/php-code-coverage\/src\/CodeCoverage\/Report\/HTML\/Renderer\/Template\/js\/d3.min.out.js",
+      "profiles" : {
+        "uglify" : "00000000-0000-0000-0000-000000000000",
+        "jshint" : "00000000-0000-0000-0000-000000000000"
+      }
+    },
+    "public\/assets\/css\/compiled\/user-list.css" : {
+      "output" : "public\/assets\/css\/compiled\/user-list.out.css"
+    },
+    "public\/assets\/css\/scss\/chart-showcase.scss" : {
+      "output" : "public\/assets\/css\/compiled\/chart-showcase.css",
+      "isUserOutput" : true,
+      "profiles" : {
+        "sass" : "00000000-0000-0000-0000-000000000000"
+      }
+    },
+    "public\/assets\/js\/snipeit.js" : {
+      "output" : "public\/assets\/js\/snipeit.out.js",
+      "profiles" : {
+        "uglify" : "00000000-0000-0000-0000-000000000000",
+        "jshint" : "00000000-0000-0000-0000-000000000000"
+      }
+    },
+    "public\/assets\/css\/compiled\/open-sans.css" : {
+      "output" : "public\/assets\/css\/compiled\/open-sans.out.css"
+    },
+    "public\/assets\/css\/scss\/form-showcase.scss" : {
+      "output" : "public\/assets\/css\/compiled\/form-showcase.css",
+      "isUserOutput" : true,
+      "profiles" : {
+        "sass" : "00000000-0000-0000-0000-000000000000"
+      }
+    },
+    "public\/assets\/css\/compiled\/form-showcase.css" : {
+      "output" : "public\/assets\/css\/compiled\/form-showcase.out.css"
+    },
+    "vendor\/phpunit\/php-code-coverage\/src\/CodeCoverage\/Report\/HTML\/Renderer\/Template\/js\/respond.min.js" : {
+      "output" : "vendor\/phpunit\/php-code-coverage\/src\/CodeCoverage\/Report\/HTML\/Renderer\/Template\/js\/respond.min.out.js",
+      "profiles" : {
+        "uglify" : "00000000-0000-0000-0000-000000000000",
+        "jshint" : "00000000-0000-0000-0000-000000000000"
+      }
+    },
+    "public\/assets\/css\/scss\/signup.scss" : {
+      "output" : "public\/assets\/css\/compiled\/signup.css",
+      "isUserOutput" : true,
+      "profiles" : {
+        "sass" : "00000000-0000-0000-0000-000000000000"
+      }
+    },
+    "public\/assets\/js\/fuelux.wizard.js" : {
+      "output" : "public\/assets\/js\/fuelux.wizard.out.js",
+      "profiles" : {
+        "uglify" : "00000000-0000-0000-0000-000000000000",
+        "jshint" : "00000000-0000-0000-0000-000000000000"
+      }
+    },
+    "public\/assets\/js\/bootstrap.min.js" : {
+      "output" : "public\/assets\/js\/bootstrap.min.out.js",
+      "profiles" : {
+        "uglify" : "00000000-0000-0000-0000-000000000000",
+        "jshint" : "00000000-0000-0000-0000-000000000000"
+      }
+    },
+    "public\/assets\/css\/compiled\/grids.css" : {
+      "output" : "public\/assets\/css\/compiled\/grids.out.css"
+    },
+    "public\/assets\/css\/bootstrap\/bootstrap-responsive.min.css" : {
+      "output" : "public\/assets\/css\/bootstrap\/bootstrap-responsive.min.out.css"
+    },
+    "public\/assets\/css\/compiled\/web-app-icons.css" : {
+      "output" : "public\/assets\/css\/compiled\/web-app-icons.out.css"
+    },
+    "public\/assets\/js\/dataTables.responsive.js" : {
+      "output" : "public\/assets\/js\/dataTables.responsive.out.js",
+      "profiles" : {
+        "uglify" : "00000000-0000-0000-0000-000000000000",
+        "jshint" : "00000000-0000-0000-0000-000000000000"
+      }
+    },
+    "vendor\/filp\/whoops\/src\/Whoops\/Resources\/css\/whoops.base.css" : {
+      "output" : "vendor\/filp\/whoops\/src\/Whoops\/Resources\/css\/whoops.base.out.css"
+    },
+    "public\/assets\/js\/jquery.flot.stack.js" : {
+      "output" : "public\/assets\/js\/jquery.flot.stack.out.js",
+      "profiles" : {
+        "uglify" : "00000000-0000-0000-0000-000000000000",
+        "jshint" : "00000000-0000-0000-0000-000000000000"
+      }
+    },
+    "public\/assets\/js\/fullcalendar.min.js" : {
+      "output" : "public\/assets\/js\/fullcalendar.min.out.js",
+      "profiles" : {
+        "uglify" : "00000000-0000-0000-0000-000000000000",
+        "jshint" : "00000000-0000-0000-0000-000000000000"
+      }
+    },
+    "vendor\/maximebf\/debugbar\/src\/DebugBar\/Resources\/debugbar.js" : {
+      "output" : "vendor\/maximebf\/debugbar\/src\/DebugBar\/Resources\/debugbar.out.js",
+      "profiles" : {
+        "uglify" : "00000000-0000-0000-0000-000000000000",
+        "jshint" : "00000000-0000-0000-0000-000000000000"
+      }
+    },
+    "vendor\/maximebf\/debugbar\/src\/DebugBar\/Resources\/openhandler.js" : {
+      "output" : "vendor\/maximebf\/debugbar\/src\/DebugBar\/Resources\/openhandler.out.js",
+      "profiles" : {
+        "uglify" : "00000000-0000-0000-0000-000000000000",
+        "jshint" : "00000000-0000-0000-0000-000000000000"
+      }
+    },
+    "vendor\/maximebf\/debugbar\/src\/DebugBar\/Resources\/vendor\/highlightjs\/highlight.pack.js" : {
+      "output" : "vendor\/maximebf\/debugbar\/src\/DebugBar\/Resources\/vendor\/highlightjs\/highlight.pack.out.js",
+      "profiles" : {
+        "uglify" : "00000000-0000-0000-0000-000000000000",
+        "jshint" : "00000000-0000-0000-0000-000000000000"
+      }
+    },
+    "vendor\/phpunit\/php-code-coverage\/src\/CodeCoverage\/Report\/HTML\/Renderer\/Template\/css\/style.css" : {
+      "output" : "vendor\/phpunit\/php-code-coverage\/src\/CodeCoverage\/Report\/HTML\/Renderer\/Template\/css\/style.out.css"
+    },
+    "vendor\/phpunit\/php-code-coverage\/src\/CodeCoverage\/Report\/HTML\/Renderer\/Template\/js\/jquery.min.js" : {
+      "output" : "vendor\/phpunit\/php-code-coverage\/src\/CodeCoverage\/Report\/HTML\/Renderer\/Template\/js\/jquery.min.out.js",
+      "profiles" : {
+        "uglify" : "00000000-0000-0000-0000-000000000000",
+        "jshint" : "00000000-0000-0000-0000-000000000000"
+      }
+    },
+    "vendor\/maximebf\/debugbar\/src\/DebugBar\/Resources\/widgets\/sqlqueries\/widget.css" : {
+      "output" : "vendor\/maximebf\/debugbar\/src\/DebugBar\/Resources\/widgets\/sqlqueries\/widget.out.css"
+    },
+    "public\/assets\/css\/compiled\/gallery.css" : {
+      "output" : "public\/assets\/css\/compiled\/gallery.out.css"
+    },
+    "public\/assets\/js\/html5.js" : {
+      "output" : "public\/assets\/js\/html5.out.js",
+      "profiles" : {
+        "uglify" : "00000000-0000-0000-0000-000000000000",
+        "jshint" : "00000000-0000-0000-0000-000000000000"
+      }
+    },
+    "vendor\/filp\/whoops\/src\/Whoops\/Resources\/js\/zepto.min.js" : {
+      "output" : "vendor\/filp\/whoops\/src\/Whoops\/Resources\/js\/zepto.min.out.js",
+      "profiles" : {
+        "uglify" : "00000000-0000-0000-0000-000000000000",
+        "jshint" : "00000000-0000-0000-0000-000000000000"
+      }
+    },
+    "public\/assets\/js\/select2.min.js" : {
+      "output" : "public\/assets\/js\/select2.min.out.js",
+      "profiles" : {
+        "uglify" : "00000000-0000-0000-0000-000000000000",
+        "jshint" : "00000000-0000-0000-0000-000000000000"
+      }
+    },
+    "public\/assets\/css\/compiled\/datatables.css" : {
+      "output" : "public\/assets\/css\/compiled\/datatables.out.css"
+    },
+    "public\/assets\/css\/scss\/index.scss" : {
+      "output" : "public\/assets\/css\/compiled\/index.css",
+      "isUserOutput" : true,
+      "profiles" : {
+        "sass" : "00000000-0000-0000-0000-000000000000"
+      }
+    },
+    "public\/assets\/css\/compiled\/calendar.css" : {
+      "output" : "public\/assets\/css\/compiled\/calendar.out.css"
+    },
+    "public\/assets\/js\/bootstrap.js" : {
+      "output" : "public\/assets\/js\/bootstrap.out.js",
+      "profiles" : {
+        "uglify" : "00000000-0000-0000-0000-000000000000",
+        "jshint" : "00000000-0000-0000-0000-000000000000"
+      }
+    },
+    "vendor\/maximebf\/debugbar\/src\/DebugBar\/Resources\/widgets\/sqlqueries\/widget.js" : {
+      "output" : "vendor\/maximebf\/debugbar\/src\/DebugBar\/Resources\/widgets\/sqlqueries\/widget.out.js",
+      "profiles" : {
+        "uglify" : "00000000-0000-0000-0000-000000000000",
+        "jshint" : "00000000-0000-0000-0000-000000000000"
+      }
+    },
+    "public\/assets\/css\/lib\/font-awesome.min.css" : {
+      "output" : "public\/assets\/css\/lib\/font-awesome.min.out.css"
+    },
+    "vendor\/maximebf\/debugbar\/src\/DebugBar\/Resources\/widgets\/mails\/widget.js" : {
+      "output" : "vendor\/maximebf\/debugbar\/src\/DebugBar\/Resources\/widgets\/mails\/widget.out.js",
+      "profiles" : {
+        "uglify" : "00000000-0000-0000-0000-000000000000",
+        "jshint" : "00000000-0000-0000-0000-000000000000"
+      }
+    }
+  },
+  "flows" : {
+    "stylus" : {
+      "output" : "*.css",
+      "stylus" : "00000000-0000-0000-0000-000000000000"
+    },
+    "sass" : {
+      "sass" : "00000000-0000-0000-0000-000000000000",
+      "output" : "*.css"
+    },
+    "coffee" : {
+      "coffee" : "00000000-0000-0000-0000-000000000000",
+      "jshint" : "00000000-0000-0000-0000-000000000000",
+      "output" : "*.js",
+      "uglify" : "00000000-0000-0000-0000-000000000000"
+    },
+    "jinja" : {
+      "jinja" : "00000000-0000-0000-0000-000000000000",
+      "output" : "*"
+    },
+    "less" : {
+      "less" : "00000000-0000-0000-0000-000000000000",
+      "output" : "*.css"
+    },
+    "css" : {
+      "output" : "*.out.css"
+    },
+    "js" : {
+      "output" : "*.out.js",
+      "uglify" : "00000000-0000-0000-0000-000000000000",
+      "jshint" : "00000000-0000-0000-0000-000000000000"
+    }
+  },
+  "profiles" : {
+    "stylus" : {
+      "00000000-0000-0000-0000-000000000000" : {
+        "mediaquery" : false,
+        "name" : "Default Stylus Profile",
+        "comments" : false,
+        "format" : 1
+      }
+    },
+    "coffee" : {
+      "00000000-0000-0000-0000-000000000000" : {
+        "name" : "Default CoffeeScript Profile",
+        "bare" : false
+      }
+    },
+    "sass" : {
+      "00000000-0000-0000-0000-000000000000" : {
+        "name" : "Default Sass Profile",
+        "style" : "compressed",
+        "debug" : 0
+      }
+    },
+    "jshint" : {
+      "00000000-0000-0000-0000-000000000000" : {
+        "name" : "Default JSHint Profile",
+        "options" : [
+          "undef",
+          "unused",
+          "bitwise",
+          "curly",
+          "eqeqeq",
+          "latedef",
+          "newcap",
+          "noarg",
+          "nonew",
+          "trailing",
+          "browser",
+          "jquery"
+        ],
+        "globals" : ""
+      }
+    },
+    "less" : {
+      "00000000-0000-0000-0000-000000000000" : {
+        "imports" : false,
+        "mediaquery" : false,
+        "name" : "Default Less Profile",
+        "comments" : false,
+        "format" : 1
+      }
+    },
+    "jinja" : {
+      "00000000-0000-0000-0000-000000000000" : {
+        "name" : "Default Jinja Profile",
+        "autoescape" : false
+      }
+    },
+    "uglify" : {
+      "00000000-0000-0000-0000-000000000000" : {
+        "name" : "Default UglifyJS Profile",
+        "options" : [
+          "--mangle",
+          "--compress",
+          "beautify"
+        ]
+      }
+    }
+  },
+  "version" : 10100
+}
