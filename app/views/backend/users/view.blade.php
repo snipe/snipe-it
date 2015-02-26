@@ -141,6 +141,46 @@
                                 </div>
                             </div>
                             @endif
+                            
+                            
+                            
+                            
+                            <br><br><br>
+                            <h6>@lang('admin/accessories/general.accessories')</h6>
+                            <br>
+                            <!-- checked out licenses table -->
+                            @if (count($user->accessories) > 0)
+                            <div class="table-responsive">
+							<table class="display">
+                                <thead>
+                                    <tr>
+                                        <th class="col-md-5">Name</th>
+                                        <th class="col-md-1">Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach ($user->accessories as $accessory)
+                                    <tr>
+                                        <td><a href="{{ route('view/accessory', $accessory->id) }}">{{{ $accessory->name }}}</a></td>
+                                        <td><a href="{{ route('view/accessory', $accessory->id) }}">{{{ mb_strimwidth($accessory->serial, 0, 50, "...") }}}</a></td>
+                                        <td> <a href="{{ route('checkin/accessory', $accessory->pivot->id) }}" class="btn-flat info">Checkin</a>
+                                        </td>
+                                    </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
+                            </div>
+                            </div>
+                            @else
+
+                            <div class="col-md-12">
+                                <div class="alert alert-info alert-block">
+                                    <i class="fa fa-info-circle"></i>
+                                    @lang('general.no_results')
+                                </div>
+                            </div>
+                            @endif
+
 
 
 
@@ -168,6 +208,10 @@
                                             <a href="{{ route('view/hardware', $log->asset_id) }}">{{{ $log->assetlog->asset_tag }}}</a>
                                         @elseif ((isset($log->assetlog->name)) && ($log->assetlog->deleted_at!=''))
                                             <del>{{{ $log->assetlog->name }}}</del> (deleted)
+                                            
+                                        @elseif ((isset($log->accessorylog->name)) && ($log->accessorylog->deleted_at==''))
+                                            {{{ $log->accessorylog }}} 
+                                            
                                         @endif
                                         </td>
                                         <td>{{{ $log->adminlog->fullName() }}}</td>
@@ -185,6 +229,8 @@
                                 </div>
                             </div>
                             @endif
+                            
+                            
 
                         </div>
                     </div>
