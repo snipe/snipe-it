@@ -48,8 +48,8 @@
                     @endif
                     </td>
                     <td>
-                        <a href="{{ route('update/statuslabel', $statuslabel->id) }}" class="btn btn-warning"><i class="fa fa-pencil icon-white"></i></a>
-<a data-html="false" class="btn delete-asset btn-danger" data-toggle="modal" href="{{ route('delete/statuslabel', $statuslabel->id) }}" data-content="@lang('admin/statuslabels/message.delete.confirm')"
+                        <a href="{{ route('update/statuslabel', $statuslabel->id) }}" class="btn btn-warning btn-sm"><i class="fa fa-pencil icon-white"></i></a>
+<a data-html="false" class="btn delete-asset btn-danger btn-sm" data-toggle="modal" href="{{ route('delete/statuslabel', $statuslabel->id) }}" data-content="@lang('admin/statuslabels/message.delete.confirm')"
                 data-title="@lang('general.delete')
                  {{ htmlspecialchars($statuslabel->name) }}?" onClick="return false;"><i class="fa fa-trash icon-white"></i></a>
                     </td>

@@ -37,8 +37,8 @@
             <td><a href="{{ route('view/manufacturer',$manufacturer->id) }}">{{ $manufacturer->assetscount() }}</a></td>
             <td>
 
-                <a href="{{ route('update/manufacturer', $manufacturer->id) }}" class="btn btn-warning"><i class="fa fa-pencil icon-white"></i></a>
-                <a data-html="false" class="btn delete-asset btn-danger" data-toggle="modal" href="{{ route('delete/manufacturer', $manufacturer->id) }}" data-content="@lang('admin/manufacturers/message.delete.confirm')"
+                <a href="{{ route('update/manufacturer', $manufacturer->id) }}" class="btn btn-warning btn-sm"><i class="fa fa-pencil icon-white"></i></a>
+                <a data-html="false" class="btn delete-asset btn-danger btn-sm" data-toggle="modal" href="{{ route('delete/manufacturer', $manufacturer->id) }}" data-content="@lang('admin/manufacturers/message.delete.confirm')"
                 data-title="@lang('general.delete')
                  {{ htmlspecialchars($manufacturer->name) }}?" onClick="return false;"><i class="fa fa-trash icon-white"></i></a>
 

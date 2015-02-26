@@ -51,8 +51,8 @@
                     {{{ $license->purchase_date }}}
                     </td>
                     <td>
-                    <a href="{{ route('update/license', $license->id) }}" class="btn btn-warning"><i class="fa fa-pencil icon-white"></i></a>
-                        <a data-html="false" class="btn delete-asset btn-danger" data-toggle="modal" href="{{ route('delete/license', $license->id) }}"
+                    <a href="{{ route('update/license', $license->id) }}" class="btn btn-warning btn-sm"><i class="fa fa-pencil icon-white"></i></a>
+                        <a data-html="false" class="btn delete-asset btn-danger btn-sm" data-toggle="modal" href="{{ route('delete/license', $license->id) }}"
                         data-content="@lang('admin/licenses/message.delete.confirm')"
                         data-title="@lang('general.delete')
                          {{ htmlspecialchars($license->name) }}?" onClick="return false;"><i class="fa fa-trash icon-white"></i></a>

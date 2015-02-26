@@ -221,7 +221,7 @@
 									@endif
 								</td>
 								<td>
-									<a class="btn delete-asset btn-danger" href="{{ route('delete/assetfile', [$asset->id, $file->id]) }}"><i class="icon-trash icon-white"></i></a>
+									<a class="btn delete-asset btn-danger btn-sm" href="{{ route('delete/assetfile', [$asset->id, $file->id]) }}"><i class="icon-trash icon-white"></i></a>
 								</td>
 							</tr>
 							@endforeach
@@ -372,9 +372,9 @@
                     <ul>
 	                    
                     	 @if (($asset->assetstatus->deployable=='1') && ($asset->assigned_to > 0) && ($asset->deleted_at==''))
-                    	<li><br /><a href="{{ route('checkin/hardware', $asset->id) }}" class="btn btn-primary">@lang('admin/hardware/general.checkin')</a></li>
+                    	<li><br /><a href="{{ route('checkin/hardware', $asset->id) }}" class="btn btn-primary btn-sm">@lang('admin/hardware/general.checkin')</a></li>
                     	@elseif ((($asset->assetstatus->deployable=='1') &&  (($asset->assigned_to=='') || ($asset->assigned_to==0))) && ($asset->deleted_at==''))
-                    	<li><br /><a href="{{ route('checkout/hardware', $asset->id) }}" class="btn btn-info">@lang('admin/hardware/general.checkout')</a></li>
+                    	<li><br /><a href="{{ route('checkout/hardware', $asset->id) }}" class="btn btn-info btn-sm">@lang('admin/hardware/general.checkout')</a></li>
 						@elseif  ($asset->deleted_at!='')
 
 						<li><br /><a href="{{ route('restore/hardware', $asset->id) }}" class="btn-flat large info ">@lang('admin/hardware/general.restore')</a></li>
@@ -430,7 +430,7 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">@lang('button.cancel')</button>
-        <button type="submit" class="btn btn-primary">@lang('button.upload')</button>
+        <button type="submit" class="btn btn-primary btn-sm">@lang('button.upload')</button>
       </div>
       {{ Form::close() }}
     </div>

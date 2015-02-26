@@ -59,8 +59,8 @@
             <td>{{{ $supplier->num_assets() }}}</td>
             <td>{{{ $supplier->num_licenses() }}}</td>
             <td>
-                <a href="{{ route('update/supplier', $supplier->id) }}" class="btn btn-warning"><i class="fa fa-pencil icon-white"></i></a>
-                <a data-html="false" class="btn delete-asset btn-danger" data-toggle="modal" href="{{ route('delete/supplier', $supplier->id) }}" data-content="@lang('admin/suppliers/message.delete.confirm')"
+                <a href="{{ route('update/supplier', $supplier->id) }}" class="btn btn-warning btn-sm"><i class="fa fa-pencil icon-white"></i></a>
+                <a data-html="false" class="btn delete-asset btn-danger btn-sm" data-toggle="modal" href="{{ route('delete/supplier', $supplier->id) }}" data-content="@lang('admin/suppliers/message.delete.confirm')"
                 data-title="@lang('general.delete')
                  {{ htmlspecialchars($supplier->name) }}?" onClick="return false;"><i class="fa fa-trash icon-white"></i></a>
 

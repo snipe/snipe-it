@@ -12,7 +12,7 @@
                 <!-- header -->
 
                 <div class="pull-right">
-                     <a href="{{ route('edit/settings') }}" class="btn btn-warning"> @lang('button.edit') Settings</a>
+                     <a href="{{ route('edit/settings') }}" class="btn btn-warning btn-sm"> @lang('button.edit') Settings</a>
                 </div>
 
                 <div class="row-fluid profile">

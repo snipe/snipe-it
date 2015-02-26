@@ -134,10 +134,10 @@
                                 </td>
                                 <td>
                                     @if (($licensedto->assigned_to) || ($licensedto->asset_id))
-                                        <a href="{{ route('checkin/license', $licensedto->id) }}" class="btn btn-primary">
+                                        <a href="{{ route('checkin/license', $licensedto->id) }}" class="btn btn-primary btn-sm">
                                         @lang('general.checkin')</a>
                                     @else
-                                        <a href="{{ route('checkout/license', $licensedto->id) }}" class="btn btn-info">
+                                        <a href="{{ route('checkout/license', $licensedto->id) }}" class="btn btn-info btn-sm">
                                         @lang('general.checkout')</a>
                                     @endif
                                 </td>
@@ -184,7 +184,7 @@
 									@endif
 								</td>
 								<td>
-									<a class="btn delete-asset btn-danger" href="{{ route('delete/licensefile', [$license->id, $file->id]) }}"><i class="fa fa-trash icon-white"></i></a>
+									<a class="btn delete-asset btn-danger btn-sm" href="{{ route('delete/licensefile', [$license->id, $file->id]) }}"><i class="fa fa-trash icon-white"></i></a>
 								</td>
 							</tr>
 							@endforeach
@@ -233,7 +233,7 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">@lang('button.cancel')</button>
-        <button type="submit" class="btn btn-primary">@lang('button.upload')</button>
+        <button type="submit" class="btn btn-primary btn-sm">@lang('button.upload')</button>
       </div>
       {{ Form::close() }}
     </div>

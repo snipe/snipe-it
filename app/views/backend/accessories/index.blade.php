@@ -24,9 +24,9 @@
 		<table id="example">
         <thead>
             <tr role="row">
-                <th class="col-md-5" bSortable="true">@lang('admin/accessories/table.title')</th>
-                 <th class="col-md-2" bSortable="true">@lang('admin/accessories/general.qty')</th>
-                <th class="col-md-2 actions" bSortable="true">@lang('table.actions')</th>
+                <th class="col-md-6" bSortable="true">@lang('admin/accessories/table.title')</th>
+                <th class="col-md-2" bSortable="true">@lang('admin/accessories/general.qty')</th>
+                <th class="col-md-3 actions" bSortable="true">@lang('table.actions')</th>
             </tr>
         </thead>
         <tbody>
@@ -35,10 +35,10 @@
                 <td>{{{ $accessory->name }}}</td>
                 <td>{{{ $accessory->qty }}}</td>
                 <td>
-                <a href="{{ route('update/accessory', $accessory->id) }}" class="btn btn-warning"><i class="fa fa-pencil icon-white"></i></a>
-<a data-html="false" class="btn delete-asset btn-danger" data-toggle="modal" href="{{ route('delete/accessory', $accessory->id) }}" data-content="@lang('admin/accessories/message.delete.confirm')"
-data-title="@lang('general.delete')
-{{{ htmlspecialchars($accessory->name) }}}?" onClick="return false;"><i class="fa fa-trash icon-white"></i></a>
+	            <a href="{{ route('checkout/accessory', $accessory->id) }}" class="btn btn-info btn-sm">@lang('general.checkout')</a>
+                <a href="{{ route('update/accessory', $accessory->id) }}" class="btn btn-warning btn-sm"><i class="fa fa-pencil icon-white"></i></a>
+<a data-html="false" class="btn delete-asset btn-danger btn-sm" data-toggle="modal" href="{{ route('delete/accessory', $accessory->id) }}" data-content="@lang('admin/accessories/message.delete.confirm')"
+data-title="@lang('general.delete') {{{ htmlspecialchars($accessory->name) }}}?" onClick="return false;"><i class="fa fa-trash icon-white"></i></a>
 
                 </td>
             </tr>
