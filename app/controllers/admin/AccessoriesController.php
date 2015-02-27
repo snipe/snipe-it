@@ -166,17 +166,13 @@ class AccessoriesController extends AdminController
         }
 
 
-        if ($accessory->has_models() > 0) {
 
-            // Redirect to the accessory management page
-            return Redirect::to('admin/accessories')->with('error', Lang::get('admin/accessories/message.assoc_users'));
-        } else {
 
             $accessory->delete();
 
             // Redirect to the locations management page
             return Redirect::to('admin/accessories')->with('success', Lang::get('admin/accessories/message.delete.success'));
-        }
+        
 
 
     }
