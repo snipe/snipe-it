@@ -166,13 +166,18 @@ class AccessoriesController extends AdminController
         }
 
 
-
-
-            $accessory->delete();
+		if ($accessory->hasUsers() > 0) {
+			 return Redirect::to('admin/accessories')->with('error', Lang::get('admin/accessories/message.assoc_users', array('count'=> $accessory->hasUsers())));
+		} else {
+			$accessory->delete();
 
             // Redirect to the locations management page
             return Redirect::to('admin/accessories')->with('success', Lang::get('admin/accessories/message.delete.success'));
-        
+
+		}
+
+
+                    
 
 
     }
@@ -273,15 +278,16 @@ class AccessoriesController extends AdminController
             
             $accessory_user = DB::table('accessories_users')->where('assigned_to','=',$accessory->assigned_to)->where('accessory_id','=',$accessory->id)->first();
             
-            print_r($accessory_user);
-            //$data['accessory_user_id'] = $accessory_user->id;
+            $data['log_id'] = $logaction->id;
             $data['eula'] = $accessory->getEula();
             $data['first_name'] = $user->first_name;
+            $data['item_name'] = $accessory->name;
+            $data['require_acceptance'] = $accessory->requireAcceptance();
             
              
-            if ($accessory->requireAcceptance()=='1') {
+            if (($accessory->requireAcceptance()=='1')  || ($accessory->getEula())) {
 				
-	            Mail::send('emails.accept-accessory', $data, function ($m) use ($user) {
+	            Mail::send('emails.accept-asset', $data, function ($m) use ($user) {
 	                $m->to($user->email, $user->first_name . ' ' . $user->last_name);
 	                $m->subject('Confirm accessory delivery');
 	            });

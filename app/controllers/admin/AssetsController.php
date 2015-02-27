@@ -451,12 +451,14 @@ class AssetsController extends AdminController
             $logaction->note = e(Input::get('note'));
             $log = $logaction->logaction('checkout');
             
-            $data['asset_id'] = $asset->id;
+            $data['log_id'] = $logaction->id;
             $data['eula'] = $asset->getEula();
             $data['first_name'] = $user->first_name;
+            $data['item_name'] = $asset->name;
+            $data['require_acceptance'] = $asset->requireAcceptance();
             
              
-            if ($asset->requireAcceptance()=='1') {
+            if (($asset->requireAcceptance()=='1')  || ($asset->getEula())) {
 				
 	            Mail::send('emails.accept-asset', $data, function ($m) use ($user) {
 	                $m->to($user->email, $user->first_name . ' ' . $user->last_name);

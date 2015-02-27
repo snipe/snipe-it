@@ -45,8 +45,9 @@
                 </div>
             </div>
             @endif
-
-
+            
+            
+                        
             <!-- User -->
 
             <div class="form-group {{ $errors->has('assigned_to') ? ' has-error' : '' }}">
@@ -58,6 +59,22 @@
                 </div>
             </div>
 
+			@if ($accessory->category->require_acceptance=='1')
+			<div class="form-group">
+                <div class="col-md-9 col-md-offset-3">
+                  <p class="hint-block">@lang('admin/categories/general.required_acceptance')</p>
+                </div>
+            </div>
+            @endif
+            
+            @if ($accessory->getEula())
+            <div class="form-group">
+
+                <div class="col-md-9 col-md-offset-3">
+                  <p class="hint-block">@lang('admin/categories/general.required_eula')</p>
+                </div>
+            </div>
+			@endif
   
 
             <!-- Form actions -->

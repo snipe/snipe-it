@@ -34,6 +34,11 @@ class Accessory extends Elegant
         return $this->belongsToMany('User', 'accessories_users', 'accessory_id','assigned_to')->withPivot('id')->withTrashed();
     }
     
+    public function hasUsers()
+    {
+        return $this->belongsToMany('User', 'accessories_users', 'accessory_id','assigned_to')->count();
+    }
+    
     
     public function requireAcceptance() {    
 	    return $this->category->require_acceptance;
@@ -45,7 +50,7 @@ class Accessory extends Elegant
         
 	    if ($this->category->eula_text) {
 		    return $Parsedown->text(e($this->category->eula_text));
-	    } elseif (Setting::getSettings()->default_eula_text) {
+	    } elseif ((Setting::getSettings()->default_eula_text) && ($this->category->use_default_eula=='1')) {
 		    return $Parsedown->text(e(Setting::getSettings()->default_eula_text));
 	    } else {
 		    return null;
