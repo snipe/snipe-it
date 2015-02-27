@@ -10,6 +10,7 @@ use View;
 use Asset;
 use Actionlog;
 use Lang;
+use Accessory;
 
 class ViewAssetsController extends AuthorizedController
 {
@@ -77,7 +78,7 @@ class ViewAssetsController extends AuthorizedController
 	        $item = License::find($findlog->asset_id);
 	    // accessories    
 	    } elseif ($findlog->accessory_id!='') {
-		   $item = Accessory::find($findlog->accesory_id);         
+		   $item = Accessory::find($findlog->accessory_id);         
         }
         
 	    // Check if the asset exists
@@ -104,11 +105,6 @@ class ViewAssetsController extends AuthorizedController
         }
         
         	$user = Sentry::getUser();
-        
-			
-			
-
-
 			$logaction = new Actionlog();
 			
 			// Asset
@@ -122,6 +118,7 @@ class ViewAssetsController extends AuthorizedController
 		        $logaction->asset_id = $findlog->asset_id;
 	        	$logaction->accessory_id = NULL;
 	        	$logaction->asset_type = 'software';
+	        	
 			// accessories    
 		    } elseif ($findlog->accessory_id!='') {
 			    $logaction->asset_id = NULL;
