@@ -68,12 +68,12 @@
 
             <td>
             @if($model->deleted_at=="")
-                <a href="{{ route('update/model', $model->id) }}" class="btn btn-warning"><i class="fa fa-pencil icon-white"></i></a>
-                <a data-html="false" class="btn delete-asset btn-danger" data-toggle="modal" href="{{ route('delete/model', $model->id) }}" data-content="@lang('admin/models/message.delete.confirm')"
+                <a href="{{ route('update/model', $model->id) }}" class="btn btn-warning btn-sm"><i class="fa fa-pencil icon-white"></i></a>
+                <a data-html="false" class="btn delete-asset btn-danger btn-sm" data-toggle="modal" href="{{ route('delete/model', $model->id) }}" data-content="@lang('admin/models/message.delete.confirm')"
                 data-title="@lang('general.delete')
                 {{ htmlspecialchars($model->name) }}?" onClick="return false;"><i class="fa fa-trash icon-white"></i></a>
             @else
-                <a href="{{ route('restore/model', $model->id) }}" class="btn btn-warning"><i class="fa fa-recycle icon-white"></i></a>
+                <a href="{{ route('restore/model', $model->id) }}" class="btn btn-warning btn-sm"><i class="fa fa-recycle icon-white"></i></a>
             @endif
             </td>
         </tr>

@@ -154,9 +154,9 @@
 
             @if (($asset->assetstatus) && (($asset->assetstatus->deployable == 1 ) && ($asset->deleted_at=='')))
 				@if (($asset->assigned_to !='') && ($asset->assigned_to > 0))
-					<a href="{{ route('checkin/hardware', $asset->id) }}" class="btn btn-primary">@lang('general.checkin')</a>
+					<a href="{{ route('checkin/hardware', $asset->id) }}" class="btn btn-primary btn-sm">@lang('general.checkin')</a>
 				@else
-					<a href="{{ route('checkout/hardware', $asset->id) }}" class="btn btn-info">@lang('general.checkout')</a>
+					<a href="{{ route('checkout/hardware', $asset->id) }}" class="btn btn-info btn-sm">@lang('general.checkout')</a>
 				@endif
             @endif
 
@@ -164,13 +164,13 @@
             <td nowrap="nowrap">
 
             @if ($asset->deleted_at=='')
-             	<a href="{{ route('update/hardware', $asset->id) }}" class="btn btn-warning"><i class="fa fa-pencil icon-white"></i></a>
-            	 <a data-html="false" class="btn delete-asset btn-danger" data-toggle="modal" href="{{ route('delete/hardware', $asset->id) }}" data-content="@lang('admin/hardware/message.delete.confirm')"
+             	<a href="{{ route('update/hardware', $asset->id) }}" class="btn btn-warning btn-sm"><i class="fa fa-pencil icon-white"></i></a>
+            	 <a data-html="false" class="btn delete-asset btn-danger btn-sm" data-toggle="modal" href="{{ route('delete/hardware', $asset->id) }}" data-content="@lang('admin/hardware/message.delete.confirm')"
                 data-title="@lang('general.delete')
                  {{ htmlspecialchars($asset->asset_tag) }}?" onClick="return false;"><i class="fa fa-trash icon-white"></i></a>
         	@else
                 @if ($asset->model->deleted_at=='')
-        		 <a href="{{ route('restore/hardware', $asset->id) }}" class="btn btn-warning"><i class="fa fa-recycle icon-white"></i></a>
+        		 <a href="{{ route('restore/hardware', $asset->id) }}" class="btn btn-warning btn-sm"><i class="fa fa-recycle icon-white"></i></a>
                 @endif
         	@endif
 

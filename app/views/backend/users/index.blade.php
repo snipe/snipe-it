@@ -74,18 +74,18 @@
 	            <!-- If the user account is suspended - show the UNSUSPEND button.  Do NOT evaluate if soft deleted! -->
 				@if (is_null($user->deleted_at))
 					@if ($user->accountStatus()=='suspended')
-			                <a href="{{ route('unsuspend/user', $user->id) }}" class="btn btn-warning"><span class="fa fa-time icon-white"></span></a>
+			                <a href="{{ route('unsuspend/user', $user->id) }}" class="btn btn-warning btn-sm"><span class="fa fa-time icon-white"></span></a>
 					@endif
 				@endif
             
 
                 @if ( ! is_null($user->deleted_at))
-                <a href="{{ route('restore/user', $user->id) }}" class="btn btn-warning"><i class="fa fa-share icon-white"></i></a>
+                <a href="{{ route('restore/user', $user->id) }}" class="btn btn-warning btn-sm"><i class="fa fa-share icon-white"></i></a>
                 @else
-                <a href="{{ route('update/user', $user->id) }}" class="btn btn-warning"><i class="fa fa-pencil icon-white"></i></a>
+                <a href="{{ route('update/user', $user->id) }}" class="btn btn-warning btn-sm"><i class="fa fa-pencil icon-white"></i></a>
 
                 @if ((Sentry::getId() !== $user->id) && (!Config::get('app.lock_passwords')))
-                <a data-html="false" class="btn delete-asset btn-danger" data-toggle="modal" href="{{ route('delete/user', $user->id) }}" data-content="Are you sure you wish to delete this user?" data-title="Delete {{ htmlspecialchars($user->first_name) }}?" onClick="return false;"><i class="fa fa-trash icon-white"></i></a>
+                <a data-html="false" class="btn delete-asset btn-danger btn-sm" data-toggle="modal" href="{{ route('delete/user', $user->id) }}" data-content="Are you sure you wish to delete this user?" data-title="Delete {{ htmlspecialchars($user->first_name) }}?" onClick="return false;"><i class="fa fa-trash icon-white"></i></a>
 
                 @else
                 <span class="btn delete-asset btn-danger disabled"><i class="fa fa-trash icon-white"></i></span>
