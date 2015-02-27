@@ -25,6 +25,7 @@
         <thead>
             <tr role="row">
                 <th class="col-md-5" bSortable="true">@lang('admin/categories/table.title')</th>
+                <th class="col-md-2" bSortable="true">@lang('general.type')</th>
                  <th class="col-md-2" bSortable="true">@lang('general.assets')</th>
                  <th class="col-md-3" bSortable="true">@lang('admin/categories/table.require_acceptance')</th>
                  <th class="col-md-2" bSortable="true">@lang('admin/categories/table.eula_text')</th>
@@ -35,7 +36,14 @@
             @foreach ($categories as $category)
             <tr>
                 <td>{{{ $category->name }}}</td>
-                <td><a href="{{ route('view/category',$category->id) }}">{{ $category->assetscount() }}</a></td>
+                <td>{{{ ucwords($category->category_type) }}}</td>
+                <td>
+	                @if ($category->category_type=='asset')
+	               		<a href="{{ route('view/category',$category->id) }}">{{ $category->assetscount() }}</a>
+	                @elseif ($category->category_type=='accessory')
+	                	{{ $category->accessoriescount() }}
+	                @endif
+	            </td>
                 <td>{{ ($category->require_acceptance=='1') ? '<i class="fa fa-check"></i>' : ''}}</td>
                 <td>{{ ($category->eula_text!='') ? '<i class="fa fa-check"></i>' : ''}}</td>
                 <td>

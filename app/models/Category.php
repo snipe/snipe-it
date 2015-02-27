@@ -20,10 +20,21 @@ class Category extends Elegant
         return $this->hasMany('Model', 'category_id')->count();
     }
 
-     public function assetscount()
+    public function assetscount()
     {
         return $this->hasManyThrough('Asset', 'Model')->count();
     }
+    
+    public function accessoriescount()
+    {
+        return $this->hasMany('Accessory')->count();
+    }
+    
+    public function accessories()
+    {
+        return $this->hasMany('Asset');
+    }
+
 
     public function assets()
     {
