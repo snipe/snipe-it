@@ -168,7 +168,7 @@ class CategoriesController extends AdminController
      */
     public function getDelete($categoryId)
     {
-        // Check if the blog post exists
+        // Check if the category exists
         if (is_null($category = Category::find($categoryId))) {
             // Redirect to the blogs management page
             return Redirect::to('admin/settings/categories')->with('error', Lang::get('admin/categories/message.not_found'));
