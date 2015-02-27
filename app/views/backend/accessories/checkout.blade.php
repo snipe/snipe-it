@@ -13,7 +13,7 @@
     <div class="col-md-12">
         <a href="{{ URL::previous() }}" class="btn-flat gray pull-right">
         <i class="fa fa-circle-arrow-left icon-white"></i>  @lang('general.back')</a>
-        <h3> @lang('admin/accessory/general.checkout')</h3>
+        <h3> @lang('general.checkout')</h3>
     </div>
 </div>
 
