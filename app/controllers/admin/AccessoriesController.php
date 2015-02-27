@@ -331,10 +331,7 @@ class AccessoriesController extends AdminController
        
 		$accessory = Accessory::find($accessory_user->accessory_id);
         $logaction = new Actionlog();
-        $logaction->checkedout_to = $accessory->assigned_to;
-
-        // Update the accessory data to null, since it's being checked in
-        $accessory->assigned_to            		= NULL;
+        $logaction->checkedout_to = $accessory_user->assigned_to;
 
         // Was the accessory updated?
         if(DB::table('accessories_users')->where('id', '=', $accessory_user->id)->delete()) {

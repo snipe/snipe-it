@@ -210,7 +210,7 @@
                                             <del>{{{ $log->assetlog->name }}}</del> (deleted)
                                             
                                         @elseif ((isset($log->accessorylog->name)) && ($log->accessorylog->deleted_at==''))
-                                            {{{ $log->accessorylog }}} 
+                                            {{{ $log->accessorylog->name }}} 
                                             
                                         @endif
                                         </td>
