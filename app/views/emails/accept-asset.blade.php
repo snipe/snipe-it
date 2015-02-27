@@ -26,7 +26,7 @@
 <p>{{ $eula }}</p>
 
 @if ($require_acceptance==1)
-<p><strong><a href="{{{ Config::get('app.url') }}}/account/accept-asset/{{ $log_id }}">I have read and agree to the terms of use, and have received this item.<br>{{{ Config::get('app.url') }}}/account/accept-asset/{{ $log_id }}</a></strong></p>
+<p><strong><a href="{{{ Config::get('app.url') }}}/account/accept-asset/{{ $log_id }}">I have read and agree to the terms of use, and have received this item.</a></strong></p>
 @endif
 
 <p>{{{ Setting::getSettings()->site_name }}}</p>
