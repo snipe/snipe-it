@@ -306,8 +306,8 @@ Route::group(array('prefix' => 'account', 'before' => 'auth', 'namespace' => 'Co
     Route::post('change-email', 'ChangeEmailController@postIndex');
     
      # Accept Asset
-    Route::get('accept-asset/{assetId}', array('as' => 'account/accept-assets', 'uses' => 'ViewAssetsController@getAcceptAsset'));
-    Route::post('accept-asset/{assetId}', array('as' => 'account/asset-accepted', 'uses' => 'ViewAssetsController@postAcceptAsset'));
+    Route::get('accept-asset/{logID}', array('as' => 'account/accept-assets', 'uses' => 'ViewAssetsController@getAcceptAsset'));
+    Route::post('accept-asset/{logID}', array('as' => 'account/asset-accepted', 'uses' => 'ViewAssetsController@postAcceptAsset'));
 
     # Profile
     Route::get('requestable-assets', array('as' => 'requestable-assets', 'uses' => 'ViewAssetsController@getRequestableIndex'));

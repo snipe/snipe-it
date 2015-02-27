@@ -61,15 +61,32 @@ class ViewAssetsController extends AuthorizedController
     
     
     // Get the acceptance screen
-    public function getAcceptAsset($assetId = null) {
+    public function getAcceptAsset($logID = null) {
 	    
-	    // Check if the asset exists
-        if (is_null($asset = Asset::find($assetId))) {
+	    if (is_null($findlog = Actionlog::find($logID))) {
             // Redirect to the asset management page
             return Redirect::to('account')->with('error', Lang::get('admin/hardware/message.does_not_exist'));
         }
         
-        return View::make('frontend/account/accept-asset', compact('asset'));
+        // Asset
+        if (($findlog->asset_id!='') && ($findlog->asset_type=='hardware')) {
+        	$item = Asset::find($findlog->asset_id);
+        
+        // software	
+        } elseif (($findlog->asset_id!='') && ($findlog->asset_type=='software')) {     
+	        $item = License::find($findlog->asset_id);
+	    // accessories    
+	    } elseif ($findlog->accessory_id!='') {
+		   $item = Accessory::find($findlog->accesory_id);         
+        }
+        
+	    // Check if the asset exists
+        if (is_null($item)) {
+            // Redirect to the asset management page
+            return Redirect::to('account')->with('error', Lang::get('admin/hardware/message.does_not_exist'));
+        }
+        
+        return View::make('frontend/account/accept-asset', compact('item'))->with('findlog', $findlog);
         
         
 
@@ -77,21 +94,43 @@ class ViewAssetsController extends AuthorizedController
     }
     
     // Save the acceptance
-    public function postAcceptAsset($assetId = null) {
+    public function postAcceptAsset($logID = null) {
 	  
+	  	
 	  	// Check if the asset exists
-        if (is_null($asset = Asset::find($assetId))) {
+        if (is_null($findlog = Actionlog::find($logID))) {
             // Redirect to the asset management page
             return Redirect::to('account')->with('error', Lang::get('admin/hardware/message.does_not_exist'));
         }
         
         	$user = Sentry::getUser();
         
-     
+			
+			
+
+
 			$logaction = new Actionlog();
-			$logaction->asset_id = $assetId;
-			$logaction->checkedout_to = $asset->assigned_to;
-			$logaction->asset_type = 'hardware';
+			
+			// Asset
+	        if (($findlog->asset_id!='') && ($findlog->asset_type=='hardware')) {
+	        	$logaction->asset_id = $findlog->asset_id;
+	        	$logaction->accessory_id = NULL;
+	        	$logaction->asset_type = 'hardware';
+	        
+	        // software	
+	        } elseif (($findlog->asset_id!='') && ($findlog->asset_type=='software')) {     
+		        $logaction->asset_id = $findlog->asset_id;
+	        	$logaction->accessory_id = NULL;
+	        	$logaction->asset_type = 'software';
+			// accessories    
+		    } elseif ($findlog->accessory_id!='') {
+			    $logaction->asset_id = NULL;
+	        	$logaction->accessory_id = $findlog->accessory_id;
+	        	$logaction->asset_type = 'accessory';         
+	        }
+			
+			$logaction->checkedout_to = $findlog->checkedout_to;
+			
 			$logaction->note = e(Input::get('note'));
 			$logaction->user_id = $user->id;
 			$logaction->accepted_at = date("Y-m-d h:i:s");
@@ -104,35 +143,6 @@ class ViewAssetsController extends AuthorizedController
 	    
     }
     
-     // Save the acceptance
-    public function postAcceptAccessory($accessoryUserID = null) {
-	  
-	  	// Check if the asset exists
-	
-
-        if (is_null($accessory_user = DB::table('accessories_users')->find($accessoryUserId))) {
-            // Redirect to the asset management page
-            return Redirect::to('account')->with('error', Lang::get('admin/hardware/message.does_not_exist'));
-        }
-        	$accessory = Accessory::find($accessory_user->accessory_id);
-        
-        	$user = Sentry::getUser();
-        
-     
-			$logaction = new Actionlog();
-			$logaction->asset_id = $accessory->id;
-			$logaction->checkedout_to = $accessory->assigned_to;
-			$logaction->asset_type = 'accessory';
-			$logaction->note = e(Input::get('note'));
-			$logaction->user_id = $user->id;
-			$logaction->accepted_at = date("Y-m-d h:i:s");
-			$log = $logaction->logaction('accepted');
-			
-			return Redirect::to('account/view-assets')->with('success', 'You have successfully accept this asset.');
-		
-	    
-    }
-
 
 
 
