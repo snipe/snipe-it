@@ -1,9 +1,10 @@
 <?php
 
 return array(
-
-    'id'      => 'ID',
-    'parent'   => 'Pai',
-    'title'      => 'Nome da Categoria de Bens',
+	'eula_text'      			=> 'EULA',
+    'id'      					=> 'ID',
+    'parent'   					=> 'Pai',
+    'require_acceptance'      	=> 'Acceptance',
+    'title'      				=> 'Nome da Categoria de Bens',
 
 );

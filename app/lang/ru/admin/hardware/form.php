@@ -2,9 +2,9 @@
 
 return array(
 
-	'bulk_update'		=> 'Bulk Update Assets',
-	'bulk_update_help'	=> 'This form allows you to update multiple assets at once. Only fill in the fields you need to change. Any fields left blank will remain unchanged. ',
-	'bulk_update_warn'	=> 'You are about to edit the properties of :asset_count assets.',
+	'bulk_update'		=> 'Редактировать выбранное',
+	'bulk_update_help'	=> 'Эта форма позволяет Вам обновить несколько объектов за раз. Заполняйте только те поля, которые нужно изменить. Пустые поля останутся без изменений. ',
+	'bulk_update_warn'	=> 'Редактирование свойств :asset_count assets.',
     'checkedout_to'		=> 'Привязан к',
     'checkout_to'		=> 'Привязать к',
     'cost'				=> 'Цена',
@@ -18,7 +18,7 @@ return array(
     'expires'			=> 'Истекает',
     'fully_depreciated'	=> 'Полностью изношен',
     'help_checkout'		=> 'Если вы желаете привязать этот актив прямо сейчас, вы должны выбрать "Готов к развертыванию" из списка статусов, во избежание неожиданностей. ',
-    'mac_address'		=> 'MAC Address',
+    'mac_address'		=> 'MAC Адрес',
     'manufacturer'		=> 'Производитель',
     'model'				=> 'Модель',
     'months'			=> 'Месяцев',
@@ -27,7 +27,7 @@ return array(
     'order'				=> 'Номер заказа',
     'qr'				=> 'QR-код',
     'requestable'		=> 'Пользователи могут запросить этот актив',
-    'select_statustype'	=> 'Select Status Type',
+    'select_statustype'	=> 'Выберите тип статуса',
     'serial'			=> 'Серийный номер',
     'status'			=> 'Статус',
     'supplier'			=> 'Поставщик',

@@ -1,9 +1,10 @@
 <?php
 
 return array(
-
-    'id'      => 'ID',
-    'parent'   => 'Parent',
-    'title'      => 'Nama Kategori Harta',
+	'eula_text'      			=> 'EULA',
+    'id'      					=> 'ID',
+    'parent'   					=> 'Parent',
+    'require_acceptance'      	=> 'Acceptance',
+    'title'      				=> 'Nama Kategori Harta',
 
 );

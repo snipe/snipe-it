@@ -20,6 +20,11 @@ return array(
         'confirm'   => 'Estás seguro de querer eliminar el Modelo?',
         'error'   => 'Ha habido un problema al eliminar el Modelo. Intentalo de nuevo.',
         'success' => 'Modelo eliminado.'
-    )
+    ),
+    
+    'restore' => array(
+        'error'   		=> 'Model was not restored, please try again',
+        'success' 		=> 'Model restored successfully.'
+    ),
 
 );

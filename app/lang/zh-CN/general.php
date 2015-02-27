@@ -3,6 +3,8 @@
 return array(
 
 
+    'accessories'			=> 'Accessories',
+    'accessory'				=> 'Accessory',
     'address'				=> '地址',
     'admin'					=> '管理员',
     'all_assets'			=> '所有资产',
@@ -32,6 +34,7 @@ return array(
     'currency'  			=> 'RMB',
     'current'  				=> '当前',
     'custom_report'         => '客户资产的报告',
+    'dashboard'				=> 'Dashboard',
     'date'					=> '日期',
     'delete'  				=> '刪除',
     'deleted'  				=> '已删除',
@@ -86,6 +89,7 @@ return array(
     'suppliers'  			=> '供应商',
     'total_assets'			=> '共计资产',
     'total_licenses'		=> '共计许可证',
+    'type'  				=> 'Type',
     'undeployable'			=> '无法被分配',
     'unknown_admin'			=> '未知管理员',
     'user'					=> '用户',

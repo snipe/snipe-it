@@ -15,24 +15,24 @@ return array(
     'update' => array(
         'error'   			=> 'Equipo no actualizado, intentalo de nuevo',
         'success' 			=> 'Equipo actualizado.',
-        'nothing_updated'	=>  'No fields were selected, so nothing was updated.',
+        'nothing_updated'	=>  'Ningún campo fue seleccionado, por lo que nada ha sido actualizado.',
     ),
 
     'restore' => array(
-        'error'   		=> 'Asset was not restored, please try again',
-        'success' 		=> 'Asset restored successfully.'
+        'error'   		=> 'El equipo no fue restaurado, por favor intente nuevamente',
+        'success' 		=> 'Equipo restaurado correctamente.'
     ),
     
     'deletefile' => array(
-        'error'   => 'File not deleted. Please try again.',
-        'success' => 'File successfully deleted.',
+        'error'   => 'Archivo no eliminado. Por favor, vuelva a intentarlo.',
+        'success' => 'Archivo eliminado correctamente.',
     ),
 
     'upload' => array(
-        'error'   => 'File(s) not uploaded. Please try again.',
-        'success' => 'File(s) successfully uploaded.',
-        'nofiles' => 'You did not select any files for upload',
-        'invalidfiles' => 'One or more of your files is too large or is a filetype that is not allowed. Allowed filetypes are png, gif, jpg, doc, docx, pdf, and txt.',
+        'error'   => 'Archivo(s) no cargado. Por favor, vuelva a intentarlo.',
+        'success' => 'Archivo(s) cargado correctamente.',
+        'nofiles' => 'No ha seleccionado ningún archivo para subir',
+        'invalidfiles' => 'Uno o más sus archivos es demasiado grande o es de un tipo no permitido. Los tipos de archivo permitidos son png, gif, jpg, doc, docx, pdf y txt.',
     ),
 
 

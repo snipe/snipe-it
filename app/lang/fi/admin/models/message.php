@@ -20,6 +20,11 @@ return array(
         'confirm'   => 'Oletko varma että haluat poistaa tämän laitemallin?',
         'error'   => 'Laitemallin poistossa tapahtui virhe. Yritä uudelleen.',
         'success' => 'Malli poistettiin onnistuneesti.'
-    )
+    ),
+    
+    'restore' => array(
+        'error'   		=> 'Model was not restored, please try again',
+        'success' 		=> 'Model restored successfully.'
+    ),
 
 );

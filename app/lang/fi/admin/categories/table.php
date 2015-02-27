@@ -1,9 +1,10 @@
 <?php
 
 return array(
-
-    'id'      => 'Tunnus',
-    'parent'   => 'Ylempi',
-    'title'      => 'Laiteluokan Nimi',
+	'eula_text'      			=> 'EULA',
+    'id'      					=> 'Tunnus',
+    'parent'   					=> 'Ylempi',
+    'require_acceptance'      	=> 'Acceptance',
+    'title'      				=> 'Laiteluokan Nimi',
 
 );

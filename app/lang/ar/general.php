@@ -3,6 +3,8 @@
 return array(
 
 
+    'accessories'			=> 'Accessories',
+    'accessory'				=> 'Accessory',
     'address'				=> 'العنوان',
     'admin'					=> 'الإدارة',
     'all_assets'			=> 'كل الأصول',
@@ -32,6 +34,7 @@ return array(
     'currency'  			=> '$',
     'current'  				=> 'الحالي',
     'custom_report'         => 'Custom Asset Report',
+    'dashboard'				=> 'Dashboard',
     'date'					=> 'التاريخ',
     'delete'  				=> 'حذف',
     'deleted'  				=> 'تم حذفها',
@@ -86,6 +89,7 @@ return array(
     'suppliers'  			=> 'الموردون',
     'total_assets'			=> 'إجمالي الأصول',
     'total_licenses'		=> 'إجمالي الرخص',
+    'type'  				=> 'Type',
     'undeployable'			=> 'غير قابلة للتوزيع',
     'unknown_admin'			=> 'إداري غير معروف',
     'user'					=> 'المستخدم',

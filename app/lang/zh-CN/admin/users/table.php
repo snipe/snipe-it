@@ -18,6 +18,7 @@ return array(
     'last_login'  			=> '上一次登陆',
     'last_name'  			=> '姓氏',
     'location'  			=> '位置',
+    'lock_passwords'		=> 'Login details cannot be changed on this installation.',
     'manager' 				=> '领导',
     'name' 					=> '名字',
     'password_confirm' 		=> '确认密码',

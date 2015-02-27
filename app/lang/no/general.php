@@ -3,6 +3,8 @@
 return array(
 
 
+    'accessories'			=> 'Accessories',
+    'accessory'				=> 'Accessory',
     'address'				=> 'Adresse',
     'admin'					=> 'Admin',
     'all_assets'			=> 'Alle eiendeler',
@@ -32,6 +34,7 @@ return array(
     'currency'  			=> '$',
     'current'  				=> 'Nåværende',
     'custom_report'         => 'Tilpasset eiendelsrapport',
+    'dashboard'				=> 'Dashboard',
     'date'					=> 'Dato',
     'delete'  				=> 'Slett',
     'deleted'  				=> 'Slettet',
@@ -86,6 +89,7 @@ return array(
     'suppliers'  			=> 'Leverandører',
     'total_assets'			=> 'eiendeler totalt',
     'total_licenses'		=> 'lisener totalt',
+    'type'  				=> 'Type',
     'undeployable'			=> 'Ikke utleverbar',
     'unknown_admin'			=> 'Ukjent admin',
     'user'					=> 'Bruker',

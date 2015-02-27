@@ -3,6 +3,8 @@
 return array(
 
 
+    'accessories'			=> 'Accessories',
+    'accessory'				=> 'Accessory',
     'address'				=> 'Adres',
     'admin'					=> 'Admin',
     'all_assets'			=> 'Wszystkie aktywa',
@@ -32,6 +34,7 @@ return array(
     'currency'  			=> 'PLN',
     'current'  				=> 'Lista urzytkowników',
     'custom_report'         => 'Raport niestandardowy składnik aktywów',
+    'dashboard'				=> 'Dashboard',
     'date'					=> 'Data',
     'delete'  				=> 'Kasuj',
     'deleted'  				=> 'Usunięte',
@@ -86,6 +89,7 @@ return array(
     'suppliers'  			=> 'Dostawcy',
     'total_assets'			=> 'Ogółem aktywów',
     'total_licenses'		=> 'Ogółem licencji',
+    'type'  				=> 'Type',
     'undeployable'			=> 'Nie przypisane',
     'unknown_admin'			=> 'Nieznany Administrator',
     'user'					=> 'Użytkownik',

@@ -3,6 +3,8 @@
 return array(
 
 
+    'accessories'			=> 'Accessories',
+    'accessory'				=> 'Accessory',
     'address'				=> 'Addresse',
     'admin'					=> 'Admin',
     'all_assets'			=> 'Alle aktiver',
@@ -32,6 +34,7 @@ return array(
     'currency'  			=> '$',
     'current'  				=> 'Current',
     'custom_report'         => 'Custom Asset Report',
+    'dashboard'				=> 'Dashboard',
     'date'					=> 'Dato',
     'delete'  				=> 'Slet',
     'deleted'  				=> 'Slettet',
@@ -86,6 +89,7 @@ return array(
     'suppliers'  			=> 'Leverandører',
     'total_assets'			=> 'total assets',
     'total_licenses'		=> 'totale licenser',
+    'type'  				=> 'Type',
     'undeployable'			=> 'Un-deployable',
     'unknown_admin'			=> 'Unknown Admin',
     'user'					=> 'Bruger',

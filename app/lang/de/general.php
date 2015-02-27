@@ -3,6 +3,8 @@
 return array(
 
 
+    'accessories'			=> 'Accessories',
+    'accessory'				=> 'Accessory',
     'address'				=> 'Supplier Address',
     'admin'					=> 'Administrator',
     'all_assets'			=> 'Alle Assets',
@@ -32,6 +34,7 @@ return array(
     'currency'  			=> '€',
     'current'  				=> 'Aktuell',
     'custom_report'         => 'Spezieller Asset Report',
+    'dashboard'				=> 'Dashboard',
     'date'					=> 'Purchase Date',
     'delete'  				=> 'Löschen',
     'deleted'  				=> 'Gelöscht',
@@ -86,6 +89,7 @@ return array(
     'suppliers'  			=> 'Lieferanten',
     'total_assets'			=> 'Gesamte Assets',
     'total_licenses'		=> 'Lizenzen insgesamt',
+    'type'  				=> 'Type',
     'undeployable'			=> 'Nicht herausgebbar',
     'unknown_admin'			=> 'Unbekannter Administrator',
     'user'					=> 'Nutzer',

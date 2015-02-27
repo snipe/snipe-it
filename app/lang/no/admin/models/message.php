@@ -20,6 +20,11 @@ return array(
         'confirm'   => 'Er du sikker på at du vil slette denne modellen?',
         'error'   => 'Det oppstod et problem under sletting av modellen. Prøv igjen.',
         'success' => 'Sletting av modell vellykket.'
-    )
+    ),
+    
+    'restore' => array(
+        'error'   		=> 'Model was not restored, please try again',
+        'success' 		=> 'Model restored successfully.'
+    ),
 
 );

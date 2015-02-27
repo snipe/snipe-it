@@ -1,9 +1,10 @@
 <?php
 
 return array(
-
-    'id'      => 'ID',
-    'parent'   => 'Pertence a',
-    'title'      => 'Nome da categoria de equipamento',
+	'eula_text'      			=> 'EULA',
+    'id'      					=> 'ID',
+    'parent'   					=> 'Pertence a',
+    'require_acceptance'      	=> 'Acceptance',
+    'title'      				=> 'Nome da categoria de equipamento',
 
 );

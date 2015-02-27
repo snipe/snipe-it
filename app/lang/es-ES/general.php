@@ -3,6 +3,8 @@
 return array(
 
 
+    'accessories'			=> 'Accessories',
+    'accessory'				=> 'Accessory',
     'address'				=> 'Dirección',
     'admin'					=> 'Admin',
     'all_assets'			=> 'Todos los Equipos',
@@ -32,6 +34,7 @@ return array(
     'currency'  			=> '€',
     'current'  				=> 'Actual',
     'custom_report'         => 'Reporte de Equipos Personalizado',
+    'dashboard'				=> 'Dashboard',
     'date'					=> 'Fecha Compra',
     'delete'  				=> 'Borrar',
     'deleted'  				=> 'Borrado',
@@ -86,6 +89,7 @@ return array(
     'suppliers'  			=> 'Proveedores',
     'total_assets'			=> 'Equipos',
     'total_licenses'		=> 'licencias totales',
+    'type'  				=> 'Type',
     'undeployable'			=> 'No Instalable',
     'unknown_admin'			=> 'Admin Desconocido',
     'user'					=> 'Usuario',

@@ -3,6 +3,8 @@
 return array(
 
 
+    'accessories'			=> 'Accessories',
+    'accessory'				=> 'Accessory',
     'address'				=> 'Adresa',
     'admin'					=> 'Admin',
     'all_assets'			=> 'Všechna zařízení',
@@ -32,6 +34,7 @@ return array(
     'currency'  			=> 'Kč',
     'current'  				=> 'Aktuální',
     'custom_report'         => 'Vlastní report majetku',
+    'dashboard'				=> 'Dashboard',
     'date'					=> 'Datum',
     'delete'  				=> 'Odstranit',
     'deleted'  				=> 'Odstraněno',
@@ -86,6 +89,7 @@ return array(
     'suppliers'  			=> 'Dodavatelé',
     'total_assets'			=> 'celkem zařízení',
     'total_licenses'		=> 'celkem licencí',
+    'type'  				=> 'Type',
     'undeployable'			=> 'Ne-přiřaditelné',
     'unknown_admin'			=> 'Neznámy správce',
     'user'					=> 'Uživatel',

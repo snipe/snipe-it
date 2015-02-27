@@ -3,6 +3,8 @@
 return array(
 
 
+    'accessories'			=> 'Accessories',
+    'accessory'				=> 'Accessory',
     'address'				=> 'Adresa',
     'admin'					=> 'Admin',
     'all_assets'			=> 'Toate activele',
@@ -32,6 +34,7 @@ return array(
     'currency'  			=> 'LEI',
     'current'  				=> 'Curent',
     'custom_report'         => 'Raport active custom',
+    'dashboard'				=> 'Dashboard',
     'date'					=> 'Data',
     'delete'  				=> 'Sterge',
     'deleted'  				=> 'Sters',
@@ -86,6 +89,7 @@ return array(
     'suppliers'  			=> 'Furnizori',
     'total_assets'			=> 'Total active',
     'total_licenses'		=> 'Total licente',
+    'type'  				=> 'Type',
     'undeployable'			=> 'Nelansabil',
     'unknown_admin'			=> 'Admin necunoscut',
     'user'					=> 'Utilizator',

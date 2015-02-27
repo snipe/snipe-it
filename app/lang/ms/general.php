@@ -3,6 +3,8 @@
 return array(
 
 
+    'accessories'			=> 'Accessories',
+    'accessory'				=> 'Accessory',
     'address'				=> 'Alamat',
     'admin'					=> 'Pentadbir',
     'all_assets'			=> 'Semua Harta',
@@ -32,6 +34,7 @@ return array(
     'currency'  			=> 'RM',
     'current'  				=> 'Semasa',
     'custom_report'         => 'Laporan Harta Pilihan',
+    'dashboard'				=> 'Dashboard',
     'date'					=> 'Tarikh',
     'delete'  				=> 'Hapuskan',
     'deleted'  				=> 'Dihapuskan',
@@ -86,6 +89,7 @@ return array(
     'suppliers'  			=> 'Pembekal',
     'total_assets'			=> 'jumlah harta',
     'total_licenses'		=> 'jumlah lesen',
+    'type'  				=> 'Type',
     'undeployable'			=> 'Tidak Boleh Agih',
     'unknown_admin'			=> 'Pentadbir Tidak Dikenali',
     'user'					=> 'Pengguna',

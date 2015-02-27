@@ -19,7 +19,7 @@ return array(
         'suspend'   => 'O usuário foi suspenso com sucesso.',
         'unsuspend' => 'O usuário foi dessuspenso com sucesso.',
         'restored'  => 'O usuário foi restaurado com sucesso.',
-+       'import'    => 'Users imported successfully.',
++       'import'    => 'Usuários importados com sucesso.',
     ),
 
     'error' => array(
@@ -27,7 +27,7 @@ return array(
         'update' => 'Houve um problema ao atualizar o usuário. Por favor, tente novamente.',
         'delete' => 'Houve um problema ao deletar o usuário. Por favor, tente novamente.',
         'unsuspend' => 'Houve um problema ao dessuspender o usuário. Por favor, tente novamente.',
-        'import'    => 'There was an issue importing users. Please try again.',
+        'import'    => 'Houve um problema ao importar os usuários. Tente novamente.',
     ),
 
 );

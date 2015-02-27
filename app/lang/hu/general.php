@@ -3,6 +3,8 @@
 return array(
 
 
+    'accessories'			=> 'Accessories',
+    'accessory'				=> 'Accessory',
     'address'				=> 'Cím',
     'admin'					=> 'Admin',
     'all_assets'			=> 'All Assets',
@@ -32,6 +34,7 @@ return array(
     'currency'  			=> '$',
     'current'  				=> 'Current',
     'custom_report'         => 'Custom Asset Report',
+    'dashboard'				=> 'Dashboard',
     'date'					=> 'Dátum',
     'delete'  				=> 'Törlés',
     'deleted'  				=> 'Törölve',
@@ -86,6 +89,7 @@ return array(
     'suppliers'  			=> 'Suppliers',
     'total_assets'			=> 'total assets',
     'total_licenses'		=> 'total licenses',
+    'type'  				=> 'Type',
     'undeployable'			=> 'Un-deployable',
     'unknown_admin'			=> 'Unknown Admin',
     'user'					=> 'Felhasználó',

@@ -18,6 +18,7 @@ return array(
     'last_login'  			=> 'Last Login',
     'last_name'  			=> 'Vezetéknév',
     'location'  			=> 'Helyszín',
+    'lock_passwords'		=> 'Login details cannot be changed on this installation.',
     'manager' 				=> 'Felettes',
     'name' 					=> 'Név',
     'password_confirm' 		=> 'Jelszó megerősítése',

@@ -20,6 +20,11 @@ return array(
         'confirm'   => 'Anda pasti anda ingin hapuskan model harta ini?',
         'error'   => 'Ada isu semasa menghapuskan model. Sila cuba lagi.',
         'success' => 'Model berjaya dihapuskan.'
-    )
+    ),
+    
+    'restore' => array(
+        'error'   		=> 'Model was not restored, please try again',
+        'success' 		=> 'Model restored successfully.'
+    ),
 
 );

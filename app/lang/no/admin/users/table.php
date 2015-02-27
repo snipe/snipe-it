@@ -18,6 +18,7 @@ return array(
     'last_login'  			=> 'Siste innlogging',
     'last_name'  			=> 'Etternavn',
     'location'  			=> 'Lokasjon',
+    'lock_passwords'		=> 'Login details cannot be changed on this installation.',
     'manager' 				=> 'Overordnet',
     'name' 					=> 'Navn',
     'password_confirm' 		=> 'Bekreft passord',

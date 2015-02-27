@@ -20,6 +20,11 @@ return array(
         'confirm'   => 'Sind sie sicher, dass sie das Asset löschen wollen?',
         'error'   => 'Beim Löschen des Modell ist ein Fehler aufgetreten. Bitte probieren Sie es noch einmal.',
         'success' => 'Das Modell wurde erfolgreich gelöscht.'
-    )
+    ),
+    
+    'restore' => array(
+        'error'   		=> 'Model was not restored, please try again',
+        'success' 		=> 'Model restored successfully.'
+    ),
 
 );

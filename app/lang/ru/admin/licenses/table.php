@@ -2,16 +2,16 @@
 
 return array(
 
-    'assigned_to'   	=> 'Assigned To',
-    'checkout'   		=> 'In/Out',
+    'assigned_to'   	=> 'Выдано',
+    'checkout'   		=> 'Выдача/Возврат',
     'id'      			=> 'ID',
-    'license_email'   	=> 'License Email',
-    'license_name'   	=> 'Licensed To',
-    'purchase_date'   	=> 'Purchase Date',
-    'purchased'   		=> 'Purchased',
-    'seats'   			=> 'Seats',
-    'hardware'   		=> 'Hardware',
-    'serial'   			=> 'Serial',
-    'title'      		=> 'License',
+    'license_email'   	=> 'Email, привязанный к лицензии',
+    'license_name'   	=> 'Лицензировано для',
+    'purchase_date'   	=> 'Дата покупки',
+    'purchased'   		=> 'Оплачено',
+    'seats'   			=> 'Количество',
+    'hardware'   		=> 'Оборудование',
+    'serial'   			=> 'Серийный номер',
+    'title'      		=> 'Лицензия',
 
 );

@@ -1,9 +1,10 @@
 <?php
 
 return array(
-
-    'id'      => 'ID',
-    'parent'   => 'Förälder',
-    'title'      => 'Tillgångskategori',
+	'eula_text'      			=> 'EULA',
+    'id'      					=> 'ID',
+    'parent'   					=> 'Förälder',
+    'require_acceptance'      	=> 'Acceptance',
+    'title'      				=> 'Tillgångskategori',
 
 );

@@ -2,9 +2,9 @@
 
 return array(
 
-	'bulk_update'		=> 'Bulk Update Assets',
-	'bulk_update_help'	=> 'This form allows you to update multiple assets at once. Only fill in the fields you need to change. Any fields left blank will remain unchanged. ',
-	'bulk_update_warn'	=> 'You are about to edit the properties of :asset_count assets.',
+	'bulk_update'		=> 'Actualización masiva de Equipos',
+	'bulk_update_help'	=> 'Este formulario le permite actualizar múltiples Equipos simultáneamente. Solo complete los campos que quiere modificar. Todo campo en blanco permanecerá sin cambios. ',
+	'bulk_update_warn'	=> 'Esta a punto de editar las propiedades de :asset_count equipos.',
     'checkedout_to'		=> 'Asignado a',
     'checkout_to'		=> 'Asignar a',
     'cost'				=> 'Precio Compra',

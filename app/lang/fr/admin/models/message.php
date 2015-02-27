@@ -20,6 +20,11 @@ return array(
         'confirm'   => 'Êtes-vous sûr de vouloir supprimer ce modèle d\'actif ?',
         'error'   => 'Un problème a eu lieu pendant la suppression du modèle. Veuillez essayer à nouveau.',
         'success' => 'Le modèle a été supprimé avec succès.'
-    )
+    ),
+    
+    'restore' => array(
+        'error'   		=> 'Model was not restored, please try again',
+        'success' 		=> 'Model restored successfully.'
+    ),
 
 );

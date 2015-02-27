@@ -18,6 +18,7 @@ return array(
     'last_login'  			=> 'Último Login',
     'last_name'  			=> 'Último Nome',
     'location'  			=> 'Local',
+    'lock_passwords'		=> 'Login details cannot be changed on this installation.',
     'manager' 				=> 'Gerenciador',
     'name' 					=> 'Nome',
     'password_confirm' 		=> 'Confirmar Senha',

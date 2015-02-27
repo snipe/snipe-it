@@ -5,46 +5,46 @@ return array(
     'does_not_exist' => 'Лицензия не существует.',
     'user_does_not_exist' => 'Пользователь не существует.',
     'asset_does_not_exist' 	=> 'Актив который вы пытаетесь ассоциировать с этой лицензией не существует.',
-    'owner_doesnt_match_asset' => 'The asset you are trying to associate with this license is owned by somene other than the person selected in the assigned to dropdown.',
-    'assoc_users'	 => 'This license is currently checked out to a user and cannot be deleted. Please check the license in first, and then try deleting again. ',
+    'owner_doesnt_match_asset' => 'Владелец актива, который вы пытаетесь связать с этой лицензией, отличается от выбранного в списке пользователя.',
+    'assoc_users'	 => 'Эта лицензия выдана пользователю и не может быть удалена. Перед удалением необходимо сначала списать лицензию на склад. ',
 
 
     'create' => array(
-        'error'   => 'License was not created, please try again.',
-        'success' => 'License created successfully.'
+        'error'   => 'Невозможно создать лицензию, повторите попытку.',
+        'success' => 'Лицензия успешно создана.'
     ),
 
     'deletefile' => array(
-        'error'   => 'File not deleted. Please try again.',
-        'success' => 'File successfully deleted.',
+        'error'   => 'Не удалось удалить файл. Повторите попытку.',
+        'success' => 'Файл успешно удален.',
     ),
 
     'upload' => array(
-        'error'   => 'File(s) not uploaded. Please try again.',
-        'success' => 'File(s) successfully uploaded.',
-        'nofiles' => 'You did not select any files for upload',
-        'invalidfiles' => 'One or more of your files is too large or is a filetype that is not allowed. Allowed filetypes are png, gif, jpg, doc, docx, pdf, and txt.',
+        'error'   => 'Не удалось загрузить файл(ы). Повторите попытку.',
+        'success' => 'Файл(ы) успешно загружены.',
+        'nofiles' => 'Не выбраны файлы для загрузки',
+        'invalidfiles' => 'Один или несколько ваших файлов слишком большого размера или имеют неподдерживаемый формат. Разрешены только следующие форматы файлов:  png, gif, jpg, doc, docx, pdf, txt.',
     ),
 
     'update' => array(
-        'error'   => 'License was not updated, please try again',
-        'success' => 'License updated successfully.'
+        'error'   => 'Невозможно обновить лицензию, повторите попытку',
+        'success' => 'Лицензия успешно обновлена.'
     ),
 
     'delete' => array(
-        'confirm'   => 'Are you sure you wish to delete this license?',
-        'error'   => 'There was an issue deleting the license. Please try again.',
-        'success' => 'The license was deleted successfully.'
+        'confirm'   => 'Вы уверены, что хотите удалить эту лицензию?',
+        'error'   => 'При удалении лицензии возникли проблемы. Повторите попытку.',
+        'success' => 'Лицензия успешно удалена.'
     ),
 
     'checkout' => array(
-        'error'   => 'There was an issue checking out the license. Please try again.',
-        'success' => 'The license was checked out successfully'
+        'error'   => 'При выдаче лицензии произошла ошибка. Повторите попытку.',
+        'success' => 'Лицензия успешно назначена'
     ),
 
     'checkin' => array(
-        'error'   => 'There was an issue checking in the license. Please try again.',
-        'success' => 'The license was checked in successfully'
+        'error'   => 'При возврате лицензии произошла ошибка. Попробуйте еще раз.',
+        'success' => 'Лицензия успешно назначена'
     ),
 
 );

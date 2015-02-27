@@ -20,6 +20,11 @@ return array(
         'confirm'   => '你确定删除这个模板吗？',
         'error'   => '删除模板的过程中出现了一点儿问题，请重试。',
         'success' => '模板已经成功被删除'
-    )
+    ),
+    
+    'restore' => array(
+        'error'   		=> 'Model was not restored, please try again',
+        'success' 		=> 'Model restored successfully.'
+    ),
 
 );

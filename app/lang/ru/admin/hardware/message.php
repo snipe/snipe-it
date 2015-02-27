@@ -2,8 +2,8 @@
 
 return array(
 
-    'undeployable' 		=> '<strong>Warning: </strong> This asset has been marked as currently undeployable.
-                        If this status has changed, please update the asset status.',
+    'undeployable' 		=> '<strong>Внимание: </strong> Этот актив был помечен как выданный.
+                        Если этот статус изменился, необходимо его обновить.',
     'does_not_exist' 	=> 'Актив не существует.',
     'assoc_users'	 	=> 'Этот актив в настоящее время привязан к пользователю и не может быть удален. Пожалуйста сначала снимите привязку, и затем попробуйте удалить снова. ',
 
@@ -15,24 +15,24 @@ return array(
     'update' => array(
         'error'   			=> 'Актив не был изменен, пожалуйста попробуйте снова',
         'success' 			=> 'Актив успешно изменен.',
-        'nothing_updated'	=>  'No fields were selected, so nothing was updated.',
+        'nothing_updated'	=>  'Поля не выбраны, нечего обновлять.',
     ),
 
     'restore' => array(
-        'error'   		=> 'Asset was not restored, please try again',
-        'success' 		=> 'Asset restored successfully.'
+        'error'   		=> 'Актив не был восстановлен, повторите попытку',
+        'success' 		=> 'Актив успешно восстановлен.'
     ),
     
     'deletefile' => array(
-        'error'   => 'File not deleted. Please try again.',
-        'success' => 'File successfully deleted.',
+        'error'   => 'Не удалось удалить файл. Повторите попытку.',
+        'success' => 'Файл успешно удален.',
     ),
 
     'upload' => array(
-        'error'   => 'File(s) not uploaded. Please try again.',
-        'success' => 'File(s) successfully uploaded.',
-        'nofiles' => 'You did not select any files for upload',
-        'invalidfiles' => 'One or more of your files is too large or is a filetype that is not allowed. Allowed filetypes are png, gif, jpg, doc, docx, pdf, and txt.',
+        'error'   => 'Не удалось загрузить файл(ы). Повторите попытку.',
+        'success' => 'Файл(ы) успешно загружены.',
+        'nofiles' => 'Не выбраны файлы для загрузки',
+        'invalidfiles' => 'Один или несколько ваших файлов слишком большого размера или имеют неподдерживаемый формат. Разрешены только следующие форматы файлов:  png, gif, jpg, doc, docx, pdf, txt.',
     ),
 
 

@@ -1,17 +1,18 @@
 <?php
 
 return array(
-	'archived'  				=> 'Archived',
+	'archived'  				=> 'Архивированные',
     'asset'  					=> 'Актив',
-    'checkin'  					=> 'Checkin Asset',
-    'checkout'  				=> 'Checkout Asset to User',
+    'checkin'  					=> 'Вернуть актив на склад',
+    'checkout'  				=> 'Выдать актив пользователю',
     'clone'  					=> 'Клонировать актив',
-    'deployable'  				=> 'Deployable',
-    'deleted'  					=> 'This asset has been deleted. <a href="/hardware/:asset_id/restore">Click here to restore it</a>.',
+    'deployable'  				=> 'Доступные',
+    'deleted'  					=> 'Этот актив был удален. <a href="/hardware/:asset_id/restore">Нажмите, чтобы восстановить</a>.',
     'edit'  					=> 'Редактировать актив',
-    'requestable'				=> 'Requestable',
-    'restore'  					=> 'Restore Asset',
-    'pending'  					=> 'Pending',
-    'undeployable'  			=> 'Undeployable',
+    'model_deleted'  			=> 'This Assets model has been deleted. You must restore the model before you can restore the Asset.<br/> <a href="/hardware/models/:model_id/restore">Click here to restore the model</a>.',
+    'requestable'				=> 'Готов к выдаче',
+    'restore'  					=> 'Восстановить актив',
+    'pending'  					=> 'Ожидание',
+    'undeployable'  			=> 'Выданные',
     'view'  					=> 'Показать актив',
 );

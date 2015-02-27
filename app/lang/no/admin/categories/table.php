@@ -1,9 +1,10 @@
 <?php
 
 return array(
-
-    'id'      => 'ID',
-    'parent'   => 'Overordnet kategori',
-    'title'      => 'Kategorinavn',
+	'eula_text'      			=> 'EULA',
+    'id'      					=> 'ID',
+    'parent'   					=> 'Overordnet kategori',
+    'require_acceptance'      	=> 'Acceptance',
+    'title'      				=> 'Kategorinavn',
 
 );

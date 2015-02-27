@@ -18,6 +18,7 @@ return array(
     'last_login'  			=> 'Log masuk terakhir',
     'last_name'  			=> 'Nama Keluarga',
     'location'  			=> 'Lokasi',
+    'lock_passwords'		=> 'Login details cannot be changed on this installation.',
     'manager' 				=> 'Pengurus',
     'name' 					=> 'Nama',
     'password_confirm' 		=> 'Sahkan kata laluan',

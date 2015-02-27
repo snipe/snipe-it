@@ -1,15 +1,18 @@
 <?php
 
 return array(
-	'alert_email'				=> 'Send alerts to',
-	'alerts_enabled'			=> 'Alerts enabled',
+	'alert_email'				=> 'Alarme senden an',
+	'alerts_enabled'			=> 'Alarme aktiv',
 	'auto_increment_assets'		=> 'Erzeugen von fortlaufenden Asset IDs',
 	'auto_increment_prefix'		=> 'Präfix (optional)',
-	'auti_incrementing_help'    => 'Aktiviere zuerst fortlaufende asset IDs um dies zu setzen',
+	'auto_incrementing_help'    => 'Enable auto-incrementing asset IDs first to set this',
+	'default_eula_text'			=> 'Default EULA',
+	'default_eula_help_text'	=> 'You can also associate custom EULAs to specific asset categories.',
     'display_asset_name'        => 'Zeige Assetname an',
     'display_checkout_date'     => 'Zeige Herausgabedatum',
     'display_eol'               => 'Zeige EOL in der Tabellenansicht',
     'display_qr'                => 'Zeige QR-Codes',
+    'eula_markdown'				=> 'This EULA allows <a href="https://help.github.com/articles/github-flavored-markdown/">Github flavored markdown</a>.',
     'header_color'              => 'Farbe der Kopfzeile',
     'info'                      => 'Mit diesen Einstellungen können Sie verschieden Aspekte Ihrer Installation bearbeiten.',
     'laravel'                   => 'Laravel Version',

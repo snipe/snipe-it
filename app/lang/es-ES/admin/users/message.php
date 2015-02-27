@@ -19,7 +19,7 @@ return array(
         'suspend'   => 'Usuario correctamente suspendido.',
         'unsuspend' => 'Usuario correctamente no suspendido.',
         'restored'  => 'Usuario correctamente restaurado.',
-+       'import'    => 'Users imported successfully.',
++       'import'    => 'Usuarios importados correctamente.',
     ),
 
     'error' => array(
@@ -27,7 +27,7 @@ return array(
         'update' => 'Ha habido un problema actualizando el Usuario. Intentalo de nuevo.',
         'delete' => 'Ha habido un problema eliminando el  Usuario. Intentalo de nuevo.',
         'unsuspend' => 'Ha habido un problema marcando como no suspendido el Usuario. Intentalo de nuevo.',
-        'import'    => 'There was an issue importing users. Please try again.',
+        'import'    => 'Ha habido un problema importando los usuarios. Por favor intente nuevamente.',
     ),
 
 );
