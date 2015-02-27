@@ -398,7 +398,7 @@
 						  		<a target="_blank" href="http://docs.snipeitapp.com/">Documentation</a> |
 						  		<a href="https://crowdin.com/project/snipe-it">Help Translate It! </a> |
 						  		<a target="_blank" href="https://github.com/snipe/snipe-it/issues?state=open">Report a Bug</a>
-						  		 &nbsp; &nbsp; (v1.2.6 pre-release)               
+						  		 &nbsp; &nbsp; (v1.2.6-beta)               
                   		</div>         	
         </div>
     </footer>
