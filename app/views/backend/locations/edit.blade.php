@@ -17,7 +17,7 @@
 
 <div class="row header">
     <div class="col-md-12">
-        <a href="{{ URL::previous() }}" class="btn-flat gray pull-right"><i class="icon-circle-arrow-left icon-white"></i>  @lang('general.back')</a>
+        <a href="{{ URL::previous() }}" class="btn-flat gray pull-right"><i class="fa fa-arrow-left icon-white"></i>  @lang('general.back')</a>
         <h3>
         @if ($location->id)
             @lang('admin/locations/table.update')
@@ -37,25 +37,25 @@
             <!-- Location Name -->
             <div class="form-group {{ $errors->has('name') ? ' has-error' : '' }}">
                 <label for="name" class="col-md-2 control-label">@lang('admin/locations/table.name')
-                 <i class='icon-asterisk'></i></label>
+                 <i class='fa fa-asterisk'></i></label>
                  </label>
                     <div class="col-md-12">
                         <div class="col-xs-8">
                         <input class="form-control" type="text" name="name" id="name" value="{{{ Input::old('name', $location->name) }}}" />
                     </div>
-                    {{ $errors->first('name', '<span class="alert-msg"><i class="icon-remove-sign"></i> :message</span>') }}
+                    {{ $errors->first('name', '<br><span class="alert-msg"><i class="fa fa-times"></i> :message</span>') }}
                     </div>
             </div>
 
             <!-- Address -->
             <div class="form-group {{ $errors->has('address') ? ' has-error' : '' }}">
                 <label for="address" class="col-md-2 control-label">@lang('admin/locations/table.address')
-                 <i class='icon-asterisk'></i></label></label>
+                 <i class='fa fa-asterisk'></i></label></label>
                     <div class="col-md-12">
                         <div class="col-xs-8">
                         <input class="form-control" type="text" name="address" id="address" value="{{{ Input::old('address', $location->address) }}}" />
                     </div>
-                    {{ $errors->first('address', '<span class="alert-msg"><i class="icon-remove-sign"></i> :message</span>') }}
+                    {{ $errors->first('address', '<br><span class="alert-msg"><i class="fa fa-times"></i> :message</span>') }}
                     </div>
             </div>
 
@@ -66,20 +66,20 @@
                         <div class="col-xs-8">
                         <input class="form-control" type="text" name="address2" id="address2" value="{{{ Input::old('address2', $location->address2) }}}" />
                     </div>
-                    {{ $errors->first('address2', '<span class="alert-msg"><i class="icon-remove-sign"></i> :message</span>') }}
+                    {{ $errors->first('address2', '<br><span class="alert-msg"><i class="fa fa-times"></i> :message</span>') }}
                     </div>
             </div>
 
             <!-- City -->
             <div class="form-group {{ $errors->has('city') ? ' has-error' : '' }}">
                 <label for="city" class="col-md-2 control-label">@lang('admin/locations/table.city')
-                 <i class='icon-asterisk'></i></label>
+                 <i class='fa fa-asterisk'></i></label>
                  </label>
                     <div class="col-md-12">
                         <div class="col-xs-8">
                         <input class="form-control" type="text" name="city" id="city" value="{{{ Input::old('city', $location->city) }}}" />
                     </div>
-                    {{ $errors->first('city', '<span class="alert-msg"><i class="icon-remove-sign"></i> :message</span>') }}
+                    {{ $errors->first('city', '<br><span class="alert-msg"><i class="fa fa-times"></i> :message</span>') }}
                     </div>
             </div>
 
@@ -92,7 +92,7 @@
                         <div class="col-xs-2">
                         <input class="form-control" type="text" name="state" id="state" value="{{{ Input::old('state', $location->state) }}}" />
                     </div>
-                    {{ $errors->first('state', '<span class="alert-msg"><i class="icon-remove-sign"></i> :message</span>') }}
+                    {{ $errors->first('state', '<br><span class="alert-msg"><i class="fa fa-times"></i> :message</span>') }}
                     </div>
             </div>
 
@@ -103,20 +103,20 @@
                         <div class="col-xs-3">
                         <input class="form-control" type="text" name="zip" id="zip" value="{{{ Input::old('zip', $location->zip) }}}" />
                     </div>
-                    {{ $errors->first('zip', '<span class="alert-msg"><i class="icon-remove-sign"></i> :message</span>') }}
+                    {{ $errors->first('zip', '<br><span class="alert-msg"><i class="fa fa-times"></i> :message</span>') }}
                     </div>
             </div>
 
             <!-- Country -->
             <div class="form-group {{ $errors->has('country') ? ' has-error' : '' }}">
                 <label for="country" class="col-md-2 control-label">@lang('admin/locations/table.country')
-                 <i class='icon-asterisk'></i></label>
+                 <i class='fa fa-asterisk'></i></label>
                  </label>
                     <div class="col-md-5">
 
                          {{ Form::countries('country', Input::old('country', $location->country), 'select2') }}
                         </div>
-                        {{ $errors->first('country', '<span class="alert-msg"><i class="icon-remove-sign"></i> :message</span>') }}
+                        {{ $errors->first('country', '<br><span class="alert-msg"><i class="fa fa-times"></i> :message</span>') }}
                     </div>
             </div>
 
@@ -126,7 +126,7 @@
             <label class="col-md-2 control-label"></label>
                 <div class="col-md-7">
                     <a class="btn btn-link" href="{{ URL::previous() }}">@lang('button.cancel')</a>
-                    <button type="submit" class="btn btn-success"><i class="icon-ok icon-white"></i> @lang('general.save')</button>
+                    <button type="submit" class="btn btn-success"><i class="fa fa-ok icon-white"></i> @lang('general.save')</button>
                 </div>
             </div>
 

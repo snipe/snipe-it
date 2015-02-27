@@ -35,7 +35,7 @@
 
 <div class="row header">
     <div class="col-md-12">
-        <a href="{{ route('create/hardware') }}" class="btn btn-success pull-right"><i class="icon-plus-sign icon-white"></i> @lang('general.create')</a>
+        <a href="{{ route('create/hardware') }}" class="btn btn-success pull-right"><i class="fa fa-plus-sign icon-white"></i> @lang('general.create')</a>
         <h3>@yield('title0')</h3>
     </div>
 </div>
@@ -164,12 +164,14 @@
             <td nowrap="nowrap">
 
             @if ($asset->deleted_at=='')
-             	<a href="{{ route('update/hardware', $asset->id) }}" class="btn btn-warning"><i class="icon-pencil icon-white"></i></a>
+             	<a href="{{ route('update/hardware', $asset->id) }}" class="btn btn-warning"><i class="fa fa-pencil icon-white"></i></a>
             	 <a data-html="false" class="btn delete-asset btn-danger" data-toggle="modal" href="{{ route('delete/hardware', $asset->id) }}" data-content="@lang('admin/hardware/message.delete.confirm')"
                 data-title="@lang('general.delete')
-                 {{ htmlspecialchars($asset->asset_tag) }}?" onClick="return false;"><i class="icon-trash icon-white"></i></a>
+                 {{ htmlspecialchars($asset->asset_tag) }}?" onClick="return false;"><i class="fa fa-trash icon-white"></i></a>
         	@else
-        		 <a href="{{ route('restore/hardware', $asset->id) }}" class="btn btn-warning"><i class="icon-share-alt icon-white"></i></a>
+                @if ($asset->model->deleted_at=='')
+        		 <a href="{{ route('restore/hardware', $asset->id) }}" class="btn btn-warning"><i class="fa fa-recycle icon-white"></i></a>
+                @endif
         	@endif
 
             </td>
@@ -199,7 +201,7 @@
 @else
 <div class="col-md-9">
     <div class="alert alert-info alert-block">
-        <i class="icon-info-sign"></i>
+        <i class="fa fa-info-circle"></i>
         @lang('general.no_results')
     </div>
 </div>

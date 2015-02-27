@@ -148,10 +148,8 @@ class ReportsController extends AdminController
      */
     public function exportDeprecationReport()
     {
-        // @todo - It may be worthwhile creating a separate controller for reporting
-
         // Grab all the assets
-        $assets = Asset::orderBy('created_at', 'DESC')->get();
+        $assets = Asset::with('model','assigneduser','assetstatus','defaultLoc','assetlog')->orderBy('created_at', 'DESC')->get();
 
         $rows = array();
 
@@ -198,17 +196,20 @@ class ReportsController extends AdminController
                 $row[] = '';  // Empty string if location is not set
             }
 
-            $depreciation = $asset->depreciate();
+			
+            
+            
 
             $row[] = $asset->purchase_date;
-            $row[] = '"'.number_format($asset->purchase_cost).'"';
-            $row[] = '"'.number_format($depreciation).'"';
-            $row[] = '"'.number_format($asset->purchase_cost - $depreciation).'"';
+            $row[] = '"'.Lang::get('general.currency').number_format($asset->purchase_cost).'"';
+            $row[] = '"'.Lang::get('general.currency').number_format($asset->getDepreciatedValue()).'"';
+            $row[] = '"-'.Lang::get('general.currency').number_format(($asset->purchase_cost - $asset->getDepreciatedValue())).'"';
             $rows[] = implode($row, ',');
         }
 
         // spit out a csv
         $csv = implode($rows, "\n");
+
         $response = Response::make($csv, 200);
         $response->header('Content-Type', 'text/csv');
         $response->header('Content-disposition', 'attachment;filename=report.csv');

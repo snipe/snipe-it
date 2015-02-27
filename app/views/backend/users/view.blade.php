@@ -27,10 +27,10 @@
                         </span>
                 </div>
                 @if ($user->deleted_at != NULL)
-                            <a href="{{ route('restore/user', $user->id) }}" class="btn-flat white large pull-right edit"><i class="icon-pencil"></i> Restore This User</a>
+                            <a href="{{ route('restore/user', $user->id) }}" class="btn-flat white large pull-right edit"><i class="fa fa-pencil"></i> Restore This User</a>
 
                 @else
-                        <!--<a href="{{ route('update/user', $user->id) }}" class="btn btn-warning pull-right edit"><i class="icon-pencil"></i> @lang('button.edit') This User</a>-->
+                        <!--<a href="{{ route('update/user', $user->id) }}" class="btn btn-warning pull-right edit"><i class="fa fa-pencil"></i> @lang('button.edit') This User</a>-->
                     <div class="row header">
 
                         <div class="btn-group pull-right">
@@ -56,7 +56,7 @@
 
                             <div class="col-md-12">
                                 <div class="alert alert-danger">
-                                    <i class="icon-exclamation-sign"></i>
+                                    <i class="fa fa-exclamation-sign"></i>
 
                                     @lang('admin/users/messages.user_deleted_warning')
 
@@ -65,17 +65,19 @@
 
                         @endif
 
+							
                             <h6>@lang('admin/users/general.assets_user', array('name' => $user->first_name))</h6>
                             <br>
                             <!-- checked out assets table -->
                             @if (count($user->assets) > 0)
-                            <table class="table table-hover">
+                            <div class="table-responsive">
+							<table class="display">
                                 <thead>
                                     <tr>
                                         <th class="col-md-3">Asset Type</th>
-                                        <th class="col-md-2"><span class="line"></span>Asset Tag</th>
-                                        <th class="col-md-2"><span class="line"></span>Name</th>
-                                        <th class="col-md-1"><span class="line"></span>Actions</th>
+                                        <th class="col-md-2">Asset Tag</th>
+                                        <th class="col-md-2">Name</th>
+                                        <th class="col-md-1">Actions</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -97,22 +99,24 @@
 
                             <div class="col-md-12">
                                 <div class="alert alert-info alert-block">
-                                    <i class="icon-info-sign"></i>
+                                    <i class="fa fa-info-circle"></i>
                                     @lang('general.no_results')
                                 </div>
                             </div>
                             @endif
 
-                             <h6>@lang('admin/users/general.software_user', array('name' => $user->first_name))</h6>
+							<br><br><br>
+                            <h6>@lang('admin/users/general.software_user', array('name' => $user->first_name))</h6>
                             <br>
-                            <!-- checked out assets table -->
+                            <!-- checked out licenses table -->
                             @if (count($user->licenses) > 0)
-                            <table class="table table-hover">
+                            <div class="table-responsive">
+							<table class="display">
                                 <thead>
                                     <tr>
-                                        <th class="col-md-4"><span class="line"></span>Name</th>
-                                        <th class="col-md-4"><span class="line"></span>Serial</th>
-                                        <th class="col-md-1"><span class="line"></span>Actions</th>
+                                        <th class="col-md-5">Name</th>
+                                        <th class="col-md-6">Serial</th>
+                                        <th class="col-md-1">Actions</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -126,15 +130,57 @@
                                     @endforeach
                                 </tbody>
                             </table>
+                            </div>
+                            </div>
                             @else
 
                             <div class="col-md-12">
                                 <div class="alert alert-info alert-block">
-                                    <i class="icon-info-sign"></i>
+                                    <i class="fa fa-info-circle"></i>
                                     @lang('general.no_results')
                                 </div>
                             </div>
                             @endif
+                            
+                            
+                            
+                            
+                            <br><br><br>
+                            <h6>@lang('admin/accessories/general.accessories')</h6>
+                            <br>
+                            <!-- checked out licenses table -->
+                            @if (count($user->accessories) > 0)
+                            <div class="table-responsive">
+							<table class="display">
+                                <thead>
+                                    <tr>
+                                        <th class="col-md-5">Name</th>
+                                        <th class="col-md-1">Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach ($user->accessories as $accessory)
+                                    <tr>
+                                        <td><a href="{{ route('view/accessory', $accessory->id) }}">{{{ $accessory->name }}}</a></td>
+                                        <td><a href="{{ route('view/accessory', $accessory->id) }}">{{{ mb_strimwidth($accessory->serial, 0, 50, "...") }}}</a></td>
+                                        <td> <a href="{{ route('checkin/accessory', $accessory->pivot->id) }}" class="btn-flat info">Checkin</a>
+                                        </td>
+                                    </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
+                            </div>
+                            </div>
+                            @else
+
+                            <div class="col-md-12">
+                                <div class="alert alert-info alert-block">
+                                    <i class="fa fa-info-circle"></i>
+                                    @lang('general.no_results')
+                                </div>
+                            </div>
+                            @endif
+
 
 
 
@@ -162,6 +208,10 @@
                                             <a href="{{ route('view/hardware', $log->asset_id) }}">{{{ $log->assetlog->asset_tag }}}</a>
                                         @elseif ((isset($log->assetlog->name)) && ($log->assetlog->deleted_at!=''))
                                             <del>{{{ $log->assetlog->name }}}</del> (deleted)
+                                            
+                                        @elseif ((isset($log->accessorylog->name)) && ($log->accessorylog->deleted_at==''))
+                                            {{{ $log->accessorylog }}} 
+                                            
                                         @endif
                                         </td>
                                         <td>{{{ $log->adminlog->fullName() }}}</td>
@@ -174,11 +224,13 @@
 
                             <div class="col-md-12">
                                 <div class="alert alert-info alert-block">
-                                    <i class="icon-info-sign"></i>
+                                    <i class="fa fa-info-circle"></i>
                                     @lang('general.no_results')
                                 </div>
                             </div>
                             @endif
+                            
+                            
 
                         </div>
                     </div>
@@ -207,9 +259,9 @@
                             <li>{{{ $user->userloc->city }}}, {{{ $user->userloc->state }}} {{{ $user->userloc->zip }}}<br /><br /></li>
                         @endif
                         @if ($user->phone)
-                            <li><i class="icon-phone"></i>{{{ $user->phone }}}</li>
+                            <li><i class="fa fa-phone"></i>{{{ $user->phone }}}</li>
                         @endif
-                            <li><i class="icon-envelope-alt"></i><a href="mailto:{{{ $user->email }}}">{{{ $user->email }}}</a></li>
+                            <li><i class="fa fa-envelope-alt"></i><a href="mailto:{{{ $user->email }}}">{{{ $user->email }}}</a></li>
                         </ul>
 
                         @if ($user->last_login!='')
@@ -217,4 +269,6 @@
                         {{{ $user->last_login->diffForHumans() }}}</h6>
                         @endif
                     </div>
+                    
+                   
 @stop

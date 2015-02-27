@@ -197,12 +197,6 @@
   float: right;
   margin-top: 35px;
 }
-.table-fixed {
-  table-layout: fixed;
-}
-.break-word {
-  word-wrap:  break-word;
-}
 
 /* responsive */
 @media (max-width: 768px) {

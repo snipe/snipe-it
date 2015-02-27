@@ -70,6 +70,7 @@ Route::group(array('prefix' => 'hardware', 'namespace' => 'Controllers\Admin', '
         Route::post('{modelId}/clone', 'ModelsController@postCreate');
         Route::get('{modelId}/delete', array('as' => 'delete/model', 'uses' => 'ModelsController@getDelete'));
         Route::get('{modelId}/view', array('as' => 'view/model', 'uses' => 'ModelsController@getView'));
+        Route::get('{modelID}/restore', array('as' => 'restore/model', 'uses' => 'ModelsController@getRestore'));
     });
 
 
@@ -108,6 +109,23 @@ Route::group(array('prefix' => 'admin', 'before' => 'admin-auth', 'namespace' =>
         Route::get('{licenseId}/showfile/{fileId}', array('as' => 'show/licensefile', 'uses' => 'LicensesController@displayFile'));
         Route::get('/', array('as' => 'licenses', 'uses' => 'LicensesController@getIndex'));
     });
+    
+    # Accessories
+        Route::group(array('prefix' => 'accessories'), function () {         
+            Route::get('create', array('as' => 'create/accessory', 'uses' => 'AccessoriesController@getCreate'));
+            Route::post('create', 'AccessoriesController@postCreate');
+            Route::get('{accessoryID}/edit', array('as' => 'update/accessory', 'uses' => 'AccessoriesController@getEdit'));
+            Route::post('{accessoryID}/edit', 'AccessoriesController@postEdit');
+            Route::get('{accessoryID}/delete', array('as' => 'delete/accessory', 'uses' => 'AccessoriesController@getDelete'));
+            Route::get('{accessoryID}/view', array('as' => 'view/accessory', 'uses' => 'AccessoriesController@getView'));
+            Route::get('{accessoryID}/checkout', array('as' => 'checkout/accessory', 'uses' => 'AccessoriesController@getCheckout'));
+		    Route::post('{accessoryID}/checkout', 'AccessoriesController@postCheckout');
+		    Route::get('{accessoryID}/checkin', array('as' => 'checkin/accessory', 'uses' => 'AccessoriesController@getCheckin'));
+		    Route::post('{accessoryID}/checkin', 'AccessoriesController@postCheckin');
+
+            Route::get('/', array('as' => 'accessories', 'uses' => 'AccessoriesController@getIndex'));
+        });
+
 
 
     # Admin Settings Routes (for categories, maufactureres, etc)
@@ -140,18 +158,19 @@ Route::group(array('prefix' => 'admin', 'before' => 'admin-auth', 'namespace' =>
             Route::post('{supplierId}/edit', 'SuppliersController@postEdit');
             Route::get('{supplierId}/delete', array('as' => 'delete/supplier', 'uses' => 'SuppliersController@getDelete'));
             Route::get('{supplierId}/view', array('as' => 'view/supplier', 'uses' => 'SuppliersController@getView'));
-        });
-
-        # Categories
-        Route::group(array('prefix' => 'categories'), function () {
-            Route::get('/', array('as' => 'categories', 'uses' => 'CategoriesController@getIndex'));
+        });        
+        
+         # Categories
+        Route::group(array('prefix' => 'categories'), function () {          
             Route::get('create', array('as' => 'create/category', 'uses' => 'CategoriesController@getCreate'));
             Route::post('create', 'CategoriesController@postCreate');
             Route::get('{categoryId}/edit', array('as' => 'update/category', 'uses' => 'CategoriesController@getEdit'));
             Route::post('{categoryId}/edit', 'CategoriesController@postEdit');
             Route::get('{categoryId}/delete', array('as' => 'delete/category', 'uses' => 'CategoriesController@getDelete'));
             Route::get('{categoryId}/view', array('as' => 'view/category', 'uses' => 'CategoriesController@getView'));
+            Route::get('/', array('as' => 'categories', 'uses' => 'CategoriesController@getIndex'));
         });
+
 
         # Depreciations
         Route::group(array('prefix' => 'depreciations'), function () {
@@ -245,7 +264,7 @@ Route::group(array('prefix' => 'auth'), function () {
 
     # Account Activation
     Route::get('activate/{activationCode}', array('as' => 'activate', 'uses' => 'AuthController@getActivate'));
-
+    
     # Forgot Password
     Route::get('forgot-password', array('as' => 'forgot-password', 'uses' => 'AuthController@getForgotPassword'));
     Route::post('forgot-password', 'AuthController@postForgotPassword');
@@ -270,9 +289,7 @@ Route::group(array('prefix' => 'auth'), function () {
 
 Route::group(array('prefix' => 'account', 'before' => 'auth', 'namespace' => 'Controllers\Account'), function () {
 
-    # Account Dashboard
-    Route::get('/', array('as' => 'account', 'uses' => 'DashboardController@getIndex'));
-
+   
     # Profile
     Route::get('profile', array('as' => 'profile', 'uses' => 'ProfileController@getIndex'));
     Route::post('profile', 'ProfileController@postIndex');
@@ -287,10 +304,17 @@ Route::group(array('prefix' => 'account', 'before' => 'auth', 'namespace' => 'Co
     # Change Email
     Route::get('change-email', array('as' => 'change-email', 'uses' => 'ChangeEmailController@getIndex'));
     Route::post('change-email', 'ChangeEmailController@postIndex');
+    
+     # Accept Asset
+    Route::get('accept-asset/{assetId}', array('as' => 'account/accept-assets', 'uses' => 'ViewAssetsController@getAcceptAsset'));
+    Route::post('accept-asset/{assetId}', array('as' => 'account/asset-accepted', 'uses' => 'ViewAssetsController@postAcceptAsset'));
 
     # Profile
     Route::get('requestable-assets', array('as' => 'requestable-assets', 'uses' => 'ViewAssetsController@getRequestableIndex'));
     Route::get('request-asset/{assetId}', array('as' => 'account/request-asset', 'uses' => 'ViewAssetsController@getRequestAsset'));
+    
+    # Account Dashboard
+    Route::get('/', array('as' => 'account', 'uses' => 'DashboardController@getIndex'));
 
 
 });
@@ -320,11 +344,8 @@ Route::group(array('before' => 'reporting-auth', 'namespace' => 'Controllers\Adm
 });
 
 
-// Redirect requests to / to the hardware section until we get a fancy dashboard set up
-Route::get('/', function () {
-    return Redirect::to('hardware');
-});
-Route::get('/', array('as' => 'home', 'before' => 'admin-auth', 'uses' => 'Controllers\Admin\AssetsController@getIndex'));
+
+Route::get('/', array('as' => 'home', 'before' => 'admin-auth', 'uses' => 'Controllers\Admin\DashboardController@getIndex'));
 
 
 

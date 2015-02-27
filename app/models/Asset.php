@@ -129,7 +129,7 @@ class Asset extends Depreciable
 
     public function model()
     {
-        return $this->belongsTo('Model','model_id');
+        return $this->belongsTo('Model','model_id')->withTrashed();
     }
     
     public static function getExpiringWarrantee($days = 30) {
@@ -203,7 +203,26 @@ class Asset extends Depreciable
 			return false;
 		}
     }
-
+    
+    public function requireAcceptance() {    
+	    return $this->model->category->require_acceptance;
+    }
+    
+    public function getEula() { 
+	      
+	    $Parsedown = new Parsedown();
+        
+	    if ($this->model->category->eula_text) {
+		    return $Parsedown->text(e($this->model->category->eula_text));
+	    } elseif (Setting::getSettings()->default_eula_text) {
+		    return $Parsedown->text(e(Setting::getSettings()->default_eula_text));
+	    } else {
+		    return null;
+	    } 
+	    
+    }
+    
+    
 
 	/**
 	-----------------------------------------------

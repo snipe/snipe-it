@@ -12,7 +12,7 @@
 
 <div class="row header">
     <div class="col-md-12">
-        <a href="{{ route('create/statuslabel') }}" class="btn btn-success pull-right"><i class="icon-plus-sign icon-white"></i>  @lang('general.create')</a>
+        <a href="{{ route('create/statuslabel') }}" class="btn btn-success pull-right"><i class="fa fa-plus icon-white"></i>  @lang('general.create')</a>
         <h3>@lang('admin/statuslabels/table.title')</h3>
     </div>
 </div>
@@ -48,10 +48,10 @@
                     @endif
                     </td>
                     <td>
-                        <a href="{{ route('update/statuslabel', $statuslabel->id) }}" class="btn btn-warning"><i class="icon-pencil icon-white"></i></a>
-<a data-html="false" class="btn delete-asset btn-danger" data-toggle="modal" href="{{ route('delete/statuslabel', $statuslabel->id) }}" data-content="@lang('admin/statuslabels/message.delete.confirm')"
+                        <a href="{{ route('update/statuslabel', $statuslabel->id) }}" class="btn btn-warning btn-sm"><i class="fa fa-pencil icon-white"></i></a>
+<a data-html="false" class="btn delete-asset btn-danger btn-sm" data-toggle="modal" href="{{ route('delete/statuslabel', $statuslabel->id) }}" data-content="@lang('admin/statuslabels/message.delete.confirm')"
                 data-title="@lang('general.delete')
-                 {{ htmlspecialchars($statuslabel->name) }}?" onClick="return false;"><i class="icon-trash icon-white"></i></a>
+                 {{ htmlspecialchars($statuslabel->name) }}?" onClick="return false;"><i class="fa fa-trash icon-white"></i></a>
                     </td>
                 </tr>
                 @endforeach

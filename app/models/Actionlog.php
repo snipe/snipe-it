@@ -21,7 +21,12 @@ class Actionlog extends Eloquent
 
     public function licenselog()
     {
-        return $this->belongsTo('License','asset_id');
+        return $this->belongsTo('License','asset_id')->withTrashed();
+    }
+    
+    public function accessorylog()
+    {
+        return $this->belongsTo('Accessory','asset_id')->withTrashed();
     }
 
     public function adminlog()
@@ -33,7 +38,8 @@ class Actionlog extends Eloquent
     {
         return $this->belongsTo('User','checkedout_to')->withTrashed();
     }
-
+    
+ 
 
     /**
 	* Check if the file exists, and if it does, force a download

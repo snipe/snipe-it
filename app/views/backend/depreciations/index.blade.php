@@ -11,7 +11,7 @@ Asset Depreciations ::
 
 <div class="row header">
     <div class="col-md-12">
-        <a href="{{ route('create/depreciations') }}" class="btn btn-success pull-right"><i class="icon-plus-sign icon-white"></i> Create New</a>
+        <a href="{{ route('create/depreciations') }}" class="btn btn-success pull-right"><i class="fa fa-plus icon-white"></i> Create New</a>
         <h3>Asset Depreciations</h3>
     </div>
 </div>
@@ -34,10 +34,10 @@ Asset Depreciations ::
                                 <td>{{ $depreciation->name }}</td>
                                 <td>{{ $depreciation->months }} @lang('admin/depreciations/table.months') </td>
                                 <td>
-                                <a href="{{ route('update/depreciations', $depreciation->id) }}" class="btn btn-warning"><i class="icon-pencil icon-white"></i></a>
-<a data-html="false" class="btn delete-asset btn-danger" data-toggle="modal" href="{{ route('delete/depreciations', $depreciation->id) }}" data-content="@lang('admin/depreciations/message.delete.confirm')"
+                                <a href="{{ route('update/depreciations', $depreciation->id) }}" class="btn btn-warning btn-sm"><i class="fa fa-pencil icon-white"></i></a>
+<a data-html="false" class="btn delete-asset btn-danger btn-sm" data-toggle="modal" href="{{ route('delete/depreciations', $depreciation->id) }}" data-content="@lang('admin/depreciations/message.delete.confirm')"
 data-title="@lang('general.delete')
- {{{ htmlspecialchars($depreciation->name) }}}?" onClick="return false;"><i class="icon-trash icon-white"></i></a>
+ {{{ htmlspecialchars($depreciation->name) }}}?" onClick="return false;"><i class="fa fa-trash icon-white"></i></a>
 
 
                                 </td>

@@ -2,6 +2,8 @@
 
 class Model extends Elegant
 {
+    use SoftDeletingTrait;
+    protected $dates = ['deleted_at'];
     protected $table = 'models';
 
     // Declare the rules for the form validation
@@ -38,4 +40,23 @@ class Model extends Elegant
     {
         return $this->belongsTo('Manufacturer','manufacturer_id');
     }
+    
+    /**
+	-----------------------------------------------
+	BEGIN QUERY SCOPES
+	-----------------------------------------------
+	**/
+    
+    /**
+	* Query builder scope for Deleted assets
+	*
+	* @param  Illuminate\Database\Query\Builder  $query  Query builder instance
+	* @return Illuminate\Database\Query\Builder          Modified query builder
+	*/
+
+	public function scopeDeleted($query)
+	{
+		return $query->whereNotNull('deleted_at');
+	}
+
 }

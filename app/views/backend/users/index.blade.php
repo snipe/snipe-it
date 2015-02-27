@@ -12,7 +12,7 @@
 <div class="row header">
     <div class="col-md-12">
 	    <a href="{{ route('import/user') }}" class="btn btn-default pull-right"><span class="fa fa-upload"></span> Import</a>
-        <a href="{{ route('create/user') }}" class="btn btn-success pull-right"><i class="icon-plus-sign icon-white"></i>  @lang('general.create')</a>
+        <a href="{{ route('create/user') }}" class="btn btn-success pull-right"><i class="fa fa-plus icon-white"></i>  @lang('general.create')</a>
         @if (Input::get('onlyTrashed'))
             <a class="btn btn-default pull-right" href="{{ URL::to('admin/users') }}" style="margin-right: 5px;">Show Current Users</a>
         @else
@@ -44,7 +44,6 @@
             <th class="col-md-1">@lang('general.assets')</th>
             <th class="col-md-1">@lang('general.licenses')</th>
             <th class="col-md-1">@lang('admin/users/table.activated')</th>
-            <th></th>
             <th class="col-md-2 actions">@lang('table.actions')</th>
         </tr>
     </thead>
@@ -52,7 +51,7 @@
 
         @foreach ($users as $user)
         <tr>
-            <td>
+            <td nowrap="nowrap">
             @if ($user->avatar)
 				<img src="/uploads/avatars/{{{ $user->avatar }}}" class="img-circle avatar hidden-phone" style="max-width: 45px;" />
 			@else
@@ -68,28 +67,28 @@
             </td>
             <td>{{{ $user->assets->count() }}}</td>
             <td>{{{ $user->licenses->count() }}}</td>
-            <td>{{ $user->isActivated() ? '<i class="icon-ok"></i>' : ''}}</td>
-            <td>
-
-            <!-- If the user account is suspended - show the UNSUSPEND button.  Do NOT evaluate if soft deleted! -->
-            @if (is_null($user->deleted_at))
-		@if ($user->accountStatus()=='suspended')
-                <a href="{{ route('unsuspend/user', $user->id) }}" class="btn btn-warning"><span class="icon-time icon-white"></span></a>
-		@endif
-            @endif
-			</td>
-            <td>
+            <td>{{ $user->isActivated() ? '<i class="fa fa-check"></i>' : ''}}</td>
+            
+            <td nowrap="nowrap">
+	            
+	            <!-- If the user account is suspended - show the UNSUSPEND button.  Do NOT evaluate if soft deleted! -->
+				@if (is_null($user->deleted_at))
+					@if ($user->accountStatus()=='suspended')
+			                <a href="{{ route('unsuspend/user', $user->id) }}" class="btn btn-warning"><span class="fa fa-time icon-white"></span></a>
+					@endif
+				@endif
+            
 
                 @if ( ! is_null($user->deleted_at))
-                <a href="{{ route('restore/user', $user->id) }}" class="btn btn-warning"><i class="icon-share-alt icon-white"></i></a>
+                <a href="{{ route('restore/user', $user->id) }}" class="btn btn-warning"><i class="fa fa-share icon-white"></i></a>
                 @else
-                <a href="{{ route('update/user', $user->id) }}" class="btn btn-warning"><i class="icon-pencil icon-white"></i></a>
+                <a href="{{ route('update/user', $user->id) }}" class="btn btn-warning"><i class="fa fa-pencil icon-white"></i></a>
 
-                @if (Sentry::getId() !== $user->id)
-                <a data-html="false" class="btn delete-asset btn-danger" data-toggle="modal" href="{{ route('delete/user', $user->id) }}" data-content="Are you sure you wish to delete this user?" data-title="Delete {{ htmlspecialchars($user->first_name) }}?" onClick="return false;"><i class="icon-trash icon-white"></i></a>
+                @if ((Sentry::getId() !== $user->id) && (!Config::get('app.lock_passwords')))
+                <a data-html="false" class="btn delete-asset btn-danger" data-toggle="modal" href="{{ route('delete/user', $user->id) }}" data-content="Are you sure you wish to delete this user?" data-title="Delete {{ htmlspecialchars($user->first_name) }}?" onClick="return false;"><i class="fa fa-trash icon-white"></i></a>
 
                 @else
-                <span class="btn delete-asset btn-danger disabled"><i class="icon-trash icon-white"></i></span>
+                <span class="btn delete-asset btn-danger disabled"><i class="fa fa-trash icon-white"></i></span>
                 @endif
                 @endif
             </td>
@@ -115,7 +114,7 @@
 
 <div class="col-md-6">
     <div class="alert alert-warning alert-block">
-        <i class="icon-warning-sign"></i>
+        <i class="fa fa-warning-sign"></i>
         @lang('general.no_results')
 
     </div>

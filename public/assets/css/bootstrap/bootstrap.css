@@ -523,10 +523,10 @@ dd {
   .dl-horizontal dd:after {
     content: " ";
     /* 1 */
-
+  
     display: table;
     /* 2 */
-
+  
   }
   .dl-horizontal dd:after {
     clear: both;
@@ -535,10 +535,10 @@ dd {
   .dl-horizontal dd:after {
     content: " ";
     /* 1 */
-
+  
     display: table;
     /* 2 */
-
+  
   }
   .dl-horizontal dd:after {
     clear: both;
@@ -1609,7 +1609,7 @@ textarea.form-control {
 .checkbox input[type="checkbox"],
 .checkbox-inline input[type="checkbox"] {
   float: left;
-  margin-left: 0;
+  margin-left: -20px;
 }
 .radio + .radio,
 .checkbox + .checkbox {
@@ -1765,8 +1765,8 @@ textarea.input-lg {
 .form-horizontal .checkbox,
 .form-horizontal .radio-inline,
 .form-horizontal .checkbox-inline {
-  margin-top: 5px;
-  margin-bottom: 5px;
+  margin-top: 0;
+  margin-bottom: 0;
   padding-top: 7px;
 }
 .form-horizontal .form-group {
@@ -1804,7 +1804,7 @@ textarea.input-lg {
 }
 .btn {
   display: inline-block;
-  padding: 3px 10px;
+  padding: 6px 12px;
   margin-bottom: 0;
   font-size: 14px;
   font-weight: normal;

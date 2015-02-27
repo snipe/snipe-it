@@ -21,12 +21,12 @@ use Response;
 use Config;
 use Location;
 use Log;
-
-use BaconQrCode\Renderer\Image as QrImage;
+use DNS2D;
+use Mail;
 
 class AssetsController extends AdminController
 {
-    protected $qrCodeDimensions = array( 'height' => 170, 'width' => 170);
+    protected $qrCodeDimensions = array( 'height' => 3.5, 'width' => 3.5);
 
     /**
      * Show a list of all the assets.
@@ -432,7 +432,7 @@ class AssetsController extends AdminController
 
 
         // Check if the user exists
-        if (is_null($assigned_to = User::find($assigned_to))) {
+        if (is_null($user = User::find($assigned_to))) {
             // Redirect to the asset management page with error
             return Redirect::to('hardware')->with('error', Lang::get('admin/hardware/message.user_does_not_exist'));
         }
@@ -446,10 +446,23 @@ class AssetsController extends AdminController
             $logaction->asset_id = $asset->id;
             $logaction->checkedout_to = $asset->assigned_to;
             $logaction->asset_type = 'hardware';
-            $logaction->location_id = $assigned_to->location_id;
+            $logaction->location_id = $user->location_id;
             $logaction->user_id = Sentry::getUser()->id;
             $logaction->note = e(Input::get('note'));
             $log = $logaction->logaction('checkout');
+            
+            $data['asset_id'] = $asset->id;
+            $data['eula'] = $asset->getEula();
+            $data['first_name'] = $user->first_name;
+            
+             
+            if ($asset->requireAcceptance()=='1') {
+				
+	            Mail::send('emails.accept-asset', $data, function ($m) use ($user) {
+	                $m->to($user->email, $user->first_name . ' ' . $user->last_name);
+	                $m->subject('Confirm asset delivery');
+	            });
+            } 
 
             // Redirect to the new asset page
             return Redirect::to("hardware")->with('success', Lang::get('admin/hardware/message.checkout.success'));
@@ -537,8 +550,6 @@ class AssetsController extends AdminController
 
             $qr_code = (object) array(
                 'display' => $settings->qr_code == '1',
-                'height' => $this->qrCodeDimensions['height'],
-                'width' => $this->qrCodeDimensions['width'],
                 'url' => route('qr_code/hardware', $asset->id)
             );
 
@@ -565,15 +576,15 @@ class AssetsController extends AdminController
 
         if ($settings->qr_code == '1') {
             $asset = Asset::find($assetId);
-            if (isset($asset->id)) {
+            
+            if (isset($asset->id,$asset->asset_tag)) {
 
+                $content = DNS2D::getBarcodePNG(route('view/hardware', $asset->id), "QRCODE",
+                    $this->qrCodeDimensions['height'],$this->qrCodeDimensions['width']);
 
-                $renderer = new \BaconQrCode\Renderer\Image\Png;
-                $renderer->setWidth($this->qrCodeDimensions['height'])
-                ->setHeight($this->qrCodeDimensions['height']);
-
-                $writer = new \BaconQrCode\Writer($renderer);
-                $content = $writer->writeString(route('view/hardware', $asset->id));
+                $img = imagecreatefromstring(base64_decode($content));
+                imagepng($img);
+                imagedestroy($img);
 
                 $content_disposition = sprintf('attachment;filename=qr_code_%s.png', preg_replace('/\W/', '', $asset->asset_tag));
                 $response = Response::make($content, 200);
@@ -866,6 +877,8 @@ class AssetsController extends AdminController
 		return Redirect::to("hardware");	
 				 
     }
-
-
+    
+    
+    
+  
 }

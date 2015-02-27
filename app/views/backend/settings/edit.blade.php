@@ -32,7 +32,7 @@ padding: 0px 20px;
 
                 <div class="pull-right">
                     <a href="{{ URL::previous() }}" class="btn-flat gray">
-                    <i class="icon-circle-arrow-left icon-white"></i>  @lang('general.back')</a>
+                    <i class="fa fa-arrow-circle-left icon-white"></i>  @lang('general.back')</a>
                 </div>
 
                 <h3 class="name">@lang('admin/settings/general.update')</h3>
@@ -57,7 +57,7 @@ padding: 0px 20px;
 	                                    </div>
 	                                    <div class="col-md-9">
 										{{ Form::text('site_name', Input::old('site_name', $setting->site_name), array('class' => 'form-control')) }}
-										{{ $errors->first('site_name', '<span class="alert-msg">:message</span>') }}
+										{{ $errors->first('site_name', '<br><span class="alert-msg">:message</span>') }}
 	                                    </div>
                                     </div>
                                     
@@ -68,7 +68,7 @@ padding: 0px 20px;
 	                                    </div>
 	                                    <div class="col-md-9">				                						             
 						                    {{ Form::file('logo') }}
-						                    {{ $errors->first('logo', '<span class="alert-msg">:message</span>') }}
+						                    {{ $errors->first('logo', '<br><span class="alert-msg">:message</span>') }}
 						                    {{ Form::checkbox('clear_logo', '1', Input::old('clear_logo')) }} Remove
 	                                    </div>
 						                
@@ -87,7 +87,7 @@ padding: 0px 20px;
 										@Lang('admin/settings/general.alerts_enabled')
 
 										
-										{{ $errors->first('alert_email', '<span class="alert-msg">:message</span>') }}
+										{{ $errors->first('alert_email', '<br><span class="alert-msg">:message</span>') }}
 	                                    </div>
                                     </div>
                                     
@@ -99,7 +99,7 @@ padding: 0px 20px;
 	                                    <div class="col-md-9">
 
 										{{ Form::text('header_color', Input::old('header_color', $setting->header_color), array('class' => 'form-control', 'style' => 'width: 100px;')) }}
-										{{ $errors->first('header_color', '<span class="alert-msg">:message</span>') }}
+										{{ $errors->first('header_color', '<br><span class="alert-msg">:message</span>') }}
 	                                    </div>
                                     </div>
 
@@ -109,7 +109,7 @@ padding: 0px 20px;
 										</div>
 	                                    <div class="col-md-9">
 										{{ Form::text('per_page', Input::old('per_page', $setting->per_page), array('class' => 'form-control', 'style'=>'width: 100px;')) }}
-										{{ $errors->first('per_page', '<span class="alert-msg">:message</span>') }}
+										{{ $errors->first('per_page', '<br><span class="alert-msg">:message</span>') }}
 										</div>
                                     </div>
 
@@ -157,7 +157,7 @@ padding: 0px 20px;
 	                                    <div class="col-md-9">
                                          @if ($setting->auto_increment_assets == 1)
 											{{ Form::text('auto_increment_prefix', Input::old('auto_increment_prefix', $setting->auto_increment_prefix), array('class' => 'form-control', 'style'=>'width: 100px;')) }}
-											{{ $errors->first('auto_increment_prefix', '<span class="alert-msg">:message</span>') }}
+											{{ $errors->first('auto_increment_prefix', '<br><span class="alert-msg">:message</span>') }}
 										@else
 											{{ Form::text('auto_increment_prefix', Input::old('auto_increment_prefix', $setting->auto_increment_prefix), array('class' => 'form-control', 'disabled'=>'disabled', 'style'=>'width: 100px;')) }}
 										@endif
@@ -194,7 +194,7 @@ padding: 0px 20px;
 	                                    <div class="col-md-9">
                                          @if ($setting->qr_code == 1)
 											{{ Form::text('qr_text', Input::old('qr_text', $setting->qr_text), array('class' => 'form-control')) }}
-											{{ $errors->first('qr_text', '<span class="alert-msg">:message</span>') }}
+											{{ $errors->first('qr_text', '<br><span class="alert-msg">:message</span>') }}
 										@else
 											{{ Form::text('qr_text', Input::old('qr_text', $setting->qr_text), array('class' => 'form-control', 'disabled'=>'disabled')) }}
 											<p class="help-inline">
@@ -204,7 +204,23 @@ padding: 0px 20px;
 	                                    </div>
 
                                     </div>
+									
+									<hr>
+									<div class="form-group {{ $errors->has('default_eula_text') ? 'error' : '' }}">
+	                                    <div class="col-md-3">
+                                        {{ Form::label('default_eula_text', Lang::get('admin/settings/general.default_eula_text')) }}
+	                                    </div>
+	                                    <div class="col-md-9">
+										{{ Form::textarea('default_eula_text', Input::old('default_eula_text', $setting->default_eula_text), array('class' => 'form-control')) }}
+										{{ $errors->first('default_eula_text', '<br><span class="alert-msg">:message</span>') }}
+										
+										 <p class="help-inline">@lang('admin/settings/general.default_eula_help_text')</p>
+										 <p class="help-inline">@lang('admin/settings/general.eula_markdown')</p>
+										 
+	                                    </div>
+	                                   
 
+                                    </div>
 
                                 @endforeach
 
@@ -212,7 +228,7 @@ padding: 0px 20px;
                                     <div class="form-group">
                                         <div class="controls col-md-offset-3">
                                             <a class="btn btn-link" href="{{ URL::previous() }}">@lang('button.cancel')</a>
-                                            <button type="submit" class="btn-flat success"><i class="icon-ok icon-white"></i> @lang('general.save')</button>
+                                            <button type="submit" class="btn-flat success"><i class="fa fa-check icon-white"></i> @lang('general.save')</button>
                                         </div>
                                 </div>
                             </form>

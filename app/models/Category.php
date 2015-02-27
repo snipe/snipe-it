@@ -12,6 +12,7 @@ class Category extends Elegant
     public $rules = array(
         'user_id' => 'numeric',
         'name'   => 'required|alpha_space|min:3|max:255|unique:categories,name,{id}',
+        'category_type'   => 'required',
     );
 
     public function has_models()
@@ -19,10 +20,21 @@ class Category extends Elegant
         return $this->hasMany('Model', 'category_id')->count();
     }
 
-     public function assetscount()
+    public function assetscount()
     {
         return $this->hasManyThrough('Asset', 'Model')->count();
     }
+    
+    public function accessoriescount()
+    {
+        return $this->hasMany('Accessory')->count();
+    }
+    
+    public function accessories()
+    {
+        return $this->hasMany('Asset');
+    }
+
 
     public function assets()
     {
@@ -33,4 +45,6 @@ class Category extends Elegant
     {
         return $this->hasMany('Model', 'category_id');
     }
+    
+    
 }

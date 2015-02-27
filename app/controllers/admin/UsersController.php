@@ -511,7 +511,7 @@ class UsersController extends AdminController
             }
         )
         ->addColumn('activated', function ($model) {
-                $activated = $model->isActivated() ? '<i class="icon-ok"></i>' : '';
+                $activated = $model->isActivated() ? '<i class="fa fa-check"></i>' : '';
                 return $activated;
             }
         )
@@ -732,6 +732,7 @@ class UsersController extends AdminController
 		return Redirect::route('users')->with('duplicates',$duplicates)->with('success', 'Success');
 		
 	}
+	
 
     
     

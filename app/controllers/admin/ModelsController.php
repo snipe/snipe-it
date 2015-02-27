@@ -25,7 +25,12 @@ class ModelsController extends AdminController
     public function getIndex()
     {
         // Grab all the models
-        $models = Model::orderBy('created_at', 'DESC')->get();
+        $models = Model::orderBy('created_at', 'DESC');
+        if (Input::get('Deleted')) {
+        	$models->withTrashed()->Deleted();
+        }
+        
+        $models = $models->with('category','assets','depreciation')->get();
 
         // Show the page
         return View::make('backend/models/index', compact('models'));
@@ -238,6 +243,29 @@ class ModelsController extends AdminController
             return Redirect::to('hardware/models')->with('success', Lang::get('admin/models/message.delete.success'));
         }
     }
+    
+    public function getRestore($modelId = null)
+    {
+
+		// Get user information
+		$model = Model::withTrashed()->find($modelId);
+
+		 if (isset($model->id)) {
+
+			// Restore the model
+			$model->restore();
+
+			// Prepare the success message
+			$success = Lang::get('admin/models/message.restore.success');
+
+			// Redirect back
+			return Redirect::back()->with('success', $success);
+
+		 } else {
+			 return Redirect::back()->with('error', Lang::get('admin/models/message.not_found'));
+		 }
+
+    }
 
 
     /**
@@ -248,7 +276,7 @@ class ModelsController extends AdminController
     **/
     public function getView($modelId = null)
     {
-        $model = Model::find($modelId);
+        $model = Model::withTrashed()->find($modelId);
 
         if (isset($model->id)) {
                 return View::make('backend/models/view', compact('model'));

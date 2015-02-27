@@ -34,7 +34,7 @@ View Assets for  {{{ $user->fullName() }}} ::
 
                             <div class="col-md-12">
                                 <div class="alert alert-danger">
-                                    <i class="icon-exclamation-sign"></i>
+                                    <i class="fa fa-exclamation-sign"></i>
                                     <strong>Warning: </strong>
                                      This user has been deleted. You will have to restore this user to edit them or assign them new assets.
                                 </div>
@@ -45,14 +45,16 @@ View Assets for  {{{ $user->fullName() }}} ::
 
                             <!-- checked out assets table -->
                             @if (count($user->assets) > 0)
+                            
                             <h4>Assets Checked Out to You</h4>
                             <br>
-                            <table class="table table-hover">
+							<div class="table-responsive">
+							<table class="display">
                                 <thead>
                                     <tr>
                                         <th class="col-md-3">Asset Type</th>
-                                        <th class="col-md-2"><span class="line"></span>Asset Tag</th>
-                                        <th class="col-md-2"><span class="line"></span>Name</th>
+                                        <th class="col-md-2">Asset Tag</th>
+                                        <th class="col-md-2">Name</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -68,18 +70,21 @@ View Assets for  {{{ $user->fullName() }}} ::
                                     @endforeach
                                 </tbody>
                             </table>
+							</div>
                             @endif
 
 
                             <!-- checked out assets table -->
                             @if (count($user->licenses) > 0)
+                            <br><br><br>
                             <h4>Software Checked Out to You</h4>
                             <br>
-                            <table class="table table-hover">
-                                <thead>
+                            <div class="table-responsive">
+							<table class="display">                                
+								<thead>
                                     <tr>
-                                        <th class="col-md-4"><span class="line"></span>Name</th>
-                                        <th class="col-md-4"><span class="line"></span>Serial</th>
+                                        <th class="col-md-4">Name</th>
+                                        <th class="col-md-4">Serial</th>
 
                                     </tr>
                                 </thead>
@@ -93,12 +98,14 @@ View Assets for  {{{ $user->fullName() }}} ::
                                     @endforeach
                                 </tbody>
                             </table>
+                            </div>
                             @endif
 
 
 
 
                             <!-- checked out assets table -->
+                            <br><br><br>
                             <h4>History </h4>
                             <br>
                             @if (count($user->userlog) > 0)

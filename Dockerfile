@@ -1,25 +1,19 @@
 FROM ubuntu
 MAINTAINER Brady Wetherington <uberbrady@gmail.com>
 
-# Merging all apt-stuff together
-####RUN apt-get install -y apache2-bin libapache2-mod-php5 php5-mysql
-
 RUN apt-get update && apt-get install -y \
 apache2-bin \
 libapache2-mod-php5 \
 php5-mysql \
+php5-mcrypt \
+php5-gd \
 patch \
 curl \
-git \
-php5-mcrypt
-
-#expect
-
-# stopped using expect (!)
+vim \
+git 
 
 RUN php5enmod mcrypt
-
-#RUN echo "include_path=/var/www/html/include" >> /etc/php5/apache2/php.ini
+RUN php5enmod gd
 
 RUN sed -i 's/variables_order = .*/variables_order = "EGPCS"/' /etc/php5/apache2/php.ini
 RUN sed -i 's/variables_order = .*/variables_order = "EGPCS"/' /etc/php5/cli/php.ini
@@ -29,17 +23,11 @@ RUN useradd --uid 1000 --gid 50 docker
 RUN echo export APACHE_RUN_USER=docker >> /etc/apache2/envvars
 RUN echo export APACHE_RUN_GROUP=staff >> /etc/apache2/envvars
 
-#COPY httpd.conf /etc/apache2/apache2.conf
-
 COPY docker/000-default.conf /etc/apache2/sites-enabled/000-default.conf
 
 COPY . /var/www/html
 
-#apachectl start
-
 RUN a2enmod rewrite
-
-#RUN apt-get install -y patch
 
 ############ INITIAL APPLICATION SETUP #####################
 
@@ -71,18 +59,15 @@ RUN cp -n /var/www/html/app/config/production/app.example.php /var/www/html/app/
 # Change default hostname to blank...I guess?
 RUN sed -i s%http://staging.yourserver.com%% /var/www/html/app/config/production/app.php
 
+# turn off the toolbar
+RUN sed -i 's%\x27debug\x27 => true%\x27debug\x27 => false%' /var/www/html/app/config/production/app.php
+
 RUN chown -R docker /var/www/html
 
 ############## DEPENDENCIES via COMPOSER ###################
 
-# get curl (this feels yucky, doesn' it?)
-#RUN apt-get install -y curl
-
 #global install of composer
 RUN cd /tmp;curl -sS https://getcomposer.org/installer | php;mv /tmp/composer.phar /usr/local/bin/composer
-
-# Composer won't install without git (doctrine/inflector specifically?)
-#RUN apt-get install -y git
 
 # Get dependencies
 RUN cd /var/www/html;composer install

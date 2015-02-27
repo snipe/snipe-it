@@ -13,7 +13,7 @@
 <div class="page-header">
 
     <div class="pull-right">
-        <a href="{{ route('reports/export/depreciation') }}" class="btn btn-flat gray pull-right"><i class="icon-download-alt"></i>
+        <a href="{{ route('reports/export/depreciation') }}" class="btn btn-flat gray pull-right"><i class="fa fa-download icon-white"></i>
         @lang('admin/hardware/table.dl_csv')</a>
         </div>
 
@@ -87,15 +87,15 @@
 
             @if ($asset->purchase_cost > 0)
             <td class="align-right">@lang('general.currency')
-            {{{ number_format($asset->purchase_cost) }}}</td>
+            	{{{ number_format($asset->purchase_cost) }}}</td>
             <td class="align-right">@lang('general.currency')
-            {{{ number_format($asset->getDepreciatedValue()) }}}</td>
+            	{{{ number_format($asset->getDepreciatedValue()) }}}</td>
             <td class="align-right">@lang('general.currency')
-            -{{{ number_format(($asset->purchase_cost - $asset->getDepreciatedValue())) }}}</td>
+            	-{{{ number_format(($asset->purchase_cost - $asset->getDepreciatedValue())) }}}</td>
             @else
-            <td></td>
-            <td></td>
-            <td></td>
+	            <td></td>
+	            <td></td>
+	            <td></td>
             @endif
 
 

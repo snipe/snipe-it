@@ -12,7 +12,7 @@
 <div class="row header">
     <div class="col-md-12">
         <a href="{{ URL::previous() }}" class="btn-flat gray pull-right">
-        <i class="icon-circle-arrow-left icon-white"></i> @lang('general.back')</a>
+        <i class="fa fa-arrow-left icon-white"></i> @lang('general.back')</a>
         <h3> @lang('admin/licenses/general.checkin') </h3>
     </div>
 </div>
@@ -47,7 +47,7 @@
                 <label for="note" class="col-md-2 control-label">@lang('admin/hardware/form.notes')</label>
                 <div class="col-md-7">
                     <textarea class="col-md-6 form-control" id="note" name="note">{{{ Input::old('note', $licenseseat->note) }}}</textarea>
-                    {{ $errors->first('note', '<span class="alert-msg"><i class="icon-remove-sign"></i> :message</span>') }}
+                    {{ $errors->first('note', '<br><span class="alert-msg"><i class="fa fa-times"></i> :message</span>') }}
                 </div>
             </div>
             <!-- Form actions -->
@@ -55,7 +55,7 @@
                 <label class="col-md-2 control-label"></label>
                     <div class="col-md-7">
                         <a class="btn btn-link" href="{{ route('licenses') }}">@lang('button.cancel')</a>
-                        <button type="submit" class="btn btn-success"><i class="icon-ok icon-white"></i> @lang('general.checkin')</button>
+                        <button type="submit" class="btn btn-success"><i class="fa fa-ok icon-white"></i> @lang('general.checkin')</button>
                     </div>
                 </div>
 

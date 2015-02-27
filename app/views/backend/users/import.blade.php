@@ -13,7 +13,7 @@ Create a User ::
         Import Users
 
         <div class="pull-right">
-            <a href="{{ route('users') }}" class="btn-flat gray pull-right"><i class="icon-circle-arrow-left icon-white"></i>  @lang('general.back')</a>
+            <a href="{{ route('users') }}" class="btn-flat gray pull-right"><i class="fa fa-arrow-circle-left icon-white"></i>  @lang('general.back')</a>
 
         </div>
     </h3>

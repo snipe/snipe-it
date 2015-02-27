@@ -18,9 +18,13 @@
                 <span class="caret"></span>
             </button>
             <ul class="dropdown-menu">
+                @if ($model->deleted_at=='')
                     <li><a href="{{ route('update/model', $model->id) }}">@lang('admin/models/table.edit')</a></li>
                     <li><a href="{{ route('clone/model', $model->id) }}">@lang('admin/models/table.clone')</a></li>
                     <li><a href="{{ route('create/hardware', $model->id) }}">@lang('admin/hardware/form.create')</a></li>
+                @else
+                    <li><a href="{{ route('restore/model', $model->id) }}">@lang('admin/models/general.restore')</a></li>
+                @endif
             </ul>
         </div>
         <h3>
@@ -35,6 +39,15 @@
 <div class="user-profile">
 <div class="row profile">
 <div class="col-md-9 bio">
+    
+    @if ($model->deleted_at!='')
+			<div class="alert alert-warning alert-block">
+				<i class="fa fa-warning"></i>
+				@lang('admin/models/general.deleted', array('model_id' => $model->id))
+
+			</div>
+
+		@endif
 
 
                             <!-- checked out models table -->
@@ -87,7 +100,7 @@
                             @else
                             <div class="col-md-9">
                                 <div class="alert alert-info alert-block">
-                                    <i class="icon-info-sign"></i>
+                                    <i class="fa fa-info-circle"></i>
                                     @lang('general.no_results')
                                 </div>
                             </div>
@@ -128,6 +141,11 @@
                                 @if ($model->image)
                                 <li><br /><img src="/uploads/models/{{{ $model->image }}}" /></li>
                                 @endif
+                                   
+                                @if  ($model->deleted_at!='')
+                                   <li><br /><a href="{{ route('restore/model', $model->id) }}" class="btn-flat large info ">@lang('admin/models/general.restore')</a></li>
+
+                    	@endif
 
                             </ul>
 

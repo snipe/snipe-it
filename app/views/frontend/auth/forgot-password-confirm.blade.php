@@ -18,22 +18,22 @@ Forgot Password ::
     <!-- New Password -->
 	<div class="form-group {{ $errors->has('password') ? ' has-error' : '' }}">
         <label for="password" class="col-md-3 control-label">New Password
-         <i class='icon-asterisk'></i>
+         <i class='fa fa-asterisk'></i>
          </label>
         <div class="col-md-5">
             <input class="form-control" type="password" name="password" id="password" />
-            {{ $errors->first('password', '<span class="alert-msg"><i class="icon-remove-sign"></i> :message</span>') }}
+            {{ $errors->first('password', '<br><span class="alert-msg"><i class="fa fa-times"></i> :message</span>') }}
         </div>
     </div>
 
     <!-- Password Confirm -->
     <div class="form-group {{ $errors->has('password_confirm') ? ' has-error' : '' }}">
         <label for="password_confirm" class="col-md-3 control-label">Password Confirmation
-         <i class='icon-asterisk'></i>
+         <i class='fa fa-asterisk'></i>
          </label>
         <div class="col-md-5">
             <input class="form-control" type="password" name="password_confirm" id="password_confirm" />
-            {{ $errors->first('password_confirm', '<span class="alert-msg"><i class="icon-remove-sign"></i> :message</span>') }}
+            {{ $errors->first('password_confirm', '<br><span class="alert-msg"><i class="fa fa-times"></i> :message</span>') }}
         </div>
     </div>
 
@@ -43,7 +43,7 @@ Forgot Password ::
         <label class="col-md-3 control-label"></label>
             <div class="col-md-7">
                 <a class="btn btn-link" href="{{ route('home') }}">@lang('button.cancel')</a>
-                <button type="submit" class="btn btn-success"><i class="icon-ok icon-white"></i> @lang('button.submit')</button>
+                <button type="submit" class="btn btn-success"><i class="fa fa-ok icon-white"></i> @lang('button.submit')</button>
             </div>
         </div>
 

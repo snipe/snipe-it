@@ -12,7 +12,7 @@
 
 <div class="row header">
     <div class="col-md-12">
-        <a href="{{ route('create/group') }}" class="btn btn-success pull-right"><i class="icon-plus-sign icon-white"></i> @lang('general.create')</a>
+        <a href="{{ route('create/group') }}" class="btn btn-success pull-right"><i class="fa fa-plus icon-white"></i> @lang('general.create')</a>
         <h3>@lang('admin/groups/titles.group_management')</h3>
     </div>
 </div>
@@ -37,10 +37,10 @@
             <td>{{ $group->users()->count() }}</td>
             <td>{{ $group->created_at->diffForHumans() }}</td>
             <td>
-                <a href="{{ route('update/group', $group->id) }}" class="btn btn-warning"><i class="icon-pencil icon-white"></i></a>
-                <a data-html="false" class="btn delete-asset btn-danger" data-toggle="modal" href="{{ route('delete/group', $group->id) }}" data-content="@lang('admin/groups/message.delete.confirm')"
+                <a href="{{ route('update/group', $group->id) }}" class="btn btn-warning btn-sm"><i class="fa fa-pencil icon-white"></i></a>
+                <a data-html="false" class="btn delete-asset btn-danger btn-sm" data-toggle="modal" href="{{ route('delete/group', $group->id) }}" data-content="@lang('admin/groups/message.delete.confirm')"
 data-title="@lang('general.delete')"
-{{ htmlspecialchars($group->name) }}?" onClick="return false;"><i class="icon-trash icon-white"></i></a>
+{{ htmlspecialchars($group->name) }}?" onClick="return false;"><i class="fa fa-trash icon-white"></i></a>
             </td>
         </tr>
         @endforeach
