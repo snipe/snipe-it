@@ -70,9 +70,6 @@
 			       
 			    </tr>
 			   @endforeach
-			   
-			@else
-			bupkiss
 			@endif
 			</tbody>
 			</table>
