@@ -13,3 +13,4 @@
 
 Artisan::add(new AppCommand);
 Artisan::add(new SendExpirationAlerts);
+Artisan::add(new Versioning);
