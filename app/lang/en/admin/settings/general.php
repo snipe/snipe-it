@@ -27,6 +27,7 @@ return array(
     'setting'                   => 'Setting',
     'settings'                  => 'Settings',
     'site_name'                 => 'Site Name',
+     'snipe_version'  			=> 'Snipe-IT version',
     'system'                    => 'System Information',
     'update'                    => 'Update Settings',
     'value'                     => 'Value',

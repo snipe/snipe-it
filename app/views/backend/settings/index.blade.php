@@ -160,6 +160,12 @@
                             <br>
                             <table class="table table-hover">
                                 <tbody>
+	                                <tr>
+                                        <td>@lang('admin/settings/general.snipe_version')</td>
+                                        <td>
+                                            {{{  Config::get('version.latest') }}}
+                                        </td>
+                                    </tr>
                                     <tr>
                                         <td>@lang('admin/settings/general.php')</td>
                                         <td> {{{ phpversion() }}}</td>
@@ -170,6 +176,9 @@
                                             {{{ $setting->lar_ver() }}}
                                         </td>
                                     </tr>
+                                    
+                                    
+                                   
                                 </tbody>
                             </table>
                         </div>
