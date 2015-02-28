@@ -3,7 +3,7 @@
 return array(
 
 
-    'accessories'			=> 'Accessories',
+    'accessories'			=> 'Acessórios',
     'accessory'				=> 'Accessory',
     'address'				=> 'Endereço',
     'admin'					=> 'Administrador',
@@ -89,7 +89,7 @@ return array(
     'suppliers'  			=> 'Fornecedores',
     'total_assets'			=> 'bens no total',
     'total_licenses'		=> 'licenças no total',
-    'type'  				=> 'Type',
+    'type'  				=> 'Tipo',
     'undeployable'			=> 'Não implantável',
     'unknown_admin'			=> 'Administrador Desconhecido',
     'user'					=> 'Usuário',

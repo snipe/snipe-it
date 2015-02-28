@@ -9,7 +9,7 @@ return array(
     'deployable'  				=> 'Implementável',
     'deleted'  					=> 'Este bem foi deletado. <a href="/hardware/:asset_id/restore">Clique aqui para restaurá-lo</a>.',
     'edit'  					=> 'Editar Bem',
-    'model_deleted'  			=> 'This Assets model has been deleted. You must restore the model before you can restore the Asset.<br/> <a href="/hardware/models/:model_id/restore">Click here to restore the model</a>.',
+    'model_deleted'  			=> 'Este modelo de Bens foi deletado. Você deve restaurar o modelo antes de restaurar o Bem.<br/> <a href="/hardware/models/:model_id/restore">Clique aqui para restaurar o modelo</a>.',
     'requestable'				=> 'Solicitável',
     'restore'  					=> 'Restaurar Bem',
     'pending'  					=> 'Pendente',

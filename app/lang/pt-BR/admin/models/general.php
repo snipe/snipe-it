@@ -2,10 +2,10 @@
 
 return array(
 
-    'deleted'  					=> 'This model has been deleted. <a href="/hardware/models/:model_id/restore">Click here to restore it</a>.',
-    'restore'                   => 'Restore Model',
+    'deleted'  					=> 'Este modelo foi deletado. <a href="/hardware/models/:model_id/restore">Clique aqui para restaurá-lo</a>.',
+    'restore'                   => 'Restaurar Modelo',
 	'show_mac_address'			=> 'Exibir o campo de endereço MAC nos bens neste modelo',
-    'view_deleted'              => 'View Deleted',
-    'view_models'               => 'View Models',
+    'view_deleted'              => 'Ver Deletados',
+    'view_models'               => 'Ver Modelos',
 
 );

@@ -9,7 +9,7 @@ return array(
     'deployable'  				=> 'Desplegable',
     'deleted'  					=> 'Este equipo ha sido eliminado. <a href="/hardware/:asset_id/restore">Click aqui para restaurarlot</a>.',
     'edit'  					=> 'Editar Equipo',
-    'model_deleted'  			=> 'This Assets model has been deleted. You must restore the model before you can restore the Asset.<br/> <a href="/hardware/models/:model_id/restore">Click here to restore the model</a>.',
+    'model_deleted'  			=> 'Este modelo de equipo ha sido borrado. Debe restaurar el modelo antes de poder restaurar el equipo.<br/><a href="/hardware/models/:model_id/restore">Hacer click aquí para restaurar el modelo</a>.',
     'requestable'				=> 'Requerible',
     'restore'  					=> 'Restaurar equipo',
     'pending'  					=> 'Pendiente',
