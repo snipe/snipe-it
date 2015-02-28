@@ -46,11 +46,12 @@ Account Sign in ::
                     </div>
             </div>
 
-             <div class="field-box">
-                <label class="col-md-3 control-label checkbox-inline"></label>
-                  <input type="checkbox" name="remember-me" id="remember-me" value="1" /> Remember me
-                </label>
-            </div>
+			<div class="checkbox col-md-offset-3">
+				<label>			
+					 	{{ Form::checkbox('remember-me', '1', Input::old('remember-me')) }}
+					 	Remember me	                 
+				</label>
+			</div>
 
             <!-- Form actions -->
                 <div class="form-group">
