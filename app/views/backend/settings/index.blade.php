@@ -163,7 +163,7 @@
 	                                <tr>
                                         <td>@lang('admin/settings/general.snipe_version')</td>
                                         <td>
-                                            {{{  Config::get('version.app_version') }}}
+                                            {{{  Config::get('version.hash_version') }}}
                                         </td>
                                     </tr>
                                     <tr>
