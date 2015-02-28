@@ -42,16 +42,23 @@ class Versioning extends Command {
         $versionFile = app_path().'/config/version.php';
  
         // The git's output
-        $version = $this->argument('version');
+        // get the argument passed in the git command
+		 $hash_version = $this->argument('app_version');
+		 
+		 // discard the commit hash
+		 $version = explode('-', $hash_version);
+		 $realVersion = $version[0] . '-' . $version[1];
+		 
+		 // save the version array to a variable
+		 $array = var_export(array('app_version' => $realVersion,'hash_version' => $hash_version), true);
  
-        // Here we save the version array in a variable
-        $array = var_export(array('latest' => $version), true);
  
         // Construct our file content
         $content = <<<CON
 <?php
 return $array;
 CON;
+
         // And finally write the file and output the current version
         \File::put($versionFile, $content);
         $this->line('Setting version: '. \Config::get('version.latest'));
@@ -65,7 +72,7 @@ CON;
     protected function getArguments()
     {
         return array(
-            array('version', InputArgument::REQUIRED, 'version number is required.'),
+            array('app_version', InputArgument::REQUIRED, 'version number is required.'),
         );
     }
  

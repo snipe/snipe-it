@@ -1,4 +1,5 @@
 <?php
 return array (
-  'latest' => 'v1.2.6-5-gc6f23e7',
+  'app_version' => 'v1.2.6-7',
+  'hash_version' => 'v1.2.6-7-g4502582',
 );
