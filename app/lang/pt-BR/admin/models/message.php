@@ -20,6 +20,11 @@ return array(
         'confirm'   => 'Tem certeza de que quer deletar este modelo de bem?',
         'error'   => 'Houve um problema ao deletar o modelo. Por favor, tente novamente.',
         'success' => 'O modelo foi deletado com sucesso.'
-    )
+    ),
+    
+    'restore' => array(
+        'error'   		=> 'O modelo não foi restaurado, tente novamente',
+        'success' 		=> 'Modelo restaurado com sucesso.'
+    ),
 
 );

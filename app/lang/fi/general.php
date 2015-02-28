@@ -3,6 +3,8 @@
 return array(
 
 
+    'accessories'			=> 'Accessories',
+    'accessory'				=> 'Accessory',
     'address'				=> 'Osoite',
     'admin'					=> 'Ylläpitäjä',
     'all_assets'			=> 'Kaikki Laitteet',
@@ -32,6 +34,7 @@ return array(
     'currency'  			=> '€',
     'current'  				=> 'Käytössä Olevat',
     'custom_report'         => 'Muokattu Laiteraportti',
+    'dashboard'				=> 'Dashboard',
     'date'					=> 'Päivä',
     'delete'  				=> 'Poista',
     'deleted'  				=> 'Poistettu',
@@ -86,6 +89,7 @@ return array(
     'suppliers'  			=> 'Toimittajat',
     'total_assets'			=> 'laitteita yhteensä',
     'total_licenses'		=> 'lisenssejä yhteensä',
+    'type'  				=> 'Type',
     'undeployable'			=> 'Ei-käyttöönotettavissa',
     'unknown_admin'			=> 'Tuntematon Ylläpitäjä',
     'user'					=> 'Käyttäjä',

@@ -3,12 +3,12 @@
 return array(
 
     'actions' 	=> 'Действия',
-    'add'    	=> 'Add New',
-    'cancel'    => 'Cancel',
+    'add'    	=> 'Добавить',
+    'cancel'    => 'Отмена',
     'delete'  	=> 'Удалить',
     'edit'    	=> 'Редактировать',
     'restore' 	=> 'Восстановить',
     'submit'  	=> 'Принять',
-    'upload'    => 'Upload',
+    'upload'    => 'Загрузка',
 
 );

@@ -9,6 +9,7 @@ return array(
     'deployable'  				=> 'Uitrolbaar',
     'deleted'  					=> 'Dit materiaal is verwijderd. <a href="/hardware/:asset_id/restore">Klik hier om te herstellen</a>.',
     'edit'  					=> 'Materiaal Bewerken',
+    'model_deleted'  			=> 'This Assets model has been deleted. You must restore the model before you can restore the Asset.<br/> <a href="/hardware/models/:model_id/restore">Click here to restore the model</a>.',
     'requestable'				=> 'Beschikbaar',
     'restore'  					=> 'Herstel materiaal',
     'pending'  					=> 'In behandeling',

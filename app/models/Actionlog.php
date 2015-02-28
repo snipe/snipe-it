@@ -26,7 +26,7 @@ class Actionlog extends Eloquent
     
     public function accessorylog()
     {
-        return $this->belongsTo('Accessory','asset_id')->withTrashed();
+        return $this->belongsTo('Accessory','accessory_id')->withTrashed();
     }
 
     public function adminlog()

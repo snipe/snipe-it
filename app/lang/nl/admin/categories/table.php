@@ -1,9 +1,10 @@
 <?php
 
 return array(
-
-    'id'      => 'ID',
-    'parent'   => 'Bovenliggend',
-    'title'      => 'Materiaal Categorie Naam',
+	'eula_text'      			=> 'EULA',
+    'id'      					=> 'ID',
+    'parent'   					=> 'Bovenliggend',
+    'require_acceptance'      	=> 'Acceptance',
+    'title'      				=> 'Materiaal Categorie Naam',
 
 );

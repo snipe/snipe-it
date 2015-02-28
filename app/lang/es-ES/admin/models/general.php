@@ -2,6 +2,10 @@
 
 return array(
 
-	'show_mac_address'			=> 'Show MAC address field in assets in this model',
+    'deleted'  					=> 'Este modelo ha sido borrado.<a href="/hardware/models/:model_id/restore">Click aquí para restaurarlo</a>.',
+    'restore'                   => 'Restaurar Modelo',
+	'show_mac_address'			=> 'Mostrar el campo de la dirección MAC en los equipos de este modelo',
+    'view_deleted'              => 'Ver Borrados',
+    'view_models'               => 'Ver Modelos',
 
 );

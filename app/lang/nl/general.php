@@ -3,6 +3,8 @@
 return array(
 
 
+    'accessories'			=> 'Accessories',
+    'accessory'				=> 'Accessory',
     'address'				=> 'Adres',
     'admin'					=> 'Beheerder',
     'all_assets'			=> 'Alle materialen',
@@ -32,6 +34,7 @@ return array(
     'currency'  			=> '$',
     'current'  				=> 'Huidige',
     'custom_report'         => 'Handmatig Materiaal Rapport',
+    'dashboard'				=> 'Dashboard',
     'date'					=> 'Datum',
     'delete'  				=> 'Verwijder',
     'deleted'  				=> 'Verwijderd',
@@ -86,6 +89,7 @@ return array(
     'suppliers'  			=> 'Leveranciers',
     'total_assets'			=> 'totaal aantal materialen',
     'total_licenses'		=> 'Totale licenties',
+    'type'  				=> 'Type',
     'undeployable'			=> 'Niet-inzetbaar',
     'unknown_admin'			=> 'Onbekende Beheerder',
     'user'					=> 'Gebruiker',

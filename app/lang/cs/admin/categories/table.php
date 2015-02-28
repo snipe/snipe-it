@@ -1,9 +1,10 @@
 <?php
 
 return array(
-
-    'id'      => 'ID',
-    'parent'   => 'Nadřazená složka',
-    'title'      => 'Jméno kategorie majetku',
+	'eula_text'      			=> 'EULA',
+    'id'      					=> 'ID',
+    'parent'   					=> 'Nadřazená složka',
+    'require_acceptance'      	=> 'Acceptance',
+    'title'      				=> 'Jméno kategorie majetku',
 
 );

@@ -68,7 +68,7 @@ class CategoriesController extends AdminController
             $category->name            		= e(Input::get('name'));
             $category->category_type        = e(Input::get('category_type'));
             $category->eula_text            = e(Input::get('eula_text'));
-            $category->use_default_eula     = e(Input::get('use_default_eula', '1'));  
+            $category->use_default_eula     = e(Input::get('use_default_eula', '0'));  
             $category->require_acceptance   = e(Input::get('require_acceptance', '0')); 
             $category->user_id          	= Sentry::getId();
 
@@ -145,7 +145,7 @@ class CategoriesController extends AdminController
             $category->name            = e(Input::get('name'));
             $category->category_type        = e(Input::get('category_type'));
             $category->eula_text            = e(Input::get('eula_text'));
-            $category->use_default_eula     = e(Input::get('use_default_eula', '1'));  
+            $category->use_default_eula     = e(Input::get('use_default_eula', '0'));  
             $category->require_acceptance   = e(Input::get('require_acceptance', '0')); 
 
             // Was the asset created?

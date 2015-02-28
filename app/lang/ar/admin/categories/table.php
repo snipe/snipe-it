@@ -1,9 +1,10 @@
 <?php
 
 return array(
-
-    'id'      => 'الرقم',
-    'parent'   => 'التصنيف الأب',
-    'title'      => 'اسم التصنيف',
+	'eula_text'      			=> 'EULA',
+    'id'      					=> 'الرقم',
+    'parent'   					=> 'التصنيف الأب',
+    'require_acceptance'      	=> 'Acceptance',
+    'title'      				=> 'اسم التصنيف',
 
 );

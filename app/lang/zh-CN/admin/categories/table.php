@@ -1,9 +1,10 @@
 <?php
 
 return array(
-
-    'id'      => '编号',
-    'parent'   => '父类',
-    'title'      => '资产分类名称',
+	'eula_text'      			=> 'EULA',
+    'id'      					=> '编号',
+    'parent'   					=> '父类',
+    'require_acceptance'      	=> 'Acceptance',
+    'title'      				=> '资产分类名称',
 
 );

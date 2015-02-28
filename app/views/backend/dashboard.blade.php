@@ -54,6 +54,8 @@
 			           		@if ($activity->licenselog)
 			           		{{{ $activity->licenselog->name }}}
 			           		@endif
+			           	@elseif ($activity->asset_type=="accessory") 
+			           		{{{ $activity->accessorylog->name }}}
 			           	@endif
 			           	
 			           	</td> 

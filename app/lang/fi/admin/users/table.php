@@ -18,6 +18,7 @@ return array(
     'last_login'  			=> 'Viimeisin kirjautuminen',
     'last_name'  			=> 'Sukunimi',
     'location'  			=> 'Sijainti',
+    'lock_passwords'		=> 'Login details cannot be changed on this installation.',
     'manager' 				=> 'Esimies',
     'name' 					=> 'Nimi',
     'password_confirm' 		=> 'Vahvista Salasana',

@@ -20,6 +20,11 @@ return array(
         'confirm'   => 'Sunteti sigur ca doriti sa stergeti acest model de activ?',
         'error'   => 'A aparut o problema la stergerea modelului. Incercati iar.',
         'success' => 'Modelul a fost sters.'
-    )
+    ),
+    
+    'restore' => array(
+        'error'   		=> 'Model was not restored, please try again',
+        'success' 		=> 'Model restored successfully.'
+    ),
 
 );

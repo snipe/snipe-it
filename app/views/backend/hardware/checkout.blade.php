@@ -73,6 +73,24 @@
                     {{ $errors->first('note', '<br><span class="alert-msg"><i class="fa fa-times"></i> :message</span>') }}
                 </div>
             </div>
+            
+            @if ($asset->requireAcceptance())
+			<div class="form-group">
+                <div class="col-md-9 col-md-offset-2">
+                  <p class="hint-block">@lang('admin/categories/general.required_acceptance')</p>
+                </div>
+            </div>
+            @endif
+            
+            
+            @if ($asset->getEula())
+            <div class="form-group">
+
+                <div class="col-md-9 col-md-offset-2">
+                  <p class="hint-block">@lang('admin/categories/general.required_eula')</p>
+                </div>
+            </div>
+			@endif
 
             <!-- Form actions -->
             <div class="form-group">

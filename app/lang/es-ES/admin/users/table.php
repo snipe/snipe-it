@@ -18,6 +18,7 @@ return array(
     'last_login'  			=> 'Ultimo Login',
     'last_name'  			=> 'Apellidos',
     'location'  			=> 'Localización',
+    'lock_passwords'		=> 'Los detalles de acceso no pueden ser cambiados en esta instalación.',
     'manager' 				=> 'Responsable',
     'name' 					=> 'Usuario',
     'password_confirm' 		=> 'Confirmar Password',

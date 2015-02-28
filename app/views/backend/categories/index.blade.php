@@ -45,10 +45,10 @@
 	                @endif
 	            </td>
                 <td>{{ ($category->require_acceptance=='1') ? '<i class="fa fa-check"></i>' : ''}}</td>
-                <td>{{ ($category->eula_text!='') ? '<i class="fa fa-check"></i>' : ''}}</td>
+                <td>{{ ($category->getEula()) ? '<i class="fa fa-check"></i>' : ''}}</td>
                 <td>
-                <a href="{{ route('update/category', $category->id) }}" class="btn btn-warning"><i class="fa fa-pencil icon-white"></i></a>
-<a data-html="false" class="btn delete-asset btn-danger" data-toggle="modal" href="{{ route('delete/category', $category->id) }}" data-content="@lang('admin/categories/message.delete.confirm')"
+                <a href="{{ route('update/category', $category->id) }}" class="btn btn-warning btn-sm"><i class="fa fa-pencil icon-white"></i></a>
+<a data-html="false" class="btn delete-asset btn-danger btn-sm" data-toggle="modal" href="{{ route('delete/category', $category->id) }}" data-content="@lang('admin/categories/message.delete.confirm')"
 data-title="@lang('general.delete')
 {{{ htmlspecialchars($category->name) }}}?" onClick="return false;"><i class="fa fa-trash icon-white"></i></a>
 

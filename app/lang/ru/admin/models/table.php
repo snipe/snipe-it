@@ -2,16 +2,16 @@
 
 return array(
 
-    'create'				=> 'Create Asset Model',
-    'created_at' 			=> 'Created at',
-    'eol'	 				=> 'EOL',
-    'modelnumber'   		=> 'Model No.',
-    'name'      			=> 'Asset Model Name',
-    'numassets' 			=> 'Assets',
-    'title'					=> 'Asset Models',
-    'update'				=> 'Update Asset Model',
-    'view'					=> 'View Asset Model',
-    'update'				=> 'Update Asset Model',
-    'clone'				=> 'Clone Model',
-    'edit'				=> 'Edit Model',
+    'create'				=> 'Создать модель актива',
+    'created_at' 			=> 'Создано',
+    'eol'	 				=> 'Срок службы',
+    'modelnumber'   		=> 'Модель',
+    'name'      			=> 'Название модели',
+    'numassets' 			=> 'Активы',
+    'title'					=> 'Модели активов',
+    'update'				=> 'Измененить модель актива',
+    'view'					=> 'Просмотр модели актива',
+    'update'				=> 'Измененить модель актива',
+    'clone'				=> 'Клонировать модель',
+    'edit'				=> 'Изменить модель',
 );

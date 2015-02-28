@@ -20,6 +20,11 @@ return array(
         'confirm'   => 'Are you sure you wish to delete this asset model?',
         'error'   => 'There was an issue deleting the model. Please try again.',
         'success' => 'The model was deleted successfully.'
-    )
+    ),
+    
+    'restore' => array(
+        'error'   		=> 'Model was not restored, please try again',
+        'success' 		=> 'Model restored successfully.'
+    ),
 
 );

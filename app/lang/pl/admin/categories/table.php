@@ -1,9 +1,10 @@
 <?php
 
 return array(
-
-    'id'      => 'ID',
-    'parent'   => 'Parent',
-    'title'      => 'Asset Category Name',
+	'eula_text'      			=> 'EULA',
+    'id'      					=> 'ID',
+    'parent'   					=> 'Kategoria nadrzędna',
+    'require_acceptance'      	=> 'Acceptance',
+    'title'      				=> 'Nazwa kategorii',
 
 );

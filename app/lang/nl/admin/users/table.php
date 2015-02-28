@@ -18,6 +18,7 @@ return array(
     'last_login'  			=> 'Laatst ingelogd',
     'last_name'  			=> 'Achternaam',
     'location'  			=> 'Locatie',
+    'lock_passwords'		=> 'Login details cannot be changed on this installation.',
     'manager' 				=> 'Manager',
     'name' 					=> 'Naam',
     'password_confirm' 		=> 'Bevestig uw wachtwoord',

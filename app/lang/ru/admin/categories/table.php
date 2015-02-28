@@ -1,9 +1,10 @@
 <?php
 
 return array(
-
-    'id'      => 'ID',
-    'parent'   => 'Родительская категория',
-    'title'      => 'Имя категории актива',
+	'eula_text'      			=> 'EULA',
+    'id'      					=> 'ID',
+    'parent'   					=> 'Родительская категория',
+    'require_acceptance'      	=> 'Acceptance',
+    'title'      				=> 'Имя категории актива',
 
 );
