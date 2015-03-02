@@ -11,6 +11,7 @@ use Asset;
 use Actionlog;
 use Lang;
 use Accessory;
+use DB;
 
 class ViewAssetsController extends AuthorizedController
 {
@@ -49,11 +50,11 @@ class ViewAssetsController extends AuthorizedController
     	// Check if the asset exists
         if (is_null($asset = Asset::find($assetId))) {
             // Redirect to the asset management page
-            return Redirect::to('hardware')->with('error', Lang::get('admin/hardware/message.does_not_exist'));
+            return Redirect::to('frontend/account/view-assets')->with('error', Lang::get('admin/hardware/message.does_not_exist'));
         } else {
 
 
-			 return View::make('frontend/account/view-asset', compact('asset'));
+			 return View::make('frontend/account/view-assets', compact('asset'));
         }
 
 
@@ -101,39 +102,56 @@ class ViewAssetsController extends AuthorizedController
 	  	// Check if the asset exists
         if (is_null($findlog = Actionlog::find($logID))) {
             // Redirect to the asset management page
-            return Redirect::to('account')->with('error', Lang::get('admin/hardware/message.does_not_exist'));
+            return Redirect::to('account/view-assets')->with('error', Lang::get('admin/hardware/message.does_not_exist'));
+        }
+                
+        
+        if ($findlog->accepted_id!='') {
+            // Redirect to the asset management page
+            return Redirect::to('account/view-assets')->with('error', Lang::get('admin/users/message.error.asset_already_accepted'));
         }
         
-        	$user = Sentry::getUser();
-			$logaction = new Actionlog();
+    	$user = Sentry::getUser();
+		$logaction = new Actionlog();
 			
-			// Asset
-	        if (($findlog->asset_id!='') && ($findlog->asset_type=='hardware')) {
-	        	$logaction->asset_id = $findlog->asset_id;
-	        	$logaction->accessory_id = NULL;
-	        	$logaction->asset_type = 'hardware';
-	        
-	        // software	
-	        } elseif (($findlog->asset_id!='') && ($findlog->asset_type=='software')) {     
-		        $logaction->asset_id = $findlog->asset_id;
-	        	$logaction->accessory_id = NULL;
-	        	$logaction->asset_type = 'software';
-	        	
-			// accessories    
-		    } elseif ($findlog->accessory_id!='') {
-			    $logaction->asset_id = NULL;
-	        	$logaction->accessory_id = $findlog->accessory_id;
-	        	$logaction->asset_type = 'accessory';         
-	        }
+		// Asset
+        if (($findlog->asset_id!='') && ($findlog->asset_type=='hardware')) {
+        	$logaction->asset_id = $findlog->asset_id;
+        	$logaction->accessory_id = NULL;
+        	$logaction->asset_type = 'hardware';
+        
+        // software	
+        } elseif (($findlog->asset_id!='') && ($findlog->asset_type=='software')) {     
+	        $logaction->asset_id = $findlog->asset_id;
+        	$logaction->accessory_id = NULL;
+        	$logaction->asset_type = 'software';
+        	
+		// accessories    
+	    } elseif ($findlog->accessory_id!='') {
+		    $logaction->asset_id = NULL;
+        	$logaction->accessory_id = $findlog->accessory_id;
+        	$logaction->asset_type = 'accessory';         
+        }
 			
-			$logaction->checkedout_to = $findlog->checkedout_to;
-			
-			$logaction->note = e(Input::get('note'));
-			$logaction->user_id = $user->id;
-			$logaction->accepted_at = date("Y-m-d h:i:s");
-			$log = $logaction->logaction('accepted');
-			
+		$logaction->checkedout_to = $findlog->checkedout_to;
+		
+		$logaction->note = e(Input::get('note'));
+		$logaction->user_id = $user->id;
+		$logaction->accepted_at = date("Y-m-d h:i:s");
+		$log = $logaction->logaction('accepted');
+		
+      
+		$update_checkout = DB::table('asset_logs')
+			->where('id',$findlog->id)
+			->update(array('accepted_id' => $logaction->id));
+		
+		if ($update_checkout ) {
 			return Redirect::to('account/view-assets')->with('success', 'You have successfully accept this asset.');
+			
+		} else {
+			return Redirect::to('account/view-assets')->with('error', 'Something went wrong ');
+		}
+		
 		
 
   

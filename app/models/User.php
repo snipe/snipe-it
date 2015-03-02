@@ -58,7 +58,7 @@ class User extends SentryUserModel
     */
     public function userlog()
     {
-        return $this->hasMany('Actionlog','checkedout_to')->withTrashed();
+        return $this->hasMany('Actionlog','checkedout_to')->orderBy('created_at', 'DESC')->withTrashed();
     }
 
     /**
