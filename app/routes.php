@@ -38,8 +38,8 @@ Route::group(array('prefix' => 'hardware', 'namespace' => 'Controllers\Admin', '
     Route::get('{assetId}/delete', array('as' => 'delete/hardware', 'uses' => 'AssetsController@getDelete'));
     Route::get('{assetId}/checkout', array('as' => 'checkout/hardware', 'uses' => 'AssetsController@getCheckout'));
     Route::post('{assetId}/checkout', 'AssetsController@postCheckout');
-    Route::get('{assetId}/checkin', array('as' => 'checkin/hardware', 'uses' => 'AssetsController@getCheckin'));
-    Route::post('{assetId}/checkin', 'AssetsController@postCheckin');
+    Route::get('{assetId}/checkin/{backto?}', array('as' => 'checkin/hardware', 'uses' => 'AssetsController@getCheckin'));
+    Route::post('{assetId}/checkin/{backto?}', 'AssetsController@postCheckin');
     Route::get('{assetId}/view', array('as' => 'view/hardware', 'uses' => 'AssetsController@getView'));
     Route::get('{assetId}/qr_code', array('as' => 'qr_code/hardware', 'uses' => 'AssetsController@getQrCode'));
     Route::get('{assetId}/restore', array('as' => 'restore/hardware', 'uses' => 'AssetsController@getRestore'));
@@ -47,12 +47,12 @@ Route::group(array('prefix' => 'hardware', 'namespace' => 'Controllers\Admin', '
     Route::get('{assetId}/deletefile/{fileId}', array('as' => 'delete/assetfile', 'uses' => 'AssetsController@getDeleteFile'));
     Route::get('{assetId}/showfile/{fileId}', array('as' => 'show/assetfile', 'uses' => 'AssetsController@displayFile'));
     Route::post('{assetId}/edit', 'AssetsController@postEdit');
-    
-    Route::post('bulkedit', 
-    	array('as' => 'hardware/bulkedit', 
+
+    Route::post('bulkedit',
+    	array('as' => 'hardware/bulkedit',
     	'uses' => 'AssetsController@postBulkEdit'));
-    Route::post('bulksave', 
-    	array('as' => 'hardware/bulksave', 
+    Route::post('bulksave',
+    	array('as' => 'hardware/bulksave',
     	'uses' => 'AssetsController@postBulkSave'));
 
 
@@ -101,17 +101,17 @@ Route::group(array('prefix' => 'admin', 'before' => 'admin-auth', 'namespace' =>
         Route::get('{licenseId}/delete', array('as' => 'delete/license', 'uses' => 'LicensesController@getDelete'));
         Route::get('{licenseId}/checkout', array('as' => 'checkout/license', 'uses' => 'LicensesController@getCheckout'));
         Route::post('{licenseId}/checkout', 'LicensesController@postCheckout');
-        Route::get('{licenseId}/checkin', array('as' => 'checkin/license', 'uses' => 'LicensesController@getCheckin'));
-        Route::post('{licenseId}/checkin', 'LicensesController@postCheckin');
+        Route::get('{licenseId}/checkin/{backto?}', array('as' => 'checkin/license', 'uses' => 'LicensesController@getCheckin'));
+        Route::post('{licenseId}/checkin/{backto?}', 'LicensesController@postCheckin');
         Route::get('{licenseId}/view', array('as' => 'view/license', 'uses' => 'LicensesController@getView'));
         Route::post('{licenseId}/upload', array('as' => 'upload/license', 'uses' => 'LicensesController@postUpload'));
         Route::get('{licenseId}/deletefile/{fileId}', array('as' => 'delete/licensefile', 'uses' => 'LicensesController@getDeleteFile'));
         Route::get('{licenseId}/showfile/{fileId}', array('as' => 'show/licensefile', 'uses' => 'LicensesController@displayFile'));
         Route::get('/', array('as' => 'licenses', 'uses' => 'LicensesController@getIndex'));
     });
-    
+
     # Accessories
-        Route::group(array('prefix' => 'accessories'), function () {         
+        Route::group(array('prefix' => 'accessories'), function () {
             Route::get('create', array('as' => 'create/accessory', 'uses' => 'AccessoriesController@getCreate'));
             Route::post('create', 'AccessoriesController@postCreate');
             Route::get('{accessoryID}/edit', array('as' => 'update/accessory', 'uses' => 'AccessoriesController@getEdit'));
@@ -120,8 +120,8 @@ Route::group(array('prefix' => 'admin', 'before' => 'admin-auth', 'namespace' =>
             Route::get('{accessoryID}/view', array('as' => 'view/accessory', 'uses' => 'AccessoriesController@getView'));
             Route::get('{accessoryID}/checkout', array('as' => 'checkout/accessory', 'uses' => 'AccessoriesController@getCheckout'));
 		    Route::post('{accessoryID}/checkout', 'AccessoriesController@postCheckout');
-		    Route::get('{accessoryID}/checkin', array('as' => 'checkin/accessory', 'uses' => 'AccessoriesController@getCheckin'));
-		    Route::post('{accessoryID}/checkin', 'AccessoriesController@postCheckin');
+		    Route::get('{accessoryID}/checkin/{backto?}', array('as' => 'checkin/accessory', 'uses' => 'AccessoriesController@getCheckin'));
+		    Route::post('{accessoryID}/checkin/{backto?}', 'AccessoriesController@postCheckin');
 
             Route::get('/', array('as' => 'accessories', 'uses' => 'AccessoriesController@getIndex'));
         });
@@ -158,10 +158,10 @@ Route::group(array('prefix' => 'admin', 'before' => 'admin-auth', 'namespace' =>
             Route::post('{supplierId}/edit', 'SuppliersController@postEdit');
             Route::get('{supplierId}/delete', array('as' => 'delete/supplier', 'uses' => 'SuppliersController@getDelete'));
             Route::get('{supplierId}/view', array('as' => 'view/supplier', 'uses' => 'SuppliersController@getView'));
-        });        
-        
+        });
+
          # Categories
-        Route::group(array('prefix' => 'categories'), function () {          
+        Route::group(array('prefix' => 'categories'), function () {
             Route::get('create', array('as' => 'create/category', 'uses' => 'CategoriesController@getCreate'));
             Route::post('create', 'CategoriesController@postCreate');
             Route::get('{categoryId}/edit', array('as' => 'update/category', 'uses' => 'CategoriesController@getEdit'));
@@ -264,7 +264,7 @@ Route::group(array('prefix' => 'auth'), function () {
 
     # Account Activation
     Route::get('activate/{activationCode}', array('as' => 'activate', 'uses' => 'AuthController@getActivate'));
-    
+
     # Forgot Password
     Route::get('forgot-password', array('as' => 'forgot-password', 'uses' => 'AuthController@getForgotPassword'));
     Route::post('forgot-password', 'AuthController@postForgotPassword');
@@ -289,7 +289,7 @@ Route::group(array('prefix' => 'auth'), function () {
 
 Route::group(array('prefix' => 'account', 'before' => 'auth', 'namespace' => 'Controllers\Account'), function () {
 
-   
+
     # Profile
     Route::get('profile', array('as' => 'profile', 'uses' => 'ProfileController@getIndex'));
     Route::post('profile', 'ProfileController@postIndex');
@@ -304,7 +304,7 @@ Route::group(array('prefix' => 'account', 'before' => 'auth', 'namespace' => 'Co
     # Change Email
     Route::get('change-email', array('as' => 'change-email', 'uses' => 'ChangeEmailController@getIndex'));
     Route::post('change-email', 'ChangeEmailController@postIndex');
-    
+
      # Accept Asset
     Route::get('accept-asset/{logID}', array('as' => 'account/accept-assets', 'uses' => 'ViewAssetsController@getAcceptAsset'));
     Route::post('accept-asset/{logID}', array('as' => 'account/asset-accepted', 'uses' => 'ViewAssetsController@postAcceptAsset'));
@@ -312,7 +312,7 @@ Route::group(array('prefix' => 'account', 'before' => 'auth', 'namespace' => 'Co
     # Profile
     Route::get('requestable-assets', array('as' => 'requestable-assets', 'uses' => 'ViewAssetsController@getRequestableIndex'));
     Route::get('request-asset/{assetId}', array('as' => 'account/request-asset', 'uses' => 'ViewAssetsController@getRequestAsset'));
-    
+
     # Account Dashboard
     Route::get('/', array('as' => 'account', 'uses' => 'DashboardController@getIndex'));
 

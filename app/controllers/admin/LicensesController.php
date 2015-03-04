@@ -536,14 +536,14 @@ class LicensesController extends AdminController
     /**
     * Check the license back into inventory
     **/
-    public function getCheckin($seatId)
+    public function getCheckin($seatId = null, $backto = null)
     {
         // Check if the asset exists
         if (is_null($licenseseat = LicenseSeat::find($seatId))) {
             // Redirect to the asset management page with error
             return Redirect::to('admin/licenses')->with('error', Lang::get('admin/licenses/message.not_found'));
         }
-        return View::make('backend/licenses/checkin', compact('licenseseat'));
+        return View::make('backend/licenses/checkin', compact('licenseseat'))->with('backto',$backto);
 
     }
 
@@ -552,7 +552,7 @@ class LicensesController extends AdminController
     /**
     * Check in the item so that it can be checked out again to someone else
     **/
-    public function postCheckin($seatId)
+    public function postCheckin($seatId = null, $backto = null)
     {
         // Check if the asset exists
         if (is_null($licenseseat = LicenseSeat::find($seatId))) {
@@ -574,7 +574,7 @@ class LicensesController extends AdminController
             // Ooops.. something went wrong
             return Redirect::back()->withInput()->withErrors($validator);
         }
-
+		$return_to = $licenseseat->assigned_to;
         $logaction = new Actionlog();
         $logaction->checkedout_to = $licenseseat->assigned_to;
 
@@ -591,8 +591,12 @@ class LicensesController extends AdminController
             $logaction->user_id = Sentry::getUser()->id;
             $log = $logaction->logaction('checkin from');
 
-            // Redirect to the license page
-            return Redirect::to("admin/licenses")->with('success', Lang::get('admin/licenses/message.checkin.success'));
+			if ($backto=='user') {
+				return Redirect::to("admin/users/".$return_to.'/view')->with('success', Lang::get('admin/licenses/message.checkin.success'));
+			} else {
+				return Redirect::to("admin/licenses/".$licenseseat->license_id."/view")->with('success', Lang::get('admin/licenses/message.checkin.success'));
+			}
+
         }
 
         // Redirect to the license page with error

@@ -450,21 +450,21 @@ class AssetsController extends AdminController
             $logaction->user_id = Sentry::getUser()->id;
             $logaction->note = e(Input::get('note'));
             $log = $logaction->logaction('checkout');
-            
+
             $data['log_id'] = $logaction->id;
             $data['eula'] = $asset->getEula();
             $data['first_name'] = $user->first_name;
             $data['item_name'] = $asset->name;
             $data['require_acceptance'] = $asset->requireAcceptance();
-            
-             
+
+
             if (($asset->requireAcceptance()=='1')  || ($asset->getEula())) {
-				
+
 	            Mail::send('emails.accept-asset', $data, function ($m) use ($user) {
 	                $m->to($user->email, $user->first_name . ' ' . $user->last_name);
 	                $m->subject('Confirm asset delivery');
 	            });
-            } 
+            }
 
             // Redirect to the new asset page
             return Redirect::to("hardware")->with('success', Lang::get('admin/hardware/message.checkout.success'));
@@ -481,7 +481,7 @@ class AssetsController extends AdminController
     * @param  int  $assetId
     * @return View
     **/
-    public function getCheckin($assetId)
+    public function getCheckin($assetId, $backto = null)
     {
         // Check if the asset exists
         if (is_null($asset = Asset::find($assetId))) {
@@ -489,7 +489,7 @@ class AssetsController extends AdminController
             return Redirect::to('hardware')->with('error', Lang::get('admin/hardware/message.not_found'));
         }
 
-        return View::make('backend/hardware/checkin', compact('asset'));
+        return View::make('backend/hardware/checkin', compact('asset'))->with('backto', $backto);
     }
 
 
@@ -499,7 +499,7 @@ class AssetsController extends AdminController
     * @param  int  $assetId
     * @return View
     **/
-    public function postCheckin($assetId)
+    public function postCheckin($assetId = null, $backto = null)
     {
         // Check if the asset exists
         if (is_null($asset = Asset::find($assetId))) {
@@ -511,11 +511,15 @@ class AssetsController extends AdminController
             $user = User::find($asset->assigned_to);
         }
 
+        // This is just used for the redirect
+        $return_to = $asset->assigned_to;
+
         $logaction = new Actionlog();
         $logaction->checkedout_to = $asset->assigned_to;
 
         // Update the asset data to null, since it's being checked in
         $asset->assigned_to            		= NULL;
+
 
         // Was the asset updated?
         if($asset->save()) {
@@ -527,8 +531,13 @@ class AssetsController extends AdminController
             $logaction->user_id = Sentry::getUser()->id;
             $log = $logaction->logaction('checkin from');
 
-            // Redirect to the new asset page
-            return Redirect::to("hardware")->with('success', Lang::get('admin/hardware/message.checkin.success'));
+
+			if ($backto=='user') {
+				return Redirect::to("admin/users/".$return_to.'/view')->with('success', Lang::get('admin/hardware/message.checkin.success'));
+			} else {
+				return Redirect::to("hardware")->with('success', Lang::get('admin/hardware/message.checkin.success'));
+			}
+
         }
 
         // Redirect to the asset management page with error
@@ -578,7 +587,7 @@ class AssetsController extends AdminController
 
         if ($settings->qr_code == '1') {
             $asset = Asset::find($assetId);
-            
+
             if (isset($asset->id,$asset->asset_tag)) {
 
                 $content = DNS2D::getBarcodePNG(route('view/hardware', $asset->id), "QRCODE",
@@ -657,8 +666,8 @@ class AssetsController extends AdminController
 		 }
 
     }
-    
-    
+
+
        /**
     *  Upload the file to the server
     *
@@ -788,10 +797,10 @@ class AssetsController extends AdminController
             return Redirect::route('hardware')->with('error', $error);
         }
     }
-    
-    
-    
-    
+
+
+
+
     /**
     *  Display bulk edit screen
     *
@@ -801,20 +810,20 @@ class AssetsController extends AdminController
     {
 
 		if (Input::has('edit_asset')) {
-			
+
 			$assets = Input::get('edit_asset');
-			
+
 			$supplier_list = array('' => '') + Supplier::orderBy('name', 'asc')->lists('name', 'id');
 	        $statuslabel_list = array('' => '') + Statuslabel::lists('name', 'id');
 	        $location_list = array('' => '') + Location::lists('name', 'id');
 		}
 
 		return View::make('backend/hardware/bulk')->with('assets',$assets)->with('supplier_list',$supplier_list)->with('statuslabel_list',$statuslabel_list)->with('location_list',$location_list);
-			 
+
     }
-    
-    
-     
+
+
+
     /**
     *  Save bulk edits
     *
@@ -824,63 +833,63 @@ class AssetsController extends AdminController
     {
 
 		if (Input::has('bulk_edit')) {
-			
+
 			$assets = Input::get('bulk_edit');
-			
+
 			if ( (Input::has('purchase_date')) ||  (Input::has('rtd_location_id')) ||  (Input::has('status_id')) )  {
-			
+
 				foreach ($assets as $key => $value) {
-					
+
 					$update_array = array();
-					
-					if (Input::has('purchase_date')) {				
+
+					if (Input::has('purchase_date')) {
 						$update_array['purchase_date'] =  e(Input::get('purchase_date'));
 					}
-					
-					if (Input::has('rtd_location_id')) {				
+
+					if (Input::has('rtd_location_id')) {
 						$update_array['rtd_location_id'] = e(Input::get('rtd_location_id'));
 					}
-					
-					if (Input::has('status_id')) {				
+
+					if (Input::has('status_id')) {
 						$update_array['status_id'] = e(Input::get('status_id'));
 					}
-								
-					
+
+
 					if (DB::table('assets')
 		            ->where('id', $key)
-		            ->update($update_array)) {		
-			            
+		            ->update($update_array)) {
+
 			            $logaction = new Actionlog();
 			            $logaction->asset_id = $key;
 			            $logaction->asset_type = 'hardware';
 			            $logaction->created_at =  date("Y-m-d h:i:s");
-			            
-			            if (Input::has('rtd_location_id')) {	
+
+			            if (Input::has('rtd_location_id')) {
 			            	$logaction->location_id = e(Input::get('rtd_location_id'));
 			            }
 			            $logaction->user_id = Sentry::getUser()->id;
 			            $log = $logaction->logaction('update');
-	                        
+
 		            }
-			          					
+
 				} // endforeach
-				
+
 				return Redirect::to("hardware")->with('success', Lang::get('admin/hardware/message.update.success'));
 
-			// no values given, nothing to update	
+			// no values given, nothing to update
 			} else {
 				return Redirect::to("hardware")->with('info',Lang::get('admin/hardware/message.update.nothing_updated'));
-				
+
 			}
 
 
 		} // endif
 
-		return Redirect::to("hardware");	
-				 
+		return Redirect::to("hardware");
+
     }
-    
-    
-    
-  
+
+
+
+
 }

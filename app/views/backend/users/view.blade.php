@@ -65,7 +65,7 @@
 
                         @endif
 
-							
+
                             <h6>@lang('admin/users/general.assets_user', array('name' => $user->first_name))</h6>
                             <br>
                             <!-- checked out assets table -->
@@ -90,7 +90,7 @@
                                         <td><a href="{{ route('view/hardware', $asset->id) }}">{{{ $asset->asset_tag }}}</a></td>
                                         <td><a href="{{ route('view/hardware', $asset->id) }}">{{{ $asset->name }}}</a></td>
 
-                                        <td> <a href="{{ route('checkin/hardware', $asset->id) }}" class="btn-flat info">Checkin</a></td>
+                                        <td> <a href="{{ route('checkin/hardware', array('assetId'=> $asset->id, 'backto'=>'user')) }}" class="btn-flat info">Checkin</a></td>
                                     </tr>
                                     @endforeach
                                 </tbody>
@@ -124,7 +124,7 @@
                                     <tr>
                                         <td><a href="{{ route('view/license', $license->id) }}">{{{ $license->name }}}</a></td>
                                         <td><a href="{{ route('view/license', $license->id) }}">{{{ mb_strimwidth($license->serial, 0, 50, "...") }}}</a></td>
-                                        <td> <a href="{{ route('checkin/license', $license->pivot->id) }}" class="btn-flat info">Checkin</a>
+                                        <td> <a href="{{ route('checkin/license', array('licenseseat_id'=> $license->pivot->id, 'backto'=>'user')) }}" class="btn-flat info">Checkin</a>
                                         </td>
                                     </tr>
                                     @endforeach
@@ -141,12 +141,12 @@
                                 </div>
                             </div>
                             @endif
-                            
-                            
-                            
-                            
+
+
+
+
                             <br><br><br>
-                            <h6>@lang('admin/accessories/general.accessories')</h6>
+                            <h6>@lang('general.accessories')</h6>
                             <br>
                             <!-- checked out licenses table -->
                             @if (count($user->accessories) > 0)
@@ -162,7 +162,6 @@
                                     @foreach ($user->accessories as $accessory)
                                     <tr>
                                         <td><a href="{{ route('view/accessory', $accessory->id) }}">{{{ $accessory->name }}}</a></td>
-                                        <td><a href="{{ route('view/accessory', $accessory->id) }}">{{{ mb_strimwidth($accessory->serial, 0, 50, "...") }}}</a></td>
                                         <td> <a href="{{ route('checkin/accessory', $accessory->pivot->id) }}" class="btn-flat info">Checkin</a>
                                         </td>
                                     </tr>
@@ -208,10 +207,10 @@
                                             <a href="{{ route('view/hardware', $log->asset_id) }}">{{{ $log->assetlog->asset_tag }}}</a>
                                         @elseif ((isset($log->assetlog->name)) && ($log->assetlog->deleted_at!=''))
                                             <del>{{{ $log->assetlog->name }}}</del> (deleted)
-                                            
+
                                         @elseif ((isset($log->accessorylog->name)) && ($log->accessorylog->deleted_at==''))
-                                            {{{ $log->accessorylog->name }}} 
-                                            
+                                            {{{ $log->accessorylog->name }}}
+
                                         @endif
                                         </td>
                                         <td>{{{ $log->adminlog->fullName() }}}</td>
@@ -229,8 +228,8 @@
                                 </div>
                             </div>
                             @endif
-                            
-                            
+
+
 
                         </div>
                     </div>
@@ -269,6 +268,6 @@
                         {{{ $user->last_login->diffForHumans() }}}</h6>
                         @endif
                     </div>
-                    
-                   
+
+
 @stop

@@ -19,8 +19,12 @@
 <div class="row form-wrapper">
 <!-- left column -->
 <div class="col-md-10 column">
+@if ($backto=='user')
+	<form class="form-horizontal" method="post" action="{{ route('checkin/hardware', array('assetId'=> $asset->id, 'backto'=>'user')) }}" autocomplete="off">
+@else
+	<form class="form-horizontal" method="post" action="{{ route('checkin/hardware', $asset->id) }}" autocomplete="off">
+@endif
 
-<form class="form-horizontal" method="post" action="" autocomplete="off">
     <!-- CSRF Token -->
     <input type="hidden" name="_token" value="{{ csrf_token() }}" />
 

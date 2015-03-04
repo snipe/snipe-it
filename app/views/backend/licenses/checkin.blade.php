@@ -21,7 +21,12 @@
 <!-- left column -->
 <div class="col-md-10 column">
 
-<form class="form-horizontal" method="post" action="" autocomplete="off">
+@if ($backto=='user')
+	<form class="form-horizontal" method="post" action="{{ route('checkin/license', array('licenseeat_id'=> $licenseseat->id, 'backto'=>'user')) }}" autocomplete="off">
+@else
+	<form class="form-horizontal" method="post" action="{{ route('checkin/license', $licenseseat->id) }}" autocomplete="off">
+@endif
+
     <!-- CSRF Token -->
     <input type="hidden" name="_token" value="{{ csrf_token() }}" />
 
