@@ -162,7 +162,7 @@
                                     @foreach ($user->accessories as $accessory)
                                     <tr>
                                         <td><a href="{{ route('view/accessory', $accessory->id) }}">{{{ $accessory->name }}}</a></td>
-                                        <td> <a href="{{ route('checkin/accessory', $accessory->pivot->id) }}" class="btn-flat info">Checkin</a>
+                                        <td> <a href="{{ route('checkin/accessory', array('accessory_id'=> $accessory->pivot->id, 'backto'=>'user')) }}" class="btn-flat info">Checkin</a>
                                         </td>
                                     </tr>
                                     @endforeach
