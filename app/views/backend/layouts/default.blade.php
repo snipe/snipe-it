@@ -19,12 +19,12 @@
 		 <!-- bootstrap -->
 	    <link href="{{ asset('assets/css/bootstrap/bootstrap.css') }}" rel="stylesheet" />
         <link href="{{ asset('assets/css/bootstrap/bootstrap-overrides.css') }}" type="text/css" rel="stylesheet" />
-        	
+
 	    <!-- global styles -->
         <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/compiled/layout.css') }}">
         <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/compiled/elements.css') }}">
         <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/compiled/icons.css') }}">
-	
+
 	    <!-- libraries -->
 	    <link rel="stylesheet" href="{{ asset('assets/css/lib/jquery-ui-1.10.2.custom.css') }}" type="text/css">
 	    <link rel="stylesheet" href="{{ asset('assets/css/lib/font-awesome.min.css') }}" type="text/css">
@@ -39,10 +39,10 @@
         <link rel="stylesheet" href="{{ asset('assets/css/compiled/dataTables.responsive.css') }}" type="text/css" media="screen" />
 
 
-	   	
+
 	    <!-- open sans font -->
 	    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
-    
+
         <!-- global header javascripts -->
         <script src="{{ asset('assets/js/jquery-latest.js') }}"></script>
         <script src="{{ asset('assets/js/jquery.dataTables.min.js') }}"></script>
@@ -66,7 +66,7 @@
         <!--[if lt IE 9]>
           <script src="{{ asset('assets/js/html5.js') }}"></script>
         <![endif]-->
-        
+
         <style>
 
         @section('styles')
@@ -78,12 +78,12 @@
 
 		@if (Setting::getSettings()->header_color)
 			.navbar-inverse {
-				background-color: {{{ Setting::getSettings()->header_color }}};		
-				background: -webkit-linear-gradient(top,  {{{ Setting::getSettings()->header_color }}} 0%,{{{ Setting::getSettings()->header_color }}} 100%);	
+				background-color: {{{ Setting::getSettings()->header_color }}};
+				background: -webkit-linear-gradient(top,  {{{ Setting::getSettings()->header_color }}} 0%,{{{ Setting::getSettings()->header_color }}} 100%);
 				border-color: {{{ Setting::getSettings()->header_color }}};
 			}
 		@endif
-		
+
         </style>
 
 
@@ -103,8 +103,8 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-    
-	            
+
+
 	            @if (Setting::getSettings()->logo)
 	            	<a class="navbar-brand" href="/" style="padding: 5px;">
 	            	<img src="/uploads/{{{ Setting::getSettings()->logo }}}">
@@ -237,8 +237,8 @@
             @endif
             </ul>
     </header>
-    
-    
+
+
     <!-- end navbar -->
     @if (Sentry::check())
     <!-- sidebar -->
@@ -295,9 +295,9 @@
             <li{{ (Request::is('reports*') ? ' class="active"><div class="pointer"><div class="arrow"></div><div class="arrow_border"></div></div>' : '>') }}
                 <a href="{{ URL::to('reports') }}"  class="dropdown-toggle">
                     <i class="fa fa-bar-chart"></i>
-                    <span>@lang('general.reports') 
+                    <span>@lang('general.reports')
                     <b class="fa fa-chevron-down"></b></span>
-                    
+
                 </a>
 
                 <ul class="submenu{{ (Request::is('reports*') ? ' active' : '') }}">
@@ -308,15 +308,16 @@
                 </ul>
             </li>
              @endif
-             
+             @if(!Sentry::getUser()->hasAccess('admin'))
               <li{{ (Request::is('account/requestable-assets') ? ' class="active"><div class="pointer"><div class="arrow"></div><div class="arrow_border"></div></div>' : '>') }}
                 <a href="{{ route('requestable-assets') }}">
                     <i class="fa fa-laptop"></i>
                     <span>@lang('admin/hardware/general.requestable')</span>
                 </a>
             </li>
-            
-            
+            @endif
+
+
 
         </ul>
     </div>
@@ -328,9 +329,9 @@
 <!-- main container -->
     <div class="content">
 
-        @if ((Sentry::check()) && (Sentry::getUser()->hasAccess('admin'))) 
+        @if ((Sentry::check()) && (Sentry::getUser()->hasAccess('admin')))
         @if (Request::is('/'))
-      
+
         <!-- upper main stats -->
         <div id="main-stats">
             <div class="row stats-row">
@@ -367,12 +368,12 @@
                         </div>
                     </div>
                 </div>
-    
+
 
         <!-- end upper main stats -->
         @endif
         @endif
-      
+
 
                 <div id="pad-wrapper">
 
@@ -392,14 +393,14 @@
         <div id="footer" class="col-md-offset-2 col-md-9 col-sm-12 col-xs-12 text-center">
 		                <div class="muted credit">
 	                  			<a target="_blank" href="http://snipeitapp.com">Snipe IT</a> is a free open source
-					  		project by 
-					  			<a target="_blank" href="http://twitter.com/snipeyhead">@snipeyhead</a>. 			
+					  		project by
+					  			<a target="_blank" href="http://twitter.com/snipeyhead">@snipeyhead</a>.
 						  		<a target="_blank" href="https://github.com/snipe/snipe-it">Fork it</a> |
 						  		<a target="_blank" href="http://docs.snipeitapp.com/">Documentation</a> |
 						  		<a href="https://crowdin.com/project/snipe-it">Help Translate It! </a> |
 						  		<a target="_blank" href="https://github.com/snipe/snipe-it/issues?state=open">Report a Bug</a>
-						  		 &nbsp; &nbsp; ({{{  Config::get('version.app_version') }}})               
-                  		</div>         	
+						  		 &nbsp; &nbsp; ({{{  Config::get('version.app_version') }}})
+                  		</div>
         </div>
     </footer>
 
