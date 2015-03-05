@@ -18,7 +18,7 @@ class AddEulaFields extends Migration {
 		});
 
 		Schema::table('categories', function ($table) {
-			$table->longText('eula_text');
+			$table->longText('eula_text')->nullable()->default(NULL);
 			$table->boolean('use_default_eula')->default(0);
 			$table->boolean('require_acceptance')->default(0);
 		});
