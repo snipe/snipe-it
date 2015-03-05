@@ -538,9 +538,7 @@ class AssetsController extends AdminController
 
         	 	if (!strtotime(Input::get('checkin_at'))) {
 					$logaction->created_at = date("Y-m-d h:i:s");
-        	 	}
-
-            	if (Input::get('checkin_at')!= date("Y-m-d")){
+        	 	} elseif (Input::get('checkin_at')!= date("Y-m-d")) {
 					$logaction->created_at = e(Input::get('checkin_at')).' 00:00:00';
 				}
         	}
