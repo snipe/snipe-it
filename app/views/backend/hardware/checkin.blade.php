@@ -46,6 +46,17 @@
             </div>
             @endif
 
+            <!-- Checkout/Checkin Date -->
+            <div class="form-group {{ $errors->has('checkin_at') ? ' has-error' : '' }}">
+                <label for="checkin_at" class="col-md-2 control-label">@lang('admin/hardware/form.checkin_date')</label>
+                <div class="input-group col-md-3">
+                    <input type="date" class="datepicker form-control" data-date-format="yyyy-mm-dd" placeholder="Checkin Date" name="checkin_at" id="checkin_at" value="{{{ Input::old('checkin_at', date('Y-m-d')) }}}">
+                    <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                {{ $errors->first('checkin_at', '<br><span class="alert-msg"><i class="fa fa-times"></i> :message</span>') }}
+                </div>
+            </div>
+
+
             <!-- Note -->
             <div class="form-group {{ $errors->has('note') ? 'error' : '' }}">
                 <label for="note" class="col-md-2 control-label">@lang('admin/hardware/form.notes')</label>

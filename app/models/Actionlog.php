@@ -7,6 +7,7 @@ class Actionlog extends Eloquent
 
     protected $table = 'asset_logs';
     public $timestamps = true;
+    protected $fillable = ['created_at'];
 
 
     public function assetlog()
@@ -23,7 +24,7 @@ class Actionlog extends Eloquent
     {
         return $this->belongsTo('License','asset_id')->withTrashed();
     }
-    
+
     public function accessorylog()
     {
         return $this->belongsTo('Accessory','accessory_id')->withTrashed();
@@ -38,8 +39,8 @@ class Actionlog extends Eloquent
     {
         return $this->belongsTo('User','checkedout_to')->withTrashed();
     }
-    
- 
+
+
 
     /**
 	* Check if the file exists, and if it does, force a download

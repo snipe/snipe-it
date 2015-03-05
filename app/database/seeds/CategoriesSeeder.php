@@ -15,6 +15,7 @@ class CategoriesSeeder extends Seeder
             'use_default_eula'	=>	0,
             'require_acceptance'	=> 0,
             'deleted_at' => NULL,
+            'eula_text'	=> NULL,
         );
 
         $date = new DateTime;
@@ -26,6 +27,7 @@ class CategoriesSeeder extends Seeder
             'use_default_eula'	=>	0,
             'require_acceptance'	=> 0,
             'deleted_at' => NULL,
+            'eula_text'	=> NULL,
         );
 
         $date = new DateTime;
@@ -37,6 +39,7 @@ class CategoriesSeeder extends Seeder
             'use_default_eula'	=>	0,
             'require_acceptance'	=> 0,
             'deleted_at' => NULL,
+            'eula_text'	=> NULL,
         );
 
         $date = new DateTime;
@@ -48,6 +51,7 @@ class CategoriesSeeder extends Seeder
             'use_default_eula'	=>	0,
             'require_acceptance'	=> 0,
             'deleted_at' => NULL,
+            'eula_text'	=> NULL,
         );
 
         $date = new DateTime;
@@ -59,6 +63,7 @@ class CategoriesSeeder extends Seeder
             'use_default_eula'	=>	0,
             'require_acceptance'	=> 0,
             'deleted_at' => NULL,
+            'eula_text'	=> NULL,
         );
 
 

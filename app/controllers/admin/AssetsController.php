@@ -415,6 +415,7 @@ class AssetsController extends AdminController
         $assigned_to = e(Input::get('assigned_to'));
 
 
+
         // Declare the rules for the form validation
         $rules = array(
             'assigned_to'   => 'required|min:1',
@@ -443,6 +444,15 @@ class AssetsController extends AdminController
         // Was the asset updated?
         if($asset->save()) {
             $logaction = new Actionlog();
+
+            if (Input::has('checkout_at')) {
+            	if (Input::get('checkout_at')!= date("Y-m-d")){
+					$logaction->created_at = e(Input::get('checkout_at')).' 00:00:00';
+				}
+        	}
+
+
+
             $logaction->asset_id = $asset->id;
             $logaction->checkedout_to = $asset->assigned_to;
             $logaction->asset_type = 'hardware';
@@ -523,6 +533,17 @@ class AssetsController extends AdminController
 
         // Was the asset updated?
         if($asset->save()) {
+
+        	 if (Input::has('checkin_at')) {
+
+        	 	if (!strtotime(Input::get('checkin_at'))) {
+					$logaction->created_at = date("Y-m-d h:i:s");
+        	 	}
+
+            	if (Input::get('checkin_at')!= date("Y-m-d")){
+					$logaction->created_at = e(Input::get('checkin_at')).' 00:00:00';
+				}
+        	}
 
             $logaction->asset_id = $asset->id;
             $logaction->location_id = NULL;

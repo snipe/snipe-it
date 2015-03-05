@@ -14,6 +14,8 @@ class Asset extends Depreciable
         'note'   			=> 'alpha_space',
         'notes'   			=> 'alpha_space',
         'pysical' 			=> 'integer',
+        'checkout_date' 	=> 'date|max:10|min:10',
+        'checkin_date' 		=> 'date|max:10|min:10',
         'supplier_id' 		=> 'integer',
         'asset_tag'   => 'required|alpha_space|min:3|max:255|unique:assets,asset_tag,{id}',
         //'serial'   			=> 'required|alpha_dash|min:3|max:255|unique:assets,serial,{id}',
@@ -29,7 +31,7 @@ class Asset extends Depreciable
     {
         return $this->model->depreciation;
     }
-    
+
     /**
     * Get uploads for this asset
     */
@@ -131,9 +133,9 @@ class Asset extends Depreciable
     {
         return $this->belongsTo('Model','model_id')->withTrashed();
     }
-    
+
     public static function getExpiringWarrantee($days = 30) {
-	    
+
 	    return Asset::where('archived','=','0')
 		->whereNotNUll('warranty_months')
 		->whereNotNUll('purchase_date')
@@ -203,26 +205,26 @@ class Asset extends Depreciable
 			return false;
 		}
     }
-    
-    public function requireAcceptance() {    
+
+    public function requireAcceptance() {
 	    return $this->model->category->require_acceptance;
     }
-    
-    public function getEula() { 
-	      
+
+    public function getEula() {
+
 	    $Parsedown = new Parsedown();
-        
+
 	    if ($this->model->category->eula_text) {
 		    return $Parsedown->text(e($this->model->category->eula_text));
 	    } elseif (Setting::getSettings()->default_eula_text) {
 		    return $Parsedown->text(e(Setting::getSettings()->default_eula_text));
 	    } else {
 		    return null;
-	    } 
-	    
+	    }
+
     }
-    
-    
+
+
 
 	/**
 	-----------------------------------------------

@@ -65,6 +65,16 @@
                 </div>
             </div>
 
+			<!-- Checkout/Checkin Date -->
+            <div class="form-group {{ $errors->has('checkout_at') ? ' has-error' : '' }}">
+                <label for="checkout_at" class="col-md-2 control-label">@lang('admin/hardware/form.checkout_date')</label>
+                <div class="input-group col-md-3">
+                    <input type="date" class="datepicker form-control" data-date-format="yyyy-mm-dd" placeholder="Checkout Date" name="checkout_at" id="checkout_at" value="{{{ Input::old('checkout_at', date('Y-m-d')) }}}">
+                    <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                {{ $errors->first('checkout_at', '<br><span class="alert-msg"><i class="fa fa-times"></i> :message</span>') }}
+                </div>
+            </div>
+
             <!-- Note -->
             <div class="form-group {{ $errors->has('note') ? 'error' : '' }}">
                 <label for="note" class="col-md-2 control-label">@lang('admin/hardware/form.notes')</label>
@@ -73,7 +83,7 @@
                     {{ $errors->first('note', '<br><span class="alert-msg"><i class="fa fa-times"></i> :message</span>') }}
                 </div>
             </div>
-            
+
             @if ($asset->requireAcceptance())
 			<div class="form-group">
                 <div class="col-md-9 col-md-offset-2">
@@ -81,8 +91,8 @@
                 </div>
             </div>
             @endif
-            
-            
+
+
             @if ($asset->getEula())
             <div class="form-group">
 
