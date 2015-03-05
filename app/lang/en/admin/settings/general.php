@@ -6,6 +6,7 @@ return array(
 	'auto_increment_assets'		=> 'Generate auto-incrementing asset IDs',
 	'auto_increment_prefix'		=> 'Prefix (optional)',
 	'auto_incrementing_help'    => 'Enable auto-incrementing asset IDs first to set this',
+	'barcode_type'				=> 'Barcode Type',
 	'default_eula_text'			=> 'Default EULA',
 	'default_eula_help_text'	=> 'You can also associate custom EULAs to specific asset categories.',
     'display_asset_name'        => 'Display Asset Name',

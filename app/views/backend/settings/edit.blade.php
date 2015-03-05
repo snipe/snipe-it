@@ -60,37 +60,37 @@ padding: 0px 20px;
 										{{ $errors->first('site_name', '<br><span class="alert-msg">:message</span>') }}
 	                                    </div>
                                     </div>
-                                    
+
                                     <div class="form-group {{ $errors->has('logo') ? 'has-error' : '' }}">
-	                                    
+
 	                                    <div class="col-md-3">
 										 	{{ Form::label('logo', Lang::get('admin/settings/general.logo')) }}
 	                                    </div>
-	                                    <div class="col-md-9">				                						             
+	                                    <div class="col-md-9">
 						                    {{ Form::file('logo') }}
 						                    {{ $errors->first('logo', '<br><span class="alert-msg">:message</span>') }}
 						                    {{ Form::checkbox('clear_logo', '1', Input::old('clear_logo')) }} Remove
 	                                    </div>
-						                
+
 						            </div>
-						            
-						            
+
+
 						            <div class="form-group {{ $errors->has('site_name') ? 'error' : '' }}">
 	                                    <div class="col-md-3">
                                         {{ Form::label('alert_email', Lang::get('admin/settings/general.alert_email')) }}
 	                                    </div>
 	                                    <div class="col-md-9">
 										{{ Form::text('alert_email', Input::old('alert_email', $setting->alert_email), array('class' => 'form-control')) }}
-										
-										
+
+
 										{{ Form::checkbox('alerts_enabled', '1', Input::old('alerts_enabled', $setting->alerts_enabled)) }}
 										@Lang('admin/settings/general.alerts_enabled')
 
-										
+
 										{{ $errors->first('alert_email', '<br><span class="alert-msg">:message</span>') }}
 	                                    </div>
                                     </div>
-                                    
+
 
 									<div class="form-group {{ $errors->has('header_color') ? 'error' : '' }}">
 										<div class="col-md-3">
@@ -115,7 +115,7 @@ padding: 0px 20px;
 
 
                                     <div class="checkbox col-md-offset-3">
-	                                    
+
 										<label>
 											{{ Form::checkbox('display_asset_name', '1', Input::old('display_asset_name', $setting->display_asset_name)) }}
 											@lang('admin/settings/general.display_asset_name')
@@ -149,7 +149,7 @@ padding: 0px 20px;
 											@lang('admin/settings/general.auto_increment_assets')
 										</label>
                                     </div>
-                   
+
                                     <div class="form-group {{ $errors->has('auto_increment_prefix') ? 'error' : '' }}">
                                             <div class="col-md-3">
 	                                            {{ Form::label('auto_increment_prefix', Lang::get('admin/settings/general.auto_increment_prefix')) }}
@@ -171,20 +171,26 @@ padding: 0px 20px;
 
                                     @if ($is_gd_installed)
 
-                                    		<div class="checkbox col-md-offset-3">
+                                    		<div class="checkbox col-md-offset-3 col-md-9" style="padding-bottom: 10px;">
 												<label>
 													{{ Form::checkbox('qr_code', '1', Input::old('qr_code', $setting->qr_code)) }}
 													@lang('admin/settings/general.display_qr')
 												</label>
 											</div>
 
-                                    @else
-                                            <span class="help-inline col-md-offset-3">
-                                                @lang('admin/settings/general.php_gd_warning')
-                                                <br>
-                                                @lang('admin/settings/general.php_gd_info')
-                                            </span>
-                                    @endif
+										<!-- Code type -->
+										<div class="form-group{{ $errors->has('barcode_type') ? ' has-error' : '' }}">
+											<div class="col-md-3">
+											 {{ Form::label('barcode_type', Lang::get('admin/settings/general.barcode_type')) }}
+											 </div>
+
+												<div class="col-md-9">
+												 {{ Form::barcode_types('barcode_type', Input::old('barcode_type', $setting->barcode_type), 'select2') }}
+
+												{{ $errors->first('barcode_type', '<br><span class="alert-msg"><i class="fa fa-times"></i> :message</span>') }}
+												</div>
+										</div>
+
 
 
 									<div class="form-group {{ $errors->has('qr_text') ? 'error' : '' }}">
@@ -204,7 +210,17 @@ padding: 0px 20px;
 	                                    </div>
 
                                     </div>
-									
+
+                                    @else
+                                            <span class="help-inline col-md-offset-3 col-md-12">
+                                                @lang('admin/settings/general.php_gd_warning')
+                                                <br>
+                                                @lang('admin/settings/general.php_gd_info')
+                                            </span>
+                                    @endif
+
+
+
 									<hr>
 									<div class="form-group {{ $errors->has('default_eula_text') ? 'error' : '' }}">
 	                                    <div class="col-md-3">
@@ -213,12 +229,12 @@ padding: 0px 20px;
 	                                    <div class="col-md-9">
 										{{ Form::textarea('default_eula_text', Input::old('default_eula_text', $setting->default_eula_text), array('class' => 'form-control')) }}
 										{{ $errors->first('default_eula_text', '<br><span class="alert-msg">:message</span>') }}
-										
+
 										 <p class="help-inline">@lang('admin/settings/general.default_eula_help_text')</p>
 										 <p class="help-inline">@lang('admin/settings/general.eula_markdown')</p>
-										 
+
 	                                    </div>
-	                                   
+
 
                                     </div>
 

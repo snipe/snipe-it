@@ -273,3 +273,29 @@ Form::macro('countries', function ($name = "country", $selected = null, $class =
     return $select;
 
 });
+
+
+/**
+* Country macro
+* Generates the dropdown menu of countries for the profile form
+*/
+Form::macro('barcode_types', function ($name = "barcode_type", $selected = null, $class = null) {
+
+    $barcode_types = array(
+    'QRCODE'=>"QR Code",
+    'PDF417'=>'PDF417',
+    'DATAMATRIX'=>'DATAMATRIX'
+    );
+
+    $select = '<select name="'.$name.'" class="'.$class.'">';
+
+    foreach ($barcode_types as $code => $codename) {
+        $select .= '<option value="'.$code.'"'.($selected == $code ? ' selected="selected"' : '').'>'.$codename.'</option> ';
+    }
+
+    $select .= '</select>';
+
+    return $select;
+
+});
+

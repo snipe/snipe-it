@@ -80,7 +80,7 @@ class SettingsController extends AdminController
             // Ooops.. something went wrong
             return Redirect::back()->withInput()->withErrors($validator);
         }
-        
+
         if (Input::get('clear_logo')=='1') {
 	        $setting->logo = NULL;
         } elseif (Input::file('logo')) {
@@ -93,7 +93,7 @@ class SettingsController extends AdminController
                 })->save($path);
                 $setting->logo = $file_name;
         }
-            
+
 
         // Update the asset data
             $setting->id = '1';
@@ -102,6 +102,7 @@ class SettingsController extends AdminController
             $setting->display_checkout_date = e(Input::get('display_checkout_date', '0'));
             $setting->per_page = e(Input::get('per_page'));
             $setting->qr_code = e(Input::get('qr_code', '0'));
+            $setting->barcode_type = e(Input::get('barcode_type'));
             $setting->display_eol = e(Input::get('display_eol', '0'));
             $setting->load_remote = e(Input::get('load_remote', '0'));
             $setting->qr_text = e(Input::get('qr_text'));
@@ -111,7 +112,7 @@ class SettingsController extends AdminController
             $setting->alerts_enabled = e(Input::get('alerts_enabled', '0'));
             $setting->header_color = e(Input::get('header_color'));
             $setting->default_eula_text = e(Input::get('default_eula_text'));
-            
+
 
             // Was the asset updated?
             if($setting->save()) {
