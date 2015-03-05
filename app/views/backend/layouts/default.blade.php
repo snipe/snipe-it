@@ -38,6 +38,8 @@
         <link rel="stylesheet" href="{{ asset('assets/css/lib/jquery.dataTables.css') }}" type="text/css" media="screen" />
         <link rel="stylesheet" href="{{ asset('assets/css/compiled/dataTables.responsive.css') }}" type="text/css" media="screen" />
 
+        <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/compiled/print.css') }}" media="print" />
+
 
 
 	    <!-- open sans font -->

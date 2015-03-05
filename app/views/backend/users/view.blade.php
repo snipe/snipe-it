@@ -14,9 +14,9 @@
             <div class="row header">
                 <div class="col-md-8">
                     @if ($user->avatar)
-                        <img src="/uploads/avatars/{{{ $user->avatar }}}" class="avatar img-circle">
+                        <img src="/uploads/avatars/{{{ $user->avatar }}}" class="avatar img-circle hidden-print">
                     @else
-                        <img src="{{{ $user->gravatar() }}}" class="avatar img-circle">
+                        <img src="{{{ $user->gravatar() }}}" class="avatar img-circle hidden-print">
                     @endif
                     <h3 class="name">{{{ $user->fullName() }}}
                     @if ($user->employee_num)
@@ -33,7 +33,7 @@
                         <!--<a href="{{ route('update/user', $user->id) }}" class="btn btn-warning pull-right edit"><i class="fa fa-pencil"></i> @lang('button.edit') This User</a>-->
                     <div class="row header">
 
-                        <div class="btn-group pull-right">
+                        <div class="btn-group pull-right hidden-print">
                             <button class="btn btn-default" data-toggle="dropdown">@lang('button.actions')
                             <span class="caret"></span>
                             </button>
@@ -77,7 +77,7 @@
                                         <th class="col-md-3">Asset Type</th>
                                         <th class="col-md-2">Asset Tag</th>
                                         <th class="col-md-2">Name</th>
-                                        <th class="col-md-1">Actions</th>
+                                        <th class="col-md-1 hidden-print">Actions</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -90,7 +90,7 @@
                                         <td><a href="{{ route('view/hardware', $asset->id) }}">{{{ $asset->asset_tag }}}</a></td>
                                         <td><a href="{{ route('view/hardware', $asset->id) }}">{{{ $asset->name }}}</a></td>
 
-                                        <td> <a href="{{ route('checkin/hardware', array('assetId'=> $asset->id, 'backto'=>'user')) }}" class="btn-flat info">Checkin</a></td>
+                                        <td class="hidden-print"> <a href="{{ route('checkin/hardware', array('assetId'=> $asset->id, 'backto'=>'user')) }}" class="btn-flat info">Checkin</a></td>
                                     </tr>
                                     @endforeach
                                 </tbody>
@@ -116,7 +116,7 @@
                                     <tr>
                                         <th class="col-md-5">Name</th>
                                         <th class="col-md-6">Serial</th>
-                                        <th class="col-md-1">Actions</th>
+                                        <th class="col-md-1 hidden-print">Actions</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -124,7 +124,7 @@
                                     <tr>
                                         <td><a href="{{ route('view/license', $license->id) }}">{{{ $license->name }}}</a></td>
                                         <td><a href="{{ route('view/license', $license->id) }}">{{{ mb_strimwidth($license->serial, 0, 50, "...") }}}</a></td>
-                                        <td> <a href="{{ route('checkin/license', array('licenseseat_id'=> $license->pivot->id, 'backto'=>'user')) }}" class="btn-flat info">Checkin</a>
+                                        <td class="hidden-print"> <a href="{{ route('checkin/license', array('licenseseat_id'=> $license->pivot->id, 'backto'=>'user')) }}" class="btn-flat info">Checkin</a>
                                         </td>
                                     </tr>
                                     @endforeach
@@ -155,14 +155,14 @@
                                 <thead>
                                     <tr>
                                         <th class="col-md-5">Name</th>
-                                        <th class="col-md-1">Actions</th>
+                                        <th class="col-md-1 hidden-print">Actions</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     @foreach ($user->accessories as $accessory)
                                     <tr>
                                         <td><a href="{{ route('view/accessory', $accessory->id) }}">{{{ $accessory->name }}}</a></td>
-                                        <td> <a href="{{ route('checkin/accessory', array('accessory_id'=> $accessory->pivot->id, 'backto'=>'user')) }}" class="btn-flat info">Checkin</a>
+                                        <td class="hidden-print"> <a href="{{ route('checkin/accessory', array('accessory_id'=> $accessory->pivot->id, 'backto'=>'user')) }}" class="btn-flat info">Checkin</a>
                                         </td>
                                     </tr>
                                     @endforeach
@@ -190,10 +190,10 @@
                             <table class="table table-hover">
                                 <thead>
                                     <tr>
-                                        <th class="col-md-3">Date</th>
-                                        <th class="col-md-3"><span class="line"></span>@lang('table.action')</th>
-                                        <th class="col-md-3"><span class="line"></span>@lang('general.asset')</th>
-                                        <th class="col-md-3"><span class="line"></span>@lang('table.by')</th>
+                                        <th class="col-md-2">Date</th>
+                                        <th class="col-md-2"><span class="line"></span>@lang('table.action')</th>
+                                        <th class="col-md-2"><span class="line"></span>@lang('general.asset')</th>
+                                        <th class="col-md-2"><span class="line"></span>@lang('table.by')</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -232,10 +232,10 @@
 
 
                         </div>
-                    </div>
+
 
                     <!-- side address column -->
-                    <div class="col-md-3 address pull-right">
+                    <div class="col-md-3 address pull-right hidden-print">
 
 
 
