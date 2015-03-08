@@ -65,7 +65,36 @@
 
                         @endif
 
+                            <h6>@lang('general.groups')</h6>
+                            <!-- groups table -->
+                            @if (count($user->groups) > 0)
+                            <div class="table-responsive">
+                                <table class="display">
+                                    <thead>
+                                        <tr>
+                                            <th class="col-md-3">Name</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach ($user->groups as $group)
+                                        <tr>
+                                          <td><a href="{{ route('update/group', $group->id) }}">{{{ $group->name }}}</a></td>
+                                        </tr>
+                                        @endforeach
+                                    </tbody>
+                                </table>
+                            </div>
+                            @else
 
+                            <div class="col-md-12">
+                                <div class="alert alert-info alert-block">
+                                    <i class="fa fa-info-circle"></i>
+                                    @lang('general.no_results')
+                                </div>
+                            </div>
+                            @endif
+
+							<br><br><br>
                             <h6>@lang('admin/users/general.assets_user', array('name' => $user->first_name))</h6>
                             <br>
                             <!-- checked out assets table -->
