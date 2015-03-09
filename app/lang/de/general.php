@@ -3,8 +3,8 @@
 return array(
 
 
-    'accessories'			=> 'Accessories',
-    'accessory'				=> 'Accessory',
+    'accessories'			=> 'Zubehör',
+    'accessory'				=> 'Zubehör',
     'address'				=> 'Supplier Address',
     'admin'					=> 'Administrator',
     'all_assets'			=> 'Alle Assets',
@@ -89,7 +89,7 @@ return array(
     'suppliers'  			=> 'Lieferanten',
     'total_assets'			=> 'Gesamte Assets',
     'total_licenses'		=> 'Lizenzen insgesamt',
-    'type'  				=> 'Type',
+    'type'  				=> 'Typ',
     'undeployable'			=> 'Nicht herausgebbar',
     'unknown_admin'			=> 'Unbekannter Administrator',
     'user'					=> 'Nutzer',

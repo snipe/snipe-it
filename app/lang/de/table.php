@@ -5,6 +5,6 @@ return array(
     'actions'	 	=> 'Aktionen',
     'action' 		=> 'Aktion',
     'by'      		=> 'Von',
-    'item' 			=> 'Item',
+    'item' 			=> 'Gegenstand',
 
 );

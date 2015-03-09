@@ -19,7 +19,7 @@ return array(
         'suspend'   => 'Gebruiker werd succesvol uitgeschakeld.',
         'unsuspend' => 'Gebruiker werd succesvol ingeschakeld.',
         'restored'  => 'Gebruiker werd succesvol opnieuw geactiveerd.',
-+       'import'    => 'Users imported successfully.',
+        'import'    => 'Users imported successfully.',
     ),
 
     'error' => array(
@@ -28,6 +28,7 @@ return array(
         'delete' => 'Er was een probleem tijdens het verwijderen van de gebruiker. Probeer opnieuw, aub.',
         'unsuspend' => 'Er was een probleem tijdens het opnieuw inschakelen van de gebruiker. Probeer opnieuw, aub.',
         'import'    => 'There was an issue importing users. Please try again.',
+        'asset_already_accepted' => 'This asset has already been accepted.',
     ),
 
 );

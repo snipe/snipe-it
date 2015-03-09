@@ -3,8 +3,8 @@
 return array(
 
 
-    'accessories'			=> 'Accessories',
-    'accessory'				=> 'Accessory',
+    'accessories'			=> 'Аксессуары',
+    'accessory'				=> 'Аксессуар',
     'address'				=> 'Адрес',
     'admin'					=> 'Администратор',
     'all_assets'			=> 'Все активы',
@@ -34,7 +34,7 @@ return array(
     'currency'  			=> 'Руб.',
     'current'  				=> 'Текущий',
     'custom_report'         => 'Пользовательский отчет по активам',
-    'dashboard'				=> 'Dashboard',
+    'dashboard'				=> 'Панель мониторинга',
     'date'					=> 'Дата',
     'delete'  				=> 'Удалить',
     'deleted'  				=> 'Удалено',
@@ -89,7 +89,7 @@ return array(
     'suppliers'  			=> 'Поставщики',
     'total_assets'			=> 'Всего активов',
     'total_licenses'		=> 'Всего лицензий',
-    'type'  				=> 'Type',
+    'type'  				=> 'Тип',
     'undeployable'			=> 'Не развертываемый',
     'unknown_admin'			=> 'Неизвестный администратор',
     'user'					=> 'Пользователь',

@@ -19,7 +19,7 @@ return array(
         'suspend'   => 'L’utilisateur a été suspendu avec succès.',
         'unsuspend' => 'L’utilisateur a été activé avec succès.',
         'restored'  => 'L’utilisateur a été restauré avec succès.',
-+       'import'    => 'Users imported successfully.',
+        'import'    => 'Users imported successfully.',
     ),
 
     'error' => array(
@@ -28,6 +28,7 @@ return array(
         'delete' => 'Un problème a eu lieu pendant la suppression de l\'utilisateur. Veuillez essayer à nouveau.',
         'unsuspend' => 'Un problème a eu lieu pendant la réhabilitation de l\'utilisateur. Veuillez essayer à nouveau.',
         'import'    => 'There was an issue importing users. Please try again.',
+        'asset_already_accepted' => 'This asset has already been accepted.',
     ),
 
 );

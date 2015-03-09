@@ -19,7 +19,7 @@ return array(
         'suspend'   => 'Pengguna berjaya digantung.',
         'unsuspend' => 'Pengguna berjaya dilepaskan.',
         'restored'  => 'Pengguna berjaya dimasukkan semula.',
-+       'import'    => 'Users imported successfully.',
+        'import'    => 'Users imported successfully.',
     ),
 
     'error' => array(
@@ -28,6 +28,7 @@ return array(
         'delete' => 'Ada isu semasa menghapuskan pengguna. Sila cuba lagi.',
         'unsuspend' => 'Ada isu semasa melepakan pengguna. Sila cuba lagi. ',
         'import'    => 'There was an issue importing users. Please try again.',
+        'asset_already_accepted' => 'This asset has already been accepted.',
     ),
 
 );

@@ -2,35 +2,35 @@
 
 return array(
 
-    'does_not_exist' => 'Category does not exist.',
-    'assoc_users'	 => 'This accessory currently has :count items checked out to users. Please check in the accessories and and try again. ',
+    'does_not_exist' => 'Diese Kategorie existiert nicht.',
+    'assoc_users'	 => 'Dieses Zubehör ist derzeit an :count  Benutzern zur Verwendung ausgegeben worden. Bitte buchen Sie das Zubehör wieder ein und versuchen es dann noch Einmal. ',
 
     'create' => array(
-        'error'   => 'Category was not created, please try again.',
-        'success' => 'Category created successfully.'
+        'error'   => 'Die Kategorie wurde nicht erstellt, bitte versuchen Sie es erneut.',
+        'success' => 'Die Kategorie wurde erfolgreich erstellt.'
     ),
 
     'update' => array(
-        'error'   => 'Category was not updated, please try again',
-        'success' => 'Category updated successfully.'
+        'error'   => 'Die Kategorie konnte nicht aktualisiert werden, bitte versuchen Sie es erneut',
+        'success' => 'Die Kategorie wurde erfolgreich aktualisiert.'
     ),
 
     'delete' => array(
-        'confirm'   => 'Are you sure you wish to delete this category?',
-        'error'   => 'There was an issue deleting the category. Please try again.',
-        'success' => 'The category was deleted successfully.'
+        'confirm'   => 'Sind Sie sicher, dass Sie diese Kategorie löschen wollen?',
+        'error'   => 'Beim Löschen der Kategorie ist ein Problem aufgetreten. Bitte versuchen Sie es erneut.',
+        'success' => 'Die Kategorie wurde erfolgreich gelöscht.'
     ),
     
      'checkout' => array(
-        'error'   		=> 'Accessory was not checked out, please try again',
-        'success' 		=> 'Accessory checked out successfully.',
-        'user_does_not_exist' => 'That user is invalid. Please try again.'
+        'error'   		=> 'Zubehör konnte nicht ausgebucht werden, bitte versuchen Sie es erneut',
+        'success' 		=> 'Zubehör erfolgreich ausgebucht.',
+        'user_does_not_exist' => 'Dieser Benutzer existiert nicht. Bitte versuchen Sie es erneut.'
     ),
 
     'checkin' => array(
-        'error'   		=> 'Accessory was not checked in, please try again',
-        'success' 		=> 'Accessory checked in successfully.',
-        'user_does_not_exist' => 'That user is invalid. Please try again.'
+        'error'   		=> 'Das Zubehör wurde nicht erfolgreich eingebucht, bitte versuchen Sie es erneut',
+        'success' 		=> 'Zubehör erfolgreich eingebucht.',
+        'user_does_not_exist' => 'Dieser Benutzer existiert nicht. Bitte versuchen Sie es erneut.'
     )
 
 

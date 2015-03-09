@@ -23,8 +23,8 @@ return array(
     ),
     
     'restore' => array(
-        'error'   		=> 'Model was not restored, please try again',
-        'success' 		=> 'Model restored successfully.'
+        'error'   		=> 'Модель не была восстановлена, повторите попытку',
+        'success' 		=> 'Модель успешно восстановлена.'
     ),
 
 );

@@ -19,7 +19,7 @@ return array(
         'suspend'   => 'Utilizatorul a fost suspendat.',
         'unsuspend' => 'Utilizatorul a fost activat.',
         'restored'  => 'Utilizatorul a fost restaurat.',
-+       'import'    => 'Users imported successfully.',
+        'import'    => 'Users imported successfully.',
     ),
 
     'error' => array(
@@ -28,6 +28,7 @@ return array(
         'delete' => 'A aparut o problema la stergerea utilizatorului. Incercati iar.',
         'unsuspend' => 'A aparut o problema la reactivarea utilizatorului. Incercati iar.',
         'import'    => 'There was an issue importing users. Please try again.',
+        'asset_already_accepted' => 'This asset has already been accepted.',
     ),
 
 );

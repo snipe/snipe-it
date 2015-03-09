@@ -19,7 +19,7 @@ return array(
         'suspend'   => 'Vellykket deaktivering av bruker.',
         'unsuspend' => 'Vellykket aktivering av bruker.',
         'restored'  => 'Vellykket gjenopprettelse av bruker.',
-+       'import'    => 'Users imported successfully.',
+        'import'    => 'Vellykket import av brukere.',
     ),
 
     'error' => array(
@@ -27,7 +27,8 @@ return array(
         'update' => 'Det oppstod et problem under oppdatering av bruker. Prøv igjen.',
         'delete' => 'Det oppstod et problem under sletting av bruker. Prøv igjen.',
         'unsuspend' => 'Det oppstod et problem under aktivering av bruker. Prøv igjen.',
-        'import'    => 'There was an issue importing users. Please try again.',
+        'import'    => 'Det oppstod et problem under import av brukere. Prøv igjen.',
+        'asset_already_accepted' => 'This asset has already been accepted.',
     ),
 
 );

@@ -18,7 +18,7 @@ return array(
     'last_login'  			=> 'Последнее посещение',
     'last_name'  			=> 'Фамилия',
     'location'  			=> 'Расположение',
-    'lock_passwords'		=> 'Login details cannot be changed on this installation.',
+    'lock_passwords'		=> 'Подробности логина не могут быть изменены на этой конфигурации.',
     'manager' 				=> 'Руководитель',
     'name' 					=> 'Имя',
     'password_confirm' 		=> 'Подтверждение пароля',

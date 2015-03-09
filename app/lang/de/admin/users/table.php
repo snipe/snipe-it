@@ -18,7 +18,7 @@ return array(
     'last_login'  			=> 'Letzte Anmeldung',
     'last_name'  			=> 'Familienname',
     'location'  			=> 'Ort',
-    'lock_passwords'		=> 'Login details cannot be changed on this installation.',
+    'lock_passwords'		=> 'Die Login-Daten können auf dieser Installation nicht geändert werden.',
     'manager' 				=> 'Manager',
     'name' 					=> 'Name',
     'password_confirm' 		=> 'Kennwort bestätigen',

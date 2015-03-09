@@ -19,7 +19,7 @@ return array(
         'suspend'   => 'Der Benutzer wurde erfolgreich deaktiviert.',
         'unsuspend' => 'Der Benutzer wurde erfolgreich reaktiviert.',
         'restored'  => 'Benutzer wurde erfolgreich wiederhergestellt.',
-+       'import'    => 'Benutzer erfolgreich Importiert.',
+        'import'    => 'Benutzer erfolgreich Importiert.',
     ),
 
     'error' => array(
@@ -28,6 +28,7 @@ return array(
         'delete' => 'Beim Entfernen des Benutzers ist ein Fehler aufgetreten. Bitte versuchen Sie es erneut.',
         'unsuspend' => 'Es gab ein Problem beim reaktivieren des Benutzers. Bitte versuche es erneut.',
         'import'    => 'Es gab ein Problem beim importieren der Benutzer. Bitte noch einmal versuchen.',
+        'asset_already_accepted' => 'This asset has already been accepted.',
     ),
 
 );

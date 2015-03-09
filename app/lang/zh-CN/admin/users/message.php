@@ -19,7 +19,7 @@ return array(
         'suspend'   => '用户已经成功停用',
         'unsuspend' => '用户解除停用',
         'restored'  => '用户成功被恢复。',
-+       'import'    => 'Users imported successfully.',
+        'import'    => 'Users imported successfully.',
     ),
 
     'error' => array(
@@ -28,6 +28,7 @@ return array(
         'delete' => '删除用户过程中出现了一点儿问题，请重试。',
         'unsuspend' => '恢复停用用户的过程中出现了一点儿问题，请重试。',
         'import'    => 'There was an issue importing users. Please try again.',
+        'asset_already_accepted' => 'This asset has already been accepted.',
     ),
 
 );

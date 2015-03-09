@@ -6,6 +6,8 @@ return array(
 	'bulk_update_help'	=> 'Diese Eingabemaske erlaubt Ihnen die Aktualisierung von mehrere Assets zugleich. Füllen Sie die Felder aus welche Sie ändern möchten. Alle leeren Felder bleiben unverändert. ',
 	'bulk_update_warn'	=> 'Sie sind dabei die Eigenschaften von :asset_count assets zu bearbeiten.',
     'checkedout_to'		=> 'Herausgegeben an',
+    'checkout_date'		=> 'Checkout Date',
+    'checkin_date'		=> 'Checkin Date',
     'checkout_to'		=> 'Herausgeben an',
     'cost'				=> 'Einkaufspreis',
     'create'			=> 'Asset erstellen',

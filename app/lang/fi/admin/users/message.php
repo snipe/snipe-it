@@ -19,7 +19,7 @@ return array(
         'suspend'   => 'Käyttäjä jäädytettiin onnistuneesti.',
         'unsuspend' => 'Käyttäjän jäädytys poistettiin onnistuneesti.',
         'restored'  => 'Käyttäjä palautettiin onnistuneesti.',
-+       'import'    => 'Users imported successfully.',
+        'import'    => 'Users imported successfully.',
     ),
 
     'error' => array(
@@ -28,6 +28,7 @@ return array(
         'delete' => 'Käyttäjän poistamisessa tapahtui virhe. Yritä uudelleen.',
         'unsuspend' => 'Käyttäjän jäädytyksen poistossa tapahtui virhe. Yritä uudelleen.',
         'import'    => 'There was an issue importing users. Please try again.',
+        'asset_already_accepted' => 'This asset has already been accepted.',
     ),
 
 );

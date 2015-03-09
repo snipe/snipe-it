@@ -2,35 +2,35 @@
 
 return array(
 
-    'does_not_exist' => 'Category does not exist.',
-    'assoc_users'	 => 'This accessory currently has :count items checked out to users. Please check in the accessories and and try again. ',
+    'does_not_exist' => 'Kategori eksisterer ikke.',
+    'assoc_users'	 => 'Dette tilbehøret har for øyeblikket :count enheter utsjekket til brukere. Sjekk inn tilbehøret og prøv igjen. ',
 
     'create' => array(
-        'error'   => 'Category was not created, please try again.',
-        'success' => 'Category created successfully.'
+        'error'   => 'Kategori ble ikke opprettet. Prøv igjen.',
+        'success' => 'Vellykket opprettelse av kategori.'
     ),
 
     'update' => array(
-        'error'   => 'Category was not updated, please try again',
-        'success' => 'Category updated successfully.'
+        'error'   => 'Kategori ble ikke opprettet. Prøv igjen',
+        'success' => 'Vellykket opprettelse av kategori.'
     ),
 
     'delete' => array(
-        'confirm'   => 'Are you sure you wish to delete this category?',
-        'error'   => 'There was an issue deleting the category. Please try again.',
-        'success' => 'The category was deleted successfully.'
+        'confirm'   => 'Er du sikker på at du vil slette denne kategorien?',
+        'error'   => 'Det oppstod et problem under sletting av kategori. Prøv igjen.',
+        'success' => 'Vellykket sletting av kategori.'
     ),
     
      'checkout' => array(
-        'error'   		=> 'Accessory was not checked out, please try again',
-        'success' 		=> 'Accessory checked out successfully.',
-        'user_does_not_exist' => 'That user is invalid. Please try again.'
+        'error'   		=> 'Tilbehør ble ikke sjekket ut. Prøv igjen',
+        'success' 		=> 'Vellykket utsjekking av tilbehør.',
+        'user_does_not_exist' => 'Denne brukeren er ugyldig. Prøv igjen.'
     ),
 
     'checkin' => array(
-        'error'   		=> 'Accessory was not checked in, please try again',
-        'success' 		=> 'Accessory checked in successfully.',
-        'user_does_not_exist' => 'That user is invalid. Please try again.'
+        'error'   		=> 'Tilbehør ble ikke sjekket inn. Prøv igjen',
+        'success' 		=> 'Vellykket innsjekk av tilbehør.',
+        'user_does_not_exist' => 'Denne brukeren er ugyldig. Prøv igjen.'
     )
 
 

@@ -19,7 +19,7 @@ return array(
         'suspend'   => 'User was successfully suspended.',
         'unsuspend' => 'User was successfully unsuspended.',
         'restored'  => 'User was successfully restored.',
-+       'import'    => 'Users imported successfully.',
+        'import'    => 'Users imported successfully.',
     ),
 
     'error' => array(
@@ -28,6 +28,7 @@ return array(
         'delete' => 'There was an issue deleting the user. Please try again.',
         'unsuspend' => 'There was an issue unsuspending the user. Please try again.',
         'import'    => 'There was an issue importing users. Please try again.',
+        'asset_already_accepted' => 'This asset has already been accepted.',
     ),
 
 );

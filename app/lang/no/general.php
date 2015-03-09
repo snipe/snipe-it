@@ -3,8 +3,8 @@
 return array(
 
 
-    'accessories'			=> 'Accessories',
-    'accessory'				=> 'Accessory',
+    'accessories'			=> 'Tilbehør',
+    'accessory'				=> 'Tilbehør',
     'address'				=> 'Adresse',
     'admin'					=> 'Admin',
     'all_assets'			=> 'Alle eiendeler',
@@ -34,7 +34,7 @@ return array(
     'currency'  			=> '$',
     'current'  				=> 'Nåværende',
     'custom_report'         => 'Tilpasset eiendelsrapport',
-    'dashboard'				=> 'Dashboard',
+    'dashboard'				=> 'Kontrollpanel',
     'date'					=> 'Dato',
     'delete'  				=> 'Slett',
     'deleted'  				=> 'Slettet',

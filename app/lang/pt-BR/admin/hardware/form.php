@@ -6,6 +6,8 @@ return array(
 	'bulk_update_help'	=> 'Este formulário lhe permite atualizar múltiplos bens de uma vez só. Apenas preencha os campos que você precisa alterá-los. Qualquer campo deixado em branco permanecerá inalterado. ',
 	'bulk_update_warn'	=> 'Você está prestes a editar as propriedades de :asset_count bens.',
     'checkedout_to'		=> 'Alocado para',
+    'checkout_date'		=> 'Checkout Date',
+    'checkin_date'		=> 'Checkin Date',
     'checkout_to'		=> 'Alocado para',
     'cost'				=> 'Custo da Compra',
     'create'			=> 'Criar Bem',

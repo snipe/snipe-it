@@ -3,7 +3,7 @@
 return array(
 
     'does_not_exist' => 'Categoría inexistente.',
-    'assoc_users'	 => 'This accessory currently has :count items checked out to users. Please check in the accessories and and try again. ',
+    'assoc_users'	 => 'Este accesorio actualmente tiene :count entregados a usuarios. Por favor ingrese los accesorios y vuelva a intentar. ',
 
     'create' => array(
         'error'   => 'La categoría no se ha creado, inténtalo de nuevo.',
@@ -22,14 +22,14 @@ return array(
     ),
     
      'checkout' => array(
-        'error'   		=> 'Accessory was not checked out, please try again',
-        'success' 		=> 'Accessory checked out successfully.',
+        'error'   		=> 'El accesorio no fue retirado, por favor vuelva a intentarlo',
+        'success' 		=> 'Accesorio retirado correctamente.',
         'user_does_not_exist' => 'Este usuario es inválido . Inténtalo de nuevo.'
     ),
 
     'checkin' => array(
-        'error'   		=> 'Accessory was not checked in, please try again',
-        'success' 		=> 'Accessory checked in successfully.',
+        'error'   		=> 'El accesorio no fue agregado, favor vuelva a intentarlo',
+        'success' 		=> 'Accesorio devuelto correctamente.',
         'user_does_not_exist' => 'Este usuario es inválido . Inténtalo de nuevo.'
     )
 

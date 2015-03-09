@@ -5,6 +5,6 @@ return array(
     'actions'	 	=> 'Handlinger',
     'action' 		=> 'Handling',
     'by'      		=> 'Av',
-    'item' 			=> 'Item',
+    'item' 			=> 'Enhet',
 
 );
