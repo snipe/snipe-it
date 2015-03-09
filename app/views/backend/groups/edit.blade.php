@@ -41,7 +41,7 @@
                         <h4>{{ $area }}</h4>
 
                         @foreach ($permissions as $permission)
-                        <div class="field-box">
+                        <div class="row field-box">
                             <label for="name" class="col-md-2 control-label">{{{ $permission['label'] }}}</label>
                             <div class="col-md-8">
                                 <label class="radio-inline">
