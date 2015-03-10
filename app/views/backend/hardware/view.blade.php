@@ -168,6 +168,7 @@
 			<thead>
 				<tr>
 					<th class="col-md-4"><span class="line"></span>@lang('general.name')</th>
+					<th class="col-md-4"><span class="line"></span>@lang('admin/licenses/form.serial')</th>
 					<th class="col-md-1"><span class="line"></span>@lang('table.actions')</th>
 				</tr>
 			</thead>
@@ -175,6 +176,7 @@
 				@foreach ($asset->licenseseats as $seat)
 				<tr>
 					<td><a href="{{ route('view/license', $seat->license->id) }}">{{{ $seat->license->name }}}</a></td>
+					<td>{{{ $seat->license->serial }}}</td>
 					<td><a href="{{ route('checkin/license', $seat->id) }}" class="btn-flat info">@lang('general.checkin')</a>
 					</td>
 				</tr>
