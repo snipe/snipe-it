@@ -16,7 +16,7 @@
 
 <div class="row header">
     <div class="col-md-12">
-            <a href="{{ URL::previous() }}" class="btn-flat gray pull-right right"><i class="fa fa-arrow-circle-left icon-white"></i> @lang('general.back')</a>
+            <a href="{{ URL::previous() }}" class="btn-flat gray pull-right right"><i class="fa fa-arrow-left icon-white"></i> @lang('general.back')</a>
         <h3>
         @if ($asset->id)
         	@lang('admin/hardware/form.update')
