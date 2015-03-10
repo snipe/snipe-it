@@ -70,7 +70,7 @@
                 <label class="col-md-2 control-label"></label>
                     <div class="col-md-7">
                         <a class="btn btn-link" href="{{ URL::previous() }}">@lang('button.cancel')</a>
-                        <button type="submit" class="btn btn-success"><i class="fa fa-ok icon-white"></i>@lang('general.checkin')</button>
+                        <button type="submit" class="btn btn-success"><i class="fa fa-check icon-white"></i>@lang('general.checkin')</button>
                     </div>
                 </div>
 
