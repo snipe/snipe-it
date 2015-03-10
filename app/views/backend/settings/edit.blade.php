@@ -32,7 +32,7 @@ padding: 0px 20px;
 
                 <div class="pull-right">
                     <a href="{{ URL::previous() }}" class="btn-flat gray">
-                    <i class="fa fa-arrow-circle-left icon-white"></i>  @lang('general.back')</a>
+                    <i class="fa fa-arrow-left icon-white"></i>  @lang('general.back')</a>
                 </div>
 
                 <h3 class="name">@lang('admin/settings/general.update')</h3>
