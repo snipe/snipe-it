@@ -58,7 +58,7 @@
                 @else
                 <a class="btn btn-link" href="{{ route('manufacturers') }}">@lang('button.cancel')</a>
                 @endif
-                <button type="submit" class="btn btn-success"><i class="fa fa-ok icon-white"></i> @lang('general.save')</button>
+                <button type="submit" class="btn btn-success"><i class="fa fa-check icon-white"></i> @lang('general.save')</button>
             </div>
         </div>
 
