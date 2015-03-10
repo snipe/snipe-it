@@ -261,7 +261,7 @@
 
 
                         </div>
-
+		</div>
 
                     <!-- side address column -->
                     <div class="col-md-3 address pull-right hidden-print">
