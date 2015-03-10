@@ -56,7 +56,7 @@
 
                             <div class="col-md-12">
                                 <div class="alert alert-danger">
-                                    <i class="fa fa-exclamation"></i>
+                                    <i class="fa fa-exclamation-circle"></i>
 
                                     @lang('admin/users/messages.user_deleted_warning')
 
