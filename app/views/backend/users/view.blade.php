@@ -56,7 +56,7 @@
 
                             <div class="col-md-12">
                                 <div class="alert alert-danger">
-                                    <i class="fa fa-exclamation-sign"></i>
+                                    <i class="fa fa-exclamation-circle"></i>
 
                                     @lang('admin/users/messages.user_deleted_warning')
 
@@ -261,7 +261,7 @@
 
 
                         </div>
-
+		</div>
 
                     <!-- side address column -->
                     <div class="col-md-3 address pull-right hidden-print">
@@ -289,7 +289,7 @@
                         @if ($user->phone)
                             <li><i class="fa fa-phone"></i>{{{ $user->phone }}}</li>
                         @endif
-                            <li><i class="fa fa-envelope-alt"></i><a href="mailto:{{{ $user->email }}}">{{{ $user->email }}}</a></li>
+                            <li><i class="fa fa-envelope-o"></i><a href="mailto:{{{ $user->email }}}">{{{ $user->email }}}</a></li>
                         </ul>
 
                         @if ($user->last_login!='')

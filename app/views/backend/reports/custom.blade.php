@@ -108,7 +108,7 @@
                     <div class="form-group">
                         <label class="col-md-2 control-label"></label>
                         <div class="controls">
-                            <button type="submit" class="btn-flat success"><i class="fa fa-download icon-white icon-white"></i> @lang('general.generate')</button>
+                            <button type="submit" class="btn-flat success"><i class="fa fa-download icon-white"></i> @lang('general.generate')</button>
                         </div>
                     </div>
                 </form>

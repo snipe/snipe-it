@@ -126,7 +126,7 @@
 
 
                                 @if ($supplier->email)
-                                    <li><i class="fa fa-envelope-alt"></i><a href="mailto:{{{ $supplier->email }}}">
+                                    <li><i class="fa fa-envelope-o"></i><a href="mailto:{{{ $supplier->email }}}">
                                     {{{ $supplier->email }}}
                                     </a></li>
                                 @endif

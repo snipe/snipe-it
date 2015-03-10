@@ -17,7 +17,7 @@
 <div class="page-header">
 
         <div class="pull-right">
-            <a href="{{ URL::previous() }}" class="btn-flat gray"><i class="fa fa-arrow-circle-left icon-white"></i>  @lang('general.back')</a>
+            <a href="{{ URL::previous() }}" class="btn-flat gray"><i class="fa fa-arrow-left icon-white"></i>  @lang('general.back')</a>
         </div>
     <h3>
         @if ($user->id)

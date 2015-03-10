@@ -185,7 +185,7 @@
 
 		<div class="col-md-12">
 			<div class="alert alert-info alert-block">
-				<i class="icon-info-sign"></i>
+				<i class="fa fa-info-circle"></i>
 				@lang('general.no_results')
 			</div>
 		</div>
@@ -224,7 +224,7 @@
 									@endif
 								</td>
 								<td>
-									<a class="btn delete-asset btn-danger btn-sm" href="{{ route('delete/assetfile', [$asset->id, $file->id]) }}"><i class="icon-trash icon-white"></i></a>
+									<a class="btn delete-asset btn-danger btn-sm" href="{{ route('delete/assetfile', [$asset->id, $file->id]) }}"><i class="fa fa-trash icon-white"></i></a>
 								</td>
 							</tr>
 							@endforeach
@@ -353,11 +353,11 @@
                     @endif
 
                     @if (isset($asset->assigneduser->email))
-                        <li><br /><i class="icon-envelope-alt"></i> <a href="mailto:{{{ $asset->assigneduser->email }}}">{{{ $asset->assigneduser->email }}}</a></li>
+                        <li><br /><i class="fa fa-envelope-o"></i> <a href="mailto:{{{ $asset->assigneduser->email }}}">{{{ $asset->assigneduser->email }}}</a></li>
                     @endif
 
                     @if ((isset($asset->assigneduser->phone)) && ($asset->assigneduser->phone!=''))
-                        <li><i class="icon-phone"></i> {{{ $asset->assigneduser->phone }}}</li>
+                        <li><i class="fa fa-phone"></i> {{{ $asset->assigneduser->phone }}}</li>
                     @endif
 
 
@@ -388,7 +388,7 @@
 					@if ($asset->assetstatus->notes)
                     <div class="col-md-12">
 						<div class="alert alert-info alert-block">
-							<i class="icon-info-sign"></i>
+							<i class="fa fa-info-circle"></i>
 							{{{ $asset->assetstatus->notes }}}
 
 						</div>

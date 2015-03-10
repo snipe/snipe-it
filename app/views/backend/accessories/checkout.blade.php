@@ -12,7 +12,7 @@
 <div class="row header">
     <div class="col-md-12">
         <a href="{{ URL::previous() }}" class="btn-flat gray pull-right">
-        <i class="fa fa-circle-arrow-left icon-white"></i>  @lang('general.back')</a>
+        <i class="fa fa-arrow-left icon-white"></i>  @lang('general.back')</a>
         <h3> @lang('general.checkout')</h3>
     </div>
 </div>
@@ -82,7 +82,7 @@
             <label class="col-md-3 control-label"></label>
                 <div class="col-md-7">
                     <a class="btn btn-link" href="{{ URL::previous() }}"> @lang('button.cancel')</a>
-                    <button type="submit" class="btn btn-success"><i class="fa fa-ok icon-white"></i> @lang('general.save')</button>
+                    <button type="submit" class="btn btn-success"><i class="fa fa-check icon-white"></i> @lang('general.save')</button>
                 </div>
             </div>
 

@@ -114,7 +114,7 @@
 
 <div class="col-md-6">
     <div class="alert alert-warning alert-block">
-        <i class="fa fa-warning-sign"></i>
+        <i class="fa fa-warning"></i>
         @lang('general.no_results')
 
     </div>
