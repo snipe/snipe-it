@@ -34,7 +34,7 @@ View Assets for  {{{ $user->fullName() }}} ::
 
                             <div class="col-md-12">
                                 <div class="alert alert-danger">
-                                    <i class="fa fa-exclamation-sign"></i>
+                                    <i class="fa fa-exclamation-circle"></i>
                                     <strong>Warning: </strong>
                                      This user has been deleted. You will have to restore this user to edit them or assign them new assets.
                                 </div>
