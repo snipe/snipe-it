@@ -23,6 +23,7 @@ use Location;
 use Log;
 use DNS2D;
 use Mail;
+use Datatable;
 
 class AssetsController extends AdminController
 {
@@ -36,40 +37,7 @@ class AssetsController extends AdminController
 
     public function getIndex()
     {
-        // Grab all the assets
-
-		$assets = Asset::with('model','assigneduser','assetstatus','defaultLoc','assetlog')->Hardware();
-        // Filter results
-        if (Input::get('Pending')) {
-        	$assets->Pending();
-        } elseif (Input::get('RTD')) {
-        	$assets->RTD();
-        } elseif (Input::get('Undeployable')) {
-        	$assets->Undeployable();
-        } elseif (Input::get('Archived')) {
-        	$assets->Archived();
-        } elseif (Input::get('Requestable')) {
-        	$assets->RequestableAssets();
-        } elseif (Input::get('Deployed')) {
-        	$assets->Deployed();
-        } elseif (Input::get('Deleted')) {
-        	$assets->withTrashed()->Deleted();
-        }
-
-        $assets = $assets->orderBy('asset_tag', 'ASC')->get();
-
-
-        // Paginate the users
-        /**$assets = $assets->paginate(Setting::getSettings()->per_page)
-            ->appends(array(
-                'Pending' => Input::get('Pending'),
-                'RTD' => Input::get('RTD'),
-                'Undeployable' => Input::get('Undeployable'),
-                'Deployed' => Input::get('Deployed'),
-            ));
-        **/
-
-        return View::make('backend/hardware/index', compact('assets'));
+        return View::make('backend/hardware/index');
     }
 
 
@@ -906,6 +874,38 @@ class AssetsController extends AdminController
 
 		return Redirect::to("hardware");
 
+    }
+
+
+    public function getDatatable()
+    {
+        //return Datatable::collection(Asset::all(array('id', 'name', 'asset_tag', 'serial')))
+
+       $assets = Asset::with('model','assigneduser','assetstatus','defaultLoc','assetlog')->Hardware();
+        // Filter results
+        if (Input::get('Pending')) {
+        	$assets->Pending();
+        } elseif (Input::get('RTD')) {
+        	$assets->RTD();
+        } elseif (Input::get('Undeployable')) {
+        	$assets->Undeployable();
+        } elseif (Input::get('Archived')) {
+        	$assets->Archived();
+        } elseif (Input::get('Requestable')) {
+        	$assets->RequestableAssets();
+        } elseif (Input::get('Deployed')) {
+        	$assets->Deployed();
+        } elseif (Input::get('Deleted')) {
+        	$assets->withTrashed()->Deleted();
+        }
+
+        $assets = $assets->orderBy('asset_tag', 'ASC')->get();
+
+        return Datatable::collection($assets)
+        ->showColumns('name', 'asset_tag', 'serial')
+        ->searchColumns('name', 'asset_tag', 'serial')
+        ->orderColumns('name', 'asset_tag', 'serial')
+        ->make();
     }
 
 
