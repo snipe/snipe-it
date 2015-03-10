@@ -35,7 +35,7 @@
 
 <div class="row header">
     <div class="col-md-12">
-        <a href="{{ route('create/hardware') }}" class="btn btn-success pull-right"><i class="fa fa-plus-sign icon-white"></i> @lang('general.create')</a>
+        <a href="{{ route('create/hardware') }}" class="btn btn-success pull-right"><i class="fa fa-plus icon-white"></i> @lang('general.create')</a>
         <h3>@yield('title0')</h3>
     </div>
 </div>
