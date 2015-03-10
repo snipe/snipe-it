@@ -14,11 +14,11 @@
 @section('content')
 <div class="row header">
     <div class="col-md-12">
-            <!--<a href="{{ URL::previous() }}" class="btn-flat gray pull-right"><i class="fa fa-circle-arrow-left icon-white"></i>  @lang('general.back')</a>-->
+            <!--<a href="{{ URL::previous() }}" class="btn-flat gray pull-right"><i class="fa fa-arrow-left icon-white"></i>  @lang('general.back')</a>-->
         @if(isset($clone_model))
-            <a href="{{{ URL::route('view/model', $clone_model->id) }}}" class="btn-flat gray pull-right"><i class="fa fa-circle-arrow-left icon-white"></i>  @lang('general.back')</a>
+            <a href="{{{ URL::route('view/model', $clone_model->id) }}}" class="btn-flat gray pull-right"><i class="fa fa-arrow-left icon-white"></i>  @lang('general.back')</a>
         @else
-            <a href="{{{ URL::route('view/model', $model->id) }}}" class="btn-flat gray pull-right"><i class="fa fa-circle-arrow-left icon-white"></i>  @lang('general.back')</a>
+            <a href="{{{ URL::route('view/model', $model->id) }}}" class="btn-flat gray pull-right"><i class="fa fa-arrow-left icon-white"></i>  @lang('general.back')</a>
         @endif
         <h3>
         @if ($model->id)
@@ -147,7 +147,7 @@
                     @else
                         <a class="btn btn-link" href="{{ URL::route('view/model', $model->id) }}">@lang('button.cancel')</a>
                     @endif
-                    <button type="submit" class="btn btn-success"><i class="fa fa-ok icon-white"></i> @lang('general.save')</button>
+                    <button type="submit" class="btn btn-success"><i class="fa fa-check icon-white"></i> @lang('general.save')</button>
                 </div>
             </div>
 </form>
