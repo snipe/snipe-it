@@ -58,6 +58,7 @@ class AssetsController extends AdminController
         $model_list = array('' => 'Select a Model') + DB::table('models')
         ->select(DB::raw('concat(name," / ",modelno) as name, id'))->orderBy('name', 'asc')
         ->orderBy('modelno', 'asc')
+        ->whereNull('deleted_at')
         ->lists('name', 'id');
 
 
