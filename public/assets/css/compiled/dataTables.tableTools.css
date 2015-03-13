@@ -160,7 +160,7 @@ a.DTTT_disabled {
  * BUTTON_STYLES
  * Action specific button styles
  * If you want img/tabletools - comment this back in
-
+*/
 a.DTTT_button_csv,
 a.DTTT_button_xls,
 a.DTTT_button_copy,
@@ -181,31 +181,31 @@ a.DTTT_button_print span {
 }
 
 
-a.DTTT_button_csv span { background: url(../img/tabletools/csv.png) no-repeat bottom right; }
-a.DTTT_button_csv:hover span { background: url(../img/tabletools/csv_hover.png) no-repeat center right; }
+a.DTTT_button_csv span { background: url(../../img/tabletools/csv.png) no-repeat bottom right; }
+a.DTTT_button_csv:hover span { background: url(../../img/tabletools/csv_hover.png) no-repeat center right; }
 
-a.DTTT_button_xls span { background: url(../img/tabletools/xls.png) no-repeat center right; }
-a.DTTT_button_xls:hover span { background: #f0f0f0 url(../img/tabletools/xls_hover.png) no-repeat center right; }
+a.DTTT_button_xls span { background: url(../../img/tabletools/xls.png) no-repeat center right; }
+a.DTTT_button_xls:hover span { background: #f0f0f0 url(../../img/tabletools/xls_hover.png) no-repeat center right; }
 
-a.DTTT_button_copy span { background: url(../img/tabletools/copy.png) no-repeat center right; }
-a.DTTT_button_copy:hover span { background: #f0f0f0 url(../img/tabletools/copy_hover.png) no-repeat center right; }
+a.DTTT_button_copy span { background: url(../../img/tabletools/copy.png) no-repeat center right; }
+a.DTTT_button_copy:hover span { background: #f0f0f0 url(../../img/tabletools/copy_hover.png) no-repeat center right; }
 
-a.DTTT_button_pdf span { background: url(../img/tabletools/pdf.png) no-repeat center right; }
-a.DTTT_button_pdf:hover span { background: #f0f0f0 url(../img/tabletools/pdf_hover.png) no-repeat center right; }
+a.DTTT_button_pdf span { background: url(../../img/tabletools/pdf.png) no-repeat center right; }
+a.DTTT_button_pdf:hover span { background: #f0f0f0 url(../../img/tabletools/pdf_hover.png) no-repeat center right; }
 
-a.DTTT_button_print span { background: url(../img/tabletools/print.png) no-repeat center right; }
-a.DTTT_button_print:hover span { background: #f0f0f0 url(../img/tabletools/print_hover.png) no-repeat center right; }
+a.DTTT_button_print span { background: url(../../img/tabletools/print.png) no-repeat center right; }
+a.DTTT_button_print:hover span { background: #f0f0f0 url(../../img/tabletools/print_hover.png) no-repeat center right; }
 
- */
+
 
 button.DTTT_button_collection span {
 	padding-right: 17px;
-	background: url(../img/tabletools/collection.png) no-repeat center right;
+	background: url(../../img/tabletools/collection.png) no-repeat center right;
 }
 
 button.DTTT_button_collection:hover span {
 	padding-right: 17px;
-	background: #f0f0f0 url(../img/tabletools/collection_hover.png) no-repeat center right;
+	background: #f0f0f0 url(../../img/tabletools/collection_hover.png) no-repeat center right;
 }
 
 
@@ -281,7 +281,7 @@ div.DTTT_collection {
 }
 
 div.DTTT_collection_background {
-	background: transparent url(../img/tabletools/background.png) repeat top left;
+	background: transparent url(../../img/tabletools/background.png) repeat top left;
 	z-index: 2001;
 }
 
