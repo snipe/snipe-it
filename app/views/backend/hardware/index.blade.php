@@ -52,14 +52,22 @@
 
 
 {{ Datatable::table()
-    ->addColumn('name', 'asset_tag', 'serial', 'assigned_to')       // these are the column headings to be shown
+    ->addColumn('name', 'asset_tag', 'serial', 'status','model','eol','checkedout_on')
     ->setUrl(route('api.hardware'))   // this is the route where data will be retrieved
+    ->setOptions(
+            array(
+                'dom' =>'C<"clear">lfrtip',
+            )
+        )
     ->render() }}
 
  {{ Form::close() }}
 
 </div>
 <script>
+	
+
+
 	$(function() {
 
 	    $('input.one_required').change(function() {

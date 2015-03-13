@@ -882,7 +882,7 @@ class AssetsController extends AdminController
     {
         //return Datatable::collection(Asset::all(array('id', 'name', 'asset_tag', 'serial')))
 
-       $assets = Asset::with('model','assigneduser','assetstatus','defaultLoc','assetlog')->Hardware();
+       $assets = Asset::with('model','assigneduser','assetstatus','defaultLoc','assetlog','model')->Hardware();
         // Filter results
         if (Input::get('Pending')) {
         	$assets->Pending();
@@ -901,15 +901,37 @@ class AssetsController extends AdminController
         }
 
         $assets = $assets->orderBy('asset_tag', 'ASC')->get();
-
+        
+        
         return Datatable::collection($assets)
-        ->showColumns('name', 'asset_tag', 'serial')
-        ->searchColumns('name', 'asset_tag', 'serial')
+        ->addColumn('name',function($assets)
+	        {
+	            return '<a href="hardware/'.$assets->id.'/view">'.$assets->name.'</a>';
+	        })	
+	        
+        ->showColumns('asset_tag', 'serial')
+         	        
+	    ->addColumn('status',function($assets)
+	        {
+	            return '<a href="foo">'.$assets->assetstatus->name.'</a>';
+	        })	
+	        	        
+		->addColumn('model',function($assets)
+			{
+			    return $assets->model->name;
+			})	
+			
+			->addColumn('eol',function($assets)
+			{
+			    return $assets->eol_date();
+			})	
+		
+	            
+	    ->showColumns('checkedout_on')
+        ->searchColumns('name', 'asset_tag', 'serial', 'model', 'status','location','eol','checkedout_on')
         ->orderColumns('name', 'asset_tag', 'serial')
         ->make();
-    }
-
-
-
+        
+		}
 
 }
