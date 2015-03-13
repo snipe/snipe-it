@@ -52,7 +52,15 @@
 
 
 {{ Datatable::table()
-    ->addColumn(Lang::get('admin/hardware/form.name'), Lang::get('admin/hardware/table.asset_tag'), Lang::get('admin/hardware/table.serial'), Lang::get('admin/hardware/table.status'),Lang::get('admin/hardware/form.model'),Lang::get('admin/hardware/table.eol'),'checkedout_on')
+    ->addColumn(Lang::get('admin/hardware/form.name'), 
+    	Lang::get('admin/hardware/table.asset_tag'), 
+    	Lang::get('admin/hardware/table.serial'), 
+    	Lang::get('admin/hardware/table.status'),
+    	Lang::get('admin/hardware/form.model'),
+    	Lang::get('admin/hardware/table.eol'),
+    	Lang::get('admin/hardware/table.checkout_date'), 
+    	Lang::get('admin/hardware/table.change'), 
+    	Lang::get('table.actions'))
     ->setUrl(route('api.hardware'))   // this is the route where data will be retrieved
     ->setOptions(
             array(
