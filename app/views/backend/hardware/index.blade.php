@@ -62,7 +62,8 @@
     	Lang::get('admin/hardware/table.change'), 
     	Lang::get('table.actions'))
     ->setUrl(route('api.hardware'))   // this is the route where data will be retrieved
-    ->setOptions('deferRender', 'true')
+    ->setOptions('deferRender', true)
+    ->setOptions('stateSave', true)
     ->setOptions(
             array(
                 'dom' =>'C<"clear">lfrtip',

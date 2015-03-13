@@ -963,8 +963,8 @@ class AssetsController extends AdminController
 	        })	
 		->addColumn($inout)     
 	    ->addColumn($actions)           
-        ->searchColumns('name', 'asset_tag', 'serial', 'model', 'status','location','eol','checkout_date')
-        ->orderColumns('name', 'asset_tag', 'serial', 'model', 'status','location','eol','checkout_date')
+        ->searchColumns('name', 'asset_tag', 'serial', 'model', 'status','location','eol','checkout_date', 'inout')
+        ->orderColumns('name', 'asset_tag', 'serial', 'model', 'status','location','eol','checkout_date', 'inout')
         ->make();
         
 		}
