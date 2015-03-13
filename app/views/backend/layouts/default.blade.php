@@ -38,6 +38,7 @@
         <link rel="stylesheet" href="{{ asset('assets/css/lib/jquery.dataTables.css') }}" type="text/css" media="screen" />
         <link rel="stylesheet" href="{{ asset('assets/css/compiled/dataTables.responsive.css') }}" type="text/css" media="screen" />
         <link rel="stylesheet" href="{{ asset('assets/css/compiled/dataTables.colVis.css') }}" type="text/css" media="screen" />
+        <link rel="stylesheet" href="{{ asset('assets/css/compiled/dataTables.tableTools.css') }}" type="text/css" media="screen" />
 
         <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/compiled/print.css') }}" media="print" />
 
@@ -49,8 +50,9 @@
         <!-- global header javascripts -->
         <script src="{{ asset('assets/js/jquery-latest.js') }}"></script>
         <script src="{{ asset('assets/js/jquery.dataTables.min.js') }}"></script>
-        <script src="{{ asset('assets/js/dataTables.responsive.js') }}"></script>
         <script src="{{ asset('assets/js/dataTables.colVis.js') }}"></script>
+        <script src="{{ asset('assets/js/dataTables.tableTools.js') }}"></script>
+        <script src="{{ asset('assets/js/dataTables.responsive.js') }}"></script>
 
         <script>
             window.snipeit = {
