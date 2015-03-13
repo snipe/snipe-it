@@ -878,28 +878,37 @@ class AssetsController extends AdminController
     }
 
 
-    public function getDatatable()
+    public function getDatatable($status = null)
     {
-        //return Datatable::collection(Asset::all(array('id', 'name', 'asset_tag', 'serial')))
 
        $assets = Asset::with('model','assigneduser','assetstatus','defaultLoc','assetlog','model')->Hardware();
-        // Filter results
-        if (Input::get('Pending')) {
-        	$assets->Pending();
-        } elseif (Input::get('RTD')) {
-        	$assets->RTD();
-        } elseif (Input::get('Undeployable')) {
-        	$assets->Undeployable();
-        } elseif (Input::get('Archived')) {
-        	$assets->Archived();
-        } elseif (Input::get('Requestable')) {
-        	$assets->RequestableAssets();
-        } elseif (Input::get('Deployed')) {
-        	$assets->Deployed();
-        } elseif (Input::get('Deleted')) {
-        	$assets->withTrashed()->Deleted();
-        }
+       
 
+			switch ($status) {
+				case 'Pending':
+					$assets->Pending();
+					break;
+				case 'RTD':
+					$assets->RTD();
+					break;
+				case 'Undeployable':
+					$assets->Undeployable();
+					break;
+				case 'Archived':
+					$assets->Archived();
+					break;
+				case 'Requestable':
+					$assets->RequestableAssets();
+					break;
+				case 'Deployed':
+					$assets->Deployed();
+					break;
+				case 'Deleted':
+					$assets->withTrashed()->Deleted();
+					break;
+			}	
+      
+			       
         $assets = $assets->orderBy('asset_tag', 'ASC')->get();
         
         $actions = new \Chumper\Datatable\Columns\FunctionColumn('actions', function ($assets) 

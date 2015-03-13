@@ -19,7 +19,7 @@ Route::group(array('prefix' => 'hardware', 'namespace' => 'Controllers\Admin', '
     );
 
     Route::resource('hardware', 'AssetsController');
-    Route::get('api/hardware', array('as'=>'api.hardware', 'uses'=>'AssetsController@getDatatable'));
+    Route::get('api/hardware/{status?}', array('as'=>'api.hardware', 'uses'=>'AssetsController@getDatatable'));
 
     Route::get('create/{model?}', array(
     	'as' => 'create/hardware',

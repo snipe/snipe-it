@@ -1,20 +1,21 @@
 @extends('backend/layouts/default')
 
 @section('title0')
-    @if (Input::get('Pending') || Input::get('Undeployable') || Input::get('Deleted') || Input::get('Requestable') || Input::get('RTD')  || Input::get('Deployed') || Input::get('Archived'))
-        @if (Input::get('Pending'))
+			
+    @if (Input::get('status'))
+        @if (Input::get('status')=='Pending')
             @lang('general.pending')
-        @elseif (Input::get('RTD'))
+        @elseif (Input::get('status')=='RTD')
             @lang('general.ready_to_deploy')
-        @elseif (Input::get('Undeployable'))
+        @elseif (Input::get('status')=='Undeployable')
             @lang('general.undeployable')
-        @elseif (Input::get('Deployed'))
+        @elseif (Input::get('status')=='Deployable')
             @lang('general.deployed')
-         @elseif (Input::get('Requestable'))
+         @elseif (Input::get('status')=='Requestable')
             @lang('admin/hardware/general.requestable')
-        @elseif (Input::get('Archived'))
+        @elseif (Input::get('status')=='Archived')
             @lang('general.archived')
-         @elseif (Input::get('Deleted'))
+         @elseif (Input::get('status')=='Deleted')
             @lang('general.deleted')
         @endif
     @else
@@ -61,7 +62,7 @@
     	Lang::get('admin/hardware/table.checkout_date'), 
     	Lang::get('admin/hardware/table.change'), 
     	Lang::get('table.actions'))
-    ->setUrl(route('api.hardware'))   // this is the route where data will be retrieved
+    ->setUrl(route('api.hardware', Input::get('status')))   // this is the route where data will be retrieved
     ->setOptions('deferRender', true)
     ->setOptions('stateSave', true)
     ->setOptions(
