@@ -66,7 +66,8 @@
     ->setOptions('stateSave', true)
     ->setOptions(
             array(
-                'dom' =>'C<"clear">lfrtip',
+                'dom' =>'CT<"clear">lfrtip',
+                'tableTools' => array('sSwfPath'=> asset('assets/swf/copy_csv_xls_pdf.swf') ),
             )
         )
     ->render() }}
