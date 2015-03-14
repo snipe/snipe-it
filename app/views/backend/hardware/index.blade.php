@@ -94,8 +94,8 @@
                             )
                         ) 
                     ),
-                'colVis'=> array('showAll'=>'Show All','restore'=>'Restore','exclude'=>array(8,9),'activate'=>'mouseover'),
-                'columnDefs'=> [array('visible'=>false,'targets'=>array(5,6,7))],
+                'colVis'=> array('showAll'=>'Show All','restore'=>'Restore','exclude'=>array(9,10),'activate'=>'mouseover'),
+                'columnDefs'=> [array('visible'=>false,'targets'=>array(6,7,8))],
             )
         )
     ->render() }}
