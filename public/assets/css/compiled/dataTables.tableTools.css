@@ -203,36 +203,36 @@ table.DTTT_selectable tbody tr {
 }
 
 table.dataTable tr.DTTT_selected.odd {
-	background-color: #9FAFD1;
+	background-color: #d6dff8;
 }
 
 table.dataTable tr.DTTT_selected.odd td.sorting_1 {
-	background-color: #9FAFD1;
+	background-color: #c1cce8;
 }
 
 table.dataTable tr.DTTT_selected.odd td.sorting_2 {
-	background-color: #9FAFD1;
+	background-color: #c1cce8;
 }
 
 table.dataTable tr.DTTT_selected.odd td.sorting_3 {
-	background-color: #9FAFD1;
+	background-color: #c1cce8;
 }
 
 
 table.dataTable tr.DTTT_selected.even {
-	background-color: #B0BED9;
+	background-color: #eaf0ff;
 }
 
 table.dataTable tr.DTTT_selected.even td.sorting_1 {
-	background-color: #B0BED9;
+	background-color: #c1cce8;
 }
 
 table.dataTable tr.DTTT_selected.even td.sorting_2 {
-	background-color: #B0BED9;
+	background-color: #c1cce8;
 }
 
 table.dataTable tr.DTTT_selected.even td.sorting_3 {
-	background-color: #B0BED9;
+	background-color: #c1cce8;
 }
 
 
