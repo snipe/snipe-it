@@ -67,11 +67,11 @@
     	Lang::get('admin/hardware/table.change'), 
     	Lang::get('table.actions'))
     ->setUrl(route('api.hardware', Input::get('status')))   // this is the route where data will be retrieved
-    ->setOptions('deferRender', true)
-    ->setOptions('stateSave', true)
     ->setOptions(
             array(
                 'dom' =>'CT<"clear">lfrtip',
+                'stateSave' => true,
+                'deferRender' => true,
                 'tableTools' => array('sSwfPath'=> asset('assets/swf/copy_csv_xls_pdf.swf') ),
             )
         )
