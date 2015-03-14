@@ -77,10 +77,7 @@
                 'dom' =>'CT<"clear">lfrtip',
                 'tableTools' => array(
                     'sSwfPath'=> Config::get('app.url').'/assets/swf/copy_csv_xls_pdf.swf',
-                    'sRowSelect'=>'os',
                     'aButtons'=>array(
-                        'select_all',
-                        'select_none',
                         'copy',
                         'print',
                         array(
@@ -94,8 +91,9 @@
                             )
                         ) 
                     ),
-                'colVis'=> array('showAll'=>'Show All','restore'=>'Restore','exclude'=>array(0,9,10),'activate'=>'mouseover'),
-                'columnDefs'=> [array('visible'=>false,'targets'=>array(6,7,8))],
+                'colVis'=> array('showAll'=>'Show All','restore'=>'Restore','exclude'=>array(0,10,11),'activate'=>'mouseover'),
+                'columnDefs'=> array(array('visible'=>false,'targets'=>array(7,8,9)),array('bSortable'=>false,'targets'=>array(0,10,11))),
+				'order'=>array(array(1,'asc')),
             )
         )
     ->render() }}
