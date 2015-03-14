@@ -244,8 +244,8 @@ class AssetsSeeder extends Seeder
 
 
         $asset[] = array(
-            'name'      	=> 'Drunken Shanenigans Laptop',
-            'asset_tag'     => 'NNY6564567775',
+            'name'      	=> 'Borked Laptop',
+            'asset_tag'     => 'NNY656456778975',
             'model_id'      => 2,
             'serial'      	=> 'WS99689080890',
             'purchase_date' => '2012-01-02',

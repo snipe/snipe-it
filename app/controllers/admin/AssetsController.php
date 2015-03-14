@@ -947,7 +947,7 @@ class AssetsController extends AdminController
 	    ->addColumn('status',function($assets)
 	        {	
 		        	if ($assets->assigned_to!='') {
-			        	return link_to('../users/'.$assets->assigned_to.'/view', $assets->assigneduser->fullName());
+			        	return link_to('../admin/users/'.$assets->assigned_to.'/view', $assets->assigneduser->fullName());
 			        } else {
 				        return $assets->assetstatus->name;				        
 			        }
@@ -955,9 +955,9 @@ class AssetsController extends AdminController
 	        })
 		->addColumn('location',function($assets)
             {
-                if ($assets->assigned_to && $assets->assetloc) {
+                if ($assets->assigned_to && $assets->assetloc) {	                
                     return link_to('admin/location/'.$assets->assetloc->id.'/edit', $assets->assetloc->name);
-                } elseif ($assets->defaultLoc!=''){
+                } elseif ($assets->defaultLoc){
                     return link_to('admin/location/'.$assets->defaultLoc->id.'/edit', $assets->defaultLoc->name);
                 }
             })

@@ -17,8 +17,7 @@ class Asset extends Depreciable
         'checkout_date' 	=> 'date|max:10|min:10',
         'checkin_date' 		=> 'date|max:10|min:10',
         'supplier_id' 		=> 'integer',
-        'asset_tag'   => 'required|alpha_space|min:3|max:255|unique:assets,asset_tag,{id}',
-        //'serial'   			=> 'required|alpha_dash|min:3|max:255|unique:assets,serial,{id}',
+        'asset_tag'   		=> 'required|alpha_space|min:3|max:255|unique:assets,asset_tag,{id}',
         'status' 			=> 'integer'
         );
 
