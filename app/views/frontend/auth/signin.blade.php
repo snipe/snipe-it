@@ -20,14 +20,7 @@ Account Sign in ::
     <form method="post" action="{{ route('signin') }}" class="form-horizontal">
         <!-- CSRF Token -->
         <input type="hidden" name="_token" value="{{ csrf_token() }}" />
-
-            <div class="form-group">
-                <label class="col-md-6 control-label"></label>
-                    <div class="col-md-5">
-                        <br><a href="{{ route('forgot-password') }}" class="btn btn-link">I forgot my password</a>
-                    </div>
-                </div>
-
+        
             <!-- Email -->
             <div class="form-group{{ $errors->first('email', ' error') }}">
                 <label for="email" class="col-md-3 control-label">Email</label>
