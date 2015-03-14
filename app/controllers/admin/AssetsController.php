@@ -911,6 +911,7 @@ class AssetsController extends AdminController
 			       
         $assets = $assets->orderBy('asset_tag', 'ASC')->get();
         
+        
         $actions = new \Chumper\Datatable\Columns\FunctionColumn('actions', function ($assets) 
         	{ 
 	        	if ($assets->deleted_at=='') {
@@ -931,7 +932,15 @@ class AssetsController extends AdminController
 				}
 	        });
         
+        
+        
         return Datatable::collection($assets)
+        ->addColumn('',function($assets)
+            {
+                                
+                    return '<input type="checkbox" name="edit_asset['.$assets->id.']" class="one_required">';
+                
+            })
         ->addColumn('name',function($assets)
 	        {
 		        return link_to('hardware/'.$assets->id.'/view', $assets->name);

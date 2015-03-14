@@ -45,7 +45,7 @@
     </div>
 </div>
 
-<div class="row form-wrapper">
+<div class="row">
 
 
 
@@ -57,7 +57,7 @@
 
 
 {{ Datatable::table()
-    ->addColumn(Lang::get('admin/hardware/form.name'), 
+    ->addColumn('',Lang::get('admin/hardware/form.name'), 
     	Lang::get('admin/hardware/table.asset_tag'), 
     	Lang::get('admin/hardware/table.serial'),
 		Lang::get('admin/hardware/form.model'),
@@ -99,20 +99,21 @@
             )
         )
     ->render() }}
+    <button class="btn btn-default" id="bulkEdit" disabled>Bulk Edit</button>
 
  {{ Form::close() }}
 
 </div>
-<script>
-	
 
+
+<script>
 
 	$(function() {
 
-	    $('input.one_required').change(function() {
+	    $('body').on('change','input.one_required',function() {
 
 	        var check_checked = $('input.one_required:checked').length;
-	        console.warn(check_checked);
+	        //console.log(check_checked);
 	        if (check_checked > 0) {
 	            $('#bulkEdit').removeAttr('disabled');
 	        }
