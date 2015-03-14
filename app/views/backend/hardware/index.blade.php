@@ -59,9 +59,10 @@
 {{ Datatable::table()
     ->addColumn(Lang::get('admin/hardware/form.name'), 
     	Lang::get('admin/hardware/table.asset_tag'), 
-    	Lang::get('admin/hardware/table.serial'), 
+    	Lang::get('admin/hardware/table.serial'),
+		Lang::get('admin/hardware/form.model'),
     	Lang::get('admin/hardware/table.status'),
-    	Lang::get('admin/hardware/form.model'),
+		Lang::get('admin/hardware/table.location'),
     	Lang::get('general.category'),
     	Lang::get('admin/hardware/table.eol'),
     	Lang::get('admin/hardware/table.checkout_date'), 
