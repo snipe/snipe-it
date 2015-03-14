@@ -77,7 +77,6 @@
                 'dom' =>'CT<"clear">lfrtip',
                 'tableTools' => array(
                     'sSwfPath'=> Config::get('app.url').'/assets/swf/copy_csv_xls_pdf.swf',
-                    'sRowSelect'=>'os',
                     'aButtons'=>array(
                         'copy',
                         'print',
