@@ -930,10 +930,6 @@ class AssetsController extends AdminController
 					return '<a href="'.route('checkout/hardware', $assets->id).'" class="btn btn-info btn-sm">'.Lang::get('general.checkout').'</a>';
 				}
 	        });
-       
-       
-       
-       
         
         return Datatable::collection($assets)
         ->addColumn('name',function($assets)
@@ -942,7 +938,12 @@ class AssetsController extends AdminController
 	        })	
 	        
         ->showColumns('asset_tag', 'serial')
-         	        
+        
+		->addColumn('model',function($assets)
+			{
+			    return $assets->model->name;
+			})
+		
 	    ->addColumn('status',function($assets)
 	        {	
 		        	if ($assets->assigned_to!='') {
@@ -951,13 +952,15 @@ class AssetsController extends AdminController
 				        return $assets->assetstatus->name;				        
 			        }
 	            
-	        })	
-	        	        
-		->addColumn('model',function($assets)
-			{
-			    return $assets->model->name;
-			})	
-			
+	        })
+		->addColumn('location',function($assets)
+            {
+                if ($assets->assigned_to && $assets->assetloc) {
+                    return link_to('admin/location/'.$assets->assetloc->id.'/edit', $assets->assetloc->name);
+                } elseif ($assets->defaultLoc!=''){
+                    return link_to('admin/location/'.$assets->defaultLoc->id.'/edit', $assets->defaultLoc->name);
+                }
+            })
 		->addColumn('category',function($assets)
 			{
 				return $assets->model->category->name;
