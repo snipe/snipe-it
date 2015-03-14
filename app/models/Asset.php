@@ -166,12 +166,6 @@ class Asset extends Depreciable
         return $this->belongsTo('Supplier','supplier_id');
     }
     
-    // FIXME
-    public function category()
-    {
-        return $this->belongsTo('Category','category_id');
-    }
-    
 
     public function months_until_eol()
     {

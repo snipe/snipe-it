@@ -881,7 +881,7 @@ class AssetsController extends AdminController
     public function getDatatable($status = null)
     {
 
-       $assets = Asset::with('model','assigneduser','assetstatus','defaultLoc','assetlog','model')->Hardware();
+       $assets = Asset::with('model','assigneduser','assetstatus','defaultLoc','assetlog','model','model.category')->Hardware();
        
 
 			switch ($status) {
@@ -958,10 +958,17 @@ class AssetsController extends AdminController
 			    return $assets->model->name;
 			})	
 			
-			->addColumn('eol',function($assets)
+		->addColumn('category',function($assets)
+			{
+				return $assets->model->category->name;
+
+			})	
+			
+		->addColumn('eol',function($assets)
 			{
 			    return $assets->eol_date();
 			})	
+		
 			
 		 ->addColumn('checkout_date',function($assets)
 	        {	
@@ -972,7 +979,7 @@ class AssetsController extends AdminController
 	        })	
 		->addColumn($inout)     
 	    ->addColumn($actions)           
-        ->searchColumns('name', 'asset_tag', 'serial', 'model', 'status','location','eol','checkout_date', 'inout')
+        ->searchColumns('name', 'asset_tag', 'serial', 'model', 'status','location','eol','checkout_date', 'inout','category')
         ->orderColumns('name', 'asset_tag', 'serial', 'model', 'status','location','eol','checkout_date', 'inout')
         ->make();
         
