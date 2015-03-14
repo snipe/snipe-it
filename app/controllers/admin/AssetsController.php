@@ -930,15 +930,6 @@ class AssetsController extends AdminController
 					return '<a href="'.route('checkout/hardware', $assets->id).'" class="btn btn-info btn-sm">'.Lang::get('general.checkout').'</a>';
 				}
 	        });
-			
-		$location = new \Chumper\Datatable\Columns\FunctionColumn('location', function ($assets)
-			{
-				if ($asset->assigneduser && $asset->assetloc)
-                    return '<a href="'.route('update/location', $asset->assetloc->id).'">'.$asset->assetloc->name.'</a>';
-                } elseif ($asset->defaultLoc){
-                    return '<a href="{'.route('update/location', $asset->defaultLoc->id).'">'.$asset->defaultLoc->name.'</a>';
-                }
-			});
         
         return Datatable::collection($assets)
         ->addColumn('name',function($assets)
@@ -962,7 +953,14 @@ class AssetsController extends AdminController
 			        }
 	            
 	        })
-		->addColumn($location)
+		->addColumn('location',function($assets)
+            {
+                if ($assets->assigned_to && $assets->assetloc) {
+                    return link_to('admin/location/'.$assets->assetloc->id.'/edit', $assets->assetloc->name);
+                } elseif ($assets->defaultLoc!=''){
+                    return link_to('admin/location/'.$assets->defaultLoc->id.'/edit', $assets->defaultLoc->name);
+                }
+            })
 		->addColumn('category',function($assets)
 			{
 				return $assets->model->category->name;
