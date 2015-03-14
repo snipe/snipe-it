@@ -936,14 +936,12 @@ class AssetsController extends AdminController
         
         return Datatable::collection($assets)
         ->addColumn('',function($assets)
-            {
-                                
-                    return '<input type="checkbox" name="edit_asset['.$assets->id.']" class="one_required">';
-                
+            {                              
+                return '<input type="checkbox" name="edit_asset['.$assets->id.']" class="one_required">';                
             })
         ->addColumn('name',function($assets)
 	        {
-		        return link_to('hardware/'.$assets->id.'/view', $assets->name);
+		        return '<a title="'.$assets->name.'" href="hardware/'.$assets->id.'/view">'.$assets->name.'</a>';
 	        })	
 	        
         ->showColumns('asset_tag', 'serial')
@@ -985,7 +983,7 @@ class AssetsController extends AdminController
 		 ->addColumn('checkout_date',function($assets)
 	        {	
 		        	if (($assets->assigned_to!='') && ($assets->assetlog->first())) {
-			        	return $assets->assetlog->first()->created_at->format('M d, Y');
+			        	return $assets->assetlog->first()->created_at->format('Y-m-d');
 			        } 
 	            
 	        })	
