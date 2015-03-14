@@ -63,12 +63,33 @@
     	Lang::get('admin/hardware/table.change'), 
     	Lang::get('table.actions'))
     ->setUrl(route('api.hardware', Input::get('status')))   // this is the route where data will be retrieved
-    ->setOptions('deferRender', true)
-    ->setOptions('stateSave', true)
     ->setOptions(
             array(
+                'deferRender'=> true,
+                'stateSave'=> true,
+                'stateDuration'=> -1,
                 'dom' =>'CT<"clear">lfrtip',
-                'tableTools' => array('sSwfPath'=> asset('assets/swf/copy_csv_xls_pdf.swf') ),
+                'tableTools' => array(
+                    'sSwfPath'=> Config::get('app.url').'/assets/swf/copy_csv_xls_pdf.swf',
+                    'sRowSelect'=>'os',
+                    'aButtons'=>array(
+                        'select_all',
+                        'select_none',
+                        'copy',
+                        'print',
+                        array(
+                            'sExtends'=>'collection',
+                            'sButtonText'=>'Export',
+                            'aButtons'=>array(
+                                'csv',
+                                'xls',
+                                'pdf'
+                                )
+                            )
+                        ) 
+                    ),
+                'colVis'=> array('showAll'=>'Show All','restore'=>'Restore','exclude'=>array(7,8),'activate'=>'mouseover'),
+                'columnDefs'=> [array('visible'=>false,'targets'=>array(5,6))],
             )
         )
     ->render() }}
