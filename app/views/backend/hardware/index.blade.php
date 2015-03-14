@@ -57,7 +57,7 @@
 
 
 {{ Datatable::table()
-    ->addColumn('',Lang::get('admin/hardware/form.name'), 
+    ->addColumn('<i class="fa fa-check"></i>',Lang::get('admin/hardware/form.name'), 
     	Lang::get('admin/hardware/table.asset_tag'), 
     	Lang::get('admin/hardware/table.serial'),
 		Lang::get('admin/hardware/form.model'),
@@ -94,12 +94,12 @@
                             )
                         ) 
                     ),
-                'colVis'=> array('showAll'=>'Show All','restore'=>'Restore','exclude'=>array(9,10),'activate'=>'mouseover'),
+                'colVis'=> array('showAll'=>'Show All','restore'=>'Restore','exclude'=>array(0,9,10),'activate'=>'mouseover'),
                 'columnDefs'=> [array('visible'=>false,'targets'=>array(6,7,8))],
             )
         )
     ->render() }}
-    <button class="btn btn-default" id="bulkEdit" disabled>Bulk Edit</button>
+    <br><button class="btn btn-default" id="bulkEdit" disabled>Bulk Edit</button>
 
  {{ Form::close() }}
 
