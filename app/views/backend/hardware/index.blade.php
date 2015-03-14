@@ -92,7 +92,7 @@
                         ) 
                     ),
                 'colVis'=> array('showAll'=>'Show All','restore'=>'Restore','exclude'=>array(0,9,10),'activate'=>'mouseover'),
-                'columnDefs'=> array('visible'=>false,'targets'=>array(6,7,8)),
+                'columnDefs'=> array(array('visible'=>false,'targets'=>array(7,8,9)),array('bSortable'=>false,'targets'=>array(0,10,11)),array('asSorting'=>array('asc'),'aTargets'=>array(1))),
             )
         )
     ->render() }}
