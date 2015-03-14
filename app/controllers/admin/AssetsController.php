@@ -934,9 +934,9 @@ class AssetsController extends AdminController
 		$location = new \Chumper\Datatable\Columns\FunctionColumn('location', function ($assets)
 			{
 				if ($asset->assigneduser && $asset->assetloc)
-                    	<a href="{{ route('update/location', $asset->assetloc->id) }}">{{{ $asset->assetloc->name }}}</a>
+                    return '<a href="'.route('update/location', $asset->assetloc->id).'">'.$asset->assetloc->name.'</a>';
                 } elseif ($asset->defaultLoc){
-                    	<a href="{{ route('update/location', $asset->defaultLoc->id) }}">{{{ $asset->defaultLoc->name }}}</a>
+                    return '<a href="{'.route('update/location', $asset->defaultLoc->id).'">'.$asset->defaultLoc->name.'</a>';
                 }
 			});
         
