@@ -79,8 +79,6 @@
                     'sSwfPath'=> Config::get('app.url').'/assets/swf/copy_csv_xls_pdf.swf',
                     'sRowSelect'=>'os',
                     'aButtons'=>array(
-                        'select_all',
-                        'select_none',
                         'copy',
                         'print',
                         array(
@@ -95,7 +93,7 @@
                         ) 
                     ),
                 'colVis'=> array('showAll'=>'Show All','restore'=>'Restore','exclude'=>array(0,9,10),'activate'=>'mouseover'),
-                'columnDefs'=> [array('visible'=>false,'targets'=>array(6,7,8))],
+                'columnDefs'=> array('visible'=>false,'targets'=>array(6,7,8)),
             )
         )
     ->render() }}
