@@ -33,6 +33,10 @@
 {{-- Page content --}}
 @section('content')
 
+<style>
+.dataTables_filter {padding-right: 20px;}
+
+</style>
 
 <div class="row header">
     <div class="col-md-12">
