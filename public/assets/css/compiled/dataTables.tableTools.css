@@ -55,6 +55,7 @@ a.DTTT_button {
 	display: inline-block;
 	margin-right: 3px;
 	padding: 5px 8px;
+	height: 30px;
 	border: 1px solid #999;
 	cursor: pointer;
 	*cursor: hand;
