@@ -58,6 +58,7 @@
     	Lang::get('admin/hardware/table.serial'), 
     	Lang::get('admin/hardware/table.status'),
     	Lang::get('admin/hardware/form.model'),
+    	Lang::get('general.category'),
     	Lang::get('admin/hardware/table.eol'),
     	Lang::get('admin/hardware/table.checkout_date'), 
     	Lang::get('admin/hardware/table.change'), 
@@ -88,7 +89,7 @@
                             )
                         ) 
                     ),
-                'colVis'=> array('showAll'=>'Show All','restore'=>'Restore','exclude'=>array(7,8),'activate'=>'mouseover'),
+                'colVis'=> array('showAll'=>'Show All','restore'=>'Restore','exclude'=>array(8,9),'activate'=>'mouseover'),
                 'columnDefs'=> [array('visible'=>false,'targets'=>array(5,6))],
             )
         )
