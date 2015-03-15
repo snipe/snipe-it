@@ -161,7 +161,7 @@ a.DTTT_disabled {
  * BUTTON_STYLES
  * Action specific button styles
  * If you want img/tabletools - comment this back in
-*/
+
 a.DTTT_button_csv,
 a.DTTT_button_xls,
 a.DTTT_button_copy,
@@ -180,7 +180,7 @@ a.DTTT_button_print span {
 	line-height: 18px;
 	padding-right: 10px;
 }
-
+*/
 
 button.DTTT_button_collection span {
 	padding-right: 17px;
