@@ -45,13 +45,13 @@ class ReportsController extends AdminController
             Lang::get('general.model_no'),
             Lang::get('general.name'),
             Lang::get('admin/hardware/table.serial'),
+            Lang::get('general.status'),
             Lang::get('admin/hardware/table.purchase_date'),
             Lang::get('admin/hardware/table.purchase_cost'),
             Lang::get('admin/hardware/form.order'),
             Lang::get('admin/hardware/form.supplier'),
             Lang::get('admin/hardware/table.checkoutto'),
-            Lang::get('admin/hardware/table.location'),
-            Lang::get('general.status')
+            Lang::get('admin/hardware/table.location')
         );
         $header = array_map('trim', $header);
         $rows[] = implode($header, ',');
@@ -69,6 +69,11 @@ class ReportsController extends AdminController
             $row[] = '"'.$asset->model->modelno.'"';
             $row[] = $asset->name;
             $row[] = $asset->serial;
+            if ($asset->assetstatus) {
+                $row[] = $asset->assetstatus->name;
+            } else {
+                $row[] = '';
+            }
             $row[] = $asset->purchase_date;
             $row[] = '"'.number_format($asset->purchase_cost).'"';
             if ($asset->order_number) {
@@ -105,16 +110,6 @@ class ReportsController extends AdminController
                 }
             } else {
                 $row[] = '';  // Empty string if location is not set
-            }
-
-            if (($asset->status_id == '0') && ($asset->assigned_to == '0')) {
-                $row[] = Lang::get('general.ready_to_deploy');
-            } elseif (($asset->status_id == '') && ($asset->assigned_to == '0')) {
-                $row[] = Lang::get('general.pending');
-            } elseif ($asset->assetstatus) {
-                $row[] = $asset->assetstatus->name;
-            } else {
-                $row[] = '';
             }
 
             $rows[] = implode($row, ',');
