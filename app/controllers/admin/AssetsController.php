@@ -23,6 +23,7 @@ use Location;
 use Log;
 use DNS2D;
 use Mail;
+use Datatable;
 
 class AssetsController extends AdminController
 {
@@ -36,40 +37,7 @@ class AssetsController extends AdminController
 
     public function getIndex()
     {
-        // Grab all the assets
-
-		$assets = Asset::with('model','assigneduser','assetstatus','defaultLoc','assetlog')->Hardware();
-        // Filter results
-        if (Input::get('Pending')) {
-        	$assets->Pending();
-        } elseif (Input::get('RTD')) {
-        	$assets->RTD();
-        } elseif (Input::get('Undeployable')) {
-        	$assets->Undeployable();
-        } elseif (Input::get('Archived')) {
-        	$assets->Archived();
-        } elseif (Input::get('Requestable')) {
-        	$assets->RequestableAssets();
-        } elseif (Input::get('Deployed')) {
-        	$assets->Deployed();
-        } elseif (Input::get('Deleted')) {
-        	$assets->withTrashed()->Deleted();
-        }
-
-        $assets = $assets->orderBy('asset_tag', 'ASC')->get();
-
-
-        // Paginate the users
-        /**$assets = $assets->paginate(Setting::getSettings()->per_page)
-            ->appends(array(
-                'Pending' => Input::get('Pending'),
-                'RTD' => Input::get('RTD'),
-                'Undeployable' => Input::get('Undeployable'),
-                'Deployed' => Input::get('Deployed'),
-            ));
-        **/
-
-        return View::make('backend/hardware/index', compact('assets'));
+        return View::make('backend/hardware/index');
     }
 
 
@@ -910,6 +878,121 @@ class AssetsController extends AdminController
     }
 
 
+    public function getDatatable($status = null)
+    {
 
+       $assets = Asset::with('model','assigneduser','assetstatus','defaultLoc','assetlog','model','model.category')->Hardware();
+       
+
+			switch ($status) {
+				case 'Pending':
+					$assets->Pending();
+					break;
+				case 'RTD':
+					$assets->RTD();
+					break;
+				case 'Undeployable':
+					$assets->Undeployable();
+					break;
+				case 'Archived':
+					$assets->Archived();
+					break;
+				case 'Requestable':
+					$assets->RequestableAssets();
+					break;
+				case 'Deployed':
+					$assets->Deployed();
+					break;
+				case 'Deleted':
+					$assets->withTrashed()->Deleted();
+					break;
+			}	
+      
+			       
+        $assets = $assets->orderBy('asset_tag', 'ASC')->get();
+        
+        
+        $actions = new \Chumper\Datatable\Columns\FunctionColumn('actions', function ($assets) 
+        	{ 
+	        	if ($assets->deleted_at=='') {
+             		return '<a href="'.route('update/hardware', $assets->id).'" class="btn btn-warning btn-sm"><i class="fa fa-pencil icon-white"></i></a> <a data-html="false" class="btn delete-asset btn-danger btn-sm" data-toggle="modal" href="'.route('delete/hardware', $assets->id).'" data-content="'.Lang::get('admin/hardware/message.delete.confirm').'" data-title="'.Lang::get('general.delete').' '.htmlspecialchars($assets->asset_tag).'?" onClick="return false;"><i class="fa fa-trash icon-white"></i></a>';
+	        	} elseif ($asset->model->deleted_at!='') {
+	        		 	return '<a href="'.route('restore/hardware', $assets->id).'" class="btn btn-warning btn-sm"><i class="fa fa-recycle icon-white"></i></a>';
+	                
+	        	}
+        	
+	        });
+	        
+	    $inout = new \Chumper\Datatable\Columns\FunctionColumn('inout', function ($assets) 
+        	{ 
+	       	 	if (($assets->assigned_to !='') && ($assets->assigned_to > 0)) {
+					return '<a href="'.route('checkin/hardware', $assets->id).'" class="btn btn-primary btn-sm">'.Lang::get('general.checkin').'</a>';
+				} else {
+					return '<a href="'.route('checkout/hardware', $assets->id).'" class="btn btn-info btn-sm">'.Lang::get('general.checkout').'</a>';
+				}
+	        });
+        
+        
+        
+        return Datatable::collection($assets)
+        ->addColumn('',function($assets)
+            {                              
+                return '<input type="checkbox" name="edit_asset['.$assets->id.']" class="one_required">';                
+            })
+        ->addColumn('name',function($assets)
+	        {
+		        return '<a title="'.$assets->name.'" href="hardware/'.$assets->id.'/view">'.$assets->name.'</a>';
+	        })	
+	        
+        ->showColumns('asset_tag', 'serial')
+        
+		->addColumn('model',function($assets)
+			{
+			    return $assets->model->name;
+			})
+		
+	    ->addColumn('status',function($assets)
+	        {	
+		        	if ($assets->assigned_to!='') {
+			        	return link_to('../admin/users/'.$assets->assigned_to.'/view', $assets->assigneduser->fullName());
+			        } else {
+				        return $assets->assetstatus->name;				        
+			        }
+	            
+	        })
+		->addColumn('location',function($assets)
+            {
+                if ($assets->assigned_to && $assets->assetloc) {	                
+                    return link_to('admin/location/'.$assets->assetloc->id.'/edit', $assets->assetloc->name);
+                } elseif ($assets->defaultLoc){
+                    return link_to('admin/location/'.$assets->defaultLoc->id.'/edit', $assets->defaultLoc->name);
+                }
+            })
+		->addColumn('category',function($assets)
+			{
+				return $assets->model->category->name;
+
+			})	
+			
+		->addColumn('eol',function($assets)
+			{
+			    return $assets->eol_date();
+			})	
+		
+			
+		 ->addColumn('checkout_date',function($assets)
+	        {	
+		        	if (($assets->assigned_to!='') && ($assets->assetlog->first())) {
+			        	return $assets->assetlog->first()->created_at->format('Y-m-d');
+			        } 
+	            
+	        })	
+		->addColumn($inout)     
+	    ->addColumn($actions)           
+        ->searchColumns('name', 'asset_tag', 'serial', 'model', 'status','location','eol','checkout_date', 'inout','category')
+        ->orderColumns('name', 'asset_tag', 'serial', 'model', 'status','location','eol','checkout_date', 'inout')
+        ->make();
+        
+		}
 
 }

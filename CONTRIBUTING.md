@@ -19,3 +19,9 @@ The labels we use in GitHub Issues and Waffle.io indicate whether we've confirme
 If you're not a coder but want to give back to the project and you're fluent in other languages, that's okay too. We use [CrowdIn](https://crowdin.com) to manage translations, and it makes it super-simple for you to add translations (or validate proposed translations) to the project without messing with code. __Check out [the Snipe-IT CrowdIn translation project here](https://crowdin.com/project/snipe-it/)__.
 
 Thanks!
+
+-----
+
+## Contributor Code of Conduct
+
+Please note that this project is released with a [Contributor Code of Conduct](CODE_OF_CONDUCT.md). By participating in this project you agree to abide by its terms.

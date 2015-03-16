@@ -36,8 +36,8 @@
         <link rel="stylesheet" href="{{ asset('assets/css/compiled/user-profile.css') }}" type="text/css" media="screen" />
         <link rel="stylesheet" href="{{ asset('assets/css/compiled/form-showcase.css') }}" type="text/css" media="screen" />
         <link rel="stylesheet" href="{{ asset('assets/css/lib/jquery.dataTables.css') }}" type="text/css" media="screen" />
-        <link rel="stylesheet" href="{{ asset('assets/css/compiled/dataTables.responsive.css') }}" type="text/css" media="screen" />
-
+        <link rel="stylesheet" href="{{ asset('assets/css/compiled/dataTables.colVis.css') }}" type="text/css" media="screen" />
+        <link rel="stylesheet" href="{{ asset('assets/css/compiled/dataTables.tableTools.css') }}" type="text/css" media="screen" />
         <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/compiled/print.css') }}" media="print" />
 
 
@@ -48,7 +48,8 @@
         <!-- global header javascripts -->
         <script src="{{ asset('assets/js/jquery-latest.js') }}"></script>
         <script src="{{ asset('assets/js/jquery.dataTables.min.js') }}"></script>
-        <script src="{{ asset('assets/js/dataTables.responsive.js') }}"></script>
+        <script src="{{ asset('assets/js/dataTables.colVis.js') }}"></script>
+        <script src="{{ asset('assets/js/dataTables.tableTools.js') }}"></script>
 
         <script>
             window.snipeit = {
@@ -255,12 +256,12 @@
                 </a>
 
                 <ul class="submenu{{ (Request::is('hardware*') ? ' active' : '') }}">
-                    <li><a href="{{ URL::to('hardware?Deployed=true') }}" {{{ (Request::query('Deployed') ? ' class="active"' : '') }}} >@lang('general.deployed')</a></li>
-                    <li><a href="{{ URL::to('hardware?RTD=true') }}" {{{ (Request::query('RTD') ? ' class="active"' : '') }}} >@lang('general.ready_to_deploy')</a></li>
-                    <li><a href="{{ URL::to('hardware?Pending=true') }}" {{{ (Request::query('Pending') ? ' class="active"' : '') }}} >@lang('general.pending')</a></li>
-                    <li><a href="{{ URL::to('hardware?Undeployable=true') }}" {{{ (Request::query('Undeployable') ? ' class="active"' : '') }}} >@lang('general.undeployable')</a></li>
-                     <li><a href="{{ URL::to('hardware?Archived=true') }}" {{{ (Request::query('Archived') ? ' class="active"' : '') }}} >@lang('admin/hardware/general.archived')</a></li>
-                     <li><a href="{{ URL::to('hardware?Requestable=true') }}" {{{ (Request::query('Requestable') ? ' class="active"' : '') }}} >@lang('admin/hardware/general.requestable')</a></li>
+                    <li><a href="{{ URL::to('hardware?status=Deployed') }}" {{{ (Request::query('Deployed') ? ' class="active"' : '') }}} >@lang('general.deployed')</a></li>
+                    <li><a href="{{ URL::to('hardware?status=RTD') }}" {{{ (Request::query('RTD') ? ' class="active"' : '') }}} >@lang('general.ready_to_deploy')</a></li>
+                    <li><a href="{{ URL::to('hardware?status=Pending') }}" {{{ (Request::query('Pending') ? ' class="active"' : '') }}} >@lang('general.pending')</a></li>
+                    <li><a href="{{ URL::to('hardware?status=Undeployable') }}" {{{ (Request::query('Undeployable') ? ' class="active"' : '') }}} >@lang('general.undeployable')</a></li>
+                     <li><a href="{{ URL::to('hardware?status=Archived') }}" {{{ (Request::query('Archived') ? ' class="active"' : '') }}} >@lang('admin/hardware/general.archived')</a></li>
+                     <li><a href="{{ URL::to('hardware?status=Requestable') }}" {{{ (Request::query('Requestable') ? ' class="active"' : '') }}} >@lang('admin/hardware/general.requestable')</a></li>
 
                     <li><a href="{{ URL::to('hardware') }}">@lang('general.list_all')</a></li>
 
