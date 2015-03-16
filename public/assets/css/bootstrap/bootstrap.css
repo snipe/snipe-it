@@ -1328,8 +1328,9 @@ th {
   padding: 5px;
 }
 .table-bordered {
-  border: 1px solid #dddddd;
+  border-top: 1px solid #dddddd;
 }
+/*
 .table-bordered > thead > tr > th,
 .table-bordered > tbody > tr > th,
 .table-bordered > tfoot > tr > th,
@@ -1338,6 +1339,7 @@ th {
 .table-bordered > tfoot > tr > td {
   border: 1px solid #dddddd;
 }
+*/
 .table-bordered > thead > tr > th,
 .table-bordered > thead > tr > td {
   border-bottom-width: 2px;
