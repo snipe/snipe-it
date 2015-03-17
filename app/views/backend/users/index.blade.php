@@ -25,7 +25,7 @@
         @else
             @lang('general.current')
         @endif
-	@lang('general.users')
+         @lang('general.users')
     </h3>
     </div>
 </div>
