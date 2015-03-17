@@ -15,7 +15,7 @@ Account Sign in ::
     </div>
 </div>
 
-<div class="row form-wrapper">
+<div class="col-md-6 col-md-offset-1">
 
     <form method="post" action="{{ route('signin') }}" class="form-horizontal">
         <!-- CSRF Token -->
@@ -23,8 +23,8 @@ Account Sign in ::
         
             <!-- Email -->
             <div class="form-group{{ $errors->first('email', ' error') }}">
-                <label for="email" class="col-md-3 control-label">Email</label>
-                    <div class="col-md-5">
+                <label for="email" class="col-md-5 col-sm-12 control-label">Email</label>
+                    <div class="col-md-7 col-sm-12">
                         <input class="form-control" type="email" name="email" id="email" value="{{{ Input::old('email') }}}" />
                         {{ $errors->first('email', '<br><span class="alert-msg"><i class="fa fa-times"></i> :message</span>') }}
                     </div>
@@ -32,30 +32,31 @@ Account Sign in ::
 
             <!-- Password -->
             <div class="form-group{{ $errors->first('password', ' error') }}">
-                <label for="password" class="col-md-3 control-label">Password</label>
-                    <div class="col-md-5">
+                <label for="password" class="col-md-5 col-sm-12 control-label">Password</label>
+                    <div class="col-md-7 col-sm-12">
                         <input class="form-control" type="password" name="password" id="password" value="{{{ Input::old('password') }}}" />
                         {{ $errors->first('password', '<br><span class="alert-msg"><i class="fa fa-times"></i> :message</span>') }}
                     </div>
             </div>
             
             <!-- Form Actions -->
-            <div class="form-group checkbox">
-    		<div class="checkbox col-md-offset-3 col-md-3 col-sm-12">
-    			<label>			
-    				 	{{ Form::checkbox('remember-me', '1', Input::old('remember-me')) }}
-    				 	Remember me	                 
-    			</label>
-    		</div>
-                <div class="col-md-6 col-sm-12">
-                    <div class="col-md-1">
-                        <button type="submit" class="btn btn-success"><i class="fa fa-ok icon-white"></i> Sign in</button>
-                    </div>
-                    <div class="col-md-4 col-sm-12">
-                        <a href="{{ route('forgot-password') }}" class="btn btn-link">I forgot my password</a>
-                    </div>
-                </div>
+            <div class="col-md-7 col-sm-12 col-md-offset-5">
+       
+	    		<div class="form-group checkbox col-md-8 col-sm-12">
+	    			<label>			
+	    				 	{{ Form::checkbox('remember-me', '1', Input::old('remember-me'), array('style'=>'margin-left: 0px; margin-right: 5px;')) }}
+	    				 	Remember me	                 
+	    			</label>
+	    		</div>
+	    		<div class="col-md-4 col-sm-6 pull-right">
+	                 <button type="submit" class="btn btn-success"><i class="fa fa-ok icon-white"></i> Sign in</button>
+	            </div>                    
+	            
             </div>
+            <div class="col-md-7 col-sm-12 col-md-offset-5 text-right" style="padding-top: 15px;">
+	                <a href="{{ route('forgot-password') }}">I forgot my password</a>
+	            </div>
+        
     </form>
 </div>
 @stop
