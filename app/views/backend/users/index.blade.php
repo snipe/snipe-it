@@ -20,12 +20,12 @@
         @endif
 
         <h3>
-        @if (Input::get('onlyTrashed'))
+        @if (Input::get('status')=='deleted')
             @lang('general.deleted')
         @else
             @lang('general.current')
         @endif
-
+	@lang('general.users')
     </h3>
     </div>
 </div>
