@@ -30,7 +30,7 @@
     </div>
 </div>
 
-<div class="row form-wrapper">
+<div class="row">
 
 {{ Datatable::table()
     ->addColumn(
