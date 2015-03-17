@@ -20,7 +20,7 @@ use Redirect;
 use Sentry;
 use Validator;
 use View;
-use Chumper\Datatable\Facades\Datatable;
+use Datatable;
 use League\Csv\Reader;
 use Mail;
 
@@ -47,41 +47,9 @@ class UsersController extends AdminController
      */
     public function getIndex()
     {
-        // Grab all the users - depending on the scope to include
-        $users = Sentry::getUserProvider()->createModel();
-
-        // Do we want to include the deleted users?
-	// the with and onlyTrashed calls currently do not work - returns an
-	// inconsistent array which cannot be displayed by the blade output
-
-        if (Input::get('withTrashed')) {
-
-            $users = $users->withTrashed();
-            //$users = Sentry::getUserProvider()->createModel()->paginate();
-
-        } elseif (Input::get('onlyTrashed')) {
-
-	// this is a tempoary 'fix' to display NO deleted users.
-            //$users = Sentry::getUserProvider()->createModel()->whereNotNull('deleted_at')->paginate();
-            //$users = Sentry::findAllUsers();
-            //$users = users::deletedUsers()->paginate();
-            $users = Sentry::getUserProvider()->createModel()->onlyTrashed();
-            //$users = users::whereNotNull('deleted_at')->paginate();
-            //$users = $users->onlyTrashed();
-            //$users = Users::onlyTrashed()->get();
-            //$users = Sentry::getUserProvider()->createModel();
-        }
-
-
-        // Paginate the users
-        $users = $users->paginate(100000)
-            ->appends(array(
-                'withTrashed' => Input::get('withTrashed'),
-                'onlyTrashed' => Input::get('onlyTrashed'),
-            ));
-
+ 
         // Show the page
-        return View::make('backend/users/index', compact('users'));
+        return View::make('backend/users/index');
     }
 
     /**
@@ -490,34 +458,7 @@ class UsersController extends AdminController
 
     }
 
-    public function getDatatable()
-    {
-        return Datatable::collection(User::all())
-        ->addColumn('name',function ($model) {
-                $name = HTML::image($model->gravatar(), $model->first_name, array('class'=>'img-circle avatar hidden-phone', 'style'=>'max-width: 45px'));
-                $name .= HTML::link(URL::action('Controllers\Admin\UsersController@getView', $model->id), $model->first_name . ' ' . $model->last_name, array('class' => 'name'));
-                return $name;
-            }
-        )
-        ->showColumns('email')
-        ->addColumn('assets', function ($model) {
-                $assets = $model->assets->count();
-                return $assets;
-            }
-        )
-        ->addColumn('licenses', function ($model) {
-                $licenses = $model->licenses->count();
-                return $licenses;
-            }
-        )
-        ->addColumn('activated', function ($model) {
-                $activated = $model->isActivated() ? '<i class="fa fa-check"></i>' : '';
-                return $activated;
-            }
-        )
-        ->make();
-    }
-
+   
     /**
      * Unsuspend the given user.
      *
@@ -732,6 +673,87 @@ class UsersController extends AdminController
 		return Redirect::route('users')->with('duplicates',$duplicates)->with('success', 'Success');
 		
 	}
+	
+	
+	public function getDatatable($status = null)
+    {
+	    
+	$users = User::with('assets');
+	
+	switch ($status) {
+		case 'deleted':
+			$users->GetDeleted();
+			break;
+		case '':
+			$users->GetNotDeleted();
+			break;
+	}	
+	
+	$users = $users->orderBy('created_at', 'DESC')->get();       
+        
+    $actions = new \Chumper\Datatable\Columns\FunctionColumn('actions', function ($users) 
+        	{ 
+	        	$action_buttons = '';
+
+				
+                if ( ! is_null($users->deleted_at)) {
+                	$action_buttons .= '<a href="'.route('restore/user', $users->id).'" class="btn btn-warning btn-sm"><i class="fa fa-share icon-white"></i></a> ';
+                } else {
+	                if ($users->accountStatus()=='suspended') {
+			               $action_buttons .= '<a href="'.route('unsuspend/user', $users->id).'" class="btn btn-warning btn-sm"><span class="fa fa-time icon-white"></span></a> ';
+					}
+					
+                	$action_buttons .= '<a href="'.route('update/user', $users->id).'" class="btn btn-warning btn-sm"><i class="fa fa-pencil icon-white"></i></a> ';
+                	
+					if ((Sentry::getId() !== $users->id) && (!Config::get('app.lock_passwords'))) {
+	                	$action_buttons .= '<a data-html="false" class="btn delete-asset btn-danger btn-sm" data-toggle="modal" href="'.route('delete/user', $users->id).'" data-content="Are you sure you wish to delete this user?" data-title="Delete '.htmlspecialchars($users->first_name).'?" onClick="return false;"><i class="fa fa-trash icon-white"></i></a> ';
+	                } else {
+	                	$action_buttons .= ' <span class="btn delete-asset btn-danger btn-sm disabled"><i class="fa fa-trash icon-white"></i></span>';
+	                }
+                }
+                return $action_buttons;
+	        	
+	        });
+	        
+     
+        return Datatable::collection($users)
+        ->addColumn('name',function($users)
+	        {
+		        return '<a title="'.$users->fullName().'" href="users/'.$users->id.'/view">'.$users->fullName().'</a>';
+	        })	
+	        
+	     ->addColumn('email',function($users)
+	        {
+		        return '<a title="'.$users->email.'" href="mailto:'.$users->email.'">'.$users->email.'</a>';
+	        })
+	        
+	     ->addColumn('manager',function($users)
+	        {
+		        if ($users->manager) {
+		       	 return '<a title="'.$users->manager->fullName().'" href="users/'.$users->manager->id.'/view">'.$users->manager->fullName().'</a>';
+		       	} 
+	        })
+	        
+		->addColumn('assets',function($users)
+	        {
+		        return $users->assets->count();
+	        })
+	        
+		->addColumn('licenses',function($users)
+	        {
+		        return $users->licenses->count();
+	        }) 
+	    ->addColumn('activated',function($users)
+	        {
+		        return $users->isActivated() ? '<i class="fa fa-check"></i>' : '';
+	        }) 
+   
+	    ->addColumn($actions)           
+        ->searchColumns('name','email','manager','activated', 'licenses','assets')
+        ->orderColumns('name','email','manager','activated', 'licenses','assets')
+        ->make();
+        
+		}
 	
 
     

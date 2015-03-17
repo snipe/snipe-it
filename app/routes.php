@@ -212,7 +212,7 @@ Route::group(array('prefix' => 'admin', 'before' => 'admin-auth', 'namespace' =>
 
     # User Management
     Route::group(array('prefix' => 'users'), function () {
-        Route::get('/', array('as' => 'users', 'uses' => 'UsersController@getIndex'));
+       
         Route::get('create', array('as' => 'create/user', 'uses' => 'UsersController@getCreate'));
         Route::post('create', 'UsersController@postCreate');
         Route::get('import', array('as' => 'import/user', 'uses' => 'UsersController@getImport'));
@@ -225,9 +225,9 @@ Route::group(array('prefix' => 'admin', 'before' => 'admin-auth', 'namespace' =>
         Route::get('{userId}/restore', array('as' => 'restore/user', 'uses' => 'UsersController@getRestore'));
         Route::get('{userId}/view', array('as' => 'view/user', 'uses' => 'UsersController@getView'));
         Route::get('{userId}/unsuspend', array('as' => 'unsuspend/user', 'uses' => 'UsersController@getUnsuspend'));
-
-
-        Route::get('datatable', array('as' => 'api.users', 'uses' => 'UsersController@getDatatable'));
+        Route::get('api/users/{status?}', array('as'=>'api.users', 'uses'=>'UsersController@getDatatable'));
+		Route::get('/', array('as' => 'users', 'uses' => 'UsersController@getIndex'));
+		
     });
 
     # Group Management

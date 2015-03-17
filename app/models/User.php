@@ -23,6 +23,7 @@ class User extends SentryUserModel
     {
         return "{$this->first_name} {$this->last_name}";
     }
+    
 
     /**
      * Returns the user Gravatar image url.
@@ -89,4 +90,16 @@ class User extends SentryUserModel
             return '';
         }
     }
+    
+    public function scopeGetDeleted($query)
+	{
+		return $query->whereNotNull('deleted_at');
+	}
+	
+	public function scopeGetNotDeleted($query)
+	{
+		return $query->whereNull('deleted_at');
+	}
+
+
 }
