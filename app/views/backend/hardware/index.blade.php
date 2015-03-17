@@ -96,8 +96,7 @@
 				'order'=>array(array(1,'asc')),
             )
         )
-    ->render() }}
-    <br><button class="btn btn-default" id="bulkEdit" disabled>Bulk Edit</button>
+    ->render('backend/hardware/datatable') }}
 
  {{ Form::close() }}
 
