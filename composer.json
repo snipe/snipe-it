@@ -19,7 +19,7 @@
         "symfony/stopwatch": "~2",
 		"laravel/framework": "4.2.*",
 		"doctrine/dbal": "v2.4.2",
-		"cartalyst/sentry": "2.1.*",
+		"cartalyst/sentry": "2.1.5",
 		"barryvdh/laravel-debugbar": "1.x",
 		"chumper/datatable": "dev-master",
 		"dinesh/barcode": "dev-master",

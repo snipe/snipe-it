@@ -1,5 +1,5 @@
 {
-  "id" : "D6450B5E-8886-45AF-9A44-076CA02ECAA7",
+  "id" : "00000000-0000-0000-0000-000000000000",
   "javascriptIndentation" : 4,
   "files" : {
     "css\/lib\/morris.css" : {
@@ -117,12 +117,6 @@
     "css\/compiled\/ui-elements.css" : {
       "output" : "css\/compiled\/ui-elements.out.css"
     },
-    "css\/scss\/skins\/dark.scss" : {
-      "output" : "css\/scss\/skins\/dark.css",
-      "profiles" : {
-        "sass" : "00000000-0000-0000-0000-000000000000"
-      }
-    },
     "css\/scss\/elements.scss" : {
       "output" : "css\/scss\/elements.css",
       "profiles" : {
@@ -148,6 +142,9 @@
         "uglify" : "00000000-0000-0000-0000-000000000000",
         "jshint" : "00000000-0000-0000-0000-000000000000"
       }
+    },
+    "css\/compiled\/print.css" : {
+      "output" : "css\/compiled\/print.out.css"
     },
     "js\/jquery.flot.js" : {
       "output" : "js\/jquery.flot.out.js",
@@ -292,15 +289,15 @@
     "css\/lib\/font-awesome.css" : {
       "output" : "css\/lib\/font-awesome.out.css"
     },
-    "js\/fullcalendar.min.js" : {
-      "output" : "js\/fullcalendar.min.out.js",
+    "js\/jquery.tmpl.min.js" : {
+      "output" : "js\/jquery.tmpl.min.out.js",
       "profiles" : {
         "uglify" : "00000000-0000-0000-0000-000000000000",
         "jshint" : "00000000-0000-0000-0000-000000000000"
       }
     },
-    "js\/jquery.tmpl.min.js" : {
-      "output" : "js\/jquery.tmpl.min.out.js",
+    "js\/jquery.uniform.min.js" : {
+      "output" : "js\/jquery.uniform.min.out.js",
       "profiles" : {
         "uglify" : "00000000-0000-0000-0000-000000000000",
         "jshint" : "00000000-0000-0000-0000-000000000000"
@@ -309,8 +306,8 @@
     "css\/bootstrap\/bootstrap-overrides.css" : {
       "output" : "css\/bootstrap\/bootstrap-overrides.out.css"
     },
-    "js\/jquery.uniform.min.js" : {
-      "output" : "js\/jquery.uniform.min.out.js",
+    "js\/fullcalendar.min.js" : {
+      "output" : "js\/fullcalendar.min.out.js",
       "profiles" : {
         "uglify" : "00000000-0000-0000-0000-000000000000",
         "jshint" : "00000000-0000-0000-0000-000000000000"
@@ -429,8 +426,8 @@
   },
   "flows" : {
     "stylus" : {
-      "output" : "*.css",
-      "stylus" : "00000000-0000-0000-0000-000000000000"
+      "stylus" : "00000000-0000-0000-0000-000000000000",
+      "output" : "*.css"
     },
     "sass" : {
       "sass" : "00000000-0000-0000-0000-000000000000",
@@ -454,9 +451,9 @@
       "output" : "*.out.css"
     },
     "js" : {
-      "output" : "*.out.js",
+      "jshint" : "00000000-0000-0000-0000-000000000000",
       "uglify" : "00000000-0000-0000-0000-000000000000",
-      "jshint" : "00000000-0000-0000-0000-000000000000"
+      "output" : "*.out.js"
     }
   },
   "profiles" : {
@@ -466,6 +463,12 @@
         "name" : "Default Stylus Profile",
         "comments" : false,
         "format" : 1
+      }
+    },
+    "coffee" : {
+      "00000000-0000-0000-0000-000000000000" : {
+        "name" : "Default CoffeeScript Profile",
+        "bare" : false
       }
     },
     "sass" : {
@@ -493,12 +496,6 @@
           "jquery"
         ],
         "globals" : ""
-      }
-    },
-    "coffee" : {
-      "00000000-0000-0000-0000-000000000000" : {
-        "name" : "Default CoffeeScript Profile",
-        "bare" : false
       }
     },
     "less" : {
