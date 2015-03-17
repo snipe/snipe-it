@@ -145,6 +145,7 @@
                 $dataConfirmModal.modal({
                     show: true
                 });
+                return false;
             }
         };
 
