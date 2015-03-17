@@ -678,7 +678,7 @@ class UsersController extends AdminController
 	public function getDatatable($status = null)
     {
 	    
-	$users = User::with('assets');
+	$users = User::with('assets','licenses','manager');
 	
 	switch ($status) {
 		case 'deleted':
