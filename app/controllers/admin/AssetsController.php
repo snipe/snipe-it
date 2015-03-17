@@ -881,7 +881,7 @@ class AssetsController extends AdminController
     public function getDatatable($status = null)
     {
 
-       $assets = Asset::with('model','assigneduser','assetstatus','defaultLoc','assetlog','model','model.category','sentryThrottle')->Hardware();
+       $assets = Asset::with('model','assigneduser','assigneduser.userloc','assetstatus','defaultLoc','assetlog','model','model.category')->Hardware();
        
 
 			switch ($status) {
