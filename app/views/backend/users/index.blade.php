@@ -12,20 +12,20 @@
 <div class="row header">
     <div class="col-md-12">
 	    <a href="{{ route('import/user') }}" class="btn btn-default pull-right"><span class="fa fa-upload"></span> Import</a>
-        <a href="{{ route('create/user') }}" class="btn btn-success pull-right"><i class="fa fa-plus icon-white"></i>  @lang('general.create')</a>
-        @if (Input::get('status')=='deleted')
-            <a class="btn btn-default pull-right" href="{{ URL::to('admin/users') }}" style="margin-right: 5px;">Show Current Users</a>
+        <a href="{{ route('create/user') }}" class="btn btn-success pull-right" style="margin-right: 5px;"><i class="fa fa-plus icon-white"></i>  @lang('general.create')</a>
+         @if (Input::get('status')=='deleted')
+            <a class="btn btn-default pull-right" href="{{ URL::to('admin/users') }}" style="margin-right: 5px;">@lang('admin/users/table.show_current')</a>
         @else
-            <a class="btn btn-default pull-right" href="{{ URL::to('admin/users?status=deleted') }}" style="margin-right: 5px;">Deleted Users</a>
+            <a class="btn btn-default pull-right" href="{{ URL::to('admin/users?status=deleted') }}" style="margin-right: 5px;">@lang('admin/users/table.show_deleted')</a>
         @endif
 
         <h3>
-        @if (Input::get('onlyTrashed'))
+        @if (Input::get('status')=='deleted')
             @lang('general.deleted')
         @else
             @lang('general.current')
         @endif
-
+         @lang('general.users')
     </h3>
     </div>
 </div>

@@ -24,10 +24,12 @@ return array(
     'password_confirm' 		=> 'Confirm Password',
     'password' 				=> 'Password',
     'phone'  				=> 'Phone',
+    'show_current'          => 'Show Current Users',
+    'show_deleted'          => 'Show Deleted Users',
     'title' 				=> 'Title',
     'updateuser' 			=> 'Update User',
     'username' 				=> 'Username',
     'username_note' 		=> '(This is used for Active Directory binding only, not for login.)',
-    'cloneuser'                         => 'Clone User',
+    'cloneuser'             => 'Clone User',
     'viewusers' 			=> 'View Users',
 );
