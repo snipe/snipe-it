@@ -77,18 +77,23 @@ class User extends SentryUserModel
     {
         return $this->belongsTo('User','manager_id')->withTrashed();
     }
-
+    
+   
     public function accountStatus()
     {
-        $throttle = Sentry::findThrottlerByUserId($this->id);
-
-        if ($throttle->isBanned()) {
-            return 'banned';
-        } elseif ($throttle->isSuspended()) {
-            return 'suspended';
-        } else {
-            return '';
-        }
+	    if ($this->sentryThrottle->suspended==1) {
+		 	return 'suspended';	
+		} elseif ($this->sentryThrottle->banned==1) {
+		 	return 'banned';	
+	 	} else {		 	
+		 	return false;
+	 	}
+	 	
+	    
+    }
+    
+    public function sentryThrottle() {	    
+	    return $this->hasOne('Throttle'); 
     }
     
     public function scopeGetDeleted($query)
