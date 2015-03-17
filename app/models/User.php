@@ -98,7 +98,7 @@ class User extends SentryUserModel
     
     public function scopeGetDeleted($query)
 	{
-		return $query->whereNotNull('deleted_at');
+		return $query->withTrashed()->whereNotNull('deleted_at');
 	}
 	
 	public function scopeGetNotDeleted($query)
