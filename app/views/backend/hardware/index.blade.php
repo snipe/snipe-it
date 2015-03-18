@@ -57,7 +57,7 @@
 
 
 {{ Datatable::table()
-    ->addColumn('<i class="fa fa-check"></i>',Lang::get('admin/hardware/form.name'), 
+    ->addColumn('<input type="checkbox" id="checkAll" style="padding-left: 0px;">',Lang::get('admin/hardware/form.name'), 
     	Lang::get('admin/hardware/table.asset_tag'), 
     	Lang::get('admin/hardware/table.serial'),
 		Lang::get('admin/hardware/form.model'),
@@ -107,18 +107,28 @@
 
 	$(function() {
 
-	    $('body').on('change','input.one_required',function() {
+		function checkForChecked() {
 
 	        var check_checked = $('input.one_required:checked').length;
-	        //console.log(check_checked);
+
 	        if (check_checked > 0) {
 	            $('#bulkEdit').removeAttr('disabled');
 	        }
 	        else {
 	            $('#bulkEdit').attr('disabled', 'disabled');
 	        }
-	    });
+	    }
+	    
+	    $('table').on('change','input.one_required',checkForChecked);
+	    	    
+	    $("#checkAll").change(function () {
+			$("input:checkbox").prop('checked', $(this).prop("checked"));
+			checkForChecked();
+		});    
+		
 	});
+	
+	
 </script>
 
 
