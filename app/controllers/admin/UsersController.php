@@ -371,7 +371,7 @@ class UsersController extends AdminController
 
 
             // Do we have permission to delete this user?
-            if ($user->isSuperUser() and ! Sentry::getUser()->isSuperUser()) {
+            if ((!Sentry::getUser()->isSuperUser()) || (Config::get('app.lock_passwords'))) {
                 // Redirect to the user management page
                 return Redirect::route('users')->with('error', 'Insufficient permissions!');
             }
