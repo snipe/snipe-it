@@ -93,7 +93,11 @@
                     ),
                 'colVis'=> array('showAll'=>'Show All','restore'=>'Restore','exclude'=>array(0,10,11),'activate'=>'mouseover'),
                 'columnDefs'=> array(array('visible'=>false,'targets'=>array(7,8,9)),array('bSortable'=>false,'targets'=>array(0,10,11))),
-				'order'=>array(array(1,'asc')),
+		'order'=>array(array(1,'asc')),
+		'bProcessing'=>true,
+                'oLanguage'=>array(
+                    'sProcessing'=>'<i class="fa fa-spinner fa-spin"></i> Loading...'
+                    ),
             )
         )
     ->render('backend/hardware/datatable') }}

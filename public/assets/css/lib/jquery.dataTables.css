@@ -213,15 +213,16 @@ table.dataTable tr.even td.sorting_3 { background-color: #F9F9FF; }
 	top: 50%;
 	left: 50%;
 	width: 250px;
-	height: 30px;
+	height: 50px;
 	margin-left: -125px;
 	margin-top: -15px;
 	padding: 14px 0 2px 0;
 	border: 1px solid #ddd;
 	text-align: center;
 	color: #999;
-	font-size: 14px;
-	background-color: white;
+	font-size: 16px;
+	background-color: #FFF;
+	z-index: 1;
 }
 
 
