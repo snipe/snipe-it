@@ -961,8 +961,8 @@ class AssetsController extends AdminController
 	        })
 		->addColumn('location',function($assets)
             {
-                if ($assets->assigned_to && $assets->assetloc) {	                
-                    return link_to('admin/location/'.$assets->assetloc->id.'/edit', $assets->assetloc->name);
+                if ($assets->assigned_to && $assets->assigneduser->userloc) {	                
+                    return link_to('admin/location/'.$assets->assigneduser->userloc->id.'/edit', $assets->assigneduser->userloc->name);
                 } elseif ($assets->defaultLoc){
                     return link_to('admin/location/'.$assets->defaultLoc->id.'/edit', $assets->defaultLoc->name);
                 }
