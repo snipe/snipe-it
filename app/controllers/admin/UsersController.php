@@ -289,6 +289,7 @@ class UsersController extends AdminController
             $user->phone 			= Input::get('phone');
             $user->location_id 		= Input::get('location_id');
             $user->manager_id 		= Input::get('manager_id');
+            $user->notes		= Input::get('notes');
 
             if ($user->manager_id == "") {
                 $user->manager_id = NULL;
