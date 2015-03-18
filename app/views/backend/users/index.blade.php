@@ -67,7 +67,11 @@
                     ),
                 'colVis'=> array('showAll'=>'Show All','restore'=>'Restore','activate'=>'mouseover'),
                 'columnDefs'=> array(array('visible'=>false,'targets'=>array()),array('bSortable'=>false,'targets'=>array(6))),
-				'order'=>array(array(1,'asc')),
+		'order'=>array(array(1,'asc')),
+		'bProcessing'=>true,
+                'oLanguage'=>array(
+                    'sProcessing'=>'<i class="fa fa-spinner fa-spin"></i> Loading...'
+                    ),
             )
         )
     ->render() }}
