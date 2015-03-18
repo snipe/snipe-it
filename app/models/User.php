@@ -81,15 +81,17 @@ class User extends SentryUserModel
    
     public function accountStatus()
     {
-	    if ($this->sentryThrottle->suspended==1) {
-		 	return 'suspended';	
-		} elseif ($this->sentryThrottle->banned==1) {
-		 	return 'banned';	
-	 	} else {		 	
-		 	return false;
-	 	}
-	 	
-	    
+        if ($this->sentryThrottle) {
+    	    if ($this->sentryThrottle->suspended==1) {
+    		 	return 'suspended';	
+    		} elseif ($this->sentryThrottle->banned==1) {
+    		 	return 'banned';	
+    	 	} else {		 	
+    		 	return false;
+    	 	}
+        } else {
+            return false;
+        }
     }
     
     public function sentryThrottle() {	    
