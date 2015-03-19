@@ -68,7 +68,7 @@
     	Lang::get('admin/hardware/table.checkout_date'), 
     	Lang::get('admin/hardware/table.change'), 
     	Lang::get('table.actions'))
-    ->setUrl(route('api.hardware', Input::get('status')))   // this is the route where data will be retrieved
+    ->setUrl(route('api.hardware.list', Input::get('status')))   // this is the route where data will be retrieved
     ->setOptions(
             array(
                 'deferRender'=> true,
