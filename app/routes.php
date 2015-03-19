@@ -20,6 +20,11 @@ Route::group(array('prefix' => 'api', 'namespace' => 'Controllers\Admin', 'befor
         Route::resource('/', 'UsersController');
         Route::get('list/{status?}', array('as'=>'api.users.list', 'uses'=>'UsersController@getDatatable'));
     });
+    /*---Licenses API---*/
+    Route::group(array('prefix'=>'licenses'), function() {
+        Route::resource('/', 'LicensesController');
+        Route::get('list', array('as'=>'api.licenses.list', 'uses'=>'LicensesController@getDatatable'));
+    });
 });
 
 /*
