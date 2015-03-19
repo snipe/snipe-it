@@ -81,26 +81,23 @@
                  </label>
                 <div class="col-md-7">
                     @if (isset($selected_model))
-                        {{ Form::select('model_id', $model_list , $selected_model->id, array('class'=>'select2', 'style'=>'min-width:400px')) }}
+                        {{ Form::select('model_id', $model_list , $selected_model->id, array('class'=>'select2 model', 'style'=>'min-width:400px')) }}
 
                     @else
-                        {{ Form::select('model_id', $model_list , Input::old('model_id', $asset->model_id), array('class'=>'select2', 'style'=>'min-width:400px')) }}
+                        {{ Form::select('model_id', $model_list , Input::old('model_id', $asset->model_id), array('class'=>'select2 model', 'style'=>'min-width:400px')) }}
                     @endif
                     {{ $errors->first('model_id', '<br><span class="alert-msg"><i class="fa fa-times"></i> :message</span>') }}
                 </div>
             </div>
 
-
-			@if ($asset->model && $asset->model->show_mac_address == '1')
             <!-- MAC Address -->
-            <div class="form-group {{ $errors->has('mac_address') ? ' has-error' : '' }}">
+            <div id="mac_address" class="form-group {{ $errors->has('mac_address') ? ' has-error' : '' }}" style="display:none;">
                 <label for="mac_address" class="col-md-2 control-label">@lang('admin/hardware/form.mac_address')</label>
                     <div class="col-md-7">
                         <input class="form-control" type="text" name="mac_address" id="mac_address" value="{{{ Input::old('mac_address', $asset->mac_address) }}}" />
                         {{ $errors->first('mac_address', '<br><span class="alert-msg"><i class="fa fa-times"></i> :message</span>') }}
                     </div>
             </div>
-            @endif
 
             <!-- Purchase Date -->
             <div class="form-group {{ $errors->has('purchase_date') ? ' has-error' : '' }}">
@@ -218,4 +215,26 @@
         </form>
     </div>
 </div>
+<script>
+
+	var $eventSelect = $(".model");
+	$eventSelect.on("change", function () { mac_add($eventSelect.val()); });
+	$(function() {
+	    mac_add($(".model option:selected").val());
+	});
+	function mac_add(id) {
+	    $.ajax({
+	        url: '{{ route('check.model') }}',
+	        data: 'id=' + id,
+	        success: function(data) {
+	            if(data == true){
+	                 $("#mac_address").css("display", "block");
+	            } else {
+	                 $("#mac_address").css("display", "none");
+	            }
+	        }
+	    });
+	};
+</script>
+
 @stop

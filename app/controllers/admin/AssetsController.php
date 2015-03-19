@@ -154,6 +154,8 @@ class AssetsController extends AdminController
             } else {
                 $asset->rtd_location_id     = e(Input::get('rtd_location_id'));
             }
+            $checkModel = $this->checkModel(e(Input::get('model_id')));
+            $asset->mac_address = ($checkModel == true) ? e(Input::get('mac_address')) : NULL;
 
             // Save the asset data
             $asset->name            		= e(Input::get('name'));
@@ -162,7 +164,6 @@ class AssetsController extends AdminController
             $asset->order_number            = e(Input::get('order_number'));
             $asset->notes            		= e(Input::get('notes'));
             $asset->asset_tag            	= e(Input::get('asset_tag'));
-            $asset->mac_address 			= e(Input::get('mac_address'));
             $asset->user_id          		= Sentry::getId();
             $asset->archived          			= '0';
             $asset->physical            		= '1';
@@ -289,6 +290,9 @@ class AssetsController extends AdminController
             } else {
                 $asset->rtd_location_id     = e(Input::get('rtd_location_id'));
             }
+            
+            $checkModel = $this->checkModel(e(Input::get('model_id')));
+            $asset->mac_address = ($checkModel == true) ? e(Input::get('mac_address')) : NULL;
 
             // Update the asset data
             $asset->name            		= e(Input::get('name'));
@@ -298,7 +302,6 @@ class AssetsController extends AdminController
             $asset->asset_tag           	= e(Input::get('asset_tag'));
             $asset->notes            		= e(Input::get('notes'));
             $asset->physical            	= '1';
-            $asset->mac_address 			= e(Input::get('mac_address'));
 
             // Was the asset updated?
             if($asset->save()) {
@@ -993,5 +996,13 @@ class AssetsController extends AdminController
         ->make();
         
 		}
+
+	public function checkModel($id = null) {
+	        if(Input::get('id')) {
+	            $id = e(Input::get('id'));
+	        }
+	        $model = DB::table('models')->select('id','show_mac_address')->where('id','=',$id)->whereNull('deleted_at')->first();
+	        return $model->show_mac_address;
+	    }
 
 }

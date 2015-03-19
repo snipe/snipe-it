@@ -50,6 +50,7 @@ Route::group(array('prefix' => 'hardware', 'namespace' => 'Controllers\Admin', '
     Route::get('{assetId}/deletefile/{fileId}', array('as' => 'delete/assetfile', 'uses' => 'AssetsController@getDeleteFile'));
     Route::get('{assetId}/showfile/{fileId}', array('as' => 'show/assetfile', 'uses' => 'AssetsController@displayFile'));
     Route::post('{assetId}/edit', 'AssetsController@postEdit');
+    Route::get('check/model', array('as' => 'check.model', 'uses' => 'AssetsController@checkModel'));
 
     Route::post('bulkedit',
     	array('as' => 'hardware/bulkedit',
