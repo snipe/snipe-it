@@ -1,4 +1,26 @@
 <?php
+/*
+|--------------------------------------------------------------------------
+| Admin API Routes
+|--------------------------------------------------------------------------
+*/
+Route::group(array('prefix' => 'api', 'namespace' => 'Controllers\Admin', 'before' => 'admin-auth'), function () {
+    /*---Hardware API---*/
+    Route::group(array('prefix' => 'hardware'), function() {
+        Route::resource('/', 'AssetsController');
+        Route::get('list/{status?}', array('as'=>'api.hardware.list', 'uses'=>'AssetsController@getDatatable'));
+    });
+    /*---Accessories API---*/
+    Route::group(array('prefix'=>'accessories'), function () {
+        Route::resource('/', 'AccessoriesController');
+        Route::get('list', array('as'=>'api.accessories.list', 'uses'=>'AccessoriesController@getDatatable'));
+    });
+    /*---Users API---*/
+    Route::group(array('prefix'=>'users'), function() {
+        Route::resource('/', 'UsersController');
+        Route::get('list/{status?}', array('as'=>'api.users.list', 'uses'=>'UsersController@getDatatable'));
+    });
+});
 
 /*
 |--------------------------------------------------------------------------
@@ -17,9 +39,6 @@ Route::group(array('prefix' => 'hardware', 'namespace' => 'Controllers\Admin', '
     	'as' => 'hardware',
     	'uses' => 'AssetsController@getIndex')
     );
-
-    Route::resource('hardware', 'AssetsController');
-    Route::get('api/hardware/{status?}', array('as'=>'api.hardware', 'uses'=>'AssetsController@getDatatable'));
 
     Route::get('create/{model?}', array(
     	'as' => 'create/hardware',
@@ -116,6 +135,7 @@ Route::group(array('prefix' => 'admin', 'before' => 'admin-auth', 'namespace' =>
 
     # Accessories
         Route::group(array('prefix' => 'accessories'), function () {
+
             Route::get('create', array('as' => 'create/accessory', 'uses' => 'AccessoriesController@getCreate'));
             Route::post('create', 'AccessoriesController@postCreate');
             Route::get('{accessoryID}/edit', array('as' => 'update/accessory', 'uses' => 'AccessoriesController@getEdit'));
@@ -226,7 +246,6 @@ Route::group(array('prefix' => 'admin', 'before' => 'admin-auth', 'namespace' =>
         Route::get('{userId}/restore', array('as' => 'restore/user', 'uses' => 'UsersController@getRestore'));
         Route::get('{userId}/view', array('as' => 'view/user', 'uses' => 'UsersController@getView'));
         Route::get('{userId}/unsuspend', array('as' => 'unsuspend/user', 'uses' => 'UsersController@getUnsuspend'));
-        Route::get('api/users/{status?}', array('as'=>'api.users', 'uses'=>'UsersController@getDatatable'));
 		Route::get('/', array('as' => 'users', 'uses' => 'UsersController@getIndex'));
 		
     });
