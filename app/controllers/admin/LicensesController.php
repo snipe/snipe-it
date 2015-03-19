@@ -19,6 +19,7 @@ use Supplier;
 use Validator;
 use View;
 use Response;
+use Datatable;
 
 class LicensesController extends AdminController
 {
@@ -33,11 +34,8 @@ class LicensesController extends AdminController
 
     public function getIndex()
     {
-        // Grab all the licenses
-        $licenses = License::orderBy('created_at', 'DESC')->get();
-
         // Show the page
-        return View::make('backend/licenses/index', compact('licenses'));
+        return View::make('backend/licenses/index');
     }
 
 
@@ -776,5 +774,34 @@ class LicensesController extends AdminController
             // Redirect to the licence management page
             return Redirect::route('licenses')->with('error', $error);
         }
+    }
+
+    public function getDatatable() {
+        $licenses = License::orderBy('created_at', 'DESC')->get();
+
+        $actions = new \Chumper\Datatable\Columns\FunctionColumn('actions', function($licenses) {
+            return '<a href="'.route('update/license', $licenses->id).'" class="btn btn-warning btn-sm" style="margin-right:5px;"><i class="fa fa-pencil icon-white"></i></a><a data-html="false" class="btn delete-asset btn-danger btn-sm" data-toggle="modal" href="'.route('delete/license', $licenses->id).'" data-content="'.Lang::get('admin/licenses/message.delete.confirm').'" data-title="'.Lang::get('general.delete').' '.htmlspecialchars($licenses->name).'?" onClick="return false;"><i class="fa fa-trash icon-white"></i></a>';
+        });
+
+        return Datatable::collection($licenses)
+        ->addColumn('name', function($licenses) {
+            return link_to('/admin/licenses/'.$licenses->id.'/view', $licenses->name);
+        })
+        ->addColumn('serial', function($licenses) {
+            return link_to('/admin/licenses/'.$licenses->id.'/view', mb_strimwidth($licenses->serial, 0, 50, "..."));
+        })
+        ->addColumn('totalSeats', function($licenses) {
+            return $licenses->totalSeatsByLicenseID();
+        })
+        ->addColumn('remaining', function($licenses) {
+            return $licenses->remaincount();
+        })
+        ->addColumn('purchase_date', function($licenses) {
+            return $licenses->purchase_date;
+        })
+        ->addColumn($actions)
+        ->searchColumns('name','serial','totalSeats','remaining','purchase_date','actions')
+        ->orderColumns('name','serial','totalSeats','remaining','purchase_date','actions')
+        ->make();
     }
 }
