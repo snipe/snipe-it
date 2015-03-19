@@ -257,10 +257,8 @@
                                 </div>
                             </div>
                             @endif
-
-
-
                         </div>
+                    </div>
 		</div>
 
                     <!-- side address column -->

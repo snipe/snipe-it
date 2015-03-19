@@ -42,7 +42,7 @@
 	    Lang::get('admin/users/table.activated'), 
 	    Lang::get('table.actions')
     )  
-    ->setUrl(route('api.users', Input::get('status')))   // this is the route where data will be retrieved
+    ->setUrl(route('api.users.list', Input::get('status')))   // this is the route where data will be retrieved
     ->setOptions(
             array(
                 'deferRender'=> true,
