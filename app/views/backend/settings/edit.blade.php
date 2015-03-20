@@ -56,8 +56,14 @@ padding: 0px 20px;
                                         {{ Form::label('site_name', Lang::get('admin/settings/general.site_name')) }}
 	                                    </div>
 	                                    <div class="col-md-9">
-										{{ Form::text('site_name', Input::old('site_name', $setting->site_name), array('class' => 'form-control')) }}
-										{{ $errors->first('site_name', '<br><span class="alert-msg">:message</span>') }}
+		                                   @if (Config::get('app.lock_passwords')===true)
+		                                   		{{ Form::text('site_name', Input::old('site_name', $setting->site_name), array('class' => 'form-control', 'disabled'=>'disabled')) }}
+		                                   @else 
+		                                   		{{ Form::text('site_name', Input::old('site_name', $setting->site_name), array('class' => 'form-control')) }}
+
+		                                   @endif
+		                                   
+										  {{ $errors->first('site_name', '<br><span class="alert-msg">:message</span>') }}
 	                                    </div>
                                     </div>
 
