@@ -93,6 +93,7 @@ return array(
     'undeployable'			=> 'Nie przypisane',
     'unknown_admin'			=> 'Nieznany Administrator',
     'user'					=> 'Użytkownik',
+    'users'                 => 'Users',
     'viewassets'  			=> 'Zobacz przypisane aktywa',
     'website'               => 'Adres witryny',
     'welcome'				=> 'Witaj, :name',

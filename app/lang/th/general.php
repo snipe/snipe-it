@@ -93,6 +93,7 @@ return array(
     'undeployable'			=> 'Un-deployable',
     'unknown_admin'			=> 'Unknown Admin',
     'user'					=> 'User',
+    'users'                 => 'Users',
     'viewassets'  			=> 'View Assigned Assets',
     'website'               => 'Website',
     'welcome'				=> 'Welcome, :name',

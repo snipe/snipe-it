@@ -93,6 +93,7 @@ return array(
     'undeployable'			=> 'Tidak Boleh Agih',
     'unknown_admin'			=> 'Pentadbir Tidak Dikenali',
     'user'					=> 'Pengguna',
+    'users'                 => 'Users',
     'viewassets'  			=> 'Paparkan Harta yang diserahkan',
     'website'               => 'Tapak web',
     'welcome'				=> 'Selamat Datang :nama',

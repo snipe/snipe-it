@@ -93,6 +93,7 @@ return array(
     'undeployable'			=> 'No Instalable',
     'unknown_admin'			=> 'Admin Desconocido',
     'user'					=> 'Usuario',
+    'users'                 => 'Users',
     'viewassets'  			=> 'Ver Equipos Asignados',
     'website'               => 'Sitio web',
     'welcome'				=> 'Bienvenido, :name',

@@ -93,6 +93,7 @@ return array(
     'undeployable'			=> '无法被分配',
     'unknown_admin'			=> '未知管理员',
     'user'					=> '用户',
+    'users'                 => 'Users',
     'viewassets'  			=> '查看资产分配',
     'website'               => '站点',
     'welcome'				=> '欢迎您，:name',

@@ -2,33 +2,33 @@
 
 return array(
 
-    'user_exists'              	=> 'User already exists!',
-    'user_not_found'           	=> 'User [:id] does not exist.',
-    'user_login_required'      	=> 'The login field is required',
-    'user_password_required'   	=> 'The password is required.',
-    'insufficient_permissions' 	=> 'Insufficient Permissions.',
-    'user_deleted_warning' 		=> 'This user has been deleted. You will have to restore this user to edit them or assign them new assets.',
+    'user_exists'              	=> 'المستخدم موجود مسبقاً!',
+    'user_not_found'           	=> 'المستخدم [id:] غير موجود.',
+    'user_login_required'      	=> 'حقل "الدخول" مطلوب',
+    'user_password_required'   	=> 'كلمة السر مطلوبة.',
+    'insufficient_permissions' 	=> 'صلاحيات غير كافية.',
+    'user_deleted_warning' 		=> 'تم حذف المستخدم. سيكون عليك استعادة هذا المستخدم للتعديل عليه او تسليمه اجهزة جديدة.',
 
 
     'success' => array(
-        'create'    => 'User was successfully created.',
-        'update'    => 'User was successfully updated.',
-        'delete'    => 'User was successfully deleted.',
-        'ban'       => 'User was successfully banned.',
-        'unban'     => 'User was successfully unbanned.',
-        'suspend'   => 'User was successfully suspended.',
-        'unsuspend' => 'User was successfully unsuspended.',
-        'restored'  => 'User was successfully restored.',
-        'import'    => 'Users imported successfully.',
+        'create'    => 'تم إنشاء المستخدم بنجاح.',
+        'update'    => 'تم تعديل المستخدم بنجاح.',
+        'delete'    => 'تم حذف المستخدم بنجاح.',
+        'ban'       => 'تم حظر المستخدم بنجاح.',
+        'unban'     => 'تم إلغاء الحظر عن المستخدم بنجاح.',
+        'suspend'   => 'تم تعليق المستخدم بنجاح.',
+        'unsuspend' => 'تم إلغاء التعليق عن المستخدم بنجاح.',
+        'restored'  => 'تم استعادة المستخدم بنجاح.',
+        'import'    => 'تم استيراد المستخدمين بنجاح.',
     ),
 
     'error' => array(
-        'create' => 'There was an issue creating the user. Please try again.',
-        'update' => 'There was an issue updating the user. Please try again.',
-        'delete' => 'There was an issue deleting the user. Please try again.',
-        'unsuspend' => 'There was an issue unsuspending the user. Please try again.',
-        'import'    => 'There was an issue importing users. Please try again.',
-        'asset_already_accepted' => 'This asset has already been accepted.',
+        'create' => 'حدث خطأ ما أثناء إنشاء هذا المستخدم. حاول مرة أخرى.',
+        'update' => 'حدث خطأ أثناء تحديث هذا المستخدم. حاول مرة أخرى.',
+        'delete' => 'حدث خطأ ما أثناء حذف هذا المستخدم. حاول مرة أخرى.',
+        'unsuspend' => 'حدث خطأ ما أثناء إلغاء التعليق عن المستخدم. حاول مرة أخرى.',
+        'import'    => 'حدث خطأ أثناء استيراد المستخدمين. حاول مرة أخرى.',
+        'asset_already_accepted' => 'هذا الجهاز تم قبوله مسبقاً.',
     ),
 
 );

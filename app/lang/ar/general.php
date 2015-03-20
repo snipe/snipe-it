@@ -93,6 +93,7 @@ return array(
     'undeployable'			=> 'غير قابلة للتوزيع',
     'unknown_admin'			=> 'إداري غير معروف',
     'user'					=> 'المستخدم',
+    'users'                 => 'Users',
     'viewassets'  			=> 'عرض الأصول المسجلة',
     'website'               => 'الموقع',
     'welcome'				=> 'إهلاً وسهلاً، :name',

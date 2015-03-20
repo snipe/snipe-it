@@ -93,6 +93,7 @@ return array(
     'undeployable'			=> 'Ikke utleverbar',
     'unknown_admin'			=> 'Ukjent admin',
     'user'					=> 'Bruker',
+    'users'                 => 'Users',
     'viewassets'  			=> 'Vis tildelte eiendeler',
     'website'               => 'Nettsted',
     'welcome'				=> 'Velkommen, :name',
