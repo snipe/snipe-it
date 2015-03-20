@@ -11,6 +11,7 @@ use Sentry;
 use Str;
 use Validator;
 use View;
+use Datatable;
 
 class CategoriesController extends AdminController
 {
