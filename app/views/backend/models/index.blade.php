@@ -13,9 +13,9 @@
     <div class="col-md-12">
         <a href="{{ route('create/model') }}" class="btn btn-success pull-right"><i class="fa fa-plus icon-white"></i>  @lang('general.create')</a>
         @if(Input::get('status')=='Deleted')
-            <a href="{{ URL::to('hardware/models') }}" class="btn btn-default pull-right"><i class="fa fa-trash"></i>  @lang('admin/models/general.view_models')</a>
+            <a href="{{ URL::to('hardware/models') }}" class="btn btn-default pull-right" style="margin-right:5px;"><i class="fa fa-trash"></i>  @lang('admin/models/general.view_models')</a>
         @else
-            <a href="{{ URL::to('hardware/models?status=Deleted') }}" class="btn btn-default pull-right"><i class="fa fa-trash"></i>  @lang('admin/models/general.view_deleted')</a>
+            <a href="{{ URL::to('hardware/models?status=Deleted') }}" class="btn btn-default pull-right" style="margin-right:5px;"><i class="fa fa-trash"></i>  @lang('admin/models/general.view_deleted')</a>
         @endif
         <h3>@lang('admin/models/table.title')</h3>
     </div>
