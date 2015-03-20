@@ -1,6 +1,10 @@
 # Contribution Guidelines
 
-Please submit all issues and pull requests to the [snipe/snipe-it](http://github.com/snipe/snipe-it) repository in the `develop` branch!
+**Before opening an issue to report a bug or request help, make sure you've checked the [Common Issues](http://snipeitapp.com/documentation/common-issues/) and [Getting Help](http://snipeitapp.com/documentation/getting-help/) pages.**
+
+## Developing on Snipe-IT
+
+Please submit all pull requests to the [snipe/snipe-it](http://github.com/snipe/snipe-it) repository in the `develop` branch!
 
 **As you're working on bug-fixes or features, please break them out into their own feature branches and open the pull request against your feature branch**. It makes it _much_ easier to decipher down the road, as you open multiple pull requests over time, and makes it much easier for me to approve pull requests quickly.
 
