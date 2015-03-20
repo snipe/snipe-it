@@ -11,6 +11,7 @@ use Str;
 use Validator;
 use View;
 use Image;
+use Config;
 
 class SettingsController extends AdminController
 {
@@ -97,7 +98,11 @@ class SettingsController extends AdminController
 
         // Update the asset data
             $setting->id = '1';
-            $setting->site_name = e(Input::get('site_name'));
+            
+             if (Config::get('app.lock_passwords')==false) {
+	             $setting->site_name = e(Input::get('site_name'));
+             }
+            
             $setting->display_asset_name = e(Input::get('display_asset_name', '0'));
             $setting->display_checkout_date = e(Input::get('display_checkout_date', '0'));
             $setting->per_page = e(Input::get('per_page'));
