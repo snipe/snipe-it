@@ -61,7 +61,6 @@
                             ),
                             'columnDefs'=> array(
                                 array('bSortable'=>false,'targets'=>array(3)),
-                                array('width'=>'20%','targets'=>array(3)),
                                 ),
                             'order'=>array(array(0,'asc')),
                             'bProcessing'=>true,
