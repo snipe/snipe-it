@@ -64,14 +64,19 @@ class SettingsController extends AdminController
 
 
         // Declare the rules for the form validation
+        
         $rules = array(
-        "site_name" 	=> 'required|min:3',
-        "per_page"   	=> 'required|min:1|numeric',
-        "qr_text"		=> 'min:1|max:31',
-        "logo"   		=> 'mimes:jpeg,bmp,png,gif',
-        "alert_email"   => 'email',
-        );
+	        "per_page"   	=> 'required|min:1|numeric',
+	        "qr_text"		=> 'min:1|max:31',
+	        "logo"   		=> 'mimes:jpeg,bmp,png,gif',
+	        "alert_email"   => 'email',
+	        );
+        
+        if (Config::get('app.lock_passwords')==false) {
+	        $rules['site_name'] = 'required|min:3';
 
+	    } 
+        
         // Create a new validator instance from our validation rules
         $validator = Validator::make(Input::all(), $rules);
 
@@ -101,7 +106,7 @@ class SettingsController extends AdminController
             
              if (Config::get('app.lock_passwords')==false) {
 	             $setting->site_name = e(Input::get('site_name'));
-             }
+             } 
             
             $setting->display_asset_name = e(Input::get('display_asset_name', '0'));
             $setting->display_checkout_date = e(Input::get('display_checkout_date', '0'));
