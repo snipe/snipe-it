@@ -20,8 +20,7 @@
 	<div class="row profile">
 		<div class="col-md-9 bio">
 			{{ Datatable::table()
-                		->addColumn('',
-                    			Lang::get('admin/categories/table.title'),
+                		->addColumn(Lang::get('admin/categories/table.title'),
                     			Lang::get('general.type'),
                     			Lang::get('general.assets'),
                     			Lang::get('admin/categories/table.require_acceptance'),
@@ -50,9 +49,9 @@
 	                                        			)
 	                                    			)
 	                                		),
-	                            		'colVis'=> array('showAll'=>'Show All','restore'=>'Restore','exclude'=>array(0,6),'activate'=>'mouseover'),
-	                            		'columnDefs'=> array(array('visible'=>false,'targets'=>array(0)),array('bSortable'=>false,'targets'=>array(6))),
-	                            		'order'=>array(array(1,'asc')),
+	                            		'colVis'=> array('showAll'=>'Show All','restore'=>'Restore','exclude'=>array(5),'activate'=>'mouseover'),
+	                            		'columnDefs'=> array(array('bSortable'=>false,'targets'=>array(5))),
+	                            		'order'=>array(array(0,'asc')),
 	                            		'bProcessing'=>true,
 	                            		'oLanguage'=>array(
 	                                		'sProcessing'=>'<i class="fa fa-spinner fa-spin"></i> Loading...',
