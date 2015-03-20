@@ -22,11 +22,8 @@ class CategoriesController extends AdminController
 
     public function getIndex()
     {
-        // Grab all the categories
-        $categories = Category::orderBy('created_at', 'DESC')->get();
-
         // Show the page
-        return View::make('backend/categories/index', compact('categories'));
+        return View::make('backend/categories/index');
     }
 
 
@@ -215,7 +212,34 @@ class CategoriesController extends AdminController
 
     }
 
+    public function getDatatable()
+    {
+        // Grab all the categories
+        $categories = Category::orderBy('created_at', 'DESC')->get();
 
+        $actions = new \Chumper\Datatable\Columns\FunctionColumn('actions', function($categories) {
+            return '<a href="'.route('update/category', $categories->id).'" class="btn btn-warning btn-sm" style="margin-right:5px;"><i class="fa fa-pencil icon-white"></i></a><a data-html="false" class="btn delete-asset btn-danger btn-sm" data-toggle="modal" href="'.route('delete/category', $categories->id).'" data-content="'.Lang::get('admin/categories/message.delete.confirm').'" data-title="'.Lang::get('general.delete').' '.htmlspecialchars($categories->name).'?" onClick="return false;"><i class="fa fa-trash icon-white"></i></a>';
+        });
+
+        return Datatable::collection($categories)
+        ->showColumns('name')
+        ->addColumn('category_type', function($categories) {
+            return ucwords($categories->category_type);
+        })
+        ->addColumn('count', function($categories) {
+            return ($categories->category_type=='asset') ? link_to('/admin/settings/categories/'.$categories->id.'/view', $categories->assetscount()) : $categories->accessoriescount();
+        })
+        ->addColumn('acceptance', function($categories) {
+            return ($categories->require_acceptance=='1') ? '<i class="fa fa-check" style="margin-right:50%;margin-left:50%;"></i>' : '';
+        })
+        ->addColumn('eula', function($categories) {
+            return ($categories->getEula()) ? '<i class="fa fa-check" style="margin-right:50%;margin-left:50%;"></i></a>' : '';
+        })
+        ->addColumn($actions)
+        ->searchColumns('name','category_type','count','acceptance','eula','actions')
+        ->orderColumns('name','category_type','count','acceptance','eula','actions')
+        ->make();
+    }
 
 
 }

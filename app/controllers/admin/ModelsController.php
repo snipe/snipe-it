@@ -24,16 +24,8 @@ class ModelsController extends AdminController
      */
     public function getIndex()
     {
-        // Grab all the models
-        $models = Model::orderBy('created_at', 'DESC');
-        if (Input::get('Deleted')) {
-        	$models->withTrashed()->Deleted();
-        }
-        
-        $models = $models->with('category','assets','depreciation')->get();
-
         // Show the page
-        return View::make('backend/models/index', compact('models'));
+        return View::make('backend/models/index');
     }
 
 /**
@@ -315,6 +307,42 @@ class ModelsController extends AdminController
         return $view;
 
     }
+    
+    public function getDatatable($status = null)
+    {
+        $models = Model::orderBy('created_at', 'DESC')->with('category','assets','depreciation');
+        ($status != 'Deleted') ?: $models->withTrashed()->Deleted();;
+        $models = $models->get();
 
+        $actions = new \Chumper\Datatable\Columns\FunctionColumn('actions', function($models) {
+            if($models->deleted_at=='') {
+                return '<a href="'.route('update/model', $models->id).'" class="btn btn-warning btn-sm" style="margin-right:5px;"><i class="fa fa-pencil icon-white"></i></a><a data-html="false" class="btn delete-asset btn-danger btn-sm" data-toggle="modal" href="'.route('delete/model', $models->id).'" data-content="'.Lang::get('admin/models/message.delete.confirm').'" data-title="'.Lang::get('general.delete').' '.htmlspecialchars($models->name).'?" onClick="return false;"><i class="fa fa-trash icon-white"></i></a>';
+            } else {
+                return '<a href="'.route('restore/model', $models->id).'" class="btn btn-warning btn-sm"><i class="fa fa-recycle icon-white"></i></a>';
+            }
+        });
+
+        return Datatable::collection($models)
+        ->addColumn('name', function ($models) {
+            return link_to('/hardware/models/'.$models->id.'/view', $models->name);
+        })
+        ->showColumns('modelno')
+        ->addColumn('asset_count', function($models) {
+            return $models->assets->count();
+        })
+        ->addColumn('depreciation', function($models) {
+            return (($models->depreciation)&&($models->depreciation->id > 0)) ? $models->depreciation->name.' ('.$models->depreciation->months.')' : Lang::get('general.no_depreciation');
+        })
+        ->addColumn('category', function($models) {
+            return ($models->category) ? $models->category->name : '';
+        })
+        ->addColumn('eol', function($models) {
+            return ($models->eol) ? $models->eol.' '.Lang::get('general.months') : '';
+        })
+        ->addColumn($actions)
+        ->searchColumns('name','modelno','asset_count','depreciation','category','eol','actions')
+        ->orderColumns('name','modelno','asset_count','depreciation','category','eol','actions')
+        ->make();
+    }
 
 }

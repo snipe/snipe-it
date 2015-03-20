@@ -25,6 +25,16 @@ Route::group(array('prefix' => 'api', 'namespace' => 'Controllers\Admin', 'befor
         Route::resource('/', 'LicensesController');
         Route::get('list', array('as'=>'api.licenses.list', 'uses'=>'LicensesController@getDatatable'));
     });
+    /*---Models API---*/
+    Route::group(array('prefix'=>'models'), function() {
+        Route::resource('/', 'ModelsController');
+        Route::get('list/{status?}', array('as'=>'api.models.list', 'uses'=>'ModelsController@getDatatable'));
+    });
+    /*--- Categories API---*/
+    Route::group(array('prefix'=>'categories'), function() {
+        Route::resource('/', 'CategoriesController');
+        Route::get('list', array('as'=>'api.categories.list', 'uses'=>'CategoriesController@getDatatable'));
+    });
 });
 
 /*
