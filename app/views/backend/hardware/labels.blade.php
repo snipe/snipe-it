@@ -20,30 +20,31 @@
 
         overflow: hidden;
 
-        outline: 1px dotted /* outline doesn't occupy space like border does */
+        outline: none; /* outline doesn't occupy space like border does */
         }
     .page-break  {
         clear: left;
         display:block;
         page-break-after:always;
         }
-	    .qr_img {
+	.qr_img {
 		    float: left;
 	    }
 	    
-	    .qr_text {
+	 .qr_text {
 		    margin-left: 5px;
 		    float: left;
 		    font-family: arial, helvetica, sans-serif;
-		    font-size: 14px;
+		    font-size: 15px;
 	    }
     </style>
 
 </head>
 <body>
 
-
+ 
 @foreach ($assets as $asset)
+	<?php $count++; ?>
 	<div class="label">
 		<div class="qr_img"><img src="./{{{ $asset->id }}}/qr_code"></div>
 		<div class="qr_text">
@@ -51,10 +52,7 @@
 				{{ $settings->qr_text }}
 				<br><br>
 			@endif
-			@if ($asset->name!='')
-				N: {{ $asset->name }}
-				<br>
-			@endif
+			
 			@if ($asset->asset_tag!='')
 				T: {{ $asset->asset_tag }}
 				<br>
@@ -66,11 +64,16 @@
 	
 		</div>
 	</div>
+	@if ($count % 18 == 0)	
+		<div class="page-break"></div>
+		
+	@endif
+	
 @endforeach	
 
 
-<div class="label">(Repeat 30 times)</div>
-<div class="page-break"></div>
+
+
 
 </body>
 </html>

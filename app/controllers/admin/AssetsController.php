@@ -819,9 +819,10 @@ class AssetsController extends AdminController
 		    if (Input::get('bulk_actions')=='labels') {
 			    $assets = Asset::find($asset_ids);
 			    $assetcount = count($assets);
+			    $count = 0;
 			    
 			    $settings = Setting::getSettings();			
-			    return View::make('backend/hardware/labels')->with('assets',$assets)->with('settings',$settings);
+			    return View::make('backend/hardware/labels')->with('assets',$assets)->with('settings',$settings)->with('count',$count);
 
 			    
 			 // Bulk edit   
