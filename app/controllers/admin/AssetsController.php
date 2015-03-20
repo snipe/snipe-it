@@ -24,6 +24,7 @@ use Log;
 use DNS2D;
 use Mail;
 use Datatable;
+use TCPDF;
 
 class AssetsController extends AdminController
 {
@@ -799,18 +800,50 @@ class AssetsController extends AdminController
     **/
     public function postBulkEdit($assets = null)
     {
+	    
+	    if (!Input::has('edit_asset')) {
+			return Redirect::back()->with('error', 'No assets selected');
+		} else {
+			$asset_raw_array = Input::get('edit_asset');				
+			foreach ($asset_raw_array as $asset_id => $value) {
+				$asset_ids[] = $asset_id;		
+				
+			}
+			
+		}
+				
+	    if (Input::has('bulk_actions')) {
+		    
+		    
+		    // Create labels
+		    if (Input::get('bulk_actions')=='labels') {
+			    $assets = Asset::find($asset_ids);
+			    $assetcount = count($assets);
+			    
+			    $settings = Setting::getSettings();			
+			    return View::make('backend/hardware/labels')->with('assets',$assets)->with('settings',$settings);
 
-		if (Input::has('edit_asset')) {
+			    
+			 // Bulk edit   
+			} elseif (Input::get('bulk_actions')=='edit') {
+				
+				$assets = Input::get('edit_asset');
+		
+				$supplier_list = array('' => '') + Supplier::orderBy('name', 'asc')->lists('name', 'id');
+		        $statuslabel_list = array('' => '') + Statuslabel::lists('name', 'id');
+		        $location_list = array('' => '') + Location::lists('name', 'id');
+		        
+		        return View::make('backend/hardware/bulk')->with('assets',$assets)->with('supplier_list',$supplier_list)->with('statuslabel_list',$statuslabel_list)->with('location_list',$location_list);
 
-			$assets = Input::get('edit_asset');
-
-			$supplier_list = array('' => '') + Supplier::orderBy('name', 'asc')->lists('name', 'id');
-	        $statuslabel_list = array('' => '') + Statuslabel::lists('name', 'id');
-	        $location_list = array('' => '') + Location::lists('name', 'id');
+				    
+			}
+			
+		} else {
+			return Redirect::back()->with('error', 'No action selected');			
 		}
 
-		return View::make('backend/hardware/bulk')->with('assets',$assets)->with('supplier_list',$supplier_list)->with('statuslabel_list',$statuslabel_list)->with('location_list',$location_list);
 
+		
     }
 
 
