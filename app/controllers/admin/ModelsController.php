@@ -14,6 +14,7 @@ use Manufacturer;
 use Str;
 use Validator;
 use View;
+use Datatable;
 
 class ModelsController extends AdminController
 {
