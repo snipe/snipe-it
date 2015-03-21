@@ -28,7 +28,7 @@
                     			Lang::get('table.actions'))
         			->setOptions(
 	                        	array(
-	                            		'ajax'=> route('api.categories.list'),
+	                            		'sAjaxSource'=> route('api.categories.list'),
 	                            		'deferRender'=> true,
 	                            		'stateSave'=> true,
 	                            		'stateDuration'=> -1,
@@ -52,7 +52,7 @@
 	                            		'colVis'=> array('showAll'=>'Show All','restore'=>'Restore','exclude'=>array(5),'activate'=>'mouseover'),
 	                            		'columnDefs'=> array(array('bSortable'=>false,'targets'=>array(5))),
 	                            		'order'=>array(array(0,'asc')),
-	                            		'bProcessing'=>true,
+	                            		'processing'=>true,
 	                            		'oLanguage'=>array(
 	                                		'sProcessing'=>'<i class="fa fa-spinner fa-spin"></i> Loading...',
 	                                		),
