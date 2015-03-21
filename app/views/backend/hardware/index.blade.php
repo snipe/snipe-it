@@ -68,9 +68,9 @@
     	Lang::get('admin/hardware/table.checkout_date'), 
     	Lang::get('admin/hardware/table.change'), 
     	Lang::get('table.actions'))
-    ->setUrl(route('api.hardware.list', Input::get('status')))   // this is the route where data will be retrieved
     ->setOptions(
             array(
+            	'ajax'=> route('api.hardware.list', Input::get('status')),
                 'deferRender'=> true,
                 'stateSave'=> true,
                 'stateDuration'=> -1,
@@ -78,15 +78,40 @@
                 'tableTools' => array(
                     'sSwfPath'=> Config::get('app.url').'/assets/swf/copy_csv_xls_pdf.swf',
                     'aButtons'=>array(
-                        'copy',
-                        'print',
+                        array(
+                        	'sExtends'=>'copy',
+                        	'sButtonText'=>'Copy',
+                        	'mColumns'=>'visible',
+                        	'bFooter'=>false,
+                        	),
+                        array(
+                        	'sExtends'=>'print',
+                        	'sButtonText'=>'Print',
+                        	'mColumns'=>'visible',
+                        	'bShowAll'=>false,
+                        	),
                         array(
                             'sExtends'=>'collection',
                             'sButtonText'=>'Export',
                             'aButtons'=>array(
-                                'csv',
-                                'xls',
-                                'pdf'
+                                array(
+                                	'sExtends'=>'csv',
+                                	'sButtonText'=>'csv',
+                                	'mColumns'=>'visible',
+                                	'bFooter'=>false,
+                                	),
+                                array(
+                                	'sExtends'=>'xls',
+                                	'sButtonText'=>'XLS',
+                                	'mColumns'=>'visible',
+                                	'bFooter'=>false,
+                                	),
+                                array(
+                                	'sExtends'=>'pdf',
+                                	'sButtonText'=>'PDF',
+                                	'mColumns'=>'visible',
+                                	'bFooter'=>false,
+                                	)
                                 )
                             )
                         ) 
@@ -96,8 +121,8 @@
 		'order'=>array(array(1,'asc')),
 		'bProcessing'=>true,
                 'oLanguage'=>array(
-                    'sProcessing'=>'<i class="fa fa-spinner fa-spin"></i> Loading...'
-                    ),
+                	'sProcessing'=>'<i class="fa fa-spinner fa-spin"></i> Loading...'
+                ),
             )
         )
     ->render('backend/hardware/datatable') }}
