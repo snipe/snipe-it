@@ -88,7 +88,7 @@
                         	'sExtends'=>'print',
                         	'sButtonText'=>'Print',
                         	'mColumns'=>'visible',
-                        	'bShowAll'=>false,
+                        	'bShowAll'=>true,
                         	),
                         array(
                             'sExtends'=>'collection',
