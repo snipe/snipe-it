@@ -70,7 +70,7 @@
     	Lang::get('table.actions'))
     ->setOptions(
             array(
-            	'ajax'=> route('api.hardware.list', Input::get('status')),
+            	'sAjaxSource'=> route('api.hardware.list', Input::get('status')),
                 'deferRender'=> true,
                 'stateSave'=> true,
                 'stateDuration'=> -1,
@@ -119,7 +119,7 @@
                 'colVis'=> array('showAll'=>'Show All','restore'=>'Restore','exclude'=>array(0,10,11),'activate'=>'mouseover'),
                 'columnDefs'=> array(array('visible'=>false,'targets'=>array(7,8,9)),array('bSortable'=>false,'targets'=>array(0,10,11))),
 		'order'=>array(array(1,'asc')),
-		'bProcessing'=>true,
+		'processing'=>true,
                 'oLanguage'=>array(
                 	'sProcessing'=>'<i class="fa fa-spinner fa-spin"></i> Loading...'
                 ),
