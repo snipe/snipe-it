@@ -29,6 +29,7 @@ Route::group(array('prefix' => 'api', 'namespace' => 'Controllers\Admin', 'befor
     Route::group(array('prefix'=>'models'), function() {
         Route::resource('/', 'ModelsController');
         Route::get('list/{status?}', array('as'=>'api.models.list', 'uses'=>'ModelsController@getDatatable'));
+        Route::get('{modelId}/check', array('as' => 'api.models.check', 'uses' => 'ModelsController@checkModel'));
     });
     /*--- Categories API---*/
     Route::group(array('prefix'=>'categories'), function() {
@@ -84,7 +85,6 @@ Route::group(array('prefix' => 'hardware', 'namespace' => 'Controllers\Admin', '
     Route::get('{assetId}/deletefile/{fileId}', array('as' => 'delete/assetfile', 'uses' => 'AssetsController@getDeleteFile'));
     Route::get('{assetId}/showfile/{fileId}', array('as' => 'show/assetfile', 'uses' => 'AssetsController@displayFile'));
     Route::post('{assetId}/edit', 'AssetsController@postEdit');
-    Route::get('check/model', array('as' => 'check.model', 'uses' => 'AssetsController@checkModel'));
 
     Route::post('bulkedit',
     	array('as' => 'hardware/bulkedit',

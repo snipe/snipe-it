@@ -220,12 +220,14 @@
 	var $eventSelect = $(".model");
 	$eventSelect.on("change", function () { mac_add($eventSelect.val()); });
 	$(function() {
-	    mac_add($(".model option:selected").val());
+        var mac = $(".model option:selected").val();
+        if(mac!=''){
+	       mac_add(mac);
+        }
 	});
 	function mac_add(id) {
 	    $.ajax({
-	        url: '{{ route('check.model') }}',
-	        data: 'id=' + id,
+	        url: "{{Config::get('app.url')}}/api/models/"+id+"/check",
 	        success: function(data) {
 	            if(data == true){
 	                 $("#mac_address").css("display", "block");

@@ -1029,13 +1029,4 @@ class AssetsController extends AdminController
         ->make();
         
 		}
-
-	public function checkModel($id = null) {
-	        if(Input::get('id')) {
-	            $id = e(Input::get('id'));
-	        }
-	        $model = DB::table('models')->select('id','show_mac_address')->where('id','=',$id)->whereNull('deleted_at')->first();
-	        return $model->show_mac_address;
-	    }
-
 }

@@ -345,5 +345,10 @@ class ModelsController extends AdminController
         ->orderColumns('name','modelno','asset_count','depreciation','category','eol','actions')
         ->make();
     }
+    
+    public function checkModel($modelId) {
+        $model = Model::find($modelId);
+        return $model->show_mac_address;
+    }
 
 }
