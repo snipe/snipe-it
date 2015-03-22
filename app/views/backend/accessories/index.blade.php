@@ -37,13 +37,13 @@
                                     array(
                                     	'sExtends'=>'copy',
                                     	'sButtonText'=>'Copy',
-                                    	'mColumns'=>'visible',
+                                    	'mColumns'=>array(0,1,2),
                                     	'bFooter'=>false,
                                 	),
                                     array(
                                     	'sExtends'=>'print',
                                     	'sButtonText'=>'Print',
-                                    	'mColumns'=>'visible',
+                                    	'mColumns'=>array(0,1,2),
                                     	'bShowAll'=>true,
                                     	'bFooter'=>true,
                                 	),
@@ -54,19 +54,19 @@
                                             array(
                                             	'sExtends'=>'csv',
                                             	'sButtonText'=>'csv',
-                                            	'mColumns'=>'visible',
+                                            	'mColumns'=>array(0,1,2),
                                             	'bFooter'=>false,
                                         	),
                                             array(
                                             	'sExtends'=>'xls',
                                             	'sButtonText'=>'XLS',
-                                            	'mColumns'=>'visible',
+                                            	'mColumns'=>array(0,1,2),
                                             	'bFooter'=>false,
                                         	),
                                             array(
                                             	'sExtends'=>'pdf',
                                             	'sButtonText'=>'PDF',
-                                            	'mColumns'=>'visible',
+                                            	'mColumns'=>array(0,1,2),
                                             	'bFooter'=>false,
                                         	)
                                         )
