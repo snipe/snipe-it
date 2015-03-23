@@ -918,7 +918,7 @@ class AssetsController extends AdminController
     public function getDatatable($status = null)
     {
 
-       $assets = Asset::with('model','assigneduser','assigneduser.userloc','assetstatus','defaultLoc','assetlog','model','model.category')->Hardware()->select(array('id', 'name','model_id','assigned_to','asset_tag','serial','status_id','purchase_date'));
+       $assets = Asset::with('model','assigneduser','assigneduser.userloc','assetstatus','defaultLoc','assetlog','model','model.category')->Hardware()->select(array('id', 'name','model_id','assigned_to','asset_tag','serial','status_id','purchase_date','deleted_at'));
        
 
 			switch ($status) {
