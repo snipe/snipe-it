@@ -241,6 +241,37 @@ class CategoriesController extends AdminController
         ->orderColumns('name','category_type','count','acceptance','eula','actions')
         ->make();
     }
+    
+    public function getDataView($categoryID) {
+        $category = Category::find($categoryID);
+        $categoryassets = $category->assets;
+
+        $actions = new \Chumper\Datatable\Columns\FunctionColumn('actions', function ($categoryassets) 
+            { 
+                if (($categoryassets->assigned_to !='') && ($categoryassets->assigned_to > 0)) {
+                    return '<a href="'.route('checkin/hardware', $categoryassets->id).'" class="btn btn-primary btn-sm">'.Lang::get('general.checkin').'</a>';
+                } else {
+                    return '<a href="'.route('checkout/hardware', $categoryassets->id).'" class="btn btn-info btn-sm">'.Lang::get('general.checkout').'</a>';
+                }
+            });
+
+        return Datatable::collection($categoryassets)
+        ->addColumn('name', function ($categoryassets) {
+            return link_to('/hardware/'.$categoryassets->id.'/view', $categoryassets->name);
+        })
+        ->addColumn('asset_tag', function ($categoryassets) {
+            return link_to('/hardware/'.$categoryassets->id.'/view', $categoryassets->asset_tag);
+        })
+        ->addColumn('assigned_to', function ($categoryassets) {
+            if ($categoryassets->assigned_to) {
+                return link_to('/admin/users/'.$categoryassets->assigned_to.'/view', $categoryassets->assigneduser->fullName());
+            }
+        })
+        ->addColumn($actions)
+        ->searchColumns('name','asset_tag','assigned_to','actions')
+        ->orderColumns('name','asset_tag','assigned_to','actions')
+        ->make();
+    }
 
 
 }

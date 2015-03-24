@@ -37,6 +37,7 @@ Route::group(array('prefix' => 'api', 'namespace' => 'Controllers\Admin', 'befor
     Route::group(array('prefix'=>'categories'), function() {
         Route::resource('/', 'CategoriesController');
         Route::get('list', array('as'=>'api.categories.list', 'uses'=>'CategoriesController@getDatatable'));
+        Route::get('{categoryID}/view', array('as'=>'api.categories.view', 'uses'=>'CategoriesController@getDataView'));
     });
 });
 

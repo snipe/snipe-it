@@ -39,43 +39,54 @@
 
                             <!-- checked out categories table -->
                             @if (count($category->assets) > 0)
-                           <table id="example">
-                            <thead>
-                                <tr role="row">
-                                        <th class="col-md-3">@lang('general.name')</th>
-                                        <th class="col-md-3">@lang('general.asset_tag')</th>
-                                        <th class="col-md-3">@lang('general.user')</th>
-                                        <th class="col-md-2">@lang('table.actions')</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-
-                                    @foreach ($category->assets as $modelassets)
-                                    <tr>
-                                        <td><a href="{{ route('view/hardware', $modelassets->id) }}">{{{ $modelassets->name }}}</a></td>
-                                        <td><a href="{{ route('view/hardware', $modelassets->id) }}">{{{ $modelassets->asset_tag }}}</a></td>
-                                        <td>
-                                        @if ($modelassets->assigneduser)
-                                        <a href="{{ route('view/user', $modelassets->assigned_to) }}">
-                                        {{{ $modelassets->assigneduser->fullName() }}}
-                                        </a>
-                                        @endif
-                                        </td>
-                                        <td>
-                                        @if ($modelassets->assigned_to != 0)
-                                            <a href="{{ route('checkin/hardware', $modelassets->id) }}" class="btn-flat info">Checkin</a>
-                                        @else
-                                            <a href="{{ route('checkout/hardware', $modelassets->id) }}" class="btn-flat success">Checkout</a>
-                                        @endif
-                                        </td>
-
-                                    </tr>
-                                    @endforeach
-
-
-                                </tbody>
-                            </table>
-
+                              {{ Datatable::table()
+                                ->addColumn(Lang::get('general.name'),
+                                            Lang::get('general.asset_tag'),
+                                            Lang::get('general.user'), 
+                                            Lang::get('table.actions'))
+                                ->setOptions(
+                                        array(
+                                            'sAjaxSource'=>route('api.categories.view', $category->id),
+                                            'deferRender'=> true,
+                                            'stateSave'=> true,
+                                            'stateDuration'=> -1,
+                                            'dom' =>'T<"clear">lfrtip',
+                                            'tableTools' => array(
+                                                'sSwfPath'=> Config::get('app.url').'/assets/swf/copy_csv_xls_pdf.swf',
+                                                'aButtons'=>array(
+                                                    array(
+                                                        'sExtends'=>'copy',
+                                                    ),
+                                                    'print',
+                                                    array(
+                                                        'sExtends'=>'collection',
+                                                        'sButtonText'=>'Export',
+                                                        'aButtons'=>array(
+                                                            array(
+                                                                'sExtends'=>'csv',
+                                                            ),
+                                                            array(
+                                                                'sExtends'=>'xls',
+                                                            ),
+                                                            array(
+                                                                'sExtends'=>'pdf',
+                                                            ),
+                                                        ),
+                                                    ),
+                                                ) 
+                                            ),
+                                            'columnDefs'=> array(
+                                                array('bSortable'=>false,'targets'=>array(3)),
+                                                array('width'=>'auto','targets'=>array(3)),
+                                                ),
+                                            'order'=>array(array(0,'asc')),
+                                            'processing'=>true,
+                                            'oLanguage'=>array(
+                                                'sProcessing'=>'<i class="fa fa-spinner fa-spin"></i> Loading...',
+                                                ),
+                                        )
+                                    )
+                                ->render() }}
                             @else
                             <div class="col-md-9">
                                 <div class="alert alert-info alert-block">

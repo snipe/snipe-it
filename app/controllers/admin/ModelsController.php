@@ -379,8 +379,8 @@ class ModelsController extends AdminController
             }
         })
         ->addColumn($actions)
-        ->searchColumns('name','asset_tag','serial','assigned_to''actions')
-        ->orderColumns('name','asset_tag','serial','assigned_to''actions')
+        ->searchColumns('name','asset_tag','serial','assigned_to','actions')
+        ->orderColumns('name','asset_tag','serial','assigned_to','actions')
         ->make();
     }
 
