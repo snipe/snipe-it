@@ -31,6 +31,7 @@ Route::group(array('prefix' => 'api', 'namespace' => 'Controllers\Admin', 'befor
         Route::resource('/', 'ModelsController');
         Route::get('list/{status?}', array('as'=>'api.models.list', 'uses'=>'ModelsController@getDatatable'));
         Route::get('{modelId}/check', array('as' => 'api.models.check', 'uses' => 'ModelsController@checkModel'));
+        Route::get('{modelID}/view', array('as'=>'api.models.view', 'uses'=>'ModelsController@getDataView'));
     });
     /*--- Categories API---*/
     Route::group(array('prefix'=>'categories'), function() {

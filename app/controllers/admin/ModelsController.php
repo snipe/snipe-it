@@ -350,5 +350,38 @@ class ModelsController extends AdminController
         $model = Model::find($modelId);
         return $model->show_mac_address;
     }
+    
+    public function getDataView($modelID)
+    {
+        $model = Model::withTrashed()->find($modelID);
+        $modelassets = $model->assets;
+
+        $actions = new \Chumper\Datatable\Columns\FunctionColumn('actions', function ($modelassets) 
+            { 
+                if (($modelassets->assigned_to !='') && ($modelassets->assigned_to > 0)) {
+                    return '<a href="'.route('checkin/hardware', $modelassets->id).'" class="btn btn-primary btn-sm">'.Lang::get('general.checkin').'</a>';
+                } else {
+                    return '<a href="'.route('checkout/hardware', $modelassets->id).'" class="btn btn-info btn-sm">'.Lang::get('general.checkout').'</a>';
+                }
+            });
+
+        return Datatable::collection($modelassets)
+        ->addColumn('name', function ($modelassets) {
+            return link_to('/hardware/'.$modelassets->id.'/view', $modelassets->name);
+        })
+        ->addColumn('asset_tag', function ($modelassets) {
+            return link_to('/hardware/'.$modelassets->id.'/view', $modelassets->asset_tag);
+        })
+        ->showColumns('serial')
+        ->addColumn('assigned_to', function ($modelassets) {
+            if ($modelassets->assigned_to) {
+                return link_to('/admin/users/'.$modelassets->assigned_to.'/view', $modelassets->assigneduser->fullName());
+            }
+        })
+        ->addColumn($actions)
+        ->searchColumns('name','asset_tag','serial','assigned_to''actions')
+        ->orderColumns('name','asset_tag','serial','assigned_to''actions')
+        ->make();
+    }
 
 }
