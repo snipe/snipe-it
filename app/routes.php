@@ -14,6 +14,7 @@ Route::group(array('prefix' => 'api', 'namespace' => 'Controllers\Admin', 'befor
     Route::group(array('prefix'=>'accessories'), function () {
         Route::resource('/', 'AccessoriesController');
         Route::get('list', array('as'=>'api.accessories.list', 'uses'=>'AccessoriesController@getDatatable'));
+        Route::get('{accessoryID}/view', array('as'=>'api.accessories.view', 'uses'=>'AccessoriesController@getDataView'));
     });
     /*---Users API---*/
     Route::group(array('prefix'=>'users'), function() {

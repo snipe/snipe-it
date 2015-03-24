@@ -389,5 +389,22 @@ class AccessoriesController extends AdminController
         ->make();
     }
 
+	public function getDataView($accessoryID)
+	{
+		$accessory = Accessory::find($accessoryID);
+        $accessory_users = $accessory->users;
+
+		$actions = new \Chumper\Datatable\Columns\FunctionColumn('actions',function($accessory_users){
+			return '<a href="'.route('checkin/accessory', $accessory_users->pivot->id).'" class="btn-flat info">Checkin</a>';
+		});
+
+		return Datatable::collection($accessory_users)
+		->addColumn('name',function($accessory_users)
+			{
+				return link_to('/admin/users/'.$accessory_users->id.'/view', $accessory_users->fullName());
+			})
+		->addColumn($actions)
+		->make();
+    }
 
 }
