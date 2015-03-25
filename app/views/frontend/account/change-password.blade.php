@@ -60,7 +60,7 @@ Change your Password
 	<label class="col-md-2 control-label"></label>
 		<div class="col-md-7">
 			<a class="btn btn-link" href="{{ route('view-assets') }}">@lang('button.cancel')</a>
-			<button type="submit" class="btn btn-success"><i class="fa fa-check icon-white"></i> @lang('general.save')</button>
+			<button type="submit" class="btn btn-success" {{ ((Config::get('app.lock_passwords') && ($user->id)) ? ' disabled' : '') }}><i class="fa fa-check icon-white"></i> @lang('general.save')</button>
 		</div>
 	</div>
 
