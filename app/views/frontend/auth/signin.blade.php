@@ -40,20 +40,20 @@ Account Sign in ::
             </div>
             
             <!-- Form Actions -->
-            <div class="col-md-7 col-sm-12 col-md-offset-5">
+            <div class="col-md-7 col-sm-12 col-xs-12 col-md-offset-5">
        
-	    		<div class="form-group checkbox col-md-8 col-sm-12">
+	    		<div class="form-group checkbox col-md-4 col-sm-12 col-xs-7">
 	    			<label>			
 	    				 	{{ Form::checkbox('remember-me', '1', Input::old('remember-me'), array('style'=>'margin-left: 0px; margin-right: 5px;')) }}
 	    				 	Remember me	                 
 	    			</label>
 	    		</div>
-	    		<div class="col-md-4 col-sm-6 pull-right">
-	                 <button type="submit" class="btn btn-success"><i class="fa fa-ok icon-white"></i> Sign in</button>
+	    		<div class="col-md-4 col-sm-6 col-xs-6 pull-right">
+	                 <button type="submit" class="btn btn-success"><i class="fa fa-check icon-white"></i> Sign in</button>
 	            </div>                    
 	            
             </div>
-            <div class="col-md-7 col-sm-12 col-md-offset-5 text-right" style="padding-top: 15px;">
+            <div class="col-md-7 col-sm-12 col-xs-6 col-md-offset-5 text-right" style="padding-top: 15px;">
 	                <a href="{{ route('forgot-password') }}">I forgot my password</a>
 	            </div>
         
