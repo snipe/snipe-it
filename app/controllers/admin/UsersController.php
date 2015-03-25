@@ -305,7 +305,7 @@ class UsersController extends AdminController
 
 
             // Do we want to update the user password?
-            if ($password) {
+            if (($password)  && (!Config::get('app.lock_passwords'))) {
                 $user->password = $password;
             }
 
@@ -320,19 +320,22 @@ class UsersController extends AdminController
             $groupsToAdd    = array_diff($selectedGroups, $userGroups);
             $groupsToRemove = array_diff($userGroups, $selectedGroups);
 
-            // Assign the user to groups
-            foreach ($groupsToAdd as $groupId) {
-                $group = Sentry::getGroupProvider()->findById($groupId);
+			if (!Config::get('app.lock_passwords')) {
 
-                $user->addGroup($group);
-            }
-
-            // Remove the user from groups
-            foreach ($groupsToRemove as $groupId) {
-                $group = Sentry::getGroupProvider()->findById($groupId);
-
-                $user->removeGroup($group);
-            }
+	            // Assign the user to groups
+	            foreach ($groupsToAdd as $groupId) {
+	                $group = Sentry::getGroupProvider()->findById($groupId);
+	
+	                $user->addGroup($group);
+	            }
+	
+	            // Remove the user from groups
+	            foreach ($groupsToRemove as $groupId) {
+	                $group = Sentry::getGroupProvider()->findById($groupId);
+	
+	                $user->removeGroup($group);
+	            }
+	         }
 
             // Was the user updated?
             if ($user->save()) {
