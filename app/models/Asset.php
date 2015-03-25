@@ -119,6 +119,18 @@ class Asset extends Depreciable
     {
         return $this->belongsTo('Statuslabel','status_id');
     }
+	
+	/** 
+	* Get name for EULA 
+	**/
+	public function assetNameForEula()
+    {
+	    if ($this->name=='') {
+		    return $this->model->name;
+	    } else {
+		    return $this->name;
+	    }
+    }
 
 
      public function warrantee_expires()

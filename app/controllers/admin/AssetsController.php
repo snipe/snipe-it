@@ -437,7 +437,7 @@ class AssetsController extends AdminController
             $data['log_id'] = $logaction->id;
             $data['eula'] = $asset->getEula();
             $data['first_name'] = $user->first_name;
-            $data['item_name'] = $asset->name;
+            $data['item_name'] = $asset->assetNameForEula();
             $data['require_acceptance'] = $asset->requireAcceptance();
 
 
