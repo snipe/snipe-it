@@ -276,12 +276,16 @@ class UsersController extends AdminController
             // Ooops.. something went wrong
             return Redirect::back()->withInput()->withErrors($validator);
         }
+        
+        // Only update the email address if locking is set to false
+        if (!Config::get('app.lock_passwords')) {
+			$user->email       		= Input::get('email');
+		}
 
         try {
             // Update the user
             $user->first_name  		= Input::get('first_name');
-            $user->last_name   		= Input::get('last_name');
-            $user->email       		= Input::get('email');
+            $user->last_name   		= Input::get('last_name');         
             $user->employee_num		= Input::get('employee_num');
             $user->activated   		= Input::get('activated', $user->activated);
             $user->permissions 		= Input::get('permissions');
