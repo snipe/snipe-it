@@ -12,73 +12,56 @@
 <div class="row header">
     <div class="col-md-12">
         <a href="{{ route('create/model') }}" class="btn btn-success pull-right"><i class="fa fa-plus icon-white"></i>  @lang('general.create')</a>
-        @if(Input::get('Deleted'))
-            <a href="{{ URL::to('hardware/models') }}" class="btn btn-default pull-right"><i class="fa fa-trash"></i>  @lang('admin/models/general.view_models')</a>
+        @if(Input::get('status')=='Deleted')
+            <a href="{{ URL::to('hardware/models') }}" class="btn btn-default pull-right" style="margin-right:5px;"><i class="fa fa-trash"></i>  @lang('admin/models/general.view_models')</a>
         @else
-            <a href="{{ URL::to('hardware/models?Deleted=true') }}" class="btn btn-default pull-right"><i class="fa fa-trash"></i>  @lang('admin/models/general.view_deleted')</a>
+            <a href="{{ URL::to('hardware/models?status=Deleted') }}" class="btn btn-default pull-right" style="margin-right:5px;"><i class="fa fa-trash"></i>  @lang('admin/models/general.view_deleted')</a>
         @endif
         <h3>@lang('admin/models/table.title')</h3>
     </div>
 </div>
 
 <div class="row form-wrapper">
-<table id="example">
-    <thead>
-        <tr role="row">
-            <th class="col-md-3">@lang('admin/models/table.title')</th>
-            <th class="col-md-2">@lang('admin/models/table.modelnumber')</th>
-            <th class="col-md-1">@lang('admin/models/table.numassets')</th>
-            <th class="col-md-2">@lang('general.depreciation')</th>
-            <th class="col-md-2">@lang('general.category')</th>
-            <th class="col-md-2">@lang('general.eol')</th>
-            <th class="col-md-2 actions">@lang('table.actions')</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach ($models as $model)
-        <tr>
-            <td><a href="{{ route('view/model', $model->id) }}">{{{ $model->name }}}</a></td>
-            <td>{{{ $model->modelno }}}</td>
-            <td><a href="{{ route('view/model', $model->id) }}">{{ ($model->assets->count()) }}</a></td>
-            <td>
-
-            @if (($model->depreciation) && ($model->depreciation->id > 0)) {{{ $model->depreciation->name }}}
-                ({{{ $model->depreciation->months }}}
-                @lang('general.months')
-                )
-            @else
-             @lang('general.no_depreciation')
-            @endif
-
-            </td>
-            <td>
-            @if ($model->category) {{{ $model->category->name }}}
-            @endif
-            </td>
-
-            <td>
-
-            @if ($model->eol) {{{ $model->eol }}}
-                @lang('general.months')
-            @else
-             --
-            @endif
-
-            </td>
-
-            <td>
-            @if($model->deleted_at=="")
-                <a href="{{ route('update/model', $model->id) }}" class="btn btn-warning btn-sm"><i class="fa fa-pencil icon-white"></i></a>
-                <a data-html="false" class="btn delete-asset btn-danger btn-sm" data-toggle="modal" href="{{ route('delete/model', $model->id) }}" data-content="@lang('admin/models/message.delete.confirm')"
-                data-title="@lang('general.delete')
-                {{ htmlspecialchars($model->name) }}?" onClick="return false;"><i class="fa fa-trash icon-white"></i></a>
-            @else
-                <a href="{{ route('restore/model', $model->id) }}" class="btn btn-warning btn-sm"><i class="fa fa-recycle icon-white"></i></a>
-            @endif
-            </td>
-        </tr>
-        @endforeach
-    </tbody>
-</table>
+    {{ Datatable::table()
+    ->addColumn(Lang::get('admin/models/table.title'),
+        Lang::get('admin/models/table.modelnumber'),
+        Lang::get('admin/models/table.numassets'),
+        Lang::get('general.depreciation'),
+        Lang::get('general.category'),
+        Lang::get('general.eol'), 
+        Lang::get('table.actions'))
+    ->setOptions(
+            array(
+                'sAjaxSource'=> route('api.models.list', Input::get('status')),
+                'deferRender'=> true,
+                'stateSave'=> true,
+                'stateDuration'=> -1,
+                'dom' =>'CT<"clear">lfrtip',
+                'tableTools' => array(
+                    'sSwfPath'=> Config::get('app.url').'/assets/swf/copy_csv_xls_pdf.swf',
+                    'aButtons'=>array(
+                        'copy',
+                        'print',
+                        array(
+                            'sExtends'=>'collection',
+                            'sButtonText'=>'Export',
+                            'aButtons'=>array(
+                                'csv',
+                                'xls',
+                                'pdf'
+                                )
+                            )
+                        ) 
+                    ),
+                'colVis'=> array('showAll'=>'Show All','restore'=>'Restore','exclude'=>array(6),'activate'=>'mouseover'),
+                'columnDefs'=> array(array('bSortable'=>false,'targets'=>array(6))),
+                'order'=>array(array(0,'asc')),
+                'processing'=>true,
+                'oLanguage'=>array(
+                    'sProcessing'=>'<i class="fa fa-spinner fa-spin"></i> Loading...',
+                    ),
+            )
+        )
+    ->render() }}
 
 @stop

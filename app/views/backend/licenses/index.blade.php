@@ -24,9 +24,9 @@
                             Lang::get('admin/licenses/form.remaining_seats'), 
                             Lang::get('admin/licenses/table.purchase_date'), 
                             Lang::get('table.actions'))
-                ->setUrl(route('api.licenses.list'))   // this is the route where data will be retrieved
                 ->setOptions(
                         array(
+                            'sAjaxSource'=>route('api.licenses.list'),
                             'deferRender'=> true,
                             'stateSave'=> true,
                             'stateDuration'=> -1,
@@ -53,7 +53,7 @@
                                 array('width'=>'20%','targets'=>array(5)),
                                 ),
                             'order'=>array(array(0,'asc')),
-                            'bProcessing'=>true,
+                            'processing'=>true,
                             'oLanguage'=>array(
                                 'sProcessing'=>'<i class="fa fa-spinner fa-spin"></i> Loading...',
                                 ),

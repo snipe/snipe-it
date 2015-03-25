@@ -14,6 +14,7 @@ Route::group(array('prefix' => 'api', 'namespace' => 'Controllers\Admin', 'befor
     Route::group(array('prefix'=>'accessories'), function () {
         Route::resource('/', 'AccessoriesController');
         Route::get('list', array('as'=>'api.accessories.list', 'uses'=>'AccessoriesController@getDatatable'));
+        Route::get('{accessoryID}/view', array('as'=>'api.accessories.view', 'uses'=>'AccessoriesController@getDataView'));
     });
     /*---Users API---*/
     Route::group(array('prefix'=>'users'), function() {
@@ -24,6 +25,19 @@ Route::group(array('prefix' => 'api', 'namespace' => 'Controllers\Admin', 'befor
     Route::group(array('prefix'=>'licenses'), function() {
         Route::resource('/', 'LicensesController');
         Route::get('list', array('as'=>'api.licenses.list', 'uses'=>'LicensesController@getDatatable'));
+    });
+    /*---Models API---*/
+    Route::group(array('prefix'=>'models'), function() {
+        Route::resource('/', 'ModelsController');
+        Route::get('list/{status?}', array('as'=>'api.models.list', 'uses'=>'ModelsController@getDatatable'));
+        Route::get('{modelId}/check', array('as' => 'api.models.check', 'uses' => 'ModelsController@checkModel'));
+        Route::get('{modelID}/view', array('as'=>'api.models.view', 'uses'=>'ModelsController@getDataView'));
+    });
+    /*--- Categories API---*/
+    Route::group(array('prefix'=>'categories'), function() {
+        Route::resource('/', 'CategoriesController');
+        Route::get('list', array('as'=>'api.categories.list', 'uses'=>'CategoriesController@getDatatable'));
+        Route::get('{categoryID}/view', array('as'=>'api.categories.view', 'uses'=>'CategoriesController@getDataView'));
     });
 });
 
@@ -74,7 +88,6 @@ Route::group(array('prefix' => 'hardware', 'namespace' => 'Controllers\Admin', '
     Route::get('{assetId}/deletefile/{fileId}', array('as' => 'delete/assetfile', 'uses' => 'AssetsController@getDeleteFile'));
     Route::get('{assetId}/showfile/{fileId}', array('as' => 'show/assetfile', 'uses' => 'AssetsController@displayFile'));
     Route::post('{assetId}/edit', 'AssetsController@postEdit');
-    Route::get('check/model', array('as' => 'check.model', 'uses' => 'AssetsController@checkModel'));
 
     Route::post('bulkedit',
     	array('as' => 'hardware/bulkedit',

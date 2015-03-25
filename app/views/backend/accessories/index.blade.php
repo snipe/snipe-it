@@ -24,9 +24,9 @@
                             Lang::get('admin/accessories/general.total'), 
                             Lang::get('admin/accessories/general.remaining'), 
                             Lang::get('table.actions'))
-                ->setUrl(route('api.accessories.list'))   // this is the route where data will be retrieved
                 ->setOptions(
                         array(
+                            'sAjaxSource'=>route('api.accessories.list'),
                             'deferRender'=> true,
                             'stateSave'=> true,
                             'stateDuration'=> -1,
@@ -35,36 +35,49 @@
                                 'sSwfPath'=> Config::get('app.url').'/assets/swf/copy_csv_xls_pdf.swf',
                                 'aButtons'=>array(
                                     array(
-                                        'sExtends'=>'copy',
-                                        'mColumns'=> array(0,1,2),
-                                    ),
-                                    'print',
+                                    	'sExtends'=>'copy',
+                                    	'sButtonText'=>'Copy',
+                                    	'mColumns'=>array(0,1,2),
+                                    	'bFooter'=>false,
+                                	),
+                                    array(
+                                    	'sExtends'=>'print',
+                                    	'sButtonText'=>'Print',
+                                    	'mColumns'=>array(0,1,2),
+                                    	'bShowAll'=>true,
+                                    	'bFooter'=>true,
+                                	),
                                     array(
                                         'sExtends'=>'collection',
                                         'sButtonText'=>'Export',
                                         'aButtons'=>array(
                                             array(
-                                                'sExtends'=>'csv',
-                                                'mColumns'=> array(0,1,2),
-                                            ),
+                                            	'sExtends'=>'csv',
+                                            	'sButtonText'=>'csv',
+                                            	'mColumns'=>array(0,1,2),
+                                            	'bFooter'=>false,
+                                        	),
                                             array(
-                                                'sExtends'=>'xls',
-                                                'mColumns'=> array(0,1,2),
-                                            ),
+                                            	'sExtends'=>'xls',
+                                            	'sButtonText'=>'XLS',
+                                            	'mColumns'=>array(0,1,2),
+                                            	'bFooter'=>false,
+                                        	),
                                             array(
-                                                'sExtends'=>'pdf',
-                                                'mColumns'=> array(0,1,2),
-                                            ),
-                                        ),
+                                            	'sExtends'=>'pdf',
+                                            	'sButtonText'=>'PDF',
+                                            	'mColumns'=>array(0,1,2),
+                                            	'bFooter'=>false,
+                                        	)
+                                        )
                                     ),
                                 ) 
                             ),
                             'columnDefs'=> array(
                                 array('bSortable'=>false,'targets'=>array(3)),
-                                array('width'=>'20%','targets'=>array(3)),
                                 ),
                             'order'=>array(array(0,'asc')),
-                            'bProcessing'=>true,
+                            'processing'=>true,
                             'oLanguage'=>array(
                                 'sProcessing'=>'<i class="fa fa-spinner fa-spin"></i> Loading...',
                                 ),
