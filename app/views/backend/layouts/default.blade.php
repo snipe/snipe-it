@@ -249,7 +249,7 @@
         <ul id="dashboard-menu">
 			@if(Sentry::getUser()->hasAccess('admin'))
             <li{{ (Request::is('hardware*') ? ' class="active"><div class="pointer"><div class="arrow"></div><div class="arrow_border"></div></div>' : '>') }}
-                <a href="{{ URL::to('hardware?RTD=true') }}" class="dropdown-toggle">
+                <a href="{{ URL::to('hardware') }}" class="dropdown-toggle">
                     <i class="fa fa-barcode"></i>
                     <span>@lang('general.assets')</span>
                     <b class="fa fa-chevron-down"></b>
@@ -348,7 +348,7 @@
                     </div>
                     <div class="col-md-3 col-sm-3 stat">
                         <div class="data">
-                            <a href="{{ URL::to('hardware?RTD=true') }}">
+                            <a href="{{ URL::to('hardware?status=RTD') }}">
                                 <span class="number">{{ number_format(Asset::availassetcount()) }}</span>
                                 <span style="color:black">@lang('general.assets_available')</span>
                             </a>
