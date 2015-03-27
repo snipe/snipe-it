@@ -2425,11 +2425,13 @@ TableTools.prototype = {
 			{
 				for ( var i=0, iLen=anFeature[cFeature].length ; i<iLen ; i++ )
 				{
-					this.dom.print.hidden.push( {
-						"node": anFeature[cFeature][i],
-						"display": "block"
-					} );
-					anFeature[cFeature][i].style.display = "none";
+					if (anFeature[cFeature][i].style.display != "none") {
+						this.dom.print.hidden.push( {
+							"node": anFeature[cFeature][i],
+							"display": "block"
+						} );
+						anFeature[cFeature][i].style.display = "none";
+					}
 				}
 			}
 		}
