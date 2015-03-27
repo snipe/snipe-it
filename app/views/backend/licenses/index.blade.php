@@ -27,36 +27,13 @@
                 ->setOptions(
                         array(
                             'sAjaxSource'=>route('api.licenses.list'),
-                            'deferRender'=> true,
-                            'stateSave'=> true,
-                            'stateDuration'=> -1,
                             'dom' =>'CT<"clear">lfrtip',
-                            'tableTools' => array(
-                                'sSwfPath'=> Config::get('app.url').'/assets/swf/copy_csv_xls_pdf.swf',
-                                'aButtons'=>array(
-                                    'copy',
-                                    'print',
-                                    array(
-                                        'sExtends'=>'collection',
-                                        'sButtonText'=>'Export',
-                                        'aButtons'=>array(
-                                            'csv',
-                                            'xls',
-                                            'pdf'
-                                            )
-                                        )
-                                    ) 
-                                ),
                             'colVis'=> array('showAll'=>'Show All','restore'=>'Restore','exclude'=>array(5),'activate'=>'mouseover'),
                             'columnDefs'=> array(
                                 array('bSortable'=>false,'targets'=>array(5)),
                                 array('width'=>'20%','targets'=>array(5)),
                                 ),
                             'order'=>array(array(0,'asc')),
-                            'processing'=>true,
-                            'oLanguage'=>array(
-                                'sProcessing'=>'<i class="fa fa-spinner fa-spin"></i> Loading...',
-                                ),
                         )
                     )
                 ->render() }}

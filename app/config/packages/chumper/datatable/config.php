@@ -50,9 +50,55 @@ return array(
 
         'options' => array(
 
-            "sPaginationType" => "full_numbers",
-
-            "bProcessing" => false
+            "pagingType" => "full_numbers",
+            'processing'=>true,
+            'language'=>array(
+                   'processing'=>'<i class="fa fa-spinner fa-spin"></i> Loading...'
+            ),
+            'deferRender'=> true,
+            'stateSave'=> true,
+            'paging'=>true,
+            'tableTools' => array(
+                'sSwfPath'=> Config::get('app.url').'/assets/swf/copy_csv_xls_pdf.swf',
+                'aButtons'=>array(
+                    array(
+                        'sExtends'=>'copy',
+                        'sButtonText'=>'Copy',
+                        'mColumns'=>'visible',
+                        'bFooter'=>false,
+                        ),
+                    array(
+                        'sExtends'=>'print',
+                        'sButtonText'=>'Print',
+                        'mColumns'=>'visible',
+                        'bShowAll'=>true,
+                        ),
+                    array(
+                        'sExtends'=>'collection',
+                        'sButtonText'=>'Export',
+                        'aButtons'=>array(
+                            array(
+                                'sExtends'=>'csv',
+                                'sButtonText'=>'csv',
+                                'mColumns'=>'visible',
+                                'bFooter'=>false,
+                                ),
+                            array(
+                                'sExtends'=>'xls',
+                                'sButtonText'=>'XLS',
+                                'mColumns'=>'visible',
+                                'bFooter'=>false,
+                                ),
+                            array(
+                                'sExtends'=>'pdf',
+                                'sButtonText'=>'PDF',
+                                'mColumns'=>'visible',
+                                'bFooter'=>false,
+                                )
+                            )
+                        )
+                    ) 
+                ),
 
         ),
 
@@ -68,7 +114,14 @@ return array(
         |
         */
 
-        'callbacks' => array(),
+        'callbacks' => array(
+            "stateSaveCallback"=>"function (oSettings, oData) {
+                    localStorage.setItem('DataTables_'+window.location.pathname, JSON.stringify(oData));
+                }",
+            "stateLoadCallback"=>"function (oSettings) {
+                    return JSON.parse(localStorage.getItem('DataTables_'+window.location.pathname));
+                }",
+        ),
 
         /*
         |--------------------------------------------------------------------------

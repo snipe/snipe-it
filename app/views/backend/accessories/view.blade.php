@@ -37,9 +37,6 @@
                 ->setOptions(
                         array(
                             'sAjaxSource'=>route('api.accessories.view', $accessory->id),
-                            'deferRender'=> true,
-                            'stateSave'=> true,
-                            'stateDuration'=> -1,
                             'dom' =>'T<"clear">lfrtip',
                             'tableTools' => array(
                                 'sSwfPath'=> Config::get('app.url').'/assets/swf/copy_csv_xls_pdf.swf',
@@ -70,10 +67,6 @@
                                 array('width'=>'auto','targets'=>array(1)),
                                 ),
                             'order'=>array(array(0,'asc')),
-                            'processing'=>true,
-                            'oLanguage'=>array(
-                                'sProcessing'=>'<i class="fa fa-spinner fa-spin"></i> Loading...',
-                                ),
                         )
                     )
                 ->render() }}

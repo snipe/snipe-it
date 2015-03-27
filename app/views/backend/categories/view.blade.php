@@ -47,43 +47,12 @@
                                 ->setOptions(
                                         array(
                                             'sAjaxSource'=>route('api.categories.view', $category->id),
-                                            'deferRender'=> true,
-                                            'stateSave'=> true,
-                                            'stateDuration'=> -1,
                                             'dom' =>'T<"clear">lfrtip',
-                                            'tableTools' => array(
-                                                'sSwfPath'=> Config::get('app.url').'/assets/swf/copy_csv_xls_pdf.swf',
-                                                'aButtons'=>array(
-                                                    array(
-                                                        'sExtends'=>'copy',
-                                                    ),
-                                                    'print',
-                                                    array(
-                                                        'sExtends'=>'collection',
-                                                        'sButtonText'=>'Export',
-                                                        'aButtons'=>array(
-                                                            array(
-                                                                'sExtends'=>'csv',
-                                                            ),
-                                                            array(
-                                                                'sExtends'=>'xls',
-                                                            ),
-                                                            array(
-                                                                'sExtends'=>'pdf',
-                                                            ),
-                                                        ),
-                                                    ),
-                                                ) 
-                                            ),
                                             'columnDefs'=> array(
                                                 array('bSortable'=>false,'targets'=>array(3)),
                                                 array('width'=>'auto','targets'=>array(3)),
                                                 ),
                                             'order'=>array(array(0,'asc')),
-                                            'processing'=>true,
-                                            'oLanguage'=>array(
-                                                'sProcessing'=>'<i class="fa fa-spinner fa-spin"></i> Loading...',
-                                                ),
                                         )
                                     )
                                 ->render() }}
