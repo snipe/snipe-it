@@ -346,10 +346,6 @@ class ModelsController extends AdminController
         ->make();
     }
     
-    public function checkModel($modelId) {
-        $model = Model::find($modelId);
-        return $model->show_mac_address;
-    }
     
     public function getDataView($modelID)
     {

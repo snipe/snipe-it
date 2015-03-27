@@ -131,6 +131,12 @@ class Asset extends Depreciable
 		    return $this->name;
 	    }
     }
+    
+    
+    public function checkModel($modelId) {
+        $model = Model::find($modelId);
+        return $model->show_mac_address;
+    }
 
 
      public function warrantee_expires()
