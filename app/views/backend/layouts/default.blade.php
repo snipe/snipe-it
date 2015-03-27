@@ -46,10 +46,10 @@
 	    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
 
         <!-- global header javascripts -->
-        <script src="{{ asset('assets/js/jquery-1.11.2.js') }}"></script>
-        <script src="{{ asset('assets/js/jquery.dataTables.js') }}"></script>
+        <script src="{{ asset('assets/js/jquery-latest.js') }}"></script>
+        <script src="{{ asset('assets/js/jquery.dataTables.min.js') }}"></script>
         <script src="{{ asset('assets/js/dataTables.colVis.js') }}"></script>
-        <script src="{{ asset('assets/js/dataTables.tableTools.nightly.js') }}"></script>
+        <script src="{{ asset('assets/js/dataTables.tableTools.js') }}"></script>
 
         <script>
             window.snipeit = {
