@@ -432,12 +432,14 @@
     <script src="{{ asset('assets/js/bootstrap.datepicker.js') }}"></script>
     <script src="{{ asset('assets/js/theme.js') }}"></script>
     <script src="{{ asset('assets/js/snipeit.js') }}"></script>
-
-	 <script>
-	$(document).ready(function() {
-	    $('table.display').dataTable();
-	} );
+	<script>
+		$(function(){
+			$( ".ColVis" ).prepend('<button class="ColVis_Button">Reset Defaults</button>').click(function(e){
+				e.preventDefault();
+				oTable.api().state.clear();
+				window.location.reload();
+			});
+		});
 	</script>
-
     </body>
 </html>

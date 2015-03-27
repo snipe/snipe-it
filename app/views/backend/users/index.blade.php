@@ -41,37 +41,14 @@
 	    Lang::get('general.licenses'), 
 	    Lang::get('admin/users/table.activated'), 
 	    Lang::get('table.actions')
-    )  
-    ->setUrl(route('api.users.list', Input::get('status')))   // this is the route where data will be retrieved
+    )
     ->setOptions(
             array(
-                'deferRender'=> true,
-                'stateSave'=> true,
-                'stateDuration'=> -1,
+                'sAjaxSource'=>route('api.users.list', Input::get('status')),
                 'dom' =>'CT<"clear">lfrtip',
-                'tableTools' => array(
-                    'sSwfPath'=> Config::get('app.url').'/assets/swf/copy_csv_xls_pdf.swf',
-                    'aButtons'=>array(
-                        'copy',
-                        'print',
-                        array(
-                            'sExtends'=>'collection',
-                            'sButtonText'=>'Export',
-                            'aButtons'=>array(
-                                'csv',
-                                'xls',
-                                'pdf'
-                                )
-                            )
-                        ) 
-                    ),
                 'colVis'=> array('showAll'=>'Show All','restore'=>'Restore','activate'=>'mouseover'),
                 'columnDefs'=> array(array('visible'=>false,'targets'=>array()),array('bSortable'=>false,'targets'=>array(6))),
-		'order'=>array(array(1,'asc')),
-		'bProcessing'=>true,
-                'oLanguage'=>array(
-                    'sProcessing'=>'<i class="fa fa-spinner fa-spin"></i> Loading...'
-                    ),
+                'order'=>array(array(1,'asc')),
             )
         )
     ->render() }}

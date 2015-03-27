@@ -61,44 +61,13 @@
                                 ->setOptions(
                                         array(
                                             'sAjaxSource'=>route('api.models.view', $model->id),
-                                            'deferRender'=> true,
-                                            'stateSave'=> true,
-                                            'stateDuration'=> -1,
                                             'dom' =>'CT<"clear">lfrtip',
-                                            'tableTools' => array(
-                                                'sSwfPath'=> Config::get('app.url').'/assets/swf/copy_csv_xls_pdf.swf',
-                                                'aButtons'=>array(
-                                                    array(
-                                                        'sExtends'=>'copy',
-                                                    ),
-                                                    'print',
-                                                    array(
-                                                        'sExtends'=>'collection',
-                                                        'sButtonText'=>'Export',
-                                                        'aButtons'=>array(
-                                                            array(
-                                                                'sExtends'=>'csv',
-                                                            ),
-                                                            array(
-                                                                'sExtends'=>'xls',
-                                                            ),
-                                                            array(
-                                                                'sExtends'=>'pdf',
-                                                            ),
-                                                        ),
-                                                    ),
-                                                ) 
-                                            ),
                                             'colVis'=> array('showAll'=>'Show All','restore'=>'Restore','exclude'=>array(4),'activate'=>'mouseover'),
                                             'columnDefs'=> array(
                                                 array('bSortable'=>false,'targets'=>array(4)),
                                                 array('width'=>'auto','targets'=>array(4)),
                                                 ),
                                             'order'=>array(array(0,'asc')),
-                                            'processing'=>true,
-                                            'oLanguage'=>array(
-                                                'sProcessing'=>'<i class="fa fa-spinner fa-spin"></i> Loading...',
-                                                ),
                                         )
                                     )
                                 ->render() }}
