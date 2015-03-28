@@ -98,7 +98,7 @@
             <td>
             @if (($asset->assigned_to > 0) && ($asset->assigneduser->location_id > 0))
                 {{{ $asset->assigneduser->userLoc->name }}}
-            @elseif ($assets->defaultLoc)
+            @elseif ($asset->defaultLoc)
                 {{{ $asset->defaultLoc->name }}}
             @endif
             </td>
