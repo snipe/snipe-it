@@ -119,28 +119,6 @@ padding: 0px 20px;
 										</div>
                                     </div>
 
-
-                                    <div class="checkbox col-md-offset-3">
-
-										<label>
-											{{ Form::checkbox('display_asset_name', '1', Input::old('display_asset_name', $setting->display_asset_name)) }}
-											@lang('admin/settings/general.display_asset_name')
-										</label>
-                                    </div>
-
-                                     <div class="checkbox col-md-offset-3">
-										<label>
-											{{ Form::checkbox('display_eol', '1', Input::old('display_eol', $setting->display_eol)) }}
-											@lang('admin/settings/general.display_eol')
-										</label>
-                                    </div>
-
-                                     <div class="checkbox col-md-offset-3">
-										<label>
-											{{ Form::checkbox('display_checkout_date', '1', Input::old('display_checkout_date', $setting->display_checkout_date)) }}
-											@lang('admin/settings/general.display_checkout_date')
-										</label>
-                                    </div>
                                    <div class="checkbox col-md-offset-3">
 										<label>
 											{{ Form::checkbox('load_remote', '1', Input::old('load_remote', $setting->load_remote)) }}
