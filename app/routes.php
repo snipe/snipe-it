@@ -29,8 +29,12 @@ Route::group(array('prefix' => 'api', 'namespace' => 'Controllers\Admin', 'befor
     /*---Models API---*/
     Route::group(array('prefix'=>'models'), function() {
         Route::resource('/', 'ModelsController');
-        Route::get('list/{status?}', array('as'=>'api.models.list', 'uses'=>'ModelsController@getDatatable'));
-        Route::get('{modelId}/check', array('as' => 'api.models.check', 'uses' => 'ModelsController@checkModel'));
+        Route::get('list/{status?}', array('as'=>'api.models.list', 'uses'=>'ModelsController@getDatatable'));        
+        Route::get('{modelId}/check', function ($modelId) {
+			 $model = Model::find($modelId);
+			 return $model->show_mac_address;
+		});
+
         Route::get('{modelID}/view', array('as'=>'api.models.view', 'uses'=>'ModelsController@getDataView'));
     });
     /*--- Categories API---*/

@@ -155,7 +155,7 @@ class AssetsController extends AdminController
             } else {
                 $asset->rtd_location_id     = e(Input::get('rtd_location_id'));
             }
-            $checkModel = $asset->checkModel(e(Input::get('model_id')));
+
             $asset->mac_address = ($checkModel == true) ? e(Input::get('mac_address')) : NULL;
 
             // Save the asset data
@@ -292,7 +292,7 @@ class AssetsController extends AdminController
                 $asset->rtd_location_id     = e(Input::get('rtd_location_id'));
             }
             
-            $checkModel = $this->checkModel(e(Input::get('model_id')));
+  
             $asset->mac_address = ($checkModel == true) ? e(Input::get('mac_address')) : NULL;
 
             // Update the asset data

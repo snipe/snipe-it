@@ -132,13 +132,6 @@ class Asset extends Depreciable
 	    }
     }
     
-    
-    public function checkModel($modelId) {
-        $model = Model::find($modelId);
-        return $model->show_mac_address;
-    }
-
-
      public function warrantee_expires()
     {
             $date = date_create($this->purchase_date);
