@@ -371,9 +371,14 @@
 			<!-- Status Info -->
 
                 @if ($asset->assetstatus)
-                    <h6><br>{{{ $asset->assetstatus->name }}}
-                    @lang('admin/hardware/general.asset')</h6>
-
+                    <h6><br>
+                     	@if (($asset->assetstatus->deployable=='1') && ($asset->assigned_to > 0))
+                            @lang('admin/hardware/general.asset') 
+                            @lang('general.deployed')
+                        @else
+                            {{{ $asset->assetstatus->name }}} 
+                            @lang('admin/hardware/general.asset')
+                        @endif
                     <ul>
 	                    
                     	 @if (($asset->assetstatus->deployable=='1') && ($asset->assigned_to > 0) && ($asset->deleted_at==''))
@@ -387,7 +392,7 @@
                     	@endif
                     </ul>
 
-					@if ($asset->assetstatus->notes)
+					@if (($asset->assetstatus->notes) && ($asset->assigned_to==''))
                     <div class="col-md-12">
 						<div class="alert alert-info alert-block">
 							<i class="fa fa-info-circle"></i>
