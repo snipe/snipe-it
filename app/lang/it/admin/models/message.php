@@ -2,29 +2,29 @@
 
 return array(
 
-    'does_not_exist' => 'Model does not exist.',
-    'assoc_users'	 => 'This model is currently associated with one or more assets and cannot be deleted. Please delete the assets, and then try deleting again. ',
+    'does_not_exist' => 'Il modello non esiste.',
+    'assoc_users'	 => 'Questo modello è attualmente associato ad uno o più beni e non può essere eliminato. Eliminare i beni e poi provare a eliminare nuovamente. ',
 
 
     'create' => array(
-        'error'   => 'Model was not created, please try again.',
-        'success' => 'Model created successfully.'
+        'error'   => 'Il modello non è stato creato, si prega di riprovare.',
+        'success' => 'Modello creato con successo.'
     ),
 
     'update' => array(
-        'error'   => 'Model was not updated, please try again',
-        'success' => 'Model updated successfully.'
+        'error'   => 'Il modello non è stato aggiornato, si prega di riprovare',
+        'success' => 'Modello aggiornato con successo.'
     ),
 
     'delete' => array(
-        'confirm'   => 'Are you sure you wish to delete this asset model?',
-        'error'   => 'There was an issue deleting the model. Please try again.',
-        'success' => 'The model was deleted successfully.'
+        'confirm'   => 'Sei sicuro di voler eliminare questo modello?',
+        'error'   => 'C\'è stato un problema durante la cancellazione del modello. Riprova per favore.',
+        'success' => 'Modello cancellato con successo.'
     ),
     
     'restore' => array(
-        'error'   		=> 'Model was not restored, please try again',
-        'success' 		=> 'Model restored successfully.'
+        'error'   		=> 'Il modello non è stato ripristinato, si prega di riprovare',
+        'success' 		=> 'Modello ripristinato con successo.'
     ),
 
 );

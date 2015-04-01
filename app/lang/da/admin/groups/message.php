@@ -2,21 +2,21 @@
 
 return array(
 
-    'group_exists'        => 'Group already exists!',
-    'group_not_found'     => 'Group [:id] does not exist.',
-    'group_name_required' => 'The name field is required',
+    'group_exists'        => 'Gruppen eksisterer allerede!',
+    'group_not_found'     => 'Gruppen [:id] eksisterer ikke.',
+    'group_name_required' => 'Navnefeltet er påkrævet',
 
     'success' => array(
-        'create' => 'Group was successfully created.',
-        'update' => 'Group was successfully updated.',
-        'delete' => 'Group was successfully deleted.',
+        'create' => 'Gruppen er oprettet.',
+        'update' => 'Gruppen er opdateret.',
+        'delete' => 'Gruppen er slettet.',
     ),
 
     'delete' => array(
-        'confirm'   => 'Are you sure you wish to delete this group?',
-        'create' => 'There was an issue creating the group. Please try again.',
-        'update' => 'There was an issue updating the group. Please try again.',
-        'delete' => 'There was an issue deleting the group. Please try again.',
+        'confirm'   => 'Er du sikker på at du vil slette gruppen?',
+        'create' => 'Der var et problem ved oprettelse af gruppen. Prøv igen.',
+        'update' => 'Der var et problem ved opdatering af gruppen. Prøv igen.',
+        'delete' => 'Der var et problem ved sletning af gruppen. Prøv igen.',
     ),
 
 );

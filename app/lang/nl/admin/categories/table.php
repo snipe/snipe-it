@@ -1,10 +1,10 @@
 <?php
 
 return array(
-	'eula_text'      			=> 'EULA',
+	'eula_text'      			=> 'GEBRUIKSRECHTOVEREENKOMST',
     'id'      					=> 'ID',
     'parent'   					=> 'Bovenliggend',
-    'require_acceptance'      	=> 'Acceptance',
+    'require_acceptance'      	=> 'Acceptatie',
     'title'      				=> 'Materiaal Categorie Naam',
 
 );

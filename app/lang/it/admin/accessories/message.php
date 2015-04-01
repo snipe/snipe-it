@@ -2,35 +2,35 @@
 
 return array(
 
-    'does_not_exist' => 'Category does not exist.',
-    'assoc_users'	 => 'This accessory currently has :count items checked out to users. Please check in the accessories and and try again. ',
+    'does_not_exist' => 'La categoria non Esiste',
+    'assoc_users'	 => 'Questo accessorio ha attualmente :count elementi controllati agli utenti. Si prega di controllare negli accessori e e riprovare. ',
 
     'create' => array(
-        'error'   => 'Category was not created, please try again.',
-        'success' => 'Category created successfully.'
+        'error'   => 'La categoria non è stata creata, si prega di riprovare.',
+        'success' => 'Categoria creata con successo.'
     ),
 
     'update' => array(
-        'error'   => 'Category was not updated, please try again',
-        'success' => 'Category updated successfully.'
+        'error'   => 'La categoria non è stata aggiornata, si prega di rirpovare',
+        'success' => 'Categoria aggiornata con successo.'
     ),
 
     'delete' => array(
-        'confirm'   => 'Are you sure you wish to delete this category?',
-        'error'   => 'There was an issue deleting the category. Please try again.',
-        'success' => 'The category was deleted successfully.'
+        'confirm'   => 'Sei sicuro di voler cancellare questa categoria?',
+        'error'   => 'Si è verificato un problema cercando di eliminare la categoria. Riprova.',
+        'success' => 'La categoria è stata eliminata con successo.'
     ),
     
      'checkout' => array(
-        'error'   		=> 'Accessory was not checked out, please try again',
-        'success' 		=> 'Accessory checked out successfully.',
-        'user_does_not_exist' => 'That user is invalid. Please try again.'
+        'error'   		=> 'L\'accessorio non è stato estratto, si prega di riprovare',
+        'success' 		=> 'Accessorio estratto con successo.',
+        'user_does_not_exist' => 'Questo utente non è valido. Riprova.'
     ),
 
     'checkin' => array(
-        'error'   		=> 'Accessory was not checked in, please try again',
-        'success' 		=> 'Accessory checked in successfully.',
-        'user_does_not_exist' => 'That user is invalid. Please try again.'
+        'error'   		=> 'L\'accessorio non è stato controllato, si prega di riprovare',
+        'success' 		=> 'Accessorio controllato con successo.',
+        'user_does_not_exist' => 'Questo utente non è valido. Riprova.'
     )
 
 

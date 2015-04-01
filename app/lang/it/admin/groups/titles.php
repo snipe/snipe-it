@@ -2,12 +2,12 @@
 
 return array(
 
-    'group_management' 	 	=> 'Group Management',
-    'create_group' 	 		=> 'Create New Group',
-    'edit_group' 	 		=> 'Edit Group',
-    'group_name' 	 		=> 'Group Name',
-    'group_admin' 	 		=> 'Group Admin',
-    'allow' 	 			=> 'Allow',
-    'deny' 	 				=> 'Deny',
+    'group_management' 	 	=> 'Gestione Gruppo',
+    'create_group' 	 		=> 'Crea nuovo gruppo',
+    'edit_group' 	 		=> 'Modifica gruppo',
+    'group_name' 	 		=> 'Nome del gruppo',
+    'group_admin' 	 		=> 'Amministratore del Gruppo',
+    'allow' 	 			=> 'Permetti',
+    'deny' 	 				=> 'Rifiuta',
 
 );

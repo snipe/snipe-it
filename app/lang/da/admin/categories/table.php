@@ -1,10 +1,10 @@
 <?php
 
 return array(
-	'eula_text'      			=> 'EULA',
+	'eula_text'      			=> 'Slutbrugerlicens',
     'id'      					=> 'ID',
     'parent'   					=> 'Forælder',
-    'require_acceptance'      	=> 'Acceptance',
-    'title'      				=> 'Asset Category Name',
+    'require_acceptance'      	=> 'Accept',
+    'title'      				=> 'Aktiv Kategorinavn',
 
 );

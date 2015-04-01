@@ -2,16 +2,16 @@
 
 return array(
 
-    'assigned_to'   	=> 'Assigned To',
-    'checkout'   		=> 'In/Out',
+    'assigned_to'   	=> 'Assegnato a',
+    'checkout'   		=> 'Dentro/Fuori',
     'id'      			=> 'ID',
-    'license_email'   	=> 'License Email',
-    'license_name'   	=> 'Licensed To',
-    'purchase_date'   	=> 'Purchase Date',
-    'purchased'   		=> 'Purchased',
-    'seats'   			=> 'Seats',
+    'license_email'   	=> 'Licenza Email',
+    'license_name'   	=> 'Autorizzato da',
+    'purchase_date'   	=> 'Data di acquisto',
+    'purchased'   		=> 'Acquistato',
+    'seats'   			=> 'Sedi',
     'hardware'   		=> 'Hardware',
-    'serial'   			=> 'Serial',
-    'title'      		=> 'License',
+    'serial'   			=> 'Seriale',
+    'title'      		=> 'Licenza',
 
 );

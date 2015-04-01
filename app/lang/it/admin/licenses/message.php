@@ -2,49 +2,49 @@
 
 return array(
 
-    'does_not_exist' => 'License does not exist.',
-    'user_does_not_exist' => 'User does not exist.',
-    'asset_does_not_exist' 	=> 'The asset you are trying to associate with this license does not exist.',
-    'owner_doesnt_match_asset' => 'The asset you are trying to associate with this license is owned by somene other than the person selected in the assigned to dropdown.',
-    'assoc_users'	 => 'This license is currently checked out to a user and cannot be deleted. Please check the license in first, and then try deleting again. ',
+    'does_not_exist' => 'La Licenza non esiste.',
+    'user_does_not_exist' => 'L\'utente non esiste.',
+    'asset_does_not_exist' 	=> 'Il bene che si sta cercando di associare a questa licenza non esiste.',
+    'owner_doesnt_match_asset' => 'Il bene che si sta cercando di associare a questa licenza è di proprietà di una persona diversa dal soggetto selezionato nel menù a discesa.',
+    'assoc_users'	 => 'Questo bene è stato assegnato ad un Utente e non può essere cancellato. Per favore Riassegnalo in magazzino,e dopo riprova a cancellarlo. ',
 
 
     'create' => array(
-        'error'   => 'License was not created, please try again.',
-        'success' => 'License created successfully.'
+        'error'   => 'La licenza non è stata creata, si prega di riprovare.',
+        'success' => 'Licenza creata con successo.'
     ),
 
     'deletefile' => array(
-        'error'   => 'File not deleted. Please try again.',
-        'success' => 'File successfully deleted.',
+        'error'   => 'File non cancellato. Riprova.',
+        'success' => 'File cancellato con successo.',
     ),
 
     'upload' => array(
-        'error'   => 'File(s) not uploaded. Please try again.',
-        'success' => 'File(s) successfully uploaded.',
-        'nofiles' => 'You did not select any files for upload',
-        'invalidfiles' => 'One or more of your files is too large or is a filetype that is not allowed. Allowed filetypes are png, gif, jpg, doc, docx, pdf, and txt.',
+        'error'   => 'File non caricato/i. Riprova.',
+        'success' => 'File caricato/i con successo.',
+        'nofiles' => 'Non hai selezionato i file per il caricamento',
+        'invalidfiles' => 'Uno o più file è troppo grande o è un tipo di file non consentito. Tipi di file ammessi sono png, gif, jpg, doc, docx, pdf, txt.',
     ),
 
     'update' => array(
-        'error'   => 'License was not updated, please try again',
-        'success' => 'License updated successfully.'
+        'error'   => 'La licenza non è stata aggiornata, si prega di riprovare',
+        'success' => 'Licenza aggiornata con successo.'
     ),
 
     'delete' => array(
-        'confirm'   => 'Are you sure you wish to delete this license?',
-        'error'   => 'There was an issue deleting the license. Please try again.',
-        'success' => 'The license was deleted successfully.'
+        'confirm'   => 'Sei sicuro di voler cancellare questa licenza?',
+        'error'   => 'C\'è stato un problema nell\'eliminazione della licenza. Riprova.',
+        'success' => 'Licenza eliminata con successo.'
     ),
 
     'checkout' => array(
-        'error'   => 'There was an issue checking out the license. Please try again.',
-        'success' => 'The license was checked out successfully'
+        'error'   => 'C\'è stato un problema nell\'estrazione della licenza. Riprova.',
+        'success' => 'La licenza è stata estratta con successo'
     ),
 
     'checkin' => array(
-        'error'   => 'There was an issue checking in the license. Please try again.',
-        'success' => 'The license was checked in successfully'
+        'error'   => 'C\'è stato un problema nella registrazione della licenza. Riprova.',
+        'success' => 'La licenza è stata registrata con successo'
     ),
 
 );

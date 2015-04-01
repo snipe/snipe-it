@@ -2,16 +2,16 @@
 
 return array(
 
-    'create'				=> 'Create Asset Model',
-    'created_at' 			=> 'Created at',
+    'create'				=> 'Creare Modello Bene',
+    'created_at' 			=> 'Creato il',
     'eol'	 				=> 'EOL',
-    'modelnumber'   		=> 'Model No.',
-    'name'      			=> 'Asset Model Name',
-    'numassets' 			=> 'Assets',
-    'title'					=> 'Asset Models',
-    'update'				=> 'Update Asset Model',
-    'view'					=> 'View Asset Model',
-    'update'				=> 'Update Asset Model',
-    'clone'				=> 'Clone Model',
-    'edit'				=> 'Edit Model',
+    'modelnumber'   		=> 'Modello Num.',
+    'name'      			=> 'Nome Modello Bene',
+    'numassets' 			=> 'Beni',
+    'title'					=> 'Modelli Bene',
+    'update'				=> 'Aggiorna Modello Bene',
+    'view'					=> 'Visualizza Modello Bene',
+    'update'				=> 'Aggiorna Modello Bene',
+    'clone'				=> 'Clona Modello',
+    'edit'				=> 'Modifica Modello',
 );
