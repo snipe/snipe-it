@@ -21,7 +21,7 @@
 		"doctrine/dbal": "v2.4.2",
 		"cartalyst/sentry": "2.1.5",
 		"barryvdh/laravel-debugbar": "1.x",
-		"chumper/datatable": "dev-master",
+		"chumper/datatable": "2.3.*",
 		"dinesh/barcode": "dev-master",
 		"intervention/image": "dev-master",
 		"league/csv": "~7.0",

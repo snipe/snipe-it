@@ -257,46 +257,46 @@
                                 </div>
                             </div>
                             @endif
-
-
-
                         </div>
+                    </div>
 		</div>
 
                     <!-- side address column -->
                     <div class="col-md-3 address pull-right hidden-print">
 
-
-
                         <h6> @lang('admin/users/general.contact_user', array('name' => $user->first_name)) </h6>
-
 
                         @if ($user->location_id)
                         	<div class="col-md-12">
-                            <iframe width="300" height="133" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.com/maps?&amp;q={{{ $user->userloc->address }}},{{{ $user->userloc->city }}},{{{ $user->userloc->state }}},{{{ $user->userloc->country }}}&amp;output=embed" style="float: none;"></iframe>
+                            <iframe width="300" height="133" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.com/maps?&amp;q={{{ $user->userloc->address }}},{{{ $user->userloc->city }}},{{{ strtoupper($user->userloc->state) }}},{{{ strtoupper($user->userloc->country) }}}&amp;output=embed" style="float: none;"></iframe>
                             </div>
                         @endif
                         <ul>
+                        @if ($user->phone)
+                            <li><i class="fa fa-phone"></i>{{{ $user->phone }}}</li>
+                        @endif
+                            <li><i class="fa fa-envelope-o"></i><a href="mailto:{{{ $user->email }}}">{{{ $user->email }}}</a><br /><br /></li>
                         @if ($user->manager)
                             <li><strong> @lang('admin/users/table.manager'):</strong><br>
                             {{{ $user->manager->fullName() }}}</li>
                         @endif
-
                         @if ($user->location_id)
                             <li>{{{ $user->userloc->address }}} {{{ $user->userloc->address2 }}}</li>
-                            <li>{{{ $user->userloc->city }}}, {{{ $user->userloc->state }}} {{{ $user->userloc->zip }}}<br /><br /></li>
+                            <li>{{{ $user->userloc->city }}}, {{{ $user->userloc->state }}} {{{ $user->userloc->zip }}}</li>
                         @endif
-                        @if ($user->phone)
-                            <li><i class="fa fa-phone"></i>{{{ $user->phone }}}</li>
-                        @endif
-                            <li><i class="fa fa-envelope-o"></i><a href="mailto:{{{ $user->email }}}">{{{ $user->email }}}</a></li>
                         </ul>
+
+                        @if ($user->notes!='')
+                        <ul>
+                            <li><strong> @lang('admin/users/table.notes'):</strong><br>
+                            {{{ $user->notes }}}</li>
+                        </ul>
+                        @endif
 
                         @if ($user->last_login!='')
                         <br /><h6>@lang('admin/users/general.last_login')
                         {{{ $user->last_login->diffForHumans() }}}</h6>
                         @endif
                     </div>
-
 
 @stop

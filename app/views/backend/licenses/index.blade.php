@@ -17,62 +17,25 @@
 </div>
 
 <div class="row form-wrapper">
-<div class="table-responsive">
-<table id="example">
-    <thead>
-        <tr role="row">
-            <th class="col-md-3" tabindex="0" rowspan="1" colspan="1">@lang('admin/licenses/table.title')</th>
-            <th class="col-md-3" tabindex="0" rowspan="1" colspan="1">@lang('admin/licenses/table.serial')</th>
-            <th class="col-sm-1">@lang('admin/licenses/form.seats')</th>
-            <th class="col-sm-1">@lang('admin/licenses/form.remaining_seats')</th>
-            <th class="col-md-3" tabindex="0" rowspan="1" colspan="1">@lang('admin/licenses/table.purchase_date')</th>
-            <th class="col-md-1 actions" tabindex="0" rowspan="1" colspan="1">@lang('table.actions')</th>
-        </tr>
-    </thead>
-    <tbody>
-
-
-        @foreach ($licenses as $license)
-
-                @if ($license->licenseseats)
-
-                <tr>
-                    <td><a href="{{ route('view/license', $license->id) }}">{{{ $license->name }}}</a>
-                     </td>
-                    <td><a href="{{ route('view/license', $license->id) }}">{{{ mb_strimwidth($license->serial, 0, 50, "...") }}}</a>
-                    </td>
-                    <td>
-                    	{{{ $license->totalSeatsByLicenseID() }}}
-                    </td>
-                    <td>
-                    	{{{ $license->remaincount() }}}
-                    </td>
-                    <td>
-                    {{{ $license->purchase_date }}}
-                    </td>
-                    <td>
-                    <a href="{{ route('update/license', $license->id) }}" class="btn btn-warning btn-sm"><i class="fa fa-pencil icon-white"></i></a>
-                        <a data-html="false" class="btn delete-asset btn-danger btn-sm" data-toggle="modal" href="{{ route('delete/license', $license->id) }}"
-                        data-content="@lang('admin/licenses/message.delete.confirm')"
-                        data-title="@lang('general.delete')
-                         {{ htmlspecialchars($license->name) }}?" onClick="return false;"><i class="fa fa-trash icon-white"></i></a>
-                    </td>
-
-
-
-                </tr>
-                @endif
-
-
-        @endforeach
-
-
-
-
-
-
-
-    </tbody>
-</table>
+    {{ Datatable::table()
+                ->addColumn(Lang::get('admin/licenses/table.title'), 
+                            Lang::get('admin/licenses/table.serial'), 
+                            Lang::get('admin/licenses/form.seats'), 
+                            Lang::get('admin/licenses/form.remaining_seats'), 
+                            Lang::get('admin/licenses/table.purchase_date'), 
+                            Lang::get('table.actions'))
+                ->setOptions(
+                        array(
+                            'sAjaxSource'=>route('api.licenses.list'),
+                            'dom' =>'CT<"clear">lfrtip',
+                            'colVis'=> array('showAll'=>'Show All','restore'=>'Restore','exclude'=>array(5),'activate'=>'mouseover'),
+                            'columnDefs'=> array(
+                                array('bSortable'=>false,'targets'=>array(5)),
+                                array('width'=>'20%','targets'=>array(5)),
+                                ),
+                            'order'=>array(array(0,'asc')),
+                        )
+                    )
+                ->render() }}
 </div>
 @stop

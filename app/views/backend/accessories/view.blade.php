@@ -31,35 +31,45 @@
 
                             <!-- checked out accessories table -->
                             @if ($accessory->users->count() > 0)
-                           <table id="example">
-                            <thead>
-                                <tr role="row">
-                                        <th class="col-md-11">@lang('general.user')</th>
-                                        <th class="col-md-1">@lang('table.actions')</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-
-                                    @foreach ($accessory->users as $accessory_users)
-                                    <tr>
-                                        <td>
-
-                                        <a href="{{ route('view/user', $accessory_users->id) }}">
-                                        {{{ $accessory_users->fullName() }}}
-                                        
-                                        </a>
-                                       
-                                        </td>
-                                        <td>
-                                            <a href="{{ route('checkin/accessory', $accessory_users->pivot->id) }}" class="btn-flat info">Checkin</a>
-                                        </td>
-
-                                    </tr>
-                                    @endforeach
-
-
-                                </tbody>
-                            </table>
+                             {{ Datatable::table()
+                ->addColumn(Lang::get('general.user'), 
+                            Lang::get('table.actions'))
+                ->setOptions(
+                        array(
+                            'sAjaxSource'=>route('api.accessories.view', $accessory->id),
+                            'dom' =>'T<"clear">lfrtip',
+                            'tableTools' => array(
+                                'sSwfPath'=> Config::get('app.url').'/assets/swf/copy_csv_xls_pdf.swf',
+                                'aButtons'=>array(
+                                    array(
+                                        'sExtends'=>'copy',
+                                    ),
+                                    'print',
+                                    array(
+                                        'sExtends'=>'collection',
+                                        'sButtonText'=>'Export',
+                                        'aButtons'=>array(
+                                            array(
+                                                'sExtends'=>'csv',
+                                            ),
+                                            array(
+                                                'sExtends'=>'xls',
+                                            ),
+                                            array(
+                                                'sExtends'=>'pdf',
+                                            ),
+                                        ),
+                                    ),
+                                ) 
+                            ),
+                            'columnDefs'=> array(
+                                array('bSortable'=>false,'targets'=>array(1)),
+                                array('width'=>'auto','targets'=>array(1)),
+                                ),
+                            'order'=>array(array(0,'asc')),
+                        )
+                    )
+                ->render() }}
 
                             @else
                             <div class="col-md-9">

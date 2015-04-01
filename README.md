@@ -9,7 +9,7 @@ This is a FOSS project for asset management in IT Operations. Knowing who has wh
 
 It is built on [Laravel 4.2](http://laravel.com) and uses the [Sentry 2](https://github.com/cartalyst/sentry) package.
 
-This project is being actively developed and we're [releasing quite frequently](https://github.com/snipe/snipe-it/releases). ([Check out the live demo here](http://snipeitapp.com/demo.php).)
+This project is being actively developed and we're [releasing quite frequently](https://github.com/snipe/snipe-it/releases). ([Check out the live demo here](http://snipeitapp.com/demo/).)
 
 __This is web-based software__. This means there there is no executable file (aka no .exe files), and it must be run on a web server and accessed through a web browser. It runs on any Mac OSX, flavor of Linux, as well as Windows.
 
@@ -65,3 +65,8 @@ Whenever you pull down a new version from master or develop, when you grab the [
 	php artisan migrate
 
 Forgetting to do this can mean your DB might end up out of sync with the new files you just pulled, or you may have some funky cached autoloader values. It's a good idea to get into the habit of running these every time you pull anything new down. If there are no database changes to migrate, it won't hurt anything to run migrations anyway.
+
+## Contributor Code of Conduct
+
+Please note that this project is released with a [Contributor Code of Conduct](CODE_OF_CONDUCT.md). By participating in this project you agree to abide by its terms.
+

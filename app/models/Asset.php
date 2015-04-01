@@ -17,8 +17,7 @@ class Asset extends Depreciable
         'checkout_date' 	=> 'date|max:10|min:10',
         'checkin_date' 		=> 'date|max:10|min:10',
         'supplier_id' 		=> 'integer',
-        'asset_tag'   => 'required|alpha_space|min:3|max:255|unique:assets,asset_tag,{id}',
-        //'serial'   			=> 'required|alpha_dash|min:3|max:255|unique:assets,serial,{id}',
+        'asset_tag'   		=> 'required|alpha_space|min:3|max:255|unique:assets,asset_tag,{id}',
         'status' 			=> 'integer'
         );
 
@@ -120,8 +119,19 @@ class Asset extends Depreciable
     {
         return $this->belongsTo('Statuslabel','status_id');
     }
-
-
+	
+	/** 
+	* Get name for EULA 
+	**/
+	public function assetNameForEula()
+    {
+	    if ($this->name=='') {
+		    return $this->model->name;
+	    } else {
+		    return $this->name;
+	    }
+    }
+    
      public function warrantee_expires()
     {
             $date = date_create($this->purchase_date);
@@ -165,6 +175,7 @@ class Asset extends Depreciable
     {
         return $this->belongsTo('Supplier','supplier_id');
     }
+    
 
     public function months_until_eol()
     {
@@ -216,7 +227,7 @@ class Asset extends Depreciable
 
 	    if ($this->model->category->eula_text) {
 		    return $Parsedown->text(e($this->model->category->eula_text));
-	    } elseif (Setting::getSettings()->default_eula_text) {
+	    } elseif ($this->model->category->use_default_eula == '1') {
 		    return $Parsedown->text(e(Setting::getSettings()->default_eula_text));
 	    } else {
 		    return null;

@@ -23,6 +23,7 @@ class User extends SentryUserModel
     {
         return "{$this->first_name} {$this->last_name}";
     }
+    
 
     /**
      * Returns the user Gravatar image url.
@@ -76,17 +77,36 @@ class User extends SentryUserModel
     {
         return $this->belongsTo('User','manager_id')->withTrashed();
     }
-
+    
+   
     public function accountStatus()
     {
-        $throttle = Sentry::findThrottlerByUserId($this->id);
-
-        if ($throttle->isBanned()) {
-            return 'banned';
-        } elseif ($throttle->isSuspended()) {
-            return 'suspended';
+        if ($this->sentryThrottle) {
+    	    if ($this->sentryThrottle->suspended==1) {
+    		 	return 'suspended';	
+    		} elseif ($this->sentryThrottle->banned==1) {
+    		 	return 'banned';	
+    	 	} else {		 	
+    		 	return false;
+    	 	}
         } else {
-            return '';
+            return false;
         }
     }
+    
+    public function sentryThrottle() {	    
+	    return $this->hasOne('Throttle'); 
+    }
+    
+    public function scopeGetDeleted($query)
+	{
+		return $query->withTrashed()->whereNotNull('deleted_at');
+	}
+	
+	public function scopeGetNotDeleted($query)
+	{
+		return $query->whereNull('deleted_at');
+	}
+
+
 }

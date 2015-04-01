@@ -11,6 +11,7 @@ use Str;
 use Validator;
 use View;
 use Image;
+use Config;
 
 class SettingsController extends AdminController
 {
@@ -63,14 +64,19 @@ class SettingsController extends AdminController
 
 
         // Declare the rules for the form validation
+        
         $rules = array(
-        "site_name" 	=> 'required|min:3',
-        "per_page"   	=> 'required|min:1|numeric',
-        "qr_text"		=> 'min:1|max:31',
-        "logo"   		=> 'mimes:jpeg,bmp,png,gif',
-        "alert_email"   => 'email',
-        );
+	        "per_page"   	=> 'required|min:1|numeric',
+	        "qr_text"		=> 'min:1|max:31',
+	        "logo"   		=> 'mimes:jpeg,bmp,png,gif',
+	        "alert_email"   => 'email',
+	        );
+        
+        if (Config::get('app.lock_passwords')==false) {
+	        $rules['site_name'] = 'required|min:3';
 
+	    } 
+        
         // Create a new validator instance from our validation rules
         $validator = Validator::make(Input::all(), $rules);
 
@@ -97,13 +103,14 @@ class SettingsController extends AdminController
 
         // Update the asset data
             $setting->id = '1';
-            $setting->site_name = e(Input::get('site_name'));
-            $setting->display_asset_name = e(Input::get('display_asset_name', '0'));
-            $setting->display_checkout_date = e(Input::get('display_checkout_date', '0'));
+            
+             if (Config::get('app.lock_passwords')==false) {
+	             $setting->site_name = e(Input::get('site_name'));
+             } 
+            
             $setting->per_page = e(Input::get('per_page'));
             $setting->qr_code = e(Input::get('qr_code', '0'));
             $setting->barcode_type = e(Input::get('barcode_type'));
-            $setting->display_eol = e(Input::get('display_eol', '0'));
             $setting->load_remote = e(Input::get('load_remote', '0'));
             $setting->qr_text = e(Input::get('qr_text'));
             $setting->auto_increment_prefix = e(Input::get('auto_increment_prefix'));

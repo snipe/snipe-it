@@ -14,6 +14,7 @@ use View;
 use User;
 use Actionlog;
 use Mail;
+use Datatable;
 
 class AccessoriesController extends AdminController
 {
@@ -25,11 +26,7 @@ class AccessoriesController extends AdminController
 
     public function getIndex()
     {
-        // Grab all the accessories
-        $accessories = Accessory::orderBy('created_at', 'DESC')->get();
-
-        // Show the page
-        return View::make('backend/accessories/index', compact('accessories'));
+        return View::make('backend/accessories/index');
     }
 
 
@@ -360,7 +357,54 @@ class AccessoriesController extends AdminController
         return Redirect::to("admin/accessories")->with('error', Lang::get('admin/accessories/message.checkin.error'));
     }
 
+    public function getDatatable()
+    {
+        $accessories = Accessory::select(array('id','name','qty'))
+        ->whereNull('deleted_at')
+        ->orderBy('created_at', 'DESC');
 
+        $accessories = $accessories->get();
 
+        $actions = new \Chumper\Datatable\Columns\FunctionColumn('actions',function($accessories)
+            {
+                return '<a href="'.route('checkout/accessory', $accessories->id).'" style="margin-right:5px;" class="btn btn-info btn-sm" '.(($accessories->numRemaining() > 0 ) ? '' : ' disabled').'>'.Lang::get('general.checkout').'</a><a href="'.route('update/accessory', $accessories->id).'" class="btn btn-warning btn-sm" style="margin-right:5px;"><i class="fa fa-pencil icon-white"></i></a><a data-html="false" class="btn delete-asset btn-danger btn-sm" data-toggle="modal" href="'.route('delete/accessory', $accessories->id).'" data-content="'.Lang::get('admin/accessories/message.delete.confirm').'" data-title="'.Lang::get('general.delete').' '.htmlspecialchars($accessories->name).'?" onClick="return false;"><i class="fa fa-trash icon-white"></i></a>';
+            });
+
+        return Datatable::collection($accessories)
+        ->addColumn('name',function($accessories)
+            {
+                return link_to('admin/accessories/'.$accessories->id.'/view', $accessories->name);
+            })
+        ->addColumn('qty',function($accessories)
+            {
+                return $accessories->qty;
+            })
+        ->addColumn('numRemaining',function($accessories)
+            {
+                return $accessories->numRemaining();
+            })
+        ->addColumn($actions)
+        ->searchColumns('name','qty','numRemaining','actions')
+        ->orderColumns('name','qty','numRemaining','actions')
+        ->make();
+    }
+
+	public function getDataView($accessoryID)
+	{
+		$accessory = Accessory::find($accessoryID);
+        $accessory_users = $accessory->users;
+
+		$actions = new \Chumper\Datatable\Columns\FunctionColumn('actions',function($accessory_users){
+			return '<a href="'.route('checkin/accessory', $accessory_users->pivot->id).'" class="btn-flat info">Checkin</a>';
+		});
+
+		return Datatable::collection($accessory_users)
+		->addColumn('name',function($accessory_users)
+			{
+				return link_to('/admin/users/'.$accessory_users->id.'/view', $accessory_users->fullName());
+			})
+		->addColumn($actions)
+		->make();
+    }
 
 }

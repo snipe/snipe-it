@@ -93,6 +93,7 @@ return array(
     'undeployable'			=> 'Nelansabil',
     'unknown_admin'			=> 'Admin necunoscut',
     'user'					=> 'Utilizator',
+    'users'                 => 'Users',
     'viewassets'  			=> 'Vezi active desemnate',
     'website'               => 'Website',
     'welcome'				=> 'Bine ati venit, :name',

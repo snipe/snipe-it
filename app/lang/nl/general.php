@@ -93,6 +93,7 @@ return array(
     'undeployable'			=> 'Niet-inzetbaar',
     'unknown_admin'			=> 'Onbekende Beheerder',
     'user'					=> 'Gebruiker',
+    'users'                 => 'Users',
     'viewassets'  			=> 'Bekijk toegekende materialen',
     'website'               => 'Website',
     'welcome'				=> 'Welkom :name',

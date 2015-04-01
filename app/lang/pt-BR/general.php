@@ -93,6 +93,7 @@ return array(
     'undeployable'			=> 'Não implantável',
     'unknown_admin'			=> 'Administrador Desconhecido',
     'user'					=> 'Usuário',
+    'users'                 => 'Users',
     'viewassets'  			=> 'Ver Bens Atribuídos',
     'website'               => 'Site',
     'welcome'				=> 'Bem-vindo, :name',

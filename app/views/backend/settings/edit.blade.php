@@ -56,8 +56,14 @@ padding: 0px 20px;
                                         {{ Form::label('site_name', Lang::get('admin/settings/general.site_name')) }}
 	                                    </div>
 	                                    <div class="col-md-9">
-										{{ Form::text('site_name', Input::old('site_name', $setting->site_name), array('class' => 'form-control')) }}
-										{{ $errors->first('site_name', '<br><span class="alert-msg">:message</span>') }}
+		                                   @if (Config::get('app.lock_passwords')===true)
+		                                   		{{ Form::text('site_name', Input::old('site_name', $setting->site_name), array('class' => 'form-control', 'disabled'=>'disabled')) }}
+		                                   @else 
+		                                   		{{ Form::text('site_name', Input::old('site_name', $setting->site_name), array('class' => 'form-control')) }}
+
+		                                   @endif
+		                                   
+										  {{ $errors->first('site_name', '<br><span class="alert-msg">:message</span>') }}
 	                                    </div>
                                     </div>
 
@@ -113,28 +119,6 @@ padding: 0px 20px;
 										</div>
                                     </div>
 
-
-                                    <div class="checkbox col-md-offset-3">
-
-										<label>
-											{{ Form::checkbox('display_asset_name', '1', Input::old('display_asset_name', $setting->display_asset_name)) }}
-											@lang('admin/settings/general.display_asset_name')
-										</label>
-                                    </div>
-
-                                     <div class="checkbox col-md-offset-3">
-										<label>
-											{{ Form::checkbox('display_eol', '1', Input::old('display_eol', $setting->display_eol)) }}
-											@lang('admin/settings/general.display_eol')
-										</label>
-                                    </div>
-
-                                     <div class="checkbox col-md-offset-3">
-										<label>
-											{{ Form::checkbox('display_checkout_date', '1', Input::old('display_checkout_date', $setting->display_checkout_date)) }}
-											@lang('admin/settings/general.display_checkout_date')
-										</label>
-                                    </div>
                                    <div class="checkbox col-md-offset-3">
 										<label>
 											{{ Form::checkbox('load_remote', '1', Input::old('load_remote', $setting->load_remote)) }}

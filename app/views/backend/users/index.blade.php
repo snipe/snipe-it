@@ -12,113 +12,50 @@
 <div class="row header">
     <div class="col-md-12">
 	    <a href="{{ route('import/user') }}" class="btn btn-default pull-right"><span class="fa fa-upload"></span> Import</a>
-        <a href="{{ route('create/user') }}" class="btn btn-success pull-right"><i class="fa fa-plus icon-white"></i>  @lang('general.create')</a>
-        @if (Input::get('onlyTrashed'))
-            <a class="btn btn-default pull-right" href="{{ URL::to('admin/users') }}" style="margin-right: 5px;">Show Current Users</a>
+        <a href="{{ route('create/user') }}" class="btn btn-success pull-right" style="margin-right: 5px;"><i class="fa fa-plus icon-white"></i>  @lang('general.create')</a>
+         @if (Input::get('status')=='deleted')
+            <a class="btn btn-default pull-right" href="{{ URL::to('admin/users') }}" style="margin-right: 5px;">@lang('admin/users/table.show_current')</a>
         @else
-            <a class="btn btn-default pull-right" href="{{ URL::to('admin/users?onlyTrashed=true') }}" style="margin-right: 5px;">Show Deleted Users</a>
+            <a class="btn btn-default pull-right" href="{{ URL::to('admin/users?status=deleted') }}" style="margin-right: 5px;">@lang('admin/users/table.show_deleted')</a>
         @endif
 
         <h3>
-        @if (Input::get('onlyTrashed'))
+        @if (Input::get('status')=='deleted')
             @lang('general.deleted')
         @else
             @lang('general.current')
         @endif
-
+         @lang('general.users')
     </h3>
     </div>
 </div>
 
-<div class="row form-wrapper">
+<div class="row">
 
-@if ($users->getTotal() > 0)
-<div class="row-fluid table users-list">
-<div class="table-responsive">
-<table id="example">
-    <thead>
-        <tr role="row">
-            <th class="col-md-3">@lang('admin/users/table.name')</th>
-            <th class="col-md-2">@lang('admin/users/table.email')</th>
-            <th class="col-md-2">@lang('admin/users/table.manager')</th>
-            <th class="col-md-1">@lang('general.assets')</th>
-            <th class="col-md-1">@lang('general.licenses')</th>
-            <th class="col-md-1">@lang('admin/users/table.activated')</th>
-            <th class="col-md-2 actions">@lang('table.actions')</th>
-        </tr>
-    </thead>
-    <tbody>
+{{ Datatable::table()
+    ->addColumn(
+	    Lang::get('admin/users/table.name'), 
+	    Lang::get('admin/users/table.email'), 
+	    Lang::get('admin/users/table.manager'),
+	    Lang::get('general.assets'), 
+	    Lang::get('general.licenses'), 
+	    Lang::get('admin/users/table.activated'), 
+	    Lang::get('table.actions')
+    )
+    ->setOptions(
+            array(
+                'sAjaxSource'=>route('api.users.list', Input::get('status')),
+                'dom' =>'CT<"clear">lfrtip',
+                'colVis'=> array('showAll'=>'Show All','restore'=>'Restore','activate'=>'mouseover'),
+                'columnDefs'=> array(array('visible'=>false,'targets'=>array()),array('bSortable'=>false,'targets'=>array(6))),
+                'order'=>array(array(1,'asc')),
+            )
+        )
+    ->render() }}
 
-        @foreach ($users as $user)
-        <tr>
-            <td nowrap="nowrap">
-            @if ($user->avatar)
-				<img src="/uploads/avatars/{{{ $user->avatar }}}" class="img-circle avatar hidden-phone" style="max-width: 45px;" />
-			@else
-				<img src="{{ $user->gravatar() }}" class="img-circle avatar hidden-phone" style="max-width: 45px;" />
-			@endif
-            <a href="{{ route('view/user', $user->id) }}" class="name">{{{ $user->fullName() }}}</a>
 
-            </td>
-            <td>{{{ $user->email }}}</td>
-            <td>
-            @if ($user->manager) {{{ $user->manager->fullName() }}}
-            @endif
-            </td>
-            <td>{{{ $user->assets->count() }}}</td>
-            <td>{{{ $user->licenses->count() }}}</td>
-            <td>{{ $user->isActivated() ? '<i class="fa fa-check"></i>' : ''}}</td>
-            
-            <td nowrap="nowrap">
-	            
-	            <!-- If the user account is suspended - show the UNSUSPEND button.  Do NOT evaluate if soft deleted! -->
-				@if (is_null($user->deleted_at))
-					@if ($user->accountStatus()=='suspended')
-			                <a href="{{ route('unsuspend/user', $user->id) }}" class="btn btn-warning btn-sm"><span class="fa fa-time icon-white"></span></a>
-					@endif
-				@endif
-            
-
-                @if ( ! is_null($user->deleted_at))
-                <a href="{{ route('restore/user', $user->id) }}" class="btn btn-warning btn-sm"><i class="fa fa-share icon-white"></i></a>
-                @else
-                <a href="{{ route('update/user', $user->id) }}" class="btn btn-warning btn-sm"><i class="fa fa-pencil icon-white"></i></a>
-
-                @if ((Sentry::getId() !== $user->id) && (!Config::get('app.lock_passwords')))
-                <a data-html="false" class="btn delete-asset btn-danger btn-sm" data-toggle="modal" href="{{ route('delete/user', $user->id) }}" data-content="Are you sure you wish to delete this user?" data-title="Delete {{ htmlspecialchars($user->first_name) }}?" onClick="return false;"><i class="fa fa-trash icon-white"></i></a>
-
-                @else
-                <span class="btn delete-asset btn-danger disabled"><i class="fa fa-trash icon-white"></i></span>
-                @endif
-                @endif
-            </td>
-        </tr>
-        @endforeach
-    </tbody>
-</table>
 </div>
 </div>
-<!-- {{
-    Datatable::table()
-        ->addColumn(Lang::get('name'))
-        ->addColumn(Lang::get('email'))
-        ->addColumn('Assets')
-        ->addColumn('Licenses')
-        ->addColumn(Lang::get('activated'))
-        ->setUrl(route('api.users'))
-        ->render()
-}} -->
 
-@else
-
-
-<div class="col-md-6">
-    <div class="alert alert-warning alert-block">
-        <i class="fa fa-warning"></i>
-        @lang('general.no_results')
-
-    </div>
-</div>
-@endif
 
 @stop

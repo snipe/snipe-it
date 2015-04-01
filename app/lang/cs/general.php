@@ -93,6 +93,7 @@ return array(
     'undeployable'			=> 'Ne-přiřaditelné',
     'unknown_admin'			=> 'Neznámy správce',
     'user'					=> 'Uživatel',
+    'users'                 => 'Users',
     'viewassets'  			=> 'Zobrazit přiřazený majetek',
     'website'               => 'Webová stránka',
     'welcome'				=> 'Vítej, :name',

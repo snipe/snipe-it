@@ -59,38 +59,6 @@
                                         @endif
                                     </tr>
                                     <tr>
-                                        <td>@lang('admin/settings/general.display_asset_name')</td>
-
-                                        @if ($setting->display_asset_name == 1)
-                                            <td>@lang('general.yes')</td>
-                                        @else
-                                            <td>@lang('general.no')</td>
-                                        @endif
-                                    </tr>
-
-                                     <tr>
-                                        <td>@lang('admin/settings/general.display_eol')</td>
-
-                                        @if ($setting->display_eol == 1)
-                                            <td>@lang('general.yes')</td>
-                                        @else
-                                            <td>@lang('general.no')</td>
-                                        @endif
-                                    </tr>
-
-
-                                    <tr>
-                                        <td>@lang('admin/settings/general.display_checkout_date')</td>
-
-
-                                        @if ($setting->display_checkout_date == 1)
-                                            <td>@lang('general.yes')</td>
-                                        @else
-                                            <td>@lang('general.no')</td>
-                                        @endif
-                                    </tr>
-
-                                    <tr>
                                         <td>@lang('admin/settings/general.auto_increment_assets')</td>
 
                                         @if ($setting->auto_increment_assets == 1)

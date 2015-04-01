@@ -11,6 +11,7 @@ use Sentry;
 use Str;
 use Validator;
 use View;
+use Datatable;
 
 class CategoriesController extends AdminController
 {
@@ -22,11 +23,8 @@ class CategoriesController extends AdminController
 
     public function getIndex()
     {
-        // Grab all the categories
-        $categories = Category::orderBy('created_at', 'DESC')->get();
-
         // Show the page
-        return View::make('backend/categories/index', compact('categories'));
+        return View::make('backend/categories/index');
     }
 
 
@@ -215,7 +213,65 @@ class CategoriesController extends AdminController
 
     }
 
+    public function getDatatable()
+    {
+        // Grab all the categories
+        $categories = Category::orderBy('created_at', 'DESC')->get();
 
+        $actions = new \Chumper\Datatable\Columns\FunctionColumn('actions', function($categories) {
+            return '<a href="'.route('update/category', $categories->id).'" class="btn btn-warning btn-sm" style="margin-right:5px;"><i class="fa fa-pencil icon-white"></i></a><a data-html="false" class="btn delete-asset btn-danger btn-sm" data-toggle="modal" href="'.route('delete/category', $categories->id).'" data-content="'.Lang::get('admin/categories/message.delete.confirm').'" data-title="'.Lang::get('general.delete').' '.htmlspecialchars($categories->name).'?" onClick="return false;"><i class="fa fa-trash icon-white"></i></a>';
+        });
+
+        return Datatable::collection($categories)
+        ->showColumns('name')
+        ->addColumn('category_type', function($categories) {
+            return ucwords($categories->category_type);
+        })
+        ->addColumn('count', function($categories) {
+            return ($categories->category_type=='asset') ? link_to('/admin/settings/categories/'.$categories->id.'/view', $categories->assetscount()) : $categories->accessoriescount();
+        })
+        ->addColumn('acceptance', function($categories) {
+            return ($categories->require_acceptance=='1') ? '<i class="fa fa-check" style="margin-right:50%;margin-left:50%;"></i>' : '';
+        })
+        ->addColumn('eula', function($categories) {
+            return ($categories->getEula()) ? '<i class="fa fa-check" style="margin-right:50%;margin-left:50%;"></i></a>' : '';
+        })
+        ->addColumn($actions)
+        ->searchColumns('name','category_type','count','acceptance','eula','actions')
+        ->orderColumns('name','category_type','count','acceptance','eula','actions')
+        ->make();
+    }
+    
+    public function getDataView($categoryID) {
+        $category = Category::find($categoryID);
+        $categoryassets = $category->assets;
+
+        $actions = new \Chumper\Datatable\Columns\FunctionColumn('actions', function ($categoryassets) 
+            { 
+                if (($categoryassets->assigned_to !='') && ($categoryassets->assigned_to > 0)) {
+                    return '<a href="'.route('checkin/hardware', $categoryassets->id).'" class="btn btn-primary btn-sm">'.Lang::get('general.checkin').'</a>';
+                } else {
+                    return '<a href="'.route('checkout/hardware', $categoryassets->id).'" class="btn btn-info btn-sm">'.Lang::get('general.checkout').'</a>';
+                }
+            });
+
+        return Datatable::collection($categoryassets)
+        ->addColumn('name', function ($categoryassets) {
+            return link_to('/hardware/'.$categoryassets->id.'/view', $categoryassets->name);
+        })
+        ->addColumn('asset_tag', function ($categoryassets) {
+            return link_to('/hardware/'.$categoryassets->id.'/view', $categoryassets->asset_tag);
+        })
+        ->addColumn('assigned_to', function ($categoryassets) {
+            if ($categoryassets->assigned_to) {
+                return link_to('/admin/users/'.$categoryassets->assigned_to.'/view', $categoryassets->assigneduser->fullName());
+            }
+        })
+        ->addColumn($actions)
+        ->searchColumns('name','asset_tag','assigned_to','actions')
+        ->orderColumns('name','asset_tag','assigned_to','actions')
+        ->make();
+    }
 
 
 }

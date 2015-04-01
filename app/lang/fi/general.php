@@ -93,6 +93,7 @@ return array(
     'undeployable'			=> 'Ei-käyttöönotettavissa',
     'unknown_admin'			=> 'Tuntematon Ylläpitäjä',
     'user'					=> 'Käyttäjä',
+    'users'                 => 'Users',
     'viewassets'  			=> 'Näytä Käyttöönotetut Laitteet',
     'website'               => 'Verkkosivu',
     'welcome'				=> 'Tervetuloa, :name',

@@ -1,4 +1,49 @@
 <?php
+/*
+|--------------------------------------------------------------------------
+| Admin API Routes
+|--------------------------------------------------------------------------
+*/
+Route::group(array('prefix' => 'api', 'namespace' => 'Controllers\Admin', 'before' => 'admin-auth'), function () {
+    /*---Hardware API---*/
+    Route::group(array('prefix' => 'hardware'), function() {
+        Route::resource('/', 'AssetsController');
+        Route::get('list/{status?}', array('as'=>'api.hardware.list', 'uses'=>'AssetsController@getDatatable'));
+    });
+    /*---Accessories API---*/
+    Route::group(array('prefix'=>'accessories'), function () {
+        Route::resource('/', 'AccessoriesController');
+        Route::get('list', array('as'=>'api.accessories.list', 'uses'=>'AccessoriesController@getDatatable'));
+        Route::get('{accessoryID}/view', array('as'=>'api.accessories.view', 'uses'=>'AccessoriesController@getDataView'));
+    });
+    /*---Users API---*/
+    Route::group(array('prefix'=>'users'), function() {
+        Route::resource('/', 'UsersController');
+        Route::get('list/{status?}', array('as'=>'api.users.list', 'uses'=>'UsersController@getDatatable'));
+    });
+    /*---Licenses API---*/
+    Route::group(array('prefix'=>'licenses'), function() {
+        Route::resource('/', 'LicensesController');
+        Route::get('list', array('as'=>'api.licenses.list', 'uses'=>'LicensesController@getDatatable'));
+    });
+    /*---Models API---*/
+    Route::group(array('prefix'=>'models'), function() {
+        Route::resource('/', 'ModelsController');
+        Route::get('list/{status?}', array('as'=>'api.models.list', 'uses'=>'ModelsController@getDatatable'));        
+        Route::get('{modelId}/check', function ($modelId) {
+			 $model = Model::find($modelId);
+			 return $model->show_mac_address;
+		});
+
+        Route::get('{modelID}/view', array('as'=>'api.models.view', 'uses'=>'ModelsController@getDataView'));
+    });
+    /*--- Categories API---*/
+    Route::group(array('prefix'=>'categories'), function() {
+        Route::resource('/', 'CategoriesController');
+        Route::get('list', array('as'=>'api.categories.list', 'uses'=>'CategoriesController@getDatatable'));
+        Route::get('{categoryID}/view', array('as'=>'api.categories.view', 'uses'=>'CategoriesController@getDataView'));
+    });
+});
 
 /*
 |--------------------------------------------------------------------------
@@ -112,6 +157,7 @@ Route::group(array('prefix' => 'admin', 'before' => 'admin-auth', 'namespace' =>
 
     # Accessories
         Route::group(array('prefix' => 'accessories'), function () {
+
             Route::get('create', array('as' => 'create/accessory', 'uses' => 'AccessoriesController@getCreate'));
             Route::post('create', 'AccessoriesController@postCreate');
             Route::get('{accessoryID}/edit', array('as' => 'update/accessory', 'uses' => 'AccessoriesController@getEdit'));
@@ -209,7 +255,7 @@ Route::group(array('prefix' => 'admin', 'before' => 'admin-auth', 'namespace' =>
 
     # User Management
     Route::group(array('prefix' => 'users'), function () {
-        Route::get('/', array('as' => 'users', 'uses' => 'UsersController@getIndex'));
+       
         Route::get('create', array('as' => 'create/user', 'uses' => 'UsersController@getCreate'));
         Route::post('create', 'UsersController@postCreate');
         Route::get('import', array('as' => 'import/user', 'uses' => 'UsersController@getImport'));
@@ -222,9 +268,8 @@ Route::group(array('prefix' => 'admin', 'before' => 'admin-auth', 'namespace' =>
         Route::get('{userId}/restore', array('as' => 'restore/user', 'uses' => 'UsersController@getRestore'));
         Route::get('{userId}/view', array('as' => 'view/user', 'uses' => 'UsersController@getView'));
         Route::get('{userId}/unsuspend', array('as' => 'unsuspend/user', 'uses' => 'UsersController@getUnsuspend'));
-
-
-        Route::get('datatable', array('as' => 'api.users', 'uses' => 'UsersController@getDatatable'));
+		Route::get('/', array('as' => 'users', 'uses' => 'UsersController@getIndex'));
+		
     });
 
     # Group Management

@@ -1,6 +1,10 @@
 # Contribution Guidelines
 
-Please submit all issues and pull requests to the [snipe/snipe-it](http://github.com/snipe/snipe-it) repository in the `develop` branch!
+**Before opening an issue to report a bug or request help, make sure you've checked the [Common Issues](http://snipeitapp.com/documentation/common-issues/) and [Getting Help](http://snipeitapp.com/documentation/getting-help/) pages.**
+
+## Developing on Snipe-IT
+
+Please submit all pull requests to the [snipe/snipe-it](http://github.com/snipe/snipe-it) repository in the `develop` branch!
 
 **As you're working on bug-fixes or features, please break them out into their own feature branches and open the pull request against your feature branch**. It makes it _much_ easier to decipher down the road, as you open multiple pull requests over time, and makes it much easier for me to approve pull requests quickly.
 
@@ -19,3 +23,9 @@ The labels we use in GitHub Issues and Waffle.io indicate whether we've confirme
 If you're not a coder but want to give back to the project and you're fluent in other languages, that's okay too. We use [CrowdIn](https://crowdin.com) to manage translations, and it makes it super-simple for you to add translations (or validate proposed translations) to the project without messing with code. __Check out [the Snipe-IT CrowdIn translation project here](https://crowdin.com/project/snipe-it/)__.
 
 Thanks!
+
+-----
+
+## Contributor Code of Conduct
+
+Please note that this project is released with a [Contributor Code of Conduct](CODE_OF_CONDUCT.md). By participating in this project you agree to abide by its terms.

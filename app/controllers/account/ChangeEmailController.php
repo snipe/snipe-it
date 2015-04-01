@@ -32,16 +32,18 @@ class ChangeEmailController extends AuthorizedController
      */
     public function postIndex()
     {
-        // Declare the rules for the form validation
-        $rules = array(
-            'current_password' => 'required|between:3,32',
-            'email'            => 'required|email|unique:users,email,'.Sentry::getUser()->email.',email',
-            'email_confirm'    => 'required|same:email',
-        );
+        
         
         if (Config::get('app.lock_passwords')) {
 			return Redirect::route('change-password')->with('error',  Lang::get('admin/users/table.lock_passwords'));
 		} else {
+			
+			// Declare the rules for the form validation
+	        $rules = array(
+	            'current_password' => 'required|between:3,32',
+	            'email'            => 'required|email|unique:users,email,'.Sentry::getUser()->email.',email',
+	            'email_confirm'    => 'required|same:email',
+	        );
 
 	        // Create a new validator instance from our validation rules
 	        $validator = Validator::make(Input::all(), $rules);
