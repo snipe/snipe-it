@@ -318,6 +318,7 @@ class AppCommand extends Command
         $data = array_merge($this->userData, array(
             'activated'   => 1,
             'manager_id'  => NULL,
+            'notes'  => 'Generated on install',
             'permissions' => array(
                 'admin' => 1,
                 'user'  => 1,
