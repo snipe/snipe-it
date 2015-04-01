@@ -1,12 +1,12 @@
 <?php
 
 return array(
-	'alert_email'				=> 'Send alerts to',
+	'alert_email'				=> '发送警报',
 	'alerts_enabled'			=> 'Alerts enabled',
 	'auto_increment_assets'		=> '生成自动递增资产ID',
 	'auto_increment_prefix'		=> '前缀（可选）',
 	'auto_incrementing_help'    => 'Enable auto-incrementing asset IDs first to set this',
-	'barcode_type'				=> 'Barcode Type',
+	'barcode_type'				=> '条码类型',
 	'default_eula_text'			=> 'Default EULA',
 	'default_eula_help_text'	=> 'You can also associate custom EULAs to specific asset categories.',
     'display_asset_name'        => '显示资产名称',
@@ -18,7 +18,7 @@ return array(
     'info'                      => '这些设置允许您自定义安装的某些方面',
     'laravel'                   => 'Laravel版本',
     'load_remote'				=> 'This Snipe-IT install can load scripts from the outside world.',
-    'logo'                    	=> 'Logo',
+    'logo'                    	=> '徽标',
     'per_page'                  => '每页搜索结果',
     'php'                       => 'PHP版本',
     'php_gd_info'               => '您必须安装php-gd显示二维码，请参阅安装说明。',

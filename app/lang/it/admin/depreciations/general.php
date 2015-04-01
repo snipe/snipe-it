@@ -1,12 +1,12 @@
 <?php
 
 return array(
-    'about_asset_depreciations'  			=> 'About Asset Depreciations',
-    'about_depreciations'  					=> 'You can set up asset depreciations to depreciate assets based on straight-line depreciation.',
-    'asset_depreciations'  					=> 'Asset Depreciations',
-    'create_depreciation'  					=> 'Create Depreciation',
-    'depreciation_name'  					=> 'Depreciation Name',
-    'number_of_months'  					=> 'Number of Months',
-    'update_depreciation'  					=> 'Update Depreciation',
+    'about_asset_depreciations'  			=> 'About Obsolescenza Asset',
+    'about_depreciations'  					=> 'Puoi settare l\'obsolescenza di un Asset per deprezzarlo in base alle percentuale di Obsolescenza.',
+    'asset_depreciations'  					=> 'Obsolescenza Asset',
+    'create_depreciation'  					=> 'Crea Obsolescenza',
+    'depreciation_name'  					=> 'Nome Obsolescenza',
+    'number_of_months'  					=> 'Numero di Mesi',
+    'update_depreciation'  					=> 'Modifica Obsolescenza',
 
 );

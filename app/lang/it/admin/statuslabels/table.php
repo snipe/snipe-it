@@ -1,15 +1,15 @@
 <?php
 
 return array(
-    'about'      	=> 'About Status Labels',
-    'archived'      	=> 'Archived',
-    'create'      	=> 'Create Status Label',
-    'deployable'      	=> 'Deployable',
-    'info'      	=> 'Status labels are used to describe the various states your assets could be in. They may be out for repair, lost/stolen, etc. You can create new status labels for deployable, pending and archived assets.',
-    'name'      	=> 'Status Name',
-    'pending'      	=> 'Pending',
-    'status_type'   => 'Status Type',
-    'title'      	=> 'Status Labels',
-    'undeployable'  => 'Undeployable',
-    'update'      	=> 'Update Status Label',
+    'about'      	=> 'Informazioni sulle etichette di stato',
+    'archived'      	=> 'Archiviato',
+    'create'      	=> 'Crea Etichetta di Stato',
+    'deployable'      	=> 'Distribuibile',
+    'info'      	=> 'Le etichette di stato sono usate per descrivere i vari stati dei beni. Essi possono essere fuori per la riparazione, perso o rubato, etc. È possibile creare nuove etichette di stato per schierabili, in attesa e dei beni archiviati.',
+    'name'      	=> 'Nome Stato',
+    'pending'      	=> 'In attesa',
+    'status_type'   => 'Tipo di stato',
+    'title'      	=> 'Etichette di Stato',
+    'undeployable'  => 'Non Distribuilbile',
+    'update'      	=> 'Aggiorna Etichetta di Stato',
 );

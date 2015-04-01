@@ -3,13 +3,13 @@
 return array(
 
     'id'      		=> 'ID',
-    'city'   		=> 'City',
-    'state'   		=> 'State',
-    'country'   	=> 'Country',
-    'create'		=> 'Create Location',
-    'update'		=> 'Update Location',
-    'name'			=> 'Location Name',
-    'address'		=> 'Address',
-    'zip'			=> 'Postal Code',
-    'locations'		=> 'Locations',
+    'city'   		=> 'Città',
+    'state'   		=> 'Stato',
+    'country'   	=> 'Paese',
+    'create'		=> 'Crea Posizione',
+    'update'		=> 'Aggiorna Posizione',
+    'name'			=> 'Nome Posizione',
+    'address'		=> 'Indirizzo',
+    'zip'			=> 'Codice Postale',
+    'locations'		=> 'Posizioni',
 );

@@ -1,9 +1,9 @@
 <?php
 
 return array(
-	'eula_text'      			=> 'EULA',
+	'eula_text'      			=> 'Slutbrugerlicens',
     'id'      					=> 'ID',
-    'require_acceptance'      	=> 'Acceptance',
-    'title'      				=> 'Accessory Name',
+    'require_acceptance'      	=> 'Accept',
+    'title'      				=> 'Tilbehør Navn',
 
 );

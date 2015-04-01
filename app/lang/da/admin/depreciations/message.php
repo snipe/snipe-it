@@ -2,24 +2,24 @@
 
 return array(
 
-    'does_not_exist' => 'Depreciation class does not exist.',
-    'assoc_users'	 => 'This depreciation is currently associated with one or more models and cannot be deleted. Please delete the models, and then try deleting again. ',
+    'does_not_exist' => 'Afskrivningsklasse eksisterer ikke.',
+    'assoc_users'	 => 'Denne afskrivning er pt. forbundet med en eller flere modeller og kan derfor ikke slettes. Slet modellerne og prøv igen.',
 
 
     'create' => array(
-        'error'   => 'Depreciation class was not created, please try again. :(',
-        'success' => 'Depreciation class created successfully. :)'
+        'error'   => 'Afskrivningsklasse blev ikke oprettet, prøv igen.',
+        'success' => 'Afskrivningsklasse blev oprettet.'
     ),
 
     'update' => array(
-        'error'   => 'Depreciation class was not updated, please try again',
-        'success' => 'Depreciation class updated successfully.'
+        'error'   => 'Afskrivningsklasse blev ikke opdateret, prøv igen.',
+        'success' => 'Afskrivningsklasse blev opdateret.'
     ),
 
     'delete' => array(
-        'confirm'   => 'Are you sure you wish to delete this depreciation class?',
-        'error'   => 'There was an issue deleting the depreciation class. Please try again.',
-        'success' => 'The depreciation class was deleted successfully.'
+        'confirm'   => 'Er du sikker på at du vil slette denne afskrivningsklasse?',
+        'error'   => 'Der var et problem ved sletning af afskrivningsklasse. Prøv igen.',
+        'success' => 'Afskrivningsklassen blev slettet.'
     )
 
 );

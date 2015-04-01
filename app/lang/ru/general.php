@@ -93,7 +93,7 @@ return array(
     'undeployable'			=> 'Не развертываемый',
     'unknown_admin'			=> 'Неизвестный администратор',
     'user'					=> 'Пользователь',
-    'users'                 => 'Users',
+    'users'                 => 'Пользователи',
     'viewassets'  			=> 'Показать присвоенные активы',
     'website'               => 'Сайт',
     'welcome'				=> 'Добро пожаловать, :name',

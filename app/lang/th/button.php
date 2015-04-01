@@ -2,13 +2,13 @@
 
 return array(
 
-    'actions' 	=> 'Actions',
-    'add'    	=> 'Add New',
-    'cancel'    => 'Cancel',
-    'delete'  	=> 'Delete',
-    'edit'    	=> 'Edit',
-    'restore' 	=> 'Restore',
-    'submit'  	=> 'Submit',
-    'upload'    => 'Upload',
+    'actions' 	=> 'การกระทำ',
+    'add'    	=> 'เพิ่มใหม่',
+    'cancel'    => 'ยกเลิก',
+    'delete'  	=> 'ลบ',
+    'edit'    	=> 'แก้ไข',
+    'restore' 	=> 'นำกลับ',
+    'submit'  	=> 'ตกลง',
+    'upload'    => 'อัพโหลด',
 
 );
