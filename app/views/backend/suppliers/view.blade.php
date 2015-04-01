@@ -145,7 +145,7 @@
                                     @endif
                                     @if (($supplier->city) || ($supplier->state))
                                         <br>
-                                        {{{ $supplier->city }}} {{{ $supplier->state }}} {{{ $supplier->zip }}} {{{ $supplier->country }}}
+                                        {{{ $supplier->city }}} {{{ strtoupper($supplier->state) }}} {{{ $supplier->zip }}} {{{ strtoupper($supplier->country) }}}
                                     @endif
                                     </li>
                                 @endif

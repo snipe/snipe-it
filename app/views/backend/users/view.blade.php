@@ -268,7 +268,7 @@
 
                         @if ($user->location_id)
                         	<div class="col-md-12">
-                            <iframe width="300" height="133" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.com/maps?&amp;q={{{ $user->userloc->address }}},{{{ $user->userloc->city }}},{{{ $user->userloc->state }}},{{{ $user->userloc->country }}}&amp;output=embed" style="float: none;"></iframe>
+                            <iframe width="300" height="133" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.com/maps?&amp;q={{{ $user->userloc->address }}},{{{ $user->userloc->city }}},{{{ strtoupper($user->userloc->state) }}},{{{ strtoupper($user->userloc->country) }}}&amp;output=embed" style="float: none;"></iframe>
                             </div>
                         @endif
                         <ul>
