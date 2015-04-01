@@ -227,7 +227,7 @@ class Asset extends Depreciable
 
 	    if ($this->model->category->eula_text) {
 		    return $Parsedown->text(e($this->model->category->eula_text));
-	    } elseif (Setting::getSettings()->default_eula_text) {
+	    } elseif ($this->model->category->use_default_eula == '1') {
 		    return $Parsedown->text(e(Setting::getSettings()->default_eula_text));
 	    } else {
 		    return null;
