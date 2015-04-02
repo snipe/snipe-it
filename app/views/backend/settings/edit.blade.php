@@ -114,9 +114,11 @@ padding: 0px 20px;
 											{{ Form::label('per_page', Lang::get('admin/settings/general.per_page')) }}
 										</div>
 	                                    <div class="col-md-9">
-										{{ Form::text('per_page', Input::old('per_page', $setting->per_page), array('class' => 'form-control', 'style'=>'width: 100px;')) }}
+										{{ Form::select('per_page', array('10'=>'10','25'=>'25','50'=>'50','75'=>'75','100'=>'100','125'=>'125','150'=>'150'), Input::old('per_page', $setting->per_page), array('class' => 'form-control', 'style'=>'width: 100px;')) }}
 										{{ $errors->first('per_page', '<br><span class="alert-msg">:message</span>') }}
 										</div>
+                                    </div>
+
                                     </div>
 
                                    <div class="checkbox col-md-offset-3">
