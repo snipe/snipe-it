@@ -979,8 +979,12 @@ class AssetsController extends AdminController
 	        {
 		        return '<a title="'.$assets->name.'" href="hardware/'.$assets->id.'/view">'.$assets->name.'</a>';
 	        })	
+	    ->addColumn('asset_tag',function($assets)
+	        {
+		        return '<a title="'.$assets->asset_tag.'" href="hardware/'.$assets->id.'/view">'.$assets->asset_tag.'</a>';
+	        })	
 	        
-        ->showColumns('asset_tag', 'serial')
+        ->showColumns('serial')
         
 		->addColumn('model',function($assets)
 			{
