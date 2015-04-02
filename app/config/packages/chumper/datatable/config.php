@@ -58,6 +58,8 @@ return array(
             'deferRender'=> true,
             'stateSave'=> true,
             'paging'=>true,
+            'pageLength'=> Setting::getSettings()->per_page,
+            'lengthMenu'=>array(array(10,25,50,75,100,125,150,-1), array(10,25,50,75,100,125,150,'All')),
             'tableTools' => array(
                 'sSwfPath'=> Config::get('app.url').'/assets/swf/copy_csv_xls_pdf.swf',
                 'aButtons'=>array(
