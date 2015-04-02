@@ -34,8 +34,8 @@ return array(
     "email"            => "il formato del :attribute è invalido.",
     "exists"           => ":attribute selezzionato è invalido.",
     "image"            => "il :attribute deve essere un immagine.",
-    "in"               => "The selected :attribute is invalid.",
-    "integer"          => "The :attribute must be an integer.",
+    "in"               => "Il selezionato :attribute è invalido.",
+    "integer"          => "L' :attribute deve essere un numero intero.",
     "ip"               => "The :attribute must be a valid IP address.",
     "max"              => array(
         "numeric" => "The :attribute may not be greater than :max.",
