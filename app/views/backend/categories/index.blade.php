@@ -28,6 +28,20 @@
                     			Lang::get('table.actions'))
         			->setOptions(
 	                        	array(
+		                        	'language' => array(
+					            	'search' => Lang::get('general.search'),
+					            	'lengthMenu' => Lang::get('general.page_menu'),
+					            	'loadingRecords' => Lang::get('general.loading'),
+					            	'zeroRecords' => Lang::get('general.no_results'),
+					            	'info' => Lang::get('general.pagination_info'), 
+					            	'processing' => Lang::get('general.processing'),
+					            	'paginate'=> array(
+					            		'first'=>Lang::get('general.first'),
+					            		'previous'=>Lang::get('general.previous'),
+					            		'next'=>Lang::get('general.next'),
+					            		'last'=>Lang::get('general.last'),
+					            		),
+					            	),
 	                            		'sAjaxSource'=> route('api.categories.list'),
 	                            		'dom' =>'CT<"clear">lfrtip',
 	                            		'colVis'=> array('showAll'=>'Show All','restore'=>'Restore','exclude'=>array(5),'activate'=>'mouseover'),
