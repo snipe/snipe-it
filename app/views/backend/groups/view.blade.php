@@ -12,7 +12,7 @@
 
 <div class="row header">
     <div class="col-md-12">
-        <a href="{{ route('view/supplier', $group->id) }}" class="btn-flat white pull-right">
+        <a href="{{ route('update/group', $group->id) }}" class="btn-flat white pull-right">
         @lang('admin/groups/table.update')</a>
         <a href="{{ URL::to('admin/groups') }}" class="btn-flat gray pull-right" style="margin-right:5px;"><i class="fa fa-arrow-left icon-white"></i> @lang('general.back')</a>
         <h3 class="name"> @lang('admin/groups/titles.group_management') - {{{ $group->name }}}</h3>
