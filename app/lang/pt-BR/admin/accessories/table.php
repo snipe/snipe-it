@@ -3,7 +3,7 @@
 return array(
 	'eula_text'      			=> 'EULA',
     'id'      					=> 'ID',
-    'require_acceptance'      	=> 'Acceptance',
+    'require_acceptance'      	=> 'Aceitação',
     'title'      				=> 'Nome do Acessório',
 
 );

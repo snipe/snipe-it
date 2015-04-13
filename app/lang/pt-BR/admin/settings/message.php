@@ -4,7 +4,7 @@ return array(
 
 
     'update' => array(
-        'error'   => 'Um erro ocorreu ao atualizar. ',
+        'error'   => 'Ocorreu um erro ao atualizar. ',
         'success' => 'Configurações atualizadas com sucesso.'
     ),
 

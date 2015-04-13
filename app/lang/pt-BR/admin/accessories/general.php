@@ -8,13 +8,13 @@ return array(
     'create'  							=> 'Criar Categoria',
     'eula_text'							=> 'EULA da Categoria',
     'eula_text_help'					=> 'Este campo lhe permite personalizar seus EULAs para tipos específicos de ativos. Se você apenas tem um EULA para todos os seus ativos, você pode selecionar a caixa abaixo para usar o padrão primário.',
-    'require_acceptance'				=> 'Require users to confirm acceptance of assets in this category.',
+    'require_acceptance'				=> 'Requer que usuários confirmem a aceitação de ativos nesta categoria.',
     'no_default_eula'					=> 'Nenhum EULA padrão primário foi encontrado. Adicione um nas Configurações.',
     'qty'  								=> 'QTD',
     'total'  							=> 'Total',
     'remaining'  						=> 'Avail',
     'update'  							=> 'Atualizar Categoria',
-    'use_default_eula'					=> 'Use the <a href="#" data-toggle="modal" data-target="#eulaModal">primary default EULA</a> instead.',
-    'use_default_eula_disabled'			=> '<del>Use the primary default EULA instead.</del> No primary default EULA is set. Please add one in Settings.',
+    'use_default_eula'					=> 'Em vez disso, use o <a href="#" data-toggle="modal" data-target="#eulaModal">EULA padrão primário</a>.',
+    'use_default_eula_disabled'			=> '<del>Em vez disso, use o EULA padrão primário.</del> Nenhum EULA padrão primário foi definido. Adicione um nas Configurações.',
 
 );

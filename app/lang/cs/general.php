@@ -90,6 +90,7 @@ return array(
     'reports'				=> 'Reporty',
     'save'  				=> 'Uložit',
     'select'				=> 'Select',
+    'search'				=> 'Search',
     'select_depreciation'	=> 'Select a Depreciation Type',
     'select_location'		=> 'Select a Location',
     'select_manufacturer'	=> 'Select a Manufacturer',
