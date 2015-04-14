@@ -33,7 +33,11 @@ Locations ::
         @foreach ($locations as $location)
         <tr>
             <td>{{{ $location->name }}}</td>
-            <td>{{{ $location->address }}}, {{{ $location->address2 }}}  </td>
+            <td>{{{ $location->address }}}
+            	@if($location->address2 != '')
+            		, {{{ $location->address2 }}}
+            	@endif
+            </td>
             <td>{{{ $location->city }}}, {{{ strtoupper($location->state) }}}  {{{ strtoupper($location->country) }}}  </td>
             <td>
                 <a href="{{ route('update/location', $location->id) }}" class="btn btn-warning btn-sm"><i class="fa fa-pencil icon-white"></i></a>
