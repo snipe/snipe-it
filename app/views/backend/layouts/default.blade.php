@@ -248,6 +248,9 @@
     <div id="sidebar-nav">
         <ul id="dashboard-menu">
 			@if(Sentry::getUser()->hasAccess('admin'))
+			<li{{ (Request::is('*/') ? ' class="active"><div class="pointer"><div class="arrow"></div><div class="arrow_border"></div></div>' : '>') }}
+                <a href="/"><i class="fa fa-dashboard"></i><span>Dashboard</span></a>
+            </li>
             <li{{ (Request::is('hardware*') ? ' class="active"><div class="pointer"><div class="arrow"></div><div class="arrow_border"></div></div>' : '>') }}
                 <a href="{{ URL::to('hardware') }}" class="dropdown-toggle">
                     <i class="fa fa-barcode"></i>
