@@ -63,6 +63,7 @@ return array(
     'licenses_available'	=> 'licenses available',
     'licenses'				=> 'Licenses',
     'list_all'				=> 'List All',
+    'loading'				=> 'Loading',
     'location'              => 'Location',
     'locations'				=> 'Locations',
     'logout'				=> 'Logout',
