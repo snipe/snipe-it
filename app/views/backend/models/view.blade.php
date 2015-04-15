@@ -113,7 +113,7 @@
                                 @endif
 
                                 @if ($model->image)
-                                <li><br /><img src="/uploads/models/{{{ $model->image }}}" /></li>
+                                <li><br /><img src="{{ Config::get('app.url') }}/uploads/models/{{{ $model->image }}}" /></li>
                                 @endif
                                    
                                 @if  ($model->deleted_at!='')
