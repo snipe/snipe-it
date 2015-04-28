@@ -405,7 +405,7 @@ class LicensesController extends AdminController
             ->leftJoin('users', 'users.id', '=', 'assets.assigned_to')
             ->leftJoin('models', 'assets.model_id', '=', 'models.id')
             ->select('assets.id', 'assets.name', 'first_name', 'last_name','asset_tag',
-            DB::raw('concat (first_name," ",last_name) as full_name, assets.id as id, models.name as modelname'))
+            DB::raw('concat(first_name," ",last_name) as full_name, assets.id as id, models.name as modelname'))
             ->whereNull('assets.deleted_at')
             ->get();
 
