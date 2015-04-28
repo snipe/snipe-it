@@ -248,6 +248,9 @@
     <div id="sidebar-nav">
         <ul id="dashboard-menu">
 			@if(Sentry::getUser()->hasAccess('admin'))
+			<li{{ (Request::is('*/') ? ' class="active"><div class="pointer"><div class="arrow"></div><div class="arrow_border"></div></div>' : '>') }}
+                <a href="/"><i class="fa fa-dashboard"></i><span>Dashboard</span></a>
+            </li>
             <li{{ (Request::is('hardware*') ? ' class="active"><div class="pointer"><div class="arrow"></div><div class="arrow_border"></div></div>' : '>') }}
                 <a href="{{ URL::to('hardware') }}" class="dropdown-toggle">
                     <i class="fa fa-barcode"></i>
@@ -399,7 +402,7 @@
 					  		project by
 					  			<a target="_blank" href="http://twitter.com/snipeyhead">@snipeyhead</a>.
 						  		<a target="_blank" href="https://github.com/snipe/snipe-it">Fork it</a> |
-						  		<a target="_blank" href="http://docs.snipeitapp.com/">Documentation</a> |
+						  		<a target="_blank" href="http://snipeitapp.com/documentation/">Documentation</a> |
 						  		<a href="https://crowdin.com/project/snipe-it">Help Translate It! </a> |
 						  		<a target="_blank" href="https://github.com/snipe/snipe-it/issues?state=open">Report a Bug</a>
 						  		 &nbsp; &nbsp; ({{{  Config::get('version.app_version') }}})

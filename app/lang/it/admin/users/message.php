@@ -2,33 +2,33 @@
 
 return array(
 
-    'user_exists'              	=> 'User already exists!',
-    'user_not_found'           	=> 'User [:id] does not exist.',
-    'user_login_required'      	=> 'The login field is required',
-    'user_password_required'   	=> 'The password is required.',
-    'insufficient_permissions' 	=> 'Insufficient Permissions.',
-    'user_deleted_warning' 		=> 'This user has been deleted. You will have to restore this user to edit them or assign them new assets.',
+    'user_exists'              	=> 'Utente già esistente!',
+    'user_not_found'           	=> 'L\'utente [:id] non esite.',
+    'user_login_required'      	=> 'È necessario il campo login',
+    'user_password_required'   	=> 'È richiesta la password.',
+    'insufficient_permissions' 	=> 'Permessi Insufficienti.',
+    'user_deleted_warning' 		=> 'Questo utente è stato eliminato. Si dovrà ripristinare questo utente per modificare o assegnare nuovi beni.',
 
 
     'success' => array(
-        'create'    => 'User was successfully created.',
-        'update'    => 'User was successfully updated.',
-        'delete'    => 'User was successfully deleted.',
-        'ban'       => 'User was successfully banned.',
-        'unban'     => 'User was successfully unbanned.',
-        'suspend'   => 'User was successfully suspended.',
-        'unsuspend' => 'User was successfully unsuspended.',
-        'restored'  => 'User was successfully restored.',
-        'import'    => 'Users imported successfully.',
+        'create'    => 'Utente creato con successo.',
+        'update'    => 'Utente aggiornato con successo.',
+        'delete'    => 'Utente eliminato con successo.',
+        'ban'       => 'Utente bloccato con successo.',
+        'unban'     => 'Utente sbloccato con successo.',
+        'suspend'   => 'Utente sospeso con successo.',
+        'unsuspend' => 'Utente riabilitato con successo.',
+        'restored'  => 'Utente ripristinato con successo.',
+        'import'    => 'Utenti importati con successo.',
     ),
 
     'error' => array(
-        'create' => 'There was an issue creating the user. Please try again.',
-        'update' => 'There was an issue updating the user. Please try again.',
-        'delete' => 'There was an issue deleting the user. Please try again.',
-        'unsuspend' => 'There was an issue unsuspending the user. Please try again.',
-        'import'    => 'There was an issue importing users. Please try again.',
-        'asset_already_accepted' => 'This asset has already been accepted.',
+        'create' => 'C\'è stato un problema durante la creazione dell\'utente. Per favore riprova.',
+        'update' => 'C\'è stato un problema durante l\'aggiornamento dell\'utente. Per favore riprova.',
+        'delete' => 'C\'è stato un problema durante la cancellazione dell\'utente. Riprova per favore.',
+        'unsuspend' => 'C\'è stato un problema durante la riabilitazione dell\'utente. Riprova per favore.',
+        'import'    => 'C\'è stato un problema durante l\'importazione degli utenti. Riprova per favore.',
+        'asset_already_accepted' => 'Questo bene è già stato accettato.',
     ),
 
 );

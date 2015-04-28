@@ -3,23 +3,23 @@
 return array(
 
     'does_not_exist' => 'O modelo não existe.',
-    'assoc_users'	 => 'Este modelo está no momento associado com um ou mais bens e não pode ser deletado. Por favor, delete os bens, e então tente deletar novamente. ',
+    'assoc_users'	 => 'Este modelo está no momento associado com um ou mais ativos e não pode ser excluído. Exclua os ativos e então tente excluir novamente. ',
 
 
     'create' => array(
-        'error'   => 'O modelo não foi criado, por favor, tente novamente.',
+        'error'   => 'O modelo não foi criado, tente novamente.',
         'success' => 'Modelo criado com sucesso.'
     ),
 
     'update' => array(
-        'error'   => 'O modelo não foi atualizado, por favor, tente novamente',
+        'error'   => 'O modelo não foi atualizado, tente novamente',
         'success' => 'Modelo atualizado com sucesso.'
     ),
 
     'delete' => array(
-        'confirm'   => 'Tem certeza de que quer deletar este modelo de bem?',
+        'confirm'   => 'Tem certeza de que quer excluir este modelo de ativo?',
         'error'   => 'Houve um problema ao deletar o modelo. Por favor, tente novamente.',
-        'success' => 'O modelo foi deletado com sucesso.'
+        'success' => 'O modelo foi excluído com sucesso.'
     ),
     
     'restore' => array(

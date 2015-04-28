@@ -5,7 +5,7 @@ return array(
     'actions' 	=> 'Ações',
     'add'    	=> 'Adicionar Novo',
     'cancel'    => 'Cancelar',
-    'delete'  	=> 'Deletar',
+    'delete'  	=> 'Excluir',
     'edit'    	=> 'Editar',
     'restore' 	=> 'Restaurar',
     'submit'  	=> 'Enviar',

@@ -28,7 +28,7 @@ return array(
         'delete' => 'Det oppstod et problem under sletting av bruker. Prøv igjen.',
         'unsuspend' => 'Det oppstod et problem under aktivering av bruker. Prøv igjen.',
         'import'    => 'Det oppstod et problem under import av brukere. Prøv igjen.',
-        'asset_already_accepted' => 'This asset has already been accepted.',
+        'asset_already_accepted' => 'Denne eiendelen er allerede akseptert.',
     ),
 
 );

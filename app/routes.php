@@ -281,6 +281,7 @@ Route::group(array('prefix' => 'admin', 'before' => 'admin-auth', 'namespace' =>
         Route::post('{groupId}/edit', 'GroupsController@postEdit');
         Route::get('{groupId}/delete', array('as' => 'delete/group', 'uses' => 'GroupsController@getDelete'));
         Route::get('{groupId}/restore', array('as' => 'restore/group', 'uses' => 'GroupsController@getRestore'));
+        Route::get('{groupId}/view', array('as' => 'view/group', 'uses' => 'GroupsController@getView'));
     });
 
     # Dashboard

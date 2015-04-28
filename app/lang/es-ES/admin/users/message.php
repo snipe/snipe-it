@@ -28,7 +28,7 @@ return array(
         'delete' => 'Ha habido un problema eliminando el  Usuario. Intentalo de nuevo.',
         'unsuspend' => 'Ha habido un problema marcando como no suspendido el Usuario. Intentalo de nuevo.',
         'import'    => 'Ha habido un problema importando los usuarios. Por favor intente nuevamente.',
-        'asset_already_accepted' => 'This asset has already been accepted.',
+        'asset_already_accepted' => 'Este equipo ya ha sido aceptado.',
     ),
 
 );

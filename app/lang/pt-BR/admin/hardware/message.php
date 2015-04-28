@@ -2,29 +2,29 @@
 
 return array(
 
-    'undeployable' 		=> '<strong>Aviso:</strong> Este bem foi marcado como atualmente não implementável.                        Se este status mudou, por favor, atualize o status do bem.',
-    'does_not_exist' 	=> 'O bem não existe.',
+    'undeployable' 		=> '<strong>Aviso:</strong> Este ativo foi marcado como atualmente não implementável.                        Se este status mudou, atualize o status do ativo.',
+    'does_not_exist' 	=> 'O ativo não existe.',
     'assoc_users'	 	=> 'Este bem está no momento associado com pelo menos um usuário e não pode ser deletado. Por favor, atualize seu bem para que não referencie mais este usuário e tente novamente. ',
 
     'create' => array(
-        'error'   		=> 'O bem não foi criado, por favor, tente novamente. :(',
-        'success' 		=> 'Bem criado com sucesso. :)'
+        'error'   		=> 'O ativo não foi criado, tente novamente. :(',
+        'success' 		=> 'Ativo criado com sucesso. :)'
     ),
 
     'update' => array(
-        'error'   			=> 'O bem não foi atualizado, por favor, tente novamente',
-        'success' 			=> 'Bem atualizado com sucesso.',
+        'error'   			=> 'O ativo não foi atualizado, tente novamente',
+        'success' 			=> 'Ativo atualizado com sucesso.',
         'nothing_updated'	=>  'Nenhum campo foi selecionado, então nada foi atualizado.',
     ),
 
     'restore' => array(
-        'error'   		=> 'O bem não foi restaurado, por favor, tente novamente',
-        'success' 		=> 'Bem restaurado com sucesso.'
+        'error'   		=> 'O ativo não foi restaurado, tente novamente',
+        'success' 		=> 'Ativo restaurado com sucesso.'
     ),
     
     'deletefile' => array(
-        'error'   => 'O arquivo não foi deletado. Tente novamente.',
-        'success' => 'Arquivo deletado com sucesso.',
+        'error'   => 'O arquivo não foi excluído. Tente novamente.',
+        'success' => 'Arquivo excluído com sucesso.',
     ),
 
     'upload' => array(
@@ -36,21 +36,21 @@ return array(
 
 
     'delete' => array(
-        'confirm'   	=> 'Tem certeza de que deseja deletar este bem?',
-        'error'   		=> 'Houve um problema ao deletar o bem. Por favor, tente novamente.',
-        'success' 		=> 'O bem foi deletado com sucesso.'
+        'confirm'   	=> 'Tem certeza de que deseja excluir este ativo?',
+        'error'   		=> 'Houve um problema ao excluir o ativo. Tente novamente.',
+        'success' 		=> 'O ativo foi excluído com sucesso.'
     ),
 
     'checkout' => array(
         'error'   		=> 'Ativo não foi registrado, favor tentar novamente',
         'success' 		=> 'Ativo registrado com sucesso.',
-        'user_does_not_exist' => 'Este usuário é inválido. Por favor, tente novamente.'
+        'user_does_not_exist' => 'Este usuário é inválido. Tente novamente.'
     ),
 
     'checkin' => array(
         'error'   		=> 'Ativo não foi retornado, favor tentar novamente',
         'success' 		=> 'Ativo retornado com sucesso.',
-        'user_does_not_exist' => 'Este usuário é inválido. Por favor, tente novamente.'
+        'user_does_not_exist' => 'Este usuário é inválido. Tente novamente.'
     )
 
 );

@@ -9,14 +9,14 @@ return array(
     'success' => array(
         'create' => 'O grupo foi criado com sucesso.',
         'update' => 'O grupo foi atualizado com sucesso.',
-        'delete' => 'O grupo foi deletado com sucesso.',
+        'delete' => 'O grupo foi excluído com sucesso.',
     ),
 
     'delete' => array(
-        'confirm'   => 'Tem certeza que deseja deletar este grupo?',
-        'create' => 'Houve um problema ao criar o grupo. Por favor, tente novamente.',
-        'update' => 'Houve um problema ao atualizar o grupo. Por favor, tente novamente.',
-        'delete' => 'Houve um problema ao deletar o grupo. Por favor, tente novamente.',
+        'confirm'   => 'Tem certeza de que deseja excluir este grupo?',
+        'create' => 'Houve um problema ao criar o grupo. Tente novamente.',
+        'update' => 'Houve um problema ao atualizar o grupo. Tente novamente.',
+        'delete' => 'Houve um problema ao excluir o grupo. Tente novamente.',
     ),
 
 );

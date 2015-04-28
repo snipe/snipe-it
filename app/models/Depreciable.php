@@ -48,7 +48,7 @@ class Depreciable extends Elegant
         }
 
         // fraction of value left
-        $months_remaining = $this->time_until_depreciated()->m + $this->time_until_depreciated()->y; //UGlY
+        $months_remaining = $this->time_until_depreciated()->m + 12*$this->time_until_depreciated()->y; //UGlY
         $current_value = round(($months_remaining/ $this->get_depreciation()->months) * $this->purchase_cost, 2);
 
         if ($current_value < 0) {

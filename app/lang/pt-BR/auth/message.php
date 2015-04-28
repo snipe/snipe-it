@@ -9,27 +9,27 @@ return array(
     'account_banned'         => 'Esta conta de usuário está banida.',
 
     'signin' => array(
-        'error'   => 'Houve um problema ao lhe tentar entrar, por favor, tente novamente.',
+        'error'   => 'Houve um problema ao tentar-lhe entrar, tente novamente.',
         'success' => 'Você entrou com sucesso.',
     ),
 
     'signup' => array(
-        'error'   => 'Houve um problema ao tentar criar sua conta, por favor, tente novamente.',
+        'error'   => 'Houve um problema ao tentar criar sua conta, tente novamente.',
         'success' => 'Conta criada com sucesso.',
     ),
 
         'forgot-password' => array(
-            'error'   => 'Houve um problema ao tentar obter um código de redefinição da senha, por favor, tente novamente.',
+            'error'   => 'Houve um problema ao tentar obter um código de redefinição da senha, tente novamente.',
             'success' => 'E-mail de recuperação de senha enviado com sucesso.',
         ),
 
         'forgot-password-confirm' => array(
-            'error'   => 'Houve um problema ao tentar redefinir sua senha, por favor, tente novamente.',
+            'error'   => 'Houve um problema ao tentar redefinir sua senha, tente novamente.',
             'success' => 'Sua senha foi redefinida com sucesso.',
         ),
 
     'activate' => array(
-        'error'   => 'Houve um problema ao tentar ativar sua conta, por favor, tente novamente.',
+        'error'   => 'Houve um problema ao tentar ativar sua conta, tente novamente.',
         'success' => 'Sua conta foi ativada com sucesso.',
     ),
 

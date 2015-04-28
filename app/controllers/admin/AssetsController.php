@@ -56,16 +56,16 @@ class AssetsController extends AdminController
         // Grab the dropdown list of models
         //$model_list = array('' => 'Select a Model') + Model::orderBy('name', 'asc')->lists('name'.' '. 'modelno', 'id');
 
-        $model_list = array('' => 'Select a Model') + DB::table('models')
+        $model_list = array('' => Lang::get('general.select_model')) + DB::table('models')
         ->select(DB::raw('concat(name," / ",modelno) as name, id'))->orderBy('name', 'asc')
         ->orderBy('modelno', 'asc')
         ->whereNull('deleted_at')
         ->lists('name', 'id');
 
 
-        $supplier_list = array('' => '') + Supplier::orderBy('name', 'asc')->lists('name', 'id');
-        $assigned_to = array('' => 'Select a User') + DB::table('users')->select(DB::raw('concat (first_name," ",last_name) as full_name, id'))->whereNull('deleted_at')->lists('full_name', 'id');
-        $location_list = array('' => '') + Location::orderBy('name', 'asc')->lists('name', 'id');
+        $supplier_list = array('' => Lang::get('general.select_supplier')) + Supplier::orderBy('name', 'asc')->lists('name', 'id');
+        $assigned_to = array('' => Lang::get('general.select_user')) + DB::table('users')->select(DB::raw('concat(first_name," ",last_name) as full_name, id'))->whereNull('deleted_at')->lists('full_name', 'id');
+        $location_list = array('' => Lang::get('general.select_location')) + Location::orderBy('name', 'asc')->lists('name', 'id');
 
 
         // Grab the dropdown list of status
@@ -211,12 +211,12 @@ class AssetsController extends AdminController
 
 
         // Grab the dropdown list of models
-		$model_list = array('' => '') + DB::table('models')
+		$model_list = array('' => Lang::get('general.select_model')) + DB::table('models')
 		->select(DB::raw('concat(name," / ",modelno) as name, id'))->orderBy('name', 'asc')
 		->orderBy('modelno', 'asc')
 		->lists('name', 'id');
-        $supplier_list = array('' => '') + Supplier::orderBy('name', 'asc')->lists('name', 'id');
-        $location_list = array('' => '') + Location::orderBy('name', 'asc')->lists('name', 'id');
+        $supplier_list = array('' => Lang::get('general.select_supplier')) + Supplier::orderBy('name', 'asc')->lists('name', 'id');
+        $location_list = array('' => Lang::get('general.select_location')) + Location::orderBy('name', 'asc')->lists('name', 'id');
 
         // Grab the dropdown list of status
         $statuslabel_list = Statuslabel::orderBy('name', 'asc')->lists('name', 'id');
@@ -369,7 +369,7 @@ class AssetsController extends AdminController
         }
 
         // Get the dropdown of users and then pass it to the checkout view
-        $users_list = array('' => 'Select a User') + DB::table('users')->select(DB::raw('concat(last_name,", ",first_name) as full_name, id'))->whereNull('deleted_at')->orderBy('last_name', 'asc')->orderBy('first_name', 'asc')->lists('full_name', 'id');
+        $users_list = array('' => Lang::get('general.select_user')) + DB::table('users')->select(DB::raw('concat(last_name,", ",first_name) as full_name, id'))->whereNull('deleted_at')->orderBy('last_name', 'asc')->orderBy('first_name', 'asc')->lists('full_name', 'id');
 
         return View::make('backend/hardware/checkout', compact('asset'))->with('users_list',$users_list);
 
@@ -603,7 +603,7 @@ class AssetsController extends AdminController
     }
 
     /**
-     * Asset update.
+     * Asset clone.
      *
      * @param  int  $assetId
      * @return View
@@ -617,17 +617,16 @@ class AssetsController extends AdminController
         }
 
         // Grab the dropdown list of models
-        $model_list = array('' => '') + Model::lists('name', 'id');
+        $model_list = array('' => Lang::get('general.select_model')) + Model::lists('name', 'id');
 
         // Grab the dropdown list of status
         $statuslabel_list = Statuslabel::lists('name', 'id');
 
-        $location_list = array('' => '') + Location::lists('name', 'id');
+        $location_list = array('' => Lang::get('general.select_location')) + Location::lists('name', 'id');
 
         // get depreciation list
-        $depreciation_list = array('' => '') + Depreciation::lists('name', 'id');
-        $supplier_list = array('' => '') + Supplier::orderBy('name', 'asc')->lists('name', 'id');
-        $assigned_to = array('' => 'Select a User') + DB::table('users')->select(DB::raw('concat (first_name," ",last_name) as full_name, id'))->whereNull('deleted_at')->lists('full_name', 'id');
+        $supplier_list = array('' => Lang::get('general.select_supplier')) + Supplier::orderBy('name', 'asc')->lists('name', 'id');
+        $assigned_to = array('' => Lang::get('general.select_user')) + DB::table('users')->select(DB::raw('concat(first_name," ",last_name) as full_name, id'))->whereNull('deleted_at')->lists('full_name', 'id');
 
         $asset = clone $asset_to_clone;
         $asset->id = null;
@@ -980,8 +979,12 @@ class AssetsController extends AdminController
 	        {
 		        return '<a title="'.$assets->name.'" href="hardware/'.$assets->id.'/view">'.$assets->name.'</a>';
 	        })	
+	    ->addColumn('asset_tag',function($assets)
+	        {
+		        return '<a title="'.$assets->asset_tag.'" href="hardware/'.$assets->id.'/view">'.$assets->asset_tag.'</a>';
+	        })	
 	        
-        ->showColumns('asset_tag', 'serial')
+        ->showColumns('serial')
         
 		->addColumn('model',function($assets)
 			{
