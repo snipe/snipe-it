@@ -1,14 +1,5 @@
 @extends('backend/layouts/default')
 
-<?php
-use DebugBar\StandardDebugBar;
-
-$debugbar = new StandardDebugBar();
-$debugbarRenderer = $debugbar->getJavascriptRenderer();
-
-$debugbar["messages"]->addMessage("hello world!");
-?>
-
 {{-- Page title --}}
 @section('title')
         @lang('admin/settings/general.update') ::

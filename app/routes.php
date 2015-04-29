@@ -387,6 +387,8 @@ Route::group(array('before' => 'reporting-auth', 'namespace' => 'Controllers\Adm
 
     Route::get('reports/custom', array('as' => 'reports/custom', 'uses' => 'ReportsController@getCustomReport'));
     Route::post('reports/custom', 'ReportsController@postCustom');
+    
+     Route::get('reports/activity', array('as' => 'reports/activity', 'uses' => 'ReportsController@getActivityReport'));
 });
 
 

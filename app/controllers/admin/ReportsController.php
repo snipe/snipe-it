@@ -10,6 +10,7 @@ use View;
 use Location;
 use Redirect;
 use Response;
+use Actionlog;
 
 class ReportsController extends AdminController
 {
@@ -212,6 +213,26 @@ class ReportsController extends AdminController
         return $response;
     }
 
+	/**
+     * Show Report for Activity
+     *
+     * @return View
+     */
+
+	public function getActivityReport()
+    {
+        $log_actions = Actionlog::orderBy('created_at', 'DESC')
+        ->with('adminlog')
+        ->with('accessorylog')
+        ->with('assetlog')
+        ->with('licenselog')
+        ->with('userlog')
+        ->orderBy('created_at','DESC')
+        ->get();
+        return View::make('backend/reports/activity', compact('log_actions'));
+    }
+    
+    
     /**
      * Show Report for Licenses
      *
