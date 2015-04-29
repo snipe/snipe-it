@@ -19,6 +19,7 @@ padding: 0px 20px;
 </style>
 
 <div id="pad-wrapper" class="user-profile">
+	
                 <!-- header -->
 
                 <div class="pull-right">
@@ -30,12 +31,14 @@ padding: 0px 20px;
 
 
                 <div class="profile">
+	                
                     <!-- bio, new note & orders column -->
+                    
                     <div class="col-md-9 bio">
                         <div class="profile-box">
                             <br>
 
-							{{ Form::open(['method' => 'POST', 'files' => true, 'class' => 'form-horizontal', 'role' => 'form' ]) }}
+								{{ Form::open(['method' => 'POST', 'files' => true, 'class' => 'form-horizontal', 'role' => 'form' ]) }}
                                 <!-- CSRF Token -->
                                 {{ Form::hidden('_token', csrf_token()) }}
 
@@ -110,7 +113,7 @@ padding: 0px 20px;
 										</div>
                                     </div>
 
-                                    </div>
+                      
 
                                    <div class="checkbox col-md-offset-3">
 										<label>
@@ -224,9 +227,10 @@ padding: 0px 20px;
                                             <button type="submit" class="btn-flat success"><i class="fa fa-check icon-white"></i> @lang('general.save')</button>
                                         </div>
                                 </div>
-                            </form>
-
+                           
+                          </form> 
                         </div>
+                        
 </div>
 
                     <!-- side address column -->
@@ -236,4 +240,5 @@ padding: 0px 20px;
 
                     </div>
 
+</div>
 @stop

@@ -21,3 +21,4 @@ crowdin.yaml
 public/uploads/logo.gif
 public/uploads/logo.png
 .siteflow
+public/assets/.siteflow
