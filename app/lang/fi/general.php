@@ -5,6 +5,7 @@ return array(
 
     'accessories'			=> 'Accessories',
     'accessory'				=> 'Accessory',
+    'activity_report'		=> 'Activity Report',
     'address'				=> 'Osoite',
     'admin'					=> 'Ylläpitäjä',
     'all_assets'			=> 'Kaikki Laitteet',
@@ -56,6 +57,7 @@ return array(
     'id'  					=> 'Tunnus',
     'image_delete'         	=> 'Poista Kuva',
     'image_upload'         	=> 'Lähetä Kuva',
+    'item'  				=> 'Item',
     'last'					=> 'Last',
     'last_name'				=> 'Sukunimi',
     'license'				=> 'Lisenssi',
@@ -63,6 +65,7 @@ return array(
     'licenses_available'	=> 'Vapaana olevat lisenssit',
     'licenses'				=> 'Lisenssit',
     'list_all'				=> 'Listaa Kaikki',
+    'loading'				=> 'Loading',
     'location'              => 'Sijainti',
     'locations'				=> 'Sijainnit',
     'logout'				=> 'Kirjaudu Ulos',

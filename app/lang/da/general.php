@@ -5,6 +5,7 @@ return array(
 
     'accessories'			=> 'Tilbehør',
     'accessory'				=> 'Tilbehør',
+    'activity_report'		=> 'Activity Report',
     'address'				=> 'Addresse',
     'admin'					=> 'Admin',
     'all_assets'			=> 'Alle aktiver',
@@ -56,6 +57,7 @@ return array(
     'id'  					=> 'ID',
     'image_delete'         	=> 'Slet billede',
     'image_upload'         	=> 'Upload billede',
+    'item'  				=> 'Item',
     'last'					=> 'Last',
     'last_name'				=> 'Efternavn',
     'license'				=> 'Licens',
@@ -63,6 +65,7 @@ return array(
     'licenses_available'	=> 'Tilgængelige licenser',
     'licenses'				=> 'Licenser',
     'list_all'				=> 'Vis alle',
+    'loading'				=> 'Loading',
     'location'              => 'Lokation',
     'locations'				=> 'Lokationer',
     'logout'				=> 'Log ud',

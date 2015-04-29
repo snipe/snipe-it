@@ -5,6 +5,7 @@ return array(
 
     'accessories'			=> 'Аксессуары',
     'accessory'				=> 'Аксессуар',
+    'activity_report'		=> 'Activity Report',
     'address'				=> 'Адрес',
     'admin'					=> 'Администратор',
     'all_assets'			=> 'Все активы',
@@ -56,6 +57,7 @@ return array(
     'id'  					=> 'ID',
     'image_delete'         	=> 'Удалить изображение',
     'image_upload'         	=> 'Загрузить изображение',
+    'item'  				=> 'Item',
     'last'					=> 'В конец',
     'last_name'				=> 'Фамилия',
     'license'				=> 'Лицензия',
@@ -63,6 +65,7 @@ return array(
     'licenses_available'	=> 'Доступные лицензии',
     'licenses'				=> 'Лицензии',
     'list_all'				=> 'Весь список',
+    'loading'				=> 'Loading',
     'location'              => 'Расположение',
     'locations'				=> 'Места',
     'logout'				=> 'Выйти',

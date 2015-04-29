@@ -5,6 +5,7 @@ return array(
 
     'accessories'			=> 'Accessories',
     'accessory'				=> 'Accessory',
+    'activity_report'		=> 'Activity Report',
     'address'				=> 'Alamat',
     'admin'					=> 'Pentadbir',
     'all_assets'			=> 'Semua Harta',
@@ -56,6 +57,7 @@ return array(
     'id'  					=> 'ID',
     'image_delete'         	=> 'Hapuskan imej',
     'image_upload'         	=> 'Muat naik imej',
+    'item'  				=> 'Item',
     'last'					=> 'Last',
     'last_name'				=> 'Nama Keluarga',
     'license'				=> 'Lesen',
@@ -63,6 +65,7 @@ return array(
     'licenses_available'	=> 'Lesen Yang Ada',
     'licenses'				=> 'Lesen',
     'list_all'				=> 'Senaraikan Semua',
+    'loading'				=> 'Loading',
     'location'              => 'Lokasi',
     'locations'				=> 'Lokasi',
     'logout'				=> 'Log keluar',

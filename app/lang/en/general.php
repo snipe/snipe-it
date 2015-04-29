@@ -57,6 +57,7 @@ return array(
     'id'  					=> 'ID',
     'image_delete'         	=> 'Delete Image',
     'image_upload'         	=> 'Upload Image',
+    'item'  				=> 'Item',
     'last'					=> 'Last',
     'last_name'				=> 'Last Name',
     'license'				=> 'License',

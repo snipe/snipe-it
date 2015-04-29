@@ -2,23 +2,23 @@
 
 return array(
 
-    'does_not_exist' => 'Category does not exist.',
+    'does_not_exist' => 'La catégorie n\'éxiste pas.',
     'assoc_users'	 => 'This accessory currently has :count items checked out to users. Please check in the accessories and and try again. ',
 
     'create' => array(
-        'error'   => 'Category was not created, please try again.',
-        'success' => 'Category created successfully.'
+        'error'   => 'La catégorie n\'a pas été crée, veuillez essayer à nouveau.',
+        'success' => 'Catégorie créée avec succès.'
     ),
 
     'update' => array(
-        'error'   => 'Category was not updated, please try again',
+        'error'   => 'Catégorie n\'a pas été actualisée, veuillez réessayer',
         'success' => 'Category updated successfully.'
     ),
 
     'delete' => array(
-        'confirm'   => 'Are you sure you wish to delete this category?',
-        'error'   => 'There was an issue deleting the category. Please try again.',
-        'success' => 'The category was deleted successfully.'
+        'confirm'   => 'Êtes vous sûr de vouloir effacer cette catégorie?',
+        'error'   => 'Problème lors de l\'effacement de cette catégorie. Veuillez réessayer.',
+        'success' => 'Catégorie effacée.'
     ),
     
      'checkout' => array(

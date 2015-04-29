@@ -5,6 +5,7 @@ return array(
 
     'accessories'			=> 'Tilbehør',
     'accessory'				=> 'Tilbehør',
+    'activity_report'		=> 'Activity Report',
     'address'				=> 'Adresse',
     'admin'					=> 'Admin',
     'all_assets'			=> 'Alle eiendeler',
@@ -56,6 +57,7 @@ return array(
     'id'  					=> 'ID',
     'image_delete'         	=> 'Slett bilde',
     'image_upload'         	=> 'Last opp bilde',
+    'item'  				=> 'Item',
     'last'					=> 'Siste',
     'last_name'				=> 'Etternavn',
     'license'				=> 'Lisens',
@@ -63,6 +65,7 @@ return array(
     'licenses_available'	=> 'Tilgjengelige lisenser',
     'licenses'				=> 'Lisenser',
     'list_all'				=> 'List alle',
+    'loading'				=> 'Loading',
     'location'              => 'Lokasjon',
     'locations'				=> 'Lokasjoner',
     'logout'				=> 'Logg ut',

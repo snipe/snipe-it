@@ -5,6 +5,7 @@ return array(
 
     'accessories'			=> 'Accessories',
     'accessory'				=> 'Accessory',
+    'activity_report'		=> 'Activity Report',
     'address'				=> 'Adress',
     'admin'					=> 'Administratör',
     'all_assets'			=> 'Alla Tillgångar',
@@ -56,6 +57,7 @@ return array(
     'id'  					=> 'ID',
     'image_delete'         	=> 'Ta bort Bild',
     'image_upload'         	=> 'Ladda upp Bild',
+    'item'  				=> 'Item',
     'last'					=> 'Last',
     'last_name'				=> 'Efternamn',
     'license'				=> 'Licens',
@@ -63,6 +65,7 @@ return array(
     'licenses_available'	=> 'tillgängliga licenser',
     'licenses'				=> 'Licenser',
     'list_all'				=> 'Lista Alla',
+    'loading'				=> 'Loading',
     'location'              => 'Plats',
     'locations'				=> 'Platser',
     'logout'				=> 'Logga ut',

@@ -5,6 +5,7 @@ return array(
 
     'accessories'			=> 'Accessories',
     'accessory'				=> 'Accessory',
+    'activity_report'		=> 'Activity Report',
     'address'				=> 'Adres',
     'admin'					=> 'Beheerder',
     'all_assets'			=> 'Alle materialen',
@@ -56,6 +57,7 @@ return array(
     'id'  					=> 'ID',
     'image_delete'         	=> 'Afbeelding verwijderen',
     'image_upload'         	=> 'Afbeelding uploaden',
+    'item'  				=> 'Item',
     'last'					=> 'Last',
     'last_name'				=> 'Achternaam',
     'license'				=> 'Licentie',
@@ -63,6 +65,7 @@ return array(
     'licenses_available'	=> 'beschikbare licenties',
     'licenses'				=> 'Licenties',
     'list_all'				=> 'Toon Alles',
+    'loading'				=> 'Loading',
     'location'              => 'Locatie',
     'locations'				=> 'Locaties',
     'logout'				=> 'Afmelden',

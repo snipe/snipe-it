@@ -123,7 +123,7 @@ class Asset extends Depreciable
 	/** 
 	* Get name for EULA 
 	**/
-	public function assetNameForEula()
+	public function showAssetName()
     {
 	    if ($this->name=='') {
 		    return $this->model->name;

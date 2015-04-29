@@ -5,6 +5,7 @@ return array(
 
     'accessories'			=> 'อุปกรณ์',
     'accessory'				=> 'อุปกรณ์',
+    'activity_report'		=> 'Activity Report',
     'address'				=> 'ที่อยู่',
     'admin'					=> 'ผู้ดูแลระบบ',
     'all_assets'			=> 'ทรัพย์สินทั้งหมด',
@@ -56,6 +57,7 @@ return array(
     'id'  					=> 'ID',
     'image_delete'         	=> 'ลบรูปภาพประจำตัว',
     'image_upload'         	=> 'อัพโหลดภาพ',
+    'item'  				=> 'Item',
     'last'					=> 'สุดท้าย',
     'last_name'				=> 'นามสกุล',
     'license'				=> 'ลิขสิทธิ์',
@@ -63,6 +65,7 @@ return array(
     'licenses_available'	=> 'ลิขสิทธิ์พร้อมใช้',
     'licenses'				=> 'ลิขสิทธิ์',
     'list_all'				=> 'รายการทั้งหมด',
+    'loading'				=> 'Loading',
     'location'              => 'สถานที่',
     'locations'				=> 'สถานที่',
     'logout'				=> 'ออกจากระบบ',

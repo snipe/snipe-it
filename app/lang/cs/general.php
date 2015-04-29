@@ -5,6 +5,7 @@ return array(
 
     'accessories'			=> 'Accessories',
     'accessory'				=> 'Accessory',
+    'activity_report'		=> 'Activity Report',
     'address'				=> 'Adresa',
     'admin'					=> 'Admin',
     'all_assets'			=> 'Všechna zařízení',
@@ -56,6 +57,7 @@ return array(
     'id'  					=> 'ID',
     'image_delete'         	=> 'Smazat obrázek',
     'image_upload'         	=> 'Nahrát obrázek',
+    'item'  				=> 'Item',
     'last'					=> 'Last',
     'last_name'				=> 'Příjmení',
     'license'				=> 'Licence',
@@ -63,6 +65,7 @@ return array(
     'licenses_available'	=> 'dostupných licencí',
     'licenses'				=> 'Licence',
     'list_all'				=> 'Vypsat vše',
+    'loading'				=> 'Loading',
     'location'              => 'Lokalita',
     'locations'				=> 'Umístění',
     'logout'				=> 'Odhlásit',
