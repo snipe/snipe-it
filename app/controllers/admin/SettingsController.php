@@ -70,6 +70,9 @@ class SettingsController extends AdminController
 	        "qr_text"		=> 'min:1|max:31',
 	        "logo"   		=> 'mimes:jpeg,bmp,png,gif',
 	        "alert_email"   => 'email',
+	        "slack_endpoint"   => 'url',
+	        "slack_channel"   => 'regex:/(?<!\w)#\w+/',
+	        "slack_botname"   => 'alpha_dash',
 	        );
         
         if (Config::get('app.lock_passwords')==false) {
