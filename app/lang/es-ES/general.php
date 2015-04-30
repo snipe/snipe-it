@@ -5,7 +5,7 @@ return array(
 
     'accessories'			=> 'Accesorios',
     'accessory'				=> 'Accesorio',
-    'activity_report'		=> 'Activity Report',
+    'activity_report'		=> 'Reporte de Actividad',
     'address'				=> 'Dirección',
     'admin'					=> 'Admin',
     'all_assets'			=> 'Todos los Equipos',
@@ -65,7 +65,7 @@ return array(
     'licenses_available'	=> 'licencias libres',
     'licenses'				=> 'Licencias',
     'list_all'				=> 'Listar Todo',
-    'loading'				=> 'Loading',
+    'loading'				=> 'Cargando',
     'location'              => 'Localización',
     'locations'				=> 'Localizaciones',
     'logout'				=> 'Desconexión',
