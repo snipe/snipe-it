@@ -25,6 +25,7 @@
 		"dinesh/barcode": "4.0.*@dev",
 		"intervention/image": "dev-master",
 		"league/csv": "~7.0",
+		"maknz/slack": "dev-master",
 		"erusev/parsedown": "dev-master"
 	},
 	"require-dev": {

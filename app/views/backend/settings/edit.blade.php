@@ -42,9 +42,11 @@ padding: 0px 20px;
                                 <!-- CSRF Token -->
                                 {{ Form::hidden('_token', csrf_token()) }}
 
-
+									
                                 @foreach ($settings as $setting)
-
+									
+									<h4>@lang('admin/settings/general.general_settings')</h4>
+									
                                     <div class="form-group {{ $errors->has('site_name') ? 'error' : '' }}">
 	                                    <div class="col-md-3">
                                         {{ Form::label('site_name', Lang::get('admin/settings/general.site_name')) }}
@@ -75,7 +77,7 @@ padding: 0px 20px;
 						            </div>
 
 
-						            <div class="form-group {{ $errors->has('site_name') ? 'error' : '' }}">
+						            <div class="form-group {{ $errors->has('alert_email') ? 'error' : '' }}">
 	                                    <div class="col-md-3">
                                         {{ Form::label('alert_email', Lang::get('admin/settings/general.alert_email')) }}
 	                                    </div>
@@ -122,7 +124,7 @@ padding: 0px 20px;
 										</label>
                                     </div>
                                     <hr>
-
+									<h4>@lang('admin/settings/general.asset_ids') (@lang('admin/settings/general.optional'))</h4>
                                     <div class="checkbox col-md-offset-3">
 										<label>
 											{{ Form::checkbox('auto_increment_assets', '1', Input::old('auto_increment_assets', $setting->auto_increment_assets)) }}
@@ -148,7 +150,7 @@ padding: 0px 20px;
 
 
 									<hr>
-
+									<h4>@lang('admin/settings/general.barcode_settings') (@lang('admin/settings/general.optional'))</h4>
                                     @if ($is_gd_installed)
 
                                     		<div class="checkbox col-md-offset-3 col-md-9" style="padding-bottom: 10px;">
@@ -202,6 +204,7 @@ padding: 0px 20px;
 
 
 									<hr>
+									<h4>@lang('admin/settings/general.eula_settings') (@lang('admin/settings/general.optional'))</h4>
 									<div class="form-group {{ $errors->has('default_eula_text') ? 'error' : '' }}">
 	                                    <div class="col-md-3">
                                         {{ Form::label('default_eula_text', Lang::get('admin/settings/general.default_eula_text')) }}
@@ -217,6 +220,56 @@ padding: 0px 20px;
 
 
                                     </div>
+                                    
+                                    <hr>
+                                    <h4>@lang('admin/settings/general.slack_integration') (@lang('admin/settings/general.optional'))</h4>
+                                    <p class="help-inline">@lang('admin/settings/general.slack_integration_help',array('slack_link' => 'https://my.slack.com/services/new/incoming-webhook'))</p>
+                                    <div class="form-group {{ $errors->has('slack_channel') ? 'error' : '' }}">
+	                                    <div class="col-md-3">
+                                        {{ Form::label('slack_endpoint', Lang::get('admin/settings/general.slack_endpoint')) }}
+	                                    </div>
+	                                    <div class="col-md-9">
+		                                    
+		                                    @if (Config::get('app.lock_passwords')===true)
+		                                     	{{ Form::text('slack_endpoint', Input::old('slack_endpoint', $setting->slack_endpoint), array('class' => 'form-control','disabled'=>'disabled')) }}
+		                                   @else 
+		                                   		{{ Form::text('slack_endpoint', Input::old('slack_endpoint', $setting->slack_endpoint), array('class' => 'form-control')) }}
+		                                   @endif
+		                                   
+										{{ $errors->first('slack_endpoint', '<br><span class="alert-msg">:message</span>') }}
+	                                    </div>
+                                    </div>
+                                    
+                                    <div class="form-group {{ $errors->has('slack_channel') ? 'error' : '' }}">
+	                                    <div class="col-md-3">
+                                        {{ Form::label('slack_channel', Lang::get('admin/settings/general.slack_channel')) }}
+	                                    </div>
+	                                    <div class="col-md-9">
+										@if (Config::get('app.lock_passwords')===true)
+		                                     	{{ Form::text('slack_channel', Input::old('slack_channel', $setting->slack_channel), array('class' => 'form-control','disabled'=>'disabled')) }}
+		                                @else 
+		                                   		{{ Form::text('slack_channel', Input::old('slack_channel', $setting->slack_channel), array('class' => 'form-control')) }}
+		                                @endif										
+		                                {{ $errors->first('slack_channel', '<br><span class="alert-msg">:message</span>') }}
+	                                    </div>
+                                    </div>
+                                    
+                                    <div class="form-group {{ $errors->has('slack_botname') ? 'error' : '' }}">
+	                                    <div class="col-md-3">
+                                        {{ Form::label('slack_botname', Lang::get('admin/settings/general.slack_botname')) }}
+	                                    </div>
+	                                    <div class="col-md-9">
+										@if (Config::get('app.lock_passwords')===true)
+		                                     	{{ Form::text('slack_botname', Input::old('slack_botname', $setting->slack_botname), array('class' => 'form-control','disabled'=>'disabled')) }}
+		                                @else 
+		                                   		{{ Form::text('slack_botname', Input::old('slack_botname', $setting->slack_botname), array('class' => 'form-control')) }}
+		                                @endif		
+		                                {{ $errors->first('slack_botname', '<br><span class="alert-msg">:message</span>') }}
+	                                    </div>
+                                    </div>
+
+
+
 
                                 @endforeach
 

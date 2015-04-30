@@ -109,6 +109,25 @@
                                             <td>@lang('general.no')</td>
                                         @endif
                                     </tr>
+                                    <tr>
+                                       <td>@lang('admin/settings/general.slack_integration') </td>
+
+                                        @if ($setting->slack_endpoint!='')
+                                            <td>@lang('general.yes')
+	                                            
+	                                            @if ($setting->slack_channel!='')
+	                                            	{{{ $setting->slack_channel }}}
+	                                            @endif
+	                                            
+                                            </td>
+                                        @else
+                                            <td>@lang('general.no')</td>
+                                        @endif
+                                    </tr>
+                                    
+                                    
+                                    
+                                    
                                     @endforeach
                                 </tbody>
                             </table>

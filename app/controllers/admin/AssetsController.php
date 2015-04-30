@@ -25,6 +25,7 @@ use DNS2D;
 use Mail;
 use Datatable;
 use TCPDF;
+use Slack;
 
 class AssetsController extends AdminController
 {
@@ -440,6 +441,37 @@ class AssetsController extends AdminController
             $data['first_name'] = $user->first_name;
             $data['item_name'] = $asset->showAssetName();
             $data['require_acceptance'] = $asset->requireAcceptance();
+            
+            $settings = Setting::getSettings();
+			
+			if ($settings->slack_endpoint) {
+				
+
+				$slack_settings = [
+				    'username' => $settings->botname,
+				    'channel' => $settings->slack_channel,
+				    'link_names' => true
+				];
+				
+				$client = new \Maknz\Slack\Client($settings->slack_endpoint,$slack_settings);
+				
+				try {
+						$client->attach([
+						    'color' => 'good',
+						    'fields' => [
+						        [
+						            'title' => 'Asset Checked Out',
+						            'value' => strtoupper($logaction->asset_type).' asset '.$asset->showAssetName().' checked out to '.$logaction->userlog->fullName().' by '.Sentry::getUser()->fullName()
+						        ],
+						        				   
+						    ]
+						])->send('A new checkout has been posted');
+					
+					} catch (Exception $e) {
+						
+					}
+
+			}
 
 
             if (($asset->requireAcceptance()=='1')  || ($asset->getEula())) {
@@ -524,7 +556,37 @@ class AssetsController extends AdminController
             $logaction->user_id = Sentry::getUser()->id;
             $log = $logaction->logaction('checkin from');
 
+			$settings = Setting::getSettings();
+			
+			if ($settings->slack_endpoint) {
+				
 
+				$slack_settings = [
+				    'username' => $settings->botname,
+				    'channel' => $settings->slack_channel,
+				    'link_names' => true
+				];
+				
+				$client = new \Maknz\Slack\Client($settings->slack_endpoint,$slack_settings);
+				
+				try {
+						$client->attach([
+						    'color' => 'good',
+						    'fields' => [
+						        [
+						            'title' => 'Asset Checked In',
+						            'value' => strtoupper($logaction->asset_type).' asset '.$asset->showAssetName().' checked in by '.Sentry::getUser()->fullName()
+						        ],
+						        				   
+						    ]
+						])->send('A new checkin has been posted');
+					
+					} catch (Exception $e) {
+						
+					}
+
+			}
+			
 			if ($backto=='user') {
 				return Redirect::to("admin/users/".$return_to.'/view')->with('success', Lang::get('admin/hardware/message.checkin.success'));
 			} else {
