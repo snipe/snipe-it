@@ -38,7 +38,7 @@ class AccessoriesController extends AdminController
     public function getCreate()
     {
         // Show the page
-        $category_list = array('' => '') + DB::table('categories')->where('category_type','=','accessory')->whereNull('deleted_at')->lists('name', 'id');
+        $category_list = array('' => '') + DB::table('categories')->where('category_type','=','accessory')->whereNull('deleted_at')->orderBy('name','ASC')->lists('name', 'id');
         return View::make('backend/accessories/edit')->with('accessory',new Accessory)->with('category_list',$category_list);
     }
 
@@ -96,7 +96,7 @@ class AccessoriesController extends AdminController
             return Redirect::to('admin/accessories')->with('error', Lang::get('admin/accessories/message.does_not_exist'));
         }
 
-		$category_list = array('' => '') + DB::table('categories')->where('category_type','=','accessory')->whereNull('deleted_at')->lists('name', 'id');
+		$category_list = array('' => '') + DB::table('categories')->where('category_type','=','accessory')->whereNull('deleted_at')->orderBy('name','ASC')->lists('name', 'id');
         return View::make('backend/accessories/edit', compact('accessory'))->with('category_list',$category_list);
     }
 

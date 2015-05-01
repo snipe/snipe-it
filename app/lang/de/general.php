@@ -5,6 +5,7 @@ return array(
 
     'accessories'			=> 'Zubehör',
     'accessory'				=> 'Zubehör',
+    'activity_report'		=> 'Activity Report',
     'address'				=> 'Supplier Address',
     'admin'					=> 'Administrator',
     'all_assets'			=> 'Alle Assets',
@@ -56,6 +57,7 @@ return array(
     'id'  					=> 'Id',
     'image_delete'         	=> 'Bild löschen',
     'image_upload'         	=> 'Bild hinzufügen',
+    'item'  				=> 'Item',
     'last'					=> 'Letztes',
     'last_name'				=> 'Familienname',
     'license'				=> 'Lizenz',
@@ -63,6 +65,7 @@ return array(
     'licenses_available'	=> 'Verfügbare Lizenzen',
     'licenses'				=> 'Lizenzen',
     'list_all'				=> 'Alle auflisten',
+    'loading'				=> 'Loading',
     'location'              => 'Standort',
     'locations'				=> 'Standorte',
     'logout'				=> 'Abmelden',

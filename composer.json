@@ -12,19 +12,20 @@
     	"mtdowling/classpreloader":"1.0.*"
 	},
 	"require": {
-		"classpreloader/classpreloader": "1.2.0",
+		"classpreloader/classpreloader": "1.*",
 		"symfony/console": "~2",
         "symfony/yaml": "~2",
         "symfony/config": "~2",
         "symfony/stopwatch": "~2",
-		"laravel/framework": "4.2.*",
+		"laravel/framework": "4.2.17",
 		"doctrine/dbal": "v2.4.2",
 		"cartalyst/sentry": "2.1.5",
 		"barryvdh/laravel-debugbar": "1.x",
 		"chumper/datatable": "2.3.*",
-		"dinesh/barcode": "dev-master",
+		"dinesh/barcode": "4.0.*@dev",
 		"intervention/image": "dev-master",
 		"league/csv": "~7.0",
+		"maknz/slack": "dev-master",
 		"erusev/parsedown": "dev-master"
 	},
 	"require-dev": {

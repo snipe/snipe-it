@@ -5,6 +5,7 @@ return array(
 
     'accessories'			=> '附属品',
     'accessory'				=> '附属品',
+    'activity_report'		=> 'Activity Report',
     'address'				=> '地址',
     'admin'					=> '管理员',
     'all_assets'			=> '所有资产',
@@ -56,6 +57,7 @@ return array(
     'id'  					=> '编号',
     'image_delete'         	=> '删除图片',
     'image_upload'         	=> '上传图片',
+    'item'  				=> 'Item',
     'last'					=> 'Last',
     'last_name'				=> '姓氏',
     'license'				=> '授权许可',
@@ -63,6 +65,7 @@ return array(
     'licenses_available'	=> '可用许可',
     'licenses'				=> '许可证',
     'list_all'				=> '列出全部',
+    'loading'				=> 'Loading',
     'location'              => '位置',
     'locations'				=> '地理位置',
     'logout'				=> '注销',

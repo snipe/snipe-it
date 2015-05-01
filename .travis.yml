@@ -23,7 +23,7 @@ before_script:
   - cp app/config/testing/database.example.php app/config/testing/database.php
   - cp app/config/testing/mail.example.php app/config/testing/mail.php
   - composer self-update
-  - composer install --prefer-source
+  - composer install --prefer-source --no-interaction
   - php artisan key:generate --env=testing
   - php artisan migrate:install --env=testing --no-interaction -vvv
   - php artisan migrate --package cartalyst/sentry --env=testing --no-interaction -vvv

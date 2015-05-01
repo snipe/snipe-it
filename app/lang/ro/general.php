@@ -5,6 +5,7 @@ return array(
 
     'accessories'			=> 'Accessories',
     'accessory'				=> 'Accessory',
+    'activity_report'		=> 'Activity Report',
     'address'				=> 'Adresa',
     'admin'					=> 'Admin',
     'all_assets'			=> 'Toate activele',
@@ -56,6 +57,7 @@ return array(
     'id'  					=> 'ID',
     'image_delete'         	=> 'Sterge poza',
     'image_upload'         	=> 'Incarca poza',
+    'item'  				=> 'Item',
     'last'					=> 'Last',
     'last_name'				=> 'Nume',
     'license'				=> 'Licenta',
@@ -63,6 +65,7 @@ return array(
     'licenses_available'	=> 'Licente disponibile',
     'licenses'				=> 'Licente',
     'list_all'				=> 'Arata tot',
+    'loading'				=> 'Loading',
     'location'              => 'Locatie',
     'locations'				=> 'Locatii',
     'logout'				=> 'Log out',

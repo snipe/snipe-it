@@ -5,6 +5,7 @@ return array(
 
     'accessories'			=> 'Accessories',
     'accessory'				=> 'Accessory',
+    'activity_report'		=> 'Activity Report',
     'address'				=> 'العنوان',
     'admin'					=> 'الإدارة',
     'all_assets'			=> 'كل الأصول',
@@ -56,6 +57,7 @@ return array(
     'id'  					=> 'الرقم',
     'image_delete'         	=> 'حذف الصورة',
     'image_upload'         	=> 'رفع صورة',
+    'item'  				=> 'Item',
     'last'					=> 'Last',
     'last_name'				=> 'الإسم الأخير',
     'license'				=> 'الرخص',
@@ -63,6 +65,7 @@ return array(
     'licenses_available'	=> 'الرخص المتاحة',
     'licenses'				=> 'الرخص',
     'list_all'				=> 'عرض الكل',
+    'loading'				=> 'Loading',
     'location'              => 'الموقع',
     'locations'				=> 'المواقع',
     'logout'				=> 'تسجيل خروج',

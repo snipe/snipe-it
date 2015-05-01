@@ -25,6 +25,7 @@ use DNS2D;
 use Mail;
 use Datatable;
 use TCPDF;
+use Slack;
 
 class AssetsController extends AdminController
 {
@@ -64,7 +65,7 @@ class AssetsController extends AdminController
 
 
         $supplier_list = array('' => Lang::get('general.select_supplier')) + Supplier::orderBy('name', 'asc')->lists('name', 'id');
-        $assigned_to = array('' => Lang::get('general.select_user')) + DB::table('users')->select(DB::raw('concat (first_name," ",last_name) as full_name, id'))->whereNull('deleted_at')->lists('full_name', 'id');
+        $assigned_to = array('' => Lang::get('general.select_user')) + DB::table('users')->select(DB::raw('concat(first_name," ",last_name) as full_name, id'))->whereNull('deleted_at')->lists('full_name', 'id');
         $location_list = array('' => Lang::get('general.select_location')) + Location::orderBy('name', 'asc')->lists('name', 'id');
 
 
@@ -438,8 +439,39 @@ class AssetsController extends AdminController
             $data['log_id'] = $logaction->id;
             $data['eula'] = $asset->getEula();
             $data['first_name'] = $user->first_name;
-            $data['item_name'] = $asset->assetNameForEula();
+            $data['item_name'] = $asset->showAssetName();
             $data['require_acceptance'] = $asset->requireAcceptance();
+            
+            $settings = Setting::getSettings();
+			
+			if ($settings->slack_endpoint) {
+				
+
+				$slack_settings = [
+				    'username' => $settings->botname,
+				    'channel' => $settings->slack_channel,
+				    'link_names' => true
+				];
+				
+				$client = new \Maknz\Slack\Client($settings->slack_endpoint,$slack_settings);
+				
+				try {
+						$client->attach([
+						    'color' => 'good',
+						    'fields' => [
+						        [
+						            'title' => 'Asset Checked Out',
+						            'value' => strtoupper($logaction->asset_type).' asset '.$asset->showAssetName().' checked out to '.$logaction->userlog->fullName().' by '.Sentry::getUser()->fullName()
+						        ],
+						        				   
+						    ]
+						])->send('A new checkout has been posted');
+					
+					} catch (Exception $e) {
+						
+					}
+
+			}
 
 
             if (($asset->requireAcceptance()=='1')  || ($asset->getEula())) {
@@ -524,7 +556,37 @@ class AssetsController extends AdminController
             $logaction->user_id = Sentry::getUser()->id;
             $log = $logaction->logaction('checkin from');
 
+			$settings = Setting::getSettings();
+			
+			if ($settings->slack_endpoint) {
+				
 
+				$slack_settings = [
+				    'username' => $settings->botname,
+				    'channel' => $settings->slack_channel,
+				    'link_names' => true
+				];
+				
+				$client = new \Maknz\Slack\Client($settings->slack_endpoint,$slack_settings);
+				
+				try {
+						$client->attach([
+						    'color' => 'good',
+						    'fields' => [
+						        [
+						            'title' => 'Asset Checked In',
+						            'value' => strtoupper($logaction->asset_type).' asset '.$asset->showAssetName().' checked in by '.Sentry::getUser()->fullName()
+						        ],
+						        				   
+						    ]
+						])->send('A new checkin has been posted');
+					
+					} catch (Exception $e) {
+						
+					}
+
+			}
+			
 			if ($backto=='user') {
 				return Redirect::to("admin/users/".$return_to.'/view')->with('success', Lang::get('admin/hardware/message.checkin.success'));
 			} else {
@@ -626,7 +688,7 @@ class AssetsController extends AdminController
 
         // get depreciation list
         $supplier_list = array('' => Lang::get('general.select_supplier')) + Supplier::orderBy('name', 'asc')->lists('name', 'id');
-        $assigned_to = array('' => Lang::get('general.select_user')) + DB::table('users')->select(DB::raw('concat (first_name," ",last_name) as full_name, id'))->whereNull('deleted_at')->lists('full_name', 'id');
+        $assigned_to = array('' => Lang::get('general.select_user')) + DB::table('users')->select(DB::raw('concat(first_name," ",last_name) as full_name, id'))->whereNull('deleted_at')->lists('full_name', 'id');
 
         $asset = clone $asset_to_clone;
         $asset->id = null;

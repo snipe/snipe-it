@@ -119,6 +119,9 @@ class SettingsController extends AdminController
             $setting->alerts_enabled = e(Input::get('alerts_enabled', '0'));
             $setting->header_color = e(Input::get('header_color'));
             $setting->default_eula_text = e(Input::get('default_eula_text'));
+            $setting->slack_endpoint = e(Input::get('slack_endpoint'));
+            $setting->slack_channel = e(Input::get('slack_channel'));
+            $setting->slack_botname = e(Input::get('slack_botname'));
 
 
             // Was the asset updated?

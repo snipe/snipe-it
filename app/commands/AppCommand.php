@@ -217,7 +217,7 @@ class AppCommand extends Command
 	protected function askUserDummyData()
 	{
 		// Ask the user to input the user password
-		$dummydata = $this->ask('Do you want to seed your database with dummy data? (deafult is yes): ');
+		$dummydata = $this->ask('Do you want to seed your database with dummy data? y/n (default is yes): ');
 
 		$this->dummyData = ( strstr($dummydata, 'y' ) || empty($dummydata) ) ? true : false;
 	}

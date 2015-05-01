@@ -307,6 +307,8 @@
                 </a>
 
                 <ul class="submenu{{ (Request::is('reports*') ? ' active' : '') }}">
+	                 <li><a href="{{ URL::to('reports/activity') }}" {{{ (Request::is('reports/activity') ? ' class="active"' : '') }}} >@lang('general.activity_report')</a></li>
+
                     <li><a href="{{ URL::to('reports/depreciation') }}" {{{ (Request::is('reports/depreciation') ? ' class="active"' : '') }}} >@lang('general.depreciation_report')</a></li>
                     <li><a href="{{ URL::to('reports/licenses') }}" {{{ (Request::is('reports/licenses') ? ' class="active"' : '') }}} >@lang('general.license_report')</a></li>
                     <li><a href="{{ URL::to('reports/assets') }}" {{{ (Request::is('reports/assets') ? ' class="active"' : '') }}} >@lang('general.asset_report')</a></li>
@@ -402,7 +404,7 @@
 					  		project by
 					  			<a target="_blank" href="http://twitter.com/snipeyhead">@snipeyhead</a>.
 						  		<a target="_blank" href="https://github.com/snipe/snipe-it">Fork it</a> |
-						  		<a target="_blank" href="http://docs.snipeitapp.com/">Documentation</a> |
+						  		<a target="_blank" href="http://snipeitapp.com/documentation/">Documentation</a> |
 						  		<a href="https://crowdin.com/project/snipe-it">Help Translate It! </a> |
 						  		<a target="_blank" href="https://github.com/snipe/snipe-it/issues?state=open">Report a Bug</a>
 						  		 &nbsp; &nbsp; ({{{  Config::get('version.app_version') }}})
