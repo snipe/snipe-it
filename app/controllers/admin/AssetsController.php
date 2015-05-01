@@ -465,7 +465,7 @@ class AssetsController extends AdminController
 						        ],
 						        [
 						            'title' => 'Note:',
-						            'value' => $logaction->note
+						            'value' => e($logaction->note)
 						        ],
 
 						        
@@ -585,7 +585,7 @@ class AssetsController extends AdminController
 						        ],
 						        [
 						            'title' => 'Note:',
-						            'value' => $logaction->note
+						            'value' => e($logaction->note)
 						        ],
 						        				   
 						    ]
