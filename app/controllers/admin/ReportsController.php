@@ -453,7 +453,7 @@ class ReportsController extends AdminController
                 }
             }
             if (e(Input::get('depreciation')) == '1') {
-                $depreciation = $asset->depreciate();
+                $depreciation = $asset->getDepreciatedValue();
                 $row[] = '"'.number_format($asset->purchase_cost).'"';
                 $row[] = '"'.number_format($depreciation).'"';
                 $row[] = '"'.number_format($asset->purchase_cost - $depreciation).'"';
