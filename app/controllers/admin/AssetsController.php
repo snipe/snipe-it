@@ -460,12 +460,18 @@ class AssetsController extends AdminController
 						    'color' => 'good',
 						    'fields' => [
 						        [
-						            'title' => 'Asset Checked Out',
-						            'value' => strtoupper($logaction->asset_type).' asset '.$asset->showAssetName().' checked out to '.$logaction->userlog->fullName().' by '.Sentry::getUser()->fullName()
+						            'title' => 'Checked Out:',
+						            'value' => strtoupper($logaction->asset_type).' asset <'.Config::get('app.url').'/hardware/'.$asset->id.'/view'.'|'.$asset->showAssetName().'> checked out to <'.Config::get('app.url').'/admin/users/'.$user->id.'/view|'.$user->fullName().'> by <'.Config::get('app.url').'/hardware/'.$asset->id.'/view'.'|'.Sentry::getUser()->fullName().'>.'
 						        ],
+						        [
+						            'title' => 'Note:',
+						            'value' => e($logaction->note)
+						        ],
+
+						        
 						        				   
 						    ]
-						])->send('A new checkout has been posted');
+						])->send('Asset Checked Out');
 					
 					} catch (Exception $e) {
 						
@@ -574,12 +580,16 @@ class AssetsController extends AdminController
 						    'color' => 'good',
 						    'fields' => [
 						        [
-						            'title' => 'Asset Checked In',
-						            'value' => strtoupper($logaction->asset_type).' asset '.$asset->showAssetName().' checked in by '.Sentry::getUser()->fullName()
+						            'title' => 'Checked In:',
+						            'value' => strtoupper($logaction->asset_type).' asset <'.Config::get('app.url').'/hardware/'.$asset->id.'/view'.'|'.$asset->showAssetName().'> checked in by <'.Config::get('app.url').'/hardware/'.$asset->id.'/view'.'|'.Sentry::getUser()->fullName().'>.'
+						        ],
+						        [
+						            'title' => 'Note:',
+						            'value' => e($logaction->note)
 						        ],
 						        				   
 						    ]
-						])->send('A new checkin has been posted');
+						])->send('Asset Checked In');
 					
 					} catch (Exception $e) {
 						

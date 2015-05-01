@@ -20,6 +20,8 @@ use Validator;
 use View;
 use Response;
 use Datatable;
+use Slack;
+use Config;
 
 class LicensesController extends AdminController
 {
@@ -132,6 +134,7 @@ class LicensesController extends AdminController
 
             // Was the license created?
             if($license->save()) {
+	            
                 $insertedId = $license->id;
                 // Save the license seat data
                 for ($x=0; $x<$license->seats; $x++) {
@@ -439,6 +442,7 @@ class LicensesController extends AdminController
 
         $assigned_to = e(Input::get('assigned_to'));
         $asset_id = e(Input::get('asset_id'));
+        $user = Sentry::getUser();
 
         // Declare the rules for the form validation
         $rules = array(
@@ -480,13 +484,13 @@ class LicensesController extends AdminController
 
 
 
-// Check if the asset exists
+		// Check if the asset exists
         if (is_null($licenseseat = LicenseSeat::find($seatId))) {
             // Redirect to the asset management page with error
             return Redirect::to('admin/licenses')->with('error', Lang::get('admin/licenses/message.not_found'));
         }
 
-    if ( e(Input::get('asset_id')) == '') {
+		if (Input::get('asset_id') == '') {
             $licenseseat->asset_id = NULL;
         } else {
             $licenseseat->asset_id = e(Input::get('asset_id'));
@@ -512,12 +516,55 @@ class LicensesController extends AdminController
             $logaction->asset_id = $licenseseat->license_id;
 
 
+			$license = License::find($licenseseat->license_id);          
+            $settings = Setting::getSettings();
+
+
             // Update the asset data
             if ( e(Input::get('assigned_to')) == '') {
-                    $logaction->checkedout_to = NULL;
+                $logaction->checkedout_to = NULL;
+                $slack_msg = strtoupper($logaction->asset_type).' license <'.Config::get('app.url').'/admin/licenses/'.$license->id.'/view'.'|'.$license->name.'> checked out to <'.Config::get('app.url').'/hardware/'.$is_asset_id->id.'/view|'.$is_asset_id->showAssetName().'> by <'.Config::get('app.url').'/admin/users/'.$user->id.'/view'.'|'.$user->fullName().'>.';
             } else {
-                    $logaction->checkedout_to = e(Input::get('assigned_to'));
+                $logaction->checkedout_to = e(Input::get('assigned_to'));             
+                $slack_msg = strtoupper($logaction->asset_type).' license <'.Config::get('app.url').'/admin/licenses/'.$license->id.'/view'.'|'.$license->name.'> checked out to <'.Config::get('app.url').'/admin/users/'.$is_assigned_to->id.'/view|'.$is_assigned_to->fullName().'> by <'.Config::get('app.url').'/admin/users/'.$user->id.'/view'.'|'.$user->fullName().'>.';
             }
+            
+        
+            
+            if ($settings->slack_endpoint) {
+				
+
+				$slack_settings = [
+				    'username' => $settings->botname,
+				    'channel' => $settings->slack_channel,
+				    'link_names' => true
+				];
+				
+				$client = new \Maknz\Slack\Client($settings->slack_endpoint,$slack_settings);
+				
+				try {
+						$client->attach([
+						    'color' => 'good',
+						    'fields' => [
+						        [
+						            'title' => 'Checked Out:',
+						            'value' => $slack_msg
+						        ],
+						        [
+						            'title' => 'Note:',
+						            'value' => e($logaction->note)
+						        ],
+
+						        
+						        				   
+						    ]
+						])->send('License Checked Out');
+					
+					} catch (Exception $e) {
+						
+					}
+
+			}
 
             $log = $logaction->logaction('checkout');
 
@@ -557,6 +604,8 @@ class LicensesController extends AdminController
             // Redirect to the asset management page with error
             return Redirect::to('admin/licenses')->with('error', Lang::get('admin/licenses/message.not_found'));
         }
+        
+        $license = License::find($licenseseat->license_id);
 
         // Declare the rules for the form validation
         $rules = array(
@@ -579,6 +628,8 @@ class LicensesController extends AdminController
         // Update the asset data
         $licenseseat->assigned_to                   = NULL;
         $licenseseat->asset_id                      = NULL;
+        
+        $user = Sentry::getUser();
 
         // Was the asset updated?
         if($licenseseat->save()) {
@@ -586,8 +637,47 @@ class LicensesController extends AdminController
             $logaction->location_id = NULL;
             $logaction->asset_type = 'software';
             $logaction->note = e(Input::get('note'));
-            $logaction->user_id = Sentry::getUser()->id;
+            $logaction->user_id = $user->id;
+            
+            $settings = Setting::getSettings();
+			
+			if ($settings->slack_endpoint) {
+				
+
+				$slack_settings = [
+				    'username' => $settings->botname,
+				    'channel' => $settings->slack_channel,
+				    'link_names' => true
+				];
+				
+				$client = new \Maknz\Slack\Client($settings->slack_endpoint,$slack_settings);
+				
+				try {
+						$client->attach([
+						    'color' => 'good',
+						    'fields' => [
+						        [
+						            'title' => 'Checked In:',
+						            'value' => strtoupper($logaction->asset_type).' <'.Config::get('app.url').'/admin/licenses/'.$license->id.'/view'.'|'.$license->name.'> checked in by <'.Config::get('app.url').'/admin/users/'.$user->id.'/view'.'|'.$user->fullName().'>.'
+						        ],
+						        [
+						            'title' => 'Note:',
+						            'value' => e($logaction->note)
+						        ],
+						        				   
+						    ]
+						])->send('License Checked In');
+					
+					} catch (Exception $e) {
+						
+					}
+
+			}
+			
+			
             $log = $logaction->logaction('checkin from');
+            
+            
 
 			if ($backto=='user') {
 				return Redirect::to("admin/users/".$return_to.'/view')->with('success', Lang::get('admin/licenses/message.checkin.success'));
