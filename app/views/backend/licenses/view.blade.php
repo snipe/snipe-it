@@ -31,9 +31,9 @@
 <div class="col-md-9 bio">
 
 @if ($license->serial)
-	<div class="col-md-12" style="padding-bottom: 10px; margin-left: 15px;">
+	<div class="col-md-12 col-sm-12" style="padding-bottom: 10px; margin-left: 15px; word-wrap: break-word;">
 	<strong>@lang('admin/licenses/form.serial'): </strong>
-	{{{ wordwrap($license->serial, 10, "\n", true) }}}
+	{{{ $license->serial }}}
 	</div>
 @endif
 
