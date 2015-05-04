@@ -156,7 +156,7 @@ class AssetsController extends AdminController
             } else {
                 $asset->rtd_location_id     = e(Input::get('rtd_location_id'));
             }
-            
+
             $checkModel = Config::get('app.url').'/api/models/'.e(Input::get('model_id')).'/check';
             $asset->mac_address = ($checkModel == true) ? e(Input::get('mac_address')) : NULL;
 
@@ -293,7 +293,7 @@ class AssetsController extends AdminController
             } else {
                 $asset->rtd_location_id     = e(Input::get('rtd_location_id'));
             }
-            
+
             $checkModel = Config::get('app.url').'/api/models/'.e(Input::get('model_id')).'/check';
             $asset->mac_address = ($checkModel == true) ? e(Input::get('mac_address')) : NULL;
 
@@ -441,20 +441,20 @@ class AssetsController extends AdminController
             $data['first_name'] = $user->first_name;
             $data['item_name'] = $asset->showAssetName();
             $data['require_acceptance'] = $asset->requireAcceptance();
-            
+
             $settings = Setting::getSettings();
-			
+
 			if ($settings->slack_endpoint) {
-				
+
 
 				$slack_settings = [
 				    'username' => $settings->botname,
 				    'channel' => $settings->slack_channel,
 				    'link_names' => true
 				];
-				
+
 				$client = new \Maknz\Slack\Client($settings->slack_endpoint,$slack_settings);
-				
+
 				try {
 						$client->attach([
 						    'color' => 'good',
@@ -468,13 +468,13 @@ class AssetsController extends AdminController
 						            'value' => e($logaction->note)
 						        ],
 
-						        
-						        				   
+
+
 						    ]
 						])->send('Asset Checked Out');
-					
+
 					} catch (Exception $e) {
-						
+
 					}
 
 			}
@@ -563,18 +563,18 @@ class AssetsController extends AdminController
             $log = $logaction->logaction('checkin from');
 
 			$settings = Setting::getSettings();
-			
+
 			if ($settings->slack_endpoint) {
-				
+
 
 				$slack_settings = [
 				    'username' => $settings->botname,
 				    'channel' => $settings->slack_channel,
 				    'link_names' => true
 				];
-				
+
 				$client = new \Maknz\Slack\Client($settings->slack_endpoint,$slack_settings);
-				
+
 				try {
 						$client->attach([
 						    'color' => 'good',
@@ -587,16 +587,16 @@ class AssetsController extends AdminController
 						            'title' => 'Note:',
 						            'value' => e($logaction->note)
 						        ],
-						        				   
+
 						    ]
 						])->send('Asset Checked In');
-					
+
 					} catch (Exception $e) {
-						
+
 					}
 
 			}
-			
+
 			if ($backto=='user') {
 				return Redirect::to("admin/users/".$return_to.'/view')->with('success', Lang::get('admin/hardware/message.checkin.success'));
 			} else {
@@ -872,51 +872,51 @@ class AssetsController extends AdminController
     **/
     public function postBulkEdit($assets = null)
     {
-	    
+
 	    if (!Input::has('edit_asset')) {
 			return Redirect::back()->with('error', 'No assets selected');
 		} else {
-			$asset_raw_array = Input::get('edit_asset');				
+			$asset_raw_array = Input::get('edit_asset');
 			foreach ($asset_raw_array as $asset_id => $value) {
-				$asset_ids[] = $asset_id;		
-				
+				$asset_ids[] = $asset_id;
+
 			}
-			
+
 		}
-				
+
 	    if (Input::has('bulk_actions')) {
-		    
-		    
+
+
 		    // Create labels
 		    if (Input::get('bulk_actions')=='labels') {
 			    $assets = Asset::find($asset_ids);
 			    $assetcount = count($assets);
 			    $count = 0;
-			    
-			    $settings = Setting::getSettings();			
+
+			    $settings = Setting::getSettings();
 			    return View::make('backend/hardware/labels')->with('assets',$assets)->with('settings',$settings)->with('count',$count);
 
-			    
-			 // Bulk edit   
-			} elseif (Input::get('bulk_actions')=='edit') {
-				
-				$assets = Input::get('edit_asset');
-		
-				$supplier_list = array('' => '') + Supplier::orderBy('name', 'asc')->lists('name', 'id');
-		        $statuslabel_list = array('' => '') + Statuslabel::lists('name', 'id');
-		        $location_list = array('' => '') + Location::lists('name', 'id');
-		        
-		        return View::make('backend/hardware/bulk')->with('assets',$assets)->with('supplier_list',$supplier_list)->with('statuslabel_list',$statuslabel_list)->with('location_list',$location_list);
 
-				    
+			 // Bulk edit
+			} elseif (Input::get('bulk_actions')=='edit') {
+
+				$assets = Input::get('edit_asset');
+
+				$supplier_list = array('' => '') + Supplier::orderBy('name', 'asc')->lists('name', 'id');
+        $statuslabel_list = array('' => '') + Statuslabel::lists('name', 'id');
+        $location_list = array('' => '') + Location::lists('name', 'id');
+
+        return View::make('backend/hardware/bulk')->with('assets',$assets)->with('supplier_list',$supplier_list)->with('statuslabel_list',$statuslabel_list)->with('location_list',$location_list);
+
+
 			}
-			
+
 		} else {
-			return Redirect::back()->with('error', 'No action selected');			
+			return Redirect::back()->with('error', 'No action selected');
 		}
 
 
-		
+
     }
 
 
@@ -933,7 +933,7 @@ class AssetsController extends AdminController
 
 			$assets = Input::get('bulk_edit');
 
-			if ( (Input::has('purchase_date')) ||  (Input::has('rtd_location_id')) ||  (Input::has('status_id')) )  {
+			if ( (Input::has('purchase_date')) ||  (Input::has('purchase_cost'))  ||  (Input::has('supplier_id')) ||  (Input::has('order_number')) || (Input::has('warranty_months')) || (Input::has('rtd_location_id')) ||  (Input::has('status_id')) )  {
 
 				foreach ($assets as $key => $value) {
 
@@ -942,19 +942,19 @@ class AssetsController extends AdminController
 					if (Input::has('purchase_date')) {
 						$update_array['purchase_date'] =  e(Input::get('purchase_date'));
 					}
-					
+
 					if (Input::has('purchase_cost')) {
 						$update_array['purchase_cost'] =  e(Input::get('purchase_cost'));
 					}
-					
+
 					if (Input::has('supplier_id')) {
 						$update_array['supplier_id'] =  e(Input::get('supplier_id'));
 					}
-					
+
 					if (Input::has('order_number')) {
 						$update_array['order_number'] =  e(Input::get('order_number'));
 					}
-					
+
 					if (Input::has('warranty_months')) {
 						$update_array['warranty_months'] =  e(Input::get('warranty_months'));
 					}
@@ -1007,7 +1007,7 @@ class AssetsController extends AdminController
     {
 
        $assets = Asset::with('model','assigneduser','assigneduser.userloc','assetstatus','defaultLoc','assetlog','model','model.category')->Hardware()->select(array('id', 'name','model_id','assigned_to','asset_tag','serial','status_id','purchase_date','deleted_at'));
-       
+
 
 			switch ($status) {
 				case 'Pending':
@@ -1031,66 +1031,66 @@ class AssetsController extends AdminController
 				case 'Deleted':
 					$assets->withTrashed()->Deleted();
 					break;
-			}	
-      
-			       
+			}
+
+
         $assets = $assets->orderBy('asset_tag', 'ASC')->get();
-        
-        
-        $actions = new \Chumper\Datatable\Columns\FunctionColumn('actions', function ($assets) 
-        	{ 
+
+
+        $actions = new \Chumper\Datatable\Columns\FunctionColumn('actions', function ($assets)
+        	{
 	        	if ($assets->deleted_at=='') {
 	        		return '<a href="'.route('update/hardware', $assets->id).'" class="btn btn-warning btn-sm"><i class="fa fa-pencil icon-white"></i></a> <a data-html="false" class="btn delete-asset btn-danger btn-sm" data-toggle="modal" href="'.route('delete/hardware', $assets->id).'" data-content="'.Lang::get('admin/hardware/message.delete.confirm').'" data-title="'.Lang::get('general.delete').' '.htmlspecialchars($assets->asset_tag).'?" onClick="return false;"><i class="fa fa-trash icon-white"></i></a>';
 	        	} elseif ($assets->model->deleted_at=='') {
 	        		return '<a href="'.route('restore/hardware', $assets->id).'" class="btn btn-warning btn-sm"><i class="fa fa-recycle icon-white"></i></a>';
 	        	}
-        	
+
 	        });
-	        
-	    $inout = new \Chumper\Datatable\Columns\FunctionColumn('inout', function ($assets) 
-        	{ 
+
+	    $inout = new \Chumper\Datatable\Columns\FunctionColumn('inout', function ($assets)
+        	{
 	       	 	if (($assets->assigned_to !='') && ($assets->assigned_to > 0)) {
 					return '<a href="'.route('checkin/hardware', $assets->id).'" class="btn btn-primary btn-sm">'.Lang::get('general.checkin').'</a>';
 				} else {
 					return '<a href="'.route('checkout/hardware', $assets->id).'" class="btn btn-info btn-sm">'.Lang::get('general.checkout').'</a>';
 				}
 	        });
-        
-        
-        
+
+
+
         return Datatable::collection($assets)
         ->addColumn('',function($assets)
-            {                              
-                return '<input type="checkbox" name="edit_asset['.$assets->id.']" class="one_required">';                
+            {
+                return '<input type="checkbox" name="edit_asset['.$assets->id.']" class="one_required">';
             })
         ->addColumn('name',function($assets)
 	        {
 		        return '<a title="'.$assets->name.'" href="hardware/'.$assets->id.'/view">'.$assets->name.'</a>';
-	        })	
+	        })
 	    ->addColumn('asset_tag',function($assets)
 	        {
 		        return '<a title="'.$assets->asset_tag.'" href="hardware/'.$assets->id.'/view">'.$assets->asset_tag.'</a>';
-	        })	
-	        
+	        })
+
         ->showColumns('serial')
-        
+
 		->addColumn('model',function($assets)
 			{
 			    return $assets->model->name;
 			})
-		
+
 	    ->addColumn('status',function($assets)
-	        {	
+	        {
 		        	if ($assets->assigned_to!='') {
 			        	return link_to('../admin/users/'.$assets->assigned_to.'/view', $assets->assigneduser->fullName());
 			        } else {
-				        return $assets->assetstatus->name;				        
+				        return $assets->assetstatus->name;
 			        }
-	            
+
 	        })
 		->addColumn('location',function($assets)
             {
-                if ($assets->assigned_to && $assets->assigneduser->userloc) {	                
+                if ($assets->assigned_to && $assets->assigneduser->userloc) {
                     return link_to('admin/location/'.$assets->assigneduser->userloc->id.'/edit', $assets->assigneduser->userloc->name);
                 } elseif ($assets->defaultLoc){
                     return link_to('admin/location/'.$assets->defaultLoc->id.'/edit', $assets->defaultLoc->name);
@@ -1100,26 +1100,26 @@ class AssetsController extends AdminController
 			{
 				return $assets->model->category->name;
 
-			})	
-			
+			})
+
 		->addColumn('eol',function($assets)
 			{
 			    return $assets->eol_date();
-			})	
-		
-			
+			})
+
+
 		 ->addColumn('checkout_date',function($assets)
-	        {	
+	        {
 		        	if (($assets->assigned_to!='') && ($assets->assetlog->first())) {
 			        	return $assets->assetlog->first()->created_at->format('Y-m-d');
-			        } 
-	            
-	        })	
-		->addColumn($inout)     
-	    ->addColumn($actions)           
+			        }
+
+	        })
+		->addColumn($inout)
+	    ->addColumn($actions)
         ->searchColumns('name', 'asset_tag', 'serial', 'model', 'status','location','eol','checkout_date', 'inout','category')
         ->orderColumns('name', 'asset_tag', 'serial', 'model', 'status','location','eol','checkout_date', 'inout')
         ->make();
-        
+
 		}
 }
