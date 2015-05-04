@@ -23,7 +23,7 @@ class LocationsController extends AdminController
     public function getIndex()
     {
         // Grab all the locations
-        $locations = Location::orderBy('created_at', 'DESC')->with('parent')->get();
+        $locations = Location::orderBy('created_at', 'DESC')->with('parent','assets')->get();
 
         // Show the page
         return View::make('backend/locations/index', compact('locations'));
@@ -172,7 +172,7 @@ class LocationsController extends AdminController
         }
 
 
-        if ($location->has_users() > 0) {
+        if ($location->has_users->count() > 0) {
             return Redirect::to('admin/settings/locations')->with('error', Lang::get('admin/locations/message.assoc_users'));
         } elseif ($location->childLocations->count() > 0) {
             return Redirect::to('admin/settings/locations')->with('error', Lang::get('admin/locations/message.assoc_users'));

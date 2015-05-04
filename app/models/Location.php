@@ -16,7 +16,11 @@ class Location extends Elegant
         );
 
     public function has_users() {
-        return $this->hasMany('User', 'location_id')->count();
+        return $this->hasMany('User', 'location_id');
+    }
+
+    public function assets() {
+        return $this->hasMany('Actionlog','location_id');
     }
 
     public function parent() {
