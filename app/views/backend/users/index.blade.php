@@ -39,6 +39,8 @@
 	    Lang::get('admin/users/table.manager'),
 	    Lang::get('general.assets'), 
 	    Lang::get('general.licenses'), 
+	    Lang::get('general.accessories'), 
+	    Lang::get('general.groups'), 
 	    Lang::get('admin/users/table.activated'), 
 	    Lang::get('table.actions')
     )

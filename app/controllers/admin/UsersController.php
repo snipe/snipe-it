@@ -686,7 +686,7 @@ class UsersController extends AdminController
 	public function getDatatable($status = null)
     {
 	    
-	$users = User::with('assets','licenses','manager','sentryThrottle');
+	$users = User::with('assets','accessories','licenses','manager','sentryThrottle','groups');
 	
 	switch ($status) {
 		case 'deleted':
@@ -751,13 +751,28 @@ class UsersController extends AdminController
 	        {
 		        return $users->licenses->count();
 	        }) 
+	    
+	    ->addColumn('accessories',function($users)
+	        {
+		        return $users->accessories->count();
+	        })
+	    
+	    ->addColumn('groups',function($users)
+	        {
+		        $group_names = '';
+		        foreach ($users->groups as $group) {
+			        $group_names .= '<a href="'.Config::get('app.url').'/admin/groups/'.$group->id.'/edit">'.$group->name.'</a> ';
+		        }
+		        return $group_names;
+	        })
+	        
 	    ->addColumn('activated',function($users)
 	        {
 		        return $users->isActivated() ? '<i class="fa fa-check"></i>' : '';
 	        }) 
    
 	    ->addColumn($actions)           
-        ->searchColumns('name','email','manager','activated', 'licenses','assets')
+        ->searchColumns('name','email','manager','activated', 'accessories','groups')
         ->orderColumns('name','email','manager','activated', 'licenses','assets')
         ->make();
         
