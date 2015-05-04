@@ -140,6 +140,11 @@
                                 <i class="fa fa-certificate"></i>
                                 @lang('general.license')</a>
                         </li>
+                        <li {{{ (Request::is('admin/accessories/create') ? 'class="active"' : '') }}}>
+                            <a href="{{ route('create/accessory') }}">
+                                <i class="fa fa-keyboard-o"></i>
+                                @lang('general.accessory')</a>
+                        </li>
                         <li {{{ (Request::is('admin/users/create') ? 'class="active"' : '') }}}>
                             <a href="{{ route('create/user') }}">
                             <i class="fa fa-user"></i>
