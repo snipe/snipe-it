@@ -34,14 +34,14 @@
 
 {{ Datatable::table()
     ->addColumn(
-	    Lang::get('admin/users/table.name'), 
-	    Lang::get('admin/users/table.email'), 
+	    Lang::get('admin/users/table.name'),
+	    '<i class="fa fa-envelope fa-lg"></i>',
 	    Lang::get('admin/users/table.manager'),
-	    Lang::get('general.assets'), 
-	    Lang::get('general.licenses'), 
-	    Lang::get('general.accessories'), 
-	    Lang::get('general.groups'), 
-	    Lang::get('admin/users/table.activated'), 
+        Lang::get('admin/users/table.location'),
+        '<i class="fa fa-barcode fa-lg"></i>',
+        '<i class="fa fa-certificate fa-lg"></i>',
+        '<i class="fa fa-keyboard-o fa-lg"></i>',
+	    Lang::get('general.groups'),
 	    Lang::get('table.actions')
     )
     ->setOptions(
@@ -49,7 +49,7 @@
                 'sAjaxSource'=>route('api.users.list', Input::get('status')),
                 'dom' =>'CT<"clear">lfrtip',
                 'colVis'=> array('showAll'=>'Show All','restore'=>'Restore','activate'=>'mouseover'),
-                'columnDefs'=> array(array('visible'=>false,'targets'=>array()),array('bSortable'=>false,'targets'=>array(6))),
+                'columnDefs'=> array(array('visible'=>false,'targets'=>array()),array('bSortable'=>false,'targets'=>array(8))),
                 'order'=>array(array(1,'asc')),
             )
         )
