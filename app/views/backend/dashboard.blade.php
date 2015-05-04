@@ -48,11 +48,11 @@
 			       <td>{{{ $activity->adminlog->fullName() }}}</td> 
 			       
 			       <td>
-			           	@if ($activity->asset_type=="hardware")
+			           	@if (($activity->assetlog) && ($activity->asset_type=="hardware"))
 			            	{{ $activity->assetlog->showAssetName() }}
-			            @elseif ($activity->asset_type=="software")
+			            @elseif (($activity->licenselog) && ($activity->asset_type=="software"))
 			            	{{ $activity->licenselog->name }}
-			            @elseif ($activity->asset_type=="accessory") 
+			            @elseif (($activity->asset_type) && ($activity->asset_type=="accessory"))
 			            	{{ $activity->accessorylog->name }}
 			            @endif
 			           	

@@ -52,13 +52,13 @@
             </td>
             <td>
 	            
-	            @if ($log_action->asset_type=="hardware")
-	            	{{ $log_action->assetlog->showAssetName() }}
-	            @elseif ($log_action->asset_type=="software")
-	            	{{ $log_action->licenselog->name }}
-	            @elseif ($log_action->asset_type=="accessory") 
-	            	{{ $log_action->accessorylog->name }}
-	            @endif
+        	@if (($log_action->assetlog) && ($log_action->asset_type=="hardware"))
+	            {{ $log_action->assetlog->showAssetName() }}
+            @elseif (($log_action->licenselog) && ($log_action->asset_type=="software"))
+            	{{ $log_action->licenselog->name }}
+            @elseif (($log_action->asset_type) && ($log_action->asset_type=="accessory"))
+            	{{ $log_action->accessorylog->name }}
+            @endif
 
 	            
             </td>
