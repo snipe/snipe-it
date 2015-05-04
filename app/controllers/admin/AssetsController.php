@@ -942,6 +942,22 @@ class AssetsController extends AdminController
 					if (Input::has('purchase_date')) {
 						$update_array['purchase_date'] =  e(Input::get('purchase_date'));
 					}
+					
+					if (Input::has('purchase_cost')) {
+						$update_array['purchase_cost'] =  e(Input::get('purchase_cost'));
+					}
+					
+					if (Input::has('supplier_id')) {
+						$update_array['supplier_id'] =  e(Input::get('supplier_id'));
+					}
+					
+					if (Input::has('order_number')) {
+						$update_array['order_number'] =  e(Input::get('order_number'));
+					}
+					
+					if (Input::has('warranty_months')) {
+						$update_array['warranty_months'] =  e(Input::get('warranty_months'));
+					}
 
 					if (Input::has('rtd_location_id')) {
 						$update_array['rtd_location_id'] = e(Input::get('rtd_location_id'));
