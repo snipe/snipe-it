@@ -38,7 +38,7 @@ class LocationsController extends AdminController
     public function getCreate()
     {
         // Show the page
-        $location_options = array('' => '') + Location::lists('name', 'id');
+        $location_options = array('' => 'Top Level') + Location::lists('name', 'id');
         return View::make('backend/locations/edit')->with('location_options',$location_options)->with('location',new Location);
     }
 
@@ -62,7 +62,11 @@ class LocationsController extends AdminController
 
             // Save the location data
             $location->name            	= e(Input::get('name'));
-            $location->parent_id		= e(Input::get('parent_id'));
+            if (Input::get('parent_id')=='') {
+                $location->parent_id		= null;
+            } else {
+                $location->parent_id		= e(Input::get('parent_id',''));
+            }
             $location->address			= e(Input::get('address'));
             $location->address2			= e(Input::get('address2'));
             $location->city    			= e(Input::get('city'));
@@ -105,7 +109,7 @@ class LocationsController extends AdminController
         // Show the page
         //$location_options = array('' => 'Top Level') + Location::lists('name', 'id');
 
-        $location_options = array('' => '') + DB::table('locations')->where('id', '!=', $locationId)->lists('name', 'id');
+        $location_options = array('' => 'Top Level') + DB::table('locations')->where('id', '!=', $locationId)->lists('name', 'id');
         return View::make('backend/locations/edit', compact('location'))->with('location_options',$location_options);
     }
 
@@ -137,7 +141,12 @@ class LocationsController extends AdminController
 
             // Update the location data
             $location->name         = e(Input::get('name'));
-            $location->parent_id		= e(Input::get('parent_id'));
+            if (Input::get('parent_id')=='') {
+                $location->parent_id		= null;
+            } else {
+                $location->parent_id		= e(Input::get('parent_id',''));
+            }
+
             $location->address			= e(Input::get('address'));
             $location->address2			= e(Input::get('address2'));
             $location->city    			= e(Input::get('city'));
