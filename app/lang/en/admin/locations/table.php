@@ -9,7 +9,7 @@ return array(
     'id'      		=> 'ID',
     'locations'		=> 'Locations',
     'name'			=> 'Location Name',
-    'parent'		=> 'Parent Location',
+    'parent'		=> 'Parent',
     'state'   		=> 'State',
     'update'		=> 'Update Location',
     'zip'			=> 'Postal Code',

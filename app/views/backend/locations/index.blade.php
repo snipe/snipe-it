@@ -23,7 +23,7 @@ Locations ::
         <tr role="row">
             <th class="col-md-2">@lang('admin/locations/table.name')</th>
             <th class="col-md-2">@lang('admin/locations/table.parent')</th>
-            <th class="col-md-3">@lang('admin/locations/table.assets')</th>
+            <th class="col-md-3">@lang('general.assets')</th>
             <th class="col-md-3">@lang('admin/locations/table.address')</th>
             <th class="col-md-2">@lang('admin/locations/table.city'),
              @lang('admin/locations/table.state')
