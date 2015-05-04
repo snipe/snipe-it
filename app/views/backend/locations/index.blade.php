@@ -21,7 +21,8 @@ Locations ::
 <table id="example">
     <thead>
         <tr role="row">
-            <th class="col-md-3">@lang('admin/locations/table.name')</th>
+            <th class="col-md-2">@lang('admin/locations/table.name')</th>
+            <th class="col-md-2">@lang('admin/locations/table.parent')</th>
             <th class="col-md-3">@lang('admin/locations/table.address')</th>
             <th class="col-md-2">@lang('admin/locations/table.city'),
              @lang('admin/locations/table.state')
@@ -32,7 +33,11 @@ Locations ::
     <tbody>
         @foreach ($locations as $location)
         <tr>
-            <td>{{{ $location->name }}}</td>
+            <td>{{{ $location->name }}}</td><td>
+              @if ($location->parent)
+                {{{ $location->parent->name }}}
+              @endif
+            </td>
             <td>{{{ $location->address }}}
             	@if($location->address2 != '')
             		, {{{ $location->address2 }}}

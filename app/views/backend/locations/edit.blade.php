@@ -46,11 +46,23 @@
                     {{ $errors->first('name', '<br><span class="alert-msg"><i class="fa fa-times"></i> :message</span>') }}
                     </div>
             </div>
+            
+            <!-- Parent-->
+            <div class="form-group {{ $errors->has('parent_id') ? ' has-error' : '' }}">
+                <label for="parent_id" class="col-md-2 control-label">@lang('admin/locations/table.parent')
+                 </label>
+                    <div class="col-md-12">
+                        <div class="col-xs-8">
+                         {{ Form::select('parent_id', $location_options , Input::old('parent_id', $location->parent_id), array('class'=>'select2', 'style'=>'width:350px')) }}                        </div>
+                    {{ $errors->first('parent_id', '<br><span class="alert-msg"><i class="fa fa-times"></i> :message</span>') }}
+                    </div>
+            </div>
 
             <!-- Address -->
             <div class="form-group {{ $errors->has('address') ? ' has-error' : '' }}">
-                <label for="address" class="col-md-2 control-label">@lang('admin/locations/table.address')
-                 <i class='fa fa-asterisk'></i></label></label>
+                <label for="address" class="col-md-2 control-label">
+                	@lang('admin/locations/table.address')
+                </label>
                     <div class="col-md-12">
                         <div class="col-xs-8">
                         <input class="form-control" type="text" name="address" id="address" value="{{{ Input::old('address', $location->address) }}}" />

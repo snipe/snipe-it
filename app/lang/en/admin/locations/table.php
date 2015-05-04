@@ -2,14 +2,15 @@
 
 return array(
 
-    'id'      		=> 'ID',
+    'address'		=> 'Address',
     'city'   		=> 'City',
-    'state'   		=> 'State',
     'country'   	=> 'Country',
     'create'		=> 'Create Location',
-    'update'		=> 'Update Location',
-    'name'			=> 'Location Name',
-    'address'		=> 'Address',
-    'zip'			=> 'Postal Code',
+    'id'      		=> 'ID',
     'locations'		=> 'Locations',
+    'name'			=> 'Location Name',
+    'parent'		=> 'Parent Location',
+    'state'   		=> 'State',
+    'update'		=> 'Update Location',
+    'zip'			=> 'Postal Code',
 );
