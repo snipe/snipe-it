@@ -30,4 +30,31 @@ class Location extends Elegant
     public function childLocations() {
         return $this->hasMany('Location')->where('parent_id','=',$this->id);
     }
+
+    public static function getLocationHierarchy($parent_id = null) {
+
+        $locations = Location::orderBy('name','ASC')->where('parent_id','=',$parent_id)->get();
+        $op = array();
+
+        foreach($locations as $location) {
+
+            if ($location['parent_id'] == $parent_id) {
+                $op[$location['id']] = array(
+                    'name' => $location['name'],
+                    'parent_id' => $location['parent_id']
+                );
+
+                // using recursion
+                $children =  Location::getLocationHierarchy($location['id']);
+                if ($children) {
+                    $op[$location['id']]['children'] = $children;
+                    //echo '<li>'.$location['id'].'has children';
+                }
+            }
+
+        }
+        return $op;
+    }
+
+
 }

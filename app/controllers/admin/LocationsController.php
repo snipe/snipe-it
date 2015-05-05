@@ -37,9 +37,29 @@ class LocationsController extends AdminController
      */
     public function getCreate()
     {
-        // Show the page
-        $location_options = array('' => 'Top Level') + Location::lists('name', 'id');
-        return View::make('backend/locations/edit')->with('location_options',$location_options)->with('location',new Location);
+        $location_options = array();
+        $location_options_array = Location::getLocationHierarchy();
+
+        foreach ($location_options_array as $id => $value) {
+            $location_options[$id] = $value['name'];
+            foreach ($value as $child_id => $children) {
+                if (is_array($children)) {
+                    foreach ($children as $child_id => $child_locations) {
+                        $location_options[$child_id] = '-- '.$child_locations['name'];
+                    }
+                }
+            }
+
+        }
+
+        /*echo '<pre>Location options:';
+        print_r($location_options);
+        echo '</pre>';
+        */
+
+        return View::make('backend/locations/edit')
+        ->with('location_options',$location_options)
+        ->with('location',new Location);
     }
 
 
@@ -65,7 +85,7 @@ class LocationsController extends AdminController
             if (Input::get('parent_id')=='') {
                 $location->parent_id		= null;
             } else {
-                $location->parent_id		= e(Input::get('parent_id',''));
+                $location->parent_id		= e(Input::get('parent_id'));
             }
             $location->address			= e(Input::get('address'));
             $location->address2			= e(Input::get('address2'));
