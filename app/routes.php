@@ -26,10 +26,18 @@ Route::group(array('prefix' => 'api', 'namespace' => 'Controllers\Admin', 'befor
         Route::resource('/', 'LicensesController');
         Route::get('list', array('as'=>'api.licenses.list', 'uses'=>'LicensesController@getDatatable'));
     });
+
+    /*---Locations API---*/
+    Route::group(array('prefix'=>'locations'), function() {
+        Route::get('{locationID}/check', function ($locationID) {
+			 $location = Location::find($locationID);
+			 return $location;
+		});
+    });
     /*---Models API---*/
     Route::group(array('prefix'=>'models'), function() {
         Route::resource('/', 'ModelsController');
-        Route::get('list/{status?}', array('as'=>'api.models.list', 'uses'=>'ModelsController@getDatatable'));        
+        Route::get('list/{status?}', array('as'=>'api.models.list', 'uses'=>'ModelsController@getDatatable'));
         Route::get('{modelId}/check', function ($modelId) {
 			 $model = Model::find($modelId);
 			 return $model->show_mac_address;
@@ -255,7 +263,7 @@ Route::group(array('prefix' => 'admin', 'before' => 'admin-auth', 'namespace' =>
 
     # User Management
     Route::group(array('prefix' => 'users'), function () {
-       
+
         Route::get('create', array('as' => 'create/user', 'uses' => 'UsersController@getCreate'));
         Route::post('create', 'UsersController@postCreate');
         Route::get('import', array('as' => 'import/user', 'uses' => 'UsersController@getImport'));
@@ -269,7 +277,7 @@ Route::group(array('prefix' => 'admin', 'before' => 'admin-auth', 'namespace' =>
         Route::get('{userId}/view', array('as' => 'view/user', 'uses' => 'UsersController@getView'));
         Route::get('{userId}/unsuspend', array('as' => 'unsuspend/user', 'uses' => 'UsersController@getUnsuspend'));
 		Route::get('/', array('as' => 'users', 'uses' => 'UsersController@getIndex'));
-		
+
     });
 
     # Group Management
@@ -387,13 +395,10 @@ Route::group(array('before' => 'reporting-auth', 'namespace' => 'Controllers\Adm
 
     Route::get('reports/custom', array('as' => 'reports/custom', 'uses' => 'ReportsController@getCustomReport'));
     Route::post('reports/custom', 'ReportsController@postCustom');
-    
+
      Route::get('reports/activity', array('as' => 'reports/activity', 'uses' => 'ReportsController@getActivityReport'));
 });
 
 
 
 Route::get('/', array('as' => 'home', 'before' => 'admin-auth', 'uses' => 'Controllers\Admin\DashboardController@getIndex'));
-
-
-

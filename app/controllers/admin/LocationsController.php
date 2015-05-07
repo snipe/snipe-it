@@ -108,19 +108,15 @@ class LocationsController extends AdminController
     {
         // Check if the location exists
         if (is_null($location = Location::find($locationId))) {
-            // Redirect to the blogs management page
             return Redirect::to('admin/settings/locations')->with('error', Lang::get('admin/locations/message.does_not_exist'));
         }
 
         // Show the page
-        //$location_options = array('' => 'Top Level') + Location::lists('name', 'id');
-
         $locations = Location::orderBy('name','ASC')->get();
-
         $location_options_array = Location::getLocationHierarchy($locations);
         $location_options = Location::flattenLocationsArray($location_options_array);
         $location_options = array('' => 'Top Level') + $location_options;
-        
+
         return View::make('backend/locations/edit', compact('location'))->with('location_options',$location_options);
     }
 
