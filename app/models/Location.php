@@ -31,29 +31,56 @@ class Location extends Elegant
         return $this->hasMany('Location')->where('parent_id','=',$this->id);
     }
 
-    public static function getLocationHierarchy($parent_id = null) {
+    public static function getLocationHierarchy($locations, $parent_id = null) {
 
-        $locations = Location::orderBy('name','ASC')->where('parent_id','=',$parent_id)->get();
+
         $op = array();
 
         foreach($locations as $location) {
 
             if ($location['parent_id'] == $parent_id) {
-                $op[$location['id']] = array(
-                    'name' => $location['name'],
-                    'parent_id' => $location['parent_id']
-                );
+                $op[$location['id']] =
+                    array(
+                        'name' => $location['name'],
+                        'parent_id' => $location['parent_id']
+                    );
 
-                // using recursion
-                $children =  Location::getLocationHierarchy($location['id']);
+                // Using recursion
+                $children =  Location::getLocationHierarchy($locations, $location['id']);
                 if ($children) {
                     $op[$location['id']]['children'] = $children;
-                    //echo '<li>'.$location['id'].'has children';
                 }
+
             }
 
         }
         return $op;
+    }
+
+
+    public static function flattenLocationsArray ($location_options_array = null) {
+
+        foreach ($location_options_array as $id => $value) {
+
+            // get the top level key value
+            $location_options[$id] = $value['name'];
+
+                // If there is a key named children, it has child locations and we have to walk it
+                if (array_key_exists('children',$value)) {
+
+                    foreach ($value['children'] as $child_id => $child_location_array) {
+                        $child_location_options = Location::flattenLocationsArray($value['children']);
+
+                        foreach ($child_location_options as $child_id => $child_name) {
+                            $location_options[$child_id] = '--'.$child_name;
+                        }
+                    }
+
+                }
+
+        }
+
+        return $location_options;
     }
 
 

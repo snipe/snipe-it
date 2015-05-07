@@ -46,7 +46,7 @@
                     {{ $errors->first('name', '<br><span class="alert-msg"><i class="fa fa-times"></i> :message</span>') }}
                     </div>
             </div>
-            
+
             <!-- Parent-->
             <div class="form-group {{ $errors->has('parent_id') ? ' has-error' : '' }}">
                 <label for="parent_id" class="col-md-2 control-label">@lang('admin/locations/table.parent')

@@ -37,25 +37,11 @@ class LocationsController extends AdminController
      */
     public function getCreate()
     {
-        $location_options = array();
-        $location_options_array = Location::getLocationHierarchy();
+        $locations = Location::orderBy('name','ASC')->get();
 
-        foreach ($location_options_array as $id => $value) {
-            $location_options[$id] = $value['name'];
-            foreach ($value as $child_id => $children) {
-                if (is_array($children)) {
-                    foreach ($children as $child_id => $child_locations) {
-                        $location_options[$child_id] = '-- '.$child_locations['name'];
-                    }
-                }
-            }
-
-        }
-
-        /*echo '<pre>Location options:';
-        print_r($location_options);
-        echo '</pre>';
-        */
+        $location_options_array = Location::getLocationHierarchy($locations);
+        $location_options = Location::flattenLocationsArray($location_options_array);
+        $location_options = array('' => 'Top Level') + $location_options;
 
         return View::make('backend/locations/edit')
         ->with('location_options',$location_options)
@@ -129,7 +115,12 @@ class LocationsController extends AdminController
         // Show the page
         //$location_options = array('' => 'Top Level') + Location::lists('name', 'id');
 
-        $location_options = array('' => 'Top Level') + DB::table('locations')->where('id', '!=', $locationId)->lists('name', 'id');
+        $locations = Location::orderBy('name','ASC')->get();
+
+        $location_options_array = Location::getLocationHierarchy($locations);
+        $location_options = Location::flattenLocationsArray($location_options_array);
+        $location_options = array('' => 'Top Level') + $location_options;
+        
         return View::make('backend/locations/edit', compact('location'))->with('location_options',$location_options);
     }
 
