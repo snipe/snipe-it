@@ -23,6 +23,10 @@ class Location extends Elegant
         return $this->hasMany('Actionlog','location_id');
     }
 
+    public function assignedassets() {
+        return $this->hasMany('Asset','rtd_location_id');
+    }
+
     public function parent() {
         return $this->belongsTo('Location', 'parent_id');
     }
