@@ -40,7 +40,7 @@ Locations ::
                 {{{ $location->parent->name }}}
               @endif
             </td>
-            <td>{{{ $location->assets->count() }}}</td>
+            <td>{{{ ($location->assets->count() + $location->assignedassets->count()) }}}</td>
             <td>{{{ $location->address }}}
             	@if($location->address2 != '')
             		, {{{ $location->address2 }}}
