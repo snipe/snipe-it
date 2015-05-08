@@ -172,8 +172,6 @@
                 $("#state").val(json.state);
                 $("#zip").val(json.zip);
                 $(".country").select2("val",json.country);
-                //$(".country option[value="+json.country+"]").attr("selected", "selected");
-                //$("select option[value="+json.country+"]")).prop('selected','true');
             }
         });
 
