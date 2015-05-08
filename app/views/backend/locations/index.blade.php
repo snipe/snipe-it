@@ -22,13 +22,13 @@ Locations ::
     <thead>
         <tr role="row">
             <th class="col-md-2">@lang('admin/locations/table.name')</th>
-            <th class="col-md-3">@lang('admin/locations/table.parent')</th>
+            <th class="col-md-2">@lang('admin/locations/table.parent')</th>
             <th class="col-md-1">@lang('general.assets')</th>
             <th class="col-md-3">@lang('admin/locations/table.address')</th>
             <th class="col-md-2">@lang('admin/locations/table.city'),
              @lang('admin/locations/table.state')
             @lang('admin/locations/table.country')</th>
-            <th class="col-md-2 actions">@lang('table.actions')</th>
+            <th class="col-md-1 actions">@lang('table.actions')</th>
         </tr>
     </thead>
     <tbody>
