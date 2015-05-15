@@ -22,7 +22,7 @@ return array(
         'error'   		=> 'Asset was not restored, please try again',
         'success' 		=> 'Asset restored successfully.'
     ),
-    
+
     'deletefile' => array(
         'error'   => 'File not deleted. Please try again.',
         'success' => 'File successfully deleted.',
@@ -40,6 +40,13 @@ return array(
         'confirm'   	=> 'Are you sure you wish to delete this asset?',
         'error'   		=> 'There was an issue deleting the asset. Please try again.',
         'success' 		=> 'The asset was deleted successfully.'
+    ),
+
+    'deletefile' => array(
+        'confirm'   	=> 'Are you sure you wish to delete this file?',
+        'confirm-more'  => 'The file :filename will be deleted immediately. ',
+        'error'   		=> 'There was an issue deleting the file. Please try again.',
+        'success' 		=> 'The file was deleted successfully.'
     ),
 
     'checkout' => array(
