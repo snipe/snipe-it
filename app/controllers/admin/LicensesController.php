@@ -22,6 +22,7 @@ use Response;
 use Datatable;
 use Slack;
 use Config;
+use Session;
 
 class LicensesController extends AdminController
 {
@@ -229,6 +230,7 @@ class LicensesController extends AdminController
             $license->depreciation_id   = e(Input::get('depreciation_id'));
             $license->purchase_order    = e(Input::get('purchase_order'));
             $license->maintained        = e(Input::get('maintained'));
+            $license->reassignable      = e(Input::get('reassignable'));
 
             if ( e(Input::get('supplier_id')) == '') {
                 $license->supplier_id = NULL;
@@ -267,6 +269,12 @@ class LicensesController extends AdminController
                 $license->maintained = 0;
             } else {
                 $license->maintained = e(Input::get('maintained'));
+            }
+
+            if ( e(Input::get('reassignable')) == '') {
+                $license->reassignable = 0;
+            } else {
+                $license->reassignable = e(Input::get('reassignable'));
             }
 
             if ( e(Input::get('purchase_order')) == '') {
@@ -607,6 +615,12 @@ class LicensesController extends AdminController
         
         $license = License::find($licenseseat->license_id);
 
+        if(!$license->reassignable) {
+            // Not allowed to checkin
+            Session::flash('error', 'License not reassignable.');
+            return Redirect::back()->withInput();
+        }
+        
         // Declare the rules for the form validation
         $rules = array(
             'note'   => 'alpha_space',
