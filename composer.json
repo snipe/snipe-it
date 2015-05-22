@@ -47,11 +47,9 @@
 
 		],
 		"post-update-cmd": [
-			"php artisan optimize",
-			"php artisan debugbar:publish"
+			"php artisan optimize"
 		],
 		"post-install-cmd": [
-			"php artisan debugbar:publish"
 		],
 		"post-create-project-cmd": [
 			"php artisan key:generate"
