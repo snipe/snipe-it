@@ -17,7 +17,7 @@
 
 
 <div class="row">
-	
+
 <div class="table-responsive">
 <table id="example">
         <thead>
@@ -34,11 +34,11 @@
 
         @foreach ($log_actions as $log_action)
         <tr>
-            <td><a href="../admin/users/{{ $log_action->adminlog->id }}/view">{{ $log_action->adminlog->fullName() }}</a></td>
+            <td><a href="../admin/users/{{ $log_action->adminlog->id }}/view">{{{ $log_action->adminlog->fullName() }}}</a></td>
             <td>{{{ $log_action->action_type }}}</td>
             <td>
 	            @if ($log_action->userlog)
-	            	<a href="../admin/users/{{ $log_action->userlog->id }}/view">{{ $log_action->userlog->fullName() }}</a>
+	            	<a href="../admin/users/{{ $log_action->userlog->id }}/view">{{{ $log_action->userlog->fullName() }}}</a>
 	            @endif
             </td>
             <td>
@@ -46,21 +46,21 @@
 	            	Asset
 	            @elseif ($log_action->asset_type=="software")
 	            	License
-	            @elseif ($log_action->asset_type=="accessory") 
+	            @elseif ($log_action->asset_type=="accessory")
 	            	Accessory
-	            @endif	            
+	            @endif
             </td>
             <td>
-	            
+
         	@if (($log_action->assetlog) && ($log_action->asset_type=="hardware"))
-	            {{ $log_action->assetlog->showAssetName() }}
+	            {{{ $log_action->assetlog->showAssetName() }}}
             @elseif (($log_action->licenselog) && ($log_action->asset_type=="software"))
-            	{{ $log_action->licenselog->name }}
+            	{{{ $log_action->licenselog->name }}}
             @elseif (($log_action->asset_type) && ($log_action->asset_type=="accessory"))
-            	{{ $log_action->accessorylog->name }}
+            	{{{ $log_action->accessorylog->name }}}
             @endif
 
-	            
+
             </td>
             <td>{{{ $log_action->created_at }}}</td>
         </tr>
