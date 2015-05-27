@@ -134,8 +134,13 @@
                                 </td>
                                 <td>
                                     @if (($licensedto->assigned_to) || ($licensedto->asset_id))
-                                        <a href="{{ route('checkin/license', $licensedto->id) }}" class="btn btn-primary btn-sm">
-                                        @lang('general.checkin')</a>
+                                        @if ($license->reassignable)
+                                            <a href="{{ route('checkin/license', $licensedto->id) }}" class="btn btn-primary btn-sm">
+                                            @lang('general.checkin')
+                                            </a>
+                                        @else
+                                            <span>Assigned</span>
+                                        @endif
                                     @else
                                         <a href="{{ route('checkout/license', $licensedto->id) }}" class="btn btn-info btn-sm">
                                         @lang('general.checkout')</a>
@@ -332,6 +337,10 @@
                     <li><strong>@lang('admin/licenses/form.seats'):</strong>
                     {{{ $license->seats }}} </li>
                     @endif
+
+                    <li><strong>@lang('admin/licenses/form.reassignable'):</strong>
+                                {{ $license->reassignable ? 'Yes' : 'No' }}
+                    </li>
 
                     @if ($license->notes)
                     	 <li><strong>@lang('admin/licenses/form.notes'):</strong>

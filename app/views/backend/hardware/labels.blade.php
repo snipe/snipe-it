@@ -52,7 +52,10 @@
 				{{{ $settings->qr_text }}}
 				<br><br>
 			@endif
-
+            		@if ($asset->name!='')
+                		<b>N: {{ $asset->name }}</b>
+                		<br>
+            		@endif			
 			@if ($asset->asset_tag!='')
 				T: {{{ $asset->asset_tag }}}
 				<br>

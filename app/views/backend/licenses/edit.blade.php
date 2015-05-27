@@ -84,6 +84,15 @@
                     </div>
             </div>
 
+            <!-- Reassignable -->
+            <div class="form-group {{ $errors->has('reassignable') ? ' has-error' : '' }}">
+                <label for="reassignable" class="col-md-3 control-label">@lang('admin/licenses/form.reassignable')</label>
+                <div class="col-md-7 input-group">
+                    {{ Form::Checkbox('reassignable', '1', Input::old('reassignable', $license->id ? $license->reassignable : '1')) }}
+                    @lang('general.yes')
+                </div>
+            </div>
+
             <!-- Supplier -->
             <div class="form-group {{ $errors->has('supplier_id') ? ' has-error' : '' }}">
                 <label for="supplier_id" class="col-md-3 control-label">@lang('admin/licenses/form.supplier')</label>
