@@ -3,7 +3,7 @@
 {{-- Page title --}}
 @section('title')
 @lang('admin/licenses/general.view')
-{{{ $license->name }}} ::
+ - {{{ $license->name }}} 
 @parent
 @stop
 
@@ -80,7 +80,7 @@
 		<strong>@lang('admin/hardware/form.fully_depreciated'): </strong>
         @if ($license->time_until_depreciated()->y > 0)
             {{{ $license->time_until_depreciated()->y }}}
-            @lang('admin/hardware/form.years'), 
+            @lang('admin/hardware/form.years'),
         @endif
 		{{{ $license->time_until_depreciated()->m }}}
 		@lang('admin/hardware/form.months')
