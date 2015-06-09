@@ -5,6 +5,7 @@ return array(
 
     'accessories'			=> '附属品',
     'accessory'				=> '附属品',
+    'action'                => 'Action',
     'activity_report'		=> 'Activity Report',
     'address'				=> '地址',
     'admin'					=> '管理员',

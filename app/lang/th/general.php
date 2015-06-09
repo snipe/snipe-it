@@ -5,6 +5,7 @@ return array(
 
     'accessories'			=> 'อุปกรณ์',
     'accessory'				=> 'อุปกรณ์',
+    'action'                => 'Action',
     'activity_report'		=> 'Activity Report',
     'address'				=> 'ที่อยู่',
     'admin'					=> 'ผู้ดูแลระบบ',

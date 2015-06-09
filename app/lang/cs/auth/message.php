@@ -2,35 +2,35 @@
 
 return array(
 
-    'account_already_exists' => 'An account with the this email already exists.',
-    'account_not_found'      => 'The email account or password is incorrect.',
-    'account_not_activated'  => 'This user account is not activated.',
-    'account_suspended'      => 'This user account is suspended.',
-    'account_banned'         => 'This user account is banned.',
+    'account_already_exists' => 'Účet s tímto emailem již existuje.',
+    'account_not_found'      => 'Emailový účet nebo heslo je nesprávné.',
+    'account_not_activated'  => 'Uživatelský účet není aktivován.',
+    'account_suspended'      => 'Uživatelský účet je pozastaven.',
+    'account_banned'         => 'Uživatelský účet je zablokován.',
 
     'signin' => array(
-        'error'   => 'There was a problem while trying to log you in, please try again.',
-        'success' => 'You have successfully logged in.',
+        'error'   => 'Vyskytl se problém při přihlášení, zkuste to znovu.',
+        'success' => 'Došlo k úspěšnému přihlášení.',
     ),
 
     'signup' => array(
-        'error'   => 'There was a problem while trying to create your account, please try again.',
-        'success' => 'Account sucessfully created.',
+        'error'   => 'Vyskytl se problém při vytváření účtu, zkuste to znovu.',
+        'success' => 'Účet úspěšně vytvořen.',
     ),
 
         'forgot-password' => array(
-            'error'   => 'There was a problem while trying to get a reset password code, please try again.',
-            'success' => 'Password recovery email successfully sent.',
+            'error'   => 'Vyskytl se problém při získávání kódu pro reset hesla, zkuste to znovu.',
+            'success' => 'Email určený k obnově hesla úspěšně odeslán.',
         ),
 
         'forgot-password-confirm' => array(
-            'error'   => 'There was a problem while trying to reset your password, please try again.',
-            'success' => 'Your password has been successfully reset.',
+            'error'   => 'Vyskytl se problém při resetování hesla, zkuste to znovu.',
+            'success' => 'Vaše heslo bylo úspěšně resetováno.',
         ),
 
     'activate' => array(
-        'error'   => 'There was a problem while trying to activate your account, please try again.',
-        'success' => 'Your account has been successfully activated.',
+        'error'   => 'Vyskytl se problém při vytváření účtu, zkuste to znovu.',
+        'success' => 'Váš účet byl úspěšně vytvořen.',
     ),
 
 );

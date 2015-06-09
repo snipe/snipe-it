@@ -14,9 +14,9 @@ return array(
 
     'delete' => array(
         'confirm'   => 'Určitě chcete odstranit tuto skupinu?',
-        'create' => 'There was an issue creating the group. Please try again.',
-        'update' => 'There was an issue updating the group. Please try again.',
-        'delete' => 'There was an issue deleting the group. Please try again.',
+        'create' => 'Vyskytl se problém s vytvářením skupiny. Zkuste to znovu.',
+        'update' => 'Vyskytl se problém s aktualizací skupiny. Zkuste to znovu.',
+        'delete' => 'Vyskytl se problém se smazáním skupiny. Zkuste to znovu.',
     ),
 
 );

@@ -12,7 +12,7 @@ return array(
     'no_default_eula'					=> 'Nenhum EULA padrão primário foi encontrado. Adicione um nas Configurações.',
     'qty'  								=> 'QTD',
     'total'  							=> 'Total',
-    'remaining'  						=> 'Avail',
+    'remaining'  						=> 'Disponível',
     'update'  							=> 'Atualizar Categoria',
     'use_default_eula'					=> 'Em vez disso, use o <a href="#" data-toggle="modal" data-target="#eulaModal">EULA padrão primário</a>.',
     'use_default_eula_disabled'			=> '<del>Em vez disso, use o EULA padrão primário.</del> Nenhum EULA padrão primário foi definido. Adicione um nas Configurações.',

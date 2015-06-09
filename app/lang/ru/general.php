@@ -5,6 +5,7 @@ return array(
 
     'accessories'			=> 'Аксессуары',
     'accessory'				=> 'Аксессуар',
+    'action'                => 'Action',
     'activity_report'		=> 'Oтчет о деятельности',
     'address'				=> 'Адрес',
     'admin'					=> 'Администратор',

@@ -10,7 +10,6 @@ return array(
     'depreciation'      => 'Depreciation',
     'expiration'        => 'Expiration Date',
     'maintained'        => 'Maintained',
-    'reassignable'      => 'Reassignable',
     'name'              => 'Software Name',
     'no_depreciation'   => 'Do Not Depreciate',
     'notes'             => 'Notes',
