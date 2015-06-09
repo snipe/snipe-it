@@ -30,6 +30,7 @@
 	},
 	"require-dev": {
 		"phpunit/phpunit": "*",
+		"codeception/codeception": "2.1.*",
 		"mockery/mockery": "0.9.*"
 	},
 	"autoload": {
