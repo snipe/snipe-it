@@ -633,14 +633,15 @@ class UsersController extends AdminController
 							$duplicates .= $row[2].', ';
 						} else {
 
-							$newuser = array(
-								'first_name' => $row[0],
-								'last_name' => $row[1],
-								'email' => $row[2],
-								'password' => $pass,
-								'activated' => $activated,
-								'permissions'	=> '{"user":1}'
-							);
+                            $newuser = array(
+                                'first_name' => $row[0],
+                                'last_name' => $row[1],
+                                'email' => $row[2],
+                                'password' => $pass,
+                                'activated' => $activated,
+                                'permissions'	=> '{"user":1}',
+                                'notes'     => 'Imported user'
+                            );
 
 							DB::table('users')->insert($newuser);
 
