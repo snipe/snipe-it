@@ -6,7 +6,7 @@
     <title>Error 404 - Not Found</title>
     <meta name="viewport" content="width=device-width">
     <style type="text/css">
-        @import url(http://fonts.googleapis.com/css?family=Droid+Sans);
+        @import url(//fonts.googleapis.com/css?family=Droid+Sans);
 
         article, aside, details, figcaption, figure, footer, header, hgroup, nav, section { display: block; }
         audio, canvas, video { display: inline-block; *display: inline; *zoom: 1; }
