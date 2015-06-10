@@ -12,9 +12,7 @@ class FixDefaultForUserNotes extends Migration {
 	 */
 	public function up()
 	{
-		Schema::table('users', function ($table) {
-			$table->text('notes')->nullable()->default(NULL);
-		});
+		DB::statement('ALTER TABLE `users` MODIFY `notes` varchar(255) DEFAULT NULL;');
 	}
 
 	/**
@@ -25,6 +23,7 @@ class FixDefaultForUserNotes extends Migration {
 	public function down()
 	{
 		//
+		DB::statement('ALTER TABLE `users` MODIFY `notes` varchar(255);');
 	}
 
 }
