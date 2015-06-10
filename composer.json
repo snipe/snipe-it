@@ -58,7 +58,7 @@
 	},
 	"config": {
 		"preferred-install": "dist",
-		"bin-dir": "bin"
+		"bin-dir": "vendor/bin"
 
 	},
 	"minimum-stability": "dev"
