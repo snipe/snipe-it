@@ -198,9 +198,6 @@ Route::group(array('prefix' => 'admin', 'before' => 'admin-auth', 'namespace' =>
             Route::get('{consumableID}/view', array('as' => 'view/consumable', 'uses' => 'ConsumablesController@getView'));
             Route::get('{consumableID}/checkout', array('as' => 'checkout/consumable', 'uses' => 'ConsumablesController@getCheckout'));
             Route::post('{consumableID}/checkout', 'ConsumablesController@postCheckout');
-            Route::get('{consumableID}/checkin/{backto?}', array('as' => 'checkin/consumable', 'uses' => 'AccessoriesController@getCheckin'));
-            Route::post('{consumableID}/checkin/{backto?}', 'ConsumablesController@postCheckin');
-
             Route::get('/', array('as' => 'accessories', 'uses' => 'ConsumablesController@getIndex'));
         });
 
