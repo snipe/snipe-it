@@ -41,6 +41,7 @@
         '<i class="fa fa-barcode fa-lg"></i>',
         '<i class="fa fa-certificate fa-lg"></i>',
         '<i class="fa fa-keyboard-o fa-lg"></i>',
+        '<i class="fa fa-tint fa-lg"></i>',
 	    Lang::get('general.groups'),
 	    Lang::get('table.actions')
     )

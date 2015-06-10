@@ -23,7 +23,7 @@ class User extends SentryUserModel
     {
         return "{$this->first_name} {$this->last_name}";
     }
-    
+
 
     /**
      * Returns the user Gravatar image url.
@@ -43,11 +43,16 @@ class User extends SentryUserModel
     {
         return $this->hasMany('Asset', 'assigned_to')->withTrashed();
     }
-    
+
      public function accessories()
     {
         return $this->belongsToMany('Accessory', 'accessories_users', 'assigned_to','accessory_id')->withPivot('id')->withTrashed();
     }
+
+    public function consumables()
+   {
+       return $this->belongsToMany('Consumable', 'consumables_users', 'assigned_to','consumable_id')->withPivot('id')->withTrashed();
+   }
 
     public function licenses()
     {
@@ -77,32 +82,32 @@ class User extends SentryUserModel
     {
         return $this->belongsTo('User','manager_id')->withTrashed();
     }
-    
-   
+
+
     public function accountStatus()
     {
         if ($this->sentryThrottle) {
     	    if ($this->sentryThrottle->suspended==1) {
-    		 	return 'suspended';	
+    		 	return 'suspended';
     		} elseif ($this->sentryThrottle->banned==1) {
-    		 	return 'banned';	
-    	 	} else {		 	
+    		 	return 'banned';
+    	 	} else {
     		 	return false;
     	 	}
         } else {
             return false;
         }
     }
-    
-    public function sentryThrottle() {	    
-	    return $this->hasOne('Throttle'); 
+
+    public function sentryThrottle() {
+	    return $this->hasOne('Throttle');
     }
-    
+
     public function scopeGetDeleted($query)
 	{
 		return $query->withTrashed()->whereNotNull('deleted_at');
 	}
-	
+
 	public function scopeGetNotDeleted($query)
 	{
 		return $query->whereNull('deleted_at');
