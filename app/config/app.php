@@ -43,7 +43,7 @@ return array(
     */
 
     'cipher' => MCRYPT_RIJNDAEL_256,
-    
+
     /*
     |--------------------------------------------------------------------------
     | Prevent Password changes

@@ -274,20 +274,20 @@ class AccessoriesController extends AdminController
             $logaction->location_id = $user->location_id;
             $logaction->user_id = Sentry::getUser()->id;
             $logaction->note = e(Input::get('note'));
-            
+
             $settings = Setting::getSettings();
-			
+
 			if ($settings->slack_endpoint) {
-				
+
 
 				$slack_settings = [
 				    'username' => $settings->botname,
 				    'channel' => $settings->slack_channel,
 				    'link_names' => true
 				];
-				
+
 				$client = new \Maknz\Slack\Client($settings->slack_endpoint,$slack_settings);
-				
+
 				try {
 						$client->attach([
 						    'color' => 'good',
@@ -301,13 +301,13 @@ class AccessoriesController extends AdminController
 						            'value' => e($logaction->note)
 						        ],
 
-						        
-						        				   
+
+
 						    ]
 						])->send('Accessory Checked Out');
-					
+
 					} catch (Exception $e) {
-						
+
 					}
 
 			}
@@ -390,20 +390,20 @@ class AccessoriesController extends AdminController
             $logaction->asset_type = 'accessory';
             $logaction->user_id = $admin_user->id;
             $logaction->note = e(Input::get('note'));
-            
+
             $settings = Setting::getSettings();
-			
+
 			if ($settings->slack_endpoint) {
-				
-				
+
+
 				$slack_settings = [
 				    'username' => $settings->botname,
 				    'channel' => $settings->slack_channel,
 				    'link_names' => true
 				];
-				
+
 				$client = new \Maknz\Slack\Client($settings->slack_endpoint,$slack_settings);
-				
+
 				try {
 						$client->attach([
 						    'color' => 'good',
@@ -416,17 +416,17 @@ class AccessoriesController extends AdminController
 						            'title' => 'Note:',
 						            'value' => e($logaction->note)
 						        ],
-						        				   
+
 						    ]
 						])->send('Accessory Checked In');
-					
+
 					} catch (Exception $e) {
-						
+
 					}
 
 			}
-			
-			
+
+
             $log = $logaction->logaction('checkin from');
 
             if ($backto=='user') {

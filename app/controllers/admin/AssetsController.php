@@ -1007,7 +1007,7 @@ class AssetsController extends AdminController
     {
 
        $assets = Asset::with('model','assigneduser','assigneduser.userloc','assetstatus','defaultLoc','assetlog','model','model.category')->Hardware()->select(array('id', 'name','model_id','assigned_to','asset_tag','serial','status_id','purchase_date','deleted_at'));
-       
+
 
       switch ($status) {
       case 'Pending':
@@ -1094,7 +1094,7 @@ class AssetsController extends AdminController
                 return link_to('admin/settings/locations/'.$assets->assigneduser->userloc->id.'/edit', $assets->assigneduser->userloc->name);
             } elseif ($assets->defaultLoc){
                 return link_to('admin/settings/locations/'.$assets->defaultLoc->id.'/edit', $assets->defaultLoc->name);
-            } 
+            }
       })
 
       ->addColumn('category',function($assets)

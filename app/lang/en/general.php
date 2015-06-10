@@ -30,6 +30,8 @@ return array(
     'checkin_from'  		=> 'Checkin from',
     'checkout'  			=> 'Checkout',
     'city'  				=> 'City',
+    'consumable'			=> 'Consumable',
+    'consumables'			=> 'Consumables',
     'country'  				=> 'Country',
     'create'				=> 'Create New',
     'created_asset'			=> 'created asset',

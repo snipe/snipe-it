@@ -16,6 +16,12 @@ Route::group(array('prefix' => 'api', 'namespace' => 'Controllers\Admin', 'befor
         Route::get('list', array('as'=>'api.accessories.list', 'uses'=>'AccessoriesController@getDatatable'));
         Route::get('{accessoryID}/view', array('as'=>'api.accessories.view', 'uses'=>'AccessoriesController@getDataView'));
     });
+    /*---Consumables API---*/
+    Route::group(array('prefix'=>'consumables'), function () {
+        Route::resource('/', 'ConsumablesController');
+        Route::get('list', array('as'=>'api.consumables.list', 'uses'=>'ConsumablesController@getDatatable'));
+        Route::get('{accessoryID}/view', array('as'=>'api.consumables.view', 'uses'=>'ConsumablesController@getDataView'));
+    });
     /*---Users API---*/
     Route::group(array('prefix'=>'users'), function() {
         Route::resource('/', 'UsersController');
@@ -178,6 +184,24 @@ Route::group(array('prefix' => 'admin', 'before' => 'admin-auth', 'namespace' =>
 		    Route::post('{accessoryID}/checkin/{backto?}', 'AccessoriesController@postCheckin');
 
             Route::get('/', array('as' => 'accessories', 'uses' => 'AccessoriesController@getIndex'));
+        });
+
+
+        # Consumables
+        Route::group(array('prefix' => 'consumables'), function () {
+
+            Route::get('create', array('as' => 'create/consumable', 'uses' => 'ConsumablesController@getCreate'));
+            Route::post('create', 'ConsumablesController@postCreate');
+            Route::get('{consumableID}/edit', array('as' => 'update/consumable', 'uses' => 'ConsumablesController@getEdit'));
+            Route::post('{consumableID}/edit', 'ConsumablesController@postEdit');
+            Route::get('{consumableID}/delete', array('as' => 'delete/consumable', 'uses' => 'ConsumablesController@getDelete'));
+            Route::get('{consumableID}/view', array('as' => 'view/consumable', 'uses' => 'ConsumablesController@getView'));
+            Route::get('{consumableID}/checkout', array('as' => 'checkout/consumable', 'uses' => 'ConsumablesController@getCheckout'));
+            Route::post('{consumableID}/checkout', 'ConsumablesController@postCheckout');
+            Route::get('{consumableID}/checkin/{backto?}', array('as' => 'checkin/consumable', 'uses' => 'AccessoriesController@getCheckin'));
+            Route::post('{consumableID}/checkin/{backto?}', 'ConsumablesController@postCheckin');
+
+            Route::get('/', array('as' => 'accessories', 'uses' => 'ConsumablesController@getIndex'));
         });
 
 

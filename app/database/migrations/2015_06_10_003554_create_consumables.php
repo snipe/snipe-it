@@ -29,6 +29,16 @@ class CreateConsumables extends Migration {
 			$table->integer('consumable_id')->nullable()->default(NULL);
 		});
 
+		Schema::create('consumables_users', function ($table) {
+            $table->increments('id');
+            $table->integer('user_id')->nullable()->default(NULL);
+            $table->integer('consumable_id')->nullable()->default(NULL);
+            $table->integer('assigned_to')->nullable()->default(NULL);
+            $table->timestamps();
+        });
+
+
+
 	}
 
 
@@ -45,6 +55,9 @@ class CreateConsumables extends Migration {
 		Schema::table('asset_logs', function ($table) {
 			$table->dropColumn('consumable_id');
 		});
+
+		Schema::drop('consumables_users');
+
 	}
 
 }

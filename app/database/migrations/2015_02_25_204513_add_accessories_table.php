@@ -17,13 +17,13 @@ class AddAccessoriesTable extends Migration {
             $table->increments('id');
             $table->string('name')->nullable()->default(NULL);
             $table->integer('category_id')->nullable()->default(NULL);
-            $table->integer('user_id')->nullable()->default(NULL);    
-            $table->integer('qty')->default(0);  
-            $table->boolean('requestable')->default(0);         
+            $table->integer('user_id')->nullable()->default(NULL);
+            $table->integer('qty')->default(0);
+            $table->boolean('requestable')->default(0);
             $table->timestamps();
             $table->softDeletes();
         });
-        
+
         Schema::table('asset_logs', function ($table) {
 			$table->integer('accessory_id')->nullable()->default(NULL);
 		});
@@ -39,7 +39,7 @@ class AddAccessoriesTable extends Migration {
 	{
 		//
 		Schema::drop('accessories');
-		
+
 		Schema::table('asset_logs', function ($table) {
 			$table->dropColumn('accessory_id');
 		});

@@ -141,6 +141,11 @@
                                 <i class="fa fa-keyboard-o"></i>
                                 @lang('general.accessory')</a>
                         </li>
+                        <li {{{ (Request::is('admin/consumables/create') ? 'class="active"' : '') }}}>
+                            <a href="{{ route('create/consumable') }}">
+                                <i class="fa fa-tint"></i>
+                                @lang('general.consumable')</a>
+                        </li>
                         <li {{{ (Request::is('admin/users/create') ? 'class="active"' : '') }}}>
                             <a href="{{ route('create/user') }}">
                             <i class="fa fa-user"></i>
@@ -282,6 +287,13 @@
                     <span>@lang('general.accessories')</span>
                 </a>
             </li>
+            <li{{ (Request::is('admin/consumables*') ? ' class="active"><div class="pointer"><div class="arrow"></div><div class="arrow_border"></div></div>' : '>') }}
+                <a href="{{ URL::to('admin/consumables') }}">
+                    <i class="fa fa-tint"></i>
+                    <span>@lang('general.consumables')</span>
+                </a>
+            </li>
+
 
             <li{{ (Request::is('admin/licenses*') ? ' class="active"><div class="pointer"><div class="arrow"></div><div class="arrow_border"></div></div>' : '>') }}
                 <a href="{{ URL::to('admin/licenses') }}"  >
