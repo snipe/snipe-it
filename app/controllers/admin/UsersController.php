@@ -645,13 +645,13 @@ class UsersController extends AdminController
 
 							DB::table('users')->insert($newuser);
 
-							$udpateuser = Sentry::findUserByLogin($row[2]);
+							$updateuser = Sentry::findUserByLogin($row[2]);
 
 						    // Update the user details
-						    $udpateuser->password = $pass;
+						    $updateuser->password = $pass;
 
 						    // Update the user
-						    $udpateuser->save();
+						    $updateuser->save();
 
 
 							if (Input::get('email_user')==1) {
