@@ -47,7 +47,7 @@ class UsersController extends AdminController
      */
     public function getIndex()
     {
- 
+
         // Show the page
         return View::make('backend/users/index');
     }
@@ -144,22 +144,22 @@ class UsersController extends AdminController
 
                 // Redirect to the new user page
                 //return Redirect::route('update/user', $user->id)->with('success', $success);
-                
+
                 if (Input::get('email_user')==1) {
 					// Send the credentials through email
-					
+
 					$data = array();
 					$data['email'] = e(Input::get('email'));
 					$data['first_name'] = e(Input::get('first_name'));
 					$data['password'] = e(Input::get('password'));
-					
+
 		            Mail::send('emails.send-login', $data, function ($m) use ($user) {
 		                $m->to($user->email, $user->first_name . ' ' . $user->last_name);
 		                $m->subject('Welcome ' . $user->first_name);
 		            });
 				}
-						
-						
+
+
                 return Redirect::route('users')->with('success', $success);
             }
 
@@ -276,7 +276,7 @@ class UsersController extends AdminController
             // Ooops.. something went wrong
             return Redirect::back()->withInput()->withErrors($validator);
         }
-        
+
         // Only update the email address if locking is set to false
         if (!Config::get('app.lock_passwords')) {
 			$user->email       		= Input::get('email');
@@ -285,7 +285,7 @@ class UsersController extends AdminController
         try {
             // Update the user
             $user->first_name  		= Input::get('first_name');
-            $user->last_name   		= Input::get('last_name');         
+            $user->last_name   		= Input::get('last_name');
             $user->employee_num		= Input::get('employee_num');
             $user->activated   		= Input::get('activated', $user->activated);
             $user->permissions 		= Input::get('permissions');
@@ -325,14 +325,14 @@ class UsersController extends AdminController
 	            // Assign the user to groups
 	            foreach ($groupsToAdd as $groupId) {
 	                $group = Sentry::getGroupProvider()->findById($groupId);
-	
+
 	                $user->addGroup($group);
 	            }
-	
+
 	            // Remove the user from groups
 	            foreach ($groupsToRemove as $groupId) {
 	                $group = Sentry::getGroupProvider()->findById($groupId);
-	
+
 	                $user->removeGroup($group);
 	            }
 	         }
@@ -466,7 +466,7 @@ class UsersController extends AdminController
 
     }
 
-   
+
     /**
      * Unsuspend the given user.
      *
@@ -568,7 +568,7 @@ class UsersController extends AdminController
             return Redirect::route('users')->with('error', $error);
         }
     }
-    
+
     /**
 	 * User import.
 	 *
@@ -589,8 +589,8 @@ class UsersController extends AdminController
 		// Show the page
 		return View::make('backend/users/import', compact('groups', 'selectedGroups', 'permissions', 'selectedPermissions'));
 	}
-	
-	
+
+
 	/**
 	 * User import form processing.
 	 *
@@ -598,96 +598,97 @@ class UsersController extends AdminController
 	 */
 	public function postImport()
 	{
-		
+
 		if (! ini_get("auto_detect_line_endings")) {
 			ini_set("auto_detect_line_endings", '1');
 		}
-		
-		$csv = Reader::createFromPath(Input::file('user_import_csv'));	
+
+		$csv = Reader::createFromPath(Input::file('user_import_csv'));
 		$csv->setNewline("\r\n");
-		
+
 		if (Input::get('has_headers')==1) {
-			$csv->setOffset(1); 
+			$csv->setOffset(1);
 		}
-		
-		$duplicates = '';	
-		
+
+		$duplicates = '';
+
 		$nbInsert = $csv->each(function ($row) use ($duplicates) {
-			
+
 			if (array_key_exists(2, $row)) {
-			
+
 				if (Input::get('activate')==1) {
-					$activated = '1'; 
+					$activated = '1';
 				} else {
-					$activated = '0'; 
+					$activated = '0';
 				}
-				
+
 				$pass = substr(str_shuffle("0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"), 0, 10);
-				
-						
-						
-				try {	
+
+
+
+				try {
 						// Check if this email already exists in the system
 						$user = DB::table('users')->where('email', $row[2])->first();
-						if ($user) {					
+						if ($user) {
 							$duplicates .= $row[2].', ';
 						} else {
-							
+
 							$newuser = array(
 								'first_name' => $row[0],
 								'last_name' => $row[1],
 								'email' => $row[2],
 								'password' => $pass,
 								'activated' => $activated,
-								'permissions'	=> '{"user":1}'
+								'permissions'	=> '{"user":1}',
+                                'notes'         => 'Imported user'
 							);
-								
+
 							DB::table('users')->insert($newuser);
-							
-							$udpateuser = Sentry::findUserByLogin($row[2]);
-	
+
+							$updateuser = Sentry::findUserByLogin($row[2]);
+
 						    // Update the user details
-						    $udpateuser->password = $pass;
-						
+						    $updateuser->password = $pass;
+
 						    // Update the user
-						    $udpateuser->save();
-	    
-							
+						    $updateuser->save();
+
+
 							if (Input::get('email_user')==1) {
 								// Send the credentials through email
-								
+
 								$data = array();
 								$data['email'] = $row[2];
 								$data['first_name'] = $row[0];
 								$data['password'] = $pass;
-								
+
 					            Mail::send('emails.send-login', $data, function ($m) use ($newuser) {
 					                $m->to($newuser['email'], $newuser['first_name'] . ' ' . $newuser['last_name']);
 					                $m->subject('Welcome ' . $newuser['first_name']);
 					            });
 							}
 						}
-								
-					
+
+
 				} catch (Exception $e) {
 					echo 'Caught exception: ',  $e->getMessage(), "\n";
 				}
 				return true;
 			}
-				
-		});	
-		
-		
+
+		});
+
+
 		return Redirect::route('users')->with('duplicates',$duplicates)->with('success', 'Success');
-		
+
 	}
-	
-	
+
+
 	public function getDatatable($status = null)
     {
-	    
+
 	$users = User::with('assets','licenses','manager','sentryThrottle');
-	
+
 	switch ($status) {
 		case 'deleted':
 			$users->GetDeleted();
@@ -695,24 +696,24 @@ class UsersController extends AdminController
 		case '':
 			$users->GetNotDeleted();
 			break;
-	}	
-	
-	$users = $users->orderBy('created_at', 'DESC')->get();       
-        
-    $actions = new \Chumper\Datatable\Columns\FunctionColumn('actions', function ($users) 
-        	{ 
+	}
+
+	$users = $users->orderBy('created_at', 'DESC')->get();
+
+    $actions = new \Chumper\Datatable\Columns\FunctionColumn('actions', function ($users)
+        	{
 	        	$action_buttons = '';
 
-				
+
                 if ( ! is_null($users->deleted_at)) {
                 	$action_buttons .= '<a href="'.route('restore/user', $users->id).'" class="btn btn-warning btn-sm"><i class="fa fa-share icon-white"></i></a> ';
                 } else {
 	                if ($users->accountStatus()=='suspended') {
 			               $action_buttons .= '<a href="'.route('unsuspend/user', $users->id).'" class="btn btn-warning btn-sm"><span class="fa fa-time icon-white"></span></a> ';
 					}
-					
+
                 	$action_buttons .= '<a href="'.route('update/user', $users->id).'" class="btn btn-warning btn-sm"><i class="fa fa-pencil icon-white"></i></a> ';
-                	
+
 					if ((Sentry::getId() !== $users->id) && (!Config::get('app.lock_passwords'))) {
 	                	$action_buttons .= '<a data-html="false" class="btn delete-asset btn-danger btn-sm" data-toggle="modal" href="'.route('delete/user', $users->id).'" data-content="Are you sure you wish to delete this user?" data-title="Delete '.htmlspecialchars($users->first_name).'?" onClick="return false;"><i class="fa fa-trash icon-white"></i></a> ';
 	                } else {
@@ -720,51 +721,51 @@ class UsersController extends AdminController
 	                }
                 }
                 return $action_buttons;
-	        	
+
 	        });
-	        
-     
+
+
         return Datatable::collection($users)
         ->addColumn('name',function($users)
 	        {
 		        return '<a title="'.$users->fullName().'" href="users/'.$users->id.'/view">'.$users->fullName().'</a>';
-	        })	
-	        
+	        })
+
 	     ->addColumn('email',function($users)
 	        {
 		        return '<a title="'.$users->email.'" href="mailto:'.$users->email.'">'.$users->email.'</a>';
 	        })
-	        
+
 	     ->addColumn('manager',function($users)
 	        {
 		        if ($users->manager) {
 		       	 return '<a title="'.$users->manager->fullName().'" href="users/'.$users->manager->id.'/view">'.$users->manager->fullName().'</a>';
-		       	} 
+		       	}
 	        })
-	        
+
 		->addColumn('assets',function($users)
 	        {
 		        return $users->assets->count();
 	        })
-	        
+
 		->addColumn('licenses',function($users)
 	        {
 		        return $users->licenses->count();
-	        }) 
+	        })
 	    ->addColumn('activated',function($users)
 	        {
 		        return $users->isActivated() ? '<i class="fa fa-check"></i>' : '';
-	        }) 
-   
-	    ->addColumn($actions)           
+	        })
+
+	    ->addColumn($actions)
         ->searchColumns('name','email','manager','activated', 'licenses','assets')
         ->orderColumns('name','email','manager','activated', 'licenses','assets')
         ->make();
-        
-		}
-	
 
-    
-    
+		}
+
+
+
+
 
 }
