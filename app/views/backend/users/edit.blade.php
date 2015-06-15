@@ -69,18 +69,33 @@
                 </div>
             </div>
 
+
+			<!-- Username -->
+            <div class="form-group {{ $errors->has('username') ? 'has-error' : '' }}">
+                <label class="col-md-3 control-label" for="username">@lang('admin/users/table.username') <i class='fa fa-asterisk'></i></label>
+                <div class="col-md-7">
+                    <input class="form-control" type="text" name="username" id="username" value="{{{ Input::old('username', $user->username) }}}"  {{ ((Config::get('app.lock_passwords') && ($user->id)) ? ' disabled' : '') }}>
+                     @if (Config::get('app.lock_passwords') && ($user->id))
+					 	<p class="help-block">@lang('admin/users/table.lock_passwords')</p>
+					 @endif
+
+                    {{ $errors->first('username', '<br><span class="alert-msg">:message</span>') }}
+                </div>
+            </div>
+
 			<!-- Email -->
             <div class="form-group {{ $errors->has('email') ? 'has-error' : '' }}">
-                <label class="col-md-3 control-label" for="email">@lang('admin/users/table.email') <i class='fa fa-asterisk'></i></label>
+                <label class="col-md-3 control-label" for="email">@lang('admin/users/table.email') </label>
                 <div class="col-md-7">
                     <input class="form-control" type="text" name="email" id="email" value="{{{ Input::old('email', $user->email) }}}"  {{ ((Config::get('app.lock_passwords') && ($user->id)) ? ' disabled' : '') }}>
-                     @if (Config::get('app.lock_passwords') && ($user->id)) 
+                     @if (Config::get('app.lock_passwords') && ($user->id))
 					 	<p class="help-block">@lang('admin/users/table.lock_passwords')</p>
 					 @endif
 
                     {{ $errors->first('email', '<br><span class="alert-msg">:message</span>') }}
                 </div>
             </div>
+
 
         	<!-- Employee Number -->
             <div class="form-group {{ $errors->has('employee_num') ? 'has-error' : '' }}">
@@ -152,7 +167,7 @@
                 </label>
                 <div class="col-md-5">
                    <input type="password" name="password_confirm" id="password_confirm"  class="form-control" value="" {{ ((Config::get('app.lock_passwords') && ($user->id)) ? ' disabled' : '') }}>
-                   @if (Config::get('app.lock_passwords') && ($user->id)) 
+                   @if (Config::get('app.lock_passwords') && ($user->id))
                     <p class="help-block">@lang('admin/users/table.lock_passwords')</p>
                    @endif
                     {{ $errors->first('password_confirm', '<br><span class="alert-msg">:message</span>') }}
@@ -193,7 +208,7 @@
                 </div>
                 </div>
             </div>
-            
+
 	<!-- Notes -->
             <div class="form-group {{ $errors->has('notes') ? ' has-error' : '' }}">
                 <label for="notes" class="col-md-3 control-label">@lang('admin/users/table.notes')</label>
@@ -226,7 +241,7 @@
                 </div>
                 </div>
             </div>
-            
+
             <!-- Email user -->
             @if (!$user->id)
 			<div class="form-group">
@@ -249,8 +264,8 @@
         <div class="row form-wrapper">
             <div class="col-md-12 column">
             <br><br>
-            
-            @if (Config::get('app.lock_passwords') && ($user->id)) 
+
+            @if (Config::get('app.lock_passwords') && ($user->id))
 		 	<p class="help-block">@lang('admin/users/table.lock_passwords')</p>
 		 	@endif
 

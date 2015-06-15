@@ -38,7 +38,7 @@ Create a User ::
 			@endif
 
 			<p>
-				Upload a CSV file with one or more users.  Passwords will be auto-generated.  The CSV should have the <strong>first</strong> fields as: <strong>firstName,lastName,email</strong>. Any additional fields to the right of those fields will be ignored.
+				Upload a CSV file with one or more users.  Passwords will be auto-generated.  The CSV should have the <strong>first</strong> fields as: <strong>firstName,lastName,username,email</strong>. Any additional fields to the right of those fields will be ignored. Email is optional, however users will not be able to recover their passwords or receive EULAs if you do not provide an email address.
 			</p>
 
             <div class="form-group {{ $errors->first('user_import_csv', 'has-error') }}">
@@ -47,7 +47,7 @@ Create a User ::
 					<input type="file" name="user_import_csv" id="user_import_csv">
 				</div>
             </div>
-            
+
             <!-- Has Headers -->
 			<div class="form-group">
 				<div class="col-sm-2 ">
@@ -56,17 +56,17 @@ Create a User ::
 					{{ Form::checkbox('has_headers', '1', Input::old('has_headers')) }} This CSV has a header row
 				</div>
 			</div>
-			
+
 
 			<!-- Email user -->
 			<div class="form-group">
 				<div class="col-sm-2 ">
 				</div>
 				<div class="col-sm-5">
-					{{ Form::checkbox('email_user', '1', Input::old('email_user')) }} Email these users their credentials?
+					{{ Form::checkbox('email_user', '1', Input::old('email_user')) }} Email these users their credentials? (Only possible where email address is included with user data.)
 				</div>
 			</div>
-			
+
 			<!-- Activate -->
 			<div class="form-group">
 				<div class="col-sm-2 ">
@@ -76,7 +76,7 @@ Create a User ::
 				</div>
 			</div>
 
-			
+
 
         </div>
     </div>
