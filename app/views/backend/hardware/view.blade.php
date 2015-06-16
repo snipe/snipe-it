@@ -429,7 +429,7 @@
       'files' => true, 'class' => 'form-horizontal' ]) }}
       <div class="modal-body">
 
-		<p>Allowed filetypes are png, gif, jpg, doc, docx, pdf, and txt.</p>
+		<p><p>@lang('admin/hardware/general.filetype_info')</p>.</p>
 
 		 <div class="form-group col-md-12">
 		 <div class="input-group col-md-12">

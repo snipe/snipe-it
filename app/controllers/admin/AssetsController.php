@@ -752,7 +752,7 @@ class AssetsController extends AdminController
 				foreach(Input::file('assetfile') as $file) {
 
 				$rules = array(
-				   'assetfile' => 'required|mimes:png,gif,jpg,jpeg,doc,docx,pdf,txt|max:2000'
+				   'assetfile' => 'required|mimes:png,gif,jpg,jpeg,doc,docx,pdf,txt,zip,rar|max:2000'
 				);
 				$validator = Validator::make(array('assetfile'=> $file), $rules);
 
