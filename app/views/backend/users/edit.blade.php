@@ -129,7 +129,7 @@
 			<!-- Location -->
             <div class="form-group {{ $errors->has('location_id') ? 'has-error' : '' }}">
                 <label class="col-md-3 control-label" for="location_id">@lang('admin/users/table.location')
-                    <i class='fa fa-asterisk'></i></label>
+                    </label>
                 <div class="col-md-7">
                     {{ Form::select('location_id', $location_list , Input::old('location_id', $user->location_id), array('class'=>'select2', 'style'=>'width:250px')) }}
                     {{ $errors->first('location_id', '<br><span class="alert-msg">:message</span>') }}
@@ -173,20 +173,6 @@
                     {{ $errors->first('password_confirm', '<br><span class="alert-msg">:message</span>') }}
                 </div>
             </div>
-
-
-            <!-- Username -->
-            <div class="form-group {{ $errors->has('username') ? 'has-error' : '' }}">
-                <label class="col-md-3 control-label" for="username">@lang('admin/users/table.username')</label>
-                <div class="col-md-5">
-                    <input class="form-control" type="text" name="username" id="username" value="{{{ Input::old('username', $user->username) }}}" disabled />
-
-                    {{ $errors->first('username', '<br><span class="alert-msg">:message</span>') }}
-                    <p class="help-block">@lang('admin/users/table.username_note')</p>
-                </div>
-            </div>
-
-
 
 			<!-- Activation Status -->
             <div class="form-group {{ $errors->has('activated') ? 'has-error' : '' }}">
