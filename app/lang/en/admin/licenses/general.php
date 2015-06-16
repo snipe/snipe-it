@@ -7,6 +7,7 @@ return array(
     'checkout'  				=> 'Checkout License Seat',
     'edit'  					=> 'Edit License',
     'clone'  					=> 'Clone License',
+    'filetype_info'             => 'Allowed filetypes are png, gif, jpg, doc, docx, pdf, txt, rar and zip.',
     'history_for'  				=> 'History for ',
     'in_out'  					=> 'In/Out',
     'info'  					=> 'License Info',

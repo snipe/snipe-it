@@ -3,7 +3,7 @@
 {{-- Page title --}}
 @section('title')
 @lang('admin/licenses/general.view')
- - {{{ $license->name }}} 
+ - {{{ $license->name }}}
 @parent
 @stop
 
@@ -221,7 +221,7 @@
       'files' => true, 'class' => 'form-horizontal' ]) }}
       <div class="modal-body">
 
-		<p>Allowed filetypes are png, gif, jpg, doc, docx, pdf, and txt.</p>
+		<p>@lang('admin/licenses/general.filetype_info')</p>
 
 		 <div class="form-group col-md-12">
 		 <div class="input-group col-md-12">
