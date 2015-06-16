@@ -34,8 +34,9 @@ class UsersController extends AdminController
     protected $validationRules = array(
         'first_name'       => 'required|alpha_space|min:2',
         'last_name'        => 'required|alpha_space|min:2',
-		'location_id'      => 'required',
-        'email'            => 'required|email|unique:users,email',
+		'location_id'      => 'numeric',
+        'username'         => 'required|min:2|unique:users,username',
+        'email'            => 'email|unique:users,email',
         'password'         => 'required|min:6',
         'password_confirm' => 'required|min:6|same:password',
     );
@@ -628,7 +629,7 @@ class UsersController extends AdminController
 
 				try {
 						// Check if this email already exists in the system
-						$user = DB::table('users')->where('email', $row[2])->first();
+						$user = DB::table('users')->where('username', $row[2])->first();
 						if ($user) {
 							$duplicates .= $row[2].', ';
 						} else {
@@ -636,7 +637,8 @@ class UsersController extends AdminController
                             $newuser = array(
                                 'first_name' => $row[0],
                                 'last_name' => $row[1],
-                                'email' => $row[2],
+                                'username' => $row[2],
+                                'email' => $row[3],
                                 'password' => $pass,
                                 'activated' => $activated,
                                 'permissions'	=> '{"user":1}',
@@ -656,16 +658,17 @@ class UsersController extends AdminController
 
 							if (Input::get('email_user')==1) {
 								// Send the credentials through email
+                                if ($row[3]!='') {
+    								$data = array();
+    								$data['username'] = $row[2];
+    								$data['first_name'] = $row[0];
+    								$data['password'] = $pass;
 
-								$data = array();
-								$data['email'] = $row[2];
-								$data['first_name'] = $row[0];
-								$data['password'] = $pass;
-
-					            Mail::send('emails.send-login', $data, function ($m) use ($newuser) {
-					                $m->to($newuser['email'], $newuser['first_name'] . ' ' . $newuser['last_name']);
-					                $m->subject('Welcome ' . $newuser['first_name']);
-					            });
+    					            Mail::send('emails.send-login', $data, function ($m) use ($newuser) {
+    					                $m->to($newuser['email'], $newuser['first_name'] . ' ' . $newuser['last_name']);
+    					                $m->subject('Welcome ' . $newuser['first_name']);
+    					            });
+                                }
 							}
 						}
 
