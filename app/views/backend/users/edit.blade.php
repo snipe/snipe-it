@@ -83,6 +83,35 @@
                 </div>
             </div>
 
+			<!-- Password -->
+			<div class="form-group {{ $errors->has('password') ? 'has-error' : '' }}">
+				<label class="col-md-3 control-label" for="password">@lang('admin/users/table.password')
+				@if (!$user->id)
+				<i class='fa fa-asterisk'></i>
+				@endif
+				</label>
+				<div class="col-md-5">
+				<input type="password" name="password" class="form-control" id="password" value="" {{ ((Config::get('app.lock_passwords') && ($user->id)) ? ' disabled' : '') }}>
+					{{ $errors->first('password', '<br><span class="alert-msg">:message</span>') }}
+				</div>
+			</div>
+
+			<!-- Password Confirm -->
+			<div class="form-group {{ $errors->has('password_confirm') ? 'has-error' : '' }}">
+				<label class="col-md-3 control-label" for="password_confirm">@lang('admin/users/table.password_confirm')
+				@if (!$user->id)
+				<i class='fa fa-asterisk'></i>
+				@endif
+				</label>
+				<div class="col-md-5">
+				<input type="password" name="password_confirm" id="password_confirm"  class="form-control" value="" {{ ((Config::get('app.lock_passwords') && ($user->id)) ? ' disabled' : '') }}>
+				@if (Config::get('app.lock_passwords') && ($user->id))
+					<p class="help-block">@lang('admin/users/table.lock_passwords')</p>
+				@endif
+					{{ $errors->first('password_confirm', '<br><span class="alert-msg">:message</span>') }}
+				</div>
+			</div>
+
 			<!-- Email -->
             <div class="form-group {{ $errors->has('email') ? 'has-error' : '' }}">
                 <label class="col-md-3 control-label" for="email">@lang('admin/users/table.email') </label>
@@ -142,35 +171,6 @@
                 <div class="col-md-4">
                     <input class="form-control" type="text" name="phone" id="phone" value="{{{ Input::old('phone', $user->phone) }}}" />
                     {{ $errors->first('phone', '<br><span class="alert-msg">:message</span>') }}
-                </div>
-            </div>
-
-            <!-- Password -->
-            <div class="form-group {{ $errors->has('password') ? 'has-error' : '' }}">
-                <label class="col-md-3 control-label" for="password">@lang('admin/users/table.password')
-                @if (!$user->id)
-                <i class='fa fa-asterisk'></i>
-                @endif
-                </label>
-                <div class="col-md-5">
-                   <input type="password" name="password" class="form-control" id="password" value="" {{ ((Config::get('app.lock_passwords') && ($user->id)) ? ' disabled' : '') }}>
-                    {{ $errors->first('password', '<br><span class="alert-msg">:message</span>') }}
-                </div>
-            </div>
-
-            <!-- Password Confirm -->
-            <div class="form-group {{ $errors->has('password_confirm') ? 'has-error' : '' }}">
-                <label class="col-md-3 control-label" for="password_confirm">@lang('admin/users/table.password_confirm')
-                @if (!$user->id)
-                <i class='fa fa-asterisk'></i>
-                @endif
-                </label>
-                <div class="col-md-5">
-                   <input type="password" name="password_confirm" id="password_confirm"  class="form-control" value="" {{ ((Config::get('app.lock_passwords') && ($user->id)) ? ' disabled' : '') }}>
-                   @if (Config::get('app.lock_passwords') && ($user->id))
-                    <p class="help-block">@lang('admin/users/table.lock_passwords')</p>
-                   @endif
-                    {{ $errors->first('password_confirm', '<br><span class="alert-msg">:message</span>') }}
                 </div>
             </div>
 
