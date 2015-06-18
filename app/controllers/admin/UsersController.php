@@ -737,7 +737,7 @@ class UsersController extends AdminController
 	     ->addColumn('email',function($users)
 	        {
                 if ($users->email) {
-                    return '<a title="'.$users->email.'" href="mailto:'.$users->email.'"><i class="fa fa-envelope fa-lg"></i>';
+                    return '<div class="text-center"><a title="'.$users->email.'" href="mailto:'.$users->email.'"><i class="fa fa-envelope fa-lg"></i></div>';
                 } else {
                     return '';
                 }
