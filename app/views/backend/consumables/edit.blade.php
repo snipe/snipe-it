@@ -50,7 +50,7 @@
 	<!-- Category -->
     <div class="form-group {{ $errors->has('category_id') ? ' has-error' : '' }}">
 	     <div class="col-md-3">
-		     {{ Form::label('category_id', Lang::get('admin/consumables/general.consumable_category')) }}
+		     {{ Form::label('category_id', Lang::get('general.category')) }}
 			 <i class='fa fa-asterisk'></i>
          </div>
             <div class="col-md-7">
@@ -62,7 +62,7 @@
     <!-- QTY -->
     <div class="form-group {{ $errors->has('qty') ? ' has-error' : '' }}">
         <div class="col-md-3">
-        	{{ Form::label('qty', Lang::get('admin/consumables/general.qty')) }}
+        	{{ Form::label('qty', Lang::get('general.quanitity')) }}
         	<i class='fa fa-asterisk'></i>
         </div>
         <div class="col-md-9">
