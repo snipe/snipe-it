@@ -329,7 +329,7 @@ class AppCommand extends Command
         $user = Sentry::getUserProvider()->create($data);
 
         // Associate the Admin group to this user
-        $group = Sentry::getGroupProvider()->findById(1);
+        $group = Sentry::getGroupProvider()->findGroupByName('Admin');
         $user->addGroup($group);
 
         // Show the success message
