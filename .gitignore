@@ -26,3 +26,6 @@ public/assets/.siteflow
 app/config/packages/schickling/backup/config.php
 app/config/packages/fideloper/proxy/config.php
 app/storage/dumps/20150619212924.sql
+app/config/staging/session.php
+app/config/production/session.php
+app/config/local/session.php
