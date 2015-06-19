@@ -103,6 +103,7 @@ return array(
         'Chumper\Datatable\DatatableServiceProvider',
         'Dinesh\Barcode\BarcodeServiceProvider',
         'Maknz\Slack\SlackServiceProvider',
+        'Schickling\Backup\BackupServiceProvider',
 
     ),
 

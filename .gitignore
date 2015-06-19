@@ -25,3 +25,4 @@ public/assets/.siteflow
 .settings/settings.json
 app/config/packages/schickling/backup/config.php
 app/config/packages/fideloper/proxy/config.php
+app/storage/dumps/20150619212924.sql
