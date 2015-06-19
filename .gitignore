@@ -23,3 +23,5 @@ public/uploads/logo.png
 .siteflow
 public/assets/.siteflow
 .settings/settings.json
+app/config/packages/schickling/backup/config.php
+app/config/packages/fideloper/proxy/config.php

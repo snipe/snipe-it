@@ -26,7 +26,9 @@
 		"intervention/image": "dev-master",
 		"league/csv": "~7.0",
 		"maknz/slack": "dev-master",
-		"erusev/parsedown": "dev-master"
+		"erusev/parsedown": "dev-master",
+		"fideloper/proxy": "2.1.1",
+		"schickling/backup": "0.6.0"
 	},
 	"require-dev": {
 		"phpunit/phpunit": "*",
