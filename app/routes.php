@@ -204,7 +204,7 @@ Route::group(array('prefix' => 'admin', 'before' => 'admin-auth', 'namespace' =>
 
 
     # Admin Settings Routes (for categories, maufactureres, etc)
-    Route::group(array('prefix' => 'settings'), function () {
+    Route::group(array('prefix' => 'settings','before' => 'admin-auth'), function () {
 
         # Settings
         Route::group(array('prefix' => 'app'), function () {
@@ -212,6 +212,13 @@ Route::group(array('prefix' => 'admin', 'before' => 'admin-auth', 'namespace' =>
             Route::get('edit', array('as' => 'edit/settings', 'uses' => 'SettingsController@getEdit'));
             Route::post('edit', 'SettingsController@postEdit');
         });
+
+        # Settings
+        Route::group(array('prefix' => 'backups'), function () {
+            Route::get('/', array('as' => 'settings/backups', 'uses' => 'SettingsController@getBackups'));
+            Route::get('download/{filename}', array('as' => 'settings/download-file', 'uses' => 'SettingsController@downloadFile'));
+        });
+
 
         # Manufacturers
         Route::group(array('prefix' => 'manufacturers'), function () {
