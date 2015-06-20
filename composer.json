@@ -28,7 +28,9 @@
 		"maknz/slack": "dev-master",
 		"erusev/parsedown": "dev-master",
 		"fideloper/proxy": "2.1.1",
+		"aws/aws-sdk-php-laravel": "1.0.x-dev",
 		"schickling/backup": "0.6.0"
+
 	},
 	"require-dev": {
 		"phpunit/phpunit": "*",

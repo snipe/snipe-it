@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "e04f8be5ea508c947facf356996047ce",
+    "hash": "7182cc1ac700eae831f4444bc5cd43c4",
     "packages": [
         {
             "name": "aws/aws-sdk-php",
@@ -71,22 +71,21 @@
         },
         {
             "name": "aws/aws-sdk-php-laravel",
-            "version": "1.1.2",
+            "version": "1.0.x-dev",
             "source": {
                 "type": "git",
                 "url": "https://github.com/aws/aws-sdk-php-laravel.git",
-                "reference": "a114872a916a567f2fba539b8d1709a97b582097"
+                "reference": "ce9a9b5144d16c9bebda23f41c2dfc7f8da38471"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/aws/aws-sdk-php-laravel/zipball/a114872a916a567f2fba539b8d1709a97b582097",
-                "reference": "a114872a916a567f2fba539b8d1709a97b582097",
+                "url": "https://api.github.com/repos/aws/aws-sdk-php-laravel/zipball/ce9a9b5144d16c9bebda23f41c2dfc7f8da38471",
+                "reference": "ce9a9b5144d16c9bebda23f41c2dfc7f8da38471",
                 "shasum": ""
             },
             "require": {
                 "aws/aws-sdk-php": "~2.2",
-                "illuminate/foundation": "4.*",
-                "illuminate/support": "4.*",
+                "laravel/framework": "4.*",
                 "php": ">=5.3.3"
             },
             "require-dev": {
@@ -120,7 +119,7 @@
                 "s3",
                 "sdk"
             ],
-            "time": "2015-02-13 19:51:35"
+            "time": "2015-05-30 00:56:30"
         },
         {
             "name": "barryvdh/laravel-debugbar",
@@ -4505,7 +4504,8 @@
         "dinesh/barcode": 20,
         "intervention/image": 20,
         "maknz/slack": 20,
-        "erusev/parsedown": 20
+        "erusev/parsedown": 20,
+        "aws/aws-sdk-php-laravel": 20
     },
     "prefer-stable": false,
     "prefer-lowest": false,
