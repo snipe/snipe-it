@@ -12,7 +12,7 @@ class FixDefaultForUserNotes extends Migration {
 	 */
 	public function up()
 	{
-		DB::statement('ALTER TABLE `users` MODIFY `notes` varchar(255) DEFAULT NULL;');
+		DB::statement('ALTER TABLE `'.DB::getTablePrefix().'users` MODIFY `notes` varchar(255) DEFAULT NULL;');
 	}
 
 	/**
@@ -23,7 +23,7 @@ class FixDefaultForUserNotes extends Migration {
 	public function down()
 	{
 		//
-		DB::statement('ALTER TABLE `users` MODIFY `notes` varchar(255);');
+		DB::statement('ALTER TABLE `'.DB::getTablePrefix().'users` MODIFY `notes` varchar(255);');
 	}
 
 }
