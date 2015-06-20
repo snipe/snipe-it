@@ -13,4 +13,3 @@ return array(
 
     'compress' => false,
 );
-

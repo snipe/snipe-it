@@ -12,6 +12,7 @@ use Validator;
 use View;
 use Image;
 use Config;
+use Response;
 
 class SettingsController extends AdminController
 {
@@ -64,7 +65,7 @@ class SettingsController extends AdminController
 
 
         // Declare the rules for the form validation
-        
+
         $rules = array(
 	        "per_page"   	=> 'required|min:1|numeric',
 	        "qr_text"		=> 'min:1|max:31',
@@ -74,12 +75,12 @@ class SettingsController extends AdminController
 	        "slack_channel"   => 'regex:/(?<!\w)#\w+/',
 	        "slack_botname"   => 'alpha_dash',
 	        );
-        
+
         if (Config::get('app.lock_passwords')==false) {
 	        $rules['site_name'] = 'required|min:3';
 
-	    } 
-        
+	    }
+
         // Create a new validator instance from our validation rules
         $validator = Validator::make(Input::all(), $rules);
 
@@ -106,11 +107,11 @@ class SettingsController extends AdminController
 
         // Update the asset data
             $setting->id = '1';
-            
+
              if (Config::get('app.lock_passwords')==false) {
 	             $setting->site_name = e(Input::get('site_name'));
-             } 
-            
+             }
+
             $setting->per_page = e(Input::get('per_page'));
             $setting->qr_code = e(Input::get('qr_code', '0'));
             $setting->barcode_type = e(Input::get('barcode_type'));
@@ -136,6 +137,62 @@ class SettingsController extends AdminController
             // Redirect to the setting management page
             return Redirect::to("admin/settings/app/edit")->with('error', Lang::get('admin/settings/message.update.error'));
 
+    }
+
+
+    /**
+    * Generate the backup page
+    *
+    * @return View
+    **/
+
+    public function getBackups()
+    {
+        $path = Config::get('backup::path');
+        $files = array();
+
+        if ($handle = opendir($path)) {
+
+            /* This is the correct way to loop over the directory. */
+            while (false !== ($entry = readdir($handle))) {
+                clearstatcache();
+                if (substr(strrchr($entry,'.'),1)=='sql') {
+                    $files[] = array(
+                            'filename' => "$entry\n",
+                            'modified' => filemtime(Config::get('backup::path').$entry)
+                        );
+                }
+
+            }
+            closedir($handle);
+        }
+
+
+        return View::make('backend/settings/backups', compact('path','files'));
+    }
+
+    /**
+    * Download the dump file
+    *
+    * @param  int  $assetId
+    * @return View
+    **/
+    public function downloadFile($filename = null)
+    {
+
+        $file = Config::get('backup::path').'/'.$filename;
+
+
+		// the license is valid
+        if (file_exists($file)) {
+				return Response::download($file);
+        } else {
+            // Prepare the error message
+            $error = Lang::get('admin/settings/message.does_not_exist');
+
+            // Redirect to the licence management page
+            return Redirect::route('settings/backups')->with('error', $error);
+        }
     }
 
 
