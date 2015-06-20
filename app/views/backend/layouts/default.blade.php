@@ -230,6 +230,11 @@
                                 <i class="fa fa-group"></i> @lang('general.groups')
                             </a>
                         </li>
+                        <li{{ (Request::is('admin/settings/backups*') ? ' class="active"' : '') }}>
+                            <a href="{{ URL::to('admin/settings/backups') }}">
+                                <i class="fa fa-download"></i> @lang('admin/settings/general.backups')
+                            </a>
+                        </li>
                         <li class="divider"></li>
                         <li>
                             <a href="{{ route('app') }}">
