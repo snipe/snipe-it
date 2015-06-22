@@ -30,7 +30,8 @@
 		"fideloper/proxy": "2.1.1",
 		"guzzlehttp/guzzle": "5.3.0",
 		"aws/aws-sdk-php-laravel": "1.0.x-dev",
-		"schickling/backup": "0.6.0"
+		"schickling/backup": "0.6.0",
+		"chumper/zipper": "0.5.x"
 
 	},
 	"require-dev": {

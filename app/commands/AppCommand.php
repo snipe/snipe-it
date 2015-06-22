@@ -18,7 +18,7 @@ class AppCommand extends Command
      *
      * @var	string
      */
-    protected $description = '';
+    protected $description = 'This command kicks off your database table creation and migration, and creates your first admin user.';
 
     /**
      * Holds the user information.

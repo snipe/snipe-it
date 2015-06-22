@@ -24,12 +24,14 @@
                                 <thead>
                                     <th>File</th>
                                     <th>Created</th>
+                                    <th>Size</th>
                                 </thead>
                                 <tbody>
                                     @foreach ($files as $file)
                                     <tr>
                                         <td><a href="backups/download/{{{ $file['filename'] }}}">{{{ $file['filename'] }}}</a></td>
                                         <td>{{{ date("M d, Y g:i A", $file['modified']) }}} </td>
+                                        <td>{{{ $file['filesize'] }}}</td>
                                     </tr>
                                     @endforeach
                                 </tbody>

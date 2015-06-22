@@ -156,9 +156,10 @@ class SettingsController extends AdminController
             /* This is the correct way to loop over the directory. */
             while (false !== ($entry = readdir($handle))) {
                 clearstatcache();
-                if (substr(strrchr($entry,'.'),1)=='sql') {
+                if (substr(strrchr($entry,'.'),1)=='zip') {
                     $files[] = array(
-                            'filename' => "$entry\n",
+                            'filename' => $entry,
+                            'filesize' => Setting::fileSizeConvert(filesize(Config::get('backup::path').$entry)),
                             'modified' => filemtime(Config::get('backup::path').$entry)
                         );
                 }
