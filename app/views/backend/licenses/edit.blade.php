@@ -87,11 +87,14 @@
             <!-- Reassignable -->
             <div class="form-group {{ $errors->has('reassignable') ? ' has-error' : '' }}">
                 <label for="reassignable" class="col-md-3 control-label">@lang('admin/licenses/form.reassignable')</label>
-                <div class="col-md-7 input-group">
+                <div class="checkbox col-md-7 input-group" style="padding-left: 35px;">
                     {{ Form::Checkbox('reassignable', '1', Input::old('reassignable', $license->id ? $license->reassignable : '1')) }}
                     @lang('general.yes')
                 </div>
             </div>
+
+
+
 
             <!-- Supplier -->
             <div class="form-group {{ $errors->has('supplier_id') ? ' has-error' : '' }}">
@@ -167,7 +170,7 @@
                 <label for="maintained" class="col-md-3 control-label">@lang('admin/licenses/form.maintained')</label>
 
 
-                <div class="col-md-7 input-group">
+                <div class="checkbox col-md-7 input-group" style="padding-left: 35px;">
 					{{ Form::Checkbox('maintained', '1', Input::old('maintained', $license->maintained)) }}
 					@lang('general.yes')
 
