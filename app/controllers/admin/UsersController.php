@@ -453,10 +453,12 @@ class UsersController extends AdminController
     public function getView($userId = null)
     {
 
-        $user = Sentry::getUserProvider()->createModel()->with('assets','consumables','accessories','licenses','userloc','userlog')->find($userId);
+        $user = User::with('assets','assets.model','consumables','accessories','licenses','userloc')->find($userId);
+
+        $userlog = $user->userlog->load('assetlog','consumablelog','assetlog.model','licenselog','accessorylog','userlog','adminlog');
 
             if (isset($user->id)) {
-                return View::make('backend/users/view', compact('user'));
+                return View::make('backend/users/view', compact('user','userlog'));
             } else {
                 // Prepare the error message
                 $error = Lang::get('admin/users/message.user_not_found', compact('id' ));

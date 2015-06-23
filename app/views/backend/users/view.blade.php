@@ -238,7 +238,7 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($user->userlog as $log)
+                                    @foreach ($userlog as $log)
                                     <tr>
                                         <td>
                                             @if ($log->assetlog)
