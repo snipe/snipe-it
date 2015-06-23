@@ -643,6 +643,7 @@ class UsersController extends AdminController
                                 'email' => $row[3],
                                 'password' => $pass,
                                 'activated' => $activated,
+                                'location_id' => $row[4],
                                 'permissions'	=> '{"user":1}',
                                 'notes'     => 'Imported user'
                             );
