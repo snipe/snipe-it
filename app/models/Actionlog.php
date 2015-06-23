@@ -30,6 +30,11 @@ class Actionlog extends Eloquent
         return $this->belongsTo('Accessory','accessory_id')->withTrashed();
     }
 
+	public function consumablelog()
+    {
+        return $this->belongsTo('Consumable','consumable_id')->withTrashed();
+    }
+
     public function adminlog()
     {
         return $this->belongsTo('User','user_id')->withTrashed();
