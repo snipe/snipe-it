@@ -100,6 +100,7 @@ Route::group(array('prefix' => 'hardware', 'namespace' => 'Controllers\Admin', '
     Route::get('{assetId}/checkin/{backto?}', array('as' => 'checkin/hardware', 'uses' => 'AssetsController@getCheckin'));
     Route::post('{assetId}/checkin/{backto?}', 'AssetsController@postCheckin');
     Route::get('{assetId}/view', array('as' => 'view/hardware', 'uses' => 'AssetsController@getView'));
+    Route::get('{assetId}/qr-view', array('as' => 'qr-view/hardware', 'uses' => 'AssetsController@getView'));
     Route::get('{assetId}/qr_code', array('as' => 'qr_code/hardware', 'uses' => 'AssetsController@getQrCode'));
     Route::get('{assetId}/restore', array('as' => 'restore/hardware', 'uses' => 'AssetsController@getRestore'));
     Route::post('{assetId}/upload', array('as' => 'upload/asset', 'uses' => 'AssetsController@postUpload'));
