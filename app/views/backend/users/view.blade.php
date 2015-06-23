@@ -23,13 +23,13 @@
                     		({{{ $user->employee_num }}})
                         @endif</h3>
                     <span class="area">{{{ $user->jobtitle }}}
-                    
-                    
+
+
                         <!-- groups table -->
                         @if (count($user->groups) > 0)
 
                             @foreach ($user->groups as $group)
-                            <a href="{{ route('update/group', $group->id) }}" class="badge badge-default">{{{ $group->name }}}</a> 
+                            <a href="{{ route('update/group', $group->id) }}" class="badge badge-default">{{{ $group->name }}}</a>
                             @endforeach
 
                         @endif
@@ -97,7 +97,7 @@
 		                                        </td>
 		                                        <td><a href="{{ route('view/hardware', $asset->id) }}">{{{ $asset->asset_tag }}}</a></td>
 		                                        <td><a href="{{ route('view/hardware', $asset->id) }}">{{{ $asset->name }}}</a></td>
-		
+
 		                                        <td class="hidden-print"> <a href="{{ route('checkin/hardware', array('assetId'=> $asset->id, 'backto'=>'user')) }}" class="btn-flat info">Checkin</a></td>
 		                                    </tr>
 		                                    @endforeach
@@ -188,6 +188,38 @@
                             @endif
 
 
+                            <br>
+                            <h6>@lang('general.consumables')</h6>
+                            <br>
+                            <!-- checked out licenses table -->
+                            @if (count($user->consumables) > 0)
+                            <div class="table-responsive">
+							<table class="display table table-hover">
+                                <thead>
+                                    <tr>
+                                        <th class="col-md-5">Name</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach ($user->consumables as $consumable)
+                                    <tr>
+                                        <td><a href="{{ route('view/consumable', $consumable->id) }}">{{{ $consumable->name }}}</a></td>
+                                    </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
+                            </div>
+                            @else
+
+                            <div class="col-md-12">
+                                <div class="alert alert-info alert-block">
+                                    <i class="fa fa-info-circle"></i>
+                                    @lang('general.no_results')
+                                </div>
+                            </div>
+                            @endif
+
+
 
 							<br>
                             <h6>@lang('admin/users/general.history_user', array('name' => $user->first_name))</h6>
@@ -198,28 +230,72 @@
                             <table class="table table-hover">
                                 <thead>
                                     <tr>
+                                        <th class="col-md-1"></th>
                                         <th class="col-md-2">Date</th>
                                         <th class="col-md-2"><span class="line"></span>@lang('table.action')</th>
-                                        <th class="col-md-2"><span class="line"></span>@lang('general.asset')</th>
+                                        <th class="col-md-3"><span class="line"></span>@lang('general.asset')</th>
                                         <th class="col-md-2"><span class="line"></span>@lang('table.by')</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     @foreach ($user->userlog as $log)
                                     <tr>
+                                        <td>
+                                            @if ($log->assetlog)
+                                                <i class="fa fa-barcode"></i>
+                                            @elseif ($log->accessorylog)
+                                                <i class="fa fa-keyboard-o"></i>
+                                            @elseif ($log->consumablelog)
+                                                <i class="fa fa-tint"></i>
+                                            @elseif ($log->licenselog)
+                                                <i class="fa fa-certificate"></i>
+                                            @else
+                                            <i class="fa fa-times"></i>
+                                            @endif
+
+                                        </td>
                                         <td>{{{ $log->created_at }}}</td>
                                         <td>{{{ $log->action_type }}}</td>
                                         <td>
 
-                                        @if ((isset($log->assetlog->name)) && ($log->assetlog->deleted_at==''))
-                                            <a href="{{ route('view/hardware', $log->asset_id) }}">{{{ $log->assetlog->asset_tag }}}</a>
-                                        @elseif ((isset($log->assetlog->name)) && ($log->assetlog->deleted_at!=''))
-                                            <del>{{{ $log->assetlog->name }}}</del> (deleted)
+                                            @if ($log->assetlog)
 
-                                        @elseif ((isset($log->accessorylog->name)) && ($log->accessorylog->deleted_at==''))
-                                            {{{ $log->accessorylog->name }}}
+                                                @if ($log->assetlog->deleted_at=='')
+                                                    <a href="{{ route('view/hardware', $log->asset_id) }}">
+                                                        {{{ $log->assetlog->showAssetName() }}}
+                                                    </a>
+                                                @else
+                                                    <del>{{{ $log->assetlog->showAssetName() }}}</del> (deleted)
+                                                @endif
 
-                                        @endif
+                                            @elseif ($log->accessorylog)
+                                                @if ($log->accessorylog->deleted_at=='')
+                                                    <a href="{{ route('view/accessory', $log->accessory_id) }}">{{{ $log->accessorylog->name }}}</a>
+                                                @else
+                                                    <del>{{{ $log->accessorylog->name }}}</del> (deleted)
+                                                @endif
+
+                                            @elseif ($log->consumablelog)
+
+                                                @if ($log->consumablelog->deleted_at=='')
+                                                    <a href="{{ route('view/consumable', $log->consumable_id) }}">{{{ $log->consumablelog->name }}}</a>
+                                                @else
+                                                    <del>{{{ $log->consumablelog->name }}}</del> (deleted)
+                                                @endif
+
+                                            @elseif ($log->licenselog)
+                                                @if ($log->licenselog->deleted_at=='')
+                                                    <a href="{{ route('view/license', $log->license_id) }}">
+                                                        {{{ $log->licenselog->name }}}
+                                                    </a>
+                                                @else
+                                                    <del>{{{ $log->licenselog->name }}}</del> (deleted)
+                                                @endif
+
+                                            @else
+                                                Error. Maybe bad data?
+                                            @endif
+
                                         </td>
                                         <td>{{{ $log->adminlog->fullName() }}}</td>
                                     </tr>
@@ -239,12 +315,12 @@
                             @endif
                         </div>
                     </div>
-	
+
 
                     <!-- side address column -->
                     <div class="col-md-3 address pull-right hidden-print">
-	                    
-	                    
+
+
                         <h6> @lang('admin/users/general.contact_user', array('name' => $user->first_name)) </h6>
 
                         @if ($user->location_id)
@@ -273,14 +349,14 @@
                             {{{ $user->notes }}}</li>
                         </ul>
                         @endif
-                                               
+
 
                         @if ($user->last_login!='')
                         <br /><h6>@lang('admin/users/general.last_login')
                         {{{ $user->last_login->diffForHumans() }}}</h6>
                         @endif
-                        
-                    	
+
+
 
                     </div>
 
