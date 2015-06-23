@@ -119,9 +119,9 @@ class Asset extends Depreciable
     {
         return $this->belongsTo('Statuslabel','status_id');
     }
-	
-	/** 
-	* Get name for EULA 
+
+	/**
+	* Get name for EULA
 	**/
 	public function showAssetName()
     {
@@ -131,7 +131,7 @@ class Asset extends Depreciable
 		    return $this->name;
 	    }
     }
-    
+
      public function warrantee_expires()
     {
             $date = date_create($this->purchase_date);
@@ -147,8 +147,9 @@ class Asset extends Depreciable
     public static function getExpiringWarrantee($days = 30) {
 
 	    return Asset::where('archived','=','0')
-		->whereNotNUll('warranty_months')
-		->whereNotNUll('purchase_date')
+		->whereNotNull('warranty_months')
+		->whereNotNull('purchase_date')
+		->whereNull('deleted_at')
 		->whereRaw(DB::raw('DATE_ADD(`purchase_date`,INTERVAL `warranty_months` MONTH) <= DATE(NOW() + INTERVAL '.$days .' DAY) AND DATE_ADD(`purchase_date`,INTERVAL `warranty_months` MONTH) > NOW()'))
 		->orderBy('purchase_date', 'ASC')
 		->get();
@@ -175,7 +176,7 @@ class Asset extends Depreciable
     {
         return $this->belongsTo('Supplier','supplier_id');
     }
-    
+
 
     public function months_until_eol()
     {
