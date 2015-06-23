@@ -453,7 +453,7 @@ class UsersController extends AdminController
     public function getView($userId = null)
     {
 
-        $user = Sentry::getUserProvider()->createModel()->find($userId);
+        $user = Sentry::getUserProvider()->createModel()->with('assets','consumables','accessories','licenses','userloc','userlog')->find($userId);
 
             if (isset($user->id)) {
                 return View::make('backend/users/view', compact('user'));
