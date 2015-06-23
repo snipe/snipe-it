@@ -29,7 +29,7 @@
                         @if (count($user->groups) > 0)
 
                             @foreach ($user->groups as $group)
-                            <a href="{{ route('update/group', $group->id) }}" class="badge badge-default">{{{ $group->name }}}</a>
+                            <a href="{{ route('update/group', $group->id) }}" class="label label-default">{{{ $group->name }}}</a>
                             @endforeach
 
                         @endif
@@ -197,8 +197,8 @@
 							<table class="display table table-hover">
                                 <thead>
                                     <tr>
-                                        <th class="col-md-9">@lang('general.name')</th>
-                                        <th class="col-md-3">@lang('general.date')</th>
+                                        <th class="col-md-8">@lang('general.name')</th>
+                                        <th class="col-md-4">@lang('general.date')</th>
                                     </tr>
                                 </thead>
                                 <tbody>
