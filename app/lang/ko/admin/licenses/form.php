@@ -15,6 +15,7 @@ return array(
     'notes'             => '비고',
     'order'             => '주문 번호.',
     'purchase_order'    => '구매 주문 번호',
+    'reassignable'      => 'Reassignable',
     'remaining_seats'   => '잔여 Seats',
     'seats'             => 'Seats',
     'serial'            => '일련번호',

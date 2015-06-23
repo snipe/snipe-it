@@ -15,6 +15,7 @@ return array(
     'notes'             => 'Примечания',
     'order'             => 'Номер заказа',
     'purchase_order'    => 'Номер заказа на поставку',
+    'reassignable'      => 'Reassignable',
     'remaining_seats'   => 'Осталось лицезий',
     'seats'             => 'Количество рабочих мест',
     'serial'            => 'Серийный номер',

@@ -9,6 +9,7 @@ return array(
     'deployable'  				=> 'Desplegable',
     'deleted'  					=> 'Este equipo ha sido eliminado. <a href="/hardware/:asset_id/restore">Click aqui para restaurarlot</a>.',
     'edit'  					=> 'Editar Equipo',
+	'filetype_info'				=> 'Allowed filetypes are png, gif, jpg, jpeg, doc, docx, pdf, txt, zip, and rar.',
     'model_deleted'  			=> 'Este modelo de equipo ha sido borrado. Debe restaurar el modelo antes de poder restaurar el equipo.<br/><a href="/hardware/models/:model_id/restore">Hacer click aquí para restaurar el modelo</a>.',
     'requestable'				=> 'Requerible',
     'restore'  					=> 'Restaurar equipo',

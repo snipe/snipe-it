@@ -15,6 +15,7 @@ return array(
     'notes'             => 'Muistiinpanot',
     'order'             => 'Tilausnumero',
     'purchase_order'    => 'Ostotilausnumero',
+    'reassignable'      => 'Reassignable',
     'remaining_seats'   => 'Jäljellä olevat käyttäjät',
     'seats'             => 'Käyttäjien lkm',
     'serial'            => 'Sarjanumero',

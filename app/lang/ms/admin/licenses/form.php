@@ -15,6 +15,7 @@ return array(
     'notes'             => 'Nota',
     'order'             => 'No. Pesanan',
     'purchase_order'    => 'Nombor Pesanan Belian',
+    'reassignable'      => 'Reassignable',
     'remaining_seats'   => 'Baki Kekosongan',
     'seats'             => 'Kekosongan',
     'serial'            => 'Siri',

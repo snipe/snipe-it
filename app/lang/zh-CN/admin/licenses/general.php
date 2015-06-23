@@ -6,6 +6,7 @@ return array(
     'checkout_history'  		=> '借出历史记录',
     'checkout'  				=> '借出许可证数量',
     'edit'  					=> '编辑许可证',
+    'filetype_info'				=> 'Allowed filetypes are png, gif, jpg, jpeg, doc, docx, pdf, txt, zip, and rar.',
     'clone'  					=> '克隆许可证',
     'history_for'  				=> '历史记录',
     'in_out'  					=> '进/出',

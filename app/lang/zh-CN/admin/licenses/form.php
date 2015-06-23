@@ -15,6 +15,7 @@ return array(
     'notes'             => '备注',
     'order'             => '订单号',
     'purchase_order'    => '采购订单号码',
+    'reassignable'      => 'Reassignable',
     'remaining_seats'   => '剩余次数',
     'seats'             => '允许使用次数',
     'serial'            => '序列号',

@@ -15,6 +15,7 @@ return array(
     'notes'             => 'Notizen',
     'order'             => 'Bestellnr.',
     'purchase_order'    => 'Bestellnummer',
+    'reassignable'      => 'Reassignable',
     'remaining_seats'   => 'Verbleibende Aktivierungen',
     'seats'             => 'Anzahl Aktivierungen',
     'serial'            => 'Seriennummer',
