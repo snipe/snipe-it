@@ -154,8 +154,17 @@
             <div class="form-group {{ $errors->has('status_id') ? ' has-error' : '' }}">
                 <label for="status_id" class="col-md-2 control-label">@lang('admin/hardware/form.status') <i class='fa fa-asterisk'></i></label>
                     <div class="col-md-7">
-                        {{ Form::select('status_id', $statuslabel_list , Input::old('status_id', $asset->status_id), array('class'=>'select2', 'style'=>'width:350px')) }}
-                        {{ $errors->first('status_id', '<br><span class="alert-msg"><i class="fa fa-times"></i> :message</span>') }}
+                        @if ($asset->assigned_to == '')
+                            {{ Form::select('status_id', $statuslabel_list , Input::old('status_id', $asset->status_id), array('class'=>'select2', 'style'=>'width:350px')) }}
+                            {{ $errors->first('status_id', '<br><span class="alert-msg"><i class="fa fa-times"></i> :message</span>') }}
+                        @else
+                            @if ($asset->assigneduser)
+                                Checked out to {{{ $asset->assigneduser->fullName() }}}
+                            @endif
+
+                        @endif
+
+
                     </div>
             </div>
 
