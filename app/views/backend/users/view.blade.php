@@ -227,7 +227,7 @@
                             <!-- checked out assets table -->
                             @if (count($user->userlog) > 0)
                             <div class="table-responsive">
-                            <table class="table table-hover">
+                            <table class="table table-hover" id="example">
                                 <thead>
                                     <tr>
                                         <th class="col-md-1"></th>
@@ -240,7 +240,7 @@
                                 <tbody>
                                     @foreach ($userlog as $log)
                                     <tr>
-                                        <td>
+                                        <td class="text-center">
                                             @if ($log->assetlog)
                                                 <i class="fa fa-barcode"></i>
                                             @elseif ($log->accessorylog)
