@@ -60,8 +60,6 @@
                             @lang('general.bad_data')
 			            @endif
 
-                        {{ $activity->licenselog }}
-
 			           	</td>
 			       <td>
 				       {{ strtolower(Lang::get('general.'.str_replace(' ','_',$activity->action_type))) }}
