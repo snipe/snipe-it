@@ -293,7 +293,7 @@
                                                 @endif
 
                                             @else
-                                                Error. Maybe bad data?
+                                                @lang('general.bad_data')
                                             @endif
 
                                         </td>

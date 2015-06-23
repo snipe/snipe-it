@@ -56,6 +56,8 @@
     			            {{ $activity->consumablelog->name }}
 			            @elseif (($activity->accessorylog) && ($activity->asset_type=="accessory"))
 			            	{{ $activity->accessorylog->name }}
+                        @else
+                            @lang('general.bad_data')
 			            @endif
 
                         {{ $activity->licenselog }}
