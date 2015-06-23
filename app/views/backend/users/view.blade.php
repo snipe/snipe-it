@@ -197,13 +197,15 @@
 							<table class="display table table-hover">
                                 <thead>
                                     <tr>
-                                        <th class="col-md-5">Name</th>
+                                        <th class="col-md-9">@lang('general.name')</th>
+                                        <th class="col-md-3">@lang('general.date')</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     @foreach ($user->consumables as $consumable)
                                     <tr>
                                         <td><a href="{{ route('view/consumable', $consumable->id) }}">{{{ $consumable->name }}}</a></td>
+                                        <td>{{{ $consumable->created_at }}}</td>
                                     </tr>
                                     @endforeach
                                 </tbody>
