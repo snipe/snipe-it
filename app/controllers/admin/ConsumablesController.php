@@ -378,16 +378,12 @@ class ConsumablesController extends AdminController
 		$consumable = Consumable::find($consumableID);
         $consumable_users = $consumable->users;
 
-		$actions = new \Chumper\Datatable\Columns\FunctionColumn('actions',function($consumable_users){
-			return '<a href="'.route('checkin/consumable', $consumable_users->pivot->id).'" class="btn-flat info">Checkin</a>';
-		});
 
 		return Datatable::collection($consumable_users)
 		->addColumn('name',function($consumable_users)
 			{
 				return link_to('/admin/users/'.$consumable_users->id.'/view', $consumable_users->fullName());
 			})
-		->addColumn($actions)
 		->make();
     }
 
