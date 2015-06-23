@@ -122,7 +122,7 @@ return array(
     'update'                => 'Update',
     'uploaded'              => 'Uploaded',
     'user'					=> 'User',
-    'users'                 => 'Update',
+    'users'                 => 'Users',
     'viewassets'  			=> 'View Assigned Assets',
     'website'               => 'Website',
     'welcome'				=> 'Welcome, :name',
