@@ -52,11 +52,13 @@
 			            	{{ $activity->assetlog->showAssetName() }}
 			            @elseif (($activity->licenselog) && ($activity->asset_type=="software"))
 			            	{{ $activity->licenselog->name }}
-                        @elseif (($activity->assetlog) && ($activity->asset_type=="consumable"))
+                        @elseif (($activity->consumablelog) && ($activity->asset_type=="consumable"))
     			            {{ $activity->consumablelog->name }}
-			            @elseif (($activity->asset_type) && ($activity->asset_type=="accessory"))
+			            @elseif (($activity->accessorylog) && ($activity->asset_type=="accessory"))
 			            	{{ $activity->accessorylog->name }}
 			            @endif
+
+                        {{ $activity->licenselog }}
 
 			           	</td>
 			       <td>
