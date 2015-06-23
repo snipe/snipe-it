@@ -29,7 +29,7 @@
     </div>
     <div class="col-md-9 chart">
         <h5>@lang('general.recent_activity')</h5>
-        
+
         <table class="table table-hover table-fixed break-word">
 			<thead>
 			    <tr>
@@ -44,30 +44,32 @@
 			@if (count($recent_activity) > 0)
 				@foreach ($recent_activity as $activity)
 			    <tr>
-			       <td>{{{ date("M d", strtotime($activity->created_at)) }}}</td> 
-			       <td>{{{ $activity->adminlog->fullName() }}}</td> 
-			       
+			       <td>{{{ date("M d", strtotime($activity->created_at)) }}}</td>
+			       <td>{{{ $activity->adminlog->fullName() }}}</td>
+
 			       <td>
 			           	@if (($activity->assetlog) && ($activity->asset_type=="hardware"))
 			            	{{ $activity->assetlog->showAssetName() }}
 			            @elseif (($activity->licenselog) && ($activity->asset_type=="software"))
 			            	{{ $activity->licenselog->name }}
+                        @elseif (($activity->assetlog) && ($activity->asset_type=="consumable"))
+    			            {{ $activity->consumablelog->name }}
 			            @elseif (($activity->asset_type) && ($activity->asset_type=="accessory"))
 			            	{{ $activity->accessorylog->name }}
 			            @endif
-			           	
-			           	</td> 
-			       <td>  
-				       {{ strtolower(Lang::get('general.'.str_replace(' ','_',$activity->action_type))) }}
-			       </td> 
+
+			           	</td>
 			       <td>
-			           @if ($activity->userlog) 
+				       {{ strtolower(Lang::get('general.'.str_replace(' ','_',$activity->action_type))) }}
+			       </td>
+			       <td>
+			           @if ($activity->userlog)
 			           		{{{ $activity->userlog->fullName() }}}
 			           	@endif
-			           	
-			           </td> 
-			       
-			       
+
+			           </td>
+
+
 			    </tr>
 			   @endforeach
 			@endif
@@ -78,7 +80,7 @@
     </div>
     <div class="col-md-3 chart">
         <h5>@lang('general.asset') @lang('general.status')</h5>
-        <div id="hero-assets" style="height: 250px;"></div>    
+        <div id="hero-assets" style="height: 250px;"></div>
     </div>
 
 
@@ -96,7 +98,7 @@
             element: 'hero-assets',
             data: [
 	            {label: '@lang('general.ready_to_deploy')', value: {{ $asset_stats['rtd']['percent'] }} },
-                {label: '@lang('general.deployed')', value: {{ $asset_stats['deployed']['percent'] }} },              
+                {label: '@lang('general.deployed')', value: {{ $asset_stats['deployed']['percent'] }} },
                 {label: '@lang('general.pending')', value: {{ $asset_stats['pending']['percent'] }} },
                 {label: '@lang('general.undeployable')', value: {{ $asset_stats['undeployable']['percent'] }} },
                 {label: '@lang('general.archived')', value: {{ $asset_stats['archived']['percent'] }} },
@@ -105,7 +107,7 @@
             formatter: function (y) { return y + "%" }
         });
 
-   
+
     </script>
 
 
