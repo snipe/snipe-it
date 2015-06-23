@@ -29,25 +29,14 @@
 			@if ($consumable->name)
             <!-- consumable name -->
             <div class="form-group">
-            <label class="col-sm-3 control-label">@lang('admin/accessories/general.consumable_name')</label>
+            <label class="col-sm-3 control-label">@lang('admin/consumables/general.consumable_name')</label>
                 <div class="col-md-6">
                   <p class="form-control-static">{{{ $consumable->name }}}</p>
                 </div>
             </div>
             @endif
 
-            @if ($consumable->category->name)
-            <!-- consumable name -->
-            <div class="form-group">
-            <label class="col-sm-3 control-label">@lang('admin/accessories/general.consumable_category')</label>
-                <div class="col-md-6">
-                  <p class="form-control-static">{{{ $consumable->category->name }}}</p>
-                </div>
-            </div>
-            @endif
-
-
-
+    
             <!-- User -->
 
             <div class="form-group {{ $errors->has('assigned_to') ? ' has-error' : '' }}">
