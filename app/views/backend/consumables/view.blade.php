@@ -3,8 +3,8 @@
 {{-- Page title --}}
 @section('title')
 
- {{{ $accessory->name }}}
- @lang('general.accessory') ::
+ {{{ $consumable->name }}}
+ @lang('general.consumable') ::
 @parent
 @stop
 
@@ -17,8 +17,8 @@
         <div class="btn-group pull-right">
            <a href="{{ URL::previous() }}" class="btn-flat gray pull-right"><i class="fa fa-arrow-left icon-white"></i>  @lang('general.back')</a>        </div>
         <h3>
-            {{{ $accessory->name }}}
- @lang('general.accessory')
+            {{{ $consumable->name }}}
+ @lang('general.consumable')
 
         </h3>
     </div>
@@ -29,14 +29,13 @@
 <div class="col-md-9 bio">
 
 
-                            <!-- checked out accessories table -->
-                            @if ($accessory->users->count() > 0)
-                             {{ Datatable::table()
-                ->addColumn(Lang::get('general.user'), 
-                            Lang::get('table.actions'))
+        <!-- checked out consumables table -->
+        @if ($consumable->users->count() > 0)
+         {{ Datatable::table()
+                ->addColumn(Lang::get('general.user'))
                 ->setOptions(
                         array(
-                            'sAjaxSource'=>route('api.accessories.view', $accessory->id),
+                            'sAjaxSource'=>route('api.consumables.view', $consumable->id),
                             'dom' =>'T<"clear">lfrtip',
                             'tableTools' => array(
                                 'sSwfPath'=> Config::get('app.url').'/assets/swf/copy_csv_xls_pdf.swf',
@@ -60,33 +59,33 @@
                                             ),
                                         ),
                                     ),
-                                ) 
+                                )
                             ),
                             'columnDefs'=> array(
-                                array('bSortable'=>false,'targets'=>array(1)),
-                                array('width'=>'auto','targets'=>array(1)),
+                                
+                                array('width'=>'auto','targets'=>array(0)),
                                 ),
                             'order'=>array(array(0,'asc')),
                         )
                     )
                 ->render() }}
 
-                            @else
-                            <div class="col-md-9">
-                                <div class="alert alert-info alert-block">
-                                    <i class="fa fa-info-circle"></i>
-                                    @lang('general.no_results')
-                                </div>
-                            </div>
-                            @endif
+        @else
+        <div class="col-md-9">
+            <div class="alert alert-info alert-block">
+                <i class="fa fa-info-circle"></i>
+                @lang('general.no_results')
+            </div>
+        </div>
+        @endif
 
-                        </div>
+    </div>
 
 <!-- side address column -->
 <div class="col-md-3 col-xs-12 address pull-right">
     <br /><br />
-    <h6>@lang('admin/accessories/general.about_accessories_title')</h6>
-    <p>@lang('admin/accessories/general.about_accessories_text') </p>
+    <h6>@lang('admin/consumables/general.about_consumables_title')</h6>
+    <p>@lang('admin/consumables/general.about_consumables_text') </p>
 
 </div>
 
