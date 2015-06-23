@@ -21,6 +21,7 @@ return array(
     'avatar_delete'         => 'Delete Avatar',
     'avatar_upload'         => 'Upload Avatar',
     'back'      			=> 'Back',
+    'bad_data'      		=> 'Nothing found. Maybe bad data?',
     'cancel'  				=> 'Cancel',
     'categories'			=> 'Categories',
     'category'				=> 'Category',
