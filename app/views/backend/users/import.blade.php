@@ -41,6 +41,10 @@ Create a User ::
 				Upload a CSV file with one or more users.  Passwords will be auto-generated.  The CSV should have the <strong>first</strong> fields as: <strong>firstName,lastName,username,email, location_id</strong>. Any additional fields to the right of those fields will be ignored. Email is optional, however users will not be able to recover their passwords or receive EULAs if you do not provide an email address.
 			</p>
 
+            @if (Config::get('app.lock_passwords'))
+                <p>Note: Email notification for users is disabled for this installation.</p>
+            @endif
+
             <div class="form-group {{ $errors->first('user_import_csv', 'has-error') }}">
                 <label for="first_name" class="col-sm-2 control-label">@lang('admin/users/general.usercsv')</label>
 				<div class="col-sm-5">

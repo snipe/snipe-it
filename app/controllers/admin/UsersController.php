@@ -659,7 +659,7 @@ class UsersController extends AdminController
 						    $updateuser->save();
 
 
-							if (Input::get('email_user')==1) {
+							if (((Input::get('email_user')==1) && !Config::get('app.lock_passwords'))) {
 								// Send the credentials through email
                                 if ($row[3]!='') {
     								$data = array();
