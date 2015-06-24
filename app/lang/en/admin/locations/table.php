@@ -12,4 +12,5 @@ return array(
     'address'		=> 'Address',
     'zip'			=> 'Postal Code',
     'locations'		=> 'Locations',
+    'parent'		=> 'Parent',
 );
