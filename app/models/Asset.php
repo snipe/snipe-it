@@ -7,7 +7,7 @@ class Asset extends Depreciable
 
     protected $table = 'assets';
     protected $errors;
-    protected $rules = array(
+    protected $rules = [
         'name'   			=> 'alpha_space|min:2|max:255',
         'model_id'   		=> 'required',
 		'status_id'   		=> 'required',
@@ -20,7 +20,7 @@ class Asset extends Depreciable
         'supplier_id' 		=> 'integer',
         'asset_tag'   		=> 'required|alpha_space|min:3|max:255|unique:assets,asset_tag,{id}',
         'status' 			=> 'integer'
-        );
+        ];
 
     public function depreciation()
     {
@@ -77,6 +77,21 @@ class Asset extends Depreciable
     public function assetlog()
     {
         return $this->hasMany('Actionlog','asset_id')->where('asset_type','=','hardware')->orderBy('created_at', 'desc')->withTrashed();
+    }
+
+    /**
+     * improvement
+     * Get improvements for this asset
+     * @return mixed
+     * @author  Vincent Sposato <vincent.sposato@gmail.com>
+     * @version v1.0
+     */
+    public function improvement()
+    {
+
+        return $this->hasMany( 'Improvement', 'asset_id' )
+                    ->orderBy( 'created_at', 'desc' )
+                    ->withTrashed();
     }
 
     /**
