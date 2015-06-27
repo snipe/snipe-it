@@ -82,15 +82,15 @@
                             } )
                             ->addColumn( 'start_date', function ( $improvements ) {
 
-                                return $improvements->start_date;
+                                return $improvements->start_date->toDateString();
                             } )
                             ->addColumn( 'completion_date', function ( $improvements ) {
 
-                                return $improvements->completion_date;
+                                return $improvements->completion_date->toDateString();
                             } )
                             ->addColumn( 'cost', function ( $improvements ) {
 
-                                return $improvements->cost;
+                                return sprintf( Lang::get( 'general.currency' ) . '%01.2f', $improvements->cost);
                             } )
                             ->addColumn( $actions )
                             ->searchColumns( 'asset', 'supplier', 'improvement_type', 'title', 'start_date',

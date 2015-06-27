@@ -1,3 +1,6 @@
+<?php
+use Carbon\Carbon;
+?>
 @extends('backend/layouts/default')
 
 {{-- Page title --}}
@@ -25,86 +28,144 @@
 <div class="col-md-9 bio">
     <div class="profile-box">
 
-                            <!-- checked out suppliers table -->
-                            <h6>Assets</h6>
-                            <br>
-                            @if (count($supplier->assets) > 0)
-                           <table id="example">
-                            <thead>
-                                <tr role="row">
-                                        <th class="col-md-3">Name</th>
-                                        <th class="col-md-3">Asset Tag</th>
-                                        <th class="col-md-3">User</th>
-                                        <th class="col-md-2">Actions</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
+            <!-- checked out suppliers table -->
+            <h6>Assets</h6>
+            <br>
+            @if (count($supplier->assets) > 0)
+           <table id="example">
+            <thead>
+                <tr role="row">
+                        <th class="col-md-3">Name</th>
+                        <th class="col-md-3">Asset Tag</th>
+                        <th class="col-md-3">User</th>
+                        <th class="col-md-2">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
 
-                                    @foreach ($supplier->assets as $supplierassets)
-                                    <tr>
-                                        <td><a href="{{ route('view/hardware', $supplierassets->id) }}">{{{ $supplierassets->name }}}</a></td>
-                                        <td><a href="{{ route('view/hardware', $supplierassets->id) }}">{{{ $supplierassets->asset_tag }}}</a></td>
-                                        <td>
-                                        @if ($supplierassets->assigneduser)
-                                        <a href="{{ route('view/user', $supplierassets->assigned_to) }}">
-                                        {{{ $supplierassets->assigneduser->fullName() }}}
-                                        </a>
-                                        @endif
-                                        </td>
-                                        <td>
-                                        @if ($supplierassets->assigned_to != '')
-                                            <a href="{{ route('checkin/hardware', $supplierassets->id) }}" class="btn-flat info">Checkin</a>
-                                        @else
-                                            <a href="{{ route('checkout/hardware', $supplierassets->id) }}" class="btn-flat success">Checkout</a>
-                                        @endif
-                                        </td>
+                    @foreach ($supplier->assets as $supplierassets)
+                    <tr>
+                        <td><a href="{{ route('view/hardware', $supplierassets->id) }}">{{{ $supplierassets->name }}}</a></td>
+                        <td><a href="{{ route('view/hardware', $supplierassets->id) }}">{{{ $supplierassets->name }}}</a></td>
+                        <td><a href="{{ route('view/hardware', $supplierassets->id) }}">{{{ $supplierassets->asset_tag }}}</a></td>
+                        <td>
+                        @if ($supplierassets->assigneduser)
+                        <a href="{{ route('view/user', $supplierassets->assigned_to) }}">
+                        {{{ $supplierassets->assigneduser->fullName() }}}
+                        </a>
+                        @endif
+                        </td>
+                        <td>
+                        @if ($supplierassets->assigned_to != '')
+                            <a href="{{ route('checkin/hardware', $supplierassets->id) }}" class="btn-flat info">Checkin</a>
+                        @else
+                            <a href="{{ route('checkout/hardware', $supplierassets->id) }}" class="btn-flat success">Checkout</a>
+                        @endif
+                        </td>
 
-                                    </tr>
-                                    @endforeach
+                    </tr>
+                    @endforeach
 
 
-                                </tbody>
-                            </table>
+                </tbody>
+            </table>
 
-                            @else
-                            <div class="col-md-12">
-                                <div class="alert alert-info alert-block">
-                                    <i class="fa fa-info-circle"></i>
-                                    @lang('general.no_results')
-                                </div>
-                            </div>
-                            @endif
-                            <br>
-                            <br>
-                            <h6>Software</h6>
-                            <br>
-                            @if (count($supplier->licenses) > 0)
-                            <table class="table table-hover">
-                                <thead>
-                                    <tr>
-                                        <th class="col-md-4"><span class="line"></span>Name</th>
-                                        <th class="col-md-4"><span class="line"></span>Serial</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    @foreach ($supplier->licenses as $license)
-                                    <tr>
-                                        <td><a href="{{ route('view/license', $license->id) }}">{{{ $license->name }}}</a></td>
-                                        <td><a href="{{ route('view/license', $license->id) }}">{{{ $license->serial }}}</a></td>
-                                        </td>
-                                    </tr>
-                                    @endforeach
-                                </tbody>
-                            </table>
-                            @else
+            @else
+            <div class="col-md-12">
+                <div class="alert alert-info alert-block">
+                    <i class="fa fa-info-circle"></i>
+                    @lang('general.no_results')
+                </div>
+            </div>
+            @endif
+            <br>
+            <br>
+            <h6>Software</h6>
+            <br>
+            @if (count($supplier->licenses) > 0)
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th class="col-md-4"><span class="line"></span>Name</th>
+                        <th class="col-md-4"><span class="line"></span>Serial</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach ($supplier->licenses as $license)
+                    <tr>
+                        <td><a href="{{ route('view/license', $license->id) }}">{{{ $license->name }}}</a></td>
+                        <td><a href="{{ route('view/license', $license->id) }}">{{{ $license->serial }}}</a></td>
+                        </td>
+                    </tr>
+                    @endforeach
+                </tbody>
+            </table>
+            @else
 
-                            <div class="col-md-12">
-                                <div class="alert alert-info alert-block">
-                                    <i class="fa fa-info-circle"></i>
-                                    @lang('general.no_results')
-                                </div>
-                            </div>
-                            @endif
+            <div class="col-md-12">
+                <div class="alert alert-info alert-block">
+                    <i class="fa fa-info-circle"></i>
+                    @lang('general.no_results')
+                </div>
+            </div>
+            @endif
+            <!-- Improvements -->
+            <br>
+            <br>
+            <h6>Improvements</h6>
+            <br>
+            <!-- Improvement table -->
+            @if (count($supplier->improvements) > 0)
+                <table class="table table-hover">
+                    <thead>
+                    <tr>
+                        <th class="col-md-2"><span class="line"></span>@lang('admin/improvements/table.asset_name')</th>
+                        <th class="col-md-2"><span class="line"></span>@lang('admin/improvements/form.improvement_type')</th>
+                        <th class="col-md-2"><span class="line"></span>@lang('admin/improvements/form.start_date')</th>
+                        <th class="col-md-2"><span class="line"></span>@lang('admin/improvements/form.completion_date')</th>
+                        <th class="col-md-2"><span class="line"></span>@lang('admin/improvements/table.is_warranty')</th>
+                        <th class="col-md-2"><span class="line"></span>@lang('admin/improvements/form.cost')</th>
+                        <th class="col-md-1"><span class="line"></span>@lang('table.actions')</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <?php $totalCost = 0; ?>
+                    @foreach ($supplier->improvements as $improvement)
+                        @if (is_null($improvement->deleted_at))
+                            <tr>
+                                <td><a href="{{ route('view/hardware', $improvement->asset_id) }}">{{{ $improvement->asset->name }}}</a></td>
+                                <td>{{{ $improvement->improvement_type }}}</td>
+                                <td>{{{ Carbon::parse($improvement->start_date)->toDateString() }}}</td>
+                                <td>{{{ Carbon::parse($improvement->completion_date)->toDateString() }}}</td>
+                                <td>{{{ $improvement->is_warranty ? "Warranty" : "Not Warranty" }}}</td>
+                                <td>{{{ sprintf( Lang::get( 'general.currency' ) . '%01.2f', $improvement->cost) }}}</td>
+                                <?php $totalCost += $improvement->cost; ?>
+                                <td><a href="{{ route('update/improvement', $improvement->id) }}" class="btn btn-warning"><i class="fa fa-pencil icon-white"></i></a>
+                                </td>
+                            </tr>
+                        @endif
+                    @endforeach
+                    </tbody>
+                    <tfoot>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td>{{{sprintf(Lang::get( 'general.currency' ) . '%01.2f', $totalCost)}}}</td>
+                    </tr>
+                    </tfoot>
+                </table>
+            @else
+                <div class="col-md-12">
+                    <div class="alert alert-info alert-block">
+                        <i class="fa fa-info-circle"></i>
+                        @lang('general.no_results')
+                    </div>
+                </div>
+            @endif
+
     </div>
 </div>
 
