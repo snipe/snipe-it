@@ -81,7 +81,7 @@ class Asset extends Depreciable
      * @author  Vincent Sposato <vincent.sposato@gmail.com>
      * @version v1.0
      */
-    public function improvement()
+    public function improvements()
     {
 
         return $this->hasMany( 'Improvement', 'asset_id' )
