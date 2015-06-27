@@ -309,6 +309,14 @@
                 </a>
 
             </li>
+            <li{{ (Request::is('admin/improvements*') ? ' class="active"><div class="pointer"><div class="arrow"></div><div class="arrow_border"></div></div>' : '>') }}
+            <a href="{{ URL::to('admin/improvements') }}"  >
+                <i class="fa fa-stethoscope"></i>
+                <span>@lang('general.improvements')</span>
+
+            </a>
+
+            </li>
             <li{{ (Request::is('admin/users*') ? ' class="active"><div class="pointer"><div class="arrow"></div><div class="arrow_border"></div></div>' : '>') }}
                 <a href="{{ URL::to('admin/users') }}">
                     <i class="fa fa-users"></i>
