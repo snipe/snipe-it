@@ -50,12 +50,12 @@
 		@if ($asset->model->deleted_at!='')
             <div class="alert alert-warning alert-block">
 				<i class="fa fa-warning"></i>
-				@lang('admin/hardware/general.model_deleted', array('model_id' => $asset->model->id))
+				@lang('admin/hardware/general.model_deleted', ['model_id' => $asset->model->id])
 			</div>
         @elseif ($asset->deleted_at!='')
 			<div class="alert alert-warning alert-block">
 				<i class="fa fa-warning"></i>
-				@lang('admin/hardware/general.deleted', array('asset_id' => $asset->id))
+				@lang('admin/hardware/general.deleted', ['asset_id' => $asset->id])
 			</div>
 		@endif
 
@@ -192,127 +192,177 @@
 			</div>
 		</div>
 		@endif
-
-
-		<div class="col-md-12">
-
-
- 	<h6>@lang('general.file_uploads') [ <a href="#" data-toggle="modal" data-target="#uploadFileModal">@lang('button.add')</a> ]</h6>
-
-
- 	<table class="table table-hover">
-                    <thead>
-                        <tr>
-                            <th class="col-md-5">@lang('general.notes')</th>
-                            <th class="col-md-5"><span class="line"></span>@lang('general.file_name')</th>
-                            <th class="col-md-2"></th>
-                            <th class="col-md-2"></th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @if (count($asset->uploads) > 0)
-							@foreach ($asset->uploads as $file)
-							<tr>
-								<td>
-									@if ($file->note) {{{ $file->note }}}
-									@endif
-								</td>
-								<td>
-								{{{ $file->filename }}}
-								</td>
-								<td>
-									@if ($file->filename)
-									<a href="{{ route('show/assetfile', [$asset->id, $file->id]) }}" class="btn btn-default">@lang('general.download')</a>
-									@endif
-								</td>
-								<td>
-									<a class="btn delete-asset btn-danger btn-sm" href="{{ route('delete/assetfile', [$asset->id, $file->id]) }}"><i class="fa fa-trash icon-white"></i></a>
-								</td>
-							</tr>
-							@endforeach
-						@else
-							<tr>
-								<td colspan="4">
-									@lang('general.no_results')
-								</td>
-							</tr>
-
-                        @endif
-
-                    </tbody>
-        </table>
-
 </div>
-
-
-
-
-        <!-- checked out assets table -->
-
-        <table class="table table-hover table-fixed break-word">
+<!-- Improvements -->
+<div class="col-md-12">
+    <h6>Improvements</h6>
+    <br>
+    <div class="row header">
+        <div class="col-md-12">
+            <a href="{{ route('create/improvements', $asset->id) }}" class="btn btn-success pull-right"><i class="fa fa-plus icon-white"></i> New Improvement</a>
+            <h3>@lang('admin/improvements/general.improvements')</h3>
+        </div>
+    </div>
+    <!-- Improvement table -->
+    @if (count($asset->improvements) > 0)
+        <table class="table table-hover">
             <thead>
-                <tr>
-                    <th class="col-md-3">@lang('general.date')</th>
-                    <th class="col-md-2"><span class="line"></span>@lang('general.admin')</th>
-                    <th class="col-md-2"><span class="line"></span>@lang('table.actions')</th>
-                    <th class="col-md-2"><span class="line"></span>@lang('general.user')</th>
-                    <th class="col-md-3"><span class="line"></span>@lang('general.notes')</th>
-                </tr>
+            <tr>
+                <th class="col-md-2"><span class="line"></span>@lang('admin/improvements/table.supplier_name')</th>
+                <th class="col-md-2"><span class="line"></span>@lang('admin/improvements/form.improvement_type')</th>
+                <th class="col-md-2"><span class="line"></span>@lang('admin/improvements/form.start_date')</th>
+                <th class="col-md-2"><span class="line"></span>@lang('admin/improvements/form.completion_date')</th>
+                <th class="col-md-2"><span class="line"></span>@lang('admin/improvements/table.is_warranty')</th>
+                <th class="col-md-2"><span class="line"></span>@lang('admin/improvements/form.cost')</th>
+                <th class="col-md-1"><span class="line"></span>@lang('table.actions')</th>
+            </tr>
             </thead>
             <tbody>
-            @if (count($asset->assetlog) > 0)
-                @foreach ($asset->assetlog as $log)
-
+            <?php $totalCost = 0; ?>
+            @foreach ($asset->improvements as $improvement)
+                @if (is_null($improvement->deleted_at))
                 <tr>
-                    <td>{{{ $log->created_at }}}</td>
-                    <td>
-                        @if (isset($log->user_id))
-                        {{{ $log->adminlog->fullName() }}}
-                        @endif
-                    </td>
-                    <td>{{ $log->action_type }}</td>
-                    <td>
-                        @if ((isset($log->checkedout_to)) && ($log->checkedout_to!=0) && ($log->checkedout_to!=''))
-
-	                        @if ($log->userlog->deleted_at=='')
-		                        <a href="{{ route('view/user', $log->checkedout_to) }}">
-		                        {{{ $log->userlog->fullName() }}}
-		                         </a>
-		                    @else
-		 						<del>{{{ $log->userlog->fullName() }}}</del>
-	                        @endif
-
-                        @endif
-                    </td>
-                    <td>
-                        @if ($log->note) {{{ $log->note }}}
-                        @endif
+                    <td><a href="{{ route('view/supplier', $improvement->supplier_id) }}">{{{ $improvement->supplier->name }}}</a></td>
+                    <td>{{{ $improvement->improvement_type }}}</td>
+                    <td>{{{ $improvement->start_date }}}</td>
+                    <td>{{{ $improvement->completion_date }}}</td>
+                    <td>{{{ $improvement->is_warranty ? "Warranty" : "Not Warranty" }}}</td>
+                    <td>{{{ sprintf( Lang::get( 'general.currency' ) . '%01.2f', $improvement->cost) }}}</td>
+                    <?php $totalCost += $improvement->cost; ?>
+                    <td><a href="{{ route('update/improvement', $improvement->id) }}" class="btn btn-warning"><i class="fa fa-pencil icon-white"></i></a>
                     </td>
                 </tr>
-
-                @endforeach
                 @endif
+            @endforeach
+            </tbody>
+            <tfoot>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td>{{{sprintf(Lang::get( 'general.currency' ) . '%01.2f', $totalCost)}}}</td>
+            </tr>
+            </tfoot>
+        </table>
+    @else
+        <div class="col-md-12">
+            <div class="alert alert-info alert-block">
+                <i class="fa fa-info-circle"></i>
+                @lang('general.no_results')
+            </div>
+        </div>
+    @endif
+</div>
+<div class="col-md-12">
+ 	<h6>@lang('general.file_uploads') [ <a href="#" data-toggle="modal" data-target="#uploadFileModal">@lang('button.add')</a> ]</h6>
+ 	<table class="table table-hover">
+        <thead>
+            <tr>
+                <th class="col-md-5">@lang('general.notes')</th>
+                <th class="col-md-5"><span class="line"></span>@lang('general.file_name')</th>
+                <th class="col-md-2"></th>
+                <th class="col-md-2"></th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (count($asset->uploads) > 0)
+                @foreach ($asset->uploads as $file)
                 <tr>
-                    <td>{{ $asset->created_at }}</td>
                     <td>
-                    @if (isset($asset->adminuser->id)) {{{ $asset->adminuser->fullName() }}}
-                    @else
-                    @lang('general.unknown_admin')
-                    @endif
+                        @if ($file->note) {{{ $file->note }}}
+                        @endif
                     </td>
-                    <td>@lang('general.created_asset')</td>
-                    <td></td>
                     <td>
-<!--                    @if ($asset->notes)
-                    {{{ $asset->notes }}}
-                    @endif -->
+                    {{{ $file->filename }}}
+                    </td>
+                    <td>
+                        @if ($file->filename)
+                        <a href="{{ route('show/assetfile', [$asset->id, $file->id]) }}" class="btn btn-default">@lang('general.download')</a>
+                        @endif
+                    </td>
+                    <td>
+                        <a class="btn delete-asset btn-danger btn-sm" href="{{ route('delete/assetfile', [$asset->id, $file->id]) }}"><i class="fa fa-trash icon-white"></i></a>
                     </td>
                 </tr>
-            </tbody>
-        </table>
+                @endforeach
+            @else
+                <tr>
+                    <td colspan="4">
+                        @lang('general.no_results')
+                    </td>
+                </tr>
 
+            @endif
 
-        </div>
+        </tbody>
+    </table>
+</div>
+<div class="col-md-12">
+        <!-- checked out assets table -->
+    <table class="table table-hover table-fixed break-word">
+        <thead>
+            <tr>
+                <th class="col-md-3">@lang('general.date')</th>
+                <th class="col-md-2"><span class="line"></span>@lang('general.admin')</th>
+                <th class="col-md-2"><span class="line"></span>@lang('table.actions')</th>
+                <th class="col-md-2"><span class="line"></span>@lang('general.user')</th>
+                <th class="col-md-3"><span class="line"></span>@lang('general.notes')</th>
+            </tr>
+        </thead>
+        <tbody>
+        @if (count($asset->assetlog) > 0)
+            @foreach ($asset->assetlog as $log)
+
+            <tr>
+                <td>{{{ $log->created_at }}}</td>
+                <td>
+                    @if (isset($log->user_id))
+                    {{{ $log->adminlog->fullName() }}}
+                    @endif
+                </td>
+                <td>{{ $log->action_type }}</td>
+                <td>
+                    @if ((isset($log->checkedout_to)) && ($log->checkedout_to!=0) && ($log->checkedout_to!=''))
+
+                        @if ($log->userlog->deleted_at=='')
+                            <a href="{{ route('view/user', $log->checkedout_to) }}">
+                            {{{ $log->userlog->fullName() }}}
+                             </a>
+                        @else
+                            <del>{{{ $log->userlog->fullName() }}}</del>
+                        @endif
+
+                    @endif
+                </td>
+                <td>
+                    @if ($log->note) {{{ $log->note }}}
+                    @endif
+                </td>
+            </tr>
+
+            @endforeach
+            @endif
+            <tr>
+                <td>{{ $asset->created_at }}</td>
+                <td>
+                @if (isset($asset->adminuser->id)) {{{ $asset->adminuser->fullName() }}}
+                @else
+                @lang('general.unknown_admin')
+                @endif
+                </td>
+                <td>@lang('general.created_asset')</td>
+                <td></td>
+                <td>
+<!--                    @if ($asset->notes)
+                {{{ $asset->notes }}}
+                @endif -->
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    </div>
 </div>
         <!-- side address column -->
         <div class="col-md-3 col-xs-12 address pull-right">
