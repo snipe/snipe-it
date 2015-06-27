@@ -25,11 +25,16 @@
                 $table->string( 'title', 100 );
                 $table->boolean( 'is_warranty' );
                 $table->date( 'start_date' );
-                $table->date( 'completion_date' );
-                $table->decimal( 'improvement_time', 8, 2 );
-                $table->longText( 'notes' );
-                $table->decimal( 'cost', 10, 2 );
-                $table->dateTime( 'deleted_at' );
+                $table->date( 'completion_date' )
+                      ->nullable();
+                $table->decimal( 'improvement_time', 8, 2 )
+                      ->nullable();
+                $table->longText( 'notes' )
+                      ->nullable();
+                $table->decimal( 'cost', 10, 2 )
+                      ->nullable();
+                $table->dateTime( 'deleted_at' )
+                      ->nullable();
                 $table->timestamps();
             } );
         }
