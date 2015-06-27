@@ -27,7 +27,7 @@
                 $table->date( 'start_date' );
                 $table->date( 'completion_date' )
                       ->nullable();
-                $table->decimal( 'improvement_time', 8, 2 )
+                $table->integer( 'improvement_time')
                       ->nullable();
                 $table->longText( 'notes' )
                       ->nullable();

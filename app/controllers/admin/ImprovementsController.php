@@ -85,12 +85,15 @@
                                 return $improvements->start_date->toDateString();
                             } )
                             ->addColumn( 'completion_date', function ( $improvements ) {
-
-                                return $improvements->completion_date->toDateString();
+                                if (is_null($improvements->completion_date)) {
+                                    return null;
+                                } else {
+                                    return $improvements->completion_date->toDateString();
+                                }
                             } )
                             ->addColumn( 'cost', function ( $improvements ) {
 
-                                return sprintf( Lang::get( 'general.currency' ) . '%01.2f', $improvements->cost);
+                                return sprintf( Lang::get( 'general.currency' ) . '%01.2f', $improvements->cost );
                             } )
                             ->addColumn( $actions )
                             ->searchColumns( 'asset', 'supplier', 'improvement_type', 'title', 'start_date',
@@ -234,6 +237,7 @@
 
         /**
          * getDelete
+         *
          * @param $improvementId
          *
          * @return mixed
@@ -255,6 +259,19 @@
             // Redirect to the improvements management page
             return Redirect::to( 'admin/improvements' )
                            ->with( 'success', Lang::get( 'admin/improvements/message.delete.success' ) );
+        }
+
+        public function getView( $improvementId )
+        {
+
+            // Check if the improvement exists
+            if (is_null( $improvement = Improvement::find( $improvementId ) )) {
+                // Redirect to the improvement management page
+                return Redirect::to( 'admin/improvements' )
+                               ->with( 'error', Lang::get( 'admin/improvements/message.not_found' ) );
+            }
+
+            return View::make('backend/improvements/view')->with('improvement', $improvement);
         }
 
     }
