@@ -1,3 +1,6 @@
+<?php
+use Carbon\Carbon;
+?>
 @extends('backend/layouts/default')
 
 {{-- Page title --}}
@@ -285,8 +288,8 @@
                 <tr>
                     <td><a href="{{ route('view/supplier', $improvement->supplier_id) }}">{{{ $improvement->supplier->name }}}</a></td>
                     <td>{{{ $improvement->improvement_type }}}</td>
-                    <td>{{{ $improvement->start_date }}}</td>
-                    <td>{{{ $improvement->completion_date }}}</td>
+                    <td>{{{ Carbon::parse($improvement->start_date)->toDateString() }}}</td>
+                    <td>{{{ Carbon::parse($improvement->completion_date)->toDateString() }}}</td>
                     <td>{{{ $improvement->is_warranty ? "Warranty" : "Not Warranty" }}}</td>
                     <td>{{{ sprintf( Lang::get( 'general.currency' ) . '%01.2f', $improvement->cost) }}}</td>
                     <?php $totalCost += $improvement->cost; ?>
