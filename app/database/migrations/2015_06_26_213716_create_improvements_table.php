@@ -27,6 +27,7 @@
                 $table->decimal( 'improvement_time', 8, 2 );
                 $table->longText( 'notes' );
                 $table->decimal( 'cost', 10, 2 );
+                $table->dateTime( 'deleted_at' );
                 $table->timestamps();
             } );
         }
