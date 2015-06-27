@@ -290,7 +290,7 @@ use Carbon\Carbon;
                     <td>{{{ $improvement->improvement_type }}}</td>
                     <td>{{{ Carbon::parse($improvement->start_date)->toDateString() }}}</td>
                     <td>{{{ Carbon::parse($improvement->completion_date)->toDateString() }}}</td>
-                    <td>{{{ $improvement->is_warranty ? "Warranty" : "Not Warranty" }}}</td>
+                    <td>{{{ $improvement->is_warranty ? Lang::get('admin/improvements/message.warranty') : Lang::get('admin/improvements/message.not_warranty') }}}</td>
                     <td>{{{ sprintf( Lang::get( 'general.currency' ) . '%01.2f', $improvement->cost) }}}</td>
                     <?php $totalCost += $improvement->cost; ?>
                     <td><a href="{{ route('update/improvement', $improvement->id) }}" class="btn btn-warning"><i class="fa fa-pencil icon-white"></i></a>
