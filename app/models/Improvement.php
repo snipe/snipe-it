@@ -6,7 +6,7 @@
     {
 
         use SoftDeletingTrait;
-        protected $dates = [ 'deleted_at', 'start_date', 'completion_date' ];
+        protected $dates = [ 'deleted_at' ];
         protected $table = 'improvements';
 
         // Declaring rules for form validation
