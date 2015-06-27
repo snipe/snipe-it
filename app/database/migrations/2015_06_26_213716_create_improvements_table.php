@@ -17,6 +17,8 @@
             Schema::create( 'improvements', function ( Blueprint $table ) {
 
                 $table->increments( 'id' );
+                $table->integer( 'asset_id' )
+                      ->unsigned();
                 $table->enum( 'improvement_type', [ 'Maintenance', 'Repair', 'Upgrade' ] );
                 $table->string( 'title', 100 );
                 $table->boolean( 'is_warranty' );
