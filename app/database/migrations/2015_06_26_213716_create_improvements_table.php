@@ -24,8 +24,8 @@
                 $table->enum( 'improvement_type', [ 'Maintenance', 'Repair', 'Upgrade' ] );
                 $table->string( 'title', 100 );
                 $table->boolean( 'is_warranty' );
-                $table->dateTime( 'start_date' );
-                $table->dateTime( 'completion_date' );
+                $table->date( 'start_date' );
+                $table->date( 'completion_date' );
                 $table->decimal( 'improvement_time', 8, 2 );
                 $table->longText( 'notes' );
                 $table->decimal( 'cost', 10, 2 );
