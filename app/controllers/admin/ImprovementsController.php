@@ -3,10 +3,10 @@
     namespace Controllers\Admin;
 
     use AdminController;
+    use Carbon\Carbon;
     use Datatable;
     use DB;
     use Improvement;
-    use Carbon\Carbon;
     use Input;
     use Lang;
     use Log;
@@ -87,11 +87,7 @@
                             } )
                             ->addColumn( 'completion_date', function ( $improvements ) {
 
-                                if (is_null( $improvements->completion_date )) {
-                                    return null;
-                                } else {
-                                        return $improvements->completion_date;
-                                }
+                                return $improvements->completion_date;
                             } )
                             ->addColumn( 'cost', function ( $improvements ) {
 
@@ -295,7 +291,7 @@
             // Render the view
             return View::make( 'backend/improvements/edit' )
                        ->with( 'asset_list', $asset_element )
-                       ->with( 'selectedAsset', NULL )
+                       ->with( 'selectedAsset', null )
                        ->with( 'supplier_list', $supplier_list )
                        ->with( 'improvementType', $improvementType )
                        ->with( 'improvement', $improvement );
@@ -308,8 +304,12 @@
             // get the POST data
             $new = Input::all();
 
-            // create a new model instance
-            $improvement = new Improvement();
+            // Check if the improvement exists
+            if (is_null( $improvement = Improvement::find( $improvementId ) )) {
+                // Redirect to the improvement management page
+                return Redirect::to( 'admin/improvements' )
+                               ->with( 'error', Lang::get( 'admin/improvements/message.not_found' ) );
+            }
 
             // attempt validation
             if ($improvement->validate( $new )) {
@@ -352,10 +352,13 @@
                     }
                 }
 
-                if (($improvement->completion_date !== "") && ($improvement->completion_date !== "0000-00-00") && ($improvement->start_date !== "") && ($improvement->start_date !== "0000-00-00")) {
-                    $startDate = Carbon::parse($improvement->start_date);
-                    $completionDate = Carbon::parse($improvement->completion_date);
-                    $improvement->improvement_time = $completionDate->diffInDays($startDate);
+                if (( $improvement->completion_date !== "" ) && ( $improvement->completion_date !== "0000-00-00" )
+                    && ( $improvement->start_date !== "" )
+                    && ( $improvement->start_date !== "0000-00-00" )
+                ) {
+                    $startDate                     = Carbon::parse( $improvement->start_date );
+                    $completionDate                = Carbon::parse( $improvement->completion_date );
+                    $improvement->improvement_time = $completionDate->diffInDays( $startDate );
                 }
 
                 // Was the improvement created?

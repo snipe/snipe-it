@@ -72,7 +72,7 @@
                             $calculationEndDate = Carbon::now();
                             $completionDate = NULL;
                         } else {
-                            $completionDate = Carbon::parse($improvement->start_date);
+                            $completionDate = Carbon::parse($improvement->completion_date);
                             $calculationEndDate = $completionDate;
                         }
                         ?>
