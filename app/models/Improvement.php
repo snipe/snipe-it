@@ -15,8 +15,8 @@
             'improvement_type' => 'required|in:Maintenance,Repair,Upgrade',
             'title'            => 'required|max:100',
             'is_warranty'      => 'boolean',
-            'start_date'       => 'required|date_format:Y-m-d H:i',
-            'completion_date'  => 'date_format:Y-m-d H:i',
+            'start_date'       => 'required|date_format:Y-m-d',
+            'completion_date'  => 'date_format:Y-m-d',
             'notes'            => 'string',
             'cost'             => 'numeric'
         ];
