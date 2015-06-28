@@ -89,15 +89,24 @@
 
                                 return $improvements->completion_date;
                             } )
+                            ->addColumn( 'improvement_time', function ( $improvements ) {
+
+                                if (is_null( $improvements->improvement_time )) {
+                                    $improvements->improvement_time = Carbon::now()
+                                                                            ->diffInDays( Carbon::parse( $improvements->start_date ) );
+                                }
+
+                                return  intval($improvements->improvement_time);
+                            } )
                             ->addColumn( 'cost', function ( $improvements ) {
 
                                 return sprintf( Lang::get( 'general.currency' ) . '%01.2f', $improvements->cost );
                             } )
                             ->addColumn( $actions )
                             ->searchColumns( 'asset', 'supplier', 'improvement_type', 'title', 'start_date',
-                                'completion_date', 'cost', 'actions' )
+                                'completion_date', 'improvement_time', 'cost', 'actions' )
                             ->orderColumns( 'asset', 'supplier', 'improvement_type', 'title', 'start_date',
-                                'completion_date', 'cost', 'actions' )
+                                'completion_date', 'improvement_time', 'cost', 'actions' )
                             ->make();
         }
 
