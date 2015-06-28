@@ -7,8 +7,6 @@
 
 {{-- Page content --}}
 @section('content')
-
-
     <div class="row header">
         <div class="col-md-12">
             <a href="{{ route('create/improvements') }}" class="btn btn-success pull-right"><i class="fa fa-plus icon-white"></i> Create New</a>
@@ -24,6 +22,7 @@
                         Lang::get('admin/improvements/form.title'),
                         Lang::get('admin/improvements/form.start_date'),
                         Lang::get('admin/improvements/form.completion_date'),
+                        Lang::get('admin/improvements/form.improvement_time'),
                         Lang::get('admin/improvements/form.cost'),
                         Lang::get('table.actions'))
             ->setOptions(
@@ -44,10 +43,10 @@
                         ],
                         'sAjaxSource'=>route('api.improvements.list'),
                         'dom' =>'CT<"clear">lfrtip',
-                        'colVis'=> ['showAll'=>'Show All','restore'=>'Restore','exclude'=>[5],'activate'=>'mouseover'],
+                        'colVis'=> ['showAll'=>'Show All','restore'=>'Restore','activate'=>'mouseover'],
                         'columnDefs'=> [
-                            ['bSortable'=>false,'targets'=>[5]],
-                            ['width'=>'20%','targets'=>[5]],
+                            ['bSortable'=>false,'targets'=>[8]],
+                            ['width'=>'12%','targets'=>[8]],
                             ],
                         'order'=>[[0,'asc']],
                     ]
