@@ -7,7 +7,7 @@ class Asset extends Depreciable
 
     protected $table = 'assets';
     protected $errors;
-    protected $rules = array(
+    protected $rules = [
         'name'   			=> 'alpha_space|min:2|max:255',
         'model_id'   		=> 'required',
         'warranty_months'   => 'integer|min:0|max:240',
@@ -19,7 +19,7 @@ class Asset extends Depreciable
         'supplier_id' 		=> 'integer',
         'asset_tag'   		=> 'required|alpha_space|min:3|max:255|unique:assets,asset_tag,{id}',
         'status' 			=> 'integer'
-        );
+        ];
 
     public function depreciation()
     {
@@ -75,6 +75,21 @@ class Asset extends Depreciable
     }
 
     /**
+     * improvement
+     * Get improvements for this asset
+     * @return mixed
+     * @author  Vincent Sposato <vincent.sposato@gmail.com>
+     * @version v1.0
+     */
+    public function improvements()
+    {
+
+        return $this->hasMany( 'Improvement', 'asset_id' )
+                    ->orderBy( 'created_at', 'desc' )
+                    ->withTrashed();
+    }
+
+    /**
     * Get action logs for this asset
     */
     public function adminuser()
@@ -119,9 +134,9 @@ class Asset extends Depreciable
     {
         return $this->belongsTo('Statuslabel','status_id');
     }
-	
-	/** 
-	* Get name for EULA 
+
+	/**
+	* Get name for EULA
 	**/
 	public function showAssetName()
     {
@@ -131,7 +146,7 @@ class Asset extends Depreciable
 		    return $this->name;
 	    }
     }
-    
+
      public function warrantee_expires()
     {
             $date = date_create($this->purchase_date);
@@ -175,7 +190,7 @@ class Asset extends Depreciable
     {
         return $this->belongsTo('Supplier','supplier_id');
     }
-    
+
 
     public function months_until_eol()
     {

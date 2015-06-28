@@ -1,19 +1,21 @@
 <?php namespace Controllers\Admin;
 
+use Actionlog;
 use AdminController;
-use Input;
-use Lang;
-use License;
 use Asset;
-use User;
-use View;
+use Illuminate\Support\Facades\Lang;
+use Illuminate\Support\Facades\Response;
+use Improvement;
+use Input;
+use License;
 use Location;
 use Redirect;
-use Response;
-use Actionlog;
+use User;
+use View;
 
 class ReportsController extends AdminController
 {
+
     /**
      * Show Asset Report
      *
@@ -21,9 +23,14 @@ class ReportsController extends AdminController
      */
     public function getAssetsReport()
     {
+
         // Grab all the assets
-        $assets = Asset::with('model','assigneduser.userLoc','assetstatus','defaultLoc','assetlog','supplier','model.manufacturer')->orderBy('created_at', 'DESC')->get();
-        return View::make('backend/reports/asset', compact('assets'));
+        $assets = Asset::with( 'model', 'assigneduser.userLoc', 'assetstatus', 'defaultLoc', 'assetlog', 'supplier',
+            'model.manufacturer' )
+                       ->orderBy( 'created_at', 'DESC' )
+                       ->get();
+
+        return View::make( 'backend/reports/asset', compact( 'assets' ) );
     }
 
     /**
@@ -33,94 +40,96 @@ class ReportsController extends AdminController
      */
     public function exportAssetReport()
     {
-        // Grab all the assets
-        $assets = Asset::orderBy('created_at', 'DESC')->get();
 
-        $rows = array();
+        // Grab all the assets
+        $assets = Asset::orderBy( 'created_at', 'DESC' )
+                       ->get();
+
+        $rows = [ ];
 
         // Create the header row
-        $header = array(
-            Lang::get('admin/hardware/table.asset_tag'),
-            Lang::get('admin/hardware/form.manufacturer'),
-            Lang::get('admin/hardware/form.model'),
-            Lang::get('general.model_no'),
-            Lang::get('general.name'),
-            Lang::get('admin/hardware/table.serial'),
-            Lang::get('general.status'),
-            Lang::get('admin/hardware/table.purchase_date'),
-            Lang::get('admin/hardware/table.purchase_cost'),
-            Lang::get('admin/hardware/form.order'),
-            Lang::get('admin/hardware/form.supplier'),
-            Lang::get('admin/hardware/table.checkoutto'),
-            Lang::get('admin/hardware/table.location')
-        );
-        $header = array_map('trim', $header);
-        $rows[] = implode($header, ',');
+        $header  = [
+            Lang::get( 'admin/hardware/table.asset_tag' ),
+            Lang::get( 'admin/hardware/form.manufacturer' ),
+            Lang::get( 'admin/hardware/form.model' ),
+            Lang::get( 'general.model_no' ),
+            Lang::get( 'general.name' ),
+            Lang::get( 'admin/hardware/table.serial' ),
+            Lang::get( 'general.status' ),
+            Lang::get( 'admin/hardware/table.purchase_date' ),
+            Lang::get( 'admin/hardware/table.purchase_cost' ),
+            Lang::get( 'admin/hardware/form.order' ),
+            Lang::get( 'admin/hardware/form.supplier' ),
+            Lang::get( 'admin/hardware/table.checkoutto' ),
+            Lang::get( 'admin/hardware/table.location' )
+        ];
+        $header  = array_map( 'trim', $header );
+        $rows[ ] = implode( $header, ',' );
 
         // Create a row per asset
         foreach ($assets as $asset) {
-            $row = array();
-            $row[] = $asset->asset_tag;
+            $row    = [ ];
+            $row[ ] = $asset->asset_tag;
             if ($asset->model->manufacturer) {
-                $row[] = $asset->model->manufacturer->name;
+                $row[ ] = $asset->model->manufacturer->name;
             } else {
-                $row[] = '';
+                $row[ ] = '';
             }
-            $row[] = '"'.$asset->model->name.'"';
-            $row[] = '"'.$asset->model->modelno.'"';
-            $row[] = $asset->name;
-            $row[] = $asset->serial;
+            $row[ ] = '"' . $asset->model->name . '"';
+            $row[ ] = '"' . $asset->model->modelno . '"';
+            $row[ ] = $asset->name;
+            $row[ ] = $asset->serial;
             if ($asset->assetstatus) {
-                $row[] = $asset->assetstatus->name;
+                $row[ ] = $asset->assetstatus->name;
             } else {
-                $row[] = '';
+                $row[ ] = '';
             }
-            $row[] = $asset->purchase_date;
-            $row[] = '"'.number_format($asset->purchase_cost).'"';
+            $row[ ] = $asset->purchase_date;
+            $row[ ] = '"' . number_format( $asset->purchase_cost ) . '"';
             if ($asset->order_number) {
-                $row[] = $asset->order_number;
+                $row[ ] = $asset->order_number;
             } else {
-                $row[] = '';
+                $row[ ] = '';
             }
             if ($asset->supplier_id) {
-                $row[] = $asset->supplier->name;
+                $row[ ] = $asset->supplier->name;
             } else {
-                $row[] = '';
+                $row[ ] = '';
             }
 
             if ($asset->assigned_to > 0) {
-                $user = User::find($asset->assigned_to);
-                $row[] = $user->fullName();
+                $user   = User::find( $asset->assigned_to );
+                $row[ ] = $user->fullName();
             } else {
-                $row[] = ''; // Empty string if unassigned
+                $row[ ] = ''; // Empty string if unassigned
             }
 
-            if (($asset->assigned_to > 0) && ($asset->assigneduser->location_id > 0)) {
-                $location = Location::find($asset->assigneduser->location_id);
+            if (( $asset->assigned_to > 0 ) && ( $asset->assigneduser->location_id > 0 )) {
+                $location = Location::find( $asset->assigneduser->location_id );
                 if ($location->name) {
-                    $row[] = $location->name;
+                    $row[ ] = $location->name;
                 } else {
-                    $row[] = '';
+                    $row[ ] = '';
                 }
             } elseif ($asset->rtd_location_id) {
-                $location = Location::find($asset->rtd_location_id);
+                $location = Location::find( $asset->rtd_location_id );
                 if ($location->name) {
-                    $row[] = $location->name;
+                    $row[ ] = $location->name;
                 } else {
-                    $row[] = '';
+                    $row[ ] = '';
                 }
             } else {
-                $row[] = '';  // Empty string if location is not set
+                $row[ ] = '';  // Empty string if location is not set
             }
 
-            $rows[] = implode($row, ',');
+            $rows[ ] = implode( $row, ',' );
         }
 
         // spit out a csv
-        $csv = implode($rows, "\n");
-        $response = Response::make($csv, 200);
-        $response->header('Content-Type', 'text/csv');
-        $response->header('Content-disposition', 'attachment;filename=report.csv');
+        $csv      = implode( $rows, "\n" );
+        $response = Response::make( $csv, 200 );
+        $response->header( 'Content-Type', 'text/csv' );
+        $response->header( 'Content-disposition', 'attachment;filename=report.csv' );
 
         return $response;
     }
@@ -132,9 +141,13 @@ class ReportsController extends AdminController
      */
     public function getDeprecationReport()
     {
+
         // Grab all the assets
-        $assets = Asset::with('model','assigneduser','assetstatus','defaultLoc','assetlog')->orderBy('created_at', 'DESC')->get();
-        return View::make('backend/reports/depreciation', compact('assets'));
+        $assets = Asset::with( 'model', 'assigneduser', 'assetstatus', 'defaultLoc', 'assetlog' )
+                       ->orderBy( 'created_at', 'DESC' )
+                       ->get();
+
+        return View::make( 'backend/reports/depreciation', compact( 'assets' ) );
     }
 
     /**
@@ -144,95 +157,96 @@ class ReportsController extends AdminController
      */
     public function exportDeprecationReport()
     {
-        // Grab all the assets
-        $assets = Asset::with('model','assigneduser','assetstatus','defaultLoc','assetlog')->orderBy('created_at', 'DESC')->get();
 
-        $rows = array();
+        // Grab all the assets
+        $assets = Asset::with( 'model', 'assigneduser', 'assetstatus', 'defaultLoc', 'assetlog' )
+                       ->orderBy( 'created_at', 'DESC' )
+                       ->get();
+
+        $rows = [ ];
 
         // Create the header row
-        $header = array(
-            Lang::get('admin/hardware/table.asset_tag'),
-            Lang::get('admin/hardware/table.title'),
-            Lang::get('admin/hardware/table.serial'),
-            Lang::get('admin/hardware/table.checkoutto'),
-            Lang::get('admin/hardware/table.location'),
-            Lang::get('admin/hardware/table.purchase_date'),
-            Lang::get('admin/hardware/table.purchase_cost'),
-            Lang::get('admin/hardware/table.book_value'),
-            Lang::get('admin/hardware/table.diff')
-        );
-        $header = array_map('trim', $header);
-        $rows[] = implode($header, ',');
+        $header  = [
+            Lang::get( 'admin/hardware/table.asset_tag' ),
+            Lang::get( 'admin/hardware/table.title' ),
+            Lang::get( 'admin/hardware/table.serial' ),
+            Lang::get( 'admin/hardware/table.checkoutto' ),
+            Lang::get( 'admin/hardware/table.location' ),
+            Lang::get( 'admin/hardware/table.purchase_date' ),
+            Lang::get( 'admin/hardware/table.purchase_cost' ),
+            Lang::get( 'admin/hardware/table.book_value' ),
+            Lang::get( 'admin/hardware/table.diff' )
+        ];
+        $header  = array_map( 'trim', $header );
+        $rows[ ] = implode( $header, ',' );
 
         // Create a row per asset
         foreach ($assets as $asset) {
-            $row = array();
-            $row[] = $asset->asset_tag;
-            $row[] = $asset->name;
-            $row[] = $asset->serial;
-
+            $row    = [ ];
+            $row[ ] = $asset->asset_tag;
+            $row[ ] = $asset->name;
+            $row[ ] = $asset->serial;
 
             if ($asset->assigned_to > 0) {
-              $user = User::find($asset->assigned_to);
-              $row[] = $user->fullName();
-              } else {
-                $row[] = ''; // Empty string if unassigned
+                $user   = User::find( $asset->assigned_to );
+                $row[ ] = $user->fullName();
+            } else {
+                $row[ ] = ''; // Empty string if unassigned
             }
 
-            if (($asset->assigned_to > 0) && ($asset->assigneduser->location_id > 0)) {
-                $location = Location::find($asset->assigneduser->location_id);
+            if (( $asset->assigned_to > 0 ) && ( $asset->assigneduser->location_id > 0 )) {
+                $location = Location::find( $asset->assigneduser->location_id );
                 if ($location->city) {
-                    $row[] = '"'.$location->city . ', ' . $location->state.'"';
+                    $row[ ] = '"' . $location->city . ', ' . $location->state . '"';
                 } elseif ($location->name) {
-                    $row[] = $location->name;
+                    $row[ ] = $location->name;
                 } else {
-                    $row[] = '';
+                    $row[ ] = '';
                 }
             } else {
-                $row[] = '';  // Empty string if location is not set
+                $row[ ] = '';  // Empty string if location is not set
             }
 
-			
-            
-            
-
-            $row[] = $asset->purchase_date;
-            $row[] = '"'.Lang::get('general.currency').number_format($asset->purchase_cost).'"';
-            $row[] = '"'.Lang::get('general.currency').number_format($asset->getDepreciatedValue()).'"';
-            $row[] = '"-'.Lang::get('general.currency').number_format(($asset->purchase_cost - $asset->getDepreciatedValue())).'"';
-            $rows[] = implode($row, ',');
+            $row[ ]  = $asset->purchase_date;
+            $row[ ]  = '"' . Lang::get( 'general.currency' ) . number_format( $asset->purchase_cost ) . '"';
+            $row[ ]  = '"' . Lang::get( 'general.currency' ) . number_format( $asset->getDepreciatedValue() ) . '"';
+            $row[ ]  = '"-' . Lang::get( 'general.currency' ) . number_format( ( $asset->purchase_cost
+                                                                                 - $asset->getDepreciatedValue() ) )
+                       . '"';
+            $rows[ ] = implode( $row, ',' );
         }
 
         // spit out a csv
-        $csv = implode($rows, "\n");
+        $csv = implode( $rows, "\n" );
 
-        $response = Response::make($csv, 200);
-        $response->header('Content-Type', 'text/csv');
-        $response->header('Content-disposition', 'attachment;filename=report.csv');
+        $response = Response::make( $csv, 200 );
+        $response->header( 'Content-Type', 'text/csv' );
+        $response->header( 'Content-disposition', 'attachment;filename=report.csv' );
 
         return $response;
     }
 
-	/**
+    /**
      * Show Report for Activity
      *
      * @return View
      */
 
-	public function getActivityReport()
+    public function getActivityReport()
     {
-        $log_actions = Actionlog::orderBy('created_at', 'DESC')
-        ->with('adminlog')
-        ->with('accessorylog')
-        ->with('assetlog')
-        ->with('licenselog')
-        ->with('userlog')
-        ->orderBy('created_at','DESC')
-        ->get();
-        return View::make('backend/reports/activity', compact('log_actions'));
+
+        $log_actions = Actionlog::orderBy( 'created_at', 'DESC' )
+                                ->with( 'adminlog' )
+                                ->with( 'accessorylog' )
+                                ->with( 'assetlog' )
+                                ->with( 'licenselog' )
+                                ->with( 'userlog' )
+                                ->orderBy( 'created_at', 'DESC' )
+                                ->get();
+
+        return View::make( 'backend/reports/activity', compact( 'log_actions' ) );
     }
-    
-    
+
     /**
      * Show Report for Licenses
      *
@@ -240,8 +254,11 @@ class ReportsController extends AdminController
      */
     public function getLicenseReport()
     {
-        $licenses = License::orderBy('created_at', 'DESC')->get();
-        return View::make('backend/reports/licenses', compact('licenses'));
+
+        $licenses = License::orderBy( 'created_at', 'DESC' )
+                           ->get();
+
+        return View::make( 'backend/reports/licenses', compact( 'licenses' ) );
     }
 
     /**
@@ -251,225 +268,296 @@ class ReportsController extends AdminController
      */
     public function exportLicenseReport()
     {
-        $licenses = License::orderBy('created_at', 'DESC')->get();
-        $rows = array();
-        $header = array(
-            Lang::get('admin/licenses/table.title'),
-            Lang::get('admin/licenses/table.serial'),
-            Lang::get('admin/licenses/form.seats'),
-            Lang::get('admin/licenses/form.remaining_seats'),
-            Lang::get('admin/licenses/form.expiration'),
-            Lang::get('admin/licenses/form.date'),
-            Lang::get('admin/licenses/form.cost')
-        );
 
-        $header = array_map('trim', $header);
-        $rows[] = implode($header, ', ');
+        $licenses = License::orderBy( 'created_at', 'DESC' )
+                           ->get();
+        $rows     = [ ];
+        $header   = [
+            Lang::get( 'admin/licenses/table.title' ),
+            Lang::get( 'admin/licenses/table.serial' ),
+            Lang::get( 'admin/licenses/form.seats' ),
+            Lang::get( 'admin/licenses/form.remaining_seats' ),
+            Lang::get( 'admin/licenses/form.expiration' ),
+            Lang::get( 'admin/licenses/form.date' ),
+            Lang::get( 'admin/licenses/form.cost' )
+        ];
+
+        $header  = array_map( 'trim', $header );
+        $rows[ ] = implode( $header, ', ' );
 
         // Row per license
         foreach ($licenses as $license) {
-            $row = array();
-            $row[] = $license->name;
-            $row[] = $license->serial;
-            $row[] = $license->seats;
-            $row[] = $license->remaincount();
-            $row[] = $license->expiration_date;
-            $row[] = $license->purchase_date;
-            $row[] = '"'.number_format($license->purchase_cost).'"';
+            $row    = [ ];
+            $row[ ] = $license->name;
+            $row[ ] = $license->serial;
+            $row[ ] = $license->seats;
+            $row[ ] = $license->remaincount();
+            $row[ ] = $license->expiration_date;
+            $row[ ] = $license->purchase_date;
+            $row[ ] = '"' . number_format( $license->purchase_cost ) . '"';
 
-            $rows[] = implode($row, ',');
+            $rows[ ] = implode( $row, ',' );
         }
 
-        $csv = implode($rows, "\n");
-        $response = Response::make($csv, 200);
-        $response->header('Content-Type', 'text/csv');
-        $response->header('Content-disposition', 'attachment;filename=report.csv');
+        $csv      = implode( $rows, "\n" );
+        $response = Response::make( $csv, 200 );
+        $response->header( 'Content-Type', 'text/csv' );
+        $response->header( 'Content-disposition', 'attachment;filename=report.csv' );
 
         return $response;
     }
 
     public function getCustomReport()
     {
-        return View::make('backend/reports/custom');
+
+        return View::make( 'backend/reports/custom' );
     }
 
     public function postCustom()
     {
-        $assets = Asset::orderBy('created_at', 'DESC')->get();
-        $rows = array();
-        $header = array();
 
-        if (e(Input::get('asset_name')) == '1')
-        {
-            $header[] = 'Asset Name';
+        $assets = Asset::orderBy( 'created_at', 'DESC' )
+                       ->get();
+        $rows   = [ ];
+        $header = [ ];
+
+        if (e( Input::get( 'asset_name' ) ) == '1') {
+            $header[ ] = 'Asset Name';
         }
-        if (e(Input::get('asset_tag')) == '1')
-        {
-            $header[] = 'Asset Tag';
+        if (e( Input::get( 'asset_tag' ) ) == '1') {
+            $header[ ] = 'Asset Tag';
         }
-        if (e(Input::get('manufacturer')) == '1')
-        {
-            $header[] = 'Manufacturer';
+        if (e( Input::get( 'manufacturer' ) ) == '1') {
+            $header[ ] = 'Manufacturer';
         }
-        if (e(Input::get('model')) == '1')
-        {
-            $header[] = 'Model';
-            $header[] = 'Model Number';
+        if (e( Input::get( 'model' ) ) == '1') {
+            $header[ ] = 'Model';
+            $header[ ] = 'Model Number';
         }
-        if (e(Input::get('serial')) == '1')
-        {
-            $header[] = 'Serial';
+        if (e( Input::get( 'serial' ) ) == '1') {
+            $header[ ] = 'Serial';
         }
-        if (e(Input::get('purchase_date')) == '1')
-        {
-            $header[] = 'Purchase Date';
+        if (e( Input::get( 'purchase_date' ) ) == '1') {
+            $header[ ] = 'Purchase Date';
         }
-        if ((e(Input::get('purchase_cost')) == '1') && (e(Input::get('depreciation')) == '0'))
-        {
-            $header[] = 'Purchase Cost';
+        if (( e( Input::get( 'purchase_cost' ) ) == '1' ) && ( e( Input::get( 'depreciation' ) ) == '0' )) {
+            $header[ ] = 'Purchase Cost';
         }
-        if (e(Input::get('order')) == '1')
-        {
-            $header[] = 'Order Number';
+        if (e( Input::get( 'order' ) ) == '1') {
+            $header[ ] = 'Order Number';
         }
-        if (e(Input::get('supplier')) == '1')
-        {
-            $header[] = 'Supplier';
+        if (e( Input::get( 'supplier' ) ) == '1') {
+            $header[ ] = 'Supplier';
         }
-        if (e(Input::get('location')) == '1')
-        {
-            $header[] = 'Location';
+        if (e( Input::get( 'location' ) ) == '1') {
+            $header[ ] = 'Location';
         }
-        if (e(Input::get('assigned_to')) == '1')
-        {
-            $header[] = 'Assigned To';
+        if (e( Input::get( 'assigned_to' ) ) == '1') {
+            $header[ ] = 'Assigned To';
         }
-        if (e(Input::get('status')) == '1')
-        {
-            $header[] = 'Status';
+        if (e( Input::get( 'status' ) ) == '1') {
+            $header[ ] = 'Status';
         }
-        if (e(Input::get('warranty')) == '1')
-        {
-            $header[] = 'Warranty';
-            $header[] = 'Warranty Expires';
+        if (e( Input::get( 'warranty' ) ) == '1') {
+            $header[ ] = 'Warranty';
+            $header[ ] = 'Warranty Expires';
         }
-        if (e(Input::get('depreciation')) == '1')
-        {
-            $header[] = 'Purchase Cost';
-            $header[] = 'Value';
-            $header[] = 'Diff';
+        if (e( Input::get( 'depreciation' ) ) == '1') {
+            $header[ ] = 'Purchase Cost';
+            $header[ ] = 'Value';
+            $header[ ] = 'Diff';
         }
 
-        $header = array_map('trim', $header);
-        $rows[] = implode($header, ',');
+        $header  = array_map( 'trim', $header );
+        $rows[ ] = implode( $header, ',' );
 
-        foreach($assets as $asset) {
-            $row = array();
-            if (e(Input::get('asset_name')) == '1') {
-                $row[] = $asset->name;
+        foreach ($assets as $asset) {
+            $row = [ ];
+            if (e( Input::get( 'asset_name' ) ) == '1') {
+                $row[ ] = $asset->name;
             }
-            if (e(Input::get('asset_tag')) == '1') {
-                $row[] = $asset->asset_tag;
+            if (e( Input::get( 'asset_tag' ) ) == '1') {
+                $row[ ] = $asset->asset_tag;
             }
-            if (e(Input::get('manufacturer')) == '1') {
+            if (e( Input::get( 'manufacturer' ) ) == '1') {
                 if ($asset->model->manufacturer) {
-                    $row[] = $asset->model->manufacturer->name;
+                    $row[ ] = $asset->model->manufacturer->name;
                 } else {
-                    $row[] = '';
+                    $row[ ] = '';
                 }
             }
-            if (e(Input::get('model')) == '1') {
-                $row[] = '"'.$asset->model->name.'"';
-                $row[] = '"'.$asset->model->modelno.'"';
+            if (e( Input::get( 'model' ) ) == '1') {
+                $row[ ] = '"' . $asset->model->name . '"';
+                $row[ ] = '"' . $asset->model->modelno . '"';
             }
-            if (e(Input::get('serial')) == '1') {
-                $row[] = $asset->serial;
+            if (e( Input::get( 'serial' ) ) == '1') {
+                $row[ ] = $asset->serial;
             }
-            if (e(Input::get('purchase_date')) == '1') {
-                $row[] = $asset->purchase_date;
+            if (e( Input::get( 'purchase_date' ) ) == '1') {
+                $row[ ] = $asset->purchase_date;
             }
-            if (e(Input::get('purchase_cost')) == '1') {
-                $row[] = '"'.number_format($asset->purchase_cost).'"';
+            if (e( Input::get( 'purchase_cost' ) ) == '1') {
+                $row[ ] = '"' . number_format( $asset->purchase_cost ) . '"';
             }
-            if (e(Input::get('order')) == '1') {
+            if (e( Input::get( 'order' ) ) == '1') {
                 if ($asset->order_number) {
-                    $row[] = $asset->order_number;
+                    $row[ ] = $asset->order_number;
                 } else {
-                    $row[] = '';
+                    $row[ ] = '';
                 }
             }
-            if (e(Input::get('supplier')) == '1') {
+            if (e( Input::get( 'supplier' ) ) == '1') {
                 if ($asset->supplier_id) {
-                    $row[] = $asset->supplier->name;
+                    $row[ ] = $asset->supplier->name;
                 } else {
-                    $row[] = '';
+                    $row[ ] = '';
                 }
             }
-            if (e(Input::get('location')) == '1') {
-                if (($asset->assigned_to > 0) && ($asset->assigneduser->location_id > 0)) {
-                    $location = Location::find($asset->assigneduser->location_id);
+            if (e( Input::get( 'location' ) ) == '1') {
+                if (( $asset->assigned_to > 0 ) && ( $asset->assigneduser->location_id > 0 )) {
+                    $location = Location::find( $asset->assigneduser->location_id );
                     if ($location->name) {
-                        $row[] = $location->name;
+                        $row[ ] = $location->name;
                     } else {
-                        $row[] = '';
+                        $row[ ] = '';
                     }
                 } elseif ($asset->rtd_location_id) {
-                    $location = Location::find($asset->rtd_location_id);
+                    $location = Location::find( $asset->rtd_location_id );
                     if ($location->name) {
-                        $row[] = $location->name;
+                        $row[ ] = $location->name;
                     } else {
-                        $row[] = '';
+                        $row[ ] = '';
                     }
                 } else {
-                    $row[] = '';  // Empty string if location is not set
+                    $row[ ] = '';  // Empty string if location is not set
                 }
             }
-            if (e(Input::get('assigned_to')) == '1') {
+            if (e( Input::get( 'assigned_to' ) ) == '1') {
                 if ($asset->assigned_to > 0) {
-                    $user = User::find($asset->assigned_to);
-                    $row[] = $user->fullName();
+                    $user   = User::find( $asset->assigned_to );
+                    $row[ ] = $user->fullName();
                 } else {
-                    $row[] = ''; // Empty string if unassigned
+                    $row[ ] = ''; // Empty string if unassigned
                 }
             }
-            if (e(Input::get('status')) == '1') {
-                if (($asset->status_id == '0') && ($asset->assigned_to == '0')) {
-                    $row[] = Lang::get('general.ready_to_deploy');
-                } elseif (($asset->status_id == '') && ($asset->assigned_to == '0')) {
-                    $row[] = Lang::get('general.pending');
+            if (e( Input::get( 'status' ) ) == '1') {
+                if (( $asset->status_id == '0' ) && ( $asset->assigned_to == '0' )) {
+                    $row[ ] = Lang::get( 'general.ready_to_deploy' );
+                } elseif (( $asset->status_id == '' ) && ( $asset->assigned_to == '0' )) {
+                    $row[ ] = Lang::get( 'general.pending' );
                 } elseif ($asset->assetstatus) {
-                    $row[] = $asset->assetstatus->name;
+                    $row[ ] = $asset->assetstatus->name;
                 } else {
-                    $row[] = '';
+                    $row[ ] = '';
                 }
             }
-            if (e(Input::get('warranty')) == '1') {
+            if (e( Input::get( 'warranty' ) ) == '1') {
                 if ($asset->warranty_months) {
-                    $row[] = $asset->warranty_months;
-                    $row[] = $asset->warrantee_expires();
+                    $row[ ] = $asset->warranty_months;
+                    $row[ ] = $asset->warrantee_expires();
                 } else {
-                    $row[] = '';
-                    $row[] = '';
+                    $row[ ] = '';
+                    $row[ ] = '';
                 }
             }
-            if (e(Input::get('depreciation')) == '1') {
+            if (e( Input::get( 'depreciation' ) ) == '1') {
                 $depreciation = $asset->getDepreciatedValue();
-                $row[] = '"'.number_format($asset->purchase_cost).'"';
-                $row[] = '"'.number_format($depreciation).'"';
-                $row[] = '"'.number_format($asset->purchase_cost - $depreciation).'"';
+                $row[ ]       = '"' . number_format( $asset->purchase_cost ) . '"';
+                $row[ ]       = '"' . number_format( $depreciation ) . '"';
+                $row[ ]       = '"' . number_format( $asset->purchase_cost - $depreciation ) . '"';
             }
-            $rows[] = implode($row, ',');
+            $rows[ ] = implode( $row, ',' );
         }
 
         // spit out a csv
-        if (array_filter($rows)) {
-            $csv = implode($rows, "\n");
-            $response = Response::make($csv, 200);
-            $response->header('Content-Type', 'text/csv');
-            $response->header('Content-disposition', 'attachment;filename=report.csv');
+        if (array_filter( $rows )) {
+            $csv      = implode( $rows, "\n" );
+            $response = Response::make( $csv, 200 );
+            $response->header( 'Content-Type', 'text/csv' );
+            $response->header( 'Content-disposition', 'attachment;filename=report.csv' );
+
             return $response;
         } else {
-            return Redirect::to("reports/custom")->with('error', Lang::get('admin/reports/message.error'));
+            return Redirect::to( "reports/custom" )
+                           ->with( 'error', Lang::get( 'admin/reports/message.error' ) );
         }
+    }
+
+    /**
+     * getImprovementsReport
+     *
+     * @return mixed
+     * @author  Vincent Sposato <vincent.sposato@gmail.com>
+     * @version v1.0
+     */
+    public function getImprovementsReport()
+    {
+
+        // Grab all the improvements
+        $improvements = Improvement::with( 'asset', 'supplier' )
+                                   ->orderBy( 'created_at', 'DESC' )
+                                   ->get();
+
+        return View::make( 'backend/reports/improvements', compact( 'improvements' ) );
+
+    }
+
+    /**
+     * exportImprovementsReport
+     *
+     * @return \Illuminate\Http\Response
+     * @author  Vincent Sposato <vincent.sposato@gmail.com>
+     * @version v1.0
+     */
+    public function exportImprovementsReport()
+    {
+
+        // Grab all the improvements
+        $improvements = Improvement::with( 'asset', 'supplier' )
+                                   ->orderBy( 'created_at', 'DESC' )
+                                   ->get();
+
+        $rows = [ ];
+
+        $header = [
+            Lang::get( 'admin/improvements/table.asset_name' ),
+            Lang::get( 'admin/improvements/table.supplier_name' ),
+            Lang::get( 'admin/improvements/form.improvement_type' ),
+            Lang::get( 'admin/improvements/form.title' ),
+            Lang::get( 'admin/improvements/form.start_date' ),
+            Lang::get( 'admin/improvements/form.completion_date' ),
+            Lang::get( 'admin/improvements/form.improvement_time' ),
+            Lang::get( 'admin/improvements/form.cost' )
+        ];
+
+        $header  = array_map( 'trim', $header );
+        $rows[ ] = implode( $header, ',' );
+
+        foreach ($improvements as $improvement) {
+            $row    = [ ];
+            $row[ ] = str_replace( ',', '', $improvement->asset->name );
+            $row[ ] = str_replace( ',', '', $improvement->supplier->name );
+            $row[ ] = $improvement->improvement_type;
+            $row[ ] = $improvement->title;
+            $row[ ] = $improvement->start_date;
+            $row[ ] = $improvement->completion_date;
+            if (is_null( $improvement->improvement_time )) {
+                $improvementTime = intval( Carbon::now()
+                                                 ->diffInDays( Carbon::parse( $improvement->start_date ) ) );
+            } else {
+                $improvementTime = intval( $improvement->improvement_time );
+            }
+            $row[ ]  = $improvementTime;
+            $row[ ]  = Lang::get( 'general.currency' ) . number_format( $improvement->cost, 2 );
+            $rows[ ] = implode( $row, ',' );
+        }
+
+        // spit out a csv
+        $csv      = implode( $rows, "\n" );
+        $response = Response::make( $csv, 200 );
+        $response->header( 'Content-Type', 'text/csv' );
+        $response->header( 'Content-disposition', 'attachment;filename=report.csv' );
+
+        return $response;
     }
 }
