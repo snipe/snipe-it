@@ -399,11 +399,12 @@ Route::group(array('before' => 'reporting-auth', 'namespace' => 'Controllers\Adm
 
     Route::get('reports/depreciation', array('as' => 'reports/depreciation', 'uses' => 'ReportsController@getDeprecationReport'));
     Route::get('reports/export/depreciation', array('as' => 'reports/export/depreciation', 'uses' => 'ReportsController@exportDeprecationReport'));
+    Route::get('reports/improvements', array('as' => 'reports/improvements', 'uses' => 'ReportsController@getImprovementsReport'));
+    Route::get('reports/export/improvements', array('as' => 'reports/export/improvements', 'uses' => 'ReportsController@exportImprovementsReport'));
     Route::get('reports/licenses', array('as' => 'reports/licenses', 'uses' => 'ReportsController@getLicenseReport'));
     Route::get('reports/export/licenses', array('as' => 'reports/export/licenses', 'uses' => 'ReportsController@exportLicenseReport'));
     Route::get('reports/assets', array('as' => 'reports/assets', 'uses' => 'ReportsController@getAssetsReport'));
     Route::get('reports/export/assets', array('as' => 'reports/export/assets', 'uses' => 'ReportsController@exportAssetReport'));
-
     Route::get('reports/custom', array('as' => 'reports/custom', 'uses' => 'ReportsController@getCustomReport'));
     Route::post('reports/custom', 'ReportsController@postCustom');
 
