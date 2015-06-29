@@ -155,4 +155,11 @@ class License extends Depreciable
     {
         return $this->belongsTo('Supplier','supplier_id');
     }
+
+    public static function getExpiringLicenses($days = 30) {
+
+        return License::whereRaw(DB::raw('TO_DAYS(expiration_date) - TO_DAYS(NOW()) >= '.$days))
+                    ->orderBy('purchase_date', 'ASC')
+                    ->get();
+    }
 }
