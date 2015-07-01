@@ -64,7 +64,7 @@ class SettingsController extends AdminController
 
 
         // Declare the rules for the form validation
-        
+
         $rules = array(
 	        "per_page"   	=> 'required|min:1|numeric',
 	        "qr_text"		=> 'min:1|max:31',
@@ -74,12 +74,12 @@ class SettingsController extends AdminController
 	        "slack_channel"   => 'regex:/(?<!\w)#\w+/',
 	        "slack_botname"   => 'alpha_dash',
 	        );
-        
+
         if (Config::get('app.lock_passwords')==false) {
 	        $rules['site_name'] = 'required|min:3';
 
-	    } 
-        
+	    }
+
         // Create a new validator instance from our validation rules
         $validator = Validator::make(Input::all(), $rules);
 
@@ -93,6 +93,7 @@ class SettingsController extends AdminController
         if (Input::get('clear_logo')=='1') {
 	        $setting->logo = NULL;
         } elseif (Input::file('logo')) {
+            if (!Config::get('app.lock_passwords')) {
                 $image = Input::file('logo');
                 $file_name = "logo.".$image->getClientOriginalExtension();
                 $path = public_path('uploads/'.$file_name);
@@ -101,16 +102,17 @@ class SettingsController extends AdminController
                     $constraint->upsize();
                 })->save($path);
                 $setting->logo = $file_name;
+            }
         }
 
 
         // Update the asset data
             $setting->id = '1';
-            
+
              if (Config::get('app.lock_passwords')==false) {
 	             $setting->site_name = e(Input::get('site_name'));
-             } 
-            
+             }
+
             $setting->per_page = e(Input::get('per_page'));
             $setting->qr_code = e(Input::get('qr_code', '0'));
             $setting->barcode_type = e(Input::get('barcode_type'));
