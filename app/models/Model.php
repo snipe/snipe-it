@@ -40,13 +40,13 @@ class Model extends Elegant
     {
         return $this->belongsTo('Manufacturer','manufacturer_id');
     }
-    
+
     /**
-	-----------------------------------------------
-	BEGIN QUERY SCOPES
-	-----------------------------------------------
+	* -----------------------------------------------
+	* BEGIN QUERY SCOPES
+	* -----------------------------------------------
 	**/
-    
+
     /**
 	* Query builder scope for Deleted assets
 	*
