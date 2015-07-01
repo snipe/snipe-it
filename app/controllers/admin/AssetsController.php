@@ -54,8 +54,13 @@ class AssetsController extends AdminController
     public function getCreate($model_id = null)
     {
 
+        /*
         // Grab the dropdown list of models
         //$model_list = array('' => 'Select a Model') + Model::orderBy('name', 'asc')->lists('name'.' '. 'modelno', 'id');
+
+        $model_list = Model::select(DB::raw('concat(manufacturers.name," ",name) as name, id'))->orderBy('name', 'asc')->with('manufacturer')->lists('name', 'id');
+        //$model_list = array('' => Lang::get('general.select_model'));
+        */
 
         $model_list = array('' => Lang::get('general.select_model')) + DB::table('models')
         ->select(DB::raw('concat(name," / ",modelno) as name, id'))->orderBy('name', 'asc')
