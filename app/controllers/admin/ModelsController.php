@@ -236,7 +236,7 @@ class ModelsController extends AdminController
             return Redirect::to('hardware/models')->with('success', Lang::get('admin/models/message.delete.success'));
         }
     }
-    
+
     public function getRestore($modelId = null)
     {
 
@@ -308,7 +308,7 @@ class ModelsController extends AdminController
         return $view;
 
     }
-    
+
     public function getDatatable($status = null)
     {
         $models = Model::orderBy('created_at', 'DESC')->with('category','assets','depreciation');
@@ -324,6 +324,9 @@ class ModelsController extends AdminController
         });
 
         return Datatable::collection($models)
+        ->addColumn('manufacturer', function($models) {
+            return $models->manufacturer->name;
+        })
         ->addColumn('name', function ($models) {
             return link_to('/hardware/models/'.$models->id.'/view', $models->name);
         })
@@ -345,15 +348,15 @@ class ModelsController extends AdminController
         ->orderColumns('name','modelno','asset_count','depreciation','category','eol','actions')
         ->make();
     }
-    
-    
+
+
     public function getDataView($modelID)
     {
         $model = Model::withTrashed()->find($modelID);
         $modelassets = $model->assets;
 
-        $actions = new \Chumper\Datatable\Columns\FunctionColumn('actions', function ($modelassets) 
-            { 
+        $actions = new \Chumper\Datatable\Columns\FunctionColumn('actions', function ($modelassets)
+            {
                 if (($modelassets->assigned_to !='') && ($modelassets->assigned_to > 0)) {
                     return '<a href="'.route('checkin/hardware', $modelassets->id).'" class="btn btn-primary btn-sm">'.Lang::get('general.checkin').'</a>';
                 } else {
