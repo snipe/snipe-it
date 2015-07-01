@@ -1010,6 +1010,9 @@ class AssetsController extends AdminController
 
 
       switch ($status) {
+      case 'Deleted':
+        $assets->withTrashed()->Deleted();
+        break;
       case 'Pending':
       	$assets->Pending();
       	break;
@@ -1028,9 +1031,7 @@ class AssetsController extends AdminController
       case 'Deployed':
       	$assets->Deployed();
       	break;
-      case 'Deleted':
-      	$assets->withTrashed()->Deleted();
-      	break;
+
       }
 
 
