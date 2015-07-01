@@ -94,6 +94,7 @@ class SettingsController extends AdminController
         if (Input::get('clear_logo')=='1') {
 	        $setting->logo = NULL;
         } elseif (Input::file('logo')) {
+            if (!Config::get('app.lock_passwords')) {
                 $image = Input::file('logo');
                 $file_name = "logo.".$image->getClientOriginalExtension();
                 $path = public_path('uploads/'.$file_name);
@@ -102,6 +103,7 @@ class SettingsController extends AdminController
                     $constraint->upsize();
                 })->save($path);
                 $setting->logo = $file_name;
+            }
         }
 
 

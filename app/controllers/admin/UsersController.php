@@ -246,6 +246,11 @@ class UsersController extends AdminController
         $this->decodePermissions($permissions);
         app('request')->request->set('permissions', $permissions);
 
+        // Only update the email address if locking is set to false
+        if (Config::get('app.lock_passwords')) {
+            return Redirect::route('users')->with('error', 'Denied! You cannot update user information on the demo.');
+        }
+
         try {
             // Get the user information
             $user = Sentry::getUserProvider()->findById($id);
@@ -277,11 +282,6 @@ class UsersController extends AdminController
             // Ooops.. something went wrong
             return Redirect::back()->withInput()->withErrors($validator);
         }
-
-        // Only update the email address if locking is set to false
-        if (!Config::get('app.lock_passwords')) {
-			$user->email       		= Input::get('email');
-		}
 
         try {
             // Update the user
@@ -326,7 +326,6 @@ class UsersController extends AdminController
 	            // Assign the user to groups
 	            foreach ($groupsToAdd as $groupId) {
 	                $group = Sentry::getGroupProvider()->findById($groupId);
-
 	                $user->addGroup($group);
 	            }
 

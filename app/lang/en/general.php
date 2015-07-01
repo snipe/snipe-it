@@ -70,6 +70,7 @@ return array(
     'licenses'				=> 'Licenses',
     'list_all'				=> 'List All',
     'loading'				=> 'Loading',
+    'lock_passwords'        => 'This field cannot be edited in this installation.',
     'location'              => 'Location',
     'locations'				=> 'Locations',
     'logout'				=> 'Logout',

@@ -23,12 +23,13 @@
 
 <div class="row form-wrapper">
     {{ Datatable::table()
-    ->addColumn(Lang::get('admin/models/table.title'),
+    ->addColumn(Lang::get('general.manufacturer'),
+        Lang::get('admin/models/table.title'),
         Lang::get('admin/models/table.modelnumber'),
         Lang::get('admin/models/table.numassets'),
         Lang::get('general.depreciation'),
         Lang::get('general.category'),
-        Lang::get('general.eol'), 
+        Lang::get('general.eol'),
         Lang::get('table.actions'))
     ->setOptions(
             array(
@@ -37,7 +38,7 @@
 	            	'lengthMenu' => Lang::get('general.page_menu'),
 	            	'loadingRecords' => Lang::get('general.loading'),
 	            	'zeroRecords' => Lang::get('general.no_results'),
-	            	'info' => Lang::get('general.pagination_info'), 
+	            	'info' => Lang::get('general.pagination_info'),
 	            	'processing' => Lang::get('general.processing'),
 	            	'paginate'=> array(
 	            		'first'=>Lang::get('general.first'),
