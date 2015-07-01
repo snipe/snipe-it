@@ -19,7 +19,7 @@ padding: 0px 20px;
 </style>
 
 <div id="pad-wrapper" class="user-profile">
-	
+
                 <!-- header -->
 
                 <div class="pull-right">
@@ -31,9 +31,9 @@ padding: 0px 20px;
 
 
                 <div class="profile">
-	                
+
                     <!-- bio, new note & orders column -->
-                    
+
                     <div class="col-md-9 bio">
                         <div class="profile-box">
                             <br>
@@ -42,11 +42,11 @@ padding: 0px 20px;
                                 <!-- CSRF Token -->
                                 {{ Form::hidden('_token', csrf_token()) }}
 
-									
+
                                 @foreach ($settings as $setting)
-									
+
 									<h4>@lang('admin/settings/general.general_settings')</h4>
-									
+
                                     <div class="form-group {{ $errors->has('site_name') ? 'error' : '' }}">
 	                                    <div class="col-md-3">
                                         {{ Form::label('site_name', Lang::get('admin/settings/general.site_name')) }}
@@ -54,11 +54,11 @@ padding: 0px 20px;
 	                                    <div class="col-md-9">
 		                                   @if (Config::get('app.lock_passwords')===true)
 		                                   		{{ Form::text('site_name', Input::old('site_name', $setting->site_name), array('class' => 'form-control', 'disabled'=>'disabled','placeholder' => 'Snipe-IT Asset Management')) }}
-		                                   @else 
+		                                   @else
 		                                   		{{ Form::text('site_name', Input::old('site_name', $setting->site_name), array('class' => 'form-control','placeholder' => 'Snipe-IT Asset Management')) }}
 
 		                                   @endif
-		                                   
+
 										  {{ $errors->first('site_name', '<br><span class="alert-msg">:message</span>') }}
 	                                    </div>
                                     </div>
@@ -69,9 +69,15 @@ padding: 0px 20px;
 										 	{{ Form::label('logo', Lang::get('admin/settings/general.logo')) }}
 	                                    </div>
 	                                    <div class="col-md-9">
-						                    {{ Form::file('logo') }}
-						                    {{ $errors->first('logo', '<br><span class="alert-msg">:message</span>') }}
-						                    {{ Form::checkbox('clear_logo', '1', Input::old('clear_logo')) }} Remove
+
+                                            @if (Config::get('app.lock_passwords'))
+                                                <p class="help-block">@lang('general.lock_passwords')</p>
+                                            @else
+
+    						                    {{ Form::file('logo') }}
+    						                    {{ $errors->first('logo', '<br><span class="alert-msg">:message</span>') }}
+    						                    {{ Form::checkbox('clear_logo', '1', Input::old('clear_logo')) }} Remove
+                                            @endif
 	                                    </div>
 
 						            </div>
@@ -115,7 +121,7 @@ padding: 0px 20px;
 										</div>
                                     </div>
 
-                      
+
 
                                    <div class="checkbox col-md-offset-3">
 										<label>
@@ -220,7 +226,7 @@ padding: 0px 20px;
 
 
                                     </div>
-                                    
+
                                     <hr>
                                     <h4>@lang('admin/settings/general.slack_integration') (@lang('admin/settings/general.optional'))</h4>
                                     <p class="help-inline">@lang('admin/settings/general.slack_integration_help',array('slack_link' => 'https://my.slack.com/services/new/incoming-webhook'))</p>
@@ -229,17 +235,17 @@ padding: 0px 20px;
                                         {{ Form::label('slack_endpoint', Lang::get('admin/settings/general.slack_endpoint')) }}
 	                                    </div>
 	                                    <div class="col-md-9">
-		                                    
+
 		                                    @if (Config::get('app.lock_passwords')===true)
 		                                     	{{ Form::text('slack_endpoint', Input::old('slack_endpoint', $setting->slack_endpoint), array('class' => 'form-control','disabled'=>'disabled','placeholder' => 'https://hooks.slack.com/services/XXXXXXXXXXXXXXXXXXXXX')) }}
-		                                   @else 
+		                                   @else
 		                                   		{{ Form::text('slack_endpoint', Input::old('slack_endpoint', $setting->slack_endpoint), array('class' => 'form-control','placeholder' => 'https://hooks.slack.com/services/XXXXXXXXXXXXXXXXXXXXX')) }}
 		                                   @endif
-		                                   
+
 										{{ $errors->first('slack_endpoint', '<br><span class="alert-msg">:message</span>') }}
 	                                    </div>
                                     </div>
-                                    
+
                                     <div class="form-group {{ $errors->has('slack_channel') ? 'error' : '' }}">
 	                                    <div class="col-md-3">
                                         {{ Form::label('slack_channel', Lang::get('admin/settings/general.slack_channel')) }}
@@ -247,13 +253,13 @@ padding: 0px 20px;
 	                                    <div class="col-md-9">
 										@if (Config::get('app.lock_passwords')===true)
 		                                     	{{ Form::text('slack_channel', Input::old('slack_channel', $setting->slack_channel), array('class' => 'form-control','disabled'=>'disabled','placeholder' => '#IT-Ops')) }}
-		                                @else 
+		                                @else
 		                                   		{{ Form::text('slack_channel', Input::old('slack_channel', $setting->slack_channel), array('class' => 'form-control','placeholder' => '#IT-Ops')) }}
-		                                @endif										
+		                                @endif
 		                                {{ $errors->first('slack_channel', '<br><span class="alert-msg">:message</span>') }}
 	                                    </div>
                                     </div>
-                                    
+
                                     <div class="form-group {{ $errors->has('slack_botname') ? 'error' : '' }}">
 	                                    <div class="col-md-3">
                                         {{ Form::label('slack_botname', Lang::get('admin/settings/general.slack_botname')) }}
@@ -261,9 +267,9 @@ padding: 0px 20px;
 	                                    <div class="col-md-9">
 										@if (Config::get('app.lock_passwords')===true)
 		                                     	{{ Form::text('slack_botname', Input::old('slack_botname', $setting->slack_botname), array('class' => 'form-control','disabled'=>'disabled','placeholder' => 'Snipe-IT Bot')) }}
-		                                @else 
+		                                @else
 		                                   		{{ Form::text('slack_botname', Input::old('slack_botname', $setting->slack_botname), array('class' => 'form-control','placeholder' => 'Snipe-IT Bot')) }}
-		                                @endif		
+		                                @endif
 		                                {{ $errors->first('slack_botname', '<br><span class="alert-msg">:message</span>') }}
 	                                    </div>
                                     </div>
@@ -280,10 +286,10 @@ padding: 0px 20px;
                                             <button type="submit" class="btn-flat success"><i class="fa fa-check icon-white"></i> @lang('general.save')</button>
                                         </div>
                                 </div>
-                           
-                          </form> 
+
+                          </form>
                         </div>
-                        
+
 </div>
 
                     <!-- side address column -->
