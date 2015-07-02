@@ -58,11 +58,11 @@ class Asset extends Depreciable
 
 
     /**
-    * Get the asset's location based on the assigned user
+    * Get the asset's location based on default RTD location
     **/
     public function defaultLoc()
     {
-        return $this->hasOne('Location', 'id', 'rtd_location_id');
+        return $this->belongsTo('Location', 'rtd_location_id');
     }
 
 
@@ -119,9 +119,9 @@ class Asset extends Depreciable
     {
         return $this->belongsTo('Statuslabel','status_id');
     }
-	
-	/** 
-	* Get name for EULA 
+
+	/**
+	* Get name for EULA
 	**/
 	public function showAssetName()
     {
@@ -131,7 +131,7 @@ class Asset extends Depreciable
 		    return $this->name;
 	    }
     }
-    
+
      public function warrantee_expires()
     {
             $date = date_create($this->purchase_date);
@@ -175,7 +175,7 @@ class Asset extends Depreciable
     {
         return $this->belongsTo('Supplier','supplier_id');
     }
-    
+
 
     public function months_until_eol()
     {
