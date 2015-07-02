@@ -262,8 +262,15 @@ class UsersController extends AdminController
             return Redirect::route('users')->with('error', $error);
         }
 
-        //
-        $this->validationRules['email'] = "required|email|unique:users,email,{$user->email},email";
+        //Check if username is the same then unset validationRules
+        if (Input::get('username') == $user->username) {
+           unset($this->validationRules['username']);
+        }
+
+        //Check if email is the same then unset validationRules
+        if ($user->email == Input::get('email')) {
+            unset($this->validationRules['email']);
+        }
 
         // Do we want to update the user password?
         if ( ! $password = Input::get('password')) {
@@ -285,8 +292,10 @@ class UsersController extends AdminController
 
         try {
             // Update the user
-            $user->first_name  		= Input::get('first_name');
+           $user->first_name  		= Input::get('first_name');
             $user->last_name   		= Input::get('last_name');
+            $user->username         = Input::get('username');
+            $user->email            = Input::get('email');
             $user->employee_num		= Input::get('employee_num');
             $user->activated   		= Input::get('activated', $user->activated);
             $user->permissions 		= Input::get('permissions');
@@ -294,7 +303,7 @@ class UsersController extends AdminController
             $user->phone 			= Input::get('phone');
             $user->location_id 		= Input::get('location_id');
             $user->manager_id 		= Input::get('manager_id');
-            $user->notes		= Input::get('notes');
+            $user->notes            = Input::get('notes');
 
             if ($user->manager_id == "") {
                 $user->manager_id = NULL;
