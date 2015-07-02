@@ -101,7 +101,7 @@ class CategoriesController extends AdminController
         //$category_options = array('' => 'Top Level') + Category::lists('name', 'id');
 
         $category_options = array('' => 'Top Level') + DB::table('categories')->where('id', '!=', $categoryId)->lists('name', 'id');
-        $category_types= array('' => '', 'asset' => 'Asset', 'accessory' => 'Accessory');
+        $category_types= array('' => '', 'asset' => 'Asset', 'accessory' => 'Accessory', 'consumable' => 'Consumable');
 
         return View::make('backend/categories/edit', compact('category'))
         ->with('category_options',$category_options)
