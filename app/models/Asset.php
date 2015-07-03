@@ -58,11 +58,11 @@ class Asset extends Depreciable
 
 
     /**
-    * Get the asset's location based on the assigned user
+    * Get the asset's location based on default RTD location
     **/
     public function defaultLoc()
     {
-        return $this->hasOne('Location', 'id', 'rtd_location_id');
+        return $this->belongsTo('Location', 'rtd_location_id');
     }
 
 
