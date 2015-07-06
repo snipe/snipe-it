@@ -1065,7 +1065,11 @@ class AssetsController extends AdminController
 
 		->addColumn('model',function($assets)
 			{
-			    return $assets->model->name;
+				if ($assets->model) {
+			    	return $assets->model->name;
+			    } else {
+				    return 'No model';
+				}
 			})
 
 	    ->addColumn('status',function($assets)
@@ -1087,7 +1091,11 @@ class AssetsController extends AdminController
             })
 		->addColumn('category',function($assets)
 			{
-				return $assets->model->category->name;
+				if (isset($assets->model->category)) {
+			    	return $assets->model->category->name;
+			    } else {
+				    return 'No category';
+				}
 
 			})
 
