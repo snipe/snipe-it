@@ -5,7 +5,7 @@ use AdminController;
 use Asset;
 use Illuminate\Support\Facades\Lang;
 use Illuminate\Support\Facades\Response;
-use Improvement;
+use AssetMaintenance;
 use Input;
 use License;
 use Location;
@@ -490,15 +490,15 @@ class ReportsController extends AdminController
      * @author  Vincent Sposato <vincent.sposato@gmail.com>
      * @version v1.0
      */
-    public function getImprovementsReport()
+    public function getAssetMaintenancesReport()
     {
 
         // Grab all the improvements
-        $improvements = Improvement::with( 'asset', 'supplier' )
+        $assetMaintenances = \AssetMaintenance::with( 'asset', 'supplier' )
                                    ->orderBy( 'created_at', 'DESC' )
                                    ->get();
 
-        return View::make( 'backend/reports/improvements', compact( 'improvements' ) );
+        return View::make( 'backend/reports/asset_maintenances', compact( 'assetMaintenances' ) );
 
     }
 
@@ -509,46 +509,46 @@ class ReportsController extends AdminController
      * @author  Vincent Sposato <vincent.sposato@gmail.com>
      * @version v1.0
      */
-    public function exportImprovementsReport()
+    public function exportAssetMaintenancesReport()
     {
 
         // Grab all the improvements
-        $improvements = Improvement::with( 'asset', 'supplier' )
+        $assetMaintenances = AssetMaintenance::with( 'asset', 'supplier' )
                                    ->orderBy( 'created_at', 'DESC' )
                                    ->get();
 
         $rows = [ ];
 
         $header = [
-            Lang::get( 'admin/improvements/table.asset_name' ),
-            Lang::get( 'admin/improvements/table.supplier_name' ),
-            Lang::get( 'admin/improvements/form.improvement_type' ),
-            Lang::get( 'admin/improvements/form.title' ),
-            Lang::get( 'admin/improvements/form.start_date' ),
-            Lang::get( 'admin/improvements/form.completion_date' ),
-            Lang::get( 'admin/improvements/form.improvement_time' ),
-            Lang::get( 'admin/improvements/form.cost' )
+            Lang::get( 'admin/asset_maintenances/table.asset_name' ),
+            Lang::get( 'admin/asset_maintenances/table.supplier_name' ),
+            Lang::get( 'admin/asset_maintenances/form.asset_maintenance_type' ),
+            Lang::get( 'admin/asset_maintenances/form.title' ),
+            Lang::get( 'admin/asset_maintenances/form.start_date' ),
+            Lang::get( 'admin/asset_maintenances/form.completion_date' ),
+            Lang::get( 'admin/asset_maintenances/form.asset_maintenance_time' ),
+            Lang::get( 'admin/asset_maintenances/form.cost' )
         ];
 
         $header  = array_map( 'trim', $header );
         $rows[ ] = implode( $header, ',' );
 
-        foreach ($improvements as $improvement) {
+        foreach ($assetMaintenances as $assetMaintenance) {
             $row    = [ ];
-            $row[ ] = str_replace( ',', '', $improvement->asset->name );
-            $row[ ] = str_replace( ',', '', $improvement->supplier->name );
-            $row[ ] = $improvement->improvement_type;
-            $row[ ] = $improvement->title;
-            $row[ ] = $improvement->start_date;
-            $row[ ] = $improvement->completion_date;
-            if (is_null( $improvement->improvement_time )) {
+            $row[ ] = str_replace( ',', '', $assetMaintenance->asset->name );
+            $row[ ] = str_replace( ',', '', $assetMaintenance->supplier->name );
+            $row[ ] = $assetMaintenance->improvement_type;
+            $row[ ] = $assetMaintenance->title;
+            $row[ ] = $assetMaintenance->start_date;
+            $row[ ] = $assetMaintenance->completion_date;
+            if (is_null( $assetMaintenance->asset_maintenance_time )) {
                 $improvementTime = intval( Carbon::now()
-                                                 ->diffInDays( Carbon::parse( $improvement->start_date ) ) );
+                                                 ->diffInDays( Carbon::parse( $assetMaintenance->start_date ) ) );
             } else {
-                $improvementTime = intval( $improvement->improvement_time );
+                $improvementTime = intval( $assetMaintenance->asset_maintenance_time );
             }
             $row[ ]  = $improvementTime;
-            $row[ ]  = Lang::get( 'general.currency' ) . number_format( $improvement->cost, 2 );
+            $row[ ]  = Lang::get( 'general.currency' ) . number_format( $assetMaintenance->cost, 2 );
             $rows[ ] = implode( $row, ',' );
         }
 

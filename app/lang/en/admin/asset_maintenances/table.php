@@ -1,7 +1,7 @@
 <?php
 
     return [
-        'title'         => 'Improvement',
+        'title'         => 'Asset Maintenance',
         'asset_name'    => 'Asset Name',
         'supplier_name' => 'Supplier Name',
         'is_warranty'   => 'Warranty',

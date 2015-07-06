@@ -193,43 +193,41 @@
 		</div>
 		@endif
 </div>
-<!-- Improvements -->
+<!-- Asset Maintenance -->
 <div class="col-md-12">
-    <h6>Improvements</h6>
-    <br>
     <div class="row header">
         <div class="col-md-12">
-            <a href="{{ route('create/improvements', $asset->id) }}" class="btn btn-success pull-right"><i class="fa fa-plus icon-white"></i> New Improvement</a>
-            <h3>@lang('admin/improvements/general.improvements')</h3>
+            <a href="{{ route('create/asset_maintenances', $asset->id) }}" class="btn btn-success pull-right"><i class="fa fa-plus icon-white"></i> New Improvement</a>
+            <h6>@lang('general.asset_maintenances')</h6>
         </div>
     </div>
-    <!-- Improvement table -->
-    @if (count($asset->improvements) > 0)
+    <!-- Asset Maintenance table -->
+    @if (count($asset->assetmaintenances) > 0)
         <table class="table table-hover">
             <thead>
             <tr>
-                <th class="col-md-2"><span class="line"></span>@lang('admin/improvements/table.supplier_name')</th>
-                <th class="col-md-2"><span class="line"></span>@lang('admin/improvements/form.improvement_type')</th>
-                <th class="col-md-2"><span class="line"></span>@lang('admin/improvements/form.start_date')</th>
-                <th class="col-md-2"><span class="line"></span>@lang('admin/improvements/form.completion_date')</th>
-                <th class="col-md-2"><span class="line"></span>@lang('admin/improvements/table.is_warranty')</th>
-                <th class="col-md-2"><span class="line"></span>@lang('admin/improvements/form.cost')</th>
+                <th class="col-md-2"><span class="line"></span>@lang('admin/asset_maintenances/table.supplier_name')</th>
+                <th class="col-md-2"><span class="line"></span>@lang('admin/asset_maintenances/form.asset_maintenance_type')</th>
+                <th class="col-md-2"><span class="line"></span>@lang('admin/asset_maintenances/form.start_date')</th>
+                <th class="col-md-2"><span class="line"></span>@lang('admin/asset_maintenances/form.completion_date')</th>
+                <th class="col-md-2"><span class="line"></span>@lang('admin/asset_maintenances/table.is_warranty')</th>
+                <th class="col-md-2"><span class="line"></span>@lang('admin/asset_maintenances/form.cost')</th>
                 <th class="col-md-1"><span class="line"></span>@lang('table.actions')</th>
             </tr>
             </thead>
             <tbody>
             <?php $totalCost = 0; ?>
-            @foreach ($asset->improvements as $improvement)
-                @if (is_null($improvement->deleted_at))
+            @foreach ($asset->asset_maintenances as $assetMaintenance)
+                @if (is_null($assetMaintenance->deleted_at))
                 <tr>
-                    <td><a href="{{ route('view/supplier', $improvement->supplier_id) }}">{{{ $improvement->supplier->name }}}</a></td>
-                    <td>{{{ $improvement->improvement_type }}}</td>
-                    <td>{{{ $improvement->start_date }}}</td>
-                    <td>{{{ $improvement->completion_date }}}</td>
-                    <td>{{{ $improvement->is_warranty ? Lang::get('admin/improvements/message.warranty') : Lang::get('admin/improvements/message.not_warranty') }}}</td>
-                    <td>{{{ sprintf( Lang::get( 'general.currency' ) . '%01.2f', $improvement->cost) }}}</td>
-                    <?php $totalCost += $improvement->cost; ?>
-                    <td><a href="{{ route('update/improvement', $improvement->id) }}" class="btn btn-warning"><i class="fa fa-pencil icon-white"></i></a>
+                    <td><a href="{{ route('view/supplier', $assetMaintenance->supplier_id) }}">{{{ $assetMaintenance->supplier->name }}}</a></td>
+                    <td>{{{ $assetMaintenance->improvement_type }}}</td>
+                    <td>{{{ $assetMaintenance->start_date }}}</td>
+                    <td>{{{ $assetMaintenance->completion_date }}}</td>
+                    <td>{{{ $assetMaintenance->is_warranty ? Lang::get('admin/asset_maintenances/message.warranty') : Lang::get('admin/asset_maintenances/message.not_warranty') }}}</td>
+                    <td>{{{ sprintf( Lang::get( 'general.currency' ) . '%01.2f', $assetMaintenance->cost) }}}</td>
+                    <?php $totalCost += $assetMaintenance->cost; ?>
+                    <td><a href="{{ route('update/asset_maintenance', $assetMaintenance->id) }}" class="btn btn-warning"><i class="fa fa-pencil icon-white"></i></a>
                     </td>
                 </tr>
                 @endif

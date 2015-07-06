@@ -1,11 +1,11 @@
 <?php
-    use Carbon\Carbon;
+use Carbon\Carbon;
 ?>
 @extends('backend/layouts/default')
 
 {{-- Page title --}}
 @section('title')
-    @lang('admin/improvements/general.view') {{ $improvement->title }} ::
+    @lang('admin/asset_maintenances/general.view') {{ $assetMaintenance->title }} ::
     @parent
 @stop
 
@@ -14,8 +14,8 @@
     <div class="row header">
         <div class="col-md-12">
             <h3 class="title">
-                @lang('admin/improvements/general.view')
-                {{{ " - " . $improvement->title }}}
+                @lang('admin/asset_maintenances/general.view')
+                {{{ " - " . $assetMaintenance->title }}}
             </h3>
 
             <div class="btn-group pull-right">
@@ -25,7 +25,7 @@
                         <span class="caret"></span>
                     </button>
                     <ul class="dropdown-menu pull-right" role="menu" aria-labelledby="dropdownMenu1">
-                        <li role="presentation"><a href="{{ route('update/improvement', $improvement->id) }}">@lang('admin/improvements/general.edit')</a></li>
+                        <li role="presentation"><a href="{{ route('update/asset_maintenance', $assetMaintenance->id) }}">@lang('admin/asset_maintenances/general.edit')</a></li>
                     </ul>
                 </div>
             </div>
@@ -38,23 +38,23 @@
                 <!-- 1st Row Begin -->
                 <div class="row">
                     <div class="col-md-12 col-sm-12" style="padding-bottom: 10px; margin-left: 15px; word-wrap: break-word;">
-                        <strong>@lang('admin/improvements/form.improvement_type'): </strong>
-                        {{{ $improvement->improvement_type }}}
+                        <strong>@lang('admin/asset_maintenances/form.asset_maintenance_type'): </strong>
+                        {{{ $assetMaintenance->asset_maintenance_type }}}
                     </div>
                 </div>
                 <!-- 1st Row End -->
                 <!-- 2nd Row Begin -->
                 <div class="row">
                     <div class="col-md-3 col-sm-3" style="padding-bottom: 10px; margin-left: 15px; word-wrap: break-word;">
-                        <strong>@lang('admin/improvements/table.asset_name'): </strong>
-                        <a href="{{ route('view/hardware', $improvement->asset_id) }}">
-                            {{{ $improvement->asset->name }}}
+                        <strong>@lang('admin/asset_maintenances/table.asset_name'): </strong>
+                        <a href="{{ route('view/hardware', $assetMaintenance->asset_id) }}">
+                            {{{ $assetMaintenance->asset->name }}}
                         </a>
                     </div>
                     <div class="col-md-3 col-sm-3" style="padding-bottom: 10px; margin-left: 15px; word-wrap: break-word;">
-                        <strong>@lang('admin/improvements/table.supplier_name'): </strong>
-                        <a href="{{ route('view/supplier', $improvement->supplier_id) }}">
-                            {{{ $improvement->supplier->name }}}
+                        <strong>@lang('admin/asset_maintenances/table.supplier_name'): </strong>
+                        <a href="{{ route('view/supplier', $assetMaintenance->supplier_id) }}">
+                            {{{ $assetMaintenance->supplier->name }}}
                         </a>
                     </div>
                 </div>
@@ -62,24 +62,24 @@
                 <!-- 3rd Row Begin -->
                 <div class="row">
                     <div class="col-md-3 col-sm-3" style="padding-bottom: 10px; margin-left: 15px; word-wrap: break-word;">
-                        <strong>@lang('admin/improvements/form.start_date'): </strong>
-                        <?php $startDate = Carbon::parse($improvement->start_date); ?>
+                        <strong>@lang('admin/asset_maintenances/form.start_date'): </strong>
+                        <?php $startDate = Carbon::parse($assetMaintenance->start_date); ?>
                         {{{ $startDate->toDateString() }}}
                     </div>
                     <div class="col-md-3 col-sm-3" style="padding-bottom: 10px; margin-left: 15px; word-wrap: break-word;">
-                        <strong>@lang('admin/improvements/form.completion_date'): </strong>
-                        <?php if (is_null($improvement->completion_date)) {
+                        <strong>@lang('admin/asset_maintenances/form.completion_date'): </strong>
+                        <?php if (is_null($assetMaintenance->completion_date)) {
                             $calculationEndDate = Carbon::now();
                             $completionDate = NULL;
                         } else {
-                            $completionDate = Carbon::parse($improvement->completion_date);
+                            $completionDate = Carbon::parse($assetMaintenance->completion_date);
                             $calculationEndDate = $completionDate;
                         }
                         ?>
-                        {{{ $completionDate ? $completionDate->toDateString() : Lang::get('admin/improvements/message.improvement_incomplete') }}}
+                        {{{ $completionDate ? $completionDate->toDateString() : Lang::get('admin/asset_maintenances/message.asset_maintenance_incomplete') }}}
                     </div>
                     <div class="col-md-3 col-sm-3" style="padding-bottom: 10px; margin-left: 15px; word-wrap: break-word;">
-                        <strong>@lang('admin/improvements/form.improvement_time'): </strong>
+                        <strong>@lang('admin/asset_maintenances/form.asset_maintenance_time'): </strong>
                         {{ $calculationEndDate->diffInDays($startDate) }}
                     </div>
                 </div>
@@ -87,20 +87,20 @@
                 <!-- 4th Row Begin -->
                 <div class="row">
                     <div class="col-md-3 col-sm-3" style="padding-bottom: 10px; margin-left: 15px; word-wrap: break-word;">
-                        <strong>@lang('admin/improvements/form.cost'): </strong>
-                        {{{ sprintf( Lang::get( 'general.currency' ) . '%01.2f', $improvement->cost) }}}
+                        <strong>@lang('admin/asset_maintenances/form.cost'): </strong>
+                        {{{ sprintf( Lang::get( 'general.currency' ) . '%01.2f', $assetMaintenance->cost) }}}
                     </div>
                     <div class="col-md-3 col-sm-3" style="padding-bottom: 10px; margin-left: 15px; word-wrap: break-word;">
-                        <strong>@lang('admin/improvements/form.is_warranty'): </strong>
-                        {{{ $improvement->is_warranty ? Lang::get('admin/improvements/message.warranty') : Lang::get('admin/improvements/message.not_warranty') }}}
+                        <strong>@lang('admin/asset_maintenances/form.is_warranty'): </strong>
+                        {{{ $assetMaintenance->is_warranty ? Lang::get('admin/asset_maintenances/message.warranty') : Lang::get('admin/asset_maintenances/message.not_warranty') }}}
                     </div>
                 </div>
                 <!-- 4th Row End -->
                 <!-- 5th Row Begin -->
                 <div class="row">
                     <div class="col-md-12 col-sm-12" style="padding-bottom: 10px; margin-left: 15px; word-wrap: break-word;">
-                        <strong>@lang('admin/improvements/form.notes'): </strong>
-                        {{{ $improvement->notes }}}
+                        <strong>@lang('admin/asset_maintenances/form.notes'): </strong>
+                        {{{ $assetMaintenance->notes }}}
                     </div>
                 </div>
                 <!-- 5th Row End -->

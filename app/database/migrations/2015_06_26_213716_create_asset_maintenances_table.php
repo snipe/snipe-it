@@ -2,8 +2,9 @@
 
     use Illuminate\Database\Migrations\Migration;
     use Illuminate\Database\Schema\Blueprint;
+    use Illuminate\Support\Facades\Lang;
 
-    class CreateImprovementsTable extends Migration
+    class CreateAssetMaintenancesTable extends Migration
     {
 
         /**
@@ -14,20 +15,20 @@
         public function up()
         {
 
-            Schema::create( 'improvements', function ( Blueprint $table ) {
+            Schema::create( 'asset_maintenances', function ( Blueprint $table ) {
 
                 $table->increments( 'id' );
                 $table->integer( 'asset_id' )
                       ->unsigned();
                 $table->integer( 'supplier_id' )
                       ->unsigned();
-                $table->enum( 'improvement_type', [ 'Maintenance', 'Repair', 'Upgrade' ] );
+                $table->enum( 'asset_maintenance_type', $this->getEnumFields() );
                 $table->string( 'title', 100 );
                 $table->boolean( 'is_warranty' );
                 $table->date( 'start_date' );
                 $table->date( 'completion_date' )
                       ->nullable();
-                $table->integer( 'improvement_time')
+                $table->integer( 'asset_maintenance_time' )
                       ->nullable();
                 $table->longText( 'notes' )
                       ->nullable();
@@ -39,6 +40,16 @@
             } );
         }
 
+        protected function getEnumFields()
+        {
+
+            return [
+                Lang::get( 'admin/asset_maintenances/general.maintenance' ),
+                Lang::get( 'admin/asset_maintenances/general.repair' ),
+                Lang::get( 'admin/asset_maintenances/general.upgrade' )
+            ];
+        }
+
         /**
          * Reverse the migrations.
          *
@@ -47,7 +58,7 @@
         public function down()
         {
 
-            Schema::dropIfExists( 'improvements' );
+            Schema::dropIfExists( 'asset_maintenances' );
 
         }
 
