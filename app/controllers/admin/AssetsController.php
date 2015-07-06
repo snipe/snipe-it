@@ -708,6 +708,8 @@ class AssetsController extends AdminController
         $asset = clone $asset_to_clone;
         $asset->id = null;
         $asset->asset_tag = '';
+        $asset->serial = '';
+        $asset->assigned_to = '';
         return View::make('backend/hardware/edit')->with('supplier_list',$supplier_list)->with('model_list',$model_list)->with('statuslabel_list',$statuslabel_list)->with('assigned_to',$assigned_to)->with('asset',$asset)->with('location_list',$location_list);
 
     }
