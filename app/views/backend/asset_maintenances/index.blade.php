@@ -1,7 +1,7 @@
 @extends('backend/layouts/default')
 
 {{-- Page title --}}
-@lang('admin/improvements/general.improvements') ::
+@lang('admin/asset_maintenances/general.improvements') ::
 @parent
 @stop
 
@@ -9,21 +9,21 @@
 @section('content')
     <div class="row header">
         <div class="col-md-12">
-            <a href="{{ route('create/improvements') }}" class="btn btn-success pull-right"><i class="fa fa-plus icon-white"></i> Create New</a>
-            <h3>@lang('admin/improvements/general.improvements')</h3>
+            <a href="{{ route('create/asset_maintenances') }}" class="btn btn-success pull-right"><i class="fa fa-plus icon-white"></i> Create New</a>
+            <h3>@lang('admin/asset_maintenances/general.asset_maintenances')</h3>
         </div>
     </div>
 
     <div class="row form-wrapper">
         {{ Datatable::table()
-            ->addColumn(Lang::get('admin/improvements/table.asset_name'),
-                        Lang::get('admin/improvements/table.supplier_name'),
-                        Lang::get('admin/improvements/form.improvement_type'),
-                        Lang::get('admin/improvements/form.title'),
-                        Lang::get('admin/improvements/form.start_date'),
-                        Lang::get('admin/improvements/form.completion_date'),
-                        Lang::get('admin/improvements/form.improvement_time'),
-                        Lang::get('admin/improvements/form.cost'),
+            ->addColumn(Lang::get('admin/asset_maintenances/table.asset_name'),
+                        Lang::get('admin/asset_maintenances/table.supplier_name'),
+                        Lang::get('admin/asset_maintenances/form.asset_maintenance_type'),
+                        Lang::get('admin/asset_maintenances/form.title'),
+                        Lang::get('admin/asset_maintenances/form.start_date'),
+                        Lang::get('admin/asset_maintenances/form.completion_date'),
+                        Lang::get('admin/asset_maintenances/form.asset_maintenance_time'),
+                        Lang::get('admin/asset_maintenances/form.cost'),
                         Lang::get('table.actions'))
             ->setOptions(
                     [
@@ -41,7 +41,7 @@
                             'last'=>Lang::get('general.last'),
                             ],
                         ],
-                        'sAjaxSource'=>route('api.improvements.list'),
+                        'sAjaxSource'=>route('api.asset_maintenances.list'),
                         'dom' =>'CT<"clear">lfrtip',
                         'colVis'=> ['showAll'=>'Show All','restore'=>'Restore','activate'=>'mouseover'],
                         'columnDefs'=> [

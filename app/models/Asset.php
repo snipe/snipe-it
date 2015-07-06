@@ -80,16 +80,16 @@ class Asset extends Depreciable
     }
 
     /**
-     * improvement
+     * assetmaintenances
      * Get improvements for this asset
      * @return mixed
      * @author  Vincent Sposato <vincent.sposato@gmail.com>
      * @version v1.0
      */
-    public function improvements()
+    public function assetmaintenances()
     {
 
-        return $this->hasMany( 'Improvement', 'asset_id' )
+        return $this->hasMany( 'AssetMaintenance', 'asset_id' )
                     ->orderBy( 'created_at', 'desc' )
                     ->withTrashed();
     }

@@ -53,10 +53,10 @@ Route::group(array('prefix' => 'api', 'namespace' => 'Controllers\Admin', 'befor
 		});
     });
     /*---Improvements API---*/
-    Route::group( [ 'prefix' => 'improvements' ], function () {
+    Route::group( [ 'prefix' => 'asset_maintenances' ], function () {
 
-        Route::resource( '/', 'ImprovementsController' );
-        Route::get( 'list', [ 'as' => 'api.improvements.list', 'uses' => 'ImprovementsController@getDatatable' ] );
+        Route::resource( '/', 'AssetMaintenancesController' );
+        Route::get( 'list', [ 'as' => 'api.asset_maintenances.list', 'uses' => 'AssetMaintenancesController@getDatatable' ] );
     } );
     /*---Models API---*/
     Route::group( [ 'prefix' => 'models'], function() {
@@ -189,18 +189,21 @@ Route::group(array('prefix' => 'admin', 'before' => 'admin-auth', 'namespace' =>
         Route::get('/', ['as' => 'licenses', 'uses' => 'LicensesController@getIndex']);
     });
 
-    # Improvements
-    Route::group( [ 'prefix' => 'improvements' ], function () {
+        # Asset Maintenances
+        Route::group( [ 'prefix' => 'asset_maintenances' ], function () {
 
-        Route::get( 'create/{assetId?}', [ 'as' => 'create/improvements', 'uses' => 'ImprovementsController@getCreate' ] );
-        Route::post( 'create/{assetId?}', 'ImprovementsController@postCreate' );
-        Route::get( '/', [ 'as' => 'improvements', 'uses' => 'ImprovementsController@getIndex' ] );
-        Route::get( '{improvementId}/edit',
-            [ 'as' => 'update/improvement', 'uses' => 'ImprovementsController@getEdit' ] );
-        Route::post( '{improvementId}/edit', 'ImprovementsController@postEdit' );
-        Route::get('{improvementId}/delete', array('as' => 'delete/improvement', 'uses' => 'ImprovementsController@getDelete'));
-        Route::get('{improvementId}/view', array('as' => 'view/improvement', 'uses' => 'ImprovementsController@getView'));
-    } );
+            Route::get( 'create/{assetId?}',
+                [ 'as' => 'create/asset_maintenances', 'uses' => 'AssetMaintenancesController@getCreate' ] );
+            Route::post( 'create/{assetId?}', 'AssetMaintenancesController@postCreate' );
+            Route::get( '/', [ 'as' => 'asset_maintenances', 'uses' => 'AssetMaintenancesController@getIndex' ] );
+            Route::get( '{assetMaintenanceId}/edit',
+                [ 'as' => 'update/asset_maintenance', 'uses' => 'AssetMaintenancesController@getEdit' ] );
+            Route::post( '{assetMaintenanceId}/edit', 'AssetMaintenancesController@postEdit' );
+            Route::get( '{assetMaintenanceId}/delete',
+                [ 'as' => 'delete/asset_maintenance', 'uses' => 'AssetMaintenancesController@getDelete' ] );
+            Route::get( '{assetMaintenanceId}/view',
+                [ 'as' => 'view/asset_maintenance', 'uses' => 'AssetMaintenancesController@getView' ] );
+        } );
 
     # Accessories
     Route::group( [ 'prefix' => 'accessories' ], function () {
@@ -425,54 +428,104 @@ Route::group(array('prefix' => 'account', 'before' => 'auth', 'namespace' => 'Co
     Route::get('change-password', array('as' => 'change-password', 'uses' => 'ChangePasswordController@getIndex'));
     Route::post('change-password', 'ChangePasswordController@postIndex');
 
-     # View Assets
-    Route::get('view-assets', array('as' => 'view-assets', 'uses' => 'ViewAssetsController@getIndex'));
 
-    # Change Email
-    Route::get('change-email', array('as' => 'change-email', 'uses' => 'ChangeEmailController@getIndex'));
-    Route::post('change-email', 'ChangeEmailController@postIndex');
+        # Register
+        #Route::get('signup', array('as' => 'signup', 'uses' => 'AuthController@getSignup'));
+        Route::post( 'signup', 'AuthController@postSignup' );
 
-     # Accept Asset
-    Route::get('accept-asset/{logID}', array('as' => 'account/accept-assets', 'uses' => 'ViewAssetsController@getAcceptAsset'));
-    Route::post('accept-asset/{logID}', array('as' => 'account/asset-accepted', 'uses' => 'ViewAssetsController@postAcceptAsset'));
+        # Account Activation
+        Route::get( 'activate/{activationCode}', [ 'as' => 'activate', 'uses' => 'AuthController@getActivate' ] );
 
-    # Profile
-    Route::get('requestable-assets', array('as' => 'requestable-assets', 'uses' => 'ViewAssetsController@getRequestableIndex'));
-    Route::get('request-asset/{assetId}', array('as' => 'account/request-asset', 'uses' => 'ViewAssetsController@getRequestAsset'));
+        # Forgot Password
+        Route::get( 'forgot-password', [ 'as' => 'forgot-password', 'uses' => 'AuthController@getForgotPassword' ] );
+        Route::post( 'forgot-password', 'AuthController@postForgotPassword' );
 
-    # Account Dashboard
-    Route::get('/', array('as' => 'account', 'uses' => 'DashboardController@getIndex'));
+        # Forgot Password Confirmation
+        Route::get( 'forgot-password/{passwordResetCode}',
+            [ 'as' => 'forgot-password-confirm', 'uses' => 'AuthController@getForgotPasswordConfirm' ] );
+        Route::post( 'forgot-password/{passwordResetCode}', 'AuthController@postForgotPasswordConfirm' );
 
+        # Logout
+        Route::get( 'logout', [ 'as' => 'logout', 'uses' => 'AuthController@getLogout' ] );
 
-});
+    } );
 
-/*
-|--------------------------------------------------------------------------
-| Application Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register all of the routes for an application.
-| It's a breeze. Simply tell Laravel the URIs it should respond to
-| and give it the Closure to execute when that URI is requested.
-|
-*/
+    /*
+    |--------------------------------------------------------------------------
+    | Account Routes
+    |--------------------------------------------------------------------------
+    |
+    |
+    |
+    */
 
-Route::group(array('before' => 'reporting-auth', 'namespace' => 'Controllers\Admin'), function () {
+    Route::group( [ 'prefix' => 'account', 'before' => 'auth', 'namespace' => 'Controllers\Account' ], function () {
 
-    Route::get('reports/depreciation', array('as' => 'reports/depreciation', 'uses' => 'ReportsController@getDeprecationReport'));
-    Route::get('reports/export/depreciation', array('as' => 'reports/export/depreciation', 'uses' => 'ReportsController@exportDeprecationReport'));
-    Route::get('reports/improvements', array('as' => 'reports/improvements', 'uses' => 'ReportsController@getImprovementsReport'));
-    Route::get('reports/export/improvements', array('as' => 'reports/export/improvements', 'uses' => 'ReportsController@exportImprovementsReport'));
-    Route::get('reports/licenses', array('as' => 'reports/licenses', 'uses' => 'ReportsController@getLicenseReport'));
-    Route::get('reports/export/licenses', array('as' => 'reports/export/licenses', 'uses' => 'ReportsController@exportLicenseReport'));
-    Route::get('reports/assets', array('as' => 'reports/assets', 'uses' => 'ReportsController@getAssetsReport'));
-    Route::get('reports/export/assets', array('as' => 'reports/export/assets', 'uses' => 'ReportsController@exportAssetReport'));
-    Route::get('reports/custom', array('as' => 'reports/custom', 'uses' => 'ReportsController@getCustomReport'));
-    Route::post('reports/custom', 'ReportsController@postCustom');
+        # Profile
+        Route::get( 'profile', [ 'as' => 'profile', 'uses' => 'ProfileController@getIndex' ] );
+        Route::post( 'profile', 'ProfileController@postIndex' );
 
-     Route::get('reports/activity', array('as' => 'reports/activity', 'uses' => 'ReportsController@getActivityReport'));
-});
+        # Change Password
+        Route::get( 'change-password', [ 'as' => 'change-password', 'uses' => 'ChangePasswordController@getIndex' ] );
+        Route::post( 'change-password', 'ChangePasswordController@postIndex' );
 
+        # View Assets
+        Route::get( 'view-assets', [ 'as' => 'view-assets', 'uses' => 'ViewAssetsController@getIndex' ] );
 
+        # Change Email
+        Route::get( 'change-email', [ 'as' => 'change-email', 'uses' => 'ChangeEmailController@getIndex' ] );
+        Route::post( 'change-email', 'ChangeEmailController@postIndex' );
+
+        # Accept Asset
+        Route::get( 'accept-asset/{logID}',
+            [ 'as' => 'account/accept-assets', 'uses' => 'ViewAssetsController@getAcceptAsset' ] );
+        Route::post( 'accept-asset/{logID}',
+            [ 'as' => 'account/asset-accepted', 'uses' => 'ViewAssetsController@postAcceptAsset' ] );
+
+        # Profile
+        Route::get( 'requestable-assets',
+            [ 'as' => 'requestable-assets', 'uses' => 'ViewAssetsController@getRequestableIndex' ] );
+        Route::get( 'request-asset/{assetId}',
+            [ 'as' => 'account/request-asset', 'uses' => 'ViewAssetsController@getRequestAsset' ] );
+
+        # Account Dashboard
+        Route::get( '/', [ 'as' => 'account', 'uses' => 'DashboardController@getIndex' ] );
+
+    } );
+
+    /*
+    |--------------------------------------------------------------------------
+    | Application Routes
+    |--------------------------------------------------------------------------
+    |
+    | Here is where you can register all of the routes for an application.
+    | It's a breeze. Simply tell Laravel the URIs it should respond to
+    | and give it the Closure to execute when that URI is requested.
+    |
+    */
+
+    Route::group( [ 'before' => 'reporting-auth', 'namespace' => 'Controllers\Admin' ], function () {
+
+        Route::get( 'reports/depreciation',
+            [ 'as' => 'reports/depreciation', 'uses' => 'ReportsController@getDeprecationReport' ] );
+        Route::get( 'reports/export/depreciation',
+            [ 'as' => 'reports/export/depreciation', 'uses' => 'ReportsController@exportDeprecationReport' ] );
+        Route::get( 'reports/asset_maintenances',
+            [ 'as' => 'reports/asset_maintenances', 'uses' => 'ReportsController@getAssetMaintenancesReport' ] );
+        Route::get( 'reports/export/asset_maintenances',
+            [ 'as' => 'reports/export/asset_maintenances', 'uses' => 'ReportsController@exportAssetMaintenancesReport' ] );
+        Route::get( 'reports/licenses',
+            [ 'as' => 'reports/licenses', 'uses' => 'ReportsController@getLicenseReport' ] );
+        Route::get( 'reports/export/licenses',
+            [ 'as' => 'reports/export/licenses', 'uses' => 'ReportsController@exportLicenseReport' ] );
+        Route::get( 'reports/assets', [ 'as' => 'reports/assets', 'uses' => 'ReportsController@getAssetsReport' ] );
+        Route::get( 'reports/export/assets',
+            [ 'as' => 'reports/export/assets', 'uses' => 'ReportsController@exportAssetReport' ] );
+        Route::get( 'reports/custom', [ 'as' => 'reports/custom', 'uses' => 'ReportsController@getCustomReport' ] );
+        Route::post( 'reports/custom', 'ReportsController@postCustom' );
+
+        Route::get( 'reports/activity',
+            [ 'as' => 'reports/activity', 'uses' => 'ReportsController@getActivityReport' ] );
+    } );
 
 Route::get('/', array('as' => 'home', 'before' => 'admin-auth', 'uses' => 'Controllers\Admin\DashboardController@getIndex'));
