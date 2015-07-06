@@ -11,7 +11,7 @@ class Location extends Elegant
             'state'   		=> 'alpha_space|min:2|max:32',
             'country'   	=> 'required|alpha_space|min:2|max:2|max:2',
             'address'		=> 'alpha_space|min:5|max:80',
-            'address2'		=> 'alpha_space|min:5|max:80',
+            'address2'		=> 'alpha_space|min:2|max:80',
             'zip'   		=> 'alpha_space|min:3|max:10',
         );
 
