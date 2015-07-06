@@ -366,7 +366,8 @@ class ModelsController extends AdminController
 
         return Datatable::collection($modelassets)
         ->addColumn('name', function ($modelassets) {
-            return link_to('/hardware/'.$modelassets->id.'/view', $modelassets->name);
+           return link_to('/hardware/'.$modelassets->id.'/view', $modelassets->showAssetName());
+          // return $modelassets->name;
         })
         ->addColumn('asset_tag', function ($modelassets) {
             return link_to('/hardware/'.$modelassets->id.'/view', $modelassets->asset_tag);
