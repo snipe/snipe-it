@@ -57,13 +57,10 @@ class ModelsController extends AdminController
     public function postCreate()
     {
 
-        // get the POST data
-        $new = Input::all();
-
         // Create a new manufacturer
         $model = new Model;
 
-        $validator = Validator::make($new, $model->validationRules());
+        $validator = Validator::make(Input::all(), $model->validationRules());
 
         // attempt validation
         if ($validator->fails())
