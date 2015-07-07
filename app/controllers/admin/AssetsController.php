@@ -708,6 +708,9 @@ class AssetsController extends AdminController
         $asset = clone $asset_to_clone;
         $asset->id = null;
         $asset->asset_tag = '';
+        $asset->serial = '';
+        $asset->assigned_to = '';
+        $asset->mac_address = '';
         return View::make('backend/hardware/edit')->with('supplier_list',$supplier_list)->with('model_list',$model_list)->with('statuslabel_list',$statuslabel_list)->with('assigned_to',$assigned_to)->with('asset',$asset)->with('location_list',$location_list);
 
     }
@@ -1080,10 +1083,14 @@ class AssetsController extends AdminController
 
       ->showColumns('serial')
 
-      ->addColumn('model',function($assets)
-      {
-        return $assets->model->name;
-      })
+		->addColumn('model',function($assets)
+			{
+				if ($assets->model) {
+			    	return $assets->model->name;
+			    } else {
+				    return 'No model';
+				}
+			})
 
       ->addColumn('status',function($assets)
         {
@@ -1093,19 +1100,22 @@ class AssetsController extends AdminController
               return $assets->assetstatus->name;
             }
 
-        })
-      ->addColumn('location',function($assets)
-      {
-            if ($assets->assigned_to && $assets->assigneduser->userloc) {
-                return link_to('admin/settings/locations/'.$assets->assigneduser->userloc->id.'/edit', $assets->assigneduser->userloc->name);
-            } elseif ($assets->defaultLoc){
-                return link_to('admin/settings/locations/'.$assets->defaultLoc->id.'/edit', $assets->defaultLoc->name);
-            }
-      })
-
-      ->addColumn('category',function($assets)
-      {
-        return $assets->model->category->name;
+	        })
+		->addColumn('location',function($assets)
+            {
+                if ($assets->assigned_to && ($assets->assigneduser->userloc!='')) {
+                    return link_to('admin/settings/locations/'.$assets->assigneduser->userloc->id.'/edit', $assets->assigneduser->userloc->name);
+                } elseif ($assets->defaultLoc){
+                    return link_to('admin/settings/locations/'.$assets->defaultLoc->id.'/edit', $assets->defaultLoc->name);
+                }
+            })
+		->addColumn('category',function($assets)
+			{
+				if (isset($assets->model->category)) {
+			    	return $assets->model->category->name;
+			    } else {
+				    return 'No category';
+				}
 
       })
 
