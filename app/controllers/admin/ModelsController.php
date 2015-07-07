@@ -57,14 +57,19 @@ class ModelsController extends AdminController
     public function postCreate()
     {
 
-        // get the POST data
-        $new = Input::all();
-
         // Create a new manufacturer
         $model = new Model;
 
+        $validator = Validator::make(Input::all(), $model->validationRules());
+
         // attempt validation
-        if ($model->validate($new)) {
+        if ($validator->fails())
+        {
+            // The given data did not pass validation
+            return Redirect::back()->withInput()->withErrors($validator->messages());
+        }
+        // attempt validation
+        else {
 
             if ( e(Input::get('depreciation_id')) == '') {
                 $model->depreciation_id =  0;
@@ -103,10 +108,6 @@ class ModelsController extends AdminController
                 // Redirect to the new model  page
                 return Redirect::to("hardware/models")->with('success', Lang::get('admin/models/message.create.success'));
             }
-        } else {
-            // failure
-            $errors = $model->errors();
-            return Redirect::back()->withInput()->withErrors($errors);
         }
 
         // Redirect to the model create page
