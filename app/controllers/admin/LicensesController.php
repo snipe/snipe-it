@@ -908,4 +908,14 @@ class LicensesController extends AdminController
         ->orderColumns('name','serial','totalSeats','remaining','purchase_date','actions')
         ->make();
     }
+    
+    public function getFreeLicense($licenseId) {
+        // Check if the asset exists
+        if (is_null($license = License::find($licenseId))) {
+            // Redirect to the asset management page with error
+            return Redirect::to('admin/licenses')->with('error', Lang::get('admin/licenses/message.not_found'));
+        }
+        $seatId = $license->freeSeat($licenseId);
+        return Redirect::to('admin/licenses/'.$seatId.'/checkout');
+    }
 }
