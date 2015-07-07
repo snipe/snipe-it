@@ -7,3 +7,8 @@ Validator::extend('alpha_space', function ($attribute,$value,$parameters) {
     // patterm must be matched at least once (empty strings will not pass)
     // (ungreedy?!) ,multiline 
 });
+
+Validator::extend('unique_column',function ($attribute,$value,$parameters) {
+  
+  return false;
+});

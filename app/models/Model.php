@@ -1,5 +1,7 @@
 <?php
 
+use CustomField;
+
 class Model extends Elegant
 {
     use SoftDeletingTrait;
@@ -39,6 +41,13 @@ class Model extends Elegant
     public function manufacturer()
     {
         return $this->belongsTo('Manufacturer','manufacturer_id');
+    }
+    
+    public function custom_fieldset()
+    {
+      $foo=new CustomField();
+      $foo2=new CustomFieldset();
+      return $this->belongsTo('CustomFieldset','custom_fieldset_id');
     }
 
     /**
