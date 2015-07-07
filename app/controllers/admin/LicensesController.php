@@ -884,7 +884,7 @@ class LicensesController extends AdminController
         $licenses = License::orderBy('created_at', 'DESC')->get();
 
         $actions = new \Chumper\Datatable\Columns\FunctionColumn('actions', function($licenses) {
-            return '<a href="'.route('update/license', $licenses->id).'" class="btn btn-warning btn-sm" style="margin-right:5px;"><i class="fa fa-pencil icon-white"></i></a><a data-html="false" class="btn delete-asset btn-danger btn-sm" data-toggle="modal" href="'.route('delete/license', $licenses->id).'" data-content="'.Lang::get('admin/licenses/message.delete.confirm').'" data-title="'.Lang::get('general.delete').' '.htmlspecialchars($licenses->name).'?" onClick="return false;"><i class="fa fa-trash icon-white"></i></a>';
+            return '<a href="'.route('freecheckout/license', $licenses->id).'" class="btn btn-primary btn-sm" style="margin-right:5px;" '.(($licenses->remaincount() > 0) ? '' : 'disabled').'>'.Lang::get('general.checkout').'</a><a href="'.route('update/license', $licenses->id).'" class="btn btn-warning btn-sm" style="margin-right:5px;"><i class="fa fa-pencil icon-white"></i></a><a data-html="false" class="btn delete-asset btn-danger btn-sm" data-toggle="modal" href="'.route('delete/license', $licenses->id).'" data-content="'.Lang::get('admin/licenses/message.delete.confirm').'" data-title="'.Lang::get('general.delete').' '.htmlspecialchars($licenses->name).'?" onClick="return false;"><i class="fa fa-trash icon-white"></i></a>';
         });
 
         return Datatable::collection($licenses)
