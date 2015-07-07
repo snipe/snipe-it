@@ -156,6 +156,16 @@ class License extends Depreciable
         return $this->belongsTo('Supplier','supplier_id');
     }
 
+public function freeSeat()
+    {
+        $seat = DB::table('license_seats')
+                    ->whereNull('assigned_to')
+                    ->whereNull('asset_id')
+                    ->where('license_id', '=', $this->id)
+                    ->whereNull('deleted_at')
+                    ->first();
+        return $seat->id;
+    }
 
 	public static function getExpiringLicenses($days = 60) {
 
