@@ -271,19 +271,19 @@
                 </a>
 
                 <ul class="submenu{{ (Request::is('hardware*') ? ' active' : '') }}">
-                    <li><a href="{{ URL::to('hardware?status=Deployed') }}" {{{ (Request::query('Deployed') ? ' class="active"' : '') }}} >@lang('general.deployed')</a></li>
-                    <li><a href="{{ URL::to('hardware?status=RTD') }}" {{{ (Request::query('RTD') ? ' class="active"' : '') }}} >@lang('general.ready_to_deploy')</a></li>
-                    <li><a href="{{ URL::to('hardware?status=Pending') }}" {{{ (Request::query('Pending') ? ' class="active"' : '') }}} >@lang('general.pending')</a></li>
-                    <li><a href="{{ URL::to('hardware?status=Undeployable') }}" {{{ (Request::query('Undeployable') ? ' class="active"' : '') }}} >@lang('general.undeployable')</a></li>
-                     <li><a href="{{ URL::to('hardware?status=Archived') }}" {{{ (Request::query('Archived') ? ' class="active"' : '') }}} >@lang('admin/hardware/general.archived')</a></li>
-                     <li><a href="{{ URL::to('hardware?status=Requestable') }}" {{{ (Request::query('Requestable') ? ' class="active"' : '') }}} >@lang('admin/hardware/general.requestable')</a></li>
+                    <li><a href="{{ URL::to('hardware?status=Deployed') }}" {{ (Request::query('status') == 'Deployed' ? ' class="active"' : '') }} >@lang('general.deployed')</a></li>
+                    <li><a href="{{ URL::to('hardware?status=RTD') }}" {{ (Request::query('status') == 'RTD' ? ' class="active"' : '') }} >@lang('general.ready_to_deploy')</a></li>
+                    <li><a href="{{ URL::to('hardware?status=Pending') }}" {{ (Request::query('status') == 'Pending' ? ' class="active"' : '') }} >@lang('general.pending')</a></li>
+                    <li><a href="{{ URL::to('hardware?status=Undeployable') }}" {{ (Request::query('status') == 'Undeployable' ? ' class="active"' : '') }} >@lang('general.undeployable')</a></li>
+                     <li><a href="{{ URL::to('hardware?status=Archived') }}" {{ (Request::query('status') == 'Archived' ? ' class="active"' : '') }} >@lang('admin/hardware/general.archived')</a></li>
+                     <li><a href="{{ URL::to('hardware?status=Requestable') }}" {{ (Request::query('status') == 'Requestable' ? ' class="active"' : '') }} >@lang('admin/hardware/general.requestable')</a></li>
 
                     <li><a href="{{ URL::to('hardware') }}">@lang('general.list_all')</a></li>
 
                     <li class="divider">&nbsp;</li>
-                    <li><a href="{{ URL::to('hardware/models') }}" {{{ (Request::is('hardware/models*') ? ' class="active"' : '') }}} >@lang('general.asset_models')</a></li>
-                    <li><a href="{{ URL::to('admin/settings/categories') }}" {{{ (Request::is('admin/settings/categories*') ? ' class="active"' : '') }}} >@lang('general.categories')</a></li>
-                    <li><a href="{{ URL::to('hardware?status=Deleted') }}" {{{ (Request::query('Deleted') ? ' class="active"' : '') }}} >@lang('general.deleted')</a></li>
+                    <li><a href="{{ URL::to('hardware/models') }}" {{ (Request::is('hardware/models*') ? ' class="active"' : '') }} >@lang('general.asset_models')</a></li>
+                    <li><a href="{{ URL::to('admin/settings/categories') }}" {{ (Request::is('admin/settings/categories*') ? ' class="active"' : '') }} >@lang('general.categories')</a></li>
+                    <li><a href="{{ URL::to('hardware?status=Deleted') }}" {{ (Request::query('status') == 'Deleted' ? ' class="active"' : '') }} >@lang('general.deleted')</a></li>
 
                 </ul>
             </li>
