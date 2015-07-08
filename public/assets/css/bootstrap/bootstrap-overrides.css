@@ -126,6 +126,9 @@ input[type="password"]{
 	font-size: 16px;
 	letter-spacing: 1px;
 }
+input[type="search"]{
+	margin-left: 5px;
+}
 textarea{
 	background: #fff;
 	border-color: #dee3ea;
