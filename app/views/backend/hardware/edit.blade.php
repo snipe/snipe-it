@@ -45,7 +45,7 @@
                 <label for="asset_tag" class="col-md-2 control-label">@lang('admin/hardware/form.tag')
                  <i class='fa fa-asterisk'></i></label>
                  </label>
-                    <div class="col-md-7">
+                    <div class="col-md-7 col-sm-12">
                     	@if  ($asset->id)
 							<input class="form-control" type="text" name="asset_tag" id="asset_tag" value="{{{ Input::old('asset_tag', $asset->asset_tag) }}}" />
 						@else
@@ -59,7 +59,7 @@
             <!-- Serial -->
             <div class="form-group {{ $errors->has('serial') ? ' has-error' : '' }}">
                 <label for="serial" class="col-md-2 control-label">@lang('admin/hardware/form.serial') <i class='fa fa-asterisk'></i></label>
-                <div class="col-md-7">
+                <div class="col-md-7 col-sm-12">
                     <input class="form-control" type="text" name="serial" id="serial" value="{{{ Input::old('serial', $asset->serial) }}}" />
                     {{ $errors->first('serial', '<br><span class="alert-msg"><i class="fa fa-times"></i> :message</span>') }}
                 </div>
@@ -68,7 +68,7 @@
             <!-- Asset Name -->
             <div class="form-group {{ $errors->has('name') ? ' has-error' : '' }}">
                 <label for="name" class="col-md-2 control-label">@lang('admin/hardware/form.name')</label>
-                    <div class="col-md-7">
+                    <div class="col-md-7 col-sm-12">
                         <input class="form-control" type="text" name="name" id="name" value="{{{ Input::old('name', $asset->name) }}}" />
                         {{ $errors->first('name', '<br><span class="alert-msg"><i class="fa fa-times"></i> :message</span>') }}
                     </div>
@@ -79,13 +79,16 @@
                 <label for="parent" class="col-md-2 control-label">@lang('admin/hardware/form.model')
                  <i class='fa fa-asterisk'></i></label>
                  </label>
-                <div class="col-md-7">
+                <div class="col-md-7 col-sm-12">
                     @if (isset($selected_model))
                         {{ Form::select('model_id', $model_list , $selected_model->id, array('class'=>'select2 model', 'style'=>'min-width:400px')) }}
 
                     @else
                         {{ Form::select('model_id', $model_list , Input::old('model_id', $asset->model_id), array('class'=>'select2 model', 'style'=>'min-width:400px')) }}
                     @endif
+
+                    <span class="mac_spinner" style="padding-left: 10px; color: green; display:none; width: 30px;"><i class="fa fa-spinner fa-spin"></i> </span>
+
                     {{ $errors->first('model_id', '<br><span class="alert-msg"><i class="fa fa-times"></i> :message</span>') }}
                 </div>
             </div>
@@ -93,7 +96,7 @@
             <!-- MAC Address -->
             <div id="mac_address" class="form-group {{ $errors->has('mac_address') ? ' has-error' : '' }}" style="display:none;">
                 <label for="mac_address" class="col-md-2 control-label">@lang('admin/hardware/form.mac_address')</label>
-                    <div class="col-md-7">
+                    <div class="col-md-7 col-sm-12">
                         <input class="form-control" type="text" name="mac_address" id="mac_address" value="{{{ Input::old('mac_address', $asset->mac_address) }}}" />
                         {{ $errors->first('mac_address', '<br><span class="alert-msg"><i class="fa fa-times"></i> :message</span>') }}
                     </div>
@@ -112,7 +115,7 @@
             <!-- Supplier -->
             <div class="form-group {{ $errors->has('supplier_id') ? ' has-error' : '' }}">
                 <label for="supplier_id" class="col-md-2 control-label">@lang('admin/hardware/form.supplier')</label>
-                <div class="col-md-7">
+                <div class="col-md-7 col-sm-12">
                     {{ Form::select('supplier_id', $supplier_list , Input::old('supplier_id', $asset->supplier_id), array('class'=>'select2', 'style'=>'min-width:350px')) }}
                     {{ $errors->first('supplier_id', '<br><span class="alert-msg"><i class="fa fa-times"></i> :message</span>') }}
                 </div>
@@ -121,7 +124,7 @@
             <!-- Order Number -->
             <div class="form-group {{ $errors->has('order_number') ? ' has-error' : '' }}">
                 <label for="order_number" class="col-md-2 control-label">@lang('admin/hardware/form.order')</label>
-                <div class="col-md-7">
+                <div class="col-md-7 col-sm-12">
                     <input class="form-control" type="text" name="order_number" id="order_number" value="{{{ Input::old('order_number', $asset->order_number) }}}" />
                     {{ $errors->first('order_number', '<br><span class="alert-msg"><i class="fa fa-times"></i> :message</span>') }}
                 </div>
@@ -161,8 +164,9 @@
             <!-- Status -->
             <div class="form-group {{ $errors->has('status_id') ? ' has-error' : '' }}">
                 <label for="status_id" class="col-md-2 control-label">@lang('admin/hardware/form.status') <i class='fa fa-asterisk'></i></label>
-                    <div class="col-md-7">
+                    <div class="col-md-7 col-sm-12 col-sm-12">
                         {{ Form::select('status_id', $statuslabel_list , Input::old('status_id', $asset->status_id), array('class'=>'select2 status_id', 'style'=>'width:350px')) }}
+                        <span class="status_spinner" style="padding-left: 10px; color: green; display:none; width: 30px;"><i class="fa fa-spinner fa-spin"></i> </span>
                         <p class="help-block">@lang('admin/hardware/form.help_checkout')</p>
                         {{ $errors->first('status_id', '<br><span class="alert-msg"><i class="fa fa-times"></i> :message</span>') }}
                     </div>
@@ -170,11 +174,11 @@
 
             @if (!$asset->id)
              <!-- Assigned To -->
-            <div id="assigned_to" style="display: none;" class="form-group {{ $errors->has('assigned_to') ? ' has-error' : '' }}">
+            <div id="assigned_user" style="display: none;" class="form-group {{ $errors->has('assigned_to') ? ' has-error' : '' }}">
                 <label for="parent" class="col-md-2 control-label">@lang('admin/hardware/form.checkout_to')
                  </label>
-                <div class="col-md-7">
-                    {{ Form::select('assigned_to', $assigned_to , Input::old('assigned_to', $asset->assigned_to), array('class'=>'select2', 'style'=>'min-width:350px')) }}
+                <div class="col-md-7 col-sm-12">
+                    {{ Form::select('assigned_to', $assigned_to , Input::old('assigned_to', $asset->assigned_to), array('class'=>'select2', 'id'=>'assigned_to', 'style'=>'min-width:350px')) }}
                     {{ $errors->first('assigned_to', '<br><span class="alert-msg"><i class="fa fa-times"></i> :message</span>') }}
                 </div>
             </div>
@@ -183,7 +187,7 @@
             <!-- Notes -->
             <div class="form-group {{ $errors->has('notes') ? ' has-error' : '' }}">
                 <label for="notes" class="col-md-2 control-label">@lang('admin/hardware/form.notes')</label>
-                <div class="col-md-7">
+                <div class="col-md-7 col-sm-12">
                     <textarea class="col-md-6 form-control" id="notes" name="notes">{{{ Input::old('notes', $asset->notes) }}}</textarea>
                     {{ $errors->first('notes', '<br><span class="alert-msg"><i class="fa fa-times"></i> :message</span>') }}
                 </div>
@@ -192,7 +196,7 @@
             <!-- Default Location -->
             <div class="form-group {{ $errors->has('rtd_location_id') ? ' has-error' : '' }}">
                 <label for="rtd_location_id" class="col-md-2 control-label">@lang('admin/hardware/form.default_location')</label>
-                    <div class="col-md-7">
+                    <div class="col-md-7 col-sm-12">
                         {{ Form::select('rtd_location_id', $location_list , Input::old('rtd_location_id', $asset->rtd_location_id), array('class'=>'select2', 'style'=>'width:350px')) }}
                         {{ $errors->first('rtd_location_id', '<br><span class="alert-msg"><i class="fa fa-times"></i> :message</span>') }}
                     </div>
@@ -213,7 +217,7 @@
             <!-- Form actions -->
                 <div class="form-group">
                 <label class="col-md-2 control-label"></label>
-                    <div class="col-md-7">
+                    <div class="col-md-7 col-sm-12">
                         <a class="btn btn-link" href="{{ URL::previous() }}">@lang('button.cancel')</a>
                         <button type="submit" class="btn btn-success"><i class="fa fa-check icon-white"></i> @lang('general.save')</button>
                     </div>
@@ -225,7 +229,10 @@
 <script>
 
 	var $eventSelect = $(".model");
-	$eventSelect.on("change", function () { mac_add($eventSelect.val()); });
+	$eventSelect.on("change", function () {
+        $(".mac_spinner").css("display", "inline");
+        mac_add($eventSelect.val());
+    });
 	$(function() {
         var mac = $(".model option:selected").val();
         if(mac!=''){
@@ -236,6 +243,8 @@
 	    $.ajax({
 	        url: "{{Config::get('app.url')}}/api/models/"+id+"/check",
 	        success: function(data) {
+                $(".mac_spinner").css("display", "none");
+                
 	            if(data == true){
 	                 $("#mac_address").css("display", "block");
 	            } else {
@@ -247,9 +256,13 @@
 
 
     var $eventSelect = $(".status_id");
-	$eventSelect.on("change", function () { user_add($eventSelect.val()); });
+	$eventSelect.on("change", function () {
+        $(".status_spinner").css("display", "inline");
+        user_add($eventSelect.val());
+    });
 	$(function() {
         var deployable = $(".status_id option:selected").val();
+
         if(deployable!=''){
 	       user_add(deployable);
         }
@@ -259,10 +272,12 @@
 	    $.ajax({
 	        url: "{{Config::get('app.url')}}/api/statuslabels/"+id+"/deployable",
 	        success: function(data) {
+                $(".status_spinner").css("display", "none");
 	            if(data == true){
-	                 $("#assigned_to").css("display", "block");
+	                 $("#assigned_user").css("display", "block");
 	            } else {
-	                 $("#assigned_to").css("display", "none");
+	                 $("#assigned_user").css("display", "none");
+                     $("#assigned_to").val('');
 	            }
 	        }
 	    });
