@@ -316,6 +316,15 @@ Route::group(array('prefix' => 'admin', 'before' => 'admin-auth', 'namespace' =>
         Route::get('{userId}/restore', array('as' => 'restore/user', 'uses' => 'UsersController@getRestore'));
         Route::get('{userId}/view', array('as' => 'view/user', 'uses' => 'UsersController@getView'));
         Route::get('{userId}/unsuspend', array('as' => 'unsuspend/user', 'uses' => 'UsersController@getUnsuspend'));
+
+        Route::post('bulkedit',
+        	array('as' => 'users/bulkedit',
+        	'uses' => 'UsersController@postBulkEdit'));
+        Route::post('bulksave',
+        	array('as' => 'users/bulksave',
+        	'uses' => 'UsersController@postBulkSave'));
+
+
 		Route::get('/', array('as' => 'users', 'uses' => 'UsersController@getIndex'));
 
     });

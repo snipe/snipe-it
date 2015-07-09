@@ -31,34 +31,95 @@
 </div>
 
 <div class="row">
+{{ Form::open([
+     'method' => 'POST',
+     'route' => ['users/bulkedit'],
+	  'class' => 'form-horizontal' ]) }}
 
-{{ Datatable::table()
-    ->addColumn(
-	    Lang::get('admin/users/table.name'),
-	    '<i class="fa fa-envelope fa-lg"></i>',
-	    Lang::get('admin/users/table.manager'),
-        Lang::get('admin/users/table.location'),
-        '<i class="fa fa-barcode fa-lg"></i>',
-        '<i class="fa fa-certificate fa-lg"></i>',
-        '<i class="fa fa-keyboard-o fa-lg"></i>',
-        '<i class="fa fa-tint fa-lg"></i>',
-	    Lang::get('general.groups'),
-	    Lang::get('table.actions')
-    )
-    ->setOptions(
-            array(
-                'sAjaxSource'=>route('api.users.list', Input::get('status')),
-                'dom' =>'CT<"clear">lfrtip',
-                'colVis'=> array('showAll'=>'Show All','restore'=>'Restore','activate'=>'mouseover'),
-                'columnDefs'=> array(array('visible'=>false,'targets'=>array()),array('bSortable'=>false,'targets'=>array(8))),
-                'order'=>array(array(1,'asc')),
+
+    {{ Datatable::table()
+        ->addColumn('<input type="checkbox" id="checkAll" style="padding-left: 0px;">',
+    	    Lang::get('admin/users/table.name'),
+    	    '<i class="fa fa-envelope fa-lg"></i>',
+    	    Lang::get('admin/users/table.manager'),
+            Lang::get('admin/users/table.location'),
+            '<i class="fa fa-barcode fa-lg"></i>',
+            '<i class="fa fa-certificate fa-lg"></i>',
+            '<i class="fa fa-keyboard-o fa-lg"></i>',
+            '<i class="fa fa-tint fa-lg"></i>',
+    	    Lang::get('general.groups'),
+    	    Lang::get('table.actions'))
+        ->setOptions(
+        array(
+            'language' => array(
+                'search' => Lang::get('general.search'),
+                'lengthMenu' => Lang::get('general.page_menu'),
+                'loadingRecords' => Lang::get('general.loading'),
+                'zeroRecords' => Lang::get('general.no_results'),
+                'info' => Lang::get('general.pagination_info'),
+                'processing' => Lang::get('general.processing'),
+                'paginate'=> array(
+                    'first'=>Lang::get('general.first'),
+                    'previous'=>Lang::get('general.previous'),
+                    'next'=>Lang::get('general.next'),
+                    'last'=>Lang::get('general.last'),
+                    ),
+                ),
+            'sAjaxSource'=> route('api.users.list', Input::get('status')),
+            'dom' =>'CT<"clear">lfrtip',
+            'colVis'=>
+                array(
+                    'showAll'=>'Show All',
+                    'restore'=>'Restore',
+                    'exclude'=>array(0,10),
+                    'activate'=>'mouseover'
+                ),
+            'columnDefs'=>
+                array(
+                    array(
+                        'visible'=>false,
+                        'targets'=>array()
+                    ),
+                    array(
+                    'orderable'=>false,
+                    'targets'=>array(0,10)
+                    )
+                ),
+            'order'=>array(array(1,'asc')),
             )
         )
-    ->render() }}
+    ->render('backend/users/datatable') }}
 
-
+ {{ Form::close() }}
 </div>
 </div>
 
+<script>
+
+	$(function() {
+
+		function checkForChecked() {
+
+	        var check_checked = $('input.one_required:checked').length;
+
+	        if (check_checked > 0) {
+	            $('#bulkEdit').removeAttr('disabled');
+	        }
+	        else {
+	            $('#bulkEdit').attr('disabled', 'disabled');
+	        }
+	    }
+
+	    $('table').on('change','input.one_required',checkForChecked);
+
+	    $("#checkAll").change(function () {
+			$("input:checkbox").prop('checked', $(this).prop("checked"));
+			checkForChecked();
+		});
+
+	});
+
+
+</script>
 
 @stop

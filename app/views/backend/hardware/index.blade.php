@@ -1,7 +1,7 @@
 @extends('backend/layouts/default')
 
 @section('title0')
-			
+
     @if (Input::get('status'))
         @if (Input::get('status')=='Pending')
             @lang('general.pending')
@@ -57,16 +57,16 @@
 
 
 {{ Datatable::table()
-    ->addColumn('<input type="checkbox" id="checkAll" style="padding-left: 0px;">',Lang::get('admin/hardware/form.name'), 
-    	Lang::get('admin/hardware/table.asset_tag'), 
+    ->addColumn('<input type="checkbox" id="checkAll" style="padding-left: 0px;">',Lang::get('admin/hardware/form.name'),
+    	Lang::get('admin/hardware/table.asset_tag'),
     	Lang::get('admin/hardware/table.serial'),
 		Lang::get('admin/hardware/form.model'),
     	Lang::get('admin/hardware/table.status'),
 		Lang::get('admin/hardware/table.location'),
     	Lang::get('general.category'),
     	Lang::get('admin/hardware/table.eol'),
-    	Lang::get('admin/hardware/table.checkout_date'), 
-    	Lang::get('admin/hardware/table.change'), 
+    	Lang::get('admin/hardware/table.checkout_date'),
+    	Lang::get('admin/hardware/table.change'),
     	Lang::get('table.actions'))
     ->setOptions(
             array(
@@ -75,7 +75,7 @@
 	            	'lengthMenu' => Lang::get('general.page_menu'),
 	            	'loadingRecords' => Lang::get('general.loading'),
 	            	'zeroRecords' => Lang::get('general.no_results'),
-	            	'info' => Lang::get('general.pagination_info'), 
+	            	'info' => Lang::get('general.pagination_info'),
 	            	'processing' => Lang::get('general.processing'),
 	            	'paginate'=> array(
 	            		'first'=>Lang::get('general.first'),
@@ -112,17 +112,17 @@
 	            $('#bulkEdit').attr('disabled', 'disabled');
 	        }
 	    }
-	    
+
 	    $('table').on('change','input.one_required',checkForChecked);
-	    	    
+
 	    $("#checkAll").change(function () {
 			$("input:checkbox").prop('checked', $(this).prop("checked"));
 			checkForChecked();
 		});
 
 	});
-	
-	
+
+
 </script>
 
 
