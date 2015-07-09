@@ -38,7 +38,7 @@
 
 
     {{ Datatable::table()
-        ->addColumn('<input type="checkbox" id="checkAll" style="padding-left: 0px;">',
+        ->addColumn('<div class="text-center"><input type="checkbox" id="checkAll" style="padding-left: 0px;"></div>',
     	    Lang::get('admin/users/table.name'),
     	    '<i class="fa fa-envelope fa-lg"></i>',
     	    Lang::get('admin/users/table.manager'),
@@ -57,7 +57,7 @@
                 'loadingRecords' => Lang::get('general.loading'),
                 'zeroRecords' => Lang::get('general.no_results'),
                 'info' => Lang::get('general.pagination_info'),
-                'processing' => Lang::get('general.processing'),
+                'processing' => '<i class="fa fa-spinner fa-spin"></i> '.Lang::get('general.processing'),
                 'paginate'=> array(
                     'first'=>Lang::get('general.first'),
                     'previous'=>Lang::get('general.previous'),

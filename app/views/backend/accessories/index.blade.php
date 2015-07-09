@@ -20,9 +20,9 @@
     <div class="row profile">
         <div class="col-md-9 bio">
             {{ Datatable::table()
-                ->addColumn(Lang::get('admin/accessories/table.title'), 
-                            Lang::get('admin/accessories/general.total'), 
-                            Lang::get('admin/accessories/general.remaining'), 
+                ->addColumn(Lang::get('admin/accessories/table.title'),
+                            Lang::get('admin/accessories/general.total'),
+                            Lang::get('admin/accessories/general.remaining'),
                             Lang::get('table.actions'))
                 ->setOptions(
                         array(
@@ -31,8 +31,8 @@
 			            	'lengthMenu' => Lang::get('general.page_menu'),
 			            	'loadingRecords' => Lang::get('general.loading'),
 			            	'zeroRecords' => Lang::get('general.no_results'),
-			            	'info' => Lang::get('general.pagination_info'), 
-			            	'processing' => Lang::get('general.processing'),
+			            	'info' => Lang::get('general.pagination_info'),
+			            	'processing' => '<i class="fa fa-spinner fa-spin"></i> '.Lang::get('general.processing'),
 			            	'paginate'=> array(
 			            		'first'=>Lang::get('general.first'),
 			            		'previous'=>Lang::get('general.previous'),
@@ -82,7 +82,7 @@
                                         	)
                                         )
                                     ),
-                                ) 
+                                )
                             ),
                             'columnDefs'=> array(
                                 array('bSortable'=>false,'targets'=>array(3)),
