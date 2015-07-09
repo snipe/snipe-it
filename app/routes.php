@@ -13,13 +13,11 @@ Route::group(array('prefix' => 'api', 'namespace' => 'Controllers\Admin', 'befor
 
     /*---Status Label API---*/
     Route::group(array('prefix'=>'statuslabels'), function() {
-
         Route::get('{statuslabelId}/deployable', function ($statuslabelId) {
 			 $statuslabel = Statuslabel::find($statuslabelId);
              if (($statuslabel->deployable=='1') && ($statuslabel->pending!='1') && ($statuslabel->archived!='1')) {
                  return $statuslabel->deployable;
              }
-
 		});
     });
 
