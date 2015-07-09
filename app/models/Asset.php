@@ -10,6 +10,7 @@ class Asset extends Depreciable
     protected $rules = array(
         'name'   			=> 'alpha_space|min:2|max:255',
         'model_id'   		=> 'required',
+		'status_id'   		=> 'required',
         'warranty_months'   => 'integer|min:0|max:240',
         'note'   			=> 'alpha_space',
         'notes'   			=> 'alpha_space',
