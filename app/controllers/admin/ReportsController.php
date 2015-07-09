@@ -11,6 +11,9 @@ use Location;
 use Redirect;
 use Response;
 use Actionlog;
+use Setting;
+use League\Csv\Writer;
+use League\Csv\Reader;
 
 class ReportsController extends AdminController
 {
@@ -147,6 +150,9 @@ class ReportsController extends AdminController
         // Grab all the assets
         $assets = Asset::with('model','assigneduser','assetstatus','defaultLoc','assetlog')->orderBy('created_at', 'DESC')->get();
 
+        $csv = \League\Csv\Writer::createFromFileObject(new \SplTempFileObject());
+        $csv->setOutputBOM(Reader::BOM_UTF16_BE);
+
         $rows = array();
 
         // Create the header row
@@ -161,8 +167,9 @@ class ReportsController extends AdminController
             Lang::get('admin/hardware/table.book_value'),
             Lang::get('admin/hardware/table.diff')
         );
-        $header = array_map('trim', $header);
-        $rows[] = implode($header, ',');
+
+        //we insert the CSV header
+        $csv->insertOne($header);
 
         // Create a row per asset
         foreach ($assets as $asset) {
@@ -182,7 +189,7 @@ class ReportsController extends AdminController
             if (($asset->assigned_to > 0) && ($asset->assigneduser->location_id > 0)) {
                 $location = Location::find($asset->assigneduser->location_id);
                 if ($location->city) {
-                    $row[] = '"'.$location->city . ', ' . $location->state.'"';
+                    $row[] = $location->city . ', ' . $location->state;
                 } elseif ($location->name) {
                     $row[] = $location->name;
                 } else {
@@ -194,23 +201,22 @@ class ReportsController extends AdminController
 
 
 
-
+            if ($asset->assetloc) {
+                $currency =  $asset->assetloc->currency;
+            } else {
+                $currency =   Setting::first()->default_currency;
+            }
 
             $row[] = $asset->purchase_date;
-            $row[] = '"'.$asset->assetloc->currency.number_format($asset->purchase_cost).'"';
-            $row[] = '"'.$asset->assetloc->currency.number_format($asset->getDepreciatedValue()).'"';
-            $row[] = '"-'.$asset->assetloc->currency.number_format(($asset->purchase_cost - $asset->getDepreciatedValue())).'"';
-            $rows[] = implode($row, ',');
+            $row[] = $currency.number_format($asset->purchase_cost);
+            $row[] = $currency.number_format($asset->getDepreciatedValue());
+            $row[] = $currency.number_format(($asset->purchase_cost - $asset->getDepreciatedValue()));
+            $csv->insertOne($row);
         }
 
-        // spit out a csv
-        $csv = implode($rows, "\n");
+        $csv->output('depreciation-report-'.date('Y-m-d').'.csv');
+        die;
 
-        $response = Response::make($csv, 200);
-        $response->header('Content-Type', 'text/csv');
-        $response->header('Content-disposition', 'attachment;filename=report.csv');
-
-        return $response;
     }
 
 	/**
