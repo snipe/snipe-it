@@ -51,7 +51,7 @@
 	            @else
 	            	 {{{ $asset->asset_tag }}}
 	            @endif
-	           
+
 	        </td>
             <td>{{{ $asset->model->name }}}</td>
             @if (Setting::getSettings()->display_asset_name)
@@ -67,7 +67,7 @@
 					{{{ $asset->assigneduser->fullName() }}}
 					</a>
             	 @endif
-					
+
             @endif
             </td>
             <td>
@@ -86,11 +86,28 @@
             </td>
 
             @if ($asset->purchase_cost > 0)
-            <td class="align-right">@lang('general.currency')
+            <td class="align-right">
+                @if ($asset->assetloc )
+                    {{{ $asset->assetloc->currency }}}
+                @else
+                    {{{ Setting::first()->default_currency }}}
+                @endif
             	{{{ number_format($asset->purchase_cost) }}}</td>
-            <td class="align-right">@lang('general.currency')
+            <td class="align-right">
+                @if ($asset->assetloc )
+                    {{{ $asset->assetloc->currency }}}
+                @else
+                    {{{ Setting::first()->default_currency }}}
+                @endif
+
             	{{{ number_format($asset->getDepreciatedValue()) }}}</td>
-            <td class="align-right">@lang('general.currency')
+            <td class="align-right">
+                @if ($asset->assetloc)
+                    {{{ $asset->assetloc->currency }}}
+                @else
+                    {{{ Setting::first()->default_currency }}}
+                @endif
+
             	-{{{ number_format(($asset->purchase_cost - $asset->getDepreciatedValue())) }}}</td>
             @else
 	            <td></td>

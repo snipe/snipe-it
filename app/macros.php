@@ -276,8 +276,8 @@ Form::macro('countries', function ($name = "country", $selected = null, $class =
 
 
 /**
-* Country macro
-* Generates the dropdown menu of countries for the profile form
+* Barcode macro
+* Generates the dropdown menu of available barcodes
 */
 Form::macro('barcode_types', function ($name = "barcode_type", $selected = null, $class = null) {
 
@@ -299,3 +299,41 @@ Form::macro('barcode_types', function ($name = "barcode_type", $selected = null,
 
 });
 
+
+/**
+* Currency macro
+* Generates the dropdown menu of world currencies
+*/
+Form::macro('currencies', function ($name = "currency", $selected = null, $class = null) {
+
+    $currencies = array(
+    '$'=>"$",
+    '€'=>'€',
+    '₠'=>"₠",
+    '₡'=>'₡',
+    '₣'=>'₣',
+    '₤'=>'₤',
+    '₥'=>'₥',
+    '₦'=>'₦',
+    '₧'=>'₧',
+    '₨'=>'₨',
+    '₩'=>'₩',
+    '₪'=>'₪',
+    '₫'=>'₫',
+    '₭'=>'₭',
+    '₮'=>'₮',
+    '₯'=>'₯',
+    '₱'=>'₱',
+    '₹'=>'₹',
+    );
+
+    $select = '<select name="'.$name.'" class="'.$class.'">';
+    foreach ($currencies as $currency) {
+        $select .= '<option value="'.$currency.'"'.($selected == $currency ? ' selected="selected"' : '').'>'.$currency.'</option> ';
+    }
+
+    $select .= '</select>';
+
+    return $select;
+
+});

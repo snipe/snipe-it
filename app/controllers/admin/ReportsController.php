@@ -192,14 +192,14 @@ class ReportsController extends AdminController
                 $row[] = '';  // Empty string if location is not set
             }
 
-			
-            
-            
+
+
+
 
             $row[] = $asset->purchase_date;
-            $row[] = '"'.Lang::get('general.currency').number_format($asset->purchase_cost).'"';
-            $row[] = '"'.Lang::get('general.currency').number_format($asset->getDepreciatedValue()).'"';
-            $row[] = '"-'.Lang::get('general.currency').number_format(($asset->purchase_cost - $asset->getDepreciatedValue())).'"';
+            $row[] = '"'.$asset->assetloc->currency.number_format($asset->purchase_cost).'"';
+            $row[] = '"'.$asset->assetloc->currency.number_format($asset->getDepreciatedValue()).'"';
+            $row[] = '"-'.$asset->assetloc->currency.number_format(($asset->purchase_cost - $asset->getDepreciatedValue())).'"';
             $rows[] = implode($row, ',');
         }
 
@@ -231,8 +231,8 @@ class ReportsController extends AdminController
         ->get();
         return View::make('backend/reports/activity', compact('log_actions'));
     }
-    
-    
+
+
     /**
      * Show Report for Licenses
      *

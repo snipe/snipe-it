@@ -72,6 +72,7 @@ class SettingsController extends AdminController
 	        "logo"   		=> 'mimes:jpeg,bmp,png,gif',
 	        "alert_email"   => 'email',
 	        "slack_endpoint"   => 'url',
+            "default_currency"   => 'required',
 	        "slack_channel"   => 'regex:/(?<!\w)#\w+/',
 	        "slack_botname"   => 'alpha_dash',
 	        );
@@ -118,6 +119,7 @@ class SettingsController extends AdminController
             $setting->qr_code = e(Input::get('qr_code', '0'));
             $setting->barcode_type = e(Input::get('barcode_type'));
             $setting->load_remote = e(Input::get('load_remote', '0'));
+            $setting->default_currency = e(Input::get('default_currency', '$'));
             $setting->qr_text = e(Input::get('qr_text'));
             $setting->auto_increment_prefix = e(Input::get('auto_increment_prefix'));
             $setting->auto_increment_assets = e(Input::get('auto_increment_assets', '0'));

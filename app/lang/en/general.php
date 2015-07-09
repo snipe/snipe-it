@@ -37,7 +37,7 @@ return array(
     'create'				=> 'Create New',
     'created_asset'			=> 'created asset',
     'created_at' 			=> 'Created at',
-    'currency'  			=> '$',
+    'currency'  			=> '$', // this is deprecated
     'current'  				=> 'Current',
     'custom_report'         => 'Custom Asset Report',
     'dashboard'				=> 'Dashboard',

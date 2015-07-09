@@ -58,6 +58,21 @@
                     </div>
             </div>
 
+            <!-- Currency -->
+            <div class="form-group {{ $errors->has('currency') ? ' has-error' : '' }}">
+                <label for="currency" class="col-md-2 control-label">
+                	@lang('admin/locations/table.address')
+                </label>
+                    <div class="col-md-12">
+                        <div class="col-xs-8">
+                        {{ Form::currencies('currency', Input::old('currency', $location->currency)) }}
+                    </div>
+                    {{ $errors->first('currency', '<br><span class="alert-msg"><i class="fa fa-times"></i> :message</span>') }}
+                    </div>
+            </div>
+
+
+
             <!-- Address -->
             <div class="form-group {{ $errors->has('address') ? ' has-error' : '' }}">
                 <label for="address" class="col-md-2 control-label">

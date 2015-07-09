@@ -1097,7 +1097,10 @@ class AssetsController extends AdminController
           	if ($assets->assigned_to!='') {
             	return link_to('../admin/users/'.$assets->assigned_to.'/view', $assets->assigneduser->fullName());
             } else {
-              return $assets->assetstatus->name;
+                if ($assets->assetstatus) {
+                    return $assets->assetstatus->name;
+                }
+
             }
 
 	        })

@@ -54,7 +54,12 @@ class Asset extends Depreciable
     **/
     public function assetloc()
     {
-        return $this->assigneduser->userloc();
+		if ($this->assigneduser) {
+			return $this->assigneduser->userloc();
+		} else {
+			return $this->belongsTo('Location', 'rtd_location_id');
+		}
+
     }
 
 
