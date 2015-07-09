@@ -7,6 +7,7 @@ composer.phar
 /app/database/*.sqlite
 /app/storage/meta/services.json
 /app/config/*/mail.php
+/app/config/*/session.php
 /app/config/*/database.php
 /app/config/*/app.php
 public/packages/*
@@ -23,9 +24,5 @@ public/uploads/logo.png
 .siteflow
 public/assets/.siteflow
 .settings/settings.json
-app/config/packages/schickling/backup/config.php
-app/config/packages/fideloper/proxy/config.php
-app/storage/dumps/20150619212924.sql
-app/config/staging/session.php
-app/config/production/session.php
-app/config/local/session.php
+
+

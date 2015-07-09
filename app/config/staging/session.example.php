@@ -135,6 +135,20 @@ return array(
     |
     */
 
-    'secure' => false,
+    'secure' => true,
+
+
+    /*
+    |--------------------------------------------------------------------------
+    | Allow multiple logins from different devices at the same time
+    |--------------------------------------------------------------------------
+    |
+    | By default, if a user logs into an account where someone is already
+    | logged in, the previous user will be logged out. We recommend leaving
+    | this set to false for security reasons.
+    |
+    */
+
+    'multi_login' => true,
 
 );

@@ -119,5 +119,24 @@ class User extends SentryUserModel
 		return $query->whereNull('deleted_at');
 	}
 
+    /**
+    * Override the SentryUser getPersistCode method for
+    * multiple logins at one time
+    **/
+    public function getPersistCode()
+    {
+
+        if (!Config::get('session.multi_login') || (!$this->persist_code))
+        {
+            $this->persist_code = $this->getRandomString();
+
+            // Our code got hashed
+            $persistCode = $this->persist_code;
+            $this->save();
+            return $persistCode;
+        }
+        return $this->persist_code;
+    }
+
 
 }
