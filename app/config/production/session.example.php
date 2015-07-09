@@ -149,6 +149,6 @@ return array(
     |
     */
 
-    'multi_login' => true,
+    'multi_login' => false,
 
 );
