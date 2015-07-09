@@ -115,7 +115,7 @@ class User extends SentryUserModel
     public function getPersistCode()
     {
 
-        if (!Config::get('multi_login') || (!$this->persist_code))
+        if (!Config::get('session.multi_login') || (!$this->persist_code))
         {
             $this->persist_code = $this->getRandomString();
 
