@@ -742,7 +742,7 @@ class UsersController extends AdminController
         return Datatable::collection($users)
         ->addColumn('',function($users)
             {
-                return '<input type="checkbox" name="edit_user['.$users->id.']" class="one_required">';
+                return '<div class="text-center"><input type="checkbox" name="edit_user['.$users->id.']" class="one_required"></div>';
             })
         ->addColumn('name',function($users)
 	        {

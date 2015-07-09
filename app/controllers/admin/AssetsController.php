@@ -1072,7 +1072,7 @@ class AssetsController extends AdminController
         return Datatable::collection($assets)
         ->addColumn('',function($assets)
             {
-                return '<input type="checkbox" name="edit_asset['.$assets->id.']" class="one_required">';
+                return '<div class="text-center"><input type="checkbox" name="edit_asset['.$assets->id.']" class="one_required"></div>';
             })
         ->addColumn('name',function($assets)
 	        {
