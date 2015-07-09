@@ -71,12 +71,11 @@
             @endif
             </td>
             <td>
-            @if (isset($asset->assigned_to))
-				@if (($asset->assigned_to > 0) && ($asset->assigneduser->location_id > 0)) {{{ Location::find($asset->assigneduser->location_id)->city }}}
-						,
-						{{{ Location::find($asset->assigneduser->location_id)->state }}}
-				@endif
-            @endif
+                @if ($asset->assetloc)
+                    {{{ $asset->assetloc->name }}}
+                @elseif ($asset->defaultloc)
+                    {{{ $asset->defaultloc->name }}}
+                @endif
             </td>
             <td>{{{ $asset->purchase_date }}}</td>
 

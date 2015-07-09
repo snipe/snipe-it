@@ -61,7 +61,7 @@
             <!-- Currency -->
             <div class="form-group {{ $errors->has('currency') ? ' has-error' : '' }}">
                 <label for="currency" class="col-md-2 control-label">
-                	@lang('admin/locations/table.address')
+                	@lang('admin/locations/table.currency')
                 </label>
                     <div class="col-md-12">
                         <div class="col-xs-8">

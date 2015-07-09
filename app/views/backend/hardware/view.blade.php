@@ -90,7 +90,12 @@
 
         @if ($asset->purchase_cost)
             <div class="col-md-12" style="padding-bottom: 5px;"><strong>@lang('admin/hardware/form.cost'):</strong>
-            {{{ $asset->assetloc->currency }}}
+            @if (($asset->id) && ($asset->assetloc))
+                {{{ $asset->assetloc->currency }}}
+            @else
+                {{{ Setting::first()->default_currency }}}
+            @endif
+
             {{{ number_format($asset->purchase_cost,2) }}} </div>
         @endif
 

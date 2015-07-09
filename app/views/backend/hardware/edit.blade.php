@@ -133,7 +133,7 @@
                     <div class="col-md-2">
                             <div class="input-group">
                                     <span class="input-group-addon">
-                                        @if ($asset->id)
+                                        @if (($asset->id) && ($asset->assetloc))
                                             {{{ $asset->assetloc->currency }}}
                                         @else
                                             {{{ Setting::first()->default_currency }}}

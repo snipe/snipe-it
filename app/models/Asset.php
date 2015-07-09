@@ -62,7 +62,6 @@ class Asset extends Depreciable
 
     }
 
-
     /**
     * Get the asset's location based on default RTD location
     **/
