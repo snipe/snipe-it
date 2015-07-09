@@ -1056,30 +1056,32 @@ class AssetsController extends AdminController
 
         });
 
-      $inout = new \Chumper\Datatable\Columns\FunctionColumn('inout', function ($assets)
+	   $inout = new \Chumper\Datatable\Columns\FunctionColumn('inout', function ($assets)
       	{
-       	 	if (($assets->assigned_to !='') && ($assets->assigned_to > 0)) {
-      	return '<a href="'.route('checkin/hardware', $assets->id).'" class="btn btn-primary btn-sm">'.Lang::get('general.checkin').'</a>';
-      } else {
-      	return '<a href="'.route('checkout/hardware', $assets->id).'" class="btn btn-info btn-sm">'.Lang::get('general.checkout').'</a>';
-      }
+            if ($assets->assetstatus->deployable != 0) {
+                if (($assets->assigned_to !='') && ($assets->assigned_to > 0)) {
+                    return '<a href="'.route('checkin/hardware', $assets->id).'" class="btn btn-primary btn-sm">'.Lang::get('general.checkin').'</a>';
+                } else {
+                    return '<a href="'.route('checkout/hardware', $assets->id).'" class="btn btn-info btn-sm">'.Lang::get('general.checkout').'</a>';
+                }
+            }
         });
 
 
 
-      return Datatable::collection($assets)
-      ->addColumn('',function($assets)
-          {
-              return '<input type="checkbox" name="edit_asset['.$assets->id.']" class="one_required">';
-          })
-      ->addColumn('name',function($assets)
-        {
-          return '<a title="'.$assets->name.'" href="hardware/'.$assets->id.'/view">'.$assets->name.'</a>';
-        })
-      ->addColumn('asset_tag',function($assets)
-        {
-          return '<a title="'.$assets->asset_tag.'" href="hardware/'.$assets->id.'/view">'.$assets->asset_tag.'</a>';
-        })
+        return Datatable::collection($assets)
+        ->addColumn('',function($assets)
+            {
+                return '<input type="checkbox" name="edit_asset['.$assets->id.']" class="one_required">';
+            })
+        ->addColumn('name',function($assets)
+	        {
+		        return '<a title="'.$assets->name.'" href="hardware/'.$assets->id.'/view">'.$assets->name.'</a>';
+	        })
+	    ->addColumn('asset_tag',function($assets)
+	        {
+		        return '<a title="'.$assets->asset_tag.'" href="hardware/'.$assets->id.'/view">'.$assets->asset_tag.'</a>';
+	        })
 
       ->showColumns('serial')
 
