@@ -13,7 +13,7 @@
     </thead>
     <tfoot>
     <tr>
-      <td colspan="12">
+      <td colspan="11">
 	      <select name="bulk_actions">
 		      <option value="edit">Bulk Edit</option>
               <option value="delete">Bulk Delete</option>
