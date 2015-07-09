@@ -10,6 +10,17 @@ Route::group(array('prefix' => 'api', 'namespace' => 'Controllers\Admin', 'befor
         Route::resource('/', 'AssetsController');
         Route::get('list/{status?}', array('as'=>'api.hardware.list', 'uses'=>'AssetsController@getDatatable'));
     });
+
+    /*---Status Label API---*/
+    Route::group(array('prefix'=>'statuslabels'), function() {
+        Route::get('{statuslabelId}/deployable', function ($statuslabelId) {
+			 $statuslabel = Statuslabel::find($statuslabelId);
+             if (($statuslabel->deployable=='1') && ($statuslabel->pending!='1') && ($statuslabel->archived!='1')) {
+                 return $statuslabel->deployable;
+             }
+		});
+    });
+
     /*---Accessories API---*/
     Route::group(array('prefix'=>'accessories'), function () {
         Route::resource('/', 'AccessoriesController');

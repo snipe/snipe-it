@@ -75,7 +75,7 @@ class AssetsController extends AdminController
 
 
         // Grab the dropdown list of status
-        $statuslabel_list = Statuslabel::orderBy('name', 'asc')->lists('name', 'id');
+        $statuslabel_list = array('' => Lang::get('general.select_statuslabel')) + Statuslabel::orderBy('name', 'asc')->lists('name', 'id');
 
         $view = View::make('backend/hardware/edit');
         $view->with('supplier_list',$supplier_list);
