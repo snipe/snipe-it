@@ -221,7 +221,88 @@
                             </div>
                             @endif
 
+                            <br />
+                            <h6>@lang('general.file_uploads') [ <a href="#" data-toggle="modal" data-target="#uploadFileModal">@lang('button.add')</a> ]</h6>
+                            <br />
+                            <table class="table table-hover">
+                                            <thead>
+                                                <tr>
+                                                    <th class="col-md-5">@lang('admin/users/form.notes')</th>
+                                                    <th class="col-md-5"><span class="line"></span>@lang('general.file_name')</th>
+                                                    <th class="col-md-2"></th>
+                                                    <th class="col-md-2"></th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @if (count($user->uploads) > 0)
+                                                    @foreach ($user->uploads as $file)
+                                                    <tr>
+                                                        <td>
+                                                            @if ($file->note) {{{ $file->note }}}
+                                                            @endif
+                                                        </td>
+                                                        <td>
+                                                        {{{ $file->filename }}}
+                                                        </td>
+                                                        <td>
+                                                            @if ($file->filename)
+                                                            <a href="{{ route('show/userfile', [$user->id, $file->id]) }}" class="btn btn-default">Download</a>
+                                                            @endif
+                                                        </td>
+                                                        <td>
+                                                            <a class="btn delete-asset btn-danger btn-sm" href="{{ route('delete/userfile', [$user->id, $file->id]) }}"><i class="fa fa-trash icon-white"></i></a>
+                                                        </td>
+                                                    </tr>
+                                                    @endforeach
+                                                @else
+                                                    <tr>
+                                                        <td colspan="4">
+                                                            @lang('general.no_results')
+                                                        </td>
+                                                    </tr>
 
+                                                @endif
+
+                                            </tbody>
+                                </table>
+
+                        <!-- Modal -->
+                        <div class="modal fade" id="uploadFileModal" tabindex="-1" role="dialog" aria-labelledby="uploadFileModalLabel" aria-hidden="true">
+                          <div class="modal-dialog">
+                            <div class="modal-content">
+                              <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                <h4 class="modal-title" id="uploadFileModalLabel">Upload File</h4>
+                              </div>
+                              {{ Form::open([
+                              'method' => 'POST',
+                              'route' => ['upload/user', $user->id],
+                              'files' => true, 'class' => 'form-horizontal' ]) }}
+                              <div class="modal-body">
+
+                                <p>@lang('admin/users/general.filetype_info')</p>
+
+                                 <div class="form-group col-md-12">
+                                 <div class="input-group col-md-12">
+                                    <input class="col-md-12 form-control" type="text" name="notes" id="notes" placeholder="Notes">
+                                </div>
+                                </div>
+                                <div class="form-group col-md-12">
+                                 <div class="input-group col-md-12">
+                                    {{ Form::file('userfile[]', ['multiple' => 'multiple']) }}
+                                </div>
+                                </div>
+
+
+                              </div>
+                              <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">@lang('button.cancel')</button>
+                                <button type="submit" class="btn btn-primary btn-sm">@lang('button.upload')</button>
+                              </div>
+                              {{ Form::close() }}
+                            </div>
+                          </div>
+                        </div>
 
 							<br>
                             <h6>@lang('admin/users/general.history_user', array('name' => $user->first_name))</h6>
