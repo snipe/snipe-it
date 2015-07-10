@@ -158,11 +158,10 @@ class License extends Depreciable
 
 public function freeSeat()
     {
-        $seat = DB::table('license_seats')
+        $seat = LicenseSeat::where('license_id','=',$this->id)
+                    ->whereNull('deleted_at')
                     ->whereNull('assigned_to')
                     ->whereNull('asset_id')
-                    ->where('license_id', '=', $this->id)
-                    ->whereNull('deleted_at')
                     ->first();
         return $seat->id;
     }
