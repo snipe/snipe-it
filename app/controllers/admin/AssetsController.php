@@ -223,11 +223,12 @@ class AssetsController extends AdminController
 		->lists('name', 'id');
         $supplier_list = array('' => Lang::get('general.select_supplier')) + Supplier::orderBy('name', 'asc')->lists('name', 'id');
         $location_list = array('' => Lang::get('general.select_location')) + Location::orderBy('name', 'asc')->lists('name', 'id');
+        $assigned_to = array('' => Lang::get('general.select_user')) + DB::table('users')->select(DB::raw('concat(first_name," ",last_name) as full_name, id'))->whereNull('deleted_at')->lists('full_name', 'id');
 
         // Grab the dropdown list of status
         $statuslabel_list = Statuslabel::orderBy('name', 'asc')->lists('name', 'id');
 
-        return View::make('backend/hardware/edit', compact('asset'))->with('model_list',$model_list)->with('supplier_list',$supplier_list)->with('location_list',$location_list)->with('statuslabel_list',$statuslabel_list);
+        return View::make('backend/hardware/edit', compact('asset'))->with('model_list',$model_list)->with('supplier_list',$supplier_list)->with('location_list',$location_list)->with('statuslabel_list',$statuslabel_list)->with('assigned_to',$assigned_to);
     }
 
 
@@ -1060,7 +1061,7 @@ class AssetsController extends AdminController
       	{
 
             if ($assets->assetstatus) {
-                
+
                 if ($assets->assetstatus->deployable != 0) {
                     if (($assets->assigned_to !='') && ($assets->assigned_to > 0)) {
                         return '<a href="'.route('checkin/hardware', $assets->id).'" class="btn btn-primary btn-sm">'.Lang::get('general.checkin').'</a>';

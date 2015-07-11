@@ -166,7 +166,9 @@
                 <label for="status_id" class="col-md-2 control-label">@lang('admin/hardware/form.status') <i class='fa fa-asterisk'></i></label>
                     <div class="col-md-7 col-sm-12 col-sm-12">
                         {{ Form::select('status_id', $statuslabel_list , Input::old('status_id', $asset->status_id), array('class'=>'select2 status_id', 'style'=>'width:350px')) }}
+
                         <span class="status_spinner" style="padding-left: 10px; color: green; display:none; width: 30px;"><i class="fa fa-spinner fa-spin"></i> </span>
+
                         <p class="help-block">@lang('admin/hardware/form.help_checkout')</p>
                         {{ $errors->first('status_id', '<br><span class="alert-msg"><i class="fa fa-times"></i> :message</span>') }}
                     </div>
@@ -228,60 +230,68 @@
 </div>
 <script>
 
-	var $eventSelect = $(".model");
-	$eventSelect.on("change", function () {
-        $(".mac_spinner").css("display", "inline");
-        mac_add($eventSelect.val());
+    $(function() {
+        mac_add($(".model option:selected").val());
     });
-	$(function() {
-        var mac = $(".model option:selected").val();
-        if(mac!=''){
-	       mac_add(mac);
+
+	var $modelSelect = $(".model");
+	$modelSelect.on("change", function () {
+        mac_add($modelSelect.val());
+    });
+
+	function mac_add(assetmodel_id) {
+        if(assetmodel_id!=''){
+            $(".mac_spinner").css("display", "inline");
+    	    $.ajax({
+    	        url: "{{Config::get('app.url')}}/api/models/"+assetmodel_id+"/check",
+    	        success: function(data) {
+                    $(".mac_spinner").css("display", "none");
+
+    	            if(data == true){
+    	                 $("#mac_address").css("display", "block");
+    	            } else {
+    	                 $("#mac_address").css("display", "none");
+    	            }
+    	        }
+    	    });
         }
-	});
-	function mac_add(id) {
-	    $.ajax({
-	        url: "{{Config::get('app.url')}}/api/models/"+id+"/check",
-	        success: function(data) {
-                $(".mac_spinner").css("display", "none");
-                
-	            if(data == true){
-	                 $("#mac_address").css("display", "block");
-	            } else {
-	                 $("#mac_address").css("display", "none");
-	            }
-	        }
-	    });
 	};
 
 
-    var $eventSelect = $(".status_id");
-	$eventSelect.on("change", function () {
-        $(".status_spinner").css("display", "inline");
-        user_add($eventSelect.val());
+
+
+    $(function() {
+        user_add($(".status_id option:selected").val());
     });
-	$(function() {
-        var deployable = $(".status_id option:selected").val();
 
-        if(deployable!=''){
-	       user_add(deployable);
+	var $statusSelect = $(".status_id");
+	$statusSelect.on("change", function () {
+        user_add($statusSelect.val());
+    });
+
+	function user_add(status_id) {
+        console.log(status_id);
+
+        if(status_id!=''){
+            $(".status_spinner").css("display", "inline");
+    	    $.ajax({
+    	        url: "{{Config::get('app.url')}}/api/statuslabels/"+status_id+"/deployable",
+    	        success: function(data) {
+                    console.log(data);
+                    $(".status_spinner").css("display", "none");
+
+    	            if(data == true){
+    	                 $("#assigned_user").css("display", "block");
+    	            } else {
+    	                 $("#assigned_user").css("display", "none");
+    	            }
+    	        }
+    	    });
         }
-	});
-
-	function user_add(id) {
-	    $.ajax({
-	        url: "{{Config::get('app.url')}}/api/statuslabels/"+id+"/deployable",
-	        success: function(data) {
-                $(".status_spinner").css("display", "none");
-	            if(data == true){
-	                 $("#assigned_user").css("display", "block");
-	            } else {
-	                 $("#assigned_user").css("display", "none");
-                     $("#assigned_to").val('');
-	            }
-	        }
-	    });
 	};
+
+
+
 </script>
 
 @stop

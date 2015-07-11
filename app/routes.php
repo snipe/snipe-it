@@ -16,7 +16,9 @@ Route::group(array('prefix' => 'api', 'namespace' => 'Controllers\Admin', 'befor
         Route::get('{statuslabelId}/deployable', function ($statuslabelId) {
 			 $statuslabel = Statuslabel::find($statuslabelId);
              if (($statuslabel->deployable=='1') && ($statuslabel->pending!='1') && ($statuslabel->archived!='1')) {
-                 return $statuslabel->deployable;
+                 return '1';
+             } else {
+                 return '0';
              }
 		});
     });
