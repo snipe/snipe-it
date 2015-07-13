@@ -172,6 +172,7 @@ Route::group(array('prefix' => 'admin', 'before' => 'admin-auth', 'namespace' =>
         Route::get('{licenseId}/clone', array('as' => 'clone/license', 'uses' => 'LicensesController@getClone'));
         Route::post('{licenseId}/clone', 'LicensesController@postCreate');
         Route::get('{licenseId}/delete', array('as' => 'delete/license', 'uses' => 'LicensesController@getDelete'));
+        Route::get('{licenseId}/freecheckout', array('as' => 'freecheckout/license', 'uses' => 'LicensesController@getFreeLicense'));
         Route::get('{licenseId}/checkout', array('as' => 'checkout/license', 'uses' => 'LicensesController@getCheckout'));
         Route::post('{licenseId}/checkout', 'LicensesController@postCheckout');
         Route::get('{licenseId}/checkin/{backto?}', array('as' => 'checkin/license', 'uses' => 'LicensesController@getCheckin'));
