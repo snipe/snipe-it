@@ -319,6 +319,9 @@ Route::group(array('prefix' => 'admin', 'before' => 'admin-auth', 'namespace' =>
         Route::get('{userId}/restore', array('as' => 'restore/user', 'uses' => 'UsersController@getRestore'));
         Route::get('{userId}/view', array('as' => 'view/user', 'uses' => 'UsersController@getView'));
         Route::get('{userId}/unsuspend', array('as' => 'unsuspend/user', 'uses' => 'UsersController@getUnsuspend'));
+        Route::post('{userId}/upload', array('as' => 'upload/user', 'uses' => 'UsersController@postUpload'));
+        Route::get('{userId}/deletefile/{fileId}', array('as' => 'delete/userfile', 'uses' => 'UsersController@getDeleteFile'));
+        Route::get('{userId}/showfile/{fileId}', array('as' => 'show/userfile', 'uses' => 'UsersController@displayFile'));
 
         Route::post('bulkedit',
         	array('as' => 'users/bulkedit',

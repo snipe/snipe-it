@@ -104,6 +104,17 @@ class User extends SentryUserModel
         return $this->hasMany('Asset','id')->withTrashed();
     }
 
+    /**
+    * Get uploads for this asset
+    */
+    public function uploads()
+    {
+        return $this->hasMany('Actionlog','asset_id')
+            ->where('asset_type', '=', 'user')
+            ->where('action_type', '=', 'uploaded')
+            ->whereNotNull('filename')
+            ->orderBy('created_at', 'desc');
+    }
 
     public function sentryThrottle() {
 	    return $this->hasOne('Throttle');
