@@ -189,7 +189,7 @@
 									@endif
 								</td>
 								<td>
-									<a class="btn delete-asset btn-danger btn-sm" href="{{ route('delete/licensefile', [$license->id, $file->id]) }}"><i class="fa fa-trash icon-white"></i></a>
+									<a class="btn delete-asset btn-danger btn-sm" href="{{ route('delete/licensefile', [$license->id, $file->id]) }}" data-content="Are you sure you wish to delete this file?" data-title="Delete {{{ $file->filename }}}?"><i class="fa fa-trash icon-white"></i></a>
 								</td>
 							</tr>
 							@endforeach
