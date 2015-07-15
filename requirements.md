@@ -21,7 +21,7 @@ The requirements for Snipe-IT are fairly standard for a modern web server, and m
 ## <i class="fa fa-linux"></i> Requirements Specific to Linux/OSX
 - Mod Rewrite
 
-### <i class="fa fa-windows"></i> Requirements Specific to Windows Server
+## <i class="fa fa-windows"></i> Requirements Specific to Windows Server
 
 - IIS
 - IIS URL Rewrite

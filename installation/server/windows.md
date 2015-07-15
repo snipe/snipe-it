@@ -2,24 +2,11 @@
 currentMenu: windows
 ---
 
-# <i class="fa fa-windows"></i> Install Snipe-IT Windows 2008 R2 With IIS
-
-<div id="generated-toc"></div>
-
-
-Prereq (Install all of these prior to continuing)
-
-- IIS
-- IIS URL Rewrite
-- [PHP 5.4](http://www.microsoft.com/web/gallery/install.aspx?appid=PHP54)
-- MariaDB 10.0.14 for Windows [64-bit](https://downloads.mariadb.org/interstitial/mariadb-10.0.14/winx64-packages/mariadb-10.0.14-winx64.msi/from/http%3A//mirror.aarnet.edu.au/pub/MariaDB) | [32-bit](https://downloads.mariadb.org/interstitial/mariadb-10.0.14/win32-packages/mariadb-10.0.14-win32.msi/from/http%3A//mirror.aarnet.edu.au/pub/MariaDB)
-- [PHP Manager for IIS](http://phpmanager.codeplex.com/) (makes managing PHP on IIS much easier)
-- [Composer install with the shell menus](https://getcomposer.org/Composer-Setup.exe )
-- [Notepad++](http://www.notepad-plus-plus.org/download/v6.6.6.html ) for editing files
+# <i class="fa fa-windows"></i> Install Snipe-IT on Windows 2008 R2 with IIS
 
 ### Setting Up an IIS Website
-- [Download Snipe-IT](http://snipeitapp.com/download.php)
-- Extract to `C:\inetpub\wwwroot\snipe-it` (folder name can be changed but we will reference it as is shown here)
+
+- Extract [Snipe-IT](http://snipeitapp.com/download.php) to `C:\inetpub\wwwroot\snipe-it` (folder name can be changed but we will reference it as is shown here)
 - Run IIS Manager
 - Right Click `Sites` and `Add Website`
 
@@ -34,36 +21,63 @@ Host name: assets.portal.local (this can be changed to suit your needs)
 ```
 
 - Click `OK`
-Your site will now appear in the list
+
+Your site will now appear in the list.
+
 - Double click on your site
 - Double Click `URL Rewrite`
-    1. In the action pane click `Import Rules...`
-    2. Click the `...` button
-    3. Go to `C:\inetpub\wwwroot\snipe-it\public`
-    4. Select `.htaccess` file
-    5. Click `Open` then `Import`
-    6. In the action pane click `Apply`
+	- In the action pane click `Import Rules...`
+	- Click the `...` button
+	- Go to `C:\inetpub\wwwroot\snipe-it\public`
+	- Select `.htaccess` file
+	- Click `Open` then `Import`
+	- In the action pane click `Apply`
 
 
+## Fix Permissions
 
-    3. Type `php artisan app:install` and follow the prompts
-7. Add permissions for the IIS user for the `storage` folder:
-    1. Goto `C:\inetpub\wwwroot\snipe-it\app`
-    2. Right Click `storage` -> `Properties`
-    3. Goto `Security Tab` -> `Edit`
-    4. Click `Add` and change location to local machine
-    5. Type `IUSR` in object name box
-    6. Click `OK`
-    7. Give `IUSR` full control
-    8. Click `OK` twice
-8. Add permissions for the IIS user for the `uploads` folder:
-    1. Goto `C:\inetpub\wwwroot\snipe-it\app`
-    2. Right Click `uploads` -> `Properties`
-    3. Goto `Security Tab` -> `Edit`
-    4. Click `Add` and change location to local machine
-    5. Type `IUSR` in object name box
-    6. Click `OK`
-    7. Give `IUSR` full control
-    8. Click `OK` twice
+Add permissions for the IIS user for the `uploads` folder:
 
-Special thanks to [@madd15](http://github.com/madd15) for writing up the Windows installation guide!
+- Go to `C:\inetpub\wwwroot\snipe-it\public`
+- Right Click uploads -> Properties
+- Go to Security Tab -> Edit
+- Click Add and change location to local machine
+- Type IUSR in object name box
+- Click OK
+- Give IUSR full control
+- Click OK twice
+
+Add permissions for the IIS user for the `private_uploads` folder:
+
+- Go to `C:\inetpub\wwwroot\snipe-it\app`
+- Right Click private_uploads -> Properties
+- Goto Security Tab -> Edit
+- Click Add and change location to local machine
+- Type IUSR in object name box
+- Click OK
+- Give IUSR full control
+- Click OK twice
+
+Add permissions for the IIS user for the `c:\windows\temp\` folder:
+
+- Goto `C:\windows\`
+- Right Click temp -> Properties
+- Goto Security Tab -> Edit
+- Click Add and change location to local machine
+- Type IUSR in object name box
+- Click OK
+- Give IUSR modify permissions
+- Click OK twice
+
+Add permissions for the IIS user for the `storage` folder:
+
+- Go to `C:\inetpub\wwwroot\snipe-it\app`
+- Right Click storage -> Properties
+- Goto Security Tab -> Edit
+- Click Add and change location to local machine
+- Type IUSR in object name box
+- Click OK
+- Give IUSR full control
+- Click OK twice
+
+Much <i class="fa fa-heart" style="color:red"></i> to [@madd15](http://github.com/madd15) for writing up the Windows installation guide!
