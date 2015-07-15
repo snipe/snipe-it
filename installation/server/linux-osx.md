@@ -4,7 +4,7 @@ currentMenu: linux-osx
 
 # <i class="fa fa-linux"></i> Installing Snipe-IT on Linux/OSX
 
-<div id="generated-toc"></div>
+<div id="generated-toc" class="generate_from_h2"></div>
 
 
 ## Using Apache
@@ -130,3 +130,39 @@ If you need more than 1024MB then change that to something higher.
 To enable it by default after reboot, add this line to /etc/fstab:
 
 	/var/swap.1 swap swap defaults 0 0
+
+
+-----
+
+## Notes on SELinux
+
+If you’re running SELinux, you’ll need to change the security context in order for the web server to be able to write to files where needed (log files, image uploads, sessions, etc).
+
+If you’re not sure, don’t worry about it unless you’ve set up Snipe-IT and you’re hitting permission errors even after you’ve updated the directory permissions to be writable.
+
+To tell if you’re running SELinux, you can run:
+
+```
+cat /etc/sysconfig/selinux
+```
+or
+
+```
+sestatus
+```
+
+If it turns out you’re running SELinux, the syntax for changing the security context on a directory is:
+
+```
+chcon -type <type> <file>
+chcon --reference <file1> <file2>
+```
+
+So for example, you might do something like:
+
+```
+chcon -R --type httpd_sys_rw_content_t /srv/snipeit
+chcon -R --reference=/var/www/html /srv/snipeit
+```
+
+Depending on where your Snipe-IT files are located.

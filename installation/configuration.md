@@ -4,7 +4,7 @@ currentMenu: configuration
 
 # Snipe-IT Configuration Files
 
-<div id="generated-toc"></div>
+<div id="generated-toc" class="generate_from_h2"></div>
 
 ## Adjust Environments
 

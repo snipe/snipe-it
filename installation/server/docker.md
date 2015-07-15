@@ -4,7 +4,7 @@ currentMenu: docker
 
 # Installing Snipe-IT on Docker
 
-<div id="generated-toc"></div>
+<div id="generated-toc" class="generate_from_h2"></div>
 
 Build the snipeit image using the Dockerfile at the root directory of Snipe-IT by doing this:
 
