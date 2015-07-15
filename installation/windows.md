@@ -1,4 +1,7 @@
 # Windows IIS
+
+<div id="generated-toc"></div>
+
 ## Install Snipe-IT Windows 2008 R2 With IIS
 
 Prereq (Install all of these prior to continuing)
@@ -117,5 +120,5 @@ This will install the dependencies. Once completed move to next step
     6. Click `OK`
     7. Give `IUSR` full control
     8. Click `OK` twice
-    
+
 Special thanks to [@madd15](http://github.com/madd15) for writing up the Windows installation guide!

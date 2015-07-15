@@ -1,3 +1,8 @@
+---
+currentMenu: upgrading
+---
+<div id="generated-toc"></div>
+
 # Upgrading
 ### Important Notes on Updating
 

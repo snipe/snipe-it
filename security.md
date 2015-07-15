@@ -1,4 +1,12 @@
+---
+currentMenu: security
+---
+
 # Some Notes on Security
+
+Snipe-IT was built with security in mind. We utilize bcrypt to handle passwords, which is an adaptive hash function based on the Blowfish symmetric block cipher cryptographic algorithm. Additionally, the software is designed in such a way to prevent brute forcing the password, with IP addresses and usernames locked out for 10 minutes after a specified number of login attempts.
+
+## Additional Security
 
 Although this is web-based software and must run on a web server, you may want to consider whether you actually need it accessible to the outside world. Running it on an internal network with ports closed to the outside world, or on AWS using a security group that prevents access from outside a selected static IP range (like your company network IP), may be something to consider.
 

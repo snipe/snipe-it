@@ -41,22 +41,38 @@ menu:
         installation:
             name: Installation
             items:
+                downloading:
+                    text: Downloading
+                    # You can use relative urls
+                    relativeUrl: installation/index.html
+                configuration:
+                    text: Configuration
+                    # You can use relative urls
+                    relativeUrl: installation/configuration.html
+                command-line:
+                    text: The CLI Installer
+                    # You can use relative urls
+                    relativeUrl: installation/command-line.html
                 linux:
                     text: Linux/OSX
                     # You can use relative urls
-                    relativeUrl: linux-osx.html
+                    relativeUrl: installation/linux-osx.html
                 windows:
                     text: Windows
                     # You can use relative urls
-                    relativeUrl: windows.html
+                    relativeUrl: installation/windows.html
                 wamp:
                     text: WAMP
                     # You can use relative urls
-                    relativeUrl: wamp.html
+                    relativeUrl: installation/wamp.html
                 xamp:
                     text: XAMPP
                     # You can use relative urls
-                    relativeUrl: xampp.html
+                    relativeUrl: installation/xampp.html
+                docker:
+                    text: Docker
+                    # You can use relative urls
+                    relativeUrl: installation/docker.html
 
         misc:
             name:

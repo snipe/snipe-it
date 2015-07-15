@@ -1,3 +1,7 @@
+---
+currentMenu: license
+---
+
 # License
 
 	Copyright (C) 2013-2014 Alison Gianotto - snipe@snipe.net

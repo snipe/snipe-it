@@ -1,4 +1,10 @@
+---
+currentMenu: common-issues
+---
+
 # Common Issues
+
+<div id="generated-toc"></div>
 
 While installation should be pretty simple, here are some of the more common questions/issues people have.
 

@@ -1,5 +1,7 @@
 # Developing & Contributing
 
+<div id="generated-toc"></div>
+
 Please be sure to see the [contributing guidelines](https://github.com/snipe/snipe-it/blob/develop/CONTRIBUTING.md) before submitting pull requests.
 
 The only real difference in setting Snipe-IT up for local development versus setting it up for production usage is the configuration files, and remembering to add the local environment flag on the artisan commands.

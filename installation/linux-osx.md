@@ -1,4 +1,10 @@
+---
+currentMenu: linux-osx
+---
+
 # Linux/OSX
+
+<div id="generated-toc"></div>
 
 
 Note: Installation for Windows IIS [can be found here](https://gist.github.com/madd15/e48a9c4aaa4b14b6f69a) (thanks, [madd15](https://github.com/madd15)!)
@@ -70,7 +76,7 @@ If you opt to manually enter a key in `app.php`, __be sure it is exactly 32 char
 
 -----
 
-### 2) Install  Dependencies into Snipe-IT application root using Composer 
+### 2) Install  Dependencies into Snipe-IT application root using Composer
 ##### 2.1) If you don't have composer installed
 
 	curl -sS https://getcomposer.org/installer | php
@@ -271,6 +277,3 @@ If you're doing any development on this, make sure you purge the auto-loader if 
 	php composer.phar dump-autoload
 
 -----
-
-
-
