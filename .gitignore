@@ -5,3 +5,4 @@ composer.phar
 app
 .DS_Store
 .couscous
+website/.siteflow

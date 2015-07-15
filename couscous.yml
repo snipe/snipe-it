@@ -12,6 +12,7 @@ exclude:
     - app
     - public
     - website
+    - CNAME
 
 # Any variable you put in this file is also available in the Twig layouts:
 title: Snipe-IT Documentation
