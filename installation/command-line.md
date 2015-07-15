@@ -1,3 +1,7 @@
+---
+currentMenu: command-line
+---
+
 # Using the CLI Installer
 
 Now, you need to create yourself a user.

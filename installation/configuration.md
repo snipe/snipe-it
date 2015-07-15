@@ -26,7 +26,7 @@ $env = $app->detectEnvironment(array(
 
 __Note: You must create the database yourself. Snipe-IT does not create the database or database users for you.__
 
-Copy the example database config from `app/config/production/database.example.php` to app/config/production/database.php. Update the file `app/config/production/database.php` with your database name and credentials:
+Copy the example database config from `app/config/production/database.example.php` to `app/config/production/database.php`. Update the file `app/config/production/database.php` with your database name and credentials:
 
 ```
 'mysql'=> array(
@@ -44,7 +44,7 @@ Copy the example database config from `app/config/production/database.example.ph
 
 ## Setup Mail Settings
 
-Copy the example mail config from app/config/production/mail.example.php to app/config/production/mail.php:
+Copy the example mail config from `app/config/production/mail.example.php` to `app/config/production/mail.php`:
 
 ```
 cp app/config/production/mail.example.php app/config/production/mail.php

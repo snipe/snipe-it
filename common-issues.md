@@ -4,7 +4,7 @@ currentMenu: common-issues
 
 # Common Issues
 
-<div id="generated-toc"></div>
+<div id="generated-toc" class="generate_from_h2"></div>
 
 While installation should be pretty simple, here are some of the more common questions/issues people have.
 
@@ -30,13 +30,13 @@ You can also run
 php artisan key:generate
 ```
 
-to auto-generate a key for you.
+to auto-generate a key for you. Put the generated key in as the value of `key` in your config.
 
 -----
 
 ## White page with error: Error in exception handler.
 
-Make sure you've changed the permissions on the `app/storage` directory and all of the directories within.
+Make sure you've changed the permissions on the `app/storage` directory and all of the directories within to be writable by the web server.
 
 -----
 
@@ -53,13 +53,9 @@ Alternatively, you can try just copying your config files over into `app/config/
 
 ## FatalErrorException. Syntax error, unexpected '[', expecting ')'
 
-This error occurs when you're using an older version of PHP and trying to run Snipe-IT.
-Per the PHP manual:
+The version of PHP you're using is too old to run Snipe-IT, which [requires](requirements.html) PHP 5.4 or later.
 
-As of PHP 5.4 you can also use the short array syntax, which replaces array() with [].
-PHP 5.4 is the minimum requirement in Snipe-IT, so you must upgrade your version of PHP to resolve this error.
-
-You should also delete the contents of the cached views in `app/storage/views` once you upgrade PHP, to resolve any cached issues.
+After upgrading PHP, you should also delete the contents of the cached views in `app/storage/views` once you upgrade PHP, to resolve any cached issues.
 
 -----
 
@@ -111,8 +107,8 @@ If you're using Snipe-IT 1.2.6 or earlier, grab the latest off of the develop br
 
 ## Installing d11wtq/boris (v1.0.8) Downloading: connection... Failed to download d11wtq/boris from dist
 
-This error is due to the fact that the repo of the dependency required by one of the libraries has moved, and composer has cached it's old location (where it doesn't exist anymore.) Composer may be caching the vendor location, even though the entry on Packagist was updated by the REPL author.
+This error is due to the fact that the repo of the dependency required by one of the libraries has moved, and composer has cached its old location (where it doesn't exist anymore.) Composer may be caching the vendor location, even though the entry on Packagist was updated by the REPL author.
 
 To solve this, clear your composer cache by running `php composer clear-cache`.
 
-If this doesn't work, Try removing the `composer.lock` file from the main Snipe-IT directory, and running `php composer install`.
+If this doesn't work, Try removing the `composer.lock` file from the main Snipe-IT directory, and running `php composer install`. (This will take a few moments, since composer will have to go through and resolve all of the dependencies itself instead of using the lock file.)

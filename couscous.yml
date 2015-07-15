@@ -91,10 +91,6 @@ menu:
         misc:
             name:
             items:
-                translations:
-                    text: Translations
-                    # You can use relative urls
-                    relativeUrl: translations.html
                 common-issues:
                     text: Common Issues
                     # You can use relative urls
@@ -103,6 +99,23 @@ menu:
                     text: Getting Help
                     # You can use relative urls
                     relativeUrl: getting-help.html
+                upgrading:
+                    text: Upgrading
+                    # You can use relative urls
+                    relativeUrl: upgrading.html
+                contributing:
+                    text: Contributing
+                    # You can use relative urls
+                    relativeUrl: contributing.html
+                translations:
+                    text: Translations
+                    # You can use relative urls
+                    relativeUrl: translations.html
+                license:
+                    text: License
+                    # You can use relative urls
+                    relativeUrl: license.html
+
 
 
 # Base URL of the published website (no "/" at the end!)
