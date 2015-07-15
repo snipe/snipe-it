@@ -9,16 +9,21 @@ This project is being actively developed and we're [releasing quite frequently](
 __This is web-based software__. This means there there is no executable file (aka no .exe files), and it must be run on a web server and accessed through a web browser. It runs on any Mac OSX, flavor of Linux, as well as Windows.
 
 -----
-## Requirements
+### Requirements
 
 - PHP 5.4 or later
 - MCrypt PHP Extension
 - Fileinfo Extension
+- php-pdo
+- php-mysql
+- php-mbstring
+- MySQL or MariaDB
 
-And _one_ of the following image libraries (for QR codes, asset model image and user avatar image uploads).
+And one of the following image libraries (for QR codes, asset model image and user avatar image uploads).
 
 - GD Library (>=2.0) … or …
 - Imagick PHP extension (>=6.3.8)
+
 
 -----
 ### Bug Reports & Feature Requests
