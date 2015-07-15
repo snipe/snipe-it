@@ -6,7 +6,7 @@ currentMenu: server
 
 As mentioned, Snipe-IT is web-based software, which means it requires a web server to run.
 
-#### You must complete all of the steps in the installation section, in addition to configuring your server. That means you will [download the software](../index.html), [customize your configuration files](../configuration.html), [install the dependencies with composer](../composer.html), and run the [command line utility](../command-line.html), in addition to configuring your web server.
+#### You must complete all of the steps in the installation section, in addition to configuring your server. That means you will [download the software](../downloading.html), [customize your configuration files](../configuration.html), [install the dependencies with composer](../composer.html), and run the [command line utility](../command-line.html), in addition to configuring your web server.
 
 Installation should take around twenty minutes or less, if nothing goes wrong, and if you're pretty familiar with web server configuration.
 

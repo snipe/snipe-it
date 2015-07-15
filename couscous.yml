@@ -43,24 +43,28 @@ menu:
         installation:
             name: Installation
             items:
-                downloading:
-                    text: Downloading
+                overview:
+                    text: Overview
                     # You can use relative urls
                     relativeUrl: installation/index.html
+                downloading:
+                    text: 1. Downloading
+                    # You can use relative urls
+                    relativeUrl: installation/downloading.html
                 configuration:
-                    text: Configuration
+                    text: 2. Configuration
                     # You can use relative urls
                     relativeUrl: installation/configuration.html
                 composer:
-                    text: Install Dependencies
+                    text: 3. Install Dependencies
                     # You can use relative urls
                     relativeUrl: installation/composer.html
                 command-line:
-                    text: The CLI Installer
+                    text: 4. The CLI Installer
                     # You can use relative urls
                     relativeUrl: installation/command-line.html
                 server:
-                    text: Server Configuration
+                    text: 5. Server Configuration
                     # You can use relative urls
                     relativeUrl: installation/server/index.html
                 linux-osx:

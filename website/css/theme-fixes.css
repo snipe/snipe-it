@@ -42,11 +42,11 @@ a:visited {
     color: #d06e2e;
 }
 
-.wy-menu-vertical a:visited {
+.wy-menu-vertical a:visited, .wy-menu-vertical a:link  {
 color: #b3b3b3;
 }
 
-.wy-side-nav-search a:visited {
+.wy-side-nav-search a:visited, .wy-nav-top a:visited, .wy-side-nav-search a:link, .wy-nav-top a:link {
 color: #ffffff;
 }
 
