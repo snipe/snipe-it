@@ -27,7 +27,7 @@ Feel free to check out the [GitHub Issues for this project](https://github.com/s
 
 We use Waffle.io to help better communicate our roadmap with users. Our [project page there](http://waffle.io/snipe/snipe-it) will show you the backlog, what's ready to be worked on, what's in progress, and what's completed.
 
-[![Stories in Ready](https://badge.waffle.io/snipe/snipe-it.png?label=ready&title=Ready)](http://waffle.io/snipe/snipe-it)
+[![Stories in Ready](https://badge.waffle.io/snipe/snipe-it.png?label=ready+for+dev&title=Ready+for+development)](http://waffle.io/snipe/snipe-it)
 
 -----
 ### Announcement List

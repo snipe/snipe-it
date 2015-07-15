@@ -1,0 +1,7 @@
+vendor
+public
+crowdin.yaml
+composer.phar
+app
+.DS_Store
+.couscous
