@@ -1,0 +1,31 @@
+.wy-side-nav-search>a, .wy-side-nav-search .wy-dropdown>a {
+    margin-bottom: 0;
+}
+
+/* Code blocks */
+pre > code {
+    display: block;
+    font-size: 12px;
+    white-space: inherit;
+    max-width: inherit;
+    background: transparent;
+    border: none;
+    overflow-x: auto;
+    padding: 0.5em;
+    color: #333;
+}
+pre > code.hljs {
+    background: transparent;
+}
+pre {
+    border: 1px solid #e1e4e5;
+    background: #fff;
+    margin: 1px 0 24px 0;
+}
+
+p.menu-section {
+    color: white;
+    padding-left: 10px;
+    margin-bottom: 10px;
+    margin-top: 20px;
+}

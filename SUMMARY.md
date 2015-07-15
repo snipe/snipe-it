@@ -1,6 +1,7 @@
 # Summary
 
 * [Introduction](README.md)
+   * [Requirements](requirements.md)
 * [Installation](installation/README.md)
    * [Linux/OSX](linuxosx/README.md)
    * [Windows](windows/README.md)

@@ -1,0 +1,81 @@
+template:
+    # Name of the directory containing the website template (default is "website")
+
+    directory: website
+    # Or if you are using a remote template, you can set the Git URL
+    #url: https://github.com/snipe/Template-ReadTheDocs.git
+
+# List of directories to exclude from the processing (default contains "vendor" and "website")
+# Paths are relative to the repository root
+exclude:
+    - vendor
+    - app
+    - public
+    - website
+
+# Any variable you put in this file is also available in the Twig layouts:
+title: Snipe-IT Documentation
+
+# The left menu bar
+menu:
+    sections:
+        introduction:
+            name:
+            items:
+                home:
+                    text: Introduction
+                    # You can use relative urls
+                    relativeUrl: index.html
+                requirements:
+                    text: Requirements
+                    # You can use relative urls
+                    relativeUrl: requirements.html
+                #foo:
+                    #text: Another link
+                    # Or absolute urls
+                    #absoluteUrl: https://example.com
+        installation:
+            name: Installation
+            items:
+                linux:
+                    text: Linux/OSX
+                    # You can use relative urls
+                    relativeUrl: linux-osx.html
+                windows:
+                    text: Windows
+                    # You can use relative urls
+                    relativeUrl: windows.html
+                wamp:
+                    text: WAMP
+                    # You can use relative urls
+                    relativeUrl: wamp.html
+                xamp:
+                    text: XAMPP
+                    # You can use relative urls
+                    relativeUrl: xampp.html
+
+        misc:
+            name:
+            items:
+                translations:
+                    text: Translations
+                    # You can use relative urls
+                    relativeUrl: translations.html
+                common-issues:
+                    text: Common Issues
+                    # You can use relative urls
+                    relativeUrl: common-issues.html
+                getting-help:
+                    text: Getting Help
+                    # You can use relative urls
+                    relativeUrl: getting-help.html
+
+
+# Base URL of the published website (no "/" at the end!)
+# You are advised to set and use this variable to write your links in the HTML layouts
+baseUrl: http://snipe.github.io/snipe-it
+
+# Used to link to the GitHub project
+github:
+    user: snipe
+    repo: snipe-it
