@@ -58,21 +58,14 @@ If you don’t have easy access to a mail server, we suggest signing up for Mand
 
 ## Adjust the Application Settings
 
-Copy the example app config from app/config/production/app.example.php to app/config/production/app.php:
-
-
-```
-cp app/config/production/app.example.php app/config/production/app.php
-```
-
-Update the file `app/config/production/app.php` with your URL settings.
+Copy the example app config from `app/config/production/app.example.php` to `app/config/production/app.php`, and then update your new `app/config/production/app.php` with your URL settings.
 
 
 ```
 'url'=> 'http://www.yourserver.com',
 ```
 
-You should also change your secret key here from `Change_this_key_or_snipe_will_get_ya` to a random 32 character string. If you prefer to have your key randomly generated, run the artisan key:generate command from the application root a little later in this process.
+You should also change your secret key here from `Change_this_key_or_snipe_will_get_ya` to a random 32 character string. If you prefer to have your key randomly generated, run the `php artisan key:generate` command from the application root a little later in this process.
 
 ## Fix permissions
 

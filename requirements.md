@@ -4,6 +4,8 @@ currentMenu: requirements
 
 # System Requirements
 
+The requirements for Snipe-IT are fairly standard for a modern web server, and if for some reason you don't have them installed, they are relatively easy to add.
+
 - PHP 5.4 or later
 - MCrypt PHP Extension
 - Fileinfo Extension

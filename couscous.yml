@@ -53,26 +53,30 @@ menu:
                     text: The CLI Installer
                     # You can use relative urls
                     relativeUrl: installation/command-line.html
-                linux:
-                    text: Linux/OSX
+                server:
+                    text: Server Configuration
                     # You can use relative urls
-                    relativeUrl: installation/linux-osx.html
+                    relativeUrl: installation/server/index.html
+                linux-osx:
+                    text: "<span class='subnav-indent'><i class='fa fa-caret-right'></i> Linux/OSX</span>"
+                    # You can use relative urls
+                    relativeUrl: installation/server/linux-osx.html
                 windows:
-                    text: Windows
+                    text: "<span class='subnav-indent'><i class='fa fa-caret-right'></i> Windows</span>"
                     # You can use relative urls
-                    relativeUrl: installation/windows.html
+                    relativeUrl: installation/server/windows.html
                 wamp:
-                    text: WAMP
+                    text: "<span class='subnav-indent'><i class='fa fa-caret-right'></i> WAMP</span>"
                     # You can use relative urls
-                    relativeUrl: installation/wamp.html
-                xamp:
-                    text: XAMPP
+                    relativeUrl: installation/server/wamp.html
+                xampp:
+                    text: "<span class='subnav-indent'><i class='fa fa-caret-right'></i> XAMPP</span>"
                     # You can use relative urls
-                    relativeUrl: installation/xampp.html
+                    relativeUrl: installation/server/xampp.html
                 docker:
-                    text: Docker
+                    text: "<span class='subnav-indent'><i class='fa fa-caret-right'></i> Docker</span>"
                     # You can use relative urls
-                    relativeUrl: installation/docker.html
+                    relativeUrl: installation/server/docker.html
 
         misc:
             name:

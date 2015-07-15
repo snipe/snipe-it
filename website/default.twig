@@ -29,7 +29,7 @@
 
                         <ul class="nav nav-pills nav-stacked">
                             {% for itemId, item in section.items %}
-                                <li class="{{ itemId == currentMenu ? 'active' }}">
+                                <li class="navitems{{ itemId == currentMenu ? ' active' }}">
                                     <a href="{{ item.absoluteUrl|default(baseUrl ~ '/' ~ item.relativeUrl) }}">
                                         {{ item.text|raw }}
                                     </a>
@@ -64,9 +64,26 @@
                         {{ content|raw }}
                     </div>
 
+                    <hr/>
+                    <div class="blue-alert">
+                            <div style="float: left; padding-right: 10px">
+                                <i class="fa fa-exclamation-triangle fa-2x"></i>
+                            </div>
+                            <div style="float: left;">
+                            <strong>
+                                See an error in this documentation?
+                            </strong>
+                            <br>Submit a pull request on the <a href="https://github.com/snipe/snipe-it/tree/documentation">documentation branch</a> of <a href="https://github.com/snipe/snipe-it">Snipe-IT</a>.
+                        </div>
+                        <div class="clear"></div>
+                    </div>
+
+
+
                     <footer>
-                        <hr/>
-                        <small>Documentation built with <a href="http://couscous.io/">Couscous</a> using a <a href="https://github.com/CouscousPHP/Template-ReadTheDocs">theme</a> based on <a href="https://readthedocs.org/">Read the Docs</a>.</small>
+                        <small>
+                            This documentation was built using <a href="http://couscous.io/">Couscous</a>. This <a href="https://github.com/CouscousPHP/Template-ReadTheDocs">theme</a> is based on <a href="https://readthedocs.org/">Read the Docs</a>.
+                        </small>
                     </footer>
 
                 </div>

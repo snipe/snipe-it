@@ -1,3 +1,7 @@
+---
+currentMenu: wamp
+---
+
 # Installing Snipe-IT on WAMP
 
 

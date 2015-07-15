@@ -7,122 +7,11 @@ currentMenu: linux-osx
 <div id="generated-toc"></div>
 
 
-Note: Installation for Windows IIS [can be found here](https://gist.github.com/madd15/e48a9c4aaa4b14b6f69a) (thanks, [madd15](https://github.com/madd15)!)
-
------
-
-### 1) Setup Environment, Database and Mail Settings
-
-#### 1.1) Adjust Environments
-
-Update the file `bootstrap/start.php` under the section `Detect The Application Environment`.
-
-__AS OF LARAVEL 4.1__
-Per the [Laravel 4.1 upgrade docs](http://laravel.com/docs/upgrade):
-
-__*"For security reasons, URL domains may no longer be used to detect your application environment. These values are easily spoofable and allow attackers to modify the environment for a request. You should convert your environment detection to use machine host names (hostname command on Mac & Ubuntu)."*__
-
-To find out your local machine's hostname, type `hostname` from a terminal prompt on the machine you're installing it on. The command-line response is that machine's hostname. Please note that the hostname is NOT always the same as the domain name.
-
-So for example, if you're installing this on your server named www.yourserver.com, the environmental variable section of `bootstrap/start.php` might look like this:
-
-	$env = $app->detectEnvironment(array(
-		...
-		'production' 	=> array('www.yourserver.com')
-	));
-
-If your development, staging and production sites all run on the same server (which is generally a terrible idea), [see this example](http://words.weareloring.com/development/setting-up-multiple-environments-in-laravel-4-1/) of how to configure the app using environmental variables.
-
------
-
-#### 1.2) Setup Your Database
-
-Copy the example database config `app/config/production/database.example.php` to `app/config/production/database.php`.
-Update the file `app/config/production/database.php` with your database name and credentials:
-
-        'mysql' => array(
-            'driver'    => 'mysql',
-            'host'      => 'localhost',
-            'database'  => 'snipeit_laravel',
-            'username'  => 'travis',
-            'password'  => '',
-            'charset'   => 'utf8',
-            'collation' => 'utf8_unicode_ci',
-            'prefix'    => '',
-        ),
-
-
-Note: You must create the database youself. Snipe-IT does not create the database or database users for you.
-
-
-#### 1.3) Setup Mail Settings
-
-Copy the example mail config `app/config/production/mail.example.php` to `app/config/production/mail.php`.
-Update the file `app/config/production/mail.php` with your mail settings.
-
-This will be used to send emails to your users, when they register and when they request a password reset.
-
-#### 1.4) Adjust the application settings.
-
-Copy the example app config `app/config/production/app.example.php` to `app/config/production/app.php`.
-
-Update the file `app/config/production/app.php` with your URL settings.
-
-    'url' => 'http://www.yourserver.com',
-
-You should also change your secret key here. If you prefer to have your key randomly generated, run the artisan key:generate command from the application root, __after__ step 4 below.
-
-If you opt to manually enter a key in `app.php`, __be sure it is exactly 32 characters__, or you will encounter an mcrypt_encrypt() error when trying to load the app.
-
------
-
-### 2) Install  Dependencies into Snipe-IT application root using Composer
-##### 2.1) If you don't have composer installed
-
-	curl -sS https://getcomposer.org/installer | php
-	php composer.phar install
-
-##### 2.2) If composer installed globally:
-
-	composer install
-
------
-
-### 3) Use custom CLI Installer Command
-
-Now, you need to create yourself a user and finish the installation.
-
-Use the following command to create your default user, user groups and run all the necessary migrations automatically.
-
-	php artisan app:install
-
------
-
-### 4) Fix permissions
-
-You'll need to make sure that the `app/storage` directory is writable by your webserver, since caches and log files get written there. You should use the minimum permissions available for writing, based on how you've got your webserver configured. You also need to change permissions for your uploads directory for user avatars and model images.
-
-	chmod -R 755 app/storage
-	chmod -R 755 public/uploads
-
-If you still run into a permissions error, you may need to increase the permissions to 775, or twiddle your user/group permissions on your server. For CentOS (or other *NIX with SELinux enabled) you will need to issue the following command:
-
-	setsebool -P httpd_unified 1
-
-Note: It should go without saying, but make sure the Snipe-IT project directory is not owned by `root`. Your webserver should be running as your webserver's user (often `apache`, `nobody`, or `www-data`). But never, ever `root`. Ever.
-
-If you still need to set the application key in app.php, you may now use artisan:
-
-	php artisan key:generate --env=production
-
------
-
-### 5) Settings up your web server
-
-##### 5.1) Set the correct document root for your server with Apache
+## Set the correct document root for your server with Apache
 
 The document root for the app should be set to the `public` directory. In a standard Apache virtualhost setup, that might look something like this on a standard linux LAMP stack:
 
+```
 	<VirtualHost *:80>
 		<Directory /var/www/html/public>
 			AllowOverride All
@@ -131,9 +20,11 @@ The document root for the app should be set to the `public` directory. In a stan
 	    	ServerName www.yourserver.com
 	    	# Other directives here
 	</VirtualHost>
+```
 
 An OS X virtualhost setup could look more like:
 
+```
 	<Directory "/Users/youruser/Sites/snipe-it/public/">
 		Allow From All
 		AllowOverride All
@@ -144,15 +35,17 @@ An OS X virtualhost setup could look more like:
 		DocumentRoot "/Users/youruser/Sites/snipe-it/public"
 	SetEnv LARAVEL_ENV development
 	</VirtualHost>
+```
 
 Snipe-IT requires `mod_rewrite` to be installed and enabled on systems running Apache. For more information on how to set up `mod_rewrite`, [click here](http://xmodulo.com/2013/01/how-to-enable-mod_rewrite-in-apache2-on-debian-ubuntu.html).
 
 Note that in Apache 2.4, you may need to use `Require all granted` instead of `Allow From All`.
 
-##### 5.2) Setting up the site configuration for your server with Nginx and PHP-FPM
+## Setting up the site configuration for your server with Nginx and PHP-FPM
 
 In order to work, PHP-FPM will need to be installed and setup to listen on a socket.  For more information on how to setup PHP-FPM, [click here](https://www.digitalocean.com/community/tutorials/how-to-install-linux-nginx-mysql-php-lemp-stack-on-ubuntu-12-04#step-five—configure-php).
 
+```
 	server {
 	    listen 80;
 	    server_name localhost;
@@ -172,9 +65,11 @@ In order to work, PHP-FPM will need to be installed and setup to listen on a soc
 	        include fastcgi_params;
 	    }
 	}
+```
 
 If you prefer to use a forced SSL setup, you can use the following configuration instead.
 
+```
 	server {
 	    listen 80;
 	    server_name localhost;
@@ -209,12 +104,13 @@ If you prefer to use a forced SSL setup, you can use the following configuration
 	        include fastcgi_params;
 	    }
 	}
+```
 
 Note that with the SSL configuration you will need to adjust the path to your SSL certificate or it will not work.  You can use a proper certificate generated from a CA or a self-signed certificate.  For more information on creating a self-signed certificate, [click here](https://www.digitalocean.com/community/tutorials/how-to-create-a-ssl-certificate-on-nginx-for-ubuntu-12-04).
 
 -----
 
-### 6) Seed the Database
+## Seed the Database
 
 Loading up the sample data will give you an idea of how this should look, how your info should be structured, etc. It only pre-loads a handful of items, so you won't have to spend an hour deleting sample data.
 
@@ -224,13 +120,13 @@ __If you run this command on a database that already has your own asset data in 
 
 -----
 
-### Application logs
+## Application logs
 
 Application logs for this app are found in `app/storage/logs`, as is customary of Laravel.
 
 -----
 
-### Running this on an EC2 Micro Instance
+## Running this on an EC2 Micro Instance
 
 Depending on your needs, you could probably run this system in an EC2 micro instance. It doesn't take up very much memory and typically won't be a super-high-traffic application. EC2 micros fall into the free/dirt-cheap tier, which might make this a nice option. One thing to note though - composer can be a little memory-intensive while you're running updates, and you may have trouble with it failing on a micro. You can crank the memory_limit up in php.ini, but EC2 micros have swap disabled by default, so even that may not cut it. If you run into totally unhelpful error messages while running composer updates (like simply 'Killed') or fatal memory issues mentioning phar, your best bet will be to enable swap:
 
