@@ -13,6 +13,7 @@ The requirements for Snipe-IT are fairly standard for a modern web server, and i
 - php-mysql
 - php-mbstring
 - MySQL or MariaDB
+- SSH access to the server (if using Linux)
 
 And one of the following image libraries (for QR codes, asset model image and user avatar image uploads).
 
