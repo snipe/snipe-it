@@ -30,6 +30,10 @@ menu:
                     text: Requirements
                     # You can use relative urls
                     relativeUrl: requirements.html
+                security:
+                    text: Security
+                    # You can use relative urls
+                    relativeUrl: security.html
                 #foo:
                     #text: Another link
                     # Or absolute urls

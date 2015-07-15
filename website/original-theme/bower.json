@@ -1,6 +1,0 @@
-{
-    "name": "couscous-readthedocs-template",
-    "dependencies": {
-        "wyrm": "~0.0.x"
-    }
-}
