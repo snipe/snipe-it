@@ -37,7 +37,7 @@ The default language is US English, however we have additional language translat
 'locale' => 'en',
 ```
 
-If you wish to use one of the other available languages, simply replace the default value of `local` from `en` to one of the values listed below.
+If you wish to use one of the other available languages, simply replace the default value of `locale` from `en` to one of the values listed below.
 
 | Language  | Value |
 | ------------- | ------------- |
