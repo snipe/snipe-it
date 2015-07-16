@@ -137,16 +137,19 @@ You should also change your secret key here from `Change_this_key_or_snipe_will_
 
 -----
 
-## Fix permissions
+## Set Directory Permissions
 
-You’ll need to make sure that the app/storage directory is writable by your webserver, since caches and log files get written there. You should use the minimum permissions available for writing, based on how you’ve got your webserver configured. You also need to change permissions for your uploads directory for user avatars and model images.
+You’ll need to make sure that the `app/storage` directory and its subdirectories are writable by your web server, since caches and log files get written there. You should use the minimum permissions available for writing, based on how you’ve got your web server configured. You also need to change permissions for your `uploads` directory for user avatars and model images.
+
+On Linux/OSX, you would do something like this:
 
 ```
 chmod -R 755 app/storage
 chmod -R 755 app/private_uploads
 chmod -R 755 public/uploads
 ```
+For help fixing permissions on IIS, see the [Windows Installation guide](server/windows.html).
 
-If you still run into a permissions error, you may need to increase the permissions to 775, or twiddle your user/group permissions on your server.
+If you still run into a permissions error, you may need to increase the permissions to 775, or twiddle your user/group permissions on your server so that the web server itself (Apache, IIS, etc) can write to files owned by the Snipe-IT user.
 
 __Note: It should go without saying, but make sure the Snipe-IT project directory is not owned by root. Your webserver should be running as your webserver’s user (often apache, nobody, or www-data). But never, ever root. Ever.__
