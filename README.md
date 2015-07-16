@@ -6,7 +6,7 @@ currentMenu: home
 
 Snipe-IT is a Free Open Source (FOSS) project for IT asset management, to enable IT departments to track who has which laptop, when it was purchased, which software licenses and accessories are available, and so on.
 
-It is built on [Laravel 4.1](http://laravel.com) and uses the [Sentry 2](https://github.com/cartalyst/sentry) package.
+It is built on [Laravel 4.2](http://laravel.com) and uses the [Sentry 2](https://github.com/cartalyst/sentry) package.
 
 This project is  actively developed and we [release quite frequently](https://github.com/snipe/snipe-it/releases). __Check out the [Snipe-IT website](http://www.snipeitapp.com) for a demo, a comprehensive list of features, screenshots and [our blog](http://snipeitapp.com/news/) for updates on new versions.__
 
