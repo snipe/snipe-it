@@ -11,7 +11,9 @@ currentMenu: linux-osx
 
 The most common setup for Snipe-IT on a linux server is to use Apache, so if you're not sure what to pick, Apache might be the best bet, as it's free, easy to configure, and well documented.
 
-The `DocumentRoot` for the app should be set to the `public` directory. In a standard Apache virtualhost setup, that might look something like this:
+__The `DocumentRoot` for the app should be set to the `public` directory.__ 
+
+In a standard Apache virtualhost setup, that might look something like this:
 
 ```
 <VirtualHost *:80>

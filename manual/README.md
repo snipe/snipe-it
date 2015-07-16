@@ -14,6 +14,8 @@ Checking in and checking out are two primary concepts behind Snipe-IT. When you 
 
 When an employee leaves your company, or if an asset, license or accessory is not functioning properly, you would check it back in. Checking it back in indicates that it’s back in your possession, or potentially out for repair. It’s up to you to decide what status to assign it, based on the condition of the asset.
 
+-----
+
 ### Status Labels
 
 Status labels are used to describe the state of the asset. You can add as many status labels as you’d like. Each status label will have one of four characteristics that describe the state of assets with that status label:
@@ -29,6 +31,8 @@ Pending – these assets can not yet be assigned to anyone.
 Use status labels however you see fit. You can just keep the starter labels we set up for you, or you can flesh out a detailed set of statuses that will make sure your team always knows exactly what’s going on with each asset.
 
 If you set up your status labels well, they can be enormously useful. A status label that is a pending label named “Awaiting Re-Imaging” tells your team that this item can’t be deployed because it’s still in the re-imaging stage and isn’t ready yet. Once it’s ready, your team can update the status to “Ready to Deploy”, and then it’s added to the pool of available deployable resources.
+
+-----
 
 ## Getting Started
 
