@@ -8,8 +8,9 @@ Now, you need to create yourself a user.
 
 Use the following command to create your default user, user groups and run all the necessary migrations.
 
+-----
 
-#### <i class="fa fa-linux"></i> Linux
+#### <i class="fa fa-linux"></i> Linux / OSX
 ```
 php artisan app:install --env=production
 ```
@@ -21,8 +22,11 @@ Open `C:\inetpub\wwwroot\snipe-it` in Windows Explorer
 - Right Click and select `Use Composer here`
 - Type `php artisan app:install --env=production` and follow the prompts
 
+-----
 
 When it asks you if you’re sure you want to run the migrations, type in `y`. You may have to do this a few times.
+
+-----
 
 ### Seed the Database (Optional)
 
@@ -38,8 +42,10 @@ php artisan db:seed --env=production
 
 If you run this command on a database that already has your own production asset data in it, IT WILL OVER-WRITE YOUR ENTIRE DATABASE. ALL of your data will be gone forever. NEVER run the db seeder on production after on your initial install.
 
+-----
+
 ### Update Your Secret Key (If you didn’t already)
 
 After running the `php artisan app:install --env=production` command above, the output of your terminal window should show you a generated secret key. If you missed it in all the scrollback, that’s okay, you can manually run `php artisan key:generate --env=production`.
 
-Update the value of `'key'` in your `app/config/production/app.php` file with the newly generated secret key.
+Update the value of `key` in your `app/config/production/app.php` file with the newly generated secret key.

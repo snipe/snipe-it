@@ -76,7 +76,7 @@ If you're interested in additional languages, or would like to help us translate
 
 __Note: You must create the database yourself. Snipe-IT does not create the database or database users for you.__
 
-Copy the example database config from `app/config/production/database.example.php` to `app/config/production/database.php`. Update the file `app/config/production/database.php` with your database name and credentials:
+Copy the example database config from `app/config/production/database.example.php` to `app/config/production/database.php`. Update the file `app/config/production/database.php` with your database name and credentials, replacing `snipeit_laravel` with your database name, `travis` with your database username, and so on:
 
 ```
 'mysql'=> array(
@@ -91,11 +91,13 @@ Copy the example database config from `app/config/production/database.example.ph
 ),
 ```
 
+You can generally leave `charset`, `collation` and `prefix` as they are.
+
 -----
 
 ## Edit Mail Settings
 
-Copy the example mail config from `app/config/production/mail.example.php` to `app/config/production/mail.php`, and update the new `app/config/production/mail.php` file with your mail settings.
+Copy the example mail config from `app/config/production/mail.example.php` to `app/config/production/mail.php`, and update the new `app/config/production/mail.php` file with your settings for SMTP server, email username and password.
 
 These settings will be used to send emails to your users, when they register and when they request a password reset.
 
