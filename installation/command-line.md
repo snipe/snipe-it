@@ -8,11 +8,21 @@ Now, you need to create yourself a user.
 
 Use the following command to create your default user, user groups and run all the necessary migrations.
 
+
+#### <i class="fa fa-linux"></i> Linux
 ```
 php artisan app:install --env=production
 ```
 
-When it asks you if you’re sure you want to run the migrations, type in `y`. You may have to do this a few times, but then you’re just about done!
+#### <i class="fa fa-windows"></i> Windows
+
+Open `C:\inetpub\wwwroot\snipe-it` in Windows Explorer
+
+- Right Click and select `Use Composer here`
+- Type `php artisan app:install --env=production` and follow the prompts
+
+
+When it asks you if you’re sure you want to run the migrations, type in `y`. You may have to do this a few times.
 
 ### Seed the Database (Optional)
 
