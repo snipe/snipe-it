@@ -150,7 +150,7 @@
             <div class="form-group {{ $errors->has('manager_id') ? 'has-error' : '' }}">
                 <label class="col-md-3 control-label" for="manager_id">@lang('admin/users/table.manager')</label>
                 <div class="col-md-7">
-                    {{ Form::select('manager_id', $manager_list , Input::old('manager_id', $user->manager_id), array('class'=>'select2', 'style'=>'width:250px')) }}
+                    {{ Form::select('manager_id', $manager_list , Input::old('manager_id', $user->manager_id), array('class'=>'select2', 'style'=>'width:350px')) }}
                     {{ $errors->first('manager_id', '<br><span class="alert-msg">:message</span>') }}
                 </div>
             </div>
@@ -160,7 +160,7 @@
                 <label class="col-md-3 control-label" for="location_id">@lang('admin/users/table.location')
                     </label>
                 <div class="col-md-7">
-                    {{ Form::select('location_id', $location_list , Input::old('location_id', $user->location_id), array('class'=>'select2', 'style'=>'width:250px')) }}
+                    {{ Form::select('location_id', $location_list , Input::old('location_id', $user->location_id), array('class'=>'select2', 'style'=>'width:350px')) }}
                     {{ $errors->first('location_id', '<br><span class="alert-msg">:message</span>') }}
                 </div>
             </div>
