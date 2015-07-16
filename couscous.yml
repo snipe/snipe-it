@@ -87,6 +87,20 @@ menu:
                     text: "<span class='subnav-indent'><i class='fa fa-caret-right'></i> Docker</span>"
                     # You can use relative urls
                     relativeUrl: installation/server/docker.html
+        manual:
+            name: User's Manual
+            items:
+                manual-home:
+                    text: Basic Concepts
+                    relativeUrl: manual/index.html
+                importing-assets:
+                    text: "<span class='subnav-indent'><i class='fa fa-caret-right'></i> Importing Assets</span>"
+                    relativeUrl: manual/importing-assets.html
+                alerts:
+                    text: "<span class='subnav-indent'></span><i class='fa fa-caret-right'></i> Configuring Alerts</span>"
+                    relativeUrl: manual/alerts.html
+
+
 
         misc:
             name:
@@ -115,6 +129,11 @@ menu:
                     text: License
                     # You can use relative urls
                     relativeUrl: license.html
+                website:
+                    text: Main Website
+                    # You can use relative urls
+                    absoluteUrl: http://snipeitapp.com
+
 
 
 
