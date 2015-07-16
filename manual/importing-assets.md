@@ -25,7 +25,7 @@ The importer will be looking for a CSV in the format of:
 Name, Email, Asset Category, Asset Model, Manufacturer, Asset Model Number, Asset Serial, Asset Tag, Location, Asset Notes
 ```
 
-[__Download a sample CSV with dummy data__](sample.csv)
+[__Download a sample CSV with dummy data__](http://snipeitapp.com/wp-content/uploads/2015/07/sample.csv)
 
 When you execute this command with a valid path to your CSV, the importer will:
 
