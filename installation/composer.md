@@ -7,6 +7,8 @@ Composer is a package manager for PHP that allows us to manage the dependencies 
 
 These are not the same thing as the [system requirements](../requirements.html), which are technologies that the server itself needs in order to run Snipe-IT (such as a database, etc).
 
+__NOTE: Never run composer as a super-user or Administrator. Always run it as the user that owns the Snipe-IT files. Running composer as a super-user will break things in ways that will be difficult to debug later. Just don't do it.__
+
 ## <i class="fa fa-linux"></i> Linux / OSX
 
 It is not required to install composer globally, however if you wish to, you can find instructions on how to do so on [the Composer website](https://getcomposer.org/doc/00-intro.md#globally).

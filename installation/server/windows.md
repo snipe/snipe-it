@@ -80,4 +80,4 @@ Add permissions for the IIS user for the `storage` folder:
 - Give IUSR full control
 - Click OK twice
 
-Much <i class="fa fa-heart" style="color:red"></i> to [@madd15](http://github.com/madd15) for writing up the Windows installation guide!
+Much <i class="fa fa-heart heart" style="color:red"></i> to [@madd15](http://github.com/madd15) for writing up the Windows installation guide!

@@ -6,23 +6,73 @@ currentMenu: configuration
 
 <div id="generated-toc" class="generate_from_h2"></div>
 
-## Adjust Environments
+## Set Your Environment
 
-Update the file `bootstrap/start.php` under the section Detect The Application Environment.
+Update the file `bootstrap/start.php` under the section Detect The Application Environment to include your server's hostname in the `production` array. This configuration option tells Snipe-IT whether it should run in development mode (local), staging, or production mode. __Unless you are a PHP developer setting up a local installation so that you can contribute code towards Snipe-IT, you should be running Snipe-IT in production mode__.
 
-To find out your local machine’s hostname, type hostname from a terminal prompt on the machine you’re installing it on. The command-line response is that machine’s hostname. Please note that the hostname is NOT always the same as the domain name.
+To find out your local machine’s hostname, type `hostname` from a terminal prompt on the machine you’re installing it on. The command-line response is that machine’s hostname. __Please note that the hostname is usually NOT the same as the domain name__.
 
-So for example, if you’re installing this on your server named www.yourserver.com, the environmental variable section of bootstrap/start.php might look like this:
+So for example, if you’re installing this on your server named `CentOS-ip-9875`, the environmental variable section of `bootstrap/start.php` might look like this:
 
 
 ```php
 $env = $app->detectEnvironment(array(
     ...
-    'production'     => array('www.yourserver.com')
+    'production'     => array('CentOS-ip-9875')
 ));
 ```
+-----
 
-## Setup Your Database
+## Set Timezone and Language Preferences
+
+Open up `app/config/app.php` and edit the `timezone` and `language` settings to reflect your desired timezone and language. The default timezone is UTC. The timezone you use should be formatted as [an accepted PHP timezone](http://php.net/manual/en/timezones.php), so for example, for Pacific Time, you could use `America/Los_Angeles`:
+
+```
+'timezone' => 'America/Los_Angeles',
+```
+
+The default language is US English, however we have additional language translations available, thanks to a great community of people [helping us translate Snipe-IT](../translations.html).
+
+```
+'locale' => 'en',
+```
+
+If you wish to use one of the other available languages, simply replace the default value of `local` from `en` to one of the values listed below.
+
+| Language  | Value |
+| ------------- | ------------- |
+|Arabic|`ar`|
+|Chinese Simplified|`zh-CN`|
+|Czech|`cs`|
+|Danish|`nl`|
+|Dutch|`nl`|
+|English|`en`|
+|English, UK |`en-GB`|
+|Finnish|`fi`|
+|French|`fr`|
+|German|`de`|
+|Hungarian|`hu`|
+|Italian|`it`|
+|Japanese|`ja`|
+|Korean|`ko`|
+|Malay|`ms`|
+|Norwegian|`no`|
+|Polish|`pl`|
+|Portuguese|`pr-PT`|
+|Portuguese, Brazilian|`pr-BT`|
+|Romanian|`ro`|
+|Russian|`ru`|
+|Spanish|`es-ES`|
+|Swedish|`sv-SE`|
+|Thai|`th`|
+|Turkish|`tr`|
+|Vietnamese|`vi`|
+
+If you're interested in additional languages, or would like to help us translate some of the incomplete existing languages, please see the [Translations](../translations.html) page.
+
+-----
+
+## Edit Database Settings
 
 __Note: You must create the database yourself. Snipe-IT does not create the database or database users for you.__
 
@@ -41,22 +91,40 @@ Copy the example database config from `app/config/production/database.example.ph
 ),
 ```
 
+-----
 
-## Setup Mail Settings
+## Edit Mail Settings
 
-Copy the example mail config from `app/config/production/mail.example.php` to `app/config/production/mail.php`:
+Copy the example mail config from `app/config/production/mail.example.php` to `app/config/production/mail.php`, and update the new `app/config/production/mail.php` file with your mail settings.
+
+These settings will be used to send emails to your users, when they register and when they request a password reset.
+
+While your mail settings will vary depending on how you've set up your server, the one line you must change regardless of your configuration is:
 
 ```
-cp app/config/production/mail.example.php app/config/production/mail.php
+'from' => array('address' => null, 'name' => null),
 ```
 
-Update the file `app/config/production/mail.php` with your mail settings.
+__Make sure as you edit this section that you change the **values**, not the **keys**.__ For example,
 
-This will be used to send emails to your users, when they register and when they request a password reset.
+```
+'from' => array('address' => 'me@example.com', 'name' => 'John Smith'),
+```
 
-If you don’t have easy access to a mail server, we suggest signing up for Mandrill. Their free tier allows for 12k free sends a month.
+is __correct__, while
 
-## Adjust the Application Settings
+```
+'from' => array('me@example.com' => null, 'John Smith' => null),
+```
+
+is __incorrect__ and will cause errors when it tries to send email.
+
+
+If you don’t have easy access to a mail server, we suggest signing up for [Mandrill](http://mandrillapp.com). Their free tier allows for 12k free sends a month.
+
+-----
+
+## Application Settings
 
 Copy the example app config from `app/config/production/app.example.php` to `app/config/production/app.php`, and then update your new `app/config/production/app.php` with your URL settings.
 
@@ -66,6 +134,8 @@ Copy the example app config from `app/config/production/app.example.php` to `app
 ```
 
 You should also change your secret key here from `Change_this_key_or_snipe_will_get_ya` to a random 32 character string. If you prefer to have your key randomly generated, run the `php artisan key:generate` command from the application root a little later in this process.
+
+-----
 
 ## Fix permissions
 

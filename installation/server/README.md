@@ -10,6 +10,8 @@ As mentioned, Snipe-IT is web-based software, which means it requires a web serv
 
 Installation should take around twenty minutes or less, if nothing goes wrong, and if you're pretty familiar with web server configuration.
 
+__NOTE: You should never run Snipe-IT (or any website, ever) as a root (Linux) or Administrator (Windows). Create an unprivileged user and make them the owner of the files.__
+
 <div class="grey-alert">
         <div style="float: left; padding-right: 10px">
             <a href="windows.html" style="color: black"><i class="fa fa-windows fa-2x"></i></a>
