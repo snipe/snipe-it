@@ -998,7 +998,7 @@ class AssetsController extends AdminController
     public function getDatatable($status = null)
     {
 
-       $assets = Asset::with('model','assigneduser','assigneduser.userloc','assetstatus','defaultLoc','assetlog','model','model.category')->Hardware()->select(array('id', 'name','model_id','assigned_to','asset_tag','serial','status_id','purchase_date','deleted_at','rtd_location_id'));
+       $assets = Asset::with('model','assigneduser','assigneduser.userloc','assetstatus','defaultLoc','assetlog','model','model.category')->Hardware()->select(array('id', 'name','model_id','assigned_to','asset_tag','serial','status_id','purchase_date','deleted_at','rtd_location_id','notes','order_number'));
 
 
 			switch ($status) {
@@ -1108,6 +1108,15 @@ class AssetsController extends AdminController
 			    return $assets->eol_date();
 			})
 
+        ->addColumn('notes',function($assets)
+    			{
+    			    return $assets->notes;
+    			})
+
+        ->addColumn('order_number',function($assets)
+			{
+			    return $assets->order_number;
+		})
 
 		 ->addColumn('checkout_date',function($assets)
 	        {
@@ -1118,8 +1127,8 @@ class AssetsController extends AdminController
 	        })
 		->addColumn($inout)
 	    ->addColumn($actions)
-        ->searchColumns('name', 'asset_tag', 'serial', 'model', 'status','location','eol','checkout_date', 'inout','category')
-        ->orderColumns('name', 'asset_tag', 'serial', 'model', 'status','location','eol','checkout_date', 'inout')
+        ->searchColumns('name', 'asset_tag', 'serial', 'model', 'status','location','eol','checkout_date', 'inout','category','notes','order_number')
+        ->orderColumns('name', 'asset_tag', 'serial', 'model', 'status','location','eol','checkout_date', 'inout','notes','order_number')
         ->make();
 
 		}
