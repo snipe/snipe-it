@@ -1108,16 +1108,15 @@ class AssetsController extends AdminController
 			    return $assets->eol_date();
 			})
 
+        ->addColumn('notes',function($assets)
+    			{
+    			    return $assets->notes;
+    			})
+
         ->addColumn('order_number',function($assets)
 			{
 			    return $assets->order_number;
-			})
-
-        ->addColumn('notes',function($assets)
-			{
-			    return $assets->notes;
-			})
-
+		})
 
 		 ->addColumn('checkout_date',function($assets)
 	        {

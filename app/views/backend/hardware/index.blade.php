@@ -1,7 +1,7 @@
 @extends('backend/layouts/default')
 
 @section('title0')
-			
+
     @if (Input::get('status'))
         @if (Input::get('status')=='Pending')
             @lang('general.pending')
@@ -57,16 +57,18 @@
 
 
 {{ Datatable::table()
-    ->addColumn('<input type="checkbox" id="checkAll" style="padding-left: 0px;">',Lang::get('admin/hardware/form.name'), 
-    	Lang::get('admin/hardware/table.asset_tag'), 
+    ->addColumn('<div class="text-center"><input type="checkbox" id="checkAll" style="padding-left: 0px;"></div>',Lang::get('admin/hardware/form.name'),
+    	Lang::get('admin/hardware/table.asset_tag'),
     	Lang::get('admin/hardware/table.serial'),
 		Lang::get('admin/hardware/form.model'),
     	Lang::get('admin/hardware/table.status'),
 		Lang::get('admin/hardware/table.location'),
     	Lang::get('general.category'),
     	Lang::get('admin/hardware/table.eol'),
-    	Lang::get('admin/hardware/table.checkout_date'), 
-    	Lang::get('admin/hardware/table.change'), 
+        Lang::get('general.notes'),
+        Lang::get('admin/hardware/form.order'),
+    	Lang::get('admin/hardware/table.checkout_date'),
+    	Lang::get('admin/hardware/table.change'),
     	Lang::get('table.actions'))
     ->setOptions(
             array(
@@ -75,8 +77,8 @@
 	            	'lengthMenu' => Lang::get('general.page_menu'),
 	            	'loadingRecords' => Lang::get('general.loading'),
 	            	'zeroRecords' => Lang::get('general.no_results'),
-	            	'info' => Lang::get('general.pagination_info'), 
-	            	'processing' => Lang::get('general.processing'),
+	            	'info' => Lang::get('general.pagination_info'),
+	            	'processing' => '<i class="fa fa-spinner fa-spin"></i> '.Lang::get('general.processing'),
 	            	'paginate'=> array(
 	            		'first'=>Lang::get('general.first'),
 	            		'previous'=>Lang::get('general.previous'),
@@ -84,10 +86,10 @@
 	            		'last'=>Lang::get('general.last'),
 	            		),
 	            	),
-            	'sAjaxSource'=> route('api.hardware.list', Input::get('status')),
+            	'sAjaxSource'=> route('api.hardware.list', array(''=>Input::get('status'),'order_number'=>Input::get('order_number'))),
                 'dom' =>'CT<"clear">lfrtip',
-                'colVis'=> array('showAll'=>'Show All','restore'=>'Restore','exclude'=>array(0,10,11),'activate'=>'mouseover'),
-                'columnDefs'=> array(array('visible'=>false,'targets'=>array(7,8,9)),array('orderable'=>false,'targets'=>array(0,10,11))),
+                'colVis'=> array('showAll'=>'Show All','restore'=>'Restore','exclude'=>array(0,12,13),'activate'=>'mouseover'),
+                'columnDefs'=> array(array('visible'=>false,'targets'=>array(7,8,9)),array('orderable'=>false,'targets'=>array(0,12,13))),
                 'order'=>array(array(1,'asc')),
             )
         )
@@ -112,17 +114,17 @@
 	            $('#bulkEdit').attr('disabled', 'disabled');
 	        }
 	    }
-	    
+
 	    $('table').on('change','input.one_required',checkForChecked);
-	    	    
+
 	    $("#checkAll").change(function () {
 			$("input:checkbox").prop('checked', $(this).prop("checked"));
 			checkForChecked();
 		});
 
 	});
-	
-	
+
+
 </script>
 
 
