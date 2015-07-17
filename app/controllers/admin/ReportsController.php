@@ -55,7 +55,8 @@ class ReportsController extends AdminController
             Lang::get('admin/hardware/form.order'),
             Lang::get('admin/hardware/form.supplier'),
             Lang::get('admin/hardware/table.checkoutto'),
-            Lang::get('admin/hardware/table.location')
+            Lang::get('admin/hardware/table.location'),
+            Lang::get('general.notes'),
         );
         $header = array_map('trim', $header);
         $rows[] = implode($header, ',');
@@ -114,6 +115,12 @@ class ReportsController extends AdminController
                 }
             } else {
                 $row[] = '';  // Empty string if location is not set
+            }
+
+            if ($asset->notes) {
+                $row[] = '"'.$asset->notes.'"';
+            } else {
+                $row[] = '';
             }
 
             $rows[] = implode($row, ',');
