@@ -29,5 +29,6 @@ composer install --no-dev --prefer-source
 ## <i class="fa fa-windows"></i> Windows
 
 - [Download Composer-Setup.exe](https://getcomposer.org/Composer-Setup.exe) from the Composer website.
+- Move the `Composer-Setup.exe` file `C:\inetpub\wwwroot\snipe-it`
 - Open `C:\inetpub\wwwroot\snipe-it` in Windows Explorer
 - Right click and select `Composer Install`. This will install the dependencies.
