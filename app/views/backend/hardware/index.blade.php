@@ -65,6 +65,7 @@
 		Lang::get('admin/hardware/table.location'),
     	Lang::get('general.category'),
     	Lang::get('admin/hardware/table.eol'),
+        Lang::get('general.notes'),
     	Lang::get('admin/hardware/table.checkout_date'),
     	Lang::get('admin/hardware/table.change'),
     	Lang::get('table.actions'))
@@ -86,8 +87,8 @@
 	            	),
             	'sAjaxSource'=> route('api.hardware.list', Input::get('status')),
                 'dom' =>'CT<"clear">lfrtip',
-                'colVis'=> array('showAll'=>'Show All','restore'=>'Restore','exclude'=>array(0,10,11),'activate'=>'mouseover'),
-                'columnDefs'=> array(array('visible'=>false,'targets'=>array(7,8,9)),array('orderable'=>false,'targets'=>array(0,10,11))),
+                'colVis'=> array('showAll'=>'Show All','restore'=>'Restore','exclude'=>array(0,11,12),'activate'=>'mouseover'),
+                'columnDefs'=> array(array('visible'=>false,'targets'=>array(7,8,9)),array('orderable'=>false,'targets'=>array(0,11,12))),
                 'order'=>array(array(1,'asc')),
             )
         )
