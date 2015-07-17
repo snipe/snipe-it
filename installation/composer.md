@@ -11,7 +11,7 @@ __NOTE: Never run composer as a super-user or Administrator. Always run it as th
 
 ## <i class="fa fa-linux"></i> Linux / OSX
 
-It is not required to install composer globally, however if you wish to, you can find instructions on how to do so on [the Composer website](https://getcomposer.org/doc/00-intro.md#globally).
+It is not required to install composer globally, however if you wish to, you can find instructions on how to do so on [the Composer website](https://getcomposer.org/).
 
 ```bash
 cd <install-dir>
