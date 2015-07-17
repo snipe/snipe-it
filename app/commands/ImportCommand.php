@@ -61,64 +61,140 @@ class ImportCommand extends Command {
 		$nbInsert = $csv->each(function ($row) use ($duplicates) {
 			$status_id = 1;
 
-			if (is_numeric($row[0])) {
-				$this->comment('User '.$row[0].' is not a name - assume this user already exists');
-			} elseif ($row[0]=='') {
+			// Let's just map some of these entries to more user friendly words
+
+			if (array_key_exists('0',$row)) {
+				$user_name = $row[0];
+			} else {
+				$user_name = '';
+			}
+
+			if (array_key_exists('1',$row)) {
+				$user_email = $row[1];
+			} else {
+				$user_email = '';
+			}
+
+			if (array_key_exists('2',$row)) {
+				$user_asset_category = $row[2];
+			} else {
+				$user_asset_category = '';
+			}
+
+			if (array_key_exists('3',$row)) {
+				$user_asset_name = $row[3];
+			} else {
+				$user_asset_name = '';
+			}
+
+			if (array_key_exists('4',$row)) {
+				$user_asset_mfgr = $row[4];
+			} else {
+				$user_asset_mfgr = '';
+			}
+
+			if (array_key_exists('5',$row)) {
+				$user_asset_modelno = $row[5];
+			} else {
+				$user_asset_modelno = '';
+			}
+
+			if (array_key_exists('6',$row)) {
+				$user_asset_serial = $row[6];
+			} else {
+				$user_asset_serial = '';
+			}
+
+			if (array_key_exists('7',$row)) {
+				$user_asset_tag = $row[7];
+			} else {
+				$user_asset_tag = '';
+			}
+
+			if (array_key_exists('8',$row)) {
+				$user_asset_location = $row[8];
+			} else {
+				$user_asset_location = '';
+			}
+
+			if (array_key_exists('9',$row)) {
+				$user_asset_notes = $row[9];
+			} else {
+				$user_asset_notes = '';
+			}
+
+
+			// A number was given instead of a name
+			if (is_numeric($user_name)) {
+				$this->comment('User '.$user_name.' is not a name - assume this user already exists');
+			// No name was given
+
+			} elseif ($user_name=='') {
 				$this->comment('No user data provided - skipping user creation, just adding asset');
 			} else {
 
-				// Generate an email based on their name
-				$name = explode(" ", $row[0]);
-				$first_name = $name[0];
-				$last_name = '';
-				$email_last_name = '';
+					$name = explode(" ", $user_name);
+					$first_name = $name[0];
+					$email_last_name = '';
 
-				if ($first_name=='Unknown') {
-					$status_id = 7;
-				}
+					if (!array_key_exists(1, $name)) {
+						$last_name='';
+						$email_last_name = $last_name;
+						$email_prefix = $first_name;
+					} else {
+						$last_name = str_replace($first_name,'',$user_name);
 
-				if (!array_key_exists(1, $name)) {
-					$last_name='';
-					$email_last_name = $last_name;
-					$email_prefix = $first_name;
-				} else {
-					// Loop through the rest of the explode so you don't truncate
-					for ($x=0; $x < count($name); $x++) {
-						if (($x > 0) && ($name[$x]!='')) {
-							$last_name.=' '.$name[$x];
-							$email_last_name.=$name[$x];
+						if ($this->option('email_format')=='filastname') {
+							$email_last_name.=str_replace(' ','',$last_name);
+							$email_prefix = $first_name[0].$email_last_name;
+
+						} elseif ($this->option('email_format')=='firstname.lastname') {
+							$email_last_name.=str_replace(' ','',$last_name);
+							$email_prefix = $first_name.'.'.$email_last_name;
+
+						} elseif ($this->option('email_format')=='firstname') {
+							$email_last_name.=str_replace(' ','',$last_name);
+							$email_prefix = $first_name;
 						}
+
+
 					}
-					$email_prefix = $first_name[0].$email_last_name;
-				}
 
-				$email = strtolower(str_replace('.','',$email_prefix)).'@'.$this->option('domain');
-				$email = str_replace("'",'',$email);
+					// Generate an email based on their name if no email address is given
+					if ($user_email=='') {
+						if ($first_name=='Unknown') {
+							$status_id = 7;
+						}
+						$email = strtolower($email_prefix).'@'.$this->option('domain');
+						$user_email = str_replace("'",'',$email);
+					}
 
-				$this->comment('Full Name: '.$row[0]);
+				$this->comment('Full Name: '.$user_name);
 				$this->comment('First Name: '.$first_name);
 				$this->comment('Last Name: '.$last_name);
-				$this->comment('Email: '.$email);
-				$this->comment('Category Name: '.$row[1]);
-				$this->comment('Item: '.$row[2]);
-				$this->comment('Manufacturer ID: '.$row[3]);
-				$this->comment('Model No: '.$row[4]);
-				$this->comment('Serial No: '.$row[5]);
-				$this->comment('Asset Tag: '.$row[6]);
-				$this->comment('Location: '.$row[7]);
+				$this->comment('Email: '.$user_email);
+				$this->comment('Category Name: '.$user_asset_category);
+				$this->comment('Item: '.$user_asset_name);
+				$this->comment('Manufacturer ID: '.$user_asset_mfgr);
+				$this->comment('Model No: '.$user_asset_modelno);
+				$this->comment('Serial No: '.$user_asset_serial);
+				$this->comment('Asset Tag: '.$user_asset_tag);
+				$this->comment('Location: '.$user_asset_location);
+				$this->comment('Notes: '.$user_asset_notes);
+
 			}
 
 			$this->comment('------------- Action Summary ----------------');
 
-			if (isset($email)) {
-				if ($user = User::where('email', $email)->first()) {
-					$this->comment('User '.$email.' already exists');
+			if (isset($user_email)) {
+				if ($user = User::where('email', $user_email)->first()) {
+					$this->comment('User '.$user_email.' already exists');
 				} else {
 					// Create the user
 					$user = Sentry::createUser(array(
 						'first_name' => $first_name,
 						'last_name' => $last_name,
-						'email'     => $email,
+						'email'     => $user_email,
 						'password'  => substr(str_shuffle("0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"), 0, 10),
 						'activated' => true,
 						'permissions' => array(
@@ -140,11 +216,11 @@ class ImportCommand extends Command {
 			}
 
 			// Check for the location match and create it if it doesn't exist
-			if ($location = Location::where('name', $row[7])->first()) {
-				$this->comment('Location '.$row[7].' already exists');
+			if ($location = Location::where('name', $user_asset_location)->first()) {
+				$this->comment('Location '.$user_asset_location.' already exists');
 			} else {
 				$location = new Location();
-				$location->name = e($row[7]);
+				$location->name = e($user_asset_location);
 				$location->address = '';
 				$location->city = '';
 				$location->state = '';
@@ -154,65 +230,65 @@ class ImportCommand extends Command {
 				if (!$this->option('testrun')=='true') {
 
 					if ($location->save()) {
-						$this->comment('Location '.$row[7].' was created');
+						$this->comment('Location '.$user_asset_location.' was created');
 		            } else {
-						$this->comment('Something went wrong! Location '.$row[1].' was NOT created');
+						$this->comment('Something went wrong! Location '.$user_asset_location.' was NOT created');
 					}
 
 				} else {
-					$this->comment('Location '.$row[7].' was (not) created - test run only');
+					$this->comment('Location '.$user_asset_location.' was (not) created - test run only');
 				}
 
 			}
 
 			// Check for the category match and create it if it doesn't exist
-			if ($category = Category::where('name', $row[1])->where('category_type', 'asset')->first()) {
-				$this->comment('Category '.$row[1].' already exists');
+			if ($category = Category::where('name', $user_asset_category)->where('category_type', 'asset')->first()) {
+				$this->comment('Category '.$user_asset_category.' already exists');
 			} else {
 				$category = new Category();
-				$category->name = e($row[1]);
+				$category->name = e($user_asset_category);
 				$category->category_type = 'asset';
 				$category->user_id = 1;
 
 				if ($category->save()) {
-					$this->comment('Category '.$row[1].' was created');
+					$this->comment('Category '.$user_asset_category.' was created');
 	            } else {
-					$this->comment('Something went wrong! Category '.$row[1].' was NOT created');
+					$this->comment('Something went wrong! Category '.$user_asset_category.' was NOT created');
 				}
 
 			}
 
 			// Check for the manufacturer match and create it if it doesn't exist
-			if ($manufacturer = Manufacturer::where('name', $row[3])->first()) {
-				$this->comment('Manufacturer '.$row[3].' already exists');
+			if ($manufacturer = Manufacturer::where('name', $user_asset_mfgr)->first()) {
+				$this->comment('Manufacturer '.$user_asset_mfgr.' already exists');
 			} else {
 				$manufacturer = new Manufacturer();
-				$manufacturer->name = e($row[3]);
+				$manufacturer->name = e($user_asset_mfgr);
 				$manufacturer->user_id = 1;
 
 				if ($manufacturer->save()) {
-					$this->comment('Manufacturer '.$row[3].' was created');
+					$this->comment('Manufacturer '.$user_asset_mfgr.' was created');
 	            } else {
-					$this->comment('Something went wrong! Manufacturer '.$row[3].' was NOT created');
+					$this->comment('Something went wrong! Manufacturer '.$user_asset_mfgr.' was NOT created');
 				}
 
 			}
 
 			// Check for the asset model match and create it if it doesn't exist
-			if ($asset_model = Model::where('name', $row[2])->where('modelno', $row[4])->where('category_id', $category->id)->where('manufacturer_id', $manufacturer->id)->first()) {
-				$this->comment('The Asset Model '.$row[2].' with model number '.$row[4].' already exists');
+			if ($asset_model = Model::where('name', $user_asset_name)->where('modelno', $user_asset_modelno)->where('category_id', $category->id)->where('manufacturer_id', $manufacturer->id)->first()) {
+				$this->comment('The Asset Model '.$user_asset_name.' with model number '.$user_asset_modelno.' already exists');
 			} else {
 				$asset_model = new Model();
-				$asset_model->name = e($row[2]);
+				$asset_model->name = e($user_asset_name);
 				$asset_model->manufacturer_id = $manufacturer->id;
-				$asset_model->modelno = e($row[4]);
+				$asset_model->modelno = e($user_asset_modelno);
 				$asset_model->category_id = $category->id;
 				$asset_model->user_id = 1;
 
 				if ($asset_model->save()) {
-					$this->comment('Asset Model '.$row[2].' with model number '.$row[4].' was created');
+					$this->comment('Asset Model '.$user_asset_name.' with model number '.$user_asset_modelno.' was created');
 	            } else {
-					$this->comment('Something went wrong! Asset Model '.$row[2].' was NOT created');
+					$this->comment('Something went wrong! Asset Model '.$user_asset_name.' was NOT created');
 				}
 
 			}
@@ -220,19 +296,20 @@ class ImportCommand extends Command {
 			// Check for the asset match and create it if it doesn't exist
 
 				$asset = new Asset();
-				$asset->name = e($row[2]);
-				$asset->serial = e($row[5]);
-				$asset->asset_tag = e($row[6]);
+				$asset->name = e($user_asset_name);
+				$asset->serial = e($user_asset_serial);
+				$asset->asset_tag = e($user_asset_tag);
 				$asset->model_id = $asset_model->id;
 				$asset->assigned_to = $user->id;
 				$asset->rtd_location_id = $location->id;
 				$asset->user_id = 1;
 				$asset->status_id = $status_id;
+				$asset->notes = e($user_asset_notes);
 
 				if ($asset->save()) {
-					$this->comment('Asset '.$row[2].' with serial number '.$row[5].' was created');
+					$this->comment('Asset '.$user_asset_name.' with serial number '.$user_asset_serial.' was created');
 	            } else {
-					$this->comment('Something went wrong! Asset '.$row[5].' was NOT created');
+					$this->comment('Something went wrong! Asset '.$user_asset_name.' was NOT created');
 				}
 
 
@@ -267,6 +344,7 @@ class ImportCommand extends Command {
 	{
 		return array(
 			array('domain', null, InputOption::VALUE_REQUIRED, 'Email domain for generated email addresses.', null),
+			array('email_format', null, InputOption::VALUE_REQUIRED, 'The format of the email addresses that should be generated. Options are firstname.lastname, firstname, filastname', null),
 			array('testrun', null, InputOption::VALUE_REQUIRED, 'Test the output without writing to the database or not.', null),
 		);
 	}

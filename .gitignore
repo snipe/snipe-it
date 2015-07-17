@@ -23,7 +23,5 @@ public/uploads/logo.gif
 public/uploads/logo.png
 .siteflow
 public/assets/.siteflow
-.settings/settings.json
-
-
+app/config/local/session.php
 .couscous

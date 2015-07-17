@@ -5,6 +5,10 @@
 
     RewriteEngine On
 
+    # Uncomment these two lines to force SSL redirect
+    # RewriteCond %{HTTPS} off
+	# RewriteRule (.*) https://%{HTTP_HOST}%{REQUEST_URI} [R=301,L]
+
     # Redirect Trailing Slashes...
     RewriteRule ^(.*)/$ /$1 [L,R=301]
 
