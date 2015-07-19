@@ -25,7 +25,7 @@ php artisan import:csv path/to/your/file.csv --domain=yourdomain.com --email_for
 The importer will be looking for a CSV in the format of:
 
 ```
-Name, Email, Asset Category, Asset Model, Manufacturer, Asset Model Number, Asset Serial, Asset Tag, Location Name, Asset Notes
+Name, Email, Asset Category, Asset Model, Manufacturer, Asset Model Number, Asset Serial, Asset Tag, Location Name, Asset Notes, Purchase Date
 ```
 
 The importer will ignore the first line of your CSV, so if you don't have a header row, you should add one.
@@ -44,15 +44,19 @@ The importer will ignore the first line of your CSV, so if you don't have a head
 |Asset Tag | `KJH90890`| Yes | |
 |Location Name | `San Diego`| Yes | Created if it doesn't exist |
 |Asset Notes | `Karens old machine`| No | |
+|Purchase Date | `2015-01-12 07:30:30`| No | Can take any date format that can be translated by `strtotime()`|
 
 ## What It Does
 
 When you execute this command with a valid path to your CSV, the importer will:
 
-- Split the user's name, creating `firstname` and `lastname`,
-- If no email is provided, it will generate an email address using your domain and the pattern you specified in `email_format`
-- Generate a password for them
+- Split the user's name, creating `firstname` and `lastname`.
+- If not user is provided, it assumes the asset is Ready to Deploy.
+- If a user's name is provided, it assumes that asset is assigned to them
+- If a user's name is provided but no email is provided, it will generate an email address using your domain and the pattern you specified in `email_format`
+- Generate a password for the new user if a user's name is provided
 - Create the user if they don't exist (based on their email address)
+- Determine if the asset model exists based on Asset Model Name and Model Number combination
 - Create the asset models, locations, category, etc if they don't currently exist, skip them if they do.
 - If no user is provided, the asset gets created as ready to deploy instead of checked out to a user
 
