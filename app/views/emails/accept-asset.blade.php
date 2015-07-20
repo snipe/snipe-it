@@ -4,7 +4,42 @@
 <p>Hello {{{ $first_name }}},</p>
 
 
-<p>A new item ({{{ strtoupper($item_name) }}}) has been checked out to you. 
+<p>A new item has been checked out to under your name, details are below. 
+
+<table>
+	<tr>
+		<td style="background-color:#ccc">
+			Asset Name:
+		</td>
+		<td>
+			<strong>{{{ $item_name }}}</strong>
+		</td>
+	</tr>
+	<tr>
+		<td style="background-color:#ccc">
+			Asset Tag:
+		</td>
+		<td>
+			<strong>{{{ $item_tag }}}</strong>
+		</td>
+	</tr>
+	<tr>
+		<td style="background-color:#ccc">
+			Checkout Date:
+		</td>
+		<td>
+			<strong>{{{ $checkout_date }}}</strong>
+		</td>
+	</tr>
+	<tr>
+		<td style="background-color:#ccc">
+			Additional Notes:
+		</td>
+		<td>
+			<strong>{{{ $note }}}</strong>
+		</td>
+	</tr>
+</table>
 	
 @if (($require_acceptance==1) && ($eula!=''))
 	
@@ -22,8 +57,7 @@
 	
 </p>
 
-
-<p>{{ $eula }}</p>
+<p><blockquote>{{ $eula }}</blockquote></p>
 
 @if ($require_acceptance==1)
 <p><strong><a href="{{{ Config::get('app.url') }}}/account/accept-asset/{{ $log_id }}">I have read and agree to the terms of use, and have received this item.</a></strong></p>
