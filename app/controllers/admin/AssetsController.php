@@ -5,6 +5,7 @@ use Input;
 use Lang;
 use Asset;
 use Supplier;
+use AssetMaintenance;
 use Statuslabel;
 use User;
 use Setting;
