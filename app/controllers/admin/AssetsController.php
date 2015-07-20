@@ -1043,9 +1043,6 @@ class AssetsController extends AdminController
 
       }
 
-      if (Input::has('order_number')) {
-          $assets->where('order_number','=',e(Input::get('order_number')));
-      }
 
       $assets = $assets->orderBy('asset_tag', 'ASC')->get();
 
@@ -1144,7 +1141,7 @@ class AssetsController extends AdminController
 
       ->addColumn('order_number',function($assets)
       {
-        return '<a href="../hardware/?order_number='.$assets->order_number.'">'.$assets->order_number.'';
+        return $assets->order_number;
       })
 
 
