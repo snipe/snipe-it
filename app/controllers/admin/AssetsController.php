@@ -446,6 +446,9 @@ class AssetsController extends AdminController
             $data['eula'] = $asset->getEula();
             $data['first_name'] = $user->first_name;
             $data['item_name'] = $asset->showAssetName();
+            $data['checkout_date'] = $logaction->created_at;
+            $data['item_tag'] = $asset->asset_tag;
+            $data['note'] = $logaction->note;
             $data['require_acceptance'] = $asset->requireAcceptance();
 
             $settings = Setting::getSettings();
