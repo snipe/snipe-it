@@ -424,21 +424,6 @@ class UsersController extends AdminController
         }
     }
 
-    public function postBulkEdit() {
-
-        if (!Input::has('edit_user')) {
-			return Redirect::back()->with('error', 'No users selected');
-		} else {
-			$user_raw_array = Input::get('edit_user');
-			foreach ($user_raw_array as $user_id => $value) {
-				$user_ids[] = $user_id;
-
-			}
-
-		}
-
-    }
-
     /**
      * Restore a deleted user.
      *
