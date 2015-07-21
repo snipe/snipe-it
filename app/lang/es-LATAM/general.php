@@ -59,7 +59,7 @@ return array(
     'image_upload'         	=> 'Enviar imagen',
     'item'  				=> 'Item',
     'last'					=> 'Último',
-    'last_name'				=> 'Apellidos',
+    'last_name'				=> 'Apellido',
     'license'				=> 'Licencia',
     'license_report'        => 'Reporte de Licencias',
     'licenses_available'	=> 'licencias libres',
