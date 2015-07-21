@@ -3,7 +3,7 @@
 return array(
 	'eula_text'      			=> 'EULA',
     'id'      					=> 'ID',
-    'parent'   					=> 'Padre',
+    'parent'   					=> 'Categoria Principal',
     'require_acceptance'      	=> 'Aceptación',
     'title'      				=> 'Categoría de equipo',
 
