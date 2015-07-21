@@ -30,7 +30,7 @@ Name, Email, Asset Category, Asset Model, Manufacturer, Asset Model Number, Asse
 
 The importer will ignore the first line of your CSV, so if you don't have a header row, you should add one.
 
-[__Download a sample CSV with dummy data__](http://snipeitapp.com/wp-content/uploads/2015/07/sample.csv)
+[__Download a sample CSV with dummy data__](http://docs.snipeitapp.com/sample.csv)
 
 | Field   | Example Data | Required | Notes |
 | ------------- | ------------- |
@@ -39,7 +39,7 @@ The importer will ignore the first line of your CSV, so if you don't have a head
 |Asset Category |`Laptop`| Yes | Created if it doesn't exist |
 |Asset Model |`MBP Retina 13-inch`| Yes |Created if it doesn't exist |
 |Manufacturer Name| `Apple`|Yes | Created if it doesn't exist |
-|Asset Model| `MacbookPro12,1`| Yes |  |
+|Asset Model| `MacbookPro12,1`| No |  |
 |Asset Serial | `C20095805496869045H6`| Yes |  |
 |Asset Tag | `KJH90890`| Yes | |
 |Location Name | `San Diego`| Yes | Created if it doesn't exist |
