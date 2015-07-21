@@ -36,56 +36,42 @@ menu:
                     text: Security
                     # You can use relative urls
                     relativeUrl: security.html
-                #foo:
-                    #text: Another link
-                    # Or absolute urls
-                    #absoluteUrl: https://example.com
+
         installation:
             name: Installation
             items:
                 overview:
                     text: Overview
-                    # You can use relative urls
                     relativeUrl: installation/index.html
                 downloading:
                     text: 1. Downloading
-                    # You can use relative urls
                     relativeUrl: installation/downloading.html
                 configuration:
                     text: 2. Configuration
-                    # You can use relative urls
                     relativeUrl: installation/configuration.html
                 composer:
                     text: 3. Install Dependencies
-                    # You can use relative urls
                     relativeUrl: installation/composer.html
                 command-line:
                     text: 4. The CLI Installer
-                    # You can use relative urls
                     relativeUrl: installation/command-line.html
                 server:
                     text: 5. Server Configuration
-                    # You can use relative urls
                     relativeUrl: installation/server/index.html
                 linux-osx:
                     text: "<span class='subnav-indent'><i class='fa fa-caret-right'></i> Linux/OSX</span>"
-                    # You can use relative urls
                     relativeUrl: installation/server/linux-osx.html
                 windows:
                     text: "<span class='subnav-indent'><i class='fa fa-caret-right'></i> Windows</span>"
-                    # You can use relative urls
                     relativeUrl: installation/server/windows.html
                 wamp:
                     text: "<span class='subnav-indent'><i class='fa fa-caret-right'></i> WAMP</span>"
-                    # You can use relative urls
                     relativeUrl: installation/server/wamp.html
                 xampp:
                     text: "<span class='subnav-indent'><i class='fa fa-caret-right'></i> XAMPP</span>"
-                    # You can use relative urls
                     relativeUrl: installation/server/xampp.html
                 docker:
                     text: "<span class='subnav-indent'><i class='fa fa-caret-right'></i> Docker</span>"
-                    # You can use relative urls
                     relativeUrl: installation/server/docker.html
         manual:
             name: User's Manual
@@ -107,31 +93,24 @@ menu:
             items:
                 common-issues:
                     text: Common Issues
-                    # You can use relative urls
                     relativeUrl: common-issues.html
                 getting-help:
                     text: Getting Help
-                    # You can use relative urls
                     relativeUrl: getting-help.html
                 upgrading:
                     text: Upgrading
-                    # You can use relative urls
                     relativeUrl: upgrading.html
                 contributing:
                     text: Contributing
-                    # You can use relative urls
                     relativeUrl: contributing.html
                 translations:
                     text: Translations
-                    # You can use relative urls
                     relativeUrl: translations.html
                 license:
                     text: License
-                    # You can use relative urls
                     relativeUrl: license.html
                 website:
                     text: Main Website
-                    # You can use relative urls
                     absoluteUrl: http://snipeitapp.com
 
 
