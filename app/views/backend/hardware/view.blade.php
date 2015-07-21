@@ -50,12 +50,12 @@
 		@if ($asset->model->deleted_at!='')
             <div class="alert alert-warning alert-block">
 				<i class="fa fa-warning"></i>
-				@lang('admin/hardware/general.model_deleted', array('model_id' => $asset->model->id))
+				@lang('admin/hardware/general.model_deleted', ['model_id' => $asset->model->id])
 			</div>
         @elseif ($asset->deleted_at!='')
 			<div class="alert alert-warning alert-block">
 				<i class="fa fa-warning"></i>
-				@lang('admin/hardware/general.deleted', array('asset_id' => $asset->id))
+				@lang('admin/hardware/general.deleted', ['asset_id' => $asset->id])
 			</div>
 		@endif
 
@@ -254,76 +254,174 @@
         </table>
 
 </div>
-
-
-
-
-        <!-- checked out assets table -->
-
-        <table class="table table-hover table-fixed break-word">
+<!-- Asset Maintenance -->
+<div class="col-md-12">
+    <div class="row header">
+        <div class="col-md-12">
+            <a href="{{ route('create/asset_maintenances', $asset->id) }}" class="btn btn-success pull-right"><i class="fa fa-plus icon-white"></i> New Improvement</a>
+            <h6>@lang('general.asset_maintenances')</h6>
+        </div>
+    </div>
+    <!-- Asset Maintenance table -->
+    @if (count($asset->assetmaintenances) > 0)
+        <table class="table table-hover">
             <thead>
-                <tr>
-                    <th class="col-md-3">@lang('general.date')</th>
-                    <th class="col-md-2"><span class="line"></span>@lang('general.admin')</th>
-                    <th class="col-md-2"><span class="line"></span>@lang('table.actions')</th>
-                    <th class="col-md-2"><span class="line"></span>@lang('general.user')</th>
-                    <th class="col-md-3"><span class="line"></span>@lang('general.notes')</th>
-                </tr>
+            <tr>
+                <th class="col-md-2"><span class="line"></span>@lang('admin/asset_maintenances/table.supplier_name')</th>
+                <th class="col-md-2"><span class="line"></span>@lang('admin/asset_maintenances/form.asset_maintenance_type')</th>
+                <th class="col-md-2"><span class="line"></span>@lang('admin/asset_maintenances/form.start_date')</th>
+                <th class="col-md-2"><span class="line"></span>@lang('admin/asset_maintenances/form.completion_date')</th>
+                <th class="col-md-2"><span class="line"></span>@lang('admin/asset_maintenances/table.is_warranty')</th>
+                <th class="col-md-2"><span class="line"></span>@lang('admin/asset_maintenances/form.cost')</th>
+                <th class="col-md-1"><span class="line"></span>@lang('table.actions')</th>
+            </tr>
             </thead>
             <tbody>
-            @if (count($asset->assetlog) > 0)
-                @foreach ($asset->assetlog as $log)
-
+            <?php $totalCost = 0; ?>
+            @foreach ($asset->asset_maintenances as $assetMaintenance)
+                @if (is_null($assetMaintenance->deleted_at))
                 <tr>
-                    <td>{{{ $log->created_at }}}</td>
-                    <td>
-                        @if (isset($log->user_id))
-                        {{{ $log->adminlog->fullName() }}}
-                        @endif
-                    </td>
-                    <td>{{ $log->action_type }}</td>
-                    <td>
-                        @if ((isset($log->checkedout_to)) && ($log->checkedout_to!=0) && ($log->checkedout_to!=''))
-
-	                        @if ($log->userlog->deleted_at=='')
-		                        <a href="{{ route('view/user', $log->checkedout_to) }}">
-		                        {{{ $log->userlog->fullName() }}}
-		                         </a>
-		                    @else
-		 						<del>{{{ $log->userlog->fullName() }}}</del>
-	                        @endif
-
-                        @endif
-                    </td>
-                    <td>
-                        @if ($log->note) {{{ $log->note }}}
-                        @endif
+                    <td><a href="{{ route('view/supplier', $assetMaintenance->supplier_id) }}">{{{ $assetMaintenance->supplier->name }}}</a></td>
+                    <td>{{{ $assetMaintenance->improvement_type }}}</td>
+                    <td>{{{ $assetMaintenance->start_date }}}</td>
+                    <td>{{{ $assetMaintenance->completion_date }}}</td>
+                    <td>{{{ $assetMaintenance->is_warranty ? Lang::get('admin/asset_maintenances/message.warranty') : Lang::get('admin/asset_maintenances/message.not_warranty') }}}</td>
+                    <td>{{{ sprintf( Lang::get( 'general.currency' ) . '%01.2f', $assetMaintenance->cost) }}}</td>
+                    <?php $totalCost += $assetMaintenance->cost; ?>
+                    <td><a href="{{ route('update/asset_maintenance', $assetMaintenance->id) }}" class="btn btn-warning"><i class="fa fa-pencil icon-white"></i></a>
                     </td>
                 </tr>
-
-                @endforeach
                 @endif
+            @endforeach
+            </tbody>
+            <tfoot>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td>{{{sprintf(Lang::get( 'general.currency' ) . '%01.2f', $totalCost)}}}</td>
+            </tr>
+            </tfoot>
+        </table>
+    @else
+        <div class="col-md-12">
+            <div class="alert alert-info alert-block">
+                <i class="fa fa-info-circle"></i>
+                @lang('general.no_results')
+            </div>
+        </div>
+    @endif
+</div>
+<div class="col-md-12">
+ 	<h6>@lang('general.file_uploads') [ <a href="#" data-toggle="modal" data-target="#uploadFileModal">@lang('button.add')</a> ]</h6>
+ 	<table class="table table-hover">
+        <thead>
+            <tr>
+                <th class="col-md-5">@lang('general.notes')</th>
+                <th class="col-md-5"><span class="line"></span>@lang('general.file_name')</th>
+                <th class="col-md-2"></th>
+                <th class="col-md-2"></th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (count($asset->uploads) > 0)
+                @foreach ($asset->uploads as $file)
                 <tr>
-                    <td>{{ $asset->created_at }}</td>
                     <td>
-                    @if (isset($asset->adminuser->id)) {{{ $asset->adminuser->fullName() }}}
-                    @else
-                    @lang('general.unknown_admin')
-                    @endif
+                        @if ($file->note) {{{ $file->note }}}
+                        @endif
                     </td>
-                    <td>@lang('general.created_asset')</td>
-                    <td></td>
                     <td>
-<!--                    @if ($asset->notes)
-                    {{{ $asset->notes }}}
-                    @endif -->
+                    {{{ $file->filename }}}
+                    </td>
+                    <td>
+                        @if ($file->filename)
+                        <a href="{{ route('show/assetfile', [$asset->id, $file->id]) }}" class="btn btn-default">@lang('general.download')</a>
+                        @endif
+                    </td>
+                    <td>
+                        <a class="btn delete-asset btn-danger btn-sm" href="{{ route('delete/assetfile', [$asset->id, $file->id]) }}"><i class="fa fa-trash icon-white"></i></a>
                     </td>
                 </tr>
-            </tbody>
-        </table>
+                @endforeach
+            @else
+                <tr>
+                    <td colspan="4">
+                        @lang('general.no_results')
+                    </td>
+                </tr>
 
+            @endif
 
-        </div>
+        </tbody>
+    </table>
+</div>
+<div class="col-md-12">
+        <!-- checked out assets table -->
+    <table class="table table-hover table-fixed break-word">
+        <thead>
+            <tr>
+                <th class="col-md-3">@lang('general.date')</th>
+                <th class="col-md-2"><span class="line"></span>@lang('general.admin')</th>
+                <th class="col-md-2"><span class="line"></span>@lang('table.actions')</th>
+                <th class="col-md-2"><span class="line"></span>@lang('general.user')</th>
+                <th class="col-md-3"><span class="line"></span>@lang('general.notes')</th>
+            </tr>
+        </thead>
+        <tbody>
+        @if (count($asset->assetlog) > 0)
+            @foreach ($asset->assetlog as $log)
+
+            <tr>
+                <td>{{{ $log->created_at }}}</td>
+                <td>
+                    @if (isset($log->user_id))
+                    {{{ $log->adminlog->fullName() }}}
+                    @endif
+                </td>
+                <td>{{ $log->action_type }}</td>
+                <td>
+                    @if ((isset($log->checkedout_to)) && ($log->checkedout_to!=0) && ($log->checkedout_to!=''))
+
+                        @if ($log->userlog->deleted_at=='')
+                            <a href="{{ route('view/user', $log->checkedout_to) }}">
+                            {{{ $log->userlog->fullName() }}}
+                             </a>
+                        @else
+                            <del>{{{ $log->userlog->fullName() }}}</del>
+                        @endif
+
+                    @endif
+                </td>
+                <td>
+                    @if ($log->note) {{{ $log->note }}}
+                    @endif
+                </td>
+            </tr>
+
+            @endforeach
+            @endif
+            <tr>
+                <td>{{ $asset->created_at }}</td>
+                <td>
+                @if (isset($asset->adminuser->id)) {{{ $asset->adminuser->fullName() }}}
+                @else
+                @lang('general.unknown_admin')
+                @endif
+                </td>
+                <td>@lang('general.created_asset')</td>
+                <td></td>
+                <td>
+<!--                    @if ($asset->notes)
+                {{{ $asset->notes }}}
+                @endif -->
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    </div>
 </div>
         <!-- side address column -->
         <div class="col-md-3 col-xs-12 address pull-right">

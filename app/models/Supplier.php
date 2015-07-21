@@ -25,6 +25,11 @@ class Supplier extends Elegant
         return $this->hasMany('Asset', 'supplier_id');
     }
 
+    public function asset_maintenances()
+    {
+        return $this->hasMany('AssetMaintenance', 'supplier_id');
+    }
+
     public function num_assets()
     {
         return $this->hasMany('Asset', 'supplier_id')->count();

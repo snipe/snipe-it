@@ -2,6 +2,7 @@
 
 use AdminController;
 use Image;
+use AssetMaintenance;
 use Input;
 use Lang;
 use Supplier;

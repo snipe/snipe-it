@@ -1,8 +1,6 @@
 <?php
 
-return array(
-
-
+    return [
     'accessories'			=> 'Accessories',
     'accessory'				=> 'Accessory',
     'action'                => 'Action',
@@ -61,6 +59,9 @@ return array(
     'id'  					=> 'ID',
     'image_delete'         	=> 'Delete Image',
     'image_upload'         	=> 'Upload Image',
+    'asset_maintenance'        => 'Asset Maintenance',
+    'asset_maintenance_report' => 'Asset Maintenance Report',
+    'asset_maintenances'       => 'Asset Maintenances',
     'item'  				=> 'Item',
     'last'					=> 'Last',
     'last_name'				=> 'Last Name',
@@ -131,5 +132,4 @@ return array(
     'years'					=> 'years',
     'yes' 					=> 'Yes',
     'zip'  					=> 'Zip',
-
-);
+    ];
