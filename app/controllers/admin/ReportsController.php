@@ -6,6 +6,7 @@ use Asset;
 use Illuminate\Support\Facades\Lang;
 use Illuminate\Support\Facades\Response;
 use AssetMaintenance;
+use Illuminate\Support\Facades\View;
 use Input;
 use License;
 use Location;
