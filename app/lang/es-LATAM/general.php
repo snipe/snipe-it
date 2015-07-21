@@ -12,7 +12,7 @@ return array(
     'all'       			=> 'Todos los',
     'archived'              => 'Archivado',
     'asset_models'			=> 'Modelos',
-    'asset'					=> 'Equipo',
+    'asset'					=> 'Equipo/Activo',
     'asset_report'          => 'Reporte de Equipos',
     'asset_tag'				=> 'Etiqueta',
     'assets_available'		=> 'equipos disponibles',
