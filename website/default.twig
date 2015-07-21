@@ -11,6 +11,12 @@
     <link rel="stylesheet" href="{{ baseUrl }}/css/theme.css" type="text/css"/>
     <link rel="stylesheet" href="{{ baseUrl }}/css/theme-fixes.css" type="text/css"/>
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.4/styles/github.min.css">
+
+    <link href="http://fonts.googleapis.com/css?family=Open+Sans:300,400" rel="stylesheet">
+    <link href="{{ baseUrl }}/css/tipuesearch.css" rel="stylesheet">
+
+
+
 </head>
 <body class="wy-body-for-nav">
 
@@ -22,6 +28,11 @@
             </div>
             <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
                 {% if menu is defined %}
+
+                <form action="{{ baseUrl }}/search.html">
+                <input type="text" name="q" id="tipue_search_input" autocomplete="off" placeholder="Search the docs" required>
+                </form>
+
                     {% for section in menu.sections %}
                         <p class="menu-section">
                             {{ section.name }}
@@ -105,6 +116,23 @@
             hljs.initHighlightingOnLoad();
         });
     </script>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <script src="{{ baseUrl }}/js/tipuesearch_set.js"></script>
+    <script src="{{ baseUrl }}/js/tipuesearch.min.js"></script>
+
+    <script>
+    $(document).ready(function() {
+         $('#tipue_search_input').tipuesearch({
+              'mode': 'live',
+              'liveDescription': 'h1',
+              'liveContent': '.document'
+         });
+    });
+    </script>
+
+
+
 
 </body>
 </html>
