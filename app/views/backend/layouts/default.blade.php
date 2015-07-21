@@ -281,10 +281,10 @@
                     <li><a href="{{ URL::to('hardware') }}">@lang('general.list_all')</a></li>
 
                     <li class="divider">&nbsp;</li>
-                    <li><a href="{{ URL::to('hardware/models') }}" {{ (Request::is('hardware/models*') ? ' class="active"' : '') }} >@lang('general.asset_models')</a></li>
-                    <li><a href="{{ URL::to('admin/settings/categories') }}" {{ (Request::is('admin/settings/categories*') ? ' class="active"' : '') }} >@lang('general.categories')</a></li>
-                    <li><a href="{{ URL::to('hardware?status=Deleted') }}" {{ (Request::query('status') == 'Deleted' ? ' class="active"' : '') }} >@lang('general.deleted')</a></li>
-
+                    <li><a href="{{ URL::to('hardware/models') }}" {{{ (Request::is('hardware/models*') ? ' class="active"' : '') }}} >@lang('general.asset_models')</a></li>
+                    <li><a href="{{ URL::to('admin/settings/categories') }}" {{{ (Request::is('admin/settings/categories*') ? ' class="active"' : '') }}} >@lang('general.categories')</a></li>
+                    <li><a href="{{ URL::to('hardware?status=Deleted') }}" {{{ (Request::query('Deleted') ? ' class="active"' : '') }}} >@lang('general.deleted')</a></li>
+                    <li><a href="{{ URL::to('admin/asset_maintenances') }}"  >@lang('general.asset_maintenances') </a></li>
                 </ul>
             </li>
             <li{{ (Request::is('admin/accessories*') ? ' class="active"><div class="pointer"><div class="arrow"></div><div class="arrow_border"></div></div>' : '>') }}
@@ -309,6 +309,7 @@
                 </a>
 
             </li>
+
             <li{{ (Request::is('admin/users*') ? ' class="active"><div class="pointer"><div class="arrow"></div><div class="arrow_border"></div></div>' : '>') }}
                 <a href="{{ URL::to('admin/users') }}">
                     <i class="fa fa-users"></i>
@@ -328,10 +329,11 @@
                 <ul class="submenu{{ (Request::is('reports*') ? ' active' : '') }}">
 	                 <li><a href="{{ URL::to('reports/activity') }}" {{ (Request::is('reports/activity') ? ' class="active"' : '') }} >@lang('general.activity_report')</a></li>
 
-                    <li><a href="{{ URL::to('reports/depreciation') }}" {{ (Request::is('reports/depreciation') ? ' class="active"' : '') }} >@lang('general.depreciation_report')</a></li>
-                    <li><a href="{{ URL::to('reports/licenses') }}" {{ (Request::is('reports/licenses') ? ' class="active"' : '') }} >@lang('general.license_report')</a></li>
-                    <li><a href="{{ URL::to('reports/assets') }}" {{ (Request::is('reports/assets') ? ' class="active"' : '') }} >@lang('general.asset_report')</a></li>
-                    <li><a href="{{ URL::to('reports/custom') }}" {{ (Request::is('reports/custom') ? ' class="active"' : '') }} >@lang('general.custom_report')</a></li>
+                    <li><a href="{{ URL::to('reports/depreciation') }}" {{{ (Request::is('reports/depreciation') ? ' class="active"' : '') }}} >@lang('general.depreciation_report')</a></li>
+                    <li><a href="{{ URL::to('reports/licenses') }}" {{{ (Request::is('reports/licenses') ? ' class="active"' : '') }}} >@lang('general.license_report')</a></li>
+                    <li><a href="{{ URL::to('reports/asset_maintenances') }}" {{{ (Request::is('reports/asset_maintenances') ? ' class="active"' : '') }}} >@lang('general.asset_maintenance_report')</a></li>
+                    <li><a href="{{ URL::to('reports/assets') }}" {{{ (Request::is('reports/assets') ? ' class="active"' : '') }}} >@lang('general.asset_report')</a></li>
+                    <li><a href="{{ URL::to('reports/custom') }}" {{{ (Request::is('reports/custom') ? ' class="active"' : '') }}} >@lang('general.custom_report')</a></li>
                 </ul>
             </li>
              @endif
