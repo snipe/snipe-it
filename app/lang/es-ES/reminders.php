@@ -19,6 +19,6 @@ return array(
 
     "token"    => "El token para restaurar la contraseña no es válido.",
 
-    "sent" => "Si existe una cuenta con el e-mail Suministrado, se enviará un mensaje para restaurar la contraseña!",
+    "sent" => "Si existe una cuenta con el e-mail Suministrado, se le enviará un mensaje para restaurar la contraseña!",
 
 );
