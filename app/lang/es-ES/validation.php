@@ -16,14 +16,14 @@ return array(
     "accepted"         => ":attribute debe ser aceptado.",
     "active_url"       => ":attribute no es una URL correcta.",
     "after"            => ":attribute debe ser posterior a :date.",
-    "alpha"            => ":attribute solo acepta letras.",
-    "alpha_dash"       => ":attribute solo acepta letras, números y guiones.",
-    "alpha_num"        => ":attribute solo acepta letras y números.",
+    "alpha"            => ":attribute solo se aceptan letras.",
+    "alpha_dash"       => ":attribute solo se aceptan letras, números y guiones.",
+    "alpha_num"        => ":attribute solo se aceptan letras y números.",
     "before"           => ":attribute debe ser anterior a :date.",
     "between"          => array(
-        "numeric" => ":attribute debe estar entre :min - :max.",
-        "file"    => ":attribute debe estar entre :min - :max kilobytes.",
-        "string"  => ":attribute debe estar entre :min - :max caracteres.",
+    "numeric" => ":attribute debe estar entre :min - :max.",
+    "file"    => ":attribute debe estar entre :min - :max kilobytes.",
+    "string"  => ":attribute debe estar entre :min - :max caracteres.",
     ),
     "confirmed"        => ":attribute la confirmación no coincide.",
     "date"             => ":attribute no es una fecha correcta.",
@@ -38,15 +38,15 @@ return array(
     "integer"          => ":attribute debe ser un número entero.",
     "ip"               => ":attribute debe ser una dirección IP correcta.",
     "max"              => array(
-        "numeric" => ":attribute no debe ser mayor que :max.",
-        "file"    => ":attribute no debe ser mayor que :max kilobytes.",
-        "string"  => ":attribute no debe tener como máximo :max caracteres.",
+    "numeric" => ":attribute no debe ser mayor que :max.",
+    "file"    => ":attribute no debe ser mayor que :max kilobytes.",
+    "string"  => ":attribute no debe tener como máximo :max caracteres.",
     ),
     "mimes"            => ":attribute debe ser un archivo del tipo: :values.",
     "min"              => array(
-        "numeric" => ":attribute debe ser como mínimo :min.",
-        "file"    => ":attribute debe ser como mínimo de :min kilobytes.",
-        "string"  => ":attribute debe contener como mínimo :min caracteres.",
+    "numeric" => ":attribute debe ser como mínimo :min.",
+    "file"    => ":attribute debe ser como mínimo de :min kilobytes.",
+    "string"  => ":attribute debe contener como mínimo :min caracteres.",
     ),
     "not_in"           => "El :attribute seleccionado no es correcto.",
     "numeric"          => ":attribute debe ser un número.",
@@ -57,9 +57,9 @@ return array(
     "required_without" => ":attribute es obligatrio cuando :values es not present.",
     "same"             => ":attribute y :other deben coincidir.",
     "size"             => array(
-        "numeric" => ":attribute debe tener :size.",
-        "file"    => ":attribute debe tener :size kilobytes.",
-        "string"  => ":attribute debe tener :size caracteres.",
+    "numeric" => ":attribute debe tener :size.",
+    "file"    => ":attribute debe tener :size kilobytes.",
+    "string"  => ":attribute debe tener :size caracteres.",
     ),
     "unique"           => ":attribute ya ha sido introducido.",
     "url"              => ":attribute formato incorrecto.",
@@ -77,7 +77,7 @@ return array(
     */
 
     'custom' => array(),
-    'alpha_space' => ":attribute solo acepta letras, comas, espacios, números y guiones.",
+    'alpha_space' => ":attribute solo se aceptan letras, comas, espacios, números y guiones.",
 
     /*
     |--------------------------------------------------------------------------
