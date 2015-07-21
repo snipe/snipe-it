@@ -3,7 +3,7 @@
 return array(
 
     'does_not_exist' => 'Categoría inexistente.',
-    'assoc_users'	 => 'Este accesorio actualmente tiene :count entregados a usuarios. Por favor ingrese los accesorios y vuelva a intentar. ',
+    'assoc_users'	 => 'Este accesorio actualmente tiene :count entregados a usuarios.  Por favor verifique en los accesorios y vuelva a intentarlo',
 
     'create' => array(
         'error'   => 'La categoría no se ha creado, inténtalo de nuevo.',
