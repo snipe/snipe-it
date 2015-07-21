@@ -26,15 +26,12 @@ menu:
             items:
                 home:
                     text: Introduction
-                    # You can use relative urls
                     relativeUrl: index.html
                 requirements:
                     text: Requirements
-                    # You can use relative urls
                     relativeUrl: requirements.html
                 security:
                     text: Security
-                    # You can use relative urls
                     relativeUrl: security.html
 
         installation:
