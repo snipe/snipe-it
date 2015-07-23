@@ -393,6 +393,10 @@
                     <ul>
 
                     	 @if (($asset->assetstatus->deployable=='1') && ($asset->assigned_to > 0) && ($asset->deleted_at==''))
+                    	 	@if ($asset->assetlog->first()->expected_checkin)
+                                <li><br />@lang('admin/hardware/form.expected_checkin')
+                                    : {{{ date('Y-m-d', strtotime($asset->assetlog->first()->expected_checkin)) }}}</li>
+                            @endif
                     	<li><br /><a href="{{ route('checkin/hardware', $asset->id) }}" class="btn btn-primary btn-sm">@lang('admin/hardware/general.checkin')</a></li>
                     	@elseif ((($asset->assetstatus->deployable=='1') &&  (($asset->assigned_to=='') || ($asset->assigned_to==0))) && ($asset->deleted_at==''))
                     	<li><br /><a href="{{ route('checkout/hardware', $asset->id) }}" class="btn btn-info btn-sm">@lang('admin/hardware/general.checkout')</a></li>
