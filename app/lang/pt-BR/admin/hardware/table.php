@@ -2,7 +2,7 @@
 
 return array(
 
-    'asset_tag'   	=> 'Marcação do Bem',
+    'asset_tag'   	=> 'Marcação do Ativo',
     'asset_model'       => 'Modelo',
     'book_value'  	=> 'Valor',
     'change' 		=> 'Entrada/Saída',
@@ -17,6 +17,6 @@ return array(
     'purchase_date'	=> 'Comprado',
     'serial'   		=> 'Serial',
     'status'   		=> 'Status',
-    'title'      	=> 'Bem ',
+    'title'      	=> 'Ativo ',
 
 );

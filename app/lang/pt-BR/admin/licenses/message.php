@@ -4,19 +4,19 @@ return array(
 
     'does_not_exist' => 'A licença não existe.',
     'user_does_not_exist' => 'O usuário não existe.',
-    'asset_does_not_exist' 	=> 'O bem que você está tentando associar com esta licença não existe.',
+    'asset_does_not_exist' 	=> 'O ativo do qual você está tentando associar com esta licença não existe.',
     'owner_doesnt_match_asset' => 'O bem que você está tentando associar a está licença é propriedade de alguma outra pessoa que não está selecionada na lista suspensa.',
     'assoc_users'	 => 'Esta licença é atualmente check-out para um usuário e não pode ser excluído. Por favor, atualize seu bem para que não referencie mais este usuário e, em seguida, tente apagar novamente. ',
 
 
     'create' => array(
-        'error'   => 'A licença não foi criada, por favor, tente novamente.',
+        'error'   => 'A licença não foi criada, tente novamente.',
         'success' => 'Licença criada com sucesso.'
     ),
 
     'deletefile' => array(
-        'error'   => 'O arquivo não foi deletado. Tente novamente.',
-        'success' => 'Arquivo deletado com sucesso.',
+        'error'   => 'O arquivo não foi excluído. Tente novamente.',
+        'success' => 'Arquivo excluído com sucesso.',
     ),
 
     'upload' => array(
@@ -27,14 +27,14 @@ return array(
     ),
 
     'update' => array(
-        'error'   => 'A licença não foi atualizada, por favor, tente novamente',
+        'error'   => 'A licença não foi atualizada, tente novamente',
         'success' => 'Licença atualizada com sucesso.'
     ),
 
     'delete' => array(
-        'confirm'   => 'Tem certeza que deseja deletar esta licença?',
-        'error'   => 'Houve um problema ao deletar esta licença. Por favor, tente novamente.',
-        'success' => 'A licença foi deletada com sucesso.'
+        'confirm'   => 'Tem certeza de que deseja excluir esta licença?',
+        'error'   => 'Houve um problema ao excluir esta licença. Tente novamente.',
+        'success' => 'A licença foi excluída com sucesso.'
     ),
 
     'checkout' => array(

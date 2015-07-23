@@ -17,49 +17,90 @@
 </div>
 
 <div class="user-profile">
-<div class="row profile">
-<div class="col-md-9 bio">
+    <div class="row profile">
+        <div class="col-md-9 bio">
+            {{ Datatable::table()
+                ->addColumn(Lang::get('admin/accessories/table.title'), 
+                            Lang::get('admin/accessories/general.total'), 
+                            Lang::get('admin/accessories/general.remaining'), 
+                            Lang::get('table.actions'))
+                ->setOptions(
+                        array(
+	                        'language' => array(
+			            	'search' => Lang::get('general.search'),
+			            	'lengthMenu' => Lang::get('general.page_menu'),
+			            	'loadingRecords' => Lang::get('general.loading'),
+			            	'zeroRecords' => Lang::get('general.no_results'),
+			            	'info' => Lang::get('general.pagination_info'), 
+			            	'processing' => Lang::get('general.processing'),
+			            	'paginate'=> array(
+			            		'first'=>Lang::get('general.first'),
+			            		'previous'=>Lang::get('general.previous'),
+			            		'next'=>Lang::get('general.next'),
+			            		'last'=>Lang::get('general.last'),
+			            		),
+			            	),
+                            'sAjaxSource'=>route('api.accessories.list'),
+                            'dom' =>'T<"clear">lfrtip',
+                            'tableTools' => array(
+                                'sSwfPath'=> Config::get('app.url').'/assets/swf/copy_csv_xls_pdf.swf',
+                                'aButtons'=>array(
+                                    array(
+                                    	'sExtends'=>'copy',
+                                    	'sButtonText'=>'Copy',
+                                    	'mColumns'=>array(0,1,2),
+                                    	'bFooter'=>false,
+                                	),
+                                    array(
+                                    	'sExtends'=>'print',
+                                    	'sButtonText'=>'Print',
+                                    	'mColumns'=>array(0,1,2),
+                                    	'bShowAll'=>true,
+                                    	'bFooter'=>true,
+                                	),
+                                    array(
+                                        'sExtends'=>'collection',
+                                        'sButtonText'=>'Export',
+                                        'aButtons'=>array(
+                                            array(
+                                            	'sExtends'=>'csv',
+                                            	'sButtonText'=>'csv',
+                                            	'mColumns'=>array(0,1,2),
+                                            	'bFooter'=>false,
+                                        	),
+                                            array(
+                                            	'sExtends'=>'xls',
+                                            	'sButtonText'=>'XLS',
+                                            	'mColumns'=>array(0,1,2),
+                                            	'bFooter'=>false,
+                                        	),
+                                            array(
+                                            	'sExtends'=>'pdf',
+                                            	'sButtonText'=>'PDF',
+                                            	'mColumns'=>array(0,1,2),
+                                            	'bFooter'=>false,
+                                        	)
+                                        )
+                                    ),
+                                ) 
+                            ),
+                            'columnDefs'=> array(
+                                array('bSortable'=>false,'targets'=>array(3)),
+                                ),
+                            'order'=>array(array(0,'asc')),
+                        )
+                    )
+                ->render() }}
+        </div>
 
-        <div class="table-responsive">
-		<table id="example">
-        <thead>
-            <tr role="row">
-                <th class="col-md-5" bSortable="true">@lang('admin/accessories/table.title')</th>
-                <th class="col-md-2" bSortable="true">@lang('admin/accessories/general.total')</th>
-                <th class="col-md-2" bSortable="true">@lang('admin/accessories/general.remaining')</th>
-                <th class="col-md-3 actions" bSortable="true">@lang('table.actions')</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach ($accessories as $accessory)
-            <tr>
-                <td><a href="{{ route('view/accessory', $accessory->id) }}">{{{ $accessory->name }}}</a></td>
-                <td>{{{ $accessory->qty }}} </td>
-                <td>{{{ $accessory->numRemaining() }}} </td>
-                <td>
-	            <a href="{{ route('checkout/accessory', $accessory->id) }}" class="btn btn-info btn-sm"{{ (($accessory->numRemaining() > 0 ) ? '' : ' disabled') }}>@lang('general.checkout')</a>
-                <a href="{{ route('update/accessory', $accessory->id) }}" class="btn btn-warning btn-sm"><i class="fa fa-pencil icon-white"></i></a>
-<a data-html="false" class="btn delete-asset btn-danger btn-sm" data-toggle="modal" href="{{ route('delete/accessory', $accessory->id) }}" data-content="@lang('admin/accessories/message.delete.confirm')"
-data-title="@lang('general.delete') {{{ htmlspecialchars($accessory->name) }}}?" onClick="return false;"><i class="fa fa-trash icon-white"></i></a>
 
-                </td>
-            </tr>
-            @endforeach
-        </tbody>
-        </table>
+        <!-- side address column -->
+        <div class="col-md-3 col-xs-12 address pull-right">
+            <br /><br />
+            <h6>@lang('admin/accessories/general.about_accessories_title')</h6>
+            <p>@lang('admin/accessories/general.about_accessories_text') </p>
 
-
+        </div>
     </div>
-    </div>
-
-
-<!-- side address column -->
-<div class="col-md-3 col-xs-12 address pull-right">
-    <br /><br />
-    <h6>@lang('admin/accessories/general.about_accessories_title')</h6>
-    <p>@lang('admin/accessories/general.about_accessories_text') </p>
-
-</div>
-</div>
 </div>
 @stop

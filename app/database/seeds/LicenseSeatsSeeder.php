@@ -24,7 +24,7 @@ class LicenseSeatsSeeder extends Seeder
 
         $license_seats[] = array(
             'license_id'      	=> '1',
-            'assigned_to'      	=> '2',
+            'assigned_to'      	=> '1',
             'created_at' 		=> $date->modify('-10 day')->format('Y-m-d H:i:s'),
             'updated_at' 		=> $date->modify('-3 day')->format('Y-m-d H:i:s'),
             'deleted_at' 		=> NULL,
@@ -35,7 +35,7 @@ class LicenseSeatsSeeder extends Seeder
 
         $license_seats[] = array(
             'license_id'      	=> '1',
-            'assigned_to'      	=> '2',
+            'assigned_to'      	=> '1',
             'created_at' 		=> $date->modify('-10 day')->format('Y-m-d H:i:s'),
             'updated_at' 		=> $date->modify('-3 day')->format('Y-m-d H:i:s'),
             'deleted_at' 		=> NULL,
@@ -57,7 +57,7 @@ class LicenseSeatsSeeder extends Seeder
 
         $license_seats[] = array(
             'license_id'      	=> '1',
-            'assigned_to'      	=> '2',
+            'assigned_to'      	=> '1',
             'created_at' 		=> $date->modify('-10 day')->format('Y-m-d H:i:s'),
             'updated_at' 		=> $date->modify('-3 day')->format('Y-m-d H:i:s'),
             'deleted_at' 		=> NULL,

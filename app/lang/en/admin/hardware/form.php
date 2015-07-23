@@ -19,7 +19,7 @@ return array(
     'eol_rate'			=> 'EOL Rate',
     'expires'			=> 'Expires',
     'fully_depreciated'	=> 'Fully Depreciated',
-    'help_checkout'		=> 'If you wish to assign this asset immediately, you should select "Ready to Deploy" from the status list above, or unexpected things may happen. ',
+    'help_checkout'		=> 'If you wish to assign this asset immediately, select "Ready to Deploy" from the status list above. ',
     'mac_address'		=> 'MAC Address',
     'manufacturer'		=> 'Manufacturer',
     'model'				=> 'Model',

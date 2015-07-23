@@ -1,5 +1,175 @@
 
 
+###  v1.2.6.1 - Released Mar 12, 2015 08:25:28
+* <a href="http://github.com/snipe/snipe-it/commit/7047af44f6544d2eeed0f0fcefdbdd44489f189a">view</a> &bull; Fixed layout for remember me button 
+* <a href="http://github.com/snipe/snipe-it/commit/4502582beb064ffeee4a1cdf892f513e58534014">view</a> &bull; Trying to fix pre-commit hook :( 
+* <a href="http://github.com/snipe/snipe-it/commit/61b04d6e40baa9054e1701455259d8d62fa868ff">view</a> &bull; Fixes #579 - user cannot accept more than once 
+* <a href="http://github.com/snipe/snipe-it/commit/2d196b1595ec87f119ad5a82f8f676918c52c896">view</a> &bull; Fixes #602 for strict_mode 
+* <a href="http://github.com/snipe/snipe-it/commit/2540e90c37f37515d8d0277a4152c4b8198a4222">view</a> &bull; Fixes #605 - hides user requestable view from admins 
+* <a href="http://github.com/snipe/snipe-it/commit/1c333e4a24a4950418175a8c354d7541637b7658">view</a> &bull; Fixes #596 - better routes for checking in multiple items from user 
+* <a href="http://github.com/snipe/snipe-it/commit/7d5ee9750f912d85ac0c7f42e2beaba7e026989c">view</a> &bull; Added #596 fix for accessories 
+* <a href="http://github.com/snipe/snipe-it/commit/3f9d9f23d5190052deb1f36be919c650e8f773b8">view</a> &bull; Fixes #280 - updated link to use config url 
+* <a href="http://github.com/snipe/snipe-it/commit/817384b7615a301d6d692aefe6e41cd92ecfd6e1">view</a> &bull; Fixes #597 - print-friendly view on users 
+* <a href="http://github.com/snipe/snipe-it/commit/2115c82587e06049245f17f9d710fbc7a61e57b9">view</a> &bull; Fixed DB format for nullable EULA 
+* <a href="http://github.com/snipe/snipe-it/commit/f62f22b4bf1399c3b98041dfe17f4cc8450847b2">view</a> &bull; ref #599. showing groups in user detail view. fixes a small design bug with group edit view 
+* <a href="http://github.com/snipe/snipe-it/commit/ad25c048c4a52a7f80a479a3b7d621aaad18b1d7">view</a> &bull; Updated Sentry version to fix #625 
+* <a href="http://github.com/snipe/snipe-it/commit/d31c12cfafb2ba323973964215f033bd9aeb1f9b">view</a> &bull; Merge pull request #629 from uberbrady/unicode_fix 
+* <a href="http://github.com/snipe/snipe-it/commit/33dd59fb814089c81886c0264b2356df2b212864">view</a> &bull; Fix #637 - Remove Deleted Models from drop down 
+* <a href="http://github.com/snipe/snipe-it/commit/cb171bcac5c4ccbb347f370e3d2b28783378c0b2">view</a> &bull; Fixes #645 - adds zip and rar to filetype 
+
+
+###  v1.2.6 - Released Feb 28, 2015 08:27:45
+
+
+###  v1.2.6-beta - Released Feb 27, 2015 03:17:06
+#### This is a pre-release 
+* <a href="http://github.com/snipe/snipe-it/commit/30df21c7aa2582bc3b1efbfd788c1aea2733aa7d">view</a> &bull; Fixed missing checkedout-to info on asset view 
+* <a href="http://github.com/snipe/snipe-it/commit/70ae59ed6260101bcfb6e3cbd6309ecb9c1c935a">view</a> &bull; Fixed a bug when no assets are in table that the autoincrement method blows up. Also optimzed the logic to get max id instead of popping top off creation date. 
+* <a href="http://github.com/snipe/snipe-it/commit/f8e12cabd4af8875abd759a3c9d6c2216cb88601">view</a> &bull; Fixes #476 - added logo upload and header color 
+* <a href="http://github.com/snipe/snipe-it/commit/f85061f988a946f1d4a284fbfc8c442636c1364c">view</a> &bull; Fix #541 - Headers not being skipped if checked 
+* <a href="http://github.com/snipe/snipe-it/commit/8b3e22b58e080b44e4de809b8598283fa6ba5bb0">view</a> &bull; Fixes #546 - only insert data if values exist 
+* <a href="http://github.com/snipe/snipe-it/commit/083cb1b5ec51aa2b6932a59b9436a1a45fad5460">view</a> &bull; Fix activate for strict db 
+* <a href="http://github.com/snipe/snipe-it/commit/35cf5b3d609fec2bc3613bdae42d338448413520">view</a> &bull; Fixes #423 
+* <a href="http://github.com/snipe/snipe-it/commit/097bb38a231795aa52ff772a38887700e828256d">view</a> &bull; Fixes #163 - accept acceptance + eula 
+* <a href="http://github.com/snipe/snipe-it/commit/b2af455523fcca1bb02018b38fdb6dc4861819d8">view</a> &bull; Merge conflict resolution. Added a use at the same line as remote. Fixed 
+* <a href="http://github.com/snipe/snipe-it/commit/8879bff16084b2cfa0280fcb1f83d3f90368797f">view</a> &bull; Fixed bug for reporting on upload in dashboard 
+* <a href="http://github.com/snipe/snipe-it/commit/3135869d5a3fafcf70e49dcbb99e36c2ec04ddd0">view</a> &bull; Fixed font path 
+* <a href="http://github.com/snipe/snipe-it/commit/a5a1c4223b357b9cc2751a28e0c4e3085e476733">view</a> &bull; Fixed chevrons 
+* <a href="http://github.com/snipe/snipe-it/commit/734dc49564e4f970846f786177c9d2928284fb5f">view</a> &bull; Fixed icon 
+* <a href="http://github.com/snipe/snipe-it/commit/a6232cbfd8050ace613259df56afae243954c625">view</a> &bull; Fix language string for create accessory 
+* <a href="http://github.com/snipe/snipe-it/commit/c2bbc1281ccdda65caa55665c66c78613142099f">view</a> &bull; Mobile fixes 
+* <a href="http://github.com/snipe/snipe-it/commit/29863004e2e622a9b3b4616abdcd92f2b950bebe">view</a> &bull; more small mobile fixes 
+* <a href="http://github.com/snipe/snipe-it/commit/8eaa70c39b3ace90a517387dc91f452aede18958">view</a> &bull; Fixes #567 - bug in depreciation report csv export 
+* <a href="http://github.com/snipe/snipe-it/commit/e41621def05994302627cd4a6a81abd8e43c86be">view</a> &bull; Fixed relation between accessory and category 
+* <a href="http://github.com/snipe/snipe-it/commit/9f3edd701b51a7aecf792e5736534c1bb15aca9a">view</a> &bull; Fixes #565 - Soft Delete Models and Allow Restore 
+* <a href="http://github.com/snipe/snipe-it/commit/528c06cf7fb4f5c35d4b90eb256c0d195b8366b7">view</a> &bull; Reverting icon fix 
+* <a href="http://github.com/snipe/snipe-it/commit/1ac401f0c036eca0cec1df0986d4c7e1903556fa">view</a> &bull; Fixed EULA mail 
+* <a href="http://github.com/snipe/snipe-it/commit/6d16c97902dadad2351b627f3157257774a075f3">view</a> &bull; Fixed back arrow 
+* <a href="http://github.com/snipe/snipe-it/commit/3e189d3502f8147c012b641cc366394875e9005c">view</a> &bull; Fixes #538 - sortable tables 
+* <a href="http://github.com/snipe/snipe-it/commit/31df29cac878deeb75d8b9b5a2efc7c84ef4b592">view</a> &bull; Fixed funky layout from datatables 
+* <a href="http://github.com/snipe/snipe-it/commit/efaf067b948899d0b784f47092dc3bc22fe504ca">view</a> &bull; Fixed user relationship 
+* <a href="http://github.com/snipe/snipe-it/commit/5010720a976019306e37b89f5aa0e917c0ffdea3">view</a> &bull; Fixed accessory relationship 
+* <a href="http://github.com/snipe/snipe-it/commit/a20e1f6943eab11fc937fcfeb3fe99dc0d520734">view</a> &bull; Fixed attach to relation 
+* <a href="http://github.com/snipe/snipe-it/commit/19ad8970d76a1676de3494b758efa65c0ed6a5c1">view</a> &bull; Fixed arrow icon 
+* <a href="http://github.com/snipe/snipe-it/commit/430b8233ed6f23402597fe54215b9988a3405dd7">view</a> &bull; Fixed user relationship 
+* <a href="http://github.com/snipe/snipe-it/commit/c0c563b1c77ff9942212af89384c8ded40b83b29">view</a> &bull; Fixes accessory relationshop for pivot 
+* <a href="http://github.com/snipe/snipe-it/commit/ef6eae63d86f159a170c3a322a44e08bab827080">view</a> &bull; Fixed error icon 
+* <a href="http://github.com/snipe/snipe-it/commit/d33dcbbcb12172527cec977f679198f594ac975b">view</a> &bull; Fixed bad method call in accessories on delete 
+* <a href="http://github.com/snipe/snipe-it/commit/04735f1affd2fdff9d6cf96ed583ece895cfb341">view</a> &bull; Fixed assetlog display 
+* <a href="http://github.com/snipe/snipe-it/commit/c484afb12b0720eaba2d28f501bf547e2ad9caa9">view</a> &bull; Fixed typo for accessories accept 
+
+
+###  v1.2.5 - Released Feb 18, 2015 03:18:10
+* <a href="http://github.com/snipe/snipe-it/commit/00f7717142e11b90764ffce2d554c566f8ad219f">view</a> &bull; Fix #475 and styling 
+* <a href="http://github.com/snipe/snipe-it/commit/49f25a23a99c08606d58101e039a885b89503fa7">view</a> &bull; Merge pull request #516 from splaer/fix-475 
+* <a href="http://github.com/snipe/snipe-it/commit/58ff929d7193b054073ef46ae2fafdef51d51919">view</a> &bull; Fixes error when no model present because new asset 
+* <a href="http://github.com/snipe/snipe-it/commit/f57c61dd4d789635cee6f62899807b1a7928800e">view</a> &bull; Possible fix for #518 - license count issue 
+* <a href="http://github.com/snipe/snipe-it/commit/064c0211dbb310d1dfdb126e3ce2cee72a80f628">view</a> &bull; Fix #517 - User Requestable Assets 
+* <a href="http://github.com/snipe/snipe-it/commit/4a5007264e1712250726047162df91041d12d28c">view</a> &bull; Fixed mac address not showing 
+* <a href="http://github.com/snipe/snipe-it/commit/17258b73a1c09918960d894702a0ae341a18f0b8">view</a> &bull; Fixes #520 - state no longer required 
+* <a href="http://github.com/snipe/snipe-it/commit/f40bb7b8b3a17ff772c797a3f91a845b068be3d2">view</a> &bull; Fixes #520 postal code requirement 
+* <a href="http://github.com/snipe/snipe-it/commit/08ee02d0cd4d1ff9ed2b0600b75390c1e34c1f53">view</a> &bull; Fixes #525 - added serial to asset model UI 
+* <a href="http://github.com/snipe/snipe-it/commit/24f5cdc743acd55ead02282e13e07f3cbd3551b0">view</a> &bull; Fixes #523 - added file uploads to assets 
+* <a href="http://github.com/snipe/snipe-it/commit/e02bea4275306fb3d2696e3018066b4b1486fa8d">view</a> &bull; Fixes #457 - added bulk options to hardware 
+* <a href="http://github.com/snipe/snipe-it/commit/4e4144ea749974332f645fa77eb74fbbfef51b90">view</a> &bull; Fixed blade reference 
+* <a href="http://github.com/snipe/snipe-it/commit/b32d74de57a3a26326a220236838f57550549ca5">view</a> &bull; Fixed seeder with duplicate ID 
+* <a href="http://github.com/snipe/snipe-it/commit/ea6a6d098ad1795fc5463c61b72240cdcd8a43e7">view</a> &bull; Fixes #440 - removed unique constraint on serial 
+* <a href="http://github.com/snipe/snipe-it/commit/38961298ed6efe3649fdbf4b1e9b3278ab85567a">view</a> &bull; Fixes #439 - loads javascript and CSS locally 
+* <a href="http://github.com/snipe/snipe-it/commit/063e5c407c8f817c16026887be16eeb42598417f">view</a> &bull; Fixed the depreciation report, fixes to calculate current depreciated value (which were only used there). Additional fixes and refactoring around Depreciable, in terms of how assets get depreciation via models, and licenses get depreciation directly. 
+
+
+###  v1.2.4 - Released Feb 12, 2015 06:57:47
+* <a href="http://github.com/snipe/snipe-it/commit/2277b6ee699a78108523eee11695a280e76b1bb4">view</a> &bull; Fixed checkout logic for new assigned_to 
+* <a href="http://github.com/snipe/snipe-it/commit/dbc93de6b3966470f83254547f8029c60f489490">view</a> &bull; Fixes checkin button on view 
+* <a href="http://github.com/snipe/snipe-it/commit/c06a4d4118039d112b69e48f9d4efc2be796f2e0">view</a> &bull; Fixed wonky checkin/checkout buttons 
+* <a href="http://github.com/snipe/snipe-it/commit/31f4ba88f655e1386f2f4f0efae84399f7aa6d52">view</a> &bull; Fix RTD query to not display checked out asset 
+* <a href="http://github.com/snipe/snipe-it/commit/5867c604104781c351f870ff3e0fd4b4d6eeb35a">view</a> &bull; Fixed scope chaining on assigned_to 
+* <a href="http://github.com/snipe/snipe-it/commit/a2178392e65bcc35594d516a20f67eea8466e5c1">view</a> &bull; Fixed seeder 
+* <a href="http://github.com/snipe/snipe-it/commit/7715731c4a2e423afb94873227eb728ad4877221">view</a> &bull; Fix count in header 
+* <a href="http://github.com/snipe/snipe-it/commit/c2e532e32e4943e251dcb5fdd005e9b65d9798a5">view</a> &bull; Fixed language file for status label messages 
+* <a href="http://github.com/snipe/snipe-it/commit/f36029a34a696d89b1058c9abdca7953d51e2bc4">view</a> &bull; Fixed migration for to set assigned_to to null per #506 
+* <a href="http://github.com/snipe/snipe-it/commit/f72b38579037d76b5b188c5d85e24ca567e2480b">view</a> &bull; Fix licenses so null instead of 0 
+* <a href="http://github.com/snipe/snipe-it/commit/34032c73ceee7a9666680f21bf7490fdc32dbdb6">view</a> &bull; Fixed licenses so null instead of 0 
+* <a href="http://github.com/snipe/snipe-it/commit/7b165a12e05396b72381fc2789124acd2b98a2b8">view</a> &bull; Fixes #508 - compacted UI for licenses overview 
+* <a href="http://github.com/snipe/snipe-it/commit/c89be345033bfbed326ffd4207a63438ea09378f">view</a> &bull; Fixes #329 and #454 - added category asset view 
+* <a href="http://github.com/snipe/snipe-it/commit/35a133bbf9f7330a038dda2e79995b9825ca7633">view</a> &bull; Fixes #382 - allow admins to restore deleted assets 
+* <a href="http://github.com/snipe/snipe-it/commit/80e10c4c9838ae4acea8847ed907c6ad05bfac1a">view</a> &bull; Fixes #387 - sortable asset view by manufacturer 
+* <a href="http://github.com/snipe/snipe-it/commit/e343c157c5998d6f30a4e25da23ad1092d50c103">view</a> &bull; Fixed naming conflict for requestable 
+* <a href="http://github.com/snipe/snipe-it/commit/cd5a352961a1e1e8d90368abf81fedee5ce94bef">view</a> &bull; Fix for wrong math on remaining licenses when assigned to an asset 
+* <a href="http://github.com/snipe/snipe-it/commit/342a8b81afb2060a128d0667acc15fa5caafc2ea">view</a> &bull; Fix for error when asset has null status 
+* <a href="http://github.com/snipe/snipe-it/commit/8cdd2156143864974423bea70521d45db6d0cb9c">view</a> &bull; Fixed intenting 
+* <a href="http://github.com/snipe/snipe-it/commit/fbf03b225d732e12821bfc83b9bae7fb7b4b8be8">view</a> &bull; Fixes #509 - added MAC address as model option 
+
+
+###  v1.2.4-beta - Released Feb 11, 2015 01:11:40
+#### This is a pre-release 
+* <a href="http://github.com/snipe/snipe-it/commit/389c27b2e691743eb361cc1fbe4ece4259ae6046">view</a> &bull; Fixes #477 - wrong sidebar on asset view 
+* <a href="http://github.com/snipe/snipe-it/commit/7009b24748edab02921c609c26bc549fa96dcd2f">view</a> &bull; Merge pull request #498 from snipe/fixes/477 
+* <a href="http://github.com/snipe/snipe-it/commit/c1600a33db6d4463d27f74f87389489210de700e">view</a> &bull; Fixes #499 - timestamps in asset logs 
+* <a href="http://github.com/snipe/snipe-it/commit/b360736b7728d2ac872193bbe8888037c9794494">view</a> &bull; Fixes #484 
+* <a href="http://github.com/snipe/snipe-it/commit/addfcd4bc5417784f95145394940f90f1302376f">view</a> &bull; Fix RTD bug 
+* <a href="http://github.com/snipe/snipe-it/commit/d2438f9fdb9b281025c17e22ac2bfaa07ce04a2d">view</a> &bull; Fixes #502 - normalized statuses 
+* <a href="http://github.com/snipe/snipe-it/commit/aef3a734a3530f109b82fc0897e25727293f9862">view</a> &bull; Small fix for pending status 
+* <a href="http://github.com/snipe/snipe-it/commit/f175f52530e58bd5ab80139c526fc7838750cb11">view</a> &bull; Fixed spacer in sidenav for list all 
+
+
+###  v1.2.3 - Released Feb 09, 2015 12:22:12
+
+
+###  v1.2.3-beta - Released Feb 07, 2015 06:02:52
+#### This is a pre-release 
+* <a href="http://github.com/snipe/snipe-it/commit/950567e9d66a6836cbca1383d24fc8548d3cbadf">view</a> &bull; Fixes issue related to #471 - assigning to user ID 0 causes erro 
+* <a href="http://github.com/snipe/snipe-it/commit/2b86f14e30c155f72b903428fd05a896ee9adfcc">view</a> &bull; Possible fix for #484 - fullname issue 
+* <a href="http://github.com/snipe/snipe-it/commit/b3af102d22a2f4f147b863e0ba8c2e4064aad01a">view</a> &bull; Fixed safe mode issue with license seeder 
+* <a href="http://github.com/snipe/snipe-it/commit/1db806f8b283e13dd04f20335d7087d12a04fa23">view</a> &bull; Fixes #488 - longer user jobtitle 
+* <a href="http://github.com/snipe/snipe-it/commit/f5efc368a58e1b26689dadb285918b090b66eb59">view</a> &bull; Fixes #487 - maintained and purchase order in strict mode 
+* <a href="http://github.com/snipe/snipe-it/commit/4dc81ce65fddced3282a9255a5a31ba8aa6a1458">view</a> &bull; Resolves #478 - redirects non-reporting users to view assets page 
+* <a href="http://github.com/snipe/snipe-it/commit/cd338d2a70e1bd4dca3bc651813e51095d7155f0">view</a> &bull; Fixes #483 - line breaks in notes on view 
+* <a href="http://github.com/snipe/snipe-it/commit/e67ba8a7437d4f27ae869072898e65749602f2dd">view</a> &bull; Fix reporting error on depreciation 
+* <a href="http://github.com/snipe/snipe-it/commit/1aeb4de0fae723801f0cdb555c77b5ee17ae1919">view</a> &bull; Possible fix for #491 - solving for giticide on package dep 
+* <a href="http://github.com/snipe/snipe-it/commit/c255edaf617872ac4a896106e56cc816209c2d5b">view</a> &bull; More travis fixes 
+* <a href="http://github.com/snipe/snipe-it/commit/feeef4b66c1b6049a1f18c67e034907ea26c7da9">view</a> &bull; Fix for asset log incorrectly using soft deletes 
+* <a href="http://github.com/snipe/snipe-it/commit/140bd137a48c199269d635aef57d14b1f0a4330a">view</a> &bull; Minor display fixes 
+* <a href="http://github.com/snipe/snipe-it/commit/29f5b7c5e3adc994b727842730c0157429520197">view</a> &bull; Fixed datetime 
+
+
+###  v1.2.2 - Released Jan 22, 2015 11:41:36
+* <a href="http://github.com/snipe/snipe-it/commit/4a77dee79c18f0e2ab155c7024234150ce98b808">view</a> &bull; Fixes #447 - added asset log entry on save 
+* <a href="http://github.com/snipe/snipe-it/commit/d85e5246807e597c1efac85c368a642a6fdcf944">view</a> &bull; Fixes #451 - allows spaces in state name 
+* <a href="http://github.com/snipe/snipe-it/commit/95141d49ba3c4f2b17ed6a26c20e7ad2a8aac9cb">view</a> &bull; Fixes #432 - add model name to checkout 
+* <a href="http://github.com/snipe/snipe-it/commit/3787a3f4bab9908f4903abdc2951cc254c8dc911">view</a> &bull; Fixed language strings for incrementing IDs 
+
+
+###  v1.2.1 - Released Jan 22, 2015 09:24:01
+
+
+###  v1.2.0 - Released Jan 22, 2015 09:24:01
+* <a href="http://github.com/snipe/snipe-it/commit/8699a90093bd27c0502dcc25f6e7d55344d54a3b">view</a> &bull; Fixed changelog 
+* <a href="http://github.com/snipe/snipe-it/commit/cff24309a1514f9ea991881ca72898c7a6358562">view</a> &bull; Possibly fixes #343 
+* <a href="http://github.com/snipe/snipe-it/commit/b2d5dc9ec5460ff1f02db6c1a31ea87d224de4c9">view</a> &bull; Fix #342 
+* <a href="http://github.com/snipe/snipe-it/commit/74ae2fceea68d18514e87edc008cb3016361beee">view</a> &bull; Fix class on th 
+* <a href="http://github.com/snipe/snipe-it/commit/fc2d472ed350d7d63fb97942d00a97b62d4bed55">view</a> &bull; Fixed english language string 
+* <a href="http://github.com/snipe/snipe-it/commit/89c7159c56f88bcf8459a5eb02d79d636335cb28">view</a> &bull; Fix array check for empty rows 
+* <a href="http://github.com/snipe/snipe-it/commit/7ddc6d497af13e7894031ac763939be9863889a4">view</a> &bull; Fix Report Langs 
+* <a href="http://github.com/snipe/snipe-it/commit/13b173409fcd5b5ce8e79566b5110eadcf51c233">view</a> &bull; Fix License form langs 
+* <a href="http://github.com/snipe/snipe-it/commit/b73ae3147a60b29ac455063ecf419a609cce2cac">view</a> &bull; Fixes #362, reduced asset name to 2 char min 
+* <a href="http://github.com/snipe/snipe-it/commit/637009054cc74b17e2dd226c6f8c467eed5b0962">view</a> &bull; Fixed typo in english 
+* <a href="http://github.com/snipe/snipe-it/commit/6905d82fc48998f9c95c454c8bf37a34e30c002e">view</a> &bull; Fixes #374 to keep the requirement to PHP 5.4 
+* <a href="http://github.com/snipe/snipe-it/commit/102481631330fbed894bf72510845bff6c88e59e">view</a> &bull; Fix #377 - Checkout users last_name, first_name 
+* <a href="http://github.com/snipe/snipe-it/commit/d6a0249c60cbb026b2e3190285d50723a76f22ee">view</a> &bull; Fixed #373 - added ability to auto-increment asset tags 
+* <a href="http://github.com/snipe/snipe-it/commit/1b41c974cf67c550b2cae39eeec8f90cb2da79e0">view</a> &bull; Fixes #348 - remove constraints on license keys 
+* <a href="http://github.com/snipe/snipe-it/commit/89a2b87e42c18b308835ef71d196b91002b451ef">view</a> &bull; Fixes #367 - added model number to dropdown 
+* <a href="http://github.com/snipe/snipe-it/commit/64c16a0bacfcde7c4d92971f2129f1b1aeac2c0e">view</a> &bull; Fixes #386 and #273 - altered column type to text 
+* <a href="http://github.com/snipe/snipe-it/commit/daefc86e5878a21f9909806599f22198360c1f9b">view</a> &bull; Formattig fixes for #386 
+* <a href="http://github.com/snipe/snipe-it/commit/73dd339772fcc35e50603ded115f67714620da69">view</a> &bull; Fix #388 - License not showing checked out in view 
+* <a href="http://github.com/snipe/snipe-it/commit/0663ccb99fa926ff944dded330ba1f0cd95abbb3">view</a> &bull; Check if ->adminuser->id isset before trying to print the fullName so we can catch when a user that created an asset has been deleted. Fixes #349 
+* <a href="http://github.com/snipe/snipe-it/commit/533be7f942cb6dfccd1e8a79c043d61791e4c54b">view</a> &bull; fixed #435. using namespace with route groups to increase the readability 
+* <a href="http://github.com/snipe/snipe-it/commit/e434616db83a8d693af63b4705e1b24476fc3c17">view</a> &bull; Merge pull request #436 from rashivkp/fix-435 
+* <a href="http://github.com/snipe/snipe-it/commit/5e496672c66428a1bbd37772aabd44f8bb1cb0fa">view</a> &bull; Fixes #469 
+* <a href="http://github.com/snipe/snipe-it/commit/3c141e8f5017e8f161b6fd1fb82b288283b8450c">view</a> &bull; Fixes #467 
+* <a href="http://github.com/snipe/snipe-it/commit/548de1a1a217e6b5c6fcbbf6cd4918f078e64542">view</a> &bull; Fixes #468 - updated ordering on license checkout 
+
+
 ###  v1.1 - Released Nov 06, 2014 02:16:26
 * <a href="http://github.com/snipe/snipe-it/commit/fafd03f00f49cb9ffe81d50aa9ca3d1f1fa1d043">view</a> &bull; Added DB Prefix to Migrations 
 * <a href="http://github.com/snipe/snipe-it/commit/309772e67d62989f1f60141a4a10d724a44c6baa">view</a> &bull; Fixed operator for setting bool display 

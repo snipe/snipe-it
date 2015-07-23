@@ -14,6 +14,9 @@ use View;
 use User;
 use Actionlog;
 use Mail;
+use Datatable;
+use Slack;
+use Config;
 
 class AccessoriesController extends AdminController
 {
@@ -25,11 +28,7 @@ class AccessoriesController extends AdminController
 
     public function getIndex()
     {
-        // Grab all the accessories
-        $accessories = Accessory::orderBy('created_at', 'DESC')->get();
-
-        // Show the page
-        return View::make('backend/accessories/index', compact('accessories'));
+        return View::make('backend/accessories/index');
     }
 
 
@@ -41,7 +40,7 @@ class AccessoriesController extends AdminController
     public function getCreate()
     {
         // Show the page
-        $category_list = array('' => '') + DB::table('categories')->where('category_type','=','accessory')->whereNull('deleted_at')->lists('name', 'id');
+        $category_list = array('' => '') + DB::table('categories')->where('category_type','=','accessory')->whereNull('deleted_at')->orderBy('name','ASC')->lists('name', 'id');
         return View::make('backend/accessories/edit')->with('accessory',new Accessory)->with('category_list',$category_list);
     }
 
@@ -99,7 +98,7 @@ class AccessoriesController extends AdminController
             return Redirect::to('admin/accessories')->with('error', Lang::get('admin/accessories/message.does_not_exist'));
         }
 
-		$category_list = array('' => '') + DB::table('categories')->where('category_type','=','accessory')->whereNull('deleted_at')->lists('name', 'id');
+		$category_list = array('' => '') + DB::table('categories')->where('category_type','=','accessory')->whereNull('deleted_at')->orderBy('name','ASC')->lists('name', 'id');
         return View::make('backend/accessories/edit', compact('accessory'))->with('category_list',$category_list);
     }
 
@@ -236,6 +235,7 @@ class AccessoriesController extends AdminController
             return Redirect::to('accessories')->with('error', Lang::get('admin/accessories/message.not_found'));
         }
 
+		$admin_user = Sentry::getUser();
         $assigned_to = e(Input::get('assigned_to'));
 
 
@@ -274,6 +274,46 @@ class AccessoriesController extends AdminController
             $logaction->location_id = $user->location_id;
             $logaction->user_id = Sentry::getUser()->id;
             $logaction->note = e(Input::get('note'));
+            
+            $settings = Setting::getSettings();
+			
+			if ($settings->slack_endpoint) {
+				
+
+				$slack_settings = [
+				    'username' => $settings->botname,
+				    'channel' => $settings->slack_channel,
+				    'link_names' => true
+				];
+				
+				$client = new \Maknz\Slack\Client($settings->slack_endpoint,$slack_settings);
+				
+				try {
+						$client->attach([
+						    'color' => 'good',
+						    'fields' => [
+						        [
+						            'title' => 'Checked Out:',
+						            'value' => strtoupper($logaction->asset_type).' <'.Config::get('app.url').'/admin/accessories/'.$accessory->id.'/view'.'|'.$accessory->name.'> checked out to <'.Config::get('app.url').'/admin/users/'.$user->id.'/view|'.$user->fullName().'> by <'.Config::get('app.url').'/admin/users/'.$admin_user->id.'/view'.'|'.$admin_user->fullName().'>.'
+						        ],
+						        [
+						            'title' => 'Note:',
+						            'value' => e($logaction->note)
+						        ],
+
+						        
+						        				   
+						    ]
+						])->send('Accessory Checked Out');
+					
+					} catch (Exception $e) {
+						
+					}
+
+			}
+
+
+
             $log = $logaction->logaction('checkout');
 
             $accessory_user = DB::table('accessories_users')->where('assigned_to','=',$accessory->assigned_to)->where('accessory_id','=',$accessory->id)->first();
@@ -339,6 +379,8 @@ class AccessoriesController extends AdminController
         $logaction = new Actionlog();
         $logaction->checkedout_to = $accessory_user->assigned_to;
         $return_to = $accessory_user->assigned_to;
+        $admin_user = Sentry::getUser();
+
 
         // Was the accessory updated?
         if(DB::table('accessories_users')->where('id', '=', $accessory_user->id)->delete()) {
@@ -346,7 +388,45 @@ class AccessoriesController extends AdminController
             $logaction->accessory_id = $accessory->id;
             $logaction->location_id = NULL;
             $logaction->asset_type = 'accessory';
-            $logaction->user_id = Sentry::getUser()->id;
+            $logaction->user_id = $admin_user->id;
+            $logaction->note = e(Input::get('note'));
+            
+            $settings = Setting::getSettings();
+			
+			if ($settings->slack_endpoint) {
+				
+				
+				$slack_settings = [
+				    'username' => $settings->botname,
+				    'channel' => $settings->slack_channel,
+				    'link_names' => true
+				];
+				
+				$client = new \Maknz\Slack\Client($settings->slack_endpoint,$slack_settings);
+				
+				try {
+						$client->attach([
+						    'color' => 'good',
+						    'fields' => [
+						        [
+						            'title' => 'Checked In:',
+						            'value' => strtoupper($logaction->asset_type).' <'.Config::get('app.url').'/admin/accessories/'.$accessory->id.'/view'.'|'.$accessory->name.'> checked in by <'.Config::get('app.url').'/admin/users/'.$admin_user->id.'/view'.'|'.$admin_user->fullName().'>.'
+						        ],
+						        [
+						            'title' => 'Note:',
+						            'value' => e($logaction->note)
+						        ],
+						        				   
+						    ]
+						])->send('Accessory Checked In');
+					
+					} catch (Exception $e) {
+						
+					}
+
+			}
+			
+			
             $log = $logaction->logaction('checkin from');
 
             if ($backto=='user') {
@@ -360,7 +440,54 @@ class AccessoriesController extends AdminController
         return Redirect::to("admin/accessories")->with('error', Lang::get('admin/accessories/message.checkin.error'));
     }
 
+    public function getDatatable()
+    {
+        $accessories = Accessory::select(array('id','name','qty'))
+        ->whereNull('deleted_at')
+        ->orderBy('created_at', 'DESC');
 
+        $accessories = $accessories->get();
 
+        $actions = new \Chumper\Datatable\Columns\FunctionColumn('actions',function($accessories)
+            {
+                return '<a href="'.route('checkout/accessory', $accessories->id).'" style="margin-right:5px;" class="btn btn-info btn-sm" '.(($accessories->numRemaining() > 0 ) ? '' : ' disabled').'>'.Lang::get('general.checkout').'</a><a href="'.route('update/accessory', $accessories->id).'" class="btn btn-warning btn-sm" style="margin-right:5px;"><i class="fa fa-pencil icon-white"></i></a><a data-html="false" class="btn delete-asset btn-danger btn-sm" data-toggle="modal" href="'.route('delete/accessory', $accessories->id).'" data-content="'.Lang::get('admin/accessories/message.delete.confirm').'" data-title="'.Lang::get('general.delete').' '.htmlspecialchars($accessories->name).'?" onClick="return false;"><i class="fa fa-trash icon-white"></i></a>';
+            });
+
+        return Datatable::collection($accessories)
+        ->addColumn('name',function($accessories)
+            {
+                return link_to('admin/accessories/'.$accessories->id.'/view', $accessories->name);
+            })
+        ->addColumn('qty',function($accessories)
+            {
+                return $accessories->qty;
+            })
+        ->addColumn('numRemaining',function($accessories)
+            {
+                return $accessories->numRemaining();
+            })
+        ->addColumn($actions)
+        ->searchColumns('name','qty','numRemaining','actions')
+        ->orderColumns('name','qty','numRemaining','actions')
+        ->make();
+    }
+
+	public function getDataView($accessoryID)
+	{
+		$accessory = Accessory::find($accessoryID);
+        $accessory_users = $accessory->users;
+
+		$actions = new \Chumper\Datatable\Columns\FunctionColumn('actions',function($accessory_users){
+			return '<a href="'.route('checkin/accessory', $accessory_users->pivot->id).'" class="btn-flat info">Checkin</a>';
+		});
+
+		return Datatable::collection($accessory_users)
+		->addColumn('name',function($accessory_users)
+			{
+				return link_to('/admin/users/'.$accessory_users->id.'/view', $accessory_users->fullName());
+			})
+		->addColumn($actions)
+		->make();
+    }
 
 }

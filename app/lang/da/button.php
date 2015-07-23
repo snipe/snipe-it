@@ -3,8 +3,8 @@
 return array(
 
     'actions' 	=> 'Handlinger',
-    'add'    	=> 'Add New',
-    'cancel'    => 'Cancel',
+    'add'    	=> 'Tilføj Ny',
+    'cancel'    => 'Annuller',
     'delete'  	=> 'Slet',
     'edit'    	=> 'Rediger',
     'restore' 	=> 'Gendan',

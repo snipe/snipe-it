@@ -4,8 +4,8 @@ return array(
 
 
     'update' => array(
-        'error'   => 'An error has occurred while updating. ',
-        'success' => 'Settings updated successfully.'
+        'error'   => 'Si è verificato un errore durante l\'aggiornamento. ',
+        'success' => 'Impostazioni aggiornate correttamente.'
     ),
 
 );

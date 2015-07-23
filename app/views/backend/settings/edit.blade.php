@@ -1,14 +1,5 @@
 @extends('backend/layouts/default')
 
-<?php
-use DebugBar\StandardDebugBar;
-
-$debugbar = new StandardDebugBar();
-$debugbarRenderer = $debugbar->getJavascriptRenderer();
-
-$debugbar["messages"]->addMessage("hello world!");
-?>
-
 {{-- Page title --}}
 @section('title')
         @lang('admin/settings/general.update') ::
@@ -28,6 +19,7 @@ padding: 0px 20px;
 </style>
 
 <div id="pad-wrapper" class="user-profile">
+
                 <!-- header -->
 
                 <div class="pull-right">
@@ -39,25 +31,35 @@ padding: 0px 20px;
 
 
                 <div class="profile">
+
                     <!-- bio, new note & orders column -->
+
                     <div class="col-md-9 bio">
                         <div class="profile-box">
                             <br>
 
-							{{ Form::open(['method' => 'POST', 'files' => true, 'class' => 'form-horizontal', 'role' => 'form' ]) }}
+								{{ Form::open(['method' => 'POST', 'files' => true, 'class' => 'form-horizontal', 'role' => 'form' ]) }}
                                 <!-- CSRF Token -->
                                 {{ Form::hidden('_token', csrf_token()) }}
 
 
                                 @foreach ($settings as $setting)
 
+									<h4>@lang('admin/settings/general.general_settings')</h4>
+
                                     <div class="form-group {{ $errors->has('site_name') ? 'error' : '' }}">
 	                                    <div class="col-md-3">
                                         {{ Form::label('site_name', Lang::get('admin/settings/general.site_name')) }}
 	                                    </div>
 	                                    <div class="col-md-9">
-										{{ Form::text('site_name', Input::old('site_name', $setting->site_name), array('class' => 'form-control')) }}
-										{{ $errors->first('site_name', '<br><span class="alert-msg">:message</span>') }}
+		                                   @if (Config::get('app.lock_passwords')===true)
+		                                   		{{ Form::text('site_name', Input::old('site_name', $setting->site_name), array('class' => 'form-control', 'disabled'=>'disabled','placeholder' => 'Snipe-IT Asset Management')) }}
+		                                   @else
+		                                   		{{ Form::text('site_name', Input::old('site_name', $setting->site_name), array('class' => 'form-control','placeholder' => 'Snipe-IT Asset Management')) }}
+
+		                                   @endif
+
+										  {{ $errors->first('site_name', '<br><span class="alert-msg">:message</span>') }}
 	                                    </div>
                                     </div>
 
@@ -67,20 +69,26 @@ padding: 0px 20px;
 										 	{{ Form::label('logo', Lang::get('admin/settings/general.logo')) }}
 	                                    </div>
 	                                    <div class="col-md-9">
-						                    {{ Form::file('logo') }}
-						                    {{ $errors->first('logo', '<br><span class="alert-msg">:message</span>') }}
-						                    {{ Form::checkbox('clear_logo', '1', Input::old('clear_logo')) }} Remove
+
+                                            @if (Config::get('app.lock_passwords'))
+                                                <p class="help-block">@lang('general.lock_passwords')</p>
+                                            @else
+
+    						                    {{ Form::file('logo') }}
+    						                    {{ $errors->first('logo', '<br><span class="alert-msg">:message</span>') }}
+    						                    {{ Form::checkbox('clear_logo', '1', Input::old('clear_logo')) }} Remove
+                                            @endif
 	                                    </div>
 
 						            </div>
 
 
-						            <div class="form-group {{ $errors->has('site_name') ? 'error' : '' }}">
+						            <div class="form-group {{ $errors->has('alert_email') ? 'error' : '' }}">
 	                                    <div class="col-md-3">
                                         {{ Form::label('alert_email', Lang::get('admin/settings/general.alert_email')) }}
 	                                    </div>
 	                                    <div class="col-md-9">
-										{{ Form::text('alert_email', Input::old('alert_email', $setting->alert_email), array('class' => 'form-control')) }}
+										{{ Form::text('alert_email', Input::old('alert_email', $setting->alert_email), array('class' => 'form-control','placeholder' => 'admin@yourcompany.com')) }}
 
 
 										{{ Form::checkbox('alerts_enabled', '1', Input::old('alerts_enabled', $setting->alerts_enabled)) }}
@@ -108,33 +116,13 @@ padding: 0px 20px;
 											{{ Form::label('per_page', Lang::get('admin/settings/general.per_page')) }}
 										</div>
 	                                    <div class="col-md-9">
-										{{ Form::text('per_page', Input::old('per_page', $setting->per_page), array('class' => 'form-control', 'style'=>'width: 100px;')) }}
+										{{ Form::select('per_page', array('10'=>'10','25'=>'25','50'=>'50','75'=>'75','100'=>'100','125'=>'125','150'=>'150'), Input::old('per_page', $setting->per_page), array('class' => 'form-control', 'style'=>'width: 100px;')) }}
 										{{ $errors->first('per_page', '<br><span class="alert-msg">:message</span>') }}
 										</div>
                                     </div>
 
 
-                                    <div class="checkbox col-md-offset-3">
 
-										<label>
-											{{ Form::checkbox('display_asset_name', '1', Input::old('display_asset_name', $setting->display_asset_name)) }}
-											@lang('admin/settings/general.display_asset_name')
-										</label>
-                                    </div>
-
-                                     <div class="checkbox col-md-offset-3">
-										<label>
-											{{ Form::checkbox('display_eol', '1', Input::old('display_eol', $setting->display_eol)) }}
-											@lang('admin/settings/general.display_eol')
-										</label>
-                                    </div>
-
-                                     <div class="checkbox col-md-offset-3">
-										<label>
-											{{ Form::checkbox('display_checkout_date', '1', Input::old('display_checkout_date', $setting->display_checkout_date)) }}
-											@lang('admin/settings/general.display_checkout_date')
-										</label>
-                                    </div>
                                    <div class="checkbox col-md-offset-3">
 										<label>
 											{{ Form::checkbox('load_remote', '1', Input::old('load_remote', $setting->load_remote)) }}
@@ -142,7 +130,7 @@ padding: 0px 20px;
 										</label>
                                     </div>
                                     <hr>
-
+									<h4>@lang('admin/settings/general.asset_ids') (@lang('admin/settings/general.optional'))</h4>
                                     <div class="checkbox col-md-offset-3">
 										<label>
 											{{ Form::checkbox('auto_increment_assets', '1', Input::old('auto_increment_assets', $setting->auto_increment_assets)) }}
@@ -168,7 +156,7 @@ padding: 0px 20px;
 
 
 									<hr>
-
+									<h4>@lang('admin/settings/general.barcode_settings') (@lang('admin/settings/general.optional'))</h4>
                                     @if ($is_gd_installed)
 
                                     		<div class="checkbox col-md-offset-3 col-md-9" style="padding-bottom: 10px;">
@@ -199,10 +187,10 @@ padding: 0px 20px;
 										</div>
 	                                    <div class="col-md-9">
                                          @if ($setting->qr_code == 1)
-											{{ Form::text('qr_text', Input::old('qr_text', $setting->qr_text), array('class' => 'form-control')) }}
+											{{ Form::text('qr_text', Input::old('qr_text', $setting->qr_text), array('class' => 'form-control','placeholder' => 'Property of Your Company')) }}
 											{{ $errors->first('qr_text', '<br><span class="alert-msg">:message</span>') }}
 										@else
-											{{ Form::text('qr_text', Input::old('qr_text', $setting->qr_text), array('class' => 'form-control', 'disabled'=>'disabled')) }}
+											{{ Form::text('qr_text', Input::old('qr_text', $setting->qr_text), array('class' => 'form-control', 'disabled'=>'disabled','placeholder' => 'Property of Your Company')) }}
 											<p class="help-inline">
                                                 @lang('admin/settings/general.qr_help')
                                             </p>
@@ -222,12 +210,13 @@ padding: 0px 20px;
 
 
 									<hr>
+									<h4>@lang('admin/settings/general.eula_settings') (@lang('admin/settings/general.optional'))</h4>
 									<div class="form-group {{ $errors->has('default_eula_text') ? 'error' : '' }}">
 	                                    <div class="col-md-3">
                                         {{ Form::label('default_eula_text', Lang::get('admin/settings/general.default_eula_text')) }}
 	                                    </div>
 	                                    <div class="col-md-9">
-										{{ Form::textarea('default_eula_text', Input::old('default_eula_text', $setting->default_eula_text), array('class' => 'form-control')) }}
+										{{ Form::textarea('default_eula_text', Input::old('default_eula_text', $setting->default_eula_text), array('class' => 'form-control','placeholder' => 'Add your default EULA text')) }}
 										{{ $errors->first('default_eula_text', '<br><span class="alert-msg">:message</span>') }}
 
 										 <p class="help-inline">@lang('admin/settings/general.default_eula_help_text')</p>
@@ -238,6 +227,56 @@ padding: 0px 20px;
 
                                     </div>
 
+                                    <hr>
+                                    <h4>@lang('admin/settings/general.slack_integration') (@lang('admin/settings/general.optional'))</h4>
+                                    <p class="help-inline">@lang('admin/settings/general.slack_integration_help',array('slack_link' => 'https://my.slack.com/services/new/incoming-webhook'))</p>
+                                    <div class="form-group {{ $errors->has('slack_channel') ? 'error' : '' }}">
+	                                    <div class="col-md-3">
+                                        {{ Form::label('slack_endpoint', Lang::get('admin/settings/general.slack_endpoint')) }}
+	                                    </div>
+	                                    <div class="col-md-9">
+
+		                                    @if (Config::get('app.lock_passwords')===true)
+		                                     	{{ Form::text('slack_endpoint', Input::old('slack_endpoint', $setting->slack_endpoint), array('class' => 'form-control','disabled'=>'disabled','placeholder' => 'https://hooks.slack.com/services/XXXXXXXXXXXXXXXXXXXXX')) }}
+		                                   @else
+		                                   		{{ Form::text('slack_endpoint', Input::old('slack_endpoint', $setting->slack_endpoint), array('class' => 'form-control','placeholder' => 'https://hooks.slack.com/services/XXXXXXXXXXXXXXXXXXXXX')) }}
+		                                   @endif
+
+										{{ $errors->first('slack_endpoint', '<br><span class="alert-msg">:message</span>') }}
+	                                    </div>
+                                    </div>
+
+                                    <div class="form-group {{ $errors->has('slack_channel') ? 'error' : '' }}">
+	                                    <div class="col-md-3">
+                                        {{ Form::label('slack_channel', Lang::get('admin/settings/general.slack_channel')) }}
+	                                    </div>
+	                                    <div class="col-md-9">
+										@if (Config::get('app.lock_passwords')===true)
+		                                     	{{ Form::text('slack_channel', Input::old('slack_channel', $setting->slack_channel), array('class' => 'form-control','disabled'=>'disabled','placeholder' => '#IT-Ops')) }}
+		                                @else
+		                                   		{{ Form::text('slack_channel', Input::old('slack_channel', $setting->slack_channel), array('class' => 'form-control','placeholder' => '#IT-Ops')) }}
+		                                @endif
+		                                {{ $errors->first('slack_channel', '<br><span class="alert-msg">:message</span>') }}
+	                                    </div>
+                                    </div>
+
+                                    <div class="form-group {{ $errors->has('slack_botname') ? 'error' : '' }}">
+	                                    <div class="col-md-3">
+                                        {{ Form::label('slack_botname', Lang::get('admin/settings/general.slack_botname')) }}
+	                                    </div>
+	                                    <div class="col-md-9">
+										@if (Config::get('app.lock_passwords')===true)
+		                                     	{{ Form::text('slack_botname', Input::old('slack_botname', $setting->slack_botname), array('class' => 'form-control','disabled'=>'disabled','placeholder' => 'Snipe-IT Bot')) }}
+		                                @else
+		                                   		{{ Form::text('slack_botname', Input::old('slack_botname', $setting->slack_botname), array('class' => 'form-control','placeholder' => 'Snipe-IT Bot')) }}
+		                                @endif
+		                                {{ $errors->first('slack_botname', '<br><span class="alert-msg">:message</span>') }}
+	                                    </div>
+                                    </div>
+
+
+
+
                                 @endforeach
 
                                 <!-- Form actions -->
@@ -247,9 +286,10 @@ padding: 0px 20px;
                                             <button type="submit" class="btn-flat success"><i class="fa fa-check icon-white"></i> @lang('general.save')</button>
                                         </div>
                                 </div>
-                            </form>
 
+                          </form>
                         </div>
+
 </div>
 
                     <!-- side address column -->
@@ -259,4 +299,5 @@ padding: 0px 20px;
 
                     </div>
 
+</div>
 @stop

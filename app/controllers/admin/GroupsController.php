@@ -161,21 +161,27 @@ class GroupsController extends AdminController
             return Redirect::back()->withInput()->withErrors($validator);
         }
 
-        try {
-            // Update the group data
-            $group->name        = Input::get('name');
-            $group->permissions = Input::get('permissions');
+        if (!Config::get('app.lock_passwords')) {
 
-            // Was the group updated?
-            if ($group->save()) {
-                // Redirect to the group page
-                return Redirect::route('update/group', $id)->with('success', Lang::get('admin/groups/message.success.update'));
-            } else {
-                // Redirect to the group page
-                return Redirect::route('update/group', $id)->with('error', Lang::get('admin/groups/message.error.update'));
+                try {
+                // Update the group data
+                $group->name        = Input::get('name');
+                $group->permissions = Input::get('permissions');
+
+                // Was the group updated?
+                if ($group->save()) {
+                    // Redirect to the group page
+                    return Redirect::route('update/group', $id)->with('success', Lang::get('admin/groups/message.success.update'));
+                } else {
+                    // Redirect to the group page
+                    return Redirect::route('update/group', $id)->with('error', Lang::get('admin/groups/message.error.update'));
+                }
+            } catch (NameRequiredException $e) {
+                $error = Lang::get('admin/group/message.group_name_required');
             }
-        } catch (NameRequiredException $e) {
-            $error = Lang::get('admin/group/message.group_name_required');
+
+        } else {
+            return Redirect::route('update/group', $id)->withInput()->with('error', 'Denied! Editing groups is not allowed in the demo.');
         }
 
         // Redirect to the group page

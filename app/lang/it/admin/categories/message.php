@@ -2,23 +2,23 @@
 
 return array(
 
-    'does_not_exist' => 'Category does not exist.',
-    'assoc_users'	 => 'This category is currently associated with at least one model and cannot be deleted. Please update your models to no longer reference this category and try again. ',
+    'does_not_exist' => 'La categoria non esiste.',
+    'assoc_users'	 => 'Questa categoria è attualmente associata ad almeno un modello e non può essere eliminata. Si prega di aggiornare i modelli di riferimento riprovare. ',
 
     'create' => array(
-        'error'   => 'Category was not created, please try again.',
-        'success' => 'Category created successfully.'
+        'error'   => 'La categoria non è stata creata, si prega di riprovare.',
+        'success' => 'Categoria creata con successo.'
     ),
 
     'update' => array(
-        'error'   => 'Category was not updated, please try again',
-        'success' => 'Category updated successfully.'
+        'error'   => 'La categoria non è stata aggiornata, si prega di rirpovare',
+        'success' => 'Categoria aggiornata con successo.'
     ),
 
     'delete' => array(
-        'confirm'   => 'Are you sure you wish to delete this category?',
-        'error'   => 'There was an issue deleting the category. Please try again.',
-        'success' => 'The category was deleted successfully.'
+        'confirm'   => 'Sei sicuro di voler cancellare questa categoria?',
+        'error'   => 'Si è verificato un problema cercando di eliminare la categoria. Riprova.',
+        'success' => 'La categoria è stata eliminata con successo.'
     )
 
 );

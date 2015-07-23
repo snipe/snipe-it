@@ -3,7 +3,7 @@
 {{-- Page title --}}
 @section('title')
 @lang('admin/licenses/general.view')
-{{{ $license->name }}} ::
+ - {{{ $license->name }}}
 @parent
 @stop
 
@@ -31,9 +31,9 @@
 <div class="col-md-9 bio">
 
 @if ($license->serial)
-	<div class="col-md-12" style="padding-bottom: 10px; margin-left: 15px;">
+	<div class="col-md-12 col-sm-12" style="padding-bottom: 10px; margin-left: 15px; word-wrap: break-word;">
 	<strong>@lang('admin/licenses/form.serial'): </strong>
-	{{{ wordwrap($license->serial, 10, "\n", true) }}}
+	{{{ $license->serial }}}
 	</div>
 @endif
 
@@ -80,7 +80,7 @@
 		<strong>@lang('admin/hardware/form.fully_depreciated'): </strong>
         @if ($license->time_until_depreciated()->y > 0)
             {{{ $license->time_until_depreciated()->y }}}
-            @lang('admin/hardware/form.years'), 
+            @lang('admin/hardware/form.years'),
         @endif
 		{{{ $license->time_until_depreciated()->m }}}
 		@lang('admin/hardware/form.months')
@@ -134,8 +134,13 @@
                                 </td>
                                 <td>
                                     @if (($licensedto->assigned_to) || ($licensedto->asset_id))
-                                        <a href="{{ route('checkin/license', $licensedto->id) }}" class="btn btn-primary btn-sm">
-                                        @lang('general.checkin')</a>
+                                        @if ($license->reassignable)
+                                            <a href="{{ route('checkin/license', $licensedto->id) }}" class="btn btn-primary btn-sm">
+                                            @lang('general.checkin')
+                                            </a>
+                                        @else
+                                            <span>Assigned</span>
+                                        @endif
                                     @else
                                         <a href="{{ route('checkout/license', $licensedto->id) }}" class="btn btn-info btn-sm">
                                         @lang('general.checkout')</a>
@@ -216,7 +221,7 @@
       'files' => true, 'class' => 'form-horizontal' ]) }}
       <div class="modal-body">
 
-		<p>Allowed filetypes are png, gif, jpg, doc, docx, pdf, and txt.</p>
+		<p>@lang('admin/licenses/general.filetype_info')</p>
 
 		 <div class="form-group col-md-12">
 		 <div class="input-group col-md-12">
@@ -332,6 +337,10 @@
                     <li><strong>@lang('admin/licenses/form.seats'):</strong>
                     {{{ $license->seats }}} </li>
                     @endif
+
+                    <li><strong>@lang('admin/licenses/form.reassignable'):</strong>
+                                {{ $license->reassignable ? 'Yes' : 'No' }}
+                    </li>
 
                     @if ($license->notes)
                     	 <li><strong>@lang('admin/licenses/form.notes'):</strong>

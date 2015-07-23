@@ -32,16 +32,19 @@ class ChangePasswordController extends AuthorizedController
      */
     protected function postIndex()
     {
-        // Declare the rules for the form validation
+        
+
+		if (Config::get('app.lock_passwords')) {
+			return Redirect::route('change-password')->with('error',  Lang::get('admin/users/table.lock_passwords'));
+		} else {
+			
+		// Declare the rules for the form validation
         $rules = array(
             'old_password'     => 'required|min:6',
             'password'         => 'required|min:6',
             'password_confirm' => 'required|same:password',
         );
-
-		if (Config::get('app.lock_passwords')) {
-			return Redirect::route('change-password')->with('error',  Lang::get('admin/users/table.lock_passwords'));
-		} else {
+        
         // Create a new validator instance from our validation rules
         $validator = Validator::make(Input::all(), $rules);
 

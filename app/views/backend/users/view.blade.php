@@ -23,8 +23,17 @@
                     		({{{ $user->employee_num }}})
                         @endif</h3>
                     <span class="area">{{{ $user->jobtitle }}}
+                    
+                    
+                        <!-- groups table -->
+                        @if (count($user->groups) > 0)
 
-                        </span>
+                            @foreach ($user->groups as $group)
+                            <a href="{{ route('update/group', $group->id) }}" class="badge badge-default">{{{ $group->name }}}</a> 
+                            @endforeach
+
+                        @endif
+					 </span>
                 </div>
                 @if ($user->deleted_at != NULL)
                             <a href="{{ route('restore/user', $user->id) }}" class="btn-flat white large pull-right edit"><i class="fa fa-pencil"></i> Restore This User</a>
@@ -65,65 +74,36 @@
 
                         @endif
 
-                            <h6>@lang('general.groups')</h6>
-                            <!-- groups table -->
-                            @if (count($user->groups) > 0)
-                            <div class="table-responsive">
-                                <table class="display">
-                                    <thead>
-                                        <tr>
-                                            <th class="col-md-3">Name</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        @foreach ($user->groups as $group)
-                                        <tr>
-                                          <td><a href="{{ route('update/group', $group->id) }}">{{{ $group->name }}}</a></td>
-                                        </tr>
-                                        @endforeach
-                                    </tbody>
-                                </table>
-                            </div>
-                            @else
-
-                            <div class="col-md-12">
-                                <div class="alert alert-info alert-block">
-                                    <i class="fa fa-info-circle"></i>
-                                    @lang('general.no_results')
-                                </div>
-                            </div>
-                            @endif
-
-							<br><br><br>
                             <h6>@lang('admin/users/general.assets_user', array('name' => $user->first_name))</h6>
                             <br>
                             <!-- checked out assets table -->
                             @if (count($user->assets) > 0)
-                            <div class="table-responsive">
-							<table class="display">
-                                <thead>
-                                    <tr>
-                                        <th class="col-md-3">Asset Type</th>
-                                        <th class="col-md-2">Asset Tag</th>
-                                        <th class="col-md-2">Name</th>
-                                        <th class="col-md-1 hidden-print">Actions</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    @foreach ($user->assets as $asset)
-                                    <tr>
-                                        <td>
-                                        @if ($asset->physical=='1') {{{ $asset->model->name }}}
-                                        @endif
-                                        </td>
-                                        <td><a href="{{ route('view/hardware', $asset->id) }}">{{{ $asset->asset_tag }}}</a></td>
-                                        <td><a href="{{ route('view/hardware', $asset->id) }}">{{{ $asset->name }}}</a></td>
-
-                                        <td class="hidden-print"> <a href="{{ route('checkin/hardware', array('assetId'=> $asset->id, 'backto'=>'user')) }}" class="btn-flat info">Checkin</a></td>
-                                    </tr>
-                                    @endforeach
-                                </tbody>
-                            </table>
+	                            <div class="table-responsive">
+									<table class="display table table-hover">
+		                                <thead>
+		                                    <tr>
+		                                        <th class="col-md-3">Asset Type</th>
+		                                        <th class="col-md-2">Asset Tag</th>
+		                                        <th class="col-md-2">Name</th>
+		                                        <th class="col-md-1 hidden-print">Actions</th>
+		                                    </tr>
+		                                </thead>
+		                                <tbody>
+		                                    @foreach ($user->assets as $asset)
+		                                    <tr>
+		                                        <td>
+		                                        @if ($asset->physical=='1') {{{ $asset->model->name }}}
+		                                        @endif
+		                                        </td>
+		                                        <td><a href="{{ route('view/hardware', $asset->id) }}">{{{ $asset->asset_tag }}}</a></td>
+		                                        <td><a href="{{ route('view/hardware', $asset->id) }}">{{{ $asset->name }}}</a></td>
+		
+		                                        <td class="hidden-print"> <a href="{{ route('checkin/hardware', array('assetId'=> $asset->id, 'backto'=>'user')) }}" class="btn-flat info">Checkin</a></td>
+		                                    </tr>
+		                                    @endforeach
+		                                </tbody>
+		                            </table>
+	                            </div>
                             @else
 
                             <div class="col-md-12">
@@ -134,13 +114,13 @@
                             </div>
                             @endif
 
-							<br><br><br>
+							<br>
                             <h6>@lang('admin/users/general.software_user', array('name' => $user->first_name))</h6>
                             <br>
                             <!-- checked out licenses table -->
                             @if (count($user->licenses) > 0)
                             <div class="table-responsive">
-							<table class="display">
+							<table class="display table table-hover">
                                 <thead>
                                     <tr>
                                         <th class="col-md-5">Name</th>
@@ -160,7 +140,6 @@
                                 </tbody>
                             </table>
                             </div>
-                            </div>
                             @else
 
                             <div class="col-md-12">
@@ -174,13 +153,13 @@
 
 
 
-                            <br><br><br>
+                            <br>
                             <h6>@lang('general.accessories')</h6>
                             <br>
                             <!-- checked out licenses table -->
                             @if (count($user->accessories) > 0)
                             <div class="table-responsive">
-							<table class="display">
+							<table class="display table table-hover">
                                 <thead>
                                     <tr>
                                         <th class="col-md-5">Name</th>
@@ -198,7 +177,6 @@
                                 </tbody>
                             </table>
                             </div>
-                            </div>
                             @else
 
                             <div class="col-md-12">
@@ -211,11 +189,12 @@
 
 
 
-
+							<br>
                             <h6>@lang('admin/users/general.history_user', array('name' => $user->first_name))</h6>
                             <br>
                             <!-- checked out assets table -->
                             @if (count($user->userlog) > 0)
+                            <div class="table-responsive">
                             <table class="table table-hover">
                                 <thead>
                                     <tr>
@@ -247,6 +226,7 @@
                                     @endforeach
                                 </tbody>
                             </table>
+                            </div>
                             @else
 
 
@@ -257,46 +237,51 @@
                                 </div>
                             </div>
                             @endif
-
-
-
                         </div>
-		</div>
+                    </div>
+	
 
                     <!-- side address column -->
                     <div class="col-md-3 address pull-right hidden-print">
-
-
-
+	                    
+	                    
                         <h6> @lang('admin/users/general.contact_user', array('name' => $user->first_name)) </h6>
 
-
                         @if ($user->location_id)
-                        	<div class="col-md-12">
-                            <iframe width="300" height="133" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.com/maps?&amp;q={{{ $user->userloc->address }}},{{{ $user->userloc->city }}},{{{ $user->userloc->state }}},{{{ $user->userloc->country }}}&amp;output=embed" style="float: none;"></iframe>
-                            </div>
+	                        <div class="col-md-12">
+	                            <iframe width="300" height="133" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.com/maps?&amp;q={{{ $user->userloc->address }}},{{{ $user->userloc->city }}},{{{ strtoupper($user->userloc->state) }}},{{{ strtoupper($user->userloc->country) }}}&amp;output=embed" style="float: none;"></iframe>
+	                         </div>
                         @endif
                         <ul>
+                        @if ($user->phone)
+                            <li><i class="fa fa-phone"></i>{{{ $user->phone }}}</li>
+                        @endif
+                            <li><i class="fa fa-envelope-o"></i><a href="mailto:{{{ $user->email }}}">{{{ $user->email }}}</a><br /><br /></li>
                         @if ($user->manager)
                             <li><strong> @lang('admin/users/table.manager'):</strong><br>
                             {{{ $user->manager->fullName() }}}</li>
                         @endif
-
                         @if ($user->location_id)
                             <li>{{{ $user->userloc->address }}} {{{ $user->userloc->address2 }}}</li>
-                            <li>{{{ $user->userloc->city }}}, {{{ $user->userloc->state }}} {{{ $user->userloc->zip }}}<br /><br /></li>
+                            <li>{{{ $user->userloc->city }}}, {{{ $user->userloc->state }}} {{{ $user->userloc->zip }}}</li>
                         @endif
-                        @if ($user->phone)
-                            <li><i class="fa fa-phone"></i>{{{ $user->phone }}}</li>
-                        @endif
-                            <li><i class="fa fa-envelope-o"></i><a href="mailto:{{{ $user->email }}}">{{{ $user->email }}}</a></li>
                         </ul>
+
+                        @if ($user->notes!='')
+                        <ul>
+                            <li><strong> @lang('admin/users/table.notes'):</strong><br>
+                            {{{ $user->notes }}}</li>
+                        </ul>
+                        @endif
+                                               
 
                         @if ($user->last_login!='')
                         <br /><h6>@lang('admin/users/general.last_login')
                         {{{ $user->last_login->diffForHumans() }}}</h6>
                         @endif
-                    </div>
+                        
+                    	
 
+                    </div>
 
 @stop

@@ -124,7 +124,7 @@
             <div class="col-md-12" style="padding-bottom: 5px;"><strong>@lang('admin/hardware/form.fully_depreciated'): </strong>
              @if ($asset->time_until_depreciated()->y > 0)
                 {{{ $asset->time_until_depreciated()->y }}}
-                @lang('admin/hardware/form.years'), 
+                @lang('admin/hardware/form.years'),
              @endif
            {{{ $asset->time_until_depreciated()->m }}}
             @lang('admin/hardware/form.months')
@@ -168,6 +168,7 @@
 			<thead>
 				<tr>
 					<th class="col-md-4"><span class="line"></span>@lang('general.name')</th>
+					<th class="col-md-4"><span class="line"></span>@lang('admin/licenses/form.serial')</th>
 					<th class="col-md-1"><span class="line"></span>@lang('table.actions')</th>
 				</tr>
 			</thead>
@@ -175,6 +176,7 @@
 				@foreach ($asset->licenseseats as $seat)
 				<tr>
 					<td><a href="{{ route('view/license', $seat->license->id) }}">{{{ $seat->license->name }}}</a></td>
+					<td>{{{ $seat->license->serial }}}</td>
 					<td><a href="{{ route('checkin/license', $seat->id) }}" class="btn-flat info">@lang('general.checkin')</a>
 					</td>
 				</tr>
@@ -190,8 +192,8 @@
 			</div>
 		</div>
 		@endif
-		
-		
+
+
 		<div class="col-md-12">
 
 
@@ -260,7 +262,7 @@
             <tbody>
             @if (count($asset->assetlog) > 0)
                 @foreach ($asset->assetlog as $log)
-                 
+
                 <tr>
                     <td>{{{ $log->created_at }}}</td>
                     <td>
@@ -287,7 +289,7 @@
                         @endif
                     </td>
                 </tr>
-       
+
                 @endforeach
                 @endif
                 <tr>
@@ -331,8 +333,8 @@
                 </li>
             </ul>
             @endif
-			
-			
+
+
             @if (($asset->assigneduser) && ($asset->assigned_to > 0) && ($asset->deleted_at==''))
                 <h6><br>@lang('admin/hardware/form.checkedout_to')</h6>
                 <ul>
@@ -369,11 +371,16 @@
 			<!-- Status Info -->
 
                 @if ($asset->assetstatus)
-                    <h6><br>{{{ $asset->assetstatus->name }}}
-                    @lang('admin/hardware/general.asset')</h6>
-
+                    <h6><br>
+                     	@if (($asset->assetstatus->deployable=='1') && ($asset->assigned_to > 0))
+                            @lang('admin/hardware/general.asset')
+                            @lang('general.deployed')
+                        @else
+                            {{{ $asset->assetstatus->name }}}
+                            @lang('admin/hardware/general.asset')
+                        @endif
                     <ul>
-	                    
+
                     	 @if (($asset->assetstatus->deployable=='1') && ($asset->assigned_to > 0) && ($asset->deleted_at==''))
                     	<li><br /><a href="{{ route('checkin/hardware', $asset->id) }}" class="btn btn-primary btn-sm">@lang('admin/hardware/general.checkin')</a></li>
                     	@elseif ((($asset->assetstatus->deployable=='1') &&  (($asset->assigned_to=='') || ($asset->assigned_to==0))) && ($asset->deleted_at==''))
@@ -385,7 +392,7 @@
                     	@endif
                     </ul>
 
-					@if ($asset->assetstatus->notes)
+					@if (($asset->assetstatus->notes) && ($asset->assigned_to==''))
                     <div class="col-md-12">
 						<div class="alert alert-info alert-block">
 							<i class="fa fa-info-circle"></i>
@@ -416,7 +423,7 @@
       'files' => true, 'class' => 'form-horizontal' ]) }}
       <div class="modal-body">
 
-		<p>Allowed filetypes are png, gif, jpg, doc, docx, pdf, and txt.</p>
+		<p><p>@lang('admin/hardware/general.filetype_info')</p>.</p>
 
 		 <div class="form-group col-md-12">
 		 <div class="input-group col-md-12">

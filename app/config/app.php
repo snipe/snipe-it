@@ -102,6 +102,7 @@ return array(
         'Cartalyst\Sentry\SentryServiceProvider',
         'Chumper\Datatable\DatatableServiceProvider',
         'Dinesh\Barcode\BarcodeServiceProvider',
+        'Maknz\Slack\SlackServiceProvider',
 
     ),
 
@@ -175,6 +176,7 @@ return array(
             'Reader'				=> 'League\Csv\Reader',
             'DNS1D'                 => 'Dinesh\Barcode\Facades\DNS1DFacade',
             'DNS2D'                 => 'Dinesh\Barcode\Facades\DNS2DFacade',
+            'Slack' 				=> 'Maknz\Slack\Facades\Slack',
 
     ),
 

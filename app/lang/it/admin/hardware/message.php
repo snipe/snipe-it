@@ -2,56 +2,56 @@
 
 return array(
 
-    'undeployable' 		=> '<strong>Warning: </strong> This asset has been marked as currently undeployable.
-                        If this status has changed, please update the asset status.',
-    'does_not_exist' 	=> 'Asset does not exist.',
-    'assoc_users'	 	=> 'This asset is currently checked out to a user and cannot be deleted. Please check the asset in first, and then try deleting again. ',
+    'undeployable' 		=> '<strong>Attenzione: </strong> Questo asset è stato marcato come non distribuibile.
+                       Se lo stato è cambiato,aggiorna lo stato dell\'asset.',
+    'does_not_exist' 	=> 'Questo Asset non esiste.',
+    'assoc_users'	 	=> 'Questo asset è stato assegnato ad un Utente e non può essere cancellato. Per favore Riassegnalo in magazzino,e dopo riprova a cancellarlo.',
 
     'create' => array(
-        'error'   		=> 'Asset was not created, please try again. :(',
-        'success' 		=> 'Asset created successfully. :)'
+        'error'   		=> 'L\'asset non è stato creato, riprova per favore. :(',
+        'success' 		=> 'L\'asset è stato creato con successo. :)'
     ),
 
     'update' => array(
-        'error'   			=> 'Asset was not updated, please try again',
-        'success' 			=> 'Asset updated successfully.',
-        'nothing_updated'	=>  'No fields were selected, so nothing was updated.',
+        'error'   			=> 'Il bene non è stato aggiornato, si prega di riprovare',
+        'success' 			=> 'Bene aggiornato con successo.',
+        'nothing_updated'	=>  'Non è stato selezionato nessun campo, nulla è stato aggiornato.',
     ),
 
     'restore' => array(
-        'error'   		=> 'Asset was not restored, please try again',
-        'success' 		=> 'Asset restored successfully.'
+        'error'   		=> 'Il bene non è stato ripristinato, riprova',
+        'success' 		=> 'Bene ripristinato con successo.'
     ),
     
     'deletefile' => array(
-        'error'   => 'File not deleted. Please try again.',
-        'success' => 'File successfully deleted.',
+        'error'   => 'File non cancellato. Riprova.',
+        'success' => 'File cancellato con successo.',
     ),
 
     'upload' => array(
-        'error'   => 'File(s) not uploaded. Please try again.',
-        'success' => 'File(s) successfully uploaded.',
-        'nofiles' => 'You did not select any files for upload',
-        'invalidfiles' => 'One or more of your files is too large or is a filetype that is not allowed. Allowed filetypes are png, gif, jpg, doc, docx, pdf, and txt.',
+        'error'   => 'File non caricato/i. Riprova.',
+        'success' => 'File caricato/i con successo.',
+        'nofiles' => 'Non hai selezionato i file per il caricamento',
+        'invalidfiles' => 'Uno o più file è troppo grande o è un tipo di file non consentito. Tipi di file ammessi sono png, gif, jpg, doc, docx, pdf, txt.',
     ),
 
 
     'delete' => array(
-        'confirm'   	=> 'Are you sure you wish to delete this asset?',
-        'error'   		=> 'There was an issue deleting the asset. Please try again.',
-        'success' 		=> 'The asset was deleted successfully.'
+        'confirm'   	=> 'Sei sicuro di voler eliminare questo bene?',
+        'error'   		=> 'C\'è stato un problema durante la cancellazione del bene. Riprova per favore.',
+        'success' 		=> 'Il bene è stato eliminato con successo.'
     ),
 
     'checkout' => array(
-        'error'   		=> 'Asset was not checked out, please try again',
-        'success' 		=> 'Asset checked out successfully.',
-        'user_does_not_exist' => 'That user is invalid. Please try again.'
+        'error'   		=> 'Il bene non è stato estratto, per favore riprova',
+        'success' 		=> 'Il bene è stato estratto con successo.',
+        'user_does_not_exist' => 'Questo utente non è valido. Riprova.'
     ),
 
     'checkin' => array(
-        'error'   		=> 'Asset was not checked in, please try again',
-        'success' 		=> 'Asset checked in successfully.',
-        'user_does_not_exist' => 'That user is invalid. Please try again.'
+        'error'   		=> 'Il bene non è stato registrato, per favore riprova',
+        'success' 		=> 'Il bene è stato registrato con successo.',
+        'user_does_not_exist' => 'Questo utente non è valido. Riprova.'
     )
 
 );

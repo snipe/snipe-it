@@ -31,7 +31,7 @@ class AppCommand extends Command
         'email'      => null,
         'password'   => null
     );
-	
+
 	protected $dummyData = true;
 
     /**
@@ -103,7 +103,7 @@ class AppCommand extends Command
 			$this->call('db:seed', array('--force'=>true));
 		}
 		else
-		{	
+		{
 			// Seeding Settings table is mandatory
 			$this->call('db:seed', array('--class' => 'SettingsSeeder', '--force'=>true));
 			// Seeding Statuslabels is strongly recommended
@@ -207,7 +207,7 @@ class AppCommand extends Command
             $this->userData['password'] = $password;
         } while( ! $password);
     }
-	
+
 	/**
 	 * Asks the user to create dummy data
 	 *
@@ -217,7 +217,7 @@ class AppCommand extends Command
 	protected function askUserDummyData()
 	{
 		// Ask the user to input the user password
-		$dummydata = $this->ask('Do you want to seed your database with dummy data? (deafult is yes): ');
+		$dummydata = $this->ask('Do you want to seed your database with dummy data? y/n (default is yes): ');
 
 		$this->dummyData = ( strstr($dummydata, 'y' ) || empty($dummydata) ) ? true : false;
 	}
@@ -318,6 +318,7 @@ class AppCommand extends Command
         $data = array_merge($this->userData, array(
             'activated'   => 1,
             'manager_id'  => NULL,
+            'notes'  => 'Generated on install',
             'permissions' => array(
                 'admin' => 1,
                 'user'  => 1,
@@ -349,7 +350,8 @@ class AppCommand extends Command
             'first_name' => 'John',
             'last_name'  => 'Doe',
             'email'      => 'john.doe@example.com',
-            'password'   => 'johndoe',
+            'password'   => substr(str_shuffle(str_repeat('0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ', mt_rand(1,10))),1,10),
+            'notes'      => 'Generated on install',
             'activated'  => 1,
             'manager_id'  => 1,
         );

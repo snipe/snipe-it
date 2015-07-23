@@ -3,13 +3,13 @@
 
 return array(
 
-    'assets_user'  		=> 'Assets assigned to :name',
-    'clone'  			=> 'Clone User',
-    'contact_user'  	=> 'Contact :name',
-    'edit'  			=> 'Edit User',
-    'history_user'  	=> 'History for :name',
-    'last_login'  		=> 'Last Login',
-    'software_user'  	=> 'Software Checked out to :name',
-    'view_user'  		=> 'View User :name',
+    'assets_user'  		=> 'Bene assegnato a :name',
+    'clone'  			=> 'Clona Utente',
+    'contact_user'  	=> 'Contatta :name',
+    'edit'  			=> 'Modifica Utente',
+    'history_user'  	=> 'Storico di :name',
+    'last_login'  		=> 'Ultimo accesso',
+    'software_user'  	=> 'Software estratto a :name',
+    'view_user'  		=> 'Visualizza Utente :name',
     'usercsv'			=> 'CSV file',
     );

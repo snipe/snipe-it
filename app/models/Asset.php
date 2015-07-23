@@ -10,6 +10,7 @@ class Asset extends Depreciable
     protected $rules = array(
         'name'   			=> 'alpha_space|min:2|max:255',
         'model_id'   		=> 'required',
+		'status_id'   		=> 'required',
         'warranty_months'   => 'integer|min:0|max:240',
         'note'   			=> 'alpha_space',
         'notes'   			=> 'alpha_space',
@@ -17,8 +18,7 @@ class Asset extends Depreciable
         'checkout_date' 	=> 'date|max:10|min:10',
         'checkin_date' 		=> 'date|max:10|min:10',
         'supplier_id' 		=> 'integer',
-        'asset_tag'   => 'required|alpha_space|min:3|max:255|unique:assets,asset_tag,{id}',
-        //'serial'   			=> 'required|alpha_dash|min:3|max:255|unique:assets,serial,{id}',
+        'asset_tag'   		=> 'required|alpha_space|min:3|max:255|unique:assets,asset_tag,{id}',
         'status' 			=> 'integer'
         );
 
@@ -59,11 +59,11 @@ class Asset extends Depreciable
 
 
     /**
-    * Get the asset's location based on the assigned user
+    * Get the asset's location based on default RTD location
     **/
     public function defaultLoc()
     {
-        return $this->hasOne('Location', 'id', 'rtd_location_id');
+        return $this->belongsTo('Location', 'rtd_location_id');
     }
 
 
@@ -121,6 +121,17 @@ class Asset extends Depreciable
         return $this->belongsTo('Statuslabel','status_id');
     }
 
+	/**
+	* Get name for EULA
+	**/
+	public function showAssetName()
+    {
+	    if ($this->name=='') {
+		    return $this->model->name;
+	    } else {
+		    return $this->name;
+	    }
+    }
 
      public function warrantee_expires()
     {
@@ -166,6 +177,7 @@ class Asset extends Depreciable
         return $this->belongsTo('Supplier','supplier_id');
     }
 
+
     public function months_until_eol()
     {
             $today = date("Y-m-d");
@@ -183,9 +195,12 @@ class Asset extends Depreciable
 
     public function eol_date()
     {
-            $date = date_create($this->purchase_date);
-            date_add($date, date_interval_create_from_date_string($this->model->eol.' months'));
-            return date_format($date, 'Y-m-d');
+	    	if (($this->purchase_date) && ($this->model)) {
+		    	$date = date_create($this->purchase_date);
+				date_add($date, date_interval_create_from_date_string($this->model->eol.' months'));
+				return date_format($date, 'Y-m-d');
+	    	}
+
     }
 
 
@@ -216,7 +231,7 @@ class Asset extends Depreciable
 
 	    if ($this->model->category->eula_text) {
 		    return $Parsedown->text(e($this->model->category->eula_text));
-	    } elseif (Setting::getSettings()->default_eula_text) {
+	    } elseif ($this->model->category->use_default_eula == '1') {
 		    return $Parsedown->text(e(Setting::getSettings()->default_eula_text));
 	    } else {
 		    return null;

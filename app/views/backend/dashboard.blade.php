@@ -28,7 +28,7 @@
         <br>
     </div>
     <div class="col-md-9 chart">
-        <h5>Recent Activity</h5>
+        <h5>@lang('general.recent_activity')</h5>
         
         <table class="table table-hover table-fixed break-word">
 			<thead>
@@ -48,18 +48,18 @@
 			       <td>{{{ $activity->adminlog->fullName() }}}</td> 
 			       
 			       <td>
-			           	@if ($activity->asset_type=="hardware") 
-			           		{{{ $activity->assetlog->name }}}
-			           	@elseif ($activity->asset_type=="software")
-			           		@if ($activity->licenselog)
-			           		{{{ $activity->licenselog->name }}}
-			           		@endif
-			           	@elseif ($activity->asset_type=="accessory") 
-			           		{{{ $activity->accessorylog->name }}}
-			           	@endif
+			           	@if (($activity->assetlog) && ($activity->asset_type=="hardware"))
+			            	{{ $activity->assetlog->showAssetName() }}
+			            @elseif (($activity->licenselog) && ($activity->asset_type=="software"))
+			            	{{ $activity->licenselog->name }}
+			            @elseif (($activity->asset_type) && ($activity->asset_type=="accessory"))
+			            	{{ $activity->accessorylog->name }}
+			            @endif
 			           	
 			           	</td> 
-			       <td>{{{ $activity->action_type }}}</td> 
+			       <td>  
+				       {{ strtolower(Lang::get('general.'.str_replace(' ','_',$activity->action_type))) }}
+			       </td> 
 			       <td>
 			           @if ($activity->userlog) 
 			           		{{{ $activity->userlog->fullName() }}}
@@ -77,7 +77,7 @@
 
     </div>
     <div class="col-md-3 chart">
-        <h5>Asset Status</h5>
+        <h5>@lang('general.asset') @lang('general.status')</h5>
         <div id="hero-assets" style="height: 250px;"></div>    
     </div>
 
@@ -95,11 +95,11 @@
         Morris.Donut({
             element: 'hero-assets',
             data: [
-	            {label: 'Ready to Deploy', value: {{ $asset_stats['rtd']['percent'] }} },
-                {label: 'Deployed', value: {{ $asset_stats['deployed']['percent'] }} },              
-                {label: 'Pending', value: {{ $asset_stats['pending']['percent'] }} },
-                {label: 'Undeployable', value: {{ $asset_stats['undeployable']['percent'] }} },
-                {label: 'Archived', value: {{ $asset_stats['archived']['percent'] }} },
+	            {label: '@lang('general.ready_to_deploy')', value: {{ $asset_stats['rtd']['percent'] }} },
+                {label: '@lang('general.deployed')', value: {{ $asset_stats['deployed']['percent'] }} },              
+                {label: '@lang('general.pending')', value: {{ $asset_stats['pending']['percent'] }} },
+                {label: '@lang('general.undeployable')', value: {{ $asset_stats['undeployable']['percent'] }} },
+                {label: '@lang('general.archived')', value: {{ $asset_stats['archived']['percent'] }} },
             ],
             colors: ["#30a1ec", "#76bdee", "#c4dafe"],
             formatter: function (y) { return y + "%" }

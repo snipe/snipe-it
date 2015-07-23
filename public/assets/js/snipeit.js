@@ -129,7 +129,7 @@
 
     // confirm delete modal
     Components.modals.confirmDelete = function() {
-        var $el = $('#example');
+        var $el = $('table');
 
         var events = {
             'click': function(evnt) {
@@ -145,6 +145,7 @@
                 $dataConfirmModal.modal({
                     show: true
                 });
+                return false;
             }
         };
 

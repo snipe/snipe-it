@@ -194,7 +194,14 @@
                 </div>
             </div>
             
-
+	<!-- Notes -->
+            <div class="form-group {{ $errors->has('notes') ? ' has-error' : '' }}">
+                <label for="notes" class="col-md-3 control-label">@lang('admin/users/table.notes')</label>
+                <div class="col-md-7">
+                    <textarea class="form-control" id="notes" name="notes">{{{ Input::old('notes', $user->notes) }}}</textarea>
+                    {{ $errors->first('notes', '<br><span class="alert-msg"><i class="fa fa-times"></i> :message</span>') }}
+                </div>
+            </div>
 
             <!-- Groups -->
             <div class="form-group {{ $errors->has('groups') ? 'has-error' : '' }}">

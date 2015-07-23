@@ -16,9 +16,9 @@ return array(
     ),
 
     'delete' => array(
-        'confirm'   => 'Tem certeza que deseja deletar esta categoria?',
-        'error'   => 'Houve um problema ao deletar a categoria. Tente novamente.',
-        'success' => 'A categoria foi deletada com sucesso.'
+        'confirm'   => 'Tem certeza de que deseja excluir esta categoria?',
+        'error'   => 'Houve um problema ao excluir a categoria. Tente novamente.',
+        'success' => 'A categoria foi excluída com sucesso.'
     ),
     
      'checkout' => array(

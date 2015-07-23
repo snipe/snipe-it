@@ -28,7 +28,7 @@ return array(
     |
     */
 
-    'host' => 'smtp.mailgun.org',
+    'host' => 'smtp.mandrillapp.com',
 
     /*
     |--------------------------------------------------------------------------

@@ -11,6 +11,7 @@ use Str;
 use Validator;
 use View;
 use Image;
+use Config;
 
 class SettingsController extends AdminController
 {
@@ -63,13 +64,21 @@ class SettingsController extends AdminController
 
 
         // Declare the rules for the form validation
+
         $rules = array(
-        "site_name" 	=> 'required|min:3',
-        "per_page"   	=> 'required|min:1|numeric',
-        "qr_text"		=> 'min:1|max:31',
-        "logo"   		=> 'mimes:jpeg,bmp,png,gif',
-        "alert_email"   => 'email',
-        );
+	        "per_page"   	=> 'required|min:1|numeric',
+	        "qr_text"		=> 'min:1|max:31',
+	        "logo"   		=> 'mimes:jpeg,bmp,png,gif',
+	        "alert_email"   => 'email',
+	        "slack_endpoint"   => 'url',
+	        "slack_channel"   => 'regex:/(?<!\w)#\w+/',
+	        "slack_botname"   => 'alpha_dash',
+	        );
+
+        if (Config::get('app.lock_passwords')==false) {
+	        $rules['site_name'] = 'required|min:3';
+
+	    }
 
         // Create a new validator instance from our validation rules
         $validator = Validator::make(Input::all(), $rules);
@@ -84,6 +93,7 @@ class SettingsController extends AdminController
         if (Input::get('clear_logo')=='1') {
 	        $setting->logo = NULL;
         } elseif (Input::file('logo')) {
+            if (!Config::get('app.lock_passwords')) {
                 $image = Input::file('logo');
                 $file_name = "logo.".$image->getClientOriginalExtension();
                 $path = public_path('uploads/'.$file_name);
@@ -92,18 +102,20 @@ class SettingsController extends AdminController
                     $constraint->upsize();
                 })->save($path);
                 $setting->logo = $file_name;
+            }
         }
 
 
         // Update the asset data
             $setting->id = '1';
-            $setting->site_name = e(Input::get('site_name'));
-            $setting->display_asset_name = e(Input::get('display_asset_name', '0'));
-            $setting->display_checkout_date = e(Input::get('display_checkout_date', '0'));
+
+             if (Config::get('app.lock_passwords')==false) {
+	             $setting->site_name = e(Input::get('site_name'));
+             }
+
             $setting->per_page = e(Input::get('per_page'));
             $setting->qr_code = e(Input::get('qr_code', '0'));
             $setting->barcode_type = e(Input::get('barcode_type'));
-            $setting->display_eol = e(Input::get('display_eol', '0'));
             $setting->load_remote = e(Input::get('load_remote', '0'));
             $setting->qr_text = e(Input::get('qr_text'));
             $setting->auto_increment_prefix = e(Input::get('auto_increment_prefix'));
@@ -112,6 +124,9 @@ class SettingsController extends AdminController
             $setting->alerts_enabled = e(Input::get('alerts_enabled', '0'));
             $setting->header_color = e(Input::get('header_color'));
             $setting->default_eula_text = e(Input::get('default_eula_text'));
+            $setting->slack_endpoint = e(Input::get('slack_endpoint'));
+            $setting->slack_channel = e(Input::get('slack_channel'));
+            $setting->slack_botname = e(Input::get('slack_botname'));
 
 
             // Was the asset updated?

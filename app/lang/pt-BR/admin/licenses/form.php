@@ -2,7 +2,7 @@
 
 return array(
 
-    'asset'             => 'Bem',
+    'asset'             => 'Ativo',
     'checkin'           => 'Registrar',
     'cost'              => 'Custo da Compra',
     'create'            => 'Criar Licença',

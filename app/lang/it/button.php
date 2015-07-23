@@ -2,13 +2,13 @@
 
 return array(
 
-    'actions' 	=> 'Actions',
-    'add'    	=> 'Add New',
-    'cancel'    => 'Cancel',
-    'delete'  	=> 'Delete',
-    'edit'    	=> 'Edit',
-    'restore' 	=> 'Restore',
-    'submit'  	=> 'Submit',
-    'upload'    => 'Upload',
+    'actions' 	=> 'Azioni',
+    'add'    	=> 'Aggiungi Nuovo',
+    'cancel'    => 'Annulla',
+    'delete'  	=> 'Cancella',
+    'edit'    	=> 'Modifica',
+    'restore' 	=> 'Ripristina',
+    'submit'  	=> 'Invia',
+    'upload'    => 'Carica / Upload',
 
 );

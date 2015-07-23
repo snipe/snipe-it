@@ -33,8 +33,12 @@ Locations ::
         @foreach ($locations as $location)
         <tr>
             <td>{{{ $location->name }}}</td>
-            <td>{{{ $location->address }}}, {{{ $location->address2 }}}  </td>
-            <td>{{{ $location->city }}}, {{{ $location->state }}}  {{{ $location->country }}}  </td>
+            <td>{{{ $location->address }}}
+            	@if($location->address2 != '')
+            		, {{{ $location->address2 }}}
+            	@endif
+            </td>
+            <td>{{{ $location->city }}}, {{{ strtoupper($location->state) }}}  {{{ strtoupper($location->country) }}}  </td>
             <td>
                 <a href="{{ route('update/location', $location->id) }}" class="btn btn-warning btn-sm"><i class="fa fa-pencil icon-white"></i></a>
                 <a data-html="false" class="btn delete-asset btn-danger btn-sm" data-toggle="modal" href="{{ route('delete/location', $location->id) }}" data-content="@lang('admin/locations/message.delete.confirm')"

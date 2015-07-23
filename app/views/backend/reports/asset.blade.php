@@ -41,7 +41,6 @@
             <th class="col-sm-1">@lang('admin/hardware/form.supplier')</th>
             <th class="col-sm-1">@lang('admin/hardware/table.checkoutto')</th>
             <th class="col-sm-1">@lang('admin/hardware/table.location')</th>
-            <th class="col-sm-1">@lang('general.status')</th>
         </tr>
     </thead>
     <tbody>
@@ -99,20 +98,10 @@
             <td>
             @if (($asset->assigned_to > 0) && ($asset->assigneduser->location_id > 0))
                 {{{ $asset->assigneduser->userLoc->name }}}
-            @elseif ($asset->rtd_location_id)
+            @elseif ($asset->defaultLoc)
                 {{{ $asset->defaultLoc->name }}}
             @endif
             </td>
-            <td>
-                @if (($asset->status_id == '0') && ($asset->assigned_to == '0'))
-                    @lang('general.ready_to_deploy')
-                @elseif (($asset->status_id == '') && ($asset->assigned_to == '0'))
-                    @lang('general.pending')
-                @elseif ($asset->assetstatus)
-                    {{{ $asset->assetstatus->name }}}
-                @endif
-            </td>
-
         </tr>
         @endforeach
     </tbody>
