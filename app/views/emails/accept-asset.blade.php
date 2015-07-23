@@ -33,6 +33,14 @@
 	</tr>
 	<tr>
 		<td style="background-color:#ccc">
+			Expected Checkin Date:
+		</td>
+		<td>
+			<strong>{{{ $expected_checkin }}}</strong>
+		</td>
+	</tr>
+	<tr>
+		<td style="background-color:#ccc">
 			Additional Notes:
 		</td>
 		<td>
