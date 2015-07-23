@@ -322,6 +322,10 @@ class AccessoriesController extends AdminController
             $data['eula'] = $accessory->getEula();
             $data['first_name'] = $user->first_name;
             $data['item_name'] = $accessory->name;
+            $data['checkout_date'] = $logaction->created_at;
+            $data['item_tag'] = '';
+            $data['expected_checkin'] = '';
+            $data['note'] = $logaction->note;
             $data['require_acceptance'] = $accessory->requireAcceptance();
 
 
