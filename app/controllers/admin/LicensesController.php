@@ -100,6 +100,12 @@ class LicensesController extends AdminController
             } else {
                 $license->maintained = e(Input::get('maintained'));
             }
+            
+            if ( e(Input::get('reassignable')) == '') {
+                $license->reassignable = 0;
+            } else {
+                $license->reassignable = e(Input::get('reassignable'));
+            }
 
             if ( e(Input::get('purchase_order')) == '') {
                 $license->purchase_order = '';
