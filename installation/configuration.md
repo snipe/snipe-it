@@ -121,8 +121,16 @@ is __correct__, while
 
 is __incorrect__ and will cause errors when it tries to send email.
 
-
 If you don’t have easy access to a mail server, we suggest signing up for [Mandrill](http://mandrillapp.com). Their free tier allows for 12k free sends a month.
+
+If you don't have an SMTP server to use, you can set the `driver` value to `mail`:
+
+```
+'driver' => 'mail',
+```
+
+If you're using GoDaddy for hosting, you will need to set your mail server to use `relay-hosting.secureserver.net` on port `25`, with `username` and `password` left as null values. See the [GoDaddy relay server documentation](https://www.godaddy.com/help/what-is-the-name-of-my-hosting-accounts-relay-server-953) for more specifics.
+
 
 -----
 

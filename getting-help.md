@@ -14,7 +14,7 @@ Before posting an issue, please read the following so we can help you as quickly
 
 ### Enable debug mode
 
-In your `app/config/app.php`, set `debug` to true. You'll switch this back to false once we're done debugging your issue, but this will turn on verbode errors on the screen and will help you see what's breaking.
+In your `app/config/app.php`, set `debug` to true. You'll switch this back to false once we're done debugging your issue, but this will turn on verbose errors on the screen and will help you see what's breaking.
 
 If you get an "Oops!" or "Whoops!" message in the browser when you hit a specific page, that means debug is set to false. Set it to true, and reload for detailed errors.
 
@@ -30,4 +30,4 @@ When posting a new issue, please be SURE to include the following:
 
 #### It will be nearly impossible for us to help you without this info, so please try to be sure to include it with every help request so that we can try to get your problem sorted quickly.
 
-**__Please do not email for support. Github Issues allows us to share solutions so that other people can learn from them, which gives the community the most benefit.__**
+**__Please do not email for installation support. Github Issues allows us to share solutions so that other people can learn from them, which gives the community the most benefit.__**
