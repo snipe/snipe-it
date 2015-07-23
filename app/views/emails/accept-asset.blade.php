@@ -15,14 +15,16 @@
 			<strong>{{{ $item_name }}}</strong>
 		</td>
 	</tr>
-	<tr>
-		<td style="background-color:#ccc">
-			Asset Tag:
-		</td>
-		<td>
-			<strong>{{{ $item_tag }}}</strong>
-		</td>
-	</tr>
+	@if ($item_tag)
+		<tr>
+			<td style="background-color:#ccc">
+				Asset Tag:
+			</td>
+			<td>
+				<strong>{{{ $item_tag }}}</strong>
+			</td>
+		</tr>
+	@endif
 	<tr>
 		<td style="background-color:#ccc">
 			Checkout Date:
@@ -31,22 +33,26 @@
 			<strong>{{{ $checkout_date }}}</strong>
 		</td>
 	</tr>
-	<tr>
-		<td style="background-color:#ccc">
-			Expected Checkin Date:
-		</td>
-		<td>
-			<strong>{{{ $expected_checkin }}}</strong>
-		</td>
-	</tr>
-	<tr>
-		<td style="background-color:#ccc">
-			Additional Notes:
-		</td>
-		<td>
-			<strong>{{{ $note }}}</strong>
-		</td>
-	</tr>
+	@if ($expected_checkin)
+		<tr>
+			<td style="background-color:#ccc">
+				Expected Checkin Date:
+			</td>
+			<td>
+				<strong>{{{ $expected_checkin }}}</strong>
+			</td>
+		</tr>
+	@endif
+	@if ($note)
+		<tr>
+			<td style="background-color:#ccc">
+				Additional Notes:
+			</td>
+			<td>
+				<strong>{{{ $note }}}</strong>
+			</td>
+		</tr>
+	@endif
 </table>
 	
 @if (($require_acceptance==1) && ($eula!=''))
