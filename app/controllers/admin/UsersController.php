@@ -287,6 +287,7 @@ class UsersController extends AdminController
             $user->first_name  		= Input::get('first_name');
             $user->last_name   		= Input::get('last_name');
             $user->employee_num		= Input::get('employee_num');
+            $user->email		    = Input::get('email');
             $user->activated   		= Input::get('activated', $user->activated);
             $user->permissions 		= Input::get('permissions');
             $user->jobtitle 		= Input::get('jobtitle');
