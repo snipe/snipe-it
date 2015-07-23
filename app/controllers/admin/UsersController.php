@@ -287,7 +287,6 @@ class UsersController extends AdminController
             $user->first_name  		= Input::get('first_name');
             $user->last_name   		= Input::get('last_name');
             $user->employee_num		= Input::get('employee_num');
-            $user->email		    = Input::get('email');
             $user->activated   		= Input::get('activated', $user->activated);
             $user->permissions 		= Input::get('permissions');
             $user->jobtitle 		= Input::get('jobtitle');
@@ -308,6 +307,11 @@ class UsersController extends AdminController
             // Do we want to update the user password?
             if (($password)  && (!Config::get('app.lock_passwords'))) {
                 $user->password = $password;
+            }
+
+            // Do we want to update the user email?
+            if (!Config::get('app.lock_passwords')) {
+                $user->email		    = Input::get('email');
             }
 
             // Get the current user groups
