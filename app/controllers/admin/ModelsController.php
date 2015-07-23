@@ -131,7 +131,7 @@ class ModelsController extends AdminController
 
         $depreciation_list = array('' => 'Do Not Depreciate') + Depreciation::lists('name', 'id');
         $manufacturer_list = array('' => 'Select One') + Manufacturer::lists('name', 'id');
-        $category_list = array('' => '') + DB::table('categories')->lists('name', 'id');
+        $category_list = array('' => '') + DB::table('categories')->whereNull('deleted_at')->lists('name', 'id');
         $view = View::make('backend/models/edit', compact('model'));
         $view->with('category_list',$category_list);
         $view->with('depreciation_list',$depreciation_list);
