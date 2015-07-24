@@ -609,6 +609,20 @@ class AssetsController extends AdminController
 					}
 
 			}
+			
+			$data['log_id'] = $logaction->id;
+            		$data['first_name'] = $user->first_name;
+            		$data['item_name'] = $asset->showAssetName();
+            		$data['checkin_date'] = $logaction->created_at;
+            		$data['item_tag'] = $asset->asset_tag;
+            		$data['note'] = $logaction->note;
+
+            		if (($asset->checkin_email()=='1')) {
+                		Mail::send('emails.checkin-asset', $data, function ($m) use ($user) {
+                    			$m->to($user->email, $user->first_name . ' ' . $user->last_name);
+                    			$m->subject('Confirm Asset Checkin');
+                		});
+            		}
 
 			if ($backto=='user') {
 				return Redirect::to("admin/users/".$return_to.'/view')->with('success', Lang::get('admin/hardware/message.checkin.success'));
