@@ -95,6 +95,14 @@
 								@lang('admin/categories/general.require_acceptance')
 							</label>
 						</div>
+						
+						<!-- Email on Checkin -->
+                        <div class="checkbox col-md-offset-3">
+                            <label>
+                                {{ Form::checkbox('checkin_email', '1', Input::old('checkin_email', $category->checkin_email)) }}
+                                @lang('admin/categories/general.checkin_email')
+                            </label>
+                        </div>
 
 
 						<hr>

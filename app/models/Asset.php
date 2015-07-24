@@ -240,6 +240,10 @@ class Asset extends Depreciable
 			return false;
 		}
     }
+    
+    public function checkin_email() {    
+        return $this->model->category->checkin_email;
+    }
 
     public function requireAcceptance() {
 	    return $this->model->category->require_acceptance;
