@@ -143,7 +143,7 @@ class AuthController extends BaseController
             );
 
             // Send the activation code through username
-            Mail::send('usernames.forgot-password', $data, function ($m) use ($user) {
+            Mail::send('emails.forgot-password', $data, function ($m) use ($user) {
                 $m->to($user->username, $user->first_name . ' ' . $user->last_name);
                 $m->subject('Account Password Recovery');
             });
