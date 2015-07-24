@@ -48,7 +48,8 @@ var tipuesearch_pages = [
     "http://docs.snipeitapp.com/upgrading.html",
     "http://docs.snipeitapp.com/contributing.html",
     "http://docs.snipeitapp.com/translations.html",
-    "http://docs.snipeitapp.com/license.html"
+    "http://docs.snipeitapp.com/license.html",
+    "http://docs.snipeitapp.com/manual/labels.html",
 
 ];
 

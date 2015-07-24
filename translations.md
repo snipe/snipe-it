@@ -7,4 +7,6 @@ If you're not a coder but want to give back to the project and you're fluent in 
 
 We currently have English, Spanish, German, Korean and Brazilian Portuguese completed, and are looking for more!
 
-If you'd like to translate Snipe-IT into a language that we don't currently offer, simply let us know via the CrowdIn platform and we'll get tha set up for you.
+If you'd like to translate Snipe-IT into a language that we don't currently offer, simply let us know via the CrowdIn platform or by [creating an issue on Github](https://github.com/snipe/snipe-it/issues) and we'll get that set up for you.
+
+**Please do not submit pull requests with language files directly to the repository. The CrowdIn platform allows us to make sure all of language files are in sync between versions and releases, so we only accept translations through the CrowdIn platform.**

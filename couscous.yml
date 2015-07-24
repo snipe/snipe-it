@@ -77,11 +77,14 @@ menu:
                     text: Basic Concepts
                     relativeUrl: manual/index.html
                 importing-assets:
-                    text: "<span class='subnav-indent'><i class='fa fa-caret-right'></i> Importing Assets</span>"
+                    text: "Importing Assets</span>"
                     relativeUrl: manual/importing-assets.html
                 alerts:
-                    text: "<span class='subnav-indent'></span><i class='fa fa-caret-right'></i> Configuring Alerts</span>"
+                    text: "Configuring Alerts</span>"
                     relativeUrl: manual/alerts.html
+                labels:
+                    text: "Generating Labels</span>"
+                    relativeUrl: manual/labels.html
 
 
 
