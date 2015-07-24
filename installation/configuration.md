@@ -163,3 +163,31 @@ For help fixing permissions on IIS, see the [Windows Installation guide](server/
 If you still run into a permissions error, you may need to increase the permissions to 775, or twiddle your user/group permissions on your server so that the web server itself (Apache, IIS, etc) can write to files owned by the Snipe-IT user.
 
 __Note: It should go without saying, but make sure the Snipe-IT project directory is not owned by root. Your webserver should be running as your webserver’s user (often apache, nobody, or www-data). But never, ever root. Ever.__
+
+-----
+
+## Optional: Set Cookies to HTTPS-only
+As an extra security feature, Snipe-IT allows you to set your cookies to HTTPS-only, which will ensure that session cookies will only be sent back to the server if the browser has a HTTPS connection.
+
+If you are running Snipe-IT over SSL and wish to use this feature, copy the example session config from `app/config/production/session.example.php` to `app/config/production/session.php`, and then update your new `app/config/production/session.php` file to reflect:
+
+```
+'secure' => true,
+```
+
+If you have this option set to `true` in your session config, your users will not be able to login if they access Snipe-IT over the non-HTTPS connection.
+
+**Note: If you are NOT running Snipe-IT over SSL and you enable this option, your users will not be able to login. Only use this option if you are running Snipe-IT over SSL.**
+
+-----
+
+## Optional: Set Your .htaccess to Redirect to SSL
+
+If you are running Snipe-IT over HTTPS and wish to automatically redirect the user to the HTTPS version if they accidentally go to the HTTP version, uncomment the following lines from the `public/.htaccess` file:
+
+```
+RewriteCond %{HTTPS} off
+RewriteRule (.*) https://%{HTTP_HOST}%{REQUEST_URI} [R=301,L]
+```
+
+**Note: If you are NOT running Snipe-IT over SSL and you enable this option, your users will not be able to access the site. Only use this option if you are running Snipe-IT over SSL.**
