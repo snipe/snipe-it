@@ -321,6 +321,11 @@ class UsersController extends AdminController
                 $user->password = $password;
             }
 
+            // Do we want to update the user email?
+            if (!Config::get('app.lock_passwords')) {
+                $user->email		    = Input::get('email');
+            }
+
             // Get the current user groups
             $userGroups = $user->groups()->lists('group_id', 'group_id');
 

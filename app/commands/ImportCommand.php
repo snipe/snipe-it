@@ -123,6 +123,11 @@ class ImportCommand extends Command {
 				$user_asset_notes = '';
 			}
 
+			if (array_key_exists('9',$row)) {
+				$user_asset_purchase_date = date("Y-m-d 00:00:01", strtotime($row[10]));
+			} else {
+				$user_asset_purchase_date = '';
+			}
 
 			// A number was given instead of a name
 			if (is_numeric($user_name)) {
@@ -131,6 +136,8 @@ class ImportCommand extends Command {
 
 			} elseif ($user_name=='') {
 				$this->comment('No user data provided - skipping user creation, just adding asset');
+				$first_name = '';
+				$last_name = '';
 			} else {
 
 					$name = explode(" ", $user_name);
@@ -169,24 +176,27 @@ class ImportCommand extends Command {
 						$user_email = str_replace("'",'',$email);
 					}
 
-				$this->comment('Full Name: '.$user_name);
-				$this->comment('First Name: '.$first_name);
-				$this->comment('Last Name: '.$last_name);
-				$this->comment('Email: '.$user_email);
-				$this->comment('Category Name: '.$user_asset_category);
-				$this->comment('Item: '.$user_asset_name);
-				$this->comment('Manufacturer ID: '.$user_asset_mfgr);
-				$this->comment('Model No: '.$user_asset_modelno);
-				$this->comment('Serial No: '.$user_asset_serial);
-				$this->comment('Asset Tag: '.$user_asset_tag);
-				$this->comment('Location: '.$user_asset_location);
-				$this->comment('Notes: '.$user_asset_notes);
+
 
 			}
 
+			$this->comment('Full Name: '.$user_name);
+			$this->comment('First Name: '.$first_name);
+			$this->comment('Last Name: '.$last_name);
+			$this->comment('Email: '.$user_email);
+			$this->comment('Category Name: '.$user_asset_category);
+			$this->comment('Item: '.$user_asset_name);
+			$this->comment('Manufacturer ID: '.$user_asset_mfgr);
+			$this->comment('Model No: '.$user_asset_modelno);
+			$this->comment('Serial No: '.$user_asset_serial);
+			$this->comment('Asset Tag: '.$user_asset_tag);
+			$this->comment('Location: '.$user_asset_location);
+			$this->comment('Purchase Date: '.$user_asset_purchase_date);
+			$this->comment('Notes: '.$user_asset_notes);
+
 			$this->comment('------------- Action Summary ----------------');
 
-			if (isset($user_email)) {
+			if ($user_email!='') {
 				if ($user = User::where('email', $user_email)->first()) {
 					$this->comment('User '.$user_email.' already exists');
 				} else {
@@ -304,6 +314,7 @@ class ImportCommand extends Command {
 				$asset->rtd_location_id = $location->id;
 				$asset->user_id = 1;
 				$asset->status_id = $status_id;
+				$asset->purchase_date = $user_asset_purchase_date;
 				$asset->notes = e($user_asset_notes);
 
 				if ($asset->save()) {
