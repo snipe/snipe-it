@@ -322,6 +322,10 @@ class ConsumablesController extends AdminController
             $data['eula'] = $consumable->getEula();
             $data['first_name'] = $user->first_name;
             $data['item_name'] = $consumable->name;
+            $data['checkout_date'] = $logaction->created_at;
+            $data['item_tag'] = '';
+            $data['expected_checkin'] = '';
+            $data['note'] = $logaction->note;
             $data['require_acceptance'] = $consumable->requireAcceptance();
 
 
