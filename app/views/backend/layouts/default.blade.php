@@ -5,7 +5,7 @@
 
         <!-- Basic Page Needs
         ================================================== -->
-        <meta http-equiv="X-UA-Compatible" content="IE=edge" /> 
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta charset="utf-8" />
         <title>
             @section('title')
@@ -81,6 +81,8 @@
 				background-color: {{{ Setting::getSettings()->header_color }}};
 				background: -webkit-linear-gradient(top,  {{{ Setting::getSettings()->header_color }}} 0%,{{{ Setting::getSettings()->header_color }}} 100%);
 				border-color: {{{ Setting::getSettings()->header_color }}};
+                background-image: -moz-linear-gradient(top, {{{ Setting::getSettings()->header_color }}}, {{{ Setting::getSettings()->header_color }}});
+
 			}
 		@endif
 
