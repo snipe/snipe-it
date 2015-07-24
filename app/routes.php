@@ -417,48 +417,6 @@ Route::group(array('prefix' => 'auth'), function () {
 |
 */
 
-Route::group(array('prefix' => 'account', 'before' => 'auth', 'namespace' => 'Controllers\Account'), function () {
-
-
-    # Profile
-    Route::get('profile', array('as' => 'profile', 'uses' => 'ProfileController@getIndex'));
-    Route::post('profile', 'ProfileController@postIndex');
-
-    # Change Password
-    Route::get('change-password', array('as' => 'change-password', 'uses' => 'ChangePasswordController@getIndex'));
-    Route::post('change-password', 'ChangePasswordController@postIndex');
-
-
-        # Register
-        #Route::get('signup', array('as' => 'signup', 'uses' => 'AuthController@getSignup'));
-        Route::post( 'signup', 'AuthController@postSignup' );
-
-        # Account Activation
-        Route::get( 'activate/{activationCode}', [ 'as' => 'activate', 'uses' => 'AuthController@getActivate' ] );
-
-        # Forgot Password
-        Route::get( 'forgot-password', [ 'as' => 'forgot-password', 'uses' => 'AuthController@getForgotPassword' ] );
-        Route::post( 'forgot-password', 'AuthController@postForgotPassword' );
-
-        # Forgot Password Confirmation
-        Route::get( 'forgot-password/{passwordResetCode}',
-            [ 'as' => 'forgot-password-confirm', 'uses' => 'AuthController@getForgotPasswordConfirm' ] );
-        Route::post( 'forgot-password/{passwordResetCode}', 'AuthController@postForgotPasswordConfirm' );
-
-        # Logout
-        Route::get( 'logout', [ 'as' => 'logout', 'uses' => 'AuthController@getLogout' ] );
-
-    } );
-
-    /*
-    |--------------------------------------------------------------------------
-    | Account Routes
-    |--------------------------------------------------------------------------
-    |
-    |
-    |
-    */
-
     Route::group( [ 'prefix' => 'account', 'before' => 'auth', 'namespace' => 'Controllers\Account' ], function () {
 
         # Profile
