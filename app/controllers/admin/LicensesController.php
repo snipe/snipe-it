@@ -100,6 +100,12 @@ class LicensesController extends AdminController
             } else {
                 $license->maintained = e(Input::get('maintained'));
             }
+            
+            if ( e(Input::get('reassignable')) == '') {
+                $license->reassignable = 0;
+            } else {
+                $license->reassignable = e(Input::get('reassignable'));
+            }
 
             if ( e(Input::get('purchase_order')) == '') {
                 $license->purchase_order = '';
@@ -408,7 +414,7 @@ class LicensesController extends AdminController
         }
 
         // Get the dropdown of users and then pass it to the checkout view
-         $users_list = array('' => 'Select a User') + DB::table('users')->select(DB::raw('concat(last_name,", ",first_name," (",email,")") as full_name, id'))->whereNull('deleted_at')->orderBy('last_name', 'asc')->orderBy('first_name', 'asc')->lists('full_name', 'id');
+         $users_list = array('' => 'Select a User') + DB::table('users')->select(DB::raw('concat(last_name,", ",first_name," (",username,")") as full_name, id'))->whereNull('deleted_at')->orderBy('last_name', 'asc')->orderBy('first_name', 'asc')->lists('full_name', 'id');
 
 
         // Left join to get a list of assets and some other helpful info

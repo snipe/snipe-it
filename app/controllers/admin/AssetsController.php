@@ -377,7 +377,7 @@ class AssetsController extends AdminController
         }
 
         // Get the dropdown of users and then pass it to the checkout view
-        $users_list = array('' => Lang::get('general.select_user')) + DB::table('users')->select(DB::raw('concat(last_name,", ",first_name," (",email,")") as full_name, id'))->whereNull('deleted_at')->orderBy('last_name', 'asc')->orderBy('first_name', 'asc')->lists('full_name', 'id');
+        $users_list = array('' => Lang::get('general.select_user')) + DB::table('users')->select(DB::raw('concat(last_name,", ",first_name," (",username,")") as full_name, id'))->whereNull('deleted_at')->orderBy('last_name', 'asc')->orderBy('first_name', 'asc')->lists('full_name', 'id');
 
         return View::make('backend/hardware/checkout', compact('asset'))->with('users_list',$users_list);
 
@@ -426,14 +426,16 @@ class AssetsController extends AdminController
         // Was the asset updated?
         if($asset->save()) {
             $logaction = new Actionlog();
-
-            if (Input::has('checkout_at')) {
+            
+             if (Input::has('checkout_at')) {
             	if (Input::get('checkout_at')!= date("Y-m-d")){
 					$logaction->created_at = e(Input::get('checkout_at')).' 00:00:00';
 				}
         	}
 
-
+            if (Input::has('expected_checkin')) {
+                $logaction->expected_checkin = e(Input::get('expected_checkin'));
+            }
 
             $logaction->asset_id = $asset->id;
             $logaction->checkedout_to = $asset->assigned_to;
@@ -447,6 +449,10 @@ class AssetsController extends AdminController
             $data['eula'] = $asset->getEula();
             $data['first_name'] = $user->first_name;
             $data['item_name'] = $asset->showAssetName();
+            $data['checkout_date'] = $logaction->created_at;
+            $data['expected_checkin'] = $logaction->expected_checkin;
+            $data['item_tag'] = $asset->asset_tag;
+            $data['note'] = $logaction->note;
             $data['require_acceptance'] = $asset->requireAcceptance();
 
             $settings = Setting::getSettings();
