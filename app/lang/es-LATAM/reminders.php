@@ -13,7 +13,7 @@ return array(
     |
     */
 
-    "password" => "Las contraseñas deben tener mínimo 6 caracteres y coincidir.",
+    "password" => "La Contraseña deben tener mínimo 6 caracteres y coincidir.",
 
     "user"     => "Usuario o E-Mail incorrectos",
 
