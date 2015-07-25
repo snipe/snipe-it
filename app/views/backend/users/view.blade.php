@@ -82,10 +82,10 @@
 									<table class="display table table-hover">
 		                                <thead>
 		                                    <tr>
-		                                        <th class="col-md-3">Asset Type</th>
-		                                        <th class="col-md-2">Asset Tag</th>
-		                                        <th class="col-md-2">Name</th>
-		                                        <th class="col-md-1 hidden-print">Actions</th>
+		                                        <th class="col-md-3">@lang('admin/hardware/table.asset_model')</th>
+		                                        <th class="col-md-2">@lang('admin/hardware/table.asset_tag')</th>
+		                                        <th class="col-md-2">@lang('general.name')</th>
+		                                        <th class="col-md-1 hidden-print">@lang('general.action')</th>
 		                                    </tr>
 		                                </thead>
 		                                <tbody>
@@ -123,9 +123,9 @@
 							<table class="display table table-hover">
                                 <thead>
                                     <tr>
-                                        <th class="col-md-5">Name</th>
-                                        <th class="col-md-6">Serial</th>
-                                        <th class="col-md-1 hidden-print">Actions</th>
+                                        <th class="col-md-5">@lang('general.name')</th>
+                                        <th class="col-md-6">@lang('admin/hardware/form.serial')</th>
+                                        <th class="col-md-1 hidden-print">@lang('general.action')</th>
                                     </tr>
                                 </thead>
                                 <tbody>
