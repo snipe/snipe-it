@@ -490,10 +490,10 @@ class UsersController extends AdminController
 
                 return Redirect::route('users')->with('success', 'Your selected users have been deleted and their assets have been updated.');
             } else {
-                return Redirect::back()->with('error', 'Bulk delete is not enabled in this installation');
+                return Redirect::route('users')->with('error', 'Bulk delete is not enabled in this installation');
             }
 
-            return Redirect::back()->with('error', 'An error has occurred');
+            return Redirect::route('users')->with('error', 'An error has occurred');
 		}
 
     }
