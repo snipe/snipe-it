@@ -26,6 +26,7 @@ use View;
 use Datatable;
 use League\Csv\Reader;
 use Mail;
+use Accessory;
 
 class UsersController extends AdminController
 {
@@ -463,6 +464,7 @@ class UsersController extends AdminController
             if (!Config::get('app.lock_passwords')) {
 
                 $assets = Asset::whereIn('assigned_to', $user_raw_array)->get();
+                $accessories = DB::table('accessories_users')->whereIn('assigned_to', $user_raw_array)->get();
                 $users = User::whereIn('id', $user_raw_array)->delete();
 
                 foreach ($assets as $asset) {
@@ -485,6 +487,23 @@ class UsersController extends AdminController
                         ));
 
 
+                }
+
+                foreach ($accessories as $accessory) {
+                    $accessory_array[] = $accessory->id;
+                    // Update the asset log
+                    $logaction = new Actionlog();
+                    $logaction->accessory_id = $accessory->id;
+                    $logaction->checkedout_to = $accessory->assigned_to;
+                    $logaction->asset_type = 'accessory';
+                    $logaction->user_id = Sentry::getUser()->id;
+                    $logaction->note = 'Bulk checkin';
+                    $log = $logaction->logaction('checkin from');
+
+                    $update_assets = DB::table('accessories_users')->whereIn('id', $accessory_array)->update(
+                        array(
+                            'assigned_to' => '',
+                        ));
                 }
 
 
