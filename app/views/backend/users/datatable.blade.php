@@ -15,7 +15,6 @@
     <tr>
       <td colspan="11">
 	      <select name="bulk_actions">
-		      <option value="edit">Bulk Edit</option>
               <option value="delete">Bulk Delete</option>
 	      </select>
 	      <button class="btn btn-default" id="bulkEdit" disabled>Go</button></td>

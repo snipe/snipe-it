@@ -21,6 +21,7 @@ use Response;
 use Sentry;
 use Str;
 use Validator;
+use Statuslabel;
 use View;
 use Datatable;
 use League\Csv\Reader;
@@ -431,15 +432,68 @@ class UsersController extends AdminController
 
     public function postBulkEdit() {
 
-        if (!Input::has('edit_user')) {
+        if ((!Input::has('edit_user')) || (count(Input::has('edit_user')) == 0)) {
 			return Redirect::back()->with('error', 'No users selected');
 		} else {
-			$user_raw_array = Input::get('edit_user');
-			foreach ($user_raw_array as $user_id => $value) {
-				$user_ids[] = $user_id;
+            $statuslabel_list = array('' => Lang::get('general.select_statuslabel')) + Statuslabel::orderBy('name', 'asc')->lists('name', 'id');
+            $user_raw_array = Input::get('edit_user');
+            $users = User::whereIn('id', $user_raw_array)->with('groups')->get();
+            return View::make('backend/users/confirm-bulk-delete', compact('users','statuslabel_list'));
 
-			}
+		}
 
+    }
+
+    public function postBulkSave() {
+
+        if ((!Input::has('edit_user')) || (count(Input::has('edit_user')) == 0)) {
+			 return Redirect::back()->with('error', 'No users selected');
+
+        } elseif ((!Input::has('status_id')) || (count(Input::has('status_id')) == 0)) {
+     			return Redirect::route('users')->with('error', 'No status selected');
+		} else {
+
+            $user_raw_array = Input::get('edit_user');
+            $asset_array = array();
+
+            if(($key = array_search(Sentry::getId(), $user_raw_array)) !== false) {
+                unset($user_raw_array[$key]);
+            }
+
+            if (!Config::get('app.lock_passwords')) {
+
+                $assets = Asset::whereIn('assigned_to', $user_raw_array)->get();
+                $users = User::whereIn('id', $user_raw_array)->delete();
+
+                foreach ($assets as $asset) {
+
+                    $asset_array[] = $asset->id;
+
+                    // Update the asset log
+                    $logaction = new Actionlog();
+                    $logaction->asset_id = $asset->id;
+                    $logaction->checkedout_to = $asset->assigned_to;
+                    $logaction->asset_type = 'hardware';
+                    $logaction->user_id = Sentry::getUser()->id;
+                    $logaction->note = 'Bulk checkin';
+                    $log = $logaction->logaction('checkin from');
+
+                    $update_assets = Asset::whereIn('id', $asset_array)->update(
+                        array(
+                            'status_id' => e(Input::get('status_id')),
+                            'assigned_to' => '',
+                        ));
+
+
+                }
+
+
+                return Redirect::route('users')->with('success', 'Your selected users have been deleted and their assets have been updated.');
+            } else {
+                return Redirect::back()->with('error', 'Bulk delete is not enabled in this installation');
+            }
+
+            return Redirect::back()->with('error', 'An error has occurred');
 		}
 
     }
@@ -483,7 +537,7 @@ class UsersController extends AdminController
     public function getView($userId = null)
     {
 
-        $user = User::with('assets','assets.model','consumables','accessories','licenses','userloc')->find($userId);
+        $user = User::with('assets','assets.model','consumables','accessories','licenses','userloc')->withTrashed()->find($userId);
 
         $userlog = $user->userlog->load('assetlog','consumablelog','assetlog.model','licenselog','accessorylog','userlog','adminlog');
 
@@ -764,7 +818,7 @@ class UsersController extends AdminController
         return Datatable::collection($users)
         ->addColumn('',function($users)
             {
-                return '<div class="text-center"><input type="checkbox" name="edit_user['.$users->id.']" class="one_required"></div>';
+                return '<div class="text-center"><input type="checkbox" name="edit_user[]" value="'.$users->id.'" class="one_required"></div>';
             })
         ->addColumn('name',function($users)
 	        {
