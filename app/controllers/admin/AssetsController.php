@@ -426,7 +426,7 @@ class AssetsController extends AdminController
         // Was the asset updated?
         if($asset->save()) {
             $logaction = new Actionlog();
-            
+
              if (Input::has('checkout_at')) {
             	if (Input::get('checkout_at')!= date("Y-m-d")){
 					$logaction->created_at = e(Input::get('checkout_at')).' 00:00:00';
@@ -609,7 +609,7 @@ class AssetsController extends AdminController
 					}
 
 			}
-			
+
 			$data['log_id'] = $logaction->id;
             		$data['first_name'] = $user->first_name;
             		$data['item_name'] = $asset->showAssetName();
@@ -1126,7 +1126,7 @@ class AssetsController extends AdminController
       ->addColumn('status',function($assets)
         {
           	if ($assets->assigned_to!='') {
-            	return link_to('../admin/users/'.$assets->assigned_to.'/view', $assets->assigneduser->fullName());
+            	return link_to(Config::get('app.url').'/admin/users/'.$assets->assigned_to.'/view', $assets->assigneduser->fullName());
             } else {
                 if ($assets->assetstatus) {
                     return $assets->assetstatus->name;
