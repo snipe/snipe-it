@@ -3,15 +3,15 @@
 return array(
 
     'does_not_exist' => 'هذه الفئة غير موجودة.',
-    'assoc_users'	 => 'This accessory currently has :count items checked out to users. Please check in the accessories and and try again. ',
+    'assoc_users'	 => 'تم إخراج :count عنصر من هذا الملحق للمستخدمين، الرجاء إيداع الملحقات ثم حاول مرة أخرى. ',
 
     'create' => array(
-        'error'   => 'Category was not created, please try again.',
-        'success' => 'Category created successfully.'
+        'error'   => 'فشل إنشاء التصنيف، الرجاء المحاولة مرة أخرى.',
+        'success' => 'تم إنشاء الفئة بنجاح.'
     ),
 
     'update' => array(
-        'error'   => 'Category was not updated, please try again',
+        'error'   => 'فشل تحديث التصنيف، الرجاء المحاولة مرة أخرى',
         'success' => 'Category updated successfully.'
     ),
 
@@ -22,14 +22,14 @@ return array(
     ),
     
      'checkout' => array(
-        'error'   		=> 'Accessory was not checked out, please try again',
-        'success' 		=> 'Accessory checked out successfully.',
-        'user_does_not_exist' => 'That user is invalid. Please try again.'
+        'error'   		=> 'لم يتم إخراج الملحق، الرجاء المحاولة مرة أخرى',
+        'success' 		=> 'تم إخراج الملحق بنجاح.',
+        'user_does_not_exist' => 'هذا المستخدم خاطئ، الرجاء المحاولة مرة أخرى.'
     ),
 
     'checkin' => array(
-        'error'   		=> 'Accessory was not checked in, please try again',
-        'success' 		=> 'Accessory checked in successfully.',
+        'error'   		=> 'لم يتم إيداع الملحق، الرجاء المحاولة مرة أخرى',
+        'success' 		=> 'تم إيداع الملحق بنجاح.',
         'user_does_not_exist' => 'That user is invalid. Please try again.'
     )
 

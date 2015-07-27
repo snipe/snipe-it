@@ -2,10 +2,10 @@
 
 return array(
 
-    'deleted'  					=> 'This model has been deleted. <a href="/hardware/models/:model_id/restore">Click here to restore it</a>.',
-    'restore'                   => 'Restore Model',
+    'deleted'  					=> 'Model byl vymazán. <a href="/hardware/models/:model_id/restore">Klikněte sem pro jeho obnovení</a>.',
+    'restore'                   => 'Obnovení Modelu',
 	'show_mac_address'			=> 'Show MAC address field in assets in this model',
-    'view_deleted'              => 'View Deleted',
-    'view_models'               => 'View Models',
+    'view_deleted'              => 'Zobrazit smazané',
+    'view_models'               => 'Zobrazit Modely',
 
 );

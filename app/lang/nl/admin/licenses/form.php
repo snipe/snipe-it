@@ -15,6 +15,7 @@ return array(
     'notes'             => 'Notes',
     'order'             => 'Order No.',
     'purchase_order'    => 'Purchase Order Number',
+    'reassignable'      => 'Reassignable',
     'remaining_seats'   => 'Remaining Seats',
     'seats'             => 'Seats',
     'serial'            => 'Serial',

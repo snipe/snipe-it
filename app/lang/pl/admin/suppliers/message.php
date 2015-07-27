@@ -2,23 +2,23 @@
 
 return array(
 
-    'does_not_exist' => 'Supplier does not exist.',
+    'does_not_exist' => 'Dostawca nie istnieje.',
     'assoc_users'	 => 'This supplier is currently associated with at least one model and cannot be deleted. Please update your models to no longer reference this supplier and try again. ',
 
     'create' => array(
-        'error'   => 'Supplier was not created, please try again.',
-        'success' => 'Supplier created successfully.'
+        'error'   => 'Dostawca nie został utworzony, spróbuj ponownie.',
+        'success' => 'Dostawca utworzony pomyślnie.'
     ),
 
     'update' => array(
-        'error'   => 'Supplier was not updated, please try again',
-        'success' => 'Supplier updated successfully.'
+        'error'   => 'Dostawca nie został zaktualizowany, spróbuj ponownie',
+        'success' => 'Dostawca zaktualizowany pomyślnie.'
     ),
 
     'delete' => array(
-        'confirm'   => 'Are you sure you wish to delete this supplier?',
-        'error'   => 'There was an issue deleting the supplier. Please try again.',
-        'success' => 'Supplier was deleted successfully.'
+        'confirm'   => 'Czy na pewno usunąć tego dostawcę?',
+        'error'   => 'Podczas usuwania dostawcy napotkano błąd. Spróbuj ponownie.',
+        'success' => 'Dostawca usunięty pomyślnie.'
     )
 
 );

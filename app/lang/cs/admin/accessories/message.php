@@ -2,35 +2,35 @@
 
 return array(
 
-    'does_not_exist' => 'Category does not exist.',
-    'assoc_users'	 => 'This accessory currently has :count items checked out to users. Please check in the accessories and and try again. ',
+    'does_not_exist' => 'Kategorie neexistuje.',
+    'assoc_users'	 => 'Tato kategorie má nyní :count položek k předání uživatelům. Zkontrolujte převzetí příslušenství a zkuste to znovu. ',
 
     'create' => array(
-        'error'   => 'Category was not created, please try again.',
-        'success' => 'Category created successfully.'
+        'error'   => 'Kategorie nevytvořena, zkuste to znovu.',
+        'success' => 'Kategorie úspěšně vytvořena.'
     ),
 
     'update' => array(
-        'error'   => 'Category was not updated, please try again',
-        'success' => 'Category updated successfully.'
+        'error'   => 'Kategorie neaktualizována, zkuste to znovu',
+        'success' => 'Kategorie úspěšně aktualizována.'
     ),
 
     'delete' => array(
-        'confirm'   => 'Are you sure you wish to delete this category?',
-        'error'   => 'There was an issue deleting the category. Please try again.',
-        'success' => 'The category was deleted successfully.'
+        'confirm'   => 'Opravdu chcete smazat tuto kategorii?',
+        'error'   => 'Vyskytl se problém při mazání kategorie. Zkuste to znovu.',
+        'success' => 'Kategorie byla úspěšně smazána.'
     ),
     
      'checkout' => array(
-        'error'   		=> 'Accessory was not checked out, please try again',
-        'success' 		=> 'Accessory checked out successfully.',
-        'user_does_not_exist' => 'That user is invalid. Please try again.'
+        'error'   		=> 'Příslušenství nebylo převzato, zkuste to znovu',
+        'success' 		=> 'Příslušenství úspěšně předáno.',
+        'user_does_not_exist' => 'Neplatný uživatel. Zkuste to znovu.'
     ),
 
     'checkin' => array(
-        'error'   		=> 'Accessory was not checked in, please try again',
-        'success' 		=> 'Accessory checked in successfully.',
-        'user_does_not_exist' => 'That user is invalid. Please try again.'
+        'error'   		=> 'Příslušenství nebylo převzato, zkuste to znovu',
+        'success' 		=> 'Příslušenství úspěšně předáno.',
+        'user_does_not_exist' => 'Neplatný uživatel. Zkuste to znovu.'
     )
 
 

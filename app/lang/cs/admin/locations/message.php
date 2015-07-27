@@ -2,24 +2,24 @@
 
 return array(
 
-    'does_not_exist' => 'Location does not exist.',
+    'does_not_exist' => 'Místo neexistuje.',
     'assoc_users'	 => 'This location is currently associated with at least one user and cannot be deleted. Please update your users to no longer reference this location and try again. ',
 
 
     'create' => array(
-        'error'   => 'Location was not created, please try again.',
-        'success' => 'Location created successfully.'
+        'error'   => 'Místo nebylo vytvořeno, zkuste to znovu prosím.',
+        'success' => 'Místo bylo úspěšně vytvořeno.'
     ),
 
     'update' => array(
-        'error'   => 'Location was not updated, please try again',
-        'success' => 'Location updated successfully.'
+        'error'   => 'Místo nebylo aktualizováno, zkuste to znovu prosím',
+        'success' => 'Místo úspěšně aktualizováno.'
     ),
 
     'delete' => array(
-        'confirm'   	=> 'Are you sure you wish to delete this location?',
-        'error'   => 'There was an issue deleting the location. Please try again.',
-        'success' => 'The location was deleted successfully.'
+        'confirm'   	=> 'Opravdu si želáte vymazat tohle místo na trvalo?',
+        'error'   => 'Vyskytl se problém při mazání místa. Zkuste to znovu prosím.',
+        'success' => 'Místo bylo úspěšně smazáno.'
     )
 
 );

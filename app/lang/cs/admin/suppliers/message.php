@@ -7,7 +7,7 @@ return array(
 
     'create' => array(
         'error'   => 'Supplier was not created, please try again.',
-        'success' => 'Supplier created successfully.'
+        'success' => 'Dodavatel úspěšně vytvořen.'
     ),
 
     'update' => array(
@@ -18,7 +18,7 @@ return array(
     'delete' => array(
         'confirm'   => 'Are you sure you wish to delete this supplier?',
         'error'   => 'There was an issue deleting the supplier. Please try again.',
-        'success' => 'Supplier was deleted successfully.'
+        'success' => 'Dodavatel byl úspěšně smazán.'
     )
 
 );

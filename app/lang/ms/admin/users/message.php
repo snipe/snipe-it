@@ -2,12 +2,14 @@
 
 return array(
 
-    'user_exists'              	=> 'Pengguna telah wujud!',
-    'user_not_found'           	=> 'Pengguna [:id] tidak wujud.',
-    'user_login_required'      	=> 'Ruangan log masuk diperlukan',
-    'user_password_required'   	=> 'Ruangan kata kunci diperlukan.',
-    'insufficient_permissions' 	=> 'Tidak cukup kuasa.',
-    'user_deleted_warning' 		=> 'Pengguna telah dihapuskan. Anda perlu masukkan semula pengguna ini untuk kemaskini atau untuk serahkan dia harta baru.',
+    'accepted'                  => 'You have successfully accepted this asset.',
+    'declined'                  => 'You have successfully declined this asset.',
+    'user_exists'               => 'Pengguna telah wujud!',
+    'user_not_found'            => 'Pengguna [:id] tidak wujud.',
+    'user_login_required'       => 'Ruangan log masuk diperlukan',
+    'user_password_required'    => 'Ruangan kata kunci diperlukan.',
+    'insufficient_permissions'  => 'Tidak cukup kuasa.',
+    'user_deleted_warning'      => 'Pengguna telah dihapuskan. Anda perlu masukkan semula pengguna ini untuk kemaskini atau untuk serahkan dia harta baru.',
 
 
     'success' => array(
@@ -29,6 +31,19 @@ return array(
         'unsuspend' => 'Ada isu semasa melepakan pengguna. Sila cuba lagi. ',
         'import'    => 'There was an issue importing users. Please try again.',
         'asset_already_accepted' => 'This asset has already been accepted.',
+        'accept_or_decline' => 'You must either accept or decline this asset.',
+    ),
+
+    'deletefile' => array(
+        'error'   => 'File not deleted. Please try again.',
+        'success' => 'File successfully deleted.',
+    ),
+
+    'upload' => array(
+        'error'   => 'File(s) not uploaded. Please try again.',
+        'success' => 'File(s) successfully uploaded.',
+        'nofiles' => 'You did not select any files for upload',
+        'invalidfiles' => 'One or more of your files is too large or is a filetype that is not allowed. Allowed filetypes are png, gif, jpg, doc, docx, pdf, and txt.',
     ),
 
 );
