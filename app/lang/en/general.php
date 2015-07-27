@@ -126,6 +126,8 @@
     'update'                => 'Update',
     'uploaded'              => 'Uploaded',
     'user'					=> 'User',
+    'accepted'			    => 'accepted',
+    'declined'			    => 'declined',
     'users'                 => 'Users',
     'viewassets'  			=> 'View Assigned Assets',
     'website'               => 'Website',
