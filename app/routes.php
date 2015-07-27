@@ -437,6 +437,8 @@ Route::group(array('prefix' => 'auth'), function () {
             [ 'as' => 'account/accept-assets', 'uses' => 'ViewAssetsController@getAcceptAsset' ] );
         Route::post( 'accept-asset/{logID}',
             [ 'as' => 'account/asset-accepted', 'uses' => 'ViewAssetsController@postAcceptAsset' ] );
+        Route::get( 'decline-asset/{logID}',
+            [ 'as' => 'account/decline-assets', 'uses' => 'ViewAssetsController@getDeclineAsset' ] );
 
         # Profile
         Route::get( 'requestable-assets',
