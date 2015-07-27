@@ -230,11 +230,18 @@
 
             <!-- Email user -->
             @if (!$user->id)
+
 			<div class="form-group">
-				<div class="col-sm-3 ">
+				<div class="col-sm-3">
 				</div>
-				<div class="col-sm-5">
-					{{ Form::checkbox('email_user', '1', Input::old('email_user')) }} Email this user their credentials?
+				<div class="col-sm-9">
+					<div class="checkbox">
+						<label for="email_user">
+							{{ Form::checkbox('email_user', '1', Input::old('email_user'), array('id'=>'email_user','disabled'=>'disabled')) }}
+
+							Email this user their credentials? <span class="help-text" id="email_user_warn">(Cannot send email. No user email address specified.)</span>
+						</label>
+					</div>
 				</div>
 			</div>
 			@endif
@@ -315,5 +322,22 @@
 		</div>
 
 </form>
+
+<script>
+$(document).ready(function() {
+
+	$('#email').on('keyup',function(){
+
+	    if(this.value.length > 0){
+	        $("#email_user").prop("disabled",false);
+			$("#email_user_warn").html("");
+	    } else {
+	        $("#email_user").prop("disabled",true);
+			$("#email_user").prop("checked",false);
+	    }
+
+	});
+});
+</script>
 
 @stop
