@@ -59,4 +59,21 @@ class Model extends Elegant
 		return $query->whereNotNull('deleted_at');
 	}
 
+    /**
+     * scopeInCategory
+     * Get all models that are in the array of category ids
+     *
+     * @param       $query
+     * @param array $categoryIdListing
+     *
+     * @return mixed
+     * @author  Vincent Sposato <vincent.sposato@gmail.com>
+     * @version v1.0
+     */
+    public function scopeInCategory( $query, array $categoryIdListing )
+    {
+
+        return $query->whereIn( 'category_id', $categoryIdListing );
+    }
+
 }
