@@ -64,61 +64,61 @@ class ImportCommand extends Command {
 			// Let's just map some of these entries to more user friendly words
 
 			if (array_key_exists('0',$row)) {
-				$user_name = $row[0];
+				$user_name = trim($row[0]);
 			} else {
 				$user_name = '';
 			}
 
 			if (array_key_exists('1',$row)) {
-				$user_email = $row[1];
+				$user_email = trim($row[1]);
 			} else {
 				$user_email = '';
 			}
 
 			if (array_key_exists('2',$row)) {
-				$user_asset_category = $row[2];
+				$user_asset_category = trim($row[2]);
 			} else {
 				$user_asset_category = '';
 			}
 
 			if (array_key_exists('3',$row)) {
-				$user_asset_name = $row[3];
+				$user_asset_name = trim($row[3]);
 			} else {
 				$user_asset_name = '';
 			}
 
 			if (array_key_exists('4',$row)) {
-				$user_asset_mfgr = $row[4];
+				$user_asset_mfgr = trim($row[4]);
 			} else {
 				$user_asset_mfgr = '';
 			}
 
 			if (array_key_exists('5',$row)) {
-				$user_asset_modelno = $row[5];
+				$user_asset_modelno = trim($row[5]);
 			} else {
 				$user_asset_modelno = '';
 			}
 
 			if (array_key_exists('6',$row)) {
-				$user_asset_serial = $row[6];
+				$user_asset_serial = trim($row[6]);
 			} else {
 				$user_asset_serial = '';
 			}
 
 			if (array_key_exists('7',$row)) {
-				$user_asset_tag = $row[7];
+				$user_asset_tag = trim($row[7]);
 			} else {
 				$user_asset_tag = '';
 			}
 
 			if (array_key_exists('8',$row)) {
-				$user_asset_location = $row[8];
+				$user_asset_location = trim($row[8]);
 			} else {
 				$user_asset_location = '';
 			}
 
 			if (array_key_exists('9',$row)) {
-				$user_asset_notes = $row[9];
+				$user_asset_notes = trim($row[9]);
 			} else {
 				$user_asset_notes = '';
 			}
@@ -201,8 +201,8 @@ class ImportCommand extends Command {
 
 			$this->comment('------------- Action Summary ----------------');
 
-			if ($user_email!='') {
-				if ($user = User::where('username', $user_username)->first()) {
+			if ($user_username!='') {
+				if ($user = User::where('username', $user_username)->whereNotNull('username')->first()) {
 					$this->comment('User '.$user_username.' already exists');
 				} else {
 					// Create the user
