@@ -67,6 +67,7 @@ class AppCommand extends Command
         $this->askUserFirstName();
         $this->askUserLastName();
         $this->askUserUsername();
+        $this->askUserEmail();
         $this->askUserPassword();
 
 		$this->askUserDummyData();
@@ -89,10 +90,10 @@ class AppCommand extends Command
         $this->call('migrate:install');
 
         // Run the Sentry Migrations
-        $this->call('migrate', array('--package' => 'cartalyst/sentry'));
+        $this->call('migrate', array('--package' => 'cartalyst/sentry','--force'=>true));
 
         // Run the Migrations
-        $this->call('migrate');
+        $this->call('migrate', array('--force'=>true));
 
         // Create the default user and default groups.
         $this->sentryRunner();

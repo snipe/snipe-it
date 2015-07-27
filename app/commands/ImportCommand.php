@@ -132,17 +132,21 @@ class ImportCommand extends Command {
 			// A number was given instead of a name
 			if (is_numeric($user_name)) {
 				$this->comment('User '.$user_name.' is not a name - assume this user already exists');
+				$user_username = '';
 			// No name was given
 
 			} elseif ($user_name=='') {
 				$this->comment('No user data provided - skipping user creation, just adding asset');
 				$first_name = '';
 				$last_name = '';
+				$user_username = '';
+
 			} else {
 
 					$name = explode(" ", $user_name);
 					$first_name = $name[0];
 					$email_last_name = '';
+					$email_prefix = $first_name;
 
 					if (!array_key_exists(1, $name)) {
 						$last_name='';
@@ -167,6 +171,9 @@ class ImportCommand extends Command {
 
 					}
 
+
+					$user_username = $email_prefix;
+
 					// Generate an email based on their name if no email address is given
 					if ($user_email=='') {
 						if ($first_name=='Unknown') {
@@ -175,14 +182,12 @@ class ImportCommand extends Command {
 						$email = strtolower($email_prefix).'@'.$this->option('domain');
 						$user_email = str_replace("'",'',$email);
 					}
-
-
-
 			}
 
 			$this->comment('Full Name: '.$user_name);
 			$this->comment('First Name: '.$first_name);
 			$this->comment('Last Name: '.$last_name);
+			$this->comment('Username: '.$user_username);
 			$this->comment('Email: '.$user_email);
 			$this->comment('Category Name: '.$user_asset_category);
 			$this->comment('Item: '.$user_asset_name);
@@ -197,14 +202,15 @@ class ImportCommand extends Command {
 			$this->comment('------------- Action Summary ----------------');
 
 			if ($user_email!='') {
-				if ($user = User::where('email', $user_email)->first()) {
-					$this->comment('User '.$user_email.' already exists');
+				if ($user = User::where('username', $user_username)->first()) {
+					$this->comment('User '.$user_username.' already exists');
 				} else {
 					// Create the user
 					$user = Sentry::createUser(array(
 						'first_name' => $first_name,
 						'last_name' => $last_name,
 						'email'     => $user_email,
+						'username'     => $user_username,
 						'password'  => substr(str_shuffle("0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"), 0, 10),
 						'activated' => true,
 						'permissions' => array(
