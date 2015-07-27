@@ -22,7 +22,7 @@ Account Sign in ::
         <input type="hidden" name="_token" value="{{ csrf_token() }}" />
 
             <!-- username -->
-            <div class="form-group {{ $errors->first('username', ' error') }}">
+            <div class="form-group{{ $errors->has('username') ? ' has-error' : '' }}">
                 <label for="username" class="col-md-2 col-sm-12 control-label">Username</label>
                     <div class="col-md-5 col-sm-12">
                         <input class="form-control" type="username" name="username" id="username" value="{{{ Input::old('username') }}}" />
@@ -31,7 +31,7 @@ Account Sign in ::
             </div>
 
             <!-- Password -->
-            <div class="form-group {{ $errors->first('password', ' error') }}">
+            <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
                 <label for="password" class="col-md-2 col-sm-12 control-label">Password</label>
                     <div class="col-md-5 col-sm-12">
                         <input class="form-control" type="password" name="password" id="password" value="{{{ Input::old('password') }}}" />
@@ -51,7 +51,7 @@ Account Sign in ::
                 </div>
 
 	    		<div class="col-md-2 col-sm-12 col-xs-12 text-right">
-	                 <button type="submit" class="btn btn-success"><i class="fa fa-check icon-white"></i> Sign in</button>
+	                 <button type="submit" class="btn btn-success">Sign in</button>
 	            </div>
             </div>
 
