@@ -2,34 +2,34 @@
 
 return array(
 
-    'does_not_exist' => 'Consumable does not exist.',
+    'does_not_exist' => 'Forbruksvaren finnes ikke.',
 
     'create' => array(
-        'error'   => 'Consumable was not created, please try again.',
-        'success' => 'Consumable created successfully.'
+        'error'   => 'Forbruksvaren bli ikke opprettet, prøv igjen.',
+        'success' => 'Forbruksvaren opprettet.'
     ),
 
     'update' => array(
-        'error'   => 'Consumable was not updated, please try again',
-        'success' => 'Consumable updated successfully.'
+        'error'   => 'Forbruksvaren ble ikke opprettet, prøv igjen',
+        'success' => 'Forbruksvare oppdatert.'
     ),
 
     'delete' => array(
         'confirm'   => 'Are you sure you wish to delete this accessory?',
-        'error'   => 'There was an issue deleting the consumable. Please try again.',
+        'error'   => 'Noe gikk feil under sletting av forbruksvaren. Prøv igjen.',
         'success' => 'The accessory was deleted successfully.'
     ),
 
      'checkout' => array(
-        'error'   		=> 'Consumable was not checked out, please try again',
-        'success' 		=> 'Consumable checked out successfully.',
-        'user_does_not_exist' => 'That user is invalid. Please try again.'
+        'error'   		=> 'Forbruksvaren ble ikke tatt ut, prøv igjen',
+        'success' 		=> 'Forbruksvaren ble tatt ut.',
+        'user_does_not_exist' => 'Denne brukeren er ugyldig. Prøv igjen.'
     ),
 
     'checkin' => array(
-        'error'   		=> 'Consumable was not checked in, please try again',
-        'success' 		=> 'Consumable checked in successfully.',
-        'user_does_not_exist' => 'That user is invalid. Please try again.'
+        'error'   		=> 'Forbruksvaren ble ikke lagt inn, prøv igjen',
+        'success' 		=> 'Forbruksvaren ble tatt ut.',
+        'user_does_not_exist' => 'Denne brukeren er ugyldig. Prøv igjen.'
     )
 
 

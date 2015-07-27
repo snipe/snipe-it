@@ -7,7 +7,7 @@ return array(
 	'auto_increment_assets'		=> 'Erzeugen von fortlaufenden Asset IDs',
 	'auto_increment_prefix'		=> 'Präfix (optional)',
 	'auto_incrementing_help'    => 'Aktiviere zuerst fortlaufende Asset IDs um dies zu setzen',
-	'backups'					=> 'Backups',
+	'backups'					=> 'Sicherungen',
 	'barcode_type'				=> 'Barcode Typ',
 	'barcode_settings'			=> 'Barcode Einstellungen',
 	'default_eula_text'			=> 'Standard EULA',

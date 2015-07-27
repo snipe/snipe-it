@@ -6,7 +6,7 @@ return array(
     'checkout_history'  		=> 'Histórico de Registros',
     'checkout'  				=> 'Registra Licença Compartilhada',
     'edit'  					=> 'Editar Licença',
-    'filetype_info'				=> 'Allowed filetypes are png, gif, jpg, jpeg, doc, docx, pdf, txt, zip, and rar.',
+    'filetype_info'				=> 'Tipos de arquivos permitidos: png, gif, jpg, jpeg, doc, docx, pdf, txt, zip e rar.',
     'clone'  					=> 'Clonar Licença',
     'history_for'  				=> 'Histórico para ',
     'in_out'  					=> 'Retorna/Registra',

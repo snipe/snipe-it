@@ -1,8 +1,6 @@
 <?php
 
-return array(
-
-
+    return [
     'accessories'			=> 'Аксессуары',
     'accessory'				=> 'Аксессуар',
     'action'                => 'Action',
@@ -21,6 +19,7 @@ return array(
     'avatar_delete'         => 'Удалить аватар',
     'avatar_upload'         => 'Загрузить аватар',
     'back'      			=> 'Назад',
+    'bad_data'      		=> 'Nothing found. Maybe bad data?',
     'cancel'  				=> 'Отмена',
     'categories'			=> 'Categories',
     'category'				=> 'Category',
@@ -36,7 +35,7 @@ return array(
     'create'				=> 'Создать нового',
     'created_asset'			=> 'Создать актив',
     'created_at' 			=> 'Создано',
-    'currency'  			=> 'Руб.',
+    'currency'  			=> 'Руб.', // this is deprecated
     'current'  				=> 'Текущий',
     'custom_report'         => 'Пользовательский отчет по активам',
     'dashboard'				=> 'Панель мониторинга',
@@ -60,6 +59,9 @@ return array(
     'id'  					=> 'ID',
     'image_delete'         	=> 'Удалить изображение',
     'image_upload'         	=> 'Загрузить изображение',
+    'asset_maintenance'        => 'Asset Maintenance',
+    'asset_maintenance_report' => 'Asset Maintenance Report',
+    'asset_maintenances'       => 'Asset Maintenances',
     'item'  				=> 'Предмет',
     'last'					=> 'В конец',
     'last_name'				=> 'Фамилия',
@@ -69,6 +71,8 @@ return array(
     'licenses'				=> 'Лицензии',
     'list_all'				=> 'Весь список',
     'loading'				=> 'Загрузка',
+    'lock_passwords'        => 'This field cannot be edited in this installation.',
+    'feature_disabled'      => 'This feature has been disabled for this installation.',
     'location'              => 'Расположение',
     'locations'				=> 'Места',
     'logout'				=> 'Выйти',
@@ -106,6 +110,7 @@ return array(
     'select_supplier'		=> 'Выберите поставщика',
     'select_user'			=> 'Выберите пользователя',
     'select_date'			=> 'Выберите дату',
+    'select_statuslabel'	=> 'Select Status',
     'settings'				=> 'Настройки',
     'sign_in'				=> 'Вход',
     'site_name'				=> 'Название сайта',
@@ -118,8 +123,11 @@ return array(
     'type'  				=> 'Тип',
     'undeployable'			=> 'Не развертываемый',
     'unknown_admin'			=> 'Неизвестный администратор',
+    'update'                => 'Update',
     'uploaded'              => 'Загружено',
     'user'					=> 'Пользователь',
+    'accepted'			    => 'accepted',
+    'declined'			    => 'declined',
     'users'                 => 'Пользователи',
     'viewassets'  			=> 'Показать присвоенные активы',
     'website'               => 'Сайт',
@@ -127,5 +135,4 @@ return array(
     'years'					=> 'Лет',
     'yes' 					=> 'Да',
     'zip'  					=> 'Почтовый индекс',
-
-);
+    ];

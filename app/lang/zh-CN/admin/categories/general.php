@@ -7,7 +7,7 @@ return array(
     'category_name'  					=> '分类名称',
     'clone'                             => 'Clone Category',
     'create'  							=> '创建分类',
-    'edit'                              => 'Edit Category',
+    'edit'                              => '编辑分类',
     'eula_text'							=> 'Category EULA',
     'eula_text_help'					=> 'This field allows you to customize your EULAs for specific types of assets. If you only have one EULA for all of your assets, you can check the box below to use the primary default.',
     'require_acceptance'				=> 'Require users to confirm acceptance of assets in this category.',

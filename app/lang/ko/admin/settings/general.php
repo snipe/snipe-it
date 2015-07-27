@@ -7,7 +7,7 @@ return array(
 	'auto_increment_assets'		=> '자동-증가 자산 ID 생성',
 	'auto_increment_prefix'		=> '접두사 (부가적)',
 	'auto_incrementing_help'    => '이 것을 설정하려면 자동-증가 자산 ID 사용을 하세요.',
-	'backups'					=> 'Backups',
+	'backups'					=> '예비품',
 	'barcode_type'				=> '바코드 형식',
 	'barcode_settings'			=> '바코드 설정',
 	'default_eula_text'			=> '기본 사용권 계약',

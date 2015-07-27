@@ -4,12 +4,12 @@
 return array(
 
     'assets_user'  		=> 'Assets assigned to :name',
-    'clone'  			=> 'Clone User',
-    'contact_user'  	=> 'Contact :name',
-    'edit'  			=> 'Edit User',
-    'history_user'  	=> 'History for :name',
-    'last_login'  		=> 'Last Login',
-    'software_user'  	=> 'Software Checked out to :name',
-    'view_user'  		=> 'View User :name',
-    'usercsv'			=> 'CSV file',
+    'clone'  			=> 'Kopiuj Użytkownika',
+    'contact_user'  	=> 'Kontakt :name',
+    'edit'  			=> 'Edycja Użytkownika',
+    'history_user'  	=> 'Historia',
+    'last_login'  		=> 'Ostatnie logowanie',
+    'software_user'  	=> 'Oprogramowanie przypisane do :name',
+    'view_user'  		=> 'Zobacz Użytkownika :name',
+    'usercsv'			=> 'plik CSV',
     );

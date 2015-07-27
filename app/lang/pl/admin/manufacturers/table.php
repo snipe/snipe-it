@@ -3,9 +3,9 @@
 return array(
 
     'asset_manufacturers'	=> 'Asset Manufacturers',
-    'create'				=> 'Create Manufacturer',
+    'create'				=> 'Stwórz Producenta',
     'id'   					=> 'ID',
-    'name'      			=> 'Manufacturer Name',
-    'update'				=> 'Update Manufacturer',
+    'name'      			=> 'Nazwa Producenta',
+    'update'				=> 'Zaktualizuj Producenta',
 
 );

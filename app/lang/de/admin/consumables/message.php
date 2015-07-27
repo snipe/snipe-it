@@ -2,34 +2,34 @@
 
 return array(
 
-    'does_not_exist' => 'Consumable does not exist.',
+    'does_not_exist' => 'Verbrauchsmaterial existiert nicht.',
 
     'create' => array(
-        'error'   => 'Consumable was not created, please try again.',
-        'success' => 'Consumable created successfully.'
+        'error'   => 'Verbrauchsmaterial konnte nicht angelegt werden, bitte versuchen Sie es erneut.',
+        'success' => 'Verbrauchsmaterial erfolgreich angelegt.'
     ),
 
     'update' => array(
-        'error'   => 'Consumable was not updated, please try again',
-        'success' => 'Consumable updated successfully.'
+        'error'   => 'Verbrauchsmaterial konnte nicht aktualisiert werden, bitte versuchen Sie es erneut',
+        'success' => 'Verbrauchsmaterial erfolgreich aktualisiert.'
     ),
 
     'delete' => array(
-        'confirm'   => 'Are you sure you wish to delete this accessory?',
-        'error'   => 'There was an issue deleting the consumable. Please try again.',
-        'success' => 'The accessory was deleted successfully.'
+        'confirm'   => 'Wollen Sie dieses Zubehör wirklich löschen?',
+        'error'   => 'Es gab Probleme das Verbrauchsmaterial zu löschen. Bitte versuchen Sie es noch einmal.',
+        'success' => 'Zubehör wurde erfolgreich gelöscht.'
     ),
 
      'checkout' => array(
-        'error'   		=> 'Consumable was not checked out, please try again',
-        'success' 		=> 'Consumable checked out successfully.',
-        'user_does_not_exist' => 'That user is invalid. Please try again.'
+        'error'   		=> 'Das Verbrauchsmaterial wurde nicht ausgetragen, bitte versuchen Sie es erneut',
+        'success' 		=> 'Verbrauchsmaterial wurde erfolgreich ausgetragen.',
+        'user_does_not_exist' => 'Der angegebene Benutzer ist ungültig. Bitte erneut versuchen.'
     ),
 
     'checkin' => array(
-        'error'   		=> 'Consumable was not checked in, please try again',
-        'success' 		=> 'Consumable checked in successfully.',
-        'user_does_not_exist' => 'That user is invalid. Please try again.'
+        'error'   		=> 'Das Verbrauchsmaterial konnte nicht aufgenommen werden, bitte versuchen Sie es erneut',
+        'success' 		=> 'Verbrauchsmaterial erfolgreich hinzugefügt.',
+        'user_does_not_exist' => 'Dieser Benutzer ist ungültig. Bitte versuchen Sie es noch einmal.'
     )
 
 

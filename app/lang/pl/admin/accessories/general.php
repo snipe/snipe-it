@@ -15,6 +15,6 @@ return array(
     'remaining'  						=> 'Dostępne',
     'update'  							=> 'Aktualizuj kategorię',
     'use_default_eula'					=> 'Użyj <a href="#" data-toggle="modal" data-target="#eulaModal"> domyślnej EULA</a> zamiast tego.',
-    'use_default_eula_disabled'			=> '<del>Use the primary default EULA instead.</del> No primary default EULA is set. Please add one in Settings.',
+    'use_default_eula_disabled'			=> '<del>Użyj zamiast domyślnego EULA.</del> Brak domyślnego EULA. Proszę dodaj jakieś w opcjach.',
 
 );

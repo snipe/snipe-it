@@ -39,7 +39,7 @@ return array(
     'slack_endpoint'            => 'Slack Endpoint',
     'slack_integration'         => 'Slack Settings',
     'slack_integration_help'    => 'Slack integration is optional, however the endpoint and channel are required if you wish to use it. To configure Slack integration, you must first <a href=":slack_link" target="_new">create an incoming webhook</a> on your Slack account.',
-    'snipe_version'  			=> 'Snipe-IT version',
+    'snipe_version'  			=> 'Version de Snipe-IT',
     'system'                    => 'Information du système',
     'update'                    => 'Mettre à jour les paramètres',
     'value'                     => 'Valeur',

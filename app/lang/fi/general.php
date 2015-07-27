@@ -1,8 +1,6 @@
 <?php
 
-return array(
-
-
+    return [
     'accessories'			=> 'Accessories',
     'accessory'				=> 'Accessory',
     'action'                => 'Action',
@@ -21,6 +19,7 @@ return array(
     'avatar_delete'         => 'Poista käyttäjäkuva',
     'avatar_upload'         => 'Lähetä Käyttäjäkuva',
     'back'      			=> 'Edellinen',
+    'bad_data'      		=> 'Nothing found. Maybe bad data?',
     'cancel'  				=> 'Peruuta',
     'categories'			=> 'Categories',
     'category'				=> 'Category',
@@ -36,7 +35,7 @@ return array(
     'create'				=> 'Luo Uusi',
     'created_asset'			=> 'laite luotu',
     'created_at' 			=> 'Luontiaika',
-    'currency'  			=> '€',
+    'currency'  			=> '€', // this is deprecated
     'current'  				=> 'Käytössä Olevat',
     'custom_report'         => 'Muokattu Laiteraportti',
     'dashboard'				=> 'Dashboard',
@@ -60,6 +59,9 @@ return array(
     'id'  					=> 'Tunnus',
     'image_delete'         	=> 'Poista Kuva',
     'image_upload'         	=> 'Lähetä Kuva',
+    'asset_maintenance'        => 'Asset Maintenance',
+    'asset_maintenance_report' => 'Asset Maintenance Report',
+    'asset_maintenances'       => 'Asset Maintenances',
     'item'  				=> 'Item',
     'last'					=> 'Last',
     'last_name'				=> 'Sukunimi',
@@ -69,6 +71,8 @@ return array(
     'licenses'				=> 'Lisenssit',
     'list_all'				=> 'Listaa Kaikki',
     'loading'				=> 'Loading',
+    'lock_passwords'        => 'This field cannot be edited in this installation.',
+    'feature_disabled'      => 'This feature has been disabled for this installation.',
     'location'              => 'Sijainti',
     'locations'				=> 'Sijainnit',
     'logout'				=> 'Kirjaudu Ulos',
@@ -106,6 +110,7 @@ return array(
     'select_supplier'		=> 'Select a Supplier',
     'select_user'			=> 'Select a User',
     'select_date'			=> 'Select Date',
+    'select_statuslabel'	=> 'Select Status',
     'settings'				=> 'Asetukset',
     'sign_in'				=> 'Kirjaudu sisään',
     'site_name'				=> 'Sivuston Nimi',
@@ -118,8 +123,11 @@ return array(
     'type'  				=> 'Type',
     'undeployable'			=> 'Ei-käyttöönotettavissa',
     'unknown_admin'			=> 'Tuntematon Ylläpitäjä',
+    'update'                => 'Update',
     'uploaded'              => 'Uploaded',
     'user'					=> 'Käyttäjä',
+    'accepted'			    => 'accepted',
+    'declined'			    => 'declined',
     'users'                 => 'Users',
     'viewassets'  			=> 'Näytä Käyttöönotetut Laitteet',
     'website'               => 'Verkkosivu',
@@ -127,5 +135,4 @@ return array(
     'years'					=> 'vuotta',
     'yes' 					=> 'Kyllä',
     'zip'  					=> 'Postinumero',
-
-);
+    ];

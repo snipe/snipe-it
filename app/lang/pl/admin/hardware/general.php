@@ -1,7 +1,7 @@
 <?php
 
 return array(
-	'archived'  				=> 'Archived',
+	'archived'  				=> 'Zarchiwizowane',
     'asset'  					=> 'Nabytek',
     'checkin'  					=> 'Potwierdzanie zasobu/aktywa',
     'checkout'  				=> 'Przypisanie aktywa do Użytkownika',

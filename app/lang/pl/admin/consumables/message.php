@@ -15,21 +15,21 @@ return array(
     ),
 
     'delete' => array(
-        'confirm'   => 'Are you sure you wish to delete this accessory?',
+        'confirm'   => 'Czy na pewno chcesz usunąć te akcesoria?',
         'error'   => 'There was an issue deleting the consumable. Please try again.',
-        'success' => 'The accessory was deleted successfully.'
+        'success' => 'Akcesoria usunięte pomyślnie.'
     ),
 
      'checkout' => array(
         'error'   		=> 'Consumable was not checked out, please try again',
         'success' 		=> 'Consumable checked out successfully.',
-        'user_does_not_exist' => 'That user is invalid. Please try again.'
+        'user_does_not_exist' => 'Użytkownik nie istnieje. Spróbuj ponownie.'
     ),
 
     'checkin' => array(
         'error'   		=> 'Consumable was not checked in, please try again',
         'success' 		=> 'Consumable checked in successfully.',
-        'user_does_not_exist' => 'That user is invalid. Please try again.'
+        'user_does_not_exist' => 'Użytkownik nie istnieje. Spróbuj ponownie.'
     )
 
 
