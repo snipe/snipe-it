@@ -16,6 +16,9 @@ use Validator;
 use View;
 use Datatable;
 
+//use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\JsonResponse;
+
 class ModelsController extends AdminController
 {
     /**
@@ -113,6 +116,32 @@ class ModelsController extends AdminController
         // Redirect to the model create page
         return Redirect::to('hardware/models/create')->with('error', Lang::get('admin/models/message.create.error'));
 
+    }
+    
+    public function store()
+    {
+      //COPYPASTA!!!! FIXME
+      $model = new Model;
+      
+      $settings=Input::all();
+      $settings['eol']=0;
+      //
+
+      $validator = Validator::make($settings, $model->validationRules());
+      if ($validator->fails())
+      {
+          // The given data did not pass validation
+          return JsonResponse::create(["error" => "Failed validation: ".print_r($validator->messages()->all('<li>:message</li>'),true)],500);
+      } else {
+        $model->name=e(Input::get('name'));
+        $model->eol=0;
+        
+        if($model->save()) {
+          return JsonResponse::create($model);
+        } else {
+          return JsonResponse::create(["error" => "Couldn't save Model"],500);
+        }
+      }
     }
 
     /**

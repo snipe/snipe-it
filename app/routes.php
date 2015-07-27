@@ -13,14 +13,15 @@ Route::group(array('prefix' => 'api', 'namespace' => 'Controllers\Admin', 'befor
 
     /*---Status Label API---*/
     Route::group(array('prefix'=>'statuslabels'), function() {
-        Route::get('{statuslabelId}/deployable', function ($statuslabelId) {
-			 $statuslabel = Statuslabel::find($statuslabelId);
-             if (($statuslabel->deployable=='1') && ($statuslabel->pending!='1') && ($statuslabel->archived!='1')) {
-                 return '1';
-             } else {
-                 return '0';
-             }
-		});
+      Route::resource('/','StatuslabelsController');
+      Route::get('{statuslabelId}/deployable', function ($statuslabelId) {
+			$statuslabel = Statuslabel::find($statuslabelId);
+       if (($statuslabel->deployable=='1') && ($statuslabel->pending!='1') && ($statuslabel->archived!='1')) {
+           return '1';
+       } else {
+           return '0';
+       }
+		  });
     });
 
     /*---Accessories API---*/
@@ -74,6 +75,10 @@ Route::group(array('prefix' => 'api', 'namespace' => 'Controllers\Admin', 'befor
         Route::resource('/', 'CategoriesController');
         Route::get('list', ['as'=>'api.categories.list', 'uses'=>'CategoriesController@getDatatable']);
         Route::get('{categoryID}/view', ['as'=>'api.categories.view', 'uses'=>'CategoriesController@getDataView']);
+    });
+    /*-- Suppliers API (mostly for creating new ones in-line while creating an asset) --*/
+    Route::group(['prefix'=>'suppliers'], function () {
+      Route::resource('/', 'SuppliersController');
     });
 });
 

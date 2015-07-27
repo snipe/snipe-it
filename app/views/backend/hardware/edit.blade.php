@@ -88,7 +88,7 @@
                     @endif
 
                     <span class="mac_spinner" style="padding-left: 10px; color: green; display:none; width: 30px;"><i class="fa fa-spinner fa-spin"></i> </span>
-
+                    <a href='#' onclick="return dependency('model')">Add new Model...</a>
                     {{ $errors->first('model_id', '<br><span class="alert-msg"><i class="fa fa-times"></i> :message</span>') }}
                 </div>
             </div>
@@ -116,7 +116,8 @@
             <div class="form-group {{ $errors->has('supplier_id') ? ' has-error' : '' }}">
                 <label for="supplier_id" class="col-md-2 control-label">@lang('admin/hardware/form.supplier')</label>
                 <div class="col-md-7 col-sm-12">
-                    {{ Form::select('supplier_id', $supplier_list , Input::old('supplier_id', $asset->supplier_id), array('class'=>'select2', 'style'=>'min-width:350px')) }}
+                    {{ Form::select('supplier_id', $supplier_list , Input::old('supplier_id', $asset->supplier_id), array('class'=>'select2', 'style'=>'min-width:350px','id'=>'supplier_select_id')) }}
+                    <a href='#' onclick="return dependency('supplier','supplier_select_id')">Add new Supplier...</a>
                     {{ $errors->first('supplier_id', '<br><span class="alert-msg"><i class="fa fa-times"></i> :message</span>') }}
                 </div>
             </div>
@@ -165,8 +166,8 @@
             <div class="form-group {{ $errors->has('status_id') ? ' has-error' : '' }}">
                 <label for="status_id" class="col-md-2 control-label">@lang('admin/hardware/form.status') <i class='fa fa-asterisk'></i></label>
                     <div class="col-md-7 col-sm-12 col-sm-12">
-                        {{ Form::select('status_id', $statuslabel_list , Input::old('status_id', $asset->status_id), array('class'=>'select2 status_id', 'style'=>'width:350px')) }}
-
+                        {{ Form::select('status_id', $statuslabel_list , Input::old('status_id', $asset->status_id), array('class'=>'select2 status_id', 'style'=>'width:350px','id'=>'status_select_id')) }}
+                        <a href='#' onclick="return dependency('statuslabel','status_select_id')">Add new Status...</a>
                         <span class="status_spinner" style="padding-left: 10px; color: green; display:none; width: 30px;"><i class="fa fa-spinner fa-spin"></i> </span>
 
                         <p class="help-block">@lang('admin/hardware/form.help_checkout')</p>
@@ -181,6 +182,7 @@
                  </label>
                 <div class="col-md-7 col-sm-12">
                     {{ Form::select('assigned_to', $assigned_to , Input::old('assigned_to', $asset->assigned_to), array('class'=>'select2', 'id'=>'assigned_to', 'style'=>'min-width:350px')) }}
+                    <a href='#' onclick="return dependency('user','assigned_to')">Add new User...</a>
                     {{ $errors->first('assigned_to', '<br><span class="alert-msg"><i class="fa fa-times"></i> :message</span>') }}
                 </div>
             </div>
@@ -199,7 +201,8 @@
             <div class="form-group {{ $errors->has('rtd_location_id') ? ' has-error' : '' }}">
                 <label for="rtd_location_id" class="col-md-2 control-label">@lang('admin/hardware/form.default_location')</label>
                     <div class="col-md-7 col-sm-12">
-                        {{ Form::select('rtd_location_id', $location_list , Input::old('rtd_location_id', $asset->rtd_location_id), array('class'=>'select2', 'style'=>'width:350px')) }}
+                        {{ Form::select('rtd_location_id', $location_list , Input::old('rtd_location_id', $asset->rtd_location_id), array('class'=>'select2', 'style'=>'width:350px','id'=>'rtd_location_select')) }}
+                        <a href='#' onclick="return dependency('location','rtd_location_select')">Add new Location...</a>
                         {{ $errors->first('rtd_location_id', '<br><span class="alert-msg"><i class="fa fa-times"></i> :message</span>') }}
                     </div>
             </div>
@@ -290,6 +293,24 @@
         }
 	};
 
+
+function dependency(what,select_id) {
+  var name=prompt("Enter the name of your new "+what);
+  $.post("{{Config::get('app.url')}}/api/"+what+"s",{name: name},function (result) {
+    var id=result.id;
+    var name=result.name;
+    
+    var select=document.getElementById(select_id);
+    select.options[select.length]=new Option(name,id);
+    select.selectedIndex=select.length-1;
+    $(select).trigger("change");
+  }).fail(function (result) {
+    //console.dir(result.responseJSON);
+    msg=result.responseJSON.error.message || result.responseJSON.error;
+    window.alert("Unable to add new "+what+" - error: "+msg);
+  });
+  return false;
+}
 
 
 </script>
