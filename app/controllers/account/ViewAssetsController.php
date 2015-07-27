@@ -119,10 +119,10 @@ class ViewAssetsController extends AuthorizedController
 		$logaction = new Actionlog();
 
         if (Input::get('asset_acceptance')=='accepted') {
-            $logaction_msg  = 'User accepted';
+            $logaction_msg  = 'accepted';
             $return_msg = Lang::get('admin/users/message.accepted');
         } else {
-            $logaction_msg = 'User declined';
+            $logaction_msg = 'declined';
             $return_msg = Lang::get('admin/users/message.declined');
         }
 
