@@ -771,7 +771,7 @@ class UsersController extends AdminController
     								$data['first_name'] = $row[0];
     								$data['password'] = $pass;
 
-                                    if ($newuser['email') {
+                                    if ($newuser['email']) {
                                         Mail::send('emails.send-login', $data, function ($m) use ($newuser) {
         					                $m->to($newuser['email'], $newuser['first_name'] . ' ' . $newuser['last_name']);
         					                $m->subject('Welcome ' . $newuser['first_name']);
