@@ -80,7 +80,7 @@ class UsersController extends AdminController
 
         $location_list = array('' => '') + Location::lists('name', 'id');
         $manager_list = array('' => '') + DB::table('users')
-            ->select(DB::raw('concat(last_name,", ",first_name," (",email,")") as full_name, id'))
+            ->select(DB::raw('concat(last_name,", ",first_name," (",username,")") as full_name, id'))
             ->whereNull('deleted_at','and')
             ->orderBy('last_name', 'asc')
             ->orderBy('first_name', 'asc')
@@ -150,11 +150,12 @@ class UsersController extends AdminController
                 // Redirect to the new user page
                 //return Redirect::route('update/user', $user->id)->with('success', $success);
 
-                if (Input::get('email_user')==1) {
+                if ((Input::get('email_user')==1) && (Input::has('email'))) {
 					// Send the credentials through email
 
 					$data = array();
 					$data['email'] = e(Input::get('email'));
+                    $data['username'] = e(Input::get('username'));
 					$data['first_name'] = e(Input::get('first_name'));
 					$data['password'] = e(Input::get('password'));
 
