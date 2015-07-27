@@ -10,6 +10,7 @@ return array(
 	'backups'					=> 'Sicherungen',
 	'barcode_type'				=> 'Barcode Typ',
 	'barcode_settings'			=> 'Barcode Einstellungen',
+	'default_currency'  		=> 'Default Currency',
 	'default_eula_text'			=> 'Standard EULA',
 	'default_eula_help_text'	=> 'Sie können ebenfalls eigene EULA\'s mit spezifischen Asset Kategorien verknüpfen.',
     'display_asset_name'        => 'Zeige Assetname an',

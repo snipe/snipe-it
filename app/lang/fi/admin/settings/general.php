@@ -10,6 +10,7 @@ return array(
 	'backups'					=> 'Backups',
 	'barcode_type'				=> 'Barcode Type',
 	'barcode_settings'			=> 'Barcode Settings',
+	'default_currency'  		=> 'Default Currency',
 	'default_eula_text'			=> 'Default EULA',
 	'default_eula_help_text'	=> 'You can also associate custom EULAs to specific asset categories.',
     'display_asset_name'        => 'Näytä laitteen nimi listauksessa',

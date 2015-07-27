@@ -3,7 +3,7 @@
 return array(
 
     'account_already_exists' => 'Már létezik ezzel az e-mail címmel felhasználó.',
-    'account_not_found'      => 'Téves e-mail cím vagy a jelszó.',
+    'account_not_found'      => 'The username or password is incorrect.',
     'account_not_activated'  => 'Ez a felhasználó nincs aktiválva.',
     'account_suspended'      => 'Ez a felhasználói fiók fel van függesztve.',
     'account_banned'         => 'Ez a felhasználó ki van tiltva.',

@@ -5,6 +5,7 @@ return array(
     'about_categories'  				=> 'Kategorie pozwolą lepiej zorganizować twoje aktywa. Przykłady grup &quot; Desktop&quot;, &quot;Laptopy&quot;, &quot;Telefony&quot;, &quot;Tablety&quot;, i inne dowolnie przez Ciebie wymyślone. ',
     'asset_categories' 					=> 'Kategorie aktywów',
     'category_name'  					=> 'Nazwa kategorii',
+    'checkin_email'                     => 'Send email to user on checkin.',
     'clone'                             => 'Klonuj kategorię',
     'create'  							=> 'Stwórz Kategorię',
     'edit'                              => 'Edytuj Kategorię',

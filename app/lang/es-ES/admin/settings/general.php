@@ -10,6 +10,7 @@ return array(
 	'backups'					=> 'Copias de seguridad',
 	'barcode_type'				=> 'Tipo de código de barras',
 	'barcode_settings'			=> 'Configuración de Código de Barras',
+	'default_currency'  		=> 'Default Currency',
 	'default_eula_text'			=> 'EULA por defecto',
 	'default_eula_help_text'	=> 'También puede asociar EULAs personalizadas para categorías especificas de equipos.',
     'display_asset_name'        => 'Mostrar Nombre Equipo',

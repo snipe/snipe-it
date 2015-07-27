@@ -6,7 +6,7 @@ return array(
     'checkout_history'  		=> 'Zuweisungsverlauf',
     'checkout'  				=> 'Lizenzaktivierung herausgeben',
     'edit'  					=> 'Edit User',
-    'filetype_info'				=> 'Erlaubte Dateitypen sind png, gif, jpg, jpeg, doc, docx, pdf, txt, zip, oder rar.',
+    'filetype_info'				=> 'Allowed filetypes are png, gif, jpg, jpeg, doc, docx, pdf, txt, zip, and rar.',
     'clone'  					=> 'Clone User',
     'history_for'  				=> 'Verlauf für ',
     'in_out'  					=> 'Zurücknehmen/Herausgeben',

@@ -10,6 +10,7 @@ return array(
 	'backups'					=> 'Yedekler',
 	'barcode_type'				=> 'Barkod Tipi',
 	'barcode_settings'			=> 'Barkod Ayarları',
+	'default_currency'  		=> 'Default Currency',
 	'default_eula_text'			=> 'Varsayılan Sözleşme',
 	'default_eula_help_text'	=> 'Özel Demirbaş Kategorileri için özel Son Kullanıcı Lisans Sözleşmesi ilişkilendirebilirsiniz.',
     'display_asset_name'        => 'Demirbaş Adı Göster',

@@ -2,8 +2,8 @@
 
     return [
         'title'         => 'Asset Maintenance',
-        'asset_name'    => 'Asset Name',
-        'supplier_name' => 'Supplier Name',
-        'is_warranty'   => 'Warranty',
-        'dl_csv'        => 'Download CSV'
+        'asset_name'    => 'Název majetku',
+        'supplier_name' => 'Dodavatel',
+        'is_warranty'   => 'Záruka',
+        'dl_csv'        => 'Stáhnout CSV'
     ];

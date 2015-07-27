@@ -5,6 +5,7 @@ return array(
     'about_categories'  				=> 'Les catégories vous aident à organiser vos biens. Des exemples de catégories peuvent être &quot;Ordinateurs de bureau&quot;, &quot;Ordinateurs portables&quot;, &quot;Téléphones portables&quot;, &quot;Tablettes&quot;, etc..., mais vous pouvez utiliser les catégories comme cela vous convient. ',
     'asset_categories' 					=> 'Catégories',
     'category_name'  					=> 'Catégorie',
+    'checkin_email'                     => 'Send email to user on checkin.',
     'clone'                             => 'Clone Category',
     'create'  							=> 'Créer Catégorie',
     'edit'                              => 'Edit Category',

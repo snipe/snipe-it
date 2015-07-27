@@ -3,7 +3,7 @@
 return array(
 
     'account_already_exists' => 'Een account met dit e-mailadres bestaat reeds.',
-    'account_not_found'      => 'E-mailadres of wachtwoord onjuist.',
+    'account_not_found'      => 'The username or password is incorrect.',
     'account_not_activated'  => 'Deze gebruikersaccount is niet actief.',
     'account_suspended'      => 'Deze gebruikersaccount is vergrendeld.',
     'account_banned'         => 'Deze gebruikersaccount is geband.',

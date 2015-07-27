@@ -5,7 +5,7 @@
         'edit'               => 'Edit Asset Maintenance',
         'delete'             => 'Delete Asset Maintenance',
         'view'               => 'View Asset Maintenance Details',
-        'repair'             => 'Repair',
+        'repair'             => 'Oprava',
         'maintenance'        => 'Maintenance',
-        'upgrade'            => 'Upgrade'
+        'upgrade'            => 'Upgradovat'
     ];

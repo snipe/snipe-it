@@ -3,7 +3,7 @@
 return array(
 
     'account_already_exists' => '이 메일 주소를 사용하는 계정이 존재합니다.',
-    'account_not_found'      => '메일 주소 나 비밀번호를 확인해 주세요.',
+    'account_not_found'      => 'The username or password is incorrect.',
     'account_not_activated'  => '이 사용자는 비활성 계정입니다.',
     'account_suspended'      => '이 사용자는 보류 계정입니다.',
     'account_banned'         => '이 사용자는 금지 계정입니다.',

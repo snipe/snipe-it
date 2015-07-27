@@ -3,7 +3,7 @@
 return array(
 
     'account_already_exists' => 'Учетная запись с таким адресом электронной почты уже существует.',
-    'account_not_found'      => 'Электронная почта или пароль неверен.',
+    'account_not_found'      => 'The username or password is incorrect.',
     'account_not_activated'  => 'Эта учетная запись не активирована.',
     'account_suspended'      => 'Эта учетная запись приостановлена.',
     'account_banned'         => 'Эта учетная запись заблокирована.',

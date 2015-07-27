@@ -10,6 +10,7 @@ return array(
 	'backups'					=> 'Kopie zapasowe',
 	'barcode_type'				=> 'Typ Kodu Kreskowego',
 	'barcode_settings'			=> 'Ustawienia Kodów Kreskowych',
+	'default_currency'  		=> 'Default Currency',
 	'default_eula_text'			=> 'Domyślna EULA',
 	'default_eula_help_text'	=> 'You can also associate custom EULAs to specific asset categories.',
     'display_asset_name'        => 'Display Asset Name',

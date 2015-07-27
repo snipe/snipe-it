@@ -3,7 +3,7 @@
 return array(
 
     'account_already_exists' => 'Účet s tímto emailem již existuje.',
-    'account_not_found'      => 'Emailový účet nebo heslo je nesprávné.',
+    'account_not_found'      => 'Neexistující uživatel nebo chybné heslo!',
     'account_not_activated'  => 'Uživatelský účet není aktivován.',
     'account_suspended'      => 'Uživatelský účet je pozastaven.',
     'account_banned'         => 'Uživatelský účet je zablokován.',

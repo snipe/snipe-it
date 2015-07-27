@@ -10,6 +10,7 @@ return array(
 	'backups'					=> '备份',
 	'barcode_type'				=> '条码类型',
 	'barcode_settings'			=> '条码设置',
+	'default_currency'  		=> 'Default Currency',
 	'default_eula_text'			=> 'Default EULA',
 	'default_eula_help_text'	=> 'You can also associate custom EULAs to specific asset categories.',
     'display_asset_name'        => '显示资产名称',

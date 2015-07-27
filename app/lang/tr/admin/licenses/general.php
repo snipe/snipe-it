@@ -6,7 +6,7 @@ return array(
     'checkout_history'  		=> 'Çıkış Geçmişi',
     'checkout'  				=> 'Lisans Kullanıcı Çıkışı',
     'edit'  					=> 'Lisansı Düzenle',
-    'filetype_info'				=> 'Kabul edilen dosya türleri : png, gif, jpg, jpeg, doc, docx, pdf, txt, zip, ve rar.',
+    'filetype_info'				=> 'Allowed filetypes are png, gif, jpg, jpeg, doc, docx, pdf, txt, zip, and rar.',
     'clone'  					=> 'Lisansı Kopyala',
     'history_for'  				=> 'Geçmiş ',
     'in_out'  					=> 'Giriş/Çıkış',

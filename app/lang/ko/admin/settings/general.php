@@ -10,6 +10,7 @@ return array(
 	'backups'					=> '예비품',
 	'barcode_type'				=> '바코드 형식',
 	'barcode_settings'			=> '바코드 설정',
+	'default_currency'  		=> 'Default Currency',
 	'default_eula_text'			=> '기본 사용권 계약',
 	'default_eula_help_text'	=> '또한 특정 자산 분류에는 맞춤형 사용권 계약들과 연결을 해야 합니다.',
     'display_asset_name'        => '자산 명 표시',

@@ -10,6 +10,7 @@ return array(
 	'backups'					=> 'สำรอง',
 	'barcode_type'				=> 'ชนิดบาร์โค๊ด',
 	'barcode_settings'			=> 'ตั้งค่าบาร์โค๊ด',
+	'default_currency'  		=> 'Default Currency',
 	'default_eula_text'			=> 'ค่าเริ่มต้นข้อกำหนดการใช้งาน',
 	'default_eula_help_text'	=> 'คุณยังสามารถปรับแต่งข้อตกลงการใช้งานสำหรับกกำหนดให้กับหมวดหมู่ทรัพย์สินได้',
     'display_asset_name'        => 'แสดงชื่อทรัพย์สิน',
