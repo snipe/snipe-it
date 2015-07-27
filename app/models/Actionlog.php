@@ -1,6 +1,8 @@
 <?php
 
-class Actionlog extends Eloquent
+    use Illuminate\Support\Facades\DB;
+
+    class Actionlog extends Eloquent
 {
 	use SoftDeletingTrait;
     protected $dates = ['deleted_at'];
@@ -81,5 +83,29 @@ class Actionlog extends Eloquent
         } else {
             return false;
         }
+    }
+
+    public function getLatestCheckoutActionForAssets()
+    {
+
+        return DB::table( 'asset_logs' )
+                 ->select( DB::raw( 'asset_id, MAX(created_at) as last_created' ) )
+                 ->where( 'action_type', '=', 'checkout' )
+                 ->groupBy( 'asset_id' )
+                 ->get();
+    }
+    /**
+     * scopeCheckoutWithoutAcceptance
+     * @param $query
+     *
+     * @return mixed
+     * @author  Vincent Sposato <vincent.sposato@gmail.com>
+     * @version v1.0
+     */
+    public function scopeCheckoutWithoutAcceptance( $query )
+    {
+
+        return $query->where( 'action_type', '=', 'checkout' )
+                     ->where( 'accepted_id', '=', null );
     }
 }
