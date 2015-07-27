@@ -73,6 +73,24 @@ menu:
                 manually-editing-data:
                     text: "Manually Editing Data"
                     relativeUrl: installation/manually-editing-data.html
+                common-issues:
+                    text: Common Issues
+                    relativeUrl: common-issues.html
+                getting-help:
+                    text: Getting Help
+                    relativeUrl: getting-help.html
+                upgrading:
+                    text: Upgrading
+                    relativeUrl: upgrading.html
+                contributing:
+                    text: Contributing
+                    relativeUrl: contributing.html
+                translations:
+                    text: Translations
+                    relativeUrl: translations.html
+                license:
+                    text: License
+                    relativeUrl: license.html
         manual:
             name: User's Manual
             items:
@@ -94,24 +112,6 @@ menu:
         misc:
             name:
             items:
-                common-issues:
-                    text: Common Issues
-                    relativeUrl: common-issues.html
-                getting-help:
-                    text: Getting Help
-                    relativeUrl: getting-help.html
-                upgrading:
-                    text: Upgrading
-                    relativeUrl: upgrading.html
-                contributing:
-                    text: Contributing
-                    relativeUrl: contributing.html
-                translations:
-                    text: Translations
-                    relativeUrl: translations.html
-                license:
-                    text: License
-                    relativeUrl: license.html
                 website:
                     text: Main Website
                     absoluteUrl: http://snipeitapp.com
