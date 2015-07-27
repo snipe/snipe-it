@@ -35,7 +35,7 @@ menu:
                     relativeUrl: security.html
 
         installation:
-            name: Installation
+            name: '<i class="fa fa-cog"></i> Installation'
             items:
                 overview:
                     text: Overview
@@ -73,12 +73,7 @@ menu:
                 manually-editing-data:
                     text: "Manually Editing Data"
                     relativeUrl: installation/manually-editing-data.html
-                common-issues:
-                    text: Common Issues
-                    relativeUrl: common-issues.html
-                getting-help:
-                    text: Getting Help
-                    relativeUrl: getting-help.html
+
                 upgrading:
                     text: Upgrading
                     relativeUrl: upgrading.html
@@ -88,23 +83,32 @@ menu:
                 translations:
                     text: Translations
                     relativeUrl: translations.html
-                license:
-                    text: License
-                    relativeUrl: license.html
+
+        help:
+            name: "<i class='fa fa-life-ring'></i> Help"
+            items:
+                common-issues:
+                    text: Common Issues
+                    relativeUrl: common-issues.html
+                getting-help:
+                    text: "Getting Help"
+                    relativeUrl: getting-help.html
+
+
         manual:
-            name: User's Manual
+            name: "<i class='fa fa-book'></i> User's Manual"
             items:
                 manual-home:
                     text: Basic Concepts
                     relativeUrl: manual/index.html
                 importing-assets:
-                    text: "Importing Assets</span>"
+                    text: "Importing Assets"
                     relativeUrl: manual/importing-assets.html
                 alerts:
-                    text: "Configuring Alerts</span>"
+                    text: "Configuring Alerts"
                     relativeUrl: manual/alerts.html
                 labels:
-                    text: "Generating Labels</span>"
+                    text: "Generating Labels"
                     relativeUrl: manual/labels.html
 
 
@@ -112,6 +116,9 @@ menu:
         misc:
             name:
             items:
+                license:
+                    text: License
+                    relativeUrl: license.html
                 website:
                     text: Main Website
                     absoluteUrl: http://snipeitapp.com

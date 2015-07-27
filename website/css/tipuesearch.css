@@ -126,6 +126,10 @@ http://www.tipue.com/search
 	text-decoration: none;
 	text-align: center;
 }
+
+
+
+
 #tipue_search_foot_boxes li.current
 {
 	padding: 10px 17px 11px 17px;
@@ -194,4 +198,8 @@ http://www.tipue.com/search
           transform: scaleY(1.0);
           -webkit-transform: scaleY(1.0);
      }
+}
+
+#tipue_search_foot_boxes li:before {
+    content: none;
 }

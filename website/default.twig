@@ -4,16 +4,17 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ title }}</title>
-
-    <link href='https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic|Roboto+Slab:400,700|Inconsolata:400,700&subset=latin,cyrillic'
-          rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+    <link href='https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic|Roboto+Slab:400,700|Inconsolata:400,700&subset=latin,cyrillic' rel='stylesheet' type='text/css'>
 
     <link rel="stylesheet" href="{{ baseUrl }}/css/theme.css" type="text/css"/>
     <link rel="stylesheet" href="{{ baseUrl }}/css/theme-fixes.css" type="text/css"/>
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.4/styles/github.min.css">
 
-    <link href="http://fonts.googleapis.com/css?family=Open+Sans:300,400" rel="stylesheet">
+    <link href="//fonts.googleapis.com/css?family=Open+Sans:300,400" rel="stylesheet">
     <link href="{{ baseUrl }}/css/tipuesearch.css" rel="stylesheet">
+
+
 
 
 
@@ -24,7 +25,7 @@
 
         <nav data-toggle="wy-nav-shift" class="wy-nav-side">
             <div class="wy-side-nav-search">
-                <a href="{{ baseUrl }}/" class="fa fa-home"> {{ title|default('The title') }}</a>
+                <a href="{{ baseUrl }}/"><i class="fa fa-home"></i> {{ title|default('The title') }}</a>
             </div>
             <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
                 {% if menu is defined %}
@@ -42,7 +43,7 @@
 
                     {% for section in menu.sections %}
                         <p class="menu-section">
-                            {{ section.name }}
+                            {{ section.name|raw }}
                         </p>
 
                         <ul class="nav nav-pills nav-stacked">
