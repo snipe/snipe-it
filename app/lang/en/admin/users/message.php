@@ -2,6 +2,8 @@
 
 return array(
 
+    'accepted'                  => 'You have successfully accepted this asset.',
+    'declined'                  => 'You have successfully declined this asset.',
     'user_exists'               => 'User already exists!',
     'user_not_found'            => 'User [:id] does not exist.',
     'user_login_required'       => 'The login field is required',
@@ -29,6 +31,7 @@ return array(
         'unsuspend' => 'There was an issue unsuspending the user. Please try again.',
         'import'    => 'There was an issue importing users. Please try again.',
         'asset_already_accepted' => 'This asset has already been accepted.',
+        'accept_or_decline' => 'You must either accept or decline this asset.',
     ),
 
     'deletefile' => array(
