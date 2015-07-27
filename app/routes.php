@@ -7,7 +7,6 @@
 Route::group(array('prefix' => 'api', 'namespace' => 'Controllers\Admin', 'before' => 'admin-auth'), function () {
     /*---Hardware API---*/
     Route::group(['prefix' => 'hardware'], function() {
-        Route::resource('/', 'AssetsController');
         Route::get('list/{status?}', ['as'=>'api.hardware.list', 'uses'=>'AssetsController@getDatatable']);
     });
 
@@ -25,26 +24,26 @@ Route::group(array('prefix' => 'api', 'namespace' => 'Controllers\Admin', 'befor
 
     /*---Accessories API---*/
     Route::group(['prefix'=>'accessories'], function () {
-        Route::resource('/', 'AccessoriesController');
         Route::get('list', ['as'=>'api.accessories.list', 'uses'=>'AccessoriesController@getDatatable']);
         Route::get('{accessoryID}/view', ['as'=>'api.accessories.view', 'uses'=>'AccessoriesController@getDataView']);
     });
+
     /*---Consumables API---*/
     Route::group(array('prefix'=>'consumables'), function () {
-        Route::resource('/', 'ConsumablesController');
         Route::get('list', array('as'=>'api.consumables.list', 'uses'=>'ConsumablesController@getDatatable'));
         Route::get('{accessoryID}/view', array('as'=>'api.consumables.view', 'uses'=>'ConsumablesController@getDataView'));
     });
+
     /*---Users API---*/
     Route::group(['prefix'=>'users'], function() {
-        Route::resource('/', 'UsersController');
         Route::get('list/{status?}', ['as'=>'api.users.list', 'uses'=>'UsersController@getDatatable']);
     });
+
     /*---Licenses API---*/
     Route::group(['prefix'=>'licenses'], function() {
-        Route::resource('/', 'LicensesController');
         Route::get('list', ['as'=>'api.licenses.list', 'uses'=>'LicensesController@getDatatable']);
     });
+
     /*---Locations API---*/
     Route::group(array('prefix'=>'locations'), function() {
         Route::get('{locationID}/check', function ($locationID) {
@@ -52,15 +51,14 @@ Route::group(array('prefix' => 'api', 'namespace' => 'Controllers\Admin', 'befor
 			 return $location;
 		});
     });
+
     /*---Improvements API---*/
     Route::group( [ 'prefix' => 'asset_maintenances' ], function () {
-
-        Route::resource( '/', 'AssetMaintenancesController' );
         Route::get( 'list', [ 'as' => 'api.asset_maintenances.list', 'uses' => 'AssetMaintenancesController@getDatatable' ] );
     } );
+
     /*---Models API---*/
     Route::group( [ 'prefix' => 'models'], function() {
-        Route::resource('/', 'ModelsController');
         Route::get('list/{status?}', array('as'=>'api.models.list', 'uses'=>'ModelsController@getDatatable'));
         Route::get('{modelId}/check', function ($modelId) {
 			 $model = Model::find($modelId);
@@ -69,9 +67,9 @@ Route::group(array('prefix' => 'api', 'namespace' => 'Controllers\Admin', 'befor
 
         Route::get('{modelID}/view', ['as'=>'api.models.view', 'uses'=>'ModelsController@getDataView']);
     });
+
     /*--- Categories API---*/
     Route::group(['prefix'=>'categories'], function() {
-        Route::resource('/', 'CategoriesController');
         Route::get('list', ['as'=>'api.categories.list', 'uses'=>'CategoriesController@getDatatable']);
         Route::get('{categoryID}/view', ['as'=>'api.categories.view', 'uses'=>'CategoriesController@getDataView']);
     });
