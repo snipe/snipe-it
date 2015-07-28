@@ -123,8 +123,12 @@ class ImportCommand extends Command {
 				$user_asset_notes = '';
 			}
 
-			if (array_key_exists('9',$row)) {
-				$user_asset_purchase_date = date("Y-m-d 00:00:01", strtotime($row[10]));
+			if (array_key_exists('10',$row)) {
+				if ($row[10]!='') {
+					$user_asset_purchase_date = date("Y-m-d 00:00:01", strtotime($row[10]));
+				} else {
+					$user_asset_purchase_date = '';
+				}
 			} else {
 				$user_asset_purchase_date = '';
 			}
@@ -314,7 +318,11 @@ class ImportCommand extends Command {
 				$asset->rtd_location_id = $location->id;
 				$asset->user_id = 1;
 				$asset->status_id = $status_id;
-				$asset->purchase_date = $user_asset_purchase_date;
+				if ($user_asset_purchase_date!='') {
+					$asset->purchase_date = $user_asset_purchase_date;
+				} else {
+					$asset->purchase_date = NULL;
+				}
 				$asset->notes = e($user_asset_notes);
 
 				if ($asset->save()) {
