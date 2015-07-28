@@ -27,6 +27,7 @@ use Mail;
 use Datatable;
 use TCPDF;
 use Slack;
+use Manufacturer; //for embedded-create
 
 class AssetsController extends AdminController
 {
@@ -77,6 +78,11 @@ class AssetsController extends AdminController
 
         // Grab the dropdown list of status
         $statuslabel_list = array('' => Lang::get('general.select_statuslabel')) + Statuslabel::orderBy('name', 'asc')->lists('name', 'id');
+        
+        // grap dropdown lists for embedded create drop-downs
+        $manufacturer_list = array('' => 'Select One') + Manufacturer::lists('name', 'id');
+        $category_list = array('' => '') + DB::table('categories')->whereNull('deleted_at')->lists('name', 'id');
+        
 
         $view = View::make('backend/hardware/edit');
         $view->with('supplier_list',$supplier_list);
@@ -85,6 +91,8 @@ class AssetsController extends AdminController
         $view->with('assigned_to',$assigned_to);
         $view->with('location_list',$location_list);
         $view->with('asset',new Asset);
+        $view->with('manufacturer',$manufacturer_list);
+        $view->with('category',$category_list);
 
         if (!is_null($model_id)) {
             $selected_model = Model::find($model_id);

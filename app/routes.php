@@ -48,9 +48,10 @@ Route::group(array('prefix' => 'api', 'namespace' => 'Controllers\Admin', 'befor
     });
     /*---Locations API---*/
     Route::group(array('prefix'=>'locations'), function() {
+        Route::resource('/','LocationsController');
         Route::get('{locationID}/check', function ($locationID) {
-			 $location = Location::find($locationID);
-			 return $location;
+			  $location = Location::find($locationID);
+			  return $location;
 		});
     });
     /*---Improvements API---*/

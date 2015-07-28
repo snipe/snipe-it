@@ -27,6 +27,7 @@ use Datatable;
 use League\Csv\Reader;
 use Mail;
 use Accessory;
+use Symfony\Component\HttpFoundation\JsonResponse;
 
 class UsersController extends AdminController
 {
@@ -185,6 +186,66 @@ class UsersController extends AdminController
 
         // Redirect to the user creation page
         return Redirect::route('create/user')->withInput()->with('error', $error);
+    }
+    
+    public function store()
+    {
+        // Create a new validator instance from our validation rules
+        $validator = Validator::make(Input::all(), $this->validationRules);
+    $permissions = Input::get('permissions', array());
+    $this->decodePermissions($permissions);
+        app('request')->request->set('permissions', $permissions);
+
+        // If validation fails, we'll exit the operation now.
+        if ($validator->fails()) {
+            // Ooops.. something went wrong
+            return JsonResponse::create(["error" => "Failed validation: ".print_r($validator->messages()->all('<li>:message</li>'),true)],500);        }
+
+        try {
+            // We need to reverse the UI specific logic for our
+            // permissions here before we create the user.
+
+            // Get the inputs, with some exceptions
+            $inputs = Input::except('csrf_token', 'password_confirm', 'groups','email_user');
+
+      // @TODO: Figure out WTF I need to do this.
+            /*if ($inputs['manager_id']=='') {
+              unset($inputs['manager_id']);
+            }*/
+
+            /*if ($inputs['location_id']=='') {
+              unset($inputs['location_id']);
+            }*/
+
+            // Was the user created?
+            if ($user = Sentry::getUserProvider()->create($inputs)) {
+                if (Input::get('email_user')==1) {
+          // Send the credentials through email
+
+          $data = array();
+          $data['email'] = e(Input::get('email'));
+          $data['first_name'] = e(Input::get('first_name'));
+          $data['password'] = e(Input::get('password'));
+
+                Mail::send('emails.send-login', $data, function ($m) use ($user) {
+                    $m->to($user->email, $user->first_name . ' ' . $user->last_name);
+                    $m->subject('Welcome ' . $user->first_name);
+                });
+        }
+
+
+                return JsonResponse::create($user);
+            } else {
+              return JsonResponse::create(["error" => "Couldn't save User"],500);
+            }
+
+
+
+        } catch (Exception $e) {
+
+          // Redirect to the user creation page
+          return JsonResponse::create(["error" => "Failed validation: ".print_r($validator->messages()->all('<li>:message</li>'),true)],500);
+        }
     }
 
     /**

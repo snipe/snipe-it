@@ -134,6 +134,9 @@ class ModelsController extends AdminController
           return JsonResponse::create(["error" => "Failed validation: ".print_r($validator->messages()->all('<li>:message</li>'),true)],500);
       } else {
         $model->name=e(Input::get('name'));
+        $model->manufacturer_id=e(Input::get('manufacturer_id'));
+        $model->category_id=e(Input::get('category_id'));
+        $model->user_id=Sentry::getUser()->id;
         $model->eol=0;
         
         if($model->save()) {
