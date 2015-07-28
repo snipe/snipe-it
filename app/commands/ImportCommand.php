@@ -320,7 +320,7 @@ class ImportCommand extends Command {
 				if ($user_asset_purchase_date!='') {
 					$asset->purchase_date = $user_asset_purchase_date;
 				} else {
-					$asset->purchase_date = 'null';
+					$asset->purchase_date = NULL;
 				}
 				$asset->serial = e($user_asset_serial);
 				$asset->asset_tag = e($user_asset_tag);
