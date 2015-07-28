@@ -47,86 +47,93 @@
 
 <div class="row">
 
-
-
  {{ Form::open([
       'method' => 'POST',
       'route' => ['hardware/bulkedit'],
 	  'class' => 'form-horizontal' ]) }}
 
-
-
-{{ Datatable::table()
-    ->addColumn('<div class="text-center"><input type="checkbox" id="checkAll" style="padding-left: 0px;"></div>',Lang::get('admin/hardware/form.name'),
-    	Lang::get('admin/hardware/table.asset_tag'),
-    	Lang::get('admin/hardware/table.serial'),
-		Lang::get('admin/hardware/form.model'),
-    	Lang::get('admin/hardware/table.status'),
-		Lang::get('admin/hardware/table.location'),
-    	Lang::get('general.category'),
-    	Lang::get('admin/hardware/table.eol'),
-        Lang::get('general.notes'),
-        Lang::get('admin/hardware/form.order'),
-    	Lang::get('admin/hardware/table.checkout_date'),
-    	Lang::get('admin/hardware/table.change'),
-    	Lang::get('table.actions'))
-    ->setOptions(
-            array(
-	            'language' => array(
-	            	'search' => Lang::get('general.search'),
-	            	'lengthMenu' => Lang::get('general.page_menu'),
-	            	'loadingRecords' => Lang::get('general.loading'),
-	            	'zeroRecords' => Lang::get('general.no_results'),
-	            	'info' => Lang::get('general.pagination_info'),
-	            	'processing' => '<i class="fa fa-spinner fa-spin"></i> '.Lang::get('general.processing'),
-	            	'paginate'=> array(
-	            		'first'=>Lang::get('general.first'),
-	            		'previous'=>Lang::get('general.previous'),
-	            		'next'=>Lang::get('general.next'),
-	            		'last'=>Lang::get('general.last'),
-	            		),
-	            	),
-            	'sAjaxSource'=> route('api.hardware.list', array(''=>Input::get('status'),'order_number'=>Input::get('order_number'))),
-                'dom' =>'CT<"clear">lfrtip',
-                'colVis'=> array('showAll'=>'Show All','restore'=>'Restore','exclude'=>array(0,12,13),'activate'=>'mouseover'),
-                'columnDefs'=> array(array('visible'=>false,'targets'=>array(7,8,9)),array('orderable'=>false,'targets'=>array(0,12,13))),
-                'order'=>array(array(1,'asc')),
-            )
-        )
-    ->render('backend/hardware/datatable') }}
+    <table name="assets" id="table" data-url="{{route('api.hardware.list', array(''=>Input::get('status'),'order_number'=>Input::get('order_number')))}}">
+        <thead>
+            <tr>
+                <th data-class="hidden-xs" data-switchable="false" data-searchable="false" data-sortable="false" data-field="checkbox"><div class="text-center"><input type="checkbox" id="checkAll" style="padding-left: 0px;"></div></th>
+                <th data-sortable="true" data-field="name">{{Lang::get('admin/hardware/form.name')}}</th>
+                <th data-sortable="true" data-field="asset_tag">{{Lang::get('admin/hardware/table.asset_tag')}}</th>
+                <th data-sortable="true" data-field="serial">{{Lang::get('admin/hardware/table.serial')}}</th>
+                <th data-sortable="true" data-field="model">{{Lang::get('admin/hardware/form.model')}}</th>
+                <th data-sortable="true" data-field="status">{{Lang::get('admin/hardware/table.status')}}</th>
+                <th data-sortable="true" data-field="location">{{Lang::get('admin/hardware/table.location')}}</th>
+                <th data-sortable="true" data-field="category">{{Lang::get('general.category')}}</th>
+                <th data-sortable="true" data-field="eol">{{Lang::get('general.eol')}}</th>
+                <th data-sortable="true" data-field="notes">{{Lang::get('general.notes')}}</th>
+                <th data-sortable="true" data-field="order">{{Lang::get('admin/hardware/form.order')}}</th>
+                <th data-sortable="true" data-field="checkout_date">{{Lang::get('admin/hardware/table.checkout_date')}}</th>
+                <th data-switchable="false" data-searchable="false" data-sortable="false" data-field="change">{{Lang::get('admin/hardware/table.change')}}</th>
+                <th data-switchable="false" data-searchable="false" data-sortable="false" data-field="actions" >{{Lang::get('table.actions')}}</th>
+            </tr>
+        </thead>
+        <tfoot>
+            <tr>
+                <td colspan="12">
+                    <select name="bulk_actions">
+                        <option value="edit">Edit</option>
+                        <option value="labels">Generate Labels</option>
+                    </select>
+                    <button class="btn btn-default" id="bulkEdit" disabled>Go</button>
+                </td>
+            </tr>
+        </tfoot>
+    </table>
 
  {{ Form::close() }}
 
-</div>
-
-<script>
-
-	$(function() {
-
-		function checkForChecked() {
-
-	        var check_checked = $('input.one_required:checked').length;
-
-	        if (check_checked > 0) {
-	            $('#bulkEdit').removeAttr('disabled');
-	        }
-	        else {
-	            $('#bulkEdit').attr('disabled', 'disabled');
-	        }
-	    }
-
-	    $('table').on('change','input.one_required',checkForChecked);
-
-	    $("#checkAll").change(function () {
-			$("input:checkbox").prop('checked', $(this).prop("checked"));
-			checkForChecked();
-		});
-
-	});
-
-
+<script type="text/javascript">
+    $('#table').bootstrapTable({
+        classes: 'table table-responsive table-no-bordered',
+        undefinedText: 'undefined',
+        iconsPrefix: 'fa',
+        showRefresh: true,
+        search: true,
+        pageSize: {{{ Setting::getSettings()->per_page }}},
+        pagination: true,
+        sidePagination: 'client',
+        sortable: true,
+        mobileResponsive: true,
+        columnsHidden: ['name'],
+        showColumns: true,
+        maintainSelected: true,
+        paginationFirstText: "@lang('general.first')",
+        paginationLastText: "@lang('general.last')",
+        paginationPreText: "@lang('general.previous')",
+        paginationNextText: "@lang('general.next')",
+        pageList: ['10','25','50','100','150','200'],
+        icons: {
+            paginationSwitchDown: 'fa-caret-square-o-down',
+            paginationSwitchUp: 'fa-caret-square-o-up',
+            columns: 'fa-columns',
+            refresh: 'fa-refresh'
+        },
+        
+    });
 </script>
 
+<script>
+    $(function() {
+        function checkForChecked() {
+            var check_checked = $('input.one_required:checked').length;
+            if (check_checked > 0) {
+                $('#bulkEdit').removeAttr('disabled');
+            }
+            else {
+                $('#bulkEdit').attr('disabled', 'disabled');
+            }
+        }
+        $('#table').on('change','input.one_required',checkForChecked);
+        $("#checkAll").change(function () {
+            $("input:checkbox").prop('checked', $(this).prop("checked"));
+            checkForChecked();
+        });
+    });
+</script>
 
-
+</div>
 @stop
