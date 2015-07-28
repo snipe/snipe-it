@@ -18,64 +18,64 @@
         <h4 class="modal-title">Modal title</h4>
       </div>
       <div class="modal-body">
-        <label for="modal-name" class="dynamic-form-element">Name:
+        <label for="modal-name" class="dynamic-form-element">@lang('general.name'):
           <input type='text' id='modal-name' class="form-control">
           <br>
         </label>
 
 
-        <label for="modal-manufacturer_id" class="dynamic-form-element">Manufacturer:
-           {{ Form::select('modal-manufacturer', $manufacturer , '', array('class'=>'select2 parent', 'style'=>'width:350px','id' =>'modal-manufacturer_id')) }}     
+        <label for="modal-manufacturer_id" class="dynamic-form-element">@lang('general.manufacturer'):
+           {{ Form::select('modal-manufacturer', $manufacturer , '', array('class'=>'select2 parent', 'style'=>'width:350px','id' =>'modal-manufacturer_id')) }}
           <br>
         </label>
-        
-        
-        <label for="modal-category_id" class="dynamic-form-element">Category:
-           {{ Form::select('modal-category', $category ,'', array('class'=>'select2 parent', 'style'=>'width:350px','id' => 'modal-category_id')) }}     
+
+
+        <label for="modal-category_id" class="dynamic-form-element">@lang('general.category'):
+           {{ Form::select('modal-category', $category ,'', array('class'=>'select2 parent', 'style'=>'width:350px','id' => 'modal-category_id')) }}
           <br>
         </label>
-        
-        
-        <label for="modal-city" class="dynamic-form-element">City:
+
+
+        <label for="modal-city" class="dynamic-form-element">@lang('general.city'):
           <input type='text' id='modal-city' class="form-control">
           <br>
         </label>
-        
-        
-        <label for="modal-country" class="dynamic-form-element">Country:
+
+
+        <label for="modal-country" class="dynamic-form-element">@lang('general.country'):
           {{ Form::countries('country', Input::old('country'), 'select2 country',"modal-country") }}
           <br>
         </label>
-        
-        
-        <label for="modal-first_name" class="dynamic-form-element">First Name:
+
+
+        <label for="modal-first_name" class="dynamic-form-element">@lang('general.first_name'):
           <input type='text' id='modal-first_name' class="form-control">
           <br>
         </label>
-        
-        
-        <label for="modal-last_name" class="dynamic-form-element">Last Name:
+
+
+        <label for="modal-last_name" class="dynamic-form-element">@lang('general.last_name'):
           <input type='text' id='modal-last_name' class="form-control">
           <br>
         </label>
 
-        
-        <label for="modal-username" class="dynamic-form-element">Username:
+
+        <label for="modal-username" class="dynamic-form-element">@lang('admin/users/table.username'):
           <input type='text' id='modal-username' class="form-control">
           <br>
         </label>
-        
-        
-        <label for="modal-password" class="dynamic-form-element">Password:
+
+
+        <label for="modal-password" class="dynamic-form-element">@lang('admin/users/table.password'):
           <input type='password' id='modal-password' class="form-control">
           <br>
         </label>
-        
-        
-        <label for="modal-password_confirm" class="dynamic-form-element">Confirm Password:
+
+
+        <label for="modal-password_confirm" class="dynamic-form-element">@lang('admin/users/table.password_confirm'):
           <input type='password' id='modal-password_confirm' class="form-control">
         </label>
-      
+
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -376,7 +376,7 @@ $(function () {
     // data-dependency="model" data-select="model_select_id"
     model=link.data("dependency");
     select=link.data("select");
-    
+
     var modal = $(this);
     modal.find('.modal-title').text('Add a new ' + model);
     //modal.find('.modal-body').text("This is where I should be AJAX'ing in the contents for the new " +model+" that you'are about to add!");
@@ -391,7 +391,7 @@ $(function () {
       show_er('#modal-manufacturer_id');
       show_er('#modal-category_id');
       break;
-      
+
       case 'user':
       $('.dynamic-form-element').hide(); //we don't want a generic "name"
       show_er("#modal-first_name");
@@ -400,20 +400,20 @@ $(function () {
       show_er("#modal-password");
       show_er("#modal-password_confirm");
       break;
-      
+
       case 'location':
       show_er('#modal-city');
       show_er('#modal-country');
       break;
-      
+
       case 'supplier':
       case 'status':
       //do nothing, they just need 'name'
     }
-    
+
     console.warn("The Model is: "+model+" and the select is: "+select);
   });
-  
+
   $('#modal-save').on('click',function () {
     var data={};
     console.warn("We are about to SAVE!!! for model: "+model+" and select ID: "+select);
@@ -428,15 +428,15 @@ $(function () {
       var bits=elem.id.split("-");
       data[bits[1]]=$(elem).val();
     });
-    
+
     console.dir(data);
-    
+
     $.post("{{Config::get('app.url')}}/api/"+model+"s",data,function (result) {
       var id=result.id;
       var name=result.name || (result.first_name+" "+result.last_name);
       $('.modal-body input:visible').val("");
       $('#createModal').modal('hide');
-      
+
       console.warn("The select ID thing we're going for is: "+select);
       var selector=document.getElementById(select);
       selector.options[selector.length]=new Option(name,id);
@@ -447,7 +447,7 @@ $(function () {
       msg=result.responseJSON.error.message || result.responseJSON.error;
       window.alert("Unable to add new "+model+" - error: "+msg);
     });
-        
+
   });
 });
 </script>
