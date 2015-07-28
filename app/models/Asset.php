@@ -240,8 +240,8 @@ class Asset extends Depreciable
 			return false;
 		}
     }
-    
-    public function checkin_email() {    
+
+    public function checkin_email() {
         return $this->model->category->checkin_email;
     }
 
@@ -391,6 +391,29 @@ class Asset extends Depreciable
 	{
 		return $query->whereNotNull('deleted_at');
 	}
+
+
+	/**
+	* Query builder scope to search on text
+	*
+	* @param  Illuminate\Database\Query\Builder  $query  Query builder instance
+	* @param  text                              $search    	 Search term
+	*
+	* @return Illuminate\Database\Query\Builder          Modified query builder
+	*/
+	public function scopeTextSearch($query, $search)
+		{
+
+
+			return $query->where(function($query) use ($search)
+			{
+
+				$query->where('name','LIKE','%'.$search.'%')
+				->orWhere('asset_tag','LIKE','%'.$search.'%')
+				->orWhere('serial','LIKE','%'.$search.'%');
+			});
+
+		}
 
 
 }

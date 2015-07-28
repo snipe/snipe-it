@@ -95,7 +95,7 @@
         search: true,
         pageSize: {{{ Setting::getSettings()->per_page }}},
         pagination: true,
-        sidePagination: 'client',
+        sidePagination: 'server',
         sortable: true,
         mobileResponsive: true,
         columnsHidden: ['name'],
@@ -112,7 +112,7 @@
             columns: 'fa-columns',
             refresh: 'fa-refresh'
         },
-        
+
     });
 </script>
 

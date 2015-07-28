@@ -27,6 +27,7 @@ use Mail;
 use Datatable;
 use TCPDF;
 use Slack;
+use Paginator;
 
 class AssetsController extends AdminController
 {
@@ -1068,7 +1069,13 @@ class AssetsController extends AdminController
           $assets->where('order_number','=',e(Input::get('order_number')));
       }
 
-      $assets = $assets->orderBy('asset_tag', 'ASC')->get();
+      $assets = $assets->orderBy('asset_tag', 'ASC');
+
+     if (Input::has('search')) {
+         $assets = $assets->TextSearch(Input::has('search'));
+     }
+     $assets = $assets->skip(Input::get('offset'))->take(Input::get('limit'))->get();
+
 
       $rows = array();
       $i=0;
@@ -1108,8 +1115,8 @@ class AssetsController extends AdminController
         $i++;
       }
 
-      $data = array('total'=>$i, 'rows'=>$rows);
+      $data = array('total'=>Asset::assetcount(), 'rows'=>$rows);
 
-      return $rows;
+      return $data;
   }
 }
