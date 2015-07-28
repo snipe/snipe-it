@@ -55,7 +55,7 @@
     <table name="assets" id="table" data-url="{{route('api.hardware.list', array(''=>Input::get('status'),'order_number'=>Input::get('order_number')))}}">
         <thead>
             <tr>
-                <th data-class="hidden-xs" data-switchable="false" data-searchable="false" data-sortable="false" data-field="checkbox"><div class="text-center"><input type="checkbox" id="checkAll" style="padding-left: 0px;"></div></th>
+                <th data-class="hidden-xs" data-switchable="false" data-searchable="false" data-sortable="false" data-field="checkbox" clickToSelect="true"><div class="text-center"><input type="checkbox" id="checkAll" style="padding-left: 0px;"></div></th>
                 <th data-sortable="true" data-field="name">{{Lang::get('admin/hardware/form.name')}}</th>
                 <th data-sortable="true" data-field="asset_tag">{{Lang::get('admin/hardware/table.asset_tag')}}</th>
                 <th data-sortable="true" data-field="serial">{{Lang::get('admin/hardware/table.serial')}}</th>
