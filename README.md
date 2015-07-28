@@ -35,6 +35,12 @@ We use Waffle.io to help better communicate our roadmap with users. Our [project
 If you're having trouble with the installation, please check the [Common Issues](http://docs.snipeitapp.com/common-issues.html) and [Getting Help](http://docs.snipeitapp.com/getting-help.html) documentation.
 
 -----
+
+### Upgrading
+
+Please see the [upgrading documentation](http://docs.snipeitapp.com/upgrading.html) for instructions on upgrading Snipe-IT.
+
+------
 ### Announcement List
 
 To be notified of important news (such as new releases, security advisories, etc), [sign up for our list](http://eepurl.com/XyZKz). We'll never sell or give away your info, and we'll only email you when it's important.
@@ -46,12 +52,6 @@ To be notified of important news (such as new releases, security advisories, etc
 Please see the [translations documentation](http://docs.snipeitapp.com/translations.html) for information about available languages and how to add translations to Snipe-IT.
 
 -----
-
-## Updating
-
-Please see the [upgrading documentation](http://docs.snipeitapp.com/upgrading.html) for instructions on upgrading Snipe-IT.
-
-------
 
 ### Contributing
 
