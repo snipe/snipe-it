@@ -1072,7 +1072,7 @@ class AssetsController extends AdminController
       $assets = $assets->orderBy('asset_tag', 'ASC');
 
      if (Input::has('search')) {
-         $assets = $assets->TextSearch(Input::has('search'));
+         $assets = $assets->TextSearch(Input::get('search'));
      }
      $assets = $assets->skip(Input::get('offset'))->take(Input::get('limit'))->get();
 
