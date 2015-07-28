@@ -284,7 +284,7 @@ Form::macro('barcode_types', function ($name = "barcode_type", $selected = null,
     $barcode_types = array(
     'QRCODE'=>"QR Code",
     'PDF417'=>'PDF417',
-    'DATAMATRIX'=>'DATAMATRIX'
+    'DATAMATRIX'=>'DATAMATRIX',
     'C128' => 'Code 128'
     );
 
