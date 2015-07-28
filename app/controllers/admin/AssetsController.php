@@ -1082,6 +1082,7 @@ class AssetsController extends AdminController
      if (Input::has('search')) {
          $assets = $assets->TextSearch(Input::get('search'));
      }
+     $assetCount = $assets->count();
      $assets = $assets->skip(Input::get('offset'))->take(Input::get('limit'))->get();
 
 
@@ -1123,7 +1124,7 @@ class AssetsController extends AdminController
         $i++;
       }
 
-      $data = array('total'=>Asset::assetcount(), 'rows'=>$rows);
+      $data = array('total'=>$assetCount, 'rows'=>$rows);
 
       return $data;
   }
