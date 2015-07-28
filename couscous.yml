@@ -70,6 +70,9 @@ menu:
                 docker:
                     text: "<span class='subnav-indent'><i class='fa fa-caret-right'></i> Docker</span>"
                     relativeUrl: installation/server/docker.html
+                subdirectory:
+                    text: "Subdirectories"
+                    relativeUrl: installation/subdirectory.html
                 manually-editing-data:
                     text: "Manually Editing Data"
                     relativeUrl: installation/manually-editing-data.html
