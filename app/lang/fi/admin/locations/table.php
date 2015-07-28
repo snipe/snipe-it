@@ -12,4 +12,6 @@ return array(
     'address'		=> 'Osoite',
     'zip'			=> 'Postinumero',
     'locations'		=> 'Sijainnit',
+    'parent'		=> 'Parent',
+    'currency'  	=> 'Location Currency', // this is deprecated
 );

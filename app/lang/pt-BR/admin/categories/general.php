@@ -5,6 +5,7 @@ return array(
     'about_categories'  				=> 'As categorias de ativos lhe ajudam a organizar seus ativos. Algumas categorias de exemplo podem ser &quot;Desktops&quot;, &quot;Notebooks&quot;, &quot;Telefones Celulares&quot;, &quot;Tablets&quot;, e outras, mas você pode usar as categorias de ativos do jeito que você quiser.',
     'asset_categories' 					=> 'Categorias de Ativos',
     'category_name'  					=> 'Nome da Categoria',
+    'checkin_email'                     => 'Send email to user on checkin.',
     'clone'                             => 'Clonar Categoria',
     'create'  							=> 'Criar Categoria',
     'edit'                              => 'Editar Categoria',

@@ -5,6 +5,7 @@ return array(
     'about_categories'  				=> 'As categorias de equipamentos ajudam na organização dos teus equipamentos. Alguns exemplos de categorias são "Computadores", "Portáteis", "Telemóveis", "Tablets", e semelhantes. De qualquer das formas, podes usar as categorias da forma que faça mais sentido para ti. ',
     'asset_categories' 					=> 'Categorias de Equipamentos',
     'category_name'  					=> 'Nome da Categoria',
+    'checkin_email'                     => 'Send email to user on checkin.',
     'clone'                             => 'Clone Category',
     'create'  							=> 'Criar Categoria',
     'edit'                              => 'Edit Category',

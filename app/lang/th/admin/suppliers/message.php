@@ -2,23 +2,23 @@
 
 return array(
 
-    'does_not_exist' => 'Supplier does not exist.',
-    'assoc_users'	 => 'This supplier is currently associated with at least one model and cannot be deleted. Please update your models to no longer reference this supplier and try again. ',
+    'does_not_exist' => 'ไม่มีซัพพลายเออร์',
+    'assoc_users'	 => 'ซัพพลายเออร์นี้มีความเกี่ยวข้องอยู่กับรายการอื่นอย่างน้อยหนึ่งรายการในปัจจุบัน และจะไม่สามารถลบได้ กรุณาแก้ไขโดยการเอารายการดังกล่าวออกจากความเกี่ยวข้องหรืออ้างอิง และลองใหม่อีกครั้ง',
 
     'create' => array(
-        'error'   => 'Supplier was not created, please try again.',
-        'success' => 'Supplier created successfully.'
+        'error'   => 'ซัพพลายเออร์ยังไม่ถูกสร้าง กรุณราลองใหม่อีกครั้ง',
+        'success' => 'สร้างซัพพลายเออร์เสร็จสมบูรณ์แล้ว'
     ),
 
     'update' => array(
-        'error'   => 'Supplier was not updated, please try again',
-        'success' => 'Supplier updated successfully.'
+        'error'   => 'ไม่ได้อัพเดทซัพพลายเออร์ กรุณาลองใหม่อีกครั้ง',
+        'success' => 'อัพเดทซัพพลายเออร์เสร็จสมบูรณ์แล้ว'
     ),
 
     'delete' => array(
-        'confirm'   => 'Are you sure you wish to delete this supplier?',
-        'error'   => 'There was an issue deleting the supplier. Please try again.',
-        'success' => 'Supplier was deleted successfully.'
+        'confirm'   => 'คุณแน่ใจว่าคุณตั้งใจจะลบซัพพลายเออร์นี้?',
+        'error'   => 'มีปัญหาระหว่างลบซัพพลายเออร์ กรุณาลองใหม่อีกครั้ง',
+        'success' => 'ลบซัพพลายเออร์เสร็จสมบูรณ์แล้ว'
     )
 
 );

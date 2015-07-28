@@ -5,6 +5,7 @@ return array(
     'about_categories'  				=> 'تصنيفات الأصول تساعدك على ترتيب الأصول. من الأمثلة على التصنيفات &quot; مكاتب &quot;،  &quot;أجهزة الكمبيوتر المحمولة &quot;،  &quot;الهواتف النقالة &quot;،  &quot;أجهزة لوحية &quot; وهكذا، كما يمكنك استخدام التصنيفات بأي طريقة تناسبك. ',
     'asset_categories' 					=> 'التصنيفات',
     'category_name'  					=> 'اسم التصنيف',
+    'checkin_email'                     => 'Send email to user on checkin.',
     'clone'                             => 'Clone Category',
     'create'  							=> 'إنشاء تصنيف',
     'edit'                              => 'Edit Category',

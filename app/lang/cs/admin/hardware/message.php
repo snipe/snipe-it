@@ -25,7 +25,7 @@ return array(
     
     'deletefile' => array(
         'error'   => 'File not deleted. Please try again.',
-        'success' => 'File successfully deleted.',
+        'success' => 'Soubor byl úspěšně smazán.',
     ),
 
     'upload' => array(
@@ -39,7 +39,7 @@ return array(
     'delete' => array(
         'confirm'   	=> 'Are you sure you wish to delete this asset?',
         'error'   		=> 'There was an issue deleting the asset. Please try again.',
-        'success' 		=> 'The asset was deleted successfully.'
+        'success' 		=> 'Majetek byl úspěšně smazán.'
     ),
 
     'checkout' => array(

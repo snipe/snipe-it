@@ -4,8 +4,8 @@ return array(
 
 
     'update' => array(
-        'error'   => 'An error has occurred while updating. ',
-        'success' => 'Settings updated successfully.'
+        'error'   => 'Vyskytla se chyba při aktualizaci. ',
+        'success' => 'Nastavení úspěšně uloženo.'
     ),
 
 );

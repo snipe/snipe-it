@@ -6,6 +6,7 @@ return array(
     'checkout_history'  		=> 'Istoric predari',
     'checkout'  				=> 'Locuri licente predate',
     'edit'  					=> 'Editeaza licenta',
+    'filetype_info'				=> 'Allowed filetypes are png, gif, jpg, jpeg, doc, docx, pdf, txt, zip, and rar.',
     'clone'  					=> 'Cloneaza licenta',
     'history_for'  				=> 'Istoric pentru ',
     'in_out'  					=> 'Predare/Primire',

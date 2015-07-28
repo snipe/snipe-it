@@ -6,6 +6,7 @@ return array(
     'checkout_history'  		=> 'История привязок',
     'checkout'  				=> 'Привязать лицензию',
     'edit'  					=> 'Редактировать лицензию',
+    'filetype_info'				=> 'Allowed filetypes are png, gif, jpg, jpeg, doc, docx, pdf, txt, zip, and rar.',
     'clone'  					=> 'Клонировать лицензию',
     'history_for'  				=> 'История для ',
     'in_out'  					=> 'Отвязано / Привязано',

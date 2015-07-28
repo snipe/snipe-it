@@ -6,6 +6,7 @@ return array(
     'checkout_history'  		=> 'Storico Estrazioni',
     'checkout'  				=> 'Estrazione Licenza Sede',
     'edit'  					=> 'Modifica Licenza',
+    'filetype_info'				=> 'Allowed filetypes are png, gif, jpg, jpeg, doc, docx, pdf, txt, zip, and rar.',
     'clone'  					=> 'Clona Licenza',
     'history_for'  				=> 'Storico per ',
     'in_out'  					=> 'Dentro/Fuori',

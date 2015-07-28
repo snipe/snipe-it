@@ -2,12 +2,14 @@
 
 return array(
 
-    'user_exists'              	=> 'Gebruiker bestaat reeds!',
-    'user_not_found'           	=> 'Gebruiker [:id] bestaat niet.',
-    'user_login_required'      	=> 'Het veld gebruikersnaam is verplicht.',
-    'user_password_required'   	=> 'Het veld wachtwoord is verplicht.',
-    'insufficient_permissions' 	=> 'Onvoldoende rechten.',
-    'user_deleted_warning' 		=> 'Deze gebruiker werd verwijderd. Om deze gebruiker te bewerken of toe te wijzen aan materiaal, zal deze opnieuw geactiveerd moeten worden.',
+    'accepted'                  => 'You have successfully accepted this asset.',
+    'declined'                  => 'You have successfully declined this asset.',
+    'user_exists'               => 'Gebruiker bestaat reeds!',
+    'user_not_found'            => 'Gebruiker [:id] bestaat niet.',
+    'user_login_required'       => 'Het veld gebruikersnaam is verplicht.',
+    'user_password_required'    => 'Het veld wachtwoord is verplicht.',
+    'insufficient_permissions'  => 'Onvoldoende rechten.',
+    'user_deleted_warning'      => 'Deze gebruiker werd verwijderd. Om deze gebruiker te bewerken of toe te wijzen aan materiaal, zal deze opnieuw geactiveerd moeten worden.',
 
 
     'success' => array(
@@ -29,6 +31,19 @@ return array(
         'unsuspend' => 'Er was een probleem tijdens het opnieuw inschakelen van de gebruiker. Probeer opnieuw, aub.',
         'import'    => 'There was an issue importing users. Please try again.',
         'asset_already_accepted' => 'This asset has already been accepted.',
+        'accept_or_decline' => 'You must either accept or decline this asset.',
+    ),
+
+    'deletefile' => array(
+        'error'   => 'File not deleted. Please try again.',
+        'success' => 'File successfully deleted.',
+    ),
+
+    'upload' => array(
+        'error'   => 'File(s) not uploaded. Please try again.',
+        'success' => 'File(s) successfully uploaded.',
+        'nofiles' => 'You did not select any files for upload',
+        'invalidfiles' => 'One or more of your files is too large or is a filetype that is not allowed. Allowed filetypes are png, gif, jpg, doc, docx, pdf, and txt.',
     ),
 
 );
