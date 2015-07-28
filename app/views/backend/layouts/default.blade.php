@@ -5,7 +5,7 @@
 
         <!-- Basic Page Needs
         ================================================== -->
-        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" /> 
         <meta charset="utf-8" />
         <title>
             @section('title')
@@ -36,17 +36,21 @@
         <link rel="stylesheet" href="{{ asset('assets/css/compiled/user-list.css') }}" type="text/css" media="screen" />
         <link rel="stylesheet" href="{{ asset('assets/css/compiled/user-profile.css') }}" type="text/css" media="screen" />
 
-        <link rel="stylesheet" href="{{ asset('assets/css/lib/jquery.dataTables.css') }}" type="text/css" media="screen" />
-        <link rel="stylesheet" href="{{ asset('assets/css/compiled/dataTables.colVis.css') }}" type="text/css" media="screen" />
-        <link rel="stylesheet" href="{{ asset('assets/css/compiled/dataTables.tableTools.css') }}" type="text/css" media="screen" />
+        <link rel="stylesheet" href="{{ asset('assets/css/bootstrap/bootstrap-table.css') }}" type="text/css" media="screen" />
+
         <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/compiled/print.css') }}" media="print" />
 
 
         <!-- global header javascripts -->
         <script src="{{ asset('assets/js/jquery-latest.js') }}"></script>
-        <script src="{{ asset('assets/js/jquery.dataTables.min.js') }}"></script>
-        <script src="{{ asset('assets/js/dataTables.colVis.js') }}"></script>
-        <script src="{{ asset('assets/js/dataTables.tableTools.js') }}"></script>
+        <script src="{{ asset('assets/js/bootstrap-table.js') }}"></script>
+        <script src="{{ asset('assets/js/extensions/export/bootstrap-table-export.js') }}"></script>
+        <script src="{{ asset('assets/js/extensions/cookie/bootstrap-table-cookie.js') }}"></script>
+        <script src="{{ asset('assets/js/extensions/mobile/bootstrap-table-mobile.js') }}"></script>
+        <script src="{{ asset('assets/js/libs/FileSaver/FileSaver.min.js') }}"></script>
+        <script src="{{ asset('assets/js/libs/html2canvas/html2canvas.min.js') }}"></script>
+        <script src="{{ asset('assets/js/libs/jsPDF/jspdf.min.js') }}"></script>
+        <script src="{{ asset('assets/js/libs/jsPDF-AutoTable/jspdf.plugin.autotable.js') }}"></script>
 
         <script>
             window.snipeit = {
@@ -81,8 +85,6 @@
 				background-color: {{{ Setting::getSettings()->header_color }}};
 				background: -webkit-linear-gradient(top,  {{{ Setting::getSettings()->header_color }}} 0%,{{{ Setting::getSettings()->header_color }}} 100%);
 				border-color: {{{ Setting::getSettings()->header_color }}};
-                background-image: -moz-linear-gradient(top, {{{ Setting::getSettings()->header_color }}}, {{{ Setting::getSettings()->header_color }}});
-
 			}
 		@endif
 
@@ -460,14 +462,5 @@
     <script src="{{ asset('assets/js/bootstrap.datepicker.js') }}"></script>
     <script src="{{ asset('assets/js/theme.js') }}"></script>
     <script src="{{ asset('assets/js/snipeit.js') }}"></script>
-	<script>
-		$(function(){
-			$( ".ColVis" ).prepend('<button class="ColVis_Button">Reset Defaults</button>').click(function(e){
-				e.preventDefault();
-				oTable.api().state.clear();
-				window.location.reload();
-			});
-		});
-	</script>
     </body>
 </html>
