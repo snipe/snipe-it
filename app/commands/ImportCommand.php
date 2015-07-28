@@ -123,8 +123,12 @@ class ImportCommand extends Command {
 				$user_asset_notes = '';
 			}
 
-			if (array_key_exists('9',$row)) {
-				$user_asset_purchase_date = date("Y-m-d 00:00:01", strtotime($row[10]));
+			if (array_key_exists('10',$row)) {
+				if ($row[10]!='') {
+					$user_asset_purchase_date = date("Y-m-d 00:00:01", strtotime($row[10]));
+				} else {
+					$user_asset_purchase_date = '';
+				}
 			} else {
 				$user_asset_purchase_date = '';
 			}
