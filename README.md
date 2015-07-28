@@ -14,13 +14,16 @@ This project is being actively developed and we're [releasing quite frequently](
 __This is web-based software__. This means there there is no executable file (aka no .exe files), and it must be run on a web server and accessed through a web browser. It runs on any Mac OSX, flavor of Linux, as well as Windows.
 
 -----
-### Documentation & Installation
 
-__Installation and configuration documentation for this project has been moved to http://snipeitapp.com/documentation/.__
+### Installation
 
-We'll be adding a long-overdue user's manual soon as well.
+__Installation and configuration documentation for this project has been moved to http://docs.snipeitapp.com.__
 
-__To deploy on Ubuntu using Ansible and Vagrant, be sure to check out the [Snipe-IT Installation scripts](https://github.com/GR360RY/snipeit-ansible) created by [@GR360RY](https://github.com/GR360RY/).__
+#### Server Requirements
+Please see the [requirements documentation](http://docs.snipeitapp.com/requirements.html) for full requirements.
+
+
+To deploy on Ubuntu using Ansible and Vagrant, check out the [Snipe-IT Installation scripts](https://github.com/GR360RY/snipeit-ansible) created by [@GR360RY](https://github.com/GR360RY/).
 
 -----
 ### Bug Reports & Feature Requests
@@ -29,44 +32,31 @@ Feel free to check out the [GitHub Issues for this project](https://github.com/s
 
 We use Waffle.io to help better communicate our roadmap with users. Our [project page there](http://waffle.io/snipe/snipe-it) will show you the backlog, what's ready to be worked on, what's in progress, and what's completed.
 
-[![Stories in Ready](https://badge.waffle.io/snipe/snipe-it.png?label=ready&title=Ready)](http://waffle.io/snipe/snipe-it)
+If you're having trouble with the installation, please check the [Common Issues](http://docs.snipeitapp.com/common-issues.html) and [Getting Help](http://docs.snipeitapp.com/getting-help.html) documentation.
 
 -----
 ### Announcement List
 
 To be notified of important news (such as new releases, security advisories, etc), [sign up for our list](http://eepurl.com/XyZKz). We'll never sell or give away your info, and we'll only email you when it's important.
 
+------
 
 ### Translations!
 
-If you're not a coder but want to give back to the project and you're fluent in other languages, consider helping out with the translations. We use [CrowdIn](https://crowdin.com) to manage translations, and it makes it super-simple for you to add translations to the project without messing with code. Check out [the Snipe-IT CrowdIn translation project here](https://crowdin.com/project/snipe-it/).
-
-We currently have English, Chinese, Finnish, Malay, Romanian and Spanish completed, and are looking for lots more!
-
------
-## Requirements
-
-- PHP 5.4 or later
-- MCrypt PHP Extension
-- Fileinfo Extension
-
-And _one_ of the following image libraries (for QR codes, asset model image and user avatar image uploads).
-
-- GD Library (>=2.0) … or …
-- Imagick PHP extension (>=6.3.8)
+Please see the [translations documentation](http://docs.snipeitapp.com/translations.html) for information about available languages and how to add translations to Snipe-IT.
 
 -----
 
-## Important Notes on Updating
+## Updating
 
-Whenever you pull down a new version from master or develop, when you grab the [latest official release](https://github.com/snipe/snipe-it/releases), make sure to run the following commands via command line:
+Please see the [upgrading documentation](http://docs.snipeitapp.com/upgrading.html) for instructions on upgrading Snipe-IT.
 
-	php composer.phar dump-autoload
-	php artisan migrate
+------
 
-Forgetting to do this can mean your DB might end up out of sync with the new files you just pulled, or you may have some funky cached autoloader values. It's a good idea to get into the habit of running these every time you pull anything new down. If there are no database changes to migrate, it won't hurt anything to run migrations anyway.
+### Contributing
 
-## Contributor Code of Conduct
+Please see the documentation on [contributing and developing for Snipe-IT](http://docs.snipeitapp.com/contributing.html).
+
+[![Stories in Ready](https://badge.waffle.io/snipe/snipe-it.png?label=ready+for+dev&title=Ready+for+Development)](http://waffle.io/snipe/snipe-it)
 
 Please note that this project is released with a [Contributor Code of Conduct](CODE_OF_CONDUCT.md). By participating in this project you agree to abide by its terms.
-
