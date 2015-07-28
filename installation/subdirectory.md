@@ -4,7 +4,7 @@ currentMenu: subdirectory
 
 # Installing Snipe-IT Into a Subdirectory
 
-If you wish to run Snipe-IT in a subdirectory (https://yourserver.com/snipe-it) instead of at a primary domain (http://yourserver.com) or a sub-domain (https://snipe-it.yourserver.com), you'll need to go through the standard install steps 1-5, and then make a few  small configuration changes to your server configuration and `.htaccess` file.
+If you wish to run Snipe-IT in a subdirectory (`https://yourserver.com/snipe-it`) instead of at a primary domain (`http://yourserver.com`) or a sub-domain (`https://snipe-it.yourserver.com`), you'll need to go through the standard install steps 1-5, and then make a few  small changes to your server configuration and `.htaccess` file.
 
 ## Add an Alias Directive
 In a standard Apache virtualhost setup, you'll need to add an `Alias` attribute to the virtualhost in your `httpd.conf`. That might look something like this, if your path to the Snipe-IT files were `/var/www/html/snipe-it/public`:
@@ -30,7 +30,7 @@ In a standard Apache virtualhost setup, you'll need to add an `Alias` attribute 
 
 ## Modify Your .htaccess
 
-You'll need to add one line to your `.htaccess` file to make this work. Immediately beneath the `RewriteEngine On`, add the option `RewriteBase /snipe-it`, once again assuming that your subdirctory URL is  `http://yourserver.com/snipe-it`.
+You'll need to add one line to your `.htaccess` file to make this work. Immediately beneath the `RewriteEngine On`, add the option `RewriteBase /snipe-it`, once again assuming that your subdirectory URL is  `http://yourserver.com/snipe-it`.
 
  ```
  <IfModule mod_rewrite.c>

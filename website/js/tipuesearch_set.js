@@ -20,6 +20,9 @@ var tipuesearch_stop_words = ["a", "about", "above", "after", "again", "against"
 var tipuesearch_replace = {'words': [
      {'word': 'tipua', 'replace_with': 'tipue'},
      {'word': 'javscript', 'replace_with': 'javascript'},
+     {'word': 'sub-directory', 'replace_with': 'subdirectory'},
+     {'word': 'sub-folder', 'replace_with': 'subdirectory'},
+     {'word': 'subfolder', 'replace_with': 'subdirectory'},
      {'word': 'jqeury', 'replace_with': 'jquery'}
 ]};
 
