@@ -317,6 +317,11 @@ class ImportCommand extends Command {
 
 				$asset = new Asset();
 				$asset->name = e($user_asset_name);
+				if ($user_asset_purchase_date!='') {
+					$asset->purchase_date = $user_asset_purchase_date;
+				} else {
+					$asset->purchase_date = 'null';
+				}
 				$asset->serial = e($user_asset_serial);
 				$asset->asset_tag = e($user_asset_tag);
 				$asset->model_id = $asset_model->id;
@@ -324,7 +329,7 @@ class ImportCommand extends Command {
 				$asset->rtd_location_id = $location->id;
 				$asset->user_id = 1;
 				$asset->status_id = $status_id;
-				$asset->purchase_date = $user_asset_purchase_date;
+
 				$asset->notes = e($user_asset_notes);
 
 				if ($asset->save()) {
