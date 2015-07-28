@@ -163,7 +163,7 @@
                     @endif
 
                     <span class="mac_spinner" style="padding-left: 10px; color: green; display:none; width: 30px;"><i class="fa fa-spinner fa-spin"></i> </span>
-                    <a href='#' data-toggle="modal" data-target="#createModal" data-dependency="model" data-select="model_select_id">Add new Model...</a> <!-- onclick="return dependency('model')" -->
+                    <a href='#' data-toggle="modal" data-target="#createModal" data-dependency="model" data-select="model_select_id"><i class="verticon fa fa-plus-square-o fa-2x"></i></a> <!-- onclick="return dependency('model')" -->
                     {{ $errors->first('model_id', '<br><span class="alert-msg"><i class="fa fa-times"></i> :message</span>') }}
                 </div>
             </div>
@@ -192,7 +192,7 @@
                 <label for="supplier_id" class="col-md-2 control-label">@lang('admin/hardware/form.supplier')</label>
                 <div class="col-md-7 col-sm-12">
                     {{ Form::select('supplier_id', $supplier_list , Input::old('supplier_id', $asset->supplier_id), array('class'=>'select2', 'style'=>'min-width:350px','id'=>'supplier_select_id')) }}
-                    <a href='#' data-toggle="modal"  data-target="#createModal" data-dependency="supplier" data-select='supplier_select_id'>Add new Supplier...</a>
+                    <a href='#' data-toggle="modal"  data-target="#createModal" data-dependency="supplier" data-select='supplier_select_id'><i class="verticon fa fa-plus-square-o fa-2x"></i></a>
                     {{ $errors->first('supplier_id', '<br><span class="alert-msg"><i class="fa fa-times"></i> :message</span>') }}
                 </div>
             </div>
@@ -242,7 +242,7 @@
                 <label for="status_id" class="col-md-2 control-label">@lang('admin/hardware/form.status') <i class='fa fa-asterisk'></i></label>
                     <div class="col-md-7 col-sm-12 col-sm-12">
                         {{ Form::select('status_id', $statuslabel_list , Input::old('status_id', $asset->status_id), array('class'=>'select2 status_id', 'style'=>'width:350px','id'=>'status_select_id')) }}
-                        <a href='#' data-toggle="modal"  data-target="#createModal" data-dependency='statuslabel' data-select='status_select_id'>Add new Status...</a>
+                        <a href='#' data-toggle="modal"  data-target="#createModal" data-dependency='statuslabel' data-select='status_select_id'><i class="verticon fa fa-plus-square-o fa-2x"></i></a>
                         <span class="status_spinner" style="padding-left: 10px; color: green; display:none; width: 30px;"><i class="fa fa-spinner fa-spin"></i> </span>
 
                         <p class="help-block">@lang('admin/hardware/form.help_checkout')</p>
@@ -257,7 +257,7 @@
                  </label>
                 <div class="col-md-7 col-sm-12">
                     {{ Form::select('assigned_to', $assigned_to , Input::old('assigned_to', $asset->assigned_to), array('class'=>'select2', 'id'=>'assigned_to', 'style'=>'min-width:350px')) }}
-                    <a href='#' data-toggle="modal"  data-target="#createModal" data-dependency="user" data-select='assigned_to'>Add new User...</a>
+                    <a href='#' data-toggle="modal"  data-target="#createModal" data-dependency="user" data-select='assigned_to'><i class="verticon fa fa-plus-square-o fa-2x"></i></a>
                     {{ $errors->first('assigned_to', '<br><span class="alert-msg"><i class="fa fa-times"></i> :message</span>') }}
                 </div>
             </div>
@@ -277,7 +277,7 @@
                 <label for="rtd_location_id" class="col-md-2 control-label">@lang('admin/hardware/form.default_location')</label>
                     <div class="col-md-7 col-sm-12">
                         {{ Form::select('rtd_location_id', $location_list , Input::old('rtd_location_id', $asset->rtd_location_id), array('class'=>'select2', 'style'=>'width:350px','id'=>'rtd_location_select')) }}
-                        <a href='#' data-toggle="modal" data-target="#createModal" data-dependency='location' data-select='rtd_location_select'>Add new Location...</a>
+                         <a href='#' data-toggle="modal" data-target="#createModal" data-dependency='location' data-select='rtd_location_select'><i class="verticon fa fa-plus-square-o fa-2x"></i></a>
                         {{ $errors->first('rtd_location_id', '<br><span class="alert-msg"><i class="fa fa-times"></i> :message</span>') }}
                     </div>
             </div>

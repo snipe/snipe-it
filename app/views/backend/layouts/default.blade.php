@@ -19,7 +19,7 @@
 
 		 <!-- bootstrap -->
 	    <link href="{{ asset('assets/css/bootstrap/bootstrap.css') }}" rel="stylesheet" />
-        <link href="{{ asset('assets/css/bootstrap/bootstrap-overrides.css') }}" type="text/css" rel="stylesheet" />
+
 
 	    <!-- global styles -->
         <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/compiled/layout.css') }}">
@@ -40,6 +40,7 @@
         <link rel="stylesheet" href="{{ asset('assets/css/compiled/dataTables.colVis.css') }}" type="text/css" media="screen" />
         <link rel="stylesheet" href="{{ asset('assets/css/compiled/dataTables.tableTools.css') }}" type="text/css" media="screen" />
         <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/compiled/print.css') }}" media="print" />
+        <link href="{{ asset('assets/css/bootstrap/bootstrap-overrides.css') }}" type="text/css" rel="stylesheet" />
 
 
         <!-- global header javascripts -->
