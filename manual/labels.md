@@ -8,4 +8,6 @@ Generating labels for your assets is very simple in Snipe-IT. Simple go to any o
 
 ![Generate labels](/img/labels.png)
 
-This will generate labels that should fit Avery 5160 in portrait mode, or a similarly-sized two-across, nine-down (in portrait mode) label sheet. There is enough padding around the labels to provide some flexibility with your choice of label sheets.
+This will generate labels that should fit Avery 5027, 5026<sup>*</sup> and 8425 in portrait mode, or a similarly-sized two-across, eighteen-label (in portrait mode) sheet. There is enough padding around the labels to provide some flexibility with your choice of label sheets.
+
+<sup>*</sup>   Avery 5026 has a color band on the left that may make the QR code difficult to read
