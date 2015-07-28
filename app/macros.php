@@ -285,6 +285,7 @@ Form::macro('barcode_types', function ($name = "barcode_type", $selected = null,
     'QRCODE'=>"QR Code",
     'PDF417'=>'PDF417',
     'DATAMATRIX'=>'DATAMATRIX'
+    'C128' => 'Code 128'
     );
 
     $select = '<select name="'.$name.'" class="'.$class.'">';
