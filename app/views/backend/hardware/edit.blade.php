@@ -18,63 +18,55 @@
         <h4 class="modal-title">Modal title</h4>
       </div>
       <div class="modal-body">
-        <label for="modal-name" class="dynamic-form-element">@lang('general.name'):
-          <input type='text' id='modal-name' class="form-control">
-          <br>
-        </label>
+        <div class="dynamic-form-row">
+          <div class="col-md-3 col-xs-12"><label for="modal-name">@lang('general.name'):</label></div>
+          <div class="col-md-9 col-xs-12"><input type='text' id='modal-name' class="form-control"></div>
+        </div>
 
+        <div class="dynamic-form-row">
+          <div class="col-md-3 col-xs-12"><label for="modal-manufacturer_id">@lang('general.manufacturer'):</label></div>
+          <div class="col-md-9 col-xs-12">{{ Form::select('modal-manufacturer', $manufacturer , '', array('class'=>'select2 parent', 'style'=>'width:350px','id' =>'modal-manufacturer_id')) }}</div>
+        </div>
 
-        <label for="modal-manufacturer_id" class="dynamic-form-element">@lang('general.manufacturer'):
-           {{ Form::select('modal-manufacturer', $manufacturer , '', array('class'=>'select2 parent', 'style'=>'width:350px','id' =>'modal-manufacturer_id')) }}
-          <br>
-        </label>
+        <div class="dynamic-form-row">
+          <div class="col-md-3 col-xs-12"><label for="modal-category_id">@lang('general.category'):</label></div>
+          <div class="col-md-9 col-xs-12">{{ Form::select('modal-category', $category ,'', array('class'=>'select2 parent', 'style'=>'width:350px','id' => 'modal-category_id')) }}</div>
+        </div>
 
+        <div class="dynamic-form-row">
+          <div class="col-md-3 col-xs-12"><label for="modal-city">@lang('general.city'):</label></div>
+          <div class="col-md-9 col-xs-12"><input type='text' id='modal-city' class="form-control"></div>
+        </div>
 
-        <label for="modal-category_id" class="dynamic-form-element">@lang('general.category'):
-           {{ Form::select('modal-category', $category ,'', array('class'=>'select2 parent', 'style'=>'width:350px','id' => 'modal-category_id')) }}
-          <br>
-        </label>
+        <div class="dynamic-form-row">
+          <div class="col-md-3 col-xs-12"><label for="modal-country">@lang('general.country'):</label></div>
+          <div class="col-md-9 col-xs-12">{{ Form::countries('country', Input::old('country'), 'select2 country',"modal-country") }}</div>
+        </div>
 
+        <div class="dynamic-form-row">
+          <div class="col-md-3 col-xs-12"><label for="modal-first_name">@lang('general.first_name'):</label></div>
+          <div class="col-md-9 col-xs-12"><input type='text' id='modal-first_name' class="form-control"></div>
+        </div>
 
-        <label for="modal-city" class="dynamic-form-element">@lang('general.city'):
-          <input type='text' id='modal-city' class="form-control">
-          <br>
-        </label>
+        <div class="dynamic-form-row">
+          <div class="col-md-3 col-xs-12"><label for="modal-last_name">@lang('general.last_name'):</label></div>
+          <div class="col-md-9 col-xs-12"><input type='text' id='modal-last_name' class="form-control"></div>
+        </div>
 
+        <div class="dynamic-form-row">
+          <div class="col-md-3 col-xs-12"><label for="modal-username">@lang('admin/users/table.username'):</label></div>
+          <div class="col-md-9 col-xs-12"><input type='text' id='modal-username' class="form-control"></div>
+        </div>
 
-        <label for="modal-country" class="dynamic-form-element">@lang('general.country'):
-          {{ Form::countries('country', Input::old('country'), 'select2 country',"modal-country") }}
-          <br>
-        </label>
+        <div class="dynamic-form-row">
+          <div class="col-md-3 col-xs-12"><label for="modal-password">@lang('admin/users/table.password'):</label></div>
+          <div class="col-md-9 col-xs-12"><input type='password' id='modal-password' class="form-control"></div>
+        </div>
 
-
-        <label for="modal-first_name" class="dynamic-form-element">@lang('general.first_name'):
-          <input type='text' id='modal-first_name' class="form-control">
-          <br>
-        </label>
-
-
-        <label for="modal-last_name" class="dynamic-form-element">@lang('general.last_name'):
-          <input type='text' id='modal-last_name' class="form-control">
-          <br>
-        </label>
-
-
-        <label for="modal-username" class="dynamic-form-element">@lang('admin/users/table.username'):
-          <input type='text' id='modal-username' class="form-control">
-          <br>
-        </label>
-
-
-        <label for="modal-password" class="dynamic-form-element">@lang('admin/users/table.password'):
-          <input type='password' id='modal-password' class="form-control">
-          <br>
-        </label>
-
-
-        <label for="modal-password_confirm" class="dynamic-form-element">@lang('admin/users/table.password_confirm'):
-          <input type='password' id='modal-password_confirm' class="form-control">
-        </label>
+        <div class="dynamic-form-row">
+          <div class="col-md-3 col-xs-12"><label for="modal-password_confirm">@lang('admin/users/table.password_confirm'):</label></div>
+          <div class="col-md-9 col-xs-12"><input type='password' id='modal-password_confirm' class="form-control"></div>
+        </div>
 
       </div>
       <div class="modal-footer">
@@ -381,9 +373,13 @@ $(function () {
     modal.find('.modal-title').text('Add a new ' + model);
     //modal.find('.modal-body').text("This is where I should be AJAX'ing in the contents for the new " +model+" that you'are about to add!");
     //use a spinner instead?
-    $('.dynamic-form-element').hide();
+    //$('.dynamic-form-element').hide();
+    //$('.modal-body input').parent().parent().hide();
+    //$('.modal-body select').parent().parent().hide();
+    $('.dynamic-form-row').hide();
     function show_er(selector) {
-      $(selector).show().parent().show();
+      //$(selector).show().parent().show();
+      $(selector).parent().parent().show();
     }
     show_er('#modal-name');
     switch(model) {
