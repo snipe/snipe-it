@@ -22,6 +22,7 @@ use Response;
 use Config;
 use Location;
 use Log;
+use DNS1D;
 use DNS2D;
 use Mail;
 use Datatable;
