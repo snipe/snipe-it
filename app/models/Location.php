@@ -33,7 +33,7 @@ class Location extends Elegant
     }
 
     public function childLocations() {
-        return $this->hasMany('Location','id')->where('parent_id','=',$this->id);
+        return $this->hasMany('Location','parent_id');
     }
 
     public static function getLocationHierarchy($locations, $parent_id = null) {
