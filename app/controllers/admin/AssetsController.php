@@ -1126,7 +1126,7 @@ class AssetsController extends AdminController
             'status'    => ($asset->assigned_to!='') ? link_to('../admin/users/'.$asset->assigned_to.'/view', $asset->assigneduser->fullName()) : (($asset->assetstatus) ? $asset->assetstatus->name : ''),
             'location'  => (($asset->assigned_to)&&($asset->assigneduser->userloc!='')) ? link_to('admin/settings/locations/'.$asset->assigneduser->userloc->id.'/edit', $asset->assigneduser->userloc->name) : (($asset->defaultLoc!='') ? link_to('admin/settings/locations/'.$asset->defaultLoc->id.'/edit', $asset->defaultLoc->name) : ''),
             'category'  => ($asset->model->category) ? $asset->model->category->name : 'No category',
-            'eol'       => $asset->eol_date(),
+            'eol'       => ($asset->eol_date()) ? $asset->eol_date() : '',
             'notes'     => $asset->notes,
             'order'     => ($asset->order_number) ? '<a href="../hardware/?order_number='.$asset->order_number.'">'.$asset->order_number.'</a>' : '',
             'checkout_date' => (($asset->assigned_to!='')&&($asset->assetlog->first())) ? $asset->assetlog->first()->created_at->format('Y-m-d') : '',
