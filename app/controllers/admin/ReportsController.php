@@ -3,18 +3,19 @@
 use Actionlog;
 use AdminController;
 use Asset;
+use AssetMaintenance;
 use Carbon\Carbon;
+use Category;
 use Illuminate\Support\Facades\Lang;
 use Illuminate\Support\Facades\Response;
-use AssetMaintenance;
 use Illuminate\Support\Facades\View;
 use Input;
+use League\Csv\Reader;
 use License;
 use Location;
+use Model;
 use Redirect;
 use Setting;
-use League\Csv\Writer;
-use League\Csv\Reader;
 
 class ReportsController extends AdminController
 {
@@ -575,5 +576,33 @@ class ReportsController extends AdminController
         $response->header( 'Content-disposition', 'attachment;filename=report.csv' );
 
         return $response;
+    }
+
+    public function getAssetAcceptanceReport()
+    {
+
+        // Grab all of the categories that require acceptance
+        $assetCategoriesRequiringAcceptance = array_pluck( Category::requiresAcceptance()
+                                                                   ->select( 'id' )
+                                                                   ->get()
+                                                                   ->toArray(), 'id' );
+
+        $modelsInCategoriesThatRequireAcceptance = array_pluck( Model::inCategory( $assetCategoriesRequiringAcceptance )
+                                                                     ->select( 'id' )
+                                                                     ->get()
+                                                                     ->toArray(), 'id' );
+
+
+        $assetsCheckedOutThatRequireAcceptance   = Asset::deployed()
+                                                        ->inModelList( $modelsInCategoriesThatRequireAcceptance )
+                                                        ->list( 'id', 'assigned_to' )
+                                                        ->get()
+                                                        ->toArray();
+        $assetMaintenances                       = AssetMaintenance::with( 'asset', 'supplier' )
+                                                                   ->orderBy( 'created_at', 'DESC' )
+                                                                   ->get();
+
+        return View::make( 'backend/reports/asset_maintenances', compact( 'assetMaintenances' ) );
+
     }
 }
