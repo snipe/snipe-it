@@ -699,7 +699,7 @@ class AssetsController extends AdminController
 		else{
                 $content = DNS2D::getBarcodePNG(route('view/hardware', $asset->id), $settings->barcode_type,
                     $this->qrCodeDimensions['height'],$this->qrCodeDimensions['width']);
-
+		}
                 $img = imagecreatefromstring(base64_decode($content));
                 imagepng($img);
                 imagedestroy($img);
