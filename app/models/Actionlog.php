@@ -47,7 +47,17 @@
         return $this->belongsTo('User','checkedout_to')->withTrashed();
     }
 
+    public function childlogs()
+    {
 
+        return $this->hasMany( 'ActionLog', 'thread_id' );
+    }
+
+    public function parentlog()
+    {
+
+        return $this->belongsTo( 'ActionLog', 'thread_id' );
+    }
 
     /**
 	* Check if the file exists, and if it does, force a download
