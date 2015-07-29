@@ -1,5 +1,4 @@
 <?php
-
 /*
 |--------------------------------------------------------------------------
 | Admin API Routes
@@ -232,7 +231,6 @@ Route::group(array('prefix' => 'admin', 'before' => 'admin-auth', 'namespace' =>
 
             Route::get( '/', [ 'as' => 'accessories', 'uses' => 'AccessoriesController@getIndex' ] );
         } );
-
         # Consumables
         Route::group( [ 'prefix' => 'consumables' ], function () {
 
@@ -390,7 +388,6 @@ Route::group(array('prefix' => 'admin', 'before' => 'admin-auth', 'namespace' =>
                 ] );
 
             Route::get( '/', [ 'as' => 'users', 'uses' => 'UsersController@getIndex' ] );
-
         } );
 
         # Group Management
@@ -528,6 +525,5 @@ Route::group(array('prefix' => 'admin', 'before' => 'admin-auth', 'namespace' =>
         Route::get( 'reports/activity',
             [ 'as' => 'reports/activity', 'uses' => 'ReportsController@getActivityReport' ] );
     } );
-
 
     Route::get( '/', [ 'as' => 'home', 'before' => 'admin-auth', 'uses' => 'Controllers\Admin\DashboardController@getIndex' ] );
