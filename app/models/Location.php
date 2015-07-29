@@ -16,7 +16,7 @@ class Location extends Elegant
             'zip'   		=> 'alpha_space|min:3|max:10',
         );
 
-    public function has_users() {
+    public function users() {
         return $this->hasMany('User', 'location_id');
     }
 
@@ -33,7 +33,7 @@ class Location extends Elegant
     }
 
     public function childLocations() {
-        return $this->hasMany('Location')->where('parent_id','=',$this->id);
+        return $this->hasMany('Location','id')->where('parent_id','=',$this->id);
     }
 
     public static function getLocationHierarchy($locations, $parent_id = null) {
@@ -64,7 +64,7 @@ class Location extends Elegant
 
 
     public static function flattenLocationsArray ($location_options_array = null) {
-
+        $location_options = array();
         foreach ($location_options_array as $id => $value) {
 
             // get the top level key value
