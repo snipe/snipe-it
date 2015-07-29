@@ -349,3 +349,7 @@ table th span.line{
 	vertical-align: middle;
 	padding-left: 5px;
 }
+
+.dynamic-form-row {
+	padding-bottom: 50px;
+}
