@@ -99,11 +99,11 @@ class LocationsController extends AdminController
         return Redirect::to('admin/settings/locations/create')->with('error', Lang::get('admin/locations/message.create.error'));
 
     }
-    
+
     public function store()
     {
       $new = Input::all();
-      
+
       $new['currency']=Setting::first()->default_currency;
 
       // create a new location instance
@@ -237,10 +237,14 @@ class LocationsController extends AdminController
         }
 
 
-        if ($location->has_users->count() > 0) {
+        if ($location->users->count() > 0) {
             return Redirect::to('admin/settings/locations')->with('error', Lang::get('admin/locations/message.assoc_users'));
         } elseif ($location->childLocations->count() > 0) {
-            return Redirect::to('admin/settings/locations')->with('error', Lang::get('admin/locations/message.assoc_users'));
+            return Redirect::to('admin/settings/locations')->with('error', Lang::get('admin/locations/message.assoc_child_loc'));
+        } elseif ($location->assets->count() > 0) {
+            return Redirect::to('admin/settings/locations')->with('error', Lang::get('admin/locations/message.assoc_assets'));
+        } elseif ($location->assignedassets->count() > 0) {
+            return Redirect::to('admin/settings/locations')->with('error', Lang::get('admin/locations/message.assoc_assets'));
         } else {
             $location->delete();
             return Redirect::to('admin/settings/locations')->with('success', Lang::get('admin/locations/message.delete.success'));

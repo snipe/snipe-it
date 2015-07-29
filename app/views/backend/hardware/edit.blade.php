@@ -18,64 +18,56 @@
         <h4 class="modal-title">Modal title</h4>
       </div>
       <div class="modal-body">
-        <label for="modal-name" class="dynamic-form-element">Name:
-          <input type='text' id='modal-name' class="form-control">
-          <br>
-        </label>
+        <div class="dynamic-form-row">
+          <div class="col-md-3 col-xs-12"><label for="modal-name">@lang('general.name'):</label></div>
+          <div class="col-md-9 col-xs-12"><input type='text' id='modal-name' class="form-control"></div>
+        </div>
 
+        <div class="dynamic-form-row">
+          <div class="col-md-3 col-xs-12"><label for="modal-manufacturer_id">@lang('general.manufacturer'):</label></div>
+          <div class="col-md-9 col-xs-12">{{ Form::select('modal-manufacturer', $manufacturer , '', array('class'=>'select2 parent', 'style'=>'width:350px','id' =>'modal-manufacturer_id')) }}</div>
+        </div>
 
-        <label for="modal-manufacturer_id" class="dynamic-form-element">Manufacturer:
-           {{ Form::select('modal-manufacturer', $manufacturer , '', array('class'=>'select2 parent', 'style'=>'width:350px','id' =>'modal-manufacturer_id')) }}     
-          <br>
-        </label>
-        
-        
-        <label for="modal-category_id" class="dynamic-form-element">Category:
-           {{ Form::select('modal-category', $category ,'', array('class'=>'select2 parent', 'style'=>'width:350px','id' => 'modal-category_id')) }}     
-          <br>
-        </label>
-        
-        
-        <label for="modal-city" class="dynamic-form-element">City:
-          <input type='text' id='modal-city' class="form-control">
-          <br>
-        </label>
-        
-        
-        <label for="modal-country" class="dynamic-form-element">Country:
-          {{ Form::countries('country', Input::old('country'), 'select2 country',"modal-country") }}
-          <br>
-        </label>
-        
-        
-        <label for="modal-first_name" class="dynamic-form-element">First Name:
-          <input type='text' id='modal-first_name' class="form-control">
-          <br>
-        </label>
-        
-        
-        <label for="modal-last_name" class="dynamic-form-element">Last Name:
-          <input type='text' id='modal-last_name' class="form-control">
-          <br>
-        </label>
+        <div class="dynamic-form-row">
+          <div class="col-md-3 col-xs-12"><label for="modal-category_id">@lang('general.category'):</label></div>
+          <div class="col-md-9 col-xs-12">{{ Form::select('modal-category', $category ,'', array('class'=>'select2 parent', 'style'=>'width:350px','id' => 'modal-category_id')) }}</div>
+        </div>
 
-        
-        <label for="modal-username" class="dynamic-form-element">Username:
-          <input type='text' id='modal-username' class="form-control">
-          <br>
-        </label>
-        
-        
-        <label for="modal-password" class="dynamic-form-element">Password:
-          <input type='password' id='modal-password' class="form-control">
-          <br>
-        </label>
-        
-        
-        <label for="modal-password_confirm" class="dynamic-form-element">Confirm Password:
-          <input type='password' id='modal-password_confirm' class="form-control">
-        </label>
-      
+        <div class="dynamic-form-row">
+          <div class="col-md-3 col-xs-12"><label for="modal-city">@lang('general.city'):</label></div>
+          <div class="col-md-9 col-xs-12"><input type='text' id='modal-city' class="form-control"></div>
+        </div>
+
+        <div class="dynamic-form-row">
+          <div class="col-md-3 col-xs-12"><label for="modal-country">@lang('general.country'):</label></div>
+          <div class="col-md-9 col-xs-12">{{ Form::countries('country', Input::old('country'), 'select2 country',"modal-country") }}</div>
+        </div>
+
+        <div class="dynamic-form-row">
+          <div class="col-md-3 col-xs-12"><label for="modal-first_name">@lang('general.first_name'):</label></div>
+          <div class="col-md-9 col-xs-12"><input type='text' id='modal-first_name' class="form-control"></div>
+        </div>
+
+        <div class="dynamic-form-row">
+          <div class="col-md-3 col-xs-12"><label for="modal-last_name">@lang('general.last_name'):</label></div>
+          <div class="col-md-9 col-xs-12"><input type='text' id='modal-last_name' class="form-control"></div>
+        </div>
+
+        <div class="dynamic-form-row">
+          <div class="col-md-3 col-xs-12"><label for="modal-username">@lang('admin/users/table.username'):</label></div>
+          <div class="col-md-9 col-xs-12"><input type='text' id='modal-username' class="form-control"></div>
+        </div>
+
+        <div class="dynamic-form-row">
+          <div class="col-md-3 col-xs-12"><label for="modal-password">@lang('admin/users/table.password'):</label></div>
+          <div class="col-md-9 col-xs-12"><input type='password' id='modal-password' class="form-control"></div>
+        </div>
+
+        <div class="dynamic-form-row">
+          <div class="col-md-3 col-xs-12"><label for="modal-password_confirm">@lang('admin/users/table.password_confirm'):</label></div>
+          <div class="col-md-9 col-xs-12"><input type='password' id='modal-password_confirm' class="form-control"></div>
+        </div>
+
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -163,7 +155,7 @@
                     @endif
 
                     <span class="mac_spinner" style="padding-left: 10px; color: green; display:none; width: 30px;"><i class="fa fa-spinner fa-spin"></i> </span>
-                    <a href='#' data-toggle="modal" data-target="#createModal" data-dependency="model" data-select="model_select_id">Add new Model...</a> <!-- onclick="return dependency('model')" -->
+                    <a href='#' data-toggle="modal" data-target="#createModal" data-dependency="model" data-select="model_select_id"><i class="verticon fa fa-plus-square-o fa-2x"></i></a> <!-- onclick="return dependency('model')" -->
                     {{ $errors->first('model_id', '<br><span class="alert-msg"><i class="fa fa-times"></i> :message</span>') }}
                 </div>
             </div>
@@ -192,7 +184,7 @@
                 <label for="supplier_id" class="col-md-2 control-label">@lang('admin/hardware/form.supplier')</label>
                 <div class="col-md-7 col-sm-12">
                     {{ Form::select('supplier_id', $supplier_list , Input::old('supplier_id', $asset->supplier_id), array('class'=>'select2', 'style'=>'min-width:350px','id'=>'supplier_select_id')) }}
-                    <a href='#' data-toggle="modal"  data-target="#createModal" data-dependency="supplier" data-select='supplier_select_id'>Add new Supplier...</a>
+                    <a href='#' data-toggle="modal"  data-target="#createModal" data-dependency="supplier" data-select='supplier_select_id'><i class="verticon fa fa-plus-square-o fa-2x"></i></a>
                     {{ $errors->first('supplier_id', '<br><span class="alert-msg"><i class="fa fa-times"></i> :message</span>') }}
                 </div>
             </div>
@@ -242,7 +234,7 @@
                 <label for="status_id" class="col-md-2 control-label">@lang('admin/hardware/form.status') <i class='fa fa-asterisk'></i></label>
                     <div class="col-md-7 col-sm-12 col-sm-12">
                         {{ Form::select('status_id', $statuslabel_list , Input::old('status_id', $asset->status_id), array('class'=>'select2 status_id', 'style'=>'width:350px','id'=>'status_select_id')) }}
-                        <a href='#' data-toggle="modal"  data-target="#createModal" data-dependency='statuslabel' data-select='status_select_id'>Add new Status...</a>
+                        <a href='#' data-toggle="modal"  data-target="#createModal" data-dependency='statuslabel' data-select='status_select_id'><i class="verticon fa fa-plus-square-o fa-2x"></i></a>
                         <span class="status_spinner" style="padding-left: 10px; color: green; display:none; width: 30px;"><i class="fa fa-spinner fa-spin"></i> </span>
 
                         <p class="help-block">@lang('admin/hardware/form.help_checkout')</p>
@@ -257,7 +249,7 @@
                  </label>
                 <div class="col-md-7 col-sm-12">
                     {{ Form::select('assigned_to', $assigned_to , Input::old('assigned_to', $asset->assigned_to), array('class'=>'select2', 'id'=>'assigned_to', 'style'=>'min-width:350px')) }}
-                    <a href='#' data-toggle="modal"  data-target="#createModal" data-dependency="user" data-select='assigned_to'>Add new User...</a>
+                    <a href='#' data-toggle="modal"  data-target="#createModal" data-dependency="user" data-select='assigned_to'><i class="verticon fa fa-plus-square-o fa-2x"></i></a>
                     {{ $errors->first('assigned_to', '<br><span class="alert-msg"><i class="fa fa-times"></i> :message</span>') }}
                 </div>
             </div>
@@ -277,7 +269,7 @@
                 <label for="rtd_location_id" class="col-md-2 control-label">@lang('admin/hardware/form.default_location')</label>
                     <div class="col-md-7 col-sm-12">
                         {{ Form::select('rtd_location_id', $location_list , Input::old('rtd_location_id', $asset->rtd_location_id), array('class'=>'select2', 'style'=>'width:350px','id'=>'rtd_location_select')) }}
-                        <a href='#' data-toggle="modal" data-target="#createModal" data-dependency='location' data-select='rtd_location_select'>Add new Location...</a>
+                         <a href='#' data-toggle="modal" data-target="#createModal" data-dependency='location' data-select='rtd_location_select'><i class="verticon fa fa-plus-square-o fa-2x"></i></a>
                         {{ $errors->first('rtd_location_id', '<br><span class="alert-msg"><i class="fa fa-times"></i> :message</span>') }}
                     </div>
             </div>
@@ -376,14 +368,18 @@ $(function () {
     // data-dependency="model" data-select="model_select_id"
     model=link.data("dependency");
     select=link.data("select");
-    
+
     var modal = $(this);
     modal.find('.modal-title').text('Add a new ' + model);
     //modal.find('.modal-body').text("This is where I should be AJAX'ing in the contents for the new " +model+" that you'are about to add!");
     //use a spinner instead?
-    $('.dynamic-form-element').hide();
+    //$('.dynamic-form-element').hide();
+    //$('.modal-body input').parent().parent().hide();
+    //$('.modal-body select').parent().parent().hide();
+    $('.dynamic-form-row').hide();
     function show_er(selector) {
-      $(selector).show().parent().show();
+      //$(selector).show().parent().show();
+      $(selector).parent().parent().show();
     }
     show_er('#modal-name');
     switch(model) {
@@ -391,7 +387,7 @@ $(function () {
       show_er('#modal-manufacturer_id');
       show_er('#modal-category_id');
       break;
-      
+
       case 'user':
       $('.dynamic-form-element').hide(); //we don't want a generic "name"
       show_er("#modal-first_name");
@@ -400,20 +396,20 @@ $(function () {
       show_er("#modal-password");
       show_er("#modal-password_confirm");
       break;
-      
+
       case 'location':
       show_er('#modal-city');
       show_er('#modal-country');
       break;
-      
+
       case 'supplier':
       case 'status':
       //do nothing, they just need 'name'
     }
-    
+
     console.warn("The Model is: "+model+" and the select is: "+select);
   });
-  
+
   $('#modal-save').on('click',function () {
     var data={};
     console.warn("We are about to SAVE!!! for model: "+model+" and select ID: "+select);
@@ -428,15 +424,15 @@ $(function () {
       var bits=elem.id.split("-");
       data[bits[1]]=$(elem).val();
     });
-    
+
     console.dir(data);
-    
+
     $.post("{{Config::get('app.url')}}/api/"+model+"s",data,function (result) {
       var id=result.id;
       var name=result.name || (result.first_name+" "+result.last_name);
       $('.modal-body input:visible').val("");
       $('#createModal').modal('hide');
-      
+
       console.warn("The select ID thing we're going for is: "+select);
       var selector=document.getElementById(select);
       selector.options[selector.length]=new Option(name,id);
@@ -447,7 +443,7 @@ $(function () {
       msg=result.responseJSON.error.message || result.responseJSON.error;
       window.alert("Unable to add new "+model+" - error: "+msg);
     });
-        
+
   });
 });
 </script>

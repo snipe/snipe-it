@@ -61,6 +61,7 @@ Route::group(array('prefix' => 'api', 'namespace' => 'Controllers\Admin', 'befor
 
     /*---Models API---*/
     Route::group( [ 'prefix' => 'models'], function() {
+        Route::resource('/','ModelsController');
         Route::get('list/{status?}', array('as'=>'api.models.list', 'uses'=>'ModelsController@getDatatable'));
         Route::get('{modelId}/check', function ($modelId) {
 			 $model = Model::find($modelId);
@@ -75,6 +76,7 @@ Route::group(array('prefix' => 'api', 'namespace' => 'Controllers\Admin', 'befor
         Route::get('list', ['as'=>'api.categories.list', 'uses'=>'CategoriesController@getDatatable']);
         Route::get('{categoryID}/view', ['as'=>'api.categories.view', 'uses'=>'CategoriesController@getDataView']);
     });
+
     /*-- Suppliers API (mostly for creating new ones in-line while creating an asset) --*/
     Route::group(['prefix'=>'suppliers'], function () {
       Route::resource('/', 'SuppliersController');
@@ -443,7 +445,7 @@ Route::group(array('prefix' => 'auth'), function () {
             [ 'as' => 'account/accept-assets', 'uses' => 'ViewAssetsController@getAcceptAsset' ] );
         Route::post( 'accept-asset/{logID}',
             [ 'as' => 'account/asset-accepted', 'uses' => 'ViewAssetsController@postAcceptAsset' ] );
-    
+
 
         # Profile
         Route::get( 'requestable-assets',

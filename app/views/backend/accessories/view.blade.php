@@ -15,7 +15,7 @@
 <div class="row header">
     <div class="col-md-12">
         <div class="btn-group pull-right">
-           <a href="{{ URL::previous() }}" class="btn-flat gray pull-right"><i class="fa fa-arrow-left icon-white"></i>  @lang('general.back')</a>        </div>
+           <a href="{{ URL::to('admin/accessories') }}" class="btn-flat gray pull-right"><i class="fa fa-arrow-left icon-white"></i>  @lang('general.back')</a>        </div>
         <h3>
             {{{ $accessory->name }}}
  @lang('general.accessory')
