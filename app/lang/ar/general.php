@@ -1,8 +1,6 @@
 <?php
 
-return array(
-
-
+    return [
     'accessories'			=> 'Accessories',
     'accessory'				=> 'Accessory',
     'action'                => 'Action',
@@ -21,6 +19,7 @@ return array(
     'avatar_delete'         => 'حذف الصورة الرمزية',
     'avatar_upload'         => 'رفع صورة رمزية',
     'back'      			=> 'الرجوع للخلف',
+    'bad_data'      		=> 'Nothing found. Maybe bad data?',
     'cancel'  				=> 'إلغاء',
     'categories'			=> 'Categories',
     'category'				=> 'Category',
@@ -36,7 +35,7 @@ return array(
     'create'				=> 'إضافة',
     'created_asset'			=> 'الأصول المضافة',
     'created_at' 			=> 'أنشئت في',
-    'currency'  			=> '$',
+    'currency'  			=> '$', // this is deprecated
     'current'  				=> 'الحالي',
     'custom_report'         => 'Custom Asset Report',
     'dashboard'				=> 'Dashboard',
@@ -60,6 +59,9 @@ return array(
     'id'  					=> 'الرقم',
     'image_delete'         	=> 'حذف الصورة',
     'image_upload'         	=> 'رفع صورة',
+    'asset_maintenance'        => 'Asset Maintenance',
+    'asset_maintenance_report' => 'Asset Maintenance Report',
+    'asset_maintenances'       => 'Asset Maintenances',
     'item'  				=> 'Item',
     'last'					=> 'Last',
     'last_name'				=> 'الإسم الأخير',
@@ -69,6 +71,8 @@ return array(
     'licenses'				=> 'الرخص',
     'list_all'				=> 'عرض الكل',
     'loading'				=> 'Loading',
+    'lock_passwords'        => 'This field cannot be edited in this installation.',
+    'feature_disabled'      => 'This feature has been disabled for this installation.',
     'location'              => 'الموقع',
     'locations'				=> 'المواقع',
     'logout'				=> 'تسجيل خروج',
@@ -106,6 +110,7 @@ return array(
     'select_supplier'		=> 'Select a Supplier',
     'select_user'			=> 'Select a User',
     'select_date'			=> 'Select Date',
+    'select_statuslabel'	=> 'Select Status',
     'settings'				=> 'الإعدادات',
     'sign_in'				=> 'تسجيل الدخول',
     'site_name'				=> 'إسم الموقع',
@@ -118,8 +123,11 @@ return array(
     'type'  				=> 'Type',
     'undeployable'			=> 'غير قابلة للتوزيع',
     'unknown_admin'			=> 'إداري غير معروف',
+    'update'                => 'Update',
     'uploaded'              => 'Uploaded',
     'user'					=> 'المستخدم',
+    'accepted'			    => 'accepted',
+    'declined'			    => 'declined',
     'users'                 => 'Users',
     'viewassets'  			=> 'عرض الأصول المسجلة',
     'website'               => 'الموقع',
@@ -127,5 +135,4 @@ return array(
     'years'					=> 'سنوات',
     'yes' 					=> 'نعم',
     'zip'  					=> 'الرمز البريدي',
-
-);
+    ];

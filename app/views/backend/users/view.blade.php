@@ -82,10 +82,10 @@
 									<table class="display table table-hover">
 		                                <thead>
 		                                    <tr>
-		                                        <th class="col-md-3">Asset Type</th>
-		                                        <th class="col-md-2">Asset Tag</th>
-		                                        <th class="col-md-2">Name</th>
-		                                        <th class="col-md-1 hidden-print">Actions</th>
+		                                        <th class="col-md-3">@lang('admin/hardware/table.asset_model')</th>
+		                                        <th class="col-md-2">@lang('admin/hardware/table.asset_tag')</th>
+		                                        <th class="col-md-2">@lang('general.name')</th>
+		                                        <th class="col-md-1 hidden-print">@lang('general.action')</th>
 		                                    </tr>
 		                                </thead>
 		                                <tbody>
@@ -123,9 +123,9 @@
 							<table class="display table table-hover">
                                 <thead>
                                     <tr>
-                                        <th class="col-md-5">Name</th>
-                                        <th class="col-md-6">Serial</th>
-                                        <th class="col-md-1 hidden-print">Actions</th>
+                                        <th class="col-md-5">@lang('general.name')</th>
+                                        <th class="col-md-6">@lang('admin/hardware/form.serial')</th>
+                                        <th class="col-md-1 hidden-print">@lang('general.action')</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -324,13 +324,13 @@
                                     @foreach ($userlog as $log)
                                     <tr>
                                         <td class="text-center">
-                                            @if ($log->assetlog)
+                                            @if (($log->assetlog) && ($log->asset_type=="hardware"))
                                                 <i class="fa fa-barcode"></i>
-                                            @elseif ($log->accessorylog)
+                                            @elseif (($log->accessorylog) && ($log->asset_type=="accessory"))
                                                 <i class="fa fa-keyboard-o"></i>
-                                            @elseif ($log->consumablelog)
+                                            @elseif (($log->consumablelog) && ($log->asset_type=="consumable"))
                                                 <i class="fa fa-tint"></i>
-                                            @elseif ($log->licenselog)
+                                            @elseif (($log->licenselog) && ($log->asset_type=="software"))
                                                 <i class="fa fa-certificate"></i>
                                             @else
                                             <i class="fa fa-times"></i>
@@ -341,7 +341,9 @@
                                         <td>{{{ $log->action_type }}}</td>
                                         <td>
 
-                                            @if ($log->assetlog)
+                                        @if ($log->assetlog)
+
+                                            @if (($log->assetlog) && ($log->asset_type=="hardware"))
 
                                                 @if ($log->assetlog->deleted_at=='')
                                                     <a href="{{ route('view/hardware', $log->asset_id) }}">
@@ -351,22 +353,8 @@
                                                     <del>{{{ $log->assetlog->showAssetName() }}}</del> (deleted)
                                                 @endif
 
-                                            @elseif ($log->accessorylog)
-                                                @if ($log->accessorylog->deleted_at=='')
-                                                    <a href="{{ route('view/accessory', $log->accessory_id) }}">{{{ $log->accessorylog->name }}}</a>
-                                                @else
-                                                    <del>{{{ $log->accessorylog->name }}}</del> (deleted)
-                                                @endif
+                                            @elseif (($log->licenselog) && ($log->asset_type=="software"))
 
-                                            @elseif ($log->consumablelog)
-
-                                                @if ($log->consumablelog->deleted_at=='')
-                                                    <a href="{{ route('view/consumable', $log->consumable_id) }}">{{{ $log->consumablelog->name }}}</a>
-                                                @else
-                                                    <del>{{{ $log->consumablelog->name }}}</del> (deleted)
-                                                @endif
-
-                                            @elseif ($log->licenselog)
                                                 @if ($log->licenselog->deleted_at=='')
                                                     <a href="{{ route('view/license', $log->license_id) }}">
                                                         {{{ $log->licenselog->name }}}
@@ -375,9 +363,26 @@
                                                     <del>{{{ $log->licenselog->name }}}</del> (deleted)
                                                 @endif
 
-                                            @else
-                                                @lang('general.bad_data')
+                                             @elseif (($log->consumablelog) && ($log->asset_type=="consumable"))
+
+                                                 @if ($log->consumablelog->deleted_at=='')
+                                                     <a href="{{ route('view/consumable', $log->consumable_id) }}">{{{ $log->consumablelog->name }}}</a>
+                                                 @else
+                                                     <del>{{{ $log->consumablelog->name }}}</del> (deleted)
+                                                 @endif
+
+                                            @elseif (($log->accessorylog) && ($log->asset_type=="accessory"))
+                                                @if ($log->accessorylog->deleted_at=='')
+                                                    <a href="{{ route('view/accessory', $log->accessory_id) }}">{{{ $log->accessorylog->name }}}</a>
+                                                @else
+                                                    <del>{{{ $log->accessorylog->name }}}</del> (deleted)
+                                                @endif
+
+                                             @else
+                                                 @lang('general.bad_data')
                                             @endif
+
+                                        @endif
 
                                         </td>
                                         <td>{{{ $log->adminlog->fullName() }}}</td>

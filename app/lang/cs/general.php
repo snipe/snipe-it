@@ -1,11 +1,9 @@
 <?php
 
-return array(
-
-
+    return [
     'accessories'			=> 'Příslušenství',
     'accessory'				=> 'Příslušenství',
-    'action'                => 'Action',
+    'action'                => 'Akce',
     'activity_report'		=> 'Report aktivity',
     'address'				=> 'Adresa',
     'admin'					=> 'Admin',
@@ -21,9 +19,10 @@ return array(
     'avatar_delete'         => 'Smazat avatara',
     'avatar_upload'         => 'Nahrát avatara',
     'back'      			=> 'Zpět',
+    'bad_data'      		=> 'Nothing found. Maybe bad data?',
     'cancel'  				=> 'Storno',
-    'categories'			=> 'Categories',
-    'category'				=> 'Category',
+    'categories'			=> 'Kategorie',
+    'category'				=> 'Kategorie',
     'changeemail'  			=> 'Změnit e-mailovou adresu',
     'changepassword'  		=> 'Změnit heslo',
     'checkin'  				=> 'Příjem',
@@ -36,7 +35,7 @@ return array(
     'create'				=> 'Vytvořit nové',
     'created_asset'			=> 'vytvořit majetek',
     'created_at' 			=> 'Vytvořeno',
-    'currency'  			=> 'Kč',
+    'currency'  			=> 'Kč', // this is deprecated
     'current'  				=> 'Aktuální',
     'custom_report'         => 'Vlastní report majetku',
     'dashboard'				=> 'Nástěnka',
@@ -60,6 +59,9 @@ return array(
     'id'  					=> 'ID',
     'image_delete'         	=> 'Smazat obrázek',
     'image_upload'         	=> 'Nahrát obrázek',
+    'asset_maintenance'        => 'Asset Maintenance',
+    'asset_maintenance_report' => 'Asset Maintenance Report',
+    'asset_maintenances'       => 'Asset Maintenances',
     'item'  				=> 'Položka',
     'last'					=> 'Poslední',
     'last_name'				=> 'Příjmení',
@@ -69,6 +71,8 @@ return array(
     'licenses'				=> 'Licence',
     'list_all'				=> 'Vypsat vše',
     'loading'				=> 'Nahrávání',
+    'lock_passwords'        => 'This field cannot be edited in this installation.',
+    'feature_disabled'      => 'This feature has been disabled for this installation.',
     'location'              => 'Lokalita',
     'locations'				=> 'Umístění',
     'logout'				=> 'Odhlásit',
@@ -92,7 +96,7 @@ return array(
     'processing'			=> 'Pracuji',
     'profile'				=> 'Váš profil',
     'qty'		            => 'QTY',
-    'quanitity'		        => 'Quanitity',
+    'quanitity'		        => 'Množství',
     'ready_to_deploy'		=> 'Připraveno k přidělení',
     'recent_activity'		=> 'Nedávná aktivita',
     'reports'				=> 'Reporty',
@@ -106,6 +110,7 @@ return array(
     'select_supplier'		=> 'Zvolit dodavatele',
     'select_user'			=> 'Zvolit uživatele',
     'select_date'			=> 'Zvolit datum',
+    'select_statuslabel'	=> 'Vybrat stav',
     'settings'				=> 'Nastavení',
     'sign_in'				=> 'Přihlásit se',
     'site_name'				=> 'Název lokality',
@@ -118,8 +123,11 @@ return array(
     'type'  				=> 'Typ',
     'undeployable'			=> 'Ne-přiřaditelné',
     'unknown_admin'			=> 'Neznámy správce',
+    'update'                => 'Aktualizace',
     'uploaded'              => 'Nahráno',
     'user'					=> 'Uživatel',
+    'accepted'			    => 'přijato',
+    'declined'			    => 'zamítnuto',
     'users'                 => 'Uživatelé',
     'viewassets'  			=> 'Zobrazit přiřazený majetek',
     'website'               => 'Webová stránka',
@@ -127,5 +135,4 @@ return array(
     'years'					=> 'roky',
     'yes' 					=> 'Ano',
     'zip'  					=> 'PSČ',
-
-);
+    ];

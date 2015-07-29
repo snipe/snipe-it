@@ -2,34 +2,34 @@
 
 return array(
 
-    'does_not_exist' => 'Consumable does not exist.',
+    'does_not_exist' => 'O consumível não existe.',
 
     'create' => array(
-        'error'   => 'Consumable was not created, please try again.',
-        'success' => 'Consumable created successfully.'
+        'error'   => 'O Consumível não foi criado, por favor, tente novamente.',
+        'success' => 'Consumível criado com sucesso.'
     ),
 
     'update' => array(
-        'error'   => 'Consumable was not updated, please try again',
-        'success' => 'Consumable updated successfully.'
+        'error'   => 'Consumível não foi atualizado, por favor tente novamente',
+        'success' => 'Consumível atualizado com sucesso.'
     ),
 
     'delete' => array(
-        'confirm'   => 'Are you sure you wish to delete this accessory?',
-        'error'   => 'There was an issue deleting the consumable. Please try again.',
-        'success' => 'The accessory was deleted successfully.'
+        'confirm'   => 'Tem certeza de que deseja excluir este acessório ?',
+        'error'   => 'Houve um problema ao excluir o consumível. Por favor, tente novamente.',
+        'success' => 'O acessório foi excluído com sucesso.'
     ),
 
      'checkout' => array(
-        'error'   		=> 'Consumable was not checked out, please try again',
-        'success' 		=> 'Consumable checked out successfully.',
-        'user_does_not_exist' => 'That user is invalid. Please try again.'
+        'error'   		=> 'Consumível não foi verificado, por favor tente novamente',
+        'success' 		=> 'Realizada a verificação do consumível com êxito.',
+        'user_does_not_exist' => 'Esse usuário é inválido. Por favor, tente novamente.'
     ),
 
     'checkin' => array(
-        'error'   		=> 'Consumable was not checked in, please try again',
-        'success' 		=> 'Consumable checked in successfully.',
-        'user_does_not_exist' => 'That user is invalid. Please try again.'
+        'error'   		=> 'Consumível não foi verificado, por favor tente novamente',
+        'success' 		=> 'Realizado o check-in do consumível com sucesso.',
+        'user_does_not_exist' => 'Esse Usuário é inválido. Por favor, tente novamente.'
     )
 
 

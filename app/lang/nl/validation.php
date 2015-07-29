@@ -77,7 +77,7 @@ return array(
     */
 
     'custom' => array(),
-    'alpha_space' => "Het veld :attribute mag enkel letters, cijfers, komma's, spaties of koppeltekens bevatten.",
+    'alpha_space' => "The :attribute field contains a character that is not allowed.",
 
     /*
     |--------------------------------------------------------------------------

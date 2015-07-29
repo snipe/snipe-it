@@ -432,6 +432,25 @@ class AccessoriesController extends AdminController
 
 
             $log = $logaction->logaction('checkin from');
+            
+            if(!is_null($accessory_user->assigned_to)) {
+                $user = User::find($accessory_user->assigned_to);
+            }
+
+            $data['log_id'] = $logaction->id;
+            $data['first_name'] = $user->first_name;
+            $data['item_name'] = $accessory->name;
+            $data['checkin_date'] = $logaction->created_at;
+            $data['item_tag'] = '';
+            $data['note'] = $logaction->note;
+
+            if (($accessory->checkin_email()=='1')) {
+
+                Mail::send('emails.checkin-asset', $data, function ($m) use ($user) {
+                    $m->to($user->email, $user->first_name . ' ' . $user->last_name);
+                    $m->subject('Confirm Accessory Checkin');
+                });
+            }
 
             if ($backto=='user') {
 				return Redirect::to("admin/users/".$return_to.'/view')->with('success', Lang::get('admin/accessories/message.checkin.success'));

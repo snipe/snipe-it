@@ -10,6 +10,7 @@ return array(
 	'backups'					=> 'Backups',
 	'barcode_type'				=> 'Strekkodetype',
 	'barcode_settings'			=> 'Strekkodeinnstillinger',
+	'default_currency'  		=> 'Default Currency',
 	'default_eula_text'			=> 'Standard EULA',
 	'default_eula_help_text'	=> 'Du kan også knytte tilpassede EULAer til bestemte eiendelskategorier.',
     'display_asset_name'        => 'Vis eiendelsnavn',

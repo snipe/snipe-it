@@ -12,4 +12,6 @@ return array(
     'address'		=> 'Adresa',
     'zip'			=> 'PSČ',
     'locations'		=> 'Umístění',
+    'parent'		=> 'Parent',
+    'currency'  	=> 'Location Currency', // this is deprecated
 );

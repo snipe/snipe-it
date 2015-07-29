@@ -10,6 +10,7 @@ return array(
 	'backups'					=> 'Backups',
 	'barcode_type'				=> 'Tipo Barcode',
 	'barcode_settings'			=> 'Barcode Settings',
+	'default_currency'  		=> 'Default Currency',
 	'default_eula_text'			=> 'EULA Predefinita',
 	'default_eula_help_text'	=> 'È possibile associare EULAs personalizzati a categorie di beni specifici.',
     'display_asset_name'        => 'Mostra Nome Bene',

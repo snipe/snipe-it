@@ -1,8 +1,6 @@
 <?php
 
-return array(
-
-
+    return [
     'accessories'			=> 'Accessories',
     'accessory'				=> 'Accessory',
     'action'                => 'Action',
@@ -21,6 +19,7 @@ return array(
     'avatar_delete'         => 'Delete Avatar',
     'avatar_upload'         => 'Upload Avatar',
     'back'      			=> 'Back',
+    'bad_data'      		=> 'Nothing found. Maybe bad data?',
     'cancel'  				=> 'Cancel',
     'categories'			=> 'Categories',
     'category'				=> 'Category',
@@ -36,7 +35,7 @@ return array(
     'create'				=> 'Create New',
     'created_asset'			=> 'created asset',
     'created_at' 			=> 'Created at',
-    'currency'  			=> '$',
+    'currency'  			=> '$', // this is deprecated
     'current'  				=> 'Current',
     'custom_report'         => 'Custom Asset Report',
     'dashboard'				=> 'Dashboard',
@@ -60,6 +59,9 @@ return array(
     'id'  					=> 'ID',
     'image_delete'         	=> 'Delete Image',
     'image_upload'         	=> 'Upload Image',
+    'asset_maintenance'        => 'Asset Maintenance',
+    'asset_maintenance_report' => 'Asset Maintenance Report',
+    'asset_maintenances'       => 'Asset Maintenances',
     'item'  				=> 'Item',
     'last'					=> 'Last',
     'last_name'				=> 'Last Name',
@@ -69,6 +71,8 @@ return array(
     'licenses'				=> 'Licenses',
     'list_all'				=> 'List All',
     'loading'				=> 'Loading',
+    'lock_passwords'        => 'This field cannot be edited in this installation.',
+    'feature_disabled'      => 'This feature has been disabled for this installation.',
     'location'              => 'Location',
     'locations'				=> 'Locations',
     'logout'				=> 'Logout',
@@ -106,6 +110,7 @@ return array(
     'select_supplier'		=> 'Select a Supplier',
     'select_user'			=> 'Select a User',
     'select_date'			=> 'Select Date',
+    'select_statuslabel'	=> 'Select Status',
     'settings'				=> 'Settings',
     'sign_in'				=> 'Sign in',
     'site_name'				=> 'Site Name',
@@ -118,8 +123,11 @@ return array(
     'type'  				=> 'Type',
     'undeployable'			=> 'Un-deployable',
     'unknown_admin'			=> 'Unknown Admin',
+    'update'                => 'Update',
     'uploaded'              => 'Uploaded',
     'user'					=> 'User',
+    'accepted'			    => 'accepted',
+    'declined'			    => 'declined',
     'users'                 => 'Users',
     'viewassets'  			=> 'View Assigned Assets',
     'website'               => 'Website',
@@ -127,5 +135,4 @@ return array(
     'years'					=> 'years',
     'yes' 					=> 'Yes',
     'zip'  					=> 'Zip',
-
-);
+    ];

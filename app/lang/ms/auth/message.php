@@ -3,7 +3,7 @@
 return array(
 
     'account_already_exists' => 'Akaun menggunakan e-mel ini telah wujud.',
-    'account_not_found'      => 'E-mel akaun atau password tidak betul.',
+    'account_not_found'      => 'The username or password is incorrect.',
     'account_not_activated'  => 'Akaun pengguna ini tidak aktif. ',
     'account_suspended'      => 'Akaun pengguna ini digantung.',
     'account_banned'         => 'Akaun pengguna ini di sekat.',

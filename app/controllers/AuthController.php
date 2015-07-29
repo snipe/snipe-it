@@ -136,14 +136,20 @@ class AuthController extends BaseController
             // Get the user password recovery code
             $user = Sentry::getUserProvider()->findByLogin(Input::get('username'));
 
+            $reset = $user->getResetPasswordCode();
+
             // Data to be used on the username view
             $data = array(
                 'user'              => $user,
-                'forgotPasswordUrl' => URL::route('forgot-password-confirm', $user->getResetPasswordCode()),
+                'forgotPasswordUrl' => URL::route('forgot-password-confirm', $reset),
             );
 
+            $user->reset_password_code = $reset;
+            $user->save();
+
+
             // Send the activation code through username
-            Mail::send('usernames.forgot-password', $data, function ($m) use ($user) {
+            Mail::send('emails.forgot-password', $data, function ($m) use ($user) {
                 $m->to($user->username, $user->first_name . ' ' . $user->last_name);
                 $m->subject('Account Password Recovery');
             });
@@ -165,12 +171,13 @@ class AuthController extends BaseController
      */
     public function getForgotPasswordConfirm($passwordResetCode = null)
     {
+
         try {
             // Find the user using the password reset code
             $user = Sentry::getUserProvider()->findByResetPasswordCode($passwordResetCode);
         } catch(Cartalyst\Sentry\Users\UserNotFoundException $e) {
             // Redirect to the forgot password page
-            return Redirect::route('forgot-password')->with('error', Lang::get('auth/message.account_not_found'));
+            //return Redirect::route('forgot-password')->with('error', Lang::get('auth/message.account_not_found'));
         }
 
         // Show the page

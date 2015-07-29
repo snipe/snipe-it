@@ -77,7 +77,7 @@ return array(
     */
 
     'custom' => array(),
-    'alpha_space' => ":attribute 항목은 문자, 쉼표, 공백, 대쉬기호만 포함 할 수 있습니다.",
+    'alpha_space' => "The :attribute field contains a character that is not allowed.",
 
     /*
     |--------------------------------------------------------------------------

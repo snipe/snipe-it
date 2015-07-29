@@ -13,6 +13,9 @@ use Str;
 use Validator;
 use View;
 
+use Symfony\Component\HttpFoundation\JsonResponse;
+
+
 class SuppliersController extends AdminController
 {
     /**
@@ -99,6 +102,26 @@ class SuppliersController extends AdminController
         // Redirect to the supplier create page
         return Redirect::to('admin/settings/suppliers/create')->with('error', Lang::get('admin/suppliers/message.create.error'));
 
+    }
+    
+    public function store()
+    {
+      $supplier=new Supplier;
+      $new=Input::all();
+      $validator = Validator::make($new, $supplier->validationRules());
+      if($validator->fails()) {
+        return JsonResponse::create(["error" => "Failed validation: ".print_r($validator->messages()->all('<li>:message</li>'),true)],500);
+      } else {
+        //$supplier->fill($new);
+        $supplier->name=$new['name'];
+        $supplier->user_id              = Sentry::getId();
+      
+        if($supplier->save()) {
+          return JsonResponse::create($supplier);
+        } else {
+          return JsonResponse::create(["error" => "Couldn't save Supplier"]);
+        }
+      }
     }
 
     /**

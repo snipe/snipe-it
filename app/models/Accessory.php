@@ -39,6 +39,9 @@ class Accessory extends Elegant
         return $this->belongsToMany('User', 'accessories_users', 'accessory_id','assigned_to')->count();
     }
     
+    public function checkin_email() {    
+        return $this->category->checkin_email;
+    }
     
     public function requireAcceptance() {    
 	    return $this->category->require_acceptance;

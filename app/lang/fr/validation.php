@@ -77,7 +77,7 @@ return array(
     */
 
     'custom' => array(),
-    'alpha_space' => "Le champ :attribute ne peut contenir que des lettres, des virgules, des espaces et des tirets.",
+    'alpha_space' => "The :attribute field contains a character that is not allowed.",
 
     /*
     |--------------------------------------------------------------------------

@@ -12,6 +12,8 @@ use Str;
 use Validator;
 use View;
 
+use Symfony\Component\HttpFoundation\JsonResponse;
+
 class LocationsController extends AdminController
 {
     /**
@@ -96,6 +98,52 @@ class LocationsController extends AdminController
         // Redirect to the location create page
         return Redirect::to('admin/settings/locations/create')->with('error', Lang::get('admin/locations/message.create.error'));
 
+    }
+
+    public function store()
+    {
+      $new = Input::all();
+
+      $new['currency']=Setting::first()->default_currency;
+
+      // create a new location instance
+      $location = new Location();
+
+      // attempt validation
+      if ($location->validate($new)) {
+
+          // Save the location data
+          $location->name            	= e(Input::get('name'));
+          // if (Input::get('parent_id')=='') {
+          //     $location->parent_id		= null;
+          // } else {
+          //     $location->parent_id		= e(Input::get('parent_id'));
+          // }
+          $location->currency			=  Setting::first()->default_currency; //e(Input::get('currency'));
+          $location->address			= ''; //e(Input::get('address'));
+          // $location->address2			= e(Input::get('address2'));
+          $location->city    			= e(Input::get('city'));
+          $location->state    		= '';//e(Input::get('state'));
+          $location->country    		= e(Input::get('country'));
+          // $location->zip    			= e(Input::get('zip'));
+          $location->user_id          = Sentry::getId();
+
+          // Was the asset created?
+          if($location->save()) {
+              // Redirect to the new location  page
+              return JsonResponse::create($location);
+              //return Redirect::to("admin/settings/locations")->with('success', Lang::get('admin/locations/message.create.success'));
+          } else {
+            return JsonResponse::create(["error" => "Couldn't save Location"],500);
+          }
+      } else {
+          // failure
+          $errors = $location->errors();
+          return JsonResponse::create(["error" => "Failed validation: ".print_r($errors->all('<li>:message</li>'),true)],500);
+      }
+
+      // Redirect to the location create page
+      return Redirect::to('admin/settings/locations/create')->with('error', Lang::get('admin/locations/message.create.error'));
     }
 
 
@@ -189,10 +237,14 @@ class LocationsController extends AdminController
         }
 
 
-        if ($location->has_users->count() > 0) {
+        if ($location->users->count() > 0) {
             return Redirect::to('admin/settings/locations')->with('error', Lang::get('admin/locations/message.assoc_users'));
         } elseif ($location->childLocations->count() > 0) {
-            return Redirect::to('admin/settings/locations')->with('error', Lang::get('admin/locations/message.assoc_users'));
+            return Redirect::to('admin/settings/locations')->with('error', Lang::get('admin/locations/message.assoc_child_loc'));
+        } elseif ($location->assets->count() > 0) {
+            return Redirect::to('admin/settings/locations')->with('error', Lang::get('admin/locations/message.assoc_assets'));
+        } elseif ($location->assignedassets->count() > 0) {
+            return Redirect::to('admin/settings/locations')->with('error', Lang::get('admin/locations/message.assoc_assets'));
         } else {
             $location->delete();
             return Redirect::to('admin/settings/locations')->with('success', Lang::get('admin/locations/message.delete.success'));

@@ -77,7 +77,7 @@ return array(
     */
 
     'custom' => array(),
-    'alpha_space' => ":attribute poate sa contina litere, cifre, virgula, spatiu sau linie de punctuatie.",
+    'alpha_space' => "The :attribute field contains a character that is not allowed.",
 
     /*
     |--------------------------------------------------------------------------

@@ -1,8 +1,6 @@
 <?php
 
-return array(
-
-
+    return [
     'accessories'			=> 'Accessories',
     'accessory'				=> 'Accessory',
     'action'                => 'Action',
@@ -21,6 +19,7 @@ return array(
     'avatar_delete'         => 'Hapuskan Avatar',
     'avatar_upload'         => 'Muat naik Avatar',
     'back'      			=> 'Belakang',
+    'bad_data'      		=> 'Nothing found. Maybe bad data?',
     'cancel'  				=> 'Batalkan',
     'categories'			=> 'Categories',
     'category'				=> 'Category',
@@ -36,7 +35,7 @@ return array(
     'create'				=> 'Cipta Baru',
     'created_asset'			=> 'cipta harta',
     'created_at' 			=> 'Cipta Pada',
-    'currency'  			=> 'RM',
+    'currency'  			=> 'RM', // this is deprecated
     'current'  				=> 'Semasa',
     'custom_report'         => 'Laporan Harta Pilihan',
     'dashboard'				=> 'Dashboard',
@@ -60,6 +59,9 @@ return array(
     'id'  					=> 'ID',
     'image_delete'         	=> 'Hapuskan imej',
     'image_upload'         	=> 'Muat naik imej',
+    'asset_maintenance'        => 'Asset Maintenance',
+    'asset_maintenance_report' => 'Asset Maintenance Report',
+    'asset_maintenances'       => 'Asset Maintenances',
     'item'  				=> 'Item',
     'last'					=> 'Last',
     'last_name'				=> 'Nama Keluarga',
@@ -69,6 +71,8 @@ return array(
     'licenses'				=> 'Lesen',
     'list_all'				=> 'Senaraikan Semua',
     'loading'				=> 'Loading',
+    'lock_passwords'        => 'This field cannot be edited in this installation.',
+    'feature_disabled'      => 'This feature has been disabled for this installation.',
     'location'              => 'Lokasi',
     'locations'				=> 'Lokasi',
     'logout'				=> 'Log keluar',
@@ -106,6 +110,7 @@ return array(
     'select_supplier'		=> 'Select a Supplier',
     'select_user'			=> 'Select a User',
     'select_date'			=> 'Select Date',
+    'select_statuslabel'	=> 'Select Status',
     'settings'				=> 'Tetapan',
     'sign_in'				=> 'Log masuk',
     'site_name'				=> 'Nama Sesawang',
@@ -118,8 +123,11 @@ return array(
     'type'  				=> 'Type',
     'undeployable'			=> 'Tidak Boleh Agih',
     'unknown_admin'			=> 'Pentadbir Tidak Dikenali',
+    'update'                => 'Update',
     'uploaded'              => 'Uploaded',
     'user'					=> 'Pengguna',
+    'accepted'			    => 'accepted',
+    'declined'			    => 'declined',
     'users'                 => 'Users',
     'viewassets'  			=> 'Paparkan Harta yang diserahkan',
     'website'               => 'Tapak web',
@@ -127,5 +135,4 @@ return array(
     'years'					=> 'tahun',
     'yes' 					=> 'Ya',
     'zip'  					=> 'Zip',
-
-);
+    ];

@@ -1,8 +1,6 @@
 <?php
 
-return array(
-
-
+    return [
     'accessories'			=> 'Accessories',
     'accessory'				=> 'Accessory',
     'action'                => 'Action',
@@ -21,6 +19,7 @@ return array(
     'avatar_delete'         => 'Sterge avatar',
     'avatar_upload'         => 'Upload Avatar',
     'back'      			=> 'Inapoi',
+    'bad_data'      		=> 'Nothing found. Maybe bad data?',
     'cancel'  				=> 'Anuleaza',
     'categories'			=> 'Categories',
     'category'				=> 'Category',
@@ -36,7 +35,7 @@ return array(
     'create'				=> 'Creeaza',
     'created_asset'			=> 'Activ creat',
     'created_at' 			=> 'Creat la',
-    'currency'  			=> 'LEI',
+    'currency'  			=> 'LEI', // this is deprecated
     'current'  				=> 'Curent',
     'custom_report'         => 'Raport active custom',
     'dashboard'				=> 'Dashboard',
@@ -60,6 +59,9 @@ return array(
     'id'  					=> 'ID',
     'image_delete'         	=> 'Sterge poza',
     'image_upload'         	=> 'Incarca poza',
+    'asset_maintenance'        => 'Asset Maintenance',
+    'asset_maintenance_report' => 'Asset Maintenance Report',
+    'asset_maintenances'       => 'Asset Maintenances',
     'item'  				=> 'Item',
     'last'					=> 'Last',
     'last_name'				=> 'Nume',
@@ -69,6 +71,8 @@ return array(
     'licenses'				=> 'Licente',
     'list_all'				=> 'Arata tot',
     'loading'				=> 'Loading',
+    'lock_passwords'        => 'This field cannot be edited in this installation.',
+    'feature_disabled'      => 'This feature has been disabled for this installation.',
     'location'              => 'Locatie',
     'locations'				=> 'Locatii',
     'logout'				=> 'Log out',
@@ -106,6 +110,7 @@ return array(
     'select_supplier'		=> 'Select a Supplier',
     'select_user'			=> 'Select a User',
     'select_date'			=> 'Select Date',
+    'select_statuslabel'	=> 'Select Status',
     'settings'				=> 'Setari',
     'sign_in'				=> 'Logheaza-te',
     'site_name'				=> 'Nume site',
@@ -118,8 +123,11 @@ return array(
     'type'  				=> 'Type',
     'undeployable'			=> 'Nelansabil',
     'unknown_admin'			=> 'Admin necunoscut',
+    'update'                => 'Update',
     'uploaded'              => 'Uploaded',
     'user'					=> 'Utilizator',
+    'accepted'			    => 'accepted',
+    'declined'			    => 'declined',
     'users'                 => 'Users',
     'viewassets'  			=> 'Vezi active desemnate',
     'website'               => 'Website',
@@ -127,5 +135,4 @@ return array(
     'years'					=> 'ani',
     'yes' 					=> 'Da',
     'zip'  					=> 'Cod postal',
-
-);
+    ];

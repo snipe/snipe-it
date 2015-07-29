@@ -10,6 +10,7 @@ return array(
 	'backups'					=> 'Backups',
 	'barcode_type'				=> 'Tipo do Código de Barras',
 	'barcode_settings'			=> 'Configuração do código de barras',
+	'default_currency'  		=> 'Default Currency',
 	'default_eula_text'			=> 'EULA Padrão',
 	'default_eula_help_text'	=> 'Você também pode associar EULAs personalizados para categorias específicas de ativos.',
     'display_asset_name'        => 'Exibir Nome do Ativo',

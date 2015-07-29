@@ -21,10 +21,13 @@ use Response;
 use Sentry;
 use Str;
 use Validator;
+use Statuslabel;
 use View;
 use Datatable;
 use League\Csv\Reader;
 use Mail;
+use Accessory;
+use Symfony\Component\HttpFoundation\JsonResponse;
 
 class UsersController extends AdminController
 {
@@ -78,7 +81,7 @@ class UsersController extends AdminController
 
         $location_list = array('' => '') + Location::lists('name', 'id');
         $manager_list = array('' => '') + DB::table('users')
-            ->select(DB::raw('concat(last_name,", ",first_name," (",email,")") as full_name, id'))
+            ->select(DB::raw('concat(last_name,", ",first_name," (",username,")") as full_name, id'))
             ->whereNull('deleted_at','and')
             ->orderBy('last_name', 'asc')
             ->orderBy('first_name', 'asc')
@@ -148,11 +151,12 @@ class UsersController extends AdminController
                 // Redirect to the new user page
                 //return Redirect::route('update/user', $user->id)->with('success', $success);
 
-                if (Input::get('email_user')==1) {
+                if ((Input::get('email_user')==1) && (Input::has('email'))) {
 					// Send the credentials through email
 
 					$data = array();
 					$data['email'] = e(Input::get('email'));
+                    $data['username'] = e(Input::get('username'));
 					$data['first_name'] = e(Input::get('first_name'));
 					$data['password'] = e(Input::get('password'));
 
@@ -183,6 +187,66 @@ class UsersController extends AdminController
 
         // Redirect to the user creation page
         return Redirect::route('create/user')->withInput()->with('error', $error);
+    }
+    
+    public function store()
+    {
+        // Create a new validator instance from our validation rules
+        $validator = Validator::make(Input::all(), $this->validationRules);
+    $permissions = Input::get('permissions', array());
+    $this->decodePermissions($permissions);
+        app('request')->request->set('permissions', $permissions);
+
+        // If validation fails, we'll exit the operation now.
+        if ($validator->fails()) {
+            // Ooops.. something went wrong
+            return JsonResponse::create(["error" => "Failed validation: ".print_r($validator->messages()->all('<li>:message</li>'),true)],500);        }
+
+        try {
+            // We need to reverse the UI specific logic for our
+            // permissions here before we create the user.
+
+            // Get the inputs, with some exceptions
+            $inputs = Input::except('csrf_token', 'password_confirm', 'groups','email_user');
+
+      // @TODO: Figure out WTF I need to do this.
+            /*if ($inputs['manager_id']=='') {
+              unset($inputs['manager_id']);
+            }*/
+
+            /*if ($inputs['location_id']=='') {
+              unset($inputs['location_id']);
+            }*/
+
+            // Was the user created?
+            if ($user = Sentry::getUserProvider()->create($inputs)) {
+                if (Input::get('email_user')==1) {
+          // Send the credentials through email
+
+          $data = array();
+          $data['email'] = e(Input::get('email'));
+          $data['first_name'] = e(Input::get('first_name'));
+          $data['password'] = e(Input::get('password'));
+
+                Mail::send('emails.send-login', $data, function ($m) use ($user) {
+                    $m->to($user->email, $user->first_name . ' ' . $user->last_name);
+                    $m->subject('Welcome ' . $user->first_name);
+                });
+        }
+
+
+                return JsonResponse::create($user);
+            } else {
+              return JsonResponse::create(["error" => "Couldn't save User"],500);
+            }
+
+
+
+        } catch (Exception $e) {
+
+          // Redirect to the user creation page
+          return JsonResponse::create(["error" => "Failed validation: ".print_r($validator->messages()->all('<li>:message</li>'),true)],500);
+        }
     }
 
     /**
@@ -321,6 +385,11 @@ class UsersController extends AdminController
                 $user->password = $password;
             }
 
+            // Do we want to update the user email?
+            if (!Config::get('app.lock_passwords')) {
+                $user->email		    = Input::get('email');
+            }
+
             // Get the current user groups
             $userGroups = $user->groups()->lists('group_id', 'group_id');
 
@@ -426,15 +495,86 @@ class UsersController extends AdminController
 
     public function postBulkEdit() {
 
-        if (!Input::has('edit_user')) {
+        if ((!Input::has('edit_user')) || (count(Input::has('edit_user')) == 0)) {
 			return Redirect::back()->with('error', 'No users selected');
 		} else {
-			$user_raw_array = Input::get('edit_user');
-			foreach ($user_raw_array as $user_id => $value) {
-				$user_ids[] = $user_id;
+            $statuslabel_list = array('' => Lang::get('general.select_statuslabel')) + Statuslabel::orderBy('name', 'asc')->lists('name', 'id');
+            $user_raw_array = Input::get('edit_user');
+            $users = User::whereIn('id', $user_raw_array)->with('groups')->get();
+            return View::make('backend/users/confirm-bulk-delete', compact('users','statuslabel_list'));
 
-			}
+		}
 
+    }
+
+    public function postBulkSave() {
+
+        if ((!Input::has('edit_user')) || (count(Input::has('edit_user')) == 0)) {
+			 return Redirect::back()->with('error', 'No users selected');
+
+        } elseif ((!Input::has('status_id')) || (count(Input::has('status_id')) == 0)) {
+     			return Redirect::route('users')->with('error', 'No status selected');
+		} else {
+
+            $user_raw_array = Input::get('edit_user');
+            $asset_array = array();
+
+            if(($key = array_search(Sentry::getId(), $user_raw_array)) !== false) {
+                unset($user_raw_array[$key]);
+            }
+
+            if (!Config::get('app.lock_passwords')) {
+
+                $assets = Asset::whereIn('assigned_to', $user_raw_array)->get();
+                $accessories = DB::table('accessories_users')->whereIn('assigned_to', $user_raw_array)->get();
+                $users = User::whereIn('id', $user_raw_array)->delete();
+
+                foreach ($assets as $asset) {
+
+                    $asset_array[] = $asset->id;
+
+                    // Update the asset log
+                    $logaction = new Actionlog();
+                    $logaction->asset_id = $asset->id;
+                    $logaction->checkedout_to = $asset->assigned_to;
+                    $logaction->asset_type = 'hardware';
+                    $logaction->user_id = Sentry::getUser()->id;
+                    $logaction->note = 'Bulk checkin';
+                    $log = $logaction->logaction('checkin from');
+
+                    $update_assets = Asset::whereIn('id', $asset_array)->update(
+                        array(
+                            'status_id' => e(Input::get('status_id')),
+                            'assigned_to' => '',
+                        ));
+
+
+                }
+
+                foreach ($accessories as $accessory) {
+                    $accessory_array[] = $accessory->id;
+                    // Update the asset log
+                    $logaction = new Actionlog();
+                    $logaction->accessory_id = $accessory->id;
+                    $logaction->checkedout_to = $accessory->assigned_to;
+                    $logaction->asset_type = 'accessory';
+                    $logaction->user_id = Sentry::getUser()->id;
+                    $logaction->note = 'Bulk checkin';
+                    $log = $logaction->logaction('checkin from');
+
+                    $update_assets = DB::table('accessories_users')->whereIn('id', $accessory_array)->update(
+                        array(
+                            'assigned_to' => '',
+                        ));
+                }
+
+
+                return Redirect::route('users')->with('success', 'Your selected users have been deleted and their assets have been updated.');
+            } else {
+                return Redirect::route('users')->with('error', 'Bulk delete is not enabled in this installation');
+            }
+
+            return Redirect::route('users')->with('error', 'An error has occurred');
 		}
 
     }
@@ -478,7 +618,7 @@ class UsersController extends AdminController
     public function getView($userId = null)
     {
 
-        $user = User::with('assets','assets.model','consumables','accessories','licenses','userloc')->find($userId);
+        $user = User::with('assets','assets.model','consumables','accessories','licenses','userloc')->withTrashed()->find($userId);
 
         $userlog = $user->userlog->load('assetlog','consumablelog','assetlog.model','licenselog','accessorylog','userlog','adminlog');
 
@@ -692,10 +832,13 @@ class UsersController extends AdminController
     								$data['first_name'] = $row[0];
     								$data['password'] = $pass;
 
-    					            Mail::send('emails.send-login', $data, function ($m) use ($newuser) {
-    					                $m->to($newuser['email'], $newuser['first_name'] . ' ' . $newuser['last_name']);
-    					                $m->subject('Welcome ' . $newuser['first_name']);
-    					            });
+                                    if ($newuser['email']) {
+                                        Mail::send('emails.send-login', $data, function ($m) use ($newuser) {
+        					                $m->to($newuser['email'], $newuser['first_name'] . ' ' . $newuser['last_name']);
+        					                $m->subject('Welcome ' . $newuser['first_name']);
+        					            });
+                                    }
+
                                 }
 							}
 						}
@@ -759,7 +902,7 @@ class UsersController extends AdminController
         return Datatable::collection($users)
         ->addColumn('',function($users)
             {
-                return '<div class="text-center"><input type="checkbox" name="edit_user['.$users->id.']" class="one_required"></div>';
+                return '<div class="text-center"><input type="checkbox" name="edit_user[]" value="'.$users->id.'" class="one_required"></div>';
             })
         ->addColumn('name',function($users)
 	        {

@@ -1,8 +1,6 @@
 <?php
 
-return array(
-
-
+    return [
     'accessories'			=> 'Accessories',
     'accessory'				=> 'Accessory',
     'action'                => 'Action',
@@ -21,6 +19,7 @@ return array(
     'avatar_delete'         => 'Supprimer l\'Avatar',
     'avatar_upload'         => 'Charger un Avatar',
     'back'      			=> 'Retour',
+    'bad_data'      		=> 'Nothing found. Maybe bad data?',
     'cancel'  				=> 'Annuler',
     'categories'			=> 'Categories',
     'category'				=> 'Category',
@@ -36,7 +35,7 @@ return array(
     'create'				=> 'Créer',
     'created_asset'			=> 'Actif créé',
     'created_at' 			=> 'Créé le',
-    'currency'  			=> '€',
+    'currency'  			=> '€', // this is deprecated
     'current'  				=> 'Actuels',
     'custom_report'         => 'Rapport d\'actif personnalisé',
     'dashboard'				=> 'Dashboard',
@@ -60,6 +59,9 @@ return array(
     'id'  					=> 'ID',
     'image_delete'         	=> 'Supprimer l\'image',
     'image_upload'         	=> 'Charger une image',
+    'asset_maintenance'        => 'Asset Maintenance',
+    'asset_maintenance_report' => 'Asset Maintenance Report',
+    'asset_maintenances'       => 'Asset Maintenances',
     'item'  				=> 'Item',
     'last'					=> 'Last',
     'last_name'				=> 'Nom',
@@ -69,6 +71,8 @@ return array(
     'licenses'				=> 'Licences',
     'list_all'				=> 'Lister tout',
     'loading'				=> 'Loading',
+    'lock_passwords'        => 'This field cannot be edited in this installation.',
+    'feature_disabled'      => 'This feature has been disabled for this installation.',
     'location'              => 'Lieu',
     'locations'				=> 'Lieux',
     'logout'				=> 'Se déconnecter',
@@ -106,6 +110,7 @@ return array(
     'select_supplier'		=> 'Select a Supplier',
     'select_user'			=> 'Select a User',
     'select_date'			=> 'Select Date',
+    'select_statuslabel'	=> 'Select Status',
     'settings'				=> 'Préférences',
     'sign_in'				=> 'Connexion',
     'site_name'				=> 'Nom du Site',
@@ -118,8 +123,11 @@ return array(
     'type'  				=> 'Type',
     'undeployable'			=> 'Non déployable',
     'unknown_admin'			=> 'Admin inconnu',
+    'update'                => 'Update',
     'uploaded'              => 'Uploaded',
     'user'					=> 'Utilisateur',
+    'accepted'			    => 'accepted',
+    'declined'			    => 'declined',
     'users'                 => 'Users',
     'viewassets'  			=> 'Voir les actifs associés',
     'website'               => 'Site web',
@@ -127,5 +135,4 @@ return array(
     'years'					=> 'années',
     'yes' 					=> 'Oui',
     'zip'  					=> 'Code postal',
-
-);
+    ];

@@ -1,9 +1,9 @@
 <?php
 
 return array(
-	'eula_text'      			=> 'EULA',
+	'eula_text'      			=> '最终用户许可协议',
     'id'      					=> 'ID',
-    'require_acceptance'      	=> 'Acceptance',
-    'title'      				=> 'Accessory Name',
+    'require_acceptance'      	=> '验收',
+    'title'      				=> '配件名称',
 
 );

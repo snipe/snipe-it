@@ -1,8 +1,6 @@
 <?php
 
-return array(
-
-
+    return [
     'accessories'			=> 'Tilbehør',
     'accessory'				=> 'Tilbehør',
     'action'                => 'Action',
@@ -21,6 +19,7 @@ return array(
     'avatar_delete'         => 'Slet avatar',
     'avatar_upload'         => 'Upload Avatar',
     'back'      			=> 'Tilbage',
+    'bad_data'      		=> 'Nothing found. Maybe bad data?',
     'cancel'  				=> 'Annuller',
     'categories'			=> 'Categories',
     'category'				=> 'Category',
@@ -36,7 +35,7 @@ return array(
     'create'				=> 'Opret ny',
     'created_asset'			=> 'skabte aktiver',
     'created_at' 			=> 'Skabt den',
-    'currency'  			=> '$',
+    'currency'  			=> '$', // this is deprecated
     'current'  				=> 'Aktuelle',
     'custom_report'         => 'Tilpasset Aktiv Rapport',
     'dashboard'				=> 'Oversigtspanel',
@@ -60,6 +59,9 @@ return array(
     'id'  					=> 'ID',
     'image_delete'         	=> 'Slet billede',
     'image_upload'         	=> 'Upload billede',
+    'asset_maintenance'        => 'Asset Maintenance',
+    'asset_maintenance_report' => 'Asset Maintenance Report',
+    'asset_maintenances'       => 'Asset Maintenances',
     'item'  				=> 'Item',
     'last'					=> 'Last',
     'last_name'				=> 'Efternavn',
@@ -69,6 +71,8 @@ return array(
     'licenses'				=> 'Licenser',
     'list_all'				=> 'Vis alle',
     'loading'				=> 'Loading',
+    'lock_passwords'        => 'This field cannot be edited in this installation.',
+    'feature_disabled'      => 'This feature has been disabled for this installation.',
     'location'              => 'Lokation',
     'locations'				=> 'Lokationer',
     'logout'				=> 'Log ud',
@@ -106,6 +110,7 @@ return array(
     'select_supplier'		=> 'Select a Supplier',
     'select_user'			=> 'Select a User',
     'select_date'			=> 'Select Date',
+    'select_statuslabel'	=> 'Select Status',
     'settings'				=> 'Instillinger',
     'sign_in'				=> 'Log ind',
     'site_name'				=> 'Site Navn',
@@ -118,8 +123,11 @@ return array(
     'type'  				=> 'Type',
     'undeployable'			=> 'Ikke implementerbar',
     'unknown_admin'			=> 'Ukendt Admin',
+    'update'                => 'Update',
     'uploaded'              => 'Uploaded',
     'user'					=> 'Bruger',
+    'accepted'			    => 'accepted',
+    'declined'			    => 'declined',
     'users'                 => 'Brugere',
     'viewassets'  			=> 'Se Tildelte Aktiver',
     'website'               => 'Hjemmeside',
@@ -127,5 +135,4 @@ return array(
     'years'					=> 'år',
     'yes' 					=> 'Ja',
     'zip'  					=> 'Postnummer',
-
-);
+    ];

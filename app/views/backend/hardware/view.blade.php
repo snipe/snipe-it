@@ -172,7 +172,7 @@
 		<table class="table table-hover">
 			<thead>
 				<tr>
-					<th class="col-md-4"><span class="line"></span>@lang('general.name')</th>
+					<th class="col-md-4">@lang('general.name')</th>
 					<th class="col-md-4"><span class="line"></span>@lang('admin/licenses/form.serial')</th>
 					<th class="col-md-1"><span class="line"></span>@lang('table.actions')</th>
 				</tr>
@@ -198,64 +198,7 @@
 		</div>
 		@endif
 
-
-		<div class="col-md-12">
-
-
- 	<h6>@lang('general.file_uploads') [ <a href="#" data-toggle="modal" data-target="#uploadFileModal">@lang('button.add')</a> ]</h6>
-
-
- 	<table class="table table-hover">
-                    <thead>
-                        <tr>
-                            <th class="col-md-5">@lang('general.notes')</th>
-                            <th class="col-md-5"><span class="line"></span>@lang('general.file_name')</th>
-                            <th class="col-md-2"></th>
-                            <th class="col-md-2"></th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @if (count($asset->uploads) > 0)
-							@foreach ($asset->uploads as $file)
-							<tr>
-								<td>
-									@if ($file->note) {{{ $file->note }}}
-									@endif
-								</td>
-								<td>
-								{{{ $file->filename }}}
-								</td>
-								<td>
-									@if ($file->filename)
-									<a href="{{ route('show/assetfile', [$asset->id, $file->id]) }}" class="btn btn-default">@lang('general.download')</a>
-									@endif
-								</td>
-								<td>
-									<a class="btn delete-asset btn-danger btn-sm"
-                                    href="{{ route('delete/assetfile', [$asset->id, $file->id]) }}"
-                                    data-html="false" data-toggle="modal"
-                                    data-title="@lang('admin/hardware/message.deletefile.confirm')"
-                                    data-content="@lang('admin/hardware/message.deletefile.confirm-more',array('filename' => $file->filename)) " onClick="return false;">
-                                    <i class="fa fa-trash icon-white"></i>
-                                    </a>
-								</td>
-							</tr>
-							@endforeach
-						@else
-							<tr>
-								<td colspan="4">
-									@lang('general.no_results')
-								</td>
-							</tr>
-
-                        @endif
-
-                    </tbody>
-        </table>
-
-</div>
 <!-- Asset Maintenance -->
-<div class="col-md-12">
     <div class="row header">
         <div class="col-md-12">
             <a href="{{ route('create/asset_maintenances', $asset->id) }}" class="btn btn-success pull-right"><i class="fa fa-plus icon-white"></i> New Improvement</a>
@@ -267,7 +210,7 @@
         <table class="table table-hover">
             <thead>
             <tr>
-                <th class="col-md-2"><span class="line"></span>@lang('admin/asset_maintenances/table.supplier_name')</th>
+                <th class="col-md-2">@lang('admin/asset_maintenances/table.supplier_name')</th>
                 <th class="col-md-2"><span class="line"></span>@lang('admin/asset_maintenances/form.asset_maintenance_type')</th>
                 <th class="col-md-2"><span class="line"></span>@lang('admin/asset_maintenances/form.start_date')</th>
                 <th class="col-md-2"><span class="line"></span>@lang('admin/asset_maintenances/form.completion_date')</th>
@@ -282,7 +225,7 @@
                 @if (is_null($assetMaintenance->deleted_at))
                 <tr>
                     <td><a href="{{ route('view/supplier', $assetMaintenance->supplier_id) }}">{{{ $assetMaintenance->supplier->name }}}</a></td>
-                    <td>{{{ $assetMaintenance->improvement_type }}}</td>
+                    <td>{{{ $assetMaintenance->asset_maintenance_type }}}</td>
                     <td>{{{ $assetMaintenance->start_date }}}</td>
                     <td>{{{ $assetMaintenance->completion_date }}}</td>
                     <td>{{{ $assetMaintenance->is_warranty ? Lang::get('admin/asset_maintenances/message.warranty') : Lang::get('admin/asset_maintenances/message.not_warranty') }}}</td>

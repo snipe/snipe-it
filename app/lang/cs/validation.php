@@ -77,7 +77,7 @@ return array(
     */
 
     'custom' => array(),
-    'alpha_space' => "Pole :attribute může obsahovat pouze znaky, čárky, mezery a pomlčky.",
+    'alpha_space' => "Pole :attribute obsahuje nepovolené znaky.",
 
     /*
     |--------------------------------------------------------------------------

@@ -5,7 +5,7 @@
 
         <!-- Basic Page Needs
         ================================================== -->
-        <meta http-equiv="X-UA-Compatible" content="IE=edge" /> 
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta charset="utf-8" />
         <title>
             @section('title')
@@ -19,7 +19,7 @@
 
 		 <!-- bootstrap -->
 	    <link href="{{ asset('assets/css/bootstrap/bootstrap.css') }}" rel="stylesheet" />
-        <link href="{{ asset('assets/css/bootstrap/bootstrap-overrides.css') }}" type="text/css" rel="stylesheet" />
+
 
 	    <!-- global styles -->
         <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/compiled/layout.css') }}">
@@ -40,6 +40,7 @@
         <link rel="stylesheet" href="{{ asset('assets/css/compiled/dataTables.colVis.css') }}" type="text/css" media="screen" />
         <link rel="stylesheet" href="{{ asset('assets/css/compiled/dataTables.tableTools.css') }}" type="text/css" media="screen" />
         <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/compiled/print.css') }}" media="print" />
+        <link href="{{ asset('assets/css/bootstrap/bootstrap-overrides.css') }}" type="text/css" rel="stylesheet" />
 
 
         <!-- global header javascripts -->
@@ -81,6 +82,8 @@
 				background-color: {{{ Setting::getSettings()->header_color }}};
 				background: -webkit-linear-gradient(top,  {{{ Setting::getSettings()->header_color }}} 0%,{{{ Setting::getSettings()->header_color }}} 100%);
 				border-color: {{{ Setting::getSettings()->header_color }}};
+                background-image: -moz-linear-gradient(top, {{{ Setting::getSettings()->header_color }}}, {{{ Setting::getSettings()->header_color }}});
+
 			}
 		@endif
 

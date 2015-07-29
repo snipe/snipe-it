@@ -5,6 +5,7 @@ return array(
     'about_categories'  				=> 'Laiteluokat helpottavat laitteiden organisointia. Luokkia voivat olla esimerkiksi &quot;Työasemat&quot;, &quot;Kannettavat tietokoneet&quot;, &quot;Matkapuhelimet&quot;, &quot;Tabletit&quot; jne, mutta voit toki käyttää laiteluokkia millä tahansa järkeen käyvällä tavalla. ',
     'asset_categories' 					=> 'Laiteluokat',
     'category_name'  					=> 'Luokan Nimi',
+    'checkin_email'                     => 'Send email to user on checkin.',
     'clone'                             => 'Clone Category',
     'create'  							=> 'Uusi Luokka',
     'edit'                              => 'Edit Category',

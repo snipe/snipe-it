@@ -7,60 +7,61 @@
 Route::group(array('prefix' => 'api', 'namespace' => 'Controllers\Admin', 'before' => 'admin-auth'), function () {
     /*---Hardware API---*/
     Route::group(['prefix' => 'hardware'], function() {
-        Route::resource('/', 'AssetsController');
         Route::get('list/{status?}', ['as'=>'api.hardware.list', 'uses'=>'AssetsController@getDatatable']);
     });
 
     /*---Status Label API---*/
     Route::group(array('prefix'=>'statuslabels'), function() {
-        Route::get('{statuslabelId}/deployable', function ($statuslabelId) {
-			 $statuslabel = Statuslabel::find($statuslabelId);
-             if (($statuslabel->deployable=='1') && ($statuslabel->pending!='1') && ($statuslabel->archived!='1')) {
-                 return '1';
-             } else {
-                 return '0';
-             }
-		});
+      Route::resource('/','StatuslabelsController');
+      Route::get('{statuslabelId}/deployable', function ($statuslabelId) {
+			$statuslabel = Statuslabel::find($statuslabelId);
+       if (($statuslabel->deployable=='1') && ($statuslabel->pending!='1') && ($statuslabel->archived!='1')) {
+           return '1';
+       } else {
+           return '0';
+       }
+		  });
     });
 
     /*---Accessories API---*/
     Route::group(['prefix'=>'accessories'], function () {
-        Route::resource('/', 'AccessoriesController');
         Route::get('list', ['as'=>'api.accessories.list', 'uses'=>'AccessoriesController@getDatatable']);
         Route::get('{accessoryID}/view', ['as'=>'api.accessories.view', 'uses'=>'AccessoriesController@getDataView']);
     });
+
     /*---Consumables API---*/
     Route::group(array('prefix'=>'consumables'), function () {
-        Route::resource('/', 'ConsumablesController');
         Route::get('list', array('as'=>'api.consumables.list', 'uses'=>'ConsumablesController@getDatatable'));
         Route::get('{accessoryID}/view', array('as'=>'api.consumables.view', 'uses'=>'ConsumablesController@getDataView'));
     });
+
     /*---Users API---*/
     Route::group(['prefix'=>'users'], function() {
-        Route::resource('/', 'UsersController');
         Route::get('list/{status?}', ['as'=>'api.users.list', 'uses'=>'UsersController@getDatatable']);
     });
+
     /*---Licenses API---*/
     Route::group(['prefix'=>'licenses'], function() {
-        Route::resource('/', 'LicensesController');
         Route::get('list', ['as'=>'api.licenses.list', 'uses'=>'LicensesController@getDatatable']);
     });
+
     /*---Locations API---*/
     Route::group(array('prefix'=>'locations'), function() {
+        Route::resource('/','LocationsController');
         Route::get('{locationID}/check', function ($locationID) {
-			 $location = Location::find($locationID);
-			 return $location;
+			  $location = Location::find($locationID);
+			  return $location;
 		});
     });
+
     /*---Improvements API---*/
     Route::group( [ 'prefix' => 'asset_maintenances' ], function () {
-
-        Route::resource( '/', 'AssetMaintenancesController' );
         Route::get( 'list', [ 'as' => 'api.asset_maintenances.list', 'uses' => 'AssetMaintenancesController@getDatatable' ] );
     } );
+
     /*---Models API---*/
     Route::group( [ 'prefix' => 'models'], function() {
-        Route::resource('/', 'ModelsController');
+        Route::resource('/','ModelsController');
         Route::get('list/{status?}', array('as'=>'api.models.list', 'uses'=>'ModelsController@getDatatable'));
         Route::get('{modelId}/check', function ($modelId) {
 			 $model = Model::find($modelId);
@@ -69,11 +70,16 @@ Route::group(array('prefix' => 'api', 'namespace' => 'Controllers\Admin', 'befor
 
         Route::get('{modelID}/view', ['as'=>'api.models.view', 'uses'=>'ModelsController@getDataView']);
     });
+
     /*--- Categories API---*/
     Route::group(['prefix'=>'categories'], function() {
-        Route::resource('/', 'CategoriesController');
         Route::get('list', ['as'=>'api.categories.list', 'uses'=>'CategoriesController@getDatatable']);
         Route::get('{categoryID}/view', ['as'=>'api.categories.view', 'uses'=>'CategoriesController@getDataView']);
+    });
+
+    /*-- Suppliers API (mostly for creating new ones in-line while creating an asset) --*/
+    Route::group(['prefix'=>'suppliers'], function () {
+      Route::resource('/', 'SuppliersController');
     });
 });
 
@@ -417,48 +423,6 @@ Route::group(array('prefix' => 'auth'), function () {
 |
 */
 
-Route::group(array('prefix' => 'account', 'before' => 'auth', 'namespace' => 'Controllers\Account'), function () {
-
-
-    # Profile
-    Route::get('profile', array('as' => 'profile', 'uses' => 'ProfileController@getIndex'));
-    Route::post('profile', 'ProfileController@postIndex');
-
-    # Change Password
-    Route::get('change-password', array('as' => 'change-password', 'uses' => 'ChangePasswordController@getIndex'));
-    Route::post('change-password', 'ChangePasswordController@postIndex');
-
-
-        # Register
-        #Route::get('signup', array('as' => 'signup', 'uses' => 'AuthController@getSignup'));
-        Route::post( 'signup', 'AuthController@postSignup' );
-
-        # Account Activation
-        Route::get( 'activate/{activationCode}', [ 'as' => 'activate', 'uses' => 'AuthController@getActivate' ] );
-
-        # Forgot Password
-        Route::get( 'forgot-password', [ 'as' => 'forgot-password', 'uses' => 'AuthController@getForgotPassword' ] );
-        Route::post( 'forgot-password', 'AuthController@postForgotPassword' );
-
-        # Forgot Password Confirmation
-        Route::get( 'forgot-password/{passwordResetCode}',
-            [ 'as' => 'forgot-password-confirm', 'uses' => 'AuthController@getForgotPasswordConfirm' ] );
-        Route::post( 'forgot-password/{passwordResetCode}', 'AuthController@postForgotPasswordConfirm' );
-
-        # Logout
-        Route::get( 'logout', [ 'as' => 'logout', 'uses' => 'AuthController@getLogout' ] );
-
-    } );
-
-    /*
-    |--------------------------------------------------------------------------
-    | Account Routes
-    |--------------------------------------------------------------------------
-    |
-    |
-    |
-    */
-
     Route::group( [ 'prefix' => 'account', 'before' => 'auth', 'namespace' => 'Controllers\Account' ], function () {
 
         # Profile
@@ -481,6 +445,7 @@ Route::group(array('prefix' => 'account', 'before' => 'auth', 'namespace' => 'Co
             [ 'as' => 'account/accept-assets', 'uses' => 'ViewAssetsController@getAcceptAsset' ] );
         Route::post( 'accept-asset/{logID}',
             [ 'as' => 'account/asset-accepted', 'uses' => 'ViewAssetsController@postAcceptAsset' ] );
+
 
         # Profile
         Route::get( 'requestable-assets',

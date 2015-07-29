@@ -22,15 +22,18 @@ use Response;
 use Config;
 use Location;
 use Log;
+use DNS1D;
 use DNS2D;
 use Mail;
 use Datatable;
 use TCPDF;
 use Slack;
+use Manufacturer; //for embedded-create
 
 class AssetsController extends AdminController
 {
     protected $qrCodeDimensions = array( 'height' => 3.5, 'width' => 3.5);
+    protected $barCodeDimensions = array( 'height' => 2, 'width' => 22);
 
     /**
      * Show a list of all the assets.
@@ -77,6 +80,11 @@ class AssetsController extends AdminController
 
         // Grab the dropdown list of status
         $statuslabel_list = array('' => Lang::get('general.select_statuslabel')) + Statuslabel::orderBy('name', 'asc')->lists('name', 'id');
+        
+        // grap dropdown lists for embedded create drop-downs
+        $manufacturer_list = array('' => 'Select One') + Manufacturer::lists('name', 'id');
+        $category_list = array('' => '') + DB::table('categories')->whereNull('deleted_at')->lists('name', 'id');
+        
 
         $view = View::make('backend/hardware/edit');
         $view->with('supplier_list',$supplier_list);
@@ -85,6 +93,8 @@ class AssetsController extends AdminController
         $view->with('assigned_to',$assigned_to);
         $view->with('location_list',$location_list);
         $view->with('asset',new Asset);
+        $view->with('manufacturer',$manufacturer_list);
+        $view->with('category',$category_list);
 
         if (!is_null($model_id)) {
             $selected_model = Model::find($model_id);
@@ -426,7 +436,7 @@ class AssetsController extends AdminController
         // Was the asset updated?
         if($asset->save()) {
             $logaction = new Actionlog();
-            
+
              if (Input::has('checkout_at')) {
             	if (Input::get('checkout_at')!= date("Y-m-d")){
 					$logaction->created_at = e(Input::get('checkout_at')).' 00:00:00';
@@ -610,6 +620,20 @@ class AssetsController extends AdminController
 
 			}
 
+			$data['log_id'] = $logaction->id;
+            		$data['first_name'] = $user->first_name;
+            		$data['item_name'] = $asset->showAssetName();
+            		$data['checkin_date'] = $logaction->created_at;
+            		$data['item_tag'] = $asset->asset_tag;
+            		$data['note'] = $logaction->note;
+
+            		if (($asset->checkin_email()=='1')) {
+                		Mail::send('emails.checkin-asset', $data, function ($m) use ($user) {
+                    			$m->to($user->email, $user->first_name . ' ' . $user->last_name);
+                    			$m->subject('Confirm Asset Checkin');
+                		});
+            		}
+
 			if ($backto=='user') {
 				return Redirect::to("admin/users/".$return_to.'/view')->with('success', Lang::get('admin/hardware/message.checkin.success'));
 			} else {
@@ -668,9 +692,14 @@ class AssetsController extends AdminController
 
             if (isset($asset->id,$asset->asset_tag)) {
 
+                if ($settings->barcode_type == 'C128'){
+		$content = DNS1D::getBarcodePNG(route('view/hardware', $asset->id), $settings->barcode_type,
+                    $this->barCodeDimensions['height'],$this->barCodeDimensions['width']);
+		}
+		else{
                 $content = DNS2D::getBarcodePNG(route('view/hardware', $asset->id), $settings->barcode_type,
                     $this->qrCodeDimensions['height'],$this->qrCodeDimensions['width']);
-
+		}
                 $img = imagecreatefromstring(base64_decode($content));
                 imagepng($img);
                 imagedestroy($img);
@@ -1112,7 +1141,7 @@ class AssetsController extends AdminController
       ->addColumn('status',function($assets)
         {
           	if ($assets->assigned_to!='') {
-            	return link_to('../admin/users/'.$assets->assigned_to.'/view', $assets->assigneduser->fullName());
+            	return link_to(Config::get('app.url').'/admin/users/'.$assets->assigned_to.'/view', $assets->assigneduser->fullName());
             } else {
                 if ($assets->assetstatus) {
                     return $assets->assetstatus->name;

@@ -10,6 +10,7 @@ return array(
 	'backups'					=> 'Backups',
 	'barcode_type'				=> 'Тип штрихкода',
 	'barcode_settings'			=> 'Настройки штрихкода',
+	'default_currency'  		=> 'Default Currency',
 	'default_eula_text'			=> 'Пользовательское соглашение по умолчанию',
 	'default_eula_help_text'	=> 'Вы так же можете привязать собственные пользовательские соглашения к определенным категориям активов.',
     'display_asset_name'        => 'Отображаемое имя актива',

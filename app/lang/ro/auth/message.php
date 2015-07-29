@@ -3,7 +3,7 @@
 return array(
 
     'account_already_exists' => 'Exista deja un cont cu aceasta adresa de e-mail.',
-    'account_not_found'      => 'E-mail sau parola incorecta.',
+    'account_not_found'      => 'The username or password is incorrect.',
     'account_not_activated'  => 'Acest utilizator nu a fost activat.',
     'account_suspended'      => 'Acest utilizator este suspendat.',
     'account_banned'         => 'Acest utilizator este banat.',

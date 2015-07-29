@@ -7,19 +7,19 @@ return array(
 
 
     'create' => array(
-        'error'   => 'Location was not created, please try again.',
-        'success' => 'Location created successfully.'
+        'error'   => 'Lokalizacja nie została stworzona. Spróbuj ponownie.',
+        'success' => 'Lokalizacja stworzona pomyślnie.'
     ),
 
     'update' => array(
-        'error'   => 'Location was not updated, please try again',
-        'success' => 'Location updated successfully.'
+        'error'   => 'Lokalizacja nie została zaktualizowana, spróbuj ponownie',
+        'success' => 'Lokalizacja zaktualizowana pomyślnie.'
     ),
 
     'delete' => array(
-        'confirm'   	=> 'Are you sure you wish to delete this location?',
-        'error'   => 'There was an issue deleting the location. Please try again.',
-        'success' => 'The location was deleted successfully.'
+        'confirm'   	=> 'Czy na pewno usunąć wybraną lokalizację?',
+        'error'   => 'Podczas usuwania lokalizacji napotkano problem. Spróbuj ponownie.',
+        'success' => 'Lokalizacja usunięta pomyślnie.'
     )
 
 );
