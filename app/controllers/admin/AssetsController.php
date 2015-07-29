@@ -21,6 +21,7 @@ use Response;
 use Config;
 use Location;
 use Log;
+use Dns1D;
 use DNS2D;
 use Mail;
 use Datatable;
@@ -30,6 +31,7 @@ use Slack;
 class AssetsController extends AdminController
 {
     protected $qrCodeDimensions = array( 'height' => 3.5, 'width' => 3.5);
+    protected $barCodeDimensions = array( 'height' => 3, 'width' => 33);
 
     /**
      * Show a list of all the assets.
@@ -660,9 +662,15 @@ class AssetsController extends AdminController
 
             if (isset($asset->id,$asset->asset_tag)) {
 
+                if ($settings->barcode_type == 'C128'){
+                $content = DNS1D::getBarcodePNG(route('view/hardware', $asset->id), $settings->barcode_type,
+                    $this->barCodeDimensions['height'],$this->barCodeDimensions['width']);
+                }
+
+                else{
                 $content = DNS2D::getBarcodePNG(route('view/hardware', $asset->id), $settings->barcode_type,
                     $this->qrCodeDimensions['height'],$this->qrCodeDimensions['width']);
-
+                }
                 $img = imagecreatefromstring(base64_decode($content));
                 imagepng($img);
                 imagedestroy($img);
