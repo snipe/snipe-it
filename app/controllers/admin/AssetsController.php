@@ -1147,8 +1147,8 @@ class AssetsController extends AdminController
             'notes'     => $asset->notes,
             'order'     => ($asset->order_number) ? '<a href="../hardware/?order_number='.$asset->order_number.'">'.$asset->order_number.'</a>' : '',
             'checkout_date' => (($asset->assigned_to!='')&&($asset->assetlog->first())) ? $asset->assetlog->first()->created_at->format('Y-m-d') : '',
-            'change'    => $inout,
-            'actions'   => $actions
+            'change'    => ($inout) ? $inout : '',
+            'actions'   => ($actions) ? $actions : ''
             );
       }
 
