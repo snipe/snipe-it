@@ -49,7 +49,7 @@ class ViewAssetsController extends AuthorizedController
 
         $user = Sentry::getUser();
 
-    	// Check if the asset exists
+    	// Check if the asset exists and is requestable
         if (is_null($asset = Asset::RequestableAssets()->find($assetId))) {
             // Redirect to the asset management page
             return Redirect::route('requestable-assets')->with('error', Lang::get('admin/hardware/message.does_not_exist_or_not_requestable'));
