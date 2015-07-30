@@ -408,9 +408,12 @@ class Asset extends Depreciable
 		{
 			foreach ($search as $search) {
 				$query->whereHas('model', function($query) use ($search) {
-					$query->join('categories','models.category_id','=','categories.id')
-					->where('categories.name','LIKE','%'.$search.'%')
-					->orWhere('models.name','LIKE','%'.$search.'%');
+					$query->whereHas('category', function($query) use ($search) {
+						$query->where(function($query) use ($search) {
+							$query->where('categories.name','LIKE','%'.$search.'%')
+							->orWhere('models.name','LIKE','%'.$search.'%');
+						});
+					});
 				})->orWhere(function($query) use ($search) {
 					$query->whereHas('assetstatus', function($query) use ($search) {
 						$query->where('name','LIKE','%'.$search.'%');
@@ -420,16 +423,22 @@ class Asset extends Depreciable
 						$query->where('name','LIKE','%'.$search.'%');
 					});
 				})->orWhere(function($query) use ($search) {
-		                    $query->whereHas('assigneduser', function($query) use ($search) {
-		                        $query->where(function($query) use ($search) {
-		                            $query->where('first_name','LIKE','%'.$search.'%')
-		                            ->orWhere('last_name','LIKE','%'.$search.'%');
-		                        });
-		                    });
+					$query->whereHas('assigneduser', function($query) use ($search) {
+						$query->where(function($query) use ($search) {
+							$query->where('users.first_name','LIKE','%'.$search.'%')
+							->orWhere('users.last_name','LIKE','%'.$search.'%')
+							->orWhere(function($query) use ($search) {
+								$query->whereHas('userloc', function($query) use ($search) {
+									$query->where('locations.name','LIKE','%'.$search.'%');
+								});
+							});
+						});
+					});
 				})->orWhere('name','LIKE','%'.$search.'%')
 				->orWhere('asset_tag','LIKE','%'.$search.'%')
 				->orWhere('serial','LIKE','%'.$search.'%')
-				->orWhere('order_number','LIKE','%'.$search.'%');
+				->orWhere('order_number','LIKE','%'.$search.'%')
+				->orWhere('notes','LIKE','%'.$search.'%');
 			}
 		});
 	}
