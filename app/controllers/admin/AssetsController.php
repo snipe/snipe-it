@@ -969,10 +969,10 @@ class AssetsController extends AdminController
 				$assets = Input::get('edit_asset');
 
 				$supplier_list = array('' => '') + Supplier::orderBy('name', 'asc')->lists('name', 'id');
-        $statuslabel_list = array('' => '') + Statuslabel::lists('name', 'id');
-        $location_list = array('' => '') + Location::lists('name', 'id');
+                $statuslabel_list = array('' => '') + Statuslabel::lists('name', 'id');
+                $location_list = array('' => '') + Location::lists('name', 'id');
 
-        return View::make('backend/hardware/bulk')->with('assets',$assets)->with('supplier_list',$supplier_list)->with('statuslabel_list',$statuslabel_list)->with('location_list',$location_list);
+                return View::make('backend/hardware/bulk')->with('assets',$assets)->with('supplier_list',$supplier_list)->with('statuslabel_list',$statuslabel_list)->with('location_list',$location_list);
 
 
 			}

@@ -54,6 +54,18 @@ class ViewAssetsController extends AuthorizedController
             // Redirect to the asset management page
             return Redirect::route('requestable-assets')->with('error', Lang::get('admin/hardware/message.does_not_exist_or_not_requestable'));
         } else {
+
+            $logaction = new Actionlog();
+            $logaction->asset_id = $asset->id;
+            $logaction->asset_type = 'hardware';
+            $logaction->created_at =  date("Y-m-d h:i:s");
+
+            if ($user->location_id) {
+                $logaction->location_id = $user->location_id;
+            }
+            $logaction->user_id = Sentry::getUser()->id;
+            $log = $logaction->logaction('requested');
+
             return Redirect::route('requestable-assets')->with('success')->with('success', Lang::get('admin/hardware/message.asset_requested'));
         }
 

@@ -45,7 +45,12 @@
 				@foreach ($recent_activity as $activity)
 			    <tr>
 			       <td>{{{ date("M d", strtotime($activity->created_at)) }}}</td>
-			       <td>{{{ $activity->adminlog->fullName() }}}</td>
+			       <td>
+                       @if ($activity->action_type!='requested')
+                            {{{ $activity->adminlog->fullName() }}}
+                       @endif
+
+                       </td>
 
 			       <td>
 			           	@if (($activity->assetlog) && ($activity->asset_type=="hardware"))
@@ -65,9 +70,11 @@
 				       {{ strtolower(Lang::get('general.'.str_replace(' ','_',$activity->action_type))) }}
 			       </td>
 			       <td>
-			           @if ($activity->userlog)
+                       @if ($activity->action_type=='requested')
+                            {{{ $activity->adminlog->fullName() }}}
+                       @elseif ($activity->userlog)
 			           		{{{ $activity->userlog->fullName() }}}
-			           	@endif
+			           @endif
 
 			           </td>
 

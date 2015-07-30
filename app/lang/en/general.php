@@ -100,6 +100,7 @@
     'ready_to_deploy'		=> 'Ready to Deploy',
     'recent_activity'		=> 'Recent Activity',
     'reports'				=> 'Reports',
+    'requested'				=> 'Requested',
     'save'  				=> 'Save',
     'select'				=> 'Select',
     'search'				=> 'Search',
