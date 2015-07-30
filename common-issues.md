@@ -22,7 +22,7 @@ Add garbage text into the `public/.htaccess` file on your local install and hit 
 
 ## PHP Warning: require(/var/www/html/asset2/bootstrap/../vendor/autoload.php): failed to open stream: No such file or directory
 
-When you see this error, it means that you either forgot to install or run composer, or you did and it failed somewhere and didn't complete. See the docs on <a href="installation/composer.html">installing and running composer</a>, and check for any errors composer might return when you attempt to run `composer install`.
+When you see this error, it means that you either forgot to install or run composer, or you did and it failed somewhere and didn't complete, so the dependencies Snipe-IT needs were not installed. See the docs on <a href="installation/composer.html">installing and running composer</a>, and check for any errors composer might return when you attempt to run `composer install`.
 
 Once your composer errors are resolved, you can <a href="installation/command-line.html">continue with the installation</a>.
 
