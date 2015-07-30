@@ -47,14 +47,14 @@ class ViewAssetsController extends AuthorizedController
 
     public function getRequestAsset($assetId = null) {
 
+        $user = Sentry::getUser();
+
     	// Check if the asset exists
-        if (is_null($asset = Asset::find($assetId))) {
+        if (is_null($asset = Asset::RequestableAssets()->find($assetId))) {
             // Redirect to the asset management page
-            return Redirect::to('frontend/account/view-assets')->with('error', Lang::get('admin/hardware/message.does_not_exist'));
+            return Redirect::route('requestable-assets')->with('error', Lang::get('admin/hardware/message.does_not_exist_or_not_requestable'));
         } else {
-
-
-			 return View::make('frontend/account/view-assets', compact('asset'));
+            return Redirect::route('requestable-assets')->with('success')->with('success', Lang::get('admin/hardware/message.asset_requested'));
         }
 
 
