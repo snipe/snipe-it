@@ -391,8 +391,7 @@ class Asset extends Depreciable
 	{
 		return $query->whereNotNull('deleted_at');
 	}
-
-
+	
 	/**
 	* Query builder scope to search on text
 	*
@@ -402,18 +401,50 @@ class Asset extends Depreciable
 	* @return Illuminate\Database\Query\Builder          Modified query builder
 	*/
 	public function scopeTextSearch($query, $search)
+	{
+		$search = explode('+', $search);
+
+		return $query->where(function($query) use ($search)
 		{
-
-
-			return $query->where(function($query) use ($search)
-			{
-
-				$query->where('name','LIKE','%'.$search.'%')
+			foreach ($search as $search) {
+				$query->whereHas('model', function($query) use ($search) {
+					$query->join('categories','models.category_id','=','categories.id')
+					->where('categories.name','LIKE','%'.$search.'%')
+					->orWhere('models.name','LIKE','%'.$search.'%');
+				})->orWhere(function($query) use ($search) {
+					$query->whereHas('assetstatus', function($query) use ($search) {
+						$query->where('name','LIKE','%'.$search.'%');
+					});
+				})->orWhere(function($query) use ($search) {
+					$query->whereHas('defaultLoc', function($query) use ($search) {
+						$query->where('name','LIKE','%'.$search.'%');
+					});
+				})->orWhere(function($query) use ($search) {
+					$query->whereHas('assigneduser', function($query) use ($search) {
+						$query->where('first_name','LIKE','%'.$search.'%')
+						->orWhere('last_name','LIKE','%'.$search.'%');
+					});
+				})->orWhere('name','LIKE','%'.$search.'%')
 				->orWhere('asset_tag','LIKE','%'.$search.'%')
-				->orWhere('serial','LIKE','%'.$search.'%');
-			});
+				->orWhere('serial','LIKE','%'.$search.'%')
+				->orWhere('order_number','LIKE','%'.$search.'%');
+			}
+		});
+	}
 
-		}
-
-
+	/**
+	* Query builder scope to order on model
+	*
+	* @param  Illuminate\Database\Query\Builder  $query  Query builder instance
+	* @param  text                              $order    	 Order
+	*
+	* @return Illuminate\Database\Query\Builder          Modified query builder
+	*/
+	public function scopeOrderModels($query, $order)
+	{
+		return $query->where(function($query) use ($order)
+		{
+			$query->join('models', 'assets.model_id', '=', 'models.id')->orderBy('models.name', $order);
+		});
+	}
 }
