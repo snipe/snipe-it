@@ -420,10 +420,12 @@ class Asset extends Depreciable
 						$query->where('name','LIKE','%'.$search.'%');
 					});
 				})->orWhere(function($query) use ($search) {
-					$query->whereHas('assigneduser', function($query) use ($search) {
-						$query->where('first_name','LIKE','%'.$search.'%')
-						->orWhere('last_name','LIKE','%'.$search.'%');
-					});
+		                    $query->whereHas('assigneduser', function($query) use ($search) {
+		                        $query->where(function($query) use ($search) {
+		                            $query->where('first_name','LIKE','%'.$search.'%')
+		                            ->orWhere('last_name','LIKE','%'.$search.'%');
+		                        });
+		                    });
 				})->orWhere('name','LIKE','%'.$search.'%')
 				->orWhere('asset_tag','LIKE','%'.$search.'%')
 				->orWhere('serial','LIKE','%'.$search.'%')
