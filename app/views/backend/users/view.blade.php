@@ -227,7 +227,7 @@
                             <table class="table table-hover">
                                             <thead>
                                                 <tr>
-                                                    <th class="col-md-5">@lang('admin/users/form.notes')</th>
+                                                    <th class="col-md-5">@lang('general.notes')</th>
                                                     <th class="col-md-5"><span class="line"></span>@lang('general.file_name')</th>
                                                     <th class="col-md-2"></th>
                                                     <th class="col-md-2"></th>
