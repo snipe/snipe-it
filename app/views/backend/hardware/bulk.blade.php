@@ -105,6 +105,17 @@
                 </div>
             </div>
 
+            <!-- Requestable -->
+			<div class="form-group">
+				<div class="col-sm-offset-2 col-sm-10">
+				  <div class="checkbox">
+					<label>
+					  <input type="checkbox" value="1" name="requestable" id="requestable"> @lang('admin/hardware/form.requestable')
+					</label>
+				  </div>
+				</div>
+		  	</div>
+
 
             @foreach ($assets as $key => $value)
             	<input type="hidden" name="bulk_edit[{{{ $key }}}]" value="1">

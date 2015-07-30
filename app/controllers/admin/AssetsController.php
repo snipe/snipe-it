@@ -999,7 +999,7 @@ class AssetsController extends AdminController
 
 			$assets = Input::get('bulk_edit');
 
-			if ( (Input::has('purchase_date')) ||  (Input::has('purchase_cost'))  ||  (Input::has('supplier_id')) ||  (Input::has('order_number')) || (Input::has('warranty_months')) || (Input::has('rtd_location_id')) ||  (Input::has('status_id')) )  {
+			if ( (Input::has('purchase_date')) ||  (Input::has('purchase_cost'))  ||  (Input::has('supplier_id')) ||  (Input::has('order_number')) || (Input::has('warranty_months')) || (Input::has('rtd_location_id'))  || (Input::has('requestable')) ||  (Input::has('status_id')) )  {
 
 				foreach ($assets as $key => $value) {
 
@@ -1032,6 +1032,12 @@ class AssetsController extends AdminController
 					if (Input::has('status_id')) {
 						$update_array['status_id'] = e(Input::get('status_id'));
 					}
+
+                    if (Input::get('requestable')=='1') {
+						$update_array['requestable'] =  1;
+					} else {
+                        $update_array['requestable'] =  0;
+                    }
 
 
 					if (DB::table('assets')
