@@ -59,7 +59,7 @@
 
             </td>
             <td>
-                <a href="{{ route('account/request-asset', $asset->id) }}" class="btn btn-info btn-sm" title="Clone asset">Request</a>
+                <a href="{{ route('account/request-asset', $asset->id) }}" class="btn btn-info btn-sm" title="@lang('button.request')">@lang('button.request')</a>
             </td>
 
         </tr>
