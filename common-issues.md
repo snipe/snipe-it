@@ -20,6 +20,14 @@ Add garbage text into the `public/.htaccess` file on your local install and hit 
 
 -----
 
+## PHP Warning: require(/var/www/html/asset2/bootstrap/../vendor/autoload.php): failed to open stream: No such file or directory
+
+When you see this error, it means that you either forgot to install or run composer, or you did and it failed somewhere and didn't complete. See the docs on <a href="installation/composer.html">installing and running composer</a>, and check for any errors composer might return when you attempt to run `composer install`.
+
+Once your composer errors are resolved, you can <a href="installation/command-line.html">continue with the installation</a>.
+
+-----
+
 ## Error message: mcrypt_encrypt(): Size of key is too large for this algorithm
 
 In `app/production/config/app.php`, find the `key` on line 43. Manually change that to a random string that is __no more than 32 characters__.
