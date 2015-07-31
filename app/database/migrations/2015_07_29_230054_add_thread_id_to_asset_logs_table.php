@@ -15,9 +15,9 @@
         public function up()
         {
 
-            Schema::table( 'action_logs', function ( Blueprint $table ) {
+            Schema::table( 'asset_logs', function ( Blueprint $table ) {
 
-                $table->integer( 'thread_id', false, true );
+                $table->integer( 'thread_id', false, true )->nullable();
                 $table->index( 'thread_id' );
             } );
         }
@@ -30,7 +30,7 @@
         public function down()
         {
 
-            Schema::table( 'action_logs', function ( Blueprint $table ) {
+            Schema::table( 'asset_logs', function ( Blueprint $table ) {
 
                 $table->dropIndex( 'thread_id' );
                 $table->dropColumn( 'thread_id' );
