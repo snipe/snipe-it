@@ -1,5 +1,6 @@
 <?php
 
+    use Illuminate\Database\Eloquent\SoftDeletingTrait;
     use Illuminate\Support\Facades\DB;
 
     class Actionlog extends Eloquent
@@ -69,8 +70,6 @@
 
     }
 
-
-
     /**
     * Get the parent category name
     */
@@ -83,6 +82,16 @@
         } else {
             return false;
         }
+    }
+
+    public function getListingOfActionLogsChronologicalOrder()
+    {
+
+        return DB::table( 'asset_logs' )
+                 ->select( '*' )
+                 ->orderBy( 'asset_id', 'asc' )
+                 ->orderBy( 'created_at', 'asc' )
+                 ->get();
     }
 
     public function getLatestCheckoutActionForAssets()
@@ -108,4 +117,5 @@
         return $query->where( 'action_type', '=', 'checkout' )
                      ->where( 'accepted_id', '=', null );
     }
+
 }
