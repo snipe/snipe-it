@@ -592,12 +592,12 @@ class ReportsController extends AdminController
                                                                      ->get()
                                                                      ->toArray(), 'id' );
 
-
         $assetsCheckedOutThatRequireAcceptance   = Asset::deployed()
                                                         ->inModelList( $modelsInCategoriesThatRequireAcceptance )
                                                         ->list( 'id', 'assigned_to' )
                                                         ->get()
                                                         ->toArray();
+
         $assetMaintenances                       = AssetMaintenance::with( 'asset', 'supplier' )
                                                                    ->orderBy( 'created_at', 'DESC' )
                                                                    ->get();
