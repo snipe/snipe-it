@@ -17,8 +17,8 @@
 
             Schema::table( 'asset_logs', function ( Blueprint $table ) {
 
-                $table->integer('thread_id')->nullable()->default(NULL);
-                $table->index('thread_id');
+                $table->integer( 'thread_id', false, true )->nullable();
+                $table->index( 'thread_id' );
             } );
         }
 
