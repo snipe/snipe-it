@@ -103,11 +103,19 @@
             }
         }
 
+        /**
+         * getUnacceptedAssets
+         * @param array $listOfAssets
+         *
+         * @return mixed
+         * @static
+         * @author  Vincent Sposato <vincent.sposato@gmail.com>
+         * @version v1.0
+         */
         public static function getUnacceptedAssets( $listOfAssets = [ '*' ] )
         {
 
             $assetIds = implode( ",", $listOfAssets );
-            Log::info( $assetIds );
             $queryForUnacceptedAssets = <<<UNACCEPTEDQUERY
 SELECT
 	asset_logs.id, asset_logs.asset_id
@@ -133,6 +141,12 @@ UNACCEPTEDQUERY;
             return DB::select( $queryForUnacceptedAssets );
         }
 
+        /**
+         * getListingOfActionLogsChronologicalOrder
+         * @return mixed
+         * @author  Vincent Sposato <vincent.sposato@gmail.com>
+         * @version v1.0
+         */
         public function getListingOfActionLogsChronologicalOrder()
         {
 
