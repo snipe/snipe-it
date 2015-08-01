@@ -32,8 +32,8 @@
 
             Schema::table( 'asset_logs', function ( Blueprint $table ) {
 
-                $table->dropIndex('thread_id');
-                $table->dropColumn('thread_id');
+                $table->dropIndex( 'thread_id' );
+                $table->dropColumn( 'thread_id' );
             } );
         }
 

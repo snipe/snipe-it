@@ -106,8 +106,8 @@
         public static function getUnacceptedAssets( $listOfAssets = [ '*' ] )
         {
 
-            $assetIds                  = implode( ",", $listOfAssets );
-            Log::info($assetIds);
+            $assetIds = implode( ",", $listOfAssets );
+            Log::info( $assetIds );
             $queryForUnacceptedAssets = <<<UNACCEPTEDQUERY
 SELECT
 	asset_logs.id, asset_logs.asset_id
