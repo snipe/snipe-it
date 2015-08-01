@@ -558,6 +558,10 @@
 
         Route::get( 'reports/activity',
             [ 'as' => 'reports/activity', 'uses' => 'ReportsController@getActivityReport' ] );
+        Route::get( 'reports/unaccepted_assets',
+            [ 'as' => 'reports/unaccepted_assets', 'uses' => 'ReportsController@getAssetAcceptanceReport' ] );
+        Route::get( 'reports/export/unaccepted_assets',
+            [ 'as' => 'reports/export/unaccepted_assets', 'uses' => 'ReportsController@exportAssetAcceptanceReport' ] );
     } );
 
     Route::get( '/',

@@ -7,6 +7,7 @@ use AssetMaintenance;
 use Carbon\Carbon;
 use Category;
 use Illuminate\Support\Facades\Lang;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\View;
 use Input;
@@ -580,29 +581,132 @@ class ReportsController extends AdminController
 
     public function getAssetAcceptanceReport()
     {
-
-        // Grab all of the categories that require acceptance
-        $assetCategoriesRequiringAcceptance = array_pluck( Category::requiresAcceptance()
-                                                                   ->select( 'id' )
-                                                                   ->get()
-                                                                   ->toArray(), 'id' );
-
-        $modelsInCategoriesThatRequireAcceptance = array_pluck( Model::inCategory( $assetCategoriesRequiringAcceptance )
-                                                                     ->select( 'id' )
-                                                                     ->get()
-                                                                     ->toArray(), 'id' );
-
-        $assetsCheckedOutThatRequireAcceptance   = Asset::deployed()
-                                                        ->inModelList( $modelsInCategoriesThatRequireAcceptance )
-                                                        ->list( 'id', 'assigned_to' )
-                                                        ->get()
-                                                        ->toArray();
-
-        $assetMaintenances                       = AssetMaintenance::with( 'asset', 'supplier' )
-                                                                   ->orderBy( 'created_at', 'DESC' )
-                                                                   ->get();
-
-        return View::make( 'backend/reports/asset_maintenances', compact( 'assetMaintenances' ) );
+        $assetsForReport = Actionlog::whereIn('id', $this->getAssetsNotAcceptedYet())->get();
+        return View::make( 'backend/reports/unaccepted_assets', compact( 'assetsForReport' ) );
 
     }
+
+    public function exportAssetAcceptanceReport() {
+        // Grab all the improvements
+        $assetsForReport = Actionlog::whereIn('id', $this->getAssetsNotAcceptedYet())->get();
+
+        $rows = [ ];
+
+        $header = [
+            Lang::get( 'general.category' ),
+            Lang::get( 'admin/hardware/form.model' ),
+            Lang::get( 'admin/hardware/form.name' ),
+            Lang::get( 'admin/hardware/table.asset_tag' ),
+            Lang::get( 'admin/hardware/table.checkout_date' ),
+            Lang::get( 'admin/hardware/table.checkoutto' ),
+            Lang::get( 'admin/hardware/table.days_without_acceptance' ),
+        ];
+
+        $header  = array_map( 'trim', $header );
+        $rows[ ] = implode( $header, ',' );
+
+        foreach ($assetsForReport as $assetItem) {
+            $row    = [ ];
+            $row[ ] = str_replace( ',', '', $assetItem->assetlog->model->category->name );
+            $row[ ] = str_replace( ',', '', $assetItem->assetlog->model->name );
+            $row[ ] = str_replace( ',', '', $assetItem->assetlog->showAssetName() );
+            $row[ ] = str_replace( ',', '', $assetItem->assetlog->asset_tag );
+            $row[ ] = $assetItem->created_at->format('Y-m-d');
+            $row[ ] = str_replace( ',', '', $assetItem->assetlog->assigneduser->fullName() );
+            $row[ ] = $assetItem->created_at->diffInDays(Carbon::now());
+            $rows[ ] = implode( $row, ',' );
+        }
+
+        // spit out a csv
+        $csv      = implode( $rows, "\n" );
+        $response = Response::make( $csv, 200 );
+        $response->header( 'Content-Type', 'text/csv' );
+        $response->header( 'Content-disposition', 'attachment;filename=report.csv' );
+
+        return $response;
+
+    }
+
+    /**
+     * getCheckedOutAssetsRequiringAcceptance
+     *
+     * @param $modelsInCategoriesThatRequireAcceptance
+     *
+     * @return array
+     * @author  Vincent Sposato <vincent.sposato@gmail.com>
+     * @version v1.0
+     */
+    protected function getCheckedOutAssetsRequiringAcceptance( $modelsInCategoriesThatRequireAcceptance )
+    {
+
+        return array_pluck( Asset::deployed()
+                                 ->inModelList( $modelsInCategoriesThatRequireAcceptance )
+                                 ->select( 'id' )
+                                 ->get()
+                                 ->toArray(), 'id' );
+}
+
+    /**
+     * getModelsInCategoriesThatRequireAcceptance
+     *
+     * @param $assetCategoriesRequiringAcceptance
+     *
+     * @return array
+     * @author  Vincent Sposato <vincent.sposato@gmail.com>
+     * @version v1.0
+     */
+    protected function getModelsInCategoriesThatRequireAcceptance( $assetCategoriesRequiringAcceptance )
+    {
+
+        return array_pluck( Model::inCategory( $assetCategoriesRequiringAcceptance )
+                                 ->select( 'id' )
+                                 ->get()
+                                 ->toArray(), 'id' );
+}
+
+    /**
+     * getCategoriesThatRequireAcceptance
+     *
+     * @return array
+     * @author  Vincent Sposato <vincent.sposato@gmail.com>
+     * @version v1.0
+     */
+    protected function getCategoriesThatRequireAcceptance()
+    {
+
+        return array_pluck( Category::requiresAcceptance()
+                                    ->select( 'id' )
+                                    ->get()
+                                    ->toArray(), 'id' );
+}
+
+    /**
+     * getAssetsCheckedOutRequiringAcceptance
+     *
+     * @return array
+     * @author  Vincent Sposato <vincent.sposato@gmail.com>
+     * @version v1.0
+     */
+    protected function getAssetsCheckedOutRequiringAcceptance()
+    {
+
+        return $this->getCheckedOutAssetsRequiringAcceptance(
+            $this->getModelsInCategoriesThatRequireAcceptance( $this->getCategoriesThatRequireAcceptance() )
+        );
+}
+
+    /**
+     * getAssetsNotAcceptedYet
+     *
+     * @return array
+     * @author  Vincent Sposato <vincent.sposato@gmail.com>
+     * @version v1.0
+     */
+    protected function getAssetsNotAcceptedYet()
+    {
+
+        return array_pluck(
+            Actionlog::getUnacceptedAssets( $this->getAssetsCheckedOutRequiringAcceptance() ),
+            'id' );
+}
 }

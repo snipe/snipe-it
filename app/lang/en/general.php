@@ -129,6 +129,7 @@
     'user'					=> 'User',
     'accepted'			    => 'accepted',
     'declined'			    => 'declined',
+    'unaccepted_asset_report' => 'Unaccepted Assets',
     'users'                 => 'Users',
     'viewassets'  			=> 'View Assigned Assets',
     'website'               => 'Website',
