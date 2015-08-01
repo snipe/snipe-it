@@ -392,5 +392,21 @@ class Asset extends Depreciable
 		return $query->whereNotNull('deleted_at');
 	}
 
+    /**
+     * scopeInModelList
+     * Get all assets in the provided listing of model ids
+     *
+     * @param       $query
+     * @param array $modelIdListing
+     *
+     * @return mixed
+     * @author  Vincent Sposato <vincent.sposato@gmail.com>
+     * @version v1.0
+     */
+    public function scopeInModelList( $query, array $modelIdListing )
+    {
+
+        return $query->whereIn( 'model_id', $modelIdListing );
+    }
 
 }
