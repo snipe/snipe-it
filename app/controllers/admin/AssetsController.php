@@ -853,7 +853,7 @@ class AssetsController extends AdminController
 				}
 
 			} else {
-				 return Redirect::back()->with('success', Lang::get('admin/hardware/message.upload.nofiles'));
+				 return Redirect::back()->with('error', Lang::get('admin/hardware/message.upload.nofiles'));
 			}
 
 

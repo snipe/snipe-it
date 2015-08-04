@@ -811,7 +811,7 @@ class LicensesController extends AdminController
 				}
 
 			} else {
-				 return Redirect::back()->with('success', Lang::get('admin/licenses/message.upload.nofiles'));
+				 return Redirect::back()->with('error', Lang::get('admin/licenses/message.upload.nofiles'));
 			}
 
 
