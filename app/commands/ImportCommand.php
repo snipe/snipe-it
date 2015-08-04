@@ -329,7 +329,11 @@ class ImportCommand extends Command {
 				$asset->rtd_location_id = $location->id;
 				$asset->user_id = 1;
 				$asset->status_id = $status_id;
-
+				if ($user_asset_purchase_date!='') {
+					$asset->purchase_date = $user_asset_purchase_date;
+				} else {
+					$asset->purchase_date = NULL;
+				}
 				$asset->notes = e($user_asset_notes);
 
 				if ($asset->save()) {

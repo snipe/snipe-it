@@ -110,7 +110,7 @@
 
 	            @if (Setting::getSettings()->logo)
 	            	<a class="navbar-brand" href="{{ Config::get('app.url') }}" style="padding: 5px;">
-	            	<img src="/uploads/{{{ Setting::getSettings()->logo }}}">
+	            	<img src="{{ Config::get('app.url') }}/uploads/{{{ Setting::getSettings()->logo }}}">
 	            	</a>
 	            @else
 	            	<a class="navbar-brand" href="{{ Config::get('app.url') }}">
