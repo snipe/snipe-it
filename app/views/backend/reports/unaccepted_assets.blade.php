@@ -34,17 +34,19 @@ use Carbon\Carbon;
                 </tr>
                 </thead>
                 <tbody>
-                @foreach ($assetsForReport as $assetItem)
-                    <tr>
-                        <td>{{{ $assetItem->assetlog->model->category->name }}}</td>
-                        <td>{{{ $assetItem->assetlog->model->name }}}</td>
-                        <td>{{ link_to(Config::get('app.url').'/hardware/'.$assetItem->assetlog->id.'/view',$assetItem->assetlog->showAssetName()) }}</td>
-                        <td>{{{ $assetItem->assetlog->asset_tag }}}</td>
-                        <td>{{{ $assetItem->created_at->format('Y-m-d') }}}</td>
-                        <td>{{ link_to(Config::get('app.url').'/admin/users/'.$assetItem->assetlog->assigned_to.'/view', $assetItem->assetlog->assigneduser->fullName())}}</td>
-                        <td>{{{ $assetItem->created_at->diffInDays(Carbon::now()) }}}</td>
-                    </tr>
-                @endforeach
+                @if ($assetsForReport)
+                    @foreach ($assetsForReport as $assetItem)
+                        <tr>
+                            <td>{{{ $assetItem->assetlog->model->category->name }}}</td>
+                            <td>{{{ $assetItem->assetlog->model->name }}}</td>
+                            <td>{{ link_to(Config::get('app.url').'/hardware/'.$assetItem->assetlog->id.'/view',$assetItem->assetlog->showAssetName()) }}</td>
+                            <td>{{{ $assetItem->assetlog->asset_tag }}}</td>
+                            <td>{{{ $assetItem->created_at->format('Y-m-d') }}}</td>
+                            <td>{{ link_to(Config::get('app.url').'/admin/users/'.$assetItem->assetlog->assigned_to.'/view', $assetItem->assetlog->assigneduser->fullName())}}</td>
+                            <td>{{{ $assetItem->created_at->diffInDays(Carbon::now()) }}}</td>
+                        </tr>
+                    @endforeach
+                @endif
                 </tbody>
                 <tfoot>
                 <tr>
