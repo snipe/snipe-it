@@ -18,7 +18,7 @@ class Asset extends Depreciable
         'checkout_date' 	=> 'date|max:10|min:10',
         'checkin_date' 		=> 'date|max:10|min:10',
         'supplier_id' 		=> 'integer',
-        'asset_tag'   		=> 'required|alpha_space|min:3|max:255|unique:assets,asset_tag,{id}',
+        'asset_tag'   		=> 'required|alpha_space|min:3|max:255|unique:assets,asset_tag,{id},id,deleted_at,NULL',
         'status' 			=> 'integer'
         ];
 
@@ -240,8 +240,8 @@ class Asset extends Depreciable
 			return false;
 		}
     }
-    
-    public function checkin_email() {    
+
+    public function checkin_email() {
         return $this->model->category->checkin_email;
     }
 
