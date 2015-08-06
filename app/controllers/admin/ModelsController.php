@@ -63,6 +63,27 @@ class ModelsController extends AdminController
         // Create a new manufacturer
         $model = new Model;
 
+
+        $validator = Validator::make(
+            // Validator data goes here
+            array(
+                'unique_fields' => array(Input::get('name'), Input::get('modelno'), Input::get('manufacturer_id'))
+            ),
+            // Validator rules go here
+            array(
+                'unique_fields' => 'unique_multiple:models,name,modelno,manufacturer_id'
+            )
+        );
+
+        // attempt validation
+        if ($validator->fails())
+        {
+            // The given data did not pass validation
+            return Redirect::back()->withInput()->with('error', Lang::get('admin/models/message.create.duplicate_set'));;
+        }
+
+
+
         $validator = Validator::make(Input::all(), $model->validationRules());
 
         // attempt validation
@@ -80,7 +101,7 @@ class ModelsController extends AdminController
                 $model->depreciation_id = e(Input::get('depreciation_id'));
             }
 
-             if ( e(Input::get('eol')) == '') {
+            if ( e(Input::get('eol')) == '') {
                 $model->eol =  0;
             } else {
                 $model->eol = e(Input::get('eol'));
@@ -117,12 +138,12 @@ class ModelsController extends AdminController
         return Redirect::to('hardware/models/create')->with('error', Lang::get('admin/models/message.create.error'));
 
     }
-    
+
     public function store()
     {
       //COPYPASTA!!!! FIXME
       $model = new Model;
-      
+
       $settings=Input::all();
       $settings['eol']=0;
       //
@@ -138,7 +159,7 @@ class ModelsController extends AdminController
         $model->category_id=e(Input::get('category_id'));
         $model->user_id=Sentry::getUser()->id;
         $model->eol=0;
-        
+
         if($model->save()) {
           return JsonResponse::create($model);
         } else {
