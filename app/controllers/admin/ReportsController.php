@@ -576,6 +576,12 @@ class ReportsController extends AdminController
         return $response;
     }
 
+    /**
+     * getAssetAcceptanceReport
+     * @return mixed
+     * @author  Vincent Sposato <vincent.sposato@gmail.com>
+     * @version v1.0
+     */
     public function getAssetAcceptanceReport()
     {
 
@@ -590,6 +596,12 @@ class ReportsController extends AdminController
 
     }
 
+    /**
+     * exportAssetAcceptanceReport
+     * @return \Illuminate\Http\Response
+     * @author  Vincent Sposato <vincent.sposato@gmail.com>
+     * @version v1.0
+     */
     public function exportAssetAcceptanceReport()
     {
 
@@ -712,9 +724,11 @@ class ReportsController extends AdminController
     protected function getAssetsNotAcceptedYet()
     {
 
+        $actionLogs = new Actionlog();
+
         if (count($this->getAssetsCheckedOutRequiringAcceptance()) > 0) {
             return array_pluck(
-                Actionlog::getUnacceptedAssets( $this->getAssetsCheckedOutRequiringAcceptance() ),
+                $actionLogs->getUnacceptedAssets( $this->getAssetsCheckedOutRequiringAcceptance() ),
                 'id' );
         } else {
             return null;
