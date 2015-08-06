@@ -406,7 +406,23 @@ class Asset extends Depreciable
     public function scopeInModelList( $query, array $modelIdListing )
     {
 
-        return $query->whereIn( 'model_id', $modelIdListing );
+        return $query->whereIn('model_id', $modelIdListing );
     }
+		
+		public function scopeNotYetAccepted($query)
+		{
+			return $query->where("accepted","=","pending");
+		}
+		
+		public function scopeRejected($query)
+		{
+			// $this->model->category->require_acceptance;
+			return $query->where("accepted","=","rejected");
+		}
+		
+		public function scopeAccepted($query)
+		{
+			return $uery->where("accepted","=","accepted");
+		}
 
 }

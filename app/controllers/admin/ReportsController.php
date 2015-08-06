@@ -585,13 +585,13 @@ class ReportsController extends AdminController
     public function getAssetAcceptanceReport()
     {
 
-        if (count($this->getAssetsNotAcceptedYet()) > 0) {
-            $assetsForReport = Actionlog::whereIn( 'id', $this->getAssetsNotAcceptedYet())->get();
+        /* if (count($this->getAssetsNotAcceptedYet()) > 0) {
+            $assetsForReport = Asset::unaccepted(); //Actionlog::whereIn( 'id', $this->getAssetsNotAcceptedYet())->get();
         } else {
             $assetsForReport = null;
-        }
+        } */
 
-
+        $assetsForReport = Asset::notYetAccepted()->get();
         return View::make( 'backend/reports/unaccepted_assets', compact( 'assetsForReport' ) );
 
     }
@@ -723,8 +723,8 @@ class ReportsController extends AdminController
      */
     protected function getAssetsNotAcceptedYet()
     {
-
-        $actionLogs = new Actionlog();
+      return Asset::unaccepted();
+      /*  $actionLogs = new Actionlog();
 
         if (count($this->getAssetsCheckedOutRequiringAcceptance()) > 0) {
             return array_pluck(
@@ -733,6 +733,6 @@ class ReportsController extends AdminController
         } else {
             return null;
         }
-
+      */
     }
 }
