@@ -34,12 +34,13 @@
 
 {{ Datatable::table()
     ->addColumn(
-	    Lang::get('admin/users/table.name'), 
-	    Lang::get('admin/users/table.email'), 
+	    Lang::get('admin/users/table.name'),
+	    Lang::get('admin/users/table.email'),
 	    Lang::get('admin/users/table.manager'),
-	    Lang::get('general.assets'), 
-	    Lang::get('general.licenses'), 
-	    Lang::get('admin/users/table.activated'), 
+        Lang::get('general.location'),
+	    Lang::get('general.assets'),
+	    Lang::get('general.licenses'),
+	    Lang::get('admin/users/table.activated'),
 	    Lang::get('table.actions')
     )
     ->setOptions(
@@ -47,7 +48,7 @@
                 'sAjaxSource'=>route('api.users.list', Input::get('status')),
                 'dom' =>'CT<"clear">lfrtip',
                 'colVis'=> array('showAll'=>'Show All','restore'=>'Restore','activate'=>'mouseover'),
-                'columnDefs'=> array(array('visible'=>false,'targets'=>array()),array('bSortable'=>false,'targets'=>array(6))),
+                'columnDefs'=> array(array('visible'=>false,'targets'=>array()),array('bSortable'=>false,'targets'=>array(7))),
                 'order'=>array(array(1,'asc')),
             )
         )

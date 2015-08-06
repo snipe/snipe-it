@@ -691,7 +691,7 @@ class UsersController extends AdminController
 	public function getDatatable($status = null)
     {
 
-	$users = User::with('assets','licenses','manager','sentryThrottle');
+	$users = User::with('assets','licenses','manager','userloc','sentryThrottle');
 
 	switch ($status) {
 		case 'deleted':
@@ -747,6 +747,13 @@ class UsersController extends AdminController
 		       	}
 	        })
 
+            ->addColumn('location',function($users)
+   	        {
+   		        if ($users->userloc) {
+   		       	 return '<a title="'.$users->userloc->name.'" href="users/'.$users->location_id.'/view">'.$users->userloc->name.'</a>';
+   		       	}
+   	        })
+
 		->addColumn('assets',function($users)
 	        {
 		        return $users->assets->count();
@@ -762,8 +769,8 @@ class UsersController extends AdminController
 	        })
 
 	    ->addColumn($actions)
-        ->searchColumns('name','email','manager','activated', 'licenses','assets')
-        ->orderColumns('name','email','manager','activated', 'licenses','assets')
+        ->searchColumns('name','email','manager','activated','licenses','location','assets')
+        ->orderColumns('name','email','manager','activated', 'licenses','location','assets')
         ->make();
 
 		}
