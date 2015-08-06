@@ -49,6 +49,9 @@
                             <ul class="dropdown-menu">
                                 <li><a href="{{ route('update/user', $user->id) }}">@lang('admin/users/general.edit')</a></li>
                                 <li><a href="{{ route('clone/user', $user->id) }}">@lang('admin/users/general.clone')</a></li>
+                                @if ((Sentry::getId() !== $user->id) && (!Config::get('app.lock_passwords')))
+                                    <li><a href="{{ route('delete/user', $user->id) }}" data-html="false"  data-toggle="modal" href="'.route('delete/user', $users->id).'" data-content="Are you sure you wish to delete this user?" data-title="Delete '.htmlspecialchars($users->first_name).'?" onClick="return false;">@lang('button.delete')</a></li>
+                                @endif
                             </ul>
                         </div>
 
