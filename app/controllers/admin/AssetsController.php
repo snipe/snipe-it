@@ -442,6 +442,9 @@ class AssetsController extends AdminController
 
         // Update the asset data
         $asset->assigned_to            		= e(Input::get('assigned_to'));
+        if($asset->requireAcceptance()) {
+          $asset->accepted="pending";
+        }
 
         // Was the asset updated?
         if($asset->save()) {
@@ -574,6 +577,7 @@ class AssetsController extends AdminController
 
         // Update the asset data to null, since it's being checked in
         $asset->assigned_to            		= NULL;
+        $asset->accepted                  = NULL; 
 
 
         // Was the asset updated?
