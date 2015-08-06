@@ -67,7 +67,7 @@
                                 <div class="alert alert-danger">
                                     <i class="fa fa-exclamation-circle"></i>
 
-                                    @lang('admin/users/messages.user_deleted_warning')
+                                    @lang('admin/users/message.user_deleted_warning')
 
                                 </div>
                             </div>
