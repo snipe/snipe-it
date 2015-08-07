@@ -104,41 +104,8 @@
         }
 
         /**
-         * getUnacceptedAssets
-         * @param array $listOfAssets
-         *
-         * @return mixed
-         * @static
-         * @author  Vincent Sposato <vincent.sposato@gmail.com>
-         * @version v1.0
-         */
-        public function getUnacceptedAssets( $listOfAssets = [ '*' ] )
-        {
-
-            $subQuery = DB::raw( '(' . DB::table( 'asset_logs AS maxAssetLogs' )
-                                         ->select( DB::raw( 'maxAssetLogs.asset_id, MAX(maxAssetLogs.created_at) AS max_asset_date' ) )
-                                         ->where( 'maxAssetLogs.action_type', '=', 'checkout' )
-                                         ->groupBy( 'maxAssetLogs.asset_id' )
-                                         ->toSql() . ') maxAssetLogs' );
-
-            return DB::table( 'asset_logs' )
-                     ->select( 'asset_logs.id', 'asset_logs.asset_id' )
-                     ->join( $subQuery, function ( $join ) {
-
-                         $join->on( 'asset_logs.asset_id', '=', 'maxAssetLogs.asset_id' )
-                              ->on( 'asset_logs.created_at', '=', 'maxAssetLogs.max_asset_date' );
-                     } )
-                     ->whereIn( 'asset_logs.asset_id', $listOfAssets )
-                     ->where( function ( $query ) {
-
-                         $query->whereNull( 'asset_logs.accepted_id' )
-                               ->orWhere( 'asset_logs.accepted_id', '=', 0 );
-                     } );
-
-        }
-
-        /**
          * getListingOfActionLogsChronologicalOrder
+         *
          * @return mixed
          * @author  Vincent Sposato <vincent.sposato@gmail.com>
          * @version v1.0

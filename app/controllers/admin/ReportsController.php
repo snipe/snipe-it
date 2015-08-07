@@ -578,6 +578,7 @@ class ReportsController extends AdminController
 
     /**
      * getAssetAcceptanceReport
+     *
      * @return mixed
      * @author  Vincent Sposato <vincent.sposato@gmail.com>
      * @version v1.0
@@ -585,19 +586,16 @@ class ReportsController extends AdminController
     public function getAssetAcceptanceReport()
     {
 
-        /* if (count($this->getAssetsNotAcceptedYet()) > 0) {
-            $assetsForReport = Asset::unaccepted(); //Actionlog::whereIn( 'id', $this->getAssetsNotAcceptedYet())->get();
-        } else {
-            $assetsForReport = null;
-        } */
+        $assetsForReport = Asset::notYetAccepted()
+                                ->get();
 
-        $assetsForReport = Asset::notYetAccepted()->get();
         return View::make( 'backend/reports/unaccepted_assets', compact( 'assetsForReport' ) );
 
     }
 
     /**
      * exportAssetAcceptanceReport
+     *
      * @return \Illuminate\Http\Response
      * @author  Vincent Sposato <vincent.sposato@gmail.com>
      * @version v1.0
@@ -616,9 +614,7 @@ class ReportsController extends AdminController
             Lang::get( 'admin/hardware/form.model' ),
             Lang::get( 'admin/hardware/form.name' ),
             Lang::get( 'admin/hardware/table.asset_tag' ),
-            Lang::get( 'admin/hardware/table.checkout_date' ),
             Lang::get( 'admin/hardware/table.checkoutto' ),
-            Lang::get( 'admin/hardware/table.days_without_acceptance' ),
         ];
 
         $header = array_map( 'trim', $header );
@@ -630,9 +626,7 @@ class ReportsController extends AdminController
             $row[]  = str_replace( ',', '', $assetItem->assetlog->model->name );
             $row[]  = str_replace( ',', '', $assetItem->assetlog->showAssetName() );
             $row[]  = str_replace( ',', '', $assetItem->assetlog->asset_tag );
-            $row[]  = $assetItem->created_at->format( 'Y-m-d' );
             $row[]  = str_replace( ',', '', $assetItem->assetlog->assigneduser->fullName() );
-            $row[]  = $assetItem->created_at->diffInDays( Carbon::now() );
             $rows[] = implode( $row, ',' );
         }
 
@@ -723,16 +717,7 @@ class ReportsController extends AdminController
      */
     protected function getAssetsNotAcceptedYet()
     {
-      return Asset::unaccepted();
-      /*  $actionLogs = new Actionlog();
 
-        if (count($this->getAssetsCheckedOutRequiringAcceptance()) > 0) {
-            return array_pluck(
-                $actionLogs->getUnacceptedAssets( $this->getAssetsCheckedOutRequiringAcceptance() ),
-                'id' );
-        } else {
-            return null;
-        }
-      */
+        return Asset::unaccepted();
     }
 }
