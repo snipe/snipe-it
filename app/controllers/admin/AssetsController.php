@@ -1057,7 +1057,7 @@ class AssetsController extends AdminController
     public function getDatatable($status = null)
     {
 
-       $assets = Asset::with('model','assigneduser','assigneduser.userloc','assetstatus','defaultLoc','assetlog','model','model.category')->Hardware()->select(array('id', 'name','model_id','assigned_to','asset_tag','serial','status_id','purchase_date','deleted_at','rtd_location_id','notes','order_number'));
+       $assets = Asset::with('model','assigneduser','assigneduser.userloc','assetstatus','defaultLoc','assetlog','model','model.category')->Hardware()->select(array('assets.id', 'assets.name','assets.model_id','assets.assigned_to','assets.asset_tag','assets.serial','assets.status_id','assets.purchase_date','assets.deleted_at','assets.rtd_location_id','assets.notes','assets.order_number'));
 
 
       switch ($status) {
@@ -1093,30 +1093,33 @@ class AssetsController extends AdminController
          $assets = $assets->TextSearch(Input::get('search'));
      }
      
-     if (Input::has('sort') && Input::has('order')){
-        $order = Input::get('order');
-        $sort = Input::get('sort');
+    $allowed_columns = ['name','asset_tag','serial','model','checkout_date','category','notes'];
+    $order = Input::get('order') === 'asc' ? 'asc' : 'desc';
+    $sort = in_array(Input::get('sort'), $allowed_columns) ? Input::get('sort') : 'asset_tag';
 
-        switch ($sort)
-        {
-            case 'model':
-                $assets = $assets->OrderModels($order);
-                break;
-            default:
-                $assets = $assets->orderBy($sort, $order);
-                break;
-        }
-     } else {
-        $assets = $assets->orderBy('asset_tag', 'ASC');
-     }
-     
+    switch ($sort)
+    {
+        case 'model':
+            $assets = $assets->OrderModels($order);
+            break;
+        case 'checkout_date':
+            $assets = $assets->OrderCheckout($order)->first();
+            break;
+        case 'category':
+            $assets = $assets->OrderCategory($order);
+            break;
+        default:
+            $assets = $assets->orderBy($sort, $order);
+            break;
+    }
+
      $assetCount = $assets->count();
      $assets = $assets->skip(Input::get('offset'))->take(Input::get('limit'))->get();
 
 
       $rows = array();
       foreach ($assets as $asset) {
-      	$inout = '';
+        $inout = '';
         $actions = '';
         if ($asset->deleted_at=='') {
             $actions = '<div style=" white-space: nowrap;"><a href="'.route('clone/hardware', $asset->id).'" class="btn btn-info btn-sm" title="Clone asset"><i class="fa fa-files-o"></i></a> <a href="'.route('update/hardware', $asset->id).'" class="btn btn-warning btn-sm"><i class="fa fa-pencil icon-white"></i></a> <a data-html="false" class="btn delete-asset btn-danger btn-sm" data-toggle="modal" href="'.route('delete/hardware', $asset->id).'" data-content="'.Lang::get('admin/hardware/message.delete.confirm').'" data-title="'.Lang::get('general.delete').' '.htmlspecialchars($asset->asset_tag).'?" onClick="return false;"><i class="fa fa-trash icon-white"></i></a></div>';
@@ -1145,7 +1148,7 @@ class AssetsController extends AdminController
             'category'  => ($asset->model->category) ? $asset->model->category->name : 'No category',
             'eol'       => ($asset->eol_date()) ? $asset->eol_date() : '',
             'notes'     => $asset->notes,
-            'order'     => ($asset->order_number) ? '<a href="../hardware/?order_number='.$asset->order_number.'">'.$asset->order_number.'</a>' : '',
+            'order_number'     => ($asset->order_number) ? '<a href="../hardware/?order_number='.$asset->order_number.'">'.$asset->order_number.'</a>' : '',
             'checkout_date' => (($asset->assigned_to!='')&&($asset->assetlog->first())) ? $asset->assetlog->first()->created_at->format('Y-m-d') : '',
             'change'    => ($inout) ? $inout : '',
             'actions'   => ($actions) ? $actions : ''
