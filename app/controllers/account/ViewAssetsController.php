@@ -132,9 +132,11 @@ class ViewAssetsController extends AuthorizedController
 
         if (Input::get('asset_acceptance')=='accepted') {
             $logaction_msg  = 'accepted';
+            $accepted="accepted";
             $return_msg = Lang::get('admin/users/message.accepted');
         } else {
             $logaction_msg = 'declined';
+            $accepted="rejected";
             $return_msg = Lang::get('admin/users/message.declined');
         }
 
@@ -174,6 +176,9 @@ class ViewAssetsController extends AuthorizedController
 		$update_checkout = DB::table('asset_logs')
 			->where('id',$findlog->id)
 			->update(array('accepted_id' => $logaction->id));
+    $affected_asset=$logaction->assetlog;
+    $affected_asset->accepted=$accepted;
+    $affected_asset->save();
 
 		if ($update_checkout ) {
 			return Redirect::to('account/view-assets')->with('success', $return_msg);
