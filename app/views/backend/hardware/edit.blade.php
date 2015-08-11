@@ -300,31 +300,28 @@
 </div>
 <script>
 
-    $(function() {
+	var $eventSelect = $(".model");
+	$eventSelect.on("change", function () {
         mac_add($(".model option:selected").val());
     });
-
-	var $modelSelect = $(".model");
-	$modelSelect.on("change", function () {
-        mac_add($modelSelect.val());
-    });
-
-	function mac_add(assetmodel_id) {
-        if(assetmodel_id!=''){
-            $(".mac_spinner").css("display", "inline");
-    	    $.ajax({
-    	        url: "{{Config::get('app.url')}}/api/models/"+assetmodel_id+"/check",
-    	        success: function(data) {
-                    $(".mac_spinner").css("display", "none");
-
-    	            if(data == true){
-    	                 $("#mac_address").css("display", "block");
-    	            } else {
-    	                 $("#mac_address").css("display", "none");
-    	            }
-    	        }
-    	    });
+	$(function() {
+        var mac = $(".model option:selected").val();
+	       mac_add(mac);
+	});
+	function mac_add(id) {
+        if(id==''){
+            return;
         }
+	    $.ajax({
+	        url: "{{Config::get('app.url')}}/api/models/"+id+"/check",
+	        success: function(data) {
+	            if(data == true){
+	                 $("#mac_address").css("display", "block");
+	            } else {
+	                 $("#mac_address").css("display", "none");
+	            }
+	        }
+	    });
 	};
 
 
