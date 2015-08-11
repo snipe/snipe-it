@@ -217,14 +217,17 @@
 <script>
 
 	var $eventSelect = $(".model");
-	$eventSelect.on("change", function () { mac_add($eventSelect.val()); });
+	$eventSelect.on("change", function () {
+        mac_add($(".model option:selected").val());
+    });
 	$(function() {
         var mac = $(".model option:selected").val();
-        if(mac!=''){
 	       mac_add(mac);
-        }
 	});
 	function mac_add(id) {
+        if(id==''){
+            return;
+        }
 	    $.ajax({
 	        url: "{{Config::get('app.url')}}/api/models/"+id+"/check",
 	        success: function(data) {
