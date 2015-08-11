@@ -6,3 +6,5 @@ app
 .DS_Store
 .couscous
 website/.siteflow
+bin
+tests

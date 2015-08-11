@@ -31,4 +31,11 @@ If you're doing any development on this, make sure you purge the auto-loader if 
 
 	php composer.phar dump-autoload
 
+
+-----
+
+### Translations
+
+You do not need to provide translated strings for all of the languages we support, only English (`app/lang/en`). We use CrowdIn for translation management by native speakers, so you only need to provide English strings. More info on translation is [available here](../translations.html).
+
 -----
