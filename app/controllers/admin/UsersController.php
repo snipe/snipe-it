@@ -929,7 +929,7 @@ class UsersController extends AdminController
             ->addColumn('location',function($users)
    	        {
    		        if ($users->userloc) {
-   		       	 return '<a title="'.$users->userloc->name.'" href="users/'.$users->location_id.'/view">'.$users->userloc->name.'</a>';
+   		       	 return $users->userloc->name;
    		       	}
    	        })
 
