@@ -1,9 +1,9 @@
 <?php
 
 return array(
-	'eula_text'      			=> 'EULA',
-    'id'      					=> 'ID',
+    'dl_csv'			=> 'Download CSV',
+    'eula_text'			=> 'EULA',
+    'id'			=> 'ID',
     'require_acceptance'      	=> 'Přijetí',
-    'title'      				=> 'Název příslušenství',
-
+    'title'			=> 'Název příslušenství',
 );

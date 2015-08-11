@@ -1,9 +1,9 @@
 <?php
 
 return array(
-	'eula_text'      			=> 'Slutbrugerlicens',
-    'id'      					=> 'ID',
+    'dl_csv'			=> 'Download CSV',
+    'eula_text'			=> 'Slutbrugerlicens',
+    'id'			=> 'ID',
     'require_acceptance'      	=> 'Accept',
-    'title'      				=> 'Tilbehør Navn',
-
+    'title'			=> 'Tilbehør Navn',
 );
