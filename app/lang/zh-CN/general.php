@@ -3,6 +3,7 @@
     return [
     'accessories'			=> '附属品',
     'accessory'				=> '附属品',
+    'accessory_report'			=> 'Accessory Report',
     'action'                => '操作',
     'activity_report'		=> '活动报告',
     'address'				=> '地址',

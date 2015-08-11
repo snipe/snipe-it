@@ -3,6 +3,7 @@
     return [
     'accessories'			=> 'Accessories',
     'accessory'				=> 'Accessory',
+    'accessory_report'			=> 'Accessory Report',
     'action'                => 'Action',
     'activity_report'		=> 'Activity Report',
     'address'				=> 'Address',

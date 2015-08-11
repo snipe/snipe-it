@@ -3,6 +3,7 @@
     return [
     'accessories'			=> 'Zubehör',
     'accessory'				=> 'Zubehör',
+    'accessory_report'			=> 'Accessory Report',
     'action'                => 'Aktion',
     'activity_report'		=> 'Aktivitätsreport',
     'address'				=> 'Supplier Address',

@@ -3,6 +3,7 @@
     return [
     'accessories'			=> 'Příslušenství',
     'accessory'				=> 'Příslušenství',
+    'accessory_report'			=> 'Accessory Report',
     'action'                => 'Akce',
     'activity_report'		=> 'Report aktivity',
     'address'				=> 'Adresa',

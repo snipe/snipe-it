@@ -3,6 +3,7 @@
     return [
     'accessories'			=> 'อุปกรณ์',
     'accessory'				=> 'อุปกรณ์',
+    'accessory_report'			=> 'Accessory Report',
     'action'                => 'ดำเนินการ',
     'activity_report'		=> 'รายงานกิจกรรม',
     'address'				=> 'ที่อยู่',

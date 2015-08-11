@@ -1,9 +1,9 @@
 <?php
 
 return array(
-	'eula_text'      			=> 'ELUA',
-    'id'      					=> 'ID',
-    'require_acceptance'      	=> 'Accettazione',
-    'title'      				=> 'Nome Accessorio',
-
+    'dl_csv'			=> 'Download CSV',
+    'eula_text'			=> 'ELUA',
+    'id'			=> 'ID',
+    'require_acceptance'	=> 'Accettazione',
+    'title'			=> 'Nome Accessorio',
 );
