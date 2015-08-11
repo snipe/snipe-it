@@ -1,6 +1,6 @@
 addons:
   hosts:
-    - AlisonMBP
+    - snipe-it.dev
 
 # see http://about.travis-ci.org/docs/user/languages/php/ for more hints
 language: php
