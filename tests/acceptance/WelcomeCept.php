@@ -1,6 +1,10 @@
 <?php
 $I = new AcceptanceTester($scenario);
-$I->wantTo('ensure that frontpage works');
+
+$I->am('Website Visitor');
+$I->wantTo('ensure that frontpage loads without errors');
+$I->amGoingTo('go to the homepage');
+$I->lookForwardTo('logging in');
 $I->amOnPage('/');
-$I->see('Account Sign in');
-?>
+$I->seeElement('input[type=username]');
+$I->seeElement('input[type=password]');
