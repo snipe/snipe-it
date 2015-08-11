@@ -12,7 +12,7 @@ class Consumable extends Elegant
     public $rules = array(
         'name'   => 'required|alpha_space|min:3|max:255',
         'category_id'   	=> 'required|integer',
-        'qty'   	=> 'required|integer|min:1',
+        'qty'   	=> 'required|integer|min:0',
     );
 
     public function category()
