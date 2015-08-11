@@ -392,7 +392,7 @@ class Asset extends Depreciable
 		return $query->whereNotNull('deleted_at');
 	}
 	
-	/**
+/**
 	* Query builder scope to search on text
 	*
 	* @param  Illuminate\Database\Query\Builder  $query  Query builder instance
@@ -434,11 +434,16 @@ class Asset extends Depreciable
 							});
 						});
 					});
+				})->orWhere(function($query) use ($search) {
+					$query->whereHas('assetlog', function($query) use ($search) {
+						$query->where('action_type','=','checkout')
+						->where('created_at','LIKE','%'.$search.'%');
+					});
 				})->orWhere('name','LIKE','%'.$search.'%')
 				->orWhere('asset_tag','LIKE','%'.$search.'%')
 				->orWhere('serial','LIKE','%'.$search.'%')
 				->orWhere('order_number','LIKE','%'.$search.'%')
-				->orWhere('notes','LIKE','%'.$search.'%');
+				->orWhere('notes','LIKE','%'.$search.'');
 			}
 		});
 	}
@@ -453,9 +458,21 @@ class Asset extends Depreciable
 	*/
 	public function scopeOrderModels($query, $order)
 	{
-		return $query->where(function($query) use ($order)
-		{
-			$query->join('models', 'assets.model_id', '=', 'models.id')->orderBy('models.name', $order);
-		});
+		return $query->join('models', 'assets.model_id', '=', 'models.id')->orderBy('models.name', $order);
+	}
+
+	public function scopeOrderCheckout($query, $order)
+	{
+		return $query->join('asset_logs', function($join){
+            $join->on('assets.id', '=', 'asset_logs.asset_id');
+        })->where('asset_logs.action_type', '=', 'checkout')
+        ->orderBy('asset_logs.created_at', $order);
+	}
+
+	public function scopeOrderCategory($query, $order)
+	{
+		return $query->join('models', 'assets.model_id', '=', 'models.id')
+            ->join('categories', 'models.category_id', '=', 'categories.id')
+            ->orderBy('categories.name', $order);
 	}
 }
