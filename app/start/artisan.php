@@ -16,4 +16,3 @@
     Artisan::add( new Versioning );
     Artisan::add( new SystemBackup );
     Artisan::add( new ImportCommand );
-    Artisan::add( new ThreadAssetLogsCommand );

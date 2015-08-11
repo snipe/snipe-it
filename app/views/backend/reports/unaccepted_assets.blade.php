@@ -1,5 +1,4 @@
 <?php
-use Carbon\Carbon;
 ?>
 @extends('backend/layouts/default')
 
@@ -21,6 +20,7 @@ use Carbon\Carbon;
     </div>
     <div class="row">
         <div class="table-responsive">
+          ASSET: <? print_r($assetsForReport) ?>
             <table id="example">
                 <thead>
                 <tr role="row">
@@ -28,22 +28,18 @@ use Carbon\Carbon;
                     <th class="col-sm-1">@lang('admin/hardware/form.model')</th>
                     <th class="col-sm-1">@lang('admin/hardware/form.name')</th>
                     <th class="col-sm-1">@lang('admin/hardware/table.asset_tag')</th>
-                    <th class="col-sm-1">@lang('admin/hardware/table.checkout_date')</th>
                     <th class="col-sm-1">@lang('admin/hardware/table.checkoutto')</th>
-                    <th class="col-sm-1">@lang('admin/hardware/table.days_without_acceptance')</th>
                 </tr>
                 </thead>
                 <tbody>
                 @if ($assetsForReport)
                     @foreach ($assetsForReport as $assetItem)
                         <tr>
-                            <td>{{{ $assetItem->assetlog->model->category->name }}}</td>
-                            <td>{{{ $assetItem->assetlog->model->name }}}</td>
-                            <td>{{ link_to(Config::get('app.url').'/hardware/'.$assetItem->assetlog->id.'/view',$assetItem->assetlog->showAssetName()) }}</td>
-                            <td>{{{ $assetItem->assetlog->asset_tag }}}</td>
-                            <td>{{{ $assetItem->created_at->format('Y-m-d') }}}</td>
-                            <td>{{ link_to(Config::get('app.url').'/admin/users/'.$assetItem->assetlog->assigned_to.'/view', $assetItem->assetlog->assigneduser->fullName())}}</td>
-                            <td>{{{ $assetItem->created_at->diffInDays(Carbon::now()) }}}</td>
+                            <td>{{{ $assetItem->model->category->name }}}</td>
+                            <td>{{{ $assetItem->model->name }}}</td>
+                            <td>{{ link_to(Config::get('app.url').'/hardware/'.$assetItem->id.'/view',$assetItem->showAssetName()) }}</td>
+                            <td>{{{ $assetItem->asset_tag }}}</td>
+                            <td>{{ link_to(Config::get('app.url').'/admin/users/'.$assetItem->assigned_to.'/view', $assetItem->assigneduser->fullName())}}</td>
                         </tr>
                     @endforeach
                 @endif

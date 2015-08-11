@@ -104,45 +104,8 @@
         }
 
         /**
-         * getUnacceptedAssets
-         * @param array $listOfAssets
-         *
-         * @return mixed
-         * @static
-         * @author  Vincent Sposato <vincent.sposato@gmail.com>
-         * @version v1.0
-         */
-        public static function getUnacceptedAssets( $listOfAssets = [ '*' ] )
-        {
-
-            $assetIds = implode( ",", $listOfAssets );
-            $queryForUnacceptedAssets = <<<UNACCEPTEDQUERY
-SELECT
-	asset_logs.id, asset_logs.asset_id
-FROM
-	asset_logs
-INNER JOIN (
-	SELECT
-		`asset_logs`.`asset_id`,
-		MAX(`asset_logs`.`created_at`) AS max_asset_date
-	FROM
-		asset_logs
-	WHERE
-		`asset_logs`.`action_type` = "checkout"
-	GROUP BY
-		`asset_logs`.`asset_id`
-) maxAssetLogs ON asset_logs.asset_id = maxAssetLogs.asset_id
-AND asset_logs.created_at = maxAssetLogs.max_asset_date
-WHERE
-	(asset_logs.accepted_id IS NULL OR asset_logs.accepted_id = 0) AND
-	asset_logs.asset_id IN ( $assetIds );
-UNACCEPTEDQUERY;
-
-            return DB::select( $queryForUnacceptedAssets );
-        }
-
-        /**
          * getListingOfActionLogsChronologicalOrder
+         *
          * @return mixed
          * @author  Vincent Sposato <vincent.sposato@gmail.com>
          * @version v1.0
