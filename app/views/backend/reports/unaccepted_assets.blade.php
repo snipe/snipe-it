@@ -20,7 +20,6 @@
     </div>
     <div class="row">
         <div class="table-responsive">
-          ASSET: <? print_r($assetsForReport) ?>
             <table id="example">
                 <thead>
                 <tr role="row">
