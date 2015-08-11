@@ -1,5 +1,6 @@
 <?php namespace Controllers\Admin;
 
+use Accessory;
 use Actionlog;
 use AdminController;
 use Asset;
@@ -20,6 +21,54 @@ use Setting;
 
 class ReportsController extends AdminController
 {
+
+    /**
+     * Show Report for Accessories
+     *
+     * @return View
+     */
+    public function getAccessoryReport()
+    {
+        $accessories = Accessory::orderBy('created_at', 'DESC')->get();
+        return View::make('backend/reports/accessories', compact('accessories'));
+    }
+
+    /**
+     * Export Accessories Report as CSV
+     *
+     * @return file download
+     */
+    public function exportAccessoryReport()
+    {
+        $accessories = Accessory::orderBy('created_at', 'DESC')->get();
+        $rows = array();
+        $header = array(
+            Lang::get('admin/accessories/table.title'),
+			Lang::get('admin/accessories/general.accessory_category'),
+            Lang::get('admin/accessories/general.total'),
+            Lang::get('admin/accessories/general.remaining')
+        );
+        $header = array_map('trim', $header);
+        $rows[] = implode($header, ', ');
+
+        // Row per accessory
+        foreach ($accessories as $accessory) {
+            $row = array();
+            $row[] = $accessory->accessory_name;
+			$row[] = $accessory->accessory_category;
+            $row[] = $accessory->total;
+            $row[] = $accessory->remaining;
+
+            $rows[] = implode($row, ',');
+        }
+
+        $csv = implode($rows, "\n");
+        $response = Response::make($csv, 200);
+        $response->header('Content-Type', 'text/csv');
+        $response->header('Content-disposition', 'attachment;filename=report.csv');
+
+        return $response;
+    }
 
     /**
      * Show Asset Report
