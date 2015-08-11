@@ -53,7 +53,7 @@ var tipuesearch_pages = [
     "http://docs.snipeitapp.com/translations.html",
     "http://docs.snipeitapp.com/license.html",
     "http://docs.snipeitapp.com/manual/labels.html",
-    "http://docs.snipeitapp.com/installation/manually-editing-data.html"
+    "http://docs.snipeitapp.com/installation/manually-editing-data.html",
     "http://docs.snipeitapp.com/installation/subdirectory.html"
 
 ];
