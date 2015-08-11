@@ -22,7 +22,7 @@ return array(
     'upload' => array(
         'error'   => 'Dosya(lar) yüklenemedi. Lütfen tekrar deneyin.',
         'success' => 'Dosya(lar) yüklendi.',
-        'nofiles' => 'Yükleme için hiç bir dosya seçmediniz',
+        'nofiles' => 'You did not select any files for upload, or the file you are trying to upload is too large',
         'invalidfiles' => 'Bir ya da daha fazla dosya izin verilen boyuttan daha büyük ya da izin verilmeyen bir dosya tipi seçtiniz. Lütfen dosya boyutu ve tipini kontrol ediniz.',
     ),
 

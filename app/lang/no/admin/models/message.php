@@ -8,7 +8,8 @@ return array(
 
     'create' => array(
         'error'   => 'Modellen ble ikke opprettet. Prøv igjen.',
-        'success' => 'Opprettelse av modell var vellykket.'
+        'success' => 'Opprettelse av modell var vellykket.',
+        'duplicate_set' => 'An asset model with that name, manufacturer and model number already exists.',
     ),
 
     'update' => array(
@@ -21,7 +22,7 @@ return array(
         'error'   => 'Det oppstod et problem under sletting av modellen. Prøv igjen.',
         'success' => 'Sletting av modell vellykket.'
     ),
-    
+
     'restore' => array(
         'error'   		=> 'Modell ble ikke gjenopprettet. Prøv igjen',
         'success' 		=> 'Vellykket gjenoppretting av modell.'

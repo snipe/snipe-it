@@ -8,6 +8,7 @@ return array(
     'delete'  	=> 'Törlés',
     'edit'    	=> 'Szerkesztés',
     'restore' 	=> 'Visszaállítás',
+    'request'   => 'Request',
     'submit'  	=> 'Küldés',
     'upload'    => 'Upload',
 

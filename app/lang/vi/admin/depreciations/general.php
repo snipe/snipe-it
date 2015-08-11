@@ -1,12 +1,12 @@
 <?php
 
 return array(
-    'about_asset_depreciations'  			=> 'About Asset Depreciations',
-    'about_depreciations'  					=> 'You can set up asset depreciations to depreciate assets based on straight-line depreciation.',
-    'asset_depreciations'  					=> 'Asset Depreciations',
-    'create_depreciation'  					=> 'Create Depreciation',
-    'depreciation_name'  					=> 'Depreciation Name',
-    'number_of_months'  					=> 'Number of Months',
-    'update_depreciation'  					=> 'Update Depreciation',
+    'about_asset_depreciations'  			=> 'Thông tin về khấu hao tài sản',
+    'about_depreciations'  					=> 'Bạn có thể thiết lập các loại khấu hao để khấu hao tài sản dựa trên straight-line khấu hao.',
+    'asset_depreciations'  					=> 'Khấu hao tài sản',
+    'create_depreciation'  					=> 'Tạo khấu hao',
+    'depreciation_name'  					=> 'Tên khấu hao',
+    'number_of_months'  					=> 'Số lượng tháng',
+    'update_depreciation'  					=> 'Cập nhật khấu hao',
 
 );

@@ -4,8 +4,8 @@ return array(
 
 
     'update' => array(
-        'error'   => 'An error has occurred while updating. ',
-        'success' => 'Settings updated successfully.'
+        'error'   => '更新時にエラーが発生しました。 ',
+        'success' => '更新に成功しました。'
     ),
 
 );

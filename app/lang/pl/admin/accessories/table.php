@@ -1,9 +1,9 @@
 <?php
 
 return array(
-	'eula_text'      			=> 'EULA',
+	'eula_text'      			=> 'Licencja',
     'id'      					=> 'ID',
-    'require_acceptance'      	=> 'Acceptance',
+    'require_acceptance'      	=> 'Akceptacja',
     'title'      				=> 'Nazwa akcesoriów',
 
 );

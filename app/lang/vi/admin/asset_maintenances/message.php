@@ -11,7 +11,7 @@
             'error'   => 'Asset Maintenance was not created, please try again.',
             'success' => 'Asset Maintenance created successfully.'
         ],
-        'asset_maintenance_incomplete' => 'Not Completed Yet',
-        'warranty'                     => 'Warranty',
-        'not_warranty'                 => 'Not Warranty',
+        'asset_maintenance_incomplete' => 'Chưa hoàn thành',
+        'warranty'                     => 'Bảo hành',
+        'not_warranty'                 => 'Không có bảo hành',
     ];

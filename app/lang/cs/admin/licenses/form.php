@@ -3,11 +3,11 @@
 return array(
 
     'asset'             => 'Majetek',
-    'checkin'           => 'Checkin',
+    'checkin'           => 'Příjem',
     'cost'              => 'Pořizovací cena',
     'create'            => 'Založ licenci',
     'date'              => 'Datum pořízení',
-    'depreciation'      => 'Depreciation',
+    'depreciation'      => 'Amortizace',
     'expiration'        => 'Expirace',
     'maintained'        => 'Údržba',
     'name'              => 'Software',
@@ -23,6 +23,6 @@ return array(
     'termination_date'  => 'Platná do',
     'to_email'          => 'Registrováno na Email',
     'to_name'           => 'Registrace na jméno',
-    'update'            => 'Update License',
+    'update'            => 'Úprava licence',
     'checkout_help'     => 'You must check a license out to a hardware asset or a person. You can select both, but the owner of the asset must match the person you\'re checking the asset out to.'
 );

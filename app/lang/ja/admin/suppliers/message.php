@@ -2,23 +2,23 @@
 
 return array(
 
-    'does_not_exist' => 'Supplier does not exist.',
-    'assoc_users'	 => 'This supplier is currently associated with at least one model and cannot be deleted. Please update your models to no longer reference this supplier and try again. ',
+    'does_not_exist' => '仕入先が存在していません。',
+    'assoc_users'	 => 'この仕入先は現在少なくとも一つの型番に関連付けされているため削除できません。この仕入先を参照しないように更新した上で、もう一度試して下さい。 ',
 
     'create' => array(
-        'error'   => 'Supplier was not created, please try again.',
-        'success' => 'Supplier created successfully.'
+        'error'   => '仕入先が作成できませんでした。もう一度試して下さい。',
+        'success' => '仕入先が作成されました。'
     ),
 
     'update' => array(
-        'error'   => 'Supplier was not updated, please try again',
-        'success' => 'Supplier updated successfully.'
+        'error'   => '仕入先は更新できませんでした。もう一度試して下さい。',
+        'success' => '仕入先が更新されました。'
     ),
 
     'delete' => array(
-        'confirm'   => 'Are you sure you wish to delete this supplier?',
-        'error'   => 'There was an issue deleting the supplier. Please try again.',
-        'success' => 'Supplier was deleted successfully.'
+        'confirm'   => '本当にこの仕入先を削除してよいですか？',
+        'error'   => '仕入先を削除する際に問題が発生しました。もう一度試して下さい。',
+        'success' => '仕入先が削除されました。'
     )
 
 );

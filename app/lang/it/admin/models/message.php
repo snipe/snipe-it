@@ -8,7 +8,8 @@ return array(
 
     'create' => array(
         'error'   => 'Il modello non è stato creato, si prega di riprovare.',
-        'success' => 'Modello creato con successo.'
+        'success' => 'Modello creato con successo.',
+        'duplicate_set' => 'An asset model with that name, manufacturer and model number already exists.',
     ),
 
     'update' => array(
@@ -21,7 +22,7 @@ return array(
         'error'   => 'C\'è stato un problema durante la cancellazione del modello. Riprova per favore.',
         'success' => 'Modello cancellato con successo.'
     ),
-    
+
     'restore' => array(
         'error'   		=> 'Il modello non è stato ripristinato, si prega di riprovare',
         'success' 		=> 'Modello ripristinato con successo.'

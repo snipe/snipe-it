@@ -5,7 +5,7 @@ return array(
     'about_categories'  				=> 'Kategorien helfen Ihnen dabei, Ihre Assets zu organisieren. Beispielkategorien sind "Schreibtische", "Laptops", "Handys", "Tablets" usw., jedoch können Sie Kategorien nutzen, wie es für Sie sinnvoll erscheint.',
     'asset_categories' 					=> 'Asset-Kategorien',
     'category_name'  					=> 'Kategoriename',
-    'checkin_email'                     => 'Send email to user on checkin.',
+    'checkin_email'                     => 'Dem Nutzer eine E-Mail beim Anmelden zusenden.',
     'clone'                             => 'Kategorie duplizieren',
     'create'  							=> 'Kategorie erstellen',
     'edit'                              => 'Kategorie bearbeiten',

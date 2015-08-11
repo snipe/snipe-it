@@ -2,35 +2,35 @@
 
 return array(
 
-    'account_already_exists' => 'An account with the this email already exists.',
-    'account_not_found'      => 'The username or password is incorrect.',
-    'account_not_activated'  => 'This user account is not activated.',
-    'account_suspended'      => 'This user account is suspended.',
-    'account_banned'         => 'This user account is banned.',
+    'account_already_exists' => 'このemailのアカウントが既に存在しています。',
+    'account_not_found'      => 'ユーザー名またはパスワードが不正です。',
+    'account_not_activated'  => 'このユーザーアカウントは有効化されていません。',
+    'account_suspended'      => 'このユーザーアカウントは停止中です。',
+    'account_banned'         => 'このユーザーアカウントは禁止されています。',
 
     'signin' => array(
-        'error'   => 'There was a problem while trying to log you in, please try again.',
-        'success' => 'You have successfully logged in.',
+        'error'   => 'ログインする際に問題が発生しました。もう一度やり直して下さい。',
+        'success' => 'ログインに成功しました。',
     ),
 
     'signup' => array(
-        'error'   => 'There was a problem while trying to create your account, please try again.',
-        'success' => 'Account sucessfully created.',
+        'error'   => 'アカウントを作成する際に問題が発生しました。もう一度やり直して下さい。',
+        'success' => 'アカウントが作成されました。',
     ),
 
         'forgot-password' => array(
-            'error'   => 'There was a problem while trying to get a reset password code, please try again.',
-            'success' => 'Password recovery email successfully sent.',
+            'error'   => 'パスワードリセットの際に問題が発生しました。もう一度やり直して下さい。',
+            'success' => 'パスワード復旧のemailを送信しました。',
         ),
 
         'forgot-password-confirm' => array(
-            'error'   => 'There was a problem while trying to reset your password, please try again.',
-            'success' => 'Your password has been successfully reset.',
+            'error'   => 'パスワードをリセットする際に問題が発生しました。もう一度やり直して下さい。',
+            'success' => 'パスワードがリセットされました。',
         ),
 
     'activate' => array(
-        'error'   => 'There was a problem while trying to activate your account, please try again.',
-        'success' => 'Your account has been successfully activated.',
+        'error'   => 'アカウントを有効にする際に問題が発生しました。もう一度やり直して下さい。',
+        'success' => 'アカウントが有効になりました。',
     ),
 
 );

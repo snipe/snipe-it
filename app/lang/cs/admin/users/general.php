@@ -10,7 +10,7 @@ return array(
     'filetype_info'     => 'Povolené přílohy: png, gif, jpg, jpeg, doc, docx, pdf, txt, zip, and rar.',
     'history_user'      => 'Historie:',
     'last_login'        => 'Poslední přihlášení',
-    'software_user'     => 'Software Checked out to :name',
+    'software_user'     => 'Software vydaný pro :name',
     'view_user'         => 'Zobraz uživatele',
     'usercsv'           => 'CSV soubor',
     );

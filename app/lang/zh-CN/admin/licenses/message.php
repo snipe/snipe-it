@@ -22,7 +22,7 @@ return array(
     'upload' => array(
         'error'   => '文件上传失败，请重试。',
         'success' => '文件上传成功。',
-        'nofiles' => '您没有选择要上传的文件',
+        'nofiles' => 'You did not select any files for upload, or the file you are trying to upload is too large',
         'invalidfiles' => '一个或多个文件过大或者属于不被允许的文件类型。允许上传的文件类型有PNG，GIF，JPG，DOC，DOCX，PDF和TXT。',
     ),
 

@@ -22,7 +22,7 @@ return array(
     'upload' => array(
         'error'   => 'Fil(er) ble ikke lastet opp. Prøv igjen.',
         'success' => 'Fil(er) ble slettet.',
-        'nofiles' => 'Du valgte ingen filer for opplasting',
+        'nofiles' => 'You did not select any files for upload, or the file you are trying to upload is too large',
         'invalidfiles' => 'En eller flere av filene dine er for store eller av en filtype som ikke er tillatt. Tillatte filtyper er png, gif, jpg, doc, docx, pdf og txt.',
     ),
 

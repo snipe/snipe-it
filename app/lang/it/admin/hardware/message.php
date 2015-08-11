@@ -5,6 +5,7 @@ return array(
     'undeployable' 		=> '<strong>Attenzione: </strong> Questo asset è stato marcato come non distribuibile.
                        Se lo stato è cambiato,aggiorna lo stato dell\'asset.',
     'does_not_exist' 	=> 'Questo Asset non esiste.',
+    'does_not_exist_or_not_requestable' => 'Nice try. That asset does not exist or is not requestable.',
     'assoc_users'	 	=> 'Questo asset è stato assegnato ad un Utente e non può essere cancellato. Per favore Riassegnalo in magazzino,e dopo riprova a cancellarlo.',
 
     'create' => array(
@@ -22,7 +23,7 @@ return array(
         'error'   		=> 'Il bene non è stato ripristinato, riprova',
         'success' 		=> 'Bene ripristinato con successo.'
     ),
-    
+
     'deletefile' => array(
         'error'   => 'File non cancellato. Riprova.',
         'success' => 'File cancellato con successo.',
@@ -31,7 +32,7 @@ return array(
     'upload' => array(
         'error'   => 'File non caricato/i. Riprova.',
         'success' => 'File caricato/i con successo.',
-        'nofiles' => 'Non hai selezionato i file per il caricamento',
+        'nofiles' => 'You did not select any files for upload, or the file you are trying to upload is too large',
         'invalidfiles' => 'Uno o più file è troppo grande o è un tipo di file non consentito. Tipi di file ammessi sono png, gif, jpg, doc, docx, pdf, txt.',
     ),
 

@@ -5,6 +5,7 @@ return array(
     'undeployable' 		=> '<strong>Warning: </strong> This asset has been marked as currently undeployable.
                         If this status has changed, please update the asset status.',
     'does_not_exist' 	=> '资产不存在',
+    'does_not_exist_or_not_requestable' => 'Nice try. That asset does not exist or is not requestable.',
     'assoc_users'	 	=> '这个资产目前已经借给某个用户，不能被删除，请检查资产信息，然后再尝试删除。',
 
     'create' => array(
@@ -22,7 +23,7 @@ return array(
         'error'   		=> 'Asset was not restored, please try again',
         'success' 		=> 'Asset restored successfully.'
     ),
-    
+
     'deletefile' => array(
         'error'   => 'File not deleted. Please try again.',
         'success' => 'File successfully deleted.',
@@ -31,7 +32,7 @@ return array(
     'upload' => array(
         'error'   => 'File(s) not uploaded. Please try again.',
         'success' => 'File(s) successfully uploaded.',
-        'nofiles' => 'You did not select any files for upload',
+        'nofiles' => 'You did not select any files for upload, or the file you are trying to upload is too large',
         'invalidfiles' => 'One or more of your files is too large or is a filetype that is not allowed. Allowed filetypes are png, gif, jpg, doc, docx, pdf, and txt.',
     ),
 

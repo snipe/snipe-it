@@ -5,6 +5,7 @@ return array(
     'undeployable' 		=> '<strong>Warning: </strong> This asset has been marked as currently undeployable.
                         If this status has changed, please update the asset status.',
     'does_not_exist' 	=> 'Activul nu exista.',
+    'does_not_exist_or_not_requestable' => 'Nice try. That asset does not exist or is not requestable.',
     'assoc_users'	 	=> 'Acest activ este predat catre un utilizator si nu se poate sterge. Va rugam verificati activul, dupa care incercati sa-l stergeti iar. ',
 
     'create' => array(
@@ -22,7 +23,7 @@ return array(
         'error'   		=> 'Asset was not restored, please try again',
         'success' 		=> 'Asset restored successfully.'
     ),
-    
+
     'deletefile' => array(
         'error'   => 'File not deleted. Please try again.',
         'success' => 'File successfully deleted.',
@@ -31,7 +32,7 @@ return array(
     'upload' => array(
         'error'   => 'File(s) not uploaded. Please try again.',
         'success' => 'File(s) successfully uploaded.',
-        'nofiles' => 'You did not select any files for upload',
+        'nofiles' => 'You did not select any files for upload, or the file you are trying to upload is too large',
         'invalidfiles' => 'One or more of your files is too large or is a filetype that is not allowed. Allowed filetypes are png, gif, jpg, doc, docx, pdf, and txt.',
     ),
 

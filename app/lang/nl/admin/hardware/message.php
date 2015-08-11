@@ -4,6 +4,7 @@ return array(
 
     'undeployable' 		=> '<strong>Waarschuwing: </strong>Het gereedschap is gemarkeerd als niet uitrolbaar. Als de status is veranderd, verander dan de status van het gereedschap.',
     'does_not_exist' 	=> 'Dit gereedschap bestaat niet.',
+    'does_not_exist_or_not_requestable' => 'Nice try. That asset does not exist or is not requestable.',
     'assoc_users'	 	=> 'Dit gereedschap is op dit moment toegewezen aan een gebruiker en kan niet verwijderd worden. Verwijder het gereedschap eerst, en probeer op nieuw.',
 
     'create' => array(
@@ -21,7 +22,7 @@ return array(
         'error'   		=> 'Gereedschap is niet hersteld. Probeer opnieuw',
         'success' 		=> 'Gereedschap is succesvol hersteld.'
     ),
-    
+
     'deletefile' => array(
         'error'   => 'File not deleted. Please try again.',
         'success' => 'File successfully deleted.',
@@ -30,7 +31,7 @@ return array(
     'upload' => array(
         'error'   => 'File(s) not uploaded. Please try again.',
         'success' => 'File(s) successfully uploaded.',
-        'nofiles' => 'You did not select any files for upload',
+        'nofiles' => 'You did not select any files for upload, or the file you are trying to upload is too large',
         'invalidfiles' => 'One or more of your files is too large or is a filetype that is not allowed. Allowed filetypes are png, gif, jpg, doc, docx, pdf, and txt.',
     ),
 

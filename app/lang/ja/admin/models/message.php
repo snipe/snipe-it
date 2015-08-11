@@ -2,29 +2,30 @@
 
 return array(
 
-    'does_not_exist' => 'Model does not exist.',
-    'assoc_users'	 => 'This model is currently associated with one or more assets and cannot be deleted. Please delete the assets, and then try deleting again. ',
+    'does_not_exist' => '型番が存在しません。',
+    'assoc_users'	 => 'この型番は他の資産に関連付けられているため、削除できません。資産を削除してから、もう一度試して下さい。 ',
 
 
     'create' => array(
-        'error'   => 'Model was not created, please try again.',
-        'success' => 'Model created successfully.'
+        'error'   => '型番が作成できませんでした。もう一度やり直して下さい。',
+        'success' => '型番が作成されました。',
+        'duplicate_set' => 'An asset model with that name, manufacturer and model number already exists.',
     ),
 
     'update' => array(
-        'error'   => 'Model was not updated, please try again',
-        'success' => 'Model updated successfully.'
+        'error'   => '型番が更新できませんでした。もう一度やり直して下さい。',
+        'success' => '型番が更新されました。'
     ),
 
     'delete' => array(
-        'confirm'   => 'Are you sure you wish to delete this asset model?',
-        'error'   => 'There was an issue deleting the model. Please try again.',
-        'success' => 'The model was deleted successfully.'
+        'confirm'   => '本当にこの資産の型番を削除しますか？',
+        'error'   => '型番を削除する際に問題が発生しました。もう一度やり直して下さい。',
+        'success' => '型番は削除されました。'
     ),
-    
+
     'restore' => array(
-        'error'   		=> 'Model was not restored, please try again',
-        'success' 		=> 'Model restored successfully.'
+        'error'   		=> '型番が復元されませんでした。もう一度、やり直して下さい。',
+        'success' 		=> '型番は復元されました。'
     ),
 
 );
