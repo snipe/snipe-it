@@ -35,9 +35,8 @@ class TestCase extends Illuminate\Foundation\Testing\TestCase
      */
     private function prepareForTests()
     {
-        Artisan::call('migrate', array('--package' => 'cartalyst/sentry','--force'=>true));
-        Artisan::call('migrate');        
-        Mail::pretend(true);
+        Artisan::call('migrate', array('--package' => 'cartalyst/sentry'));
+        Artisan::call('migrate');
     }
 
 }

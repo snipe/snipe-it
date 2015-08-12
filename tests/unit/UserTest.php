@@ -12,6 +12,7 @@ class UserTest extends TestCase {
       $user = new User;
       $user->email = "name@example.com";
       $user->password = "password";
+      $user->setHasher(new Cartalyst\Sentry\Hashing\BCryptHasher);
 
 
       // User should not save
@@ -27,6 +28,7 @@ class UserTest extends TestCase {
       $this->assertEquals($errors[0], "The username field is required.");
     }
     */
+
 
 
 }

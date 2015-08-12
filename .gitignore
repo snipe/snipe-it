@@ -26,3 +26,4 @@ public/assets/.siteflow
 app/config/local/session.php
 .couscous
 tests/_support/_generated/*
+tests/_data/scenarios
