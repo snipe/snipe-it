@@ -1,6 +1,6 @@
 <?php
 
-use CustomField;
+//use CustomField;
 
 class Model extends Elegant
 {
