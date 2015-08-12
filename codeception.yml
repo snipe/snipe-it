@@ -24,6 +24,8 @@ modules:
     enabled:
         - Laravel4
     config:
+        Laravel4:
+            environment: test
         Db:
             dsn: 'mysql:host=localhost;dbname=snipeit_laravel'
             user: 'travis'
