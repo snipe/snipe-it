@@ -20,7 +20,7 @@ env:
 
 # execute any number of scripts before the test run, custom env's are available as variables
 before_script:
-  - if [[ "$DB" == "mysql" ]]; then mysql -e "create database IF NOT EXISTS snipeit_laravel;" -utravis; fi
+  - if [[ "$DB" == "mysql" ]]; then mysql -e "create database IF NOT EXISTS snipeit_unit;" -utravis; fi
   - curl -s http://getcomposer.org/installer | php
   - cp app/config/testing/app.example.php app/config/testing/app.php
   - cp app/config/testing/database.example.php app/config/testing/database.php
@@ -35,7 +35,7 @@ before_script:
 
 # omitting "script:" will default to phpunit
 # use the $DB env variable to determine the phpunit.xml to use
-script: phpunit
+script: ./vendor/bin/codecept run
 
 # configure notifications (email, IRC, campfire etc)
 notifications:
