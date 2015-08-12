@@ -4,12 +4,15 @@ class UserTest extends TestCase {
     /**
      * Username is required
      */
+
+     /*
     public function testUsernameIsRequired()
     {
       // Create a new User
       $user = new User;
       $user->email = "name@example.com";
       $user->password = "password";
+
 
       // User should not save
       $this->assertFalse($user->save());
@@ -23,6 +26,7 @@ class UserTest extends TestCase {
       // The username error should be set
       $this->assertEquals($errors[0], "The username field is required.");
     }
+    */
 
 
 }
