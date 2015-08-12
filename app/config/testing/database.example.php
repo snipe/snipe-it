@@ -54,7 +54,7 @@ return array(
         'mysql' => array(
             'driver'    => 'mysql',
             'host'      => 'localhost',
-            'database'  => 'snipeit_laravel',
+            'database'  => 'snipeit_unit',
             'username'  => 'travis',
             'password'  => '',
             'charset'   => 'utf8',
