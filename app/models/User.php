@@ -12,6 +12,11 @@ class User extends SentryUserModel
     use SoftDeletingTrait;
 	protected $dates = ['deleted_at'];
 
+    public function __construct()
+    {
+        $this->setHasher(new \Cartalyst\Sentry\Hashing\BcryptHasher);
+    }
+
 
     /**
      * Returns the user full name, it simply concatenates

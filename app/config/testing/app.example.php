@@ -26,7 +26,7 @@ return array(
     |
     */
 
-    'url' => 'http://staging.yourserver.com',
+    'url' => 'http://snipe-it.dev',
 
     /*
     |--------------------------------------------------------------------------

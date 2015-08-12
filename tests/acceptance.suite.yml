@@ -8,5 +8,5 @@ class_name: AcceptanceTester
 modules:
     enabled:
         - PhpBrowser:
-            url: http://snipe-it.local:8888
+            url: http://snipe-it.dev
         - \Helper\Acceptance
