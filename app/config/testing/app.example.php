@@ -40,6 +40,6 @@ return array(
     | Run a php artisan key:generate --env=staging to create a random one
     */
 
-    'key' => 'Change_this_key_or_snipe_will_get_ya',
+    'key' => '8YHfiO4EyWBewqrpGHDA4Iuom2ZIahXQ',
 
 );
