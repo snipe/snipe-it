@@ -21,13 +21,8 @@ coverage:
         ssl:
             verify_peer: false
 modules:
-    enabled:
-        - Laravel4
-    config:
-        Laravel4:
-            environment: test
         Db:
-            dsn: 'mysql:host=localhost;dbname=snipeit_laravel'
+            dsn: 'mysql:host=localhost;dbname=snipeit_unit'
             user: 'travis'
             password: ''
             dump: tests/_data/dump.sql

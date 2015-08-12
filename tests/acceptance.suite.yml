@@ -9,4 +9,3 @@ modules:
     enabled:
         - PhpBrowser:
             url: http://snipe-it.dev
-        - \Helper\Acceptance
