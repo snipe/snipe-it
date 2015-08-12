@@ -36,7 +36,7 @@ before_script:
 
 # omitting "script:" will default to phpunit
 # use the $DB env variable to determine the phpunit.xml to use
-script: ./vendor/bin/codecept run
+script: ./vendor/bin/codecept run -vvv
 
 # configure notifications (email, IRC, campfire etc)
 notifications:
