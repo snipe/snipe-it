@@ -25,8 +25,6 @@ $app = new Illuminate\Foundation\Application;
 */
 
 $env = $app->detectEnvironment(array(
-
-    'testing'		=> array('snipe-it.dev','worker-linux-docker-*'),
     'local'		 	=> array('homestead','AlisonMBP'),
     'staging' 		=> array('stagingweb01'),
     'production' 	=> array('www.yourserver.com')

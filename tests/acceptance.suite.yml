@@ -9,4 +9,7 @@ modules:
     enabled:
         - PhpBrowser:
             url: http://snipe-it.dev
-        - \Helper\Acceptance
+        - Laravel4:
+            cleanup: true
+            environment: testing
+            filters: true
