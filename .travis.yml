@@ -3,10 +3,6 @@ addons:
         - snipe-it.dev
 sudo: false
 
-# addons:
-#   hosts:
-#     - snipe-it.dev
-
 # see http://about.travis-ci.org/docs/user/languages/php/ for more hints
 language: php
 
@@ -22,7 +18,6 @@ env:
 
 # execute any number of scripts before the test run, custom env's are available as variables
 before_script:
-  #  - hostname
   - if [[ "$DB" == "mysql" ]]; then mysql -e "create database IF NOT EXISTS snipeit_unit;" -utravis; fi
   - curl -s http://getcomposer.org/installer | php
   - cp app/config/testing/app.example.php app/config/testing/app.php
@@ -35,9 +30,6 @@ before_script:
   - php artisan migrate --package cartalyst/sentry --env=testing --no-interaction -vvv
   - php artisan migrate --env=testing --no-interaction -vvv
   - php artisan db:seed --env=testing --no-interaction -vvv
-  # - ping -c 5 snipe-it.dev
-  # - cat /etc/hosts
-  # - curl -vvvvv -D - http://snipe-it.dev/nonexistent
 
 # omitting "script:" will default to phpunit
 # use the $DB env variable to determine the phpunit.xml to use
@@ -47,9 +39,8 @@ script: ./vendor/bin/codecept run
 notifications:
   slack:
     secure: vv9we1RxB9RsrMbomSdq6D7vz/okobw87pEkgIZjB+hj1QpQ2by90gsPsOa+NgsJEFaEP7e4KlT6SH8kK+zhbmuKaUd3d1//XdcancE22LZXi6tkiB5yuR/Jhhb1LLDqyGJTB4D92hMnnCPiUjpxNA3r437ttNeYRdYIEEP3drA=
-
-    urls:
-      - https://webhooks.gitter.im/e/d0e44998bfd3074d4877
+  urls:
+    - https://webhooks.gitter.im/e/d0e44998bfd3074d4877
     on_success: change  # options: [always|never|change] default: always
     on_failure: change  # options: [always|never|change] default: always
     on_start: false     # default: false
