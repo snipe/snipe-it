@@ -9,3 +9,4 @@ modules:
     enabled:
         - PhpBrowser:
             url: http://snipe-it.dev
+        - Laravel4
