@@ -8,4 +8,4 @@ class_name: AcceptanceTester
 modules:
     enabled:
         - PhpBrowser:
-            url: http://snipe-it.dev
+            url: http://127.0.0.1
