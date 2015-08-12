@@ -1,12 +1,12 @@
+# We don't use sudo here, so we can use travis' upgraded container infrastructure
+sudo: false
+
 addons:
   hosts:
     - snipe-it.dev
 
 # see http://about.travis-ci.org/docs/user/languages/php/ for more hints
 language: php
-
-# We don't use sudo here, so we can use travis' upgraded container infrastructure
-sudo: false
 
 # list any PHP version you want to test against
 php:
@@ -20,6 +20,7 @@ env:
 
 # execute any number of scripts before the test run, custom env's are available as variables
 before_script:
+  - hostname
   - if [[ "$DB" == "mysql" ]]; then mysql -e "create database IF NOT EXISTS snipeit_unit;" -utravis; fi
   - curl -s http://getcomposer.org/installer | php
   - cp app/config/testing/app.example.php app/config/testing/app.php
