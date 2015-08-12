@@ -1,5 +1,5 @@
 # We don't use sudo here, so we can use travis' upgraded container infrastructure
-sudo: false
+sudo: required
 
 addons:
   hosts:
@@ -33,8 +33,8 @@ before_script:
   - php artisan migrate --package cartalyst/sentry --env=testing --no-interaction -vvv
   - php artisan migrate --env=testing --no-interaction -vvv
   - php artisan db:seed --env=testing --no-interaction -vvv
-  - cat /etc/hosts
-  - curl -vvvvv -D - http://snipe-it.dev/nonexistent
+  # - cat /etc/hosts
+  # - curl -vvvvv -D - http://snipe-it.dev/nonexistent
 
 # omitting "script:" will default to phpunit
 # use the $DB env variable to determine the phpunit.xml to use
