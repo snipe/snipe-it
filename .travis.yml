@@ -1,6 +1,3 @@
-# We don't use sudo here, so we can use travis' upgraded container infrastructure
-sudo: false
-
 addons:
   hosts:
     - snipe-it.dev
