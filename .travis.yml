@@ -1,9 +1,9 @@
 # We don't use sudo here, so we can use travis' upgraded container infrastructure
 sudo: required
 
-addons:
-  hosts:
-    - snipe-it.dev
+# addons:
+#   hosts:
+#     - snipe-it.dev
 
 # see http://about.travis-ci.org/docs/user/languages/php/ for more hints
 language: php
