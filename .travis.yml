@@ -33,6 +33,7 @@ before_script:
   - php artisan migrate --package cartalyst/sentry --env=testing --no-interaction -vvv
   - php artisan migrate --env=testing --no-interaction -vvv
   - php artisan db:seed --env=testing --no-interaction -vvv
+  - php -i
 
 # omitting "script:" will default to phpunit
 # use the $DB env variable to determine the phpunit.xml to use
