@@ -8,6 +8,7 @@ Create a User ::
 
 {{-- Page content --}}
 @section('content')
+<!--
 <script type="text/javascript">
 $( document ).ready(function() {
 	$( "#sync" ).click( function() {
@@ -15,7 +16,7 @@ $( document ).ready(function() {
 	});
 });
 </script>
-
+-->
 <div class="page-header">
     <h3>
         Create Users from LDAP
@@ -29,45 +30,28 @@ $( document ).ready(function() {
 <script type="text/javascript" src="{{ Config::get('app.cdn.default') }}/js/pGenerator.jquery.js"></script>
 
 
-
+<p>
+    Connect to LDAP and create users.  Passwords will be auto-generated.				
+</p>
+<p>
+    LDAP configuration settings can be found in the app/config folder in a file called ldap.php
+</p>
 <form class="form-horizontal" role="form" method="post" action="">
     <!-- CSRF Token -->
     <input type="hidden" name="_token" value="{{ csrf_token() }}" />
 
     <!-- Tabs Content -->
-    <div class="tab-content">
-        <!-- General tab -->
-        <div class="tab-pane active" id="tab-general">
-        <br>
-			@if (Session::get('message'))
-			<p class="alert-danger">
-				You have an error in your CSV file:<br />
-				{{ Session::get('message') }}
-			</p>
-			@endif
-
-			<p>
-				Connect to LDAP and create users.  Passwords will be auto-generated.				
-			</p>
-			<p>
-				LDAP configuration settings can be found in the app/config folder in a file called ldap.php
-			</p>
-
-            @if (Config::get('app.lock_passwords'))
-                <p>Note: Email notification for users is disabled for this installation.</p>
-            @endif
-
-        </div>
-    </div>
-
-    <div class="form-group">
+ 
+<!--    <div class="form-group pull-left">
 	<label class="col-md-3 control-label"></label>
-        <div class="col-md-7">
+-->
+        <!--
+        <div class="col-md-7"> -->
             <button type="submit" class="btn btn-warning" id="sync">
                 <i class="fa fa-refresh icon-white"></i> Synchronize
             </button>
-        </div>
-    </div>
+<!--        </div> -->
+   <!-- </div> -->
 </form>
 
 @if (Session::get('summary'))
