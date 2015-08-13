@@ -9,9 +9,6 @@ function ParseFloat($floatString){
 
     // use comma for thousands until local info is property used
     $LocaleInfo = localeconv();
-    //$thousands = isset($LocaleInfo["mon_thousands_sep"]) ? $LocaleInfo["mon_thousands_sep"] : ",";
-    //$floatString = str_replace($LocaleInfo["mon_thousands_sep"] , "", $floatString);
-    //$floatString = str_replace($LocaleInfo["decimal_point"] , ".", $floatString);
     $floatString = str_replace("," , "", $floatString);
     $floatString = str_replace($LocaleInfo["decimal_point"] , ".", $floatString);
     return floatval($floatString);
@@ -19,7 +16,8 @@ function ParseFloat($floatString){
 
 function modelList() {
     $model_list = array('' => Lang::get('general.select_model')) + DB::table('models')
-    ->select(DB::raw('COALESCE(concat(name, " / ",modelno),name) as name, id'))->orderBy('name', 'asc')
+    //->select(DB::raw('COALESCE(concat(name, " / ",modelno),name) as name, id'))->orderBy('name', 'asc')
+    ->select(DB::raw('IF (modelno="" OR modelno IS NULL,name,concat(name, " / ",modelno)) as name, id'))->orderBy('name', 'asc')
     ->orderBy('modelno', 'asc')
     ->whereNull('deleted_at')
     ->lists('name', 'id');
