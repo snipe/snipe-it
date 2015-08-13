@@ -8,15 +8,17 @@ Create a User ::
 
 {{-- Page content --}}
 @section('content')
-<!--
+
 <script type="text/javascript">
-$( document ).ready(function() {
-	$( "#sync" ).click( function() {
-		alert("OK");
-	});
-});
+    $(document).ready(function () {
+        $("#sync").click(function () {
+            $("#sync").removeClass("btn-warning");
+            $("#sync-button-icon").addClass("fa-spin");
+            $("#sync-button-text").html(" Processing...");
+        });
+    });
 </script>
--->
+
 <div class="page-header">
     <h3>
         Create Users from LDAP
@@ -36,47 +38,37 @@ $( document ).ready(function() {
 <p>
     LDAP configuration settings can be found in the app/config folder in a file called ldap.php
 </p>
-<form class="form-horizontal" role="form" method="post" action="">
+<form class="form-horizontal" role="form" method="post" action="" id="ldap-form">
     <!-- CSRF Token -->
     <input type="hidden" name="_token" value="{{ csrf_token() }}" />
 
-    <!-- Tabs Content -->
- 
-<!--    <div class="form-group pull-left">
-	<label class="col-md-3 control-label"></label>
--->
-        <!--
-        <div class="col-md-7"> -->
-            <button type="submit" class="btn btn-warning" id="sync">
-                <i class="fa fa-refresh icon-white"></i> Synchronize
-            </button>
-<!--        </div> -->
-   <!-- </div> -->
+    <button type="submit" class="btn btn-warning" id="sync">
+        <i id="sync-button-icon" class="fa fa-refresh icon-white"></i> <span id="sync-button-text">Synchronize</span>
+    </button>
 </form>
-
 @if (Session::get('summary'))
 <h3>Synchronization Results</h3>
-    <table class="table table-bordered">
-        <tr>
-            <th>Username</th><th>York ID</th>
-            <th>First Name</th><th>Last Name</th>
-            <th>Email</th><th>Notes</th>
-	</tr>
-	<?php
-            $summary = Session::get('summary');
-            foreach( $summary as $entry ) {
-                echo "<tr>";
-		echo "<td>" . $entry['username'] . "</td>";
-		echo "<td>" . $entry['pycyin'] . "</td>";
-		echo "<td>" . $entry['firstname'] . "</td>";
-		echo "<td>" . $entry['lastname'] . "</td>";
-		echo "<td>" . $entry['mail'] . "</td>";
-		echo "<td>" . $entry['note'] . "</td>";
-		echo "</tr>";
-            }
-	?>
-    </table>
-			
+<table class="table table-bordered">
+    <tr>
+        <th>Username</th><th>York ID</th>
+        <th>First Name</th><th>Last Name</th>
+        <th>Email</th><th>Notes</th>
+    </tr>
+    <?php
+    $summary = Session::get('summary');
+    foreach ($summary as $entry) {
+        echo "<tr>";
+        echo "<td>" . $entry['username'] . "</td>";
+        echo "<td>" . $entry['pycyin'] . "</td>";
+        echo "<td>" . $entry['firstname'] . "</td>";
+        echo "<td>" . $entry['lastname'] . "</td>";
+        echo "<td>" . $entry['mail'] . "</td>";
+        echo "<td>" . $entry['note'] . "</td>";
+        echo "</tr>";
+    }
+    ?>
+</table>
+
 @endif
 
 @stop
