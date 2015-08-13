@@ -94,7 +94,7 @@
                             'fields' => [
                                 [
                                     'title' => 'Checked Out:',
-                                    'value' => strtoupper($logaction->asset_type).' asset <'.Config::get('app.url').'/hardware/'.$this->id.'/view'.'|'.$this->showAssetName().'> checked out to <'.Config::get('app.url').'/admin/users/'.$this->assigned_to.'/view|'.$this->assigneduser->fullName().'> by <'.Config::get('app.url').'/hardware/'.$this->id.'/view'.'|'.$admin->fullName().'>.'
+                                    'value' => 'HARDWARE asset <'.Config::get('app.url').'/hardware/'.$this->id.'/view'.'|'.$this->showAssetName().'> checked out to <'.Config::get('app.url').'/admin/users/'.$this->assigned_to.'/view|'.$this->assigneduser->fullName().'> by <'.Config::get('app.url').'/hardware/'.$this->id.'/view'.'|'.$admin->fullName().'>.'
                                 ],
                                 [
                                     'title' => 'Note:',
@@ -107,7 +107,7 @@
                         ])->send('Asset Checked Out');
 
                     } catch (Exception $e) {
-
+                        print_r($e);
                     }
                 }
 
