@@ -214,6 +214,7 @@ class AssetsController extends AdminController
         $category_list = categoryList();
         $supplier_list = suppliersList();
         $assigned_to = assignedToList();
+        $statuslabel_types = statusTypeList();
 
         return View::make('backend/hardware/edit', compact('asset'))
         ->with('model_list',$model_list)
@@ -222,6 +223,7 @@ class AssetsController extends AdminController
         ->with('statuslabel_list',$statuslabel_list)
         ->with('assigned_to',$assigned_to)
         ->with('manufacturer',$manufacturer_list)
+        ->with('statuslabel_types',$statuslabel_types)
         ->with('category',$category_list);
     }
 
