@@ -1060,9 +1060,9 @@ class UsersController extends AdminController {
     protected $ldapValidationRules = array(
         'firstname' => 'required|alpha_space|min:2',
         'lastname' => 'required|alpha_space|min:2',
-        'pycyin' => 'numeric',
+        'pycyin' => 'required|numeric',
         'username' => 'required|min:2|unique:users,username',
-        'mail' => 'email|unique:users,email',
+        'mail' => 'required|email|unique:users,email',
     );
 
     /**
@@ -1095,12 +1095,12 @@ class UsersController extends AdminController {
             if ($results[$i]["pyactive"][0] == "TRUE") {
 
                 $item = array();
-                $item["username"] = $results[$i]["pyusername"][0];
-                $item["pycyin"] = $results[$i]["pycyin"][0];
-                $item["cn"] = $results[$i]["cn"][0];
-                $item["lastname"] = $results[$i]["sn"][0];
-                $item["firstname"] = $results[$i]["givenname"][0];
-                $item["mail"] = $results[$i]["mail"][0];
+                $item["username"] = isset( $results[$i]["pyusername"][0] ) ? $results[$i]["pyusername"][0] : "";
+                $item["pycyin"] = isset( $results[$i]["pycyin"][0] ) ? $results[$i]["pycyin"][0] : "";
+                $item["cn"] = isset( $results[$i]["cn"][0] ) ? $results[$i]["cn"][0] : "";
+                $item["lastname"] = isset( $results[$i]["sn"][0] ) ? $results[$i]["sn"][0] : "";
+                $item["firstname"] = isset( $results[$i]["givenname"][0] ) ? $results[$i]["givenname"][0] : "";
+                $item["mail"] = isset( $results[$i]["mail"][0] ) ? $results[$i]["mail"][0] : "" ;
 
                 $user = DB::table('users')->where('username', $item["username"])->first();
                 if ($user) {
