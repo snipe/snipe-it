@@ -53,3 +53,8 @@ function manufacturerList() {
     $manufacturer_list = array('' => 'Select One') + Manufacturer::lists('name', 'id');
     return $manufacturer_list;
 }
+
+function statusTypeList() {
+    $statuslabel_types = array('' => Lang::get('admin/hardware/form.select_statustype')) + array('undeployable' => Lang::get('admin/hardware/general.undeployable')) + array('pending' => Lang::get('admin/hardware/general.pending')) + array('archived' => Lang::get('admin/hardware/general.archived')) + array('deployable' => Lang::get('admin/hardware/general.deployable'));
+    return $statuslabel_types;
+}

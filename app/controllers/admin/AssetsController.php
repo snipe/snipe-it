@@ -63,6 +63,7 @@ class AssetsController extends AdminController
         $category_list = categoryList();
         $supplier_list = suppliersList();
         $assigned_to = assignedToList();
+        $statuslabel_types = statusTypeList();
 
         $view = View::make('backend/hardware/edit');
         $view->with('supplier_list',$supplier_list);
@@ -73,6 +74,7 @@ class AssetsController extends AdminController
         $view->with('asset',new Asset);
         $view->with('manufacturer',$manufacturer_list);
         $view->with('category',$category_list);
+        $view->with('statuslabel_types',$statuslabel_types);
 
         if (!is_null($model_id)) {
             $selected_model = Model::find($model_id);
