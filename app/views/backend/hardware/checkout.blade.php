@@ -71,10 +71,11 @@
                 <div class="input-group col-md-3">
                     <input type="date" class="datepicker form-control" data-date-format="yyyy-mm-dd" placeholder="Checkout Date" name="checkout_at" id="checkout_at" value="{{{ Input::old('checkout_at', date('Y-m-d')) }}}">
                     <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
-                {{ $errors->first('checkout_at', '<br><span class="alert-msg"><i class="fa fa-times"></i> :message</span>') }}
+
                 </div>
+                {{ $errors->first('checkout_at', '<br><span class="alert-msg"><i class="fa fa-times"></i> :message</span>') }}
             </div>
-            
+
             <!-- Expected Checkin Date -->
             <div class="form-group {{ $errors->has('expected_checkin') ? ' has-error' : '' }}">
                 <label for="checkout_at" class="col-md-2 control-label">@lang('admin/hardware/form.expected_checkin')</label>
