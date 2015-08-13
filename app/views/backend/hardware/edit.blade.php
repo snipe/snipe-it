@@ -34,6 +34,11 @@
         </div>
 
         <div class="dynamic-form-row">
+          <div class="col-md-3 col-xs-12"><label for="modal-modelno">@lang('general.model_no'):</label></div>
+          <div class="col-md-9 col-xs-12"><input type='text' id='modal-modelno' class="form-control"></div>
+        </div>
+
+        <div class="dynamic-form-row">
           <div class="col-md-3 col-xs-12"><label for="modal-city">@lang('general.city'):</label></div>
           <div class="col-md-9 col-xs-12"><input type='text' id='modal-city' class="form-control"></div>
         </div>
@@ -383,6 +388,7 @@ $(function () {
       case 'model':
       show_er('#modal-manufacturer_id');
       show_er('#modal-category_id');
+      show_er('#modal-modelno');
       break;
 
       case 'user':
@@ -404,14 +410,14 @@ $(function () {
       //do nothing, they just need 'name'
     }
 
-    console.warn("The Model is: "+model+" and the select is: "+select);
+    //console.warn("The Model is: "+model+" and the select is: "+select);
   });
 
   $('#modal-save').on('click',function () {
     var data={};
-    console.warn("We are about to SAVE!!! for model: "+model+" and select ID: "+select);
+    //console.warn("We are about to SAVE!!! for model: "+model+" and select ID: "+select);
     $('.modal-body input:visible').each(function (index,elem) {
-      console.warn("["+index+"]: "+elem.id+" = "+$(elem).val());
+      //console.warn("["+index+"]: "+elem.id+" = "+$(elem).val());
       var bits=elem.id.split("-");
       if(bits[0]==="modal") {
         data[bits[1]]=$(elem).val();
@@ -422,7 +428,7 @@ $(function () {
       data[bits[1]]=$(elem).val();
     });
 
-    console.dir(data);
+    //console.dir(data);
 
     $.post("{{Config::get('app.url')}}/api/"+model+"s",data,function (result) {
       var id=result.id;
@@ -430,7 +436,7 @@ $(function () {
       $('.modal-body input:visible').val("");
       $('#createModal').modal('hide');
 
-      console.warn("The select ID thing we're going for is: "+select);
+      //console.warn("The select ID thing we're going for is: "+select);
       var selector=document.getElementById(select);
       selector.options[selector.length]=new Option(name,id);
       selector.selectedIndex=selector.length-1;
