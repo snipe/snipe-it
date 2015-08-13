@@ -188,13 +188,13 @@ class UsersController extends AdminController
         // Redirect to the user creation page
         return Redirect::route('create/user')->withInput()->with('error', $error);
     }
-    
+
     public function store()
     {
         // Create a new validator instance from our validation rules
         $validator = Validator::make(Input::all(), $this->validationRules);
-    $permissions = Input::get('permissions', array());
-    $this->decodePermissions($permissions);
+        $permissions = Input::get('permissions', array());
+        $this->decodePermissions($permissions);
         app('request')->request->set('permissions', $permissions);
 
         // If validation fails, we'll exit the operation now.
@@ -208,8 +208,10 @@ class UsersController extends AdminController
 
             // Get the inputs, with some exceptions
             $inputs = Input::except('csrf_token', 'password_confirm', 'groups','email_user');
+            $inputs['activated'] = true;
 
-      // @TODO: Figure out WTF I need to do this.
+
+            // @TODO: Figure out WTF I need to do this.
             /*if ($inputs['manager_id']=='') {
               unset($inputs['manager_id']);
             }*/
@@ -220,19 +222,20 @@ class UsersController extends AdminController
 
             // Was the user created?
             if ($user = Sentry::getUserProvider()->create($inputs)) {
+
                 if (Input::get('email_user')==1) {
-          // Send the credentials through email
+                  // Send the credentials through email
 
-          $data = array();
-          $data['email'] = e(Input::get('email'));
-          $data['first_name'] = e(Input::get('first_name'));
-          $data['password'] = e(Input::get('password'));
+                  $data = array();
+                  $data['email'] = e(Input::get('email'));
+                  $data['first_name'] = e(Input::get('first_name'));
+                  $data['password'] = e(Input::get('password'));
 
-                Mail::send('emails.send-login', $data, function ($m) use ($user) {
-                    $m->to($user->email, $user->first_name . ' ' . $user->last_name);
-                    $m->subject('Welcome ' . $user->first_name);
-                });
-        }
+                    Mail::send('emails.send-login', $data, function ($m) use ($user) {
+                        $m->to($user->email, $user->first_name . ' ' . $user->last_name);
+                        $m->subject('Welcome ' . $user->first_name);
+                    });
+                }
 
 
                 return JsonResponse::create($user);
