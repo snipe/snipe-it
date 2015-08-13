@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <phpunit backupGlobals="false"
          backupStaticAttributes="false"
-         bootstrap="bootstrap/autoload.php"
          colors="true"
          convertErrorsToExceptions="true"
          convertNoticesToExceptions="true"
@@ -10,9 +9,12 @@
          stopOnFailure="false"
          syntaxCheck="false"
 >
+    <php>
+         <ini name="display_errors" value="true"/>
+    </php>
     <testsuites>
-        <testsuite name="Application Test Suite">
-            <directory>./app/tests/</directory>
+        <testsuite name="Snipe-IT Test Suite">
+            <directory>tests/unit/</directory>
         </testsuite>
     </testsuites>
 </phpunit>
