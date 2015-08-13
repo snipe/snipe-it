@@ -10,6 +10,7 @@ class Statuslabel extends Elegant
     protected $rules = array(
         'name'  => 'required|alpha_space|min:2|max:100|unique:status_labels,name,{id}',
         'statuslabel_types' => 'required|in:deployable,pending,archived,undeployable',
+		'notes'	=> 'alpha_space',
     );
 
     public function has_assets()
