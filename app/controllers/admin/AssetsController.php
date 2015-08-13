@@ -55,26 +55,14 @@ class AssetsController extends AdminController
      */
     public function getCreate($model_id = null)
     {
-
-        $model_list = array('' => Lang::get('general.select_model')) + DB::table('models')
-        ->select(DB::raw('concat(name," / ",modelno) as name, id'))->orderBy('name', 'asc')
-        ->orderBy('modelno', 'asc')
-        ->whereNull('deleted_at')
-        ->lists('name', 'id');
-
-
-        $supplier_list = array('' => Lang::get('general.select_supplier')) + Supplier::orderBy('name', 'asc')->lists('name', 'id');
-        $assigned_to = array('' => Lang::get('general.select_user')) + DB::table('users')->select(DB::raw('concat(first_name," ",last_name) as full_name, id'))->whereNull('deleted_at')->lists('full_name', 'id');
-        $location_list = array('' => Lang::get('general.select_location')) + Location::orderBy('name', 'asc')->lists('name', 'id');
-
-
-        // Grab the dropdown list of status
-        $statuslabel_list = array('' => Lang::get('general.select_statuslabel')) + Statuslabel::orderBy('name', 'asc')->lists('name', 'id');
-
-        // grap dropdown lists for embedded create drop-downs
-        $manufacturer_list = array('' => 'Select One') + Manufacturer::lists('name', 'id');
-        $category_list = array('' => '') + DB::table('categories')->whereNull('deleted_at')->lists('name', 'id');
-
+        // Grab the dropdown lists
+        $model_list = modelList();
+        $statuslabel_list = statusLabelList();
+        $location_list = locationsList();
+        $manufacturer_list = manufacturerList();
+        $category_list = categoryList();
+        $supplier_list = suppliersList();
+        $assigned_to = assignedToList();
 
         $view = View::make('backend/hardware/edit');
         $view->with('supplier_list',$supplier_list);
@@ -216,21 +204,14 @@ class AssetsController extends AdminController
             return Redirect::to('hardware')->with('error', Lang::get('admin/hardware/message.does_not_exist'));
         }
 
-
-        // Grab the dropdown list of models
-        $manufacturer_list = array('' => 'Select One') + Manufacturer::lists('name', 'id');
-        $category_list = array('' => '') + DB::table('categories')->whereNull('deleted_at')->lists('name', 'id');
-
-		$model_list = array('' => Lang::get('general.select_model')) + DB::table('models')
-		->select(DB::raw('concat(name," / ",modelno) as name, id'))->orderBy('name', 'asc')
-		->orderBy('modelno', 'asc')
-		->lists('name', 'id');
-        $supplier_list = array('' => Lang::get('general.select_supplier')) + Supplier::orderBy('name', 'asc')->lists('name', 'id');
-        $location_list = array('' => Lang::get('general.select_location')) + Location::orderBy('name', 'asc')->lists('name', 'id');
-        $assigned_to = array('' => Lang::get('general.select_user')) + DB::table('users')->select(DB::raw('concat(first_name," ",last_name) as full_name, id'))->whereNull('deleted_at')->lists('full_name', 'id');
-
-        // Grab the dropdown list of status
-        $statuslabel_list = Statuslabel::orderBy('name', 'asc')->lists('name', 'id');
+        // Grab the dropdown lists
+        $model_list = modelList();
+        $statuslabel_list = statusLabelList();
+        $location_list = locationsList();
+        $manufacturer_list = manufacturerList();
+        $category_list = categoryList();
+        $supplier_list = suppliersList();
+        $assigned_to = assignedToList();
 
         return View::make('backend/hardware/edit', compact('asset'))
         ->with('model_list',$model_list)
@@ -663,20 +644,14 @@ class AssetsController extends AdminController
             return Redirect::to('hardware')->with('error', Lang::get('admin/hardware/message.does_not_exist'));
         }
 
-        // Grab the dropdown list of models
-        $model_list = array('' => Lang::get('general.select_model')) + Model::lists('name', 'id');
-
-        // Grab the dropdown list of status
-        $statuslabel_list = Statuslabel::lists('name', 'id');
-
-        $location_list = array('' => Lang::get('general.select_location')) + Location::lists('name', 'id');
-
-        $manufacturer_list = array('' => 'Select One') + Manufacturer::lists('name', 'id');
-        $category_list = array('' => '') + DB::table('categories')->whereNull('deleted_at')->lists('name', 'id');
-
-        // get depreciation list
-        $supplier_list = array('' => Lang::get('general.select_supplier')) + Supplier::orderBy('name', 'asc')->lists('name', 'id');
-        $assigned_to = array('' => Lang::get('general.select_user')) + DB::table('users')->select(DB::raw('concat(first_name," ",last_name) as full_name, id'))->whereNull('deleted_at')->lists('full_name', 'id');
+        // Grab the dropdown lists
+        $model_list = modelList();
+        $statuslabel_list = statusLabelList();
+        $location_list = locationsList();
+        $manufacturer_list = manufacturerList();
+        $category_list = categoryList();
+        $supplier_list = suppliersList();
+        $assigned_to = assignedToList();
 
         $asset = clone $asset_to_clone;
         $asset->id = null;
