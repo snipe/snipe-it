@@ -16,7 +16,6 @@ function ParseFloat($floatString){
 
 function modelList() {
     $model_list = array('' => Lang::get('general.select_model')) + DB::table('models')
-    //->select(DB::raw('COALESCE(concat(name, " / ",modelno),name) as name, id'))->orderBy('name', 'asc')
     ->select(DB::raw('IF (modelno="" OR modelno IS NULL,name,concat(name, " / ",modelno)) as name, id'))->orderBy('name', 'asc')
     ->orderBy('modelno', 'asc')
     ->whereNull('deleted_at')
