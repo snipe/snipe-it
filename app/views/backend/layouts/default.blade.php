@@ -425,7 +425,7 @@
     <footer>
 
         <div id="footer" class="col-md-offset-2 col-md-9 col-sm-12 col-xs-12 text-center">
-		                <div class="muted credit">
+		                <div class="muted credit hidden-xs">
 	                  			<a target="_blank" href="http://snipeitapp.com">Snipe IT</a> is a free open source
 					  		project by
 					  			<a target="_blank" href="http://twitter.com/snipeyhead">@snipeyhead</a>.
