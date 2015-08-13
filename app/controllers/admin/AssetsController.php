@@ -543,7 +543,7 @@ class AssetsController extends AdminController
             		$data['item_tag'] = $asset->asset_tag;
             		$data['note'] = $logaction->note;
 
-            		if (($asset->checkin_email()=='1')) {
+            		if ((($asset->checkin_email()=='1')) && (!Config::get('app.lock_passwords'))) {
                 		Mail::send('emails.checkin-asset', $data, function ($m) use ($user) {
                     			$m->to($user->email, $user->first_name . ' ' . $user->last_name);
                     			$m->subject('Confirm Asset Checkin');

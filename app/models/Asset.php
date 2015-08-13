@@ -66,7 +66,7 @@
             $data['note'] = $note;
             $data['require_acceptance'] = $this->requireAcceptance();
 
-            if (($this->requireAcceptance()=='1')  || ($this->getEula())) {
+            if ((($this->requireAcceptance()=='1')  || ($this->getEula())) && (!Config::get('app.lock_passwords'))) {
 
 	            Mail::send('emails.accept-asset', $data, function ($m) use ($user) {
 	                $m->to($user->email, $user->first_name . ' ' . $user->last_name);
