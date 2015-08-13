@@ -47,7 +47,7 @@
 
         /*---Users API---*/
         Route::group( [ 'prefix' => 'users' ], function () {
-
+            Route::post( '/', [ 'as' => 'api.users.store', 'uses' => 'UsersController@store' ] );
             Route::get( 'list/{status?}', [ 'as' => 'api.users.list', 'uses' => 'UsersController@getDatatable' ] );
         } );
 
