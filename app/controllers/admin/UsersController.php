@@ -886,7 +886,7 @@ class UsersController extends AdminController
                 	$action_buttons .= '<a href="'.route('restore/user', $users->id).'" class="btn btn-warning btn-sm"><i class="fa fa-share icon-white"></i></a> ';
                 } else {
 	                if ($users->accountStatus()=='suspended') {
-			               $action_buttons .= '<a href="'.route('unsuspend/user', $users->id).'" class="btn btn-warning btn-sm"><span class="fa fa-time icon-white"></span></a> ';
+			               $action_buttons .= '<a href="'.route('unsuspend/user', $users->id).'" class="btn btn-default btn-sm"><span class="fa fa-clock-o"></span></a> ';
 					}
 
                 	$action_buttons .= '<a href="'.route('update/user', $users->id).'" class="btn btn-warning btn-sm"><i class="fa fa-pencil icon-white"></i></a> ';
