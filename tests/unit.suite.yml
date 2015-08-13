@@ -6,4 +6,7 @@ modules:
     enabled:
         - Asserts
         - \Helper\Unit
-        
+        - Laravel4:
+            filters: true
+            cleanup: true
+            environment: testing
