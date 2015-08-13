@@ -23,15 +23,126 @@
             'status'          => 'integer'
         ];
 
+
+        /**
+         * Checkout asset
+         */
+        public function checkOutToUser($user, $admin, $checkout_at = null, $expected_checkin = null, $note = null) {
+            $this->assigneduser()->associate($user);
+
+            $settings = Setting::getSettings();
+
+            if($this->requireAcceptance()) {
+              $this->accepted="pending";
+            }
+
+            if($this->save()) {
+
+                $log_id = $this->createCheckoutLog($checkout_at, $admin, $user, $expected_checkin, $note);
+
+                if ((($this->requireAcceptance()=='1')  || ($this->getEula())) && ($user->email!='')) {
+                    $this->checkOutNotifyMail($log_id, $user, $checkout_at, $expected_checkin, $note);
+                }
+
+                if ($settings->slack_endpoint) {
+                    $this->checkOutNotifySlack($settings, $admin, $note);
+                }
+                return true;
+
+            }
+            return false;
+
+        }
+
+        public function checkOutNotifyMail($log_id, $user, $checkout_at, $expected_checkin, $note) {
+
+            $data['log_id'] = $log_id;
+            $data['eula'] = $this->getEula();
+            $data['first_name'] = $user->first_name;
+            $data['item_name'] = $this->showAssetName();
+            $data['checkout_date'] = $checkout_at;
+            $data['expected_checkin'] = $expected_checkin;
+            $data['item_tag'] = $this->asset_tag;
+            $data['note'] = $note;
+            $data['require_acceptance'] = $this->requireAcceptance();
+
+            if (($this->requireAcceptance()=='1')  || ($this->getEula())) {
+
+	            Mail::send('emails.accept-asset', $data, function ($m) use ($user) {
+	                $m->to($user->email, $user->first_name . ' ' . $user->last_name);
+	                $m->subject('Confirm asset delivery');
+	            });
+            }
+
+        }
+
+        public function checkOutNotifySlack($settings, $admin, $note = null) {
+
+			if ($settings->slack_endpoint) {
+
+                $slack_settings = [
+                    'username' => $settings->botname,
+                    'channel' => $settings->slack_channel,
+                    'link_names' => true
+                ];
+
+                $client = new \Maknz\Slack\Client($settings->slack_endpoint,$slack_settings);
+
+                    try {
+                        $client->attach([
+                            'color' => 'good',
+                            'fields' => [
+                                [
+                                    'title' => 'Checked Out:',
+                                    'value' => strtoupper($logaction->asset_type).' asset <'.Config::get('app.url').'/hardware/'.$this->id.'/view'.'|'.$this->showAssetName().'> checked out to <'.Config::get('app.url').'/admin/users/'.$this->assigned_to.'/view|'.$this->assigneduser->fullName().'> by <'.Config::get('app.url').'/hardware/'.$this->id.'/view'.'|'.$admin->fullName().'>.'
+                                ],
+                                [
+                                    'title' => 'Note:',
+                                    'value' => e($note)
+                                ],
+
+
+
+                            ]
+                        ])->send('Asset Checked Out');
+
+                    } catch (Exception $e) {
+
+                    }
+                }
+
+        }
+
+        public function createCheckoutLog($checkout_at = null, $admin, $user, $expected_checkin = null, $note = null) {
+
+            $logaction = new Actionlog();
+            $logaction->asset_id = $this->id;
+            $logaction->checkedout_to = $this->assigned_to;
+            $logaction->asset_type = 'hardware';
+            $logaction->location_id = $user->location_id;
+            $logaction->adminlog()->associate($admin);
+            $logaction->note = $note;
+            if ($checkout_at) {
+                $logaction->created_at = $checkout_at;
+            }
+            $log = $logaction->logaction('checkout');
+            return $logaction->id;
+        }
+
+
+        /**
+         * Set depreciation relationship
+         */
         public function depreciation()
         {
-
             return $this->model->belongsTo( 'Depreciation', 'depreciation_id' );
         }
 
+        /**
+         * Get depreciation attribute from associated asset model
+         */
         public function get_depreciation()
         {
-
             return $this->model->depreciation;
         }
 

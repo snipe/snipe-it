@@ -46,8 +46,6 @@ class AssetsController extends AdminController
         return View::make('backend/hardware/index');
     }
 
-
-
     /**
      * Asset create.
      *
@@ -57,14 +55,6 @@ class AssetsController extends AdminController
      */
     public function getCreate($model_id = null)
     {
-
-        /*
-        // Grab the dropdown list of models
-        //$model_list = array('' => 'Select a Model') + Model::orderBy('name', 'asc')->lists('name'.' '. 'modelno', 'id');
-
-        $model_list = Model::select(DB::raw('concat(manufacturers.name," ",name) as name, id'))->orderBy('name', 'asc')->with('manufacturer')->lists('name', 'id');
-        //$model_list = array('' => Lang::get('general.select_model'));
-        */
 
         $model_list = array('' => Lang::get('general.select_model')) + DB::table('models')
         ->select(DB::raw('concat(name," / ",modelno) as name, id'))->orderBy('name', 'asc')
@@ -408,122 +398,51 @@ class AssetsController extends AdminController
     **/
     public function postCheckout($assetId)
     {
+
         // Check if the asset exists
-        if (is_null($asset = Asset::find($assetId))) {
-            // Redirect to the asset management page with error
+        if (!$asset = Asset::find($assetId)) {
             return Redirect::to('hardware')->with('error', Lang::get('admin/hardware/message.not_found'));
         }
-
-        $assigned_to = e(Input::get('assigned_to'));
-
-
 
         // Declare the rules for the form validation
         $rules = array(
             'assigned_to'   => 'required|min:1',
+            'checkout_at'   => 'required|date',
             'note'   => 'alpha_space',
         );
 
         // Create a new validator instance from our validation rules
         $validator = Validator::make(Input::all(), $rules);
 
-        // If validation fails, we'll exit the operation now.
         if ($validator->fails()) {
-            // Ooops.. something went wrong
             return Redirect::back()->withInput()->withErrors($validator);
         }
 
-
-        // Check if the user exists
-        if (is_null($user = User::find($assigned_to))) {
-            // Redirect to the asset management page with error
+        if (!$user = User::find(e(Input::get('assigned_to')))) {
             return Redirect::to('hardware')->with('error', Lang::get('admin/hardware/message.user_does_not_exist'));
         }
 
-        // Update the asset data
-        $asset->assigned_to            		= e(Input::get('assigned_to'));
-        if($asset->requireAcceptance()) {
-          $asset->accepted="pending";
+        if (!$admin = Sentry::getUser()) {
+            return Redirect::to('hardware')->with('error', Lang::get('admin/hardware/message.admin_user_does_not_exist'));
         }
 
-        // Was the asset updated?
-        if($asset->save()) {
-            $logaction = new Actionlog();
 
-             if (Input::has('checkout_at')) {
-            	if (Input::get('checkout_at')!= date("Y-m-d")){
-					$logaction->created_at = e(Input::get('checkout_at')).' 00:00:00';
-				}
-        	}
+    	if (Input::get('checkout_at')!= date("Y-m-d")){
+			$checkout_at = e(Input::get('checkout_at')).' 00:00:00';
+    	} else {
+            $checkout_at = date("Y-m-d h:i:s");
+        }
 
-            if (Input::has('expected_checkin')) {
-                $logaction->expected_checkin = e(Input::get('expected_checkin'));
-            }
-
-            $logaction->asset_id = $asset->id;
-            $logaction->checkedout_to = $asset->assigned_to;
-            $logaction->asset_type = 'hardware';
-            $logaction->location_id = $user->location_id;
-            $logaction->user_id = Sentry::getUser()->id;
-            $logaction->note = e(Input::get('note'));
-            $log = $logaction->logaction('checkout');
-
-            $data['log_id'] = $logaction->id;
-            $data['eula'] = $asset->getEula();
-            $data['first_name'] = $user->first_name;
-            $data['item_name'] = $asset->showAssetName();
-            $data['checkout_date'] = $logaction->created_at;
-            $data['expected_checkin'] = $logaction->expected_checkin;
-            $data['item_tag'] = $asset->asset_tag;
-            $data['note'] = $logaction->note;
-            $data['require_acceptance'] = $asset->requireAcceptance();
-
-            $settings = Setting::getSettings();
-
-			if ($settings->slack_endpoint) {
-
-
-				$slack_settings = [
-				    'username' => $settings->botname,
-				    'channel' => $settings->slack_channel,
-				    'link_names' => true
-				];
-
-				$client = new \Maknz\Slack\Client($settings->slack_endpoint,$slack_settings);
-
-				try {
-						$client->attach([
-						    'color' => 'good',
-						    'fields' => [
-						        [
-						            'title' => 'Checked Out:',
-						            'value' => strtoupper($logaction->asset_type).' asset <'.Config::get('app.url').'/hardware/'.$asset->id.'/view'.'|'.$asset->showAssetName().'> checked out to <'.Config::get('app.url').'/admin/users/'.$user->id.'/view|'.$user->fullName().'> by <'.Config::get('app.url').'/hardware/'.$asset->id.'/view'.'|'.Sentry::getUser()->fullName().'>.'
-						        ],
-						        [
-						            'title' => 'Note:',
-						            'value' => e($logaction->note)
-						        ],
-
-
-
-						    ]
-						])->send('Asset Checked Out');
-
-					} catch (Exception $e) {
-
-					}
-
+        if (Input::has('expected_checkin')) {
+        	if (Input::get('expected_checkin')!= date("Y-m-d")){
+				$expected_checkin = e(Input::get('expected_checkin')).' 00:00:00';
 			}
+    	} else {
+            $expected_checkin = null;
+        }
 
 
-            if (($asset->requireAcceptance()=='1')  || ($asset->getEula())) {
-
-	            Mail::send('emails.accept-asset', $data, function ($m) use ($user) {
-	                $m->to($user->email, $user->first_name . ' ' . $user->last_name);
-	                $m->subject('Confirm asset delivery');
-	            });
-            }
-
+        if ($asset->checkOutToUser($user, $admin, $checkout_at, $expected_checkin, e(Input::get('note')))) {
             // Redirect to the new asset page
             return Redirect::to("hardware")->with('success', Lang::get('admin/hardware/message.checkout.success'));
         }
@@ -577,7 +496,7 @@ class AssetsController extends AdminController
 
         // Update the asset data to null, since it's being checked in
         $asset->assigned_to            		= NULL;
-        $asset->accepted                  = NULL; 
+        $asset->accepted                  = NULL;
 
 
         // Was the asset updated?
