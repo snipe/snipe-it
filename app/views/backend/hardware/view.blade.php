@@ -201,8 +201,10 @@
 <!-- Asset Maintenance -->
     <div class="row header">
         <div class="col-md-12">
-            <a href="{{ route('create/asset_maintenances', $asset->id) }}" class="btn btn-success pull-right"><i class="fa fa-plus icon-white"></i> New Improvement</a>
-            <h6>@lang('general.asset_maintenances')</h6>
+
+            <h6>@lang('general.asset_maintenances')
+            [ <a href="{{ route('create/asset_maintenances', $asset->id) }}">@lang('button.add')</a> ]
+        </h6>
         </div>
     </div>
     <!-- Asset Maintenance table -->
