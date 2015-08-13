@@ -54,7 +54,8 @@ var tipuesearch_pages = [
     "http://docs.snipeitapp.com/license.html",
     "http://docs.snipeitapp.com/manual/labels.html",
     "http://docs.snipeitapp.com/installation/manually-editing-data.html",
-    "http://docs.snipeitapp.com/installation/subdirectory.html"
+    "http://docs.snipeitapp.com/installation/subdirectory.html",
+    "http://docs.snipeitapp.com/manual/user-management/index.html"
 
 ];
 
@@ -74,6 +75,7 @@ var tipuesearch_weight = {'weight': [
 var tipuesearch_stem = {'words': [
      {'word': 'e-mail', 'stem': 'email'},
      {'word': 'javascript', 'stem': 'jquery'},
+     {'word': 'un-suspend', 'stem': 'unsuspend'},
      {'word': 'javascript', 'stem': 'js'}
 ]};
 

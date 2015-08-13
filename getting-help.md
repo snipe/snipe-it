@@ -6,7 +6,7 @@ currentMenu: getting-help
 
 If you're having trouble setting up Snipe-IT, don't worry!
 
-__First__, check the [common issues page](../common-issues.html) to make sure your problem hasn't already been addressed. We update that page frequently as requests come in.
+__First__, check the [common issues page](common-issues.html) to make sure your problem hasn't already been addressed. We update that page frequently as requests come in.
 
 If you can't find your issue there, simply post a new issue in the [Github Issues for Snipe-IT](https://github.com/snipe/snipe-it/issues), or ask in the [Snipe-IT Gitter chat room](https://gitter.im/snipe/snipe-it?utm_source=share-link&utm_medium=link&utm_campaign=share-link) and we'll try to get you sorted out.
 

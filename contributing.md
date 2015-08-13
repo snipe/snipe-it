@@ -62,10 +62,10 @@ php composer.phar dump-autoload
 
 ## Translations
 
-You do not need to provide translated strings for all of the languages we support, only English (`app/lang/en`). We use CrowdIn for translation management by native speakers, so you only need to provide English strings. More info on translation is [available here](../translations.html).
+You do not need to provide translated strings for all of the languages we support, only English (`app/lang/en`). We use CrowdIn for translation management by native speakers, so you only need to provide English strings. More info on translation is [available here](translations.html).
 
 -----
 
 ## Contributor Code of Conduct
 
-Please note that this project is released with a [Contributor Code of Conduct](CODE_OF_CONDUCT.md). By participating in this project you agree to abide by its terms.
+Please note that this project is released with a Contributor Code of Conduct. By participating in this project you agree to abide by its terms. [See the source on Github](https://github.com/snipe/snipe-it) to read the current version of the Code of Conduct.

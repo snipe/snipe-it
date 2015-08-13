@@ -126,18 +126,22 @@
     </script>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-    <script src="{{ baseUrl }}/js/tipuesearch_set.js"></script>
-    <script src="{{ baseUrl }}/js/tipuesearch.min.js"></script>
 
-    <script>
-    $(document).ready(function() {
-         $('#tipue_search_input').tipuesearch({
-              'mode': 'live',
-              'liveDescription': 'h1',
-              'liveContent': '.document'
-         });
-    });
-    </script>
+    {% if currentMenu == "search" %}
+        <script src="{{ baseUrl }}/js/tipuesearch_set.js"></script>
+        <script src="{{ baseUrl }}/js/tipuesearch.min.js"></script>
+
+
+        <script>
+        $(document).ready(function() {
+             $('#tipue_search_input').tipuesearch({
+                  'mode': 'live',
+                  'liveDescription': 'h1',
+                  'liveContent': '.document'
+             });
+        });
+        </script>
+    {% endif %}
 
 
 

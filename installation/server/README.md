@@ -36,6 +36,6 @@ __NOTE: You should never run Snipe-IT (or any website, ever) as a root (Linux) o
     <div class="clear"></div>
 </div>
 
-We also provide server configuration instructions for [XAMPP](xampp.html), [MAMP](mamp.html) and [Docker](docker.html).
+We also provide server configuration instructions for [XAMPP](xampp.html), [WAMP](wamp.html) and [Docker](docker.html).
 
 If this all looks too overwhelming for you, we do offer [affordable hosted solutions](http://snipeitapp.com/hosting/) for folks who want to use Snipe-IT but don't know how to run a web server, or don't have time to keep up with updates.

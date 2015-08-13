@@ -6,7 +6,7 @@ currentMenu: windows
 
 ### Setting Up an IIS Website
 
-- Extract [Snipe-IT](http://snipeitapp.com/download.php) to `C:\inetpub\wwwroot\snipe-it` (folder name can be changed but we will reference it as is shown here)
+- Extract [Snipe-IT](../downloading.html) to `C:\inetpub\wwwroot\snipe-it` (folder name can be changed but we will reference it as is shown here)
 - Run IIS Manager
 - Right Click `Sites` and `Add Website`
 
