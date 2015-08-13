@@ -19,57 +19,60 @@
       </div>
       <div class="modal-body">
         <div class="dynamic-form-row">
-          <div class="col-md-3 col-xs-12"><label for="modal-name">@lang('general.name'):</label></div>
+          <div class="col-md-3 col-xs-12"><label for="modal-name">@lang('general.name')*:
+          </label></div>
           <div class="col-md-9 col-xs-12"><input type='text' id='modal-name' class="form-control"></div>
         </div>
 
         <div class="dynamic-form-row">
-          <div class="col-md-3 col-xs-12"><label for="modal-manufacturer_id">@lang('general.manufacturer'):</label></div>
+          <div class="col-md-3 col-xs-12"><label for="modal-manufacturer_id">@lang('general.manufacturer')*:
+          </label></div>
           <div class="col-md-9 col-xs-12">{{ Form::select('modal-manufacturer', $manufacturer , '', array('class'=>'select2 parent', 'style'=>'width:350px','id' =>'modal-manufacturer_id')) }}</div>
         </div>
 
         <div class="dynamic-form-row">
-          <div class="col-md-3 col-xs-12"><label for="modal-category_id">@lang('general.category'):</label></div>
+          <div class="col-md-3 col-xs-12"><label for="modal-category_id">@lang('general.category')*:
+          </label></div>
           <div class="col-md-9 col-xs-12">{{ Form::select('modal-category', $category ,'', array('class'=>'select2 parent', 'style'=>'width:350px','id' => 'modal-category_id')) }}</div>
         </div>
 
         <div class="dynamic-form-row">
-          <div class="col-md-3 col-xs-12"><label for="modal-modelno">@lang('general.model_no'):</label></div>
+          <div class="col-md-3 col-xs-12"><label for="modal-modelno">@lang('general.model_no')*:</label></div>
           <div class="col-md-9 col-xs-12"><input type='text' id='modal-modelno' class="form-control"></div>
         </div>
 
         <div class="dynamic-form-row">
-          <div class="col-md-3 col-xs-12"><label for="modal-city">@lang('general.city'):</label></div>
+          <div class="col-md-3 col-xs-12"><label for="modal-city">@lang('general.city')*:</label></div>
           <div class="col-md-9 col-xs-12"><input type='text' id='modal-city' class="form-control"></div>
         </div>
 
         <div class="dynamic-form-row">
-          <div class="col-md-3 col-xs-12"><label for="modal-country">@lang('general.country'):</label></div>
+          <div class="col-md-3 col-xs-12"><label for="modal-country">@lang('general.country')*:</label></div>
           <div class="col-md-9 col-xs-12">{{ Form::countries('country', Input::old('country'), 'select2 country',"modal-country") }}</div>
         </div>
 
         <div class="dynamic-form-row">
-          <div class="col-md-3 col-xs-12"><label for="modal-first_name">@lang('general.first_name'):</label></div>
+          <div class="col-md-3 col-xs-12"><label for="modal-first_name">@lang('general.first_name')*:</label></div>
           <div class="col-md-9 col-xs-12"><input type='text' id='modal-first_name' class="form-control"></div>
         </div>
 
         <div class="dynamic-form-row">
-          <div class="col-md-3 col-xs-12"><label for="modal-last_name">@lang('general.last_name'):</label></div>
+          <div class="col-md-3 col-xs-12"><label for="modal-last_name">@lang('general.last_name')*:</label></div>
           <div class="col-md-9 col-xs-12"><input type='text' id='modal-last_name' class="form-control"></div>
         </div>
 
         <div class="dynamic-form-row">
-          <div class="col-md-3 col-xs-12"><label for="modal-username">@lang('admin/users/table.username'):</label></div>
+          <div class="col-md-3 col-xs-12"><label for="modal-username">@lang('admin/users/table.username')*:</label></div>
           <div class="col-md-9 col-xs-12"><input type='text' id='modal-username' class="form-control"></div>
         </div>
 
         <div class="dynamic-form-row">
-          <div class="col-md-3 col-xs-12"><label for="modal-password">@lang('admin/users/table.password'):</label></div>
+          <div class="col-md-3 col-xs-12"><label for="modal-password">@lang('admin/users/table.password')*:</label></div>
           <div class="col-md-9 col-xs-12"><input type='password' id='modal-password' class="form-control"></div>
         </div>
 
         <div class="dynamic-form-row">
-          <div class="col-md-3 col-xs-12"><label for="modal-password_confirm">@lang('admin/users/table.password_confirm'):</label></div>
+          <div class="col-md-3 col-xs-12"><label for="modal-password_confirm">@lang('admin/users/table.password_confirm')*:</label></div>
           <div class="col-md-9 col-xs-12"><input type='password' id='modal-password_confirm' class="form-control"></div>
         </div>
 
@@ -115,7 +118,7 @@
             <!-- Asset Tag -->
             <div class="form-group {{ $errors->has('asset_tag') ? ' has-error' : '' }}">
                 <label for="asset_tag" class="col-md-2 control-label">@lang('admin/hardware/form.tag')
-                 <i class='fa fa-asterisk'></i></label>
+                 *</label>
                  </label>
                     <div class="col-md-7 col-sm-12">
                     	@if  ($asset->id)
@@ -130,7 +133,7 @@
 
             <!-- Serial -->
             <div class="form-group {{ $errors->has('serial') ? ' has-error' : '' }}">
-                <label for="serial" class="col-md-2 control-label">@lang('admin/hardware/form.serial') <i class='fa fa-asterisk'></i></label>
+                <label for="serial" class="col-md-2 control-label">@lang('admin/hardware/form.serial') *</label>
                 <div class="col-md-7 col-sm-12">
                     <input class="form-control" type="text" name="serial" id="serial" value="{{{ Input::old('serial', $asset->serial) }}}" />
                     {{ $errors->first('serial', '<br><span class="alert-msg"><i class="fa fa-times"></i> :message</span>') }}
@@ -149,7 +152,7 @@
             <!-- Model -->
             <div class="form-group {{ $errors->has('model_id') ? ' has-error' : '' }}">
                 <label for="parent" class="col-md-2 control-label">@lang('admin/hardware/form.model')
-                 <i class='fa fa-asterisk'></i></label>
+                 *</label>
                  </label>
                 <div class="col-md-7 col-sm-12">
                     @if (isset($selected_model))
@@ -236,7 +239,7 @@
 
             <!-- Status -->
             <div class="form-group {{ $errors->has('status_id') ? ' has-error' : '' }}">
-                <label for="status_id" class="col-md-2 control-label">@lang('admin/hardware/form.status') <i class='fa fa-asterisk'></i></label>
+                <label for="status_id" class="col-md-2 control-label">@lang('admin/hardware/form.status') *</label>
                     <div class="col-md-7 col-sm-12 col-sm-12">
                         {{ Form::select('status_id', $statuslabel_list , Input::old('status_id', $asset->status_id), array('class'=>'select2 status_id', 'style'=>'width:350px','id'=>'status_select_id')) }}
                         <a href='#' data-toggle="modal"  data-target="#createModal" data-dependency='statuslabel' data-select='status_select_id'><i class="verticon fa fa-plus-square-o fa-2x"></i></a>
@@ -392,7 +395,7 @@ $(function () {
       break;
 
       case 'user':
-      $('.dynamic-form-element').hide(); //we don't want a generic "name"
+      $('.dynamic-form-row').hide(); //we don't want a generic "name"
       show_er("#modal-first_name");
       show_er("#modal-last_name");
       show_er("#modal-username");
