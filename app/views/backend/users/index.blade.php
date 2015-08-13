@@ -12,7 +12,7 @@
 <div class="row header">
     <div class="col-md-12">
         <a href="{{ route('ldap/user') }}" class="btn btn-default pull-right"><span class="fa fa-upload"></span> LDAP</a>
-	<a href="{{ route('import/user') }}" class="btn btn-default pull-right"><span class="fa fa-upload"></span> Import</a>
+	<a href="{{ route('import/user') }}" class="btn btn-default pull-right" style="margin-right: 5px;"><span class="fa fa-upload"></span> Import</a>
         <a href="{{ route('create/user') }}" class="btn btn-success pull-right" style="margin-right: 5px;"><i class="fa fa-plus icon-white"></i>  @lang('general.create')</a>
          @if (Input::get('status')=='deleted')
             <a class="btn btn-default pull-right" href="{{ URL::to('admin/users') }}" style="margin-right: 5px;">@lang('admin/users/table.show_current')</a>
