@@ -1,14 +1,14 @@
 <?php
 
     return [
-        'asset_maintenance_type' => 'Asset Maintenance Type',
-        'title'                  => 'Title',
-        'start_date'             => 'Start Date',
-        'completion_date'        => 'Completion Date',
-        'cost'                   => 'Cost',
-        'is_warranty'            => 'Warranty Improvement',
-        'asset_maintenance_time' => 'Asset Maintenance Time (in days)',
-        'notes'                  => 'Notes',
-        'update'                 => 'Update Asset Maintenance',
-        'create'                 => 'Create Asset Maintenance'
+        'asset_maintenance_type' => 'Typ des Wartungsvertrages',
+        'title'                  => 'Artikelbezeichnung',
+        'start_date'             => 'Startdatum',
+        'completion_date'        => 'Fertigstellungstermin',
+        'cost'                   => 'Kosten (Netto wenn keine Steuer)',
+        'is_warranty'            => 'Nachbesserungsarbeiten',
+        'asset_maintenance_time' => 'Wartungsvertrag (in Tagen)',
+        'notes'                  => 'Anmerkungen',
+        'update'                 => 'Wartungsvertrag überarbeiten',
+        'create'                 => 'Wartungsvertrag erstellen'
     ];

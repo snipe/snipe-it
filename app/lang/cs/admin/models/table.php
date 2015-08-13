@@ -4,11 +4,11 @@ return array(
 
     'create'				=> 'Create Asset Model',
     'created_at' 			=> 'Vytvořeno',
-    'eol'	 				=> 'EOL',
+    'eol'	 				=> 'KŽ',
     'modelnumber'   		=> 'Modelová řada',
     'name'      			=> 'Asset Model Name',
     'numassets' 			=> 'Počet',
-    'title'					=> 'Asset Models',
+    'title'					=> 'Model',
     'update'				=> 'Update Asset Model',
     'view'					=> 'View Asset Model',
     'update'				=> 'Update Asset Model',

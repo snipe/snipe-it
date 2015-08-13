@@ -2,12 +2,12 @@
 
 return array(
 
-    'group_management' 	 	=> 'Group Management',
-    'create_group' 	 		=> 'Create New Group',
-    'edit_group' 	 		=> 'Edit Group',
-    'group_name' 	 		=> 'Group Name',
-    'group_admin' 	 		=> 'Group Admin',
-    'allow' 	 			=> 'Allow',
-    'deny' 	 				=> 'Deny',
+    'group_management' 	 	=> 'グループ管理',
+    'create_group' 	 		=> '新規グループを作成',
+    'edit_group' 	 		=> 'グループを編集',
+    'group_name' 	 		=> 'グループ名',
+    'group_admin' 	 		=> 'グループ管理',
+    'allow' 	 			=> '許可',
+    'deny' 	 				=> '拒否',
 
 );

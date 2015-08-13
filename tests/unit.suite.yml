@@ -1,0 +1,12 @@
+# Codeception Test Suite Configuration
+
+# suite for unit (internal) tests.
+class_name: UnitTester
+modules:
+    enabled:
+        - Asserts
+        - \Helper\Unit
+        - Laravel4:
+            filters: true
+            cleanup: true
+            environment: testing

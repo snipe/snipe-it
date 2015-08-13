@@ -45,7 +45,8 @@
             <td>{{ $license->remaincount() }}</td>
             <td>{{ $license->expiration_date }}</td>
             <td>{{ $license->purchase_date }}</td>
-            <td>@lang('general.currency')
+            <td>
+            {{{ Setting::first()->default_currency }}}
             {{{ number_format($license->purchase_cost) }}}</td>
         </tr>
         @endforeach

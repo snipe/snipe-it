@@ -23,13 +23,13 @@
                     		({{{ $user->employee_num }}})
                         @endif</h3>
                     <span class="area">{{{ $user->jobtitle }}}
-                    
-                    
+
+
                         <!-- groups table -->
                         @if (count($user->groups) > 0)
 
                             @foreach ($user->groups as $group)
-                            <a href="{{ route('update/group', $group->id) }}" class="badge badge-default">{{{ $group->name }}}</a> 
+                            <a href="{{ route('update/group', $group->id) }}" class="label label-default">{{{ $group->name }}}</a>
                             @endforeach
 
                         @endif
@@ -42,13 +42,16 @@
                         <!--<a href="{{ route('update/user', $user->id) }}" class="btn btn-warning pull-right edit"><i class="fa fa-pencil"></i> @lang('button.edit') This User</a>-->
                     <div class="row header">
 
-                        <div class="btn-group pull-right hidden-print">
+                        <div class="btn-group pull-right hidden-print" role="group">
                             <button class="btn btn-default" data-toggle="dropdown">@lang('button.actions')
                             <span class="caret"></span>
                             </button>
                             <ul class="dropdown-menu">
                                 <li><a href="{{ route('update/user', $user->id) }}">@lang('admin/users/general.edit')</a></li>
                                 <li><a href="{{ route('clone/user', $user->id) }}">@lang('admin/users/general.clone')</a></li>
+                                @if ((Sentry::getId() !== $user->id) && (!Config::get('app.lock_passwords')))
+                                    <li><a href="{{ route('delete/user', $user->id) }}">@lang('button.delete')</a></li>
+                                @endif
                             </ul>
                         </div>
 
@@ -82,10 +85,10 @@
 									<table class="display table table-hover">
 		                                <thead>
 		                                    <tr>
-		                                        <th class="col-md-3">Asset Type</th>
-		                                        <th class="col-md-2">Asset Tag</th>
-		                                        <th class="col-md-2">Name</th>
-		                                        <th class="col-md-1 hidden-print">Actions</th>
+		                                        <th class="col-md-3">@lang('admin/hardware/table.asset_model')</th>
+		                                        <th class="col-md-2">@lang('admin/hardware/table.asset_tag')</th>
+		                                        <th class="col-md-2">@lang('general.name')</th>
+		                                        <th class="col-md-1 hidden-print">@lang('general.action')</th>
 		                                    </tr>
 		                                </thead>
 		                                <tbody>
@@ -97,7 +100,7 @@
 		                                        </td>
 		                                        <td><a href="{{ route('view/hardware', $asset->id) }}">{{{ $asset->asset_tag }}}</a></td>
 		                                        <td><a href="{{ route('view/hardware', $asset->id) }}">{{{ $asset->name }}}</a></td>
-		
+
 		                                        <td class="hidden-print"> <a href="{{ route('checkin/hardware', array('assetId'=> $asset->id, 'backto'=>'user')) }}" class="btn-flat info">Checkin</a></td>
 		                                    </tr>
 		                                    @endforeach
@@ -123,9 +126,9 @@
 							<table class="display table table-hover">
                                 <thead>
                                     <tr>
-                                        <th class="col-md-5">Name</th>
-                                        <th class="col-md-6">Serial</th>
-                                        <th class="col-md-1 hidden-print">Actions</th>
+                                        <th class="col-md-5">@lang('general.name')</th>
+                                        <th class="col-md-6">@lang('admin/hardware/form.serial')</th>
+                                        <th class="col-md-1 hidden-print">@lang('general.action')</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -188,6 +191,121 @@
                             @endif
 
 
+                            <br>
+                            <h6>@lang('general.consumables')</h6>
+                            <br>
+                            <!-- checked out licenses table -->
+                            @if (count($user->consumables) > 0)
+                            <div class="table-responsive">
+							<table class="display table table-hover">
+                                <thead>
+                                    <tr>
+                                        <th class="col-md-8">@lang('general.name')</th>
+                                        <th class="col-md-4">@lang('general.date')</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach ($user->consumables as $consumable)
+                                    <tr>
+                                        <td><a href="{{ route('view/consumable', $consumable->id) }}">{{{ $consumable->name }}}</a></td>
+                                        <td>{{{ $consumable->created_at }}}</td>
+                                    </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
+                            </div>
+                            @else
+
+                            <div class="col-md-12">
+                                <div class="alert alert-info alert-block">
+                                    <i class="fa fa-info-circle"></i>
+                                    @lang('general.no_results')
+                                </div>
+                            </div>
+                            @endif
+
+                            <br />
+                            <h6>@lang('general.file_uploads') [ <a href="#" data-toggle="modal" data-target="#uploadFileModal">@lang('button.add')</a> ]</h6>
+                            <br />
+                            <table class="table table-hover">
+                                            <thead>
+                                                <tr>
+                                                    <th class="col-md-5">@lang('general.notes')</th>
+                                                    <th class="col-md-5"><span class="line"></span>@lang('general.file_name')</th>
+                                                    <th class="col-md-2"></th>
+                                                    <th class="col-md-2"></th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @if (count($user->uploads) > 0)
+                                                    @foreach ($user->uploads as $file)
+                                                    <tr>
+                                                        <td>
+                                                            @if ($file->note) {{{ $file->note }}}
+                                                            @endif
+                                                        </td>
+                                                        <td>
+                                                        {{{ $file->filename }}}
+                                                        </td>
+                                                        <td>
+                                                            @if ($file->filename)
+                                                            <a href="{{ route('show/userfile', [$user->id, $file->id]) }}" class="btn btn-default">Download</a>
+                                                            @endif
+                                                        </td>
+                                                        <td>
+                                                            <a class="btn delete-asset btn-danger btn-sm" href="{{ route('delete/userfile', [$user->id, $file->id]) }}" data-content="Are you sure you wish to delete this file?" data-title="Delete {{{ $file->filename }}}?"><i class="fa fa-trash icon-white"></i></a>
+                                                        </td>
+                                                    </tr>
+                                                    @endforeach
+                                                @else
+                                                    <tr>
+                                                        <td colspan="4">
+                                                            @lang('general.no_results')
+                                                        </td>
+                                                    </tr>
+
+                                                @endif
+
+                                            </tbody>
+                                </table>
+
+                        <!-- Modal -->
+                        <div class="modal fade" id="uploadFileModal" tabindex="-1" role="dialog" aria-labelledby="uploadFileModalLabel" aria-hidden="true">
+                          <div class="modal-dialog">
+                            <div class="modal-content">
+                              <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                <h4 class="modal-title" id="uploadFileModalLabel">Upload File</h4>
+                              </div>
+                              {{ Form::open([
+                              'method' => 'POST',
+                              'route' => ['upload/user', $user->id],
+                              'files' => true, 'class' => 'form-horizontal' ]) }}
+                              <div class="modal-body">
+
+                                <p>@lang('admin/users/general.filetype_info')</p>
+
+                                 <div class="form-group col-md-12">
+                                 <div class="input-group col-md-12">
+                                    <input class="col-md-12 form-control" type="text" name="notes" id="notes" placeholder="Notes">
+                                </div>
+                                </div>
+                                <div class="form-group col-md-12">
+                                 <div class="input-group col-md-12">
+                                    {{ Form::file('userfile[]', ['multiple' => 'multiple']) }}
+                                </div>
+                                </div>
+
+
+                              </div>
+                              <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">@lang('button.cancel')</button>
+                                <button type="submit" class="btn btn-primary btn-sm">@lang('button.upload')</button>
+                              </div>
+                              {{ Form::close() }}
+                            </div>
+                          </div>
+                        </div>
 
 							<br>
                             <h6>@lang('admin/users/general.history_user', array('name' => $user->first_name))</h6>
@@ -195,31 +313,80 @@
                             <!-- checked out assets table -->
                             @if (count($user->userlog) > 0)
                             <div class="table-responsive">
-                            <table class="table table-hover">
+                            <table class="table table-hover" id="example">
                                 <thead>
                                     <tr>
+                                        <th class="col-md-1"></th>
                                         <th class="col-md-2">Date</th>
                                         <th class="col-md-2"><span class="line"></span>@lang('table.action')</th>
-                                        <th class="col-md-2"><span class="line"></span>@lang('general.asset')</th>
+                                        <th class="col-md-3"><span class="line"></span>@lang('general.asset')</th>
                                         <th class="col-md-2"><span class="line"></span>@lang('table.by')</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($user->userlog as $log)
+                                    @foreach ($userlog as $log)
                                     <tr>
+                                        <td class="text-center">
+                                            @if (($log->assetlog) && ($log->asset_type=="hardware"))
+                                                <i class="fa fa-barcode"></i>
+                                            @elseif (($log->accessorylog) && ($log->asset_type=="accessory"))
+                                                <i class="fa fa-keyboard-o"></i>
+                                            @elseif (($log->consumablelog) && ($log->asset_type=="consumable"))
+                                                <i class="fa fa-tint"></i>
+                                            @elseif (($log->licenselog) && ($log->asset_type=="software"))
+                                                <i class="fa fa-certificate"></i>
+                                            @else
+                                            <i class="fa fa-times"></i>
+                                            @endif
+
+                                        </td>
                                         <td>{{{ $log->created_at }}}</td>
                                         <td>{{{ $log->action_type }}}</td>
                                         <td>
 
-                                        @if ((isset($log->assetlog->name)) && ($log->assetlog->deleted_at==''))
-                                            <a href="{{ route('view/hardware', $log->asset_id) }}">{{{ $log->assetlog->asset_tag }}}</a>
-                                        @elseif ((isset($log->assetlog->name)) && ($log->assetlog->deleted_at!=''))
-                                            <del>{{{ $log->assetlog->name }}}</del> (deleted)
+                                        @if ($log->assetlog)
 
-                                        @elseif ((isset($log->accessorylog->name)) && ($log->accessorylog->deleted_at==''))
-                                            {{{ $log->accessorylog->name }}}
+                                            @if (($log->assetlog) && ($log->asset_type=="hardware"))
+
+                                                @if ($log->assetlog->deleted_at=='')
+                                                    <a href="{{ route('view/hardware', $log->asset_id) }}">
+                                                        {{{ $log->assetlog->showAssetName() }}}
+                                                    </a>
+                                                @else
+                                                    <del>{{{ $log->assetlog->showAssetName() }}}</del> (deleted)
+                                                @endif
+
+                                            @elseif (($log->licenselog) && ($log->asset_type=="software"))
+
+                                                @if ($log->licenselog->deleted_at=='')
+                                                    <a href="{{ route('view/license', $log->license_id) }}">
+                                                        {{{ $log->licenselog->name }}}
+                                                    </a>
+                                                @else
+                                                    <del>{{{ $log->licenselog->name }}}</del> (deleted)
+                                                @endif
+
+                                             @elseif (($log->consumablelog) && ($log->asset_type=="consumable"))
+
+                                                 @if ($log->consumablelog->deleted_at=='')
+                                                     <a href="{{ route('view/consumable', $log->consumable_id) }}">{{{ $log->consumablelog->name }}}</a>
+                                                 @else
+                                                     <del>{{{ $log->consumablelog->name }}}</del> (deleted)
+                                                 @endif
+
+                                            @elseif (($log->accessorylog) && ($log->asset_type=="accessory"))
+                                                @if ($log->accessorylog->deleted_at=='')
+                                                    <a href="{{ route('view/accessory', $log->accessory_id) }}">{{{ $log->accessorylog->name }}}</a>
+                                                @else
+                                                    <del>{{{ $log->accessorylog->name }}}</del> (deleted)
+                                                @endif
+
+                                             @else
+                                                 @lang('general.bad_data')
+                                            @endif
 
                                         @endif
+
                                         </td>
                                         <td>{{{ $log->adminlog->fullName() }}}</td>
                                     </tr>
@@ -239,12 +406,12 @@
                             @endif
                         </div>
                     </div>
-	
+
 
                     <!-- side address column -->
                     <div class="col-md-3 address pull-right hidden-print">
-	                    
-	                    
+
+
                         <h6> @lang('admin/users/general.contact_user', array('name' => $user->first_name)) </h6>
 
                         @if ($user->location_id)
@@ -273,14 +440,14 @@
                             {{{ $user->notes }}}</li>
                         </ul>
                         @endif
-                                               
+
 
                         @if ($user->last_login!='')
                         <br /><h6>@lang('admin/users/general.last_login')
                         {{{ $user->last_login->diffForHumans() }}}</h6>
                         @endif
-                        
-                    	
+
+
 
                     </div>
 

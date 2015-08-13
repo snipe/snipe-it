@@ -8,6 +8,7 @@ return array(
     'delete'  	=> '削除',
     'edit'    	=> '編集',
     'restore' 	=> '復元',
+    'request'   => 'Request',
     'submit'  	=> '送信',
     'upload'    => 'アップロード',
 

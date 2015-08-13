@@ -18,5 +18,6 @@ return array(
     'serial'   		=> 'Seri No',
     'status'   		=> 'Durum',
     'title'      	=> 'Demirbaş ',
+    'days_without_acceptance' => 'Days Without Acceptance'
 
 );

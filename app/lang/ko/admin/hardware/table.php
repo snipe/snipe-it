@@ -18,5 +18,6 @@ return array(
     'serial'   		=> '일련번호',
     'status'   		=> '상태',
     'title'      	=> '자산 ',
+    'days_without_acceptance' => 'Days Without Acceptance'
 
 );

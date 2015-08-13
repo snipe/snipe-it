@@ -11,7 +11,7 @@ class Category extends Elegant
     */
     public $rules = array(
         'user_id' => 'numeric',
-        'name'   => 'required|alpha_space|min:3|max:255|unique:categories,name,{id}',
+        'name'   => 'required|alpha_space|min:3|max:255|unique:categories,name,{id},id,deleted_at,NULL',
         'category_type'   => 'required',
     );
 
@@ -24,12 +24,12 @@ class Category extends Elegant
     {
         return $this->hasManyThrough('Asset', 'Model')->count();
     }
-    
+
     public function accessoriescount()
     {
         return $this->hasMany('Accessory')->count();
     }
-    
+
     public function accessories()
     {
         return $this->hasMany('Asset');
@@ -45,21 +45,34 @@ class Category extends Elegant
     {
         return $this->hasMany('Model', 'category_id');
     }
-    
-    public function getEula() { 
-	      
+
+    public function getEula() {
+
 	    $Parsedown = new Parsedown();
-        
+
 	    if ($this->eula_text) {
 		    return $Parsedown->text(e($this->eula_text));
 	    } elseif ((Setting::getSettings()->default_eula_text) && ($this->use_default_eula=='1')) {
 		    return $Parsedown->text(e(Setting::getSettings()->default_eula_text));
 	    } else {
 		    return null;
-	    } 
-	    
+	    }
+
     }
 
-    
-    
+    /**
+     * scopeRequiresAcceptance
+     *
+     * @param $query
+     *
+     * @return mixed
+     * @author  Vincent Sposato <vincent.sposato@gmail.com>
+     * @version v1.0
+     */
+    public function scopeRequiresAcceptance( $query )
+    {
+
+        return $query->where( 'require_acceptance', '=', true );
+    }
+
 }

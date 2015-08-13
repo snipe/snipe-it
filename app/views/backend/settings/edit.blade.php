@@ -83,6 +83,18 @@ padding: 0px 20px;
 						            </div>
 
 
+                                    <div class="form-group {{ $errors->has('default_currency') ? 'error' : '' }}">
+	                                    <div class="col-md-3">
+                                        {{ Form::label('default_currency', Lang::get('admin/settings/general.default_currency')) }}
+	                                    </div>
+	                                    <div class="col-md-9">
+										{{ Form::currencies('default_currency', Input::old('default_currency', $setting->default_currency)) }}
+
+
+										{{ $errors->first('default_currency', '<br><span class="alert-msg">:message</span>') }}
+	                                    </div>
+                                    </div>
+
 						            <div class="form-group {{ $errors->has('alert_email') ? 'error' : '' }}">
 	                                    <div class="col-md-3">
                                         {{ Form::label('alert_email', Lang::get('admin/settings/general.alert_email')) }}

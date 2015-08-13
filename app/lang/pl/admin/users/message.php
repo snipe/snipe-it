@@ -35,14 +35,14 @@ return array(
     ),
 
     'deletefile' => array(
-        'error'   => 'File not deleted. Please try again.',
-        'success' => 'File successfully deleted.',
+        'error'   => 'Pliki nie zostały usunięte. Spróbuj ponownie.',
+        'success' => 'Pliki zostały usunięte.',
     ),
 
     'upload' => array(
-        'error'   => 'File(s) not uploaded. Please try again.',
-        'success' => 'File(s) successfully uploaded.',
-        'nofiles' => 'You did not select any files for upload',
+        'error'   => 'Plik(i) nie zostały wysłane. Spróbuj ponownie.',
+        'success' => 'Plik(i) zostały wysłane poprawnie.',
+        'nofiles' => 'Nie wybrałeś żadnych plików do wysłania',
         'invalidfiles' => 'One or more of your files is too large or is a filetype that is not allowed. Allowed filetypes are png, gif, jpg, doc, docx, pdf, and txt.',
     ),
 

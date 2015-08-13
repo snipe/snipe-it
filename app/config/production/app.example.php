@@ -26,7 +26,7 @@ return array(
     |
     */
 
-    'url' => 'http://production.yourserver.com',
+    'url' => 'https://production.yourserver.com',
 
     /*
     |--------------------------------------------------------------------------

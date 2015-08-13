@@ -3,9 +3,9 @@
 return array(
     'about_consumables_title' 			=> 'Acerca de los consumibles',
     'about_consumables_text'  			=> 'Consumibles son cualquier cosa comprada que puede ser usada a lo largo del tiempo. Por ejemplo, tinta para impresora o papel para copiadora.',
-    'consumable_name'                  => 'Consumable Name',
-    'create'                             => 'Create Consumable',
+    'consumable_name'                  => 'Nombre del Consumible',
+    'create'                             => 'Crear Consumible',
     'remaining' 			             => 'Restante',
     'total' 			                 => 'Total',
-    'update'                            => 'Update Consumable',
+    'update'                            => 'Actualizar Consumible',
 );

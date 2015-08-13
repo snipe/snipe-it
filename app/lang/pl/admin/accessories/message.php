@@ -28,8 +28,8 @@ return array(
     ),
 
     'checkin' => array(
-        'error'   		=> 'Accessory was not checked in, please try again',
-        'success' 		=> 'Accessory checked in successfully.',
+        'error'   		=> 'Akcesoria nie zostały przypisane, spróbuj ponownie',
+        'success' 		=> 'Akcesoria przypisane pomyślnie.',
         'user_does_not_exist' => 'Użytkownik nie istnieje. Spróbuj ponownie.'
     )
 

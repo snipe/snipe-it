@@ -8,7 +8,8 @@ return array(
 
     'create' => array(
         'error'   => '모델이 생성되지 않았습니다. 다시 시도하세요.',
-        'success' => '모델이 생성되었습니다.'
+        'success' => '모델이 생성되었습니다.',
+        'duplicate_set' => 'An asset model with that name, manufacturer and model number already exists.',
     ),
 
     'update' => array(
@@ -21,7 +22,7 @@ return array(
         'error'   => '모델을 삭제하는 중 문제가 발생했습니다. 다시 시도해 주세요.',
         'success' => '모델이 삭제되었습니다.'
     ),
-    
+
     'restore' => array(
         'error'   		=> '모델이 복원되지 않았습니다. 다시 시도해 주세요.',
         'success' 		=> '모델이 복원되었습니다.'

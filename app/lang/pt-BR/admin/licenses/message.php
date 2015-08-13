@@ -22,7 +22,7 @@ return array(
     'upload' => array(
         'error'   => 'O(s) arquivo(s) não foi/foram carregado(s). Tente novamente.',
         'success' => 'Arquivo(s) carregado(s) com sucesso.',
-        'nofiles' => 'Você não selecionou nenhum arquivo para carregar',
+        'nofiles' => 'You did not select any files for upload, or the file you are trying to upload is too large',
         'invalidfiles' => 'Um ou mais de seus arquivos é muito grande ou está em um tipo de arquivo não permitido. Os tipos permitidos são png, gif, jpg, doc, docx, pdf, e txt.',
     ),
 

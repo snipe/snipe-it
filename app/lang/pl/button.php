@@ -8,6 +8,7 @@ return array(
     'delete'  	=> 'Kasuj',
     'edit'    	=> 'Edycja',
     'restore' 	=> 'Przywróć',
+    'request'   => 'Request',
     'submit'  	=> 'Zatwierdź',
     'upload'    => 'Wgraj',
 

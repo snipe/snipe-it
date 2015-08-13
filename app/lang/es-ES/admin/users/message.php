@@ -2,8 +2,8 @@
 
 return array(
 
-    'accepted'                  => 'You have successfully accepted this asset.',
-    'declined'                  => 'You have successfully declined this asset.',
+    'accepted'                  => 'Ha aceptado con éxito este equipo.',
+    'declined'                  => 'Ha declinado con éxito este equipo.',
     'user_exists'               => 'El Usuario ya existe!',
     'user_not_found'            => 'Usuario [:id] no existe.',
     'user_login_required'       => 'El campo Usuario es obligatorio',
@@ -31,19 +31,19 @@ return array(
         'unsuspend' => 'Ha habido un problema marcando como no suspendido el Usuario. Intentalo de nuevo.',
         'import'    => 'Ha habido un problema importando los usuarios. Por favor intente nuevamente.',
         'asset_already_accepted' => 'Este equipo ya ha sido aceptado.',
-        'accept_or_decline' => 'You must either accept or decline this asset.',
+        'accept_or_decline' => 'Debe aceptar o declinar este equipo.',
     ),
 
     'deletefile' => array(
-        'error'   => 'File not deleted. Please try again.',
-        'success' => 'File successfully deleted.',
+        'error'   => 'Archivo no eliminado. Por favor, vuelva a intentarlo.',
+        'success' => 'Archivo eliminado correctamente.',
     ),
 
     'upload' => array(
-        'error'   => 'File(s) not uploaded. Please try again.',
-        'success' => 'File(s) successfully uploaded.',
-        'nofiles' => 'You did not select any files for upload',
-        'invalidfiles' => 'One or more of your files is too large or is a filetype that is not allowed. Allowed filetypes are png, gif, jpg, doc, docx, pdf, and txt.',
+        'error'   => 'Archivo(s) no cargado. Por favor, vuelva a intentarlo.',
+        'success' => 'Archivo(s) cargado correctamente.',
+        'nofiles' => 'No ha seleccionado ningún archivo para subir',
+        'invalidfiles' => 'Uno o más sus archivos es demasiado grande o es de un tipo no permitido. Los tipos de archivo permitidos son png, gif, jpg, doc, docx, pdf y txt.',
     ),
 
 );

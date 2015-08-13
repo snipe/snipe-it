@@ -8,7 +8,8 @@ return array(
 
     'create' => array(
         'error'   => 'Klasör oluşturulmadı, lütfen tekrar deneyin.',
-        'success' => 'Model oluşturuldu.'
+        'success' => 'Model oluşturuldu.',
+        'duplicate_set' => 'An asset model with that name, manufacturer and model number already exists.',
     ),
 
     'update' => array(
@@ -21,7 +22,7 @@ return array(
         'error'   => 'Demirbaş silinirken bir problem oluştu. Lütfen tekrar deneyin.',
         'success' => 'Model silindi.'
     ),
-    
+
     'restore' => array(
         'error'   		=> 'Model geri getirilemedi, lütfen tekrar deneyin',
         'success' 		=> 'Model geri getirildi.'

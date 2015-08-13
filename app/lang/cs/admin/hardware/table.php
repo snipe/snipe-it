@@ -18,5 +18,6 @@ return array(
     'serial'   		=> 'Sériové číslo',
     'status'   		=> 'Stav',
     'title'      	=> 'Majetek ',
+    'days_without_acceptance' => 'Days Without Acceptance'
 
 );

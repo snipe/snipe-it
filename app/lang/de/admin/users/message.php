@@ -2,8 +2,8 @@
 
 return array(
 
-    'accepted'                  => 'You have successfully accepted this asset.',
-    'declined'                  => 'You have successfully declined this asset.',
+    'accepted'                  => 'Sie haben diesen Gegenstand erfolgreich angenommen.',
+    'declined'                  => 'Sie haben diesen Gegenstand abgelehnt.',
     'user_exists'               => 'Benutzer existiert bereits!',
     'user_not_found'            => 'Benutzer [:id] existiert nicht.',
     'user_login_required'       => 'Das Loginfeld ist erforderlich',
@@ -31,19 +31,19 @@ return array(
         'unsuspend' => 'Es gab ein Problem beim reaktivieren des Benutzers. Bitte versuche es erneut.',
         'import'    => 'Es gab ein Problem beim importieren der Benutzer. Bitte noch einmal versuchen.',
         'asset_already_accepted' => 'Dieses Asset wurde bereits akzeptiert.',
-        'accept_or_decline' => 'You must either accept or decline this asset.',
+        'accept_or_decline' => 'Sie müssen diesen Gegenstand entweder annehmen oder ablehnen.',
     ),
 
     'deletefile' => array(
-        'error'   => 'File not deleted. Please try again.',
-        'success' => 'File successfully deleted.',
+        'error'   => 'Datei nicht gelöscht. Bitte versuchen Sie es nochmals.',
+        'success' => 'Datei erfolgreich gelöscht.',
     ),
 
     'upload' => array(
-        'error'   => 'File(s) not uploaded. Please try again.',
-        'success' => 'File(s) successfully uploaded.',
-        'nofiles' => 'You did not select any files for upload',
-        'invalidfiles' => 'One or more of your files is too large or is a filetype that is not allowed. Allowed filetypes are png, gif, jpg, doc, docx, pdf, and txt.',
+        'error'   => 'Datei(en) wurden nicht erfolgreich hochgeladen. Bitte versuchen Sie es nochmals.',
+        'success' => 'Datei(en) wurden erfolgreich hochgeladen.',
+        'nofiles' => 'Sie haben keine Dateien zum Hochladen ausgewählt.',
+        'invalidfiles' => 'Eine oder mehrere Ihrer Dateien ist zu groß oder deren Dateityp ist nicht zugelassen. Zugelassene Dateitypen sind png, gif, jpg, doc, docx, pdf, und txt.',
     ),
 
 );

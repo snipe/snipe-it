@@ -5,6 +5,7 @@ return array(
     'undeployable' 		=> '<strong>Advarsel:</strong> Denne eiendelen er merket som ikke utleverbar.
                         Oppdater eiendelsstatus hvis situasjonen har endret seg.',
     'does_not_exist' 	=> 'Eiendel eksisterer ikke.',
+    'does_not_exist_or_not_requestable' => 'Nice try. That asset does not exist or is not requestable.',
     'assoc_users'	 	=> 'Denne eiendelen er merket som utsjekket til en bruker og kan ikke slettes. Vennligst sjekk inn eiendelen først, og forsøk sletting på nytt. ',
 
     'create' => array(
@@ -22,7 +23,7 @@ return array(
         'error'   		=> 'Eiendel ble ikke gjenopprettet. Prøv igjen',
         'success' 		=> 'Vellykket gjenoppretting av eiendel.'
     ),
-    
+
     'deletefile' => array(
         'error'   => 'Fil ble ikke slettet. Prøv igjen.',
         'success' => 'Vellykket sletting av fil.',
@@ -31,7 +32,7 @@ return array(
     'upload' => array(
         'error'   => 'Fil(er) ble ikke lastet opp. Prøv igjen.',
         'success' => 'Vellykket opplasting av fil(er).',
-        'nofiles' => 'Du valgte ingen filer for opplasting',
+        'nofiles' => 'You did not select any files for upload, or the file you are trying to upload is too large',
         'invalidfiles' => 'En eller flere av filene dine er for store eller av en ikke tillatt filtype. Tillatte filtyper er png, gif, jpg, doc, docx, pdf og txt.',
     ),
 

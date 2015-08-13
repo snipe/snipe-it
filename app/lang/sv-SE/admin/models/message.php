@@ -8,7 +8,8 @@ return array(
 
     'create' => array(
         'error'   => 'Modellen skapades inte, försök igen.',
-        'success' => 'Modellen skapad.'
+        'success' => 'Modellen skapad.',
+        'duplicate_set' => 'An asset model with that name, manufacturer and model number already exists.',
     ),
 
     'update' => array(
@@ -21,7 +22,7 @@ return array(
         'error'   => 'Problem att ta bort modellen. Försök igen.',
         'success' => 'Modellen borttagen.'
     ),
-    
+
     'restore' => array(
         'error'   		=> 'Modellen återskapades inte, försök igen',
         'success' 		=> 'Modellen återskapades.'

@@ -2,7 +2,7 @@
 
 return array(
 
-    'does_not_exist' => 'Supplier does not exist.',
+    'does_not_exist' => 'Dodavatel neexistuje.',
     'assoc_users'	 => 'This supplier is currently associated with at least one model and cannot be deleted. Please update your models to no longer reference this supplier and try again. ',
 
     'create' => array(
@@ -12,7 +12,7 @@ return array(
 
     'update' => array(
         'error'   => 'Supplier was not updated, please try again',
-        'success' => 'Supplier updated successfully.'
+        'success' => 'Dodavatel úspěšně aktualizován.'
     ),
 
     'delete' => array(
