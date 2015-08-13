@@ -42,8 +42,7 @@ class StatuslabelsController extends AdminController
         // Show the page
 		$statuslabel = new Statuslabel;
 		$use_statuslabel_type = $statuslabel->getStatuslabelType();
-
-    	$statuslabel_types = array('' => Lang::get('admin/hardware/form.select_statustype')) + array('undeployable' => Lang::get('admin/hardware/general.undeployable')) + array('pending' => Lang::get('admin/hardware/general.pending')) + array('archived' => Lang::get('admin/hardware/general.archived')) + array('deployable' => Lang::get('admin/hardware/general.deployable'));
+    	$statuslabel_types = statusTypeList();
 
         return View::make('backend/statuslabels/edit', compact('statuslabel_types','statuslabel'))->with('use_statuslabel_type',$use_statuslabel_type);
     }
@@ -91,16 +90,17 @@ class StatuslabelsController extends AdminController
         return Redirect::to('admin/settings/statuslabels/create')->with('error', Lang::get('admin/statuslabels/message.create.error'));
 
     }
-    
+
     public function store()
     {
       // get the POST data
       $new = Input::all();
-      
+
       $new['statuslabel_types']="deployable";
 
       // create a new model instance
       $statuslabel = new Statuslabel();
+      $statustype = Statuslabel::getStatuslabelTypesForDB(Input::get('statuslabel_types'));
 
       // attempt validation
       if ($statuslabel->validate($new)) {
@@ -108,12 +108,12 @@ class StatuslabelsController extends AdminController
         //$statustype = Statuslabel::getStatuslabelTypesForDB(Input::get('statuslabel_types'));
 
           // Save the Statuslabel data
-          $statuslabel->name            	= e(Input::get('name'));
-          $statuslabel->user_id          = Sentry::getId();
-          //$statuslabel->notes          =  e(Input::get('notes'));
-          $statuslabel->deployable          =  true; //$statustype['deployable'];
-          $statuslabel->pending          =  false; //$statustype['pending'];
-          $statuslabel->archived          =  false; //$statustype['archived'];
+          $statuslabel->name            = e(Input::get('name'));
+          $statuslabel->user_id         = Sentry::getId();
+          $statuslabel->notes           =  '';
+          $statuslabel->deployable      =  $statustype['deployable'];
+          $statuslabel->pending         =  $statustype['pending'];
+          $statuslabel->archived        =  $statustype['archived'];
 
           // Was the asset created?
           if($statuslabel->save()) {

@@ -42,6 +42,12 @@
         </div>
 
         <div class="dynamic-form-row">
+          <div class="col-md-3 col-xs-12"><label for="modal-statuslabel_types">@lang('admin/statuslabels/table.status_type')*:
+          </label></div>
+          <div class="col-md-9 col-xs-12">{{ Form::select('modal-statuslabel_types', $statuslabel_types, '', array('class'=>'select2', 'style'=>'width:350px','id' =>'modal-statuslabel_types')) }}</div>
+        </div>
+
+        <div class="dynamic-form-row">
           <div class="col-md-3 col-xs-12"><label for="modal-city">@lang('general.city')*:</label></div>
           <div class="col-md-9 col-xs-12"><input type='text' id='modal-city' class="form-control"></div>
         </div>
@@ -78,8 +84,8 @@
 
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary" id="modal-save">Save changes</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal">@lang('button.cancel')</button>
+        <button type="button" class="btn btn-primary" id="modal-save">@lang('general.save')</button>
       </div>
     </div><!-- /.modal-content -->
   </div><!-- /.modal-dialog -->
@@ -408,8 +414,12 @@ $(function () {
       show_er('#modal-country');
       break;
 
+      case 'statuslabel':
+      show_er("#modal-statuslabel_types");
+      break;
+
       case 'supplier':
-      case 'status':
+
       //do nothing, they just need 'name'
     }
 
