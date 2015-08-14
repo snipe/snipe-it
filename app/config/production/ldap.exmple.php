@@ -74,5 +74,6 @@ return array(
     'result.emp.num'  => "",
     'result.last.name'  => "",
     'result.first.name' => "",
-    'result.email' => ""
+    'result.email' => "",
+    'result.active.flag' => ""
 );
