@@ -75,5 +75,15 @@ return array(
     'result.last.name'  => "",
     'result.first.name' => "",
     'result.email' => "",
-    'result.active.flag' => ""
+    'result.active.flag' => "",
+    
+    /*
+    |--------------------------------------------------------------------------
+    | LDAP filter query for authentication
+    |--------------------------------------------------------------------------
+    |
+    | The LDAP query that we want to execute when authenticating a user
+    |
+    */
+    'authentication.filter.query' => "uid="
 );
