@@ -50,7 +50,7 @@ Create a User ::
 <h3>Synchronization Results</h3>
 <table class="table table-bordered">
     <tr>
-        <th>Username</th><th>York ID</th>
+        <th>Username</th><th>Employee Number</th>
         <th>First Name</th><th>Last Name</th>
         <th>Email</th><th>Notes</th>
     </tr>
@@ -59,10 +59,10 @@ Create a User ::
     foreach ($summary as $entry) {
         echo "<tr>";
         echo "<td>" . $entry['username'] . "</td>";
-        echo "<td>" . $entry['pycyin'] . "</td>";
+        echo "<td>" . $entry['employee_number'] . "</td>";
         echo "<td>" . $entry['firstname'] . "</td>";
         echo "<td>" . $entry['lastname'] . "</td>";
-        echo "<td>" . $entry['mail'] . "</td>";
+        echo "<td>" . $entry['email'] . "</td>";
         echo "<td>" . $entry['note'] . "</td>";
         echo "</tr>";
     }
