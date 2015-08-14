@@ -1154,8 +1154,10 @@ class UsersController extends AdminController {
                 array_push($summary, $item);
             }
             /* Easy break in the loop */
+            /*
             if ($i >= 1)
                 break;
+            */
         }
 
 
