@@ -2,10 +2,10 @@
 
 return array(
 
-    'deleted'  					=> 'This model has been deleted. <a href="/hardware/models/:model_id/restore">Click here to restore it</a>.',
-    'restore'                   => 'Restore Model',
-	'show_mac_address'			=> 'Show MAC address field in assets in this model',
-    'view_deleted'              => 'View Deleted',
-    'view_models'               => 'View Models',
+    'deleted'  					=> 'この型番は削除されました。<a href="/hardware/models/:model_id/restore">元に戻すにはココをクリックして下さい。</a>.',
+    'restore'                   => '型番を復元',
+	'show_mac_address'			=> 'この型番の資産にMACアドレスフィールドを表示',
+    'view_deleted'              => '削除したものを表示',
+    'view_models'               => '型番を表示',
 
 );

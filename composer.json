@@ -26,10 +26,17 @@
 		"intervention/image": "dev-master",
 		"league/csv": "~7.0",
 		"maknz/slack": "dev-master",
-		"erusev/parsedown": "dev-master"
+		"erusev/parsedown": "dev-master",
+		"fideloper/proxy": "2.1.1",
+		"guzzlehttp/guzzle": "5.3.0",
+		"aws/aws-sdk-php-laravel": "1.0.x-dev",
+		"schickling/backup": "0.6.0",
+		"chumper/zipper": "0.5.x"
+
 	},
 	"require-dev": {
 		"phpunit/phpunit": "*",
+		"codeception/codeception": "2.1.*",
 		"mockery/mockery": "0.9.*"
 	},
 	"autoload": {
@@ -57,7 +64,7 @@
 	},
 	"config": {
 		"preferred-install": "dist",
-		"bin-dir": "bin"
+		"bin-dir": "vendor/bin"
 
 	},
 	"minimum-stability": "dev"

@@ -30,7 +30,7 @@
 	.qr_img {
 		    float: left;
 	    }
-	    
+
 	 .qr_text {
 		    margin-left: 5px;
 		    float: left;
@@ -42,14 +42,14 @@
 </head>
 <body>
 
- 
+
 @foreach ($assets as $asset)
 	<?php $count++; ?>
 	<div class="label">
 		<div class="qr_img"><img src="./{{{ $asset->id }}}/qr_code"></div>
 		<div class="qr_text">
 			@if ($settings->qr_text!='')
-				{{ $settings->qr_text }}
+				{{{ $settings->qr_text }}}
 				<br><br>
 			@endif
             		@if ($asset->name!='')
@@ -57,22 +57,22 @@
                 		<br>
             		@endif			
 			@if ($asset->asset_tag!='')
-				T: {{ $asset->asset_tag }}
+				T: {{{ $asset->asset_tag }}}
 				<br>
 			@endif
 			@if ($asset->serial!='')
-				S: {{ $asset->serial }}
+				S: {{{ $asset->serial }}}
 				<br>
 			@endif
-	
+
 		</div>
 	</div>
-	@if ($count % 18 == 0)	
+	@if ($count % 18 == 0)
 		<div class="page-break"></div>
-		
+
 	@endif
-	
-@endforeach	
+
+@endforeach
 
 
 
@@ -80,5 +80,3 @@
 
 </body>
 </html>
-
-

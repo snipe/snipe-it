@@ -2,11 +2,11 @@
 
 return array(
 
-    'assigned_to'   	=> 'Assigned To',
-    'checkout'   		=> 'In/Out',
+    'assigned_to'   	=> 'Přiděleno',
+    'checkout'   		=> 'Stav',
     'id'      			=> 'ID',
     'license_email'   	=> 'License Email',
-    'license_name'   	=> 'Licensed To',
+    'license_name'   	=> 'Registrováno na',
     'purchase_date'   	=> 'Pořízeno',
     'purchased'   		=> 'Zakoupeno',
     'seats'   			=> 'Seats',

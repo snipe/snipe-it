@@ -17,7 +17,7 @@ return array(
     'default_location'	=> 'Standard Lagerort',
     'eol_date'			=> 'End of Live Datum (Ende der Nutzungsdauer)',
     'eol_rate'			=> 'EOL Rate',
-    'expected_checkin'  => 'Expected Checkin Date',
+    'expected_checkin'  => 'Erwartetes Liederdatum',
     'expires'			=> 'Gültig bis',
     'fully_depreciated'	=> 'Komplett Abgeschrieben',
     'help_checkout'		=> 'If you wish to assign this asset immediately, select "Ready to Deploy" from the status list above. ',

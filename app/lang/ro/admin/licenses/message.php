@@ -22,7 +22,7 @@ return array(
     'upload' => array(
         'error'   => 'Fisierul/Fisierele nu au fost uploadate. Incecati iar.',
         'success' => 'Fisierul/Fisierele au fost uploadate.',
-        'nofiles' => 'N-ati selectat fisiere pentru upload',
+        'nofiles' => 'You did not select any files for upload, or the file you are trying to upload is too large',
         'invalidfiles' => 'Unul sau mai multe fisiere sunt prea mari sau tipul de fisier este interzis. Tipurile de fisiere permise sunt png, gif, jpg, doc, docx, pdf si txt.',
     ),
 

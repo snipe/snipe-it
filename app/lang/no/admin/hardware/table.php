@@ -18,5 +18,6 @@ return array(
     'serial'   		=> 'Serienummer',
     'status'   		=> 'Status',
     'title'      	=> 'Eiendel ',
+    'days_without_acceptance' => 'Days Without Acceptance'
 
 );

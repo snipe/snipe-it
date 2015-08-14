@@ -2,16 +2,16 @@
 
 return array(
 
-    'assigned_to'   	=> 'Assigned To',
+    'assigned_to'   	=> '割り当て先',
     'checkout'   		=> 'In/Out',
     'id'      			=> 'ID',
-    'license_email'   	=> 'License Email',
-    'license_name'   	=> 'Licensed To',
-    'purchase_date'   	=> 'Purchase Date',
-    'purchased'   		=> 'Purchased',
-    'seats'   			=> 'Seats',
-    'hardware'   		=> 'Hardware',
-    'serial'   			=> 'Serial',
-    'title'      		=> 'License',
+    'license_email'   	=> '認可されたEmail',
+    'license_name'   	=> 'ライセンス先',
+    'purchase_date'   	=> '購入日',
+    'purchased'   		=> '購入済',
+    'seats'   			=> 'シート数',
+    'hardware'   		=> 'ハードウェア',
+    'serial'   			=> 'シリアル',
+    'title'      		=> 'ライセンス',
 
 );

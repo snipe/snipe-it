@@ -5,6 +5,7 @@ return array(
     'undeployable' 		=> '<strong>Uyarı:</strong> Bu demirbaş dağıtılamaz olarak işlaretlenmiş.
                         Eğer durumu değişti ise, lütfen Demirbaş Durumu\'nu güncelleyiniz.',
     'does_not_exist' 	=> 'Demirbaş mevcut değil.',
+    'does_not_exist_or_not_requestable' => 'Nice try. That asset does not exist or is not requestable.',
     'assoc_users'	 	=> 'Bu demirbaş kullanıcıya çıkış yapılmış olaran görülüyor ve silinemez. Lütfen önce demirbaş girişi yapınız, ardından tekrar siliniz. ',
 
     'create' => array(
@@ -22,7 +23,7 @@ return array(
         'error'   		=> 'Demirbaş geri getirilemedi, lütfen tekrar deneyin',
         'success' 		=> 'Demirbaş geri getirildi.'
     ),
-    
+
     'deletefile' => array(
         'error'   => 'Dosya silinemedi. Lütfen tekrar deneyin.',
         'success' => 'Dosya silindi.',
@@ -31,7 +32,7 @@ return array(
     'upload' => array(
         'error'   => 'Dosya(lar) yüklenemedi. Lütfen tekrar deneyin.',
         'success' => 'Dosya(lar) yüklendi.',
-        'nofiles' => 'Yükleme için hiç bir dosya seçmediniz.',
+        'nofiles' => 'You did not select any files for upload, or the file you are trying to upload is too large',
         'invalidfiles' => 'Bir ya da daha fazla dosya izin verilen boyuttan daha büyük ya da izin verilmeyen bir dosya tipi seçtiniz. Lütfen dosya boyutu ve tipini kontrol ediniz.',
     ),
 

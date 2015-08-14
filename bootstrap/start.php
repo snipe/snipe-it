@@ -25,9 +25,8 @@ $app = new Illuminate\Foundation\Application;
 */
 
 $env = $app->detectEnvironment(array(
-
-    'local'		 	=> array('YourLocalDevHostname','AlisonMBP'),
-    'staging' 		=> array('staging.yourserver.com'),
+    'local'		 	=> array('homestead','AlisonMBP'),
+    'staging' 		=> array('stagingweb01'),
     'production' 	=> array('www.yourserver.com')
 ));
 

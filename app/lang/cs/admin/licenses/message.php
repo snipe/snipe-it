@@ -2,7 +2,7 @@
 
 return array(
 
-    'does_not_exist' => 'License does not exist.',
+    'does_not_exist' => 'Licence neexistuje.',
     'user_does_not_exist' => 'Uživatel neexistuje.',
     'asset_does_not_exist' 	=> 'The asset you are trying to associate with this license does not exist.',
     'owner_doesnt_match_asset' => 'The asset you are trying to associate with this license is owned by somene other than the person selected in the assigned to dropdown.',
@@ -10,19 +10,19 @@ return array(
 
 
     'create' => array(
-        'error'   => 'License was not created, please try again.',
-        'success' => 'License created successfully.'
+        'error'   => 'Licence nebyla vytvořena, zkuste to prosím znovu.',
+        'success' => 'Licence byla úspěšně vytvořena.'
     ),
 
     'deletefile' => array(
-        'error'   => 'File not deleted. Please try again.',
+        'error'   => 'Soubor se nepodařilo smazat. Prosím zkuste to znovu.',
         'success' => 'Soubor byl úspěšně smazán.',
     ),
 
     'upload' => array(
-        'error'   => 'File(s) not uploaded. Please try again.',
+        'error'   => 'Soubor(y) se nepodařilo nahrát. Prosím zkuste to znovu.',
         'success' => 'File(s) successfully uploaded.',
-        'nofiles' => 'You did not select any files for upload',
+        'nofiles' => 'You did not select any files for upload, or the file you are trying to upload is too large',
         'invalidfiles' => 'One or more of your files is too large or is a filetype that is not allowed. Allowed filetypes are png, gif, jpg, doc, docx, pdf, and txt.',
     ),
 
@@ -44,7 +44,7 @@ return array(
 
     'checkin' => array(
         'error'   => 'There was an issue checking in the license. Please try again.',
-        'success' => 'The license was checked in successfully'
+        'success' => 'Licence byla úspěšně zkontrolována'
     ),
 
 );

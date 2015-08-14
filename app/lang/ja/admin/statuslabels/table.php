@@ -1,15 +1,15 @@
 <?php
 
 return array(
-    'about'      	=> 'About Status Labels',
-    'archived'      	=> 'Archived',
-    'create'      	=> 'Create Status Label',
-    'deployable'      	=> 'Deployable',
-    'info'      	=> 'Status labels are used to describe the various states your assets could be in. They may be out for repair, lost/stolen, etc. You can create new status labels for deployable, pending and archived assets.',
-    'name'      	=> 'Status Name',
-    'pending'      	=> 'Pending',
-    'status_type'   => 'Status Type',
-    'title'      	=> 'Status Labels',
-    'undeployable'  => 'Undeployable',
-    'update'      	=> 'Update Status Label',
+    'about'      	=> 'ステータスラベルについて',
+    'archived'      	=> 'アーカイブ',
+    'create'      	=> 'ステータスラベルを作成',
+    'deployable'      	=> '配備可能',
+    'info'      	=> 'ステータスラベルは資産の様々な状態の説明に利用されます。修理中であったり、紛失/盗難かもしれません。資産を配備可能、ペンディング、保管といった新しいステータスラベルを作成できます。',
+    'name'      	=> 'ステータス名',
+    'pending'      	=> '保留中',
+    'status_type'   => 'ステータスタイプ',
+    'title'      	=> 'ステータスラベル',
+    'undeployable'  => '配備不可',
+    'update'      	=> 'ステータスラベルを更新',
 );

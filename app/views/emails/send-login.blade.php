@@ -6,7 +6,7 @@
 <p>An administrator has created an account for you on the {{{ Setting::getSettings()->site_name }}} website. </p>
 
 <p>URL: <a href="{{ Config::get('app.url') }}">{{ Config::get('app.url') }}</a><br>
-Login: {{{ $email }}} <br>
+Login: {{{ $username }}} <br>
 Password: {{{ $password }}}
 </p>
 

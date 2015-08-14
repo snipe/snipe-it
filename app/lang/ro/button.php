@@ -8,6 +8,7 @@ return array(
     'delete'  	=> 'Sterge',
     'edit'    	=> 'Editeaza',
     'restore' 	=> 'Restaureaza',
+    'request'   => 'Request',
     'submit'  	=> 'Trimiteti',
     'upload'    => 'Incarca',
 

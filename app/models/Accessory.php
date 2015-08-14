@@ -12,7 +12,7 @@ class Accessory extends Elegant
     public $rules = array(
         'name'   => 'required|alpha_space|min:3|max:255',
         'category_id'   	=> 'required|integer',
-        'qty'   	=> 'required|integer|min:1',
+        'qty'   	=> 'required|integer|min:0',
     );
 
     public function category()
@@ -27,43 +27,46 @@ class Accessory extends Elegant
     {
         return $this->hasMany('Actionlog','accessory_id')->where('asset_type','=','accessory')->orderBy('created_at', 'desc')->withTrashed();
     }
-    
-    
+
+
     public function users()
     {
         return $this->belongsToMany('User', 'accessories_users', 'accessory_id','assigned_to')->withPivot('id')->withTrashed();
     }
-    
+
     public function hasUsers()
     {
         return $this->belongsToMany('User', 'accessories_users', 'accessory_id','assigned_to')->count();
     }
-    
-    
-    public function requireAcceptance() {    
+
+    public function checkin_email() {
+        return $this->category->checkin_email;
+    }
+
+    public function requireAcceptance() {
 	    return $this->category->require_acceptance;
     }
-    
-    public function getEula() { 
-	      
+
+    public function getEula() {
+
 	    $Parsedown = new Parsedown();
-        
+
 	    if ($this->category->eula_text) {
 		    return $Parsedown->text(e($this->category->eula_text));
 	    } elseif ((Setting::getSettings()->default_eula_text) && ($this->category->use_default_eula=='1')) {
 		    return $Parsedown->text(e(Setting::getSettings()->default_eula_text));
 	    } else {
 		    return null;
-	    } 
-	    
+	    }
+
     }
-    
-    public function numRemaining() {    
+
+    public function numRemaining() {
 	    $checkedout = $this->users->count();
 	    $total = $this->qty;
 	    $remaining = $total - $checkedout;
 	    return $remaining;
     }
 
-    
+
 }

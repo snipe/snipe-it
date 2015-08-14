@@ -101,6 +101,12 @@ class LicensesController extends AdminController
                 $license->maintained = e(Input::get('maintained'));
             }
 
+            if ( e(Input::get('reassignable')) == '') {
+                $license->reassignable = 0;
+            } else {
+                $license->reassignable = e(Input::get('reassignable'));
+            }
+
             if ( e(Input::get('purchase_order')) == '') {
                 $license->purchase_order = '';
             } else {
@@ -135,7 +141,7 @@ class LicensesController extends AdminController
 
             // Was the license created?
             if($license->save()) {
-	            
+
                 $insertedId = $license->id;
                 // Save the license seat data
                 for ($x=0; $x<$license->seats; $x++) {
@@ -408,7 +414,7 @@ class LicensesController extends AdminController
         }
 
         // Get the dropdown of users and then pass it to the checkout view
-         $users_list = array('' => 'Select a User') + DB::table('users')->select(DB::raw('concat(last_name,", ",first_name) as full_name, id'))->whereNull('deleted_at')->orderBy('last_name', 'asc')->orderBy('first_name', 'asc')->lists('full_name', 'id');
+         $users_list = array('' => 'Select a User') + DB::table('users')->select(DB::raw('concat(last_name,", ",first_name," (",username,")") as full_name, id'))->whereNull('deleted_at')->orderBy('last_name', 'asc')->orderBy('first_name', 'asc')->lists('full_name', 'id');
 
 
         // Left join to get a list of assets and some other helpful info
@@ -524,7 +530,7 @@ class LicensesController extends AdminController
             $logaction->asset_id = $licenseseat->license_id;
 
 
-			$license = License::find($licenseseat->license_id);          
+			$license = License::find($licenseseat->license_id);
             $settings = Setting::getSettings();
 
 
@@ -533,23 +539,23 @@ class LicensesController extends AdminController
                 $logaction->checkedout_to = NULL;
                 $slack_msg = strtoupper($logaction->asset_type).' license <'.Config::get('app.url').'/admin/licenses/'.$license->id.'/view'.'|'.$license->name.'> checked out to <'.Config::get('app.url').'/hardware/'.$is_asset_id->id.'/view|'.$is_asset_id->showAssetName().'> by <'.Config::get('app.url').'/admin/users/'.$user->id.'/view'.'|'.$user->fullName().'>.';
             } else {
-                $logaction->checkedout_to = e(Input::get('assigned_to'));             
+                $logaction->checkedout_to = e(Input::get('assigned_to'));
                 $slack_msg = strtoupper($logaction->asset_type).' license <'.Config::get('app.url').'/admin/licenses/'.$license->id.'/view'.'|'.$license->name.'> checked out to <'.Config::get('app.url').'/admin/users/'.$is_assigned_to->id.'/view|'.$is_assigned_to->fullName().'> by <'.Config::get('app.url').'/admin/users/'.$user->id.'/view'.'|'.$user->fullName().'>.';
             }
-            
-        
-            
+
+
+
             if ($settings->slack_endpoint) {
-				
+
 
 				$slack_settings = [
 				    'username' => $settings->botname,
 				    'channel' => $settings->slack_channel,
 				    'link_names' => true
 				];
-				
+
 				$client = new \Maknz\Slack\Client($settings->slack_endpoint,$slack_settings);
-				
+
 				try {
 						$client->attach([
 						    'color' => 'good',
@@ -563,13 +569,13 @@ class LicensesController extends AdminController
 						            'value' => e($logaction->note)
 						        ],
 
-						        
-						        				   
+
+
 						    ]
 						])->send('License Checked Out');
-					
+
 					} catch (Exception $e) {
-						
+
 					}
 
 			}
@@ -612,7 +618,7 @@ class LicensesController extends AdminController
             // Redirect to the asset management page with error
             return Redirect::to('admin/licenses')->with('error', Lang::get('admin/licenses/message.not_found'));
         }
-        
+
         $license = License::find($licenseseat->license_id);
 
         if(!$license->reassignable) {
@@ -620,7 +626,7 @@ class LicensesController extends AdminController
             Session::flash('error', 'License not reassignable.');
             return Redirect::back()->withInput();
         }
-        
+
         // Declare the rules for the form validation
         $rules = array(
             'note'   => 'alpha_space',
@@ -642,7 +648,7 @@ class LicensesController extends AdminController
         // Update the asset data
         $licenseseat->assigned_to                   = NULL;
         $licenseseat->asset_id                      = NULL;
-        
+
         $user = Sentry::getUser();
 
         // Was the asset updated?
@@ -652,20 +658,20 @@ class LicensesController extends AdminController
             $logaction->asset_type = 'software';
             $logaction->note = e(Input::get('note'));
             $logaction->user_id = $user->id;
-            
+
             $settings = Setting::getSettings();
-			
+
 			if ($settings->slack_endpoint) {
-				
+
 
 				$slack_settings = [
 				    'username' => $settings->botname,
 				    'channel' => $settings->slack_channel,
 				    'link_names' => true
 				];
-				
+
 				$client = new \Maknz\Slack\Client($settings->slack_endpoint,$slack_settings);
-				
+
 				try {
 						$client->attach([
 						    'color' => 'good',
@@ -678,20 +684,20 @@ class LicensesController extends AdminController
 						            'title' => 'Note:',
 						            'value' => e($logaction->note)
 						        ],
-						        				   
+
 						    ]
 						])->send('License Checked In');
-					
+
 					} catch (Exception $e) {
-						
+
 					}
 
 			}
-			
-			
+
+
             $log = $logaction->logaction('checkin from');
-            
-            
+
+
 
 			if ($backto=='user') {
 				return Redirect::to("admin/users/".$return_to.'/view')->with('success', Lang::get('admin/licenses/message.checkin.success'));
@@ -805,7 +811,7 @@ class LicensesController extends AdminController
 				}
 
 			} else {
-				 return Redirect::back()->with('success', Lang::get('admin/licenses/message.upload.nofiles'));
+				 return Redirect::back()->with('error', Lang::get('admin/licenses/message.upload.nofiles'));
 			}
 
 
@@ -884,7 +890,7 @@ class LicensesController extends AdminController
         $licenses = License::orderBy('created_at', 'DESC')->get();
 
         $actions = new \Chumper\Datatable\Columns\FunctionColumn('actions', function($licenses) {
-            return '<a href="'.route('update/license', $licenses->id).'" class="btn btn-warning btn-sm" style="margin-right:5px;"><i class="fa fa-pencil icon-white"></i></a><a data-html="false" class="btn delete-asset btn-danger btn-sm" data-toggle="modal" href="'.route('delete/license', $licenses->id).'" data-content="'.Lang::get('admin/licenses/message.delete.confirm').'" data-title="'.Lang::get('general.delete').' '.htmlspecialchars($licenses->name).'?" onClick="return false;"><i class="fa fa-trash icon-white"></i></a>';
+            return '<span style="white-space: nowrap;"><a href="'.route('freecheckout/license', $licenses->id).'" class="btn btn-primary btn-sm" style="margin-right:5px;" '.(($licenses->remaincount() > 0) ? '' : 'disabled').'>'.Lang::get('general.checkout').'</a> <a href="'.route('clone/license', $licenses->id).'" class="btn btn-info btn-sm" style="margin-right:5px;" title="Clone asset"><i class="fa fa-files-o"></i></a><a href="'.route('update/license', $licenses->id).'" class="btn btn-warning btn-sm" style="margin-right:5px;"><i class="fa fa-pencil icon-white"></i></a><a data-html="false" class="btn delete-asset btn-danger btn-sm" data-toggle="modal" href="'.route('delete/license', $licenses->id).'" data-content="'.Lang::get('admin/licenses/message.delete.confirm').'" data-title="'.Lang::get('general.delete').' '.htmlspecialchars($licenses->name).'?" onClick="return false;"><i class="fa fa-trash icon-white"></i></a></span>';
         });
 
         return Datatable::collection($licenses)
@@ -907,5 +913,15 @@ class LicensesController extends AdminController
         ->searchColumns('name','serial','totalSeats','remaining','purchase_date','actions')
         ->orderColumns('name','serial','totalSeats','remaining','purchase_date','actions')
         ->make();
+    }
+
+    public function getFreeLicense($licenseId) {
+        // Check if the asset exists
+        if (is_null($license = License::find($licenseId))) {
+            // Redirect to the asset management page with error
+            return Redirect::to('admin/licenses')->with('error', Lang::get('admin/licenses/message.not_found'));
+        }
+        $seatId = $license->freeSeat($licenseId);
+        return Redirect::to('admin/licenses/'.$seatId.'/checkout');
     }
 }

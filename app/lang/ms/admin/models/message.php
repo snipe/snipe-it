@@ -8,7 +8,8 @@ return array(
 
     'create' => array(
         'error'   => 'Model gagal dicipta, sila cuba lagi.',
-        'success' => 'Model berjaya dicipta.'
+        'success' => 'Model berjaya dicipta.',
+        'duplicate_set' => 'An asset model with that name, manufacturer and model number already exists.',
     ),
 
     'update' => array(
@@ -21,7 +22,7 @@ return array(
         'error'   => 'Ada isu semasa menghapuskan model. Sila cuba lagi.',
         'success' => 'Model berjaya dihapuskan.'
     ),
-    
+
     'restore' => array(
         'error'   		=> 'Model was not restored, please try again',
         'success' 		=> 'Model restored successfully.'

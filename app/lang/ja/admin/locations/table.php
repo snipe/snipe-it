@@ -3,15 +3,15 @@
 return array(
 
     'id'      		=> 'ID',
-    'city'   		=> 'City',
-    'state'   		=> 'State',
-    'country'   	=> 'Country',
-    'create'		=> 'Create Location',
-    'update'		=> 'Update Location',
-    'name'			=> 'Location Name',
-    'address'		=> 'Address',
-    'zip'			=> 'Postal Code',
-    'locations'		=> 'Locations',
-    'parent'		=> 'Parent',
-    'currency'  	=> 'Location Currency', // this is deprecated
+    'city'   		=> '市区町村',
+    'state'   		=> '都道府県',
+    'country'   	=> '国',
+    'create'		=> '所在地を作成',
+    'update'		=> '所在地を更新',
+    'name'			=> 'ロケーション名',
+    'address'		=> '住所',
+    'zip'			=> '郵便番号',
+    'locations'		=> 'ロケーション',
+    'parent'		=> '上位',
+    'currency'  	=> '現地通貨', // this is deprecated
 );

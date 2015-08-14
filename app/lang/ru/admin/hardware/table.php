@@ -18,5 +18,6 @@ return array(
     'serial'   		=> 'Серийный номер',
     'status'   		=> 'Статус',
     'title'      	=> 'Актив ',
+    'days_without_acceptance' => 'Days Without Acceptance'
 
 );

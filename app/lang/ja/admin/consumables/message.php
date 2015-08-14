@@ -2,34 +2,34 @@
 
 return array(
 
-    'does_not_exist' => 'Consumable does not exist.',
+    'does_not_exist' => '消耗品は存在しません。',
 
     'create' => array(
-        'error'   => 'Consumable was not created, please try again.',
-        'success' => 'Consumable created successfully.'
+        'error'   => '消耗品は作成できませんでした。もう一度試して下さい。',
+        'success' => '消耗品の作成に成功しました。'
     ),
 
     'update' => array(
-        'error'   => 'Consumable was not updated, please try again',
-        'success' => 'Consumable updated successfully.'
+        'error'   => '消耗品の更新に失敗しました。もう一度試して下さい。',
+        'success' => '消耗品の更新に成功しました。'
     ),
 
     'delete' => array(
-        'confirm'   => 'Are you sure you wish to delete this accessory?',
-        'error'   => 'There was an issue deleting the consumable. Please try again.',
-        'success' => 'The accessory was deleted successfully.'
+        'confirm'   => 'この付属品を本当に削除してもよいですか？',
+        'error'   => '消耗品の削除に失敗しました。もう一度試して下さい。',
+        'success' => '付属品の削除に成功しました。'
     ),
 
      'checkout' => array(
-        'error'   		=> 'Consumable was not checked out, please try again',
-        'success' 		=> 'Consumable checked out successfully.',
-        'user_does_not_exist' => 'That user is invalid. Please try again.'
+        'error'   		=> '消耗品はチェックアウトできませんでした。もう一度試して下さい。',
+        'success' 		=> '消耗品はチェックアウトに成功しました。',
+        'user_does_not_exist' => '利用者が正しくありません。もう一度試して下さい。'
     ),
 
     'checkin' => array(
-        'error'   		=> 'Consumable was not checked in, please try again',
-        'success' 		=> 'Consumable checked in successfully.',
-        'user_does_not_exist' => 'That user is invalid. Please try again.'
+        'error'   		=> '消耗品はチェックインされませんでした。もう一度試して下さい。',
+        'success' 		=> '消耗品はチェックインされました。',
+        'user_does_not_exist' => '利用者が正しくありません。もう一度試して下さい。'
     )
 
 

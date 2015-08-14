@@ -51,7 +51,7 @@
 	            @else
 	            	 {{{ $asset->asset_tag }}}
 	            @endif
-	           
+
 	        </td>
             <td>{{{ $asset->model->name }}}</td>
             @if (Setting::getSettings()->display_asset_name)
@@ -67,16 +67,15 @@
 					{{{ $asset->assigneduser->fullName() }}}
 					</a>
             	 @endif
-					
+
             @endif
             </td>
             <td>
-            @if (isset($asset->assigned_to))
-				@if (($asset->assigned_to > 0) && ($asset->assigneduser->location_id > 0)) {{{ Location::find($asset->assigneduser->location_id)->city }}}
-						,
-						{{{ Location::find($asset->assigneduser->location_id)->state }}}
-				@endif
-            @endif
+                @if ($asset->assetloc)
+                    {{{ $asset->assetloc->name }}}
+                @elseif ($asset->defaultloc)
+                    {{{ $asset->defaultloc->name }}}
+                @endif
             </td>
             <td>{{{ $asset->purchase_date }}}</td>
 
@@ -86,11 +85,28 @@
             </td>
 
             @if ($asset->purchase_cost > 0)
-            <td class="align-right">@lang('general.currency')
+            <td class="align-right">
+                @if ($asset->assetloc )
+                    {{{ $asset->assetloc->currency }}}
+                @else
+                    {{{ Setting::first()->default_currency }}}
+                @endif
             	{{{ number_format($asset->purchase_cost) }}}</td>
-            <td class="align-right">@lang('general.currency')
+            <td class="align-right">
+                @if ($asset->assetloc )
+                    {{{ $asset->assetloc->currency }}}
+                @else
+                    {{{ Setting::first()->default_currency }}}
+                @endif
+
             	{{{ number_format($asset->getDepreciatedValue()) }}}</td>
-            <td class="align-right">@lang('general.currency')
+            <td class="align-right">
+                @if ($asset->assetloc)
+                    {{{ $asset->assetloc->currency }}}
+                @else
+                    {{{ Setting::first()->default_currency }}}
+                @endif
+
             	-{{{ number_format(($asset->purchase_cost - $asset->getDepreciatedValue())) }}}</td>
             @else
 	            <td></td>

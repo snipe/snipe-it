@@ -22,7 +22,7 @@ return array(
     'upload' => array(
         'error'   => '파일(들)이 업로드 되지 않았습니다. 다시 시도해 주세요.',
         'success' => '파일(들)이 업로드 되었습니다.',
-        'nofiles' => '업로드 할 파일을 선택해 주세요',
+        'nofiles' => 'You did not select any files for upload, or the file you are trying to upload is too large',
         'invalidfiles' => '하나 이상의 파일이 너무 크거나 허용되지 않는  형식입니다. 허용되는 형식은 png, gif, jpg, doc, docx, pdf, txt 입니다.',
     ),
 

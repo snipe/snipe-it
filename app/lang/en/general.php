@@ -3,6 +3,7 @@
     return [
     'accessories'			=> 'Accessories',
     'accessory'				=> 'Accessory',
+    'accessory_report'			=> 'Accessory Report',
     'action'                => 'Action',
     'activity_report'		=> 'Activity Report',
     'address'				=> 'Address',
@@ -100,6 +101,7 @@
     'ready_to_deploy'		=> 'Ready to Deploy',
     'recent_activity'		=> 'Recent Activity',
     'reports'				=> 'Reports',
+    'requested'				=> 'Requested',
     'save'  				=> 'Save',
     'select'				=> 'Select',
     'search'				=> 'Search',
@@ -128,6 +130,7 @@
     'user'					=> 'User',
     'accepted'			    => 'accepted',
     'declined'			    => 'declined',
+    'unaccepted_asset_report' => 'Unaccepted Assets',
     'users'                 => 'Users',
     'viewassets'  			=> 'View Assigned Assets',
     'website'               => 'Website',

@@ -7,6 +7,7 @@ composer.phar
 /app/database/*.sqlite
 /app/storage/meta/services.json
 /app/config/*/mail.php
+/app/config/*/session.php
 /app/config/*/database.php
 /app/config/*/app.php
 public/packages/*
@@ -24,3 +25,5 @@ public/uploads/logo.png
 public/assets/.siteflow
 app/config/local/session.php
 .couscous
+tests/_support/_generated/*
+tests/_data/scenarios

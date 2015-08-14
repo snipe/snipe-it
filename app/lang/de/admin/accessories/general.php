@@ -5,7 +5,7 @@ return array(
     'about_accessories_text'  			=> 'Ein Zubehör ist alles was Sie an einem Benutzer ausgeben können, jedoch keine Seriennummer besitzt (oder wo es keinen Sinn macht eben diese zu verwalten). Zum Beispiel: Computer Mäuse und Tastaturen.',
     'accessory_category' 				=> 'Züberhor Kategorie',
     'accessory_name'  					=> 'Zubehör Name',
-    'create'  							=> 'Create Accessory',
+    'create'  							=> 'Zubehör neu erstellen',
     'eula_text'							=> 'Kategorie EULA',
     'eula_text_help'					=> 'Dieses Feld erlaubt Ihnen die EULA Ihren Bedürfnissen nach Asset Typ anzupassen.Wenn Sie nur eine EULA für alle Assets haben, aktivieren Sie die Checkbox unterhalb um die Standard EULA zu verwenden.',
     'require_acceptance'				=> 'Erfordert die Zustimmung der Assets in dieser Kategorie durch den Benutzer.',
@@ -13,7 +13,7 @@ return array(
     'qty'  								=> 'Anzahl',
     'total'  							=> 'Gesamt',
     'remaining'  						=> 'Verfügbar',
-    'update'  							=> 'Update Accessory',
+    'update'  							=> 'Zubehör überarbeiten',
     'use_default_eula'					=> 'Die <a href="#" data-toggle="modal" data-target="#eulaModal">Standard EULA</a> statt dessen verwenden.',
     'use_default_eula_disabled'			=> '<del>Die Standard EULA statt dessen verwenden.</del>Keine Standard EULA definiert. Bitte fügen Sie eine in den Einstellungen hinzu.',
 
