@@ -5,21 +5,21 @@ use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Input\InputArgument;
 use League\Csv\Reader;
 
-class ImportCommand extends Command {
+class LicenseImportCommand extends Command {
 
 	/**
 	 * The console command name.
 	 *
 	 * @var string
 	 */
-	protected $name = 'import:csv';
+	protected $name = 'license-import:csv';
 
 	/**
 	 * The console command description.
 	 *
 	 * @var string
 	 */
-	protected $description = 'Import from CSV';
+	protected $description = 'Import Licenses from CSV';
 
 	/**
 	 * Create a new command instance.
@@ -42,9 +42,9 @@ class ImportCommand extends Command {
 
 
 		if (!$this->option('testrun')=='true') {
-			$this->comment('======= Importing '.$filename.' =========');
+			$this->comment('======= Importing Licenses from '.$filename.' =========');
 		} else {
-			$this->comment('====== TEST ONLY Import for '.$filename.' ====');
+			$this->comment('====== TEST ONLY License Import for '.$filename.' ====');
 			$this->comment('============== NO DATA WILL BE WRITTEN ==============');
 		}
 
@@ -76,61 +76,90 @@ class ImportCommand extends Command {
 			}
 
 			if (array_key_exists('2',$row)) {
-				$user_asset_category = trim($row[2]);
+				$user_username = trim($row[2]);
 			} else {
-				$user_asset_category = '';
+				$user_username = '';
 			}
 
 			if (array_key_exists('3',$row)) {
-				$user_asset_name = trim($row[3]);
+				$user_license_name = trim($row[3]);
 			} else {
-				$user_asset_name = '';
+				$user_license_name = '';
 			}
 
 			if (array_key_exists('4',$row)) {
-				$user_asset_mfgr = trim($row[4]);
+				$user_license_serial = trim($row[4]);
 			} else {
-				$user_asset_mfgr = '';
+				$user_license_serial = '';
 			}
 
 			if (array_key_exists('5',$row)) {
-				$user_asset_modelno = trim($row[5]);
+				$user_licensed_to_name = trim($row[5]);
 			} else {
-				$user_asset_modelno = '';
+				$user_licensed_to_name = '';
 			}
 
 			if (array_key_exists('6',$row)) {
-				$user_asset_serial = trim($row[6]);
+				$user_licensed_to_email = trim($row[6]);
 			} else {
-				$user_asset_serial = '';
+				$user_licensed_to_email = '';
 			}
 
 			if (array_key_exists('7',$row)) {
-				$user_asset_tag = trim($row[7]);
+				$user_license_seats = trim($row[7]);
 			} else {
-				$user_asset_tag = '';
+				$user_license_seats = '';
 			}
 
 			if (array_key_exists('8',$row)) {
-				$user_asset_location = trim($row[8]);
+				$user_license_reassignable = trim($row[8]);
+				if ($user_license_reassignable!='') {
+					if ((strtolower($user_license_reassignable)=='yes') || (strtolower($user_license_reassignable)=='true') || ($user_license_reassignable=='1')) {
+						$user_license_reassignable = 1;
+					}
+				} else {
+					$user_license_reassignable = 0;
+				}
 			} else {
-				$user_asset_location = '';
+				$user_license_reassignable = 0;
 			}
 
 			if (array_key_exists('9',$row)) {
-				$user_asset_notes = trim($row[9]);
+				$user_license_supplier = trim($row[9]);
 			} else {
-				$user_asset_notes = '';
+				$user_license_supplier = '';
 			}
 
 			if (array_key_exists('10',$row)) {
-				if ($row[10]!='') {
-					$user_asset_purchase_date = date("Y-m-d 00:00:01", strtotime($row[10]));
+				$user_license_maintained = trim($row[10]);
+
+				if ($user_license_maintained!='') {
+					if ((strtolower($user_license_maintained)=='yes') || (strtolower($user_license_maintained)=='true') || ($user_license_maintained=='1')) {
+						$user_license_maintained = 1;
+					}
 				} else {
-					$user_asset_purchase_date = '';
+					$user_license_maintained = 0;
+				}
+
+
+			} else {
+				$user_license_maintained = '';
+			}
+
+			if (array_key_exists('11',$row)) {
+				$user_license_notes = trim($row[11]);
+			} else {
+				$user_license_notes = '';
+			}
+
+			if (array_key_exists('12',$row)) {
+				if ($row[12]!='') {
+					$user_license_purchase_date = date("Y-m-d 00:00:01", strtotime($row[12]));
+				} else {
+					$user_license_purchase_date = '';
 				}
 			} else {
-				$user_asset_purchase_date = '';
+				$user_license_purchase_date = 0;
 			}
 
 			// A number was given instead of a name
@@ -140,7 +169,7 @@ class ImportCommand extends Command {
 			// No name was given
 
 			} elseif ($user_name=='') {
-				$this->comment('No user data provided - skipping user creation, just adding asset');
+				$this->comment('No user data provided - skipping user creation, just adding license');
 				$first_name = '';
 				$last_name = '';
 				$user_username = '';
@@ -193,15 +222,16 @@ class ImportCommand extends Command {
 			$this->comment('Last Name: '.$last_name);
 			$this->comment('Username: '.$user_username);
 			$this->comment('Email: '.$user_email);
-			$this->comment('Category Name: '.$user_asset_category);
-			$this->comment('Item: '.$user_asset_name);
-			$this->comment('Manufacturer ID: '.$user_asset_mfgr);
-			$this->comment('Model No: '.$user_asset_modelno);
-			$this->comment('Serial No: '.$user_asset_serial);
-			$this->comment('Asset Tag: '.$user_asset_tag);
-			$this->comment('Location: '.$user_asset_location);
-			$this->comment('Purchase Date: '.$user_asset_purchase_date);
-			$this->comment('Notes: '.$user_asset_notes);
+			$this->comment('License Name: '.$user_license_name);
+			$this->comment('Serial No: '.$user_license_serial);
+			$this->comment('Licensed To Name: '.$user_licensed_to_name);
+			$this->comment('Licensed To Email: '.$user_licensed_to_email);
+			$this->comment('Seats: '.$user_license_seats);
+			$this->comment('Reassignable: '.$user_license_reassignable);
+			$this->comment('Supplier: '.$user_license_supplier);
+			$this->comment('Maintained: '.$user_license_maintained);
+			$this->comment('Notes: '.$user_license_notes);
+			$this->comment('Purchase Date: '.$user_license_purchase_date);
 
 			$this->comment('------------- Action Summary ----------------');
 
@@ -221,7 +251,7 @@ class ImportCommand extends Command {
 							'admin' => 0,
 							'user'  => 1,
 						),
-						'notes'         => 'Imported user'
+						'notes'         => 'User importerd through license importer'
 					));
 
 					// Find the group using the group id
@@ -233,114 +263,75 @@ class ImportCommand extends Command {
 				}
 			} else {
 				$user = new User;
+				$user->user_id = NULL;
 			}
 
-			// Check for the location match and create it if it doesn't exist
-			if ($location = Location::where('name', $user_asset_location)->first()) {
-				$this->comment('Location '.$user_asset_location.' already exists');
+
+			// Check for the supplier match and create it if it doesn't exist
+			if ($supplier = Supplier::where('name', $user_license_supplier)->first()) {
+				$this->comment('Supplier '.$user_license_supplier.' already exists');
 			} else {
-				$location = new Location();
-				$location->name = e($user_asset_location);
-				$location->address = '';
-				$location->city = '';
-				$location->state = '';
-				$location->country = '';
-				$location->user_id = 1;
+				$supplier = new Supplier();
+				$supplier->name = e($user_license_supplier);
+				$supplier->user_id = 1;
 
-				if (!$this->option('testrun')=='true') {
+				if ($supplier->save()) {
+					$this->comment('Supplier '.$user_license_supplier.' was created');
+	            } else {
+					$this->comment('Something went wrong! Supplier '.$user_license_supplier.' was NOT created');
+				}
 
-					if ($location->save()) {
-						$this->comment('Location '.$user_asset_location.' was created');
-		            } else {
-						$this->comment('Something went wrong! Location '.$user_asset_location.' was NOT created');
+			}
+
+
+			// Add the license
+			$license = new License();
+			$license->name = e($user_license_name);
+			if ($user_license_purchase_date!='') {
+				$license->purchase_date = $user_license_purchase_date;
+			} else {
+				$license->purchase_date = NULL;
+			}
+			$license->serial = e($user_license_serial);
+			$license->seats = e($user_license_seats);
+			$license->supplier_id = $supplier->id;
+			$license->user_id = 1;
+			if ($user_license_purchase_date!='') {
+				$license->purchase_date = $user_license_purchase_date;
+			} else {
+				$license->purchase_date = NULL;
+			}
+			$license->license_name = $user_licensed_to_name;
+			$license->license_email = $user_licensed_to_email;
+			$license->notes = e($user_license_notes);
+
+			if ($license->save()) {
+				$this->comment('License '.$user_license_name.' with serial number '.$user_license_serial.' was created');
+
+
+				$license_seat_created = 0;
+
+				for ($x = 0; $x < $user_license_seats; $x++) {
+					// Create the license seat entries
+					$license_seat = new LicenseSeat();
+					$license_seat->license_id = $license->id;
+					$license_seat->assigned_to = $user->id;
+					if ($license_seat->save()) {
+						$license_seat_created++;
 					}
+				}
 
+				if ($license_seat_created > 0) {
+					$this->comment($license_seat_created.' seats were created');
 				} else {
-					$this->comment('Location '.$user_asset_location.' was (not) created - test run only');
+					$this->comment('Something went wrong! NO seats for '.$user_license_name.' were created');
 				}
 
+
+
+            } else {
+				$this->comment('Something went wrong! License '.$user_license_name.' was NOT created');
 			}
-
-			// Check for the category match and create it if it doesn't exist
-			if ($category = Category::where('name', $user_asset_category)->where('category_type', 'asset')->first()) {
-				$this->comment('Category '.$user_asset_category.' already exists');
-			} else {
-				$category = new Category();
-				$category->name = e($user_asset_category);
-				$category->category_type = 'asset';
-				$category->user_id = 1;
-
-				if ($category->save()) {
-					$this->comment('Category '.$user_asset_category.' was created');
-	            } else {
-					$this->comment('Something went wrong! Category '.$user_asset_category.' was NOT created');
-				}
-
-			}
-
-			// Check for the manufacturer match and create it if it doesn't exist
-			if ($manufacturer = Manufacturer::where('name', $user_asset_mfgr)->first()) {
-				$this->comment('Manufacturer '.$user_asset_mfgr.' already exists');
-			} else {
-				$manufacturer = new Manufacturer();
-				$manufacturer->name = e($user_asset_mfgr);
-				$manufacturer->user_id = 1;
-
-				if ($manufacturer->save()) {
-					$this->comment('Manufacturer '.$user_asset_mfgr.' was created');
-	            } else {
-					$this->comment('Something went wrong! Manufacturer '.$user_asset_mfgr.' was NOT created');
-				}
-
-			}
-
-			// Check for the asset model match and create it if it doesn't exist
-			if ($asset_model = Model::where('name', $user_asset_name)->where('modelno', $user_asset_modelno)->where('category_id', $category->id)->where('manufacturer_id', $manufacturer->id)->first()) {
-				$this->comment('The Asset Model '.$user_asset_name.' with model number '.$user_asset_modelno.' already exists');
-			} else {
-				$asset_model = new Model();
-				$asset_model->name = e($user_asset_name);
-				$asset_model->manufacturer_id = $manufacturer->id;
-				$asset_model->modelno = e($user_asset_modelno);
-				$asset_model->category_id = $category->id;
-				$asset_model->user_id = 1;
-
-				if ($asset_model->save()) {
-					$this->comment('Asset Model '.$user_asset_name.' with model number '.$user_asset_modelno.' was created');
-	            } else {
-					$this->comment('Something went wrong! Asset Model '.$user_asset_name.' was NOT created');
-				}
-
-			}
-
-			// Check for the asset match and create it if it doesn't exist
-
-				$asset = new Asset();
-				$asset->name = e($user_asset_name);
-				if ($user_asset_purchase_date!='') {
-					$asset->purchase_date = $user_asset_purchase_date;
-				} else {
-					$asset->purchase_date = NULL;
-				}
-				$asset->serial = e($user_asset_serial);
-				$asset->asset_tag = e($user_asset_tag);
-				$asset->model_id = $asset_model->id;
-				$asset->assigned_to = $user->id;
-				$asset->rtd_location_id = $location->id;
-				$asset->user_id = 1;
-				$asset->status_id = $status_id;
-				if ($user_asset_purchase_date!='') {
-					$asset->purchase_date = $user_asset_purchase_date;
-				} else {
-					$asset->purchase_date = NULL;
-				}
-				$asset->notes = e($user_asset_notes);
-
-				if ($asset->save()) {
-					$this->comment('Asset '.$user_asset_name.' with serial number '.$user_asset_serial.' was created');
-	            } else {
-					$this->comment('Something went wrong! Asset '.$user_asset_name.' was NOT created');
-				}
 
 
 			$this->comment('=====================================');

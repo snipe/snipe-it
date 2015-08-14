@@ -15,4 +15,5 @@
     Artisan::add( new SendExpirationAlerts );
     Artisan::add( new Versioning );
     Artisan::add( new SystemBackup );
-    Artisan::add( new ImportCommand );
+    Artisan::add( new AssetImportCommand );
+    Artisan::add( new LicenseImportCommand );
