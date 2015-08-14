@@ -1084,6 +1084,7 @@ class UsersController extends AdminController {
         $ldap_result_last_name = Config::get('ldap.result.last.name');
         $ldap_result_first_name = Config::get('ldap.result.first.name');
         $ldap_result_email = Config::get('ldap.result.email');
+        $ldap_result_active_flag = Config::get('ldap.result.active.flag');
         
         $ldapconn = ldap_connect($url)
                 or die("Could not connect to LDAP server.");
@@ -1098,7 +1099,7 @@ class UsersController extends AdminController {
 
         $summary = array();
         for ($i = 0; $i < $results["count"]; $i++) {
-            if ($results[$i]["pyactive"][0] == "TRUE") {
+            if ($results[$i][$ldap_result_active_flag][0] == "TRUE") {
 
                 $item = array();
                 $item["username"] = isset( $results[$i][$ldap_result_username][0] ) ? $results[$i][$ldap_result_username][0] : "";
