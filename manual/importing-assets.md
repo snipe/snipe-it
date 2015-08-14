@@ -11,7 +11,7 @@ There is an asset import tool in later versions of Snipe-IT ( > `1.2.8`). It is 
 ## Usage:
 
 ```
-php artisan import:csv path/to/your/file.csv --domain=yourdomain.com --email_format=firstname.lastname
+php artisan asset-import:csv path/to/your/file.csv --domain=yourdomain.com --email_format=firstname.lastname
 ```
 
 
@@ -30,7 +30,7 @@ Name, Email, Asset Category, Asset Model, Manufacturer, Asset Model Number, Asse
 
 The importer will ignore the first line of your CSV, so if you don't have a header row, you should add one.
 
-[__Download a sample CSV with dummy data__](http://docs.snipeitapp.com/sample.csv)
+[__Download a sample CSV with dummy data__](http://docs.snipeitapp.com/sample-assets.csv)
 
 | Field   | Example Data | Required | Notes |
 | ------------- | ------------- |

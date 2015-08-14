@@ -110,6 +110,9 @@ menu:
                 importing-assets:
                     text: "Importing Assets"
                     relativeUrl: manual/importing-assets.html
+                importing-licenses:
+                    text: "Importing Licenses"
+                    relativeUrl: manual/importing-licenses.html
                 alerts:
                     text: "Configuring Alerts"
                     relativeUrl: manual/alerts.html
