@@ -1060,9 +1060,9 @@ class UsersController extends AdminController {
     protected $ldapValidationRules = array(
         'firstname' => 'required|alpha_space|min:2',
         'lastname' => 'required|alpha_space|min:2',
-        'pycyin' => 'required|numeric',
+        'employee_number' => 'required|numeric',
         'username' => 'required|min:2|unique:users,username',
-        'mail' => 'required|email|unique:users,email',
+        'email' => 'required|email|unique:users,email',
     );
 
     /**
@@ -1079,6 +1079,12 @@ class UsersController extends AdminController {
         $base_dn = Config::get('ldap.basedn');
         $filter = Config::get('ldap.filter');
 
+        $ldap_result_username = Config::get('ldap.result.username');
+        $ldap_result_emp_num = Config::get('ldap.result.emp.num');
+        $ldap_result_last_name = Config::get('ldap.result.last.name');
+        $ldap_result_first_name = Config::get('ldap.result.first.name');
+        $ldap_result_email = Config::get('ldap.result.email');
+        
         $ldapconn = ldap_connect($url)
                 or die("Could not connect to LDAP server.");
 
@@ -1095,12 +1101,11 @@ class UsersController extends AdminController {
             if ($results[$i]["pyactive"][0] == "TRUE") {
 
                 $item = array();
-                $item["username"] = isset( $results[$i]["pyusername"][0] ) ? $results[$i]["pyusername"][0] : "";
-                $item["pycyin"] = isset( $results[$i]["pycyin"][0] ) ? $results[$i]["pycyin"][0] : "";
-                $item["cn"] = isset( $results[$i]["cn"][0] ) ? $results[$i]["cn"][0] : "";
-                $item["lastname"] = isset( $results[$i]["sn"][0] ) ? $results[$i]["sn"][0] : "";
-                $item["firstname"] = isset( $results[$i]["givenname"][0] ) ? $results[$i]["givenname"][0] : "";
-                $item["mail"] = isset( $results[$i]["mail"][0] ) ? $results[$i]["mail"][0] : "" ;
+                $item["username"] = isset( $results[$i][$ldap_result_username][0] ) ? $results[$i][$ldap_result_username][0] : "";
+                $item["employee_number"] = isset( $results[$i][$ldap_result_emp_num][0] ) ? $results[$i][$ldap_result_emp_num][0] : "";
+                $item["lastname"] = isset( $results[$i][$ldap_result_last_name][0] ) ? $results[$i][$ldap_result_last_name][0] : "";
+                $item["firstname"] = isset( $results[$i][$ldap_result_first_name][0] ) ? $results[$i][$ldap_result_first_name][0] : "";
+                $item["email"] = isset( $results[$i][$ldap_result_email][0] ) ? $results[$i][$ldap_result_email][0] : "" ;
 
                 $user = DB::table('users')->where('username', $item["username"])->first();
                 if ($user) {
@@ -1121,8 +1126,8 @@ class UsersController extends AdminController {
                             'first_name' => $item["firstname"],
                             'last_name' => $item["lastname"],
                             'username' => $item["username"],
-                            'email' => $item["mail"],
-                            'employee_num' => $item["pycyin"],
+                            'email' => $item["email"],
+                            'employee_num' => $item["employee_number"],
                             'password' => $pass,
                             'activated' => 1,
                             'location_id' => 1,
@@ -1148,10 +1153,8 @@ class UsersController extends AdminController {
                 array_push($summary, $item);
             }
             /* Easy break in the loop */
-            /*
-            if ($i >= 15)
+            if ($i >= 1)
                 break;
-            */
         }
 
 
