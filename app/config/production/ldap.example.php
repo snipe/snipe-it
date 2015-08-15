@@ -75,6 +75,12 @@ return array(
     'result.last.name'  => "",
     'result.first.name' => "",
     'result.email' => "",
+    
+    /*
+    | This field is optional as not all LDAP directories will have it.  If yours
+    | does not have it, just leave this field blank and the extra check will
+    | be omitted.
+    */
     'result.active.flag' => "",
     
     /*
