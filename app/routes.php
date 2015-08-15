@@ -393,6 +393,9 @@
         # User Management
         Route::group( [ 'prefix' => 'users' ], function () {
 
+            Route::get( 'ldap', ['as' => 'ldap/user', 'uses' => 'UsersController@getLDAP' ] );
+            Route::post( 'ldap', 'UsersController@postLDAP' );
+            
             Route::get( 'create', [ 'as' => 'create/user', 'uses' => 'UsersController@getCreate' ] );
             Route::post( 'create', 'UsersController@postCreate' );
             Route::get( 'import', [ 'as' => 'import/user', 'uses' => 'UsersController@getImport' ] );
