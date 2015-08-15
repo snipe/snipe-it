@@ -36,6 +36,9 @@ before_script:
 script: ./vendor/bin/codecept run --env travis-ci
 #script: phpunit
 
+after_failure:
+  - cat tests/_output/WelcomeCept.fail.html
+  
 # configure notifications (email, IRC, campfire etc)
 notifications:
   email: false
