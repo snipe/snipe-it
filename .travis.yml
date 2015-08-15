@@ -20,9 +20,9 @@ env:
 before_script:
   - if [[ "$DB" == "mysql" ]]; then mysql -e "create database IF NOT EXISTS snipeit_unit;" -utravis; fi
   - curl -s http://getcomposer.org/installer | php
-  - cp app/config/travis-ci/app.example.php app/config/testing/app.php
-  - cp app/config/travis-ci/database.example.php app/config/testing/database.php
-  - cp app/config/travis-ci/mail.example.php app/config/testing/mail.php
+  - cp app/config/travis-ci/app.example.php app/config/travis-ci/app.php
+  - cp app/config/travis-ci/database.example.php app/config/travis-ci/database.php
+  - cp app/config/travis-ci/mail.example.php app/config/travis-ci/mail.php
   - composer self-update
   - composer install --prefer-source --no-interaction
   - php artisan key:generate --env=testing
