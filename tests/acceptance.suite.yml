@@ -7,12 +7,6 @@
 class_name: AcceptanceTester
 modules:
     enabled:
+        - \Helper\Acceptance
         - PhpBrowser:
             url: http://snipe-it.dev
-# Even when filters are set to true, this doesn't seem to work.
-# Also, it looks like the Laravel4 module isn't really meant for
-# Acceptance tests?
-#        - Laravel4:
-#            filters: true
-#            cleanup: true
-#            environment: testing
