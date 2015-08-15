@@ -1087,7 +1087,7 @@ class UsersController extends AdminController {
         $ldap_result_active_flag = Config::get('ldap.result.active.flag');
 
 
-        $ldapconn = @ldap_connect($url, 389);
+        $ldapconn = @ldap_connect($url);
         if (!$ldapconn) {
             return Redirect::route('users')->with('error', Lang::get('admin/users/message.error.ldap_could_not_connect'));
         }
