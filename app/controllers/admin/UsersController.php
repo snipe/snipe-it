@@ -1060,9 +1060,9 @@ class UsersController extends AdminController {
     protected $ldapValidationRules = array(
         'firstname' => 'required|alpha_space|min:2',
         'lastname' => 'required|alpha_space|min:2',
-        'employee_number' => 'required|numeric',
+        'employee_number' => 'numeric',
         'username' => 'required|min:2|unique:users,username',
-        'email' => 'required|email|unique:users,email',
+        'email' => 'email|unique:users,email',
     );
 
     /**
@@ -1073,6 +1073,7 @@ class UsersController extends AdminController {
      */
     public function postLDAP() {
 
+        $ldap_version = Config::get('ldap.version');
         $url = Config::get('ldap.url');
         $username = Config::get('ldap.username');
         $password = Config::get('ldap.password');
@@ -1094,7 +1095,7 @@ class UsersController extends AdminController {
         }
 
         // Set options
-        $ldapopt = @ldap_set_option($ldapconn, LDAP_OPT_PROTOCOL_VERSION, 3);
+        $ldapopt = @ldap_set_option($ldapconn, LDAP_OPT_PROTOCOL_VERSION, $ldap_version);
         if (!$ldapopt) {
             return Redirect::route('users')->with('error', Lang::get('admin/users/message.error.ldap_could_not_connect'));
         }
@@ -1106,7 +1107,7 @@ class UsersController extends AdminController {
         }
 
         // Perform the search
-        $search_results = @ldap_search($ldapconn, $base_dn, $filter);
+        $search_results = @ldap_search($ldapconn, $base_dn, '('.$filter.')');
         if (!$search_results) {
             return Redirect::route('users')->with('error', Lang::get('admin/users/message.error.ldap_could_not_search').ldap_error($ldapconn));
         }
