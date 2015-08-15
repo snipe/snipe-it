@@ -52,7 +52,7 @@ return array(
     | The search filter for the LDAP query.
     |
     */
-	'filter' => "",
+	'filter' => "&(cn=*)",
 
 
 	/*

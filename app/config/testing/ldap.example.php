@@ -52,7 +52,7 @@ return array(
     | The search filter for the LDAP query.
     |
     */
-	'filter' => "",
+	'filter' => "&(cn=*)",
 
 
 	/*
@@ -101,7 +101,7 @@ return array(
     | The LDAP query that we want to execute when authenticating a user
     |
     */
-    'ldap_version' => 3,
+    'version' => 3,
 
 
 );
