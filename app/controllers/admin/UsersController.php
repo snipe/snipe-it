@@ -1068,7 +1068,7 @@ class UsersController extends AdminController {
     /**
      * LDAP form processing.
      *
-     * @Auther Aldin Alaily
+     * @Auther Aladin Alaily
      * @return Redirect
      */
     public function postLDAP() {
