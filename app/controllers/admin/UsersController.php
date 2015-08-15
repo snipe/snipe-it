@@ -1068,7 +1068,7 @@ class UsersController extends AdminController {
     /**
      * LDAP form processing.
      *
-     * @Auther Aladin Alaily
+     * @author Aldin Alaily
      * @return Redirect
      */
     public function postLDAP() {
@@ -1119,7 +1119,7 @@ class UsersController extends AdminController {
 
         $summary = array();
         for ($i = 0; $i < $results["count"]; $i++) {
-            if ($results[$i][$ldap_result_active_flag][0] == "TRUE") {
+            if (empty($ldap_result_active_flag) || $results[$i][$ldap_result_active_flag][0] == "TRUE") {
 
                 $item = array();
                 $item["username"] = isset( $results[$i][$ldap_result_username][0] ) ? $results[$i][$ldap_result_username][0] : "";
@@ -1173,11 +1173,7 @@ class UsersController extends AdminController {
 
                 array_push($summary, $item);
             }
-            /* Easy break in the loop */
-            /*
-            if ($i >= 1)
-                break;
-            */
+
         }
 
 
