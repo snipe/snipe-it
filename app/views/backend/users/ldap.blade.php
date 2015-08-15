@@ -32,14 +32,14 @@ Create a User ::
 <script type="text/javascript" src="{{ Config::get('app.cdn.default') }}/js/pGenerator.jquery.js"></script>
 
 @if (Config::get('ldap.url')=='')
-    LDAP integration has not been configured for this installation.
+    @Lang('admin/users/message.ldap_not_configured')
 @else
 
     <p>
-        Connect to LDAP and create users.  Passwords will be auto-generated.
+        @Lang('admin/users/general.ldap_text')
     </p>
     <p>
-        LDAP configuration settings can be found in the app/config folder in a file called ldap.php
+        @Lang('admin/users/general.ldap_config_text')
     </p>
     <form class="form-horizontal" role="form" method="post" action="" id="ldap-form">
         <!-- CSRF Token -->
