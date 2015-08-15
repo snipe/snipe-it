@@ -1112,7 +1112,7 @@ class UsersController extends AdminController {
 
         $summary = array();
         for ($i = 0; $i < $results["count"]; $i++) {
-            if ($results[$i][$ldap_result_active_flag][0] == "TRUE") {
+            if (empty($ldap_result_active_flag) || $results[$i][$ldap_result_active_flag][0] == "TRUE") {
 
                 $item = array();
                 $item["username"] = isset( $results[$i][$ldap_result_username][0] ) ? $results[$i][$ldap_result_username][0] : "";
