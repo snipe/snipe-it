@@ -28,3 +28,4 @@ app/config/local/session.php
 tests/_support/_generated/*
 tests/_data/scenarios
 nbproject/*
+app/config/local/ldap.php
