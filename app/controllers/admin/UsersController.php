@@ -1068,7 +1068,7 @@ class UsersController extends AdminController {
     /**
      * LDAP form processing.
      *
-     * @Auther Aldin Alaily
+     * @author Aldin Alaily
      * @return Redirect
      */
     public function postLDAP() {
@@ -1166,11 +1166,7 @@ class UsersController extends AdminController {
 
                 array_push($summary, $item);
             }
-            /* Easy break in the loop */
-            /*
-            if ($i >= 1)
-                break;
-            */
+
         }
 
 
