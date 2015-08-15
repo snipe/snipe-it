@@ -7,7 +7,8 @@ return array(
     | URL
     |--------------------------------------------------------------------------
     |
-    | URL for the LDAP server.
+    | URL for the LDAP server. This should start with ldap://, for example:
+    | ldap://ldap.yourserver.com
     |
     */
     'url' => "",
@@ -18,7 +19,8 @@ return array(
     | Username
     |--------------------------------------------------------------------------
     |
-    | Username to use to connect authenticate to LDAP.
+    | Username to use to connect authenticate to LDAP, for example:
+    | cn=read-only-admin,dc=example,dc=com
     |
     */
 	'username' => "",
@@ -38,7 +40,8 @@ return array(
     | Basedn
     |--------------------------------------------------------------------------
     |
-    | The base where the search for users will be executed.
+    | The base where the search for users will be executed, for example:
+    | dc=example,dc=com
     |
     */
 	'basedn'   => "",
@@ -49,7 +52,8 @@ return array(
     | Filter
     |--------------------------------------------------------------------------
     |
-    | The search filter for the LDAP query.
+    | The search filter for the LDAP query. This probably does not have to be
+    | changed.
     |
     */
 	'filter' => "&(cn=*)",
@@ -71,24 +75,25 @@ return array(
     |
     */
     'result.username' => "",
-    'result.emp.num'  => "",
     'result.last.name'  => "",
     'result.first.name' => "",
-    'result.email' => "",
 
     /*
-    | This field is optional as not all LDAP directories will have it.  If yours
-    | does not have it, just leave this field blank and the extra check will
+    | These fields are optional as not all LDAP directories will have it.  If yours
+    | does not have them, just leave these blank and the extra check will
     | be omitted.
     */
     'result.active.flag' => "",
+    'result.emp.num'  => "",
+    'result.email' => "",
 
     /*
     |--------------------------------------------------------------------------
     | LDAP filter query for authentication
     |--------------------------------------------------------------------------
     |
-    | The LDAP query that we want to execute when authenticating a user
+    | The LDAP query that we want to execute when authenticating a user. This
+    | should not have to be changed.
     |
     */
     'authentication.filter.query' => "uid=",
@@ -98,7 +103,7 @@ return array(
     | LDAP Version
     |--------------------------------------------------------------------------
     |
-    | The LDAP query that we want to execute when authenticating a user
+    | Version of LDAP you are using.
     |
     */
     'version' => 3,
