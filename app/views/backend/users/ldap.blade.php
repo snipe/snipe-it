@@ -31,44 +31,47 @@ Create a User ::
 </div>
 <script type="text/javascript" src="{{ Config::get('app.cdn.default') }}/js/pGenerator.jquery.js"></script>
 
+@if (Config::get('ldap.url')=='')
+    LDAP integration has not been configured for this installation.
+@else
 
-<p>
-    Connect to LDAP and create users.  Passwords will be auto-generated.				
-</p>
-<p>
-    LDAP configuration settings can be found in the app/config folder in a file called ldap.php
-</p>
-<form class="form-horizontal" role="form" method="post" action="" id="ldap-form">
-    <!-- CSRF Token -->
-    <input type="hidden" name="_token" value="{{ csrf_token() }}" />
+    <p>
+        Connect to LDAP and create users.  Passwords will be auto-generated.
+    </p>
+    <p>
+        LDAP configuration settings can be found in the app/config folder in a file called ldap.php
+    </p>
+    <form class="form-horizontal" role="form" method="post" action="" id="ldap-form">
+        <!-- CSRF Token -->
+        <input type="hidden" name="_token" value="{{ csrf_token() }}" />
 
-    <button type="submit" class="btn btn-warning" id="sync">
-        <i id="sync-button-icon" class="fa fa-refresh icon-white"></i> <span id="sync-button-text">Synchronize</span>
-    </button>
-</form>
-@if (Session::get('summary'))
-<h3>Synchronization Results</h3>
-<table class="table table-bordered">
-    <tr>
-        <th>Username</th><th>Employee Number</th>
-        <th>First Name</th><th>Last Name</th>
-        <th>Email</th><th>Notes</th>
-    </tr>
-    <?php
-    $summary = Session::get('summary');
-    foreach ($summary as $entry) {
-        echo "<tr>";
-        echo "<td>" . $entry['username'] . "</td>";
-        echo "<td>" . $entry['employee_number'] . "</td>";
-        echo "<td>" . $entry['firstname'] . "</td>";
-        echo "<td>" . $entry['lastname'] . "</td>";
-        echo "<td>" . $entry['email'] . "</td>";
-        echo "<td>" . $entry['note'] . "</td>";
-        echo "</tr>";
-    }
-    ?>
-</table>
-
+        <button type="submit" class="btn btn-warning" id="sync">
+            <i id="sync-button-icon" class="fa fa-refresh icon-white"></i> <span id="sync-button-text">Synchronize</span>
+        </button>
+    </form>
+    @if (Session::get('summary'))
+    <h3>Synchronization Results</h3>
+    <table class="table table-bordered">
+        <tr>
+            <th>Username</th><th>Employee Number</th>
+            <th>First Name</th><th>Last Name</th>
+            <th>Email</th><th>Notes</th>
+        </tr>
+        <?php
+        $summary = Session::get('summary');
+        foreach ($summary as $entry) {
+            echo "<tr>";
+            echo "<td>" . $entry['username'] . "</td>";
+            echo "<td>" . $entry['employee_number'] . "</td>";
+            echo "<td>" . $entry['firstname'] . "</td>";
+            echo "<td>" . $entry['lastname'] . "</td>";
+            echo "<td>" . $entry['email'] . "</td>";
+            echo "<td>" . $entry['note'] . "</td>";
+            echo "</tr>";
+        }
+        ?>
+    </table>
+    @endif
 @endif
 
 @stop
