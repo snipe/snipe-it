@@ -1138,7 +1138,15 @@ class UsersController extends AdminController {
 
                     $validator = Validator::make($item, $this->ldapValidationRules);
                     if ($validator->fails()) {
-                        $item["note"] = "Validator failed: " . $validator->messages();
+                        $validator_msg = '';
+
+                		foreach($validator->messages()->all() as $key)
+                		{
+                			$validator_msg .= '<li>'.$key;
+                		}
+
+                        $item["note"] = '<span class="alert-msg">Validator failed: <br>'.$validator_msg.'</span>';
+
                     } else {
 
                         // Create the user if they don't exist.

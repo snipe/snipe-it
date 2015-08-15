@@ -29,7 +29,8 @@ Create a User ::
         </div>
     </h3>
 </div>
-<script type="text/javascript" src="{{ Config::get('app.cdn.default') }}/js/pGenerator.jquery.js"></script>
+
+<script type="text/javascript" src="{{ asset('/assets/js/pGenerator.jquery.js') }}"></script>
 
 @if (Config::get('ldap.url')=='')
     @Lang('admin/users/message.ldap_not_configured')

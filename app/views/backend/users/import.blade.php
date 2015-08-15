@@ -19,7 +19,7 @@ Create a User ::
     </h3>
 </div>
 
-<script type="text/javascript" src="{{ Config::get('app.cdn.default') }}/js/pGenerator.jquery.js"></script>
+<script type="text/javascript" src="{{ asset('/assets/js/pGenerator.jquery.js') }}"></script>
 
 <form class="form-horizontal" role="form" method="post" enctype="multipart/form-data" action="">
     <!-- CSRF Token -->
