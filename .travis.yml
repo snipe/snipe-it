@@ -25,7 +25,7 @@ before_script:
   - cp app/config/travis-ci/mail.example.php app/config/travis-ci/mail.php
   - composer self-update
   - composer install --prefer-source --no-interaction
-  - php artisan key:generate --env=testing
+  - php artisan key:generate --env=travis-ci
   - php artisan migrate:install --env=travis-ci --no-interaction -vvv
   - php artisan migrate --package cartalyst/sentry --env=travis-ci --no-interaction -vvv
   - php artisan migrate --env=travis-ci --no-interaction -vvv
