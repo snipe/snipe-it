@@ -6,7 +6,31 @@
 
 class_name: AcceptanceTester
 modules:
-    enabled:
-        - \Helper\Acceptance
-        - PhpBrowser:
+  enabled:
+    - \Helper\Acceptance
+    - Laravel4
+    - PhpBrowser
+  config:
+    PhpBrowser:
+      url: http://snipe-it.dev
+    Laravel4:
+      environment: travis-ci
+      filters: true
+
+env:
+  travis-ci:
+    modules:
+      config:
+        PhpBrowser:
+          url: http://snipe-laravel.app
+        Laravel4:
+          environment: travis-ci
+          filters: true
+  local:
+    modules:
+      config:
+        PhpBrowser:
             url: http://snipe-it.dev
+        Laravel4:
+          environment: travis-ci
+          filters: true

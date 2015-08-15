@@ -20,21 +20,21 @@ env:
 before_script:
   - if [[ "$DB" == "mysql" ]]; then mysql -e "create database IF NOT EXISTS snipeit_unit;" -utravis; fi
   - curl -s http://getcomposer.org/installer | php
-  - cp app/config/testing/app.example.php app/config/testing/app.php
-  - cp app/config/testing/database.example.php app/config/testing/database.php
-  - cp app/config/testing/mail.example.php app/config/testing/mail.php
+  - cp app/config/travis-ci/app.example.php app/config/testing/app.php
+  - cp app/config/travis-ci/database.example.php app/config/testing/database.php
+  - cp app/config/travis-ci/mail.example.php app/config/testing/mail.php
   - composer self-update
   - composer install --prefer-source --no-interaction
   - php artisan key:generate --env=testing
-  - php artisan migrate:install --env=testing --no-interaction -vvv
-  - php artisan migrate --package cartalyst/sentry --env=testing --no-interaction -vvv
-  - php artisan migrate --env=testing --no-interaction -vvv
-  - php artisan db:seed --env=testing --no-interaction -vvv
+  - php artisan migrate:install --env=travis-ci --no-interaction -vvv
+  - php artisan migrate --package cartalyst/sentry --env=travis-ci --no-interaction -vvv
+  - php artisan migrate --env=travis-ci --no-interaction -vvv
+  - php artisan db:seed --env=travis-ci --no-interaction -vvv
 
 # omitting "script:" will default to phpunit
 # use the $DB env variable to determine the phpunit.xml to use
-# script: ./vendor/bin/codecept run
-script: phpunit
+ script: ./vendor/bin/codecept run --env travis-ci
+#script: phpunit
 
 # configure notifications (email, IRC, campfire etc)
 notifications:
