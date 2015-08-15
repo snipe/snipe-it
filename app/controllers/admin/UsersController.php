@@ -1085,17 +1085,30 @@ class UsersController extends AdminController {
         $ldap_result_first_name = Config::get('ldap.result.first.name');
         $ldap_result_email = Config::get('ldap.result.email');
         $ldap_result_active_flag = Config::get('ldap.result.active.flag');
-        
-        $ldapconn = ldap_connect($url)
-                or die("Could not connect to LDAP server.");
+
+
+        $ldapconn = @ldap_connect($url, 389);
+        if (!$ldapconn) {
+            return Redirect::route('users')->with('error', Lang::get('admin/users/message.error.ldap_could_not_connect'));
+        }
 
         // Binding to ldap server
-        $ldapbind = ldap_bind($ldapconn, $username, $password)
-                or die("could not bind.");
+        $ldapbind = @ldap_bind($ldapconn, $username, $password);
+        if (!$ldapbind) {
+            return Redirect::route('users')->with('error', Lang::get('admin/users/message.error.ldap_could_not_bind').ldap_error($ldapconn));
+        }
 
         // Perform the search
-        $search_results = ldap_search($ldapconn, $base_dn, $filter);
-        $results = ldap_get_entries($ldapconn, $search_results);
+        $search_results = @ldap_search($ldapconn, $base_dn, $filter);
+        if (!$search_results) {
+            return Redirect::route('users')->with('error', Lang::get('admin/users/message.error.ldap_could_not_search').ldap_error($ldapconn));
+        }
+
+        // Get results
+        $results = @ldap_get_entries($ldapconn, $search_results);
+        if (!$results) {
+            return Redirect::route('users')->with('error', Lang::get('admin/users/message.error.ldap_could_not_get_entries').ldap_error($ldapconn));
+        }
 
         $summary = array();
         for ($i = 0; $i < $results["count"]; $i++) {
