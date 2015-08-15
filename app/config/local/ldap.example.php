@@ -91,5 +91,17 @@ return array(
     | The LDAP query that we want to execute when authenticating a user
     |
     */
-    'authentication.filter.query' => "uid="
+    'authentication.filter.query' => "uid=",
+
+    /*
+    |--------------------------------------------------------------------------
+    | LDAP Version
+    |--------------------------------------------------------------------------
+    |
+    | The LDAP query that we want to execute when authenticating a user
+    |
+    */
+    'version' => 3,
+
+
 );
