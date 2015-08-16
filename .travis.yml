@@ -32,6 +32,7 @@ before_script:
   - php artisan db:seed --env=travis-ci --no-interaction -vvv
   - ./vendor/bin/codecept build
   - php artisan serve --env=travis-ci &
+  - php artisan env
 
 # omitting "script:" will default to phpunit
 # use the $DB env variable to determine the phpunit.xml to use
