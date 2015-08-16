@@ -24,7 +24,9 @@
     |
     */
     if ($_SERVER[ 'APP_ENV' ] == 'travis-ci') {
-        $env = 'travis-ci';
+        $env =  $app->detectEnvironment(function() {
+            return 'travis-ci';
+        });
     } else {
         $env = $app->detectEnvironment( [
             'local'      => [ 'homestead', 'AlisonMBP' ],
