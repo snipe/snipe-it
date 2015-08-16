@@ -18,6 +18,7 @@ env:
 
 # execute any number of scripts before the test run, custom env's are available as variables
 before_script:
+  - hostname
   - if [[ "$DB" == "mysql" ]]; then mysql -e "create database IF NOT EXISTS snipeit_unit;" -utravis; fi
   - curl -s http://getcomposer.org/installer | php
   - cp app/config/travis-ci/app.example.php app/config/travis-ci/app.php
