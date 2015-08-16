@@ -23,7 +23,7 @@
     | given environment, then we will automatically detect it for you.
     |
     */
-    if ($_SERVER[ 'APP_ENV' ] == 'travis-ci') {
+    if (isset($_SERVER[ 'APP_ENV' ]) && $_SERVER[ 'APP_ENV' ] == 'travis-ci') {
         $env =  $app->detectEnvironment(function() {
             return 'travis-ci';
         });
