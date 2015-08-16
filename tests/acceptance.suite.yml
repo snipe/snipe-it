@@ -14,7 +14,7 @@ modules:
     PhpBrowser:
       url: http://snipe-it.dev
     Laravel4:
-      environment: travis-ci
+      environment: testing
       filters: true
 
 env:
@@ -22,7 +22,7 @@ env:
     modules:
       config:
         PhpBrowser:
-          url: http://snipe-it.dev
+          url: http://localhost:8000
         Laravel4:
           environment: travis-ci
           filters: true
