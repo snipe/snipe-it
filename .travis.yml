@@ -14,8 +14,7 @@ php:
 
 # optionally specify a list of environments, for example to test different RDBMS
 env:
-  - DB=mysql
-  - APP_ENV=travis-ci
+  - DB=mysql APP_ENV=travis-ci
 
 # execute any number of scripts before the test run, custom env's are available as variables
 before_script:
