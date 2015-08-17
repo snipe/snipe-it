@@ -96,7 +96,7 @@
 						{{ $errors->first('password', '<br><span class="alert-msg">:message</span>') }}
 				</div>
 				<div class="col-md-4">
-					 <a href="#" class="left" id="genPassword" style="float: left;">Generate</a>
+					 <a href="#" class="left" id="genPassword">Generate</a>
 				</div>
 
 
