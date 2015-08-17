@@ -87,14 +87,21 @@
 			<div class="form-group {{ $errors->has('password') ? 'has-error' : '' }}">
 				<label class="col-md-3 control-label" for="password">@lang('admin/users/table.password')
 				@if (!$user->id)
-				<i class='fa fa-asterisk'></i>
+					<i class='fa fa-asterisk'></i>
 				@endif
 				</label>
 				<div class="col-md-5">
-				<input type="password" name="password" class="form-control" id="password" value="" {{ ((Config::get('app.lock_passwords') && ($user->id)) ? ' disabled' : '') }}>
-					{{ $errors->first('password', '<br><span class="alert-msg">:message</span>') }}
+					<input type="password" name="password" class="form-control" id="password" value="" {{ ((Config::get('app.lock_passwords') && ($user->id)) ? ' disabled' : '') }}>
+					<span id="generated-password"></span>
+						{{ $errors->first('password', '<br><span class="alert-msg">:message</span>') }}
 				</div>
+				<div class="col-md-4">
+					 <a href="#" class="left" id="genPassword" style="float: left;">Generate</a>
+				</div>
+
+
 			</div>
+
 
 			<!-- Password Confirm -->
 			<div class="form-group {{ $errors->has('password_confirm') ? 'has-error' : '' }}">
@@ -337,6 +344,27 @@ $(document).ready(function() {
 	    }
 
 	});
+});
+</script>
+
+<script src="{{ asset('assets/js/pGenerator.jquery.js') }}"></script>
+
+<script>
+$(document).ready(function(){
+
+    $('#genPassword').pGenerator({
+        'bind': 'click',
+        'passwordElement': '#password',
+        'displayElement': '#generated-password',
+        'passwordLength': 16,
+        'uppercase': true,
+        'lowercase': true,
+        'numbers':   true,
+        'specialChars': true,
+        'onPasswordGenerated': function(generatedPassword) {
+			 $('#password_confirm').val($('#password').val());
+        }
+    });
 });
 </script>
 
