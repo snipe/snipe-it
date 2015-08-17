@@ -301,5 +301,5 @@ done
 
 echo ""; echo ""
 echo "***$si should now be installed. open up http://$fqdn in a web browser to verify.***"
-#echo "***If you want mail capabilities, open $dir/app/config/production/mail.php and fill out the attributes***"
+echo "***If you want mail capabilities, open $dir/app/config/production/mail.php and fill out the attributes***"
 sleep 1
