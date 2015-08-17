@@ -66,7 +66,7 @@ class ViewAssetsController extends AuthorizedController
             $logaction->user_id = Sentry::getUser()->id;
             $log = $logaction->logaction('requested');
 
-            return Redirect::route('requestable-assets')->with('success')->with('success', Lang::get('admin/hardware/message.asset_requested'));
+            return Redirect::route('requestable-assets')->with('success')->with('success', Lang::get('admin/hardware/message.requests.success'));
         }
 
 

@@ -24,6 +24,11 @@ return array(
         'success' 		=> 'Asset restored successfully.'
     ),
 
+    'requests' => array(
+        'error'   		=> 'Asset could not be requested, please try again.',
+        'success' 		=> 'You have sucessfully requested this asset.'
+    ),
+
     'deletefile' => array(
         'error'   => 'File not deleted. Please try again.',
         'success' => 'File successfully deleted.',
