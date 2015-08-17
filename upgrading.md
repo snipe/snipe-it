@@ -12,7 +12,7 @@ If you don’t plan on contributing code to Snipe-IT, you should always grab the
 Whenever you pull down a new version from master or develop, or when you grab the latest official release, make sure to run the following commands via command line:
 
 ```
-php composer.phar install --no-dev
+php composer.phar install --no-dev --prefer-source
 php composer.phar dump-autoload
 php artisan migrate
 ```
