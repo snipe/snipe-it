@@ -28,7 +28,7 @@
         <br>
     </div>
     <div class="col-md-9 chart">
-        <h5>@lang('general.recent_activity')</h5>
+        <h5>@lang('general.recent_activity') (<a href="{{ Config::get('app.url') }}/reports/activity">view all</a>)</h5>
 
         <table class="table table-hover table-fixed break-word">
 			<thead>
@@ -47,20 +47,20 @@
 			       <td>{{{ date("M d", strtotime($activity->created_at)) }}}</td>
 			       <td>
                        @if ($activity->action_type!='requested')
-                            {{{ $activity->adminlog->fullName() }}}
+                            <a href="{{ route('view/user', $activity->user_id) }}">{{{ $activity->adminlog->fullName() }}}</a>
                        @endif
 
                        </td>
 
 			       <td>
 			           	@if (($activity->assetlog) && ($activity->asset_type=="hardware"))
-			            	{{ $activity->assetlog->showAssetName() }}
+			            	<a href="{{ route('view/hardware', $activity->asset_id) }}">{{ $activity->assetlog->showAssetName() }}</a>
 			            @elseif (($activity->licenselog) && ($activity->asset_type=="software"))
-			            	{{ $activity->licenselog->name }}
+			            	<a href="{{ route('view/license', $activity->asset_id) }}">{{{ $activity->licenselog->name }}}</a>
                         @elseif (($activity->consumablelog) && ($activity->asset_type=="consumable"))
-    			            {{ $activity->consumablelog->name }}
+    			            <a href="{{ route('view/consumable', $activity->consumable_id) }}">{{{ $activity->consumablelog->name }}}</a>
 			            @elseif (($activity->accessorylog) && ($activity->asset_type=="accessory"))
-			            	{{ $activity->accessorylog->name }}
+			            	<a href="{{ route('view/accessory', $activity->accessory_id) }}">{{{ $activity->accessorylog->name }}}</a>
                         @else
                             @lang('general.bad_data')
 			            @endif
@@ -71,9 +71,9 @@
 			       </td>
 			       <td>
                        @if ($activity->action_type=='requested')
-                            {{{ $activity->adminlog->fullName() }}}
+                            <a href="{{ route('view/user', $activity->user_id) }}">{{{ $activity->adminlog->fullName() }}}</a>
                        @elseif ($activity->userlog)
-			           		{{{ $activity->userlog->fullName() }}}
+			           		<a href="{{ route('view/user', $activity->checkedout_to) }}">{{{ $activity->userlog->fullName() }}}</a>
 			           @endif
 
 			           </td>
