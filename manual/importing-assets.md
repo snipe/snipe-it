@@ -39,7 +39,7 @@ The importer will ignore the first line of your CSV, so if you don't have a head
 |Asset Category |`Laptop`| Yes | Created if it doesn't exist |
 |Asset Model |`MBP Retina 13-inch`| Yes |Created if it doesn't exist |
 |Manufacturer Name| `Apple`|Yes | Created if it doesn't exist |
-|Asset Model| `MacbookPro12,1`| No |  |
+|Asset Model No.| `MacbookPro12,1`| No |  |
 |Asset Serial | `C20095805496869045H6`| Yes |  |
 |Asset Tag | `KJH90890`| Yes | |
 |Location Name | `San Diego`| Yes | Created if it doesn't exist |
