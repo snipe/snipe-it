@@ -435,7 +435,7 @@
                         @endif
                     <ul>
 
-                    	 @if (($asset->assetstatus->deployable=='1') && ($asset->assigned_to > 0) && ($asset->deleted_at==''))
+                    	 @if (($asset->assetstatus->deployable=='1') && ($asset->assigned_to > 0) && ($asset->deleted_at=='') && ($asset->assetlog->first()))
                     	 	@if ($asset->assetlog->first()->expected_checkin)
                                 <li><br />@lang('admin/hardware/form.expected_checkin')
                                     : {{{ date('Y-m-d', strtotime($asset->assetlog->first()->expected_checkin)) }}}</li>
