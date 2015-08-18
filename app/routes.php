@@ -32,7 +32,7 @@ Route::group(array('prefix' => 'api', 'namespace' => 'Controllers\Admin', 'befor
     /*---Consumables API---*/
     Route::group(array('prefix'=>'consumables'), function () {
         Route::get('list', array('as'=>'api.consumables.list', 'uses'=>'ConsumablesController@getDatatable'));
-        Route::get('{accessoryID}/view', array('as'=>'api.consumables.view', 'uses'=>'ConsumablesController@getDataView'));
+        Route::get('{consumableID}/view', array('as'=>'api.consumables.view', 'uses'=>'ConsumablesController@getDataView'));
     });
 
     /*---Users API---*/
