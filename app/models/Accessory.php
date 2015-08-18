@@ -68,7 +68,7 @@ class Accessory extends Elegant
 	    return $remaining;
     }
     
-     /**
+    /**
     * Query builder scope to search on text
     *
     * @param  Illuminate\Database\Query\Builder  $query  Query builder instance
@@ -78,13 +78,10 @@ class Accessory extends Elegant
     */
     public function scopeTextSearch($query, $search)
     {
-        $search = explode('+', $search);
 
         return $query->where(function($query) use ($search)
         {
-            foreach ($search as $s) {
                 $query->where('name', 'LIKE', '%'.$s.'%');
-            }
         });
     }
     
