@@ -67,6 +67,25 @@ class Accessory extends Elegant
 	    $remaining = $total - $checkedout;
 	    return $remaining;
     }
+    
+     /**
+    * Query builder scope to search on text
+    *
+    * @param  Illuminate\Database\Query\Builder  $query  Query builder instance
+    * @param  text                              $search      Search term
+    *
+    * @return Illuminate\Database\Query\Builder          Modified query builder
+    */
+    public function scopeTextSearch($query, $search)
+    {
+        $search = explode('+', $search);
 
+        return $query->where(function($query) use ($search)
+        {
+            foreach ($search as $s) {
+                $query->where('name', 'LIKE', '%'.$s.'%');
+            }
+        });
+    }
     
 }
