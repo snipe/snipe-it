@@ -62,7 +62,7 @@ class AssetsController extends AdminController
         $manufacturer_list = manufacturerList();
         $category_list = categoryList();
         $supplier_list = suppliersList();
-        $assigned_to = assignedToList();
+        $assigned_to = usersList();
         $statuslabel_types = statusTypeList();
 
         $view = View::make('backend/hardware/edit');
@@ -213,7 +213,7 @@ class AssetsController extends AdminController
         $manufacturer_list = manufacturerList();
         $category_list = categoryList();
         $supplier_list = suppliersList();
-        $assigned_to = assignedToList();
+        $assigned_to = usersList();
         $statuslabel_types = statusTypeList();
 
         return View::make('backend/hardware/edit', compact('asset'))
@@ -655,7 +655,7 @@ class AssetsController extends AdminController
         $manufacturer_list = manufacturerList();
         $category_list = categoryList();
         $supplier_list = suppliersList();
-        $assigned_to = assignedToList();
+        $assigned_to = usersList();
 
         $asset = clone $asset_to_clone;
         $asset->id = null;

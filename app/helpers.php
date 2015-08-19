@@ -38,15 +38,6 @@ function suppliersList() {
     return $supplier_list;
 }
 
-function assignedToList() {
-    $assigned_to = array('' => Lang::get('general.select_user')) + DB::table('users')
-    ->select(DB::raw('concat(first_name," ",last_name) as full_name, id'))
-    ->whereNull('deleted_at')
-    ->orderBy('name', 'asc')
-    ->lists('full_name', 'id');
-    return $assigned_to;
-}
-
 function statusLabelList() {
     $statuslabel_list = Statuslabel::orderBy('name', 'asc')
     ->lists('name', 'id');
