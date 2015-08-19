@@ -27,8 +27,9 @@
         /**
          * Checkout asset
          */
-        public function checkOutToUser($user, $admin, $checkout_at = null, $expected_checkin = null, $note = null) {
+        public function checkOutToUser($user, $admin, $checkout_at = null, $expected_checkin = null, $note = null, $name = null) {
             $this->assigneduser()->associate($user);
+            $this->name = $name;
 
             $settings = Setting::getSettings();
 
