@@ -40,9 +40,9 @@ class ModelsController extends AdminController
     public function getCreate()
     {
         // Show the page
-        $depreciation_list = array('' => 'Do Not Depreciate') + Depreciation::lists('name', 'id');
-        $manufacturer_list = array('' => 'Select One') + Manufacturer::lists('name', 'id');
-        $category_list = array('' => '') + DB::table('categories')->whereNull('deleted_at')->lists('name', 'id');
+        $depreciation_list = depreciationList();
+        $manufacturer_list = manufacturerList();
+        $category_list = categoryList();
         $view = View::make('backend/models/edit');
         $view->with('category_list',$category_list);
         $view->with('depreciation_list',$depreciation_list);

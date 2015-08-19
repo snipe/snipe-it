@@ -36,7 +36,7 @@ class CategoriesController extends AdminController
     public function getCreate()
     {
         // Show the page
-         $category_types= array('' => '', 'asset' => 'Asset', 'accessory' => 'Accessory', 'consumable' => 'Consumable');
+         $category_types= categoryTypeList();
         return View::make('backend/categories/edit')->with('category',new Category)
         ->with('category_types',$category_types);
     }

@@ -80,13 +80,8 @@ class UsersController extends AdminController {
         $userPermissions = Input::old('permissions', array('superuser' => -1));
         $this->encodePermissions($userPermissions);
 
-        $location_list = array('' => '') + Location::lists('name', 'id');
-        $manager_list = array('' => '') + DB::table('users')
-                        ->select(DB::raw('concat(last_name,", ",first_name," (",username,")") as full_name, id'))
-                        ->whereNull('deleted_at', 'and')
-                        ->orderBy('last_name', 'asc')
-                        ->orderBy('first_name', 'asc')
-                        ->lists('full_name', 'id');
+        $location_list = locationsList();
+        $manager_list = managerList();
 
         /* echo '<pre>';
           print_r($userPermissions);
