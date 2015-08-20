@@ -909,9 +909,12 @@ class LicensesController extends AdminController
         ->addColumn('purchase_date', function($licenses) {
             return $licenses->purchase_date;
         })
+        ->addColumn('notes', function($licenses) {
+            return $licenses->notes;
+        })
         ->addColumn($actions)
-        ->searchColumns('name','serial','totalSeats','remaining','purchase_date','actions')
-        ->orderColumns('name','serial','totalSeats','remaining','purchase_date','actions')
+        ->searchColumns('name','serial','totalSeats','remaining','purchase_date','actions','notes')
+        ->orderColumns('name','serial','totalSeats','remaining','purchase_date','actions','notes')
         ->make();
     }
 
