@@ -1,7 +1,7 @@
 addons:
     hosts:
         - snipe-it.dev
-sudo: false
+sudo: true
 
 # see http://about.travis-ci.org/docs/user/languages/php/ for more hints
 language: php
