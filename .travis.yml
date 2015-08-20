@@ -32,6 +32,7 @@ before_script:
   - php artisan migrate --env=travis-ci --no-interaction -vvv
   - php artisan db:seed --env=travis-ci --no-interaction -vvv
   - ./vendor/bin/codecept build
+  - chmod 777 -R app/storage
   - php artisan serve --env=travis-ci &
   - sleep 5
   - php artisan env
