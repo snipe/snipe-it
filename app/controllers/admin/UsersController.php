@@ -1085,6 +1085,10 @@ class UsersController extends AdminController {
 
         // Connect to LDAP server
         $ldapconn = @ldap_connect($url);
+
+        // Needed for AD
+        ldap_set_option($ldapconn, LDAP_OPT_REFERRALS, 0);
+
         if (!$ldapconn) {
             return Redirect::route('users')->with('error', Lang::get('admin/users/message.error.ldap_could_not_connect'));
         }
