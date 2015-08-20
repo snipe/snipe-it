@@ -33,6 +33,7 @@ before_script:
   - php artisan db:seed --env=travis-ci --no-interaction -vvv
   - ./vendor/bin/codecept build
   - php artisan serve --env=travis-ci &
+  - sleep 5
   - php artisan env
 
 # omitting "script:" will default to phpunit
