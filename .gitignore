@@ -29,3 +29,5 @@ tests/_support/_generated/*
 tests/_data/scenarios
 nbproject/*
 app/config/local/ldap.php
+app/storage/dumps/*
+app/config/packages/schickling/backup/config.php
