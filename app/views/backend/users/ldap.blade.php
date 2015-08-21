@@ -46,9 +46,20 @@ Create a User ::
         <!-- CSRF Token -->
         <input type="hidden" name="_token" value="{{ csrf_token() }}" />
 
+        <div class="form-group {{ $errors->has('location_id') ? 'has-error' : '' }}">
+                <label class="col-md-3 control-label" for="location_id">@lang('admin/users/table.location')
+                    </label>
+                <div class="col-md-7">
+                    {{ Form::select('location_id', $location_list, array('class'=>'select2', 'style'=>'width:350px')) }}
+                    {{ $errors->first('location_id', '<br><span class="alert-msg">:message</span>') }}
+                </div>
+            </div>
+        
         <button type="submit" class="btn btn-warning" id="sync">
             <i id="sync-button-icon" class="fa fa-refresh icon-white"></i> <span id="sync-button-text">Synchronize</span>
         </button>
+        
+
     </form>
     @if (Session::get('summary'))
     <h3>Synchronization Results</h3>

@@ -1043,12 +1043,17 @@ class UsersController extends AdminController {
         // Selected permissions
         $selectedPermissions = Input::old('permissions', array('superuser' => -1));
         $this->encodePermissions($selectedPermissions);
+        
+        $location_list = locationsList();
+                        
         // Show the page
-        return View::make('backend/users/ldap', compact('groups', 'selectedGroups', 'permissions', 'selectedPermissions'));
+        return View::make('backend/users/ldap', compact('groups', 'selectedGroups', 'permissions', 'selectedPermissions'))
+                        ->with('location_list', $location_list);
+        
     }
 
     /**
-     * Declare the rules for the form validation
+     * Declare the rules for the ldap fields validation.
      *
      * @var array
      */
@@ -1059,6 +1064,15 @@ class UsersController extends AdminController {
         'username' => 'required|min:2|unique:users,username',
         'email' => 'email|unique:users,email',
     );
+    
+    /**
+     * Declare the rules for the form validation.
+     *
+     * @var array
+     */
+    protected $ldapFormInputValidationRules = array(
+        'location_id' => 'required|numeric'
+    );
 
     /**
      * LDAP form processing.
@@ -1068,6 +1082,15 @@ class UsersController extends AdminController {
      */
     public function postLDAP() {
 
+        $location_id = Input::get('location_id');
+        
+        $formValidator = Validator::make(Input::all(), $this->ldapFormInputValidationRules);
+        // If validation fails, we'll exit the operation now.
+        if ($formValidator->fails()) {
+            // Ooops.. something went wrong
+            return Redirect::back()->withInput()->withErrors($formValidator);
+        }
+        
         $ldap_version = Config::get('ldap.version');
         $url = Config::get('ldap.url');
         $username = Config::get('ldap.username');
@@ -1159,7 +1182,7 @@ class UsersController extends AdminController {
                             'employee_num' => $item["employee_number"],
                             'password' => $pass,
                             'activated' => 1,
-                            'location_id' => 1,
+                            'location_id' => $location_id,
                             'permissions' => '{"user":1}',
                             'notes' => 'Imported from LDAP'
                         );
