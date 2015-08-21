@@ -46,10 +46,11 @@
                     {{ $errors->first('asset_id', '<br><span class="alert-msg"><i class="fa fa-times"></i> :message</span>') }}
                 </div>
             </div>
-            
+
             <!-- Supplier -->
             <div class="form-group {{ $errors->has('supplier_id') ? ' has-error' : '' }}">
-                <label for="supplier_id" class="col-md-3 control-label">@lang('admin/asset_maintenances/table.supplier_name')</label>
+                <label for="supplier_id" class="col-md-3 control-label">@lang('admin/asset_maintenances/table.supplier_name')
+                    <i class='fa fa-asterisk'></i></label>
                 <div class="col-md-7">
                     {{ Form::select('supplier_id', $supplier_list , Input::old('supplier_id', $assetMaintenance->supplier_id), ['class'=>'select2', 'style'=>'min-width:350px']) }}
                     {{ $errors->first('supplier_id', '<br><span class="alert-msg"><i class="fa fa-times"></i> :message</span>') }}
