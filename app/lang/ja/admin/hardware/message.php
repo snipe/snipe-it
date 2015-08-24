@@ -2,57 +2,57 @@
 
 return array(
 
-    'undeployable' 		=> '<strong>Warning: </strong> This asset has been marked as currently undeployable.
-                        If this status has changed, please update the asset status.',
-    'does_not_exist' 	=> 'Asset does not exist.',
-    'does_not_exist_or_not_requestable' => 'Nice try. That asset does not exist or is not requestable.',
-    'assoc_users'	 	=> 'This asset is currently checked out to a user and cannot be deleted. Please check the asset in first, and then try deleting again. ',
+    'undeployable' 		=> '<strong>警告:</strong>この資産は、現在 未配備としてマークされています。
+                        この状態が変更された場合は、資産のステータスを更新してください。',
+    'does_not_exist' 	=> '資産が存在しません。',
+    'does_not_exist_or_not_requestable' => '申し訳ありません。その資産が存在しないまたはリクエスト可能ではありません。',
+    'assoc_users'	 	=> 'この資産は利用者にチェックされているため削除できません。資産をチェック後、もう一度、やり直して下さい。 ',
 
     'create' => array(
-        'error'   		=> 'Asset was not created, please try again. :(',
-        'success' 		=> 'Asset created successfully. :)'
+        'error'   		=> '資産は作成されませんでした。もう一度、やり直して下さい。',
+        'success' 		=> '資産は作成されました。'
     ),
 
     'update' => array(
-        'error'   			=> 'Asset was not updated, please try again',
-        'success' 			=> 'Asset updated successfully.',
-        'nothing_updated'	=>  'No fields were selected, so nothing was updated.',
+        'error'   			=> '資産は更新されませんでした。もう一度、やり直して下さい。',
+        'success' 			=> '資産は正常に更新されました。',
+        'nothing_updated'	=>  'フィールドが選択されていないため、更新されませんでした。',
     ),
 
     'restore' => array(
-        'error'   		=> 'Asset was not restored, please try again',
-        'success' 		=> 'Asset restored successfully.'
+        'error'   		=> '資産は復元されませんでした。もう一度、やり直して下さい。',
+        'success' 		=> '資産は正常に復元されました。'
     ),
 
     'deletefile' => array(
-        'error'   => 'File not deleted. Please try again.',
-        'success' => 'File successfully deleted.',
+        'error'   => 'ファイルが削除できませんでした。もう一度、やり直して下さい。',
+        'success' => 'ファイルは正常に削除されました。',
     ),
 
     'upload' => array(
-        'error'   => 'File(s) not uploaded. Please try again.',
-        'success' => 'File(s) successfully uploaded.',
-        'nofiles' => 'You did not select any files for upload, or the file you are trying to upload is too large',
-        'invalidfiles' => 'One or more of your files is too large or is a filetype that is not allowed. Allowed filetypes are png, gif, jpg, doc, docx, pdf, and txt.',
+        'error'   => 'ファイルがアップロードできませんでした。もう一度、やり直して下さい。',
+        'success' => 'ファイルが正常にアップロードされました。',
+        'nofiles' => 'アップロードするファイルが選択されていないか、アップロードしようとしているファイルが大き過ぎます。',
+        'invalidfiles' => 'いずれかのファイルが大き過ぎるか、ファイルタイプが許可されていません。許可されているファイルタイプ（png, gif, jpg, doc, docx, pdf, and txt）',
     ),
 
 
     'delete' => array(
-        'confirm'   	=> 'Are you sure you wish to delete this asset?',
-        'error'   		=> 'There was an issue deleting the asset. Please try again.',
-        'success' 		=> 'The asset was deleted successfully.'
+        'confirm'   	=> 'この資産を削除してもよろしいですか？',
+        'error'   		=> '資産を削除する際に問題が発生しました。もう一度やり直して下さい。',
+        'success' 		=> '資産は正常に削除されました。'
     ),
 
     'checkout' => array(
-        'error'   		=> 'Asset was not checked out, please try again',
-        'success' 		=> 'Asset checked out successfully.',
-        'user_does_not_exist' => 'That user is invalid. Please try again.'
+        'error'   		=> '資産はチェックアウトされませんでした。もう一度、やり直して下さい。',
+        'success' 		=> '資産は正常にチェックアウトされました。',
+        'user_does_not_exist' => 'その利用者は不正です。もう一度、やり直して下さい。'
     ),
 
     'checkin' => array(
-        'error'   		=> 'Asset was not checked in, please try again',
-        'success' 		=> 'Asset checked in successfully.',
-        'user_does_not_exist' => 'That user is invalid. Please try again.'
+        'error'   		=> '資産はチェックインされませんでした。もう一度、やり直して下さい。',
+        'success' 		=> '資産は正常にチェックインされました。',
+        'user_does_not_exist' => 'その利用者は不正です。もう一度、やり直して下さい。'
     )
 
 );

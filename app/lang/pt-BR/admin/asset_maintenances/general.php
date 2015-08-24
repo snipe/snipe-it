@@ -1,11 +1,11 @@
 <?php
 
     return [
-        'asset_maintenances' => 'Asset Maintenances',
-        'edit'               => 'Edit Asset Maintenance',
-        'delete'             => 'Delete Asset Maintenance',
-        'view'               => 'View Asset Maintenance Details',
-        'repair'             => 'Repair',
-        'maintenance'        => 'Maintenance',
-        'upgrade'            => 'Upgrade'
+        'asset_maintenances' => 'Manutenções de Ativos',
+        'edit'               => 'Editar Manutenção de Ativo',
+        'delete'             => 'Deletar Manutenção de Ativo',
+        'view'               => 'Ver Detalhes da Manutenção do Ativo',
+        'repair'             => 'Reparar',
+        'maintenance'        => 'Manutenção',
+        'upgrade'            => 'Melhorar'
     ];

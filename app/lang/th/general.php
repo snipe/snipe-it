@@ -3,6 +3,7 @@
     return [
     'accessories'			=> 'อุปกรณ์',
     'accessory'				=> 'อุปกรณ์',
+    'accessory_report'			=> 'Accessory Report',
     'action'                => 'ดำเนินการ',
     'activity_report'		=> 'รายงานกิจกรรม',
     'address'				=> 'ที่อยู่',
@@ -59,6 +60,7 @@
     'id'  					=> 'ID',
     'image_delete'         	=> 'ลบรูปภาพประจำตัว',
     'image_upload'         	=> 'อัพโหลดภาพ',
+    'import'         	    => 'Import',
     'asset_maintenance'        => 'Asset Maintenance',
     'asset_maintenance_report' => 'Asset Maintenance Report',
     'asset_maintenances'       => 'Asset Maintenances',

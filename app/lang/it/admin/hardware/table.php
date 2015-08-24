@@ -18,6 +18,6 @@ return array(
     'serial'   		=> 'Seriale',
     'status'   		=> 'Stato',
     'title'      	=> 'Bene ',
-    'days_without_acceptance' => 'Days Without Acceptance'
+    'days_without_acceptance' => 'Giorni senza accettazione'
 
 );

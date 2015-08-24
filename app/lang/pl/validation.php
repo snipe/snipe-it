@@ -13,17 +13,17 @@ return array(
     |
     */
 
-    "accepted"         => "The :attribute must be accepted.",
-    "active_url"       => "The :attribute is not a valid URL.",
-    "after"            => "The :attribute must be a date after :date.",
-    "alpha"            => "The :attribute may only contain letters.",
-    "alpha_dash"       => "The :attribute may only contain letters, numbers, and dashes.",
-    "alpha_num"        => "The :attribute may only contain letters and numbers.",
-    "before"           => "The :attribute must be a date before :date.",
+    "accepted"         => ":attribute musi zostać zaakceptowany.",
+    "active_url"       => ":attribute nie jest poprawnym adresem URL.",
+    "after"            => ":attribute musi być późniejszą datą w stosunku do :date.",
+    "alpha"            => ":attribute może zawierać tylko litery.",
+    "alpha_dash"       => ":attribute może zawierać tylko litery, cyfry i myślniki.",
+    "alpha_num"        => ":attribute może zawierać tylko litery i cyfry.",
+    "before"           => ":attribute musi być późniejszą datą w stosunku do :date.",
     "between"          => array(
-        "numeric" => "The :attribute must be between :min - :max.",
-        "file"    => "The :attribute must be between :min - :max kilobytes.",
-        "string"  => "The :attribute must be between :min - :max characters.",
+        "numeric" => ":attribute musi być pomiędzy :min - :max.",
+        "file"    => ":attribute musi być pomiędzy :min - :max kilobajtów.",
+        "string"  => ":attribute musi być pomiędzy :min - :max znaków.",
     ),
     "confirmed"        => "The :attribute confirmation does not match.",
     "date"             => "The :attribute is not a valid date.",

@@ -20,7 +20,7 @@ return array(
     'expected_checkin'  => 'Erwartetes Liederdatum',
     'expires'			=> 'Gültig bis',
     'fully_depreciated'	=> 'Komplett Abgeschrieben',
-    'help_checkout'		=> 'If you wish to assign this asset immediately, select "Ready to Deploy" from the status list above. ',
+    'help_checkout'		=> 'Um das Asset sofort zu zuweisen, "bereit zum Aufstellen" in der Status-Liste unten auswählen. ',
     'mac_address'		=> 'MAC Adresse',
     'manufacturer'		=> 'Hersteller',
     'model'				=> 'Modell',

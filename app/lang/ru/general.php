@@ -3,6 +3,7 @@
     return [
     'accessories'			=> 'Аксессуары',
     'accessory'				=> 'Аксессуар',
+    'accessory_report'			=> 'Accessory Report',
     'action'                => 'Action',
     'activity_report'		=> 'Oтчет о деятельности',
     'address'				=> 'Адрес',
@@ -59,6 +60,7 @@
     'id'  					=> 'ID',
     'image_delete'         	=> 'Удалить изображение',
     'image_upload'         	=> 'Загрузить изображение',
+    'import'         	    => 'Import',
     'asset_maintenance'        => 'Asset Maintenance',
     'asset_maintenance_report' => 'Asset Maintenance Report',
     'asset_maintenances'       => 'Asset Maintenances',

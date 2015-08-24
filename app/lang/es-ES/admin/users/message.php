@@ -10,6 +10,7 @@ return array(
     'user_password_required'    => 'El password es obligatorio.',
     'insufficient_permissions'  => 'No tiene permiso.',
     'user_deleted_warning'      => 'Este usuario ha sido eliminado. Deberá restaurarlo para editarlo o asignarle nuevos Equipos.',
+    'ldap_not_configured'        => 'LDAP integration has not been configured for this installation.',
 
 
     'success' => array(
@@ -32,6 +33,10 @@ return array(
         'import'    => 'Ha habido un problema importando los usuarios. Por favor intente nuevamente.',
         'asset_already_accepted' => 'Este equipo ya ha sido aceptado.',
         'accept_or_decline' => 'Debe aceptar o declinar este equipo.',
+        'ldap_could_not_connect' => 'Could not connect to the LDAP server. Please check your LDAP server configuration in the LDAP config file. <br>Error from LDAP Server:',
+        'ldap_could_not_bind' => 'Could not bind to the LDAP server. Please check your LDAP server configuration in the LDAP config file. <br>Error from LDAP Server: ',
+        'ldap_could_not_search' => 'Could not search the LDAP server. Please check your LDAP server configuration in the LDAP config file. <br>Error from LDAP Server:',
+        'ldap_could_not_get_entries' => 'Could not get entries from the LDAP server. Please check your LDAP server configuration in the LDAP config file. <br>Error from LDAP Server:',
     ),
 
     'deletefile' => array(

@@ -8,7 +8,7 @@ return array(
     'delete'  	=> 'Slett',
     'edit'    	=> 'Rediger',
     'restore' 	=> 'Gjenopprett',
-    'request'   => 'Request',
+    'request'   => 'Forespørsel',
     'submit'  	=> 'Send',
     'upload'    => 'Last opp',
 

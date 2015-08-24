@@ -22,7 +22,7 @@ return array(
     'upload' => array(
         'error'   => 'ファイルがアップロードできませんでした。もう一度、やり直して下さい。',
         'success' => 'ファイルがアップロードされました。',
-        'nofiles' => 'You did not select any files for upload, or the file you are trying to upload is too large',
+        'nofiles' => 'アップロードするファイルが選択されていないか、アップロードしようとしているファイルが大き過ぎます。',
         'invalidfiles' => 'いずれかのファイルが大き過ぎるか、ファイルタイプが許可されていません。許可されているファイルタイプ（png, gif, jpg, doc, docx, pdf, and txt）',
     ),
 

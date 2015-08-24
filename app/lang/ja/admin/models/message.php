@@ -9,7 +9,7 @@ return array(
     'create' => array(
         'error'   => '型番が作成できませんでした。もう一度やり直して下さい。',
         'success' => '型番が作成されました。',
-        'duplicate_set' => 'An asset model with that name, manufacturer and model number already exists.',
+        'duplicate_set' => '資産型の名前や製造元、型番は、既に存在してます。',
     ),
 
     'update' => array(

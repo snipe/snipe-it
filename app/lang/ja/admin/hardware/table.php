@@ -18,6 +18,6 @@ return array(
     'serial'   		=> 'シリアル',
     'status'   		=> '状態',
     'title'      	=> '資産 ',
-    'days_without_acceptance' => 'Days Without Acceptance'
+    'days_without_acceptance' => '未受理期間'
 
 );

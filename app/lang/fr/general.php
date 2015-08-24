@@ -3,6 +3,7 @@
     return [
     'accessories'			=> 'Accessories',
     'accessory'				=> 'Accessory',
+    'accessory_report'			=> 'Accessory Report',
     'action'                => 'Action',
     'activity_report'		=> 'Activity Report',
     'address'				=> 'Adresse',
@@ -59,6 +60,7 @@
     'id'  					=> 'ID',
     'image_delete'         	=> 'Supprimer l\'image',
     'image_upload'         	=> 'Charger une image',
+    'import'         	    => 'Import',
     'asset_maintenance'        => 'Asset Maintenance',
     'asset_maintenance_report' => 'Asset Maintenance Report',
     'asset_maintenances'       => 'Asset Maintenances',

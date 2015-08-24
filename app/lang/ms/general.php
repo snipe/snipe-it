@@ -3,6 +3,7 @@
     return [
     'accessories'			=> 'Accessories',
     'accessory'				=> 'Accessory',
+    'accessory_report'			=> 'Accessory Report',
     'action'                => 'Action',
     'activity_report'		=> 'Activity Report',
     'address'				=> 'Alamat',
@@ -59,6 +60,7 @@
     'id'  					=> 'ID',
     'image_delete'         	=> 'Hapuskan imej',
     'image_upload'         	=> 'Muat naik imej',
+    'import'         	    => 'Import',
     'asset_maintenance'        => 'Asset Maintenance',
     'asset_maintenance_report' => 'Asset Maintenance Report',
     'asset_maintenances'       => 'Asset Maintenances',

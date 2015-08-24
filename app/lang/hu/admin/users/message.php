@@ -10,6 +10,7 @@ return array(
     'user_password_required'    => 'The password is required.',
     'insufficient_permissions'  => 'Insufficient Permissions.',
     'user_deleted_warning'      => 'This user has been deleted. You will have to restore this user to edit them or assign them new assets.',
+    'ldap_not_configured'        => 'LDAP integration has not been configured for this installation.',
 
 
     'success' => array(
@@ -32,6 +33,10 @@ return array(
         'import'    => 'There was an issue importing users. Please try again.',
         'asset_already_accepted' => 'This asset has already been accepted.',
         'accept_or_decline' => 'You must either accept or decline this asset.',
+        'ldap_could_not_connect' => 'Could not connect to the LDAP server. Please check your LDAP server configuration in the LDAP config file. <br>Error from LDAP Server:',
+        'ldap_could_not_bind' => 'Could not bind to the LDAP server. Please check your LDAP server configuration in the LDAP config file. <br>Error from LDAP Server: ',
+        'ldap_could_not_search' => 'Could not search the LDAP server. Please check your LDAP server configuration in the LDAP config file. <br>Error from LDAP Server:',
+        'ldap_could_not_get_entries' => 'Could not get entries from the LDAP server. Please check your LDAP server configuration in the LDAP config file. <br>Error from LDAP Server:',
     ),
 
     'deletefile' => array(

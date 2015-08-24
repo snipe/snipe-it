@@ -7,8 +7,8 @@
         'completion_date'        => 'Ngày hoàn thành',
         'cost'                   => 'Chi phí',
         'is_warranty'            => 'Warranty Improvement',
-        'asset_maintenance_time' => 'Asset Maintenance Time (in days)',
+        'asset_maintenance_time' => 'Thời gian bảo trì tài sản (ngày)',
         'notes'                  => 'Ghi chú',
         'update'                 => 'Update Asset Maintenance',
-        'create'                 => 'Create Asset Maintenance'
+        'create'                 => 'Tạo Bảo hành Tài sản'
     ];

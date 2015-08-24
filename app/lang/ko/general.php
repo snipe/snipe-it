@@ -3,6 +3,7 @@
     return [
     'accessories'			=> '부속품들',
     'accessory'				=> '부속품',
+    'accessory_report'			=> 'Accessory Report',
     'action'                => '작업',
     'activity_report'		=> '활동 보고서',
     'address'				=> '주소',
@@ -59,6 +60,7 @@
     'id'  					=> '아이디',
     'image_delete'         	=> '이미지 삭제',
     'image_upload'         	=> '이미지 올리기',
+    'import'         	    => 'Import',
     'asset_maintenance'        => 'Asset Maintenance',
     'asset_maintenance_report' => 'Asset Maintenance Report',
     'asset_maintenances'       => 'Asset Maintenances',

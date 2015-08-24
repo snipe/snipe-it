@@ -8,7 +8,7 @@ return array(
     'delete'  	=> '刪除',
     'edit'    	=> '编辑',
     'restore' 	=> '恢复',
-    'request'   => 'Request',
+    'request'   => '申请',
     'submit'  	=> '提交',
     'upload'    => '上传',
 

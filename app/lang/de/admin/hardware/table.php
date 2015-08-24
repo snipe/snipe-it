@@ -18,6 +18,6 @@ return array(
     'serial'   		=> 'Seriennummer',
     'status'   		=> 'Status',
     'title'      	=> 'Asset ',
-    'days_without_acceptance' => 'Days Without Acceptance'
+    'days_without_acceptance' => 'Tage ohne Akzeptierung'
 
 );

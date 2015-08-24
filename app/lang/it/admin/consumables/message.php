@@ -2,34 +2,34 @@
 
 return array(
 
-    'does_not_exist' => 'Consumable does not exist.',
+    'does_not_exist' => 'Il consumabile non esiste.',
 
     'create' => array(
-        'error'   => 'Consumable was not created, please try again.',
-        'success' => 'Consumable created successfully.'
+        'error'   => 'Il consumabile non è stato creato, prova di nuovo.',
+        'success' => 'Il consumabile è stato creato con successo.'
     ),
 
     'update' => array(
-        'error'   => 'Consumable was not updated, please try again',
-        'success' => 'Consumable updated successfully.'
+        'error'   => 'Il consumabile non è stato aggiornato, prova di nuovo',
+        'success' => 'Il consumabile è stato aggiornato con successo.'
     ),
 
     'delete' => array(
-        'confirm'   => 'Are you sure you wish to delete this accessory?',
-        'error'   => 'There was an issue deleting the consumable. Please try again.',
-        'success' => 'The accessory was deleted successfully.'
+        'confirm'   => 'Sei sicuro di voler eliminare quest\'accessorio?',
+        'error'   => 'C\'è stato un problema durante l\'eliminazione del consumabile. Prova di nuovo.',
+        'success' => 'L\'accessorio è stato eliminato con successo.'
     ),
 
      'checkout' => array(
-        'error'   		=> 'Consumable was not checked out, please try again',
-        'success' 		=> 'Consumable checked out successfully.',
-        'user_does_not_exist' => 'That user is invalid. Please try again.'
+        'error'   		=> 'Il consumabile non è stato controllato, prova di nuovo',
+        'success' 		=> 'Il consumabile è stato controllato con successo.',
+        'user_does_not_exist' => 'Questo utente non è valido. Riprova.'
     ),
 
     'checkin' => array(
-        'error'   		=> 'Consumable was not checked in, please try again',
-        'success' 		=> 'Consumable checked in successfully.',
-        'user_does_not_exist' => 'That user is invalid. Please try again.'
+        'error'   		=> 'Il consumabile non è stato controllato, prova di nuovo',
+        'success' 		=> 'Il consumabile è stato controllato con successo.',
+        'user_does_not_exist' => 'Questo utente non è valido. Riprova.'
     )
 
 

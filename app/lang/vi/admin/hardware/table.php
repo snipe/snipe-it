@@ -3,7 +3,7 @@
 return array(
 
     'asset_tag'   	=> 'Thẻ tài sản',
-    'asset_model'       => 'Model',
+    'asset_model'       => 'Loại',
     'book_value'  	=> 'Giá trị',
     'change' 		=> 'Vào/Ra',
     'checkout_date' => 'Checkout Date',
