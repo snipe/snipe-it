@@ -22,3 +22,5 @@ To set it to run every week, use:
 ```
 @weekly /path/to/php /path/to/your/snipe-it/artisan snipeit:backup
 ```
+
+You will need to make sure that mysqldump is installed and set in your path. If mysqldump isn't in your path, you can set it manually by copying `/app/config/packages/schickling/backup/config.example.php` to `/app/config/packages/schickling/backup/config.php` and updating the mysqldump path information. 
