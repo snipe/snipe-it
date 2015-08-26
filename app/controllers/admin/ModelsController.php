@@ -16,6 +16,9 @@ use Validator;
 use View;
 use Datatable;
 
+//use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\JsonResponse;
+
 class ModelsController extends AdminController
 {
     /**
@@ -37,9 +40,9 @@ class ModelsController extends AdminController
     public function getCreate()
     {
         // Show the page
-        $depreciation_list = array('' => 'Do Not Depreciate') + Depreciation::lists('name', 'id');
-        $manufacturer_list = array('' => 'Select One') + Manufacturer::lists('name', 'id');
-        $category_list = array('' => '') + DB::table('categories')->whereNull('deleted_at')->lists('name', 'id');
+        $depreciation_list = depreciationList();
+        $manufacturer_list = manufacturerList();
+        $category_list = categoryList();
         $view = View::make('backend/models/edit');
         $view->with('category_list',$category_list);
         $view->with('depreciation_list',$depreciation_list);
@@ -57,14 +60,40 @@ class ModelsController extends AdminController
     public function postCreate()
     {
 
-        // get the POST data
-        $new = Input::all();
-
         // Create a new manufacturer
         $model = new Model;
 
+
+        $validator = Validator::make(
+            // Validator data goes here
+            array(
+                'unique_fields' => array(Input::get('name'), Input::get('modelno'), Input::get('manufacturer_id'))
+            ),
+            // Validator rules go here
+            array(
+                'unique_fields' => 'unique_multiple:models,name,modelno,manufacturer_id'
+            )
+        );
+
         // attempt validation
-        if ($model->validate($new)) {
+        if ($validator->fails())
+        {
+            // The given data did not pass validation
+            return Redirect::back()->withInput()->with('error', Lang::get('admin/models/message.create.duplicate_set'));;
+        }
+
+
+
+        $validator = Validator::make(Input::all(), $model->validationRules());
+
+        // attempt validation
+        if ($validator->fails())
+        {
+            // The given data did not pass validation
+            return Redirect::back()->withInput()->withErrors($validator->messages());
+        }
+        // attempt validation
+        else {
 
             if ( e(Input::get('depreciation_id')) == '') {
                 $model->depreciation_id =  0;
@@ -72,7 +101,7 @@ class ModelsController extends AdminController
                 $model->depreciation_id = e(Input::get('depreciation_id'));
             }
 
-             if ( e(Input::get('eol')) == '') {
+            if ( e(Input::get('eol')) == '') {
                 $model->eol =  0;
             } else {
                 $model->eol = e(Input::get('eol'));
@@ -103,15 +132,41 @@ class ModelsController extends AdminController
                 // Redirect to the new model  page
                 return Redirect::to("hardware/models")->with('success', Lang::get('admin/models/message.create.success'));
             }
-        } else {
-            // failure
-            $errors = $model->errors();
-            return Redirect::back()->withInput()->withErrors($errors);
         }
 
         // Redirect to the model create page
         return Redirect::to('hardware/models/create')->with('error', Lang::get('admin/models/message.create.error'));
 
+    }
+
+    public function store()
+    {
+      //COPYPASTA!!!! FIXME
+      $model = new Model;
+
+      $settings=Input::all();
+      $settings['eol']=0;
+      //
+
+      $validator = Validator::make($settings, $model->validationRules());
+      if ($validator->fails())
+      {
+          // The given data did not pass validation
+          return JsonResponse::create(["error" => "Failed validation: ".print_r($validator->messages()->all('<li>:message</li>'),true)],500);
+      } else {
+        $model->name=e(Input::get('name'));
+        $model->manufacturer_id = e(Input::get('manufacturer_id'));
+        $model->category_id = e(Input::get('category_id'));
+        $model->modelno = e(Input::get('modelno'));
+        $model->user_id = Sentry::getUser()->id;
+        $model->eol=0;
+
+        if($model->save()) {
+          return JsonResponse::create($model);
+        } else {
+          return JsonResponse::create(["error" => "Couldn't save Model"],500);
+        }
+      }
     }
 
     /**
@@ -130,7 +185,7 @@ class ModelsController extends AdminController
 
         $depreciation_list = array('' => 'Do Not Depreciate') + Depreciation::lists('name', 'id');
         $manufacturer_list = array('' => 'Select One') + Manufacturer::lists('name', 'id');
-        $category_list = array('' => '') + DB::table('categories')->lists('name', 'id');
+        $category_list = array('' => '') + DB::table('categories')->whereNull('deleted_at')->lists('name', 'id');
         $view = View::make('backend/models/edit', compact('model'));
         $view->with('category_list',$category_list);
         $view->with('depreciation_list',$depreciation_list);

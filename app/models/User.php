@@ -44,10 +44,15 @@ class User extends SentryUserModel
         return $this->hasMany('Asset', 'assigned_to')->withTrashed();
     }
 
-     public function accessories()
+    public function accessories()
     {
         return $this->belongsToMany('Accessory', 'accessories_users', 'assigned_to','accessory_id')->withPivot('id')->withTrashed();
     }
+
+    public function consumables()
+   {
+       return $this->belongsToMany('Consumable', 'consumables_users', 'assigned_to','consumable_id')->withPivot('id')->withTrashed();
+   }
 
     public function licenses()
     {
@@ -92,6 +97,23 @@ class User extends SentryUserModel
         } else {
             return false;
         }
+    }
+
+    public function assetlog()
+    {
+        return $this->hasMany('Asset','id')->withTrashed();
+    }
+
+    /**
+    * Get uploads for this asset
+    */
+    public function uploads()
+    {
+        return $this->hasMany('Actionlog','asset_id')
+            ->where('asset_type', '=', 'user')
+            ->where('action_type', '=', 'uploaded')
+            ->whereNotNull('filename')
+            ->orderBy('created_at', 'desc');
     }
 
     public function sentryThrottle() {

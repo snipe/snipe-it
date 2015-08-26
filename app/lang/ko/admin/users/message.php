@@ -10,6 +10,7 @@ return array(
     'user_password_required'    => '비밀번호를 입력해 주세요.',
     'insufficient_permissions'  => '승인 불충분.',
     'user_deleted_warning'      => '이 사용자는 삭제되었습니다. 그것들을 수정하려면 이 사용자를 복원하던가 새 자산들을 생성하세요.',
+    'ldap_not_configured'        => 'LDAP integration has not been configured for this installation.',
 
 
     'success' => array(
@@ -32,6 +33,10 @@ return array(
         'import'    => '사용자를 내보내기 할 때 문제가 발생했습니다. 다시 시도하세요.',
         'asset_already_accepted' => '이 자산은 이미 수락되었습니다.',
         'accept_or_decline' => 'You must either accept or decline this asset.',
+        'ldap_could_not_connect' => 'Could not connect to the LDAP server. Please check your LDAP server configuration in the LDAP config file. <br>Error from LDAP Server:',
+        'ldap_could_not_bind' => 'Could not bind to the LDAP server. Please check your LDAP server configuration in the LDAP config file. <br>Error from LDAP Server: ',
+        'ldap_could_not_search' => 'Could not search the LDAP server. Please check your LDAP server configuration in the LDAP config file. <br>Error from LDAP Server:',
+        'ldap_could_not_get_entries' => 'Could not get entries from the LDAP server. Please check your LDAP server configuration in the LDAP config file. <br>Error from LDAP Server:',
     ),
 
     'deletefile' => array(

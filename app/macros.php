@@ -8,7 +8,7 @@
 * Country macro
 * Generates the dropdown menu of countries for the profile form
 */
-Form::macro('countries', function ($name = "country", $selected = null, $class = null) {
+Form::macro('countries', function ($name = "country", $selected = null, $class = null, $id = null) {
 
     $countries = array(
     ''=>"Select a Country",
@@ -262,7 +262,11 @@ Form::macro('countries', function ($name = "country", $selected = null, $class =
     'ZW'=>'Zimbabwe'
     );
 
-    $select = '<select name="'.$name.'" class="'.$class.'" style="min-width:350px">';
+    $idclause='';
+    if($id) {
+      $idclause=" id='$id'";
+    }
+    $select = '<select name="'.$name.'" class="'.$class.'" style="min-width:350px"'.$idclause.'>';
 
     foreach ($countries as $abbr => $country) {
         $select .= '<option value="'.strtoupper($abbr).'"'.(strtoupper($selected)== strtoupper($abbr) ? ' selected="selected"' : '').'>'.$country.'</option> ';
@@ -276,15 +280,16 @@ Form::macro('countries', function ($name = "country", $selected = null, $class =
 
 
 /**
-* Country macro
-* Generates the dropdown menu of countries for the profile form
+* Barcode macro
+* Generates the dropdown menu of available barcodes
 */
 Form::macro('barcode_types', function ($name = "barcode_type", $selected = null, $class = null) {
 
     $barcode_types = array(
     'QRCODE'=>"QR Code",
     'PDF417'=>'PDF417',
-    'DATAMATRIX'=>'DATAMATRIX'
+    'DATAMATRIX'=>'DATAMATRIX',
+    'C128'=>'Code 128'
     );
 
     $select = '<select name="'.$name.'" class="'.$class.'">';
@@ -299,3 +304,41 @@ Form::macro('barcode_types', function ($name = "barcode_type", $selected = null,
 
 });
 
+
+/**
+* Currency macro
+* Generates the dropdown menu of world currencies
+*/
+Form::macro('currencies', function ($name = "currency", $selected = null, $class = null) {
+
+    $currencies = array(
+    '$'=>"$",
+    '€'=>'€',
+    '₠'=>"₠",
+    '₡'=>'₡',
+    '₣'=>'₣',
+    '₤'=>'₤',
+    '₥'=>'₥',
+    '₦'=>'₦',
+    '₧'=>'₧',
+    '₨'=>'₨',
+    '₩'=>'₩',
+    '₪'=>'₪',
+    '₫'=>'₫',
+    '₭'=>'₭',
+    '₮'=>'₮',
+    '₯'=>'₯',
+    '₱'=>'₱',
+    '₹'=>'₹',
+    );
+
+    $select = '<select name="'.$name.'" class="'.$class.'">';
+    foreach ($currencies as $currency) {
+        $select .= '<option value="'.$currency.'"'.($selected == $currency ? ' selected="selected"' : '').'>'.$currency.'</option> ';
+    }
+
+    $select .= '</select>';
+
+    return $select;
+
+});

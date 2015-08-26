@@ -46,7 +46,7 @@ return array(
 	|
 	*/
 
-	'hasher' => 'native',
+	'hasher' => 'bcrypt',
 
 	/*
 	|--------------------------------------------------------------------------
@@ -134,7 +134,7 @@ return array(
 		|
 		*/
 
-		'login_attribute' => 'email',
+		'login_attribute' => 'username',
 
 	),
 

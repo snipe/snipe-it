@@ -8,6 +8,7 @@ return array(
     'delete'  	=> 'Slet',
     'edit'    	=> 'Rediger',
     'restore' 	=> 'Gendan',
+    'request'   => 'Request',
     'submit'  	=> 'Send',
     'upload'    => 'Upload',
 

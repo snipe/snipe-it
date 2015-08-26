@@ -2,21 +2,21 @@
 
 return array(
 
-    'group_exists'        => 'Group already exists!',
-    'group_not_found'     => 'Group [:id] does not exist.',
-    'group_name_required' => 'The name field is required',
+    'group_exists'        => 'グループは既に存在しています！',
+    'group_not_found'     => 'グループ [:id] は、存在していません。',
+    'group_name_required' => '名前フィールドは必須です。',
 
     'success' => array(
-        'create' => 'Group was successfully created.',
-        'update' => 'Group was successfully updated.',
-        'delete' => 'Group was successfully deleted.',
+        'create' => 'グループは正常に作成されました。',
+        'update' => 'グループは正常に更新されました。',
+        'delete' => 'グループは正常に削除されました。',
     ),
 
     'delete' => array(
-        'confirm'   => 'Are you sure you wish to delete this group?',
-        'create' => 'There was an issue creating the group. Please try again.',
-        'update' => 'There was an issue updating the group. Please try again.',
-        'delete' => 'There was an issue deleting the group. Please try again.',
+        'confirm'   => '本当にこのグループを削除してもよいですか？',
+        'create' => 'グループを作成時に問題が発生しました。もう一度試して下さい。',
+        'update' => 'グループを更新時に問題が発生しました。もう一度試して下さい。',
+        'delete' => 'グループを削除時に問題が発生しました。もう一度試して下さい。',
     ),
 
 );

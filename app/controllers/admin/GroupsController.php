@@ -81,7 +81,7 @@ class GroupsController extends AdminController
             // Was the group created?
             if ($group = Sentry::getGroupProvider()->create($inputs)) {
                 // Redirect to the new group page
-                return Redirect::route('update/group', $group->id)->with('success', Lang::get('admin/groups/message.success.create'));
+                return Redirect::route('groups')->with('success', Lang::get('admin/groups/message.success.create'));
             }
 
             // Redirect to the new group page

@@ -18,5 +18,6 @@ return array(
     'serial'   		=> 'Nr. seryjny',
     'status'   		=> 'Status',
     'title'      	=> 'Nabytek',
+    'days_without_acceptance' => 'Days Without Acceptance'
 
 );

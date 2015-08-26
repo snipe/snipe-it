@@ -1,0 +1,18 @@
+# Codeception Test Suite Configuration
+
+# suite for acceptance tests.
+# perform tests in browser using the WebDriver or PhpBrowser.
+# If you need both WebDriver and PHPBrowser tests - create a separate suite.
+
+class_name: AcceptanceTester
+modules:
+    enabled:
+        - PhpBrowser:
+            url: http://snipe-it.dev
+# Even when filters are set to true, this doesn't seem to work.
+# Also, it looks like the Laravel4 module isn't really meant for
+# Acceptance tests?
+#        - Laravel4:
+#            filters: true
+#            cleanup: true
+#            environment: testing

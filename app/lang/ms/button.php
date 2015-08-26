@@ -8,6 +8,7 @@ return array(
     'delete'  	=> 'Hapuskan',
     'edit'    	=> 'Kemaskini',
     'restore' 	=> 'Masukkan Semula',
+    'request'   => 'Request',
     'submit'  	=> 'Hantar',
     'upload'    => 'Upload',
 

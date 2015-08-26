@@ -2,35 +2,35 @@
 
 return array(
 
-    'does_not_exist' => 'Category does not exist.',
-    'assoc_users'	 => 'This accessory currently has :count items checked out to users. Please check in the accessories and and try again. ',
+    'does_not_exist' => 'Hạng mục không tồn tại.',
+    'assoc_users'	 => 'Phụ kiện này hiện có :count cái đã giao cho người dùng. Bạn hãy nhập lại vào trong phần phụ kiện và thử lại lần nữa. ',
 
     'create' => array(
-        'error'   => 'Category was not created, please try again.',
-        'success' => 'Category created successfully.'
+        'error'   => 'Hạng mục chưa được tạo. Bạn hãy thử lại.',
+        'success' => 'Hạng mục đã được khởi tạo thành công.'
     ),
 
     'update' => array(
-        'error'   => 'Category was not updated, please try again',
-        'success' => 'Category updated successfully.'
+        'error'   => 'Hạng mục chưa được cập nhật. Bạn hãy thử lại',
+        'success' => 'Hạng mục được cập nhật thành công.'
     ),
 
     'delete' => array(
-        'confirm'   => 'Are you sure you wish to delete this category?',
-        'error'   => 'There was an issue deleting the category. Please try again.',
-        'success' => 'The category was deleted successfully.'
+        'confirm'   => 'Bạn có chắc chắn muốn xoá hạng mục này?',
+        'error'   => 'Có vấn đề xảy ra khi xoá hạng mục này. Bạn hãy thử lại.',
+        'success' => 'Hạng mục này đã được xoá thành công.'
     ),
     
      'checkout' => array(
-        'error'   		=> 'Accessory was not checked out, please try again',
-        'success' 		=> 'Accessory checked out successfully.',
-        'user_does_not_exist' => 'That user is invalid. Please try again.'
+        'error'   		=> 'Phụ kiện chưa được xuất kho. Bạn hãy thử lại',
+        'success' 		=> 'Phụ kiện được xuất kho thành công.',
+        'user_does_not_exist' => 'Người dùng này không tồn tại. Bạn hãy thử lại.'
     ),
 
     'checkin' => array(
-        'error'   		=> 'Accessory was not checked in, please try again',
-        'success' 		=> 'Accessory checked in successfully.',
-        'user_does_not_exist' => 'That user is invalid. Please try again.'
+        'error'   		=> 'Phụ kiện chưa được kho. Bạn hãy thử lại',
+        'success' 		=> 'Phuk kiện được nhập kho thành công.',
+        'user_does_not_exist' => 'Người dùng này không tồn tại. Bạn hãy thử lại.'
     )
 
 

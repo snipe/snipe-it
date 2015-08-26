@@ -5,7 +5,7 @@ return array(
     'about_consumables_text'  			=> 'Consumables are anything purchased that will be used up over time. For example, printer ink or copier paper.',
     'consumable_name'                  => 'Consumable Name',
     'create'                             => 'Create Consumable',
-    'remaining' 			             => 'Remaining',
-    'total' 			                 => 'Total',
+    'remaining' 			             => 'Còn lại',
+    'total' 			                 => 'Tổng số',
     'update'                            => 'Update Consumable',
 );

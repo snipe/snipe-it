@@ -2,49 +2,49 @@
 
 return array(
 
-    'does_not_exist' => 'License does not exist.',
-    'user_does_not_exist' => 'User does not exist.',
-    'asset_does_not_exist' 	=> 'The asset you are trying to associate with this license does not exist.',
-    'owner_doesnt_match_asset' => 'The asset you are trying to associate with this license is owned by somene other than the person selected in the assigned to dropdown.',
-    'assoc_users'	 => 'This license is currently checked out to a user and cannot be deleted. Please check the license in first, and then try deleting again. ',
+    'does_not_exist' => 'ライセンスが存在しません。',
+    'user_does_not_exist' => '利用者が存在しません。',
+    'asset_does_not_exist' 	=> 'このライセンスに関連付けられている資産が存在しません。',
+    'owner_doesnt_match_asset' => 'ドロップダウンで割り当てられた以上の利用者にライセンスを関連付けようとしています。',
+    'assoc_users'	 => 'このライセンスは利用者にチェックされているため削除できません。ライセンスをチェック後、もう一度、やり直して下さい。 ',
 
 
     'create' => array(
-        'error'   => 'License was not created, please try again.',
-        'success' => 'License created successfully.'
+        'error'   => 'ライセンスが作成できませんでした。もう一度、やり直して下さい。',
+        'success' => 'ライセンスが作成されました。'
     ),
 
     'deletefile' => array(
-        'error'   => 'File not deleted. Please try again.',
-        'success' => 'File successfully deleted.',
+        'error'   => 'ファイルが削除できませんでした。もう一度、やり直して下さい。',
+        'success' => 'ファイルは削除されました。',
     ),
 
     'upload' => array(
-        'error'   => 'File(s) not uploaded. Please try again.',
-        'success' => 'File(s) successfully uploaded.',
-        'nofiles' => 'You did not select any files for upload',
-        'invalidfiles' => 'One or more of your files is too large or is a filetype that is not allowed. Allowed filetypes are png, gif, jpg, doc, docx, pdf, and txt.',
+        'error'   => 'ファイルがアップロードできませんでした。もう一度、やり直して下さい。',
+        'success' => 'ファイルがアップロードされました。',
+        'nofiles' => 'アップロードするファイルが選択されていないか、アップロードしようとしているファイルが大き過ぎます。',
+        'invalidfiles' => 'いずれかのファイルが大き過ぎるか、ファイルタイプが許可されていません。許可されているファイルタイプ（png, gif, jpg, doc, docx, pdf, and txt）',
     ),
 
     'update' => array(
-        'error'   => 'License was not updated, please try again',
-        'success' => 'License updated successfully.'
+        'error'   => 'ライセンスが更新できませんでした。もう一度、やり直して下さい。',
+        'success' => 'ライセンスが更新されました。'
     ),
 
     'delete' => array(
-        'confirm'   => 'Are you sure you wish to delete this license?',
-        'error'   => 'There was an issue deleting the license. Please try again.',
-        'success' => 'The license was deleted successfully.'
+        'confirm'   => 'このライセンスを削除してもよろしいですか？',
+        'error'   => 'ライセンスを削除する際に問題が発生しました。もう一度、やり直して下さい。',
+        'success' => 'ライセンスが削除されました。'
     ),
 
     'checkout' => array(
-        'error'   => 'There was an issue checking out the license. Please try again.',
-        'success' => 'The license was checked out successfully'
+        'error'   => 'ライセンスのチェックを外す際に問題が発生しました。もう一度、やり直して下さい。',
+        'success' => 'ライセンスのチェックを外しました。'
     ),
 
     'checkin' => array(
-        'error'   => 'There was an issue checking in the license. Please try again.',
-        'success' => 'The license was checked in successfully'
+        'error'   => 'ライセンスのチェックを入れる際に問題が発生しました。もう一度、やり直して下さい。',
+        'success' => 'ライセンスのチェックを入れました。'
     ),
 
 );

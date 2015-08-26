@@ -47,10 +47,37 @@
                     </div>
             </div>
 
+            <!-- Parent-->
+            <div class="form-group {{ $errors->has('parent_id') ? ' has-error' : '' }}">
+                <label for="parent_id" class="col-md-2 control-label">@lang('admin/locations/table.parent')
+                 </label>
+                    <div class="col-md-12">
+                        <div class="col-xs-8">
+                         {{ Form::select('parent_id', $location_options , Input::old('parent_id', $location->parent_id), array('class'=>'select2 parent', 'style'=>'width:350px')) }}                        </div>
+                    {{ $errors->first('parent_id', '<br><span class="alert-msg"><i class="fa fa-times"></i> :message</span>') }}
+                    </div>
+            </div>
+
+            <!-- Currency -->
+            <div class="form-group {{ $errors->has('currency') ? ' has-error' : '' }}">
+                <label for="currency" class="col-md-2 control-label">
+                	@lang('admin/locations/table.currency')
+                </label>
+                    <div class="col-md-12">
+                        <div class="col-xs-8">
+                        {{ Form::currencies('currency', Input::old('currency', $location->currency)) }}
+                    </div>
+                    {{ $errors->first('currency', '<br><span class="alert-msg"><i class="fa fa-times"></i> :message</span>') }}
+                    </div>
+            </div>
+
+
+
             <!-- Address -->
             <div class="form-group {{ $errors->has('address') ? ' has-error' : '' }}">
-                <label for="address" class="col-md-2 control-label">@lang('admin/locations/table.address')
-                 <i class='fa fa-asterisk'></i></label></label>
+                <label for="address" class="col-md-2 control-label">
+                	@lang('admin/locations/table.address')
+                </label>
                     <div class="col-md-12">
                         <div class="col-xs-8">
                         <input class="form-control" type="text" name="address" id="address" value="{{{ Input::old('address', $location->address) }}}" />
@@ -114,7 +141,7 @@
                  </label>
                     <div class="col-md-5">
 
-                         {{ Form::countries('country', Input::old('country', $location->country), 'select2') }}
+                         {{ Form::countries('country', Input::old('country', $location->country), 'select2 country') }}
                         </div>
                         {{ $errors->first('country', '<br><span class="alert-msg"><i class="fa fa-times"></i> :message</span>') }}
                     </div>
@@ -132,5 +159,39 @@
 
 </form>
 
+@if (!$location->id)
+<script>
+
+	var $eventSelect = $(".parent");
+	$eventSelect.on("change", function () { parent_details($eventSelect.val()); });
+	$(function() {
+        var parent_loc = $(".parent option:selected").val();
+        if(parent_loc!=''){
+            parent_details(parent_loc);
+        }
+	});
+
+	function parent_details(id) {
+
+        //start ajax request
+        $.ajax({
+            type: 'GET',
+            url: "{{Config::get('app.url')}}/api/locations/"+id+"/check",
+            //force to handle it as text
+            dataType: "text",
+            success: function(data) {
+                var json = $.parseJSON(data);
+                $("#city").val(json.city);
+                $("#address").val(json.address);
+                $("#address2").val(json.address2);
+                $("#state").val(json.state);
+                $("#zip").val(json.zip);
+                $(".country").select2("val",json.country);
+            }
+        });
+
+	};
+</script>
+@endif
 
 @stop

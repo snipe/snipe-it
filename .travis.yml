@@ -1,6 +1,7 @@
 addons:
-  hosts:
-    - AlisonMBP
+    hosts:
+        - snipe-it.dev
+sudo: false
 
 # see http://about.travis-ci.org/docs/user/languages/php/ for more hints
 language: php
@@ -17,7 +18,7 @@ env:
 
 # execute any number of scripts before the test run, custom env's are available as variables
 before_script:
-  - if [[ "$DB" == "mysql" ]]; then mysql -e "create database IF NOT EXISTS snipeit_laravel;" -utravis; fi
+  - if [[ "$DB" == "mysql" ]]; then mysql -e "create database IF NOT EXISTS snipeit_unit;" -utravis; fi
   - curl -s http://getcomposer.org/installer | php
   - cp app/config/testing/app.example.php app/config/testing/app.php
   - cp app/config/testing/database.example.php app/config/testing/database.php
@@ -32,9 +33,17 @@ before_script:
 
 # omitting "script:" will default to phpunit
 # use the $DB env variable to determine the phpunit.xml to use
+# script: ./vendor/bin/codecept run
 script: phpunit
 
 # configure notifications (email, IRC, campfire etc)
 notifications:
+  email: false
   slack:
     secure: vv9we1RxB9RsrMbomSdq6D7vz/okobw87pEkgIZjB+hj1QpQ2by90gsPsOa+NgsJEFaEP7e4KlT6SH8kK+zhbmuKaUd3d1//XdcancE22LZXi6tkiB5yuR/Jhhb1LLDqyGJTB4D92hMnnCPiUjpxNA3r437ttNeYRdYIEEP3drA=
+  webhooks:
+    urls:
+      - https://webhooks.gitter.im/e/5e136eb0c1965f3918d0
+    on_success: change  # options: [always|never|change] default: always
+    on_failure: change  # options: [always|never|change] default: always
+    on_start: false     # default: false

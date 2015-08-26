@@ -18,5 +18,6 @@ return array(
     'serial'   		=> 'Sarjanumero',
     'status'   		=> 'Tila',
     'title'      	=> 'Laite ',
+    'days_without_acceptance' => 'Days Without Acceptance'
 
 );

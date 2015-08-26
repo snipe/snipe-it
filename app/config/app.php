@@ -43,7 +43,7 @@ return array(
     */
 
     'cipher' => MCRYPT_RIJNDAEL_256,
-    
+
     /*
     |--------------------------------------------------------------------------
     | Prevent Password changes
@@ -103,6 +103,8 @@ return array(
         'Chumper\Datatable\DatatableServiceProvider',
         'Dinesh\Barcode\BarcodeServiceProvider',
         'Maknz\Slack\SlackServiceProvider',
+        'Schickling\Backup\BackupServiceProvider',
+        'Chumper\Zipper\ZipperServiceProvider',
 
     ),
 
@@ -177,6 +179,7 @@ return array(
             'DNS1D'                 => 'Dinesh\Barcode\Facades\DNS1DFacade',
             'DNS2D'                 => 'Dinesh\Barcode\Facades\DNS2DFacade',
             'Slack' 				=> 'Maknz\Slack\Facades\Slack',
+            'Zipper'                => 'Chumper\Zipper\Zipper',
 
     ),
 

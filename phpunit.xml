@@ -10,8 +10,11 @@
          stopOnFailure="false"
          syntaxCheck="false"
 >
+    <php>
+         <ini name="display_errors" value="true"/>
+    </php>
     <testsuites>
-        <testsuite name="Application Test Suite">
+        <testsuite name="Snipe-IT Test Suite">
             <directory>./app/tests/</directory>
         </testsuite>
     </testsuites>

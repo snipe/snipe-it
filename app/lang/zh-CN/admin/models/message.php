@@ -8,7 +8,8 @@ return array(
 
     'create' => array(
         'error'   => '模板没有被创建，请重试。',
-        'success' => '模板创建成功。'
+        'success' => '模板创建成功。',
+        'duplicate_set' => '资产名称、制造商和编号都相同的其它资产模板已存在。',
     ),
 
     'update' => array(
@@ -21,10 +22,10 @@ return array(
         'error'   => '删除模板的过程中出现了一点儿问题，请重试。',
         'success' => '模板已经成功被删除'
     ),
-    
+
     'restore' => array(
-        'error'   		=> 'Model was not restored, please try again',
-        'success' 		=> 'Model restored successfully.'
+        'error'   		=> '型号未被恢复，请重试。',
+        'success' 		=> '型号恢复成功。'
     ),
 
 );

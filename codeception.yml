@@ -1,0 +1,16 @@
+actor: Tester
+paths:
+    tests: tests
+    log: tests/_output
+    data: tests/_data
+    helpers: tests/_support
+settings:
+    bootstrap: _bootstrap.php
+    colors: true
+    memory_limit: 1024M
+modules:
+        Db:
+            dsn: 'mysql:host=localhost;dbname=snipeit_unit'
+            user: 'travis'
+            password: ''
+            dump: tests/_data/dump.sql

@@ -77,7 +77,7 @@ return array(
     */
 
     'custom' => array(),
-    'alpha_space' => "The :attribute field contains a character that is not allowed.",
+    'alpha_space' => "Das :attribute Feld enthält ein nicht erlaubtes Zeichen.",
 
     /*
     |--------------------------------------------------------------------------

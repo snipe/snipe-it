@@ -10,6 +10,7 @@ return array(
     'user_password_required'    => 'كلمة السر مطلوبة.',
     'insufficient_permissions'  => 'صلاحيات غير كافية.',
     'user_deleted_warning'      => 'تم حذف المستخدم. سيكون عليك استعادة هذا المستخدم للتعديل عليه او تسليمه اجهزة جديدة.',
+    'ldap_not_configured'        => 'LDAP integration has not been configured for this installation.',
 
 
     'success' => array(
@@ -32,6 +33,10 @@ return array(
         'import'    => 'حدث خطأ أثناء استيراد المستخدمين. حاول مرة أخرى.',
         'asset_already_accepted' => 'هذا الجهاز تم قبوله مسبقاً.',
         'accept_or_decline' => 'You must either accept or decline this asset.',
+        'ldap_could_not_connect' => 'Could not connect to the LDAP server. Please check your LDAP server configuration in the LDAP config file. <br>Error from LDAP Server:',
+        'ldap_could_not_bind' => 'Could not bind to the LDAP server. Please check your LDAP server configuration in the LDAP config file. <br>Error from LDAP Server: ',
+        'ldap_could_not_search' => 'Could not search the LDAP server. Please check your LDAP server configuration in the LDAP config file. <br>Error from LDAP Server:',
+        'ldap_could_not_get_entries' => 'Could not get entries from the LDAP server. Please check your LDAP server configuration in the LDAP config file. <br>Error from LDAP Server:',
     ),
 
     'deletefile' => array(

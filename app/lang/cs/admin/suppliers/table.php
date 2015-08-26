@@ -1,7 +1,7 @@
 <?php
 
 return array(
-    'address'               => 'Supplier Address',
+    'address'               => 'Adresa dodavatele',
     'assets'                => 'Assets',
     'city'                  => 'Město',
     'contact'               => 'Kontaktní osoba',

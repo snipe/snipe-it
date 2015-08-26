@@ -8,7 +8,8 @@ return array(
 
     'create' => array(
         'error'   => 'Model nie został stworzony. Spróbuj ponownie.',
-        'success' => 'Model utworzony pomyślnie.'
+        'success' => 'Model utworzony pomyślnie.',
+        'duplicate_set' => 'An asset model with that name, manufacturer and model number already exists.',
     ),
 
     'update' => array(
@@ -21,7 +22,7 @@ return array(
         'error'   => 'Wystąpił błąd podczas usuwania modelu. Spróbuj ponownie.',
         'success' => 'Model usunięty poprawnie.'
     ),
-    
+
     'restore' => array(
         'error'   		=> 'Model nie został przywrócony, spróbuj ponownie',
         'success' 		=> 'Model został przywrócony pomyślnie.'

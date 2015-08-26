@@ -18,6 +18,48 @@ class AuthController extends BaseController
         return View::make('frontend.auth.signin');
     }
 
+
+    /**
+     * Authenticates a user to LDAP
+     *
+     * @return  true    if the username and/or password provided are valid
+     *          false   if the username and/or password provided are invalid
+     *
+     */
+    function ldap($username, $password) {
+
+        $ldaphost    = Config::get('ldap.url');
+        $ldaprdn     = Config::get('ldap.username');
+        $ldappass    = Config::get('ldap.password');
+        $baseDn      = Config::get('ldap.basedn');
+        $filterQuery = Config::get('ldap.authentication.filter.query') . $username;
+
+	// Connecting to LDAP
+	$connection = ldap_connect($ldaphost) or die("Could not connect to {$ldaphost}");
+    // Needed for AD
+    ldap_set_option($connection, LDAP_OPT_REFERRALS, 0);
+
+        try {
+            if ($connection) {
+                // binding to ldap server
+                $ldapbind = ldap_bind($connection, $ldaprdn, $ldappass);
+                if ( ($results = @ldap_search($connection, $baseDn, $filterQuery)) !==false ) {
+                    $entry = ldap_first_entry($connection, $results);
+                    if ( ($userDn = @ldap_get_dn($connection, $entry)) !== false ) {
+                        if( ($isBound = ldap_bind($connection, $userDn, $password)) == "true") {
+                            return true;
+                        }
+                    }
+                }
+            }
+        } catch (Exception $e) {
+            LOG::error($e->getMessage());
+        }
+	ldap_close($connection);
+	return false;
+    }
+
+
     /**
      * Account sign in form processing.
      *
@@ -27,7 +69,7 @@ class AuthController extends BaseController
     {
         // Declare the rules for the form validation
         $rules = array(
-            'email'    => 'required|email',
+            'username'    => 'required',
             'password' => 'required',
         );
 
@@ -41,8 +83,39 @@ class AuthController extends BaseController
         }
 
         try {
-            // Try to log the user in
-            Sentry::authenticate(Input::only('email', 'password'), Input::get('remember-me', 0));
+
+            /**
+             * =================================================================
+             * Hack in LDAP authentication
+             */
+
+            // Try to get the user from the database.
+            $user = (array) DB::table('users')->where('username', Input::get('username'))->first();
+
+            if ($user && strpos($user["notes"],'LDAP') !== false) {
+                LOG::debug("Authenticating user against LDAP.");
+                if( $this->ldap(Input::get('username'), Input::get('password')) ) {
+                        LOG::debug("valid login");
+                    $pass = substr(str_shuffle("0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"), 0, 10);
+                    $user = Sentry::findUserByLogin( Input::get('username') );
+                    $user->password = $pass;
+                    $user->save();
+                    $credentials = array(
+                        'username' => Input::get('username'),
+                        'password' => $pass,
+                    );
+                    Sentry::authenticate($credentials, Input::get('remember-me', 0));
+                }
+                else {
+                    throw new Cartalyst\Sentry\Users\UserNotFoundException();
+                }
+            }
+            /* ============================================================== */
+            else {
+                LOG::debug("Authenticating user against database.");
+                // Try to log the user in
+                Sentry::authenticate(Input::only('username', 'password'), Input::get('remember-me', 0));
+            }
 
             // Get the page we were before
             $redirect = Session::get('loginRedirect', 'account');
@@ -53,91 +126,19 @@ class AuthController extends BaseController
             // Redirect to the users page
             return Redirect::to($redirect)->with('success', Lang::get('auth/message.signin.success'));
         } catch (Cartalyst\Sentry\Users\UserNotFoundException $e) {
-            $this->messageBag->add('email', Lang::get('auth/message.account_not_found'));
+            $this->messageBag->add('username', Lang::get('auth/message.account_not_found'));
         } catch (Cartalyst\Sentry\Users\UserNotActivatedException $e) {
-            $this->messageBag->add('email', Lang::get('auth/message.account_not_activated'));
+            $this->messageBag->add('username', Lang::get('auth/message.account_not_activated'));
         } catch (Cartalyst\Sentry\Throttling\UserSuspendedException $e) {
-            $this->messageBag->add('email', Lang::get('auth/message.account_suspended'));
+            $this->messageBag->add('username', Lang::get('auth/message.account_suspended'));
         } catch (Cartalyst\Sentry\Throttling\UserBannedException $e) {
-            $this->messageBag->add('email', Lang::get('auth/message.account_banned'));
+            $this->messageBag->add('username', Lang::get('auth/message.account_banned'));
         }
 
         // Ooops.. something went wrong
         return Redirect::back()->withInput()->withErrors($this->messageBag);
     }
 
-    /**
-     * Account sign up.
-     *
-     * @return View
-     */
-    public function getSignup()
-    {
-        // Is the user logged in?
-        if (Sentry::check()) {
-            return Redirect::route('account');
-        }
-
-        // Show the page
-        return View::make('frontend.auth.signup');
-    }
-
-    /**
-     * Account sign up form processing.
-     *
-     * @return Redirect
-     */
-    public function postSignup()
-    {
-        // Declare the rules for the form validation
-        $rules = array(
-            'first_name'       => 'required|min:2',
-            'last_name'        => 'required|min:2',
-            'email'            => 'required|email|unique:users',
-            'email_confirm'    => 'required|email|same:email',
-            'password'         => 'required|between:10,32',
-            'password_confirm' => 'required|same:password',
-        );
-
-        // Create a new validator instance from our validation rules
-        $validator = Validator::make(Input::all(), $rules);
-
-        // If validation fails, we'll exit the operation now.
-        if ($validator->fails()) {
-            // Ooops.. something went wrong
-            return Redirect::back()->withInput()->withErrors($validator);
-        }
-
-        try {
-            // Register the user
-            $user = Sentry::register(array(
-                'first_name' => Input::get('first_name'),
-                'last_name'  => Input::get('last_name'),
-                'email'      => Input::get('email'),
-                'password'   => Input::get('password'),
-            ));
-
-            // Data to be used on the email view
-            $data = array(
-                'user'          => $user,
-                'activationUrl' => URL::route('activate', $user->getActivationCode()),
-            );
-
-            // Send the activation code through email
-            Mail::send('emails.register-activate', $data, function ($m) use ($user) {
-                $m->to($user->email, $user->first_name . ' ' . $user->last_name);
-                $m->subject('Welcome ' . $user->first_name);
-            });
-
-            // Redirect to the register page
-            return Redirect::back()->with('success', Lang::get('auth/message.signup.success'));
-        } catch (Cartalyst\Sentry\Users\UserExistsException $e) {
-            $this->messageBag->add('email', Lang::get('auth/message.account_already_exists'));
-        }
-
-        // Ooops.. something went wrong
-        return Redirect::back()->withInput()->withErrors($this->messageBag);
-    }
 
     /**
      * User account activation page.
@@ -192,7 +193,7 @@ class AuthController extends BaseController
     {
         // Declare the rules for the validator
         $rules = array(
-            'email' => 'required|email',
+            'username' => 'required',
         );
 
         // Create a new validator instance from our dynamic rules
@@ -206,22 +207,28 @@ class AuthController extends BaseController
 
         try {
             // Get the user password recovery code
-            $user = Sentry::getUserProvider()->findByLogin(Input::get('email'));
+            $user = Sentry::getUserProvider()->findByLogin(Input::get('username'));
 
-            // Data to be used on the email view
+            $reset = $user->getResetPasswordCode();
+
+            // Data to be used on the username view
             $data = array(
                 'user'              => $user,
-                'forgotPasswordUrl' => URL::route('forgot-password-confirm', $user->getResetPasswordCode()),
+                'forgotPasswordUrl' => URL::route('forgot-password-confirm', $reset),
             );
 
-            // Send the activation code through email
+            $user->reset_password_code = $reset;
+            $user->save();
+
+
+            // Send the activation code through username
             Mail::send('emails.forgot-password', $data, function ($m) use ($user) {
-                $m->to($user->email, $user->first_name . ' ' . $user->last_name);
+                $m->to($user->username, $user->first_name . ' ' . $user->last_name);
                 $m->subject('Account Password Recovery');
             });
         } catch (Cartalyst\Sentry\Users\UserNotFoundException $e) {
-            // Even though the email was not found, we will pretend
-            // we have sent the password reset code through email,
+            // Even though the username was not found, we will pretend
+            // we have sent the password reset code through username,
             // this is a security measure against hackers.
         }
 
@@ -237,12 +244,13 @@ class AuthController extends BaseController
      */
     public function getForgotPasswordConfirm($passwordResetCode = null)
     {
+
         try {
             // Find the user using the password reset code
             $user = Sentry::getUserProvider()->findByResetPasswordCode($passwordResetCode);
         } catch(Cartalyst\Sentry\Users\UserNotFoundException $e) {
             // Redirect to the forgot password page
-            return Redirect::route('forgot-password')->with('error', Lang::get('auth/message.account_not_found'));
+            //return Redirect::route('forgot-password')->with('error', Lang::get('auth/message.account_not_found'));
         }
 
         // Show the page

@@ -2,10 +2,10 @@
 
 return array(
 
-    'deleted'  					=> 'This model has been deleted. <a href="/hardware/models/:model_id/restore">Click here to restore it</a>.',
-    'restore'                   => 'Restore Model',
-	'show_mac_address'			=> 'Show MAC address field in assets in this model',
-    'view_deleted'              => 'View Deleted',
-    'view_models'               => 'View Models',
+    'deleted'  					=> 'Model này đã bị xoá. <a href="/hardware/models/:model_id/restore">Bấm vào đây để khôi phục lại</a>.',
+    'restore'                   => 'Khôi phục Model',
+	'show_mac_address'			=> 'Hiển thị trường địa chỉ MAC trong tài sản của model này',
+    'view_deleted'              => 'Xem Model đã xoá',
+    'view_models'               => 'Xem model',
 
 );

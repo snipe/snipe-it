@@ -2,35 +2,35 @@
 
 return array(
 
-    'does_not_exist' => 'Category does not exist.',
-    'assoc_users'	 => 'This accessory currently has :count items checked out to users. Please check in the accessories and and try again. ',
+    'does_not_exist' => 'カテゴリーが存在しません。',
+    'assoc_users'	 => 'この付属品は、利用者に :count 個チェックされていません。もう一度、付属品をチェックして下さい。 ',
 
     'create' => array(
-        'error'   => 'Category was not created, please try again.',
-        'success' => 'Category created successfully.'
+        'error'   => 'カテゴリーが作成されていません。もう一度、やり直して下さい。',
+        'success' => 'カテゴリーの作成に成功しました。'
     ),
 
     'update' => array(
-        'error'   => 'Category was not updated, please try again',
-        'success' => 'Category updated successfully.'
+        'error'   => 'カテゴリーが更新されていません。もう一度、やり直して下さい。',
+        'success' => 'カテゴリーの更新に成功しました。'
     ),
 
     'delete' => array(
-        'confirm'   => 'Are you sure you wish to delete this category?',
-        'error'   => 'There was an issue deleting the category. Please try again.',
-        'success' => 'The category was deleted successfully.'
+        'confirm'   => 'このカテゴリを削除してもよろしいですか？',
+        'error'   => 'このカテゴリーを削除する際に問題が発生しました。もう一度、やり直して下さい。',
+        'success' => 'カテゴリーの削除に成功しました。'
     ),
     
      'checkout' => array(
-        'error'   		=> 'Accessory was not checked out, please try again',
-        'success' 		=> 'Accessory checked out successfully.',
-        'user_does_not_exist' => 'That user is invalid. Please try again.'
+        'error'   		=> '付属品がチェックされませんでした。もう一度、やり直して下さい。',
+        'success' 		=> '付属品のチェックが終了しました。',
+        'user_does_not_exist' => 'その利用者は不正です。もう一度、やり直して下さい。'
     ),
 
     'checkin' => array(
-        'error'   		=> 'Accessory was not checked in, please try again',
-        'success' 		=> 'Accessory checked in successfully.',
-        'user_does_not_exist' => 'That user is invalid. Please try again.'
+        'error'   		=> '付属品がチェックされませんでした。もう一度、やり直して下さい。',
+        'success' 		=> '付属品のチェックが終了しました。',
+        'user_does_not_exist' => 'その利用者は不正です。もう一度、やり直して下さい。'
     )
 
 

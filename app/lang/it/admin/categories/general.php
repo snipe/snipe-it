@@ -5,7 +5,7 @@ return array(
     'about_categories'  				=> 'Le categorie degli assets ti aiutano ad organizzare i tuoi beni. Alcuni esempi di categorie possono essere "Desktop", "Laptop", "Mobile Phone" e così via, ma puoi usare le categorie degli assets in qualsiasi modo abbia senso per te. ',
     'asset_categories' 					=> 'Categorie degli Assets',
     'category_name'  					=> 'Nome categoria',
-    'checkin_email'                     => 'Send email to user on checkin.',
+    'checkin_email'                     => 'Invia email all\'utente al momento della registrazione.',
     'clone'                             => 'Copia Categoria',
     'create'  							=> 'Crea Categoria',
     'edit'                              => 'Modifica Categoria',

@@ -3,7 +3,7 @@
 return array(
 
     'account_already_exists' => 'Ein Konto mit dieser Email-Adresse existiert bereits.',
-    'account_not_found'      => 'The username or password is incorrect.',
+    'account_not_found'      => 'Benutzername oder Passwort sind nicht korrekt.',
     'account_not_activated'  => 'Das Benutzerkonto ist nicht aktiviert.',
     'account_suspended'      => 'Dieses Benutzerkonto ist gesperrt.',
     'account_banned'         => 'Dieses Benutzerkonto wurde ausgeschlossen.',

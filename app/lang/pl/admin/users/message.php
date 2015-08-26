@@ -10,6 +10,7 @@ return array(
     'user_password_required'    => 'Pole hasło jest wymagane.',
     'insufficient_permissions'  => 'Brak uprawnień.',
     'user_deleted_warning'      => 'This user has been deleted. You will have to restore this user to edit them or assign them new assets.',
+    'ldap_not_configured'        => 'LDAP integration has not been configured for this installation.',
 
 
     'success' => array(
@@ -32,17 +33,21 @@ return array(
         'import'    => 'Podczas importowania użytkowników wystąpił błąd. Spróbuj ponownie.',
         'asset_already_accepted' => 'This asset has already been accepted.',
         'accept_or_decline' => 'You must either accept or decline this asset.',
+        'ldap_could_not_connect' => 'Could not connect to the LDAP server. Please check your LDAP server configuration in the LDAP config file. <br>Error from LDAP Server:',
+        'ldap_could_not_bind' => 'Could not bind to the LDAP server. Please check your LDAP server configuration in the LDAP config file. <br>Error from LDAP Server: ',
+        'ldap_could_not_search' => 'Could not search the LDAP server. Please check your LDAP server configuration in the LDAP config file. <br>Error from LDAP Server:',
+        'ldap_could_not_get_entries' => 'Could not get entries from the LDAP server. Please check your LDAP server configuration in the LDAP config file. <br>Error from LDAP Server:',
     ),
 
     'deletefile' => array(
-        'error'   => 'File not deleted. Please try again.',
-        'success' => 'File successfully deleted.',
+        'error'   => 'Pliki nie zostały usunięte. Spróbuj ponownie.',
+        'success' => 'Pliki zostały usunięte.',
     ),
 
     'upload' => array(
-        'error'   => 'File(s) not uploaded. Please try again.',
-        'success' => 'File(s) successfully uploaded.',
-        'nofiles' => 'You did not select any files for upload',
+        'error'   => 'Plik(i) nie zostały wysłane. Spróbuj ponownie.',
+        'success' => 'Plik(i) zostały wysłane poprawnie.',
+        'nofiles' => 'Nie wybrałeś żadnych plików do wysłania',
         'invalidfiles' => 'One or more of your files is too large or is a filetype that is not allowed. Allowed filetypes are png, gif, jpg, doc, docx, pdf, and txt.',
     ),
 
