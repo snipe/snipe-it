@@ -119,6 +119,9 @@ menu:
                 labels:
                     text: "Generating Labels"
                     relativeUrl: manual/labels.html
+                backups:
+                    text: "Backups"
+                    relativeUrl: manual/backups.html
 
 
 

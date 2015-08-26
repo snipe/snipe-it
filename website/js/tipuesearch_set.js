@@ -56,7 +56,9 @@ var tipuesearch_pages = [
     "http://docs.snipeitapp.com/installation/manually-editing-data.html",
     "http://docs.snipeitapp.com/installation/subdirectory.html",
     "http://docs.snipeitapp.com/manual/user-management/index.html",
-    "http://docs.snipeitapp.com/manual/importing-licenses.html"
+    "http://docs.snipeitapp.com/manual/importing-licenses.html",
+    "http://docs.snipeitapp.com/manual/backups.html",
+    "http://docs.snipeitapp.com/manual/ldap.html"
 
 ];
 
