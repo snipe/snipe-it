@@ -23,7 +23,7 @@ Forgot Password ::
 		</label>
 		<div class="col-md-5">
 			<input class="form-control" type="text" name="username" id="username" value="{{{ Input::old('username') }}}" />
-			{{ $errors->first('email', '<br><span class="alert-msg">:message</span>') }}
+			{{ $errors->first('username', '<br><span class="alert-msg">:message</span>') }}
 		</div>
     </div>
 
