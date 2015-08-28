@@ -1,7 +1,7 @@
 addons:
     hosts:
-        - snipe-it.dev
-sudo: true
+        - localhost
+sudo: false
 
 # see http://about.travis-ci.org/docs/user/languages/php/ for more hints
 language: php
@@ -33,7 +33,7 @@ before_script:
   - php artisan db:seed --no-interaction -vvv
   - ./vendor/bin/codecept build
   - sudo chmod 777 -R app/storage
-  - php artisan serve &
+  - php artisan serve -port=80 &
   - sleep 5
   - php artisan env
 
