@@ -26,14 +26,14 @@ before_script:
   - cp app/config/travis-ci/mail.example.php app/config/travis-ci/mail.php
   - composer self-update
   - composer install --prefer-source --no-interaction
-  - php artisan key:generate --env=travis-ci
-  - php artisan migrate:install --env=travis-ci --no-interaction -vvv
-  - php artisan migrate --package cartalyst/sentry --env=travis-ci --no-interaction -vvv
-  - php artisan migrate --env=travis-ci --no-interaction -vvv
-  - php artisan db:seed --env=travis-ci --no-interaction -vvv
+  - php artisan key:generate
+  - php artisan migrate:install --no-interaction -vvv
+  - php artisan migrate --package cartalyst/sentry --no-interaction -vvv
+  - php artisan migrate --no-interaction -vvv
+  - php artisan db:seed --no-interaction -vvv
   - ./vendor/bin/codecept build
   - sudo chmod 777 -R app/storage
-  - php artisan serve --env=travis-ci &
+  - php artisan serve &
   - sleep 5
   - php artisan env
 
