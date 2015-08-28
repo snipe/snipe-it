@@ -22,7 +22,7 @@ env:
     modules:
       config:
         PhpBrowser:
-          url: http://localhost:8000
+          url: http://localhost:8007
         Laravel4:
           environment: travis-ci
           filters: true
