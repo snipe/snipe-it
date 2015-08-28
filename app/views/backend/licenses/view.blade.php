@@ -33,7 +33,7 @@
 @if ($license->serial)
 	<div class="col-md-12 col-sm-12" style="padding-bottom: 10px; margin-left: 15px; word-wrap: break-word;">
 	<strong>@lang('admin/licenses/form.serial'): </strong>
-	{{{ $license->serial }}}
+	{{ nl2br($license->serial) }}
 	</div>
 @endif
 
