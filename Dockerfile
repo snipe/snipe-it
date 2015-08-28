@@ -54,14 +54,8 @@ COPY docker/mail.php /var/www/html/app/config/production/mail.php
 #change DB file user
 #RUN sed -i s/travis/snipe_it/ /var/www/html/app/config/production/database.php
 
-#init app config file (DO NOT overwrite!)
-RUN cp -n /var/www/html/app/config/production/app.example.php /var/www/html/app/config/production/app.php
-
-# Change default hostname to blank...I guess?
-RUN sed -i s%http://staging.yourserver.com%% /var/www/html/app/config/production/app.php
-
-# turn off the toolbar
-RUN sed -i 's%\x27debug\x27 => true%\x27debug\x27 => false%' /var/www/html/app/config/production/app.php
+#init app config file
+COPY docker/app.php /var/www/html/app/config/production/app.php
 
 RUN chown -R docker /var/www/html
 
