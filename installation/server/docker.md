@@ -31,6 +31,10 @@ docker run --name mysql -e MYSQL_ROOT_PASSWORD=SUPERDUPERSECRETPASSWORD -e MYSQL
 
 That should set you up with your database to use. (You can also use an environment file using `--env-file`; see `docker run --help` for details)
 
+You will want to set the URL that will be used to access the server. This value is used as the URL for the dashboard page, as well as in emails.
+
+- SERVER_URL – the server's URL (example: http://snipeit.example.com)
+
 You'll want to handle E-Mail – you can do this with a Docker container (not documented here), or point to any other external mail server. If you did want to do it using Docker, make sure to expose port 587 for mail submission, and use `--link mail:...`.
 
 Regardless, the environment variables necessary are:
