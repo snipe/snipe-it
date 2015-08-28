@@ -174,7 +174,9 @@ If you don't have an LDAP server (or don't wish to import your users, or allow t
 
 The LDAP functionality will import any users in your LDAP/Active Directory, but will leave existing users untouched.
 
-See the `app/config/production/ldap.example.php` for details on specific LDAP settings. 
+See the `app/config/production/ldap.example.php` for details on specific LDAP settings.
+
+**Note: You must have the `php-ldap` extension installed for LDAP integration to work.**
 
 -----
 

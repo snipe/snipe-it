@@ -17,6 +17,7 @@ The requirements for Snipe-IT are fairly standard for a modern web server, and m
 - MySQL or MariaDB
 - SSH access to the server (if using Linux)
 - GD Library (>=2.0) or Imagick PHP extension (>=6.3.8)
+- php-ldap extension (only if using LDAP)
 
 ## <i class="fa fa-linux"></i> Requirements Specific to Linux/OSX
 - Mod Rewrite

@@ -64,6 +64,13 @@ to auto-generate a 32-character key for you. Paste the generated key in as the v
 
 -----
 
+## Call to undefined function Controllers\Admin\ldap_connect()
+
+The PHP LDAP extension is not installed on your server. While this extension is not required for all Snipe-IT installations, it must be installed if you wish to use any of the LDAP functionality. 
+
+-----
+
+
 ## White page with error: Error in exception handler.
 
 Make sure you've changed the permissions on the `app/storage` directory and all of the directories within to be writable by the web server.
