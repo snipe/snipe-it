@@ -5,6 +5,7 @@ RUN apt-get update && apt-get install -y \
 apache2-bin \
 libapache2-mod-php5 \
 php5-curl \
+php5-ldap \
 php5-mysql \
 php5-mcrypt \
 php5-gd \
@@ -39,23 +40,8 @@ WORKDIR /var/www/html
 #Patch bootstrap file
 RUN patch -p1 < /tmp/app_start.patch
 
-#DB create?
-# mysqladmin -u root  create snipeit_laravel
-
-#DB create user, grant access to new DB?
-# grant all privileges on snipeit_laravel.* TO snipeit;
-
-#DB config file init? (NEVER overwrite!)
-#RUN cp -n /var/www/html/app/config/production/database.example.php /var/www/html/app/config/production/database.php
-COPY docker/database.php /var/www/html/app/config/production/database.php
-
-COPY docker/mail.php /var/www/html/app/config/production/mail.php
-
-#change DB file user
-#RUN sed -i s/travis/snipe_it/ /var/www/html/app/config/production/database.php
-
-#init app config file
-COPY docker/app.php /var/www/html/app/config/production/app.php
+#copy all configuration files
+COPY docker/*.php /var/www/html/app/config/production/
 
 RUN chown -R docker /var/www/html
 
