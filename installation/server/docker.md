@@ -31,6 +31,10 @@ docker run --name mysql -e MYSQL_ROOT_PASSWORD=SUPERDUPERSECRETPASSWORD -e MYSQL
 
 That should set you up with your database to use. (You can also use an environment file using `--env-file`; see `docker run --help` for details)
 
+You will want to set the URL that will be used to access the server. This value is used as the URL for the dashboard page, as well as in emails.
+
+- SERVER_URL – the server's URL (example: http://snipeit.example.com)
+
 You'll want to handle E-Mail – you can do this with a Docker container (not documented here), or point to any other external mail server. If you did want to do it using Docker, make sure to expose port 587 for mail submission, and use `--link mail:...`.
 
 Regardless, the environment variables necessary are:
@@ -43,6 +47,21 @@ Regardless, the environment variables necessary are:
 - MAIL_ENV_PASSWORD – SMTP password
 
 You can assemble these options into an env-file, or specify them on the command line when you run your Snipe-IT container.
+
+Likewise, there are environment variables available to configure the (optional) LDAP support:
+
+- LDAP_URL – the URL for your LDAP server (ldap://ldap.example.com)
+- LDAP_USERNAME – LDAP 'browse' username
+- LDAP_PASSWORD – LDAP 'browse' password
+- LDAP_BASEDN – the base where the search for users will be executed
+- LDAP_FILTER – the search filter for the LDAP query
+- LDAP_RESULT_USERNAME – the LDAP field to use as the username
+- LDAP_RESULT_LAST_NAME – the LDAP field to use as the last name
+- LDAP_RESULT_FIRST_NAME – the LDAP field to use as the first name
+- LDAP_RESULT_ACTIVE_FLAG – the LDAP field used to specify if the user is active (optional)
+- LDAP_RESULT_EMP_NUM – the LDAP field used to specify the employee number (optional)
+- LDAP_RESULT_EMAIL – the LDAP field used to specify the email address (optional)
+- LDAP_AUTHENTICATION_FILTER_QUERY – the LDAP query to execute when authenticating a user (optional)
 
 Now you can start your Snipe-IT container:
 
