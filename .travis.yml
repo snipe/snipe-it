@@ -32,7 +32,7 @@ before_script:
   - php artisan migrate --no-interaction -vvv
   - php artisan db:seed --no-interaction -vvv
   - ./vendor/bin/codecept build
-  - php artisan serve --port=8007 &
+  - APP_ENV=travis-ci php artisan serve --port=8007 &
   - sleep 5
   - php artisan env
 
