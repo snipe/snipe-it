@@ -23,18 +23,12 @@
     | given environment, then we will automatically detect it for you.
     |
     */
-//    if (isset($_SERVER[ 'APP_ENV' ]) && $_SERVER[ 'APP_ENV' ] == 'travis-ci') {
-//        $env =  $app->detectEnvironment(function() {
-//            return 'travis-ci';
-//        });
-//    } else {
         $env = $app->detectEnvironment( [
             'local'      => [ 'homestead', 'AlisonMBP' ],
             'travis-ci'  => getenv('APP_ENV') == 'travis-ci',
             'staging'    => [ 'stagingweb01' ],
             'production' => [ 'www.yourserver.com' ]
         ] );
-//    }
 
     /*
     |--------------------------------------------------------------------------
