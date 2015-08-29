@@ -34,15 +34,10 @@ before_script:
   - ./vendor/bin/codecept build
   - APP_ENV=travis-ci php artisan serve --port=8007 &
   - sleep 5
-  - php artisan env
 
 # omitting "script:" will default to phpunit
 # use the $DB env variable to determine the phpunit.xml to use
 script: ./vendor/bin/codecept run --env travis-ci -vvv
-#script: phpunit
-
-after_failure:
-  - cat tests/_output/WelcomeCept.fail.html
 
 # configure notifications (email, IRC, campfire etc)
 notifications:
