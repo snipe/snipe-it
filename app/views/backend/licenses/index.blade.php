@@ -17,39 +17,46 @@
 </div>
 
 <div class="row form-wrapper">
-    {{ Datatable::table()
-                ->addColumn(Lang::get('admin/licenses/table.title'), 
-                            Lang::get('admin/licenses/table.serial'), 
-                            Lang::get('admin/licenses/form.seats'), 
-                            Lang::get('admin/licenses/form.remaining_seats'), 
-                            Lang::get('admin/licenses/table.purchase_date'), 
-                            Lang::get('table.actions'))
-                ->setOptions(
-                        array(
-	                        'language' => array(
-			            	'search' => Lang::get('general.search'),
-			            	'lengthMenu' => Lang::get('general.page_menu'),
-			            	'loadingRecords' => Lang::get('general.loading'),
-			            	'zeroRecords' => Lang::get('general.no_results'),
-			            	'info' => Lang::get('general.pagination_info'), 
-			            	'processing' => Lang::get('general.processing'),
-			            	'paginate'=> array(
-			            		'first'=>Lang::get('general.first'),
-			            		'previous'=>Lang::get('general.previous'),
-			            		'next'=>Lang::get('general.next'),
-			            		'last'=>Lang::get('general.last'),
-			            		),
-			            	),
-                            'sAjaxSource'=>route('api.licenses.list'),
-                            'dom' =>'CT<"clear">lfrtip',
-                            'colVis'=> array('showAll'=>'Show All','restore'=>'Restore','exclude'=>array(5),'activate'=>'mouseover'),
-                            'columnDefs'=> array(
-                                array('bSortable'=>false,'targets'=>array(5)),
-                                array('width'=>'20%','targets'=>array(5)),
-                                ),
-                            'order'=>array(array(0,'asc')),
-                        )
-                    )
-                ->render() }}
+    <table name="licenses" id="table" data-url="{{route('api.licenses.list')}}">
+        <thead>
+            <tr>
+                <th data-field="name">{{Lang::get('admin/licenses/table.title')}}</th>
+                <th data-field="serial">{{Lang::get('admin/licenses/table.serial')}}</th>
+                <th data-field="totalSeats">{{Lang::get('admin/licenses/form.seats')}}</th>
+                <th data-field="remaining">{{Lang::get('admin/licenses/form.remaining_seats')}}</th>
+                <th data-field="purchase_date">{{Lang::get('admin/licenses/table.purchase_date')}}</th>
+                <th data-field="actions">{{Lang::get('table.actions')}}</th>
+            </tr>
+        </thead>
+    </table>
 </div>
+
+<script type="text/javascript">
+    $('#table').bootstrapTable({
+        classes: 'table table-hover table-no-bordered',
+        undefinedText: 'undefined',
+        iconsPrefix: 'fa',
+        showRefresh: true,
+        search: true,
+        pageSize: {{{ Setting::getSettings()->per_page }}},
+        pagination: true,
+        sidePagination: 'server',
+        sortable: true,
+        mobileResponsive: true,
+        showExport: true,
+        showColumns: false,
+        maintainSelected: true,
+        paginationFirstText: "@lang('general.first')",
+        paginationLastText: "@lang('general.last')",
+        paginationPreText: "@lang('general.previous')",
+        paginationNextText: "@lang('general.next')",
+        pageList: ['10','25','50','100','150','200'],
+        icons: {
+            paginationSwitchDown: 'fa-caret-square-o-down',
+            paginationSwitchUp: 'fa-caret-square-o-up',
+            columns: 'fa-columns',
+            refresh: 'fa-refresh'
+        },
+    });
+</script>
 @stop
