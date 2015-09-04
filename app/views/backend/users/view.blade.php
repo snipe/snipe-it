@@ -344,8 +344,6 @@
                                         <td>{{{ $log->action_type }}}</td>
                                         <td>
 
-                                        @if ($log->assetlog)
-
                                             @if (($log->assetlog) && ($log->asset_type=="hardware"))
 
                                                 @if ($log->assetlog->deleted_at=='')
@@ -384,8 +382,6 @@
                                              @else
                                                  @lang('general.bad_data')
                                             @endif
-
-                                        @endif
 
                                         </td>
                                         <td>{{{ $log->adminlog->fullName() }}}</td>

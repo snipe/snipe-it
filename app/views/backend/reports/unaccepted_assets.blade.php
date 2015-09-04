@@ -16,7 +16,7 @@
             <a href="{{ route('reports/export/unaccepted_assets') }}" class="btn btn-flat gray pull-right"><i class="fa fa-download icon-white"></i>
                 @lang('admin/asset_maintenances/table.dl_csv')</a>
         </div>
-        <h3>@lang('general.asset_maintenance_report')</h3>
+        <h3>@lang('general.unaccepted_asset_report')</h3>
     </div>
     <div class="row">
         <div class="table-responsive">
