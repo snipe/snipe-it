@@ -143,6 +143,8 @@ Copy the example app config from `app/config/production/app.example.php` to `app
 'url'=> 'http://www.yourserver.com',
 ```
 
+**This value should begin with the protocol (http:// or https://), as reflected in the example above.**
+
 You should also change your secret key here from `Change_this_key_or_snipe_will_get_ya` to a random 32 character string. If you prefer to have your key randomly generated, run the `php artisan key:generate` command from the application root a little later in this process.
 
 -----
