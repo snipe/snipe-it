@@ -123,6 +123,17 @@ padding: 0px 20px;
 	                                    </div>
                                     </div>
 
+                                    <div class="form-group {{ $errors->has('custom_css') ? 'error' : '' }}">
+	                                    <div class="col-md-3">
+                                        {{ Form::label('custom_css', Lang::get('admin/settings/general.custom_css')) }}
+	                                    </div>
+	                                    <div class="col-md-9">
+										{{ Form::textarea('custom_css', Input::old('custom_css', $setting->custom_css), array('class' => 'form-control','placeholder' => 'Add your custom CSS')) }}
+										{{ $errors->first('custom_css', '<br><span class="alert-msg">:message</span>') }}
+										 <p class="help-inline">@lang('admin/settings/general.custom_css_help')</p>
+	                                    </div>
+
+
 									 <div class="form-group {{ $errors->has('per_page') ? 'error' : '' }}">
                                         <div class="col-md-3">
 											{{ Form::label('per_page', Lang::get('admin/settings/general.per_page')) }}

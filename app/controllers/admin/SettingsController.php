@@ -70,6 +70,7 @@ class SettingsController extends AdminController
 	        "per_page"   	=> 'required|min:1|numeric',
 	        "qr_text"		=> 'min:1|max:31',
 	        "logo"   		=> 'mimes:jpeg,bmp,png,gif',
+            "custom_css"   => 'alpha_space',
 	        "alert_email"   => 'email',
 	        "slack_endpoint"   => 'url',
             "default_currency"   => 'required',
@@ -113,6 +114,7 @@ class SettingsController extends AdminController
 
              if (Config::get('app.lock_passwords')==false) {
 	             $setting->site_name = e(Input::get('site_name'));
+                 $setting->custom_css = e(Input::get('custom_css'));
              }
 
             $setting->per_page = e(Input::get('per_page'));
