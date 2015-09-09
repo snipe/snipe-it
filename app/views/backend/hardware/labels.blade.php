@@ -35,7 +35,7 @@
 		    margin-left: 5px;
 		    float: left;
 		    font-family: arial, helvetica, sans-serif;
-		    font-size: 15px;
+		    font-size: 14px;
 	    }
     </style>
 
@@ -55,7 +55,7 @@
             		@if ($asset->name!='')
                 		<b>N: {{ $asset->name }}</b>
                 		<br>
-            		@endif			
+            		@endif
 			@if ($asset->asset_tag!='')
 				T: {{{ $asset->asset_tag }}}
 				<br>
