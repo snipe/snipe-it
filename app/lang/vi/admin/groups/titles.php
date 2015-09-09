@@ -2,12 +2,12 @@
 
 return array(
 
-    'group_management' 	 	=> 'Group Management',
-    'create_group' 	 		=> 'Create New Group',
-    'edit_group' 	 		=> 'Edit Group',
-    'group_name' 	 		=> 'Group Name',
-    'group_admin' 	 		=> 'Group Admin',
-    'allow' 	 			=> 'Allow',
-    'deny' 	 				=> 'Deny',
+    'group_management' 	 	=> 'Quản lý nhóm',
+    'create_group' 	 		=> 'Tạo nhóm mới',
+    'edit_group' 	 		=> 'Chỉnh sửa nhóm',
+    'group_name' 	 		=> 'Tên nhóm',
+    'group_admin' 	 		=> 'Quản lý nhóm',
+    'allow' 	 			=> 'Cho phép',
+    'deny' 	 				=> 'Từ chối',
 
 );

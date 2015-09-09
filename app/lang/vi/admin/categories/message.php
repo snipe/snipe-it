@@ -3,7 +3,7 @@
 return array(
 
     'does_not_exist' => 'Hạng mục không tồn tại.',
-    'assoc_users'	 => 'This category is currently associated with at least one model and cannot be deleted. Please update your models to no longer reference this category and try again. ',
+    'assoc_users'	 => 'Danh mục này hiện đang được liên kết đến ít nhất một kiểu tài sản và không thể xóa. Vui lòng cập nhật kiểu tài sản của bạn để không còn liên kết đến danh mục này và thử lại. ',
 
     'create' => array(
         'error'   => 'Hạng mục chưa được tạo. Bạn hãy thử lại.',

@@ -10,6 +10,8 @@ return array(
 	'backups'					=> 'Backups',
 	'barcode_type'				=> 'Tipo Barcode',
 	'barcode_settings'			=> 'Impostazioni codice a barre',
+	'custom_css'				=> 'Custom CSS',
+	'custom_css_help'			=> 'Enter any custom CSS overrides you would like to use. Do not include the &lt;style&gt;&lt;/style&gt; tags.',
 	'default_currency'  		=> 'Valuta predefinita',
 	'default_eula_text'			=> 'EULA Predefinita',
 	'default_eula_help_text'	=> 'È possibile associare EULAs personalizzati a categorie di beni specifici.',

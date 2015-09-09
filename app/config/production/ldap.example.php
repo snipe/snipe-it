@@ -68,10 +68,10 @@ return array(
     | LDAP as follows (where $results[$i] represents a row in the LDAP query:
     | $username-to-insert-in-snipe-it = $results[$i]["my-org-username"][0]
     |
-    | Note: all these fields are required.
     |--------------------------------------------------------------------------
     |
     | The search filter for the LDAP query.
+    | Note: all these fields are required, and they should all be lowercase.
     |
     */
     'result.username' => "",

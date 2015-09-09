@@ -1,17 +1,17 @@
 <?php
 
     return [
-        'not_found'                    => 'Asset Maintenance you were looking for was not found!',
+        'not_found'                    => 'Irangos priežiūra, kurios tu ieškai, nerasta!',
         'delete'                       => [
-            'confirm' => 'Are you sure you wish to delete this asset maintenance?',
-            'error'   => 'There was an issue deleting the asset maintenance. Please try again.',
-            'success' => 'The asset maintenance was deleted successfully.'
+            'confirm' => 'Ar tikrai norite ištrinti šią įrangos priežiūrą?',
+            'error'   => 'Inepavyko ištrinti įrangos priežiūrą. Prašome bandykite dar kartą.',
+            'success' => 'Įrangos preižiūra buvo sėkmingai ištrinta.'
         ],
         'create'                       => [
-            'error'   => 'Asset Maintenance was not created, please try again.',
-            'success' => 'Asset Maintenance created successfully.'
+            'error'   => 'Įrangos priežiūra nebuvo sukurta, prašome bandykite dar kartą.',
+            'success' => 'Įrangos priežiūra sukurta sėkmingai.'
         ],
-        'asset_maintenance_incomplete' => 'Not Completed Yet',
-        'warranty'                     => 'Warranty',
-        'not_warranty'                 => 'Not Warranty',
+        'asset_maintenance_incomplete' => 'Nebaigta',
+        'warranty'                     => 'Garantija',
+        'not_warranty'                 => 'Nėra garantijos',
     ];

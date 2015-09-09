@@ -87,6 +87,11 @@
 			}
 		@endif
 
+        @if (Setting::getSettings()->custom_css)
+            {{{ Setting::getSettings()->custom_css }}}
+        @endif
+
+
         </style>
 
 

@@ -2,26 +2,26 @@
 
 return array(
 
-    'does_not_exist' => 'Location does not exist.',
-    'assoc_users'	 => 'This location is currently associated with at least one user and cannot be deleted. Please update your users to no longer reference this location and try again. ',
-    'assoc_assets'	 => 'This location is currently associated with at least one asset and cannot be deleted. Please update your assets to no longer reference this location and try again. ',
-    'assoc_child_loc'	 => 'This location is currently the parent of at least one child location and cannot be deleted. Please update your locations to no longer reference this location and try again. ',
+    'does_not_exist' => 'Tokios vietovės nėra.',
+    'assoc_users'	 => 'Ši vietovė šiuo metu yra susieta bent su vienu vartotoju ir negali būti ištrinta. Prašome atnaujinkite naudotojus, kad atsieti šią vietovę ir tuomet bandykite iš naujo ištrinti. ',
+    'assoc_assets'	 => 'Ši vietovė šiuo metu yra susieta bent su vienu įrangos vienetu ir negali būti ištrinta. Prašome atnaujinkite įrangą, kad atsieti šią vietovę ir tuomet bandykite iš naujo ištrinti. ',
+    'assoc_child_loc'	 => 'Ši vietovė šiuo metu yra skaip pagrindinė bent kelioms kitoms žemesnio lygio vietovėms ir negali būti ištrinta. Prašome atnaujinkite vietoves, kad atsieti šią vietovę ir tuomet bandykite iš naujo ištrinti. ',
 
 
     'create' => array(
-        'error'   => 'Location was not created, please try again.',
-        'success' => 'Location created successfully.'
+        'error'   => 'Vietovė nesukurta. Prašome bandykite dar kartą.',
+        'success' => 'Vietovė sukurta.'
     ),
 
     'update' => array(
-        'error'   => 'Location was not updated, please try again',
-        'success' => 'Location updated successfully.'
+        'error'   => 'Vietovė neatnaujinta. Prašome bandykite dar kartą',
+        'success' => 'Vietovė sėkmingai atnaujinta.'
     ),
 
     'delete' => array(
-        'confirm'   	=> 'Are you sure you wish to delete this location?',
-        'error'   => 'There was an issue deleting the location. Please try again.',
-        'success' => 'The location was deleted successfully.'
+        'confirm'   	=> 'Ar jūs tikrai norite ištrinti šią vietovę?',
+        'error'   => 'Nepavyko ištrinti vietovės. Prašome bandykite dar kartą.',
+        'success' => 'Vietovė sėkmingai ištrinta.'
     )
 
 );

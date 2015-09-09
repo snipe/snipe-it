@@ -1,12 +1,12 @@
 <?php
 
 return array(
-    'about_asset_depreciations'  			=> 'About Asset Depreciations',
-    'about_depreciations'  					=> 'You can set up asset depreciations to depreciate assets based on straight-line depreciation.',
-    'asset_depreciations'  					=> 'Asset Depreciations',
-    'create_depreciation'  					=> 'Create Depreciation',
-    'depreciation_name'  					=> 'Depreciation Name',
-    'number_of_months'  					=> 'Number of Months',
-    'update_depreciation'  					=> 'Update Depreciation',
+    'about_asset_depreciations'  			=> 'Apie įrangos nusidėvėjimą',
+    'about_depreciations'  					=> 'Jūs galite nustatyti irangos nusidėvėjimą naudodami proporcinio metodo nusidėvėjimą.',
+    'asset_depreciations'  					=> 'Irangos nusidėvėjimas',
+    'create_depreciation'  					=> 'Sukurti nusidėvėjimą',
+    'depreciation_name'  					=> 'Nusidėvėjimo pavadinimas',
+    'number_of_months'  					=> 'Mėnesių skaičius',
+    'update_depreciation'  					=> 'Atnaujinti nusidėvėjimą',
 
 );

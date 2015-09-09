@@ -10,6 +10,8 @@ return array(
 	'backups'					=> 'Yedekler',
 	'barcode_type'				=> 'Barkod Tipi',
 	'barcode_settings'			=> 'Barkod Ayarları',
+	'custom_css'				=> 'Custom CSS',
+	'custom_css_help'			=> 'Enter any custom CSS overrides you would like to use. Do not include the &lt;style&gt;&lt;/style&gt; tags.',
 	'default_currency'  		=> 'Default Currency',
 	'default_eula_text'			=> 'Varsayılan Sözleşme',
 	'default_eula_help_text'	=> 'Özel Demirbaş Kategorileri için özel Son Kullanıcı Lisans Sözleşmesi ilişkilendirebilirsiniz.',

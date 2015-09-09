@@ -1,11 +1,11 @@
 <?php
 
 return array(
-    'about_consumables_title' 			=> 'About Consumables',
-    'about_consumables_text'  			=> 'Consumables are anything purchased that will be used up over time. For example, printer ink or copier paper.',
-    'consumable_name'                  => 'Consumable Name',
-    'create'                             => 'Create Consumable',
+    'about_consumables_title' 			=> 'Vật rẻ mau hỏng',
+    'about_consumables_text'  			=> 'Vật rẻ mau hỏng là bất cứ thứ gì được mua định kỳ theo thời gian. Ví dụ: mục in hoặc giấy photo.',
+    'consumable_name'                  => 'Tên vật tư phụ',
+    'create'                             => 'Tạo vật tư phụ',
     'remaining' 			             => 'Còn lại',
     'total' 			                 => 'Tổng số',
-    'update'                            => 'Update Consumable',
+    'update'                            => 'Cập nhật vật tư phụ',
 );

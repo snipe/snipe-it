@@ -1,9 +1,9 @@
 <?php
 
     return [
-        'title'         => 'Asset Maintenance',
-        'asset_name'    => 'Asset Name',
-        'supplier_name' => 'Supplier Name',
-        'is_warranty'   => 'Warranty',
-        'dl_csv'        => 'Download CSV'
+        'title'         => 'Įrangos priežiūra',
+        'asset_name'    => 'Įrangos pavadinimas',
+        'supplier_name' => 'Tiekėjo pavadinimas',
+        'is_warranty'   => 'Garantija',
+        'dl_csv'        => 'Atsisiųti CSV fromatu'
     ];

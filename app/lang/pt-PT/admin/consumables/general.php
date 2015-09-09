@@ -1,11 +1,11 @@
 <?php
 
 return array(
-    'about_consumables_title' 			=> 'About Consumables',
-    'about_consumables_text'  			=> 'Consumables are anything purchased that will be used up over time. For example, printer ink or copier paper.',
-    'consumable_name'                  => 'Consumable Name',
-    'create'                             => 'Create Consumable',
-    'remaining' 			             => 'Remaining',
+    'about_consumables_title' 			=> 'Acerca de Consumíveis',
+    'about_consumables_text'  			=> 'Consumíveis são todo e qualquer item comprado que será usado ao longo do tempo. Por exemplo, papel ou tinta de impressora.',
+    'consumable_name'                  => 'Nome do consumível',
+    'create'                             => 'Criar consumível',
+    'remaining' 			             => 'Restantes',
     'total' 			                 => 'Total',
-    'update'                            => 'Update Consumable',
+    'update'                            => 'Atualizar consumível',
 );

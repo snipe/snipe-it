@@ -10,6 +10,8 @@ return array(
 	'backups'					=> 'Backups',
 	'barcode_type'				=> 'Тип штрихкода',
 	'barcode_settings'			=> 'Настройки штрихкода',
+	'custom_css'				=> 'Custom CSS',
+	'custom_css_help'			=> 'Enter any custom CSS overrides you would like to use. Do not include the &lt;style&gt;&lt;/style&gt; tags.',
 	'default_currency'  		=> 'Default Currency',
 	'default_eula_text'			=> 'Пользовательское соглашение по умолчанию',
 	'default_eula_help_text'	=> 'Вы так же можете привязать собственные пользовательские соглашения к определенным категориям активов.',

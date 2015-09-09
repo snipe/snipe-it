@@ -33,11 +33,13 @@ class AuthController extends BaseController
         $ldappass    = Config::get('ldap.password');
         $baseDn      = Config::get('ldap.basedn');
         $filterQuery = Config::get('ldap.authentication.filter.query') . $username;
+        $ldapversion = Config::get('ldap.version');
 
 	// Connecting to LDAP
 	$connection = ldap_connect($ldaphost) or die("Could not connect to {$ldaphost}");
     // Needed for AD
     ldap_set_option($connection, LDAP_OPT_REFERRALS, 0);
+    ldap_set_option($connection, LDAP_OPT_PROTOCOL_VERSION,$ldapversion);
 
         try {
             if ($connection) {

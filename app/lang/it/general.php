@@ -3,7 +3,7 @@
     return [
     'accessories'			=> 'Accessori',
     'accessory'				=> 'Accessorio',
-    'accessory_report'			=> 'Accessory Report',
+    'accessory_report'			=> 'Rapporto sugli Accessori',
     'action'                => 'Azione',
     'activity_report'		=> 'Rapporto sull\'attività',
     'address'				=> 'Indirizzo',
@@ -60,7 +60,7 @@
     'id'  					=> 'ID',
     'image_delete'         	=> 'Cancella l\'Immagine',
     'image_upload'         	=> 'Carica immagine',
-    'import'         	    => 'Import',
+    'import'         	    => 'Importa',
     'asset_maintenance'        => 'Manutenzione Prodotto',
     'asset_maintenance_report' => 'Rapporto manutenzione prodotto',
     'asset_maintenances'       => 'Manutenzione Prodotto',

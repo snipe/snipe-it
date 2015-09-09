@@ -1,17 +1,17 @@
 <?php
 
     return [
-        'not_found'                    => 'Asset Maintenance you were looking for was not found!',
+        'not_found'                    => '자산 관리를 찾을 수 없습니다!',
         'delete'                       => [
-            'confirm' => 'Are you sure you wish to delete this asset maintenance?',
-            'error'   => 'There was an issue deleting the asset maintenance. Please try again.',
-            'success' => 'The asset maintenance was deleted successfully.'
+            'confirm' => '이 자산 관리를 삭제 하시겠습니까?',
+            'error'   => '자산 관리 삭제시에 문제가 발생했습니다. 다시 시도해 주세요.',
+            'success' => '자산 관리가 삭제되었습니다.'
         ],
         'create'                       => [
-            'error'   => 'Asset Maintenance was not created, please try again.',
-            'success' => 'Asset Maintenance created successfully.'
+            'error'   => '자산 관리가 생성되지 않았습니다. 다시 시도해 주세요.',
+            'success' => '자산 관리가 생성되었습니다.'
         ],
-        'asset_maintenance_incomplete' => 'Not Completed Yet',
-        'warranty'                     => 'Warranty',
-        'not_warranty'                 => 'Not Warranty',
+        'asset_maintenance_incomplete' => '아직 완료되지 않았습니다.',
+        'warranty'                     => '보증',
+        'not_warranty'                 => '보증 안됨',
     ];

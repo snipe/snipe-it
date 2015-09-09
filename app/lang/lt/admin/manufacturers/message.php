@@ -2,23 +2,23 @@
 
 return array(
 
-    'does_not_exist' => 'Manufacturer does not exist.',
-    'assoc_users'	 => 'This manufacturer is currently associated with at least one model and cannot be deleted. Please update your models to no longer reference this manufacturer and try again. ',
+    'does_not_exist' => 'Tokio gamintojo nėra.',
+    'assoc_users'	 => 'Šis gamintojas šiuo metu susietas su daugaiau nei vienu modeliu ir negali būti ištrintas. Prašome atnaujinkite savo modelius, kad nesisietų su šiuo gamintoju ir bandykite iš naujo. ',
 
     'create' => array(
-        'error'   => 'Manufacturer was not created, please try again.',
-        'success' => 'Manufacturer created successfully.'
+        'error'   => 'Gamintojas nesukurtas, prašome bandykite dar kartą.',
+        'success' => 'Gamintojas sėkmingai sukurtas.'
     ),
 
     'update' => array(
-        'error'   => 'Manufacturer was not updated, please try again',
-        'success' => 'Manufacturer updated successfully.'
+        'error'   => 'Gamintojas neatnaujintas, prašome bandykite dar kartą',
+        'success' => 'Gamintojas sėkmingai atnaujintas.'
     ),
 
     'delete' => array(
-        'confirm'   => 'Are you sure you wish to delete this manufacturer?',
-        'error'   => 'There was an issue deleting the manufacturer. Please try again.',
-        'success' => 'The Manufacturer was deleted successfully.'
+        'confirm'   => 'Ar jūs tikrai norite ištrinti šį gamintoją?',
+        'error'   => 'Nepavyko ištrinti gamintojo. Prašome bandykite dar kartą.',
+        'success' => 'Gamintojas sėkmingai ištrintas.'
     )
 
 );

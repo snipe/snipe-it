@@ -2,35 +2,35 @@
 
 return array(
 
-    'does_not_exist' => 'Category does not exist.',
-    'assoc_users'	 => 'This accessory currently has :count items checked out to users. Please check in the accessories and and try again. ',
+    'does_not_exist' => 'Tokios kategorijos nėra.',
+    'assoc_users'	 => 'Ši įranga šiuo metu turi:count vienetus išduotus vartotojams. Prašome patikrinkite irangos meniu ir bandykite dar kartą. ',
 
     'create' => array(
-        'error'   => 'Category was not created, please try again.',
-        'success' => 'Category created successfully.'
+        'error'   => 'Kategorijos sukurti nepavyko, prašome badykite dar kartą.',
+        'success' => 'Sėkmingai sukurta nauja kategorija.'
     ),
 
     'update' => array(
-        'error'   => 'Category was not updated, please try again',
-        'success' => 'Category updated successfully.'
+        'error'   => 'Kategorija neatnaujinta, prašome pabandykite dar kartą',
+        'success' => 'Kategorijos atnaujinimas sėkmingas.'
     ),
 
     'delete' => array(
-        'confirm'   => 'Are you sure you wish to delete this category?',
-        'error'   => 'There was an issue deleting the category. Please try again.',
-        'success' => 'The category was deleted successfully.'
+        'confirm'   => 'Ar jūs tikrai norite ištrinti šią kategoriją?',
+        'error'   => 'Nepavyko ištrinti kategorijos. Prašome bandykite dar kartą.',
+        'success' => 'Kategorija sėkmingai ištrinta.'
     ),
     
      'checkout' => array(
-        'error'   		=> 'Accessory was not checked out, please try again',
-        'success' 		=> 'Accessory checked out successfully.',
-        'user_does_not_exist' => 'That user is invalid. Please try again.'
+        'error'   		=> 'Įrangos nepavyko išimti, prašome bandykite dar kartą',
+        'success' 		=> 'Įranga sėkmingai išimta.',
+        'user_does_not_exist' => 'Šis vartotojas neteisingas. Prašome bandykite dar kartą.'
     ),
 
     'checkin' => array(
-        'error'   		=> 'Accessory was not checked in, please try again',
-        'success' 		=> 'Accessory checked in successfully.',
-        'user_does_not_exist' => 'That user is invalid. Please try again.'
+        'error'   		=> 'Įrangos nepavyko pridėti, prašome bandykite dar kartą',
+        'success' 		=> 'Įranga sėkmingai pridėta.',
+        'user_does_not_exist' => 'Varototojas neteisingas. Prašome bandykite dar kartą.'
     )
 
 

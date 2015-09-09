@@ -2,14 +2,14 @@
 
 return array(
 
-    'actions' 	=> 'Actions',
-    'add'    	=> 'Add New',
-    'cancel'    => 'Cancel',
-    'delete'  	=> 'Delete',
-    'edit'    	=> 'Edit',
-    'restore' 	=> 'Restore',
-    'request'   => 'Request',
-    'submit'  	=> 'Submit',
-    'upload'    => 'Upload',
+    'actions' 	=> 'Veiksmai',
+    'add'    	=> 'Pridėti naują',
+    'cancel'    => 'Atšaukti',
+    'delete'  	=> 'Ištrinti',
+    'edit'    	=> 'Keisti',
+    'restore' 	=> 'Atstatyti',
+    'request'   => 'Užklausti',
+    'submit'  	=> 'Išsaugoti',
+    'upload'    => 'Įkelti',
 
 );

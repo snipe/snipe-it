@@ -2,24 +2,24 @@
 
 return array(
 
-    'does_not_exist' => 'Depreciation class does not exist.',
-    'assoc_users'	 => 'This depreciation is currently associated with one or more models and cannot be deleted. Please delete the models, and then try deleting again. ',
+    'does_not_exist' => 'A classe de imobilizado não existe.',
+    'assoc_users'	 => 'Esta depreciação está atualmente associada com um ou mais modelos e não pode ser removida. Por favor, remova os modelos, e depois tente novamente. ',
 
 
     'create' => array(
-        'error'   => 'Depreciation class was not created, please try again. :(',
-        'success' => 'Depreciation class created successfully. :)'
+        'error'   => 'A não foi possível criar a classe de imobilizado. Por favor, tente novamente.',
+        'success' => 'Classe de imobilizado criada com sucesso.'
     ),
 
     'update' => array(
-        'error'   => 'Depreciation class was not updated, please try again',
-        'success' => 'Depreciation class updated successfully.'
+        'error'   => 'Classe de imobilizado não foi atualizada. Por favor, tente novamente',
+        'success' => 'Classe de imobilizado atualizada com sucesso.'
     ),
 
     'delete' => array(
-        'confirm'   => 'Are you sure you wish to delete this depreciation class?',
-        'error'   => 'There was an issue deleting the depreciation class. Please try again.',
-        'success' => 'The depreciation class was deleted successfully.'
+        'confirm'   => 'Tem a certeza que pretende remover esta classe de imobilizado?',
+        'error'   => 'Ocorreu um problema ao remover esta classe de imobilizado. Por favor, tente novamente.',
+        'success' => 'A classe de imobilizado foi criada com sucesso.'
     )
 
 );

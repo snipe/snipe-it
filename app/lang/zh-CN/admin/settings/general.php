@@ -10,6 +10,8 @@ return array(
 	'backups'					=> '备份',
 	'barcode_type'				=> '条码类型',
 	'barcode_settings'			=> '条码设置',
+	'custom_css'				=> 'Custom CSS',
+	'custom_css_help'			=> 'Enter any custom CSS overrides you would like to use. Do not include the &lt;style&gt;&lt;/style&gt; tags.',
 	'default_currency'  		=> '默认货币',
 	'default_eula_text'			=> 'Default EULA',
 	'default_eula_help_text'	=> '你也可以将自定义的EULA与特定资产分类相关联。',

@@ -12,6 +12,6 @@ return array(
     'address'		=> '주소',
     'zip'			=> '우편번호',
     'locations'		=> '위치',
-    'parent'		=> 'Parent',
-    'currency'  	=> 'Location Currency', // this is deprecated
+    'parent'		=> '상위',
+    'currency'  	=> '현지 통화', // this is deprecated
 );

@@ -1,5 +1,5 @@
 <?php
 
 return array(
-    'info'   => 'Select the options you want for your asset report.'
+    'info'   => 'Pasirinkite dalis, kurias norite matyti savo įrangos ataskaitoje.'
 );

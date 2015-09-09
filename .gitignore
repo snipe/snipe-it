@@ -31,3 +31,4 @@ nbproject/*
 app/config/local/ldap.php
 app/storage/dumps/*
 app/config/packages/schickling/backup/config.php
+app/config/app.backup.php

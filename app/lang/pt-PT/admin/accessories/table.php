@@ -1,9 +1,11 @@
 <?php
 
 return array(
-	'eula_text'      			=> 'EULA',
+	'dl_csv'      				=> 'Download CSV',
+	'eula_text'      			=> 'EULA (Contrato de Licença de Utilizador Final)',
     'id'      					=> 'ID',
-    'require_acceptance'      	=> 'Acceptance',
-    'title'      				=> 'Accessory Name',
+    'require_acceptance'      	=> 'Aceitação',
+    'title'      				=> 'Nome do Acessório',
+
 
 );

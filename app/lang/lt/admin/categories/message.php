@@ -2,23 +2,23 @@
 
 return array(
 
-    'does_not_exist' => 'Category does not exist.',
-    'assoc_users'	 => 'This category is currently associated with at least one model and cannot be deleted. Please update your models to no longer reference this category and try again. ',
+    'does_not_exist' => 'Tokios kategorijos nėra.',
+    'assoc_users'	 => 'Ši kategorija šiuo metu susieta su mažiausiai viena įranga ir negali būti ištrinta. prašome atnaujinkite savo įrangą, kad nebūtų nuorodų į šią grupę ir bandykite iš naujo. ',
 
     'create' => array(
-        'error'   => 'Category was not created, please try again.',
-        'success' => 'Category created successfully.'
+        'error'   => 'Kategorijos sukurti nepavyko, prašome badykite dar kartą.',
+        'success' => 'Sėkmingai sukurta nauja kategorija.'
     ),
 
     'update' => array(
-        'error'   => 'Category was not updated, please try again',
-        'success' => 'Category updated successfully.'
+        'error'   => 'Kategorija neatnaujinta, prašome pabandykite dar kartą',
+        'success' => 'Kategorijos atnaujinimas sėkmingas.'
     ),
 
     'delete' => array(
-        'confirm'   => 'Are you sure you wish to delete this category?',
-        'error'   => 'There was an issue deleting the category. Please try again.',
-        'success' => 'The category was deleted successfully.'
+        'confirm'   => 'Ar jūs tikrai norite ištrinti šią kategoriją?',
+        'error'   => 'Nepavyko ištrinti kategorijos. Prašome bandykite dar kartą.',
+        'success' => 'Kategorija sėkmingai ištrinta.'
     )
 
 );

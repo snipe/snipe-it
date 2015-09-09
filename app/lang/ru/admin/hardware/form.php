@@ -17,7 +17,7 @@ return array(
     'default_location'	=> 'Текущее расположение',
     'eol_date'			=> 'Срок эксплуатации',
     'eol_rate'			=> 'EOL величина',
-    'expected_checkin'  => 'Expected Checkin Date',
+    'expected_checkin'  => 'Ожидаемая дата возврата',
     'expires'			=> 'Истекает',
     'fully_depreciated'	=> 'Полностью изношен',
     'help_checkout'		=> 'If you wish to assign this asset immediately, select "Ready to Deploy" from the status list above. ',

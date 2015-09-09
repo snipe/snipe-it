@@ -13,12 +13,12 @@ return array(
     |
     */
 
-    "password" => "Passwords must be six characters and match the confirmation.",
+    "password" => "Mật khẩu phải có tối thiểu 6 ký tự và trùng với thông tin xác nhận.",
 
-    "user"     => "Username or email address is incorrect",
+    "user"     => "Tên đăng nhập và địa chỉ email không đúng",
 
-    "token"    => "This password reset token is invalid.",
+    "token"    => "Token khởi tạo mật khẩu này không hợp lệ.",
 
-    "sent" => "If a matching email address was found, a password reminder has been sent!",
+    "sent" => "Nếu tìm thấy một địa chỉ email phù hợp, một thông báo mật khẩu đã được gửi đi!",
 
 );

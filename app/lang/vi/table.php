@@ -2,9 +2,9 @@
 
 return array(
 
-    'actions'	 	=> 'Actions',
-    'action' 		=> 'Action',
-    'by'      		=> 'By',
-    'item' 			=> 'Item',
+    'actions'	 	=> 'Thao tác',
+    'action' 		=> 'Tác vụ',
+    'by'      		=> 'Bởi',
+    'item' 			=> 'Mục',
 
 );
