@@ -128,8 +128,17 @@ padding: 0px 20px;
                                         {{ Form::label('custom_css', Lang::get('admin/settings/general.custom_css')) }}
 	                                    </div>
 	                                    <div class="col-md-9">
-										{{ Form::textarea('custom_css', Input::old('custom_css', $setting->custom_css), array('class' => 'form-control','placeholder' => 'Add your custom CSS')) }}
-										{{ $errors->first('custom_css', '<br><span class="alert-msg">:message</span>') }}
+
+                                        @if (Config::get('app.lock_passwords')===true)
+                                            {{ Form::textarea('custom_css', Input::old('custom_css', $setting->custom_css), array('class' => 'form-control','placeholder' => 'Add your custom CSS','disabled'=>'disabled')) }}
+                                            {{ $errors->first('custom_css', '<br><span class="alert-msg">:message</span>') }}
+                                            <p class="help-block">@lang('general.lock_passwords')</p>
+                                        @else
+                                            {{ Form::textarea('custom_css', Input::old('custom_css', $setting->custom_css), array('class' => 'form-control','placeholder' => 'Add your custom CSS')) }}
+                                            {{ $errors->first('custom_css', '<br><span class="alert-msg">:message</span>') }}
+                                        @endif
+
+
 										 <p class="help-inline">@lang('admin/settings/general.custom_css_help')</p>
 	                                    </div>
 
