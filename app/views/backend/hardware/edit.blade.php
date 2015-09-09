@@ -139,7 +139,7 @@
 
             <!-- Serial -->
             <div class="form-group {{ $errors->has('serial') ? ' has-error' : '' }}">
-                <label for="serial" class="col-md-2 control-label">@lang('admin/hardware/form.serial') *</label>
+                <label for="serial" class="col-md-2 control-label">@lang('admin/hardware/form.serial') </label>
                 <div class="col-md-7 col-sm-12">
                     <input class="form-control" type="text" name="serial" id="serial" value="{{{ Input::old('serial', $asset->serial) }}}" />
                     {{ $errors->first('serial', '<br><span class="alert-msg"><i class="fa fa-times"></i> :message</span>') }}
