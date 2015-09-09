@@ -2,16 +2,16 @@
 
 return array(
 
-    'assigned_to'   	=> 'Assigned To',
-    'checkout'   		=> 'In/Out',
+    'assigned_to'   	=> 'Susieta su',
+    'checkout'   		=> 'Priimta/išduota',
     'id'      			=> 'ID',
-    'license_email'   	=> 'License Email',
-    'license_name'   	=> 'Licensed To',
-    'purchase_date'   	=> 'Purchase Date',
-    'purchased'   		=> 'Purchased',
-    'seats'   			=> 'Seats',
-    'hardware'   		=> 'Hardware',
-    'serial'   			=> 'Serial',
-    'title'      		=> 'License',
+    'license_email'   	=> 'Licenzijos el. paštas',
+    'license_name'   	=> 'Licenzija išduota',
+    'purchase_date'   	=> 'Pirkimo data',
+    'purchased'   		=> 'Nupirkta',
+    'seats'   			=> 'Prieigos',
+    'hardware'   		=> 'Įranga',
+    'serial'   			=> 'Serijinis numeris',
+    'title'      		=> 'Licenzija',
 
 );

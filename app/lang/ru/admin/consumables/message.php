@@ -2,34 +2,34 @@
 
 return array(
 
-    'does_not_exist' => 'Consumable does not exist.',
+    'does_not_exist' => 'Расходный материал не существует.',
 
     'create' => array(
-        'error'   => 'Consumable was not created, please try again.',
-        'success' => 'Consumable created successfully.'
+        'error'   => 'Расходный материал не создан, попробуйте ещё раз.',
+        'success' => 'Расходный материал успешно создан.'
     ),
 
     'update' => array(
-        'error'   => 'Consumable was not updated, please try again',
-        'success' => 'Consumable updated successfully.'
+        'error'   => 'Расходный материал не был обновлён, попробуйте ещё раз',
+        'success' => 'Расходный материал успешно обновлён.'
     ),
 
     'delete' => array(
-        'confirm'   => 'Are you sure you wish to delete this accessory?',
-        'error'   => 'There was an issue deleting the consumable. Please try again.',
-        'success' => 'The accessory was deleted successfully.'
+        'confirm'   => 'Вы уверены, что хотите удалить этот аксессуар?',
+        'error'   => 'В процессе удаления расходного материала произошла ошибка. Попробуйте ещё раз.',
+        'success' => 'Аксесуар был успешно удалён.'
     ),
 
      'checkout' => array(
-        'error'   		=> 'Consumable was not checked out, please try again',
-        'success' 		=> 'Consumable checked out successfully.',
-        'user_does_not_exist' => 'That user is invalid. Please try again.'
+        'error'   		=> 'Расходный материал не был выдан, попробуйте ещё раз',
+        'success' 		=> 'Расходный материал успешно выдан.',
+        'user_does_not_exist' => 'Неверный пользователь. Попробуйте ещё раз.'
     ),
 
     'checkin' => array(
-        'error'   		=> 'Consumable was not checked in, please try again',
-        'success' 		=> 'Consumable checked in successfully.',
-        'user_does_not_exist' => 'That user is invalid. Please try again.'
+        'error'   		=> 'Расходный материал не был принят, попробуйте ещё раз',
+        'success' 		=> 'Расходный материал успешно принят.',
+        'user_does_not_exist' => 'Неверный пользователь. Попробуйте ещё раз.'
     )
 
 

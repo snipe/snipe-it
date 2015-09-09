@@ -10,6 +10,8 @@ return array(
 	'backups'					=> 'Zálohy',
 	'barcode_type'				=> 'Tyo čárového kódu',
 	'barcode_settings'			=> 'Nastavení čárového kódu',
+	'custom_css'				=> 'Custom CSS',
+	'custom_css_help'			=> 'Enter any custom CSS overrides you would like to use. Do not include the &lt;style&gt;&lt;/style&gt; tags.',
 	'default_currency'  		=> 'Default Currency',
 	'default_eula_text'			=> 'Výchozí EULA',
 	'default_eula_help_text'	=> 'Můžete také spojit vlastní EULA se specifickými kategoriemi majetku.',

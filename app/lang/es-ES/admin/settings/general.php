@@ -10,6 +10,8 @@ return array(
 	'backups'					=> 'Copias de seguridad',
 	'barcode_type'				=> 'Tipo de código de barras',
 	'barcode_settings'			=> 'Configuración de Código de Barras',
+	'custom_css'				=> 'Custom CSS',
+	'custom_css_help'			=> 'Enter any custom CSS overrides you would like to use. Do not include the &lt;style&gt;&lt;/style&gt; tags.',
 	'default_currency'  		=> 'Moneda Predeterminada',
 	'default_eula_text'			=> 'EULA por defecto',
 	'default_eula_help_text'	=> 'También puede asociar EULAs personalizadas para categorías especificas de equipos.',

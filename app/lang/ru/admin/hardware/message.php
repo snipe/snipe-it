@@ -5,7 +5,7 @@ return array(
     'undeployable' 		=> '<strong>Внимание: </strong> Этот актив был помечен как выданный.
                         Если этот статус изменился, необходимо его обновить.',
     'does_not_exist' 	=> 'Актив не существует.',
-    'does_not_exist_or_not_requestable' => 'Nice try. That asset does not exist or is not requestable.',
+    'does_not_exist_or_not_requestable' => 'Почти получилось. Актив не существует и не доступен для выдачи.',
     'assoc_users'	 	=> 'Этот актив в настоящее время привязан к пользователю и не может быть удален. Пожалуйста сначала снимите привязку, и затем попробуйте удалить снова. ',
 
     'create' => array(
@@ -32,7 +32,7 @@ return array(
     'upload' => array(
         'error'   => 'Не удалось загрузить файл(ы). Повторите попытку.',
         'success' => 'Файл(ы) успешно загружены.',
-        'nofiles' => 'You did not select any files for upload, or the file you are trying to upload is too large',
+        'nofiles' => 'Не выбрано ни одного файла для загрузки или файл, который вы пытаетесь загрузить, слишком большой',
         'invalidfiles' => 'Один или несколько ваших файлов слишком большого размера или имеют неподдерживаемый формат. Разрешены только следующие форматы файлов:  png, gif, jpg, doc, docx, pdf, txt.',
     ),
 

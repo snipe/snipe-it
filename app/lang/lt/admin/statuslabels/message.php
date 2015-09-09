@@ -2,24 +2,24 @@
 
 return array(
 
-    'does_not_exist' => 'Location does not exist.',
-    'assoc_users'	 => 'This location is currently associated with at least one user and cannot be deleted. Please update your users to no longer reference this location and try again. ',
+    'does_not_exist' => 'Tokios vietovės nėra.',
+    'assoc_users'	 => 'Ši vietovė šiuo metu yra susieta bent su vienu vartotoju ir negali būti ištrinta. Prašome atnaujinkite naudotojus, kad atsieti šią vietovę ir tuomet bandykite iš naujo. ',
 
 
     'create' => array(
-        'error'   => 'Location was not created, please try again.',
-        'success' => 'Location created successfully.'
+        'error'   => 'Vietovė nesukurta. Prašome bandykite dar kartą.',
+        'success' => 'Vietovė sėkmingai sukurta.'
     ),
 
     'update' => array(
-        'error'   => 'Location was not updated, please try again',
-        'success' => 'Location updated successfully.'
+        'error'   => 'Vietovė neatnaujinta. Prašome bandykite dar kartą',
+        'success' => 'Vietovė sėkmingai atnaujinta.'
     ),
 
     'delete' => array(
-        'confirm'   => 'Are you sure you wish to delete this status label?',
-        'error'   => 'There was an issue deleting the location. Please try again.',
-        'success' => 'The location was deleted successfully.'
+        'confirm'   => 'Ar jūs tikrai norite ištrinti būklės kortelę?',
+        'error'   => 'Nepavyko ištrinti vietovės. Prašome bandykite dar kartą.',
+        'success' => 'Vietovė sėkmingai ištrinta.'
     )
 
 );

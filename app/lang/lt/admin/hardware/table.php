@@ -2,22 +2,22 @@
 
 return array(
 
-    'asset_tag'   	=> 'Asset Tag',
-    'asset_model'       => 'Model',
-    'book_value'  	=> 'Value',
-    'change' 		=> 'In/Out',
-    'checkout_date' => 'Checkout Date',
-    'checkoutto' 	=> 'Checked Out',
-    'diff' 			=> 'Diff',
-    'dl_csv' 		=> 'Download CSV',
-    'eol' 			=> 'EOL',
+    'asset_tag'   	=> 'Įrangos kortelė',
+    'asset_model'       => 'Modelis',
+    'book_value'  	=> 'Vertė',
+    'change' 		=> 'Priimta/Išduota',
+    'checkout_date' => 'Išdavimo data',
+    'checkoutto' 	=> 'Išduota',
+    'diff' 			=> 'Skirtumas',
+    'dl_csv' 		=> 'Atsisiųti CSV fromatu',
+    'eol' 			=> 'Nurašymo data',
     'id'      		=> 'ID',
-    'location' 		=> 'Location',
-    'purchase_cost'	=> 'Cost',
-    'purchase_date'	=> 'Purchased',
-    'serial'   		=> 'Serial',
-    'status'   		=> 'Status',
-    'title'      	=> 'Asset ',
-    'days_without_acceptance' => 'Days Without Acceptance'
+    'location' 		=> 'Vieta',
+    'purchase_cost'	=> 'Kaina',
+    'purchase_date'	=> 'Nupirkta',
+    'serial'   		=> 'Serijinis numeris',
+    'status'   		=> 'Būklė',
+    'title'      	=> 'Įranga ',
+    'days_without_acceptance' => 'Dienų skaičius be priėmimo'
 
 );

@@ -2,10 +2,10 @@
 
 return array(
 
-    'asset_manufacturers'	=> 'Asset Manufacturers',
-    'create'				=> 'Create Manufacturer',
+    'asset_manufacturers'	=> 'Įrangos gamintojai',
+    'create'				=> 'Sukurti gamintoją',
     'id'   					=> 'ID',
-    'name'      			=> 'Manufacturer Name',
-    'update'				=> 'Update Manufacturer',
+    'name'      			=> 'Gamintojo pavadinimas',
+    'update'				=> 'Atnaujinti gamintoją',
 
 );

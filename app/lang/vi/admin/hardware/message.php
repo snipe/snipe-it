@@ -2,14 +2,14 @@
 
 return array(
 
-    'undeployable' 		=> '<strong>Warning: </strong> This asset has been marked as currently undeployable.
-                        If this status has changed, please update the asset status.',
+    'undeployable' 		=> '<strong>Cảnh báo: </strong> Tài sản này hiện tại đang được đánh dấu là không cho phép cấp phát.
+                        Nếu tình trạng này đã được thay đổi, xin vui lòng cập nhật tình trạng tài sản.',
     'does_not_exist' 	=> 'Tài sản không tồn tại.',
-    'does_not_exist_or_not_requestable' => 'Nice try. That asset does not exist or is not requestable.',
-    'assoc_users'	 	=> 'This asset is currently checked out to a user and cannot be deleted. Please check the asset in first, and then try deleting again. ',
+    'does_not_exist_or_not_requestable' => 'Bạn đã cố gắng. Tài sản đó không tồn tại hoặc không cho phép đề xuất.',
+    'assoc_users'	 	=> 'Tài sản này hiện tại đã được checkout đến một người dùng và không thể xóa. Đầu tiên xin vui lòng kiểm tra lại tài sản, và cố gắng thử lần nữa. ',
 
     'create' => array(
-        'error'   		=> 'Asset was not created, please try again. :(',
+        'error'   		=> 'Tài sản chưa được tạo, xin vui lòng thử lại. :(',
         'success' 		=> 'Tài sản được tạo thành công. :)'
     ),
 
@@ -32,7 +32,7 @@ return array(
     'upload' => array(
         'error'   => 'Tập tin đã không được tải lên. Bạn hãy thử lại.',
         'success' => 'Tập tin đã được tải lên thành công.',
-        'nofiles' => 'You did not select any files for upload, or the file you are trying to upload is too large',
+        'nofiles' => 'Bạn chưa chọn tập tin để tải lên, hoặc tập tin bạn đang chọn tải lên có dung lượng quá lớn',
         'invalidfiles' => 'Một hoặc nhiều tập tin của bạn có dung lượng quá lớn hoặc có định dạng không được hỗ trợ. Những tập tin được hỗ trợ bao gồm: png, gif, jpg, doc, docx, pdf, và txt.',
     ),
 
@@ -44,14 +44,14 @@ return array(
     ),
 
     'checkout' => array(
-        'error'   		=> 'Asset was not checked out, please try again',
-        'success' 		=> 'Asset checked out successfully.',
+        'error'   		=> 'Tài sản chưa được checkout, xin vui lòng thử lại',
+        'success' 		=> 'Tài sản đã checkout thành công.',
         'user_does_not_exist' => 'Người dùng này không tồn tại. Bạn hãy thử lại.'
     ),
 
     'checkin' => array(
-        'error'   		=> 'Asset was not checked in, please try again',
-        'success' 		=> 'Asset checked in successfully.',
+        'error'   		=> 'Tài sản chưa được checkin, xin vui lòng thử lại',
+        'success' 		=> 'Tài sản đã checkin thành công.',
         'user_does_not_exist' => 'Người dùng này không tồn tại. Bạn hãy thử lại.'
     )
 

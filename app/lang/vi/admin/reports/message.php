@@ -1,5 +1,5 @@
 <?php
 
 return array(
-    'error'   => 'You must select at least ONE option.'
+    'error'   => 'Bạn phải lựa chọn ít nhất một tùy chọn.'
 );

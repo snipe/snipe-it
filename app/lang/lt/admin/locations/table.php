@@ -3,15 +3,15 @@
 return array(
 
     'id'      		=> 'ID',
-    'city'   		=> 'City',
-    'state'   		=> 'State',
-    'country'   	=> 'Country',
-    'create'		=> 'Create Location',
-    'update'		=> 'Update Location',
-    'name'			=> 'Location Name',
-    'address'		=> 'Address',
-    'zip'			=> 'Postal Code',
-    'locations'		=> 'Locations',
-    'parent'		=> 'Parent',
-    'currency'  	=> 'Location Currency', // this is deprecated
+    'city'   		=> 'Miestas',
+    'state'   		=> 'Rajonas',
+    'country'   	=> 'Šalis',
+    'create'		=> 'Sukurti vietovę',
+    'update'		=> 'Atnaujinti vietovę',
+    'name'			=> 'Vietovės pavadinimas',
+    'address'		=> 'Adresas',
+    'zip'			=> 'Pašto kodas',
+    'locations'		=> 'Vietovės',
+    'parent'		=> 'Pagrindinė',
+    'currency'  	=> 'Vietos valiuta', // this is deprecated
 );

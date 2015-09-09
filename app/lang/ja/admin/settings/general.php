@@ -10,6 +10,8 @@ return array(
 	'backups'					=> 'バックアップ',
 	'barcode_type'				=> 'バーコードタイプ',
 	'barcode_settings'			=> 'バーコード設定',
+	'custom_css'				=> 'Custom CSS',
+	'custom_css_help'			=> 'Enter any custom CSS overrides you would like to use. Do not include the &lt;style&gt;&lt;/style&gt; tags.',
 	'default_currency'  		=> '既定の通貨',
 	'default_eula_text'			=> '既定のEULA',
 	'default_eula_help_text'	=> '特殊な資産カテゴリーにカスタムEULAを関連付けられます。',

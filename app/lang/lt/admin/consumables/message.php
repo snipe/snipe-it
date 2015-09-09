@@ -2,34 +2,34 @@
 
 return array(
 
-    'does_not_exist' => 'Consumable does not exist.',
+    'does_not_exist' => 'Tokios suvartojamos įrangos nėra.',
 
     'create' => array(
-        'error'   => 'Consumable was not created, please try again.',
-        'success' => 'Consumable created successfully.'
+        'error'   => 'Suvartojama įranga nebuvo sukurta, prašome bandykite dar kartą.',
+        'success' => 'Suvartojama įranga sukurta sėkmingai.'
     ),
 
     'update' => array(
-        'error'   => 'Consumable was not updated, please try again',
-        'success' => 'Consumable updated successfully.'
+        'error'   => 'Suvartojama įranga nebuvo atnaujinta, prašome bandykite dar kartą',
+        'success' => 'Suvartojama įranga atnaujinta sėkmingai.'
     ),
 
     'delete' => array(
-        'confirm'   => 'Are you sure you wish to delete this accessory?',
-        'error'   => 'There was an issue deleting the consumable. Please try again.',
-        'success' => 'The accessory was deleted successfully.'
+        'confirm'   => 'Ar jūs tikrai norite ištrinti šią suvartojamą įrangą?',
+        'error'   => 'Nepavyko ištrinti suvartojamos įrangos. Prašome bandykite dar kartą.',
+        'success' => 'Ši įranga sėkmingai ištrinta.'
     ),
 
      'checkout' => array(
-        'error'   		=> 'Consumable was not checked out, please try again',
-        'success' 		=> 'Consumable checked out successfully.',
-        'user_does_not_exist' => 'That user is invalid. Please try again.'
+        'error'   		=> 'Ši suvartojama įranga nebuvo išimta, prašome bandykite dar kartą',
+        'success' 		=> 'Suvartojam įranga sėkminga išimta.',
+        'user_does_not_exist' => 'Šis vartotojas neteisingas. Prašome bandykite dar kartą.'
     ),
 
     'checkin' => array(
-        'error'   		=> 'Consumable was not checked in, please try again',
-        'success' 		=> 'Consumable checked in successfully.',
-        'user_does_not_exist' => 'That user is invalid. Please try again.'
+        'error'   		=> 'Ši suvartojama įranga nebuvo pridėta, prašome bandykite dar kartą',
+        'success' 		=> 'Suvartojama įranga sėkmingai pridėta.',
+        'user_does_not_exist' => 'Neteisingas naudotojas. Prašome bandykite dar kartą.'
     )
 
 

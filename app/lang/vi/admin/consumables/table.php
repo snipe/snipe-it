@@ -1,5 +1,5 @@
 <?php
 
 return array(
-    'title'      				=> 'Consumable Name',
+    'title'      				=> 'Tên vật tư phụ',
 );

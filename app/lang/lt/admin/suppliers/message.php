@@ -2,23 +2,23 @@
 
 return array(
 
-    'does_not_exist' => 'Supplier does not exist.',
-    'assoc_users'	 => 'This supplier is currently associated with at least one model and cannot be deleted. Please update your models to no longer reference this supplier and try again. ',
+    'does_not_exist' => 'Tokio tiekėjo nėra.',
+    'assoc_users'	 => 'Šis tiekėjas šiuo metu susietas su bent vienu modeliu ir negali būti ištrintas. Prašome atnaujinkite savo modelius, kad šie nebūtu susieti su šiuo tiekėju ir bandykite dar kartą. ',
 
     'create' => array(
-        'error'   => 'Supplier was not created, please try again.',
-        'success' => 'Supplier created successfully.'
+        'error'   => 'Tiekėjas nesukurtas. Prašome bandykite dar kartą.',
+        'success' => 'Tiekėjas sėkmingai sukurtas.'
     ),
 
     'update' => array(
-        'error'   => 'Supplier was not updated, please try again',
-        'success' => 'Supplier updated successfully.'
+        'error'   => 'Tiekėjas neatnaujintas. Prašome bandykite dar kartą',
+        'success' => 'Tiekėjas sėkmingai atnaujintas.'
     ),
 
     'delete' => array(
-        'confirm'   => 'Are you sure you wish to delete this supplier?',
-        'error'   => 'There was an issue deleting the supplier. Please try again.',
-        'success' => 'Supplier was deleted successfully.'
+        'confirm'   => 'Ar jūs tikrai norite ištrinti šį tiekėją?',
+        'error'   => 'Nepavyko ištrinti tiekėjo. Prašome bandykite dar kartą.',
+        'success' => 'Tiekėjas ištrintas sėkmingai.'
     )
 
 );

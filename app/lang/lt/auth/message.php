@@ -2,35 +2,35 @@
 
 return array(
 
-    'account_already_exists' => 'An account with the this email already exists.',
-    'account_not_found'      => 'The username or password is incorrect.',
-    'account_not_activated'  => 'This user account is not activated.',
-    'account_suspended'      => 'This user account is suspended.',
-    'account_banned'         => 'This user account is banned.',
+    'account_already_exists' => 'Paskyra su šiuo el. paštu jau yra sukurta.',
+    'account_not_found'      => 'Naudotojo vardas arba slaptažodis neteisingas.',
+    'account_not_activated'  => 'Šio naudotojo paskyra nėra aktyvuota.',
+    'account_suspended'      => 'Šio naudotojo paskyra užšaldyta.',
+    'account_banned'         => 'Šio vartojo paskyra užblokuota.',
 
     'signin' => array(
-        'error'   => 'There was a problem while trying to log you in, please try again.',
-        'success' => 'You have successfully logged in.',
+        'error'   => 'Iškilo problema bandant prisijungti, prašome bandykite dar kartą.',
+        'success' => 'Jūs sėkmingai prisijungėte.',
     ),
 
     'signup' => array(
-        'error'   => 'There was a problem while trying to create your account, please try again.',
-        'success' => 'Account sucessfully created.',
+        'error'   => 'Siekiant suskurti jūsų paskyrą iškilo problema. Prašome bandykite dar kartą.',
+        'success' => 'Paskyra sėkmingai sukurta.',
     ),
 
         'forgot-password' => array(
-            'error'   => 'There was a problem while trying to get a reset password code, please try again.',
-            'success' => 'Password recovery email successfully sent.',
+            'error'   => 'Iškilo sunkumų siekiant gauti slaptažodžio atnaujinimo kodą. Prašome bandykite dar kartą.',
+            'success' => 'Slaptažodžio atkūrimo el. paštas išsiųstas.',
         ),
 
         'forgot-password-confirm' => array(
-            'error'   => 'There was a problem while trying to reset your password, please try again.',
-            'success' => 'Your password has been successfully reset.',
+            'error'   => 'Iškilo sunkumų siekiant pakeisti jūsų slaptažodį. Prašome bandykite dar kartą.',
+            'success' => 'Jūsų slaptaždis sėkmingai atnaujintas.',
         ),
 
     'activate' => array(
-        'error'   => 'There was a problem while trying to activate your account, please try again.',
-        'success' => 'Your account has been successfully activated.',
+        'error'   => 'Iškilo sunkumų siekiant aktyvuoti jūsų paskyrą. Prašome bandyti dar kartą.',
+        'success' => 'Jūsų paskyra sėkmingai aktyvuota.',
     ),
 
 );

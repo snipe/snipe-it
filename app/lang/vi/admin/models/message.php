@@ -2,30 +2,30 @@
 
 return array(
 
-    'does_not_exist' => 'Model does not exist.',
-    'assoc_users'	 => 'This model is currently associated with one or more assets and cannot be deleted. Please delete the assets, and then try deleting again. ',
+    'does_not_exist' => 'Kiểu tài sản không tồn tại.',
+    'assoc_users'	 => 'Tài sản này hiện tại đang liên kết với ít nhất một hoặc nhiều tài sản và không thể xóa. Xin vui lòng xóa tài sản, và cố gắng thử lại lần nữa. ',
 
 
     'create' => array(
-        'error'   => 'Model was not created, please try again.',
-        'success' => 'Model created successfully.',
-        'duplicate_set' => 'An asset model with that name, manufacturer and model number already exists.',
+        'error'   => 'Kiểu tài sản chưa được tạo, xin thử lại.',
+        'success' => 'Kiểu tài sản đã tạo thành công.',
+        'duplicate_set' => 'Kiểu tài sản này với tên, nhà sản xuất và mã tài sản thật sự đã tồn tại.',
     ),
 
     'update' => array(
-        'error'   => 'Model was not updated, please try again',
-        'success' => 'Model updated successfully.'
+        'error'   => 'Kiểu tài sản chưa cập nhật, xin thử lại',
+        'success' => 'Kiểu tài sản đã cập nhật thành công.'
     ),
 
     'delete' => array(
-        'confirm'   => 'Are you sure you wish to delete this asset model?',
-        'error'   => 'There was an issue deleting the model. Please try again.',
-        'success' => 'The model was deleted successfully.'
+        'confirm'   => 'Bạn có chắc muốn xóa kiểu tài sản này?',
+        'error'   => 'Có vấn đề xảy ra khi xóa kiểu tài sản. Xin thử lại.',
+        'success' => 'Kiểu tài sản đã xóa thành công.'
     ),
 
     'restore' => array(
-        'error'   		=> 'Model was not restored, please try again',
-        'success' 		=> 'Model restored successfully.'
+        'error'   		=> 'Kiểu tài sản chưa được phục hồi, xin thử lại',
+        'success' 		=> 'Kiểu tài sản đã được phục hồi thành công.'
     ),
 
 );

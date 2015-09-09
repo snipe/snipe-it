@@ -10,6 +10,8 @@ return array(
 	'backups'					=> 'Kopie zapasowe',
 	'barcode_type'				=> 'Typ Kodu Kreskowego',
 	'barcode_settings'			=> 'Ustawienia Kodów Kreskowych',
+	'custom_css'				=> 'Custom CSS',
+	'custom_css_help'			=> 'Enter any custom CSS overrides you would like to use. Do not include the &lt;style&gt;&lt;/style&gt; tags.',
 	'default_currency'  		=> 'Domyślna Waluta',
 	'default_eula_text'			=> 'Domyślna EULA',
 	'default_eula_help_text'	=> 'Możesz również sporządzić własną licencje by sprecyzować kategorie aktywa.',

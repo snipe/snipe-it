@@ -8,7 +8,7 @@ return array(
     'delete'  	=> 'Удалить',
     'edit'    	=> 'Редактировать',
     'restore' 	=> 'Восстановить',
-    'request'   => 'Request',
+    'request'   => 'Требовать',
     'submit'  	=> 'Принять',
     'upload'    => 'Загрузка',
 

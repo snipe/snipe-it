@@ -2,30 +2,30 @@
 
 return array(
 
-    'does_not_exist' => 'Model does not exist.',
-    'assoc_users'	 => 'This model is currently associated with one or more assets and cannot be deleted. Please delete the assets, and then try deleting again. ',
+    'does_not_exist' => 'Tokio modelio nėra.',
+    'assoc_users'	 => 'Šis modelis šiuo metu susietas su daugiau nei vienu įrangos vientu ir negali būti ištrintas. Prašome ištrinkite įrangą ir tuomet bandykite trinti iš naujo. ',
 
 
     'create' => array(
-        'error'   => 'Model was not created, please try again.',
-        'success' => 'Model created successfully.',
-        'duplicate_set' => 'An asset model with that name, manufacturer and model number already exists.',
+        'error'   => 'Modelis nebuvo ištrintas, prašome bandykite iš naujo.',
+        'success' => 'Modelis sėkmingai sukurtas.',
+        'duplicate_set' => 'Įrangos modelis su šiuo pavadinimu, gamintoju ir modeliu numeriu jau yra.',
     ),
 
     'update' => array(
-        'error'   => 'Model was not updated, please try again',
-        'success' => 'Model updated successfully.'
+        'error'   => 'Modelis nebuvo atnaujintas, prašome bandykite iš naujo',
+        'success' => 'Modelis sėkmingai atnaujintas.'
     ),
 
     'delete' => array(
-        'confirm'   => 'Are you sure you wish to delete this asset model?',
-        'error'   => 'There was an issue deleting the model. Please try again.',
-        'success' => 'The model was deleted successfully.'
+        'confirm'   => 'Ar jūs tikrai norite ištrinti šios įrangos modelį?',
+        'error'   => 'Nepavyko ištrinti modelio. Prašome bandykite dar kartą.',
+        'success' => 'Modelis sėkmingai ištrintas.'
     ),
 
     'restore' => array(
-        'error'   		=> 'Model was not restored, please try again',
-        'success' 		=> 'Model restored successfully.'
+        'error'   		=> 'Modelis nebuvo atkurtas, prašome bandykite dar kartą',
+        'success' 		=> 'Modelis sėkmingai atkurtas.'
     ),
 
 );

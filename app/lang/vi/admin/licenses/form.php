@@ -24,5 +24,5 @@ return array(
     'to_email'          => 'Đã cấp phép cho email',
     'to_name'           => 'Đã cấp phép cho tên',
     'update'            => 'Cập nhập giấy phép sử dụng',
-    'checkout_help'     => 'You must check a license out to a hardware asset or a person. You can select both, but the owner of the asset must match the person you\'re checking the asset out to.'
+    'checkout_help'     => 'Bạn phải kiểm tra bản quyền đã cấp phát đến phần cứng của tài sản hoặc một cá nhân. Bạn có thể lựa chọn cả hai, nhưng chủ thể của tài sản phải tương ứng với người mà bạn đang kiểm tra cấp phát tài sản.'
 );

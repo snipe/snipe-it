@@ -2,57 +2,56 @@
 
 return array(
 
-    'undeployable' 		=> '<strong>Warning: </strong> This asset has been marked as currently undeployable.
-                        If this status has changed, please update the asset status.',
-    'does_not_exist' 	=> 'Asset does not exist.',
-    'does_not_exist_or_not_requestable' => 'Nice try. That asset does not exist or is not requestable.',
-    'assoc_users'	 	=> 'This asset is currently checked out to a user and cannot be deleted. Please check the asset in first, and then try deleting again. ',
+    'undeployable' 		=> '<strong>Dėmesio: </strong> Ši įranga pažymėta kaip negalima naudoti. Jei būklė  pasikeitė, prašome atnaujinti įrangos būklę.',
+    'does_not_exist' 	=> 'Tokios įrangos nėra.',
+    'does_not_exist_or_not_requestable' => 'Tokios įrangos nėra arba jos negalima užklausti.',
+    'assoc_users'	 	=> 'Ši įranga šiuo metu yra išduota naudotojui ir negali būti ištrinta. Prašome pirmiausia patikrinkite įrangą, tuomet bandykite ištrinti vėl. ',
 
     'create' => array(
-        'error'   		=> 'Asset was not created, please try again. :(',
-        'success' 		=> 'Asset created successfully. :)'
+        'error'   		=> 'Įrangos sukurti nepavyko, prašome bandykite dar kartą. :(',
+        'success' 		=> 'Įranga sėkminga sukurta. :)'
     ),
 
     'update' => array(
-        'error'   			=> 'Asset was not updated, please try again',
-        'success' 			=> 'Asset updated successfully.',
-        'nothing_updated'	=>  'No fields were selected, so nothing was updated.',
+        'error'   			=> 'Įrangos atnaujinti nepavyko, prašome bandykite dar kartą',
+        'success' 			=> 'Įranga sėkmingai atnaujinta.',
+        'nothing_updated'	=>  'Nei vienas laukelis nepasirinktas, tad niekas nebuvo atnaujinta.',
     ),
 
     'restore' => array(
-        'error'   		=> 'Asset was not restored, please try again',
-        'success' 		=> 'Asset restored successfully.'
+        'error'   		=> 'Įranga nebuvo atkurta, prašome bandykite dar kartą',
+        'success' 		=> 'Įranga atkurta sėkmingai.'
     ),
 
     'deletefile' => array(
-        'error'   => 'File not deleted. Please try again.',
-        'success' => 'File successfully deleted.',
+        'error'   => 'Failas neištrintas. Prašome bandykite dar kartą.',
+        'success' => 'Failas sėkmingai ištrintas.',
     ),
 
     'upload' => array(
-        'error'   => 'File(s) not uploaded. Please try again.',
-        'success' => 'File(s) successfully uploaded.',
-        'nofiles' => 'You did not select any files for upload, or the file you are trying to upload is too large',
-        'invalidfiles' => 'One or more of your files is too large or is a filetype that is not allowed. Allowed filetypes are png, gif, jpg, doc, docx, pdf, and txt.',
+        'error'   => 'Failas (-ai) neįkelti. Prašome bandykite dar kartą.',
+        'success' => 'Failas (-ai) sėkmingai įkelti.',
+        'nofiles' => 'Jūs nepasirinkote nė vieno failo įkėlimui arba failai, kuriuos ketinate įkelti yra per dideli',
+        'invalidfiles' => 'Vienas ar keli failai yra per didelis arba neleidžiamas šis failų formatas. primename, kad leidžiami sekantys formatai png, gif, jpg, doc, docx, pdf, txt.',
     ),
 
 
     'delete' => array(
-        'confirm'   	=> 'Are you sure you wish to delete this asset?',
-        'error'   		=> 'There was an issue deleting the asset. Please try again.',
-        'success' 		=> 'The asset was deleted successfully.'
+        'confirm'   	=> 'Ar jūs tikrai norite ištrinti šią įrangą?',
+        'error'   		=> 'Nepavyko ištrinti įrangos. Prašome bandykite dar kartą.',
+        'success' 		=> 'Įranga sėkmingai ištrinta.'
     ),
 
     'checkout' => array(
-        'error'   		=> 'Asset was not checked out, please try again',
-        'success' 		=> 'Asset checked out successfully.',
-        'user_does_not_exist' => 'That user is invalid. Please try again.'
+        'error'   		=> 'Įranga neišduota, prašome bandyti dar kartą',
+        'success' 		=> 'Įranga išduota sėkmingai.',
+        'user_does_not_exist' => 'Netinkamas naudotojas. Prašome bandykite dar kartą.'
     ),
 
     'checkin' => array(
-        'error'   		=> 'Asset was not checked in, please try again',
-        'success' 		=> 'Asset checked in successfully.',
-        'user_does_not_exist' => 'That user is invalid. Please try again.'
+        'error'   		=> 'Įranga neišduota, prašome bandyti dar kartą',
+        'success' 		=> 'Įranga išduota sėkmingai.',
+        'user_does_not_exist' => 'Šis naudotojas neteisingas. Prašome bandykite dar kartą.'
     )
 
 );

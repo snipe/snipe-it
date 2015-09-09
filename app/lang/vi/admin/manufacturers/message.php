@@ -3,7 +3,7 @@
 return array(
 
     'does_not_exist' => 'Hãng sản xuất không tồn tại.',
-    'assoc_users'	 => 'This manufacturer is currently associated with at least one model and cannot be deleted. Please update your models to no longer reference this manufacturer and try again. ',
+    'assoc_users'	 => 'Nhà sản xuất này hiện tại đang được liên kết với ít nhất một kiểu tài sản và không thể xóa. Xin vui lòng cập nhật kiểu tài sản của bạn để không liên kết đến nhà sản xuất này và thử lại. ',
 
     'create' => array(
         'error'   => 'Hãng sản xuất không được tạo. Bạn hãy thử lại.',

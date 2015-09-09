@@ -2,21 +2,21 @@
 
 return array(
 
-    'group_exists'        => 'Group already exists!',
-    'group_not_found'     => 'Group [:id] does not exist.',
-    'group_name_required' => 'The name field is required',
+    'group_exists'        => 'Gruoė jau sukurta!',
+    'group_not_found'     => 'Tokios [:id] grupės nėra.',
+    'group_name_required' => 'Laukelio pavadinimas privalomas',
 
     'success' => array(
-        'create' => 'Group was successfully created.',
-        'update' => 'Group was successfully updated.',
-        'delete' => 'Group was successfully deleted.',
+        'create' => 'Grupė sėkmingai sukurta.',
+        'update' => 'Grupė sėkmingai atnaujinta.',
+        'delete' => 'Grupė sėkmingai ištrinta.',
     ),
 
     'delete' => array(
-        'confirm'   => 'Are you sure you wish to delete this group?',
-        'create' => 'There was an issue creating the group. Please try again.',
-        'update' => 'There was an issue updating the group. Please try again.',
-        'delete' => 'There was an issue deleting the group. Please try again.',
+        'confirm'   => 'Ar tikrai norite ištrinti šią grupę?',
+        'create' => 'Nepavyko sukurti grupės. Prašome bandykite dar kartą.',
+        'update' => 'Nepavyko atnaujinti grupės. Prašome bandykite dar kartą.',
+        'delete' => 'Nepavyko ištrinti grupės. Prašome bandykite dar kartą.',
     ),
 
 );

@@ -10,6 +10,8 @@ return array(
 	'backups'					=> 'Sikkerhetskopier',
 	'barcode_type'				=> 'Strekkodetype',
 	'barcode_settings'			=> 'Strekkodeinnstillinger',
+	'custom_css'				=> 'Custom CSS',
+	'custom_css_help'			=> 'Enter any custom CSS overrides you would like to use. Do not include the &lt;style&gt;&lt;/style&gt; tags.',
 	'default_currency'  		=> 'Standardvaluta',
 	'default_eula_text'			=> 'Standard EULA',
 	'default_eula_help_text'	=> 'Du kan også knytte tilpassede EULAer til bestemte eiendelskategorier.',

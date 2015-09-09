@@ -2,10 +2,10 @@
 
 return array(
 
-    'deleted'  					=> 'This model has been deleted. <a href="/hardware/models/:model_id/restore">Click here to restore it</a>.',
-    'restore'                   => 'Restore Model',
-	'show_mac_address'			=> 'Show MAC address field in assets in this model',
-    'view_deleted'              => 'View Deleted',
-    'view_models'               => 'View Models',
+    'deleted'  					=> 'Šis modelis ištrintas. <a href="/hardware/models/:model_id/restore">Spauskite atkurti modelį čia</a>.',
+    'restore'                   => 'Atkurti modelį',
+	'show_mac_address'			=> 'Rodykite MAC adreso laukelį įrangoje šiam modeliui',
+    'view_deleted'              => 'Peržiūrėti ištrintus',
+    'view_models'               => 'Peržiūrėti modelius',
 
 );
