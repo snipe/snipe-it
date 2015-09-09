@@ -105,6 +105,7 @@ return array(
         'Maknz\Slack\SlackServiceProvider',
         'Schickling\Backup\BackupServiceProvider',
         'Chumper\Zipper\ZipperServiceProvider',
+        'Fideloper\Proxy\ProxyServiceProvider',
 
     ),
 
