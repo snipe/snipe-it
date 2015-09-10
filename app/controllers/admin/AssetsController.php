@@ -469,8 +469,12 @@ class AssetsController extends AdminController
             return Redirect::to('hardware')->with('error', Lang::get('admin/hardware/message.not_found'));
         }
 
+        // Check for a valid user to checkout fa-random
+        // This will need to be tweaked for checkout to location
         if (!is_null($asset->assigned_to)) {
             $user = User::find($asset->assigned_to);
+        } else {
+            return Redirect::to('hardware')->with('error', Lang::get('admin/hardware/message.already_checked_in'));
         }
 
         // This is just used for the redirect
@@ -507,7 +511,6 @@ class AssetsController extends AdminController
 
 			if ($settings->slack_endpoint) {
 
-
 				$slack_settings = [
 				    'username' => $settings->botname,
 				    'channel' => $settings->slack_channel,
@@ -538,19 +541,19 @@ class AssetsController extends AdminController
 
 			}
 
-			$data['log_id'] = $logaction->id;
-            		$data['first_name'] = $user->first_name;
-            		$data['item_name'] = $asset->showAssetName();
-            		$data['checkin_date'] = $logaction->created_at;
-            		$data['item_tag'] = $asset->asset_tag;
-            		$data['note'] = $logaction->note;
+            $data['log_id'] = $logaction->id;
+            $data['first_name'] = $user->first_name;
+            $data['item_name'] = $asset->showAssetName();
+            $data['checkin_date'] = $logaction->created_at;
+            $data['item_tag'] = $asset->asset_tag;
+            $data['note'] = $logaction->note;
 
-            		if ((($asset->checkin_email()=='1')) && (!Config::get('app.lock_passwords'))) {
-                		Mail::send('emails.checkin-asset', $data, function ($m) use ($user) {
-                    			$m->to($user->email, $user->first_name . ' ' . $user->last_name);
-                    			$m->subject('Confirm Asset Checkin');
-                		});
-            		}
+            if ((($asset->checkin_email()=='1')) && ($user) && (!Config::get('app.lock_passwords'))) {
+                Mail::send('emails.checkin-asset', $data, function ($m) use ($user) {
+                	$m->to($user->email, $user->first_name . ' ' . $user->last_name);
+                	$m->subject('Confirm Asset Checkin');
+                });
+            }
 
 			if ($backto=='user') {
 				return Redirect::to("admin/users/".$return_to.'/view')->with('success', Lang::get('admin/hardware/message.checkin.success'));
