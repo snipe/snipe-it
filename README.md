@@ -25,6 +25,8 @@ Please see the [requirements documentation](http://docs.snipeitapp.com/requireme
 
 To deploy on Ubuntu using Ansible and Vagrant, check out the [Snipe-IT Installation scripts](https://github.com/GR360RY/snipeit-ansible) created by [@GR360RY](https://github.com/GR360RY/).
 
+To deploy on a fresh Ubuntu / CentOS install that will be dedicated to Snipe-It, run the "install.sh". Make sure to chmod +x install.sh and run as sudo on Ubuntu systems (or equivalent on CentOS.)
+
 -----
 ### Bug Reports & Feature Requests
 
