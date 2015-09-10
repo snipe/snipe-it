@@ -73,6 +73,9 @@ menu:
                 subdirectory:
                     text: "Subdirectories"
                     relativeUrl: installation/subdirectory.html
+                proxy:
+                    text: "Using a Reverse Proxy"
+                    relativeUrl: installation/proxy.html
                 manually-editing-data:
                     text: "Manually Editing Data"
                     relativeUrl: installation/manually-editing-data.html
