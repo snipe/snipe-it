@@ -1,7 +1,7 @@
 #!/bin/bash -e
 
 ######################################################
-# 	    Snipe-It Install Script		     #
+# 	    Snipe-It Install Script    	             #
 #	   Script created by Mike Tucker             #
 #	     mtucker6784@gmail.com                   #
 # This script is just to help streamline the         #
@@ -20,8 +20,8 @@ si="Snipe-IT"
 hostname="$(hostname)"
 hosts=/etc/hosts
 distro="$(cat /proc/version)"
-file=develop.zip
-dir=/var/www/snipe-it-develop
+file=master.zip
+dir=/var/www/snipe-it-master
 
 ans=default
 case $distro in
@@ -35,7 +35,7 @@ case $distro in
                 ;;
         *)
                 echo "Not sure of this OS. Exiting for safety."
-				exit
+		exit
                 ;;
 esac
 
@@ -54,20 +54,20 @@ read setpw
 
 case $setpw in
         [yY] | [yY][Ee][Ss] )
-                        mysqlrootpw="$(echo `< /dev/urandom tr -dc _A-Za-z-0-9 | head -c8`)"
-                        mysqluserpw="$(echo `< /dev/urandom tr -dc _A-Za-z-0-9 | head -c8`)"
-                        echo "I'm putting this into /root/mysqlpasswords ... PLEASE REMOVE that file after you have recorded the passwords somewhere safe!"
-                        ans="yes"
+                mysqlrootpw="$(echo `< /dev/urandom tr -dc _A-Za-z-0-9 | head -c8`)"
+                mysqluserpw="$(echo `< /dev/urandom tr -dc _A-Za-z-0-9 | head -c8`)"
+                echo "I'm putting this into /root/mysqlpasswords ... PLEASE REMOVE that file after you have recorded the passwords somewhere safe!"
+                ans="yes"
                 ;;
         [nN] | [n|N][O|o] )
-		                echo "Q. What do you want your root PW to be?"
-                        read mysqlrootpw
-                        echo "Q. What do you want your snipeit user PW to be?"
-                        read mysqluserpw
-						ans="no"
+		echo "Q. What do you want your root PW to be?"
+                read mysqlrootpw
+                echo "Q. What do you want your snipeit user PW to be?"
+                read mysqluserpw
+				ans="no"
                 ;;
         *) echo "Invalid answer. Please type y or n"
-            ;;
+                ;;
 esac
 done
 
@@ -162,6 +162,7 @@ if [[ $distro == "u" ]]; then
 
 	service apache2 restart
 else
+
 	#Make directories so we can create a new apache vhost
 	sudo mkdir /etc/httpd/
 	sudo mkdir /etc/httpd/sites-available/
@@ -250,24 +251,6 @@ else
 	service httpd restart
 fi
 
-#Todo(?) To Mail or Not To Mail environment here.
-#echo "Q. Do you want me to install sendmail and help you configure your mail environment?"
-#echo "Please note that while I'll install sendmail, I'll still send you to a nano environment to edit the mail.php file at the end of this install."
-#read setpw
-#case $setpw in
-#
-#        [yY] | [yY][Ee][Ss] )
-#                                apt-get install -y sendmail
-#                                installmail=yes
-#                ;;
-#
-#        [nN] | [n|N][O|o] )
-#                                echo "Ok, no problem."
-#                ;;
-#        *) echo "Invalid answer"
-#            ;;
-#esac
-
 echo ""; echo ""; echo ""
 echo "***I have no idea about your mail environment, so if you want email capability, open up the following***"
 echo "nano -w $dir/app/config/production/mail.php"
@@ -281,25 +264,26 @@ echo "Q. Shall I delete the password files I created? (Remember to record the pa
 read setpw
 case $setpw in
 
-        [yY] | [yY][Ee][Ss] )
-                        rm $createstufffile
-						rm $passwordfile
-                        echo "$createstufffile and $passwordfile files have been removed."
-						ans=yes
-		                ;;
+      [yY] | [yY][Ee][Ss] )
+                rm $createstufffile
+				rm $passwordfile
+                echo "$createstufffile and $passwordfile files have been removed."
+				ans=yes
+		;;
         [nN] | [n|N][O|o] )
-                        echo "Ok, I won't remove the file. Please for the love of security, record the passwords and delete this file regardless."
-				        echo "$si cannot be held responsible if this file is compromised!"
-			            echo "From Snipe: I cannot encourage or even facilitate poor security practices, and still sleep the few, frantic hours I sleep at night."
-						ans=no
-		                ;;
+                echo "Ok, I won't remove the file. Please for the love of security, record the passwords and delete this file regardless."
+				echo "$si cannot be held responsible if this file is compromised!"
+				echo "From Snipe: I cannot encourage or even facilitate poor security practices, and still sleep the few, frantic hours I sleep at night."
+				ans=no
+		;;
         *)
-				echo "Please select a valid option"
-		               ;;
+		echo "Please select a valid option"
+		;;
 esac
 done
 
 echo ""; echo ""
+echo "***If you want mail capabilities, open $dir/app/config/production/mail.php and fill out the attributes***"
+echo ""; echo ""
 echo "***$si should now be installed. open up http://$fqdn in a web browser to verify.***"
-#echo "***If you want mail capabilities, open $dir/app/config/production/mail.php and fill out the attributes***"
 sleep 1

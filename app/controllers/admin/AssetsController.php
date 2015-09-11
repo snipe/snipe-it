@@ -22,8 +22,6 @@ use Response;
 use Config;
 use Location;
 use Log;
-use DNS1D;
-use DNS2D;
 use Mail;
 use Datatable;
 use TCPDF;
@@ -469,8 +467,12 @@ class AssetsController extends AdminController
             return Redirect::to('hardware')->with('error', Lang::get('admin/hardware/message.not_found'));
         }
 
+        // Check for a valid user to checkout fa-random
+        // This will need to be tweaked for checkout to location
         if (!is_null($asset->assigned_to)) {
             $user = User::find($asset->assigned_to);
+        } else {
+            return Redirect::to('hardware')->with('error', Lang::get('admin/hardware/message.already_checked_in'));
         }
 
         // This is just used for the redirect
@@ -507,7 +509,6 @@ class AssetsController extends AdminController
 
 			if ($settings->slack_endpoint) {
 
-
 				$slack_settings = [
 				    'username' => $settings->botname,
 				    'channel' => $settings->slack_channel,
@@ -538,19 +539,19 @@ class AssetsController extends AdminController
 
 			}
 
-			$data['log_id'] = $logaction->id;
-            		$data['first_name'] = $user->first_name;
-            		$data['item_name'] = $asset->showAssetName();
-            		$data['checkin_date'] = $logaction->created_at;
-            		$data['item_tag'] = $asset->asset_tag;
-            		$data['note'] = $logaction->note;
+            $data['log_id'] = $logaction->id;
+            $data['first_name'] = $user->first_name;
+            $data['item_name'] = $asset->showAssetName();
+            $data['checkin_date'] = $logaction->created_at;
+            $data['item_tag'] = $asset->asset_tag;
+            $data['note'] = $logaction->note;
 
-            		if ((($asset->checkin_email()=='1')) && (!Config::get('app.lock_passwords'))) {
-                		Mail::send('emails.checkin-asset', $data, function ($m) use ($user) {
-                    			$m->to($user->email, $user->first_name . ' ' . $user->last_name);
-                    			$m->subject('Confirm Asset Checkin');
-                		});
-            		}
+            if ((($asset->checkin_email()=='1')) && ($user) && (!Config::get('app.lock_passwords'))) {
+                Mail::send('emails.checkin-asset', $data, function ($m) use ($user) {
+                	$m->to($user->email, $user->first_name . ' ' . $user->last_name);
+                	$m->subject('Confirm Asset Checkin');
+                });
+            }
 
 			if ($backto=='user') {
 				return Redirect::to("admin/users/".$return_to.'/view')->with('success', Lang::get('admin/hardware/message.checkin.success'));
@@ -607,31 +608,15 @@ class AssetsController extends AdminController
 
         if ($settings->qr_code == '1') {
             $asset = Asset::find($assetId);
+            $size = barcodeDimensions($settings->barcode_type);
 
             if (isset($asset->id,$asset->asset_tag)) {
-
-                if ($settings->barcode_type == 'C128'){
-		$content = DNS1D::getBarcodePNG(route('view/hardware', $asset->id), $settings->barcode_type,
-                    $this->barCodeDimensions['height'],$this->barCodeDimensions['width']);
-		}
-		else{
-                $content = DNS2D::getBarcodePNG(route('view/hardware', $asset->id), $settings->barcode_type,
-                    $this->qrCodeDimensions['height'],$this->qrCodeDimensions['width']);
-		}
-                $img = imagecreatefromstring(base64_decode($content));
-                imagepng($img);
-                imagedestroy($img);
-
-                $content_disposition = sprintf('attachment;filename=qr_code_%s.png', preg_replace('/\W/', '', $asset->asset_tag));
-                $response = Response::make($content, 200);
-                $response->header('Content-Type', 'image/png');
-                $response->header('Content-Disposition', $content_disposition);
-                return $response;
+                $barcode = new \Com\Tecnick\Barcode\Barcode();
+                $barcode_obj =  $barcode->getBarcodeObj($settings->barcode_type, route('view/hardware', $asset->id), $size['height'], $size['width'], 'black', array(-2, -2, -2, -2));
+                return $barcode_obj->getPngData();
             }
         }
 
-        $response = Response::make('', 404);
-        return $response;
     }
 
     /**
