@@ -85,3 +85,17 @@ function usersList() {
     $users_list = array('' => Lang::get('general.select_user')) + DB::table('users')->select(DB::raw('concat(last_name,", ",first_name," (",username,")") as full_name, id'))->whereNull('deleted_at')->orderBy('last_name', 'asc')->orderBy('first_name', 'asc')->lists('full_name', 'id');
     return $users_list;
 }
+
+function barcodeDimensions ($barcode_type = 'QRCODE') {
+    if ($barcode_type == 'C128') {
+        $size['height'] = '-1';
+        $size['width'] = '-10';
+    } elseif  ($barcode_type == 'PDF417') {
+        $size['height'] = '-3';
+        $size['width'] = '-10';
+    } else {
+        $size['height'] = '-3';
+        $size['width'] = '-3';
+    }
+    return $size;
+}

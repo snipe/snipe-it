@@ -22,7 +22,6 @@
 		"cartalyst/sentry": "2.1.5",
 		"barryvdh/laravel-debugbar": "1.x",
 		"chumper/datatable": "2.3.*",
-		"dinesh/barcode": "4.0.*@dev",
 		"intervention/image": "dev-master",
 		"league/csv": "~7.0",
 		"maknz/slack": "dev-master",
@@ -31,9 +30,16 @@
 		"guzzlehttp/guzzle": "5.3.0",
 		"aws/aws-sdk-php-laravel": "1.0.x-dev",
 		"schickling/backup": "0.6.0",
-		"chumper/zipper": "0.5.x"
+		"chumper/zipper": "0.5.x",
+		"tecnick.com/tc-lib-barcode": "dev-master"
 
 	},
+	"repositories": [
+        {
+            "type": "vcs",
+            "url": "git@github.com:tecnickcom/tc-lib-barcode.git"
+        }
+    ],
 	"require-dev": {
 		"phpunit/phpunit": "*",
 		"codeception/codeception": "2.1.*",

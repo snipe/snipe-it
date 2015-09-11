@@ -22,8 +22,6 @@ use Response;
 use Config;
 use Location;
 use Log;
-use DNS1D;
-use DNS2D;
 use Mail;
 use Datatable;
 use TCPDF;
@@ -610,31 +608,15 @@ class AssetsController extends AdminController
 
         if ($settings->qr_code == '1') {
             $asset = Asset::find($assetId);
+            $size = barcodeDimensions($settings->barcode_type);
 
             if (isset($asset->id,$asset->asset_tag)) {
-
-                if ($settings->barcode_type == 'C128'){
-		$content = DNS1D::getBarcodePNG(route('view/hardware', $asset->id), $settings->barcode_type,
-                    $this->barCodeDimensions['height'],$this->barCodeDimensions['width']);
-		}
-		else{
-                $content = DNS2D::getBarcodePNG(route('view/hardware', $asset->id), $settings->barcode_type,
-                    $this->qrCodeDimensions['height'],$this->qrCodeDimensions['width']);
-		}
-                $img = imagecreatefromstring(base64_decode($content));
-                imagepng($img);
-                imagedestroy($img);
-
-                $content_disposition = sprintf('attachment;filename=qr_code_%s.png', preg_replace('/\W/', '', $asset->asset_tag));
-                $response = Response::make($content, 200);
-                $response->header('Content-Type', 'image/png');
-                $response->header('Content-Disposition', $content_disposition);
-                return $response;
+                $barcode = new \Com\Tecnick\Barcode\Barcode();
+                $barcode_obj =  $barcode->getBarcodeObj($settings->barcode_type, route('view/hardware', $asset->id), $size['height'], $size['width'], 'black', array(-2, -2, -2, -2));
+                return $barcode_obj->getPngData();
             }
         }
 
-        $response = Response::make('', 404);
-        return $response;
     }
 
     /**

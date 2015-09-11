@@ -205,7 +205,8 @@ padding: 0px 20px;
 											 </div>
 
 												<div class="col-md-9">
-												 {{ Form::barcode_types('barcode_type', Input::old('barcode_type', $setting->barcode_type), 'select2') }}
+                                                {{ Form::barcode_types('barcode_type', Input::old('barcode_type', $setting->barcode_type), 'select2') }}
+
 
 												{{ $errors->first('barcode_type', '<br><span class="alert-msg"><i class="fa fa-times"></i> :message</span>') }}
 												</div>
