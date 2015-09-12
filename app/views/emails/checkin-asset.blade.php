@@ -4,7 +4,7 @@
 <p>Hello {{{ $first_name }}},</p>
 
 
-<p>The following item has been checkin. 
+<p>The following item has been checked in: 
 
 <table>
 	<tr>
