@@ -88,7 +88,7 @@
 		@endif
 
         @if (Setting::getSettings()->custom_css)
-            {{{ Setting::getSettings()->custom_css }}}
+            {{ Setting::getSettings()->show_custom_css() }}
         @endif
 
 
