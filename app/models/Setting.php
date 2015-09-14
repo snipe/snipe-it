@@ -29,6 +29,15 @@ class Setting extends Elegant
 
     }
 
+    public function show_custom_css() {
+        $custom_css = Setting::getSettings()->custom_css;
+        $custom_css = e($custom_css);
+        // Needed for modifying the bootstrap nav :(
+        $custom_css = str_ireplace('script','SCRIPTS-NOT-ALLOWED-HERE',$custom_css);
+        $custom_css = str_replace('&gt;','>',$custom_css);
+        return $custom_css;
+    }
+
     /**
     * Converts bytes into human readable file size.
     *
