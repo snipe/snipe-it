@@ -39,7 +39,7 @@
                                         <td>{{{ $file['filesize'] }}}</td>
                                         <td>
                                             <a data-html="false"
-                                            class="btn delete-asset btn-danger btn-sm  {{ (Config::get('app.lock_passwords')) ? ' disabled': '' }}" data-toggle="modal" href=" {{ route('settings/delete-file', $file['filename']) }}" data-content="@lang('admin/settings/message.backup.delete_confirm')" data-title="{{ Lang::get('general.delete') }}  {{ htmlspecialchars($file['filename']) }} ?" onClick="return false;">
+                                            class="btn delete-asset btn-danger btn-sm {{ (Config::get('app.lock_passwords')) ? ' disabled': '' }}" data-toggle="modal" href=" {{ route('settings/delete-file', $file['filename']) }}" data-content="@lang('admin/settings/message.backup.delete_confirm')" data-title="{{ Lang::get('general.delete') }}  {{ htmlspecialchars($file['filename']) }} ?" onClick="return false;">
                                                 <i class="fa fa-trash icon-white"></i>
                                             </a>
                                         </td>
