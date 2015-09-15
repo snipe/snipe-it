@@ -209,18 +209,21 @@ class SettingsController extends AdminController
     **/
     public function downloadFile($filename = null)
     {
+        if (!Config::get('app.lock_passwords')) {
+            $file = Config::get('backup::path').'/'.$filename;
+            if (file_exists($file)) {
+    				return Response::download($file);
+            } else {
 
-        $file = Config::get('backup::path').'/'.$filename;
-
-
-		// the license is valid
-        if (file_exists($file)) {
-				return Response::download($file);
+                // Redirect to the backup page
+                return Redirect::route('settings/backups')->with('error',  Lang::get('admin/settings/message.backup.file_not_found'));
+            }
         } else {
-
             // Redirect to the backup page
-            return Redirect::route('settings/backups')->with('error',  Lang::get('admin/settings/message.backup.file_not_found'));
+            return Redirect::route('settings/backups')->with('error',  Lang::get('general.feature_disabled'));
         }
+
+
     }
 
     /**
@@ -232,15 +235,19 @@ class SettingsController extends AdminController
     public function deleteFile($filename = null)
     {
 
-        $file = Config::get('backup::path').'/'.$filename;
+        if (!Config::get('app.lock_passwords')) {
 
-		// the backup file is valid
-        if (file_exists($file)) {
-			unlink($file);
-            return Redirect::route('settings/backups')->with('success', Lang::get('admin/settings/message.backup.file_deleted'));
+            $file = Config::get('backup::path').'/'.$filename;
+            if (file_exists($file)) {
+    			unlink($file);
+                return Redirect::route('settings/backups')->with('success', Lang::get('admin/settings/message.backup.file_deleted'));
+            } else {
+                return Redirect::route('settings/backups')->with('error', Lang::get('admin/settings/message.backup.file_not_found'));
+            }
         } else {
-            return Redirect::route('settings/backups')->with('error', Lang::get('admin/settings/message.backup.file_not_found'));
+            return Redirect::route('settings/backups')->with('error',  Lang::get('general.feature_disabled'));
         }
+
     }
 
 

@@ -19,7 +19,7 @@
                         @if (Config::get('app.lock_passwords'))
                            <p class="help-block">@lang('general.feature_disabled')</p>
                         @endif
-                        
+
                         <div class="profile-box">
                             <br>
                             <!-- checked out assets table -->
@@ -34,12 +34,12 @@
                                 <tbody>
                                     @foreach ($files as $file)
                                     <tr>
-                                        <td><a href="backups/delete/{{{ $file['filename'] }}}">{{{ $file['filename'] }}}</a></td>
+                                        <td><a href="backups/download/{{{ $file['filename'] }}}">{{{ $file['filename'] }}}</a></td>
                                         <td>{{{ date("M d, Y g:i A", $file['modified']) }}} </td>
                                         <td>{{{ $file['filesize'] }}}</td>
                                         <td>
                                             <a data-html="false"
-                                            class="btn delete-asset btn-danger btn-sm" data-toggle="modal" href=" {{ route('settings/delete-file', $file['filename']) }}" data-content="@lang('admin/settings/message.backup.delete_confirm')" data-title="{{ Lang::get('general.delete') }}  {{ htmlspecialchars($file['filename']) }} ?" onClick="return false;">
+                                            class="btn delete-asset btn-danger btn-sm  {{ (Config::get('app.lock_passwords')) ? ' disabled': '' }}" data-toggle="modal" href=" {{ route('settings/delete-file', $file['filename']) }}" data-content="@lang('admin/settings/message.backup.delete_confirm')" data-title="{{ Lang::get('general.delete') }}  {{ htmlspecialchars($file['filename']) }} ?" onClick="return false;">
                                                 <i class="fa fa-trash icon-white"></i>
                                             </a>
                                         </td>
