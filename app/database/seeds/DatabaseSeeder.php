@@ -24,6 +24,7 @@ class DatabaseSeeder extends Seeder
         $this->call('ActionlogSeeder');
         $this->call('AccessoriesSeeder');
         $this->call('AssetMaintenancesSeeder');
+        $this->call('SuppliersSeeder');
     }
 
 }
