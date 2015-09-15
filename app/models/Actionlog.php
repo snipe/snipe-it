@@ -115,6 +115,7 @@
 
             return DB::table( 'asset_logs' )
                      ->select( '*' )
+                     ->where('action_type','!=','uploaded')
                      ->orderBy( 'asset_id', 'asc' )
                      ->orderBy( 'created_at', 'asc' )
                      ->get();

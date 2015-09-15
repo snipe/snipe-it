@@ -63,35 +63,39 @@
         public function up()
         {
 
-            Schema::table( 'asset_logs', function ( Blueprint $table ) {
+            if (!Schema::hasColumn('asset_logs', 'thread_id')) {
 
-                $table->integer( 'thread_id' )
-                      ->nullable()
-                      ->default( null );
-                $table->index( 'thread_id' );
-            } );
+                Schema::table( 'asset_logs', function ( Blueprint $table ) {
 
-            $this->actionlog = new Actionlog();
-            $this->assetLogs = $this->actionlog->getListingOfActionLogsChronologicalOrder();
+                    $table->integer( 'thread_id' )
+                          ->nullable()
+                          ->default( null );
+                    $table->index( 'thread_id' );
+                } );
 
-            foreach ($this->assetLogs as $assetLog) {
 
-                if ($this->hasAssetChanged( $assetLog )) {
-                    $this->resetCurrentAssetInformation( $assetLog );
+                $this->actionlog = new Actionlog();
+                $this->assetLogs = $this->actionlog->getListingOfActionLogsChronologicalOrder();
+
+                foreach ($this->assetLogs as $assetLog) {
+
+                    if ($this->hasAssetChanged( $assetLog )) {
+                        $this->resetCurrentAssetInformation( $assetLog );
+                    }
+
+                    if ($this->hasBegunNewChain( $assetLog )) {
+                        $this->startOfCurrentThread = false;
+                        continue;
+                    }
+
+                    $this->updateAssetLogWithThreadInformation( $assetLog );
+
+                    if ($this->hasReachedEndOfChain( $assetLog )
+                    ) {
+                        $this->clearCurrentAssetInformation();
+                    }
+
                 }
-
-                if ($this->hasBegunNewChain( $assetLog )) {
-                    $this->startOfCurrentThread = false;
-                    continue;
-                }
-
-                $this->updateAssetLogWithThreadInformation( $assetLog );
-
-                if ($this->hasReachedEndOfChain( $assetLog )
-                ) {
-                    $this->clearCurrentAssetInformation();
-                }
-
             }
 
         }
