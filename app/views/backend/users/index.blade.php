@@ -44,6 +44,7 @@
         ->addColumn('<div class="text-center"><input type="checkbox" id="checkAll" style="padding-left: 0px;"></div>',
     	    Lang::get('admin/users/table.name'),
     	    '<i class="fa fa-envelope fa-lg"></i>',
+            Lang::get('admin/users/table.username'),
     	    Lang::get('admin/users/table.manager'),
             Lang::get('admin/users/table.location'),
             '<i class="fa fa-barcode fa-lg"></i>',
