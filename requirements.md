@@ -9,11 +9,7 @@ The requirements for Snipe-IT are fairly standard for a modern web server, and m
 ## General System Requirements
 
 - PHP 5.4 or later: [<i class="fa fa-linux"></i>](http://php.net/manual/en/install.unix.debian.php) [<i class="fa fa-windows"></i>](http://www.microsoft.com/web/gallery/install.aspx?appid=PHP54)
-- MCrypt PHP Extension
-- Fileinfo Extension
-- php-pdo
-- php-mysql
-- php-mbstring
+- PHP Extensions: MCrypt, Fileinfo, php-pdo, php-mysql, php-mbstring, php-curl
 - MySQL or MariaDB
 - SSH access to the server (if using Linux)
 - GD Library (>=2.0) or Imagick PHP extension (>=6.3.8)
