@@ -72,33 +72,33 @@
                           ->default( null );
                     $table->index( 'thread_id' );
                 } );
-
-
-                $this->actionlog = new Actionlog();
-                $this->assetLogs = $this->actionlog->getListingOfActionLogsChronologicalOrder();
-
-                foreach ($this->assetLogs as $assetLog) {
-
-                    if ($this->hasAssetChanged( $assetLog )) {
-                        $this->resetCurrentAssetInformation( $assetLog );
-                    }
-
-                    if ($this->hasBegunNewChain( $assetLog )) {
-                        $this->startOfCurrentThread = false;
-                        continue;
-                    }
-
-                    $this->updateAssetLogWithThreadInformation( $assetLog );
-
-                    if ($this->hasReachedEndOfChain( $assetLog )
-                    ) {
-                        $this->clearCurrentAssetInformation();
-                    }
-
-                }
             }
 
+            $this->actionlog = new Actionlog();
+            $this->assetLogs = $this->actionlog->getListingOfActionLogsChronologicalOrder();
+
+            foreach ($this->assetLogs as $assetLog) {
+
+                if ($this->hasAssetChanged( $assetLog )) {
+                    $this->resetCurrentAssetInformation( $assetLog );
+                }
+
+                if ($this->hasBegunNewChain( $assetLog )) {
+                    $this->startOfCurrentThread = false;
+                    continue;
+                }
+
+                $this->updateAssetLogWithThreadInformation( $assetLog );
+
+                if ($this->hasReachedEndOfChain( $assetLog )
+                ) {
+                    $this->clearCurrentAssetInformation();
+                }
+
+            }
         }
+
+
 
         /**
          * Reverse the migrations.
