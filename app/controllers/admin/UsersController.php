@@ -876,6 +876,9 @@ class UsersController extends AdminController {
                                 return '';
                             }
                         })
+                        ->addColumn('username', function($users) {
+                            return $users->username;
+                        })
                         ->addColumn('manager', function($users) {
                             if ($users->manager) {
                                 return '<a title="' . $users->manager->fullName() . '" href="users/' . $users->manager->id . '/view">' . $users->manager->fullName() . '</a>';
@@ -906,8 +909,8 @@ class UsersController extends AdminController {
                             return $group_names;
                         })
                         ->addColumn($actions)
-                        ->searchColumns('name', 'email', 'manager', 'activated', 'groups', 'location')
-                        ->orderColumns('name', 'email', 'manager', 'activated', 'licenses', 'assets', 'accessories', 'consumables', 'groups', 'location')
+                        ->searchColumns('name', 'email', 'username', 'manager', 'activated', 'groups', 'location')
+                        ->orderColumns('name', 'email', 'username', 'manager', 'activated', 'licenses', 'assets', 'accessories', 'consumables', 'groups', 'location')
                         ->make();
     }
 
@@ -1043,13 +1046,13 @@ class UsersController extends AdminController {
         // Selected permissions
         $selectedPermissions = Input::old('permissions', array('superuser' => -1));
         $this->encodePermissions($selectedPermissions);
-        
+
         $location_list = locationsList();
-                        
+
         // Show the page
         return View::make('backend/users/ldap', compact('groups', 'selectedGroups', 'permissions', 'selectedPermissions'))
                         ->with('location_list', $location_list);
-        
+
     }
 
     /**
@@ -1064,7 +1067,7 @@ class UsersController extends AdminController {
         'username' => 'required|min:2|unique:users,username',
         'email' => 'email|unique:users,email',
     );
-    
+
     /**
      * Declare the rules for the form validation.
      *
@@ -1083,14 +1086,14 @@ class UsersController extends AdminController {
     public function postLDAP() {
 
         $location_id = Input::get('location_id');
-        
+
         $formValidator = Validator::make(Input::all(), $this->ldapFormInputValidationRules);
         // If validation fails, we'll exit the operation now.
         if ($formValidator->fails()) {
             // Ooops.. something went wrong
             return Redirect::back()->withInput()->withErrors($formValidator);
         }
-        
+
         $ldap_version = Config::get('ldap.version');
         $url = Config::get('ldap.url');
         $username = Config::get('ldap.username');
