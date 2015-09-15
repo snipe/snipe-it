@@ -51,7 +51,7 @@
                         <br /><br />
 
                         <form method="POST">
-                            <button class="btn btn-default">Generate Backup</button>
+                            <button class="btn btn-default">@lang('admin/settings/general.generate_backup')</button>
                         </form>
                         <br /><br />
 
