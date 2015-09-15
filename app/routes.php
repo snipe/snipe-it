@@ -298,9 +298,22 @@
             # Settings
             Route::group( [ 'prefix' => 'backups' ], function () {
 
+
+                Route::get( 'download/{filename}', [
+                    'as' => 'settings/download-file',
+                    'uses' => 'SettingsController@downloadFile' ]
+                );
+
+                Route::get( 'delete/{filename}', [
+                    'as' => 'settings/delete-file',
+                    'uses' => 'SettingsController@deleteFile' ]
+                );
+
+                Route::post( '/', [
+                    'as' => 'settings/backups',
+                    'uses' => 'SettingsController@postBackups'
+                ]);
                 Route::get( '/', [ 'as' => 'settings/backups', 'uses' => 'SettingsController@getBackups' ] );
-                Route::get( 'download/{filename}',
-                    [ 'as' => 'settings/download-file', 'uses' => 'SettingsController@downloadFile' ] );
             } );
 
             # Manufacturers
@@ -395,7 +408,7 @@
 
             Route::get( 'ldap', ['as' => 'ldap/user', 'uses' => 'UsersController@getLDAP' ] );
             Route::post( 'ldap', 'UsersController@postLDAP' );
-            
+
             Route::get( 'create', [ 'as' => 'create/user', 'uses' => 'UsersController@getCreate' ] );
             Route::post( 'create', 'UsersController@postCreate' );
             Route::get( 'import', [ 'as' => 'import/user', 'uses' => 'UsersController@getImport' ] );

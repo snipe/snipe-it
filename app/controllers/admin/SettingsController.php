@@ -13,6 +13,7 @@ use View;
 use Image;
 use Config;
 use Response;
+use Artisan;
 
 class SettingsController extends AdminController
 {
@@ -172,11 +173,27 @@ class SettingsController extends AdminController
 
             }
             closedir($handle);
+            $files = array_reverse($files);
         }
 
 
         return View::make('backend/settings/backups', compact('path','files'));
     }
+
+
+    /**
+    * Generate the backup page
+    *
+    * @return View
+    **/
+
+    public function postBackups()
+    {
+        Artisan::call('snipe:backup');
+        return Redirect::to("admin/settings/backups")->with('success', Lang::get('admin/settings/message.backup.generated'));
+
+    }
+
 
     /**
     * Download the dump file
@@ -194,11 +211,29 @@ class SettingsController extends AdminController
         if (file_exists($file)) {
 				return Response::download($file);
         } else {
-            // Prepare the error message
-            $error = Lang::get('admin/settings/message.does_not_exist');
 
-            // Redirect to the licence management page
-            return Redirect::route('settings/backups')->with('error', $error);
+            // Redirect to the backup page
+            return Redirect::route('settings/backups')->with('error',  Lang::get('admin/settings/message.backup.file_not_found'));
+        }
+    }
+
+    /**
+    * Download the dump file
+    *
+    * @param  int  $assetId
+    * @return View
+    **/
+    public function deleteFile($filename = null)
+    {
+
+        $file = Config::get('backup::path').'/'.$filename;
+
+		// the backup file is valid
+        if (file_exists($file)) {
+			unlink($file);
+            return Redirect::route('settings/backups')->with('success', Lang::get('admin/settings/message.backup.file_deleted'));
+        } else {
+            return Redirect::route('settings/backups')->with('error', Lang::get('admin/settings/message.backup.file_not_found'));
         }
     }
 
