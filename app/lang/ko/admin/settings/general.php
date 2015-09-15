@@ -22,6 +22,7 @@ return array(
     'eula_settings'				=> '최종 사용 계약 설정',
     'eula_markdown'				=> '이 최종 사용 계약은 <a href="https://help.github.com/articles/github-flavored-markdown/">GFM을 따른다</a>.',
     'general_settings'			=> '일반 설정',
+	'generate_backup'			=> 'Generate Backup',
     'header_color'              => '머릿말 색상',
     'info'                      => '이 설정들은 설치본의 특정 분야를 설정하는 것입니다.',
     'laravel'                   => 'Laravel 버전',

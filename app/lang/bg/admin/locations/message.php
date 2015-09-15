@@ -2,26 +2,26 @@
 
 return array(
 
-    'does_not_exist' => 'Location does not exist.',
-    'assoc_users'	 => 'This location is currently associated with at least one user and cannot be deleted. Please update your users to no longer reference this location and try again. ',
-    'assoc_assets'	 => 'This location is currently associated with at least one asset and cannot be deleted. Please update your assets to no longer reference this location and try again. ',
+    'does_not_exist' => 'Местоположението не съществува.',
+    'assoc_users'	 => 'Местоположението е свързано с поне един потребител и не може да бъде изтрито. Моля, актуализирайте потребителите, така че да не са свързани с това местоположение и опитайте отново. ',
+    'assoc_assets'	 => 'Местоположението е свързано с поне един актив и не може да бъде изтрито. Моля, актуализирайте активите, така че да не са свързани с това местоположение и опитайте отново. ',
     'assoc_child_loc'	 => 'This location is currently the parent of at least one child location and cannot be deleted. Please update your locations to no longer reference this location and try again. ',
 
 
     'create' => array(
-        'error'   => 'Location was not created, please try again.',
-        'success' => 'Location created successfully.'
+        'error'   => 'Местоположението не е създадено. Моля, опитайте отново.',
+        'success' => 'Местоположението е създадено.'
     ),
 
     'update' => array(
-        'error'   => 'Location was not updated, please try again',
-        'success' => 'Location updated successfully.'
+        'error'   => 'Местоположението не е обновено. Моля, опитайте отново',
+        'success' => 'Местоположението е обновено.'
     ),
 
     'delete' => array(
-        'confirm'   	=> 'Are you sure you wish to delete this location?',
-        'error'   => 'There was an issue deleting the location. Please try again.',
-        'success' => 'The location was deleted successfully.'
+        'confirm'   	=> 'Сигурни ли сте, че искате да изтриете това местоположение?',
+        'error'   => 'Възникна проблем при изтриване на местоположението. Моля, опитайте отново.',
+        'success' => 'Местоположението е изтрито.'
     )
 
 );

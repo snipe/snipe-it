@@ -22,6 +22,7 @@ return array(
     'eula_settings'				=> '最终用户许可协议(EULA)设置',
     'eula_markdown'				=> 'EULA中可以使用<a href="https://help.github.com/articles/github-flavored-markdown/">Github flavored markdown</a>.',
     'general_settings'			=> '一般设置',
+	'generate_backup'			=> 'Generate Backup',
     'header_color'              => '标题颜色',
     'info'                      => '这些设置允许您自定义安装的某些方面',
     'laravel'                   => 'Laravel版本',

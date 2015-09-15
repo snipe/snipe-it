@@ -3,15 +3,15 @@
 return array(
 
     'does_not_exist' => 'Категорията не съществува.',
-    'assoc_users'	 => 'This category is currently associated with at least one model and cannot be deleted. Please update your models to no longer reference this category and try again. ',
+    'assoc_users'	 => 'Тази категория е асоциирана с поне един модел и не може да бъде изтрита. Моля обновете връзките с моделите и опитайте отново.',
 
     'create' => array(
-        'error'   => 'Category was not created, please try again.',
-        'success' => 'Category created successfully.'
+        'error'   => 'Категорията не беше създадена. Моля опитайте отново.',
+        'success' => 'Категорията е създадена.'
     ),
 
     'update' => array(
-        'error'   => 'Category was not updated, please try again',
+        'error'   => 'Категорията не беше обновена. Моля опитайте отново',
         'success' => 'Категорията е обновена успешно.'
     ),
 

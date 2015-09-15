@@ -22,6 +22,7 @@ return array(
     'eula_settings'				=> 'EULA-innstillinger',
     'eula_markdown'				=> 'Denne EULAen tillater <a href="https://help.github.com/articles/github-flavored-markdown/">Github Flavored markdown</a>.',
     'general_settings'			=> 'Generelle innstillinger',
+	'generate_backup'			=> 'Generate Backup',
     'header_color'              => 'Overskriftsfarge',
     'info'                      => 'Disse innstillingene lar deg tilpasse enkelte aspekter av installasjonen din.',
     'laravel'                   => 'Laravel-versjon',

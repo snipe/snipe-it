@@ -2,7 +2,7 @@
 
 return array(
 
-    'does_not_exist' => 'Model does not exist.',
+    'does_not_exist' => 'Моделът не съществува.',
     'assoc_users'	 => 'This model is currently associated with one or more assets and cannot be deleted. Please delete the assets, and then try deleting again. ',
 
 

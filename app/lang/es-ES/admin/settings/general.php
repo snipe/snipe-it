@@ -22,6 +22,7 @@ return array(
     'eula_settings'				=> 'Configuración EULA',
     'eula_markdown'				=> 'Este EULS permite <a href="https://help.github.com/articles/github-flavored-markdown/">makrdown estilo Github</a>.',
     'general_settings'			=> 'Configuración General',
+	'generate_backup'			=> 'Generate Backup',
     'header_color'              => 'Color de encabezado',
     'info'                      => 'Estos parámetros permirten personalizar ciertos aspectos de la aplicación.',
     'laravel'                   => 'Versión de Laravel',

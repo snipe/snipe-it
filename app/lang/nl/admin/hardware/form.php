@@ -21,7 +21,7 @@ return array(
     'expires'			=> 'Vervalt op',
     'fully_depreciated'	=> 'Volledig afgeschreven',
     'help_checkout'		=> 'If you wish to assign this asset immediately, select "Ready to Deploy" from the status list above. ',
-    'mac_address'		=> 'MAC Address',
+    'mac_address'		=> 'MAC-adres',
     'manufacturer'		=> 'Fabrikant',
     'model'				=> 'Model',
     'months'			=> 'maanden',

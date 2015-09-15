@@ -2,49 +2,49 @@
 
 return array(
 
-    'does_not_exist' => 'License does not exist.',
-    'user_does_not_exist' => 'User does not exist.',
-    'asset_does_not_exist' 	=> 'The asset you are trying to associate with this license does not exist.',
-    'owner_doesnt_match_asset' => 'The asset you are trying to associate with this license is owned by somene other than the person selected in the assigned to dropdown.',
-    'assoc_users'	 => 'This license is currently checked out to a user and cannot be deleted. Please check the license in first, and then try deleting again. ',
+    'does_not_exist' => 'Лицензът не съществува.',
+    'user_does_not_exist' => 'Потребителят не съществува.',
+    'asset_does_not_exist' 	=> 'Активът, който се опитвате да свържете с този лиценз не съществува.',
+    'owner_doesnt_match_asset' => 'Активът, който се опитвате да свържете с този лиценз е притежание на друго лице, различно от това, което е определено в падащия списък.',
+    'assoc_users'	 => 'Този лиценз понастоящем е изписан на потребител и не може да бъде изтрит. Моля, първо впишете лиценза и тогава опитайте отново да го изтриете. ',
 
 
     'create' => array(
-        'error'   => 'License was not created, please try again.',
-        'success' => 'License created successfully.'
+        'error'   => 'Лицензът не беше създаден. Моля, опитайте отново.',
+        'success' => 'Лицензът е създаден.'
     ),
 
     'deletefile' => array(
-        'error'   => 'File not deleted. Please try again.',
-        'success' => 'File successfully deleted.',
+        'error'   => 'Файлът не е изтрит. Моля, опитайте отново.',
+        'success' => 'Файлът е изтрит.',
     ),
 
     'upload' => array(
-        'error'   => 'File(s) not uploaded. Please try again.',
-        'success' => 'File(s) successfully uploaded.',
-        'nofiles' => 'You did not select any files for upload, or the file you are trying to upload is too large',
-        'invalidfiles' => 'One or more of your files is too large or is a filetype that is not allowed. Allowed filetypes are png, gif, jpg, doc, docx, pdf, and txt.',
+        'error'   => 'Файлът (файловете) не е качен. Моля, опитайте отново.',
+        'success' => 'Файлът (файловете) е качен.',
+        'nofiles' => 'Не сте избрали файл за качване или файлът, който се опитвате да качите е твърде голям',
+        'invalidfiles' => 'Един или повече файлове са твърде големи или с неразрешен тип. Разрешените типове файлове са png, gif, jpg, doc, docx, pdf, и txt.',
     ),
 
     'update' => array(
-        'error'   => 'License was not updated, please try again',
-        'success' => 'License updated successfully.'
+        'error'   => 'Лицензът не беше обновен. Моля, опитайте отново',
+        'success' => 'Лицензът е обновен.'
     ),
 
     'delete' => array(
-        'confirm'   => 'Are you sure you wish to delete this license?',
-        'error'   => 'There was an issue deleting the license. Please try again.',
-        'success' => 'The license was deleted successfully.'
+        'confirm'   => 'Сигурни ли сте, че искате да изтриете този лиценз?',
+        'error'   => 'Възникна проблем при изтриването на този лиценз. Моля, опитайте отново.',
+        'success' => 'Лицензът е изтрит.'
     ),
 
     'checkout' => array(
-        'error'   => 'There was an issue checking out the license. Please try again.',
-        'success' => 'The license was checked out successfully'
+        'error'   => 'Възникна проблем при изписването на лиценза. Моля, опитайте отново.',
+        'success' => 'Лицензът е изписан'
     ),
 
     'checkin' => array(
-        'error'   => 'There was an issue checking in the license. Please try again.',
-        'success' => 'The license was checked in successfully'
+        'error'   => 'Възникна проблем при вписването на лиценза. Моля, опитайте отново.',
+        'success' => 'Лицензът е вписан'
     ),
 
 );

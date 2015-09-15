@@ -22,6 +22,7 @@ return array(
     'eula_settings'				=> 'EULA nustatymai',
     'eula_markdown'				=> 'Šis EULA leidžia <a href="https://help.github.com/articles/github-flavored-markdown/">Github flavored markdown</a>.',
     'general_settings'			=> 'Bendrieji nustatymai',
+	'generate_backup'			=> 'Generate Backup',
     'header_color'              => 'Atraštės spalva',
     'info'                      => 'Šie nustatymai leidžia jums pasirinkti savus diegimo nustatymus.',
     'laravel'                   => 'Laravel versija',

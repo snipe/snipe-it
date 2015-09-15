@@ -2,57 +2,56 @@
 
 return array(
 
-    'undeployable' 		=> '<strong>Warning: </strong> This asset has been marked as currently undeployable.
-                        If this status has changed, please update the asset status.',
-    'does_not_exist' 	=> 'Asset does not exist.',
-    'does_not_exist_or_not_requestable' => 'Nice try. That asset does not exist or is not requestable.',
-    'assoc_users'	 	=> 'This asset is currently checked out to a user and cannot be deleted. Please check the asset in first, and then try deleting again. ',
+    'undeployable' 		=> '<strong>Внимание:</strong> Този актив е маркиран като невъзможен за предоставяне. Ако статусът е променен, моля обновете актива.',
+    'does_not_exist' 	=> 'Активът не съществува.',
+    'does_not_exist_or_not_requestable' => 'Добър опит. Активът не съществува или не може а бъде предоставян.',
+    'assoc_users'	 	=> 'Активът е изписан на потребител и не може да бъде изтрит. Моля впишете го обратно и след това опитайте да го изтриете отново.',
 
     'create' => array(
-        'error'   		=> 'Asset was not created, please try again. :(',
-        'success' 		=> 'Asset created successfully. :)'
+        'error'   		=> 'Активът не беше създаден. Моля опитайте отново.',
+        'success' 		=> 'Активът създаден успешно.'
     ),
 
     'update' => array(
-        'error'   			=> 'Asset was not updated, please try again',
-        'success' 			=> 'Asset updated successfully.',
-        'nothing_updated'	=>  'No fields were selected, so nothing was updated.',
+        'error'   			=> 'Активът не беше обновен. Моля опитайте отново.',
+        'success' 			=> 'Активът обновен успешно.',
+        'nothing_updated'	=>  'Няма избрани полета, съответно нищо не беше обновено.',
     ),
 
     'restore' => array(
-        'error'   		=> 'Asset was not restored, please try again',
-        'success' 		=> 'Asset restored successfully.'
+        'error'   		=> 'Активът не беше възстановен. Моля опитайте отново.',
+        'success' 		=> 'Активът възстановен успешно.'
     ),
 
     'deletefile' => array(
-        'error'   => 'File not deleted. Please try again.',
-        'success' => 'File successfully deleted.',
+        'error'   => 'Файлът не беше изтрит. Моля опитайте отново.',
+        'success' => 'Файлът изтрит успешно.',
     ),
 
     'upload' => array(
-        'error'   => 'File(s) not uploaded. Please try again.',
-        'success' => 'File(s) successfully uploaded.',
-        'nofiles' => 'You did not select any files for upload, or the file you are trying to upload is too large',
-        'invalidfiles' => 'One or more of your files is too large or is a filetype that is not allowed. Allowed filetypes are png, gif, jpg, doc, docx, pdf, and txt.',
+        'error'   => 'Качването неуспешно. Моля опитайте отново.',
+        'success' => 'Качването успешно.',
+        'nofiles' => 'Не сте избрали файлове за качване или са твърде големи.',
+        'invalidfiles' => 'Един или повече файлове са твърде големи или с непозволен тип. Разрешените файлови типове за качване са png, gif, jpg, doc, docx, pdf и txt.',
     ),
 
 
     'delete' => array(
-        'confirm'   	=> 'Are you sure you wish to delete this asset?',
-        'error'   		=> 'There was an issue deleting the asset. Please try again.',
-        'success' 		=> 'The asset was deleted successfully.'
+        'confirm'   	=> 'Сигурни ли сте, че желаете изтриване на актива?',
+        'error'   		=> 'Проблем при изтриване на актива. Моля опитайте отново.',
+        'success' 		=> 'Активът е изтрит успешно.'
     ),
 
     'checkout' => array(
-        'error'   		=> 'Asset was not checked out, please try again',
-        'success' 		=> 'Asset checked out successfully.',
-        'user_does_not_exist' => 'That user is invalid. Please try again.'
+        'error'   		=> 'Активът не беше изписан. Моля опитайте отново.',
+        'success' 		=> 'Активът изписан успешно.',
+        'user_does_not_exist' => 'Невалиден потребител. Моля опитайте отново.'
     ),
 
     'checkin' => array(
-        'error'   		=> 'Asset was not checked in, please try again',
-        'success' 		=> 'Asset checked in successfully.',
-        'user_does_not_exist' => 'That user is invalid. Please try again.'
+        'error'   		=> 'Активът не беше вписан. Моля опитайте отново.',
+        'success' 		=> 'Активът вписан успешно.',
+        'user_does_not_exist' => 'Невалиден потребител. Моля опитайте отново.'
     )
 
 );

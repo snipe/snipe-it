@@ -22,6 +22,7 @@ return array(
     'eula_settings'				=> 'Nastavení EULA',
     'eula_markdown'				=> 'Tato EULA umožňuje <a href="https://help.github.com/articles/github-flavored-markdown/">Github markdown</a>.',
     'general_settings'			=> 'Obecné nastavení',
+	'generate_backup'			=> 'Generate Backup',
     'header_color'              => 'Barva záhlaví',
     'info'                      => 'Tato nastavení umožňují zvolit určité prvky instalace.',
     'laravel'                   => 'Verze Laravel',

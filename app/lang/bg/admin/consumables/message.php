@@ -2,34 +2,34 @@
 
 return array(
 
-    'does_not_exist' => 'Consumable does not exist.',
+    'does_not_exist' => 'Консуматива не съществува.',
 
     'create' => array(
-        'error'   => 'Consumable was not created, please try again.',
-        'success' => 'Consumable created successfully.'
+        'error'   => 'Консумативът не беше създаден. Моля опитайте отново.',
+        'success' => 'Консумативът създаден успешно.'
     ),
 
     'update' => array(
-        'error'   => 'Consumable was not updated, please try again',
-        'success' => 'Consumable updated successfully.'
+        'error'   => 'Консумативът не беше обновен. Моля опитайте отново.',
+        'success' => 'Консумативът обновен успешно.'
     ),
 
     'delete' => array(
-        'confirm'   => 'Are you sure you wish to delete this accessory?',
-        'error'   => 'There was an issue deleting the consumable. Please try again.',
-        'success' => 'The accessory was deleted successfully.'
+        'confirm'   => 'Сигурни ли сте, че желаете да изтриете аксесоара?',
+        'error'   => 'Проблем при изтриването на консуматива. Моля опитайте отново.',
+        'success' => 'Аксесоарът беше изтрит успешно.'
     ),
 
      'checkout' => array(
-        'error'   		=> 'Consumable was not checked out, please try again',
-        'success' 		=> 'Consumable checked out successfully.',
-        'user_does_not_exist' => 'That user is invalid. Please try again.'
+        'error'   		=> 'Консумативът не беше изписан. Моля опитайте отново.',
+        'success' 		=> 'Консумативът изписан успешно.',
+        'user_does_not_exist' => 'Невалиден потребител. Моля опитайте отново.'
     ),
 
     'checkin' => array(
-        'error'   		=> 'Consumable was not checked in, please try again',
-        'success' 		=> 'Consumable checked in successfully.',
-        'user_does_not_exist' => 'That user is invalid. Please try again.'
+        'error'   		=> 'Консумативът не беше вписан. Моля опитайте отново.',
+        'success' 		=> 'Консумативът вписан успешно.',
+        'user_does_not_exist' => 'Невалиден потребител. Моля опитайте отново.'
     )
 
 
