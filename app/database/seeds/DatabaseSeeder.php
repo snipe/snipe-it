@@ -22,6 +22,8 @@ class DatabaseSeeder extends Seeder
         $this->call('LicensesSeeder');
         $this->call('LicenseSeatsSeeder');
         $this->call('ActionlogSeeder');
+        $this->call('AccessoriesSeeder');
+        $this->call('AssetMaintenancesSeeder');
     }
 
 }
