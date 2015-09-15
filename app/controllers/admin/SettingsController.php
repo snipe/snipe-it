@@ -189,8 +189,14 @@ class SettingsController extends AdminController
 
     public function postBackups()
     {
-        Artisan::call('snipe:backup');
-        return Redirect::to("admin/settings/backups")->with('success', Lang::get('admin/settings/message.backup.generated'));
+        if (!Config::get('app.lock_passwords')) {
+            Artisan::call('snipe:backup');
+            return Redirect::to("admin/settings/backups")->with('success', Lang::get('admin/settings/message.backup.generated'));
+        } else {
+            Artisan::call('snipe:backup');
+            return Redirect::to("admin/settings/backups")->with('error', Lang::get('general.feature_disabled'));
+        }
+
 
     }
 

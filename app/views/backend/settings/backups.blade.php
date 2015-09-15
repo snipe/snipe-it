@@ -16,6 +16,10 @@
                     <!-- bio, new note & orders column -->
                     <div class="col-md-9 bio">
                         <h3 class="name">@lang('admin/settings/general.backups')</h3>
+                        @if (Config::get('app.lock_passwords'))
+                           <p class="help-block">@lang('general.feature_disabled')</p>
+                        @endif
+                        
                         <div class="profile-box">
                             <br>
                             <!-- checked out assets table -->
@@ -48,13 +52,19 @@
 
                      <!-- side address column -->
                     <div class="col-md-3 address pull-right">
-                        <br /><br />
+                        <br><br>
 
                         <form method="POST">
-                            <button class="btn btn-default">@lang('admin/settings/general.generate_backup')</button>
-                        </form>
-                        <br /><br />
+                            <p>
+                                <button class="btn btn-default {{ (Config::get('app.lock_passwords')) ? ' disabled': '' }}">@lang('admin/settings/general.generate_backup')</button>
+                            </p>
 
+                             @if (Config::get('app.lock_passwords'))
+                                <p class="help-block">@lang('general.feature_disabled')</p>
+                             @endif
+
+
+                        </form>
                         <p>Backup files are located in: app/storage/dumps</p>
 
 
