@@ -2,24 +2,24 @@
 
 return array(
 
-    'does_not_exist' => 'Depreciation class does not exist.',
-    'assoc_users'	 => 'This depreciation is currently associated with one or more models and cannot be deleted. Please delete the models, and then try deleting again. ',
+    'does_not_exist' => 'Амортизацията не съществува.',
+    'assoc_users'	 => 'Тази амортизация е асоциирана с един или повече модели и не може да бъде изтрита. Моля изтрийте моделите и опитайте отново.',
 
 
     'create' => array(
-        'error'   => 'Depreciation class was not created, please try again. :(',
-        'success' => 'Depreciation class created successfully. :)'
+        'error'   => 'Класът на амортизация не беше създаден. Моля опитайте отново.',
+        'success' => 'Класът на амортизация създаден успешно.'
     ),
 
     'update' => array(
-        'error'   => 'Depreciation class was not updated, please try again',
-        'success' => 'Depreciation class updated successfully.'
+        'error'   => 'Класът на амортизация не беше обновен. Моля опитайте отново.',
+        'success' => 'Класът на амортизация обновен успешно.'
     ),
 
     'delete' => array(
-        'confirm'   => 'Are you sure you wish to delete this depreciation class?',
-        'error'   => 'There was an issue deleting the depreciation class. Please try again.',
-        'success' => 'The depreciation class was deleted successfully.'
+        'confirm'   => 'Сигурни ли сте, че желаете изтриване на класът на амортизация?',
+        'error'   => 'Проблем при изтриването на класа на амортизация. Моля опитайте отново.',
+        'success' => 'Класът на амортизация изтрит успешно.'
     )
 
 );

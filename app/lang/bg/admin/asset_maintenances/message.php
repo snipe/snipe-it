@@ -1,15 +1,15 @@
 <?php
 
     return [
-        'not_found'                    => 'Asset Maintenance you were looking for was not found!',
+        'not_found'                    => 'Поддръжката на актив, която търсите не бе открита!',
         'delete'                       => [
-            'confirm' => 'Are you sure you wish to delete this asset maintenance?',
-            'error'   => 'There was an issue deleting the asset maintenance. Please try again.',
-            'success' => 'The asset maintenance was deleted successfully.'
+            'confirm' => 'Потвърдете изтриването на поддръжката на актив.',
+            'error'   => 'Проблем при изтриването на поддръжка на актив. Моля опитайте отново.',
+            'success' => 'Поддръжката на актив изтрита успешно.'
         ],
         'create'                       => [
-            'error'   => 'Asset Maintenance was not created, please try again.',
-            'success' => 'Asset Maintenance created successfully.'
+            'error'   => 'Поддръжката на актив не бе създадена. Моля опитайте отново.',
+            'success' => 'Поддръжката на актив създадена успешно.'
         ],
         'asset_maintenance_incomplete' => 'Все още неприключила',
         'warranty'                     => 'Гаранция',

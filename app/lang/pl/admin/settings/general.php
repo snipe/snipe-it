@@ -22,6 +22,7 @@ return array(
     'eula_settings'				=> 'Ustawienia Licencji',
     'eula_markdown'				=> 'Ta licencja zezwala na <a href="https://help.github.com/articles/github-flavored-markdown/">Github flavored markdown</a>.',
     'general_settings'			=> 'Ustawienia ogólne',
+	'generate_backup'			=> 'Generate Backup',
     'header_color'              => 'Kolor nagłówka',
     'info'                      => 'Te ustawienia pozwalają ci zdefiniować najważniejsze szczegóły twojej instalacji.',
     'laravel'                   => 'Wersja Laravel',

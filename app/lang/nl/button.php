@@ -8,7 +8,7 @@ return array(
     'delete'  	=> 'Verwijder',
     'edit'    	=> 'Bewerk',
     'restore' 	=> 'Herstel',
-    'request'   => 'Request',
+    'request'   => 'Aanvraag',
     'submit'  	=> 'Verzenden',
     'upload'    => 'Verstuur',
 

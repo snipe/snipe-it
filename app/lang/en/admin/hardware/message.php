@@ -7,7 +7,6 @@ return array(
     'does_not_exist' 	=> 'Asset does not exist.',
     'does_not_exist_or_not_requestable' => 'Nice try. That asset does not exist or is not requestable.',
     'assoc_users'	 	=> 'This asset is currently checked out to a user and cannot be deleted. Please check the asset in first, and then try deleting again. ',
-    'already_checked_in' => 'Could not checkin asset because it is not checked out to anyone.',
 
     'create' => array(
         'error'   		=> 'Asset was not created, please try again. :(',

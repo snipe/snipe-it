@@ -2,37 +2,37 @@
 
 return array(
 
-    'accepted'                  => 'You have successfully accepted this asset.',
-    'declined'                  => 'You have successfully declined this asset.',
-    'user_exists'               => 'User already exists!',
-    'user_not_found'            => 'User [:id] does not exist.',
-    'user_login_required'       => 'The login field is required',
-    'user_password_required'    => 'The password is required.',
-    'insufficient_permissions'  => 'Insufficient Permissions.',
-    'user_deleted_warning'      => 'This user has been deleted. You will have to restore this user to edit them or assign them new assets.',
-    'ldap_not_configured'        => 'LDAP integration has not been configured for this installation.',
+    'accepted'                  => 'Активът беше приет.',
+    'declined'                  => 'Активът беше отказан.',
+    'user_exists'               => 'Потребителят вече съществува!',
+    'user_not_found'            => 'Потребител [:id] не съществува.',
+    'user_login_required'       => 'Полето за вход е задължително',
+    'user_password_required'    => 'Паролата е задължителна.',
+    'insufficient_permissions'  => 'Нямате необходимите права.',
+    'user_deleted_warning'      => 'Този потребител е изтрит. За да редактирате данните за него или да му зададете актив, трябва първо да възстановите потребителя.',
+    'ldap_not_configured'        => 'Интеграцията с LDAP не е конфигурирана за тази инсталация.',
 
 
     'success' => array(
-        'create'    => 'User was successfully created.',
-        'update'    => 'User was successfully updated.',
-        'delete'    => 'User was successfully deleted.',
+        'create'    => 'Потребителят е създаден.',
+        'update'    => 'Потребителят е обновен.',
+        'delete'    => 'Потребителят е изтрит.',
         'ban'       => 'User was successfully banned.',
         'unban'     => 'User was successfully unbanned.',
         'suspend'   => 'User was successfully suspended.',
         'unsuspend' => 'User was successfully unsuspended.',
-        'restored'  => 'User was successfully restored.',
+        'restored'  => 'Потребителят е възстановен.',
         'import'    => 'Users imported successfully.',
     ),
 
     'error' => array(
-        'create' => 'There was an issue creating the user. Please try again.',
-        'update' => 'There was an issue updating the user. Please try again.',
-        'delete' => 'There was an issue deleting the user. Please try again.',
+        'create' => 'Възникна проблем при създаването на този потребител. Моля, опитайте отново.',
+        'update' => 'Възникна проблем при обновяването на този потребител. Моля, опитайте отново.',
+        'delete' => 'Възникна проблем при изтриването на този потребител. Моля, опитайте отново.',
         'unsuspend' => 'There was an issue unsuspending the user. Please try again.',
         'import'    => 'There was an issue importing users. Please try again.',
-        'asset_already_accepted' => 'This asset has already been accepted.',
-        'accept_or_decline' => 'You must either accept or decline this asset.',
+        'asset_already_accepted' => 'Този актив е вече приет.',
+        'accept_or_decline' => 'Трябва да приемете или да откажете този актив.',
         'ldap_could_not_connect' => 'Could not connect to the LDAP server. Please check your LDAP server configuration in the LDAP config file. <br>Error from LDAP Server:',
         'ldap_could_not_bind' => 'Could not bind to the LDAP server. Please check your LDAP server configuration in the LDAP config file. <br>Error from LDAP Server: ',
         'ldap_could_not_search' => 'Could not search the LDAP server. Please check your LDAP server configuration in the LDAP config file. <br>Error from LDAP Server:',
@@ -40,8 +40,8 @@ return array(
     ),
 
     'deletefile' => array(
-        'error'   => 'File not deleted. Please try again.',
-        'success' => 'File successfully deleted.',
+        'error'   => 'Файлът не е изтрит. Моля, опитайте отново.',
+        'success' => 'Файлът е изтрит.',
     ),
 
     'upload' => array(

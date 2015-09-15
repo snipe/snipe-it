@@ -2,24 +2,24 @@
 
 return array(
 
-    'does_not_exist' => 'Location does not exist.',
-    'assoc_users'	 => 'This location is currently associated with at least one user and cannot be deleted. Please update your users to no longer reference this location and try again. ',
+    'does_not_exist' => 'Местоположението не съществува.',
+    'assoc_users'	 => 'Местоположението е свързано с поне един потребител и не може да бъде изтрито. Моля, актуализирайте потребителите, така че да не са свързани с това местоположение и опитайте отново. ',
 
 
     'create' => array(
-        'error'   => 'Location was not created, please try again.',
-        'success' => 'Location created successfully.'
+        'error'   => 'Местоположението не беше създадено. Моля опитайте отново.',
+        'success' => 'Местоположението създадено успешно.'
     ),
 
     'update' => array(
-        'error'   => 'Location was not updated, please try again',
-        'success' => 'Location updated successfully.'
+        'error'   => 'Местоположението не беше обновено. Моля опитайте отново.',
+        'success' => 'Местоположението обновено успешно.'
     ),
 
     'delete' => array(
-        'confirm'   => 'Are you sure you wish to delete this status label?',
-        'error'   => 'There was an issue deleting the location. Please try again.',
-        'success' => 'The location was deleted successfully.'
+        'confirm'   => 'Сигурни ли сте, че желаете изтриване на този статус етикет?',
+        'error'   => 'Проблем при изтриване на местоположението. Моля опитайте отново.',
+        'success' => 'Местоположението изтрито успешно.'
     )
 
 );

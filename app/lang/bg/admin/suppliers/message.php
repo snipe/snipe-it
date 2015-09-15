@@ -2,23 +2,23 @@
 
 return array(
 
-    'does_not_exist' => 'Supplier does not exist.',
-    'assoc_users'	 => 'This supplier is currently associated with at least one model and cannot be deleted. Please update your models to no longer reference this supplier and try again. ',
+    'does_not_exist' => 'Несъществуващ доставчик.',
+    'assoc_users'	 => 'Този доставчик е асоцииран с поне един от моделите и не може да бъде изтрит. Моля, променете връзките на моделите по отношение на този доставчик и опитайте отново. ',
 
     'create' => array(
-        'error'   => 'Supplier was not created, please try again.',
-        'success' => 'Supplier created successfully.'
+        'error'   => 'Доставчикът не беше създаден. Моля, опитайте отново.',
+        'success' => 'Доставчикът е създаден.'
     ),
 
     'update' => array(
-        'error'   => 'Supplier was not updated, please try again',
-        'success' => 'Supplier updated successfully.'
+        'error'   => 'Достъвчикът не беше обновен. Моля, опитайте отново',
+        'success' => 'Доставчикът е обновен.'
     ),
 
     'delete' => array(
-        'confirm'   => 'Are you sure you wish to delete this supplier?',
-        'error'   => 'There was an issue deleting the supplier. Please try again.',
-        'success' => 'Supplier was deleted successfully.'
+        'confirm'   => 'Сигурни ли сте, че искате да изтриете този доставчик?',
+        'error'   => 'Възникна проблем при изтриване на доставчика. Моля, опитайте отново.',
+        'success' => 'Доставчикът е изтрит.'
     )
 
 );

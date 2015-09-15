@@ -63,13 +63,16 @@
         public function up()
         {
 
-            Schema::table( 'asset_logs', function ( Blueprint $table ) {
+            if (!Schema::hasColumn('asset_logs', 'thread_id')) {
 
-                $table->integer( 'thread_id' )
-                      ->nullable()
-                      ->default( null );
-                $table->index( 'thread_id' );
-            } );
+                Schema::table( 'asset_logs', function ( Blueprint $table ) {
+
+                    $table->integer( 'thread_id' )
+                          ->nullable()
+                          ->default( null );
+                    $table->index( 'thread_id' );
+                } );
+            }
 
             $this->actionlog = new Actionlog();
             $this->assetLogs = $this->actionlog->getListingOfActionLogsChronologicalOrder();
@@ -93,8 +96,9 @@
                 }
 
             }
-
         }
+
+
 
         /**
          * Reverse the migrations.

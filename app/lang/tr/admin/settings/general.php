@@ -22,6 +22,7 @@ return array(
     'eula_settings'				=> 'Son Kullanıcı Lisans Sözleşmesi Ayarları',
     'eula_markdown'				=> 'This EULA allows <a href="https://help.github.com/articles/github-flavored-markdown/">Github flavored markdown</a>.',
     'general_settings'			=> 'Genel Ayarlar',
+	'generate_backup'			=> 'Generate Backup',
     'header_color'              => 'Başlık rengi',
     'info'                      => 'Bu ayarlardan kurulum görünüşünüzü kişiselleştirebilirsiniz.',
     'laravel'                   => 'Laravel Version',

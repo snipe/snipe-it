@@ -2,23 +2,23 @@
 
 return array(
 
-    'does_not_exist' => 'Manufacturer does not exist.',
-    'assoc_users'	 => 'This manufacturer is currently associated with at least one model and cannot be deleted. Please update your models to no longer reference this manufacturer and try again. ',
+    'does_not_exist' => 'Несъществуващ производител.',
+    'assoc_users'	 => 'Този производител е асоцииран с поне един от моделите и не може да бъде изтрит. Моля, променете връзките на моделите по отношение на този производител и опитайте отново. ',
 
     'create' => array(
-        'error'   => 'Manufacturer was not created, please try again.',
-        'success' => 'Manufacturer created successfully.'
+        'error'   => 'Производителят не беше създаден. Моля, опитайте отново.',
+        'success' => 'Производителят е създаден.'
     ),
 
     'update' => array(
-        'error'   => 'Manufacturer was not updated, please try again',
-        'success' => 'Manufacturer updated successfully.'
+        'error'   => 'Производителят не е обновен. Моля, опитайте отново',
+        'success' => 'Производителят е обновен.'
     ),
 
     'delete' => array(
-        'confirm'   => 'Are you sure you wish to delete this manufacturer?',
-        'error'   => 'There was an issue deleting the manufacturer. Please try again.',
-        'success' => 'The Manufacturer was deleted successfully.'
+        'confirm'   => 'Сигурни ли сте, че искате да изтриете този производител?',
+        'error'   => 'Възникна проблем при изтриването на проиводителя. Моля, опитайте отново.',
+        'success' => 'Производителят е изтрит.'
     )
 
 );

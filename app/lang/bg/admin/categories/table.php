@@ -3,7 +3,7 @@
 return array(
 	'eula_text'      			=> 'EULA',
     'id'      					=> 'ID',
-    'parent'   					=> 'Parent',
+    'parent'   					=> 'Горна категория',
     'require_acceptance'      	=> 'Утвърждаване',
     'title'      				=> 'Категория на актива',
 

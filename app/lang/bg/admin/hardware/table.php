@@ -2,22 +2,22 @@
 
 return array(
 
-    'asset_tag'   	=> 'Asset Tag',
-    'asset_model'       => 'Model',
-    'book_value'  	=> 'Value',
-    'change' 		=> 'In/Out',
-    'checkout_date' => 'Checkout Date',
-    'checkoutto' 	=> 'Checked Out',
-    'diff' 			=> 'Diff',
-    'dl_csv' 		=> 'Download CSV',
+    'asset_tag'   	=> 'Инвентарен номер',
+    'asset_model'       => 'Модел',
+    'book_value'  	=> 'Стойност',
+    'change' 		=> 'Предоставяне',
+    'checkout_date' => 'Дата на изписване',
+    'checkoutto' 	=> 'Изписан',
+    'diff' 			=> 'Разлика',
+    'dl_csv' 		=> 'Сваляне на CSV',
     'eol' 			=> 'EOL',
     'id'      		=> 'ID',
-    'location' 		=> 'Location',
-    'purchase_cost'	=> 'Cost',
-    'purchase_date'	=> 'Purchased',
-    'serial'   		=> 'Serial',
-    'status'   		=> 'Status',
-    'title'      	=> 'Asset ',
-    'days_without_acceptance' => 'Days Without Acceptance'
+    'location' 		=> 'Местоположение',
+    'purchase_cost'	=> 'Стойност',
+    'purchase_date'	=> 'Закупен',
+    'serial'   		=> 'Сериен номер',
+    'status'   		=> 'Статус',
+    'title'      	=> 'Актив ',
+    'days_without_acceptance' => 'Дни без да е предаден'
 
 );
