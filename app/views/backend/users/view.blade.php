@@ -410,7 +410,7 @@
 
                         <h6> @lang('admin/users/general.contact_user', array('name' => $user->first_name)) </h6>
 
-                        @if ($user->location_id)
+                        @if ($user->userloc)
 	                        <div class="col-md-12">
 	                            <iframe width="300" height="133" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.com/maps?&amp;q={{{ $user->userloc->address }}},{{{ $user->userloc->city }}},{{{ strtoupper($user->userloc->state) }}},{{{ strtoupper($user->userloc->country) }}}&amp;output=embed" style="float: none;"></iframe>
 	                         </div>
