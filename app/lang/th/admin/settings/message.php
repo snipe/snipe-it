@@ -4,14 +4,14 @@ return array(
 
 
     'update' => array(
-        'error'                 => 'An error has occurred while updating. ',
-        'success'               => 'Settings updated successfully.'
+        'error'                 => 'เกิด error ระหว่างการอัพเดตข้อมูล ',
+        'success'               => 'อัพเดตการตั้งค่าเรียบร้อยแล้ว'
     ),
     'backup' => array(
-        'delete_confirm'        => 'Are you sure you would like to delete this backup file? This action cannot be undone. ',
-        'file_deleted'          => 'The backup file was successfully deleted. ',
-        'generated'             => 'A new backup file was successfully created.',
-        'file_not_found'        => 'That backup file could not be found on the server.',
+        'delete_confirm'        => 'คุณแน่ใจที่จะลบข้อมูลสำรองนี้? การดำเนินการนี้จะไม่สามารถกู้คืนได้ ',
+        'file_deleted'          => 'ลบข้อมูลสำรองเรียบร้อยแล้ว ',
+        'generated'             => 'ไฟล์ข้อมูลสำรองถูกสร้างเรียบร้อยแล้ว',
+        'file_not_found'        => 'ไม่พบไฟล์ข้อมูลสำรองบนเซิฟเวอร์',
     ),
 
 );

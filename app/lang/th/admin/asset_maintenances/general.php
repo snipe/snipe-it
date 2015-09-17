@@ -1,11 +1,11 @@
 <?php
 
     return [
-        'asset_maintenances' => 'Asset Maintenances',
-        'edit'               => 'Edit Asset Maintenance',
-        'delete'             => 'Delete Asset Maintenance',
-        'view'               => 'View Asset Maintenance Details',
-        'repair'             => 'Repair',
-        'maintenance'        => 'Maintenance',
-        'upgrade'            => 'Upgrade'
+        'asset_maintenances' => 'ซ่อมบำรุงสินทรัพย์',
+        'edit'               => 'แก้ไขการซ่อมบำรุงสินทรัพย์',
+        'delete'             => 'ลบการซ่อมบำรุงสินทรัพย์',
+        'view'               => 'ดูรายละเอียดการซ่อมบำรุงสินทรัพย์',
+        'repair'             => 'ซ่อมแซม',
+        'maintenance'        => 'การดูแลรักษา',
+        'upgrade'            => 'อัพเกรด'
     ];

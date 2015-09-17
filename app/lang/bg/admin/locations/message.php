@@ -5,7 +5,7 @@ return array(
     'does_not_exist' => 'Местоположението не съществува.',
     'assoc_users'	 => 'Местоположението е свързано с поне един потребител и не може да бъде изтрито. Моля, актуализирайте потребителите, така че да не са свързани с това местоположение и опитайте отново. ',
     'assoc_assets'	 => 'Местоположението е свързано с поне един актив и не може да бъде изтрито. Моля, актуализирайте активите, така че да не са свързани с това местоположение и опитайте отново. ',
-    'assoc_child_loc'	 => 'This location is currently the parent of at least one child location and cannot be deleted. Please update your locations to no longer reference this location and try again. ',
+    'assoc_child_loc'	 => 'В избраното местоположение е присъединено едно или повече местоположения. Моля преместете ги в друго и опитайте отново.',
 
 
     'create' => array(

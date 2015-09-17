@@ -8,10 +8,10 @@ return array(
         'success'               => 'Die Einstellungen wurden erfolgreich aktualisiert.'
     ),
     'backup' => array(
-        'delete_confirm'        => 'Are you sure you would like to delete this backup file? This action cannot be undone. ',
-        'file_deleted'          => 'The backup file was successfully deleted. ',
-        'generated'             => 'A new backup file was successfully created.',
-        'file_not_found'        => 'That backup file could not be found on the server.',
+        'delete_confirm'        => 'Backup Datei wirklich löschen? Aktion kann nicht rückgängig gemacht werden. ',
+        'file_deleted'          => 'Backup Datei erfolgreich gelöscht. ',
+        'generated'             => 'Backup Datei erfolgreich erstellt.',
+        'file_not_found'        => 'Backup Datei konnte nicht gefunden werden.',
     ),
 
 );

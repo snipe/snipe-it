@@ -3,29 +3,29 @@
 return array(
 
     'does_not_exist' => 'Моделът не съществува.',
-    'assoc_users'	 => 'This model is currently associated with one or more assets and cannot be deleted. Please delete the assets, and then try deleting again. ',
+    'assoc_users'	 => 'Този модел е асоцииран с един или повече активи и не може да бъде изтрит. Моля изтрийте активите и опитайте отново.',
 
 
     'create' => array(
-        'error'   => 'Model was not created, please try again.',
-        'success' => 'Model created successfully.',
-        'duplicate_set' => 'An asset model with that name, manufacturer and model number already exists.',
+        'error'   => 'Моделът не беше създаден. Моля опитайте отново.',
+        'success' => 'Моделът създаден успешно.',
+        'duplicate_set' => 'Актив с това име, производител и номер на модел вече е въведен.',
     ),
 
     'update' => array(
-        'error'   => 'Model was not updated, please try again',
-        'success' => 'Model updated successfully.'
+        'error'   => 'Моделът не беше обновен. Моля опитайте отново.',
+        'success' => 'Моделът обновен успешно.'
     ),
 
     'delete' => array(
-        'confirm'   => 'Are you sure you wish to delete this asset model?',
-        'error'   => 'There was an issue deleting the model. Please try again.',
-        'success' => 'The model was deleted successfully.'
+        'confirm'   => 'Желаете ли изтриване на модела?',
+        'error'   => 'Проблем при изтриване на модела. Моля опитайте отново.',
+        'success' => 'Моделът изтрит успешно.'
     ),
 
     'restore' => array(
-        'error'   		=> 'Model was not restored, please try again',
-        'success' 		=> 'Model restored successfully.'
+        'error'   		=> 'Моделът не беше възстановен. Моля опитайте отново.',
+        'success' 		=> 'Моделът възстановен успешно.'
     ),
 
 );

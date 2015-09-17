@@ -1,11 +1,11 @@
 <?php
 
 return array(
-    'about_consumables_title' 			=> 'About Consumables',
-    'about_consumables_text'  			=> 'Consumables are anything purchased that will be used up over time. For example, printer ink or copier paper.',
-    'consumable_name'                  => 'Consumable Name',
-    'create'                             => 'Create Consumable',
-    'remaining' 			             => 'Remaining',
-    'total' 			                 => 'Total',
-    'update'                            => 'Update Consumable',
+    'about_consumables_title' 			=> 'เกี่ยวกับวัสดุสิ้นเปลือง',
+    'about_consumables_text'  			=> 'วัสดุสิ้นเปลืองคือสิ่งใดๆ ที่มีการซื้อและนำมาใช้ในช่วงเวลานั้น ยกตัวอย่างเช่น หมึกปริ้นเตอร์ หรือ กระดาษถ่ายสำเนา',
+    'consumable_name'                  => 'ชื่อวัสดุสิ้นเปลือง',
+    'create'                             => 'สร้างวัสดุสิ้นเปลือง',
+    'remaining' 			             => 'คงค้าง',
+    'total' 			                 => 'รวมทั้งหมด',
+    'update'                            => 'ปรับปรุงวัสดุสิ้นเปลือง',
 );
