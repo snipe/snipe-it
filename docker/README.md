@@ -10,36 +10,53 @@ Then you can use your newly built image as ```snipeit```
 
 ### How to get up and running ###
 
+* The best way to handle all of the various settings for your various containers is to use an `env-file`. 
+See the Docker documentation for more details. It should be just a simple text file with environment 
+variable names and values, separated by ```=``` signs.
+
+Your docker.env should look something like this:
+
+```env
+# Mysql Parameters
+MYSQL_ROOT_PASSWORD=YOUR_SUPER_SECRET_PASSWORD
+MYSQL_DATABASE=snipeit
+MYSQL_USER=snipeit
+MYSQL_PASSWORD=YOUR_snipeit_USER_PASSWORD
+
+# Email Parameters
+# - the hostname/IP address of your mailserver
+MAIL_PORT_587_TCP_ADDR=smtp.whatever.com
+#the port for the mailserver (probably 587, could be another)
+MAIL_PORT_587_TCP_PORT=587
+# the default from address, and from name for emails
+MAIL_ENV_FROM_ADDR=youremail@yourdomain.com
+MAIL_ENV_FROM_NAME=Your Full Email Name
+# - pick 'tls' for SMTP-over-SSL, 'tcp' for unencrypted
+MAIL_ENV_ENCRYPTION=tcp
+# SMTP username and password
+MAIL_ENV_USERNAME=your_email_username
+MAIL_ENV_PASSWORD=your_email_password
+
+# Snipe-IT Settings
+SNIPEIT_TIMEZONE=UTC
+SNIPEIT_LOCALE=en
+SERVER_URL=https://myserver.com
+```
 * First get a MySQL container running
 
-Figure out what you want for your:
-
-* MySQL root password
-* MySQL Database name for Snipe-IT
-* MySQL User name for the user who will access Snipe-IT
-* MySQL Password for that user
-
 ```sh
-docker run --name mysql -e MYSQL_ROOT_PASSWORD=SUPERDUPERSECRETPASSWORD -e MYSQL_DATABASE=snipeit -e MYSQL_USER=snipeit -e MYSQL_PASSWORD=tinglewingler -d -p $(boot2docker ip)::3306 mysql
+docker run --name snipe-mysql --env-file=my_env_file -d -p $(docker-machine ip b2d)::3306 mysql
 ```
 
-That should set you up with your database to use. (You can also use an environment file using ```--env-file```; see ```docker run --help``` for details)
+That should set you up with your database to use. (You can also specify environment variables on the command-line instead of the env-file, but that can get very clunky very quickly; see ```docker run --help``` for details)
 
-You'll want to handle E-Mail - you can do this with a Docker container (not documented here), or point to any other external mail server. If you did want to do it using Docker, make sure to expose port 587 for mail submission, and use ```--link mail:...```. Regardless, the environment variables necessary are:
-
- * MAIL_PORT_587_TCP_ADDR - the hostname/IP address of your mailserver
- * MAIL_PORT_587_TCP_PORT - the port for the mailserver (probably 587, could be another)
- * MAIL_ENV_FROM_ADDR, MAIL_ENV_FROM_NAME - the default from address, and from name for emails
- * MAIL_ENV_ENCRYPTION - pick 'tls' for SMTP-over-SSL, 'tcp' for unencrypted
- * MAIL_ENV_USERNAME - SMTP username
- * MAIL_ENV_PASSWORD - SMTP password
-
-You can assemble these options into an env-file, or specify them on the command line when you run your Snipe-IT container.
+* If your Email solution requires its own container, start that container or service. Make sure to expose port 587 for mail submission, and use ```--link mail:...```.
 
 Now you can start your Snipe-IT container -
 ```sh
-docker run -d -p $(boot2docker ip)::80 --name="snipeit" --link mysql:mysql [--env-file or -e options...] snipeit 
+docker run -d -p $(docker-machine ip b2d)::80 --name="snipeit" --link snipe-mysql:mysql --env-file=my_env_file snipeit 
 ```
+If you have a separate container running for email, you will also want a ```--link``` setting for email as well.
 
 You can find out what port Snipe-IT is running on with:
 
@@ -55,15 +72,15 @@ docker exec -i -t snipeit php artisan app:install
 
 (Go ahead and answer the questions however you like. Type 'yes' when asked whether or not you want to run migrations.)
 
-#NOTE:
+~~#NOTE:~~
 
-You may have to run:
+~~You may have to run:~~
 
 ```sh
-docker exec -i -t snipeit php artisan key:generate --env=production
+~~docker exec -i -t snipeit php artisan key:generate --env=production~~
 ```
 
-to get the production application key set correctly; I'm not yet sure why this is (I think it's a bug?)
+~~to get the production application key set correctly; I'm not yet sure why this is (I think it's a bug?)~~
 
 # ~~If you want to seed~~
 

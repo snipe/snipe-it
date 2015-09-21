@@ -53,6 +53,9 @@ RUN cd /var/www/html;composer install
 
 ############### APPLICATION INSTALL/INIT #################
 
+RUN cd /var/www/html;MYSQL_PORT_3306_TCP_ADDR='' MYSQL_PORT_3306_TCP_PORT='' MYSQL_ENV_MYSQL_DATABASE='' \
+MYSQL_ENV_MYSQL_USER='' MYSQL_ENV_MYSQL_PASSWORD='' php artisan --env=production -n key:generate
+
 #RUN php artisan app:install
 # too interactive! Try something else
 
