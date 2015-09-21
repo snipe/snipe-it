@@ -1,10 +1,10 @@
 <?php
 
 return array(
-	'eula_text'      			=> 'EULA',
-    'id'      					=> 'ID',
-    'parent'   					=> 'Parent',
-    'require_acceptance'      	=> 'Acceptance',
-    'title'      				=> 'Asset Category Name',
+	'eula_text'      			=> 'ข้อกำหนดการใช้งาน',
+    'id'      					=> 'ไอดี',
+    'parent'   					=> 'หมวดแม่',
+    'require_acceptance'      	=> 'การยอมรับ',
+    'title'      				=> 'ชื่อหมวดหมู่สินทรัพย์',
 
 );

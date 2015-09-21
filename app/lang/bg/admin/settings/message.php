@@ -8,10 +8,10 @@ return array(
         'success'               => 'Настройките са актуализирани успешно.'
     ),
     'backup' => array(
-        'delete_confirm'        => 'Are you sure you would like to delete this backup file? This action cannot be undone. ',
-        'file_deleted'          => 'The backup file was successfully deleted. ',
-        'generated'             => 'A new backup file was successfully created.',
-        'file_not_found'        => 'That backup file could not be found on the server.',
+        'delete_confirm'        => 'Желаете ли изтриването на този архивен файл? Действието е окончателно.',
+        'file_deleted'          => 'Архивният файл беше изтрит успешно.',
+        'generated'             => 'Нов архивен файл беше създаден успешно.',
+        'file_not_found'        => 'Архивният файл не беше открит на сървъра.',
     ),
 
 );

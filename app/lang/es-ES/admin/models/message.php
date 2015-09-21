@@ -9,7 +9,7 @@ return array(
     'create' => array(
         'error'   => 'Modelo no creado, Intentalo de nuevo.',
         'success' => 'Modelo creado.',
-        'duplicate_set' => 'An asset model with that name, manufacturer and model number already exists.',
+        'duplicate_set' => 'Un modelo de activo con ese nombre, fabricante y número de modelo ya existe.',
     ),
 
     'update' => array(

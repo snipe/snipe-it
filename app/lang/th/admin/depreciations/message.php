@@ -2,24 +2,24 @@
 
 return array(
 
-    'does_not_exist' => 'Depreciation class does not exist.',
-    'assoc_users'	 => 'This depreciation is currently associated with one or more models and cannot be deleted. Please delete the models, and then try deleting again. ',
+    'does_not_exist' => 'ไม่มีหมวดค่าเสื่อมราคา',
+    'assoc_users'	 => 'ค่าเสื่อมราคานี้มีความเกี่ยวข้องกับโมเดลอื่นๆ และจะไม่สามารถลบได้ กรุณาลบโมเดล จากนั้นลองลบอีกครั้ง ',
 
 
     'create' => array(
-        'error'   => 'Depreciation class was not created, please try again. :(',
-        'success' => 'Depreciation class created successfully. :)'
+        'error'   => 'ยังไม่ได้สร้างหมวดค่าเสื่อมราคา กรุณาลองอีกครั้ง',
+        'success' => 'สร้างหมวดค่าเสื่อมราคาเรียบร้อยแล้ว'
     ),
 
     'update' => array(
-        'error'   => 'Depreciation class was not updated, please try again',
-        'success' => 'Depreciation class updated successfully.'
+        'error'   => 'ยังไม่ได้ปรับปรุงหมวดค่าเสื่อมราคา กรุณาลองใหม่อีกครั้ง',
+        'success' => 'ปรับปุงหมวดค่าเสื่อมราคาเรียบร้อยแล้ว'
     ),
 
     'delete' => array(
-        'confirm'   => 'Are you sure you wish to delete this depreciation class?',
-        'error'   => 'There was an issue deleting the depreciation class. Please try again.',
-        'success' => 'The depreciation class was deleted successfully.'
+        'confirm'   => 'คุณแน่ใจที่จะลบหมวดค่าเสื่อมราคานี้?',
+        'error'   => 'มีปัญหาระหว่างการลบหมวดค่าเสื่อมราคา กรุณาลองใหม่อีกครั้ง',
+        'success' => 'หมวดค่าเสื่อมราคาถูกลบแล้ว'
     )
 
 );

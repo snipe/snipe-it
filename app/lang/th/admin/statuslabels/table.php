@@ -1,15 +1,15 @@
 <?php
 
 return array(
-    'about'      	=> 'About Status Labels',
-    'archived'      	=> 'Archived',
-    'create'      	=> 'Create Status Label',
-    'deployable'      	=> 'Deployable',
-    'info'      	=> 'Status labels are used to describe the various states your assets could be in. They may be out for repair, lost/stolen, etc. You can create new status labels for deployable, pending and archived assets.',
-    'name'      	=> 'Status Name',
-    'pending'      	=> 'Pending',
-    'status_type'   => 'Status Type',
-    'title'      	=> 'Status Labels',
-    'undeployable'  => 'Undeployable',
-    'update'      	=> 'Update Status Label',
+    'about'      	=> 'เกี่ยวกับป้ายสถานะ',
+    'archived'      	=> 'ที่เก็บถาวร',
+    'create'      	=> 'สร้างป้ายสถานะ',
+    'deployable'      	=> 'สามารถใช้งานได้',
+    'info'      	=> 'ป้ายสถานะใช้สำหรับบ่งบอกสถานะของสินทรัพย์ของคุณว่าอยู่ในสถานะใด ซึ่งอาจจะอยู่สถานะ เช่น ซ่อมแซม สูญหาย ถูกขโมย เป็นต้น คุณสามารถสร้างป้ายสถานะสำหรับ สามารถใช้งานได้ หรืออยู่ในระหว่างการดำเนินการ หรือ ถูกเก็บไว้ถาวร',
+    'name'      	=> 'ชื่อสถานะ',
+    'pending'      	=> 'อยู่ระหว่างดำเนินการ',
+    'status_type'   => 'ประเภทสถานะ',
+    'title'      	=> 'ป้ายสถานะ',
+    'undeployable'  => 'ไม่สามารถนำไปใช้งานได้',
+    'update'      	=> 'ปรับปรุงป้ายสถานะ',
 );

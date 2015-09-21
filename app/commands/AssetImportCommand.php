@@ -144,6 +144,17 @@ class AssetImportCommand extends Command {
 				$user_asset_purchase_date = '';
 			}
 
+			// Asset purchase cost
+			if (array_key_exists('11',$row)) {
+				if ($row[11]!='') {
+					$user_asset_purchase_cost = trim($row[11]);
+				} else {
+					$user_asset_purchase_cost = '';
+				}
+			} else {
+				$user_asset_purchase_cost = '';
+			}
+
 			// A number was given instead of a name
 			if (is_numeric($user_name)) {
 				$this->comment('User '.$user_name.' is not a name - assume this user already exists');
@@ -212,6 +223,7 @@ class AssetImportCommand extends Command {
 			$this->comment('Asset Tag: '.$user_asset_tag);
 			$this->comment('Location: '.$user_asset_location);
 			$this->comment('Purchase Date: '.$user_asset_purchase_date);
+			$this->comment('Purchase Cost: '.$user_asset_purchase_cost);
 			$this->comment('Notes: '.$user_asset_notes);
 
 			$this->comment('------------- Action Summary ----------------');
@@ -332,6 +344,11 @@ class AssetImportCommand extends Command {
 					$asset->purchase_date = $user_asset_purchase_date;
 				} else {
 					$asset->purchase_date = NULL;
+				}
+				if ($user_asset_purchase_cost!='') {
+					$asset->purchase_cost = ParseFloat(e($user_asset_purchase_cost));
+				} else {
+					$asset->purchase_cost = 0.00;
 				}
 				$asset->serial = e($user_asset_serial);
 				$asset->asset_tag = e($user_asset_tag);

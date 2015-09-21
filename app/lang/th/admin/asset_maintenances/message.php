@@ -1,17 +1,17 @@
 <?php
 
     return [
-        'not_found'                    => 'Asset Maintenance you were looking for was not found!',
+        'not_found'                    => 'ไม่พบการซ่อมบำรุงสินทรัพย์ที่คุณค้นหา',
         'delete'                       => [
-            'confirm' => 'Are you sure you wish to delete this asset maintenance?',
-            'error'   => 'There was an issue deleting the asset maintenance. Please try again.',
-            'success' => 'The asset maintenance was deleted successfully.'
+            'confirm' => 'คุณต้องการที่จะลบการซ่อมบำรุงสินทรัพย์นี้?',
+            'error'   => 'มีปัญหาระหว่างการลบการซ่อมบำรุงสินทรัพย์ กรุณาลองอีกครั้ง',
+            'success' => 'การซ่อมบำรุงสินทรัพย์ถูกลบเรียบร้อยแล้ว'
         ],
         'create'                       => [
-            'error'   => 'Asset Maintenance was not created, please try again.',
-            'success' => 'Asset Maintenance created successfully.'
+            'error'   => 'การซ่อมบำรุงสินทรัพย์ยังไม่ถูกสร้าง กรุณาลองอีกครั้ง',
+            'success' => 'สร้างการซ่อมบำรุงสินทรัพย์เรียบร้อยแล้ว'
         ],
-        'asset_maintenance_incomplete' => 'Not Completed Yet',
-        'warranty'                     => 'Warranty',
-        'not_warranty'                 => 'Not Warranty',
+        'asset_maintenance_incomplete' => 'ยังไม่แล้วเสร็จ',
+        'warranty'                     => 'การรับประกัน',
+        'not_warranty'                 => 'ไม่มีการรับประกัน',
     ];

@@ -2,16 +2,16 @@
 
 return array(
 
-    'create'				=> 'Create Asset Model',
-    'created_at' 			=> 'Created at',
+    'create'				=> 'Създаване на модел на актив',
+    'created_at' 			=> 'Създаден в',
     'eol'	 				=> 'EOL',
     'modelnumber'   		=> 'Модел №',
-    'name'      			=> 'Asset Model Name',
+    'name'      			=> 'Модел на актив',
     'numassets' 			=> 'Активи',
     'title'					=> 'Модели на активи',
-    'update'				=> 'Update Asset Model',
-    'view'					=> 'View Asset Model',
-    'update'				=> 'Update Asset Model',
-    'clone'				=> 'Clone Model',
-    'edit'				=> 'Edit Model',
+    'update'				=> 'Обновяване на модел на актив',
+    'view'					=> 'Преглед на модел на актив',
+    'update'				=> 'Обновяване на модел на актив',
+    'clone'				=> 'Копиране на модел',
+    'edit'				=> 'Редакция на модел',
 );

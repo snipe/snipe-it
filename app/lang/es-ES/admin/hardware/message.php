@@ -5,7 +5,7 @@ return array(
     'undeployable' 		=> '<strong>Atención: </strong> Este equipo está marcado como no isntalabre.
                         Si no es correcto, actualiza su estado.',
     'does_not_exist' 	=> 'Equipo inexistente.',
-    'does_not_exist_or_not_requestable' => 'Nice try. That asset does not exist or is not requestable.',
+    'does_not_exist_or_not_requestable' => 'Buen intento. El activo no existe o no es solicitable.',
     'assoc_users'	 	=> 'Equipo asignado a un usuario, no se puede eliminar.',
 
     'create' => array(
@@ -32,7 +32,7 @@ return array(
     'upload' => array(
         'error'   => 'Archivo(s) no cargado. Por favor, vuelva a intentarlo.',
         'success' => 'Archivo(s) cargado correctamente.',
-        'nofiles' => 'You did not select any files for upload, or the file you are trying to upload is too large',
+        'nofiles' => 'No ha seleccionado ningun archivo para ser cargado, o el archivo que seleccionó es demasiado grande',
         'invalidfiles' => 'Uno o más sus archivos es demasiado grande o es de un tipo no permitido. Los tipos de archivo permitidos son png, gif, jpg, doc, docx, pdf y txt.',
     ),
 

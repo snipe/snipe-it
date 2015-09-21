@@ -334,7 +334,7 @@ class AssetsController extends AdminController
         // Check if the asset exists
         if (is_null($asset = Asset::find($assetId))) {
             // Redirect to the asset management page with error
-            return Redirect::to('hardware')->with('error', Lang::get('admin/hardware/message.not_found'));
+            return Redirect::to('hardware')->with('error', Lang::get('admin/hardware/message.does_not_exist'));
         }
 
         if (isset($asset->assigneduser->id) && ($asset->assigneduser->id!=0)) {
@@ -366,7 +366,7 @@ class AssetsController extends AdminController
         // Check if the asset exists
         if (is_null($asset = Asset::find($assetId))) {
             // Redirect to the asset management page with error
-            return Redirect::to('hardware')->with('error', Lang::get('admin/hardware/message.not_found'));
+            return Redirect::to('hardware')->with('error', Lang::get('admin/hardware/message.does_not_exist'));
         }
 
         // Get the dropdown of users and then pass it to the checkout view
@@ -384,7 +384,7 @@ class AssetsController extends AdminController
 
         // Check if the asset exists
         if (!$asset = Asset::find($assetId)) {
-            return Redirect::to('hardware')->with('error', Lang::get('admin/hardware/message.not_found'));
+            return Redirect::to('hardware')->with('error', Lang::get('admin/hardware/message.does_not_exist'));
         }
 
         // Declare the rules for the form validation
@@ -446,7 +446,7 @@ class AssetsController extends AdminController
         // Check if the asset exists
         if (is_null($asset = Asset::find($assetId))) {
             // Redirect to the asset management page with error
-            return Redirect::to('hardware')->with('error', Lang::get('admin/hardware/message.not_found'));
+            return Redirect::to('hardware')->with('error', Lang::get('admin/hardware/message.does_not_exist'));
         }
 
         return View::make('backend/hardware/checkin', compact('asset'))->with('backto', $backto);
@@ -464,7 +464,7 @@ class AssetsController extends AdminController
         // Check if the asset exists
         if (is_null($asset = Asset::find($assetId))) {
             // Redirect to the asset management page with error
-            return Redirect::to('hardware')->with('error', Lang::get('admin/hardware/message.not_found'));
+            return Redirect::to('hardware')->with('error', Lang::get('admin/hardware/message.does_not_exist'));
         }
 
         // Check for a valid user to checkout fa-random
@@ -681,7 +681,7 @@ class AssetsController extends AdminController
 			return Redirect::route('hardware')->with('success', $success);
 
 		 } else {
-			 return Redirect::to('hardware')->with('error', Lang::get('admin/hardware/message.not_found'));
+			 return Redirect::to('hardware')->with('error', Lang::get('admin/hardware/message.does_not_exist'));
 		 }
 
     }

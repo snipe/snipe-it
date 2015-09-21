@@ -6,12 +6,12 @@ return array(
     'city'   		=> 'Град',
     'state'   		=> 'Област',
     'country'   	=> 'Държава',
-    'create'		=> 'Create Location',
-    'update'		=> 'Update Location',
-    'name'			=> 'Location Name',
+    'create'		=> 'Създаване на местоположение',
+    'update'		=> 'Обновяване на местоположение',
+    'name'			=> 'Местоположение',
     'address'		=> 'Aдрес',
     'zip'			=> 'Пощенски код',
-    'locations'		=> 'Locations',
-    'parent'		=> 'Parent',
-    'currency'  	=> 'Location Currency', // this is deprecated
+    'locations'		=> 'Местоположения',
+    'parent'		=> 'Присъединено към',
+    'currency'  	=> 'Валута на местоположението', // this is deprecated
 );

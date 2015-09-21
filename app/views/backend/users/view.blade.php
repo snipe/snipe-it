@@ -424,7 +424,7 @@
                             <li><strong> @lang('admin/users/table.manager'):</strong><br>
                             {{{ $user->manager->fullName() }}}</li>
                         @endif
-                        @if ($user->location_id)
+                        @if ($user->userloc)
                             <li>{{{ $user->userloc->address }}} {{{ $user->userloc->address2 }}}</li>
                             <li>{{{ $user->userloc->city }}}, {{{ $user->userloc->state }}} {{{ $user->userloc->zip }}}</li>
                         @endif
