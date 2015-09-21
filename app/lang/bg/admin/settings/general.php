@@ -22,7 +22,7 @@ return array(
     'eula_settings'				=> 'Настройки на EULA',
     'eula_markdown'				=> 'Съдържанието на EULA може да бъде форматирано с <a href="https://help.github.com/articles/github-flavored-markdown/">Github flavored markdown</a>.',
     'general_settings'			=> 'Общи настройки',
-	'generate_backup'			=> 'Generate Backup',
+	'generate_backup'			=> 'Създаване на архив',
     'header_color'              => 'Цвят на хедъра',
     'info'                      => 'Тези настройки позволяват да конфигурирате различни аспекти на Вашата инсталация.',
     'laravel'                   => 'Версия на Laravel',
