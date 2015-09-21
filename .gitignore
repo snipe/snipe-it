@@ -8,6 +8,7 @@ composer.phar
 /app/storage/meta/services.json
 /app/config/*/mail.php
 /app/config/*/session.php
+/app/config/*/ldap.php
 /app/config/*/database.php
 /app/config/*/app.php
 public/packages/*
@@ -15,6 +16,7 @@ public/uploads/models/*
 public/uploads/avatars/*
 /app/storage/views/*
 /app/storage/logs/*
+/app/storage/dumps/*
 /app/storage/debugbar/
 /bin/
 .idea
@@ -25,3 +27,4 @@ public/uploads/logo.png
 public/assets/.siteflow
 app/config/local/session.php
 .couscous
+2015091584319-backup.zip
