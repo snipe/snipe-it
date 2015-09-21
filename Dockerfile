@@ -33,12 +33,10 @@ RUN a2enmod rewrite
 
 ############ INITIAL APPLICATION SETUP #####################
 
-COPY docker/app_start.patch /tmp/app_start.patch
-
 WORKDIR /var/www/html
 
-#Patch bootstrap file
-RUN patch -p1 < /tmp/app_start.patch
+#Append to bootstrap file (less brittle than 'patch')
+RUN sed -i 's/return $app;/$env="production";\nreturn $app;/' bootstrap/start.php
 
 #copy all configuration files
 COPY docker/*.php /var/www/html/app/config/production/
