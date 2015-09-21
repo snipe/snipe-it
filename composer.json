@@ -31,7 +31,7 @@
 		"aws/aws-sdk-php-laravel": "1.0.x-dev",
 		"schickling/backup": "0.6.0",
 		"chumper/zipper": "0.5.x",
-		"tecnick.com/tc-lib-barcode": "dev-master"
+		"tecnickcom/tc-lib-barcode": "dev-master"
 
 	},
 	"repositories": [
