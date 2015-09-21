@@ -213,6 +213,7 @@
             <thead>
             <tr>
                 <th class="col-md-2">@lang('admin/asset_maintenances/table.supplier_name')</th>
+                <th class="col-md-2"><span class="line"></span>@lang('admin/asset_maintenances/form.title')</th>
                 <th class="col-md-2"><span class="line"></span>@lang('admin/asset_maintenances/form.asset_maintenance_type')</th>
                 <th class="col-md-2"><span class="line"></span>@lang('admin/asset_maintenances/form.start_date')</th>
                 <th class="col-md-2"><span class="line"></span>@lang('admin/asset_maintenances/form.completion_date')</th>
@@ -227,6 +228,7 @@
                 @if (is_null($assetMaintenance->deleted_at))
                 <tr>
                     <td><a href="{{ route('view/supplier', $assetMaintenance->supplier_id) }}">{{{ $assetMaintenance->supplier->name }}}</a></td>
+                    <td>{{{ $assetMaintenance->title }}}</td>
                     <td>{{{ $assetMaintenance->asset_maintenance_type }}}</td>
                     <td>{{{ $assetMaintenance->start_date }}}</td>
                     <td>{{{ $assetMaintenance->completion_date }}}</td>
