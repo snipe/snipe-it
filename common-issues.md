@@ -142,10 +142,10 @@ If you're using Snipe-IT 1.2.6 or earlier, grab the latest off of the develop br
 
 -----
 
-## Installing d11wtq/boris (v1.0.8) Downloading: connection... Failed to download d11wtq/boris from dist
+## PHP Fatal error: Class 'Patchwork\Utf8\Bootup' not found in \bootstrap\autoload.php on line 43
 
-This error is due to the fact that the repo of the dependency required by one of the libraries has moved, and composer has cached its old location (where it doesn't exist anymore.) Composer may be caching the vendor location, even though the entry on Packagist was updated by the REPL author.
+This happens sometimes with composer, though we don't really know why, as it's not specific to Snipe-IT. If you run into this error after running `php composer.phar install --no-dev --prefer-source`, try the following:
 
-To solve this, clear your composer cache by running `php composer clear-cache`.
-
-If this doesn't work, Try removing the `composer.lock` file from the main Snipe-IT directory, and running `php composer install`. (This will take a few moments, since composer will have to go through and resolve all of the dependencies itself instead of using the lock file.)
+- delete your `composer.lock` file
+- run `php composer.phar dump-autoload`
+- run `php composer.phar update --no-dev --prefer-source`
