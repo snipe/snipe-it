@@ -619,6 +619,57 @@ class AssetsController extends AdminController
 
     }
 
+
+    public function getImport() {
+
+        $path = app_path().'/private_uploads/imports/assets';
+        $files = array();
+
+        if ($handle = opendir($path)) {
+
+            /* This is the correct way to loop over the directory. */
+            while (false !== ($entry = readdir($handle))) {
+                clearstatcache();
+                if (substr(strrchr($entry,'.'),1)=='csv') {
+                    $files[] = array(
+                            'filename' => $entry,
+                            'filesize' => Setting::fileSizeConvert(filesize($path.'/'.$entry)),
+                            'modified' => filemtime($path.'/'.$entry)
+                        );
+                }
+
+            }
+            closedir($handle);
+            $files = array_reverse($files);
+        }
+
+        return View::make('backend/hardware/import')->with('files',$files);
+    }
+
+    public function apiPostImport() {
+
+        $files = Input::file('files');
+        $path = app_path().'/private_uploads/imports/assets';
+        $results = array();
+
+        foreach ($files as $file) {
+            $file->move($path, $file->getClientOriginalName());
+            $name = $file->getClientOriginalName();
+            $results[] = compact('name');
+        }
+
+        return array(
+            'files' => $results
+        );
+
+    }
+
+    public function getProcessFile() {
+        // php artisan asset-import:csv path/to/your/file.csv --domain=yourdomain.com --email_format=firstname.lastname
+
+        Artisan::call('asset-import:csv', ['path/to/your/file.csv']);
+    }
+
     /**
      * Asset clone.
      *

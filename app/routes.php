@@ -10,6 +10,8 @@
         Route::group( [ 'prefix' => 'hardware' ], function () {
 
             Route::get( 'list/{status?}', [ 'as' => 'api.hardware.list', 'uses' => 'AssetsController@getDatatable' ] );
+
+            Route::post('import', 'AssetsController@apiPostImport' );
         } );
 
         /*---Status Label API---*/
@@ -118,12 +120,6 @@
     Route::group( [ 'prefix' => 'hardware', 'namespace' => 'Controllers\Admin', 'before' => 'admin-auth' ],
         function () {
 
-            Route::get( '/', [
-                    'as'   => 'hardware',
-                    'uses' => 'AssetsController@getIndex'
-                ]
-            );
-
             Route::get( 'create/{model?}', [
                     'as'   => 'create/hardware',
                     'uses' => 'AssetsController@getCreate'
@@ -160,6 +156,15 @@
                 [ 'as' => 'delete/assetfile', 'uses' => 'AssetsController@getDeleteFile' ] );
             Route::get( '{assetId}/showfile/{fileId}',
                 [ 'as' => 'show/assetfile', 'uses' => 'AssetsController@displayFile' ] );
+
+            Route::get('import', 'AssetsController@getImport' );
+
+            Route::get( 'import/delete-import/{filename}',
+                [ 'as' => 'assets/import/delete-file', 'uses' => 'AssetsController@getDeleteImportFile' ] );
+
+            Route::get( 'import/process/{filename}',
+                [ 'as' => 'assets/import/process-file', 'uses' => 'AssetsController@getProcessImport' ] );
+
             Route::post( '{assetId}/edit', 'AssetsController@postEdit' );
 
             Route::post( 'bulkedit',
@@ -187,6 +192,12 @@
                 Route::get( '{modelId}/view', [ 'as' => 'view/model', 'uses' => 'ModelsController@getView' ] );
                 Route::get( '{modelID}/restore', [ 'as' => 'restore/model', 'uses' => 'ModelsController@getRestore' ] );
             } );
+
+            Route::get( '/', [
+                    'as'   => 'hardware',
+                    'uses' => 'AssetsController@getIndex'
+                ]
+            );
 
         } );
 
