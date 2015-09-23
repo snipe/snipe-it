@@ -24,23 +24,24 @@
         <div class="col-md-3">
         <!-- The fileinput-button span is used to style the file input field as button -->
             <span class="btn btn-info fileinput-button">
-                <i class="glyphicon glyphicon-plus"></i>
+                <i class="fa fa-plus icon-white"></i>
                 <span>Select Import File...</span>
                 <!-- The file input field used as target for the file upload widget -->
-                <input id="fileupload" type="file" name="files[]" accept="text/csv" data-url="../api/hardware/import">
+                <input id="fileupload" type="file" name="files[]" data-url="../api/hardware/import" accept="text/csv">
             </span>
         </div>
         <div class="col-md-9" id="progress-container" style="visibility: hidden; padding-bottom: 20px;">
             <!-- The global progress bar -->
             <div class="col-md-11">
-                <div id="progress" class="progress" style="margin-top: 10px;">
-                    <div class="progress-bar progress-bar-success"></div>
-                    <div class="progress-bar-text"></div>
+                <div id="progress" class="progress progress-striped active" style="margin-top: 8px;">
+                    <div class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="45" aria-valuemin="0" aria-valuemax="100" style="width: 45%">
+                        <span id="progress-bar-text">0% Complete</span>
+                    </div>
                 </div>
             </div>
             <div class="col-md-1">
                 <div class="pull-right progress-checkmark" style="display: none;">
-                    <i class="fa fa-check fa-3x icon-white" style="color: green"></i>
+
                 </div>
             </div>
         </div>
@@ -62,7 +63,7 @@
                 });
 
                 $('.process').bind('click', function() {
-                  $('#progress-container').addClass('fa-spin');
+                  $('.process').addClass('fa-spin');
                 });
 
                 $('#fileupload').fileupload({
@@ -70,17 +71,37 @@
                     dataType: 'json',
 
                     progress: function (e, data) {
+                        //var overallProgress = $('#fileupload').fileupload('progress');
+                        //var activeUploads = $('#fileupload').fileupload('active');
                         var progress = parseInt((data.loaded / uploadedFileSize) * 100, 10);
-                        $('.progress-bar-success').css('width',progress + '%');
-                        $('.progress-bar-text').html(progress + '%');
+                        $('.progress-bar').addClass('progress-bar-warning').css('width',progress + '%');
+                        $('#progress-bar-text').html(progress + '%');
+                        //console.dir(overallProgress);
+                    },
 
-                        if (data.error != 0) {
-                            $('.progress-bar-success').css('color','red');
-                        }
+                    done: function (e, data) {
+                        //console.dir(data);
 
-                        if (progress == 100) {
-                            $('.progress-checkmark').delay(250).fadeIn('slow');
+                        // We use this instead of the fail option, since our API
+                        // returns a 200 OK status which always shows as "success"
+
+                        if (data && data.jqXHR.responseJSON.error && data.jqXHR.responseJSON && data.jqXHR.responseJSON.error) {
+                            $('#progress-bar-text').html(data.jqXHR.responseJSON.error);
+                            $('.progress-bar').removeClass('progress-bar-warning').addClass('progress-bar-danger').css('width','100%');
+                            $('.progress-checkmark').fadeIn('fast').html('<i class="fa fa-times fa-3x icon-white" style="color: #d9534f"></i>');
+                            //console.log(data.jqXHR.responseJSON.error);
+                        } else {
+                            $('.progress-bar').removeClass('progress-bar-warning').addClass('progress-bar-success').css('width','100%');
+                            $('.progress-checkmark').fadeIn('fast');
+                            $('#progress-container').delay(950).css('visibility', 'visible');
+                            $('.progress-bar-text').html('Finished!');
+                            $('.progress-checkmark').fadeIn('fast').html('<i class="fa fa-check fa-3x icon-white" style="color: green"></i>');
+                            $.each(data.result.files, function (index, file) {
+                                $('<li>').text(file.name).appendTo(document.body);
+                            });
                         }
+                        $('#progress').removeClass('active');
+
 
                     }
                 });
@@ -105,7 +126,8 @@
             <td>{{{ date("M d, Y g:i A", $file['modified']) }}} </td>
             <td>{{{ $file['filesize'] }}}</td>
             <td>
-                <a class="btn btn-info btn-sm process" href="import/process/{{{ $file['filename'] }}}"><i class="fa fa-spinner"></i> Process</a>
+                <a class="btn btn-info btn-sm" href="import/process/{{{ $file['filename'] }}}">
+                    <i class="fa fa-spinner process"></i> Process</a>
 
                 <!-- <a data-html="false"
                 class="btn delete-asset btn-danger btn-sm {{ (Config::get('app.lock_passwords')) ? ' disabled': '' }}" data-toggle="modal" href=" {{ route('assets/import/delete-file', $file['filename']) }}" data-content="@lang('admin/settings/message.backup.delete_confirm')" data-title="{{ Lang::get('general.delete') }}  {{ htmlspecialchars($file['filename']) }} ?" onClick="return false;">
