@@ -22,7 +22,7 @@
 
                         <div class="profile-box">
                             <br>
-                            <!-- checked out assets table -->
+                            <!-- Backups table -->
 
                             <table class="table table-hover">
                                 <thead>
