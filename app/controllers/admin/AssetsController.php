@@ -649,22 +649,57 @@ class AssetsController extends AdminController
         return View::make('backend/hardware/import')->with('files',$files);
     }
 
+
+
     public function postAPIImportUpload() {
 
-        $files = Input::file('files');
-        $path = app_path().'/private_uploads/imports/assets';
-        $results = array();
+        if (!Config::get('app.lock_passwords')) {
 
-        foreach ($files as $file) {
-            $fixed_filename = str_replace(' ','-',$file->getClientOriginalName());
-            $file->move($path, date('Y-m-d-his').'-'.$file->getClientOriginalName());
-            $name = $file->getClientOriginalName();
-            $results[] = compact('name');
+            $rules = array(
+                'files' => 'required'
+            );
+
+            $validator = Validator::make(Input::all(), $rules);
+
+            if ($validator->fails()) {
+                $messages = $validator->messages();
+                $results['error']=$messages->first('files');
+                return $results;
+
+            } else {
+                    $files = Input::file('files');
+                    $path = app_path().'/private_uploads/imports/assets';
+                    $results = array();
+
+                    foreach ($files as $file) {
+
+                        if (!in_array($file->getMimeType(), array(
+                            'application/vnd.ms-excel',
+                            'text/csv',
+                            'text/plain',
+                            'text/comma-separated-values',
+                            'text/tsv'))) {
+                            $results['error']='File type must be CSV';
+                            return $results;
+                        }
+
+                        $fixed_filename = str_replace(' ','-',$file->getClientOriginalName());
+                        $file->move($path, date('Y-m-d-his').'-'.$file->getClientOriginalName());
+                        $name = $file->getClientOriginalName();
+                        $results[] = compact('name');
+                    }
+            }
+
+        } else {
+
+            $results['error']=Lang::get('general.feature_disabled');
+            return $results;
         }
 
         return array(
             'files' => $results
         );
+
 
     }
 
