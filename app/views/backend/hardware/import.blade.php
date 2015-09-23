@@ -61,6 +61,10 @@
                   $('#progress-container').css('visibility', 'visible');
                 });
 
+                $('.process').bind('click', function() {
+                  $('#progress-container').addClass('fa-spin');
+                });
+
                 $('#fileupload').fileupload({
                     //maxChunkSize: 100000,
                     dataType: 'json',
@@ -75,7 +79,7 @@
                         }
 
                         if (progress == 100) {
-                            $('.progress-checkmark').fadeIn('slow');
+                            $('.progress-checkmark').delay(250).fadeIn('slow');
                         }
 
                     }
@@ -97,19 +101,21 @@
     <tbody>
         @foreach ($files as $file)
         <tr>
-            <td><a href="assets/import/download/{{{ $file['filename'] }}}">{{{ $file['filename'] }}}</a></td>
+            <td>{{{ $file['filename'] }}}</td>
             <td>{{{ date("M d, Y g:i A", $file['modified']) }}} </td>
             <td>{{{ $file['filesize'] }}}</td>
-            <td><a class="btn btn-info btn-sm" href="">Process</a></td>
             <td>
-                <a data-html="false"
+                <a class="btn btn-info btn-sm process" href="import/process/{{{ $file['filename'] }}}"><i class="fa fa-spinner"></i> Process</a>
+
+                <!-- <a data-html="false"
                 class="btn delete-asset btn-danger btn-sm {{ (Config::get('app.lock_passwords')) ? ' disabled': '' }}" data-toggle="modal" href=" {{ route('assets/import/delete-file', $file['filename']) }}" data-content="@lang('admin/settings/message.backup.delete_confirm')" data-title="{{ Lang::get('general.delete') }}  {{ htmlspecialchars($file['filename']) }} ?" onClick="return false;">
                     <i class="fa fa-trash icon-white"></i>
-                </a>
+                </a> -->
             </td>
         </tr>
         @endforeach
     </tbody>
 </table>
+
 
 @stop

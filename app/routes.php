@@ -11,7 +11,7 @@
 
             Route::get( 'list/{status?}', [ 'as' => 'api.hardware.list', 'uses' => 'AssetsController@getDatatable' ] );
 
-            Route::post('import', 'AssetsController@apiPostImport' );
+            Route::post('import', 'AssetsController@postAPIImportUpload' );
         } );
 
         /*---Status Label API---*/
@@ -157,13 +157,15 @@
             Route::get( '{assetId}/showfile/{fileId}',
                 [ 'as' => 'show/assetfile', 'uses' => 'AssetsController@displayFile' ] );
 
-            Route::get('import', 'AssetsController@getImport' );
-
             Route::get( 'import/delete-import/{filename}',
                 [ 'as' => 'assets/import/delete-file', 'uses' => 'AssetsController@getDeleteImportFile' ] );
 
             Route::get( 'import/process/{filename}',
-                [ 'as' => 'assets/import/process-file', 'uses' => 'AssetsController@getProcessImport' ] );
+                [ 'as' => 'assets/import/process-file', 'uses' => 'AssetsController@getProcessImportFile' ] );
+
+            Route::get( 'import',
+                [ 'as' => 'assets/import', 'uses' => 'AssetsController@getImportUpload' ] );
+
 
             Route::post( '{assetId}/edit', 'AssetsController@postEdit' );
 
