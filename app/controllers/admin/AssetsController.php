@@ -685,8 +685,9 @@ class AssetsController extends AdminController
 
                         $fixed_filename = str_replace(' ','-',$file->getClientOriginalName());
                         $file->move($path, date('Y-m-d-his').'-'.$file->getClientOriginalName());
-                        $name = $file->getClientOriginalName();
-                        $results[] = compact('name');
+                        $name = date('Y-m-d-his').'-'.$fixed_filename;
+                        $filesize = Setting::fileSizeConvert(filesize($path.'/'.$name));
+                        $results[] = compact('name', 'filesize');
                     }
             }
 

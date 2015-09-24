@@ -41,7 +41,6 @@
             </div>
             <div class="col-md-1">
                 <div class="pull-right progress-checkmark" style="display: none;">
-
                 </div>
             </div>
         </div>
@@ -80,7 +79,7 @@
                     },
 
                     done: function (e, data) {
-                        //console.dir(data);
+                        console.dir(data);
 
                         // We use this instead of the fail option, since our API
                         // returns a 200 OK status which always shows as "success"
@@ -97,7 +96,8 @@
                             $('.progress-bar-text').html('Finished!');
                             $('.progress-checkmark').fadeIn('fast').html('<i class="fa fa-check fa-3x icon-white" style="color: green"></i>');
                             $.each(data.result.files, function (index, file) {
-                                $('<li>').text(file.name).appendTo(document.body);
+                                $('<tr><td>' + file.name + '</td><td>Just now</td><td>' + file.filesize + '</td><td><a class="btn btn-info btn-sm" href="import/process/' + file.name + '"><i class="fa fa-spinner process"></i> Process</a></td></tr>').prependTo("#upload-table > tbody");
+                                //$('<tr><td>').text(file.name).appendTo(document.body);
                             });
                         }
                         $('#progress').removeClass('active');
@@ -112,7 +112,7 @@
 
 
 
-<table class="table table-hover">
+<table class="table table-hover" id="upload-table">
     <thead>
         <th>File</th>
         <th>Created</th>
