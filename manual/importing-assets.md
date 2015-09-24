@@ -6,7 +6,10 @@ currentMenu: importing-assets
 
 <div id="generated-toc" class="generate_from_h2"></div>
 
-There is an asset import tool in later versions of Snipe-IT ( > `1.2.8`). It is available through the command-line only, as very large file uploading and processing will cause memory exhaustion issues on many servers. We'll be working on a way to make this web-based and chunk data in the future.
+There is an asset import tool in later versions of Snipe-IT ( > `1.2.8`). It is available through the command-line only, as very large file uploading and processing will cause memory exhaustion issues on many servers<sup>*</sup>.
+
+<sup>*</sup>There is a beta web-based file-upload and import tool currently on the develop branch and slated for the next release. You'll find a `sample.csv` already in the import page which you can try out. 
+
 
 ## Usage:
 
