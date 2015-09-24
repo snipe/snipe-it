@@ -17,11 +17,7 @@
 </div>
 
 
-@if ($display_output)
-<pre>
-    <?php print_r($display_output); ?>
-</pre>
+Your process has started.
 
-@endif
 
 @stop
