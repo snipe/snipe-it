@@ -710,7 +710,11 @@ class AssetsController extends AdminController
         $output = new BufferedOutput;
         Artisan::call('asset-import:csv', ['filename'=> app_path().'/private_uploads/imports/assets/'.$filename, '--domain'=>'snipe.net', '--email_format'=>'firstname.lastname'], $output);
         $display_output =  $output->fetch();
-        return View::make('backend/hardware/import-status')->with('display_output',$display_output);
+        $file = app_path().'/private_uploads/imports/assets/output-'.$filename;
+        file_put_contents($file, $display_output);
+
+
+        return View::make('backend/hardware/import-status');
 
     }
 
