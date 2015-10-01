@@ -58,6 +58,27 @@
                 {{ $errors->first('category_id', '<span class="alert-msg"><i class="fa fa-times"></i> :message</span>') }}
             </div>
     </div>
+    
+    <!-- Order Number -->
+    <div class="form-group {{ $errors->has('order_number') ? ' has-error' : '' }}">
+        <label for="order_number" class="col-md-2 control-label">@lang('admin/hardware/form.order')</label>
+        <div class="col-md-7 col-sm-12">
+            <input class="form-control" type="text" name="order_number" id="order_number" value="{{{ Input::old('order_number', $accessory->order_number) }}}" />
+            {{ $errors->first('order_number', '<br><span class="alert-msg"><i class="fa fa-times"></i> :message</span>') }}
+        </div>
+    </div>
+    
+    <!-- Purchase Date -->
+    <div class="form-group {{ $errors->has('purchase_date') ? ' has-error' : '' }}">
+        <label for="purchase_date" class="col-md-2 control-label">@lang('admin/hardware/form.date')</label>
+        <div class="input-group col-md-3">
+            <input type="date" class="datepicker form-control" data-date-format="yyyy-mm-dd" placeholder="@lang('general.select_date')" name="purchase_date" id="purchase_date" value="{{{ Input::old('purchase_date', $accessory->purchase_date) }}}">
+            <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+        {{ $errors->first('purchase_date', '<br><span class="alert-msg"><i class="fa fa-times"></i> :message</span>') }}
+        </div>
+    </div>
+    
+    
             
     <!-- QTY -->
     <div class="form-group {{ $errors->has('qty') ? ' has-error' : '' }}">
