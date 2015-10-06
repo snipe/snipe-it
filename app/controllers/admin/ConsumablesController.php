@@ -164,20 +164,10 @@ class ConsumablesController extends AdminController
             return Redirect::to('admin/consumables')->with('error', Lang::get('admin/consumables/message.not_found'));
         }
 
-
-		if ($consumable->hasUsers() > 0) {
-			 return Redirect::to('admin/consumables')->with('error', Lang::get('admin/consumables/message.assoc_users', array('count'=> $consumable->hasUsers())));
-		} else {
 			$consumable->delete();
 
             // Redirect to the locations management page
             return Redirect::to('admin/consumables')->with('success', Lang::get('admin/consumables/message.delete.success'));
-
-		}
-
-
-
-
 
     }
 
