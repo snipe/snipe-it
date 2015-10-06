@@ -530,7 +530,7 @@ class UsersController extends AdminController {
                     $update_assets = Asset::whereIn('id', $asset_array)->update(
                             array(
                                 'status_id' => e(Input::get('status_id')),
-                                'assigned_to' => '',
+                                'assigned_to' => null,
                     ));
                 }
 
