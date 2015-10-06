@@ -15,9 +15,9 @@ return array(
     ),
 
     'delete' => array(
-        'confirm'   => 'Er du sikker på at du vil slette dette tilbehør?',
+        'confirm'   => 'Are you sure you wish to delete this consumable?',
         'error'   => 'Noe gikk feil under sletting av forbruksvaren. Prøv igjen.',
-        'success' => 'Tilbehør ble slettet.'
+        'success' => 'The consumable was deleted successfully.'
     ),
 
      'checkout' => array(
