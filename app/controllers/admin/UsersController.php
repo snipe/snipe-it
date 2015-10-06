@@ -545,9 +545,9 @@ class UsersController extends AdminController {
                     $logaction->note = 'Bulk checkin';
                     $log = $logaction->logaction('checkin from');
 
-                    $update_assets = DB::table('accessories_users')->whereIn('id', $accessory_array)->update(
+                    $update_accessories = DB::table('accessories_users')->whereIn('id', $accessory_array)->update(
                             array(
-                                'assigned_to' => '',
+                                'assigned_to' => null,
                     ));
                 }
 
