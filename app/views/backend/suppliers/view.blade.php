@@ -32,8 +32,8 @@
            <table id="example">
             <thead>
                 <tr role="row">
-                        <th class="col-md-3">Name</th>
                         <th class="col-md-3">Asset Tag</th>
+                        <th class="col-md-3">Name</th>
                         <th class="col-md-3">User</th>
                         <th class="col-md-2">Actions</th>
                     </tr>
@@ -42,9 +42,9 @@
 
                     @foreach ($supplier->assets as $supplierassets)
                     <tr>
-                        <td><a href="{{ route('view/hardware', $supplierassets->id) }}">{{{ $supplierassets->name }}}</a></td>
-                        <td><a href="{{ route('view/hardware', $supplierassets->id) }}">{{{ $supplierassets->name }}}</a></td>
+
                         <td><a href="{{ route('view/hardware', $supplierassets->id) }}">{{{ $supplierassets->asset_tag }}}</a></td>
+                        <td><a href="{{ route('view/hardware', $supplierassets->id) }}">{{{ $supplierassets->showAssetName() }}}</a></td>
                         <td>
                         @if ($supplierassets->assigneduser)
                         <a href="{{ route('view/user', $supplierassets->assigned_to) }}">
