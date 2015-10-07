@@ -22,7 +22,7 @@ return array(
     'eula_settings'				=> 'EULA設定',
     'eula_markdown'				=> 'この EULA は、<a href="https://help.github.com/articles/github-flavored-markdown/">Github flavored markdown</a>で、利用可能です。',
     'general_settings'			=> '全般設定',
-	'generate_backup'			=> 'Generate Backup',
+	'generate_backup'			=> 'バックアップを作成',
     'header_color'              => 'ヘッダーカラー',
     'info'                      => 'これらの設定は、あなたの設備の特性に合わせてカスタマイズできます。',
     'laravel'                   => 'Laravelバージョン',

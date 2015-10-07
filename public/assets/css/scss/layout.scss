@@ -67,7 +67,7 @@ input.search{
 		border: 1px solid #0f1217;
 		position: relative;
 		border-radius: 4px;
-		top: 9px;	
+		top: 9px;
 		color: #000;
 		font-size: 13px;
 		margin-right: 40px;
@@ -95,7 +95,7 @@ input.search{
 		}
 		i {
 			font-size: 17px;
-			color: #9ba3ad;	
+			color: #9ba3ad;
 		}
 		.count {
 			position: absolute;
@@ -120,7 +120,7 @@ input.search{
 		display: none;
 
 		&.is-visible {
-			display: block; 
+			display: block;
 			-webkit-animation: reveal .2s ease-out;
 			-moz-animation: reveal .2s ease-out;
 			animation: reveal .2s ease-out;
@@ -273,7 +273,7 @@ input.search{
 	width: 180px;
 	float: left;
 	margin: 0em;
-	padding-top: 5.8em;
+	padding-top: 0.8em;
 
 	#dashboard-menu {
 		list-style: none;
@@ -309,7 +309,7 @@ input.search{
 			&.active > a,
 			> a:hover {
 				color: rgba(51, 69, 90, 1);
-				text-decoration: none;	
+				text-decoration: none;
 			}
 			&.active {
 				a {
@@ -381,7 +381,7 @@ input.search{
 					width: initial;
 					height: initial;
 				}
-			}		
+			}
 		}
 
 		/* sidebar submenus */
@@ -538,7 +538,7 @@ input.search{
 @media (max-width: 1020px) {
 }
 @media (max-width: 768px) {
-	#pad-wrapper {  
+	#pad-wrapper {
 		padding: 0px 15px;
 	}
 	.content {
@@ -563,7 +563,7 @@ input.search{
 		-o-transition: left .3s ease;
 		-ms-transition: left .3s ease;
 		transition: left .3s ease;
-	}	
+	}
 	#sidebar-nav #dashboard-menu {
 		margin-left: 10px;
 	}

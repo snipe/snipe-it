@@ -15,9 +15,9 @@ return array(
     ),
 
     'delete' => array(
-        'confirm'   => 'Wollen Sie dieses Zubehör wirklich löschen?',
+        'confirm'   => 'Are you sure you wish to delete this consumable?',
         'error'   => 'Es gab Probleme das Verbrauchsmaterial zu löschen. Bitte versuchen Sie es noch einmal.',
-        'success' => 'Zubehör wurde erfolgreich gelöscht.'
+        'success' => 'The consumable was deleted successfully.'
     ),
 
      'checkout' => array(

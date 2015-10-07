@@ -530,7 +530,7 @@ class UsersController extends AdminController {
                     $update_assets = Asset::whereIn('id', $asset_array)->update(
                             array(
                                 'status_id' => e(Input::get('status_id')),
-                                'assigned_to' => '',
+                                'assigned_to' => null,
                     ));
                 }
 
@@ -545,9 +545,9 @@ class UsersController extends AdminController {
                     $logaction->note = 'Bulk checkin';
                     $log = $logaction->logaction('checkin from');
 
-                    $update_assets = DB::table('accessories_users')->whereIn('id', $accessory_array)->update(
+                    $update_accessories = DB::table('accessories_users')->whereIn('id', $accessory_array)->update(
                             array(
-                                'assigned_to' => '',
+                                'assigned_to' => null,
                     ));
                 }
 

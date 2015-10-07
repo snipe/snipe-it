@@ -15,9 +15,9 @@ return array(
     ),
 
     'delete' => array(
-        'confirm'   => 'Bạn có chắc muốn xóa phụ kiện này?',
+        'confirm'   => 'Are you sure you wish to delete this consumable?',
         'error'   => 'Có vấn đề khi xóa vật tư phụ. Xin vui lòng thử lại.',
-        'success' => 'Phụ kiện đã xóa thành công.'
+        'success' => 'The consumable was deleted successfully.'
     ),
 
      'checkout' => array(

@@ -15,7 +15,7 @@ return array(
 
     "password" => "Passwords must be six characters and match the confirmation.",
 
-    "user"     => "Username or email address is incorrect",
+    "user"     => "Kullanıcı adı veya e-mail adresi hatalı",
 
     "token"    => "This password reset token is invalid.",
 

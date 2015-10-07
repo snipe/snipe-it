@@ -15,9 +15,9 @@ return array(
     ),
 
     'delete' => array(
-        'confirm'   => 'คุณแน่ใจที่จะลบอุปกรณ์เสริมนี้?',
+        'confirm'   => 'Are you sure you wish to delete this consumable?',
         'error'   => 'มีปัญหาระหว่างการลบวัสดุสิ้นเปลือง กรุณาลองอีกครั้ง',
-        'success' => 'ลบอุปกรณ์เสริมเรียบร้อยแล้ว'
+        'success' => 'The consumable was deleted successfully.'
     ),
 
      'checkout' => array(

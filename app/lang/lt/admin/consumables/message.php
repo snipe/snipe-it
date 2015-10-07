@@ -15,9 +15,9 @@ return array(
     ),
 
     'delete' => array(
-        'confirm'   => 'Ar jūs tikrai norite ištrinti šią suvartojamą įrangą?',
+        'confirm'   => 'Are you sure you wish to delete this consumable?',
         'error'   => 'Nepavyko ištrinti suvartojamos įrangos. Prašome bandykite dar kartą.',
-        'success' => 'Ši įranga sėkmingai ištrinta.'
+        'success' => 'The consumable was deleted successfully.'
     ),
 
      'checkout' => array(
