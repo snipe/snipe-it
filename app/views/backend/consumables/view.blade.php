@@ -27,7 +27,24 @@
 <div class="user-profile">
 <div class="row profile">
 <div class="col-md-9 bio">
+        
+        @if ($consumable->purchase_date)
+            <div class="col-md-12" style="padding-bottom: 5px;"><strong>@lang('admin/consumables/general.date'): </strong>
+            {{{ $consumable->purchase_date }}} </div>
+        @endif
 
+        @if ($consumable->purchase_cost)
+            <div class="col-md-12" style="padding-bottom: 5px;"><strong>@lang('admin/consumables/general.cost'):</strong>
+            {{{ Setting::first()->default_currency }}}
+
+            {{{ number_format($consumable->purchase_cost,2) }}} </div>
+        @endif
+
+        @if ($consumable->order_number)
+            <div class="col-md-12" style="padding-bottom: 5px;"><strong>@lang('admin/consumables/general.order'):</strong>
+            {{{ $consumable->order_number }}} </div>
+        @endif
+        <br />
 
         <!-- checked out consumables table -->
         @if ($consumable->users->count() > 0)

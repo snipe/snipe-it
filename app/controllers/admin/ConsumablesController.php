@@ -66,10 +66,24 @@ class ConsumablesController extends AdminController
         else{
 
             // Update the consumable data
-            $consumable->name            		= e(Input::get('name'));
-            $consumable->category_id            	= e(Input::get('category_id'));
-            $consumable->qty            			= e(Input::get('qty'));
-            $consumable->user_id          		= Sentry::getId();
+            $consumable->name                   = e(Input::get('name'));
+            $consumable->category_id            = e(Input::get('category_id'));
+            $consumable->order_number           = e(Input::get('order_number'));
+            
+            if (e(Input::get('purchase_date')) == '') {
+                $consumable->purchase_date       =  NULL;
+            } else {
+                $consumable->purchase_date       = e(Input::get('purchase_date'));
+            }
+            
+            if (e(Input::get('purchase_cost')) == '0.00') {
+                $consumable->purchase_cost       =  NULL;
+            } else {
+                $consumable->purchase_cost       = ParseFloat(e(Input::get('purchase_cost')));
+            }
+            
+            $consumable->qty                    = e(Input::get('qty'));
+            $consumable->user_id                = Sentry::getId();
 
             // Was the consumable created?
             if($consumable->save()) {
@@ -134,9 +148,23 @@ class ConsumablesController extends AdminController
         else {
 
             // Update the consumable data
-            $consumable->name            		= e(Input::get('name'));
-            $consumable->category_id            	= e(Input::get('category_id'));
-            $consumable->qty            			= e(Input::get('qty'));
+            $consumable->name                   = e(Input::get('name'));
+            $consumable->category_id            = e(Input::get('category_id'));
+            $consumable->order_number           = e(Input::get('order_number'));
+            
+            if (e(Input::get('purchase_date')) == '') {
+                $consumable->purchase_date       =  NULL;
+            } else {
+                $consumable->purchase_date       = e(Input::get('purchase_date'));
+            }
+            
+            if (e(Input::get('purchase_cost')) == '0.00') {
+                $consumable->purchase_cost       =  NULL;
+            } else {
+                $consumable->purchase_cost       = ParseFloat(e(Input::get('purchase_cost')));
+            }
+            
+            $consumable->qty                    = e(Input::get('qty'));
 
             // Was the consumable created?
             if($consumable->save()) {

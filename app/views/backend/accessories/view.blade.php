@@ -27,6 +27,24 @@
 <div class="user-profile">
 <div class="row profile">
 <div class="col-md-9 bio">
+        
+        @if ($accessory->purchase_date)
+            <div class="col-md-12" style="padding-bottom: 5px;"><strong>@lang('admin/accessories/general.date'): </strong>
+            {{{ $accessory->purchase_date }}} </div>
+        @endif
+
+        @if ($accessory->purchase_cost)
+            <div class="col-md-12" style="padding-bottom: 5px;"><strong>@lang('admin/accessories/general.cost'):</strong>
+            {{{ Setting::first()->default_currency }}}
+
+            {{{ number_format($accessory->purchase_cost,2) }}} </div>
+        @endif
+
+        @if ($accessory->order_number)
+            <div class="col-md-12" style="padding-bottom: 5px;"><strong>@lang('admin/accessories/general.order'):</strong>
+            {{{ $accessory->order_number }}} </div>
+        @endif
+        <br />
 
 
                             <!-- checked out accessories table -->
