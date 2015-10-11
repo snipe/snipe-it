@@ -52,7 +52,7 @@ RUN chown -R docker /var/www/html
 RUN cd /tmp;curl -sS https://getcomposer.org/installer | php;mv /tmp/composer.phar /usr/local/bin/composer
 
 # Get dependencies
-RUN cd /var/www/html;composer install
+RUN cd /var/www/html;composer install --prefer-source
 
 ############### APPLICATION INSTALL/INIT #################
 
