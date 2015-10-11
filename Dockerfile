@@ -1,6 +1,8 @@
 FROM ubuntu
 MAINTAINER Brady Wetherington <uberbrady@gmail.com>
 
+RUN echo 'debconf debconf/frontend select Noninteractive' | debconf-set-selections
+
 RUN apt-get update && apt-get install -y \
 apache2-bin \
 libapache2-mod-php5 \
