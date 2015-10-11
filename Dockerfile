@@ -12,6 +12,7 @@ php5-gd \
 patch \
 curl \
 vim \
+dialog \
 git 
 
 RUN php5enmod mcrypt
