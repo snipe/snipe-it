@@ -52,7 +52,7 @@ RUN chown -R docker /var/www/html
 RUN cd /tmp;curl -sS https://getcomposer.org/installer | php;mv /tmp/composer.phar /usr/local/bin/composer
 
 # Get dependencies
-RUN cd /var/www/html;composer install --prefer-source  --no-interaction
+RUN cd /var/www/html;composer config -g github-oauth.github.com 101a9ecc0b90241b3f588b86e8ef52c516f82a03;composer install --prefer-dist --no-interaction
 
 ############### APPLICATION INSTALL/INIT #################
 
