@@ -102,7 +102,7 @@
               {{ Form::label('header_color', Lang::get('admin/settings/general.header_color')) }}
             </div>
             <div class="col-md-9">
-              {{ Form::text('header_color', Input::old('header_color', $setting->header_color), array('class' => 'form-control', 'style' => 'width: 100px;')) }}
+              {{ Form::text('header_color', Input::old('header_color', $setting->header_color), array('class' => 'form-control', 'style' => 'width: 100px;','placeholder' => '#FF0000')) }}
               {{ $errors->first('header_color', '<br><span class="alert-msg">:message</span>') }}
             </div>
           </div>

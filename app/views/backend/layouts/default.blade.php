@@ -113,7 +113,12 @@
             </button>
 
 
-	            @if (Setting::getSettings()->logo)
+	            @if (Setting::getSettings()->brand === 3)
+                    <a class="navbar-brand" href="{{ Config::get('app.url') }}" style="padding: 5px;">
+                    <img src="{{ Config::get('app.url') }}/uploads/{{{ Setting::getSettings()->logo }}}">
+                    {{{ Setting::getSettings()->site_name }}}
+                    </a>
+                @elseif (Setting::getSettings()->brand === 2)
 	            	<a class="navbar-brand" href="{{ Config::get('app.url') }}" style="padding: 5px;">
 	            	<img src="{{ Config::get('app.url') }}/uploads/{{{ Setting::getSettings()->logo }}}">
 	            	</a>
