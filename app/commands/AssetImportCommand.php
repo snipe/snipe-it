@@ -187,12 +187,17 @@ class AssetImportCommand extends Command {
 				$last_name = $user_email_array['last_name'];
 
 				if ($user_email=='') {
-					$user_email = $user_email_array['username'].'@'.$this->option('domain');
+					$user_email = $user_email_array['username'].'@'.Config::get('app.domain');
 				}
 
 				if ($user_username=='') {
-					$user_name_array = User::generateFormattedNameFromFullName($this->option('username_format'), $user_name);
-					$user_username = $user_name_array['username'];
+					if ($this->option('username_format')=='email') {
+						$user_username = $user_email;
+					} else {
+						$user_name_array = User::generateFormattedNameFromFullName($this->option('username_format'), $user_name);
+						$user_username = $user_name_array['username'];
+					}
+
 				}
 
 			}
@@ -394,12 +399,11 @@ class AssetImportCommand extends Command {
 	 */
 	protected function getOptions()
 	{
-		return array(
-			array('domain', null, InputOption::VALUE_REQUIRED, 'Email domain for generated email addresses.', null),
-			array('email_format', null, InputOption::VALUE_REQUIRED, 'The format of the email addresses that should be generated. Options are firstname.lastname, firstname, filastname', null),
-			array('username_format', null, InputOption::VALUE_REQUIRED, 'The format of the username that should be generated. Options are firstname.lastname, firstname, filastname, email', null),
-			array('testrun', null, InputOption::VALUE_REQUIRED, 'Test the output without writing to the database or not.', null),
-		);
+	return array(
+		array('email_format', null, InputOption::VALUE_REQUIRED, 'The format of the email addresses that should be generated. Options are firstname.lastname, firstname, filastname', null),
+		array('username_format', null, InputOption::VALUE_REQUIRED, 'The format of the username that should be generated. Options are firstname.lastname, firstname, filastname, email', null),
+		array('testrun', null, InputOption::VALUE_REQUIRED, 'Test the output without writing to the database or not.', null),
+	);
 	}
 
 
