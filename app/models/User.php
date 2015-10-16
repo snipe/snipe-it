@@ -149,5 +149,96 @@ class User extends SentryUserModel
         return $this->persist_code;
     }
 
+    public function scopeMatchEmailOrUsername( $query, $user_username, $user_email )
+    {
+        return $query->where('email','=',$user_email)
+        ->orWhere('username','=',$user_username)
+        ->orWhere('username','=',$user_email);
+    }
+
+
+    public static function generateUsernameFromFullName($format = 'filastname', $domain, $users_name) {
+
+        $name = explode(" ", $users_name);
+        $first_name = $name[0];
+        $username_last_name = '';
+        $username = $username_last_name;
+
+        // If there is no last name given
+        if (!array_key_exists(1, $name)) {
+            $last_name='';
+            $username_last_name = $last_name;
+            $username = $first_name;
+
+        // There is a last name given
+        } else {
+
+            $last_name = str_replace($first_name,'',$username);
+
+            if ($format=='filastname') {
+                $email_last_name.=str_replace(' ','',$last_name);
+                $email_prefix = $first_name[0].$email_last_name;
+
+            } elseif ($format=='firstname.lastname') {
+                $email_last_name.=str_replace(' ','',$last_name);
+                $email_prefix = $first_name.'.'.$email_last_name;
+
+            } elseif ($format=='firstname') {
+                $email_last_name.=str_replace(' ','',$last_name);
+                $email_prefix = $first_name;
+
+            } elseif ($format=='email') {
+                $email_last_name.=str_replace(' ','',$last_name);
+                $email_prefix = $first_name;
+            }
+
+
+        }
+
+    }
+
+    public static function generateFormattedNameFromFullName($format = 'filastname', $users_name) {
+        $name = explode(" ", $users_name);
+        $name = str_replace("'", '', $name);
+        $first_name = $name[0];
+        $email_last_name = '';
+        $email_prefix = $first_name;
+
+        // If there is no last name given
+        if (!array_key_exists(1, $name)) {
+            $last_name='';
+            $email_last_name = $last_name;
+            $user_username = $first_name;
+
+        // There is a last name given
+        } else {
+
+            $last_name = str_replace($first_name,'',$users_name);
+
+            if ($format=='filastname') {
+                $email_last_name.=str_replace(' ','',$last_name);
+                $email_prefix = $first_name[0].$email_last_name;
+
+            } elseif ($format=='firstname.lastname') {
+                $email_last_name.=str_replace(' ','',$last_name);
+                $email_prefix = $first_name.'.'.$email_last_name;
+
+            } elseif ($format=='firstname') {
+                $email_last_name.=str_replace(' ','',$last_name);
+                $email_prefix = $first_name;
+
+            }
+        }
+
+        $user_username = $email_prefix;
+        $user['first_name'] = $first_name;
+        $user['last_name'] = $last_name;
+        $user['username'] = strtolower($user_username);
+
+        return $user;
+
+
+    }
+
 
 }

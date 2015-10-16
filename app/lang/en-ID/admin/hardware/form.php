@@ -2,12 +2,12 @@
 
 return array(
 
-	'bulk_update'		=> 'Bulk Update Assets',
-	'bulk_update_help'	=> 'This form allows you to update multiple assets at once. Only fill in the fields you need to change. Any fields left blank will remain unchanged. ',
-	'bulk_update_warn'	=> 'You are about to edit the properties of :asset_count assets.',
-    'checkedout_to'		=> 'Checked Out To',
-    'checkout_date'		=> 'Checkout Date',
-    'checkin_date'		=> 'Checkin Date',
+	'bulk_update'		=> 'Perbarui Aset secara massal',
+	'bulk_update_help'	=> 'Formulir ini memungkinkan Anda untuk memperbarui beberapa aset sekaligus. Hanya mengisi kolom yang Anda butuhkan untuk mengubah. Setiap bidang dibiarkan kosong tidak berubah. ',
+	'bulk_update_warn'	=> 'Anda akan mengedit properti :asset_count aset.',
+    'checkedout_to'		=> 'Checkout ke',
+    'checkout_date'		=> 'Tanggal Check out',
+    'checkin_date'		=> 'Tanggal Check in',
     'checkout_to'		=> 'Checkout to',
     'cost'				=> 'Purchase Cost',
     'create'			=> 'Create Asset',

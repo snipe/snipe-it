@@ -15,9 +15,9 @@ return array(
     ),
 
     'delete' => array(
-        'confirm'   => 'Are you sure you wish to delete this consumable?',
+        'confirm'   => 'Você realmente quer apagar este suprimento?',
         'error'   => 'Houve um problema ao excluir o consumível. Por favor, tente novamente.',
-        'success' => 'The consumable was deleted successfully.'
+        'success' => 'O suprimento foi deletado com sucesso.'
     ),
 
      'checkout' => array(
