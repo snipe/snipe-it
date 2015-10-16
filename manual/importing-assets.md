@@ -29,7 +29,7 @@ php artisan asset-import:csv path/to/your/file.csv --domain=yourdomain.com --ema
 The importer will be looking for a CSV in the format of:
 
 ```
-Name, Email, Asset Category, Asset Model, Manufacturer, Asset Model Number, Asset Serial, Asset Tag, Location Name, Asset Notes, Purchase Date, Purchase Cost
+Name, Email, Username, Asset Category, Asset Model, Manufacturer, Asset Model Number, Asset Serial, Asset Tag, Location Name, Asset Notes, Purchase Date, Purchase Cost
 ```
 
 The importer will ignore the first line of your CSV, so if you don't have a header row, you should add one.
