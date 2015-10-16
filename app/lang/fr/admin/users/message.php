@@ -2,15 +2,15 @@
 
 return array(
 
-    'accepted'                  => 'You have successfully accepted this asset.',
-    'declined'                  => 'You have successfully declined this asset.',
+    'accepted'                  => 'Vous avez accepté cet actif.',
+    'declined'                  => 'Vous avez refusé cet actif.',
     'user_exists'               => 'L\'utilisateur existe déjà !',
     'user_not_found'            => 'L\'utilisateur [:id] n\'existe pas.',
     'user_login_required'       => 'Le champ identifiant est obligatoire',
     'user_password_required'    => 'Le mot de passe est obligatoire.',
     'insufficient_permissions'  => 'Droits insuffisants.',
     'user_deleted_warning'      => 'Cet utilisateur a été supprimé. Vous devez le restaurer pour pouvoir l\'éditer ou lui assigner de nouveaux actifs.',
-    'ldap_not_configured'        => 'LDAP integration has not been configured for this installation.',
+    'ldap_not_configured'        => 'L\'intégration LDAP n\'a pas été configuré pour cette installation .',
 
 
     'success' => array(
@@ -22,7 +22,7 @@ return array(
         'suspend'   => 'L’utilisateur a été suspendu avec succès.',
         'unsuspend' => 'L’utilisateur a été activé avec succès.',
         'restored'  => 'L’utilisateur a été restauré avec succès.',
-        'import'    => 'Users imported successfully.',
+        'import'    => 'Les utilisateurs ont été importés correctement.',
     ),
 
     'error' => array(
@@ -30,25 +30,25 @@ return array(
         'update' => 'Un problème a eu lieu pendant la mise à jour de l\'utilisateur. Veuillez essayer à nouveau.',
         'delete' => 'Un problème a eu lieu pendant la suppression de l\'utilisateur. Veuillez essayer à nouveau.',
         'unsuspend' => 'Un problème a eu lieu pendant la réhabilitation de l\'utilisateur. Veuillez essayer à nouveau.',
-        'import'    => 'There was an issue importing users. Please try again.',
-        'asset_already_accepted' => 'This asset has already been accepted.',
-        'accept_or_decline' => 'You must either accept or decline this asset.',
-        'ldap_could_not_connect' => 'Could not connect to the LDAP server. Please check your LDAP server configuration in the LDAP config file. <br>Error from LDAP Server:',
-        'ldap_could_not_bind' => 'Could not bind to the LDAP server. Please check your LDAP server configuration in the LDAP config file. <br>Error from LDAP Server: ',
-        'ldap_could_not_search' => 'Could not search the LDAP server. Please check your LDAP server configuration in the LDAP config file. <br>Error from LDAP Server:',
-        'ldap_could_not_get_entries' => 'Could not get entries from the LDAP server. Please check your LDAP server configuration in the LDAP config file. <br>Error from LDAP Server:',
+        'import'    => 'Il y a eu un problème lors de l\'importation des utilisateurs. Veuillez réessayer.',
+        'asset_already_accepted' => 'Cet actif a déjà été accepté.',
+        'accept_or_decline' => 'Vous devez accepter ou refuser cet actif.',
+        'ldap_could_not_connect' => 'Impossible de se connecter au serveur LDAP . S\'il vous plaît vérifier la configuration de votre serveur LDAP dans le fichier de configuration LDAP . <br> Erreur du serveur LDAP :',
+        'ldap_could_not_bind' => 'Impossible de se connecter au serveur LDAP . S\'il vous plaît vérifier la configuration de votre serveur LDAP dans le fichier de configuration LDAP . <br> Erreur de serveur LDAP : ',
+        'ldap_could_not_search' => 'Impossible de rechercher le serveur LDAP . S\'il vous plaît vérifier la configuration de votre serveur LDAP dans le fichier de configuration LDAP . <br> Erreur de serveur LDAP :',
+        'ldap_could_not_get_entries' => 'Impossible d\'obtenir les entrées du serveur LDAP . S\'il vous plaît vérifier la configuration de votre serveur LDAP dans le fichier de configuration LDAP . <br> Erreur de serveur LDAP :',
     ),
 
     'deletefile' => array(
-        'error'   => 'File not deleted. Please try again.',
-        'success' => 'File successfully deleted.',
+        'error'   => 'Le fichier n\'a pas pu être supprimé. Veuillez réessayer.',
+        'success' => 'Le fichier a été supprimé correctement.',
     ),
 
     'upload' => array(
-        'error'   => 'File(s) not uploaded. Please try again.',
-        'success' => 'File(s) successfully uploaded.',
-        'nofiles' => 'You did not select any files for upload',
-        'invalidfiles' => 'One or more of your files is too large or is a filetype that is not allowed. Allowed filetypes are png, gif, jpg, doc, docx, pdf, and txt.',
+        'error'   => 'Le(s) fichier(s) n\'ont pas pu être téléversé. Veuillez réessayer.',
+        'success' => 'Le(s) fichier(s) ont été téléversé correctement.',
+        'nofiles' => 'Vous n\'avez pas sélectionné de fichier pour le téléversement',
+        'invalidfiles' => 'Un ou plusieurs de vos fichiers sont trop gros, ou sont d\'un type non autorisé. Les types de fichiers autorisés sont png, gif, jpg, doc, docx, pdf et txt.',
     ),
 
 );

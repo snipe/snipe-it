@@ -1,11 +1,11 @@
 <?php
 
 return array(
-    'about_consumables_title' 			=> 'About Consumables',
-    'about_consumables_text'  			=> 'Consumables are anything purchased that will be used up over time. For example, printer ink or copier paper.',
-    'consumable_name'                  => 'Consumable Name',
-    'create'                             => 'Create Consumable',
-    'remaining' 			             => 'Remaining',
+    'about_consumables_title' 			=> 'À propos des fournitures',
+    'about_consumables_text'  			=> 'Les fournitures sont des biens qui seront utilisés au fil du temps. Par exemple de l\'encre ou du papier pour les imprimantes.',
+    'consumable_name'                  => 'Nom de la fourniture',
+    'create'                             => 'Créer une fourniture',
+    'remaining' 			             => 'Quantité restante',
     'total' 			                 => 'Total',
-    'update'                            => 'Update Consumable',
+    'update'                            => 'Actualiser la fourniture',
 );

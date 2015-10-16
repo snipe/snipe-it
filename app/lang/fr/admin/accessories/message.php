@@ -3,7 +3,7 @@
 return array(
 
     'does_not_exist' => 'La catégorie n\'éxiste pas.',
-    'assoc_users'	 => 'This accessory currently has :count items checked out to users. Please check in the accessories and and try again. ',
+    'assoc_users'	 => 'Cet accessoire à présentement des items d\'attribué à des utilisateurs. S\'il vous plaît vérifier l\'accessoire et veuillez réessayer. ',
 
     'create' => array(
         'error'   => 'La catégorie n\'a pas été crée, veuillez essayer à nouveau.',
@@ -12,7 +12,7 @@ return array(
 
     'update' => array(
         'error'   => 'Catégorie n\'a pas été actualisée, veuillez réessayer',
-        'success' => 'Category updated successfully.'
+        'success' => 'Catégorie actualisée correctement.'
     ),
 
     'delete' => array(
@@ -22,15 +22,15 @@ return array(
     ),
     
      'checkout' => array(
-        'error'   		=> 'Accessory was not checked out, please try again',
-        'success' 		=> 'Accessory checked out successfully.',
-        'user_does_not_exist' => 'That user is invalid. Please try again.'
+        'error'   		=> 'Cet accessoire n\'est pas attribué. Veuillez réessayer',
+        'success' 		=> 'Accessoire attribué correctement.',
+        'user_does_not_exist' => 'Cet utilisateur est inexistant. Veuillez réessayer.'
     ),
 
     'checkin' => array(
-        'error'   		=> 'Accessory was not checked in, please try again',
-        'success' 		=> 'Accessory checked in successfully.',
-        'user_does_not_exist' => 'That user is invalid. Please try again.'
+        'error'   		=> 'Cet accessoire n\'a pas été dissocié, veuillez réessayer',
+        'success' 		=> 'Accessoire dissocié correctement.',
+        'user_does_not_exist' => 'Cet utilisateur est inexistant. Veuillez réessayer.'
     )
 
 

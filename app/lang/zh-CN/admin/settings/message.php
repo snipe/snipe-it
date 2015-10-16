@@ -8,10 +8,10 @@ return array(
         'success'               => '设置配置信息更新成功。'
     ),
     'backup' => array(
-        'delete_confirm'        => 'Are you sure you would like to delete this backup file? This action cannot be undone. ',
-        'file_deleted'          => 'The backup file was successfully deleted. ',
-        'generated'             => 'A new backup file was successfully created.',
-        'file_not_found'        => 'That backup file could not be found on the server.',
+        'delete_confirm'        => '你确定你想要删除该备份文件? 此操作无法撤消。 ',
+        'file_deleted'          => '备份文件已成功删除。 ',
+        'generated'             => '成功地创建了一个新的备份文件。',
+        'file_not_found'        => '在服务器上找不到备份文件。',
     ),
 
 );

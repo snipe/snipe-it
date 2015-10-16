@@ -15,7 +15,7 @@ return array(
     'notes'             => 'Notes',
     'order'             => 'Commande n°.',
     'purchase_order'    => 'Numéro de commande',
-    'reassignable'      => 'Reassignable',
+    'reassignable'      => 'Réattribuables',
     'remaining_seats'   => 'Postes restants',
     'seats'             => 'Postes',
     'serial'            => 'Clé de licence',

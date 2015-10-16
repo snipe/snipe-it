@@ -1,12 +1,12 @@
 <?php
 
 return array(
-    'about_asset_depreciations'  			=> 'About Asset Depreciations',
-    'about_depreciations'  					=> 'You can set up asset depreciations to depreciate assets based on straight-line depreciation.',
-    'asset_depreciations'  					=> 'Asset Depreciations',
-    'create_depreciation'  					=> 'Create Depreciation',
-    'depreciation_name'  					=> 'Depreciation Name',
-    'number_of_months'  					=> 'Number of Months',
-    'update_depreciation'  					=> 'Update Depreciation',
+    'about_asset_depreciations'  			=> 'Tentang Penyusutan Aset',
+    'about_depreciations'  					=> 'Anda dapat mengatur depresiasi aset berdasarkan straight-line depreciation.',
+    'asset_depreciations'  					=> 'Penyusutan Aset',
+    'create_depreciation'  					=> 'Buat Penyusutan',
+    'depreciation_name'  					=> 'Nama Penyusutan',
+    'number_of_months'  					=> 'Jumlah Bulan',
+    'update_depreciation'  					=> 'Update Penyusutan',
 
 );

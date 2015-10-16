@@ -15,9 +15,9 @@ return array(
     ),
 
     'delete' => array(
-        'confirm'   => 'Are you sure you wish to delete this consumable?',
+        'confirm'   => '您确定希望删除此耗材？',
         'error'   => '删除耗材失败，请重试',
-        'success' => 'The consumable was deleted successfully.'
+        'success' => '成功删除此耗材。'
     ),
 
      'checkout' => array(
