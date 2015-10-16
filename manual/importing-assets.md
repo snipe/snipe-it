@@ -10,17 +10,17 @@ There is an asset import tool in later versions of Snipe-IT ( > `1.2.8`). It is 
 
 <sup>*</sup>There is a beta web-based file-upload and import tool currently on the develop branch and slated for the next release. You'll find a `sample.csv` already in the import page which you can try out.
 
+Make sure you have your organization's domain name filled out in the `domain` value in `app/config/production/app.php`, so that it knows what domain to use when generating email addresses if none are provided in your CSV.
 
 ## Usage:
 
 ```
-php artisan asset-import:csv path/to/your/file.csv --domain=yourdomain.com --email_format=firstname.lastname --username_format=firstname.lastname
+php artisan asset-import:csv path/to/your/file.csv --email_format=firstname.lastname --username_format=firstname.lastname
 ```
 
 
 | Option  | Values | Required |
 | ------------- | ------------- |
-|`domain`| a domain name string formatted as yourdomain.com| Yes|
 |`email_format`|`firstname`, `firstname.lastname`, or `filastname` (for first initial, last name)| Yes |
 |`username_format`|`firstname`, `firstname.lastname`, `filastname` (for first initial, last name) or `email`| Yes |
 
