@@ -28,6 +28,19 @@ return array(
 
     'url' => 'http://snipe-it-laravel.local:8888',
 
+
+    /*
+    |--------------------------------------------------------------------------
+    | Organization Domain Name
+    |--------------------------------------------------------------------------
+    |
+    | The domain name of the organization, used when generating email addresses
+    | through the import tools.
+    |
+    */
+
+    'domain' => 'yourserver.com',
+
     /*
     |--------------------------------------------------------------------------
     | Encryption Key
@@ -37,7 +50,7 @@ return array(
     | to a random, 32 character string, otherwise these encrypted strings
     | will not be safe. Please do this before deploying an application!
     |
-    | Run a php artisan key:generate to create a random one
+    | Run a php artisan key:generate --env=staging to create a random one
     */
 
     'key' => 'Change_this_key_or_snipe_will_get_ya',

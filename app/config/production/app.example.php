@@ -28,6 +28,19 @@ return array(
 
     'url' => 'https://production.yourserver.com',
 
+
+    /*
+    |--------------------------------------------------------------------------
+    | Organization Domain Name
+    |--------------------------------------------------------------------------
+    |
+    | The domain name of the organization, used when generating email addresses
+    | through the import tools.
+    |
+    */
+
+    'domain' => 'yourserver.com',
+
     /*
     |--------------------------------------------------------------------------
     | Encryption Key
