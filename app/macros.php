@@ -316,6 +316,7 @@ Form::macro('currencies', function ($name = "currency", $selected = null, $class
     '€'=>'€',
     '₠'=>"₠",
     '₡'=>'₡',
+    'RM'=>'RM',
     '₣'=>'₣',
     '₤'=>'₤',
     '₥'=>'₥',

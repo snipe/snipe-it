@@ -27,6 +27,9 @@ use Datatable;
 use TCPDF;
 use Slack;
 use Manufacturer; //for embedded-create
+use Artisan;
+use Symfony\Component\Console\Output\BufferedOutput;
+
 
 class AssetsController extends AdminController
 {
@@ -616,6 +619,102 @@ class AssetsController extends AdminController
                 return $barcode_obj->getPngData();
             }
         }
+
+    }
+
+
+    public function getImportUpload() {
+
+        $path = app_path().'/private_uploads/imports/assets';
+        $files = array();
+
+        if ($handle = opendir($path)) {
+
+            /* This is the correct way to loop over the directory. */
+            while (false !== ($entry = readdir($handle))) {
+                clearstatcache();
+                if (substr(strrchr($entry,'.'),1)=='csv') {
+                    $files[] = array(
+                            'filename' => $entry,
+                            'filesize' => Setting::fileSizeConvert(filesize($path.'/'.$entry)),
+                            'modified' => filemtime($path.'/'.$entry)
+                        );
+                }
+
+            }
+            closedir($handle);
+            $files = array_reverse($files);
+        }
+
+        return View::make('backend/hardware/import')->with('files',$files);
+    }
+
+
+
+    public function postAPIImportUpload() {
+
+        if (!Config::get('app.lock_passwords')) {
+
+            $rules = array(
+                'files' => 'required'
+            );
+
+            $validator = Validator::make(Input::all(), $rules);
+
+            if ($validator->fails()) {
+                $messages = $validator->messages();
+                $results['error']=$messages->first('files');
+                return $results;
+
+            } else {
+                    $files = Input::file('files');
+                    $path = app_path().'/private_uploads/imports/assets';
+                    $results = array();
+
+                    foreach ($files as $file) {
+
+                        if (!in_array($file->getMimeType(), array(
+                            'application/vnd.ms-excel',
+                            'text/csv',
+                            'text/plain',
+                            'text/comma-separated-values',
+                            'text/tsv'))) {
+                            $results['error']='File type must be CSV';
+                            return $results;
+                        }
+
+                        $fixed_filename = str_replace(' ','-',$file->getClientOriginalName());
+                        $file->move($path, date('Y-m-d-his').'-'.$file->getClientOriginalName());
+                        $name = date('Y-m-d-his').'-'.$fixed_filename;
+                        $filesize = Setting::fileSizeConvert(filesize($path.'/'.$name));
+                        $results[] = compact('name', 'filesize');
+                    }
+            }
+
+        } else {
+
+            $results['error']=Lang::get('general.feature_disabled');
+            return $results;
+        }
+
+        return array(
+            'files' => $results
+        );
+
+
+    }
+
+    public function getProcessImportFile($filename) {
+        // php artisan asset-import:csv path/to/your/file.csv --domain=yourdomain.com --email_format=firstname.lastname
+
+        $output = new BufferedOutput;
+        Artisan::call('asset-import:csv', ['filename'=> app_path().'/private_uploads/imports/assets/'.$filename, '--domain'=>'snipe.net', '--email_format'=>'firstname.lastname'], $output);
+        $display_output =  $output->fetch();
+        $file = app_path().'/private_uploads/imports/assets/'.str_replace('.csv','',$filename).'-output-'.date("Y-m-d-his").'.txt';
+        file_put_contents($file, $display_output);
+
+
+        return View::make('backend/hardware/import-status');
 
     }
 

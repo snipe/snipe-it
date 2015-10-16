@@ -32,7 +32,7 @@ class Category extends Elegant
 
     public function accessories()
     {
-        return $this->hasMany('Asset');
+        return $this->hasMany('Accessory');
     }
 
 

@@ -20,6 +20,8 @@
     {{ Datatable::table()
                 ->addColumn(Lang::get('admin/licenses/table.title'),
                             Lang::get('admin/licenses/table.serial'),
+                            Lang::get('admin/licenses/form.to_name'),
+                            Lang::get('admin/licenses/form.to_email'),
                             Lang::get('admin/licenses/form.seats'),
                             Lang::get('admin/licenses/form.remaining_seats'),
                             Lang::get('admin/licenses/table.purchase_date'),
@@ -43,10 +45,10 @@
 			            	),
                             'sAjaxSource'=>route('api.licenses.list'),
                             'dom' =>'CT<"clear">lfrtip',
-                            'colVis'=> array('showAll'=>'Show All','restore'=>'Restore','exclude'=>array(6),'activate'=>'mouseover'),
+                            'colVis'=> array('showAll'=>'Show All','restore'=>'Restore','exclude'=>array(8),'activate'=>'mouseover'),
                             'columnDefs'=> array(
-                                array('bSortable'=>false,'targets'=>array(6)),
-                                array('width'=>'20%','targets'=>array(6)),
+                                array('bSortable'=>false,'targets'=>array(8)),
+                                array('width'=>'20%','targets'=>array(8)),
                                 ),
                             'order'=>array(array(0,'asc')),
                         )

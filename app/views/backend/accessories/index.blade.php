@@ -20,7 +20,9 @@
     <div class="row profile">
         <div class="col-md-9 bio">
             {{ Datatable::table()
-                ->addColumn(Lang::get('admin/accessories/table.title'),
+                ->addColumn(
+                            Lang::get('admin/accessories/general.accessory_category'),
+                            Lang::get('admin/accessories/table.title'),
                             Lang::get('admin/accessories/general.total'),
                             Lang::get('admin/accessories/general.remaining'),
                             Lang::get('table.actions'))

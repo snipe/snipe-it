@@ -2,7 +2,7 @@
 
     return [
         'asset_maintenance_type' => 'Asset Maintenance Type',
-        'title'                  => 'Title',
+        'title'                  => 'Заголовок',
         'start_date'             => 'Start Date',
         'completion_date'        => 'Completion Date',
         'cost'                   => 'Cost',

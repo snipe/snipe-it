@@ -32,7 +32,6 @@
 		"schickling/backup": "0.6.0",
 		"chumper/zipper": "0.5.x",
 		"tecnickcom/tc-lib-barcode": "dev-master"
-
 	},
 	"repositories": [
         {

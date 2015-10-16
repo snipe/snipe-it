@@ -1,6 +1,7 @@
-# .gitignore sample
-
-#ignore all files in this dir...
-*
-#... except for this one.
-!.gitignore
+/*
+!/imports
+/imports/*
+!/imports/assets
+/imports/assets/*
+!/imports/assets/sample.csv
+*.DS_Store

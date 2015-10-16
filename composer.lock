@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "c1afc6215672bf880415da37b6f1fa0f",
+    "hash": "67ca06e168135d84c1d3cc1fef38dec0",
     "packages": [
         {
             "name": "aws/aws-sdk-php",
@@ -1753,12 +1753,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/maximebf/php-debugbar.git",
-                "reference": "ab12b6f57dd33b1fffa875046fd17c34d88388b9"
+                "reference": "6812102772144c85cfe7702d4decfedc12200b9d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/maximebf/php-debugbar/zipball/ab12b6f57dd33b1fffa875046fd17c34d88388b9",
-                "reference": "ab12b6f57dd33b1fffa875046fd17c34d88388b9",
+                "url": "https://api.github.com/repos/maximebf/php-debugbar/zipball/6812102772144c85cfe7702d4decfedc12200b9d",
+                "reference": "6812102772144c85cfe7702d4decfedc12200b9d",
                 "shasum": ""
             },
             "require": {
@@ -1801,7 +1801,7 @@
             "keywords": [
                 "debug"
             ],
-            "time": "2015-07-09 18:15:09"
+            "time": "2015-09-22 07:16:34"
         },
         {
             "name": "monolog/monolog",
@@ -2788,12 +2788,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/EventDispatcher.git",
-                "reference": "e79162fa079bb559ddad17c58cf8b7ecbaffd9b6"
+                "reference": "0ef7669c0af9f62752a96a5d43c1b13c5c2e70e9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/EventDispatcher/zipball/e79162fa079bb559ddad17c58cf8b7ecbaffd9b6",
-                "reference": "e79162fa079bb559ddad17c58cf8b7ecbaffd9b6",
+                "url": "https://api.github.com/repos/symfony/EventDispatcher/zipball/0ef7669c0af9f62752a96a5d43c1b13c5c2e70e9",
+                "reference": "0ef7669c0af9f62752a96a5d43c1b13c5c2e70e9",
                 "shasum": ""
             },
             "require": {
@@ -2838,7 +2838,7 @@
             ],
             "description": "Symfony EventDispatcher Component",
             "homepage": "https://symfony.com",
-            "time": "2015-09-14 06:10:06"
+            "time": "2015-09-22 13:49:41"
         },
         {
             "name": "symfony/filesystem",
@@ -3247,12 +3247,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/Stopwatch.git",
-                "reference": "9eb95ce869cf480c0dc3a1891ae70037d50b43ce"
+                "reference": "53219df2141bab8c9eeabf23e0c508f0b1477ef6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/Stopwatch/zipball/9eb95ce869cf480c0dc3a1891ae70037d50b43ce",
-                "reference": "9eb95ce869cf480c0dc3a1891ae70037d50b43ce",
+                "url": "https://api.github.com/repos/symfony/Stopwatch/zipball/53219df2141bab8c9eeabf23e0c508f0b1477ef6",
+                "reference": "53219df2141bab8c9eeabf23e0c508f0b1477ef6",
                 "shasum": ""
             },
             "require": {
@@ -3288,7 +3288,7 @@
             ],
             "description": "Symfony Stopwatch Component",
             "homepage": "https://symfony.com",
-            "time": "2015-09-14 14:15:17"
+            "time": "2015-09-22 13:49:41"
         },
         {
             "name": "symfony/translation",
@@ -3352,12 +3352,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/var-dumper.git",
-                "reference": "937f203533edfad9d9ca64d199fcecb9b9d81f3c"
+                "reference": "86ae8aa7f062c24db75e0a273827d59fde8e409c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/var-dumper/zipball/937f203533edfad9d9ca64d199fcecb9b9d81f3c",
-                "reference": "937f203533edfad9d9ca64d199fcecb9b9d81f3c",
+                "url": "https://api.github.com/repos/symfony/var-dumper/zipball/86ae8aa7f062c24db75e0a273827d59fde8e409c",
+                "reference": "86ae8aa7f062c24db75e0a273827d59fde8e409c",
                 "shasum": ""
             },
             "require": {
@@ -3403,7 +3403,7 @@
                 "debug",
                 "dump"
             ],
-            "time": "2015-09-18 07:20:16"
+            "time": "2015-09-20 21:07:38"
         },
         {
             "name": "symfony/yaml",
@@ -3615,12 +3615,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/Codeception/Codeception.git",
-                "reference": "d1e2d567788bd3d2d97e0f7f6352faa21356d262"
+                "reference": "b95f54cc565b563c9d9b71e36e5b95d3fa1ca8a6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Codeception/Codeception/zipball/d1e2d567788bd3d2d97e0f7f6352faa21356d262",
-                "reference": "d1e2d567788bd3d2d97e0f7f6352faa21356d262",
+                "url": "https://api.github.com/repos/Codeception/Codeception/zipball/b95f54cc565b563c9d9b71e36e5b95d3fa1ca8a6",
+                "reference": "b95f54cc565b563c9d9b71e36e5b95d3fa1ca8a6",
                 "shasum": ""
             },
             "require": {
@@ -3687,7 +3687,7 @@
                 "functional testing",
                 "unit testing"
             ],
-            "time": "2015-09-18 21:01:19"
+            "time": "2015-09-22 21:55:34"
         },
         {
             "name": "doctrine/instantiator",
@@ -3949,12 +3949,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpspec/prophecy.git",
-                "reference": "80da5500014051b9e70740f183c5e5586f38f977"
+                "reference": "4f9b1eaf0a7da77c362f8d91cbc68ab1f4718d62"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpspec/prophecy/zipball/80da5500014051b9e70740f183c5e5586f38f977",
-                "reference": "80da5500014051b9e70740f183c5e5586f38f977",
+                "url": "https://api.github.com/repos/phpspec/prophecy/zipball/4f9b1eaf0a7da77c362f8d91cbc68ab1f4718d62",
+                "reference": "4f9b1eaf0a7da77c362f8d91cbc68ab1f4718d62",
                 "shasum": ""
             },
             "require": {
@@ -4001,7 +4001,7 @@
                 "spy",
                 "stub"
             ],
-            "time": "2015-08-13 10:25:47"
+            "time": "2015-09-22 14:49:23"
         },
         {
             "name": "phpunit/php-code-coverage",

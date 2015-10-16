@@ -15,9 +15,9 @@ return array(
     ),
 
     'delete' => array(
-        'confirm'   => 'Сигурни ли сте, че желаете да изтриете аксесоара?',
+        'confirm'   => 'Are you sure you wish to delete this consumable?',
         'error'   => 'Проблем при изтриването на консуматива. Моля опитайте отново.',
-        'success' => 'Аксесоарът беше изтрит успешно.'
+        'success' => 'The consumable was deleted successfully.'
     ),
 
      'checkout' => array(

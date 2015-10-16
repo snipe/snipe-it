@@ -148,7 +148,7 @@ if [[ $distro == "u" ]]; then
 	replace "            'password'  => ''," "            'password'  => '$mysqluserpw'," -- $dir/app/config/production/database.php
 	replace "'http://production.yourserver.com'," "'http://$fqdn'," -- $dir/app/config/production/database.php
 	cp $dir/app/config/production/app.example.php $dir/app/config/production/app.php
-	replace "'https://production.yourserver.com'," "'https://$fqdn'," -- $dir/app/config/production/app.php
+	replace "'http://production.yourserver.com'," "'http://$fqdn'," -- $dir/app/config/production/app.php
 	replace "'Change_this_key_or_snipe_will_get_ya'," "'$random32'," -- $dir/app/config/production/app.php
 	replace "'false'," "true," -- $dir/app/config/production/app.php
 	cp $dir/app/config/production/mail.example.php $dir/app/config/production/mail.php

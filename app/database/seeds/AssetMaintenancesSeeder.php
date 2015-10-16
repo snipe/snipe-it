@@ -18,6 +18,7 @@ class AssetMaintenancesSeeder extends Seeder
             'title'      	=> 'Test Maintenance',
             'start_date' 	=> $date->modify('-10 day'),
             'cost'  => '200.99',
+            'is_warranty'  => '0',
             'created_at' 	=> $date->modify('-10 day'),
             'updated_at' 	=> $date->modify('-3 day'),
         );

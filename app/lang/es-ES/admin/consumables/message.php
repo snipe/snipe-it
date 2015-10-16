@@ -15,9 +15,9 @@ return array(
     ),
 
     'delete' => array(
-        'confirm'   => 'Esta seguro de querer borrar este accesorio?',
+        'confirm'   => 'Are you sure you wish to delete this consumable?',
         'error'   => 'Hubo un error al borrar este consumible. Por favor intente nuevamente.',
-        'success' => 'El accesorio fue borrado con éxito.'
+        'success' => 'The consumable was deleted successfully.'
     ),
 
      'checkout' => array(
