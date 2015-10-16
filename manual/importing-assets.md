@@ -8,13 +8,13 @@ currentMenu: importing-assets
 
 There is an asset import tool in later versions of Snipe-IT ( > `1.2.8`). It is available through the command-line only, as very large file uploading and processing will cause memory exhaustion issues on many servers<sup>*</sup>.
 
-<sup>*</sup>There is a beta web-based file-upload and import tool currently on the develop branch and slated for the next release. You'll find a `sample.csv` already in the import page which you can try out. 
+<sup>*</sup>There is a beta web-based file-upload and import tool currently on the develop branch and slated for the next release. You'll find a `sample.csv` already in the import page which you can try out.
 
 
 ## Usage:
 
 ```
-php artisan asset-import:csv path/to/your/file.csv --domain=yourdomain.com --email_format=firstname.lastname
+php artisan asset-import:csv path/to/your/file.csv --domain=yourdomain.com --email_format=firstname.lastname --username_format=firstname.lastname
 ```
 
 
@@ -22,6 +22,7 @@ php artisan asset-import:csv path/to/your/file.csv --domain=yourdomain.com --ema
 | ------------- | ------------- |
 |`domain`| a domain name string formatted as yourdomain.com| Yes|
 |`email_format`|`firstname`, `firstname.lastname`, or `filastname` (for first initial, last name)| Yes |
+|`username_format`|`firstname`, `firstname.lastname`, `filastname` (for first initial, last name) or `email`| Yes |
 
 
 ## CSV Format
@@ -39,6 +40,7 @@ The importer will ignore the first line of your CSV, so if you don't have a head
 | ------------- | ------------- |
 |Name|`Firstname Lastname` | No| No commas. First name first, last name last |
 |Email| `you@example.com`| No|If empty, will be generated using the `email_format` and `domain` you provide in the import command|
+|Username| `yourname.lastname`| No|If empty, will be generated using the `username_format` you provide in the import command|
 |Asset Category |`Laptop`| Yes | Created if it doesn't exist |
 |Asset Model |`MBP Retina 13-inch`| Yes |Created if it doesn't exist |
 |Manufacturer Name| `Apple`|Yes | Created if it doesn't exist |
