@@ -13,5 +13,5 @@ return array(
     'zip'			=> 'Code postal',
     'locations'		=> 'Lieux',
     'parent'		=> 'Parent',
-    'currency'  	=> 'Location Currency', // this is deprecated
+    'currency'  	=> 'Devise de l\'emplacement', // this is deprecated
 );

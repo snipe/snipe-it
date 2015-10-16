@@ -2,35 +2,35 @@
 
 return array(
 
-    'does_not_exist' => 'Category does not exist.',
-    'assoc_users'	 => 'This accessory currently has :count items checked out to users. Please check in the accessories and and try again. ',
+    'does_not_exist' => 'Kategori tidak ada.',
+    'assoc_users'	 => 'Aksesori saat ini memiliki :count item untuk pengguna. Silahkan cek di aksesoris dan dan coba lagi. ',
 
     'create' => array(
-        'error'   => 'Category was not created, please try again.',
-        'success' => 'Category created successfully.'
+        'error'   => 'Kategori gagal dibuat, silakan coba lagi.',
+        'success' => 'Kategori berhasil disimpan.'
     ),
 
     'update' => array(
-        'error'   => 'Category was not updated, please try again',
-        'success' => 'Category updated successfully.'
+        'error'   => 'Kategori tidak terupdate, silakan coba lagi',
+        'success' => 'Kategori berhasil diupdate.'
     ),
 
     'delete' => array(
-        'confirm'   => 'Are you sure you wish to delete this category?',
-        'error'   => 'There was an issue deleting the category. Please try again.',
-        'success' => 'The category was deleted successfully.'
+        'confirm'   => 'Apakah Anda yakin ingin menghapus kategori ini?',
+        'error'   => 'Ada masalah menghapus kategori. Silakan coba lagi.',
+        'success' => 'Kategori berhasil dihapus.'
     ),
     
      'checkout' => array(
-        'error'   		=> 'Accessory was not checked out, please try again',
-        'success' 		=> 'Accessory checked out successfully.',
-        'user_does_not_exist' => 'That user is invalid. Please try again.'
+        'error'   		=> 'Aksesori belum diperiksa, silakan coba lagi',
+        'success' 		=> 'Aksesori berhasil diperiksa.',
+        'user_does_not_exist' => 'Pengguna yang tidak valid. Silakan coba lagi.'
     ),
 
     'checkin' => array(
-        'error'   		=> 'Accessory was not checked in, please try again',
-        'success' 		=> 'Accessory checked in successfully.',
-        'user_does_not_exist' => 'That user is invalid. Please try again.'
+        'error'   		=> 'Aksesori belum diperiksa, silakan coba lagi',
+        'success' 		=> 'Aksesori berhasil diperiksa.',
+        'user_does_not_exist' => 'Pengguna yang tidak valid. Silakan coba lagi.'
     )
 
 

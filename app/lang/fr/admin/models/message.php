@@ -9,7 +9,7 @@ return array(
     'create' => array(
         'error'   => 'Le modèle n\'a pas été créé, veuillez essayer à nouveau.',
         'success' => 'Le modèle a été créé avec succès.',
-        'duplicate_set' => 'An asset model with that name, manufacturer and model number already exists.',
+        'duplicate_set' => 'Un modèle d\'actif avec ce nom, fabricant et modèle existe déjà.',
     ),
 
     'update' => array(
@@ -24,8 +24,8 @@ return array(
     ),
 
     'restore' => array(
-        'error'   		=> 'Model was not restored, please try again',
-        'success' 		=> 'Model restored successfully.'
+        'error'   		=> 'Le modèle d\'actif n\'a pas été restauré, veuillez réessayer',
+        'success' 		=> 'Modèle d\'actif restauré correctement.'
     ),
 
 );
