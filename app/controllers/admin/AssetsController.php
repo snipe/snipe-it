@@ -708,7 +708,7 @@ class AssetsController extends AdminController
         // php artisan asset-import:csv path/to/your/file.csv --domain=yourdomain.com --email_format=firstname.lastname
 
         $output = new BufferedOutput;
-        Artisan::call('asset-import:csv', ['filename'=> app_path().'/private_uploads/imports/assets/'.$filename, '--domain'=>'snipe.net', '--email_format'=>'firstname.lastname'], $output);
+        Artisan::call('asset-import:csv', ['filename'=> app_path().'/private_uploads/imports/assets/'.$filename, '--email_format'=>'firstname.lastname', '--username_format'=>'firstname.lastname'], $output);
         $display_output =  $output->fetch();
         $file = app_path().'/private_uploads/imports/assets/'.str_replace('.csv','',$filename).'-output-'.date("Y-m-d-his").'.txt';
         file_put_contents($file, $display_output);
