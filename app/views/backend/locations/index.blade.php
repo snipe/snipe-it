@@ -30,6 +30,7 @@ Locations ::
                 <th data-sortable="true" data-field="name">@lang('admin/locations/table.name')</th>
                 <th data-sortable="false" data-field="parent">@lang('admin/locations/table.parent')</th>
                 <th data-searchable="false" data-sortable="false" data-field="assets">@lang('general.assets')</th>
+                <th data-searchable="true" data-sortable="true" data-field="currency">@lang('general.currency')</th>
                 <th data-searchable="true" data-sortable="true" data-field="address">@lang('admin/locations/table.address')</th>
                 <th data-searchable="true" data-sortable="true" data-field="city">@lang('admin/locations/table.city')
                 </th>

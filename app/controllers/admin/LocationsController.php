@@ -256,7 +256,7 @@ class LocationsController extends AdminController
 
     public function getDatatable()
     {
-        $locations = Location::select(array('id','name','address','address2','city','state','zip','country'))
+        $locations = Location::select(array('id','name','address','address2','city','state','zip','country','parent_id','currency'))->with('assets')
         ->whereNull('deleted_at');
 
         if (Input::has('search')) {
@@ -275,8 +275,7 @@ class LocationsController extends AdminController
             $limit = 50;
         }
 
-
-        $allowed_columns = ['name','address','city','state','country'];
+        $allowed_columns = ['name','address','city','state','country','currency'];
         $order = Input::get('order') === 'asc' ? 'asc' : 'desc';
         $sort = in_array(Input::get('sort'), $allowed_columns) ? Input::get('sort') : 'created_at';
 
@@ -293,11 +292,12 @@ class LocationsController extends AdminController
             $rows[] = array(
                 'name'          => link_to('admin/locations/'.$location->id.'/view', $location->name),
                 'parent'        => ($location->parent) ? $location->parent->name : '',
-                'assets'       => ($location->assets->count() + $location->assignedassets->count()),
+                'assets'        => ($location->assets->count() + $location->assignedassets->count()),
                 'address'       => ($location->address) ? $location->address: '',
                 'city'          => $location->city,
-                'state'          => $location->state,
+                'state'         => $location->state,
                 'country'       => $location->country,
+                'currency'      => $location->currency,
                 'actions'       => $actions
             );
         }
