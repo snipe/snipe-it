@@ -847,6 +847,13 @@ class UsersController extends AdminController {
 
         $users = User::with('assets', 'accessories', 'consumables', 'licenses', 'manager', 'sentryThrottle', 'groups', 'userloc');
 
+        switch ($status) {
+        case 'deleted':
+          $users = $users->withTrashed()->Deleted();
+          break;
+        }
+
+
 
          if (Input::has('search')) {
              $users = $users->TextSearch(Input::get('search'));
@@ -896,7 +903,7 @@ class UsersController extends AdminController {
 
             $rows[] = array(
                 'checkbox'      =>'<div class="text-center"><input type="checkbox" name="edit_user['.$user->id.']" class="one_required"></div>',
-                'name'          => '<a title="'.$user->fullName().'" href="hardware/'.$user->id.'/view">'.$user->fullName().'</a>',
+                'name'          => '<a title="'.$user->fullName().'" href="../admin/users/'.$user->id.'/view">'.$user->fullName().'</a>',
                 'email'         => ($user->email!='') ? '<a href="mailto:'.$user->email.'"><i class="fa fa-envelope"></i></a>' : '',
                 'username'         => $user->username,
                 'location'      => ($user->location_id!='') ? $user->userloc->name : '',

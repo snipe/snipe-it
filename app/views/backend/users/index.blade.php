@@ -39,20 +39,26 @@
          'route' => ['users/bulkedit'],
          'class' => 'form-horizontal' ]) }}
 
-       <table name="assets" id="table" data-url="{{route('api.users.list') }}">
+       <table
+        name="assets"
+        id="table"
+        data-toggle="table"
+        data-url="{{ route('api.users.list', array(''=>Input::get('status'))) }}"
+        data-cookie="true"
+        data-cookie-id-table="userTable">
            <thead>
                <tr>
                    <th data-class="hidden-xs" data-switchable="false" data-searchable="false" data-sortable="false" data-field="checkbox"><div class="text-center"><input type="checkbox" id="checkAll" style="padding-left: 0px;"></div></th>
                    <th data-sortable="true" data-field="name">{{ Lang::get('admin/users/table.name') }}</th>
                    <th data-sortable="true" data-field="email"><i class="fa fa-envelope fa-lg"></i></th>
                    <th data-sortable="true" data-field="username">{{ Lang::get('admin/users/table.username') }}</th>
-                   <th data-sortable="true" data-field="manager">{{ Lang::get('admin/users/table.manager') }}</th>
-                   <th data-sortable="true" data-field="location">{{ Lang::get('admin/users/table.location') }}</th>
-                   <th data-sortable="true" data-field="assets"><i class="fa fa-barcode fa-lg"></i></th>
-                   <th data-sortable="true" data-field="licenses"><i class="fa fa-certificate fa-lg"></i></th>
-                   <th data-sortable="true" data-field="accessories"><i class="fa fa-keyboard-o fa-lg"></i></th>
-                   <th data-sortable="true" data-field="consumables"><i class="fa fa-tint fa-lg"></i></th>
-                   <th data-sortable="true" data-field="groups">{{ Lang::get('general.groups') }}</th>
+                   <th data-sortable="false" data-field="manager">{{ Lang::get('admin/users/table.manager') }}</th>
+                   <th data-sortable="false" data-field="location">{{ Lang::get('admin/users/table.location') }}</th>
+                   <th data-sortable="false" data-field="assets"><i class="fa fa-barcode fa-lg"></i></th>
+                   <th data-sortable="false" data-field="licenses"><i class="fa fa-certificate fa-lg"></i></th>
+                   <th data-sortable="false" data-field="accessories"><i class="fa fa-keyboard-o fa-lg"></i></th>
+                   <th data-sortable="false" data-field="consumables"><i class="fa fa-tint fa-lg"></i></th>
+                   <th data-sortable="false" data-field="groups">{{ Lang::get('general.groups') }}</th>
                    <th data-sortable="true" data-field="notes">{{ Lang::get('general.notes') }}</th>
                    <th data-switchable="false" data-searchable="false" data-sortable="false" data-field="actions" >{{ Lang::get('table.actions') }}</th>
                </tr>
@@ -74,11 +80,11 @@
 </div>
 @section('moar_scripts')
 <script src="{{ asset('assets/js/bootstrap-table.js') }}"></script>
+<script src="{{ asset('assets/js/extensions/cookie/bootstrap-table-cookie.js') }}"></script>
 <script src="{{ asset('assets/js/extensions/mobile/bootstrap-table-mobile.js') }}"></script>
-<script src="{{ asset('assets/js/extensions/export/bootstrap-table-export.js?v=1') }}"></script>
-<script src="{{ asset('assets/js/extensions/cookie/bootstrap-table-cookie.js?v=1') }}"></script>
-<script src="//rawgit.com/kayalshri/tableExport.jquery.plugin/master/tableExport.js?v=1') }}"></script>
-<script src="//rawgit.com/kayalshri/tableExport.jquery.plugin/master/jquery.base64.js?v=1') }}"></script>
+<script src="{{ asset('assets/js/extensions/export/bootstrap-table-export.js') }}"></script>
+<script src="//rawgit.com/kayalshri/tableExport.jquery.plugin/master/tableExport.js') }}"></script>
+<script src="//rawgit.com/kayalshri/tableExport.jquery.plugin/master/jquery.base64.js') }}"></script>
 <script type="text/javascript">
     $('#table').bootstrapTable({
         classes: 'table table-responsive table-no-bordered',
@@ -92,9 +98,7 @@
         sortable: true,
         cookie: true,
         mobileResponsive: true,
-        columnsHidden: ['name'],
         showExport: true,
-        exportLabel: 'Export',
         showColumns: true,
         maintainSelected: true,
         paginationFirstText: "@lang('general.first')",

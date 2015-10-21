@@ -211,17 +211,32 @@ class User extends SentryUserModel
     public function scopeTextsearch($query, $q)
 	{
 
-			return $query->where(function($query) use ($q)
-			{
-
-			$query->orWhere('first_name', 'LIKE', "%$q%")
-					->orWhere('first_name', 'LIKE', "%$q%")
-                    ->orWhere('email', 'LIKE', "%$q%")
-                    ->orWhere('username', 'LIKE', "%$q%")
-					->orWhere('notes', 'LIKE', "%$q%");
-			});
+			return $query->where('first_name', 'LIKE', "%$q%")
+				->orWhere('last_name', 'LIKE', "%$q%")
+                ->orWhere('email', 'LIKE', "%$q%")
+                ->orWhere('username', 'LIKE', "%$q%")
+				->orWhere('notes', 'LIKE', "%$q%")
+                ->orWhere(function($query) use ($q) {
+                    $query->whereHas('userloc', function($query) use ($q) {
+                        $query->where('name','LIKE','%'.$q.'%');
+                    });
+                });
 
 	}
+
+
+    /**
+     * Query builder scope for Deleted users
+     *
+     * @param  Illuminate\Database\Query\Builder $query Query builder instance
+     *
+     * @return Illuminate\Database\Query\Builder          Modified query builder
+     */
+
+    public function scopeDeleted($query)
+    {
+        return $query->whereNotNull('deleted_at');
+    }
 
 
 }
