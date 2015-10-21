@@ -176,7 +176,7 @@ public function freeSeat()
 		->get();
 
     }
-    
+
     /**
     * Query builder scope to search on text
     *
@@ -190,7 +190,12 @@ public function freeSeat()
 
         return $query->where(function($query) use ($search)
         {
-                $query->where('name', 'LIKE', '%'.$search.'%');
+                $query->where('name', 'LIKE', '%'.$search.'%')
+				->orWhere('serial', 'LIKE', '%'.$search.'%')
+				->orWhere('notes', 'LIKE', '%'.$search.'%')
+				->orWhere('order_number', 'LIKE', '%'.$search.'%')
+				->orWhere('purchase_date', 'LIKE', '%'.$search.'%')
+				->orWhere('purchase_cost', 'LIKE', '%'.$search.'%');
         });
     }
 }
