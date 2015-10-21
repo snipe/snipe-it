@@ -43,6 +43,9 @@
 
 
         <!-- global header javascripts -->
+        <script src="{{ asset('assets/js/jquery-latest.js') }}"></script>
+        <script src="{{ asset('assets/js/bootstrap.min.js') }}"></script>
+        
         <script>
             window.snipeit = {
                 settings: {
@@ -454,9 +457,6 @@
     </div>
 
     <!-- scripts -->
-
-    <script src="{{ asset('assets/js/jquery-latest.js') }}"></script>
-    <script src="{{ asset('assets/js/bootstrap.min.js') }}"></script>    
     <script src="{{ asset('assets/js/jquery.knob.js') }}"></script>
     <script src="{{ asset('assets/js/select2.min.js') }}"></script>
     <script src="{{ asset('assets/js/jquery.uniform.min.js') }}"></script>

@@ -7,6 +7,11 @@
 
 {{-- Page content --}}
 @section('content')
+
+    <link rel="stylesheet" href="https://demo.snipeitapp.com/assets/css/lib/jquery.dataTables.css" type="text/css" media="screen" />
+    <link rel="stylesheet" href="https://demo.snipeitapp.com/assets/css/compiled/dataTables.colVis.css" type="text/css" media="screen" />
+    <link rel="stylesheet" href="https://demo.snipeitapp.com/assets/css/compiled/dataTables.tableTools.css" type="text/css" media="screen" />
+
     <div class="row header">
         <div class="col-md-12">
             <a href="{{ route('create/asset_maintenances') }}" class="btn btn-success pull-right"><i class="fa fa-plus icon-white"></i> Create New</a>
@@ -53,4 +58,11 @@
                 )
             ->render() }}
     </div>
+
+@section('moar_scripts')
+<script src="https://demo.snipeitapp.com/assets/js/jquery.dataTables.min.js"></script>
+<script src="https://demo.snipeitapp.com/assets/js/dataTables.colVis.js"></script>
+<script src="https://demo.snipeitapp.com/assets/js/dataTables.tableTools.js"></script>
+
+@stop
 @stop
