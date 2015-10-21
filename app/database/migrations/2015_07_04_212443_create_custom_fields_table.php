@@ -14,10 +14,11 @@ class CreateCustomFieldsTable extends Migration
 	public function up()
 	{
 		Schema::create('custom_fields', function ($table) {
-				$table->string('name');
-				$table->string('format');
-				$table->string('element');
-				$table->timestamps();
+			$table->increments('id');
+			$table->string('name');
+			$table->string('format');
+			$table->string('element');
+			$table->timestamps();
 		});
 	}
 

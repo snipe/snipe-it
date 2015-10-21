@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateCustomFieldFieldset extends Migration {
+class CreateCustomFieldCustomFieldset extends Migration {
 
 	/**
 	 * Run the migrations.
@@ -12,10 +12,10 @@ class CreateCustomFieldFieldset extends Migration {
 	 */
 	public function up()
 	{
-		Schema::table('custom_field_fieldset', function(Blueprint $table)
+		Schema::create('custom_field_custom_fieldset', function(Blueprint $table)
 		{
 			$table->integer('custom_field_id');
-			$table->integer('fieldset_id');
+			$table->integer('custom_fieldset_id');
 			
 			$table->integer('order');
 			$table->boolean('required');
@@ -29,11 +29,7 @@ class CreateCustomFieldFieldset extends Migration {
 	 */
 	public function down()
 	{
-		Schema::drop('custom_field_fieldset');
-		// Schema::table('custom_field_fieldset', function(Blueprint $table)
-		// {
-		// 	//
-		// });
+		Schema::drop('custom_field_custom_fieldsets');
 	}
 
 }

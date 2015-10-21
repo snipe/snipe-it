@@ -45,9 +45,9 @@ class Model extends Elegant
     
     public function custom_fieldset()
     {
-      $foo=new CustomField();
-      $foo2=new CustomFieldset();
-      return $this->belongsTo('Fieldset','fieldset_id');
+      // $foo=new CustomField();
+      // $foo2=new CustomFieldset();
+      return $this->belongsTo('custom_fieldset','fieldset_id');
     }
 
     /**

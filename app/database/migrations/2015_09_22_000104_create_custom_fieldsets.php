@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateFieldset extends Migration {
+class CreateCustomFieldsets extends Migration {
 
 	/**
 	 * Run the migrations.
@@ -12,8 +12,10 @@ class CreateFieldset extends Migration {
 	 */
 	public function up()
 	{
-		Schema::table('fieldset', function(Blueprint $table)
+		Schema::create('custom_fieldsets', function(Blueprint $table)
 		{
+			$table->increments('id');
+			$table->string('name');
 			//
 		});
 	}
@@ -25,10 +27,7 @@ class CreateFieldset extends Migration {
 	 */
 	public function down()
 	{
-		Schema::table('fieldset', function(Blueprint $table)
-		{
-			//
-		});
+		Schema::drop('custom_fieldsets');
 	}
 
 }

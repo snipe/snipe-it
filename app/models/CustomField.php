@@ -2,6 +2,7 @@
 
 class CustomField extends Elegant
 {
+  public $guarded=["id"];
   public static $PredefinedFormats=[
     "ALPHA" => "[a-zA-Z]*",
     "NUMERIC" => "[0-9]*",
@@ -9,7 +10,22 @@ class CustomField extends Elegant
     "IP" => "([01]?\\d\\d?|2[0-4]\\d|25[0-5])\\.([01]?\\d\\d?|2[0-4]\\d|25[0-5])\\.([01]?\\d\\d?|2[0-4]\\d|25[0-5])\\.([01]?\\d\\d?|2[0-4]\\d|25[0-5])"
   ];
   
-  public static function saving($custom_field) {
+  public static $table_name="assets";
+  
+  public static function name_to_db_name($name)
+  {
+    return preg_replace("/\s/","_",strtolower($name));
+  }
+  
+  public static function creating($custom_field) {
+    if(in_array($custom_field->db_column_name(),Schema::getColumnListing(CustomField::$table_name))) {
+      //field already exists when making a new custom field; fail.
+      return false;
+    }
+    return db::exec("ALTER TABLE ".CustomField::$table_name." ADD COLUMN (".$custom_field->db_column_name()." TEXT)");
+  }
+  
+  public static function updating($custom_field) {
     //print("    SAVING CALLBACK FIRING!!!!!    ");
     if($custom_field->isDirty("name")) {
       //print("DIRTINESS DETECTED!");
@@ -21,9 +37,11 @@ class CustomField extends Elegant
         
       }*/
       //print("Fields are: ".print_r($fields,true));
-      if(in_array($custom_field->db_column_name(),Schema::getColumnListing('assets'))) {
+      if(in_array($custom_field->db_column_name(),Schema::getColumnListing(CustomField::$table_name))) {
+        //field already exists when renaming a custom field
         return false;
       }
+      return db::exec("UPDATE ".CustomField::$table_name." RENAME ".self::name_to_db_name($custom_field->get_original("name"))." TO ".$custom_field->db_column_name());
     }
     return true;
   }
@@ -57,7 +75,7 @@ class CustomField extends Elegant
   }
   
   public function db_column_name() {
-    return preg_replace("/\s/","_",strtolower($this->name));
+    return self::name_to_db_name($this->name);
   }
   
   //mutators for 'format' attribute
