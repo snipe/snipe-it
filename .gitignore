@@ -25,10 +25,6 @@ public/uploads/logo.png
 public/assets/.siteflow
 app/config/local/session.php
 .couscous
+app/storage/dumps/*
 tests/_support/_generated/*
 tests/_data/scenarios
-nbproject/*
-app/config/local/ldap.php
-app/storage/dumps/*
-app/config/packages/schickling/backup/config.php
-app/config/app.backup.php

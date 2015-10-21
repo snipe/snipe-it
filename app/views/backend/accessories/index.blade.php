@@ -19,80 +19,16 @@
 <div class="user-profile">
     <div class="row profile">
         <div class="col-md-9 bio">
-            {{ Datatable::table()
-                ->addColumn(
-                            Lang::get('admin/accessories/general.accessory_category'),
-                            Lang::get('admin/accessories/table.title'),
-                            Lang::get('admin/accessories/general.total'),
-                            Lang::get('admin/accessories/general.remaining'),
-                            Lang::get('table.actions'))
-                ->setOptions(
-                        array(
-	                        'language' => array(
-			            	'search' => Lang::get('general.search'),
-			            	'lengthMenu' => Lang::get('general.page_menu'),
-			            	'loadingRecords' => Lang::get('general.loading'),
-			            	'zeroRecords' => Lang::get('general.no_results'),
-			            	'info' => Lang::get('general.pagination_info'),
-			            	'processing' => '<i class="fa fa-spinner fa-spin"></i> '.Lang::get('general.processing'),
-			            	'paginate'=> array(
-			            		'first'=>Lang::get('general.first'),
-			            		'previous'=>Lang::get('general.previous'),
-			            		'next'=>Lang::get('general.next'),
-			            		'last'=>Lang::get('general.last'),
-			            		),
-			            	),
-                            'sAjaxSource'=>route('api.accessories.list'),
-                            'dom' =>'T<"clear">lfrtip',
-                            'tableTools' => array(
-                                'sSwfPath'=> Config::get('app.url').'/assets/swf/copy_csv_xls_pdf.swf',
-                                'aButtons'=>array(
-                                    array(
-                                    	'sExtends'=>'copy',
-                                    	'sButtonText'=>'Copy',
-                                    	'mColumns'=>array(0,1,2),
-                                    	'bFooter'=>false,
-                                	),
-                                    array(
-                                    	'sExtends'=>'print',
-                                    	'sButtonText'=>'Print',
-                                    	'mColumns'=>array(0,1,2),
-                                    	'bShowAll'=>true,
-                                    	'bFooter'=>true,
-                                	),
-                                    array(
-                                        'sExtends'=>'collection',
-                                        'sButtonText'=>'Export',
-                                        'aButtons'=>array(
-                                            array(
-                                            	'sExtends'=>'csv',
-                                            	'sButtonText'=>'csv',
-                                            	'mColumns'=>array(0,1,2),
-                                            	'bFooter'=>false,
-                                        	),
-                                            array(
-                                            	'sExtends'=>'xls',
-                                            	'sButtonText'=>'XLS',
-                                            	'mColumns'=>array(0,1,2),
-                                            	'bFooter'=>false,
-                                        	),
-                                            array(
-                                            	'sExtends'=>'pdf',
-                                            	'sButtonText'=>'PDF',
-                                            	'mColumns'=>array(0,1,2),
-                                            	'bFooter'=>false,
-                                        	)
-                                        )
-                                    ),
-                                )
-                            ),
-                            'columnDefs'=> array(
-                                array('bSortable'=>false,'targets'=>array(3)),
-                                ),
-                            'order'=>array(array(0,'asc')),
-                        )
-                    )
-                ->render() }}
+            <table name="accessories" id="table" data-url="{{route('api.accessories.list')}}">
+                <thead>
+                    <tr>
+                        <th data-sortable="true" data-field="name">{{Lang::get('admin/accessories/table.title')}}</th>
+                        <th data-switchable="false" data-searchable="false" data-sortable="false" data-field="qty">{{Lang::get('admin/accessories/general.total')}}</th>
+                        <th data-switchable="false" data-searchable="false" data-sortable="false" data-field="numRemaining">{{Lang::get('admin/accessories/general.remaining')}}</th>
+                        <th data-switchable="false" data-searchable="false" data-sortable="false" data-field="actions">{{Lang::get('table.actions')}}</th>
+                    </tr>
+                </thead>
+            </table>
         </div>
 
 
@@ -105,4 +41,34 @@
         </div>
     </div>
 </div>
+
+<script type="text/javascript">
+    $('#table').bootstrapTable({
+        classes: 'table table-hover table-no-bordered',
+        undefinedText: 'undefined',
+        iconsPrefix: 'fa',
+        showRefresh: true,
+        search: true,
+        pageSize: {{{ Setting::getSettings()->per_page }}},
+        pagination: true,
+        sidePagination: 'server',
+        sortable: true,
+        mobileResponsive: true,
+        showExport: true,
+        showColumns: false,
+        maintainSelected: true,
+        paginationFirstText: "@lang('general.first')",
+        paginationLastText: "@lang('general.last')",
+        paginationPreText: "@lang('general.previous')",
+        paginationNextText: "@lang('general.next')",
+        pageList: ['10','25','50','100','150','200'],
+        icons: {
+            paginationSwitchDown: 'fa-caret-square-o-down',
+            paginationSwitchUp: 'fa-caret-square-o-up',
+            columns: 'fa-columns',
+            refresh: 'fa-refresh'
+        },
+    });
+</script>
+
 @stop

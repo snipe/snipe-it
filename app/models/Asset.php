@@ -1,10 +1,9 @@
 <?php
 
-    class Asset extends Depreciable
-    {
-
-        use SoftDeletingTrait;
-        protected $dates = [ 'deleted_at' ];
+class Asset extends Depreciable
+{
+	use SoftDeletingTrait;
+    protected $dates = ['deleted_at'];
 
         protected $table = 'assets';
         protected $errors;
@@ -381,28 +380,23 @@
 
             $settings = Setting::getSettings();
 
-            if ($settings->auto_increment_assets == '1') {
-                $asset_tag = DB::table( 'assets' )
-                               ->where( 'physical', '=', '1' )
-                               ->max( 'id' );
+		if ($settings->auto_increment_assets == '1') {
+			$asset_tag = DB::table('assets')
+				->where('physical', '=', '1')
+				->max('id');
+			return $settings->auto_increment_prefix.($asset_tag + 1);
+		} else {
+			return false;
+		}
+    }
 
-                return $settings->auto_increment_prefix . ( $asset_tag + 1 );
-            } else {
-                return false;
-            }
-        }
+    public function checkin_email() {
+        return $this->model->category->checkin_email;
+    }
 
-        public function checkin_email()
-        {
-
-            return $this->model->category->checkin_email;
-        }
-
-        public function requireAcceptance()
-        {
-
-            return $this->model->category->require_acceptance;
-        }
+    public function requireAcceptance() {
+	    return $this->model->category->require_acceptance;
+    }
 
         public function getEula()
         {
@@ -560,45 +554,92 @@
          * @return Illuminate\Database\Query\Builder          Modified query builder
          */
 
-        public function scopeDeleted( $query )
-        {
+	public function scopeDeleted($query)
+	{
+		return $query->whereNotNull('deleted_at');
+	}
+	
+/**
+	* Query builder scope to search on text
+	*
+	* @param  Illuminate\Database\Query\Builder  $query  Query builder instance
+	* @param  text                              $search    	 Search term
+	*
+	* @return Illuminate\Database\Query\Builder          Modified query builder
+	*/
+	public function scopeTextSearch($query, $search)
+	{
+		$search = explode('+', $search);
 
-            return $query->whereNotNull( 'deleted_at' );
-        }
+		return $query->where(function($query) use ($search)
+		{
+			foreach ($search as $search) {
+				$query->whereHas('model', function($query) use ($search) {
+					$query->whereHas('category', function($query) use ($search) {
+						$query->where(function($query) use ($search) {
+							$query->where('categories.name','LIKE','%'.$search.'%')
+							->orWhere('models.name','LIKE','%'.$search.'%');
+						});
+					});
+				})->orWhere(function($query) use ($search) {
+					$query->whereHas('assetstatus', function($query) use ($search) {
+						$query->where('name','LIKE','%'.$search.'%');
+					});
+				})->orWhere(function($query) use ($search) {
+					$query->whereHas('defaultLoc', function($query) use ($search) {
+						$query->where('name','LIKE','%'.$search.'%');
+					});
+				})->orWhere(function($query) use ($search) {
+					$query->whereHas('assigneduser', function($query) use ($search) {
+						$query->where(function($query) use ($search) {
+							$query->where('users.first_name','LIKE','%'.$search.'%')
+							->orWhere('users.last_name','LIKE','%'.$search.'%')
+							->orWhere(function($query) use ($search) {
+								$query->whereHas('userloc', function($query) use ($search) {
+									$query->where('locations.name','LIKE','%'.$search.'%');
+								});
+							});
+						});
+					});
+				})->orWhere(function($query) use ($search) {
+					$query->whereHas('assetlog', function($query) use ($search) {
+						$query->where('action_type','=','checkout')
+						->where('created_at','LIKE','%'.$search.'%');
+					});
+				})->orWhere('name','LIKE','%'.$search.'%')
+				->orWhere('asset_tag','LIKE','%'.$search.'%')
+				->orWhere('serial','LIKE','%'.$search.'%')
+				->orWhere('order_number','LIKE','%'.$search.'%')
+				->orWhere('notes','LIKE','%'.$search.'');
+			}
+		});
+	}
 
-        /**
-         * scopeInModelList
-         * Get all assets in the provided listing of model ids
-         *
-         * @param       $query
-         * @param array $modelIdListing
-         *
-         * @return mixed
-         * @author  Vincent Sposato <vincent.sposato@gmail.com>
-         * @version v1.0
-         */
-        public function scopeInModelList( $query, array $modelIdListing )
-        {
+	/**
+	* Query builder scope to order on model
+	*
+	* @param  Illuminate\Database\Query\Builder  $query  Query builder instance
+	* @param  text                              $order    	 Order
+	*
+	* @return Illuminate\Database\Query\Builder          Modified query builder
+	*/
+	public function scopeOrderModels($query, $order)
+	{
+		return $query->join('models', 'assets.model_id', '=', 'models.id')->orderBy('models.name', $order);
+	}
 
-            return $query->whereIn( 'model_id', $modelIdListing );
-        }
+	public function scopeOrderCheckout($query, $order)
+	{
+		return $query->join('asset_logs', function($join){
+            $join->on('assets.id', '=', 'asset_logs.asset_id');
+        })->where('asset_logs.action_type', '=', 'checkout')
+        ->orderBy('asset_logs.created_at', $order);
+	}
 
-        public function scopeNotYetAccepted( $query )
-        {
-
-            return $query->where( "accepted", "=", "pending" );
-        }
-
-        public function scopeRejected( $query )
-        {
-
-            return $query->where( "accepted", "=", "rejected" );
-        }
-
-        public function scopeAccepted( $query )
-        {
-
-            return $query->where( "accepted", "=", "accepted" );
-        }
-
-    }
+	public function scopeOrderCategory($query, $order)
+	{
+		return $query->join('models', 'assets.model_id', '=', 'models.id')
+            ->join('categories', 'models.category_id', '=', 'categories.id')
+            ->orderBy('categories.name', $order);
+	}
+}
