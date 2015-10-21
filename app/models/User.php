@@ -200,5 +200,28 @@ class User extends SentryUserModel
 
     }
 
+    /**
+	* Query builder scope to search on text
+	*
+	* @param  Illuminate\Database\Query\Builder  $query  Query builder instance
+	* @param  text                              $search    	 Search term
+	*
+	* @return Illuminate\Database\Query\Builder          Modified query builder
+	*/
+    public function scopeTextsearch($query, $q)
+	{
+
+			return $query->where(function($query) use ($q)
+			{
+
+			$query->orWhere('first_name', 'LIKE', "%$q%")
+					->orWhere('first_name', 'LIKE', "%$q%")
+                    ->orWhere('email', 'LIKE', "%$q%")
+                    ->orWhere('username', 'LIKE', "%$q%")
+					->orWhere('notes', 'LIKE', "%$q%");
+			});
+
+	}
+
 
 }
