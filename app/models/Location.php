@@ -29,7 +29,7 @@ class Location extends Elegant
     }
 
     public function parent() {
-        return $this->hasOne('Location', 'parent_id');
+        return $this->belongsTo('Location', 'parent_id');
     }
 
     public function childLocations() {
