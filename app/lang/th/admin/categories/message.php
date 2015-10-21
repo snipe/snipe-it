@@ -3,22 +3,22 @@
 return array(
 
     'does_not_exist' => 'ยังไม่มีหมวดหมู่',
-    'assoc_users'	 => 'This category is currently associated with at least one model and cannot be deleted. Please update your models to no longer reference this category and try again. ',
+    'assoc_users'	 => 'หมวดหมู่นี้มีความเกี่ยวข้องอยู่กับรายการอื่นอย่างน้อยหนึ่งรายการในปัจจุบัน และจะไม่สามารถลบได้ กรุณาแก้ไขโดยการเอาโมเดลดังกล่าวออกจากหมวดหมู่ที่เกี่ยวข้องหรืออ้างอิงอยู่ และลองใหม่อีกครั้ง. ',
 
     'create' => array(
-        'error'   => 'Category was not created, please try again.',
-        'success' => 'Category created successfully.'
+        'error'   => 'ยังไม่ได้สร้างหมวดหมู่ กรุณาลองอีกครั้ง.',
+        'success' => 'สร้างหมวดหมู่เรียบร้อยแล้ว.'
     ),
 
     'update' => array(
-        'error'   => 'Category was not updated, please try again',
-        'success' => 'Category updated successfully.'
+        'error'   => 'ยังไม่ได้ปรับปรุงหมวดหมู่ กรุณาลองอีกครั้ง',
+        'success' => 'ปรับปรุงหมวดหมู่เรียบร้อยแล้ว.'
     ),
 
     'delete' => array(
-        'confirm'   => 'Are you sure you wish to delete this category?',
-        'error'   => 'There was an issue deleting the category. Please try again.',
-        'success' => 'The category was deleted successfully.'
+        'confirm'   => 'คุณแน่ใจที่ต้องการจะลบหมวดหมู่นี้?',
+        'error'   => 'มีปัญหาขณะลบหมวดหมู่นี้ กรุณาลองอีกครั้ง.',
+        'success' => 'ลบหมวดหมู่เรียบร้อยแล้ว.'
     )
 
 );

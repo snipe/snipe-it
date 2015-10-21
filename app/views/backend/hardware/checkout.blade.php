@@ -33,15 +33,17 @@
                 </div>
             </div>
 
-			@if ($asset->name)
-            <!-- Asset name -->
-            <div class="form-group">
-            <label class="col-sm-2 control-label">@lang('admin/hardware/form.name')</label>
-                <div class="col-md-6">
-                  <p class="form-control-static">{{{ $asset->name }}}</p>
-                </div>
+
+
+            <!-- Asset Name -->
+            <div class="form-group {{ $errors->has('name') ? ' has-error' : '' }}">
+                <label for="name" class="col-md-2 control-label">@lang('admin/hardware/form.name')</label>
+                    <div class="col-md-7 col-sm-12">
+                        <input class="form-control" type="text" name="name" id="name" value="{{{ Input::old('name', $asset->name) }}}" />
+                        {{ $errors->first('name', '<br><span class="alert-msg"><i class="fa fa-times"></i> :message</span>') }}
+                    </div>
             </div>
-            @endif
+
 
             @if ($asset->model->name)
             <!-- Asset name -->

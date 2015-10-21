@@ -2,21 +2,21 @@
 
 return array(
 
-    'group_exists'        => 'Group already exists!',
-    'group_not_found'     => 'Group [:id] does not exist.',
-    'group_name_required' => 'The name field is required',
+    'group_exists'        => 'มีกลุ่มอยู่แล้ว',
+    'group_not_found'     => 'ไม่มีกลุ่ม [:id]',
+    'group_name_required' => 'ต้องกำหนดชื่อฟิลด์',
 
     'success' => array(
-        'create' => 'Group was successfully created.',
-        'update' => 'Group was successfully updated.',
-        'delete' => 'Group was successfully deleted.',
+        'create' => 'สร้างกลุ่มเรียบร้อยแล้ว',
+        'update' => 'ปรับปรุงกลุ่มเรียบร้อยแล้ว',
+        'delete' => 'ลบกลุ่มเรียบร้อยแล้ว',
     ),
 
     'delete' => array(
-        'confirm'   => 'Are you sure you wish to delete this group?',
-        'create' => 'There was an issue creating the group. Please try again.',
-        'update' => 'There was an issue updating the group. Please try again.',
-        'delete' => 'There was an issue deleting the group. Please try again.',
+        'confirm'   => 'คุณแน่ใจที่จะลบกลุ่มนี้?',
+        'create' => 'มีปัญหาระหว่างการสร้างกลุ่ม กรุณาลองใหม่อีกครั้ง',
+        'update' => 'มีปัญหาระหว่างปรับปรุงกลุ่ม กรุณาลองใหม่อีกครั้ง.',
+        'delete' => 'มีปัญหาระหว่างการลบกลุ่ม กรุณาลองใหม่อีกครั้ง.',
     ),
 
 );

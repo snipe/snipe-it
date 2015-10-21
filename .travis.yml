@@ -1,6 +1,6 @@
 addons:
     hosts:
-        - snipe-it.dev
+        - localhost
 sudo: false
 
 # see http://about.travis-ci.org/docs/user/languages/php/ for more hints
@@ -14,27 +14,30 @@ php:
 
 # optionally specify a list of environments, for example to test different RDBMS
 env:
-  - DB=mysql
+  - DB=mysql APP_ENV=travis-ci
 
 # execute any number of scripts before the test run, custom env's are available as variables
 before_script:
+  - hostname
   - if [[ "$DB" == "mysql" ]]; then mysql -e "create database IF NOT EXISTS snipeit_unit;" -utravis; fi
   - curl -s http://getcomposer.org/installer | php
-  - cp app/config/testing/app.example.php app/config/testing/app.php
-  - cp app/config/testing/database.example.php app/config/testing/database.php
-  - cp app/config/testing/mail.example.php app/config/testing/mail.php
+  - cp app/config/travis-ci/app.example.php app/config/travis-ci/app.php
+  - cp app/config/travis-ci/database.example.php app/config/travis-ci/database.php
+  - cp app/config/travis-ci/mail.example.php app/config/travis-ci/mail.php
   - composer self-update
   - composer install --prefer-source --no-interaction
-  - php artisan key:generate --env=testing
-  - php artisan migrate:install --env=testing --no-interaction -vvv
-  - php artisan migrate --package cartalyst/sentry --env=testing --no-interaction -vvv
-  - php artisan migrate --env=testing --no-interaction -vvv
-  - php artisan db:seed --env=testing --no-interaction -vvv
+  - php artisan key:generate
+  - php artisan migrate:install --no-interaction -vvv
+  - php artisan migrate --package cartalyst/sentry --no-interaction -vvv
+  - php artisan migrate --no-interaction -vvv
+  - php artisan db:seed --no-interaction -vvv
+  - ./vendor/bin/codecept build
+  - APP_ENV=travis-ci php artisan serve --port=8007 &
+  - sleep 5
 
 # omitting "script:" will default to phpunit
 # use the $DB env variable to determine the phpunit.xml to use
-# script: ./vendor/bin/codecept run
-script: phpunit
+script: ./vendor/bin/codecept run --env travis-ci -vvv
 
 # configure notifications (email, IRC, campfire etc)
 notifications:

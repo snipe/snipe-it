@@ -213,6 +213,7 @@
             <thead>
             <tr>
                 <th class="col-md-2">@lang('admin/asset_maintenances/table.supplier_name')</th>
+                <th class="col-md-2"><span class="line"></span>@lang('admin/asset_maintenances/form.title')</th>
                 <th class="col-md-2"><span class="line"></span>@lang('admin/asset_maintenances/form.asset_maintenance_type')</th>
                 <th class="col-md-2"><span class="line"></span>@lang('admin/asset_maintenances/form.start_date')</th>
                 <th class="col-md-2"><span class="line"></span>@lang('admin/asset_maintenances/form.completion_date')</th>
@@ -227,6 +228,7 @@
                 @if (is_null($assetMaintenance->deleted_at))
                 <tr>
                     <td><a href="{{ route('view/supplier', $assetMaintenance->supplier_id) }}">{{{ $assetMaintenance->supplier->name }}}</a></td>
+                    <td>{{{ $assetMaintenance->title }}}</td>
                     <td>{{{ $assetMaintenance->asset_maintenance_type }}}</td>
                     <td>{{{ $assetMaintenance->start_date }}}</td>
                     <td>{{{ $assetMaintenance->completion_date }}}</td>
@@ -435,7 +437,7 @@
                         @endif
                     <ul>
 
-                    	 @if (($asset->assetstatus->deployable=='1') && ($asset->assigned_to > 0) && ($asset->deleted_at==''))
+                    	 @if (($asset->assetstatus->deployable=='1') && ($asset->assigned_to > 0) && ($asset->deleted_at=='') && ($asset->assetlog->first()))
                     	 	@if ($asset->assetlog->first()->expected_checkin)
                                 <li><br />@lang('admin/hardware/form.expected_checkin')
                                     : {{{ date('Y-m-d', strtotime($asset->assetlog->first()->expected_checkin)) }}}</li>

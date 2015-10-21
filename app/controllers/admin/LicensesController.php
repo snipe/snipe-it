@@ -900,6 +900,12 @@ class LicensesController extends AdminController
         ->addColumn('serial', function($licenses) {
             return link_to('/admin/licenses/'.$licenses->id.'/view', mb_strimwidth($licenses->serial, 0, 50, "..."));
         })
+        ->addColumn('license_name', function($licenses) {
+            return $licenses->license_name;
+        })
+        ->addColumn('license_email', function($licenses) {
+            return $licenses->license_email;
+        })
         ->addColumn('totalSeats', function($licenses) {
             return $licenses->totalSeatsByLicenseID();
         })
@@ -909,9 +915,12 @@ class LicensesController extends AdminController
         ->addColumn('purchase_date', function($licenses) {
             return $licenses->purchase_date;
         })
+        ->addColumn('notes', function($licenses) {
+            return $licenses->notes;
+        })
         ->addColumn($actions)
-        ->searchColumns('name','serial','totalSeats','remaining','purchase_date','actions')
-        ->orderColumns('name','serial','totalSeats','remaining','purchase_date','actions')
+        ->searchColumns('name','serial','totalSeats','remaining','purchase_date','actions','notes','license_name','license_email')
+        ->orderColumns('name','serial','totalSeats','remaining','purchase_date','actions','notes','license_name','license_email')
         ->make();
     }
 

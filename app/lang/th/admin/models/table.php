@@ -2,16 +2,16 @@
 
 return array(
 
-    'create'				=> 'Create Asset Model',
-    'created_at' 			=> 'Created at',
-    'eol'	 				=> 'EOL',
-    'modelnumber'   		=> 'Model No.',
-    'name'      			=> 'Asset Model Name',
-    'numassets' 			=> 'Assets',
-    'title'					=> 'Asset Models',
-    'update'				=> 'Update Asset Model',
-    'view'					=> 'View Asset Model',
-    'update'				=> 'Update Asset Model',
-    'clone'				=> 'Clone Model',
-    'edit'				=> 'Edit Model',
+    'create'				=> 'สร้างโมเดล',
+    'created_at' 			=> 'สร้างที่',
+    'eol'	 				=> 'อายุการใช้งาน',
+    'modelnumber'   		=> 'หมายเลขโมเดล',
+    'name'      			=> 'ชื่อโมเดล',
+    'numassets' 			=> 'สินทรัพย์',
+    'title'					=> 'รุ่นทรัพย์สิน',
+    'update'				=> 'อัพเดทรุ่นสินทรัพย์',
+    'view'					=> 'ดูรุ่นสินทรัพย์',
+    'update'				=> 'อัพเดทรุ่นสินทรัพย์',
+    'clone'				=> 'คัดลอกแบบรุ่น',
+    'edit'				=> 'แก้ไขรุ่น',
 );

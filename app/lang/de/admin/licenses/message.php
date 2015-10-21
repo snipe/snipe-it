@@ -22,7 +22,7 @@ return array(
     'upload' => array(
         'error'   => 'Datei(en) wurden nicht hochgeladen. Bitte versuchen Sie es noch einmal.',
         'success' => 'Datei(en) erfolgreich hochgeladen.',
-        'nofiles' => 'You did not select any files for upload, or the file you are trying to upload is too large',
+        'nofiles' => 'Es wurde keine Datei für den Upload ausgewählt, oder die Datei ist zu groß',
         'invalidfiles' => 'Eine oder mehrere Ihrer Datei(en) sind zu groß oder ein Dateityp ist nicht erlaubt. Erlaubte Dateitypen sind png, gif, jpg, doc, docx, pdf, and txt.',
     ),
 

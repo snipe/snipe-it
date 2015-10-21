@@ -2,16 +2,16 @@
 
 return array(
 
-    'create'				=> 'Create Asset Model',
-    'created_at' 			=> 'Created at',
-    'eol'	 				=> 'EOL',
-    'modelnumber'   		=> 'Model No.',
-    'name'      			=> 'Asset Model Name',
-    'numassets' 			=> 'Assets',
-    'title'					=> 'Asset Models',
-    'update'				=> 'Update Asset Model',
-    'view'					=> 'View Asset Model',
-    'update'				=> 'Update Asset Model',
-    'clone'				=> 'Clone Model',
-    'edit'				=> 'Edit Model',
+    'create'				=> 'Criar Modelo de Artigo',
+    'created_at' 			=> 'Criado em',
+    'eol'	 				=> 'EOL (Fim de vida)',
+    'modelnumber'   		=> 'Modelo Nº ',
+    'name'      			=> 'Nome do Modelo de Artigo',
+    'numassets' 			=> 'Artigos',
+    'title'					=> 'Modelos de Artigo',
+    'update'				=> 'Atualizar Modelo de Artigo',
+    'view'					=> 'Ver Modelo de Artigo',
+    'update'				=> 'Atualizar Modelo de Artigo',
+    'clone'				=> 'Clonar Modelo',
+    'edit'				=> 'Editar Modelo',
 );

@@ -12,6 +12,9 @@ use Actionlog;
 use Lang;
 use Accessory;
 use DB;
+use Slack;
+use Setting;
+use Config;
 
 class ViewAssetsController extends AuthorizedController
 {
@@ -66,7 +69,38 @@ class ViewAssetsController extends AuthorizedController
             $logaction->user_id = Sentry::getUser()->id;
             $log = $logaction->logaction('requested');
 
-            return Redirect::route('requestable-assets')->with('success')->with('success', Lang::get('admin/hardware/message.asset_requested'));
+            $settings = Setting::getSettings();
+
+			if ($settings->slack_endpoint) {
+
+
+				$slack_settings = [
+				    'username' => $settings->botname,
+				    'channel' => $settings->slack_channel,
+				    'link_names' => true
+				];
+
+				$client = new \Maknz\Slack\Client($settings->slack_endpoint,$slack_settings);
+
+				try {
+						$client->attach([
+						    'color' => 'good',
+						    'fields' => [
+						        [
+						            'title' => 'REQUESTED:',
+						            'value' => strtoupper($logaction->asset_type).' asset <'.Config::get('app.url').'/hardware/'.$asset->id.'/view'.'|'.$asset->showAssetName().'> requested by <'.Config::get('app.url').'/hardware/'.$asset->id.'/view'.'|'.Sentry::getUser()->fullName().'>.'
+						        ]
+
+						    ]
+						])->send('Asset Requested');
+
+					} catch (Exception $e) {
+
+					}
+
+			}
+
+            return Redirect::route('requestable-assets')->with('success')->with('success', Lang::get('admin/hardware/message.requests.success'));
         }
 
 

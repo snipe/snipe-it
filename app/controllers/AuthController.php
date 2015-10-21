@@ -18,6 +18,50 @@ class AuthController extends BaseController
         return View::make('frontend.auth.signin');
     }
 
+
+    /**
+     * Authenticates a user to LDAP
+     *
+     * @return  true    if the username and/or password provided are valid
+     *          false   if the username and/or password provided are invalid
+     *
+     */
+    function ldap($username, $password) {
+
+        $ldaphost    = Config::get('ldap.url');
+        $ldaprdn     = Config::get('ldap.username');
+        $ldappass    = Config::get('ldap.password');
+        $baseDn      = Config::get('ldap.basedn');
+        $filterQuery = Config::get('ldap.authentication.filter.query') . $username;
+        $ldapversion = Config::get('ldap.version');
+
+	// Connecting to LDAP
+	$connection = ldap_connect($ldaphost) or die("Could not connect to {$ldaphost}");
+    // Needed for AD
+    ldap_set_option($connection, LDAP_OPT_REFERRALS, 0);
+    ldap_set_option($connection, LDAP_OPT_PROTOCOL_VERSION,$ldapversion);
+
+        try {
+            if ($connection) {
+                // binding to ldap server
+                $ldapbind = ldap_bind($connection, $ldaprdn, $ldappass);
+                if ( ($results = @ldap_search($connection, $baseDn, $filterQuery)) !==false ) {
+                    $entry = ldap_first_entry($connection, $results);
+                    if ( ($userDn = @ldap_get_dn($connection, $entry)) !== false ) {
+                        if( ($isBound = ldap_bind($connection, $userDn, $password)) == "true") {
+                            return true;
+                        }
+                    }
+                }
+            }
+        } catch (Exception $e) {
+            LOG::error($e->getMessage());
+        }
+	ldap_close($connection);
+	return false;
+    }
+
+
     /**
      * Account sign in form processing.
      *
@@ -41,8 +85,39 @@ class AuthController extends BaseController
         }
 
         try {
-            // Try to log the user in
-            Sentry::authenticate(Input::only('username', 'password'), Input::get('remember-me', 0));
+
+            /**
+             * =================================================================
+             * Hack in LDAP authentication
+             */
+
+            // Try to get the user from the database.
+            $user = (array) DB::table('users')->where('username', Input::get('username'))->first();
+
+            if ($user && strpos($user["notes"],'LDAP') !== false) {
+                LOG::debug("Authenticating user against LDAP.");
+                if( $this->ldap(Input::get('username'), Input::get('password')) ) {
+                        LOG::debug("valid login");
+                    $pass = substr(str_shuffle("0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"), 0, 10);
+                    $user = Sentry::findUserByLogin( Input::get('username') );
+                    $user->password = $pass;
+                    $user->save();
+                    $credentials = array(
+                        'username' => Input::get('username'),
+                        'password' => $pass,
+                    );
+                    Sentry::authenticate($credentials, Input::get('remember-me', 0));
+                }
+                else {
+                    throw new Cartalyst\Sentry\Users\UserNotFoundException();
+                }
+            }
+            /* ============================================================== */
+            else {
+                LOG::debug("Authenticating user against database.");
+                // Try to log the user in
+                Sentry::authenticate(Input::only('username', 'password'), Input::get('remember-me', 0));
+            }
 
             // Get the page we were before
             $redirect = Session::get('loginRedirect', 'account');
@@ -134,7 +209,9 @@ class AuthController extends BaseController
 
         try {
             // Get the user password recovery code
-            $user = Sentry::getUserProvider()->findByLogin(Input::get('username'));
+            if (!$user = Sentry::getUserProvider()->findByLogin(Input::get('username'))) {
+                $user = User::where('email','=',Input::get('username'));
+            }
 
             $reset = $user->getResetPasswordCode();
 
@@ -148,11 +225,14 @@ class AuthController extends BaseController
             $user->save();
 
 
-            // Send the activation code through username
-            Mail::send('emails.forgot-password', $data, function ($m) use ($user) {
-                $m->to($user->username, $user->first_name . ' ' . $user->last_name);
-                $m->subject('Account Password Recovery');
-            });
+            if ($user->email) {
+                // Send the activation code through username
+                Mail::send('emails.forgot-password', $data, function ($m) use ($user) {
+                    $m->to($user->email, $user->first_name . ' ' . $user->last_name);
+                    $m->subject('Account Password Recovery');
+                });
+            }
+
         } catch (Cartalyst\Sentry\Users\UserNotFoundException $e) {
             // Even though the username was not found, we will pretend
             // we have sent the password reset code through username,

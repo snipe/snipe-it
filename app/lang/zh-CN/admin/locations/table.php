@@ -12,6 +12,6 @@ return array(
     'address'		=> '地址',
     'zip'			=> '邮政编码',
     'locations'		=> '地理位置',
-    'parent'		=> 'Parent',
-    'currency'  	=> 'Location Currency', // this is deprecated
+    'parent'		=> '上级节点',
+    'currency'  	=> '当地货币单位', // this is deprecated
 );

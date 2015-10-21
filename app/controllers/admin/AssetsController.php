@@ -22,13 +22,14 @@ use Response;
 use Config;
 use Location;
 use Log;
-use DNS1D;
-use DNS2D;
 use Mail;
 use Datatable;
 use TCPDF;
 use Slack;
 use Manufacturer; //for embedded-create
+use Artisan;
+use Symfony\Component\Console\Output\BufferedOutput;
+
 
 class AssetsController extends AdminController
 {
@@ -62,7 +63,7 @@ class AssetsController extends AdminController
         $manufacturer_list = manufacturerList();
         $category_list = categoryList();
         $supplier_list = suppliersList();
-        $assigned_to = assignedToList();
+        $assigned_to = usersList();
         $statuslabel_types = statusTypeList();
 
         $view = View::make('backend/hardware/edit');
@@ -213,7 +214,7 @@ class AssetsController extends AdminController
         $manufacturer_list = manufacturerList();
         $category_list = categoryList();
         $supplier_list = suppliersList();
-        $assigned_to = assignedToList();
+        $assigned_to = usersList();
         $statuslabel_types = statusTypeList();
 
         return View::make('backend/hardware/edit', compact('asset'))
@@ -336,7 +337,7 @@ class AssetsController extends AdminController
         // Check if the asset exists
         if (is_null($asset = Asset::find($assetId))) {
             // Redirect to the asset management page with error
-            return Redirect::to('hardware')->with('error', Lang::get('admin/hardware/message.not_found'));
+            return Redirect::to('hardware')->with('error', Lang::get('admin/hardware/message.does_not_exist'));
         }
 
         if (isset($asset->assigneduser->id) && ($asset->assigneduser->id!=0)) {
@@ -368,11 +369,11 @@ class AssetsController extends AdminController
         // Check if the asset exists
         if (is_null($asset = Asset::find($assetId))) {
             // Redirect to the asset management page with error
-            return Redirect::to('hardware')->with('error', Lang::get('admin/hardware/message.not_found'));
+            return Redirect::to('hardware')->with('error', Lang::get('admin/hardware/message.does_not_exist'));
         }
 
         // Get the dropdown of users and then pass it to the checkout view
-        $users_list = array('' => Lang::get('general.select_user')) + DB::table('users')->select(DB::raw('concat(last_name,", ",first_name," (",username,")") as full_name, id'))->whereNull('deleted_at')->orderBy('last_name', 'asc')->orderBy('first_name', 'asc')->lists('full_name', 'id');
+        $users_list = usersList();
 
         return View::make('backend/hardware/checkout', compact('asset'))->with('users_list',$users_list);
 
@@ -386,7 +387,7 @@ class AssetsController extends AdminController
 
         // Check if the asset exists
         if (!$asset = Asset::find($assetId)) {
-            return Redirect::to('hardware')->with('error', Lang::get('admin/hardware/message.not_found'));
+            return Redirect::to('hardware')->with('error', Lang::get('admin/hardware/message.does_not_exist'));
         }
 
         // Declare the rules for the form validation
@@ -427,7 +428,7 @@ class AssetsController extends AdminController
         }
 
 
-        if ($asset->checkOutToUser($user, $admin, $checkout_at, $expected_checkin, e(Input::get('note')))) {
+        if ($asset->checkOutToUser($user, $admin, $checkout_at, $expected_checkin, e(Input::get('note')), e(Input::get('name')))) {
             // Redirect to the new asset page
             return Redirect::to("hardware")->with('success', Lang::get('admin/hardware/message.checkout.success'));
         }
@@ -448,7 +449,7 @@ class AssetsController extends AdminController
         // Check if the asset exists
         if (is_null($asset = Asset::find($assetId))) {
             // Redirect to the asset management page with error
-            return Redirect::to('hardware')->with('error', Lang::get('admin/hardware/message.not_found'));
+            return Redirect::to('hardware')->with('error', Lang::get('admin/hardware/message.does_not_exist'));
         }
 
         return View::make('backend/hardware/checkin', compact('asset'))->with('backto', $backto);
@@ -466,11 +467,15 @@ class AssetsController extends AdminController
         // Check if the asset exists
         if (is_null($asset = Asset::find($assetId))) {
             // Redirect to the asset management page with error
-            return Redirect::to('hardware')->with('error', Lang::get('admin/hardware/message.not_found'));
+            return Redirect::to('hardware')->with('error', Lang::get('admin/hardware/message.does_not_exist'));
         }
 
+        // Check for a valid user to checkout fa-random
+        // This will need to be tweaked for checkout to location
         if (!is_null($asset->assigned_to)) {
             $user = User::find($asset->assigned_to);
+        } else {
+            return Redirect::to('hardware')->with('error', Lang::get('admin/hardware/message.already_checked_in'));
         }
 
         // This is just used for the redirect
@@ -507,7 +512,6 @@ class AssetsController extends AdminController
 
 			if ($settings->slack_endpoint) {
 
-
 				$slack_settings = [
 				    'username' => $settings->botname,
 				    'channel' => $settings->slack_channel,
@@ -538,19 +542,19 @@ class AssetsController extends AdminController
 
 			}
 
-			$data['log_id'] = $logaction->id;
-            		$data['first_name'] = $user->first_name;
-            		$data['item_name'] = $asset->showAssetName();
-            		$data['checkin_date'] = $logaction->created_at;
-            		$data['item_tag'] = $asset->asset_tag;
-            		$data['note'] = $logaction->note;
+            $data['log_id'] = $logaction->id;
+            $data['first_name'] = $user->first_name;
+            $data['item_name'] = $asset->showAssetName();
+            $data['checkin_date'] = $logaction->created_at;
+            $data['item_tag'] = $asset->asset_tag;
+            $data['note'] = $logaction->note;
 
-            		if ((($asset->checkin_email()=='1')) && (!Config::get('app.lock_passwords'))) {
-                		Mail::send('emails.checkin-asset', $data, function ($m) use ($user) {
-                    			$m->to($user->email, $user->first_name . ' ' . $user->last_name);
-                    			$m->subject('Confirm Asset Checkin');
-                		});
-            		}
+            if ((($asset->checkin_email()=='1')) && ($user) && (!Config::get('app.lock_passwords'))) {
+                Mail::send('emails.checkin-asset', $data, function ($m) use ($user) {
+                	$m->to($user->email, $user->first_name . ' ' . $user->last_name);
+                	$m->subject('Confirm Asset Checkin');
+                });
+            }
 
 			if ($backto=='user') {
 				return Redirect::to("admin/users/".$return_to.'/view')->with('success', Lang::get('admin/hardware/message.checkin.success'));
@@ -607,31 +611,111 @@ class AssetsController extends AdminController
 
         if ($settings->qr_code == '1') {
             $asset = Asset::find($assetId);
+            $size = barcodeDimensions($settings->barcode_type);
 
             if (isset($asset->id,$asset->asset_tag)) {
-
-                if ($settings->barcode_type == 'C128'){
-		$content = DNS1D::getBarcodePNG(route('view/hardware', $asset->id), $settings->barcode_type,
-                    $this->barCodeDimensions['height'],$this->barCodeDimensions['width']);
-		}
-		else{
-                $content = DNS2D::getBarcodePNG(route('view/hardware', $asset->id), $settings->barcode_type,
-                    $this->qrCodeDimensions['height'],$this->qrCodeDimensions['width']);
-		}
-                $img = imagecreatefromstring(base64_decode($content));
-                imagepng($img);
-                imagedestroy($img);
-
-                $content_disposition = sprintf('attachment;filename=qr_code_%s.png', preg_replace('/\W/', '', $asset->asset_tag));
-                $response = Response::make($content, 200);
-                $response->header('Content-Type', 'image/png');
-                $response->header('Content-Disposition', $content_disposition);
-                return $response;
+                $barcode = new \Com\Tecnick\Barcode\Barcode();
+                $barcode_obj =  $barcode->getBarcodeObj($settings->barcode_type, route('view/hardware', $asset->id), $size['height'], $size['width'], 'black', array(-2, -2, -2, -2));
+                return $barcode_obj->getPngData();
             }
         }
 
-        $response = Response::make('', 404);
-        return $response;
+    }
+
+
+    public function getImportUpload() {
+
+        $path = app_path().'/private_uploads/imports/assets';
+        $files = array();
+
+        if ($handle = opendir($path)) {
+
+            /* This is the correct way to loop over the directory. */
+            while (false !== ($entry = readdir($handle))) {
+                clearstatcache();
+                if (substr(strrchr($entry,'.'),1)=='csv') {
+                    $files[] = array(
+                            'filename' => $entry,
+                            'filesize' => Setting::fileSizeConvert(filesize($path.'/'.$entry)),
+                            'modified' => filemtime($path.'/'.$entry)
+                        );
+                }
+
+            }
+            closedir($handle);
+            $files = array_reverse($files);
+        }
+
+        return View::make('backend/hardware/import')->with('files',$files);
+    }
+
+
+
+    public function postAPIImportUpload() {
+
+        if (!Config::get('app.lock_passwords')) {
+
+            $rules = array(
+                'files' => 'required'
+            );
+
+            $validator = Validator::make(Input::all(), $rules);
+
+            if ($validator->fails()) {
+                $messages = $validator->messages();
+                $results['error']=$messages->first('files');
+                return $results;
+
+            } else {
+                    $files = Input::file('files');
+                    $path = app_path().'/private_uploads/imports/assets';
+                    $results = array();
+
+                    foreach ($files as $file) {
+
+                        if (!in_array($file->getMimeType(), array(
+                            'application/vnd.ms-excel',
+                            'text/csv',
+                            'text/plain',
+                            'text/comma-separated-values',
+                            'text/tsv'))) {
+                            $results['error']='File type must be CSV';
+                            return $results;
+                        }
+
+                        $fixed_filename = str_replace(' ','-',$file->getClientOriginalName());
+                        $file->move($path, date('Y-m-d-his').'-'.$file->getClientOriginalName());
+                        $name = date('Y-m-d-his').'-'.$fixed_filename;
+                        $filesize = Setting::fileSizeConvert(filesize($path.'/'.$name));
+                        $results[] = compact('name', 'filesize');
+                    }
+            }
+
+        } else {
+
+            $results['error']=Lang::get('general.feature_disabled');
+            return $results;
+        }
+
+        return array(
+            'files' => $results
+        );
+
+
+    }
+
+    public function getProcessImportFile($filename) {
+        // php artisan asset-import:csv path/to/your/file.csv --domain=yourdomain.com --email_format=firstname.lastname
+
+        $output = new BufferedOutput;
+        Artisan::call('asset-import:csv', ['filename'=> app_path().'/private_uploads/imports/assets/'.$filename, '--email_format'=>'firstname.lastname', '--username_format'=>'firstname.lastname'], $output);
+        $display_output =  $output->fetch();
+        $file = app_path().'/private_uploads/imports/assets/'.str_replace('.csv','',$filename).'-output-'.date("Y-m-d-his").'.txt';
+        file_put_contents($file, $display_output);
+
+
+        return View::make('backend/hardware/import-status');
+
     }
 
     /**
@@ -655,7 +739,8 @@ class AssetsController extends AdminController
         $manufacturer_list = manufacturerList();
         $category_list = categoryList();
         $supplier_list = suppliersList();
-        $assigned_to = assignedToList();
+        $assigned_to = usersList();
+        $statuslabel_types = statusTypeList();
 
         $asset = clone $asset_to_clone;
         $asset->id = null;
@@ -667,6 +752,7 @@ class AssetsController extends AdminController
         ->with('supplier_list',$supplier_list)
         ->with('model_list',$model_list)
         ->with('statuslabel_list',$statuslabel_list)
+        ->with('statuslabel_types',$statuslabel_types)
         ->with('assigned_to',$assigned_to)
         ->with('asset',$asset)
         ->with('location_list',$location_list)
@@ -694,7 +780,7 @@ class AssetsController extends AdminController
 			return Redirect::route('hardware')->with('success', $success);
 
 		 } else {
-			 return Redirect::to('hardware')->with('error', Lang::get('admin/hardware/message.not_found'));
+			 return Redirect::to('hardware')->with('error', Lang::get('admin/hardware/message.does_not_exist'));
 		 }
 
     }
@@ -980,7 +1066,7 @@ class AssetsController extends AdminController
     public function getDatatable($status = null)
     {
 
-       $assets = Asset::with('model','assigneduser','assigneduser.userloc','assetstatus','defaultLoc','assetlog','model','model.category')->Hardware()->select(array('id', 'name','model_id','assigned_to','asset_tag','serial','status_id','purchase_date','deleted_at','rtd_location_id','notes','order_number','mac_address'));
+       $assets = Asset::with('model','assigneduser','assigneduser.userloc','assetstatus','defaultLoc','assetlog','model','model.category')->Hardware()->select(array('id', 'name','model_id','assigned_to','asset_tag','serial','status_id','purchase_date','deleted_at','rtd_location_id','notes','order_number','mac_address','warranty_months'));
 
 
       switch ($status) {
@@ -1019,7 +1105,7 @@ class AssetsController extends AdminController
       	{
         	if ($assets->deleted_at=='') {
         		return '<div style=" white-space: nowrap;"><a href="'.route('clone/hardware', $assets->id).'" class="btn btn-info btn-sm" title="Clone asset"><i class="fa fa-files-o"></i></a> <a href="'.route('update/hardware', $assets->id).'" class="btn btn-warning btn-sm"><i class="fa fa-pencil icon-white"></i></a> <a data-html="false" class="btn delete-asset btn-danger btn-sm" data-toggle="modal" href="'.route('delete/hardware', $assets->id).'" data-content="'.Lang::get('admin/hardware/message.delete.confirm').'" data-title="'.Lang::get('general.delete').' '.htmlspecialchars($assets->asset_tag).'?" onClick="return false;"><i class="fa fa-trash icon-white"></i></a></div>';
-        	} elseif ($assets->model->deleted_at=='') {
+        	} elseif ($assets->deleted_at!='') {
         		return '<a href="'.route('restore/hardware', $assets->id).'" class="btn btn-warning btn-sm"><i class="fa fa-recycle icon-white"></i></a>';
         	}
 

@@ -9,7 +9,7 @@ return array(
     'create' => array(
         'error'   => '모델이 생성되지 않았습니다. 다시 시도하세요.',
         'success' => '모델이 생성되었습니다.',
-        'duplicate_set' => 'An asset model with that name, manufacturer and model number already exists.',
+        'duplicate_set' => '이름, 제조사 그리고 모델 번호가 같은 자산 모델이 존재합니다.',
     ),
 
     'update' => array(

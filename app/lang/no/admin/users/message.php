@@ -2,14 +2,15 @@
 
 return array(
 
-    'accepted'                  => 'You have successfully accepted this asset.',
-    'declined'                  => 'You have successfully declined this asset.',
+    'accepted'                  => 'Du har akseptert eiendelen.',
+    'declined'                  => 'Du har avvist eiendelen.',
     'user_exists'               => 'Bruker finnes allerede!',
     'user_not_found'            => 'Bruker [:id] finnes ikke.',
     'user_login_required'       => 'Login-feltet er påkrevd',
     'user_password_required'    => 'Passord er påkrevd.',
     'insufficient_permissions'  => 'Utilstrekkelige rettigheter.',
     'user_deleted_warning'      => 'Denne brukeren er slettet. Du vil må gjenopprette denne brukeren for å redigere, eller tildele nye eiendeler.',
+    'ldap_not_configured'        => 'LDAP integrasjonen er ikke konfigurert i denne installasjonen.',
 
 
     'success' => array(
@@ -31,19 +32,23 @@ return array(
         'unsuspend' => 'Det oppstod et problem under aktivering av bruker. Prøv igjen.',
         'import'    => 'Det oppstod et problem under import av brukere. Prøv igjen.',
         'asset_already_accepted' => 'Denne eiendelen er allerede akseptert.',
-        'accept_or_decline' => 'You must either accept or decline this asset.',
+        'accept_or_decline' => 'Du må enten akseptere eller avvise denne eiendelen.',
+        'ldap_could_not_connect' => 'Kunne ikke kople til LDAP-serveren. Sjekk LDAP-innstillingene i konfigurasjonsfilen. <br>Feil fra LDAP-server:',
+        'ldap_could_not_bind' => 'Kunne ikke opprette tilkopling til LDAP-server. Sjekk LDAP-innstillingene i konfigurasjonsfilen. <br>Feil fra LDAP-server: ',
+        'ldap_could_not_search' => 'Kunne ikke utføre søk på LDAP-serveren. Sjekk LDAP-innstillingene i konfigurasjonsfilen. <br>Feil fra LDAP-server:',
+        'ldap_could_not_get_entries' => 'Fikk ingen oppføringer fra LDAP-serveren. Sjekk LDAP-innstillingene i konfigurasjonsfilen. <br>Feil fra LDAP-server:',
     ),
 
     'deletefile' => array(
-        'error'   => 'File not deleted. Please try again.',
-        'success' => 'File successfully deleted.',
+        'error'   => 'Fil ble ikke slettet. Prøv igjen.',
+        'success' => 'Fil ble slettet.',
     ),
 
     'upload' => array(
-        'error'   => 'File(s) not uploaded. Please try again.',
-        'success' => 'File(s) successfully uploaded.',
-        'nofiles' => 'You did not select any files for upload',
-        'invalidfiles' => 'One or more of your files is too large or is a filetype that is not allowed. Allowed filetypes are png, gif, jpg, doc, docx, pdf, and txt.',
+        'error'   => 'Fil(er) ble ikke lastet opp. Prøv igjen.',
+        'success' => 'Vellykket opplasting av fil(er).',
+        'nofiles' => 'Du valgte ingen filer for opplasting',
+        'invalidfiles' => 'En eller flere av filene dine er for store eller av en filtype som ikke er tillatt. Tillatte filtyper er png, gif, jpg, doc, docx, pdf og txt.',
     ),
 
 );

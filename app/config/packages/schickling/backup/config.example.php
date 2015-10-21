@@ -1,6 +1,6 @@
 <?php
 return array(
-	'path' => storage_path() . '/dumps/',
+	'path' => 'app/storage/dumps/',
 
 	'mysql' => array(
 		'dump_command_path' => '',

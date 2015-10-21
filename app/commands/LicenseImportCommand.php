@@ -315,7 +315,14 @@ class LicenseImportCommand extends Command {
 					// Create the license seat entries
 					$license_seat = new LicenseSeat();
 					$license_seat->license_id = $license->id;
-					$license_seat->assigned_to = $user->id;
+
+					// Only assign the first seat to the user
+					if ($x==0) {
+						$license_seat->assigned_to = $user->id;
+					} else {
+						$license_seat->assigned_to = NULL;
+					}
+
 					if ($license_seat->save()) {
 						$license_seat_created++;
 					}

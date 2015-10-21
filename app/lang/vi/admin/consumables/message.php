@@ -2,34 +2,34 @@
 
 return array(
 
-    'does_not_exist' => 'Consumable does not exist.',
+    'does_not_exist' => 'Vật tư phụ không tồn tại.',
 
     'create' => array(
-        'error'   => 'Consumable was not created, please try again.',
-        'success' => 'Consumable created successfully.'
+        'error'   => 'Vật tư phụ chưa tạo, xin vui lòng thử lại.',
+        'success' => 'Vật tư phụ đã tạo thành công.'
     ),
 
     'update' => array(
-        'error'   => 'Consumable was not updated, please try again',
-        'success' => 'Consumable updated successfully.'
+        'error'   => 'Vật tư phụ chưa cập nhật, xin vui lòng thử lại',
+        'success' => 'Vật tư phụ đã cập nhật thành công.'
     ),
 
     'delete' => array(
-        'confirm'   => 'Are you sure you wish to delete this accessory?',
-        'error'   => 'There was an issue deleting the consumable. Please try again.',
-        'success' => 'The accessory was deleted successfully.'
+        'confirm'   => 'Are you sure you wish to delete this consumable?',
+        'error'   => 'Có vấn đề khi xóa vật tư phụ. Xin vui lòng thử lại.',
+        'success' => 'The consumable was deleted successfully.'
     ),
 
      'checkout' => array(
-        'error'   		=> 'Consumable was not checked out, please try again',
-        'success' 		=> 'Consumable checked out successfully.',
-        'user_does_not_exist' => 'That user is invalid. Please try again.'
+        'error'   		=> 'Vật tư phụ chưa checkout, xin thử lại',
+        'success' 		=> 'Vật tư phụ đã checkout thành công.',
+        'user_does_not_exist' => 'Người dùng này không tồn tại. Xin vui lòng thử lại.'
     ),
 
     'checkin' => array(
-        'error'   		=> 'Consumable was not checked in, please try again',
-        'success' 		=> 'Consumable checked in successfully.',
-        'user_does_not_exist' => 'That user is invalid. Please try again.'
+        'error'   		=> 'Vật tư phụ chưa checkin, xin thử lại',
+        'success' 		=> 'Vật tư phụ đã checkin thành công.',
+        'user_does_not_exist' => 'Người dùng này không tồn tại. Xin vui lòng thử lại.'
     )
 
 

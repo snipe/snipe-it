@@ -11,7 +11,10 @@
 
 <div class="row header">
     <div class="col-md-12">
-	    <a href="{{ route('import/user') }}" class="btn btn-default pull-right"><span class="fa fa-upload"></span> Import</a>
+        @if (Config::get('ldap.url')!='')
+            <a href="{{ route('ldap/user') }}" class="btn btn-default pull-right"><span class="fa fa-upload"></span> LDAP</a>
+        @endif
+	<a href="{{ route('import/user') }}" class="btn btn-default pull-right" style="margin-right: 5px;"><span class="fa fa-upload"></span> @lang('general.import')</a>
         <a href="{{ route('create/user') }}" class="btn btn-success pull-right" style="margin-right: 5px;"><i class="fa fa-plus icon-white"></i>  @lang('general.create')</a>
          @if (Input::get('status')=='deleted')
             <a class="btn btn-default pull-right" href="{{ URL::to('admin/users') }}" style="margin-right: 5px;">@lang('admin/users/table.show_current')</a>
@@ -41,6 +44,7 @@
         ->addColumn('<div class="text-center"><input type="checkbox" id="checkAll" style="padding-left: 0px;"></div>',
     	    Lang::get('admin/users/table.name'),
     	    '<i class="fa fa-envelope fa-lg"></i>',
+            Lang::get('admin/users/table.username'),
     	    Lang::get('admin/users/table.manager'),
             Lang::get('admin/users/table.location'),
             '<i class="fa fa-barcode fa-lg"></i>',

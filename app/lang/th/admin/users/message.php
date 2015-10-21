@@ -2,14 +2,15 @@
 
 return array(
 
-    'accepted'                  => 'You have successfully accepted this asset.',
-    'declined'                  => 'You have successfully declined this asset.',
+    'accepted'                  => 'คุณยอมรับสินทรัพย์นี้เรียบร้อยแล้ว',
+    'declined'                  => 'คุณปฏิเสธสินทรัพย์นี้เรียบร้อยแล้ว',
     'user_exists'               => 'มีผู้ใช้งานนี้แล้ว',
     'user_not_found'            => 'ไม่มีชื่อผู้ใช้งานนี้',
     'user_login_required'       => 'ต้องการชื่อผู้ใช้งาน',
     'user_password_required'    => 'ต้องการรหัสผ่าน',
     'insufficient_permissions'  => 'สิทธิ์การใช้งานไม่เพียงพอ',
     'user_deleted_warning'      => 'ผู้ใช้งานนี้ถูกลบแล้ว คุณจำเป็นต้องกู้คืนผู้ใช้งานก่อนแก้ไข',
+    'ldap_not_configured'        => 'การทำงานร่วมกับ LDAP ไม่ได้ถูกตั้งค่าไว้สำหรับการติดตั้งนี้',
 
 
     'success' => array(
@@ -31,19 +32,23 @@ return array(
         'unsuspend' => 'มีปัญหาระหว่างการยกเลิกการระงับผู้ใช้งาน กรุณาลองใหม่อีกครั้ง',
         'import'    => 'มีปัญหาระหว่างการนำเข้าผู้ใช้งาน กรุณาลองใหม่อีกครั้ง',
         'asset_already_accepted' => 'ทรัพย์สินนี้ได้รับการยอมรับแล้ว',
-        'accept_or_decline' => 'You must either accept or decline this asset.',
+        'accept_or_decline' => 'คุณต้องยอมรับ หรือปฏิเสธสินทรัพย์นี้',
+        'ldap_could_not_connect' => 'ไม่สามารถเชื่อมต่อกับ LDAP Server ได้ กรุณาตรวจสอบการตั้งค่า LDAP Server ของคุณในไฟล์ตั้งค่า LDAP <br>ผิดพลาดจาก LDAP Server:',
+        'ldap_could_not_bind' => 'ไม่สามารถผูกกับ LDAP Server ได้ กรุณาตรวจสอบการตั้งค่า LDAP Server ของคุณในไฟล์ตั้งค่า LDAP <br>ผิดพลาดจาก LDAP Server: ',
+        'ldap_could_not_search' => 'ไม่สามารถค้นหา LDAP Server ได้ กรุณาตรวจสอบการตั้งค่า LDAP Server ของคุณในไฟล์ตั้งค่า LDAP <br>ผิดพลาดจาก LDAP Server:',
+        'ldap_could_not_get_entries' => 'ไม่สามารถดึงข้อมูลจาก LDAP Server ได้ กรุณาตรวจสอบการตั้งค่า LDAP Server ของคุณในไฟล์ตั้งค่า LDAP <br>ผิดพลาดจาก LDAP Server:',
     ),
 
     'deletefile' => array(
-        'error'   => 'File not deleted. Please try again.',
-        'success' => 'File successfully deleted.',
+        'error'   => 'ไฟล์ยังไม่ถูกลบ กรุณาลองใหม่อีกครั้ง',
+        'success' => 'ไฟล์ถูกลบเรียบร้อยแล้ว',
     ),
 
     'upload' => array(
-        'error'   => 'File(s) not uploaded. Please try again.',
-        'success' => 'File(s) successfully uploaded.',
-        'nofiles' => 'You did not select any files for upload',
-        'invalidfiles' => 'One or more of your files is too large or is a filetype that is not allowed. Allowed filetypes are png, gif, jpg, doc, docx, pdf, and txt.',
+        'error'   => 'ไฟล์ยังไม่ถูกอัพโหลด กรุณาลองอีกครั้ง',
+        'success' => 'ไฟล์ถูกอัพโหลดเรียบร้อยแล้ว',
+        'nofiles' => 'คุณยังไม่ได้เลือกไฟล์สำหรับอัพโหลด',
+        'invalidfiles' => 'ไฟล์ข้อมูลของคุณมีขนาดใหญ่เกินไป หรือประเภทของไฟล์ไม่ได้รับการอนุญาต ประเภทของไฟล์ที่ได้รับอนุญาตแล้วมีดังนี้ png, gif, jpg, doc, docx, pdf, and txt.',
     ),
 
 );

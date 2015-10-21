@@ -18,7 +18,7 @@ class SystemBackup extends Command {
 	 *
 	 * @var string
 	 */
-	protected $description = 'This commandcreates a database dump and zips up all of the uploaded files in the upload directories.';
+	protected $description = 'This command creates a database dump and zips up all of the uploaded files in the upload directories.';
 
 	/**
 	 * Create a new command instance.

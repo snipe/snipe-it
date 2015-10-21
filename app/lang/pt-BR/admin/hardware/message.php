@@ -4,7 +4,7 @@ return array(
 
     'undeployable' 		=> '<strong>Aviso:</strong> Este ativo foi marcado como atualmente não implementável.                        Se este status mudou, atualize o status do ativo.',
     'does_not_exist' 	=> 'O ativo não existe.',
-    'does_not_exist_or_not_requestable' => 'Nice try. That asset does not exist or is not requestable.',
+    'does_not_exist_or_not_requestable' => 'Boa tentativa. Este ativo não existe ou não pode ser requisitado.',
     'assoc_users'	 	=> 'Este bem está no momento associado com pelo menos um usuário e não pode ser deletado. Por favor, atualize seu bem para que não referencie mais este usuário e tente novamente. ',
 
     'create' => array(
@@ -31,7 +31,7 @@ return array(
     'upload' => array(
         'error'   => 'O(s) arquivo(s) não foi/foram carregado(s). Tente novamente.',
         'success' => 'Arquivo(s) carregado(s) com sucesso.',
-        'nofiles' => 'You did not select any files for upload, or the file you are trying to upload is too large',
+        'nofiles' => 'Você não selecionou arquivos para carregar, ou o arquivo que você esta tentando carrega é muito grande',
         'invalidfiles' => 'Um ou mais de seus arquivos é muito grande ou está em um tipo de arquivo não permitido. Os tipos permitidos são png, gif, jpg, doc, docx, pdf, e txt.',
     ),
 

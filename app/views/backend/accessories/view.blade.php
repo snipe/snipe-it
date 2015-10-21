@@ -32,7 +32,7 @@
                             <!-- checked out accessories table -->
                             @if ($accessory->users->count() > 0)
                              {{ Datatable::table()
-                ->addColumn(Lang::get('general.user'), 
+                ->addColumn(Lang::get('general.user'),
                             Lang::get('table.actions'))
                 ->setOptions(
                         array(
@@ -60,7 +60,7 @@
                                             ),
                                         ),
                                     ),
-                                ) 
+                                )
                             ),
                             'columnDefs'=> array(
                                 array('bSortable'=>false,'targets'=>array(1)),
@@ -84,6 +84,10 @@
 
 <!-- side address column -->
 <div class="col-md-3 col-xs-12 address pull-right">
+    <div class="text-center">
+        <a href="{{ route('checkout/accessory', $accessory->id) }}" style="margin-right:5px;" class="btn btn-info btn-sm" {{ (($accessory->numRemaining() > 0 ) ? '' : ' disabled') }}>@lang('general.checkout')</a>
+    </div>
+
     <br /><br />
     <h6>@lang('admin/accessories/general.about_accessories_title')</h6>
     <p>@lang('admin/accessories/general.about_accessories_text') </p>

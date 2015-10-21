@@ -2,34 +2,34 @@
 
 return array(
 
-    'does_not_exist' => 'Consumable does not exist.',
+    'does_not_exist' => 'ไม่มีรายการวัสดุสิ้นเปลืองนี้',
 
     'create' => array(
-        'error'   => 'Consumable was not created, please try again.',
-        'success' => 'Consumable created successfully.'
+        'error'   => 'ยังไม่ได้สร้างวัสดุสิ้นเปลือง กรุณาลองใหม่อีกครั้ง',
+        'success' => 'สร้างวัสดุสิ้นเปลืองเรียบร้อยแล้ว'
     ),
 
     'update' => array(
-        'error'   => 'Consumable was not updated, please try again',
-        'success' => 'Consumable updated successfully.'
+        'error'   => 'ยังไม่ได้ปรับปรุงวัสดุสิ้นเปลือง กรุณาลองใหม่อีกครั้ง',
+        'success' => 'ปรับปรุงวัสดุสิ้นเปลืองเรียบร้อยแล้ว.'
     ),
 
     'delete' => array(
-        'confirm'   => 'Are you sure you wish to delete this accessory?',
-        'error'   => 'There was an issue deleting the consumable. Please try again.',
-        'success' => 'The accessory was deleted successfully.'
+        'confirm'   => 'Are you sure you wish to delete this consumable?',
+        'error'   => 'มีปัญหาระหว่างการลบวัสดุสิ้นเปลือง กรุณาลองอีกครั้ง',
+        'success' => 'The consumable was deleted successfully.'
     ),
 
      'checkout' => array(
-        'error'   		=> 'Consumable was not checked out, please try again',
-        'success' 		=> 'Consumable checked out successfully.',
-        'user_does_not_exist' => 'That user is invalid. Please try again.'
+        'error'   		=> 'วัสดุสิ้นเปลืองยังไม่ถูกเช็คเอ้าท์ กรุณาลองใหม่อีกครั้ง',
+        'success' 		=> 'เช็คเอ้าท์วัสดุสิ้นเปลืองแล้ว',
+        'user_does_not_exist' => 'ผู้ใช้งานไม่ถูกต้อง กรุณาลองใหม่อีกครั้ง.'
     ),
 
     'checkin' => array(
-        'error'   		=> 'Consumable was not checked in, please try again',
-        'success' 		=> 'Consumable checked in successfully.',
-        'user_does_not_exist' => 'That user is invalid. Please try again.'
+        'error'   		=> 'วัสดุสิ้นเปลืองยังไม่ถูกเช็คอิน กรุณาลองใหม่อีกครั้ง',
+        'success' 		=> 'เช็คอินวัสดุสิ้นเปลืองแล้ว.',
+        'user_does_not_exist' => 'ผู้ใช้งานไม่ถูกต้อง กรุณาลองใหม่อีกครั้ง.'
     )
 
 

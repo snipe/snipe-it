@@ -9,7 +9,7 @@ return array(
     'create' => array(
         'error'   => 'Modellen ble ikke opprettet. Prøv igjen.',
         'success' => 'Opprettelse av modell var vellykket.',
-        'duplicate_set' => 'An asset model with that name, manufacturer and model number already exists.',
+        'duplicate_set' => 'En eiendel med dette navnet, produsenten og modelnummeret eksisterer allerede.',
     ),
 
     'update' => array(

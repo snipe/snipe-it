@@ -2,35 +2,35 @@
 
 return array(
 
-    'account_already_exists' => 'An account with the this email already exists.',
-    'account_not_found'      => 'The username or password is incorrect.',
-    'account_not_activated'  => 'This user account is not activated.',
-    'account_suspended'      => 'This user account is suspended.',
-    'account_banned'         => 'This user account is banned.',
+    'account_already_exists' => 'Tài khoản với email này đã thực sự tồn tại.',
+    'account_not_found'      => 'Tên đăng nhập hoặc mật khẩu không đúng.',
+    'account_not_activated'  => 'Tài khoản người dùng này chưa được kích hoạt.',
+    'account_suspended'      => 'Tài khoản người dùng này đã bị tạm ngưng.',
+    'account_banned'         => 'Tài khoản người dùng này đã bị cấm.',
 
     'signin' => array(
-        'error'   => 'There was a problem while trying to log you in, please try again.',
-        'success' => 'You have successfully logged in.',
+        'error'   => 'Có vấn đề khi bạn có gắng đăng nhập, xin thử lại.',
+        'success' => 'Bạn đã đăng nhập thành công.',
     ),
 
     'signup' => array(
-        'error'   => 'There was a problem while trying to create your account, please try again.',
-        'success' => 'Account sucessfully created.',
+        'error'   => 'Có vấn đề khi cố gắng tạo tài khoản của bạn, xin thử lại.',
+        'success' => 'Tài khoản đã được tạo thành công.',
     ),
 
         'forgot-password' => array(
-            'error'   => 'There was a problem while trying to get a reset password code, please try again.',
-            'success' => 'Password recovery email successfully sent.',
+            'error'   => 'Có vấn đề khi cố gắng nhận một mã phục hồi mật khẩu, xin thử lại.',
+            'success' => 'Đã gửi đến email phuc hồi mật khẩu thành công.',
         ),
 
         'forgot-password-confirm' => array(
-            'error'   => 'There was a problem while trying to reset your password, please try again.',
-            'success' => 'Your password has been successfully reset.',
+            'error'   => 'Có vấn đề khi cố gắng khởi tạo lại mật khẩu của bạn, xin thử lại lần nữa.',
+            'success' => 'Mật khẩu của bạn đã được khởi tạo lại thành công.',
         ),
 
     'activate' => array(
-        'error'   => 'There was a problem while trying to activate your account, please try again.',
-        'success' => 'Your account has been successfully activated.',
+        'error'   => 'Có vấn đề khi cố gắng kích hoạt tài khoản của bạn, xin thử lại.',
+        'success' => 'Tài khoản của bạn đã được kích hoạt thành công.',
     ),
 
 );

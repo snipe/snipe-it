@@ -2,9 +2,9 @@
 
 return array(
 
-    'actions'	 	=> 'Actions',
-    'action' 		=> 'Action',
-    'by'      		=> 'By',
+    'actions'	 	=> 'Ações',
+    'action' 		=> 'Ação',
+    'by'      		=> 'Por',
     'item' 			=> 'Item',
 
 );

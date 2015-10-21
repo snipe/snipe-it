@@ -3,6 +3,7 @@
     return [
     'accessories'			=> 'Příslušenství',
     'accessory'				=> 'Příslušenství',
+    'accessory_report'			=> 'Accessory Report',
     'action'                => 'Akce',
     'activity_report'		=> 'Report aktivity',
     'address'				=> 'Adresa',
@@ -59,6 +60,7 @@
     'id'  					=> 'ID',
     'image_delete'         	=> 'Smazat obrázek',
     'image_upload'         	=> 'Nahrát obrázek',
+    'import'         	    => 'Import',
     'asset_maintenance'        => 'Asset Maintenance',
     'asset_maintenance_report' => 'Asset Maintenance Report',
     'asset_maintenances'       => 'Asset Maintenances',

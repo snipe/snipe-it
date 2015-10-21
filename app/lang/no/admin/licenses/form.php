@@ -15,7 +15,7 @@ return array(
     'notes'             => 'Notater',
     'order'             => 'Ordrenummer',
     'purchase_order'    => 'Innkjøpsordrenummer',
-    'reassignable'      => 'Reassignable',
+    'reassignable'      => 'Kan tildeles på ny',
     'remaining_seats'   => 'Gjenværende setelisenser',
     'seats'             => 'Setelisenser',
     'serial'            => 'Serienummer',

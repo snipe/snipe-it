@@ -2,20 +2,20 @@
 
 return array(
 
-    'asset_tag'   	=> 'Asset Tag',
+    'asset_tag'   	=> 'Asset tag',
     'asset_model'       => 'Model',
-    'book_value'  	=> 'Value',
-    'change' 		=> 'In/Out',
+    'book_value'  	=> 'Waarde',
+    'change' 		=> 'In/out',
     'checkout_date' => 'Checkout Date',
     'checkoutto' 	=> 'Checked Out',
     'diff' 			=> 'Diff',
-    'dl_csv' 		=> 'Download CSV',
+    'dl_csv' 		=> 'CSV downloaden',
     'eol' 			=> 'EOL',
     'id'      		=> 'ID',
-    'location' 		=> 'Location',
-    'purchase_cost'	=> 'Cost',
-    'purchase_date'	=> 'Purchased',
-    'serial'   		=> 'Serial',
+    'location' 		=> 'Locatie',
+    'purchase_cost'	=> 'Kostprijs',
+    'purchase_date'	=> 'Aangekocht',
+    'serial'   		=> 'Serienummer',
     'status'   		=> 'Status',
     'title'      	=> 'Asset ',
     'days_without_acceptance' => 'Days Without Acceptance'

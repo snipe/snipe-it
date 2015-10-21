@@ -2,24 +2,24 @@
 
 return array(
 
-    'does_not_exist' => 'Location does not exist.',
-    'assoc_users'	 => 'This location is currently associated with at least one user and cannot be deleted. Please update your users to no longer reference this location and try again. ',
+    'does_not_exist' => 'Localização não existe.',
+    'assoc_users'	 => 'Esta localização está atualmente associada com pelo menos um utilizador e não pode ser removida. Atualize este utilizadores de modo a não referenciarem mais este local e tente novamente. ',
 
 
     'create' => array(
-        'error'   => 'Location was not created, please try again.',
-        'success' => 'Location created successfully.'
+        'error'   => 'Não foi possível criar a localização. Por favor, tente novamente.',
+        'success' => 'Localização criada com sucesso.'
     ),
 
     'update' => array(
-        'error'   => 'Location was not updated, please try again',
-        'success' => 'Location updated successfully.'
+        'error'   => 'A localização não foi atualizada. Por favor, tente novamente',
+        'success' => 'Localização atualizada com sucesso.'
     ),
 
     'delete' => array(
-        'confirm'   => 'Are you sure you wish to delete this status label?',
-        'error'   => 'There was an issue deleting the location. Please try again.',
-        'success' => 'The location was deleted successfully.'
+        'confirm'   => 'Tem que a certeza que pretende criar este Estado?',
+        'error'   => 'Ocorreu um problema ao remover esta localização. Por favor, tente novamente.',
+        'success' => 'A localização foi removida com sucesso.'
     )
 
 );

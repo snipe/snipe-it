@@ -316,6 +316,7 @@ Form::macro('currencies', function ($name = "currency", $selected = null, $class
     '€'=>'€',
     '₠'=>"₠",
     '₡'=>'₡',
+    'RM'=>'RM',
     '₣'=>'₣',
     '₤'=>'₤',
     '₥'=>'₥',
@@ -335,6 +336,28 @@ Form::macro('currencies', function ($name = "currency", $selected = null, $class
     $select = '<select name="'.$name.'" class="'.$class.'">';
     foreach ($currencies as $currency) {
         $select .= '<option value="'.$currency.'"'.($selected == $currency ? ' selected="selected"' : '').'>'.$currency.'</option> ';
+    }
+
+    $select .= '</select>';
+
+    return $select;
+
+});
+
+
+
+Form::macro('barcode_types', function ($name = "barcode_type", $selected = null, $class = null) {
+
+    $barcode_types = array(
+        'C128',
+        'DATAMATRIX',
+        'PDF417',
+        'QRCODE',
+    );
+
+    $select = '<select name="'.$name.'" class="'.$class.'">';
+    foreach ($barcode_types as $barcode_type) {
+        $select .= '<option value="'.$barcode_type.'"'.($selected == $barcode_type ? ' selected="selected"' : '').'>'.$barcode_type.'</option> ';
     }
 
     $select .= '</select>';

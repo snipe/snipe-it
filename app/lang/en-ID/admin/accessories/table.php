@@ -1,9 +1,11 @@
 <?php
 
 return array(
+	'dl_csv'      				=> 'Unduh CSV',
 	'eula_text'      			=> 'EULA',
     'id'      					=> 'ID',
-    'require_acceptance'      	=> 'Acceptance',
-    'title'      				=> 'Accessory Name',
+    'require_acceptance'      	=> 'Penerimaan',
+    'title'      				=> 'Nama Aksesoris',
+
 
 );

@@ -6,7 +6,7 @@ return array(
     'checkout_history'  		=> 'Utsjekkhistorikk',
     'checkout'  				=> 'Sjekk ut setelisens',
     'edit'  					=> 'Rediger lisens',
-    'filetype_info'				=> 'Allowed filetypes are png, gif, jpg, jpeg, doc, docx, pdf, txt, zip, and rar.',
+    'filetype_info'				=> 'Gyldige filtyper er png, gif, jpg, jpeg, doc docx, pdf, txt, zip og rar.',
     'clone'  					=> 'Klon lisens',
     'history_for'  				=> 'Historikk for ',
     'in_out'  					=> 'Inne/ute',

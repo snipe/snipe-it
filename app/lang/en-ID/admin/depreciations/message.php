@@ -2,24 +2,24 @@
 
 return array(
 
-    'does_not_exist' => 'Depreciation class does not exist.',
-    'assoc_users'	 => 'This depreciation is currently associated with one or more models and cannot be deleted. Please delete the models, and then try deleting again. ',
+    'does_not_exist' => 'Kelas penyusutan tidak ada.',
+    'assoc_users'	 => 'Penyusutan ini terkait dengan satu atau lebih model dan tidak dapat dihapus. Hapus model, dan kemudian coba hapus lagi. ',
 
 
     'create' => array(
-        'error'   => 'Depreciation class was not created, please try again. :(',
-        'success' => 'Depreciation class created successfully. :)'
+        'error'   => 'Kelas depresiasi gagal dibuat, silakan coba lagi. :(',
+        'success' => 'Kelas penyusutan berhasil dibuat. :)'
     ),
 
     'update' => array(
-        'error'   => 'Depreciation class was not updated, please try again',
-        'success' => 'Depreciation class updated successfully.'
+        'error'   => 'Kelas depresiasi gagal diperbarui, silakan coba lagi',
+        'success' => 'Kelas penyusutan berhasil diperbarui.'
     ),
 
     'delete' => array(
-        'confirm'   => 'Are you sure you wish to delete this depreciation class?',
-        'error'   => 'There was an issue deleting the depreciation class. Please try again.',
-        'success' => 'The depreciation class was deleted successfully.'
+        'confirm'   => 'Apakah Anda yakin ingin menghapus kelas depresiasi ini?',
+        'error'   => 'Ada masalah menghapus kelas penyusutan. Silakan coba lagi.',
+        'success' => 'Kelas depresiasi berhasil dihapus.'
     )
 
 );

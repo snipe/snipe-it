@@ -1,17 +1,17 @@
 <?php
 
     return [
-        'not_found'                    => 'Asset Maintenance you were looking for was not found!',
+        'not_found'                    => '未找到你查询的资产维护信息！',
         'delete'                       => [
-            'confirm' => 'Are you sure you wish to delete this asset maintenance?',
-            'error'   => 'There was an issue deleting the asset maintenance. Please try again.',
-            'success' => 'The asset maintenance was deleted successfully.'
+            'confirm' => ' 你确定要删除这条资产维护信息吗？',
+            'error'   => '资产维护信息删除失败，请稍后重试',
+            'success' => '资产维护信息已删除'
         ],
         'create'                       => [
-            'error'   => 'Asset Maintenance was not created, please try again.',
-            'success' => 'Asset Maintenance created successfully.'
+            'error'   => '资产维护信息创建失败，请重试',
+            'success' => '资产维护信息已创建。'
         ],
-        'asset_maintenance_incomplete' => 'Not Completed Yet',
-        'warranty'                     => 'Warranty',
-        'not_warranty'                 => 'Not Warranty',
+        'asset_maintenance_incomplete' => '尚未完成',
+        'warranty'                     => '有质保',
+        'not_warranty'                 => '无质保',
     ];

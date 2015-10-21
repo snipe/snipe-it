@@ -1,12 +1,12 @@
 <?php
 
 return array(
-    'about_asset_depreciations'  			=> 'About Asset Depreciations',
-    'about_depreciations'  					=> 'You can set up asset depreciations to depreciate assets based on straight-line depreciation.',
-    'asset_depreciations'  					=> 'Asset Depreciations',
-    'create_depreciation'  					=> 'Create Depreciation',
-    'depreciation_name'  					=> 'Depreciation Name',
-    'number_of_months'  					=> 'Number of Months',
-    'update_depreciation'  					=> 'Update Depreciation',
+    'about_asset_depreciations'  			=> 'เกี่ยวกับค่าเสื่อมราคาสินทรัพย์',
+    'about_depreciations'  					=> 'คุณสามารถกำหนดการคิดค่าเสื่อมราคาเพื่อตัดค่าเสื่อมราคาโดยวิธีการคิดค่าเสื่อมราคาแบบเส้นตรง',
+    'asset_depreciations'  					=> 'ค่าเสื่อมราคาสินทรัพย์',
+    'create_depreciation'  					=> 'สร้างค่าเสื่อมราคา',
+    'depreciation_name'  					=> 'ชื่อค่าเสื่อมราคา',
+    'number_of_months'  					=> 'จำนวนเดือน',
+    'update_depreciation'  					=> 'ปรับปรุงค่าเสื่อมราคา',
 
 );

@@ -15,9 +15,9 @@ return array(
     ),
 
     'delete' => array(
-        'confirm'   => 'Tem certeza de que deseja excluir este acessório ?',
+        'confirm'   => 'Você realmente quer apagar este suprimento?',
         'error'   => 'Houve um problema ao excluir o consumível. Por favor, tente novamente.',
-        'success' => 'O acessório foi excluído com sucesso.'
+        'success' => 'O suprimento foi deletado com sucesso.'
     ),
 
      'checkout' => array(

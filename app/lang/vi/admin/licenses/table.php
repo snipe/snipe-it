@@ -2,16 +2,16 @@
 
 return array(
 
-    'assigned_to'   	=> 'Assigned To',
-    'checkout'   		=> 'In/Out',
+    'assigned_to'   	=> 'Cấp phát đến',
+    'checkout'   		=> 'Nhập/Xuất',
     'id'      			=> 'ID',
-    'license_email'   	=> 'License Email',
-    'license_name'   	=> 'Licensed To',
-    'purchase_date'   	=> 'Purchase Date',
-    'purchased'   		=> 'Purchased',
+    'license_email'   	=> 'Email bản quyền',
+    'license_name'   	=> 'Bản quyền đã cấp cho',
+    'purchase_date'   	=> 'Ngày mua',
+    'purchased'   		=> 'Đã mua',
     'seats'   			=> 'Seats',
-    'hardware'   		=> 'Hardware',
+    'hardware'   		=> 'Phần cứng',
     'serial'   			=> 'Serial',
-    'title'      		=> 'License',
+    'title'      		=> 'Bản quyền',
 
 );

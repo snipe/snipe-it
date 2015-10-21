@@ -5,7 +5,7 @@ return array(
     'undeployable' 		=> '<strong>경고: </strong> 이 자산은 현재 사용불가 상태입니다.
                         이 상태를 변경하시려면, 자산 상태를 갱신하세요.',
     'does_not_exist' 	=> '자산이 존재하지 않습니다.',
-    'does_not_exist_or_not_requestable' => 'Nice try. That asset does not exist or is not requestable.',
+    'does_not_exist_or_not_requestable' => '좋은 시도지만, 그 자산은 존재하지 않거나 요청가능하지 않습니다.',
     'assoc_users'	 	=> '이 자산은 현재 사용자에게 반출 중이어서 삭제 할 수 없습니다. 먼저 자산을 확인해 보고 다시 삭제를 시도해 주세요. ',
 
     'create' => array(
@@ -32,7 +32,7 @@ return array(
     'upload' => array(
         'error'   => '파일(들)이 업로드 되지 않았습니다. 다시 시도해 주세요.',
         'success' => '파일(들)이 업로드 되었습니다.',
-        'nofiles' => 'You did not select any files for upload, or the file you are trying to upload is too large',
+        'nofiles' => '업로드 하기 위한 파일이 선택되지 않았거나, 업로드 할 파일이 너무 큽니다.',
         'invalidfiles' => '하나 이상의 파일이 너무 크거나 허용되지 않는  형식입니다. 허용되는 형식은 png, gif, jpg, doc, docx, pdf, txt 입니다.',
     ),
 

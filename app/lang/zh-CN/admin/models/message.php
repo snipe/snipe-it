@@ -9,7 +9,7 @@ return array(
     'create' => array(
         'error'   => '模板没有被创建，请重试。',
         'success' => '模板创建成功。',
-        'duplicate_set' => 'An asset model with that name, manufacturer and model number already exists.',
+        'duplicate_set' => '资产名称、制造商和编号都相同的其它资产模板已存在。',
     ),
 
     'update' => array(

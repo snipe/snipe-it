@@ -2,14 +2,15 @@
 
 return array(
 
-    'accepted'                  => 'You have successfully accepted this asset.',
-    'declined'                  => 'You have successfully declined this asset.',
+    'accepted'                  => 'Este aceitou este ativo com sucesso.',
+    'declined'                  => 'Você recusou com sucesso esse ativo.',
     'user_exists'               => 'O usuário já existe!',
     'user_not_found'            => 'O usuário [:id] não existe.',
     'user_login_required'       => 'O campo de login é requerido',
     'user_password_required'    => 'A senha é requerida.',
     'insufficient_permissions'  => 'Permissões Insuficientes.',
     'user_deleted_warning'      => 'Este usuário foi deletado. Você terá que restaurar este usuário para editá-los ou atribui-lós novos bens.',
+    'ldap_not_configured'        => 'Integração LDAP não foi configurada para esta instalação.',
 
 
     'success' => array(
@@ -31,19 +32,23 @@ return array(
         'unsuspend' => 'Houve um problema ao remover a suspensão do usuário. Tente novamente.',
         'import'    => 'Houve um problema ao importar usuários. Tente novamente.',
         'asset_already_accepted' => 'Este ativo já foi aceito.',
-        'accept_or_decline' => 'You must either accept or decline this asset.',
+        'accept_or_decline' => 'Você precisa aceita ou rejeitar esse ativo.',
+        'ldap_could_not_connect' => 'Não foi possível conectar ao servidor LDAP. Por favor verifique as configurações do servidor LDAP no arquivo de configurações.<br>Erro do Servidor LDAP:',
+        'ldap_could_not_bind' => 'Não foi possível se ligar ao servidor LDAP. Por favor verifique as configurações do servidor LDAP no arquivo de configurações.<br>Erro do Servidor LDAP: ',
+        'ldap_could_not_search' => 'Não foi possível procurar o servidor LDAP. Por favor verifique as configurações do servidor LDAP no arquivo de configurações.<br>Erro do Servidor LDAP:',
+        'ldap_could_not_get_entries' => 'Não foi possível obter informações do servidor LDAP. Por favor verifique as configurações do servidor LDAP no arquivo de configurações.<br>Erro do Servidor LDAP:',
     ),
 
     'deletefile' => array(
-        'error'   => 'File not deleted. Please try again.',
-        'success' => 'File successfully deleted.',
+        'error'   => 'Arquivo não deletado. Por favor tente novamente.',
+        'success' => 'Arquivo foi deletado com sucesso.',
     ),
 
     'upload' => array(
-        'error'   => 'File(s) not uploaded. Please try again.',
-        'success' => 'File(s) successfully uploaded.',
-        'nofiles' => 'You did not select any files for upload',
-        'invalidfiles' => 'One or more of your files is too large or is a filetype that is not allowed. Allowed filetypes are png, gif, jpg, doc, docx, pdf, and txt.',
+        'error'   => 'Arquivo(s) não carregados. Por favor tente novamente.',
+        'success' => 'Arquivo(s) carregados com sucesso.',
+        'nofiles' => 'Você não selecionou nenhum arquivo para carregar',
+        'invalidfiles' => 'Um ou mais de seus arquivos são muito grande ou o tipo de arquivo não é permitido. Tipos permitidos são png, gif, jpg, doc, docx, pdf e txt.',
     ),
 
 );

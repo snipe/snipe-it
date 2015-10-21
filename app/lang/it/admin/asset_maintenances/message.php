@@ -1,17 +1,17 @@
 <?php
 
     return [
-        'not_found'                    => 'Asset Maintenance you were looking for was not found!',
+        'not_found'                    => 'La manutenzione garanzia che stavi cercando non è stata trovata!',
         'delete'                       => [
-            'confirm' => 'Are you sure you wish to delete this asset maintenance?',
-            'error'   => 'There was an issue deleting the asset maintenance. Please try again.',
-            'success' => 'The asset maintenance was deleted successfully.'
+            'confirm' => 'Sei sicuro di voler eliminare questa manutenzione garanzia?',
+            'error'   => 'C\'è stato un problema eliminando la manutenzione garanzia. Riprova.',
+            'success' => 'Manutenzione prodotto eliminata con successo.'
         ],
         'create'                       => [
-            'error'   => 'Asset Maintenance was not created, please try again.',
-            'success' => 'Asset Maintenance created successfully.'
+            'error'   => 'Manutenzione prodotto non creata, riprova.',
+            'success' => 'Manutenzione prodotto creata con successo.'
         ],
-        'asset_maintenance_incomplete' => 'Not Completed Yet',
-        'warranty'                     => 'Warranty',
-        'not_warranty'                 => 'Not Warranty',
+        'asset_maintenance_incomplete' => 'Non ancora completato',
+        'warranty'                     => 'Garanzia',
+        'not_warranty'                 => 'Senza garanzia',
     ];

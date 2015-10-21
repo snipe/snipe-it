@@ -4,8 +4,8 @@ return array(
 
     'does_not_exist' => 'Lokasjon eksisterer ikke.',
     'assoc_users'	 => 'Denne lokasjonen er i bruk av minst en bruker, og kan ikke slettes. Fjern brukernes kobling mot lokasjonen og prøv igjen. ',
-    'assoc_assets'	 => 'This location is currently associated with at least one asset and cannot be deleted. Please update your assets to no longer reference this location and try again. ',
-    'assoc_child_loc'	 => 'This location is currently the parent of at least one child location and cannot be deleted. Please update your locations to no longer reference this location and try again. ',
+    'assoc_assets'	 => 'Lokasjonen er tilknyttet minst en eiendel og kan ikke slettes. Oppdater dine eiendeler slik at de ikke refererer til denne lokasjonen, og prøv igjen. ',
+    'assoc_child_loc'	 => 'Lokasjonen er overordnet til minst en underlokasjon og kan ikke slettes. Oppdater din lokasjoner til å ikke referere til denne lokasjonen, og prøv igjen. ',
 
 
     'create' => array(

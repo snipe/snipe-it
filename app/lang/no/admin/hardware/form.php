@@ -17,7 +17,7 @@ return array(
     'default_location'	=> 'Standard plassering',
     'eol_date'			=> 'EOL dato',
     'eol_rate'			=> 'EOL-rate',
-    'expected_checkin'  => 'Expected Checkin Date',
+    'expected_checkin'  => 'Forventet dato for innsjekk',
     'expires'			=> 'Utløper',
     'fully_depreciated'	=> 'Ferdig nedskrevet',
     'help_checkout'		=> 'If you wish to assign this asset immediately, select "Ready to Deploy" from the status list above. ',

@@ -3,11 +3,11 @@
 return array(
 
     'asset_tag'   	=> 'Thẻ tài sản',
-    'asset_model'       => 'Model',
+    'asset_model'       => 'Loại',
     'book_value'  	=> 'Giá trị',
     'change' 		=> 'Vào/Ra',
-    'checkout_date' => 'Checkout Date',
-    'checkoutto' 	=> 'Checked Out',
+    'checkout_date' => 'Ngày checkout',
+    'checkoutto' 	=> 'Đã checkout',
     'diff' 			=> 'Khác nhau',
     'dl_csv' 		=> 'Tải tập tin CSV xuống',
     'eol' 			=> 'EOL',
@@ -18,6 +18,6 @@ return array(
     'serial'   		=> 'Sê-ri',
     'status'   		=> 'Tình trạng',
     'title'      	=> 'Tài sản ',
-    'days_without_acceptance' => 'Days Without Acceptance'
+    'days_without_acceptance' => 'Những ngày không chấp nhận'
 
 );

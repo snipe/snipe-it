@@ -1,14 +1,14 @@
 #!/bin/bash -e
 
 ######################################################
-# 	    Snipe-It Install Script		                   #
-#	   Script created by Mike Tucker                   #
-#	     mtucker6784@gmail.com                         #
+# 	    Snipe-It Install Script    	             #
+#	   Script created by Mike Tucker             #
+#	     mtucker6784@gmail.com                   #
 # This script is just to help streamline the         #
 # install process for Debian and CentOS              #
 # based distributions. I assume you will be          #
 # installing as a subdomain on a fresh OS install.   #
-# Right now I'm n ot going to worry about SMTP setup #
+# Right now I'm not going to worry about SMTP setup  #
 #                                                    #
 # Feel free to modify, but please give               #
 # credit where it's due. Thanks!                     #
@@ -19,8 +19,10 @@ clear
 si="Snipe-IT"
 hostname="$(hostname)"
 hosts=/etc/hosts
-
 distro="$(cat /proc/version)"
+file=master.zip
+dir=/var/www/snipe-it-master
+
 ans=default
 case $distro in
         *Ubuntu*|*Debian*)
@@ -37,24 +39,6 @@ case $distro in
                 ;;
 esac
 
-until [[ $ans == "1.2.8" ]] || [[ $ans == "2.0" ]]; do
-echo -e "Select what version of $si you want to install:\n1. 1.2.8 stable (GIT) \n2. 2.0-pre (ZIP)"
-read ver
-case $ver in
-	1 )
-		dir=/var/www/snipe-it
-		ans=1.2.8
-		;;
-	2 )
-		dir=/var/www/snipe-it-2.0
-		ans=2.0
-		;;
-	* )
-		echo "Please select 1 or 2"
-		;;
-esac
-done
-
 #Get your FQDN.
 echo ""
 echo "$si install script - Installing $ans"
@@ -70,21 +54,20 @@ read setpw
 
 case $setpw in
         [yY] | [yY][Ee][Ss] )
-                                mysqlrootpw="$(echo `< /dev/urandom tr -dc _A-Za-z-0-9 | head -c6`)"
-                                mysqluserpw="$(echo `< /dev/urandom tr -dc _A-Za-z-0-9 | head -c6`)"
-                                echo "I'm putting this into /root/mysqlpasswords ... PLEASE REMOVE that file after you have recorded the passwords somewhere safe!"
-                                ans="yes"
+                mysqlrootpw="$(echo `< /dev/urandom tr -dc _A-Za-z-0-9 | head -c8`)"
+                mysqluserpw="$(echo `< /dev/urandom tr -dc _A-Za-z-0-9 | head -c8`)"
+                echo "I'm putting this into /root/mysqlpasswords ... PLEASE REMOVE that file after you have recorded the passwords somewhere safe!"
+                ans="yes"
                 ;;
-
         [nN] | [n|N][O|o] )
-		                echo "Q. What do you want your root PW to be?"
-                                read mysqlrootpw
-                                echo "Q. What do you want your snipeit user PW to be?"
-                                read mysqluserpw
+		echo "Q. What do you want your root PW to be?"
+                read mysqlrootpw
+                echo "Q. What do you want your snipeit user PW to be?"
+                read mysqluserpw
 				ans="no"
                 ;;
         *) echo "Invalid answer. Please type y or n"
-            ;;
+                ;;
 esac
 done
 
@@ -116,16 +99,12 @@ if [[ $distro == "u" ]]; then
 	apachefile=/etc/apache2/sites-available/$fqdn.conf
 	sudo apt-get update ; sudo apt-get -y upgrade ;	sudo apt-get install -y git unzip
 
-	if [[ $ver == "1" ]]; then
-		sudo git clone https://github.com/snipe/snipe-it.git $dir
-	else
-		wget https://github.com/snipe/snipe-it/archive/2.0.zip
-		sudo unzip 2.0.zip -d /var/www/
-	fi
+	wget https://github.com/snipe/snipe-it/archive/$file
+	sudo unzip $file -d /var/www/
 
 	#We already established MySQL root & user PWs, so we dont need to be prompted. Let's go ahead and install Apache, PHP and MySQL.
 	sudo DEBIAN_FRONTEND=noninteractive apt-get install -y lamp-server^
-	sudo apt-get install -y php5 php5-mcrypt php5-curl php5-mysql
+	sudo apt-get install -y php5 php5-mcrypt php5-curl php5-mysql php-gd
 
 	#Create MySQL accounts
 	echo "Create MySQL accounts"
@@ -171,17 +150,19 @@ if [[ $distro == "u" ]]; then
 	cp $dir/app/config/production/app.example.php $dir/app/config/production/app.php
 	replace "'http://production.yourserver.com'," "'http://$fqdn'," -- $dir/app/config/production/app.php
 	replace "'Change_this_key_or_snipe_will_get_ya'," "'$random32'," -- $dir/app/config/production/app.php
+	replace "'false'," "true," -- $dir/app/config/production/app.php
 	cp $dir/app/config/production/mail.example.php $dir/app/config/production/mail.php
 
 	#Install / configure composer
-	sudo curl -sS https://getcomposer.org/installer | php
+	curl -sS https://getcomposer.org/installer | php
 	mv composer.phar /usr/local/bin/composer
 	cd $dir/
-  composer install --no-dev --prefer-source
+	composer install --no-dev --prefer-source
 	php artisan app:install --env=production
 
 	service apache2 restart
 else
+
 	#Make directories so we can create a new apache vhost
 	sudo mkdir /etc/httpd/
 	sudo mkdir /etc/httpd/sites-available/
@@ -194,12 +175,8 @@ else
 	sudo rpm -Uvh http://dev.mysql.com/get/mysql-community-release-el7-5.noarch.rpm
 	sudo yum -y install httpd mysql-server wget git unzip
 
-	if [[ $ver == "1" ]]; then
-		sudo git clone https://github.com/snipe/snipe-it.git $dir
-	else
-		wget https://github.com/snipe/snipe-it/archive/2.0.zip
-		sudo unzip 2.0.zip -d /var/www/
-	fi
+	wget https://github.com/snipe/snipe-it/archive/$file
+	sudo unzip $file -d /var/www/
 
 	sudo /sbin/service mysqld start
 
@@ -262,7 +239,7 @@ else
 	#Install / configure composer
 	cd $dir
 	sudo mysql -u root -p$mysqlrootpw < /root/createstuff.sql
-	sudo curl -sS https://getcomposer.org/installer | php
+	curl -sS https://getcomposer.org/installer | php
 	php composer.phar install --no-dev --prefer-source
 	php artisan app:install --env=production
 
@@ -273,24 +250,6 @@ else
 
 	service httpd restart
 fi
-
-#Todo(?) To Mail or Not To Mail environment here.
-#echo "Q. Do you want me to install sendmail and help you configure your mail environment?"
-#echo "Please note that while I'll install sendmail, I'll still send you to a nano environment to edit the mail.php file at the end of this install."
-#read setpw
-#case $setpw in
-#
-#        [yY] | [yY][Ee][Ss] )
-#                                apt-get install -y sendmail
-#                                installmail=yes
-#                ;;
-#
-#        [nN] | [n|N][O|o] )
-#                                echo "Ok, no problem."
-#                ;;
-#        *) echo "Invalid answer"
-#            ;;
-#esac
 
 echo ""; echo ""; echo ""
 echo "***I have no idea about your mail environment, so if you want email capability, open up the following***"
@@ -305,26 +264,26 @@ echo "Q. Shall I delete the password files I created? (Remember to record the pa
 read setpw
 case $setpw in
 
-        [yY] | [yY][Ee][Ss] )
-                                rm $createstufffile
+      [yY] | [yY][Ee][Ss] )
+                rm $createstufffile
 				rm $passwordfile
-                                echo "$createstufffile and $passwordfile files have been removed."
+                echo "$createstufffile and $passwordfile files have been removed."
 				ans=yes
-		                ;;
+		;;
         [nN] | [n|N][O|o] )
-                                echo "Ok, I won't remove the file. Please for the love of security, record the passwords and delete this file regardless."
-				                        echo "$si cannot be held responsible if this file is compromised!"
-			                        	echo "From Snipe: I cannot encourage or even facilitate poor security practices, and still sleep the few, frantic hours I sleep at night."
+                echo "Ok, I won't remove the file. Please for the love of security, record the passwords and delete this file regardless."
+				echo "$si cannot be held responsible if this file is compromised!"
+				echo "From Snipe: I cannot encourage or even facilitate poor security practices, and still sleep the few, frantic hours I sleep at night."
 				ans=no
-		                ;;
+		;;
         *)
-				echo "Please select a valid option"
-		               ;;
+		echo "Please select a valid option"
+		;;
 esac
 done
 
-echo ""
-echo ""
+echo ""; echo ""
+echo "***If you want mail capabilities, open $dir/app/config/production/mail.php and fill out the attributes***"
+echo ""; echo ""
 echo "***$si should now be installed. open up http://$fqdn in a web browser to verify.***"
-#echo "***If you want mail capabilities, open $dir/app/config/production/mail.php and fill out the attributes***"
 sleep 1

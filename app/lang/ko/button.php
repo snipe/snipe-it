@@ -8,7 +8,7 @@ return array(
     'delete'  	=> '삭제',
     'edit'    	=> '편집',
     'restore' 	=> '복원',
-    'request'   => 'Request',
+    'request'   => '요청',
     'submit'  	=> '제출',
     'upload'    => '올리기',
 

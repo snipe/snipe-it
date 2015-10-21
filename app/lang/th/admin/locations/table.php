@@ -3,15 +3,15 @@
 return array(
 
     'id'      		=> 'ID',
-    'city'   		=> 'City',
-    'state'   		=> 'State',
-    'country'   	=> 'Country',
-    'create'		=> 'Create Location',
-    'update'		=> 'Update Location',
-    'name'			=> 'Location Name',
-    'address'		=> 'Address',
-    'zip'			=> 'Postal Code',
-    'locations'		=> 'Locations',
-    'parent'		=> 'Parent',
-    'currency'  	=> 'Location Currency', // this is deprecated
+    'city'   		=> 'เขต/อำเภอ',
+    'state'   		=> 'เมือง/รัฐ',
+    'country'   	=> 'ประเทศ',
+    'create'		=> 'สร้างสถานที่',
+    'update'		=> 'อัพเดทสถานที่',
+    'name'			=> 'ชื่อสถานที่',
+    'address'		=> 'ที่อยู่',
+    'zip'			=> 'รหัสไปรษณีย์',
+    'locations'		=> 'สถานที่',
+    'parent'		=> 'หมวดแม่',
+    'currency'  	=> 'สกุลเงินตามสถานที่', // this is deprecated
 );

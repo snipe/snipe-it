@@ -12,6 +12,6 @@ return array(
     'address'		=> 'Адрес',
     'zip'			=> 'Почтовый индекс',
     'locations'		=> 'Размещения',
-    'parent'		=> 'Parent',
-    'currency'  	=> 'Location Currency', // this is deprecated
+    'parent'		=> 'Родитель',
+    'currency'  	=> 'Валюта местонахождения', // this is deprecated
 );

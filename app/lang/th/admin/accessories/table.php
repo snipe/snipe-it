@@ -1,9 +1,11 @@
 <?php
 
 return array(
-	'eula_text'      			=> 'EULA',
-    'id'      					=> 'ID',
-    'require_acceptance'      	=> 'Acceptance',
-    'title'      				=> 'Accessory Name',
+	'dl_csv'      				=> 'ดาวน์โหลด CSV',
+	'eula_text'      			=> 'ข้อกำหนดการใช้งาน',
+    'id'      					=> 'ไอดี',
+    'require_acceptance'      	=> 'การยอมรับ',
+    'title'      				=> 'ชื่ออุปกรณ์เสริม',
+
 
 );

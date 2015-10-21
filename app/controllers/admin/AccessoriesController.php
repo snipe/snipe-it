@@ -432,7 +432,7 @@ class AccessoriesController extends AdminController
 
 
             $log = $logaction->logaction('checkin from');
-            
+
             if(!is_null($accessory_user->assigned_to)) {
                 $user = User::find($accessory_user->assigned_to);
             }
@@ -465,7 +465,7 @@ class AccessoriesController extends AdminController
 
     public function getDatatable()
     {
-        $accessories = Accessory::select(array('id','name','qty'))
+        $accessories = Accessory::with('category')
         ->whereNull('deleted_at')
         ->orderBy('created_at', 'DESC');
 
@@ -477,6 +477,10 @@ class AccessoriesController extends AdminController
             });
 
         return Datatable::collection($accessories)
+        ->addColumn('category',function($accessories)
+            {
+                return $accessories->category->name;
+            })
         ->addColumn('name',function($accessories)
             {
                 return link_to('admin/accessories/'.$accessories->id.'/view', $accessories->name);
@@ -490,8 +494,8 @@ class AccessoriesController extends AdminController
                 return $accessories->numRemaining();
             })
         ->addColumn($actions)
-        ->searchColumns('name','qty','numRemaining','actions')
-        ->orderColumns('name','qty','numRemaining','actions')
+        ->searchColumns('category','name','qty','numRemaining','actions')
+        ->orderColumns('category','name','qty','numRemaining','actions')
         ->make();
     }
 

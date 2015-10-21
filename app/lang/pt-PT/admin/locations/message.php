@@ -2,26 +2,26 @@
 
 return array(
 
-    'does_not_exist' => 'Location does not exist.',
-    'assoc_users'	 => 'This location is currently associated with at least one user and cannot be deleted. Please update your users to no longer reference this location and try again. ',
-    'assoc_assets'	 => 'This location is currently associated with at least one asset and cannot be deleted. Please update your assets to no longer reference this location and try again. ',
-    'assoc_child_loc'	 => 'This location is currently the parent of at least one child location and cannot be deleted. Please update your locations to no longer reference this location and try again. ',
+    'does_not_exist' => 'Localização não existe.',
+    'assoc_users'	 => 'Esta localização está atualmente associada com pelo menos um utilizador e não pode ser removida. Atualize este utilizadores de modo a não referenciarem mais este local e tente novamente. ',
+    'assoc_assets'	 => 'Esta localização está atualmente associada com pelo menos um artigo e não pode ser removida. Atualize este artigos de modo a não referenciarem mais este local e tente novamente. ',
+    'assoc_child_loc'	 => 'Esta localização contém pelo menos uma sub-localização e não pode ser removida. Por favor, atualize as localizações para não referenciarem mais esta localização e tente novamente. ',
 
 
     'create' => array(
-        'error'   => 'Location was not created, please try again.',
-        'success' => 'Location created successfully.'
+        'error'   => 'Não foi possível criar a localização. Por favor, tente novamente.',
+        'success' => 'Localização criada com sucesso.'
     ),
 
     'update' => array(
-        'error'   => 'Location was not updated, please try again',
-        'success' => 'Location updated successfully.'
+        'error'   => 'A localização não foi atualizada. Por favor, tente novamente',
+        'success' => 'Localização atualizada com sucesso.'
     ),
 
     'delete' => array(
-        'confirm'   	=> 'Are you sure you wish to delete this location?',
-        'error'   => 'There was an issue deleting the location. Please try again.',
-        'success' => 'The location was deleted successfully.'
+        'confirm'   	=> 'Tem a certeza que pretende remover esta localização?',
+        'error'   => 'Ocorreu um problema ao remover esta localização. Por favor, tente novamente.',
+        'success' => 'A localização foi removida com sucesso.'
     )
 
 );

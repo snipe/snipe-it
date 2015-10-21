@@ -15,21 +15,21 @@ return array(
     ),
 
     'delete' => array(
-        'confirm'   => '是否确定删除此配件？',
-        'error'   => 'There was an issue deleting the consumable. Please try again.',
-        'success' => 'The accessory was deleted successfully.'
+        'confirm'   => '您确定希望删除此耗材？',
+        'error'   => '删除耗材失败，请重试',
+        'success' => '成功删除此耗材。'
     ),
 
      'checkout' => array(
-        'error'   		=> 'Consumable was not checked out, please try again',
-        'success' 		=> 'Consumable checked out successfully.',
-        'user_does_not_exist' => 'That user is invalid. Please try again.'
+        'error'   		=> '耗材领取失败，请重试',
+        'success' 		=> '耗材领取成功',
+        'user_does_not_exist' => '无效用户，请重试。'
     ),
 
     'checkin' => array(
-        'error'   		=> 'Consumable was not checked in, please try again',
-        'success' 		=> 'Consumable checked in successfully.',
-        'user_does_not_exist' => 'That user is invalid. Please try again.'
+        'error'   		=> '耗材登记失败，请重试',
+        'success' 		=> '耗材登记成功',
+        'user_does_not_exist' => '无效用户，请重试。'
     )
 
 

@@ -18,6 +18,7 @@ use Location;
 use Model;
 use Redirect;
 use Setting;
+use User;
 
 class ReportsController extends AdminController
 {

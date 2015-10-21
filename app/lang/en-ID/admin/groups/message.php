@@ -2,21 +2,21 @@
 
 return array(
 
-    'group_exists'        => 'Group already exists!',
-    'group_not_found'     => 'Group [:id] does not exist.',
-    'group_name_required' => 'The name field is required',
+    'group_exists'        => 'Grup sudah ada!',
+    'group_not_found'     => 'Group [:id] tidak ada.',
+    'group_name_required' => 'Nama field diperlukan',
 
     'success' => array(
-        'create' => 'Group was successfully created.',
-        'update' => 'Group was successfully updated.',
-        'delete' => 'Group was successfully deleted.',
+        'create' => 'Group berhasil dibuat.',
+        'update' => 'Grup berhasil diperbarui.',
+        'delete' => 'Grup berhasil dihapus.',
     ),
 
     'delete' => array(
-        'confirm'   => 'Are you sure you wish to delete this group?',
-        'create' => 'There was an issue creating the group. Please try again.',
-        'update' => 'There was an issue updating the group. Please try again.',
-        'delete' => 'There was an issue deleting the group. Please try again.',
+        'confirm'   => 'Apakah Anda yakin ingin menghapus grup ini?',
+        'create' => 'Ada masalah saat membuat Grup. Silakan coba lagi.',
+        'update' => 'Ada masalah saat memperbarui Grup. Silakan coba lagi.',
+        'delete' => 'Ada masalah saat menghapus grup. Silakan coba lagi.',
     ),
 
 );

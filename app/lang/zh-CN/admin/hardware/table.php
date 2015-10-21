@@ -18,6 +18,6 @@ return array(
     'serial'   		=> '序列号',
     'status'   		=> '状态',
     'title'      	=> '资产',
-    'days_without_acceptance' => 'Days Without Acceptance'
+    'days_without_acceptance' => '过期天数'
 
 );

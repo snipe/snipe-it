@@ -1,15 +1,15 @@
 <?php
 
     return [
-        'not_found'                    => 'Asset Maintenance you were looking for was not found!',
+        'not_found'                    => 'Tài sản đang bảo trì mà bạn tìm không có!',
         'delete'                       => [
-            'confirm' => 'Are you sure you wish to delete this asset maintenance?',
-            'error'   => 'There was an issue deleting the asset maintenance. Please try again.',
-            'success' => 'The asset maintenance was deleted successfully.'
+            'confirm' => 'Bạn có chắc muốn xóa tài sản đang bảo trì?',
+            'error'   => 'Có vấn đề xảy ra khi xóa tài sản đang bảo trì. Vui lòng thử lại.',
+            'success' => 'Tài sản đang bảo trì đã được xóa thành công.'
         ],
         'create'                       => [
-            'error'   => 'Asset Maintenance was not created, please try again.',
-            'success' => 'Asset Maintenance created successfully.'
+            'error'   => 'Tài sản đang bảo trì chưa được tạo, xin vui lòng thử lại.',
+            'success' => 'Tài sản đang bảo trì được tạo thành công.'
         ],
         'asset_maintenance_incomplete' => 'Chưa hoàn thành',
         'warranty'                     => 'Bảo hành',
