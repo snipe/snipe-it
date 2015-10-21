@@ -10,49 +10,11 @@
 
     var firstLoad = false;
 
-    var sprintf = function(str) {
-        var args = arguments,
-            flag = true,
-            i = 1;
-
-        str = str.replace(/%s/g, function() {
-            var arg = args[i++];
-
-            if (typeof arg === 'undefined') {
-                flag = false;
-                return '';
-            }
-            return arg;
-        });
-        return flag ? str : '';
-    };
-
-    var calculateObjectValue = function (self, name, args, defaultValue) {
-        if (typeof name === 'string') {
-            // support obj.func1.func2
-            var names = name.split('.');
-
-            if (names.length > 1) {
-                name = window;
-                $.each(names, function (i, f) {
-                    name = name[f];
-                });
-            } else {
-                name = window[name];
-            }
-        }
-        if (typeof name === 'object') {
-            return name;
-        }
-        if (typeof name === 'function') {
-            return name.apply(self, args);
-        }
-        return defaultValue;
-    };
+    var sprintf = $.fn.bootstrapTable.utils.sprintf;
 
     var showAvdSearch = function(pColumns, searchTitle, searchText, that) {
-        if (!$("#avdSearchModal").hasClass("modal")) {
-            var vModal = "<div id=\"avdSearchModal\" class=\"modal fade\" tabindex=\"-1\" role=\"dialog\" aria-labelledby=\"mySmallModalLabel\" aria-hidden=\"true\">";
+        if (!$("#avdSearchModal" + "_" + that.options.idTable).hasClass("modal")) {
+            var vModal = sprintf("<div id=\"avdSearchModal%s\"  class=\"modal fade\" tabindex=\"-1\" role=\"dialog\" aria-labelledby=\"mySmallModalLabel\" aria-hidden=\"true\">", "_" + that.options.idTable);
             vModal += "<div class=\"modal-dialog modal-xs\">";
             vModal += " <div class=\"modal-content\">";
             vModal += "  <div class=\"modal-header\">";
@@ -60,7 +22,7 @@
             vModal += sprintf("   <h4 class=\"modal-title\">%s</h4>", searchTitle);
             vModal += "  </div>";
             vModal += "  <div class=\"modal-body modal-body-custom\">";
-            vModal += "   <div class=\"container-fluid\" id=\"avdSearchModalContent\" style=\"padding-right: 0px;padding-left: 0px;\" >";
+            vModal += sprintf("   <div class=\"container-fluid\" id=\"avdSearchModalContent%s\" style=\"padding-right: 0px;padding-left: 0px;\" >", "_" + that.options.idTable);
             vModal += "   </div>";
             vModal += "  </div>";
             vModal += "  </div>";
@@ -72,7 +34,7 @@
             var vFormAvd = createFormAvd(pColumns, searchText, that),
                 timeoutId = 0;;
 
-            $('#avdSearchModalContent').append(vFormAvd.join(''));
+            $('#avdSearchModalContent' + "_" + that.options.idTable).append(vFormAvd.join(''));
 
             $('#' + that.options.idForm).off('keyup blur', 'input').on('keyup blur', 'input', function (event) {
                 clearTimeout(timeoutId);
@@ -81,13 +43,13 @@
                 }, that.options.searchTimeOut);
             });
 
-            $("#btnCloseAvd").click(function() {
-                $("#avdSearchModal").modal('hide');
+            $("#btnCloseAvd" + "_" + that.options.idTable).click(function() {
+                $("#avdSearchModal" + "_" + that.options.idTable).modal('hide');
             });
 
-            $("#avdSearchModal").modal();
+            $("#avdSearchModal" + "_" + that.options.idTable).modal();
         } else {
-            $("#avdSearchModal").modal();
+            $("#avdSearchModal" + "_" + that.options.idTable).modal();
         }
     };
 
@@ -108,7 +70,7 @@
 
         htmlForm.push('<div class="form-group">');
         htmlForm.push('<div class="col-sm-offset-9 col-sm-3">');
-        htmlForm.push(sprintf('<button type="button" id="btnCloseAvd" class="btn btn-default" >%s</button>', searchText));
+        htmlForm.push(sprintf('<button type="button" id="btnCloseAvd%s" class="btn btn-default" >%s</button>', "_" + that.options.idTable, searchText));
         htmlForm.push('</div>');
         htmlForm.push('</div>');
         htmlForm.push('</form>');
@@ -161,6 +123,10 @@
             return;
         }
 
+        if (!this.options.idTable) {
+            return;
+        }
+
         var that = this,
             html = [];
 
@@ -173,12 +139,16 @@
 
         that.$toolbar.find('button[name="advancedSearch"]')
             .off('click').on('click', function() {
-                showAvdSearch(that.options.columns, that.options.formatAdvancedSearch(), that.options.formatAdvancedCloseButton(), that);
+                showAvdSearch(that.columns, that.options.formatAdvancedSearch(), that.options.formatAdvancedCloseButton(), that);
             });
     };
 
     BootstrapTable.prototype.load = function(data) {
         _load.apply(this, Array.prototype.slice.apply(arguments));
+
+        if (!this.options.advancedSearch) {
+            return;
+        }
 
         if (typeof this.options.idTable === 'undefined') {
             return;
@@ -195,6 +165,10 @@
     BootstrapTable.prototype.initSearch = function () {
         _initSearch.apply(this, Array.prototype.slice.apply(arguments));
 
+        if (!this.options.advancedSearch) {
+            return;
+        }
+
         var that = this;
         var fp = $.isEmptyObject(this.filterColumnsPartial) ? null : this.filterColumnsPartial;
 
@@ -202,7 +176,7 @@
             for (var key in fp) {
                 var fval = fp[key].toLowerCase();
                 var value = item[key];
-                value = calculateObjectValue(that.header,
+                value = $.fn.bootstrapTable.utils.calculateObjectValue(that.header,
                     that.header.formatters[$.inArray(key, that.header.fields)],
                     [value, item, i], value);
 

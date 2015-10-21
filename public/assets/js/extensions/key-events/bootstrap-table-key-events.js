@@ -19,7 +19,6 @@
 
     BootstrapTable.prototype.init = function () {
         _init.apply(this, Array.prototype.slice.apply(arguments));
-
         this.initKeyEvents();
     };
 

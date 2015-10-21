@@ -8,25 +8,13 @@
 
     'use strict';
 
-    var getFieldIndex = function (columns, field) {
-        var index = -1;
-
-        $.each(columns, function (i, column) {
-            if (column.field === field) {
-                index = i;
-                return false;
-            }
-            return true;
-        });
-        return index;
-    };
-
     $.extend($.fn.bootstrapTable.defaults, {
         reorderableColumns: false,
         maxMovingRows: 10,
         onReorderColumn: function (headerFields) {
             return false;
-        }
+        },
+        dragaccept: null
     });
 
     $.extend($.fn.bootstrapTable.Constructor.EVENTS, {
@@ -84,32 +72,47 @@
     };
 
     BootstrapTable.prototype.makeRowsReorderable = function () {
-
         var that = this;
         try {
             $(this.$el).dragtable('destroy');
         } catch (e) {}
         $(this.$el).dragtable({
             maxMovingRows: that.options.maxMovingRows,
+            dragaccept: that.options.dragaccept,
             clickDelay:200,
             beforeStop: function() {
                 var ths = [],
+                    formatters = [],
                     columns = [],
+                    columnsHidden = [],
                     columnIndex = -1;
                 that.$header.find('th').each(function (i) {
                     ths.push($(this).data('field'));
+                    formatters.push($(this).data('formatter'));
                 });
 
-                for (var i = 0; i < ths.length; i++ ) {
-                    columnIndex = getFieldIndex(that.options.columns, ths[i]);
-                    if (columnIndex !== -1) {
-                        columns.push(that.options.columns[columnIndex]);
-                        that.options.columns.splice(columnIndex, 1);
+                //Exist columns not shown
+                if (ths.length < that.columns.length) {
+                    columnsHidden = $.grep(that.columns, function (column) {
+                       return !column.visible;
+                    });
+                    for (var i = 0; i < columnsHidden.length; i++) {
+                        ths.push(columnsHidden[i].field);
+                        formatters.push(columnsHidden[i].formatter);
                     }
                 }
 
-                that.options.columns = that.options.columns.concat(columns);
+                for (var i = 0; i < ths.length; i++ ) {
+                    columnIndex = $.fn.bootstrapTable.utils.getFieldIndex(that.columns, ths[i]);
+                    if (columnIndex !== -1) {
+                        columns.push(that.columns[columnIndex]);
+                        that.columns.splice(columnIndex, 1);
+                    }
+                }
+
+                that.columns = that.columns.concat(columns);
                 that.header.fields = ths;
+                that.header.formatters = formatters;
                 that.resetView();
                 that.trigger('reorder-column', ths);
             }

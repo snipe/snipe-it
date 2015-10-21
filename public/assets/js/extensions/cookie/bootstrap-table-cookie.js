@@ -310,7 +310,7 @@
 
         setCookie(this, cookieIds.columns, JSON.stringify(visibleColumns));
     };
-
+    
     BootstrapTable.prototype.selectPage = function (page) {
         _selectPage.apply(this, Array.prototype.slice.apply(arguments));
         setCookie(this, idsStateSaveList.pageNumber, page);
