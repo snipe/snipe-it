@@ -323,14 +323,15 @@ padding: 0px 20px;
                           </form>
                         </div>
 
-</div>
-
-                    <!-- side address column -->
-                    <div class="col-md-3 address pull-right">
-                    <br /><br />
-                        <p>@lang('admin/settings/general.info')</p>
-
                     </div>
+                </div>
+
+                <!-- side address column -->
+                <div class="col-md-3 address pull-right">
+                <br /><br />
+                    <p>@lang('admin/settings/general.info')</p>
+
+                </div>
 
 </div>
 @stop
