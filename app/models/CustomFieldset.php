@@ -2,7 +2,7 @@
 class CustomFieldset extends Elegant
 {
   public function fields() {
-    return $this->hasMany('CustomField');
+    return $this->belongsToMany('CustomField');
   }
   
   //requiredness goes *here*

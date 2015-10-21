@@ -38,7 +38,7 @@ class CustomField extends Elegant
   }*/
   
   public function fieldset() {
-    return $this->hasMany('CustomFieldset'); //?!?!?!?!?!?
+    return $this->belongsToMany('Fieldset'); //?!?!?!?!?!?
   }
   
   public $rules=[
