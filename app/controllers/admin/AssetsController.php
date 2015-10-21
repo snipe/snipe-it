@@ -1083,6 +1083,18 @@ class AssetsController extends AdminController
     public function getDatatable($status = null)
     {
 
+        if (Input::has('offset')) {
+            $offset = e(Input::get('offset'));
+        } else {
+            $offset = 0;
+        }
+
+        if (Input::has('limit')) {
+            $limit = e(Input::get('limit'));
+        } else {
+            $limit = 50;
+        }
+
        $assets = Asset::with('model','assigneduser','assigneduser.userloc','assetstatus','defaultLoc','assetlog','model','model.category')->Hardware()->select(array('assets.id', 'assets.name','assets.model_id','assets.assigned_to','assets.asset_tag','assets.serial','assets.status_id','assets.purchase_date','assets.deleted_at','assets.rtd_location_id','assets.notes','assets.order_number'));
 
 
@@ -1118,7 +1130,7 @@ class AssetsController extends AdminController
      if (Input::has('search')) {
          $assets = $assets->TextSearch(Input::get('search'));
      }
-     
+
     $allowed_columns = ['name','asset_tag','serial','model','checkout_date','category','notes'];
     $order = Input::get('order') === 'asc' ? 'asc' : 'desc';
     $sort = in_array(Input::get('sort'), $allowed_columns) ? Input::get('sort') : 'asset_tag';
@@ -1140,7 +1152,7 @@ class AssetsController extends AdminController
     }
 
      $assetCount = $assets->count();
-     $assets = $assets->skip(Input::get('offset'))->take(Input::get('limit'))->get();
+     $assets = $assets->skip($offset)->take($limit)->get();
 
 
       $rows = array();
@@ -1169,12 +1181,12 @@ class AssetsController extends AdminController
             'asset_tag' => '<a title="'.$asset->asset_tag.'" href="hardware/'.$asset->id.'/view">'.$asset->asset_tag.'</a>',
             'serial'    => $asset->serial,
             'model'     => ($asset->model) ? $asset->model->name : 'No model',
-            'status'    => ($asset->assigned_to!='') ? link_to('../admin/users/'.$asset->assigned_to.'/view', $asset->assigneduser->fullName()) : (($asset->assetstatus) ? $asset->assetstatus->name : ''),
-            'location'  => (($asset->assigned_to)&&($asset->assigneduser->userloc!='')) ? link_to('admin/settings/locations/'.$asset->assigneduser->userloc->id.'/edit', $asset->assigneduser->userloc->name) : (($asset->defaultLoc!='') ? link_to('admin/settings/locations/'.$asset->defaultLoc->id.'/edit', $asset->defaultLoc->name) : ''),
+            'status'    => ($asset->assigneduser) ? link_to('../admin/users/'.$asset->assigned_to.'/view', $asset->assigneduser->fullName()) : (($asset->assetstatus) ? $asset->assetstatus->name : ''),
+            'location'  => (($asset->assigneduser) && ($asset->assigneduser->userloc!='')) ? link_to('admin/settings/locations/'.$asset->assigneduser->userloc->id.'/edit', $asset->assigneduser->userloc->name) : (($asset->defaultLoc!='') ? link_to('admin/settings/locations/'.$asset->defaultLoc->id.'/edit', $asset->defaultLoc->name) : ''),
             'category'  => ($asset->model->category) ? $asset->model->category->name : 'No category',
             'eol'       => ($asset->eol_date()) ? $asset->eol_date() : '',
             'notes'     => $asset->notes,
-            'order_number'     => ($asset->order_number) ? '<a href="../hardware/?order_number='.$asset->order_number.'">'.$asset->order_number.'</a>' : '',
+            'order_number'     => ($asset->order_number!='') ? '<a href="../hardware/?order_number='.$asset->order_number.'">'.$asset->order_number.'</a>' : ' ',
             'checkout_date' => (($asset->assigned_to!='')&&($asset->assetlog->first())) ? $asset->assetlog->first()->created_at->format('Y-m-d') : '',
             'change'    => ($inout) ? $inout : '',
             'actions'   => ($actions) ? $actions : ''
