@@ -80,7 +80,7 @@ class User extends SentryUserModel
     **/
     public function manager()
     {
-        return $this->belongsTo('User','manager_id')->withTrashed();
+        return $this->hasOne('User','manager_id')->withTrashed();
     }
 
 
@@ -208,17 +208,27 @@ class User extends SentryUserModel
 	*
 	* @return Illuminate\Database\Query\Builder          Modified query builder
 	*/
-    public function scopeTextsearch($query, $q)
+    public function scopeTextsearch($query, $search)
 	{
 
-			return $query->where('first_name', 'LIKE', "%$q%")
-				->orWhere('last_name', 'LIKE', "%$q%")
-                ->orWhere('email', 'LIKE', "%$q%")
-                ->orWhere('username', 'LIKE', "%$q%")
-				->orWhere('notes', 'LIKE', "%$q%")
-                ->orWhere(function($query) use ($q) {
-                    $query->whereHas('userloc', function($query) use ($q) {
-                        $query->where('name','LIKE','%'.$q.'%');
+			return $query->where('first_name', 'LIKE', "%$search%")
+				->orWhere('last_name', 'LIKE', "%$search%")
+                ->orWhere('email', 'LIKE', "%$search%")
+                ->orWhere('username', 'LIKE', "%$search%")
+				->orWhere('notes', 'LIKE', "%$search%")
+                ->orWhere(function($query) use ($search) {
+                    $query->whereHas('userloc', function($query) use ($search) {
+                        $query->where('name','LIKE','%'.$search.'%');
+                    });
+                })
+
+                // This doesn't actually work - need to use a table alias maybe?
+                ->orWhere(function($query) use ($search) {
+                    $query->whereHas('manager', function($query) use ($search) {
+                        $query->where(function($query) use ($search) {
+                            $query->where('first_name','LIKE','%'.$search.'%')
+                            ->orWhere('last_name','LIKE','%'.$search.'%');
+                        });
                     });
                 });
 
