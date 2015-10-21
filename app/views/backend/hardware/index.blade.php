@@ -48,7 +48,13 @@
       'route' => ['hardware/bulkedit'],
 	  'class' => 'form-horizontal' ]) }}
 
-    <table name="assets" id="table" data-url="{{route('api.hardware.list', array(''=>Input::get('status'),'order_number'=>Input::get('order_number')))}}">
+    <table
+    name="assets"
+    id="table"
+    data-url="{{route('api.hardware.list', array(''=>Input::get('status'),'order_number'=>Input::get('order_number')))}}"
+    data-cookie="true"
+    data-click-to-select="true"
+    data-cookie-id-table="assetsTable">
         <thead>
             <tr>
                 <th data-class="hidden-xs" data-switchable="false" data-searchable="false" data-sortable="false" data-field="checkbox"><div class="text-center"><input type="checkbox" id="checkAll" style="padding-left: 0px;"></div></th>
@@ -86,11 +92,11 @@
 
 @section('moar_scripts')
 <script src="{{ asset('assets/js/bootstrap-table.js') }}"></script>
+<script src="{{ asset('assets/js/extensions/cookie/bootstrap-table-cookie.js') }}"></script>
 <script src="{{ asset('assets/js/extensions/mobile/bootstrap-table-mobile.js') }}"></script>
-<script src="{{ asset('assets/js/extensions/export/bootstrap-table-export.js?v=1') }}"></script>
-<script src="{{ asset('assets/js/extensions/cookie/bootstrap-table-cookie.js?v=1') }}"></script>
-<script src="//rawgit.com/kayalshri/tableExport.jquery.plugin/master/tableExport.js?v=1') }}"></script>
-<script src="//rawgit.com/kayalshri/tableExport.jquery.plugin/master/jquery.base64.js?v=1') }}"></script>
+<script src="{{ asset('assets/js/extensions/export/bootstrap-table-export.js') }}"></script>
+<script src="//rawgit.com/kayalshri/tableExport.jquery.plugin/master/tableExport.js"></script>
+<script src="//rawgit.com/kayalshri/tableExport.jquery.plugin/master/jquery.base64.js"></script>
 <script type="text/javascript">
     $('#table').bootstrapTable({
         classes: 'table table-responsive table-no-bordered',
@@ -104,10 +110,10 @@
         sortable: true,
         cookie: true,
         mobileResponsive: true,
-        columnsHidden: ['name'],
         showExport: true,
-        exportLabel: 'Export',
         showColumns: true,
+        exportDataType: 'all',
+        exportTypes: ['csv', 'txt','json', 'xml'],
         maintainSelected: true,
         paginationFirstText: "@lang('general.first')",
         paginationLastText: "@lang('general.last')",
@@ -123,6 +129,7 @@
 
     });
 </script>
+
 
 <script>
     $(function() {

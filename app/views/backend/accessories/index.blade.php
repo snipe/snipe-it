@@ -19,7 +19,13 @@
 <div class="user-profile">
     <div class="row profile">
         <div class="col-md-9 bio">
-            <table name="accessories" id="table" data-url="{{route('api.accessories.list')}}">
+            <table
+            name="accessories"
+            id="table"
+            data-url="{{route('api.accessories.list')}}"
+            data-cookie="true"
+            data-click-to-select="true"
+            data-cookie-id-table="accessoriesTable">
                 <thead>
                     <tr>
                         <th data-sortable="true" data-field="name">{{Lang::get('admin/accessories/table.title')}}</th>
@@ -45,11 +51,11 @@
 
 @section('moar_scripts')
 <script src="{{ asset('assets/js/bootstrap-table.js') }}"></script>
+<script src="{{ asset('assets/js/extensions/cookie/bootstrap-table-cookie.js') }}"></script>
 <script src="{{ asset('assets/js/extensions/mobile/bootstrap-table-mobile.js') }}"></script>
-<script src="{{ asset('assets/js/extensions/export/bootstrap-table-export.js?v=1') }}"></script>
-<script src="{{ asset('assets/js/extensions/cookie/bootstrap-table-cookie.js?v=1') }}"></script>
-<script src="//rawgit.com/kayalshri/tableExport.jquery.plugin/master/tableExport.js?v=1') }}"></script>
-<script src="//rawgit.com/kayalshri/tableExport.jquery.plugin/master/jquery.base64.js?v=1') }}"></script>
+<script src="{{ asset('assets/js/extensions/export/bootstrap-table-export.js') }}"></script>
+<script src="//rawgit.com/kayalshri/tableExport.jquery.plugin/master/tableExport.js"></script>
+<script src="//rawgit.com/kayalshri/tableExport.jquery.plugin/master/jquery.base64.js"></script>
 <script type="text/javascript">
     $('#table').bootstrapTable({
         classes: 'table table-responsive table-no-bordered',
@@ -63,8 +69,10 @@
         sortable: true,
         cookie: true,
         mobileResponsive: true,
-        columnsHidden: ['name'],
         showExport: true,
+        showColumns: true,
+        exportDataType: 'all',
+        exportTypes: ['csv', 'txt','json', 'xml'],
         maintainSelected: true,
         paginationFirstText: "@lang('general.first')",
         paginationLastText: "@lang('general.last')",

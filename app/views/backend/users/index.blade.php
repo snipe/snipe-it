@@ -45,6 +45,7 @@
         data-toggle="table"
         data-url="{{ route('api.users.list', array(''=>Input::get('status'))) }}"
         data-cookie="true"
+        data-click-to-select="true"
         data-cookie-id-table="userTable">
            <thead>
                <tr>
@@ -115,6 +116,8 @@
         mobileResponsive: true,
         showExport: true,
         showColumns: true,
+        exportDataType: 'all',
+        exportTypes: ['csv', 'txt','json', 'xml'],
         maintainSelected: true,
         paginationFirstText: "@lang('general.first')",
         paginationLastText: "@lang('general.last')",

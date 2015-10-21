@@ -45,7 +45,7 @@
                     '<div class="export btn-group">',
                         '<button class="btn btn-default dropdown-toggle" ' +
                             'data-toggle="dropdown" type="button">',
-                            '<i class="glyphicon glyphicon-export icon-share"></i> ',
+                            '<i class="fa fa-download"></i> ',
                             '<span class="caret"></span>',
                         '</button>',
                         '<ul class="dropdown-menu" role="menu">',
