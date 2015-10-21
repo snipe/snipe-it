@@ -1176,20 +1176,20 @@ class AssetsController extends AdminController
         }
 
         $rows[] = array(
-            'checkbox'  =>'<div class="text-center"><input type="checkbox" name="edit_asset['.$asset->id.']" class="one_required"></div>',
-            'name'      => '<a title="'.$asset->name.'" href="hardware/'.$asset->id.'/view">'.$asset->name.'</a>',
-            'asset_tag' => '<a title="'.$asset->asset_tag.'" href="hardware/'.$asset->id.'/view">'.$asset->asset_tag.'</a>',
-            'serial'    => $asset->serial,
-            'model'     => ($asset->model) ? $asset->model->name : 'No model',
-            'status'    => ($asset->assigneduser) ? link_to('../admin/users/'.$asset->assigned_to.'/view', $asset->assigneduser->fullName()) : (($asset->assetstatus) ? $asset->assetstatus->name : ''),
-            'location'  => (($asset->assigneduser) && ($asset->assigneduser->userloc!='')) ? link_to('admin/settings/locations/'.$asset->assigneduser->userloc->id.'/edit', $asset->assigneduser->userloc->name) : (($asset->defaultLoc!='') ? link_to('admin/settings/locations/'.$asset->defaultLoc->id.'/edit', $asset->defaultLoc->name) : ''),
-            'category'  => ($asset->model->category) ? $asset->model->category->name : 'No category',
-            'eol'       => ($asset->eol_date()) ? $asset->eol_date() : '',
-            'notes'     => $asset->notes,
-            'order_number'     => ($asset->order_number!='') ? '<a href="../hardware/?order_number='.$asset->order_number.'">'.$asset->order_number.'</a>' : ' ',
+            'checkbox'      =>'<div class="text-center"><input type="checkbox" name="edit_asset['.$asset->id.']" class="one_required"></div>',
+            'name'          => '<a title="'.$asset->name.'" href="hardware/'.$asset->id.'/view">'.$asset->name.'</a>',
+            'asset_tag'     => '<a title="'.$asset->asset_tag.'" href="hardware/'.$asset->id.'/view">'.$asset->asset_tag.'</a>',
+            'serial'        => $asset->serial,
+            'model'         => ($asset->model) ? $asset->model->name : 'No model',
+            'status'        => ($asset->assigneduser) ? link_to('../admin/users/'.$asset->assigned_to.'/view', $asset->assigneduser->fullName()) : (($asset->assetstatus) ? $asset->assetstatus->name : ''),
+            'location'      => (($asset->assigneduser) && ($asset->assigneduser->userloc!='')) ? link_to('admin/settings/locations/'.$asset->assigneduser->userloc->id.'/edit', $asset->assigneduser->userloc->name) : (($asset->defaultLoc!='') ? link_to('admin/settings/locations/'.$asset->defaultLoc->id.'/edit', $asset->defaultLoc->name) : ''),
+            'category'      => ($asset->model->category) ? $asset->model->category->name : 'No category',
+            'eol'           => ($asset->eol_date()) ? $asset->eol_date() : '',
+            'notes'         => $asset->notes,
+            'order_number'  => ($asset->order_number!='') ? '<a href="../hardware/?order_number='.$asset->order_number.'">'.$asset->order_number.'</a>' : 'none',
             'checkout_date' => (($asset->assigned_to!='')&&($asset->assetlog->first())) ? $asset->assetlog->first()->created_at->format('Y-m-d') : '',
-            'change'    => ($inout) ? $inout : '',
-            'actions'   => ($actions) ? $actions : ''
+            'change'        => ($inout) ? $inout : '',
+            'actions'       => ($actions) ? $actions : ''
             );
       }
 

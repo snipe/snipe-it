@@ -41,6 +41,14 @@
     </div>
 </div>
 
+@section('moar_scripts')
+<script src="{{ asset('assets/js/bootstrap-table.js') }}"></script>
+<script src="{{ asset('assets/js/extensions/mobile/bootstrap-table-mobile.js') }}"></script>
+<script src="{{ asset('assets/js/extensions/export/bootstrap-table-export.js?v=1') }}"></script>
+<script src="{{ asset('assets/js/extensions/cookie/bootstrap-table-cookie.js?v=1') }}"></script>
+<script src="//rawgit.com/kayalshri/tableExport.jquery.plugin/master/tableExport.js?v=1') }}"></script>
+<script src="//rawgit.com/kayalshri/tableExport.jquery.plugin/master/jquery.base64.js?v=1') }}"></script>
+
 <script type="text/javascript">
     $('#table').bootstrapTable({
         classes: 'table table-hover table-no-bordered',
@@ -69,5 +77,6 @@
         },
     });
 </script>
+@stop
 
 @stop

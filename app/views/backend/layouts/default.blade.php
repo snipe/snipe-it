@@ -5,7 +5,7 @@
 
         <!-- Basic Page Needs
         ================================================== -->
-        <meta http-equiv="X-UA-Compatible" content="IE=edge" /> 
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta charset="utf-8" />
         <title>
             @section('title')
@@ -43,16 +43,6 @@
 
 
         <!-- global header javascripts -->
-        <script src="{{ asset('assets/js/jquery-latest.js') }}"></script>
-        <script src="{{ asset('assets/js/bootstrap-table.js') }}"></script>
-        <script src="{{ asset('assets/js/extensions/export/bootstrap-table-export.js') }}"></script>
-        <script src="{{ asset('assets/js/extensions/cookie/bootstrap-table-cookie.js') }}"></script>
-        <script src="{{ asset('assets/js/extensions/mobile/bootstrap-table-mobile.js') }}"></script>
-        <script src="{{ asset('assets/js/libs/FileSaver/FileSaver.min.js') }}"></script>
-        <script src="{{ asset('assets/js/libs/html2canvas/html2canvas.min.js') }}"></script>
-        <script src="{{ asset('assets/js/libs/jsPDF/jspdf.min.js') }}"></script>
-        <script src="{{ asset('assets/js/libs/jsPDF-AutoTable/jspdf.plugin.autotable.js') }}"></script>
-
         <script>
             window.snipeit = {
                 settings: {
@@ -464,12 +454,18 @@
     </div>
 
     <!-- scripts -->
-    <script src="{{ asset('assets/js/bootstrap.min.js') }}"></script>
+
+    <script src="{{ asset('assets/js/jquery-latest.js') }}"></script>
+    <script src="{{ asset('assets/js/bootstrap.min.js') }}"></script>    
     <script src="{{ asset('assets/js/jquery.knob.js') }}"></script>
     <script src="{{ asset('assets/js/select2.min.js') }}"></script>
     <script src="{{ asset('assets/js/jquery.uniform.min.js') }}"></script>
     <script src="{{ asset('assets/js/bootstrap.datepicker.js') }}"></script>
     <script src="{{ asset('assets/js/theme.js') }}"></script>
     <script src="{{ asset('assets/js/snipeit.js') }}"></script>
+
+    @section('moar_scripts')
+	@show
+
     </body>
 </html>
