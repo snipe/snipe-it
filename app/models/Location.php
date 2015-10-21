@@ -104,6 +104,8 @@ class Location extends Elegant
                 ->orWhere('city', 'LIKE', "%$search%")
                 ->orWhere('state', 'LIKE', "%$search%")
                 ->orWhere('zip', 'LIKE', "%$search%")
+                
+                // This doesn't actually work - need to use a table alias maybe?
                 ->orWhere(function($query) use ($search) {
                     $query->whereHas('parent', function($query) use ($search) {
                         $query->where(function($query) use ($search) {

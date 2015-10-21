@@ -80,7 +80,7 @@ class User extends SentryUserModel
     **/
     public function manager()
     {
-        return $this->hasOne('User','manager_id')->withTrashed();
+        return $this->belongsTo('User','manager_id')->withTrashed();
     }
 
 
