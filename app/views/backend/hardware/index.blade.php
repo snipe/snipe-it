@@ -98,7 +98,7 @@
 <script type="text/javascript">
     $('#table').bootstrapTable({
         classes: 'table table-responsive table-no-bordered',
-        undefinedText: 'undefined',
+        undefinedText: '',
         iconsPrefix: 'fa',
         showRefresh: true,
         search: true,

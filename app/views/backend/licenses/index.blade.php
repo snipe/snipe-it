@@ -38,11 +38,10 @@
 <script src="{{ asset('assets/js/extensions/cookie/bootstrap-table-cookie.js?v=1') }}"></script>
 <script src="//rawgit.com/kayalshri/tableExport.jquery.plugin/master/tableExport.js?v=1') }}"></script>
 <script src="//rawgit.com/kayalshri/tableExport.jquery.plugin/master/jquery.base64.js?v=1') }}"></script>
-
 <script type="text/javascript">
     $('#table').bootstrapTable({
-        classes: 'table table-hover table-no-bordered',
-        undefinedText: 'undefined',
+        classes: 'table table-responsive table-no-bordered',
+        undefinedText: '',
         iconsPrefix: 'fa',
         showRefresh: true,
         search: true,
@@ -50,9 +49,12 @@
         pagination: true,
         sidePagination: 'server',
         sortable: true,
+        cookie: true,
         mobileResponsive: true,
+        columnsHidden: ['name'],
         showExport: true,
-        showColumns: false,
+        exportLabel: 'Export',
+        showColumns: true,
         maintainSelected: true,
         paginationFirstText: "@lang('general.first')",
         paginationLastText: "@lang('general.last')",
@@ -65,6 +67,7 @@
             columns: 'fa-columns',
             refresh: 'fa-refresh'
         },
+
     });
 </script>
 @stop
