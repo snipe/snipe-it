@@ -907,7 +907,7 @@ class UsersController extends AdminController {
                 'email'         => ($user->email!='') ? '<span class="hidden-md hidden-lg" style="display: inline !important;"><a href="mailto:'.$user->email.'">'.$user->email.'</a></span> <span class="hidden-xs hidden-sm"><a href="mailto:'.$user->email.'"><i class="fa fa-envelope"></i></a></span>' : '',
                 'username'         => $user->username,
                 'location'      => ($user->location_id!='') ? $user->userloc->name : '',
-                'manager'         => ($user->manager_id!='') ? '<a title="' . $user->manager->fullName() . '" href="users/' . $user->manager->id . '/view">' . $user->manager->fullName() . '</a>' : '',
+                'manager'         => ($user->manager) ? '<a title="' . $user->manager->fullName() . '" href="users/' . $user->manager->id . '/view">' . $user->manager->fullName() . '</a>' : '',
                 'assets'        => $user->assets->count(),
                 'licenses'        => $user->licenses->count(),
                 'accessories'        => $user->accessories->count(),
