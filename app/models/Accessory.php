@@ -67,7 +67,7 @@ class Accessory extends Elegant
 	    $remaining = $total - $checkedout;
 	    return $remaining;
     }
-    
+
     /**
     * Query builder scope to search on text
     *
@@ -81,8 +81,8 @@ class Accessory extends Elegant
 
         return $query->where(function($query) use ($search)
         {
-                $query->where('name', 'LIKE', '%'.$s.'%');
+                $query->where('name', 'LIKE', '%'.$search.'%');
         });
     }
-    
+
 }
