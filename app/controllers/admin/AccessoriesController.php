@@ -465,12 +465,25 @@ class AccessoriesController extends AdminController
 
     public function getDatatable()
     {
-        $accessories = Accessory::select(array('id','name','qty'))
+        $accessories = Accessory::select(array('id','name','qty','category_id'))->with('category')
         ->whereNull('deleted_at');
 
         if (Input::has('search')) {
             $accessories = $accessories->TextSearch(Input::get('search'));
         }
+
+        if (Input::has('offset')) {
+            $offset = e(Input::get('offset'));
+        } else {
+            $offset = 0;
+        }
+
+        if (Input::has('limit')) {
+            $limit = e(Input::get('limit'));
+        } else {
+            $limit = 50;
+        }
+
 
         $allowed_columns = ['name'];
         $order = Input::get('order') === 'asc' ? 'asc' : 'desc';
@@ -479,7 +492,7 @@ class AccessoriesController extends AdminController
         $accessories = $accessories->orderBy($sort, $order);
 
         $accessCount = $accessories->count();
-        $accessories = $accessories->skip(Input::get('offset'))->take(Input::get('limit'))->get();        
+        $accessories = $accessories->skip($offset)->take($limit)->get();
 
         $rows = array();
 
@@ -488,6 +501,7 @@ class AccessoriesController extends AdminController
 
             $rows[] = array(
                 'name'          => link_to('admin/accessories/'.$accessory->id.'/view', $accessory->name),
+                'category'      => $accessory->category->name,
                 'qty'           => $accessory->qty,
                 'numRemaining'  => $accessory->numRemaining(),
                 'actions'       => $actions

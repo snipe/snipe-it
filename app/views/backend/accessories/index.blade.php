@@ -23,6 +23,7 @@
                 <thead>
                     <tr>
                         <th data-sortable="true" data-field="name">{{Lang::get('admin/accessories/table.title')}}</th>
+                        <th data-switchable="false" data-searchable="false" data-sortable="false" data-field="category">{{Lang::get('admin/accessories/general.accessory_category')}}</th>
                         <th data-switchable="false" data-searchable="false" data-sortable="false" data-field="qty">{{Lang::get('admin/accessories/general.total')}}</th>
                         <th data-switchable="false" data-searchable="false" data-sortable="false" data-field="numRemaining">{{Lang::get('admin/accessories/general.remaining')}}</th>
                         <th data-switchable="false" data-searchable="false" data-sortable="false" data-field="actions">{{Lang::get('table.actions')}}</th>
@@ -64,8 +65,6 @@
         mobileResponsive: true,
         columnsHidden: ['name'],
         showExport: true,
-        exportLabel: 'Export',
-        showColumns: true,
         maintainSelected: true,
         paginationFirstText: "@lang('general.first')",
         paginationLastText: "@lang('general.last')",
