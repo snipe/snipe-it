@@ -19,7 +19,13 @@
 <div class="user-profile">
 	<div class="row profile">
 		<div class="col-md-9 bio">
-			<table name="models" id="table" data-url="{{route('api.categories.list')}}">
+			<table
+            name="categories"
+            id="table"
+            data-url="{{route('api.categories.list')}}"
+            data-cookie="true"
+            data-click-to-select="true"
+            data-cookie-id-table="categoriesTable">
 		        <thead>
 		            <tr>
 		                <th data-sortable="true" data-field="name">{{Lang::get('admin/categories/table.title')}}</th>
@@ -45,14 +51,14 @@
 
 @section('moar_scripts')
 <script src="{{ asset('assets/js/bootstrap-table.js') }}"></script>
+<script src="{{ asset('assets/js/extensions/cookie/bootstrap-table-cookie.js') }}"></script>
 <script src="{{ asset('assets/js/extensions/mobile/bootstrap-table-mobile.js') }}"></script>
-<script src="{{ asset('assets/js/extensions/export/bootstrap-table-export.js?v=1') }}"></script>
-<script src="{{ asset('assets/js/extensions/cookie/bootstrap-table-cookie.js?v=1') }}"></script>
-<script src="//rawgit.com/kayalshri/tableExport.jquery.plugin/master/tableExport.js?v=1') }}"></script>
-<script src="//rawgit.com/kayalshri/tableExport.jquery.plugin/master/jquery.base64.js?v=1') }}"></script>
+<script src="{{ asset('assets/js/extensions/export/bootstrap-table-export.js') }}"></script>
+<script src="//rawgit.com/kayalshri/tableExport.jquery.plugin/master/tableExport.js"></script>
+<script src="//rawgit.com/kayalshri/tableExport.jquery.plugin/master/jquery.base64.js"></script>
 <script type="text/javascript">
     $('#table').bootstrapTable({
-        classes: 'table table-hover table-no-bordered',
+        classes: 'table table-responsive table-no-bordered',
         undefinedText: '',
         iconsPrefix: 'fa',
         showRefresh: true,
@@ -61,9 +67,12 @@
         pagination: true,
         sidePagination: 'server',
         sortable: true,
+        cookie: true,
         mobileResponsive: true,
         showExport: true,
         showColumns: true,
+        exportDataType: 'all',
+        exportTypes: ['csv', 'txt','json', 'xml'],
         maintainSelected: true,
         paginationFirstText: "@lang('general.first')",
         paginationLastText: "@lang('general.last')",
@@ -76,6 +85,7 @@
             columns: 'fa-columns',
             refresh: 'fa-refresh'
         },
+
     });
 </script>
 @stop
