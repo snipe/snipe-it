@@ -75,7 +75,7 @@ class Model extends Elegant
 
         return $query->whereIn( 'category_id', $categoryIdListing );
     }
-    
+
     /**
     * Query builder scope to search on text
     *
@@ -87,11 +87,24 @@ class Model extends Elegant
     public function scopeTextSearch($query, $search)
     {
 
-        return $query->where(function($query) use ($search)
-        {
-            $query->where('name', 'LIKE', '%'.$search.'%')
-            ->orWhere('modelno', 'LIKE', '%'.$search.'%');
-        });
+        return $query->where('name', 'LIKE', "%$search%")
+            ->orWhere('modelno', 'LIKE', "%$search%")
+            ->orWhere(function($query) use ($search) {
+                $query->whereHas('depreciation', function($query) use ($search) {
+                    $query->where('name','LIKE','%'.$search.'%');
+                });
+            })
+            ->orWhere(function($query) use ($search) {
+                $query->whereHas('category', function($query) use ($search) {
+                    $query->where('name','LIKE','%'.$search.'%');
+                });
+            })
+            ->orWhere(function($query) use ($search) {
+                $query->whereHas('manufacturer', function($query) use ($search) {
+                    $query->where('name','LIKE','%'.$search.'%');
+                });
+            });
+
     }
 
 }
