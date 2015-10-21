@@ -839,6 +839,12 @@ class UsersController extends AdminController {
             $limit = 50;
         }
 
+        if (Input::get('sort')=='name') {
+            $sort = 'first_name';
+        } else {
+            $sort = e(Input::get('sort'));
+        }
+
         $users = User::with('assets', 'accessories', 'consumables', 'licenses', 'manager', 'sentryThrottle', 'groups', 'userloc');
 
 
@@ -848,11 +854,11 @@ class UsersController extends AdminController {
 
         $allowed_columns = ['last_name','first_name','email','username','manager','location','assets','accessories', 'consumables','licenses','groups'];
         $order = Input::get('order') === 'asc' ? 'asc' : 'desc';
-        $sort = in_array(Input::get('sort'), $allowed_columns) ? Input::get('sort') : 'last_name';
+        $sort = in_array($sort, $allowed_columns) ? $sort : 'first_name';
 
 
         $userCount = $users->count();
-        $users = $users->skip($offset)->take($limit)->get();
+        $users = $users->skip($offset)->take($limit)->orderBy($sort, $order)->get();
 
 
         $rows = array();
