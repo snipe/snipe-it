@@ -902,9 +902,9 @@ class UsersController extends AdminController {
             $actions .= '</nobr>';
 
             $rows[] = array(
-                'checkbox'      =>'<div class="text-center"><input type="checkbox" name="edit_user['.$user->id.']" class="one_required"></div>',
+                'checkbox'      =>'<div class="text-center hidden-xs hidden-sm"><input type="checkbox" name="edit_user['.$user->id.']" class="one_required"></div>',
                 'name'          => '<a title="'.$user->fullName().'" href="../admin/users/'.$user->id.'/view">'.$user->fullName().'</a>',
-                'email'         => ($user->email!='') ? '<a href="mailto:'.$user->email.'"><i class="fa fa-envelope"></i></a>' : '',
+                'email'         => ($user->email!='') ? '<span class="hidden-md hidden-lg" style="display: inline !important;"><a href="mailto:'.$user->email.'">'.$user->email.'</a></span> <span class="hidden-xs hidden-sm"><a href="mailto:'.$user->email.'"><i class="fa fa-envelope"></i></a></span>' : '',
                 'username'         => $user->username,
                 'location'      => ($user->location_id!='') ? $user->userloc->name : '',
                 'manager'         => ($user->manager_id!='') ? '<a title="' . $user->manager->fullName() . '" href="users/' . $user->manager->id . '/view">' . $user->manager->fullName() . '</a>' : '',

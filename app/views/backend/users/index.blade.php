@@ -48,16 +48,31 @@
         data-cookie-id-table="userTable">
            <thead>
                <tr>
-                   <th data-class="hidden-xs" data-switchable="false" data-searchable="false" data-sortable="false" data-field="checkbox"><div class="text-center"><input type="checkbox" id="checkAll" style="padding-left: 0px;"></div></th>
+                   <th data-class="hidden-xs hidden-sm" data-switchable="false" data-searchable="false" data-sortable="false" data-field="checkbox"><div class="text-center"><input type="checkbox" id="checkAll" style="padding-left: 0px;" style="hidden-xs hidden-sm"></div></th>
                    <th data-sortable="true" data-field="name">{{ Lang::get('admin/users/table.name') }}</th>
-                   <th data-sortable="true" data-field="email"><i class="fa fa-envelope fa-lg"></i></th>
+                   <th data-sortable="true" data-field="email">
+                       <span class="hidden-md hidden-lg">Email</span>
+                       <span class="hidden-xs"><i class="fa fa-envelope fa-lg"></i></span>
+                   </th>
                    <th data-sortable="true" data-field="username">{{ Lang::get('admin/users/table.username') }}</th>
                    <th data-sortable="false" data-field="manager">{{ Lang::get('admin/users/table.manager') }}</th>
                    <th data-sortable="false" data-field="location">{{ Lang::get('admin/users/table.location') }}</th>
-                   <th data-sortable="false" data-field="assets"><i class="fa fa-barcode fa-lg"></i></th>
-                   <th data-sortable="false" data-field="licenses"><i class="fa fa-certificate fa-lg"></i></th>
-                   <th data-sortable="false" data-field="accessories"><i class="fa fa-keyboard-o fa-lg"></i></th>
-                   <th data-sortable="false" data-field="consumables"><i class="fa fa-tint fa-lg"></i></th>
+                   <th data-sortable="false" data-field="assets">
+                       <span class="hidden-md hidden-lg">Assets</span>
+                       <span class="hidden-xs"><i class="fa fa-barcode fa-lg"></i></span>
+                   </th>
+                   <th data-sortable="false" data-field="licenses">
+                       <span class="hidden-md hidden-lg">Licenses</span>
+                       <span class="hidden-xs"><i class="fa fa-certificate fa-lg"></i></span>
+                   </th>
+                   <th data-sortable="false" data-field="accessories">
+                       <span class="hidden-md hidden-lg">Accessories</span>
+                       <span class="hidden-xs"><i class="fa fa-keyboard-o fa-lg"></i></span>
+                   </th>
+                   <th data-sortable="false" data-field="consumables">
+                       <span class="hidden-md hidden-lg">Consumables</span>
+                       <span class="hidden-xs"><i class="fa fa-tint fa-lg"></i></span>
+                   </th>
                    <th data-sortable="false" data-field="groups">{{ Lang::get('general.groups') }}</th>
                    <th data-sortable="true" data-field="notes">{{ Lang::get('general.notes') }}</th>
                    <th data-switchable="false" data-searchable="false" data-sortable="false" data-field="actions" >{{ Lang::get('table.actions') }}</th>
