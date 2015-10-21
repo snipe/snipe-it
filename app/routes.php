@@ -39,11 +39,17 @@
                 [ 'as' => 'api.accessories.view', 'uses' => 'AccessoriesController@getDataView' ] );
         } );
 
-    /*---Consumables API---*/
-    Route::group(array('prefix'=>'consumables'), function () {
-        Route::get('list', array('as'=>'api.consumables.list', 'uses'=>'ConsumablesController@getDatatable'));
-        Route::get('{consumableID}/view', array('as'=>'api.consumables.view', 'uses'=>'ConsumablesController@getDataView'));
-    });
+        /*---Consumables API---*/
+        Route::group(array('prefix'=>'consumables'), function () {
+            Route::get('list', array('as'=>'api.consumables.list', 'uses'=>'ConsumablesController@getDatatable'));
+            Route::get('{consumableID}/view', array('as'=>'api.consumables.view', 'uses'=>'ConsumablesController@getDataView'));
+        });
+
+        /*---Locations API---*/
+        Route::group(array('prefix'=>'locations'), function () {
+            Route::get('list', array('as'=>'api.locations.list', 'uses'=>'LocationsController@getDatatable'));
+            Route::get('{$locationID}/view', array('as'=>'api.locations.view', 'uses'=>'LocationsController@getDataView'));
+        });
 
         /*---Users API---*/
         Route::group( [ 'prefix' => 'users' ], function () {
