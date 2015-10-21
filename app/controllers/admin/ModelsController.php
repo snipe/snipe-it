@@ -373,6 +373,19 @@ class ModelsController extends AdminController
             $models = $models->TextSearch(Input::get('search'));
         }
 
+        if (Input::has('offset')) {
+            $offset = e(Input::get('offset'));
+        } else {
+            $offset = 0;
+        }
+
+        if (Input::has('limit')) {
+            $limit = e(Input::get('limit'));
+        } else {
+            $limit = 50;
+        }
+
+
         $allowed_columns = ['name'];
         $order = Input::get('order') === 'asc' ? 'asc' : 'desc';
         $sort = in_array(Input::get('sort'), $allowed_columns) ? Input::get('sort') : 'created_at';
@@ -380,7 +393,7 @@ class ModelsController extends AdminController
         $models = $models->orderBy($sort, $order);
 
         $modelCount = $models->count();
-        $models = $models->skip(Input::get('offset'))->take(Input::get('limit'))->get();
+        $models = $models->skip($offset)->take($limit)->get();
 
         $rows = array();
 
