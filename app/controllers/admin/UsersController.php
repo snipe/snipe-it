@@ -868,7 +868,7 @@ class UsersController extends AdminController {
 
             $group_names = '';
             $inout = '';
-            $actions = '';
+            $actions = '<nobr>';
 
             foreach ($user->groups as $group) {
                 $group_names .= '<a href="' . Config::get('app.url') . '/admin/groups/' . $group->id . '/edit" class="label  label-default">' . $group->name . '</a> ';
@@ -892,6 +892,7 @@ class UsersController extends AdminController {
                     $actions .= ' <span class="btn delete-asset btn-danger btn-sm disabled"><i class="fa fa-trash icon-white"></i></span>';
                 }
             }
+            $actions .= '</nobr>';
 
             $rows[] = array(
                 'checkbox'      =>'<div class="text-center"><input type="checkbox" name="edit_user['.$user->id.']" class="one_required"></div>',
