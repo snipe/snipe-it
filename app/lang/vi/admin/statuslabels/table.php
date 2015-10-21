@@ -1,15 +1,15 @@
 <?php
 
 return array(
-    'about'      	=> 'About Status Labels',
-    'archived'      	=> 'Archived',
-    'create'      	=> 'Create Status Label',
-    'deployable'      	=> 'Deployable',
+    'about'      	=> 'Về tình trạng nhãn',
+    'archived'      	=> 'Đã lưu trữ',
+    'create'      	=> 'Tạo tình trạng nhãn',
+    'deployable'      	=> 'Cho phép cấp phát',
     'info'      	=> 'Status labels are used to describe the various states your assets could be in. They may be out for repair, lost/stolen, etc. You can create new status labels for deployable, pending and archived assets.',
-    'name'      	=> 'Status Name',
-    'pending'      	=> 'Pending',
-    'status_type'   => 'Status Type',
-    'title'      	=> 'Status Labels',
-    'undeployable'  => 'Undeployable',
-    'update'      	=> 'Update Status Label',
+    'name'      	=> 'Tên tình trạng',
+    'pending'      	=> 'Đang chờ',
+    'status_type'   => 'Loại tình trạng',
+    'title'      	=> 'Nhãn tình trạng',
+    'undeployable'  => 'Không cho phép cấp phát',
+    'update'      	=> 'Cập nhật tình trạng nhãn',
 );

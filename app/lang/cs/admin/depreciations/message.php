@@ -3,23 +3,23 @@
 return array(
 
     'does_not_exist' => 'Amortizační skupina neexistuje.',
-    'assoc_users'	 => 'This depreciation is currently associated with one or more models and cannot be deleted. Please delete the models, and then try deleting again. ',
+    'assoc_users'	 => 'Tato amortizace je momentálně spojena s jedním nebo více modely a nemůže být smazáno. Prosím smažte tyto modely a pak to zkuste znovu. ',
 
 
     'create' => array(
-        'error'   => 'Depreciation class was not created, please try again. :(',
-        'success' => 'Depreciation class created successfully. :)'
+        'error'   => 'Skupina amrotizace nebyla vytvořena, zkuste to znovu. :(',
+        'success' => 'Skupina amrotizace úspěšně vytvořena. :)'
     ),
 
     'update' => array(
-        'error'   => 'Depreciation class was not updated, please try again',
-        'success' => 'Depreciation class updated successfully.'
+        'error'   => 'Skupina amrotizace nebyla aktualizována, zkuste to znovu',
+        'success' => 'Skupina amrotizace úspěšně aktualizována.'
     ),
 
     'delete' => array(
-        'confirm'   => 'Are you sure you wish to delete this depreciation class?',
-        'error'   => 'There was an issue deleting the depreciation class. Please try again.',
-        'success' => 'The depreciation class was deleted successfully.'
+        'confirm'   => 'Opravdu chcete smazat tuto skupinu amrotizace?',
+        'error'   => 'Vyskytl se problém při mazání skupiny amrotizace. Zkuste to znovu.',
+        'success' => 'Skupina amrotizace byla úspěšně smazána.'
     )
 
 );

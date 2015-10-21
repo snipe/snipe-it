@@ -12,4 +12,6 @@ return array(
     'address'		=> 'Adresse',
     'zip'			=> 'Postnummer',
     'locations'		=> 'Plasseringer',
+    'parent'		=> 'Overordnet',
+    'currency'  	=> 'Valuta i lokasjon', // this is deprecated
 );

@@ -6,6 +6,7 @@ return array(
     'checkout_history'  		=> 'Historial Asignaciones',
     'checkout'  				=> 'Asignar Instalación',
     'edit'  					=> 'Editar Usuario',
+    'filetype_info'				=> 'Tipos de archivos permitidos son png, gif, jpg, jpeg, doc, docx, pdf, txt, zip, y rar.',
     'clone'  					=> 'Clonar Usuario',
     'history_for'  				=> 'Historial para ',
     'in_out'  					=> 'Quita/Asigna',

@@ -7,6 +7,7 @@ composer.phar
 /app/database/*.sqlite
 /app/storage/meta/services.json
 /app/config/*/mail.php
+/app/config/*/session.php
 /app/config/*/database.php
 /app/config/*/app.php
 public/packages/*
@@ -22,3 +23,12 @@ public/uploads/logo.gif
 public/uploads/logo.png
 .siteflow
 public/assets/.siteflow
+app/config/local/session.php
+.couscous
+tests/_support/_generated/*
+tests/_data/scenarios
+nbproject/*
+app/config/local/ldap.php
+app/storage/dumps/*
+app/config/packages/schickling/backup/config.php
+app/config/app.backup.php

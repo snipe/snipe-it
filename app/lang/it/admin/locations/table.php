@@ -12,4 +12,6 @@ return array(
     'address'		=> 'Indirizzo',
     'zip'			=> 'Codice Postale',
     'locations'		=> 'Posizioni',
+    'parent'		=> 'Genitore',
+    'currency'  	=> 'Valuta della Posizione', // this is deprecated
 );

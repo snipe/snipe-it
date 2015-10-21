@@ -15,6 +15,7 @@ return array(
     'notes'             => 'Notas',
     'order'             => 'Nº do Pedido',
     'purchase_order'    => 'Número do Pedido de Compra',
+    'reassignable'      => 'Realocavel',
     'remaining_seats'   => 'Compartilhamentos restantes',
     'seats'             => 'Nº compart.',
     'serial'            => 'Serial',

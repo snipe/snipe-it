@@ -36,7 +36,7 @@ class CategoriesController extends AdminController
     public function getCreate()
     {
         // Show the page
-         $category_types= array('' => '', 'asset' => 'Asset', 'accessory' => 'Accessory');
+         $category_types= categoryTypeList();
         return View::make('backend/categories/edit')->with('category',new Category)
         ->with('category_types',$category_types);
     }
@@ -66,8 +66,9 @@ class CategoriesController extends AdminController
             $category->name            		= e(Input::get('name'));
             $category->category_type        = e(Input::get('category_type'));
             $category->eula_text            = e(Input::get('eula_text'));
-            $category->use_default_eula     = e(Input::get('use_default_eula', '0'));  
-            $category->require_acceptance   = e(Input::get('require_acceptance', '0')); 
+            $category->use_default_eula     = e(Input::get('use_default_eula', '0'));
+            $category->require_acceptance   = e(Input::get('require_acceptance', '0'));
+            $category->checkin_email        = e(Input::get('checkin_email', '0'));
             $category->user_id          	= Sentry::getId();
 
             // Was the asset created?
@@ -101,8 +102,8 @@ class CategoriesController extends AdminController
         //$category_options = array('' => 'Top Level') + Category::lists('name', 'id');
 
         $category_options = array('' => 'Top Level') + DB::table('categories')->where('id', '!=', $categoryId)->lists('name', 'id');
-        $category_types= array('' => '', 'asset' => 'Asset', 'accessory' => 'Accessory');
-        
+        $category_types= array('' => '', 'asset' => 'Asset', 'accessory' => 'Accessory', 'consumable' => 'Consumable');
+
         return View::make('backend/categories/edit', compact('category'))
         ->with('category_options',$category_options)
         ->with('category_types',$category_types);
@@ -143,8 +144,9 @@ class CategoriesController extends AdminController
             $category->name            = e(Input::get('name'));
             $category->category_type        = e(Input::get('category_type'));
             $category->eula_text            = e(Input::get('eula_text'));
-            $category->use_default_eula     = e(Input::get('use_default_eula', '0'));  
-            $category->require_acceptance   = e(Input::get('require_acceptance', '0')); 
+            $category->use_default_eula     = e(Input::get('use_default_eula', '0'));
+            $category->require_acceptance   = e(Input::get('require_acceptance', '0'));
+            $category->checkin_email        = e(Input::get('checkin_email', '0'));
 
             // Was the asset created?
             if($category->save()) {
@@ -241,13 +243,13 @@ class CategoriesController extends AdminController
         ->orderColumns('name','category_type','count','acceptance','eula','actions')
         ->make();
     }
-    
+
     public function getDataView($categoryID) {
         $category = Category::find($categoryID);
         $categoryassets = $category->assets;
 
-        $actions = new \Chumper\Datatable\Columns\FunctionColumn('actions', function ($categoryassets) 
-            { 
+        $actions = new \Chumper\Datatable\Columns\FunctionColumn('actions', function ($categoryassets)
+            {
                 if (($categoryassets->assigned_to !='') && ($categoryassets->assigned_to > 0)) {
                     return '<a href="'.route('checkin/hardware', $categoryassets->id).'" class="btn btn-primary btn-sm">'.Lang::get('general.checkin').'</a>';
                 } else {

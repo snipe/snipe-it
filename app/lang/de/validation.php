@@ -77,7 +77,7 @@ return array(
     */
 
     'custom' => array(),
-    'alpha_space' => ":attribute Feld darf nur Buchstaben, Kommas, Leerzeichen und Gedankenstriche enthalten.",
+    'alpha_space' => "Das :attribute Feld enthält ein nicht erlaubtes Zeichen.",
 
     /*
     |--------------------------------------------------------------------------

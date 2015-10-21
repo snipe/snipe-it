@@ -13,12 +13,12 @@ return array(
     |
     */
 
-    "password" => "Passwords must be six characters and match the confirmation.",
+    "password" => "Heslo musí mít šest znaků a schodovat se s potvrzujícím heslem.",
 
-    "user"     => "Username or email address is incorrect",
+    "user"     => "Uživatelské jméno nebo email je chybný",
 
-    "token"    => "This password reset token is invalid.",
+    "token"    => "Tento token pro reset hesla je neplatný.",
 
-    "sent" => "If a matching email address was found, a password reminder has been sent!",
+    "sent" => "Pokud byl email nalezen, tak bylo heslo zasláno!",
 
 );

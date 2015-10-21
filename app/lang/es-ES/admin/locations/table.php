@@ -12,4 +12,6 @@ return array(
     'address'		=> 'Dirección',
     'zip'			=> 'Códio Postal',
     'locations'		=> 'Localizaciones',
+    'parent'		=> 'Padre',
+    'currency'  	=> 'Divisa de la Localización', // this is deprecated
 );

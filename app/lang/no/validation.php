@@ -77,7 +77,7 @@ return array(
     */
 
     'custom' => array(),
-    'alpha_space' => "Attributt-feltet :attribute kan kun inneholde bokstaver, komma, mellomrom eller bindestreker.",
+    'alpha_space' => "Feltet :attribute innholder ugyldige tegn.",
 
     /*
     |--------------------------------------------------------------------------

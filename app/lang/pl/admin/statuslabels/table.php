@@ -1,15 +1,15 @@
 <?php
 
 return array(
-    'about'      	=> 'About Status Labels',
-    'archived'      	=> 'Archived',
-    'create'      	=> 'Create Status Label',
-    'deployable'      	=> 'Deployable',
-    'info'      	=> 'Status labels are used to describe the various states your assets could be in. They may be out for repair, lost/stolen, etc. You can create new status labels for deployable, pending and archived assets.',
-    'name'      	=> 'Status Name',
-    'pending'      	=> 'Pending',
-    'status_type'   => 'Status Type',
-    'title'      	=> 'Status Labels',
-    'undeployable'  => 'Undeployable',
-    'update'      	=> 'Update Status Label',
+    'about'      	=> 'O statusie',
+    'archived'      	=> 'Zarchiwizowane',
+    'create'      	=> 'Stwórz Status',
+    'deployable'      	=> 'Gotowe do wdrożenia',
+    'info'      	=> 'Status jest używany by opisać różne stany w jakich mogą znaleźć się twoje aktywa. Mogą być one w trakcie naprawy, zgubione/ukradzione itd. Możesz tworzyć nowe etykiety statusu dla gotowych do wdrożenia, oczekujących oraz zarchiwizowanych aktywów.',
+    'name'      	=> 'Nazwa Statusu',
+    'pending'      	=> 'Oczekujący',
+    'status_type'   => 'Typ Statusu',
+    'title'      	=> 'Status',
+    'undeployable'  => 'Niemożliwe do wdrożenia',
+    'update'      	=> 'Zaktualizuj Status',
 );

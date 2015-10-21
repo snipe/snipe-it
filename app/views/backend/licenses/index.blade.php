@@ -18,11 +18,14 @@
 
 <div class="row form-wrapper">
     {{ Datatable::table()
-                ->addColumn(Lang::get('admin/licenses/table.title'), 
-                            Lang::get('admin/licenses/table.serial'), 
-                            Lang::get('admin/licenses/form.seats'), 
-                            Lang::get('admin/licenses/form.remaining_seats'), 
-                            Lang::get('admin/licenses/table.purchase_date'), 
+                ->addColumn(Lang::get('admin/licenses/table.title'),
+                            Lang::get('admin/licenses/table.serial'),
+                            Lang::get('admin/licenses/form.to_name'),
+                            Lang::get('admin/licenses/form.to_email'),
+                            Lang::get('admin/licenses/form.seats'),
+                            Lang::get('admin/licenses/form.remaining_seats'),
+                            Lang::get('admin/licenses/table.purchase_date'),
+                            Lang::get('admin/licenses/form.notes'),
                             Lang::get('table.actions'))
                 ->setOptions(
                         array(
@@ -31,7 +34,7 @@
 			            	'lengthMenu' => Lang::get('general.page_menu'),
 			            	'loadingRecords' => Lang::get('general.loading'),
 			            	'zeroRecords' => Lang::get('general.no_results'),
-			            	'info' => Lang::get('general.pagination_info'), 
+			            	'info' => Lang::get('general.pagination_info'),
 			            	'processing' => Lang::get('general.processing'),
 			            	'paginate'=> array(
 			            		'first'=>Lang::get('general.first'),
@@ -42,10 +45,10 @@
 			            	),
                             'sAjaxSource'=>route('api.licenses.list'),
                             'dom' =>'CT<"clear">lfrtip',
-                            'colVis'=> array('showAll'=>'Show All','restore'=>'Restore','exclude'=>array(5),'activate'=>'mouseover'),
+                            'colVis'=> array('showAll'=>'Show All','restore'=>'Restore','exclude'=>array(8),'activate'=>'mouseover'),
                             'columnDefs'=> array(
-                                array('bSortable'=>false,'targets'=>array(5)),
-                                array('width'=>'20%','targets'=>array(5)),
+                                array('bSortable'=>false,'targets'=>array(8)),
+                                array('width'=>'20%','targets'=>array(8)),
                                 ),
                             'order'=>array(array(0,'asc')),
                         )

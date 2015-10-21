@@ -8,7 +8,8 @@ return array(
 
     'create' => array(
         'error'   => 'Modelul nu a fost creat, incercati iar.',
-        'success' => 'Modelul a fost creat.'
+        'success' => 'Modelul a fost creat.',
+        'duplicate_set' => 'An asset model with that name, manufacturer and model number already exists.',
     ),
 
     'update' => array(
@@ -21,7 +22,7 @@ return array(
         'error'   => 'A aparut o problema la stergerea modelului. Incercati iar.',
         'success' => 'Modelul a fost sters.'
     ),
-    
+
     'restore' => array(
         'error'   		=> 'Model was not restored, please try again',
         'success' 		=> 'Model restored successfully.'

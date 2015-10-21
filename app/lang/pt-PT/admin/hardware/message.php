@@ -2,56 +2,57 @@
 
 return array(
 
-    'undeployable' 		=> '<strong>Warning: </strong> This asset has been marked as currently undeployable.
-                        If this status has changed, please update the asset status.',
-    'does_not_exist' 	=> 'Asset does not exist.',
-    'assoc_users'	 	=> 'This asset is currently checked out to a user and cannot be deleted. Please check the asset in first, and then try deleting again. ',
+    'undeployable' 		=> '<strong>Aviso: </strong> Este artigo foi assinalado como "não implementável".
+                        Se este estado mudou, por favor atualize o estado do artigo.',
+    'does_not_exist' 	=> 'Artigo não existente.',
+    'does_not_exist_or_not_requestable' => 'Boa tentativa. Esse artigo não existe ou não é solicitável.',
+    'assoc_users'	 	=> 'Este artigo está correntemente alocado a um utilizador e não pode ser removido. Por favor devolva o artigo e de seguida tente remover novamente. ',
 
     'create' => array(
-        'error'   		=> 'Asset was not created, please try again. :(',
-        'success' 		=> 'Asset created successfully. :)'
+        'error'   		=> 'Não foi possível criar o Artigo. Por favor, tente novamente. :(',
+        'success' 		=> 'Artigo criado com sucesso. :)'
     ),
 
     'update' => array(
-        'error'   			=> 'Asset was not updated, please try again',
-        'success' 			=> 'Asset updated successfully.',
-        'nothing_updated'	=>  'No fields were selected, so nothing was updated.',
+        'error'   			=> 'Artigo não foi atualizado. Por favor, tente novamente',
+        'success' 			=> 'Artigo atualizado com sucesso.',
+        'nothing_updated'	=>  'Nenhum atributo foi selecionado, portanto nada foi atualizado.',
     ),
 
     'restore' => array(
-        'error'   		=> 'Asset was not restored, please try again',
-        'success' 		=> 'Asset restored successfully.'
+        'error'   		=> 'O Artigo não foi restaurado, por favor tente novamente',
+        'success' 		=> 'Artigo restaurado com sucesso.'
     ),
-    
+
     'deletefile' => array(
-        'error'   => 'File not deleted. Please try again.',
-        'success' => 'File successfully deleted.',
+        'error'   => 'Ficheiro não removido. Por favor, tente novamente.',
+        'success' => 'Ficheiro removido com sucesso.',
     ),
 
     'upload' => array(
-        'error'   => 'File(s) not uploaded. Please try again.',
-        'success' => 'File(s) successfully uploaded.',
-        'nofiles' => 'You did not select any files for upload',
-        'invalidfiles' => 'One or more of your files is too large or is a filetype that is not allowed. Allowed filetypes are png, gif, jpg, doc, docx, pdf, and txt.',
+        'error'   => 'Ficheiro(s) não submetidos. Por favor, tente novamente.',
+        'success' => 'Ficheiro(s) submetidos com sucesso.',
+        'nofiles' => 'Não selecionou nenhum ficheiro para submissão, ou o ficheiro que pretende submeter é demasiado grande',
+        'invalidfiles' => 'Um ou mais ficheiros são demasiado grandes ou trata-se de um tipo de ficheiro não permitido. Os tipos de ficheiro permitidos são png, gif, jpg, jpeg, doc, docx, pdf e txt.',
     ),
 
 
     'delete' => array(
-        'confirm'   	=> 'Are you sure you wish to delete this asset?',
-        'error'   		=> 'There was an issue deleting the asset. Please try again.',
-        'success' 		=> 'The asset was deleted successfully.'
+        'confirm'   	=> 'Tem a certeza de que pretende eliminar este artigo?',
+        'error'   		=> 'Ocorreu um problema ao remover o artigo. Por favor, tente novamente.',
+        'success' 		=> 'O artigo foi removido com sucesso.'
     ),
 
     'checkout' => array(
-        'error'   		=> 'Asset was not checked out, please try again',
-        'success' 		=> 'Asset checked out successfully.',
-        'user_does_not_exist' => 'That user is invalid. Please try again.'
+        'error'   		=> 'Não foi possível alocar o artigo, por favor tente novamente',
+        'success' 		=> 'Artigo alocado com sucesso.',
+        'user_does_not_exist' => 'O utilizador é inválido. Por favor, tente novamente.'
     ),
 
     'checkin' => array(
-        'error'   		=> 'Asset was not checked in, please try again',
-        'success' 		=> 'Asset checked in successfully.',
-        'user_does_not_exist' => 'That user is invalid. Please try again.'
+        'error'   		=> 'Não foi possível devolver o artigo, por favor tente novamente',
+        'success' 		=> 'Artigo devolvido com sucesso.',
+        'user_does_not_exist' => 'O utilizador é inválido. Por favor, tente novamente.'
     )
 
 );

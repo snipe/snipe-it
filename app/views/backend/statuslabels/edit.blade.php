@@ -44,32 +44,31 @@
                 <label for="name" class="col-md-3 control-label">@lang('general.name')
                 <i class='fa fa-asterisk'></i></label>
                 </label>
-                    <div class="col-md-6">
+                    <div class="col-md-7">
                         <input class="form-control" type="text" name="name" id="name" value="{{{ Input::old('name', $statuslabel->name) }}}" />
-                        {{ $errors->first('name', '<br><span class="alert-msg"><i class="fa fa-times"></i> :message</span>') }}
+                        {{ $errors->first('name', '<span class="alert-msg"><i class="fa fa-times"></i> :message</span>') }}
                     </div>
             </div>
 
 
             <!-- Note -->
-            <div class="form-group {{ $errors->has('notes') ? 'error' : '' }}">
+            <div class="form-group {{ $errors->has('notes') ? 'has-error' : '' }}">
                 <label for="notes" class="col-md-3 control-label">@lang('admin/hardware/form.notes')</label>
                 <div class="col-md-7">
-                    <textarea class="col-md-6 form-control" id="notes" name="notes">{{{ Input::old('notes', $statuslabel->notes) }}}</textarea>
-                    {{ $errors->first('notes', '<br><span class="alert-msg"><i class="fa fa-times"></i> :message</span>') }}
+                    <textarea class="col-md-12 form-control" id="notes" name="notes">{{{ Input::old('notes', $statuslabel->notes) }}}</textarea>
+                    {{ $errors->first('notes', '<span class="alert-msg"><i class="fa fa-times"></i> :message</span>') }}
                 </div>
             </div>
 
 
             <!-- Label type -->
-            <div class="form-group {{ $errors->has('status_type_bool') ? 'error' : '' }}">
-                <label for="notes" class="col-md-3 control-label">@lang('admin/statuslabels/table.status_type')
+            <div class="form-group {{ $errors->has('statuslabel_types') ? 'has-error' : '' }}">
+                <label for="statuslabel_types" class="col-md-3 control-label">@lang('admin/statuslabels/table.status_type')
                 <i class='fa fa-asterisk'></i></label>
                 </label>
                 <div class="col-md-7">
-                  {{ Form::select('statuslabel_types', $statuslabel_types , $use_statuslabel_type, array('class'=>'select2', 'style'=>'min-width:400px')) }}
-                    {{ $errors->first('notes', '<br><span class="alert-msg"><i class="fa fa-times"></i> :message</span>') }}
-                    {{ $errors->first('status_type', '<br><span class="alert-msg"><i class="fa fa-times"></i> :message</span>') }}
+                    {{ Form::select('statuslabel_types', $statuslabel_types, $statuslabel_types, array('class'=>'select2', 'style'=>'min-width:400px')) }}
+                    {{ $errors->first('statuslabel_types', '<br><span class="alert-msg"><i class="fa fa-times"></i> :message</span>') }}
                 </div>
             </div>
 

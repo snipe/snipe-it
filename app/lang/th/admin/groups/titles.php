@@ -2,12 +2,12 @@
 
 return array(
 
-    'group_management' 	 	=> 'Group Management',
-    'create_group' 	 		=> 'Create New Group',
-    'edit_group' 	 		=> 'Edit Group',
-    'group_name' 	 		=> 'Group Name',
-    'group_admin' 	 		=> 'Group Admin',
-    'allow' 	 			=> 'Allow',
-    'deny' 	 				=> 'Deny',
+    'group_management' 	 	=> 'การจัดการกลุ่ม',
+    'create_group' 	 		=> 'สร้างกลุ่มใหม่',
+    'edit_group' 	 		=> 'แก้ไขกลุ่ม',
+    'group_name' 	 		=> 'ชื่อกลุ่ม',
+    'group_admin' 	 		=> 'กลุ่มผู้ดูแล',
+    'allow' 	 			=> 'อนุญาต',
+    'deny' 	 				=> 'ไม่อนุญาต',
 
 );

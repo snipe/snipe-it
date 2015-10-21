@@ -3,7 +3,7 @@
 return array(
 
     'account_already_exists' => '此邮箱已经被注册。',
-    'account_not_found'      => '邮箱或密码不符',
+    'account_not_found'      => '用户名或密码错误',
     'account_not_activated'  => '用户还未激活',
     'account_suspended'      => '账户已经被停用',
     'account_banned'         => '账户已经被禁用',

@@ -2,23 +2,23 @@
 
 return array(
 
-    'does_not_exist' => 'Manufacturer does not exist.',
-    'assoc_users'	 => 'This manufacturer is currently associated with at least one model and cannot be deleted. Please update your models to no longer reference this manufacturer and try again. ',
+    'does_not_exist' => 'ยังไม่มีผู้ผลิต',
+    'assoc_users'	 => 'ผู้ผลิตนี้มีความสัมพันธ์ในรายการโมเดลอย่างน้อยหนึ่งรายการในปัจจุบัน และไม่สามารถลบได้ กรุณาอัพเดทโมเดลของคุณออกจากความสัมพันธ์ดังกล่าว และลองอีกครั้ง ',
 
     'create' => array(
-        'error'   => 'Manufacturer was not created, please try again.',
-        'success' => 'Manufacturer created successfully.'
+        'error'   => 'ยังไม่ได้สร้างผู้ผลิต กรุณาลองใหม่อีกครั้ง',
+        'success' => 'สร้างผู้ผลิตเรียบร้อยแล้ว'
     ),
 
     'update' => array(
-        'error'   => 'Manufacturer was not updated, please try again',
-        'success' => 'Manufacturer updated successfully.'
+        'error'   => 'ยังไม่ได้ปรับปรุงผู้ผลิต กรุณาลองใหม่อีกครั้ง',
+        'success' => 'ปรับปรุงผู้ผลิตเรียบร้อยแล้ว'
     ),
 
     'delete' => array(
-        'confirm'   => 'Are you sure you wish to delete this manufacturer?',
-        'error'   => 'There was an issue deleting the manufacturer. Please try again.',
-        'success' => 'The Manufacturer was deleted successfully.'
+        'confirm'   => 'คุณแน่ใจที่จะลบผู้ผลิตนี้?',
+        'error'   => 'มีปัญหาระหว่างการลบผู้ผลิต กรุณาลองใหม่อีกครั้ง',
+        'success' => 'ลบผู้ผลิตเรียบร้อยแล้ว'
     )
 
 );

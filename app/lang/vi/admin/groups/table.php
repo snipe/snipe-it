@@ -3,7 +3,7 @@
 return array(
 
     'id'         => 'Id',
-    'name'       => 'Name',
-    'users'      => '# of Users',
+    'name'       => 'Tên',
+    'users'      => '# của Người dùng',
 
 );

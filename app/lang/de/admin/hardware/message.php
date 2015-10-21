@@ -5,6 +5,7 @@ return array(
     'undeployable' 		=> '<strong>Achtung:</strong>Dieses Asset wurde kürzlich als nicht verteilbar markiert.
                         Falls sich dieser Status verändert hat, aktualisieren Sie bitte den Asset Status.',
     'does_not_exist' 	=> 'Asset existiert nicht.',
+    'does_not_exist_or_not_requestable' => 'Netter Versuch. Das Asset existiert nicht oder ist nicht abrufbar.',
     'assoc_users'	 	=> 'Dieses Asset ist im Moment an einen Benutzer herausgegeben und kann nicht entfernt werden. Bitte buchen sie das Asset wieder ein und versuchen Sie dann erneut es zu entfernen. ',
 
     'create' => array(
@@ -22,7 +23,7 @@ return array(
         'error'   		=> 'Asset wurde nicht wiederhergestellt, bitte versuchen Sie es noch einmal',
         'success' 		=> 'Asset erfolgreich wiederhergestellt.'
     ),
-    
+
     'deletefile' => array(
         'error'   => 'Datei wurde nicht gelöscht. Bitte noch einmal Probieren.',
         'success' => 'Datei erfolgreich gelöscht.',
@@ -31,7 +32,7 @@ return array(
     'upload' => array(
         'error'   => 'Datei(en) wurde nicht hochgeladen. Bitte noch einmal Probieren.',
         'success' => 'Datei(en) erfolgreich hochgeladen.',
-        'nofiles' => 'Sie haben keine Datei zum hochladen ausgewählt',
+        'nofiles' => 'Es wurde keine Datei für den Upload ausgewählt, oder die Datei ist zu groß',
         'invalidfiles' => 'Eine oder mehrere Ihrer Dateien ist zu groß oder deren Dateityp ist nicht zugelassen. Zugelassene Dateitypen sind png, gif, jpg, doc, docx, pdf, und txt.',
     ),
 

@@ -8,7 +8,8 @@ return array(
 
     'create' => array(
         'error'   => 'Modellen ble ikke opprettet. Prøv igjen.',
-        'success' => 'Opprettelse av modell var vellykket.'
+        'success' => 'Opprettelse av modell var vellykket.',
+        'duplicate_set' => 'En eiendel med dette navnet, produsenten og modelnummeret eksisterer allerede.',
     ),
 
     'update' => array(
@@ -21,7 +22,7 @@ return array(
         'error'   => 'Det oppstod et problem under sletting av modellen. Prøv igjen.',
         'success' => 'Sletting av modell vellykket.'
     ),
-    
+
     'restore' => array(
         'error'   		=> 'Modell ble ikke gjenopprettet. Prøv igjen',
         'success' 		=> 'Vellykket gjenoppretting av modell.'

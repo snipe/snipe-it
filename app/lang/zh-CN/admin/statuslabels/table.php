@@ -2,14 +2,14 @@
 
 return array(
     'about'      	=> '关于状态标签',
-    'archived'      	=> 'Archived',
+    'archived'      	=> '已存档',
     'create'      	=> '创建状态标签',
-    'deployable'      	=> 'Deployable',
-    'info'      	=> 'Status labels are used to describe the various states your assets could be in. They may be out for repair, lost/stolen, etc. You can create new status labels for deployable, pending and archived assets.',
+    'deployable'      	=> '可部署',
+    'info'      	=> '状态标签用于描述资产的各种状态（例如送外维修、丢失、被窃等等）。你可以为处于可部署、待处理或已存档的资产创建新的状态标签。 ',
     'name'      	=> '状态名称',
-    'pending'      	=> 'Pending',
-    'status_type'   => 'Status Type',
+    'pending'      	=> '待处理',
+    'status_type'   => '状态类型',
     'title'      	=> '状态标签',
-    'undeployable'  => 'Undeployable',
+    'undeployable'  => '无法部署',
     'update'      	=> '更新状态标签',
 );

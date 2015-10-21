@@ -8,6 +8,7 @@ return array(
     'delete'  	=> 'Radera',
     'edit'    	=> 'Ändra',
     'restore' 	=> 'Återställ',
+    'request'   => 'Request',
     'submit'  	=> 'Skicka',
     'upload'    => 'Upload',
 

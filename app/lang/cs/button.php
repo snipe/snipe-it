@@ -3,12 +3,13 @@
 return array(
 
     'actions' 	=> 'Akce',
-    'add'    	=> 'Add New',
-    'cancel'    => 'Cancel',
+    'add'    	=> 'Přidej nový',
+    'cancel'    => 'Zrušit',
     'delete'  	=> 'Smazat',
     'edit'    	=> 'Upravit',
     'restore' 	=> 'Obnovit',
+    'request'   => 'Request',
     'submit'  	=> 'Odeslat',
-    'upload'    => 'Upload',
+    'upload'    => 'Nahrát',
 
 );

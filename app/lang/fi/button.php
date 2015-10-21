@@ -8,6 +8,7 @@ return array(
     'delete'  	=> 'Poista',
     'edit'    	=> 'Muokkaa',
     'restore' 	=> 'Palauta',
+    'request'   => 'Request',
     'submit'  	=> 'Lähetä',
     'upload'    => 'Lähetä',
 

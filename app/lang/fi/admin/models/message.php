@@ -8,7 +8,8 @@ return array(
 
     'create' => array(
         'error'   => 'Mallia ei luotu, yritä uudelleen.',
-        'success' => 'Malli luotiin onnistuneesti.'
+        'success' => 'Malli luotiin onnistuneesti.',
+        'duplicate_set' => 'An asset model with that name, manufacturer and model number already exists.',
     ),
 
     'update' => array(
@@ -21,7 +22,7 @@ return array(
         'error'   => 'Laitemallin poistossa tapahtui virhe. Yritä uudelleen.',
         'success' => 'Malli poistettiin onnistuneesti.'
     ),
-    
+
     'restore' => array(
         'error'   		=> 'Model was not restored, please try again',
         'success' 		=> 'Model restored successfully.'

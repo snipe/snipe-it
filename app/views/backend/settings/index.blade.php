@@ -30,6 +30,10 @@
                                         <td>@lang('admin/settings/general.site_name')</td>
                                         <td>{{{ $setting->site_name }}} </td>
                                     </tr>
+                                    <tr>
+                                        <td>@lang('admin/settings/general.default_currency')</td>
+                                        <td>{{{ $setting->default_currency }}} </td>
+                                    </tr>
                                      <tr>
                                         <td>@lang('admin/settings/general.alert_email')</td>
 
@@ -114,20 +118,20 @@
 
                                         @if ($setting->slack_endpoint!='')
                                             <td>@lang('general.yes')
-	                                            
+
 	                                            @if ($setting->slack_channel!='')
 	                                            	{{{ $setting->slack_channel }}}
 	                                            @endif
-	                                            
+
                                             </td>
                                         @else
                                             <td>@lang('general.no')</td>
                                         @endif
                                     </tr>
-                                    
-                                    
-                                    
-                                    
+
+
+
+
                                     @endforeach
                                 </tbody>
                             </table>

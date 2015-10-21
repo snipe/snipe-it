@@ -77,7 +77,7 @@ return array(
     */
 
     'custom' => array(),
-    'alpha_space' => ":attribute solo acepta letras, comas, espacios, números y guiones.",
+    'alpha_space' => "El campo :attribute contiene un caracter que no está permitido.",
 
     /*
     |--------------------------------------------------------------------------

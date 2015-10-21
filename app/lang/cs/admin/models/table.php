@@ -3,15 +3,15 @@
 return array(
 
     'create'				=> 'Create Asset Model',
-    'created_at' 			=> 'Created at',
-    'eol'	 				=> 'EOL',
-    'modelnumber'   		=> 'Model No.',
+    'created_at' 			=> 'Vytvořeno',
+    'eol'	 				=> 'KŽ',
+    'modelnumber'   		=> 'Modelová řada',
     'name'      			=> 'Asset Model Name',
-    'numassets' 			=> 'Assets',
-    'title'					=> 'Asset Models',
+    'numassets' 			=> 'Počet',
+    'title'					=> 'Model',
     'update'				=> 'Update Asset Model',
     'view'					=> 'View Asset Model',
     'update'				=> 'Update Asset Model',
-    'clone'				=> 'Clone Model',
-    'edit'				=> 'Edit Model',
+    'clone'				=> 'Kopíruj modelovou řadu',
+    'edit'				=> 'Edituj model',
 );

@@ -254,3 +254,6 @@ table.dataTable thead td:active {
 	-webkit-overflow-scrolling: touch;
 }
 
+a.paginate_button.current {
+    font-weight: bold;
+}

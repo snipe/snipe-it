@@ -83,6 +83,18 @@ padding: 0px 20px;
 						            </div>
 
 
+                                    <div class="form-group {{ $errors->has('default_currency') ? 'error' : '' }}">
+	                                    <div class="col-md-3">
+                                        {{ Form::label('default_currency', Lang::get('admin/settings/general.default_currency')) }}
+	                                    </div>
+	                                    <div class="col-md-9">
+										{{ Form::currencies('default_currency', Input::old('default_currency', $setting->default_currency)) }}
+
+
+										{{ $errors->first('default_currency', '<br><span class="alert-msg">:message</span>') }}
+	                                    </div>
+                                    </div>
+
 						            <div class="form-group {{ $errors->has('alert_email') ? 'error' : '' }}">
 	                                    <div class="col-md-3">
                                         {{ Form::label('alert_email', Lang::get('admin/settings/general.alert_email')) }}
@@ -110,6 +122,26 @@ padding: 0px 20px;
 										{{ $errors->first('header_color', '<br><span class="alert-msg">:message</span>') }}
 	                                    </div>
                                     </div>
+
+                                    <div class="form-group {{ $errors->has('custom_css') ? 'error' : '' }}">
+	                                    <div class="col-md-3">
+                                        {{ Form::label('custom_css', Lang::get('admin/settings/general.custom_css')) }}
+	                                    </div>
+	                                    <div class="col-md-9">
+
+                                        @if (Config::get('app.lock_passwords')===true)
+                                            {{ Form::textarea('custom_css', Input::old('custom_css', $setting->custom_css), array('class' => 'form-control','placeholder' => 'Add your custom CSS','disabled'=>'disabled')) }}
+                                            {{ $errors->first('custom_css', '<br><span class="alert-msg">:message</span>') }}
+                                            <p class="help-block">@lang('general.lock_passwords')</p>
+                                        @else
+                                            {{ Form::textarea('custom_css', Input::old('custom_css', $setting->custom_css), array('class' => 'form-control','placeholder' => 'Add your custom CSS')) }}
+                                            {{ $errors->first('custom_css', '<br><span class="alert-msg">:message</span>') }}
+                                        @endif
+
+
+										 <p class="help-inline">@lang('admin/settings/general.custom_css_help')</p>
+	                                    </div>
+
 
 									 <div class="form-group {{ $errors->has('per_page') ? 'error' : '' }}">
                                         <div class="col-md-3">
@@ -173,7 +205,8 @@ padding: 0px 20px;
 											 </div>
 
 												<div class="col-md-9">
-												 {{ Form::barcode_types('barcode_type', Input::old('barcode_type', $setting->barcode_type), 'select2') }}
+                                                {{ Form::barcode_types('barcode_type', Input::old('barcode_type', $setting->barcode_type), 'select2') }}
+
 
 												{{ $errors->first('barcode_type', '<br><span class="alert-msg"><i class="fa fa-times"></i> :message</span>') }}
 												</div>

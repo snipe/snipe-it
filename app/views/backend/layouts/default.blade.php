@@ -5,6 +5,7 @@
 
         <!-- Basic Page Needs
         ================================================== -->
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta charset="utf-8" />
         <title>
             @section('title')
@@ -18,7 +19,7 @@
 
 		 <!-- bootstrap -->
 	    <link href="{{ asset('assets/css/bootstrap/bootstrap.css') }}" rel="stylesheet" />
-        <link href="{{ asset('assets/css/bootstrap/bootstrap-overrides.css') }}" type="text/css" rel="stylesheet" />
+
 
 	    <!-- global styles -->
         <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/compiled/layout.css') }}">
@@ -34,16 +35,13 @@
         <link rel="stylesheet" href="{{ asset('assets/css/compiled/index.css') }}" type="text/css" media="screen" />
         <link rel="stylesheet" href="{{ asset('assets/css/compiled/user-list.css') }}" type="text/css" media="screen" />
         <link rel="stylesheet" href="{{ asset('assets/css/compiled/user-profile.css') }}" type="text/css" media="screen" />
-        <link rel="stylesheet" href="{{ asset('assets/css/compiled/form-showcase.css') }}" type="text/css" media="screen" />
+
         <link rel="stylesheet" href="{{ asset('assets/css/lib/jquery.dataTables.css') }}" type="text/css" media="screen" />
         <link rel="stylesheet" href="{{ asset('assets/css/compiled/dataTables.colVis.css') }}" type="text/css" media="screen" />
         <link rel="stylesheet" href="{{ asset('assets/css/compiled/dataTables.tableTools.css') }}" type="text/css" media="screen" />
         <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/compiled/print.css') }}" media="print" />
+        <link href="{{ asset('assets/css/bootstrap/bootstrap-overrides.css') }}" type="text/css" rel="stylesheet" />
 
-
-
-	    <!-- open sans font -->
-	    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
 
         <!-- global header javascripts -->
         <script src="{{ asset('assets/js/jquery-latest.js') }}"></script>
@@ -84,8 +82,15 @@
 				background-color: {{{ Setting::getSettings()->header_color }}};
 				background: -webkit-linear-gradient(top,  {{{ Setting::getSettings()->header_color }}} 0%,{{{ Setting::getSettings()->header_color }}} 100%);
 				border-color: {{{ Setting::getSettings()->header_color }}};
+                background-image: -moz-linear-gradient(top, {{{ Setting::getSettings()->header_color }}}, {{{ Setting::getSettings()->header_color }}});
+
 			}
 		@endif
+
+        @if (Setting::getSettings()->custom_css)
+            {{ Setting::getSettings()->show_custom_css() }}
+        @endif
+
 
         </style>
 
@@ -110,7 +115,7 @@
 
 	            @if (Setting::getSettings()->logo)
 	            	<a class="navbar-brand" href="{{ Config::get('app.url') }}" style="padding: 5px;">
-	            	<img src="/uploads/{{{ Setting::getSettings()->logo }}}">
+	            	<img src="{{ Config::get('app.url') }}/uploads/{{{ Setting::getSettings()->logo }}}">
 	            	</a>
 	            @else
 	            	<a class="navbar-brand" href="{{ Config::get('app.url') }}">
@@ -139,6 +144,16 @@
                             <a href="{{ route('create/licenses') }}">
                                 <i class="fa fa-certificate"></i>
                                 @lang('general.license')</a>
+                        </li>
+                        <li {{{ (Request::is('admin/accessories/create') ? 'class="active"' : '') }}}>
+                            <a href="{{ route('create/accessory') }}">
+                                <i class="fa fa-keyboard-o"></i>
+                                @lang('general.accessory')</a>
+                        </li>
+                        <li {{{ (Request::is('admin/consumables/create') ? 'class="active"' : '') }}}>
+                            <a href="{{ route('create/consumable') }}">
+                                <i class="fa fa-tint"></i>
+                                @lang('general.consumable')</a>
                         </li>
                         <li {{{ (Request::is('admin/users/create') ? 'class="active"' : '') }}}>
                             <a href="{{ route('create/user') }}">
@@ -224,6 +239,11 @@
                                 <i class="fa fa-group"></i> @lang('general.groups')
                             </a>
                         </li>
+                        <li{{ (Request::is('admin/settings/backups*') ? ' class="active"' : '') }}>
+                            <a href="{{ URL::to('admin/settings/backups') }}">
+                                <i class="fa fa-download"></i> @lang('admin/settings/general.backups')
+                            </a>
+                        </li>
                         <li class="divider"></li>
                         <li>
                             <a href="{{ route('app') }}">
@@ -249,7 +269,7 @@
         <ul id="dashboard-menu">
 			@if(Sentry::getUser()->hasAccess('admin'))
 			<li{{ (Request::is('*/') ? ' class="active"><div class="pointer"><div class="arrow"></div><div class="arrow_border"></div></div>' : '>') }}
-                <a href="{{ Config::get('app.url') }}"><i class="fa fa-dashboard"></i><span>Dashboard</span></a>
+                <a href="{{Config::get('app.url')}}"><i class="fa fa-dashboard"></i><span>Dashboard</span></a>
             </li>
             <li{{ (Request::is('hardware*') ? ' class="active"><div class="pointer"><div class="arrow"></div><div class="arrow_border"></div></div>' : '>') }}
                 <a href="{{ URL::to('hardware') }}" class="dropdown-toggle">
@@ -259,12 +279,12 @@
                 </a>
 
                 <ul class="submenu{{ (Request::is('hardware*') ? ' active' : '') }}">
-                    <li><a href="{{ URL::to('hardware?status=Deployed') }}" {{{ (Request::query('Deployed') ? ' class="active"' : '') }}} >@lang('general.deployed')</a></li>
-                    <li><a href="{{ URL::to('hardware?status=RTD') }}" {{{ (Request::query('RTD') ? ' class="active"' : '') }}} >@lang('general.ready_to_deploy')</a></li>
-                    <li><a href="{{ URL::to('hardware?status=Pending') }}" {{{ (Request::query('Pending') ? ' class="active"' : '') }}} >@lang('general.pending')</a></li>
-                    <li><a href="{{ URL::to('hardware?status=Undeployable') }}" {{{ (Request::query('Undeployable') ? ' class="active"' : '') }}} >@lang('general.undeployable')</a></li>
-                     <li><a href="{{ URL::to('hardware?status=Archived') }}" {{{ (Request::query('Archived') ? ' class="active"' : '') }}} >@lang('admin/hardware/general.archived')</a></li>
-                     <li><a href="{{ URL::to('hardware?status=Requestable') }}" {{{ (Request::query('Requestable') ? ' class="active"' : '') }}} >@lang('admin/hardware/general.requestable')</a></li>
+                    <li><a href="{{ URL::to('hardware?status=Deployed') }}" {{ (Request::query('status') == 'Deployed' ? ' class="active"' : '') }} >@lang('general.deployed')</a></li>
+                    <li><a href="{{ URL::to('hardware?status=RTD') }}" {{ (Request::query('status') == 'RTD' ? ' class="active"' : '') }} >@lang('general.ready_to_deploy')</a></li>
+                    <li><a href="{{ URL::to('hardware?status=Pending') }}" {{ (Request::query('status') == 'Pending' ? ' class="active"' : '') }} >@lang('general.pending')</a></li>
+                    <li><a href="{{ URL::to('hardware?status=Undeployable') }}" {{ (Request::query('status') == 'Undeployable' ? ' class="active"' : '') }} >@lang('general.undeployable')</a></li>
+                     <li><a href="{{ URL::to('hardware?status=Archived') }}" {{ (Request::query('status') == 'Archived' ? ' class="active"' : '') }} >@lang('admin/hardware/general.archived')</a></li>
+                     <li><a href="{{ URL::to('hardware?status=Requestable') }}" {{ (Request::query('status') == 'Requestable' ? ' class="active"' : '') }} >@lang('admin/hardware/general.requestable')</a></li>
 
                     <li><a href="{{ URL::to('hardware') }}">@lang('general.list_all')</a></li>
 
@@ -272,7 +292,8 @@
                     <li><a href="{{ URL::to('hardware/models') }}" {{{ (Request::is('hardware/models*') ? ' class="active"' : '') }}} >@lang('general.asset_models')</a></li>
                     <li><a href="{{ URL::to('admin/settings/categories') }}" {{{ (Request::is('admin/settings/categories*') ? ' class="active"' : '') }}} >@lang('general.categories')</a></li>
                     <li><a href="{{ URL::to('hardware?status=Deleted') }}" {{{ (Request::query('Deleted') ? ' class="active"' : '') }}} >@lang('general.deleted')</a></li>
-
+                    <li><a href="{{ URL::to('admin/asset_maintenances') }}"  >@lang('general.asset_maintenances') </a></li>
+                    <li><a href="{{ URL::to('hardware/import') }}"  >@lang('general.import') </a></li>
                 </ul>
             </li>
             <li{{ (Request::is('admin/accessories*') ? ' class="active"><div class="pointer"><div class="arrow"></div><div class="arrow_border"></div></div>' : '>') }}
@@ -281,6 +302,13 @@
                     <span>@lang('general.accessories')</span>
                 </a>
             </li>
+            <li{{ (Request::is('admin/consumables*') ? ' class="active"><div class="pointer"><div class="arrow"></div><div class="arrow_border"></div></div>' : '>') }}
+                <a href="{{ URL::to('admin/consumables') }}">
+                    <i class="fa fa-tint"></i>
+                    <span>@lang('general.consumables')</span>
+                </a>
+            </li>
+
 
             <li{{ (Request::is('admin/licenses*') ? ' class="active"><div class="pointer"><div class="arrow"></div><div class="arrow_border"></div></div>' : '>') }}
                 <a href="{{ URL::to('admin/licenses') }}"  >
@@ -290,6 +318,7 @@
                 </a>
 
             </li>
+
             <li{{ (Request::is('admin/users*') ? ' class="active"><div class="pointer"><div class="arrow"></div><div class="arrow_border"></div></div>' : '>') }}
                 <a href="{{ URL::to('admin/users') }}">
                     <i class="fa fa-users"></i>
@@ -307,11 +336,14 @@
                 </a>
 
                 <ul class="submenu{{ (Request::is('reports*') ? ' active' : '') }}">
-	                 <li><a href="{{ URL::to('reports/activity') }}" {{{ (Request::is('reports/activity') ? ' class="active"' : '') }}} >@lang('general.activity_report')</a></li>
+	                 <li><a href="{{ URL::to('reports/activity') }}" {{ (Request::is('reports/activity') ? ' class="active"' : '') }} >@lang('general.activity_report')</a></li>
 
                     <li><a href="{{ URL::to('reports/depreciation') }}" {{{ (Request::is('reports/depreciation') ? ' class="active"' : '') }}} >@lang('general.depreciation_report')</a></li>
                     <li><a href="{{ URL::to('reports/licenses') }}" {{{ (Request::is('reports/licenses') ? ' class="active"' : '') }}} >@lang('general.license_report')</a></li>
+                    <li><a href="{{ URL::to('reports/asset_maintenances') }}" {{{ (Request::is('reports/asset_maintenances') ? ' class="active"' : '') }}} >@lang('general.asset_maintenance_report')</a></li>
                     <li><a href="{{ URL::to('reports/assets') }}" {{{ (Request::is('reports/assets') ? ' class="active"' : '') }}} >@lang('general.asset_report')</a></li>
+                    <li><a href="{{ URL::to('reports/unaccepted_assets') }}" {{{ (Request::is('reports/unaccepted_assets') ? ' class="active"' : '') }}} >@lang('general.unaccepted_asset_report')</a></li>
+                    <li><a href="{{ URL::to('reports/accessories') }}" {{{ (Request::is('reports/accessories') ? ' class="active"' : '') }}} >@lang('general.accessory_report')</a></li>
                     <li><a href="{{ URL::to('reports/custom') }}" {{{ (Request::is('reports/custom') ? ' class="active"' : '') }}} >@lang('general.custom_report')</a></li>
                 </ul>
             </li>
@@ -399,13 +431,13 @@
     <footer>
 
         <div id="footer" class="col-md-offset-2 col-md-9 col-sm-12 col-xs-12 text-center">
-		                <div class="muted credit">
+		                <div class="muted credit hidden-xs">
 	                  			<a target="_blank" href="http://snipeitapp.com">Snipe IT</a> is a free open source
 					  		project by
 					  			<a target="_blank" href="http://twitter.com/snipeyhead">@snipeyhead</a>.
 						  		<a target="_blank" href="https://github.com/snipe/snipe-it">Fork it</a> |
-						  		<a target="_blank" href="http://snipeitapp.com/documentation/">Documentation</a> |
-						  		<a href="https://crowdin.com/project/snipe-it">Help Translate It! </a> |
+						  		<a target="_blank" href="http://docs.snipeitapp.com/">Documentation</a> |
+						  		<a target="_blank" href="http://docs.snipeitapp.com/translations.html">Translate It! </a> |
 						  		<a target="_blank" href="https://github.com/snipe/snipe-it/issues?state=open">Report a Bug</a>
 						  		 &nbsp; &nbsp; ({{{  Config::get('version.app_version') }}})
                   		</div>

@@ -18,7 +18,7 @@ class AppCommand extends Command
      *
      * @var	string
      */
-    protected $description = '';
+    protected $description = 'This command kicks off your database table creation and migration, and creates your first admin user.';
 
     /**
      * Holds the user information.
@@ -28,7 +28,7 @@ class AppCommand extends Command
     protected $userData = array(
         'first_name' => null,
         'last_name'  => null,
-        'email'      => null,
+        'username'      => null,
         'password'   => null
     );
 
@@ -66,6 +66,7 @@ class AppCommand extends Command
         // Let's ask the user some questions, shall we?
         $this->askUserFirstName();
         $this->askUserLastName();
+        $this->askUserUsername();
         $this->askUserEmail();
         $this->askUserPassword();
 
@@ -89,10 +90,10 @@ class AppCommand extends Command
         $this->call('migrate:install');
 
         // Run the Sentry Migrations
-        $this->call('migrate', array('--package' => 'cartalyst/sentry'));
+        $this->call('migrate', array('--package' => 'cartalyst/sentry','--force'=>true));
 
         // Run the Migrations
-        $this->call('migrate');
+        $this->call('migrate', array('--force'=>true));
 
         // Create the default user and default groups.
         $this->sentryRunner();
@@ -162,7 +163,7 @@ class AppCommand extends Command
     }
 
     /**
-     * Asks the user for the user email address.
+     * Asks the user for the username address.
      *
      * @return void
      * @todo   Use the Laravel Validator
@@ -171,7 +172,7 @@ class AppCommand extends Command
     {
         do {
             // Ask the user to input the email address
-            $email = $this->ask('Please enter your user email: ');
+            $email = $this->ask('Please enter your email: ');
 
             // Check if email is valid
             if ($email == '') {
@@ -185,6 +186,32 @@ class AppCommand extends Command
         while ( ! $email);
     }
 
+
+    /**
+     * Asks the user for the username address.
+     *
+     * @return void
+     * @todo   Use the Laravel Validator
+     */
+    protected function askUserUsername()
+    {
+        do {
+            // Ask the user to input the username
+            $username = $this->ask('Please enter your username: ');
+
+            // Check if username is valid
+            if ($username == '') {
+                // Return an error message
+                $this->error('Username is invalid. Please try again.');
+            }
+
+            // Store the username address
+            $this->userData['username'] = $username;
+        }
+        while ( ! $username);
+    }
+
+
     /**
      * Asks the user for the user password.
      *
@@ -197,7 +224,7 @@ class AppCommand extends Command
             // Ask the user to input the user password
             $password = $this->ask('Please enter your user password (at least 8 characters): ');
 
-            // Check if email is valid
+            // Check if password is valid
             if ($password == '') {
                 // Return an error message
                 $this->error('Password is invalid. Please try again.');
@@ -217,9 +244,9 @@ class AppCommand extends Command
 	protected function askUserDummyData()
 	{
 		// Ask the user to input the user password
-		$dummydata = $this->ask('Do you want to seed your database with dummy data? y/n (default is yes): ');
+		$dummydata = $this->ask('Do you want to seed your database with dummy data? Y/n (default is yes): ');
 
-		$this->dummyData = ( strstr($dummydata, 'y' ) || empty($dummydata) ) ? true : false;
+		$this->dummyData = ( strstr($dummydata, 'Y' ) || empty($dummydata) ) ? true : false;
 	}
 
     /**
@@ -329,7 +356,7 @@ class AppCommand extends Command
         $user = Sentry::getUserProvider()->create($data);
 
         // Associate the Admin group to this user
-        $group = Sentry::getGroupProvider()->findById(1);
+        $group = Sentry::findGroupByName('Admin');
         $user->addGroup($group);
 
         // Show the success message
@@ -350,6 +377,7 @@ class AppCommand extends Command
             'first_name' => 'John',
             'last_name'  => 'Doe',
             'email'      => 'john.doe@example.com',
+            'username'      => 'john.doe@example.com',
             'password'   => substr(str_shuffle(str_repeat('0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ', mt_rand(1,10))),1,10),
             'notes'      => 'Generated on install',
             'activated'  => 1,

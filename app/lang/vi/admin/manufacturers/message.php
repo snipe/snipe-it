@@ -2,23 +2,23 @@
 
 return array(
 
-    'does_not_exist' => 'Manufacturer does not exist.',
-    'assoc_users'	 => 'This manufacturer is currently associated with at least one model and cannot be deleted. Please update your models to no longer reference this manufacturer and try again. ',
+    'does_not_exist' => 'Hãng sản xuất không tồn tại.',
+    'assoc_users'	 => 'Nhà sản xuất này hiện tại đang được liên kết với ít nhất một kiểu tài sản và không thể xóa. Xin vui lòng cập nhật kiểu tài sản của bạn để không liên kết đến nhà sản xuất này và thử lại. ',
 
     'create' => array(
-        'error'   => 'Manufacturer was not created, please try again.',
-        'success' => 'Manufacturer created successfully.'
+        'error'   => 'Hãng sản xuất không được tạo. Bạn hãy thử lại.',
+        'success' => 'Hãng sản xuất được tạo thành công.'
     ),
 
     'update' => array(
-        'error'   => 'Manufacturer was not updated, please try again',
-        'success' => 'Manufacturer updated successfully.'
+        'error'   => 'Hãng sản xuất không được tạo. Bạn hãy thử lại',
+        'success' => 'Hãng sản xuất được tạo thành công.'
     ),
 
     'delete' => array(
-        'confirm'   => 'Are you sure you wish to delete this manufacturer?',
-        'error'   => 'There was an issue deleting the manufacturer. Please try again.',
-        'success' => 'The Manufacturer was deleted successfully.'
+        'confirm'   => 'Bạn có chắc chắn muốn xoá hãng sản xuất này?',
+        'error'   => 'Có vấn đề xảy ra khi xoá hãng sản xuất này. Bạn hãy thử lại.',
+        'success' => 'Hãng sản xuất đã được xoá thành công.'
     )
 
 );

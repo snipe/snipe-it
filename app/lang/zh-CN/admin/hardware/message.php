@@ -2,9 +2,9 @@
 
 return array(
 
-    'undeployable' 		=> '<strong>Warning: </strong> This asset has been marked as currently undeployable.
-                        If this status has changed, please update the asset status.',
+    'undeployable' 		=> '<strong>警告: </strong>该资产目前已经被标记为不可被分配，如果该资产状态已经改变，请刷新。',
     'does_not_exist' 	=> '资产不存在',
+    'does_not_exist_or_not_requestable' => '已重试，那个资产不存在或不可申请。',
     'assoc_users'	 	=> '这个资产目前已经借给某个用户，不能被删除，请检查资产信息，然后再尝试删除。',
 
     'create' => array(
@@ -15,24 +15,24 @@ return array(
     'update' => array(
         'error'   			=> '资产更新失败，请重试。',
         'success' 			=> '资产更新成功。',
-        'nothing_updated'	=>  'No fields were selected, so nothing was updated.',
+        'nothing_updated'	=>  '一个也没有选，所以什么也不会更新。',
     ),
 
     'restore' => array(
-        'error'   		=> 'Asset was not restored, please try again',
-        'success' 		=> 'Asset restored successfully.'
+        'error'   		=> '资产未被恢复，请重试。',
+        'success' 		=> '资产恢复成功。'
     ),
-    
+
     'deletefile' => array(
-        'error'   => 'File not deleted. Please try again.',
-        'success' => 'File successfully deleted.',
+        'error'   => '文件删除失败，请重试',
+        'success' => '文件已成功删除。',
     ),
 
     'upload' => array(
-        'error'   => 'File(s) not uploaded. Please try again.',
-        'success' => 'File(s) successfully uploaded.',
-        'nofiles' => 'You did not select any files for upload',
-        'invalidfiles' => 'One or more of your files is too large or is a filetype that is not allowed. Allowed filetypes are png, gif, jpg, doc, docx, pdf, and txt.',
+        'error'   => '文件上传失败，请重试。',
+        'success' => '文件已上传成功。',
+        'nofiles' => '尚未选择要上传的文件，或上传的文件过大。',
+        'invalidfiles' => '一个或多个文件过大或者属于不被允许的文件类型。允许上传的文件类型有PNG，GIF，JPG，DOC，DOCX，PDF和TXT。',
     ),
 
 

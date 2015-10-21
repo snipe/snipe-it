@@ -2,23 +2,23 @@
 
 return array(
 
-    'does_not_exist' => 'Category does not exist.',
-    'assoc_users'	 => 'This category is currently associated with at least one model and cannot be deleted. Please update your models to no longer reference this category and try again. ',
+    'does_not_exist' => 'Hạng mục không tồn tại.',
+    'assoc_users'	 => 'Danh mục này hiện đang được liên kết đến ít nhất một kiểu tài sản và không thể xóa. Vui lòng cập nhật kiểu tài sản của bạn để không còn liên kết đến danh mục này và thử lại. ',
 
     'create' => array(
-        'error'   => 'Category was not created, please try again.',
-        'success' => 'Category created successfully.'
+        'error'   => 'Hạng mục chưa được tạo. Bạn hãy thử lại.',
+        'success' => 'Hạng mục đã được khởi tạo thành công.'
     ),
 
     'update' => array(
-        'error'   => 'Category was not updated, please try again',
-        'success' => 'Category updated successfully.'
+        'error'   => 'Hạng mục chưa được cập nhật. Bạn hãy thử lại',
+        'success' => 'Hạng mục được cập nhật thành công.'
     ),
 
     'delete' => array(
-        'confirm'   => 'Are you sure you wish to delete this category?',
-        'error'   => 'There was an issue deleting the category. Please try again.',
-        'success' => 'The category was deleted successfully.'
+        'confirm'   => 'Bạn có chắc chắn muốn xoá hạng mục này?',
+        'error'   => 'Có vấn đề xảy ra khi xoá hạng mục này. Bạn hãy thử lại.',
+        'success' => 'Hạng mục này đã được xoá thành công.'
     )
 
 );

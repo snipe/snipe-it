@@ -2,9 +2,9 @@
 
 return array(
 
-    'undeployable' 		=> '<strong>Warning: </strong> This asset has been marked as currently undeployable.
-                        If this status has changed, please update the asset status.',
-    'does_not_exist' 	=> 'Asset does not exist.',
+    'undeployable' 		=> '<strong>คำเตือน: </strong> สินทรัพย์นี้ถูกกำหนดสถานะให้ไม่สามารถใช้งานได้ หากสถานะนี้ถูกเปลี่ยน กรุณาอัพเดทสถานะสินทรัพย์ด้วย',
+    'does_not_exist' 	=> 'ไม่มีสินทรัพย์',
+    'does_not_exist_or_not_requestable' => 'Nice try. That asset does not exist or is not requestable.',
     'assoc_users'	 	=> 'This asset is currently checked out to a user and cannot be deleted. Please check the asset in first, and then try deleting again. ',
 
     'create' => array(
@@ -22,7 +22,7 @@ return array(
         'error'   		=> 'Asset was not restored, please try again',
         'success' 		=> 'Asset restored successfully.'
     ),
-    
+
     'deletefile' => array(
         'error'   => 'File not deleted. Please try again.',
         'success' => 'File successfully deleted.',
@@ -31,7 +31,7 @@ return array(
     'upload' => array(
         'error'   => 'File(s) not uploaded. Please try again.',
         'success' => 'File(s) successfully uploaded.',
-        'nofiles' => 'You did not select any files for upload',
+        'nofiles' => 'You did not select any files for upload, or the file you are trying to upload is too large',
         'invalidfiles' => 'One or more of your files is too large or is a filetype that is not allowed. Allowed filetypes are png, gif, jpg, doc, docx, pdf, and txt.',
     ),
 

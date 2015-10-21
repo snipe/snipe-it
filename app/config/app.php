@@ -43,7 +43,7 @@ return array(
     */
 
     'cipher' => MCRYPT_RIJNDAEL_256,
-    
+
     /*
     |--------------------------------------------------------------------------
     | Prevent Password changes
@@ -101,8 +101,10 @@ return array(
         'Barryvdh\Debugbar\ServiceProvider',
         'Cartalyst\Sentry\SentryServiceProvider',
         'Chumper\Datatable\DatatableServiceProvider',
-        'Dinesh\Barcode\BarcodeServiceProvider',
         'Maknz\Slack\SlackServiceProvider',
+        'Schickling\Backup\BackupServiceProvider',
+        'Chumper\Zipper\ZipperServiceProvider',
+        'Fideloper\Proxy\ProxyServiceProvider',
 
     ),
 
@@ -174,9 +176,8 @@ return array(
             'Validator'       		=> 'Illuminate\Support\Facades\Validator',
             'View'            		=> 'Illuminate\Support\Facades\View',
             'Reader'				=> 'League\Csv\Reader',
-            'DNS1D'                 => 'Dinesh\Barcode\Facades\DNS1DFacade',
-            'DNS2D'                 => 'Dinesh\Barcode\Facades\DNS2DFacade',
             'Slack' 				=> 'Maknz\Slack\Facades\Slack',
+            'Zipper'                => 'Chumper\Zipper\Zipper',
 
     ),
 

@@ -61,7 +61,11 @@ expect -exact "Sample\r
 Please enter your last name: "
 send -- "User\r"
 expect -exact "User\r
-Please enter your user email: "
+Please enter your username: "
+send -- "snipeitadmin"
+expect -exact "snipeitadmin"
+send -- "\r"
+Please enter your email: "
 send -- "snipeit@example.com"
 expect -exact "snipeit@example.com"
 send -- "\r"

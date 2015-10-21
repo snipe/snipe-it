@@ -2,29 +2,30 @@
 
 return array(
 
-    'does_not_exist' => 'Model does not exist.',
-    'assoc_users'	 => 'This model is currently associated with one or more assets and cannot be deleted. Please delete the assets, and then try deleting again. ',
+    'does_not_exist' => 'ไม่มีโมเดลนี้',
+    'assoc_users'	 => 'โมเดลนี้มีความสัมพันธ์กับสินทรัพย์หนึ่ง หรือมากกว่าในปัจจุบัน และจะไม่สามารถลบได้ กรุณาลบสินทรัพย์และลองอีกครั้ง ',
 
 
     'create' => array(
-        'error'   => 'Model was not created, please try again.',
-        'success' => 'Model created successfully.'
+        'error'   => 'ยังไม่ได้สร้างโมเดล กรุณาลองใหม่อีกครั้ง',
+        'success' => 'สร้างโมเดียลเรียบร้อยแล้ว',
+        'duplicate_set' => 'มีชื่อโมเดลสินทรัพย์ ผู้ผลิต และหมายเลขโมเดลแล้ว',
     ),
 
     'update' => array(
-        'error'   => 'Model was not updated, please try again',
-        'success' => 'Model updated successfully.'
+        'error'   => 'ยังไม่ได้ปรับปรุงโมเดล กรุณาลองใหม่อีกครั้ง',
+        'success' => 'ปรับปรุงโมเดลเรียบร้อยแล้ว'
     ),
 
     'delete' => array(
-        'confirm'   => 'Are you sure you wish to delete this asset model?',
-        'error'   => 'There was an issue deleting the model. Please try again.',
-        'success' => 'The model was deleted successfully.'
+        'confirm'   => 'คุณแน่ใจที่จะลบโมเดลนี้?',
+        'error'   => 'มีปัญหาระหว่างลบโมเดล กรุณาลองใหม่อีกครั้ง.',
+        'success' => 'ลบโมเดลเรียบร้อยแล้ว'
     ),
-    
+
     'restore' => array(
-        'error'   		=> 'Model was not restored, please try again',
-        'success' 		=> 'Model restored successfully.'
+        'error'   		=> 'ยังไม่ได้กู้คืนโมเดล กรุณาลองใหม่อีกครั้ง',
+        'success' 		=> 'กู้คืนโมเดลเรียบร้อยแล้ว'
     ),
 
 );

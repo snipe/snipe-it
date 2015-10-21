@@ -12,4 +12,6 @@ return array(
     'address'		=> 'Alamat',
     'zip'			=> 'Poskod',
     'locations'		=> 'Lokasi',
+    'parent'		=> 'Parent',
+    'currency'  	=> 'Location Currency', // this is deprecated
 );

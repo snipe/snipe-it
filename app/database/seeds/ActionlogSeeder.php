@@ -30,7 +30,7 @@ class ActionlogSeeder extends Seeder
             'asset_id' 			=> '1',
             'checkedout_to' 	=> '1',
             'location_id'  		=> NULL,
-            'created_at' 			=> $date->modify('-10 day'),
+            'created_at' 		=> $date->modify('-10 day'),
             'asset_type' 		=> 'hardware',
             'note'				=> NULL,
             'filename'			=> NULL,

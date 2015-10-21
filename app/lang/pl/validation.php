@@ -13,17 +13,17 @@ return array(
     |
     */
 
-    "accepted"         => "The :attribute must be accepted.",
-    "active_url"       => "The :attribute is not a valid URL.",
-    "after"            => "The :attribute must be a date after :date.",
-    "alpha"            => "The :attribute may only contain letters.",
-    "alpha_dash"       => "The :attribute may only contain letters, numbers, and dashes.",
-    "alpha_num"        => "The :attribute may only contain letters and numbers.",
-    "before"           => "The :attribute must be a date before :date.",
+    "accepted"         => ":attribute musi zostać zaakceptowany.",
+    "active_url"       => ":attribute nie jest poprawnym adresem URL.",
+    "after"            => ":attribute musi być późniejszą datą w stosunku do :date.",
+    "alpha"            => ":attribute może zawierać tylko litery.",
+    "alpha_dash"       => ":attribute może zawierać tylko litery, cyfry i myślniki.",
+    "alpha_num"        => ":attribute może zawierać tylko litery i cyfry.",
+    "before"           => ":attribute musi być późniejszą datą w stosunku do :date.",
     "between"          => array(
-        "numeric" => "The :attribute must be between :min - :max.",
-        "file"    => "The :attribute must be between :min - :max kilobytes.",
-        "string"  => "The :attribute must be between :min - :max characters.",
+        "numeric" => ":attribute musi być pomiędzy :min - :max.",
+        "file"    => ":attribute musi być pomiędzy :min - :max kilobajtów.",
+        "string"  => ":attribute musi być pomiędzy :min - :max znaków.",
     ),
     "confirmed"        => "The :attribute confirmation does not match.",
     "date"             => "The :attribute is not a valid date.",
@@ -31,12 +31,12 @@ return array(
     "different"        => "The :attribute and :other must be different.",
     "digits"           => "The :attribute must be :digits digits.",
     "digits_between"   => "The :attribute must be between :min and :max digits.",
-    "email"            => "The :attribute format is invalid.",
-    "exists"           => "The selected :attribute is invalid.",
-    "image"            => "The :attribute must be an image.",
-    "in"               => "The selected :attribute is invalid.",
-    "integer"          => "The :attribute must be an integer.",
-    "ip"               => "The :attribute must be a valid IP address.",
+    "email"            => "Format pola :attribute jest niewłaściwy.",
+    "exists"           => "Wybrane :attribute jest niewłaściwe.",
+    "image"            => ":attribute musi być obrazkiem.",
+    "in"               => "Wybrane :attribute jest niewłaściwe.",
+    "integer"          => ":attribute must musi być liczbą całkowitą.",
+    "ip"               => ":attribute musi być poprawnym adresem IP.",
     "max"              => array(
         "numeric" => "The :attribute may not be greater than :max.",
         "file"    => "The :attribute may not be greater than :max kilobytes.",
@@ -49,9 +49,9 @@ return array(
         "string"  => "The :attribute must be at least :min characters.",
     ),
     "not_in"           => "The selected :attribute is invalid.",
-    "numeric"          => "The :attribute must be a number.",
-    "regex"            => "The :attribute format is invalid.",
-    "required"         => "The :attribute field is required.",
+    "numeric"          => ":attribute musi być liczbą.",
+    "regex"            => "Format :attribute jest niewłaściwy.",
+    "required"         => ":attribute nie może być puste.",
     "required_if"      => "The :attribute field is required when :other is :value.",
     "required_with"    => "The :attribute field is required when :values is present.",
     "required_without" => "The :attribute field is required when :values is not present.",
@@ -77,7 +77,7 @@ return array(
     */
 
     'custom' => array(),
-    'alpha_space' => "The :attribute field may only contain letters, commas, spaces and dashes.",
+    'alpha_space' => "The :attribute field contains a character that is not allowed.",
 
     /*
     |--------------------------------------------------------------------------

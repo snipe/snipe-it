@@ -8,6 +8,7 @@ return array(
     'delete'  	=> 'ลบ',
     'edit'    	=> 'แก้ไข',
     'restore' 	=> 'นำกลับ',
+    'request'   => 'ร้องขอ',
     'submit'  	=> 'ตกลง',
     'upload'    => 'อัพโหลด',
 

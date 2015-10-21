@@ -2,10 +2,10 @@
 
 return array(
 
-    'asset_manufacturers'	=> 'Asset Manufacturers',
-    'create'				=> 'Create Manufacturer',
+    'asset_manufacturers'	=> 'ผู้ผลิตสินทรัพย์',
+    'create'				=> 'สร้างผู้ผลิต',
     'id'   					=> 'ID',
-    'name'      			=> 'Manufacturer Name',
-    'update'				=> 'Update Manufacturer',
+    'name'      			=> 'ชื่อผู้ผลิต',
+    'update'				=> 'ปรับปรุงผู้ผลิต',
 
 );

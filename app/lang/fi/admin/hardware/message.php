@@ -5,6 +5,7 @@ return array(
     'undeployable' 		=> '<strong>Varoitus: </strong> Tämä laite on määritetty käyttökunnottomaksi.
                         Jos laitteen tila on muuttunut, päivitä laitteen tila sen asetuksista.',
     'does_not_exist' 	=> 'Laitetta ei löydy.',
+    'does_not_exist_or_not_requestable' => 'Nice try. That asset does not exist or is not requestable.',
     'assoc_users'	 	=> 'Tämä laite on luovutettu käyttäjälle joten sitä ei voida poistaa. Palauta laite ensin käyttäjältä ja yritä uudelleen. ',
 
     'create' => array(
@@ -22,7 +23,7 @@ return array(
         'error'   		=> 'Laitetta ei palautettu, ole hyvä ja yritä uudelleen',
         'success' 		=> 'Laite palautettiin onnistuneesti.'
     ),
-    
+
     'deletefile' => array(
         'error'   => 'Tiedostoa ei poistettu. Ole hyvä ja yritä uudelleen.',
         'success' => 'Tiedosto poistettiin onnistuneesti.',
@@ -31,7 +32,7 @@ return array(
     'upload' => array(
         'error'   => 'Tiedostoja ei lähetetty. Ole hyvä ja yritä uudelleen.',
         'success' => 'Tiedostot lähetettiin onnistuneesti.',
-        'nofiles' => 'Et valinnut yhtään tiedostoa lähetettäväksi',
+        'nofiles' => 'You did not select any files for upload, or the file you are trying to upload is too large',
         'invalidfiles' => 'Yksi tai useampia tiedostoja on liian iso tai sen tiedostotyyppi ei ole sallittu. Sallitut tiedostotyypit ovat png, gif, jpg, doc, docx, pdf, ja txt.',
     ),
 

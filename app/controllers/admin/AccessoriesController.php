@@ -218,7 +218,7 @@ class AccessoriesController extends AdminController
         }
 
         // Get the dropdown of users and then pass it to the checkout view
-        $users_list = array('' => 'Select a User') + DB::table('users')->select(DB::raw('concat(last_name,", ",first_name) as full_name, id'))->whereNull('deleted_at')->orderBy('last_name', 'asc')->orderBy('first_name', 'asc')->lists('full_name', 'id');
+        $users_list = array('' => 'Select a User') + DB::table('users')->select(DB::raw('concat(last_name,", ",first_name," (",username,")") as full_name, id'))->whereNull('deleted_at')->orderBy('last_name', 'asc')->orderBy('first_name', 'asc')->lists('full_name', 'id');
 
         return View::make('backend/accessories/checkout', compact('accessory'))->with('users_list',$users_list);
 
@@ -274,20 +274,20 @@ class AccessoriesController extends AdminController
             $logaction->location_id = $user->location_id;
             $logaction->user_id = Sentry::getUser()->id;
             $logaction->note = e(Input::get('note'));
-            
+
             $settings = Setting::getSettings();
-			
+
 			if ($settings->slack_endpoint) {
-				
+
 
 				$slack_settings = [
 				    'username' => $settings->botname,
 				    'channel' => $settings->slack_channel,
 				    'link_names' => true
 				];
-				
+
 				$client = new \Maknz\Slack\Client($settings->slack_endpoint,$slack_settings);
-				
+
 				try {
 						$client->attach([
 						    'color' => 'good',
@@ -301,13 +301,13 @@ class AccessoriesController extends AdminController
 						            'value' => e($logaction->note)
 						        ],
 
-						        
-						        				   
+
+
 						    ]
 						])->send('Accessory Checked Out');
-					
+
 					} catch (Exception $e) {
-						
+
 					}
 
 			}
@@ -322,6 +322,10 @@ class AccessoriesController extends AdminController
             $data['eula'] = $accessory->getEula();
             $data['first_name'] = $user->first_name;
             $data['item_name'] = $accessory->name;
+            $data['checkout_date'] = $logaction->created_at;
+            $data['item_tag'] = '';
+            $data['expected_checkin'] = '';
+            $data['note'] = $logaction->note;
             $data['require_acceptance'] = $accessory->requireAcceptance();
 
 
@@ -390,20 +394,20 @@ class AccessoriesController extends AdminController
             $logaction->asset_type = 'accessory';
             $logaction->user_id = $admin_user->id;
             $logaction->note = e(Input::get('note'));
-            
+
             $settings = Setting::getSettings();
-			
+
 			if ($settings->slack_endpoint) {
-				
-				
+
+
 				$slack_settings = [
 				    'username' => $settings->botname,
 				    'channel' => $settings->slack_channel,
 				    'link_names' => true
 				];
-				
+
 				$client = new \Maknz\Slack\Client($settings->slack_endpoint,$slack_settings);
-				
+
 				try {
 						$client->attach([
 						    'color' => 'good',
@@ -416,18 +420,37 @@ class AccessoriesController extends AdminController
 						            'title' => 'Note:',
 						            'value' => e($logaction->note)
 						        ],
-						        				   
+
 						    ]
 						])->send('Accessory Checked In');
-					
+
 					} catch (Exception $e) {
-						
+
 					}
 
 			}
-			
-			
+
+
             $log = $logaction->logaction('checkin from');
+
+            if(!is_null($accessory_user->assigned_to)) {
+                $user = User::find($accessory_user->assigned_to);
+            }
+
+            $data['log_id'] = $logaction->id;
+            $data['first_name'] = $user->first_name;
+            $data['item_name'] = $accessory->name;
+            $data['checkin_date'] = $logaction->created_at;
+            $data['item_tag'] = '';
+            $data['note'] = $logaction->note;
+
+            if (($accessory->checkin_email()=='1')) {
+
+                Mail::send('emails.checkin-asset', $data, function ($m) use ($user) {
+                    $m->to($user->email, $user->first_name . ' ' . $user->last_name);
+                    $m->subject('Confirm Accessory Checkin');
+                });
+            }
 
             if ($backto=='user') {
 				return Redirect::to("admin/users/".$return_to.'/view')->with('success', Lang::get('admin/accessories/message.checkin.success'));
@@ -442,7 +465,7 @@ class AccessoriesController extends AdminController
 
     public function getDatatable()
     {
-        $accessories = Accessory::select(array('id','name','qty'))
+        $accessories = Accessory::with('category')
         ->whereNull('deleted_at')
         ->orderBy('created_at', 'DESC');
 
@@ -454,6 +477,10 @@ class AccessoriesController extends AdminController
             });
 
         return Datatable::collection($accessories)
+        ->addColumn('category',function($accessories)
+            {
+                return $accessories->category->name;
+            })
         ->addColumn('name',function($accessories)
             {
                 return link_to('admin/accessories/'.$accessories->id.'/view', $accessories->name);
@@ -467,8 +494,8 @@ class AccessoriesController extends AdminController
                 return $accessories->numRemaining();
             })
         ->addColumn($actions)
-        ->searchColumns('name','qty','numRemaining','actions')
-        ->orderColumns('name','qty','numRemaining','actions')
+        ->searchColumns('category','name','qty','numRemaining','actions')
+        ->orderColumns('category','name','qty','numRemaining','actions')
         ->make();
     }
 

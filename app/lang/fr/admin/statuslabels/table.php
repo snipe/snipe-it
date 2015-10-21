@@ -2,14 +2,14 @@
 
 return array(
     'about'      	=> 'À propos des étiquettes de statut',
-    'archived'      	=> 'Archived',
+    'archived'      	=> 'Retiré',
     'create'      	=> 'Créé une étiquette de statut',
-    'deployable'      	=> 'Deployable',
-    'info'      	=> 'Status labels are used to describe the various states your assets could be in. They may be out for repair, lost/stolen, etc. You can create new status labels for deployable, pending and archived assets.',
+    'deployable'      	=> 'Déployable',
+    'info'      	=> 'Les étiquettes d\'état sont utilisés pour décrire les différents états de vos actifs. Ils peuvent être pour réparation , perdu / volé , etc. Vous pouvez créer de nouvelles étiquettes d\'état pour déployable , en attente et actifs retirés.',
     'name'      	=> 'Nom du statut',
-    'pending'      	=> 'Pending',
-    'status_type'   => 'Status Type',
+    'pending'      	=> 'En attente',
+    'status_type'   => 'Type d\'état',
     'title'      	=> 'Étiquette de statut',
-    'undeployable'  => 'Undeployable',
+    'undeployable'  => 'Non déployable',
     'update'      	=> 'Mettre à jour l\'étiquette de statut',
 );

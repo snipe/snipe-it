@@ -8,7 +8,8 @@ return array(
 
     'create' => array(
         'error'   => 'O modelo não foi criado, tente novamente.',
-        'success' => 'Modelo criado com sucesso.'
+        'success' => 'Modelo criado com sucesso.',
+        'duplicate_set' => 'Um modelo de ativo com este nome, desse fabricante e desse modelo já existe.',
     ),
 
     'update' => array(
@@ -21,7 +22,7 @@ return array(
         'error'   => 'Houve um problema ao deletar o modelo. Por favor, tente novamente.',
         'success' => 'O modelo foi excluído com sucesso.'
     ),
-    
+
     'restore' => array(
         'error'   		=> 'O modelo não foi restaurado, tente novamente',
         'success' 		=> 'Modelo restaurado com sucesso.'

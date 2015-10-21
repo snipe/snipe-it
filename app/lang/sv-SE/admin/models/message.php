@@ -2,29 +2,30 @@
 
 return array(
 
-    'does_not_exist' => 'Model does not exist.',
-    'assoc_users'	 => 'This model is currently associated with one or more assets and cannot be deleted. Please delete the assets, and then try deleting again. ',
+    'does_not_exist' => 'Modellen finns inte.',
+    'assoc_users'	 => 'Denna modell är redan associerad med en eller flera inventarier och kan inte tas bort. Ta bort inventarierna och försök sedan igen. ',
 
 
     'create' => array(
-        'error'   => 'Model was not created, please try again.',
-        'success' => 'Model created successfully.'
+        'error'   => 'Modellen skapades inte, försök igen.',
+        'success' => 'Modellen skapad.',
+        'duplicate_set' => 'An asset model with that name, manufacturer and model number already exists.',
     ),
 
     'update' => array(
-        'error'   => 'Model was not updated, please try again',
-        'success' => 'Model updated successfully.'
+        'error'   => 'Modellen uppdaterades inte, försök igen',
+        'success' => 'Modellen uppdaterad.'
     ),
 
     'delete' => array(
-        'confirm'   => 'Are you sure you wish to delete this asset model?',
-        'error'   => 'There was an issue deleting the model. Please try again.',
-        'success' => 'The model was deleted successfully.'
+        'confirm'   => 'Är du säker på att du vill ta bort denna modell?',
+        'error'   => 'Problem att ta bort modellen. Försök igen.',
+        'success' => 'Modellen borttagen.'
     ),
-    
+
     'restore' => array(
-        'error'   		=> 'Model was not restored, please try again',
-        'success' 		=> 'Model restored successfully.'
+        'error'   		=> 'Modellen återskapades inte, försök igen',
+        'success' 		=> 'Modellen återskapades.'
     ),
 
 );

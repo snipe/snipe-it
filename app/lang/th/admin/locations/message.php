@@ -2,24 +2,26 @@
 
 return array(
 
-    'does_not_exist' => 'Location does not exist.',
-    'assoc_users'	 => 'This location is currently associated with at least one user and cannot be deleted. Please update your users to no longer reference this location and try again. ',
+    'does_not_exist' => 'ไม่มีสถานที่นี้.',
+    'assoc_users'	 => 'สถานที่นี้ถูกใช้งานหรือเกี่ยวข้องอยู่กับผู้ใช้งานคนใดคนหนึ่ง และไม่สามารถลบได้ กรุณาปรับปรุงผู้ใช้งานของท่านไม่ให้มีส่วนเกี่ยวข้องกับสถานที่นี้ และลองอีกครั้ง. ',
+    'assoc_assets'	 => 'สถานที่นี้ถูกใช้งานหรือเกี่ยวข้องอยู่กับผู้ใช้งานคนใดคนหนึ่ง และไม่สามารถลบได้ กรุณาปรับปรุงผู้ใช้งานของท่านไม่ให้มีส่วนเกี่ยวข้องกับสถานที่นี้ และลองอีกครั้ง. ',
+    'assoc_child_loc'	 => 'สถานที่นี้ถูกใช้งานหรือเกี่ยวข้องอยู่กับหมวดสถานที่ใดที่หนึ่ง และไม่สามารถลบได้ กรุณาปรับปรุงสถานที่ของท่านไม่ให้มีส่วนเกี่ยวข้องกับหมวดสถานที่นี้ และลองอีกครั้ง. ',
 
 
     'create' => array(
-        'error'   => 'Location was not created, please try again.',
-        'success' => 'Location created successfully.'
+        'error'   => 'สถานที่ยังไม่ถูกสร้าง กรุณาลองใหม่อีกครั้ง.',
+        'success' => 'สร้างสถานที่เรียบร้อยแล้ว.'
     ),
 
     'update' => array(
-        'error'   => 'Location was not updated, please try again',
-        'success' => 'Location updated successfully.'
+        'error'   => 'สถานที่ยังไม่ถูกปรับปรุง กรุณาลองใหม่อีกครั้ง',
+        'success' => 'ปรับปรุงสถานที่เรียบร้อยแล้ว.'
     ),
 
     'delete' => array(
-        'confirm'   	=> 'Are you sure you wish to delete this location?',
-        'error'   => 'There was an issue deleting the location. Please try again.',
-        'success' => 'The location was deleted successfully.'
+        'confirm'   	=> 'คุณแน่ใจที่จะลบสถานที่นี้?',
+        'error'   => 'มีปัญหาระหว่างการลบสถานที่ กรุณาลองใหม่อีกครั้ง.',
+        'success' => 'ลบสถานที่เรียบร้อยแล้ว.'
     )
 
 );

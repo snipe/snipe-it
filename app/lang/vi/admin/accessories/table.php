@@ -1,9 +1,11 @@
 <?php
 
 return array(
-	'eula_text'      			=> 'EULA',
-    'id'      					=> 'ID',
-    'require_acceptance'      	=> 'Acceptance',
-    'title'      				=> 'Accessory Name',
+	'dl_csv'      				=> 'Tải xuống CSV',
+	'eula_text'      			=> 'Điều khoản sử dụng cho người dùng cuối',
+    'id'      					=> 'Định danh',
+    'require_acceptance'      	=> 'Chấp nhận',
+    'title'      				=> 'Tên phụ kiện',
+
 
 );

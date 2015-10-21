@@ -2,29 +2,30 @@
 
 return array(
 
-    'does_not_exist' => 'Model does not exist.',
-    'assoc_users'	 => 'This model is currently associated with one or more assets and cannot be deleted. Please delete the assets, and then try deleting again. ',
+    'does_not_exist' => 'O Modelo não existe.',
+    'assoc_users'	 => 'Este modelo está atualmente associado com pelo menos um artigo e não pode ser removido. Por favor, remova os artigos e depois tente novamente. ',
 
 
     'create' => array(
-        'error'   => 'Model was not created, please try again.',
-        'success' => 'Model created successfully.'
+        'error'   => 'O Modelo não foi criado. Por favor tente novamente.',
+        'success' => 'Modelo criado com sucesso.',
+        'duplicate_set' => 'Já existe um Modelo de artigo com esse nome, fabricante e número de modelo.',
     ),
 
     'update' => array(
-        'error'   => 'Model was not updated, please try again',
-        'success' => 'Model updated successfully.'
+        'error'   => 'O Modelo não foi atualizado. Por favor tente novamente',
+        'success' => 'Modelo atualizado com sucesso.'
     ),
 
     'delete' => array(
-        'confirm'   => 'Are you sure you wish to delete this asset model?',
-        'error'   => 'There was an issue deleting the model. Please try again.',
-        'success' => 'The model was deleted successfully.'
+        'confirm'   => 'Tem a certeza que pretende remover este modelo de artigo?',
+        'error'   => 'Ocorreu um problema ao remover o modelo. Por favor, tente novamente.',
+        'success' => 'O modelo foi removido com sucesso.'
     ),
-    
+
     'restore' => array(
-        'error'   		=> 'Model was not restored, please try again',
-        'success' 		=> 'Model restored successfully.'
+        'error'   		=> 'O Modelo não foi restaurado, por favor tente novamente',
+        'success' 		=> 'Modelo restaurado com sucesso.'
     ),
 
 );

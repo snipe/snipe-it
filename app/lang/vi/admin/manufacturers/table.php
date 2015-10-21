@@ -2,10 +2,10 @@
 
 return array(
 
-    'asset_manufacturers'	=> 'Asset Manufacturers',
-    'create'				=> 'Create Manufacturer',
+    'asset_manufacturers'	=> 'Hãng sản xuất',
+    'create'				=> 'Tạo hãng sản xuất',
     'id'   					=> 'ID',
-    'name'      			=> 'Manufacturer Name',
-    'update'				=> 'Update Manufacturer',
+    'name'      			=> 'Tên hãng sản xuất',
+    'update'				=> 'Cập nhật hãng sản xuất',
 
 );

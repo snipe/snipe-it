@@ -81,7 +81,7 @@ class GroupsController extends AdminController
             // Was the group created?
             if ($group = Sentry::getGroupProvider()->create($inputs)) {
                 // Redirect to the new group page
-                return Redirect::route('update/group', $group->id)->with('success', Lang::get('admin/groups/message.success.create'));
+                return Redirect::route('groups')->with('success', Lang::get('admin/groups/message.success.create'));
             }
 
             // Redirect to the new group page
@@ -163,7 +163,7 @@ class GroupsController extends AdminController
 
         if (!Config::get('app.lock_passwords')) {
 
-                try {
+            try {
                 // Update the group data
                 $group->name        = Input::get('name');
                 $group->permissions = Input::get('permissions');
@@ -196,18 +196,22 @@ class GroupsController extends AdminController
      */
     public function getDelete($id = null)
     {
-        try {
-            // Get group information
-            $group = Sentry::getGroupProvider()->findById($id);
+        if (!Config::get('app.lock_passwords')) {
+            try {
+                // Get group information
+                $group = Sentry::getGroupProvider()->findById($id);
 
-            // Delete the group
-            $group->delete();
+                // Delete the group
+                $group->delete();
 
-            // Redirect to the group management page
-            return Redirect::route('groups')->with('success', Lang::get('admin/groups/message.success.delete'));
-        } catch (GroupNotFoundException $e) {
-            // Redirect to the group management page
-            return Redirect::route('groups')->with('error', Lang::get('admin/groups/message.group_not_found', compact('id')));
+                // Redirect to the group management page
+                return Redirect::route('groups')->with('success', Lang::get('admin/groups/message.success.delete'));
+            } catch (GroupNotFoundException $e) {
+                // Redirect to the group management page
+                return Redirect::route('groups')->with('error', Lang::get('admin/groups/message.group_not_found', compact('id')));
+            }
+        } else {
+            return Redirect::route('groups')->with('error',  Lang::get('general.feature_disabled'));
         }
     }
 

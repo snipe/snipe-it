@@ -2,49 +2,49 @@
 
 return array(
 
-    'does_not_exist' => 'License does not exist.',
-    'user_does_not_exist' => 'User does not exist.',
-    'asset_does_not_exist' 	=> 'The asset you are trying to associate with this license does not exist.',
-    'owner_doesnt_match_asset' => 'The asset you are trying to associate with this license is owned by somene other than the person selected in the assigned to dropdown.',
-    'assoc_users'	 => 'This license is currently checked out to a user and cannot be deleted. Please check the license in first, and then try deleting again. ',
+    'does_not_exist' => 'Bản quyền không tồn tại.',
+    'user_does_not_exist' => 'Người dùng không tồn tại.',
+    'asset_does_not_exist' 	=> 'Tài sản bản đang cố gắng liên kết với bản quyền này không tồn tại.',
+    'owner_doesnt_match_asset' => 'Tài sản bạn đang cố gắng liên kết với bản quyền đã được sở hữu hởi một người nào đó khác với người đang được lựa chọn để gán trong danh sách xổ xuống.',
+    'assoc_users'	 => 'Bản quyền này hiện tại đã được checkout đến một người dùng và có thể đã bị xóa. Xin vui lòng kiểm tra lại bản quyền đầu tiên, và kế đến có gắng xóa thêm lần nữa. ',
 
 
     'create' => array(
-        'error'   => 'License was not created, please try again.',
-        'success' => 'License created successfully.'
+        'error'   => 'Bản quyền chưa được tạo, xin vui lòng thử lại.',
+        'success' => 'Bản quyền đã được tạo thành công.'
     ),
 
     'deletefile' => array(
-        'error'   => 'File not deleted. Please try again.',
-        'success' => 'File successfully deleted.',
+        'error'   => 'Tập tin không xóa được. Xin vui lòng thử lại.',
+        'success' => 'Tập tin đã xóa thành công.',
     ),
 
     'upload' => array(
-        'error'   => 'File(s) not uploaded. Please try again.',
-        'success' => 'File(s) successfully uploaded.',
-        'nofiles' => 'You did not select any files for upload',
-        'invalidfiles' => 'One or more of your files is too large or is a filetype that is not allowed. Allowed filetypes are png, gif, jpg, doc, docx, pdf, and txt.',
+        'error'   => 'Tập tin không tải lên được. Xin vui lòng thử lại.',
+        'success' => 'Tập tin đã tải lên thành công.',
+        'nofiles' => 'Bạn chưa chọn bất kỳ tập tin nào để tải lên, hoặc tập tin bạn đang cố gắng tải lên có dung lượng quá lớn',
+        'invalidfiles' => 'Một hoặc nhiều tập tin của ban có dung lượng quá lớn hoặc loại tập tin không cho phép tải lên. Chỉ cho phép những loại tập tin png, gif, jpg, doc, docx, pdf, and txt.',
     ),
 
     'update' => array(
-        'error'   => 'License was not updated, please try again',
-        'success' => 'License updated successfully.'
+        'error'   => 'Bản quyền chưa được cập nhật, xin vui lòng thử lại',
+        'success' => 'Bản quyền đã cập nhật thành công.'
     ),
 
     'delete' => array(
-        'confirm'   => 'Are you sure you wish to delete this license?',
-        'error'   => 'There was an issue deleting the license. Please try again.',
-        'success' => 'The license was deleted successfully.'
+        'confirm'   => 'Bạn có chắc muốn xóa bản quyền này?',
+        'error'   => 'Có vấn đề xảy ra khi xóa bản quyền này. Xin vui lòng thử lại.',
+        'success' => 'Bản quyền đã xóa thành công.'
     ),
 
     'checkout' => array(
-        'error'   => 'There was an issue checking out the license. Please try again.',
-        'success' => 'The license was checked out successfully'
+        'error'   => 'Có vấn đề xảy ra khi checkout bản quyền. Xin vui lòng thử lại.',
+        'success' => 'Bản quyền đã được checkout thành công'
     ),
 
     'checkin' => array(
-        'error'   => 'There was an issue checking in the license. Please try again.',
-        'success' => 'The license was checked in successfully'
+        'error'   => 'Có vấn đề xảy ra khi checkin bản quyền. Xin vui lòng thử lại.',
+        'success' => 'Bản quyền đã được checkin thành công'
     ),
 
 );

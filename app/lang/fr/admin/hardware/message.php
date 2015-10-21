@@ -2,9 +2,10 @@
 
 return array(
 
-    'undeployable' 		=> '<strong>Warning: </strong> This asset has been marked as currently undeployable.
-                        If this status has changed, please update the asset status.',
+    'undeployable' 		=> '<strong>Attention: </strong> Ce bien a été marqué non déployable.
+                        Si ce statut a changé, veuillez l\'actualiser.',
     'does_not_exist' 	=> 'Ce bien n\'existe pas.',
+    'does_not_exist_or_not_requestable' => 'Cet actif n\'existe pas ou ne peux pas être réquisitionné.',
     'assoc_users'	 	=> 'Ce bien est marqué sorti par un utilisateur et ne peut être supprimé. Veuillez d\'abord cliquer sur Retour de Biens, et réessayer.',
 
     'create' => array(
@@ -15,24 +16,24 @@ return array(
     'update' => array(
         'error'   			=> 'Ce bien n\'a pas été actualisé, veuillez réessayer',
         'success' 			=> 'Bien actualisé correctement.',
-        'nothing_updated'	=>  'No fields were selected, so nothing was updated.',
+        'nothing_updated'	=>  'Aucun champ n\'a été sélectionné, rien n\'a été actualisé.',
     ),
 
     'restore' => array(
-        'error'   		=> 'Asset was not restored, please try again',
-        'success' 		=> 'Asset restored successfully.'
+        'error'   		=> 'L\'actif n\'a pas été restauré, veuillez réessayer',
+        'success' 		=> 'Actif restauré correctement.'
     ),
-    
+
     'deletefile' => array(
-        'error'   => 'File not deleted. Please try again.',
-        'success' => 'File successfully deleted.',
+        'error'   => 'Le fichier n\'a pas été détruit. Veuillez réessayer.',
+        'success' => 'Fichier détruit correctement.',
     ),
 
     'upload' => array(
-        'error'   => 'File(s) not uploaded. Please try again.',
-        'success' => 'File(s) successfully uploaded.',
-        'nofiles' => 'You did not select any files for upload',
-        'invalidfiles' => 'One or more of your files is too large or is a filetype that is not allowed. Allowed filetypes are png, gif, jpg, doc, docx, pdf, and txt.',
+        'error'   => 'Le(s) fichier(s) n\'ont pas pu être téléversé. Veuillez réessayer.',
+        'success' => 'Le(s) fichier(s) ont été téléversé correctement.',
+        'nofiles' => 'Vous n\'avez pas sélectionné de fichier pour le téléchargement ou le fichier que vous essayez de télécharger est trop gros',
+        'invalidfiles' => 'Un ou plusieurs de vos fichiers sont trop gros, ou sont d\'un type non autorisé. Les types de fichiers autorisés sont png, gif, jpg, doc, docx, pdf et txt.',
     ),
 
 

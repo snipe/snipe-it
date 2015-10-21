@@ -10,8 +10,8 @@ class Model extends Elegant
 
     // Declare the rules for the form validation
     protected $rules = array(
-        'name'   		=> 'required|alpha_space|min:3|max:255|unique:models,name,{id}',
-        'modelno'   		=> 'alpha_space|min:1|max:255|unique:models,modelno,{id}',
+        'name'   		=> 'required|alpha_space|min:2|max:255|unique:models,deleted_at,NULL',
+        'modelno'   		=> 'alpha_space|min:1|max:255',
         'category_id'   	=> 'required|integer',
         'manufacturer_id'   => 'required|integer',
         'eol'   => 'required|integer:min:0|max:240',
@@ -67,5 +67,22 @@ class Model extends Elegant
 	{
 		return $query->whereNotNull('deleted_at');
 	}
+
+    /**
+     * scopeInCategory
+     * Get all models that are in the array of category ids
+     *
+     * @param       $query
+     * @param array $categoryIdListing
+     *
+     * @return mixed
+     * @author  Vincent Sposato <vincent.sposato@gmail.com>
+     * @version v1.0
+     */
+    public function scopeInCategory( $query, array $categoryIdListing )
+    {
+
+        return $query->whereIn( 'category_id', $categoryIdListing );
+    }
 
 }

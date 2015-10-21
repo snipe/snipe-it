@@ -77,7 +77,7 @@ return array(
     */
 
     'custom' => array(),
-    'alpha_space' => "O campo de :attribute pode apenas conter letras, vírgulas, espaços e traços.",
+    'alpha_space' => "O campo :attribute contém um caractere que não é permitido.",
 
     /*
     |--------------------------------------------------------------------------

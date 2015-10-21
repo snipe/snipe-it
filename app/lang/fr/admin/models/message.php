@@ -8,7 +8,8 @@ return array(
 
     'create' => array(
         'error'   => 'Le modèle n\'a pas été créé, veuillez essayer à nouveau.',
-        'success' => 'Le modèle a été créé avec succès.'
+        'success' => 'Le modèle a été créé avec succès.',
+        'duplicate_set' => 'Un modèle d\'actif avec ce nom, fabricant et modèle existe déjà.',
     ),
 
     'update' => array(
@@ -21,10 +22,10 @@ return array(
         'error'   => 'Un problème a eu lieu pendant la suppression du modèle. Veuillez essayer à nouveau.',
         'success' => 'Le modèle a été supprimé avec succès.'
     ),
-    
+
     'restore' => array(
-        'error'   		=> 'Model was not restored, please try again',
-        'success' 		=> 'Model restored successfully.'
+        'error'   		=> 'Le modèle d\'actif n\'a pas été restauré, veuillez réessayer',
+        'success' 		=> 'Modèle d\'actif restauré correctement.'
     ),
 
 );

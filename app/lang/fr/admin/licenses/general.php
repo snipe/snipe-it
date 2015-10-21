@@ -6,6 +6,7 @@ return array(
     'checkout_history'  		=> 'Historique des associations',
     'checkout'  				=> 'Associer la licence multiposte',
     'edit'  					=> 'Éditer la licence',
+    'filetype_info'				=> 'Types de fichier autorisés: png, gif, jpg, jpeg, doc, docx, pdf, txt, zip, and rar.',
     'clone'  					=> 'Cloner la licence',
     'history_for'  				=> 'Historique pour ',
     'in_out'  					=> 'Associer/Libérer',

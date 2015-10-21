@@ -3,13 +3,15 @@
 return array(
 
     'id'      		=> 'ID',
-    'city'   		=> 'City',
-    'state'   		=> 'State',
-    'country'   	=> 'Country',
-    'create'		=> 'Create Location',
-    'update'		=> 'Update Location',
-    'name'			=> 'Location Name',
-    'address'		=> 'Address',
-    'zip'			=> 'Postal Code',
-    'locations'		=> 'Locations',
+    'city'   		=> 'Cidade',
+    'state'   		=> 'Distrito',
+    'country'   	=> 'País',
+    'create'		=> 'Criar localização',
+    'update'		=> 'Atualizar localização',
+    'name'			=> 'Nome da localização',
+    'address'		=> 'Morada',
+    'zip'			=> 'Código postal',
+    'locations'		=> 'Localizações',
+    'parent'		=> 'Pertence a',
+    'currency'  	=> 'Moeda', // this is deprecated
 );

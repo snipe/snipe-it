@@ -18,5 +18,6 @@ return array(
     'serial'   		=> 'N. Serie',
     'status'   		=> 'Estado',
     'title'      	=> 'Equipo ',
+    'days_without_acceptance' => 'Días Sin Aceptación'
 
 );
