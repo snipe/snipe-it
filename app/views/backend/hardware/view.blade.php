@@ -105,10 +105,12 @@
         @endif
 
         @if ($asset->supplier_id)
-            <div class="col-md-6" style="padding-bottom: 5px;"><strong>@lang('admin/hardware/form.supplier'): </strong>
-            <a href="{{ route('view/supplier', $asset->supplier_id) }}">
-            {{{ $asset->supplier->name }}}
-            </a> </div>
+            <div class="col-md-6" style="padding-bottom: 5px;">
+                  <strong>@lang('admin/hardware/form.supplier'): </strong>
+                  <a href="{{ route('view/supplier', $asset->supplier_id) }}">
+                  {{{ $asset->supplier->name }}}
+                  </a>
+            </div>
         @endif
 
         @if ($asset->warranty_months)

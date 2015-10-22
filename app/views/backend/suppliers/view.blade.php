@@ -23,19 +23,19 @@
 <div class="user-profile">
 <div class="row profile">
 <div class="col-md-9 bio">
-    <div class="profile-box">
 
-            <!-- checked out suppliers table -->
-            <h6>Assets</h6>
-            <br>
-            @if (count($supplier->assets) > 0)
-           <table id="example">
+      <!-- checked out suppliers table -->
+      <h6>Assets</h6>
+      <br>
+      @if (count($supplier->assets) > 0)
+      <div class="table-responsive">
+       <table class="display table table-hover">
             <thead>
                 <tr role="row">
                         <th class="col-md-3">Asset Tag</th>
-                        <th class="col-md-3">Name</th>
-                        <th class="col-md-3">User</th>
-                        <th class="col-md-2">Actions</th>
+                        <th class="col-md-3"><span class="line"></span>Name</th>
+                        <th class="col-md-3"><span class="line"></span>User</th>
+                        <th class="col-md-2"><span class="line"></span>Actions</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -54,9 +54,9 @@
                         </td>
                         <td>
                         @if ($supplierassets->assigned_to != '')
-                            <a href="{{ route('checkin/hardware', $supplierassets->id) }}" class="btn-flat info">Checkin</a>
+                            <a href="{{ route('checkin/hardware', $supplierassets->id) }}" class="btn btn-info btn-sm">Checkin</a>
                         @else
-                            <a href="{{ route('checkout/hardware', $supplierassets->id) }}" class="btn-flat success">Checkout</a>
+                            <a href="{{ route('checkout/hardware', $supplierassets->id) }}" class="btn btn-success btn-sm">Checkout</a>
                         @endif
                         </td>
 
@@ -66,6 +66,7 @@
 
                 </tbody>
             </table>
+      </div>
 
             @else
             <div class="col-md-12">
@@ -83,7 +84,7 @@
             <table class="table table-hover">
                 <thead>
                     <tr>
-                        <th class="col-md-4"><span class="line"></span>Name</th>
+                        <th class="col-md-4">Name</th>
                         <th class="col-md-4"><span class="line"></span>Serial</th>
                     </tr>
                 </thead>
@@ -163,7 +164,7 @@
                 </div>
             @endif
 
-    </div>
+
 </div>
 
 
