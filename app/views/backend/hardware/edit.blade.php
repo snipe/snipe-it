@@ -300,7 +300,7 @@
 		  	</div>
         
         <!-- Custom Fields -->
-        @if($asset->model->fieldset)
+        @if($asset->model && $asset->model->fieldset)
           <h1>Custom Fields</h1>
           @foreach($asset->model->fieldset->fields AS $field)
             <div class="form-group">
