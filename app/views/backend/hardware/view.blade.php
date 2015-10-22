@@ -65,12 +65,6 @@
 
         @endif
 
-        @if ($asset->mac_address!='')
-            <div class="col-md-12" style="padding-bottom: 5px;"><strong>@lang('admin/hardware/form.mac_address'):</strong>
-            {{{ $asset->mac_address }}}
-            </div>
-        @endif
-
         @if ($asset->model->manufacturer)
             <div class="col-md-12" style="padding-bottom: 5px;"><strong>@lang('admin/hardware/form.manufacturer'): </strong>
             <a href="{{ route('update/manufacturer', $asset->model->manufacturer->id) }}">
@@ -159,6 +153,17 @@
             </div>
         @endif
 
+        @if ($asset->model->fieldset->sortBy('custom_field_custom_fieldset.order'))
+          <hr>
+          <div class="col-md-12" style="padding-bottom: 5px;"><strong>FIELDSET:</strong> 
+            {{{ $asset->model->fieldset->name }}}</div>
+          @foreach($asset->model->fieldset->fields as $field)
+            <div class="col-md-12" style="padding-bottom: 5px;"><strong>{{{ $field->name }}}:</strong>
+            {{{ $asset->{$field->db_column_name()} }}}
+            </div>
+          @endforeach
+          <hr>
+        @endif
 
 
 

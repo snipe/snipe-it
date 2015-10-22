@@ -14,36 +14,40 @@ class CustomField extends Elegant
   
   public static function name_to_db_name($name)
   {
-    return preg_replace("/\s/","_",strtolower($name));
+    return "_snipeit_".preg_replace("/\s/","_",strtolower($name));
   }
   
-  public static function creating($custom_field) {
-    if(in_array($custom_field->db_column_name(),Schema::getColumnListing(CustomField::$table_name))) {
-      //field already exists when making a new custom field; fail.
-      return false;
-    }
-    return db::exec("ALTER TABLE ".CustomField::$table_name." ADD COLUMN (".$custom_field->db_column_name()." TEXT)");
-  }
-  
-  public static function updating($custom_field) {
-    //print("    SAVING CALLBACK FIRING!!!!!    ");
-    if($custom_field->isDirty("name")) {
-      //print("DIRTINESS DETECTED!");
-      //$fields=array_keys($custom_field->getAttributes());
-      ;
-      //add timestamp fields, add id column
-      //array_push($fields,$custom_field->getKeyName());
-      /*if($custom_field::timestamps) {
-        
-      }*/
-      //print("Fields are: ".print_r($fields,true));
-      if(in_array($custom_field->db_column_name(),Schema::getColumnListing(CustomField::$table_name))) {
-        //field already exists when renaming a custom field
+  public static function boot()
+  {
+    self::creating(function ($custom_field) {
+      
+      if(in_array($custom_field->db_column_name(),Schema::getColumnListing(DB::getTablePrefix().CustomField::$table_name))) {
+        //field already exists when making a new custom field; fail.
         return false;
       }
-      return db::exec("UPDATE ".CustomField::$table_name." RENAME ".self::name_to_db_name($custom_field->get_original("name"))." TO ".$custom_field->db_column_name());
-    }
-    return true;
+      return DB::statement("ALTER TABLE ".DB::getTablePrefix().CustomField::$table_name." ADD COLUMN (".$custom_field->db_column_name()." TEXT)");
+    });
+    
+    self::updating(function ($custom_field) {
+      //print("    SAVING CALLBACK FIRING!!!!!    ");
+      if($custom_field->isDirty("name")) {
+        //print("DIRTINESS DETECTED!");
+        //$fields=array_keys($custom_field->getAttributes());
+        //;
+        //add timestamp fields, add id column
+        //array_push($fields,$custom_field->getKeyName());
+        /*if($custom_field::timestamps) {
+          
+        }*/
+        //print("Fields are: ".print_r($fields,true));
+        if(in_array($custom_field->db_column_name(),Schema::getColumnListing(CustomField::$table_name))) {
+          //field already exists when renaming a custom field
+          return false;
+        }
+        return DB::statement("UPDATE ".CustomField::$table_name." RENAME ".self::name_to_db_name($custom_field->get_original("name"))." TO ".$custom_field->db_column_name());
+      }
+      return true;
+    });
   }
   
   /*public static function boot() {
@@ -56,13 +60,9 @@ class CustomField extends Elegant
   }*/
   
   public function fieldset() {
-    return $this->belongsToMany('Fieldset'); //?!?!?!?!?!?
+    return $this->belongsToMany('CustomFieldset'); //?!?!?!?!?!?
   }
-  
-  public $rules=[
-    'name' => 'unique_column'
-  ];
-  
+    
   //public function 
   
   //need helper to go from regex->English
@@ -89,7 +89,7 @@ class CustomField extends Elegant
   }
 
   public function setFormatAttribute($value) {
-    if(self::$PredefinedFormats[$value]) {
+    if(isset(self::$PredefinedFormats[$value])) {
       $this->attributes['format']=self::$PredefinedFormats[$value];
     } else {
       $this->attributes['format']=$value;

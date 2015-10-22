@@ -242,9 +242,20 @@ class AssetsController extends AdminController
             // Redirect to the asset management page with error
             return Redirect::to('hardware')->with('error', Lang::get('admin/hardware/message.does_not_exist'));
         }
+        
+        $input=Input::all();
+        if($this->model->fieldset)
+        {
+          foreach($this->model->fieldset->fields AS $field) {
+            $input[$field->db_column_name()]=$input->fields[$field->db_column_name()];
+          }
+          unset($input['fields']);
+        }
 
         //attempt to validate
-        $validator = Validator::make(Input::all(), $asset->validationRules($assetId));
+        $validator = Validator::make($input, $asset->validationRules($assetId) + $this->fieldset->validation_rules());
+        
+        $custom_errors=[];
 
         if ($validator->fails())
         {
@@ -264,7 +275,7 @@ class AssetsController extends AdminController
             if (e(Input::get('warranty_months')) == '') {
                 $asset->warranty_months =  NULL;
             } else {
-                $asset->warranty_months        = e(Input::get('warranty_months'));
+                $asset->warranty_months = e(Input::get('warranty_months'));
             }
 
             if (e(Input::get('purchase_cost')) == '') {
@@ -1066,7 +1077,7 @@ class AssetsController extends AdminController
     public function getDatatable($status = null)
     {
 
-       $assets = Asset::with('model','assigneduser','assigneduser.userloc','assetstatus','defaultLoc','assetlog','model','model.category')->Hardware()->select(array('id', 'name','model_id','assigned_to','asset_tag','serial','status_id','purchase_date','deleted_at','rtd_location_id','notes','order_number','mac_address','warranty_months'));
+       $assets = Asset::with('model','assigneduser','assigneduser.userloc','assetstatus','defaultLoc','assetlog','model','model.category')->Hardware()->select(array('id', 'name','model_id','assigned_to','asset_tag','serial','status_id','purchase_date','deleted_at','rtd_location_id','notes','order_number','warranty_months'));
 
 
       switch ($status) {

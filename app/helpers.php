@@ -89,6 +89,17 @@ function usersList() {
     return $users_list;
 }
 
+function customFieldsetList() {
+  $customfields=CustomFieldset::lists('name','id');
+  return array('' => Lang::get('general.no_custom_field')) + $customfields;
+}
+
+function predefined_formats() {
+  $keys=array_keys(CustomField::$PredefinedFormats);
+  $stuff=array_combine($keys,$keys);
+  return $stuff+["" => "Custom Format..."];
+}
+
 function barcodeDimensions ($barcode_type = 'QRCODE') {
     if ($barcode_type == 'C128') {
         $size['height'] = '-1';

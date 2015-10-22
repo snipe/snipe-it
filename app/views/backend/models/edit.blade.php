@@ -110,8 +110,8 @@
 			<div class="form-group {{ $errors->has('eol') ? ' has-error' : '' }}">
 				<div class="checkbox col-md-offset-2">
 					<label>
-						{{ Form::checkbox('show_mac_address', '1', Input::old('show_mac_address', $model->show_mac_address)) }}
-						@lang('admin/models/general.show_mac_address')
+						{{ Form::select('custom_fieldset', customFieldsetList(),Input::old('custom_fieldset', $model->fieldset_id)) }}
+						@lang('admin/models/general.choose_fieldset')
 					</label>
 				</div>
 			</div>

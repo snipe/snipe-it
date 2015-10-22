@@ -175,7 +175,7 @@
             </div>
 
             <!-- MAC Address -->
-            <div id="mac_address" class="form-group {{ $errors->has('mac_address') ? ' has-error' : '' }}" style="display:none;">
+            <div id="mac_address" class="form-group {{ $errors->has('mac_address') ? ' has-error' : '' }}" > <!-- style="display:none;" -->
                 <label for="mac_address" class="col-md-2 control-label">@lang('admin/hardware/form.mac_address')</label>
                     <div class="col-md-7 col-sm-12">
                         <input class="form-control" type="text" name="mac_address" id="mac_address" value="{{{ Input::old('mac_address', $asset->mac_address) }}}" />
@@ -267,7 +267,7 @@
                     {{ $errors->first('assigned_to', '<br><span class="alert-msg"><i class="fa fa-times"></i> :message</span>') }}
                 </div>
             </div>
-			@endif
+            @endif
 
             <!-- Notes -->
             <div class="form-group {{ $errors->has('notes') ? ' has-error' : '' }}">
@@ -298,6 +298,19 @@
 				  </div>
 				</div>
 		  	</div>
+        
+        <!-- Custom Fields -->
+        @if($asset->model->fieldset)
+          <h1>Custom Fields</h1>
+          @foreach($asset->model->fieldset->fields AS $field)
+            <div class="form-group">
+              <label for="idunno" class="col-md-2 control-label">{{{ $field->name }}}</label>
+              <div class="col-md-7 col-sm-12">
+                  <input type="text" value="{{{ Input::old('fields[{{$field->db_column_name()}}]',$asset->{$field->db_column_name()}) }}}" name="fields[{{{ $field->db_column_name() }}}]">
+              </div>
+            </div>
+          @endforeach
+        @endif
 
 
             <!-- Form actions -->

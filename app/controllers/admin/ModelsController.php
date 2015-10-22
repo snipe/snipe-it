@@ -236,7 +236,8 @@ class ModelsController extends AdminController
             $model->modelno            	= e(Input::get('modelno'));
             $model->manufacturer_id    	= e(Input::get('manufacturer_id'));
             $model->category_id    		= e(Input::get('category_id'));
-            $model->show_mac_address 	= e(Input::get('show_mac_address', '0'));
+            //$model->show_mac_address 	= e(Input::get('show_mac_address', '0'));
+            $model->fieldset_id = e(Input::get('custom_fieldset'));
 
             if (Input::file('image')) {
                 $image = Input::file('image');

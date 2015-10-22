@@ -43,11 +43,9 @@ class Model extends Elegant
         return $this->belongsTo('Manufacturer','manufacturer_id');
     }
     
-    public function custom_fieldset()
+    public function fieldset()
     {
-      // $foo=new CustomField();
-      // $foo2=new CustomFieldset();
-      return $this->belongsTo('custom_fieldset','fieldset_id');
+        return $this->belongsTo('CustomFieldset','fieldset_id');
     }
 
     /**

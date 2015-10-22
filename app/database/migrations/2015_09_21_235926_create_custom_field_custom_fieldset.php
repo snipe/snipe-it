@@ -29,7 +29,7 @@ class CreateCustomFieldCustomFieldset extends Migration {
 	 */
 	public function down()
 	{
-		Schema::drop('custom_field_custom_fieldsets');
+		Schema::drop('custom_field_custom_fieldset');
 	}
 
 }
