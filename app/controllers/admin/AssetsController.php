@@ -207,7 +207,6 @@ class AssetsController extends AdminController
             // Redirect to the asset management page
             return Redirect::to('hardware')->with('error', Lang::get('admin/hardware/message.does_not_exist'));
         }
-
         // Grab the dropdown lists
         $model_list = modelList();
         $statuslabel_list = statusLabelList();
@@ -217,33 +216,16 @@ class AssetsController extends AdminController
         $supplier_list = suppliersList();
         $assigned_to = usersList();
         $statuslabel_types = statusTypeList();
-
-        // Grab the dropdown list of models
-	$model_list = array('' => Lang::get('general.select_model')) + DB::table('models')
-		->select(DB::raw('concat(name," / ",modelno) as name, id'))->orderBy('name', 'asc')
-		->orderBy('modelno', 'asc')
-		->lists('name', 'id');
-        $supplier_list = array('' => Lang::get('general.select_supplier')) + Supplier::orderBy('name', 'asc')->lists('name', 'id');
-        $location_list = array('' => Lang::get('general.select_location')) + Location::orderBy('name', 'asc')->lists('name', 'id');
-        $assigned_to = array('' => Lang::get('general.select_user')) + DB::table('users')->select(DB::raw('concat(first_name," ",last_name) as full_name, id'))->whereNull('deleted_at')->lists('full_name', 'id');
-        // grap dropdown lists for embedded create drop-downs
-        $manufacturer_list = array('' => 'Select One') + Manufacturer::lists('name', 'id');
-        $category_list = array('' => '') + DB::table('categories')->whereNull('deleted_at')->lists('name', 'id');
-
-        // Grab the dropdown list of status
-        $statuslabel_list = Statuslabel::orderBy('name', 'asc')->lists('name', 'id');
-
-        $view = View::make('backend/hardware/edit', compact('asset'));
-        $view = $view->with('model_list',$model_list);
-        $view = $view->with('supplier_list',$supplier_list);
-        $view = $view->with('location_list',$location_list);
-        $view = $view->with('statuslabel_list',$statuslabel_list);
-        $view = $view->with('statuslabel_types',$statuslabel_types);
-        $view = $view->with('manufacturer',$manufacturer_list);
-        $view = $view->with('category',$category_list);
-        $view = $view->with('assigned_to',$assigned_to);
-
-        return $view;
+        
+        return View::make('backend/hardware/edit', compact('asset'))
+        ->with('model_list',$model_list)
+        ->with('supplier_list',$supplier_list)
+        ->with('location_list',$location_list)
+        ->with('statuslabel_list',$statuslabel_list)
+        ->with('assigned_to',$assigned_to)
+        ->with('manufacturer',$manufacturer_list)
+        ->with('statuslabel_types',$statuslabel_types)
+        ->with('category',$category_list);
     }
 
 
