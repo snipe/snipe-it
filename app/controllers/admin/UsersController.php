@@ -909,7 +909,7 @@ class UsersController extends AdminController {
                             .'<a href="mailto:'.$user->email.'" class="hidden-xs hidden-sm"><i class="fa fa-envelope"></i></a>'
                             .'</span>' : '',
                 'username'         => $user->username,
-                'location'      => ($user->location_id!='') ? $user->userloc->name : '',
+                'location'      => ($user->userloc) ? $user->userloc->name : '',
                 'manager'         => ($user->manager) ? '<a title="' . $user->manager->fullName() . '" href="users/' . $user->manager->id . '/view">' . $user->manager->fullName() . '</a>' : '',
                 'assets'        => $user->assets->count(),
                 'licenses'        => $user->licenses->count(),
