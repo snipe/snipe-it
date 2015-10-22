@@ -88,5 +88,33 @@ class Location extends Elegant
         return $location_options;
     }
 
+    /**
+    * Query builder scope to search on text
+    *
+    * @param  Illuminate\Database\Query\Builder  $query  Query builder instance
+    * @param  text                              $search    	 Search term
+    *
+    * @return Illuminate\Database\Query\Builder          Modified query builder
+    */
+    public function scopeTextsearch($query, $search)
+    {
+
+            return $query->where('name', 'LIKE', "%$search%")
+                ->orWhere('address', 'LIKE', "%$search%")
+                ->orWhere('city', 'LIKE', "%$search%")
+                ->orWhere('state', 'LIKE', "%$search%")
+                ->orWhere('zip', 'LIKE', "%$search%")
+                
+                // This doesn't actually work - need to use a table alias maybe?
+                ->orWhere(function($query) use ($search) {
+                    $query->whereHas('parent', function($query) use ($search) {
+                        $query->where(function($query) use ($search) {
+                            $query->where('name','LIKE','%'.$search.'%');
+                        });
+                    });
+                });
+
+    }
+
 
 }

@@ -24,9 +24,6 @@ class StatuslabelsController extends AdminController
 
     public function getIndex()
     {
-        // Grab all the statuslabels
-        $statuslabels = Statuslabel::orderBy('created_at', 'DESC')->get();
-
         // Show the page
         return View::make('backend/statuslabels/index', compact('statuslabels'));
     }
@@ -228,6 +225,68 @@ class StatuslabelsController extends AdminController
 
 
     }
+
+
+    public function getDatatable()
+    {
+        $statuslabels = Statuslabel::select(array('id','name','deployable','pending','archived'))
+        ->whereNull('deleted_at');
+
+        if (Input::has('search')) {
+            $statuslabels = $statuslabels->TextSearch(e(Input::get('search')));
+        }
+
+        if (Input::has('offset')) {
+            $offset = e(Input::get('offset'));
+        } else {
+            $offset = 0;
+        }
+
+        if (Input::has('limit')) {
+            $limit = e(Input::get('limit'));
+        } else {
+            $limit = 50;
+        }
+
+        $allowed_columns = ['id','name'];
+        $order = Input::get('order') === 'asc' ? 'asc' : 'desc';
+        $sort = in_array(Input::get('sort'), $allowed_columns) ? Input::get('sort') : 'created_at';
+
+        $statuslabels->orderBy($sort, $order);
+
+        $statuslabelsCount = $statuslabels->count();
+        $statuslabels = $statuslabels->skip($offset)->take($limit)->get();
+
+        $rows = array();
+
+        foreach($statuslabels as $statuslabel) {
+
+            if ($statuslabel->deployable == 1) {
+			$label_type = Lang::get('admin/statuslabels/table.deployable');
+            } elseif ($statuslabel->pending == 1) {
+			$label_type = Lang::get('admin/statuslabels/table.pending');
+            } elseif ($statuslabel->archived == 1) {
+		      $label_type = Lang::get('admin/statuslabels/table.archived');
+		} else {
+                  $label_type = Lang::get('admin/statuslabels/table.undeployable');
+            }
+
+            $actions = '<a href="'.route('update/location', $statuslabel->id).'" class="btn btn-warning btn-sm" style="margin-right:5px;"><i class="fa fa-pencil icon-white"></i></a><a data-html="false" class="btn delete-asset btn-danger btn-sm" data-toggle="modal" href="'.route('delete/statuslabel', $statuslabel->id).'" data-content="'.Lang::get('admin/statuslabels/message.delete.confirm').'" data-title="'.Lang::get('general.delete').' '.htmlspecialchars($statuslabel->name).'?" onClick="return false;"><i class="fa fa-trash icon-white"></i></a>';
+
+            $rows[] = array(
+                'id'            => $statuslabel->id,
+                'type'          => $label_type,
+                'name'          => e($statuslabel->name),
+                'actions'       => $actions
+            );
+        }
+
+        $data = array('total' => $statuslabelsCount, 'rows' => $rows);
+
+        return $data;
+
+    }
+
 
 
 

@@ -18,47 +18,73 @@ Locations ::
 
 <div class="row form-wrapper">
 
-<table id="example">
-    <thead>
-        <tr role="row">
-            <th class="col-md-2">@lang('admin/locations/table.name')</th>
-            <th class="col-md-2">@lang('admin/locations/table.parent')</th>
-            <th class="col-md-1">@lang('general.assets')</th>
-            <th class="col-md-3">@lang('admin/locations/table.address')</th>
-            <th class="col-md-2">@lang('admin/locations/table.city'),
-             @lang('admin/locations/table.state')
-            @lang('admin/locations/table.country')</th>
-            <th class="col-md-1 actions">@lang('table.actions')</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach ($locations as $location)
-        <tr>
-            <td>{{{ $location->name }}}</td>
-            <td>
-              @if ($location->parent)
-                {{{ $location->parent->name }}}
-              @endif
-            </td>
-            <td>{{{ ($location->assets->count() + $location->assignedassets->count()) }}}</td>
-            <td>{{{ $location->address }}}
-            	@if($location->address2 != '')
-            		, {{{ $location->address2 }}}
-            	@endif
-            </td>
-            <td>{{{ $location->city }}}, {{{ strtoupper($location->state) }}}  {{{ strtoupper($location->country) }}}  </td>
-            <td>
-                <a href="{{ route('update/location', $location->id) }}" class="btn btn-warning btn-sm"><i class="fa fa-pencil icon-white"></i></a>
-                <a data-html="false" class="btn delete-asset btn-danger btn-sm" data-toggle="modal" href="{{ route('delete/location', $location->id) }}" data-content="@lang('admin/locations/message.delete.confirm')"
-                data-title="@lang('general.delete')
-                 {{ htmlspecialchars($location->name) }}?" onClick="return false;"><i class="fa fa-trash icon-white"></i></a>
-
-            </td>
-        </tr>
-        @endforeach
-    </tbody>
-</table>
+    <table
+    name="categories"
+    id="table"
+    data-url="{{ route('api.locations.list') }}"
+    data-cookie="true"
+    data-click-to-select="true"
+    data-cookie-id-table="locationsTable">
+        <thead>
+            <tr>
+                <th data-sortable="true" data-field="id" data-visible="false">@lang('general.id')</th>
+                <th data-sortable="true" data-field="name">@lang('admin/locations/table.name')</th>
+                <th data-sortable="false" data-field="parent">@lang('admin/locations/table.parent')</th>
+                <th data-searchable="false" data-sortable="false" data-field="assets">@lang('general.assets')</th>
+                <th data-searchable="true" data-sortable="true" data-field="currency">@lang('general.currency')</th>
+                <th data-searchable="true" data-sortable="true" data-field="address">@lang('admin/locations/table.address')</th>
+                <th data-searchable="true" data-sortable="true" data-field="city">@lang('admin/locations/table.city')
+                </th>
+                <th data-searchable="true" data-sortable="true" data-field="state">
+                 @lang('admin/locations/table.state')
+                </th>
+                <th data-searchable="true" data-sortable="true" data-field="country">
+                @lang('admin/locations/table.country')</th>
+                <th data-switchable="false" data-searchable="false" data-sortable="false" data-field="actions">{{ Lang::get('table.actions') }}</th>
+            </tr>
+        </thead>
+    </table>
 </div>
 
+@section('moar_scripts')
+<script src="{{ asset('assets/js/bootstrap-table.js') }}"></script>
+<script src="{{ asset('assets/js/extensions/cookie/bootstrap-table-cookie.js') }}"></script>
+<script src="{{ asset('assets/js/extensions/mobile/bootstrap-table-mobile.js') }}"></script>
+<script src="{{ asset('assets/js/extensions/export/bootstrap-table-export.js') }}"></script>
+<script src="{{ asset('assets/js/extensions/export/tableExport.js') }}"></script>
+<script src="{{ asset('assets/js/extensions/export/jquery.base64.js') }}"></script>
+<script type="text/javascript">
+    $('#table').bootstrapTable({
+        classes: 'table table-responsive table-no-bordered',
+        undefinedText: '',
+        iconsPrefix: 'fa',
+        showRefresh: true,
+        search: true,
+        pageSize: {{{ Setting::getSettings()->per_page }}},
+        pagination: true,
+        sidePagination: 'server',
+        sortable: true,
+        cookie: true,
+        mobileResponsive: true,
+        showExport: true,
+        showColumns: true,
+        exportDataType: 'all',
+        exportTypes: ['csv', 'txt','json', 'xml'],
+        maintainSelected: true,
+        paginationFirstText: "@lang('general.first')",
+        paginationLastText: "@lang('general.last')",
+        paginationPreText: "@lang('general.previous')",
+        paginationNextText: "@lang('general.next')",
+        pageList: ['10','25','50','100','150','200'],
+        icons: {
+            paginationSwitchDown: 'fa-caret-square-o-down',
+            paginationSwitchUp: 'fa-caret-square-o-up',
+            columns: 'fa-columns',
+            refresh: 'fa-refresh'
+        },
+
+    });
+</script>
+@stop
 
 @stop

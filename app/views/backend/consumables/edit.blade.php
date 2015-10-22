@@ -58,6 +58,45 @@
                 {{ $errors->first('category_id', '<span class="alert-msg"><i class="fa fa-times"></i> :message</span>') }}
             </div>
     </div>
+    
+    <!-- Order Number -->
+    <div class="form-group {{ $errors->has('order_number') ? ' has-error' : '' }}">
+        <div class="col-md-3">
+		     {{ Form::label('order_number', Lang::get('admin/consumables/general.order')) }}
+        </div>
+        <div class="col-md-3">
+            <input class="form-control" type="text" name="order_number" id="order_number" value="{{{ Input::old('order_number', $consumable->order_number) }}}" />
+            {{ $errors->first('order_number', '<br><span class="alert-msg"><i class="fa fa-times"></i> :message</span>') }}
+        </div>
+    </div>
+    
+    <!-- Purchase Date -->
+    <div class="form-group {{ $errors->has('purchase_date') ? ' has-error' : '' }}">
+        <div class="col-md-3">
+		     {{ Form::label('purchase_date', Lang::get('admin/consumables/general.date')) }}
+        </div>
+        <div class="input-group col-md-3">
+            <input type="date" class="datepicker form-control" data-date-format="yyyy-mm-dd" placeholder="@lang('general.select_date')" name="purchase_date" id="purchase_date" value="{{{ Input::old('purchase_date', $consumable->purchase_date) }}}">
+            <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+            {{ $errors->first('purchase_date', '<br><span class="alert-msg"><i class="fa fa-times"></i> :message</span>') }}
+        </div>
+    </div>
+    
+    <!-- Purchase Cost -->
+    <div class="form-group {{ $errors->has('purchase_cost') ? ' has-error' : '' }}">
+        <div class="col-md-3">
+		     {{ Form::label('purchase_cost', Lang::get('admin/consumables/general.cost')) }}
+        </div>
+        <div class="col-md-2">
+            <div class="input-group">
+                <span class="input-group-addon">
+                    {{{ Setting::first()->default_currency }}}
+                </span>
+                <input class="col-md-2 form-control" type="text" name="purchase_cost" id="purchase_cost" value="{{ Input::old('purchase_cost', number_format($consumable->purchase_cost,2)) }}" />
+                {{ $errors->first('purchase_cost', '<br><span class="alert-msg"><i class="fa fa-times"></i> :message</span>') }}
+            </div>
+        </div>
+    </div>
 
     <!-- QTY -->
     <div class="form-group {{ $errors->has('qty') ? ' has-error' : '' }}">
@@ -66,8 +105,8 @@
         	<i class='fa fa-asterisk'></i>
         </div>
         <div class="col-md-9">
-	        <div class="col-md-2">
-            <input class="form-control" type="text" name="qty" id="qty" value="{{{ Input::old('qty', $consumable->qty) }}}" />
+            <div class="col-md-2">
+                <input class="form-control" type="text" name="qty" id="qty" value="{{{ Input::old('qty', $consumable->qty) }}}" />
             </div>
             {{ $errors->first('qty', '<span class="alert-msg"><i class="fa fa-times"></i> :message</span>') }}
         </div>

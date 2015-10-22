@@ -19,66 +19,70 @@
 <div class="user-profile">
 <div class="row profile">
 <div class="col-md-12">
-
-@if ($suppliers->count() >= 1)
-<table id="example">
-    <thead>
-        <tr role="row">
-            <th class="col-md-3">@lang('admin/suppliers/table.name')</th>
-            <th class="col-md-3">@lang('admin/suppliers/table.address')</th>
-            <th class="col-md-3">@lang('admin/suppliers/table.contact')</th>
-            <th class="col-md-3">@lang('admin/suppliers/table.phone')</th>
-            <th class="col-md-3">@lang('admin/suppliers/table.assets')</th>
-            <th class="col-md-3">@lang('admin/suppliers/table.licenses')</th>
-            <th class="col-md-2 actions">@lang('table.actions')</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach ($suppliers as $supplier)
-        <tr>
-            <td><a href="{{ route('view/supplier', $supplier->id) }}">
-            {{{ $supplier->name }}}
-            </a></td>
-            <td>{{{ $supplier->address }}}
-
-            @if (($supplier->address2) || ($supplier->city) || ($supplier->state))
-
-                 {{{ $supplier->city }}}
-                 {{{ $supplier->state }}}  {{{ $supplier->zip }}}
-            @endif
-            </td>
-            <td>
-            @if ($supplier->email)
-                <a href="mailto:{{{ $supplier->email }}}">
-                {{{ $supplier->contact }}}
-                </a>
-            @else {{{ $supplier->contact }}}
-            @endif
-            </td>
-            <td>{{{ $supplier->phone }}}</td>
-            <td>{{{ $supplier->num_assets() }}}</td>
-            <td>{{{ $supplier->num_licenses() }}}</td>
-            <td>
-                <a href="{{ route('update/supplier', $supplier->id) }}" class="btn btn-warning btn-sm"><i class="fa fa-pencil icon-white"></i></a>
-                <a data-html="false" class="btn delete-asset btn-danger btn-sm" data-toggle="modal" href="{{ route('delete/supplier', $supplier->id) }}" data-content="@lang('admin/suppliers/message.delete.confirm')"
-                data-title="@lang('general.delete')
-                 {{ htmlspecialchars($supplier->name) }}?" onClick="return false;"><i class="fa fa-trash icon-white"></i></a>
-
-
-            </td>
-        </tr>
-        @endforeach
-    </tbody>
-</table>
-@else
-        @lang('general.no_results')
-
-        @endif
+      <table
+      name="suppliers"
+      id="table"
+      data-url="{{ route('api.suppliers.list') }}"
+      data-cookie="true"
+      data-click-to-select="true"
+      data-cookie-id-table="suppliersTable">
+          <thead>
+              <tr>
+                  <th data-sortable="true" data-field="id" data-visible="false">@lang('admin/suppliers/table.id')</th>
+                  <th data-sortable="true" data-field="name">@lang('admin/locations/table.name')</th>
+                  <th data-sortable="true" data-field="address">@lang('admin/suppliers/table.address')</th>
+                  <th data-searchable="true" data-sortable="true" data-field="contact">@lang('admin/suppliers/table.contact')</th>
+                  <th data-searchable="true" data-sortable="true" data-field="email">@lang('admin/suppliers/table.email')</th>
+                  <th data-searchable="true" data-sortable="true" data-field="phone">@lang('admin/suppliers/table.phone')</th>
+                  <th data-searchable="true" data-sortable="true" data-field="fax" data-visible="false">@lang('admin/suppliers/table.fax')</th>
+                  <th data-searchable="false" data-sortable="false" data-field="assets">@lang('admin/suppliers/table.assets')</th>
+                  <th data-searchable="false" data-sortable="false" data-field="licenses">@lang('admin/suppliers/table.licenses')</th>
+                  <th data-switchable="false" data-searchable="false" data-sortable="false" data-field="actions">{{ Lang::get('table.actions') }}</th>
+              </tr>
+          </thead>
+      </table>
+      </div>
 </div>
 
+@section('moar_scripts')
+<script src="{{ asset('assets/js/bootstrap-table.js') }}"></script>
+<script src="{{ asset('assets/js/extensions/cookie/bootstrap-table-cookie.js') }}"></script>
+<script src="{{ asset('assets/js/extensions/mobile/bootstrap-table-mobile.js') }}"></script>
+<script src="{{ asset('assets/js/extensions/export/bootstrap-table-export.js') }}"></script>
+<script src="{{ asset('assets/js/extensions/export/tableExport.js') }}"></script>
+<script src="{{ asset('assets/js/extensions/export/jquery.base64.js') }}"></script>
+<script type="text/javascript">
+    $('#table').bootstrapTable({
+        classes: 'table table-responsive table-no-bordered',
+        undefinedText: '',
+        iconsPrefix: 'fa',
+        showRefresh: true,
+        search: true,
+        pageSize: {{{ Setting::getSettings()->per_page }}},
+        pagination: true,
+        sidePagination: 'server',
+        sortable: true,
+        cookie: true,
+        mobileResponsive: true,
+        showExport: true,
+        showColumns: true,
+        exportDataType: 'all',
+        exportTypes: ['csv', 'txt','json', 'xml'],
+        maintainSelected: true,
+        paginationFirstText: "@lang('general.first')",
+        paginationLastText: "@lang('general.last')",
+        paginationPreText: "@lang('general.previous')",
+        paginationNextText: "@lang('general.next')",
+        pageList: ['10','25','50','100','150','200'],
+        icons: {
+            paginationSwitchDown: 'fa-caret-square-o-down',
+            paginationSwitchUp: 'fa-caret-square-o-up',
+            columns: 'fa-columns',
+            refresh: 'fa-refresh'
+        },
 
-
-</div>
-
+    });
+</script>
+@stop
 
 @stop

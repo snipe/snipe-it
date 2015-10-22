@@ -218,30 +218,58 @@ class CategoriesController extends AdminController
     public function getDatatable()
     {
         // Grab all the categories
-        $categories = Category::orderBy('created_at', 'DESC')->get();
+        $categories = Category::with('assets', 'accessories');
+
+        if (Input::has('search')) {
+            $categories = $categories->TextSearch(e(Input::get('search')));
+        }
+
+        if (Input::has('offset')) {
+            $offset = e(Input::get('offset'));
+        } else {
+            $offset = 0;
+        }
+
+        if (Input::has('limit')) {
+            $limit = e(Input::get('limit'));
+        } else {
+            $limit = 50;
+        }
+
 
         $actions = new \Chumper\Datatable\Columns\FunctionColumn('actions', function($categories) {
             return '<a href="'.route('update/category', $categories->id).'" class="btn btn-warning btn-sm" style="margin-right:5px;"><i class="fa fa-pencil icon-white"></i></a><a data-html="false" class="btn delete-asset btn-danger btn-sm" data-toggle="modal" href="'.route('delete/category', $categories->id).'" data-content="'.Lang::get('admin/categories/message.delete.confirm').'" data-title="'.Lang::get('general.delete').' '.htmlspecialchars($categories->name).'?" onClick="return false;"><i class="fa fa-trash icon-white"></i></a>';
         });
 
-        return Datatable::collection($categories)
-        ->showColumns('name')
-        ->addColumn('category_type', function($categories) {
-            return ucwords($categories->category_type);
-        })
-        ->addColumn('count', function($categories) {
-            return ($categories->category_type=='asset') ? link_to('/admin/settings/categories/'.$categories->id.'/view', $categories->assetscount()) : $categories->accessoriescount();
-        })
-        ->addColumn('acceptance', function($categories) {
-            return ($categories->require_acceptance=='1') ? '<i class="fa fa-check" style="margin-right:50%;margin-left:50%;"></i>' : '';
-        })
-        ->addColumn('eula', function($categories) {
-            return ($categories->getEula()) ? '<i class="fa fa-check" style="margin-right:50%;margin-left:50%;"></i></a>' : '';
-        })
-        ->addColumn($actions)
-        ->searchColumns('name','category_type','count','acceptance','eula','actions')
-        ->orderColumns('name','category_type','count','acceptance','eula','actions')
-        ->make();
+        $allowed_columns = ['id','name','category_type'];
+        $order = Input::get('order') === 'asc' ? 'asc' : 'desc';
+        $sort = in_array(Input::get('sort'), $allowed_columns) ? Input::get('sort') : 'created_at';
+
+        $categories = $categories->orderBy($sort, $order);
+
+        $catCount = $categories->count();
+        $categories = $categories->skip($offset)->take($limit)->get();
+
+        $rows = array();
+
+        foreach ($categories as $category) {
+            $actions = '<a href="'.route('update/category', $category->id).'" class="btn btn-warning btn-sm" style="margin-right:5px;"><i class="fa fa-pencil icon-white"></i></a><a data-html="false" class="btn delete-asset btn-danger btn-sm" data-toggle="modal" href="'.route('delete/category', $category->id).'" data-content="'.Lang::get('admin/categories/message.delete.confirm').'" data-title="'.Lang::get('general.delete').' '.htmlspecialchars($category->name).'?" onClick="return false;"><i class="fa fa-trash icon-white"></i></a>';
+
+            $rows[] = array(
+                'id'      => $category->id,
+                'name'  => $category->name,
+                'category_type' => ucwords($category->category_type),
+                'count'         => ($category->category_type=='asset') ? link_to('/admin/settings/categories/'.$category->id.'/view', $category->assetscount()) : $category->accessoriescount(),
+                'acceptance'    => ($category->require_acceptance=='1') ? '<i class="fa fa-check"></i>' : '',
+                //EULA is still not working correctly
+                'eula'          => ($category->getEula()) ? '<i class="fa fa-check"></i>' : '',
+                'actions'       => $actions
+            );
+        }
+
+        $data = array('total' => $catCount, 'rows' => $rows);
+
+        return $data;
     }
 
     public function getDataView($categoryID) {

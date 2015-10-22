@@ -824,94 +824,105 @@ class UsersController extends AdminController {
         return Redirect::route('users')->with('duplicates', $duplicates)->with('success', 'Success');
     }
 
-    public function getDatatable($status = null) {
+    public function getDatatable($status = null)
+    {
+
+        if (Input::has('offset')) {
+            $offset = e(Input::get('offset'));
+        } else {
+            $offset = 0;
+        }
+
+        if (Input::has('limit')) {
+            $limit = e(Input::get('limit'));
+        } else {
+            $limit = 50;
+        }
+
+        if (Input::get('sort')=='name') {
+            $sort = 'first_name';
+        } else {
+            $sort = e(Input::get('sort'));
+        }
 
         $users = User::with('assets', 'accessories', 'consumables', 'licenses', 'manager', 'sentryThrottle', 'groups', 'userloc');
 
         switch ($status) {
-            case 'deleted':
-                $users->GetDeleted();
-                break;
-            case '':
-                $users->GetNotDeleted();
-                break;
+        case 'deleted':
+          $users = $users->withTrashed()->Deleted();
+          break;
         }
 
-        $users = $users->orderBy('created_at', 'DESC')->get();
-
-        $actions = new \Chumper\Datatable\Columns\FunctionColumn('actions', function ($users) {
-            $action_buttons = '';
 
 
-            if (!is_null($users->deleted_at)) {
-                $action_buttons .= '<a href="' . route('restore/user', $users->id) . '" class="btn btn-warning btn-sm"><i class="fa fa-share icon-white"></i></a> ';
+         if (Input::has('search')) {
+             $users = $users->TextSearch(Input::get('search'));
+         }
+
+        $allowed_columns = ['last_name','first_name','email','username','manager','location','assets','accessories', 'consumables','licenses','groups'];
+        $order = Input::get('order') === 'asc' ? 'asc' : 'desc';
+        $sort = in_array($sort, $allowed_columns) ? $sort : 'first_name';
+
+
+        $userCount = $users->count();
+        $users = $users->skip($offset)->take($limit)->orderBy($sort, $order)->get();
+
+
+        $rows = array();
+
+        foreach ($users as $user)
+        {
+
+            $group_names = '';
+            $inout = '';
+            $actions = '<nobr>';
+
+            foreach ($user->groups as $group) {
+                $group_names .= '<a href="' . Config::get('app.url') . '/admin/groups/' . $group->id . '/edit" class="label  label-default">' . $group->name . '</a> ';
+            }
+
+
+            if (!is_null($user->deleted_at)) {
+
+                $actions .= '<a href="' . route('restore/user', $user->id) . '" class="btn btn-warning btn-sm"><i class="fa fa-share icon-white"></i></a> ';
             } else {
-                if ($users->accountStatus() == 'suspended') {
-                    $action_buttons .= '<a href="' . route('unsuspend/user', $users->id) . '" class="btn btn-default btn-sm"><span class="fa fa-clock-o"></span></a> ';
+
+                if ($user->accountStatus() == 'suspended') {
+                    $actions .= '<a href="' . route('unsuspend/user', $user->id) . '" class="btn btn-default btn-sm"><span class="fa fa-clock-o"></span></a> ';
                 }
 
-                $action_buttons .= '<a href="' . route('update/user', $users->id) . '" class="btn btn-warning btn-sm"><i class="fa fa-pencil icon-white"></i></a> ';
+                $actions .= '<a href="' . route('update/user', $user->id) . '" class="btn btn-warning btn-sm"><i class="fa fa-pencil icon-white"></i></a> ';
 
-                if ((Sentry::getId() !== $users->id) && (!Config::get('app.lock_passwords'))) {
-                    $action_buttons .= '<a data-html="false" class="btn delete-asset btn-danger btn-sm" data-toggle="modal" href="' . route('delete/user', $users->id) . '" data-content="Are you sure you wish to delete this user?" data-title="Delete ' . htmlspecialchars($users->first_name) . '?" onClick="return false;"><i class="fa fa-trash icon-white"></i></a> ';
+                if ((Sentry::getId() !== $user->id) && (!Config::get('app.lock_passwords'))) {
+                    $actions .= '<a data-html="false" class="btn delete-asset btn-danger btn-sm" data-toggle="modal" href="' . route('delete/user', $user->id) . '" data-content="Are you sure you wish to delete this user?" data-title="Delete ' . htmlspecialchars($user->first_name) . '?" onClick="return false;"><i class="fa fa-trash icon-white"></i></a> ';
                 } else {
-                    $action_buttons .= ' <span class="btn delete-asset btn-danger btn-sm disabled"><i class="fa fa-trash icon-white"></i></span>';
+                    $actions .= ' <span class="btn delete-asset btn-danger btn-sm disabled"><i class="fa fa-trash icon-white"></i></span>';
                 }
             }
-            return $action_buttons;
-        });
+            $actions .= '</nobr>';
 
+            $rows[] = array(
+                'checkbox'      =>'<div class="text-center hidden-xs hidden-sm"><input type="checkbox" name="edit_user['.$user->id.']" class="one_required"></div>',
+                'name'          => '<a title="'.$user->fullName().'" href="../admin/users/'.$user->id.'/view">'.$user->fullName().'</a>',
+                'email'         => ($user->email!='') ?
+                            '<a href="mailto:'.$user->email.'" class="hidden-md hidden-lg">'.$user->email.'</a>'
+                            .'<a href="mailto:'.$user->email.'" class="hidden-xs hidden-sm"><i class="fa fa-envelope"></i></a>'
+                            .'</span>' : '',
+                'username'         => $user->username,
+                'location'      => ($user->userloc) ? $user->userloc->name : '',
+                'manager'         => ($user->manager) ? '<a title="' . $user->manager->fullName() . '" href="users/' . $user->manager->id . '/view">' . $user->manager->fullName() . '</a>' : '',
+                'assets'        => $user->assets->count(),
+                'licenses'        => $user->licenses->count(),
+                'accessories'        => $user->accessories->count(),
+                'consumables'        => $user->consumables->count(),
+                'groups'        => $group_names,
+                'notes'         => $user->notes,
+                'actions'       => ($actions) ? $actions : ''
+            );
+        }
 
-        return Datatable::collection($users)
-                        ->addColumn('', function($users) {
-                            return '<div class="text-center"><input type="checkbox" name="edit_user[]" value="' . $users->id . '" class="one_required"></div>';
-                        })
-                        ->addColumn('name', function($users) {
-                            return '<a title="' . $users->fullName() . '" href="users/' . $users->id . '/view">' . $users->fullName() . '</a>';
-                        })
-                        ->addColumn('email', function($users) {
-                            if ($users->email) {
-                                return '<div class="text-center"><a title="' . $users->email . '" href="mailto:' . $users->email . '"><i class="fa fa-envelope fa-lg"></i></div>';
-                            } else {
-                                return '';
-                            }
-                        })
-                        ->addColumn('username', function($users) {
-                            return $users->username;
-                        })
-                        ->addColumn('manager', function($users) {
-                            if ($users->manager) {
-                                return '<a title="' . $users->manager->fullName() . '" href="users/' . $users->manager->id . '/view">' . $users->manager->fullName() . '</a>';
-                            }
-                        })
-                        ->addColumn('location', function($users) {
-                            if ($users->userloc) {
-                                return $users->userloc->name;
-                            }
-                        })
-                        ->addColumn('assets', function($users) {
-                            return $users->assets->count();
-                        })
-                        ->addColumn('licenses', function($users) {
-                            return $users->licenses->count();
-                        })
-                        ->addColumn('accessories', function($users) {
-                            return $users->accessories->count();
-                        })
-                        ->addColumn('consumables', function($users) {
-                            return $users->consumables->count();
-                        })
-                        ->addColumn('groups', function($users) {
-                            $group_names = '';
-                            foreach ($users->groups as $group) {
-                                $group_names .= '<a href="' . Config::get('app.url') . '/admin/groups/' . $group->id . '/edit" class="label  label-default">' . $group->name . '</a> ';
-                            }
-                            return $group_names;
-                        })
-                        ->addColumn($actions)
-                        ->searchColumns('name', 'email', 'username', 'manager', 'activated', 'groups', 'location')
-                        ->orderColumns('name', 'email', 'username', 'manager', 'activated', 'licenses', 'assets', 'accessories', 'consumables', 'groups', 'location')
-                        ->make();
+        $data = array('total'=>$userCount, 'rows'=>$rows);
+        return $data;
     }
 
     /**

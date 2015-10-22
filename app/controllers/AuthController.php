@@ -45,7 +45,7 @@ class AuthController extends BaseController
             if ($connection) {
                 // binding to ldap server
                 $ldapbind = ldap_bind($connection, $ldaprdn, $ldappass);
-                if ( ($results = @ldap_search($connection, $baseDn, $filterQuery)) !==false ) {
+                if ( ($results = @ldap_search($connection, $baseDn, $filterQuery)) != false ) {
                     $entry = ldap_first_entry($connection, $results);
                     if ( ($userDn = @ldap_get_dn($connection, $entry)) !== false ) {
                         if( ($isBound = ldap_bind($connection, $userDn, $password)) == "true") {

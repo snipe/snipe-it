@@ -52,25 +52,18 @@
 
                             <!-- checked out models table -->
                             @if (count($model->assets) > 0)
-                            	{{ Datatable::table()
-                                ->addColumn(Lang::get('general.name'),
-                                            Lang::get('general.asset_tag'),
-                                            Lang::get('admin/hardware/table.serial'),
-                                            Lang::get('general.user'), 
-                                            Lang::get('table.actions'))
-                                ->setOptions(
-                                        array(
-                                            'sAjaxSource'=>route('api.models.view', $model->id),
-                                            'dom' =>'CT<"clear">lfrtip',
-                                            'colVis'=> array('showAll'=>'Show All','restore'=>'Restore','exclude'=>array(4),'activate'=>'mouseover'),
-                                            'columnDefs'=> array(
-                                                array('bSortable'=>false,'targets'=>array(4)),
-                                                array('width'=>'auto','targets'=>array(4)),
-                                                ),
-                                            'order'=>array(array(0,'asc')),
-                                        )
-                                    )
-                                ->render() }}
+                            	<table name="modelassets" id="table" data-url="{{route('api.models.view', $model->id)}}">
+                                    <thead>
+                                        <tr>
+                                            
+                                            <th data-sortable="true" data-field="name">{{Lang::get('general.name')}}</th>
+                                            <th data-sortable="true" data-field="asset_tag">{{Lang::get('general.asset_tag')}}</th>
+                                            <th data-sortable="true" data-field="serial">{{Lang::get('admin/hardware/table.serial')}}</th>
+                                            <th data-sortable="true" data-field="assigned_to">{{Lang::get('general.user')}}</th>
+                                            <th data-switchable="false" data-searchable="false" data-sortable="false" data-field="actions">{{ Lang::get('table.actions') }}</th>
+                                        </tr>
+                                    </thead>
+                                </table>
                             @else
                             <div class="col-md-9">
                                 <div class="alert alert-info alert-block">
@@ -79,6 +72,7 @@
                                 </div>
                             </div>
                             @endif
+
 
                         </div>
 

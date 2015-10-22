@@ -45,71 +45,63 @@
          * @author  Vincent Sposato <vincent.sposato@gmail.com>
          * @version v1.0
          */
-        public function getDatatable()
-        {
 
-            $assetMaintenances = AssetMaintenance::orderBy( 'created_at', 'DESC' )
-                                            ->get();
+     public function getDatatable()
+     {
+         $maintenances = AssetMaintenance::with('asset','supplier')
+         ->whereNull('deleted_at');
 
-            $actions = new \Chumper\Datatable\Columns\FunctionColumn( 'actions', function ( $assetMaintenances ) {
+         if (Input::has('search')) {
+             $maintenances = $maintenances->TextSearch(e(Input::get('search')));
+         }
 
-                return '<a href="' . route( 'update/asset_maintenance', $assetMaintenances->id )
-                       . '" class="btn btn-warning btn-sm" style="margin-right:5px;"><i class="fa fa-pencil icon-white"></i></a><a data-html="false" class="btn delete-asset btn-danger btn-sm" data-toggle="modal" href="'
-                       . route( 'delete/asset_maintenance', $assetMaintenances->id ) . '" data-content="'
-                       . Lang::get( 'admin/asset_maintenances/message.delete.confirm' ) . '" data-title="'
-                       . Lang::get( 'general.delete' ) . ' ' . htmlspecialchars( $assetMaintenances->title )
-                       . '?" onClick="return false;"><i class="fa fa-trash icon-white"></i></a>';
-            } );
+         if (Input::has('offset')) {
+             $offset = e(Input::get('offset'));
+         } else {
+             $offset = 0;
+         }
 
-            return Datatable::collection( $assetMaintenances )
-                            ->addColumn( 'asset', function ( $assetMaintenances ) {
+         if (Input::has('limit')) {
+             $limit = e(Input::get('limit'));
+         } else {
+             $limit = 50;
+         }
 
-                                return link_to( '/hardware/' . $assetMaintenances->asset_id . '/view',
-                                    mb_strimwidth( $assetMaintenances->asset->name, 0, 50, "..." ) );
-                            } )
-                            ->addColumn( 'supplier', function ( $assetMaintenances ) {
+         $allowed_columns = ['id','title','asset_maintenance_time','asset_maintenance_type','cost','start_date','completion_date','notes'];
+         $order = Input::get('order') === 'asc' ? 'asc' : 'desc';
+         $sort = in_array(Input::get('sort'), $allowed_columns) ? Input::get('sort') : 'created_at';
 
-                                return link_to( '/admin/settings/suppliers/' . $assetMaintenances->supplier_id
-                                                . '/view',
-                                    mb_strimwidth( $assetMaintenances->supplier->name, 0, 50, "..." ) );
-                            } )
-                            ->addColumn( 'asset_maintenance_type', function ( $assetMaintenances ) {
+         $maintenances->orderBy($sort, $order);
 
-                                return $assetMaintenances->asset_maintenance_type;
-                            } )
-                            ->addColumn( 'title', function ( $assetMaintenances ) {
+         $maintenancesCount = $maintenances->count();
+         $maintenances = $maintenances->skip($offset)->take($limit)->get();
 
-                                return link_to( '/admin/asset_maintenances/' . $assetMaintenances->id . '/view',
-                                    mb_strimwidth( $assetMaintenances->title, 0, 50, "..." ) );
-                            } )
-                            ->addColumn( 'start_date', function ( $assetMaintenances ) {
+         $rows = array();
 
-                                return $assetMaintenances->start_date;
-                            } )
-                            ->addColumn( 'completion_date', function ( $assetMaintenances ) {
+         foreach($maintenances as $maintenance) {
 
-                                return $assetMaintenances->completion_date;
-                            } )
-                            ->addColumn( 'asset_maintenance_time', function ( $assetMaintenances ) {
+             $actions = '<a href="'.route('update/location', $maintenance->id).'" class="btn btn-warning btn-sm" style="margin-right:5px;"><i class="fa fa-pencil icon-white"></i></a><a data-html="false" class="btn delete-asset btn-danger btn-sm" data-toggle="modal" href="'.route('delete/statuslabel', $maintenance->id).'" data-content="'.Lang::get('admin/asset_maintenances/message.delete.confirm').'" data-title="'.Lang::get('general.delete').' '.htmlspecialchars($maintenance->title).'?" onClick="return false;"><i class="fa fa-trash icon-white"></i></a>';
 
-                                if (is_null( $assetMaintenances->asset_maintenance_time )) {
-                                    $assetMaintenances->asset_maintenance_time = Carbon::now()
-                                                                                       ->diffInDays( Carbon::parse( $assetMaintenances->start_date ) );
-                                }
+             $rows[] = array(
+                 'id'            => $maintenance->id,
+                 'asset_name'    => $maintenance->asset->showAssetName(),
+                 'title'         => $maintenance->title,
+                 'notes'         => $maintenance->notes,
+                 'supplier'      => $maintenance->supplier->name,
+                 'cost'          => ($maintenance->cost) ? $maintenance->asset->assetloc->currency.''.$maintenance->cost : $maintenance->cost ,
+                 'asset_maintenance_type'          => e($maintenance->asset_maintenance_type),
+                 'start_date'         => $maintenance->start_date,
+                 'time'          => $maintenance->asset_maintenance_time,
+                 'completion_date'     => $maintenance->completion_date,
+                 'actions'       => $actions
+             );
+         }
 
-                                return intval( $assetMaintenances->asset_maintenance_time );
-                            } )
-                            ->addColumn( 'cost', function ( $assetMaintenances ) {
+         $data = array('total' => $maintenancesCount, 'rows' => $rows);
 
-                                return sprintf( Lang::get( 'general.currency' ) . '%01.2f', $assetMaintenances->cost );
-                            } )
-                            ->addColumn( $actions )
-                            ->searchColumns( 'asset', 'supplier', 'asset_maintenance_type', 'title', 'start_date',
-                                'completion_date', 'asset_maintenance_time', 'cost', 'actions' )
-                            ->orderColumns( 'asset', 'supplier', 'asset_maintenance_type', 'title', 'start_date',
-                                'completion_date', 'asset_maintenance_time', 'cost', 'actions' )
-                            ->make();
-        }
+         return $data;
+
+     }
 
         /**
          * getCreate

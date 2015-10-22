@@ -28,7 +28,11 @@
                 } else {
                     return '0';
                 }
-            } );
+
+            });
+
+            Route::get( 'list', [ 'as' => 'api.statuslabels.list', 'uses' => 'StatuslabelsController@getDatatable' ] );
+
         } );
 
         /*---Accessories API---*/
@@ -40,12 +44,31 @@
         } );
 
         /*---Consumables API---*/
-        Route::group( [ 'prefix' => 'consumables' ], function () {
+        Route::group(array('prefix'=>'consumables'), function () {
+            Route::get('list', array('as'=>'api.consumables.list', 'uses'=>'ConsumablesController@getDatatable'));
+            Route::get('{consumableID}/view', array('as'=>'api.consumables.view', 'uses'=>'ConsumablesController@getDataView'));
+        });
 
-            Route::get( 'list', [ 'as' => 'api.consumables.list', 'uses' => 'ConsumablesController@getDatatable' ] );
-            Route::get( '{accessoryID}/view',
-                [ 'as' => 'api.consumables.view', 'uses' => 'ConsumablesController@getDataView' ] );
-        } );
+        /*---Locations API---*/
+        Route::group(array('prefix'=>'locations'), function () {
+            Route::get('list', array('as'=>'api.locations.list', 'uses'=>'LocationsController@getDatatable'));
+        });
+
+        /*---Depreciations API---*/
+        Route::group(array('prefix'=>'depreciations'), function () {
+            Route::get('list', array('as'=>'api.depreciations.list', 'uses'=>'DepreciationsController@getDatatable'));
+            Route::get('{$depreciationID}/view', array('as'=>'api.depreciations.view', 'uses'=>'DepreciationsController@getDataView'));
+        });
+
+        /*---Manufacturers API---*/
+        Route::group(array('prefix'=>'manufacturers'), function () {
+            Route::get('list', array('as'=>'api.manufacturers.list', 'uses'=>'ManufacturersController@getDatatable'));
+        });
+
+        /*---Suppliers API---*/
+        Route::group(array('prefix'=>'suppliers'), function () {
+            Route::get('list', array('as'=>'api.suppliers.list', 'uses'=>'SuppliersController@getDatatable'));
+        });
 
         /*---Users API---*/
         Route::group( [ 'prefix' => 'users' ], function () {

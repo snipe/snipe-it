@@ -369,40 +369,57 @@ class ModelsController extends AdminController
     {
         $models = Model::orderBy('created_at', 'DESC')->with('category','assets','depreciation');
         ($status != 'Deleted') ?: $models->withTrashed()->Deleted();;
-        $models = $models->get();
 
-        $actions = new \Chumper\Datatable\Columns\FunctionColumn('actions', function($models) {
-            if($models->deleted_at=='') {
-                return '<a href="'.route('update/model', $models->id).'" class="btn btn-warning btn-sm" style="margin-right:5px;"><i class="fa fa-pencil icon-white"></i></a><a data-html="false" class="btn delete-asset btn-danger btn-sm" data-toggle="modal" href="'.route('delete/model', $models->id).'" data-content="'.Lang::get('admin/models/message.delete.confirm').'" data-title="'.Lang::get('general.delete').' '.htmlspecialchars($models->name).'?" onClick="return false;"><i class="fa fa-trash icon-white"></i></a>';
+        if (Input::has('search')) {
+            $models = $models->TextSearch(Input::get('search'));
+        }
+
+        if (Input::has('offset')) {
+            $offset = e(Input::get('offset'));
+        } else {
+            $offset = 0;
+        }
+
+        if (Input::has('limit')) {
+            $limit = e(Input::get('limit'));
+        } else {
+            $limit = 50;
+        }
+
+
+        $allowed_columns = ['name'];
+        $order = Input::get('order') === 'asc' ? 'asc' : 'desc';
+        $sort = in_array(Input::get('sort'), $allowed_columns) ? Input::get('sort') : 'created_at';
+
+        $models = $models->orderBy($sort, $order);
+
+        $modelCount = $models->count();
+        $models = $models->skip($offset)->take($limit)->get();
+
+        $rows = array();
+
+        foreach ($models as $model) {
+            if ($model->deleted_at == '') {
+                $actions = '<a href="'.route('update/model', $model->id).'" class="btn btn-warning btn-sm" style="margin-right:5px;"><i class="fa fa-pencil icon-white"></i></a><a data-html="false" class="btn delete-asset btn-danger btn-sm" data-toggle="modal" href="'.route('delete/model', $model->id).'" data-content="'.Lang::get('admin/models/message.delete.confirm').'" data-title="'.Lang::get('general.delete').' '.htmlspecialchars($model->name).'?" onClick="return false;"><i class="fa fa-trash icon-white"></i></a>';
             } else {
-                return '<a href="'.route('restore/model', $models->id).'" class="btn btn-warning btn-sm"><i class="fa fa-recycle icon-white"></i></a>';
+                $actions = '<a href="'.route('restore/model', $model->id).'" class="btn btn-warning btn-sm"><i class="fa fa-recycle icon-white"></i></a>';
             }
-        });
 
-        return Datatable::collection($models)
-        ->addColumn('manufacturer', function($models) {
-            return $models->manufacturer->name;
-        })
-        ->addColumn('name', function ($models) {
-            return link_to('/hardware/models/'.$models->id.'/view', $models->name);
-        })
-        ->showColumns('modelno')
-        ->addColumn('asset_count', function($models) {
-            return $models->assets->count();
-        })
-        ->addColumn('depreciation', function($models) {
-            return (($models->depreciation)&&($models->depreciation->id > 0)) ? $models->depreciation->name.' ('.$models->depreciation->months.')' : Lang::get('general.no_depreciation');
-        })
-        ->addColumn('category', function($models) {
-            return ($models->category) ? $models->category->name : '';
-        })
-        ->addColumn('eol', function($models) {
-            return ($models->eol) ? $models->eol.' '.Lang::get('general.months') : '';
-        })
-        ->addColumn($actions)
-        ->searchColumns('name','modelno','asset_count','depreciation','category','eol','actions')
-        ->orderColumns('name','modelno','asset_count','depreciation','category','eol','actions')
-        ->make();
+            $rows[] = array(
+                'manufacturer'      => $model->manufacturer->name,
+                'name'              => link_to('/hardware/models/'.$model->id.'/view', $model->name),
+                'modelnumber'       => $model->modelno,
+                'numassets'         => $model->assets->count(),
+                'depreciation'      => (($model->depreciation)&&($model->depreciation->id > 0)) ? $model->depreciation->name.' ('.$model->depreciation->months.')' : Lang::get('general.no_depreciation'),
+                'category'          => ($model->category) ? $model->category->name : '',
+                'eol'               => ($model->eol) ? $model->eol.' '.Lang::get('general.months') : '',
+                'actions'           => $actions
+                );
+        }
+
+        $data = array('total' => $modelCount, 'rows' => $rows);
+
+        return $data;
     }
 
 
@@ -411,33 +428,29 @@ class ModelsController extends AdminController
         $model = Model::withTrashed()->find($modelID);
         $modelassets = $model->assets;
 
-        $actions = new \Chumper\Datatable\Columns\FunctionColumn('actions', function ($modelassets)
-            {
-                if (($modelassets->assigned_to !='') && ($modelassets->assigned_to > 0)) {
-                    return '<a href="'.route('checkin/hardware', $modelassets->id).'" class="btn btn-primary btn-sm">'.Lang::get('general.checkin').'</a>';
-                } else {
-                    return '<a href="'.route('checkout/hardware', $modelassets->id).'" class="btn btn-info btn-sm">'.Lang::get('general.checkout').'</a>';
-                }
-            });
+        $modelassetsCount = $modelassets->Count();
 
-        return Datatable::collection($modelassets)
-        ->addColumn('name', function ($modelassets) {
-           return link_to('/hardware/'.$modelassets->id.'/view', $modelassets->showAssetName());
-          // return $modelassets->name;
-        })
-        ->addColumn('asset_tag', function ($modelassets) {
-            return link_to('/hardware/'.$modelassets->id.'/view', $modelassets->asset_tag);
-        })
-        ->showColumns('serial')
-        ->addColumn('assigned_to', function ($modelassets) {
-            if ($modelassets->assigned_to) {
-                return link_to('/admin/users/'.$modelassets->assigned_to.'/view', $modelassets->assigneduser->fullName());
+        $rows = array();
+
+        foreach ($modelassets as $asset) {
+            if (($asset->assigned_to !='') && ($asset->assigned_to > 0)) {
+                $actions = '<a href="'.route('checkin/hardware', $asset->id).'" class="btn btn-primary btn-sm">'.Lang::get('general.checkin').'</a>';
+            } else {
+                $actions = '<a href="'.route('checkout/hardware', $asset->id).'" class="btn btn-info btn-sm">'.Lang::get('general.checkout').'</a>';
             }
-        })
-        ->addColumn($actions)
-        ->searchColumns('name','asset_tag','serial','assigned_to','actions')
-        ->orderColumns('name','asset_tag','serial','assigned_to','actions')
-        ->make();
+
+            $rows[] = array(
+                'name'          => link_to('/hardware/'.$asset->id.'/view', $asset->showAssetName()),
+                'asset_tag'     => link_to('hardware/'.$asset->id.'/view', $asset->asset_tag),
+                'serial'        => $asset->serial,
+                'assigned_to'   => ($asset->assigned_to) ? link_to('/admin/users/'.$asset->assigned_to.'/view', $asset->assigneduser->fullName()) : '',
+                'actions'       => $actions
+                );
+        }
+
+        $data = array('total' => $modelassetsCount, 'rows' => $rows);
+
+        return $data;
     }
 
 }

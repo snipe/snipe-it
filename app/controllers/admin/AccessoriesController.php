@@ -68,6 +68,20 @@ class AccessoriesController extends AdminController
             // Update the accessory data
             $accessory->name            		= e(Input::get('name'));
             $accessory->category_id            	= e(Input::get('category_id'));
+            $accessory->order_number            = e(Input::get('order_number'));
+            
+            if (e(Input::get('purchase_date')) == '') {
+                $accessory->purchase_date       =  NULL;
+            } else {
+                $accessory->purchase_date       = e(Input::get('purchase_date'));
+            }
+            
+            if (e(Input::get('purchase_cost')) == '0.00') {
+                $accessory->purchase_cost       =  NULL;
+            } else {
+                $accessory->purchase_cost       = ParseFloat(e(Input::get('purchase_cost')));
+            }
+            
             $accessory->qty            			= e(Input::get('qty'));
             $accessory->user_id          		= Sentry::getId();
 
@@ -136,6 +150,20 @@ class AccessoriesController extends AdminController
             // Update the accessory data
             $accessory->name            		= e(Input::get('name'));
             $accessory->category_id            	= e(Input::get('category_id'));
+            $accessory->order_number            = e(Input::get('order_number'));
+            
+            if (e(Input::get('purchase_date')) == '') {
+                $accessory->purchase_date       =  NULL;
+            } else {
+                $accessory->purchase_date       = e(Input::get('purchase_date'));
+            }
+            
+            if (e(Input::get('purchase_cost')) == '0.00') {
+                $accessory->purchase_cost       =  NULL;
+            } else {
+                $accessory->purchase_cost       = ParseFloat(e(Input::get('purchase_cost')));
+            }
+            
             $accessory->qty            			= e(Input::get('qty'));
 
             // Was the accessory created?
@@ -466,55 +494,76 @@ class AccessoriesController extends AdminController
     public function getDatatable()
     {
         $accessories = Accessory::with('category')
-        ->whereNull('deleted_at')
-        ->orderBy('created_at', 'DESC');
+        ->whereNull('deleted_at');
 
-        $accessories = $accessories->get();
+        if (Input::has('search')) {
+            $accessories = $accessories->TextSearch(Input::get('search'));
+        }
 
-        $actions = new \Chumper\Datatable\Columns\FunctionColumn('actions',function($accessories)
-            {
-                return '<a href="'.route('checkout/accessory', $accessories->id).'" style="margin-right:5px;" class="btn btn-info btn-sm" '.(($accessories->numRemaining() > 0 ) ? '' : ' disabled').'>'.Lang::get('general.checkout').'</a><a href="'.route('update/accessory', $accessories->id).'" class="btn btn-warning btn-sm" style="margin-right:5px;"><i class="fa fa-pencil icon-white"></i></a><a data-html="false" class="btn delete-asset btn-danger btn-sm" data-toggle="modal" href="'.route('delete/accessory', $accessories->id).'" data-content="'.Lang::get('admin/accessories/message.delete.confirm').'" data-title="'.Lang::get('general.delete').' '.htmlspecialchars($accessories->name).'?" onClick="return false;"><i class="fa fa-trash icon-white"></i></a>';
-            });
+        if (Input::has('offset')) {
+            $offset = e(Input::get('offset'));
+        } else {
+            $offset = 0;
+        }
 
-        return Datatable::collection($accessories)
-        ->addColumn('category',function($accessories)
-            {
-                return $accessories->category->name;
-            })
-        ->addColumn('name',function($accessories)
-            {
-                return link_to('admin/accessories/'.$accessories->id.'/view', $accessories->name);
-            })
-        ->addColumn('qty',function($accessories)
-            {
-                return $accessories->qty;
-            })
-        ->addColumn('numRemaining',function($accessories)
-            {
-                return $accessories->numRemaining();
-            })
-        ->addColumn($actions)
-        ->searchColumns('category','name','qty','numRemaining','actions')
-        ->orderColumns('category','name','qty','numRemaining','actions')
-        ->make();
+        if (Input::has('limit')) {
+            $limit = e(Input::get('limit'));
+        } else {
+            $limit = 50;
+        }
+
+
+        $allowed_columns = ['name','order_number','purchase_date','purchase_cost'];
+        $order = Input::get('order') === 'asc' ? 'asc' : 'desc';
+        $sort = in_array(Input::get('sort'), $allowed_columns) ? Input::get('sort') : 'created_at';
+
+        $accessories = $accessories->orderBy($sort, $order);
+
+        $accessCount = $accessories->count();
+        $accessories = $accessories->skip($offset)->take($limit)->get();
+
+        $rows = array();
+
+        foreach ($accessories as $accessory) {
+            $actions = '<a href="'.route('checkout/accessory', $accessory->id).'" style="margin-right:5px;" class="btn btn-info btn-sm" '.(($accessory->numRemaining() > 0 ) ? '' : ' disabled').'>'.Lang::get('general.checkout').'</a><a href="'.route('update/accessory', $accessory->id).'" class="btn btn-warning btn-sm" style="margin-right:5px;"><i class="fa fa-pencil icon-white"></i></a><a data-html="false" class="btn delete-asset btn-danger btn-sm" data-toggle="modal" href="'.route('delete/accessory', $accessory->id).'" data-content="'.Lang::get('admin/accessories/message.delete.confirm').'" data-title="'.Lang::get('general.delete').' '.htmlspecialchars($accessory->name).'?" onClick="return false;"><i class="fa fa-trash icon-white"></i></a>';
+
+            $rows[] = array(
+                'name'          => link_to('admin/accessories/'.$accessory->id.'/view', $accessory->name),
+                'category'      => $accessory->category->name,
+                'qty'           => $accessory->qty,
+                'order_number'  => $accessory->order_number,
+                'purchase_date'  => $accessory->purchase_date,
+                'purchase_cost'  => $accessory->purchase_cost,
+                'numRemaining'  => $accessory->numRemaining(),
+                'actions'       => $actions
+                );
+        }
+
+        $data = array('total'=>$accessCount, 'rows'=>$rows);
+
+        return $data;
     }
 
 	public function getDataView($accessoryID)
 	{
 		$accessory = Accessory::find($accessoryID);
         $accessory_users = $accessory->users;
+        $count = $accessory_users->count();
 
-		$actions = new \Chumper\Datatable\Columns\FunctionColumn('actions',function($accessory_users){
-			return '<a href="'.route('checkin/accessory', $accessory_users->pivot->id).'" class="btn-flat info">Checkin</a>';
-		});
+        $rows = array();
 
-		return Datatable::collection($accessory_users)
-		->addColumn('name',function($accessory_users)
-			{
-				return link_to('/admin/users/'.$accessory_users->id.'/view', $accessory_users->fullName());
-			})
-		->addColumn($actions)
-		->make();
+        foreach ($accessory_users as $user) {
+            $actions = '<a href="'.route('checkin/accessory', $user->pivot->id).'" class="btn-flat info">Checkin</a>';
+
+            $rows[] = array(
+                'name'          => link_to('/admin/users/'.$user->id.'/view', $user->fullName()),
+                'actions'       => $actions
+                );
+        }
+
+        $data = array('total'=>$count, 'rows'=>$rows);
+
+        return $data;
     }
 
 }
