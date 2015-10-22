@@ -244,16 +244,22 @@ class AssetsController extends AdminController
         }
         
         $input=Input::all();
-        if($this->model->fieldset)
+        // return "INPUT IS: <pre>".print_r($input,true)."</pre>";
+        $rules=$asset->validationRules($assetId);
+        if($asset->model->fieldset)
         {
-          foreach($this->model->fieldset->fields AS $field) {
-            $input[$field->db_column_name()]=$input->fields[$field->db_column_name()];
+          foreach($asset->model->fieldset->fields AS $field) {
+            $input[$field->db_column_name()]=$input['fields'][$field->db_column_name()];
+            $asset->{$field->db_column_name()}=$input[$field->db_column_name()];
           }
+          $rules+=$asset->model->fieldset->validation_rules();
           unset($input['fields']);
         }
+        
+        //return "Rules: <pre>".print_r($rules,true)."</pre>";
 
         //attempt to validate
-        $validator = Validator::make($input, $asset->validationRules($assetId) + $this->fieldset->validation_rules());
+        $validator = Validator::make($input,  $rules );
         
         $custom_errors=[];
 
@@ -309,7 +315,7 @@ class AssetsController extends AdminController
             }
 
             $checkModel = Config::get('app.url').'/api/models/'.e(Input::get('model_id')).'/check';
-            $asset->mac_address = ($checkModel == true) ? e(Input::get('mac_address')) : NULL;
+            //$asset->mac_address = ($checkModel == true) ? e(Input::get('mac_address')) : NULL;
 
             // Update the asset data
             $asset->name            		= e(Input::get('name'));

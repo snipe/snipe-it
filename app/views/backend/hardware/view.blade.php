@@ -153,7 +153,7 @@
             </div>
         @endif
 
-        @if ($asset->model->fieldset->sortBy('custom_field_custom_fieldset.order'))
+        @if ($asset->model->fieldset)
           <hr>
           <div class="col-md-12" style="padding-bottom: 5px;"><strong>FIELDSET:</strong> 
             {{{ $asset->model->fieldset->name }}}</div>

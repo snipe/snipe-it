@@ -15,7 +15,7 @@ class CustomFieldset extends Elegant
       if($field->pivot->required) {
         $rule[]="required";
       }
-      array_push($rule,"regex",$field->format);
+      array_push($rule,"regex:/".$field->attributes['format']."/");
       $rules[$field->db_column_name()]=$rule;
     }
     return $rules;
