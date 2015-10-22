@@ -19,7 +19,7 @@
 <div class="user-profile">
 	<div class="row profile">
 		<div class="col-md-9 bio">
-			<table
+		<table
             name="categories"
             id="table"
             data-url="{{route('api.categories.list')}}"
