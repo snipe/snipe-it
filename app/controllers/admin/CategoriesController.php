@@ -218,7 +218,24 @@ class CategoriesController extends AdminController
     public function getDatatable()
     {
         // Grab all the categories
-        $categories = Category::orderBy('created_at', 'DESC')->get();
+        $categories = Category::orderBy('created_at', 'DESC');
+
+        if (Input::has('search')) {
+            $categories = $categories->TextSearch(e(Input::get('search')));
+        }
+
+        if (Input::has('offset')) {
+            $offset = e(Input::get('offset'));
+        } else {
+            $offset = 0;
+        }
+
+        if (Input::has('limit')) {
+            $limit = e(Input::get('limit'));
+        } else {
+            $limit = 50;
+        }
+
 
         $actions = new \Chumper\Datatable\Columns\FunctionColumn('actions', function($categories) {
             return '<a href="'.route('update/category', $categories->id).'" class="btn btn-warning btn-sm" style="margin-right:5px;"><i class="fa fa-pencil icon-white"></i></a><a data-html="false" class="btn delete-asset btn-danger btn-sm" data-toggle="modal" href="'.route('delete/category', $categories->id).'" data-content="'.Lang::get('admin/categories/message.delete.confirm').'" data-title="'.Lang::get('general.delete').' '.htmlspecialchars($categories->name).'?" onClick="return false;"><i class="fa fa-trash icon-white"></i></a>';
@@ -231,7 +248,7 @@ class CategoriesController extends AdminController
         $categories = $categories->orderBy($sort, $order);
 
         $catCount = $categories->count();
-        $categories = $categories->skip(Input::get('offset'))->take(Input::get('limit'))->get();
+        $categories = $categories->skip($offset)->take($limit)->get();
 
         $rows = array();
 

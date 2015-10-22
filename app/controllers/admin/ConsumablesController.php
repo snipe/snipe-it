@@ -69,19 +69,19 @@ class ConsumablesController extends AdminController
             $consumable->name                   = e(Input::get('name'));
             $consumable->category_id            = e(Input::get('category_id'));
             $consumable->order_number           = e(Input::get('order_number'));
-            
+
             if (e(Input::get('purchase_date')) == '') {
                 $consumable->purchase_date       =  NULL;
             } else {
                 $consumable->purchase_date       = e(Input::get('purchase_date'));
             }
-            
+
             if (e(Input::get('purchase_cost')) == '0.00') {
                 $consumable->purchase_cost       =  NULL;
             } else {
                 $consumable->purchase_cost       = ParseFloat(e(Input::get('purchase_cost')));
             }
-            
+
             $consumable->qty                    = e(Input::get('qty'));
             $consumable->user_id                = Sentry::getId();
 
@@ -151,19 +151,19 @@ class ConsumablesController extends AdminController
             $consumable->name                   = e(Input::get('name'));
             $consumable->category_id            = e(Input::get('category_id'));
             $consumable->order_number           = e(Input::get('order_number'));
-            
+
             if (e(Input::get('purchase_date')) == '') {
                 $consumable->purchase_date       =  NULL;
             } else {
                 $consumable->purchase_date       = e(Input::get('purchase_date'));
             }
-            
+
             if (e(Input::get('purchase_cost')) == '0.00') {
                 $consumable->purchase_cost       =  NULL;
             } else {
                 $consumable->purchase_cost       = ParseFloat(e(Input::get('purchase_cost')));
             }
-            
+
             $consumable->qty                    = e(Input::get('qty'));
 
             // Was the consumable created?
@@ -372,6 +372,18 @@ class ConsumablesController extends AdminController
             $consumables = $consumables->TextSearch(Input::get('search'));
         }
 
+        if (Input::has('offset')) {
+            $offset = e(Input::get('offset'));
+        } else {
+            $offset = 0;
+        }
+
+        if (Input::has('limit')) {
+            $limit = e(Input::get('limit'));
+        } else {
+            $limit = 50;
+        }
+
         $allowed_columns = ['id','name'];
         $order = Input::get('order') === 'asc' ? 'asc' : 'desc';
         $sort = in_array(Input::get('sort'), $allowed_columns) ? Input::get('sort') : 'created_at';
@@ -379,7 +391,7 @@ class ConsumablesController extends AdminController
         $consumables->orderBy($sort, $order);
 
         $consumCount = $consumables->count();
-        $consumables = $consumables->skip(Input::get('offset'))->take(Input::get('limit'))->get();
+        $consumables = $consumables->skip($offset)->take($limit)->get();
 
         $rows = array();
 
