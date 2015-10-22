@@ -1095,7 +1095,7 @@ class AssetsController extends AdminController
             $limit = 50;
         }
 
-       $assets = Asset::with('model','assigneduser','assigneduser.userloc','assetstatus','defaultLoc','assetlog','model','model.category')->Hardware()->select(array('assets.id', 'assets.name','assets.model_id','assets.assigned_to','assets.asset_tag','assets.serial','assets.status_id','assets.purchase_date','assets.deleted_at','assets.rtd_location_id','assets.notes','assets.order_number'));
+       $assets = Asset::with('model','assigneduser','assigneduser.userloc','assetstatus','defaultLoc','assetlog','model','model.category','assetstatus')->Hardware()->select(array('assets.id', 'assets.name','assets.model_id','assets.assigned_to','assets.asset_tag','assets.serial','assets.status_id','assets.purchase_date','assets.deleted_at','assets.rtd_location_id','assets.notes','assets.order_number'));
 
 
       switch ($status) {
