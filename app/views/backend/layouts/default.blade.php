@@ -113,7 +113,12 @@
             </button>
 
 
-	            @if (Setting::getSettings()->logo)
+	            @if (Setting::getSettings()->brand === 3)
+                    <a class="navbar-brand" href="{{ Config::get('app.url') }}" style="padding: 5px;">
+                    <img src="{{ Config::get('app.url') }}/uploads/{{{ Setting::getSettings()->logo }}}">
+                    {{{ Setting::getSettings()->site_name }}}
+                    </a>
+                @elseif (Setting::getSettings()->brand === 2)
 	            	<a class="navbar-brand" href="{{ Config::get('app.url') }}" style="padding: 5px;">
 	            	<img src="{{ Config::get('app.url') }}/uploads/{{{ Setting::getSettings()->logo }}}">
 	            	</a>
@@ -131,33 +136,33 @@
                  @if(Sentry::getUser()->hasAccess('admin'))
                  <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                        <i class="fa fa-plus"></i> @lang('general.create')
+                        <i class="fa fa-plus fa-fw"></i> @lang('general.create')
                         <b class="caret"></b>
                     </a>
                     <ul class="dropdown-menu">
                        <li {{{ (Request::is('hardware/create') ? 'class="active"' : '') }}}>
                                <a href="{{ route('create/hardware') }}">
-                                   <i class="fa fa-barcode"></i>
+                                   <i class="fa fa-barcode fa-fw"></i>
                                    @lang('general.asset')</a>
                            </li>
                         <li {{{ (Request::is('admin/licenses/create') ? 'class="active"' : '') }}}>
                             <a href="{{ route('create/licenses') }}">
-                                <i class="fa fa-certificate"></i>
+                                <i class="fa fa-certificate fa-fw"></i>
                                 @lang('general.license')</a>
                         </li>
                         <li {{{ (Request::is('admin/accessories/create') ? 'class="active"' : '') }}}>
                             <a href="{{ route('create/accessory') }}">
-                                <i class="fa fa-keyboard-o"></i>
+                                <i class="fa fa-keyboard-o fa-fw"></i>
                                 @lang('general.accessory')</a>
                         </li>
                         <li {{{ (Request::is('admin/consumables/create') ? 'class="active"' : '') }}}>
                             <a href="{{ route('create/consumable') }}">
-                                <i class="fa fa-tint"></i>
+                                <i class="fa fa-tint fa-fw"></i>
                                 @lang('general.consumable')</a>
                         </li>
                         <li {{{ (Request::is('admin/users/create') ? 'class="active"' : '') }}}>
                             <a href="{{ route('create/user') }}">
-                            <i class="fa fa-user"></i>
+                            <i class="fa fa-user fa-fw"></i>
                             @lang('general.user')</a>
                         </li>
                     </ul>
@@ -165,28 +170,28 @@
                 @endif
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                        {{{ Lang::get('general.welcome', array('name' => Sentry::getUser()->first_name)) }}}
+                        <i class="fa fa-user fa-fw"></i> {{{ Lang::get('general.welcome', array('name' => Sentry::getUser()->first_name)) }}}
                         <b class="caret"></b>
                     </a>
                     <ul class="dropdown-menu">
                         <li{{{ (Request::is('account/profile') ? ' class="active"' : '') }}}>
                          	<a href="{{ route('view-assets') }}">
-                                <i class="fa fa-check"></i> @lang('general.viewassets')
+                                <i class="fa fa-check fa-fw"></i> @lang('general.viewassets')
                         	</a>
                              <a href="{{ route('profile') }}">
-                                <i class="fa fa-user"></i> @lang('general.editprofile')
+                                <i class="fa fa-user fa-fw"></i> @lang('general.editprofile')
                             </a>
                              <a href="{{ route('change-password') }}">
-                                <i class="fa fa-lock"></i> @lang('general.changepassword')
+                                <i class="fa fa-lock fa-fw"></i> @lang('general.changepassword')
                             </a>
                             <a href="{{ route('change-email') }}">
-                                <i class="fa fa-envelope"></i> @lang('general.changeemail')
+                                <i class="fa fa-envelope fa-fw"></i> @lang('general.changeemail')
                             </a>
                         </li>
                         <li class="divider"></li>
                         <li>
                             <a href="{{ route('logout') }}">
-                                <i class="fa fa-sign-out"></i>
+                                <i class="fa fa-sign-out fa-fw"></i>
                                 @lang('general.logout')
                             </a>
                         </li>
@@ -195,59 +200,59 @@
                 @if(Sentry::getUser()->hasAccess('admin'))
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                        <i class="fa fa-wrench icon-white"></i> @lang('general.admin')
+                        <i class="fa fa-wrench fa-fw"></i> @lang('general.admin')
                         <b class="caret"></b>
                     </a>
                     <ul class="dropdown-menu">
                         <li{{ (Request::is('hardware/models*') ? ' class="active"' : '') }}>
                             <a href="{{ URL::to('hardware/models') }}">
-                                <i class="fa fa-th"></i> @lang('general.asset_models')
+                                <i class="fa fa-th fa-fw"></i> @lang('general.asset_models')
                             </a>
                         </li>
                         <li{{ (Request::is('admin/settings/categories*') ? ' class="active"' : '') }}>
                             <a href="{{ URL::to('admin/settings/categories') }}">
-                                <i class="fa fa-check"></i> @lang('general.categories')
+                                <i class="fa fa-check fa-fw"></i> @lang('general.categories')
                             </a>
                         </li>
                         <li{{ (Request::is('admin/settings/manufacturers*') ? ' class="active"' : '') }}>
                             <a href="{{ URL::to('admin/settings/manufacturers') }}">
-                                <i class="fa fa-briefcase"></i> @lang('general.manufacturers')
+                                <i class="fa fa-briefcase fa-fw"></i> @lang('general.manufacturers')
                             </a>
                         </li>
                         <li{{ (Request::is('admin/settings/suppliers*') ? ' class="active"' : '') }}>
                             <a href="{{ URL::to('admin/settings/suppliers') }}">
-                                <i class="fa fa-credit-card"></i> @lang('general.suppliers')
+                                <i class="fa fa-credit-card fa-fw"></i> @lang('general.suppliers')
                             </a>
                         </li>
                         <li{{ (Request::is('admin/settings/statuslabels*') ? ' class="active"' : '') }}>
                             <a href="{{ URL::to('admin/settings/statuslabels') }}">
-                                <i class="fa fa-list"></i> @lang('general.status_labels')
+                                <i class="fa fa-list fa-fw"></i> @lang('general.status_labels')
                             </a>
                         </li>
                         <li{{ (Request::is('admin/settings/depreciations*') ? ' class="active"' : '') }}>
                             <a href="{{ URL::to('admin/settings/depreciations') }}">
-                                <i class="fa fa-arrow-down"></i> @lang('general.depreciation')
+                                <i class="fa fa-arrow-down fa-fw"></i> @lang('general.depreciation')
                             </a>
                         </li>
                         <li{{ (Request::is('admin/settings/locations*') ? ' class="active"' : '') }}>
                             <a href="{{ URL::to('admin/settings/locations') }}">
-                                <i class="fa fa-globe"></i> @lang('general.locations')
+                                <i class="fa fa-globe fa-fw"></i> @lang('general.locations')
                             </a>
                         </li>
                         <li{{ (Request::is('admin/groups*') ? ' class="active"' : '') }}>
                             <a href="{{ URL::to('admin/groups') }}">
-                                <i class="fa fa-group"></i> @lang('general.groups')
+                                <i class="fa fa-group fa-fw"></i> @lang('general.groups')
                             </a>
                         </li>
                         <li{{ (Request::is('admin/settings/backups*') ? ' class="active"' : '') }}>
                             <a href="{{ URL::to('admin/settings/backups') }}">
-                                <i class="fa fa-download"></i> @lang('admin/settings/general.backups')
+                                <i class="fa fa-download fa-fw"></i> @lang('admin/settings/general.backups')
                             </a>
                         </li>
                         <li class="divider"></li>
                         <li>
                             <a href="{{ route('app') }}">
-                                <i class="fa fa-cog"></i> @lang('general.settings')
+                                <i class="fa fa-cog fa-fw"></i> @lang('general.settings')
                             </a>
                         </li>
 
