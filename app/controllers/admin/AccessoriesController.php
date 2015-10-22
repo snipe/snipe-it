@@ -68,6 +68,20 @@ class AccessoriesController extends AdminController
             // Update the accessory data
             $accessory->name            		= e(Input::get('name'));
             $accessory->category_id            	= e(Input::get('category_id'));
+            $accessory->order_number            = e(Input::get('order_number'));
+            
+            if (e(Input::get('purchase_date')) == '') {
+                $accessory->purchase_date       =  NULL;
+            } else {
+                $accessory->purchase_date       = e(Input::get('purchase_date'));
+            }
+            
+            if (e(Input::get('purchase_cost')) == '0.00') {
+                $accessory->purchase_cost       =  NULL;
+            } else {
+                $accessory->purchase_cost       = ParseFloat(e(Input::get('purchase_cost')));
+            }
+            
             $accessory->qty            			= e(Input::get('qty'));
             $accessory->user_id          		= Sentry::getId();
 
@@ -136,6 +150,20 @@ class AccessoriesController extends AdminController
             // Update the accessory data
             $accessory->name            		= e(Input::get('name'));
             $accessory->category_id            	= e(Input::get('category_id'));
+            $accessory->order_number            = e(Input::get('order_number'));
+            
+            if (e(Input::get('purchase_date')) == '') {
+                $accessory->purchase_date       =  NULL;
+            } else {
+                $accessory->purchase_date       = e(Input::get('purchase_date'));
+            }
+            
+            if (e(Input::get('purchase_cost')) == '0.00') {
+                $accessory->purchase_cost       =  NULL;
+            } else {
+                $accessory->purchase_cost       = ParseFloat(e(Input::get('purchase_cost')));
+            }
+            
             $accessory->qty            			= e(Input::get('qty'));
 
             // Was the accessory created?
