@@ -19,15 +19,15 @@
 <div class="row">
 
 <div class="table-responsive">
-<table id="example">
+<table class="table table-hover">
         <thead>
             <tr role="row">
             <th class="col-sm-1">@lang('general.admin')</th>
-            <th class="col-sm-1">@lang('general.action')</th>
-            <th class="col-sm-1">@lang('general.type')</th>
-            <th class="col-sm-1">@lang('general.item')</th>
-            <th class="col-sm-1"></th>
-            <th class="col-sm-1">@lang('general.date')</th
+            <th class="col-sm-1"><span class="line"></span>@lang('general.action')</th>
+            <th class="col-sm-1"><span class="line"></span>@lang('general.type')</th>
+            <th class="col-sm-1"><span class="line"></span>@lang('general.item')</th>
+            <th class="col-sm-1"><span class="line"></span>@lang('general.user')</th>
+            <th class="col-sm-1"><span class="line"></span>@lang('general.date')</th
         </tr>
     </thead>
     <tbody>
