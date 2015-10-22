@@ -275,7 +275,7 @@ class LocationsController extends AdminController
             $limit = 50;
         }
 
-        $allowed_columns = ['name','address','city','state','country','currency'];
+        $allowed_columns = ['id','name','address','city','state','country','currency'];
         $order = Input::get('order') === 'asc' ? 'asc' : 'desc';
         $sort = in_array(Input::get('sort'), $allowed_columns) ? Input::get('sort') : 'created_at';
 
@@ -290,6 +290,7 @@ class LocationsController extends AdminController
             $actions = '<a href="'.route('update/location', $location->id).'" class="btn btn-warning btn-sm" style="margin-right:5px;"><i class="fa fa-pencil icon-white"></i></a><a data-html="false" class="btn delete-asset btn-danger btn-sm" data-toggle="modal" href="'.route('delete/location', $location->id).'" data-content="'.Lang::get('admin/locations/message.delete.confirm').'" data-title="'.Lang::get('general.delete').' '.htmlspecialchars($location->name).'?" onClick="return false;"><i class="fa fa-trash icon-white"></i></a>';
 
             $rows[] = array(
+                'id'            => $location->id,
                 'name'          => link_to('admin/locations/'.$location->id.'/view', $location->name),
                 'parent'        => ($location->parent) ? $location->parent->name : '',
                 'assets'        => ($location->assets->count() + $location->assignedassets->count()),
@@ -306,25 +307,6 @@ class LocationsController extends AdminController
 
         return $data;
 
-    }
-
-	public function getDataView($locationId)
-	{
-		$consumable = Consumable::find($consumableID);
-        $consumable_users = $consumable->users;
-        $count = $consumable_users->count();
-
-        $rows = array();
-
-        foreach ($consumable_users as $user) {
-            $rows[] = array(
-                'name' => link_to('/admin/users/'.$user->id.'/view', $user->fullName())
-                );
-        }
-
-        $data = array('total' => $count, 'rows' => $rows);
-
-        return $data;
     }
 
 
