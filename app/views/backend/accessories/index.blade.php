@@ -29,9 +29,12 @@
                 <thead>
                     <tr>
                         <th data-sortable="true" data-field="name">{{Lang::get('admin/accessories/table.title')}}</th>
-                        <th data-switchable="false" data-searchable="false" data-sortable="false" data-field="category">{{Lang::get('admin/accessories/general.accessory_category')}}</th>
-                        <th data-switchable="false" data-searchable="false" data-sortable="false" data-field="qty">{{Lang::get('admin/accessories/general.total')}}</th>
-                        <th data-switchable="false" data-searchable="false" data-sortable="false" data-field="numRemaining">{{Lang::get('admin/accessories/general.remaining')}}</th>
+                        <th data-searchable="false" data-sortable="false" data-field="category">{{Lang::get('admin/accessories/general.accessory_category')}}</th>
+                        <th data-searchable="false" data-sortable="false" data-field="qty">{{Lang::get('admin/accessories/general.total')}}</th>
+                        <th data-searchable="true" data-sortable="true" data-field="purchase_date">{{Lang::get('admin/accessories/general.date')}}</th>
+                        <th data-searchable="true" data-sortable="true" data-field="purchase_cost">{{Lang::get('admin/accessories/general.cost')}}</th>
+                        <th data-searchable="true" data-sortable="true" data-field="order_number">{{Lang::get('admin/accessories/general.order')}}</th>
+                        <th data-searchable="false" data-sortable="false" data-field="numRemaining">{{Lang::get('admin/accessories/general.remaining')}}</th>
                         <th data-switchable="false" data-searchable="false" data-sortable="false" data-field="actions">{{Lang::get('table.actions')}}</th>
                     </tr>
                 </thead>

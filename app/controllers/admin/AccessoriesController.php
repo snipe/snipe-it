@@ -493,7 +493,7 @@ class AccessoriesController extends AdminController
 
     public function getDatatable()
     {
-        $accessories = Accessory::select(array('id','name','qty','category_id'))->with('category')
+        $accessories = Accessory::with('category')
         ->whereNull('deleted_at');
 
         if (Input::has('search')) {
@@ -513,7 +513,7 @@ class AccessoriesController extends AdminController
         }
 
 
-        $allowed_columns = ['name'];
+        $allowed_columns = ['name','order_number','purchase_date','purchase_cost'];
         $order = Input::get('order') === 'asc' ? 'asc' : 'desc';
         $sort = in_array(Input::get('sort'), $allowed_columns) ? Input::get('sort') : 'created_at';
 
@@ -531,6 +531,9 @@ class AccessoriesController extends AdminController
                 'name'          => link_to('admin/accessories/'.$accessory->id.'/view', $accessory->name),
                 'category'      => $accessory->category->name,
                 'qty'           => $accessory->qty,
+                'order_number'  => $accessory->order_number,
+                'purchase_date'  => $accessory->purchase_date,
+                'purchase_cost'  => $accessory->purchase_cost,
                 'numRemaining'  => $accessory->numRemaining(),
                 'actions'       => $actions
                 );
