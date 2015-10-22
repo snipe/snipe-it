@@ -904,9 +904,23 @@ class AssetsController extends AdminController
 
 		// the asset is valid
         if (isset($asset->id)) {
-				$log = Actionlog::find($fileId);
-				$file = $log->get_src();
-				return Response::download($file);
+
+		$log = Actionlog::find($fileId);
+		$file = $log->get_src();
+
+            $filetype = Asset::checkUploadIsImage($file);
+
+            if ($filetype) {
+
+                  $contents = file_get_contents($file);
+                  $response = Response::make($contents);
+                  $response->header('Content-Type', $filetype);
+                  return $response;
+
+            } else {
+                  return Response::download($file);
+            }
+
         } else {
             // Prepare the error message
             $error = Lang::get('admin/hardware/message.does_not_exist', compact('id'));

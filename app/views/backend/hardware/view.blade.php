@@ -9,6 +9,7 @@
 {{-- Page content --}}
 @section('content')
 
+
 <div class="row header">
     <div class="col-md-12">
      <h3 class="name">
@@ -283,7 +284,13 @@
                         @endif
                     </td>
                     <td>
-                    {{{ $file->filename }}}
+                         @if (Asset::checkUploadIsImage($file->get_src()))
+                              <a class='preview' data-placement="top" data-image-url="showfile/{{{ $file->id }}}" data-container="body" data-toggle="popover" data-placement="top" >{{{ $file->filename }}}</a>
+                         @else
+                              {{{ $file->filename }}}
+                         @endif
+
+
                     </td>
                     <td>
                         @if ($file->filename)
@@ -308,6 +315,8 @@
     </table>
 </div>
 <div class="col-md-12">
+
+      <h6>History </h6>
         <!-- checked out assets table -->
     <table class="table table-hover table-fixed break-word">
         <thead>
@@ -374,6 +383,7 @@
 </div>
         <!-- side address column -->
         <div class="col-md-3 col-xs-12 address pull-right">
+
 
         	<!-- Asset notes -->
 @if ($asset->notes)
@@ -508,5 +518,16 @@
     </div>
   </div>
 </div>
+@section('moar_scripts')
+<script>
+      $('.preview').popover({
+          'trigger':'hover',
+          'html':true,
+          'content':function(){
+              return "<img src='"+$(this).data('imageUrl')+"' style='max-height: 350px; max-width: 250px;'>";
+          }
+      });
+</script>
+@stop
 
 @stop

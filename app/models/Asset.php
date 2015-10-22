@@ -159,6 +159,19 @@ class Asset extends Depreciable
                         ->orderBy( 'created_at', 'desc' );
         }
 
+	  public static function checkUploadIsImage($file) {
+		  // Check if the file is an image, so we can show a preview
+		  $finfo = finfo_open(FILEINFO_MIME_TYPE); // return mime type ala mimetype extension
+		  $filetype = finfo_file($finfo, $file);
+		  finfo_close($finfo);
+
+		  if (($filetype=="image/jpeg") || ($filetype=="image/jpg") || ($filetype=="image/gif")) {
+			  return true;
+		  }
+
+		  return false;
+	  }
+
         public function assigneduser()
         {
 
@@ -558,7 +571,7 @@ class Asset extends Depreciable
 	{
 		return $query->whereNotNull('deleted_at');
 	}
-	
+
 /**
 	* Query builder scope to search on text
 	*
