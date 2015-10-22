@@ -57,7 +57,6 @@
     data-cookie-id-table="assetsTable">
         <thead>
             <tr>
-
                 <th data-class="hidden-xs" data-switchable="false" data-searchable="false" data-sortable="false" data-field="checkbox"><div class="text-center"><input type="checkbox" id="checkAll" style="padding-left: 0px;"></div></th>
                 <th data-sortable="true" data-field="id" data-visible="false">@lang('general.id')</th>
                 <th data-sortable="true" data-field="name"  data-visible="false">{{Lang::get('admin/hardware/form.name')}}</th>
@@ -71,6 +70,9 @@
                 <th data-sortable="true" data-field="notes">{{Lang::get('general.notes')}}</th>
                 <th data-sortable="true" data-field="order">{{Lang::get('admin/hardware/form.order')}}</th>
                 <th data-sortable="true" data-field="checkout_date">{{Lang::get('admin/hardware/table.checkout_date')}}</th>
+                @foreach(CustomField::all() AS $field)
+                  <th data-sortable="true" data-field="{{$field->db_column_name()}}">{{{$field->name}}}</th>
+                @endforeach
                 <th data-switchable="false" data-searchable="false" data-sortable="false" data-field="change">{{Lang::get('admin/hardware/table.change')}}</th>
                 <th data-switchable="false" data-searchable="false" data-sortable="false" data-field="actions" >{{Lang::get('table.actions')}}</th>
             </tr>

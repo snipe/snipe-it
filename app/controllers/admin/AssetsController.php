@@ -30,6 +30,7 @@ use Paginator;
 use Manufacturer; //for embedded-create
 use Artisan;
 use Symfony\Component\Console\Output\BufferedOutput;
+use CustomField;
 
 
 class AssetsController extends AdminController
@@ -1190,7 +1191,7 @@ class AssetsController extends AdminController
             }
         }
 
-        $rows[] = array(
+        $row = array(
             'checkbox'      =>'<div class="text-center"><input type="checkbox" name="edit_asset['.$asset->id.']" class="one_required"></div>',
             'id'        => $asset->id,
             'name'          => '<a title="'.$asset->name.'" href="hardware/'.$asset->id.'/view">'.$asset->name.'</a>',
@@ -1207,6 +1208,10 @@ class AssetsController extends AdminController
             'change'        => ($inout) ? $inout : '',
             'actions'       => ($actions) ? $actions : ''
             );
+        foreach(CustomField::all() AS $field) {
+          $row[$field->db_column_name()]=$asset->{$field->db_column_name()};
+        }
+        $rows[]=$row;
       }
 
       $data = array('total'=>$assetCount, 'rows'=>$rows);

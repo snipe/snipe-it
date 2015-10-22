@@ -625,6 +625,9 @@ class Asset extends Depreciable
 				->orWhere('order_number','LIKE','%'.$search.'%')
 				->orWhere('notes','LIKE','%'.$search.'');
 			}
+			foreach(CustomField::all() AS $field) {
+				$query->orWhere($field->db_column_name(),'LIKE',"%$search%");
+			}
 		});
 	}
 
