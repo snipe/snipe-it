@@ -11,12 +11,6 @@
 
 
 <div class="page-header">
-
-    <div class="pull-right">
-        <a href="{{ route('reports/export/accessories') }}" class="btn btn-flat gray pull-right"><i class="fa fa-download icon-white"></i>
-        @lang('admin/accessories/table.dl_csv')</a>
-        </div>
-
     <h3>@lang('general.accessory_report')</h3>
 </div>
 
