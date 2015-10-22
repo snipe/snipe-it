@@ -54,8 +54,8 @@
 <script src="{{ asset('assets/js/extensions/cookie/bootstrap-table-cookie.js') }}"></script>
 <script src="{{ asset('assets/js/extensions/mobile/bootstrap-table-mobile.js') }}"></script>
 <script src="{{ asset('assets/js/extensions/export/bootstrap-table-export.js') }}"></script>
-<script src="//rawgit.com/kayalshri/tableExport.jquery.plugin/master/tableExport.js"></script>
-<script src="//rawgit.com/kayalshri/tableExport.jquery.plugin/master/jquery.base64.js"></script>
+<script src="{{ asset('assets/js/extensions/export/tableExport.js') }}"></script>
+<script src="{{ asset('assets/js/extensions/export/jquery.base64.js') }}"></script>
 <script type="text/javascript">
     $('#table').bootstrapTable({
         classes: 'table table-responsive table-no-bordered',
