@@ -572,7 +572,40 @@ class Asset extends Depreciable
 		return $query->whereNotNull('deleted_at');
 	}
 
-/**
+	/**
+     * scopeInModelList
+     * Get all assets in the provided listing of model ids
+     *
+     * @param       $query
+     * @param array $modelIdListing
+     *
+     * @return mixed
+     * @author  Vincent Sposato <vincent.sposato@gmail.com>
+     * @version v1.0
+     */
+	public function scopeInModelList( $query, array $modelIdListing )
+	{
+		return $query->whereIn('model_id', $modelIdListing );
+	}
+
+	public function scopeNotYetAccepted($query)
+	{
+		return $query->where("accepted","=","pending");
+	}
+
+	public function scopeRejected($query)
+	{
+	// $this->model->category->require_acceptance;
+		return $query->where("accepted","=","rejected");
+	}
+
+	public function scopeAccepted($query)
+	{
+		return $uery->where("accepted","=","accepted");
+	}
+
+
+	/**
 	* Query builder scope to search on text
 	*
 	* @param  Illuminate\Database\Query\Builder  $query  Query builder instance
@@ -645,8 +678,8 @@ class Asset extends Depreciable
 	{
 		return $query->join('asset_logs', function($join){
             $join->on('assets.id', '=', 'asset_logs.asset_id');
-        })->where('asset_logs.action_type', '=', 'checkout')
-        ->orderBy('asset_logs.created_at', $order);
+        	})->where('asset_logs.action_type', '=', 'checkout')
+        	->orderBy('asset_logs.created_at', $order);
 	}
 
 	public function scopeOrderCategory($query, $order)
@@ -655,4 +688,7 @@ class Asset extends Depreciable
             ->join('categories', 'models.category_id', '=', 'categories.id')
             ->orderBy('categories.name', $order);
 	}
+
+
+
 }
