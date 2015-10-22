@@ -238,6 +238,7 @@ class AssetsController extends AdminController
         $view = $view->with('supplier_list',$supplier_list);
         $view = $view->with('location_list',$location_list);
         $view = $view->with('statuslabel_list',$statuslabel_list);
+        $view = $view->with('statuslabel_types',$statuslabel_types);
         $view = $view->with('manufacturer',$manufacturer_list);
         $view = $view->with('category',$category_list);
         $view = $view->with('assigned_to',$assigned_to);
@@ -1095,7 +1096,7 @@ class AssetsController extends AdminController
             $limit = 50;
         }
 
-       $assets = Asset::with('model','assigneduser','assigneduser.userloc','assetstatus','defaultLoc','assetlog','model','model.category','assetstatus')->Hardware()->select(array('assets.id', 'assets.name','assets.model_id','assets.assigned_to','assets.asset_tag','assets.serial','assets.status_id','assets.purchase_date','assets.deleted_at','assets.rtd_location_id','assets.notes','assets.order_number'));
+       $assets = Asset::with('model','assigneduser','assigneduser.userloc','assetstatus','defaultLoc','assetlog','model','model.category','assetstatus','assetloc')->Hardware()->select(array('assets.id', 'assets.name','assets.model_id','assets.assigned_to','assets.asset_tag','assets.serial','assets.status_id','assets.purchase_date','assets.deleted_at','assets.rtd_location_id','assets.notes','assets.order_number'));
 
 
       switch ($status) {
