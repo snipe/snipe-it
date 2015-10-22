@@ -286,7 +286,7 @@
 
 
 
-        </div>
+</div>
 
 
         <!-- side address column -->
@@ -295,7 +295,7 @@
             <h6>@lang('admin/settings/general.about_settings_title')</h6>
             <p>@lang('admin/settings/general.about_settings_text')</p>
 
-        </div>
-    </div>
+                    </div>
+
 </div>
 @stop

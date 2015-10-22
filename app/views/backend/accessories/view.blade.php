@@ -25,80 +25,26 @@
 </div>
 
 <div class="user-profile">
-<div class="row profile">
-<div class="col-md-9 bio">
-        
-        @if ($accessory->purchase_date)
-            <div class="col-md-12" style="padding-bottom: 5px;"><strong>@lang('admin/accessories/general.date'): </strong>
-            {{{ $accessory->purchase_date }}} </div>
-        @endif
-
-        @if ($accessory->purchase_cost)
-            <div class="col-md-12" style="padding-bottom: 5px;"><strong>@lang('admin/accessories/general.cost'):</strong>
-            {{{ Setting::first()->default_currency }}}
-
-            {{{ number_format($accessory->purchase_cost,2) }}} </div>
-        @endif
-
-        @if ($accessory->order_number)
-            <div class="col-md-12" style="padding-bottom: 5px;"><strong>@lang('admin/accessories/general.order'):</strong>
-            {{{ $accessory->order_number }}} </div>
-        @endif
-        <br />
-
-
-                            <!-- checked out accessories table -->
-                            @if ($accessory->users->count() > 0)
-                             {{ Datatable::table()
-                ->addColumn(Lang::get('general.user'),
-                            Lang::get('table.actions'))
-                ->setOptions(
-                        array(
-                            'sAjaxSource'=>route('api.accessories.view', $accessory->id),
-                            'dom' =>'T<"clear">lfrtip',
-                            'tableTools' => array(
-                                'sSwfPath'=> Config::get('app.url').'/assets/swf/copy_csv_xls_pdf.swf',
-                                'aButtons'=>array(
-                                    array(
-                                        'sExtends'=>'copy',
-                                    ),
-                                    'print',
-                                    array(
-                                        'sExtends'=>'collection',
-                                        'sButtonText'=>'Export',
-                                        'aButtons'=>array(
-                                            array(
-                                                'sExtends'=>'csv',
-                                            ),
-                                            array(
-                                                'sExtends'=>'xls',
-                                            ),
-                                            array(
-                                                'sExtends'=>'pdf',
-                                            ),
-                                        ),
-                                    ),
-                                )
-                            ),
-                            'columnDefs'=> array(
-                                array('bSortable'=>false,'targets'=>array(1)),
-                                array('width'=>'auto','targets'=>array(1)),
-                                ),
-                            'order'=>array(array(0,'asc')),
-                        )
-                    )
-                ->render() }}
-
-                            @else
-                            <div class="col-md-9">
-                                <div class="alert alert-info alert-block">
-                                    <i class="fa fa-info-circle"></i>
-                                    @lang('general.no_results')
-                                </div>
-                            </div>
-                            @endif
-
-                        </div>
+    <div class="row profile">
+        <div class="col-md-9 bio">
+            @if ($accessory->users->count() > 0)
+                <table name="accessory_users" id="table" data-url="{{route('api.accessories.view', $accessory->id)}}">
+                    <thead>
+                        <tr>
+                            <th data-switchable="false" data-searchable="false" data-sortable="false" data-field="name">{{Lang::get('general.user')}}</th>
+                            <th data-switchable="false" data-searchable="false" data-sortable="false" data-field="actions">{{Lang::get('table.actions')}}</th>
+                        </tr>
+                    </thead>
+                </table>
+            @else
+                <div class="col-md-9">
+                    <div class="alert alert-info alert-block">
+                        <i class="fa fa-info-circle"></i>
+                        @lang('general.no_results')
+                    </div>
+                </div>
+            @endif
+        </div>
 
 <!-- side address column -->
 <div class="col-md-3 col-xs-12 address pull-right">
@@ -111,5 +57,45 @@
     <p>@lang('admin/accessories/general.about_accessories_text') </p>
 
 </div>
+
+@section('moar_scripts')
+<script src="{{ asset('assets/js/bootstrap-table.js') }}"></script>
+<script src="{{ asset('assets/js/extensions/mobile/bootstrap-table-mobile.js') }}"></script>
+<script src="{{ asset('assets/js/extensions/export/bootstrap-table-export.js?v=1') }}"></script>
+<script src="{{ asset('assets/js/extensions/cookie/bootstrap-table-cookie.js?v=1') }}"></script>
+<script src="//rawgit.com/kayalshri/tableExport.jquery.plugin/master/tableExport.js?v=1') }}"></script>
+<script src="//rawgit.com/kayalshri/tableExport.jquery.plugin/master/jquery.base64.js?v=1') }}"></script>
+<script type="text/javascript">
+    $('#table').bootstrapTable({
+        classes: 'table table-responsive table-no-bordered',
+        undefinedText: '',
+        iconsPrefix: 'fa',
+        showRefresh: true,
+        search: true,
+        pageSize: {{{ Setting::getSettings()->per_page }}},
+        pagination: true,
+        sidePagination: 'server',
+        sortable: true,
+        cookie: true,
+        mobileResponsive: true,
+        columnsHidden: ['name'],
+        showExport: true,
+        exportLabel: 'Export',
+        maintainSelected: true,
+        paginationFirstText: "@lang('general.first')",
+        paginationLastText: "@lang('general.last')",
+        paginationPreText: "@lang('general.previous')",
+        paginationNextText: "@lang('general.next')",
+        pageList: ['10','25','50','100','150','200'],
+        icons: {
+            paginationSwitchDown: 'fa-caret-square-o-down',
+            paginationSwitchUp: 'fa-caret-square-o-up',
+            columns: 'fa-columns',
+            refresh: 'fa-refresh'
+        },
+
+    });
+</script>
+@stop
 
 @stop

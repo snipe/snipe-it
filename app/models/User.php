@@ -200,5 +200,55 @@ class User extends SentryUserModel
 
     }
 
+    /**
+	* Query builder scope to search on text
+	*
+	* @param  Illuminate\Database\Query\Builder  $query  Query builder instance
+	* @param  text                              $search    	 Search term
+	*
+	* @return Illuminate\Database\Query\Builder          Modified query builder
+	*/
+    public function scopeTextsearch($query, $search)
+	{
+
+            return $query->where(function($query) use ($search) {
+                $query->where('first_name', 'LIKE', "%$search%")
+                ->orWhere('last_name', 'LIKE', "%$search%")
+                ->orWhere('email', 'LIKE', "%$search%")
+                ->orWhere('username', 'LIKE', "%$search%")
+                ->orWhere('notes', 'LIKE', "%$search%")
+                ->orWhere(function($query) use ($search) {
+                    $query->whereHas('userloc', function($query) use ($search) {
+                        $query->where('name','LIKE','%'.$search.'%');
+                    });
+                })
+
+                // This doesn't actually work - need to use a table alias maybe?
+                ->orWhere(function($query) use ($search) {
+                    $query->whereHas('manager', function($query) use ($search) {
+                        $query->where(function($query) use ($search) {
+                            $query->where('first_name','LIKE','%'.$search.'%')
+                            ->orWhere('last_name','LIKE','%'.$search.'%');
+                        });
+                    });
+                });
+            });
+
+	}
+
+
+    /**
+     * Query builder scope for Deleted users
+     *
+     * @param  Illuminate\Database\Query\Builder $query Query builder instance
+     *
+     * @return Illuminate\Database\Query\Builder          Modified query builder
+     */
+
+    public function scopeDeleted($query)
+    {
+        return $query->whereNotNull('deleted_at');
+    }
+
 
 }

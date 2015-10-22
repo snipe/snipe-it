@@ -366,47 +366,58 @@ class ConsumablesController extends AdminController
     public function getDatatable()
     {
         $consumables = Consumable::select(array('id','name','qty'))
-        ->whereNull('deleted_at')
-        ->orderBy('created_at', 'DESC');
+        ->whereNull('deleted_at');
 
-        $consumables = $consumables->get();
+        if (Input::has('search')) {
+            $consumables = $consumables->TextSearch(Input::get('search'));
+        }
 
-        $actions = new \Chumper\Datatable\Columns\FunctionColumn('actions',function($consumables)
-            {
-                return '<a href="'.route('checkout/consumable', $consumables->id).'" style="margin-right:5px;" class="btn btn-info btn-sm" '.(($consumables->numRemaining() > 0 ) ? '' : ' disabled').'>'.Lang::get('general.checkout').'</a><a href="'.route('update/consumable', $consumables->id).'" class="btn btn-warning btn-sm" style="margin-right:5px;"><i class="fa fa-pencil icon-white"></i></a><a data-html="false" class="btn delete-asset btn-danger btn-sm" data-toggle="modal" href="'.route('delete/consumable', $consumables->id).'" data-content="'.Lang::get('admin/consumables/message.delete.confirm').'" data-title="'.Lang::get('general.delete').' '.htmlspecialchars($consumables->name).'?" onClick="return false;"><i class="fa fa-trash icon-white"></i></a>';
-            });
+        $allowed_columns = ['id','name'];
+        $order = Input::get('order') === 'asc' ? 'asc' : 'desc';
+        $sort = in_array(Input::get('sort'), $allowed_columns) ? Input::get('sort') : 'created_at';
 
-        return Datatable::collection($consumables)
-        ->addColumn('name',function($consumables)
-            {
-                return link_to('admin/consumables/'.$consumables->id.'/view', $consumables->name);
-            })
-        ->addColumn('qty',function($consumables)
-            {
-                return $consumables->qty;
-            })
-        ->addColumn('numRemaining',function($consumables)
-            {
-                return $consumables->numRemaining();
-            })
-        ->addColumn($actions)
-        ->searchColumns('name','qty','numRemaining','actions')
-        ->orderColumns('name','qty','numRemaining','actions')
-        ->make();
+        $consumables->orderBy($sort, $order);
+
+        $consumCount = $consumables->count();
+        $consumables = $consumables->skip(Input::get('offset'))->take(Input::get('limit'))->get();
+
+        $rows = array();
+
+        foreach($consumables as $consumable) {
+            $actions = '<a href="'.route('checkout/consumable', $consumable->id).'" style="margin-right:5px;" class="btn btn-info btn-sm" '.(($consumable->numRemaining() > 0 ) ? '' : ' disabled').'>'.Lang::get('general.checkout').'</a><a href="'.route('update/consumable', $consumable->id).'" class="btn btn-warning btn-sm" style="margin-right:5px;"><i class="fa fa-pencil icon-white"></i></a><a data-html="false" class="btn delete-asset btn-danger btn-sm" data-toggle="modal" href="'.route('delete/consumable', $consumable->id).'" data-content="'.Lang::get('admin/consumables/message.delete.confirm').'" data-title="'.Lang::get('general.delete').' '.htmlspecialchars($consumable->name).'?" onClick="return false;"><i class="fa fa-trash icon-white"></i></a>';
+
+            $rows[] = array(
+                'id'          => $consumable->id,
+                'name'          => link_to('admin/consumables/'.$consumable->id.'/view', $consumable->name),
+                'qty'           => $consumable->qty,
+                'numRemaining'  => $consumable->numRemaining(),
+                'actions'       => $actions
+            );
+        }
+
+        $data = array('total' => $consumCount, 'rows' => $rows);
+
+        return $data;
+
     }
 
 	public function getDataView($consumableID)
 	{
 		$consumable = Consumable::find($consumableID);
         $consumable_users = $consumable->users;
+        $count = $consumable_users->count();
 
+        $rows = array();
 
-		return Datatable::collection($consumable_users)
-		->addColumn('name',function($consumable_users)
-			{
-				return link_to('/admin/users/'.$consumable_users->id.'/view', $consumable_users->fullName());
-			})
-		->make();
+        foreach ($consumable_users as $user) {
+            $rows[] = array(
+                'name' => link_to('/admin/users/'.$user->id.'/view', $user->fullName())
+                );
+        }
+
+        $data = array('total' => $count, 'rows' => $rows);
+
+        return $data;
     }
 
 }

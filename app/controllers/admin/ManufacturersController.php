@@ -20,9 +20,6 @@ class ManufacturersController extends AdminController
      */
     public function getIndex()
     {
-        // Grab all the manufacturers
-        $manufacturers = Manufacturer::orderBy('created_at', 'DESC')->get();
-
         // Show the page
         return View::make('backend/manufacturers/index', compact('manufacturers'));
     }
@@ -192,7 +189,54 @@ class ManufacturersController extends AdminController
 
     }
 
+    public function getDatatable()
+    {
+        $manufacturers = Manufacturer::select(array('id','name'))->with('assets')
+        ->whereNull('deleted_at');
 
+        if (Input::has('search')) {
+            $manufacturers = $manufacturers->TextSearch(e(Input::get('search')));
+        }
+
+        if (Input::has('offset')) {
+            $offset = e(Input::get('offset'));
+        } else {
+            $offset = 0;
+        }
+
+        if (Input::has('limit')) {
+            $limit = e(Input::get('limit'));
+        } else {
+            $limit = 50;
+        }
+
+        $allowed_columns = ['id','name'];
+        $order = Input::get('order') === 'asc' ? 'asc' : 'desc';
+        $sort = in_array(Input::get('sort'), $allowed_columns) ? Input::get('sort') : 'created_at';
+
+        $manufacturers->orderBy($sort, $order);
+
+        $manufacturersCount = $manufacturers->count();
+        $manufacturers = $manufacturers->skip($offset)->take($limit)->get();
+
+        $rows = array();
+
+        foreach($manufacturers as $manufacturer) {
+            $actions = '<a href="'.route('update/manufacturer', $manufacturer->id).'" class="btn btn-warning btn-sm" style="margin-right:5px;"><i class="fa fa-pencil icon-white"></i></a><a data-html="false" class="btn delete-asset btn-danger btn-sm" data-toggle="modal" href="'.route('delete/location', $manufacturer->id).'" data-content="'.Lang::get('admin/manufacturers/message.delete.confirm').'" data-title="'.Lang::get('general.delete').' '.htmlspecialchars($manufacturer->name).'?" onClick="return false;"><i class="fa fa-trash icon-white"></i></a>';
+
+            $rows[] = array(
+                'id'              => $manufacturer->id,
+                'name'          => link_to('admin/manufacturers/'.$manufacturer->id.'/view', $manufacturer->name),
+                'assets'              => $manufacturer->assetscount(),
+                'actions'       => $actions
+            );
+        }
+
+        $data = array('total' => $manufacturersCount, 'rows' => $rows);
+
+        return $data;
+
+    }
 
 
 }
