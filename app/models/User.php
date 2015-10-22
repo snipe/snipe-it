@@ -211,11 +211,12 @@ class User extends SentryUserModel
     public function scopeTextsearch($query, $search)
 	{
 
-			return $query->where('first_name', 'LIKE', "%$search%")
-				->orWhere('last_name', 'LIKE', "%$search%")
+            return $query->where(function($query) use ($search) {
+                $query->where('first_name', 'LIKE', "%$search%")
+                ->orWhere('last_name', 'LIKE', "%$search%")
                 ->orWhere('email', 'LIKE', "%$search%")
                 ->orWhere('username', 'LIKE', "%$search%")
-				->orWhere('notes', 'LIKE', "%$search%")
+                ->orWhere('notes', 'LIKE', "%$search%")
                 ->orWhere(function($query) use ($search) {
                     $query->whereHas('userloc', function($query) use ($search) {
                         $query->where('name','LIKE','%'.$search.'%');
@@ -231,6 +232,7 @@ class User extends SentryUserModel
                         });
                     });
                 });
+            });
 
 	}
 
