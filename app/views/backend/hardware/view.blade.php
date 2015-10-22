@@ -185,7 +185,7 @@
 				<tr>
 					<td><a href="{{ route('view/license', $seat->license->id) }}">{{{ $seat->license->name }}}</a></td>
 					<td>{{{ $seat->license->serial }}}</td>
-					<td><a href="{{ route('checkin/license', $seat->id) }}" class="btn-flat info">@lang('general.checkin')</a>
+					<td><a href="{{ route('checkin/license', $seat->id) }}" class="btn-flat info btn-sm">@lang('general.checkin')</a>
 					</td>
 				</tr>
 				@endforeach
@@ -238,7 +238,7 @@
                     <td>{{{ $assetMaintenance->is_warranty ? Lang::get('admin/asset_maintenances/message.warranty') : Lang::get('admin/asset_maintenances/message.not_warranty') }}}</td>
                     <td>{{{ sprintf( Lang::get( 'general.currency' ) . '%01.2f', $assetMaintenance->cost) }}}</td>
                     <?php $totalCost += $assetMaintenance->cost; ?>
-                    <td><a href="{{ route('update/asset_maintenance', $assetMaintenance->id) }}" class="btn btn-warning"><i class="fa fa-pencil icon-white"></i></a>
+                    <td><a href="{{ route('update/asset_maintenance', $assetMaintenance->id) }}" class="btn btn-warning btn-sm"><i class="fa fa-pencil icon-white"></i></a>
                     </td>
                 </tr>
                 @endif
@@ -511,7 +511,7 @@
 
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">@lang('button.cancel')</button>
+        <button type="button" class="btn btn-default btn-sm" data-dismiss="modal">@lang('button.cancel')</button>
         <button type="submit" class="btn btn-primary btn-sm">@lang('button.upload')</button>
       </div>
       {{ Form::close() }}
