@@ -216,7 +216,7 @@ class AssetsController extends AdminController
         $supplier_list = suppliersList();
         $assigned_to = usersList();
         $statuslabel_types = statusTypeList();
-        
+
         return View::make('backend/hardware/edit', compact('asset'))
         ->with('model_list',$model_list)
         ->with('supplier_list',$supplier_list)
@@ -1066,20 +1066,29 @@ class AssetsController extends AdminController
     public function getDatatable($status = null)
     {
 
-        if (Input::has('offset')) {
-            $offset = e(Input::get('offset'));
-        } else {
-            $offset = 0;
-        }
 
-        if (Input::has('limit')) {
-            $limit = e(Input::get('limit'));
-        } else {
-            $limit = 50;
-        }
+       $assets = Asset::with('model','assigneduser','assigneduser.userloc','assetstatus','defaultLoc','assetlog','model','model.category','assetstatus','assetloc')
+       ->Hardware();
 
-       $assets = Asset::with('model','assigneduser','assigneduser.userloc','assetstatus','defaultLoc','assetlog','model','model.category','assetstatus','assetloc')->Hardware()->select(array('assets.id', 'assets.name','assets.model_id','assets.assigned_to','assets.asset_tag','assets.serial','assets.status_id','assets.purchase_date','assets.deleted_at','assets.rtd_location_id','assets.notes','assets.order_number'));
+       if (Input::has('search')) {
+             $assets = $assets->TextSearch(Input::get('search'));
+       }
 
+       if (Input::has('offset')) {
+             $offset = e(Input::get('offset'));
+       } else {
+             $offset = 0;
+       }
+
+       if (Input::has('limit')) {
+             $limit = e(Input::get('limit'));
+       } else {
+             $limit = 50;
+       }
+
+       if (Input::has('order_number')) {
+           $assets->where('order_number','=',e(Input::get('order_number')));
+       }
 
       switch ($status) {
       case 'Deleted':
@@ -1105,14 +1114,6 @@ class AssetsController extends AdminController
       	break;
 
       }
-
-      if (Input::has('order_number')) {
-          $assets->where('order_number','=',e(Input::get('order_number')));
-      }
-
-     if (Input::has('search')) {
-         $assets = $assets->TextSearch(Input::get('search'));
-     }
 
     $allowed_columns = ['id','name','asset_tag','serial','model','checkout_date','category','notes'];
     $order = Input::get('order') === 'asc' ? 'asc' : 'desc';
