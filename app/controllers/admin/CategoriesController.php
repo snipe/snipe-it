@@ -218,7 +218,7 @@ class CategoriesController extends AdminController
     public function getDatatable()
     {
         // Grab all the categories
-        $categories = Category::orderBy('created_at', 'DESC');
+        $categories = Category::with('assets');
 
         if (Input::has('search')) {
             $categories = $categories->TextSearch(e(Input::get('search')));
