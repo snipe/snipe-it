@@ -82,7 +82,7 @@
                             <!-- checked out assets table -->
                             @if (count($user->assets) > 0)
 	                            <div class="table-responsive">
-									<table class="display table table-hover">
+						<table class="display table table-hover">
 		                                <thead>
 		                                    <tr>
 		                                        <th class="col-md-3">@lang('admin/hardware/table.asset_model')</th>

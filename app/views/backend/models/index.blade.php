@@ -22,38 +22,56 @@
 </div>
 
 <div class="row form-wrapper">
-    {{ Datatable::table()
-    ->addColumn(Lang::get('general.manufacturer'),
-        Lang::get('admin/models/table.title'),
-        Lang::get('admin/models/table.modelnumber'),
-        Lang::get('admin/models/table.numassets'),
-        Lang::get('general.depreciation'),
-        Lang::get('general.category'),
-        Lang::get('general.eol'),
-        Lang::get('table.actions'))
-    ->setOptions(
-            array(
-	             'language' => array(
-	            	'search' => Lang::get('general.search'),
-	            	'lengthMenu' => Lang::get('general.page_menu'),
-	            	'loadingRecords' => Lang::get('general.loading'),
-	            	'zeroRecords' => Lang::get('general.no_results'),
-	            	'info' => Lang::get('general.pagination_info'),
-	            	'processing' => Lang::get('general.processing'),
-	            	'paginate'=> array(
-	            		'first'=>Lang::get('general.first'),
-	            		'previous'=>Lang::get('general.previous'),
-	            		'next'=>Lang::get('general.next'),
-	            		'last'=>Lang::get('general.last'),
-	            		),
-	            ),
-                'sAjaxSource'=> route('api.models.list', Input::get('status')),
-                'dom' =>'CT<"clear">lfrtip',
-               'colVis'=> array('showAll'=>'Show All','restore'=>'Restore','exclude'=>array(6),'activate'=>'mouseover'),
-                'columnDefs'=> array(array('bSortable'=>false,'targets'=>array(6))),
-                'order'=>array(array(0,'asc')),
-            )
-        )
-    ->render() }}
 
+    <table name="models" id="table" data-url="{{route('api.models.list', Input::get('status'))}}">
+        <thead>
+            <tr>
+                <th data-sortable="true" data-field="manufacturer">{{Lang::get('general.manufacturer')}}</th>
+                <th data-sortable="true" data-field="name">{{Lang::get('admin/models/table.title')}}</th>
+                <th data-sortable="true" data-field="modelnumber">{{Lang::get('admin/models/table.modelnumber')}}</th>
+                <th data-sortable="true" data-field="numassets">{{Lang::get('admin/models/table.numassets')}}</th>
+                <th data-sortable="true" data-field="depreciation">{{Lang::get('general.depreciation')}}</th>
+                <th data-sortable="true" data-field="category">{{Lang::get('general.category')}}</th>
+                <th data-sortable="true" data-field="eol">{{Lang::get('general.eol')}}</th>
+                <th data-switchable="false" data-searchable="false" data-sortable="false" data-field="actions">{{ Lang::get('table.actions') }}</th>
+            </tr>
+        </thead>
+    </table>
+
+@section('moar_scripts')
+<script src="{{ asset('assets/js/bootstrap-table.js') }}"></script>
+<script src="{{ asset('assets/js/extensions/mobile/bootstrap-table-mobile.js') }}"></script>
+<script src="{{ asset('assets/js/extensions/export/bootstrap-table-export.js?v=1') }}"></script>
+<script src="{{ asset('assets/js/extensions/cookie/bootstrap-table-cookie.js?v=1') }}"></script>
+<script src="//rawgit.com/kayalshri/tableExport.jquery.plugin/master/tableExport.js?v=1') }}"></script>
+<script src="//rawgit.com/kayalshri/tableExport.jquery.plugin/master/jquery.base64.js?v=1') }}"></script>
+<script type="text/javascript">
+    $('#table').bootstrapTable({
+        classes: 'table table-hover table-no-bordered',
+        undefinedText: '',
+        iconsPrefix: 'fa',
+        showRefresh: true,
+        search: true,
+        pageSize: {{{ Setting::getSettings()->per_page }}},
+        pagination: true,
+        sidePagination: 'server',
+        sortable: true,
+        mobileResponsive: true,
+        showExport: true,
+        showColumns: true,
+        maintainSelected: true,
+        paginationFirstText: "@lang('general.first')",
+        paginationLastText: "@lang('general.last')",
+        paginationPreText: "@lang('general.previous')",
+        paginationNextText: "@lang('general.next')",
+        pageList: ['10','25','50','100','150','200'],
+        icons: {
+            paginationSwitchDown: 'fa-caret-square-o-down',
+            paginationSwitchUp: 'fa-caret-square-o-up',
+            columns: 'fa-columns',
+            refresh: 'fa-refresh'
+        },
+    });
+</script>
+@stop
 @stop

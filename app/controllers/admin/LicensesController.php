@@ -887,41 +887,40 @@ class LicensesController extends AdminController
     }
 
     public function getDatatable() {
-        $licenses = License::orderBy('created_at', 'DESC')->get();
+        $licenses = License::select('id','name','serial','purchase_date','seats');
 
-        $actions = new \Chumper\Datatable\Columns\FunctionColumn('actions', function($licenses) {
-            return '<span style="white-space: nowrap;"><a href="'.route('freecheckout/license', $licenses->id).'" class="btn btn-primary btn-sm" style="margin-right:5px;" '.(($licenses->remaincount() > 0) ? '' : 'disabled').'>'.Lang::get('general.checkout').'</a> <a href="'.route('clone/license', $licenses->id).'" class="btn btn-info btn-sm" style="margin-right:5px;" title="Clone asset"><i class="fa fa-files-o"></i></a><a href="'.route('update/license', $licenses->id).'" class="btn btn-warning btn-sm" style="margin-right:5px;"><i class="fa fa-pencil icon-white"></i></a><a data-html="false" class="btn delete-asset btn-danger btn-sm" data-toggle="modal" href="'.route('delete/license', $licenses->id).'" data-content="'.Lang::get('admin/licenses/message.delete.confirm').'" data-title="'.Lang::get('general.delete').' '.htmlspecialchars($licenses->name).'?" onClick="return false;"><i class="fa fa-trash icon-white"></i></a></span>';
-        });
+        if (Input::has('search')) {
+            $licenses = $licenses->TextSearch(Input::get('search'));
+        }
 
-        return Datatable::collection($licenses)
-        ->addColumn('name', function($licenses) {
-            return link_to('/admin/licenses/'.$licenses->id.'/view', $licenses->name);
-        })
-        ->addColumn('serial', function($licenses) {
-            return link_to('/admin/licenses/'.$licenses->id.'/view', mb_strimwidth($licenses->serial, 0, 50, "..."));
-        })
-        ->addColumn('license_name', function($licenses) {
-            return $licenses->license_name;
-        })
-        ->addColumn('license_email', function($licenses) {
-            return $licenses->license_email;
-        })
-        ->addColumn('totalSeats', function($licenses) {
-            return $licenses->totalSeatsByLicenseID();
-        })
-        ->addColumn('remaining', function($licenses) {
-            return $licenses->remaincount();
-        })
-        ->addColumn('purchase_date', function($licenses) {
-            return $licenses->purchase_date;
-        })
-        ->addColumn('notes', function($licenses) {
-            return $licenses->notes;
-        })
-        ->addColumn($actions)
-        ->searchColumns('name','serial','totalSeats','remaining','purchase_date','actions','notes','license_name','license_email')
-        ->orderColumns('name','serial','totalSeats','remaining','purchase_date','actions','notes','license_name','license_email')
-        ->make();
+        $allowed_columns = ['id','name'];
+        $order = Input::get('order') === 'asc' ? 'asc' : 'desc';
+        $sort = in_array(Input::get('sort'), $allowed_columns) ? Input::get('sort') : 'created_at';
+
+        $licenses = $licenses->orderBy($sort, $order);
+
+        $licenseCount = $licenses->count();
+        $licenses = $licenses->skip(Input::get('offset'))->take(Input::get('limit'))->get();
+
+        $rows = array();
+
+        foreach ($licenses as $license) {
+            $actions = '<span style="white-space: nowrap;"><a href="'.route('freecheckout/license', $license->id).'" class="btn btn-primary btn-sm" style="margin-right:5px;" '.(($license->remaincount() > 0) ? '' : 'disabled').'>'.Lang::get('general.checkout').'</a> <a href="'.route('clone/license', $license->id).'" class="btn btn-info btn-sm" style="margin-right:5px;" title="Clone asset"><i class="fa fa-files-o"></i></a><a href="'.route('update/license', $license->id).'" class="btn btn-warning btn-sm" style="margin-right:5px;"><i class="fa fa-pencil icon-white"></i></a><a data-html="false" class="btn delete-asset btn-danger btn-sm" data-toggle="modal" href="'.route('delete/license', $license->id).'" data-content="'.Lang::get('admin/licenses/message.delete.confirm').'" data-title="'.Lang::get('general.delete').' '.htmlspecialchars($license->name).'?" onClick="return false;"><i class="fa fa-trash icon-white"></i></a></span>';
+
+            $rows[] = array(
+                'id'                => $license->id,
+                'name'              => link_to('/admin/licenses/'.$license->id.'/view', $license->name),
+                'serial'            => link_to('/admin/licenses/'.$license->id.'/view', mb_strimwidth($license->serial, 0, 50, "...")),
+                'totalSeats'        => $license->totalSeatsByLicenseID(),
+                'remaining'         => $license->remaincount(),
+                'purchase_date'     => ($license->purchase_date) ? $license->purchase_date : '',
+                'actions'           => $actions
+                );
+        }
+
+        $data = array('total' => $licenseCount, 'rows' => $rows);
+
+        return $data;
     }
 
     public function getFreeLicense($licenseId) {

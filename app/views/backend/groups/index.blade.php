@@ -20,13 +20,14 @@
 
 
 <div class="row form-wrapper">
-<table id="example">
+<div class="table-responsive">
+<table class="table table-hover">
     <thead>
         <tr role="row">
             <th class="col-md-3">@lang('admin/groups/table.name')</th>
-            <th class="col-md-2">@lang('admin/groups/table.users')</th>
-            <th class="col-md-2">@lang('general.created_at')</th>
-            <th class="col-md-1 actions">@lang('table.actions')</th>
+            <th class="col-md-2"><span class="line"></span>@lang('admin/groups/table.users')</th>
+            <th class="col-md-2"><span class="line"></span>@lang('general.created_at')</th>
+            <th class="col-md-1 actions"><span class="line"></span>@lang('table.actions')</th>
         </tr>
     </thead>
     <tbody>
@@ -52,6 +53,6 @@ data-title="@lang('general.delete')"
     </tbody>
 </table>
 </div>
-
+</div>
 
 @stop

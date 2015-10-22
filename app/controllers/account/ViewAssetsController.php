@@ -208,11 +208,12 @@ class ViewAssetsController extends AuthorizedController
 		$log = $logaction->logaction($logaction_msg);
 
 		$update_checkout = DB::table('asset_logs')
-			->where('id',$findlog->id)
-			->update(array('accepted_id' => $logaction->id));
-    $affected_asset=$logaction->assetlog;
-    $affected_asset->accepted=$accepted;
-    $affected_asset->save();
+		->where('id',$findlog->id)
+		->update(array('accepted_id' => $logaction->id));
+
+            $affected_asset=$logaction->assetlog;
+            $affected_asset->accepted=$accepted;
+            $affected_asset->save();
 
 		if ($update_checkout ) {
 			return Redirect::to('account/view-assets')->with('success', $return_msg);

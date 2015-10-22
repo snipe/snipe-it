@@ -68,7 +68,8 @@ class SettingsController extends AdminController
         // Declare the rules for the form validation
 
         $rules = array(
-	        "per_page"   	=> 'required|min:1|numeric',
+	        "brand"     => 'required|min:1|numeric',
+            "per_page"   	=> 'required|min:1|numeric',
 	        "qr_text"		=> 'min:1|max:31',
 	        "logo"   		=> 'mimes:jpeg,bmp,png,gif',
             "custom_css"   => 'alpha_space',
@@ -115,6 +116,7 @@ class SettingsController extends AdminController
 
              if (Config::get('app.lock_passwords')==false) {
 	             $setting->site_name = e(Input::get('site_name'));
+                 $setting->brand = e(Input::get('brand'));
                  $setting->custom_css = e(Input::get('custom_css'));
              }
 

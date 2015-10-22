@@ -10,6 +10,7 @@ composer.phar
 /app/config/*/session.php
 /app/config/*/database.php
 /app/config/*/app.php
+/app/config/*/ldap.php
 public/packages/*
 public/uploads/models/*
 public/uploads/avatars/*
@@ -25,10 +26,6 @@ public/uploads/logo.png
 public/assets/.siteflow
 app/config/local/session.php
 .couscous
+app/storage/dumps/*
 tests/_support/_generated/*
 tests/_data/scenarios
-nbproject/*
-app/config/local/ldap.php
-app/storage/dumps/*
-app/config/packages/schickling/backup/config.php
-app/config/app.backup.php

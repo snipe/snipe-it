@@ -254,6 +254,61 @@ class LocationsController extends AdminController
 
     }
 
+    public function getDatatable()
+    {
+        $locations = Location::select(array('id','name','address','address2','city','state','zip','country','parent_id','currency'))->with('assets')
+        ->whereNull('deleted_at');
+
+        if (Input::has('search')) {
+            $locations = $locations->TextSearch(e(Input::get('search')));
+        }
+
+        if (Input::has('offset')) {
+            $offset = e(Input::get('offset'));
+        } else {
+            $offset = 0;
+        }
+
+        if (Input::has('limit')) {
+            $limit = e(Input::get('limit'));
+        } else {
+            $limit = 50;
+        }
+
+        $allowed_columns = ['id','name','address','city','state','country','currency'];
+        $order = Input::get('order') === 'asc' ? 'asc' : 'desc';
+        $sort = in_array(Input::get('sort'), $allowed_columns) ? Input::get('sort') : 'created_at';
+
+        $locations->orderBy($sort, $order);
+
+        $locationsCount = $locations->count();
+        $locations = $locations->skip($offset)->take($limit)->get();
+
+        $rows = array();
+
+        foreach($locations as $location) {
+            $actions = '<a href="'.route('update/location', $location->id).'" class="btn btn-warning btn-sm" style="margin-right:5px;"><i class="fa fa-pencil icon-white"></i></a><a data-html="false" class="btn delete-asset btn-danger btn-sm" data-toggle="modal" href="'.route('delete/location', $location->id).'" data-content="'.Lang::get('admin/locations/message.delete.confirm').'" data-title="'.Lang::get('general.delete').' '.htmlspecialchars($location->name).'?" onClick="return false;"><i class="fa fa-trash icon-white"></i></a>';
+
+            $rows[] = array(
+                'id'            => $location->id,
+                'name'          => link_to('admin/locations/'.$location->id.'/view', $location->name),
+                'parent'        => ($location->parent) ? $location->parent->name : '',
+                'assets'        => ($location->assets->count() + $location->assignedassets->count()),
+                'address'       => ($location->address) ? $location->address: '',
+                'city'          => $location->city,
+                'state'         => $location->state,
+                'country'       => $location->country,
+                'currency'      => $location->currency,
+                'actions'       => $actions
+            );
+        }
+
+        $data = array('total' => $locationsCount, 'rows' => $rows);
+
+        return $data;
+
+    }
+
 
 
 }
