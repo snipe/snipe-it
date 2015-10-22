@@ -28,6 +28,7 @@
             data-cookie-id-table="categoriesTable">
 		        <thead>
 		            <tr>
+                        <th data-sortable="true" data-field="id" data-visible="false">@lang('general.id')</th>
 		                <th data-sortable="true" data-field="name">{{Lang::get('admin/categories/table.title')}}</th>
 		                <th data-sortable="true" data-field="category_type">{{Lang::get('general.type')}}</th>
 		                <th data-searchable="false" data-sortable="false" data-field="count">{{Lang::get('general.assets')}}</th>

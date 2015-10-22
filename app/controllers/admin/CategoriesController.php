@@ -224,7 +224,7 @@ class CategoriesController extends AdminController
             $categories = $categories->TextSearch(Input::get('search'));
         }
 
-        $allowed_columns = ['name','category_type'];
+        $allowed_columns = ['id','name','category_type'];
         $order = Input::get('order') === 'asc' ? 'asc' : 'desc';
         $sort = in_array(Input::get('sort'), $allowed_columns) ? Input::get('sort') : 'created_at';
 
@@ -239,6 +239,7 @@ class CategoriesController extends AdminController
             $actions = '<a href="'.route('update/category', $category->id).'" class="btn btn-warning btn-sm" style="margin-right:5px;"><i class="fa fa-pencil icon-white"></i></a><a data-html="false" class="btn delete-asset btn-danger btn-sm" data-toggle="modal" href="'.route('delete/category', $category->id).'" data-content="'.Lang::get('admin/categories/message.delete.confirm').'" data-title="'.Lang::get('general.delete').' '.htmlspecialchars($category->name).'?" onClick="return false;"><i class="fa fa-trash icon-white"></i></a>';
 
             $rows[] = array(
+                'id'      => $category->id,
                 'name'  => $category->name,
                 'category_type' => ucwords($category->category_type),
                 'count'         => ($category->category_type=='asset') ? link_to('/admin/settings/categories/'.$category->id.'/view', $category->assetscount()) : $category->accessoriescount(),

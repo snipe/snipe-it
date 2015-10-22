@@ -26,6 +26,7 @@
     data-cookie-id-table="licenseTable">
         <thead>
             <tr>
+                <th data-sortable="true" data-field="id" data-visible="false">@lang('general.id')</th>
                 <th data-field="name">{{Lang::get('admin/licenses/table.title')}}</th>
                 <th data-field="serial">{{Lang::get('admin/licenses/table.serial')}}</th>
                 <th data-field="totalSeats">{{Lang::get('admin/licenses/form.seats')}}</th>

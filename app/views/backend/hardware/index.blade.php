@@ -57,8 +57,10 @@
     data-cookie-id-table="assetsTable">
         <thead>
             <tr>
+
                 <th data-class="hidden-xs" data-switchable="false" data-searchable="false" data-sortable="false" data-field="checkbox"><div class="text-center"><input type="checkbox" id="checkAll" style="padding-left: 0px;"></div></th>
-                <th data-sortable="true" data-field="name">{{Lang::get('admin/hardware/form.name')}}</th>
+                <th data-sortable="true" data-field="id" data-visible="false">@lang('general.id')</th>
+                <th data-sortable="true" data-field="name"  data-visible="false">{{Lang::get('admin/hardware/form.name')}}</th>
                 <th data-sortable="true" data-field="asset_tag">{{Lang::get('admin/hardware/table.asset_tag')}}</th>
                 <th data-sortable="true" data-field="serial">{{Lang::get('admin/hardware/table.serial')}}</th>
                 <th data-sortable="true" data-field="model">{{Lang::get('admin/hardware/form.model')}}</th>

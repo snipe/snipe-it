@@ -1131,7 +1131,7 @@ class AssetsController extends AdminController
          $assets = $assets->TextSearch(Input::get('search'));
      }
 
-    $allowed_columns = ['name','asset_tag','serial','model','checkout_date','category','notes'];
+    $allowed_columns = ['id','name','asset_tag','serial','model','checkout_date','category','notes'];
     $order = Input::get('order') === 'asc' ? 'asc' : 'desc';
     $sort = in_array(Input::get('sort'), $allowed_columns) ? Input::get('sort') : 'asset_tag';
 
@@ -1177,6 +1177,7 @@ class AssetsController extends AdminController
 
         $rows[] = array(
             'checkbox'      =>'<div class="text-center"><input type="checkbox" name="edit_asset['.$asset->id.']" class="one_required"></div>',
+            'id'        => $asset->id,
             'name'          => '<a title="'.$asset->name.'" href="hardware/'.$asset->id.'/view">'.$asset->name.'</a>',
             'asset_tag'     => '<a title="'.$asset->asset_tag.'" href="hardware/'.$asset->id.'/view">'.$asset->asset_tag.'</a>',
             'serial'        => $asset->serial,

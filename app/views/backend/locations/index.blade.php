@@ -27,6 +27,7 @@ Locations ::
     data-cookie-id-table="locationsTable">
         <thead>
             <tr>
+                <th data-sortable="true" data-field="id" data-visible="false">@lang('general.id')</th>
                 <th data-sortable="true" data-field="name">@lang('admin/locations/table.name')</th>
                 <th data-sortable="false" data-field="parent">@lang('admin/locations/table.parent')</th>
                 <th data-searchable="false" data-sortable="false" data-field="assets">@lang('general.assets')</th>

@@ -893,7 +893,7 @@ class LicensesController extends AdminController
             $licenses = $licenses->TextSearch(Input::get('search'));
         }
 
-        $allowed_columns = ['name'];
+        $allowed_columns = ['id','name'];
         $order = Input::get('order') === 'asc' ? 'asc' : 'desc';
         $sort = in_array(Input::get('sort'), $allowed_columns) ? Input::get('sort') : 'created_at';
 
@@ -908,6 +908,7 @@ class LicensesController extends AdminController
             $actions = '<span style="white-space: nowrap;"><a href="'.route('freecheckout/license', $license->id).'" class="btn btn-primary btn-sm" style="margin-right:5px;" '.(($license->remaincount() > 0) ? '' : 'disabled').'>'.Lang::get('general.checkout').'</a> <a href="'.route('clone/license', $license->id).'" class="btn btn-info btn-sm" style="margin-right:5px;" title="Clone asset"><i class="fa fa-files-o"></i></a><a href="'.route('update/license', $license->id).'" class="btn btn-warning btn-sm" style="margin-right:5px;"><i class="fa fa-pencil icon-white"></i></a><a data-html="false" class="btn delete-asset btn-danger btn-sm" data-toggle="modal" href="'.route('delete/license', $license->id).'" data-content="'.Lang::get('admin/licenses/message.delete.confirm').'" data-title="'.Lang::get('general.delete').' '.htmlspecialchars($license->name).'?" onClick="return false;"><i class="fa fa-trash icon-white"></i></a></span>';
 
             $rows[] = array(
+                'id'                => $license->id,
                 'name'              => link_to('/admin/licenses/'.$license->id.'/view', $license->name),
                 'serial'            => link_to('/admin/licenses/'.$license->id.'/view', mb_strimwidth($license->serial, 0, 50, "...")),
                 'totalSeats'        => $license->totalSeatsByLicenseID(),
