@@ -8,7 +8,7 @@ currentMenu: importing-assets
 
 There is an asset import tool in later versions of Snipe-IT ( > `1.2.8`). It is available through the command-line only, as very large file uploading and processing will cause memory exhaustion issues on many servers<sup>*</sup>.
 
-<sup>*</sup>There is a beta web-based file-upload and import tool currently on the develop branch and slated for the next release. You'll find a `sample.csv` already in the import page which you can try out. This web-based importer is in beta and shouldn't be used in production yet.
+<sup>*</sup>There is a beta web-based file-upload and import tool currently on the develop branch and slated for the next release. You'll find a `sample.csv` already in the import page which you can try out. This web-based importer is in beta and shouldn't be used in production yet, and should be limited to imports of 1000 records at a time or less. We're working on making it able to handle more records at a time.
 
 Make sure you have your organization's domain name filled out in the `domain` value in `app/config/production/app.php`, so that it knows what domain to use when generating email addresses if none are provided in your CSV.
 
@@ -29,7 +29,7 @@ php artisan asset-import:csv path/to/your/file.csv --email_format=firstname.last
 The importer will be looking for a CSV in the format of:
 
 ```
-Name, Email	Username, Asset Name, Asset Category, Asset Model, Manufacturer, Asset Model Number, Asset Serial, Asset Tag, Location Name, Asset Notes, Purchase Date, Purchase Cost
+Name (Firstname Lastname), Email, Username, Asset Name, Asset Category, Asset Model, Manufacturer, Asset Model Number, Asset Serial, Asset Tag, Location Name, Asset Notes, Purchase Date, Purchase Cost
 ```
 
 The importer will ignore the first line of your CSV, so if you don't have a header row, you should add one.
