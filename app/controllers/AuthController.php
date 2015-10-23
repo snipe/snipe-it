@@ -52,8 +52,9 @@ class AuthController extends BaseController
                     $entry = ldap_first_entry($connection, $results);
                     if ( ($userDn = @ldap_get_dn($connection, $entry)) !== false ) {
                         if( ($isBound = ldap_bind($connection, $userDn, $password)) == "true") {
-                            $user_info = array_change_key_case(ldap_get_attributes($connection, $entry),CASE_LOWER);
-                            return ($returnUser ? $user_info : true);
+                            return $returnUser ?
+                                array_change_key_case(ldap_get_attributes($connection, $entry),CASE_LOWER)
+                                : true;
                         }
                     }
                 }
