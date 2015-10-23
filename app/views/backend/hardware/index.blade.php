@@ -60,19 +60,20 @@
 
                 <th data-class="hidden-xs" data-switchable="false" data-searchable="false" data-sortable="false" data-field="checkbox"><div class="text-center"><input type="checkbox" id="checkAll" style="padding-left: 0px;"></div></th>
                 <th data-sortable="true" data-field="id" data-visible="false">@lang('general.id')</th>
-                <th data-sortable="true" data-field="name"  data-visible="false">{{Lang::get('admin/hardware/form.name')}}</th>
-                <th data-sortable="true" data-field="asset_tag">{{Lang::get('admin/hardware/table.asset_tag')}}</th>
-                <th data-sortable="true" data-field="serial">{{Lang::get('admin/hardware/table.serial')}}</th>
-                <th data-sortable="true" data-field="model">{{Lang::get('admin/hardware/form.model')}}</th>
-                <th data-sortable="true" data-field="status">{{Lang::get('admin/hardware/table.status')}}</th>
-                <th data-sortable="true" data-field="location">{{Lang::get('admin/hardware/table.location')}}</th>
-                <th data-sortable="true" data-field="category">{{Lang::get('general.category')}}</th>
-                <th data-sortable="true" data-field="eol">{{Lang::get('general.eol')}}</th>
-                <th data-sortable="true" data-field="notes">{{Lang::get('general.notes')}}</th>
-                <th data-sortable="true" data-field="order">{{Lang::get('admin/hardware/form.order')}}</th>
-                <th data-sortable="true" data-field="checkout_date">{{Lang::get('admin/hardware/table.checkout_date')}}</th>
-                <th data-switchable="false" data-searchable="false" data-sortable="false" data-field="change">{{Lang::get('admin/hardware/table.change')}}</th>
-                <th data-switchable="false" data-searchable="false" data-sortable="false" data-field="actions" >{{Lang::get('table.actions')}}</th>
+                <th data-sortable="true" data-field="name"  data-visible="false">@lang('admin/hardware/form.name')</th>
+                <th data-sortable="true" data-field="asset_tag">@lang('admin/hardware/table.asset_tag')</th>
+                <th data-sortable="true" data-field="serial">@lang('admin/hardware/table.serial')</th>
+                <th data-sortable="true" data-field="model">@lang('admin/hardware/form.model')</th>
+                <th data-sortable="true" data-field="status">@lang('admin/hardware/table.status')</th>
+                <th data-sortable="true" data-field="location">@lang('admin/hardware/table.location')</th>
+                <th data-sortable="true" data-field="category">@lang('general.category')</th>
+                <th data-sortable="true" data-field="eol">@lang('general.eol')</th>
+                <th data-sortable="true" data-field="notes">@lang('general.notes')</th>
+                <th data-sortable="true" data-field="order">@lang('admin/hardware/form.order')</th>
+                <th data-sortable="true" data-field="checkout_date">@lang('admin/hardware/table.checkout_date')</th>
+                <th data-sortable="true" data-field="expected_checkin">@lang('admin/hardware/form.expected_checkin')</th>
+                <th data-switchable="false" data-searchable="false" data-sortable="false" data-field="change">@lang('admin/hardware/table.change')</th>
+                <th data-switchable="false" data-searchable="false" data-sortable="false" data-field="actions" >@lang('table.actions')</th>
             </tr>
         </thead>
         <tfoot>
