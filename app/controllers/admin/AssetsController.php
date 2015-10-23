@@ -1129,7 +1129,7 @@ class AssetsController extends AdminController
 
       }
 
-    $allowed_columns = ['id','name','asset_tag','serial','model','checkout_date','category','notes','expected_checkin'];
+    $allowed_columns = ['id','name','asset_tag','serial','model','checkout_date','category','notes','expected_checkin','order_number'];
     $order = Input::get('order') === 'asc' ? 'asc' : 'desc';
     $sort = in_array(Input::get('sort'), $allowed_columns) ? Input::get('sort') : 'asset_tag';
 
@@ -1185,10 +1185,10 @@ class AssetsController extends AdminController
             'model'         => ($asset->model) ? $asset->model->name : 'No model',
             'status'        => ($asset->assigneduser) ? link_to('../admin/users/'.$asset->assigned_to.'/view', $asset->assigneduser->fullName()) : (($asset->assetstatus) ? $asset->assetstatus->name : ''),
             'location'      => (($asset->assigneduser) && ($asset->assigneduser->userloc!='')) ? link_to('admin/settings/locations/'.$asset->assigneduser->userloc->id.'/edit', $asset->assigneduser->userloc->name) : (($asset->defaultLoc!='') ? link_to('admin/settings/locations/'.$asset->defaultLoc->id.'/edit', $asset->defaultLoc->name) : ''),
-            'category'      => ($asset->model->category) ? $asset->model->category->name : 'No category',
+            'category'      => ($asset->model->category) ? $asset->model->category->name : '',
             'eol'           => ($asset->eol_date()) ? $asset->eol_date() : '',
             'notes'         => $asset->notes,
-            'order_number'  => ($asset->order_number!='') ? '<a href="../hardware/?order_number='.$asset->order_number.'">'.$asset->order_number.'</a>' : 'none',
+            'order_number'  => ($asset->order_number!='') ? '<a href="../hardware/?order_number='.$asset->order_number.'">'.$asset->order_number.'</a>' : '',
             'checkout_date' => (($asset->assigned_to!='')&&($asset->assetlog->first())) ? $asset->assetlog->first()->created_at->format('Y-m-d') : '',
             'expected_checkin' => (($asset->assigned_to!='') && ($asset->assetlog->first()) && ($asset->assetlog->first()->expected_checkin!='')) ? $asset->assetlog->first()->expected_checkin : '',
             'change'        => ($inout) ? $inout : '',
