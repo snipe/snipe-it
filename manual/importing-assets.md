@@ -32,14 +32,14 @@ The importer will be looking for a CSV in the format of:
 Name (Firstname Lastname), Email, Username, Asset Name, Asset Category, Asset Model, Manufacturer, Asset Model Number, Asset Serial, Asset Tag, Location Name, Asset Notes, Purchase Date, Purchase Cost
 ```
 
-The importer will ignore the first line of your CSV, so if you don't have a header row, you should add one.
+The importer will ignore the first line of your CSV, so if you don't have a header row, you should add one. **There should not be any blank lines at the end of the CSV.**
 
 [__Download a sample CSV with dummy data__](http://docs.snipeitapp.com/sample-assets.csv)
 
 | Field   | Example Data | Required | Notes |
 | ------------- | ------------- |
 |Name|`Firstname Lastname` | No| No commas. First name first, last name last |
-|Email| `you@example.com`| No|If empty, will be generated using the `email_format` and `domain` you provide in the import command|
+|Email| `you@example.com`| No|If empty, will be generated using the `email_format` and `domain` you provide in your `app/config/production/app.php`|
 |Username| `yourname.lastname`| No|If empty, will be generated using the `username_format` you provide in the import command|
 |Asset Name |`Karen 2015`| No |  |
 |Asset Category |`Laptop`| Yes | Created if it doesn't exist |
