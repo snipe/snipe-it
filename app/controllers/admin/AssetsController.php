@@ -416,7 +416,7 @@ class AssetsController extends AdminController
     	if (Input::get('checkout_at')!= date("Y-m-d")){
 			$checkout_at = e(Input::get('checkout_at')).' 00:00:00';
     	} else {
-            $checkout_at = date("Y-m-d h:i:s");
+            $checkout_at = date("Y-m-d H:i:s");
         }
 
         if (Input::has('expected_checkin')) {
@@ -495,7 +495,7 @@ class AssetsController extends AdminController
         	 if (Input::has('checkin_at')) {
 
         	 	if (!strtotime(Input::get('checkin_at'))) {
-					$logaction->created_at = date("Y-m-d h:i:s");
+					$logaction->created_at = date("Y-m-d H:i:s");
         	 	} elseif (Input::get('checkin_at')!= date("Y-m-d")) {
 					$logaction->created_at = e(Input::get('checkin_at')).' 00:00:00';
 				}
@@ -824,7 +824,7 @@ class AssetsController extends AdminController
 						$logaction->user_id = Sentry::getUser()->id;
 						$logaction->note = e(Input::get('notes'));
 						$logaction->checkedout_to =  NULL;
-						$logaction->created_at =  date("Y-m-d h:i:s");
+						$logaction->created_at =  date("Y-m-d H:i:s");
 						$logaction->filename =  $filename;
 						$log = $logaction->logaction('uploaded');
 					} else {
@@ -1049,7 +1049,7 @@ class AssetsController extends AdminController
 			            $logaction = new Actionlog();
 			            $logaction->asset_id = $key;
 			            $logaction->asset_type = 'hardware';
-			            $logaction->created_at =  date("Y-m-d h:i:s");
+			            $logaction->created_at =  date("Y-m-d H:i:s");
 
 			            if (Input::has('rtd_location_id')) {
 			            	$logaction->location_id = e(Input::get('rtd_location_id'));
