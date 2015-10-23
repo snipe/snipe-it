@@ -37,7 +37,14 @@
 <div class="row header">
     <div class="col-md-12">
         <a href="{{ route('create/hardware') }}" class="btn btn-success pull-right"><i class="fa fa-plus icon-white"></i> @lang('general.create')</a>
-        <h3>@yield('title0')</h3>
+        <h3>@yield('title0')
+
+             @if (Input::has('order_number'))
+                  - Order {{{ Input::get('order_number') }}}
+             @endif
+
+
+       </h3>
     </div>
 </div>
 
@@ -69,7 +76,7 @@
                 <th data-sortable="true" data-field="category">@lang('general.category')</th>
                 <th data-sortable="true" data-field="eol">@lang('general.eol')</th>
                 <th data-sortable="true" data-field="notes">@lang('general.notes')</th>
-                <th data-sortable="true" data-field="order">@lang('admin/hardware/form.order')</th>
+                <th data-sortable="true" data-field="order_number">@lang('admin/hardware/form.order')</th>
                 <th data-sortable="true" data-field="checkout_date">@lang('admin/hardware/table.checkout_date')</th>
                 <th data-sortable="true" data-field="expected_checkin">@lang('admin/hardware/form.expected_checkin')</th>
                 <th data-switchable="false" data-searchable="false" data-sortable="false" data-field="change">@lang('admin/hardware/table.change')</th>
