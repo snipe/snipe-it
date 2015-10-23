@@ -421,8 +421,8 @@ class AssetsController extends AdminController
 
         if (Input::has('expected_checkin')) {
         	if (Input::get('expected_checkin')!= date("Y-m-d")){
-				$expected_checkin = e(Input::get('expected_checkin')).' 00:00:00';
-			}
+			$expected_checkin = e(Input::get('expected_checkin'));
+		}
     	} else {
             $expected_checkin = null;
         }
@@ -1129,7 +1129,7 @@ class AssetsController extends AdminController
 
       }
 
-    $allowed_columns = ['id','name','asset_tag','serial','model','checkout_date','category','notes'];
+    $allowed_columns = ['id','name','asset_tag','serial','model','checkout_date','category','notes','expected_checkin'];
     $order = Input::get('order') === 'asc' ? 'asc' : 'desc';
     $sort = in_array(Input::get('sort'), $allowed_columns) ? Input::get('sort') : 'asset_tag';
 
@@ -1141,6 +1141,9 @@ class AssetsController extends AdminController
         case 'checkout_date':
             $assets = $assets->OrderCheckout($order)->first();
             break;
+      case 'expected_checkin':
+          $assets = $assets->OrderExpectedCheckin($order)->first();
+          break;
         case 'category':
             $assets = $assets->OrderCategory($order);
             break;
@@ -1187,6 +1190,7 @@ class AssetsController extends AdminController
             'notes'         => $asset->notes,
             'order_number'  => ($asset->order_number!='') ? '<a href="../hardware/?order_number='.$asset->order_number.'">'.$asset->order_number.'</a>' : 'none',
             'checkout_date' => (($asset->assigned_to!='')&&($asset->assetlog->first())) ? $asset->assetlog->first()->created_at->format('Y-m-d') : '',
+            'expected_checkin' => (($asset->assigned_to!='') && ($asset->assetlog->first()) && ($asset->assetlog->first()->expected_checkin!='')) ? $asset->assetlog->first()->expected_checkin : '',
             'change'        => ($inout) ? $inout : '',
             'actions'       => ($actions) ? $actions : ''
             );
