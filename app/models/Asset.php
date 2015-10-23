@@ -682,6 +682,15 @@ class Asset extends Depreciable
         	->orderBy('asset_logs.created_at', $order);
 	}
 
+	public function scopeExpectedCheckin($query, $order)
+	{
+		return $query->join('asset_logs', function($join){
+            $join->on('assets.id', '=', 'asset_logs.asset_id');
+        	})->where('asset_logs.action_type', '=', 'checkout')
+        	->orderBy('asset_logs.expected_checkin', $order);
+	}
+
+
 	public function scopeOrderCategory($query, $order)
 	{
 		return $query->join('models', 'assets.model_id', '=', 'models.id')
