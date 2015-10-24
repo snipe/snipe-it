@@ -61,7 +61,7 @@
     data-url="{{route('api.hardware.list', array(''=>Input::get('status'),'order_number'=>Input::get('order_number')))}}"
     data-cookie="true"
     data-click-to-select="true"
-    data-cookie-id-table="assetsTable">
+    data-cookie-id-table="assetTable">
         <thead>
             <tr>
 
@@ -77,7 +77,7 @@
                 <th data-sortable="true" data-field="eol">@lang('general.eol')</th>
                 <th data-sortable="true" data-field="notes">@lang('general.notes')</th>
                 <th data-sortable="true" data-field="order_number">@lang('admin/hardware/form.order')</th>
-                <th data-sortable="true" data-field="checkout_date">@lang('admin/hardware/table.checkout_date')</th>
+                <th data-sortable="true" data-field="last_checkout">@lang('admin/hardware/table.checkout_date')</th>
                 <th data-sortable="true" data-field="expected_checkin">@lang('admin/hardware/form.expected_checkin')</th>
                 <th data-switchable="false" data-searchable="false" data-sortable="false" data-field="change">@lang('admin/hardware/table.change')</th>
                 <th data-switchable="false" data-searchable="false" data-sortable="false" data-field="actions" >@lang('table.actions')</th>
