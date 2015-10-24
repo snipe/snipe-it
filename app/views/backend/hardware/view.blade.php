@@ -162,10 +162,10 @@
             </div>
         @endif
 
-        @if ($asset->assetlog->first()->expected_checkin)
+        @if ($asset->expected_checkin!='')
             <div class="col-md-12" style="padding-bottom: 5px;">
                   <strong>@lang('admin/hardware/form.expected_checkin')</strong>
-               : {{{ $asset->assetlog->first()->expected_checkin }}}
+               : {{{ $asset->expected_checkin }}}
             </div>
        @endif
 

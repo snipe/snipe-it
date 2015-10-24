@@ -1141,6 +1141,9 @@ class AssetsController extends AdminController
         case 'category':
             $assets = $assets->OrderCategory($order);
             break;
+        case 'status':
+            $assets = $assets->OrderCategory($order);
+           break;
         default:
             $assets = $assets->orderBy($sort, $order);
             break;
