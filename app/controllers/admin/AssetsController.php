@@ -1129,7 +1129,20 @@ class AssetsController extends AdminController
 
       }
 
-    $allowed_columns = ['id','name','asset_tag','serial','model','last_checkout','category','notes','expected_checkin','order_number'];
+    $allowed_columns = [
+                        'id',
+                        'name',
+                        'asset_tag',
+                        'serial',
+                        'model',
+                        'last_checkout',
+                        'category',
+                        'notes',
+                        'expected_checkin',
+                        'order_number',
+                        'location'
+                      ];
+
     $order = Input::get('order') === 'asc' ? 'asc' : 'desc';
     $sort = in_array(Input::get('sort'), $allowed_columns) ? Input::get('sort') : 'asset_tag';
 
@@ -1140,6 +1153,9 @@ class AssetsController extends AdminController
             break;
         case 'category':
             $assets = $assets->OrderCategory($order);
+            break;
+        case 'location':
+            $assets = $assets->OrderLocation($order);
             break;
         case 'status':
             $assets = $assets->OrderCategory($order);

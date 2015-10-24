@@ -595,17 +595,38 @@ class Asset extends Depreciable
 		return $query->whereIn('model_id', $modelIdListing );
 	}
 
+  /**
+  * Query builder scope to get not-yet-accepted assets
+  *
+  * @param  Illuminate\Database\Query\Builder  $query  Query builder instance
+  *
+  * @return Illuminate\Database\Query\Builder          Modified query builder
+  */
 	public function scopeNotYetAccepted($query)
 	{
 		return $query->where("accepted","=","pending");
 	}
 
+  /**
+  * Query builder scope to get rejected assets
+  *
+  * @param  Illuminate\Database\Query\Builder  $query  Query builder instance
+  *
+  * @return Illuminate\Database\Query\Builder          Modified query builder
+  */
 	public function scopeRejected($query)
 	{
-	// $this->model->category->require_acceptance;
 		return $query->where("accepted","=","rejected");
 	}
 
+
+  /**
+  * Query builder scope to get accepted assets
+  *
+  * @param  Illuminate\Database\Query\Builder  $query  Query builder instance
+  *
+  * @return Illuminate\Database\Query\Builder          Modified query builder
+  */
 	public function scopeAccepted($query)
 	{
 		return $uery->where("accepted","=","accepted");
@@ -613,7 +634,7 @@ class Asset extends Depreciable
 
 
 	/**
-	* Query builder scope to search on text
+	* Query builder scope to search on text for complex Bootstrap Tables API
 	*
 	* @param  Illuminate\Database\Query\Builder  $query  Query builder instance
 	* @param  text                              $search    	 Search term
@@ -681,23 +702,14 @@ class Asset extends Depreciable
 		return $query->join('models', 'assets.model_id', '=', 'models.id')->orderBy('models.name', $order);
 	}
 
-	public function scopeOrderCheckout($query, $order)
-	{
-		return $query->join('asset_logs', function($join){
-            $join->on('assets.id', '=', 'asset_logs.asset_id');
-        	})->where('asset_logs.action_type', '=', 'checkout')
-        	->orderBy('asset_logs.created_at', $order);
-	}
-
-	public function scopeExpectedCheckin($query, $order)
-	{
-		return $query->join('asset_logs', function($join){
-            $join->on('assets.id', '=', 'asset_logs.asset_id');
-        	})->where('asset_logs.action_type', '=', 'checkout')
-        	->orderBy('asset_logs.expected_checkin', $order);
-	}
-
-
+  /**
+  * Query builder scope to order on category
+  *
+  * @param  Illuminate\Database\Query\Builder  $query  Query builder instance
+  * @param  text                              $order    	 Order
+  *
+  * @return Illuminate\Database\Query\Builder          Modified query builder
+  */
 	public function scopeOrderCategory($query, $order)
 	{
 		return $query->join('models', 'assets.model_id', '=', 'models.id')
@@ -705,6 +717,19 @@ class Asset extends Depreciable
             ->orderBy('categories.name', $order);
 	}
 
-
+  /**
+	* Query builder scope to order on model
+	*
+	* @param  Illuminate\Database\Query\Builder  $query  Query builder instance
+	* @param  text                              $order    	 Order
+	*
+	* @return Illuminate\Database\Query\Builder          Modified query builder
+  * TODO: Extend this method out for checked out assets as well. Right now it
+  * only checks the location name related to rtd_location_id 
+	*/
+	public function scopeOrderLocation($query, $order)
+	{
+		return $query->join('locations', 'locations.id', '=', 'assets.rtd_location_id')->orderBy('locations.name', $order);
+	}
 
 }
