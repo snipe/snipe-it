@@ -72,13 +72,13 @@
                 <th data-sortable="true" data-field="serial">@lang('admin/hardware/table.serial')</th>
                 <th data-sortable="true" data-field="model">@lang('admin/hardware/form.model')</th>
                 <th data-sortable="true" data-field="status">@lang('admin/hardware/table.status')</th>
-                <th data-sortable="true" data-field="location">@lang('admin/hardware/table.location')</th>
-                <th data-sortable="true" data-field="category">@lang('general.category')</th>
-                <th data-sortable="true" data-field="eol">@lang('general.eol')</th>
-                <th data-sortable="true" data-field="notes">@lang('general.notes')</th>
-                <th data-sortable="true" data-field="order_number">@lang('admin/hardware/form.order')</th>
-                <th data-sortable="true" data-field="last_checkout">@lang('admin/hardware/table.checkout_date')</th>
-                <th data-sortable="true" data-field="expected_checkin">@lang('admin/hardware/form.expected_checkin')</th>
+                <th data-sortable="true" data-field="location" data-searchable="true">@lang('admin/hardware/table.location')</th>
+                <th data-sortable="true" data-field="category" data-searchable="true">@lang('general.category')</th>
+                <th data-sortable="false" data-field="eol"  data-searchable="true">@lang('general.eol')</th>
+                <th data-sortable="true" data-searchable="true" data-field="notes">@lang('general.notes')</th>
+                <th data-sortable="true" data-searchable="true"  data-field="order_number">@lang('admin/hardware/form.order')</th>
+                <th data-sortable="true" data-searchable="true" data-field="last_checkout">@lang('admin/hardware/table.checkout_date')</th>
+                <th data-sortable="true" data-field="expected_checkin" data-searchable="true">@lang('admin/hardware/form.expected_checkin')</th>
                 <th data-switchable="false" data-searchable="false" data-sortable="false" data-field="change">@lang('admin/hardware/table.change')</th>
                 <th data-switchable="false" data-searchable="false" data-sortable="false" data-field="actions" >@lang('table.actions')</th>
             </tr>
