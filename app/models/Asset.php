@@ -27,6 +27,13 @@ class Asset extends Depreciable
          * Checkout asset
          */
         public function checkOutToUser($user, $admin, $checkout_at = null, $expected_checkin = null, $note = null, $name = null) {
+
+		if ($expected_checkin) {
+			$this->expected_checkin = $expected_checkin ;
+		}
+
+		$this->last_checkout = $checkout_at;
+
             $this->assigneduser()->associate($user);
             $this->name = $name;
 
