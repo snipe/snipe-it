@@ -32,6 +32,8 @@
                         <th data-sortable="true" data-field="name">{{Lang::get('admin/consumables/table.title')}}</th>
                         <th data-switchable="false" data-searchable="false" data-sortable="false" data-field="qty">{{Lang::get('admin/consumables/general.total')}}</th>
                         <th data-switchable="false" data-searchable="false" data-sortable="false" data-field="numRemaining">{{Lang::get('admin/consumables/general.remaining')}}</th>
+                        <th data-switchable="false" data-searchable="false" data-sortable="false" data-field="actions">{{ Lang::get('table.actions') }}</th>
+
                     </tr>
                 </thead>
             </table>
