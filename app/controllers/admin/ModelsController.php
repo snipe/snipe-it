@@ -15,6 +15,7 @@ use Str;
 use Validator;
 use View;
 use Datatable;
+use Asset;
 
 //use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -317,7 +318,7 @@ class ModelsController extends AdminController
 
 
     /**
-    *  Get the asset information to present to the model view page
+    *  Get the model information to present to the model view page
     *
     * @param  int  $assetId
     * @return View
@@ -339,7 +340,14 @@ class ModelsController extends AdminController
 
     }
 
-        public function getClone($modelId = null)
+    /**
+    *  Get the clone page to clone a model
+    *
+    * @param  int  $modelId
+    * @return View
+    **/
+
+    public function getClone($modelId = null)
     {
         // Check if the model exists
         if (is_null($model_to_clone = Model::find($modelId))) {
@@ -363,6 +371,14 @@ class ModelsController extends AdminController
         return $view;
 
     }
+
+
+    /**
+    *  Get the JSON response for the bootstrap table list view
+    *
+    * @param  string  $status
+    * @return JSON
+    **/
 
     public function getDatatable($status = null)
     {
@@ -422,16 +438,45 @@ class ModelsController extends AdminController
     }
 
 
+    /**
+    *  Get the asset information to present to the model view page
+    *
+    * @param  int  $modelID
+    * @return View
+    **/
     public function getDataView($modelID)
     {
-        $model = Model::withTrashed()->find($modelID);
-        $modelassets = $model->assets;
+        $assets = Asset::where('model_id','=',$modelID)->withTrashed();
 
-        $modelassetsCount = $modelassets->Count();
+        if (Input::has('search')) {
+            $assets = $assets->TextSearch(Input::get('search'));
+        }
+
+        if (Input::has('offset')) {
+            $offset = e(Input::get('offset'));
+        } else {
+            $offset = 0;
+        }
+
+        if (Input::has('limit')) {
+            $limit = e(Input::get('limit'));
+        } else {
+            $limit = 50;
+        }
+
+
+        $allowed_columns = ['name', 'serial','asset_tag'];
+        $order = Input::get('order') === 'asc' ? 'asc' : 'desc';
+        $sort = in_array(Input::get('sort'), $allowed_columns) ? Input::get('sort') : 'created_at';
+
+        $assets = $assets->orderBy($sort, $order);
+
+        $assetsCount = $assets->count();
+        $assets = $assets->skip($offset)->take($limit)->get();
 
         $rows = array();
 
-        foreach ($modelassets as $asset) {
+        foreach ($assets as $asset) {
             if (($asset->assigned_to !='') && ($asset->assigned_to > 0)) {
                 $actions = '<a href="'.route('checkin/hardware', $asset->id).'" class="btn btn-primary btn-sm">'.Lang::get('general.checkin').'</a>';
             } else {
@@ -439,6 +484,7 @@ class ModelsController extends AdminController
             }
 
             $rows[] = array(
+                'id'            => $asset->id,
                 'name'          => link_to('/hardware/'.$asset->id.'/view', $asset->showAssetName()),
                 'asset_tag'     => link_to('hardware/'.$asset->id.'/view', $asset->asset_tag),
                 'serial'        => $asset->serial,
@@ -447,7 +493,7 @@ class ModelsController extends AdminController
                 );
         }
 
-        $data = array('total' => $modelassetsCount, 'rows' => $rows);
+        $data = array('total' => $assetsCount, 'rows' => $rows);
 
         return $data;
     }

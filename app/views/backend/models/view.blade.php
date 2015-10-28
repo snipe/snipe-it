@@ -58,14 +58,15 @@
                               data-url="{{route('api.models.view', $model->id)}}"
                               data-cookie="true"
                               data-click-to-select="true"
-                              data-cookie-id-table="modelDetailViewTable">
+                              data-cookie-id-table="modeldetailsViewTable">
                                     <thead>
                                         <tr>
 
-                                            <th data-sortable="true" data-field="name">{{Lang::get('general.name')}}</th>
+                                            <th data-sortable="true" data-field="id" data-searchable="false" data-visible="false">{{Lang::get('general.id')}}</th>
+                                            <th data-sortable="true" data-field="name" data-searchable="true">{{Lang::get('general.name')}}</th>
                                             <th data-sortable="true" data-field="asset_tag">{{Lang::get('general.asset_tag')}}</th>
                                             <th data-sortable="true" data-field="serial">{{Lang::get('admin/hardware/table.serial')}}</th>
-                                            <th data-sortable="true" data-field="assigned_to">{{Lang::get('general.user')}}</th>
+                                            <th data-sortable="false" data-field="assigned_to">{{Lang::get('general.user')}}</th>
                                             <th data-switchable="false" data-searchable="false" data-sortable="false" data-field="actions">{{ Lang::get('table.actions') }}</th>
                                         </tr>
                                     </thead>
