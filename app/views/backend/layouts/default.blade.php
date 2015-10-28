@@ -45,7 +45,7 @@
         <!-- global header javascripts -->
         <script src="{{ asset('assets/js/jquery-latest.js') }}"></script>
         <script src="{{ asset('assets/js/bootstrap.min.js') }}"></script>
-        
+
         <script>
             window.snipeit = {
                 settings: {
@@ -108,12 +108,12 @@
             </button>
 
 
-	            @if (Setting::getSettings()->brand === 3)
+	            @if (Setting::getSettings()->brand == '3')
                     <a class="navbar-brand" href="{{ Config::get('app.url') }}" style="padding: 5px;">
                     <img src="{{ Config::get('app.url') }}/uploads/{{{ Setting::getSettings()->logo }}}">
                     {{{ Setting::getSettings()->site_name }}}
                     </a>
-                @elseif (Setting::getSettings()->brand === 2)
+                @elseif (Setting::getSettings()->brand == '2')
 	            	<a class="navbar-brand" href="{{ Config::get('app.url') }}" style="padding: 5px;">
 	            	<img src="{{ Config::get('app.url') }}/uploads/{{{ Setting::getSettings()->logo }}}">
 	            	</a>
