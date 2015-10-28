@@ -22,11 +22,14 @@ class AuthController extends BaseController
     /**
      * Authenticates a user to LDAP
      *
-     * @return  true    if the username and/or password provided are valid
-     *          false   if the username and/or password provided are invalid
-     *
+     * @param $username
+     * @param $password
+     * @param bool|false $returnUser
+     * @return bool true    if the username and/or password provided are valid
+     *              false   if the username and/or password provided are invalid
+     *         array of ldap_attributes if $returnUser is true
      */
-    function ldap($username, $password) {
+    function ldap($username, $password, $returnUser = false) {
 
         $ldaphost    = Config::get('ldap.url');
         $ldaprdn     = Config::get('ldap.username');
@@ -35,11 +38,11 @@ class AuthController extends BaseController
         $filterQuery = Config::get('ldap.authentication.filter.query') . $username;
         $ldapversion = Config::get('ldap.version');
 
-	// Connecting to LDAP
-	$connection = ldap_connect($ldaphost) or die("Could not connect to {$ldaphost}");
-    // Needed for AD
-    ldap_set_option($connection, LDAP_OPT_REFERRALS, 0);
-    ldap_set_option($connection, LDAP_OPT_PROTOCOL_VERSION,$ldapversion);
+	    // Connecting to LDAP
+        $connection = ldap_connect($ldaphost) or die("Could not connect to {$ldaphost}");
+        // Needed for AD
+        ldap_set_option($connection, LDAP_OPT_REFERRALS, 0);
+        ldap_set_option($connection, LDAP_OPT_PROTOCOL_VERSION,$ldapversion);
 
         try {
             if ($connection) {
@@ -49,7 +52,9 @@ class AuthController extends BaseController
                     $entry = ldap_first_entry($connection, $results);
                     if ( ($userDn = @ldap_get_dn($connection, $entry)) !== false ) {
                         if( ($isBound = ldap_bind($connection, $userDn, $password)) == "true") {
-                            return true;
+                            return $returnUser ?
+                                array_change_key_case(ldap_get_attributes($connection, $entry),CASE_LOWER)
+                                : true;
                         }
                     }
                 }
@@ -59,6 +64,65 @@ class AuthController extends BaseController
         }
 	ldap_close($connection);
 	return false;
+    }
+
+    /**
+     * Create user from LDAP attributes
+     *
+     * @param $ldapatttibutes
+     * @return array|bool
+     */
+    function createUserFromLdap($ldapatttibutes){
+        //Get LDAP attribute config
+        $ldap_result_username = Config::get('ldap.result.username');
+        $ldap_result_emp_num = Config::get('ldap.result.emp.num');
+        $ldap_result_last_name = Config::get('ldap.result.last.name');
+        $ldap_result_first_name = Config::get('ldap.result.first.name');
+        $ldap_result_email = Config::get('ldap.result.email');
+
+        //Get LDAP user data
+        $item = array();
+        $item["username"] = isset( $ldapatttibutes[$ldap_result_username][0] ) ? $ldapatttibutes[$ldap_result_username][0] : "";
+        $item["employee_number"] = isset( $ldapatttibutes[$ldap_result_emp_num][0] ) ? $ldapatttibutes[$ldap_result_emp_num][0] : "";
+        $item["lastname"] = isset( $ldapatttibutes[$ldap_result_last_name][0] ) ? $ldapatttibutes[$ldap_result_last_name][0] : "";
+        $item["firstname"] = isset( $ldapatttibutes[$ldap_result_first_name][0] ) ? $ldapatttibutes[$ldap_result_first_name][0] : "";
+        $item["email"] = isset( $ldapatttibutes[$ldap_result_email][0] ) ? $ldapatttibutes[$ldap_result_email][0] : "" ;
+
+        //create user
+        if(!empty($item["username"]) && !empty($item['email'])) {
+            $pass = substr(str_shuffle("0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"), 0, 10);
+
+            $newuser = array(
+                'first_name' => $item["firstname"],
+                'last_name' => $item["lastname"],
+                'username' => $item["username"],
+                'email' => $item["email"],
+                'employee_num' => $item["employee_number"],
+                'password' => $pass,
+                'activated' => 1,
+                'location_id' => null,
+                'permissions' => '{"user":1}',
+                'notes' => 'Imported from LDAP'
+            );
+
+            DB::table('users')->insert($newuser);
+            $updateuser = Sentry::findUserByLogin($item["username"]);
+
+            // Update the user details
+            $updateuser->password = $pass;
+
+            // Update the user
+            $updateuser->save();
+        } else {
+            throw new Cartalyst\Sentry\Users\UserNotFoundException();
+        }
+
+        //$item["note"] = "<strong>created</strong>";
+        $credentials = array(
+            'username' => $item["username"],
+            'password' => $pass,
+        );
+        return $credentials;
     }
 
 
@@ -83,7 +147,6 @@ class AuthController extends BaseController
             // Ooops.. something went wrong
             return Redirect::back()->withInput()->withErrors($validator);
         }
-
         try {
 
             /**
@@ -93,8 +156,18 @@ class AuthController extends BaseController
 
             // Try to get the user from the database.
             $user = (array) DB::table('users')->where('username', Input::get('username'))->first();
+            //If user does not exist and authenticates sucessfully with LDAP we will create it onf the fly and sign in with default permissions
+            if(!$user){
+                if($userattr = $this->ldap(Input::get('username'), Input::get('password'),true) ){
+                    LOG::debug("Creating LDAP authenticated user.");
+                    $credentials = $this->createUserFromLdap($userattr);
+                    Sentry::authenticate($credentials, Input::get('remember-me', 0));
 
-            if ($user && strpos($user["notes"],'LDAP') !== false) {
+
+                }
+            }
+
+            else if ($user && strpos($user["notes"],'LDAP') !== false) {
                 LOG::debug("Authenticating user against LDAP.");
                 if( $this->ldap(Input::get('username'), Input::get('password')) ) {
                         LOG::debug("valid login");
