@@ -1,6 +1,8 @@
 FROM ubuntu
 MAINTAINER Brady Wetherington <uberbrady@gmail.com>
 
+RUN echo 'debconf debconf/frontend select Noninteractive' | debconf-set-selections
+
 RUN apt-get update && apt-get install -y \
 apache2-bin \
 libapache2-mod-php5 \
@@ -12,6 +14,7 @@ php5-gd \
 patch \
 curl \
 vim \
+dialog \
 git 
 
 RUN php5enmod mcrypt
@@ -49,7 +52,7 @@ RUN chown -R docker /var/www/html
 RUN cd /tmp;curl -sS https://getcomposer.org/installer | php;mv /tmp/composer.phar /usr/local/bin/composer
 
 # Get dependencies
-RUN cd /var/www/html;composer install
+RUN cd /var/www/html;composer config -g github-oauth.github.com 101a9ecc0b90241b3f588b86e8ef52c516f82a03;composer install --prefer-dist --no-interaction
 
 ############### APPLICATION INSTALL/INIT #################
 
