@@ -38,7 +38,6 @@ echo ""
 echo ""
 echo "  Welcome to Snipe-IT Inventory Installer for Centos and Debian!"
 echo ""
-echo $distro
 case $distro in
         *Ubuntu*|*Debian*)
                 echo "  The installer has detected Ubuntu/Debian as the OS detected."
