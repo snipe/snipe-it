@@ -15,6 +15,11 @@
 ######################################################
 
 #First things first, let's set some variables and find our distro.
+# ensure running as root
+if [ "$(id -u)" != "0" ]; then
+  exec sudo "$0" "$@" 
+fi
+
 clear
 si="Snipe-IT"
 hostname="$(hostname)"
