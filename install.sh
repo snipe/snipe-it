@@ -132,7 +132,7 @@ case $distro in
 		apachefile=/etc/apache2/sites-available/$fqdn.conf
 		sudo apt-get update ; sudo apt-get -y upgrade ;	sudo apt-get install -y git unzip
 
-		wget https://github.com/snipe/snipe-it/archive/$file
+		wget -P /tmp/snipeit/ https://github.com/snipe/snipe-it/archive/$file
 		sudo unzip $file -d /var/www/
 
 		#We already established MySQL root & user PWs, so we dont need to be prompted. Let's go ahead and install Apache, PHP and MySQL.
@@ -298,10 +298,10 @@ case $distro in
 		echo "##  Download Snipe-IT from githut and put it in the web directory.";
 
 		wget https://github.com/snipe/snipe-it/archive/$file &> /dev/null
-		unzip -qo master.zip -d /tmp/ 
-		cp -Rv /tmp/snipe-it-master $webdir/$name
+		unzip -qo master.zip -d /tmp/snipeit/
+		cp -R /tmp/snipeit/snipe-it-master $webdir/$name
 
-		#Change permissions on directories
+		# Change permissions on directories
 		sudo chmod -R 755 $webdir/$name/app/storage
 		sudo chmod -R 755 $webdir/$name/app/private_uploads
 		sudo chmod -R 755 $webdir/$name/public/uploads
@@ -309,18 +309,21 @@ case $distro in
 		
 		echo "##  Start the mariaDB server.";
 		#/sbin/service mysqld start
+		# Makde mariaDB start on boot and restart the daemon
 		systemctl enable mariadb.service
 		systemctl restart mariadb.service
 
-		#Create MySQL accounts
-		echo "##  Create MySQL accounts"
-		mysqladmin -u root password $mysqlrootpw
-		echo ""
-		echo "  ***Your Current ROOT password is---> $mysqlrootpw"
-		echo "  ***Use $mysqlrootpw at the following prompt for root login***"
-		echo ""
-		
+		# Have user set own root password when securing install
+		# and just set the snipeit database user at the beginning
 		/usr/bin/mysql_secure_installation 
+
+		#Create MySQL accounts
+		# echo "##  Create MySQL accounts"
+		# mysqladmin -u root password $mysqlrootpw
+		# echo ""
+		# echo "  ***Your Current ROOT password is---> $mysqlrootpw"
+		# echo "  ***Use $mysqlrootpw at the following prompt for root login***"
+		# echo ""		
 
 		#Install PHP stuff.
 		echo "##  Install PHP Stuff";
@@ -352,9 +355,9 @@ case $distro in
 		echo "##  Setup hosts file.";
 		echo >> $hosts "127.0.0.1 $hostname $fqdn"
 
+		# Make apache start on boot and restart the daemon
 		systemctl enable httpd.service
 		systemctl restart httpd.service
-		# /sbin/service httpd restart
 
 		#Modify the Snipe-It files necessary for a production environment.
 		replace "'www.yourserver.com'" "'$hostname'" -- $webdir/$name/bootstrap/start.php
@@ -375,13 +378,13 @@ case $distro in
 		php composer.phar install --no-dev --prefer-source
 		php artisan app:install --env=production
 
+#TODO detect if SELinux and firewall are enabled to decide what to do
 		#Add SELinux and firewall exception/rules. Youll have to allow 443 if you want ssl connectivity.
 		# chcon -R -h -t httpd_sys_script_rw_t $webdir/$name/
 		# firewall-cmd --zone=public --add-port=80/tcp --permanent
 		# firewall-cmd --reload
 
 		systemctl restart httpd.service
-		# service httpd restart
 		;;
 esac
 
@@ -429,4 +432,7 @@ echo ""
 echo "  ***$si should now be installed. open up http://$fqdn in a web browser to verify.***"
 echo ""
 echo ""
+echo "##  Cleaning up..."
+rm -rf /tmp/snipeit/
+echo "##  Done!"
 sleep 1
