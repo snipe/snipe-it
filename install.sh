@@ -1,4 +1,4 @@
-#!/bin/bash -e
+#!/bin/bash
 
 ######################################################
 # 	    Snipe-It Install Script    	             #
@@ -24,49 +24,65 @@ file=master.zip
 dir=/var/www/snipe-it-master
 
 ans=default
+
+echo "
+	   _____       _                  __________
+	  / ___/____  (_)___  ___        /  _/_  __/
+	  \__ \/ __ \/ / __ \/ _ \______ / /  / /   
+	 ___/ / / / / / /_/ /  __/_____// /  / /    
+	/____/_/ /_/_/ .___/\___/     /___/ /_/     
+	            /_/                             
+"
+
+echo ""
+echo ""
+echo "  Welcome to Snipe-IT Inventory Installer for Centos and Debian!"
+echo ""
+echo $distro
 case $distro in
         *Ubuntu*|*Debian*)
-                echo "Ubuntu/Debian detected. Carry forth."
+                echo "  The installer has detected Ubuntu/Debian as the OS detected."
                 distro=u
                 ;;
         *centos*)
-                echo "CentOS detected. Carry forth."
+                echo "  The installer has detected CentOS as the OS."
                 distro=c
                 ;;
         *)
-                echo "Not sure of this OS. Exiting for safety."
+                echo "  The installer was unable to determine your OS. Exiting for safety."
 		exit
                 ;;
 esac
 
 #Get your FQDN.
 echo ""
-echo "$si install script - Installing $ans"
-echo "Q. What is the FQDN of your server? (example: www.yourserver.com)"
+echo "  $si install script - Installing $ans"
+echo -n "  Q. What is the FQDN of your server? (example: www.yourserver.com): "
 read fqdn
 echo ""
 
 #Do you want to set your own passwords, or have me generate random ones?
 ans=default
 until [[ $ans == "yes" ]] || [[ $ans == "no" ]]; do
-echo "Q. Do you want me to automatically create the MySQL root & user passwords? (y/n)"
+echo -n "  Q. Do you want me to automatically create the MySQL root & user passwords? (y/n) "
 read setpw
 
 case $setpw in
         [yY] | [yY][Ee][Ss] )
                 mysqlrootpw="$(echo `< /dev/urandom tr -dc _A-Za-z-0-9 | head -c8`)"
                 mysqluserpw="$(echo `< /dev/urandom tr -dc _A-Za-z-0-9 | head -c8`)"
-                echo "I'm putting this into /root/mysqlpasswords ... PLEASE REMOVE that file after you have recorded the passwords somewhere safe!"
+                echo "  I'm putting this into /root/mysqlpasswords ... "
+				echo "  PLEASE REMOVE that file after you have recorded the passwords somewhere safe!"
                 ans="yes"
                 ;;
         [nN] | [n|N][O|o] )
-		echo "Q. What do you want your root PW to be?"
-                read mysqlrootpw
-                echo "Q. What do you want your snipeit user PW to be?"
-                read mysqluserpw
+				echo -n  "  Q. What do you want your root PW to be?"
+                read -s mysqlrootpw
+                echo -n  "  Q. What do you want your snipeit user PW to be?"
+                read -s mysqluserpw
 				ans="no"
                 ;;
-        *) echo "Invalid answer. Please type y or n"
+        *) 		echo "  Invalid answer. Please type y or n"
                 ;;
 esac
 done
@@ -85,10 +101,16 @@ echo >> $passwordfile "MySQL Passwords..."
 echo >> $passwordfile "Root: $mysqlrootpw"
 echo >> $passwordfile "User (snipeit): $mysqluserpw"
 echo >> $passwordfile "32 bit random string: $random32"
-echo "MySQL ROOT password: $mysqlrootpw"
-echo "MySQL USER (snipeit) password: $mysqluserpw"
-echo "32 bit random string: $random32"
-echo "These passwords have been exported to /root/mysqlpasswords.txt...I recommend You delete this file for security purposes"
+
+echo "  ************************************************************"
+echo "  *  MySQL ROOT password: $mysqlrootpw                           *"
+echo "  *  MySQL USER (snipeit) password: $mysqluserpw                 *"
+echo "  *  32 bit random string: $random32  *"
+echo "  ************************************************************"
+echo ""
+echo "  These passwords have been exported to /root/mysqlpasswords.txt..."
+echo "  I recommend You delete this file for security purposes"
+echo ""
 
 #Let us make it so only root can read the file. Again, this isn't best practice, so please remove these after the install.
 chown root:root $passwordfile $creatstufffile
@@ -107,7 +129,7 @@ if [[ $distro == "u" ]]; then
 	sudo apt-get install -y php5 php5-mcrypt php5-curl php5-mysql php5-gd
 
 	#Create MySQL accounts
-	echo "Create MySQL accounts"
+	echo "##  Create MySQL accounts"
 	sudo mysqladmin -u root password $mysqlrootpw
 	sudo mysql -u root -p$mysqlrootpw < /root/createstuff.sql
 
@@ -138,7 +160,7 @@ if [[ $distro == "u" ]]; then
 	sudo chmod -R 755 $dir/app/private_uploads
 	sudo chmod -R 755 $dir/public/uploads
 	sudo chown -R www-data:www-data /var/www/
-	echo "Finished permission changes."
+	echo "##  Finished permission changes."
 
 	#Modify the Snipe-It files necessary for a production environment.
 	replace "'www.yourserver.com'" "'$hostname'" -- $dir/bootstrap/start.php
@@ -162,14 +184,10 @@ if [[ $distro == "u" ]]; then
 
 	service apache2 restart
 else
+#####################################  Install for Centos/Redhat  ##############################################
 
 	#Make directories so we can create a new apache vhost
-	sudo mkdir /etc/httpd/
-	sudo mkdir /etc/httpd/sites-available/
-	sudo mkdir /etc/httpd/sites-enabled/
-	apachefile=/etc/httpd/sites-available/$fqdn.conf
-	apachefileen=/etc/httpd/sites-enabled/$fqdn.conf
-	apachecfg=/etc/httpd/conf/httpd.conf
+	apachefile=/etc/httpd/conf.d/snipe-it.conf
 
 	#Allow us to get the mysql engine
 	sudo rpm -Uvh http://dev.mysql.com/get/mysql-community-release-el7-5.noarch.rpm
@@ -181,12 +199,14 @@ else
 	sudo /sbin/service mysqld start
 
 	#Create MySQL accounts
-	echo "Create MySQL accounts"
-	sudo mysqladmin -u root password $mysqlrootpw
+	echo "##  Create MySQL accounts"
+	mysqladmin -u root password $mysqlrootpw
 	echo ""
-	echo "***Your Current ROOT password is---> $mysqlrootpw"
-	echo "***Use $mysqlrootpw at the following prompt for root login***"
-	sudo /usr/bin/mysql_secure_installation
+	echo "  ***Your Current ROOT password is---> $mysqlrootpw"
+	echo "  ***Use $mysqlrootpw at the following prompt for root login***"
+	echo ""
+	
+	/usr/bin/mysql_secure_installation 
 
 	#Install PHP stuff.
 	sudo yum -y install php php-mysql php-bcmath.x86_64 php-cli.x86_64 php-common.x86_64 php-embedded.x86_64 php-gd.x86_64 php-mbstring
@@ -209,6 +229,8 @@ else
 	echo >> $apachefile "        ErrorLog /var/log/httpd/snipe.error.log"
 	echo >> $apachefile "        CustomLog /var/log/access.log combined"
 	echo >> $apachefile "</VirtualHost>"
+	
+	echo "##  Setup hosts file.";
 	echo >> $hosts "127.0.0.1 $hostname $fqdn"
 	sudo ln -s $apachefile $apachefileen
 
@@ -251,39 +273,48 @@ else
 	service httpd restart
 fi
 
-echo ""; echo ""; echo ""
-echo "***I have no idea about your mail environment, so if you want email capability, open up the following***"
-echo "nano -w $dir/app/config/production/mail.php"
-echo "And edit the attributes appropriately."
+echo ""
+echo ""
+echo ""
+echo "  ***I have no idea about your mail environment, so if you want email capability, open up the following***"
+echo "  nano -w $dir/app/config/production/mail.php"
+echo "  And edit the attributes appropriately."
+echo ""
+echo ""
 sleep 1
 
-echo "";echo "";echo ""
+echo ""
+
 ans=default
 until [[ $ans == "yes" ]] || [[ $ans == "no" ]]; do
-echo "Q. Shall I delete the password files I created? (Remember to record the passwords before deleting) (y/n)"
+echo "  Q. Shall I delete the password files I created? (Remember to record the passwords before deleting) (y/n)"
 read setpw
 case $setpw in
 
       [yY] | [yY][Ee][Ss] )
                 rm $createstufffile
 				rm $passwordfile
-                echo "$createstufffile and $passwordfile files have been removed."
+                echo "  $createstufffile and $passwordfile files have been removed."
 				ans=yes
 		;;
         [nN] | [n|N][O|o] )
-                echo "Ok, I won't remove the file. Please for the love of security, record the passwords and delete this file regardless."
-				echo "$si cannot be held responsible if this file is compromised!"
-				echo "From Snipe: I cannot encourage or even facilitate poor security practices, and still sleep the few, frantic hours I sleep at night."
+                echo "  Ok, I won't remove the file. Please for the love of security, record the passwords and delete this file regardless."
+				echo "  $si cannot be held responsible if this file is compromised!"
+				echo "  From Snipe: I cannot encourage or even facilitate poor security practices, and still sleep the few, frantic hours I sleep at night."
 				ans=no
 		;;
         *)
-		echo "Please select a valid option"
+		echo "  Please select a valid option"
 		;;
 esac
 done
 
-echo ""; echo ""
-echo "***If you want mail capabilities, open $dir/app/config/production/mail.php and fill out the attributes***"
-echo ""; echo ""
-echo "***$si should now be installed. open up http://$fqdn in a web browser to verify.***"
+echo ""
+echo ""
+echo "  ***If you want mail capabilities, open $dir/app/config/production/mail.php and fill out the attributes***"
+echo ""
+echo ""
+echo "  ***$si should now be installed. open up http://$fqdn in a web browser to verify.***"
+echo ""
+echo ""
 sleep 1
