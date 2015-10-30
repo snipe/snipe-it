@@ -56,6 +56,7 @@ esac
 #Get your FQDN.
 echo ""
 echo "  $si install script - Installing $ans"
+echo ""
 echo -n "  Q. What is the FQDN of your server? (example: www.yourserver.com): "
 read fqdn
 echo ""
