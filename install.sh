@@ -124,9 +124,8 @@ echo ""
 chown root:root $passwordfile $creatstufffile
 chmod 700 $passwordfile $createstufffile
 
-if [[ $distro == "u" ]]; then
 case $distro in
-	[u] )
+	u )
 		#####################################  Install for Debian/ubuntu  ##############################################
 
 		#Update/upgrade Debian/Ubuntu repositories, get the latest version of git.
@@ -196,8 +195,7 @@ case $distro in
 
 		service apache2 restart
 		;;
-
-	[c6] )
+	c6 )
 		#####################################  Install for Centos/Redhat 6  ##############################################
 
 		#Make directories so we can create a new apache vhost
@@ -286,8 +284,7 @@ case $distro in
 
 		service httpd restart
 		;;
-
-	[c7]
+	c7 )
 		#####################################  Install for Centos/Redhat 7  ##############################################
 
 		#Make directories so we can create a new apache vhost
@@ -378,7 +375,7 @@ case $distro in
 		php composer.phar install --no-dev --prefer-source
 		php artisan app:install --env=production
 
-		#Add SELinux and firewall exception/rules. You'll have to allow 443 if you want ssl connectivity.
+		#Add SELinux and firewall exception/rules. Youll have to allow 443 if you want ssl connectivity.
 		# chcon -R -h -t httpd_sys_script_rw_t $webdir/$name/
 		# firewall-cmd --zone=public --add-port=80/tcp --permanent
 		# firewall-cmd --reload
