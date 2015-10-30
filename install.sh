@@ -79,7 +79,7 @@ case $setpw in
         [yY] | [yY][Ee][Ss] )
                 mysqlrootpw="$(echo `< /dev/urandom tr -dc _A-Za-z-0-9 | head -c8`)"
                 mysqluserpw="$(echo `< /dev/urandom tr -dc _A-Za-z-0-9 | head -c8`)"
-                echo "  I'm putting this into /root/mysqlpasswords ... "
+                echo "  I'm putting this into /tmp/snipeit/mysqlpasswords ... "
 				echo "  PLEASE REMOVE that file after you have recorded the passwords somewhere safe!"
                 ans="yes"
                 ;;
@@ -100,8 +100,8 @@ random32="$(echo `< /dev/urandom tr -dc _A-Za-z-0-9 | head -c32`)"
 
 #createstuff.sql will be injected to the database during install. mysqlpasswords.txt is a file that will contain the root and snipeit user passwords.
 #Again, this file should be removed, which will be a prompt at the end of the script.
-createstufffile=/root/createstuff.sql
-passwordfile=/root/mysqlpasswords.txt
+createstufffile=/tmp/snipeit/createstuff.sql
+passwordfile=/tmp/snipeit/mysqlpasswords.txt
 
 echo >> $createstufffile "CREATE DATABASE snipeit;"
 echo >> $createstufffile "GRANT ALL PRIVILEGES ON snipeit.* TO snipeit@localhost IDENTIFIED BY '$mysqluserpw';"
@@ -116,7 +116,7 @@ echo "  *  MySQL USER (snipeit) password: $mysqluserpw                 *"
 echo "  *  32 bit random string: $random32  *"
 echo "  ************************************************************"
 echo ""
-echo "  These passwords have been exported to /root/mysqlpasswords.txt..."
+echo "  These passwords have been exported to /tmp/snipeit/mysqlpasswords.txt..."
 echo "  I recommend You delete this file for security purposes"
 echo ""
 
@@ -142,7 +142,7 @@ case $distro in
 		#Create MySQL accounts
 		echo "##  Create MySQL accounts"
 		sudo mysqladmin -u root password $mysqlrootpw
-		sudo mysql -u root -p$mysqlrootpw < /root/createstuff.sql
+		sudo mysql -u root -p$mysqlrootpw < /tmp/snipeit/createstuff.sql
 
 		#Enable mcrypt and rewrite
 		sudo php5enmod mcrypt
@@ -272,7 +272,7 @@ case $distro in
 
 		#Install / configure composer
 		cd $dir
-		sudo mysql -u root -p$mysqlrootpw < /root/createstuff.sql
+		sudo mysql -u root -p$mysqlrootpw < /tmp/snipeit/createstuff.sql
 		curl -sS https://getcomposer.org/installer | php
 		php composer.phar install --no-dev --prefer-source
 		php artisan app:install --env=production
@@ -373,7 +373,7 @@ case $distro in
 
 		#Install / configure composer
 		cd $webdir/$name
-		sudo mysql -u root -p$mysqlrootpw < /root/createstuff.sql
+		mysql -u root -p < /tmp/snipeit/createstuff.sql
 		curl -sS https://getcomposer.org/installer | php
 		php composer.phar install --no-dev --prefer-source
 		php artisan app:install --env=production
