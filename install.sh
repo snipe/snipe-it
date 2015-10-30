@@ -26,8 +26,10 @@ hostname="$(hostname)"
 hosts=/etc/hosts
 distro="$(cat /proc/version)"
 file=master.zip
+#TODO replace dir with webdir and name
 dir=/var/www/snipe-it-master
-
+webdir=/var/www/html
+name="snipeit"
 ans=default
 
 echo "
@@ -43,6 +45,7 @@ echo ""
 echo ""
 echo "  Welcome to Snipe-IT Inventory Installer for Centos and Debian!"
 echo ""
+#TODO add centos/redhat version checking to determine <6 or 7
 case $distro in
         *Ubuntu*|*Debian*)
                 echo "  The installer has detected Ubuntu/Debian as the OS detected."
@@ -50,7 +53,7 @@ case $distro in
                 ;;
         *centos*)
                 echo "  The installer has detected CentOS as the OS."
-                distro=c
+                distro=c6
                 ;;
         *)
                 echo "  The installer was unable to determine your OS. Exiting for safety."
@@ -122,161 +125,268 @@ chown root:root $passwordfile $creatstufffile
 chmod 700 $passwordfile $createstufffile
 
 if [[ $distro == "u" ]]; then
-#Update/upgrade Debian/Ubuntu repositories, get the latest version of git.
-	apachefile=/etc/apache2/sites-available/$fqdn.conf
-	sudo apt-get update ; sudo apt-get -y upgrade ;	sudo apt-get install -y git unzip
+case $distro in
+	[u] )
+		#####################################  Install for Debian/ubuntu  ##############################################
 
-	wget https://github.com/snipe/snipe-it/archive/$file
-	sudo unzip $file -d /var/www/
+		#Update/upgrade Debian/Ubuntu repositories, get the latest version of git.
+		apachefile=/etc/apache2/sites-available/$fqdn.conf
+		sudo apt-get update ; sudo apt-get -y upgrade ;	sudo apt-get install -y git unzip
 
-	#We already established MySQL root & user PWs, so we dont need to be prompted. Let's go ahead and install Apache, PHP and MySQL.
-	sudo DEBIAN_FRONTEND=noninteractive apt-get install -y lamp-server^
-	sudo apt-get install -y php5 php5-mcrypt php5-curl php5-mysql php5-gd
+		wget https://github.com/snipe/snipe-it/archive/$file
+		sudo unzip $file -d /var/www/
 
-	#Create MySQL accounts
-	echo "##  Create MySQL accounts"
-	sudo mysqladmin -u root password $mysqlrootpw
-	sudo mysql -u root -p$mysqlrootpw < /root/createstuff.sql
+		#We already established MySQL root & user PWs, so we dont need to be prompted. Let's go ahead and install Apache, PHP and MySQL.
+		sudo DEBIAN_FRONTEND=noninteractive apt-get install -y lamp-server^
+		sudo apt-get install -y php5 php5-mcrypt php5-curl php5-mysql php5-gd
 
-	#Enable mcrypt and rewrite
-	sudo php5enmod mcrypt
-	sudo a2enmod rewrite
-	sudo ls -al /etc/apache2/mods-enabled/rewrite.load
+		#Create MySQL accounts
+		echo "##  Create MySQL accounts"
+		sudo mysqladmin -u root password $mysqlrootpw
+		sudo mysql -u root -p$mysqlrootpw < /root/createstuff.sql
 
-	#Create a new virtual host for Apache.
-	echo >> $apachefile ""
-	echo >> $apachefile ""
-	echo >> $apachefile "<VirtualHost *:80>"
-	echo >> $apachefile "ServerAdmin webmaster@localhost"
-	echo >> $apachefile "    <Directory $dir/public>"
-	echo >> $apachefile "        Require all granted"
-	echo >> $apachefile "        AllowOverride All"
-	echo >> $apachefile "   </Directory>"
-	echo >> $apachefile "    DocumentRoot $dir/public"
-	echo >> $apachefile "    ServerName $fqdn"
-	echo >> $apachefile "        ErrorLog "\${APACHE_LOG_DIR}"/error.log"
-	echo >> $apachefile "        CustomLog "\${APACHE_LOG_DIR}"/access.log combined"
-	echo >> $apachefile "</VirtualHost>"
-	echo >> $hosts "127.0.0.1 $hostname $fqdn"
-	a2ensite $fqdn.conf
+		#Enable mcrypt and rewrite
+		sudo php5enmod mcrypt
+		sudo a2enmod rewrite
+		sudo ls -al /etc/apache2/mods-enabled/rewrite.load
 
-	#Change permissions on directories
-	sudo chmod -R 755 $dir/app/storage
-	sudo chmod -R 755 $dir/app/private_uploads
-	sudo chmod -R 755 $dir/public/uploads
-	sudo chown -R www-data:www-data /var/www/
-	echo "##  Finished permission changes."
+		#Create a new virtual host for Apache.
+		echo >> $apachefile ""
+		echo >> $apachefile ""
+		echo >> $apachefile "<VirtualHost *:80>"
+		echo >> $apachefile "ServerAdmin webmaster@localhost"
+		echo >> $apachefile "    <Directory $dir/public>"
+		echo >> $apachefile "        Require all granted"
+		echo >> $apachefile "        AllowOverride All"
+		echo >> $apachefile "   </Directory>"
+		echo >> $apachefile "    DocumentRoot $dir/public"
+		echo >> $apachefile "    ServerName $fqdn"
+		echo >> $apachefile "        ErrorLog "\${APACHE_LOG_DIR}"/error.log"
+		echo >> $apachefile "        CustomLog "\${APACHE_LOG_DIR}"/access.log combined"
+		echo >> $apachefile "</VirtualHost>"
+		echo >> $hosts "127.0.0.1 $hostname $fqdn"
+		a2ensite $fqdn.conf
 
-	#Modify the Snipe-It files necessary for a production environment.
-	replace "'www.yourserver.com'" "'$hostname'" -- $dir/bootstrap/start.php
-	cp $dir/app/config/production/database.example.php $dir/app/config/production/database.php
-	replace "'snipeit_laravel'," "'snipeit'," -- $dir/app/config/production/database.php
-	replace "'travis'," "'snipeit'," -- $dir/app/config/production/database.php
-	replace "            'password'  => ''," "            'password'  => '$mysqluserpw'," -- $dir/app/config/production/database.php
-	replace "'http://production.yourserver.com'," "'http://$fqdn'," -- $dir/app/config/production/database.php
-	cp $dir/app/config/production/app.example.php $dir/app/config/production/app.php
-	replace "'http://production.yourserver.com'," "'http://$fqdn'," -- $dir/app/config/production/app.php
-	replace "'Change_this_key_or_snipe_will_get_ya'," "'$random32'," -- $dir/app/config/production/app.php
-	replace "'false'," "true," -- $dir/app/config/production/app.php
-	cp $dir/app/config/production/mail.example.php $dir/app/config/production/mail.php
+		#Change permissions on directories
+		sudo chmod -R 755 $dir/app/storage
+		sudo chmod -R 755 $dir/app/private_uploads
+		sudo chmod -R 755 $dir/public/uploads
+		sudo chown -R www-data:www-data /var/www/
+		echo "##  Finished permission changes."
 
-	#Install / configure composer
-	curl -sS https://getcomposer.org/installer | php
-	mv composer.phar /usr/local/bin/composer
-	cd $dir/
-	composer install --no-dev --prefer-source
-	php artisan app:install --env=production
+		#Modify the Snipe-It files necessary for a production environment.
+		replace "'www.yourserver.com'" "'$hostname'" -- $dir/bootstrap/start.php
+		cp $dir/app/config/production/database.example.php $dir/app/config/production/database.php
+		replace "'snipeit_laravel'," "'snipeit'," -- $dir/app/config/production/database.php
+		replace "'travis'," "'snipeit'," -- $dir/app/config/production/database.php
+		replace "            'password'  => ''," "            'password'  => '$mysqluserpw'," -- $dir/app/config/production/database.php
+		replace "'http://production.yourserver.com'," "'http://$fqdn'," -- $dir/app/config/production/database.php
+		cp $dir/app/config/production/app.example.php $dir/app/config/production/app.php
+		replace "'http://production.yourserver.com'," "'http://$fqdn'," -- $dir/app/config/production/app.php
+		replace "'Change_this_key_or_snipe_will_get_ya'," "'$random32'," -- $dir/app/config/production/app.php
+		replace "'false'," "true," -- $dir/app/config/production/app.php
+		cp $dir/app/config/production/mail.example.php $dir/app/config/production/mail.php
 
-	service apache2 restart
-else
-#####################################  Install for Centos/Redhat  ##############################################
+		#Install / configure composer
+		curl -sS https://getcomposer.org/installer | php
+		mv composer.phar /usr/local/bin/composer
+		cd $dir/
+		composer install --no-dev --prefer-source
+		php artisan app:install --env=production
 
-	#Make directories so we can create a new apache vhost
-	apachefile=/etc/httpd/conf.d/snipe-it.conf
+		service apache2 restart
+		;;
 
-	#Allow us to get the mysql engine
-	sudo rpm -Uvh http://dev.mysql.com/get/mysql-community-release-el7-5.noarch.rpm
-	sudo yum -y install httpd mysql-server wget git unzip
+	[c6] )
+		#####################################  Install for Centos/Redhat 6  ##############################################
 
-	wget https://github.com/snipe/snipe-it/archive/$file
-	sudo unzip $file -d /var/www/
+		#Make directories so we can create a new apache vhost
+		apachefile=/etc/httpd/conf.d/snipe-it.conf
 
-	sudo /sbin/service mysqld start
+		#Allow us to get the mysql engine
+		sudo rpm -Uvh http://dev.mysql.com/get/mysql-community-release-el7-5.noarch.rpm
+		sudo yum -y install httpd mysql-server wget git unzip
 
-	#Create MySQL accounts
-	echo "##  Create MySQL accounts"
-	mysqladmin -u root password $mysqlrootpw
-	echo ""
-	echo "  ***Your Current ROOT password is---> $mysqlrootpw"
-	echo "  ***Use $mysqlrootpw at the following prompt for root login***"
-	echo ""
-	
-	/usr/bin/mysql_secure_installation 
+		wget https://github.com/snipe/snipe-it/archive/$file
+		sudo unzip $file -d /var/www/
 
-	#Install PHP stuff.
-	sudo yum -y install php php-mysql php-bcmath.x86_64 php-cli.x86_64 php-common.x86_64 php-embedded.x86_64 php-gd.x86_64 php-mbstring
-	wget http://dl.fedoraproject.org/pub/epel/7/x86_64/e/epel-release-7-5.noarch.rpm
-	rpm -ivh epel-release-7-5.noarch.rpm
-	yum install -y --enablerepo="epel" php-mcrypt
+		sudo /sbin/service mysqld start
 
-	#Create the new virtual host in Apache.
-	echo >> $apachefile ""
-	echo >> $apachefile ""
-	echo >> $apachefile "<VirtualHost *:80>"
-	echo >> $apachefile "ServerAdmin webmaster@localhost"
-	echo >> $apachefile "    <Directory $dir/public>"
-	echo >> $apachefile "        Require all granted"
-	echo >> $apachefile "        AllowOverride All"
-	echo >> $apachefile "        Options +Indexes"
-	echo >> $apachefile "   </Directory>"
-	echo >> $apachefile "    DocumentRoot $dir/public"
-	echo >> $apachefile "    ServerName $fqdn"
-	echo >> $apachefile "        ErrorLog /var/log/httpd/snipe.error.log"
-	echo >> $apachefile "        CustomLog /var/log/access.log combined"
-	echo >> $apachefile "</VirtualHost>"
-	
-	echo "##  Setup hosts file.";
-	echo >> $hosts "127.0.0.1 $hostname $fqdn"
-	sudo ln -s $apachefile $apachefileen
+		#Create MySQL accounts
+		echo "##  Create MySQL accounts"
+		mysqladmin -u root password $mysqlrootpw
+		echo ""
+		echo "  ***Your Current ROOT password is---> $mysqlrootpw"
+		echo "  ***Use $mysqlrootpw at the following prompt for root login***"
+		echo ""
+		
+		/usr/bin/mysql_secure_installation 
 
-	#Enable rewrite and vhost
-	echo >> $apachecfg "LoadModule rewrite_module modules/mod_rewrite.so"
-	echo >> $apachecfg "IncludeOptional sites-enabled/*.conf"
+		#Install PHP stuff.
+		sudo yum -y install php php-mysql php-bcmath.x86_64 php-cli.x86_64 php-common.x86_64 php-embedded.x86_64 php-gd.x86_64 php-mbstring
+		wget http://dl.fedoraproject.org/pub/epel/7/x86_64/e/epel-release-7-5.noarch.rpm
+		rpm -ivh epel-release-7-5.noarch.rpm
+		yum install -y --enablerepo="epel" php-mcrypt
 
-	#Change permissions on directories
-	sudo chmod -R 755 $dir/app/storage
-	sudo chmod -R 755 $dir/app/private_uploads
-	sudo chmod -R 755 $dir/public/uploads
-	sudo chown -R apache:apache /var/www/
+		#Create the new virtual host in Apache.
+		echo >> $apachefile ""
+		echo >> $apachefile ""
+		echo >> $apachefile "<VirtualHost *:80>"
+		echo >> $apachefile "ServerAdmin webmaster@localhost"
+		echo >> $apachefile "    <Directory $dir/public>"
+		echo >> $apachefile "        Require all granted"
+		echo >> $apachefile "        AllowOverride All"
+		echo >> $apachefile "        Options +Indexes"
+		echo >> $apachefile "   </Directory>"
+		echo >> $apachefile "    DocumentRoot $dir/public"
+		echo >> $apachefile "    ServerName $fqdn"
+		echo >> $apachefile "        ErrorLog /var/log/httpd/snipe.error.log"
+		echo >> $apachefile "        CustomLog /var/log/access.log combined"
+		echo >> $apachefile "</VirtualHost>"
+		
+		echo "##  Setup hosts file.";
+		echo >> $hosts "127.0.0.1 $hostname $fqdn"
+		sudo ln -s $apachefile $apachefileen
 
-	service httpd restart
+		#Enable rewrite and vhost
+		echo >> $apachecfg "LoadModule rewrite_module modules/mod_rewrite.so"
+		echo >> $apachecfg "IncludeOptional sites-enabled/*.conf"
 
-	#Modify the Snipe-It files necessary for a production environment.
-	replace "'www.yourserver.com'" "'$hostname'" -- $dir/bootstrap/start.php
-	cp $dir/app/config/production/database.example.php $dir/app/config/production/database.php
-	replace "'snipeit_laravel'," "'snipeit'," -- $dir/app/config/production/database.php
-	replace "'travis'," "'snipeit'," -- $dir/app/config/production/database.php
-	replace "            'password'  => ''," "            'password'  => '$mysqluserpw'," -- $dir/app/config/production/database.php
-	replace "'http://production.yourserver.com'," "'http://$fqdn'," -- $dir/app/config/production/database.php
-	cp $dir/app/config/production/app.example.php $dir/app/config/production/app.php
-	replace "'http://production.yourserver.com'," "'http://$fqdn'," -- $dir/app/config/production/app.php
-	replace "'Change_this_key_or_snipe_will_get_ya'," "'$random32'," -- $dir/app/config/production/app.php
-	cp $dir/app/config/production/mail.example.php $dir/app/config/production/mail.php
+		#Change permissions on directories
+		sudo chmod -R 755 $dir/app/storage
+		sudo chmod -R 755 $dir/app/private_uploads
+		sudo chmod -R 755 $dir/public/uploads
+		sudo chown -R apache:apache /var/www/
 
-	#Install / configure composer
-	cd $dir
-	sudo mysql -u root -p$mysqlrootpw < /root/createstuff.sql
-	curl -sS https://getcomposer.org/installer | php
-	php composer.phar install --no-dev --prefer-source
-	php artisan app:install --env=production
+		service httpd restart
 
-	#Add SELinux and firewall exception/rules. You'll have to allow 443 if you want ssl connectivity.
-	chcon -R -h -t httpd_sys_script_rw_t $dir/
-	firewall-cmd --zone=public --add-port=80/tcp --permanent
-	firewall-cmd --reload
+		#Modify the Snipe-It files necessary for a production environment.
+		replace "'www.yourserver.com'" "'$hostname'" -- $dir/bootstrap/start.php
+		cp $dir/app/config/production/database.example.php $dir/app/config/production/database.php
+		replace "'snipeit_laravel'," "'snipeit'," -- $dir/app/config/production/database.php
+		replace "'travis'," "'snipeit'," -- $dir/app/config/production/database.php
+		replace "            'password'  => ''," "            'password'  => '$mysqluserpw'," -- $dir/app/config/production/database.php
+		replace "'http://production.yourserver.com'," "'http://$fqdn'," -- $dir/app/config/production/database.php
+		cp $dir/app/config/production/app.example.php $dir/app/config/production/app.php
+		replace "'http://production.yourserver.com'," "'http://$fqdn'," -- $dir/app/config/production/app.php
+		replace "'Change_this_key_or_snipe_will_get_ya'," "'$random32'," -- $dir/app/config/production/app.php
+		cp $dir/app/config/production/mail.example.php $dir/app/config/production/mail.php
 
-	service httpd restart
-fi
+		#Install / configure composer
+		cd $dir
+		sudo mysql -u root -p$mysqlrootpw < /root/createstuff.sql
+		curl -sS https://getcomposer.org/installer | php
+		php composer.phar install --no-dev --prefer-source
+		php artisan app:install --env=production
+
+		#Add SELinux and firewall exception/rules. You'll have to allow 443 if you want ssl connectivity.
+		chcon -R -h -t httpd_sys_script_rw_t $dir/
+		firewall-cmd --zone=public --add-port=80/tcp --permanent
+		firewall-cmd --reload
+
+		service httpd restart
+		;;
+
+	[c7]
+		#####################################  Install for Centos/Redhat 7  ##############################################
+
+		#Make directories so we can create a new apache vhost
+		apachefile=/etc/httpd/conf.d/snipe-it.conf
+
+		#Allow us to get the mysql engine
+		echo "##  Add IUS repo and install mariaDB and a few other packages.";
+		rpm -Uvh https://centos7.iuscommunity.org/ius-release.rpm > /dev/null
+		yum -y install httpd mariadb-server wget git unzip epel-release > /dev/null
+
+		echo "##  Download Snipe-IT from githut and put it in the web directory.";
+
+		wget https://github.com/snipe/snipe-it/archive/$file &> /dev/null
+		unzip -qo master.zip -d /tmp/ 
+		cp -Rv /tmp/snipe-it-master $webdir/$name
+
+		#Change permissions on directories
+		sudo chmod -R 755 $webdir/$name/app/storage
+		sudo chmod -R 755 $webdir/$name/app/private_uploads
+		sudo chmod -R 755 $webdir/$name/public/uploads
+		sudo chown -R apache:apache $webdir/$name
+		
+		echo "##  Start the mariaDB server.";
+		#/sbin/service mysqld start
+		systemctl enable mariadb.service
+		systemctl restart mariadb.service
+
+		#Create MySQL accounts
+		echo "##  Create MySQL accounts"
+		mysqladmin -u root password $mysqlrootpw
+		echo ""
+		echo "  ***Your Current ROOT password is---> $mysqlrootpw"
+		echo "  ***Use $mysqlrootpw at the following prompt for root login***"
+		echo ""
+		
+		/usr/bin/mysql_secure_installation 
+
+		#Install PHP stuff.
+		echo "##  Install PHP Stuff";
+		PACKAGES="php56u php56u-mysqlnd php56u-bcmath php56u-cli php56u-common php56u-embedded php56u-gd php56u-mbstring php56u-mcrypt"
+		
+		yum -y install $PACKAGES  > /dev/null
+		rpm --query --queryformat "    " $PACKAGES
+
+		#Create the new virtual host in Apache and enable rewrite
+		echo "##  Create the new virtual host in Apache.";
+
+		echo >> $apachefile ""
+		echo >> $apachefile ""
+		echo >> $apachefile "LoadModule rewrite_module modules/mod_rewrite.so"
+		echo >> $apachefile ""
+		echo >> $apachefile "<VirtualHost *:80>"
+		echo >> $apachefile "ServerAdmin webmaster@localhost"
+		echo >> $apachefile "    <Directory $webdir/$name/public>"
+		echo >> $apachefile "        Require all granted"
+		echo >> $apachefile "        AllowOverride All"
+		echo >> $apachefile "        Options +Indexes"
+		echo >> $apachefile "   </Directory>"
+		echo >> $apachefile "    DocumentRoot $webdir/$name/public"
+		echo >> $apachefile "    ServerName $fqdn"
+		echo >> $apachefile "        ErrorLog /var/log/httpd/snipe.error.log"
+		echo >> $apachefile "        CustomLog /var/log/access.log combined"
+		echo >> $apachefile "</VirtualHost>"
+		
+		echo "##  Setup hosts file.";
+		echo >> $hosts "127.0.0.1 $hostname $fqdn"
+
+		systemctl enable httpd.service
+		systemctl restart httpd.service
+		# /sbin/service httpd restart
+
+		#Modify the Snipe-It files necessary for a production environment.
+		replace "'www.yourserver.com'" "'$hostname'" -- $webdir/$name/bootstrap/start.php
+		cp $webdir/$name/app/config/production/database.example.php $webdir/$name/app/config/production/database.php
+		replace "'snipeit_laravel'," "'snipeit'," -- $webdir/$name/app/config/production/database.php
+		replace "'travis'," "'snipeit'," -- $webdir/$name/app/config/production/database.php
+		replace "            'password'  => ''," "            'password'  => '$mysqluserpw'," -- $webdir/$name/app/config/production/database.php
+		replace "'http://production.yourserver.com'," "'http://$fqdn'," -- $webdir/$name/app/config/production/database.php
+		cp $webdir/$name/app/config/production/app.example.php $webdir/$name/app/config/production/app.php
+		replace "'http://production.yourserver.com'," "'http://$fqdn'," -- $webdir/$name/app/config/production/app.php
+		replace "'Change_this_key_or_snipe_will_get_ya'," "'$random32'," -- $webdir/$name/app/config/production/app.php
+		cp $webdir/$name/app/config/production/mail.example.php $webdir/$name/app/config/production/mail.php
+
+		#Install / configure composer
+		cd $webdir/$name
+		sudo mysql -u root -p$mysqlrootpw < /root/createstuff.sql
+		curl -sS https://getcomposer.org/installer | php
+		php composer.phar install --no-dev --prefer-source
+		php artisan app:install --env=production
+
+		#Add SELinux and firewall exception/rules. You'll have to allow 443 if you want ssl connectivity.
+		# chcon -R -h -t httpd_sys_script_rw_t $webdir/$name/
+		# firewall-cmd --zone=public --add-port=80/tcp --permanent
+		# firewall-cmd --reload
+
+		systemctl restart httpd.service
+		# service httpd restart
+		;;
+esac
 
 echo ""
 echo ""
