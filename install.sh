@@ -1,9 +1,9 @@
 #!/bin/bash
 
 ######################################################
-# 	    Snipe-It Install Script    	             #
-#	   Script created by Mike Tucker             #
-#	     mtucker6784@gmail.com                   #
+#           Snipe-It Install Script                  #
+#          Script created by Mike Tucker             #
+#            mtucker6784@gmail.com                   #
 # This script is just to help streamline the         #
 # install process for Debian and CentOS              #
 # based distributions. I assume you will be          #
@@ -16,7 +16,7 @@
 
 # ensure running as root
 if [ "$(id -u)" != "0" ]; then
-  exec sudo "$0" "$@" 
+  exec sudo "$0" "$@"
 fi
 
 #First things first, let's set some variables and find our distro.
@@ -25,13 +25,24 @@ si="Snipe-IT"
 hostname="$(hostname)"
 fqdn="$(hostname --fqdn)"
 hosts=/etc/hosts
-distro="$(cat /proc/version)"
 file=master.zip
 webdir=/var/www/html
 name="snipeit"
 tmp=/tmp/$name
 ans=default
 mkdir $tmp
+
+#  Lets find what distro we are using and what version
+distro="$(cat /proc/version)"
+if grep -q ubuntu <<<$distro; then
+	for f in $(find /etc -type f -maxdepth 1 \( ! -wholename /etc/os-release ! -wholename /etc/lsb-release -wholename /etc/\*release -o -wholename /etc/\*version \) 2> /dev/null);
+	do
+		distro="${f:5:${#f}-13}"
+	done;
+	if [ "$distro" = "centos" ] || [ "$distro" = "redhat" ]; then
+		distro+="$(rpm -q --qf "%{VERSION}" $(rpm -q --whatprovides redhat-release))"
+	fi
+fi
 
 echo "
 	   _____       _                  __________
@@ -46,19 +57,23 @@ echo ""
 echo ""
 echo "  Welcome to Snipe-IT Inventory Installer for Centos and Debian!"
 echo ""
-#TODO add centos/redhat version checking to determine <6 or 7
+
 case $distro in
         *Ubuntu*|*Debian*)
                 echo "  The installer has detected Ubuntu/Debian as the OS."
-                distro=u
+                distro=debian
                 ;;
-        *centos*)
-                echo "  The installer has detected CentOS as the OS."
-                distro=c6
+        *centos6*|*redhat6*)
+                echo "  The installer has detected $distro $distVersion as the OS."
+                distro=redhat6
+                ;;
+        *centos7*|*redhat7*)
+                echo "  The installer has detected $distro $distVersion as the OS."
+                distro=redhat7
                 ;;
         *)
                 echo "  The installer was unable to determine your OS. Exiting for safety."
-		exit
+                exit
                 ;;
 esac
 
@@ -67,7 +82,7 @@ esac
 echo -n "  Q. What is the FQDN of your server? ($fqdn): "
 read fqdn
 if [ -z "$fqdn" ]; then
-	fqdn="$(hostname --fqdn)"
+        fqdn="$(hostname --fqdn)"
 fi
 echo "     Setting to $fqdn"
 echo ""
@@ -129,7 +144,7 @@ chown root:root $passwordfile $creatstufffile
 chmod 700 $passwordfile $createstufffile
 
 case $distro in
-	u )
+	debian)
 		#####################################  Install for Debian/ubuntu  ##############################################
 
 		#Update/upgrade Debian/Ubuntu repositories, get the latest version of git.
@@ -199,7 +214,7 @@ case $distro in
 
 		service apache2 restart
 		;;
-	c6 )
+	redhat6 )
 		#####################################  Install for Centos/Redhat 6  ##############################################
 
 		#Make directories so we can create a new apache vhost
@@ -311,7 +326,7 @@ case $distro in
 
 		service httpd restart
 		;;
-	c7 )
+	redhat7 )
 		#####################################  Install for Centos/Redhat 7  ##############################################
 
 		#Make directories so we can create a new apache vhost
