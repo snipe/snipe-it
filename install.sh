@@ -140,8 +140,8 @@ echo "  I recommend You delete this file for security purposes"
 echo ""
 
 #Let us make it so only root can read the file. Again, this isn't best practice, so please remove these after the install.
-chown root:root $passwordfile $creatstufffile
-chmod 700 $passwordfile $createstufffile
+chown root:root $passwordfile $dbSetup
+chmod 700 $passwordfile $dbSetup
 
 case $distro in
 	debian)
@@ -227,7 +227,7 @@ case $distro in
 		echo >> $mariadbRepo "[mariadb]"
 		echo >> $mariadbRepo "name = MariaDB"
 		echo >> $mariadbRepo "baseurl = http://yum.mariadb.org/10.0/centos7-amd64"
-		echo >> $mariadbRepo "gpgkey=https://yum.mariadb.org/RPM-GPG-KEY-MariaDB"
+		echo >> $mariadbRepo "gpgkey=https://yum.mariadb.org/RPM-GPG-KEY-MariaD6"
 		echo >> $mariadbRepo "gpgcheck=1"
 		echo >> $mariadbRepo "enable=1"
 
