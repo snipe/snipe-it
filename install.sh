@@ -34,7 +34,7 @@ mkdir $tmp
 
 #  Lets find what distro we are using and what version
 distro="$(cat /proc/version)"
-if grep -q ubuntu <<<$distro; then
+if grep -q centos <<<$distro; then
 	for f in $(find /etc -type f -maxdepth 1 \( ! -wholename /etc/os-release ! -wholename /etc/lsb-release -wholename /etc/\*release -o -wholename /etc/\*version \) 2> /dev/null);
 	do
 		distro="${f:5:${#f}-13}"
