@@ -18,18 +18,29 @@
 if [ "$(id -u)" != "0" ]; then
   exec sudo "$0" "$@"
 fi
-
 #First things first, let's set some variables and find our distro.
 clear
+
+name="snipeit"
 si="Snipe-IT"
 hostname="$(hostname)"
 fqdn="$(hostname --fqdn)"
+ans=default
 hosts=/etc/hosts
 file=master.zip
-name="snipeit"
 tmp=/tmp/$name
-ans=default
+
+rm -rf $tmp/
 mkdir $tmp
+
+function isinstalled {
+  if yum list installed "$@" >/dev/null 2>&1; then
+    true
+  else
+    false
+  fi
+}
+
 
 #  Lets find what distro we are using and what version
 distro="$(cat /proc/version)"
@@ -112,14 +123,13 @@ random32="$(echo `< /dev/urandom tr -dc _A-Za-z-0-9 | head -c32`)"
 
 #db_setup.sql will be injected to the database during install. 
 #Again, this file should be removed, which will be a prompt at the end of the script.
-dbSetup=$tmp/db_setup.sql
-
-echo >> $dbSetup "CREATE DATABASE snipeit;"
-echo >> $dbSetup "GRANT ALL PRIVILEGES ON snipeit.* TO snipeit@localhost IDENTIFIED BY '$mysqluserpw';"
+dbsetup=$tmp/db_setup.sql
+echo >> $dbsetup "CREATE DATABASE snipeit;"
+echo >> $dbsetup "GRANT ALL PRIVILEGES ON snipeit.* TO snipeit@localhost IDENTIFIED BY '$mysqluserpw';"
 
 #Let us make it so only root can read the file. Again, this isn't best practice, so please remove these after the install.
-chown root:root $dbSetup
-chmod 700 $dbSetup
+chown root:root $dbsetup
+chmod 700 $dbsetup
 
 case $distro in
 	debian)
@@ -180,7 +190,7 @@ case $distro in
 		replace "            'password'  => ''," "            'password'  => '$mysqluserpw'," -- $webdir/$name/app/config/production/database.php
 		replace "'http://production.yourserver.com'," "'http://$fqdn'," -- $webdir/$name/app/config/production/database.php
 		cp $webdir/$name/app/config/production/app.example.php $webdir/$name/app/config/production/app.php
-		replace "'http://production.yourserver.com'," "'http://$fqdn'," -- $webdir/$name/app/config/production/app.php
+		replace "'https://production.yourserver.com'," "'http://$fqdn'," -- $webdir/$name/app/config/production/app.php
 		replace "'Change_this_key_or_snipe_will_get_ya'," "'$random32'," -- $webdir/$name/app/config/production/app.php
 		replace "'false'," "true," -- $webdir/$name/app/config/production/app.php
 		cp $webdir/$name/app/config/production/mail.example.php $webdir/$name/app/config/production/mail.php
@@ -192,7 +202,9 @@ case $distro in
 		# Have user set own root password when securing install
 		# and just set the snipeit database user at the beginning
 		/usr/bin/mysql_secure_installation 
-		sudo mysql -u root -p < $tmp/$dbsetup
+
+		echo -n "##  Input your MySQL/MariaDB root password: "
+		sudo mysql -u root -p < $dbsetup
 
 		#Install / configure composer
 		curl -sS https://getcomposer.org/installer | php
@@ -278,9 +290,9 @@ case $distro in
 		# Make apache start on boot and restart the daemon
 		chkconfig httpd on
 		/sbin/service httpd start
-
+	##TODO get timezone and set it in file
 		# Set timezone
-		$tzone = $(grep ZONE /etc/sysconfig/clock);
+		$tzone=$(grep ZONE /etc/sysconfig/clock);
 
 		# if $tzone == 
 
@@ -292,13 +304,14 @@ case $distro in
 		replace "            'password'  => ''," "            'password'  => '$mysqluserpw'," -- $webdir/$name/app/config/production/database.php
 		replace "'http://production.yourserver.com'," "'http://$fqdn'," -- $webdir/$name/app/config/production/database.php
 		cp $webdir/$name/app/config/production/app.example.php $webdir/$name/app/config/production/app.php
-		replace "'http://production.yourserver.com'," "'http://$fqdn'," -- $webdir/$name/app/config/production/app.php
+		replace "'https://production.yourserver.com'," "'http://$fqdn'," -- $webdir/$name/app/config/production/app.php
 		replace "'Change_this_key_or_snipe_will_get_ya'," "'$random32'," -- $webdir/$name/app/config/production/app.php
 		cp $webdir/$name/app/config/production/mail.example.php $webdir/$name/app/config/production/mail.php
 
 		#Install / configure composer
 		cd $webdir/$name
-		mysql -u root -p < $tmp/$dbsetup
+		echo -n "##  Input your MySQL/MariaDB root password: "
+		mysql -u root -p < $dbsetup
 		curl -sS https://getcomposer.org/installer | php
 		php composer.phar install --no-dev --prefer-source
 		php artisan app:install --env=production
@@ -317,18 +330,26 @@ case $distro in
 		apachefile=/etc/httpd/conf.d/snipe-it.conf
 
 		#Allow us to get the mysql engine
+		echo ""
 		echo "##  Add IUS repo and install mariaDB and a few other packages.";
 		yum -y install wget > /dev/null
-		wget -P $tmp/ https://centos7.iuscommunity.org/ius-release.rpm
+		wget -P $tmp/ https://centos7.iuscommunity.org/ius-release.rpm > /dev/null
 		rpm -Uvh $tmp/ius-release.rpm > /dev/null
 
 		#Install PHP stuff.
 		echo "##  Install PHP Stuff";
 		PACKAGES="php56u php56u-mysqlnd php56u-bcmath php56u-cli php56u-common php56u-embedded php56u-gd php56u-mbstring php56u-mcrypt httpd mariadb-server git unzip epel-release"
 		
-		yum -y install $PACKAGES  > /dev/null
-		rpm --query --queryformat "    " $PACKAGES
+        for p in $PACKAGES;do
+	        if isinstalled $p;then
+				echo " ##" $p "Installed"
+			else
+				echo -n " ##" $p "Installing... "
+				yum -y install $p > /dev/null
+			fi
+        done;
 
+        echo ""
 		echo "##  Download Snipe-IT from github and put it in the web directory.";
 
 		wget -P $tmp/ https://github.com/snipe/snipe-it/archive/$file &> /dev/null
@@ -342,7 +363,6 @@ case $distro in
 		sudo chown -R apache:apache $webdir/$name
 		
 		echo "##  Start the mariaDB server.";
-		#/sbin/service mysqld start
 		# Makde mariaDB start on boot and restart the daemon
 		systemctl enable mariadb.service
 		systemctl restart mariadb.service
@@ -376,6 +396,11 @@ case $distro in
 		# Make apache start on boot and restart the daemon
 		systemctl enable httpd.service
 		systemctl restart httpd.service
+	##TODO get timezone and set it in file
+		# Set timezone
+		$tzone=$(grep ZONE /etc/sysconfig/clock);
+
+		# if $tzone == 
 
 		#Modify the Snipe-It files necessary for a production environment.
 		replace "'www.yourserver.com'" "'$hostname'" -- $webdir/$name/bootstrap/start.php
@@ -385,13 +410,14 @@ case $distro in
 		replace "            'password'  => ''," "            'password'  => '$mysqluserpw'," -- $webdir/$name/app/config/production/database.php
 		replace "'http://production.yourserver.com'," "'http://$fqdn'," -- $webdir/$name/app/config/production/database.php
 		cp $webdir/$name/app/config/production/app.example.php $webdir/$name/app/config/production/app.php
-		replace "'http://production.yourserver.com'," "'http://$fqdn'," -- $webdir/$name/app/config/production/app.php
+		replace "'https://production.yourserver.com'," "'http://$fqdn'," -- $webdir/$name/app/config/production/app.php
 		replace "'Change_this_key_or_snipe_will_get_ya'," "'$random32'," -- $webdir/$name/app/config/production/app.php
 		cp $webdir/$name/app/config/production/mail.example.php $webdir/$name/app/config/production/mail.php
 
 		#Install / configure composer
 		cd $webdir/$name
-		mysql -u root -p < $tmp/$dbsetup
+		echo -n "##  Input your MySQL/MariaDB root password: "
+		mysql -u root -p < $dbsetup
 		curl -sS https://getcomposer.org/installer | php
 		php composer.phar install --no-dev --prefer-source
 		php artisan app:install --env=production
@@ -407,16 +433,9 @@ case $distro in
 esac
 
 echo ""
-echo "  ***I have no idea about your mail environment, so if you want email capability, open up the following***"
-echo "  nano -w $webdir/$name/app/config/production/mail.php"
-echo "  And edit the attributes appropriately."
-echo ""
-sleep 1
-
-echo ""
 echo "  ***If you want mail capabilities, open $webdir/$name/app/config/production/mail.php and fill out the attributes***"
 echo ""
-echo "  ***$si should now be installed. open up http://$fqdn in a web browser to verify.***"
+echo "  ***Open http://$fqdn to login to Snipe-IT.***"
 echo ""
 echo ""
 echo "##  Cleaning up..."
