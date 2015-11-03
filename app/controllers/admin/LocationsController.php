@@ -256,9 +256,9 @@ class LocationsController extends AdminController
 
 
     /**
-    *  Get the consumable information to present to the consumable view page
+    *  Get the location page detail page
     *
-    * @param  int  $consumableId
+    * @param  int  $locationID
     * @return View
     **/
     public function getView($locationId = null)
@@ -279,6 +279,12 @@ class LocationsController extends AdminController
     }
 
 
+    /**
+    *  Get the locations API information to present to the location view page
+    *
+    * @param  int  $locationID
+    * @return JSON
+    **/
     public function getDatatable()
     {
         $locations = Location::select(array('id','name','address','address2','city','state','zip','country','parent_id','currency'))->with('assets')
@@ -335,6 +341,12 @@ class LocationsController extends AdminController
     }
 
 
+    /**
+    *  Get the location user listing information to present to the location details page
+    *
+    * @param  int  $locationID
+    * @return JSON
+    **/
     public function getDataViewUsers($locationID)
   	{
   		$location = Location::find($locationID);
@@ -355,24 +367,33 @@ class LocationsController extends AdminController
   }
 
 
+  /**
+  *  Get the location asset information to present to the location details page
+  *
+  * @param  int  $locationID
+  * @return JSON
+  **/
   public function getDataViewAssets($locationID)
   {
-    $location = Location::find($locationID)->with('assets');
+    $location = Location::find($locationID);
     $count = $location->assets->count();
 
     $rows = array();
 
     foreach ($location->assets as $asset) {
         $rows[] = array(
-            'name' => link_to('/hardware/'.$asset->id.'/view', $asset->showAssetName())
-            );
+          'name' => link_to('/hardware/'.$asset->id.'/view', $asset->showAssetName()),
+          'asset_tag' => $asset->asset_tag,
+          'serial' => $asset->serial,
+          'model' => $asset->model->name,
+
+        );
     }
 
     $data = array('total' => $count, 'rows' => $rows);
-
     return $data;
-}
 
+  }
 
 
 }
