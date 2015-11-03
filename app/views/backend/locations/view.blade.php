@@ -44,7 +44,7 @@
     data-cookie-id-table="location_usersDetailTable">
         <thead>
             <tr>
-                <th data-switchable="false" data-searchable="false" data-sortable="false" data-field="name">@lang('general.user')</th>
+                <th data-searchable="false" data-sortable="false" data-field="name">@lang('general.user')</th>
             </tr>
         </thead>
     </table>
@@ -64,7 +64,10 @@
     data-cookie-id-table="location_assetsDetailTable">
         <thead>
             <tr>
-                <th data-switchable="false" data-searchable="false" data-sortable="false" data-field="name">@lang('general.name')</th>
+                <th data-searchable="false" data-sortable="false" data-field="name">@lang('general.name')</th>
+                <th data-searchable="false" data-sortable="false" data-field="model">@lang('admin/hardware/form.model')</th>
+                <th data-searchable="false" data-sortable="false" data-field="asset_tag">@lang('admin/hardware/form.tag')</th>
+                <th data-searchable="false" data-sortable="false" data-field="serial">@lang('admin/hardware/form.serial')</th>
             </tr>
         </thead>
     </table>
@@ -87,7 +90,7 @@
         undefinedText: '',
         iconsPrefix: 'fa',
         showRefresh: true,
-        search: true,
+        search: false,
         pageSize: {{{ Setting::getSettings()->per_page }}},
         pagination: true,
         sidePagination: 'server',
@@ -119,7 +122,7 @@
         undefinedText: '',
         iconsPrefix: 'fa',
         showRefresh: true,
-        search: true,
+        search: false,
         pageSize: {{{ Setting::getSettings()->per_page }}},
         pagination: true,
         sidePagination: 'server',
