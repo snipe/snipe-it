@@ -212,11 +212,11 @@ class User extends SentryUserModel
 	{
 
             return $query->where(function($query) use ($search) {
-                $query->where('first_name', 'LIKE', "%$search%")
-                ->orWhere('last_name', 'LIKE', "%$search%")
-                ->orWhere('email', 'LIKE', "%$search%")
-                ->orWhere('username', 'LIKE', "%$search%")
-                ->orWhere('notes', 'LIKE', "%$search%")
+                $query->where('users.first_name', 'LIKE', "%$search%")
+                ->orWhere('users.last_name', 'LIKE', "%$search%")
+                ->orWhere('users.email', 'LIKE', "%$search%")
+                ->orWhere('users.username', 'LIKE', "%$search%")
+                ->orWhere('users.notes', 'LIKE', "%$search%")
                 ->orWhere(function($query) use ($search) {
                     $query->whereHas('userloc', function($query) use ($search) {
                         $query->where('name','LIKE','%'.$search.'%');
@@ -225,7 +225,7 @@ class User extends SentryUserModel
 
                 // Ugly, ugly code because Laravel sucks at self-joins
                 ->orWhere(function($query) use ($search) {
-                    $query->whereRaw("manager_id IN (select id from users where first_name LIKE '%".$search."%' OR last_name LIKE '%".$search."%') ");
+                    $query->whereRaw("users.manager_id IN (select id from users where first_name LIKE '%".$search."%' OR last_name LIKE '%".$search."%') ");
                 });
             });
 
