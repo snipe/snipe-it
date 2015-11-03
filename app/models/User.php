@@ -246,4 +246,20 @@ class User extends SentryUserModel
     }
 
 
+    /**
+    * Query builder scope to order on manager
+    *
+    * @param  Illuminate\Database\Query\Builder  $query  Query builder instance
+    * @param  text                              $order    	 Order
+    *
+    * @return Illuminate\Database\Query\Builder          Modified query builder
+    */
+    public function scopeOrderManager($query, $order)
+    {
+      // Left join here, or it will only return results with parents
+      return $query->leftJoin('users as manager', 'users.manager_id', '=', 'manager.id')->orderBy('manager.first_name', $order)->orderBy('manager.last_name', $order);
+    }
+
+
+
 }

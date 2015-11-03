@@ -29,7 +29,7 @@ Locations ::
             <tr>
                 <th data-sortable="true" data-field="id" data-visible="false">@lang('general.id')</th>
                 <th data-sortable="true" data-field="name">@lang('admin/locations/table.name')</th>
-                <th data-sortable="false" data-field="parent">@lang('admin/locations/table.parent')</th>
+                <th data-sortable="true" data-field="parent">@lang('admin/locations/table.parent')</th>
                 <th data-searchable="false" data-sortable="false" data-field="assets_default">@lang('admin/locations/table.assets_rtd')</th>
                 <th data-searchable="false" data-sortable="false" data-field="assets_checkedout">@lang('admin/locations/table.assets_checkedout')</th>
                 <th data-searchable="true" data-sortable="true" data-field="currency">@lang('general.currency')</th>

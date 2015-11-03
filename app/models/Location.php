@@ -121,4 +121,19 @@ class Location extends Elegant
     }
 
 
+    /**
+    * Query builder scope to order on parent
+    *
+    * @param  Illuminate\Database\Query\Builder  $query  Query builder instance
+    * @param  text                              $order    	 Order
+    *
+    * @return Illuminate\Database\Query\Builder          Modified query builder
+    */
+    public function scopeOrderParent($query, $order)
+    {
+      // Left join here, or it will only return results with parents
+      return $query->leftJoin('locations as parent_loc', 'locations.parent_id', '=', 'parent_loc.id')->orderBy('parent_loc.name', $order);
+    }
+
+
 }

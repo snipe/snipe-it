@@ -845,7 +845,7 @@ class UsersController extends AdminController {
             $sort = e(Input::get('sort'));
         }
 
-        $users = User::with('assets', 'accessories', 'consumables', 'licenses', 'manager', 'sentryThrottle', 'groups', 'userloc');
+        $users = User::select('users.*')->with('assets', 'accessories', 'consumables', 'licenses', 'manager', 'sentryThrottle', 'groups', 'userloc');
 
         switch ($status) {
         case 'deleted':
@@ -853,21 +853,31 @@ class UsersController extends AdminController {
           break;
         }
 
-
-
          if (Input::has('search')) {
              $users = $users->TextSearch(Input::get('search'));
          }
 
-        $allowed_columns = ['last_name','first_name','email','username','manager','location','assets','accessories', 'consumables','licenses','groups'];
-        $order = Input::get('order') === 'asc' ? 'asc' : 'desc';
-        $sort = in_array($sort, $allowed_columns) ? $sort : 'first_name';
+         $order = Input::get('order') === 'asc' ? 'asc' : 'desc';
 
+         switch (Input::get('sort'))
+         {
+             case 'manager':
+               $users = $users->OrderManager($order);
+               break;
+             default:
+                $allowed_columns =
+                [
+                  'last_name','first_name','email','username','location',
+                  'assets','accessories', 'consumables','licenses','groups'
+                ];
+
+                $sort = in_array($sort, $allowed_columns) ? $sort : 'first_name';
+                $users = $users->orderBy($sort, $order);
+             break;
+         }
 
         $userCount = $users->count();
-        $users = $users->skip($offset)->take($limit)->orderBy($sort, $order)->get();
-
-
+        $users = $users->skip($offset)->take($limit)->get();
         $rows = array();
 
         foreach ($users as $user)

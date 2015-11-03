@@ -287,8 +287,8 @@ class LocationsController extends AdminController
     **/
     public function getDatatable()
     {
-        $locations = Location::select(array('id','name','address','address2','city','state','zip','country','parent_id','currency'))->with('assets')
-        ->whereNull('deleted_at');
+        $locations = Location::select(array('locations.id','locations.name','locations.address','locations.address2','locations.city','locations.state','locations.zip','locations.country','locations.parent_id','locations.currency'))->with('assets');
+
 
         if (Input::has('search')) {
             $locations = $locations->TextSearch(e(Input::get('search')));
@@ -306,11 +306,23 @@ class LocationsController extends AdminController
             $limit = 50;
         }
 
-        $allowed_columns = ['id','name','address','city','state','country','currency'];
         $order = Input::get('order') === 'asc' ? 'asc' : 'desc';
-        $sort = in_array(Input::get('sort'), $allowed_columns) ? Input::get('sort') : 'created_at';
 
-        $locations->orderBy($sort, $order);
+
+
+        switch (Input::get('sort'))
+        {
+            case 'parent':
+              $locations = $locations->OrderParent($order);
+              break;
+            default:
+              $allowed_columns = ['id','name','address','city','state','country','currency'];
+
+              $sort = in_array(Input::get('sort'), $allowed_columns) ? Input::get('sort') : 'created_at';
+              $locations = $locations->orderBy($sort, $order);
+            break;
+        }
+
 
         $locationsCount = $locations->count();
         $locations = $locations->skip($offset)->take($limit)->get();
@@ -318,13 +330,15 @@ class LocationsController extends AdminController
         $rows = array();
 
         foreach($locations as $location) {
-            $actions = '<a href="'.route('update/location', $location->id).'" class="btn btn-warning btn-sm" style="margin-right:5px;"><i class="fa fa-pencil icon-white"></i></a><a data-html="false" class="btn delete-asset btn-danger btn-sm" data-toggle="modal" href="'.route('delete/location', $location->id).'" data-content="'.Lang::get('admin/locations/message.delete.confirm').'" data-title="'.Lang::get('general.delete').' '.htmlspecialchars($location->name).'?" onClick="return false;"><i class="fa fa-trash icon-white"></i></a>';
+            $actions = '<nobr><a href="'.route('update/location', $location->id).'" class="btn btn-warning btn-sm" style="margin-right:5px;"><i class="fa fa-pencil icon-white"></i></a><a data-html="false" class="btn delete-asset btn-danger btn-sm" data-toggle="modal" href="'.route('delete/location', $location->id).'" data-content="'.Lang::get('admin/locations/message.delete.confirm').'" data-title="'.Lang::get('general.delete').' '.htmlspecialchars($location->name).'?" onClick="return false;"><i class="fa fa-trash icon-white"></i></a></nobr>';
 
             $rows[] = array(
                 'id'            => $location->id,
                 'name'          => link_to('admin/settings/locations/'.$location->id.'/view', $location->name),
                 'parent'        => ($location->parent) ? $location->parent->name : '',
-                'assets'        => ($location->assets->count() + $location->assignedassets->count()),
+              //  'assets'        => ($location->assets->count() + $location->assignedassets->count()),
+                'assets_default' => $location->assignedassets->count(),
+                'assets_checkedout' => $location->assets->count(),
                 'address'       => ($location->address) ? $location->address: '',
                 'city'          => $location->city,
                 'state'         => $location->state,
