@@ -110,7 +110,7 @@ done
 #Snipe says we need a new 32bit key, so let's create one randomly and inject it into the file
 random32="$(echo `< /dev/urandom tr -dc _A-Za-z-0-9 | head -c32`)"
 
-#createstuff.sql will be injected to the database during install. 
+#db_setup.sql will be injected to the database during install. 
 #Again, this file should be removed, which will be a prompt at the end of the script.
 dbSetup=$tmp/db_setup.sql
 
@@ -118,13 +118,8 @@ echo >> $dbSetup "CREATE DATABASE snipeit;"
 echo >> $dbSetup "GRANT ALL PRIVILEGES ON snipeit.* TO snipeit@localhost IDENTIFIED BY '$mysqluserpw';"
 
 #Let us make it so only root can read the file. Again, this isn't best practice, so please remove these after the install.
-<<<<<<< HEAD
 chown root:root $dbSetup
 chmod 700 $dbSetup
-=======
-chown root:root $passwordfile $dbSetup
-chmod 700 $passwordfile $dbSetup
->>>>>>> origin/develop
 
 case $distro in
 	debian)
@@ -197,7 +192,7 @@ case $distro in
 		# Have user set own root password when securing install
 		# and just set the snipeit database user at the beginning
 		/usr/bin/mysql_secure_installation 
-		sudo mysql -u root -p < $tmp/createstuff.sql
+		sudo mysql -u root -p < $tmp/$dbsetup
 
 		#Install / configure composer
 		curl -sS https://getcomposer.org/installer | php
@@ -287,7 +282,7 @@ case $distro in
 		# Set timezone
 		$tzone = $(grep ZONE /etc/sysconfig/clock);
 
-		if $tzone == 
+		# if $tzone == 
 
 		#Modify the Snipe-It files necessary for a production environment.
 		replace "'www.yourserver.com'" "'$hostname'" -- $webdir/$name/bootstrap/start.php
@@ -303,7 +298,7 @@ case $distro in
 
 		#Install / configure composer
 		cd $webdir/$name
-		mysql -u root -p < $tmp/createstuff.sql
+		mysql -u root -p < $tmp/$dbsetup
 		curl -sS https://getcomposer.org/installer | php
 		php composer.phar install --no-dev --prefer-source
 		php artisan app:install --env=production
@@ -325,7 +320,7 @@ case $distro in
 		echo "##  Add IUS repo and install mariaDB and a few other packages.";
 		yum -y install wget > /dev/null
 		wget -P $tmp/ https://centos7.iuscommunity.org/ius-release.rpm
-		rpm -Uvh ius-release.rpm > /dev/null
+		rpm -Uvh $tmp/ius-release.rpm > /dev/null
 
 		#Install PHP stuff.
 		echo "##  Install PHP Stuff";
@@ -396,7 +391,7 @@ case $distro in
 
 		#Install / configure composer
 		cd $webdir/$name
-		mysql -u root -p < $tmp/createstuff.sql
+		mysql -u root -p < $tmp/$dbsetup
 		curl -sS https://getcomposer.org/installer | php
 		php composer.phar install --no-dev --prefer-source
 		php artisan app:install --env=production
