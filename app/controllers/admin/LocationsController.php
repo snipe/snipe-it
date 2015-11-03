@@ -254,6 +254,31 @@ class LocationsController extends AdminController
 
     }
 
+
+    /**
+    *  Get the consumable information to present to the consumable view page
+    *
+    * @param  int  $consumableId
+    * @return View
+    **/
+    public function getView($locationId = null)
+    {
+        $location = Location::find($locationId);
+
+        if (isset($location->id)) {
+                return View::make('backend/locations/view', compact('location'));
+        } else {
+            // Prepare the error message
+            $error = Lang::get('admin/locations/message.does_not_exist', compact('id'));
+
+            // Redirect to the user management page
+            return Redirect::route('locations')->with('error', $error);
+        }
+
+
+    }
+
+
     public function getDatatable()
     {
         $locations = Location::select(array('id','name','address','address2','city','state','zip','country','parent_id','currency'))->with('assets')
@@ -291,7 +316,7 @@ class LocationsController extends AdminController
 
             $rows[] = array(
                 'id'            => $location->id,
-                'name'          => link_to('admin/locations/'.$location->id.'/view', $location->name),
+                'name'          => link_to('admin/settings/locations/'.$location->id.'/view', $location->name),
                 'parent'        => ($location->parent) ? $location->parent->name : '',
                 'assets'        => ($location->assets->count() + $location->assignedassets->count()),
                 'address'       => ($location->address) ? $location->address: '',
@@ -308,6 +333,45 @@ class LocationsController extends AdminController
         return $data;
 
     }
+
+
+    public function getDataViewUsers($locationID)
+  	{
+  		$location = Location::find($locationID);
+      $location_users = $location->users;
+      $count = $location_users->count();
+
+      $rows = array();
+
+      foreach ($location_users as $user) {
+          $rows[] = array(
+              'name' => link_to('/admin/users/'.$user->id.'/view', $user->fullName())
+              );
+      }
+
+      $data = array('total' => $count, 'rows' => $rows);
+
+      return $data;
+  }
+
+
+  public function getDataViewAssets($locationID)
+  {
+    $location = Location::find($locationID)->with('assets');
+    $count = $location->assets->count();
+
+    $rows = array();
+
+    foreach ($location->assets as $asset) {
+        $rows[] = array(
+            'name' => link_to('/hardware/'.$asset->id.'/view', $asset->showAssetName())
+            );
+    }
+
+    $data = array('total' => $count, 'rows' => $rows);
+
+    return $data;
+}
 
 
 
