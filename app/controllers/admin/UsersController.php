@@ -845,8 +845,7 @@ class UsersController extends AdminController {
             $sort = e(Input::get('sort'));
         }
 
-        $users = User::select(array('users.id','users.email','users.username','users.location_id','users.manager_id','users.first_name','users.last_name','users.created_at'))
-        ->with('assets', 'accessories', 'consumables', 'licenses', 'manager', 'sentryThrottle', 'groups', 'userloc');
+        $users = User::select(array('users.id','users.email','users.username','users.location_id','users.manager_id','users.first_name','users.last_name','users.created_at','users.notes'))->with('assets', 'accessories', 'consumables', 'licenses', 'manager', 'sentryThrottle', 'groups', 'userloc');
 
         switch ($status) {
         case 'deleted':
