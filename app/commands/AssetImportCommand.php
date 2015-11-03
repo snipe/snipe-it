@@ -256,9 +256,11 @@ class AssetImportCommand extends Command {
 				$this->comment('Location '.$user_asset_location.' already exists');
 			} else {
 
+        $location = new Location();
+
 				if ($user_asset_location!='') {
 
-					$location = new Location();
+
 					$location->name = e($user_asset_location);
 					$location->address = '';
 					$location->city = '';
