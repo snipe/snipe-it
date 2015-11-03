@@ -27,7 +27,6 @@ fqdn="$(hostname --fqdn)"
 hosts=/etc/hosts
 distro="$(cat /proc/version)"
 file=master.zip
-webdir=/var/www/html
 name="snipeit"
 tmp=/tmp/$name
 ans=default
@@ -74,22 +73,16 @@ echo ""
 
 #Do you want to set your own passwords, or have me generate random ones?
 until [[ $ans == "yes" ]] || [[ $ans == "no" ]]; do
-echo -n "  Q. Do you want me to automatically create the MySQL root & user passwords? (y/n) "
+echo -n "  Q. Do you want me to automatically create the snipe database user password? (y/n) "
 read setpw
 
 case $setpw in
         [yY] | [yY][Ee][Ss] )
-                mysqlrootpw="$(echo `< /dev/urandom tr -dc _A-Za-z-0-9 | head -c8`)"
-                mysqluserpw="$(echo `< /dev/urandom tr -dc _A-Za-z-0-9 | head -c8`)"
-                echo "  I'm putting this into $tmp/mysqlpasswords ... "
-				echo "  PLEASE REMOVE that file after you have recorded the passwords somewhere safe!"
+                mysqluserpw="$(echo `< /dev/urandom tr -dc _A-Za-z-0-9 | head -c16`)"
                 ans="yes"
                 ;;
         [nN] | [n|N][O|o] )
-				echo -n  "  Q. What do you want your root PW to be?"
-                read -s mysqlrootpw
-                echo ""
-                echo -n  "  Q. What do you want your snipeit user PW to be?"
+                echo -n  "  Q. What do you want your snipeit user password to be?"
                 read -s mysqluserpw
                 echo ""
 				ans="no"
@@ -102,51 +95,38 @@ done
 #Snipe says we need a new 32bit key, so let's create one randomly and inject it into the file
 random32="$(echo `< /dev/urandom tr -dc _A-Za-z-0-9 | head -c32`)"
 
-#createstuff.sql will be injected to the database during install. mysqlpasswords.txt is a file that will contain the root and snipeit user passwords.
+#createstuff.sql will be injected to the database during install. 
 #Again, this file should be removed, which will be a prompt at the end of the script.
 dbSetup=$tmp/db_setup.sql
-passwordfile=$tmp/mysqlpasswords.txt
 
 echo >> $dbSetup "CREATE DATABASE snipeit;"
 echo >> $dbSetup "GRANT ALL PRIVILEGES ON snipeit.* TO snipeit@localhost IDENTIFIED BY '$mysqluserpw';"
-echo >> $passwordfile "MySQL Passwords..."
-echo >> $passwordfile "Root: $mysqlrootpw"
-echo >> $passwordfile "User (snipeit): $mysqluserpw"
-echo >> $passwordfile "32 bit random string: $random32"
-
-echo "  ************************************************************"
-echo "  *  MySQL ROOT password: $mysqlrootpw                           *"
-echo "  *  MySQL USER (snipeit) password: $mysqluserpw                 *"
-echo "  *  32 bit random string: $random32  *"
-echo "  ************************************************************"
-echo ""
-echo "  These passwords have been exported to $tmp/mysqlpasswords.txt..."
-echo "  I recommend You delete this file for security purposes"
-echo ""
 
 #Let us make it so only root can read the file. Again, this isn't best practice, so please remove these after the install.
-chown root:root $passwordfile $creatstufffile
-chmod 700 $passwordfile $createstufffile
+chown root:root $dbSetup
+chmod 700 $dbSetup
 
 case $distro in
 	u )
 		#####################################  Install for Debian/ubuntu  ##############################################
 
+		webdir=/var/www
+
 		#Update/upgrade Debian/Ubuntu repositories, get the latest version of git.
 		apachefile=/etc/apache2/sites-available/$fqdn.conf
 		sudo apt-get update ; sudo apt-get -y upgrade ;	sudo apt-get install -y git unzip
 
-		wget -P $tmp/ https://github.com/snipe/snipe-it/archive/$file
-		sudo unzip $file -d /var/www/
+		#  Get files and extract to web dir
+		wget -P $tmp/ https://github.com/snipe/snipe-it/archive/$file &> /dev/null
+		unzip -qo $tmp/$file -d $tmp/
+		cp -R $tmp/snipe-it-master $webdir/$name
 
 		#We already established MySQL root & user PWs, so we dont need to be prompted. Let's go ahead and install Apache, PHP and MySQL.
 		sudo DEBIAN_FRONTEND=noninteractive apt-get install -y lamp-server^
 		sudo apt-get install -y php5 php5-mcrypt php5-curl php5-mysql php5-gd
 
-		#Create MySQL accounts
-		echo "##  Create MySQL accounts"
-		sudo mysqladmin -u root password $mysqlrootpw
-		sudo mysql -u root -p$mysqlrootpw < $tmp/createstuff.sql
+
+		##  TODO make sure apache is set to start on boot and go ahead and start it
 
 		#Enable mcrypt and rewrite
 		sudo php5enmod mcrypt
@@ -190,6 +170,15 @@ case $distro in
 		replace "'false'," "true," -- $webdir/$name/app/config/production/app.php
 		cp $webdir/$name/app/config/production/mail.example.php $webdir/$name/app/config/production/mail.php
 
+
+		echo "##  Secure Mysql"
+		##  TODO make sure mysql is set to start on boot and go ahead and start it
+
+		# Have user set own root password when securing install
+		# and just set the snipeit database user at the beginning
+		/usr/bin/mysql_secure_installation 
+		sudo mysql -u root -p < $tmp/createstuff.sql
+
 		#Install / configure composer
 		curl -sS https://getcomposer.org/installer | php
 		mv composer.phar /usr/local/bin/composer
@@ -202,7 +191,7 @@ case $distro in
 	c6 )
 		#####################################  Install for Centos/Redhat 6  ##############################################
 
-		#Make directories so we can create a new apache vhost
+		webdir=/var/www/html
 		apachefile=/etc/httpd/conf.d/snipe-it.conf
 
 		#Allow us to get the mysql engine
@@ -216,15 +205,21 @@ case $distro in
 		echo >> $mariadbRepo "gpgcheck=1"
 		echo >> $mariadbRepo "enable=1"
 
+		yum -y install wget > /dev/null
 		wget -P $tmp/ https://centos6.iuscommunity.org/ius-release.rpm
-
 		rpm -Uvh ius-release*.rpm > /dev/null
-		yum -y install httpd mariadb-server wget git unzip epel-release > /dev/null
+
+		#Install PHP and other needed stuff.
+		echo "##  Install PHP and other needed stuff";
+		PACKAGES="php56u php56u-mysqlnd php56u-bcmath php56u-cli php56u-common php56u-embedded php56u-gd php56u-mbstring php56u-mcrypt httpd mariadb-server git unzip epel-release"
+		
+		yum -y install $PACKAGES  > /dev/null
+		rpm --query --queryformat "    " $PACKAGES
 
 		echo "##  Download Snipe-IT from github and put it in the web directory.";
 
 		wget -P $tmp/ https://github.com/snipe/snipe-it/archive/$file &> /dev/null
-		unzip -qo $tmp/master.zip -d $tmp/
+		unzip -qo $tmp/$file -d $tmp/
 		cp -R $tmp/snipe-it-master $webdir/$name
 
 		# Change permissions on directories
@@ -239,24 +234,8 @@ case $distro in
 		chkconfig mysqld on
 		/sbin/service mysqld restart
 
-		# Have user set own root password when securing install
-		# and just set the snipeit database user at the beginning
+		echo "##  Start securing mariaDB server.";
 		/usr/bin/mysql_secure_installation 
-
-		#Create MySQL accounts
-		# echo "##  Create MySQL accounts"
-		# mysqladmin -u root password $mysqlrootpw
-		# echo ""
-		# echo "  ***Your Current ROOT password is---> $mysqlrootpw"
-		# echo "  ***Use $mysqlrootpw at the following prompt for root login***"
-		# echo ""		
-
-		#Install PHP stuff.
-		echo "##  Install PHP Stuff";
-		PACKAGES="php56u php56u-mysqlnd php56u-bcmath php56u-cli php56u-common php56u-embedded php56u-gd php56u-mbstring php56u-mcrypt"
-		
-		yum -y install $PACKAGES  > /dev/null
-		rpm --query --queryformat "    " $PACKAGES
 
 		#Create the new virtual host in Apache and enable rewrite
 		echo "##  Create the new virtual host in Apache.";
@@ -284,6 +263,11 @@ case $distro in
 		# Make apache start on boot and restart the daemon
 		chkconfig httpd on
 		/sbin/service httpd start
+
+		# Set timezone
+		$tzone = $(grep ZONE /etc/sysconfig/clock);
+
+		if $tzone == 
 
 		#Modify the Snipe-It files necessary for a production environment.
 		replace "'www.yourserver.com'" "'$hostname'" -- $webdir/$name/bootstrap/start.php
@@ -314,14 +298,21 @@ case $distro in
 	c7 )
 		#####################################  Install for Centos/Redhat 7  ##############################################
 
-		#Make directories so we can create a new apache vhost
+		webdir=/var/www/html
 		apachefile=/etc/httpd/conf.d/snipe-it.conf
 
 		#Allow us to get the mysql engine
 		echo "##  Add IUS repo and install mariaDB and a few other packages.";
+		yum -y install wget > /dev/null
 		wget -P $tmp/ https://centos7.iuscommunity.org/ius-release.rpm
 		rpm -Uvh ius-release.rpm > /dev/null
-		yum -y install httpd mariadb-server wget git unzip epel-release > /dev/null
+
+		#Install PHP stuff.
+		echo "##  Install PHP Stuff";
+		PACKAGES="php56u php56u-mysqlnd php56u-bcmath php56u-cli php56u-common php56u-embedded php56u-gd php56u-mbstring php56u-mcrypt httpd mariadb-server git unzip epel-release"
+		
+		yum -y install $PACKAGES  > /dev/null
+		rpm --query --queryformat "    " $PACKAGES
 
 		echo "##  Download Snipe-IT from github and put it in the web directory.";
 
@@ -341,24 +332,8 @@ case $distro in
 		systemctl enable mariadb.service
 		systemctl restart mariadb.service
 
-		# Have user set own root password when securing install
-		# and just set the snipeit database user at the beginning
+		echo "##  Start securing mariaDB server.";
 		/usr/bin/mysql_secure_installation 
-
-		#Create MySQL accounts
-		# echo "##  Create MySQL accounts"
-		# mysqladmin -u root password $mysqlrootpw
-		# echo ""
-		# echo "  ***Your Current ROOT password is---> $mysqlrootpw"
-		# echo "  ***Use $mysqlrootpw at the following prompt for root login***"
-		# echo ""		
-
-		#Install PHP stuff.
-		echo "##  Install PHP Stuff";
-		PACKAGES="php56u php56u-mysqlnd php56u-bcmath php56u-cli php56u-common php56u-embedded php56u-gd php56u-mbstring php56u-mcrypt"
-		
-		yum -y install $PACKAGES  > /dev/null
-		rpm --query --queryformat "    " $PACKAGES
 
 		#Create the new virtual host in Apache and enable rewrite
 		echo "##  Create the new virtual host in Apache.";
