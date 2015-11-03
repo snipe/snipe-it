@@ -578,6 +578,7 @@ class AssetsController extends AdminController
     public function getView($assetId = null)
     {
         $asset = Asset::withTrashed()->find($assetId);
+        $settings = Setting::all();
 
         if (isset($asset->id)) {
 
@@ -588,7 +589,7 @@ class AssetsController extends AdminController
                 'url' => route('qr_code/hardware', $asset->id)
             );
 
-            return View::make('backend/hardware/view', compact('asset', 'qr_code'));
+            return View::make('backend/hardware/view', compact('asset', 'qr_code','settings'));
         } else {
             // Prepare the error message
             $error = Lang::get('admin/hardware/message.does_not_exist', compact('id'));
