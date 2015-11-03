@@ -223,14 +223,9 @@ class User extends SentryUserModel
                     });
                 })
 
-                // This doesn't actually work - need to use a table alias maybe?
+                // Ugly, ugly code because Laravel sucks at self-joins
                 ->orWhere(function($query) use ($search) {
-                    $query->whereHas('manager', function($query) use ($search) {
-                        $query->where(function($query) use ($search) {
-                            $query->where('first_name','LIKE','%'.$search.'%')
-                            ->orWhere('last_name','LIKE','%'.$search.'%');
-                        });
-                    });
+                    $query->whereRaw("manager_id IN (select id from users where first_name LIKE '%".$search."%' OR last_name LIKE '%".$search."%') ");
                 });
             });
 
