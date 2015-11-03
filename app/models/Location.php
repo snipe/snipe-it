@@ -21,7 +21,7 @@ class Location extends Elegant
     }
 
     public function assets() {
-        return $this->hasMany('Actionlog','location_id');
+        return $this->hasManyThrough('Asset', 'Actionlog', 'location_id', 'id');
     }
 
     public function assignedassets() {
@@ -104,7 +104,7 @@ class Location extends Elegant
                 ->orWhere('city', 'LIKE', "%$search%")
                 ->orWhere('state', 'LIKE', "%$search%")
                 ->orWhere('zip', 'LIKE', "%$search%")
-                
+
                 // This doesn't actually work - need to use a table alias maybe?
                 ->orWhere(function($query) use ($search) {
                     $query->whereHas('parent', function($query) use ($search) {
