@@ -1,5 +1,5 @@
 <?php
 return array (
-  'app_version' => 'v2.0-365',
-  'hash_version' => 'v2.0-365-gd0eed67',
+  'app_version' => 'v2.0-369',
+  'hash_version' => 'v2.0-369-g769fb13',
 );
