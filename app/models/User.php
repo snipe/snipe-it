@@ -200,7 +200,7 @@ class User extends SentryUserModel
 
     }
 
-    /**
+  /**
 	* Query builder scope to search on text
 	*
 	* @param  Illuminate\Database\Query\Builder  $query  Query builder instance
@@ -211,23 +211,23 @@ class User extends SentryUserModel
     public function scopeTextsearch($query, $search)
 	{
 
-            return $query->where(function($query) use ($search) {
-                $query->where('users.first_name', 'LIKE', "%$search%")
-                ->orWhere('users.last_name', 'LIKE', "%$search%")
-                ->orWhere('users.email', 'LIKE', "%$search%")
-                ->orWhere('users.username', 'LIKE', "%$search%")
-                ->orWhere('users.notes', 'LIKE', "%$search%")
-                ->orWhere(function($query) use ($search) {
-                    $query->whereHas('userloc', function($query) use ($search) {
-                        $query->where('name','LIKE','%'.$search.'%');
-                    });
-                })
-
-                // Ugly, ugly code because Laravel sucks at self-joins
-                ->orWhere(function($query) use ($search) {
-                    $query->whereRaw("users.manager_id IN (select id from users where first_name LIKE '%".$search."%' OR last_name LIKE '%".$search."%') ");
-                });
+    return $query->where(function($query) use ($search) {
+        $query->where('users.first_name', 'LIKE', "%$search%")
+        ->orWhere('users.last_name', 'LIKE', "%$search%")
+        ->orWhere('users.email', 'LIKE', "%$search%")
+        ->orWhere('users.username', 'LIKE', "%$search%")
+        ->orWhere('users.notes', 'LIKE', "%$search%")
+        ->orWhere(function($query) use ($search) {
+            $query->whereHas('userloc', function($query) use ($search) {
+                $query->where('name','LIKE','%'.$search.'%');
             });
+        })
+
+        // Ugly, ugly code because Laravel sucks at self-joins
+        ->orWhere(function($query) use ($search) {
+            $query->whereRaw("users.manager_id IN (select id from users where first_name LIKE '%".$search."%' OR last_name LIKE '%".$search."%') ");
+        });
+    });
 
 	}
 

@@ -23,7 +23,6 @@ use Config;
 use Location;
 use Log;
 use Mail;
-use Datatable;
 use TCPDF;
 use Slack;
 use Paginator;
@@ -1141,18 +1140,18 @@ class AssetsController extends AdminController
       }
 
     $allowed_columns = [
-                        'id',
-                        'name',
-                        'asset_tag',
-                        'serial',
-                        'model',
-                        'last_checkout',
-                        'category',
-                        'notes',
-                        'expected_checkin',
-                        'order_number',
-                        'location'
-                      ];
+      'id',
+      'name',
+      'asset_tag',
+      'serial',
+      'model',
+      'last_checkout',
+      'category',
+      'notes',
+      'expected_checkin',
+      'order_number',
+      'location'
+    ];
 
     $order = Input::get('order') === 'asc' ? 'asc' : 'desc';
     $sort = in_array(Input::get('sort'), $allowed_columns) ? Input::get('sort') : 'asset_tag';
