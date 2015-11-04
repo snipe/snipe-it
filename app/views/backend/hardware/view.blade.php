@@ -244,17 +244,7 @@
                     <td>{{{ $assetMaintenance->start_date }}}</td>
                     <td>{{{ $assetMaintenance->completion_date }}}</td>
                     <td>{{{ $assetMaintenance->is_warranty ? Lang::get('admin/asset_maintenances/message.warranty') : Lang::get('admin/asset_maintenances/message.not_warranty') }}}</td>
-                    <td><nobr>
-
-                      @if ($asset->assetloc)
-                        {{{ $asset->assetloc->currency }}}
-                      @elseif ($settings->default_currency!='')
-                        {{{ $settings->default_currency }}}
-                      @else
-                        @lang('general.currency')
-                      @endif
-
-                      {{{ $assetMaintenance->cost }}}</nobr></td>
+                    <td><nobr>{{{ $use_currency.$assetMaintenance->cost }}}</nobr></td>
                     <?php $totalCost += $assetMaintenance->cost; ?>
                     <td><a href="{{ route('update/asset_maintenance', $assetMaintenance->id) }}" class="btn btn-warning btn-sm"><i class="fa fa-pencil icon-white"></i></a>
                     </td>
@@ -264,12 +254,7 @@
             </tbody>
             <tfoot>
             <tr>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td>{{{sprintf(Lang::get( 'general.currency' ) . '%01.2f', $totalCost)}}}</td>
+                <td colspan="7" class="text-right">{{{ $use_currency.$totalCost }}}</td>
             </tr>
             </tfoot>
         </table>

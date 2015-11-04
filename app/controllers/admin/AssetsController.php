@@ -580,6 +580,16 @@ class AssetsController extends AdminController
         $asset = Asset::withTrashed()->find($assetId);
         $settings = Setting::all();
 
+
+        if ($asset->assetloc) {
+            $use_currency = $asset->assetloc->currency;
+        } elseif ($settings->default_currency!='') {
+           $use_currency = $settings->default_currency;
+        } else {
+          $use_currency = Lang::get('general.currency');
+        }
+
+
         if (isset($asset->id)) {
 
             $settings = Setting::getSettings();
@@ -589,7 +599,7 @@ class AssetsController extends AdminController
                 'url' => route('qr_code/hardware', $asset->id)
             );
 
-            return View::make('backend/hardware/view', compact('asset', 'qr_code','settings'));
+            return View::make('backend/hardware/view', compact('asset', 'qr_code','settings'))->with('use_currency',$use_currency);
         } else {
             // Prepare the error message
             $error = Lang::get('admin/hardware/message.does_not_exist', compact('id'));
