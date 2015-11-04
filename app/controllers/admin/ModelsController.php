@@ -382,7 +382,7 @@ class ModelsController extends AdminController
 
     public function getDatatable($status = null)
     {
-        $models = Model::orderBy('created_at', 'DESC')->with('category','assets','depreciation');
+        $models = Model::with('category','assets','depreciation');
         ($status != 'Deleted') ?: $models->withTrashed()->Deleted();;
 
         if (Input::has('search')) {
@@ -402,7 +402,7 @@ class ModelsController extends AdminController
         }
 
 
-        $allowed_columns = ['name'];
+        $allowed_columns = ['id','name','modelno'];
         $order = Input::get('order') === 'asc' ? 'asc' : 'desc';
         $sort = in_array(Input::get('sort'), $allowed_columns) ? Input::get('sort') : 'created_at';
 
@@ -415,13 +415,14 @@ class ModelsController extends AdminController
 
         foreach ($models as $model) {
             if ($model->deleted_at == '') {
-                $actions = '<a href="'.route('update/model', $model->id).'" class="btn btn-warning btn-sm" style="margin-right:5px;"><i class="fa fa-pencil icon-white"></i></a><a data-html="false" class="btn delete-asset btn-danger btn-sm" data-toggle="modal" href="'.route('delete/model', $model->id).'" data-content="'.Lang::get('admin/models/message.delete.confirm').'" data-title="'.Lang::get('general.delete').' '.htmlspecialchars($model->name).'?" onClick="return false;"><i class="fa fa-trash icon-white"></i></a>';
+                $actions = '<div style=" white-space: nowrap;"><a href="'.route('update/model', $model->id).'" class="btn btn-warning btn-sm" style="margin-right:5px;"><i class="fa fa-pencil icon-white"></i></a><a data-html="false" class="btn delete-asset btn-danger btn-sm" data-toggle="modal" href="'.route('delete/model', $model->id).'" data-content="'.Lang::get('admin/models/message.delete.confirm').'" data-title="'.Lang::get('general.delete').' '.htmlspecialchars($model->name).'?" onClick="return false;"><i class="fa fa-trash icon-white"></i></a></div>';
             } else {
                 $actions = '<a href="'.route('restore/model', $model->id).'" class="btn btn-warning btn-sm"><i class="fa fa-recycle icon-white"></i></a>';
             }
 
             $rows[] = array(
-                'manufacturer'      => $model->manufacturer->name,
+                'id'      => $model->id,
+                'manufacturer'      => link_to('/admin/settings/manufacturers/'.$model->manufacturer->id.'/view', $model->manufacturer->name),
                 'name'              => link_to('/hardware/models/'.$model->id.'/view', $model->name),
                 'modelnumber'       => $model->modelno,
                 'numassets'         => $model->assets->count(),
