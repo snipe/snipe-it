@@ -577,7 +577,7 @@ class AssetsController extends AdminController
     public function getView($assetId = null)
     {
         $asset = Asset::withTrashed()->find($assetId);
-
+        $settings = Setting::getSettings();
 
 
         if ($asset->userloc) {
@@ -587,17 +587,17 @@ class AssetsController extends AdminController
         } else {
           $default_currency = Setting::first()->default_currency;
 
-          if ($default_currency!='') {
-            $use_currency = $default_currency;
+          if ($settings->default_currency!='') {
+            $use_currency = $settings->default_currency;
           } else {
             $use_currency = Lang::get('general.currency');
           }
-          
+
         }
 
         if (isset($asset->id)) {
 
-            $settings = Setting::getSettings();
+
 
             $qr_code = (object) array(
                 'display' => $settings->qr_code == '1',
