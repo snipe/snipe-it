@@ -26,7 +26,8 @@ return array(
     'header_color'              => 'สีส่วนหัว',
     'info'                      => 'การตั้งค่าเหล่านี้ช่วยให้คุณสามารถปรับแต่งลักษณะบางอย่าง',
     'laravel'                   => 'เวอร์ชั่น Laravel',
-    'load_remote'				=> 'สริปต์การติดตั้ง Snipe-IT นี้สามารถโหลดได้ทั่วทุกมุมโลก',
+    'load_remote_text'          => 'Remote Scripts',
+    'load_remote_help_text'		=> 'This Snipe-IT install can load scripts from the outside world.',
     'logo'                    	=> 'โลโก้',
     'optional'					=> 'ออฟชั่นเสริม',
     'per_page'                  => 'ผลการค้นหาต่อหน้า',
@@ -47,4 +48,7 @@ return array(
     'system'                    => 'ข้อมูลระบบ',
     'update'                    => 'แก้ไขการตั้งค่า',
     'value'                     => 'มูลค่า',
+    'brand'                     => 'Branding',
+    'about_settings_title'      => 'About Settings',
+    'about_settings_text'       => 'These settings let you customize certain aspects of your installation.',    
 );

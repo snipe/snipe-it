@@ -43,6 +43,7 @@
     'date'					=> 'Dato',
     'delete'  				=> 'Slett',
     'deleted'  				=> 'Slettet',
+    'delete_seats'  		=> 'Deleted Seats',
     'deployed'				=> 'Utlevert',
     'depreciation_report'	=> 'Avskrivningsrapport',
     'download'				=> 'Last ned',

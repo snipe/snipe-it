@@ -12,6 +12,6 @@
             'success' => 'Asset Maintenance created successfully.'
         ],
         'asset_maintenance_incomplete' => 'Not Completed Yet',
-        'warranty'                     => 'Warranty',
-        'not_warranty'                 => 'Not Warranty',
+        'warranty'                     => 'Takuu',
+        'not_warranty'                 => 'Takuu päättynyt',
     ];

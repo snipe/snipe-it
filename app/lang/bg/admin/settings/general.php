@@ -26,7 +26,8 @@ return array(
     'header_color'              => 'Цвят на хедъра',
     'info'                      => 'Тези настройки позволяват да конфигурирате различни аспекти на Вашата инсталация.',
     'laravel'                   => 'Версия на Laravel',
-    'load_remote'				=> 'Тази Snipe-IT инсталация може да зарежда и изпълнява външни скриптове.',
+    'load_remote_text'          => 'Remote Scripts',
+    'load_remote_help_text'		=> 'This Snipe-IT install can load scripts from the outside world.',
     'logo'                    	=> 'Лого',
     'optional'					=> 'незадължително',
     'per_page'                  => 'Резултати на страница',
@@ -47,4 +48,7 @@ return array(
     'system'                    => 'Информация за системата',
     'update'                    => 'Обновяване на настройките',
     'value'                     => 'Стойност',
+    'brand'                     => 'Branding',
+    'about_settings_title'      => 'About Settings',
+    'about_settings_text'       => 'These settings let you customize certain aspects of your installation.',    
 );

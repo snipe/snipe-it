@@ -26,7 +26,8 @@ return array(
     'header_color'              => 'Color de encabezado',
     'info'                      => 'Estos parámetros permirten personalizar ciertos aspectos de la aplicación.',
     'laravel'                   => 'Versión de Laravel',
-    'load_remote'				=> 'Esta instalación de Snipe-IT puede cargar scripts del mundo exterior.',
+    'load_remote_text'          => 'Remote Scripts',
+    'load_remote_help_text'		=> 'This Snipe-IT install can load scripts from the outside world.',
     'logo'                    	=> 'Logo',
     'optional'					=> 'opcional',
     'per_page'                  => 'Resultados por página',
@@ -47,4 +48,7 @@ return array(
     'system'                    => 'Información del Sistema',
     'update'                    => 'Actualizar Parámetros',
     'value'                     => 'Valor',
+    'brand'                     => 'Branding',
+    'about_settings_title'      => 'About Settings',
+    'about_settings_text'       => 'These settings let you customize certain aspects of your installation.',    
 );

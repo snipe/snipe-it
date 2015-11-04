@@ -43,6 +43,7 @@
     'date'					=> '日期',
     'delete'  				=> '刪除',
     'deleted'  				=> '已删除',
+    'delete_seats'  		=> 'Deleted Seats',
     'deployed'				=> '已分配',
     'depreciation_report'	=> '折旧报告',
     'download'				=> '下载',

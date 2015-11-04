@@ -1,7 +1,8 @@
 <?php
 
 return array(
-
+    'assets_rtd'		=> 'Assets RTD',
+    'assets_checkedout'		=> 'Assets Assigned',
     'id'      		=> 'ID',
     'city'   		=> 'Град',
     'state'   		=> 'Област',
@@ -13,5 +14,5 @@ return array(
     'zip'			=> 'Пощенски код',
     'locations'		=> 'Местоположения',
     'parent'		=> 'Присъединено към',
-    'currency'  	=> 'Валута на местоположението', // this is deprecated
+    'currency'  	=> 'Валута на местоположението',
 );

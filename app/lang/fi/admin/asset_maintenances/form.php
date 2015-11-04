@@ -1,14 +1,14 @@
 <?php
 
     return [
-        'asset_maintenance_type' => 'Asset Maintenance Type',
+        'asset_maintenance_type' => 'Maintenance Type',
         'title'                  => 'Title',
-        'start_date'             => 'Start Date',
-        'completion_date'        => 'Completion Date',
-        'cost'                   => 'Cost',
+        'start_date'             => 'Aloituspäivä',
+        'completion_date'        => 'Completed',
+        'cost'                   => 'Kustannus',
         'is_warranty'            => 'Warranty Improvement',
-        'asset_maintenance_time' => 'Asset Maintenance Time (in days)',
-        'notes'                  => 'Notes',
-        'update'                 => 'Update Asset Maintenance',
-        'create'                 => 'Create Asset Maintenance'
+        'asset_maintenance_time' => 'Days',
+        'notes'                  => 'Muistiinpanot',
+        'update'                 => 'Update',
+        'create'                 => 'Create'
     ];

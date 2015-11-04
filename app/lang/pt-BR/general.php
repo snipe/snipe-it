@@ -43,6 +43,7 @@
     'date'					=> 'Data',
     'delete'  				=> 'Deletar',
     'deleted'  				=> 'Excluído',
+    'delete_seats'  		=> 'Deleted Seats',
     'deployed'				=> 'Implantado',
     'depreciation_report'	=> 'Relatório de Depreciações',
     'download'				=> 'Download',

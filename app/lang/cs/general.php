@@ -43,6 +43,7 @@
     'date'					=> 'Datum',
     'delete'  				=> 'Odstranit',
     'deleted'  				=> 'Odstraněno',
+    'delete_seats'  		=> 'Deleted Seats',
     'deployed'				=> 'Vydané',
     'depreciation_report'	=> 'Report zastarání',
     'download'				=> 'Stáhnout',

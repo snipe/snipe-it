@@ -26,7 +26,8 @@ return array(
     'header_color'              => '머릿말 색상',
     'info'                      => '이 설정들은 설치본의 특정 분야를 설정하는 것입니다.',
     'laravel'                   => 'Laravel 버전',
-    'load_remote'				=> '이 Snipe-IT 설치는 인터넷에서 스크립트들을 읽어 올 수 있습니다.',
+    'load_remote_text'          => 'Remote Scripts',
+    'load_remote_help_text'		=> 'This Snipe-IT install can load scripts from the outside world.',
     'logo'                    	=> '로고',
     'optional'					=> '선택 사항',
     'per_page'                  => '페이지 당 결과',
@@ -47,4 +48,7 @@ return array(
     'system'                    => '시스템 정보',
     'update'                    => '갱신 설정',
     'value'                     => '가치',
+    'brand'                     => 'Branding',
+    'about_settings_title'      => 'About Settings',
+    'about_settings_text'       => 'These settings let you customize certain aspects of your installation.',    
 );

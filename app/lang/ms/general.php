@@ -43,6 +43,7 @@
     'date'					=> 'Tarikh',
     'delete'  				=> 'Hapuskan',
     'deleted'  				=> 'Dihapuskan',
+    'delete_seats'  		=> 'Deleted Seats',
     'deployed'				=> 'Telah Diagihkan',
     'depreciation_report'	=> 'Laporan Susut nilai',
     'download'				=> 'Download',

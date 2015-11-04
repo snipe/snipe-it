@@ -43,6 +43,7 @@
     'date'					=> 'Dátum',
     'delete'  				=> 'Törlés',
     'deleted'  				=> 'Törölve',
+    'delete_seats'  		=> 'Deleted Seats',
     'deployed'				=> 'Deployed',
     'depreciation_report'	=> 'Depreciation Report',
     'download'				=> 'Download',

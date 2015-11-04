@@ -1,7 +1,8 @@
 <?php
 
 return array(
-
+    'assets_rtd'		=> 'Assets RTD',
+    'assets_checkedout'		=> 'Assets Assigned',
     'id'      		=> 'ID',
     'city'   		=> 'Città',
     'state'   		=> 'Stato',
@@ -13,5 +14,5 @@ return array(
     'zip'			=> 'Codice Postale',
     'locations'		=> 'Posizioni',
     'parent'		=> 'Genitore',
-    'currency'  	=> 'Valuta della Posizione', // this is deprecated
+    'currency'  	=> 'Valuta della Posizione',
 );

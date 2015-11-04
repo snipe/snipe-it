@@ -26,7 +26,8 @@ return array(
     'header_color'              => 'Overskriftsfarge',
     'info'                      => 'Disse innstillingene lar deg tilpasse enkelte aspekter av installasjonen din.',
     'laravel'                   => 'Laravel-versjon',
-    'load_remote'				=> 'Denne Snipe-IT-installasjonen kan laste skript fra Internett.',
+    'load_remote_text'          => 'Remote Scripts',
+    'load_remote_help_text'		=> 'This Snipe-IT install can load scripts from the outside world.',
     'logo'                    	=> 'Logo',
     'optional'					=> 'valgfri',
     'per_page'                  => 'Resultater pr side',
@@ -47,4 +48,7 @@ return array(
     'system'                    => 'Systeminformasjon',
     'update'                    => 'Oppdater innstillinger',
     'value'                     => 'Verdi',
+    'brand'                     => 'Branding',
+    'about_settings_title'      => 'About Settings',
+    'about_settings_text'       => 'These settings let you customize certain aspects of your installation.',    
 );
