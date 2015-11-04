@@ -310,31 +310,37 @@ Form::macro('barcode_types', function ($name = "barcode_type", $selected = null,
 */
 Form::macro('currencies', function ($name = "currency", $selected = null, $class = null) {
 
-    $currencies = array(
-    '$'=>"$",
-    '€'=>'€',
-    '₠'=>"₠",
-    '₡'=>'₡',
-    'RM'=>'RM',
-    '₣'=>'₣',
-    '₤'=>'₤',
-    '₥'=>'₥',
-    '₦'=>'₦',
-    '₧'=>'₧',
-    '₨'=>'₨',
-    '₩'=>'₩',
-    '₪'=>'₪',
-    '₫'=>'₫',
-    '₭'=>'₭',
-    '₮'=>'₮',
-    '₯'=>'₯',
-    '₱'=>'₱',
-    '₹'=>'₹',
-    );
+      $currencies =  array(
+  		'USD' => array('name'=>'USD - U.S. Dollars', 'symbol'=>'$','symbol_html'=>'$'),
+  		'GBP' => array('name'=>'GBP - British Pounds', 'symbol'=>'£','symbol_html'=>'&pound;'),
+  		'EUR' => array('name'=>'EUR - Euros', 'symbol'=>'€','symbol_html'=>'&euro;'),
+      'ZAR' => array('name'=>'ZAR - South African Rand', 'symbol'=>'R','symbol_html'=>'R'),
+  		'AUD' => array('name'=>'AUD - Australian Dollars', 'symbol'=>'$','symbol_html'=>'$'),
+  		'BRL' => array('name'=>'BRL - Brazilian Real', 'symbol'=>'R$','symbol_html'=>'R$'),
+  		'CAD' => array('name'=>'CAD - Canadian Dollars', 'symbol'=>'$','symbol_html'=>'$'),
+  		'CZK' => array('name'=>'CZK - Czech koruny', 'symbol'=>'Kč','symbol_html'=>''),
+  		'DKK' => array('name'=>'DKK - Danish Kroner', 'symbol'=>'kr','symbol_html'=>'kr'),
+  		'HKD' => array('name'=>'HKD - Hong Kong Dollars', 'symbol'=>'$','symbol_html'=>'$'),
+  		'HUF' => array('name'=>'HUF - Hungarian Forints', 'symbol'=>'Ft','symbol_html'=>'Ft'),
+  		'ILS' => array('name'=>'ILS - Israeli Shekels', 'symbol'=>'₪','symbol_html'=>'&#8362;'),
+  		'JPY' => array('name'=>'JPY - Japanese Yen', 'symbol'=>'¥','symbol_html'=>'&#165;'),
+  		'MYR' => array('name'=>'MYR - Malaysian Ringgits', 'symbol'=>'RM','symbol_html'=>'RM'),
+  		'MXN' => array('name'=>'MXN - Mexican Pesos', 'symbol'=>'$','symbol_html'=>'$'),
+  		'NZD' => array('name'=>'NZD - New Zealand Dollars', 'symbol'=>'$','symbol_html'=>'$'),
+  		'NOK' => array('name'=>'NOK - Norwegian Kroner', 'symbol'=>'kr','symbol_html'=>'kr'),
+  		'PHP' => array('name'=>'PHP - Philippine Pesos', 'symbol'=>'Php','symbol_html'=>'Php'),
+  		'PLN' => array('name'=>'PLN - Polish zloty', 'symbol'=>'zł','symbol_html'=>''),
+  		'SGD' => array('name'=>'SGD - Singapore Dollars', 'symbol'=>'$','symbol_html'=>'$'),
+  		'SEK' => array('name'=>'SEK - Swedish Kronor', 'symbol'=>'kr','symbol_html'=>'kr'),
+  		'CHF' => array('name'=>'CHF - Swiss Francs', 'symbol'=>'CHF','symbol_html'=>'CHF'),
+  		'TWD' => array('name'=>'TWD - Taiwan New Dollars', 'symbol'=>'$','symbol_html'=>'$'),
+  		'THB' => array('name'=>'THB - Thai Baht', 'symbol'=>'฿','symbol_html'=>' &#3647;'),
+  		'TRY' => array('name'=>'TRY - Turkish Liras', 'symbol'=>'TL','symbol_html'=>' &#3647;'),
+  	);
 
     $select = '<select name="'.$name.'" class="'.$class.'">';
     foreach ($currencies as $currency) {
-        $select .= '<option value="'.$currency.'"'.($selected == $currency ? ' selected="selected"' : '').'>'.$currency.'</option> ';
+        $select .= '<option value="'.$currency['symbol'].'"'.($selected == $currency['symbol'] ? ' selected="selected"' : '').'>'.$currency['name'].' ('.$currency['symbol'].')</option> ';
     }
 
     $select .= '</select>';
