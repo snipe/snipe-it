@@ -42,13 +42,14 @@
   data-cookie-id-table="categoryAssetsTable">
       <thead>
           <tr>
-              <th data-searchable="false" data-sortable="false" data-field="id" data-visible="false">{{Lang::get('general.id')}}</th>
-              <th data-searchable="false" data-sortable="false" data-field="name">{{Lang::get('general.name')}}</th>
-              <th data-searchable="false" data-sortable="false" data-field="model">{{Lang::get('admin/hardware/form.model')}}</th>
-              <th data-searchable="false" data-sortable="false" data-field="asset_tag">{{Lang::get('general.asset_tag')}}</th>
-              <th data-searchable="false" data-sortable="false" data-field="serial">{{Lang::get('admin/hardware/form.serial')}}</th>
-              <th data-searchable="false" data-sortable="false" data-field="assigned_to">{{Lang::get('general.user')}}</th>
-              <th data-searchable="false" data-sortable="false" data-field="actions"  data-switchable="false">{{Lang::get('table.actions')}}</th>
+              <th data-searchable="false" data-sortable="false" data-field="id" data-visible="false">@lang('general.id')</th>
+              <th data-searchable="false" data-sortable="false" data-field="name">@lang('general.name')</th>
+              <th data-searchable="false" data-sortable="false" data-field="model">@lang('admin/hardware/form.model')</th>
+              <th data-searchable="false" data-sortable="false" data-field="asset_tag">@lang('general.asset_tag')</th>
+              <th data-searchable="false" data-sortable="false" data-field="serial">@lang('admin/hardware/form.serial')</th>
+              <th data-searchable="false" data-sortable="false" data-field="assigned_to">@lang('general.user')</th>
+              <th data-searchable="false" data-sortable="false" data-field="change"  data-switchable="false">@lang('admin/hardware/table.change')</th>
+              <th data-searchable="false" data-sortable="false" data-field="actions"  data-switchable="false">@lang('table.actions')</th>
           </tr>
       </thead>
   </table>
