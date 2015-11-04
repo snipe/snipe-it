@@ -91,7 +91,10 @@
 
         @if ($asset->purchase_cost)
             <div class="col-md-12" style="padding-bottom: 5px;"><strong>@lang('admin/hardware/form.cost'):</strong>
-            @if (($asset->id) && ($asset->assetloc))
+              
+            @if (($asset->id) && ($asset->userloc))
+                  {{{ $asset->userloc->currency }}}
+            @elseif (($asset->id) && ($asset->assetloc))
                 {{{ $asset->assetloc->currency }}}
             @else
                 {{{ Setting::first()->default_currency }}}
@@ -414,9 +417,22 @@
                     <li><a href="{{ route('view/user', $asset->assigned_to) }}">{{ $asset->assigneduser->fullName() }}</a></li>
 
 
-                    @if (isset($asset->assetloc->address))
+                    @if (isset($asset->userloc))
+                        <li>{{{ $asset->userloc->name }}}
+                        <li>{{{ $asset->userloc->address }}}
+                        @if (isset($asset->userloc->address2))
+                          {{{ $asset->userloc->address2 }}}
+                        @endif
+                        </li>
+                        @if (isset($asset->assetloc->city))
+                            <li>{{{ $asset->assetloc->city }}}, {{{ $asset->assetloc->state }}} {{{ $asset->assetloc->zip }}}</li>
+                        @endif
+
+                    @elseif (isset($asset->assetloc))
+                        <li>{{{ $asset->assetloc->name }}}
                         <li>{{{ $asset->assetloc->address }}}
-                        @if (isset($asset->assetloc->address2)) {{{ $asset->assetloc->address2 }}}
+                        @if (isset($asset->assetloc->address2))
+                          {{{ $asset->assetloc->address2 }}}
                         @endif
                         </li>
                         @if (isset($asset->assetloc->city))

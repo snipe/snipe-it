@@ -577,17 +577,20 @@ class AssetsController extends AdminController
     public function getView($assetId = null)
     {
         $asset = Asset::withTrashed()->find($assetId);
-        $settings = Setting::all();
 
 
-        if ($asset->assetloc) {
+
+        if ($asset->userloc) {
+            $use_currency = $asset->userloc->currency;
+        } elseif ($asset->assetloc) {
             $use_currency = $asset->assetloc->currency;
-        } elseif ($settings->default_currency!='') {
-           $use_currency = $settings->default_currency;
         } else {
-          $use_currency = Lang::get('general.currency');
+          if ($settings->default_currency!='') {
+           $use_currency = Setting::first()->default_currency;
+          } else {
+            $use_currency = Lang::get('general.currency');
+          }
         }
-
 
         if (isset($asset->id)) {
 
