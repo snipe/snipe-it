@@ -27,7 +27,7 @@
       data-url="{{ route('api.statuslabels.list') }}"
       data-cookie="true"
       data-click-to-select="true"
-      data-cookie-id-table="statuslabelsTable">
+      data-cookie-id-table="statuslabelsTable-v{{ Config::get('version.app_version') }}">
           <thead>
               <tr>
                   <th data-sortable="true" data-field="id" data-visible="false">@lang('general.id')</th>

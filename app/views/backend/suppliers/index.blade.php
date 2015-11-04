@@ -25,7 +25,7 @@
       data-url="{{ route('api.suppliers.list') }}"
       data-cookie="true"
       data-click-to-select="true"
-      data-cookie-id-table="suppliersTable">
+      data-cookie-id-table="suppliersTable-v{{ Config::get('version.app_version') }}">
           <thead>
               <tr>
                   <th data-sortable="true" data-field="id" data-visible="false">@lang('admin/suppliers/table.id')</th>

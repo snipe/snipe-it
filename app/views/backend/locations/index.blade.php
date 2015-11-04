@@ -24,7 +24,7 @@ Locations ::
     data-url="{{ route('api.locations.list') }}"
     data-cookie="true"
     data-click-to-select="true"
-    data-cookie-id-table="locationsTable">
+    data-cookie-id-table="locationsTable-v{{ Config::get('version.app_version') }}">
         <thead>
             <tr>
                 <th data-sortable="true" data-field="id" data-visible="false">@lang('general.id')</th>
