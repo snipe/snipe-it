@@ -200,5 +200,66 @@ class User extends SentryUserModel
 
     }
 
+  /**
+	* Query builder scope to search on text
+	*
+	* @param  Illuminate\Database\Query\Builder  $query  Query builder instance
+	* @param  text                              $search    	 Search term
+	*
+	* @return Illuminate\Database\Query\Builder          Modified query builder
+	*/
+    public function scopeTextsearch($query, $search)
+	{
+
+    return $query->where(function($query) use ($search) {
+        $query->where('users.first_name', 'LIKE', "%$search%")
+        ->orWhere('users.last_name', 'LIKE', "%$search%")
+        ->orWhere('users.email', 'LIKE', "%$search%")
+        ->orWhere('users.username', 'LIKE', "%$search%")
+        ->orWhere('users.notes', 'LIKE', "%$search%")
+        ->orWhere(function($query) use ($search) {
+            $query->whereHas('userloc', function($query) use ($search) {
+                $query->where('name','LIKE','%'.$search.'%');
+            });
+        })
+
+        // Ugly, ugly code because Laravel sucks at self-joins
+        ->orWhere(function($query) use ($search) {
+            $query->whereRaw("users.manager_id IN (select id from users where first_name LIKE '%".$search."%' OR last_name LIKE '%".$search."%') ");
+        });
+    });
+
+	}
+
+
+    /**
+     * Query builder scope for Deleted users
+     *
+     * @param  Illuminate\Database\Query\Builder $query Query builder instance
+     *
+     * @return Illuminate\Database\Query\Builder          Modified query builder
+     */
+
+    public function scopeDeleted($query)
+    {
+        return $query->whereNotNull('deleted_at');
+    }
+
+
+    /**
+    * Query builder scope to order on manager
+    *
+    * @param  Illuminate\Database\Query\Builder  $query  Query builder instance
+    * @param  text                              $order    	 Order
+    *
+    * @return Illuminate\Database\Query\Builder          Modified query builder
+    */
+    public function scopeOrderManager($query, $order)
+    {
+      // Left join here, or it will only return results with parents
+      return $query->leftJoin('users as manager', 'users.manager_id', '=', 'manager.id')->orderBy('manager.first_name', $order)->orderBy('manager.last_name', $order);
+    }
+
+
 
 }

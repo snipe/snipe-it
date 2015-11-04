@@ -43,6 +43,7 @@
     'date'					=> 'Tarih',
     'delete'  				=> 'Sil',
     'deleted'  				=> 'Silinmiş',
+    'delete_seats'  		=> 'Deleted Seats',
     'deployed'				=> 'Deployed',
     'depreciation_report'	=> 'Depreciation Report',
     'download'				=> 'İndir',

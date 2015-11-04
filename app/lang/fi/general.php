@@ -43,6 +43,7 @@
     'date'					=> 'Päivä',
     'delete'  				=> 'Poista',
     'deleted'  				=> 'Poistettu',
+    'delete_seats'  		=> 'Deleted Seats',
     'deployed'				=> 'Käyttöönotettu',
     'depreciation_report'	=> 'Poistoraportti',
     'download'				=> 'Lataa',

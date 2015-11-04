@@ -405,7 +405,7 @@ class ReportsController extends AdminController
         if (e( Input::get( 'purchase_date' ) ) == '1') {
             $header[] = 'Purchase Date';
         }
-        if (( e( Input::get( 'purchase_cost' ) ) == '1' ) && ( e( Input::get( 'depreciation' ) ) == '0' )) {
+        if (( e( Input::get( 'purchase_cost' ) ) == '1' ) && ( e( Input::get( 'depreciation' ) ) != '1' )) {
             $header[] = 'Purchase Cost';
         }
         if (e( Input::get( 'order' ) ) == '1') {
@@ -461,7 +461,7 @@ class ReportsController extends AdminController
             if (e( Input::get( 'purchase_date' ) ) == '1') {
                 $row[] = $asset->purchase_date;
             }
-            if (e( Input::get( 'purchase_cost' ) ) == '1') {
+            if (e( Input::get( 'purchase_cost' ) ) == '1' && ( e( Input::get( 'depreciation' ) ) != '1' )) {
                 $row[] = '"' . number_format( $asset->purchase_cost ) . '"';
             }
             if (e( Input::get( 'order' ) ) == '1') {

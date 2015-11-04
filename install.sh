@@ -104,7 +104,7 @@ if [[ $distro == "u" ]]; then
 
 	#We already established MySQL root & user PWs, so we dont need to be prompted. Let's go ahead and install Apache, PHP and MySQL.
 	sudo DEBIAN_FRONTEND=noninteractive apt-get install -y lamp-server^
-	sudo apt-get install -y php5 php5-mcrypt php5-curl php5-mysql php-gd
+	sudo apt-get install -y php5 php5-mcrypt php5-curl php5-mysql php5-gd
 
 	#Create MySQL accounts
 	echo "Create MySQL accounts"

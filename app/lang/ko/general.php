@@ -43,6 +43,7 @@
     'date'					=> '날짜',
     'delete'  				=> '삭제',
     'deleted'  				=> '삭제됨',
+    'delete_seats'  		=> 'Deleted Seats',
     'deployed'				=> '사용중',
     'depreciation_report'	=> '감가상각 보고서',
     'download'				=> '내려받기',

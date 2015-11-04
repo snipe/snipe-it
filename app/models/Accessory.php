@@ -12,7 +12,7 @@ class Accessory extends Elegant
     public $rules = array(
         'name'   => 'required|alpha_space|min:3|max:255',
         'category_id'   	=> 'required|integer',
-        'qty'   	=> 'required|integer|min:0',
+        'qty'   	=> 'required|integer|min:1',
     );
 
     public function category()
@@ -68,5 +68,21 @@ class Accessory extends Elegant
 	    return $remaining;
     }
 
+    /**
+    * Query builder scope to search on text
+    *
+    * @param  Illuminate\Database\Query\Builder  $query  Query builder instance
+    * @param  text                              $search      Search term
+    *
+    * @return Illuminate\Database\Query\Builder          Modified query builder
+    */
+    public function scopeTextSearch($query, $search)
+    {
+
+        return $query->where(function($query) use ($search)
+        {
+                $query->where('name', 'LIKE', '%'.$search.'%');
+        });
+    }
 
 }

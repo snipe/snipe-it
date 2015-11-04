@@ -43,6 +43,7 @@
     'date'					=> 'Data',
     'delete'  				=> 'Ištrinti',
     'deleted'  				=> 'Ištrinta',
+    'delete_seats'  		=> 'Deleted Seats',
     'deployed'				=> 'Naudojama',
     'depreciation_report'	=> 'Nusidėvėjimo ataskaita',
     'download'				=> 'Atsisiųsti',

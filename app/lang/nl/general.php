@@ -43,6 +43,7 @@
     'date'					=> 'Datum',
     'delete'  				=> 'Verwijder',
     'deleted'  				=> 'Verwijderd',
+    'delete_seats'  		=> 'Deleted Seats',
     'deployed'				=> 'Ingezet',
     'depreciation_report'	=> 'Afschrijvingsrapport',
     'download'				=> 'Download',

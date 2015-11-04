@@ -2,7 +2,7 @@
 
 return array(
 
-    'does_not_exist' => 'Category does not exist.',
+    'does_not_exist' => 'Luokkaa ei löydy.',
     'assoc_users'	 => 'This accessory currently has :count items checked out to users. Please check in the accessories and and try again. ',
 
     'create' => array(
@@ -11,8 +11,8 @@ return array(
     ),
 
     'update' => array(
-        'error'   => 'Category was not updated, please try again',
-        'success' => 'Category updated successfully.'
+        'error'   => 'Luokkaa ei päivitetty, yritä uudelleen',
+        'success' => 'Luokka päivitettiin onnistuneesti.'
     ),
 
     'delete' => array(
@@ -24,7 +24,7 @@ return array(
      'checkout' => array(
         'error'   		=> 'Accessory was not checked out, please try again',
         'success' 		=> 'Accessory checked out successfully.',
-        'user_does_not_exist' => 'That user is invalid. Please try again.'
+        'user_does_not_exist' => 'Käyttäjä on virheellinen. Yritä uudelleen.'
     ),
 
     'checkin' => array(

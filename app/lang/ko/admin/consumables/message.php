@@ -15,9 +15,9 @@ return array(
     ),
 
     'delete' => array(
-        'confirm'   => 'Are you sure you wish to delete this consumable?',
+        'confirm'   => '이 소모품을 삭제하시겠습니까?',
         'error'   => '소모품 삭제시 문제가 발생했습니다. 다시 시도해 주세요.',
-        'success' => 'The consumable was deleted successfully.'
+        'success' => '소모품이 삭제 되었습니다.'
     ),
 
      'checkout' => array(

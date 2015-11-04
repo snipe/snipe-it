@@ -43,6 +43,7 @@
     'date'					=> 'Datum',
     'delete'  				=> 'Ta bort',
     'deleted'  				=> 'Raderad',
+    'delete_seats'  		=> 'Deleted Seats',
     'deployed'				=> 'Deployed',
     'depreciation_report'	=> 'Depreciation Report',
     'download'				=> 'Ladda ner',

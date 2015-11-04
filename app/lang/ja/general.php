@@ -43,6 +43,7 @@
     'date'					=> '日付',
     'delete'  				=> '削除',
     'deleted'  				=> '削除しました。',
+    'delete_seats'  		=> 'Deleted Seats',
     'deployed'				=> '配備済',
     'depreciation_report'	=> '減価償却レポート',
     'download'				=> 'ダウンロード',

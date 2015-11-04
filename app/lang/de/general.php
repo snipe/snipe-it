@@ -43,6 +43,7 @@
     'date'					=> 'Purchase Date',
     'delete'  				=> 'Löschen',
     'deleted'  				=> 'Gelöscht',
+    'delete_seats'  		=> 'Deleted Seats',
     'deployed'				=> 'Herausgegeben',
     'depreciation_report'	=> 'Abschreibunsgreport',
     'download'				=> 'Download',
