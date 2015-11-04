@@ -37,9 +37,9 @@
   name="category_assets"
   id="table"
   data-url="{{ route('api.categories.view', $category->id) }}"
-  data-cookie="false"
+  data-cookie="true"
   data-click-to-select="true"
-  data-cookie-id-table="categoryDetailTablesdfsdasdf">
+  data-cookie-id-table="categoryAssetsTable">
       <thead>
           <tr>
               <th data-searchable="false" data-sortable="false" data-field="id" data-visible="false">{{Lang::get('general.id')}}</th>
