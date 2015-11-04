@@ -1156,6 +1156,7 @@ class AssetsController extends AdminController
       'notes',
       'expected_checkin',
       'order_number',
+	  'image',
       'location'
     ];
 
@@ -1207,11 +1208,12 @@ class AssetsController extends AdminController
 
         $rows[] = array(
             'checkbox'      =>'<div class="text-center"><input type="checkbox" name="edit_asset['.$asset->id.']" class="one_required"></div>',
-            'id'        => $asset->id,
+            'id'        	=> $asset->id,
+			'image' 	    => '<img src="/uploads/models/'.$asset->model->image.'" height=40 width=50></img>',
             'name'          => '<a title="'.$asset->name.'" href="hardware/'.$asset->id.'/view">'.$asset->name.'</a>',
             'asset_tag'     => '<a title="'.$asset->asset_tag.'" href="hardware/'.$asset->id.'/view">'.$asset->asset_tag.'</a>',
             'serial'        => $asset->serial,
-            'model'         => ($asset->model) ? $asset->model->name : 'No model',
+            'model'         => ($asset->model) ? link_to('/hardware/models/'.$asset->model->id.'/view', $asset->model->name, array('target'=>'_blank')) : 'No model',
             'status'        => ($asset->assigneduser) ? link_to('../admin/users/'.$asset->assigned_to.'/view', $asset->assigneduser->fullName()) : (($asset->assetstatus) ? $asset->assetstatus->name : ''),
             'location'      => (($asset->assigneduser) && ($asset->assigneduser->userloc!='')) ? link_to('admin/settings/locations/'.$asset->assigneduser->userloc->id.'/edit', $asset->assigneduser->userloc->name) : (($asset->defaultLoc!='') ? link_to('admin/settings/locations/'.$asset->defaultLoc->id.'/edit', $asset->defaultLoc->name) : ''),
             'category'      => (($asset->model) && ($asset->model->category)) ? $asset->model->category->name : '',
