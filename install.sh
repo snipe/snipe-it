@@ -299,7 +299,7 @@ case $distro in
 		/sbin/service httpd start
 	##TODO get timezone and set it in file
 		# Set timezone
-		$tzone=$(grep ZONE /etc/sysconfig/clock);
+		# $tzone=$(grep ZONE /etc/sysconfig/clock);
 
 		# if $tzone == 
 
@@ -317,7 +317,7 @@ case $distro in
 
 		#Install / configure composer
 		cd $webdir/$name
-		echo -n "##  Input your MySQL/MariaDB root password: "
+		echo "##  Input your MySQL/MariaDB root password: "
 		mysql -u root -p < $dbsetup
 		curl -sS https://getcomposer.org/installer | php
 		php composer.phar install --no-dev --prefer-source
@@ -406,7 +406,7 @@ case $distro in
 		systemctl restart httpd.service
 	##TODO get timezone and set it in file
 		# Set timezone
-		$tzone=$(grep ZONE /etc/sysconfig/clock);
+		# $tzone=$(grep ZONE /etc/sysconfig/clock);
 
 		# if $tzone == 
 
@@ -424,7 +424,7 @@ case $distro in
 
 		#Install / configure composer
 		cd $webdir/$name
-		echo -n "##  Input your MySQL/MariaDB root password: "
+		echo "##  Input your MySQL/MariaDB root password "
 		mysql -u root -p < $dbsetup
 		curl -sS https://getcomposer.org/installer | php
 		php composer.phar install --no-dev --prefer-source
