@@ -219,17 +219,18 @@ case $distro in
 		#####################################  Install for Centos/Redhat 6  ##############################################
 
 		webdir=/var/www/html
-		apachefile=/etc/httpd/conf.d/$name.conf
+
+##TODO make sure the repo doesnt exhist isnt already in there
 
 		#Allow us to get the mysql engine
 		echo ""
-		echo "##  Add IUS repo and install mariaDB and a few other packages.";
+		echo "##  Add IUS and mariaDB repos.";
 		mariadbRepo=/etc/yum.repos.d/MariaDB.repo
 		touch $mariadbRepo
 		echo >> $mariadbRepo "[mariadb]"
 		echo >> $mariadbRepo "name = MariaDB"
-		echo >> $mariadbRepo "baseurl = http://yum.mariadb.org/10.0/centos7-amd64"
-		echo >> $mariadbRepo "gpgkey=https://yum.mariadb.org/RPM-GPG-KEY-MariaD6"
+		echo >> $mariadbRepo "baseurl = http://yum.mariadb.org/10.1/centos6-amd64"
+		echo >> $mariadbRepo "gpgkey=https://yum.mariadb.org/RPM-GPG-KEY-MariaDB"
 		echo >> $mariadbRepo "gpgcheck=1"
 		echo >> $mariadbRepo "enable=1"
 
@@ -239,16 +240,17 @@ case $distro in
 
 		#Install PHP and other needed stuff.
 		echo "##  Install PHP and other needed stuff";
-		PACKAGES="php56u php56u-mysqlnd php56u-bcmath php56u-cli php56u-common php56u-embedded php56u-gd php56u-mbstring php56u-mcrypt httpd mariadb-server git unzip epel-release"
+		PACKAGES="epel-release httpd MariaDB-server git unzip php56u php56u-mysqlnd php56u-bcmath php56u-cli php56u-common php56u-embedded php56u-gd php56u-mbstring php56u-mcrypt"
 		
-        for p in $PACKAGES;do
-	        if isinstalled $p;then
+		for p in $PACKAGES;do
+			if isinstalled $p;then
 				echo " ##" $p "Installed"
 			else
 				echo -n " ##" $p "Installing... "
 				yum -y install $p > /dev/null
+			echo "";
 			fi
-        done;
+		done;
 
         echo ""
 		echo "##  Download Snipe-IT from github and put it in the web directory.";
@@ -265,14 +267,16 @@ case $distro in
 
 		# Make mariaDB start on boot and restart the daemon
 		echo "##  Start the mariaDB server.";
-		chkconfig mysqld on
-		/sbin/service mysqld restart
+		chkconfig mysql on
+		/sbin/service mysql restart
 
 		echo "##  Start securing mariaDB server.";
 		/usr/bin/mysql_secure_installation 
 
+##TODO make sure the apachefile doesnt exhist isnt already in there
 		#Create the new virtual host in Apache and enable rewrite
 		echo "##  Create the new virtual host in Apache.";
+		apachefile=/etc/httpd/conf.d/$name.conf
 
 		echo >> $apachefile ""
 		echo >> $apachefile ""
@@ -291,6 +295,7 @@ case $distro in
 		echo >> $apachefile "        CustomLog /var/log/access.log combined"
 		echo >> $apachefile "</VirtualHost>"
 		
+##TODO make sure hosts file doesnt already contain this info
 		echo "##  Setup hosts file.";
 		echo >> $hosts "127.0.0.1 $hostname $fqdn"
 
@@ -335,27 +340,27 @@ case $distro in
 		#####################################  Install for Centos/Redhat 7  ##############################################
 
 		webdir=/var/www/html
-		apachefile=/etc/httpd/conf.d/$name.conf
 
 		#Allow us to get the mysql engine
 		echo ""
-		echo "##  Add IUS repo and install mariaDB and a few other packages.";
+		echo "##  Add IUS and mariaDB repos.";
 		yum -y install wget > /dev/null
 		wget -P $tmp/ https://centos7.iuscommunity.org/ius-release.rpm &> /dev/null
 		rpm -Uvh $tmp/ius-release*.rpm > /dev/null
 
 		#Install PHP and other needed stuff.
 		echo "##  Install PHP and other needed stuff";
-		PACKAGES="php56u php56u-mysqlnd php56u-bcmath php56u-cli php56u-common php56u-embedded php56u-gd php56u-mbstring php56u-mcrypt httpd mariadb-server git unzip epel-release"
+		PACKAGES="epel-release httpd mariadb-server git unzip php56u php56u-mysqlnd php56u-bcmath php56u-cli php56u-common php56u-embedded php56u-gd php56u-mbstring php56u-mcrypt"
 		
-        for p in $PACKAGES;do
-	        if isinstalled $p;then
+		for p in $PACKAGES;do
+			if isinstalled $p;then
 				echo " ##" $p "Installed"
 			else
 				echo -n " ##" $p "Installing... "
 				yum -y install $p > /dev/null
+			echo "";
 			fi
-        done;
+		done;
 
         echo ""
 		echo "##  Download Snipe-IT from github and put it in the web directory.";
@@ -376,11 +381,16 @@ case $distro in
 		systemctl restart mariadb.service
 
 		echo "##  Start securing mariaDB server.";
+		echo "";
+		echo "";
 		/usr/bin/mysql_secure_installation 
 
-		#Create the new virtual host in Apache and enable rewrite
-		echo "##  Create the new virtual host in Apache.";
 
+##TODO make sure the apachefile doesnt exhist isnt already in there
+		#Create the new virtual host in Apache and enable rewrite
+		apachefile=/etc/httpd/conf.d/$name.conf
+
+		echo "##  Create the new virtual host in Apache.";
 		echo >> $apachefile ""
 		echo >> $apachefile ""
 		echo >> $apachefile "LoadModule rewrite_module modules/mod_rewrite.so"
@@ -397,29 +407,34 @@ case $distro in
 		echo >> $apachefile "        ErrorLog /var/log/httpd/snipe.error.log"
 		echo >> $apachefile "        CustomLog /var/log/access.log combined"
 		echo >> $apachefile "</VirtualHost>"
-		
+
+##TODO make sure this isnt already in there
 		echo "##  Setup hosts file.";
 		echo >> $hosts "127.0.0.1 $hostname $fqdn"
 
+
+		echo "##  Start the apache server.";
 		# Make apache start on boot and restart the daemon
 		systemctl enable httpd.service
 		systemctl restart httpd.service
-	##TODO get timezone and set it in file
+##TODO get timezone and set it in file
 		# Set timezone
 		# $tzone=$(grep ZONE /etc/sysconfig/clock);
 
 		# if $tzone == 
 
 		#Modify the Snipe-It files necessary for a production environment.
-		replace "'www.yourserver.com'" "'$hostname'" -- $webdir/$name/bootstrap/start.php
+		echo "##  Modify the Snipe-It files necessary for a production environment.";
+
+		replace "'www.yourserver.com'" "'$hostname'" -- $webdir/$name/bootstrap/start.php > /dev/null
 		cp $webdir/$name/app/config/production/database.example.php $webdir/$name/app/config/production/database.php
-		replace "'snipeit_laravel'," "'snipeit'," -- $webdir/$name/app/config/production/database.php
-		replace "'travis'," "'snipeit'," -- $webdir/$name/app/config/production/database.php
-		replace "            'password'  => ''," "            'password'  => '$mysqluserpw'," -- $webdir/$name/app/config/production/database.php
-		replace "'production.yourserver.com'," "'$fqdn'," -- $webdir/$name/app/config/production/database.php
+		replace "'snipeit_laravel'," "'snipeit'," -- $webdir/$name/app/config/production/database.php > /dev/null
+		replace "'travis'," "'snipeit'," -- $webdir/$name/app/config/production/database.php > /dev/null
+		replace "            'password'  => ''," "            'password'  => '$mysqluserpw'," -- $webdir/$name/app/config/production/database.php > /dev/null
+		replace "'production.yourserver.com'," "'$fqdn'," -- $webdir/$name/app/config/production/database.php > /dev/null
 		cp $webdir/$name/app/config/production/app.example.php $webdir/$name/app/config/production/app.php
-		replace "'production.yourserver.com'," "'$fqdn'," -- $webdir/$name/app/config/production/app.php
-		replace "'Change_this_key_or_snipe_will_get_ya'," "'$random32'," -- $webdir/$name/app/config/production/app.php
+		replace "'production.yourserver.com'," "'$fqdn'," -- $webdir/$name/app/config/production/app.php > /dev/null
+		replace "'Change_this_key_or_snipe_will_get_ya'," "'$random32'," -- $webdir/$name/app/config/production/app.php > /dev/null
 		cp $webdir/$name/app/config/production/mail.example.php $webdir/$name/app/config/production/mail.php
 
 		#Install / configure composer
