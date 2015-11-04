@@ -5,7 +5,6 @@
     use AdminController;
     use AssetMaintenance;
     use Carbon\Carbon;
-    use Datatable;
     use DB;
     use Input;
     use Lang;
@@ -94,7 +93,7 @@
 
              $rows[] = array(
                  'id'            => $maintenance->id,
-                 'asset_name'    => $maintenance->asset->showAssetName(),
+                 'asset_name'    =>  link_to('/hardware/'.$maintenance->asset->id.'/view', $maintenance->asset->showAssetName()) ,
                  'title'         => $maintenance->title,
                  'notes'         => $maintenance->notes,
                  'supplier'      => $maintenance->supplier->name,
