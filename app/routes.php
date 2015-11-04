@@ -66,6 +66,7 @@
         /*---Manufacturers API---*/
         Route::group(array('prefix'=>'manufacturers'), function () {
             Route::get('list', array('as'=>'api.manufacturers.list', 'uses'=>'ManufacturersController@getDatatable'));
+            Route::get('{manufacturerID}/view', array('as'=>'api.manufacturers.view', 'uses'=>'ManufacturersController@getDataView'));
         });
 
         /*---Suppliers API---*/
