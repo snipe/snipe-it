@@ -585,11 +585,14 @@ class AssetsController extends AdminController
         } elseif ($asset->assetloc) {
             $use_currency = $asset->assetloc->currency;
         } else {
-          if ($settings->default_currency!='') {
-           $use_currency = Setting::first()->default_currency;
+          $default_currency = Setting::first()->default_currency;
+
+          if ($default_currency!='') {
+            $use_currency = $default_currency;
           } else {
             $use_currency = Lang::get('general.currency');
           }
+          
         }
 
         if (isset($asset->id)) {
