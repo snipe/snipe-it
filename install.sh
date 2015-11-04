@@ -75,11 +75,11 @@ case $distro in
                 ;;
         *centos6*|*redhat6*)
                 echo "  The installer has detected $distro $distVersion as the OS."
-                distro=redhat6
+                distro=centos6
                 ;;
         *centos7*|*redhat7*)
                 echo "  The installer has detected $distro $distVersion as the OS."
-                distro=redhat7
+                distro=centos7
                 ;;
         *)
                 echo "  The installer was unable to determine your OS. Exiting for safety."
@@ -138,7 +138,7 @@ case $distro in
 		webdir=/var/www
 
 		#Update/upgrade Debian/Ubuntu repositories, get the latest version of git.
-		apachefile=/etc/apache2/sites-available/$fqdn.conf
+		apachefile=/etc/apache2/sites-available/$name.conf
 		sudo apt-get update ; sudo apt-get -y upgrade ;	sudo apt-get install -y git unzip
 
 		#  Get files and extract to web dir
@@ -173,7 +173,7 @@ case $distro in
 		echo >> $apachefile "        CustomLog "\${APACHE_LOG_DIR}"/access.log combined"
 		echo >> $apachefile "</VirtualHost>"
 		echo >> $hosts "127.0.0.1 $hostname $fqdn"
-		a2ensite $fqdn.conf
+		a2ensite $name.conf
 
 		#Change permissions on directories
 		sudo chmod -R 755 $webdir/$name/app/storage
@@ -188,9 +188,9 @@ case $distro in
 		replace "'snipeit_laravel'," "'snipeit'," -- $webdir/$name/app/config/production/database.php
 		replace "'travis'," "'snipeit'," -- $webdir/$name/app/config/production/database.php
 		replace "            'password'  => ''," "            'password'  => '$mysqluserpw'," -- $webdir/$name/app/config/production/database.php
-		replace "'http://production.yourserver.com'," "'http://$fqdn'," -- $webdir/$name/app/config/production/database.php
+		replace "'production.yourserver.com'," "'$fqdn'," -- $webdir/$name/app/config/production/database.php
 		cp $webdir/$name/app/config/production/app.example.php $webdir/$name/app/config/production/app.php
-		replace "'https://production.yourserver.com'," "'http://$fqdn'," -- $webdir/$name/app/config/production/app.php
+		replace "'production.yourserver.com'," "'$fqdn'," -- $webdir/$name/app/config/production/app.php
 		replace "'Change_this_key_or_snipe_will_get_ya'," "'$random32'," -- $webdir/$name/app/config/production/app.php
 		replace "'false'," "true," -- $webdir/$name/app/config/production/app.php
 		cp $webdir/$name/app/config/production/mail.example.php $webdir/$name/app/config/production/mail.php
@@ -215,13 +215,14 @@ case $distro in
 
 		service apache2 restart
 		;;
-	redhat6 )
+	centos6 )
 		#####################################  Install for Centos/Redhat 6  ##############################################
 
 		webdir=/var/www/html
-		apachefile=/etc/httpd/conf.d/snipe-it.conf
+		apachefile=/etc/httpd/conf.d/$name.conf
 
 		#Allow us to get the mysql engine
+		echo ""
 		echo "##  Add IUS repo and install mariaDB and a few other packages.";
 		mariadbRepo=/etc/yum.repos.d/MariaDB.repo
 		touch $mariadbRepo
@@ -233,16 +234,23 @@ case $distro in
 		echo >> $mariadbRepo "enable=1"
 
 		yum -y install wget > /dev/null
-		wget -P $tmp/ https://centos6.iuscommunity.org/ius-release.rpm
-		rpm -Uvh ius-release*.rpm > /dev/null
+		wget -P $tmp/ https://centos6.iuscommunity.org/ius-release.rpm > /dev/null
+		rpm -Uvh $tmp/ius-release*.rpm > /dev/null
 
 		#Install PHP and other needed stuff.
 		echo "##  Install PHP and other needed stuff";
 		PACKAGES="php56u php56u-mysqlnd php56u-bcmath php56u-cli php56u-common php56u-embedded php56u-gd php56u-mbstring php56u-mcrypt httpd mariadb-server git unzip epel-release"
 		
-		yum -y install $PACKAGES  > /dev/null
-		rpm --query --queryformat "    " $PACKAGES
+        for p in $PACKAGES;do
+	        if isinstalled $p;then
+				echo " ##" $p "Installed"
+			else
+				echo -n " ##" $p "Installing... "
+				yum -y install $p > /dev/null
+			fi
+        done;
 
+        echo ""
 		echo "##  Download Snipe-IT from github and put it in the web directory.";
 
 		wget -P $tmp/ https://github.com/snipe/snipe-it/archive/$file &> /dev/null
@@ -255,8 +263,7 @@ case $distro in
 		sudo chmod -R 755 $webdir/$name/public/uploads
 		sudo chown -R apache:apache $webdir/$name
 
-
-		# Makde mariaDB start on boot and restart the daemon
+		# Make mariaDB start on boot and restart the daemon
 		echo "##  Start the mariaDB server.";
 		chkconfig mysqld on
 		/sbin/service mysqld restart
@@ -302,9 +309,9 @@ case $distro in
 		replace "'snipeit_laravel'," "'snipeit'," -- $webdir/$name/app/config/production/database.php
 		replace "'travis'," "'snipeit'," -- $webdir/$name/app/config/production/database.php
 		replace "            'password'  => ''," "            'password'  => '$mysqluserpw'," -- $webdir/$name/app/config/production/database.php
-		replace "'http://production.yourserver.com'," "'http://$fqdn'," -- $webdir/$name/app/config/production/database.php
+		replace "'production.yourserver.com'," "'$fqdn'," -- $webdir/$name/app/config/production/database.php
 		cp $webdir/$name/app/config/production/app.example.php $webdir/$name/app/config/production/app.php
-		replace "'https://production.yourserver.com'," "'http://$fqdn'," -- $webdir/$name/app/config/production/app.php
+		replace "'production.yourserver.com'," "'$fqdn'," -- $webdir/$name/app/config/production/app.php
 		replace "'Change_this_key_or_snipe_will_get_ya'," "'$random32'," -- $webdir/$name/app/config/production/app.php
 		cp $webdir/$name/app/config/production/mail.example.php $webdir/$name/app/config/production/mail.php
 
@@ -316,28 +323,29 @@ case $distro in
 		php composer.phar install --no-dev --prefer-source
 		php artisan app:install --env=production
 
-		#Add SELinux and firewall exception/rules. You'll have to allow 443 if you want ssl connectivity.
+#TODO detect if SELinux and firewall are enabled to decide what to do
+		#Add SELinux and firewall exception/rules. Youll have to allow 443 if you want ssl connectivity.
 		# chcon -R -h -t httpd_sys_script_rw_t $webdir/$name/
 		# firewall-cmd --zone=public --add-port=80/tcp --permanent
 		# firewall-cmd --reload
 
 		service httpd restart
 		;;
-	redhat7 )
+	centos7 )
 		#####################################  Install for Centos/Redhat 7  ##############################################
 
 		webdir=/var/www/html
-		apachefile=/etc/httpd/conf.d/snipe-it.conf
+		apachefile=/etc/httpd/conf.d/$name.conf
 
 		#Allow us to get the mysql engine
 		echo ""
 		echo "##  Add IUS repo and install mariaDB and a few other packages.";
 		yum -y install wget > /dev/null
 		wget -P $tmp/ https://centos7.iuscommunity.org/ius-release.rpm > /dev/null
-		rpm -Uvh $tmp/ius-release.rpm > /dev/null
+		rpm -Uvh $tmp/ius-release*.rpm > /dev/null
 
-		#Install PHP stuff.
-		echo "##  Install PHP Stuff";
+		#Install PHP and other needed stuff.
+		echo "##  Install PHP and other needed stuff";
 		PACKAGES="php56u php56u-mysqlnd php56u-bcmath php56u-cli php56u-common php56u-embedded php56u-gd php56u-mbstring php56u-mcrypt httpd mariadb-server git unzip epel-release"
 		
         for p in $PACKAGES;do
@@ -353,7 +361,7 @@ case $distro in
 		echo "##  Download Snipe-IT from github and put it in the web directory.";
 
 		wget -P $tmp/ https://github.com/snipe/snipe-it/archive/$file &> /dev/null
-		unzip -qo $tmp/master.zip -d $tmp/
+		unzip -qo $tmp/$file -d $tmp/
 		cp -R $tmp/snipe-it-master $webdir/$name
 
 		# Change permissions on directories
@@ -362,8 +370,8 @@ case $distro in
 		sudo chmod -R 755 $webdir/$name/public/uploads
 		sudo chown -R apache:apache $webdir/$name
 		
+		# Make mariaDB start on boot and restart the daemon
 		echo "##  Start the mariaDB server.";
-		# Makde mariaDB start on boot and restart the daemon
 		systemctl enable mariadb.service
 		systemctl restart mariadb.service
 
@@ -408,9 +416,9 @@ case $distro in
 		replace "'snipeit_laravel'," "'snipeit'," -- $webdir/$name/app/config/production/database.php
 		replace "'travis'," "'snipeit'," -- $webdir/$name/app/config/production/database.php
 		replace "            'password'  => ''," "            'password'  => '$mysqluserpw'," -- $webdir/$name/app/config/production/database.php
-		replace "'http://production.yourserver.com'," "'http://$fqdn'," -- $webdir/$name/app/config/production/database.php
+		replace "'production.yourserver.com'," "'$fqdn'," -- $webdir/$name/app/config/production/database.php
 		cp $webdir/$name/app/config/production/app.example.php $webdir/$name/app/config/production/app.php
-		replace "'https://production.yourserver.com'," "'http://$fqdn'," -- $webdir/$name/app/config/production/app.php
+		replace "'production.yourserver.com'," "'$fqdn'," -- $webdir/$name/app/config/production/app.php
 		replace "'Change_this_key_or_snipe_will_get_ya'," "'$random32'," -- $webdir/$name/app/config/production/app.php
 		cp $webdir/$name/app/config/production/mail.example.php $webdir/$name/app/config/production/mail.php
 
