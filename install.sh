@@ -74,11 +74,11 @@ case $distro in
                 distro=debian
                 ;;
         *centos6*|*redhat6*)
-                echo "  The installer has detected $distro $distVersion as the OS."
+                echo "  The installer has detected $distro as the OS."
                 distro=centos6
                 ;;
         *centos7*|*redhat7*)
-                echo "  The installer has detected $distro $distVersion as the OS."
+                echo "  The installer has detected $distro as the OS."
                 distro=centos7
                 ;;
         *)
@@ -234,7 +234,7 @@ case $distro in
 		echo >> $mariadbRepo "enable=1"
 
 		yum -y install wget > /dev/null
-		wget -P $tmp/ https://centos6.iuscommunity.org/ius-release.rpm > /dev/null
+		wget -P $tmp/ https://centos6.iuscommunity.org/ius-release.rpm &> /dev/null
 		rpm -Uvh $tmp/ius-release*.rpm > /dev/null
 
 		#Install PHP and other needed stuff.
@@ -341,7 +341,7 @@ case $distro in
 		echo ""
 		echo "##  Add IUS repo and install mariaDB and a few other packages.";
 		yum -y install wget > /dev/null
-		wget -P $tmp/ https://centos7.iuscommunity.org/ius-release.rpm > /dev/null
+		wget -P $tmp/ https://centos7.iuscommunity.org/ius-release.rpm &> /dev/null
 		rpm -Uvh $tmp/ius-release*.rpm > /dev/null
 
 		#Install PHP and other needed stuff.
