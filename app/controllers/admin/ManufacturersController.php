@@ -226,7 +226,7 @@ class ManufacturersController extends AdminController
 
             $rows[] = array(
                 'id'              => $manufacturer->id,
-                'name'          => link_to('admin/manufacturers/'.$manufacturer->id.'/view', $manufacturer->name),
+                'name'          => link_to('admin/settings/manufacturers/'.$manufacturer->id.'/view', $manufacturer->name),
                 'assets'              => $manufacturer->assetscount(),
                 'actions'       => $actions
             );
