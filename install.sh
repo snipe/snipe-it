@@ -131,6 +131,8 @@ echo >> $dbsetup "GRANT ALL PRIVILEGES ON snipeit.* TO snipeit@localhost IDENTIF
 chown root:root $dbsetup
 chmod 700 $dbsetup
 
+## TODO: Progress tracker on each step
+
 case $distro in
 	debian)
 		#####################################  Install for Debian/ubuntu  ##############################################
@@ -138,14 +140,20 @@ case $distro in
 		webdir=/var/www/html
 
 		#Update/upgrade Debian/Ubuntu repositories, get the latest version of git.
+		echo "Updaing ubuntu."
+		echo ""
 		apachefile=/etc/apache2/sites-available/$name.conf
+		sudo apt-get update > /dev/null
+		sudo apt-get -y upgrade > /dev/null
+		sudo apt-get install -y git unzip > /dev/null
 
 		echo "##  Install packages."
-		sudo apt-get install -y git unzip php5 php5-mcrypt php5-curl php5-mysql php5-gd > /dev/null
+		sudo apt-get install -y git unzip php5 php5-mcrypt php5-curl php5-mysql php5-gd php5-ldap > /dev/null
 		#We already established MySQL root & user PWs, so we dont need to be prompted. Let's go ahead and install Apache, PHP and MySQL.
 		sudo DEBIAN_FRONTEND=noninteractive apt-get install -y lamp-server^ > /dev/null
 
 		#  Get files and extract to web dir
+		echo ""
 		echo "##  Download snipeit and extract to web directory."
 		wget -P $tmp/ https://github.com/snipe/snipe-it/archive/$file &> /dev/null
 		unzip -qo $tmp/$file -d $tmp/
@@ -155,9 +163,9 @@ case $distro in
 
 		#Enable mcrypt and rewrite
 		echo "##  Enabled mcrypt and rewrite"
-		sudo php5enmod mcrypt
-		sudo a2enmod rewrite
-		sudo ls -al /etc/apache2/mods-enabled/rewrite.load
+		sudo php5enmod mcrypt > /dev/null
+		sudo a2enmod rewrite > /dev/null
+		sudo ls -al /etc/apache2/mods-enabled/rewrite.load > /dev/null
 
 		#Create a new virtual host for Apache.
 		echo "##  Create Virtual host for apache."
@@ -177,7 +185,7 @@ case $distro in
 
 		echo "##  Setup hosts file."
 		echo >> $hosts "127.0.0.1 $hostname $fqdn"
-		a2ensite $name.conf
+		a2ensite $name.conf > /dev/null
 
 		#Change permissions on directories
 		echo "##  Set permissionson web directory."
@@ -185,32 +193,40 @@ case $distro in
 		sudo chmod -R 755 $webdir/$name/app/private_uploads
 		sudo chmod -R 755 $webdir/$name/public/uploads
 		sudo chown -R www-data:www-data /var/www/
-		echo "##  Finished permission changes."
+		# echo "##  Finished permission changes."
 
 		#Modify the Snipe-It files necessary for a production environment.
 		echo "##  Modify the Snipe-It files necessary for a production environment."
+		echo "   Setting up bootstrap file."
 		replace "'www.yourserver.com'" "'$hostname'" -- $webdir/$name/bootstrap/start.php
+
+		echo "   Setting up database file."
 		cp $webdir/$name/app/config/production/database.example.php $webdir/$name/app/config/production/database.php
 		replace "'snipeit_laravel'," "'snipeit'," -- $webdir/$name/app/config/production/database.php
 		replace "'travis'," "'snipeit'," -- $webdir/$name/app/config/production/database.php
 		replace "            'password'  => ''," "            'password'  => '$mysqluserpw'," -- $webdir/$name/app/config/production/database.php
 		replace "'production.yourserver.com'," "'$fqdn'," -- $webdir/$name/app/config/production/database.php
+
+		echo "   Setting up app file."
 		cp $webdir/$name/app/config/production/app.example.php $webdir/$name/app/config/production/app.php
 		replace "'production.yourserver.com'," "'$fqdn'," -- $webdir/$name/app/config/production/app.php
 		replace "'Change_this_key_or_snipe_will_get_ya'," "'$random32'," -- $webdir/$name/app/config/production/app.php
 		replace "'false'," "true," -- $webdir/$name/app/config/production/app.php
+
+		echo "   Setting up mail file."
 		cp $webdir/$name/app/config/production/mail.example.php $webdir/$name/app/config/production/mail.php
 
+		##  TODO make sure mysql is set to start on boot and go ahead and start it
+
+
+		echo "##  Input your MySQL/MariaDB root password: "
+		sudo mysql -u root < $dbsetup
 
 		echo "##  Secure Mysql"
-		##  TODO make sure mysql is set to start on boot and go ahead and start it
 
 		# Have user set own root password when securing install
 		# and just set the snipeit database user at the beginning
 		/usr/bin/mysql_secure_installation 
-
-		echo -n "##  Input your MySQL/MariaDB root password: "
-		sudo mysql -u root -p < $dbsetup
 
 		#Install / configure composer
 		echo "##  Install and configure composer"
@@ -248,7 +264,7 @@ case $distro in
 
 		#Install PHP and other needed stuff.
 		echo "##  Install PHP and other needed stuff";
-		PACKAGES="epel-release httpd MariaDB-server git unzip php56u php56u-mysqlnd php56u-bcmath php56u-cli php56u-common php56u-embedded php56u-gd php56u-mbstring php56u-mcrypt"
+		PACKAGES="epel-release httpd MariaDB-server git unzip php56u php56u-mysqlnd php56u-bcmath php56u-cli php56u-common php56u-embedded php56u-gd php56u-mbstring php56u-mcrypt php56u-ldap"
 		
 		for p in $PACKAGES;do
 			if isinstalled $p;then
@@ -267,16 +283,13 @@ case $distro in
 		unzip -qo $tmp/$file -d $tmp/
 		cp -R $tmp/snipe-it-master $webdir/$name
 
-		# Change permissions on directories
-		sudo chmod -R 755 $webdir/$name/app/storage
-		sudo chmod -R 755 $webdir/$name/app/private_uploads
-		sudo chmod -R 755 $webdir/$name/public/uploads
-		sudo chown -R apache:apache $webdir/$name
-
 		# Make mariaDB start on boot and restart the daemon
 		echo "##  Start the mariaDB server.";
 		chkconfig mysql on
 		/sbin/service mysql restart
+		
+		echo "##  Input your MySQL/MariaDB root password: "
+		mysql -u root < $dbsetup
 
 		echo "##  Start securing mariaDB server.";
 		/usr/bin/mysql_secure_installation 
@@ -317,6 +330,8 @@ case $distro in
 		# if $tzone == 
 
 		#Modify the Snipe-It files necessary for a production environment.
+		echo "##  Modify the Snipe-It files necessary for a production environment.";
+
 		replace "'www.yourserver.com'" "'$hostname'" -- $webdir/$name/bootstrap/start.php
 		cp $webdir/$name/app/config/production/database.example.php $webdir/$name/app/config/production/database.php
 		replace "'snipeit_laravel'," "'snipeit'," -- $webdir/$name/app/config/production/database.php
@@ -328,12 +343,19 @@ case $distro in
 		replace "'Change_this_key_or_snipe_will_get_ya'," "'$random32'," -- $webdir/$name/app/config/production/app.php
 		cp $webdir/$name/app/config/production/mail.example.php $webdir/$name/app/config/production/mail.php
 
+		# Change permissions on directories
+		sudo chmod -R 755 $webdir/$name/app/storage
+		sudo chmod -R 755 $webdir/$name/app/private_uploads
+		sudo chmod -R 755 $webdir/$name/public/uploads
+		sudo chown -R apache:apache $webdir/$name
+
 		#Install / configure composer
+		echo "##  Configure composer"
 		cd $webdir/$name
-		echo "##  Input your MySQL/MariaDB root password: "
-		mysql -u root -p < $dbsetup
 		curl -sS https://getcomposer.org/installer | php
 		php composer.phar install --no-dev --prefer-source
+
+		echo "##  Install Snipe-IT"
 		php artisan app:install --env=production
 
 #TODO detect if SELinux and firewall are enabled to decide what to do
@@ -358,7 +380,7 @@ case $distro in
 
 		#Install PHP and other needed stuff.
 		echo "##  Install PHP and other needed stuff";
-		PACKAGES="epel-release httpd mariadb-server git unzip php56u php56u-mysqlnd php56u-bcmath php56u-cli php56u-common php56u-embedded php56u-gd php56u-mbstring php56u-mcrypt"
+		PACKAGES="epel-release httpd mariadb-server git unzip php56u php56u-mysqlnd php56u-bcmath php56u-cli php56u-common php56u-embedded php56u-gd php56u-mbstring php56u-mcrypt php56u-ldap"
 		
 		for p in $PACKAGES;do
 			if isinstalled $p;then
@@ -377,16 +399,13 @@ case $distro in
 		unzip -qo $tmp/$file -d $tmp/
 		cp -R $tmp/snipe-it-master $webdir/$name
 
-		# Change permissions on directories
-		sudo chmod -R 755 $webdir/$name/app/storage
-		sudo chmod -R 755 $webdir/$name/app/private_uploads
-		sudo chmod -R 755 $webdir/$name/public/uploads
-		sudo chown -R apache:apache $webdir/$name
-		
 		# Make mariaDB start on boot and restart the daemon
 		echo "##  Start the mariaDB server.";
 		systemctl enable mariadb.service
 		systemctl restart mariadb.service
+
+		echo "##  Input your MySQL/MariaDB root password "
+		mysql -u root < $dbsetup
 
 		echo "##  Start securing mariaDB server.";
 		echo "";
@@ -445,10 +464,16 @@ case $distro in
 		replace "'Change_this_key_or_snipe_will_get_ya'," "'$random32'," -- $webdir/$name/app/config/production/app.php > /dev/null
 		cp $webdir/$name/app/config/production/mail.example.php $webdir/$name/app/config/production/mail.php
 
+
+		# Change permissions on directories
+		sudo chmod -R 755 $webdir/$name/app/storage
+		sudo chmod -R 755 $webdir/$name/app/private_uploads
+		sudo chmod -R 755 $webdir/$name/public/uploads
+		sudo chown -R apache:apache $webdir/$name
+
 		#Install / configure composer
 		cd $webdir/$name
-		echo "##  Input your MySQL/MariaDB root password "
-		mysql -u root -p < $dbsetup
+
 		curl -sS https://getcomposer.org/installer | php
 		php composer.phar install --no-dev --prefer-source
 		php artisan app:install --env=production
