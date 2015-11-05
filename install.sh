@@ -135,30 +135,32 @@ case $distro in
 	debian)
 		#####################################  Install for Debian/ubuntu  ##############################################
 
-		webdir=/var/www
+		webdir=/var/www/html
 
 		#Update/upgrade Debian/Ubuntu repositories, get the latest version of git.
 		apachefile=/etc/apache2/sites-available/$name.conf
-		sudo apt-get update ; sudo apt-get -y upgrade ;	sudo apt-get install -y git unzip
+
+		echo "##  Install packages."
+		sudo apt-get install -y git unzip php5 php5-mcrypt php5-curl php5-mysql php5-gd > /dev/null
+		#We already established MySQL root & user PWs, so we dont need to be prompted. Let's go ahead and install Apache, PHP and MySQL.
+		sudo DEBIAN_FRONTEND=noninteractive apt-get install -y lamp-server^ > /dev/null
 
 		#  Get files and extract to web dir
+		echo "##  Download snipeit and extract to web directory."
 		wget -P $tmp/ https://github.com/snipe/snipe-it/archive/$file &> /dev/null
 		unzip -qo $tmp/$file -d $tmp/
 		cp -R $tmp/snipe-it-master $webdir/$name
 
-		#We already established MySQL root & user PWs, so we dont need to be prompted. Let's go ahead and install Apache, PHP and MySQL.
-		sudo DEBIAN_FRONTEND=noninteractive apt-get install -y lamp-server^
-		sudo apt-get install -y php5 php5-mcrypt php5-curl php5-mysql php5-gd
-
-
 		##  TODO make sure apache is set to start on boot and go ahead and start it
 
 		#Enable mcrypt and rewrite
+		echo "##  Enabled mcrypt and rewrite"
 		sudo php5enmod mcrypt
 		sudo a2enmod rewrite
 		sudo ls -al /etc/apache2/mods-enabled/rewrite.load
 
 		#Create a new virtual host for Apache.
+		echo "##  Create Virtual host for apache."
 		echo >> $apachefile ""
 		echo >> $apachefile ""
 		echo >> $apachefile "<VirtualHost *:80>"
@@ -172,10 +174,13 @@ case $distro in
 		echo >> $apachefile "        ErrorLog "\${APACHE_LOG_DIR}"/error.log"
 		echo >> $apachefile "        CustomLog "\${APACHE_LOG_DIR}"/access.log combined"
 		echo >> $apachefile "</VirtualHost>"
+
+		echo "##  Setup hosts file."
 		echo >> $hosts "127.0.0.1 $hostname $fqdn"
 		a2ensite $name.conf
 
 		#Change permissions on directories
+		echo "##  Set permissionson web directory."
 		sudo chmod -R 755 $webdir/$name/app/storage
 		sudo chmod -R 755 $webdir/$name/app/private_uploads
 		sudo chmod -R 755 $webdir/$name/public/uploads
@@ -183,6 +188,7 @@ case $distro in
 		echo "##  Finished permission changes."
 
 		#Modify the Snipe-It files necessary for a production environment.
+		echo "##  Modify the Snipe-It files necessary for a production environment."
 		replace "'www.yourserver.com'" "'$hostname'" -- $webdir/$name/bootstrap/start.php
 		cp $webdir/$name/app/config/production/database.example.php $webdir/$name/app/config/production/database.php
 		replace "'snipeit_laravel'," "'snipeit'," -- $webdir/$name/app/config/production/database.php
@@ -207,12 +213,14 @@ case $distro in
 		sudo mysql -u root -p < $dbsetup
 
 		#Install / configure composer
+		echo "##  Install and configure composer"
 		curl -sS https://getcomposer.org/installer | php
 		mv composer.phar /usr/local/bin/composer
 		cd $webdir/$name/
 		composer install --no-dev --prefer-source
 		php artisan app:install --env=production
 
+		echo "##  restart apache."
 		service apache2 restart
 		;;
 	centos6 )
@@ -229,7 +237,7 @@ case $distro in
 		touch $mariadbRepo
 		echo >> $mariadbRepo "[mariadb]"
 		echo >> $mariadbRepo "name = MariaDB"
-		echo >> $mariadbRepo "baseurl = http://yum.mariadb.org/10.1/centos6-amd64"
+		echo >> $mariadbRepo "baseurl = http://yum.mariadb.org/10.0/centos6-amd64"
 		echo >> $mariadbRepo "gpgkey=https://yum.mariadb.org/RPM-GPG-KEY-MariaDB"
 		echo >> $mariadbRepo "gpgcheck=1"
 		echo >> $mariadbRepo "enable=1"
@@ -248,7 +256,7 @@ case $distro in
 			else
 				echo -n " ##" $p "Installing... "
 				yum -y install $p > /dev/null
-			echo "";
+				echo "";
 			fi
 		done;
 
