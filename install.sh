@@ -191,7 +191,7 @@ case $distro in
 		#Modify the Snipe-It files necessary for a production environment.
 		echo "##  Modify the Snipe-It files necessary for a production environment."
 		echo "		Setting up Timezone."
-		$tzone=$(cat /etc/timezone);
+		tzone=$(cat /etc/timezone);
 		sed -i "s/UTC/$tzone/g" $webdir/$name/app/config/app.php
 
 		echo "		Setting up bootstrap file."
@@ -331,9 +331,8 @@ case $distro in
 		#Modify the Snipe-It files necessary for a production environment.
 		echo "##  Modify the Snipe-It files necessary for a production environment."
 		echo "		Setting up Timezone."
-		$tzone=$(grep ZONE /etc/sysconfig/clock | tr -d '"' | sed 's/ZONE=//g');
+		tzone=$(grep ZONE /etc/sysconfig/clock | tr -d '"' | sed 's/ZONE=//g');
 		sed -i "s/UTC/$tzone/g" $webdir/$name/app/config/app.php
-
 
 		echo "		Setting up bootstrap file."
 		sed -i "s/www.yourserver.com/$hostname/g" $webdir/$name/bootstrap/start.php
@@ -458,7 +457,7 @@ case $distro in
 		#Modify the Snipe-It files necessary for a production environment.
 		echo "##  Modify the Snipe-It files necessary for a production environment."
 		echo "		Setting up Timezone."
-		$tzone=$(grep ZONE /etc/sysconfig/clock | tr -d '"' | sed 's/ZONE=//g');
+		tzone=$(grep ZONE /etc/sysconfig/clock | tr -d '"' | sed 's/ZONE=//g');
 		sed -i "s/UTC/$tzone/g" $webdir/$name/app/config/app.php
 
 		echo "		Setting up bootstrap file."
