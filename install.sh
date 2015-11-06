@@ -140,6 +140,7 @@ case $distro in
 		webdir=/var/www
 
 		#Update/upgrade Debian/Ubuntu repositories, get the latest version of git.
+		echo ""
 		echo "##  Updaing ubuntu"
 		echo ""
 		apachefile=/etc/apache2/sites-available/$name.conf
@@ -189,22 +190,26 @@ case $distro in
 
 		#Modify the Snipe-It files necessary for a production environment.
 		echo "##  Modify the Snipe-It files necessary for a production environment."
-		echo "   Setting up bootstrap file."
+		echo "		Setting up Timezone."
+		$tzone=$(cat /etc/timezone);
+		sed -i "s/UTC/$tzone/g" $webdir/$name/app/config/app.php
+
+		echo "		Setting up bootstrap file."
 		sed -i "s/www.yourserver.com/$hostname/g" $webdir/$name/bootstrap/start.php
 
-		echo "   Setting up database file."
+		echo "		Setting up database file."
 		cp $webdir/$name/app/config/production/database.example.php $webdir/$name/app/config/production/database.php
 		sed -i "s/snipeit_laravel/snipeit/g" $webdir/$name/app/config/production/database.php
 		sed -i "s/travis/snipeit/g" $webdir/$name/app/config/production/database.php
 		sed -i "s/password'  => ''/password'  => '$mysqluserpw'/g" $webdir/$name/app/config/production/database.php
 
-		echo "   Setting up app file."
+		echo "		Setting up app file."
 		cp $webdir/$name/app/config/production/app.example.php $webdir/$name/app/config/production/app.php
 		sed -i "s/production.yourserver.com/$fqdn/g" $webdir/$name/app/config/production/app.php
 		sed -i "s/Change_this_key_or_snipe_will_get_ya/$random32/g" $webdir/$name/app/config/production/app.php
 		sed -i "s/false/true/g" $webdir/$name/app/config/production/app.php
 
-		echo "   Setting up mail file."
+		echo "		Setting up mail file."
 		cp $webdir/$name/app/config/production/mail.example.php $webdir/$name/app/config/production/mail.php
 
 		##  TODO make sure mysql is set to start on boot and go ahead and start it
@@ -319,32 +324,33 @@ case $distro in
 		echo >> $hosts "127.0.0.1 $hostname $fqdn"
 
 		# Make apache start on boot and restart the daemon
+		echo "##  Start the apache server.";
 		chkconfig httpd on
 		/sbin/service httpd start
-	##TODO get timezone and set it in file
-		# Set timezone
-		# $tzone=$(grep ZONE /etc/sysconfig/clock);
-
-		# if $tzone == 
 
 		#Modify the Snipe-It files necessary for a production environment.
 		echo "##  Modify the Snipe-It files necessary for a production environment."
-		echo "   Setting up bootstrap file."
+		echo "		Setting up Timezone."
+		$tzone=$(grep ZONE /etc/sysconfig/clock | tr -d '"' | sed 's/ZONE=//g');
+		sed -i "s/UTC/$tzone/g" $webdir/$name/app/config/app.php
+
+
+		echo "		Setting up bootstrap file."
 		sed -i "s/www.yourserver.com/$hostname/g" $webdir/$name/bootstrap/start.php
 
-		echo "   Setting up database file."
+		echo "		Setting up database file."
 		cp $webdir/$name/app/config/production/database.example.php $webdir/$name/app/config/production/database.php
 		sed -i "s/snipeit_laravel/snipeit/g" $webdir/$name/app/config/production/database.php
 		sed -i "s/travis/snipeit/g" $webdir/$name/app/config/production/database.php
 		sed -i "s/password'  => ''/password'  => '$mysqluserpw'/g" $webdir/$name/app/config/production/database.php
 
-		echo "   Setting up app file."
+		echo "		Setting up app file."
 		cp $webdir/$name/app/config/production/app.example.php $webdir/$name/app/config/production/app.php
 		sed -i "s/production.yourserver.com/$fqdn/g" $webdir/$name/app/config/production/app.php
 		sed -i "s/Change_this_key_or_snipe_will_get_ya/$random32/g" $webdir/$name/app/config/production/app.php
 		sed -i "s/false/true/g" $webdir/$name/app/config/production/app.php
 
-		echo "   Setting up mail file."
+		echo "		Setting up mail file."
 		cp $webdir/$name/app/config/production/mail.example.php $webdir/$name/app/config/production/mail.php
 
 		# Change permissions on directories
@@ -448,30 +454,29 @@ case $distro in
 		# Make apache start on boot and restart the daemon
 		systemctl enable httpd.service
 		systemctl restart httpd.service
-##TODO get timezone and set it in file
-		# Set timezone
-		# $tzone=$(grep ZONE /etc/sysconfig/clock);
-
-		# if $tzone == 
 
 		#Modify the Snipe-It files necessary for a production environment.
 		echo "##  Modify the Snipe-It files necessary for a production environment."
-		echo "   Setting up bootstrap file."
+		echo "		Setting up Timezone."
+		$tzone=$(grep ZONE /etc/sysconfig/clock | tr -d '"' | sed 's/ZONE=//g');
+		sed -i "s/UTC/$tzone/g" $webdir/$name/app/config/app.php
+
+		echo "		Setting up bootstrap file."
 		sed -i "s/www.yourserver.com/$hostname/g" $webdir/$name/bootstrap/start.php
 
-		echo "   Setting up database file."
+		echo "		Setting up database file."
 		cp $webdir/$name/app/config/production/database.example.php $webdir/$name/app/config/production/database.php
 		sed -i "s/snipeit_laravel/snipeit/g" $webdir/$name/app/config/production/database.php
 		sed -i "s/travis/snipeit/g" $webdir/$name/app/config/production/database.php
 		sed -i "s/password'  => ''/password'  => '$mysqluserpw'/g" $webdir/$name/app/config/production/database.php
 
-		echo "   Setting up app file."
+		echo "		Setting up app file."
 		cp $webdir/$name/app/config/production/app.example.php $webdir/$name/app/config/production/app.php
 		sed -i "s/production.yourserver.com/$fqdn/g" $webdir/$name/app/config/production/app.php
 		sed -i "s/Change_this_key_or_snipe_will_get_ya/$random32/g" $webdir/$name/app/config/production/app.php
 		sed -i "s/false/true/g" $webdir/$name/app/config/production/app.php
 
-		echo "   Setting up mail file."
+		echo "		Setting up mail file."
 		cp $webdir/$name/app/config/production/mail.example.php $webdir/$name/app/config/production/mail.php
 
 		# Change permissions on directories
