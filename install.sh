@@ -190,26 +190,26 @@ case $distro in
 
 		#Modify the Snipe-It files necessary for a production environment.
 		echo "##  Modify the Snipe-It files necessary for a production environment."
-		echo "		Setting up Timezone."
+		echo "	Setting up Timezone."
 		tzone=$(cat /etc/timezone);
 		sed -i "s,UTC,$tzone,g" $webdir/$name/app/config/app.php
 
-		echo "		Setting up bootstrap file."
+		echo "	Setting up bootstrap file."
 		sed -i "s,www.yourserver.com,$hostname,g" $webdir/$name/bootstrap/start.php
 
-		echo "		Setting up database file."
+		echo "	Setting up database file."
 		cp $webdir/$name/app/config/production/database.example.php $webdir/$name/app/config/production/database.php
 		sed -i "s,snipeit_laravel,snipeit,g" $webdir/$name/app/config/production/database.php
 		sed -i "s,travis,snipeit,g" $webdir/$name/app/config/production/database.php
 		sed -i "s,password'  => '',password'  => '$mysqluserpw',g" $webdir/$name/app/config/production/database.php
 
-		echo "		Setting up app file."
+		echo "	Setting up app file."
 		cp $webdir/$name/app/config/production/app.example.php $webdir/$name/app/config/production/app.php
 		sed -i "s,production.yourserver.com,$fqdn,g" $webdir/$name/app/config/production/app.php
 		sed -i "s,Change_this_key_or_snipe_will_get_ya,$random32,g" $webdir/$name/app/config/production/app.php
 		sed -i "s,false,true,g" $webdir/$name/app/config/production/app.php
 
-		echo "		Setting up mail file."
+		echo "	Setting up mail file."
 		cp $webdir/$name/app/config/production/mail.example.php $webdir/$name/app/config/production/mail.php
 
 		##  TODO make sure mysql is set to start on boot and go ahead and start it
@@ -289,7 +289,7 @@ case $distro in
 		# Make mariaDB start on boot and restart the daemon
 		echo "##  Start the mariaDB server.";
 		chkconfig mysql on
-		/sbin/service mysql restart
+		/sbin/service mysql start
 		
 		echo "##  Input your MySQL/MariaDB root password: "
 		mysql -u root < $dbsetup
@@ -309,7 +309,7 @@ case $distro in
 		echo >> $apachefile "<VirtualHost *:80>"
 		echo >> $apachefile "ServerAdmin webmaster@localhost"
 		echo >> $apachefile "    <Directory $webdir/$name/public>"
-		echo >> $apachefile "        Require all granted"
+		echo >> $apachefile "        Allow From All"
 		echo >> $apachefile "        AllowOverride All"
 		echo >> $apachefile "        Options +Indexes"
 		echo >> $apachefile "   </Directory>"
@@ -330,26 +330,26 @@ case $distro in
 
 		#Modify the Snipe-It files necessary for a production environment.
 		echo "##  Modify the Snipe-It files necessary for a production environment."
-		echo "		Setting up Timezone."
+		echo "	Setting up Timezone."
 		tzone=$(grep ZONE /etc/sysconfig/clock | tr -d '"' | sed 's/ZONE=//g');
 		sed -i "s,UTC,$tzone,g" $webdir/$name/app/config/app.php
 
-		echo "		Setting up bootstrap file."
+		echo "	Setting up bootstrap file."
 		sed -i "s,www.yourserver.com,$hostname,g" $webdir/$name/bootstrap/start.php
 
-		echo "		Setting up database file."
+		echo "	Setting up database file."
 		cp $webdir/$name/app/config/production/database.example.php $webdir/$name/app/config/production/database.php
 		sed -i "s,snipeit_laravel,snipeit,g" $webdir/$name/app/config/production/database.php
 		sed -i "s,travis,snipeit,g" $webdir/$name/app/config/production/database.php
 		sed -i "s,password'  => '',password'  => '$mysqluserpw',g" $webdir/$name/app/config/production/database.php
 
-		echo "		Setting up app file."
+		echo "	Setting up app file."
 		cp $webdir/$name/app/config/production/app.example.php $webdir/$name/app/config/production/app.php
 		sed -i "s,production.yourserver.com,$fqdn,g" $webdir/$name/app/config/production/app.php
 		sed -i "s,Change_this_key_or_snipe_will_get_ya,$random32,g" $webdir/$name/app/config/production/app.php
 		sed -i "s,false,true,g" $webdir/$name/app/config/production/app.php
 
-		echo "		Setting up mail file."
+		echo "	Setting up mail file."
 		cp $webdir/$name/app/config/production/mail.example.php $webdir/$name/app/config/production/mail.php
 
 		# Change permissions on directories
@@ -411,7 +411,7 @@ case $distro in
 		# Make mariaDB start on boot and restart the daemon
 		echo "##  Start the mariaDB server.";
 		systemctl enable mariadb.service
-		systemctl restart mariadb.service
+		systemctl start mariadb.service
 
 		echo "##  Input your MySQL/MariaDB root password "
 		mysql -u root < $dbsetup
@@ -434,7 +434,7 @@ case $distro in
 		echo >> $apachefile "<VirtualHost *:80>"
 		echo >> $apachefile "ServerAdmin webmaster@localhost"
 		echo >> $apachefile "    <Directory $webdir/$name/public>"
-		echo >> $apachefile "        Require all granted"
+		echo >> $apachefile "        Allow From All"
 		echo >> $apachefile "        AllowOverride All"
 		echo >> $apachefile "        Options +Indexes"
 		echo >> $apachefile "   </Directory>"
@@ -456,26 +456,26 @@ case $distro in
 
 		#Modify the Snipe-It files necessary for a production environment.
 		echo "##  Modify the Snipe-It files necessary for a production environment."
-		echo "		Setting up Timezone."
+		echo "	Setting up Timezone."
 		tzone=$(grep ZONE /etc/sysconfig/clock | tr -d '"' | sed 's/ZONE=//g');
 		sed -i "s,UTC,$tzone,g" $webdir/$name/app/config/app.php
 
-		echo "		Setting up bootstrap file."
+		echo "	Setting up bootstrap file."
 		sed -i "s,www.yourserver.com,$hostname,g" $webdir/$name/bootstrap/start.php
 
-		echo "		Setting up database file."
+		echo "	Setting up database file."
 		cp $webdir/$name/app/config/production/database.example.php $webdir/$name/app/config/production/database.php
 		sed -i "s,snipeit_laravel,snipeit,g" $webdir/$name/app/config/production/database.php
 		sed -i "s,travis,snipeit,g" $webdir/$name/app/config/production/database.php
 		sed -i "s,password'  => '',password'  => '$mysqluserpw',g" $webdir/$name/app/config/production/database.php
 
-		echo "		Setting up app file."
+		echo "	Setting up app file."
 		cp $webdir/$name/app/config/production/app.example.php $webdir/$name/app/config/production/app.php
 		sed -i "s,production.yourserver.com,$fqdn,g" $webdir/$name/app/config/production/app.php
 		sed -i "s,Change_this_key_or_snipe_will_get_ya,$random32,g" $webdir/$name/app/config/production/app.php
 		sed -i "s,false,true,g" $webdir/$name/app/config/production/app.php
 
-		echo "		Setting up mail file."
+		echo "	Setting up mail file."
 		cp $webdir/$name/app/config/production/mail.example.php $webdir/$name/app/config/production/mail.php
 
 		# Change permissions on directories
