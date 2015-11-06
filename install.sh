@@ -137,7 +137,7 @@ case $distro in
 	debian)
 		#####################################  Install for Debian/ubuntu  ##############################################
 
-		webdir=/var/www/html
+		webdir=/var/www
 
 		#Update/upgrade Debian/Ubuntu repositories, get the latest version of git.
 		echo "##  Updaing ubuntu"
@@ -179,8 +179,8 @@ case $distro in
 		echo >> $apachefile "   </Directory>"
 		echo >> $apachefile "    DocumentRoot $webdir/$name/public"
 		echo >> $apachefile "    ServerName $fqdn"
-		echo >> $apachefile "        ErrorLog "\${APACHE_LOG_DIR}"/error.log"
-		echo >> $apachefile "        CustomLog "\${APACHE_LOG_DIR}"/access.log combined"
+		echo >> $apachefile "        ErrorLog /var/log/apache2/snipeIT.error.log"
+		echo >> $apachefile "        CustomLog /var/log/apache2/access.log combined"
 		echo >> $apachefile "</VirtualHost>"
 
 		echo "##  Setup hosts file."
@@ -310,7 +310,7 @@ case $distro in
 		echo >> $apachefile "   </Directory>"
 		echo >> $apachefile "    DocumentRoot $webdir/$name/public"
 		echo >> $apachefile "    ServerName $fqdn"
-		echo >> $apachefile "        ErrorLog /var/log/httpd/snipe.error.log"
+		echo >> $apachefile "        ErrorLog /var/log/httpd/snipeIT.error.log"
 		echo >> $apachefile "        CustomLog /var/log/access.log combined"
 		echo >> $apachefile "</VirtualHost>"
 		
@@ -435,7 +435,7 @@ case $distro in
 		echo >> $apachefile "   </Directory>"
 		echo >> $apachefile "    DocumentRoot $webdir/$name/public"
 		echo >> $apachefile "    ServerName $fqdn"
-		echo >> $apachefile "        ErrorLog /var/log/httpd/snipe.error.log"
+		echo >> $apachefile "        ErrorLog /var/log/httpd/snipeIT.error.log"
 		echo >> $apachefile "        CustomLog /var/log/access.log combined"
 		echo >> $apachefile "</VirtualHost>"
 
