@@ -192,22 +192,22 @@ case $distro in
 		echo "##  Modify the Snipe-It files necessary for a production environment."
 		echo "		Setting up Timezone."
 		tzone=$(cat /etc/timezone);
-		sed -i "s/UTC/$tzone/g" $webdir/$name/app/config/app.php
+		sed -i "s,UTC,$tzone,g" $webdir/$name/app/config/app.php
 
 		echo "		Setting up bootstrap file."
-		sed -i "s/www.yourserver.com/$hostname/g" $webdir/$name/bootstrap/start.php
+		sed -i "s,www.yourserver.com,$hostname,g" $webdir/$name/bootstrap/start.php
 
 		echo "		Setting up database file."
 		cp $webdir/$name/app/config/production/database.example.php $webdir/$name/app/config/production/database.php
-		sed -i "s/snipeit_laravel/snipeit/g" $webdir/$name/app/config/production/database.php
-		sed -i "s/travis/snipeit/g" $webdir/$name/app/config/production/database.php
-		sed -i "s/password'  => ''/password'  => '$mysqluserpw'/g" $webdir/$name/app/config/production/database.php
+		sed -i "s,snipeit_laravel,snipeit,g" $webdir/$name/app/config/production/database.php
+		sed -i "s,travis,snipeit,g" $webdir/$name/app/config/production/database.php
+		sed -i "s,password'  => '',password'  => '$mysqluserpw',g" $webdir/$name/app/config/production/database.php
 
 		echo "		Setting up app file."
 		cp $webdir/$name/app/config/production/app.example.php $webdir/$name/app/config/production/app.php
-		sed -i "s/production.yourserver.com/$fqdn/g" $webdir/$name/app/config/production/app.php
-		sed -i "s/Change_this_key_or_snipe_will_get_ya/$random32/g" $webdir/$name/app/config/production/app.php
-		sed -i "s/false/true/g" $webdir/$name/app/config/production/app.php
+		sed -i "s,production.yourserver.com,$fqdn,g" $webdir/$name/app/config/production/app.php
+		sed -i "s,Change_this_key_or_snipe_will_get_ya,$random32,g" $webdir/$name/app/config/production/app.php
+		sed -i "s,false,true,g" $webdir/$name/app/config/production/app.php
 
 		echo "		Setting up mail file."
 		cp $webdir/$name/app/config/production/mail.example.php $webdir/$name/app/config/production/mail.php
@@ -332,22 +332,22 @@ case $distro in
 		echo "##  Modify the Snipe-It files necessary for a production environment."
 		echo "		Setting up Timezone."
 		tzone=$(grep ZONE /etc/sysconfig/clock | tr -d '"' | sed 's/ZONE=//g');
-		sed -i "s/UTC/$tzone/g" $webdir/$name/app/config/app.php
+		sed -i "s,UTC,$tzone,g" $webdir/$name/app/config/app.php
 
 		echo "		Setting up bootstrap file."
-		sed -i "s/www.yourserver.com/$hostname/g" $webdir/$name/bootstrap/start.php
+		sed -i "s,www.yourserver.com,$hostname,g" $webdir/$name/bootstrap/start.php
 
 		echo "		Setting up database file."
 		cp $webdir/$name/app/config/production/database.example.php $webdir/$name/app/config/production/database.php
-		sed -i "s/snipeit_laravel/snipeit/g" $webdir/$name/app/config/production/database.php
-		sed -i "s/travis/snipeit/g" $webdir/$name/app/config/production/database.php
-		sed -i "s/password'  => ''/password'  => '$mysqluserpw'/g" $webdir/$name/app/config/production/database.php
+		sed -i "s,snipeit_laravel,snipeit,g" $webdir/$name/app/config/production/database.php
+		sed -i "s,travis,snipeit,g" $webdir/$name/app/config/production/database.php
+		sed -i "s,password'  => '',password'  => '$mysqluserpw',g" $webdir/$name/app/config/production/database.php
 
 		echo "		Setting up app file."
 		cp $webdir/$name/app/config/production/app.example.php $webdir/$name/app/config/production/app.php
-		sed -i "s/production.yourserver.com/$fqdn/g" $webdir/$name/app/config/production/app.php
-		sed -i "s/Change_this_key_or_snipe_will_get_ya/$random32/g" $webdir/$name/app/config/production/app.php
-		sed -i "s/false/true/g" $webdir/$name/app/config/production/app.php
+		sed -i "s,production.yourserver.com,$fqdn,g" $webdir/$name/app/config/production/app.php
+		sed -i "s,Change_this_key_or_snipe_will_get_ya,$random32,g" $webdir/$name/app/config/production/app.php
+		sed -i "s,false,true,g" $webdir/$name/app/config/production/app.php
 
 		echo "		Setting up mail file."
 		cp $webdir/$name/app/config/production/mail.example.php $webdir/$name/app/config/production/mail.php
@@ -458,22 +458,22 @@ case $distro in
 		echo "##  Modify the Snipe-It files necessary for a production environment."
 		echo "		Setting up Timezone."
 		tzone=$(grep ZONE /etc/sysconfig/clock | tr -d '"' | sed 's/ZONE=//g');
-		sed -i "s/UTC/$tzone/g" $webdir/$name/app/config/app.php
+		sed -i "s,UTC,$tzone,g" $webdir/$name/app/config/app.php
 
 		echo "		Setting up bootstrap file."
-		sed -i "s/www.yourserver.com/$hostname/g" $webdir/$name/bootstrap/start.php
+		sed -i "s,www.yourserver.com,$hostname,g" $webdir/$name/bootstrap/start.php
 
 		echo "		Setting up database file."
 		cp $webdir/$name/app/config/production/database.example.php $webdir/$name/app/config/production/database.php
-		sed -i "s/snipeit_laravel/snipeit/g" $webdir/$name/app/config/production/database.php
-		sed -i "s/travis/snipeit/g" $webdir/$name/app/config/production/database.php
-		sed -i "s/password'  => ''/password'  => '$mysqluserpw'/g" $webdir/$name/app/config/production/database.php
+		sed -i "s,snipeit_laravel,snipeit,g" $webdir/$name/app/config/production/database.php
+		sed -i "s,travis,snipeit,g" $webdir/$name/app/config/production/database.php
+		sed -i "s,password'  => '',password'  => '$mysqluserpw',g" $webdir/$name/app/config/production/database.php
 
 		echo "		Setting up app file."
 		cp $webdir/$name/app/config/production/app.example.php $webdir/$name/app/config/production/app.php
-		sed -i "s/production.yourserver.com/$fqdn/g" $webdir/$name/app/config/production/app.php
-		sed -i "s/Change_this_key_or_snipe_will_get_ya/$random32/g" $webdir/$name/app/config/production/app.php
-		sed -i "s/false/true/g" $webdir/$name/app/config/production/app.php
+		sed -i "s,production.yourserver.com,$fqdn,g" $webdir/$name/app/config/production/app.php
+		sed -i "s,Change_this_key_or_snipe_will_get_ya,$random32,g" $webdir/$name/app/config/production/app.php
+		sed -i "s,false,true,g" $webdir/$name/app/config/production/app.php
 
 		echo "		Setting up mail file."
 		cp $webdir/$name/app/config/production/mail.example.php $webdir/$name/app/config/production/mail.php
