@@ -190,20 +190,19 @@ case $distro in
 		#Modify the Snipe-It files necessary for a production environment.
 		echo "##  Modify the Snipe-It files necessary for a production environment."
 		echo "   Setting up bootstrap file."
-		replace "'www.yourserver.com'" "'$hostname'" -- $webdir/$name/bootstrap/start.php
+		sed -i "s/www.yourserver.com/$hostname/g" $webdir/$name/bootstrap/start.php
 
 		echo "   Setting up database file."
 		cp $webdir/$name/app/config/production/database.example.php $webdir/$name/app/config/production/database.php
-		replace "'snipeit_laravel'," "'snipeit'," -- $webdir/$name/app/config/production/database.php
-		replace "'travis'," "'snipeit'," -- $webdir/$name/app/config/production/database.php
-		replace "            'password'  => ''," "            'password'  => '$mysqluserpw'," -- $webdir/$name/app/config/production/database.php
-		replace "'production.yourserver.com'," "'$fqdn'," -- $webdir/$name/app/config/production/database.php
+		sed -i "s/snipeit_laravel/snipeit/g" $webdir/$name/app/config/production/database.php
+		sed -i "s/travis/snipeit/g" $webdir/$name/app/config/production/database.php
+		sed -i "s/password'  => ''/password'  => '$mysqluserpw'/g" $webdir/$name/app/config/production/database.php
 
 		echo "   Setting up app file."
 		cp $webdir/$name/app/config/production/app.example.php $webdir/$name/app/config/production/app.php
-		replace "'production.yourserver.com'," "'$fqdn'," -- $webdir/$name/app/config/production/app.php
-		replace "'Change_this_key_or_snipe_will_get_ya'," "'$random32'," -- $webdir/$name/app/config/production/app.php
-		replace "'false'," "true," -- $webdir/$name/app/config/production/app.php
+		sed -i "s/production.yourserver.com/$fqdn/g" $webdir/$name/app/config/production/app.php
+		sed -i "s/Change_this_key_or_snipe_will_get_ya/$random32/g" $webdir/$name/app/config/production/app.php
+		sed -i "s/false/true/g" $webdir/$name/app/config/production/app.php
 
 		echo "   Setting up mail file."
 		cp $webdir/$name/app/config/production/mail.example.php $webdir/$name/app/config/production/mail.php
@@ -329,17 +328,23 @@ case $distro in
 		# if $tzone == 
 
 		#Modify the Snipe-It files necessary for a production environment.
-		echo "##  Modify the Snipe-It files necessary for a production environment.";
+		echo "##  Modify the Snipe-It files necessary for a production environment."
+		echo "   Setting up bootstrap file."
+		sed -i "s/www.yourserver.com/$hostname/g" $webdir/$name/bootstrap/start.php
 
-		replace "'www.yourserver.com'" "'$hostname'" -- $webdir/$name/bootstrap/start.php
+		echo "   Setting up database file."
 		cp $webdir/$name/app/config/production/database.example.php $webdir/$name/app/config/production/database.php
-		replace "'snipeit_laravel'," "'snipeit'," -- $webdir/$name/app/config/production/database.php
-		replace "'travis'," "'snipeit'," -- $webdir/$name/app/config/production/database.php
-		replace "            'password'  => ''," "            'password'  => '$mysqluserpw'," -- $webdir/$name/app/config/production/database.php
-		replace "'production.yourserver.com'," "'$fqdn'," -- $webdir/$name/app/config/production/database.php
+		sed -i "s/snipeit_laravel/snipeit/g" $webdir/$name/app/config/production/database.php
+		sed -i "s/travis/snipeit/g" $webdir/$name/app/config/production/database.php
+		sed -i "s/password'  => ''/password'  => '$mysqluserpw'/g" $webdir/$name/app/config/production/database.php
+
+		echo "   Setting up app file."
 		cp $webdir/$name/app/config/production/app.example.php $webdir/$name/app/config/production/app.php
-		replace "'production.yourserver.com'," "'$fqdn'," -- $webdir/$name/app/config/production/app.php
-		replace "'Change_this_key_or_snipe_will_get_ya'," "'$random32'," -- $webdir/$name/app/config/production/app.php
+		sed -i "s/production.yourserver.com/$fqdn/g" $webdir/$name/app/config/production/app.php
+		sed -i "s/Change_this_key_or_snipe_will_get_ya/$random32/g" $webdir/$name/app/config/production/app.php
+		sed -i "s/false/true/g" $webdir/$name/app/config/production/app.php
+
+		echo "   Setting up mail file."
 		cp $webdir/$name/app/config/production/mail.example.php $webdir/$name/app/config/production/mail.php
 
 		# Change permissions on directories
@@ -450,19 +455,24 @@ case $distro in
 		# if $tzone == 
 
 		#Modify the Snipe-It files necessary for a production environment.
-		echo "##  Modify the Snipe-It files necessary for a production environment.";
+		echo "##  Modify the Snipe-It files necessary for a production environment."
+		echo "   Setting up bootstrap file."
+		sed -i "s/www.yourserver.com/$hostname/g" $webdir/$name/bootstrap/start.php
 
-		replace "'www.yourserver.com'" "'$hostname'" -- $webdir/$name/bootstrap/start.php > /dev/null
+		echo "   Setting up database file."
 		cp $webdir/$name/app/config/production/database.example.php $webdir/$name/app/config/production/database.php
-		replace "'snipeit_laravel'," "'snipeit'," -- $webdir/$name/app/config/production/database.php > /dev/null
-		replace "'travis'," "'snipeit'," -- $webdir/$name/app/config/production/database.php > /dev/null
-		replace "            'password'  => ''," "            'password'  => '$mysqluserpw'," -- $webdir/$name/app/config/production/database.php > /dev/null
-		replace "'production.yourserver.com'," "'$fqdn'," -- $webdir/$name/app/config/production/database.php > /dev/null
-		cp $webdir/$name/app/config/production/app.example.php $webdir/$name/app/config/production/app.php
-		replace "'production.yourserver.com'," "'$fqdn'," -- $webdir/$name/app/config/production/app.php > /dev/null
-		replace "'Change_this_key_or_snipe_will_get_ya'," "'$random32'," -- $webdir/$name/app/config/production/app.php > /dev/null
-		cp $webdir/$name/app/config/production/mail.example.php $webdir/$name/app/config/production/mail.php
+		sed -i "s/snipeit_laravel/snipeit/g" $webdir/$name/app/config/production/database.php
+		sed -i "s/travis/snipeit/g" $webdir/$name/app/config/production/database.php
+		sed -i "s/password'  => ''/password'  => '$mysqluserpw'/g" $webdir/$name/app/config/production/database.php
 
+		echo "   Setting up app file."
+		cp $webdir/$name/app/config/production/app.example.php $webdir/$name/app/config/production/app.php
+		sed -i "s/production.yourserver.com/$fqdn/g" $webdir/$name/app/config/production/app.php
+		sed -i "s/Change_this_key_or_snipe_will_get_ya/$random32/g" $webdir/$name/app/config/production/app.php
+		sed -i "s/false/true/g" $webdir/$name/app/config/production/app.php
+
+		echo "   Setting up mail file."
+		cp $webdir/$name/app/config/production/mail.example.php $webdir/$name/app/config/production/mail.php
 
 		# Change permissions on directories
 		sudo chmod -R 755 $webdir/$name/app/storage
