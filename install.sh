@@ -140,16 +140,16 @@ case $distro in
 		webdir=/var/www/html
 
 		#Update/upgrade Debian/Ubuntu repositories, get the latest version of git.
-		echo "Updaing ubuntu."
+		echo "##  Updaing ubuntu"
 		echo ""
 		apachefile=/etc/apache2/sites-available/$name.conf
 		sudo apt-get update > /dev/null
 		sudo apt-get -y upgrade > /dev/null
-		sudo apt-get install -y git unzip > /dev/null
 
 		echo "##  Install packages."
 		sudo apt-get install -y git unzip php5 php5-mcrypt php5-curl php5-mysql php5-gd php5-ldap > /dev/null
 		#We already established MySQL root & user PWs, so we dont need to be prompted. Let's go ahead and install Apache, PHP and MySQL.
+		echo "##  Settup LAMP."
 		sudo DEBIAN_FRONTEND=noninteractive apt-get install -y lamp-server^ > /dev/null
 
 		#  Get files and extract to web dir
@@ -187,14 +187,6 @@ case $distro in
 		echo >> $hosts "127.0.0.1 $hostname $fqdn"
 		a2ensite $name.conf > /dev/null
 
-		#Change permissions on directories
-		echo "##  Set permissionson web directory."
-		sudo chmod -R 755 $webdir/$name/app/storage
-		sudo chmod -R 755 $webdir/$name/app/private_uploads
-		sudo chmod -R 755 $webdir/$name/public/uploads
-		sudo chown -R www-data:www-data /var/www/
-		# echo "##  Finished permission changes."
-
 		#Modify the Snipe-It files necessary for a production environment.
 		echo "##  Modify the Snipe-It files necessary for a production environment."
 		echo "   Setting up bootstrap file."
@@ -218,6 +210,13 @@ case $distro in
 
 		##  TODO make sure mysql is set to start on boot and go ahead and start it
 
+		#Change permissions on directories
+		echo "##  Set permissionson web directory."
+		sudo chmod -R 755 $webdir/$name/app/storage
+		sudo chmod -R 755 $webdir/$name/app/private_uploads
+		sudo chmod -R 755 $webdir/$name/public/uploads
+		sudo chown -R www-data:www-data /var/www/
+		# echo "##  Finished permission changes."
 
 		echo "##  Input your MySQL/MariaDB root password: "
 		sudo mysql -u root < $dbsetup
