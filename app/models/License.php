@@ -10,14 +10,20 @@ class License extends Depreciable
     protected $guarded = 'id';
     protected $table = 'licenses';
     protected $rules = array(
-            'name'   => 'required|alpha_space|min:3|max:255',
-            'serial'   => 'required|min:5',
-            'seats'   => 'required|min:1|max:10000|integer',
-            'license_email'   => 'email|min:0|max:120',
-            'license_name'   => 'alpha_space|min:0|max:100',
-            'note'   => 'alpha_space',
-            'notes'   => 'alpha_space|min:0',
-        );
+        'name'   => 'required|alpha_space|min:3|max:255',
+        'serial'   => 'required|min:5',
+        'seats'   => 'required|min:1|max:10000|integer',
+        'license_email'   => 'email|min:0|max:120',
+        'license_name'   => 'alpha_space|min:0|max:100',
+        'note'   => 'alpha_space',
+        'notes'   => 'alpha_space|min:0',
+        'company_id' => 'required|integer',
+    );
+
+    public function company()
+    {
+        return $this->belongsTo('Company', 'company_id');
+    }
 
     /**
      * Get the assigned user

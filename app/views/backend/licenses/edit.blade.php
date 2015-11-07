@@ -33,6 +33,18 @@
     <!-- CSRF Token -->
     <input type="hidden" name="_token" value="{{ csrf_token() }}" />
 
+            <!-- Company -->
+            <div class="form-group {{ $errors->has('company_id') ? ' has-error' : '' }}">
+                <div class="col-md-3 control-label">
+                    {{ Form::label('company_id', Lang::get('general.company')) }}
+                    <i class='fa fa-asterisk'></i>
+                </div>
+                <div class="col-md-7">
+                    {{ Form::select('company_id', $company_list , Input::old('company_id', $license->company_id), array('class'=>'select2', 'style'=>'min-width:350px')) }}
+                    {{ $errors->first('company_id', '<br><span class="alert-msg"><i class="fa fa-times"></i> :message</span>') }}
+                </div>
+            </div>
+
             <!-- License -->
             <div class="form-group {{ $errors->has('name') ? ' has-error' : '' }}">
                 <label for="name" class="col-md-3 control-label">@lang('admin/licenses/form.name')

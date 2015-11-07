@@ -14,6 +14,8 @@ class AdminController extends AuthorizedController
         // Apply the admin auth filter
         //$this->beforeFilter('admin-auth', array('except' => $this->whitelist));
 
+        // CSRF Protection
+        $this->beforeFilter('csrf', array('on' => 'post'));
     }
 
 

@@ -13,6 +13,7 @@ use Validator;
 use View;
 use User;
 use Actionlog;
+use Company;
 use Mail;
 use Datatable;
 use Slack;
@@ -41,7 +42,11 @@ class AccessoriesController extends AdminController
     {
         // Show the page
         $category_list = array('' => '') + DB::table('categories')->where('category_type','=','accessory')->whereNull('deleted_at')->orderBy('name','ASC')->lists('name', 'id');
-        return View::make('backend/accessories/edit')->with('accessory',new Accessory)->with('category_list',$category_list);
+        $company_list = Company::getSelectList();
+        return View::make('backend/accessories/edit')
+            ->with('accessory', new Accessory)
+            ->with('category_list', $category_list)
+            ->with('company_list', $company_list);
     }
 
 
@@ -68,20 +73,21 @@ class AccessoriesController extends AdminController
             // Update the accessory data
             $accessory->name            		= e(Input::get('name'));
             $accessory->category_id            	= e(Input::get('category_id'));
+            $accessory->company_id              = e(Input::get('company_id'));
             $accessory->order_number            = e(Input::get('order_number'));
-            
+
             if (e(Input::get('purchase_date')) == '') {
                 $accessory->purchase_date       =  NULL;
             } else {
                 $accessory->purchase_date       = e(Input::get('purchase_date'));
             }
-            
+
             if (e(Input::get('purchase_cost')) == '0.00') {
                 $accessory->purchase_cost       =  NULL;
             } else {
                 $accessory->purchase_cost       = ParseFloat(e(Input::get('purchase_cost')));
             }
-            
+
             $accessory->qty            			= e(Input::get('qty'));
             $accessory->user_id          		= Sentry::getId();
 
@@ -113,7 +119,11 @@ class AccessoriesController extends AdminController
         }
 
 		$category_list = array('' => '') + DB::table('categories')->where('category_type','=','accessory')->whereNull('deleted_at')->orderBy('name','ASC')->lists('name', 'id');
-        return View::make('backend/accessories/edit', compact('accessory'))->with('category_list',$category_list);
+        $company_list = Company::getSelectList();
+
+        return View::make('backend/accessories/edit', compact('accessory'))
+            ->with('category_list',$category_list)
+            ->with('company_list', $company_list);
     }
 
 
@@ -150,20 +160,21 @@ class AccessoriesController extends AdminController
             // Update the accessory data
             $accessory->name            		= e(Input::get('name'));
             $accessory->category_id            	= e(Input::get('category_id'));
+            $accessory->company_id              = e(Input::get('company_id'));
             $accessory->order_number            = e(Input::get('order_number'));
-            
+
             if (e(Input::get('purchase_date')) == '') {
                 $accessory->purchase_date       =  NULL;
             } else {
                 $accessory->purchase_date       = e(Input::get('purchase_date'));
             }
-            
+
             if (e(Input::get('purchase_cost')) == '0.00') {
                 $accessory->purchase_cost       =  NULL;
             } else {
                 $accessory->purchase_cost       = ParseFloat(e(Input::get('purchase_cost')));
             }
-            
+
             $accessory->qty            			= e(Input::get('qty'));
 
             // Was the accessory created?
@@ -493,7 +504,7 @@ class AccessoriesController extends AdminController
 
     public function getDatatable()
     {
-        $accessories = Accessory::with('category')
+        $accessories = Accessory::with('category', 'company')
         ->whereNull('deleted_at');
 
         if (Input::has('search')) {
@@ -526,17 +537,19 @@ class AccessoriesController extends AdminController
 
         foreach ($accessories as $accessory) {
             $actions = '<a href="'.route('checkout/accessory', $accessory->id).'" style="margin-right:5px;" class="btn btn-info btn-sm" '.(($accessory->numRemaining() > 0 ) ? '' : ' disabled').'>'.Lang::get('general.checkout').'</a><a href="'.route('update/accessory', $accessory->id).'" class="btn btn-warning btn-sm" style="margin-right:5px;"><i class="fa fa-pencil icon-white"></i></a><a data-html="false" class="btn delete-asset btn-danger btn-sm" data-toggle="modal" href="'.route('delete/accessory', $accessory->id).'" data-content="'.Lang::get('admin/accessories/message.delete.confirm').'" data-title="'.Lang::get('general.delete').' '.htmlspecialchars($accessory->name).'?" onClick="return false;"><i class="fa fa-trash icon-white"></i></a>';
+            $company = $accessory->company;
 
             $rows[] = array(
                 'name'          => link_to('admin/accessories/'.$accessory->id.'/view', $accessory->name),
                 'category'      => $accessory->category->name,
                 'qty'           => $accessory->qty,
                 'order_number'  => $accessory->order_number,
-                'purchase_date'  => $accessory->purchase_date,
-                'purchase_cost'  => $accessory->purchase_cost,
+                'purchase_date' => $accessory->purchase_date,
+                'purchase_cost' => $accessory->purchase_cost,
                 'numRemaining'  => $accessory->numRemaining(),
-                'actions'       => $actions
-                );
+                'actions'       => $actions,
+                'companyName'   => is_null($company) ? '' : e($company->name)
+            );
         }
 
         $data = array('total'=>$accessCount, 'rows'=>$rows);

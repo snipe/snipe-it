@@ -30,6 +30,8 @@
     'checkin_from'  		=> 'Checkin from',
     'checkout'  			=> 'Checkout',
     'city'  				=> 'City',
+    'companies'			=> 'Companies',
+    'company'				=> 'Company',
     'consumable'			=> 'Consumable',
     'consumables'			=> 'Consumables',
     'country'  				=> 'Country',

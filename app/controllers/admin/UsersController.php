@@ -14,6 +14,7 @@ use DB;
 use Input;
 use User;
 use Asset;
+use Company;
 use Lang;
 use Actionlog;
 use Location;
@@ -42,11 +43,12 @@ class UsersController extends AdminController {
     protected $validationRules = array(
         'first_name' => 'required|alpha_space|min:2',
         'last_name' => 'required|alpha_space|min:2',
-        'location_id' => 'numeric',
         'username' => 'required|min:2|unique:users,username',
         'email' => 'email|unique:users,email',
         'password' => 'required|min:6',
         'password_confirm' => 'required|min:6|same:password',
+        'company_id' => 'required|integer',
+        'location_id' => 'numeric',
     );
 
     /**
@@ -82,6 +84,7 @@ class UsersController extends AdminController {
 
         $location_list = locationsList();
         $manager_list = managerList();
+        $company_list = Company::getSelectList();
 
         /* echo '<pre>';
           print_r($userPermissions);
@@ -93,6 +96,7 @@ class UsersController extends AdminController {
         return View::make('backend/users/edit', compact('groups', 'userGroups', 'permissions', 'userPermissions'))
                         ->with('location_list', $location_list)
                         ->with('manager_list', $manager_list)
+                        ->with('company_list', $company_list)
                         ->with('user', new User);
     }
 
@@ -267,6 +271,7 @@ class UsersController extends AdminController {
             $this->encodeAllPermissions($permissions);
 
             $location_list = array('' => '') + Location::lists('name', 'id');
+            $company_list = Company::getSelectList();
             $manager_list = array('' => 'Select a User') + DB::table('users')
                             ->select(DB::raw('concat(last_name,", ",first_name," (",email,")") as full_name, id'))
                             ->whereNull('deleted_at')
@@ -285,6 +290,7 @@ class UsersController extends AdminController {
         // Show the page
         return View::make('backend/users/edit', compact('user', 'groups', 'userGroups', 'permissions', 'userPermissions'))
                         ->with('location_list', $location_list)
+                        ->with('company_list', $company_list)
                         ->with('manager_list', $manager_list);
     }
 
@@ -357,6 +363,7 @@ class UsersController extends AdminController {
             $user->jobtitle = Input::get('jobtitle');
             $user->phone = Input::get('phone');
             $user->location_id = Input::get('location_id');
+            $user->company_id = Input::get('company_id');
             $user->manager_id = Input::get('manager_id');
             $user->notes = Input::get('notes');
 
@@ -845,7 +852,8 @@ class UsersController extends AdminController {
             $sort = e(Input::get('sort'));
         }
 
-        $users = User::select(array('users.id','users.email','users.username','users.location_id','users.manager_id','users.first_name','users.last_name','users.created_at','users.notes'))->with('assets', 'accessories', 'consumables', 'licenses', 'manager', 'sentryThrottle', 'groups', 'userloc');
+        $users = User::select(array('id','email','username','location_id','manager_id','first_name','last_name','created_at','notes','company_id'))
+            ->with('assets','accessories','consumables','licenses','manager','sentryThrottle','groups','userloc','company');
 
         switch ($status) {
         case 'deleted':
@@ -927,7 +935,8 @@ class UsersController extends AdminController {
                 'consumables'        => $user->consumables->count(),
                 'groups'        => $group_names,
                 'notes'         => $user->notes,
-                'actions'       => ($actions) ? $actions : ''
+                'actions'       => ($actions) ? $actions : '',
+                'companyName'   => is_null($user->company) ? '' : e($user->company->name)
             );
         }
 

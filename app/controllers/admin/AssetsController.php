@@ -12,6 +12,7 @@ use Setting;
 use Redirect;
 use DB;
 use Actionlog;
+use Company;
 use Model;
 use Depreciation;
 use Sentry;
@@ -63,11 +64,13 @@ class AssetsController extends AdminController
         $manufacturer_list = manufacturerList();
         $category_list = categoryList();
         $supplier_list = suppliersList();
+        $company_list = Company::getSelectList();
         $assigned_to = usersList();
         $statuslabel_types = statusTypeList();
 
         $view = View::make('backend/hardware/edit');
         $view->with('supplier_list',$supplier_list);
+        $view->with('company_list',$company_list);
         $view->with('model_list',$model_list);
         $view->with('statuslabel_list',$statuslabel_list);
         $view->with('assigned_to',$assigned_to);
@@ -160,7 +163,8 @@ class AssetsController extends AdminController
             // Save the asset data
             $asset->name            		= e(Input::get('name'));
             $asset->serial            		= e(Input::get('serial'));
-            $asset->model_id           		= e(Input::get('model_id'));
+            $asset->company_id              = e(Input::get('company_id'));
+            $asset->model_id                = e(Input::get('model_id'));
             $asset->order_number            = e(Input::get('order_number'));
             $asset->notes            		= e(Input::get('notes'));
             $asset->asset_tag            	= e(Input::get('asset_tag'));
@@ -213,12 +217,14 @@ class AssetsController extends AdminController
         $manufacturer_list = manufacturerList();
         $category_list = categoryList();
         $supplier_list = suppliersList();
+        $company_list = Company::getSelectList();
         $assigned_to = usersList();
         $statuslabel_types = statusTypeList();
 
         return View::make('backend/hardware/edit', compact('asset'))
         ->with('model_list',$model_list)
         ->with('supplier_list',$supplier_list)
+        ->with('company_list',$company_list)
         ->with('location_list',$location_list)
         ->with('statuslabel_list',$statuslabel_list)
         ->with('assigned_to',$assigned_to)
@@ -300,13 +306,14 @@ class AssetsController extends AdminController
             $asset->mac_address = ($checkModel == true) ? e(Input::get('mac_address')) : NULL;
 
             // Update the asset data
-            $asset->name            		= e(Input::get('name'));
-            $asset->serial            		= e(Input::get('serial'));
-            $asset->model_id           		= e(Input::get('model_id'));
-            $asset->order_number            = e(Input::get('order_number'));
-            $asset->asset_tag           	= e(Input::get('asset_tag'));
-            $asset->notes            		= e(Input::get('notes'));
-            $asset->physical            	= '1';
+            $asset->name         = e(Input::get('name'));
+            $asset->serial       = e(Input::get('serial'));
+            $asset->company_id   = e(Input::get('company_id'));
+            $asset->model_id     = e(Input::get('model_id'));
+            $asset->order_number = e(Input::get('order_number'));
+            $asset->asset_tag    = e(Input::get('asset_tag'));
+            $asset->notes        = e(Input::get('notes'));
+            $asset->physical     = '1';
 
             // Was the asset updated?
             if($asset->save()) {
@@ -1097,7 +1104,7 @@ class AssetsController extends AdminController
     {
 
 
-       $assets = Asset::with('model','assigneduser','assigneduser.userloc','assetstatus','defaultLoc','assetlog','model','model.category','assetstatus','assetloc')
+       $assets = Asset::with('model','assigneduser','assigneduser.userloc','assetstatus','defaultLoc','assetlog','model','model.category','assetstatus','assetloc', 'company')
        ->Hardware();
 
        if (Input::has('search')) {
@@ -1221,8 +1228,9 @@ class AssetsController extends AdminController
             'last_checkout' => ($asset->last_checkout!='') ? $asset->last_checkout : '',
             'expected_checkin' => ($asset->expected_checkin!='')  ? $asset->expected_checkin : '',
             'change'        => ($inout) ? $inout : '',
-            'actions'       => ($actions) ? $actions : ''
-            );
+            'actions'       => ($actions) ? $actions : '',
+            'companyName'   => is_null($asset->company) ? '' : e($asset->company->name)
+        );
       }
 
       $data = array('total'=>$assetCount, 'rows'=>$rows);

@@ -50,6 +50,19 @@
             <div class="col-md-12 column">
             <br><br>
 
+
+            <!-- Company -->
+            <div class="form-group {{ $errors->has('company_id') ? 'has-error' : '' }}">
+                <div class="col-md-3 control-label">
+                    {{ Form::label('company_id', Lang::get('general.company')) }}
+                    <i class='fa fa-asterisk'></i>
+                </div>
+                <div class="col-md-7">
+                    {{ Form::select('company_id', $company_list , Input::old('company_id', $user->company_id), array('class'=>'select2', 'style'=>'width:350px')) }}
+                    {{ $errors->first('company_id', '<br><span class="alert-msg">:message</span>') }}
+                </div>
+            </div>
+
             <!-- First Name -->
             <div class="form-group {{ $errors->has('first_name') ? 'has-error' : '' }}">
                 <label class="col-md-3 control-label" for="first_name">@lang('general.first_name')
@@ -62,7 +75,7 @@
 
             <!-- Last Name -->
             <div class="form-group {{ $errors->has('last_name') ? 'has-error' : '' }}">
-                <label class="col-md-3 control-label" for="first_name">@lang('general.last_name') <i class='fa fa-asterisk'></i></label>
+                <label class="col-md-3 control-label" for="last_name">@lang('general.last_name') <i class='fa fa-asterisk'></i></label>
                 <div class="col-md-7">
                     <input class="form-control" type="text" name="last_name" id="last_name" value="{{{ Input::old('last_name', $user->last_name) }}}" />
                     {{ $errors->first('last_name', '<br><span class="alert-msg">:message</span>') }}

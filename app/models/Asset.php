@@ -11,6 +11,7 @@ class Asset extends Depreciable
             'name'            => 'alpha_space|min:2|max:255',
             'model_id'        => 'required',
             'status_id'       => 'required',
+            'company_id'      => 'required|integer',
             'warranty_months' => 'integer|min:0|max:240',
             'note'            => 'alpha_space',
             'notes'           => 'alpha_space',
@@ -21,6 +22,11 @@ class Asset extends Depreciable
             'asset_tag'       => 'required|alpha_space|min:3|max:255|unique:assets,asset_tag,{id}',
             'status'          => 'integer'
         ];
+
+        public function company()
+        {
+            return $this->belongsTo('Company', 'company_id');
+        }
 
 
     /**

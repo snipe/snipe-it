@@ -12,6 +12,7 @@ use DB;
 use Redirect;
 use LicenseSeat;
 use Depreciation;
+use Company;
 use Setting;
 use Sentry;
 use Str;
@@ -55,11 +56,14 @@ class LicensesController extends AdminController
         $depreciation_list = array('0' => Lang::get('admin/licenses/form.no_depreciation')) + Depreciation::lists('name', 'id');
         $supplier_list = array('' => 'Select Supplier') + Supplier::orderBy('name', 'asc')->lists('name', 'id');
         $maintained_list = array('' => 'Maintained', '1' => 'Yes', '0' => 'No');
+        $company_list = Company::getSelectList();
+
         return View::make('backend/licenses/edit')
             ->with('license_options',$license_options)
             ->with('depreciation_list',$depreciation_list)
             ->with('supplier_list',$supplier_list)
             ->with('maintained_list',$maintained_list)
+            ->with('company_list', $company_list)
             ->with('license',new License);
     }
 
@@ -124,6 +128,7 @@ class LicensesController extends AdminController
             $license->purchase_date     = e(Input::get('purchase_date'));
             $license->purchase_order    = e(Input::get('purchase_order'));
             $license->depreciation_id   = e(Input::get('depreciation_id'));
+            $license->company_id        = e(Input::get('company_id'));
             $license->expiration_date   = e(Input::get('expiration_date'));
             $license->user_id           = Sentry::getId();
 
@@ -195,10 +200,13 @@ class LicensesController extends AdminController
         $depreciation_list = array('0' => Lang::get('admin/licenses/form.no_depreciation')) + Depreciation::lists('name', 'id');
         $supplier_list = array('' => 'Select Supplier') + Supplier::orderBy('name', 'asc')->lists('name', 'id');
         $maintained_list = array('' => 'Maintained', '1' => 'Yes', '0' => 'No');
+        $company_list = Company::getSelectList();
+
         return View::make('backend/licenses/edit', compact('license'))
             ->with('license_options',$license_options)
             ->with('depreciation_list',$depreciation_list)
             ->with('supplier_list',$supplier_list)
+            ->with('company_list', $company_list)
             ->with('maintained_list',$maintained_list);
     }
 
@@ -234,6 +242,7 @@ class LicensesController extends AdminController
             $license->notes             = e(Input::get('notes'));
             $license->order_number      = e(Input::get('order_number'));
             $license->depreciation_id   = e(Input::get('depreciation_id'));
+            $license->company_id        = e(Input::get('company_id'));
             $license->purchase_order    = e(Input::get('purchase_order'));
             $license->maintained        = e(Input::get('maintained'));
             $license->reassignable      = e(Input::get('reassignable'));
@@ -887,7 +896,7 @@ class LicensesController extends AdminController
     }
 
     public function getDatatable() {
-        $licenses = License::select('id','name','serial','purchase_date','seats');
+        $licenses = License::select('id','name','serial','purchase_date','seats', 'company_id')->with('company');
 
         if (Input::has('search')) {
             $licenses = $licenses->TextSearch(Input::get('search'));
@@ -914,8 +923,9 @@ class LicensesController extends AdminController
                 'totalSeats'        => $license->totalSeatsByLicenseID(),
                 'remaining'         => $license->remaincount(),
                 'purchase_date'     => ($license->purchase_date) ? $license->purchase_date : '',
-                'actions'           => $actions
-                );
+                'actions'           => $actions,
+                'companyName'       => is_null($license->company) ? '' : e($license->company->name)
+            );
         }
 
         $data = array('total' => $licenseCount, 'rows' => $rows);

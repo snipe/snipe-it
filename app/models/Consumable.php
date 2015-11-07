@@ -10,10 +10,16 @@ class Consumable extends Elegant
     * Category validation rules
     */
     public $rules = array(
-        'name'   => 'required|alpha_space|min:3|max:255',
-        'category_id'   	=> 'required|integer',
-        'qty'   	=> 'required|integer|min:0',
+        'name'        => 'required|alpha_space|min:3|max:255',
+        'qty'         => 'required|integer|min:0',
+        'category_id' => 'required|integer',
+        'company_id'  => 'required|integer',
     );
+
+    public function company()
+    {
+        return $this->belongsTo('Company', 'company_id');
+    }
 
     public function category()
     {
@@ -64,7 +70,7 @@ class Consumable extends Elegant
 	    $remaining = $total - $checkedout;
 	    return $remaining;
     }
-    
+
     /**
     * Query builder scope to search on text
     *
