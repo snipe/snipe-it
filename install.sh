@@ -1,9 +1,9 @@
-#!/bin/bash -e
+#!/bin/bash
 
 ######################################################
-# 	    Snipe-It Install Script    	             #
-#	   Script created by Mike Tucker             #
-#	     mtucker6784@gmail.com                   #
+#           Snipe-It Install Script                  #
+#          Script created by Mike Tucker             #
+#            mtucker6784@gmail.com                   #
 # This script is just to help streamline the         #
 # install process for Debian and CentOS              #
 # based distributions. I assume you will be          #
@@ -14,59 +14,106 @@
 # credit where it's due. Thanks!                     #
 ######################################################
 
+# ensure running as root
+if [ "$(id -u)" != "0" ]; then
+  exec sudo "$0" "$@"
+fi
 #First things first, let's set some variables and find our distro.
 clear
+
+name="snipeit"
 si="Snipe-IT"
 hostname="$(hostname)"
-hosts=/etc/hosts
-distro="$(cat /proc/version)"
-file=master.zip
-dir=/var/www/snipe-it-master
-
+fqdn="$(hostname --fqdn)"
 ans=default
+hosts=/etc/hosts
+file=master.zip
+tmp=/tmp/$name
+
+rm -rf $tmp/
+mkdir $tmp
+
+function isinstalled {
+  if yum list installed "$@" >/dev/null 2>&1; then
+    true
+  else
+    false
+  fi
+}
+
+
+#  Lets find what distro we are using and what version
+distro="$(cat /proc/version)"
+if grep -q centos <<<$distro; then
+	for f in $(find /etc -type f -maxdepth 1 \( ! -wholename /etc/os-release ! -wholename /etc/lsb-release -wholename /etc/\*release -o -wholename /etc/\*version \) 2> /dev/null);
+	do
+		distro="${f:5:${#f}-13}"
+	done;
+	if [ "$distro" = "centos" ] || [ "$distro" = "redhat" ]; then
+		distro+="$(rpm -q --qf "%{VERSION}" $(rpm -q --whatprovides redhat-release))"
+	fi
+fi
+
+echo "
+	   _____       _                  __________
+	  / ___/____  (_)___  ___        /  _/_  __/
+	  \__ \/ __ \/ / __ \/ _ \______ / /  / /   
+	 ___/ / / / / / /_/ /  __/_____// /  / /    
+	/____/_/ /_/_/ .___/\___/     /___/ /_/     
+	            /_/                             
+"
+
+echo ""
+echo ""
+echo "  Welcome to Snipe-IT Inventory Installer for Centos and Debian!"
+echo ""
+
 case $distro in
         *Ubuntu*|*Debian*)
-                echo "Ubuntu/Debian detected. Carry forth."
-                distro=u
+                echo "  The installer has detected Ubuntu/Debian as the OS."
+                distro=debian
                 ;;
-        *centos*)
-                echo "CentOS detected. Carry forth."
-                distro=c
+        *centos6*|*redhat6*)
+                echo "  The installer has detected $distro as the OS."
+                distro=centos6
+                ;;
+        *centos7*|*redhat7*)
+                echo "  The installer has detected $distro as the OS."
+                distro=centos7
                 ;;
         *)
-                echo "Not sure of this OS. Exiting for safety."
-		exit
+                echo "  The installer was unable to determine your OS. Exiting for safety."
+                exit
                 ;;
 esac
 
 #Get your FQDN.
-echo ""
-echo "$si install script - Installing $ans"
-echo "Q. What is the FQDN of your server? (example: www.yourserver.com)"
+
+echo -n "  Q. What is the FQDN of your server? ($fqdn): "
 read fqdn
+if [ -z "$fqdn" ]; then
+        fqdn="$(hostname --fqdn)"
+fi
+echo "     Setting to $fqdn"
 echo ""
 
 #Do you want to set your own passwords, or have me generate random ones?
-ans=default
 until [[ $ans == "yes" ]] || [[ $ans == "no" ]]; do
-echo "Q. Do you want me to automatically create the MySQL root & user passwords? (y/n)"
+echo -n "  Q. Do you want me to automatically create the snipe database user password? (y/n) "
 read setpw
 
 case $setpw in
         [yY] | [yY][Ee][Ss] )
-                mysqlrootpw="$(echo `< /dev/urandom tr -dc _A-Za-z-0-9 | head -c8`)"
-                mysqluserpw="$(echo `< /dev/urandom tr -dc _A-Za-z-0-9 | head -c8`)"
-                echo "I'm putting this into /root/mysqlpasswords ... PLEASE REMOVE that file after you have recorded the passwords somewhere safe!"
+                mysqluserpw="$(echo `< /dev/urandom tr -dc _A-Za-z-0-9 | head -c16`)"
                 ans="yes"
                 ;;
         [nN] | [n|N][O|o] )
-		echo "Q. What do you want your root PW to be?"
-                read mysqlrootpw
-                echo "Q. What do you want your snipeit user PW to be?"
-                read mysqluserpw
+                echo -n  "  Q. What do you want your snipeit user password to be?"
+                read -s mysqluserpw
+                echo ""
 				ans="no"
                 ;;
-        *) echo "Invalid answer. Please type y or n"
+        *) 		echo "  Invalid answer. Please type y or n"
                 ;;
 esac
 done
@@ -74,216 +121,393 @@ done
 #Snipe says we need a new 32bit key, so let's create one randomly and inject it into the file
 random32="$(echo `< /dev/urandom tr -dc _A-Za-z-0-9 | head -c32`)"
 
-#createstuff.sql will be injected to the database during install. mysqlpasswords.txt is a file that will contain the root and snipeit user passwords.
+#db_setup.sql will be injected to the database during install. 
 #Again, this file should be removed, which will be a prompt at the end of the script.
-createstufffile=/root/createstuff.sql
-passwordfile=/root/mysqlpasswords.txt
-
-echo >> $createstufffile "CREATE DATABASE snipeit;"
-echo >> $createstufffile "GRANT ALL PRIVILEGES ON snipeit.* TO snipeit@localhost IDENTIFIED BY '$mysqluserpw';"
-echo >> $passwordfile "MySQL Passwords..."
-echo >> $passwordfile "Root: $mysqlrootpw"
-echo >> $passwordfile "User (snipeit): $mysqluserpw"
-echo >> $passwordfile "32 bit random string: $random32"
-echo "MySQL ROOT password: $mysqlrootpw"
-echo "MySQL USER (snipeit) password: $mysqluserpw"
-echo "32 bit random string: $random32"
-echo "These passwords have been exported to /root/mysqlpasswords.txt...I recommend You delete this file for security purposes"
+dbsetup=$tmp/db_setup.sql
+echo >> $dbsetup "CREATE DATABASE snipeit;"
+echo >> $dbsetup "GRANT ALL PRIVILEGES ON snipeit.* TO snipeit@localhost IDENTIFIED BY '$mysqluserpw';"
 
 #Let us make it so only root can read the file. Again, this isn't best practice, so please remove these after the install.
-chown root:root $passwordfile $creatstufffile
-chmod 700 $passwordfile $createstufffile
+chown root:root $dbsetup
+chmod 700 $dbsetup
 
-if [[ $distro == "u" ]]; then
-#Update/upgrade Debian/Ubuntu repositories, get the latest version of git.
-	apachefile=/etc/apache2/sites-available/$fqdn.conf
-	sudo apt-get update ; sudo apt-get -y upgrade ;	sudo apt-get install -y git unzip
+## TODO: Progress tracker on each step
 
-	wget https://github.com/snipe/snipe-it/archive/$file
-	sudo unzip $file -d /var/www/
+case $distro in
+	debian)
+		#####################################  Install for Debian/ubuntu  ##############################################
 
-	#We already established MySQL root & user PWs, so we dont need to be prompted. Let's go ahead and install Apache, PHP and MySQL.
-	sudo DEBIAN_FRONTEND=noninteractive apt-get install -y lamp-server^
-	sudo apt-get install -y php5 php5-mcrypt php5-curl php5-mysql php5-gd
+		webdir=/var/www
 
-	#Create MySQL accounts
-	echo "Create MySQL accounts"
-	sudo mysqladmin -u root password $mysqlrootpw
-	sudo mysql -u root -p$mysqlrootpw < /root/createstuff.sql
+		#Update/upgrade Debian/Ubuntu repositories, get the latest version of git.
+		echo ""
+		echo "##  Updaing ubuntu"
+		echo ""
+		apachefile=/etc/apache2/sites-available/$name.conf
+		sudo apt-get update > /dev/null
+		sudo apt-get -y upgrade > /dev/null
 
-	#Enable mcrypt and rewrite
-	sudo php5enmod mcrypt
-	sudo a2enmod rewrite
-	sudo ls -al /etc/apache2/mods-enabled/rewrite.load
+		echo "##  Install packages."
+		sudo apt-get install -y git unzip php5 php5-mcrypt php5-curl php5-mysql php5-gd php5-ldap > /dev/null
+		#We already established MySQL root & user PWs, so we dont need to be prompted. Let's go ahead and install Apache, PHP and MySQL.
+		echo "##  Settup LAMP."
+		sudo DEBIAN_FRONTEND=noninteractive apt-get install -y lamp-server^ > /dev/null
 
-	#Create a new virtual host for Apache.
-	echo >> $apachefile ""
-	echo >> $apachefile ""
-	echo >> $apachefile "<VirtualHost *:80>"
-	echo >> $apachefile "ServerAdmin webmaster@localhost"
-	echo >> $apachefile "    <Directory $dir/public>"
-	echo >> $apachefile "        Require all granted"
-	echo >> $apachefile "        AllowOverride All"
-	echo >> $apachefile "   </Directory>"
-	echo >> $apachefile "    DocumentRoot $dir/public"
-	echo >> $apachefile "    ServerName $fqdn"
-	echo >> $apachefile "        ErrorLog "\${APACHE_LOG_DIR}"/error.log"
-	echo >> $apachefile "        CustomLog "\${APACHE_LOG_DIR}"/access.log combined"
-	echo >> $apachefile "</VirtualHost>"
-	echo >> $hosts "127.0.0.1 $hostname $fqdn"
-	a2ensite $fqdn.conf
+		#  Get files and extract to web dir
+		echo ""
+		echo "##  Download snipeit and extract to web directory."
+		wget -P $tmp/ https://github.com/snipe/snipe-it/archive/$file &> /dev/null
+		unzip -qo $tmp/$file -d $tmp/
+		cp -R $tmp/snipe-it-master $webdir/$name
 
-	#Change permissions on directories
-	sudo chmod -R 755 $dir/app/storage
-	sudo chmod -R 755 $dir/app/private_uploads
-	sudo chmod -R 755 $dir/public/uploads
-	sudo chown -R www-data:www-data /var/www/
-	echo "Finished permission changes."
+		##  TODO make sure apache is set to start on boot and go ahead and start it
 
-	#Modify the Snipe-It files necessary for a production environment.
-	replace "'www.yourserver.com'" "'$hostname'" -- $dir/bootstrap/start.php
-	cp $dir/app/config/production/database.example.php $dir/app/config/production/database.php
-	replace "'snipeit_laravel'," "'snipeit'," -- $dir/app/config/production/database.php
-	replace "'travis'," "'snipeit'," -- $dir/app/config/production/database.php
-	replace "            'password'  => ''," "            'password'  => '$mysqluserpw'," -- $dir/app/config/production/database.php
-	replace "'http://production.yourserver.com'," "'http://$fqdn'," -- $dir/app/config/production/database.php
-	cp $dir/app/config/production/app.example.php $dir/app/config/production/app.php
-	replace "'http://production.yourserver.com'," "'http://$fqdn'," -- $dir/app/config/production/app.php
-	replace "'Change_this_key_or_snipe_will_get_ya'," "'$random32'," -- $dir/app/config/production/app.php
-	replace "'false'," "true," -- $dir/app/config/production/app.php
-	cp $dir/app/config/production/mail.example.php $dir/app/config/production/mail.php
+		#Enable mcrypt and rewrite
+		echo "##  Enabled mcrypt and rewrite"
+		sudo php5enmod mcrypt > /dev/null
+		sudo a2enmod rewrite > /dev/null
+		sudo ls -al /etc/apache2/mods-enabled/rewrite.load > /dev/null
 
-	#Install / configure composer
-	curl -sS https://getcomposer.org/installer | php
-	mv composer.phar /usr/local/bin/composer
-	cd $dir/
-	composer install --no-dev --prefer-source
-	php artisan app:install --env=production
+		#Create a new virtual host for Apache.
+		echo "##  Create Virtual host for apache."
+		echo >> $apachefile ""
+		echo >> $apachefile ""
+		echo >> $apachefile "<VirtualHost *:80>"
+		echo >> $apachefile "ServerAdmin webmaster@localhost"
+		echo >> $apachefile "    <Directory $webdir/$name/public>"
+		echo >> $apachefile "        Require all granted"
+		echo >> $apachefile "        AllowOverride All"
+		echo >> $apachefile "   </Directory>"
+		echo >> $apachefile "    DocumentRoot $webdir/$name/public"
+		echo >> $apachefile "    ServerName $fqdn"
+		echo >> $apachefile "        ErrorLog /var/log/apache2/snipeIT.error.log"
+		echo >> $apachefile "        CustomLog /var/log/apache2/access.log combined"
+		echo >> $apachefile "</VirtualHost>"
 
-	service apache2 restart
-else
+		echo "##  Setup hosts file."
+		echo >> $hosts "127.0.0.1 $hostname $fqdn"
+		a2ensite $name.conf > /dev/null
 
-	#Make directories so we can create a new apache vhost
-	sudo mkdir /etc/httpd/
-	sudo mkdir /etc/httpd/sites-available/
-	sudo mkdir /etc/httpd/sites-enabled/
-	apachefile=/etc/httpd/sites-available/$fqdn.conf
-	apachefileen=/etc/httpd/sites-enabled/$fqdn.conf
-	apachecfg=/etc/httpd/conf/httpd.conf
+		#Modify the Snipe-It files necessary for a production environment.
+		echo "##  Modify the Snipe-It files necessary for a production environment."
+		echo "	Setting up Timezone."
+		tzone=$(cat /etc/timezone);
+		sed -i "s,UTC,$tzone,g" $webdir/$name/app/config/app.php
 
-	#Allow us to get the mysql engine
-	sudo rpm -Uvh http://dev.mysql.com/get/mysql-community-release-el7-5.noarch.rpm
-	sudo yum -y install httpd mysql-server wget git unzip
+		echo "	Setting up bootstrap file."
+		sed -i "s,www.yourserver.com,$hostname,g" $webdir/$name/bootstrap/start.php
 
-	wget https://github.com/snipe/snipe-it/archive/$file
-	sudo unzip $file -d /var/www/
+		echo "	Setting up database file."
+		cp $webdir/$name/app/config/production/database.example.php $webdir/$name/app/config/production/database.php
+		sed -i "s,snipeit_laravel,snipeit,g" $webdir/$name/app/config/production/database.php
+		sed -i "s,travis,snipeit,g" $webdir/$name/app/config/production/database.php
+		sed -i "s,password'  => '',password'  => '$mysqluserpw',g" $webdir/$name/app/config/production/database.php
 
-	sudo /sbin/service mysqld start
+		echo "	Setting up app file."
+		cp $webdir/$name/app/config/production/app.example.php $webdir/$name/app/config/production/app.php
+		sed -i "s,production.yourserver.com,$fqdn,g" $webdir/$name/app/config/production/app.php
+		sed -i "s,Change_this_key_or_snipe_will_get_ya,$random32,g" $webdir/$name/app/config/production/app.php
+		sed -i "s,false,true,g" $webdir/$name/app/config/production/app.php
 
-	#Create MySQL accounts
-	echo "Create MySQL accounts"
-	sudo mysqladmin -u root password $mysqlrootpw
-	echo ""
-	echo "***Your Current ROOT password is---> $mysqlrootpw"
-	echo "***Use $mysqlrootpw at the following prompt for root login***"
-	sudo /usr/bin/mysql_secure_installation
+		echo "	Setting up mail file."
+		cp $webdir/$name/app/config/production/mail.example.php $webdir/$name/app/config/production/mail.php
 
-	#Install PHP stuff.
-	sudo yum -y install php php-mysql php-bcmath.x86_64 php-cli.x86_64 php-common.x86_64 php-embedded.x86_64 php-gd.x86_64 php-mbstring
-	wget http://dl.fedoraproject.org/pub/epel/7/x86_64/e/epel-release-7-5.noarch.rpm
-	rpm -ivh epel-release-7-5.noarch.rpm
-	yum install -y --enablerepo="epel" php-mcrypt
+		##  TODO make sure mysql is set to start on boot and go ahead and start it
 
-	#Create the new virtual host in Apache.
-	echo >> $apachefile ""
-	echo >> $apachefile ""
-	echo >> $apachefile "<VirtualHost *:80>"
-	echo >> $apachefile "ServerAdmin webmaster@localhost"
-	echo >> $apachefile "    <Directory $dir/public>"
-	echo >> $apachefile "        Require all granted"
-	echo >> $apachefile "        AllowOverride All"
-	echo >> $apachefile "        Options +Indexes"
-	echo >> $apachefile "   </Directory>"
-	echo >> $apachefile "    DocumentRoot $dir/public"
-	echo >> $apachefile "    ServerName $fqdn"
-	echo >> $apachefile "        ErrorLog /var/log/httpd/snipe.error.log"
-	echo >> $apachefile "        CustomLog /var/log/access.log combined"
-	echo >> $apachefile "</VirtualHost>"
-	echo >> $hosts "127.0.0.1 $hostname $fqdn"
-	sudo ln -s $apachefile $apachefileen
+		#Change permissions on directories
+		echo "##  Set permissionson web directory."
+		sudo chmod -R 755 $webdir/$name/app/storage
+		sudo chmod -R 755 $webdir/$name/app/private_uploads
+		sudo chmod -R 755 $webdir/$name/public/uploads
+		sudo chown -R www-data:www-data /var/www/
+		# echo "##  Finished permission changes."
 
-	#Enable rewrite and vhost
-	echo >> $apachecfg "LoadModule rewrite_module modules/mod_rewrite.so"
-	echo >> $apachecfg "IncludeOptional sites-enabled/*.conf"
+		echo "##  Input your MySQL/MariaDB root password: "
+		sudo mysql -u root < $dbsetup
 
-	#Change permissions on directories
-	sudo chmod -R 755 $dir/app/storage
-	sudo chmod -R 755 $dir/app/private_uploads
-	sudo chmod -R 755 $dir/public/uploads
-	sudo chown -R apache:apache /var/www/
+		echo "##  Secure Mysql"
 
-	service httpd restart
+		# Have user set own root password when securing install
+		# and just set the snipeit database user at the beginning
+		/usr/bin/mysql_secure_installation 
 
-	#Modify the Snipe-It files necessary for a production environment.
-	replace "'www.yourserver.com'" "'$hostname'" -- $dir/bootstrap/start.php
-	cp $dir/app/config/production/database.example.php $dir/app/config/production/database.php
-	replace "'snipeit_laravel'," "'snipeit'," -- $dir/app/config/production/database.php
-	replace "'travis'," "'snipeit'," -- $dir/app/config/production/database.php
-	replace "            'password'  => ''," "            'password'  => '$mysqluserpw'," -- $dir/app/config/production/database.php
-	replace "'http://production.yourserver.com'," "'http://$fqdn'," -- $dir/app/config/production/database.php
-	cp $dir/app/config/production/app.example.php $dir/app/config/production/app.php
-	replace "'http://production.yourserver.com'," "'http://$fqdn'," -- $dir/app/config/production/app.php
-	replace "'Change_this_key_or_snipe_will_get_ya'," "'$random32'," -- $dir/app/config/production/app.php
-	cp $dir/app/config/production/mail.example.php $dir/app/config/production/mail.php
+		#Install / configure composer
+		echo "##  Install and configure composer"
+		curl -sS https://getcomposer.org/installer | php
+		mv composer.phar /usr/local/bin/composer
+		cd $webdir/$name/
+		composer install --no-dev --prefer-source
+		php artisan app:install --env=production
 
-	#Install / configure composer
-	cd $dir
-	sudo mysql -u root -p$mysqlrootpw < /root/createstuff.sql
-	curl -sS https://getcomposer.org/installer | php
-	php composer.phar install --no-dev --prefer-source
-	php artisan app:install --env=production
-
-	#Add SELinux and firewall exception/rules. You'll have to allow 443 if you want ssl connectivity.
-	chcon -R -h -t httpd_sys_script_rw_t $dir/
-	firewall-cmd --zone=public --add-port=80/tcp --permanent
-	firewall-cmd --reload
-
-	service httpd restart
-fi
-
-echo ""; echo ""; echo ""
-echo "***I have no idea about your mail environment, so if you want email capability, open up the following***"
-echo "nano -w $dir/app/config/production/mail.php"
-echo "And edit the attributes appropriately."
-sleep 1
-
-echo "";echo "";echo ""
-ans=default
-until [[ $ans == "yes" ]] || [[ $ans == "no" ]]; do
-echo "Q. Shall I delete the password files I created? (Remember to record the passwords before deleting) (y/n)"
-read setpw
-case $setpw in
-
-      [yY] | [yY][Ee][Ss] )
-                rm $createstufffile
-				rm $passwordfile
-                echo "$createstufffile and $passwordfile files have been removed."
-				ans=yes
+		echo "##  restart apache."
+		service apache2 restart
 		;;
-        [nN] | [n|N][O|o] )
-                echo "Ok, I won't remove the file. Please for the love of security, record the passwords and delete this file regardless."
-				echo "$si cannot be held responsible if this file is compromised!"
-				echo "From Snipe: I cannot encourage or even facilitate poor security practices, and still sleep the few, frantic hours I sleep at night."
-				ans=no
+	centos6 )
+		#####################################  Install for Centos/Redhat 6  ##############################################
+
+		webdir=/var/www/html
+
+##TODO make sure the repo doesnt exhist isnt already in there
+
+		#Allow us to get the mysql engine
+		echo ""
+		echo "##  Add IUS and mariaDB repos.";
+		mariadbRepo=/etc/yum.repos.d/MariaDB.repo
+		touch $mariadbRepo
+		echo >> $mariadbRepo "[mariadb]"
+		echo >> $mariadbRepo "name = MariaDB"
+		echo >> $mariadbRepo "baseurl = http://yum.mariadb.org/10.0/centos6-amd64"
+		echo >> $mariadbRepo "gpgkey=https://yum.mariadb.org/RPM-GPG-KEY-MariaDB"
+		echo >> $mariadbRepo "gpgcheck=1"
+		echo >> $mariadbRepo "enable=1"
+
+		yum -y install wget > /dev/null
+		wget -P $tmp/ https://centos6.iuscommunity.org/ius-release.rpm &> /dev/null
+		rpm -Uvh $tmp/ius-release*.rpm > /dev/null
+
+		#Install PHP and other needed stuff.
+		echo "##  Install PHP and other needed stuff";
+		PACKAGES="epel-release httpd MariaDB-server git unzip php56u php56u-mysqlnd php56u-bcmath php56u-cli php56u-common php56u-embedded php56u-gd php56u-mbstring php56u-mcrypt php56u-ldap"
+		
+		for p in $PACKAGES;do
+			if isinstalled $p;then
+				echo " ##" $p "Installed"
+			else
+				echo -n " ##" $p "Installing... "
+				yum -y install $p > /dev/null
+				echo "";
+			fi
+		done;
+
+        echo ""
+		echo "##  Download Snipe-IT from github and put it in the web directory.";
+
+		wget -P $tmp/ https://github.com/snipe/snipe-it/archive/$file &> /dev/null
+		unzip -qo $tmp/$file -d $tmp/
+		cp -R $tmp/snipe-it-master $webdir/$name
+
+		# Make mariaDB start on boot and restart the daemon
+		echo "##  Start the mariaDB server.";
+		chkconfig mysql on
+		/sbin/service mysql start
+		
+		echo "##  Input your MySQL/MariaDB root password: "
+		mysql -u root < $dbsetup
+
+		echo "##  Start securing mariaDB server.";
+		/usr/bin/mysql_secure_installation 
+
+##TODO make sure the apachefile doesnt exhist isnt already in there
+		#Create the new virtual host in Apache and enable rewrite
+		echo "##  Create the new virtual host in Apache.";
+		apachefile=/etc/httpd/conf.d/$name.conf
+
+		echo >> $apachefile ""
+		echo >> $apachefile ""
+		echo >> $apachefile "LoadModule rewrite_module modules/mod_rewrite.so"
+		echo >> $apachefile ""
+		echo >> $apachefile "<VirtualHost *:80>"
+		echo >> $apachefile "ServerAdmin webmaster@localhost"
+		echo >> $apachefile "    <Directory $webdir/$name/public>"
+		echo >> $apachefile "        Allow From All"
+		echo >> $apachefile "        AllowOverride All"
+		echo >> $apachefile "        Options +Indexes"
+		echo >> $apachefile "   </Directory>"
+		echo >> $apachefile "    DocumentRoot $webdir/$name/public"
+		echo >> $apachefile "    ServerName $fqdn"
+		echo >> $apachefile "        ErrorLog /var/log/httpd/snipeIT.error.log"
+		echo >> $apachefile "        CustomLog /var/log/access.log combined"
+		echo >> $apachefile "</VirtualHost>"
+		
+##TODO make sure hosts file doesnt already contain this info
+		echo "##  Setup hosts file.";
+		echo >> $hosts "127.0.0.1 $hostname $fqdn"
+
+		# Make apache start on boot and restart the daemon
+		echo "##  Start the apache server.";
+		chkconfig httpd on
+		/sbin/service httpd start
+
+		#Modify the Snipe-It files necessary for a production environment.
+		echo "##  Modify the Snipe-It files necessary for a production environment."
+		echo "	Setting up Timezone."
+		tzone=$(grep ZONE /etc/sysconfig/clock | tr -d '"' | sed 's/ZONE=//g');
+		sed -i "s,UTC,$tzone,g" $webdir/$name/app/config/app.php
+
+		echo "	Setting up bootstrap file."
+		sed -i "s,www.yourserver.com,$hostname,g" $webdir/$name/bootstrap/start.php
+
+		echo "	Setting up database file."
+		cp $webdir/$name/app/config/production/database.example.php $webdir/$name/app/config/production/database.php
+		sed -i "s,snipeit_laravel,snipeit,g" $webdir/$name/app/config/production/database.php
+		sed -i "s,travis,snipeit,g" $webdir/$name/app/config/production/database.php
+		sed -i "s,password'  => '',password'  => '$mysqluserpw',g" $webdir/$name/app/config/production/database.php
+
+		echo "	Setting up app file."
+		cp $webdir/$name/app/config/production/app.example.php $webdir/$name/app/config/production/app.php
+		sed -i "s,production.yourserver.com,$fqdn,g" $webdir/$name/app/config/production/app.php
+		sed -i "s,Change_this_key_or_snipe_will_get_ya,$random32,g" $webdir/$name/app/config/production/app.php
+		sed -i "s,false,true,g" $webdir/$name/app/config/production/app.php
+
+		echo "	Setting up mail file."
+		cp $webdir/$name/app/config/production/mail.example.php $webdir/$name/app/config/production/mail.php
+
+		# Change permissions on directories
+		sudo chmod -R 755 $webdir/$name/app/storage
+		sudo chmod -R 755 $webdir/$name/app/private_uploads
+		sudo chmod -R 755 $webdir/$name/public/uploads
+		sudo chown -R apache:apache $webdir/$name
+
+		#Install / configure composer
+		echo "##  Configure composer"
+		cd $webdir/$name
+		curl -sS https://getcomposer.org/installer | php
+		php composer.phar install --no-dev --prefer-source
+
+		echo "##  Install Snipe-IT"
+		php artisan app:install --env=production
+
+#TODO detect if SELinux and firewall are enabled to decide what to do
+		#Add SELinux and firewall exception/rules. Youll have to allow 443 if you want ssl connectivity.
+		# chcon -R -h -t httpd_sys_script_rw_t $webdir/$name/
+		# firewall-cmd --zone=public --add-port=80/tcp --permanent
+		# firewall-cmd --reload
+
+		service httpd restart
 		;;
-        *)
-		echo "Please select a valid option"
+	centos7 )
+		#####################################  Install for Centos/Redhat 7  ##############################################
+
+		webdir=/var/www/html
+
+		#Allow us to get the mysql engine
+		echo ""
+		echo "##  Add IUS and mariaDB repos.";
+		yum -y install wget > /dev/null
+		wget -P $tmp/ https://centos7.iuscommunity.org/ius-release.rpm &> /dev/null
+		rpm -Uvh $tmp/ius-release*.rpm > /dev/null
+
+		#Install PHP and other needed stuff.
+		echo "##  Install PHP and other needed stuff";
+		PACKAGES="epel-release httpd mariadb-server git unzip php56u php56u-mysqlnd php56u-bcmath php56u-cli php56u-common php56u-embedded php56u-gd php56u-mbstring php56u-mcrypt php56u-ldap"
+		
+		for p in $PACKAGES;do
+			if isinstalled $p;then
+				echo " ##" $p "Installed"
+			else
+				echo -n " ##" $p "Installing... "
+				yum -y install $p > /dev/null
+			echo "";
+			fi
+		done;
+
+        echo ""
+		echo "##  Download Snipe-IT from github and put it in the web directory.";
+
+		wget -P $tmp/ https://github.com/snipe/snipe-it/archive/$file &> /dev/null
+		unzip -qo $tmp/$file -d $tmp/
+		cp -R $tmp/snipe-it-master $webdir/$name
+
+		# Make mariaDB start on boot and restart the daemon
+		echo "##  Start the mariaDB server.";
+		systemctl enable mariadb.service
+		systemctl start mariadb.service
+
+		echo "##  Input your MySQL/MariaDB root password "
+		mysql -u root < $dbsetup
+
+		echo "##  Start securing mariaDB server.";
+		echo "";
+		echo "";
+		/usr/bin/mysql_secure_installation 
+
+
+##TODO make sure the apachefile doesnt exhist isnt already in there
+		#Create the new virtual host in Apache and enable rewrite
+		apachefile=/etc/httpd/conf.d/$name.conf
+
+		echo "##  Create the new virtual host in Apache.";
+		echo >> $apachefile ""
+		echo >> $apachefile ""
+		echo >> $apachefile "LoadModule rewrite_module modules/mod_rewrite.so"
+		echo >> $apachefile ""
+		echo >> $apachefile "<VirtualHost *:80>"
+		echo >> $apachefile "ServerAdmin webmaster@localhost"
+		echo >> $apachefile "    <Directory $webdir/$name/public>"
+		echo >> $apachefile "        Allow From All"
+		echo >> $apachefile "        AllowOverride All"
+		echo >> $apachefile "        Options +Indexes"
+		echo >> $apachefile "   </Directory>"
+		echo >> $apachefile "    DocumentRoot $webdir/$name/public"
+		echo >> $apachefile "    ServerName $fqdn"
+		echo >> $apachefile "        ErrorLog /var/log/httpd/snipeIT.error.log"
+		echo >> $apachefile "        CustomLog /var/log/access.log combined"
+		echo >> $apachefile "</VirtualHost>"
+
+##TODO make sure this isnt already in there
+		echo "##  Setup hosts file.";
+		echo >> $hosts "127.0.0.1 $hostname $fqdn"
+
+
+		echo "##  Start the apache server.";
+		# Make apache start on boot and restart the daemon
+		systemctl enable httpd.service
+		systemctl restart httpd.service
+
+		#Modify the Snipe-It files necessary for a production environment.
+		echo "##  Modify the Snipe-It files necessary for a production environment."
+		echo "	Setting up Timezone."
+		tzone=$(grep ZONE /etc/sysconfig/clock | tr -d '"' | sed 's/ZONE=//g');
+		sed -i "s,UTC,$tzone,g" $webdir/$name/app/config/app.php
+
+		echo "	Setting up bootstrap file."
+		sed -i "s,www.yourserver.com,$hostname,g" $webdir/$name/bootstrap/start.php
+
+		echo "	Setting up database file."
+		cp $webdir/$name/app/config/production/database.example.php $webdir/$name/app/config/production/database.php
+		sed -i "s,snipeit_laravel,snipeit,g" $webdir/$name/app/config/production/database.php
+		sed -i "s,travis,snipeit,g" $webdir/$name/app/config/production/database.php
+		sed -i "s,password'  => '',password'  => '$mysqluserpw',g" $webdir/$name/app/config/production/database.php
+
+		echo "	Setting up app file."
+		cp $webdir/$name/app/config/production/app.example.php $webdir/$name/app/config/production/app.php
+		sed -i "s,production.yourserver.com,$fqdn,g" $webdir/$name/app/config/production/app.php
+		sed -i "s,Change_this_key_or_snipe_will_get_ya,$random32,g" $webdir/$name/app/config/production/app.php
+		sed -i "s,false,true,g" $webdir/$name/app/config/production/app.php
+
+		echo "	Setting up mail file."
+		cp $webdir/$name/app/config/production/mail.example.php $webdir/$name/app/config/production/mail.php
+
+		# Change permissions on directories
+		sudo chmod -R 755 $webdir/$name/app/storage
+		sudo chmod -R 755 $webdir/$name/app/private_uploads
+		sudo chmod -R 755 $webdir/$name/public/uploads
+		sudo chown -R apache:apache $webdir/$name
+
+		#Install / configure composer
+		cd $webdir/$name
+
+		curl -sS https://getcomposer.org/installer | php
+		php composer.phar install --no-dev --prefer-source
+		php artisan app:install --env=production
+
+#TODO detect if SELinux and firewall are enabled to decide what to do
+		#Add SELinux and firewall exception/rules. Youll have to allow 443 if you want ssl connectivity.
+		# chcon -R -h -t httpd_sys_script_rw_t $webdir/$name/
+		# firewall-cmd --zone=public --add-port=80/tcp --permanent
+		# firewall-cmd --reload
+
+		systemctl restart httpd.service
 		;;
 esac
-done
 
-echo ""; echo ""
-echo "***If you want mail capabilities, open $dir/app/config/production/mail.php and fill out the attributes***"
-echo ""; echo ""
-echo "***$si should now be installed. open up http://$fqdn in a web browser to verify.***"
+echo ""
+echo "  ***If you want mail capabilities, open $webdir/$name/app/config/production/mail.php and fill out the attributes***"
+echo ""
+echo "  ***Open http://$fqdn to login to Snipe-IT.***"
+echo ""
+echo ""
+echo "##  Cleaning up..."
+rm -rf $tmp/
+echo "##  Done!"
 sleep 1
