@@ -140,4 +140,5 @@
     'years'					=> 'years',
     'yes' 					=> 'Yes',
     'zip'  					=> 'Zip',
+    'noimage'					=> 'No image uploaded or image not found.',
     ];
