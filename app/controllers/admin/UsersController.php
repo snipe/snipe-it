@@ -43,7 +43,7 @@ class UsersController extends AdminController {
         'first_name' => 'required|alpha_space|min:2',
         'last_name' => 'required|alpha_space|min:2',
         'location_id' => 'numeric',
-        'username' => 'required|min:2|unique:users,username',
+        'username' => 'required|min:2|unique:users,username, ',
         'email' => 'email|unique:users,email',
         'password' => 'required|min:6',
         'password_confirm' => 'required|min:6|same:password',
@@ -486,8 +486,8 @@ class UsersController extends AdminController {
         if ((!Input::has('edit_user')) || (count(Input::has('edit_user')) == 0)) {
             return Redirect::back()->with('error', 'No users selected');
         } else {
-            $statuslabel_list = array('' => Lang::get('general.select_statuslabel')) + Statuslabel::orderBy('name', 'asc')->lists('name', 'id');
-            $user_raw_array = Input::get('edit_user');
+            $statuslabel_list = statusLabelList();
+            $user_raw_array = array_keys(Input::get('edit_user'));
             $users = User::whereIn('id', $user_raw_array)->with('groups')->get();
             return View::make('backend/users/confirm-bulk-delete', compact('users', 'statuslabel_list'));
         }
