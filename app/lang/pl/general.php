@@ -43,6 +43,7 @@
     'date'					=> 'Data',
     'delete'  				=> 'Kasuj',
     'deleted'  				=> 'Usunięte',
+    'delete_seats'  		=> 'Deleted Seats',
     'deployed'				=> 'Rozmieszczone',
     'depreciation_report'	=> 'Raport Amortyzacji',
     'download'				=> 'Pobieranie',

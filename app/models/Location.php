@@ -21,7 +21,7 @@ class Location extends Elegant
     }
 
     public function assets() {
-        return $this->hasMany('Actionlog','location_id');
+        return $this->hasManyThrough('Asset', 'Actionlog', 'location_id', 'id');
     }
 
     public function assignedassets() {
@@ -99,21 +99,40 @@ class Location extends Elegant
     public function scopeTextsearch($query, $search)
     {
 
-            return $query->where('name', 'LIKE', "%$search%")
-                ->orWhere('address', 'LIKE', "%$search%")
-                ->orWhere('city', 'LIKE', "%$search%")
-                ->orWhere('state', 'LIKE', "%$search%")
-                ->orWhere('zip', 'LIKE', "%$search%")
-                
-                // This doesn't actually work - need to use a table alias maybe?
-                ->orWhere(function($query) use ($search) {
-                    $query->whereHas('parent', function($query) use ($search) {
-                        $query->where(function($query) use ($search) {
-                            $query->where('name','LIKE','%'.$search.'%');
-                        });
-                    });
-                });
+      return $query->where('name', 'LIKE', "%$search%")
+          ->orWhere('address', 'LIKE', "%$search%")
+          ->orWhere('city', 'LIKE', "%$search%")
+          ->orWhere('state', 'LIKE', "%$search%")
+          ->orWhere('zip', 'LIKE', "%$search%")
 
+          // This doesn't actually work - need to use a table alias maybe?
+          ->orWhere(function($query) use ($search) {
+              $query->whereHas('parent', function($query) use ($search) {
+                  $query->where(function($query) use ($search) {
+                      $query->where('name','LIKE','%'.$search.'%');
+                  });
+              })
+            // Ugly, ugly code because Laravel sucks at self-joins
+            ->orWhere(function($query) use ($search) {
+                $query->whereRaw("parent_id IN (select id from locations where name LIKE '%".$search."%') ");
+            });
+      });
+
+    }
+
+
+    /**
+    * Query builder scope to order on parent
+    *
+    * @param  Illuminate\Database\Query\Builder  $query  Query builder instance
+    * @param  text                              $order    	 Order
+    *
+    * @return Illuminate\Database\Query\Builder          Modified query builder
+    */
+    public function scopeOrderParent($query, $order)
+    {
+      // Left join here, or it will only return results with parents
+      return $query->leftJoin('locations as parent_loc', 'locations.parent_id', '=', 'parent_loc.id')->orderBy('parent_loc.name', $order);
     }
 
 

@@ -91,7 +91,10 @@
 
         @if ($asset->purchase_cost)
             <div class="col-md-12" style="padding-bottom: 5px;"><strong>@lang('admin/hardware/form.cost'):</strong>
-            @if (($asset->id) && ($asset->assetloc))
+              
+            @if (($asset->id) && ($asset->userloc))
+                  {{{ $asset->userloc->currency }}}
+            @elseif (($asset->id) && ($asset->assetloc))
                 {{{ $asset->assetloc->currency }}}
             @else
                 {{{ Setting::first()->default_currency }}}
@@ -244,7 +247,7 @@
                     <td>{{{ $assetMaintenance->start_date }}}</td>
                     <td>{{{ $assetMaintenance->completion_date }}}</td>
                     <td>{{{ $assetMaintenance->is_warranty ? Lang::get('admin/asset_maintenances/message.warranty') : Lang::get('admin/asset_maintenances/message.not_warranty') }}}</td>
-                    <td>{{{ sprintf( Lang::get( 'general.currency' ) . '%01.2f', $assetMaintenance->cost) }}}</td>
+                    <td><nobr>{{{ $use_currency.$assetMaintenance->cost }}}</nobr></td>
                     <?php $totalCost += $assetMaintenance->cost; ?>
                     <td><a href="{{ route('update/asset_maintenance', $assetMaintenance->id) }}" class="btn btn-warning btn-sm"><i class="fa fa-pencil icon-white"></i></a>
                     </td>
@@ -254,12 +257,7 @@
             </tbody>
             <tfoot>
             <tr>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td>{{{sprintf(Lang::get( 'general.currency' ) . '%01.2f', $totalCost)}}}</td>
+                <td colspan="7" class="text-right">{{{ $use_currency.$totalCost }}}</td>
             </tr>
             </tfoot>
         </table>
@@ -419,9 +417,22 @@
                     <li><a href="{{ route('view/user', $asset->assigned_to) }}">{{ $asset->assigneduser->fullName() }}</a></li>
 
 
-                    @if (isset($asset->assetloc->address))
+                    @if (isset($asset->userloc))
+                        <li>{{{ $asset->userloc->name }}}
+                        <li>{{{ $asset->userloc->address }}}
+                        @if (isset($asset->userloc->address2))
+                          {{{ $asset->userloc->address2 }}}
+                        @endif
+                        </li>
+                        @if (isset($asset->assetloc->city))
+                            <li>{{{ $asset->assetloc->city }}}, {{{ $asset->assetloc->state }}} {{{ $asset->assetloc->zip }}}</li>
+                        @endif
+
+                    @elseif (isset($asset->assetloc))
+                        <li>{{{ $asset->assetloc->name }}}
                         <li>{{{ $asset->assetloc->address }}}
-                        @if (isset($asset->assetloc->address2)) {{{ $asset->assetloc->address2 }}}
+                        @if (isset($asset->assetloc->address2))
+                          {{{ $asset->assetloc->address2 }}}
                         @endif
                         </li>
                         @if (isset($asset->assetloc->city))

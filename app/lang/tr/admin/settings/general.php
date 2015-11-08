@@ -26,7 +26,8 @@ return array(
     'header_color'              => 'Başlık rengi',
     'info'                      => 'Bu ayarlardan kurulum görünüşünüzü kişiselleştirebilirsiniz.',
     'laravel'                   => 'Laravel Version',
-    'load_remote'				=> 'Bu Snipe-IT kurulumu dünya dışından scriptler yükleyebilir.',
+    'load_remote_text'          => 'Remote Scripts',
+    'load_remote_help_text'		=> 'This Snipe-IT install can load scripts from the outside world.',
     'logo'                    	=> 'Logo',
     'optional'					=> 'İsteğe bağlı',
     'per_page'                  => 'Sayfa başına sonuç sayısı',
@@ -47,4 +48,7 @@ return array(
     'system'                    => 'Sistem Bilgisi',
     'update'                    => 'Ayarları Güncelle',
     'value'                     => 'Değer',
+    'brand'                     => 'Branding',
+    'about_settings_title'      => 'About Settings',
+    'about_settings_text'       => 'These settings let you customize certain aspects of your installation.',    
 );

@@ -1,7 +1,7 @@
 <?php
 
 return array(
-	'dl_csv'      				=> 'Download CSV',
+	'dl_csv'      				=> 'Atsisiūsti CSV',
 	'eula_text'      			=> 'EULA',
     'id'      					=> 'ID',
     'require_acceptance'      	=> 'Priėmimas',

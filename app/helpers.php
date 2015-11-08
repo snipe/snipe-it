@@ -39,7 +39,7 @@ function suppliersList() {
 }
 
 function statusLabelList() {
-    $statuslabel_list = Statuslabel::orderBy('name', 'asc')
+    $statuslabel_list = array('' => Lang::get('general.select_statuslabel')) + Statuslabel::orderBy('name', 'asc')
     ->lists('name', 'id');
     return $statuslabel_list;
 }

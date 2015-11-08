@@ -200,7 +200,7 @@ class User extends SentryUserModel
 
     }
 
-    /**
+  /**
 	* Query builder scope to search on text
 	*
 	* @param  Illuminate\Database\Query\Builder  $query  Query builder instance
@@ -211,28 +211,23 @@ class User extends SentryUserModel
     public function scopeTextsearch($query, $search)
 	{
 
-            return $query->where(function($query) use ($search) {
-                $query->where('first_name', 'LIKE', "%$search%")
-                ->orWhere('last_name', 'LIKE', "%$search%")
-                ->orWhere('email', 'LIKE', "%$search%")
-                ->orWhere('username', 'LIKE', "%$search%")
-                ->orWhere('notes', 'LIKE', "%$search%")
-                ->orWhere(function($query) use ($search) {
-                    $query->whereHas('userloc', function($query) use ($search) {
-                        $query->where('name','LIKE','%'.$search.'%');
-                    });
-                })
-
-                // This doesn't actually work - need to use a table alias maybe?
-                ->orWhere(function($query) use ($search) {
-                    $query->whereHas('manager', function($query) use ($search) {
-                        $query->where(function($query) use ($search) {
-                            $query->where('first_name','LIKE','%'.$search.'%')
-                            ->orWhere('last_name','LIKE','%'.$search.'%');
-                        });
-                    });
-                });
+    return $query->where(function($query) use ($search) {
+        $query->where('users.first_name', 'LIKE', "%$search%")
+        ->orWhere('users.last_name', 'LIKE', "%$search%")
+        ->orWhere('users.email', 'LIKE', "%$search%")
+        ->orWhere('users.username', 'LIKE', "%$search%")
+        ->orWhere('users.notes', 'LIKE', "%$search%")
+        ->orWhere(function($query) use ($search) {
+            $query->whereHas('userloc', function($query) use ($search) {
+                $query->where('name','LIKE','%'.$search.'%');
             });
+        })
+
+        // Ugly, ugly code because Laravel sucks at self-joins
+        ->orWhere(function($query) use ($search) {
+            $query->whereRaw("users.manager_id IN (select id from users where first_name LIKE '%".$search."%' OR last_name LIKE '%".$search."%') ");
+        });
+    });
 
 	}
 
@@ -249,6 +244,22 @@ class User extends SentryUserModel
     {
         return $query->whereNotNull('deleted_at');
     }
+
+
+    /**
+    * Query builder scope to order on manager
+    *
+    * @param  Illuminate\Database\Query\Builder  $query  Query builder instance
+    * @param  text                              $order    	 Order
+    *
+    * @return Illuminate\Database\Query\Builder          Modified query builder
+    */
+    public function scopeOrderManager($query, $order)
+    {
+      // Left join here, or it will only return results with parents
+      return $query->leftJoin('users as manager', 'users.manager_id', '=', 'manager.id')->orderBy('manager.first_name', $order)->orderBy('manager.last_name', $order);
+    }
+
 
 
 }

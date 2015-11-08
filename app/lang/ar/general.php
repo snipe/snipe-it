@@ -43,6 +43,7 @@
     'date'					=> 'التاريخ',
     'delete'  				=> 'حذف',
     'deleted'  				=> 'تم حذفها',
+    'delete_seats'  		=> 'Deleted Seats',
     'deployed'				=> 'مُوزعة',
     'depreciation_report'	=> 'تقرير الإستهلاك',
     'download'				=> 'Download',

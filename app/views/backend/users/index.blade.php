@@ -46,7 +46,7 @@
         data-url="{{ route('api.users.list', array(''=>Input::get('status'))) }}"
         data-cookie="true"
         data-click-to-select="true"
-        data-cookie-id-table="userTable">
+        data-cookie-id-table="userTableDisplay-v{{ Config::get('version.app_version') }}">
            <thead>
                <tr>
                    <th data-class="hidden-xs hidden-sm" data-switchable="false" data-searchable="false" data-sortable="false" data-field="checkbox"><div class="text-center"><input type="checkbox" id="checkAll" style="padding-left: 0px;" style="hidden-xs hidden-sm"></div></th>
@@ -56,8 +56,8 @@
                        <span class="hidden-xs"><i class="fa fa-envelope fa-lg"></i></span>
                    </th>
                    <th data-sortable="true" data-field="username">{{ Lang::get('admin/users/table.username') }}</th>
-                   <th data-sortable="false" data-field="manager">{{ Lang::get('admin/users/table.manager') }}</th>
-                   <th data-sortable="false" data-field="location">{{ Lang::get('admin/users/table.location') }}</th>
+                   <th data-searchable="true" data-sortable="true" data-field="manager">{{ Lang::get('admin/users/table.manager') }}</th>
+                   <th data-sortable="true" data-field="location">{{ Lang::get('admin/users/table.location') }}</th>
                    <th data-sortable="false" data-field="assets">
                        <span class="hidden-md hidden-lg">Assets</span>
                        <span class="hidden-xs"><i class="fa fa-barcode fa-lg"></i></span>

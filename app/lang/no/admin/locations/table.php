@@ -1,7 +1,8 @@
 <?php
 
 return array(
-
+    'assets_rtd'		=> 'Assets RTD',
+    'assets_checkedout'		=> 'Assets Assigned',
     'id'      		=> 'ID',
     'city'   		=> 'By',
     'state'   		=> 'Stat',
@@ -13,5 +14,5 @@ return array(
     'zip'			=> 'Postnummer',
     'locations'		=> 'Plasseringer',
     'parent'		=> 'Overordnet',
-    'currency'  	=> 'Valuta i lokasjon', // this is deprecated
+    'currency'  	=> 'Valuta i lokasjon',
 );

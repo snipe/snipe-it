@@ -1,7 +1,8 @@
 <?php
 
 return array(
-
+    'assets_rtd'		=> 'Assets RTD',
+    'assets_checkedout'		=> 'Assets Assigned',
     'id'      		=> 'Tunnus',
     'city'   		=> 'Kaupunki',
     'state'   		=> 'Lääni',
@@ -12,6 +13,6 @@ return array(
     'address'		=> 'Osoite',
     'zip'			=> 'Postinumero',
     'locations'		=> 'Sijainnit',
-    'parent'		=> 'Parent',
-    'currency'  	=> 'Location Currency', // this is deprecated
+    'parent'		=> 'Ylempi kategoria',
+    'currency'  	=> 'Valuutta',
 );

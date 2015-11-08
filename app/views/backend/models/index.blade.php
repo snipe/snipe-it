@@ -23,15 +23,22 @@
 
 <div class="row form-wrapper">
 
-    <table name="models" id="table" data-url="{{route('api.models.list', Input::get('status'))}}">
+  <table
+  name="models"
+  id="table"
+  data-url="{{route('api.models.list')}}"
+  data-cookie="true"
+  data-click-to-select="true"
+  data-cookie-id-table="modelsTable-v{{ Config::get('version.app_version') }}">
         <thead>
             <tr>
-                <th data-sortable="true" data-field="manufacturer">{{Lang::get('general.manufacturer')}}</th>
+                <th data-sortable="true" data-field="id" data-visible="false">{{Lang::get('general.id')}}</th>
+                <th data-sortable="false" data-field="manufacturer">{{Lang::get('general.manufacturer')}}</th>
                 <th data-sortable="true" data-field="name">{{Lang::get('admin/models/table.title')}}</th>
                 <th data-sortable="true" data-field="modelnumber">{{Lang::get('admin/models/table.modelnumber')}}</th>
-                <th data-sortable="true" data-field="numassets">{{Lang::get('admin/models/table.numassets')}}</th>
-                <th data-sortable="true" data-field="depreciation">{{Lang::get('general.depreciation')}}</th>
-                <th data-sortable="true" data-field="category">{{Lang::get('general.category')}}</th>
+                <th data-sortable="false" data-field="numassets">{{Lang::get('admin/models/table.numassets')}}</th>
+                <th data-sortable="false" data-field="depreciation">{{Lang::get('general.depreciation')}}</th>
+                <th data-sortable="false" data-field="category">{{Lang::get('general.category')}}</th>
                 <th data-sortable="true" data-field="eol">{{Lang::get('general.eol')}}</th>
                 <th data-switchable="false" data-searchable="false" data-sortable="false" data-field="actions">{{ Lang::get('table.actions') }}</th>
             </tr>

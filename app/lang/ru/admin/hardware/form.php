@@ -20,7 +20,7 @@ return array(
     'expected_checkin'  => 'Ожидаемая дата возврата',
     'expires'			=> 'Истекает',
     'fully_depreciated'	=> 'Полностью изношен',
-    'help_checkout'		=> 'If you wish to assign this asset immediately, select "Ready to Deploy" from the status list above. ',
+    'help_checkout'		=> 'Если вы хотите привязать этот актив немедленно, выберите статус "Готов к установке" из списка ниже. ',
     'mac_address'		=> 'MAC Адрес',
     'manufacturer'		=> 'Производитель',
     'model'				=> 'Модель',

@@ -23,7 +23,6 @@ use Config;
 use Location;
 use Log;
 use Mail;
-use Datatable;
 use TCPDF;
 use Slack;
 use Paginator;
@@ -578,17 +577,34 @@ class AssetsController extends AdminController
     public function getView($assetId = null)
     {
         $asset = Asset::withTrashed()->find($assetId);
+        $settings = Setting::getSettings();
+
+
+        if ($asset->userloc) {
+            $use_currency = $asset->userloc->currency;
+        } elseif ($asset->assetloc) {
+            $use_currency = $asset->assetloc->currency;
+        } else {
+          $default_currency = Setting::first()->default_currency;
+
+          if ($settings->default_currency!='') {
+            $use_currency = $settings->default_currency;
+          } else {
+            $use_currency = Lang::get('general.currency');
+          }
+
+        }
 
         if (isset($asset->id)) {
 
-            $settings = Setting::getSettings();
+
 
             $qr_code = (object) array(
                 'display' => $settings->qr_code == '1',
                 'url' => route('qr_code/hardware', $asset->id)
             );
 
-            return View::make('backend/hardware/view', compact('asset', 'qr_code'));
+            return View::make('backend/hardware/view', compact('asset', 'qr_code','settings'))->with('use_currency',$use_currency);
         } else {
             // Prepare the error message
             $error = Lang::get('admin/hardware/message.does_not_exist', compact('id'));
@@ -1130,18 +1146,18 @@ class AssetsController extends AdminController
       }
 
     $allowed_columns = [
-                        'id',
-                        'name',
-                        'asset_tag',
-                        'serial',
-                        'model',
-                        'last_checkout',
-                        'category',
-                        'notes',
-                        'expected_checkin',
-                        'order_number',
-                        'location'
-                      ];
+      'id',
+      'name',
+      'asset_tag',
+      'serial',
+      'model',
+      'last_checkout',
+      'category',
+      'notes',
+      'expected_checkin',
+      'order_number',
+      'location'
+    ];
 
     $order = Input::get('order') === 'asc' ? 'asc' : 'desc';
     $sort = in_array(Input::get('sort'), $allowed_columns) ? Input::get('sort') : 'asset_tag';
@@ -1195,7 +1211,7 @@ class AssetsController extends AdminController
             'name'          => '<a title="'.$asset->name.'" href="hardware/'.$asset->id.'/view">'.$asset->name.'</a>',
             'asset_tag'     => '<a title="'.$asset->asset_tag.'" href="hardware/'.$asset->id.'/view">'.$asset->asset_tag.'</a>',
             'serial'        => $asset->serial,
-            'model'         => ($asset->model) ? $asset->model->name : 'No model',
+            'model'         => ($asset->model) ? link_to('/hardware/models/'.$asset->model->id.'/view', $asset->model->name) : 'No model',
             'status'        => ($asset->assigneduser) ? link_to('../admin/users/'.$asset->assigned_to.'/view', $asset->assigneduser->fullName()) : (($asset->assetstatus) ? $asset->assetstatus->name : ''),
             'location'      => (($asset->assigneduser) && ($asset->assigneduser->userloc!='')) ? link_to('admin/settings/locations/'.$asset->assigneduser->userloc->id.'/edit', $asset->assigneduser->userloc->name) : (($asset->defaultLoc!='') ? link_to('admin/settings/locations/'.$asset->defaultLoc->id.'/edit', $asset->defaultLoc->name) : ''),
             'category'      => (($asset->model) && ($asset->model->category)) ? $asset->model->category->name : '',

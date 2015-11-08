@@ -25,15 +25,15 @@
             data-url="{{route('api.categories.list')}}"
             data-cookie="true"
             data-click-to-select="true"
-            data-cookie-id-table="categoriesTable">
+            data-cookie-id-table="categoriesTable-v{{ Config::get('version.app_version') }}">
 		        <thead>
 		            <tr>
-                        <th data-sortable="true" data-field="id" data-visible="false">@lang('general.id')</th>
+                    <th data-sortable="true" data-field="id" data-visible="false">@lang('general.id')</th>
 		                <th data-sortable="true" data-field="name">{{Lang::get('admin/categories/table.title')}}</th>
 		                <th data-sortable="true" data-field="category_type">{{Lang::get('general.type')}}</th>
 		                <th data-searchable="false" data-sortable="false" data-field="count">{{Lang::get('general.assets')}}</th>
-		                <th data-searchable="false" data-sortable="false" data-field="acceptance">{{Lang::get('admin/categories/table.require_acceptance')}}</th>
-		                <th data-searchable="false" data-sortable="false" data-field="eula">{{Lang::get('admin/categories/table.eula_text')}}</th>
+		                <th data-searchable="false" data-sortable="true" data-field="acceptance">{{Lang::get('admin/categories/table.require_acceptance')}}</th>
+		                <th data-searchable="false" data-sortable="true" data-field="eula">{{Lang::get('admin/categories/table.eula_text')}}</th>
 		                <th data-switchable="false" data-searchable="false" data-sortable="false" data-field="actions">{{ Lang::get('table.actions') }}</th>
 		            </tr>
 		        </thead>

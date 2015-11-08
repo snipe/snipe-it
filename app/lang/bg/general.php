@@ -43,6 +43,7 @@
     'date'					=> 'Дата',
     'delete'  				=> 'Изтриване',
     'deleted'  				=> 'Изтрито',
+    'delete_seats'  		=> 'Deleted Seats',
     'deployed'				=> 'Изписани',
     'depreciation_report'	=> 'Справка за амортизации',
     'download'				=> 'Изтегляне',

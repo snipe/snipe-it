@@ -52,6 +52,9 @@
         /*---Locations API---*/
         Route::group(array('prefix'=>'locations'), function () {
             Route::get('list', array('as'=>'api.locations.list', 'uses'=>'LocationsController@getDatatable'));
+            Route::get('{locationID}/view', array('as'=>'api.locations.view', 'uses'=>'LocationsController@getDataView'));
+            Route::get('{locationID}/users', array('as'=>'api.locations.viewusers', 'uses'=>'LocationsController@getDataViewUsers'));
+            Route::get('{locationID}/assets', array('as'=>'api.locations.viewassets', 'uses'=>'LocationsController@getDataViewAssets'));
         });
 
         /*---Depreciations API---*/
@@ -63,6 +66,7 @@
         /*---Manufacturers API---*/
         Route::group(array('prefix'=>'manufacturers'), function () {
             Route::get('list', array('as'=>'api.manufacturers.list', 'uses'=>'ManufacturersController@getDatatable'));
+            Route::get('{manufacturerID}/view', array('as'=>'api.manufacturers.view', 'uses'=>'ManufacturersController@getDataView'));
         });
 
         /*---Suppliers API---*/
@@ -420,6 +424,7 @@
                 Route::get( '{locationId}/edit',
                     [ 'as' => 'update/location', 'uses' => 'LocationsController@getEdit' ] );
                 Route::post( '{locationId}/edit', 'LocationsController@postEdit' );
+                Route::get( '{locationId}/view', 'LocationsController@getView' );
                 Route::get( '{locationId}/delete',
                     [ 'as' => 'delete/location', 'uses' => 'LocationsController@getDelete' ] );
             } );

@@ -5,7 +5,6 @@
     use AdminController;
     use AssetMaintenance;
     use Carbon\Carbon;
-    use Datatable;
     use DB;
     use Input;
     use Lang;
@@ -20,6 +19,7 @@
     use TCPDF;
     use Validator;
     use View;
+    use Setting;
 
     class AssetMaintenancesController extends AdminController
     {
@@ -48,7 +48,9 @@
 
      public function getDatatable()
      {
-         $maintenances = AssetMaintenance::with('asset','supplier')
+
+
+        $maintenances = AssetMaintenance::with('asset','supplier')
          ->whereNull('deleted_at');
 
          if (Input::has('search')) {
@@ -77,18 +79,25 @@
          $maintenances = $maintenances->skip($offset)->take($limit)->get();
 
          $rows = array();
+         $settings = Setting::getSettings();
 
          foreach($maintenances as $maintenance) {
 
              $actions = '<a href="'.route('update/location', $maintenance->id).'" class="btn btn-warning btn-sm" style="margin-right:5px;"><i class="fa fa-pencil icon-white"></i></a><a data-html="false" class="btn delete-asset btn-danger btn-sm" data-toggle="modal" href="'.route('delete/statuslabel', $maintenance->id).'" data-content="'.Lang::get('admin/asset_maintenances/message.delete.confirm').'" data-title="'.Lang::get('general.delete').' '.htmlspecialchars($maintenance->title).'?" onClick="return false;"><i class="fa fa-trash icon-white"></i></a>';
 
+            if (($maintenance->cost) && ($maintenance->asset->assetloc) &&  ($maintenance->asset->assetloc->currency!='')) {
+                $maintenance_cost = $maintenance->asset->assetloc->currency.$maintenance->cost;
+            } else {
+                $maintenance_cost = $settings->default_currency.$maintenance->cost;
+            }
+
              $rows[] = array(
                  'id'            => $maintenance->id,
-                 'asset_name'    => $maintenance->asset->showAssetName(),
+                 'asset_name'    =>  link_to('/hardware/'.$maintenance->asset->id.'/view', $maintenance->asset->showAssetName()) ,
                  'title'         => $maintenance->title,
                  'notes'         => $maintenance->notes,
                  'supplier'      => $maintenance->supplier->name,
-                 'cost'          => ($maintenance->cost) ? $maintenance->asset->assetloc->currency.''.$maintenance->cost : $maintenance->cost ,
+                 'cost'          => $maintenance_cost,
                  'asset_maintenance_type'          => e($maintenance->asset_maintenance_type),
                  'start_date'         => $maintenance->start_date,
                  'time'          => $maintenance->asset_maintenance_time,

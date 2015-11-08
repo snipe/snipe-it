@@ -25,7 +25,7 @@
             data-url="{{route('api.consumables.list')}}"
             data-cookie="true"
             data-click-to-select="true"
-            data-cookie-id-table="consumablesTable">
+            data-cookie-id-table="consumablesTable-v{{ Config::get('version.app_version') }}">
                 <thead>
                     <tr>
                         <th data-sortable="true" data-field="id" data-visible="false">@lang('general.id')</th>

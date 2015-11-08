@@ -26,7 +26,8 @@ return array(
     'header_color'              => 'Header Color',
     'info'                      => 'Tetapan ini membenarkan anda menyesuaikan sesetengah aspek pemasangan anda.',
     'laravel'                   => 'Versi Laravel',
-    'load_remote'				=> 'This Snipe-IT install can load scripts from the outside world.',
+    'load_remote_text'          => 'Remote Scripts',
+    'load_remote_help_text'		=> 'This Snipe-IT install can load scripts from the outside world.',
     'logo'                    	=> 'Logo',
     'optional'					=> 'optional',
     'per_page'                  => 'Senarai Setiap Mukasurat',
@@ -47,4 +48,7 @@ return array(
     'system'                    => 'Maklumat Sistem',
     'update'                    => 'Kemaskini Tetapan',
     'value'                     => 'Nilai',
+    'brand'                     => 'Branding',
+    'about_settings_title'      => 'About Settings',
+    'about_settings_text'       => 'These settings let you customize certain aspects of your installation.',    
 );

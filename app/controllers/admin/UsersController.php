@@ -43,7 +43,7 @@ class UsersController extends AdminController {
         'first_name' => 'required|alpha_space|min:2',
         'last_name' => 'required|alpha_space|min:2',
         'location_id' => 'numeric',
-        'username' => 'required|min:2|unique:users,username',
+        'username' => 'required|min:2|unique:users,username, ',
         'email' => 'email|unique:users,email',
         'password' => 'required|min:6',
         'password_confirm' => 'required|min:6|same:password',
@@ -486,8 +486,8 @@ class UsersController extends AdminController {
         if ((!Input::has('edit_user')) || (count(Input::has('edit_user')) == 0)) {
             return Redirect::back()->with('error', 'No users selected');
         } else {
-            $statuslabel_list = array('' => Lang::get('general.select_statuslabel')) + Statuslabel::orderBy('name', 'asc')->lists('name', 'id');
-            $user_raw_array = Input::get('edit_user');
+            $statuslabel_list = statusLabelList();
+            $user_raw_array = array_keys(Input::get('edit_user'));
             $users = User::whereIn('id', $user_raw_array)->with('groups')->get();
             return View::make('backend/users/confirm-bulk-delete', compact('users', 'statuslabel_list'));
         }
@@ -845,7 +845,7 @@ class UsersController extends AdminController {
             $sort = e(Input::get('sort'));
         }
 
-        $users = User::with('assets', 'accessories', 'consumables', 'licenses', 'manager', 'sentryThrottle', 'groups', 'userloc');
+        $users = User::select(array('users.id','users.email','users.username','users.location_id','users.manager_id','users.first_name','users.last_name','users.created_at','users.notes'))->with('assets', 'accessories', 'consumables', 'licenses', 'manager', 'sentryThrottle', 'groups', 'userloc');
 
         switch ($status) {
         case 'deleted':
@@ -853,21 +853,31 @@ class UsersController extends AdminController {
           break;
         }
 
-
-
          if (Input::has('search')) {
              $users = $users->TextSearch(Input::get('search'));
          }
 
-        $allowed_columns = ['last_name','first_name','email','username','manager','location','assets','accessories', 'consumables','licenses','groups'];
-        $order = Input::get('order') === 'asc' ? 'asc' : 'desc';
-        $sort = in_array($sort, $allowed_columns) ? $sort : 'first_name';
+         $order = Input::get('order') === 'asc' ? 'asc' : 'desc';
 
+         switch (Input::get('sort'))
+         {
+             case 'manager':
+               $users = $users->OrderManager($order);
+               break;
+             default:
+                $allowed_columns =
+                [
+                  'last_name','first_name','email','username','location',
+                  'assets','accessories', 'consumables','licenses','groups'
+                ];
+
+                $sort = in_array($sort, $allowed_columns) ? $sort : 'first_name';
+                $users = $users->orderBy($sort, $order);
+             break;
+         }
 
         $userCount = $users->count();
-        $users = $users->skip($offset)->take($limit)->orderBy($sort, $order)->get();
-
-
+        $users = $users->skip($offset)->take($limit)->get();
         $rows = array();
 
         foreach ($users as $user)
