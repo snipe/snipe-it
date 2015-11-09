@@ -171,17 +171,6 @@ class AssetsController extends AdminController
             $asset->physical            		= '1';
             $asset->depreciate          		= '0';
 
-	    // Create the image (if one was chosen.)
-            if (Input::file('image')) {
-                $image = Input::file('image');
-                $file_name = str_random(25).".".$image->getClientOriginalExtension();
-                $path = public_path('uploads/assets/'.$file_name);
-                Image::make($image->getRealPath())->resize(300, null, function ($constraint) {
-                    $constraint->aspectRatio();
-                    $constraint->upsize();
-                })->save($path);
-                $asset->image = $file_name;
-
 
             // Was the asset created?
             if($asset->save()) {
@@ -195,6 +184,17 @@ class AssetsController extends AdminController
 					$logaction->note = e(Input::get('note'));
 					$log = $logaction->logaction('checkout');
 				}
+	    // Create the image (if one was chosen.)
+            if (Input::file('image')) {
+                $image = Input::file('image');
+                $file_name = str_random(25).".".$image->getClientOriginalExtension();
+                $path = public_path('uploads/assets/'.$file_name);
+                Image::make($image->getRealPath())->resize(300, null, function ($constraint) {
+                    $constraint->aspectRatio();
+                    $constraint->upsize();
+                })->save($path);
+                $asset->image = $file_name;
+
             }
                 // Redirect to the asset listing page
                 return Redirect::to("hardware")->with('success', Lang::get('admin/hardware/message.create.success'));
