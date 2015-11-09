@@ -15,3 +15,12 @@ git clone https://github.com/snipe/snipe-it your-folder
 or
 
 #### Download the source from [https://github.com/snipe/snipe-it/archive/master.zip](https://github.com/snipe/snipe-it/archive/master.zip)
+
+or
+
+#### Download and run the installer script (centos/redhat and debian/ubuntu)
+```bash
+wget https://raw.githubusercontent.com/snipe/snipe-it/master/install.sh
+chmod 744 install.sh
+./install.sh
+```
