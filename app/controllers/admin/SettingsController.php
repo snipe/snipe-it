@@ -79,8 +79,12 @@ class SettingsController extends AdminController
 	        "slack_channel"   => 'regex:/(?<!\w)#\w+/',
 	        "slack_botname"   => 'alpha_dash',
             "ldap_server"   => 'url',
-            "brand"     => 'min:1',
-            "brand"     => 'min:1',
+            "ldap_uname"     => 'min:1',
+            "ldap_pword"     => 'min:1',
+            "ldap_basedn"     => 'min:1',
+            "ldap_username"     => 'min:1',
+            "ldap_lname"     => 'min:1',
+            "ldap_lname"     => 'min:1',
 	        );
 
         if (Config::get('app.lock_passwords')==false) {
