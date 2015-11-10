@@ -1,4 +1,4 @@
-<?php namespace Controllers\Admin;
+site_name<?php namespace Controllers\Admin;
 
 use AdminController;
 use Input;
@@ -78,6 +78,9 @@ class SettingsController extends AdminController
             "default_currency"   => 'required',
 	        "slack_channel"   => 'regex:/(?<!\w)#\w+/',
 	        "slack_botname"   => 'alpha_dash',
+            "ldap_server"   => 'url',
+            "brand"     => 'min:1',
+            "brand"     => 'min:1',
 	        );
 
         if (Config::get('app.lock_passwords')==false) {

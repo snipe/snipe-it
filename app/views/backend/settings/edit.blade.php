@@ -272,6 +272,22 @@
               </div>
             </div>
 
+          <!-- LDAP Server -->
+          <div class="form-group {{ $errors->has('ldap_server') ? 'error' : '' }}">
+              <div class="col-md-3">
+                {{ Form::label('ldap_server', Lang::get('admin/settings/general.ldap_server')) }}
+              </div>
+              <div class="col-md-9">
+                @if (Config::get('app.lock_passwords')===true)
+                  {{ Form::text('ldap_server', Input::old('ldap_server', $setting->ldap_server), array('class' => 'form-control', 'disabled'=>'disabled','placeholder' => 'Snipe-IT Asset Management')) }}
+                @else
+                  {{ Form::text('ldap_server', Input::old('ldap_server', $setting->ldap_server), array('class' => 'form-control','placeholder' => 'Snipe-IT Asset Management')) }}
+                @endif
+
+                {{ $errors->first('ldap_server', '<br><span class="alert-msg">:message</span>') }}
+              </div>
+          </div>
+
           @endforeach
 
           <!-- Form actions -->
