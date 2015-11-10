@@ -1,4 +1,4 @@
-site_name<?php namespace Controllers\Admin;
+<?php namespace Controllers\Admin;
 
 use AdminController;
 use Input;
@@ -138,6 +138,13 @@ class SettingsController extends AdminController
             $setting->slack_endpoint = e(Input::get('slack_endpoint'));
             $setting->slack_channel = e(Input::get('slack_channel'));
             $setting->slack_botname = e(Input::get('slack_botname'));
+            $setting->ldap_server = e(Input::get('ldap_server'));
+            $setting->ldap_uname = e(Input::get('ldap_uname'));
+            $setting->ldap_pword = e(Input::get('ldap_pword'));
+            $setting->ldap_basedn = e(Input::get('ldap_basedn'));
+            $setting->ldap_username = e(Input::get('ldap_username'));
+            $setting->ldap_lname = e(Input::get('ldap_lname'));
+            $setting->ldap_fname = e(Input::get('ldap_fname'));
 
 
             // Was the asset updated?
