@@ -1184,7 +1184,8 @@ class AssetsController extends AdminController
       'notes',
       'expected_checkin',
       'order_number',
-      'location'
+      'location',
+      'image',
     ];
 
     $order = Input::get('order') === 'asc' ? 'asc' : 'desc';
