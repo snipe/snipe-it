@@ -59,7 +59,7 @@ If you wish to use one of the other available languages, simply replace the defa
 |Norwegian|`no`|
 |Polish|`pl`|
 |Portuguese|`pr-PT`|
-|Portuguese, Brazilian|`pr-BT`|
+|Portuguese, Brazilian|`pr-BR`|
 |Romanian|`ro`|
 |Russian|`ru`|
 |Spanish|`es-ES`|
