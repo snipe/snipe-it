@@ -1236,7 +1236,7 @@ class AssetsController extends AdminController
         $rows[] = array(
             'checkbox'      =>'<div class="text-center"><input type="checkbox" name="edit_asset['.$asset->id.']" class="one_required"></div>',
             'id'        => $asset->id,
-            'image'          => ($asset->image!='') ? '<img src="/uploads/assets/'.$asset->image.'" height=50 width=50></img>' : (($asset->model->image!='') ? '<img src="/uploads/models/'.$asset->model->image.'" height=40 width=50></img>' : ''),
+            'image' => ($asset->image!='') ? '<img src="'.Config::get('app.url').'/uploads/assets/'.$asset->image.'" height=50 width=50>' : (($asset->model->image!='') ? '<img src="'.Config::get('app.url').'/uploads/models/'.$asset->model->image.'" height=40 width=50>' : ''),
             'name'          => '<a title="'.$asset->name.'" href="hardware/'.$asset->id.'/view">'.$asset->name.'</a>',
             'asset_tag'     => '<a title="'.$asset->asset_tag.'" href="hardware/'.$asset->id.'/view">'.$asset->asset_tag.'</a>',
             'serial'        => $asset->serial,

@@ -14,7 +14,7 @@ class Image extends Migration {
 	{
 		Schema::table('assets', function(Blueprint $table)
 		{
-			$table->text('image')->after('notes')->nullable();
+			$table->text('image')->after('notes')->nullable()->default(NULL);
 			//
 		});
 	}
@@ -24,12 +24,11 @@ class Image extends Migration {
 	 *
 	 * @return void
 	 */
-	public function down()
-	{
-		Schema::table('assets', function(Blueprint $table)
-		{
-			//
-		});
-	}
+  public function down()
+   {
+       Schema::table('assets', function ($table) {
+           $table->dropColumn('image');
+       });
+   }
 
 }
