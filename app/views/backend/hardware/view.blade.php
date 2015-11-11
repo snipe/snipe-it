@@ -38,8 +38,6 @@
                 <li role="presentation"><a href="{{ route('clone/hardware', $asset->id) }}">@lang('admin/hardware/general.clone')</a></li>
             </ul>
         </div>
-
-
     </div>
 </div>
 </div>
@@ -47,7 +45,6 @@
 <div class="user-profile">
 <div class="row profile">
 <div class="col-md-9 bio">
-
 		@if ($asset->model->deleted_at!='')
             <div class="alert alert-warning alert-block">
 				<i class="fa fa-warning"></i>
@@ -144,6 +141,7 @@
         @endif
 
 
+
         @if ($asset->model->eol)
             <div class="col-md-12" style="padding-bottom: 5px;">
             <strong>@lang('admin/hardware/form.eol_rate'): </strong>
@@ -178,10 +176,11 @@
 
 
 <div class="col-md-12">
+
   		<!-- Licenses assets table -->
         <h6>Software Assigned </h6>
-		<br>
-		<!-- checked out assets table -->
+
+
 		@if (count($asset->licenses) > 0)
 		<table class="table table-hover">
 			<thead>
@@ -295,8 +294,6 @@
                          @else
                               {{{ $file->filename }}}
                          @endif
-
-
                     </td>
                     <td>
                         @if ($file->filename)
@@ -408,6 +405,14 @@
             </ul>
             @endif
 
+		<!-- Is there an image to show? -->
+                 @if ($asset->image)
+                     <h6><img src="{{ Config::get('app.url') }}/uploads/assets/{{{ $asset->image }}}"</img></h6>
+		 @else
+		     <h6><br/><p>@lang('general.noimage')<p></h6></br>
+                 @endif
+
+		<!-- checked out assets table -->
 
             @if (($asset->assigneduser) && ($asset->assigned_to > 0) && ($asset->deleted_at==''))
                 <h6><br>@lang('admin/hardware/form.checkedout_to')</h6>
@@ -415,6 +420,8 @@
 
                     <li><img src="{{{ $asset->assigneduser->gravatar() }}}" class="img-circle" style="width: 100px; margin-right: 20px;" /><br /><br /></li>
                     <li><a href="{{ route('view/user', $asset->assigned_to) }}">{{ $asset->assigneduser->fullName() }}</a></li>
+		<br>
+
 
 
                     @if (isset($asset->userloc))

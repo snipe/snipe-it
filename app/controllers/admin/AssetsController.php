@@ -2,6 +2,7 @@
 
 use AdminController;
 use Input;
+use Image;
 use Lang;
 use Asset;
 use Supplier;
@@ -29,6 +30,7 @@ use Paginator;
 use Manufacturer; //for embedded-create
 use Artisan;
 use Symfony\Component\Console\Output\BufferedOutput;
+use Symfony\Component\HttpFoundation\JsonResponse;
 
 
 class AssetsController extends AdminController
@@ -169,6 +171,19 @@ class AssetsController extends AdminController
             $asset->physical            		= '1';
             $asset->depreciate          		= '0';
 
+	    // Create the image (if one was chosen.)
+            if (Input::file('image')) {
+                $image = Input::file('image');
+                $file_name = str_random(25).".".$image->getClientOriginalExtension();
+                $path = public_path('uploads/assets/'.$file_name);
+                Image::make($image->getRealPath())->resize(300, null, function ($constraint) {
+                    $constraint->aspectRatio();
+                    $constraint->upsize();
+                })->save($path);
+                $asset->image = $file_name;
+
+            }
+
             // Was the asset created?
             if($asset->save()) {
 
@@ -181,7 +196,6 @@ class AssetsController extends AdminController
 					$logaction->note = e(Input::get('note'));
 					$log = $logaction->logaction('checkout');
 				}
-
                 // Redirect to the asset listing page
                 return Redirect::to("hardware")->with('success', Lang::get('admin/hardware/message.create.success'));
             }
@@ -307,6 +321,20 @@ class AssetsController extends AdminController
             $asset->asset_tag           	= e(Input::get('asset_tag'));
             $asset->notes            		= e(Input::get('notes'));
             $asset->physical            	= '1';
+
+	    // Update the image
+            if (Input::file('image')) {
+                $image = Input::file('image');
+		  $file_name = str_random(25).".".$image->getClientOriginalExtension();
+                $path = public_path('uploads/assets/'.$file_name);
+                Image::make($image->getRealPath())->resize(300, null, function ($constraint) {
+                    $constraint->aspectRatio();
+                    $constraint->upsize();
+                })->save($path);
+                $asset->image = $file_name;
+            }
+
+
 
             // Was the asset updated?
             if($asset->save()) {
@@ -1208,6 +1236,7 @@ class AssetsController extends AdminController
         $rows[] = array(
             'checkbox'      =>'<div class="text-center"><input type="checkbox" name="edit_asset['.$asset->id.']" class="one_required"></div>',
             'id'        => $asset->id,
+            'image'          => ($asset->image!='') ? '<img src="/uploads/assets/'.$asset->image.'" height=50 width=50></img>' : (($asset->model->image!='') ? '<img src="/uploads/models/'.$asset->model->image.'" height=40 width=50></img>' : ''),
             'name'          => '<a title="'.$asset->name.'" href="hardware/'.$asset->id.'/view">'.$asset->name.'</a>',
             'asset_tag'     => '<a title="'.$asset->asset_tag.'" href="hardware/'.$asset->id.'/view">'.$asset->asset_tag.'</a>',
             'serial'        => $asset->serial,
