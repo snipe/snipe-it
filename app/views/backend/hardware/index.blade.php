@@ -119,6 +119,7 @@
         sidePagination: 'server',
         sortable: true,
         cookie: true,
+        cookieExpire: '2y',
         mobileResponsive: true,
         showExport: true,
         showColumns: true,
