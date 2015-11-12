@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AddCustomCssToSettings extends Migration {
+class AddLdapFieldsToSettings extends Migration {
 
 	/**
 	 * Run the migrations.
