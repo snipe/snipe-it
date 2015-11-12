@@ -27,8 +27,14 @@
 <div class="user-profile">
     <div class="row profile">
         <div class="col-md-9 bio">
-            @if ($accessory->users->count() > 0)
-                <table name="accessory_users" id="table" data-url="{{route('api.accessories.view', $accessory->id)}}">
+              <table
+              name="accessory_users"
+              id="table"
+              data-url="{{ route('api.accessories.view', $accessory->id) }}"
+              data-cookie="true"
+              data-click-to-select="true"
+              data-cookie-id-table="accessoryUsersTable">
+
                     <thead>
                         <tr>
                             <th data-switchable="false" data-searchable="false" data-sortable="false" data-field="name">{{Lang::get('general.user')}}</th>
@@ -36,14 +42,6 @@
                         </tr>
                     </thead>
                 </table>
-            @else
-                <div class="col-md-9">
-                    <div class="alert alert-info alert-block">
-                        <i class="fa fa-info-circle"></i>
-                        @lang('general.no_results')
-                    </div>
-                </div>
-            @endif
         </div>
 
 <!-- side address column -->

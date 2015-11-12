@@ -541,7 +541,7 @@ class AccessoriesController extends AdminController
 
             $rows[] = array(
                 'name'          => link_to('admin/accessories/'.$accessory->id.'/view', $accessory->name),
-                'category'      => $accessory->category->name,
+                'category'      => link_to('admin/settings/categories/'.$accessory->category->id.'/view', $accessory->category->name),
                 'qty'           => $accessory->qty,
                 'order_number'  => $accessory->order_number,
                 'purchase_date' => $accessory->purchase_date,

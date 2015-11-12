@@ -113,9 +113,9 @@
             <div class="col-md-12 column">
 
 			 @if ($asset->id)
-				 <form class="form-horizontal" method="post" action="{{ route('update/hardware',$asset->id) }}" autocomplete="off" role="form">
+				 <form class="form-horizontal" method="post" action="{{ route('update/hardware',$asset->id) }}" autocomplete="off" role="form" enctype="multipart/form-data" >
 			 @else
-				 <form class="form-horizontal" method="post" action="{{ route('savenew/hardware') }}" autocomplete="off" role="form">
+				 <form class="form-horizontal" method="post" action="{{ route('savenew/hardware') }}" autocomplete="off" role="form" enctype="multipart/form-data">
 			 @endif
 
             <!-- CSRF Token -->
@@ -312,11 +312,33 @@
 		  	</div>
 
 
+            <!-- Image -->
+            @if ($asset->image)
+                <div class="form-group {{ $errors->has('image_delete') ? 'has-error' : '' }}">
+                    <label class="col-md-2 control-label" for="image_delete">@lang('general.image_delete')</label>
+                    <div class="col-md-5">
+                        {{ Form::checkbox('image_delete') }}
+                        <img src="/uploads/assets/{{{ $asset->image }}}" />
+                        {{ $errors->first('image_delete', '<br><span class="alert-msg">:message</span>') }}
+                    </div>
+                </div>
+            @endif
+
+            <div class="form-group {{ $errors->has('image') ? 'has-error' : '' }}">
+                <label class="col-md-2 control-label" for="image">@lang('general.image_upload')</label>
+                <div class="col-md-5">
+                    {{ Form::file('image') }}
+                    {{ $errors->first('image', '<br><span class="alert-msg">:message</span>') }}
+                </div>
+            </div>
+
+
+
             <!-- Form actions -->
                 <div class="form-group">
                 <label class="col-md-2 control-label"></label>
                     <div class="col-md-7 col-sm-12">
-                        <a class="btn btn-link" href="{{ URL::previous() }}">@lang('button.cancel')</a>
+                        <a class="btn btn-link" href="{{ URL::previous() }}" method="post" enctype="multipart/form-data">@lang('button.cancel')</a>
                         <button type="submit" class="btn btn-success"><i class="fa fa-check icon-white"></i> @lang('general.save')</button>
                     </div>
                 </div>

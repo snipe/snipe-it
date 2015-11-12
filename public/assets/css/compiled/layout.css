@@ -9,3 +9,8 @@ To remove this comment, please support us and upgrade to SiteFlow Pro.
 div.checker {
     display: inline;
 }
+
+.assetimg {
+  max-width: 250px;
+  max-height: 250px;
+}
