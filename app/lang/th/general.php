@@ -43,6 +43,7 @@
     'date'					=> 'วันเดือนปี',
     'delete'  				=> 'ลบ',
     'deleted'  				=> 'ลบแล้ว',
+    'delete_seats'  		=> 'Deleted Seats',
     'deployed'				=> 'กำลังใช้งาน',
     'depreciation_report'	=> 'รายงานการเสื่อมราคา',
     'download'				=> 'ดาวน์โหลด',

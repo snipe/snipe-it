@@ -22,9 +22,6 @@ class DepreciationsController extends AdminController
 
     public function getIndex()
     {
-        // Grab all the depreciations
-        $depreciations = Depreciation::orderBy('created_at', 'DESC')->get();
-
         // Show the page
         return View::make('backend/depreciations/index', compact('depreciations'));
     }
@@ -123,7 +120,7 @@ class DepreciationsController extends AdminController
 
         if ($validator->fails())
         {
-            // The given data did not pass validation            
+            // The given data did not pass validation
             return Redirect::back()->withInput()->withErrors($validator->messages());
         }
         // attempt validation
@@ -137,7 +134,7 @@ class DepreciationsController extends AdminController
                 // Redirect to the depreciation page
                 return Redirect::to("admin/settings/depreciations/")->with('success', Lang::get('admin/depreciations/message.update.success'));
             }
-        } 
+        }
 
         // Redirect to the depreciation management page
         return Redirect::to("admin/settings/depreciations/$depreciationId/edit")->with('error', Lang::get('admin/depreciations/message.update.error'));
@@ -172,6 +169,56 @@ class DepreciationsController extends AdminController
         }
 
     }
+
+
+    public function getDatatable()
+    {
+        $depreciations = Depreciation::select(array('id','name','months'));
+
+        if (Input::has('search')) {
+            $depreciations = $depreciations->TextSearch(e(Input::get('search')));
+        }
+
+        if (Input::has('offset')) {
+            $offset = e(Input::get('offset'));
+        } else {
+            $offset = 0;
+        }
+
+        if (Input::has('limit')) {
+            $limit = e(Input::get('limit'));
+        } else {
+            $limit = 50;
+        }
+
+        $allowed_columns = ['id','name','months'];
+        $order = Input::get('order') === 'asc' ? 'asc' : 'desc';
+        $sort = in_array(Input::get('sort'), $allowed_columns) ? Input::get('sort') : 'created_at';
+
+        $depreciations->orderBy($sort, $order);
+
+        $depreciationsCount = $depreciations->count();
+        $depreciations = $depreciations->skip($offset)->take($limit)->get();
+
+        $rows = array();
+
+        foreach($depreciations as $depreciation) {
+            $actions = '<a href="'.route('update/depreciations', $depreciation->id).'" class="btn btn-warning btn-sm" style="margin-right:5px;"><i class="fa fa-pencil icon-white"></i></a><a data-html="false" class="btn delete-asset btn-danger btn-sm" data-toggle="modal" href="'.route('delete/depreciations', $depreciation->id).'" data-content="'.Lang::get('admin/depreciations/message.delete.confirm').'" data-title="'.Lang::get('general.delete').' '.htmlspecialchars($depreciation->name).'?" onClick="return false;"><i class="fa fa-trash icon-white"></i></a>';
+
+            $rows[] = array(
+                'id'            => $depreciation->id,
+                'name'          => $depreciation->name,
+                'months'        => $depreciation->months,
+                'actions'       => $actions
+            );
+        }
+
+        $data = array('total' => $depreciationsCount, 'rows' => $rows);
+
+        return $data;
+
+    }
+
 
 
 

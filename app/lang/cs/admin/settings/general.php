@@ -26,7 +26,8 @@ return array(
     'header_color'              => 'Barva záhlaví',
     'info'                      => 'Tato nastavení umožňují zvolit určité prvky instalace.',
     'laravel'                   => 'Verze Laravel',
-    'load_remote'				=> 'Tato instalace Snipe-IT může nahrávat skripty z vnějšího světa.',
+    'load_remote_text'          => 'Remote Scripts',
+    'load_remote_help_text'		=> 'This Snipe-IT install can load scripts from the outside world.',
     'logo'                    	=> 'Logo',
     'optional'					=> 'volitelný',
     'per_page'                  => 'Výsledků na stránku',
@@ -47,4 +48,7 @@ return array(
     'system'                    => 'Systémové informace',
     'update'                    => 'Upravit nastavení',
     'value'                     => 'Hodnota',
+    'brand'                     => 'Branding',
+    'about_settings_title'      => 'About Settings',
+    'about_settings_text'       => 'These settings let you customize certain aspects of your installation.',    
 );

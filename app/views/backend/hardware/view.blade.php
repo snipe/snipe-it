@@ -9,6 +9,7 @@
 {{-- Page content --}}
 @section('content')
 
+
 <div class="row header">
     <div class="col-md-12">
      <h3 class="name">
@@ -37,8 +38,6 @@
                 <li role="presentation"><a href="{{ route('clone/hardware', $asset->id) }}">@lang('admin/hardware/general.clone')</a></li>
             </ul>
         </div>
-
-
     </div>
 </div>
 </div>
@@ -46,7 +45,6 @@
 <div class="user-profile">
 <div class="row profile">
 <div class="col-md-9 bio">
-
 		@if ($asset->model->deleted_at!='')
             <div class="alert alert-warning alert-block">
 				<i class="fa fa-warning"></i>
@@ -90,7 +88,10 @@
 
         @if ($asset->purchase_cost)
             <div class="col-md-12" style="padding-bottom: 5px;"><strong>@lang('admin/hardware/form.cost'):</strong>
-            @if (($asset->id) && ($asset->assetloc))
+
+            @if (($asset->id) && ($asset->userloc))
+                  {{{ $asset->userloc->currency }}}
+            @elseif (($asset->id) && ($asset->assetloc))
                 {{{ $asset->assetloc->currency }}}
             @else
                 {{{ Setting::first()->default_currency }}}
@@ -105,10 +106,12 @@
         @endif
 
         @if ($asset->supplier_id)
-            <div class="col-md-6" style="padding-bottom: 5px;"><strong>@lang('admin/hardware/form.supplier'): </strong>
-            <a href="{{ route('view/supplier', $asset->supplier_id) }}">
-            {{{ $asset->supplier->name }}}
-            </a> </div>
+            <div class="col-md-6" style="padding-bottom: 5px;">
+                  <strong>@lang('admin/hardware/form.supplier'): </strong>
+                  <a href="{{ route('view/supplier', $asset->supplier_id) }}">
+                  {{{ $asset->supplier->name }}}
+                  </a>
+            </div>
         @endif
 
         @if ($asset->warranty_months)
@@ -138,6 +141,7 @@
         @endif
 
 
+
         @if ($asset->model->eol)
             <div class="col-md-12" style="padding-bottom: 5px;">
             <strong>@lang('admin/hardware/form.eol_rate'): </strong>
@@ -159,15 +163,24 @@
             </div>
         @endif
 
+        @if ($asset->expected_checkin!='')
+            <div class="col-md-12" style="padding-bottom: 5px;">
+                  <strong>@lang('admin/hardware/form.expected_checkin')</strong>
+               : {{{ $asset->expected_checkin }}}
+            </div>
+       @endif
+
+
 
 
 
 
 <div class="col-md-12">
+
   		<!-- Licenses assets table -->
         <h6>Software Assigned </h6>
-		<br>
-		<!-- checked out assets table -->
+
+
 		@if (count($asset->licenses) > 0)
 		<table class="table table-hover">
 			<thead>
@@ -182,7 +195,7 @@
 				<tr>
 					<td><a href="{{ route('view/license', $seat->license->id) }}">{{{ $seat->license->name }}}</a></td>
 					<td>{{{ $seat->license->serial }}}</td>
-					<td><a href="{{ route('checkin/license', $seat->id) }}" class="btn-flat info">@lang('general.checkin')</a>
+					<td><a href="{{ route('checkin/license', $seat->id) }}" class="btn-flat info btn-sm">@lang('general.checkin')</a>
 					</td>
 				</tr>
 				@endforeach
@@ -233,9 +246,9 @@
                     <td>{{{ $assetMaintenance->start_date }}}</td>
                     <td>{{{ $assetMaintenance->completion_date }}}</td>
                     <td>{{{ $assetMaintenance->is_warranty ? Lang::get('admin/asset_maintenances/message.warranty') : Lang::get('admin/asset_maintenances/message.not_warranty') }}}</td>
-                    <td>{{{ sprintf( Lang::get( 'general.currency' ) . '%01.2f', $assetMaintenance->cost) }}}</td>
+                    <td><nobr>{{{ $use_currency.$assetMaintenance->cost }}}</nobr></td>
                     <?php $totalCost += $assetMaintenance->cost; ?>
-                    <td><a href="{{ route('update/asset_maintenance', $assetMaintenance->id) }}" class="btn btn-warning"><i class="fa fa-pencil icon-white"></i></a>
+                    <td><a href="{{ route('update/asset_maintenance', $assetMaintenance->id) }}" class="btn btn-warning btn-sm"><i class="fa fa-pencil icon-white"></i></a>
                     </td>
                 </tr>
                 @endif
@@ -243,12 +256,7 @@
             </tbody>
             <tfoot>
             <tr>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td>{{{sprintf(Lang::get( 'general.currency' ) . '%01.2f', $totalCost)}}}</td>
+                <td colspan="7" class="text-right">{{{ $use_currency.$totalCost }}}</td>
             </tr>
             </tfoot>
         </table>
@@ -281,7 +289,11 @@
                         @endif
                     </td>
                     <td>
-                    {{{ $file->filename }}}
+                         @if (Asset::checkUploadIsImage($file->get_src()))
+                              <a class='preview' data-placement="top" data-image-url="showfile/{{{ $file->id }}}" data-container="body" data-toggle="popover" data-placement="top" >{{{ $file->filename }}}</a>
+                         @else
+                              {{{ $file->filename }}}
+                         @endif
                     </td>
                     <td>
                         @if ($file->filename)
@@ -306,6 +318,8 @@
     </table>
 </div>
 <div class="col-md-12">
+
+      <h6>History </h6>
         <!-- checked out assets table -->
     <table class="table table-hover table-fixed break-word">
         <thead>
@@ -373,6 +387,7 @@
         <!-- side address column -->
         <div class="col-md-3 col-xs-12 address pull-right">
 
+
         	<!-- Asset notes -->
 @if ($asset->notes)
 
@@ -390,6 +405,17 @@
             </ul>
             @endif
 
+		<!-- Is there an asset or model image to show? -->
+
+        @if ($asset->image)
+          <img src="{{ Config::get('app.url') }}/uploads/assets/{{{ $asset->image }}}" class="assetimg">
+        @else
+          @if ($asset->model->image!='')
+            <img src="{{ Config::get('app.url') }}/uploads/models/{{{ $asset->model->image }}}" class="assetimg">
+          @endif
+        @endif
+
+		<!-- checked out assets table -->
 
             @if (($asset->assigneduser) && ($asset->assigned_to > 0) && ($asset->deleted_at==''))
                 <h6><br>@lang('admin/hardware/form.checkedout_to')</h6>
@@ -397,11 +423,26 @@
 
                     <li><img src="{{{ $asset->assigneduser->gravatar() }}}" class="img-circle" style="width: 100px; margin-right: 20px;" /><br /><br /></li>
                     <li><a href="{{ route('view/user', $asset->assigned_to) }}">{{ $asset->assigneduser->fullName() }}</a></li>
+		<br>
 
 
-                    @if (isset($asset->assetloc->address))
+
+                    @if (isset($asset->userloc))
+                        <li>{{{ $asset->userloc->name }}}
+                        <li>{{{ $asset->userloc->address }}}
+                        @if (isset($asset->userloc->address2))
+                          {{{ $asset->userloc->address2 }}}
+                        @endif
+                        </li>
+                        @if (isset($asset->assetloc->city))
+                            <li>{{{ $asset->assetloc->city }}}, {{{ $asset->assetloc->state }}} {{{ $asset->assetloc->zip }}}</li>
+                        @endif
+
+                    @elseif (isset($asset->assetloc))
+                        <li>{{{ $asset->assetloc->name }}}
                         <li>{{{ $asset->assetloc->address }}}
-                        @if (isset($asset->assetloc->address2)) {{{ $asset->assetloc->address2 }}}
+                        @if (isset($asset->assetloc->address2))
+                          {{{ $asset->assetloc->address2 }}}
                         @endif
                         </li>
                         @if (isset($asset->assetloc->city))
@@ -438,10 +479,7 @@
                     <ul>
 
                     	 @if (($asset->assetstatus->deployable=='1') && ($asset->assigned_to > 0) && ($asset->deleted_at=='') && ($asset->assetlog->first()))
-                    	 	@if ($asset->assetlog->first()->expected_checkin)
-                                <li><br />@lang('admin/hardware/form.expected_checkin')
-                                    : {{{ date('Y-m-d', strtotime($asset->assetlog->first()->expected_checkin)) }}}</li>
-                            @endif
+
                     	<li><br /><a href="{{ route('checkin/hardware', $asset->id) }}" class="btn btn-primary btn-sm">@lang('admin/hardware/general.checkin')</a></li>
                     	@elseif ((($asset->assetstatus->deployable=='1') &&  (($asset->assigned_to=='') || ($asset->assigned_to==0))) && ($asset->deleted_at==''))
                     	<li><br /><a href="{{ route('checkout/hardware', $asset->id) }}" class="btn btn-info btn-sm">@lang('admin/hardware/general.checkout')</a></li>
@@ -499,12 +537,23 @@
 
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">@lang('button.cancel')</button>
+        <button type="button" class="btn btn-default btn-sm" data-dismiss="modal">@lang('button.cancel')</button>
         <button type="submit" class="btn btn-primary btn-sm">@lang('button.upload')</button>
       </div>
       {{ Form::close() }}
     </div>
   </div>
 </div>
+@section('moar_scripts')
+<script>
+      $('.preview').popover({
+          'trigger':'hover',
+          'html':true,
+          'content':function(){
+              return "<img src='"+$(this).data('imageUrl')+"' style='max-height: 350px; max-width: 250px;'>";
+          }
+      });
+</script>
+@stop
 
 @stop

@@ -1,7 +1,8 @@
 <?php
 
 return array(
-
+    'assets_rtd'		=> 'Assets RTD',
+    'assets_checkedout'		=> 'Assets Assigned',
     'id'      		=> 'ID',
     'city'   		=> 'Şehir',
     'state'   		=> 'Bölge',
@@ -13,5 +14,5 @@ return array(
     'zip'			=> 'Posta kodu',
     'locations'		=> 'Konumlar',
     'parent'		=> 'Parent',
-    'currency'  	=> 'Location Currency', // this is deprecated
+    'currency'  	=> 'Location Currency',
 );

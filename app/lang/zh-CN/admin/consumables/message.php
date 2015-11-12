@@ -15,9 +15,9 @@ return array(
     ),
 
     'delete' => array(
-        'confirm'   => '是否确定删除此配件？',
+        'confirm'   => '您确定希望删除此耗材？',
         'error'   => '删除耗材失败，请重试',
-        'success' => '配件删除成功'
+        'success' => '成功删除此耗材。'
     ),
 
      'checkout' => array(

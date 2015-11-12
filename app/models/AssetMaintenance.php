@@ -81,4 +81,26 @@
 
             return $query->whereNotNull( 'deleted_at' );
         }
+
+        /**
+        * Query builder scope to search on text
+        *
+        * @param  Illuminate\Database\Query\Builder  $query  Query builder instance
+        * @param  text                              $search      Search term
+        *
+        * @return Illuminate\Database\Query\Builder          Modified query builder
+        */
+        public function scopeTextSearch($query, $search)
+        {
+
+             return $query->where(function($query) use ($search)
+             {
+                    $query->where('title', 'LIKE', '%'.$search.'%')
+                    ->orWhere('notes', 'LIKE', '%'.$search.'%')
+                    ->orWhere('asset_maintenance_type', 'LIKE', '%'.$search.'%')
+                    ->orWhere('cost', 'LIKE', '%'.$search.'%')
+                    ->orWhere('start_date', 'LIKE', '%'.$search.'%')
+                    ->orWhere('completion_date', 'LIKE', '%'.$search.'%');
+             });
+        }
     }

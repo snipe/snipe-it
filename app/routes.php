@@ -10,6 +10,8 @@
         Route::group( [ 'prefix' => 'hardware' ], function () {
 
             Route::get( 'list/{status?}', [ 'as' => 'api.hardware.list', 'uses' => 'AssetsController@getDatatable' ] );
+
+            Route::post('import', 'AssetsController@postAPIImportUpload' );
         } );
 
         /*---Status Label API---*/
@@ -26,7 +28,11 @@
                 } else {
                     return '0';
                 }
-            } );
+
+            });
+
+            Route::get( 'list', [ 'as' => 'api.statuslabels.list', 'uses' => 'StatuslabelsController@getDatatable' ] );
+
         } );
 
         /*---Accessories API---*/
@@ -38,12 +44,35 @@
         } );
 
         /*---Consumables API---*/
-        Route::group( [ 'prefix' => 'consumables' ], function () {
+        Route::group(array('prefix'=>'consumables'), function () {
+            Route::get('list', array('as'=>'api.consumables.list', 'uses'=>'ConsumablesController@getDatatable'));
+            Route::get('{consumableID}/view', array('as'=>'api.consumables.view', 'uses'=>'ConsumablesController@getDataView'));
+        });
 
-            Route::get( 'list', [ 'as' => 'api.consumables.list', 'uses' => 'ConsumablesController@getDatatable' ] );
-            Route::get( '{accessoryID}/view',
-                [ 'as' => 'api.consumables.view', 'uses' => 'ConsumablesController@getDataView' ] );
-        } );
+        /*---Locations API---*/
+        Route::group(array('prefix'=>'locations'), function () {
+            Route::get('list', array('as'=>'api.locations.list', 'uses'=>'LocationsController@getDatatable'));
+            Route::get('{locationID}/view', array('as'=>'api.locations.view', 'uses'=>'LocationsController@getDataView'));
+            Route::get('{locationID}/users', array('as'=>'api.locations.viewusers', 'uses'=>'LocationsController@getDataViewUsers'));
+            Route::get('{locationID}/assets', array('as'=>'api.locations.viewassets', 'uses'=>'LocationsController@getDataViewAssets'));
+        });
+
+        /*---Depreciations API---*/
+        Route::group(array('prefix'=>'depreciations'), function () {
+            Route::get('list', array('as'=>'api.depreciations.list', 'uses'=>'DepreciationsController@getDatatable'));
+            Route::get('{$depreciationID}/view', array('as'=>'api.depreciations.view', 'uses'=>'DepreciationsController@getDataView'));
+        });
+
+        /*---Manufacturers API---*/
+        Route::group(array('prefix'=>'manufacturers'), function () {
+            Route::get('list', array('as'=>'api.manufacturers.list', 'uses'=>'ManufacturersController@getDatatable'));
+            Route::get('{manufacturerID}/view', array('as'=>'api.manufacturers.view', 'uses'=>'ManufacturersController@getDataView'));
+        });
+
+        /*---Suppliers API---*/
+        Route::group(array('prefix'=>'suppliers'), function () {
+            Route::get('list', array('as'=>'api.suppliers.list', 'uses'=>'SuppliersController@getDatatable'));
+        });
 
         /*---Users API---*/
         Route::group( [ 'prefix' => 'users' ], function () {
@@ -118,12 +147,6 @@
     Route::group( [ 'prefix' => 'hardware', 'namespace' => 'Controllers\Admin', 'before' => 'admin-auth' ],
         function () {
 
-            Route::get( '/', [
-                    'as'   => 'hardware',
-                    'uses' => 'AssetsController@getIndex'
-                ]
-            );
-
             Route::get( 'create/{model?}', [
                     'as'   => 'create/hardware',
                     'uses' => 'AssetsController@getCreate'
@@ -160,6 +183,17 @@
                 [ 'as' => 'delete/assetfile', 'uses' => 'AssetsController@getDeleteFile' ] );
             Route::get( '{assetId}/showfile/{fileId}',
                 [ 'as' => 'show/assetfile', 'uses' => 'AssetsController@displayFile' ] );
+
+            Route::get( 'import/delete-import/{filename}',
+                [ 'as' => 'assets/import/delete-file', 'uses' => 'AssetsController@getDeleteImportFile' ] );
+
+            Route::get( 'import/process/{filename}',
+                [ 'as' => 'assets/import/process-file', 'uses' => 'AssetsController@getProcessImportFile' ] );
+
+            Route::get( 'import',
+                [ 'as' => 'assets/import', 'uses' => 'AssetsController@getImportUpload' ] );
+
+
             Route::post( '{assetId}/edit', 'AssetsController@postEdit' );
 
             Route::post( 'bulkedit',
@@ -187,6 +221,12 @@
                 Route::get( '{modelId}/view', [ 'as' => 'view/model', 'uses' => 'ModelsController@getView' ] );
                 Route::get( '{modelID}/restore', [ 'as' => 'restore/model', 'uses' => 'ModelsController@getRestore' ] );
             } );
+
+            Route::get( '/', [
+                    'as'   => 'hardware',
+                    'uses' => 'AssetsController@getIndex'
+                ]
+            );
 
         } );
 
@@ -384,6 +424,7 @@
                 Route::get( '{locationId}/edit',
                     [ 'as' => 'update/location', 'uses' => 'LocationsController@getEdit' ] );
                 Route::post( '{locationId}/edit', 'LocationsController@postEdit' );
+                Route::get( '{locationId}/view', 'LocationsController@getView' );
                 Route::get( '{locationId}/delete',
                     [ 'as' => 'delete/location', 'uses' => 'LocationsController@getDelete' ] );
             } );

@@ -103,7 +103,7 @@ class SuppliersController extends AdminController
         return Redirect::to('admin/settings/suppliers/create')->with('error', Lang::get('admin/suppliers/message.create.error'));
 
     }
-    
+
     public function store()
     {
       $supplier=new Supplier;
@@ -115,7 +115,7 @@ class SuppliersController extends AdminController
         //$supplier->fill($new);
         $supplier->name=$new['name'];
         $supplier->user_id              = Sentry::getId();
-      
+
         if($supplier->save()) {
           return JsonResponse::create($supplier);
         } else {
@@ -163,7 +163,7 @@ class SuppliersController extends AdminController
 
         if ($validator->fails())
         {
-            // The given data did not pass validation           
+            // The given data did not pass validation
             return Redirect::back()->withInput()->withErrors($validator->messages());
         }
         // attempt validation
@@ -204,7 +204,7 @@ class SuppliersController extends AdminController
                 // Redirect to the new supplier page
                 return Redirect::to("admin/settings/suppliers")->with('success', Lang::get('admin/suppliers/message.update.success'));
             }
-        } 
+        }
 
         // Redirect to the supplier management page
         return Redirect::to("admin/settings/suppliers/$supplierId/edit")->with('error', Lang::get('admin/suppliers/message.update.error'));
@@ -261,6 +261,61 @@ class SuppliersController extends AdminController
             return Redirect::route('suppliers')->with('error', $error);
         }
 
+
+    }
+
+    public function getDatatable()
+    {
+        $suppliers = Supplier::select(array('id','name','address','address2','city','state','country','fax', 'phone','email','contact'))
+        ->whereNull('deleted_at');
+
+        if (Input::has('search')) {
+            $suppliers = $suppliers->TextSearch(e(Input::get('search')));
+        }
+
+        if (Input::has('offset')) {
+            $offset = e(Input::get('offset'));
+        } else {
+            $offset = 0;
+        }
+
+        if (Input::has('limit')) {
+            $limit = e(Input::get('limit'));
+        } else {
+            $limit = 50;
+        }
+
+        $allowed_columns = ['id','name','address','phone','contact','fax','email'];
+        $order = Input::get('order') === 'asc' ? 'asc' : 'desc';
+        $sort = in_array(Input::get('sort'), $allowed_columns) ? Input::get('sort') : 'created_at';
+
+        $suppliers->orderBy($sort, $order);
+
+        $suppliersCount = $suppliers->count();
+        $suppliers = $suppliers->skip($offset)->take($limit)->get();
+
+        $rows = array();
+
+        foreach($suppliers as $supplier) {
+            $actions = '<a href="'.route('update/supplier', $supplier->id).'" class="btn btn-warning btn-sm" style="margin-right:5px;"><i class="fa fa-pencil icon-white"></i></a><a data-html="false" class="btn delete-asset btn-danger btn-sm" data-toggle="modal" href="'.route('delete/location', $supplier->id).'" data-content="'.Lang::get('admin/suppliers/message.delete.confirm').'" data-title="'.Lang::get('general.delete').' '.htmlspecialchars($supplier->name).'?" onClick="return false;"><i class="fa fa-trash icon-white"></i></a>';
+
+            $rows[] = array(
+                'id'                => $supplier->id,
+                'name'              => link_to('admin/settings/suppliers/'.$supplier->id.'/view', $supplier->name),
+                'contact'           => $supplier->contact,
+                'address'           => $supplier->address.' '.$supplier->address2.' '.$supplier->city.' '.$supplier->state.' '.$supplier->country,
+                'phone'             => $supplier->phone,
+                'fax'             => $supplier->fax,
+                'email'             => ($supplier->email!='') ? '<a href="mailto:'.$supplier->email.'">'.$supplier->email.'</a>' : '',
+                'assets'            => $supplier->num_assets(),
+                'licenses'          => $supplier->num_licenses(),
+                'actions'           => $actions
+            );
+        }
+
+        $data = array('total' => $suppliersCount, 'rows' => $rows);
+
+        return $data;
 
     }
 

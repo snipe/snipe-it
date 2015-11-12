@@ -15,9 +15,9 @@ return array(
     ),
 
     'delete' => array(
-        'confirm'   => 'Tem a certeza que pretende remover este acessório?',
+        'confirm'   => 'Tem a certeza que deseja remover este consumível?',
         'error'   => 'Ocorreu um problema ao remover o consumível. Por favor, tente novamente.',
-        'success' => 'O acessório foi removido com sucesso.'
+        'success' => 'Consumível removido com sucesso.'
     ),
 
      'checkout' => array(

@@ -39,7 +39,7 @@
 <div class="user-profile">
 <div class="row profile">
 <div class="col-md-9 bio">
-    
+
     @if ($model->deleted_at!='')
 			<div class="alert alert-warning alert-block">
 				<i class="fa fa-warning"></i>
@@ -52,25 +52,25 @@
 
                             <!-- checked out models table -->
                             @if (count($model->assets) > 0)
-                            	{{ Datatable::table()
-                                ->addColumn(Lang::get('general.name'),
-                                            Lang::get('general.asset_tag'),
-                                            Lang::get('admin/hardware/table.serial'),
-                                            Lang::get('general.user'), 
-                                            Lang::get('table.actions'))
-                                ->setOptions(
-                                        array(
-                                            'sAjaxSource'=>route('api.models.view', $model->id),
-                                            'dom' =>'CT<"clear">lfrtip',
-                                            'colVis'=> array('showAll'=>'Show All','restore'=>'Restore','exclude'=>array(4),'activate'=>'mouseover'),
-                                            'columnDefs'=> array(
-                                                array('bSortable'=>false,'targets'=>array(4)),
-                                                array('width'=>'auto','targets'=>array(4)),
-                                                ),
-                                            'order'=>array(array(0,'asc')),
-                                        )
-                                    )
-                                ->render() }}
+                            	<table
+                              name="modelassets"
+                              id="table"
+                              data-url="{{route('api.models.view', $model->id)}}"
+                              data-cookie="true"
+                              data-click-to-select="true"
+                              data-cookie-id-table="modeldetailsViewTable">
+                                    <thead>
+                                        <tr>
+
+                                            <th data-sortable="true" data-field="id" data-searchable="false" data-visible="false">{{Lang::get('general.id')}}</th>
+                                            <th data-sortable="true" data-field="name" data-searchable="true">{{Lang::get('general.name')}}</th>
+                                            <th data-sortable="true" data-field="asset_tag">{{Lang::get('general.asset_tag')}}</th>
+                                            <th data-sortable="true" data-field="serial">{{Lang::get('admin/hardware/table.serial')}}</th>
+                                            <th data-sortable="false" data-field="assigned_to">{{Lang::get('general.user')}}</th>
+                                            <th data-switchable="false" data-searchable="false" data-sortable="false" data-field="actions">{{ Lang::get('table.actions') }}</th>
+                                        </tr>
+                                    </thead>
+                                </table>
                             @else
                             <div class="col-md-9">
                                 <div class="alert alert-info alert-block">
@@ -79,6 +79,7 @@
                                 </div>
                             </div>
                             @endif
+
 
                         </div>
 
@@ -108,14 +109,14 @@
 
                                 @if ($model->eol)
                                 <li>@lang('general.eol'):
-                                {{ $model->eol }} 
+                                {{ $model->eol }}
                                 @lang('general.months')</li>
                                 @endif
 
                                 @if ($model->image)
                                 <li><br /><img src="{{ Config::get('app.url') }}/uploads/models/{{{ $model->image }}}" /></li>
                                 @endif
-                                   
+
                                 @if  ($model->deleted_at!='')
                                    <li><br /><a href="{{ route('restore/model', $model->id) }}" class="btn-flat large info ">@lang('admin/models/general.restore')</a></li>
 
@@ -124,4 +125,46 @@
                             </ul>
 
                     </div>
+
+                    @section('moar_scripts')
+                    <script src="{{ asset('assets/js/bootstrap-table.js') }}"></script>
+                    <script src="{{ asset('assets/js/extensions/cookie/bootstrap-table-cookie.js') }}"></script>
+                    <script src="{{ asset('assets/js/extensions/mobile/bootstrap-table-mobile.js') }}"></script>
+                    <script src="{{ asset('assets/js/extensions/export/bootstrap-table-export.js') }}"></script>
+                    <script src="{{ asset('assets/js/extensions/export/tableExport.js') }}"></script>
+                    <script src="{{ asset('assets/js/extensions/export/jquery.base64.js') }}"></script>
+                    <script type="text/javascript">
+                        $('#table').bootstrapTable({
+                            classes: 'table table-responsive table-no-bordered',
+                            undefinedText: '',
+                            iconsPrefix: 'fa',
+                            showRefresh: true,
+                            search: true,
+                            pageSize: {{{ Setting::getSettings()->per_page }}},
+                            pagination: true,
+                            sidePagination: 'server',
+                            sortable: true,
+                            cookie: true,
+                            mobileResponsive: true,
+                            showExport: true,
+                            showColumns: true,
+                            exportDataType: 'all',
+                            exportTypes: ['csv', 'txt','json', 'xml'],
+                            maintainSelected: true,
+                            paginationFirstText: "@lang('general.first')",
+                            paginationLastText: "@lang('general.last')",
+                            paginationPreText: "@lang('general.previous')",
+                            paginationNextText: "@lang('general.next')",
+                            pageList: ['10','25','50','100','150','200'],
+                            icons: {
+                                paginationSwitchDown: 'fa-caret-square-o-down',
+                                paginationSwitchUp: 'fa-caret-square-o-up',
+                                columns: 'fa-columns',
+                                refresh: 'fa-refresh'
+                            },
+
+                        });
+                    </script>
+                    @stop
+
 @stop

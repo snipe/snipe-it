@@ -15,12 +15,14 @@ class SuppliersSeeder extends Seeder
             'name'      	=> 'New Egg',
             'created_at' 	=> $date->modify('-10 day'),
             'updated_at' 	=> $date->modify('-3 day'),
+            'user_id'       => 1,
         );
 
         $supplier[] = array(
             'name'      	=> 'Microsoft',
             'created_at' 	=> $date->modify('-10 day'),
             'updated_at' 	=> $date->modify('-3 day'),
+            'user_id'       => 1,
         );
 
 

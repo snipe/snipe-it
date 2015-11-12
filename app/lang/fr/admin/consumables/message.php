@@ -2,34 +2,34 @@
 
 return array(
 
-    'does_not_exist' => 'Consumable does not exist.',
+    'does_not_exist' => 'Cette fourniture n\'existe pas.',
 
     'create' => array(
-        'error'   => 'Consumable was not created, please try again.',
-        'success' => 'Consumable created successfully.'
+        'error'   => 'La fourniture n\'a pas été créé, veuillez réessayer.',
+        'success' => 'La fourniture a été créé correctement.'
     ),
 
     'update' => array(
-        'error'   => 'Consumable was not updated, please try again',
-        'success' => 'Consumable updated successfully.'
+        'error'   => 'La fourniture n\'a pas été actualisé, veuillez réessayer',
+        'success' => 'La fourniture a été actualisé correctement.'
     ),
 
     'delete' => array(
-        'confirm'   => 'Are you sure you wish to delete this accessory?',
-        'error'   => 'There was an issue deleting the consumable. Please try again.',
-        'success' => 'The accessory was deleted successfully.'
+        'confirm'   => 'Êtes-vous certain de vouloir détruire cette fourniture ?',
+        'error'   => 'Il y a eu un problème en détruisant la fourniture. Veuillez réessayer.',
+        'success' => 'La fourniture a été détruite correctement.'
     ),
 
      'checkout' => array(
-        'error'   		=> 'Consumable was not checked out, please try again',
-        'success' 		=> 'Consumable checked out successfully.',
-        'user_does_not_exist' => 'That user is invalid. Please try again.'
+        'error'   		=> 'La fourniture n\'a pas été attribué correctement, veuillez réessayer',
+        'success' 		=> 'La fourniture a été attribué correctement.',
+        'user_does_not_exist' => 'Cet utilisateur est invalide. Veuillez réessayer.'
     ),
 
     'checkin' => array(
-        'error'   		=> 'Consumable was not checked in, please try again',
-        'success' 		=> 'Consumable checked in successfully.',
-        'user_does_not_exist' => 'That user is invalid. Please try again.'
+        'error'   		=> 'La fourniture n\'a pas été dissocié correctement, veuillez réessayer',
+        'success' 		=> 'La fourniture à été dissocié correctement.',
+        'user_does_not_exist' => 'Cet utilisateur est invalide. Veuillez réessayer.'
     )
 
 

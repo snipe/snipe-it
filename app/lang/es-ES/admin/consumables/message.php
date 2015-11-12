@@ -15,9 +15,9 @@ return array(
     ),
 
     'delete' => array(
-        'confirm'   => 'Esta seguro de querer borrar este accesorio?',
+        'confirm'   => '¿Está seguro que desea eliminar este consumible?',
         'error'   => 'Hubo un error al borrar este consumible. Por favor intente nuevamente.',
-        'success' => 'El accesorio fue borrado con éxito.'
+        'success' => 'El consumible ha sido eliminado correctamente.'
     ),
 
      'checkout' => array(

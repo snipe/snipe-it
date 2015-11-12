@@ -73,7 +73,7 @@
                                     </tr>
 
                                     <tr>
-                                        <td>@lang('admin/settings/general.load_remote')</td>
+                                        <td>@lang('admin/settings/general.load_remote_text')</td>
 
                                         @if ($setting->load_remote == 1)
                                             <td>@lang('general.yes')</td>

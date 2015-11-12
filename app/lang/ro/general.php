@@ -43,6 +43,7 @@
     'date'					=> 'Data',
     'delete'  				=> 'Sterge',
     'deleted'  				=> 'Sters',
+    'delete_seats'  		=> 'Deleted Seats',
     'deployed'				=> 'Pus in folosinta',
     'depreciation_report'	=> 'Raport depreciere',
     'download'				=> 'Download',

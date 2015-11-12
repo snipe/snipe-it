@@ -13,7 +13,7 @@ return array(
     |
     */
 
-    'debug' => true,
+    'debug' => false,
 
     /*
     |--------------------------------------------------------------------------
@@ -27,6 +27,19 @@ return array(
     */
 
     'url' => 'http://staging.yourserver.com',
+
+
+    /*
+    |--------------------------------------------------------------------------
+    | Organization Domain Name
+    |--------------------------------------------------------------------------
+    |
+    | The domain name of the organization, used when generating email addresses
+    | through the import tools.
+    |
+    */
+
+    'domain' => 'yourserver.com',
 
     /*
     |--------------------------------------------------------------------------

@@ -100,10 +100,10 @@
     <div class="wrapper">
         <div class="error-spacer"></div>
         <div role="main" class="main">
-            <h1>Scheduled Maintenance</h1>
+            <h1>System Unavailable</h1>
 
             <p>
-                We are under a scheduled maintenance and we'll be back shortly!
+               The system is currently undergoing maintenance. Please check back soon.
             </p>
         </div>
     </div>

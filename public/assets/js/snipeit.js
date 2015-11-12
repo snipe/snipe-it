@@ -8,63 +8,6 @@
     var Components = {};
     Components.modals = {};
 
-    Components.example = function() {
-        var paginationType = 'full_numbers';
-        var $el = $('#example');
-
-        var render = function() {
-            $el.dataTable({
-                "sPaginationType": paginationType,
-                "iDisplayLength": settings.per_page,
-                "aLengthMenu": [
-                    [settings.per_page, -1],
-                    [settings.per_page, "All"]
-                ],
-                "aoColumnDefs": [{
-                    'bSortable': false,
-                    'aTargets': ['actions']
-                }]
-            });
-
-            $el.popover();
-        };
-
-        return {
-            render: render
-        };
-    };
-
-
-    Components.nosorting = function() {
-        var paginationType = 'full_numbers';
-        var $el = $('#nosorting');
-
-        var render = function() {
-            $el.dataTable({
-                "sPaginationType": paginationType,
-                "fnSort": [1, 'asc'],
-                "aoColumns": [{
-                    "bSortable": false
-                }, {
-                    "bSortable": false
-                }, {
-                    "bSortable": false
-                }, {
-                    "bSortable": false
-                }],
-                "iDisplayLength": settings.per_page,
-                "aLengthMenu": [
-                    [settings.per_page, -1],
-                    [settings.per_page, "All"]
-                ]
-            });
-        };
-
-        return {
-            render: render
-        };
-    };
-
     // add uniform plugin styles to html elements
     Components.pluginStyles = function() {
         var $el = $("input:checkbox, input:radio");
@@ -164,8 +107,6 @@
      * Component definition stays out of load event, execution only happens.
      */
     $(function() {
-        new Components.example().render();
-        new Components.nosorting().render();
         new Components.pluginStyles().render();
         new Components.datepicker().render();
         new Components.select2().render();

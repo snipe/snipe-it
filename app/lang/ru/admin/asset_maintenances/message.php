@@ -1,17 +1,17 @@
 <?php
 
     return [
-        'not_found'                    => 'Asset Maintenance you were looking for was not found!',
+        'not_found'                    => 'Актив не найден!',
         'delete'                       => [
-            'confirm' => 'Are you sure you wish to delete this asset maintenance?',
-            'error'   => 'There was an issue deleting the asset maintenance. Please try again.',
-            'success' => 'The asset maintenance was deleted successfully.'
+            'confirm' => 'Вы уверены что хотите удалить?',
+            'error'   => 'При удалении возникла проблема. Пожалуйста попробуйте еще раз.',
+            'success' => 'Удалено.'
         ],
         'create'                       => [
-            'error'   => 'Asset Maintenance was not created, please try again.',
-            'success' => 'Asset Maintenance created successfully.'
+            'error'   => 'Не выполнено, попробуйте еще раз.',
+            'success' => 'Выполнено.'
         ],
         'asset_maintenance_incomplete' => 'Ещё не готово',
         'warranty'                     => 'Гарантия',
-        'not_warranty'                 => 'Not Warranty',
+        'not_warranty'                 => 'Гарантии нет/истекла',
     ];

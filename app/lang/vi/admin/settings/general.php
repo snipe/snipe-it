@@ -26,7 +26,8 @@ return array(
     'header_color'              => 'Màu Header',
     'info'                      => 'Các thiết lập này cho phép bạn tùy chỉnh một số khía cạnh của quá trình cài đặt.',
     'laravel'                   => 'Phiên bản Laravel',
-    'load_remote'				=> 'Cài đặt Snipe-IT này có thể phải tải những đoạn mã từ bên ngoài.',
+    'load_remote_text'          => 'Remote Scripts',
+    'load_remote_help_text'		=> 'This Snipe-IT install can load scripts from the outside world.',
     'logo'                    	=> 'Logo',
     'optional'					=> 'tùy ý',
     'per_page'                  => 'Kết quả trên trang',
@@ -47,4 +48,7 @@ return array(
     'system'                    => 'Thông tin hệ thống',
     'update'                    => 'Cập nhật cài đặt',
     'value'                     => 'Giá trị',
+    'brand'                     => 'Branding',
+    'about_settings_title'      => 'About Settings',
+    'about_settings_text'       => 'These settings let you customize certain aspects of your installation.',    
 );

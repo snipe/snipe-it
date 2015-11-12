@@ -149,5 +149,117 @@ class User extends SentryUserModel
         return $this->persist_code;
     }
 
+    public function scopeMatchEmailOrUsername( $query, $user_username, $user_email )
+    {
+        return $query->where('email','=',$user_email)
+        ->orWhere('username','=',$user_username)
+        ->orWhere('username','=',$user_email);
+    }
+
+
+    public static function generateFormattedNameFromFullName($format = 'filastname', $users_name) {
+        $name = explode(" ", $users_name);
+        $name = str_replace("'", '', $name);
+        $first_name = $name[0];
+        $email_last_name = '';
+        $email_prefix = $first_name;
+
+        // If there is no last name given
+        if (!array_key_exists(1, $name)) {
+            $last_name='';
+            $email_last_name = $last_name;
+            $user_username = $first_name;
+
+        // There is a last name given
+        } else {
+
+            $last_name = str_replace($first_name,'',$users_name);
+
+            if ($format=='filastname') {
+                $email_last_name.=str_replace(' ','',$last_name);
+                $email_prefix = $first_name[0].$email_last_name;
+
+            } elseif ($format=='firstname.lastname') {
+                $email_last_name.=str_replace(' ','',$last_name);
+                $email_prefix = $first_name.'.'.$email_last_name;
+
+            } elseif ($format=='firstname') {
+                $email_last_name.=str_replace(' ','',$last_name);
+                $email_prefix = $first_name;
+
+            }
+        }
+
+        $user_username = $email_prefix;
+        $user['first_name'] = $first_name;
+        $user['last_name'] = $last_name;
+        $user['username'] = strtolower($user_username);
+
+        return $user;
+
+
+    }
+
+  /**
+	* Query builder scope to search on text
+	*
+	* @param  Illuminate\Database\Query\Builder  $query  Query builder instance
+	* @param  text                              $search    	 Search term
+	*
+	* @return Illuminate\Database\Query\Builder          Modified query builder
+	*/
+    public function scopeTextsearch($query, $search)
+	{
+
+    return $query->where(function($query) use ($search) {
+        $query->where('users.first_name', 'LIKE', "%$search%")
+        ->orWhere('users.last_name', 'LIKE', "%$search%")
+        ->orWhere('users.email', 'LIKE', "%$search%")
+        ->orWhere('users.username', 'LIKE', "%$search%")
+        ->orWhere('users.notes', 'LIKE', "%$search%")
+        ->orWhere(function($query) use ($search) {
+            $query->whereHas('userloc', function($query) use ($search) {
+                $query->where('name','LIKE','%'.$search.'%');
+            });
+        })
+
+        // Ugly, ugly code because Laravel sucks at self-joins
+        ->orWhere(function($query) use ($search) {
+            $query->whereRaw("users.manager_id IN (select id from users where first_name LIKE '%".$search."%' OR last_name LIKE '%".$search."%') ");
+        });
+    });
+
+	}
+
+
+    /**
+     * Query builder scope for Deleted users
+     *
+     * @param  Illuminate\Database\Query\Builder $query Query builder instance
+     *
+     * @return Illuminate\Database\Query\Builder          Modified query builder
+     */
+
+    public function scopeDeleted($query)
+    {
+        return $query->whereNotNull('deleted_at');
+    }
+
+
+    /**
+    * Query builder scope to order on manager
+    *
+    * @param  Illuminate\Database\Query\Builder  $query  Query builder instance
+    * @param  text                              $order    	 Order
+    *
+    * @return Illuminate\Database\Query\Builder          Modified query builder
+    */
+    public function scopeOrderManager($query, $order)
+    {
+      // Left join here, or it will only return results with parents
+      return $query->leftJoin('users as manager', 'users.manager_id', '=', 'manager.id')->orderBy('manager.first_name', $order)->orderBy('manager.last_name', $order);
+    }
+
+
 
 }

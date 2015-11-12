@@ -43,6 +43,7 @@
     'date'					=> 'Fecha Compra',
     'delete'  				=> 'Borrar',
     'deleted'  				=> 'Borrado',
+    'delete_seats'  		=> 'Deleted Seats',
     'deployed'				=> 'Instalados - ',
     'depreciation_report'	=> 'Informe de amortización',
     'download'				=> 'Descargar',

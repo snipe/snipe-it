@@ -77,66 +77,80 @@ class AssetImportCommand extends Command {
 				$user_email = '';
 			}
 
-			// Asset Category
+			// User's email
 			if (array_key_exists('2',$row)) {
-				$user_asset_category = trim($row[2]);
+				$user_username = trim($row[2]);
+			} else {
+				$user_username = '';
+			}
+
+			// Asset Name
+			if (array_key_exists('3',$row)) {
+				$user_asset_asset_name = trim($row[3]);
+			} else {
+				$user_asset_asset_name = '';
+			}
+
+			// Asset Category
+			if (array_key_exists('4',$row)) {
+				$user_asset_category = trim($row[4]);
 			} else {
 				$user_asset_category = '';
 			}
 
 			// Asset Name
-			if (array_key_exists('3',$row)) {
-				$user_asset_name = trim($row[3]);
+			if (array_key_exists('5',$row)) {
+				$user_asset_name = trim($row[5]);
 			} else {
 				$user_asset_name = '';
 			}
 
 			// Asset Manufacturer
-			if (array_key_exists('4',$row)) {
-				$user_asset_mfgr = trim($row[4]);
+			if (array_key_exists('6',$row)) {
+				$user_asset_mfgr = trim($row[6]);
 			} else {
 				$user_asset_mfgr = '';
 			}
 
 			// Asset model number
-			if (array_key_exists('5',$row)) {
-				$user_asset_modelno = trim($row[5]);
+			if (array_key_exists('7',$row)) {
+				$user_asset_modelno = trim($row[7]);
 			} else {
 				$user_asset_modelno = '';
 			}
 
 			// Asset serial number
-			if (array_key_exists('6',$row)) {
-				$user_asset_serial = trim($row[6]);
+			if (array_key_exists('8',$row)) {
+				$user_asset_serial = trim($row[8]);
 			} else {
 				$user_asset_serial = '';
 			}
 
 			// Asset tag
-			if (array_key_exists('7',$row)) {
-				$user_asset_tag = trim($row[7]);
+			if (array_key_exists('9',$row)) {
+				$user_asset_tag = trim($row[9]);
 			} else {
 				$user_asset_tag = '';
 			}
 
 			// Asset location
-			if (array_key_exists('8',$row)) {
-				$user_asset_location = trim($row[8]);
+			if (array_key_exists('10',$row)) {
+				$user_asset_location = trim($row[10]);
 			} else {
 				$user_asset_location = '';
 			}
 
 			// Asset notes
-			if (array_key_exists('9',$row)) {
-				$user_asset_notes = trim($row[9]);
+			if (array_key_exists('11',$row)) {
+				$user_asset_notes = trim($row[11]);
 			} else {
 				$user_asset_notes = '';
 			}
 
 			// Asset purchase date
-			if (array_key_exists('10',$row)) {
-				if ($row[10]!='') {
-					$user_asset_purchase_date = date("Y-m-d 00:00:01", strtotime($row[10]));
+			if (array_key_exists('12',$row)) {
+				if ($row[12]!='') {
+					$user_asset_purchase_date = date("Y-m-d 00:00:01", strtotime($row[12]));
 				} else {
 					$user_asset_purchase_date = '';
 				}
@@ -145,9 +159,9 @@ class AssetImportCommand extends Command {
 			}
 
 			// Asset purchase cost
-			if (array_key_exists('11',$row)) {
-				if ($row[11]!='') {
-					$user_asset_purchase_cost = trim($row[11]);
+			if (array_key_exists('13',$row)) {
+				if ($row[13]!='') {
+					$user_asset_purchase_cost = trim($row[13]);
 				} else {
 					$user_asset_purchase_cost = '';
 				}
@@ -168,46 +182,24 @@ class AssetImportCommand extends Command {
 				$user_username = '';
 
 			} else {
+				$user_email_array = User::generateFormattedNameFromFullName($this->option('email_format'), $user_name);
+				$first_name = $user_email_array['first_name'];
+				$last_name = $user_email_array['last_name'];
 
-					$name = explode(" ", $user_name);
-					$first_name = $name[0];
-					$email_last_name = '';
-					$email_prefix = $first_name;
+				if ($user_email=='') {
+					$user_email = $user_email_array['username'].'@'.Config::get('app.domain');
+				}
 
-					if (!array_key_exists(1, $name)) {
-						$last_name='';
-						$email_last_name = $last_name;
-						$email_prefix = $first_name;
+				if ($user_username=='') {
+					if ($this->option('username_format')=='email') {
+						$user_username = $user_email;
 					} else {
-						$last_name = str_replace($first_name,'',$user_name);
-
-						if ($this->option('email_format')=='filastname') {
-							$email_last_name.=str_replace(' ','',$last_name);
-							$email_prefix = $first_name[0].$email_last_name;
-
-						} elseif ($this->option('email_format')=='firstname.lastname') {
-							$email_last_name.=str_replace(' ','',$last_name);
-							$email_prefix = $first_name.'.'.$email_last_name;
-
-						} elseif ($this->option('email_format')=='firstname') {
-							$email_last_name.=str_replace(' ','',$last_name);
-							$email_prefix = $first_name;
-						}
-
-
+						$user_name_array = User::generateFormattedNameFromFullName($this->option('username_format'), $user_name);
+						$user_username = $user_name_array['username'];
 					}
 
+				}
 
-					$user_username = $email_prefix;
-
-					// Generate an email based on their name if no email address is given
-					if ($user_email=='') {
-						if ($first_name=='Unknown') {
-							$status_id = 7;
-						}
-						$email = strtolower($email_prefix).'@'.$this->option('domain');
-						$user_email = str_replace("'",'',$email);
-					}
 			}
 
 			$this->comment('Full Name: '.$user_name);
@@ -229,7 +221,8 @@ class AssetImportCommand extends Command {
 			$this->comment('------------- Action Summary ----------------');
 
 			if ($user_username!='') {
-				if ($user = User::where('username', $user_username)->whereNotNull('username')->first()) {
+				if ($user = User::MatchEmailOrUsername($user_username, $user_email)
+					->whereNotNull('username')->first()) {
 					$this->comment('User '.$user_username.' already exists');
 				} else {
 					// Create the user
@@ -238,7 +231,7 @@ class AssetImportCommand extends Command {
 						'last_name' => $last_name,
 						'email'     => $user_email,
 						'username'     => $user_username,
-						'password'  => substr(str_shuffle("0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"), 0, 10),
+						'password'  => substr(str_shuffle("0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"), 0, 12),
 						'activated' => true,
 						'permissions' => array(
 							'admin' => 0,
@@ -262,24 +255,32 @@ class AssetImportCommand extends Command {
 			if ($location = Location::where('name', $user_asset_location)->first()) {
 				$this->comment('Location '.$user_asset_location.' already exists');
 			} else {
-				$location = new Location();
-				$location->name = e($user_asset_location);
-				$location->address = '';
-				$location->city = '';
-				$location->state = '';
-				$location->country = '';
-				$location->user_id = 1;
 
-				if (!$this->option('testrun')=='true') {
+        $location = new Location();
 
-					if ($location->save()) {
-						$this->comment('Location '.$user_asset_location.' was created');
-		            } else {
-						$this->comment('Something went wrong! Location '.$user_asset_location.' was NOT created');
+				if ($user_asset_location!='') {
+
+
+					$location->name = e($user_asset_location);
+					$location->address = '';
+					$location->city = '';
+					$location->state = '';
+					$location->country = '';
+					$location->user_id = 1;
+
+					if (!$this->option('testrun')=='true') {
+
+						if ($location->save()) {
+							$this->comment('Location '.$user_asset_location.' was created');
+			            } else {
+							$this->comment('Something went wrong! Location '.$user_asset_location.' was NOT created');
+						}
+
+					} else {
+						$this->comment('Location '.$user_asset_location.' was (not) created - test run only');
 					}
-
 				} else {
-					$this->comment('Location '.$user_asset_location.' was (not) created - test run only');
+					$this->comment('No location given, so none created.');
 				}
 
 			}
@@ -339,7 +340,7 @@ class AssetImportCommand extends Command {
 			// Check for the asset match and create it if it doesn't exist
 
 				$asset = new Asset();
-				$asset->name = e($user_asset_name);
+				$asset->name = e($user_asset_asset_name);
 				if ($user_asset_purchase_date!='') {
 					$asset->purchase_date = $user_asset_purchase_date;
 				} else {
@@ -400,11 +401,11 @@ class AssetImportCommand extends Command {
 	 */
 	protected function getOptions()
 	{
-		return array(
-			array('domain', null, InputOption::VALUE_REQUIRED, 'Email domain for generated email addresses.', null),
-			array('email_format', null, InputOption::VALUE_REQUIRED, 'The format of the email addresses that should be generated. Options are firstname.lastname, firstname, filastname', null),
-			array('testrun', null, InputOption::VALUE_REQUIRED, 'Test the output without writing to the database or not.', null),
-		);
+	return array(
+		array('email_format', null, InputOption::VALUE_REQUIRED, 'The format of the email addresses that should be generated. Options are firstname.lastname, firstname, filastname', null),
+		array('username_format', null, InputOption::VALUE_REQUIRED, 'The format of the username that should be generated. Options are firstname.lastname, firstname, filastname, email', null),
+		array('testrun', null, InputOption::VALUE_REQUIRED, 'Test the output without writing to the database or not.', null),
+	);
 	}
 
 

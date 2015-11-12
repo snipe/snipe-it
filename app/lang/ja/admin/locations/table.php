@@ -1,7 +1,8 @@
 <?php
 
 return array(
-
+    'assets_rtd'		=> 'Assets RTD',
+    'assets_checkedout'		=> 'Assets Assigned',
     'id'      		=> 'ID',
     'city'   		=> '市区町村',
     'state'   		=> '都道府県',
@@ -13,5 +14,5 @@ return array(
     'zip'			=> '郵便番号',
     'locations'		=> 'ロケーション',
     'parent'		=> '上位',
-    'currency'  	=> '現地通貨', // this is deprecated
+    'currency'  	=> '現地通貨',
 );

@@ -43,6 +43,7 @@
     'date'					=> 'Ngày',
     'delete'  				=> 'Xóa',
     'deleted'  				=> 'Đã xóa',
+    'delete_seats'  		=> 'Deleted Seats',
     'deployed'				=> 'Đã cấp phát',
     'depreciation_report'	=> 'Báo cáo khấu hao',
     'download'				=> 'Tải về',

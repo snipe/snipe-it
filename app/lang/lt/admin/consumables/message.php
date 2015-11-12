@@ -15,9 +15,9 @@ return array(
     ),
 
     'delete' => array(
-        'confirm'   => 'Ar jūs tikrai norite ištrinti šią suvartojamą įrangą?',
+        'confirm'   => 'Ar tikrai norite ištrinti pasirinktą įrangą?',
         'error'   => 'Nepavyko ištrinti suvartojamos įrangos. Prašome bandykite dar kartą.',
-        'success' => 'Ši įranga sėkmingai ištrinta.'
+        'success' => 'Įranga buvo ištrinta sėkmingai.'
     ),
 
      'checkout' => array(

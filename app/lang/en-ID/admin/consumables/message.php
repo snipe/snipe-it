@@ -2,34 +2,34 @@
 
 return array(
 
-    'does_not_exist' => 'Consumable does not exist.',
+    'does_not_exist' => 'Consumable Tidak ada.',
 
     'create' => array(
-        'error'   => 'Consumable was not created, please try again.',
-        'success' => 'Consumable created successfully.'
+        'error'   => 'Consumable gagal dibuat, silahkan coba lagi.',
+        'success' => 'Consumable berhasil dibuat.'
     ),
 
     'update' => array(
-        'error'   => 'Consumable was not updated, please try again',
-        'success' => 'Consumable updated successfully.'
+        'error'   => 'Consumable gagal diupdate, silahkan coba lagi',
+        'success' => 'Consumable berhasil diupdate.'
     ),
 
     'delete' => array(
-        'confirm'   => 'Are you sure you wish to delete this accessory?',
-        'error'   => 'There was an issue deleting the consumable. Please try again.',
-        'success' => 'The accessory was deleted successfully.'
+        'confirm'   => 'Apakah Anda yakin ingin menghapus Consumable ini?',
+        'error'   => 'Ada masalah menghapus Consumable. Silakan coba lagi.',
+        'success' => 'Consumable berhasil dihapus.'
     ),
 
      'checkout' => array(
-        'error'   		=> 'Consumable was not checked out, please try again',
-        'success' 		=> 'Consumable checked out successfully.',
-        'user_does_not_exist' => 'That user is invalid. Please try again.'
+        'error'   		=> 'Consumable tidak diperiksa, silakan coba lagi',
+        'success' 		=> 'Consumable berhasil diperiksa.',
+        'user_does_not_exist' => 'Pengguna tidak valid. Silakan coba lagi.'
     ),
 
     'checkin' => array(
-        'error'   		=> 'Consumable was not checked in, please try again',
-        'success' 		=> 'Consumable checked in successfully.',
-        'user_does_not_exist' => 'That user is invalid. Please try again.'
+        'error'   		=> 'Consumable tidak diperiksa, silakan coba lagi',
+        'success' 		=> 'Consumable berhasil di-check in.',
+        'user_does_not_exist' => 'Pengguna tidak valid. Silakan coba lagi.'
     )
 
 
