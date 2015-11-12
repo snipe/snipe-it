@@ -1,12 +1,23 @@
 #### How to use the Snipe-IT docker image #####
 
+The easiest way, by far, is to just use the version we push to the docker hub:
+
+```sh
+docker pull snipe/snipe-it
+```
+
+Then you have a functioning Snipe-IT container. Skip ahead to "How to get up and 
+running" to configure it and get it connected to your database.
+
+#### How to *Build* the Snipe-IT docker image ####
+
 Build the snipeit image using the ```Dockerfile``` at the root directory of Snipe-IT by doing this:
 
 ```sh
-docker build -t snipeit .
+docker build -t snipe-it .
 ```
 
-Then you can use your newly built image as ```snipeit```
+Then you can use your newly built image as ```snipe-it```
 
 ### How to get up and running ###
 
@@ -42,11 +53,15 @@ SNIPEIT_TIMEZONE=UTC
 SNIPEIT_LOCALE=en
 SERVER_URL=https://myserver.com
 ```
-* First get a MySQL container running
+* First get a MySQL container running.
 
 ```sh
 docker run --name snipe-mysql --env-file=my_env_file -d -p $(docker-machine ip b2d)::3306 mysql
 ```
+
+**WARNING:** Newer MySQL containers run strict-mode by default, and the initial
+migrations and appliction setup will fail in strict mode. You need to disable it
+first!
 
 That should set you up with your database to use. (You can also specify environment variables on the command-line instead of the env-file, but that can get very clunky very quickly; see ```docker run --help``` for details)
 
@@ -54,23 +69,28 @@ That should set you up with your database to use. (You can also specify environm
 
 Now you can start your Snipe-IT container -
 ```sh
-docker run -d -p $(docker-machine ip b2d)::80 --name="snipeit" --link snipe-mysql:mysql --env-file=my_env_file snipeit 
+docker run -d -p $(docker-machine ip b2d)::80 --name="snipeit" --link snipe-mysql:mysql --env-file=my_env_file snipe-it 
 ```
 If you have a separate container running for email, you will also want a ```--link``` setting for email as well.
 
 You can find out what port Snipe-IT is running on with:
 
 ```sh
-docker port snipeit
+docker port snipe-it
 ```
 
 And finally, you can initialize the application and database like this:
 
 ```sh
-docker exec -i -t snipeit php artisan app:install
+docker exec -i -t snipe-it php artisan app:install
 ```
 
 (Go ahead and answer the questions however you like. Type 'yes' when asked whether or not you want to run migrations.)
+
+**WARNING:** Docker wants to treat containers as 'ephemeral' - but Snipe-IT is
+expecting to be able to save uploaded images and files to the local filesystem.
+Either make sure to back up your image, or mount a local directory to house
+uploaded files at /var/www/blah/
 
 ~~#NOTE:~~
 
