@@ -88,7 +88,7 @@
 
         @if ($asset->purchase_cost)
             <div class="col-md-12" style="padding-bottom: 5px;"><strong>@lang('admin/hardware/form.cost'):</strong>
-              
+
             @if (($asset->id) && ($asset->userloc))
                   {{{ $asset->userloc->currency }}}
             @elseif (($asset->id) && ($asset->assetloc))
@@ -405,12 +405,15 @@
             </ul>
             @endif
 
-		<!-- Is there an image to show? -->
-                 @if ($asset->image)
-                     <h6><img src="{{ Config::get('app.url') }}/uploads/assets/{{{ $asset->image }}}"</img></h6>
-		 @else
-		     <h6><br/><p>@lang('general.noimage')<p></h6></br>
-                 @endif
+		<!-- Is there an asset or model image to show? -->
+
+        @if ($asset->image)
+          <img src="{{ Config::get('app.url') }}/uploads/assets/{{{ $asset->image }}}" class="assetimg">
+        @else
+          @if ($asset->model->image!='')
+            <img src="{{ Config::get('app.url') }}/uploads/models/{{{ $asset->model->image }}}" class="assetimg">
+          @endif
+        @endif
 
 		<!-- checked out assets table -->
 
