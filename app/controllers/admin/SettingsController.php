@@ -84,7 +84,7 @@ class SettingsController extends AdminController
             "ldap_basedn"     => 'min:1',
             "ldap_username"     => 'min:1',
             "ldap_lname"     => 'min:1',
-            "ldap_lname"     => 'min:1',
+            "ldap_fname"     => 'min:1',
 	        );
 
         if (Config::get('app.lock_passwords')==false) {
