@@ -73,7 +73,7 @@ class AccessoriesController extends AdminController
             // Update the accessory data
             $accessory->name            		= e(Input::get('name'));
             $accessory->category_id            	= e(Input::get('category_id'));
-            $accessory->company_id              = e(Input::get('company_id'));
+            $accessory->company_id              = Company::getIdFromInput(Input::get('company_id'));
             $accessory->order_number            = e(Input::get('order_number'));
 
             if (e(Input::get('purchase_date')) == '') {
@@ -160,7 +160,7 @@ class AccessoriesController extends AdminController
             // Update the accessory data
             $accessory->name            		= e(Input::get('name'));
             $accessory->category_id            	= e(Input::get('category_id'));
-            $accessory->company_id              = e(Input::get('company_id'));
+            $accessory->company_id              = Company::getIdFromInput(Input::get('company_id'));
             $accessory->order_number            = e(Input::get('order_number'));
 
             if (e(Input::get('purchase_date')) == '') {

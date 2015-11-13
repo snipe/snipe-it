@@ -1,5 +1,7 @@
 <?php
 
+use Lang;
+
 final class Company extends Elegant
 {
     protected $table = 'companies';
@@ -9,6 +11,15 @@ final class Company extends Elegant
 
     public static function getSelectList()
     {
-        return array('' => '') + DB::table('companies')->orderBy('name', 'ASC')->lists('name', 'id');
+        $select_company = Lang::get('admin/companies/general.select_company');
+        return ['0' => $select_company] + DB::table('companies')->orderBy('name', 'ASC')->lists('name', 'id');
+    }
+
+    public static function getIdFromInput($input)
+    {
+        $escapedInput = e($input);
+
+        if ($escapedInput == '0') { return NULL;          }
+        else                      { return $escapedInput; }
     }
 }

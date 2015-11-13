@@ -124,6 +124,8 @@ class UsersController extends AdminController {
             // Get the inputs, with some exceptions
             $inputs = Input::except('csrf_token', 'password_confirm', 'groups', 'email_user');
 
+            $inputs['company_id'] = Company::getIdFromInput($inputs['company_id']);
+
             // @TODO: Figure out WTF I need to do this.
             if ($inputs['manager_id'] == '') {
                 unset($inputs['manager_id']);
@@ -363,7 +365,7 @@ class UsersController extends AdminController {
             $user->jobtitle = Input::get('jobtitle');
             $user->phone = Input::get('phone');
             $user->location_id = Input::get('location_id');
-            $user->company_id = Input::get('company_id');
+            $user->company_id = Company::getIdFromInput(Input::get('company_id'));
             $user->manager_id = Input::get('manager_id');
             $user->notes = Input::get('notes');
 

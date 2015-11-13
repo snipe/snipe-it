@@ -39,7 +39,6 @@
     <div class="form-group {{ $errors->has('company_id') ? ' has-error' : '' }}">
         <div class="col-md-3">
             {{ Form::label('company_id', Lang::get('general.company')) }}
-            <i class='fa fa-asterisk'></i>
         </div>
         <div class="col-md-7">
             {{ Form::select('company_id', $company_list , Input::old('company_id', $consumable->company_id), array('class'=>'select2', 'style'=>'width:350px')) }}

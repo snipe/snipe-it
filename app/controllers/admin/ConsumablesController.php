@@ -74,7 +74,7 @@ class ConsumablesController extends AdminController
             // Update the consumable data
             $consumable->name                   = e(Input::get('name'));
             $consumable->category_id            = e(Input::get('category_id'));
-            $consumable->company_id             = e(Input::get('company_id'));
+            $consumable->company_id             = Company::getIdFromInput(Input::get('company_id'));
             $consumable->order_number           = e(Input::get('order_number'));
 
             if (e(Input::get('purchase_date')) == '') {
@@ -161,7 +161,7 @@ class ConsumablesController extends AdminController
             // Update the consumable data
             $consumable->name                   = e(Input::get('name'));
             $consumable->category_id            = e(Input::get('category_id'));
-            $consumable->company_id             = e(Input::get('company_id'));
+            $consumable->company_id             = Company::getIdFromInput(Input::get('company_id'));
             $consumable->order_number           = e(Input::get('order_number'));
 
             if (e(Input::get('purchase_date')) == '') {

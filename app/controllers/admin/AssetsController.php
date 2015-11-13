@@ -165,7 +165,7 @@ class AssetsController extends AdminController
             // Save the asset data
             $asset->name            		= e(Input::get('name'));
             $asset->serial            		= e(Input::get('serial'));
-            $asset->company_id              = e(Input::get('company_id'));
+            $asset->company_id              = Company::getIdFromInput(Input::get('company_id'));
             $asset->model_id                = e(Input::get('model_id'));
             $asset->order_number            = e(Input::get('order_number'));
             $asset->notes            		= e(Input::get('notes'));
@@ -322,7 +322,7 @@ class AssetsController extends AdminController
             // Update the asset data
             $asset->name         = e(Input::get('name'));
             $asset->serial       = e(Input::get('serial'));
-            $asset->company_id   = e(Input::get('company_id'));
+            $asset->company_id   = Company::getIdFromInput(Input::get('company_id'));
             $asset->model_id     = e(Input::get('model_id'));
             $asset->order_number = e(Input::get('order_number'));
             $asset->asset_tag    = e(Input::get('asset_tag'));

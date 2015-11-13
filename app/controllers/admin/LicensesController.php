@@ -128,7 +128,7 @@ class LicensesController extends AdminController
             $license->purchase_date     = e(Input::get('purchase_date'));
             $license->purchase_order    = e(Input::get('purchase_order'));
             $license->depreciation_id   = e(Input::get('depreciation_id'));
-            $license->company_id        = e(Input::get('company_id'));
+            $license->company_id        = Company::getIdFromInput(Input::get('company_id'));
             $license->expiration_date   = e(Input::get('expiration_date'));
             $license->user_id           = Sentry::getId();
 
@@ -242,7 +242,7 @@ class LicensesController extends AdminController
             $license->notes             = e(Input::get('notes'));
             $license->order_number      = e(Input::get('order_number'));
             $license->depreciation_id   = e(Input::get('depreciation_id'));
-            $license->company_id        = e(Input::get('company_id'));
+            $license->company_id        = Company::getIdFromInput(Input::get('company_id'));
             $license->purchase_order    = e(Input::get('purchase_order'));
             $license->maintained        = e(Input::get('maintained'));
             $license->reassignable      = e(Input::get('reassignable'));
