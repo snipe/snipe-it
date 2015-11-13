@@ -29,3 +29,4 @@ app/config/local/session.php
 app/storage/dumps/*
 tests/_support/_generated/*
 tests/_data/scenarios
+public/uploads/assets/*
