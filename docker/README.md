@@ -1,6 +1,6 @@
 #### How to use the Snipe-IT docker image #####
 
-The easiest way, by far, is to just use the version we push to the docker hub:
+The easiest way, by far, is to just use the version we push to Docker Hub:
 
 ```sh
 docker pull snipe/snipe-it
@@ -11,7 +11,8 @@ running" to configure it and get it connected to your database.
 
 #### How to *Build* the Snipe-IT docker image ####
 
-Build the snipeit image using the ```Dockerfile``` at the root directory of Snipe-IT by doing this:
+This is more if you're doing development on the Docker piece of Snipe-IT.
+You can build the snipe-it image using the ```Dockerfile``` at the root directory of Snipe-IT by doing this:
 
 ```sh
 docker build -t snipe-it .
@@ -52,16 +53,31 @@ MAIL_ENV_PASSWORD=your_email_password
 SNIPEIT_TIMEZONE=UTC
 SNIPEIT_LOCALE=en
 SERVER_URL=https://myserver.com
+
+# LDAP Parameters (or omit if not using LDAP)
+# See ldap.php for more info
+LDAP_URL=ldap://ldap.yourserver.com
+LDAP_USERNAME=admin
+LDAP_PASSWORD=adminpass
+LDAP_BASEDN=dc=example,dc=com
+LDAP_FILTER=&(cn=*)
+LDAP_RESULT_USERNAME=username
+LDAP_RESULT_LAST_NAME=sn
+LDAP_RESULT_FIRST_NAME=gn
+LDAP_RESULT_ACTIVE_FLAG=active
+LDAP_RESULT_EMP_NUM=emp-num
+LDAP_RESULT_EMAIL=email
+LDAP_AUTHENTICATION_FILTER_QUERY="uid="
 ```
 * First get a MySQL container running. MySQL 5.6 or earlier are easiest.
 
 ```sh
-docker run --name snipe-mysql --env-file=my_env_file -d -p $(docker-machine ip b2d)::3306 mysql-56
+docker run --name snipe-mysql --env-file=my_env_file -d -p $(docker-machine ip b2d)::3306 mysql:5.6
 ```
 
 **WARNING:** Newer MySQL containers (5.7 and later, or MariaDB) may run in strict-mode by default, and the initial
-migrations and appliction setup will fail in strict mode. You need to disable it
-first!
+migrations and appliction setup will fail in strict mode. If you want to use one of those versions, you need to disable strict
+mode first!
 
 That should set you up with your database to use. (You can also specify environment variables on the command-line instead of the env-file, but that can get very clunky very quickly; see ```docker run --help``` for details)
 
@@ -76,48 +92,23 @@ If you have a separate container running for email, you will also want a ```--li
 You can find out what port Snipe-IT is running on with:
 
 ```sh
-docker port snipe-it
+docker port snipeit
 ```
 
 And finally, you can initialize the application and database like this:
 
 ```sh
-docker exec -i -t snipe-it php artisan app:install
+docker exec -i -t snipeit php artisan app:install
 ```
 
 (Go ahead and answer the questions however you like. Type 'yes' when asked whether or not you want to run migrations.)
-
-**WARNING:** Docker wants to treat containers as 'ephemeral' - but Snipe-IT is
-expecting to be able to save uploaded images and files to the local filesystem.
-Either make sure to back up your image, or mount a local directory to house
-uploaded files at /var/www/blah/
-
-~~#NOTE:~~
-
-~~You may have to run:~~
-
-```sh
-~~docker exec -i -t snipeit php artisan key:generate --env=production~~
-```
-
-~~to get the production application key set correctly; I'm not yet sure why this is (I think it's a bug?)~~
-
-# ~~If you want to seed~~
-
-~~You can load out some initial data into the DB if you like by doing this:~~
-
-```sh
-~~docker -p $(boot2docker ip):8000:80 --link mysql:mysql php artisan db:seed~~
-```
-
-~~This already happens~~
 
 ### For Development ###
 
 When you call ```docker run``` - make sure to mount your own snipe-it directory *over* the /var/www/html directory. Something like:
 
 ```sh
-docker run -d -v /Path/To/My/snipe-it/checkout:/var/www/html -p $(boot2docker ip)::80  --name="snipeit" --link mysql:mysql snipeit
+docker run -d -v /Path/To/My/snipe-it/checkout:/var/www/html -p $(docker-machine ip b2d)::80  --name="snipeit" --link mysql:mysql snipeit
 ```
 
 Then your local changes to the code will be reflected. You will have to re-run ```composer install``` - 
