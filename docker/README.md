@@ -53,13 +53,13 @@ SNIPEIT_TIMEZONE=UTC
 SNIPEIT_LOCALE=en
 SERVER_URL=https://myserver.com
 ```
-* First get a MySQL container running.
+* First get a MySQL container running. MySQL 5.6 or earlier are easiest.
 
 ```sh
-docker run --name snipe-mysql --env-file=my_env_file -d -p $(docker-machine ip b2d)::3306 mysql
+docker run --name snipe-mysql --env-file=my_env_file -d -p $(docker-machine ip b2d)::3306 mysql-56
 ```
 
-**WARNING:** Newer MySQL containers run strict-mode by default, and the initial
+**WARNING:** Newer MySQL containers (5.7 and later, or MariaDB) may run in strict-mode by default, and the initial
 migrations and appliction setup will fail in strict mode. You need to disable it
 first!
 
