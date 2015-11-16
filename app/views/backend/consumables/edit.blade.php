@@ -36,15 +36,17 @@
     <input type="hidden" name="_token" value="{{ csrf_token() }}" />
 
     <!-- Company -->
-    <div class="form-group {{ $errors->has('company_id') ? ' has-error' : '' }}">
-        <div class="col-md-3">
-            {{ Form::label('company_id', Lang::get('general.company')) }}
+    @if (Company::isCurrentUserAuthorized())
+        <div class="form-group {{ $errors->has('company_id') ? ' has-error' : '' }}">
+            <div class="col-md-3">
+                {{ Form::label('company_id', Lang::get('general.company')) }}
+            </div>
+            <div class="col-md-7">
+                {{ Form::select('company_id', $company_list , Input::old('company_id', $consumable->company_id), array('class'=>'select2', 'style'=>'width:350px')) }}
+                {{ $errors->first('company_id', '<span class="alert-msg"><i class="fa fa-times"></i> :message</span>') }}
+            </div>
         </div>
-        <div class="col-md-7">
-            {{ Form::select('company_id', $company_list , Input::old('company_id', $consumable->company_id), array('class'=>'select2', 'style'=>'width:350px')) }}
-            {{ $errors->first('company_id', '<span class="alert-msg"><i class="fa fa-times"></i> :message</span>') }}
-        </div>
-    </div>
+    @endif
 
     <!-- Name -->
     <div class="form-group {{ $errors->has('name') ? ' has-error' : '' }}">

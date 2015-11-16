@@ -130,6 +130,7 @@ class SettingsController extends AdminController
             $setting->auto_increment_assets = e(Input::get('auto_increment_assets', '0'));
             $setting->alert_email = e(Input::get('alert_email'));
             $setting->alerts_enabled = e(Input::get('alerts_enabled', '0'));
+            $setting->full_multiple_companies_support = e(Input::get('full_multiple_companies_support', '0'));
             $setting->header_color = e(Input::get('header_color'));
             $setting->default_eula_text = e(Input::get('default_eula_text'));
             $setting->slack_endpoint = e(Input::get('slack_endpoint'));

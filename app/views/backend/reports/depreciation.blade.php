@@ -25,6 +25,7 @@
       data-cookie-id-table="depreciationReportTable">
         <thead>
             <tr role="row">
+            <th class="col-sm-1">@lang('admin/companies/table.title')</th>
             <th class="col-sm-1">@lang('admin/hardware/table.asset_tag')</th>
             <th class="col-sm-1">@lang('admin/hardware/table.title')</th>
             @if (Setting::getSettings()->display_asset_name)
@@ -44,6 +45,7 @@
 
         @foreach ($assets as $asset)
         <tr>
+            <td>{{{ is_null($asset->company) ? '' : $asset->company->name }}}</td>
             <td>
 	            @if ($asset->deleted_at!='')
 	            	 <del>{{{ $asset->asset_tag }}}</del>

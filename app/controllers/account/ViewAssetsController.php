@@ -9,6 +9,7 @@ use Location;
 use View;
 use Asset;
 use Actionlog;
+use Company;
 use Lang;
 use Accessory;
 use DB;
@@ -43,7 +44,9 @@ class ViewAssetsController extends AuthorizedController
 
 	public function getRequestableIndex() {
 
-		$assets = Asset::with('model','defaultLoc')->Hardware()->RequestableAssets()->get();
+		$assets = Asset::with('model','defaultLoc')->Hardware()->RequestableAssets();
+        $assets = Company::scopeCompanayables($assets)->get();
+
         return View::make('frontend/account/requestable-assets', compact('user','assets'));
     }
 
@@ -56,7 +59,11 @@ class ViewAssetsController extends AuthorizedController
         if (is_null($asset = Asset::RequestableAssets()->find($assetId))) {
             // Redirect to the asset management page
             return Redirect::route('requestable-assets')->with('error', Lang::get('admin/hardware/message.does_not_exist_or_not_requestable'));
-        } else {
+        }
+        else if (!Company::isCurrentUserHasAccess($asset)) {
+            return Redirect::route('requestable-assets')->with('error', Lang::get('general.insufficient_permissions'));
+        }
+        else {
 
             $logaction = new Actionlog();
             $logaction->asset_id = $asset->id;
@@ -133,17 +140,16 @@ class ViewAssetsController extends AuthorizedController
             // Redirect to the asset management page
             return Redirect::to('account')->with('error', Lang::get('admin/hardware/message.does_not_exist'));
         }
-
-        return View::make('frontend/account/accept-asset', compact('item'))->with('findlog', $findlog);
-
-
-
-
+        else if (!Company::isCurrentUserHasAccess($item)) {
+            return Redirect::route('requestable-assets')->with('error', Lang::get('general.insufficient_permissions'));
+        }
+        else {
+            return View::make('frontend/account/accept-asset', compact('item'))->with('findlog', $findlog);
+        }
     }
 
     // Save the acceptance
     public function postAcceptAsset($logID = null) {
-
 
 	  	// Check if the asset exists
         if (is_null($findlog = Actionlog::find($logID))) {
@@ -151,6 +157,10 @@ class ViewAssetsController extends AuthorizedController
             return Redirect::to('account/view-assets')->with('error', Lang::get('admin/hardware/message.does_not_exist'));
         }
 
+        $is_unauthorized = is_null(Company::scopeActionLogs(Actionlog::where('id', '=', $logID))->first());
+        if ($is_unauthorized) {
+            return Redirect::route('requestable-assets')->with('error', Lang::get('general.insufficient_permissions'));
+        }
 
         if ($findlog->accepted_id!='') {
             // Redirect to the asset management page
@@ -221,14 +231,5 @@ class ViewAssetsController extends AuthorizedController
 		} else {
 			return Redirect::to('account/view-assets')->with('error', 'Something went wrong ');
 		}
-
-
-
-
-
     }
-
-
-
-
 }

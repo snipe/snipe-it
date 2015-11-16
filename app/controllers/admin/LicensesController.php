@@ -128,7 +128,7 @@ class LicensesController extends AdminController
             $license->purchase_date     = e(Input::get('purchase_date'));
             $license->purchase_order    = e(Input::get('purchase_order'));
             $license->depreciation_id   = e(Input::get('depreciation_id'));
-            $license->company_id        = Company::getIdFromInput(Input::get('company_id'));
+            $license->company_id        = Company::getIdForCurrentUser(Input::get('company_id'));
             $license->expiration_date   = e(Input::get('expiration_date'));
             $license->user_id           = Sentry::getId();
 
@@ -186,6 +186,9 @@ class LicensesController extends AdminController
             // Redirect to the blogs management page
             return Redirect::to('admin/licenses')->with('error', Lang::get('admin/licenses/message.does_not_exist'));
         }
+        else if (!Company::isCurrentUserHasAccess($license)) {
+            return Redirect::to('admin/licenses')->with('error', Lang::get('general.insufficient_permissions'));
+        }
 
             if ($license->purchase_date == "0000-00-00") {
                 $license->purchase_date = NULL;
@@ -224,6 +227,9 @@ class LicensesController extends AdminController
             // Redirect to the blogs management page
             return Redirect::to('admin/licenses')->with('error', Lang::get('admin/licenses/message.does_not_exist'));
         }
+        else if (!Company::isCurrentUserHasAccess($license)) {
+            return Redirect::to('admin/licenses')->with('error', Lang::get('general.insufficient_permissions'));
+        }
 
 
         // get the POST data
@@ -242,7 +248,7 @@ class LicensesController extends AdminController
             $license->notes             = e(Input::get('notes'));
             $license->order_number      = e(Input::get('order_number'));
             $license->depreciation_id   = e(Input::get('depreciation_id'));
-            $license->company_id        = Company::getIdFromInput(Input::get('company_id'));
+            $license->company_id        = Company::getIdForCurrentUser(Input::get('company_id'));
             $license->purchase_order    = e(Input::get('purchase_order'));
             $license->maintained        = e(Input::get('maintained'));
             $license->reassignable      = e(Input::get('reassignable'));
@@ -383,6 +389,9 @@ class LicensesController extends AdminController
             // Redirect to the license management page
             return Redirect::to('admin/licenses')->with('error', Lang::get('admin/licenses/message.not_found'));
         }
+        else if (!Company::isCurrentUserHasAccess($license)) {
+            return Redirect::to('admin/licenses')->with('error', Lang::get('general.insufficient_permissions'));
+        }
 
         if (($license->assignedcount()) && ($license->assignedcount() > 0)) {
 
@@ -420,6 +429,9 @@ class LicensesController extends AdminController
         if (is_null($licenseseat = LicenseSeat::find($seatId))) {
             // Redirect to the asset management page with error
             return Redirect::to('admin/licenses')->with('error', Lang::get('admin/licenses/message.not_found'));
+        }
+        else if (!is_null($licenseseat->license) && !Company::isCurrentUserHasAccess($licenseseat->license)) {
+            return Redirect::to('admin/licenses')->with('error', Lang::get('general.insufficient_permissions'));
         }
 
         // Get the dropdown of users and then pass it to the checkout view
@@ -462,10 +474,14 @@ class LicensesController extends AdminController
     public function postCheckout($seatId)
     {
 
-
+        $licenseseat = LicenseSeat::find($seatId);
         $assigned_to = e(Input::get('assigned_to'));
         $asset_id = e(Input::get('asset_id'));
         $user = Sentry::getUser();
+
+        if (!is_null($licenseseat->license) && !Company::isCurrentUserHasAccess($licenseseat->license)) {
+            return Redirect::to('admin/licenses')->with('error', Lang::get('general.insufficient_permissions'));
+        }
 
         // Declare the rules for the form validation
         $rules = array(
@@ -508,7 +524,7 @@ class LicensesController extends AdminController
 
 
 		// Check if the asset exists
-        if (is_null($licenseseat = LicenseSeat::find($seatId))) {
+        if (is_null($licenseseat)) {
             // Redirect to the asset management page with error
             return Redirect::to('admin/licenses')->with('error', Lang::get('admin/licenses/message.not_found'));
         }
@@ -611,6 +627,9 @@ class LicensesController extends AdminController
             // Redirect to the asset management page with error
             return Redirect::to('admin/licenses')->with('error', Lang::get('admin/licenses/message.not_found'));
         }
+        else if (!Company::isCurrentUserHasAccess($licenseseat->license)) {
+            return Redirect::to('admin/licenses')->with('error', Lang::get('general.insufficient_permissions'));
+        }
         return View::make('backend/licenses/checkin', compact('licenseseat'))->with('backto',$backto);
 
     }
@@ -629,6 +648,10 @@ class LicensesController extends AdminController
         }
 
         $license = License::find($licenseseat->license_id);
+
+        if (!Company::isCurrentUserHasAccess($license)) {
+            return Redirect::to('admin/licenses')->with('error', Lang::get('general.insufficient_permissions'));
+        }
 
         if(!$license->reassignable) {
             // Not allowed to checkin
@@ -731,6 +754,10 @@ class LicensesController extends AdminController
         $license = License::find($licenseId);
 
         if (isset($license->id)) {
+
+                if (!Company::isCurrentUserHasAccess($license)) {
+                    return Redirect::to('admin/licenses')->with('error', Lang::get('general.insufficient_permissions'));
+                }
                 return View::make('backend/licenses/view', compact('license'));
         } else {
             // Prepare the error message
@@ -747,6 +774,9 @@ class LicensesController extends AdminController
         if (is_null($license_to_clone = License::find($licenseId))) {
             // Redirect to the blogs management page
             return Redirect::to('admin/licenses')->with('error', Lang::get('admin/licenses/message.does_not_exist'));
+        }
+        else if (!Company::isCurrentUserHasAccess($license_to_clone)) {
+            return Redirect::to('admin/licenses')->with('error', Lang::get('general.insufficient_permissions'));
         }
 
           // Show the page
@@ -779,6 +809,11 @@ class LicensesController extends AdminController
 		$destinationPath = app_path().'/private_uploads';
 
         if (isset($license->id)) {
+
+
+            if (!Company::isCurrentUserHasAccess($license)) {
+                return Redirect::to('admin/licenses')->with('error', Lang::get('general.insufficient_permissions'));
+            }
 
         	if (Input::hasFile('licensefile')) {
 
@@ -851,6 +886,11 @@ class LicensesController extends AdminController
 		// the license is valid
         if (isset($license->id)) {
 
+
+            if (!Company::isCurrentUserHasAccess($license)) {
+                return Redirect::to('admin/licenses')->with('error', Lang::get('general.insufficient_permissions'));
+            }
+
 			$log = Actionlog::find($fileId);
 			$full_filename = $destinationPath.'/'.$log->filename;
 			if (file_exists($full_filename)) {
@@ -883,6 +923,11 @@ class LicensesController extends AdminController
 
 		// the license is valid
         if (isset($license->id)) {
+
+                if (!Company::isCurrentUserHasAccess($license)) {
+                    return Redirect::to('admin/licenses')->with('error', Lang::get('general.insufficient_permissions'));
+                }
+
 				$log = Actionlog::find($fileId);
 				$file = $log->get_src();
 				return Response::download($file);
@@ -897,6 +942,7 @@ class LicensesController extends AdminController
 
     public function getDatatable() {
         $licenses = License::select('id','name','serial','purchase_date','seats', 'company_id')->with('company');
+        $licenses = Company::scopeCompanayables($licenses);
 
         if (Input::has('search')) {
             $licenses = $licenses->TextSearch(Input::get('search'));

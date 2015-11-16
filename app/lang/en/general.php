@@ -68,6 +68,7 @@
     'asset_maintenance_report' => 'Asset Maintenance Report',
     'asset_maintenances'       => 'Asset Maintenances',
     'item'  				=> 'Item',
+    'insufficient_permissions' => 'Insufficient permissions!',
     'last'					=> 'Last',
     'last_name'				=> 'Last Name',
     'license'				=> 'License',

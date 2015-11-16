@@ -45,6 +45,21 @@
               </div>
           </div>
 
+          <!-- Full Multiple Companies Support -->
+          <div class="form-group {{ $errors->has('full_multiple_companies_support') ? 'error' : '' }}">
+            <div class="col-md-3">
+              {{ Form::label('full_multiple_companies_support',
+                             Lang::get('admin/settings/general.full_multiple_companies_support_text')) }}
+            </div>
+            <div class="col-md-9">
+              {{ Form::checkbox('full_multiple_companies_support', '1', Input::old('full_multiple_companies_support',
+                                $setting->full_multiple_companies_support)) }}
+              @Lang('admin/settings/general.full_multiple_companies_support_text')
+              {{ $errors->first('full_multiple_companies_support', '<br><span class="alert-msg">:message</span>') }}
+              <p class="help-inline">@lang('admin/settings/general.full_multiple_companies_support_help_text')</p>
+            </div>
+          </div>
+
           <!-- Logo -->
           <div class="form-group {{ $errors->has('logo') ? 'has-error' : '' }}">
             <div class="col-md-3">
@@ -148,7 +163,7 @@
           </div>
 
           <hr><h4>@lang('admin/settings/general.asset_ids') (@lang('admin/settings/general.optional'))</h4>
-          
+
           <!-- auto ids -->
           <div class="form-group">
             <div class="col-md-3">
@@ -173,7 +188,7 @@
               {{ Form::text('auto_increment_prefix', Input::old('auto_increment_prefix', $setting->auto_increment_prefix), array('class' => 'form-control', 'disabled'=>'disabled', 'style'=>'width: 100px;')) }}
               @endif
             </div>
-          </div>                                
+          </div>
 
           <hr><h4>@lang('admin/settings/general.barcode_settings') (@lang('admin/settings/general.optional'))</h4>
 
@@ -224,7 +239,7 @@
                 @lang('admin/settings/general.php_gd_info')
               </span>
             @endif
-          
+
           <hr><h4>@lang('admin/settings/general.eula_settings') (@lang('admin/settings/general.optional'))</h4>
             <!-- EULA text -->
             <div class="form-group {{ $errors->has('default_eula_text') ? 'error' : '' }}">

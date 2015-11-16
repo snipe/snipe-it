@@ -1,5 +1,5 @@
 <?php
 
-return array(
+return [
     'select_company' => 'Select Company',
-);
+];
