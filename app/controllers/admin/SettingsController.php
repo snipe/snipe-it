@@ -82,9 +82,9 @@ class SettingsController extends AdminController
             "ldap_uname"     => 'min:1',
             "ldap_pword"     => 'min:1',
             "ldap_basedn"     => 'min:1',
-            "ldap_username"     => 'min:1',
-            "ldap_lname"     => 'min:1',
-            "ldap_fname"     => 'min:1',
+            "ldap_username_field"     => 'min:1',
+            "ldap_lname_field"     => 'min:1',
+            "ldap_fname_field"     => 'min:1',
 	        );
 
         if (Config::get('app.lock_passwords')==false) {
@@ -146,9 +146,15 @@ class SettingsController extends AdminController
             $setting->ldap_uname = e(Input::get('ldap_uname'));
             $setting->ldap_pword = e(Input::get('ldap_pword'));
             $setting->ldap_basedn = e(Input::get('ldap_basedn'));
-            $setting->ldap_username = e(Input::get('ldap_username'));
-            $setting->ldap_lname = e(Input::get('ldap_lname'));
-            $setting->ldap_fname = e(Input::get('ldap_fname'));
+            $setting->ldap_filter = e(Input::get('ldap_filter'));
+            $setting->ldap_username_field = e(Input::get('ldap_username_field'));
+            $setting->ldap_lname_field = e(Input::get('ldap_lname_field'));
+            $setting->ldap_fname_field = e(Input::get('ldap_fname_field'));
+            $setting->ldap_auth_filter_query = e(Input::get('ldap_auth_filter_query'));
+            $setting->ldap_version = e(Input::get('ldap_version'));
+            $setting->ldap_active_flag = e(Input::get('ldap_active_flag'));
+            $setting->ldap_emp_num = e(Input::get('ldap_emp_num'));
+            $setting->ldap_email = e(Input::get('ldap_email'));
 
 
             // Was the asset updated?
