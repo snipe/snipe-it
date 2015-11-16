@@ -14,19 +14,19 @@ class AddLdapFieldsToSettings extends Migration {
 	{
 		Schema::table('settings', function(Blueprint $table)
 		{
-			$table->text('ldap_server')->nullable()->default(NULL);
-			$table->text('ldap_uname')->nullable()->default(NULL);
-			$table->text('ldap_pword')->nullable()->default(NULL);
-			$table->text('ldap_basedn')->nullable()->default(NULL);
-			$table->text('ldap_filter')->nullable()->default("&(cn=*)");
-			$table->text('ldap_username_field')->nullable()->default("samaccountname");
-			$table->text('ldap_lname_field')->nullable()->default("sn");
-			$table->text('ldap_fname_field')->nullable()->default("givenname");
-			$table->text('ldap_auth_filter_query')->nullable()->default("uid=");
-			$table->text('ldap_version')->nullable()->default(3);
-			$table->text('ldap_active_flag')->nullable()->default(NULL);
-			$table->text('ldap_emp_num')->nullable()->default(NULL);
-			$table->text('ldap_email')->nullable()->default(NULL);
+			$table->string('ldap_server')->nullable()->default(NULL);
+			$table->string('ldap_uname')->nullable()->default(NULL);
+			$table->string('ldap_pword')->nullable()->default(NULL);
+			$table->string('ldap_basedn')->nullable()->default(NULL);
+			$table->string('ldap_filter')->nullable()->default("&(cn=*)");
+			$table->string('ldap_username_field')->nullable()->default("samaccountname");
+			$table->string('ldap_lname_field')->nullable()->default("sn");
+			$table->string('ldap_fname_field')->nullable()->default("givenname");
+			$table->string('ldap_auth_filter_query')->nullable()->default("uid=");
+			$table->integer('ldap_version')->nullable()->default(3);
+			$table->string('ldap_active_flag')->nullable()->default(NULL);
+			$table->string('ldap_emp_num')->nullable()->default(NULL);
+			$table->string('ldap_email')->nullable()->default(NULL);
 		});
 	}
 
