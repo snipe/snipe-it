@@ -82,9 +82,14 @@ class SettingsController extends AdminController
             "ldap_uname"     => 'min:1',
             "ldap_pword"     => 'min:1',
             "ldap_basedn"     => 'min:1',
+            "ldap_filter"     => 'min:1',
             "ldap_username_field"     => 'min:1',
             "ldap_lname_field"     => 'min:1',
-            "ldap_fname_field"     => 'min:1',
+            "ldap_auth_filter_query"     => 'min:1',
+            "ldap_version"     => 'min:1',
+            "ldap_active_flag"     => 'min:1',
+            "ldap_emp_num"     => 'min:1',
+            "ldap_email"     => 'min:1',
 	        );
 
         if (Config::get('app.lock_passwords')==false) {
