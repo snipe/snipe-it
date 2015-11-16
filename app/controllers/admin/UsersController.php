@@ -1116,18 +1116,30 @@ class UsersController extends AdminController {
         }
 
         $ldap_version = Config::get('ldap.version');
-        $url = Config::get('ldap.url');
-        $username = Config::get('ldap.username');
-        $password = Config::get('ldap.password');
-        $base_dn = Config::get('ldap.basedn');
+        $url = Setting::getSettings()->ldap_server;
+        $username = Setting::getSettings()->ldap_uname;
+        $password = Setting::getSettings()->ldap_pword;
+        $base_dn = Setting::getSettings()->ldap_basedn;
+        // $filter = Setting::getSettings()->ldap_server
+        // $ldap_version = Config::get('ldap.version');
+        // $url = Config::get('ldap.url');
+        // $username = Config::get('ldap.username');
+        // $password = Config::get('ldap.password');
+        // $base_dn = Config::get('ldap.basedn');
         $filter = Config::get('ldap.filter');
 
-        $ldap_result_username = Config::get('ldap.result.username');
+        $ldap_result_username = Config::get('ldap_username');
         $ldap_result_emp_num = Config::get('ldap.result.emp.num');
-        $ldap_result_last_name = Config::get('ldap.result.last.name');
-        $ldap_result_first_name = Config::get('ldap.result.first.name');
+        $ldap_result_last_name = Config::get('ldap_lname');
+        $ldap_result_first_name = Config::get('ldap_fname');
         $ldap_result_email = Config::get('ldap.result.email');
         $ldap_result_active_flag = Config::get('ldap.result.active.flag');
+        // $ldap_result_username = Config::get('ldap.result.username');
+        // $ldap_result_emp_num = Config::get('ldap.result.emp.num');
+        // $ldap_result_last_name = Config::get('ldap.result.last.name');
+        // $ldap_result_first_name = Config::get('ldap.result.first.name');
+        // $ldap_result_email = Config::get('ldap.result.email');
+        // $ldap_result_active_flag = Config::get('ldap.result.active.flag');
 
 
         // Connect to LDAP server
