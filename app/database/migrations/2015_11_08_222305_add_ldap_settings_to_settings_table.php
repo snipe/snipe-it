@@ -14,7 +14,7 @@ class AddLdapFieldsToSettings extends Migration {
 	{
 		Schema::table('settings', function(Blueprint $table)
 		{
-			$table->text('ldap_url')->nullable()->default(NULL);
+			$table->text('ldap_server')->nullable()->default(NULL);
 			$table->text('ldap_uname')->nullable()->default(NULL);
 			$table->text('ldap_pword')->nullable()->default(NULL);
 			$table->text('ldap_basedn')->nullable()->default(NULL);
@@ -33,7 +33,7 @@ class AddLdapFieldsToSettings extends Migration {
 	{
 		Schema::table('settings', function(Blueprint $table)
 		{
-			$table->dropColumn('ldap_url');
+			$table->dropColumn('ldap_server');
 			$table->dropColumn('ldap_uname');
 			$table->dropColumn('ldap_pword');
 			$table->dropColumn('ldap_basedn');
