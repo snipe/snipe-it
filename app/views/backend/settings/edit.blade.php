@@ -281,9 +281,9 @@
               </div>
               <div class="col-md-9">
                 @if (Config::get('app.lock_passwords')===true)
-                  {{ Form::text('ldap_server', Input::old('ldap_server', $setting->ldap_server), array('class' => 'form-control', 'disabled'=>'disabled','placeholder' => 'ldap.example.com')) }}
+                  {{ Form::text('ldap_server', Input::old('ldap_server', $setting->ldap_server), array('class' => 'form-control', 'disabled'=>'disabled','placeholder' => 'ldap://ldap.example.com')) }}
                 @else
-                  {{ Form::text('ldap_server', Input::old('ldap_server', $setting->ldap_server), array('class' => 'form-control','placeholder' => 'ldap.example.com')) }}
+                  {{ Form::text('ldap_server', Input::old('ldap_server', $setting->ldap_server), array('class' => 'form-control','placeholder' => 'ldap://ldap.example.com')) }}
                 @endif
 
                 {{ $errors->first('ldap_server', '<br><span class="alert-msg">:message</span>') }}
@@ -481,7 +481,7 @@
                 @if (Config::get('app.lock_passwords')===true)
                   {{ Form::text('ldap_email', Input::old('ldap_email', $setting->ldap_email), array('class' => 'form-control', 'disabled'=>'disabled','placeholder' => '')) }}
                 @else
-                  {{ Form::text('ldap_email', Input::old('ldap_email', $setting->ldap_fname_field), array('class' => 'form-control','placeholder' => '')) }}
+                  {{ Form::text('ldap_email', Input::old('ldap_email', $setting->ldap_email), array('class' => 'form-control','placeholder' => '')) }}
                 @endif
 
                 {{ $errors->first('ldap_server', '<br><span class="alert-msg">:message</span>') }}
