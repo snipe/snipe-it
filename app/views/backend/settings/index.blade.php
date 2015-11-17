@@ -129,7 +129,7 @@
                                         @endif
                                     </tr>
                                     <tr>
-                                        <td>@lang('admin/settings/general.default_eula_text')</td>
+                                        <td>@lang('admin/settings/general.ldap_integration')</td>
 
                                         @if ($setting->ldap_enabled == 1)
                                             <td>@lang('general.yes')</td>
