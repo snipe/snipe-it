@@ -32,7 +32,7 @@ class AppCommand extends Command
         'password'   => null
     );
 
-	protected $dummyData = true;
+	protected $dummyData = false;
 
     /**
      * Create a new command instance.
