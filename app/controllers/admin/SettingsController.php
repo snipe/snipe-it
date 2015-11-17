@@ -80,20 +80,20 @@ class SettingsController extends AdminController
             "default_currency"   => 'required',
 	        "slack_channel"   => 'regex:/(?<!\w)#\w+/',
 	        "slack_botname"   => 'alpha_dash',
-            "ldap_server"   => 'sometimes|required|url',
-            "ldap_uname"     => 'sometimes|required',
-            "ldap_pword"     => 'sometimes|required',
-            "ldap_basedn"     => 'sometimes|required',
-            "ldap_filter"     => 'sometimes|required',
-            "ldap_username_field"     => 'sometimes|required',
-            "ldap_lname_field"     => 'sometimes|required',
-            "ldap_auth_filter_query"     => 'sometimes|required',
-            "ldap_version"     => 'sometimes|required',
+            "ldap_server"   => 'sometimes|required_if:ldap_enabled,1|url',
+            "ldap_uname"     => 'sometimes|required_if:ldap_enabled,1',
+            "ldap_pword"     => 'sometimes|required_if:ldap_enabled,1',
+            "ldap_basedn"     => 'sometimes|required_if:ldap_enabled,1',
+            "ldap_filter"     => 'sometimes|required_if:ldap_enabled,1',
+            "ldap_username_field"     => 'sometimes|required_if:ldap_enabled,1',
+            "ldap_lname_field"     => 'sometimes|required_if:ldap_enabled,1',
+            "ldap_auth_filter_query"     => 'sometimes|required_if:ldap_enabled,1',
+            "ldap_version"     => 'sometimes|required_if:ldap_enabled,1',
             "ldap_active_flag"     => '',
             "ldap_emp_num"     => '',
             "ldap_email"     => '',
 	        );
-
+        
         if (Config::get('app.lock_passwords')==false) {
 	        $rules['site_name'] = 'required|min:3';
 
