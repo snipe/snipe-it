@@ -67,31 +67,57 @@ class SettingsController extends AdminController
 
         // Declare the rules for the form validation
 
-        $rules = array(
-	        "brand"     => 'required|min:1|numeric',
-            "per_page"   	=> 'required|min:1|numeric',
-	        "qr_text"		=> 'min:1|max:31',
-	        "logo"   		=> 'mimes:jpeg,bmp,png,gif',
-            "custom_css"   => 'alpha_space',
-	        "alert_email"   => 'email',
-	        "slack_endpoint"   => 'url',
-            "default_currency"   => 'required',
-	        "slack_channel"   => 'regex:/(?<!\w)#\w+/',
-	        "slack_botname"   => 'alpha_dash',
-            "ldap_server"   => 'url',
-            "ldap_uname"     => 'min:1',
-            "ldap_pword"     => 'min:1',
-            "ldap_basedn"     => 'min:1',
-            "ldap_filter"     => 'min:1',
-            "ldap_username_field"     => 'min:1',
-            "ldap_lname_field"     => 'min:1',
-            "ldap_auth_filter_query"     => 'min:1',
-            "ldap_version"     => 'min:1',
-            "ldap_active_flag"     => 'min:1',
-            "ldap_emp_num"     => 'min:1',
-            "ldap_email"     => 'min:1',
-	        );
-
+        if (Setting::getSettings()->ldap_enabled == 1){
+            $rules = array(
+                "brand"     => 'required|min:1|numeric',
+                "per_page"      => 'required|min:1|numeric',
+                "qr_text"       => 'min:1|max:31',
+                "logo"          => 'mimes:jpeg,bmp,png,gif',
+                "custom_css"   => 'alpha_space',
+                "alert_email"   => 'email',
+                "slack_endpoint"   => 'url',
+                "default_currency"   => 'required',
+                "slack_channel"   => 'regex:/(?<!\w)#\w+/',
+                "slack_botname"   => 'alpha_dash',
+                "ldap_server"   => 'required|url',
+                "ldap_uname"     => 'required|min:1',
+                "ldap_pword"     => 'required|min:1',
+                "ldap_basedn"     => 'required|min:1',
+                "ldap_filter"     => 'required|min:1',
+                "ldap_username_field"     => 'required|min:1',
+                "ldap_lname_field"     => 'required|min:1',
+                "ldap_auth_filter_query"     => 'required|min:1',
+                "ldap_version"     => 'required|min:1',
+                "ldap_active_flag"     => 'min:1',
+                "ldap_emp_num"     => 'min:1',
+                "ldap_email"     => 'min:1',
+                );
+        }else{
+            $rules = array(
+    	        "brand"     => 'required|min:1|numeric',
+                "per_page"   	=> 'required|min:1|numeric',
+    	        "qr_text"		=> 'min:1|max:31',
+    	        "logo"   		=> 'mimes:jpeg,bmp,png,gif',
+                "custom_css"   => 'alpha_space',
+    	        "alert_email"   => 'email',
+    	        "slack_endpoint"   => 'url',
+                "default_currency"   => 'required',
+    	        "slack_channel"   => 'regex:/(?<!\w)#\w+/',
+    	        "slack_botname"   => 'alpha_dash',
+                "ldap_server"   => 'url',
+                "ldap_uname"     => 'min:1',
+                "ldap_pword"     => 'min:1',
+                "ldap_basedn"     => 'min:1',
+                "ldap_filter"     => 'min:1',
+                "ldap_username_field"     => 'min:1',
+                "ldap_lname_field"     => 'min:1',
+                "ldap_auth_filter_query"     => 'min:1',
+                "ldap_version"     => 'min:1',
+                "ldap_active_flag"     => 'min:1',
+                "ldap_emp_num"     => 'min:1',
+                "ldap_email"     => 'min:1',
+    	        );
+        }
         if (Config::get('app.lock_passwords')==false) {
 	        $rules['site_name'] = 'required|min:3';
 
