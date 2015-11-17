@@ -33,7 +33,7 @@ class AuthController extends BaseController
 
         $ldaphost    = Setting::getSettings()->ldap_server;
         $ldaprdn     = Setting::getSettings()->ldap_uname;
-        $ldappass    = Setting::getSettings()->ldap_pword;
+        $ldappass    = Crypt::decrypt(Setting::getSettings()->ldap_pword);
         $baseDn      = Setting::getSettings()->ldap_basedn;
         $filterQuery = Setting::getSettings()->ldap_auth_filter_query . $username;
         $ldapversion = Setting::getSettings()->ldap_version;

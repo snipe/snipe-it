@@ -1118,7 +1118,7 @@ class UsersController extends AdminController {
         $ldap_version = Setting::getSettings()->ldap_version;
         $url = Setting::getSettings()->ldap_server;
         $username = Setting::getSettings()->ldap_uname;
-        $password = Setting::getSettings()->ldap_pword;
+        $password = Crypt::decrypt(Setting::getSettings()->ldap_pword);
         $base_dn = Setting::getSettings()->ldap_basedn;
         $filter = Setting::getSettings()->ldap_filter;
 
