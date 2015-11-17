@@ -14,6 +14,8 @@ use Image;
 use Config;
 use Response;
 use Artisan;
+use Crypt;
+
 
 class SettingsController extends AdminController
 {

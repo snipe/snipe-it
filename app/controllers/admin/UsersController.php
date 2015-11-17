@@ -31,6 +31,8 @@ use Mail;
 use Accessory;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Illuminate\Support\Facades\Log;
+use Crypt;
+
 
 class UsersController extends AdminController {
 
