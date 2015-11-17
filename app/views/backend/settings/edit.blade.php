@@ -272,7 +272,19 @@
               </div>
             </div>
 
-          <hr><h4>@lang('admin/settings/general.ldap_integration') (@lang('admin/settings/general.optional'))</h4>
+          <hr><h4>@lang('admin/settings/general.ldap_settings') (@lang('admin/settings/general.optional'))</h4>
+          
+          <!-- Enable LDAP -->
+          <div class="form-group {{ $errors->has('ldap_enable') ? 'error' : '' }}">
+            <div class="col-md-3">
+              {{ Form::label('ldap_enable', Lang::get('admin/settings/general.ldap_enable')) }}
+            </div>
+            <div class="col-md-9">
+              {{ Form::checkbox('ldap_enabled', '1', Input::old('ldap_enabled', $setting->ldap_enabled)) }}
+              @Lang('admin/settings/general.ldap_enabled')
+              {{ $errors->first('ldap_enable', '<br><span class="alert-msg">:message</span>') }}
+            </div>
+          </div>
 
           <!-- LDAP Server -->
           <div class="form-group {{ $errors->has('ldap_server') ? 'error' : '' }}">

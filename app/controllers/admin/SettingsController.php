@@ -147,6 +147,7 @@ class SettingsController extends AdminController
             $setting->slack_endpoint = e(Input::get('slack_endpoint'));
             $setting->slack_channel = e(Input::get('slack_channel'));
             $setting->slack_botname = e(Input::get('slack_botname'));
+            $setting->ldap_enabled = e(Input::get('ldap_enabled', '0'));
             $setting->ldap_server = e(Input::get('ldap_server'));
             $setting->ldap_uname = e(Input::get('ldap_uname'));
             $setting->ldap_pword = e(Input::get('ldap_pword'));
