@@ -275,14 +275,14 @@
           <hr><h4>@lang('admin/settings/general.ldap_settings') (@lang('admin/settings/general.optional'))</h4>
           
           <!-- Enable LDAP -->
-          <div class="form-group {{ $errors->has('ldap_enable') ? 'error' : '' }}">
+          <div class="form-group {{ $errors->has('ldap_integration') ? 'error' : '' }}">
             <div class="col-md-3">
-              {{ Form::label('ldap_enable', Lang::get('admin/settings/general.ldap_enable')) }}
+              {{ Form::label('ldap_integration', Lang::get('admin/settings/general.ldap_integration')) }}
             </div>
             <div class="col-md-9">
               {{ Form::checkbox('ldap_enabled', '1', Input::old('ldap_enabled', $setting->ldap_enabled)) }}
               @Lang('admin/settings/general.ldap_enabled')
-              {{ $errors->first('ldap_enable', '<br><span class="alert-msg">:message</span>') }}
+              {{ $errors->first('ldap_enabled', '<br><span class="alert-msg">:message</span>') }}
             </div>
           </div>
 
@@ -416,7 +416,7 @@
                   {{ Form::text('ldap_fname_field', Input::old('ldap_fname_field', $setting->ldap_fname_field), array('class' => 'form-control','placeholder' => 'givenname')) }}
                 @endif
 
-                {{ $errors->first('ldap_server', '<br><span class="alert-msg">:message</span>') }}
+                {{ $errors->first('ldap_fname_field', '<br><span class="alert-msg">:message</span>') }}
               </div>
           </div>
 
@@ -432,7 +432,7 @@
                   {{ Form::text('ldap_auth_filter_query', Input::old('ldap_auth_filter_query', $setting->ldap_auth_filter_query), array('class' => 'form-control','placeholder' => '"uid="')) }}
                 @endif
 
-                {{ $errors->first('ldap_server', '<br><span class="alert-msg">:message</span>') }}
+                {{ $errors->first('ldap_auth_filter_query', '<br><span class="alert-msg">:message</span>') }}
               </div>
           </div>
 
@@ -448,7 +448,7 @@
                   {{ Form::text('ldap_version', Input::old('ldap_version', $setting->ldap_version), array('class' => 'form-control','placeholder' => '3')) }}
                 @endif
 
-                {{ $errors->first('ldap_server', '<br><span class="alert-msg">:message</span>') }}
+                {{ $errors->first('ldap_version', '<br><span class="alert-msg">:message</span>') }}
               </div>
           </div>
 
@@ -464,7 +464,7 @@
                   {{ Form::text('ldap_active_flag', Input::old('ldap_active_flag', $setting->ldap_active_flag), array('class' => 'form-control','placeholder' => '')) }}
                 @endif
 
-                {{ $errors->first('ldap_server', '<br><span class="alert-msg">:message</span>') }}
+                {{ $errors->first('ldap_active_flag', '<br><span class="alert-msg">:message</span>') }}
               </div>
           </div>
 
@@ -480,7 +480,7 @@
                   {{ Form::text('ldap_emp_num', Input::old('ldap_emp_num', $setting->ldap_emp_num), array('class' => 'form-control','placeholder' => '')) }}
                 @endif
 
-                {{ $errors->first('ldap_server', '<br><span class="alert-msg">:message</span>') }}
+                {{ $errors->first('ldap_emp_num', '<br><span class="alert-msg">:message</span>') }}
               </div>
           </div>
 
@@ -496,7 +496,7 @@
                   {{ Form::text('ldap_email', Input::old('ldap_email', $setting->ldap_email), array('class' => 'form-control','placeholder' => '')) }}
                 @endif
 
-                {{ $errors->first('ldap_server', '<br><span class="alert-msg">:message</span>') }}
+                {{ $errors->first('ldap_email', '<br><span class="alert-msg">:message</span>') }}
               </div>
           </div>
 
