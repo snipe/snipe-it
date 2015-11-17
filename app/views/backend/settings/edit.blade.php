@@ -275,228 +275,228 @@
           <hr><h4>@lang('admin/settings/general.ldap_settings') (@lang('admin/settings/general.optional'))</h4>
           
           <!-- Enable LDAP -->
-          <div class="form-group {{{ $errors->has('ldap_integration') ? 'error' : '' }}}">
+          <div class="form-group {{ $errors->has('ldap_integration') ? 'error' : '' }}">
             <div class="col-md-3">
-              {{{ Form::label('ldap_integration', Lang::get('admin/settings/general.ldap_integration')) }}}
+              {{ Form::label('ldap_integration', Lang::get('admin/settings/general.ldap_integration')) }}
             </div>
             <div class="col-md-9">
-              {{{ Form::checkbox('ldap_enabled', '1', Input::old('ldap_enabled', $setting->ldap_enabled)) }}}
+              {{ Form::checkbox('ldap_enabled', '1', Input::old('ldap_enabled', $setting->ldap_enabled)) }}
               @Lang('admin/settings/general.ldap_enabled')
-              {{{ $errors->first('ldap_enabled', '<br><span class="alert-msg">:message</span>') }}}
+              {{ $errors->first('ldap_enabled', '<br><span class="alert-msg">:message</span>') }}
             </div>
           </div>
 
           <!-- LDAP Server -->
-          <div class="form-group {{{ $errors->has('ldap_server') ? 'error' : '' }}}">
+          <div class="form-group {{ $errors->has('ldap_server') ? 'error' : '' }}">
               <div class="col-md-3">
-                {{{ Form::label('ldap_server', Lang::get('admin/settings/general.ldap_server')) }}}
+                {{ Form::label('ldap_server', Lang::get('admin/settings/general.ldap_server')) }}
               </div>
               <div class="col-md-9">
                 @if (Config::get('app.lock_passwords')===true)
-                  {{{ Form::text('ldap_server', Input::old('ldap_server', $setting->ldap_server), array('class' => 'form-control', 'disabled'=>'disabled','placeholder' => 'ldap://ldap.example.com')) }}}
+                  {{ Form::text('ldap_server', Input::old('ldap_server', $setting->ldap_server), array('class' => 'form-control', 'disabled'=>'disabled','placeholder' => 'ldap://ldap.example.com')) }}
                 @else
-                  {{{ Form::text('ldap_server', Input::old('ldap_server', $setting->ldap_server), array('class' => 'form-control','placeholder' => 'ldap://ldap.example.com')) }}}
+                  {{ Form::text('ldap_server', Input::old('ldap_server', $setting->ldap_server), array('class' => 'form-control','placeholder' => 'ldap://ldap.example.com')) }}
                 @endif
 
-                {{{ $errors->first('ldap_server', '<br><span class="alert-msg">:message</span>') }}}
+                {{ $errors->first('ldap_server', '<br><span class="alert-msg">:message</span>') }}
               </div>
           </div>
 
 
           <!-- LDAP Username -->
-          <div class="form-group {{{ $errors->has('ldap_uname') ? 'error' : '' }}}">
+          <div class="form-group {{ $errors->has('ldap_uname') ? 'error' : '' }}">
               <div class="col-md-3">
-                {{{ Form::label('ldap_uname', Lang::get('admin/settings/general.ldap_uname')) }}}
+                {{ Form::label('ldap_uname', Lang::get('admin/settings/general.ldap_uname')) }}
               </div>
               <div class="col-md-9">
                 @if (Config::get('app.lock_passwords')===true)
-                  {{{ Form::text('ldap_uname', Input::old('ldap_uname', $setting->ldap_uname), array('class' => 'form-control', 'disabled'=>'disabled','placeholder' => 'binduser@example.com')) }}}
+                  {{ Form::text('ldap_uname', Input::old('ldap_uname', $setting->ldap_uname), array('class' => 'form-control', 'disabled'=>'disabled','placeholder' => 'binduser@example.com')) }}
                 @else
-                  {{{ Form::text('ldap_uname', Input::old('ldap_uname', $setting->ldap_uname), array('class' => 'form-control','placeholder' => 'binduser@example.com')) }}}
+                  {{ Form::text('ldap_uname', Input::old('ldap_uname', $setting->ldap_uname), array('class' => 'form-control','placeholder' => 'binduser@example.com')) }}
                 @endif
 
-                {{{ $errors->first('ldap_uname', '<br><span class="alert-msg">:message</span>') }}}
+                {{ $errors->first('ldap_uname', '<br><span class="alert-msg">:message</span>') }}
               </div>
           </div>
 
 
           <!-- LDAP pword -->
-          <div class="form-group {{{ $errors->has('ldap_pword') ? 'error' : '' }}}">
+          <div class="form-group {{ $errors->has('ldap_pword') ? 'error' : '' }}">
               <div class="col-md-3">
-                {{{ Form::label('ldap_pword', Lang::get('admin/settings/general.ldap_pword')) }}}
+                {{ Form::label('ldap_pword', Lang::get('admin/settings/general.ldap_pword')) }}
               </div>
               <div class="col-md-9">
                 @if (Config::get('app.lock_passwords')===true)
-                  {{{ Form::text('ldap_pword', Input::old('ldap_pword', $setting->ldap_pword), array('class' => 'form-control', 'disabled'=>'disabled','placeholder' => 'binduserpassword')) }}}
+                  {{ Form::text('ldap_pword', Input::old('ldap_pword', $setting->ldap_pword), array('class' => 'form-control', 'disabled'=>'disabled','placeholder' => 'binduserpassword')) }}
                 @else
-                  {{{ Form::text('ldap_pword', Input::old('ldap_pword', $setting->ldap_pword), array('class' => 'form-control','placeholder' => 'binduserpassword')) }}}
+                  {{ Form::text('ldap_pword', Input::old('ldap_pword', $setting->ldap_pword), array('class' => 'form-control','placeholder' => 'binduserpassword')) }}
                 @endif
 
-                {{{ $errors->first('ldap_pword', '<br><span class="alert-msg">:message</span>') }}}
+                {{ $errors->first('ldap_pword', '<br><span class="alert-msg">:message</span>') }}
               </div>
           </div>
 
 
           <!-- LDAP basedn -->
-          <div class="form-group {{{ $errors->has('ldap_basedn') ? 'error' : '' }}}">
+          <div class="form-group {{ $errors->has('ldap_basedn') ? 'error' : '' }}">
               <div class="col-md-3">
-                {{{ Form::label('ldap_basedn', Lang::get('admin/settings/general.ldap_basedn')) }}}
+                {{ Form::label('ldap_basedn', Lang::get('admin/settings/general.ldap_basedn')) }}
               </div>
               <div class="col-md-9">
                 @if (Config::get('app.lock_passwords')===true)
-                  {{{ Form::text('ldap_basedn', Input::old('ldap_basedn', $setting->ldap_basedn), array('class' => 'form-control', 'disabled'=>'disabled','placeholder' => 'cn=users/authorized,dc=example,dc=com')) }}}
+                  {{ Form::text('ldap_basedn', Input::old('ldap_basedn', $setting->ldap_basedn), array('class' => 'form-control', 'disabled'=>'disabled','placeholder' => 'cn=users/authorized,dc=example,dc=com')) }}
                 @else
-                  {{{ Form::text('ldap_basedn', Input::old('ldap_basedn', $setting->ldap_basedn), array('class' => 'form-control','placeholder' => 'cn=users/authorized,dc=example,dc=com')) }}}
+                  {{ Form::text('ldap_basedn', Input::old('ldap_basedn', $setting->ldap_basedn), array('class' => 'form-control','placeholder' => 'cn=users/authorized,dc=example,dc=com')) }}
                 @endif
 
-                {{{ $errors->first('ldap_basedn', '<br><span class="alert-msg">:message</span>') }}}
+                {{ $errors->first('ldap_basedn', '<br><span class="alert-msg">:message</span>') }}
               </div>
           </div>
 
           <!-- LDAP filter -->
-          <div class="form-group {{{ $errors->has('ldap_filter') ? 'error' : '' }}}">
+          <div class="form-group {{ $errors->has('ldap_filter') ? 'error' : '' }}">
               <div class="col-md-3">
-                {{{ Form::label('ldap_filter', Lang::get('admin/settings/general.ldap_filter')) }}}
+                {{ Form::label('ldap_filter', Lang::get('admin/settings/general.ldap_filter')) }}
               </div>
               <div class="col-md-9">
                 @if (Config::get('app.lock_passwords')===true)
-                  {{{ Form::text('ldap_filter', Input::old('ldap_filter', $setting->ldap_filter), array('class' => 'form-control', 'disabled'=>'disabled','placeholder' => 'cn=users/authorized,dc=example,dc=com')) }}}
+                  {{ Form::text('ldap_filter', Input::old('ldap_filter', $setting->ldap_filter), array('class' => 'form-control', 'disabled'=>'disabled','placeholder' => 'cn=users/authorized,dc=example,dc=com')) }}
                 @else
-                  {{{ Form::text('ldap_filter', Input::old('ldap_filter', $setting->ldap_filter), array('class' => 'form-control','placeholder' => 'cn=users/authorized,dc=example,dc=com')) }}}
+                  {{ Form::text('ldap_filter', Input::old('ldap_filter', $setting->ldap_filter), array('class' => 'form-control','placeholder' => 'cn=users/authorized,dc=example,dc=com')) }}
                 @endif
 
-                {{{ $errors->first('ldap_filter', '<br><span class="alert-msg">:message</span>') }}}
+                {{ $errors->first('ldap_filter', '<br><span class="alert-msg">:message</span>') }}
               </div>
           </div>
 
 
           <!-- LDAP  username field-->
-          <div class="form-group {{{ $errors->has('ldap_username_field') ? 'error' : '' }}}">
+          <div class="form-group {{ $errors->has('ldap_username_field') ? 'error' : '' }}">
               <div class="col-md-3">
-                {{{ Form::label('ldap_username_field', Lang::get('admin/settings/general.ldap_username_field')) }}}
+                {{ Form::label('ldap_username_field', Lang::get('admin/settings/general.ldap_username_field')) }}
               </div>
               <div class="col-md-9">
                 @if (Config::get('app.lock_passwords')===true)
-                  {{{ Form::text('ldap_username_field', Input::old('ldap_username_field', $setting->ldap_username_field), array('class' => 'form-control', 'disabled'=>'disabled','placeholder' => 'samaccountname')) }}}
+                  {{ Form::text('ldap_username_field', Input::old('ldap_username_field', $setting->ldap_username_field), array('class' => 'form-control', 'disabled'=>'disabled','placeholder' => 'samaccountname')) }}
                 @else
-                  {{{ Form::text('ldap_username_field', Input::old('ldap_username_field', $setting->ldap_username_field), array('class' => 'form-control','placeholder' => 'samaccountname')) }}}
+                  {{ Form::text('ldap_username_field', Input::old('ldap_username_field', $setting->ldap_username_field), array('class' => 'form-control','placeholder' => 'samaccountname')) }}
                 @endif
 
-                {{{ $errors->first('ldap_username_field', '<br><span class="alert-msg">:message</span>') }}}
+                {{ $errors->first('ldap_username_field', '<br><span class="alert-msg">:message</span>') }}
               </div>
           </div>
 
 
           <!-- LDAP Last Name Field -->
-          <div class="form-group {{{ $errors->has('ldap_lname_field') ? 'error' : '' }}}">
+          <div class="form-group {{ $errors->has('ldap_lname_field') ? 'error' : '' }}">
               <div class="col-md-3">
-                {{{ Form::label('ldap_lname_field', Lang::get('admin/settings/general.ldap_lname_field')) }}}
+                {{ Form::label('ldap_lname_field', Lang::get('admin/settings/general.ldap_lname_field')) }}
               </div>
               <div class="col-md-9">
                 @if (Config::get('app.lock_passwords')===true)
-                  {{{ Form::text('ldap_lname_field', Input::old('ldap_lname_field', $setting->ldap_lname_field), array('class' => 'form-control', 'disabled'=>'disabled','placeholder' => 'sn')) }}}
+                  {{ Form::text('ldap_lname_field', Input::old('ldap_lname_field', $setting->ldap_lname_field), array('class' => 'form-control', 'disabled'=>'disabled','placeholder' => 'sn')) }}
                 @else
-                  {{{ Form::text('ldap_lname_field', Input::old('ldap_lname_field', $setting->ldap_lname_field), array('class' => 'form-control','placeholder' => 'sn')) }}}
+                  {{ Form::text('ldap_lname_field', Input::old('ldap_lname_field', $setting->ldap_lname_field), array('class' => 'form-control','placeholder' => 'sn')) }}
                 @endif
 
-                {{{ $errors->first('ldap_lname_field', '<br><span class="alert-msg">:message</span>') }}}
+                {{ $errors->first('ldap_lname_field', '<br><span class="alert-msg">:message</span>') }}
               </div>
           </div>
 
 
           <!-- LDAP First Name field -->
-          <div class="form-group {{{ $errors->has('ldap_fname_field') ? 'error' : '' }}}">
+          <div class="form-group {{ $errors->has('ldap_fname_field') ? 'error' : '' }}">
               <div class="col-md-3">
-                {{{ Form::label('ldap_fname_field', Lang::get('admin/settings/general.ldap_fname_field')) }}}
+                {{ Form::label('ldap_fname_field', Lang::get('admin/settings/general.ldap_fname_field')) }}
               </div>
               <div class="col-md-9">
                 @if (Config::get('app.lock_passwords')===true)
-                  {{{ Form::text('ldap_fname_field', Input::old('ldap_fname_field', $setting->ldap_fname_field), array('class' => 'form-control', 'disabled'=>'disabled','placeholder' => 'givenname')) }}}
+                  {{ Form::text('ldap_fname_field', Input::old('ldap_fname_field', $setting->ldap_fname_field), array('class' => 'form-control', 'disabled'=>'disabled','placeholder' => 'givenname')) }}
                 @else
-                  {{{ Form::text('ldap_fname_field', Input::old('ldap_fname_field', $setting->ldap_fname_field), array('class' => 'form-control','placeholder' => 'givenname')) }}}
+                  {{ Form::text('ldap_fname_field', Input::old('ldap_fname_field', $setting->ldap_fname_field), array('class' => 'form-control','placeholder' => 'givenname')) }}
                 @endif
 
-                {{{ $errors->first('ldap_fname_field', '<br><span class="alert-msg">:message</span>') }}}
+                {{ $errors->first('ldap_fname_field', '<br><span class="alert-msg">:message</span>') }}
               </div>
           </div>
 
           <!-- LDAP Auth Filter Query -->
-          <div class="form-group {{{ $errors->has('ldap_auth_filter_query') ? 'error' : '' }}}">
+          <div class="form-group {{ $errors->has('ldap_auth_filter_query') ? 'error' : '' }}">
               <div class="col-md-3">
-                {{{ Form::label('ldap_auth_filter_query', Lang::get('admin/settings/general.ldap_auth_filter_query')) }}}
+                {{ Form::label('ldap_auth_filter_query', Lang::get('admin/settings/general.ldap_auth_filter_query')) }}
               </div>
               <div class="col-md-9">
                 @if (Config::get('app.lock_passwords')===true)
-                  {{{ Form::text('ldap_auth_filter_query', Input::old('ldap_auth_filter_query', $setting->ldap_auth_filter_query), array('class' => 'form-control', 'disabled'=>'disabled','placeholder' => '"uid="')) }}}
+                  {{ Form::text('ldap_auth_filter_query', Input::old('ldap_auth_filter_query', $setting->ldap_auth_filter_query), array('class' => 'form-control', 'disabled'=>'disabled','placeholder' => '"uid="')) }}
                 @else
-                  {{{ Form::text('ldap_auth_filter_query', Input::old('ldap_auth_filter_query', $setting->ldap_auth_filter_query), array('class' => 'form-control','placeholder' => '"uid="')) }}}
+                  {{ Form::text('ldap_auth_filter_query', Input::old('ldap_auth_filter_query', $setting->ldap_auth_filter_query), array('class' => 'form-control','placeholder' => '"uid="')) }}
                 @endif
 
-                {{{ $errors->first('ldap_auth_filter_query', '<br><span class="alert-msg">:message</span>') }}}
+                {{ $errors->first('ldap_auth_filter_query', '<br><span class="alert-msg">:message</span>') }}
               </div>
           </div>
 
           <!-- LDAP Version -->
-          <div class="form-group {{{ $errors->has('ldap_version') ? 'error' : '' }}}">
+          <div class="form-group {{ $errors->has('ldap_version') ? 'error' : '' }}">
               <div class="col-md-3">
-                {{{ Form::label('ldap_version', Lang::get('admin/settings/general.ldap_version')) }}}
+                {{ Form::label('ldap_version', Lang::get('admin/settings/general.ldap_version')) }}
               </div>
               <div class="col-md-9">
                 @if (Config::get('app.lock_passwords')===true)
-                  {{{ Form::text('ldap_version', Input::old('ldap_version', $setting->ldap_version), array('class' => 'form-control', 'disabled'=>'disabled','placeholder' => '3')) }}}
+                  {{ Form::text('ldap_version', Input::old('ldap_version', $setting->ldap_version), array('class' => 'form-control', 'disabled'=>'disabled','placeholder' => '3')) }}
                 @else
-                  {{{ Form::text('ldap_version', Input::old('ldap_version', $setting->ldap_version), array('class' => 'form-control','placeholder' => '3')) }}}
+                  {{ Form::text('ldap_version', Input::old('ldap_version', $setting->ldap_version), array('class' => 'form-control','placeholder' => '3')) }}
                 @endif
 
-                {{{ $errors->first('ldap_version', '<br><span class="alert-msg">:message</span>') }}}
+                {{ $errors->first('ldap_version', '<br><span class="alert-msg">:message</span>') }}
               </div>
           </div>
 
           <!-- LDAP active flag -->
-          <div class="form-group {{{ $errors->has('ldap_active_flag') ? 'error' : '' }}}">
+          <div class="form-group {{ $errors->has('ldap_active_flag') ? 'error' : '' }}">
               <div class="col-md-3">
-                {{{ Form::label('ldap_active_flag', Lang::get('admin/settings/general.ldap_active_flag')) }}}
+                {{ Form::label('ldap_active_flag', Lang::get('admin/settings/general.ldap_active_flag')) }}
               </div>
               <div class="col-md-9">
                 @if (Config::get('app.lock_passwords')===true)
-                  {{{ Form::text('ldap_active_flag', Input::old('ldap_active_flag', $setting->ldap_active_flag), array('class' => 'form-control', 'disabled'=>'disabled','placeholder' => '')) }}}
+                  {{ Form::text('ldap_active_flag', Input::old('ldap_active_flag', $setting->ldap_active_flag), array('class' => 'form-control', 'disabled'=>'disabled','placeholder' => '')) }}
                 @else
-                  {{{ Form::text('ldap_active_flag', Input::old('ldap_active_flag', $setting->ldap_active_flag), array('class' => 'form-control','placeholder' => '')) }}}
+                  {{ Form::text('ldap_active_flag', Input::old('ldap_active_flag', $setting->ldap_active_flag), array('class' => 'form-control','placeholder' => '')) }}
                 @endif
 
-                {{{ $errors->first('ldap_active_flag', '<br><span class="alert-msg">:message</span>') }}}
+                {{ $errors->first('ldap_active_flag', '<br><span class="alert-msg">:message</span>') }}
               </div>
           </div>
 
           <!-- LDAP emp number -->
-          <div class="form-group {{{ $errors->has('ldap_emp_num') ? 'error' : '' }}}">
+          <div class="form-group {{ $errors->has('ldap_emp_num') ? 'error' : '' }}">
               <div class="col-md-3">
-                {{{ Form::label('ldap_emp_num', Lang::get('admin/settings/general.ldap_emp_num')) }}}
+                {{ Form::label('ldap_emp_num', Lang::get('admin/settings/general.ldap_emp_num')) }}
               </div>
               <div class="col-md-9">
                 @if (Config::get('app.lock_passwords')===true)
-                  {{{ Form::text('ldap_emp_num', Input::old('ldap_emp_num', $setting->ldap_emp_num), array('class' => 'form-control', 'disabled'=>'disabled','placeholder' => '')) }}}
+                  {{ Form::text('ldap_emp_num', Input::old('ldap_emp_num', $setting->ldap_emp_num), array('class' => 'form-control', 'disabled'=>'disabled','placeholder' => '')) }}
                 @else
-                  {{{ Form::text('ldap_emp_num', Input::old('ldap_emp_num', $setting->ldap_emp_num), array('class' => 'form-control','placeholder' => '')) }}}
+                  {{ Form::text('ldap_emp_num', Input::old('ldap_emp_num', $setting->ldap_emp_num), array('class' => 'form-control','placeholder' => '')) }}
                 @endif
 
-                {{{ $errors->first('ldap_emp_num', '<br><span class="alert-msg">:message</span>') }}}
+                {{ $errors->first('ldap_emp_num', '<br><span class="alert-msg">:message</span>') }}
               </div>
           </div>
 
           <!-- LDAP email -->
-          <div class="form-group {{{ $errors->has('ldap_email') ? 'error' : '' }}}">
+          <div class="form-group {{ $errors->has('ldap_email') ? 'error' : '' }}">
               <div class="col-md-3">
-                {{{ Form::label('ldap_email', Lang::get('admin/settings/general.ldap_email')) }}}
+                {{ Form::label('ldap_email', Lang::get('admin/settings/general.ldap_email')) }}
               </div>
               <div class="col-md-9">
                 @if (Config::get('app.lock_passwords')===true)
-                  {{{ Form::text('ldap_email', Input::old('ldap_email', $setting->ldap_email), array('class' => 'form-control', 'disabled'=>'disabled','placeholder' => '')) }}}
+                  {{ Form::text('ldap_email', Input::old('ldap_email', $setting->ldap_email), array('class' => 'form-control', 'disabled'=>'disabled','placeholder' => '')) }}
                 @else
-                  {{{ Form::text('ldap_email', Input::old('ldap_email', $setting->ldap_email), array('class' => 'form-control','placeholder' => '')) }}}
+                  {{ Form::text('ldap_email', Input::old('ldap_email', $setting->ldap_email), array('class' => 'form-control','placeholder' => '')) }}
                 @endif
 
-                {{{ $errors->first('ldap_email', '<br><span class="alert-msg">:message</span>') }}}
+                {{ $errors->first('ldap_email', '<br><span class="alert-msg">:message</span>') }}
               </div>
           </div>
 
