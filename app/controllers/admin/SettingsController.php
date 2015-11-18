@@ -185,9 +185,8 @@ class SettingsController extends AdminController
     public function getLDAP()
     {
         if (Config::get('ldap.url')=='') {
-            Lang('admin/users/message.ldap_not_configured')
-        }
-        else {
+            Lang('admin/users/message.ldap_not_configured');
+        } else {
             $setting->ldap_enabled = Input::get('ldap_enabled', '1');
             $setting->ldap_server = Config::get('ldap.url');
             $setting->ldap_uname = Config::get('ldap.username');
