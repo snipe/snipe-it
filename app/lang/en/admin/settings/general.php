@@ -26,6 +26,7 @@ return array(
     'header_color'              => 'Header Color',
     'info'                      => 'These settings let you customize certain aspects of your installation.',
     'laravel'                   => 'Laravel Version',
+    'ldap_import'               => 'Import LDAP Settings',
     'ldap_enabled'              => 'LDAP enabled',
     'ldap_integration'          => 'LDAP Integration',
     'ldap_settings'             => 'LDAP Settings',

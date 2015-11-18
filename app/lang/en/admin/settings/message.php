@@ -13,5 +13,8 @@ return array(
         'generated'             => 'A new backup file was successfully created.',
         'file_not_found'        => 'That backup file could not be found on the server.',
     ),
-
+    'import' => array(
+        'error'                 => 'An error has occurred while importing. ',
+        'success'               => 'Settings imported successfully.'
+    ),
 );

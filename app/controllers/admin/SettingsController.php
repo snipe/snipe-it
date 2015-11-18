@@ -176,7 +176,44 @@ class SettingsController extends AdminController
 
     }
 
+    /**
+     * Import settings from LDAP file.
+     *
+     * @param  int  $settingId
+     * @return Redirect
+     */
+    public function postLDAP()
+    {
+        if (Config::get('ldap.url')=='') {
+            Lang('admin/users/message.ldap_not_configured')
+        }
+        else {
+            $setting->ldap_enabled = Input::get('ldap_enabled', '1');
+            $setting->ldap_server = Config::get('ldap.url');
+            $setting->ldap_uname = Config::get('ldap.username');
+            $setting->ldap_pword = Crypt::encrypt(Config::get('ldap.password'));
+            $setting->ldap_basedn = Config::get('ldap.basedn');
+            $setting->ldap_filter = Config::get('ldap.filter');
+            $setting->ldap_username_field = Config::get('ldap.result.username');
+            $setting->ldap_lname_field = Config::get('ldap.result.last.name');
+            $setting->ldap_fname_field = Config::get('ldap.result.first.name');
+            $setting->ldap_auth_filter_query = Config::get('authentication.filter.query');
+            $setting->ldap_version = Config::get('ldap.version');
+            $setting->ldap_active_flag = Config::get('ldap.result.active.flag');
+            $setting->ldap_emp_num = Config::get('ldap.result.emp.num');
+            $setting->ldap_email = Config::get('ldap.result.email');
+        }
 
+        // Was the asset updated?
+        if($setting->save()) {
+            // Redirect to the settings page
+            return Redirect::to("admin/settings/app")->with('success', Lang::get('admin/settings/message.import.success'));
+        }
+
+        // Redirect to the setting management page
+        return Redirect::to("admin/settings/app/edit")->with('error', Lang::get('admin/settings/message.import.error'));
+
+    }
     /**
     * Generate the backup page
     *
