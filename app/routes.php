@@ -321,7 +321,7 @@
             Route::get( '{consumableID}/checkout',
                 [ 'as' => 'checkout/consumable', 'uses' => 'ConsumablesController@getCheckout' ] );
             Route::post( '{consumableID}/checkout', 'ConsumablesController@postCheckout' );
-            Route::get( '/', [ 'as' => 'accessories', 'uses' => 'ConsumablesController@getIndex' ] );
+            Route::get( '/', [ 'as' => 'consumables', 'uses' => 'ConsumablesController@getIndex' ] );
         } );
 
         # Admin Settings Routes (for categories, maufactureres, etc)
