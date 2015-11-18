@@ -16,6 +16,7 @@ use Validator;
 use View;
 use Datatable;
 use Asset;
+use Company;
 
 //use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -447,7 +448,7 @@ class ModelsController extends AdminController
     **/
     public function getDataView($modelID)
     {
-        $assets = Asset::where('model_id','=',$modelID)->withTrashed();
+        $assets = Asset::where('model_id','=',$modelID)->withTrashed()->with('company');
 
         if (Input::has('search')) {
             $assets = $assets->TextSearch(Input::get('search'));
@@ -490,8 +491,9 @@ class ModelsController extends AdminController
                 'asset_tag'     => link_to('hardware/'.$asset->id.'/view', $asset->asset_tag),
                 'serial'        => $asset->serial,
                 'assigned_to'   => ($asset->assigned_to) ? link_to('/admin/users/'.$asset->assigned_to.'/view', $asset->assigneduser->fullName()) : '',
-                'actions'       => $actions
-                );
+                'actions'       => $actions,
+                'companyName'   => Company::getName($asset)
+            );
         }
 
         $data = array('total' => $assetsCount, 'rows' => $rows);

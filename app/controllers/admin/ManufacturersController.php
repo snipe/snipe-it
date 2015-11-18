@@ -243,7 +243,7 @@ class ManufacturersController extends AdminController
 
     public function getDataView($manufacturerID) {
 
-      $manufacturer = Manufacturer::find($manufacturerID);
+      $manufacturer = Manufacturer::with('assets.company')->find($manufacturerID);
       $manufacturer_assets = $manufacturer->assets;
 
       if (Input::has('search')) {

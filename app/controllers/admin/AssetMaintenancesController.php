@@ -217,7 +217,7 @@
 
                 $asset = Asset::find( e( Input::get( 'asset_id' ) ) );
 
-                if (is_null($asset) || !Company::isCurrentUserHasAccess($asset)) {
+                if (!Company::isCurrentUserHasAccess($asset)) {
                     return static::getInsufficientPermissionsRedirect();
                 }
 
@@ -384,7 +384,7 @@
 
                 $asset = Asset::find( e( Input::get( 'asset_id' ) ) );
 
-                if (is_null($asset) || !Company::isCurrentUserHasAccess($asset)) {
+                if (!Company::isCurrentUserHasAccess($asset)) {
                     return static::getInsufficientPermissionsRedirect();
                 }
 

@@ -108,7 +108,7 @@ final class Company extends Elegant
     {
         $company = $companayable->company;
 
-        if (is_null($company)) { return '';             }
-        else                   { return $company->name; }
+        if (is_null($company)) { return '';                }
+        else                   { return e($company->name); }
     }
 }

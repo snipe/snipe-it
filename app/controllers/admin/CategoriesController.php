@@ -4,6 +4,7 @@ use AdminController;
 use Input;
 use Lang;
 use Category;
+use Company;
 use Redirect;
 use Setting;
 use DB;
@@ -269,7 +270,7 @@ class CategoriesController extends AdminController
 
     public function getDataView($categoryID) {
 
-      $category = Category::find($categoryID);
+      $category = Category::with('assets.company')->find($categoryID);
       $category_assets = $category->assets;
 
       if (Input::has('search')) {
@@ -300,7 +301,7 @@ class CategoriesController extends AdminController
 
         $actions = '';
         $inout='';
-        
+
         if ($asset->deleted_at=='') {
             $actions = '<div style=" white-space: nowrap;"><a href="'.route('clone/hardware', $asset->id).'" class="btn btn-info btn-sm" title="Clone asset"><i class="fa fa-files-o"></i></a> <a href="'.route('update/hardware', $asset->id).'" class="btn btn-warning btn-sm"><i class="fa fa-pencil icon-white"></i></a> <a data-html="false" class="btn delete-asset btn-danger btn-sm" data-toggle="modal" href="'.route('delete/hardware', $asset->id).'" data-content="'.Lang::get('admin/hardware/message.delete.confirm').'" data-title="'.Lang::get('general.delete').' '.htmlspecialchars($asset->asset_tag).'?" onClick="return false;"><i class="fa fa-trash icon-white"></i></a></div>';
         } elseif ($asset->deleted_at!='') {
@@ -326,8 +327,7 @@ class CategoriesController extends AdminController
           'assigned_to' => ($asset->assigneduser) ? link_to('/admin/users/'.$asset->assigneduser->id.'/view', $asset->assigneduser->fullName()): '',
           'change' => $inout,
           'actions' => $actions,
-
-
+          'companyName' => Company::getName($asset),
         );
       }
 
