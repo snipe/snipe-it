@@ -11,7 +11,7 @@ $gh_user = 'snipe';
 $gh_repo = 'snipe-it';
 $file = 'CHANGELOG.md';
 $string = 'fix|resolve|closes|closed|#changelog';
-$omit = '';
+$omit = 'fuck';
 
 /*
 * No need to change anything below here

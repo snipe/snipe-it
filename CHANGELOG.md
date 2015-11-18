@@ -694,10 +694,8 @@
 * <a href="http://github.com/snipe/snipe-it/commit/d9a37f38228d55bb6265efc626e3ab7919013362">view</a> &bull; Fixes #88 
 * <a href="http://github.com/snipe/snipe-it/commit/5858bfb99b2144fbc805ec62cc90e6aaaf019f77">view</a> &bull; Fixed language file paths caused by #88 
 * <a href="http://github.com/snipe/snipe-it/commit/9f7cbc8a4f01ddf2596e831f658c9a8c321b2f46">view</a> &bull; Another fix related to #88, also accounts for users with invalid location_ids 
-* <a href="http://github.com/snipe/snipe-it/commit/1b56c31a22afd39a875677714b9c07e96876b8df">view</a> &bull; Fixed relationship between users/locations because fuck you ORM 
 * <a href="http://github.com/snipe/snipe-it/commit/f0f07b578b2439a627e5e946df0849d88d8526cf">view</a> &bull; Fixing pivot for users 
 * <a href="http://github.com/snipe/snipe-it/commit/9fa826b2e77ce22d25a8b3094bc825802d25be85">view</a> &bull; Fixed assigned to id 
-* <a href="http://github.com/snipe/snipe-it/commit/839d01a3af08d780be4152bc02b33bff1a7d7f20">view</a> &bull; Fixed relationship method because fuck you ORM 
 * <a href="http://github.com/snipe/snipe-it/commit/06cbd0723e415d81ea12aa48f2c37188741b2dbc">view</a> &bull; Fixes #93 
 * <a href="http://github.com/snipe/snipe-it/commit/e305099b45401c871f16fec23c200080830fcd5d">view</a> &bull; Fixed model view 
 * <a href="http://github.com/snipe/snipe-it/commit/7003eff42ca0e0ea2b9070187c0afd8ba1a8d8b0">view</a> &bull; More fixes for #88 
