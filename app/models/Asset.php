@@ -3,6 +3,8 @@
 class Asset extends Depreciable
 {
 	use SoftDeletingTrait;
+	use CompanayableTrait;
+
     protected $dates = ['deleted_at'];
 
         protected $table = 'assets';
@@ -258,8 +260,7 @@ return false;
   public static function assetcount()
   {
 
-      return Company::scopeCompanayables( DB::table( 'assets' ) )
-               ->where( 'physical', '=', '1' )
+      return Asset::where( 'physical', '=', '1' )
                ->whereNull( 'deleted_at', 'and' )
                ->count();
   }
@@ -270,7 +271,7 @@ return false;
   public static function availassetcount()
   {
 
-      return Company::scopeCompanayables( Asset::RTD() )
+      return Asset::RTD()
                   ->whereNull( 'deleted_at' )
                   ->count();
 

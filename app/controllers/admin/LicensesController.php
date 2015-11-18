@@ -430,7 +430,7 @@ class LicensesController extends AdminController
             // Redirect to the asset management page with error
             return Redirect::to('admin/licenses')->with('error', Lang::get('admin/licenses/message.not_found'));
         }
-        else if (!is_null($licenseseat->license) && !Company::isCurrentUserHasAccess($licenseseat->license)) {
+        else if (!Company::isCurrentUserHasAccess($licenseseat->license)) {
             return Redirect::to('admin/licenses')->with('error', Lang::get('general.insufficient_permissions'));
         }
 
@@ -479,7 +479,7 @@ class LicensesController extends AdminController
         $asset_id = e(Input::get('asset_id'));
         $user = Sentry::getUser();
 
-        if (!is_null($licenseseat->license) && !Company::isCurrentUserHasAccess($licenseseat->license)) {
+        if (!Company::isCurrentUserHasAccess($licenseseat->license)) {
             return Redirect::to('admin/licenses')->with('error', Lang::get('general.insufficient_permissions'));
         }
 
@@ -942,7 +942,6 @@ class LicensesController extends AdminController
 
     public function getDatatable() {
         $licenses = License::select('id','name','serial','purchase_date','seats', 'company_id')->with('company');
-        $licenses = Company::scopeCompanayables($licenses);
 
         if (Input::has('search')) {
             $licenses = $licenses->TextSearch(Input::get('search'));

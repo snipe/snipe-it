@@ -31,8 +31,7 @@ class ReportsController extends AdminController
      */
     public function getAccessoryReport()
     {
-        $accessories = Accessory::orderBy('created_at', 'DESC')->with('company');
-        $accessories = Company::scopeCompanayables($accessories)->get();
+        $accessories = Accessory::orderBy('created_at', 'DESC')->with('company')->get();
 
         return View::make('backend/reports/accessories', compact('accessories'));
     }
@@ -44,8 +43,7 @@ class ReportsController extends AdminController
      */
     public function exportAccessoryReport()
     {
-        $accessories = Accessory::orderBy('created_at', 'DESC');
-        $accessories = Company::scopeCompanayables($accessories)->get();
+        $accessories = Accessory::orderBy('created_at', 'DESC')->get();
 
         $rows = array();
         $header = array(
@@ -86,9 +84,8 @@ class ReportsController extends AdminController
         // Grab all the assets
         $assets = Asset::with( 'model', 'assigneduser.userLoc', 'assetstatus', 'defaultLoc', 'assetlog', 'supplier',
             'model.manufacturer', 'company' )
-                       ->orderBy( 'created_at', 'DESC' );
-
-        $assets = Company::scopeCompanayables( $assets )->get();
+                       ->orderBy( 'created_at', 'DESC' )
+                       ->get();
 
         return View::make( 'backend/reports/asset', compact( 'assets' ) );
     }
@@ -101,8 +98,7 @@ class ReportsController extends AdminController
     public function exportAssetReport()
     {
         // Grab all the assets
-        $assets = Asset::orderBy( 'created_at', 'DESC' );
-        $assets = Company::scopeCompanayables( $assets )->get();
+        $assets = Asset::orderBy( 'created_at', 'DESC' )->get();
 
         $rows = [ ];
 
@@ -210,9 +206,7 @@ class ReportsController extends AdminController
 
         // Grab all the assets
         $assets = Asset::with( 'model', 'assigneduser', 'assetstatus', 'defaultLoc', 'assetlog', 'company' )
-                       ->orderBy( 'created_at', 'DESC' );
-
-        $assets = Company::scopeCompanayables( $assets )->get();
+                       ->orderBy( 'created_at', 'DESC' )->get();
 
         return View::make( 'backend/reports/depreciation', compact( 'assets' ) );
     }
@@ -227,9 +221,7 @@ class ReportsController extends AdminController
 
         // Grab all the assets
         $assets = Asset::with( 'model', 'assigneduser', 'assetstatus', 'defaultLoc', 'assetlog' )
-                       ->orderBy( 'created_at', 'DESC' );
-
-        $assets = Company::scopeCompanayables( $assets )->get();
+                       ->orderBy( 'created_at', 'DESC' )->get();
 
         $csv = \League\Csv\Writer::createFromFileObject( new \SplTempFileObject() );
         $csv->setOutputBOM( Reader::BOM_UTF16_BE );
@@ -325,9 +317,7 @@ class ReportsController extends AdminController
     {
 
         $licenses = License::orderBy( 'created_at', 'DESC' )
-                           ->with( 'company' );
-
-        $licenses = Company::scopeCompanayables( $licenses )
+                           ->with( 'company' )
                            ->get();
 
         return View::make( 'backend/reports/licenses', compact( 'licenses' ) );
@@ -340,9 +330,7 @@ class ReportsController extends AdminController
      */
     public function exportLicenseReport()
     {
-        $licenses = License::orderBy( 'created_at', 'DESC' );
-        $licenses = Company::scopeCompanayables( $licenses )
-                           ->get();
+        $licenses = License::orderBy( 'created_at', 'DESC' )->get();
 
         $rows     = [ ];
         $header   = [
@@ -388,8 +376,7 @@ class ReportsController extends AdminController
 
     public function postCustom()
     {
-        $assets = Asset::orderBy( 'created_at', 'DESC' );
-        $assets = Company::scopeCompanayables( $assets )->get();
+        $assets = Asset::orderBy( 'created_at', 'DESC' )->get();
 
         $rows   = [ ];
         $header = [ ];
@@ -643,8 +630,7 @@ class ReportsController extends AdminController
      */
     public function getAssetAcceptanceReport()
     {
-        $assetsForReport = Asset::notYetAccepted()->with( 'company' );
-        $assetsForReport = Company::scopeCompanayables( $assetsForReport )->get();
+        $assetsForReport = Asset::notYetAccepted()->with( 'company' )->get();
 
         return View::make( 'backend/reports/unaccepted_assets', compact( 'assetsForReport' ) );
     }
@@ -707,8 +693,8 @@ class ReportsController extends AdminController
      */
     protected function getCheckedOutAssetsRequiringAcceptance( $modelsInCategoriesThatRequireAcceptance )
     {
-        $assets = Asset::deployed()->inModelList( $modelsInCategoriesThatRequireAcceptance );
-        $assets = Company::scopeCompanayables( $assets )
+        $assets = Asset::deployed()
+                        ->inModelList( $modelsInCategoriesThatRequireAcceptance )
                         ->select( 'id' )
                         ->get()
                         ->toArray();
@@ -774,6 +760,6 @@ class ReportsController extends AdminController
      */
     protected function getAssetsNotAcceptedYet()
     {
-        return Company::scopeCompanayables(Asset::unaccepted());
+        return Asset::unaccepted();
     }
 }

@@ -1,6 +1,7 @@
 <?php namespace Controllers\Admin;
 
 use AdminController;
+use Company;
 use Input;
 use Lang;
 use Manufacturer;
@@ -296,6 +297,7 @@ class ManufacturersController extends AdminController
           'serial' => $asset->serial,
           'assigned_to' => ($asset->assigneduser) ? link_to('/admin/users/'.$asset->assigneduser->id.'/view', $asset->assigneduser->fullName()): '',
           'actions' => $actions,
+          'companyName' => Company::getName($asset),
         );
 
         if (isset($inout)) { $row['change'] = $inout; }

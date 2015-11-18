@@ -3,6 +3,8 @@
 class License extends Depreciable
 {
 	use SoftDeletingTrait;
+	use CompanayableTrait;
+
     protected $dates = ['deleted_at'];
 
     public $timestamps = true;

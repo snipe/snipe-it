@@ -636,7 +636,7 @@ class AssetsController extends AdminController
         $asset = Asset::withTrashed()->find($assetId);
         $settings = Setting::getSettings();
 
-        if (!is_null($asset) && !Company::isCurrentUserHasAccess($asset)) {
+        if (!Company::isCurrentUserHasAccess($asset)) {
             return Redirect::to('hardware')->with('error', Lang::get('general.insufficient_permissions'));
         }
         else if ($asset->userloc) {
@@ -688,7 +688,7 @@ class AssetsController extends AdminController
             $asset = Asset::find($assetId);
             $size = barcodeDimensions($settings->barcode_type);
 
-            if (!is_null($asset) && !Company::isCurrentUserHasAccess($asset)) {
+            if (!Company::isCurrentUserHasAccess($asset)) {
                 return Redirect::to('hardware')->with('error', Lang::get('general.insufficient_permissions'));
             }
 
@@ -861,7 +861,7 @@ class AssetsController extends AdminController
 		// Get user information
 		$asset = Asset::withTrashed()->find($assetId);
 
-        if (!is_null($asset) && !Company::isCurrentUserHasAccess($asset)) {
+        if (!Company::isCurrentUserHasAccess($asset)) {
             return Redirect::to('hardware')->with('error', Lang::get('general.insufficient_permissions'));
         }
 		else if (isset($asset->id)) {
@@ -1199,8 +1199,6 @@ class AssetsController extends AdminController
 
        $assets = Asset::with('model','assigneduser','assigneduser.userloc','assetstatus','defaultLoc','assetlog','model','model.category','assetstatus','assetloc', 'company')
        ->Hardware();
-
-       $assets = Company::scopeCompanayables($assets);
 
        if (Input::has('search')) {
              $assets = $assets->TextSearch(Input::get('search'));

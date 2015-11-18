@@ -24,6 +24,11 @@
 
     class AssetMaintenancesController extends AdminController
     {
+        private static function getInsufficientPermissionsRedirect()
+        {
+            return Redirect::to( 'admin/asset_maintenances')
+                ->with('error', Lang::get( 'general.insufficient_permissions' ) );
+        }
 
         /**
          * getIndex
@@ -213,7 +218,7 @@
                 $asset = Asset::find( e( Input::get( 'asset_id' ) ) );
 
                 if (is_null($asset) || !Company::isCurrentUserHasAccess($asset)) {
-                    return Redirect::to( 'admin/asset_maintenances', Lang::get( 'general.insufficient_permissions' ) );
+                    return static::getInsufficientPermissionsRedirect();
                 }
 
                 // Save the asset maintenance data
@@ -270,7 +275,7 @@
                                ->with( 'error', Lang::get( 'admin/asset_maintenances/message.not_found' ) );
             }
             else if (!Company::isCurrentUserHasAccess( $assetMaintenance->asset )) {
-                return Redirect::to( 'admin/asset_maintenances', Lang::get( 'general.insufficient_permissions' ) );
+                return static::getInsufficientPermissionsRedirect();
             }
 
             if ($assetMaintenance->completion_date == '0000-00-00') {
@@ -347,7 +352,7 @@
                                ->with( 'error', Lang::get( 'admin/asset_maintenances/message.not_found' ) );
             }
             else if (!Company::isCurrentUserHasAccess( $assetMaintenance->asset )) {
-                return Redirect::to( 'admin/asset_maintenances', Lang::get( 'general.insufficient_permissions' ) );
+                return static::getInsufficientPermissionsRedirect();
             }
 
             // attempt validation
@@ -380,7 +385,7 @@
                 $asset = Asset::find( e( Input::get( 'asset_id' ) ) );
 
                 if (is_null($asset) || !Company::isCurrentUserHasAccess($asset)) {
-                    return Redirect::to( 'admin/asset_maintenances', Lang::get( 'general.insufficient_permissions' ) );
+                    return static::getInsufficientPermissionsRedirect();
                 }
 
                 // Save the asset maintenance data
@@ -452,7 +457,7 @@
                                ->with( 'error', Lang::get( 'admin/asset_maintenances/message.not_found' ) );
             }
             else if (!Company::isCurrentUserHasAccess( $assetMaintenance->asset )) {
-                return Redirect::to( 'admin/asset_maintenances', Lang::get( 'general.insufficient_permissions' ) );
+                return static::getInsufficientPermissionsRedirect();
             }
 
             // Delete the asset maintenance
@@ -481,7 +486,7 @@
                                ->with( 'error', Lang::get( 'admin/asset_maintenances/message.not_found' ) );
             }
             else if (!Company::isCurrentUserHasAccess( $assetMaintenance->asset )) {
-                return Redirect::to( 'admin/asset_maintenances', Lang::get( 'general.insufficient_permissions' ) );
+                return static::getInsufficientPermissionsRedirect();
             }
 
             return View::make( 'backend/asset_maintenances/view')->with('assetMaintenance', $assetMaintenance);

@@ -41,7 +41,8 @@ final class Company extends Elegant
 
     public static function isCurrentUserHasAccess($companyable)
     {
-        if (!static::isFullMultipleCompanySupportEnabled()) { return TRUE; }
+        if      (is_null($companyable))                          { return FALSE; }
+        else if (!static::isFullMultipleCompanySupportEnabled()) { return TRUE;  }
         else
         {
             $current_user_company_id = Sentry::getUser()->company_id;
@@ -101,5 +102,13 @@ final class Company extends Elegant
                 ->orWhereHas( 'licenselog', $f )
                 ->orWhereHas( 'consumablelog', $f );
         }
+    }
+
+    public static function getName($companayable)
+    {
+        $company = $companayable->company;
+
+        if (is_null($company)) { return '';             }
+        else                   { return $company->name; }
     }
 }

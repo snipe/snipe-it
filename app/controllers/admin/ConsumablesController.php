@@ -403,8 +403,6 @@ class ConsumablesController extends AdminController
             ->whereNull('deleted_at')
             ->with('company');
 
-        $consumables = Company::scopeCompanayables($consumables);
-
         if (Input::has('search')) {
             $consumables = $consumables->TextSearch(Input::get('search'));
         }
@@ -458,7 +456,7 @@ class ConsumablesController extends AdminController
         $consumable_users = $consumable->users;
         $count = $consumable_users->count();
 
-        if (!is_null($consumable) && !Company::isCurrentUserHasAccess($consumable)) {
+        if (!Company::isCurrentUserHasAccess($consumable)) {
             return ['total' => 0, 'rows' => []];
         }
 

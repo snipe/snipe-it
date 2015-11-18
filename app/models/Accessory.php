@@ -3,6 +3,8 @@
 class Accessory extends Elegant
 {
     use SoftDeletingTrait;
+    use CompanayableTrait;
+
     protected $dates = ['deleted_at'];
     protected $table = 'accessories';
 

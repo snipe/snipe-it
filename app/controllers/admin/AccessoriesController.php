@@ -421,7 +421,7 @@ class AccessoriesController extends AdminController
 
 		$accessory = Accessory::find($accessory_user->accessory_id);
 
-        if (!is_null($accessory) && !Company::isCurrentUserHasAccess($accessory)) {
+        if (!Company::isCurrentUserHasAccess($accessory)) {
             return Redirect::to('admin/accessories')->with('error', Lang::get('general.insufficient_permissions'));
         }
         else {
@@ -447,7 +447,7 @@ class AccessoriesController extends AdminController
 
 		$accessory = Accessory::find($accessory_user->accessory_id);
 
-        if (!is_null($accessory) && !Company::isCurrentUserHasAccess($accessory)) {
+        if (!Company::isCurrentUserHasAccess($accessory)) {
             return Redirect::to('admin/accessories')->with('error', Lang::get('general.insufficient_permissions'));
         }
 
@@ -539,8 +539,6 @@ class AccessoriesController extends AdminController
         $accessories = Accessory::with('category', 'company')
         ->whereNull('deleted_at');
 
-        $accessories = Company::scopeCompanayables($accessories);
-
         if (Input::has('search')) {
             $accessories = $accessories->TextSearch(Input::get('search'));
         }
@@ -595,7 +593,7 @@ class AccessoriesController extends AdminController
 	{
 		$accessory = Accessory::find($accessoryID);
 
-        if (!is_null($accessory) && !Company::isCurrentUserHasAccess($accessory)) {
+        if (!Company::isCurrentUserHasAccess($accessory)) {
             return ['total' => 0, 'rows' => []];
         }
 

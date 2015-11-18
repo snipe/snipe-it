@@ -23,9 +23,9 @@ class DashboardController extends AdminController
             ->get();
 
 
-        $asset_stats['total'] = Company::scopeCompanayables(Asset::Hardware())->count();
+        $asset_stats['total'] = Asset::Hardware()->count();
 
-        $asset_stats['rtd']['total'] = Company::scopeCompanayables(Asset::Hardware()->RTD())->count();
+        $asset_stats['rtd']['total'] = Asset::Hardware()->RTD()->count();
 
         if ($asset_stats['rtd']['total'] > 0) {
 	        $asset_stats['rtd']['percent'] = round(($asset_stats['rtd']['total']/$asset_stats['total']) * 100);
@@ -34,7 +34,7 @@ class DashboardController extends AdminController
         }
 
 
-        $asset_stats['pending']['total'] = Company::scopeCompanayables(Asset::Hardware()->Pending())->count();
+        $asset_stats['pending']['total'] = Asset::Hardware()->Pending()->count();
 
         if ($asset_stats['pending']['total'] > 0) {
 	        $asset_stats['pending']['percent'] = round(($asset_stats['pending']['total']/$asset_stats['total']) * 100);
@@ -43,7 +43,7 @@ class DashboardController extends AdminController
         }
 
 
-        $asset_stats['deployed']['total'] = Company::scopeCompanayables(Asset::Hardware()->Deployed())->count();
+        $asset_stats['deployed']['total'] = Asset::Hardware()->Deployed()->count();
 
         if ($asset_stats['deployed']['total'] > 0) {
 	         $asset_stats['deployed']['percent'] = round(($asset_stats['deployed']['total']/$asset_stats['total']) * 100);
@@ -52,7 +52,7 @@ class DashboardController extends AdminController
         }
 
 
-        $asset_stats['undeployable']['total'] = Company::scopeCompanayables(Asset::Hardware()->Undeployable())->count();
+        $asset_stats['undeployable']['total'] = Asset::Hardware()->Undeployable()->count();
 
         if ($asset_stats['undeployable']['total'] > 0) {
 	        $asset_stats['undeployable']['percent'] = round(($asset_stats['undeployable']['total']/$asset_stats['total']) * 100);
@@ -60,7 +60,7 @@ class DashboardController extends AdminController
 	        $asset_stats['undeployable']['percent'] = 0;
         }
 
-        $asset_stats['archived']['total'] = Company::scopeCompanayables(Asset::Hardware()->Archived())->count();
+        $asset_stats['archived']['total'] = Asset::Hardware()->Archived()->count();
 
         if ($asset_stats['archived']['total'] > 0) {
 	        $asset_stats['archived']['percent'] = round(($asset_stats['archived']['total']/$asset_stats['total']) * 100);
