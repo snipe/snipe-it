@@ -285,9 +285,12 @@
               {{ $errors->first('ldap_enabled', '<br><span class="alert-msg">:message</span>') }}
             </div>
             <div class="col-md-3">
-              {{ Form::button('ldap_import', '1', Input::old('ldap_import', $setting->ldap_import)) }}
+              {{ Form::open(['method' => 'GET', 'files' => true, 'class' => 'form-horizontal', 'role' => 'form' ]) }}
+
+              {{ Form::button('Import LDAP') }}
               @Lang('admin/settings/general.ldap_import')
               {{ $errors->first('ldap_import', '<br><span class="alert-msg">:message</span>') }}
+              {{ Form::close() }}
             </div>
           </div>
 
