@@ -1,10 +1,5 @@
 <?php
 
-use Setting;
-
-use Lang;
-use Sentry;
-
 final class Company extends Elegant
 {
     protected $table = 'companies';
