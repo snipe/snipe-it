@@ -10,7 +10,7 @@ ini_set( 'date.timezone', 'UTC' );
 $gh_user = 'snipe';
 $gh_repo = 'snipe-it';
 $file = 'CHANGELOG.md';
-$string = 'fix|resolve|closes|closed|#changelog';
+$string = 'fix|resolve|close|#changelog';
 $omit = 'fuck';
 
 /*
