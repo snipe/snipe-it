@@ -174,6 +174,8 @@ To set up your Snipe-IT installation to be able to use LDAP for user login and i
 
 The LDAP functionality will import any users in your LDAP/Active Directory, but will leave existing users untouched.
 
+**If you currently have ldap configured you'll need to click the "import ldap settings" button on the settings page.**
+
 **Note: You must have the `php-ldap` extension installed for LDAP integration to work.**
 
 -----
