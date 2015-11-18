@@ -10,12 +10,16 @@ ini_set( 'date.timezone', 'UTC' );
 $gh_user = 'snipe';
 $gh_repo = 'snipe-it';
 $file = 'CHANGELOG.md';
-$string = 'fix|resolve|closes|closed|#changelog';
-$omit = '';
+$string = 'fix|resolve|close|#changelog';
+$omit = 'fuck';
 
 /*
 * No need to change anything below here
 */
+
+// Clear old changelog info
+file_put_contents($file,'');
+
 $url = 'https://api.github.com/repos/'.$gh_user.'/'.$gh_repo.'/releases';
 $ch = curl_init();
 	$timeout = 5;
