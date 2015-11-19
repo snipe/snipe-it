@@ -13,7 +13,7 @@ final class Company extends Elegant
         return $settings->full_multiple_companies_support == 1;
     }
 
-    private static function scopeCompanayablesDirectly($query, $column = 'company_id')
+    private static function scopeCompanyablesDirectly($query, $column = 'company_id')
     {
         $company_id = Sentry::getUser()->company_id;
 
@@ -70,13 +70,13 @@ final class Company extends Elegant
         }
     }
 
-    public static function scopeCompanayables($query, $column = 'company_id')
+    public static function scopeCompanyables($query, $column = 'company_id')
     {
         if (!static::isFullMultipleCompanySupportEnabled()) { return $query; }
-        else { return static::scopeCompanayablesDirectly($query, $column); }
+        else { return static::scopeCompanyablesDirectly($query, $column); }
     }
 
-    public static function scopeCompanayableChildren(array $companyable_names, $query)
+    public static function scopeCompanyableChildren(array $companyable_names, $query)
     {
         if      (count($companyable_names) == 0)                 { throw new Exception('-_-'); }
         else if (!static::isFullMultipleCompanySupportEnabled()) { return $query;              }
@@ -84,7 +84,7 @@ final class Company extends Elegant
         {
             $f = function ($q)
             {
-                static::scopeCompanayablesDirectly($q);
+                static::scopeCompanyablesDirectly($q);
             };
 
             $q = $query->whereHas($companyable_names[0], $f);
@@ -98,9 +98,9 @@ final class Company extends Elegant
         }
     }
 
-    public static function getName($companayable)
+    public static function getName($companyable)
     {
-        $company = $companayable->company;
+        $company = $companyable->company;
 
         if (is_null($company)) { return '';                }
         else                   { return e($company->name); }

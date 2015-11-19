@@ -14,7 +14,7 @@ final class CompanyableChildScope implements ScopeInterface
     public function apply(Builder $builder)
     {
         $model = $builder->getModel();
-        return Company::scopeCompanayableChildren($model->getCompanyableParents(), $builder);
+        return Company::scopeCompanyableChildren($model->getCompanyableParents(), $builder);
     }
 
     /**

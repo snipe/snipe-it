@@ -3,7 +3,7 @@
 class License extends Depreciable
 {
 	use SoftDeletingTrait;
-	use CompanayableTrait;
+	use CompanyableTrait;
 
     protected $dates = ['deleted_at'];
 

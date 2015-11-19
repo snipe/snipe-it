@@ -3,7 +3,7 @@
 use \Illuminate\Database\Eloquent\Builder;
 use \Illuminate\Database\Eloquent\ScopeInterface;
 
-final class CompanayableScope implements ScopeInterface
+final class CompanyableScope implements ScopeInterface
 {
     /**
      * Apply the scope to a given Eloquent query builder.
@@ -13,7 +13,7 @@ final class CompanayableScope implements ScopeInterface
      */
     public function apply(Builder $builder)
     {
-        return Company::scopeCompanayables($builder);
+        return Company::scopeCompanyables($builder);
     }
 
     /**

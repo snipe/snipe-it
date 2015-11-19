@@ -3,7 +3,7 @@
 trait CompanyableChildTrait
 {
     /**
-     * Boot the companayable trait for a model.
+     * Boot the companyable trait for a model.
      *
      * @return void
      */

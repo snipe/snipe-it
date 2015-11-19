@@ -3,7 +3,7 @@
 class Asset extends Depreciable
 {
 	use SoftDeletingTrait;
-	use CompanayableTrait;
+	use CompanyableTrait;
 
     protected $dates = ['deleted_at'];
 
