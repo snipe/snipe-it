@@ -10,7 +10,9 @@ final class Company extends Elegant
     private static function isFullMultipleCompanySupportEnabled()
     {
         $settings = Setting::getSettings();
-        return $settings->full_multiple_companies_support == 1;
+
+        if (is_null($settings)) { return TRUE;                                            }
+        else                    { return $settings->full_multiple_companies_support == 1; }
     }
 
     private static function scopeCompanyablesDirectly($query, $column = 'company_id')
