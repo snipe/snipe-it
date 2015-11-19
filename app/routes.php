@@ -336,7 +336,7 @@
             } );
 
             # Settings
-            Route::group( [ 'prefix' => 'backups' ], function () {
+            Route::group( [ 'prefix' => 'backups', 'before' => 'backup-auth' ], function () {
 
 
                 Route::get( 'download/{filename}', [
