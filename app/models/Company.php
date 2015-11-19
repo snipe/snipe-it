@@ -13,6 +13,14 @@ final class Company extends Elegant
         return $settings->full_multiple_companies_support == 1;
     }
 
+    private static function scopeCompanayablesDirectly($query, $column = 'company_id')
+    {
+        $company_id = Sentry::getUser()->company_id;
+
+        if ($company_id == NULL) { return $query;                                   }
+        else                     { return $query->where($column, '=', $company_id); }
+    }
+
     public static function getSelectList()
     {
         $select_company = Lang::get('admin/companies/general.select_company');
@@ -65,43 +73,34 @@ final class Company extends Elegant
     public static function scopeCompanayables($query, $column = 'company_id')
     {
         if (!static::isFullMultipleCompanySupportEnabled()) { return $query; }
-        else
-        {
-            $company_id = Sentry::getUser()->company_id;
-
-            if ($company_id == NULL) { return $query;                                   }
-            else                     { return $query->where($column, '=', $company_id); }
-        }
+        else { return static::scopeCompanayablesDirectly($query, $column); }
     }
 
-    public static function scopeCompanayableChildren($companyable_name, $query)
+    public static function scopeCompanayableChildren(array $companyable_names, $query)
     {
-        if (!static::isFullMultipleCompanySupportEnabled()) { return $query; }
+        if      (count($companyable_names) == 0)                 { throw new Exception('-_-'); }
+        else if (!static::isFullMultipleCompanySupportEnabled()) { return $query;              }
         else
         {
-            return $query->whereHas($companyable_name, function ($query)
+            $f = function ($q)
             {
-                static::scopeCompanayables($query);
-            });
+                static::scopeCompanayablesDirectly($q);
+            };
+
+            $q = $query->whereHas($companyable_names[0], $f);
+
+            for ($i = 1; $i < count($companyable_names); $i++)
+            {
+                $q = $q->orWhereHas($companyable_names[$i], $f);
+            }
+
+            return $q;
         }
     }
 
     public static function scopeActionLogs($query)
     {
-        if (!static::isFullMultipleCompanySupportEnabled()) { return $query; }
-        else
-        {
-            $f = function ( $q )
-            {
-                static::scopeCompanayables( $q );
-            };
-
-            return $query
-                ->whereHas( 'accessorylog', $f )
-                ->orWhereHas( 'assetlog', $f )
-                ->orWhereHas( 'licenselog', $f )
-                ->orWhereHas( 'consumablelog', $f );
-        }
+        return static::scopeCompanayableChildren(['accessorylog', 'assetlog', 'licenselog', 'consumablelog'], $query);
     }
 
     public static function getName($companayable)

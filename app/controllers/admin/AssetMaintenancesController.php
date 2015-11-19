@@ -57,7 +57,7 @@
         $maintenances = AssetMaintenance::with('asset','supplier','asset.company')
          ->whereNull('deleted_at');
 
-         $maintenances = Company::scopeCompanayableChildren('asset', $maintenances);
+         $maintenances = Company::scopeCompanayableChildren(['asset'], $maintenances);
 
          if (Input::has('search')) {
              $maintenances = $maintenances->TextSearch(e(Input::get('search')));

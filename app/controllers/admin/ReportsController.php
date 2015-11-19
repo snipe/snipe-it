@@ -556,7 +556,7 @@ class ReportsController extends AdminController
         $assetMaintenances = \AssetMaintenance::with( 'asset', 'supplier', 'asset.company' )
                                               ->orderBy( 'created_at', 'DESC' );
 
-        $assetMaintenances = Company::scopeCompanayableChildren( 'asset', $assetMaintenances )->get();
+        $assetMaintenances = Company::scopeCompanayableChildren( [ 'asset' ], $assetMaintenances )->get();
 
         return View::make( 'backend/reports/asset_maintenances', compact( 'assetMaintenances' ) );
 
@@ -575,7 +575,7 @@ class ReportsController extends AdminController
         $assetMaintenances = AssetMaintenance::with( 'asset', 'supplier' )
                                              ->orderBy( 'created_at', 'DESC' );
 
-        $assetMaintenances = Company::scopeCompanayableChildren( 'asset', $assetMaintenances )->get();
+        $assetMaintenances = Company::scopeCompanayableChildren( [ 'asset' ], $assetMaintenances )->get();
 
         $rows = [ ];
 
