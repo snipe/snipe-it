@@ -11,7 +11,8 @@ final class Company extends Elegant
     {
         $settings = Setting::getSettings();
 
-        if (is_null($settings)) { return TRUE;                                            }
+        // NOTE: this can happen when seeding the database
+        if (is_null($settings)) { return FALSE;                                           }
         else                    { return $settings->full_multiple_companies_support == 1; }
     }
 
