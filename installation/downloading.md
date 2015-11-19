@@ -19,6 +19,9 @@ or
 or
 
 #### Download and run the installer script (centos/redhat and debian/ubuntu)
+
+Note: requires Centos 6 or Ubuntu 14 or greater.
+
 ```bash
 wget https://raw.githubusercontent.com/snipe/snipe-it/master/install.sh
 chmod 744 install.sh
