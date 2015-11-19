@@ -71,8 +71,7 @@ class License extends Depreciable
     */
      public static function assetcount()
     {
-        return Company::scopeCompanayableChildren(['license'], LicenseSeat::with('license'))
-                    ->whereNull('deleted_at')
+        return LicenseSeat::whereNull('deleted_at')
                     ->count();
     }
 
@@ -82,8 +81,7 @@ class License extends Depreciable
     */
      public function totalSeatsByLicenseID()
     {
-        return DB::table('license_seats')
-        			->where('license_id', '=', $this->id)
+        return LicenseSeat::where('license_id', '=', $this->id)
                     ->whereNull('deleted_at')
                     ->count();
     }
@@ -94,8 +92,7 @@ class License extends Depreciable
     */
      public static function availassetcount()
     {
-        return Company::scopeCompanayableChildren(['license'], LicenseSeat::with('license'))
-                    ->whereNull('assigned_to')
+        return LicenseSeat::whereNull('assigned_to')
                     ->whereNull('asset_id')
                     ->whereNull('deleted_at')
                     ->count();
@@ -106,8 +103,7 @@ class License extends Depreciable
      */
     public function availcount()
     {
-        return DB::table('license_seats')
-                    ->whereNull('assigned_to')
+        return LicenseSeat::whereNull('assigned_to')
                     ->whereNull('asset_id')
                     ->where('license_id', '=', $this->id)
                     ->whereNull('deleted_at')

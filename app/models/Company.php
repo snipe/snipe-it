@@ -98,11 +98,6 @@ final class Company extends Elegant
         }
     }
 
-    public static function scopeActionLogs($query)
-    {
-        return static::scopeCompanayableChildren(['accessorylog', 'assetlog', 'licenselog', 'consumablelog'], $query);
-    }
-
     public static function getName($companayable)
     {
         $company = $companayable->company;

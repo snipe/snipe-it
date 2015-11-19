@@ -296,7 +296,7 @@ class ReportsController extends AdminController
      */
     public function getActivityReport()
     {
-        $log_actions = Company::scopeActionLogs(Actionlog::orderBy( 'created_at', 'DESC' ))
+        $log_actions = Actionlog::orderBy( 'created_at', 'DESC' )
                                 ->with( 'adminlog' )
                                 ->with( 'accessorylog' )
                                 ->with( 'assetlog' )
@@ -554,9 +554,8 @@ class ReportsController extends AdminController
     {
         // Grab all the improvements
         $assetMaintenances = \AssetMaintenance::with( 'asset', 'supplier', 'asset.company' )
-                                              ->orderBy( 'created_at', 'DESC' );
-
-        $assetMaintenances = Company::scopeCompanayableChildren( [ 'asset' ], $assetMaintenances )->get();
+                                              ->orderBy( 'created_at', 'DESC' )
+                                              ->get();
 
         return View::make( 'backend/reports/asset_maintenances', compact( 'assetMaintenances' ) );
 
@@ -573,9 +572,8 @@ class ReportsController extends AdminController
     {
         // Grab all the improvements
         $assetMaintenances = AssetMaintenance::with( 'asset', 'supplier' )
-                                             ->orderBy( 'created_at', 'DESC' );
-
-        $assetMaintenances = Company::scopeCompanayableChildren( [ 'asset' ], $assetMaintenances )->get();
+                                             ->orderBy( 'created_at', 'DESC' )
+                                             ->get();
 
         $rows = [ ];
 

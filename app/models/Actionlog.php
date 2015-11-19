@@ -4,15 +4,21 @@
     use Illuminate\Support\Facades\DB;
     use Illuminate\Support\Facades\Log;
 
-    class Actionlog extends Eloquent
+    class Actionlog extends Eloquent implements ICompanyableChild
     {
-
+        use CompanyableChildTrait;
         use SoftDeletingTrait;
+
         protected $dates = [ 'deleted_at' ];
 
         protected $table      = 'asset_logs';
         public    $timestamps = true;
         protected $fillable   = [ 'created_at' ];
+
+        public function getCompanyableParents()
+        {
+            return [ 'accessorylog', 'assetlog', 'licenselog', 'consumablelog' ];
+        }
 
         public function assetlog()
         {

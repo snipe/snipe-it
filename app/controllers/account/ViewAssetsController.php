@@ -156,7 +156,8 @@ class ViewAssetsController extends AuthorizedController
             return Redirect::to('account/view-assets')->with('error', Lang::get('admin/hardware/message.does_not_exist'));
         }
 
-        $is_unauthorized = is_null(Company::scopeActionLogs(Actionlog::where('id', '=', $logID))->first());
+        // NOTE: make sure the global scope is applied
+        $is_unauthorized = is_null(Actionlog::where('id', '=', $logID)->first());
         if ($is_unauthorized) {
             return Redirect::route('requestable-assets')->with('error', Lang::get('general.insufficient_permissions'));
         }

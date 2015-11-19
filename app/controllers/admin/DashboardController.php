@@ -17,7 +17,7 @@ class DashboardController extends AdminController
     {
         // Show the page
 
-        $recent_activity = Company::scopeActionLogs(Actionlog::orderBy('created_at','DESC'))
+        $recent_activity = Actionlog::orderBy('created_at','DESC')
             ->with('accessorylog','consumablelog','licenselog','assetlog','adminlog','userlog')
             ->take(7)
             ->get();

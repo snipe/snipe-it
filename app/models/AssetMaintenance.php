@@ -3,10 +3,11 @@
     use Illuminate\Database\Eloquent\SoftDeletingTrait;
     use Illuminate\Support\Facades\Lang;
 
-    class AssetMaintenance extends Elegant
+    class AssetMaintenance extends Elegant implements ICompanyableChild
     {
-
+        use CompanyableChildTrait;
         use SoftDeletingTrait;
+
         protected $dates = [ 'deleted_at' ];
         protected $table = 'asset_maintenances';
 
@@ -22,6 +23,11 @@
             'notes'                  => 'string',
             'cost'                   => 'numeric'
         ];
+
+        public function getCompanyableParents()
+        {
+            return [ 'asset' ];
+        }
 
         /**
          * getImprovementOptions
