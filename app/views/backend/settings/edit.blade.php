@@ -45,20 +45,22 @@
               </div>
           </div>
 
-          <!-- Full Multiple Companies Support -->
-          <div class="form-group {{ $errors->has('full_multiple_companies_support') ? 'error' : '' }}">
-            <div class="col-md-3">
-              {{ Form::label('full_multiple_companies_support',
-                             Lang::get('admin/settings/general.full_multiple_companies_support_text')) }}
+          @if (Sentry::getUser()->isSuperUser())
+            <!-- Full Multiple Companies Support -->
+            <div class="form-group {{ $errors->has('full_multiple_companies_support') ? 'error' : '' }}">
+              <div class="col-md-3">
+                {{ Form::label('full_multiple_companies_support',
+                               Lang::get('admin/settings/general.full_multiple_companies_support_text')) }}
+              </div>
+              <div class="col-md-9">
+                {{ Form::checkbox('full_multiple_companies_support', '1', Input::old('full_multiple_companies_support',
+                                  $setting->full_multiple_companies_support)) }}
+                @Lang('admin/settings/general.full_multiple_companies_support_text')
+                {{ $errors->first('full_multiple_companies_support', '<br><span class="alert-msg">:message</span>') }}
+                <p class="help-inline">@lang('admin/settings/general.full_multiple_companies_support_help_text')</p>
+              </div>
             </div>
-            <div class="col-md-9">
-              {{ Form::checkbox('full_multiple_companies_support', '1', Input::old('full_multiple_companies_support',
-                                $setting->full_multiple_companies_support)) }}
-              @Lang('admin/settings/general.full_multiple_companies_support_text')
-              {{ $errors->first('full_multiple_companies_support', '<br><span class="alert-msg">:message</span>') }}
-              <p class="help-inline">@lang('admin/settings/general.full_multiple_companies_support_help_text')</p>
-            </div>
-          </div>
+          @endif
 
           <!-- Logo -->
           <div class="form-group {{ $errors->has('logo') ? 'has-error' : '' }}">
