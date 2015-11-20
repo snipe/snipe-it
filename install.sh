@@ -57,10 +57,10 @@ fi
 echo "
 	   _____       _                  __________
 	  / ___/____  (_)___  ___        /  _/_  __/
-	  \__ \/ __ \/ / __ \/ _ \______ / /  / /   
-	 ___/ / / / / / /_/ /  __/_____// /  / /    
-	/____/_/ /_/_/ .___/\___/     /___/ /_/     
-	            /_/                             
+	  \__ \/ __ \/ / __ \/ _ \______ / /  / /
+	 ___/ / / / / / /_/ /  __/_____// /  / /
+	/____/_/ /_/_/ .___/\___/     /___/ /_/
+	            /_/
 "
 
 echo ""
@@ -121,7 +121,7 @@ done
 #Snipe says we need a new 32bit key, so let's create one randomly and inject it into the file
 random32="$(echo `< /dev/urandom tr -dc _A-Za-z-0-9 | head -c32`)"
 
-#db_setup.sql will be injected to the database during install. 
+#db_setup.sql will be injected to the database during install.
 #Again, this file should be removed, which will be a prompt at the end of the script.
 dbsetup=$tmp/db_setup.sql
 echo >> $dbsetup "CREATE DATABASE snipeit;"
@@ -141,21 +141,21 @@ case $distro in
 
 		#Update/upgrade Debian/Ubuntu repositories, get the latest version of git.
 		echo ""
-		echo "##  Updaing ubuntu"
+		echo "##  Updating ubuntu"
 		echo ""
 		apachefile=/etc/apache2/sites-available/$name.conf
 		sudo apt-get update > /dev/null
 		sudo apt-get -y upgrade > /dev/null
 
-		echo "##  Install packages."
+		echo "##  Installing packages."
 		sudo apt-get install -y git unzip php5 php5-mcrypt php5-curl php5-mysql php5-gd php5-ldap > /dev/null
 		#We already established MySQL root & user PWs, so we dont need to be prompted. Let's go ahead and install Apache, PHP and MySQL.
-		echo "##  Settup LAMP."
+		echo "##  Setting up LAMP."
 		sudo DEBIAN_FRONTEND=noninteractive apt-get install -y lamp-server^ > /dev/null
 
 		#  Get files and extract to web dir
 		echo ""
-		echo "##  Download snipeit and extract to web directory."
+		echo "##  Downloading snipeit and extract to web directory."
 		wget -P $tmp/ https://github.com/snipe/snipe-it/archive/$file &> /dev/null
 		unzip -qo $tmp/$file -d $tmp/
 		cp -R $tmp/snipe-it-master $webdir/$name
@@ -184,7 +184,7 @@ case $distro in
 		echo >> $apachefile "        CustomLog /var/log/apache2/access.log combined"
 		echo >> $apachefile "</VirtualHost>"
 
-		echo "##  Setup hosts file."
+		echo "##  Setting up hosts file."
 		echo >> $hosts "127.0.0.1 $hostname $fqdn"
 		a2ensite $name.conf > /dev/null
 
@@ -215,7 +215,7 @@ case $distro in
 		##  TODO make sure mysql is set to start on boot and go ahead and start it
 
 		#Change permissions on directories
-		echo "##  Set permissionson web directory."
+		echo "##  Seting permissions on web directory."
 		sudo chmod -R 755 $webdir/$name/app/storage
 		sudo chmod -R 755 $webdir/$name/app/private_uploads
 		sudo chmod -R 755 $webdir/$name/public/uploads
@@ -225,21 +225,21 @@ case $distro in
 		echo "##  Input your MySQL/MariaDB root password: "
 		sudo mysql -u root < $dbsetup
 
-		echo "##  Secure Mysql"
+		echo "##  Securing Mysql"
 
 		# Have user set own root password when securing install
 		# and just set the snipeit database user at the beginning
-		/usr/bin/mysql_secure_installation 
+		/usr/bin/mysql_secure_installation
 
 		#Install / configure composer
-		echo "##  Install and configure composer"
+		echo "##  Installing and configuring composer"
 		curl -sS https://getcomposer.org/installer | php
 		mv composer.phar /usr/local/bin/composer
 		cd $webdir/$name/
 		composer install --no-dev --prefer-source
 		php artisan app:install --env=production
 
-		echo "##  restart apache."
+		echo "##  Restarting apache."
 		service apache2 restart
 		;;
 	centos6 )
@@ -251,7 +251,7 @@ case $distro in
 
 		#Allow us to get the mysql engine
 		echo ""
-		echo "##  Add IUS and mariaDB repos.";
+		echo "##  Adding IUS and mariaDB repos.";
 		mariadbRepo=/etc/yum.repos.d/MariaDB.repo
 		touch $mariadbRepo
 		echo >> $mariadbRepo "[mariadb]"
@@ -266,9 +266,9 @@ case $distro in
 		rpm -Uvh $tmp/ius-release*.rpm > /dev/null
 
 		#Install PHP and other needed stuff.
-		echo "##  Install PHP and other needed stuff";
+		echo "##  Installing PHP and other needed stuff";
 		PACKAGES="epel-release httpd MariaDB-server git unzip php56u php56u-mysqlnd php56u-bcmath php56u-cli php56u-common php56u-embedded php56u-gd php56u-mbstring php56u-mcrypt php56u-ldap"
-		
+
 		for p in $PACKAGES;do
 			if isinstalled $p;then
 				echo " ##" $p "Installed"
@@ -280,26 +280,26 @@ case $distro in
 		done;
 
         echo ""
-		echo "##  Download Snipe-IT from github and put it in the web directory.";
+		echo "##  Downloading Snipe-IT from github and putting it in the web directory.";
 
 		wget -P $tmp/ https://github.com/snipe/snipe-it/archive/$file &> /dev/null
 		unzip -qo $tmp/$file -d $tmp/
 		cp -R $tmp/snipe-it-master $webdir/$name
 
 		# Make mariaDB start on boot and restart the daemon
-		echo "##  Start the mariaDB server.";
+		echo "##  Starting the mariaDB server.";
 		chkconfig mysql on
 		/sbin/service mysql start
-		
+
 		echo "##  Input your MySQL/MariaDB root password: "
 		mysql -u root < $dbsetup
 
-		echo "##  Start securing mariaDB server.";
-		/usr/bin/mysql_secure_installation 
+		echo "##  Securing mariaDB server.";
+		/usr/bin/mysql_secure_installation
 
 ##TODO make sure the apachefile doesnt exhist isnt already in there
 		#Create the new virtual host in Apache and enable rewrite
-		echo "##  Create the new virtual host in Apache.";
+		echo "##  Creating the new virtual host in Apache.";
 		apachefile=/etc/httpd/conf.d/$name.conf
 
 		echo >> $apachefile ""
@@ -318,18 +318,18 @@ case $distro in
 		echo >> $apachefile "        ErrorLog /var/log/httpd/snipeIT.error.log"
 		echo >> $apachefile "        CustomLog /var/log/access.log combined"
 		echo >> $apachefile "</VirtualHost>"
-		
+
 ##TODO make sure hosts file doesnt already contain this info
-		echo "##  Setup hosts file.";
+		echo "##  Setting up hosts file.";
 		echo >> $hosts "127.0.0.1 $hostname $fqdn"
 
 		# Make apache start on boot and restart the daemon
-		echo "##  Start the apache server.";
+		echo "##  Starting the apache server.";
 		chkconfig httpd on
 		/sbin/service httpd start
 
 		#Modify the Snipe-It files necessary for a production environment.
-		echo "##  Modify the Snipe-It files necessary for a production environment."
+		echo "##  Modifying the Snipe-It files necessary for a production environment."
 		echo "	Setting up Timezone."
 		tzone=$(grep ZONE /etc/sysconfig/clock | tr -d '"' | sed 's/ZONE=//g');
 		sed -i "s,UTC,$tzone,g" $webdir/$name/app/config/app.php
@@ -364,7 +364,7 @@ case $distro in
 		curl -sS https://getcomposer.org/installer | php
 		php composer.phar install --no-dev --prefer-source
 
-		echo "##  Install Snipe-IT"
+		echo "##  Installing Snipe-IT"
 		php artisan app:install --env=production
 
 #TODO detect if SELinux and firewall are enabled to decide what to do
@@ -388,9 +388,9 @@ case $distro in
 		rpm -Uvh $tmp/ius-release*.rpm > /dev/null
 
 		#Install PHP and other needed stuff.
-		echo "##  Install PHP and other needed stuff";
+		echo "##  Installing PHP and other needed stuff";
 		PACKAGES="epel-release httpd mariadb-server git unzip php56u php56u-mysqlnd php56u-bcmath php56u-cli php56u-common php56u-embedded php56u-gd php56u-mbstring php56u-mcrypt php56u-ldap"
-		
+
 		for p in $PACKAGES;do
 			if isinstalled $p;then
 				echo " ##" $p "Installed"
@@ -402,31 +402,31 @@ case $distro in
 		done;
 
         echo ""
-		echo "##  Download Snipe-IT from github and put it in the web directory.";
+		echo "##  Downloading Snipe-IT from github and put it in the web directory.";
 
 		wget -P $tmp/ https://github.com/snipe/snipe-it/archive/$file &> /dev/null
 		unzip -qo $tmp/$file -d $tmp/
 		cp -R $tmp/snipe-it-master $webdir/$name
 
 		# Make mariaDB start on boot and restart the daemon
-		echo "##  Start the mariaDB server.";
+		echo "##  Starting the mariaDB server.";
 		systemctl enable mariadb.service
 		systemctl start mariadb.service
 
 		echo "##  Input your MySQL/MariaDB root password "
 		mysql -u root < $dbsetup
 
-		echo "##  Start securing mariaDB server.";
+		echo "##  Securing mariaDB server.";
 		echo "";
 		echo "";
-		/usr/bin/mysql_secure_installation 
+		/usr/bin/mysql_secure_installation
 
 
 ##TODO make sure the apachefile doesnt exhist isnt already in there
 		#Create the new virtual host in Apache and enable rewrite
 		apachefile=/etc/httpd/conf.d/$name.conf
 
-		echo "##  Create the new virtual host in Apache.";
+		echo "##  Creating the new virtual host in Apache.";
 		echo >> $apachefile ""
 		echo >> $apachefile ""
 		echo >> $apachefile "LoadModule rewrite_module modules/mod_rewrite.so"
@@ -445,17 +445,17 @@ case $distro in
 		echo >> $apachefile "</VirtualHost>"
 
 ##TODO make sure this isnt already in there
-		echo "##  Setup hosts file.";
+		echo "##  Setting up hosts file.";
 		echo >> $hosts "127.0.0.1 $hostname $fqdn"
 
 
-		echo "##  Start the apache server.";
+		echo "##  Starting the apache server.";
 		# Make apache start on boot and restart the daemon
 		systemctl enable httpd.service
 		systemctl restart httpd.service
 
 		#Modify the Snipe-It files necessary for a production environment.
-		echo "##  Modify the Snipe-It files necessary for a production environment."
+		echo "##  Modifying the Snipe-IT files necessary for a production environment."
 		echo "	Setting up Timezone."
 		tzone=$(grep ZONE /etc/sysconfig/clock | tr -d '"' | sed 's/ZONE=//g');
 		sed -i "s,UTC,$tzone,g" $webdir/$name/app/config/app.php
