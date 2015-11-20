@@ -4,9 +4,7 @@ currentMenu: docker
 
 # Installing Snipe-IT on Docker
 
-<div id="generated-toc" class="generate_from_h2"></div>
-
-The easiest way, by far, is to just use the version we push to Docker Hub:
+The easiest way, by far, is to just use the version we push to [Docker Hub](https://hub.docker.com/r/snipe/snipe-it/):
 
 ```sh
 docker pull snipe/snipe-it
@@ -15,24 +13,13 @@ docker pull snipe/snipe-it
 Then you have a functioning Snipe-IT container. Skip ahead to "How to get up and
 running" to configure it and get it connected to your database.
 
-#### How to *Build* the Snipe-IT docker image ####
+## How to get up and running
 
-This is more if you're doing development on the Docker piece of Snipe-IT.
-You can build the snipe-it image using the ```Dockerfile``` at the root directory of Snipe-IT by doing this:
-
-```sh
-docker build -t snipe-it .
-```
-
-Then you can use your newly built image as ```snipe-it```
-
-### How to get up and running ###
-
-* The best way to handle all of the various settings for your various containers is to use an `env-file`.
+The best way to handle all of the various settings for your various containers is to use an `env-file`.
 See the Docker documentation for more details. It should be just a simple text file with environment
 variable names and values, separated by ```=``` signs.
 
-Your docker.env should look something like this:
+Your `docker.env` should look something like this:
 
 ```env
 # Mysql Parameters
@@ -75,19 +62,19 @@ LDAP_RESULT_EMP_NUM=emp-num
 LDAP_RESULT_EMAIL=email
 LDAP_AUTHENTICATION_FILTER_QUERY="uid="
 ```
-* First get a MySQL container running. MySQL 5.6 or earlier are easiest.
+First get a MySQL container running. MySQL 5.6 or earlier are easiest.
 
 ```sh
 docker run --name snipe-mysql --env-file=my_env_file -d -p $(docker-machine ip b2d)::3306 mysql:5.6
 ```
 
-**WARNING:** Newer MySQL containers (5.7 and later, or MariaDB) may run in strict-mode by default, and the initial
-migrations and application setup will fail in strict mode. If you want to use one of those versions, you need to disable strict
-mode first!
+**WARNING:** Newer MySQL containers (5.7 and later, or MariaDB) may run in strict-mode by default, and the initial migrations and application setup will fail in strict mode. If you want to use one of those versions, you need to disable strict mode first!
 
 That should set you up with your database to use. (You can also specify environment variables on the command-line instead of the env-file, but that can get very clunky very quickly; see ```docker run --help``` for details)
 
 * If your Email solution requires its own container, start that container or service. Make sure to expose port 587 for mail submission, and use ```--link mail:...```.
+
+### Start your Snipe-IT container
 
 Now you can start your Snipe-IT container -
 ```sh
@@ -109,7 +96,16 @@ docker exec -i -t snipeit php artisan app:install
 
 (Go ahead and answer the questions however you like. Type 'yes' when asked whether or not you want to run migrations.)
 
-### For Development ###
+## For Development
+
+You can build the snipe-it image using the ```Dockerfile``` at the root directory of Snipe-IT by doing this:
+
+```sh
+docker build -t snipe-it .
+```
+
+Then you can use your newly built image as ```snipe-it```
+
 
 When you call ```docker run``` - make sure to mount your own snipe-it directory *over* the /var/www/html directory. Something like:
 
