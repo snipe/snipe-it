@@ -19,7 +19,7 @@ class License extends Depreciable
         'license_name'   => 'alpha_space|min:0|max:100',
         'note'   => 'alpha_space',
         'notes'   => 'alpha_space|min:0',
-        'company_id' => 'required|integer',
+        'company_id' => 'integer',
     );
 
     public function company()

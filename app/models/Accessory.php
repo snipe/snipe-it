@@ -15,7 +15,7 @@ class Accessory extends Elegant
         'name'        => 'required|alpha_space|min:3|max:255',
         'qty'         => 'required|integer|min:1',
         'category_id' => 'required|integer',
-        'company_id'  => 'required|integer',
+        'company_id'  => 'integer',
     );
 
     public function company()

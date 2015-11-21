@@ -13,7 +13,7 @@ class Asset extends Depreciable
             'name'            => 'alpha_space|min:2|max:255',
             'model_id'        => 'required',
             'status_id'       => 'required',
-            'company_id'      => 'required|integer',
+            'company_id'      => 'integer',
             'warranty_months' => 'integer|min:0|max:240',
             'note'            => 'alpha_space',
             'notes'           => 'alpha_space',
