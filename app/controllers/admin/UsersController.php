@@ -258,6 +258,10 @@ class UsersController extends AdminController {
             // Get the user information
             $user = Sentry::getUserProvider()->findById($id);
 
+            if (!Company::isCurrentUserHasAccess($user)) {
+                return Redirect::route('users')->with('error', Lang::get('general.insufficient_permissions'));
+            }
+
             // Get this user groups
             $userGroups = $user->groups()->lists('group_id', 'name');
 
@@ -317,6 +321,10 @@ class UsersController extends AdminController {
         try {
             // Get the user information
             $user = Sentry::getUserProvider()->findById($id);
+
+            if (!Company::isCurrentUserHasAccess($user)) {
+                return Redirect::route('users')->with('error', Lang::get('general.insufficient_permissions'));
+            }
         } catch (UserNotFoundException $e) {
             // Prepare the error message
             $error = Lang::get('admin/users/message.user_not_found', compact('id'));
@@ -497,7 +505,10 @@ class UsersController extends AdminController {
         } else {
             $statuslabel_list = statusLabelList();
             $user_raw_array = array_keys(Input::get('edit_user'));
-            $users = User::whereIn('id', $user_raw_array)->with('groups')->get();
+
+            $users = User::whereIn('id', $user_raw_array)->with('groups');
+            $users = Company::scopeCompanyables($users)->get();
+
             return View::make('backend/users/confirm-bulk-delete', compact('users', 'statuslabel_list'));
         }
     }
@@ -521,7 +532,9 @@ class UsersController extends AdminController {
 
                 $assets = Asset::whereIn('assigned_to', $user_raw_array)->get();
                 $accessories = DB::table('accessories_users')->whereIn('assigned_to', $user_raw_array)->get();
-                $users = User::whereIn('id', $user_raw_array)->delete();
+
+                $users = User::whereIn('id', $user_raw_array);
+                $users = Company::scopeCompanyables($users)->delete();
 
                 foreach ($assets as $asset) {
 
@@ -581,14 +594,20 @@ class UsersController extends AdminController {
             // Get user information
             $user = Sentry::getUserProvider()->createModel()->withTrashed()->find($id);
 
-            // Restore the user
-            $user->restore();
+            if (!Company::isCurrentUserHasAccess($user)) {
+                return Redirect::route('users')->with('error', Lang::get('general.insufficient_permissions'));
+            }
+            else
+            {
+                // Restore the user
+                $user->restore();
 
-            // Prepare the success message
-            $success = Lang::get('admin/users/message.success.restored');
+                // Prepare the success message
+                $success = Lang::get('admin/users/message.success.restored');
 
-            // Redirect to the user management page
-            return Redirect::route('users')->with('success', $success);
+                // Redirect to the user management page
+                return Redirect::route('users')->with('success', $success);
+            }
         } catch (UserNotFoundException $e) {
             // Prepare the error message
             $error = Lang::get('admin/users/message.user_not_found', compact('id'));
@@ -611,7 +630,12 @@ class UsersController extends AdminController {
         $userlog = $user->userlog->load('assetlog', 'consumablelog', 'assetlog.model', 'licenselog', 'accessorylog', 'userlog', 'adminlog');
 
         if (isset($user->id)) {
-            return View::make('backend/users/view', compact('user', 'userlog'));
+
+            if (!Company::isCurrentUserHasAccess($user)) {
+                return Redirect::route('users')->with('error', Lang::get('general.insufficient_permissions'));
+            } else {
+                return View::make('backend/users/view', compact('user', 'userlog'));
+            }
         } else {
             // Prepare the error message
             $error = Lang::get('admin/users/message.user_not_found', compact('id'));
@@ -792,6 +816,7 @@ class UsersController extends AdminController {
                             'password' => $pass,
                             'activated' => $activated,
                             'location_id' => $row[4],
+                            'company_id' => Company::getIdForUser($row[5]),
                             'permissions' => '{"user":1}',
                             'notes' => 'Imported user'
                         );
@@ -858,6 +883,7 @@ class UsersController extends AdminController {
 
         $users = User::select(array('id','email','username','location_id','manager_id','first_name','last_name','created_at','notes','company_id'))
             ->with('assets','accessories','consumables','licenses','manager','sentryThrottle','groups','userloc','company');
+        $users = Company::scopeCompanyables($users);
 
         switch ($status) {
         case 'deleted':
@@ -962,7 +988,10 @@ class UsersController extends AdminController {
 
         if (isset($user->id)) {
 
-            if (Input::hasFile('userfile')) {
+            if (!Company::isCurrentUserHasAccess($user)) {
+                return Redirect::route('users')->with('error', Lang::get('general.insufficient_permissions'));
+            }
+            else if (Input::hasFile('userfile')) {
 
                 foreach (Input::file('userfile') as $file) {
 
@@ -1023,13 +1052,19 @@ class UsersController extends AdminController {
         // the license is valid
         if (isset($user->id)) {
 
-            $log = Actionlog::find($fileId);
-            $full_filename = $destinationPath . '/' . $log->filename;
-            if (file_exists($full_filename)) {
-                unlink($destinationPath . '/' . $log->filename);
+            if (!Company::isCurrentUserHasAccess($user)) {
+                return Redirect::route('users')->with('error', Lang::get('general.insufficient_permissions'));
             }
-            $log->delete();
-            return Redirect::back()->with('success', Lang::get('admin/users/message.deletefile.success'));
+            else
+            {
+                $log = Actionlog::find($fileId);
+                $full_filename = $destinationPath . '/' . $log->filename;
+                if (file_exists($full_filename)) {
+                    unlink($destinationPath . '/' . $log->filename);
+                }
+                $log->delete();
+                return Redirect::back()->with('success', Lang::get('admin/users/message.deletefile.success'));
+            }
         } else {
             // Prepare the error message
             $error = Lang::get('admin/users/message.does_not_exist', compact('id'));
@@ -1051,9 +1086,15 @@ class UsersController extends AdminController {
 
         // the license is valid
         if (isset($user->id)) {
-            $log = Actionlog::find($fileId);
-            $file = $log->get_src();
-            return Response::download($file);
+            if (!Company::isCurrentUserHasAccess($user)) {
+                return Redirect::route('users')->with('error', Lang::get('general.insufficient_permissions'));
+            }
+            else
+            {
+                $log = Actionlog::find($fileId);
+                $file = $log->get_src();
+                return Response::download($file);
+            }
         } else {
             // Prepare the error message
             $error = Lang::get('admin/users/message.does_not_exist', compact('id'));
