@@ -65,11 +65,21 @@ final class Company extends Elegant
 
     public static function isCurrentUserAuthorized()
     {
-        if (!static::isFullMultipleCompanySupportEnabled()) { return TRUE; }
-        else
-        {
-            $current_user = Sentry::getUser();
-            return ($current_user->company_id == NULL);
+        return (!static::isFullMultipleCompanySupportEnabled() || Sentry::getUser()->company_id == NULL);
+    }
+
+    public static function canManageUsersCompanies()
+    {
+        return (!static::isFullMultipleCompanySupportEnabled() || Sentry::getUser()->isSuperUser() ||
+                Sentry::getUser()->company_id == NULL);
+    }
+
+    public static function getIdForUser($unescaped_input)
+    {
+        if (!static::isFullMultipleCompanySupportEnabled() || Sentry::getUser()->isSuperUser()) {
+            return static::getIdFromInput($unescaped_input);
+        } else {
+            return static::getIdForCurrentUser($unescaped_input);
         }
     }
 

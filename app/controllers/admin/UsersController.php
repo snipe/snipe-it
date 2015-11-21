@@ -48,7 +48,7 @@ class UsersController extends AdminController {
         'email' => 'email|unique:users,email',
         'password' => 'required|min:6',
         'password_confirm' => 'required|min:6|same:password',
-        'company_id' => 'required|integer',
+        'company_id' => 'integer',
     );
 
     /**
@@ -124,7 +124,7 @@ class UsersController extends AdminController {
             // Get the inputs, with some exceptions
             $inputs = Input::except('csrf_token', 'password_confirm', 'groups', 'email_user');
 
-            $inputs['company_id'] = Company::getIdFromInput($inputs['company_id']);
+            $inputs['company_id'] = Company::getIdForUser(Input::get('company_id'));
 
             // @TODO: Figure out WTF I need to do this.
             if ($inputs['manager_id'] == '') {
@@ -365,7 +365,7 @@ class UsersController extends AdminController {
             $user->jobtitle = Input::get('jobtitle');
             $user->phone = Input::get('phone');
             $user->location_id = Input::get('location_id');
-            $user->company_id = Company::getIdFromInput(Input::get('company_id'));
+            $user->company_id = Company::getIdForUser(Input::get('company_id'));
             $user->manager_id = Input::get('manager_id');
             $user->notes = Input::get('notes');
 
@@ -698,6 +698,7 @@ class UsersController extends AdminController {
             $this->encodeAllPermissions($permissions);
 
             $location_list = array('' => '') + Location::lists('name', 'id');
+            $company_list = Company::getSelectList();
             $manager_list = array('' => 'Select a User') + DB::table('users')
                             ->select(DB::raw('concat(last_name,", ",first_name," (",email,")") as full_name, id'))
                             ->whereNull('deleted_at')
@@ -709,6 +710,7 @@ class UsersController extends AdminController {
             // Show the page
             return View::make('backend/users/edit', compact('groups', 'userGroups', 'permissions', 'userPermissions'))
                             ->with('location_list', $location_list)
+                            ->with('company_list', $company_list)
                             ->with('manager_list', $manager_list)
                             ->with('user', $user)
                             ->with('clone_user', $user_to_clone);
