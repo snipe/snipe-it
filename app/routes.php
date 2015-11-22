@@ -331,7 +331,6 @@
             Route::group( [ 'prefix' => 'app' ], function () {
 
                 Route::get( '/', [ 'as' => 'app', 'uses' => 'SettingsController@getIndex' ] );
-                Route::get( 'edit', [ 'as' => 'edit/settings', 'uses' => 'SettingsController@getLDAP' ] );
                 Route::get( 'edit', [ 'as' => 'edit/settings', 'uses' => 'SettingsController@getEdit' ] );
                 Route::post( 'edit', 'SettingsController@postEdit' );
             } );

@@ -182,7 +182,7 @@ class SettingsController extends AdminController
      * @param  int  $settingId
      * @return Redirect
      */
-    public function getLDAP()
+    public function postLDAP()
     {
         if (Config::get('ldap.url')=='') {
             Lang('admin/users/message.ldap_not_configured');
