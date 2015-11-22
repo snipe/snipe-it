@@ -314,7 +314,6 @@ Form::macro('currencies', function ($name = "currency", $selected = null, $class
   		'USD' => array('name'=>'USD - U.S. Dollars', 'symbol'=>'$','symbol_html'=>'$'),
   		'GBP' => array('name'=>'GBP - British Pounds', 'symbol'=>'£','symbol_html'=>'&pound;'),
   		'EUR' => array('name'=>'EUR - Euros', 'symbol'=>'€','symbol_html'=>'&euro;'),
-      'ZAR' => array('name'=>'ZAR - South African Rand', 'symbol'=>'R','symbol_html'=>'R'),
   		'AUD' => array('name'=>'AUD - Australian Dollars', 'symbol'=>'$','symbol_html'=>'$'),
   		'BRL' => array('name'=>'BRL - Brazilian Real', 'symbol'=>'R$','symbol_html'=>'R$'),
   		'CAD' => array('name'=>'CAD - Canadian Dollars', 'symbol'=>'$','symbol_html'=>'$'),
@@ -330,12 +329,15 @@ Form::macro('currencies', function ($name = "currency", $selected = null, $class
   		'NOK' => array('name'=>'NOK - Norwegian Kroner', 'symbol'=>'kr','symbol_html'=>'kr'),
   		'PHP' => array('name'=>'PHP - Philippine Pesos', 'symbol'=>'Php','symbol_html'=>'Php'),
   		'PLN' => array('name'=>'PLN - Polish zloty', 'symbol'=>'zł','symbol_html'=>''),
+  		'RUB' => array('name'=>'RUB - Russian Rubles', 'symbol'=>'₽','symbol_html'=>'&#8381;'),
   		'SGD' => array('name'=>'SGD - Singapore Dollars', 'symbol'=>'$','symbol_html'=>'$'),
   		'SEK' => array('name'=>'SEK - Swedish Kronor', 'symbol'=>'kr','symbol_html'=>'kr'),
   		'CHF' => array('name'=>'CHF - Swiss Francs', 'symbol'=>'CHF','symbol_html'=>'CHF'),
   		'TWD' => array('name'=>'TWD - Taiwan New Dollars', 'symbol'=>'$','symbol_html'=>'$'),
   		'THB' => array('name'=>'THB - Thai Baht', 'symbol'=>'฿','symbol_html'=>' &#3647;'),
   		'TRY' => array('name'=>'TRY - Turkish Liras', 'symbol'=>'TL','symbol_html'=>' &#3647;'),
+  		'UAH' => array('name'=>'UAH - Ukrainian Hryvnias', 'symbol'=>'₴','symbol_html'=>'&#8372;'),
+      		'ZAR' => array('name'=>'ZAR - South African Rand', 'symbol'=>'R','symbol_html'=>'R'),
   	);
 
     $select = '<select name="'.$name.'" class="'.$class.'">';
