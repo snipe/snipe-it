@@ -1,6 +1,6 @@
 # Contribution Guidelines
 
-**Before opening an issue to report a bug or request help, make sure you've checked the [Common Issues](http://snipeitapp.com/documentation/common-issues/) and [Getting Help](http://snipeitapp.com/documentation/getting-help/) pages.**
+**Before opening an issue to report a bug or request help, make sure you've checked the [Common Issues](http://docs.snipeitapp.com/common-issues.html) and [Getting Help](http://docs.snipeitapp.com/getting-help.html) pages.**
 
 ## Developing on Snipe-IT
 
