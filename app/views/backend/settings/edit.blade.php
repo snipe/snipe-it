@@ -279,15 +279,10 @@
             <div class="col-md-3">
               {{ Form::label('ldap_integration', Lang::get('admin/settings/general.ldap_integration')) }}
             </div>
-            <div class="col-md-3">
+            <div class="col-md-9">
               {{ Form::checkbox('ldap_enabled', '1', Input::old('ldap_enabled', $setting->ldap_enabled)) }}
               @Lang('admin/settings/general.ldap_enabled')
               {{ $errors->first('ldap_enabled', '<br><span class="alert-msg">:message</span>') }}
-            </div>
-            <div class="col-md-3">
-              {{ Form::button('ldap_import', '1', Input::old('ldap_import', $setting->ldap_import)) }}
-              @Lang('admin/settings/general.ldap_import')
-              {{ $errors->first('ldap_import', '<br><span class="alert-msg">:message</span>') }}
             </div>
           </div>
 
