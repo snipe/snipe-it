@@ -327,9 +327,9 @@
               </div>
               <div class="col-md-9">
                 @if (Config::get('app.lock_passwords')===true)
-                  {{ Form::text('ldap_pword', Input::old('ldap_pword', $setting->ldap_pword), array('class' => 'form-control', 'disabled'=>'disabled','placeholder' => 'binduserpassword')) }}
+                  {{ Form::text('ldap_pword', Input::old('ldap_pword', Crypt::decrypt($setting->ldap_pword)), array('class' => 'form-control', 'disabled'=>'disabled','placeholder' => 'binduserpassword')) }}
                 @else
-                  {{ Form::text('ldap_pword', Input::old('ldap_pword', $setting->ldap_pword), array('class' => 'form-control','placeholder' => 'binduserpassword')) }}
+                  {{ Form::text('ldap_pword', Input::old('ldap_pword', Crypt::decrypt($setting->ldap_pword)), array('class' => 'form-control','placeholder' => 'binduserpassword')) }}
                 @endif
 
                 {{ $errors->first('ldap_pword', '<br><span class="alert-msg">:message</span>') }}
