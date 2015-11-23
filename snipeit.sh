@@ -509,6 +509,8 @@ echo "  ***Open http://$fqdn to login to Snipe-IT.***"
 echo ""
 echo ""
 echo "##  Cleaning up..."
+rm -f snipeit.sh
+rm -f install.sh
 rm -rf $tmp/
 echo "##  Done!"
 sleep 1
