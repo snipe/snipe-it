@@ -144,19 +144,19 @@ case $distro in
 		echo "##  Updaing ubuntu"
 		echo ""
 		apachefile=/etc/apache2/sites-available/$name.conf
-		sudo apt-get update > /dev/null
-		sudo apt-get -y upgrade > /dev/null
+		sudo apt-get update >> /var/log/snipeit-install.log 2>&1 
+		sudo apt-get -y upgrade >> /var/log/snipeit-install.log 2>&1 
 
 		echo "##  Install packages."
-		sudo apt-get install -y git unzip php5 php5-mcrypt php5-curl php5-mysql php5-gd php5-ldap > /dev/null
+		sudo apt-get install -y git unzip php5 php5-mcrypt php5-curl php5-mysql php5-gd php5-ldap >> /var/log/snipeit-install.log 2>&1 
 		#We already established MySQL root & user PWs, so we dont need to be prompted. Let's go ahead and install Apache, PHP and MySQL.
 		echo "##  Settup LAMP."
-		sudo DEBIAN_FRONTEND=noninteractive apt-get install -y lamp-server^ > /dev/null
+		sudo DEBIAN_FRONTEND=noninteractive apt-get install -y lamp-server^ >> /var/log/snipeit-install.log 2>&1 
 
 		#  Get files and extract to web dir
 		echo ""
 		echo "##  Download snipeit and extract to web directory."
-		wget -P $tmp/ https://github.com/snipe/snipe-it/archive/$file &> /dev/null
+		wget -P $tmp/ https://github.com/snipe/snipe-it/archive/$file >> /var/log/snipeit-install.log 2>&1 
 		unzip -qo $tmp/$file -d $tmp/
 		cp -R $tmp/snipe-it-master $webdir/$name
 
@@ -164,9 +164,9 @@ case $distro in
 
 		#Enable mcrypt and rewrite
 		echo "##  Enabled mcrypt and rewrite"
-		sudo php5enmod mcrypt > /dev/null
-		sudo a2enmod rewrite > /dev/null
-		sudo ls -al /etc/apache2/mods-enabled/rewrite.load > /dev/null
+		sudo php5enmod mcrypt >> /var/log/snipeit-install.log 2>&1 
+		sudo a2enmod rewrite >> /var/log/snipeit-install.log 2>&1 
+		sudo ls -al /etc/apache2/mods-enabled/rewrite.load >> /var/log/snipeit-install.log 2>&1 
 
 		#Create a new virtual host for Apache.
 		echo "##  Create Virtual host for apache."
@@ -186,7 +186,7 @@ case $distro in
 
 		echo "##  Setup hosts file."
 		echo >> $hosts "127.0.0.1 $hostname $fqdn"
-		a2ensite $name.conf > /dev/null
+		a2ensite $name.conf >> /var/log/snipeit-install.log 2>&1 
 
 		#Modify the Snipe-It files necessary for a production environment.
 		echo "##  Modify the Snipe-It files necessary for a production environment."
@@ -261,9 +261,9 @@ case $distro in
 		echo >> $mariadbRepo "gpgcheck=1"
 		echo >> $mariadbRepo "enable=1"
 
-		yum -y install wget > /dev/null
-		wget -P $tmp/ https://centos6.iuscommunity.org/ius-release.rpm &> /dev/null
-		rpm -Uvh $tmp/ius-release*.rpm > /dev/null
+		yum -y install wget >> /var/log/snipeit-install.log 2>&1 
+		wget -P $tmp/ https://centos6.iuscommunity.org/ius-release.rpm >> /var/log/snipeit-install.log 2>&1 
+		rpm -Uvh $tmp/ius-release*.rpm >> /var/log/snipeit-install.log 2>&1 
 
 		#Install PHP and other needed stuff.
 		echo "##  Install PHP and other needed stuff";
@@ -274,7 +274,7 @@ case $distro in
 				echo " ##" $p "Installed"
 			else
 				echo -n " ##" $p "Installing... "
-				yum -y install $p > /dev/null
+				yum -y install $p >> /var/log/snipeit-install.log 2>&1 
 				echo "";
 			fi
 		done;
@@ -282,7 +282,7 @@ case $distro in
         echo ""
 		echo "##  Download Snipe-IT from github and put it in the web directory.";
 
-		wget -P $tmp/ https://github.com/snipe/snipe-it/archive/$file &> /dev/null
+		wget -P $tmp/ https://github.com/snipe/snipe-it/archive/$file >> /var/log/snipeit-install.log 2>&1 
 		unzip -qo $tmp/$file -d $tmp/
 		cp -R $tmp/snipe-it-master $webdir/$name
 
@@ -383,9 +383,9 @@ case $distro in
 		#Allow us to get the mysql engine
 		echo ""
 		echo "##  Add IUS and mariaDB repos.";
-		yum -y install wget > /dev/null
-		wget -P $tmp/ https://centos7.iuscommunity.org/ius-release.rpm &> /dev/null
-		rpm -Uvh $tmp/ius-release*.rpm > /dev/null
+		yum -y install wget >> /var/log/snipeit-install.log 2>&1 
+		wget -P $tmp/ https://centos7.iuscommunity.org/ius-release.rpm >> /var/log/snipeit-install.log 2>&1 
+		rpm -Uvh $tmp/ius-release*.rpm >> /var/log/snipeit-install.log 2>&1 
 
 		#Install PHP and other needed stuff.
 		echo "##  Install PHP and other needed stuff";
@@ -396,7 +396,7 @@ case $distro in
 				echo " ##" $p "Installed"
 			else
 				echo -n " ##" $p "Installing... "
-				yum -y install $p > /dev/null
+				yum -y install $p >> /var/log/snipeit-install.log 2>&1 
 			echo "";
 			fi
 		done;
@@ -404,7 +404,7 @@ case $distro in
         echo ""
 		echo "##  Download Snipe-IT from github and put it in the web directory.";
 
-		wget -P $tmp/ https://github.com/snipe/snipe-it/archive/$file &> /dev/null
+		wget -P $tmp/ https://github.com/snipe/snipe-it/archive/$file >> /var/log/snipeit-install.log 2>&1 
 		unzip -qo $tmp/$file -d $tmp/
 		cp -R $tmp/snipe-it-master $webdir/$name
 
