@@ -458,7 +458,7 @@ case $distro in
 		#Modify the Snipe-It files necessary for a production environment.
 		echo "##  Modify the Snipe-It files necessary for a production environment."
 		echo "	Setting up Timezone."
-		tzone=$(grep ZONE /etc/sysconfig/clock | tr -d '"' | sed 's/ZONE=//g');
+		tzone=$(timedatectl | gawk -F'[: ]+' ' $2 ~ /Timezone/ {print $3}');
 		sed -i "s,UTC,$tzone,g" $webdir/$name/app/config/app.php
 
 		echo "	Setting up bootstrap file."
