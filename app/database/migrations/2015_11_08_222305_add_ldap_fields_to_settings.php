@@ -7,7 +7,7 @@ class AddLdapFieldsToSettings extends Migration {
 
 	/**
 	 * Run the migrations.
-	 * 
+	 *
 	 * @return void
 	 */
 	public function up()
@@ -17,7 +17,7 @@ class AddLdapFieldsToSettings extends Migration {
 			$table->string('ldap_enabled')->nullable()->default(NULL);
 			$table->string('ldap_server')->nullable()->default(NULL);
 			$table->string('ldap_uname')->nullable()->default(NULL);
-			$table->longText('ldap_pword')->nullable()->default('NULL');
+			$table->longText('ldap_pword')->nullable()->default(NULL);
 			$table->string('ldap_basedn')->nullable()->default(NULL);
 			$table->string('ldap_filter')->nullable()->default('cn=*');
 			$table->string('ldap_username_field')->nullable()->default('samaccountname');
