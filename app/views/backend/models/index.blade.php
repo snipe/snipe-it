@@ -65,6 +65,8 @@
         sortable: true,
         mobileResponsive: true,
         showExport: true,
+        cookie: true,
+        cookieExpire: '2y',
         showColumns: true,
         maintainSelected: true,
         paginationFirstText: "@lang('general.first')",
