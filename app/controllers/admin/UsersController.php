@@ -952,6 +952,7 @@ class UsersController extends AdminController {
             $actions .= '</nobr>';
 
             $rows[] = array(
+                'id'         => $user->id,
                 'checkbox'      =>'<div class="text-center hidden-xs hidden-sm"><input type="checkbox" name="edit_user['.$user->id.']" class="one_required"></div>',
                 'name'          => '<a title="'.$user->fullName().'" href="../admin/users/'.$user->id.'/view">'.$user->fullName().'</a>',
                 'email'         => ($user->email!='') ?
@@ -1179,7 +1180,7 @@ class UsersController extends AdminController {
         $filter = Setting::getSettings()->ldap_filter;
 
         $ldap_result_username = Setting::getSettings()->ldap_username_field;
-        $ldap_result_last_name = Setting::getSettings()->ldap_lname_field;        
+        $ldap_result_last_name = Setting::getSettings()->ldap_lname_field;
         $ldap_result_first_name = Setting::getSettings()->ldap_fname_field;
 
         $ldap_result_active_flag = Setting::getSettings()->ldap_active_flag_field;
