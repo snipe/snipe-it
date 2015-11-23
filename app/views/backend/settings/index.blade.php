@@ -119,16 +119,24 @@
                                         @if ($setting->slack_endpoint!='')
                                             <td>@lang('general.yes')
 
-	                                            @if ($setting->slack_channel!='')
-	                                            	{{{ $setting->slack_channel }}}
-	                                            @endif
+                                                @if ($setting->slack_channel!='')
+                                                    {{{ $setting->slack_channel }}}
+                                                @endif
 
                                             </td>
                                         @else
                                             <td>@lang('general.no')</td>
                                         @endif
                                     </tr>
+                                    <tr>
+                                        <td>@lang('admin/settings/general.ldap_integration')</td>
 
+                                        @if ($setting->ldap_enabled == 1)
+                                            <td>@lang('general.yes')</td>
+                                        @else
+                                            <td>@lang('general.no')</td>
+                                        @endif
+                                    </tr>
 
 
 

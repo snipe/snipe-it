@@ -14,6 +14,8 @@ use Image;
 use Config;
 use Response;
 use Artisan;
+use Crypt;
+
 
 class SettingsController extends AdminController
 {
@@ -78,8 +80,20 @@ class SettingsController extends AdminController
             "default_currency"   => 'required',
 	        "slack_channel"   => 'regex:/(?<!\w)#\w+/',
 	        "slack_botname"   => 'alpha_dash',
+            "ldap_server"   => 'sometimes|required_if:ldap_enabled,1|url',
+            "ldap_uname"     => 'sometimes|required_if:ldap_enabled,1',
+            "ldap_pword"     => 'sometimes|required_if:ldap_enabled,1',
+            "ldap_basedn"     => 'sometimes|required_if:ldap_enabled,1',
+            "ldap_filter"     => 'sometimes|required_if:ldap_enabled,1',
+            "ldap_username_field"     => 'sometimes|required_if:ldap_enabled,1',
+            "ldap_lname_field"     => 'sometimes|required_if:ldap_enabled,1',
+            "ldap_auth_filter_query"     => 'sometimes|required_if:ldap_enabled,1',
+            "ldap_version"     => 'sometimes|required_if:ldap_enabled,1',
+            "ldap_active_flag"     => '',
+            "ldap_emp_num"     => '',
+            "ldap_email"     => '',
 	        );
-
+        
         if (Config::get('app.lock_passwords')==false) {
 	        $rules['site_name'] = 'required|min:3';
 
@@ -135,6 +149,20 @@ class SettingsController extends AdminController
             $setting->slack_endpoint = e(Input::get('slack_endpoint'));
             $setting->slack_channel = e(Input::get('slack_channel'));
             $setting->slack_botname = e(Input::get('slack_botname'));
+            $setting->ldap_enabled = Input::get('ldap_enabled', '0');
+            $setting->ldap_server = Input::get('ldap_server');
+            $setting->ldap_uname = Input::get('ldap_uname');
+            $setting->ldap_pword = Crypt::encrypt(Input::get('ldap_pword'));
+            $setting->ldap_basedn = Input::get('ldap_basedn');
+            $setting->ldap_filter = Input::get('ldap_filter');
+            $setting->ldap_username_field = Input::get('ldap_username_field');
+            $setting->ldap_lname_field = Input::get('ldap_lname_field');
+            $setting->ldap_fname_field = Input::get('ldap_fname_field');
+            $setting->ldap_auth_filter_query = Input::get('ldap_auth_filter_query');
+            $setting->ldap_version = Input::get('ldap_version');
+            $setting->ldap_active_flag = Input::get('ldap_active_flag');
+            $setting->ldap_emp_num = Input::get('ldap_emp_num');
+            $setting->ldap_email = Input::get('ldap_email');
 
 
             // Was the asset updated?

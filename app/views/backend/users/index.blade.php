@@ -11,7 +11,7 @@
 
 <div class="row header">
     <div class="col-md-12">
-        @if (Config::get('ldap.url')!='')
+        @if (Setting::getSettings()->ldap_enabled == 1)
             <a href="{{ route('ldap/user') }}" class="btn btn-default pull-right"><span class="fa fa-upload"></span> LDAP</a>
         @endif
 	<a href="{{ route('import/user') }}" class="btn btn-default pull-right" style="margin-right: 5px;"><span class="fa fa-upload"></span> @lang('general.import')</a>

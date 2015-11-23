@@ -67,7 +67,7 @@
     'asset_maintenances'       => 'Asset Maintenances',
     'item'  				=> 'Item',
     'last'					=> 'Last',
-    'last_name'				=> 'Last Name',
+    'last_name'             => 'Last Name',
     'license'				=> 'License',
     'license_report'        => 'License Report',
     'licenses_available'	=> 'licenses available',

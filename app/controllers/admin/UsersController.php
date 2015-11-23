@@ -31,6 +31,8 @@ use Mail;
 use Accessory;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Illuminate\Support\Facades\Log;
+use Crypt;
+
 
 class UsersController extends AdminController {
 
@@ -1115,20 +1117,20 @@ class UsersController extends AdminController {
             return Redirect::back()->withInput()->withErrors($formValidator);
         }
 
-        $ldap_version = Config::get('ldap.version');
-        $url = Config::get('ldap.url');
-        $username = Config::get('ldap.username');
-        $password = Config::get('ldap.password');
-        $base_dn = Config::get('ldap.basedn');
-        $filter = Config::get('ldap.filter');
+        $ldap_version = Setting::getSettings()->ldap_version;
+        $url = Setting::getSettings()->ldap_server;
+        $username = Setting::getSettings()->ldap_uname;
+        $password = Crypt::decrypt(Setting::getSettings()->ldap_pword);
+        $base_dn = Setting::getSettings()->ldap_basedn;
+        $filter = Setting::getSettings()->ldap_filter;
 
-        $ldap_result_username = Config::get('ldap.result.username');
-        $ldap_result_emp_num = Config::get('ldap.result.emp.num');
-        $ldap_result_last_name = Config::get('ldap.result.last.name');
-        $ldap_result_first_name = Config::get('ldap.result.first.name');
-        $ldap_result_email = Config::get('ldap.result.email');
-        $ldap_result_active_flag = Config::get('ldap.result.active.flag');
+        $ldap_result_username = Setting::getSettings()->ldap_username_field;
+        $ldap_result_last_name = Setting::getSettings()->ldap_lname_field;        
+        $ldap_result_first_name = Setting::getSettings()->ldap_fname_field;
 
+        $ldap_result_active_flag = Setting::getSettings()->ldap_active_flag_field;
+        $ldap_result_emp_num = Setting::getSettings()->ldap_emp_num_field;
+        $ldap_result_email = Setting::getSettings()->ldap_email_field;
 
         // Connect to LDAP server
         $ldapconn = @ldap_connect($url);

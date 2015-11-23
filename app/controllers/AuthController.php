@@ -31,12 +31,12 @@ class AuthController extends BaseController
      */
     function ldap($username, $password, $returnUser = false) {
 
-        $ldaphost    = Config::get('ldap.url');
-        $ldaprdn     = Config::get('ldap.username');
-        $ldappass    = Config::get('ldap.password');
-        $baseDn      = Config::get('ldap.basedn');
-        $filterQuery = Config::get('ldap.authentication.filter.query') . $username;
-        $ldapversion = Config::get('ldap.version');
+        $ldaphost    = Setting::getSettings()->ldap_server;
+        $ldaprdn     = Setting::getSettings()->ldap_uname;
+        $ldappass    = Crypt::decrypt(Setting::getSettings()->ldap_pword);
+        $baseDn      = Setting::getSettings()->ldap_basedn;
+        $filterQuery = Setting::getSettings()->ldap_auth_filter_query . $username;
+        $ldapversion = Setting::getSettings()->ldap_version;
 
 	    // Connecting to LDAP
         $connection = ldap_connect($ldaphost) or die("Could not connect to {$ldaphost}");
@@ -74,11 +74,11 @@ class AuthController extends BaseController
      */
     function createUserFromLdap($ldapatttibutes){
         //Get LDAP attribute config
-        $ldap_result_username = Config::get('ldap.result.username');
-        $ldap_result_emp_num = Config::get('ldap.result.emp.num');
-        $ldap_result_last_name = Config::get('ldap.result.last.name');
-        $ldap_result_first_name = Config::get('ldap.result.first.name');
-        $ldap_result_email = Config::get('ldap.result.email');
+        $ldap_result_username = Setting::getSettings()->ldap_username_field;
+        $ldap_result_emp_num = Setting::getSettings()->ldap_emp_num;
+        $ldap_result_last_name = Setting::getSettings()->ldap_lname_field;
+        $ldap_result_first_name = Setting::getSettings()->ldap_fname_field;
+        $ldap_result_email = Setting::getSettings()->ldap_email;
 
         //Get LDAP user data
         $item = array();

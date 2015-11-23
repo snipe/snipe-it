@@ -32,7 +32,7 @@ Create a User ::
 
 <script type="text/javascript" src="{{ asset('/assets/js/pGenerator.jquery.js') }}"></script>
 
-@if (Config::get('ldap.url')=='')
+@if (Setting::getSettings()->ldap_enabled == 0)
     @Lang('admin/users/message.ldap_not_configured')
 @else
 
