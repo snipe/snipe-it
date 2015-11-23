@@ -251,7 +251,7 @@ case $distro in
 
 		#Allow us to get the mysql engine
 		echo ""
-		echo "##  Add IUS and mariaDB repos.";
+		echo "##  Add epel, IUS and mariaDB repos.";
 		mariadbRepo=/etc/yum.repos.d/MariaDB.repo
 		touch $mariadbRepo
 		echo >> $mariadbRepo "[mariadb]"
@@ -261,13 +261,13 @@ case $distro in
 		echo >> $mariadbRepo "gpgcheck=1"
 		echo >> $mariadbRepo "enable=1"
 
-		yum -y install wget > /dev/null
+		yum -y install wget epel-release > /dev/null
 		wget -P $tmp/ https://centos6.iuscommunity.org/ius-release.rpm &> /dev/null
 		rpm -Uvh $tmp/ius-release*.rpm > /dev/null
 
 		#Install PHP and other needed stuff.
 		echo "##  Install PHP and other needed stuff";
-		PACKAGES="epel-release httpd MariaDB-server git unzip php56u php56u-mysqlnd php56u-bcmath php56u-cli php56u-common php56u-embedded php56u-gd php56u-mbstring php56u-mcrypt php56u-ldap"
+		PACKAGES=" httpd MariaDB-server git unzip php56u php56u-mysqlnd php56u-bcmath php56u-cli php56u-common php56u-embedded php56u-gd php56u-mbstring php56u-mcrypt php56u-ldap"
 		
 		for p in $PACKAGES;do
 			if isinstalled $p;then
@@ -382,14 +382,14 @@ case $distro in
 
 		#Allow us to get the mysql engine
 		echo ""
-		echo "##  Add IUS and mariaDB repos.";
-		yum -y install wget > /dev/null
+		echo "##  Add epel, IUS and mariaDB repos.";
+		yum -y install wget epel-release > /dev/null
 		wget -P $tmp/ https://centos7.iuscommunity.org/ius-release.rpm &> /dev/null
 		rpm -Uvh $tmp/ius-release*.rpm > /dev/null
 
 		#Install PHP and other needed stuff.
 		echo "##  Install PHP and other needed stuff";
-		PACKAGES="epel-release httpd mariadb-server git unzip php56u php56u-mysqlnd php56u-bcmath php56u-cli php56u-common php56u-embedded php56u-gd php56u-mbstring php56u-mcrypt php56u-ldap"
+		PACKAGES="httpd mariadb-server git unzip php56u php56u-mysqlnd php56u-bcmath php56u-cli php56u-common php56u-embedded php56u-gd php56u-mbstring php56u-mcrypt php56u-ldap"
 		
 		for p in $PACKAGES;do
 			if isinstalled $p;then
