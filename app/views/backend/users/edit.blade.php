@@ -50,19 +50,6 @@
             <div class="col-md-12 column">
             <br><br>
 
-            @if (Company::canManageUsersCompanies())
-                <!-- Company -->
-                <div class="form-group {{ $errors->has('company_id') ? 'has-error' : '' }}">
-                    <div class="col-md-3 control-label">
-                        {{ Form::label('company_id', Lang::get('general.company')) }}
-                    </div>
-                    <div class="col-md-7">
-                        {{ Form::select('company_id', $company_list , Input::old('company_id', $user->company_id), array('class'=>'select2', 'style'=>'width:350px')) }}
-                        {{ $errors->first('company_id', '<br><span class="alert-msg">:message</span>') }}
-                    </div>
-                </div>
-            @endif
-
             <!-- First Name -->
             <div class="form-group {{ $errors->has('first_name') ? 'has-error' : '' }}">
                 <label class="col-md-3 control-label" for="first_name">@lang('general.first_name')
@@ -144,6 +131,21 @@
                     {{ $errors->first('email', '<br><span class="alert-msg">:message</span>') }}
                 </div>
             </div>
+
+          <!-- Company --> 
+          @if (Company::canManageUsersCompanies())
+              <!-- Company -->
+              <div class="form-group {{ $errors->has('company_id') ? 'has-error' : '' }}">
+                  <div class="col-md-3 control-label">
+                      {{ Form::label('company_id', Lang::get('general.company')) }}
+                  </div>
+                  <div class="col-md-7">
+                      {{ Form::select('company_id', $company_list , Input::old('company_id', $user->company_id), array('class'=>'select2', 'style'=>'width:350px')) }}
+                      {{ $errors->first('company_id', '<br><span class="alert-msg">:message</span>') }}
+                  </div>
+              </div>
+            @endif
+
 
 
         	<!-- Employee Number -->
