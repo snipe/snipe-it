@@ -163,7 +163,7 @@ case $distro in
 		##  TODO make sure apache is set to start on boot and go ahead and start it
 
 		#Enable mcrypt and rewrite
-		echo "##  Enabled mcrypt and rewrite"
+		echo "##  Enabling mcrypt and rewrite"
 		sudo php5enmod mcrypt >> /var/log/snipeit-install.log 2>&1 
 		sudo a2enmod rewrite >> /var/log/snipeit-install.log 2>&1 
 		sudo ls -al /etc/apache2/mods-enabled/rewrite.load >> /var/log/snipeit-install.log 2>&1 
