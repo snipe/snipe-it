@@ -43,9 +43,20 @@ class SettingsController extends AdminController
      */
     public function getEdit()
     {
-        $settings = Setting::orderBy('created_at', 'DESC')->paginate(10);
+        $setting = Setting::first();
         $is_gd_installed = extension_loaded('gd');
-        return View::make('backend/settings/edit', compact('settings', 'is_gd_installed'));
+
+        // echo '<pre>';
+        // print_r($settings);
+        // echo '</pre>';
+        // exit;
+
+        if ($setting->ldap_pword!='') {
+          $show_ldap_pword = Crypt::decrypt($setting->ldap_pword);
+        } else {
+          $show_ldap_pword = '';
+        }
+        return View::make('backend/settings/edit', compact('setting'))->with('is_gd_installed',$is_gd_installed)->with('show_ldap_pword',$show_ldap_pword);
     }
 
 
@@ -89,15 +100,11 @@ class SettingsController extends AdminController
             "ldap_lname_field"     => 'sometimes|required_if:ldap_enabled,1',
             "ldap_auth_filter_query"     => 'sometimes|required_if:ldap_enabled,1',
             "ldap_version"     => 'sometimes|required_if:ldap_enabled,1',
-            "ldap_active_flag"     => '',
-            "ldap_emp_num"     => '',
-            "ldap_email"     => '',
 	        );
-        
+
         if (Config::get('app.lock_passwords')==false) {
 	        $rules['site_name'] = 'required|min:3';
-
-	    }
+	      }
 
         // Create a new validator instance from our validation rules
         $validator = Validator::make(Input::all(), $rules);

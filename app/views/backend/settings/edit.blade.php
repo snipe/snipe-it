@@ -23,8 +23,6 @@
           <!-- CSRF Token -->
           {{ Form::hidden('_token', csrf_token()) }}
 
-          @foreach ($settings as $setting)
-
 
 
           <h4>@lang('admin/settings/general.general_settings')</h4>
@@ -148,7 +146,7 @@
           </div>
 
           <hr><h4>@lang('admin/settings/general.asset_ids') (@lang('admin/settings/general.optional'))</h4>
-          
+
           <!-- auto ids -->
           <div class="form-group">
             <div class="col-md-3">
@@ -173,7 +171,7 @@
               {{ Form::text('auto_increment_prefix', Input::old('auto_increment_prefix', $setting->auto_increment_prefix), array('class' => 'form-control', 'disabled'=>'disabled', 'style'=>'width: 100px;')) }}
               @endif
             </div>
-          </div>                                
+          </div>
 
           <hr><h4>@lang('admin/settings/general.barcode_settings') (@lang('admin/settings/general.optional'))</h4>
 
@@ -224,7 +222,7 @@
                 @lang('admin/settings/general.php_gd_info')
               </span>
             @endif
-          
+
           <hr><h4>@lang('admin/settings/general.eula_settings') (@lang('admin/settings/general.optional'))</h4>
             <!-- EULA text -->
             <div class="form-group {{ $errors->has('default_eula_text') ? 'error' : '' }}">
@@ -273,7 +271,7 @@
             </div>
 
           <hr><h4>@lang('admin/settings/general.ldap_settings') (@lang('admin/settings/general.optional'))</h4>
-          
+
           <!-- Enable LDAP -->
           <div class="form-group {{ $errors->has('ldap_integration') ? 'error' : '' }}">
             <div class="col-md-3">
@@ -326,10 +324,10 @@
                 {{ Form::label('ldap_pword', Lang::get('admin/settings/general.ldap_pword')) }}
               </div>
               <div class="col-md-9">
-                @if (Config::get('app.lock_passwords')===true)
-                  {{ Form::text('ldap_pword', Input::old('ldap_pword', Crypt::decrypt($setting->ldap_pword)), array('class' => 'form-control', 'disabled'=>'disabled','placeholder' => 'binduserpassword')) }}
+                @if (Config::get('app.lock_passwords'))
+                  {{ Form::text('ldap_pword', Input::old('ldap_pword'), array('class' => 'form-control', 'disabled'=>'disabled','placeholder' => 'binduserpassword')) }}
                 @else
-                  {{ Form::text('ldap_pword', Input::old('ldap_pword', Crypt::decrypt($setting->ldap_pword)), array('class' => 'form-control','placeholder' => 'binduserpassword')) }}
+                  {{ Form::text('ldap_pword', Input::old('ldap_pword', $show_ldap_pword), array('class' => 'form-control','placeholder' => 'binduserpassword')) }}
                 @endif
 
                 {{ $errors->first('ldap_pword', '<br><span class="alert-msg">:message</span>') }}
@@ -500,13 +498,12 @@
               </div>
           </div>
 
-          @endforeach
 
           <!-- Form actions -->
           <div class="form-group">
               <div class="controls col-md-offset-3">
                   <a class="btn btn-link" href="{{ URL::previous() }}">@lang('button.cancel')</a>
-                  <button type="submit" class="btn-flat success"><i class="fa fa-check icon-white"></i> @lang('general.save')</button>
+                  <button type="submit" class="btn btn-success"><i class="fa fa-check icon-white"></i> @lang('general.save')</button>
               </div>
           </div>
 
