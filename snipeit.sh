@@ -141,7 +141,7 @@ case $distro in
 
 		#Update/upgrade Debian/Ubuntu repositories, get the latest version of git.
 		echo ""
-		echo "##  Updating ubuntu"
+		echo "##  Updating ubuntu in the background. Please be patient."
 		echo ""
 		apachefile=/etc/apache2/sites-available/$name.conf
 		sudo apt-get update >> /var/log/snipeit-install.log 2>&1 
