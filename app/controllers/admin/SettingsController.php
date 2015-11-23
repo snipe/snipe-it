@@ -171,6 +171,10 @@ class SettingsController extends AdminController
             $setting->ldap_emp_num = Input::get('ldap_emp_num');
             $setting->ldap_email = Input::get('ldap_email');
 
+            if (Sentry::getUser()->isSuperUser()) {
+                $setting->full_multiple_companies_support = e(Input::get('full_multiple_companies_support', '0'));
+            }
+
 
             // Was the asset updated?
             if($setting->save()) {

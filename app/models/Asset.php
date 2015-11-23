@@ -3,6 +3,8 @@
 class Asset extends Depreciable
 {
 	use SoftDeletingTrait;
+	use CompanyableTrait;
+
     protected $dates = ['deleted_at'];
 
         protected $table = 'assets';
@@ -11,6 +13,7 @@ class Asset extends Depreciable
             'name'            => 'alpha_space|min:2|max:255',
             'model_id'        => 'required',
             'status_id'       => 'required',
+            'company_id'      => 'integer',
             'warranty_months' => 'integer|min:0|max:240',
             'note'            => 'alpha_space',
             'notes'           => 'alpha_space',
@@ -21,6 +24,11 @@ class Asset extends Depreciable
             'asset_tag'       => 'required|alpha_space|min:3|max:255|unique:assets,asset_tag,{id}',
             'status'          => 'integer'
         ];
+
+        public function company()
+        {
+            return $this->belongsTo('Company', 'company_id');
+        }
 
 
     /**
@@ -252,8 +260,7 @@ return false;
   public static function assetcount()
   {
 
-      return DB::table( 'assets' )
-               ->where( 'physical', '=', '1' )
+      return Asset::where( 'physical', '=', '1' )
                ->whereNull( 'deleted_at', 'and' )
                ->count();
   }

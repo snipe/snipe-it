@@ -4,6 +4,7 @@ use AdminController;
 use View;
 use Asset;
 use Actionlog;
+use Company;
 
 class DashboardController extends AdminController
 {
@@ -16,7 +17,10 @@ class DashboardController extends AdminController
     {
         // Show the page
 
-        $recent_activity = Actionlog::orderBy('created_at','DESC')->with('accessorylog','consumablelog','licenselog','assetlog','adminlog','userlog')->take(7)->get();
+        $recent_activity = Actionlog::orderBy('created_at','DESC')
+            ->with('accessorylog','consumablelog','licenselog','assetlog','adminlog','userlog')
+            ->take(7)
+            ->get();
 
 
         $asset_stats['total'] = Asset::Hardware()->count();

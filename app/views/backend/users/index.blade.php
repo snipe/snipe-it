@@ -50,6 +50,7 @@
            <thead>
                <tr>
                    <th data-class="hidden-xs hidden-sm" data-switchable="false" data-searchable="false" data-sortable="false" data-field="checkbox"><div class="text-center"><input type="checkbox" id="checkAll" style="padding-left: 0px;" style="hidden-xs hidden-sm"></div></th>
+                   <th data-switchable="true" data-sortable="false" data-field="companyName">@lang('admin/companies/table.title')</th>
                    <th data-sortable="true" data-field="name">{{ Lang::get('admin/users/table.name') }}</th>
                    <th data-sortable="true" data-field="email">
                        <span class="hidden-md hidden-lg">Email</span>

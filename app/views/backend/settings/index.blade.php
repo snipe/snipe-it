@@ -30,6 +30,19 @@
                                         <td>@lang('admin/settings/general.site_name')</td>
                                         <td>{{{ $setting->site_name }}} </td>
                                     </tr>
+                                    @if (Sentry::getUser()->isSuperUser())
+                                        <tr>
+                                            <td>
+                                                @lang('admin/settings/general.full_multiple_companies_support_text')
+                                            </td>
+
+                                            @if ($setting->full_multiple_companies_support == 1)
+                                                <td>@lang('general.yes')</td>
+                                            @else
+                                                <td>@lang('general.no')</td>
+                                            @endif
+                                        </tr>
+                                    @endif
                                     <tr>
                                         <td>@lang('admin/settings/general.default_currency')</td>
                                         <td>{{{ $setting->default_currency }}} </td>

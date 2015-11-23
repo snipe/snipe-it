@@ -12,6 +12,11 @@ class User extends SentryUserModel
     use SoftDeletingTrait;
 	protected $dates = ['deleted_at'];
 
+    public function company()
+    {
+        return $this->belongsTo('Company', 'company_id');
+    }
+
 
     /**
      * Returns the user full name, it simply concatenates

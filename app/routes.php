@@ -321,7 +321,7 @@
             Route::get( '{consumableID}/checkout',
                 [ 'as' => 'checkout/consumable', 'uses' => 'ConsumablesController@getCheckout' ] );
             Route::post( '{consumableID}/checkout', 'ConsumablesController@postCheckout' );
-            Route::get( '/', [ 'as' => 'accessories', 'uses' => 'ConsumablesController@getIndex' ] );
+            Route::get( '/', [ 'as' => 'consumables', 'uses' => 'ConsumablesController@getIndex' ] );
         } );
 
         # Admin Settings Routes (for categories, maufactureres, etc)
@@ -336,7 +336,7 @@
             } );
 
             # Settings
-            Route::group( [ 'prefix' => 'backups' ], function () {
+            Route::group( [ 'prefix' => 'backups', 'before' => 'backup-auth' ], function () {
 
 
                 Route::get( 'download/{filename}', [
@@ -355,6 +355,18 @@
                 ]);
                 Route::get( '/', [ 'as' => 'settings/backups', 'uses' => 'SettingsController@getBackups' ] );
             } );
+
+            # Companies
+            Route::group([ 'prefix' => 'companies' ], function () {
+
+                Route::get('{companyId}/edit', ['as' => 'update/company', 'uses' => 'CompaniesController@getEdit']);
+                Route::get('create', ['as' => 'create/company', 'uses' => 'CompaniesController@getCreate']);
+                Route::get('/', ['as' => 'companies', 'uses' => 'CompaniesController@getIndex']);
+
+                Route::post('{companyId}/delete', ['as' => 'delete/company', 'uses' => 'CompaniesController@postDelete']);
+                Route::post('{companyId}/edit', 'CompaniesController@postEdit');
+                Route::post('create', 'CompaniesController@postCreate');
+            });
 
             # Manufacturers
             Route::group( [ 'prefix' => 'manufacturers' ], function () {

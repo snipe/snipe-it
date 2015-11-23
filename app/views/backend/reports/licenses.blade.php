@@ -24,7 +24,8 @@
       data-click-to-select="true"
       data-cookie-id-table="licensesReportTable">
         <thead>
-            <tr role="row">
+        <tr role="row">
+            <th class="col-sm-1">@lang('admin/companies/table.title')</th>
             <th class="col-sm-1">@lang('admin/licenses/table.title')</th>
             <th class="col-sm-1">@lang('admin/licenses/table.serial')</th>
             <th class="col-sm-1">@lang('admin/licenses/form.seats')</th>
@@ -38,6 +39,7 @@
 
         @foreach ($licenses as $license)
         <tr>
+            <td>{{{ is_null($license->company) ? '' : $license->company->name }}}</td>
             <td>{{{ $license->name }}}</td>
             <td>{{{ mb_strimwidth($license->serial, 0, 50, "...") }}}</td>
             <td>{{ $license->seats }}</td>

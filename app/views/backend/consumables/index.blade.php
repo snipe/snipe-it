@@ -29,6 +29,7 @@
                 <thead>
                     <tr>
                         <th data-sortable="true" data-field="id" data-visible="false">@lang('general.id')</th>
+                        <th data-switchable="true" data-searchable="false" data-sortable="false" data-field="companyName">@lang('admin/companies/table.title')</th>
                         <th data-sortable="true" data-field="name">{{Lang::get('admin/consumables/table.title')}}</th>
                         <th data-switchable="false" data-searchable="false" data-sortable="false" data-field="qty">{{Lang::get('admin/consumables/general.total')}}</th>
                         <th data-switchable="false" data-searchable="false" data-sortable="false" data-field="numRemaining">{{Lang::get('admin/consumables/general.remaining')}}</th>

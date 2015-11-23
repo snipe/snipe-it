@@ -45,6 +45,8 @@ return array(
     'load_remote_text'          => 'Remote Scripts',
     'load_remote_help_text'		=> 'This Snipe-IT install can load scripts from the outside world.',
     'logo'                    	=> 'Logo',
+    'full_multiple_companies_support_help_text' => 'Restricting users (including admins) assigned to companies to their company\'s assets.',
+    'full_multiple_companies_support_text' => 'Full Multiple Companies Support',
     'optional'					=> 'optional',
     'per_page'                  => 'Results Per Page',
     'php'                       => 'PHP Version',
@@ -66,5 +68,5 @@ return array(
     'value'                     => 'Value',
     'brand'                     => 'Branding',
     'about_settings_title'      => 'About Settings',
-    'about_settings_text'       => 'These settings let you customize certain aspects of your installation.',    
+    'about_settings_text'       => 'These settings let you customize certain aspects of your installation.',
 );

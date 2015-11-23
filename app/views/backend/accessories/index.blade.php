@@ -28,6 +28,7 @@
             data-cookie-id-table="accessoriesTable">
                 <thead>
                     <tr>
+                        <th data-switchable="true" data-searchable="false" data-sortable="false" data-field="companyName">@lang('admin/companies/table.title')</th>
                         <th data-sortable="true" data-field="name">{{Lang::get('admin/accessories/table.title')}}</th>
                         <th data-searchable="false" data-sortable="false" data-field="category">{{Lang::get('admin/accessories/general.accessory_category')}}</th>
                         <th data-searchable="false" data-sortable="false" data-field="qty">{{Lang::get('admin/accessories/general.total')}}</th>
