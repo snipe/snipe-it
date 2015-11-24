@@ -80,6 +80,11 @@
             Route::get( 'list/{status?}', [ 'as' => 'api.users.list', 'uses' => 'UsersController@getDatatable' ] );
         } );
 
+        /*---Groups API---*/
+        Route::group( [ 'prefix' => 'groups' ], function () {
+            Route::get( 'list', [ 'as' => 'api.groups.list', 'uses' => 'GroupsController@getDatatable' ] );
+        } );
+
         /*---Licenses API---*/
         Route::group( [ 'prefix' => 'licenses' ], function () {
 
