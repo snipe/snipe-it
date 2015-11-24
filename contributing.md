@@ -17,6 +17,8 @@ Please submit all pull requests to the [snipe/snipe-it](http://github.com/snipe/
 
 If you don't have a feature in mind, but would like to contribute back to the project, check out the [open issues](https://github.com/snipe/snipe-it/issues?state=open) and see if there are any you can tackle.
 
+If you have a feature in mind that hasn't been asked for in Github Issues, please open an issue so that we can discuss how it should work so that it will benefit the entire community.
+
 We use Waffle.io to help better communicate our roadmap with users. Our [project page there](http://waffle.io/snipe/snipe-it) will show you the backlog, what's ready to be worked on, what's in progress, and what's completed. Issues that have been approved by the project maintainer are labeled "ready for dev".
 
 [![Stories in Ready](https://badge.waffle.io/snipe/snipe-it.png?label=ready+for+dev&title=Ready+for+Development)](http://waffle.io/snipe/snipe-it)
@@ -50,6 +52,14 @@ In dev mode, we use the fabulous [Laravel Debugbar](https://github.com/barryvdh/
 
 The profiler is enabled by default if you have `debug` set to `true` in your `app.php`. You certainly don’t have to use it, but it’s pretty handy for troubleshooting queries, seeing how much memory your pages are using, making sure your code isn't introducing n+1 queries, etc.
 
+-----
+
+## Database Considerations
+
+Always make sure you're eager loading queries where possible, to avoid "N+1 query" issues with large data sets. The debugbar at the bottom of your development installation will show you the number of queries you're executing, which should alert you to any issues.
+
+-----
+
 ## Purging the autoloader
 
 If you’re doing any development on this, make sure you purge the auto-loader if you see any errors stating the new model you created can’t be found, etc, otherwise your new models won’t be grokked.
@@ -60,9 +70,11 @@ php composer.phar dump-autoload
 
 -----
 
-## Translations
+## Localization Support
 
-You do not need to provide translated strings for all of the languages we support, only English (`app/lang/en`). We use CrowdIn for translation management by native speakers, so you only need to provide English strings. More info on translation is [available here](translations.html).
+When developing on Snipe-IT, please always use language strings (`@lang('path/to/file.string')` in blades, `Lang::get('path/to/file.string')` in controllers) instead of regular text on any user-facing text, so that we can easily extend your changes out to the translation community.
+
+You do not need to provide translated strings for all of the languages we support, only English (`app/lang/en`). We use CrowdIn for translation management by native speakers, so you only need to provide English strings. More info on translations [available here](translations.html).
 
 -----
 
