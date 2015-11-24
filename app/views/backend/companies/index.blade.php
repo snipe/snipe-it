@@ -47,7 +47,7 @@
 
                       <input type="hidden" name="_token" value="{{ csrf_token() }}" />
 
-                      <a href="{{ route('update/company', $company->id) }}" class="btn btn-sm btn-primary"
+                      <a href="{{ route('update/company', $company->id) }}" class="btn btn-sm btn-warning"
                          title="{{ Lang::get('button.edit') }}">
                         <i class="fa fa-pencil icon-white"></i>
                       </a>
