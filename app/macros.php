@@ -315,6 +315,7 @@ Form::macro('currencies', function ($name = "currency", $selected = null, $class
   		'GBP' => array('name'=>'GBP - British Pounds', 'symbol'=>'£','symbol_html'=>'&pound;'),
   		'EUR' => array('name'=>'EUR - Euros', 'symbol'=>'€','symbol_html'=>'&euro;'),
   		'AUD' => array('name'=>'AUD - Australian Dollars', 'symbol'=>'$','symbol_html'=>'$'),
+        'BGN' => array('name'=>'BGN - Bulgarian lev', 'symbol'=>'лв.','symbol_html'=>'лв.'),
   		'BRL' => array('name'=>'BRL - Brazilian Real', 'symbol'=>'R$','symbol_html'=>'R$'),
   		'CAD' => array('name'=>'CAD - Canadian Dollars', 'symbol'=>'$','symbol_html'=>'$'),
   		'CZK' => array('name'=>'CZK - Czech koruny', 'symbol'=>'Kč','symbol_html'=>''),
