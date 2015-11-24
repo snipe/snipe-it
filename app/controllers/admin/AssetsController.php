@@ -1256,6 +1256,7 @@ class AssetsController extends AdminController
       'notes',
       'expected_checkin',
       'order_number',
+      'companyName',
       'location',
       'image',
     ];
@@ -1270,6 +1271,9 @@ class AssetsController extends AdminController
             break;
         case 'category':
             $assets = $assets->OrderCategory($order);
+            break;
+        case 'companyName':
+            $assets = $assets->OrderCompany($order);
             break;
         case 'location':
             $assets = $assets->OrderLocation($order);

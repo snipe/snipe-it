@@ -664,11 +664,15 @@ return false;
 					});
 				})->orWhere(function($query) use ($search) {
 					$query->whereHas('assetstatus', function($query) use ($search) {
-						$query->where('name','LIKE','%'.$search.'%');
+						$query->where('status_labels.name','LIKE','%'.$search.'%');
+					});
+        })->orWhere(function($query) use ($search) {
+					$query->whereHas('company', function($query) use ($search) {
+						$query->where('companies.name','LIKE','%'.$search.'%');
 					});
 				})->orWhere(function($query) use ($search) {
 					$query->whereHas('defaultLoc', function($query) use ($search) {
-						$query->where('name','LIKE','%'.$search.'%');
+						$query->where('locations.name','LIKE','%'.$search.'%');
 					});
 				})->orWhere(function($query) use ($search) {
 					$query->whereHas('assigneduser', function($query) use ($search) {
@@ -687,7 +691,7 @@ return false;
 						$query->where('action_type','=','checkout')
 						->where('created_at','LIKE','%'.$search.'%');
 					});
-				})->orWhere('name','LIKE','%'.$search.'%')
+				})->orWhere('assets.name','LIKE','%'.$search.'%')
 				->orWhere('asset_tag','LIKE','%'.$search.'%')
 				->orWhere('serial','LIKE','%'.$search.'%')
 				->orWhere('order_number','LIKE','%'.$search.'%')
@@ -707,6 +711,19 @@ return false;
 	public function scopeOrderModels($query, $order)
 	{
 		return $query->join('models', 'assets.model_id', '=', 'models.id')->orderBy('models.name', $order);
+	}
+
+  /**
+	* Query builder scope to order on company
+	*
+	* @param  Illuminate\Database\Query\Builder  $query  Query builder instance
+	* @param  text                              $order    	 Order
+	*
+	* @return Illuminate\Database\Query\Builder          Modified query builder
+	*/
+	public function scopeOrderCompany($query, $order)
+	{
+		return $query->leftJoin('companies', 'assets.company_id', '=', 'companies.id')->orderBy('companies.name', $order);
 	}
 
   /**
