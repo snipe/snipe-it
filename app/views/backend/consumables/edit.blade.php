@@ -72,6 +72,19 @@
             </div>
     </div>
 
+    <!--  Location -->
+    <div class="form-group {{ $errors->has('location_id') ? ' has-error' : '' }}">
+       <div class="col-md-3">
+       {{ Form::label('location_id', Lang::get('general.location')) }}
+       </div>
+            <div class="col-md-7 col-sm-12">
+                {{ Form::select('location_id', $location_list , Input::old('location_id', $consumable->location_id), array('class'=>'select2', 'style'=>'width:350px')) }}
+
+                {{ $errors->first('location_id', '<br><span class="alert-msg"><i class="fa fa-times"></i> :message</span>') }}
+            </div>
+    </div>
+
+
     <!-- Order Number -->
     <div class="form-group {{ $errors->has('order_number') ? ' has-error' : '' }}">
         <div class="col-md-3">

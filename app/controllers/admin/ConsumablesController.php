@@ -43,11 +43,13 @@ class ConsumablesController extends AdminController
         // Show the page
         $category_list = array('' => '') + DB::table('categories')->where('category_type','=','consumable')->whereNull('deleted_at')->orderBy('name','ASC')->lists('name', 'id');
         $company_list = Company::getSelectList();
+        $location_list = locationsList();
 
         return View::make('backend/consumables/edit')
             ->with('consumable', new Consumable)
             ->with('category_list', $category_list)
-            ->with('company_list', $company_list);
+            ->with('company_list', $company_list)
+            ->with('location_list', $location_list);
     }
 
 
@@ -74,6 +76,7 @@ class ConsumablesController extends AdminController
             // Update the consumable data
             $consumable->name                   = e(Input::get('name'));
             $consumable->category_id            = e(Input::get('category_id'));
+            $consumable->location_id            = e(Input::get('location_id'));
             $consumable->company_id             = Company::getIdForCurrentUser(Input::get('company_id'));
             $consumable->order_number           = e(Input::get('order_number'));
 
@@ -124,10 +127,12 @@ class ConsumablesController extends AdminController
 
 		$category_list = array('' => '') + DB::table('categories')->where('category_type','=','consumable')->whereNull('deleted_at')->orderBy('name','ASC')->lists('name', 'id');
         $company_list = Company::getSelectList();
+        $location_list = locationsList();
 
         return View::make('backend/consumables/edit', compact('consumable'))
             ->with('category_list', $category_list)
-            ->with('company_list', $company_list);
+            ->with('company_list', $company_list)
+            ->with('location_list', $location_list);
     }
 
 
@@ -167,6 +172,7 @@ class ConsumablesController extends AdminController
             // Update the consumable data
             $consumable->name                   = e(Input::get('name'));
             $consumable->category_id            = e(Input::get('category_id'));
+            $consumable->location_id            = e(Input::get('location_id'));
             $consumable->company_id             = Company::getIdForCurrentUser(Input::get('company_id'));
             $consumable->order_number           = e(Input::get('order_number'));
 
@@ -399,9 +405,8 @@ class ConsumablesController extends AdminController
 
     public function getDatatable()
     {
-        $consumables = Consumable::select(array('id','name','qty', 'company_id'))
-            ->whereNull('deleted_at')
-            ->with('company');
+        $consumables = Consumable::whereNull('consumables.deleted_at')
+            ->with('company','location','category','users');
 
         if (Input::has('search')) {
             $consumables = $consumables->TextSearch(Input::get('search'));
@@ -419,11 +424,25 @@ class ConsumablesController extends AdminController
             $limit = 50;
         }
 
-        $allowed_columns = ['id','name'];
+        $allowed_columns = ['id','name','order_number','purchase_date','purchase_cost','companyName','category'];
         $order = Input::get('order') === 'asc' ? 'asc' : 'desc';
         $sort = in_array(Input::get('sort'), $allowed_columns) ? Input::get('sort') : 'created_at';
 
-        $consumables->orderBy($sort, $order);
+        switch ($sort)
+        {
+            case 'category':
+                $consumables = $consumables->OrderCategory($order);
+                break;
+            case 'location':
+                $consumables = $consumables->OrderLocation($order);
+                break;
+            case 'companyName':
+                $consumables = $consumables->OrderCompany($order);
+                break;
+            default:
+                $consumables = $consumables->orderBy($sort, $order);
+                break;
+        }
 
         $consumCount = $consumables->count();
         $consumables = $consumables->skip($offset)->take($limit)->get();
@@ -431,16 +450,21 @@ class ConsumablesController extends AdminController
         $rows = array();
 
         foreach($consumables as $consumable) {
-            $actions = '<a href="'.route('checkout/consumable', $consumable->id).'" style="margin-right:5px;" class="btn btn-info btn-sm" '.(($consumable->numRemaining() > 0 ) ? '' : ' disabled').'>'.Lang::get('general.checkout').'</a><a href="'.route('update/consumable', $consumable->id).'" class="btn btn-warning btn-sm" style="margin-right:5px;"><i class="fa fa-pencil icon-white"></i></a><a data-html="false" class="btn delete-asset btn-danger btn-sm" data-toggle="modal" href="'.route('delete/consumable', $consumable->id).'" data-content="'.Lang::get('admin/consumables/message.delete.confirm').'" data-title="'.Lang::get('general.delete').' '.htmlspecialchars($consumable->name).'?" onClick="return false;"><i class="fa fa-trash icon-white"></i></a>';
+            $actions = '<nobr><a href="'.route('checkout/consumable', $consumable->id).'" style="margin-right:5px;" class="btn btn-info btn-sm" '.(($consumable->numRemaining() > 0 ) ? '' : ' disabled').'>'.Lang::get('general.checkout').'</a><a href="'.route('update/consumable', $consumable->id).'" class="btn btn-warning btn-sm" style="margin-right:5px;"><i class="fa fa-pencil icon-white"></i></a><a data-html="false" class="btn delete-asset btn-danger btn-sm" data-toggle="modal" href="'.route('delete/consumable', $consumable->id).'" data-content="'.Lang::get('admin/consumables/message.delete.confirm').'" data-title="'.Lang::get('general.delete').' '.htmlspecialchars($consumable->name).'?" onClick="return false;"><i class="fa fa-trash icon-white"></i></a></nobr>';
             $company = $consumable->company;
 
             $rows[] = array(
                 'id'            => $consumable->id,
                 'name'          => link_to('admin/consumables/'.$consumable->id.'/view', $consumable->name),
+                'location'   => ($consumable->location) ? e($consumable->location->name) : '',
                 'qty'           => $consumable->qty,
+                'category'           => $consumable->category->name,
+                'order_number'  => $consumable->order_number,
+                'purchase_date'  => $consumable->purchase_date,
+                'purchase_cost'  => ($consumable->purchase_cost!='') ? number_format($consumable->purchase_cost,2): '' ,
                 'numRemaining'  => $consumable->numRemaining(),
                 'actions'       => $actions,
-                'companyName'   => is_null($company) ? '' : e($company->name)
+                'companyName'   => is_null($company) ? '' : e($company->name),
             );
         }
 

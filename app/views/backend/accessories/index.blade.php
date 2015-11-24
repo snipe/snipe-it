@@ -25,7 +25,7 @@
             data-url="{{route('api.accessories.list')}}"
             data-cookie="true"
             data-click-to-select="true"
-            data-cookie-id-table="accessoriesTable-v{{ Config::get('version.app_version') }}srytytyu">
+            data-cookie-id-table="accessoriesTable-v{{ Config::get('version.app_version') }}">
                 <thead>
                     <tr>
                         <th data-switchable="true" data-searchable="true" data-sortable="true" data-field="companyName">@lang('admin/companies/table.title')</th>
