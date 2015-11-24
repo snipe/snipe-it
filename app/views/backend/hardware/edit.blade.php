@@ -248,11 +248,18 @@
             <!-- Warranty -->
             <div class="form-group {{ $errors->has('warranty_months') ? ' has-error' : '' }}">
                 <label for="warranty_months" class="col-md-2 control-label">@lang('admin/hardware/form.warranty')</label>
-                <div class="col-md-2">
-                    <div class="input-group">
-                    <input class="col-md-2 form-control" type="text" name="warranty_months" id="warranty_months" value="{{{ Input::old('warranty_months', $asset->warranty_months) }}}" />   <span class="input-group-addon">@lang('admin/hardware/form.months')</span>
-                    {{ $errors->first('warranty_months', '<br><span class="alert-msg"><i class="fa fa-times"></i> :message</span>') }}
+                <div class="col-md-10">
+
+                    <div class="input-group col-md-3" style="padding-left: 0px;">
+                      <input class="form-control" type="text" name="warranty_months" id="warranty_months" value="{{{ Input::old('warranty_months', $asset->warranty_months) }}}" />
+                      <span class="input-group-addon">@lang('admin/hardware/form.months')</span>
                     </div>
+                    <div class="col-md-10" style="padding-left: 0px;">
+                      <p class="help-block">Entering a value here will override your asset model EOL settings.</p>
+                      {{ $errors->first('warranty_months', '<br><span class="alert-msg"><i class="fa fa-times"></i> :message</span>') }}
+                    </div>
+
+
                 </div>
             </div>
 
