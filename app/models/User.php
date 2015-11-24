@@ -230,7 +230,7 @@ public function scopeGetNotDeleted($query)
       ->orWhere('users.notes', 'LIKE', "%$search%")
       ->orWhere(function($query) use ($search) {
           $query->whereHas('userloc', function($query) use ($search) {
-              $query->where('name','LIKE','%'.$search.'%');
+              $query->where('locations.name','LIKE','%'.$search.'%');
           });
       })
 
@@ -269,6 +269,19 @@ public function scopeGetNotDeleted($query)
   {
     // Left join here, or it will only return results with parents
     return $query->leftJoin('users as manager', 'users.manager_id', '=', 'manager.id')->orderBy('manager.first_name', $order)->orderBy('manager.last_name', $order);
+  }
+
+  /**
+  * Query builder scope to order on company
+  *
+  * @param  Illuminate\Database\Query\Builder  $query  Query builder instance
+  * @param  text                              $order    	 Order
+  *
+  * @return Illuminate\Database\Query\Builder          Modified query builder
+  */
+  public function scopeOrderLocation($query, $order)
+  {
+    return $query->leftJoin('locations', 'users.location_id', '=', 'locations.id')->orderBy('locations.name', $order);
   }
 
 

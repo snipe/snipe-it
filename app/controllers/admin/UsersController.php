@@ -883,7 +883,7 @@ class UsersController extends AdminController {
             $sort = e(Input::get('sort'));
         }
 
-        $users = User::select(array('id','email','username','location_id','manager_id','first_name','last_name','created_at','notes','company_id'))
+        $users = User::select(array('users.id','users.email','users.username','users.location_id','users.manager_id','users.first_name','users.last_name','users.created_at','users.notes','users.company_id'))
             ->with('assets','accessories','consumables','licenses','manager','sentryThrottle','groups','userloc','company');
         $users = Company::scopeCompanyables($users);
 
@@ -902,12 +902,15 @@ class UsersController extends AdminController {
          switch (Input::get('sort'))
          {
              case 'manager':
-               $users = $users->OrderManager($order);
+                $users = $users->OrderManager($order);
                break;
+             case 'location':
+                $users = $users->OrderLocation($order);
+              break;
              default:
                 $allowed_columns =
                 [
-                  'last_name','first_name','email','username','location',
+                  'last_name','first_name','email','username',
                   'assets','accessories', 'consumables','licenses','groups'
                 ];
 
