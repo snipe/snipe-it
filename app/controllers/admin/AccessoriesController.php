@@ -537,7 +537,7 @@ class AccessoriesController extends AdminController
     public function getDatatable()
     {
         $accessories = Accessory::with('category', 'company')
-        ->whereNull('deleted_at');
+        ->whereNull('accessories.deleted_at');
 
         if (Input::has('search')) {
             $accessories = $accessories->TextSearch(Input::get('search'));
@@ -556,11 +556,22 @@ class AccessoriesController extends AdminController
         }
 
 
-        $allowed_columns = ['name','order_number','purchase_date','purchase_cost'];
+        $allowed_columns = ['name','order_number','purchase_date','purchase_cost','companyName','category'];
         $order = Input::get('order') === 'asc' ? 'asc' : 'desc';
         $sort = in_array(Input::get('sort'), $allowed_columns) ? Input::get('sort') : 'created_at';
 
-        $accessories = $accessories->orderBy($sort, $order);
+        switch ($sort)
+        {
+            case 'category':
+                $accessories = $accessories->OrderCategory($order);
+                break;
+            case 'companyName':
+                $accessories = $accessories->OrderCompany($order);
+                break;
+            default:
+                $accessories = $accessories->orderBy($sort, $order);
+                break;
+        }
 
         $accessCount = $accessories->count();
         $accessories = $accessories->skip($offset)->take($limit)->get();
@@ -568,7 +579,7 @@ class AccessoriesController extends AdminController
         $rows = array();
 
         foreach ($accessories as $accessory) {
-            $actions = '<a href="'.route('checkout/accessory', $accessory->id).'" style="margin-right:5px;" class="btn btn-info btn-sm" '.(($accessory->numRemaining() > 0 ) ? '' : ' disabled').'>'.Lang::get('general.checkout').'</a><a href="'.route('update/accessory', $accessory->id).'" class="btn btn-warning btn-sm" style="margin-right:5px;"><i class="fa fa-pencil icon-white"></i></a><a data-html="false" class="btn delete-asset btn-danger btn-sm" data-toggle="modal" href="'.route('delete/accessory', $accessory->id).'" data-content="'.Lang::get('admin/accessories/message.delete.confirm').'" data-title="'.Lang::get('general.delete').' '.htmlspecialchars($accessory->name).'?" onClick="return false;"><i class="fa fa-trash icon-white"></i></a>';
+            $actions = '<nobr><a href="'.route('checkout/accessory', $accessory->id).'" style="margin-right:5px;" class="btn btn-info btn-sm" '.(($accessory->numRemaining() > 0 ) ? '' : ' disabled').'>'.Lang::get('general.checkout').'</a><a href="'.route('update/accessory', $accessory->id).'" class="btn btn-warning btn-sm" style="margin-right:5px;"><i class="fa fa-pencil icon-white"></i></a><a data-html="false" class="btn delete-asset btn-danger btn-sm" data-toggle="modal" href="'.route('delete/accessory', $accessory->id).'" data-content="'.Lang::get('admin/accessories/message.delete.confirm').'" data-title="'.Lang::get('general.delete').' '.htmlspecialchars($accessory->name).'?" onClick="return false;"><i class="fa fa-trash icon-white"></i></a></nobr>';
             $company = $accessory->company;
 
             $rows[] = array(

@@ -25,12 +25,12 @@
             data-url="{{route('api.accessories.list')}}"
             data-cookie="true"
             data-click-to-select="true"
-            data-cookie-id-table="accessoriesTable">
+            data-cookie-id-table="accessoriesTable-v{{ Config::get('version.app_version') }}srytytyu">
                 <thead>
                     <tr>
-                        <th data-switchable="true" data-searchable="false" data-sortable="false" data-field="companyName">@lang('admin/companies/table.title')</th>
-                        <th data-sortable="true" data-field="name">{{Lang::get('admin/accessories/table.title')}}</th>
-                        <th data-searchable="false" data-sortable="false" data-field="category">{{Lang::get('admin/accessories/general.accessory_category')}}</th>
+                        <th data-switchable="true" data-searchable="true" data-sortable="true" data-field="companyName">@lang('admin/companies/table.title')</th>
+                        <th data-sortable="true" data-searchable="true"  data-field="name">{{Lang::get('admin/accessories/table.title')}}</th>
+                        <th data-searchable="true" data-sortable="true" data-field="category">{{Lang::get('admin/accessories/general.accessory_category')}}</th>
                         <th data-searchable="false" data-sortable="false" data-field="qty">{{Lang::get('admin/accessories/general.total')}}</th>
                         <th data-searchable="true" data-sortable="true" data-field="purchase_date">{{Lang::get('admin/accessories/general.date')}}</th>
                         <th data-searchable="true" data-sortable="true" data-field="purchase_cost">{{Lang::get('admin/accessories/general.cost')}}</th>
