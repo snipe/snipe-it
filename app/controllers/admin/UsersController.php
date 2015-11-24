@@ -46,7 +46,7 @@ class UsersController extends AdminController {
         'first_name' => 'required|alpha_space|min:2',
         'last_name' => 'required|alpha_space|min:2',
         'location_id' => 'numeric',
-        'username' => 'required|min:2|unique:users,username, ',
+        'username' => 'required|min:2|unique:users,deleted_at,NULL',
         'email' => 'email|unique:users,email',
         'password' => 'required|min:6',
         'password_confirm' => 'required|min:6|same:password',
