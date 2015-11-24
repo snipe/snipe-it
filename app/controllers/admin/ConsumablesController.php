@@ -458,7 +458,7 @@ class ConsumablesController extends AdminController
                 'name'          => link_to('admin/consumables/'.$consumable->id.'/view', $consumable->name),
                 'location'   => ($consumable->location) ? e($consumable->location->name) : '',
                 'qty'           => $consumable->qty,
-                'category'           => $consumable->category->name,
+                'category'           => ($consumable->category) ? $consumable->category->name : 'Missing category', 
                 'order_number'  => $consumable->order_number,
                 'purchase_date'  => $consumable->purchase_date,
                 'purchase_cost'  => ($consumable->purchase_cost!='') ? number_format($consumable->purchase_cost,2): '' ,
