@@ -34,15 +34,15 @@
           <table class="table">
             <thead>
               <tr>
-                <th class="text-center">@lang('general.id')</th>
-                <th class="text-center">@lang('admin/companies/table.name')</th>
-                <th class="text-center">@lang('table.actions')</th>
+                <th>@lang('general.id')</th>
+                <th>@lang('admin/companies/table.name')</th>
+                <th>@lang('table.actions')</th>
               </tr>
               @foreach ($companies as $company)
                 <tr>
-                  <td class="text-center">{{{ $company->id }}}</td>
-                  <td class="text-center">{{{ $company->name }}}</td>
-                  <td class="text-center">
+                  <td>{{{ $company->id }}}</td>
+                  <td>{{{ $company->name }}}</td>
+                  <td>
                     <form method="POST" action="{{ route('delete/company', $company->id) }}" role="form">
 
                       <input type="hidden" name="_token" value="{{ csrf_token() }}" />
