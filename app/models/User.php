@@ -9,8 +9,14 @@ class User extends SentryUserModel
      *
      * @var bool
      */
-    use SoftDeletingTrait;
+  use SoftDeletingTrait;
 	protected $dates = ['deleted_at'];
+
+  public function __construct()
+  {
+      $this->setHasher(new \Cartalyst\Sentry\Hashing\BCryptHasher);
+  }
+
 
     public function company()
     {
