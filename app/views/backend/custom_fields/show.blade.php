@@ -1,3 +1,5 @@
+@extends('backend/layouts/default')
+@section('content')
 <h2>Fieldset</h2>
 {{{ $custom_fieldset->name }}}
 
@@ -10,3 +12,4 @@
 {{ Form::checkbox("required","on") }}Required?
 {{ Form::text("order",$maxid)}}
 {{ Form::select("field_id",["" => "Add New Field to Fieldset"] + CustomField::lists("name","id"),"",["onchange" => "document.forms[0].submit()"]) }}
+@stop

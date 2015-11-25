@@ -1,3 +1,5 @@
+@extends('backend/layouts/default')
+@section('content')
 <?
 ?>
 
@@ -16,3 +18,4 @@
   @endforeach
 </ul>
 <a href='/custom_fieldsets/create-field'>New Field</a>
+@stop

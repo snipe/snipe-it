@@ -1,3 +1,5 @@
+@extends('backend/layouts/default')
+@section('content')
 
 
 {{ Form::open(["url" =>"/custom_fieldsets/create-field"])}}
@@ -7,3 +9,4 @@ format: {{ Form::select("format",predefined_formats(),"ALPHA") }}
 Custom Format (if selected): {{ Form::text("custom_format") }}<br>
 <input type='submit'>
 {{ Form::close() }}
+@stop
