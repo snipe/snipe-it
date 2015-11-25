@@ -17,6 +17,7 @@ use View;
 use Datatable;
 use Asset;
 use Company;
+use Config;
 
 //use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -425,6 +426,7 @@ class ModelsController extends AdminController
                 'id'      => $model->id,
                 'manufacturer'      => link_to('/admin/settings/manufacturers/'.$model->manufacturer->id.'/view', $model->manufacturer->name),
                 'name'              => link_to('/hardware/models/'.$model->id.'/view', $model->name),
+                'image' => ($model->image!='') ? '<img src="'.Config::get('app.url').'/uploads/models/'.$model->image.'" height=50 width=50>' : '',
                 'modelnumber'       => $model->modelno,
                 'numassets'         => $model->assets->count(),
                 'depreciation'      => (($model->depreciation)&&($model->depreciation->id > 0)) ? $model->depreciation->name.' ('.$model->depreciation->months.')' : Lang::get('general.no_depreciation'),
