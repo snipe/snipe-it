@@ -26,7 +26,7 @@
          data-url="{{route('api.asset_maintenances.list')}}"
          data-cookie="true"
          data-click-to-select="true"
-         data-cookie-id-table="maintenancesTable-v{{ Config::get('version.app_version') }}">
+         data-cookie-id-table="maintenancesTable-{{ Config::get('version.hash_version') }}">
             <thead>
                      <tr>
                      <th data-field="companyName" data-sortable="false" data-visible="false">@lang('admin/companies/table.title')</th>

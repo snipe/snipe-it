@@ -69,7 +69,7 @@
     data-url="{{route('api.hardware.list', array(''=>Input::get('status'),'order_number'=>Input::get('order_number')))}}"
     data-cookie="true"
     data-click-to-select="true"
-    data-cookie-id-table="assetTable-v{{ Config::get('version.app_version') }}">
+    data-cookie-id-table="assetTable-{{ Config::get('version.hash_version') }}">
         <thead>
             <tr>
 
