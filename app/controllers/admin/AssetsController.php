@@ -739,7 +739,7 @@ class AssetsController extends AdminController
         if (!Company::isCurrentUserAuthorized()) {
             return Redirect::to('hardware')->with('error', Lang::get('general.insufficient_permissions'));
         }
-        else if (!Config::get('app.lock_passwords')) {
+        elseif (!Config::get('app.lock_passwords')) {
 
             $rules = array(
                 'files' => 'required'
@@ -769,8 +769,9 @@ class AssetsController extends AdminController
                             return $results;
                         }
 
+                        $date = date('Y-m-d-his');
                         $fixed_filename = str_replace(' ','-',$file->getClientOriginalName());
-                        $file->move($path, date('Y-m-d-his').'-'.$file->getClientOriginalName());
+                        $file->move($path, $date.'-'.$fixed_filename);
                         $name = date('Y-m-d-his').'-'.$fixed_filename;
                         $filesize = Setting::fileSizeConvert(filesize($path.'/'.$name));
                         $results[] = compact('name', 'filesize');
