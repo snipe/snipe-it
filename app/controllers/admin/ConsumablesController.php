@@ -284,59 +284,59 @@ class ConsumablesController extends AdminController
     **/
     public function postCheckout($consumableId)
     {
-        // Check if the consumable exists
-        if (is_null($consumable = Consumable::find($consumableId))) {
-            // Redirect to the consumable management page with error
-            return Redirect::to('consumables')->with('error', Lang::get('admin/consumables/message.not_found'));
-        }
-        else if (!Company::isCurrentUserHasAccess($consumable)) {
-            return Redirect::to('admin/consumables')->with('error', Lang::get('general.insufficient_permissions'));
-        }
+      // Check if the consumable exists
+      if (is_null($consumable = Consumable::find($consumableId))) {
+          // Redirect to the consumable management page with error
+          return Redirect::to('consumables')->with('error', Lang::get('admin/consumables/message.not_found'));
+      }
+      else if (!Company::isCurrentUserHasAccess($consumable)) {
+          return Redirect::to('admin/consumables')->with('error', Lang::get('general.insufficient_permissions'));
+      }
 
-		$admin_user = Sentry::getUser();
-        $assigned_to = e(Input::get('assigned_to'));
-
-
-        // Declare the rules for the form validation
-        $rules = array(
-            'assigned_to'   => 'required|min:1'
-        );
-
-        // Create a new validator instance from our validation rules
-        $validator = Validator::make(Input::all(), $rules);
-
-        // If validation fails, we'll exit the operation now.
-        if ($validator->fails()) {
-            // Ooops.. something went wrong
-            return Redirect::back()->withInput()->withErrors($validator);
-        }
+	    $admin_user = Sentry::getUser();
+      $assigned_to = e(Input::get('assigned_to'));
 
 
-        // Check if the user exists
-        if (is_null($user = User::find($assigned_to))) {
-            // Redirect to the consumable management page with error
-            return Redirect::to('admin/consumables')->with('error', Lang::get('admin/consumables/message.user_does_not_exist'));
-        }
+      // Declare the rules for the form validation
+      $rules = array(
+          'assigned_to'   => 'required|min:1'
+      );
 
-        // Update the consumable data
-        $consumable->assigned_to            		= e(Input::get('assigned_to'));
+      // Create a new validator instance from our validation rules
+      $validator = Validator::make(Input::all(), $rules);
 
-        $consumable->users()->attach($consumable->id, array(
-        'consumable_id' => $consumable->id,
-        'assigned_to' => e(Input::get('assigned_to'))));
+      // If validation fails, we'll exit the operation now.
+      if ($validator->fails()) {
+          // Ooops.. something went wrong
+          return Redirect::back()->withInput()->withErrors($validator);
+      }
 
-            $logaction = new Actionlog();
-            $logaction->consumable_id = $consumable->id;
-            $logaction->checkedout_to = $consumable->assigned_to;
-            $logaction->asset_type = 'consumable';
-            $logaction->location_id = $user->location_id;
-            $logaction->user_id = Sentry::getUser()->id;
-            $logaction->note = e(Input::get('note'));
 
-            $settings = Setting::getSettings();
+      // Check if the user exists
+      if (is_null($user = User::find($assigned_to))) {
+          // Redirect to the consumable management page with error
+          return Redirect::to('admin/consumables')->with('error', Lang::get('admin/consumables/message.user_does_not_exist'));
+      }
+
+      // Update the consumable data
+      $consumable->assigned_to = e(Input::get('assigned_to'));
+
+      $consumable->users()->attach($consumable->id, array(
+      'consumable_id' => $consumable->id,
+      'user_id' => $admin_user->id,
+      'assigned_to' => e(Input::get('assigned_to'))));
+
+      $logaction = new Actionlog();
+      $logaction->consumable_id = $consumable->id;
+      $logaction->checkedout_to = $consumable->assigned_to;
+      $logaction->asset_type = 'consumable';
+      $logaction->location_id = $user->location_id;
+      $logaction->user_id = Sentry::getUser()->id;
+      $logaction->note = e(Input::get('note'));
+
+      $settings = Setting::getSettings();
 
 			if ($settings->slack_endpoint) {
-
 
 				$slack_settings = [
 				    'username' => $settings->botname,
@@ -358,45 +358,40 @@ class ConsumablesController extends AdminController
 						            'title' => 'Note:',
 						            'value' => e($logaction->note)
 						        ],
-
-
-
 						    ]
 						])->send('Consumable Checked Out');
 
 					} catch (Exception $e) {
 
 					}
-
 			}
 
 
+      $log = $logaction->logaction('checkout');
 
-            $log = $logaction->logaction('checkout');
+      $consumable_user = DB::table('consumables_users')->where('assigned_to','=',$consumable->assigned_to)->where('consumable_id','=',$consumable->id)->first();
 
-            $consumable_user = DB::table('consumables_users')->where('assigned_to','=',$consumable->assigned_to)->where('consumable_id','=',$consumable->id)->first();
-
-            $data['log_id'] = $logaction->id;
-            $data['eula'] = $consumable->getEula();
-            $data['first_name'] = $user->first_name;
-            $data['item_name'] = $consumable->name;
-            $data['checkout_date'] = $logaction->created_at;
-            $data['item_tag'] = '';
-            $data['expected_checkin'] = '';
-            $data['note'] = $logaction->note;
-            $data['require_acceptance'] = $consumable->requireAcceptance();
+      $data['log_id'] = $logaction->id;
+      $data['eula'] = $consumable->getEula();
+      $data['first_name'] = $user->first_name;
+      $data['item_name'] = $consumable->name;
+      $data['checkout_date'] = $logaction->created_at;
+      $data['item_tag'] = '';
+      $data['expected_checkin'] = '';
+      $data['note'] = $logaction->note;
+      $data['require_acceptance'] = $consumable->requireAcceptance();
 
 
-            if (($consumable->requireAcceptance()=='1')  || ($consumable->getEula())) {
+      if (($consumable->requireAcceptance()=='1')  || ($consumable->getEula())) {
 
-	            Mail::send('emails.accept-asset', $data, function ($m) use ($user) {
-	                $m->to($user->email, $user->first_name . ' ' . $user->last_name);
-	                $m->subject('Confirm consumable delivery');
-	            });
-            }
+        Mail::send('emails.accept-asset', $data, function ($m) use ($user) {
+            $m->to($user->email, $user->first_name . ' ' . $user->last_name);
+            $m->subject('Confirm consumable delivery');
+        });
+      }
 
-            // Redirect to the new consumable page
-            return Redirect::to("admin/consumables")->with('success', Lang::get('admin/consumables/message.checkout.success'));
+      // Redirect to the new consumable page
+      return Redirect::to("admin/consumables")->with('success', Lang::get('admin/consumables/message.checkout.success'));
 
 
 
@@ -458,7 +453,7 @@ class ConsumablesController extends AdminController
                 'name'          => link_to('admin/consumables/'.$consumable->id.'/view', $consumable->name),
                 'location'   => ($consumable->location) ? e($consumable->location->name) : '',
                 'qty'           => $consumable->qty,
-                'category'           => ($consumable->category) ? $consumable->category->name : 'Missing category', 
+                'category'           => ($consumable->category) ? $consumable->category->name : 'Missing category',
                 'order_number'  => $consumable->order_number,
                 'purchase_date'  => $consumable->purchase_date,
                 'purchase_cost'  => ($consumable->purchase_cost!='') ? number_format($consumable->purchase_cost,2): '' ,
@@ -477,24 +472,25 @@ class ConsumablesController extends AdminController
 	public function getDataView($consumableID)
 	{
 		$consumable = Consumable::find($consumableID);
-        $consumable_users = $consumable->users;
-        $count = $consumable_users->count();
+    $consumable->load('consumableAssigments','consumableAssigments.admin','consumableAssigments.user');
 
-        if (!Company::isCurrentUserHasAccess($consumable)) {
-            return ['total' => 0, 'rows' => []];
-        }
-
-        $rows = array();
-
-        foreach ($consumable_users as $user) {
-            $rows[] = array(
-                'name' => link_to('/admin/users/'.$user->id.'/view', $user->fullName())
-                );
-        }
-
-        $data = array('total' => $count, 'rows' => $rows);
-
-        return $data;
+    if (!Company::isCurrentUserHasAccess($consumable)) {
+        return ['total' => 0, 'rows' => []];
     }
+
+    $rows = array();
+
+    foreach ($consumable->consumableAssigments as $consumable_assignment) {
+      $rows[] = array(
+        'name' => link_to('/admin/users/'.$consumable_assignment->user->id.'/view', $consumable_assignment->user->fullName()),
+        'created_at' => $consumable_assignment->created_at->format('Y-m-d H:i:s'),
+        'admin' => $consumable_assignment->admin->fullName(),
+      );
+    }
+
+    $consumableCount = $consumable->users->count();
+    $data = array('total' => $consumableCount, 'rows' => $rows);
+    return $data;
+  }
 
 }
