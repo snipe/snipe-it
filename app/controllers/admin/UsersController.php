@@ -43,14 +43,14 @@ class UsersController extends AdminController {
      * @var array
      */
     protected $validationRules = array(
-        'first_name' => 'required|alpha_space|min:2',
-        'last_name' => 'required|alpha_space|min:2',
-        'location_id' => 'numeric',
-        'username' => 'required|min:2|unique:users,deleted_at,NULL',
-        'email' => 'email|unique:users,email',
-        'password' => 'required|min:6',
-        'password_confirm' => 'required|min:6|same:password',
-        'company_id' => 'integer',
+      'first_name' => 'required|alpha_space|min:2',
+      'last_name' => 'required|alpha_space|min:2',
+      'location_id' => 'numeric',
+      'username' => 'required|min:2|unique:users,deleted_at,NULL',
+      'email' => 'email|unique:users,email',
+      'password' => 'required|min:6',
+      'password_confirm' => 'required|min:6|same:password',
+      'company_id' => 'integer',
     );
 
     /**
@@ -108,6 +108,12 @@ class UsersController extends AdminController {
      * @return Redirect
      */
     public function postCreate() {
+
+        // echo '<pre>';
+        // print_r($this->validationRules);
+        // echo '</pre>';
+        // exit;
+
         // Create a new validator instance from our validation rules
         $validator = Validator::make(Input::all(), $this->validationRules);
         $permissions = Input::get('permissions', array());
