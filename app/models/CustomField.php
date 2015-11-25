@@ -4,6 +4,7 @@ class CustomField extends Elegant
 {
   public $guarded=["id"];
   public static $PredefinedFormats=[
+    "ANY" => "",
     "ALPHA" => "[a-zA-Z]*",
     "NUMERIC" => "[0-9]*",
     "MAC" => "[a-fA-F0-9]{2}:[a-fA-F0-9]{2}:[a-fA-F0-9]{2}:[a-fA-F0-9]{2}:[a-fA-F0-9]{2}:[a-fA-F0-9]{2}",

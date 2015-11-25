@@ -12,4 +12,5 @@
 {{ Form::checkbox("required","on") }}Required?
 {{ Form::text("order",$maxid)}}
 {{ Form::select("field_id",["" => "Add New Field to Fieldset"] + CustomField::lists("name","id"),"",["onchange" => "document.forms[0].submit()"]) }}
+<br><a href='/custom_fieldsets'>Back to Custom Fieldset List</a>
 @stop
