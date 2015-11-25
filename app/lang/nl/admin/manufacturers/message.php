@@ -2,23 +2,23 @@
 
 return array(
 
-    'does_not_exist' => 'Manufacturer does not exist.',
-    'assoc_users'	 => 'This manufacturer is currently associated with at least one model and cannot be deleted. Please update your models to no longer reference this manufacturer and try again. ',
+    'does_not_exist' => 'Fabrikant bestaat niet.',
+    'assoc_users'	 => 'Deze fabrikant is verbonden met 1 of meerdere modellen en kan hierdoor niet verwijderd worden. Controleer de modellen zodat er geen verbinding meer is met deze fabrikant en probeer opnieuw. ',
 
     'create' => array(
-        'error'   => 'Manufacturer was not created, please try again.',
-        'success' => 'Manufacturer created successfully.'
+        'error'   => 'Fabrikant was niet aangemaakt, Probeer opnieuw.',
+        'success' => 'Fabrikant aangemaakt.'
     ),
 
     'update' => array(
-        'error'   => 'Manufacturer was not updated, please try again',
-        'success' => 'Manufacturer updated successfully.'
+        'error'   => 'Fabrikant niet bijgewerkt, probeer opnieuw',
+        'success' => 'Fabrikant succesvol bijgewerkt.'
     ),
 
     'delete' => array(
-        'confirm'   => 'Are you sure you wish to delete this manufacturer?',
-        'error'   => 'There was an issue deleting the manufacturer. Please try again.',
-        'success' => 'The Manufacturer was deleted successfully.'
+        'confirm'   => 'Weet u zeker dat deze fabrikant verwijderd kan worden?',
+        'error'   => 'Er was een probleem bij het verwijderen. Probeer opnieuw.',
+        'success' => 'Fabrikant succesvol verwijderd.'
     )
 
 );

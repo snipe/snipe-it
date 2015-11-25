@@ -1,8 +1,8 @@
 <?php
 
 return array(
-    'assets_rtd'		=> 'Assets RTD',
-    'assets_checkedout'		=> 'Assets Assigned',
+    'assets_rtd'		=> '資産RTD',
+    'assets_checkedout'		=> '資産割当先',
     'id'      		=> 'ID',
     'city'   		=> '市区町村',
     'state'   		=> '都道府県',

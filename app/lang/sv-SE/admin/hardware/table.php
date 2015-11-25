@@ -18,6 +18,7 @@ return array(
     'serial'   		=> 'Serial',
     'status'   		=> 'Status',
     'title'      	=> 'Asset ',
+    'image'		=> 'Device Image',
     'days_without_acceptance' => 'Days Without Acceptance'
 
 );
