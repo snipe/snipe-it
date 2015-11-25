@@ -471,11 +471,15 @@ class ConsumablesController extends AdminController
 
 	public function getDataView($consumableID)
 	{
-		$consumable = Consumable::find($consumableID);
-    $consumable->load('consumableAssigments','consumableAssigments.admin','consumableAssigments.user');
+		//$consumable = Consumable::find($consumableID);
+    $consumable = Consumable::with(array('consumableAssigments'=> function($query) {
+      $query->orderBy('created_at','DESC');
+    }))->find($consumableID);
+
+    $consumable->load('consumableAssigments.admin','consumableAssigments.user');
 
     if (!Company::isCurrentUserHasAccess($consumable)) {
-        return ['total' => 0, 'rows' => []];
+      return ['total' => 0, 'rows' => []];
     }
 
     $rows = array();
