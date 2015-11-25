@@ -542,7 +542,7 @@ class AccessoriesController extends AdminController
 
     public function getDatatable()
     {
-        $accessories = Accessory::with('category', 'company')
+        $accessories = Accessory::select('accessories.*')->with('category', 'company')
         ->whereNull('accessories.deleted_at');
 
         if (Input::has('search')) {

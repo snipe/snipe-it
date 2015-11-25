@@ -1198,7 +1198,7 @@ class AssetsController extends AdminController
     {
 
 
-       $assets = Asset::with('model','assigneduser','assigneduser.userloc','assetstatus','defaultLoc','assetlog','model','model.category','assetstatus','assetloc', 'company')
+       $assets = Asset::select('assets.*')->with('model','assigneduser','assigneduser.userloc','assetstatus','defaultLoc','assetlog','model','model.category','assetstatus','assetloc', 'company')
        ->Hardware();
 
        if (Input::has('search')) {

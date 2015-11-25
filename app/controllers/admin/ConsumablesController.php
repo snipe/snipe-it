@@ -400,7 +400,7 @@ class ConsumablesController extends AdminController
 
     public function getDatatable()
     {
-        $consumables = Consumable::whereNull('consumables.deleted_at')
+        $consumables = Consumable::select('consumables.*')->whereNull('consumables.deleted_at')
             ->with('company','location','category','users');
 
         if (Input::has('search')) {
