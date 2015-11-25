@@ -194,7 +194,7 @@ public function freeSeat()
 
         return $query->where(function($query) use ($search)
         {
-                $query->where('name', 'LIKE', '%'.$search.'%')
+        $query->where('name', 'LIKE', '%'.$search.'%')
 				->orWhere('serial', 'LIKE', '%'.$search.'%')
 				->orWhere('notes', 'LIKE', '%'.$search.'%')
 				->orWhere('order_number', 'LIKE', '%'.$search.'%')
