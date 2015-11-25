@@ -29,6 +29,7 @@
          data-cookie-id-table="maintenancesTable-v{{ Config::get('version.app_version') }}">
             <thead>
                      <tr>
+                     <th data-field="companyName" data-sortable="false" data-visible="false">@lang('admin/companies/table.title')</th>
                      <th data-sortable="true" data-field="id" data-visible="false">@lang('general.id')</th>
                          <th data-sortable="false" data-field="asset_name">@lang('admin/asset_maintenances/table.asset_name')</th>
                          <th data-sortable="false" data-field="supplier">@lang('admin/asset_maintenances/table.supplier_name')</th>

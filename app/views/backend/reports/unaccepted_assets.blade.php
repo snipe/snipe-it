@@ -23,6 +23,7 @@
              data-cookie-id-table="unacceptedAssets">
                 <thead>
                 <tr role="row">
+                    <th class="col-sm-1">@lang('admin/companies/table.title')</th>
                     <th class="col-sm-1">@lang('general.category')</th>
                     <th class="col-sm-1">@lang('admin/hardware/form.model')</th>
                     <th class="col-sm-1">@lang('admin/hardware/form.name')</th>
@@ -34,6 +35,7 @@
                 @if ($assetsForReport)
                     @foreach ($assetsForReport as $assetItem)
                         <tr>
+                            <td>{{{ is_null($assetItem->company) ? '' : $assetItem->company->name }}}</td>
                             <td>{{{ $assetItem->model->category->name }}}</td>
                             <td>{{{ $assetItem->model->name }}}</td>
                             <td>{{ link_to(Config::get('app.url').'/hardware/'.$assetItem->id.'/view',$assetItem->showAssetName()) }}</td>
@@ -91,5 +93,5 @@
         });
     </script>
     @stop
-    
+
 @stop

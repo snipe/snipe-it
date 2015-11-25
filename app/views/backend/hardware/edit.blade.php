@@ -121,6 +121,19 @@
             <!-- CSRF Token -->
             <input type="hidden" name="_token" value="{{ csrf_token() }}" />
 
+            <!-- Company -->
+            @if (Company::isCurrentUserAuthorized())
+              <div class="form-group {{ $errors->has('company_id') ? ' has-error' : '' }}">
+                <div class="col-md-2 control-label">{{ Form::label('company_id', Lang::get('general.company')) }}</div>
+                <div class="col-md-7 col-sm-12">
+                  {{ Form::select('company_id', $company_list , Input::old('company_id', $asset->company_id),
+                                  ['class'=>'select2', 'style'=>'min-width:350px']) }}
+                  {{ $errors->first('company_id', '<br><span class="alert-msg"><i class="fa fa-times"></i> :message</span>') }}
+                </div>
+              </div>
+            @endif
+
+
             <!-- Asset Tag -->
             <div class="form-group {{ $errors->has('asset_tag') ? ' has-error' : '' }}">
                 <label for="asset_tag" class="col-md-2 control-label">@lang('admin/hardware/form.tag')
@@ -235,11 +248,18 @@
             <!-- Warranty -->
             <div class="form-group {{ $errors->has('warranty_months') ? ' has-error' : '' }}">
                 <label for="warranty_months" class="col-md-2 control-label">@lang('admin/hardware/form.warranty')</label>
-                <div class="col-md-2">
-                    <div class="input-group">
-                    <input class="col-md-2 form-control" type="text" name="warranty_months" id="warranty_months" value="{{{ Input::old('warranty_months', $asset->warranty_months) }}}" />   <span class="input-group-addon">@lang('admin/hardware/form.months')</span>
-                    {{ $errors->first('warranty_months', '<br><span class="alert-msg"><i class="fa fa-times"></i> :message</span>') }}
+                <div class="col-md-10">
+
+                    <div class="input-group col-md-3" style="padding-left: 0px;">
+                      <input class="form-control" type="text" name="warranty_months" id="warranty_months" value="{{{ Input::old('warranty_months', $asset->warranty_months) }}}" />
+                      <span class="input-group-addon">@lang('admin/hardware/form.months')</span>
                     </div>
+                    <div class="col-md-10" style="padding-left: 0px;">
+                      <p class="help-block">Entering a value here will override your asset model EOL settings.</p>
+                      {{ $errors->first('warranty_months', '<br><span class="alert-msg"><i class="fa fa-times"></i> :message</span>') }}
+                    </div>
+
+
                 </div>
             </div>
 

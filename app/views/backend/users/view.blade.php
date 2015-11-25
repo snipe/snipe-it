@@ -19,6 +19,9 @@
                         <img src="{{{ $user->gravatar() }}}" class="avatar img-circle hidden-print">
                     @endif
                     <h3 class="name">{{{ $user->fullName() }}}
+                    @if (!is_null($user->company))
+                        - {{{ $user->company->name }}}
+                    @endif
                     @if ($user->employee_num)
                     		({{{ $user->employee_num }}})
                         @endif</h3>

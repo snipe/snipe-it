@@ -14,6 +14,7 @@ use DB;
 use Input;
 use User;
 use Asset;
+use Company;
 use Lang;
 use Actionlog;
 use Location;
@@ -31,6 +32,8 @@ use Mail;
 use Accessory;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Illuminate\Support\Facades\Log;
+use Crypt;
+
 
 class UsersController extends AdminController {
 
@@ -40,13 +43,14 @@ class UsersController extends AdminController {
      * @var array
      */
     protected $validationRules = array(
-        'first_name' => 'required|alpha_space|min:2',
-        'last_name' => 'required|alpha_space|min:2',
-        'location_id' => 'numeric',
-        'username' => 'required|min:2|unique:users,username, ',
-        'email' => 'email|unique:users,email',
-        'password' => 'required|min:6',
-        'password_confirm' => 'required|min:6|same:password',
+      'first_name' => 'required|alpha_space|min:2',
+      'last_name' => 'required|alpha_space|min:2',
+      'location_id' => 'numeric',
+      'username' => 'required|min:2|unique:users,deleted_at,NULL',
+      'email' => 'email|unique:users,email',
+      'password' => 'required|min:6',
+      'password_confirm' => 'required|min:6|same:password',
+      'company_id' => 'integer',
     );
 
     /**
@@ -82,6 +86,7 @@ class UsersController extends AdminController {
 
         $location_list = locationsList();
         $manager_list = managerList();
+        $company_list = Company::getSelectList();
 
         /* echo '<pre>';
           print_r($userPermissions);
@@ -93,6 +98,7 @@ class UsersController extends AdminController {
         return View::make('backend/users/edit', compact('groups', 'userGroups', 'permissions', 'userPermissions'))
                         ->with('location_list', $location_list)
                         ->with('manager_list', $manager_list)
+                        ->with('company_list', $company_list)
                         ->with('user', new User);
     }
 
@@ -102,6 +108,12 @@ class UsersController extends AdminController {
      * @return Redirect
      */
     public function postCreate() {
+
+        // echo '<pre>';
+        // print_r($this->validationRules);
+        // echo '</pre>';
+        // exit;
+
         // Create a new validator instance from our validation rules
         $validator = Validator::make(Input::all(), $this->validationRules);
         $permissions = Input::get('permissions', array());
@@ -119,6 +131,8 @@ class UsersController extends AdminController {
             // permissions here before we create the user.
             // Get the inputs, with some exceptions
             $inputs = Input::except('csrf_token', 'password_confirm', 'groups', 'email_user');
+
+            $inputs['company_id'] = Company::getIdForUser(Input::get('company_id'));
 
             // @TODO: Figure out WTF I need to do this.
             if ($inputs['manager_id'] == '') {
@@ -252,6 +266,10 @@ class UsersController extends AdminController {
             // Get the user information
             $user = Sentry::getUserProvider()->findById($id);
 
+            if (!Company::isCurrentUserHasAccess($user)) {
+                return Redirect::route('users')->with('error', Lang::get('general.insufficient_permissions'));
+            }
+
             // Get this user groups
             $userGroups = $user->groups()->lists('group_id', 'name');
 
@@ -267,6 +285,7 @@ class UsersController extends AdminController {
             $this->encodeAllPermissions($permissions);
 
             $location_list = array('' => '') + Location::lists('name', 'id');
+            $company_list = Company::getSelectList();
             $manager_list = array('' => 'Select a User') + DB::table('users')
                             ->select(DB::raw('concat(last_name,", ",first_name," (",email,")") as full_name, id'))
                             ->whereNull('deleted_at')
@@ -285,6 +304,7 @@ class UsersController extends AdminController {
         // Show the page
         return View::make('backend/users/edit', compact('user', 'groups', 'userGroups', 'permissions', 'userPermissions'))
                         ->with('location_list', $location_list)
+                        ->with('company_list', $company_list)
                         ->with('manager_list', $manager_list);
     }
 
@@ -309,6 +329,10 @@ class UsersController extends AdminController {
         try {
             // Get the user information
             $user = Sentry::getUserProvider()->findById($id);
+
+            if (!Company::isCurrentUserHasAccess($user)) {
+                return Redirect::route('users')->with('error', Lang::get('general.insufficient_permissions'));
+            }
         } catch (UserNotFoundException $e) {
             // Prepare the error message
             $error = Lang::get('admin/users/message.user_not_found', compact('id'));
@@ -357,6 +381,7 @@ class UsersController extends AdminController {
             $user->jobtitle = Input::get('jobtitle');
             $user->phone = Input::get('phone');
             $user->location_id = Input::get('location_id');
+            $user->company_id = Company::getIdForUser(Input::get('company_id'));
             $user->manager_id = Input::get('manager_id');
             $user->notes = Input::get('notes');
 
@@ -488,7 +513,10 @@ class UsersController extends AdminController {
         } else {
             $statuslabel_list = statusLabelList();
             $user_raw_array = array_keys(Input::get('edit_user'));
-            $users = User::whereIn('id', $user_raw_array)->with('groups')->get();
+
+            $users = User::whereIn('id', $user_raw_array)->with('groups');
+            $users = Company::scopeCompanyables($users)->get();
+
             return View::make('backend/users/confirm-bulk-delete', compact('users', 'statuslabel_list'));
         }
     }
@@ -512,7 +540,9 @@ class UsersController extends AdminController {
 
                 $assets = Asset::whereIn('assigned_to', $user_raw_array)->get();
                 $accessories = DB::table('accessories_users')->whereIn('assigned_to', $user_raw_array)->get();
-                $users = User::whereIn('id', $user_raw_array)->delete();
+
+                $users = User::whereIn('id', $user_raw_array);
+                $users = Company::scopeCompanyables($users)->delete();
 
                 foreach ($assets as $asset) {
 
@@ -572,14 +602,20 @@ class UsersController extends AdminController {
             // Get user information
             $user = Sentry::getUserProvider()->createModel()->withTrashed()->find($id);
 
-            // Restore the user
-            $user->restore();
+            if (!Company::isCurrentUserHasAccess($user)) {
+                return Redirect::route('users')->with('error', Lang::get('general.insufficient_permissions'));
+            }
+            else
+            {
+                // Restore the user
+                $user->restore();
 
-            // Prepare the success message
-            $success = Lang::get('admin/users/message.success.restored');
+                // Prepare the success message
+                $success = Lang::get('admin/users/message.success.restored');
 
-            // Redirect to the user management page
-            return Redirect::route('users')->with('success', $success);
+                // Redirect to the user management page
+                return Redirect::route('users')->with('success', $success);
+            }
         } catch (UserNotFoundException $e) {
             // Prepare the error message
             $error = Lang::get('admin/users/message.user_not_found', compact('id'));
@@ -602,7 +638,12 @@ class UsersController extends AdminController {
         $userlog = $user->userlog->load('assetlog', 'consumablelog', 'assetlog.model', 'licenselog', 'accessorylog', 'userlog', 'adminlog');
 
         if (isset($user->id)) {
-            return View::make('backend/users/view', compact('user', 'userlog'));
+
+            if (!Company::isCurrentUserHasAccess($user)) {
+                return Redirect::route('users')->with('error', Lang::get('general.insufficient_permissions'));
+            } else {
+                return View::make('backend/users/view', compact('user', 'userlog'));
+            }
         } else {
             // Prepare the error message
             $error = Lang::get('admin/users/message.user_not_found', compact('id'));
@@ -689,6 +730,7 @@ class UsersController extends AdminController {
             $this->encodeAllPermissions($permissions);
 
             $location_list = array('' => '') + Location::lists('name', 'id');
+            $company_list = Company::getSelectList();
             $manager_list = array('' => 'Select a User') + DB::table('users')
                             ->select(DB::raw('concat(last_name,", ",first_name," (",email,")") as full_name, id'))
                             ->whereNull('deleted_at')
@@ -700,6 +742,7 @@ class UsersController extends AdminController {
             // Show the page
             return View::make('backend/users/edit', compact('groups', 'userGroups', 'permissions', 'userPermissions'))
                             ->with('location_list', $location_list)
+                            ->with('company_list', $company_list)
                             ->with('manager_list', $manager_list)
                             ->with('user', $user)
                             ->with('clone_user', $user_to_clone);
@@ -781,6 +824,7 @@ class UsersController extends AdminController {
                             'password' => $pass,
                             'activated' => $activated,
                             'location_id' => $row[4],
+                            'company_id' => Company::getIdForUser($row[5]),
                             'permissions' => '{"user":1}',
                             'notes' => 'Imported user'
                         );
@@ -845,7 +889,9 @@ class UsersController extends AdminController {
             $sort = e(Input::get('sort'));
         }
 
-        $users = User::select(array('users.id','users.email','users.username','users.location_id','users.manager_id','users.first_name','users.last_name','users.created_at','users.notes'))->with('assets', 'accessories', 'consumables', 'licenses', 'manager', 'sentryThrottle', 'groups', 'userloc');
+        $users = User::select(array('users.id','users.email','users.username','users.location_id','users.manager_id','users.first_name','users.last_name','users.created_at','users.notes','users.company_id'))
+            ->with('assets','accessories','consumables','licenses','manager','sentryThrottle','groups','userloc','company');
+        $users = Company::scopeCompanyables($users);
 
         switch ($status) {
         case 'deleted':
@@ -862,12 +908,15 @@ class UsersController extends AdminController {
          switch (Input::get('sort'))
          {
              case 'manager':
-               $users = $users->OrderManager($order);
+                $users = $users->OrderManager($order);
                break;
+             case 'location':
+                $users = $users->OrderLocation($order);
+              break;
              default:
                 $allowed_columns =
                 [
-                  'last_name','first_name','email','username','location',
+                  'last_name','first_name','email','username',
                   'assets','accessories', 'consumables','licenses','groups'
                 ];
 
@@ -912,6 +961,7 @@ class UsersController extends AdminController {
             $actions .= '</nobr>';
 
             $rows[] = array(
+                'id'         => $user->id,
                 'checkbox'      =>'<div class="text-center hidden-xs hidden-sm"><input type="checkbox" name="edit_user['.$user->id.']" class="one_required"></div>',
                 'name'          => '<a title="'.$user->fullName().'" href="../admin/users/'.$user->id.'/view">'.$user->fullName().'</a>',
                 'email'         => ($user->email!='') ?
@@ -927,7 +977,8 @@ class UsersController extends AdminController {
                 'consumables'        => $user->consumables->count(),
                 'groups'        => $group_names,
                 'notes'         => $user->notes,
-                'actions'       => ($actions) ? $actions : ''
+                'actions'       => ($actions) ? $actions : '',
+                'companyName'   => is_null($user->company) ? '' : e($user->company->name)
             );
         }
 
@@ -949,7 +1000,10 @@ class UsersController extends AdminController {
 
         if (isset($user->id)) {
 
-            if (Input::hasFile('userfile')) {
+            if (!Company::isCurrentUserHasAccess($user)) {
+                return Redirect::route('users')->with('error', Lang::get('general.insufficient_permissions'));
+            }
+            else if (Input::hasFile('userfile')) {
 
                 foreach (Input::file('userfile') as $file) {
 
@@ -1010,13 +1064,19 @@ class UsersController extends AdminController {
         // the license is valid
         if (isset($user->id)) {
 
-            $log = Actionlog::find($fileId);
-            $full_filename = $destinationPath . '/' . $log->filename;
-            if (file_exists($full_filename)) {
-                unlink($destinationPath . '/' . $log->filename);
+            if (!Company::isCurrentUserHasAccess($user)) {
+                return Redirect::route('users')->with('error', Lang::get('general.insufficient_permissions'));
             }
-            $log->delete();
-            return Redirect::back()->with('success', Lang::get('admin/users/message.deletefile.success'));
+            else
+            {
+                $log = Actionlog::find($fileId);
+                $full_filename = $destinationPath . '/' . $log->filename;
+                if (file_exists($full_filename)) {
+                    unlink($destinationPath . '/' . $log->filename);
+                }
+                $log->delete();
+                return Redirect::back()->with('success', Lang::get('admin/users/message.deletefile.success'));
+            }
         } else {
             // Prepare the error message
             $error = Lang::get('admin/users/message.does_not_exist', compact('id'));
@@ -1038,9 +1098,15 @@ class UsersController extends AdminController {
 
         // the license is valid
         if (isset($user->id)) {
-            $log = Actionlog::find($fileId);
-            $file = $log->get_src();
-            return Response::download($file);
+            if (!Company::isCurrentUserHasAccess($user)) {
+                return Redirect::route('users')->with('error', Lang::get('general.insufficient_permissions'));
+            }
+            else
+            {
+                $log = Actionlog::find($fileId);
+                $file = $log->get_src();
+                return Response::download($file);
+            }
         } else {
             // Prepare the error message
             $error = Lang::get('admin/users/message.does_not_exist', compact('id'));
@@ -1115,20 +1181,20 @@ class UsersController extends AdminController {
             return Redirect::back()->withInput()->withErrors($formValidator);
         }
 
-        $ldap_version = Config::get('ldap.version');
-        $url = Config::get('ldap.url');
-        $username = Config::get('ldap.username');
-        $password = Config::get('ldap.password');
-        $base_dn = Config::get('ldap.basedn');
-        $filter = Config::get('ldap.filter');
+        $ldap_version = Setting::getSettings()->ldap_version;
+        $url = Setting::getSettings()->ldap_server;
+        $username = Setting::getSettings()->ldap_uname;
+        $password = Crypt::decrypt(Setting::getSettings()->ldap_pword);
+        $base_dn = Setting::getSettings()->ldap_basedn;
+        $filter = Setting::getSettings()->ldap_filter;
 
-        $ldap_result_username = Config::get('ldap.result.username');
-        $ldap_result_emp_num = Config::get('ldap.result.emp.num');
-        $ldap_result_last_name = Config::get('ldap.result.last.name');
-        $ldap_result_first_name = Config::get('ldap.result.first.name');
-        $ldap_result_email = Config::get('ldap.result.email');
-        $ldap_result_active_flag = Config::get('ldap.result.active.flag');
+        $ldap_result_username = Setting::getSettings()->ldap_username_field;
+        $ldap_result_last_name = Setting::getSettings()->ldap_lname_field;
+        $ldap_result_first_name = Setting::getSettings()->ldap_fname_field;
 
+        $ldap_result_active_flag = Setting::getSettings()->ldap_active_flag_field;
+        $ldap_result_emp_num = Setting::getSettings()->ldap_emp_num_field;
+        $ldap_result_email = Setting::getSettings()->ldap_email_field;
 
         // Connect to LDAP server
         $ldapconn = @ldap_connect($url);

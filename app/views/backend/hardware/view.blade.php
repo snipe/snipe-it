@@ -57,6 +57,13 @@
 			</div>
 		@endif
 
+        @if ($asset->company)
+            <div class="col-md-12" style="padding-bottom: 5px;">
+                <strong>@lang('general.company'): </strong>
+                <em>{{{ $asset->company->name }}}</em>
+            </div>
+        @endif
+
         @if ($asset->serial)
             <div class="col-md-12" style="padding-bottom: 5px;"><strong>@lang('admin/hardware/form.serial'): </strong>
             <em>{{{ $asset->serial }}}</em></div>

@@ -16,6 +16,8 @@ use Validator;
 use View;
 use Datatable;
 use Asset;
+use Company;
+use Config;
 
 //use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -383,7 +385,7 @@ class ModelsController extends AdminController
     public function getDatatable($status = null)
     {
         $models = Model::with('category','assets','depreciation');
-        ($status != 'Deleted') ?: $models->withTrashed()->Deleted();;
+        ($status != 'Deleted') ?: $models->withTrashed()->Deleted();
 
         if (Input::has('search')) {
             $models = $models->TextSearch(Input::get('search'));
@@ -424,6 +426,7 @@ class ModelsController extends AdminController
                 'id'      => $model->id,
                 'manufacturer'      => link_to('/admin/settings/manufacturers/'.$model->manufacturer->id.'/view', $model->manufacturer->name),
                 'name'              => link_to('/hardware/models/'.$model->id.'/view', $model->name),
+                'image' => ($model->image!='') ? '<img src="'.Config::get('app.url').'/uploads/models/'.$model->image.'" height=50 width=50>' : '',
                 'modelnumber'       => $model->modelno,
                 'numassets'         => $model->assets->count(),
                 'depreciation'      => (($model->depreciation)&&($model->depreciation->id > 0)) ? $model->depreciation->name.' ('.$model->depreciation->months.')' : Lang::get('general.no_depreciation'),
@@ -447,7 +450,7 @@ class ModelsController extends AdminController
     **/
     public function getDataView($modelID)
     {
-        $assets = Asset::where('model_id','=',$modelID)->withTrashed();
+        $assets = Asset::where('model_id','=',$modelID)->withTrashed()->with('company');
 
         if (Input::has('search')) {
             $assets = $assets->TextSearch(Input::get('search'));
@@ -476,12 +479,18 @@ class ModelsController extends AdminController
         $assets = $assets->skip($offset)->take($limit)->get();
 
         $rows = array();
+        $actions = '';
 
         foreach ($assets as $asset) {
-            if (($asset->assigned_to !='') && ($asset->assigned_to > 0)) {
-                $actions = '<a href="'.route('checkin/hardware', $asset->id).'" class="btn btn-primary btn-sm">'.Lang::get('general.checkin').'</a>';
-            } else {
-                $actions = '<a href="'.route('checkout/hardware', $asset->id).'" class="btn btn-info btn-sm">'.Lang::get('general.checkout').'</a>';
+
+            if ($asset->assetstatus) {
+                if ($asset->assetstatus->deployable != 0) {
+                    if (($asset->assigned_to !='') && ($asset->assigned_to > 0)) {
+                        $actions = '<a href="'.route('checkin/hardware', $asset->id).'" class="btn btn-primary btn-sm">'.Lang::get('general.checkin').'</a>';
+                    } else {
+                        $actions = '<a href="'.route('checkout/hardware', $asset->id).'" class="btn btn-info btn-sm">'.Lang::get('general.checkout').'</a>';
+                    }
+                }
             }
 
             $rows[] = array(
@@ -490,8 +499,9 @@ class ModelsController extends AdminController
                 'asset_tag'     => link_to('hardware/'.$asset->id.'/view', $asset->asset_tag),
                 'serial'        => $asset->serial,
                 'assigned_to'   => ($asset->assigned_to) ? link_to('/admin/users/'.$asset->assigned_to.'/view', $asset->assigneduser->fullName()) : '',
-                'actions'       => $actions
-                );
+                'actions'       => $actions,
+                'companyName'   => Company::getName($asset)
+            );
         }
 
         $data = array('total' => $assetsCount, 'rows' => $rows);

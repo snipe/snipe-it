@@ -116,6 +116,13 @@ Route::filter('reporting-auth', function () {
     }
 });
 
+Route::filter('backup-auth', function () {
+
+    if (!Sentry::getUser()->isSuperUser()) {
+        return Redirect::route('home')->with('error', Lang::get('general.insufficient_permissions'));
+    }
+});
+
 
 
 /*

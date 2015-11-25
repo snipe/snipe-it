@@ -42,6 +42,9 @@
   data-cookie-id-table="categoryAssetsTable">
       <thead>
           <tr>
+              <th data-searchable="false" data-sortable="false" data-field="companyName" data-visible="false">
+                  @lang('admin/companies/table.title')
+              </th>
               <th data-searchable="false" data-sortable="false" data-field="id" data-visible="false">@lang('general.id')</th>
               <th data-searchable="false" data-sortable="false" data-field="name">@lang('general.name')</th>
               <th data-searchable="false" data-sortable="false" data-field="model">@lang('admin/hardware/form.model')</th>

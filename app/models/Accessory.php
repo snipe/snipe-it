@@ -3,6 +3,8 @@
 class Accessory extends Elegant
 {
     use SoftDeletingTrait;
+    use CompanyableTrait;
+
     protected $dates = ['deleted_at'];
     protected $table = 'accessories';
 
@@ -10,10 +12,21 @@ class Accessory extends Elegant
     * Category validation rules
     */
     public $rules = array(
-        'name'   => 'required|alpha_space|min:3|max:255',
-        'category_id'   	=> 'required|integer',
-        'qty'   	=> 'required|integer|min:1',
+        'name'        => 'required|alpha_space|min:3|max:255',
+        'qty'         => 'required|integer|min:1',
+        'category_id' => 'required|integer',
+        'company_id'  => 'integer',
     );
+
+    public function company()
+    {
+        return $this->belongsTo('Company', 'company_id');
+    }
+
+    public function location()
+    {
+        return $this->belongsTo('Location', 'location_id');
+    }
 
     public function category()
     {
@@ -77,12 +90,73 @@ class Accessory extends Elegant
     * @return Illuminate\Database\Query\Builder          Modified query builder
     */
     public function scopeTextSearch($query, $search)
-    {
+  	{
+  		$search = explode('+', $search);
 
-        return $query->where(function($query) use ($search)
-        {
-                $query->where('name', 'LIKE', '%'.$search.'%');
-        });
+  		return $query->where(function($query) use ($search)
+  		{
+  			foreach ($search as $search) {
+  					$query->whereHas('category', function($query) use ($search) {
+  						$query->where('categories.name','LIKE','%'.$search.'%');
+          })->orWhere(function($query) use ($search) {
+  					$query->whereHas('company', function($query) use ($search) {
+  						$query->where('companies.name','LIKE','%'.$search.'%');
+  					});
+  				})->orWhere(function($query) use ($search) {
+  					$query->whereHas('assetlog', function($query) use ($search) {
+  						$query->where('action_type','=','checkout')
+  						->where('created_at','LIKE','%'.$search.'%');
+  					});
+          })->orWhere(function($query) use ($search) {
+  					$query->whereHas('location', function($query) use ($search) {
+  						$query->where('locations.name','LIKE','%'.$search.'%');
+  					});
+  				})->orWhere('accessories.name','LIKE','%'.$search.'%')
+  				->orWhere('accessories.order_number','LIKE','%'.$search.'%')
+          ->orWhere('accessories.purchase_cost','LIKE','%'.$search.'%')
+          ->orWhere('accessories.purchase_date','LIKE','%'.$search.'%');
+  			}
+  		});
+  	}
+
+    /**
+  	* Query builder scope to order on company
+  	*
+  	* @param  Illuminate\Database\Query\Builder  $query  Query builder instance
+  	* @param  text                              $order    	 Order
+  	*
+  	* @return Illuminate\Database\Query\Builder          Modified query builder
+  	*/
+  	public function scopeOrderCompany($query, $order)
+  	{
+  		return $query->leftJoin('companies', 'accessories.company_id', '=', 'companies.id')->orderBy('companies.name', $order);
+  	}
+
+    /**
+  	* Query builder scope to order on company
+  	*
+  	* @param  Illuminate\Database\Query\Builder  $query  Query builder instance
+  	* @param  text                              $order    	 Order
+  	*
+  	* @return Illuminate\Database\Query\Builder          Modified query builder
+  	*/
+  	public function scopeOrderCategory($query, $order)
+  	{
+  		return $query->leftJoin('categories', 'accessories.category_id', '=', 'categories.id')->orderBy('categories.name', $order);
+  	}
+
+    /**
+    * Query builder scope to order on company
+    *
+    * @param  Illuminate\Database\Query\Builder  $query  Query builder instance
+    * @param  text                              $order    	 Order
+    *
+    * @return Illuminate\Database\Query\Builder          Modified query builder
+    */
+    public function scopeOrderLocation($query, $order)
+    {
+      return $query->leftJoin('locations', 'consumables.location_id', '=', 'locations.id')->orderBy('locations.name', $order);
     }
+
 
 }

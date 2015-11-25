@@ -14,8 +14,8 @@
         txt: 'TXT',
         sql: 'SQL',
         doc: 'MS-Word',
-        excel: 'Ms-Excel',
-        powerpoint: 'Ms-Powerpoint',
+        excel: 'MS-Excel',
+        powerpoint: 'MS-Powerpoint',
         pdf: 'PDF'
     };
 
@@ -45,7 +45,7 @@
                     '<div class="export btn-group">',
                         '<button class="btn btn-default dropdown-toggle" ' +
                             'data-toggle="dropdown" type="button">',
-                            '<i class="fa fa-download"></i> ',
+                            '<i class="glyphicon glyphicon-export icon-share"></i> ',
                             '<span class="caret"></span>',
                         '</button>',
                         '<ul class="dropdown-menu" role="menu">',
@@ -83,12 +83,11 @@
                         };
 
                     if (that.options.exportDataType === 'all' && that.options.pagination) {
-                        that.togglePagination();
-                        that.$el.on('load-success.bs.table', function () {
+                        that.$el.one('load-success.bs.table page-change.bs.table', function () {
                             doExport();
-                            that.$el.off('load-success.bs.table');
                             that.togglePagination();
                         });
+                        that.togglePagination();
                     } else if (that.options.exportDataType === 'selected') {
                         var data = that.getData(),
                             selectedData = that.getAllSelections();

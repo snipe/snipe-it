@@ -67,7 +67,7 @@
                 <i class='fa fa-asterisk'></i></label>
                 </label>
                 <div class="col-md-7">
-                    {{ Form::select('statuslabel_types', $statuslabel_types, $statuslabel_types, array('class'=>'select2', 'style'=>'min-width:400px')) }}
+                    {{ Form::select('statuslabel_types', $statuslabel_types, $statuslabel->getStatuslabelType(), array('class'=>'select2', 'style'=>'min-width:400px')) }}
                     {{ $errors->first('statuslabel_types', '<br><span class="alert-msg"><i class="fa fa-times"></i> :message</span>') }}
                 </div>
             </div>

@@ -1,6 +1,7 @@
 <?php namespace Controllers\Admin;
 
 use AdminController;
+use Company;
 use Input;
 use Lang;
 use Manufacturer;
@@ -242,7 +243,7 @@ class ManufacturersController extends AdminController
 
     public function getDataView($manufacturerID) {
 
-      $manufacturer = Manufacturer::find($manufacturerID);
+      $manufacturer = Manufacturer::with('assets.company')->find($manufacturerID);
       $manufacturer_assets = $manufacturer->assets;
 
       if (Input::has('search')) {
@@ -288,18 +289,20 @@ class ManufacturersController extends AdminController
             }
         }
 
-        $rows[] = array(
+        $row = array(
           'id' => $asset->id,
           'name' => link_to('/hardware/'.$asset->id.'/view', $asset->showAssetName()),
           'model' => $asset->model->name,
           'asset_tag' => $asset->asset_tag,
           'serial' => $asset->serial,
           'assigned_to' => ($asset->assigneduser) ? link_to('/admin/users/'.$asset->assigneduser->id.'/view', $asset->assigneduser->fullName()): '',
-          'change' => $inout,
           'actions' => $actions,
-
-
+          'companyName' => Company::getName($asset),
         );
+
+        if (isset($inout)) { $row['change'] = $inout; }
+
+        $rows[] = $row;
       }
 
       $data = array('total' => $count, 'rows' => $rows);

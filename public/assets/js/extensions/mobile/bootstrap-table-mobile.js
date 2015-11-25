@@ -22,7 +22,9 @@
 
     var resetView = function (that) {
         if (that.options.height || that.options.showFooter) {
-            setTimeout(that.resetView, 1);
+            setTimeout(function(){
+                that.resetView.call(that);
+            }, 1);
         }
     };
 

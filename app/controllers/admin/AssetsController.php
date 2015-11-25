@@ -13,6 +13,7 @@ use Setting;
 use Redirect;
 use DB;
 use Actionlog;
+use Company;
 use Model;
 use Depreciation;
 use Sentry;
@@ -65,11 +66,13 @@ class AssetsController extends AdminController
         $manufacturer_list = manufacturerList();
         $category_list = categoryList();
         $supplier_list = suppliersList();
+        $company_list = Company::getSelectList();
         $assigned_to = usersList();
         $statuslabel_types = statusTypeList();
 
         $view = View::make('backend/hardware/edit');
         $view->with('supplier_list',$supplier_list);
+        $view->with('company_list',$company_list);
         $view->with('model_list',$model_list);
         $view->with('statuslabel_list',$statuslabel_list);
         $view->with('assigned_to',$assigned_to);
@@ -162,7 +165,8 @@ class AssetsController extends AdminController
             // Save the asset data
             $asset->name            		= e(Input::get('name'));
             $asset->serial            		= e(Input::get('serial'));
-            $asset->model_id           		= e(Input::get('model_id'));
+            $asset->company_id              = Company::getIdForCurrentUser(Input::get('company_id'));
+            $asset->model_id                = e(Input::get('model_id'));
             $asset->order_number            = e(Input::get('order_number'));
             $asset->notes            		= e(Input::get('notes'));
             $asset->asset_tag            	= e(Input::get('asset_tag'));
@@ -220,6 +224,10 @@ class AssetsController extends AdminController
             // Redirect to the asset management page
             return Redirect::to('hardware')->with('error', Lang::get('admin/hardware/message.does_not_exist'));
         }
+        else if (!Company::isCurrentUserHasAccess($asset)) {
+            return Redirect::to('hardware')->with('error', Lang::get('general.insufficient_permissions'));
+        }
+
         // Grab the dropdown lists
         $model_list = modelList();
         $statuslabel_list = statusLabelList();
@@ -227,12 +235,14 @@ class AssetsController extends AdminController
         $manufacturer_list = manufacturerList();
         $category_list = categoryList();
         $supplier_list = suppliersList();
+        $company_list = Company::getSelectList();
         $assigned_to = usersList();
         $statuslabel_types = statusTypeList();
 
         return View::make('backend/hardware/edit', compact('asset'))
         ->with('model_list',$model_list)
         ->with('supplier_list',$supplier_list)
+        ->with('company_list',$company_list)
         ->with('location_list',$location_list)
         ->with('statuslabel_list',$statuslabel_list)
         ->with('assigned_to',$assigned_to)
@@ -254,6 +264,9 @@ class AssetsController extends AdminController
         if (is_null($asset = Asset::find($assetId))) {
             // Redirect to the asset management page with error
             return Redirect::to('hardware')->with('error', Lang::get('admin/hardware/message.does_not_exist'));
+        }
+        else if (!Company::isCurrentUserHasAccess($asset)) {
+            return Redirect::to('hardware')->with('error', Lang::get('general.insufficient_permissions'));
         }
 
         //attempt to validate
@@ -314,13 +327,14 @@ class AssetsController extends AdminController
             $asset->mac_address = ($checkModel == true) ? e(Input::get('mac_address')) : NULL;
 
             // Update the asset data
-            $asset->name            		= e(Input::get('name'));
-            $asset->serial            		= e(Input::get('serial'));
-            $asset->model_id           		= e(Input::get('model_id'));
-            $asset->order_number            = e(Input::get('order_number'));
-            $asset->asset_tag           	= e(Input::get('asset_tag'));
-            $asset->notes            		= e(Input::get('notes'));
-            $asset->physical            	= '1';
+            $asset->name         = e(Input::get('name'));
+            $asset->serial       = e(Input::get('serial'));
+            $asset->company_id   = Company::getIdForCurrentUser(Input::get('company_id'));
+            $asset->model_id     = e(Input::get('model_id'));
+            $asset->order_number = e(Input::get('order_number'));
+            $asset->asset_tag    = e(Input::get('asset_tag'));
+            $asset->notes        = e(Input::get('notes'));
+            $asset->physical     = '1';
 
 	    // Update the image
             if (Input::file('image')) {
@@ -366,6 +380,9 @@ class AssetsController extends AdminController
             // Redirect to the asset management page with error
             return Redirect::to('hardware')->with('error', Lang::get('admin/hardware/message.does_not_exist'));
         }
+        else if (!Company::isCurrentUserHasAccess($asset)) {
+            return Redirect::to('hardware')->with('error', Lang::get('general.insufficient_permissions'));
+        }
 
         if (isset($asset->assigneduser->id) && ($asset->assigneduser->id!=0)) {
             // Redirect to the asset management page
@@ -398,6 +415,9 @@ class AssetsController extends AdminController
             // Redirect to the asset management page with error
             return Redirect::to('hardware')->with('error', Lang::get('admin/hardware/message.does_not_exist'));
         }
+        else if (!Company::isCurrentUserHasAccess($asset)) {
+            return Redirect::to('hardware')->with('error', Lang::get('general.insufficient_permissions'));
+        }
 
         // Get the dropdown of users and then pass it to the checkout view
         $users_list = usersList();
@@ -415,6 +435,9 @@ class AssetsController extends AdminController
         // Check if the asset exists
         if (!$asset = Asset::find($assetId)) {
             return Redirect::to('hardware')->with('error', Lang::get('admin/hardware/message.does_not_exist'));
+        }
+        else if (!Company::isCurrentUserHasAccess($asset)) {
+            return Redirect::to('hardware')->with('error', Lang::get('general.insufficient_permissions'));
         }
 
         // Declare the rules for the form validation
@@ -478,6 +501,9 @@ class AssetsController extends AdminController
             // Redirect to the asset management page with error
             return Redirect::to('hardware')->with('error', Lang::get('admin/hardware/message.does_not_exist'));
         }
+        else if (!Company::isCurrentUserHasAccess($asset)) {
+            return Redirect::to('hardware')->with('error', Lang::get('general.insufficient_permissions'));
+        }
 
         return View::make('backend/hardware/checkin', compact('asset'))->with('backto', $backto);
     }
@@ -495,6 +521,9 @@ class AssetsController extends AdminController
         if (is_null($asset = Asset::find($assetId))) {
             // Redirect to the asset management page with error
             return Redirect::to('hardware')->with('error', Lang::get('admin/hardware/message.does_not_exist'));
+        }
+        else if (!Company::isCurrentUserHasAccess($asset)) {
+            return Redirect::to('hardware')->with('error', Lang::get('general.insufficient_permissions'));
         }
 
         // Check for a valid user to checkout fa-random
@@ -607,8 +636,10 @@ class AssetsController extends AdminController
         $asset = Asset::withTrashed()->find($assetId);
         $settings = Setting::getSettings();
 
-
-        if ($asset->userloc) {
+        if (!Company::isCurrentUserHasAccess($asset)) {
+            return Redirect::to('hardware')->with('error', Lang::get('general.insufficient_permissions'));
+        }
+        else if ($asset->userloc) {
             $use_currency = $asset->userloc->currency;
         } elseif ($asset->assetloc) {
             $use_currency = $asset->assetloc->currency;
@@ -657,6 +688,10 @@ class AssetsController extends AdminController
             $asset = Asset::find($assetId);
             $size = barcodeDimensions($settings->barcode_type);
 
+            if (!Company::isCurrentUserHasAccess($asset)) {
+                return Redirect::to('hardware')->with('error', Lang::get('general.insufficient_permissions'));
+            }
+
             if (isset($asset->id,$asset->asset_tag)) {
                 $barcode = new \Com\Tecnick\Barcode\Barcode();
                 $barcode_obj =  $barcode->getBarcodeObj($settings->barcode_type, route('view/hardware', $asset->id), $size['height'], $size['width'], 'black', array(-2, -2, -2, -2));
@@ -671,6 +706,10 @@ class AssetsController extends AdminController
 
         $path = app_path().'/private_uploads/imports/assets';
         $files = array();
+
+        if (!Company::isCurrentUserAuthorized()) {
+            return Redirect::to('hardware')->with('error', Lang::get('general.insufficient_permissions'));
+        }
 
         if ($handle = opendir($path)) {
 
@@ -697,7 +736,10 @@ class AssetsController extends AdminController
 
     public function postAPIImportUpload() {
 
-        if (!Config::get('app.lock_passwords')) {
+        if (!Company::isCurrentUserAuthorized()) {
+            return Redirect::to('hardware')->with('error', Lang::get('general.insufficient_permissions'));
+        }
+        elseif (!Config::get('app.lock_passwords')) {
 
             $rules = array(
                 'files' => 'required'
@@ -727,8 +769,9 @@ class AssetsController extends AdminController
                             return $results;
                         }
 
+                        $date = date('Y-m-d-his');
                         $fixed_filename = str_replace(' ','-',$file->getClientOriginalName());
-                        $file->move($path, date('Y-m-d-his').'-'.$file->getClientOriginalName());
+                        $file->move($path, $date.'-'.$fixed_filename);
                         $name = date('Y-m-d-his').'-'.$fixed_filename;
                         $filesize = Setting::fileSizeConvert(filesize($path.'/'.$name));
                         $results[] = compact('name', 'filesize');
@@ -750,6 +793,10 @@ class AssetsController extends AdminController
 
     public function getProcessImportFile($filename) {
         // php artisan asset-import:csv path/to/your/file.csv --domain=yourdomain.com --email_format=firstname.lastname
+
+        if (!Company::isCurrentUserAuthorized()) {
+            return Redirect::to('hardware')->with('error', Lang::get('general.insufficient_permissions'));
+        }
 
         $output = new BufferedOutput;
         Artisan::call('asset-import:csv', ['filename'=> app_path().'/private_uploads/imports/assets/'.$filename, '--email_format'=>'firstname.lastname', '--username_format'=>'firstname.lastname'], $output);
@@ -774,6 +821,9 @@ class AssetsController extends AdminController
         if (is_null($asset_to_clone = Asset::find($assetId))) {
             // Redirect to the asset management page
             return Redirect::to('hardware')->with('error', Lang::get('admin/hardware/message.does_not_exist'));
+        }
+        else if (!Company::isCurrentUserHasAccess($asset_to_clone)) {
+            return Redirect::to('hardware')->with('error', Lang::get('general.insufficient_permissions'));
         }
 
         // Grab the dropdown lists
@@ -812,7 +862,10 @@ class AssetsController extends AdminController
 		// Get user information
 		$asset = Asset::withTrashed()->find($assetId);
 
-		 if (isset($asset->id)) {
+        if (!Company::isCurrentUserHasAccess($asset)) {
+            return Redirect::to('hardware')->with('error', Lang::get('general.insufficient_permissions'));
+        }
+		else if (isset($asset->id)) {
 
 			// Restore the user
 			$asset->restore();
@@ -844,6 +897,10 @@ class AssetsController extends AdminController
 		$destinationPath = app_path().'/private_uploads';
 
         if (isset($asset->id)) {
+
+            if (!Company::isCurrentUserHasAccess($asset)) {
+                return Redirect::to('hardware')->with('error', Lang::get('general.insufficient_permissions'));
+            }
 
         	if (Input::hasFile('assetfile')) {
 
@@ -916,6 +973,11 @@ class AssetsController extends AdminController
 		// the asset is valid
         if (isset($asset->id)) {
 
+
+            if (!Company::isCurrentUserHasAccess($asset)) {
+                return Redirect::to('hardware')->with('error', Lang::get('general.insufficient_permissions'));
+            }
+
 			$log = Actionlog::find($fileId);
 			$full_filename = $destinationPath.'/'.$log->filename;
 			if (file_exists($full_filename)) {
@@ -948,6 +1010,11 @@ class AssetsController extends AdminController
 
 		// the asset is valid
         if (isset($asset->id)) {
+
+
+            if (!Company::isCurrentUserHasAccess($asset)) {
+                return Redirect::to('hardware')->with('error', Lang::get('general.insufficient_permissions'));
+            }
 
 		$log = Actionlog::find($fileId);
 		$file = $log->get_src();
@@ -985,7 +1052,10 @@ class AssetsController extends AdminController
     public function postBulkEdit($assets = null)
     {
 
-	    if (!Input::has('edit_asset')) {
+        if (!Company::isCurrentUserAuthorized()) {
+            return Redirect::to('hardware')->with('error', Lang::get('general.insufficient_permissions'));
+        }
+	    else if (!Input::has('edit_asset')) {
 			return Redirect::back()->with('error', 'No assets selected');
 		} else {
 			$asset_raw_array = Input::get('edit_asset');
@@ -1041,7 +1111,10 @@ class AssetsController extends AdminController
     public function postBulkSave($assets = null)
     {
 
-		if (Input::has('bulk_edit')) {
+        if (!Company::isCurrentUserAuthorized()) {
+            return Redirect::to('hardware')->with('error', Lang::get('general.insufficient_permissions'));
+        }
+		else if (Input::has('bulk_edit')) {
 
 			$assets = Input::get('bulk_edit');
 
@@ -1125,7 +1198,7 @@ class AssetsController extends AdminController
     {
 
 
-       $assets = Asset::with('model','assigneduser','assigneduser.userloc','assetstatus','defaultLoc','assetlog','model','model.category','assetstatus','assetloc')
+       $assets = Asset::with('model','assigneduser','assigneduser.userloc','assetstatus','defaultLoc','assetlog','model','model.category','assetstatus','assetloc', 'company')
        ->Hardware();
 
        if (Input::has('search')) {
@@ -1184,6 +1257,7 @@ class AssetsController extends AdminController
       'notes',
       'expected_checkin',
       'order_number',
+      'companyName',
       'location',
       'image',
     ];
@@ -1198,6 +1272,9 @@ class AssetsController extends AdminController
             break;
         case 'category':
             $assets = $assets->OrderCategory($order);
+            break;
+        case 'companyName':
+            $assets = $assets->OrderCompany($order);
             break;
         case 'location':
             $assets = $assets->OrderLocation($order);
@@ -1251,8 +1328,9 @@ class AssetsController extends AdminController
             'last_checkout' => ($asset->last_checkout!='') ? $asset->last_checkout : '',
             'expected_checkin' => ($asset->expected_checkin!='')  ? $asset->expected_checkin : '',
             'change'        => ($inout) ? $inout : '',
-            'actions'       => ($actions) ? $actions : ''
-            );
+            'actions'       => ($actions) ? $actions : '',
+            'companyName'   => is_null($asset->company) ? '' : e($asset->company->name)
+        );
       }
 
       $data = array('total'=>$assetCount, 'rows'=>$rows);
