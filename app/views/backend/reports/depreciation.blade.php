@@ -132,7 +132,7 @@
 <script src="{{ asset('assets/js/extensions/export/jquery.base64.js') }}"></script>
 <script type="text/javascript">
     $('#table').bootstrapTable({
-        classes: 'table table-responsive table-no-bordered',
+        classes: 'table table-responsive table-striped table-bordered',
         undefinedText: '',
         iconsPrefix: 'fa',
         showRefresh: true,
