@@ -55,6 +55,14 @@
       'route' => ['hardware/bulkedit'],
 	  'class' => 'form-horizontal' ]) }}
 
+    {{-- <div id="toolbar" class="pull-left" style="padding-top: 10px;">
+        <select class="form-control">
+            <option value="">Export Type</option>
+            <option value="all">Export All</option>
+            <option value="selected">Export Selected</option>
+        </select>
+    </div> --}}
+
     <table
     name="assets"
     id="table"
@@ -110,6 +118,8 @@
 <script src="{{ asset('assets/js/extensions/export/tableExport.js') }}"></script>
 <script src="{{ asset('assets/js/extensions/export/jquery.base64.js') }}"></script>
 <script type="text/javascript">
+
+
     $('#table').bootstrapTable({
         classes: 'table table-responsive table-no-bordered',
         undefinedText: '',
@@ -141,8 +151,15 @@
         },
 
     });
-</script>
 
+    // $('#toolbar').find('select').change(function () {
+    //     $table.bootstrapTable('refreshOptions', {
+    //         exportDataType: $(this).val()
+    //     });
+    // });
+
+
+</script>
 
 <script>
     $(function() {
