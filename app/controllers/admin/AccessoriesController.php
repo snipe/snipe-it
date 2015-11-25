@@ -43,10 +43,12 @@ class AccessoriesController extends AdminController
         // Show the page
         $category_list = array('' => '') + DB::table('categories')->where('category_type','=','accessory')->whereNull('deleted_at')->orderBy('name','ASC')->lists('name', 'id');
         $company_list = Company::getSelectList();
+        $location_list = locationsList();
         return View::make('backend/accessories/edit')
             ->with('accessory', new Accessory)
             ->with('category_list', $category_list)
-            ->with('company_list', $company_list);
+            ->with('company_list', $company_list)
+            ->with('location_list', $location_list);
     }
 
 
@@ -73,6 +75,7 @@ class AccessoriesController extends AdminController
             // Update the accessory data
             $accessory->name            		= e(Input::get('name'));
             $accessory->category_id            	= e(Input::get('category_id'));
+            $accessory->location_id            	= e(Input::get('location_id'));
             $accessory->company_id              = Company::getIdForCurrentUser(Input::get('company_id'));
             $accessory->order_number            = e(Input::get('order_number'));
 
@@ -121,12 +124,14 @@ class AccessoriesController extends AdminController
             return Redirect::to('admin/accessories')->with('error', Lang::get('general.insufficient_permissions'));
         }
 
-		$category_list = array('' => '') + DB::table('categories')->where('category_type','=','accessory')->whereNull('deleted_at')->orderBy('name','ASC')->lists('name', 'id');
+		    $category_list = array('' => '') + DB::table('categories')->where('category_type','=','accessory')->whereNull('deleted_at')->orderBy('name','ASC')->lists('name', 'id');
         $company_list = Company::getSelectList();
+        $location_list = locationsList();
 
         return View::make('backend/accessories/edit', compact('accessory'))
             ->with('category_list',$category_list)
-            ->with('company_list', $company_list);
+            ->with('company_list', $company_list)
+            ->with('location_list', $location_list);
     }
 
 
@@ -165,6 +170,7 @@ class AccessoriesController extends AdminController
 
             // Update the accessory data
             $accessory->name            		= e(Input::get('name'));
+            $accessory->location_id            	= e(Input::get('location_id'));
             $accessory->category_id            	= e(Input::get('category_id'));
             $accessory->company_id              = Company::getIdForCurrentUser(Input::get('company_id'));
             $accessory->order_number            = e(Input::get('order_number'));
@@ -587,6 +593,7 @@ class AccessoriesController extends AdminController
                 'category'      => link_to('admin/settings/categories/'.$accessory->category->id.'/view', $accessory->category->name),
                 'qty'           => $accessory->qty,
                 'order_number'  => $accessory->order_number,
+                'location'      => ($accessory->location) ? $accessory->location->name: '',
                 'purchase_date' => $accessory->purchase_date,
                 'purchase_cost' => $accessory->purchase_cost,
                 'numRemaining'  => $accessory->numRemaining(),

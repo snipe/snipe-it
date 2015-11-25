@@ -23,6 +23,11 @@ class Accessory extends Elegant
         return $this->belongsTo('Company', 'company_id');
     }
 
+    public function location()
+    {
+        return $this->belongsTo('Location', 'location_id');
+    }
+
     public function category()
     {
         return $this->belongsTo('Category', 'category_id')->where('category_type','=','accessory');
@@ -102,6 +107,10 @@ class Accessory extends Elegant
   						$query->where('action_type','=','checkout')
   						->where('created_at','LIKE','%'.$search.'%');
   					});
+          })->orWhere(function($query) use ($search) {
+  					$query->whereHas('location', function($query) use ($search) {
+  						$query->where('locations.name','LIKE','%'.$search.'%');
+  					});
   				})->orWhere('accessories.name','LIKE','%'.$search.'%')
   				->orWhere('accessories.order_number','LIKE','%'.$search.'%')
           ->orWhere('accessories.purchase_cost','LIKE','%'.$search.'%')
@@ -135,6 +144,19 @@ class Accessory extends Elegant
   	{
   		return $query->leftJoin('categories', 'accessories.category_id', '=', 'categories.id')->orderBy('categories.name', $order);
   	}
+
+    /**
+    * Query builder scope to order on company
+    *
+    * @param  Illuminate\Database\Query\Builder  $query  Query builder instance
+    * @param  text                              $order    	 Order
+    *
+    * @return Illuminate\Database\Query\Builder          Modified query builder
+    */
+    public function scopeOrderLocation($query, $order)
+    {
+      return $query->leftJoin('locations', 'consumables.location_id', '=', 'locations.id')->orderBy('locations.name', $order);
+    }
 
 
 }
