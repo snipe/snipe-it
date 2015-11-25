@@ -484,7 +484,7 @@ class ConsumablesController extends AdminController
       $rows[] = array(
         'name' => link_to('/admin/users/'.$consumable_assignment->user->id.'/view', $consumable_assignment->user->fullName()),
         'created_at' => ($consumable_assignment->created_at->format('Y-m-d H:i:s')=='-0001-11-30 00:00:00') ? '' : $consumable_assignment->created_at->format('Y-m-d H:i:s'),
-        'admin' => $consumable_assignment->admin->fullName(),
+        'admin' => ($consumable_assignment->admin) ? $consumable_assignment->admin->fullName() : '',
       );
     }
 
