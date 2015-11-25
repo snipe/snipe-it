@@ -18,6 +18,7 @@ return array(
     'serial'   		=> 'Sê-ri',
     'status'   		=> 'Tình trạng',
     'title'      	=> 'Tài sản ',
+    'image'		=> 'Device Image',
     'days_without_acceptance' => 'Những ngày không chấp nhận'
 
 );

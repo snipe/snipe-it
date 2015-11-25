@@ -1,8 +1,8 @@
 <?php
 
 return array(
-    'assets_rtd'		=> 'Assets RTD',
-    'assets_checkedout'		=> 'Assets Assigned',
+    'assets_rtd'		=> '设备RTD',
+    'assets_checkedout'		=> '持有人',
     'id'      		=> '编号',
     'city'   		=> '城市',
     'state'   		=> '省份',

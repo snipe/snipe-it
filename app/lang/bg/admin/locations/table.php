@@ -1,8 +1,8 @@
 <?php
 
 return array(
-    'assets_rtd'		=> 'Assets RTD',
-    'assets_checkedout'		=> 'Assets Assigned',
+    'assets_rtd'		=> 'Бракувани активи',
+    'assets_checkedout'		=> 'Изписани активи',
     'id'      		=> 'ID',
     'city'   		=> 'Град',
     'state'   		=> 'Област',

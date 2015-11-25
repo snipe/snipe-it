@@ -15,9 +15,9 @@ return array(
     ),
 
     'delete' => array(
-        'confirm'   => 'Are you sure you wish to delete this consumable?',
+        'confirm'   => 'この消耗品を削除しますか？',
         'error'   => '消耗品の削除に失敗しました。もう一度試して下さい。',
-        'success' => 'The consumable was deleted successfully.'
+        'success' => '消耗品は削除されました。'
     ),
 
      'checkout' => array(
