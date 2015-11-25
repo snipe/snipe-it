@@ -649,7 +649,7 @@ return false;
 	*/
 	public function scopeTextSearch($query, $search)
 	{
-		$search = explode('+', $search);
+		$search = explode(' ', $search);
 
 		return $query->where(function($query) use ($search)
 		{
