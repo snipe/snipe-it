@@ -85,7 +85,7 @@
         undefinedText: '',
         iconsPrefix: 'fa',
         showRefresh: true,
-        search: true,
+        search: false,
         pageSize: {{{ Setting::getSettings()->per_page }}},
         pagination: true,
         sidePagination: 'server',
