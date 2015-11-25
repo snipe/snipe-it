@@ -37,7 +37,14 @@
 <div class="row header">
     <div class="col-md-12">
         <a href="{{ route('create/hardware') }}" class="btn btn-success pull-right"><i class="fa fa-plus icon-white"></i> @lang('general.create')</a>
-        <h3>@yield('title0')</h3>
+        <h3>@yield('title0')
+
+             @if (Input::has('order_number'))
+                  - Order {{{ Input::get('order_number') }}}
+             @endif
+
+
+       </h3>
     </div>
 </div>
 
@@ -48,33 +55,44 @@
       'route' => ['hardware/bulkedit'],
 	  'class' => 'form-horizontal' ]) }}
 
+    {{-- <div id="toolbar" class="pull-left" style="padding-top: 10px;">
+        <select class="form-control">
+            <option value="">Export Type</option>
+            <option value="all">Export All</option>
+            <option value="selected">Export Selected</option>
+        </select>
+    </div> --}}
+
     <table
     name="assets"
     id="table"
     data-url="{{route('api.hardware.list', array(''=>Input::get('status'),'order_number'=>Input::get('order_number')))}}"
     data-cookie="true"
     data-click-to-select="true"
-    data-cookie-id-table="assetsTable">
+    data-cookie-id-table="assetTable-{{ Config::get('version.hash_version') }}">
         <thead>
             <tr>
                 <th data-class="hidden-xs" data-switchable="false" data-searchable="false" data-sortable="false" data-field="checkbox"><div class="text-center"><input type="checkbox" id="checkAll" style="padding-left: 0px;"></div></th>
                 <th data-sortable="true" data-field="id" data-visible="false">@lang('general.id')</th>
-                <th data-sortable="true" data-field="name"  data-visible="false">{{Lang::get('admin/hardware/form.name')}}</th>
-                <th data-sortable="true" data-field="asset_tag">{{Lang::get('admin/hardware/table.asset_tag')}}</th>
-                <th data-sortable="true" data-field="serial">{{Lang::get('admin/hardware/table.serial')}}</th>
-                <th data-sortable="true" data-field="model">{{Lang::get('admin/hardware/form.model')}}</th>
-                <th data-sortable="true" data-field="status">{{Lang::get('admin/hardware/table.status')}}</th>
-                <th data-sortable="true" data-field="location">{{Lang::get('admin/hardware/table.location')}}</th>
-                <th data-sortable="true" data-field="category">{{Lang::get('general.category')}}</th>
-                <th data-sortable="true" data-field="eol">{{Lang::get('general.eol')}}</th>
-                <th data-sortable="true" data-field="notes">{{Lang::get('general.notes')}}</th>
-                <th data-sortable="true" data-field="order">{{Lang::get('admin/hardware/form.order')}}</th>
-                <th data-sortable="true" data-field="checkout_date">{{Lang::get('admin/hardware/table.checkout_date')}}</th>
+                <th data-field="companyName" data-searchable="true" data-sortable="true" data-switchable="true">@lang('general.company')</th>
+                <th data-sortable="true" data-field="image"  data-visible="false">@lang('admin/hardware/table.image')</th>
+                <th data-sortable="true" data-field="name"  data-visible="false">@lang('admin/hardware/form.name')</th>
+                <th data-sortable="true" data-field="asset_tag">@lang('admin/hardware/table.asset_tag')</th>
+                <th data-sortable="true" data-field="serial">@lang('admin/hardware/table.serial')</th>
+                <th data-sortable="true" data-field="model">@lang('admin/hardware/form.model')</th>
+                <th data-sortable="true" data-field="status">@lang('admin/hardware/table.status')</th>
+                <th data-sortable="true" data-field="location" data-searchable="true">@lang('admin/hardware/table.location')</th>
+                <th data-sortable="true" data-field="category" data-searchable="true">@lang('general.category')</th>
+                <th data-sortable="false" data-field="eol"  data-searchable="true">@lang('general.eol')</th>
+                <th data-sortable="true" data-searchable="true" data-field="notes">@lang('general.notes')</th>
+                <th data-sortable="true" data-searchable="true"  data-field="order_number">@lang('admin/hardware/form.order')</th>
+                <th data-sortable="true" data-searchable="true" data-field="last_checkout">@lang('admin/hardware/table.checkout_date')</th>
+                <th data-sortable="true" data-field="expected_checkin" data-searchable="true">@lang('admin/hardware/form.expected_checkin')</th>
                 @foreach(CustomField::all() AS $field)
                   <th data-sortable="true" data-field="{{$field->db_column_name()}}">{{{$field->name}}}</th>
                 @endforeach
-                <th data-switchable="false" data-searchable="false" data-sortable="false" data-field="change">{{Lang::get('admin/hardware/table.change')}}</th>
-                <th data-switchable="false" data-searchable="false" data-sortable="false" data-field="actions" >{{Lang::get('table.actions')}}</th>
+                <th data-switchable="false" data-searchable="false" data-sortable="false" data-field="change">@lang('admin/hardware/table.change')</th>
+                <th data-switchable="false" data-searchable="false" data-sortable="false" data-field="actions" >@lang('table.actions')</th>
             </tr>
         </thead>
         <tfoot>
@@ -101,6 +119,8 @@
 <script src="{{ asset('assets/js/extensions/export/tableExport.js') }}"></script>
 <script src="{{ asset('assets/js/extensions/export/jquery.base64.js') }}"></script>
 <script type="text/javascript">
+
+
     $('#table').bootstrapTable({
         classes: 'table table-responsive table-no-bordered',
         undefinedText: '',
@@ -112,6 +132,7 @@
         sidePagination: 'server',
         sortable: true,
         cookie: true,
+        cookieExpire: '2y',
         mobileResponsive: true,
         showExport: true,
         showColumns: true,
@@ -131,8 +152,15 @@
         },
 
     });
-</script>
 
+    // $('#toolbar').find('select').change(function () {
+    //     $table.bootstrapTable('refreshOptions', {
+    //         exportDataType: $(this).val()
+    //     });
+    // });
+
+
+</script>
 
 <script>
     $(function() {

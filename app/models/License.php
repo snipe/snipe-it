@@ -3,6 +3,8 @@
 class License extends Depreciable
 {
 	use SoftDeletingTrait;
+	use CompanyableTrait;
+
     protected $dates = ['deleted_at'];
 
     public $timestamps = true;
@@ -10,14 +12,20 @@ class License extends Depreciable
     protected $guarded = 'id';
     protected $table = 'licenses';
     protected $rules = array(
-            'name'   => 'required|alpha_space|min:3|max:255',
-            'serial'   => 'required|min:5',
-            'seats'   => 'required|min:1|max:10000|integer',
-            'license_email'   => 'email|min:0|max:120',
-            'license_name'   => 'alpha_space|min:0|max:100',
-            'note'   => 'alpha_space',
-            'notes'   => 'alpha_space|min:0',
-        );
+        'name'   => 'required|alpha_space|min:3|max:255',
+        'serial'   => 'required|min:5',
+        'seats'   => 'required|min:1|max:10000|integer',
+        'license_email'   => 'email|min:0|max:120',
+        'license_name'   => 'alpha_space|min:0|max:100',
+        'note'   => 'alpha_space',
+        'notes'   => 'alpha_space|min:0',
+        'company_id' => 'integer',
+    );
+
+    public function company()
+    {
+        return $this->belongsTo('Company', 'company_id');
+    }
 
     /**
      * Get the assigned user
@@ -63,8 +71,7 @@ class License extends Depreciable
     */
      public static function assetcount()
     {
-        return DB::table('license_seats')
-                    ->whereNull('deleted_at')
+        return LicenseSeat::whereNull('deleted_at')
                     ->count();
     }
 
@@ -74,8 +81,7 @@ class License extends Depreciable
     */
      public function totalSeatsByLicenseID()
     {
-        return DB::table('license_seats')
-        			->where('license_id', '=', $this->id)
+        return LicenseSeat::where('license_id', '=', $this->id)
                     ->whereNull('deleted_at')
                     ->count();
     }
@@ -86,8 +92,7 @@ class License extends Depreciable
     */
      public static function availassetcount()
     {
-        return DB::table('license_seats')
-                    ->whereNull('assigned_to')
+        return LicenseSeat::whereNull('assigned_to')
                     ->whereNull('asset_id')
                     ->whereNull('deleted_at')
                     ->count();
@@ -98,8 +103,7 @@ class License extends Depreciable
      */
     public function availcount()
     {
-        return DB::table('license_seats')
-                    ->whereNull('assigned_to')
+        return LicenseSeat::whereNull('assigned_to')
                     ->whereNull('asset_id')
                     ->where('license_id', '=', $this->id)
                     ->whereNull('deleted_at')
@@ -190,7 +194,7 @@ public function freeSeat()
 
         return $query->where(function($query) use ($search)
         {
-                $query->where('name', 'LIKE', '%'.$search.'%')
+        $query->where('name', 'LIKE', '%'.$search.'%')
 				->orWhere('serial', 'LIKE', '%'.$search.'%')
 				->orWhere('notes', 'LIKE', '%'.$search.'%')
 				->orWhere('order_number', 'LIKE', '%'.$search.'%')

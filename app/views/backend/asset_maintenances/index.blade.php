@@ -26,9 +26,10 @@
          data-url="{{route('api.asset_maintenances.list')}}"
          data-cookie="true"
          data-click-to-select="true"
-         data-cookie-id-table="maintenancesTable">
+         data-cookie-id-table="maintenancesTable-{{ Config::get('version.hash_version') }}">
             <thead>
                      <tr>
+                     <th data-field="companyName" data-sortable="false" data-visible="false">@lang('admin/companies/table.title')</th>
                      <th data-sortable="true" data-field="id" data-visible="false">@lang('general.id')</th>
                          <th data-sortable="false" data-field="asset_name">@lang('admin/asset_maintenances/table.asset_name')</th>
                          <th data-sortable="false" data-field="supplier">@lang('admin/asset_maintenances/table.supplier_name')</th>
@@ -64,6 +65,7 @@
       sidePagination: 'server',
       sortable: true,
       cookie: true,
+      cookieExpire: '2y',
       mobileResponsive: true,
       showExport: true,
       showColumns: true,

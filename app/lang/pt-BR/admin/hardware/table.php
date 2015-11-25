@@ -18,6 +18,7 @@ return array(
     'serial'   		=> 'Serial',
     'status'   		=> 'Status',
     'title'      	=> 'Ativo ',
+    'image'		=> 'Device Image',
     'days_without_acceptance' => 'Dias sem que fosse aceito'
 
 );

@@ -1,7 +1,8 @@
 <?php
 
 return array(
-
+    'assets_rtd'		=> 'Assets RTD',
+    'assets_checkedout'		=> 'Assets Assigned',
     'id'      		=> '아이디',
     'city'   		=> '시',
     'state'   		=> '주',
@@ -13,5 +14,5 @@ return array(
     'zip'			=> '우편번호',
     'locations'		=> '위치',
     'parent'		=> '상위',
-    'currency'  	=> '현지 통화', // this is deprecated
+    'currency'  	=> '현지 통화',
 );

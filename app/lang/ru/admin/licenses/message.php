@@ -22,7 +22,7 @@ return array(
     'upload' => array(
         'error'   => 'Не удалось загрузить файл(ы). Повторите попытку.',
         'success' => 'Файл(ы) успешно загружены.',
-        'nofiles' => 'You did not select any files for upload, or the file you are trying to upload is too large',
+        'nofiles' => 'Не выбрано ни одного файла для загрузки или файл, который вы пытаетесь загрузить, слишком большой',
         'invalidfiles' => 'Один или несколько ваших файлов слишком большого размера или имеют неподдерживаемый формат. Разрешены только следующие форматы файлов:  png, gif, jpg, doc, docx, pdf, txt.',
     ),
 

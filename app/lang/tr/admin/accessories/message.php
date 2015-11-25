@@ -2,17 +2,17 @@
 
 return array(
 
-    'does_not_exist' => 'Kategori mevcut değil.',
+    'does_not_exist' => 'Accessory does not exist.',
     'assoc_users'	 => 'Bu aksesuardan :count adet kullanıcılara çıkış yapıldı. Lütfen aksesuar girişi yapınız ve tekrar deneyin.',
 
     'create' => array(
-        'error'   => 'Kategori oluşturulamadı. Lütfen tekrar deneyiniz.',
-        'success' => 'Kategori oluşturuldu.'
+        'error'   => 'Accessory was not created, please try again.',
+        'success' => 'Accessory created successfully.'
     ),
 
     'update' => array(
-        'error'   => 'Kategori güncellenemedi, Lütfen tekrar deneyin',
-        'success' => 'Kategori güncellendi.'
+        'error'   => 'Accessory was not updated, please try again',
+        'success' => 'Accessory updated successfully.'
     ),
 
     'delete' => array(
@@ -20,7 +20,7 @@ return array(
         'error'   => 'Bu kategoriyi silerken bir hata ile karşılaşıldı. Lütfen tekrar deneyin.',
         'success' => 'Kategori silindi.'
     ),
-    
+
      'checkout' => array(
         'error'   		=> 'Aksesuar çıkışı yapılamadı, lütfen tekrar deneyin',
         'success' 		=> 'Aksesuar çıkışı yapıldı.',

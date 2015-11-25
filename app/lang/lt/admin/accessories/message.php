@@ -2,17 +2,17 @@
 
 return array(
 
-    'does_not_exist' => 'Tokios kategorijos nėra.',
+    'does_not_exist' => 'Accessory does not exist.',
     'assoc_users'	 => 'Ši įranga šiuo metu turi:count vienetus išduotus vartotojams. Prašome patikrinkite irangos meniu ir bandykite dar kartą. ',
 
     'create' => array(
-        'error'   => 'Kategorijos sukurti nepavyko, prašome badykite dar kartą.',
-        'success' => 'Sėkmingai sukurta nauja kategorija.'
+        'error'   => 'Accessory was not created, please try again.',
+        'success' => 'Accessory created successfully.'
     ),
 
     'update' => array(
-        'error'   => 'Kategorija neatnaujinta, prašome pabandykite dar kartą',
-        'success' => 'Kategorijos atnaujinimas sėkmingas.'
+        'error'   => 'Accessory was not updated, please try again',
+        'success' => 'Accessory updated successfully.'
     ),
 
     'delete' => array(
@@ -20,7 +20,7 @@ return array(
         'error'   => 'Nepavyko ištrinti kategorijos. Prašome bandykite dar kartą.',
         'success' => 'Kategorija sėkmingai ištrinta.'
     ),
-    
+
      'checkout' => array(
         'error'   		=> 'Įrangos nepavyko išimti, prašome bandykite dar kartą',
         'success' 		=> 'Įranga sėkmingai išimta.',

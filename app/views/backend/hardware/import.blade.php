@@ -68,7 +68,7 @@
                 $('#fileupload').fileupload({
                     //maxChunkSize: 100000,
                     dataType: 'json',
-
+                    formData: {_token: '{{ csrf_token() }}'},
                     progress: function (e, data) {
                         //var overallProgress = $('#fileupload').fileupload('progress');
                         //var activeUploads = $('#fileupload').fileupload('active');

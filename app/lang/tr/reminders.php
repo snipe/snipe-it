@@ -13,12 +13,12 @@ return array(
     |
     */
 
-    "password" => "Passwords must be six characters and match the confirmation.",
+    "password" => "Şifre en az 6 karakter olmalı ve birbiriyle eşleşmeli.",
 
     "user"     => "Kullanıcı adı veya e-mail adresi hatalı",
 
     "token"    => "This password reset token is invalid.",
 
-    "sent" => "If a matching email address was found, a password reminder has been sent!",
+    "sent" => "Eşleşen email bulunsaydı, şifre gönderilirdi!",
 
 );

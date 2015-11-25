@@ -29,7 +29,7 @@
     data-url="{{route('api.manufacturers.list')}}"
     data-cookie="true"
     data-click-to-select="true"
-    data-cookie-id-table="manufacturersTable">
+    data-cookie-id-table="manufacturersTable-{{ Config::get('version.hash_version') }}">
         <thead>
             <tr>
                 <th data-sortable="true" data-field="id" data-visible="false">@lang('general.id')</th>
@@ -80,6 +80,7 @@
         sidePagination: 'server',
         sortable: true,
         cookie: true,
+        cookieExpire: '2y',
         mobileResponsive: true,
         showExport: true,
         showColumns: true,

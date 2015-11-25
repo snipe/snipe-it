@@ -25,7 +25,7 @@ Asset Depreciations ::
                   id="table"
                   data-url="{{ route('api.depreciations.list') }}"
                   data-cookie="true"
-                  data-cookie-id-table="depreciationsTable">
+                  data-cookie-id-table="depreciationsTable-{{ Config::get('version.hash_version') }}">
                       <thead>
                           <tr>
                               <th data-sortable="true" data-field="id" data-visible="false">@lang('general.id')</th>
@@ -67,6 +67,7 @@ $('#table').bootstrapTable({
     sidePagination: 'server',
     sortable: true,
     cookie: true,
+    cookieExpire: '2y',
     mobileResponsive: true,
     showExport: true,
     showColumns: true,

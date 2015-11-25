@@ -5,14 +5,17 @@ class UserTest extends TestCase {
      * Username is required
      */
 
-     /*
+
+    /*
     public function testUsernameIsRequired()
     {
       // Create a new User
       $user = new User;
-      $user->email = "name@example.com";
+      $user->email = "name4@example.com";
+      $user->first_name = "Jane";
+      $user->last_name = "Smith";
       $user->password = "password";
-      $user->setHasher(new Cartalyst\Sentry\Hashing\BCryptHasher);
+
 
 
       // User should not save
@@ -28,6 +31,7 @@ class UserTest extends TestCase {
       $this->assertEquals($errors[0], "The username field is required.");
     }
     */
+
 
 
 

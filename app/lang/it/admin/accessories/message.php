@@ -2,17 +2,17 @@
 
 return array(
 
-    'does_not_exist' => 'La categoria non Esiste',
+    'does_not_exist' => 'Accessory does not exist.',
     'assoc_users'	 => 'Questo accessorio ha attualmente :count elementi controllati agli utenti. Si prega di controllare negli accessori e e riprovare. ',
 
     'create' => array(
-        'error'   => 'La categoria non è stata creata, si prega di riprovare.',
-        'success' => 'Categoria creata con successo.'
+        'error'   => 'Accessory was not created, please try again.',
+        'success' => 'Accessory created successfully.'
     ),
 
     'update' => array(
-        'error'   => 'La categoria non è stata aggiornata, si prega di rirpovare',
-        'success' => 'Categoria aggiornata con successo.'
+        'error'   => 'Accessory was not updated, please try again',
+        'success' => 'Accessory updated successfully.'
     ),
 
     'delete' => array(
@@ -20,7 +20,7 @@ return array(
         'error'   => 'Si è verificato un problema cercando di eliminare la categoria. Riprova.',
         'success' => 'La categoria è stata eliminata con successo.'
     ),
-    
+
      'checkout' => array(
         'error'   		=> 'L\'accessorio non è stato estratto, si prega di riprovare',
         'success' 		=> 'Accessorio estratto con successo.',

@@ -1,7 +1,8 @@
 <?php
 
 return array(
-
+    'assets_rtd'		=> 'Assets RTD',
+    'assets_checkedout'		=> 'Assets Assigned',
     'id'      		=> 'ID',
     'city'   		=> 'Miestas',
     'state'   		=> 'Rajonas',
@@ -13,5 +14,5 @@ return array(
     'zip'			=> 'Pašto kodas',
     'locations'		=> 'Vietovės',
     'parent'		=> 'Pagrindinė',
-    'currency'  	=> 'Vietos valiuta', // this is deprecated
+    'currency'  	=> 'Vietos valiuta',
 );

@@ -2,17 +2,17 @@
 
 return array(
 
-    'does_not_exist' => 'Kategorie neexistuje.',
+    'does_not_exist' => 'Accessory does not exist.',
     'assoc_users'	 => 'Tato kategorie má nyní :count položek k předání uživatelům. Zkontrolujte převzetí příslušenství a zkuste to znovu. ',
 
     'create' => array(
-        'error'   => 'Kategorie nevytvořena, zkuste to znovu.',
-        'success' => 'Kategorie úspěšně vytvořena.'
+        'error'   => 'Accessory was not created, please try again.',
+        'success' => 'Accessory created successfully.'
     ),
 
     'update' => array(
-        'error'   => 'Kategorie neaktualizována, zkuste to znovu',
-        'success' => 'Kategorie úspěšně aktualizována.'
+        'error'   => 'Accessory was not updated, please try again',
+        'success' => 'Accessory updated successfully.'
     ),
 
     'delete' => array(
@@ -20,7 +20,7 @@ return array(
         'error'   => 'Vyskytl se problém při mazání kategorie. Zkuste to znovu.',
         'success' => 'Kategorie byla úspěšně smazána.'
     ),
-    
+
      'checkout' => array(
         'error'   		=> 'Příslušenství nebylo převzato, zkuste to znovu',
         'success' 		=> 'Příslušenství úspěšně předáno.',

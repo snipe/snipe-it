@@ -4,6 +4,7 @@ use AdminController;
 use Input;
 use Lang;
 use Category;
+use Company;
 use Redirect;
 use Setting;
 use DB;
@@ -11,7 +12,6 @@ use Sentry;
 use Str;
 use Validator;
 use View;
-use Datatable;
 
 class CategoriesController extends AdminController
 {
@@ -237,10 +237,6 @@ class CategoriesController extends AdminController
         }
 
 
-        $actions = new \Chumper\Datatable\Columns\FunctionColumn('actions', function($categories) {
-            return '<a href="'.route('update/category', $categories->id).'" class="btn btn-warning btn-sm" style="margin-right:5px;"><i class="fa fa-pencil icon-white"></i></a><a data-html="false" class="btn delete-asset btn-danger btn-sm" data-toggle="modal" href="'.route('delete/category', $categories->id).'" data-content="'.Lang::get('admin/categories/message.delete.confirm').'" data-title="'.Lang::get('general.delete').' '.htmlspecialchars($categories->name).'?" onClick="return false;"><i class="fa fa-trash icon-white"></i></a>';
-        });
-
         $allowed_columns = ['id','name','category_type'];
         $order = Input::get('order') === 'asc' ? 'asc' : 'desc';
         $sort = in_array(Input::get('sort'), $allowed_columns) ? Input::get('sort') : 'created_at';
@@ -257,9 +253,9 @@ class CategoriesController extends AdminController
 
             $rows[] = array(
                 'id'      => $category->id,
-                'name'  => $category->name,
+                'name'  => link_to('/admin/settings/categories/'.$category->id.'/view', $category->name) ,
                 'category_type' => ucwords($category->category_type),
-                'count'         => ($category->category_type=='asset') ? link_to('/admin/settings/categories/'.$category->id.'/view', $category->assetscount()) : $category->accessoriescount(),
+                'count'         => ($category->category_type=='asset') ?  $category->assetscount() : $category->accessoriescount(),
                 'acceptance'    => ($category->require_acceptance=='1') ? '<i class="fa fa-check"></i>' : '',
                 //EULA is still not working correctly
                 'eula'          => ($category->getEula()) ? '<i class="fa fa-check"></i>' : '',
@@ -273,34 +269,70 @@ class CategoriesController extends AdminController
     }
 
     public function getDataView($categoryID) {
-        $category = Category::find($categoryID);
-        $categoryassets = $category->assets;
 
-        $actions = new \Chumper\Datatable\Columns\FunctionColumn('actions', function ($categoryassets)
-            {
-                if (($categoryassets->assigned_to !='') && ($categoryassets->assigned_to > 0)) {
-                    return '<a href="'.route('checkin/hardware', $categoryassets->id).'" class="btn btn-primary btn-sm">'.Lang::get('general.checkin').'</a>';
+      $category = Category::with('assets.company')->find($categoryID);
+      $category_assets = $category->assets;
+
+      if (Input::has('search')) {
+          $category_assets = $category_assets->TextSearch(e(Input::get('search')));
+      }
+
+      if (Input::has('offset')) {
+          $offset = e(Input::get('offset'));
+      } else {
+          $offset = 0;
+      }
+
+      if (Input::has('limit')) {
+          $limit = e(Input::get('limit'));
+      } else {
+          $limit = 50;
+      }
+
+      $order = Input::get('order') === 'asc' ? 'asc' : 'desc';
+
+      $allowed_columns = ['id','name','serial','asset_tag'];
+      $sort = in_array(Input::get('sort'), $allowed_columns) ? Input::get('sort') : 'created_at';
+      $count = $category_assets->count();
+
+      $rows = array();
+
+      foreach ($category_assets as $asset) {
+
+        $actions = '';
+        $inout='';
+
+        if ($asset->deleted_at=='') {
+            $actions = '<div style=" white-space: nowrap;"><a href="'.route('clone/hardware', $asset->id).'" class="btn btn-info btn-sm" title="Clone asset"><i class="fa fa-files-o"></i></a> <a href="'.route('update/hardware', $asset->id).'" class="btn btn-warning btn-sm"><i class="fa fa-pencil icon-white"></i></a> <a data-html="false" class="btn delete-asset btn-danger btn-sm" data-toggle="modal" href="'.route('delete/hardware', $asset->id).'" data-content="'.Lang::get('admin/hardware/message.delete.confirm').'" data-title="'.Lang::get('general.delete').' '.htmlspecialchars($asset->asset_tag).'?" onClick="return false;"><i class="fa fa-trash icon-white"></i></a></div>';
+        } elseif ($asset->deleted_at!='') {
+            $actions = '<a href="'.route('restore/hardware', $asset->id).'" class="btn btn-warning btn-sm"><i class="fa fa-recycle icon-white"></i></a>';
+        }
+
+        if ($asset->assetstatus) {
+            if ($asset->assetstatus->deployable != 0) {
+                if (($asset->assigned_to !='') && ($asset->assigned_to > 0)) {
+                    $inout = '<a href="'.route('checkin/hardware', $asset->id).'" class="btn btn-primary btn-sm">'.Lang::get('general.checkin').'</a>';
                 } else {
-                    return '<a href="'.route('checkout/hardware', $categoryassets->id).'" class="btn btn-info btn-sm">'.Lang::get('general.checkout').'</a>';
+                    $inout = '<a href="'.route('checkout/hardware', $asset->id).'" class="btn btn-info btn-sm">'.Lang::get('general.checkout').'</a>';
                 }
-            });
-
-        return Datatable::collection($categoryassets)
-        ->addColumn('name', function ($categoryassets) {
-            return link_to('/hardware/'.$categoryassets->id.'/view', $categoryassets->name);
-        })
-        ->addColumn('asset_tag', function ($categoryassets) {
-            return link_to('/hardware/'.$categoryassets->id.'/view', $categoryassets->asset_tag);
-        })
-        ->addColumn('assigned_to', function ($categoryassets) {
-            if ($categoryassets->assigned_to) {
-                return link_to('/admin/users/'.$categoryassets->assigned_to.'/view', $categoryassets->assigneduser->fullName());
             }
-        })
-        ->addColumn($actions)
-        ->searchColumns('name','asset_tag','assigned_to','actions')
-        ->orderColumns('name','asset_tag','assigned_to','actions')
-        ->make();
+        }
+
+        $rows[] = array(
+          'id' => $asset->id,
+          'name' => link_to('/hardware/'.$asset->id.'/view', $asset->showAssetName()),
+          'model' => $asset->model->name,
+          'asset_tag' => $asset->asset_tag,
+          'serial' => $asset->serial,
+          'assigned_to' => ($asset->assigneduser) ? link_to('/admin/users/'.$asset->assigneduser->id.'/view', $asset->assigneduser->fullName()): '',
+          'change' => $inout,
+          'actions' => $actions,
+          'companyName' => Company::getName($asset),
+        );
+      }
+
+      $data = array('total' => $count, 'rows' => $rows);
+      return $data;
     }
 
 

@@ -1,11 +1,18 @@
 <?php
 
-class LicenseSeat extends Elegant
+class LicenseSeat extends Elegant implements ICompanyableChild
 {
+	use CompanyableChildTrait;
 	use SoftDeletingTrait;
+
     protected $dates = ['deleted_at'];
     protected $guarded = 'id';
     protected $table = 'license_seats';
+
+    public function getCompanyableParents()
+    {
+        return ['asset', 'license'];
+    }
 
     public function license()
     {

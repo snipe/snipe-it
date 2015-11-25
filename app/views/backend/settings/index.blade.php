@@ -30,6 +30,19 @@
                                         <td>@lang('admin/settings/general.site_name')</td>
                                         <td>{{{ $setting->site_name }}} </td>
                                     </tr>
+                                    @if (Sentry::getUser()->isSuperUser())
+                                        <tr>
+                                            <td>
+                                                @lang('admin/settings/general.full_multiple_companies_support_text')
+                                            </td>
+
+                                            @if ($setting->full_multiple_companies_support == 1)
+                                                <td>@lang('general.yes')</td>
+                                            @else
+                                                <td>@lang('general.no')</td>
+                                            @endif
+                                        </tr>
+                                    @endif
                                     <tr>
                                         <td>@lang('admin/settings/general.default_currency')</td>
                                         <td>{{{ $setting->default_currency }}} </td>
@@ -119,16 +132,24 @@
                                         @if ($setting->slack_endpoint!='')
                                             <td>@lang('general.yes')
 
-	                                            @if ($setting->slack_channel!='')
-	                                            	{{{ $setting->slack_channel }}}
-	                                            @endif
+                                                @if ($setting->slack_channel!='')
+                                                    {{{ $setting->slack_channel }}}
+                                                @endif
 
                                             </td>
                                         @else
                                             <td>@lang('general.no')</td>
                                         @endif
                                     </tr>
+                                    <tr>
+                                        <td>@lang('admin/settings/general.ldap_integration')</td>
 
+                                        @if ($setting->ldap_enabled == 1)
+                                            <td>@lang('general.yes')</td>
+                                        @else
+                                            <td>@lang('general.no')</td>
+                                        @endif
+                                    </tr>
 
 
 

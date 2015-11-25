@@ -15,6 +15,9 @@ use Str;
 use Validator;
 use View;
 use Datatable;
+use Asset;
+use Company;
+use Config;
 
 //use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -318,7 +321,7 @@ class ModelsController extends AdminController
 
 
     /**
-    *  Get the asset information to present to the model view page
+    *  Get the model information to present to the model view page
     *
     * @param  int  $assetId
     * @return View
@@ -340,7 +343,14 @@ class ModelsController extends AdminController
 
     }
 
-        public function getClone($modelId = null)
+    /**
+    *  Get the clone page to clone a model
+    *
+    * @param  int  $modelId
+    * @return View
+    **/
+
+    public function getClone($modelId = null)
     {
         // Check if the model exists
         if (is_null($model_to_clone = Model::find($modelId))) {
@@ -365,10 +375,18 @@ class ModelsController extends AdminController
 
     }
 
+
+    /**
+    *  Get the JSON response for the bootstrap table list view
+    *
+    * @param  string  $status
+    * @return JSON
+    **/
+
     public function getDatatable($status = null)
     {
-        $models = Model::orderBy('created_at', 'DESC')->with('category','assets','depreciation');
-        ($status != 'Deleted') ?: $models->withTrashed()->Deleted();;
+        $models = Model::with('category','assets','depreciation');
+        ($status != 'Deleted') ?: $models->withTrashed()->Deleted();
 
         if (Input::has('search')) {
             $models = $models->TextSearch(Input::get('search'));
@@ -387,7 +405,7 @@ class ModelsController extends AdminController
         }
 
 
-        $allowed_columns = ['name'];
+        $allowed_columns = ['id','name','modelno'];
         $order = Input::get('order') === 'asc' ? 'asc' : 'desc';
         $sort = in_array(Input::get('sort'), $allowed_columns) ? Input::get('sort') : 'created_at';
 
@@ -400,14 +418,16 @@ class ModelsController extends AdminController
 
         foreach ($models as $model) {
             if ($model->deleted_at == '') {
-                $actions = '<a href="'.route('update/model', $model->id).'" class="btn btn-warning btn-sm" style="margin-right:5px;"><i class="fa fa-pencil icon-white"></i></a><a data-html="false" class="btn delete-asset btn-danger btn-sm" data-toggle="modal" href="'.route('delete/model', $model->id).'" data-content="'.Lang::get('admin/models/message.delete.confirm').'" data-title="'.Lang::get('general.delete').' '.htmlspecialchars($model->name).'?" onClick="return false;"><i class="fa fa-trash icon-white"></i></a>';
+                $actions = '<div style=" white-space: nowrap;"><a href="'.route('update/model', $model->id).'" class="btn btn-warning btn-sm" style="margin-right:5px;"><i class="fa fa-pencil icon-white"></i></a><a data-html="false" class="btn delete-asset btn-danger btn-sm" data-toggle="modal" href="'.route('delete/model', $model->id).'" data-content="'.Lang::get('admin/models/message.delete.confirm').'" data-title="'.Lang::get('general.delete').' '.htmlspecialchars($model->name).'?" onClick="return false;"><i class="fa fa-trash icon-white"></i></a></div>';
             } else {
                 $actions = '<a href="'.route('restore/model', $model->id).'" class="btn btn-warning btn-sm"><i class="fa fa-recycle icon-white"></i></a>';
             }
 
             $rows[] = array(
-                'manufacturer'      => $model->manufacturer->name,
+                'id'      => $model->id,
+                'manufacturer'      => link_to('/admin/settings/manufacturers/'.$model->manufacturer->id.'/view', $model->manufacturer->name),
                 'name'              => link_to('/hardware/models/'.$model->id.'/view', $model->name),
+                'image' => ($model->image!='') ? '<img src="'.Config::get('app.url').'/uploads/models/'.$model->image.'" height=50 width=50>' : '',
                 'modelnumber'       => $model->modelno,
                 'numassets'         => $model->assets->count(),
                 'depreciation'      => (($model->depreciation)&&($model->depreciation->id > 0)) ? $model->depreciation->name.' ('.$model->depreciation->months.')' : Lang::get('general.no_depreciation'),
@@ -423,32 +443,69 @@ class ModelsController extends AdminController
     }
 
 
+    /**
+    *  Get the asset information to present to the model view page
+    *
+    * @param  int  $modelID
+    * @return View
+    **/
     public function getDataView($modelID)
     {
-        $model = Model::withTrashed()->find($modelID);
-        $modelassets = $model->assets;
+        $assets = Asset::where('model_id','=',$modelID)->withTrashed()->with('company');
 
-        $modelassetsCount = $modelassets->Count();
+        if (Input::has('search')) {
+            $assets = $assets->TextSearch(Input::get('search'));
+        }
+
+        if (Input::has('offset')) {
+            $offset = e(Input::get('offset'));
+        } else {
+            $offset = 0;
+        }
+
+        if (Input::has('limit')) {
+            $limit = e(Input::get('limit'));
+        } else {
+            $limit = 50;
+        }
+
+
+        $allowed_columns = ['name', 'serial','asset_tag'];
+        $order = Input::get('order') === 'asc' ? 'asc' : 'desc';
+        $sort = in_array(Input::get('sort'), $allowed_columns) ? Input::get('sort') : 'created_at';
+
+        $assets = $assets->orderBy($sort, $order);
+
+        $assetsCount = $assets->count();
+        $assets = $assets->skip($offset)->take($limit)->get();
 
         $rows = array();
+        $actions = '';
 
-        foreach ($modelassets as $asset) {
-            if (($asset->assigned_to !='') && ($asset->assigned_to > 0)) {
-                $actions = '<a href="'.route('checkin/hardware', $asset->id).'" class="btn btn-primary btn-sm">'.Lang::get('general.checkin').'</a>';
-            } else {
-                $actions = '<a href="'.route('checkout/hardware', $asset->id).'" class="btn btn-info btn-sm">'.Lang::get('general.checkout').'</a>';
+        foreach ($assets as $asset) {
+
+            if ($asset->assetstatus) {
+                if ($asset->assetstatus->deployable != 0) {
+                    if (($asset->assigned_to !='') && ($asset->assigned_to > 0)) {
+                        $actions = '<a href="'.route('checkin/hardware', $asset->id).'" class="btn btn-primary btn-sm">'.Lang::get('general.checkin').'</a>';
+                    } else {
+                        $actions = '<a href="'.route('checkout/hardware', $asset->id).'" class="btn btn-info btn-sm">'.Lang::get('general.checkout').'</a>';
+                    }
+                }
             }
 
             $rows[] = array(
+                'id'            => $asset->id,
                 'name'          => link_to('/hardware/'.$asset->id.'/view', $asset->showAssetName()),
                 'asset_tag'     => link_to('hardware/'.$asset->id.'/view', $asset->asset_tag),
                 'serial'        => $asset->serial,
                 'assigned_to'   => ($asset->assigned_to) ? link_to('/admin/users/'.$asset->assigned_to.'/view', $asset->assigneduser->fullName()) : '',
-                'actions'       => $actions
-                );
+                'actions'       => $actions,
+                'companyName'   => Company::getName($asset)
+            );
         }
 
-        $data = array('total' => $modelassetsCount, 'rows' => $rows);
+        $data = array('total' => $assetsCount, 'rows' => $rows);
 
         return $data;
     }

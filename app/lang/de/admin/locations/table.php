@@ -1,7 +1,8 @@
 <?php
 
 return array(
-
+    'assets_rtd'		=> 'Asset bereit zum Herausgeben',
+    'assets_checkedout'		=> 'Zugewiesene Assets',
     'id'      		=> 'ID',
     'city'   		=> 'Stadt',
     'state'   		=> 'Bundesland',
@@ -13,5 +14,5 @@ return array(
     'zip'			=> 'Postleitzahl',
     'locations'		=> 'Standorte',
     'parent'		=> 'Hauptkategorie',
-    'currency'  	=> 'Landeswährung', // this is deprecated
+    'currency'  	=> 'Landeswährung',
 );

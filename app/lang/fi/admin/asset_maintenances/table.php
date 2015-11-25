@@ -1,9 +1,9 @@
 <?php
 
     return [
-        'title'         => 'Asset Maintenance',
-        'asset_name'    => 'Asset Name',
-        'supplier_name' => 'Supplier Name',
-        'is_warranty'   => 'Warranty',
-        'dl_csv'        => 'Download CSV'
+        'title'         => 'Laitteen ylläpito',
+        'asset_name'    => 'Laitenimi',
+        'supplier_name' => 'Toimittajan Nimi',
+        'is_warranty'   => 'Takuu',
+        'dl_csv'        => 'Lataa CSV'
     ];

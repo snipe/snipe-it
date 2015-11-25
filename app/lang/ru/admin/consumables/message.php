@@ -15,9 +15,9 @@ return array(
     ),
 
     'delete' => array(
-        'confirm'   => 'Are you sure you wish to delete this consumable?',
+        'confirm'   => 'Вы уверены, что хотите удалить расходный материал?',
         'error'   => 'В процессе удаления расходного материала произошла ошибка. Попробуйте ещё раз.',
-        'success' => 'The consumable was deleted successfully.'
+        'success' => 'Расходный материал успешно удалён.'
     ),
 
      'checkout' => array(

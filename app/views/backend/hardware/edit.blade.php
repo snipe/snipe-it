@@ -113,13 +113,26 @@
             <div class="col-md-12 column">
 
 			 @if ($asset->id)
-				 <form class="form-horizontal" method="post" action="{{ route('update/hardware',$asset->id) }}" autocomplete="off" role="form">
+				 <form class="form-horizontal" method="post" action="{{ route('update/hardware',$asset->id) }}" autocomplete="off" role="form" enctype="multipart/form-data" >
 			 @else
-				 <form class="form-horizontal" method="post" action="{{ route('savenew/hardware') }}" autocomplete="off" role="form">
+				 <form class="form-horizontal" method="post" action="{{ route('savenew/hardware') }}" autocomplete="off" role="form" enctype="multipart/form-data">
 			 @endif
 
             <!-- CSRF Token -->
             <input type="hidden" name="_token" value="{{ csrf_token() }}" />
+
+            <!-- Company -->
+            @if (Company::isCurrentUserAuthorized())
+              <div class="form-group {{ $errors->has('company_id') ? ' has-error' : '' }}">
+                <div class="col-md-2 control-label">{{ Form::label('company_id', Lang::get('general.company')) }}</div>
+                <div class="col-md-7 col-sm-12">
+                  {{ Form::select('company_id', $company_list , Input::old('company_id', $asset->company_id),
+                                  ['class'=>'select2', 'style'=>'min-width:350px']) }}
+                  {{ $errors->first('company_id', '<br><span class="alert-msg"><i class="fa fa-times"></i> :message</span>') }}
+                </div>
+              </div>
+            @endif
+
 
             <!-- Asset Tag -->
             <div class="form-group {{ $errors->has('asset_tag') ? ' has-error' : '' }}">
@@ -235,11 +248,18 @@
             <!-- Warranty -->
             <div class="form-group {{ $errors->has('warranty_months') ? ' has-error' : '' }}">
                 <label for="warranty_months" class="col-md-2 control-label">@lang('admin/hardware/form.warranty')</label>
-                <div class="col-md-2">
-                    <div class="input-group">
-                    <input class="col-md-2 form-control" type="text" name="warranty_months" id="warranty_months" value="{{{ Input::old('warranty_months', $asset->warranty_months) }}}" />   <span class="input-group-addon">@lang('admin/hardware/form.months')</span>
-                    {{ $errors->first('warranty_months', '<br><span class="alert-msg"><i class="fa fa-times"></i> :message</span>') }}
+                <div class="col-md-10">
+
+                    <div class="input-group col-md-3" style="padding-left: 0px;">
+                      <input class="form-control" type="text" name="warranty_months" id="warranty_months" value="{{{ Input::old('warranty_months', $asset->warranty_months) }}}" />
+                      <span class="input-group-addon">@lang('admin/hardware/form.months')</span>
                     </div>
+                    <div class="col-md-10" style="padding-left: 0px;">
+                      <p class="help-block">Entering a value here will override your asset model EOL settings.</p>
+                      {{ $errors->first('warranty_months', '<br><span class="alert-msg"><i class="fa fa-times"></i> :message</span>') }}
+                    </div>
+
+
                 </div>
             </div>
 
@@ -313,11 +333,33 @@
         @endif
 
 
+            <!-- Image -->
+            @if ($asset->image)
+                <div class="form-group {{ $errors->has('image_delete') ? 'has-error' : '' }}">
+                    <label class="col-md-2 control-label" for="image_delete">@lang('general.image_delete')</label>
+                    <div class="col-md-5">
+                        {{ Form::checkbox('image_delete') }}
+                        <img src="/uploads/assets/{{{ $asset->image }}}" />
+                        {{ $errors->first('image_delete', '<br><span class="alert-msg">:message</span>') }}
+                    </div>
+                </div>
+            @endif
+
+            <div class="form-group {{ $errors->has('image') ? 'has-error' : '' }}">
+                <label class="col-md-2 control-label" for="image">@lang('general.image_upload')</label>
+                <div class="col-md-5">
+                    {{ Form::file('image') }}
+                    {{ $errors->first('image', '<br><span class="alert-msg">:message</span>') }}
+                </div>
+            </div>
+
+
+
             <!-- Form actions -->
                 <div class="form-group">
                 <label class="col-md-2 control-label"></label>
                     <div class="col-md-7 col-sm-12">
-                        <a class="btn btn-link" href="{{ URL::previous() }}">@lang('button.cancel')</a>
+                        <a class="btn btn-link" href="{{ URL::previous() }}" method="post" enctype="multipart/form-data">@lang('button.cancel')</a>
                         <button type="submit" class="btn btn-success"><i class="fa fa-check icon-white"></i> @lang('general.save')</button>
                     </div>
                 </div>

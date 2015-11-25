@@ -25,7 +25,7 @@
       data-url="{{ route('api.suppliers.list') }}"
       data-cookie="true"
       data-click-to-select="true"
-      data-cookie-id-table="suppliersTable">
+      data-cookie-id-table="suppliersTable-{{ Config::get('version.hash_version') }}">
           <thead>
               <tr>
                   <th data-sortable="true" data-field="id" data-visible="false">@lang('admin/suppliers/table.id')</th>
@@ -63,6 +63,7 @@
         sidePagination: 'server',
         sortable: true,
         cookie: true,
+        cookieExpire: '2y',
         mobileResponsive: true,
         showExport: true,
         showColumns: true,

@@ -35,6 +35,19 @@
     <!-- CSRF Token -->
     <input type="hidden" name="_token" value="{{ csrf_token() }}" />
 
+    <!-- Company -->
+    @if (Company::isCurrentUserAuthorized())
+        <div class="form-group {{ $errors->has('company_id') ? ' has-error' : '' }}">
+            <div class="col-md-3">
+                {{ Form::label('company_id', Lang::get('general.company')) }}
+            </div>
+            <div class="col-md-7">
+                {{ Form::select('company_id', $company_list , Input::old('company_id', $consumable->company_id), array('class'=>'select2', 'style'=>'width:350px')) }}
+                {{ $errors->first('company_id', '<span class="alert-msg"><i class="fa fa-times"></i> :message</span>') }}
+            </div>
+        </div>
+    @endif
+
     <!-- Name -->
     <div class="form-group {{ $errors->has('name') ? ' has-error' : '' }}">
         <div class="col-md-3">
@@ -58,7 +71,20 @@
                 {{ $errors->first('category_id', '<span class="alert-msg"><i class="fa fa-times"></i> :message</span>') }}
             </div>
     </div>
-    
+
+    <!--  Location -->
+    <div class="form-group {{ $errors->has('location_id') ? ' has-error' : '' }}">
+       <div class="col-md-3">
+       {{ Form::label('location_id', Lang::get('general.location')) }}
+       </div>
+            <div class="col-md-7 col-sm-12">
+                {{ Form::select('location_id', $location_list , Input::old('location_id', $consumable->location_id), array('class'=>'select2', 'style'=>'width:350px')) }}
+
+                {{ $errors->first('location_id', '<br><span class="alert-msg"><i class="fa fa-times"></i> :message</span>') }}
+            </div>
+    </div>
+
+
     <!-- Order Number -->
     <div class="form-group {{ $errors->has('order_number') ? ' has-error' : '' }}">
         <div class="col-md-3">
@@ -69,7 +95,7 @@
             {{ $errors->first('order_number', '<br><span class="alert-msg"><i class="fa fa-times"></i> :message</span>') }}
         </div>
     </div>
-    
+
     <!-- Purchase Date -->
     <div class="form-group {{ $errors->has('purchase_date') ? ' has-error' : '' }}">
         <div class="col-md-3">
@@ -81,7 +107,7 @@
             {{ $errors->first('purchase_date', '<br><span class="alert-msg"><i class="fa fa-times"></i> :message</span>') }}
         </div>
     </div>
-    
+
     <!-- Purchase Cost -->
     <div class="form-group {{ $errors->has('purchase_cost') ? ' has-error' : '' }}">
         <div class="col-md-3">

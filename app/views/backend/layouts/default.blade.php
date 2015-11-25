@@ -45,7 +45,7 @@
         <!-- global header javascripts -->
         <script src="{{ asset('assets/js/jquery-latest.js') }}"></script>
         <script src="{{ asset('assets/js/bootstrap.min.js') }}"></script>
-        
+
         <script>
             window.snipeit = {
                 settings: {
@@ -108,12 +108,12 @@
             </button>
 
 
-	            @if (Setting::getSettings()->brand === 3)
+	            @if (Setting::getSettings()->brand == '3')
                     <a class="navbar-brand" href="{{ Config::get('app.url') }}" style="padding: 5px;">
                     <img src="{{ Config::get('app.url') }}/uploads/{{{ Setting::getSettings()->logo }}}">
                     {{{ Setting::getSettings()->site_name }}}
                     </a>
-                @elseif (Setting::getSettings()->brand === 2)
+                @elseif (Setting::getSettings()->brand == '2')
 	            	<a class="navbar-brand" href="{{ Config::get('app.url') }}" style="padding: 5px;">
 	            	<img src="{{ Config::get('app.url') }}/uploads/{{{ Setting::getSettings()->logo }}}">
 	            	</a>
@@ -199,6 +199,11 @@
                         <b class="caret"></b>
                     </a>
                     <ul class="dropdown-menu">
+                        <li{{ (Request::is('admin/settings/companies*') ? ' class="active"' : '') }}>
+                            <a href="{{ URL::to('admin/settings/companies') }}">
+                                <i class="fa fa-building-o fa-fw"></i> @lang('general.companies')
+                            </a>
+                        </li>
                         <li{{ (Request::is('hardware/models*') ? ' class="active"' : '') }}>
                             <a href="{{ URL::to('hardware/models') }}">
                                 <i class="fa fa-th fa-fw"></i> @lang('general.asset_models')
@@ -468,6 +473,13 @@
     <script src="{{ asset('assets/js/bootstrap.datepicker.js') }}"></script>
     <script src="{{ asset('assets/js/theme.js') }}"></script>
     <script src="{{ asset('assets/js/snipeit.js') }}"></script>
+
+    <script>
+    $(document).ready(function(){
+        $('[data-toggle="popover"]').popover();
+    });
+    </script>
+
 
     @section('moar_scripts')
 	@show

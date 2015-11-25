@@ -11,7 +11,7 @@
 
 <div class="row header">
     <div class="col-md-12">
-        @if (Config::get('ldap.url')!='')
+        @if (Setting::getSettings()->ldap_enabled == 1)
             <a href="{{ route('ldap/user') }}" class="btn btn-default pull-right"><span class="fa fa-upload"></span> LDAP</a>
         @endif
 	<a href="{{ route('import/user') }}" class="btn btn-default pull-right" style="margin-right: 5px;"><span class="fa fa-upload"></span> @lang('general.import')</a>
@@ -46,18 +46,20 @@
         data-url="{{ route('api.users.list', array(''=>Input::get('status'))) }}"
         data-cookie="true"
         data-click-to-select="true"
-        data-cookie-id-table="userTable">
+        data-cookie-id-table="userTableDisplay-{{ Config::get('version.hash_version') }}">
            <thead>
                <tr>
                    <th data-class="hidden-xs hidden-sm" data-switchable="false" data-searchable="false" data-sortable="false" data-field="checkbox"><div class="text-center"><input type="checkbox" id="checkAll" style="padding-left: 0px;" style="hidden-xs hidden-sm"></div></th>
+                   <th data-switchable="true" data-sortable="false" data-field="id" data-visible="false">@lang('general.id')</th>
+                   <th data-switchable="true" data-sortable="false" data-field="companyName" data-visible="false">@lang('admin/companies/table.title')</th>
                    <th data-sortable="true" data-field="name">{{ Lang::get('admin/users/table.name') }}</th>
                    <th data-sortable="true" data-field="email">
                        <span class="hidden-md hidden-lg">Email</span>
                        <span class="hidden-xs"><i class="fa fa-envelope fa-lg"></i></span>
                    </th>
                    <th data-sortable="true" data-field="username">{{ Lang::get('admin/users/table.username') }}</th>
-                   <th data-sortable="false" data-field="manager">{{ Lang::get('admin/users/table.manager') }}</th>
-                   <th data-sortable="false" data-field="location">{{ Lang::get('admin/users/table.location') }}</th>
+                   <th data-searchable="true" data-sortable="true" data-field="manager">{{ Lang::get('admin/users/table.manager') }}</th>
+                   <th data-sortable="true" data-field="location">{{ Lang::get('admin/users/table.location') }}</th>
                    <th data-sortable="false" data-field="assets">
                        <span class="hidden-md hidden-lg">Assets</span>
                        <span class="hidden-xs"><i class="fa fa-barcode fa-lg"></i></span>
@@ -113,6 +115,7 @@
         sidePagination: 'server',
         sortable: true,
         cookie: true,
+        cookieExpire: '2y',
         mobileResponsive: true,
         showExport: true,
         showColumns: true,

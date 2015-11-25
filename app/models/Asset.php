@@ -3,30 +3,44 @@
 class Asset extends Depreciable
 {
 	use SoftDeletingTrait;
+	use CompanyableTrait;
+
     protected $dates = ['deleted_at'];
+    protected $table = 'assets';
+    protected $errors;
+    protected $rules = [
+      'name'            => 'alpha_space|min:2|max:255',
+      'model_id'        => 'required',
+      'status_id'       => 'required',
+      'company_id'      => 'integer',
+      'warranty_months' => 'integer|min:0|max:240',
+      'note'            => 'alpha_space',
+      'notes'           => 'alpha_space',
+      'physical'         => 'integer',
+      'checkout_date'   => 'date|max:10|min:10',
+      'checkin_date'    => 'date|max:10|min:10',
+      'supplier_id'     => 'integer',
+      'asset_tag'       => 'required|alpha_space|min:2|max:255|unique:assets,asset_tag,{id},id,deleted_at,NULL',
+      'status'          => 'integer',
+    ];
 
-        protected $table = 'assets';
-        protected $errors;
-        protected $rules = [
-            'name'            => 'alpha_space|min:2|max:255',
-            'model_id'        => 'required',
-            'status_id'       => 'required',
-            'warranty_months' => 'integer|min:0|max:240',
-            'note'            => 'alpha_space',
-            'notes'           => 'alpha_space',
-            'pysical'         => 'integer',
-            'checkout_date'   => 'date|max:10|min:10',
-            'checkin_date'    => 'date|max:10|min:10',
-            'supplier_id'     => 'integer',
-            'asset_tag'       => 'required|alpha_space|min:3|max:255|unique:assets,asset_tag,{id}',
-            'status'          => 'integer'
-        ];
+    public function company()
+    {
+        return $this->belongsTo('Company', 'company_id');
+    }
 
 
-        /**
-         * Checkout asset
-         */
-        public function checkOutToUser($user, $admin, $checkout_at = null, $expected_checkin = null, $note = null, $name = null) {
+    /**
+    * Checkout asset
+    */
+    public function checkOutToUser($user, $admin, $checkout_at = null, $expected_checkin = null, $note = null, $name = null) {
+
+		if ($expected_checkin) {
+			$this->expected_checkin = $expected_checkin ;
+		}
+
+		$this->last_checkout = $checkout_at;
+
             $this->assigneduser()->associate($user);
             $this->name = $name;
 
@@ -113,285 +127,284 @@ class Asset extends Depreciable
 
         }
 
-        public function createCheckoutLog($checkout_at = null, $admin, $user, $expected_checkin = null, $note = null) {
+  public function createCheckoutLog($checkout_at = null, $admin, $user, $expected_checkin = null, $note = null) {
 
-            $logaction = new Actionlog();
-            $logaction->asset_id = $this->id;
-            $logaction->checkedout_to = $this->assigned_to;
-            $logaction->asset_type = 'hardware';
-            $logaction->location_id = $user->location_id;
-            $logaction->adminlog()->associate($admin);
-            $logaction->note = $note;
-            if ($checkout_at) {
-                $logaction->created_at = $checkout_at;
-            }
-            $log = $logaction->logaction('checkout');
-            return $logaction->id;
-        }
+      $logaction = new Actionlog();
+      $logaction->asset_id = $this->id;
+      $logaction->checkedout_to = $this->assigned_to;
+      $logaction->asset_type = 'hardware';
+      $logaction->location_id = $user->location_id;
+      $logaction->adminlog()->associate($admin);
+      $logaction->note = $note;
+      if ($checkout_at) {
+          $logaction->created_at = $checkout_at;
+      }
+      $log = $logaction->logaction('checkout');
+      return $logaction->id;
+  }
 
 
-        /**
-         * Set depreciation relationship
-         */
-        public function depreciation()
-        {
-            return $this->model->belongsTo( 'Depreciation', 'depreciation_id' );
-        }
+  /**
+   * Set depreciation relationship
+   */
+  public function depreciation()
+  {
+      return $this->model->belongsTo( 'Depreciation', 'depreciation_id' );
+  }
 
-        /**
-         * Get depreciation attribute from associated asset model
-         */
-        public function get_depreciation()
-        {
-            return $this->model->depreciation;
-        }
+  /**
+   * Get depreciation attribute from associated asset model
+   */
+  public function get_depreciation()
+  {
+      return $this->model->depreciation;
+  }
 
-        /**
-         * Get uploads for this asset
-         */
-        public function uploads()
-        {
+  /**
+   * Get uploads for this asset
+   */
+  public function uploads()
+  {
 
-            return $this->hasMany( 'Actionlog', 'asset_id' )
-                        ->where( 'asset_type', '=', 'hardware' )
-                        ->where( 'action_type', '=', 'uploaded' )
-                        ->whereNotNull( 'filename' )
-                        ->orderBy( 'created_at', 'desc' );
-        }
+      return $this->hasMany( 'Actionlog', 'asset_id' )
+                  ->where( 'asset_type', '=', 'hardware' )
+                  ->where( 'action_type', '=', 'uploaded' )
+                  ->whereNotNull( 'filename' )
+                  ->orderBy( 'created_at', 'desc' );
+  }
 
-	  public static function checkUploadIsImage($file) {
-		  // Check if the file is an image, so we can show a preview
-		  $finfo = finfo_open(FILEINFO_MIME_TYPE); // return mime type ala mimetype extension
-		  $filetype = finfo_file($finfo, $file);
-		  finfo_close($finfo);
+public static function checkUploadIsImage($file) {
+// Check if the file is an image, so we can show a preview
+$finfo = finfo_open(FILEINFO_MIME_TYPE); // return mime type ala mimetype extension
+$filetype = finfo_file($finfo, $file);
+finfo_close($finfo);
 
-		  if (($filetype=="image/jpeg") || ($filetype=="image/jpg") || ($filetype=="image/gif")) {
-			  return true;
-		  }
+if (($filetype=="image/jpeg") || ($filetype=="image/jpg") || ($filetype=="image/gif")) {
+  return true;
+}
 
-		  return false;
-	  }
+return false;
+}
 
-        public function assigneduser()
-        {
+  public function assigneduser()
+  {
 
-            return $this->belongsTo( 'User', 'assigned_to' )
-                        ->withTrashed();
-        }
+      return $this->belongsTo( 'User', 'assigned_to' )
+                  ->withTrashed();
+  }
 
-        /**
-         * Get the asset's location based on the assigned user
-         **/
-        public function assetloc()
-        {
+  /**
+   * Get the asset's location based on the assigned user
+   **/
+  public function assetloc()
+  {
 
-            if ($this->assigneduser) {
-                return $this->assigneduser->userloc();
-            } else {
-                return $this->belongsTo( 'Location', 'rtd_location_id' );
-            }
+      if ($this->assigneduser) {
+          return $this->assigneduser->userloc();
+      } else {
+          return $this->belongsTo( 'Location', 'rtd_location_id' );
+      }
 
-        }
+  }
 
-        /**
-         * Get the asset's location based on default RTD location
-         **/
-        public function defaultLoc()
-        {
+  /**
+   * Get the asset's location based on default RTD location
+   **/
+  public function defaultLoc()
+  {
 
-            return $this->belongsTo( 'Location', 'rtd_location_id' );
-        }
+      return $this->belongsTo( 'Location', 'rtd_location_id' );
+  }
 
-        /**
-         * Get action logs for this asset
-         */
-        public function assetlog()
-        {
+  /**
+   * Get action logs for this asset
+   */
+  public function assetlog()
+  {
 
-            return $this->hasMany( 'Actionlog', 'asset_id' )
-                        ->where( 'asset_type', '=', 'hardware' )
-                        ->orderBy( 'created_at', 'desc' )
-                        ->withTrashed();
-        }
+      return $this->hasMany( 'Actionlog', 'asset_id' )
+                  ->where( 'asset_type', '=', 'hardware' )
+                  ->orderBy( 'created_at', 'desc' )
+                  ->withTrashed();
+  }
 
-        /**
-         * assetmaintenances
-         * Get improvements for this asset
-         *
-         * @return mixed
-         * @author  Vincent Sposato <vincent.sposato@gmail.com>
-         * @version v1.0
-         */
-        public function assetmaintenances()
-        {
+  /**
+   * assetmaintenances
+   * Get improvements for this asset
+   *
+   * @return mixed
+   * @author  Vincent Sposato <vincent.sposato@gmail.com>
+   * @version v1.0
+   */
+  public function assetmaintenances()
+  {
 
-            return $this->hasMany( 'AssetMaintenance', 'asset_id' )
-                        ->orderBy( 'created_at', 'desc' )
-                        ->withTrashed();
-        }
+      return $this->hasMany( 'AssetMaintenance', 'asset_id' )
+                  ->orderBy( 'created_at', 'desc' )
+                  ->withTrashed();
+  }
 
-        /**
-         * Get action logs for this asset
-         */
-        public function adminuser()
-        {
+  /**
+   * Get action logs for this asset
+   */
+  public function adminuser()
+  {
 
-            return $this->belongsTo( 'User', 'user_id' );
-        }
+      return $this->belongsTo( 'User', 'user_id' );
+  }
 
-        /**
-         * Get total assets
-         */
-        public static function assetcount()
-        {
+  /**
+   * Get total assets
+   */
+  public static function assetcount()
+  {
 
-            return DB::table( 'assets' )
-                     ->where( 'physical', '=', '1' )
-                     ->whereNull( 'deleted_at', 'and' )
-                     ->count();
-        }
+      return Asset::where( 'physical', '=', '1' )
+               ->whereNull( 'deleted_at', 'and' )
+               ->count();
+  }
 
-        /**
-         * Get total assets not checked out
-         */
-        public static function availassetcount()
-        {
+  /**
+   * Get total assets not checked out
+   */
+  public static function availassetcount()
+  {
 
-            return Asset::RTD()
-                        ->whereNull( 'deleted_at' )
-                        ->count();
+      return Asset::RTD()
+                  ->whereNull( 'deleted_at' )
+                  ->count();
 
-        }
+  }
 
-        /**
-         * Get requestable assets
-         */
-        public static function getRequestable()
-        {
+  /**
+   * Get requestable assets
+   */
+  public static function getRequestable()
+  {
 
-            return Asset::Requestable()
-                        ->whereNull( 'deleted_at' )
-                        ->count();
+      return Asset::Requestable()
+                  ->whereNull( 'deleted_at' )
+                  ->count();
 
-        }
+  }
 
-        /**
-         * Get total assets
-         */
-        public function assetstatus()
-        {
+  /**
+   * Get total assets
+   */
+  public function assetstatus()
+  {
 
-            return $this->belongsTo( 'Statuslabel', 'status_id' );
-        }
+      return $this->belongsTo( 'Statuslabel', 'status_id' );
+  }
 
-        /**
-         * Get name for EULA
-         **/
-        public function showAssetName()
-        {
+  /**
+   * Get name for EULA
+   **/
+  public function showAssetName()
+  {
 
-            if ($this->name == '') {
-                return $this->model->name;
-            } else {
-                return $this->name;
-            }
-        }
+      if ($this->name == '') {
+          return $this->model->name;
+      } else {
+          return $this->name;
+      }
+  }
 
-        public function warrantee_expires()
-        {
+  public function warrantee_expires()
+  {
 
-            $date = date_create( $this->purchase_date );
-            date_add( $date, date_interval_create_from_date_string( $this->warranty_months . ' months' ) );
+      $date = date_create( $this->purchase_date );
+      date_add( $date, date_interval_create_from_date_string( $this->warranty_months . ' months' ) );
 
-            return date_format( $date, 'Y-m-d' );
-        }
+      return date_format( $date, 'Y-m-d' );
+  }
 
-        public function model()
-        {
+  public function model()
+  {
 
-            return $this->belongsTo( 'Model', 'model_id' )
-                        ->withTrashed();
-        }
+      return $this->belongsTo( 'Model', 'model_id' )
+                  ->withTrashed();
+  }
 
-        public static function getExpiringWarrantee( $days = 30 )
-        {
+  public static function getExpiringWarrantee( $days = 30 )
+  {
 
-            return Asset::where( 'archived', '=', '0' )
-                        ->whereNotNull( 'warranty_months' )
-                        ->whereNotNull( 'purchase_date' )
-                        ->whereNull( 'deleted_at' )
-                        ->whereRaw( DB::raw( 'DATE_ADD(`purchase_date`,INTERVAL `warranty_months` MONTH) <= DATE(NOW() + INTERVAL '
-                                             . $days
-                                             . ' DAY) AND DATE_ADD(`purchase_date`,INTERVAL `warranty_months` MONTH) > NOW()' ) )
-                        ->orderBy( 'purchase_date', 'ASC' )
-                        ->get();
+      return Asset::where( 'archived', '=', '0' )
+                  ->whereNotNull( 'warranty_months' )
+                  ->whereNotNull( 'purchase_date' )
+                  ->whereNull( 'deleted_at' )
+                  ->whereRaw( DB::raw( 'DATE_ADD(`purchase_date`,INTERVAL `warranty_months` MONTH) <= DATE(NOW() + INTERVAL '
+                                       . $days
+                                       . ' DAY) AND DATE_ADD(`purchase_date`,INTERVAL `warranty_months` MONTH) > NOW()' ) )
+                  ->orderBy( 'purchase_date', 'ASC' )
+                  ->get();
 
-        }
+  }
 
-        /**
-         * Get the license seat information
-         **/
-        public function licenses()
-        {
+  /**
+   * Get the license seat information
+   **/
+  public function licenses()
+  {
 
-            return $this->belongsToMany( 'License', 'license_seats', 'asset_id', 'license_id' );
+      return $this->belongsToMany( 'License', 'license_seats', 'asset_id', 'license_id' );
 
-        }
+  }
 
-        public function licenseseats()
-        {
+  public function licenseseats()
+  {
 
-            return $this->hasMany( 'LicenseSeat', 'asset_id' );
-        }
+      return $this->hasMany( 'LicenseSeat', 'asset_id' );
+  }
 
-        public function supplier()
-        {
+  public function supplier()
+  {
 
-            return $this->belongsTo( 'Supplier', 'supplier_id' );
-        }
+      return $this->belongsTo( 'Supplier', 'supplier_id' );
+  }
 
-        public function months_until_eol()
-        {
+  public function months_until_eol()
+  {
 
-            $today = date( "Y-m-d" );
-            $d1    = new DateTime( $today );
-            $d2    = new DateTime( $this->eol_date() );
+      $today = date( "Y-m-d" );
+      $d1    = new DateTime( $today );
+      $d2    = new DateTime( $this->eol_date() );
 
-            if ($this->eol_date() > $today) {
-                $interval = $d2->diff( $d1 );
-            } else {
-                $interval = null;
-            }
+      if ($this->eol_date() > $today) {
+          $interval = $d2->diff( $d1 );
+      } else {
+          $interval = null;
+      }
 
-            return $interval;
-        }
+      return $interval;
+  }
 
-        public function eol_date()
-        {
+  public function eol_date()
+  {
 
-            if (( $this->purchase_date ) && ( $this->model )) {
-                $date = date_create( $this->purchase_date );
+      if (( $this->purchase_date ) && ( $this->model )) {
+          $date = date_create( $this->purchase_date );
 
-                // Use the asset-level EOL if one is given
-                if (($this->warranty_months) && ($this->warranty_months!='0')) {
-                    date_add( $date, date_interval_create_from_date_string( $this->warranty_months . ' months' ));
-                // If a warranty month period wasn't specified on the asset level, use the model
-                } else {
-                    date_add( $date, date_interval_create_from_date_string( $this->model->eol . ' months' ));
-                }
+          // Use the asset-level EOL if one is given
+          if (($this->warranty_months) && ($this->warranty_months!='0')) {
+              date_add( $date, date_interval_create_from_date_string( $this->warranty_months . ' months' ));
+          // If a warranty month period wasn't specified on the asset level, use the model
+          } else {
+              date_add( $date, date_interval_create_from_date_string( $this->model->eol . ' months' ));
+          }
 
-                return date_format( $date, 'Y-m-d' );
-            }
+          return date_format( $date, 'Y-m-d' );
+      }
 
-        }
+  }
 
-        /**
-         * Get total assets
-         */
-        public static function autoincrement_asset()
-        {
+  /**
+   * Get total assets
+   */
+  public static function autoincrement_asset()
+  {
 
-            $settings = Setting::getSettings();
+      $settings = Setting::getSettings();
 
 		if ($settings->auto_increment_assets == '1') {
 			$asset_tag = DB::table('assets')
@@ -572,8 +585,62 @@ class Asset extends Depreciable
 		return $query->whereNotNull('deleted_at');
 	}
 
-/**
-	* Query builder scope to search on text
+	/**
+     * scopeInModelList
+     * Get all assets in the provided listing of model ids
+     *
+     * @param       $query
+     * @param array $modelIdListing
+     *
+     * @return mixed
+     * @author  Vincent Sposato <vincent.sposato@gmail.com>
+     * @version v1.0
+     */
+	public function scopeInModelList( $query, array $modelIdListing )
+	{
+		return $query->whereIn('model_id', $modelIdListing );
+	}
+
+  /**
+  * Query builder scope to get not-yet-accepted assets
+  *
+  * @param  Illuminate\Database\Query\Builder  $query  Query builder instance
+  *
+  * @return Illuminate\Database\Query\Builder          Modified query builder
+  */
+	public function scopeNotYetAccepted($query)
+	{
+		return $query->where("accepted","=","pending");
+	}
+
+  /**
+  * Query builder scope to get rejected assets
+  *
+  * @param  Illuminate\Database\Query\Builder  $query  Query builder instance
+  *
+  * @return Illuminate\Database\Query\Builder          Modified query builder
+  */
+	public function scopeRejected($query)
+	{
+		return $query->where("accepted","=","rejected");
+	}
+
+
+  /**
+  * Query builder scope to get accepted assets
+  *
+  * @param  Illuminate\Database\Query\Builder  $query  Query builder instance
+  *
+  * @return Illuminate\Database\Query\Builder          Modified query builder
+  */
+	public function scopeAccepted($query)
+	{
+		return $uery->where("accepted","=","accepted");
+	}
+
+
+	/**
+	* Query builder scope to search on text for complex Bootstrap Tables API
 	*
 	* @param  Illuminate\Database\Query\Builder  $query  Query builder instance
 	* @param  text                              $search    	 Search term
@@ -582,7 +649,7 @@ class Asset extends Depreciable
 	*/
 	public function scopeTextSearch($query, $search)
 	{
-		$search = explode('+', $search);
+		$search = explode(' ', $search);
 
 		return $query->where(function($query) use ($search)
 		{
@@ -596,11 +663,15 @@ class Asset extends Depreciable
 					});
 				})->orWhere(function($query) use ($search) {
 					$query->whereHas('assetstatus', function($query) use ($search) {
-						$query->where('name','LIKE','%'.$search.'%');
+						$query->where('status_labels.name','LIKE','%'.$search.'%');
+					});
+        })->orWhere(function($query) use ($search) {
+					$query->whereHas('company', function($query) use ($search) {
+						$query->where('companies.name','LIKE','%'.$search.'%');
 					});
 				})->orWhere(function($query) use ($search) {
 					$query->whereHas('defaultLoc', function($query) use ($search) {
-						$query->where('name','LIKE','%'.$search.'%');
+						$query->where('locations.name','LIKE','%'.$search.'%');
 					});
 				})->orWhere(function($query) use ($search) {
 					$query->whereHas('assigneduser', function($query) use ($search) {
@@ -619,7 +690,7 @@ class Asset extends Depreciable
 						$query->where('action_type','=','checkout')
 						->where('created_at','LIKE','%'.$search.'%');
 					});
-				})->orWhere('name','LIKE','%'.$search.'%')
+				})->orWhere('assets.name','LIKE','%'.$search.'%')
 				->orWhere('asset_tag','LIKE','%'.$search.'%')
 				->orWhere('serial','LIKE','%'.$search.'%')
 				->orWhere('order_number','LIKE','%'.$search.'%')
@@ -644,18 +715,47 @@ class Asset extends Depreciable
 		return $query->join('models', 'assets.model_id', '=', 'models.id')->orderBy('models.name', $order);
 	}
 
-	public function scopeOrderCheckout($query, $order)
+  /**
+	* Query builder scope to order on company
+	*
+	* @param  Illuminate\Database\Query\Builder  $query  Query builder instance
+	* @param  text                              $order    	 Order
+	*
+	* @return Illuminate\Database\Query\Builder          Modified query builder
+	*/
+	public function scopeOrderCompany($query, $order)
 	{
-		return $query->join('asset_logs', function($join){
-            $join->on('assets.id', '=', 'asset_logs.asset_id');
-        })->where('asset_logs.action_type', '=', 'checkout')
-        ->orderBy('asset_logs.created_at', $order);
+		return $query->leftJoin('companies', 'assets.company_id', '=', 'companies.id')->orderBy('companies.name', $order);
 	}
 
+  /**
+  * Query builder scope to order on category
+  *
+  * @param  Illuminate\Database\Query\Builder  $query  Query builder instance
+  * @param  text                              $order    	 Order
+  *
+  * @return Illuminate\Database\Query\Builder          Modified query builder
+  */
 	public function scopeOrderCategory($query, $order)
 	{
 		return $query->join('models', 'assets.model_id', '=', 'models.id')
             ->join('categories', 'models.category_id', '=', 'categories.id')
             ->orderBy('categories.name', $order);
 	}
+
+  /**
+	* Query builder scope to order on model
+	*
+	* @param  Illuminate\Database\Query\Builder  $query  Query builder instance
+	* @param  text                              $order    	 Order
+	*
+	* @return Illuminate\Database\Query\Builder          Modified query builder
+  * TODO: Extend this method out for checked out assets as well. Right now it
+  * only checks the location name related to rtd_location_id
+	*/
+	public function scopeOrderLocation($query, $order)
+	{
+		return $query->join('locations', 'locations.id', '=', 'assets.rtd_location_id')->orderBy('locations.name', $order);
+	}
+
 }
