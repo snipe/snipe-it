@@ -835,6 +835,7 @@ class AssetsController extends AdminController
         $supplier_list = suppliersList();
         $assigned_to = usersList();
         $statuslabel_types = statusTypeList();
+        $company_list = Company::getSelectList();
 
         $asset = clone $asset_to_clone;
         $asset->id = null;
@@ -851,7 +852,8 @@ class AssetsController extends AdminController
         ->with('asset',$asset)
         ->with('location_list',$location_list)
         ->with('manufacturer',$manufacturer_list)
-        ->with('category',$category_list);
+        ->with('category',$category_list)
+        ->with('company_list',$company_list);
 
     }
 
