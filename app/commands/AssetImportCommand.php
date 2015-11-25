@@ -285,12 +285,20 @@ class AssetImportCommand extends Command {
 
 			}
 
+      if (e($user_asset_category)=='') {
+        $category_name = 'Unnamed Category';
+      } else {
+        $category_name = e($user_asset_category);
+      }
+
 			// Check for the category match and create it if it doesn't exist
-			if ($category = Category::where('name', $user_asset_category)->where('category_type', 'asset')->first()) {
-				$this->comment('Category '.$user_asset_category.' already exists');
+			if ($category = Category::where('name', $category_name)->where('category_type', 'asset')->first()) {
+				$this->comment('Category '.$category_name.' already exists');
+
 			} else {
 				$category = new Category();
-				$category->name = e($user_asset_category);
+
+        $category->name = $category_name;
 				$category->category_type = 'asset';
 				$category->user_id = 1;
 
@@ -338,38 +346,43 @@ class AssetImportCommand extends Command {
 			}
 
 			// Check for the asset match and create it if it doesn't exist
+        if ($asset = Asset::where('asset_tag', $user_asset_tag)->first()) {
+          $this->comment('The Asset with asset tag '.$user_asset_tag.' already exists');
+        } else {
+          $asset = new Asset();
+          $asset->name = e($user_asset_asset_name);
+  				if ($user_asset_purchase_date!='') {
+  					$asset->purchase_date = $user_asset_purchase_date;
+  				} else {
+  					$asset->purchase_date = NULL;
+  				}
+  				if ($user_asset_purchase_cost!='') {
+  					$asset->purchase_cost = ParseFloat(e($user_asset_purchase_cost));
+  				} else {
+  					$asset->purchase_cost = 0.00;
+  				}
+  				$asset->serial = e($user_asset_serial);
+  				$asset->asset_tag = e($user_asset_tag);
+  				$asset->model_id = $asset_model->id;
+  				$asset->assigned_to = $user->id;
+  				$asset->rtd_location_id = $location->id;
+  				$asset->user_id = 1;
+  				$asset->status_id = $status_id;
+  				if ($user_asset_purchase_date!='') {
+  					$asset->purchase_date = $user_asset_purchase_date;
+  				} else {
+  					$asset->purchase_date = NULL;
+  				}
+  				$asset->notes = e($user_asset_notes);
 
-				$asset = new Asset();
-				$asset->name = e($user_asset_asset_name);
-				if ($user_asset_purchase_date!='') {
-					$asset->purchase_date = $user_asset_purchase_date;
-				} else {
-					$asset->purchase_date = NULL;
-				}
-				if ($user_asset_purchase_cost!='') {
-					$asset->purchase_cost = ParseFloat(e($user_asset_purchase_cost));
-				} else {
-					$asset->purchase_cost = 0.00;
-				}
-				$asset->serial = e($user_asset_serial);
-				$asset->asset_tag = e($user_asset_tag);
-				$asset->model_id = $asset_model->id;
-				$asset->assigned_to = $user->id;
-				$asset->rtd_location_id = $location->id;
-				$asset->user_id = 1;
-				$asset->status_id = $status_id;
-				if ($user_asset_purchase_date!='') {
-					$asset->purchase_date = $user_asset_purchase_date;
-				} else {
-					$asset->purchase_date = NULL;
-				}
-				$asset->notes = e($user_asset_notes);
+  				if ($asset->save()) {
+  					$this->comment('Asset '.$user_asset_name.' with serial number '.$user_asset_serial.' was created');
+  	            } else {
+  					$this->comment('Something went wrong! Asset '.$user_asset_name.' was NOT created');
+  				}
 
-				if ($asset->save()) {
-					$this->comment('Asset '.$user_asset_name.' with serial number '.$user_asset_serial.' was created');
-	            } else {
-					$this->comment('Something went wrong! Asset '.$user_asset_name.' was NOT created');
-				}
+        }
+
 
 
 			$this->comment('=====================================');
