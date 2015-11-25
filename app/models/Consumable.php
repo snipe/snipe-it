@@ -18,6 +18,16 @@ class Consumable extends Elegant
         'company_id'  => 'required|integer',
     );
 
+    public function admin()
+    {
+        return $this->belongsTo('User', 'user_id');
+    }
+
+    public function consumableAssigments()
+    {
+        return $this->hasMany('ConsumableAssignment');
+    }
+
     public function company()
     {
         return $this->belongsTo('Company', 'company_id');
@@ -34,7 +44,7 @@ class Consumable extends Elegant
     }
 
     /**
-    * Get action logs for this accessory
+    * Get action logs for this consumable
     */
      public function assetlog()
     {
@@ -44,7 +54,7 @@ class Consumable extends Elegant
 
     public function users()
     {
-        return $this->belongsToMany('User', 'consumables_users', 'consumable_id','assigned_to')->withPivot('id')->withTrashed();
+        return $this->belongsToMany('User', 'consumables_users', 'consumable_id','assigned_to')->withPivot('user_id')->withTrashed()->withTimestamps();
     }
 
     public function hasUsers()
