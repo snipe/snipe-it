@@ -6,29 +6,28 @@ class Asset extends Depreciable
 	use CompanyableTrait;
 
     protected $dates = ['deleted_at'];
+    protected $table = 'assets';
+    protected $errors;
+    protected $rules = [
+      'name'            => 'alpha_space|min:2|max:255',
+      'model_id'        => 'required',
+      'status_id'       => 'required',
+      'company_id'      => 'integer',
+      'warranty_months' => 'integer|min:0|max:240',
+      'note'            => 'alpha_space',
+      'notes'           => 'alpha_space',
+      'physical'         => 'integer',
+      'checkout_date'   => 'date|max:10|min:10',
+      'checkin_date'    => 'date|max:10|min:10',
+      'supplier_id'     => 'integer',
+      'asset_tag'       => 'required|alpha_space|min:2|max:255|unique:assets,asset_tag,{id},id,deleted_at,NULL',
+      'status'          => 'integer',
+    ];
 
-        protected $table = 'assets';
-        protected $errors;
-        protected $rules = [
-            'name'            => 'alpha_space|min:2|max:255',
-            'model_id'        => 'required',
-            'status_id'       => 'required',
-            'company_id'      => 'integer',
-            'warranty_months' => 'integer|min:0|max:240',
-            'note'            => 'alpha_space',
-            'notes'           => 'alpha_space',
-            'pysical'         => 'integer',
-            'checkout_date'   => 'date|max:10|min:10',
-            'checkin_date'    => 'date|max:10|min:10',
-            'supplier_id'     => 'integer',
-            'asset_tag'       => 'required|alpha_space|min:3|max:255|unique:assets,asset_tag,{id}',
-            'status'          => 'integer'
-        ];
-
-        public function company()
-        {
-            return $this->belongsTo('Company', 'company_id');
-        }
+    public function company()
+    {
+        return $this->belongsTo('Company', 'company_id');
+    }
 
 
     /**
