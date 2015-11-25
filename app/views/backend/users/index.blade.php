@@ -46,7 +46,7 @@
         data-url="{{ route('api.users.list', array(''=>Input::get('status'))) }}"
         data-cookie="true"
         data-click-to-select="true"
-        data-cookie-id-table="userTableDisplay-v{{ Config::get('version.app_version') }}">
+        data-cookie-id-table="userTableDisplay-{{ Config::get('version.hash_version') }}">
            <thead>
                <tr>
                    <th data-class="hidden-xs hidden-sm" data-switchable="false" data-searchable="false" data-sortable="false" data-field="checkbox"><div class="text-center"><input type="checkbox" id="checkAll" style="padding-left: 0px;" style="hidden-xs hidden-sm"></div></th>

@@ -27,7 +27,7 @@
         data-url="{{ route('api.groups.list') }}"
         data-cookie="true"
         data-click-to-select="true"
-        data-cookie-id-table="userGroupDisplay-v{{ Config::get('version.app_version') }}">
+        data-cookie-id-table="userGroupDisplay-{{ Config::get('version.hash_version') }}">
            <thead>
                <tr>
                    <th data-switchable="true" data-sortable="false" data-field="id" data-visible="false">@lang('general.id')</th>

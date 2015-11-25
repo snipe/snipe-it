@@ -52,7 +52,7 @@
         data-url="{{route('api.consumables.view', $consumable->id)}}"
         data-cookie="true"
         data-click-to-select="true"
-        data-cookie-id-table="consumableDetailTable-v{{ Config::get('version.app_version') }}">
+        data-cookie-id-table="consumableDetailTable-{{ Config::get('version.hash_version') }}">
             <thead>
                 <tr>
                     <th data-switchable="false" data-searchable="false" data-sortable="false" data-field="name">{{Lang::get('general.user')}}</th>
