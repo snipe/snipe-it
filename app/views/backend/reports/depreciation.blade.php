@@ -86,14 +86,14 @@
             </td>
 
             @if ($asset->purchase_cost > 0)
-            <td class="align-right">
+            <td>
                 @if ($asset->assetloc )
                     {{{ $asset->assetloc->currency }}}
                 @else
                     {{{ Setting::first()->default_currency }}}
                 @endif
             	{{{ number_format($asset->purchase_cost) }}}</td>
-            <td class="align-right">
+            <td>
                 @if ($asset->assetloc )
                     {{{ $asset->assetloc->currency }}}
                 @else
@@ -101,7 +101,7 @@
                 @endif
 
             	{{{ number_format($asset->getDepreciatedValue()) }}}</td>
-            <td class="align-right">
+            <td>
                 @if ($asset->assetloc)
                     {{{ $asset->assetloc->currency }}}
                 @else
