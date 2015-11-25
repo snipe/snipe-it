@@ -384,7 +384,7 @@ class ModelsController extends AdminController
     public function getDatatable($status = null)
     {
         $models = Model::with('category','assets','depreciation');
-        ($status != 'Deleted') ?: $models->withTrashed()->Deleted();;
+        ($status != 'Deleted') ?: $models->withTrashed()->Deleted();
 
         if (Input::has('search')) {
             $models = $models->TextSearch(Input::get('search'));
@@ -477,12 +477,18 @@ class ModelsController extends AdminController
         $assets = $assets->skip($offset)->take($limit)->get();
 
         $rows = array();
+        $actions = '';
 
         foreach ($assets as $asset) {
-            if (($asset->assigned_to !='') && ($asset->assigned_to > 0)) {
-                $actions = '<a href="'.route('checkin/hardware', $asset->id).'" class="btn btn-primary btn-sm">'.Lang::get('general.checkin').'</a>';
-            } else {
-                $actions = '<a href="'.route('checkout/hardware', $asset->id).'" class="btn btn-info btn-sm">'.Lang::get('general.checkout').'</a>';
+
+            if ($asset->assetstatus) {
+                if ($asset->assetstatus->deployable != 0) {
+                    if (($asset->assigned_to !='') && ($asset->assigned_to > 0)) {
+                        $actions = '<a href="'.route('checkin/hardware', $asset->id).'" class="btn btn-primary btn-sm">'.Lang::get('general.checkin').'</a>';
+                    } else {
+                        $actions = '<a href="'.route('checkout/hardware', $asset->id).'" class="btn btn-info btn-sm">'.Lang::get('general.checkout').'</a>';
+                    }
+                }
             }
 
             $rows[] = array(
