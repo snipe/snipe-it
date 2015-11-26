@@ -35,9 +35,13 @@ class CustomFieldsController extends \BaseController {
 	{
 		//
 		$cfset=new CustomFieldset(["name" => Input::get("name")]);
-		$cfset->save();
-		return Redirect::to("/custom_fieldsets/".$cfset->id); //redirect(["asdf" => "alskdjf"]);
-		
+		$validator=Validator::make(Input::all(),$cfset->rules);
+		if($validator->passes()) {
+			$cfset->save();
+			return Redirect::to("/custom_fieldsets/".$cfset->id); //redirect(["asdf" => "alskdjf"]);
+		} else {
+			return Redirect::back()->withInput()->withErrors($validator);
+		}
 	}
 	
 	public function postAssociate($id)
@@ -62,12 +66,18 @@ class CustomFieldsController extends \BaseController {
 		} else {
 			$field->format=Input::get('format');
 		}
-		$results=$field->save();
-		//return "postCreateField: $results";
-		if ($results) {
-			return Redirect::to("/custom_fieldsets/");
+		
+		$validator=Validator::make(Input::all(),$field->rules);
+		if($validator->passes()) {
+			$results=$field->save();
+			//return "postCreateField: $results";
+			if ($results) {
+				return Redirect::to("/custom_fieldsets/");
+			} else {
+				return Redirect::back()->withInput()->withErrors(['message' => "Failed to save?"]);
+			}
 		} else {
-			return Redirect::to("/custom_fieldsets/create-field");
+			return Redirect::back()->withInput()->withErrors($validator);
 		}
 	}
 
