@@ -31,6 +31,7 @@ use Paginator;
 use Manufacturer; //for embedded-create
 use Artisan;
 use Symfony\Component\Console\Output\BufferedOutput;
+use CustomField;
 use Symfony\Component\HttpFoundation\JsonResponse;
 
 
@@ -268,9 +269,26 @@ class AssetsController extends AdminController
         else if (!Company::isCurrentUserHasAccess($asset)) {
             return Redirect::to('hardware')->with('error', Lang::get('general.insufficient_permissions'));
         }
+        
+        $input=Input::all();
+        // return "INPUT IS: <pre>".print_r($input,true)."</pre>";
+        $rules=$asset->validationRules($assetId);
+        if($asset->model->fieldset)
+        {
+          foreach($asset->model->fieldset->fields AS $field) {
+            $input[$field->db_column_name()]=$input['fields'][$field->db_column_name()];
+            $asset->{$field->db_column_name()}=$input[$field->db_column_name()];
+          }
+          $rules+=$asset->model->fieldset->validation_rules();
+          unset($input['fields']);
+        }
+        
+        //return "Rules: <pre>".print_r($rules,true)."</pre>";
 
         //attempt to validate
-        $validator = Validator::make(Input::all(), $asset->validationRules($assetId));
+        $validator = Validator::make($input,  $rules );
+        
+        $custom_errors=[];
 
         if ($validator->fails())
         {
@@ -290,7 +308,7 @@ class AssetsController extends AdminController
             if (e(Input::get('warranty_months')) == '') {
                 $asset->warranty_months =  NULL;
             } else {
-                $asset->warranty_months        = e(Input::get('warranty_months'));
+                $asset->warranty_months = e(Input::get('warranty_months'));
             }
 
             if (e(Input::get('purchase_cost')) == '') {
@@ -324,7 +342,7 @@ class AssetsController extends AdminController
             }
 
             $checkModel = Config::get('app.url').'/api/models/'.e(Input::get('model_id')).'/check';
-            $asset->mac_address = ($checkModel == true) ? e(Input::get('mac_address')) : NULL;
+            //$asset->mac_address = ($checkModel == true) ? e(Input::get('mac_address')) : NULL;
 
             // Update the asset data
             $asset->name         = e(Input::get('name'));
@@ -1200,7 +1218,7 @@ class AssetsController extends AdminController
     {
 
 
-       $assets = Asset::select('assets.*')->with('model','assigneduser','assigneduser.userloc','assetstatus','defaultLoc','assetlog','model','model.category','assetstatus','assetloc', 'company')
+       $assets = Asset::select('assets.*')->with('model','assigneduser','assigneduser.userloc','assetstatus','defaultLoc','assetlog','model','model.category','model.fieldset','assetstatus','assetloc', 'company')
        ->Hardware();
 
        if (Input::has('search')) {
@@ -1263,6 +1281,12 @@ class AssetsController extends AdminController
       'location',
       'image',
     ];
+    
+    $all_custom_fields=CustomField::all(); //used as a 'cache' of custom fields throughout this page load
+    
+    foreach($all_custom_fields AS $field) {
+      $allowed_columns[]=$field->db_column_name();
+    }
 
     $order = Input::get('order') === 'asc' ? 'asc' : 'desc';
     $sort = in_array(Input::get('sort'), $allowed_columns) ? Input::get('sort') : 'asset_tag';
@@ -1313,7 +1337,7 @@ class AssetsController extends AdminController
             }
         }
 
-        $rows[] = array(
+        $row = array(
             'checkbox'      =>'<div class="text-center"><input type="checkbox" name="edit_asset['.$asset->id.']" class="one_required"></div>',
             'id'        => $asset->id,
             'image' => ($asset->image!='') ? '<img src="'.Config::get('app.url').'/uploads/assets/'.$asset->image.'" height=50 width=50>' : (($asset->model->image!='') ? '<img src="'.Config::get('app.url').'/uploads/models/'.$asset->model->image.'" height=40 width=50>' : ''),
@@ -1332,7 +1356,11 @@ class AssetsController extends AdminController
             'change'        => ($inout) ? $inout : '',
             'actions'       => ($actions) ? $actions : '',
             'companyName'   => is_null($asset->company) ? '' : e($asset->company->name)
-        );
+            );
+        foreach($all_custom_fields AS $field) {
+          $row[$field->db_column_name()]=$asset->{$field->db_column_name()};
+        }
+        $rows[]=$row;
       }
 
       $data = array('total'=>$assetCount, 'rows'=>$rows);

@@ -5,13 +5,16 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-function ParseFloat($floatString){
-
-    // use comma for thousands until local info is property used
-    $LocaleInfo = localeconv();
-    $floatString = str_replace("," , "", $floatString);
-    $floatString = str_replace($LocaleInfo["decimal_point"] , ".", $floatString);
-    return floatval($floatString);
+ 
+if(!function_exists("ParseFloat")) {
+  //this may be only necessary to run tests?
+  function ParseFloat($floatString){ 
+      // use comma for thousands until local info is property used
+      $LocaleInfo = localeconv();
+      $floatString = str_replace("," , "", $floatString); 
+      $floatString = str_replace($LocaleInfo["decimal_point"] , ".", $floatString); 
+      return floatval($floatString); 
+  } 
 }
 
 function modelList() {
@@ -84,6 +87,17 @@ function categoryTypeList() {
 function usersList() {
     $users_list = array('' => Lang::get('general.select_user')) + DB::table('users')->select(DB::raw('concat(last_name,", ",first_name," (",username,")") as full_name, id'))->whereNull('deleted_at')->orderBy('last_name', 'asc')->orderBy('first_name', 'asc')->lists('full_name', 'id');
     return $users_list;
+}
+
+function customFieldsetList() {
+  $customfields=CustomFieldset::lists('name','id');
+  return array('' => Lang::get('general.no_custom_field')) + $customfields;
+}
+
+function predefined_formats() {
+  $keys=array_keys(CustomField::$PredefinedFormats);
+  $stuff=array_combine($keys,$keys);
+  return $stuff+["" => "Custom Format..."];
 }
 
 function barcodeDimensions ($barcode_type = 'QRCODE') {

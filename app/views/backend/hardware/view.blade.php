@@ -70,12 +70,6 @@
 
         @endif
 
-        @if ($asset->mac_address!='')
-            <div class="col-md-12" style="padding-bottom: 5px;"><strong>@lang('admin/hardware/form.mac_address'):</strong>
-            {{{ $asset->mac_address }}}
-            </div>
-        @endif
-
         @if ($asset->model->manufacturer)
             <div class="col-md-12" style="padding-bottom: 5px;"><strong>@lang('admin/hardware/form.manufacturer'): </strong>
             <a href="{{ route('update/manufacturer', $asset->model->manufacturer->id) }}">
@@ -170,6 +164,17 @@
             </div>
         @endif
 
+        @if ($asset->model->fieldset)
+          <hr>
+          <div class="col-md-12" style="padding-bottom: 5px;"><strong>FIELDSET:</strong> 
+            {{{ $asset->model->fieldset->name }}}</div>
+          @foreach($asset->model->fieldset->fields as $field)
+            <div class="col-md-12" style="padding-bottom: 5px;"><strong>{{{ $field->name }}}:</strong>
+            {{{ $asset->{$field->db_column_name()} }}}
+            </div>
+          @endforeach
+          <hr>
+        @endif
         @if ($asset->expected_checkin!='')
             <div class="col-md-12" style="padding-bottom: 5px;">
                   <strong>@lang('admin/hardware/form.expected_checkin')</strong>
