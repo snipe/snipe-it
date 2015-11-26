@@ -161,7 +161,6 @@ class AssetsController extends AdminController
             }
 
             $checkModel = Config::get('app.url').'/api/models/'.e(Input::get('model_id')).'/check';
-            $asset->mac_address = ($checkModel == true) ? e(Input::get('mac_address')) : NULL;
 
             // Save the asset data
             $asset->name            		= e(Input::get('name'));
@@ -269,7 +268,7 @@ class AssetsController extends AdminController
         else if (!Company::isCurrentUserHasAccess($asset)) {
             return Redirect::to('hardware')->with('error', Lang::get('general.insufficient_permissions'));
         }
-        
+
         $input=Input::all();
         // return "INPUT IS: <pre>".print_r($input,true)."</pre>";
         $rules=$asset->validationRules($assetId);
@@ -282,12 +281,12 @@ class AssetsController extends AdminController
           $rules+=$asset->model->fieldset->validation_rules();
           unset($input['fields']);
         }
-        
+
         //return "Rules: <pre>".print_r($rules,true)."</pre>";
 
         //attempt to validate
         $validator = Validator::make($input,  $rules );
-        
+
         $custom_errors=[];
 
         if ($validator->fails())
@@ -1281,9 +1280,9 @@ class AssetsController extends AdminController
       'location',
       'image',
     ];
-    
+
     $all_custom_fields=CustomField::all(); //used as a 'cache' of custom fields throughout this page load
-    
+
     foreach($all_custom_fields AS $field) {
       $allowed_columns[]=$field->db_column_name();
     }
