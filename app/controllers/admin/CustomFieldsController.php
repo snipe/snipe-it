@@ -1,4 +1,4 @@
-<?php
+<?php namespace Controllers\Admin;
 
 class CustomFieldsController extends \BaseController {
 

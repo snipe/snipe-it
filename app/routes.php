@@ -140,13 +140,6 @@
         } );
     } );
 
-    
-    # Custom fieldset
-    //Route::get('/custom_fieldsets/{id}','CustomFieldsController@show');
-    //Route::get('/custom_fieldsets/create','CustomFieldsController@getCreate');
-    Route::post('/custom_fieldsets/{id}/associate','CustomFieldsController@postAssociate');
-    Route::controller('/custom_fieldsets','CustomFieldsController' );
-
     /*
     |--------------------------------------------------------------------------
     | Asset Routes
@@ -467,6 +460,12 @@
             } );
 
         } );
+
+        # Custom fieldset
+        //Route::get('/custom_fieldsets/{id}','CustomFieldsController@show');
+        //Route::get('/custom_fieldsets/create','CustomFieldsController@getCreate');
+        // Route::post(['prefix' => 'custom_fieldsets/{id}/associate','CustomFieldsController@postAssociate');
+        Route::controller('custom_fieldsets','CustomFieldsController');
 
         # User Management
         Route::group( [ 'prefix' => 'users' ], function () {
