@@ -1218,7 +1218,7 @@ class AssetsController extends AdminController
     {
 
 
-       $assets = Asset::select('assets.*')->with('model','assigneduser','assigneduser.userloc','assetstatus','defaultLoc','assetlog','model','model.category','assetstatus','assetloc', 'company')
+       $assets = Asset::select('assets.*')->with('model','assigneduser','assigneduser.userloc','assetstatus','defaultLoc','assetlog','model','model.category','model.fieldset','assetstatus','assetloc', 'company')
        ->Hardware();
 
        if (Input::has('search')) {
@@ -1281,6 +1281,12 @@ class AssetsController extends AdminController
       'location',
       'image',
     ];
+    
+    $all_custom_fields=CustomField::all(); //used as a 'cache' of custom fields throughout this page load
+    
+    foreach($all_custom_fields AS $field) {
+      $allowed_columns[]=$field->db_column_name();
+    }
 
     $order = Input::get('order') === 'asc' ? 'asc' : 'desc';
     $sort = in_array(Input::get('sort'), $allowed_columns) ? Input::get('sort') : 'asset_tag';
@@ -1351,7 +1357,7 @@ class AssetsController extends AdminController
             'actions'       => ($actions) ? $actions : '',
             'companyName'   => is_null($asset->company) ? '' : e($asset->company->name)
             );
-        foreach(CustomField::all() AS $field) {
+        foreach($all_custom_fields AS $field) {
           $row[$field->db_column_name()]=$asset->{$field->db_column_name()};
         }
         $rows[]=$row;
