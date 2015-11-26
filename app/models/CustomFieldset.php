@@ -3,6 +3,11 @@ class CustomFieldset extends Elegant
 {
   protected $guarded=["id"];
   public $timestamps=false;
+
+  public $rules=[
+    "name" => "required|unique:custom_fieldsets"
+  ];
+
   public function fields() {
     return $this->belongsToMany('CustomField')->withPivot(["required","order"])->orderBy("pivot_order");
   }

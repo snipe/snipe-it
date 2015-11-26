@@ -11,6 +11,10 @@ class CustomField extends Elegant
     "IP" => "([01]?\\d\\d?|2[0-4]\\d|25[0-5])\\.([01]?\\d\\d?|2[0-4]\\d|25[0-5])\\.([01]?\\d\\d?|2[0-4]\\d|25[0-5])\\.([01]?\\d\\d?|2[0-4]\\d|25[0-5])"
   ];
   
+  public $rules=[
+    "name" => "required|unique"
+  ];
+  
   public static $table_name="assets";
   
   public static function name_to_db_name($name)

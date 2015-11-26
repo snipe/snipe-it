@@ -35,9 +35,13 @@ class CustomFieldsController extends \BaseController {
 	{
 		//
 		$cfset=new CustomFieldset(["name" => Input::get("name")]);
-		$cfset->save();
-		return Redirect::to("/custom_fieldsets/".$cfset->id); //redirect(["asdf" => "alskdjf"]);
-		
+		$validator=Validator::make(Input::all(),$cfset->rules);
+		if($validator->passes()) {
+			$cfset->save();
+			return Redirect::to("/custom_fieldsets/".$cfset->id); //redirect(["asdf" => "alskdjf"]);
+		} else {
+			return Redirect::to("/custom_fieldsets/create")->withErrors($validator);
+		}
 	}
 	
 	public function postAssociate($id)
