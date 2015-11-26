@@ -466,6 +466,7 @@ $(function () {
     });
 
     //console.dir(data);
+    data._token =  '{{ csrf_token() }}',
 
     $.post("{{Config::get('app.url')}}/api/"+model+"s",data,function (result) {
       var id=result.id;
