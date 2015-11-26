@@ -18,7 +18,12 @@ final class Company extends Elegant
 
     private static function scopeCompanyablesDirectly($query, $column = 'company_id')
     {
-        $company_id = Sentry::getUser()->company_id;
+        if (Sentry::getUser()) {
+          $company_id = Sentry::getUser()->company_id;
+        } else {
+          $company_id = NULL;
+        }
+
 
         if ($company_id == NULL) { return $query;                                   }
         else                     { return $query->where($column, '=', $company_id); }
