@@ -12,7 +12,7 @@ class CustomField extends Elegant
   ];
   
   public $rules=[
-    "name" => "required|unique"
+    "name" => "required|unique:custom_fields"
   ];
   
   public static $table_name="assets";
