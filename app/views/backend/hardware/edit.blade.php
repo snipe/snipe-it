@@ -187,14 +187,6 @@
                 </div>
             </div>
 
-            <!-- MAC Address -->
-            <div id="mac_address" class="form-group {{ $errors->has('mac_address') ? ' has-error' : '' }}" > <!-- style="display:none;" -->
-                <label for="mac_address" class="col-md-2 control-label">@lang('admin/hardware/form.mac_address')</label>
-                    <div class="col-md-7 col-sm-12">
-                        <input class="form-control" type="text" name="mac_address" id="mac_address" value="{{{ Input::old('mac_address', $asset->mac_address) }}}" />
-                        {{ $errors->first('mac_address', '<br><span class="alert-msg"><i class="fa fa-times"></i> :message</span>') }}
-                    </div>
-            </div>
 
             <!-- Purchase Date -->
             <div class="form-group {{ $errors->has('purchase_date') ? ' has-error' : '' }}">
@@ -318,7 +310,7 @@
 				  </div>
 				</div>
 		  	</div>
-        
+
         <!-- Custom Fields -->
         @if($asset->model && $asset->model->fieldset)
           <h1>Custom Fields</h1>
@@ -369,30 +361,7 @@
 </div>
 <script>
 
-	var $eventSelect = $(".model");
-	$eventSelect.on("change", function () {
-        mac_add($(".model option:selected").val());
-    });
-	$(function() {
-        var mac = $(".model option:selected").val();
-	       mac_add(mac);
-	});
-	function mac_add(id) {
-        if(id==''){
-            return;
-        }
-	    $.ajax({
-	        url: "{{Config::get('app.url')}}/api/models/"+id+"/check",
-	        success: function(data) {
-	            if(data == true){
-	                 $("#mac_address").css("display", "block");
-	            } else {
-	                 $("#mac_address").css("display", "none");
-	            }
-	        }
-	    });
-	};
-
+	
 
 
 

@@ -859,7 +859,7 @@ class AssetsController extends AdminController
         $asset->asset_tag = '';
         $asset->serial = '';
         $asset->assigned_to = '';
-        $asset->mac_address = '';
+
         return View::make('backend/hardware/edit')
         ->with('supplier_list',$supplier_list)
         ->with('model_list',$model_list)
