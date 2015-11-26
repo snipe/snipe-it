@@ -483,6 +483,7 @@ $(function () {
       data[bits[1]]=$(elem).val();
     });
 
+    data._token =  '{{ csrf_token() }}',
     //console.dir(data);
 
     $.post("{{Config::get('app.url')}}/api/"+model+"s",data,function (result) {
