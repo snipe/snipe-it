@@ -53,8 +53,19 @@ class CustomFieldsController extends \BaseController {
 	
 	public function associate($id)
 	{
-		print "ID is: $id";
+		//print "ID is: $id";
 		$set=CustomFieldset::find($id);
+		//print_r($set->fields());
+		foreach($set->fields AS $field) {
+			//print_r($field);
+			//print "Field ID of this particular field is:".$field->id.", and we are checking for: ".Input::get('field_id');
+			if($field->id == Input::get('field_id')) {
+				//print "I want to redirect back in failure";
+				//exit(-2);
+				return Redirect::route("admin.custom_fields.show",[$id])->withInput()->withErrors(['field_id' => "Field already added"]);
+			}
+		}
+		exit(-1);
 		$results=$set->fields()->attach(Input::get('field_id'),["required" => (Input::get('required') == "on"),"order" => Input::get('order')]);
 		//return "I assoced it. Results: $results";
 		return Redirect::route("admin.custom_fields.show",[$id]); //redirect(["asdf" => "alskdjf"]);
@@ -101,13 +112,21 @@ class CustomFieldsController extends \BaseController {
 		
 		//print_r($parameters);
 		//
+		$custom_fields_list=["" => "Add New Field to Fieldset"] + CustomField::lists("name","id");
+		// print_r($custom_fields_list);
 		$maxid=0;
 		foreach($cfset->fields AS $field) {
+			// print "Looking for: ".$field->id;
 			if($field->pivot->order > $maxid) {
 				$maxid=$field->pivot->order;
 			}
+			if(isset($custom_fields_list[$field->id])) {
+				// print "Found ".$field->id.", so removing it.<br>";
+				unset($custom_fields_list[$field->id]);
+			}
 		}
-		return View::make("backend.custom_fields.show")->with("custom_fieldset",$cfset)->with("maxid",$maxid+1);
+		
+		return View::make("backend.custom_fields.show")->with("custom_fieldset",$cfset)->with("maxid",$maxid+1)->with("custom_fields_list",$custom_fields_list);
 	}
 
 

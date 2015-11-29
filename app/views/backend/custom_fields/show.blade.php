@@ -11,6 +11,7 @@
 {{ Form::open(['route' => ["admin.custom_fields.associate",$custom_fieldset->id]]) }}
 {{ Form::checkbox("required","on") }}Required?
 {{ Form::text("order",$maxid)}}
-{{ Form::select("field_id",["" => "Add New Field to Fieldset"] + CustomField::lists("name","id"),"",["onchange" => "document.forms[0].submit()"]) }}
+{{ Form::select("field_id",$custom_fields_list,"",["onchange" => "document.forms[0].submit()"]) }}
+<span class="alert-msg"><?= $errors->first('field_id'); ?></span>
 <br>{{link_to_route("admin.custom_fields.index","Back to Custom Fieldset List")}}
 @stop
