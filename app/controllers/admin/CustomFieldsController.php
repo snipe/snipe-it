@@ -1,5 +1,12 @@
 <?php namespace Controllers\Admin;
 
+use View;
+use CustomFieldset;
+use CustomField;
+use Input;
+use Validator;
+use Redirect;
+
 class CustomFieldsController extends \BaseController {
 
 	/**
@@ -7,7 +14,7 @@ class CustomFieldsController extends \BaseController {
 	 *
 	 * @return Response
 	 */
-	public function getIndex()
+	public function index()
 	{
 		//
 		return View::make("backend.custom_fields.index")->with("custom_fieldsets",CustomFieldset::all())->with("custom_fields",CustomField::all());
@@ -19,7 +26,7 @@ class CustomFieldsController extends \BaseController {
 	 *
 	 * @return Response
 	 */
-	public function getCreate()
+	public function create()
 	{
 		//
 		return View::make("backend.custom_fields.create");
@@ -31,34 +38,34 @@ class CustomFieldsController extends \BaseController {
 	 *
 	 * @return Response
 	 */
-	public function postIndex()
+	public function store()
 	{
 		//
 		$cfset=new CustomFieldset(["name" => Input::get("name")]);
 		$validator=Validator::make(Input::all(),$cfset->rules);
 		if($validator->passes()) {
 			$cfset->save();
-			return Redirect::to("/custom_fieldsets/".$cfset->id); //redirect(["asdf" => "alskdjf"]);
+			return Redirect::route("admin.custom_fields.show",[$cfset->id]); //redirect(["asdf" => "alskdjf"]);
 		} else {
 			return Redirect::back()->withInput()->withErrors($validator);
 		}
 	}
 	
-	public function postAssociate($id)
+	public function associate($id)
 	{
 		print "ID is: $id";
 		$set=CustomFieldset::find($id);
 		$results=$set->fields()->attach(Input::get('field_id'),["required" => (Input::get('required') == "on"),"order" => Input::get('order')]);
 		//return "I assoced it. Results: $results";
-		return Redirect::to("/custom_fieldsets/".$id); //redirect(["asdf" => "alskdjf"]);
+		return Redirect::route("admin.custom_fields.show",[$id]); //redirect(["asdf" => "alskdjf"]);
 	}
 	
-	public function getCreateField()
+	public function createField()
 	{
 		return View::make("backend.custom_fields.create_field");
 	}
 	
-	public function postCreateField()
+	public function storeField()
 	{
 		$field=new CustomField(["name" => Input::get("name"),"element" => Input::get("element")]);
 		if(!in_array(Input::get('format'),["ALPHA","NUMERIC","MAC","IP"])) {
@@ -72,7 +79,7 @@ class CustomFieldsController extends \BaseController {
 			$results=$field->save();
 			//return "postCreateField: $results";
 			if ($results) {
-				return Redirect::to("/custom_fieldsets/");
+				return Redirect::route("admin.custom_fields.index");
 			} else {
 				return Redirect::back()->withInput()->withErrors(['message' => "Failed to save?"]);
 			}
@@ -87,9 +94,9 @@ class CustomFieldsController extends \BaseController {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function missingMethod($parameters = array())
+	public function show($id)
 	{
-		$id=$parameters[0];
+		//$id=$parameters[0];
 		$cfset=CustomFieldset::find($id);
 		
 		//print_r($parameters);
