@@ -24,7 +24,6 @@ final class Company extends Elegant
           $company_id = NULL;
         }
 
-
         if ($company_id == NULL) { return $query;                                   }
         else                     { return $query->where($column, '=', $company_id); }
     }

@@ -465,6 +465,7 @@ $(function () {
       data[bits[1]]=$(elem).val();
     });
 
+    data._token =  '{{ csrf_token() }}',
     //console.dir(data);
     data._token =  '{{ csrf_token() }}',
 
