@@ -480,9 +480,10 @@ class ModelsController extends AdminController
         $assets = $assets->skip($offset)->take($limit)->get();
 
         $rows = array();
-        $actions = '';
+
 
         foreach ($assets as $asset) {
+          $actions = '';
 
             if ($asset->assetstatus) {
                 if ($asset->assetstatus->deployable != 0) {
