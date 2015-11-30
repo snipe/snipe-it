@@ -384,15 +384,7 @@ return false;
 
       if (( $this->purchase_date ) && ( $this->model )) {
           $date = date_create( $this->purchase_date );
-
-          // Use the asset-level EOL if one is given
-          if (($this->warranty_months) && ($this->warranty_months!='0')) {
-              date_add( $date, date_interval_create_from_date_string( $this->warranty_months . ' months' ));
-          // If a warranty month period wasn't specified on the asset level, use the model
-          } else {
-              date_add( $date, date_interval_create_from_date_string( $this->model->eol . ' months' ));
-          }
-
+          date_add( $date, date_interval_create_from_date_string( $this->model->eol . ' months' ));
           return date_format( $date, 'Y-m-d' );
       }
 

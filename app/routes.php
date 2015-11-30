@@ -115,13 +115,6 @@
 
             Route::resource( '/', 'ModelsController' );
             Route::get( 'list/{status?}', [ 'as' => 'api.models.list', 'uses' => 'ModelsController@getDatatable' ] );
-            Route::get( '{modelId}/check', function ( $modelId ) {
-
-                $model = Model::find( $modelId );
-
-                return $model->show_mac_address;
-            } );
-
             Route::get( '{modelID}/view', [ 'as' => 'api.models.view', 'uses' => 'ModelsController@getDataView' ] );
         } );
 
@@ -139,6 +132,13 @@
             Route::resource( '/', 'SuppliersController' );
         } );
     } );
+
+
+    # Custom fieldset
+    //Route::get('/custom_fieldsets/{id}','CustomFieldsController@show');
+    //Route::get('/custom_fieldsets/create','CustomFieldsController@getCreate');
+    Route::post('/custom_fieldsets/{id}/associate','CustomFieldsController@postAssociate');
+    Route::controller('/custom_fieldsets','CustomFieldsController' );
 
     /*
     |--------------------------------------------------------------------------
