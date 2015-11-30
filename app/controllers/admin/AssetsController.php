@@ -161,6 +161,7 @@ class AssetsController extends AdminController
             }
 
             $checkModel = Config::get('app.url').'/api/models/'.e(Input::get('model_id')).'/check';
+            //$asset->mac_address = ($checkModel == true) ? e(Input::get('mac_address')) : NULL;
 
             // Save the asset data
             $asset->name            		= e(Input::get('name'));
