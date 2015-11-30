@@ -249,9 +249,9 @@
                                 <i class="fa fa-download fa-fw"></i> @lang('admin/settings/general.backups')
                             </a>
                         </li>
-                        <li{{ (Request::is('custom_fieldsets*') ? ' class="active"' : '') }}>
-                            <a href="{{ URL::to('custom_fieldsets') }}">
-                                <i class="fa fa-wrench fa-fw"></i> Custom Fields?
+                        <li{{ (Request::is('admin/custom_fields*') ? ' class="active"' : '') }}>
+                            <a href="{{ route('admin.custom_fields.index') }}">
+                                <i class="fa fa-wrench fa-fw"></i> Custom Fields
                             </a>
                         </li>
                         <li class="divider"></li>

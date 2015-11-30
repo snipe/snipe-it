@@ -8,9 +8,9 @@
 <li>{{$field->pivot->order}}) {{$field->name}}, {{$field->format}}, {{$field->pivot->required ? "REQUIRED" : "OPTIONAL"}}</li>
 @endforeach
 </ul>
-{{ Form::open(['url' => '/custom_fieldsets/'.$custom_fieldset->id.'/associate']) }}
+{{ Form::open(['route' => ["admin.custom_fields.associate",$custom_fieldset->id]]) }}
 {{ Form::checkbox("required","on") }}Required?
 {{ Form::text("order",$maxid)}}
 {{ Form::select("field_id",["" => "Add New Field to Fieldset"] + CustomField::lists("name","id"),"",["onchange" => "document.forms[0].submit()"]) }}
-<br><a href='/custom_fieldsets'>Back to Custom Fieldset List</a>
+<br>{{link_to_route("admin.custom_fields.index","Back to Custom Fieldset List")}}
 @stop
