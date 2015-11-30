@@ -137,8 +137,8 @@
     # Custom fieldset
     //Route::get('/custom_fieldsets/{id}','CustomFieldsController@show');
     //Route::get('/custom_fieldsets/create','CustomFieldsController@getCreate');
-    Route::post('/custom_fieldsets/{id}/associate','CustomFieldsController@postAssociate');
-    Route::controller('/custom_fieldsets','CustomFieldsController' );
+    //Route::post('/custom_fieldsets/{id}/associate','CustomFieldsController@postAssociate');
+    //Route::controller('/custom_fieldsets','CustomFieldsController' );
 
     /*
     |--------------------------------------------------------------------------
