@@ -12,6 +12,10 @@ class CustomFieldset extends Elegant
     return $this->belongsToMany('CustomField')->withPivot(["required","order"])->orderBy("pivot_order");
   }
   
+  public function models() {
+    return $this->hasMany('Model',"fieldset_id");
+  }
+  
   public function validation_rules()
   {
     $rules=[];

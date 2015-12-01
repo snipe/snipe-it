@@ -53,6 +53,10 @@ class CustomField extends Elegant
       }
       return true;
     });
+    
+    self::deleting(function ($custom_field) {
+      return DB::statement("ALTER TABLE ".CustomField::$table_name." DROP COLUMN ".$custom_field->db_column_name());
+    });
   }
   
   /*public static function boot() {
