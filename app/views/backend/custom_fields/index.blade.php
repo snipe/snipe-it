@@ -14,12 +14,13 @@
                 <thead>
                     <tr>
                       <th>@lang('general.name')</th>
+                      <th>Used In</th>
                       <th></th>
                     </tr>
                 </thead>
                 <tfoot>
                   <tr>
-                    <td colspan="2" class="text-right">
+                    <td colspan="3" class="text-right">
                       <a class="btn btn-info btn-sm" href="{{ route('admin.custom_fields.create') }}">New Fieldset</a>
                     </td>
                   </tr>
@@ -33,7 +34,7 @@
                       </td>
                     <td>
                       @if($fieldset->models->count() > 0)
-                        Fieldset in use in models:
+
                         @foreach($fieldset->models AS $model)
                           {{link_to_route("view/model",$model->name,[$model->id])}}
                         @endforeach
