@@ -51,11 +51,11 @@ class CustomFieldsController extends \BaseController {
 			return Redirect::back()->withInput()->withErrors($validator);
 		}
 	}
-	
+
 	public function associate($id)
 	{
 		//print "ID is: $id";
-		$set=CustomFieldset::find($id);
+		$set = CustomFieldset::find($id);
 		//print_r($set->fields());
 		foreach($set->fields AS $field) {
 			//print_r($field);
@@ -66,17 +66,17 @@ class CustomFieldsController extends \BaseController {
 				return Redirect::route("admin.custom_fields.show",[$id])->withInput()->withErrors(['field_id' => "Field already added"]);
 			}
 		}
-		exit(-1);
+
 		$results=$set->fields()->attach(Input::get('field_id'),["required" => (Input::get('required') == "on"),"order" => Input::get('order')]);
 		//return "I assoced it. Results: $results";
 		return Redirect::route("admin.custom_fields.show",[$id]); //redirect(["asdf" => "alskdjf"]);
 	}
-	
+
 	public function createField()
 	{
 		return View::make("backend.custom_fields.create_field");
 	}
-	
+
 	public function storeField()
 	{
 		$field=new CustomField(["name" => Input::get("name"),"element" => Input::get("element")]);
@@ -85,7 +85,7 @@ class CustomFieldsController extends \BaseController {
 		} else {
 			$field->format=Input::get('format');
 		}
-		
+
 		$validator=Validator::make(Input::all(),$field->rules);
 		if($validator->passes()) {
 			$results=$field->save();
@@ -93,22 +93,22 @@ class CustomFieldsController extends \BaseController {
 			if ($results) {
 				return Redirect::route("admin.custom_fields.index");
 			} else {
-				return Redirect::back()->withInput()->with('message', "Failed to save?");
+				return Redirect::back()->withInput()->with('error', "Failed to save?");
 			}
 		} else {
 			return Redirect::back()->withInput()->withErrors($validator);
 		}
 	}
-	
+
 	public function deleteField($field_id)
 	{
 		$field=CustomField::find($field_id);
-		
+
 		if($field->fieldset->count()>0) {
 			return Redirect::back()->withErrors(['message' => "Field is in-use"]);
 		} else {
 			$field->delete();
-			return Redirect::route("admin.custom_fields.index")->with("message","Field Deleted");
+			return Redirect::route("admin.custom_fields.index")->with("success","Field Deleted");
 		}
 	}
 
@@ -122,7 +122,7 @@ class CustomFieldsController extends \BaseController {
 	{
 		//$id=$parameters[0];
 		$cfset=CustomFieldset::find($id);
-		
+
 		//print_r($parameters);
 		//
 		$custom_fields_list=["" => "Add New Field to Fieldset"] + CustomField::lists("name","id");
@@ -138,7 +138,7 @@ class CustomFieldsController extends \BaseController {
 				unset($custom_fields_list[$field->id]);
 			}
 		}
-		
+
 		return View::make("backend.custom_fields.show")->with("custom_fieldset",$cfset)->with("maxid",$maxid+1)->with("custom_fields_list",$custom_fields_list);
 	}
 
@@ -177,14 +177,14 @@ class CustomFieldsController extends \BaseController {
 	{
 		//
 		$fieldset=CustomFieldset::find($id);
-		
+
 		$models=Model::where("fieldset_id","=",$id);
 		if($models->count()==0) {
 			$fieldset->delete();
-			return Redirect::route("admin.custom_fields.index")->with("message","Fieldset Deleted");
+			return Redirect::route("admin.custom_fields.index")->with("success","Fieldset Deleted");
 		}
 		else {
-			return Redirect::route("admin.custom_fields.index")->with("message","Fieldset still in use"); //->with("models",$models);
+			return Redirect::route("admin.custom_fields.index")->with("error","Fieldset still in use"); //->with("models",$models);
 		}
 	}
 
