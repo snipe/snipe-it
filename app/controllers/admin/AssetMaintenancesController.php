@@ -21,6 +21,7 @@
     use Validator;
     use View;
     use Setting;
+    use Asset;
 
     class AssetMaintenancesController extends AdminController
     {
