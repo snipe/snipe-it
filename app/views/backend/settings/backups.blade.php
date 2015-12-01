@@ -55,6 +55,8 @@
                         <br><br>
 
                         <form method="POST">
+                          {{ Form::hidden('_token', csrf_token()) }}
+
                             <p>
                                 <button class="btn btn-default {{ (Config::get('app.lock_passwords')) ? ' disabled': '' }}">@lang('admin/settings/general.generate_backup')</button>
                             </p>
