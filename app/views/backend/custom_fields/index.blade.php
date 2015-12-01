@@ -38,12 +38,16 @@
                         @foreach($fieldset->models AS $model)
                           {{link_to_route("view/model",$model->name,[$model->id])}}
                         @endforeach
-                      @else
+                      @endif
+
+                      @if($fieldset->models->count()==0)
+
                         {{ Form::open(array('route' => array('admin.custom_fields.destroy', $fieldset->id), 'method' => 'delete')) }}
                         <button type="submit" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></button>
                         {{ Form::close() }}</li>
                       @endif
-                    </td></tr>
+                    </td>
+                  </tr>
                   @endforeach
                 @endif
 
@@ -91,7 +95,7 @@
                     @if($field->fieldset->count()==0)
 
                       {{ Form::open(array('route' => array('admin.custom_fields.delete-field', $field->id), 'method' => 'delete')) }}
-                      <button type="submit" class="btn btn-danger btn-mini">Delete</button>
+                      <button type="submit" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></button>
                       {{ Form::close() }}</td>
                     @endif
                     </td>
