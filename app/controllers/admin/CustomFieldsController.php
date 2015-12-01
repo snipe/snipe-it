@@ -6,6 +6,7 @@ use CustomField;
 use Input;
 use Validator;
 use Redirect;
+use Model;
 
 class CustomFieldsController extends \BaseController {
 
@@ -92,10 +93,22 @@ class CustomFieldsController extends \BaseController {
 			if ($results) {
 				return Redirect::route("admin.custom_fields.index");
 			} else {
-				return Redirect::back()->withInput()->withErrors(['message' => "Failed to save?"]);
+				return Redirect::back()->withInput()->with('message', "Failed to save?");
 			}
 		} else {
 			return Redirect::back()->withInput()->withErrors($validator);
+		}
+	}
+	
+	public function deleteField($field_id)
+	{
+		$field=CustomField::find($field_id);
+		
+		if($field->fieldset->count()>0) {
+			return Redirect::back()->withErrors(['message' => "Field is in-use"]);
+		} else {
+			$field->delete();
+			return Redirect::route("admin.custom_fields.index")->with("message","Field Deleted");
 		}
 	}
 
@@ -163,6 +176,16 @@ class CustomFieldsController extends \BaseController {
 	public function destroy($id)
 	{
 		//
+		$fieldset=CustomFieldset::find($id);
+		
+		$models=Model::where("fieldset_id","=",$id);
+		if($models->count()==0) {
+			$fieldset->delete();
+			return Redirect::route("admin.custom_fields.index")->with("message","Fieldset Deleted");
+		}
+		else {
+			return Redirect::route("admin.custom_fields.index")->with("message","Fieldset still in use"); //->with("models",$models);
+		}
 	}
 
 

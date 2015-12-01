@@ -133,13 +133,6 @@
         } );
     } );
 
-
-    # Custom fieldset
-    //Route::get('/custom_fieldsets/{id}','CustomFieldsController@show');
-    //Route::get('/custom_fieldsets/create','CustomFieldsController@getCreate');
-    //Route::post('/custom_fieldsets/{id}/associate','CustomFieldsController@postAssociate');
-    //Route::controller('/custom_fieldsets','CustomFieldsController' );
-
     /*
     |--------------------------------------------------------------------------
     | Asset Routes
@@ -461,15 +454,12 @@
 
         } );
 
-        # Custom fieldset
-        //Route::get('/custom_fieldsets/{id}','CustomFieldsController@show');
-        //Route::get('/custom_fieldsets/create','CustomFieldsController@getCreate');
-        // Route::post(['prefix' => 'custom_fieldsets/{id}/associate','CustomFieldsController@postAssociate');
-        Route::get('custom_fields/create-field',['uses' =>'CustomFieldsController@createField','as' => 'admin.custom_fields.create-field']); //['prefix' => 'custom_fields',]
+        # Custom fields support
+        Route::get('custom_fields/create-field',['uses' =>'CustomFieldsController@createField','as' => 'admin.custom_fields.create-field']);
         Route::post('custom_fields/create-field',['uses' => 'CustomFieldsController@storeField','as' => 'admin.custom_fields.store-field']);
         Route::post('custom_fields/{id}/associate',['uses' => 'CustomFieldsController@associate','as' => 'admin.custom_fields.associate']);
+        Route::match(['DELETE'],'custom_fields/delete-field/{id}',['uses' => 'CustomFieldsController@deleteField','as' => 'admin.custom_fields.delete-field']);
         Route::resource('custom_fields','CustomFieldsController');
-        //Route::controller('custom_fields','CustomFieldsController');
 
         # User Management
         Route::group( [ 'prefix' => 'users' ], function () {
