@@ -16,9 +16,10 @@ class CreateCustomFieldCustomFieldset extends Migration {
 		{
 			$table->integer('custom_field_id');
 			$table->integer('custom_fieldset_id');
-			
+
 			$table->integer('order');
 			$table->boolean('required');
+      $table->engine = 'InnoDB';
 		});
 	}
 
