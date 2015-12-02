@@ -64,6 +64,31 @@ to auto-generate a 32-character key for you. Paste the generated key in as the v
 
 -----
 
+## During install or running migrations - SQLSTATE[HY000]: General error: 1005 Can't create table 'snipeit.#sql-3626_1c6' (errno: 150)
+
+This happens when your default table engine is set to MyISAM (which in general is weird. InnoDB has been the default table engine in MySQL for quite some time).  
+
+If you see this error:
+
+```
+Illuminate\Database\QueryException]
+SQLSTATE[HY000]: General error: 1005 Can't create table 'snipeit.#sql-3626_1c6' (errno: 150) (SQL: alter table users add constraint users_company
+_id_foreign foreign key (company_id) references companies (id))
+
+[PDOException]
+SQLSTATE[HY000]: General error: 1005 Can't create table 'snipeit.#sql-3626_1c6' (errno: 150)
+```
+
+Try running:
+
+```
+ALTER TABLE companies ENGINE = InnoDB;
+```
+
+on your MySQL database and then re-run migrations.
+
+-----
+
 ## Call to undefined function Controllers\Admin\ldap_connect()
 
 The PHP LDAP extension is not installed on your server. While this extension is not required for all Snipe-IT installations, it must be installed if you wish to use any of the LDAP functionality.
