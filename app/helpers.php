@@ -5,16 +5,16 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
- 
+
 if(!function_exists("ParseFloat")) {
   //this may be only necessary to run tests?
-  function ParseFloat($floatString){ 
+  function ParseFloat($floatString){
       // use comma for thousands until local info is property used
       $LocaleInfo = localeconv();
-      $floatString = str_replace("," , "", $floatString); 
-      $floatString = str_replace($LocaleInfo["decimal_point"] , ".", $floatString); 
-      return floatval($floatString); 
-  } 
+      $floatString = str_replace("," , "", $floatString);
+      $floatString = str_replace($LocaleInfo["decimal_point"] , ".", $floatString);
+      return floatval($floatString);
+  }
 }
 
 function modelList() {
@@ -91,7 +91,7 @@ function usersList() {
 
 function customFieldsetList() {
   $customfields=CustomFieldset::lists('name','id');
-  return array('' => Lang::get('general.no_custom_field')) + $customfields;
+  return array('' => Lang::get('admin/models/general.no_custom_field')) + $customfields;
 }
 
 function predefined_formats() {

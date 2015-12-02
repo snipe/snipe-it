@@ -1,30 +1,26 @@
 @extends('backend/layouts/default')
 @section('content')
 
-
-
-<h3>Fieldsets</h3>
-
 <div class="user-profile">
     <div class="row profile">
-        <div class="col-md-12">
+        <div class="col-md-9 bio">
+
+          <div class="pull-right">
+            <a class="btn btn-info btn-sm" href="{{ route('admin.custom_fields.create') }}">New Fieldset</a>
+          </div>
+          <h3>Fieldsets</h3>
+
             <table
             name="fieldsets"
             id="table" class="table table-responsive table-no-bordered">
                 <thead>
                     <tr>
                       <th>@lang('general.name')</th>
-                      <th>Used In</th>
+                      <th>Used By Models</th>
                       <th></th>
                     </tr>
                 </thead>
-                <tfoot>
-                  <tr>
-                    <td colspan="3" class="text-right">
-                      <a class="btn btn-info btn-sm" href="{{ route('admin.custom_fields.create') }}">New Fieldset</a>
-                    </td>
-                  </tr>
-                </tfoot>
+
 
                 @if(isset($custom_fieldsets))
                 <tbody>
@@ -33,19 +29,19 @@
                       <td>{{ link_to_route("admin.custom_fields.show",$fieldset->name,['id' => $fieldset->id]) }}
                       </td>
                     <td>
-                      @if($fieldset->models->count() > 0)
-
-                        @foreach($fieldset->models AS $model)
+                        @foreach($fieldset->models as $model)
                           {{link_to_route("view/model",$model->name,[$model->id])}}
                         @endforeach
-                      @endif
-
-                      @if($fieldset->models->count()==0)
-
+                    </td>
+                    <td>
                         {{ Form::open(array('route' => array('admin.custom_fields.destroy', $fieldset->id), 'method' => 'delete')) }}
-                        <button type="submit" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></button>
-                        {{ Form::close() }}</li>
-                      @endif
+
+                        @if($fieldset->models->count() > 0)
+                          <button type="submit" class="btn btn-danger btn-sm disabled" disabled><i class="fa fa-trash"></i></button>
+                        @else
+                          <button type="submit" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></button>
+                        @endif
+                        {{ Form::close() }}
                     </td>
                   </tr>
                   @endforeach
@@ -55,7 +51,12 @@
             </table>
 
 
+            <div class="pull-right">
+              <a class="btn btn-info btn-sm" href="{{ route('admin.custom_fields.create-field') }}">New Field</a>
+            </div>
+
             <h3>Custom Field Definitions</h3>
+
 
             <table
             name="fieldsets"
@@ -63,18 +64,11 @@
                 <thead>
                     <tr>
                         <th>@lang('general.name')</th>
-                        <th>Type</th>
+                        <th>@lang('admin/custom_fields/general.field_format')</th>
                         <th>Fieldsets</th>
                         <th></th>
                     </tr>
                 </thead>
-                <tfoot>
-                  <tr>
-                    <td colspan="4" class="text-right">
-                      <a class="btn btn-info btn-sm" href="{{ route('admin.custom_fields.create-field') }}">New Field</a>
-                    </td>
-                  </tr>
-                </tfoot>
                 <tbody>
 
                 @foreach($custom_fields AS $field)
@@ -82,22 +76,19 @@
                     <td>{{{ $field->name }}}</td>
                     <td>{{{ $field->format }}}</td>
                     <td>
-
-                    @if($field->fieldset->count()>0)
-
                       @foreach($field->fieldset as $fieldset)
                       {{link_to_route("admin.custom_fields.show",$fieldset->name,[$fieldset->id])}}
                       @endforeach
-                    @endif
                   </td>
                   <td>
+                    {{ Form::open(array('route' => array('admin.custom_fields.delete-field', $field->id), 'method' => 'delete')) }}
 
-                    @if($field->fieldset->count()==0)
-
-                      {{ Form::open(array('route' => array('admin.custom_fields.delete-field', $field->id), 'method' => 'delete')) }}
+                    @if($field->fieldset->count()>0)
+                      <button type="submit" class="btn btn-danger btn-sm disabled" disabled><i class="fa fa-trash"></i></button>
+                    @else
                       <button type="submit" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></button>
-                      {{ Form::close() }}</td>
                     @endif
+                    {{ Form::close() }}
                     </td>
                   </tr>
                   @endforeach
@@ -107,6 +98,13 @@
 
               </tbody>
             </table>
+
+        </div>
+        <!-- side address column -->
+        <div class="col-md-3 col-xs-12 address pull-right">
+            <br /><br />
+            <h6>@lang('admin/custom_fields/general.about_fieldsets_title')</h6>
+            <p>@lang('admin/custom_fields/general.about_fieldsets_text') </p>
 
         </div>
 

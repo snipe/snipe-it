@@ -109,7 +109,7 @@
 
             <!-- Custom Fieldset -->
             <div class="form-group {{ $errors->has('custom_fieldset') ? ' has-error' : '' }}">
-              <label for="custom_fieldset" class="col-md-2 control-label">@lang('admin/models/general.choose_fieldset')</label>
+              <label for="custom_fieldset" class="col-md-2 control-label">@lang('admin/models/general.fieldset')</label>
               <div class="col-md-7">
                   {{ Form::select('custom_fieldset', customFieldsetList(),Input::old('custom_fieldset', $model->fieldset_id), array('class'=>'select2', 'style'=>'width:350px')) }}
                   {{ $errors->first('custom_fieldset', '<br><span class="alert-msg"><i class="fa fa-times"></i> :message</span>') }}
