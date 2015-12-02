@@ -361,11 +361,15 @@ $(function() {
   $('#model_select_id').on("change",function () {
     // console.warn("Model Id has changed!");
     var modelid=$('#model_select_id').val();
-    console.warn("Model ID is: "+modelid);
-    $.get("/hardware/models/"+modelid+"/custom_fields",{_token: "{{ csrf_token() }}"},function (data) {
-      // console.warn("Ajax call came back okay! Data is: "+data);
-      $('#custom_fields_content').html(data);
-    })
+    if(modelid=='') {
+      $('#custom_fields_content').html("");
+    } else {
+      // console.warn("Model ID is: "+modelid);
+      $.get("/hardware/models/"+modelid+"/custom_fields",{_token: "{{ csrf_token() }}"},function (data) {
+        // console.warn("Ajax call came back okay! Data is: "+data);
+        $('#custom_fields_content').html(data);
+      });
+    }
   });
 });
 
