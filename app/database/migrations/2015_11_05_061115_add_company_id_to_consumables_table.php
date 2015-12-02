@@ -15,7 +15,7 @@ class AddCompanyIdToConsumablesTable extends Migration {
         Schema::table('consumables', function(Blueprint $table)
         {
             $table->integer('company_id')->unsigned()->nullable();
-            $table->foreign('company_id')->references('id')->on('companies');
+            //$table->foreign('company_id')->references('id')->on('companies');
         });
     }
 
@@ -28,7 +28,7 @@ class AddCompanyIdToConsumablesTable extends Migration {
     {
         Schema::table('consumables', function(Blueprint $table)
         {
-            $table->dropForeign('consumables_company_id_foreign');
+            //$table->dropForeign('consumables_company_id_foreign');
             $table->dropColumn('company_id');
         });
     }
