@@ -7,6 +7,7 @@ use Input;
 use Validator;
 use Redirect;
 use Model;
+use Lang;
 
 class CustomFieldsController extends \BaseController {
 
@@ -46,7 +47,7 @@ class CustomFieldsController extends \BaseController {
 		$validator=Validator::make(Input::all(),$cfset->rules);
 		if($validator->passes()) {
 			$cfset->save();
-			return Redirect::route("admin.custom_fields.show",[$cfset->id]); //redirect(["asdf" => "alskdjf"]);
+			return Redirect::route("admin.custom_fields.show",[$cfset->id])->with('success',Lang::get('admin/custom_fields/message.fieldset.create.success')); 
 		} else {
 			return Redirect::back()->withInput()->withErrors($validator);
 		}
@@ -54,22 +55,18 @@ class CustomFieldsController extends \BaseController {
 
 	public function associate($id)
 	{
-		//print "ID is: $id";
+
 		$set = CustomFieldset::find($id);
-		//print_r($set->fields());
+
 		foreach($set->fields AS $field) {
-			//print_r($field);
-			//print "Field ID of this particular field is:".$field->id.", and we are checking for: ".Input::get('field_id');
 			if($field->id == Input::get('field_id')) {
-				//print "I want to redirect back in failure";
-				//exit(-2);
-				return Redirect::route("admin.custom_fields.show",[$id])->withInput()->withErrors(['field_id' => "Field already added"]);
+				return Redirect::route("admin.custom_fields.show",[$id])->withInput()->withErrors(['field_id' => Lang::get('admin/custom_fields/message.field.already_added')]);
 			}
 		}
 
 		$results=$set->fields()->attach(Input::get('field_id'),["required" => (Input::get('required') == "on"),"order" => Input::get('order')]);
-		//return "I assoced it. Results: $results";
-		return Redirect::route("admin.custom_fields.show",[$id]); //redirect(["asdf" => "alskdjf"]);
+
+		return Redirect::route("admin.custom_fields.show",[$id])->with("success",Lang::get('admin/custom_fields/message.field.create.assoc_success'));
 	}
 
 	public function createField()
@@ -91,9 +88,9 @@ class CustomFieldsController extends \BaseController {
 			$results=$field->save();
 			//return "postCreateField: $results";
 			if ($results) {
-				return Redirect::route("admin.custom_fields.index");
+				return Redirect::route("admin.custom_fields.index")->with("success",Lang::get('admin/custom_fields/message.field.create.success'));
 			} else {
-				return Redirect::back()->withInput()->with('error', "Failed to save?");
+				return Redirect::back()->withInput()->with('error', Lang::get('admin/custom_fields/message.field.create.error'));
 			}
 		} else {
 			return Redirect::back()->withInput()->withErrors($validator);
@@ -108,7 +105,7 @@ class CustomFieldsController extends \BaseController {
 			return Redirect::back()->withErrors(['message' => "Field is in-use"]);
 		} else {
 			$field->delete();
-			return Redirect::route("admin.custom_fields.index")->with("success","Field Deleted");
+			return Redirect::route("admin.custom_fields.index")->with("success",Lang::get('admin/custom_fields/message.field.delete.success'));
 		}
 	}
 
@@ -181,10 +178,10 @@ class CustomFieldsController extends \BaseController {
 		$models=Model::where("fieldset_id","=",$id);
 		if($models->count()==0) {
 			$fieldset->delete();
-			return Redirect::route("admin.custom_fields.index")->with("success","Fieldset Deleted");
+			return Redirect::route("admin.custom_fields.index")->with("success",Lang::get('admin/custom_fields/message.fieldset.delete.success'));
 		}
 		else {
-			return Redirect::route("admin.custom_fields.index")->with("error","Fieldset still in use"); //->with("models",$models);
+			return Redirect::route("admin.custom_fields.index")->with("error",Lang::get('admin/custom_fields/message.fieldset.delete.in_use')); //->with("models",$models);
 		}
 	}
 
