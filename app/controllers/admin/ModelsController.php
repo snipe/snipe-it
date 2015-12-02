@@ -374,6 +374,14 @@ class ModelsController extends AdminController
         return $view;
 
     }
+    
+    
+    public function getCustomFields($modelId)
+    {
+      $model=Model::find($modelId);
+      return View::make("backend.models.custom_fields_form")->with("model",$model);
+    }
+
 
 
     /**
