@@ -251,7 +251,7 @@
                         </li>
                         <li{{ (Request::is('admin/custom_fields*') ? ' class="active"' : '') }}>
                             <a href="{{ route('admin.custom_fields.index') }}">
-                                <i class="fa fa-wrench fa-fw"></i> Custom Fields
+                                <i class="fa fa-wrench fa-fw"></i> @lang('admin/custom_fields/general.custom_fields')
                             </a>
                         </li>
                         <li class="divider"></li>

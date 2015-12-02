@@ -2,7 +2,7 @@
 
 {{-- Page title --}}
 @section('title')
-  @lang('admin/custom_fields/general.create_fieldset')
+  @lang('admin/custom_fields/general.custom_fields')
 @parent
 @stop
 
@@ -15,7 +15,7 @@
           <i class="fa fa-arrow-left icon-white"></i>
           @lang('general.back')</a>
         <h3>
-        {{{ $custom_fieldset->name }}} Fieldset
+        {{{ $custom_fieldset->name }}} @lang('admin/custom_fields/general.fieldset')
         </h3>
     </div>
 </div>
