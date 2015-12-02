@@ -218,6 +218,7 @@
                 Route::get( '{modelId}/delete', [ 'as' => 'delete/model', 'uses' => 'ModelsController@getDelete' ] );
                 Route::get( '{modelId}/view', [ 'as' => 'view/model', 'uses' => 'ModelsController@getView' ] );
                 Route::get( '{modelID}/restore', [ 'as' => 'restore/model', 'uses' => 'ModelsController@getRestore' ] );
+                Route::get( '{modelId}/custom_fields',['as' => 'custom_fields/model','uses' => 'ModelsController@getCustomFields']);
             } );
 
             Route::get( '/', [

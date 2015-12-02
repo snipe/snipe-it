@@ -311,18 +311,12 @@
 				</div>
 		  	</div>
 
+        <div id='custom_fields_content'>
         <!-- Custom Fields -->
         @if($asset->model && $asset->model->fieldset)
-          <h1>Custom Fields</h1>
-          @foreach($asset->model->fieldset->fields AS $field)
-            <div class="form-group">
-              <label for="idunno" class="col-md-2 control-label">{{{ $field->name }}}</label>
-              <div class="col-md-7 col-sm-12">
-                  <input type="text" value="{{{ Input::old('fields[{{$field->db_column_name()}}]',$asset->{$field->db_column_name()}) }}}" name="fields[{{{ $field->db_column_name() }}}]">
-              </div>
-            </div>
-          @endforeach
+          @include("backend.models.custom_fields_form",["model" => $asset->model])
         @endif
+      </div>
 
 
             <!-- Image -->
@@ -363,7 +357,21 @@
 
 	
 
-
+$(function() {
+  $('#model_select_id').on("change",function () {
+    // console.warn("Model Id has changed!");
+    var modelid=$('#model_select_id').val();
+    if(modelid=='') {
+      $('#custom_fields_content').html("");
+    } else {
+      // console.warn("Model ID is: "+modelid);
+      $.get("/hardware/models/"+modelid+"/custom_fields",{_token: "{{ csrf_token() }}"},function (data) {
+        // console.warn("Ajax call came back okay! Data is: "+data);
+        $('#custom_fields_content').html(data);
+      });
+    }
+  });
+});
 
     $(function() {
         user_add($(".status_id option:selected").val());
@@ -467,7 +475,6 @@ $(function () {
 
     data._token =  '{{ csrf_token() }}',
     //console.dir(data);
-    data._token =  '{{ csrf_token() }}',
 
     $.post("{{Config::get('app.url')}}/api/"+model+"s",data,function (result) {
       var id=result.id;
