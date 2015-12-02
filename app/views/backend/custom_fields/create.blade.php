@@ -11,7 +11,7 @@
 
 <div class="row header">
     <div class="col-md-12">
-        <a href="{{ URL::previous() }}" class="btn-flat gray pull-right">
+        <a href="{{ route('admin.custom_fields.index') }}" class="btn-flat gray pull-right">
           <i class="fa fa-arrow-left icon-white"></i>
           @lang('general.back')</a>
         <h3>
@@ -39,7 +39,7 @@
             <div class="form-group">
             <label class="col-md-4 control-label"></label>
                 <div class="col-md-7">
-                    <a class="btn btn-link" href="{{ URL::previous() }}">@lang('button.cancel')</a>
+                    <a class="btn btn-link" href="{{ route('admin.custom_fields.index') }}">@lang('button.cancel')</a>
                     <button type="submit" class="btn btn-success"><i class="fa fa-check icon-white"></i> @lang('general.save')</button>
                 </div>
             </div>
