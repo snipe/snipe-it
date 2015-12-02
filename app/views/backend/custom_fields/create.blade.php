@@ -44,7 +44,7 @@
                 </div>
             </div>
 
-        </form>
+        {{ Form::close() }}
 
 </div>
 
