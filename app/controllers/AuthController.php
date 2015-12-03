@@ -149,14 +149,10 @@ class AuthController extends BaseController
         }
         try {
 
-            /**
-             * =================================================================
-             * LDAP authentication
-             */
-
             // Should we even check for LDAP users?
             if (Setting::getSettings()->ldap_enabled) {
 
+              LOG::debug("LDAP is enabled.");
               // Check if the user exists in the database
               $user = User::where('username', Input::get('username'))->whereNull('deleted_at')->first();
 
@@ -166,19 +162,18 @@ class AuthController extends BaseController
               if(!$user){
 
                   if($userattr = $this->ldap(Input::get('username'), Input::get('password'),true) ){
-
                       LOG::debug("Creating LDAP authenticated user.");
                       $credentials = $this->createUserFromLdap($userattr);
                       Sentry::authenticate($credentials, Input::get('remember-me', 0));
-
                   }
 
               // If the user exists and they were imported from LDAP already
-              } elseif ($user && strpos($user["notes"],'LDAP') !== false) {
-                LOG::debug("Authenticating existing user against LDAP.");
+              } else {
 
-                if( $this->ldap(Input::get('username'), Input::get('password')) ) {
-                        LOG::debug("valid login");
+                LOG::debug("User exists in database. Authenticating existing user against LDAP.");
+
+                if ($this->ldap(Input::get('username'), Input::get('password')) ) {
+                    LOG::debug("Valid LDAP login");
                     $pass = substr(str_shuffle("0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"), 0, 20);
                     $user = Sentry::findUserByLogin( Input::get('username') );
                     $user->password = $pass;
@@ -188,22 +183,26 @@ class AuthController extends BaseController
                         'password' => $pass,
                     );
                     Sentry::authenticate($credentials, Input::get('remember-me', 0));
-                }
-                else {
 
-                    LOG::debug("Authenticating user against database.");
+
+                } else {
+
+                    LOG::debug("No joy on LDAP. Attempting authentication user against database.");
                     // Try to log the user in
                     if (!Sentry::authenticate(Input::only('username', 'password'), Input::get('remember-me', 0))) {
                       throw new Cartalyst\Sentry\Users\UserNotFoundException();
                     }
 
                 }
+
               }
+
+
 
             // NO LDAP enabled - just try to login the user normally
             } else {
 
-              LOG::debug("Authenticating user against database.");
+              LOG::debug("LDAP is not enabled. Authenticating user against database.");
               // Try to log the user in
               Sentry::authenticate(Input::only('username', 'password'), Input::get('remember-me', 0));
 
