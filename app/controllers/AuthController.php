@@ -222,15 +222,23 @@ class AuthController extends BaseController
             return Redirect::to($redirect)->with('success', Lang::get('auth/message.signin.success'));
 
         } catch (Cartalyst\Sentry\Users\UserNotFoundException $e) {
+            LOG::debug("Local authentication: User ".Input::get('username')." not found");
+            $this->messageBag->add('username', Lang::get('auth/message.account_not_found'));
+
+        } catch (Cartalyst\Sentry\Users\WrongPasswordException $e) {
+            LOG::debug("Local authentication: Password for ".Input::get('username')." is incorrect.");
             $this->messageBag->add('username', Lang::get('auth/message.account_not_found'));
 
         } catch (Cartalyst\Sentry\Users\UserNotActivatedException $e) {
+            LOG::debug("Local authentication: User not activated");
             $this->messageBag->add('username', Lang::get('auth/message.account_not_activated'));
 
         } catch (Cartalyst\Sentry\Throttling\UserSuspendedException $e) {
+            LOG::debug("Local authentication: Account suspended");
             $this->messageBag->add('username', Lang::get('auth/message.account_suspended'));
 
         } catch (Cartalyst\Sentry\Throttling\UserBannedException $e) {
+            LOG::debug("Local authentication: Account banned.");
             $this->messageBag->add('username', Lang::get('auth/message.account_banned'));
         }
 
