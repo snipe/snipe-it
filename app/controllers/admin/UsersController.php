@@ -889,7 +889,7 @@ class UsersController extends AdminController {
             $sort = e(Input::get('sort'));
         }
 
-        $users = User::select(array('users.id','users.email','users.username','users.location_id','users.manager_id','users.first_name','users.last_name','users.created_at','users.notes','users.company_id'))
+        $users = User::select(array('users.id','users.employee_num','users.email','users.username','users.location_id','users.manager_id','users.first_name','users.last_name','users.created_at','users.notes','users.company_id'))
             ->with('assets','accessories','consumables','licenses','manager','sentryThrottle','groups','userloc','company');
         $users = Company::scopeCompanyables($users);
 
@@ -916,7 +916,7 @@ class UsersController extends AdminController {
              default:
                 $allowed_columns =
                 [
-                  'last_name','first_name','email','username',
+                  'last_name','first_name','email','username','employee_num',
                   'assets','accessories', 'consumables','licenses','groups'
                 ];
 
@@ -972,6 +972,7 @@ class UsersController extends AdminController {
                 'location'      => ($user->userloc) ? $user->userloc->name : '',
                 'manager'         => ($user->manager) ? '<a title="' . $user->manager->fullName() . '" href="users/' . $user->manager->id . '/view">' . $user->manager->fullName() . '</a>' : '',
                 'assets'        => $user->assets->count(),
+                'employee_num'  => $user->employee_num,
                 'licenses'        => $user->licenses->count(),
                 'accessories'        => $user->accessories->count(),
                 'consumables'        => $user->consumables->count(),
