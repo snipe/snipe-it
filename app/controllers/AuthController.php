@@ -190,6 +190,7 @@ class AuthController extends BaseController
                     LOG::debug("No joy on LDAP. Attempting authentication user against database.");
                     // Try to log the user in
                     if (!Sentry::authenticate(Input::only('username', 'password'), Input::get('remember-me', 0))) {
+                      LOG::debug("Local authentication failed.");
                       throw new Cartalyst\Sentry\Users\UserNotFoundException();
                     }
 
