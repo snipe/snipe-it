@@ -176,7 +176,7 @@ class AuthController extends BaseController
               // If the user exists and they were imported from LDAP already
               } elseif ($user && strpos($user["notes"],'LDAP') !== false) {
                 LOG::debug("Authenticating existing user against LDAP.");
-                
+
                 if( $this->ldap(Input::get('username'), Input::get('password')) ) {
                         LOG::debug("valid login");
                     $pass = substr(str_shuffle("0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"), 0, 20);
@@ -190,7 +190,13 @@ class AuthController extends BaseController
                     Sentry::authenticate($credentials, Input::get('remember-me', 0));
                 }
                 else {
-                    throw new Cartalyst\Sentry\Users\UserNotFoundException();
+
+                    LOG::debug("Authenticating user against database.");
+                    // Try to log the user in
+                    if (!Sentry::authenticate(Input::only('username', 'password'), Input::get('remember-me', 0))) {
+                      throw new Cartalyst\Sentry\Users\UserNotFoundException();
+                    }
+
                 }
               }
 
