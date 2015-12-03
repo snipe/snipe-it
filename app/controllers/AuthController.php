@@ -165,6 +165,8 @@ class AuthController extends BaseController
                       LOG::debug("Creating LDAP authenticated user.");
                       $credentials = $this->createUserFromLdap($userattr);
                       Sentry::authenticate($credentials, Input::get('remember-me', 0));
+                  } else {
+                    throw new Cartalyst\Sentry\Users\UserNotFoundException();
                   }
 
               // If the user exists and they were imported from LDAP already
@@ -184,7 +186,7 @@ class AuthController extends BaseController
                     );
                     Sentry::authenticate($credentials, Input::get('remember-me', 0));
 
-
+                // LDAP authentication failed. Try hitting the database.
                 } else {
 
                     LOG::debug("No joy on LDAP. Attempting authentication user against database.");
@@ -194,11 +196,12 @@ class AuthController extends BaseController
                       throw new Cartalyst\Sentry\Users\UserNotFoundException();
                     }
 
-                }
+                } // End LDAP auth
 
-              }
+              } // End if(!user)
 
-
+              LOG::debug("LDAP attempts failed. Authenticating user against database.");
+              Sentry::authenticate(Input::only('username', 'password'), Input::get('remember-me', 0));
 
             // NO LDAP enabled - just try to login the user normally
             } else {
