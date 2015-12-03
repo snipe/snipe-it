@@ -504,11 +504,9 @@ class AssetsController extends AdminController
         }
 
         if (Input::has('expected_checkin')) {
-        	if (Input::get('expected_checkin')!= date("Y-m-d")){
-			$expected_checkin = e(Input::get('expected_checkin'));
-		}
-    	} else {
-            $expected_checkin = null;
+			    $expected_checkin = e(Input::get('expected_checkin'));
+    	  } else {
+            $expected_checkin = '';
         }
 
 
