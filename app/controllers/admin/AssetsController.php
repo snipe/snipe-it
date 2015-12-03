@@ -100,9 +100,25 @@ class AssetsController extends AdminController
     {
         // create a new model instance
         $asset = new Asset();
+        $asset->model = Model::find(e(Input::get('model_id')));
 
         //attempt to validate
-        $validator = Validator::make(Input::all(), $asset->validationRules());
+        $input=Input::all();
+
+        $rules=$asset->validationRules();
+        if($asset->model->fieldset)
+        {
+          foreach($asset->model->fieldset->fields AS $field) {
+            $input[$field->db_column_name()]=$input['fields'][$field->db_column_name()];
+            $asset->{$field->db_column_name()}=$input[$field->db_column_name()];
+          }
+          $rules+=$asset->model->fieldset->validation_rules();
+          unset($input['fields']);
+        }
+
+        $validator = Validator::make($input,  $rules );
+        $custom_errors=[];
+
 
         if ($validator->fails())
         {

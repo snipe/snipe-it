@@ -159,8 +159,14 @@
 
             <div id='custom_fields_content'>
               <!-- Custom Fields -->
-              @if($asset->model && $asset->model->fieldset)
-                @include("backend.models.custom_fields_form",["model" => $asset->model])
+              @if ($asset->model && $asset->model->fieldset)
+                <?php $model=$asset->model; ?>
+              @endif
+              @if (Input::old('model_id'))
+                <?php $model=Model::find(Input::old('model_id')); ?>
+              @endif
+              @if (isset($model) && $model)
+                @include("backend.models.custom_fields_form",["model" => $model])
               @endif
             </div>
 
