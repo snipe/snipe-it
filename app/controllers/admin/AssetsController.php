@@ -100,7 +100,7 @@ class AssetsController extends AdminController
     {
         // create a new model instance
         $asset = new Asset();
-        $asset->model = Model::find(e(Input::get('model_id')));
+        $asset->model()->associate(Model::find(e(Input::get('model_id'))));
 
         //attempt to validate
         $input=Input::all();
