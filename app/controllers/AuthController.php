@@ -162,10 +162,11 @@ class AuthController extends BaseController
               if(!$user){
 
                   if($userattr = $this->ldap(Input::get('username'), Input::get('password'),true) ){
-                      LOG::debug("Creating LDAP authenticated user.");
-                      $credentials = $this->createUserFromLdap($userattr);
-                      Sentry::authenticate($credentials, Input::get('remember-me', 0));
+                    LOG::debug("Creating LDAP authenticated user.");
+                    $credentials = $this->createUserFromLdap($userattr);
+                    Sentry::authenticate($credentials, Input::get('remember-me', 0));
                   } else {
+                    LOG::debug("User does not exist in the local database or LDAP.");
                     throw new Cartalyst\Sentry\Users\UserNotFoundException();
                   }
 
