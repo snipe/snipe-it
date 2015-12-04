@@ -587,6 +587,7 @@ class UsersController extends AdminController {
                 return Redirect::route('users')->with('error', 'Bulk delete is not enabled in this installation');
             }
 
+            /** @noinspection PhpUnreachableStatementInspection Known to be unreachable but kept following discussion: https://github.com/snipe/snipe-it/pull/1423 */
             return Redirect::route('users')->with('error', 'An error has occurred');
         }
     }
