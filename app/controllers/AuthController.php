@@ -173,7 +173,7 @@ class AuthController extends BaseController
               // If the user exists and they were imported from LDAP already
               } else {
 
-                LOG::debug("User exists in database. Authenticating existing user against LDAP.");
+                LOG::debug("User exists in local database. Authenticating existing user against LDAP.");
 
                 if ($this->ldap(Input::get('username'), Input::get('password')) ) {
                     LOG::debug("Valid LDAP login");
@@ -190,7 +190,7 @@ class AuthController extends BaseController
                 // LDAP authentication failed. Try hitting the database.
                 } else {
 
-                    LOG::debug("No joy on LDAP. Attempting authentication user against database.");
+                    LOG::debug("Login failed for LDAP. Attempting authentication user against database.");
                     // Try to log the user in
                     if (!Sentry::authenticate(Input::only('username', 'password'), Input::get('remember-me', 0))) {
                       LOG::debug("Local authentication failed.");
