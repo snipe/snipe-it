@@ -824,7 +824,7 @@ class UsersController extends AdminController {
                             'password' => $pass,
                             'activated' => $activated,
                             'location_id' => $row[4],
-                            'company_id' => Company::getIdForUser($row[5]),
+                            //'company_id' => Company::getIdForUser($row[5]),
                             'permissions' => '{"user":1}',
                             'notes' => 'Imported user'
                         );
