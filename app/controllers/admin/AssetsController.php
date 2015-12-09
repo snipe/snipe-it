@@ -1364,7 +1364,7 @@ class AssetsController extends AdminController
             'category'      => (($asset->model) && ($asset->model->category)) ? $asset->model->category->name : '',
             'eol'           => ($asset->eol_date()) ? $asset->eol_date() : '',
             'notes'         => $asset->notes,
-            'order_number'  => ($asset->order_number!='') ? '<a href="../hardware/?order_number='.$asset->order_number.'">'.$asset->order_number.'</a>' : '',
+            'order_number'  => ($asset->order_number!='') ? '<a href="'.Config::get('app.url').'/hardware?order_number='.$asset->order_number.'">'.$asset->order_number.'</a>' : '',
             'last_checkout' => ($asset->last_checkout!='') ? $asset->last_checkout : '',
             'expected_checkin' => ($asset->expected_checkin!='')  ? $asset->expected_checkin : '',
             'change'        => ($inout) ? $inout : '',
