@@ -53,6 +53,11 @@ return array(
         'error'   		=> 'Asset was not checked in, please try again',
         'success' 		=> 'Asset checked in successfully.',
         'user_does_not_exist' => 'That user is invalid. Please try again.'
+    ),
+
+    'requests' => array(
+        'error'   		=> 'Asset was not requested, please try again',
+        'success' 		=> 'Asset requested successfully.',
     )
 
 );
