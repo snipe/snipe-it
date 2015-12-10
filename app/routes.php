@@ -199,6 +199,11 @@
                     'as'   => 'hardware/bulkedit',
                     'uses' => 'AssetsController@postBulkEdit'
                 ] );
+            Route::post( 'bulkdelete',
+                [
+                    'as'   => 'hardware/bulkdelete',
+                    'uses' => 'AssetsController@postBulkDelete'
+                ] );
             Route::post( 'bulksave',
                 [
                     'as'   => 'hardware/bulksave',
