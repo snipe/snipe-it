@@ -60,7 +60,7 @@ use Carbon\Carbon;
                             ?>
                         @endif
                         <td>{{{ $assetMaintenanceTime }}}</td>
-                        <td>@lang('general.currency'){{ number_format($assetMaintenance->cost,2) }}</td>
+                        <td>{{{ Setting::first()->default_currency }}}{{ number_format($assetMaintenance->cost,2) }}</td>
                     </tr>
                     <?php
                         $totalDays += $assetMaintenanceTime;
@@ -72,7 +72,7 @@ use Carbon\Carbon;
                     <tr>
                         <td colspan="6" align="right"><strong>Totals:</strong></td>
                         <td>{{number_format($totalDays)}}</td>
-                        <td>@lang('general.currency'){{ number_format($totalCost,2) }}</td>
+                        <td>{{{ Setting::first()->default_currency }}}{{ number_format($totalCost,2) }}</td>
                     </tr>
                 </tfoot>
             </table>
