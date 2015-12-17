@@ -25,6 +25,7 @@ class CreateLicensesTable extends Migration
         $table->text('notes');
         $table->integer('user_id');
         $table->timestamps();
+        $table->engine = 'InnoDB';
         });
     }
 

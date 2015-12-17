@@ -149,29 +149,35 @@ class AuthController extends BaseController
         }
         try {
 
-            /**
-             * =================================================================
-             * Hack in LDAP authentication
-             */
+            // Should we even check for LDAP users?
+            if (Setting::getSettings()->ldap_enabled) {
 
-            // Try to get the user from the database.
-            $user = (array) DB::table('users')->where('username', Input::get('username'))->first();
-            //If user does not exist and authenticates sucessfully with LDAP we will create it onf the fly and sign in with default permissions
-            if(!$user){
-                if($userattr = $this->ldap(Input::get('username'), Input::get('password'),true) ){
+              LOG::debug("LDAP is enabled.");
+              // Check if the user exists in the database
+              $user = User::where('username', Input::get('username'))->whereNull('deleted_at')->first();
+
+              // The user does not exist in the database. Try to get them from LDAP.
+              // If user does not exist and authenticates sucessfully with LDAP we
+              // will create it on the fly and sign in with default permissions
+              if(!$user){
+
+                  if($userattr = $this->ldap(Input::get('username'), Input::get('password'),true) ){
                     LOG::debug("Creating LDAP authenticated user.");
                     $credentials = $this->createUserFromLdap($userattr);
                     Sentry::authenticate($credentials, Input::get('remember-me', 0));
+                  } else {
+                    LOG::debug("User does not exist in the local database or LDAP.");
+                    throw new Cartalyst\Sentry\Users\UserNotFoundException();
+                  }
 
+              // If the user exists and they were imported from LDAP already
+              } else {
 
-                }
-            }
+                LOG::debug("User exists in local database. Authenticating existing user against LDAP.");
 
-            else if ($user && strpos($user["notes"],'LDAP') !== false) {
-                LOG::debug("Authenticating user against LDAP.");
-                if( $this->ldap(Input::get('username'), Input::get('password')) ) {
-                        LOG::debug("valid login");
-                    $pass = substr(str_shuffle("0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"), 0, 10);
+                if ($this->ldap(Input::get('username'), Input::get('password')) ) {
+                    LOG::debug("Valid LDAP login");
+                    $pass = substr(str_shuffle("0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"), 0, 20);
                     $user = Sentry::findUserByLogin( Input::get('username') );
                     $user->password = $pass;
                     $user->save();
@@ -180,16 +186,31 @@ class AuthController extends BaseController
                         'password' => $pass,
                     );
                     Sentry::authenticate($credentials, Input::get('remember-me', 0));
-                }
-                else {
-                    throw new Cartalyst\Sentry\Users\UserNotFoundException();
-                }
-            }
-            /* ============================================================== */
-            else {
-                LOG::debug("Authenticating user against database.");
-                // Try to log the user in
-                Sentry::authenticate(Input::only('username', 'password'), Input::get('remember-me', 0));
+
+                // LDAP authentication failed. Try hitting the database.
+                } else {
+
+                    LOG::debug("Login failed for LDAP. Attempting authentication user against database.");
+                    // Try to log the user in
+                    if (!Sentry::authenticate(Input::only('username', 'password'), Input::get('remember-me', 0))) {
+                      LOG::debug("Local authentication failed.");
+                      throw new Cartalyst\Sentry\Users\UserNotFoundException();
+                    }
+
+                } // End LDAP auth
+
+              } // End if(!user)
+
+              LOG::debug("LDAP attempts failed. Authenticating user against database.");
+              Sentry::authenticate(Input::only('username', 'password'), Input::get('remember-me', 0));
+
+            // NO LDAP enabled - just try to login the user normally
+            } else {
+
+              LOG::debug("LDAP is not enabled. Authenticating user against database.");
+              // Try to log the user in
+              Sentry::authenticate(Input::only('username', 'password'), Input::get('remember-me', 0));
+
             }
 
             // Get the page we were before
@@ -200,13 +221,25 @@ class AuthController extends BaseController
 
             // Redirect to the users page
             return Redirect::to($redirect)->with('success', Lang::get('auth/message.signin.success'));
+
         } catch (Cartalyst\Sentry\Users\UserNotFoundException $e) {
+            LOG::debug("Local authentication: User ".Input::get('username')." not found");
             $this->messageBag->add('username', Lang::get('auth/message.account_not_found'));
+
+        } catch (Cartalyst\Sentry\Users\WrongPasswordException $e) {
+            LOG::debug("Local authentication: Password for ".Input::get('username')." is incorrect.");
+            $this->messageBag->add('username', Lang::get('auth/message.account_not_found'));
+
         } catch (Cartalyst\Sentry\Users\UserNotActivatedException $e) {
+            LOG::debug("Local authentication: User not activated");
             $this->messageBag->add('username', Lang::get('auth/message.account_not_activated'));
+
         } catch (Cartalyst\Sentry\Throttling\UserSuspendedException $e) {
+            LOG::debug("Local authentication: Account suspended");
             $this->messageBag->add('username', Lang::get('auth/message.account_suspended'));
+
         } catch (Cartalyst\Sentry\Throttling\UserBannedException $e) {
+            LOG::debug("Local authentication: Account banned.");
             $this->messageBag->add('username', Lang::get('auth/message.account_banned'));
         }
 

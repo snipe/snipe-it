@@ -8,6 +8,7 @@
     'activity_report'		=> 'Activity Report',
     'address'				=> 'Address',
     'admin'					=> 'Admin',
+    'add_seats'     => 'Added seats',
     'all_assets'			=> 'All Assets',
     'all'       			=> 'All',
     'archived'              => 'Archived',

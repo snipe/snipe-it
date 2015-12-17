@@ -22,6 +22,7 @@ class AddAccessoriesTable extends Migration {
             $table->boolean('requestable')->default(0);
             $table->timestamps();
             $table->softDeletes();
+            $table->engine = 'InnoDB';
         });
 
         Schema::table('asset_logs', function ($table) {
