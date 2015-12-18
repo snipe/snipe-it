@@ -133,6 +133,12 @@ class ViewAssetsController extends AuthorizedController
             // Redirect to the asset management page
             return Redirect::to('account')->with('error', Lang::get('admin/hardware/message.does_not_exist'));
         }
+        
+        $user = Sentry::getUser();
+        
+        if ($user->id != $findlog->checkedout_to) {
+            return Redirect::to('account/view-assets')->with('error', Lang::get('admin/users/message.error.incorrect_user_accepted'));
+        }
 
         // Asset
         if (($findlog->asset_id!='') && ($findlog->asset_type=='hardware')) {
@@ -184,6 +190,11 @@ class ViewAssetsController extends AuthorizedController
         }
 
     	$user = Sentry::getUser();
+        
+        if ($user->id != $findlog->checkedout_to) {
+            return Redirect::to('account/view-assets')->with('error', Lang::get('admin/users/message.error.incorrect_user_accepted'));
+        }
+        
 		$logaction = new Actionlog();
 
         if (Input::get('asset_acceptance')=='accepted') {
