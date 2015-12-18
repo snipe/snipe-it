@@ -499,7 +499,7 @@ class AssetsController extends AdminController
 
 
     	if (Input::get('checkout_at')!= date("Y-m-d")){
-			$checkout_at = e(Input::get('checkout_at')).' 00:00:00';
+			     $checkout_at = e(Input::get('checkout_at')).' 00:00:00';
     	} else {
             $checkout_at = date("Y-m-d H:i:s");
         }
