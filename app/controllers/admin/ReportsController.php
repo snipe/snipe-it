@@ -476,14 +476,14 @@ class ReportsController extends AdminController
             if (e( Input::get( 'location' ) ) == '1') {
                 if (( $asset->assigned_to > 0 ) && ( $asset->assigneduser->location_id > 0 )) {
                     $location = Location::find( $asset->assigneduser->location_id );
-                    if ($location->name) {
+                    if ($location) {
                         $row[] = $location->name;
                     } else {
                         $row[] = '';
                     }
                 } elseif ($asset->rtd_location_id) {
                     $location = Location::find( $asset->rtd_location_id );
-                    if ($location->name) {
+                    if ($location) {
                         $row[] = $location->name;
                     } else {
                         $row[] = '';
