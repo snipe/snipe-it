@@ -77,7 +77,7 @@ class AssetImportCommand extends Command {
 				$user_email = '';
 			}
 
-			// User's email
+                        // User's username
 			if (array_key_exists('2',$row)) {
 				$user_username = trim($row[2]);
 			} else {
@@ -98,11 +98,11 @@ class AssetImportCommand extends Command {
 				$user_asset_category = '';
 			}
 
-			// Asset Name
+                        // Asset Model Name
 			if (array_key_exists('5',$row)) {
-				$user_asset_name = trim($row[5]);
+                                $user_asset_model_name = trim($row[5]);
 			} else {
-				$user_asset_name = '';
+                                $user_asset_model_name = '';
 			}
 
 			// Asset Manufacturer
@@ -220,7 +220,8 @@ class AssetImportCommand extends Command {
 			$this->comment('Username: '.$user_username);
 			$this->comment('Email: '.$user_email);
 			$this->comment('Category Name: '.$user_asset_category);
-			$this->comment('Item: '.$user_asset_name);
+                        $this->comment('Item: '.$user_asset_asset_name);
+                        $this->comment('Model: '.$user_asset_model_name);
 			$this->comment('Manufacturer ID: '.$user_asset_mfgr);
 			$this->comment('Model No: '.$user_asset_modelno);
 			$this->comment('Serial No: '.$user_asset_serial);
@@ -340,20 +341,20 @@ class AssetImportCommand extends Command {
 			}
 
 			// Check for the asset model match and create it if it doesn't exist
-			if ($asset_model = Model::where('name', $user_asset_name)->where('modelno', $user_asset_modelno)->where('category_id', $category->id)->where('manufacturer_id', $manufacturer->id)->first()) {
-				$this->comment('The Asset Model '.$user_asset_name.' with model number '.$user_asset_modelno.' already exists');
+                        if ($asset_model = Model::where('name', $user_asset_model_name)->where('modelno', $user_asset_modelno)->where('category_id', $category->id)->where('manufacturer_id', $manufacturer->id)->first()) {
+                                $this->comment('The Asset Model '.$user_asset_model_name.' with model number '.$user_asset_modelno.' already exists');
 			} else {
 				$asset_model = new Model();
-				$asset_model->name = e($user_asset_name);
+                                $asset_model->name = e($user_asset_model_name);
 				$asset_model->manufacturer_id = $manufacturer->id;
 				$asset_model->modelno = e($user_asset_modelno);
 				$asset_model->category_id = $category->id;
 				$asset_model->user_id = 1;
 
 				if ($asset_model->save()) {
-					$this->comment('Asset Model '.$user_asset_name.' with model number '.$user_asset_modelno.' was created');
+                                        $this->comment('Asset Model '.$user_asset_model_name.' with model number '.$user_asset_modelno.' was created');
                                 } else {
-					$this->comment('Something went wrong! Asset Model '.$user_asset_name.' was NOT created');
+                                        $this->comment('Something went wrong! Asset Model '.$user_asset_model_name.' was NOT created');
 				}
 
 			}
