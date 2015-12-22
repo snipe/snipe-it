@@ -26,6 +26,14 @@ function modelList() {
     return $model_list;
 }
 
+function companyList() {
+    $company_list = array('' => '') + DB::table('companies')
+    ->orderBy('name', 'asc')
+    ->lists('name', 'id');
+    return $company_list;
+}
+
+
 function categoryList() {
     $category_list = array('' => '') + DB::table('categories')
     ->whereNull('deleted_at')

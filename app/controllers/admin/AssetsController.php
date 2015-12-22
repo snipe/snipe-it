@@ -1131,12 +1131,11 @@ class AssetsController extends AdminController
 			} elseif (Input::get('bulk_actions')=='edit') {
 
 				$assets = Input::get('edit_asset');
-				$supplier_list = array('' => '') + Supplier::orderBy('name', 'asc')->lists('name', 'id');
-        $statuslabel_list = array('' => '') + Statuslabel::lists('name', 'id');
-        $location_list = array('' => '') + Location::lists('name', 'id');
-        $models_list = array('' => '') + Model::lists('name', 'id');
-        $models_list = array('' => '') + Model::lists('name', 'id');
-        $companies_list = array('' => '') + array('clear' => Lang::get('general.remove_company')) + Company::lists('name', 'id');
+				$supplier_list = array('' => '') + suppliersList();
+        $statuslabel_list = array('' => '') + statusLabelList();
+        $location_list = array('' => '') + locationsList();
+        $models_list = array('' => '') + modelList();
+        $companies_list = array('' => '') + array('clear' => Lang::get('general.remove_company')) + companyList();
 
         return View::make('backend/hardware/bulk')
         ->with('assets',$assets)
