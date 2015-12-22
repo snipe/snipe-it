@@ -37,11 +37,15 @@ The LDAP functionality will import any users in your LDAP/Active Directory, but 
 |Username Field|`uid`|The name of the field in your LDAP that you want to use for Snipe-IT username. |Yes|
 |Last Name|`sn`|The name of the field in your LDAP to use for last name. This is often `sn` (for surname)|Yes|
 |LDAP First Name|`cn`|The name of the field in your LDAP to use for first name.|Yes|
-|LDAP Authentication query|`uid="`|The LDAP query we should use to search your LDAP users|Yes|
+|LDAP Authentication query|`uid="`|The LDAP query we should use to search your LDAP users. (This is usually `samaccountname=` in Active Directory, `uid="` in non-AD LDAP.)|Yes|
 |LDAP Version|`3`|Version of LDAP. This is usually going to be `3`|Yes|
 |LDAP Active Flag|`active`|Only necessary if you use a field in LDAP to indicate if the user is active. Can otherwise be left blank.|No|
 |LDAP Employee Number| |Only necessary if you use a field in LDAP to store an employee number. Can otherwise be left blank.|No|
 |LDAP Email|`mail`|LDAP field that should map to an email address for the user|Yes|
+
+**Note: In most cases, all attribute values you enter should be all lowercase.**
+
+Once your settings are entered, make sure you check the `LDAP Integration` checkbox to enable LDAP authentication.
 
 ### Example Settings
 
