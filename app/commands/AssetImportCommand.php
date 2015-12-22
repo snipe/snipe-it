@@ -179,7 +179,7 @@ class AssetImportCommand extends Command {
 				$this->comment('No user data provided - skipping user creation, just adding asset');
 				$first_name = '';
 				$last_name = '';
-				$user_username = '';
+				//$user_username = '';
 
 			} else {
 				$user_email_array = User::generateFormattedNameFromFullName($this->option('email_format'), $user_name);
