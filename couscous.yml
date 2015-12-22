@@ -108,7 +108,7 @@ menu:
                     text: Basic Concepts
                     relativeUrl: manual/index.html
                 user-management:
-                    text: User Management
+                    text: "LDAP / User Management"
                     relativeUrl: manual/user-management/index.html
                 importing-assets:
                     text: "Importing Assets"

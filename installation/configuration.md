@@ -168,20 +168,6 @@ __Note: It should go without saying, but make sure the Snipe-IT project director
 
 -----
 
-## Optional: LDAP Configuration
-
-To set up your Snipe-IT installation to be able to use LDAP for user login and import, copy the `app/config/production/ldap.example.php` over to `app/config/production/ldap.php` and follow the directions to use your own LDAP settings.  
-
-If you don't have an LDAP server (or don't wish to import your users, or allow them to login using their LDAP credentials), you can skip this step.
-
-The LDAP functionality will import any users in your LDAP/Active Directory, but will leave existing users untouched.
-
-See the `app/config/production/ldap.example.php` for details on specific LDAP settings.
-
-**Note: You must have the `php-ldap` extension installed for LDAP integration to work.**
-
------
-
 ## Optional: Set Cookies to HTTPS-only
 As an extra security feature, Snipe-IT allows you to set your cookies to HTTPS-only, which will ensure that session cookies will only be sent back to the server if the browser has a HTTPS connection.
 
