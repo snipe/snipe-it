@@ -102,7 +102,7 @@
     'processing'			=> 'Đang xử lý',
     'profile'				=> 'Hồ sơ của bạn',
     'qty'		            => 'Số lượng',
-    'quanitity'		        => 'Quanitity',
+    'quantity'		        => 'Quantity',
     'ready_to_deploy'		=> 'Sẵn sàng để cấp phát',
     'recent_activity'		=> 'Hoạt động gần đây',
     'reports'				=> 'Các báo cáo',

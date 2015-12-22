@@ -102,7 +102,7 @@
     'processing'			=> 'Processing',
     'profile'				=> 'Profail Anda',
     'qty'		            => 'QTY',
-    'quanitity'		        => 'Quanitity',
+    'quantity'		        => 'Quantity',
     'ready_to_deploy'		=> 'Sedia untuk diagihkan',
     'recent_activity'		=> 'Recent Activity',
     'reports'				=> 'Laporan',

@@ -102,7 +102,7 @@
     'processing'			=> 'Pracuji',
     'profile'				=> 'Váš profil',
     'qty'		            => 'QTY',
-    'quanitity'		        => 'Množství',
+    'quantity'		        => 'Množství',
     'ready_to_deploy'		=> 'Připraveno k přidělení',
     'recent_activity'		=> 'Nedávná aktivita',
     'reports'				=> 'Reporty',

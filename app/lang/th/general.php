@@ -102,7 +102,7 @@
     'processing'			=> 'กำลังดำเนินการ',
     'profile'				=> 'โปรไฟล์ของคุณ',
     'qty'		            => 'จำนวน',
-    'quanitity'		        => 'จำนวน',
+    'quantity'		        => 'จำนวน',
     'ready_to_deploy'		=> 'พร้อมใช้งาน',
     'recent_activity'		=> 'กิจกรรมล่าสุด',
     'reports'				=> 'รายงาน',
