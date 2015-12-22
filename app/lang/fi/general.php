@@ -102,7 +102,7 @@
     'processing'			=> 'Processing',
     'profile'				=> 'Profiilisi',
     'qty'		            => 'QTY',
-    'quanitity'		        => 'Quanitity',
+    'quantity'		        => 'Quantity',
     'ready_to_deploy'		=> 'Käyttöönotettavissa',
     'recent_activity'		=> 'Recent Activity',
     'reports'				=> 'Raportit',

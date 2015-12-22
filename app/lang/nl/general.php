@@ -102,7 +102,7 @@
     'processing'			=> 'Processing',
     'profile'				=> 'Uw profiel',
     'qty'		            => 'QTY',
-    'quanitity'		        => 'Quanitity',
+    'quantity'		        => 'Quantity',
     'ready_to_deploy'		=> 'Klaar om ingezet te worden',
     'recent_activity'		=> 'Recent Activity',
     'reports'				=> 'Rapporten',

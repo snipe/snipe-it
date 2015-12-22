@@ -102,7 +102,7 @@
     'processing'			=> 'A processar',
     'profile'				=> 'Perfil',
     'qty'		            => 'QTD',
-    'quanitity'		        => 'Quantidade',
+    'quantity'		        => 'Quantidade',
     'ready_to_deploy'		=> 'Pronto para implementar',
     'recent_activity'		=> 'Actividade Recente',
     'reports'				=> 'Relatórios',

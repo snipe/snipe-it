@@ -102,7 +102,7 @@
     'processing'			=> 'Behandler',
     'profile'				=> 'Din profil',
     'qty'		            => 'Antall',
-    'quanitity'		        => 'Antall',
+    'quantity'		        => 'Antall',
     'ready_to_deploy'		=> 'Klar for utlevering',
     'recent_activity'		=> 'Nylig aktivitet',
     'reports'				=> 'Rapporter',

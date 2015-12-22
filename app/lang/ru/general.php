@@ -102,7 +102,7 @@
     'processing'			=> 'Обработка',
     'profile'				=> 'Ваш профиль',
     'qty'		            => 'Кол-во',
-    'quanitity'		        => 'Количество',
+    'quantity'		        => 'Количество',
     'ready_to_deploy'		=> 'Готов к установке',
     'recent_activity'		=> 'Недавняя активность',
     'reports'				=> 'Отчеты',

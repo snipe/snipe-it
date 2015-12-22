@@ -102,7 +102,7 @@
     'processing'			=> 'Bearbetar',
     'profile'				=> 'Din profil',
     'qty'		            => 'Antal',
-    'quanitity'		        => 'Quanitity',
+    'quantity'		        => 'Quantity',
     'ready_to_deploy'		=> 'Ready to Deploy',
     'recent_activity'		=> 'Senaste aktivitet',
     'reports'				=> 'Rapporter',

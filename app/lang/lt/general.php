@@ -102,7 +102,7 @@
     'processing'			=> 'Vykdoma',
     'profile'				=> 'Jūsų profilis',
     'qty'		            => 'Vnt',
-    'quanitity'		        => 'Kiekis',
+    'quantity'		        => 'Kiekis',
     'ready_to_deploy'		=> 'Paruošta naudojimui',
     'recent_activity'		=> 'Paskutiniai veiksmai',
     'reports'				=> 'Ataskaitos',
