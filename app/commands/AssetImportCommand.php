@@ -175,6 +175,7 @@ class AssetImportCommand extends Command {
                                     $user_asset_company_name = trim($row[14]);
                                 } else {
                                         $user_asset_company_name= '';
+                                }
                          } else {
                                 $user_asset_company_name = '';
                          }
