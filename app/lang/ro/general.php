@@ -102,7 +102,7 @@
     'processing'			=> 'Processing',
     'profile'				=> 'Profilul dvs.',
     'qty'		            => 'QTY',
-    'quanitity'		        => 'Quanitity',
+    'quantity'		        => 'Quantity',
     'ready_to_deploy'		=> 'Gata de lansare',
     'recent_activity'		=> 'Recent Activity',
     'reports'				=> 'Rapoarte',

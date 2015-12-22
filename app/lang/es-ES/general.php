@@ -102,7 +102,7 @@
     'processing'			=> 'Procesando',
     'profile'				=> 'Perfil',
     'qty'		            => 'Cant',
-    'quanitity'		        => 'Cantidad',
+    'quantity'		        => 'Cantidad',
     'ready_to_deploy'		=> 'Disponibles',
     'recent_activity'		=> 'Actividad Reciente',
     'reports'				=> 'Informes',

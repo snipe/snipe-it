@@ -102,7 +102,7 @@
     'processing'			=> 'İşleniyor',
     'profile'				=> 'Profiliniz',
     'qty'		            => 'QTY',
-    'quanitity'		        => 'Quanitity',
+    'quantity'		        => 'Quantity',
     'ready_to_deploy'		=> 'Ready to Deploy',
     'recent_activity'		=> 'Recent Activity',
     'reports'				=> 'Raporlar',

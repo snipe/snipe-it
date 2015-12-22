@@ -127,7 +127,7 @@
     <!-- QTY -->
     <div class="form-group {{ $errors->has('qty') ? ' has-error' : '' }}">
         <div class="col-md-3">
-        	{{ Form::label('qty', Lang::get('general.quanitity')) }}
+        	{{ Form::label('qty', Lang::get('general.quantity')) }}
         	<i class='fa fa-asterisk'></i>
         </div>
         <div class="col-md-9">

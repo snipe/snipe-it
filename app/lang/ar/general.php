@@ -102,7 +102,7 @@
     'processing'			=> 'Processing',
     'profile'				=> 'ملفك الشخصي',
     'qty'		            => 'QTY',
-    'quanitity'		        => 'Quanitity',
+    'quantity'		        => 'Quantity',
     'ready_to_deploy'		=> 'جاهزة للتوزيع',
     'recent_activity'		=> 'Recent Activity',
     'reports'				=> 'التقارير',

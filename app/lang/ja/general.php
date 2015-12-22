@@ -102,7 +102,7 @@
     'processing'			=> '処理中',
     'profile'				=> 'あなたのプロファイル',
     'qty'		            => '数量',
-    'quanitity'		        => '数量',
+    'quantity'		        => '数量',
     'ready_to_deploy'		=> '配備完了',
     'recent_activity'		=> '最近のアクティビティ',
     'reports'				=> 'レポート',
