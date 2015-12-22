@@ -97,6 +97,17 @@
                 </div>
             </div>
 
+            <!-- Company -->
+            <div class="form-group {{ $errors->has('company_id') ? ' has-error' : '' }}">
+                <label for="company_id" class="col-md-2 control-label">
+                  @lang('general.company')
+                </label>
+                    <div class="col-md-7">
+                        {{ Form::select('company_id', $companies_list , Input::old('company_id'), array('class'=>'select2', 'style'=>'width:350px')) }}
+                        {{ $errors->first('company_id', '<br><span class="alert-msg"><i class="fa fa-times"></i> :message</span>') }}
+                    </div>
+            </div>
+
             <!-- Order Number -->
             <div class="form-group {{ $errors->has('order_number') ? ' has-error' : '' }}">
                 <label for="order_number" class="col-md-2 control-label">@lang('admin/hardware/form.order')</label>

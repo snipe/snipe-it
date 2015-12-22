@@ -106,6 +106,7 @@
     'quantity'		        => 'Quantity',
     'ready_to_deploy'		=> 'Ready to Deploy',
     'recent_activity'		=> 'Recent Activity',
+    'remove_company'    => 'Remove Company Association',
     'reports'				=> 'Reports',
     'requested'				=> 'Requested',
     'save'  				=> 'Save',

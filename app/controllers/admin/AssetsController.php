@@ -1135,8 +1135,16 @@ class AssetsController extends AdminController
         $statuslabel_list = array('' => '') + Statuslabel::lists('name', 'id');
         $location_list = array('' => '') + Location::lists('name', 'id');
         $models_list = array('' => '') + Model::lists('name', 'id');
+        $models_list = array('' => '') + Model::lists('name', 'id');
+        $companies_list = array('' => '') + array('clear' => Lang::get('general.remove_company')) + Company::lists('name', 'id');
 
-        return View::make('backend/hardware/bulk')->with('assets',$assets)->with('supplier_list',$supplier_list)->with('statuslabel_list',$statuslabel_list)->with('location_list',$location_list)->with('models_list',$models_list);
+        return View::make('backend/hardware/bulk')
+        ->with('assets',$assets)
+        ->with('supplier_list',$supplier_list)
+        ->with('statuslabel_list',$statuslabel_list)
+        ->with('location_list',$location_list)
+        ->with('models_list',$models_list)
+        ->with('companies_list',$companies_list);
 
 
 			}
@@ -1166,7 +1174,7 @@ class AssetsController extends AdminController
 
 			$assets = Input::get('bulk_edit');
 
-			if ( (Input::has('purchase_date')) ||  (Input::has('purchase_cost'))  ||  (Input::has('supplier_id')) ||  (Input::has('order_number')) || (Input::has('warranty_months')) || (Input::has('rtd_location_id'))  || (Input::has('requestable')) ||  (Input::has('status_id')) ||  (Input::has('model_id')) )  {
+			if ( (Input::has('purchase_date')) ||  (Input::has('purchase_cost'))  ||  (Input::has('supplier_id')) ||  (Input::has('order_number')) || (Input::has('warranty_months')) || (Input::has('rtd_location_id'))  || (Input::has('requestable')) ||  (Input::has('company_id')) || (Input::has('status_id')) ||  (Input::has('model_id')) )  {
 
 				foreach ($assets as $key => $value) {
 
@@ -1186,6 +1194,15 @@ class AssetsController extends AdminController
 
           if (Input::has('model_id')) {
 						$update_array['model_id'] =  e(Input::get('model_id'));
+					}
+
+          if (Input::has('company_id')) {
+            if (Input::get('company_id')=="clear") {
+              $update_array['company_id'] =  null;
+            } else {
+              $update_array['company_id'] =  e(Input::get('company_id'));
+            }
+
 					}
 
 					if (Input::has('order_number')) {
