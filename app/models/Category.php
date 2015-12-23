@@ -35,6 +35,28 @@ class Category extends Elegant
         return $this->hasMany('Accessory');
     }
 
+    public function consumablesCount()
+    {
+        return $this->hasMany('Consumable')->count();
+    }
+
+    public function consumables()
+    {
+        return $this->hasMany('Consumable');
+    }
+
+    public function itemCount()
+    {
+        switch ($this->category_type) {
+            case 'asset':
+                return $this->assetscount();
+            case 'accessory':
+                return $this->accessoriescount();
+            case 'consumable':
+                return $this->consumablesCount();
+        }
+        return '0';
+    }
 
     public function assets()
     {
