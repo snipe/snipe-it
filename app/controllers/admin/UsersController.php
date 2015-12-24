@@ -1196,6 +1196,13 @@ class UsersController extends AdminController {
         $ldap_result_active_flag = Setting::getSettings()->ldap_active_flag_field;
         $ldap_result_emp_num = Setting::getSettings()->ldap_emp_num_field;
         $ldap_result_email = Setting::getSettings()->ldap_email_field;
+        $ldap_server_cert_ignore = Setting::getSettings()->ldap_server_cert_ignore;
+
+        // If we are ignoring the SSL cert we need to setup the environment variable
+        // before we create the connection
+        if($ldap_server_cert_ignore) {
+            putenv('LDAPTLS_REQCERT=never');
+        }
 
         // Connect to LDAP server
         $ldapconn = @ldap_connect($url);
@@ -1215,6 +1222,8 @@ class UsersController extends AdminController {
 
         // Binding to ldap server
         $ldapbind = @ldap_bind($ldapconn, $username, $password);
+
+        Log::error(ldap_errno($ldapconn));
         if (!$ldapbind) {
             return Redirect::route('users')->with('error', Lang::get('admin/users/message.error.ldap_could_not_bind').ldap_error($ldapconn));
         }

@@ -315,8 +315,18 @@
 
                 {{ $errors->first('ldap_server', '<br><span class="alert-msg">:message</span>') }}
               </div>
+          </div><!-- LDAP Server -->
+          <div class="form-group {{ $errors->has('ldap_server_cert_ignore') ? 'error' : '' }}">
+              <div class="col-md-3">
+                 {{ Form::label('ldap_server_cert_ignore', Lang::get('admin/settings/general.ldap_server_cert')) }}
+              </div>
+              <div class="col-md-9">
+                {{ Form::checkbox('ldap_server_cert_ignore', '1', Input::old('ldap_server_cert_ignore', $setting->ldap_server_cert_ignore)) }}
+                @Lang('admin/settings/general.ldap_server_cert_ignore')
+                {{ $errors->first('ldap_server_cert_ignore', '<br><span class="alert-msg">:message</span>') }}
+                <p class="help-inline">@Lang('admin/settings/general.ldap_server_cert_help')</p>
+              </div>
           </div>
-
 
           <!-- LDAP Username -->
           <div class="form-group {{ $errors->has('ldap_uname') ? 'error' : '' }}">
