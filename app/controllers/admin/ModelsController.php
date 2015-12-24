@@ -322,7 +322,7 @@ class ModelsController extends AdminController
     /**
     *  Get the model information to present to the model view page
     *
-    * @param  int  $assetId
+    * @param  int  $modelId
     * @return View
     **/
     public function getView($modelId = null)

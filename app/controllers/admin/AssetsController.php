@@ -891,9 +891,9 @@ class AssetsController extends AdminController
     * @param  int  $assetId
     * @return View
     **/
-    public function postUpload($assetID = null)
+    public function postUpload($assetId = null)
     {
-        $asset = Asset::find($assetID);
+        $asset = Asset::find($assetId);
 
 		// the asset is valid
 		$destinationPath = app_path().'/private_uploads';
@@ -965,11 +965,12 @@ class AssetsController extends AdminController
     *  Delete the associated file
     *
     * @param  int  $assetId
+    * @param  int  $fileId
     * @return View
     **/
-    public function getDeleteFile($assetID = null, $fileId = null)
+    public function getDeleteFile($assetId = null, $fileId = null)
     {
-        $asset = Asset::find($assetID);
+        $asset = Asset::find($assetId);
         $destinationPath = app_path().'/private_uploads';
 
 		// the asset is valid
@@ -1003,12 +1004,13 @@ class AssetsController extends AdminController
     *  Display/download the uploaded file
     *
     * @param  int  $assetId
+    * @param  int  $fileId
     * @return View
     **/
-    public function displayFile($assetID = null, $fileId = null)
+    public function displayFile($assetId = null, $fileId = null)
     {
 
-        $asset = Asset::find($assetID);
+        $asset = Asset::find($assetId);
 
 		// the asset is valid
         if (isset($asset->id)) {

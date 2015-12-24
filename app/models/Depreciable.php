@@ -31,9 +31,7 @@ class Depreciable extends Elegant
         return $this->depreciation;
     }
 
-     /**
-     * @param $purchase_cost
-     * @param $purchase_date1
+    /**
      * @return float|int
      */
 

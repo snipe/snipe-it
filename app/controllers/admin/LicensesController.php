@@ -746,7 +746,7 @@ class LicensesController extends AdminController
     /**
     *  Get the asset information to present to the asset view page
     *
-    * @param  int  $assetId
+    * @param  int  $licenseId
     * @return View
     **/
     public function getView($licenseId = null)
@@ -805,7 +805,7 @@ class LicensesController extends AdminController
     /**
     *  Upload the file to the server
     *
-    * @param  int  $assetId
+    * @param  int  $licenseId
     * @return View
     **/
     public function postUpload($licenseId = null)
@@ -882,7 +882,8 @@ class LicensesController extends AdminController
     /**
     *  Delete the associated file
     *
-    * @param  int  $assetId
+    * @param  int  $licenseId
+    * @param  int  $fileId
     * @return View
     **/
     public function getDeleteFile($licenseId = null, $fileId = null)
@@ -920,7 +921,8 @@ class LicensesController extends AdminController
     /**
     *  Display/download the uploaded file
     *
-    * @param  int  $assetId
+    * @param  int  $licenseId
+    * @param  int  $fileId
     * @return View
     **/
     public function displayFile($licenseId = null, $fileId = null)
