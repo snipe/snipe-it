@@ -536,7 +536,12 @@ class UsersController extends AdminController {
                 unset($user_raw_array[$key]);
             }
 
-            if (!Config::get('app.lock_passwords')) {
+            if (!Sentry::getUser()->isSuperUser()) {
+                // Redirect to the user management page
+                return Redirect::route('users')->with('error', 'Insufficient permissions!');
+            } else if (Config::get('app.lock_passwords')) {
+                return Redirect::route('users')->with('error', 'Bulk delete is not enabled in this installation');
+            } else {
 
                 $assets = Asset::whereIn('assigned_to', $user_raw_array)->get();
                 $accessories = DB::table('accessories_users')->whereIn('assigned_to', $user_raw_array)->get();
@@ -583,8 +588,6 @@ class UsersController extends AdminController {
 
 
                 return Redirect::route('users')->with('success', 'Your selected users have been deleted and their assets have been updated.');
-            } else {
-                return Redirect::route('users')->with('error', 'Bulk delete is not enabled in this installation');
             }
 
             return Redirect::route('users')->with('error', 'An error has occurred');
