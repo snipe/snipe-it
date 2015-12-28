@@ -576,6 +576,9 @@ class AssetsController extends AdminController
         // Update the asset data to null, since it's being checked in
         $asset->assigned_to            		= NULL;
         $asset->accepted                  = NULL;
+        
+        $asset->expected_checkin = NULL;
+        $asset->last_checkout = NULL;
 
 
         // Was the asset updated?
