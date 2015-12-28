@@ -56,6 +56,18 @@
                     </div>
             </div>
 
+            <!-- Asset Model -->
+            <div class="form-group {{ $errors->has('model_id') ? ' has-error' : '' }}">
+                <label for="model_id" class="col-md-2 control-label">
+                  @lang('admin/hardware/form.model')
+                </label>
+                    <div class="col-md-7">
+                        {{ Form::select('model_id', $models_list , Input::old('model_id'), array('class'=>'select2', 'style'=>'width:350px')) }}
+                        {{ $errors->first('model_id', '<br><span class="alert-msg"><i class="fa fa-times"></i> :message</span>') }}
+                    </div>
+            </div>
+
+
             <!-- Default Location -->
             <div class="form-group {{ $errors->has('status_id') ? ' has-error' : '' }}">
                 <label for="status_id" class="col-md-2 control-label">@lang('admin/hardware/form.default_location')</label>
@@ -83,6 +95,17 @@
                     {{ Form::select('supplier_id', $supplier_list , Input::old('supplier_id'), array('class'=>'select2', 'style'=>'min-width:350px')) }}
                     {{ $errors->first('supplier_id', '<br><span class="alert-msg"><i class="fa fa-times"></i> :message</span>') }}
                 </div>
+            </div>
+
+            <!-- Company -->
+            <div class="form-group {{ $errors->has('company_id') ? ' has-error' : '' }}">
+                <label for="company_id" class="col-md-2 control-label">
+                  @lang('general.company')
+                </label>
+                    <div class="col-md-7">
+                        {{ Form::select('company_id', $companies_list , Input::old('company_id'), array('class'=>'select2', 'style'=>'width:350px')) }}
+                        {{ $errors->first('company_id', '<br><span class="alert-msg"><i class="fa fa-times"></i> :message</span>') }}
+                    </div>
             </div>
 
             <!-- Order Number -->

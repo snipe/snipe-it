@@ -95,6 +95,13 @@
     <body>
 
     <!-- navbar -->
+    @if ((Sentry::check()) && (Sentry::getUser()->hasAccess('admin')) && (Config::get('app.debug')) && (App::environment('production')))
+      <div class="row" style="margin-bottom: 0px; background-color: red; color: white; padding: 10px; font-size: 15px;">
+        <div class="col-md-12">
+        <i class="fa fa-warning fa-3x pull-left"></i> <strong>WARNING:</strong> This application is running in production mode with debugging enabled. This can expose sensitive data if your application is accessible to the outside world. Disable debug mode by setting the <i>debug</i> value app/config/production/app.php to <i>false</i>.
+        </div>
+      </div>
+    @endif
 
 
     <!-- navbar -->
@@ -247,6 +254,11 @@
                         <li{{ (Request::is('admin/settings/backups*') ? ' class="active"' : '') }}>
                             <a href="{{ URL::to('admin/settings/backups') }}">
                                 <i class="fa fa-download fa-fw"></i> @lang('admin/settings/general.backups')
+                            </a>
+                        </li>
+                        <li{{ (Request::is('admin/custom_fields*') ? ' class="active"' : '') }}>
+                            <a href="{{ route('admin.custom_fields.index') }}">
+                                <i class="fa fa-wrench fa-fw"></i> @lang('admin/custom_fields/general.custom_fields')
                             </a>
                         </li>
                         <li class="divider"></li>

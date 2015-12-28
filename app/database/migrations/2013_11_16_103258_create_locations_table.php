@@ -19,6 +19,7 @@ class CreateLocationsTable extends Migration
             $table->string('country',2);
             $table->timestamps();
             $table->integer('user_id');
+            $table->engine = 'InnoDB';
         });
     }
 

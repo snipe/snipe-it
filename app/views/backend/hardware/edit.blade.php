@@ -110,7 +110,7 @@
 
 <div class="row form-wrapper">
             <!-- left column -->
-            <div class="col-md-12 column">
+      <div class="col-md-12 column">
 
 			 @if ($asset->id)
 				 <form class="form-horizontal" method="post" action="{{ route('update/hardware',$asset->id) }}" autocomplete="off" role="form" enctype="multipart/form-data" >
@@ -120,19 +120,6 @@
 
             <!-- CSRF Token -->
             <input type="hidden" name="_token" value="{{ csrf_token() }}" />
-
-            <!-- Company -->
-            @if (Company::isCurrentUserAuthorized())
-              <div class="form-group {{ $errors->has('company_id') ? ' has-error' : '' }}">
-                <div class="col-md-2 control-label">{{ Form::label('company_id', Lang::get('general.company')) }}</div>
-                <div class="col-md-7 col-sm-12">
-                  {{ Form::select('company_id', $company_list , Input::old('company_id', $asset->company_id),
-                                  ['class'=>'select2', 'style'=>'min-width:350px']) }}
-                  {{ $errors->first('company_id', '<br><span class="alert-msg"><i class="fa fa-times"></i> :message</span>') }}
-                </div>
-              </div>
-            @endif
-
 
             <!-- Asset Tag -->
             <div class="form-group {{ $errors->has('asset_tag') ? ' has-error' : '' }}">
@@ -147,24 +134,6 @@
 						@endif
 
                         {{ $errors->first('asset_tag', '<span class="alert-msg"><i class="fa fa-times"></i> :message</span>') }}
-                    </div>
-            </div>
-
-            <!-- Serial -->
-            <div class="form-group {{ $errors->has('serial') ? ' has-error' : '' }}">
-                <label for="serial" class="col-md-2 control-label">@lang('admin/hardware/form.serial') </label>
-                <div class="col-md-7 col-sm-12">
-                    <input class="form-control" type="text" name="serial" id="serial" value="{{{ Input::old('serial', $asset->serial) }}}" />
-                    {{ $errors->first('serial', '<br><span class="alert-msg"><i class="fa fa-times"></i> :message</span>') }}
-                </div>
-            </div>
-
-            <!-- Asset Name -->
-            <div class="form-group {{ $errors->has('name') ? ' has-error' : '' }}">
-                <label for="name" class="col-md-2 control-label">@lang('admin/hardware/form.name')</label>
-                    <div class="col-md-7 col-sm-12">
-                        <input class="form-control" type="text" name="name" id="name" value="{{{ Input::old('name', $asset->name) }}}" />
-                        {{ $errors->first('name', '<br><span class="alert-msg"><i class="fa fa-times"></i> :message</span>') }}
                     </div>
             </div>
 
@@ -187,14 +156,77 @@
                 </div>
             </div>
 
-            <!-- MAC Address -->
-            <div id="mac_address" class="form-group {{ $errors->has('mac_address') ? ' has-error' : '' }}" style="display:none;">
-                <label for="mac_address" class="col-md-2 control-label">@lang('admin/hardware/form.mac_address')</label>
-                    <div class="col-md-7 col-sm-12">
-                        <input class="form-control" type="text" name="mac_address" id="mac_address" value="{{{ Input::old('mac_address', $asset->mac_address) }}}" />
-                        {{ $errors->first('mac_address', '<br><span class="alert-msg"><i class="fa fa-times"></i> :message</span>') }}
+
+            <div id='custom_fields_content'>
+              <!-- Custom Fields -->
+              @if ($asset->model && $asset->model->fieldset)
+                <?php $model=$asset->model; ?>
+              @endif
+              @if (Input::old('model_id'))
+                <?php $model=Model::find(Input::old('model_id')); ?>
+              @endif
+              @if (isset($model) && $model)
+                @include("backend.models.custom_fields_form",["model" => $model])
+              @endif
+            </div>
+
+            <!-- Status -->
+            <div class="form-group {{ $errors->has('status_id') ? ' has-error' : '' }}">
+                <label for="status_id" class="col-md-2 control-label">@lang('admin/hardware/form.status') *</label>
+                    <div class="col-md-7 col-sm-12 col-sm-12">
+                        {{ Form::select('status_id', $statuslabel_list , Input::old('status_id', $asset->status_id), array('class'=>'select2 status_id', 'style'=>'width:350px','id'=>'status_select_id')) }}
+                        <a href='#' data-toggle="modal"  data-target="#createModal" data-dependency='statuslabel' data-select='status_select_id'><i class="verticon fa fa-plus-square-o fa-2x"></i></a>
+                        <span class="status_spinner" style="padding-left: 10px; color: green; display:none; width: 30px;"><i class="fa fa-spinner fa-spin"></i> </span>
+
+                        <p class="help-block">@lang('admin/hardware/form.help_checkout')</p>
+                        {{ $errors->first('status_id', '<br><span class="alert-msg"><i class="fa fa-times"></i> :message</span>') }}
                     </div>
             </div>
+
+            @if (!$asset->id)
+             <!-- Assigned To -->
+            <div id="assigned_user" style="display: none;" class="form-group {{ $errors->has('assigned_to') ? ' has-error' : '' }}">
+                <label for="parent" class="col-md-2 control-label">@lang('admin/hardware/form.checkout_to')
+                 </label>
+                <div class="col-md-7 col-sm-12">
+                    {{ Form::select('assigned_to', $assigned_to , Input::old('assigned_to', $asset->assigned_to), array('class'=>'select2', 'id'=>'assigned_to', 'style'=>'min-width:350px')) }}
+                    <a href='#' data-toggle="modal"  data-target="#createModal" data-dependency="user" data-select='assigned_to'><i class="verticon fa fa-plus-square-o fa-2x"></i></a>
+                    {{ $errors->first('assigned_to', '<br><span class="alert-msg"><i class="fa fa-times"></i> :message</span>') }}
+                </div>
+            </div>
+            @endif
+
+
+            <!-- Serial -->
+            <div class="form-group {{ $errors->has('serial') ? ' has-error' : '' }}">
+                <label for="serial" class="col-md-2 control-label">@lang('admin/hardware/form.serial') </label>
+                <div class="col-md-7 col-sm-12">
+                    <input class="form-control" type="text" name="serial" id="serial" value="{{{ Input::old('serial', $asset->serial) }}}" />
+                    {{ $errors->first('serial', '<br><span class="alert-msg"><i class="fa fa-times"></i> :message</span>') }}
+                </div>
+            </div>
+
+            <!-- Asset Name -->
+            <div class="form-group {{ $errors->has('name') ? ' has-error' : '' }}">
+                <label for="name" class="col-md-2 control-label">@lang('admin/hardware/form.name')</label>
+                    <div class="col-md-7 col-sm-12">
+                        <input class="form-control" type="text" name="name" id="name" value="{{{ Input::old('name', $asset->name) }}}" />
+                        {{ $errors->first('name', '<br><span class="alert-msg"><i class="fa fa-times"></i> :message</span>') }}
+                    </div>
+            </div>
+
+
+            <!-- Company -->
+            @if (Company::isCurrentUserAuthorized())
+              <div class="form-group {{ $errors->has('company_id') ? ' has-error' : '' }}">
+                <div class="col-md-2 control-label">{{ Form::label('company_id', Lang::get('general.company')) }}</div>
+                <div class="col-md-7 col-sm-12">
+                  {{ Form::select('company_id', $company_list , Input::old('company_id', $asset->company_id),
+                                  ['class'=>'select2', 'style'=>'min-width:350px']) }}
+                  {{ $errors->first('company_id', '<br><span class="alert-msg"><i class="fa fa-times"></i> :message</span>') }}
+                </div>
+              </div>
+            @endif
 
             <!-- Purchase Date -->
             <div class="form-group {{ $errors->has('purchase_date') ? ' has-error' : '' }}">
@@ -263,31 +295,7 @@
                 </div>
             </div>
 
-            <!-- Status -->
-            <div class="form-group {{ $errors->has('status_id') ? ' has-error' : '' }}">
-                <label for="status_id" class="col-md-2 control-label">@lang('admin/hardware/form.status') *</label>
-                    <div class="col-md-7 col-sm-12 col-sm-12">
-                        {{ Form::select('status_id', $statuslabel_list , Input::old('status_id', $asset->status_id), array('class'=>'select2 status_id', 'style'=>'width:350px','id'=>'status_select_id')) }}
-                        <a href='#' data-toggle="modal"  data-target="#createModal" data-dependency='statuslabel' data-select='status_select_id'><i class="verticon fa fa-plus-square-o fa-2x"></i></a>
-                        <span class="status_spinner" style="padding-left: 10px; color: green; display:none; width: 30px;"><i class="fa fa-spinner fa-spin"></i> </span>
 
-                        <p class="help-block">@lang('admin/hardware/form.help_checkout')</p>
-                        {{ $errors->first('status_id', '<br><span class="alert-msg"><i class="fa fa-times"></i> :message</span>') }}
-                    </div>
-            </div>
-
-            @if (!$asset->id)
-             <!-- Assigned To -->
-            <div id="assigned_user" style="display: none;" class="form-group {{ $errors->has('assigned_to') ? ' has-error' : '' }}">
-                <label for="parent" class="col-md-2 control-label">@lang('admin/hardware/form.checkout_to')
-                 </label>
-                <div class="col-md-7 col-sm-12">
-                    {{ Form::select('assigned_to', $assigned_to , Input::old('assigned_to', $asset->assigned_to), array('class'=>'select2', 'id'=>'assigned_to', 'style'=>'min-width:350px')) }}
-                    <a href='#' data-toggle="modal"  data-target="#createModal" data-dependency="user" data-select='assigned_to'><i class="verticon fa fa-plus-square-o fa-2x"></i></a>
-                    {{ $errors->first('assigned_to', '<br><span class="alert-msg"><i class="fa fa-times"></i> :message</span>') }}
-                </div>
-            </div>
-			@endif
 
             <!-- Notes -->
             <div class="form-group {{ $errors->has('notes') ? ' has-error' : '' }}">
@@ -318,6 +326,7 @@
 				  </div>
 				</div>
 		  	</div>
+
 
 
             <!-- Image -->
@@ -356,32 +365,23 @@
 </div>
 <script>
 
-	var $eventSelect = $(".model");
-	$eventSelect.on("change", function () {
-        mac_add($(".model option:selected").val());
-    });
-	$(function() {
-        var mac = $(".model option:selected").val();
-	       mac_add(mac);
-	});
-	function mac_add(id) {
-        if(id==''){
-            return;
-        }
-	    $.ajax({
-	        url: "{{Config::get('app.url')}}/api/models/"+id+"/check",
-	        success: function(data) {
-	            if(data == true){
-	                 $("#mac_address").css("display", "block");
-	            } else {
-	                 $("#mac_address").css("display", "none");
-	            }
-	        }
-	    });
-	};
 
 
-
+$(function() {
+  $('#model_select_id').on("change",function () {
+    // console.warn("Model Id has changed!");
+    var modelid=$('#model_select_id').val();
+    if(modelid=='') {
+      $('#custom_fields_content').html("");
+    } else {
+      // console.warn("Model ID is: "+modelid);
+      $.get("/hardware/models/"+modelid+"/custom_fields",{_token: "{{ csrf_token() }}"},function (data) {
+        // console.warn("Ajax call came back okay! Data is: "+data);
+        $('#custom_fields_content').html(data);
+      });
+    }
+  });
+});
 
     $(function() {
         user_add($(".status_id option:selected").val());

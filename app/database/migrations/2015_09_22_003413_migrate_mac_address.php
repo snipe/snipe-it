@@ -1,0 +1,56 @@
+<?php
+
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Database\Migrations\Migration;
+
+class MigrateMacAddress extends Migration {
+
+	/**
+	 * Run the migrations.
+	 *
+	 * @return void
+	 */
+	public function up()
+	{
+		DB::getDoctrineSchemaManager()->getDatabasePlatform()->registerDoctrineTypeMapping('enum', 'string');
+
+		$f2=new CustomFieldset(['name' => "Asset with MAC Address"]);
+		if(!$f2->save()) {
+			throw new Exception("couldn't save customfieldset");
+		}
+		$macid=DB::table('custom_fields')->insertGetId([
+			'name' => "MAC Address",
+			'format' => CustomField::$PredefinedFormats['MAC'],
+			'element'=>'text']);
+		if(!$macid) {
+			throw new Exception("Can't save MAC Custom field: $macid");
+		}
+		
+		$f2->fields()->attach($macid,['required' => false, 'order' => 1]);
+		Model::where(["show_mac_address" => true])->update(["fieldset_id"=>$f2->id]);
+
+		DB::statement("ALTER TABLE assets CHANGE mac_address _snipeit_mac_address varchar(255)");
+
+		$ans=Schema::table("models",function (Blueprint $table) {
+			$table->renameColumn('show_mac_address','deprecated_mac_address');
+		});
+	}
+
+	/**
+	 * Reverse the migrations.
+	 *
+	 * @return void
+	 */
+	public function down()
+	{
+		//
+		$f=CustomFieldset::where(["name" => "Asset with MAC Address"])->first();
+		$f->fields()->delete();
+		$f->delete();
+		Schema::table("models",function(Blueprint $table) {
+			$table->renameColumn("deprecated_mac_address","show_mac_address");
+		});
+		DB::statement("ALTER TABLE assets CHANGE _snipeit_mac_address mac_address varchar(255)");
+	}
+
+}

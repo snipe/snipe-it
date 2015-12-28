@@ -116,7 +116,11 @@ class ModelsController extends AdminController
             $model->manufacturer_id    	= e(Input::get('manufacturer_id'));
             $model->category_id    		= e(Input::get('category_id'));
             $model->user_id          	= Sentry::getId();
-            $model->show_mac_address 	= e(Input::get('show_mac_address', '0'));
+            if (Input::get('custom_fieldset')!='') {
+              $model->fieldset_id = e(Input::get('custom_fieldset'));
+            }
+
+            //$model->show_mac_address 	= e(Input::get('show_mac_address', '0'));
 
 
             if (Input::file('image')) {
@@ -239,7 +243,9 @@ class ModelsController extends AdminController
             $model->modelno            	= e(Input::get('modelno'));
             $model->manufacturer_id    	= e(Input::get('manufacturer_id'));
             $model->category_id    		= e(Input::get('category_id'));
-            $model->show_mac_address 	= e(Input::get('show_mac_address', '0'));
+            if (Input::get('custom_fieldset')!='') {
+              $model->fieldset_id = e(Input::get('custom_fieldset'));
+            }
 
             if (Input::file('image')) {
                 $image = Input::file('image');
@@ -373,6 +379,14 @@ class ModelsController extends AdminController
         return $view;
 
     }
+
+
+    public function getCustomFields($modelId)
+    {
+      $model=Model::find($modelId);
+      return View::make("backend.models.custom_fields_form")->with("model",$model);
+    }
+
 
 
     /**

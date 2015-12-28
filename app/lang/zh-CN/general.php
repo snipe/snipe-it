@@ -102,7 +102,7 @@
     'processing'			=> '处理中',
     'profile'				=> '您的个人资料',
     'qty'		            => '数量',
-    'quanitity'		        => '数量',
+    'quantity'		        => '数量',
     'ready_to_deploy'		=> '待分配',
     'recent_activity'		=> '最近操作活动',
     'reports'				=> '报告',

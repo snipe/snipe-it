@@ -18,6 +18,7 @@ class CreateSettingsTable extends Migration
             $table->string('option_value');
             $table->timestamps();
             $table->integer('user_id');
+            $table->engine = 'InnoDB';
         });
     }
 

@@ -102,7 +102,7 @@
     'processing'			=> 'Processing',
     'profile'				=> 'Din profil',
     'qty'		            => 'QTY',
-    'quanitity'		        => 'Quanitity',
+    'quantity'		        => 'Quantity',
     'ready_to_deploy'		=> 'Klar til Implementering',
     'recent_activity'		=> 'Recent Activity',
     'reports'				=> 'Rapporter',

@@ -31,7 +31,9 @@ use Paginator;
 use Manufacturer; //for embedded-create
 use Artisan;
 use Symfony\Component\Console\Output\BufferedOutput;
+use CustomField;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Models;
 
 
 class AssetsController extends AdminController
@@ -99,9 +101,25 @@ class AssetsController extends AdminController
     {
         // create a new model instance
         $asset = new Asset();
+        $asset->model()->associate(Model::find(e(Input::get('model_id'))));
 
         //attempt to validate
-        $validator = Validator::make(Input::all(), $asset->validationRules());
+        $input=Input::all();
+
+        $rules=$asset->validationRules();
+        if($asset->model->fieldset)
+        {
+          foreach($asset->model->fieldset->fields AS $field) {
+            $input[$field->db_column_name()]=$input['fields'][$field->db_column_name()];
+            $asset->{$field->db_column_name()}=$input[$field->db_column_name()];
+          }
+          $rules+=$asset->model->fieldset->validation_rules();
+          unset($input['fields']);
+        }
+
+        $validator = Validator::make($input,  $rules );
+        $custom_errors=[];
+
 
         if ($validator->fails())
         {
@@ -160,7 +178,7 @@ class AssetsController extends AdminController
             }
 
             $checkModel = Config::get('app.url').'/api/models/'.e(Input::get('model_id')).'/check';
-            $asset->mac_address = ($checkModel == true) ? e(Input::get('mac_address')) : NULL;
+            //$asset->mac_address = ($checkModel == true) ? e(Input::get('mac_address')) : NULL;
 
             // Save the asset data
             $asset->name            		= e(Input::get('name'));
@@ -269,8 +287,25 @@ class AssetsController extends AdminController
             return Redirect::to('hardware')->with('error', Lang::get('general.insufficient_permissions'));
         }
 
+        $input=Input::all();
+        // return "INPUT IS: <pre>".print_r($input,true)."</pre>";
+        $rules=$asset->validationRules($assetId);
+        if($asset->model->fieldset)
+        {
+          foreach($asset->model->fieldset->fields AS $field) {
+            $input[$field->db_column_name()]=$input['fields'][$field->db_column_name()];
+            $asset->{$field->db_column_name()}=$input[$field->db_column_name()];
+          }
+          $rules+=$asset->model->fieldset->validation_rules();
+          unset($input['fields']);
+        }
+
+        //return "Rules: <pre>".print_r($rules,true)."</pre>";
+
         //attempt to validate
-        $validator = Validator::make(Input::all(), $asset->validationRules($assetId));
+        $validator = Validator::make($input,  $rules );
+
+        $custom_errors=[];
 
         if ($validator->fails())
         {
@@ -290,7 +325,7 @@ class AssetsController extends AdminController
             if (e(Input::get('warranty_months')) == '') {
                 $asset->warranty_months =  NULL;
             } else {
-                $asset->warranty_months        = e(Input::get('warranty_months'));
+                $asset->warranty_months = e(Input::get('warranty_months'));
             }
 
             if (e(Input::get('purchase_cost')) == '') {
@@ -324,7 +359,7 @@ class AssetsController extends AdminController
             }
 
             $checkModel = Config::get('app.url').'/api/models/'.e(Input::get('model_id')).'/check';
-            $asset->mac_address = ($checkModel == true) ? e(Input::get('mac_address')) : NULL;
+            //$asset->mac_address = ($checkModel == true) ? e(Input::get('mac_address')) : NULL;
 
             // Update the asset data
             $asset->name         = e(Input::get('name'));
@@ -464,17 +499,15 @@ class AssetsController extends AdminController
 
 
     	if (Input::get('checkout_at')!= date("Y-m-d")){
-			$checkout_at = e(Input::get('checkout_at')).' 00:00:00';
+			     $checkout_at = e(Input::get('checkout_at')).' 00:00:00';
     	} else {
             $checkout_at = date("Y-m-d H:i:s");
         }
 
         if (Input::has('expected_checkin')) {
-        	if (Input::get('expected_checkin')!= date("Y-m-d")){
-			$expected_checkin = e(Input::get('expected_checkin'));
-		}
-    	} else {
-            $expected_checkin = null;
+			    $expected_checkin = e(Input::get('expected_checkin'));
+    	  } else {
+            $expected_checkin = '';
         }
 
 
@@ -544,6 +577,8 @@ class AssetsController extends AdminController
         $asset->assigned_to            		= NULL;
         $asset->accepted                  = NULL;
 
+        $asset->expected_checkin = NULL;
+        $asset->last_checkout = NULL;
 
         // Was the asset updated?
         if($asset->save()) {
@@ -1054,43 +1089,63 @@ class AssetsController extends AdminController
     public function postBulkEdit($assets = null)
     {
 
-        if (!Company::isCurrentUserAuthorized()) {
-            return Redirect::to('hardware')->with('error', Lang::get('general.insufficient_permissions'));
-        }
-	    else if (!Input::has('edit_asset')) {
-			return Redirect::back()->with('error', 'No assets selected');
-		} else {
-			$asset_raw_array = Input::get('edit_asset');
-			foreach ($asset_raw_array as $asset_id => $value) {
-				$asset_ids[] = $asset_id;
+      if (!Company::isCurrentUserAuthorized()) {
+        return Redirect::to('hardware')->with('error', Lang::get('general.insufficient_permissions'));
 
-			}
+      } elseif (!Input::has('edit_asset')) {
+			     return Redirect::back()->with('error', 'No assets selected');
 
-		}
+  		} else {
+  			$asset_raw_array = Input::get('edit_asset');
+  			foreach ($asset_raw_array as $asset_id => $value) {
+  				$asset_ids[] = $asset_id;
+
+  			}
+
+  		}
 
 	    if (Input::has('bulk_actions')) {
 
 
 		    // Create labels
 		    if (Input::get('bulk_actions')=='labels') {
-			    $assets = Asset::find($asset_ids);
-			    $assetcount = count($assets);
-			    $count = 0;
+          $settings = Setting::getSettings();
+          if ($settings->qr_code=='1') {
 
-			    $settings = Setting::getSettings();
-			    return View::make('backend/hardware/labels')->with('assets',$assets)->with('settings',$settings)->with('count',$count);
+            $assets = Asset::find($asset_ids);
+            $assetcount = count($assets);
+            $count = 0;
 
+            return View::make('backend/hardware/labels')->with('assets',$assets)->with('settings',$settings)->with('count',$count);
+
+          } else {
+            // QR codes are not enabled
+            return Redirect::to("hardware")->with('error','Barcodes are not enabled in Admin > Settings');
+          }
+
+      } elseif (Input::get('bulk_actions')=='delete') {
+
+
+        $assets = Asset::with('assigneduser','assetloc')->find($asset_ids);
+        return View::make('backend/hardware/bulk-delete')->with('assets',$assets);
 
 			 // Bulk edit
 			} elseif (Input::get('bulk_actions')=='edit') {
 
 				$assets = Input::get('edit_asset');
+				$supplier_list = array('' => '') + suppliersList();
+        $statuslabel_list = array('' => '') + statusLabelList();
+        $location_list = array('' => '') + locationsList();
+        $models_list = array('' => '') + modelList();
+        $companies_list = array('' => '') + array('clear' => Lang::get('general.remove_company')) + companyList();
 
-				$supplier_list = array('' => '') + Supplier::orderBy('name', 'asc')->lists('name', 'id');
-                $statuslabel_list = array('' => '') + Statuslabel::lists('name', 'id');
-                $location_list = array('' => '') + Location::lists('name', 'id');
-
-                return View::make('backend/hardware/bulk')->with('assets',$assets)->with('supplier_list',$supplier_list)->with('statuslabel_list',$statuslabel_list)->with('location_list',$location_list);
+        return View::make('backend/hardware/bulk')
+        ->with('assets',$assets)
+        ->with('supplier_list',$supplier_list)
+        ->with('statuslabel_list',$statuslabel_list)
+        ->with('location_list',$location_list)
+        ->with('models_list',$models_list)
+        ->with('companies_list',$companies_list);
 
 
 			}
@@ -1113,14 +1168,14 @@ class AssetsController extends AdminController
     public function postBulkSave($assets = null)
     {
 
-        if (!Company::isCurrentUserAuthorized()) {
-            return Redirect::to('hardware')->with('error', Lang::get('general.insufficient_permissions'));
-        }
-		else if (Input::has('bulk_edit')) {
+      if (!Company::isCurrentUserAuthorized()) {
+          return Redirect::to('hardware')->with('error', Lang::get('general.insufficient_permissions'));
+
+      } elseif (Input::has('bulk_edit')) {
 
 			$assets = Input::get('bulk_edit');
 
-			if ( (Input::has('purchase_date')) ||  (Input::has('purchase_cost'))  ||  (Input::has('supplier_id')) ||  (Input::has('order_number')) || (Input::has('warranty_months')) || (Input::has('rtd_location_id'))  || (Input::has('requestable')) ||  (Input::has('status_id')) )  {
+			if ( (Input::has('purchase_date')) ||  (Input::has('purchase_cost'))  ||  (Input::has('supplier_id')) ||  (Input::has('order_number')) || (Input::has('warranty_months')) || (Input::has('rtd_location_id'))  || (Input::has('requestable')) ||  (Input::has('company_id')) || (Input::has('status_id')) ||  (Input::has('model_id')) )  {
 
 				foreach ($assets as $key => $value) {
 
@@ -1136,6 +1191,19 @@ class AssetsController extends AdminController
 
 					if (Input::has('supplier_id')) {
 						$update_array['supplier_id'] =  e(Input::get('supplier_id'));
+					}
+
+          if (Input::has('model_id')) {
+						$update_array['model_id'] =  e(Input::get('model_id'));
+					}
+
+          if (Input::has('company_id')) {
+            if (Input::get('company_id')=="clear") {
+              $update_array['company_id'] =  null;
+            } else {
+              $update_array['company_id'] =  e(Input::get('company_id'));
+            }
+
 					}
 
 					if (Input::has('order_number')) {
@@ -1154,11 +1222,11 @@ class AssetsController extends AdminController
 						$update_array['status_id'] = e(Input::get('status_id'));
 					}
 
-                    if (Input::get('requestable')=='1') {
+          if (Input::get('requestable')=='1') {
 						$update_array['requestable'] =  1;
 					} else {
-                        $update_array['requestable'] =  0;
-                    }
+            $update_array['requestable'] =  0;
+          }
 
 
 					if (DB::table('assets')
@@ -1195,12 +1263,61 @@ class AssetsController extends AdminController
 
     }
 
+    /**
+    *  Save bulk edits
+    *
+    * @return View
+    **/
+    public function postBulkDelete($assets = null)
+    {
+
+      if (!Company::isCurrentUserAuthorized()) {
+        return Redirect::to('hardware')->with('error', Lang::get('general.insufficient_permissions'));
+      } elseif (Input::has('bulk_edit')) {
+			  //$assets = Input::get('bulk_edit');
+        $assets = Asset::find(Input::get('bulk_edit'));
+        //print_r($assets);
+
+
+				foreach ($assets as $asset) {
+          //echo '<li>'.$asset;
+          $update_array['deleted_at'] = date('Y-m-d h:i:s');
+          $update_array['assigned_to'] = NULL;
+
+					if (DB::table('assets')
+            ->where('id', $asset->id)
+            ->update($update_array)) {
+
+	            $logaction = new Actionlog();
+	            $logaction->asset_id = $asset->id;
+	            $logaction->asset_type = 'hardware';
+	            $logaction->created_at =  date("Y-m-d H:i:s");
+	            $logaction->user_id = Sentry::getUser()->id;
+	            $log = $logaction->logaction('deleted');
+
+            }
+
+				} // endforeach
+				return Redirect::to("hardware")->with('success', Lang::get('admin/hardware/message.delete.success'));
+
+			// no values given, nothing to update
+			} else {
+				return Redirect::to("hardware")->with('info',Lang::get('admin/hardware/message.delete.nothing_updated'));
+
+			}
+
+		// Something weird happened here - default to hardware
+    return Redirect::to("hardware");
+
+    }
+
+
 
     public function getDatatable($status = null)
     {
 
 
-       $assets = Asset::select('assets.*')->with('model','assigneduser','assigneduser.userloc','assetstatus','defaultLoc','assetlog','model','model.category','assetstatus','assetloc', 'company')
+       $assets = Asset::select('assets.*')->with('model','assigneduser','assigneduser.userloc','assetstatus','defaultLoc','assetlog','model','model.category','model.fieldset','assetstatus','assetloc', 'company')
        ->Hardware();
 
        if (Input::has('search')) {
@@ -1264,6 +1381,12 @@ class AssetsController extends AdminController
       'image',
     ];
 
+    $all_custom_fields=CustomField::all(); //used as a 'cache' of custom fields throughout this page load
+
+    foreach($all_custom_fields AS $field) {
+      $allowed_columns[]=$field->db_column_name();
+    }
+
     $order = Input::get('order') === 'asc' ? 'asc' : 'desc';
     $sort = in_array(Input::get('sort'), $allowed_columns) ? Input::get('sort') : 'asset_tag';
 
@@ -1313,7 +1436,7 @@ class AssetsController extends AdminController
             }
         }
 
-        $rows[] = array(
+        $row = array(
             'checkbox'      =>'<div class="text-center"><input type="checkbox" name="edit_asset['.$asset->id.']" class="one_required"></div>',
             'id'        => $asset->id,
             'image' => (($asset->image) && ($asset->image!='')) ? '<img src="'.Config::get('app.url').'/uploads/assets/'.$asset->image.'" height=50 width=50>' : ((($asset->model) && ($asset->model->image!='')) ? '<img src="'.Config::get('app.url').'/uploads/models/'.$asset->model->image.'" height=40 width=50>' : ''),
@@ -1326,13 +1449,17 @@ class AssetsController extends AdminController
             'category'      => (($asset->model) && ($asset->model->category)) ? $asset->model->category->name : '',
             'eol'           => ($asset->eol_date()) ? $asset->eol_date() : '',
             'notes'         => $asset->notes,
-            'order_number'  => ($asset->order_number!='') ? '<a href="../hardware/?order_number='.$asset->order_number.'">'.$asset->order_number.'</a>' : '',
+            'order_number'  => ($asset->order_number!='') ? '<a href="'.Config::get('app.url').'/hardware?order_number='.$asset->order_number.'">'.$asset->order_number.'</a>' : '',
             'last_checkout' => ($asset->last_checkout!='') ? $asset->last_checkout : '',
             'expected_checkin' => ($asset->expected_checkin!='')  ? $asset->expected_checkin : '',
             'change'        => ($inout) ? $inout : '',
             'actions'       => ($actions) ? $actions : '',
             'companyName'   => is_null($asset->company) ? '' : e($asset->company->name)
-        );
+            );
+        foreach($all_custom_fields AS $field) {
+          $row[$field->db_column_name()]=$asset->{$field->db_column_name()};
+        }
+        $rows[]=$row;
       }
 
       $data = array('total'=>$assetCount, 'rows'=>$rows);
