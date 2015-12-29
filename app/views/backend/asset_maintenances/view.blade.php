@@ -68,19 +68,12 @@ use Carbon\Carbon;
                     </div>
                     <div class="col-md-3 col-sm-3" style="padding-bottom: 10px; margin-left: 15px; word-wrap: break-word;">
                         <strong>@lang('admin/asset_maintenances/form.completion_date'): </strong>
-                        <?php if (is_null($assetMaintenance->completion_date)) {
-                            $calculationEndDate = Carbon::now();
-                            $completionDate = NULL;
-                        } else {
-                            $completionDate = Carbon::parse($assetMaintenance->completion_date);
-                            $calculationEndDate = $completionDate;
-                        }
-                        ?>
-                        {{{ $completionDate ? $completionDate->toDateString() : Lang::get('admin/asset_maintenances/message.asset_maintenance_incomplete') }}}
+			{{ $completionDate = $assetMaintenance->completion_date }}
+                        {{{ $completionDate ? $completionDate : Lang::get('admin/asset_maintenances/message.asset_maintenance_incomplete') }}}
                     </div>
                     <div class="col-md-3 col-sm-3" style="padding-bottom: 10px; margin-left: 15px; word-wrap: break-word;">
                         <strong>@lang('admin/asset_maintenances/form.asset_maintenance_time'): </strong>
-                        {{ $calculationEndDate->diffInDays($startDate) }}
+                        {{ $assetMaintenance->asset_maintenance_time }}
                     </div>
                 </div>
                 <!-- 3rd Row End -->

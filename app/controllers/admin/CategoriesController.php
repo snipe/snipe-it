@@ -250,12 +250,11 @@ class CategoriesController extends AdminController
 
         foreach ($categories as $category) {
             $actions = '<a href="'.route('update/category', $category->id).'" class="btn btn-warning btn-sm" style="margin-right:5px;"><i class="fa fa-pencil icon-white"></i></a><a data-html="false" class="btn delete-asset btn-danger btn-sm" data-toggle="modal" href="'.route('delete/category', $category->id).'" data-content="'.Lang::get('admin/categories/message.delete.confirm').'" data-title="'.Lang::get('general.delete').' '.htmlspecialchars($category->name).'?" onClick="return false;"><i class="fa fa-trash icon-white"></i></a>';
-
             $rows[] = array(
                 'id'      => $category->id,
                 'name'  => link_to('/admin/settings/categories/'.$category->id.'/view', $category->name) ,
                 'category_type' => ucwords($category->category_type),
-                'count'         => ($category->category_type=='asset') ?  $category->assetscount() : $category->accessoriescount(),
+                'count'         => $category->itemCount(),
                 'acceptance'    => ($category->require_acceptance=='1') ? '<i class="fa fa-check"></i>' : '',
                 //EULA is still not working correctly
                 'eula'          => ($category->getEula()) ? '<i class="fa fa-check"></i>' : '',
