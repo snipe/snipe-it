@@ -33,6 +33,7 @@ return array(
         'import'    => 'มีปัญหาระหว่างการนำเข้าผู้ใช้งาน กรุณาลองใหม่อีกครั้ง',
         'asset_already_accepted' => 'ทรัพย์สินนี้ได้รับการยอมรับแล้ว',
         'accept_or_decline' => 'คุณต้องยอมรับ หรือปฏิเสธสินทรัพย์นี้',
+        'incorrect_user_accepted' => 'The asset you have attempted to accept was not checked out to you.',
         'ldap_could_not_connect' => 'ไม่สามารถเชื่อมต่อกับ LDAP Server ได้ กรุณาตรวจสอบการตั้งค่า LDAP Server ของคุณในไฟล์ตั้งค่า LDAP <br>ผิดพลาดจาก LDAP Server:',
         'ldap_could_not_bind' => 'ไม่สามารถผูกกับ LDAP Server ได้ กรุณาตรวจสอบการตั้งค่า LDAP Server ของคุณในไฟล์ตั้งค่า LDAP <br>ผิดพลาดจาก LDAP Server: ',
         'ldap_could_not_search' => 'ไม่สามารถค้นหา LDAP Server ได้ กรุณาตรวจสอบการตั้งค่า LDAP Server ของคุณในไฟล์ตั้งค่า LDAP <br>ผิดพลาดจาก LDAP Server:',

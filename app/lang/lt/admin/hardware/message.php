@@ -52,6 +52,11 @@ return array(
         'error'   		=> 'Įranga neišduota, prašome bandyti dar kartą',
         'success' 		=> 'Įranga išduota sėkmingai.',
         'user_does_not_exist' => 'Šis naudotojas neteisingas. Prašome bandykite dar kartą.'
+    ),
+
+    'requests' => array(
+        'error'   		=> 'Asset was not requested, please try again',
+        'success' 		=> 'Asset requested successfully.',
     )
 
 );

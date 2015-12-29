@@ -1,7 +1,9 @@
 <?php
 
 return array(
-
+	'bulk_delete'		=> 'Confrm Bulk Delete Assets',
+  'bulk_delete_help'	=> 'Review the assets for bulk deletion below. Once deleted, these assets can be restored, but they will no longer be associated with any users they are currently assigned to.',
+  'bulk_delete_warn'	=> 'You are about to delete :asset_count assets.',
 	'bulk_update'		=> 'Aggiornamento quantità beni',
 	'bulk_update_help'	=> 'Questo modulo consente di aggiornare più risorse in una sola volta. Riempire solo i campi che è necessario cambiare. Tutti i campi lasciati vuoti rimarranno invariati. ',
 	'bulk_update_warn'	=> 'Stai per modificare le proprietà di :asset_count beni.',

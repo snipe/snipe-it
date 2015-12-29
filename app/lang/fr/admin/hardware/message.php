@@ -53,6 +53,11 @@ return array(
         'error'   		=> 'Ce bien n\'a pas été retourné, veuillez réessayer',
         'success' 		=> 'Ce bien a été retourné correctement.',
         'user_does_not_exist' => 'Cet utilisateur est invalide. Veuillez réessayer.'
+    ),
+
+    'requests' => array(
+        'error'   		=> 'Asset was not requested, please try again',
+        'success' 		=> 'Asset requested successfully.',
     )
 
 );

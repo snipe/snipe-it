@@ -1,7 +1,9 @@
 <?php
 
 return array(
-
+	'bulk_delete'		=> 'Confrm Bulk Delete Assets',
+  'bulk_delete_help'	=> 'Review the assets for bulk deletion below. Once deleted, these assets can be restored, but they will no longer be associated with any users they are currently assigned to.',
+  'bulk_delete_warn'	=> 'You are about to delete :asset_count assets.',
 	'bulk_update'		=> 'ปรับปรุงสินทรัพย์แบบหลายรายการ',
 	'bulk_update_help'	=> 'ฟอร์มนี้อนุญาตให้คุณปรับปรุงสินทรัพย์แบบหลายรายการในครั้งเดียว เพียงกรอกข้อมูลที่ต้องการเปลี่ยนแปลงลงในช่อง ช่องใดที่ไม่ได้กรอกข้อมูลจะไม่มีการเปลี่ยนแปลงใดๆ ',
 	'bulk_update_warn'	=> 'คุณกำลังแก้ไขคุณสมบัติของสินทรัพย์ :asset_count',

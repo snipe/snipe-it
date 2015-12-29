@@ -1,7 +1,9 @@
 <?php
 
 return array(
-
+	'bulk_delete'		=> 'Confrm Bulk Delete Assets',
+  'bulk_delete_help'	=> 'Review the assets for bulk deletion below. Once deleted, these assets can be restored, but they will no longer be associated with any users they are currently assigned to.',
+  'bulk_delete_warn'	=> 'You are about to delete :asset_count assets.',
 	'bulk_update'		=> 'Masseoppdater eiendeler',
 	'bulk_update_help'	=> 'Dette skjemaet lar deg oppdatere flere eiendeler på en gang. Fyll kun ut feltene du ønsker å endre. Tomme felter forblir uendret. ',
 	'bulk_update_warn'	=> 'Du er på vei til å endre egenskapene til :asset_count eiendeler.',
@@ -20,7 +22,7 @@ return array(
     'expected_checkin'  => 'Forventet dato for innsjekk',
     'expires'			=> 'Utløper',
     'fully_depreciated'	=> 'Ferdig nedskrevet',
-    'help_checkout'		=> 'If you wish to assign this asset immediately, select "Ready to Deploy" from the status list above. ',
+    'help_checkout'		=> 'Hvis du ønsker å tildele denne eiendelen umiddelbart, velger du "klar til å distribuere" fra status listen ovenfor. ',
     'mac_address'		=> 'MAC-adresse',
     'manufacturer'		=> 'Produsent',
     'model'				=> 'Modell',

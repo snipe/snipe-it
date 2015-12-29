@@ -53,6 +53,11 @@ return array(
         'error'   		=> 'Актив не был отвязан, пожалуйста попробуйте снова',
         'success' 		=> 'Актив успешно отвязан.',
         'user_does_not_exist' => 'Этот пользователь является недопустимым. Пожалуйста, попробуйте еще раз.'
+    ),
+
+    'requests' => array(
+        'error'   		=> 'Asset was not requested, please try again',
+        'success' 		=> 'Asset requested successfully.',
     )
 
 );

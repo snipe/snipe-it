@@ -1,10 +1,10 @@
 <?php
 
     return [
-        'asset_maintenances' => 'Asset Maintenances',
-        'edit'               => 'Edit Asset Maintenance',
-        'delete'             => 'Delete Asset Maintenance',
-        'view'               => 'View Asset Maintenance Details',
+        'asset_maintenances' => 'Záznamy o údržbě zařízení',
+        'edit'               => 'Upravit záznam o údržbě zařízení',
+        'delete'             => 'Odstranit záznam o údržbě zařízení',
+        'view'               => 'Zobrazit podrobnosti o údržbě zařízení',
         'repair'             => 'Oprava',
         'maintenance'        => 'Údržba',
         'upgrade'            => 'Upgradovat'

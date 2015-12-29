@@ -2,17 +2,17 @@
 
 return array(
 
-    'does_not_exist' => 'Accessory does not exist.',
+    'does_not_exist' => 'Zubehör existiert nicht.',
     'assoc_users'	 => 'Dieses Zubehör ist derzeit an :count  Benutzern zur Verwendung ausgegeben worden. Bitte buchen Sie das Zubehör wieder ein und versuchen es dann noch Einmal. ',
 
     'create' => array(
-        'error'   => 'Accessory was not created, please try again.',
-        'success' => 'Accessory created successfully.'
+        'error'   => 'Zubehör wurde nicht erzeugt, bitte versuchen Sie es erneut.',
+        'success' => 'Zubehör erfolgreich angelegt.'
     ),
 
     'update' => array(
-        'error'   => 'Accessory was not updated, please try again',
-        'success' => 'Accessory updated successfully.'
+        'error'   => 'Zubehör wurde nicht aktualisiert, bitte versuchen Sie es erneut',
+        'success' => 'Zubehör wurde erfolgreich aktualisiert.'
     ),
 
     'delete' => array(

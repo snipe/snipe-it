@@ -53,6 +53,11 @@ return array(
         'error'   		=> 'Il bene non è stato registrato, per favore riprova',
         'success' 		=> 'Il bene è stato registrato con successo.',
         'user_does_not_exist' => 'Questo utente non è valido. Riprova.'
+    ),
+
+    'requests' => array(
+        'error'   		=> 'Asset was not requested, please try again',
+        'success' 		=> 'Asset requested successfully.',
     )
 
 );

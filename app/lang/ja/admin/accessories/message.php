@@ -2,17 +2,17 @@
 
 return array(
 
-    'does_not_exist' => 'Accessory does not exist.',
-    'assoc_users'	 => 'この付属品は、利用者に :count 個チェックされていません。もう一度、付属品をチェックして下さい。 ',
+    'does_not_exist' => '付属品は存在しません。',
+    'assoc_users'	 => 'この付属品は、ユーザーに :count 個貸し出されています。もう一度、付属品を返却して下さい。 ',
 
     'create' => array(
-        'error'   => 'Accessory was not created, please try again.',
-        'success' => 'Accessory created successfully.'
+        'error'   => '付属品は作成されていません。もう一度やり直してください。',
+        'success' => '付属品は正常に作成されました。'
     ),
 
     'update' => array(
-        'error'   => 'Accessory was not updated, please try again',
-        'success' => 'Accessory updated successfully.'
+        'error'   => '付属品は更新されませんでした。もう一度、やり直して下さい。',
+        'success' => '付属品は正常に更新されました。'
     ),
 
     'delete' => array(

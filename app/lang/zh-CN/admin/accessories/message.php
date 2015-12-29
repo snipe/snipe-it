@@ -2,17 +2,17 @@
 
 return array(
 
-    'does_not_exist' => 'Accessory does not exist.',
+    'does_not_exist' => '配件不存在。',
     'assoc_users'	 => '配件目前状态：可用数量不足，请检查改配件再重试。',
 
     'create' => array(
-        'error'   => 'Accessory was not created, please try again.',
-        'success' => 'Accessory created successfully.'
+        'error'   => '配件添加失败，请重试。',
+        'success' => '配件添加成功。'
     ),
 
     'update' => array(
-        'error'   => 'Accessory was not updated, please try again',
-        'success' => 'Accessory updated successfully.'
+        'error'   => '配件更新失败，请重试。',
+        'success' => '配件更新成功。'
     ),
 
     'delete' => array(

@@ -53,6 +53,11 @@ return array(
         'error'   		=> '資産はチェックインされませんでした。もう一度、やり直して下さい。',
         'success' 		=> '資産は正常にチェックインされました。',
         'user_does_not_exist' => 'その利用者は不正です。もう一度、やり直して下さい。'
+    ),
+
+    'requests' => array(
+        'error'   		=> 'Asset was not requested, please try again',
+        'success' 		=> 'Asset requested successfully.',
     )
 
 );

@@ -52,6 +52,11 @@ return array(
         'error'   		=> 'Ativo não foi retornado, favor tentar novamente',
         'success' 		=> 'Ativo retornado com sucesso.',
         'user_does_not_exist' => 'Este usuário é inválido. Tente novamente.'
+    ),
+
+    'requests' => array(
+        'error'   		=> 'Asset was not requested, please try again',
+        'success' 		=> 'Asset requested successfully.',
     )
 
 );

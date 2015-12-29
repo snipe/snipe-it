@@ -53,6 +53,11 @@ return array(
         'error'   		=> 'Tài sản chưa được checkin, xin vui lòng thử lại',
         'success' 		=> 'Tài sản đã checkin thành công.',
         'user_does_not_exist' => 'Người dùng này không tồn tại. Bạn hãy thử lại.'
+    ),
+
+    'requests' => array(
+        'error'   		=> 'Asset was not requested, please try again',
+        'success' 		=> 'Asset requested successfully.',
     )
 
 );

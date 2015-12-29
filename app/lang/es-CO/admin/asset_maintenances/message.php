@@ -1,17 +1,17 @@
 <?php
 
     return [
-        'not_found'                    => 'Asset Maintenance you were looking for was not found!',
+        'not_found'                    => 'Mantenimiento de Activos que estás buscando no fue encontrado!',
         'delete'                       => [
-            'confirm' => 'Are you sure you wish to delete this asset maintenance?',
-            'error'   => 'There was an issue deleting the asset maintenance. Please try again.',
-            'success' => 'The asset maintenance was deleted successfully.'
+            'confirm' => '¿Está seguro que desea eliminar este mantenimiento de activo?',
+            'error'   => 'Hubo un problema al eliminar el mantenimiento del activo. Por favor intentelo nuevamente.',
+            'success' => 'El mantenimiento del activo fue eliminado de manera exitosa.'
         ],
         'create'                       => [
-            'error'   => 'Asset Maintenance was not created, please try again.',
-            'success' => 'Asset Maintenance created successfully.'
+            'error'   => 'Mantenimiento de Activos no fue creado, por favor intentelo de nuevo.',
+            'success' => 'Mantenimiento de Activo creado correctamente.'
         ],
-        'asset_maintenance_incomplete' => 'Not Completed Yet',
-        'warranty'                     => 'Warranty',
-        'not_warranty'                 => 'Not Warranty',
+        'asset_maintenance_incomplete' => 'Sin Completar',
+        'warranty'                     => 'Garantía',
+        'not_warranty'                 => 'Sin Garantía',
     ];

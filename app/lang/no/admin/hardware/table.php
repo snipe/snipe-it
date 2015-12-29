@@ -18,7 +18,7 @@ return array(
     'serial'   		=> 'Serienummer',
     'status'   		=> 'Status',
     'title'      	=> 'Eiendel ',
-    'image'		=> 'Device Image',
+    'image'		=> 'Enhet bilde',
     'days_without_acceptance' => 'Dager uten aksept'
 
 );

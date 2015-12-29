@@ -53,6 +53,11 @@ return array(
         'error'   		=> 'Harta tidak diterima, sila cuba lagi',
         'success' 		=> 'Harta berjaya diterima.',
         'user_does_not_exist' => 'Pengguna tidah sah. Sila cuba lagi.'
+    ),
+
+    'requests' => array(
+        'error'   		=> 'Asset was not requested, please try again',
+        'success' 		=> 'Asset requested successfully.',
     )
 
 );

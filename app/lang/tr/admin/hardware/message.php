@@ -53,6 +53,11 @@ return array(
         'error'   		=> 'Demirbaş girişi yapılamadı. Lütfen tekrar deneyin',
         'success' 		=> 'Demirbaş girişi yapıldı.',
         'user_does_not_exist' => 'Bu kullanıcı geçersiz. Lütfen tekrar deneyin.'
+    ),
+
+    'requests' => array(
+        'error'   		=> 'Asset was not requested, please try again',
+        'success' 		=> 'Asset requested successfully.',
     )
 
 );

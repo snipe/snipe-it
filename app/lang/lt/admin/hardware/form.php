@@ -1,7 +1,9 @@
 <?php
 
 return array(
-
+	'bulk_delete'		=> 'Confrm Bulk Delete Assets',
+  'bulk_delete_help'	=> 'Review the assets for bulk deletion below. Once deleted, these assets can be restored, but they will no longer be associated with any users they are currently assigned to.',
+  'bulk_delete_warn'	=> 'You are about to delete :asset_count assets.',
 	'bulk_update'		=> 'Visa atnaujinama įranga',
 	'bulk_update_help'	=> 'Ši forma leidžia jums atnaujinti kelias įrangas vienu metu. Prašome užpildykite laukelius, kuriuos reikia keisti. Visi laukeliai, kuriuos paliksite tuščius liks nepakeisti. ',
 	'bulk_update_warn'	=> 'Jūs ruošiatės keisti sekančius nustatymus :asset_count assets.',
