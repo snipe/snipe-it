@@ -14,6 +14,10 @@ return array(
     */
 
     'debug' => false,
+    
+    'timezone' => isset($_ENV['SNIPEIT_TIMEZONE']) ? $_ENV['SNIPEIT_TIMEZONE'] : 'UTC',
+    'locale' => isset($_ENV['SNIPEIT_LOCALE']) ? $_ENV['SNIPEIT_LOCALE'] : 'en',
+
 
     /*
     |--------------------------------------------------------------------------
