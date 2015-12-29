@@ -29,6 +29,8 @@ In a standard Apache virtualhost setup, that might look something like this:
 </VirtualHost>
 ```
 
+**Note**: If you are using the script for centos6+ or Ubuntu 14+ remember to change your directory and document root to `/var/www/html/snipeit/public`
+
 An OS X virtualhost setup could look more like:
 
 ```
