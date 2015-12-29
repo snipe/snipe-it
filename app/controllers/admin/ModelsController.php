@@ -82,7 +82,7 @@ class ModelsController extends AdminController
         if ($validator->fails())
         {
             // The given data did not pass validation
-            return Redirect::back()->withInput()->with('error', Lang::get('admin/models/message.create.duplicate_set'));;
+            return Redirect::back()->withInput()->with('error', Lang::get('admin/models/message.create.duplicate_set'));
         }
 
 

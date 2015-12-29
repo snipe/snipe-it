@@ -398,6 +398,7 @@ class AssetsController extends AdminController
 
 
         // Redirect to the asset management page with error
+        /** @noinspection PhpUnreachableStatementInspection Known to be unreachable but kept following discussion: https://github.com/snipe/snipe-it/pull/1423 */
         return Redirect::to("hardware/$assetId/edit")->with('error', Lang::get('admin/hardware/message.update.error'));
 
     }

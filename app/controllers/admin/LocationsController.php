@@ -143,6 +143,7 @@ class LocationsController extends AdminController
       }
 
       // Redirect to the location create page
+      /** @noinspection PhpUnreachableStatementInspection Known to be unreachable but kept following discussion: https://github.com/snipe/snipe-it/pull/1423 */
       return Redirect::to('admin/settings/locations/create')->with('error', Lang::get('admin/locations/message.create.error'));
     }
 
