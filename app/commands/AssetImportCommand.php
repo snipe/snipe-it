@@ -169,6 +169,18 @@ class AssetImportCommand extends Command {
 				$user_asset_purchase_cost = '';
 			}
 
+                         // Asset Company Name
+                         if (array_key_exists('14',$row)) {
+                                if ($row[14]!='') {
+                                    $user_asset_company_name = trim($row[14]);
+                                } else {
+                                        $user_asset_company_name= '';
+                                }
+                         } else {
+                                $user_asset_company_name = '';
+                         }
+
+
 			// A number was given instead of a name
 			if (is_numeric($user_name)) {
 				$this->comment('User '.$user_name.' is not a name - assume this user already exists');
@@ -179,7 +191,7 @@ class AssetImportCommand extends Command {
 				$this->comment('No user data provided - skipping user creation, just adding asset');
 				$first_name = '';
 				$last_name = '';
-				$user_username = '';
+				//$user_username = '';
 
 			} else {
 				$user_email_array = User::generateFormattedNameFromFullName($this->option('email_format'), $user_name);
@@ -217,6 +229,7 @@ class AssetImportCommand extends Command {
 			$this->comment('Purchase Date: '.$user_asset_purchase_date);
 			$this->comment('Purchase Cost: '.$user_asset_purchase_cost);
 			$this->comment('Notes: '.$user_asset_notes);
+                        $this->comment('Company Name: '.$user_asset_company_name);
 
 			$this->comment('------------- Action Summary ----------------');
 
@@ -285,18 +298,26 @@ class AssetImportCommand extends Command {
 
 			}
 
+      if (e($user_asset_category)=='') {
+        $category_name = 'Unnamed Category';
+      } else {
+        $category_name = e($user_asset_category);
+      }
+
 			// Check for the category match and create it if it doesn't exist
-			if ($category = Category::where('name', $user_asset_category)->where('category_type', 'asset')->first()) {
-				$this->comment('Category '.$user_asset_category.' already exists');
+			if ($category = Category::where('name', $category_name)->where('category_type', 'asset')->first()) {
+				$this->comment('Category '.$category_name.' already exists');
+
 			} else {
 				$category = new Category();
-				$category->name = e($user_asset_category);
+
+                                $category->name = $category_name;
 				$category->category_type = 'asset';
 				$category->user_id = 1;
 
 				if ($category->save()) {
 					$this->comment('Category '.$user_asset_category.' was created');
-	            } else {
+                                } else {
 					$this->comment('Something went wrong! Category '.$user_asset_category.' was NOT created');
 				}
 
@@ -312,7 +333,7 @@ class AssetImportCommand extends Command {
 
 				if ($manufacturer->save()) {
 					$this->comment('Manufacturer '.$user_asset_mfgr.' was created');
-	            } else {
+                                } else {
 					$this->comment('Something went wrong! Manufacturer '.$user_asset_mfgr.' was NOT created');
 				}
 
@@ -331,45 +352,65 @@ class AssetImportCommand extends Command {
 
 				if ($asset_model->save()) {
 					$this->comment('Asset Model '.$user_asset_name.' with model number '.$user_asset_modelno.' was created');
-	            } else {
+                                } else {
 					$this->comment('Something went wrong! Asset Model '.$user_asset_name.' was NOT created');
 				}
 
 			}
 
+                        // Check for the asset company match and create it if it doesn't exist
+                        if ($company = Company::where('name', $user_asset_company_name)->first()) {
+                            $this->comment('Company '.$user_asset_company_name.' already exists');
+                        } else {
+                            $company = new Company();
+                            $company->name = e($user_asset_company_name);
+
+                            if ($company->save()) {
+                                $this->comment('Company '.$user_asset_company_name.' was created');
+                            } else {
+                                    $this->comment('Something went wrong! Company '.$user_asset_company_name.' was NOT created');
+                            }
+                        }
+
 			// Check for the asset match and create it if it doesn't exist
+        if ($asset = Asset::where('asset_tag', $user_asset_tag)->first()) {
+          $this->comment('The Asset with asset tag '.$user_asset_tag.' already exists');
+        } else {
+          $asset = new Asset();
+          $asset->name = e($user_asset_asset_name);
+  				if ($user_asset_purchase_date!='') {
+  					$asset->purchase_date = $user_asset_purchase_date;
+  				} else {
+  					$asset->purchase_date = NULL;
+  				}
+  				if ($user_asset_purchase_cost!='') {
+  					$asset->purchase_cost = ParseFloat(e($user_asset_purchase_cost));
+  				} else {
+  					$asset->purchase_cost = 0.00;
+  				}
+  				$asset->serial = e($user_asset_serial);
+  				$asset->asset_tag = e($user_asset_tag);
+  				$asset->model_id = $asset_model->id;
+  				$asset->assigned_to = $user->id;
+  				$asset->rtd_location_id = $location->id;
+  				$asset->user_id = 1;
+  				$asset->status_id = $status_id;
+                                $asset->company_id = $company->id;
+  				if ($user_asset_purchase_date!='') {
+  					$asset->purchase_date = $user_asset_purchase_date;
+  				} else {
+  					$asset->purchase_date = NULL;
+  				}
+  				$asset->notes = e($user_asset_notes);
 
-				$asset = new Asset();
-				$asset->name = e($user_asset_asset_name);
-				if ($user_asset_purchase_date!='') {
-					$asset->purchase_date = $user_asset_purchase_date;
-				} else {
-					$asset->purchase_date = NULL;
-				}
-				if ($user_asset_purchase_cost!='') {
-					$asset->purchase_cost = ParseFloat(e($user_asset_purchase_cost));
-				} else {
-					$asset->purchase_cost = 0.00;
-				}
-				$asset->serial = e($user_asset_serial);
-				$asset->asset_tag = e($user_asset_tag);
-				$asset->model_id = $asset_model->id;
-				$asset->assigned_to = $user->id;
-				$asset->rtd_location_id = $location->id;
-				$asset->user_id = 1;
-				$asset->status_id = $status_id;
-				if ($user_asset_purchase_date!='') {
-					$asset->purchase_date = $user_asset_purchase_date;
-				} else {
-					$asset->purchase_date = NULL;
-				}
-				$asset->notes = e($user_asset_notes);
+  				if ($asset->save()) {
+  					$this->comment('Asset '.$user_asset_name.' with serial number '.$user_asset_serial.' was created');
+  	            } else {
+  					$this->comment('Something went wrong! Asset '.$user_asset_name.' was NOT created');
+  				}
 
-				if ($asset->save()) {
-					$this->comment('Asset '.$user_asset_name.' with serial number '.$user_asset_serial.' was created');
-	            } else {
-					$this->comment('Something went wrong! Asset '.$user_asset_name.' was NOT created');
-				}
+        }
+
 
 
 			$this->comment('=====================================');

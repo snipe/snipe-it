@@ -26,6 +26,7 @@
 
               <thead>
                   <tr role="row">
+                        <th class="col-sm-1">@lang('admin/companies/table.title')</th>
                         <th class="col-sm-1">@lang('admin/accessories/table.title')</th>
                         <th class="col-sm-1">@lang('admin/accessories/general.total')</th>
                         <th class="col-sm-1">@lang('admin/accessories/general.remaining')</th>
@@ -35,6 +36,7 @@
 
                     @foreach ($accessories as $accessory)
                     <tr>
+                        <td>{{{ is_null($accessory->company) ? '' : $accessory->company->name }}}</td>
                         <td>{{ $accessory->name }}</td>
                         <td>{{ $accessory->qty }}</td>
                         <td>{{ $accessory->numRemaining() }}</td>

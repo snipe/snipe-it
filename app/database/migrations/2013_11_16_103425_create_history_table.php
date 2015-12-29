@@ -17,6 +17,7 @@ class CreateHistoryTable extends Migration
             $table->integer('location_id')->nullable;
             $table->timestamps();
             $table->integer('user_id');
+            $table->engine = 'InnoDB';
         });
     }
 

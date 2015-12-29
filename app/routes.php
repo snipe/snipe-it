@@ -80,6 +80,11 @@
             Route::get( 'list/{status?}', [ 'as' => 'api.users.list', 'uses' => 'UsersController@getDatatable' ] );
         } );
 
+        /*---Groups API---*/
+        Route::group( [ 'prefix' => 'groups' ], function () {
+            Route::get( 'list', [ 'as' => 'api.groups.list', 'uses' => 'GroupsController@getDatatable' ] );
+        } );
+
         /*---Licenses API---*/
         Route::group( [ 'prefix' => 'licenses' ], function () {
 
@@ -110,13 +115,6 @@
 
             Route::resource( '/', 'ModelsController' );
             Route::get( 'list/{status?}', [ 'as' => 'api.models.list', 'uses' => 'ModelsController@getDatatable' ] );
-            Route::get( '{modelId}/check', function ( $modelId ) {
-
-                $model = Model::find( $modelId );
-
-                return $model->show_mac_address;
-            } );
-
             Route::get( '{modelID}/view', [ 'as' => 'api.models.view', 'uses' => 'ModelsController@getDataView' ] );
         } );
 
@@ -201,6 +199,11 @@
                     'as'   => 'hardware/bulkedit',
                     'uses' => 'AssetsController@postBulkEdit'
                 ] );
+            Route::post( 'bulkdelete',
+                [
+                    'as'   => 'hardware/bulkdelete',
+                    'uses' => 'AssetsController@postBulkDelete'
+                ] );
             Route::post( 'bulksave',
                 [
                     'as'   => 'hardware/bulksave',
@@ -220,6 +223,7 @@
                 Route::get( '{modelId}/delete', [ 'as' => 'delete/model', 'uses' => 'ModelsController@getDelete' ] );
                 Route::get( '{modelId}/view', [ 'as' => 'view/model', 'uses' => 'ModelsController@getView' ] );
                 Route::get( '{modelID}/restore', [ 'as' => 'restore/model', 'uses' => 'ModelsController@getRestore' ] );
+                Route::get( '{modelId}/custom_fields',['as' => 'custom_fields/model','uses' => 'ModelsController@getCustomFields']);
             } );
 
             Route::get( '/', [
@@ -321,7 +325,7 @@
             Route::get( '{consumableID}/checkout',
                 [ 'as' => 'checkout/consumable', 'uses' => 'ConsumablesController@getCheckout' ] );
             Route::post( '{consumableID}/checkout', 'ConsumablesController@postCheckout' );
-            Route::get( '/', [ 'as' => 'accessories', 'uses' => 'ConsumablesController@getIndex' ] );
+            Route::get( '/', [ 'as' => 'consumables', 'uses' => 'ConsumablesController@getIndex' ] );
         } );
 
         # Admin Settings Routes (for categories, maufactureres, etc)
@@ -336,7 +340,7 @@
             } );
 
             # Settings
-            Route::group( [ 'prefix' => 'backups' ], function () {
+            Route::group( [ 'prefix' => 'backups', 'before' => 'backup-auth' ], function () {
 
 
                 Route::get( 'download/{filename}', [
@@ -355,6 +359,18 @@
                 ]);
                 Route::get( '/', [ 'as' => 'settings/backups', 'uses' => 'SettingsController@getBackups' ] );
             } );
+
+            # Companies
+            Route::group([ 'prefix' => 'companies' ], function () {
+
+                Route::get('{companyId}/edit', ['as' => 'update/company', 'uses' => 'CompaniesController@getEdit']);
+                Route::get('create', ['as' => 'create/company', 'uses' => 'CompaniesController@getCreate']);
+                Route::get('/', ['as' => 'companies', 'uses' => 'CompaniesController@getIndex']);
+
+                Route::post('{companyId}/delete', ['as' => 'delete/company', 'uses' => 'CompaniesController@postDelete']);
+                Route::post('{companyId}/edit', 'CompaniesController@postEdit');
+                Route::post('create', 'CompaniesController@postCreate');
+            });
 
             # Manufacturers
             Route::group( [ 'prefix' => 'manufacturers' ], function () {
@@ -443,6 +459,13 @@
             } );
 
         } );
+
+        # Custom fields support
+        Route::get('custom_fields/create-field',['uses' =>'CustomFieldsController@createField','as' => 'admin.custom_fields.create-field']);
+        Route::post('custom_fields/create-field',['uses' => 'CustomFieldsController@storeField','as' => 'admin.custom_fields.store-field']);
+        Route::post('custom_fields/{id}/associate',['uses' => 'CustomFieldsController@associate','as' => 'admin.custom_fields.associate']);
+        Route::match(['DELETE'],'custom_fields/delete-field/{id}',['uses' => 'CustomFieldsController@deleteField','as' => 'admin.custom_fields.delete-field']);
+        Route::resource('custom_fields','CustomFieldsController');
 
         # User Management
         Route::group( [ 'prefix' => 'users' ], function () {

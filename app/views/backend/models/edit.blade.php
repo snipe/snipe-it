@@ -52,17 +52,17 @@
                     </div>
             </div>
 
-			 <div class="form-group {{ $errors->has('manufacturer_id') ? ' has-error' : '' }}">
-				<label for="manufacturer_id" class="col-md-2 control-label">@lang('general.manufacturer')
-				 <i class='fa fa-asterisk'></i></label>
-				 </label>
-					<div class="col-md-7">
-						{{ Form::select('manufacturer_id', $manufacturer_list , Input::old('manufacturer_id', $model->manufacturer_id), array('class'=>'select2', 'style'=>'width:350px')) }}
-						{{ $errors->first('manufacturer_id', '<br><span class="alert-msg"><i class="fa fa-times"></i> :message</span>') }}
-					</div>
-			</div>
+       <div class="form-group {{ $errors->has('manufacturer_id') ? ' has-error' : '' }}">
+        <label for="manufacturer_id" class="col-md-2 control-label">@lang('general.manufacturer')
+         <i class='fa fa-asterisk'></i></label>
+         </label>
+          <div class="col-md-7">
+            {{ Form::select('manufacturer_id', $manufacturer_list , Input::old('manufacturer_id', $model->manufacturer_id), array('class'=>'select2', 'style'=>'width:350px')) }}
+            {{ $errors->first('manufacturer_id', '<br><span class="alert-msg"><i class="fa fa-times"></i> :message</span>') }}
+          </div>
+      </div>
 
-			<!-- Category -->
+      <!-- Category -->
             <div class="form-group {{ $errors->has('category_id') ? ' has-error' : '' }}">
                 <label for="category_id" class="col-md-2 control-label">@lang('general.category')
                  <i class='fa fa-asterisk'></i></label>
@@ -107,14 +107,15 @@
                 </div>
             </div>
 
-			<div class="form-group {{ $errors->has('eol') ? ' has-error' : '' }}">
-				<div class="checkbox col-md-offset-2">
-					<label>
-						{{ Form::checkbox('show_mac_address', '1', Input::old('show_mac_address', $model->show_mac_address)) }}
-						@lang('admin/models/general.show_mac_address')
-					</label>
-				</div>
-			</div>
+            <!-- Custom Fieldset -->
+            <div class="form-group {{ $errors->has('custom_fieldset') ? ' has-error' : '' }}">
+              <label for="custom_fieldset" class="col-md-2 control-label">@lang('admin/models/general.fieldset')</label>
+              <div class="col-md-7">
+                  {{ Form::select('custom_fieldset', customFieldsetList(),Input::old('custom_fieldset', $model->fieldset_id), array('class'=>'select2', 'style'=>'width:350px')) }}
+                  {{ $errors->first('custom_fieldset', '<br><span class="alert-msg"><i class="fa fa-times"></i> :message</span>') }}
+                </label>
+              </div>
+            </div>
 
             <!-- Image -->
             @if ($model->image)

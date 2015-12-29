@@ -46,30 +46,21 @@
         @endif
         <br />
 
-        <!-- checked out consumables table -->
-        @if ($consumable->users->count() > 0)
-
-            <table
-            name="consumable_users"
-            id="table"
-            data-url="{{route('api.consumables.view', $consumable->id)}}"
-            data-cookie="true"
-            data-click-to-select="true"
-            data-cookie-id-table="consumableDetailTable">
-                <thead>
-                    <tr>
-                        <th data-switchable="false" data-searchable="false" data-sortable="false" data-field="name">{{Lang::get('general.user')}}</th>
-                    </tr>
-                </thead>
-            </table>
-        @else
-            <div class="col-md-9">
-                <div class="alert alert-info alert-block">
-                    <i class="fa fa-info-circle"></i>
-                    @lang('general.no_results')
-                </div>
-            </div>
-        @endif
+        <table
+        name="consumable_users"
+        id="table"
+        data-url="{{route('api.consumables.view', $consumable->id)}}"
+        data-cookie="true"
+        data-click-to-select="true"
+        data-cookie-id-table="consumableDetailTable-{{ Config::get('version.hash_version') }}">
+            <thead>
+                <tr>
+                    <th data-switchable="false" data-searchable="false" data-sortable="false" data-field="name">{{Lang::get('general.user')}}</th>
+                    <th data-switchable="false" data-searchable="false" data-sortable="false" data-field="created_at">{{Lang::get('general.date')}}</th>
+                    <th data-switchable="false" data-searchable="false" data-sortable="false" data-field="admin">{{Lang::get('general.admin')}}</th>
+                </tr>
+            </thead>
+        </table>
 
     </div>
 
@@ -94,7 +85,7 @@
         undefinedText: '',
         iconsPrefix: 'fa',
         showRefresh: true,
-        search: true,
+        search: false,
         pageSize: {{{ Setting::getSettings()->per_page }}},
         pagination: true,
         sidePagination: 'server',

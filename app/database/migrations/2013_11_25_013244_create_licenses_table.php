@@ -25,6 +25,7 @@ class ReCreateLicensesTable extends Migration
             $table->integer('depreciation_id');
             $table->timestamps();
             $table->softDeletes();
+            $table->engine = 'InnoDB';
         });
     }
 

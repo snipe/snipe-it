@@ -62,6 +62,7 @@
                                     <thead>
                                         <tr>
 
+                                            <th data-sortable="false" data-field="companyName" data-searchable="false" data-visible="false">{{{ Lang::get('admin/companies/table.title') }}}</th>
                                             <th data-sortable="true" data-field="id" data-searchable="false" data-visible="false">{{Lang::get('general.id')}}</th>
                                             <th data-sortable="true" data-field="name" data-searchable="true">{{Lang::get('general.name')}}</th>
                                             <th data-sortable="true" data-field="asset_tag">{{Lang::get('general.asset_tag')}}</th>

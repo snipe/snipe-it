@@ -22,17 +22,23 @@
             <table
             name="consumables"
             id="table"
-            data-url="{{route('api.consumables.list')}}"
+            data-url="{{route('api.consumables.list') }}"
             data-cookie="true"
             data-click-to-select="true"
-            data-cookie-id-table="consumablesTable-v{{ Config::get('version.app_version') }}">
+            data-cookie-id-table="consumablesTable-{{ Config::get('version.hash_version') }}-{{ Config::get('version.hash_version') }}">
                 <thead>
                     <tr>
                         <th data-sortable="true" data-field="id" data-visible="false">@lang('general.id')</th>
-                        <th data-sortable="true" data-field="name">{{Lang::get('admin/consumables/table.title')}}</th>
-                        <th data-switchable="false" data-searchable="false" data-sortable="false" data-field="qty">{{Lang::get('admin/consumables/general.total')}}</th>
-                        <th data-switchable="false" data-searchable="false" data-sortable="false" data-field="numRemaining">{{Lang::get('admin/consumables/general.remaining')}}</th>
-                        <th data-switchable="false" data-searchable="false" data-sortable="false" data-field="actions">{{ Lang::get('table.actions') }}</th>
+                        <th data-switchable="true" data-searchable="true" data-sortable="true" data-field="companyName">@lang('admin/companies/table.title')</th>
+                        <th data-sortable="true" data-searchable="true" data-field="name">@lang('admin/consumables/table.title')</th>
+                        <th data-searchable="true" data-sortable="true" data-field="location">@lang('general.location')</th>
+                        <th data-searchable="true" data-sortable="true" data-field="category">@lang('general.category')</th>
+                        <th data-switchable="false" data-searchable="false" data-sortable="false" data-field="qty"> @lang('admin/consumables/general.total')</th>
+                        <th data-switchable="false" data-searchable="false" data-sortable="false" data-field="numRemaining"> @lang('admin/consumables/general.remaining')</th>
+                        <th data-sortable="true" data-searchable="true" data-field="order_number" data-visible="false">@lang('admin/consumables/general.order')</th>
+                        <th data-sortable="true" data-searchable="true" data-field="purchase_date" data-visible="false">@lang('admin/consumables/general.date')</th>
+                        <th data-sortable="true" data-searchable="true" data-field="purchase_cost" data-visible="false">@lang('admin/consumables/general.cost')</th>
+                        <th data-switchable="false" data-searchable="false" data-sortable="false" data-field="actions"> @lang('table.actions')</th>
 
                     </tr>
                 </thead>

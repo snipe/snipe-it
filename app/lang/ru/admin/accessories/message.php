@@ -2,17 +2,17 @@
 
 return array(
 
-    'does_not_exist' => 'Категория не существует.',
+    'does_not_exist' => 'Accessory does not exist.',
     'assoc_users'	 => 'Данный аксессуар выдан пользователям в количестве :count. Сделайте возврат аксессуара и попробуйте снова. ',
 
     'create' => array(
-        'error'   => 'Категория не создана, пожалуйста попробуйте снова.',
-        'success' => 'Категория успешно создана.'
+        'error'   => 'Accessory was not created, please try again.',
+        'success' => 'Accessory created successfully.'
     ),
 
     'update' => array(
-        'error'   => 'Категория не изменена, пожалуйста попробуйте снова',
-        'success' => 'Категория успешно изменена.'
+        'error'   => 'Accessory was not updated, please try again',
+        'success' => 'Accessory updated successfully.'
     ),
 
     'delete' => array(
@@ -20,7 +20,7 @@ return array(
         'error'   => 'При удалении категории возникла проблема. Пожалуйста попробуйте снова.',
         'success' => 'Категория успешно удалена.'
     ),
-    
+
      'checkout' => array(
         'error'   		=> 'Ошибка при выдаче аксессуара. Повторите попытку',
         'success' 		=> 'Аксессуар успешно выдан.',

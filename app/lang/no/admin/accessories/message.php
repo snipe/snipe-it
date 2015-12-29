@@ -2,17 +2,17 @@
 
 return array(
 
-    'does_not_exist' => 'Kategori eksisterer ikke.',
+    'does_not_exist' => 'Accessory does not exist.',
     'assoc_users'	 => 'Dette tilbehøret har for øyeblikket :count enheter utsjekket til brukere. Sjekk inn tilbehøret og prøv igjen. ',
 
     'create' => array(
-        'error'   => 'Kategori ble ikke opprettet. Prøv igjen.',
-        'success' => 'Vellykket opprettelse av kategori.'
+        'error'   => 'Accessory was not created, please try again.',
+        'success' => 'Accessory created successfully.'
     ),
 
     'update' => array(
-        'error'   => 'Kategori ble ikke opprettet. Prøv igjen',
-        'success' => 'Vellykket opprettelse av kategori.'
+        'error'   => 'Accessory was not updated, please try again',
+        'success' => 'Accessory updated successfully.'
     ),
 
     'delete' => array(
@@ -20,7 +20,7 @@ return array(
         'error'   => 'Det oppstod et problem under sletting av kategori. Prøv igjen.',
         'success' => 'Vellykket sletting av kategori.'
     ),
-    
+
      'checkout' => array(
         'error'   		=> 'Tilbehør ble ikke sjekket ut. Prøv igjen',
         'success' 		=> 'Vellykket utsjekking av tilbehør.',

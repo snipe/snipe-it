@@ -29,15 +29,15 @@ class AddEulaFields extends Migration {
 		});
 
 
-        Schema::create('requested_assets', function ($table) {
-            $table->increments('id');
-            $table->integer('asset_id')->default(NULL);
-            $table->integer('user_id')->default(NULL);
-            $table->dateTime('accepted_at')->nullable()->default(NULL);
-            $table->dateTime('denied_at')->nullable()->default(NULL);
-            $table->string('notes')->default(NULL);
-            $table->timestamps();
-        });
+    Schema::create('requested_assets', function ($table) {
+        $table->increments('id');
+        $table->integer('asset_id')->default(NULL);
+        $table->integer('user_id')->default(NULL);
+        $table->dateTime('accepted_at')->nullable()->default(NULL);
+        $table->dateTime('denied_at')->nullable()->default(NULL);
+        $table->string('notes')->default(NULL);
+        $table->timestamps();
+    });
 	}
 
 	/**

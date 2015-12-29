@@ -18,41 +18,68 @@
 </div>
 
 
+<div class="row">
 
-<div class="row form-wrapper">
-<div class="table-responsive">
-<table class="table table-hover">
-    <thead>
-        <tr role="row">
-            <th class="col-md-3">@lang('admin/groups/table.name')</th>
-            <th class="col-md-2"><span class="line"></span>@lang('admin/groups/table.users')</th>
-            <th class="col-md-2"><span class="line"></span>@lang('general.created_at')</th>
-            <th class="col-md-1 actions"><span class="line"></span>@lang('table.actions')</th>
-        </tr>
-    </thead>
-    <tbody>
-        @if ($groups->count() >= 1)
-        @foreach ($groups as $group)
-        <tr>
-            <td>{{ $group->name }}</td>
-            <td>{{ $group->users()->count() }}</td>
-            <td>{{ $group->created_at->diffForHumans() }}</td>
-            <td>
-                <a href="{{ route('update/group', $group->id) }}" class="btn btn-warning btn-sm {{ (Config::get('app.lock_passwords')) ? ' disabled': '' }}"><i class="fa fa-pencil icon-white"></i></a>
-                <a data-html="false" class="btn delete-asset btn-danger btn-sm {{ (Config::get('app.lock_passwords')) ? ' disabled': '' }}" data-toggle="modal" href="{{ route('delete/group', $group->id) }}" data-content="@lang('admin/groups/message.delete.confirm')"
-data-title="@lang('general.delete')"
-{{ htmlspecialchars($group->name) }}?" onClick="return false;"><i class="fa fa-trash icon-white"></i></a>
-            </td>
-        </tr>
-        @endforeach
-        @else
-        <tr>
-            <td colspan="5">@lang('general.no_results')</td>
-        </tr>
-        @endif
-    </tbody>
-</table>
+       <table
+        name="groups"
+        id="table"
+        data-toggle="table"
+        data-url="{{ route('api.groups.list') }}"
+        data-cookie="true"
+        data-click-to-select="true"
+        data-cookie-id-table="userGroupDisplay-{{ Config::get('version.hash_version') }}">
+           <thead>
+               <tr>
+                   <th data-switchable="true" data-sortable="false" data-field="id" data-visible="false">@lang('general.id')</th>
+                   <th data-switchable="true" data-sortable="true" data-field="name" data-visible="true">@lang('admin/groups/table.name')</th>
+                   <th data-switchable="true" data-sortable="false" data-field="users" data-visible="true">@lang('admin/groups/table.users')</th>
+                   <th data-switchable="true" data-sortable="true" data-field="created_at" data-visible="true">@lang('general.created_at')</th>
+                   <th data-switchable="false" data-searchable="false" data-sortable="false" data-field="actions" >{{ Lang::get('table.actions') }}</th>
+               </tr>
+           </thead>
+       </table>
+
 </div>
 </div>
+@section('moar_scripts')
+<script src="{{ asset('assets/js/bootstrap-table.js') }}"></script>
+<script src="{{ asset('assets/js/extensions/cookie/bootstrap-table-cookie.js') }}"></script>
+<script src="{{ asset('assets/js/extensions/mobile/bootstrap-table-mobile.js') }}"></script>
+<script src="{{ asset('assets/js/extensions/export/bootstrap-table-export.js') }}"></script>
+<script src="{{ asset('assets/js/extensions/export/tableExport.js') }}"></script>
+<script src="{{ asset('assets/js/extensions/export/jquery.base64.js') }}"></script>
+<script type="text/javascript">
+    $('#table').bootstrapTable({
+        classes: 'table table-responsive table-no-bordered',
+        undefinedText: '',
+        iconsPrefix: 'fa',
+        showRefresh: true,
+        search: true,
+        pageSize: {{{ Setting::getSettings()->per_page }}},
+        pagination: true,
+        sidePagination: 'server',
+        sortable: true,
+        cookie: true,
+        cookieExpire: '2y',
+        mobileResponsive: true,
+        showExport: true,
+        showColumns: true,
+        exportDataType: 'all',
+        exportTypes: ['csv', 'txt','json', 'xml'],
+        maintainSelected: true,
+        paginationFirstText: "@lang('general.first')",
+        paginationLastText: "@lang('general.last')",
+        paginationPreText: "@lang('general.previous')",
+        paginationNextText: "@lang('general.next')",
+        pageList: ['10','25','50','100','150','200'],
+        icons: {
+            paginationSwitchDown: 'fa-caret-square-o-down',
+            paginationSwitchUp: 'fa-caret-square-o-up',
+            columns: 'fa-columns',
+            refresh: 'fa-refresh'
+        },
 
+    });
+</script>
+@stop
 @stop

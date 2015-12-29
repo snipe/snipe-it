@@ -1,5 +1,7 @@
 <?php
 
+//use CustomField;
+
 class Model extends Elegant
 {
     use SoftDeletingTrait;
@@ -8,7 +10,7 @@ class Model extends Elegant
 
     // Declare the rules for the form validation
     protected $rules = array(
-        'name'   		=> 'required|alpha_space|min:2|max:255|unique:models,deleted_at,NULL',
+        'name'   		=> 'required|alpha_space|min:2|max:255|unique:models,name,{id},deleted_at',
         'modelno'   		=> 'alpha_space|min:1|max:255',
         'category_id'   	=> 'required|integer',
         'manufacturer_id'   => 'required|integer',
@@ -39,6 +41,11 @@ class Model extends Elegant
     public function manufacturer()
     {
         return $this->belongsTo('Manufacturer','manufacturer_id');
+    }
+
+    public function fieldset()
+    {
+        return $this->belongsTo('CustomFieldset','fieldset_id');
     }
 
     /**

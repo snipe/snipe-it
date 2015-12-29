@@ -32,6 +32,7 @@
 
         <thead>
             <tr role="row">
+            <th class="col-sm-1">@lang('admin/companies/table.title')</th>
             <th class="col-sm-1">@lang('admin/hardware/table.asset_tag')</th>
             <th class="col-sm-1">@lang('admin/hardware/form.manufacturer')</th>
             <th class="col-sm-1">@lang('admin/hardware/form.model')</th>
@@ -53,6 +54,7 @@
 
         @foreach ($assets as $asset)
         <tr>
+            <td>{{{ is_null($asset->company) ? '' : $asset->company->name }}}</td>
             <td>{{{ $asset->asset_tag }}}</td>
             <td>
             @if ($asset->model->manufacturer)
@@ -102,10 +104,10 @@
             @endif
             </td>
             <td>
-            @if (($asset->assigned_to > 0) && ($asset->assigneduser->location_id > 0))
-                {{{ $asset->assigneduser->userLoc->name }}}
+            @if (($asset->assigneduser) && ($asset->assigneduser->userLoc))
+              {{{ $asset->assigneduser->userLoc->name }}}
             @elseif ($asset->defaultLoc)
-                {{{ $asset->defaultLoc->name }}}
+              {{{ $asset->defaultLoc->name }}}
             @endif
             </td>
         </tr>

@@ -22,9 +22,6 @@ class GroupsController extends AdminController
      */
     public function getIndex()
     {
-        // Grab all the groups
-        $groups = Sentry::getGroupProvider()->createModel()->paginate();
-
         // Show the page
         return View::make('backend/groups/index', compact('groups'));
     }
@@ -213,6 +210,80 @@ class GroupsController extends AdminController
         } else {
             return Redirect::route('groups')->with('error',  Lang::get('general.feature_disabled'));
         }
+    }
+
+
+
+    public function getDatatable($status = null)
+    {
+
+        if (Input::has('offset')) {
+            $offset = e(Input::get('offset'));
+        } else {
+            $offset = 0;
+        }
+
+        if (Input::has('limit')) {
+            $limit = e(Input::get('limit'));
+        } else {
+            $limit = 50;
+        }
+
+        if (Input::get('sort')=='name') {
+            $sort = 'first_name';
+        } else {
+            $sort = e(Input::get('sort'));
+        }
+
+        // Grab all the groups
+        $groups = Sentry::getGroupProvider()->createModel();
+        //$users = Company::scopeCompanyables($users);
+
+         if (Input::has('search')) {
+             $groups = $users->TextSearch(Input::get('search'));
+         }
+
+         $order = Input::get('order') === 'asc' ? 'asc' : 'desc';
+
+        $allowed_columns =
+         [
+           'name','created_at'
+         ];
+
+        $sort = in_array($sort, $allowed_columns) ? $sort : 'name';
+        $groups = $groups->orderBy($sort, $order);
+
+        $groupsCount = $groups->count();
+        $groups = $groups->skip($offset)->take($limit)->get();
+        $rows = array();
+
+        foreach ($groups as $group)
+        {
+            $group_names = '';
+            $inout = '';
+            $actions = '<nobr>';
+
+            $actions .= '<a href="' . route('update/group', $group->id) . '" class="btn btn-warning btn-sm"><i class="fa fa-pencil icon-white"></i></a> ';
+
+            if (!Config::get('app.lock_passwords')) {
+                  $actions .= '<a data-html="false" class="btn delete-asset btn-danger btn-sm" data-toggle="modal" href="' . route('delete/group', $group->id) . '" data-content="'.Lang::get('admin/groups/message.delete.confirm').'" data-title="Delete ' . htmlspecialchars($group->name) . '?" onClick="return false;"><i class="fa fa-trash icon-white"></i></a> ';
+              } else {
+                  $actions .= ' <span class="btn delete-asset btn-danger btn-sm disabled"><i class="fa fa-trash icon-white"></i></span>';
+              }
+
+            $actions .= '</nobr>';
+
+            $rows[] = array(
+                'id'         => $group->id,
+                'name'        => $group->name,
+                'users'         => $group->users->count(),
+                'created_at'        => $group->created_at->format('Y-m-d H:i:s'),
+                'actions'       => ($actions) ? $actions : '',
+            );
+        }
+
+        $data = array('total'=>$groupsCount, 'rows'=>$rows);
+        return $data;
     }
 
 }

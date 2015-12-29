@@ -19,6 +19,7 @@ class AddUploadsTable extends Migration
             $table->string('filenotes')->nullable;
             $table->timestamps();
             $table->softDeletes();
+            $table->engine = 'InnoDB';
         });
     }
 

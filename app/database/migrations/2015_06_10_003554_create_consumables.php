@@ -17,12 +17,13 @@ class CreateConsumables extends Migration {
             $table->increments('id');
             $table->string('name')->nullable()->default(NULL);
             $table->integer('category_id')->nullable()->default(NULL);
-			$table->integer('location_id')->nullable()->default(NULL);
+			      $table->integer('location_id')->nullable()->default(NULL);
             $table->integer('user_id')->nullable()->default(NULL);
             $table->integer('qty')->default(0);
             $table->boolean('requestable')->default(0);
             $table->timestamps();
             $table->softDeletes();
+            $table->engine = 'InnoDB';
         });
 
         Schema::table('asset_logs', function ($table) {

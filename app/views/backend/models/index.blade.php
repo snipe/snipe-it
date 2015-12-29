@@ -29,18 +29,19 @@
   data-url="{{route('api.models.list')}}"
   data-cookie="true"
   data-click-to-select="true"
-  data-cookie-id-table="modelsTable-v{{ Config::get('version.app_version') }}">
+  data-cookie-id-table="modelsTable-{{ Config::get('version.hash_version') }}">
         <thead>
             <tr>
-                <th data-sortable="true" data-field="id" data-visible="false">{{Lang::get('general.id')}}</th>
-                <th data-sortable="false" data-field="manufacturer">{{Lang::get('general.manufacturer')}}</th>
-                <th data-sortable="true" data-field="name">{{Lang::get('admin/models/table.title')}}</th>
-                <th data-sortable="true" data-field="modelnumber">{{Lang::get('admin/models/table.modelnumber')}}</th>
-                <th data-sortable="false" data-field="numassets">{{Lang::get('admin/models/table.numassets')}}</th>
-                <th data-sortable="false" data-field="depreciation">{{Lang::get('general.depreciation')}}</th>
-                <th data-sortable="false" data-field="category">{{Lang::get('general.category')}}</th>
-                <th data-sortable="true" data-field="eol">{{Lang::get('general.eol')}}</th>
-                <th data-switchable="false" data-searchable="false" data-sortable="false" data-field="actions">{{ Lang::get('table.actions') }}</th>
+                <th data-sortable="true" data-field="id" data-visible="false">@lang('general.id')</th>
+                <th data-sortable="true" data-field="image"  data-visible="false">@lang('admin/hardware/table.image')</th>
+                <th data-sortable="false" data-field="manufacturer">@lang('general.manufacturer')</th>
+                <th data-sortable="true" data-field="name">@lang('admin/models/table.title')</th>
+                <th data-sortable="true" data-field="modelnumber">@lang('admin/models/table.modelnumber')</th>
+                <th data-sortable="false" data-field="numassets">@lang('admin/models/table.numassets')</th>
+                <th data-sortable="false" data-field="depreciation">@lang('general.depreciation')</th>
+                <th data-sortable="false" data-field="category">@lang('general.category')</th>
+                <th data-sortable="true" data-field="eol">@lang('general.eol')</th>
+                <th data-switchable="false" data-searchable="false" data-sortable="false" data-field="actions">@lang('table.actions')</th>
             </tr>
         </thead>
     </table>

@@ -1,14 +1,14 @@
 <?php
 
 return array(
-    'about_consumables_title' 			=> 'About Consumables',
+    'about_consumables_title' 			=> 'Materiały eksploatacyjne',
     'about_consumables_text'  			=> 'Consumables are anything purchased that will be used up over time. For example, printer ink or copier paper.',
-    'consumable_name'                  => 'Consumable Name',
-    'cost'				=> 'Purchase Cost',
-    'create'                             => 'Create Consumable',
-    'date'					=> 'Purchase Date',
-    'order'					=> 'Order Number',
+    'consumable_name'                  => 'Nazwa materiału eksploatacyjnego',
+    'cost'				=> 'Koszt zakupu',
+    'create'                             => 'Utwórz materiał eksploatacyjny',
+    'date'					=> 'Data zakupu',
+    'order'					=> 'Numer zamówienia',
     'remaining' 			             => 'Pozostało',
     'total' 			                 => 'Łącznie',
-    'update'                            => 'Update Consumable',
+    'update'                            => 'Aktualizuj materiał eksploatacyjny',
 );

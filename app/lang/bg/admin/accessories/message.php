@@ -2,17 +2,17 @@
 
 return array(
 
-    'does_not_exist' => 'Няма такава категория.',
+    'does_not_exist' => 'Accessory does not exist.',
     'assoc_users'	 => 'От този аксесоар са предадени :count броя на потребителите. Моля впишете обратно нови или върнати и опитайте отново.',
 
     'create' => array(
-        'error'   => 'Категорията не беше създадена. Моля опитайте отново.',
-        'success' => 'Категорията е създадена.'
+        'error'   => 'Accessory was not created, please try again.',
+        'success' => 'Accessory created successfully.'
     ),
 
     'update' => array(
-        'error'   => 'Категорията не беше обновена. Моля опитайте отново.',
-        'success' => 'Категорията е обновена.'
+        'error'   => 'Accessory was not updated, please try again',
+        'success' => 'Accessory updated successfully.'
     ),
 
     'delete' => array(
@@ -20,7 +20,7 @@ return array(
         'error'   => 'Проблем при изтриване на категорията. Моля опитайте отново.',
         'success' => 'Категорията бе изтрита успешно.'
     ),
-    
+
      'checkout' => array(
         'error'   		=> 'Аксесоарът не беше изписан. Моля опитайте отново.',
         'success' 		=> 'Аксесоарът изписан успешно.',

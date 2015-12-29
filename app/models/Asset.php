@@ -3,24 +3,31 @@
 class Asset extends Depreciable
 {
 	use SoftDeletingTrait;
-    protected $dates = ['deleted_at'];
+	use CompanyableTrait;
 
-        protected $table = 'assets';
-        protected $errors;
-        protected $rules = [
-            'name'            => 'alpha_space|min:2|max:255',
-            'model_id'        => 'required',
-            'status_id'       => 'required',
-            'warranty_months' => 'integer|min:0|max:240',
-            'note'            => 'alpha_space',
-            'notes'           => 'alpha_space',
-            'pysical'         => 'integer',
-            'checkout_date'   => 'date|max:10|min:10',
-            'checkin_date'    => 'date|max:10|min:10',
-            'supplier_id'     => 'integer',
-            'asset_tag'       => 'required|alpha_space|min:3|max:255|unique:assets,asset_tag,{id}',
-            'status'          => 'integer'
-        ];
+    protected $dates = ['deleted_at'];
+    protected $table = 'assets';
+    protected $errors;
+    protected $rules = [
+      'name'            => 'alpha_space|min:2|max:255',
+      'model_id'        => 'required',
+      'status_id'       => 'required',
+      'company_id'      => 'integer',
+      'warranty_months' => 'integer|min:0|max:240',
+      'note'            => 'alpha_space',
+      'notes'           => 'alpha_space',
+      'physical'         => 'integer',
+      'checkout_date'   => 'date|max:10|min:10',
+      'checkin_date'    => 'date|max:10|min:10',
+      'supplier_id'     => 'integer',
+      'asset_tag'       => 'required|alpha_space|min:2|max:255|unique:assets,asset_tag,{id},id,deleted_at,NULL',
+      'status'          => 'integer',
+    ];
+
+    public function company()
+    {
+        return $this->belongsTo('Company', 'company_id');
+    }
 
 
     /**
@@ -252,8 +259,7 @@ return false;
   public static function assetcount()
   {
 
-      return DB::table( 'assets' )
-               ->where( 'physical', '=', '1' )
+      return Asset::where( 'physical', '=', '1' )
                ->whereNull( 'deleted_at', 'and' )
                ->count();
   }
@@ -378,15 +384,7 @@ return false;
 
       if (( $this->purchase_date ) && ( $this->model )) {
           $date = date_create( $this->purchase_date );
-
-          // Use the asset-level EOL if one is given
-          if (($this->warranty_months) && ($this->warranty_months!='0')) {
-              date_add( $date, date_interval_create_from_date_string( $this->warranty_months . ' months' ));
-          // If a warranty month period wasn't specified on the asset level, use the model
-          } else {
-              date_add( $date, date_interval_create_from_date_string( $this->model->eol . ' months' ));
-          }
-
+          date_add( $date, date_interval_create_from_date_string( $this->model->eol . ' months' ));
           return date_format( $date, 'Y-m-d' );
       }
 
@@ -643,7 +641,7 @@ return false;
 	*/
 	public function scopeTextSearch($query, $search)
 	{
-		$search = explode('+', $search);
+		$search = explode(' ', $search);
 
 		return $query->where(function($query) use ($search)
 		{
@@ -657,11 +655,15 @@ return false;
 					});
 				})->orWhere(function($query) use ($search) {
 					$query->whereHas('assetstatus', function($query) use ($search) {
-						$query->where('name','LIKE','%'.$search.'%');
+						$query->where('status_labels.name','LIKE','%'.$search.'%');
+					});
+        })->orWhere(function($query) use ($search) {
+					$query->whereHas('company', function($query) use ($search) {
+						$query->where('companies.name','LIKE','%'.$search.'%');
 					});
 				})->orWhere(function($query) use ($search) {
 					$query->whereHas('defaultLoc', function($query) use ($search) {
-						$query->where('name','LIKE','%'.$search.'%');
+						$query->where('locations.name','LIKE','%'.$search.'%');
 					});
 				})->orWhere(function($query) use ($search) {
 					$query->whereHas('assigneduser', function($query) use ($search) {
@@ -680,11 +682,14 @@ return false;
 						$query->where('action_type','=','checkout')
 						->where('created_at','LIKE','%'.$search.'%');
 					});
-				})->orWhere('name','LIKE','%'.$search.'%')
+				})->orWhere('assets.name','LIKE','%'.$search.'%')
 				->orWhere('asset_tag','LIKE','%'.$search.'%')
 				->orWhere('serial','LIKE','%'.$search.'%')
 				->orWhere('order_number','LIKE','%'.$search.'%')
 				->orWhere('notes','LIKE','%'.$search.'');
+			}
+			foreach(CustomField::all() AS $field) {
+				$query->orWhere($field->db_column_name(),'LIKE',"%$search%");
 			}
 		});
 	}
@@ -700,6 +705,19 @@ return false;
 	public function scopeOrderModels($query, $order)
 	{
 		return $query->join('models', 'assets.model_id', '=', 'models.id')->orderBy('models.name', $order);
+	}
+
+  /**
+	* Query builder scope to order on company
+	*
+	* @param  Illuminate\Database\Query\Builder  $query  Query builder instance
+	* @param  text                              $order    	 Order
+	*
+	* @return Illuminate\Database\Query\Builder          Modified query builder
+	*/
+	public function scopeOrderCompany($query, $order)
+	{
+		return $query->leftJoin('companies', 'assets.company_id', '=', 'companies.id')->orderBy('companies.name', $order);
 	}
 
   /**

@@ -28,6 +28,7 @@ class AddSuppliers extends Migration
             $table->timestamps();
             $table->integer('user_id');
             $table->softDeletes();
+            $table->engine = 'InnoDB';
         });
     }
 

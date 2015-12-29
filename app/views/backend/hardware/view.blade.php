@@ -57,16 +57,17 @@
 			</div>
 		@endif
 
+        @if ($asset->company)
+            <div class="col-md-12" style="padding-bottom: 5px;">
+                <strong>@lang('general.company'): </strong>
+                <em>{{{ $asset->company->name }}}</em>
+            </div>
+        @endif
+
         @if ($asset->serial)
             <div class="col-md-12" style="padding-bottom: 5px;"><strong>@lang('admin/hardware/form.serial'): </strong>
             <em>{{{ $asset->serial }}}</em></div>
 
-        @endif
-
-        @if ($asset->mac_address!='')
-            <div class="col-md-12" style="padding-bottom: 5px;"><strong>@lang('admin/hardware/form.mac_address'):</strong>
-            {{{ $asset->mac_address }}}
-            </div>
         @endif
 
         @if ($asset->model->manufacturer)
@@ -163,6 +164,17 @@
             </div>
         @endif
 
+        @if ($asset->model->fieldset)
+          <hr>
+          <div class="col-md-12" style="padding-bottom: 5px;"><strong>FIELDSET:</strong> 
+            {{{ $asset->model->fieldset->name }}}</div>
+          @foreach($asset->model->fieldset->fields as $field)
+            <div class="col-md-12" style="padding-bottom: 5px;"><strong>{{{ $field->name }}}:</strong>
+            {{{ $asset->{$field->db_column_name()} }}}
+            </div>
+          @endforeach
+          <hr>
+        @endif
         @if ($asset->expected_checkin!='')
             <div class="col-md-12" style="padding-bottom: 5px;">
                   <strong>@lang('admin/hardware/form.expected_checkin')</strong>

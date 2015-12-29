@@ -3,7 +3,7 @@
 return array(
 
     'account_already_exists' => 'En konto med denne e-mail eksisterer allerede.',
-    'account_not_found'      => 'The username or password is incorrect.',
+    'account_not_found'      => 'Brugernavn eller kodeord er forkert.',
     'account_not_activated'  => 'Denne brugerkonto er ikke aktiveret.',
     'account_suspended'      => 'Denne brugerkonto er suspenderet.',
     'account_banned'         => 'Denne brugerkonto er blokeret.',
