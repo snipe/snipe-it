@@ -37,6 +37,13 @@ class AuthController extends BaseController
         $baseDn      = Setting::getSettings()->ldap_basedn;
         $filterQuery = Setting::getSettings()->ldap_auth_filter_query . $username;
         $ldapversion = Setting::getSettings()->ldap_version;
+        $ldap_server_cert_ignore = Setting::getSettings()->ldap_server_cert_ignore;
+
+        // If we are ignoring the SSL cert we need to setup the environment variable
+        // before we create the connection
+        if($ldap_server_cert_ignore) {
+            putenv('LDAPTLS_REQCERT=never');
+        }
 
 	    // Connecting to LDAP
         $connection = ldap_connect($ldaphost) or die("Could not connect to {$ldaphost}");
