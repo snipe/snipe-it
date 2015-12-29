@@ -79,12 +79,9 @@
                    </th>
                    <th data-sortable="false" data-field="groups">{{ Lang::get('general.groups') }}</th>
                    <th data-sortable="true" data-field="notes">{{ Lang::get('general.notes') }}</th>
-                   @if (Input::get('status')!='deleted')
-                    <th data-switchable="false" data-searchable="false" data-sortable="false" data-field="actions" >{{ Lang::get('table.actions') }}</th>
-                   @endif
+                   <th data-switchable="false" data-searchable="false" data-sortable="false" data-field="actions" >{{ Lang::get('table.actions') }}</th>
                </tr>
            </thead>
-           @if (Input::get('status')!='deleted')
            <tfoot>
                <tr>
                    <td colspan="12">
@@ -95,7 +92,6 @@
                    </td>
                </tr>
            </tfoot>
-           @endif
        </table>
 
     {{ Form::close() }}
