@@ -989,7 +989,7 @@ class UsersController extends AdminController {
     /**
      *  Upload the file to the server
      *
-     * @param  int  $assetId
+     * @param  int  $userId
      * @return View
      * */
     public function postUpload($userId = null) {
@@ -1054,7 +1054,8 @@ class UsersController extends AdminController {
     /**
      *  Delete the associated file
      *
-     * @param  int  $assetId
+     * @param  int  $userId
+     * @param  int  $fileId
      * @return View
      * */
     public function getDeleteFile($userId = null, $fileId = null) {
@@ -1089,7 +1090,8 @@ class UsersController extends AdminController {
     /**
      *  Display/download the uploaded file
      *
-     * @param  int  $assetId
+     * @param  int  $userId
+     * @param  int  $fileId
      * @return View
      * */
     public function displayFile($userId = null, $fileId = null) {

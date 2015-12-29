@@ -37,8 +37,6 @@ class SettingsController extends AdminController
 
     /**
      * Setting update.
-     *
-     * @param  int  $settingId
      * @return View
      */
     public function getEdit()
@@ -63,7 +61,6 @@ class SettingsController extends AdminController
     /**
      * Setting update form processing page.
      *
-     * @param  int  $settingId
      * @return Redirect
      */
     public function postEdit()
@@ -243,11 +240,11 @@ class SettingsController extends AdminController
 
 
     /**
-    * Download the dump file
-    *
-    * @param  int  $assetId
-    * @return View
-    **/
+     * Download the dump file
+     *
+     * @param string|null $filename
+     * @return View
+     */
     public function downloadFile($filename = null)
     {
         if (!Config::get('app.lock_passwords')) {
@@ -268,11 +265,11 @@ class SettingsController extends AdminController
     }
 
     /**
-    * Download the dump file
-    *
-    * @param  int  $assetId
-    * @return View
-    **/
+     * Download the dump file
+     *
+     * @param string|null $filename
+     * @return View
+     */
     public function deleteFile($filename = null)
     {
 
