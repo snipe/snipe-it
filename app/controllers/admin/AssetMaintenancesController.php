@@ -107,7 +107,7 @@
                  'cost'          => $maintenance_cost,
                  'asset_maintenance_type'          => e($maintenance->asset_maintenance_type),
                  'start_date'         => $maintenance->start_date,
-                 'time'          => $maintenance->asset_maintenance_time,
+                 'asset_maintenance_time'          => $maintenance->asset_maintenance_time,
                  'completion_date'     => $maintenance->completion_date,
                  'actions'       => $actions,
                  'companyName'   => is_null($company) ? '' : $company->name
@@ -231,6 +231,16 @@
                     || ( $assetMaintenance->completion_date == "0000-00-00" )
                 ) {
                     $assetMaintenance->completion_date = null;
+                }
+
+                if (( $assetMaintenance->completion_date !== "" )
+                    && ( $assetMaintenance->completion_date !== "0000-00-00" )
+                    && ( $assetMaintenance->start_date !== "" )
+                    && ( $assetMaintenance->start_date !== "0000-00-00" )
+                ) {
+                    $startDate                                = Carbon::parse( $assetMaintenance->start_date );
+                    $completionDate                           = Carbon::parse( $assetMaintenance->completion_date );
+                    $assetMaintenance->asset_maintenance_time = $completionDate->diffInDays( $startDate );
                 }
 
                 // Was the asset maintenance created?
