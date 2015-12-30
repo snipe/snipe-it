@@ -94,7 +94,7 @@ They're expected to be named exactly: `/etc/ssl/private/snipeit-ssl.key` and `/e
 docker run -d -P --name="snipeit" --link snipe-mysql:mysql -v /Absolute/Path/To/Your/SSL_Cert_directory:/etc/ssl/private --env-file=my_env_file snipe-it
 ```
 
-#### Email, Management, Access
+### Email, Management, Access
 
 If you have a separate container running for email, you will also want a ```--link``` setting for email as well.
 
