@@ -677,11 +677,6 @@ return false;
 							});
 						});
 					});
-				})->orWhere(function($query) use ($search) {
-					$query->whereHas('assetlog', function($query) use ($search) {
-						$query->where('action_type','=','checkout')
-						->where('created_at','LIKE','%'.$search.'%');
-					});
 				})->orWhere('assets.name','LIKE','%'.$search.'%')
 				->orWhere('asset_tag','LIKE','%'.$search.'%')
 				->orWhere('serial','LIKE','%'.$search.'%')
