@@ -170,7 +170,13 @@ class AccessoriesController extends AdminController
 
             // Update the accessory data
             $accessory->name            		= e(Input::get('name'));
-            $accessory->location_id            	= e(Input::get('location_id'));
+
+            if (e(Input::get('location_id')) == '') {
+                $accessory->location_id = NULL;
+            } else {
+                $accessory->location_id     = e(Input::get('location_id'));
+            }
+
             $accessory->category_id            	= e(Input::get('category_id'));
             $accessory->company_id              = Company::getIdForCurrentUser(Input::get('company_id'));
             $accessory->order_number            = e(Input::get('order_number'));
