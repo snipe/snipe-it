@@ -46,21 +46,6 @@ MAIL_ENV_PASSWORD=your_email_password
 SNIPEIT_TIMEZONE=UTC
 SNIPEIT_LOCALE=en
 SERVER_URL=https://myserver.com
-
-# LDAP Parameters (or omit if not using LDAP)
-# See ldap.php for more info
-LDAP_URL=ldap://ldap.yourserver.com
-LDAP_USERNAME=admin
-LDAP_PASSWORD=adminpass
-LDAP_BASEDN=dc=example,dc=com
-LDAP_FILTER=&(cn=*)
-LDAP_RESULT_USERNAME=username
-LDAP_RESULT_LAST_NAME=sn
-LDAP_RESULT_FIRST_NAME=gn
-LDAP_RESULT_ACTIVE_FLAG=active
-LDAP_RESULT_EMP_NUM=emp-num
-LDAP_RESULT_EMAIL=email
-LDAP_AUTHENTICATION_FILTER_QUERY="uid="
 ```
 First get a MySQL container running. MySQL 5.6 or earlier are easiest.
 
