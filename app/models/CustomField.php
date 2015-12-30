@@ -71,6 +71,10 @@ class CustomField extends Elegant
   public function fieldset() {
     return $this->belongsToMany('CustomFieldset'); //?!?!?!?!?!?
   }
+  
+  public function user() {
+    return $this->belongsTo('User');
+  }
 
   //public function
 

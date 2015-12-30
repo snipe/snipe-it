@@ -2,7 +2,6 @@
 class CustomFieldset extends Elegant
 {
   protected $guarded=["id"];
-  public $timestamps=false;
 
   public $rules=[
     "name" => "required|unique:custom_fieldsets"
@@ -14,6 +13,10 @@ class CustomFieldset extends Elegant
   
   public function models() {
     return $this->hasMany('Model',"fieldset_id");
+  }
+  
+  public function user() {
+    return $this->belongsTo('User'); //WARNING - not all CustomFieldsets have a User!!
   }
   
   public function validation_rules()
