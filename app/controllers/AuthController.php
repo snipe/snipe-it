@@ -161,7 +161,7 @@ class AuthController extends BaseController
 
               LOG::debug("LDAP is enabled.");
               // Check if the user exists in the database
-              $user = User::where('username', Input::get('username'))->whereNull('deleted_at')->first();
+              $user = Sentry::findUserByLogin( Input::get('username'));
 
               // The user does not exist in the database. Try to get them from LDAP.
               // If user does not exist and authenticates sucessfully with LDAP we
@@ -174,7 +174,6 @@ class AuthController extends BaseController
                     Sentry::authenticate($credentials, Input::get('remember-me', 0));
                   } else {
                     LOG::debug("User does not exist in the local database or LDAP.");
-                    throw new Cartalyst\Sentry\Users\UserNotFoundException();
                   }
 
               // If the user exists and they were imported from LDAP already
@@ -183,41 +182,27 @@ class AuthController extends BaseController
                 LOG::debug("User exists in local database. Authenticating existing user against LDAP.");
 
                 if ($this->ldap(Input::get('username'), Input::get('password')) ) {
-                    LOG::debug("Valid LDAP login");
-                    $pass = substr(str_shuffle("0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"), 0, 20);
-                    $user = Sentry::findUserByLogin( Input::get('username') );
-                    $user->password = $pass;
+                    LOG::debug("Valid LDAP login. Updating the local data.");
+
+                    $user->password = Input::get('password');
                     $user->save();
                     $credentials = array(
                         'username' => Input::get('username'),
-                        'password' => $pass,
+                        'password' => Input::get('password'),
                     );
-                    Sentry::authenticate($credentials, Input::get('remember-me', 0));
-
-                // LDAP authentication failed. Try hitting the database.
-                } else {
-
-                    LOG::debug("Login failed for LDAP. Attempting authentication user against database.");
-                    // Try to log the user in
-                    if (!Sentry::authenticate(Input::only('username', 'password'), Input::get('remember-me', 0))) {
-                      LOG::debug("Local authentication failed.");
-                      throw new Cartalyst\Sentry\Users\UserNotFoundException();
-                    }
 
                 } // End LDAP auth
 
               } // End if(!user)
 
-              LOG::debug("LDAP attempts failed. Authenticating user against database.");
-              Sentry::authenticate(Input::only('username', 'password'), Input::get('remember-me', 0));
-
             // NO LDAP enabled - just try to login the user normally
-            } else {
+            }
 
-              LOG::debug("LDAP is not enabled. Authenticating user against database.");
-              // Try to log the user in
-              Sentry::authenticate(Input::only('username', 'password'), Input::get('remember-me', 0));
-
+            LOG::debug("Authenticating user against database.");
+            // Try to log the user in
+            if (!Sentry::authenticate(Input::only('username', 'password'), Input::get('remember-me', 0))) {
+              LOG::debug("Local authentication failed.");
+              throw new Cartalyst\Sentry\Users\UserNotFoundException();
             }
 
             // Get the page we were before
