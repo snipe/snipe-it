@@ -536,7 +536,12 @@ class UsersController extends AdminController {
                 unset($user_raw_array[$key]);
             }
 
-            if (!Config::get('app.lock_passwords')) {
+            if (!Sentry::getUser()->isSuperUser()) {
+                // Redirect to the user management page
+                return Redirect::route('users')->with('error', 'Insufficient permissions!');
+            } else if (Config::get('app.lock_passwords')) {
+                return Redirect::route('users')->with('error', 'Bulk delete is not enabled in this installation');
+            } else {
 
                 $assets = Asset::whereIn('assigned_to', $user_raw_array)->get();
                 $accessories = DB::table('accessories_users')->whereIn('assigned_to', $user_raw_array)->get();
@@ -583,8 +588,6 @@ class UsersController extends AdminController {
 
 
                 return Redirect::route('users')->with('success', 'Your selected users have been deleted and their assets have been updated.');
-            } else {
-                return Redirect::route('users')->with('error', 'Bulk delete is not enabled in this installation');
             }
 
             /** @noinspection PhpUnreachableStatementInspection Known to be unreachable but kept following discussion: https://github.com/snipe/snipe-it/pull/1423 */
@@ -890,7 +893,7 @@ class UsersController extends AdminController {
             $sort = e(Input::get('sort'));
         }
 
-        $users = User::select(array('users.id','users.employee_num','users.email','users.username','users.location_id','users.manager_id','users.first_name','users.last_name','users.created_at','users.notes','users.company_id'))
+        $users = User::select(array('users.id','users.employee_num','users.email','users.username','users.location_id','users.manager_id','users.first_name','users.last_name','users.created_at','users.notes','users.company_id','users.deleted_at'))
             ->with('assets','accessories','consumables','licenses','manager','sentryThrottle','groups','userloc','company');
         $users = Company::scopeCompanyables($users);
 
@@ -942,7 +945,7 @@ class UsersController extends AdminController {
             }
 
 
-            if (!is_null($user->deleted_at)) {
+            if (isset($user->deleted_at)) {
 
                 $actions .= '<a href="' . route('restore/user', $user->id) . '" class="btn btn-warning btn-sm"><i class="fa fa-share icon-white"></i></a> ';
             } else {
