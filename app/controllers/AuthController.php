@@ -171,9 +171,8 @@ class AuthController extends BaseController
                   if($userattr = $this->ldap(Input::get('username'), Input::get('password'),true) ){
                     LOG::debug("Creating LDAP authenticated user.");
                     $credentials = $this->createUserFromLdap($userattr);
-                    Sentry::authenticate($credentials, Input::get('remember-me', 0));
                   } else {
-                    LOG::debug("User does not exist in the local database or LDAP.");
+                    LOG::debug("User did not authenticate correctly against LDAP. No local user was created.");
                   }
 
               // If the user exists and they were imported from LDAP already
@@ -191,7 +190,9 @@ class AuthController extends BaseController
                         'password' => Input::get('password'),
                     );
 
-                } // End LDAP auth
+                } else {
+                  LOG::debug("User did not authenticate correctly against LDAP. Local user was not updated.");
+                }// End LDAP auth
 
               } // End if(!user)
 
