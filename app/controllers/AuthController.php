@@ -57,7 +57,7 @@ class AuthController extends BaseController
                 $ldapbind = ldap_bind($connection, $ldaprdn, $ldappass);
                 if ( ($results = @ldap_search($connection, $baseDn, $filterQuery)) != false ) {
                     $entry = ldap_first_entry($connection, $results);
-                    if ( ($userDn = @ldap_get_dn($connection, $entry)) !== false ) {
+                    if ( ($userDn = @ldap_get_dn($connection, $entry)) != false ) {
                         if( ($isBound = ldap_bind($connection, $userDn, $password)) == "true") {
                             return $returnUser ?
                                 array_change_key_case(ldap_get_attributes($connection, $entry),CASE_LOWER)
@@ -96,8 +96,8 @@ class AuthController extends BaseController
         $item["email"] = isset( $ldapatttibutes[$ldap_result_email][0] ) ? $ldapatttibutes[$ldap_result_email][0] : "" ;
 
         //create user
-        if(!empty($item["username"]) && !empty($item['email'])) {
-            $pass = substr(str_shuffle("0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"), 0, 10);
+        if(!empty($item["username"])) {
+            //$pass = substr(str_shuffle("0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"), 0, 10);
 
             $newuser = array(
                 'first_name' => $item["firstname"],
@@ -105,21 +105,22 @@ class AuthController extends BaseController
                 'username' => $item["username"],
                 'email' => $item["email"],
                 'employee_num' => $item["employee_number"],
-                'password' => $pass,
+                'password' => Input::get("password"), //$pass,
                 'activated' => 1,
                 'location_id' => null,
-                'permissions' => '{"user":1}',
+                'permissions' => ["user" => 1], //'{"user":1}',
                 'notes' => 'Imported from LDAP'
             );
-
-            DB::table('users')->insert($newuser);
+            Sentry::createUser($newuser);
+            /*DB::table('users')->insert($newuser);
             $updateuser = Sentry::findUserByLogin($item["username"]);
+            $updateuser->setHasher(new Cartalyst\Sentry\Hashing\BcryptHasher);
 
             // Update the user details
-            $updateuser->password = $pass;
+            $updateuser->password = Input::get('password');
 
             // Update the user
-            $updateuser->save();
+            $updateuser->save(); */
         } else {
             throw new Cartalyst\Sentry\Users\UserNotFoundException();
         }
@@ -127,7 +128,7 @@ class AuthController extends BaseController
         //$item["note"] = "<strong>created</strong>";
         $credentials = array(
             'username' => $item["username"],
-            'password' => $pass,
+            'password' => Input::get("password")//$pass,
         );
         return $credentials;
     }
@@ -157,19 +158,21 @@ class AuthController extends BaseController
         try {
 
             // Should we even check for LDAP users?
-            if (Setting::getSettings()->ldap_enabled) {
+            if (Setting::getSettings()->ldap_enabled=='1') {
 
               LOG::debug("LDAP is enabled.");
               // Check if the user exists in the database
-              $user = Sentry::findUserByLogin( Input::get('username'));
+              $user = User::where('username','=',Input::get('username'))->whereNull('deleted_at')->first();
+              LOG::debug("Sentry lookup complete");
+
 
               // The user does not exist in the database. Try to get them from LDAP.
               // If user does not exist and authenticates sucessfully with LDAP we
               // will create it on the fly and sign in with default permissions
               if(!$user){
-
+                  LOG::debug("Local user ".Input::get('username')." does not exist");
                   if($userattr = $this->ldap(Input::get('username'), Input::get('password'),true) ){
-                    LOG::debug("Creating LDAP authenticated user.");
+                    LOG::debug("Creating local user from authenticated LDAP user.");
                     $credentials = $this->createUserFromLdap($userattr);
                   } else {
                     LOG::debug("User did not authenticate correctly against LDAP. No local user was created.");
@@ -178,17 +181,13 @@ class AuthController extends BaseController
               // If the user exists and they were imported from LDAP already
               } else {
 
-                LOG::debug("User exists in local database. Authenticating existing user against LDAP.");
+                LOG::debug("Local user ".Input::get('username')." exists in database. Authenticating existing user against LDAP.");
 
                 if ($this->ldap(Input::get('username'), Input::get('password')) ) {
                     LOG::debug("Valid LDAP login. Updating the local data.");
-
-                    $user->password = Input::get('password');
-                    $user->save();
-                    $credentials = array(
-                        'username' => Input::get('username'),
-                        'password' => Input::get('password'),
-                    );
+                    $sentryuser=Sentry::findUserById($user->id); //need the Sentry object, not the Eloquent object, to access critical password hashing functions
+                    $sentryuser->password = Input::get('password');
+                    $sentryuser->save();
 
                 } else {
                   LOG::debug("User did not authenticate correctly against LDAP. Local user was not updated.");
