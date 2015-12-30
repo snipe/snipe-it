@@ -311,7 +311,7 @@ Form::macro('barcode_types', function ($name = "barcode_type", $selected = null,
 Form::macro('currencies', function ($name = "currency", $selected = null, $class = null) {
 
       $currencies =  array(
-        'USD' => array('name'=>'', 'symbol'=>'$','symbol_html'=>'$'),
+        'USD' => array('name'=>'US/Canadian/etc Dollar', 'symbol'=>'$','symbol_html'=>'$'),
         'GBP' => array('name'=>'GBP - British Pounds', 'symbol'=>'£','symbol_html'=>'&pound;'),
         'EUR' => array('name'=>'EUR - Euros', 'symbol'=>'€','symbol_html'=>'&euro;'),
         'BGN' => array('name'=>'BGN - Bulgarian lev', 'symbol'=>'лв.','symbol_html'=>'лв.'),
@@ -325,6 +325,7 @@ Form::macro('currencies', function ($name = "currency", $selected = null, $class
         'NOK' => array('name'=>'NOK - Norwegian Kroner', 'symbol'=>'kr','symbol_html'=>'kr'),
         'PHP' => array('name'=>'PHP - Philippine Pesos', 'symbol'=>'Php','symbol_html'=>'Php'),
         'PLN' => array('name'=>'PLN - Polish zloty', 'symbol'=>'zł','symbol_html'=>'PLN'),
+        'INR' => array('name'=>'INR - Indian Rupee', 'symbol'=>'Rs','symbol_html'=>'&#8360;'),
         'RUB' => array('name'=>'RUB - Russian Rubles', 'symbol'=>'₽','symbol_html'=>'&#8381;'),
         'SEK' => array('name'=>'SEK - Swedish Kronor', 'symbol'=>'kr','symbol_html'=>'kr'),
         'CHF' => array('name'=>'CHF - Swiss Francs', 'symbol'=>'CHF','symbol_html'=>'CHF'),
