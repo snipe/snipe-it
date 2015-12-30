@@ -14,6 +14,113 @@ If a user locks themselves out by attempting and failing to login too many times
 
 ![Unsuspend](/img/unsuspend-user.png)
 
+-----
+
+##Permissions
+
+
+###Super User
+
+Super User permissions:
+| Ability  | Allowed |
+| ------------- | ------------- |
+|Create Companies|Yes|
+|Delete Companies|Yes|
+|Create Asset Models|Yes|
+|Delete Asset Models|Yes|
+|Create Asset Categories|Yes|
+|Delete Asset Categories|Yes|
+|Create Manufacturer|Yes|
+|Delete Manufacturer|Yes|
+|Create Suppliers|Yes|
+|Delete Suppliers|Yes|
+|Create Status Labels|Yes|
+|Delete Status Labels|Yes|
+|Create Asset Depreciation|Yes|
+|Delete Asset Depreciation|Yes|
+|Create Locations|Yes|
+|Delete Locations|Yes|
+|Create Groups|Yes|
+|Delete Groups|Yes|
+|Take Backup|Yes|
+|Delete Backup|Yes|
+|Edit System Settings|Yes|
+|Create Users|Yes|
+|Remove Users|Yes|
+|Create Assets|Yes|
+|Edit Super Users|Yes|
+|Unlock Users|Yes|
+|Edit Users Permissions|Yes|
+|View Items Assigned to User|Yes|
+|Requset Assets|No|
+
+###Admin User Permissions:
+
+| Ability  | Allowed |
+| ------------- | ------------- |
+|Create Companies|Yes|
+|Delete Companies|Yes|
+|Create Asset Models|Yes|
+|Delete Asset Models|Yes|
+|Create Asset Categories|Yes|
+|Delete Asset Categories|Yes|
+|Create Manufacturer|Yes|
+|Delete Manufacturer|Yes|
+|Create Suppliers|Yes|
+|Delete Suppliers|Yes|
+|Create Status Labels|Yes|
+|Delete Status Labels|Yes|
+|Create Asset Depreciation|Yes|
+|Delete Asset Depreciation|Yes|
+|Create Locations|Yes|
+|Delete Locations|Yes|
+|Create Groups|Yes|
+|Delete Groups|Yes|
+|Take Backup|No|
+|Delete Backup|No|
+|Edit System Settings|Yes|
+|Create Users|Yes|
+|Remove Users|No|
+|Create Assets|Yes|
+|Edit Super Users|Yes|
+|Unlock Users|Yes|
+|Edit Users Permissions|Yes|
+|View Items Assigned to User|Yes|
+|Requset Assets|No|
+
+###User Permissions
+
+| Ability  | Allowed |
+| ------------- | ------------- |
+|Create Companies|No|
+|Delete Companies|No|
+|Create Asset Models|No|
+|Delete Asset Models|No|
+|Create Asset Categories|No|
+|Delete Asset Categories|No|
+|Create Manufacturer|No|
+|Delete Manufacturer|No|
+|Create Suppliers|No|
+|Delete Suppliers|No|
+|Create Status Labels|No|
+|Delete Status Labels|No|
+|Create Asset Depreciation|No|
+|Delete Asset Depreciation|No|
+|Create Locations|No|
+|Delete Locations|No|
+|Create Groups|No|
+|Delete Groups|No|
+|Take Backup|No|
+|Delete Backup|No|
+|Edit System Settings|No|
+|Create Users|No|
+|Remove Users|No|
+|Create Assets|No|
+|Edit Super Users|No|
+|Unlock Users|No|
+|Edit Users Permissions|No|
+|View Items Assigned to User|Yes|
+|Requset Assets|Yes|
 
 -----
 
