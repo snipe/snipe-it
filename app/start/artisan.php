@@ -17,3 +17,4 @@
     Artisan::add( new SystemBackup );
     Artisan::add( new AssetImportCommand );
     Artisan::add( new LicenseImportCommand );
+    Artisan::add( new ObjectImportCommand );
