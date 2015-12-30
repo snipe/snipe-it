@@ -2,17 +2,17 @@
 
 return array(
 
-    'does_not_exist' => 'Accessory does not exist.',
+    'does_not_exist' => 'Аксесоарът на съществува.',
     'assoc_users'	 => 'От този аксесоар са предадени :count броя на потребителите. Моля впишете обратно нови или върнати и опитайте отново.',
 
     'create' => array(
-        'error'   => 'Accessory was not created, please try again.',
-        'success' => 'Accessory created successfully.'
+        'error'   => 'Аксесоарът не беше създаден. Моля опитайте отново.',
+        'success' => 'Аксесоарът създаден успешно.'
     ),
 
     'update' => array(
-        'error'   => 'Accessory was not updated, please try again',
-        'success' => 'Accessory updated successfully.'
+        'error'   => 'Аксесоарът не беше обновен. Моля опитайте отново.',
+        'success' => 'Аксесоарът обновен успешно.'
     ),
 
     'delete' => array(

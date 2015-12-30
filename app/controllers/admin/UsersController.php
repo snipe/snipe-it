@@ -536,6 +536,10 @@ class UsersController extends AdminController {
                 unset($user_raw_array[$key]);
             }
 
+            if (!Sentry::getUser()->isSuperUser()) {
+                return Redirect::route('users')->with('error', Lang::get('admin/users/message.insufficient_permissions'));
+            }
+
             if (!Config::get('app.lock_passwords')) {
 
                 $assets = Asset::whereIn('assigned_to', $user_raw_array)->get();
@@ -587,6 +591,7 @@ class UsersController extends AdminController {
                 return Redirect::route('users')->with('error', 'Bulk delete is not enabled in this installation');
             }
 
+            /** @noinspection PhpUnreachableStatementInspection Known to be unreachable but kept following discussion: https://github.com/snipe/snipe-it/pull/1423 */
             return Redirect::route('users')->with('error', 'An error has occurred');
         }
     }
@@ -889,8 +894,8 @@ class UsersController extends AdminController {
             $sort = e(Input::get('sort'));
         }
 
-        $users = User::select(array('users.id','users.email','users.username','users.location_id','users.manager_id','users.first_name','users.last_name','users.created_at','users.notes','users.company_id'))
-            ->with('assets','accessories','consumables','licenses','manager','sentryThrottle','groups','userloc','company');
+        $users = User::select(array('users.id','users.employee_num','users.email','users.username','users.location_id','users.manager_id','users.first_name','users.last_name','users.created_at','users.notes','users.company_id', 'users.deleted_at'))
+        ->with('assets','accessories','consumables','licenses','manager','sentryThrottle','groups','userloc','company');
         $users = Company::scopeCompanyables($users);
 
         switch ($status) {
@@ -916,7 +921,7 @@ class UsersController extends AdminController {
              default:
                 $allowed_columns =
                 [
-                  'last_name','first_name','email','username',
+                  'last_name','first_name','email','username','employee_num',
                   'assets','accessories', 'consumables','licenses','groups'
                 ];
 
@@ -972,6 +977,7 @@ class UsersController extends AdminController {
                 'location'      => ($user->userloc) ? $user->userloc->name : '',
                 'manager'         => ($user->manager) ? '<a title="' . $user->manager->fullName() . '" href="users/' . $user->manager->id . '/view">' . $user->manager->fullName() . '</a>' : '',
                 'assets'        => $user->assets->count(),
+                'employee_num'  => $user->employee_num,
                 'licenses'        => $user->licenses->count(),
                 'accessories'        => $user->accessories->count(),
                 'consumables'        => $user->consumables->count(),
@@ -1197,6 +1203,13 @@ class UsersController extends AdminController {
         $ldap_result_active_flag = Setting::getSettings()->ldap_active_flag_field;
         $ldap_result_emp_num = Setting::getSettings()->ldap_emp_num_field;
         $ldap_result_email = Setting::getSettings()->ldap_email_field;
+        $ldap_server_cert_ignore = Setting::getSettings()->ldap_server_cert_ignore;
+
+        // If we are ignoring the SSL cert we need to setup the environment variable
+        // before we create the connection
+        if($ldap_server_cert_ignore) {
+            putenv('LDAPTLS_REQCERT=never');
+        }
 
         // Connect to LDAP server
         $ldapconn = @ldap_connect($url);
@@ -1216,6 +1229,8 @@ class UsersController extends AdminController {
 
         // Binding to ldap server
         $ldapbind = @ldap_bind($ldapconn, $username, $password);
+
+        Log::error(ldap_errno($ldapconn));
         if (!$ldapbind) {
             return Redirect::route('users')->with('error', Lang::get('admin/users/message.error.ldap_could_not_bind').ldap_error($ldapconn));
         }

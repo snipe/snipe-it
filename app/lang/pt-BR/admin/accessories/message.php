@@ -2,17 +2,17 @@
 
 return array(
 
-    'does_not_exist' => 'Accessory does not exist.',
+    'does_not_exist' => 'Este acessório não existe.',
     'assoc_users'	 => 'Este acessório tem atualmente :count itens alocado para os usuários. Por favor, verifique em acessórios e e tente novamente. ',
 
     'create' => array(
-        'error'   => 'Accessory was not created, please try again.',
-        'success' => 'Accessory created successfully.'
+        'error'   => 'Acessório não criado, Por favor tente novamente.',
+        'success' => 'Acessório criado com sucesso.'
     ),
 
     'update' => array(
-        'error'   => 'Accessory was not updated, please try again',
-        'success' => 'Accessory updated successfully.'
+        'error'   => 'Acessório não atualizado, Por favor tente novamente',
+        'success' => 'Acessório atualizado com sucesso.'
     ),
 
     'delete' => array(

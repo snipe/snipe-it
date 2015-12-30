@@ -104,10 +104,10 @@
             @endif
             </td>
             <td>
-            @if (($asset->assigned_to > 0) && ($asset->assigneduser->location_id > 0))
-                {{{ $asset->assigneduser->userLoc->name }}}
+            @if (($asset->assigneduser) && ($asset->assigneduser->userLoc))
+              {{{ $asset->assigneduser->userLoc->name }}}
             @elseif ($asset->defaultLoc)
-                {{{ $asset->defaultLoc->name }}}
+              {{{ $asset->defaultLoc->name }}}
             @endif
             </td>
         </tr>

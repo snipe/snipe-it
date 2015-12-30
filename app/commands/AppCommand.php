@@ -70,7 +70,7 @@ class AppCommand extends Command
         $this->askUserEmail();
         $this->askUserPassword();
 
-		$this->askUserDummyData();
+		    $this->askUserDummyData();
 
         $this->comment('');
         $this->comment('');
@@ -256,8 +256,7 @@ class AppCommand extends Command
     {
         // Ask the user to input the user password
         $dummydata = $this->ask('Do you want to seed your database with dummy data? y/N (default is no): ');
-
-        $this->dummyData = ( strstr($dummydata, 'N' ) || empty($dummydata) ) ? true : false;
+        $this->dummyData = (strstr($dummydata, 'y' )) ? true : false;
     }
 
     /**

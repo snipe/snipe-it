@@ -1,7 +1,7 @@
 <?php
 
     return [
-        'title'         => 'Asset Maintenance',
+        'title'         => 'Údržba zařízení',
         'asset_name'    => 'Název majetku',
         'supplier_name' => 'Dodavatel',
         'is_warranty'   => 'Záruka',

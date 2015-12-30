@@ -53,6 +53,11 @@ return array(
         'error'   		=> 'Eiendel ble ikke sjekket inn. Prøv igjen',
         'success' 		=> 'Vellykket innsjekk av eiendel.',
         'user_does_not_exist' => 'Denne brukeren er ugyldig. Vennligst prøv igjen.'
+    ),
+
+    'requests' => array(
+        'error'   		=> 'Asset was not requested, please try again',
+        'success' 		=> 'Asset requested successfully.',
     )
 
 );

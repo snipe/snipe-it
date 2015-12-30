@@ -677,16 +677,14 @@ return false;
 							});
 						});
 					});
-				})->orWhere(function($query) use ($search) {
-					$query->whereHas('assetlog', function($query) use ($search) {
-						$query->where('action_type','=','checkout')
-						->where('created_at','LIKE','%'.$search.'%');
-					});
 				})->orWhere('assets.name','LIKE','%'.$search.'%')
 				->orWhere('asset_tag','LIKE','%'.$search.'%')
 				->orWhere('serial','LIKE','%'.$search.'%')
 				->orWhere('order_number','LIKE','%'.$search.'%')
 				->orWhere('notes','LIKE','%'.$search.'');
+			}
+			foreach(CustomField::all() AS $field) {
+				$query->orWhere($field->db_column_name(),'LIKE',"%$search%");
 			}
 		});
 	}

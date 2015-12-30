@@ -8,10 +8,10 @@ return array(
         'success'               => 'Oppdatering av innstillinger vellykket.'
     ),
     'backup' => array(
-        'delete_confirm'        => 'Are you sure you would like to delete this backup file? This action cannot be undone. ',
-        'file_deleted'          => 'The backup file was successfully deleted. ',
-        'generated'             => 'A new backup file was successfully created.',
-        'file_not_found'        => 'That backup file could not be found on the server.',
+        'delete_confirm'        => 'Er du sikker på at du vil slette denne sikkerhetskopien? Denne handlingen kan ikke angres. ',
+        'file_deleted'          => 'Den Sikkerhetskopierte filen ble slettet. ',
+        'generated'             => 'En ny sikkerhetskopi fil ble opprettet.',
+        'file_not_found'        => 'Den backup-filen ble ikke funnet på serveren.',
     ),
 
 );

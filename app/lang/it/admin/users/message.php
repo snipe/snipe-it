@@ -33,6 +33,7 @@ return array(
         'import'    => 'C\'è stato un problema durante l\'importazione degli utenti. Riprova per favore.',
         'asset_already_accepted' => 'Questo bene è già stato accettato.',
         'accept_or_decline' => 'Devi accettare o rifiutare questo prodotto.',
+        'incorrect_user_accepted' => 'The asset you have attempted to accept was not checked out to you.',
         'ldap_could_not_connect' => 'Impossibile connettersi al server LDAP. Controlla la configurazione del tuo server LDAP nel file di configurazione LDAP.<br>Errori dal server LDAP:',
         'ldap_could_not_bind' => 'Impossibile unirsi al server LDAP. Controlla la configurazione del tuo server LDAP nel file di configurazione LDAP.<br>Errori dal server LDAP: ',
         'ldap_could_not_search' => 'Impossibile trovare il server LDAP. Controlla la configurazione del tuo server LDAP nel file di configurazione LDAP.<br>Errori dal server LDAP:',

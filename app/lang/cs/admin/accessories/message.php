@@ -2,17 +2,17 @@
 
 return array(
 
-    'does_not_exist' => 'Accessory does not exist.',
+    'does_not_exist' => 'Doplněk neexistuje.',
     'assoc_users'	 => 'Tato kategorie má nyní :count položek k předání uživatelům. Zkontrolujte převzetí příslušenství a zkuste to znovu. ',
 
     'create' => array(
-        'error'   => 'Accessory was not created, please try again.',
-        'success' => 'Accessory created successfully.'
+        'error'   => 'Doplněk nebyl vytvořen, prosím zkuste to znovu.',
+        'success' => 'Doplněk byl úspěšně vytvořen.'
     ),
 
     'update' => array(
-        'error'   => 'Accessory was not updated, please try again',
-        'success' => 'Accessory updated successfully.'
+        'error'   => 'Doplněk nebyl upraven, prosím zkuste to znovu',
+        'success' => 'Doplněk byl úspěšně upraven.'
     ),
 
     'delete' => array(

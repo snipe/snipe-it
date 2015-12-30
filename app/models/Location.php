@@ -8,7 +8,6 @@ class Location extends Elegant
     protected $rules = array(
             'name'  		=> 'required|alpha_space|min:3|max:255|unique:locations,name,{id}',
             'city'   		=> 'required|alpha_space|min:3|max:255',
-            'currency'   		=> 'required',
             'state'   		=> 'alpha_space|min:2|max:32',
             'country'   	=> 'required|alpha_space|min:2|max:2|max:2',
             'address'		=> 'alpha_space|min:5|max:80',

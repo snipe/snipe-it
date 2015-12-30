@@ -2,17 +2,17 @@
 
 return array(
 
-    'does_not_exist' => 'Accessory does not exist.',
+    'does_not_exist' => 'Tilbehør eksisterer ikke.',
     'assoc_users'	 => 'Dette tilbehøret har for øyeblikket :count enheter utsjekket til brukere. Sjekk inn tilbehøret og prøv igjen. ',
 
     'create' => array(
-        'error'   => 'Accessory was not created, please try again.',
-        'success' => 'Accessory created successfully.'
+        'error'   => 'Tilbehør ble ikke opprettet, vennligst prøv igjen.',
+        'success' => 'Tilbehør optrettet.'
     ),
 
     'update' => array(
-        'error'   => 'Accessory was not updated, please try again',
-        'success' => 'Accessory updated successfully.'
+        'error'   => 'Tilbehør ble ikke oppdatert, vennligst prøv igjen',
+        'success' => 'Tilbehør oppdatert.'
     ),
 
     'delete' => array(

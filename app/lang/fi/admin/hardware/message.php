@@ -53,6 +53,11 @@ return array(
         'error'   		=> 'Laitteen palautus epäonnistui, yritä uudelleen',
         'success' 		=> 'Laite palautettu onnistuneesti.',
         'user_does_not_exist' => 'Käyttäjä on virheellinen. Yritä uudelleen.'
+    ),
+
+    'requests' => array(
+        'error'   		=> 'Asset was not requested, please try again',
+        'success' 		=> 'Asset requested successfully.',
     )
 
 );

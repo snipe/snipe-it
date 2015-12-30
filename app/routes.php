@@ -115,13 +115,6 @@
 
             Route::resource( '/', 'ModelsController' );
             Route::get( 'list/{status?}', [ 'as' => 'api.models.list', 'uses' => 'ModelsController@getDatatable' ] );
-            Route::get( '{modelId}/check', function ( $modelId ) {
-
-                $model = Model::find( $modelId );
-
-                return $model->show_mac_address;
-            } );
-
             Route::get( '{modelID}/view', [ 'as' => 'api.models.view', 'uses' => 'ModelsController@getDataView' ] );
         } );
 
@@ -206,6 +199,11 @@
                     'as'   => 'hardware/bulkedit',
                     'uses' => 'AssetsController@postBulkEdit'
                 ] );
+            Route::post( 'bulkdelete',
+                [
+                    'as'   => 'hardware/bulkdelete',
+                    'uses' => 'AssetsController@postBulkDelete'
+                ] );
             Route::post( 'bulksave',
                 [
                     'as'   => 'hardware/bulksave',
@@ -225,6 +223,7 @@
                 Route::get( '{modelId}/delete', [ 'as' => 'delete/model', 'uses' => 'ModelsController@getDelete' ] );
                 Route::get( '{modelId}/view', [ 'as' => 'view/model', 'uses' => 'ModelsController@getView' ] );
                 Route::get( '{modelID}/restore', [ 'as' => 'restore/model', 'uses' => 'ModelsController@getRestore' ] );
+                Route::get( '{modelId}/custom_fields',['as' => 'custom_fields/model','uses' => 'ModelsController@getCustomFields']);
             } );
 
             Route::get( '/', [
@@ -460,6 +459,13 @@
             } );
 
         } );
+
+        # Custom fields support
+        Route::get('custom_fields/create-field',['uses' =>'CustomFieldsController@createField','as' => 'admin.custom_fields.create-field']);
+        Route::post('custom_fields/create-field',['uses' => 'CustomFieldsController@storeField','as' => 'admin.custom_fields.store-field']);
+        Route::post('custom_fields/{id}/associate',['uses' => 'CustomFieldsController@associate','as' => 'admin.custom_fields.associate']);
+        Route::match(['DELETE'],'custom_fields/delete-field/{id}',['uses' => 'CustomFieldsController@deleteField','as' => 'admin.custom_fields.delete-field']);
+        Route::resource('custom_fields','CustomFieldsController');
 
         # User Management
         Route::group( [ 'prefix' => 'users' ], function () {

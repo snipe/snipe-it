@@ -2,17 +2,17 @@
 
 return array(
 
-    'does_not_exist' => 'Accessory does not exist.',
+    'does_not_exist' => 'Aksesori tidak ditemukan.',
     'assoc_users'	 => 'Aksesori saat ini memiliki :count item untuk pengguna. Silahkan cek di aksesoris dan dan coba lagi. ',
 
     'create' => array(
-        'error'   => 'Accessory was not created, please try again.',
-        'success' => 'Accessory created successfully.'
+        'error'   => 'Aksesori tidak dapat dibuat, silahkan coba kembali.',
+        'success' => 'Aksesori berhasil dibuat.'
     ),
 
     'update' => array(
-        'error'   => 'Accessory was not updated, please try again',
-        'success' => 'Accessory updated successfully.'
+        'error'   => 'Aksesori tidak dapat diperbaharui, silahkan coba kembali',
+        'success' => 'Aksesori berhasil diperbaharui.'
     ),
 
     'delete' => array(

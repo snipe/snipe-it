@@ -1,7 +1,9 @@
 <?php
 
 return array(
-
+	'bulk_delete'		=> 'Confrm Bulk Delete Assets',
+  'bulk_delete_help'	=> 'Review the assets for bulk deletion below. Once deleted, these assets can be restored, but they will no longer be associated with any users they are currently assigned to.',
+  'bulk_delete_warn'	=> 'You are about to delete :asset_count assets.',
 	'bulk_update'		=> 'Actualización masiva de Equipos',
 	'bulk_update_help'	=> 'Este formulario le permite actualizar múltiples Equipos simultáneamente. Solo complete los campos que quiere modificar. Todo campo en blanco permanecerá sin cambios. ',
 	'bulk_update_warn'	=> 'Esta a punto de editar las propiedades de :asset_count equipos.',

@@ -53,6 +53,11 @@ return array(
         'error'   		=> 'Activul nu a fost primit, va rugam incercati iar',
         'success' 		=> 'Activul a fost primit.',
         'user_does_not_exist' => 'Utilizatorul este invalid. Va rugam incercati iar.'
+    ),
+
+    'requests' => array(
+        'error'   		=> 'Asset was not requested, please try again',
+        'success' 		=> 'Asset requested successfully.',
     )
 
 );

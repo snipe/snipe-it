@@ -52,6 +52,11 @@ return array(
         'error'   		=> 'Активът не беше вписан. Моля опитайте отново.',
         'success' 		=> 'Активът вписан успешно.',
         'user_does_not_exist' => 'Невалиден потребител. Моля опитайте отново.'
+    ),
+
+    'requests' => array(
+        'error'   		=> 'Asset was not requested, please try again',
+        'success' 		=> 'Asset requested successfully.',
     )
 
 );

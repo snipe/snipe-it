@@ -53,6 +53,11 @@ return array(
         'error'   		=> 'No se ha quitado el equipo. Intentalo de nuevo.',
         'success' 		=> 'Equipo quitado correctamente.',
         'user_does_not_exist' => 'Este usuario no es correcto. Intentalo de nuevo.'
+    ),
+
+    'requests' => array(
+        'error'   		=> 'Asset was not requested, please try again',
+        'success' 		=> 'Asset requested successfully.',
     )
 
 );

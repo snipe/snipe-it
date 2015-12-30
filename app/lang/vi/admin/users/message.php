@@ -33,6 +33,7 @@ return array(
         'import'    => 'Có vấn đề xảy ra khi nhập danh sách người dùng. Xin thử lại.',
         'asset_already_accepted' => 'Tài sản này đã được chấp thuận.',
         'accept_or_decline' => 'Bạn phải chấp nhận hoặc từ chối tài sản này.',
+        'incorrect_user_accepted' => 'The asset you have attempted to accept was not checked out to you.',
         'ldap_could_not_connect' => 'Không thể kết nối đến máy chủ LDAP. Xin vui lòng kiểm tra lại cấu hình máy chủ LDAP của bạn ở trong tập tin cấu hình LDAP. <br>Lỗi từ máy chủ LDAP:',
         'ldap_could_not_bind' => 'Không thể liên kết đến máy chủ LDAP. Xin vui lòng kiểm tra lại cấu hình máy chủ LDAP của bạn ở trong tập tin cấu hình LDAP. <br>Lỗi từ máy chủ LDAP: ',
         'ldap_could_not_search' => 'Không thể tìm thấy máy chủ LDAP. Xin vui lòng kiểm tra cấu hình cài đặt máy chủ LDAP của bạn ở trong tập tin cấu hình LDAP. <br>Lỗi từ máy chủ LDAP:',

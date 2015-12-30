@@ -1,7 +1,9 @@
 <?php
 
 return array(
-
+	'bulk_delete'		=> 'Confrm Bulk Delete Assets',
+  'bulk_delete_help'	=> 'Review the assets for bulk deletion below. Once deleted, these assets can be restored, but they will no longer be associated with any users they are currently assigned to.',
+  'bulk_delete_warn'	=> 'You are about to delete :asset_count assets.',
 	'bulk_update'		=> 'Cập nhật tài sản số lượng lớn',
 	'bulk_update_help'	=> 'Form này cho phép bạn cập nhật nhiều tài sản cùng lúc. Chỉ điền vào ô bạn cần thay đổi. Bất kỳ ô nào để trống sẽ thông báo là chưa thay đổi. ',
 	'bulk_update_warn'	=> 'Bạn muốn chỉnh sửa các thuộc tính của :asset_count assets.',

@@ -1,7 +1,9 @@
 <?php
 
 return array(
-
+	'bulk_delete'		=> 'Confrm Bulk Delete Assets',
+  'bulk_delete_help'	=> 'Review the assets for bulk deletion below. Once deleted, these assets can be restored, but they will no longer be associated with any users they are currently assigned to.',
+  'bulk_delete_warn'	=> 'You are about to delete :asset_count assets.',
 	'bulk_update'		=> 'Demirbaşları Toplu Güncelle',
 	'bulk_update_help'	=> 'Bu form birden çok demirbaşı tek seferde güncellemenizi sağlar. Lütfen sadece değiştirmek istediğiniz alanları doldurunuz. Değiştirilmesini istemediğiniz alanları boş bırakınız. ',
 	'bulk_update_warn'	=> ':asset_count adet demirbaşı düzenlemek üzeresiniz.',

@@ -53,6 +53,11 @@ return array(
         'error'   		=> 'Nie można przypisać nabytku/zasobu, proszę spróbować ponownie',
         'success' 		=> 'Nabytek/zasób przypisany.',
         'user_does_not_exist' => 'Nieprawidłowy użytkownik. Proszę spróbować ponownie.'
+    ),
+
+    'requests' => array(
+        'error'   		=> 'Asset was not requested, please try again',
+        'success' 		=> 'Asset requested successfully.',
     )
 
 );

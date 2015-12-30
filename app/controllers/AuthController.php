@@ -37,6 +37,13 @@ class AuthController extends BaseController
         $baseDn      = Setting::getSettings()->ldap_basedn;
         $filterQuery = Setting::getSettings()->ldap_auth_filter_query . $username;
         $ldapversion = Setting::getSettings()->ldap_version;
+        $ldap_server_cert_ignore = Setting::getSettings()->ldap_server_cert_ignore;
+
+        // If we are ignoring the SSL cert we need to setup the environment variable
+        // before we create the connection
+        if($ldap_server_cert_ignore) {
+            putenv('LDAPTLS_REQCERT=never');
+        }
 
 	    // Connecting to LDAP
         $connection = ldap_connect($ldaphost) or die("Could not connect to {$ldaphost}");
@@ -50,7 +57,7 @@ class AuthController extends BaseController
                 $ldapbind = ldap_bind($connection, $ldaprdn, $ldappass);
                 if ( ($results = @ldap_search($connection, $baseDn, $filterQuery)) != false ) {
                     $entry = ldap_first_entry($connection, $results);
-                    if ( ($userDn = @ldap_get_dn($connection, $entry)) !== false ) {
+                    if ( ($userDn = @ldap_get_dn($connection, $entry)) != false ) {
                         if( ($isBound = ldap_bind($connection, $userDn, $password)) == "true") {
                             return $returnUser ?
                                 array_change_key_case(ldap_get_attributes($connection, $entry),CASE_LOWER)
@@ -89,8 +96,8 @@ class AuthController extends BaseController
         $item["email"] = isset( $ldapatttibutes[$ldap_result_email][0] ) ? $ldapatttibutes[$ldap_result_email][0] : "" ;
 
         //create user
-        if(!empty($item["username"]) && !empty($item['email'])) {
-            $pass = substr(str_shuffle("0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"), 0, 10);
+        if(!empty($item["username"])) {
+            //$pass = substr(str_shuffle("0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"), 0, 10);
 
             $newuser = array(
                 'first_name' => $item["firstname"],
@@ -98,21 +105,22 @@ class AuthController extends BaseController
                 'username' => $item["username"],
                 'email' => $item["email"],
                 'employee_num' => $item["employee_number"],
-                'password' => $pass,
+                'password' => Input::get("password"), //$pass,
                 'activated' => 1,
                 'location_id' => null,
-                'permissions' => '{"user":1}',
+                'permissions' => ["user" => 1], //'{"user":1}',
                 'notes' => 'Imported from LDAP'
             );
-
-            DB::table('users')->insert($newuser);
+            Sentry::createUser($newuser);
+            /*DB::table('users')->insert($newuser);
             $updateuser = Sentry::findUserByLogin($item["username"]);
+            $updateuser->setHasher(new Cartalyst\Sentry\Hashing\BcryptHasher);
 
             // Update the user details
-            $updateuser->password = $pass;
+            $updateuser->password = Input::get('password');
 
             // Update the user
-            $updateuser->save();
+            $updateuser->save(); */
         } else {
             throw new Cartalyst\Sentry\Users\UserNotFoundException();
         }
@@ -120,7 +128,7 @@ class AuthController extends BaseController
         //$item["note"] = "<strong>created</strong>";
         $credentials = array(
             'username' => $item["username"],
-            'password' => $pass,
+            'password' => Input::get("password")//$pass,
         );
         return $credentials;
     }
@@ -149,47 +157,52 @@ class AuthController extends BaseController
         }
         try {
 
-            /**
-             * =================================================================
-             * Hack in LDAP authentication
-             */
+            // Should we even check for LDAP users?
+            if (Setting::getSettings()->ldap_enabled=='1') {
 
-            // Try to get the user from the database.
-            $user = (array) DB::table('users')->where('username', Input::get('username'))->first();
-            //If user does not exist and authenticates sucessfully with LDAP we will create it onf the fly and sign in with default permissions
-            if(!$user){
-                if($userattr = $this->ldap(Input::get('username'), Input::get('password'),true) ){
-                    LOG::debug("Creating LDAP authenticated user.");
+              LOG::debug("LDAP is enabled.");
+              // Check if the user exists in the database
+              $user = User::where('username','=',Input::get('username'))->whereNull('deleted_at')->first();
+              LOG::debug("Sentry lookup complete");
+
+
+              // The user does not exist in the database. Try to get them from LDAP.
+              // If user does not exist and authenticates sucessfully with LDAP we
+              // will create it on the fly and sign in with default permissions
+              if(!$user){
+                  LOG::debug("Local user ".Input::get('username')." does not exist");
+                  if($userattr = $this->ldap(Input::get('username'), Input::get('password'),true) ){
+                    LOG::debug("Creating local user from authenticated LDAP user.");
                     $credentials = $this->createUserFromLdap($userattr);
-                    Sentry::authenticate($credentials, Input::get('remember-me', 0));
+                  } else {
+                    LOG::debug("User did not authenticate correctly against LDAP. No local user was created.");
+                  }
 
+              // If the user exists and they were imported from LDAP already
+              } else {
 
-                }
+                LOG::debug("Local user ".Input::get('username')." exists in database. Authenticating existing user against LDAP.");
+
+                if ($this->ldap(Input::get('username'), Input::get('password')) ) {
+                    LOG::debug("Valid LDAP login. Updating the local data.");
+                    $sentryuser=Sentry::findUserById($user->id); //need the Sentry object, not the Eloquent object, to access critical password hashing functions
+                    $sentryuser->password = Input::get('password');
+                    $sentryuser->save();
+
+                } else {
+                  LOG::debug("User did not authenticate correctly against LDAP. Local user was not updated.");
+                }// End LDAP auth
+
+              } // End if(!user)
+
+            // NO LDAP enabled - just try to login the user normally
             }
 
-            else if ($user && strpos($user["notes"],'LDAP') !== false) {
-                LOG::debug("Authenticating user against LDAP.");
-                if( $this->ldap(Input::get('username'), Input::get('password')) ) {
-                        LOG::debug("valid login");
-                    $pass = substr(str_shuffle("0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"), 0, 10);
-                    $user = Sentry::findUserByLogin( Input::get('username') );
-                    $user->password = $pass;
-                    $user->save();
-                    $credentials = array(
-                        'username' => Input::get('username'),
-                        'password' => $pass,
-                    );
-                    Sentry::authenticate($credentials, Input::get('remember-me', 0));
-                }
-                else {
-                    throw new Cartalyst\Sentry\Users\UserNotFoundException();
-                }
-            }
-            /* ============================================================== */
-            else {
-                LOG::debug("Authenticating user against database.");
-                // Try to log the user in
-                Sentry::authenticate(Input::only('username', 'password'), Input::get('remember-me', 0));
+            LOG::debug("Authenticating user against database.");
+            // Try to log the user in
+            if (!Sentry::authenticate(Input::only('username', 'password'), Input::get('remember-me', 0))) {
+              LOG::debug("Local authentication failed.");
+              throw new Cartalyst\Sentry\Users\UserNotFoundException();
             }
 
             // Get the page we were before
@@ -200,13 +213,25 @@ class AuthController extends BaseController
 
             // Redirect to the users page
             return Redirect::to($redirect)->with('success', Lang::get('auth/message.signin.success'));
+
         } catch (Cartalyst\Sentry\Users\UserNotFoundException $e) {
+            LOG::debug("Local authentication: User ".Input::get('username')." not found");
             $this->messageBag->add('username', Lang::get('auth/message.account_not_found'));
+
+        } catch (Cartalyst\Sentry\Users\WrongPasswordException $e) {
+            LOG::debug("Local authentication: Password for ".Input::get('username')." is incorrect.");
+            $this->messageBag->add('username', Lang::get('auth/message.account_not_found'));
+
         } catch (Cartalyst\Sentry\Users\UserNotActivatedException $e) {
+            LOG::debug("Local authentication: User not activated");
             $this->messageBag->add('username', Lang::get('auth/message.account_not_activated'));
+
         } catch (Cartalyst\Sentry\Throttling\UserSuspendedException $e) {
+            LOG::debug("Local authentication: Account suspended");
             $this->messageBag->add('username', Lang::get('auth/message.account_suspended'));
+
         } catch (Cartalyst\Sentry\Throttling\UserBannedException $e) {
+            LOG::debug("Local authentication: Account banned.");
             $this->messageBag->add('username', Lang::get('auth/message.account_banned'));
         }
 

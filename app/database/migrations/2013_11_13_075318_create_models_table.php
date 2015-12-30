@@ -18,6 +18,7 @@ class CreateModelsTable extends Migration
             $table->integer('manufacturer_id')->nullable();
             $table->integer('category_id')->nullable();
             $table->timestamps();
+            $table->engine = 'InnoDB';
         });
     }
 

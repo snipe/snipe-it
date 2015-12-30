@@ -24,3 +24,8 @@ Validator::extend('unique_multiple', function ($attribute, $value, $parameters)
     // Validation result will be false if any rows match the combination
     return ($query->count() == 0);
 });
+
+Validator::extend('unique_column',function ($attribute,$value,$parameters) {
+  
+  return false;
+});

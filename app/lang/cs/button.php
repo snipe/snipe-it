@@ -8,7 +8,7 @@ return array(
     'delete'  	=> 'Smazat',
     'edit'    	=> 'Upravit',
     'restore' 	=> 'Obnovit',
-    'request'   => 'Request',
+    'request'   => 'Požadavek',
     'submit'  	=> 'Odeslat',
     'upload'    => 'Nahrát',
 

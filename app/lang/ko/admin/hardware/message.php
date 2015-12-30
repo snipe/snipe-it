@@ -53,6 +53,11 @@ return array(
         'error'   		=> '자산이 반입되지 않았습니다. 다시 시도해 주세요.',
         'success' 		=> '자산이 반입되었습니다.',
         'user_does_not_exist' => '잘못된 사용자 입니다. 다시 시도해 주세요.'
+    ),
+
+    'requests' => array(
+        'error'   		=> 'Asset was not requested, please try again',
+        'success' 		=> 'Asset requested successfully.',
     )
 
 );

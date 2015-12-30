@@ -16,6 +16,7 @@ class CreateCategoriesTable extends Migration
             $table->string('name');
             $table->integer('parent')->default(0);
             $table->timestamps();
+            $table->engine = 'InnoDB';
         });
     }
 

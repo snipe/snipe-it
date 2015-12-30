@@ -1,7 +1,7 @@
 <?php
 
 return array(
-    'assets_rtd'		=> 'Assets RTD',
+    'assets_rtd'		=> 'Assets Retired',
     'assets_checkedout'		=> 'Assets Assigned',
     'id'      		=> 'ID',
     'city'   		=> 'City',

@@ -15,7 +15,7 @@ class AddCompanyIdToAssetsTable extends Migration {
         Schema::table('assets', function(Blueprint $table)
         {
             $table->integer('company_id')->unsigned()->nullable();
-            $table->foreign('company_id')->references('id')->on('companies');
+            //$table->foreign('company_id')->references('id')->on('companies');
         });
     }
 
@@ -28,7 +28,7 @@ class AddCompanyIdToAssetsTable extends Migration {
     {
         Schema::table('assets', function(Blueprint $table)
         {
-            $table->dropForeign('assets_company_id_foreign');
+            // $table->dropForeign('assets_company_id_foreign');
             $table->dropColumn('company_id');
         });
     }
