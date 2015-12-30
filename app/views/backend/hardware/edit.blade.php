@@ -287,7 +287,6 @@
                       <span class="input-group-addon">@lang('admin/hardware/form.months')</span>
                     </div>
                     <div class="col-md-10" style="padding-left: 0px;">
-                      <p class="help-block">Entering a value here will override your asset model EOL settings.</p>
                       {{ $errors->first('warranty_months', '<br><span class="alert-msg"><i class="fa fa-times"></i> :message</span>') }}
                     </div>
 
