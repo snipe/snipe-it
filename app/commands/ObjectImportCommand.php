@@ -55,201 +55,73 @@ class ObjectImportCommand extends Command {
 
 		$csv = Reader::createFromPath($this->argument('filename'));
 		$csv->setNewline("\r\n");
-                $headers = $csv->fetchOne();
-		$csv->setOffset(1);
-		$duplicates = '';
 
-                // Scan the headers and determine what each column is
-                $item_type_field = NULL;
-                $user_name_field = NULL;
-                $user_email_field = NULL;
-                $user_username_field = NULL;
-
-                $asset_name_field = NULL;
-                $asset_category_field = NULL;
-                $asset_model_name_field = NULL;
-                $asset_mfgr_field = NULL;
-                $asset_modelno_field = NULL;
-                $asset_serial_field = NULL;
-                $asset_assettag_field = NULL;
-                $asset_location_field = NULL;
-                $asset_notes_field = NULL;
-                $asset_purchaseDate_field = NULL;
-                $asset_purchaseCost_field = NULL;
-                $asset_companyName_field = NULL;
+                $results = $csv->fetchAssoc();
 
 
-                foreach( $headers as $index => $name ) {
-                    switch( $name ) {
-                        case "Item Type":
-                            $item_type_field = $index;
-                            break;
-
-                        case "Name":
-                            $user_name_field = $index;
-                            break;
-
-                        case "Email":
-                            $user_email_field = $index;
-                            break;
-
-                        case "User Name":
-                            $user_username_field = $index;
-                            break;
-
-                        case "Item Name":
-                            $asset_name_field = $index;
-                            break;
-                        case "Category":
-                            $asset_category_field = $index;
-                            break;
-                        case "Model Name":
-                            $asset_model_name_field = $index;
-                            break;
-                        case "Manufacturer":
-                            $asset_mfgr_field = $index;
-                            break;
-                        case "Model Number":
-                            $asset_modelno_field = $index;
-                            break;
-                        case "Serial Number":
-                            $asset_serial_field = $index;
-                            break;
-                        case "Asset Tag":
-                            $asset_assettag_field = $index;
-                            break;
-                        case "Location";
-                            $asset_location_field = $index;
-                            break;
-                        case "Notes";
-                            $asset_notes_field = $index;
-                            break;
-                        case "Purchase Date":
-                            $asset_purchaseDate_field = $index;
-                            break;
-                        case "Purchase Cost":
-                            $asset_purchaseCost_field = $index;
-                            break;
-                        case "Company Name":
-                            $asset_companyName_field = $index;
-                            break;
-                    }
+                $newarray = NULL;
+                foreach( $results as $index => $arraytoNormalize) {
+                    $internalnewarray = array_change_key_case($arraytoNormalize);
+                    $newarray[$index] = $internalnewarray;
                 }
 
+
 		// Loop through the records
-                foreach( $csv as $row ) {
+                foreach( $newarray as $row ) {
 			$status_id = 1;
 
 			// Let's just map some of these entries to more user friendly words
+                        $user_name = $user_email = $user_username = $asset_name
+                                   = $asset_category = $asset_model_name = $asset_mfgr
+                                   = $asset_modelno = $asset_serial = $asset_tag = $asset_location
+                                   = $asset_notes = $asset_purchase_date = $asset_purchase_cost
+                                   = $asset_company_name = '';
 
-			// User's name
-			if (array_key_exists($user_name_field,$row)) {
-				$user_name = trim($row[$user_name_field]);
-			} else {
-				$user_name = '';
-			}
-
-			// User's email
-			if (array_key_exists($user_email_field,$row)) {
-				$user_email = trim($row[$user_email_field]);
-			} else {
-				$user_email = '';
-			}
-
-                        // User's username
-			if (array_key_exists($user_username_field,$row)) {
-				$user_username = trim($row[$user_username_field]);
-			} else {
-				$user_username = '';
-			}
-
-			// Asset Name
-			if (array_key_exists($asset_name_field,$row)) {
-				$asset_name = trim($row[$asset_name_field]);
-			} else {
-				$asset_name = '';
-			}
-
-			// Asset Category
-			if (array_key_exists($asset_category_field,$row)) {
-				$asset_category = trim($row[$asset_category_field]);
-			} else {
-				$asset_category = '';
-			}
-
-                        // Asset Model Name
-			if (array_key_exists($asset_model_name_field,$row)) {
-                                $asset_model_name = trim($row[$asset_model_name_field]);
-			} else {
-                                $asset_model_name = '';
-			}
-
-			// Asset Manufacturer
-			if (array_key_exists($asset_mfgr_field,$row)) {
-				$asset_mfgr = trim($row[$asset_mfgr_field]);
-			} else {
-				$asset_mfgr = '';
-			}
-
-			// Asset model number
-			if (array_key_exists($asset_modelno_field,$row)) {
-				$asset_modelno = trim($row[$asset_modelno_field]);
-			} else {
-				$asset_modelno = '';
-			}
-
-			// Asset serial number
-			if (array_key_exists($asset_serial_field,$row)) {
-				$asset_serial = trim($row[$asset_serial_field]);
-			} else {
-				$asset_serial = '';
-			}
-
-			// Asset tag
-			if (array_key_exists($asset_assettag_field,$row)) {
-				$asset_tag = trim($row[$asset_assettag_field]);
-			} else {
-				$asset_tag = '';
-			}
-
-			// Asset location
-			if (array_key_exists($asset_location_field,$row)) {
-				$asset_location = trim($row[$asset_location_field]);
-			} else {
-				$asset_location = '';
-			}
-
-			// Asset notes
-			if (array_key_exists($asset_notes_field,$row)) {
-				$asset_notes = trim($row[$asset_notes_field]);
-			} else {
-				$asset_notes = '';
-			}
-
-			// Asset purchase date
-			if (array_key_exists($asset_purchaseDate_field,$row)) {
-				if ($row[$asset_purchaseDate_field]!='') {
-					$asset_purchase_date = date("Y-m-d 00:00:01", strtotime($row[$asset_purchaseDate_field]));
-				} else {
-					$asset_purchase_date = '';
-				}
-			} else {
-				$asset_purchase_date = '';
-			}
-
-			// Asset purchase cost
-			if (array_key_exists($asset_purchaseCost_field,$row)) {
-                                $asset_purchase_cost = trim($row[$asset_purchaseCost_field]);
-			} else {
-				$asset_purchase_cost = '';
-			}
-
-                         // Asset Company Name
-                         if (array_key_exists($asset_companyName_field,$row)) {
-                                $asset_company_name = trim($row[$asset_companyName_field]);
-                         } else {
-                                $asset_company_name = '';
-                         }
+                        if(array_key_exists("name", $row) ) {
+                            $user_name = trim($row["name"]);
+                        }
+                        if(array_key_exists("email", $row) ) {
+                            $user_email = trim($row["email"]);
+                        }
+                        if(array_key_exists("username", $row) ) {
+                            $user_username = trim($row["username"]);
+                        }
+                        if(array_key_exists("item name", $row)) {
+                            $asset_name = trim($row["item name"]);
+                        }
+                        if(array_key_exists("category", $row) ) {
+                            $asset_category = trim($row["category"]);
+                        }
+                        if(array_key_exists("model name", $row) ) {
+                            $asset_model_name = trim($row["model name"]);
+                        }
+                        if(array_key_exists("manufacturer", $row) ) {
+                            $asset_mfgr = trim($row["manufacturer"]);
+                        }
+                        if(array_key_exists("model number", $row) ) {
+                            $asset_modelno = trim($row["model number"]);
+                        }
+                        if(array_key_exists("serial number", $row) ) {
+                            $asset_serial = trim($row["serial number"]);
+                        }
+                        if(array_key_exists("asset tag", $row) ) {
+                            $asset_tag = trim($row["asset tag"]);
+                        }
+                        if(array_key_exists("location", $row) ) {
+                            $asset_location = trim($row["location"]);
+                        }
+                        if(array_key_exists("notes", $row) ) {
+                            $asset_notes = trim($row["notes"]);
+                        }
+                        if(array_key_exists("purchase date", $row) ) {
+                            $asset_purchase_date = strtotime($row["purchase date"]);
+                        }
+                        if(array_key_exists("purchase cost", $row) ) {
+                            $asset_purchase_cost = trim($row["purchase cost"]);
+                        }
+                        if(array_key_exists("company name", $row) ) {
+                            $asset_company_name = trim($row["company name"]);
+                        }
 
 
 			// A number was given instead of a name
