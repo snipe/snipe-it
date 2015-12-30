@@ -8,5 +8,12 @@ then
   MYSQL_ENV_MYSQL_USER='' MYSQL_ENV_MYSQL_PASSWORD='' php artisan --env=production -n key:generate
 fi
 
+if [ -f /etc/ssl/private/snipeit-ssl.crt -a -f /etc/ssl/private/snipeit-ssl.key ]
+then
+  a2enmod ssl
+else
+  a2dismod ssl
+fi
+
 . /etc/apache2/envvars 
 exec apache2 -DNO_DETACH < /dev/null
