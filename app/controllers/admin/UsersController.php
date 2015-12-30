@@ -536,6 +536,10 @@ class UsersController extends AdminController {
                 unset($user_raw_array[$key]);
             }
 
+            if (!Sentry::getUser()->isSuperUser()) {
+                return Redirect::route('users')->with('error', Lang::get('admin/users/message.insufficient_permissions'));
+            }
+
             if (!Config::get('app.lock_passwords')) {
 
                 $assets = Asset::whereIn('assigned_to', $user_raw_array)->get();
