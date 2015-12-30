@@ -890,8 +890,8 @@ class UsersController extends AdminController {
             $sort = e(Input::get('sort'));
         }
 
-        $users = User::select(array('users.id','users.employee_num','users.email','users.username','users.location_id','users.manager_id','users.first_name','users.last_name','users.created_at','users.notes','users.company_id'))
-            ->with('assets','accessories','consumables','licenses','manager','sentryThrottle','groups','userloc','company');
+        $users = User::select(array('users.id','users.employee_num','users.email','users.username','users.location_id','users.manager_id','users.first_name','users.last_name','users.created_at','users.notes','users.company_id', 'users.deleted_at'))
+        ->with('assets','accessories','consumables','licenses','manager','sentryThrottle','groups','userloc','company');
         $users = Company::scopeCompanyables($users);
 
         switch ($status) {
