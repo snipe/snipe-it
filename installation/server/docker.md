@@ -76,10 +76,26 @@ That should set you up with your database to use. (You can also specify environm
 
 ### Start your Snipe-IT container
 
-Now you can start your Snipe-IT container -
+First off, decide whether or not you want to have your Snipe-IT container manage SSL for you, or not.
+
+#### SSL disabled
+
+Start your Snipe-IT container -
 ```sh
 docker run -d -p $(docker-machine ip b2d)::80 --name="snipeit" --link snipe-mysql:mysql --env-file=my_env_file snipe-it
 ```
+
+#### SSL enabled
+Start your Snipe-IT container - but make sure you can "mount" your local copies of your SSL key and SSL certificate onto the container.
+
+They're expected to be named exactly: `/etc/ssl/private/snipeit-ssl.key` and `/etc/ssl/private/snipeit-ssl.crt` for the key and certificate, respectively.
+
+```sh
+docker run -d -P --name="snipeit" --link snipe-mysql:mysql -v /Absolute/Path/To/Your/SSL_Cert_directory:/etc/ssl/private --env-file=my_env_file snipe-it
+```
+
+#### Email, Management, Access
+
 If you have a separate container running for email, you will also want a ```--link``` setting for email as well.
 
 You can find out what port Snipe-IT is running on with:
