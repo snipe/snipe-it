@@ -18,6 +18,8 @@ You would then add all of those mobile phone related fields to a new "Mobile Pho
 
 ![Create mobile phones fieldset](/img/mobile-phones.png)
 
+When you're adding a field to a fieldset, you can select whether that field should be required, what order it should appear in, and then select the fieldset to add from the select box.
+
 ![Create mobile phones fieldset](/img/add-to-fieldset.png)
 
 Then, for any mobile phone assets you create that belong to that asset model, the custom fields attributes will automatically appear.
@@ -31,6 +33,21 @@ To break it down step by step:
 You can create the fields first, or the fieldset first, but be sure to add the new fields to your fieldset, and then associate that fieldset to an asset model to see those new fields on your asset forms.
 
 Once your asset models have custom fieldsets associated with them, your new values will appear on the asset view and edit pages, and in the main asset listing table. You will be able to search/sort on these fields (as well as show/hide them in the table view) the same as you can the other built-in fields.
+
+### Custom Field Validation
+
+We have provided support for basic input validation on the custom fields you create. When creating the fields, you'll have the option of selecting the `Format` the text input for your new fields should be in when your admins add or edit assets. You have several pre-defined options:
+
+| Format  | Description |
+| ------------- | ------------- |
+|`ANY`|No input validation. Any text is acceptable.|
+|`ALPHA`|Any alpha numeric text.|
+|`NUMERIC`|Any numeric text.|
+|`MAC`|Text formatted in MAC address format.|
+|`IP`|Text formatted as an IPv4 address. (IPv6 is coming soon.)|
+|`CUSTOM`|Custom regular expression.|
+
+If you select `CUSTOM`, be sure to enter a valid regular expression in the `Custom Format` box below that select box.
 
 ### Notes:
 
