@@ -18,7 +18,7 @@ If a user locks themselves out by attempting and failing to login too many times
 
 ##Permissions
 
-Super User permissions:
+
 | Ability       | Super User | Admin | Reporter | User |
 | ------------- | -----------|-------|----------|------|
 |Create Companies|Yes        |Yes    |No        |No    |
@@ -49,7 +49,7 @@ Super User permissions:
 |Unlock Users   |Yes         |Yes    |No        |No    |
 |Edit Users Permissions|Yes  |Yes    |No        |No    |
 |View Items Assigned to User|Yes|Yes |No        |No    |
-|Request Assets |No          |No     |No        |No    |
+|Request Assets |No          |No     |No        |Yes   |
 |Generate Reports| Yes       |Yes    |Yes       |No    |
 
 
