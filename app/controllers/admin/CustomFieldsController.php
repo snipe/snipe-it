@@ -8,6 +8,7 @@ use Validator;
 use Redirect;
 use Model;
 use Lang;
+use Sentry;
 
 class CustomFieldsController extends \BaseController {
 
@@ -19,7 +20,11 @@ class CustomFieldsController extends \BaseController {
 	public function index()
 	{
 		//
-		return View::make("backend.custom_fields.index")->with("custom_fieldsets",CustomFieldset::all())->with("custom_fields",CustomField::all());
+		$fieldsets=CustomFieldset::with("fields","models")->get();
+		//$fieldsets=CustomFieldset::all();
+		$fields=CustomField::with("fieldset")->get();
+		//$fields=CustomField::all();
+		return View::make("backend.custom_fields.index")->with("custom_fieldsets",$fieldsets)->with("custom_fields",$fields);
 	}
 
 
@@ -43,7 +48,7 @@ class CustomFieldsController extends \BaseController {
 	public function store()
 	{
 		//
-		$cfset=new CustomFieldset(["name" => Input::get("name")]);
+		$cfset=new CustomFieldset(["name" => Input::get("name"),"user_id" => Sentry::getUser()->id]);
 		$validator=Validator::make(Input::all(),$cfset->rules);
 		if($validator->passes()) {
 			$cfset->save();
@@ -76,7 +81,7 @@ class CustomFieldsController extends \BaseController {
 
 	public function storeField()
 	{
-		$field=new CustomField(["name" => Input::get("name"),"element" => Input::get("element")]);
+		$field=new CustomField(["name" => Input::get("name"),"element" => Input::get("element"),"user_id" => Sentry::getUser()->id]);
 		if(!in_array(Input::get('format'),["ALPHA","NUMERIC","MAC","IP"])) {
 			$field->format=Input::get("custom_format");
 		} else {
