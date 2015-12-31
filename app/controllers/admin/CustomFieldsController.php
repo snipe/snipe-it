@@ -20,7 +20,11 @@ class CustomFieldsController extends \BaseController {
 	public function index()
 	{
 		//
-		return View::make("backend.custom_fields.index")->with("custom_fieldsets",CustomFieldset::all())->with("custom_fields",CustomField::all());
+		$fieldsets=CustomFieldset::with("fields","models")->get();
+		//$fieldsets=CustomFieldset::all();
+		$fields=CustomField::with("fieldset")->get();
+		//$fields=CustomField::all();
+		return View::make("backend.custom_fields.index")->with("custom_fieldsets",$fieldsets)->with("custom_fields",$fields);
 	}
 
 
