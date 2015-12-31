@@ -15,6 +15,7 @@ class MigrateMacAddress extends Migration {
 		DB::getDoctrineSchemaManager()->getDatabasePlatform()->registerDoctrineTypeMapping('enum', 'string');
 
 		$f2=new CustomFieldset(['name' => "Asset with MAC Address"]);
+		$f2->timestamps=false; //when this model was first created, it had no timestamps. But later on it gets them.
 		if(!$f2->save()) {
 			throw new Exception("couldn't save customfieldset");
 		}
