@@ -16,10 +16,10 @@ If a user locks themselves out by attempting and failing to login too many times
 
 -----
 
-##Permissions
+## Permissions
 
 
-###Super User
+### Super User
 
 Super User permissions:
 | Ability  | Allowed |
@@ -54,7 +54,7 @@ Super User permissions:
 |View Items Assigned to User|Yes|
 |Requset Assets|No|
 
-###Admin User Permissions:
+### Admin User Permissions:
 
 | Ability  | Allowed |
 | ------------- | ------------- |
@@ -88,7 +88,7 @@ Super User permissions:
 |View Items Assigned to User|Yes|
 |Requset Assets|No|
 
-###User Permissions
+### User Permissions
 
 | Ability  | Allowed |
 | ------------- | ------------- |

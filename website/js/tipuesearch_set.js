@@ -59,6 +59,7 @@ var tipuesearch_pages = [
     "http://docs.snipeitapp.com/manual/importing-licenses.html",
     "http://docs.snipeitapp.com/manual/backups.html",
     "http://docs.snipeitapp.com/manual/ldap.html",
+    "http://docs.snipeitapp.com/manual/custom-fields.html",
     "http://docs.snipeitapp.com/installation/proxy.html"
 ];
 
