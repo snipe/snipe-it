@@ -79,54 +79,52 @@ class ObjectImportCommand extends Command {
 		$this->accessories = Accessory::All(['name','qty']);
 		// Loop through the records
 		foreach( $newarray as $row ) {
-			$status_id = 1;
 
 			// Let's just map some of these entries to more user friendly words
 
 			// Fetch general items here, fetch item type specific items in respective methods
 			/** @var Asset, License, Accessory, or Consumable $item_type */
-			$item_type = strtolower($this->array_smart_fetch($row, "item type"));
-			$item_name = $this->array_smart_fetch($row, "item name");
+
 			$item_category = $this->array_smart_fetch($row, "category");
 			$item_company_name = $this->array_smart_fetch($row, "company name");
-			$item_purchase_date = date("Y-m-d 00:00:01", strtotime($this->array_smart_fetch($row, "purchase date")));
-			$item_purchase_cost = $this->array_smart_fetch($row, "purchase cost");
-			$item_order_number = $this->array_smart_fetch($row, "order number");
 			$item_location = $this->array_smart_fetch($row, "location");
-			$item_notes = $this->array_smart_fetch($row, "notes");
-			$item_quantity = $this->array_smart_fetch($row, "quantity");
-			$item_requestable = $this->array_smart_fetch($row, "requestable");
 
-
-
-			if(empty($item_type)) {
+			$item["item_type"] = strtolower($this->array_smart_fetch($row, "item type"));
+			if(empty($item["item_type"])) {
 				$this->comment("Item Type not set.  Assuming asset");
-				$item_type = 'asset';
+				$item["item_type"] = 'asset';
 			}
-			$this->comment("Item Type: " . $item_type);
+
+			$item["item_name"] = $this->array_smart_fetch($row, "item name");
+			$item["purchase_date"] = date("Y-m-d 00:00:01", strtotime($this->array_smart_fetch($row, "purchase date")));
+			$item["purchase_cost"] = $this->array_smart_fetch($row, "purchase cost");
+			$item["order_number"] = $this->array_smart_fetch($row, "order number");
+			$item["notes"] = $this->array_smart_fetch($row, "notes");
+			$item["quantity"] = $this->array_smart_fetch($row, "quantity");
+			$item["requestable"] = $this->array_smart_fetch($row, "requestable");
+
+
+			$this->comment("Item Type: " . $item["item_type"]);
 			$this->comment('Category Name: ' . $item_category);
 			$this->comment('Location: ' . $item_location);
-			$this->comment('Purchase Date: ' . $item_purchase_date);
-			$this->comment('Purchase Cost: ' . $item_purchase_cost);
+			$this->comment('Purchase Date: ' . $item["purchase_date"]);
+			$this->comment('Purchase Cost: ' . $item["purchase_cost"]);
 			$this->comment('Company Name: ' . $item_company_name);
 
-			$user = $this->createOrFetchUser($row);
+			$item["user"] = $this->createOrFetchUser($row);
 
-			$location = $this->createOrFetchLocation($item_location);
-			$category = $this->createOrFetchCategory($item_category, $item_type);
-			$manufacturer = $this->createOrFetchManufacturer($row);
-			$company = $this->createOrFetchCompany($item_company_name);
+			$item["location"] = $this->createOrFetchLocation($item_location);
+			$item["category"] = $this->createOrFetchCategory($item_category, $item["item_type"]);
+			$item["manufacturer"] = $this->createOrFetchManufacturer($row);
+			$item["company"] = $this->createOrFetchCompany($item_company_name);
 
-			$this->comment("About to check item type... " . $item_type );
-			switch ($item_type) {
+			switch ($item["item_type"]) {
 				case "asset":
-					$this->createAssetIfNotExists($row, $item_name, $item_purchase_date, $item_purchase_cost,
-						$user, $location, $status_id, $company, $category, $manufacturer, $item_order_number, $item_notes);
+					$this->createAssetIfNotExists($row, $item);
 					break;
 				case "accessory":
 					$this->comment('accessory');
-					$this->createAccessoryIfNotExists($row, $item_name, $item_purchase_date, $item_purchase_cost,
-						 $location, $company, $category, $item_order_number, $item_quantity, $item_requestable);
+					$this->createAccessoryIfNotExists($row, $item);
 					break;
 
 			}
@@ -149,6 +147,9 @@ class ObjectImportCommand extends Command {
 		return array_key_exists($key,$array) ? trim($array[ $key ]) : $default;
 	}
 
+	/**
+	 * @var
+     */
 	private $locations;
 	/**
 	 * @param $asset_location
@@ -443,7 +444,6 @@ class ObjectImportCommand extends Command {
 		foreach ($this->companies as $tempcompany) {
 			if ($tempcompany->name == $asset_company_name ) {
 				$this->comment('A matching Company ' . $asset_company_name . ' already exists');
-				$this->comment("Before Return");
 				return $tempcompany;
 			}
 		}
@@ -498,32 +498,21 @@ class ObjectImportCommand extends Command {
 	private $assets;
 
 	/**
-	 * @param $asset_tag
-	 * @param $item_name
-	 * @param $item_purchase_date
-	 * @param $item_purchase_cost
-	 * @param $asset_serial
-	 * @param $asset_model
-	 * @param $user
-	 * @param $location
-	 * @param $status_id
-	 * @param $company
-	 * @param $item_notes
+	 * @param array $row The CSV Row we are importing
+	 * @param array $item Data about the item that has already been parsed.
 	 */
-	public function createAssetIfNotExists(array $row, $item_name, $item_purchase_date, $item_purchase_cost,
-										   $user, $location, $status_id, $company, $category, $manufacturer,
-										   $item_order_number, $item_notes )
+	public function createAssetIfNotExists(array $row, array $item )
 	{
+		$status_id = 1;
         $asset_serial = $this->array_smart_fetch($row, "serial number");
         $asset_tag = $this->array_smart_fetch($row, "asset tag");
-//        $item_notes = $this->array_smart_fetch($row, "notes");
         // Check for the asset model match and create it if it doesn't exist
-        $asset_model = $this->createOrFetchAssetModel($row, $category, $manufacturer);
+        $asset_model = $this->createOrFetchAssetModel($row, $item["category"], $item["manufacturer"]);
 		$supplier = $this->createOrFetchSupplier($row);
 
         $this->comment('Serial No: '.$asset_serial);
         $this->comment('Asset Tag: '.$asset_tag);
-        $this->comment('Notes: '.$item_notes);
+        $this->comment('Notes: '.$item["notes"]);
 
 		foreach ($this->assets as $tempasset) {
 			if ($tempasset->asset_tag == $asset_tag ) {
@@ -533,40 +522,42 @@ class ObjectImportCommand extends Command {
 		}
 
 		$asset = new Asset();
-		$asset->name = e($item_name);
-		if ($item_purchase_date != '') {
-			$asset->purchase_date = $item_purchase_date;
+		$asset->name = e($item["item_name"]);
+		if ($item["purchase_date"] != '') {
+			$asset->purchase_date = $item["purchase_date"];
 		} else {
 			$asset->purchase_date = NULL;
 		}
-		if ($item_purchase_cost != '') {
-			$asset->purchase_cost = ParseFloat(e($item_purchase_cost)).toFixed(2);
+
+		if (!empty($item_purchase_cost)) {
+			$asset->purchase_cost = number_format(e($item["purchase_cost"]),2);
+			$this->comment("Asset cost parsed: " . $asset->purchase_cost);
 		} else {
 			$asset->purchase_cost = 0.00;
 		}
 		$asset->serial = e($asset_serial);
 		$asset->asset_tag = e($asset_tag);
 		$asset->model_id = $asset_model->id;
-		$asset->assigned_to = $user->id;
-		$asset->rtd_location_id = $location->id;
+		$asset->assigned_to = $item["user"]->id;
+		$asset->rtd_location_id = $item["location"]->id;
 		$asset->user_id = 1;
 		$asset->status_id = $status_id;
-		$asset->company_id = $company->id;
-		$asset->order_number = $item_order_number;
+		$asset->company_id = $item["company"]->id;
+		$asset->order_number = $item["order_number"];
 		$asset->supplier_id = $supplier->id;
-		if ($item_purchase_date != '') {
-			$asset->purchase_date = $item_purchase_date;
+		if ($item["purchase_date"] != '') {
+			$asset->purchase_date = $item["purchase_date"];
 		} else {
 			$asset->purchase_date = NULL;
 		}
-		$asset->notes = e($item_notes);
+		$asset->notes = e($item["notes"]);
 
 		if ($this->option('testrun') != 'true') {
 
 			if ($asset->save()) {
-				$this->comment('Asset ' . $item_name . ' with serial number ' . $asset_serial . ' was created');
+				$this->comment('Asset ' . $item["item_name"] . ' with serial number ' . $asset_serial . ' was created');
 			} else {
-				$this->comment('Something went wrong! Asset ' . $item_name . ' was NOT created');
+				$this->comment('Something went wrong! Asset ' . $item["item_name"] . ' was NOT created');
 			}
 
 		} else {
@@ -580,61 +571,48 @@ class ObjectImportCommand extends Command {
 	/**
 	 * Create an accessory if a duplicate does not exist
 	 * @param array $row The csv row we are working on
-	 * @param $item_name Name of Accessory
-	 * @param $item_purchase_date Date Accessory was purchasd
-	 * @param $item_purchase_cost Price accessory was purchased at
-	 * @param $location Where Accessory is stored
-	 * @param $company Company Accessory Belongs to
-	 * @param $category Accessory Category
-	 * @param $item_order_number Order number
-	 * @param int $quantity Number of this accessory in Stock
-	 * @param bool $requestable Is Accessory Requestable?
+	 * @param $item Previously extracted information about the item
 	 */
-	public function createAccessoryIfNotExists(array $row, $item_name, $item_purchase_date, $item_purchase_cost,
-											   $location, $company, $category, $item_order_number,
-											   $quantity, $requestable )
+	public function createAccessoryIfNotExists(array $row, array $item )
 	{
 		$this->comment("Creating Accessory");
 		foreach ($this->accessories as $tempaccessory) {
-			if ($tempaccessory->name == $item_name ) {
-				$this->comment('A matching Accessory ' . $item_name . ' already exists.  ');
+			if ($tempaccessory->name == $item["item_name"] ) {
+				$this->comment('A matching Accessory ' . $item["item_name"] . ' already exists.  ');
 				// FUTURE: Adjust quantity on import maybe?
 				return;
 			}
 		}
 
-		$this->comment('1');
 		$accessory = new Accessory();
-		$accessory->name = e($item_name);
-		if (!empty($item_purchase_date)) {
-			$accessory->purchase_date = $item_purchase_date;
+		$accessory->name = e($item["item_name"]);
+		if (!empty($item["purchase_date"])) {
+			$accessory->purchase_date = $item["purchase_date"];
 		} else {
 			$accessory->purchase_date = NULL;
 		}
-		$this->comment('2');
-		if (!empty($item_purchase_cost)) {
-			$accessory->purchase_cost = number_format(e($item_purchase_cost),2);
-			$this->comment("Accessory cost parsed: " . $accessory->purchase_cost);
+		if (!empty($item["purchase_cost"])) {
+			$accessory->purchase_cost = number_format(e($item["purchase_cost"]),2);
 		} else {
 			$accessory->purchase_cost = 0.00;
 		}
-		$accessory->location_id = $location->id;
+		$accessory->location_id = $item["location"]->id;
 		$accessory->user_id = 1;
-		$accessory->company_id = $company->id;
-		$accessory->order_number = $item_order_number;
-		$accessory->category_id = $category->id;
-		if (!empty($item_purchase_date)) {
-			$accessory->purchase_date = $item_purchase_date;
+		$accessory->company_id = $item["company"]->id;
+		$accessory->order_number = $item["order_number"];
+		$accessory->category_id = $item["category"]->id;
+		if (!empty($item["purchase_date"])) {
+			$accessory->purchase_date = $item["purchase_date"];
 		} else {
 			$accessory->purchase_date = NULL;
 		}
 		//TODO: Implement
 //		$accessory->notes = e($item_notes);
-		$accessory->requestable = filter_var($requestable, FILTER_VALIDATE_BOOLEAN);
+		$accessory->requestable = filter_var($item["requestable"], FILTER_VALIDATE_BOOLEAN);
 
 		//Must have at least one of the item if we import it.
-		if($quantity>0) {
-			$accessory->qty = $quantity;
+		if($item["quantity"]>0) {
+			$accessory->qty = $item["quantity"];
 		} else {
 			$accessory->qty = 1;
 		}
@@ -642,13 +620,13 @@ class ObjectImportCommand extends Command {
 		if ($this->option('testrun') != 'true') {
 
 			if ($accessory->save()) {
-				$this->comment('Accessory ' . $item_name . ' was created');
+				$this->comment('Accessory ' . $item["item_name"] . ' was created');
 			} else {
-				$this->comment('Something went wrong! Accessory ' . $item_name . ' was NOT created');
+				$this->comment('Something went wrong! Accessory ' . $item["item_name"] . ' was NOT created');
 			}
 
 		} else {
-			$this->comment('TEST RUN - Accessory  ' . $item_name . ' not created');
+			$this->comment('TEST RUN - Accessory  ' . $item["item_name"] . ' not created');
 			return;
 		}
 	}
