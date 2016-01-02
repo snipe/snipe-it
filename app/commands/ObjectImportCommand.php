@@ -6,6 +6,9 @@ use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Input\InputArgument;
 use League\Csv\Reader;
 
+/**
+ * Class ObjectImportCommand
+ */
 class ObjectImportCommand extends Command {
 
 	/**
@@ -66,103 +69,63 @@ class ObjectImportCommand extends Command {
 			$newarray[$index] = $internalnewarray;
 		}
 
-
+		$this->locations = Location::All(['name', 'id']);
+		$this->categories = Category::All(['name', 'category_type']);
+		$this->manufacturers = Manufacturer::All(['name']);
+		$this->asset_models = Model::All(['name','modelno','category_id','manufacturer_id', 'id']);
+		$this->companies = Company::All(['name', 'id']);
+		$this->assets = Asset::all(['asset_tag']);
+		$this->suppliers = Supplier::All(['name']);
 		// Loop through the records
 		foreach( $newarray as $row ) {
 			$status_id = 1;
 
 			// Let's just map some of these entries to more user friendly words
 
-			$user_name = $this->array_smart_fetch($row,"name");
-			$user_email = $this->array_smart_fetch($row,"email");
-			$user_username = $this->array_smart_fetch($row,"username");
-			$asset_name = $this->array_smart_fetch($row,"item name");
-			$asset_category = $this->array_smart_fetch($row, "category");
-			$asset_model_name = $this->array_smart_fetch($row, "model name");
-			$asset_mfgr = $this->array_smart_fetch($row, "manufacturer");
-			$asset_modelno = $this->array_smart_fetch($row, "model number");
-			$asset_serial = $this->array_smart_fetch($row, "serial number");
-			$asset_tag = $this->array_smart_fetch($row, "asset tag");
-			$asset_location = $this->array_smart_fetch($row, "location");
-			$asset_notes = $this->array_smart_fetch($row, "notes");
-			$asset_purchase_date = $this->array_smart_fetch($row, "purchase date");
-			$asset_purchase_cost = $this->array_smart_fetch($row, "purchase cost");
-			$asset_company_name = $this->array_smart_fetch($row, "company name");
+			// Fetch general items here, fetch item type specific items in respective methods
+			/** @var Asset, License, Accessory, or Consumable $item_type */
+			$item_type = strtolower($this->array_smart_fetch($row, "item type"));
+			$item_name = $this->array_smart_fetch($row, "item name");
+			$item_category = $this->array_smart_fetch($row, "category");
+			$item_company_name = $this->array_smart_fetch($row, "company name");
+			$item_purchase_date = $this->array_smart_fetch($row, "purchase date");
+			$item_purchase_cost = $this->array_smart_fetch($row, "purchase cost");
+			$item_order_number = $this->array_smart_fetch($row, "order number");
+			$item_location = $this->array_smart_fetch($row, "location");
 
 
-			// A number was given instead of a name
-			if (is_numeric($user_name)) {
-				$this->comment('User '.$user_name.' is a number - Assuming UID - hopefully this user already exists');
-				$user_username = '';
 
-				// No name was given
-			} elseif ($user_name=='') {
-				$this->comment('No user data provided - skipping user creation, just adding asset');
-				$first_name = '';
-				$last_name = '';
-				//$user_username = '';
+			$this->comment('Category Name: ' . $item_category);
 
-			} else {
-				$user_email_array = User::generateFormattedNameFromFullName($this->option('email_format'), $user_name);
-				$first_name = $user_email_array['first_name'];
-				$last_name = $user_email_array['last_name'];
 
-				if ($user_email=='') {
-					$user_email = $user_email_array['username'].'@'.Config::get('app.domain');
-				}
+			$this->comment('Location: ' . $item_location);
+			$this->comment('Purchase Date: ' . $item_purchase_date);
+			$this->comment('Purchase Cost: ' . $item_purchase_cost);
+			$this->comment('Company Name: ' . $item_company_name);
 
-				if ($user_username=='') {
-					if ($this->option('username_format')=='email') {
-						$user_username = $user_email;
-					} else {
-						$user_name_array = User::generateFormattedNameFromFullName($this->option('username_format'), $user_name);
-						$user_username = $user_name_array['username'];
-					}
+			$user = $this->createOrFetchUser($row);
 
-				}
+//			dd($locations);
+			$location = $this->createOrFetchLocation($item_location);
+			$category = $this->createOrFetchCategory($item_category, $item_type);
+			$manufacturer = $this->createOrFetchManufacturer($row);
+
+
+			$company = $this->createOrFetchCompany($item_company_name);
+//			dd(strtolower($item_type));
+			switch ($item_type) {
+				case "asset":
+					$this->createAssetIfNotExists($row, $item_name, $item_purchase_date, $item_purchase_cost,
+						$user, $location, $status_id, $company, $category, $manufacturer, $item_order_number);
+					continue;
 
 			}
-
-			$this->comment('Full Name: '.$user_name);
-			$this->comment('First Name: '.$first_name);
-			$this->comment('Last Name: '.$last_name);
-			$this->comment('Username: '.$user_username);
-			$this->comment('Email: '.$user_email);
-			$this->comment('Category Name: '.$asset_category);
-			$this->comment('Manufacturer ID: '.$asset_mfgr);
-			$this->comment('Model No: '.$asset_modelno);
-			$this->comment('Serial No: '.$asset_serial);
-			$this->comment('Asset Tag: '.$asset_tag);
-			$this->comment('Location: '.$asset_location);
-			$this->comment('Purchase Date: '.$asset_purchase_date);
-			$this->comment('Purchase Cost: '.$asset_purchase_cost);
-			$this->comment('Notes: '.$asset_notes);
-			$this->comment('Company Name: '.$asset_company_name);
-
 			$this->comment('------------- Action Summary ----------------');
 
-			if($this->option('testrun') == true) {
-				continue; // We parsed and shared, now die.
-			}
-
-			$user = $this->createOrFetchUser($user_username, $user_email, $first_name, $last_name);
-			$location = $this->createOrFetchLocation($asset_location);
-			$category = $this->createOrFetchCategory($asset_category);
-			$manufacturer = $this->createOrFetchManufacturer($asset_mfgr);
-			// Check for the asset model match and create it if it doesn't exist
-			$asset_model = $this->createOrFetchAssetModel($asset_model_name, $asset_modelno, $category, $manufacturer);
-			$company = $this->createOrFetchCompany($asset_company_name);
-			$this->createAssetIfNotExists($asset_tag, $asset_name, $asset_purchase_date, $asset_purchase_cost,
-				$asset_serial, $asset_model, $user, $location, $status_id, $company, $asset_notes);
-
-
+		}
 			$this->comment('=====================================');
 
 			return true;
-
-		}
-
-
 	}
 
 	/**
@@ -176,6 +139,7 @@ class ObjectImportCommand extends Command {
 		return array_key_exists($key,$array) ? trim($array[ $key ]) : $default;
 	}
 
+	private $locations;
 	/**
 	 * @param $asset_location
 	 * @return Location
@@ -183,44 +147,54 @@ class ObjectImportCommand extends Command {
 	public function createOrFetchLocation($asset_location)
 	{
 // Check for the location match and create it if it doesn't exist
-		if ($location = Location::where('name', $asset_location)->first()) {
-			$this->comment('Location ' . $asset_location . ' already exists');
-			return $location;
-		} else {
+//		if ($location = Location::where('name', $asset_location)->first()) {
+//			$this->comment('Location ' . $asset_location . ' already exists');
+//			return $location;
+//		} else {
+		foreach($this->locations as $templocation) {
+			if( $templocation->name == $asset_location) {
+				$this->comment('Location ' . $asset_location . ' already exists');
+				return $templocation;
+			}
+		}
+		// No matching locations in the collection, create a new one.
 
-			$location = new Location();
 
-			if ($asset_location != '') {
+		$location = new Location();
+
+		if ($asset_location != '') {
 
 
-				$location->name = e($asset_location);
-				$location->address = '';
-				$location->city = '';
-				$location->state = '';
-				$location->country = '';
-				$location->user_id = 1;
+			$location->name = e($asset_location);
+			$location->address = '';
+			$location->city = '';
+			$location->state = '';
+			$location->country = '';
+			$location->user_id = 1;
+			$this->locations->add($location);
 
-				if (!$this->option('testrun') == 'true') {
+			if (!$this->option('testrun') == 'true') {
 
-					if ($location->save()) {
-						$this->comment('Location ' . $asset_location . ' was created');
-						return $location;
-					} else {
-						$this->comment('Something went wrong! Location ' . $asset_location . ' was NOT created');
-						return $location;
-					}
+				if ($location->save()) {
+					$this->comment('Location ' . $asset_location . ' was created');
 
+					return $location;
 				} else {
-					$this->comment('Location ' . $asset_location . ' was (not) created - test run only');
+					$this->comment('Something went wrong! Location ' . $asset_location . ' was NOT created');
 					return $location;
 				}
+
 			} else {
-				$this->comment('No location given, so none created.');
+				$this->comment('Location ' . $asset_location . ' was (not) created - test run only');
 				return $location;
 			}
-
+		} else {
+			$this->comment('No location given, so none created.');
+			return $location;
 		}
+
 	}
+
 
 	/**
 	 * @param $user_username
@@ -229,8 +203,53 @@ class ObjectImportCommand extends Command {
 	 * @param $last_name
 	 * @return User
 	 */
-	public function createOrFetchUser($user_username, $user_email, $first_name, $last_name)
+	public function createOrFetchUser($row)
 	{
+		$user_name = $this->array_smart_fetch($row, "name");
+		$user_email = $this->array_smart_fetch($row, "email");
+		$user_username = $this->array_smart_fetch($row, "username");
+
+
+		// A number was given instead of a name
+		if (is_numeric($user_name)) {
+			$this->comment('User ' . $user_name . ' is a number - Assuming UID - hopefully this user already exists');
+			$user_username = '';
+
+			// No name was given
+		} elseif ($user_name == '') {
+			$this->comment('No user data provided - skipping user creation, just adding asset');
+			$first_name = '';
+			$last_name = '';
+			//$user_username = '';
+
+		} else {
+			$user_email_array = User::generateFormattedNameFromFullName($this->option('email_format'), $user_name);
+			$first_name = $user_email_array['first_name'];
+			$last_name = $user_email_array['last_name'];
+
+			if ($user_email == '') {
+				$user_email = $user_email_array['username'] . '@' . Config::get('app.domain');
+			}
+
+			if ($user_username == '') {
+				if ($this->option('username_format') == 'email') {
+					$user_username = $user_email;
+				} else {
+					$user_name_array = User::generateFormattedNameFromFullName($this->option('username_format'), $user_name);
+					$user_username = $user_name_array['username'];
+				}
+
+			}
+
+		}
+		$this->comment('Full Name: ' . $user_name);
+		$this->comment('First Name: ' . $first_name);
+		$this->comment('Last Name: ' . $last_name);
+		$this->comment('Username: ' . $user_username);
+		$this->comment('Email: ' . $user_email);
+
+        if($this->option('testrun') == true )
+            return new User;
 		if (!empty($user_username)) {
 			if ($user = User::MatchEmailOrUsername($user_username, $user_email)
 				->whereNotNull('username')->first()
@@ -267,30 +286,36 @@ class ObjectImportCommand extends Command {
 		}
 	}
 
+	private $categories;
+
 	/**
 	 * @param $asset_category
 	 * @return Category
 	 */
-	public function createOrFetchCategory($asset_category)
+	public function createOrFetchCategory($asset_category, $item_type)
 	{
+
 		if (e($asset_category) == '') {
 			$category_name = 'Unnamed Category';
 		} else {
 			$category_name = e($asset_category);
 		}
 
-		// Check for the category match and create it if it doesn't exist
-		if ($category = Category::where('name', $category_name)->where('category_type', 'asset')->first()) {
-			$this->comment('Category ' . $category_name . ' already exists');
-			return $category;
+		foreach($this->categories as $tempcategory) {
+			if( $tempcategory->name == $asset_category && $tempcategory->category_type == $item_type) {
+				$this->comment('Category ' . $asset_category . ' already exists');
+				return $tempcategory;
+			}
+		}
 
-		} else {
-			$category = new Category();
+		$category = new Category();
 
-			$category->name = $category_name;
-			$category->category_type = 'asset';
-			$category->user_id = 1;
+		$category->name = $category_name;
+		$category->category_type = 'asset';
+		$category->user_id = 1;
+		$this->categories->add($category);
 
+		if($this->option('testrun')!='true') {
 			if ($category->save()) {
 				$this->comment('Category ' . $asset_category . ' was created');
 				return $category;
@@ -298,24 +323,40 @@ class ObjectImportCommand extends Command {
 				$this->comment('Something went wrong! Category ' . $asset_category . ' was NOT created');
 				return $category;
 			}
-
+		} else {
+			$this->comment("Test Run! Category " . $category->name . ' not saved');
+			return $category;
 		}
+
 	}
 
+
+	private $manufacturers;
 	/**
 	 * @param $asset_mfgr
 	 * @return Manufacturer
 	 */
-	public function createOrFetchManufacturer($asset_mfgr)
+	public function createOrFetchManufacturer(array $row)
 	{
-// Check for the manufacturer match and create it if it doesn't exist
-		if ($manufacturer = Manufacturer::where('name', $asset_mfgr)->first()) {
-			$this->comment('Manufacturer ' . $asset_mfgr . ' already exists');
-			return $manufacturer;
-		} else {
-			$manufacturer = new Manufacturer();
-			$manufacturer->name = e($asset_mfgr);
-			$manufacturer->user_id = 1;
+		$asset_mfgr = $this->array_smart_fetch($row, "manufacturer");
+
+		$this->comment('Manufacturer ID: ' . $asset_mfgr);
+
+		foreach ($this->manufacturers as $tempmanufacturer) {
+			if ($tempmanufacturer->name == $asset_mfgr) {
+				$this->comment('Manufacturer ' . $asset_mfgr . ' already exists');
+				return $tempmanufacturer;
+			}
+		}
+
+		//Otherwise create a manufacturer.
+
+		$manufacturer = new Manufacturer();
+		$manufacturer->name = e($asset_mfgr);
+		$manufacturer->user_id = 1;
+		$this->manufacturers->add($manufacturer);
+
+		if ($this->option('testrun') != true) {
 
 			if ($manufacturer->save()) {
 				$this->comment('Manufacturer ' . $asset_mfgr . ' was created');
@@ -325,29 +366,46 @@ class ObjectImportCommand extends Command {
 				return $manufacturer;
 			}
 
+		} else {
+			$this->comment("TEST RUN - " . $manufacturer->name . ' not created' );
+			return $manufacturer;
 		}
 	}
 
-	/**
-	 * @param $asset_model_name
-	 * @param $asset_modelno
-	 * @param $category
-	 * @param $manufacturer
-	 * @return Model
-	 */
-	public function createOrFetchAssetModel($asset_model_name, $asset_modelno, $category, $manufacturer)
+	private $asset_models;
+    /**
+     * @param array $row The current CSV row we are working on
+     * @param $category Item Category
+     * @param $manufacturer MFGR extracted from CSV
+     * @return Model Asset Model
+     * @internal param $asset_modelno
+     */
+	public function createOrFetchAssetModel(array $row, $category, $manufacturer)
 	{
-		if ($asset_model = Model::where('name', $asset_model_name)->where('modelno', $asset_modelno)->where('category_id', $category->id)->where('manufacturer_id', $manufacturer->id)->first()) {
-			$this->comment('The Asset Model ' . $asset_model_name . ' with model number ' . $asset_modelno . ' already exists');
-			return $asset_model;
-		} else {
-			$asset_model = new Model();
-			$asset_model->name = e($asset_model_name);
-			$asset_model->manufacturer_id = $manufacturer->id;
-			$asset_model->modelno = e($asset_modelno);
-			$asset_model->category_id = $category->id;
-			$asset_model->user_id = 1;
 
+		$asset_model_name = $this->array_smart_fetch($row, "model name");
+		$asset_modelno = $this->array_smart_fetch($row, "model number");
+		$this->comment('Model Name: ' . $asset_model_name);
+		$this->comment('Model No: ' . $asset_modelno);
+
+		foreach ($this->asset_models as $tempmodel) {
+			if ($tempmodel->name == $asset_model_name && $tempmodel->modelno == $asset_modelno
+				&& $tempmodel->category_id == $category->id && $tempmodel->manufacturer_id == $manufacturer->id
+			) {
+				$this->comment('A matching model ' . $asset_model_name . ' with model number ' . $asset_modelno . ' already exists');
+				return $tempmodel;
+			}
+		}
+		$asset_model = new Model();
+		$asset_model->name = e($asset_model_name);
+//		dd($manufacturer);
+		$asset_model->manufacturer_id = $manufacturer->id;
+		$asset_model->modelno = e($asset_modelno);
+		$asset_model->category_id = $category->id;
+		$asset_model->user_id = 1;
+		$this->asset_models->add($asset_model);
+
+		if(!$this->option('testrun') == 'true') {
 			if ($asset_model->save()) {
 				$this->comment('Asset Model ' . $asset_model_name . ' with model number ' . $asset_modelno . ' was created');
 				return $asset_model;
@@ -355,9 +413,14 @@ class ObjectImportCommand extends Command {
 				$this->comment('Something went wrong! Asset Model ' . $asset_model_name . ' was NOT created');
 				return $asset_model;
 			}
-
+		} else {
+			$this->comment( ' TEST RUN - Model ' . $asset_model_name . ' not created');
+			return $asset_model;
 		}
+
 	}
+
+	private $companies;
 
 	/**
 	 * @param $asset_company_name
@@ -365,14 +428,18 @@ class ObjectImportCommand extends Command {
 	 */
 	public function createOrFetchCompany($asset_company_name)
 	{
+		foreach ($this->companies as $tempcompany) {
+			if ($tempcompany->name == $asset_company_name ) {
+				$this->comment('A matching Company ' . $asset_company_name . ' already exists');
+				return $tempcompany;
+			}
+		}
 // Check for the asset company match and create it if it doesn't exist
-		if ($company = Company::where('name', $asset_company_name)->first()) {
-			$this->comment('Company ' . $asset_company_name . ' already exists');
-			return $company;
-		} else {
+
 			$company = new Company();
 			$company->name = e($asset_company_name);
 
+		if($this->option('testrun') != 'true') {
 			if ($company->save()) {
 				$this->comment('Company ' . $asset_company_name . ' was created');
 				return $company;
@@ -380,14 +447,47 @@ class ObjectImportCommand extends Command {
 				$this->comment('Something went wrong! Company ' . $asset_company_name . ' was NOT created');
 				return $company;
 			}
+		} else {
+			$this->comment( ' TEST RUN - Company ' . $asset_company_name . ' not created');
+			return $company;
 		}
 	}
 
+	private $suppliers;
+	public function createOrFetchSupplier($row)
+	{
+		$supplier_name = $this->array_smart_fetch($row, "supplier");
+		foreach ($this->suppliers as $tempsupplier) {
+			if ($tempsupplier->name == $supplier_name ) {
+				$this->comment('A matching Company ' . $supplier_name . ' already exists');
+				return $tempsupplier;
+			}
+		}
+// Check for the asset company match and create it if it doesn't exist
+
+		$supplier = new Supplier();
+		$supplier->name = e($supplier_name);
+
+		if($this->option('testrun') != 'true') {
+			if ($supplier->save()) {
+				$this->comment('Supplier ' . $supplier_name . ' was created');
+				return $supplier;
+			} else {
+				$this->comment('Something went wrong! Supplier ' . $supplier_name . ' was NOT created');
+				return $supplier;
+			}
+		} else {
+			$this->comment( ' TEST RUN - Supplier ' . $supplier_name . ' not created');
+			return $supplier;
+		}
+	}
+	private $assets;
+
 	/**
 	 * @param $asset_tag
-	 * @param $asset_name
-	 * @param $asset_purchase_date
-	 * @param $asset_purchase_cost
+	 * @param $item_name
+	 * @param $item_purchase_date
+	 * @param $item_purchase_cost
 	 * @param $asset_serial
 	 * @param $asset_model
 	 * @param $user
@@ -396,46 +496,68 @@ class ObjectImportCommand extends Command {
 	 * @param $company
 	 * @param $asset_notes
 	 */
-	public function createAssetIfNotExists($asset_tag, $asset_name, $asset_purchase_date, $asset_purchase_cost, $asset_serial,
-										   $asset_model, $user, $location, $status_id, $company, $asset_notes)
+	public function createAssetIfNotExists(array $row, $item_name, $item_purchase_date, $item_purchase_cost,
+										   $user, $location, $status_id, $company, $category, $manufacturer,
+										   $item_order_number )
 	{
-// Check for the asset match and create it if it doesn't exist
-		if ($asset = Asset::where('asset_tag', $asset_tag)->first()) {
-			$this->comment('The Asset with asset tag ' . $asset_tag . ' already exists');
+        $asset_serial = $this->array_smart_fetch($row, "serial number");
+        $asset_tag = $this->array_smart_fetch($row, "asset tag");
+        $asset_notes = $this->array_smart_fetch($row, "notes");
+        // Check for the asset model match and create it if it doesn't exist
+        $asset_model = $this->createOrFetchAssetModel($row, $category, $manufacturer);
+		$supplier = $this->createOrFetchSupplier($row);
+
+        $this->comment('Serial No: '.$asset_serial);
+        $this->comment('Asset Tag: '.$asset_tag);
+        $this->comment('Notes: '.$asset_notes);
+
+		foreach ($this->assets as $tempasset) {
+			if ($tempasset->asset_tag == $asset_tag ) {
+				$this->comment('A matching Company ' . $asset_tag . ' already exists');
+				return;
+			}
+		}
+
+		$asset = new Asset();
+		$asset->name = e($item_name);
+		if ($item_purchase_date != '') {
+			$asset->purchase_date = $item_purchase_date;
 		} else {
-			$asset = new Asset();
-			$asset->name = e($asset_name);
-			if ($asset_purchase_date != '') {
-				$asset->purchase_date = $asset_purchase_date;
-			} else {
-				$asset->purchase_date = NULL;
-			}
-			if ($asset_purchase_cost != '') {
-				$asset->purchase_cost = ParseFloat(e($asset_purchase_cost));
-			} else {
-				$asset->purchase_cost = 0.00;
-			}
-			$asset->serial = e($asset_serial);
-			$asset->asset_tag = e($asset_tag);
-			$asset->model_id = $asset_model->id;
-			$asset->assigned_to = $user->id;
-			$asset->rtd_location_id = $location->id;
-			$asset->user_id = 1;
-			$asset->status_id = $status_id;
-			$asset->company_id = $company->id;
-			if ($asset_purchase_date != '') {
-				$asset->purchase_date = $asset_purchase_date;
-			} else {
-				$asset->purchase_date = NULL;
-			}
-			$asset->notes = e($asset_notes);
+			$asset->purchase_date = NULL;
+		}
+		if ($item_purchase_cost != '') {
+			$asset->purchase_cost = ParseFloat(e($item_purchase_cost));
+		} else {
+			$asset->purchase_cost = 0.00;
+		}
+		$asset->serial = e($asset_serial);
+		$asset->asset_tag = e($asset_tag);
+		$asset->model_id = $asset_model->id;
+		$asset->assigned_to = $user->id;
+		$asset->rtd_location_id = $location->id;
+		$asset->user_id = 1;
+		$asset->status_id = $status_id;
+		$asset->company_id = $company->id;
+		$asset->order_number = $item_order_number;
+		$asset->supplier_id = $supplier->id;
+		if ($item_purchase_date != '') {
+			$asset->purchase_date = $item_purchase_date;
+		} else {
+			$asset->purchase_date = NULL;
+		}
+		$asset->notes = e($asset_notes);
+
+		if ($this->option('testrun') != 'true') {
 
 			if ($asset->save()) {
-				$this->comment('Asset ' . $asset_name . ' with serial number ' . $asset_serial . ' was created');
+				$this->comment('Asset ' . $item_name . ' with serial number ' . $asset_serial . ' was created');
 			} else {
-				$this->comment('Something went wrong! Asset ' . $asset_name . ' was NOT created');
+				$this->comment('Something went wrong! Asset ' . $item_name . ' was NOT created');
 			}
 
+		} else {
+			$this->comment('TEST RUN - Asset w/ tag ' .$asset_tag . ' not created');
+			return;
 		}
 	}
 
