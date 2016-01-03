@@ -76,7 +76,8 @@ class ObjectImportCommand extends Command {
 		$this->companies = Company::All(['name', 'id']);
 		$this->assets = Asset::all(['asset_tag']);
 		$this->suppliers = Supplier::All(['name']);
-		$this->accessories = Accessory::All(['name','qty']);
+		$this->accessories = Accessory::All(['name']);
+		$this->consumables = Consumable::All(['name']);
 		// Loop through the records
 		foreach( $newarray as $row ) {
 
@@ -86,7 +87,7 @@ class ObjectImportCommand extends Command {
 			/** @var Asset, License, Accessory, or Consumable $item_type */
 
 			$item_category = $this->array_smart_fetch($row, "category");
-			$item_company_name = $this->array_smart_fetch($row, "company name");
+			$item_company_name = $this->array_smart_fetch($row, "company");
 			$item_location = $this->array_smart_fetch($row, "location");
 
 			$item["item_type"] = strtolower($this->array_smart_fetch($row, "item type"));
@@ -123,10 +124,11 @@ class ObjectImportCommand extends Command {
 					$this->createAssetIfNotExists($row, $item);
 					break;
 				case "accessory":
-					$this->comment('accessory');
 					$this->createAccessoryIfNotExists($row, $item);
 					break;
-
+				case 'consumable':
+					$this->createConsumableIfNotExists($row, $item);
+					break;
 			}
 			$this->comment('------------- Action Summary ----------------');
 
@@ -449,8 +451,8 @@ class ObjectImportCommand extends Command {
 		}
 // Check for the asset company match and create it if it doesn't exist
 
-			$company = new Company();
-			$company->name = e($asset_company_name);
+		$company = new Company();
+		$company->name = e($asset_company_name);
 
 		if($this->option('testrun') != 'true') {
 			if ($company->save()) {
@@ -577,7 +579,7 @@ class ObjectImportCommand extends Command {
 	{
 		$this->comment("Creating Accessory");
 		foreach ($this->accessories as $tempaccessory) {
-			if ($tempaccessory->name == $item["item_name"] ) {
+			if ($tempaccessory->name === $item["item_name"] ) {
 				$this->comment('A matching Accessory ' . $item["item_name"] . ' already exists.  ');
 				// FUTURE: Adjust quantity on import maybe?
 				return;
@@ -601,11 +603,7 @@ class ObjectImportCommand extends Command {
 		$accessory->company_id = $item["company"]->id;
 		$accessory->order_number = $item["order_number"];
 		$accessory->category_id = $item["category"]->id;
-		if (!empty($item["purchase_date"])) {
-			$accessory->purchase_date = $item["purchase_date"];
-		} else {
-			$accessory->purchase_date = NULL;
-		}
+
 		//TODO: Implement
 //		$accessory->notes = e($item_notes);
 		$accessory->requestable = filter_var($item["requestable"], FILTER_VALIDATE_BOOLEAN);
@@ -627,7 +625,63 @@ class ObjectImportCommand extends Command {
 
 		} else {
 			$this->comment('TEST RUN - Accessory  ' . $item["item_name"] . ' not created');
-			return;
+		}
+	}
+
+	private $consumables;
+	/**
+	 * Create a consumable if a duplicate does not exist
+	 * @param array $row The csv row we are working with
+	 * @param array $item Previously extracted information about the item.
+	 */
+	public function createConsumableIfNotExists(array $row, array $item)
+	{
+		$this->comment("Creating Consumable");
+		foreach($this->consumables as $tempconsumable) {
+			if($tempconsumable->name === $item["item_name"]) {
+				$this->comment("A matching sumable " . $item["item_name"] . " already exists");
+				//TODO: Adjust quantity if different maybe?
+				return;
+			}
+		}
+
+		$consumable = new Consumable();
+		$consumable->name = e($item["item_name"]);
+
+		if(!empty($item["purchase_date"])) {
+			$consumable->purchase_date = $item["purchase_date"];
+		} else {
+			$consumable->purchase_date = NULL;
+		}
+
+		if(!empty($item["purchase_cost"])) {
+			$consumable->purchase_cost = number_format(e($item["purchase_cost"]),2);
+		} else {
+			$consumable->purchase_cost = 0.00;
+		}
+		$consumable->location_id = $item["location"]->id;
+		$consumable->user_id = 1; // TODO: What user_id should we use for imports?
+		$consumable->company_id = $item["company"]->id;
+		$consumable->order_number = $item["order_number"];
+		$consumable->category_id = $item["category"]->id;
+		// TODO:Implement
+		//$consumable->notes= e($item_notes);
+		$consumable->requestable = filter_var($item["requestable"], FILTER_VALIDATE_BOOLEAN);
+
+		if($item["quantity"]>0) {
+			$consumable->qty = $item["quantity"];
+		} else {
+			$consumable->qty = 1;
+		}
+
+		if($this->option("testrun") != true) {
+			if($consumable->save()) {
+				$this->comment("Consumable " . $item["item_name"] . ' was created');
+			} else {
+				$this->comment('Something went wrong! Consumable ' . $item["item_name"] . ' not created');
+			}
+		} else {
+			$this->comment('TEST RUN - Consumable ' . $item['item_name'] . ' not created');
 		}
 	}
 
