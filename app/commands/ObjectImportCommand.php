@@ -2,6 +2,7 @@
 <?php
 
 use Illuminate\Console\Command;
+use Illuminate\Support\Facades\Config;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Input\InputArgument;
 use League\Csv\Reader;
@@ -45,7 +46,7 @@ class ObjectImportCommand extends Command {
 		$filename = $this->argument('filename');
 
 
-		if ($this->option('testrun')=='true') {
+		if ($this->option('testrun')) {
 			$this->comment('====== TEST ONLY Asset Import for '.$filename.' ====');
 			$this->comment('============== NO DATA WILL BE WRITTEN ==============');
 		} else {
@@ -124,10 +125,10 @@ class ObjectImportCommand extends Command {
 					$this->createAssetIfNotExists($row, $item);
 					break;
 				case "accessory":
-					$this->createAccessoryIfNotExists($row, $item);
+					$this->createAccessoryIfNotExists($item);
 					break;
 				case 'consumable':
-					$this->createConsumableIfNotExists($row, $item);
+					$this->createConsumableIfNotExists($item);
 					break;
 			}
 			$this->comment('------------- Action Summary ----------------');
@@ -140,10 +141,10 @@ class ObjectImportCommand extends Command {
 
 	/**
 	 * Check to see if the given key exists in the array, and trim excess white space before returning it
-	 * @param array $array
-	 * @param $key Value which may or may not exist as a key in $array
-	 * @param string $default Value to return if key doesn't exist in database
-	 * @return string Value associated with $key if it exists, otherwise $default
+	 * @param $array array
+	 * @param $key string
+	 * @param $default string
+	 * @return string
      */
 	public function array_smart_fetch(Array $array, $key, $default = ''){
 		return array_key_exists($key,$array) ? trim($array[ $key ]) : $default;
@@ -154,16 +155,12 @@ class ObjectImportCommand extends Command {
      */
 	private $locations;
 	/**
-	 * @param $asset_location
+	 * Checks the DB to see if a location with the same name exists, otherwise create it
+	 * @param $asset_location string
 	 * @return Location
 	 */
 	public function createOrFetchLocation($asset_location)
 	{
-// Check for the location match and create it if it doesn't exist
-//		if ($location = Location::where('name', $asset_location)->first()) {
-//			$this->comment('Location ' . $asset_location . ' already exists');
-//			return $location;
-//		} else {
 		foreach($this->locations as $templocation) {
 			if( $templocation->name == $asset_location) {
 				$this->comment('Location ' . $asset_location . ' already exists');
@@ -171,13 +168,9 @@ class ObjectImportCommand extends Command {
 			}
 		}
 		// No matching locations in the collection, create a new one.
-
-
 		$location = new Location();
 
-		if ($asset_location != '') {
-
-
+		if (!empty($asset_location)) {
 			$location->name = e($asset_location);
 			$location->address = '';
 			$location->city = '';
@@ -186,19 +179,15 @@ class ObjectImportCommand extends Command {
 			$location->user_id = 1;
 			$this->locations->add($location);
 
-			if (!$this->option('testrun') == 'true') {
-
+			if (!$this->option('testrun')) {
 				if ($location->save()) {
 					$this->comment('Location ' . $asset_location . ' was created');
-
 					return $location;
 				} else {
 					$this->comment('Something went wrong! Location ' . $asset_location . ' was NOT created');
 					return $location;
 				}
-
 			} else {
-				$this->comment('Location ' . $asset_location . ' was (not) created - test run only');
 				return $location;
 			}
 		} else {
@@ -210,11 +199,13 @@ class ObjectImportCommand extends Command {
 
 
 	/**
-	 * @param $user_username
-	 * @param $user_email
-	 * @param $first_name
-	 * @param $last_name
-	 * @return User
+	 * Finds the user matching given data, or creates a new one if there is no match
+	 * @param $row array
+	 * @return User Model w/ matching name
+	 * @internal param string $user_username Username extracted from CSV
+	 * @internal param string $user_email Email extracted from CSV
+	 * @internal param string $first_name
+	 * @internal param string $last_name
 	 */
 	public function createOrFetchUser($row)
 	{
@@ -222,29 +213,27 @@ class ObjectImportCommand extends Command {
 		$user_email = $this->array_smart_fetch($row, "email");
 		$user_username = $this->array_smart_fetch($row, "username");
 
-
 		// A number was given instead of a name
 		if (is_numeric($user_name)) {
 			$this->comment('User ' . $user_name . ' is a number - Assuming UID - hopefully this user already exists');
 			$user_username = '';
 
 			// No name was given
-		} elseif ($user_name == '') {
+		} elseif (empty($user_name)) {
 			$this->comment('No user data provided - skipping user creation, just adding asset');
 			$first_name = '';
 			$last_name = '';
-			//$user_username = '';
 
 		} else {
 			$user_email_array = User::generateFormattedNameFromFullName($this->option('email_format'), $user_name);
 			$first_name = $user_email_array['first_name'];
 			$last_name = $user_email_array['last_name'];
 
-			if ($user_email == '') {
+			if (empty($user_email)) {
 				$user_email = $user_email_array['username'] . '@' . Config::get('app.domain');
 			}
 
-			if ($user_username == '') {
+			if (empty($user_username)) {
 				if ($this->option('username_format') == 'email') {
 					$user_username = $user_email;
 				} else {
@@ -263,7 +252,7 @@ class ObjectImportCommand extends Command {
 		$this->comment('Email: ' . $user_email);
 		$this->comment('--- End User Data ---');
 
-        if($this->option('testrun') == true )
+        if($this->option('testrun'))
             return new User;
 		if (!empty($user_username)) {
 			if ($user = User::MatchEmailOrUsername($user_username, $user_email)
@@ -304,12 +293,13 @@ class ObjectImportCommand extends Command {
 	private $categories;
 
 	/**
-	 * @param $asset_category
+	 * Finds a category with the same name and item type in the database, otherwise creates it
+	 * @param $asset_category string
+	 * @param $item_type string
 	 * @return Category
 	 */
 	public function createOrFetchCategory($asset_category, $item_type)
 	{
-
 		if (e($asset_category) == '') {
 			$category_name = 'Unnamed Category';
 		} else {
@@ -330,7 +320,7 @@ class ObjectImportCommand extends Command {
 		$category->user_id = 1;
 		$this->categories->add($category);
 
-		if($this->option('testrun')!='true') {
+		if(!$this->option('testrun')) {
 			if ($category->save()) {
 				$this->comment('Category ' . $asset_category . ' was created');
 				return $category;
@@ -339,7 +329,6 @@ class ObjectImportCommand extends Command {
 				return $category;
 			}
 		} else {
-			$this->comment("Test Run! Category " . $category->name . ' not saved');
 			return $category;
 		}
 
@@ -347,9 +336,12 @@ class ObjectImportCommand extends Command {
 
 
 	private $manufacturers;
+
 	/**
-	 * @param $asset_mfgr
+	 * Finds a manufacturer with matching name, otherwise create it.
+	 * @param $row array
 	 * @return Manufacturer
+	 * @internal param $asset_mfgr string
 	 */
 	public function createOrFetchManufacturer(array $row)
 	{
@@ -371,8 +363,7 @@ class ObjectImportCommand extends Command {
 		$manufacturer->user_id = 1;
 		$this->manufacturers->add($manufacturer);
 
-		if ($this->option('testrun') != true) {
-
+		if (!$this->option('testrun')) {
 			if ($manufacturer->save()) {
 				$this->comment('Manufacturer ' . $asset_mfgr . ' was created');
 				return $manufacturer;
@@ -382,18 +373,17 @@ class ObjectImportCommand extends Command {
 			}
 
 		} else {
-			$this->comment("TEST RUN - " . $manufacturer->name . ' not created' );
 			return $manufacturer;
 		}
 	}
 
 	private $asset_models;
     /**
-     * @param array $row The current CSV row we are working on
-     * @param $category Item Category
-     * @param $manufacturer MFGR extracted from CSV
-     * @return Model Asset Model
-     * @internal param $asset_modelno
+     * @param array
+     * @param $category Category
+     * @param $manufacturer Manufacturer
+     * @return Model
+     * @internal param $asset_modelno string
      */
 	public function createOrFetchAssetModel(array $row, $category, $manufacturer)
 	{
@@ -413,14 +403,13 @@ class ObjectImportCommand extends Command {
 		}
 		$asset_model = new Model();
 		$asset_model->name = e($asset_model_name);
-//		dd($manufacturer);
 		$asset_model->manufacturer_id = $manufacturer->id;
 		$asset_model->modelno = e($asset_modelno);
 		$asset_model->category_id = $category->id;
 		$asset_model->user_id = 1;
 		$this->asset_models->add($asset_model);
 
-		if(!$this->option('testrun') == 'true') {
+		if(!$this->option('testrun')) {
 			if ($asset_model->save()) {
 				$this->comment('Asset Model ' . $asset_model_name . ' with model number ' . $asset_modelno . ' was created');
 				return $asset_model;
@@ -429,7 +418,6 @@ class ObjectImportCommand extends Command {
 				return $asset_model;
 			}
 		} else {
-			$this->comment( ' TEST RUN - Model ' . $asset_model_name . ' not created');
 			return $asset_model;
 		}
 
@@ -438,7 +426,7 @@ class ObjectImportCommand extends Command {
 	private $companies;
 
 	/**
-	 * @param $asset_company_name
+	 * @param $asset_company_name string
 	 * @return Company
 	 */
 	public function createOrFetchCompany($asset_company_name)
@@ -449,12 +437,11 @@ class ObjectImportCommand extends Command {
 				return $tempcompany;
 			}
 		}
-// Check for the asset company match and create it if it doesn't exist
 
 		$company = new Company();
 		$company->name = e($asset_company_name);
 
-		if($this->option('testrun') != 'true') {
+		if(!$this->option('testrun')) {
 			if ($company->save()) {
 				$this->comment('Company ' . $asset_company_name . ' was created');
 				return $company;
@@ -463,13 +450,17 @@ class ObjectImportCommand extends Command {
 				return $company;
 			}
 		} else {
-			$this->comment( ' TEST RUN - Company ' . $asset_company_name . ' not created');
 			return $company;
 		}
 	}
 
 	private $suppliers;
-	public function createOrFetchSupplier($row)
+
+	/**
+	 * @param $row array
+	 * @return Supplier
+     */
+	public function createOrFetchSupplier(array $row)
 	{
 		$supplier_name = $this->array_smart_fetch($row, "supplier");
 		foreach ($this->suppliers as $tempsupplier) {
@@ -478,13 +469,12 @@ class ObjectImportCommand extends Command {
 				return $tempsupplier;
 			}
 		}
-// Check for the asset company match and create it if it doesn't exist
 
 		$supplier = new Supplier();
 		$supplier->name = e($supplier_name);
 		$supplier->user_id = 1;
 
-		if($this->option('testrun') != 'true') {
+		if(!$this->option('testrun')) {
 			if ($supplier->save()) {
 				$this->comment('Supplier ' . $supplier_name . ' was created');
 				return $supplier;
@@ -493,15 +483,14 @@ class ObjectImportCommand extends Command {
 				return $supplier;
 			}
 		} else {
-			$this->comment( ' TEST RUN - Supplier ' . $supplier_name . ' not created');
 			return $supplier;
 		}
 	}
 	private $assets;
 
 	/**
-	 * @param array $row The CSV Row we are importing
-	 * @param array $item Data about the item that has already been parsed.
+	 * @param array $row
+	 * @param array $item
 	 */
 	public function createAssetIfNotExists(array $row, array $item )
 	{
@@ -547,14 +536,9 @@ class ObjectImportCommand extends Command {
 		$asset->company_id = $item["company"]->id;
 		$asset->order_number = $item["order_number"];
 		$asset->supplier_id = $supplier->id;
-		if ($item["purchase_date"] != '') {
-			$asset->purchase_date = $item["purchase_date"];
-		} else {
-			$asset->purchase_date = NULL;
-		}
 		$asset->notes = e($item["notes"]);
 
-		if ($this->option('testrun') != 'true') {
+		if (!$this->option('testrun')) {
 
 			if ($asset->save()) {
 				$this->comment('Asset ' . $item["item_name"] . ' with serial number ' . $asset_serial . ' was created');
@@ -563,7 +547,6 @@ class ObjectImportCommand extends Command {
 			}
 
 		} else {
-			$this->comment('TEST RUN - Asset w/ tag ' .$asset_tag . ' not created');
 			return;
 		}
 	}
@@ -572,10 +555,9 @@ class ObjectImportCommand extends Command {
 
 	/**
 	 * Create an accessory if a duplicate does not exist
-	 * @param array $row The csv row we are working on
-	 * @param $item Previously extracted information about the item
+	 * @param $item array
 	 */
-	public function createAccessoryIfNotExists(array $row, array $item )
+	public function createAccessoryIfNotExists(array $item )
 	{
 		$this->comment("Creating Accessory");
 		foreach ($this->accessories as $tempaccessory) {
@@ -608,33 +590,31 @@ class ObjectImportCommand extends Command {
 //		$accessory->notes = e($item_notes);
 		$accessory->requestable = filter_var($item["requestable"], FILTER_VALIDATE_BOOLEAN);
 
-		//Must have at least one of the item if we import it.
-		if($item["quantity"]>0) {
+		//Must have at least zero of the item if we import it.
+		if($item["quantity"] > -1) {
 			$accessory->qty = $item["quantity"];
 		} else {
 			$accessory->qty = 1;
 		}
 
-		if ($this->option('testrun') != 'true') {
-
+		if (!$this->option('testrun')) {
 			if ($accessory->save()) {
 				$this->comment('Accessory ' . $item["item_name"] . ' was created');
 			} else {
 				$this->comment('Something went wrong! Accessory ' . $item["item_name"] . ' was NOT created');
 			}
-
 		} else {
 			$this->comment('TEST RUN - Accessory  ' . $item["item_name"] . ' not created');
 		}
 	}
 
 	private $consumables;
+
 	/**
 	 * Create a consumable if a duplicate does not exist
-	 * @param array $row The csv row we are working with
-	 * @param array $item Previously extracted information about the item.
+	 * @param $item array
 	 */
-	public function createConsumableIfNotExists(array $row, array $item)
+	public function createConsumableIfNotExists(array $item)
 	{
 		$this->comment("Creating Consumable");
 		foreach($this->consumables as $tempconsumable) {
@@ -668,13 +648,13 @@ class ObjectImportCommand extends Command {
 		//$consumable->notes= e($item_notes);
 		$consumable->requestable = filter_var($item["requestable"], FILTER_VALIDATE_BOOLEAN);
 
-		if($item["quantity"]>0) {
+		if($item["quantity"] > -1) {
 			$consumable->qty = $item["quantity"];
 		} else {
 			$consumable->qty = 1;
 		}
 
-		if($this->option("testrun") != true) {
+		if(!$this->option("testrun")) {
 			if($consumable->save()) {
 				$this->comment("Consumable " . $item["item_name"] . ' was created');
 			} else {
@@ -708,7 +688,7 @@ class ObjectImportCommand extends Command {
 	return array(
 		array('email_format', null, InputOption::VALUE_REQUIRED, 'The format of the email addresses that should be generated. Options are firstname.lastname, firstname, filastname', null),
 		array('username_format', null, InputOption::VALUE_REQUIRED, 'The format of the username that should be generated. Options are firstname.lastname, firstname, filastname, email', null),
-		array('testrun', null, InputOption::VALUE_REQUIRED, 'Test the output without writing to the database or not.', null),
+		array('testrun', null, InputOption::VALUE_NONE, 'If set, will parse and output data without adding to database', null),
 	);
 
 	}
