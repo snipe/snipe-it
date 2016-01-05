@@ -103,8 +103,8 @@ final class Company extends Elegant
             {
                 static::scopeCompanyablesDirectly($q);
             };
-            
-            $q = $query->where(function ($q) {
+
+            $q = $query->where(function ($q) use ($companyable_names, $f) {
               $q2 = $q->whereHas($companyable_names[0], $f);
 
               for ($i = 1; $i < count($companyable_names); $i++)
