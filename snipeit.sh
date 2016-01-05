@@ -222,8 +222,8 @@ case $distro in
 		sudo chown -R www-data:www-data /var/www/
 		# echo "##  Finished permission changes."
 
-		echo "##  Input your MySQL/MariaDB root password: "
-		sudo mysql -u root < $dbsetup
+		echo "##  Input your MySQL/MariaDB root password (blank if this is a fresh install): "
+		sudo mysql -u root -p < $dbsetup
 
 		echo "##  Securing Mysql"
 
@@ -292,8 +292,8 @@ case $distro in
 		chkconfig mysql on
 		/sbin/service mysql start
 
-		echo "##  Input your MySQL/MariaDB root password: "
-		mysql -u root < $dbsetup
+		echo "##  Input your MySQL/MariaDB root password (blank if this is a fresh install): "
+		mysql -u root -p < $dbsetup
 
 		echo "##  Securing mariaDB server.";
 		/usr/bin/mysql_secure_installation
@@ -414,8 +414,8 @@ case $distro in
 		systemctl enable mariadb.service
 		systemctl start mariadb.service
 
-		echo "##  Input your MySQL/MariaDB root password "
-		mysql -u root < $dbsetup
+		echo "##  Input your MySQL/MariaDB root password (blank if this is a fresh install): "
+		mysql -u root -p < $dbsetup
 
 		echo "##  Securing mariaDB server.";
 		echo "";
