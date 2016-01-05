@@ -95,7 +95,7 @@ final class Company extends Elegant
 
     public static function scopeCompanyableChildren(array $companyable_names, $query)
     {
-        if      (count($companyable_names) == 0)                 { throw new Exception('-_-'); }
+        if      (count($companyable_names) == 0)                 { throw new Exception('No Companyable Children to scope'); }
         else if (!static::isFullMultipleCompanySupportEnabled()) { return $query;              }
         else
         {
@@ -103,14 +103,15 @@ final class Company extends Elegant
             {
                 static::scopeCompanyablesDirectly($q);
             };
+            
+            $q = $query->where(function ($q) {
+              $q2 = $q->whereHas($companyable_names[0], $f);
 
-            $q = $query->whereHas($companyable_names[0], $f);
-
-            for ($i = 1; $i < count($companyable_names); $i++)
-            {
-                $q = $q->orWhereHas($companyable_names[$i], $f);
-            }
-
+              for ($i = 1; $i < count($companyable_names); $i++)
+              {
+                  $q2 = $q2->orWhereHas($companyable_names[$i], $f);
+              }
+            });
             return $q;
         }
     }
