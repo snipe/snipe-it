@@ -359,6 +359,8 @@ class AppCommand extends Command
             'permissions' => array(
                 'admin' => 1,
                 'user'  => 1,
+                'superuser' => 1,
+                'reports' => 1,
             ),
         ));
 
