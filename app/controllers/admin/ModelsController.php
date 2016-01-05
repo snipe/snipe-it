@@ -243,7 +243,9 @@ class ModelsController extends AdminController
             $model->modelno            	= e(Input::get('modelno'));
             $model->manufacturer_id    	= e(Input::get('manufacturer_id'));
             $model->category_id    		= e(Input::get('category_id'));
-            if (Input::get('custom_fieldset')!='') {
+            if (Input::get('custom_fieldset')=='') {
+              $model->fieldset_id = null;
+            } else {
               $model->fieldset_id = e(Input::get('custom_fieldset'));
             }
 
