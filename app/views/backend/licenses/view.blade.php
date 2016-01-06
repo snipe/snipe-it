@@ -333,7 +333,7 @@
                     @endif
                     @if ($license->purchase_cost > 0)
                     <li><strong>@lang('admin/licenses/form.cost'):</strong>
-                    @lang('general.currency')
+                    {{{ Setting::first()->default_currency }}}
                     {{{ number_format($license->purchase_cost,2) }}} </li>
                     @endif
                     @if ($license->order_number)

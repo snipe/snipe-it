@@ -81,7 +81,7 @@
             <div class="form-group {{ $errors->has('purchase_cost') ? ' has-error' : '' }}">
                 <label for="purchase_cost" class="col-md-2 control-label">@lang('admin/hardware/form.cost')</label>
                 <div class="input-group col-md-3">
-	                <span class="input-group-addon">@lang('general.currency')</span>
+	                <span class="input-group-addon">{{{ Setting::first()->default_currency }}}</span>
                     <input type="text" class="form-control" placeholder="@lang('admin/hardware/form.cost')" name="purchase_cost" id="purchase_cost" value="{{{ Input::old('purchase_cost') }}}">
 
                 {{ $errors->first('purchase_cost', '<br><span class="alert-msg"><i class="fa fa-times"></i> :message</span>') }}

@@ -76,7 +76,7 @@
             @endif
             </td>
             <td>{{{ $asset->purchase_date }}}</td>
-            <td class="align-right">@lang('general.currency')
+            <td class="align-right">{{{ Setting::first()->default_currency }}}
                 {{{ number_format($asset->purchase_cost) }}}
             </td>
             <td>

@@ -72,12 +72,17 @@
             </td>
 
             @if ($asset->purchase_cost > 0)
-            <td class="align-right">@lang('general.currency')
-            {{{ number_format($asset->purchase_cost) }}}</td>
-            <td class="align-right">@lang('general.currency')
-            {{{ number_format($asset->depreciate()) }}}</td>
-            <td class="align-right">@lang('general.currency')
-            -{{{ number_format(($asset->purchase_cost - $asset->depreciate())) }}}</td>
+            <td class="align-right">
+              {{{ Setting::first()->default_currency }}}
+              {{{ number_format($asset->purchase_cost) }}}
+            </td>
+            <td class="align-right">
+              {{{ Setting::first()->default_currency }}}
+              {{{ number_format($asset->depreciate()) }}}
+            </td>
+            <td class="align-right">
+              {{{ Setting::first()->default_currency }}}
+              -{{{ number_format(($asset->purchase_cost - $asset->depreciate())) }}}</td>
             @else
             <td></td>
             <td></td>

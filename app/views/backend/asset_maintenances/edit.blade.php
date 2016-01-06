@@ -115,7 +115,7 @@
                 <label for="cost" class="col-md-3 control-label">@lang('admin/asset_maintenances/form.cost')</label>
                 <div class="col-md-2">
                     <div class="input-group">
-                        <span class="input-group-addon">@lang('general.currency')</span>
+                        <span class="input-group-addon">{{{ Setting::first()->default_currency }}}</span>
                         <input class="col-md-2 form-control" type="text" name="cost" id="cost" value="{{ Input::old('cost', number_format($assetMaintenance->cost,2)) }}" />
                         {{ $errors->first('cost', '<br><span class="alert-msg"><i class="fa fa-times"></i> :message</span>') }}
                     </div>
