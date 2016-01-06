@@ -374,7 +374,7 @@ $(function() {
       $('#custom_fields_content').html("");
     } else {
       // console.warn("Model ID is: "+modelid);
-      $.get("/hardware/models/"+modelid+"/custom_fields",{_token: "{{ csrf_token() }}"},function (data) {
+      $.get("{{Config::get('app.url')}}/hardware/models/"+modelid+"/custom_fields",{_token: "{{ csrf_token() }}"},function (data) {
         // console.warn("Ajax call came back okay! Data is: "+data);
         $('#custom_fields_content').html(data);
       });
