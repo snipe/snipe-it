@@ -18,6 +18,7 @@ use Mail;
 use Datatable;
 use Slack;
 use Config;
+use Location;
 
 class AccessoriesController extends AdminController
 {
@@ -594,6 +595,22 @@ class AccessoriesController extends AdminController
             $actions = '<nobr><a href="'.route('checkout/accessory', $accessory->id).'" style="margin-right:5px;" class="btn btn-info btn-sm" '.(($accessory->numRemaining() > 0 ) ? '' : ' disabled').'>'.Lang::get('general.checkout').'</a><a href="'.route('update/accessory', $accessory->id).'" class="btn btn-warning btn-sm" style="margin-right:5px;"><i class="fa fa-pencil icon-white"></i></a><a data-html="false" class="btn delete-asset btn-danger btn-sm" data-toggle="modal" href="'.route('delete/accessory', $accessory->id).'" data-content="'.Lang::get('admin/accessories/message.delete.confirm').'" data-title="'.Lang::get('general.delete').' '.htmlspecialchars($accessory->name).'?" onClick="return false;"><i class="fa fa-trash icon-white"></i></a></nobr>';
             $company = $accessory->company;
 
+
+            //Build Purchase cost
+            if( !empty($accessory->purchase_cost )) {
+                $currency = Setting::first()->defaultCurrency;
+                if ($accessory->location_id) {
+                    $location = Location::find($accessory->location_id);
+                    if($location) {
+                        $currency = $location->currency;
+                    }
+                }
+                $purchase_cost = $currency . number_format($accessory->purchase_cost,2);
+            } else {
+                $purchase_cost = '';
+            }
+
+
             $rows[] = array(
                 'name'          => link_to('admin/accessories/'.$accessory->id.'/view', $accessory->name),
                 'category'      => link_to('admin/settings/categories/'.$accessory->category->id.'/view', $accessory->category->name),
@@ -601,13 +618,12 @@ class AccessoriesController extends AdminController
                 'order_number'  => $accessory->order_number,
                 'location'      => ($accessory->location) ? $accessory->location->name: '',
                 'purchase_date' => $accessory->purchase_date,
-                'purchase_cost' => $accessory->purchase_cost,
+                'purchase_cost' => $purchase_cost,
                 'numRemaining'  => $accessory->numRemaining(),
                 'actions'       => $actions,
                 'companyName'   => is_null($company) ? '' : e($company->name)
             );
         }
-
         $data = array('total'=>$accessCount, 'rows'=>$rows);
 
         return $data;
