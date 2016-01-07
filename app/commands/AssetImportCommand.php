@@ -372,6 +372,8 @@ class AssetImportCommand extends Command {
             }
         }
 
+      } else {
+	      $company = new Company();
       }
 
 			// Check for the asset match and create it if it doesn't exist
@@ -397,7 +399,7 @@ class AssetImportCommand extends Command {
   				$asset->rtd_location_id = $location->id;
   				$asset->user_id = 1;
   				$asset->status_id = $status_id;
-                                $asset->company_id = $company->id;
+                $asset->company_id = $company->id;
   				if ($user_asset_purchase_date!='') {
   					$asset->purchase_date = $user_asset_purchase_date;
   				} else {
