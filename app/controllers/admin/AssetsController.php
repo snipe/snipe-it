@@ -290,13 +290,14 @@ class AssetsController extends AdminController
         $input=Input::all();
         // return "INPUT IS: <pre>".print_r($input,true)."</pre>";
         $rules=$asset->validationRules($assetId);
-        if($asset->model->fieldset)
+        $model=Model::find(e(Input::get('model_id'))); //validate by the NEW model's custom fields, not the current one
+        if($model->fieldset)
         {
-          foreach($asset->model->fieldset->fields AS $field) {
+          foreach($model->fieldset->fields AS $field) {
             $input[$field->db_column_name()]=$input['fields'][$field->db_column_name()];
             $asset->{$field->db_column_name()}=$input[$field->db_column_name()];
           }
-          $rules+=$asset->model->fieldset->validation_rules();
+          $rules+=$model->fieldset->validation_rules();
           unset($input['fields']);
         }
 
