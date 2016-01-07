@@ -1202,7 +1202,7 @@ class UsersController extends AdminController {
 
         $ldap_result_active_flag = Setting::getSettings()->ldap_active_flag_field;
         $ldap_result_emp_num = Setting::getSettings()->ldap_emp_num_field;
-        $ldap_result_email = Setting::getSettings()->ldap_email_field;
+        $ldap_result_email = Setting::getSettings()->ldap_email;
         $ldap_server_cert_ignore = Setting::getSettings()->ldap_server_cert_ignore;
 
         // If we are ignoring the SSL cert we need to setup the environment variable
