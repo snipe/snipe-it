@@ -166,7 +166,7 @@
 
         @if ($asset->model->fieldset)
           <hr>
-          <div class="col-md-12" style="padding-bottom: 5px;"><strong>FIELDSET:</strong> 
+          <div class="col-md-12" style="padding-bottom: 5px;"><strong>FIELDSET:</strong>
             {{{ $asset->model->fieldset->name }}}</div>
           @foreach($asset->model->fieldset->fields as $field)
             <div class="col-md-12" style="padding-bottom: 5px;"><strong>{{{ $field->name }}}:</strong>
@@ -495,6 +495,7 @@
                     	<li><br /><a href="{{ route('checkin/hardware', $asset->id) }}" class="btn btn-primary btn-sm">@lang('admin/hardware/general.checkin')</a></li>
                     	@elseif ((($asset->assetstatus->deployable=='1') &&  (($asset->assigned_to=='') || ($asset->assigned_to==0))) && ($asset->deleted_at==''))
                     	<li><br /><a href="{{ route('checkout/hardware', $asset->id) }}" class="btn btn-info btn-sm">@lang('admin/hardware/general.checkout')</a></li>
+                        <li><br /><a href="{{ route('checkout/hardware/location', $asset->id) }}" class="btn btn-info btn-sm">@lang('admin/hardware/general.checkout_loc')</a></li>
 						@elseif  (($asset->deleted_at!='') && ($asset->model->deleted_at==''))
 
 						<li><br /><a href="{{ route('restore/hardware', $asset->id) }}" class="btn-flat large info ">@lang('admin/hardware/general.restore')</a></li>
