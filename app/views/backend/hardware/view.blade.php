@@ -428,8 +428,52 @@
         @endif
 
 		<!-- checked out assets table -->
+            @if (($asset->rtd_location_id) && ($asset->rtd_location_id > 0) && ($asset->deleted_at==''))
+                <h6><br>@lang('admin/hardware/form.checkedout_to')</h6>
+                <ul>
+                    {{--{{ dd(print_r($asset->rtd_location_id)) }}--}}
 
-            @if (($asset->assigneduser) && ($asset->assigned_to > 0) && ($asset->deleted_at==''))
+                    <li><a href="{{ route('/view', $asset->rtd_location_id) }}">{{ $asset->assignedLocation->name }}</a></li>
+                    <br>
+
+
+
+                    @if (isset($asset->userloc))
+                        <li>{{{ $asset->userloc->name }}}
+                        <li>{{{ $asset->userloc->address }}}
+                            @if (isset($asset->userloc->address2))
+                                {{{ $asset->userloc->address2 }}}
+                            @endif
+                        </li>
+                        @if (isset($asset->assetloc->city))
+                            <li>{{{ $asset->assetloc->city }}}, {{{ $asset->assetloc->state }}} {{{ $asset->assetloc->zip }}}</li>
+                        @endif
+
+                    @elseif (isset($asset->assetloc))
+                        <li>{{{ $asset->assetloc->name }}}
+                        <li>{{{ $asset->assetloc->address }}}
+                            @if (isset($asset->assetloc->address2))
+                                {{{ $asset->assetloc->address2 }}}
+                            @endif
+                        </li>
+                        @if (isset($asset->assetloc->city))
+                            <li>{{{ $asset->assetloc->city }}}, {{{ $asset->assetloc->state }}} {{{ $asset->assetloc->zip }}}</li>
+                        @endif
+
+                    @endif
+
+                    @if (isset($asset->assigneduser->email))
+                        <li><br /><i class="fa fa-envelope-o"></i> <a href="mailto:{{{ $asset->assigneduser->email }}}">{{{ $asset->assigneduser->email }}}</a></li>
+                    @endif
+
+                    @if ((isset($asset->assigneduser->phone)) && ($asset->assigneduser->phone!=''))
+                        <li><i class="fa fa-phone"></i> {{{ $asset->assigneduser->phone }}}</li>
+                    @endif
+
+
+                </ul>
+
+            @elseif (($asset->assigneduser) && ($asset->assigned_to > 0) && ($asset->deleted_at==''))
                 <h6><br>@lang('admin/hardware/form.checkedout_to')</h6>
                 <ul>
 

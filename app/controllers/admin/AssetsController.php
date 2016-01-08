@@ -504,7 +504,7 @@ class AssetsController extends AdminController
 
         // Declare the rules for the form validation
         $rules = array(
-            'assigned_to'   => 'required|min:1',
+            'rtd_location_id'   => 'required|min:1',
             'checkout_at'   => 'required|date',
             'note'   => 'alpha_space',
         );
@@ -516,8 +516,11 @@ class AssetsController extends AdminController
             return Redirect::back()->withInput()->withErrors($validator);
         }
 
-        if (!$user = User::find(e(Input::get('assigned_to')))) {
-            return Redirect::to('hardware')->with('error', Lang::get('admin/hardware/message.user_does_not_exist'));
+        //TODO: update appropriate LANG/viewer labels for locations
+
+        if (!$location = Location::find(e(Input::get('rtd_location_id')))) {
+            return Redirect::to('hardware')->with('error', "Location DOES NOT EXIST");
+//            return Redirect::to('hardware')->with('error', Lang::get('admin/hardware/message.user_does_not_exist'));
         }
 
         if (!$admin = Sentry::getUser()) {
@@ -538,7 +541,7 @@ class AssetsController extends AdminController
         }
 
 
-        if ($asset->checkOutToUser($user, $admin, $checkout_at, $expected_checkin, e(Input::get('note')), e(Input::get('name')))) {
+        if ($asset->checkOutToLocation($location, $admin, $checkout_at, $expected_checkin, e(Input::get('note')), e(Input::get('name')))) {
             // Redirect to the new asset page
             return Redirect::to("hardware")->with('success', Lang::get('admin/hardware/message.checkout.success'));
         }
