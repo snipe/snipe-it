@@ -69,7 +69,7 @@
                 @if (Config::get('app.lock_passwords'))
                     <p class="help-block">@lang('general.lock_passwords')</p>
                 @else
-                    {{ Form::checkbox('location_checkout', '1', Input::old('location_checkout'), $setting->location_checkout) }}
+                    {{ Form::checkbox('location_checkout', '1', Input::old('location_checkout', $setting->location_checkout)) }}
                     <b>check out assets to locations instead of users**</b>
                 @endif
             </div>
