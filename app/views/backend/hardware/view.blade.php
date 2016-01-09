@@ -433,7 +433,7 @@
                 <ul>
                     {{--{{ dd(print_r($asset->rtd_location_id)) }}--}}
 
-                    <li><a href="{{ route('/view', $asset->rtd_location_id) }}">{{ $asset->assignedLocation->name }}</a></li>
+                    <li><a href="{{ route('update/location', $asset->rtd_location_id) }}">{{ $asset->assignedLocation->name }}</a></li>
                     <br>
 
 
@@ -539,7 +539,6 @@
                     	<li><br /><a href="{{ route('checkin/hardware', $asset->id) }}" class="btn btn-primary btn-sm">@lang('admin/hardware/general.checkin')</a></li>
                     	@elseif ((($asset->assetstatus->deployable=='1') &&  (($asset->assigned_to=='') || ($asset->assigned_to==0))) && ($asset->deleted_at==''))
                     	<li><br /><a href="{{ route('checkout/hardware', $asset->id) }}" class="btn btn-info btn-sm">@lang('admin/hardware/general.checkout')</a></li>
-                        <li><br /><a href="{{ route('checkout/hardware/location', $asset->id) }}" class="btn btn-info btn-sm">@lang('admin/hardware/general.checkout_loc')</a></li>
 						@elseif  (($asset->deleted_at!='') && ($asset->model->deleted_at==''))
 
 						<li><br /><a href="{{ route('restore/hardware', $asset->id) }}" class="btn-flat large info ">@lang('admin/hardware/general.restore')</a></li>

@@ -60,16 +60,32 @@
 
 
              <!-- Location/User Checkout -->
+            <!-- TODO: see thrown-together js at bottom for our dual-select exclusion hider -->
+
             @if(isset($locations_list))
                 <div class="form-group {{ $errors->has('assigned_to') ? ' has-error' : '' }}">
                     <label for="assigned_to" class="col-md-2 control-label">@lang('admin/hardware/form.checkout_to')
-                        <i class='fa fa-asterisk'></i></label>
+                    </label>
                     <div class="col-md-9">
-                         <!-- Form::select('assigned_to', $users_list , Input::old('assigned_to', $asset->assigned_to)-->
                         {{ Form::select('rtd_location_id', $locations_list, Input::old('rtd_location_id', $asset->rtd_location_id), array('class'=>'select2', 'style'=>'min-width:350px')) }}
                         {{ $errors->first('rtd_location_id', '<br><span class="alert-msg"><i class="fa fa-times"></i> :message</span>') }}
                     </div>
                 </div>
+                <div>
+                    <label for="or" class="col-md-2 control-label"><i class='fa fa-asterisk'></i></label>
+                    <div class="col-md-9">
+                        <p><b>OR</b></p>
+                    </div>
+                </div>
+                <div class="form-group {{ $errors->has('assigned_to') ? ' has-error' : '' }}">
+                    <label for="assigned_to" class="col-md-2 control-label">@lang('admin/hardware/form.checkout_to')
+                    </label>
+                    <div class="col-md-9">
+                        {{ Form::select('assigned_to', $users_list , Input::old('assigned_to', $asset->assigned_to), array('class'=>'select2', 'style'=>'min-width:350px')) }}
+                        {{ $errors->first('assigned_to', '<br><span class="alert-msg"><i class="fa fa-times"></i> :message</span>') }}
+                    </div>
+                </div>
+
             @else
             <!-- User Checkout Only -->
                 <div class="form-group {{ $errors->has('assigned_to') ? ' has-error' : '' }}">
@@ -146,4 +162,28 @@
 
 </div>
 </div>
+
+
+@stop
+
+@section('moar_scripts')
+
+    <script>
+    $('select[name="co-location"]').change(function(){
+
+        if($('select[name="co-location"]').val() > 0){
+            $('select[name="co-user"]').attr('disabled', 'disabled');
+        }
+
+    })
+
+    $('select[name="co-user"]').change(function(){
+
+        if($('select[name="co-user"]').val() > 0){
+            $('select[name="co-location"]').attr('disabled', 'disabled');
+        }
+
+    })
+    </script>
+
 @stop
