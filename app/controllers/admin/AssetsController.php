@@ -842,7 +842,7 @@ class AssetsController extends AdminController
         file_put_contents($file, $display_output);
 
 
-        return View::make('backend/hardware/import-status');
+        return Redirect::to('hardware')->with('success','Your file has been imported');
 
     }
 
