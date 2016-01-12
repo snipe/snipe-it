@@ -1158,7 +1158,7 @@ class UsersController extends AdminController {
     protected $ldapValidationRules = array(
         'firstname' => 'required|alpha_space|min:2',
         'lastname' => 'required|alpha_space|min:2',
-        'employee_number' => 'numeric',
+        'employee_number' => 'alpha_space',
         'username' => 'required|min:2|unique:users,username',
         'email' => 'email|unique:users,email',
     );
@@ -1201,7 +1201,7 @@ class UsersController extends AdminController {
         $ldap_result_first_name = Setting::getSettings()->ldap_fname_field;
 
         $ldap_result_active_flag = Setting::getSettings()->ldap_active_flag_field;
-        $ldap_result_emp_num = Setting::getSettings()->ldap_emp_num_field;
+        $ldap_result_emp_num = Setting::getSettings()->ldap_emp_num;
         $ldap_result_email = Setting::getSettings()->ldap_email;
         $ldap_server_cert_ignore = Setting::getSettings()->ldap_server_cert_ignore;
 
