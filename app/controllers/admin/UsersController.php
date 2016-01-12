@@ -829,11 +829,6 @@ class UsersController extends AdminController {
                         $duplicates .= $row[2] . ', ';
                     } else {
 
-                      // echo '<pre>';
-                      // print_r($row);
-                      // echo '</pre>';
-                      // exit;
-
                         $newuser = array(
                             'first_name' => $row[0],
                             'last_name' => $row[1],
