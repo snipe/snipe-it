@@ -810,7 +810,15 @@ class UsersController extends AdminController {
                     $activated = '0';
                 }
 
-                $pass = substr(str_shuffle("0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"), 0, 10);
+                $pass = substr(str_shuffle("0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"), 0, 15);
+
+                // Location
+          			if (array_key_exists('4',$row)) {
+          				$user_location_id = trim($row[4]);
+                  if ($user_location_id=='') {
+                    $user_location_id = null;
+                  }
+          			}
 
 
 
@@ -821,6 +829,11 @@ class UsersController extends AdminController {
                         $duplicates .= $row[2] . ', ';
                     } else {
 
+                      // echo '<pre>';
+                      // print_r($row);
+                      // echo '</pre>';
+                      // exit;
+
                         $newuser = array(
                             'first_name' => $row[0],
                             'last_name' => $row[1],
@@ -828,8 +841,11 @@ class UsersController extends AdminController {
                             'email' => $row[3],
                             'password' => $pass,
                             'activated' => $activated,
-                            'location_id' => $row[4],
-                            //'company_id' => Company::getIdForUser($row[5]),
+                            'location_id' => $user_location_id,
+                            'phone' => $row[5],
+                            'jobtitle' => $row[6],
+                            'employee_num' => $row[7],
+                            //'company_id' => Company::getIdForUser($row[8]),
                             'permissions' => '{"user":1}',
                             'notes' => 'Imported user'
                         );

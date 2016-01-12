@@ -38,7 +38,11 @@ Create a User ::
 			@endif
 
 			<p>
-				Upload a CSV file with one or more users.  Passwords will be auto-generated.  The CSV should have the <strong>first</strong> fields as: <strong>firstName,lastName,username,email, location_id</strong>. Any additional fields to the right of those fields will be ignored. Email is optional, however users will not be able to recover their passwords or receive EULAs if you do not provide an email address.
+				Upload a CSV file with one or more users.  Passwords will be auto-generated.  The CSV should have the <strong>first</strong> fields as: </p>
+
+        <p><strong>firstName,lastName, username, email, location_id, phone, jobtitle, employee_num</strong>. </p>
+
+        <p>Any additional fields to the right of those fields will be ignored. Email is optional, however users will not be able to recover their passwords or receive EULAs if you do not provide an email address.
 			</p>
 
             @if (Config::get('app.lock_passwords'))
