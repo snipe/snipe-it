@@ -132,7 +132,7 @@
                 </div>
             </div>
 
-          <!-- Company --> 
+          <!-- Company -->
           @if (Company::canManageUsersCompanies())
               <!-- Company -->
               <div class="form-group {{ $errors->has('company_id') ? 'has-error' : '' }}">
@@ -289,6 +289,8 @@
                         <legend>{{ $area }}</legend>
 
                         @foreach ($permissions as $permission)
+                        <p>{{{ $permission['note'] }}}</p>
+
                         <div class="form-group">
                         	<label class="col-md-3 control-label" for="{{{ $permission['label'] }}}">
                         	{{{ $permission['label'] }}}
