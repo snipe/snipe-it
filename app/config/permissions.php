@@ -23,5 +23,12 @@ return array(
         ),
     ),
 
+    'Licenses' => array(
+        array(
+            'permission' => 'license_keys',
+            'label'      => 'View License Keys',
+        ),
+    ),
+
 
 );
