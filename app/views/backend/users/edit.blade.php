@@ -74,7 +74,7 @@
             <div class="form-group {{ $errors->has('username') ? 'has-error' : '' }}">
                 <label class="col-md-3 control-label" for="username">@lang('admin/users/table.username') <i class='fa fa-asterisk'></i></label>
                 <div class="col-md-7">
-                    <input class="form-control" type="text" name="username" id="username" value="{{{ Input::old('username', $user->username) }}}"  {{ ((Config::get('app.lock_passwords') && ($user->id)) ? ' disabled' : '') }} autocomplete="off">
+                    <input class="form-control" type="text" name="username" id="username" value="{{{ Input::old('username', $user->username) }}}"  {{ ((Config::get('app.lock_passwords') && ($user->id)) ? ' disabled' : '') }} autocomplete="off" readonly onfocus="this.removeAttribute('readonly');">
                      @if (Config::get('app.lock_passwords') && ($user->id))
 					 	<p class="help-block">@lang('admin/users/table.lock_passwords')</p>
 					 @endif
@@ -91,7 +91,7 @@
 				@endif
 				</label>
 				<div class="col-md-5">
-					<input type="password" name="password" class="form-control" id="password" value="" {{ ((Config::get('app.lock_passwords') && ($user->id)) ? ' disabled' : '') }} autocomplete="off">
+					<input type="password" name="password" class="form-control" id="password" value="" {{ ((Config::get('app.lock_passwords') && ($user->id)) ? ' disabled' : '') }} autocomplete="off" readonly onfocus="this.removeAttribute('readonly');">
 					<span id="generated-password"></span>
 						{{ $errors->first('password', '<br><span class="alert-msg">:message</span>') }}
 				</div>
@@ -123,10 +123,10 @@
             <div class="form-group {{ $errors->has('email') ? 'has-error' : '' }}">
                 <label class="col-md-3 control-label" for="email">@lang('admin/users/table.email') </label>
                 <div class="col-md-7">
-                    <input class="form-control" type="text" name="email" id="email" value="{{{ Input::old('email', $user->email) }}}"  {{ ((Config::get('app.lock_passwords') && ($user->id)) ? ' disabled' : '') }} autocomplete="off">
+                    <input class="form-control" type="text" name="email" id="email" value="{{{ Input::old('email', $user->email) }}}"  {{ ((Config::get('app.lock_passwords') && ($user->id)) ? ' disabled' : '') }} autocomplete="off"  readonly onfocus="this.removeAttribute('readonly');">
                      @if (Config::get('app.lock_passwords') && ($user->id))
-					 	<p class="help-block">@lang('admin/users/table.lock_passwords')</p>
-					 @endif
+          					 	<p class="help-block">@lang('admin/users/table.lock_passwords')</p>
+          					 @endif
 
                     {{ $errors->first('email', '<br><span class="alert-msg">:message</span>') }}
                 </div>
