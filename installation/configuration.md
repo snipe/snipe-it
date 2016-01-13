@@ -160,11 +160,11 @@ __If you're using Gmail to send your emails__, you'll want to use the settings b
 
 Additionally, you may need to tweak a few settings in your Gmail account to handle Google's security that can kick in if Google doesn't recognize the system you're trying to access it through.
 
-- First sign into the Gmail account in a browser on the device where you are setting up your client app
+- Sign into the Gmail account in a browser
 - Go [here](https://www.google.com/settings/security/lesssecureapps) and enable access for "less secure" apps:
 - Then go [here](https://accounts.google.com/b/0/DisplayUnlockCaptcha) and click Continue.
 
-(More info on sending email through Laravel and Gmail is [available here](http://code.tutsplus.com/tutorials/sending-emails-with-laravel-4-gmail--net-36105).)
+(More info on sending email through Laravel and Gmail is [available here](http://code.tutsplus.com/tutorials/sending-emails-with-laravel-4-gmail--net-36105), and more info on why Google makes you jump through these hoops is [available here](https://googleonlinesecurity.blogspot.co.uk/2014/04/new-security-measures-will-affect-older.html).)
 
 -----
 
