@@ -144,9 +144,9 @@ If you don't have an SMTP server to use, you can set the `driver` value to `mail
 'driver' => 'mail',
 ```
 
-If you're using GoDaddy for hosting, you will need to set your mail server to use `relay-hosting.secureserver.net` on port `25`, with `username` and `password` left as null values. See the [GoDaddy relay server documentation](https://www.godaddy.com/help/what-is-the-name-of-my-hosting-accounts-relay-server-953) for more specifics.
+__If you're using GoDaddy for hosting__, you will need to set your mail server to use `relay-hosting.secureserver.net` on port `25`, with `username` and `password` left as null values. See the [GoDaddy relay server documentation](https://www.godaddy.com/help/what-is-the-name-of-my-hosting-accounts-relay-server-953) for more specifics.
 
-If you're using Gmail for your email server, you'll want to use the settings below (in addition to filling out the from address and name in the config file):
+__If you're using Gmail to send your emails__, you'll want to use the settings below (in addition to filling out the from address and name in the config file):
 
 
 | Setting       | Value |
@@ -158,6 +158,7 @@ If you're using Gmail for your email server, you'll want to use the settings bel
 |`username`|`'your_gmail_username'` |
 |`password`|`'your_gmail_password'` |
 
+(More info on sending email through Laravel and Gmail is [available here](http://code.tutsplus.com/tutorials/sending-emails-with-laravel-4-gmail--net-36105).)
 
 -----
 
