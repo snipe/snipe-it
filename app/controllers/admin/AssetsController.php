@@ -539,8 +539,8 @@ class AssetsController extends AdminController
         else if (!Company::isCurrentUserHasAccess($asset)) {
             return Redirect::to('hardware')->with('error', Lang::get('general.insufficient_permissions'));
         }
-
-        return View::make('backend/hardware/checkin', compact('asset'))->with('backto', $backto);
+        $statusLabel_list = statusLabelList();
+        return View::make('backend/hardware/checkin', compact('asset'))->with('statusLabel_list',$statusLabel_list)->with('backto', $backto);
     }
 
 
@@ -582,6 +582,9 @@ class AssetsController extends AdminController
         $asset->expected_checkin = NULL;
         $asset->last_checkout = NULL;
 
+        if (Input::has('status_id')) {
+          $asset->status_id =  e(Input::get('status_id'));
+        }
         // Was the asset updated?
         if($asset->save()) {
 

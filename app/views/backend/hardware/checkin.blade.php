@@ -36,7 +36,7 @@
                 </div>
             </div>
 
-			@if ($asset->name)
+			      @if ($asset->name)
             <!-- Asset name -->
             <div class="form-group">
             <label class="col-sm-2 control-label">@lang('admin/hardware/form.name')</label>
@@ -45,6 +45,12 @@
                 </div>
             </div>
             @endif
+
+            <div class="form-group">
+              <div class="col-md-2 col-xs-12"><label for="status_id">@lang('admin/hardware/table.status'):
+              </label></div>
+              <div class="col-md-6 col-xs-12">{{ Form::select('status_id', $statusLabel_list, '', array('class'=>'select2', 'style'=>'width:350px','id' =>'modal-statuslabel_types')) }}</div>
+            </div>
 
             <!-- Checkout/Checkin Date -->
             <div class="form-group {{ $errors->has('checkin_at') ? ' has-error' : '' }}">
