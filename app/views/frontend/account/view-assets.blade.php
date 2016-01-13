@@ -55,6 +55,7 @@ View Assets for  {{{ $user->fullName() }}} ::
                                         <th class="col-md-4">@lang('admin/hardware/table.asset_model')</th>
                                         <th class="col-md-2">@lang('admin/hardware/table.asset_tag')</th>
                                         <th class="col-md-3">@lang('general.name')</th>
+                                        <th></th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -66,6 +67,17 @@ View Assets for  {{{ $user->fullName() }}} ::
                                         </td>
                                         <td>{{{ $asset->asset_tag }}}</td>
                                         <td>{{{ $asset->name }}}</td>
+                                        <td>
+
+                                        @if (($asset->image) && ($asset->image!=''))
+                                          <img src="{{ Config::get('app.url') }}/uploads/assets/{{{ $asset->image }}}" height="50" width="50">
+
+                                        @elseif (($asset->model) && ($asset->model->image!=''))
+                                          <img src="{{ Config::get('app.url') }}/uploads/models/{{{ $asset->model->image }}}" height="50" width="50">
+                                        @endif
+
+                                       </td>
+
                                     </tr>
                                     @endforeach
                                 </tbody>
@@ -100,7 +112,7 @@ View Assets for  {{{ $user->fullName() }}} ::
                                     <td>{{{ $license->name }}}</td>
                                     <td>
 
-                                       @if ($user->hasAccess('license_keys'))
+                                       @if (($user->hasAccess('admin')) || ($user->hasAccess('license_keys')))
 
                                        {{{ mb_strimwidth($license->serial, 0, 50, "...") }}}
                                       @else
@@ -163,7 +175,7 @@ View Assets for  {{{ $user->fullName() }}} ::
                         <!-- checked out consumables table -->
                         @if (count($user->consumables) > 0)
                         <div class="table-responsive">
-          <table class="display table table-hover">
+                          <table class="display table table-hover">
                             <thead>
                                 <tr>
                                     <th class="col-md-9">@lang('general.name')</th>
