@@ -11,6 +11,16 @@
 
 @section('content')
 
+<style>
+.radio {
+  min-height: 10px;
+  padding-right: 10px;
+}
+input[type="radio"] {
+  margin-right: 10px;
+}
+</style>
+
 <div class="row header">
     <div class="col-md-12">
             <a href="{{ URL::previous() }}" class="btn-flat gray pull-right right"><i class="fa fa-arrow-left icon-white"></i> @lang('general.back')</a>
@@ -129,15 +139,21 @@
             </div>
 
             <!-- Requestable -->
-			<div class="form-group">
-				<div class="col-sm-offset-2 col-sm-10">
-				  <div class="checkbox">
-					<label>
-					  <input type="checkbox" value="1" name="requestable" id="requestable"> @lang('admin/hardware/form.requestable')
-					</label>
-				  </div>
-				</div>
-		  	</div>
+
+            <div class="form-group {{ $errors->has('warranty_months') ? ' has-error' : '' }}">
+                <label for="requestable" class="col-md-2 control-label">@lang('admin/hardware/form.requestable')</label>
+                <div class="col-md-10">
+                    <label class="radio">
+                      <input type="radio" name="requestable" value="1"> Yes
+                    </label>
+                    <label class="radio">
+                      <input type="radio" name="requestable" value="0"> No
+                    </label>
+                    <label class="radio">
+                      <input type="radio" name="requestable" value=""> Do Not Change
+                    </label>
+                </div>
+            </div>
 
 
             @foreach ($assets as $key => $value)

@@ -1226,10 +1226,8 @@ class AssetsController extends AdminController
 						$update_array['status_id'] = e(Input::get('status_id'));
 					}
 
-          if (Input::get('requestable')=='1') {
-						$update_array['requestable'] =  1;
-					} else {
-            $update_array['requestable'] =  0;
+          if (Input::has('requestable')) {
+            $update_array['requestable'] = e(Input::get('requestable'));
           }
 
 
