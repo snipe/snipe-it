@@ -55,7 +55,6 @@ View Assets for  {{{ $user->fullName() }}} ::
                                         <th class="col-md-4">@lang('admin/hardware/table.asset_model')</th>
                                         <th class="col-md-2">@lang('admin/hardware/table.asset_tag')</th>
                                         <th class="col-md-3">@lang('general.name')</th>
-                                        <th class="col-md-3">@lang('general.date')</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -67,7 +66,6 @@ View Assets for  {{{ $user->fullName() }}} ::
                                         </td>
                                         <td>{{{ $asset->asset_tag }}}</td>
                                         <td>{{{ $asset->name }}}</td>
-                                        <td>{{{ $asset->assetlog->first()->created_at }}}</td>
                                     </tr>
                                     @endforeach
                                 </tbody>
@@ -94,7 +92,6 @@ View Assets for  {{{ $user->fullName() }}} ::
                                 <tr>
                                     <th class="col-md-5">@lang('general.name')</th>
                                     <th class="col-md-4">@lang('admin/hardware/form.serial')</th>
-                                    <th class="col-md-3">@lang('general.date')</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -110,7 +107,6 @@ View Assets for  {{{ $user->fullName() }}} ::
                                         ---
                                       @endif
                                     </td>
-                                    <td>{{{ $license->assetlog->first()->created_at }}}</td>
                                 </tr>
                                 @endforeach
                             </tbody>
@@ -139,14 +135,12 @@ View Assets for  {{{ $user->fullName() }}} ::
                             <thead>
                                 <tr>
                                     <th class="col-md-9">Name</th>
-                                    <th class="col-md-3">@lang('general.date')</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 @foreach ($user->accessories as $accessory)
                                 <tr>
                                     <td>{{{ $accessory->name }}}</td>
-                                    <td>{{{ $accessory->assetlog->first()->created_at }}}</td>
                                 </tr>
                                 @endforeach
                             </tbody>
@@ -173,14 +167,12 @@ View Assets for  {{{ $user->fullName() }}} ::
                             <thead>
                                 <tr>
                                     <th class="col-md-9">@lang('general.name')</th>
-                                    <th class="col-md-3">@lang('general.date')</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 @foreach ($user->consumables as $consumable)
                                 <tr>
                                     <td>{{{ $consumable->name }}}</td>
-                                    <td>{{{ $consumable->assetlog->first()->created_at }}}</td>
                                 </tr>
                                 @endforeach
                             </tbody>
