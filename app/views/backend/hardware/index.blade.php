@@ -89,7 +89,7 @@
                 <th data-sortable="true" data-searchable="true" data-field="last_checkout">@lang('admin/hardware/table.checkout_date')</th>
                 <th data-sortable="true" data-field="expected_checkin" data-searchable="true">@lang('admin/hardware/form.expected_checkin')</th>
                 @foreach(CustomField::all() AS $field)
-                  <th data-sortable="true" data-field="{{$field->db_column_name()}}">{{{$field->name}}}</th>
+                  <th data-sortable="true" data-visible="false" data-field="{{$field->db_column_name()}}">{{{$field->name}}}</th>
                 @endforeach
                 <th data-switchable="false" data-searchable="false" data-sortable="false" data-field="change">@lang('admin/hardware/table.change')</th>
                 <th data-switchable="false" data-searchable="false" data-sortable="false" data-field="actions" >@lang('table.actions')</th>
