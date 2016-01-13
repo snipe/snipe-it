@@ -53,7 +53,7 @@
  {{ Form::open([
       'method' => 'POST',
       'route' => ['hardware/bulkedit'],
-	  'class' => 'form-horizontal' ]) }}
+	    'class' => 'form-horizontal' ]) }}
 
     {{-- <div id="toolbar" class="pull-left" style="padding-top: 10px;">
         <select class="form-control">
