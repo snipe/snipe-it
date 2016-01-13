@@ -121,6 +121,21 @@ is __correct__, while
 
 is __incorrect__ and will cause errors when it tries to send email.
 
+
+Make sure you enclose your values in single quotes. For example,
+
+```
+'username' => 'myusername',
+```
+
+is __correct__, while
+
+```
+'username' => myusername,
+```
+
+is __incorrect__ and will cause errors when it tries to send email.
+
 If you don’t have easy access to a mail server, we suggest signing up for [Mandrill](http://mandrillapp.com). Their free tier allows for 12k free sends a month.
 
 If you don't have an SMTP server to use, you can set the `driver` value to `mail`:
@@ -130,6 +145,18 @@ If you don't have an SMTP server to use, you can set the `driver` value to `mail
 ```
 
 If you're using GoDaddy for hosting, you will need to set your mail server to use `relay-hosting.secureserver.net` on port `25`, with `username` and `password` left as null values. See the [GoDaddy relay server documentation](https://www.godaddy.com/help/what-is-the-name-of-my-hosting-accounts-relay-server-953) for more specifics.
+
+If you're using Gmail for your email server, you'll want to use the settings below (in addition to filling out the from address and name in the config file):
+
+
+| Setting       | Value |
+| ------------- | -----------|
+|`driver`|`'smtp'` |
+|`host`|`'smtp.gmail.com''` |
+|`port`|`587` |
+|`encryption`|`'tls'` |
+|`username`|`'your_gmail_username'` |
+|`password`|`'your_gmail_password'` |
 
 
 -----
