@@ -136,17 +136,19 @@ is __correct__, while
 
 is __incorrect__ and will cause errors when it tries to send email.
 
-If you don’t have easy access to a mail server, we suggest signing up for [Mandrill](http://mandrillapp.com). Their free tier allows for 12k free sends a month.
-
 If you don't have an SMTP server to use, you can set the `driver` value to `mail`:
 
 ```
 'driver' => 'mail',
 ```
 
-__If you're using GoDaddy for hosting__, you will need to set your mail server to use `relay-hosting.secureserver.net` on port `25`, with `username` and `password` left as null values. See the [GoDaddy relay server documentation](https://www.godaddy.com/help/what-is-the-name-of-my-hosting-accounts-relay-server-953) for more specifics.
+### GoDaddy Email
 
-__If you're using Gmail to send your emails__, you'll want to use the settings below (in addition to filling out the from address and name in the config file):
+If you're using GoDaddy for hosting, you will need to set your mail server to use `relay-hosting.secureserver.net` on port `25`, with `username` and `password` left as null values. See the [GoDaddy relay server documentation](https://www.godaddy.com/help/what-is-the-name-of-my-hosting-accounts-relay-server-953) for more specifics.
+
+### Using Gmail
+
+If you're using Gmail to send your emails, you'll want to use the settings below (in addition to filling out the from address and name in the config file):
 
 
 | Setting       | Value |
@@ -163,8 +165,13 @@ Additionally, you may need to tweak a few settings in your Gmail account to hand
 - Sign into the Gmail account in a browser
 - Go [here](https://www.google.com/settings/security/lesssecureapps) and enable access for "less secure" apps:
 - Then go [here](https://accounts.google.com/b/0/DisplayUnlockCaptcha) and click Continue.
+- If you're still getting errors, try [this solution on StackOverflow](http://stackoverflow.com/a/26041277/200021).
 
 (More info on sending email through Laravel and Gmail is [available here](http://code.tutsplus.com/tutorials/sending-emails-with-laravel-4-gmail--net-36105), and more info on why Google makes you jump through these hoops is [available here](https://googleonlinesecurity.blogspot.co.uk/2014/04/new-security-measures-will-affect-older.html).)
+
+### If you're still having problems
+
+If you don’t have easy access to a mail server (or you can't get your settings to work for some reason), we suggest signing up for [Mandrill](http://mandrillapp.com). Their free tier allows for 12k free sends a month, which should more than cover normal Snipe-IT email usage.
 
 -----
 

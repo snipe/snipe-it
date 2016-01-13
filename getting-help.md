@@ -18,7 +18,7 @@ In your `app/config/production/app.php`, set `debug` to true. You'll switch this
 
 __If you get an "Oops!" or "Whoops!" message in the browser when you hit a specific page, that means debug is set to `false`.__ Set it to `true`, and reload for detailed errors.
 
-### Enable your browser's error Console
+### Enable your browser's error console
 
 Sometimes errors reported by your browser can lend  clue as to what's going on. [Enable your browser's error console](http://webmasters.stackexchange.com/questions/8525/how-to-open-the-javascript-console-in-different-browsers) to see any client-side errors that may be causing issues.
 
