@@ -284,7 +284,7 @@ class UsersController extends AdminController {
             $permissions = Config::get('permissions');
             $this->encodeAllPermissions($permissions);
 
-            $location_list = array('' => '') + Location::lists('name', 'id');
+            $location_list = locationsList();
             $company_list = Company::getSelectList();
             $manager_list = array('' => 'Select a User') + DB::table('users')
                             ->select(DB::raw('concat(last_name,", ",first_name," (",email,")") as full_name, id'))
