@@ -470,6 +470,95 @@ class AssetsController extends AdminController
 
     }
 
+    /*
+     * GET checkout to location
+     *
+     */
+    public function getLocationCheckout($assetId)
+    {
+        // Check if the asset exists...same as user
+        if (is_null($asset = Asset::find($assetId))) {
+            // Redirect to the asset management page with error
+            return Redirect::to('hardware')->with('error', Lang::get('admin/hardware/message.does_not_exist'));
+        }
+        else if (!Company::isCurrentUserHasAccess($asset)) {
+            return Redirect::to('hardware')->with('error', Lang::get('general.insufficient_permissions'));
+        }
+
+        $locations_list = locationsList();
+        $users_list = usersList();
+
+//        dd(print_r(compact('asset')));
+
+        return View::make('backend/hardware/checkout', compact('asset'))
+                    ->with('locations_list', $locations_list)
+                    ->with('users_list', $users_list);
+
+    }
+
+    /**
+     * Check out the asset to a TODO: LOCATION
+     **/
+    public function postCheckoutLocation($assetId)
+    {
+
+        // Check if the asset exists
+        if (!$asset = Asset::find($assetId)) {
+            return Redirect::to('hardware')->with('error', Lang::get('admin/hardware/message.does_not_exist'));
+        }
+        else if (!Company::isCurrentUserHasAccess($asset)) {
+            return Redirect::to('hardware')->with('error', Lang::get('general.insufficient_permissions'));
+        }
+
+        // Declare the rules for the form validation
+        $rules = array(
+            'rtd_location_id'   => 'required|min:1',
+            'checkout_at'   => 'required|date',
+            'note'   => 'alpha_space',
+        );
+
+        // Create a new validator instance from our validation rules
+        $validator = Validator::make(Input::all(), $rules);
+
+        if ($validator->fails()) {
+            return Redirect::back()->withInput()->withErrors($validator);
+        }
+
+        //TODO: update appropriate LANG/viewer labels for locations
+
+        if (!$location = Location::find(e(Input::get('rtd_location_id')))) {
+            return Redirect::to('hardware')->with('error', "Location DOES NOT EXIST");
+//            return Redirect::to('hardware')->with('error', Lang::get('admin/hardware/message.user_does_not_exist'));
+        }
+
+        if (!$admin = Sentry::getUser()) {
+            return Redirect::to('hardware')->with('error', Lang::get('admin/hardware/message.admin_user_does_not_exist'));
+        }
+
+
+        if (Input::get('checkout_at')!= date("Y-m-d")){
+            $checkout_at = e(Input::get('checkout_at')).' 00:00:00';
+        } else {
+            $checkout_at = date("Y-m-d H:i:s");
+        }
+
+        if (Input::has('expected_checkin')) {
+            $expected_checkin = e(Input::get('expected_checkin'));
+        } else {
+            $expected_checkin = '';
+        }
+
+
+        if ($asset->checkOutToLocation($location, $admin, $checkout_at, $expected_checkin, e(Input::get('note')), e(Input::get('name')))) {
+            // Redirect to the new asset page
+            return Redirect::to("hardware")->with('success', Lang::get('admin/hardware/message.checkout.success'));
+        }
+
+        // Redirect to the asset management page with error
+        return Redirect::to("hardware/$assetId/checkout")->with('error', Lang::get('admin/hardware/message.checkout.error'));
+    }
+
+
     /**
     * Check out the asset to a person
     **/

@@ -30,6 +30,15 @@
                                         <td>@lang('admin/settings/general.site_name')</td>
                                         <td>{{{ $setting->site_name }}} </td>
                                     </tr>
+                                    <tr>
+                                        <td>@lang('admin/settings/general.checkout_to_location')</td>
+
+                                        @if ($setting->location_checkout == 1)
+                                            <td>@lang('general.yes')</td>
+                                        @else
+                                            <td>@lang('general.no')</td>
+                                        @endif
+                                    </tr>
                                     @if (Sentry::getUser()->isSuperUser())
                                         <tr>
                                             <td>
@@ -150,9 +159,6 @@
                                             <td>@lang('general.no')</td>
                                         @endif
                                     </tr>
-
-
-
                                     @endforeach
                                 </tbody>
                             </table>

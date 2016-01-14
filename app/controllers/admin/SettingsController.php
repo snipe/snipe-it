@@ -138,6 +138,8 @@ class SettingsController extends AdminController
                  $setting->custom_css = e(Input::get('custom_css'));
              }
 
+            $setting->location_checkout = e(Input::get('location_checkout', '0'));
+
             $setting->per_page = e(Input::get('per_page'));
             $setting->qr_code = e(Input::get('qr_code', '0'));
             $setting->barcode_type = e(Input::get('barcode_type'));
