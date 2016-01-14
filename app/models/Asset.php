@@ -87,7 +87,11 @@ class Asset extends Depreciable
 
         $this->last_checkout = $checkout_at;
 
-        $this->assignedLocation()->associate($location);
+
+        //associate the location with the asset
+        //and let's try associating the logged in admin and see what happens
+        $this->assignedlocation()->associate($location);
+        $this->assigneduser()->associate($admin);
         $this->name = $name;
 
         $settings = Setting::getSettings();
@@ -100,17 +104,17 @@ class Asset extends Depreciable
 
             $log_id = $this->createLocationCheckoutLog($checkout_at, $admin, $location, $expected_checkin, $note);
 
-            return true;
-            // TODO: fire off notification events on location assign
 
-            if ((($this->requireAcceptance()=='1')  || ($this->getEula())) && ($user->email!='')) {
-                $this->checkOutNotifyMail($log_id, $user, $checkout_at, $expected_checkin, $note);
-            }
+            // TODO: fire off email notification events on location assign
+
+//            if ((($this->requireAcceptance()=='1')  || ($this->getEula())) && ($user->email!='')) {
+//                $this->checkOutNotifyMail($log_id, $user, $checkout_at, $expected_checkin, $note);
+//            }
 
             if ($settings->slack_endpoint) {
                 $this->checkOutNotifySlack($settings, $admin, $note);
             }
-
+            return true;
 
         }
         return false;
@@ -260,7 +264,7 @@ if (($filetype=="image/jpeg") || ($filetype=="image/jpg") || ($filetype=="image/
 return false;
 }
 
-    public function assignedLocation()
+    public function assignedlocation()
     {
 
         return $this->belongsTo( 'Location', 'rtd_location_id' )

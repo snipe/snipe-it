@@ -63,6 +63,15 @@
                         ->withTrashed();
         }
 
+        /**
+         * @return mixed
+         */
+        public function locadminlog()
+        {
+            return $this->belongsTo('Location', 'location_id')
+                        ->withTrashed();
+        }
+
         public function userlog()
         {
 
