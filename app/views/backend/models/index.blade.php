@@ -26,7 +26,7 @@
   <table
   name="models"
   id="table"
-  data-url="{{route('api.models.list')}}"
+  data-url="{{route('api.models.list',array('status'=>Input::get('status')))}}"
   data-cookie="true"
   data-click-to-select="true"
   data-cookie-id-table="modelsTable-{{ Config::get('version.hash_version') }}">

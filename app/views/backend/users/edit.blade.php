@@ -14,6 +14,14 @@
 
 {{-- Page content --}}
 @section('content')
+
+<style>
+.form-horizontal .control-label {
+  padding-top: 0px;
+}
+
+</style>
+
 <div class="page-header">
 
         <div class="pull-right">
@@ -74,10 +82,10 @@
             <div class="form-group {{ $errors->has('username') ? 'has-error' : '' }}">
                 <label class="col-md-3 control-label" for="username">@lang('admin/users/table.username') <i class='fa fa-asterisk'></i></label>
                 <div class="col-md-7">
-                    <input class="form-control" type="text" name="username" id="username" value="{{{ Input::old('username', $user->username) }}}"  {{ ((Config::get('app.lock_passwords') && ($user->id)) ? ' disabled' : '') }} autocomplete="off">
-                     @if (Config::get('app.lock_passwords') && ($user->id))
-					 	<p class="help-block">@lang('admin/users/table.lock_passwords')</p>
-					 @endif
+                    <input class="form-control" type="text" name="username" id="username" value="{{{ Input::old('username', $user->username) }}}"  {{ ((Config::get('app.lock_passwords') && ($user->id)) ? ' disabled' : '') }} autocomplete="false" readonly onfocus="this.removeAttribute('readonly');">
+                    @if (Config::get('app.lock_passwords') && ($user->id))
+					 	              <p class="help-block">@lang('admin/users/table.lock_passwords')</p>
+					          @endif
 
                     {{ $errors->first('username', '<br><span class="alert-msg">:message</span>') }}
                 </div>
@@ -91,7 +99,7 @@
 				@endif
 				</label>
 				<div class="col-md-5">
-					<input type="password" name="password" class="form-control" id="password" value="" {{ ((Config::get('app.lock_passwords') && ($user->id)) ? ' disabled' : '') }} autocomplete="off">
+					<input type="password" name="password" class="form-control" id="password" value="" {{ ((Config::get('app.lock_passwords') && ($user->id)) ? ' disabled' : '') }} autocomplete="false" readonly onfocus="this.removeAttribute('readonly');">
 					<span id="generated-password"></span>
 						{{ $errors->first('password', '<br><span class="alert-msg">:message</span>') }}
 				</div>
@@ -123,16 +131,16 @@
             <div class="form-group {{ $errors->has('email') ? 'has-error' : '' }}">
                 <label class="col-md-3 control-label" for="email">@lang('admin/users/table.email') </label>
                 <div class="col-md-7">
-                    <input class="form-control" type="text" name="email" id="email" value="{{{ Input::old('email', $user->email) }}}"  {{ ((Config::get('app.lock_passwords') && ($user->id)) ? ' disabled' : '') }} autocomplete="off">
+                    <input class="form-control" type="text" name="email" id="email" value="{{{ Input::old('email', $user->email) }}}"  {{ ((Config::get('app.lock_passwords') && ($user->id)) ? ' disabled' : '') }} autocomplete="off"  readonly onfocus="this.removeAttribute('readonly');">
                      @if (Config::get('app.lock_passwords') && ($user->id))
-					 	<p class="help-block">@lang('admin/users/table.lock_passwords')</p>
-					 @endif
+          					 	<p class="help-block">@lang('admin/users/table.lock_passwords')</p>
+          					 @endif
 
                     {{ $errors->first('email', '<br><span class="alert-msg">:message</span>') }}
                 </div>
             </div>
 
-          <!-- Company --> 
+          <!-- Company -->
           @if (Company::canManageUsersCompanies())
               <!-- Company -->
               <div class="form-group {{ $errors->has('company_id') ? 'has-error' : '' }}">
@@ -281,18 +289,39 @@
             <br><br>
 
             @if (Config::get('app.lock_passwords') && ($user->id))
-		 	<p class="help-block">@lang('admin/users/table.lock_passwords')</p>
-		 	@endif
+		 	        <p class="help-block">@lang('admin/users/table.lock_passwords')</p>
+		 	     @endif
+
+          @if ((($user->id!='')) && (!Sentry::getUser()->hasAccess('superuser')))
+            <p class="alert alert-warning">Only superadmins may edit a user's permissions.</p>
+          @endif
 
                  @foreach ($permissions as $area => $permissions)
                     <fieldset>
                         <legend>{{ $area }}</legend>
 
                         @foreach ($permissions as $permission)
+                        <p>{{{ $permission['note'] }}}</p>
+
                         <div class="form-group">
                         	<label class="col-md-3 control-label" for="{{{ $permission['label'] }}}">
                         	{{{ $permission['label'] }}}
                         	</label>
+
+                          @if ((($user->id!='')) && (!Sentry::getUser()->hasAccess('superuser')))
+
+                          <div class="col-md-8">
+
+                            @if (array_get($userPermissions, $permission['permission'])=='1')
+                              Enabled
+                            @elseif (array_get($userPermissions, $permission['permission'])=='-1')
+                              Inherit
+                            @else
+                              Deny
+                            @endif
+                          </div>
+
+                          @else
                              <div class="col-md-2">
                              <div class="radio inline">
                                 <label for="{{{ $permission['permission'] }}}_allow" onclick="">
@@ -321,6 +350,7 @@
                             </div>
                             </div>
                             @endif
+                          @endif
                         </div>
                         @endforeach
 
@@ -338,7 +368,6 @@
 		<label class="col-md-3 control-label"></label>
 			<div class="col-md-7">
 				<a class="btn btn-link" href="{{ route('users') }}">@lang('button.cancel')</a>
-				<button type="reset" class="btn">Reset</button>
 				<button type="submit" class="btn btn-success"><i class="fa fa-check icon-white"></i> @lang('general.save')</button>
 			</div>
 		</div>

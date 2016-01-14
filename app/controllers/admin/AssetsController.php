@@ -290,13 +290,14 @@ class AssetsController extends AdminController
         $input=Input::all();
         // return "INPUT IS: <pre>".print_r($input,true)."</pre>";
         $rules=$asset->validationRules($assetId);
-        if($asset->model->fieldset)
+        $model=Model::find(e(Input::get('model_id'))); //validate by the NEW model's custom fields, not the current one
+        if($model->fieldset)
         {
-          foreach($asset->model->fieldset->fields AS $field) {
+          foreach($model->fieldset->fields AS $field) {
             $input[$field->db_column_name()]=$input['fields'][$field->db_column_name()];
             $asset->{$field->db_column_name()}=$input[$field->db_column_name()];
           }
-          $rules+=$asset->model->fieldset->validation_rules();
+          $rules+=$model->fieldset->validation_rules();
           unset($input['fields']);
         }
 
@@ -356,6 +357,13 @@ class AssetsController extends AdminController
             } else {
                 $asset->rtd_location_id     = e(Input::get('rtd_location_id'));
             }
+
+            if (Input::has('image_delete')) {
+                unlink(public_path().'/uploads/assets/'.$asset->image);
+                $asset->image = '';
+            }
+
+
 
             $checkModel = Config::get('app.url').'/api/models/'.e(Input::get('model_id')).'/check';
             //$asset->mac_address = ($checkModel == true) ? e(Input::get('mac_address')) : NULL;
@@ -560,8 +568,8 @@ class AssetsController extends AdminController
         else if (!Company::isCurrentUserHasAccess($asset)) {
             return Redirect::to('hardware')->with('error', Lang::get('general.insufficient_permissions'));
         }
-
-        return View::make('backend/hardware/checkin', compact('asset'))->with('backto', $backto);
+        $statusLabel_list = statusLabelList();
+        return View::make('backend/hardware/checkin', compact('asset'))->with('statusLabel_list',$statusLabel_list)->with('backto', $backto);
     }
 
 
@@ -603,6 +611,9 @@ class AssetsController extends AdminController
         $asset->expected_checkin = NULL;
         $asset->last_checkout = NULL;
 
+        if (Input::has('status_id')) {
+          $asset->status_id =  e(Input::get('status_id'));
+        }
         // Was the asset updated?
         if($asset->save()) {
 
@@ -863,7 +874,7 @@ class AssetsController extends AdminController
         file_put_contents($file, $display_output);
 
 
-        return View::make('backend/hardware/import-status');
+        return Redirect::to('hardware')->with('success','Your file has been imported');
 
     }
 
@@ -1247,10 +1258,8 @@ class AssetsController extends AdminController
 						$update_array['status_id'] = e(Input::get('status_id'));
 					}
 
-          if (Input::get('requestable')=='1') {
-						$update_array['requestable'] =  1;
-					} else {
-            $update_array['requestable'] =  0;
+          if (Input::has('requestable')) {
+            $update_array['requestable'] = e(Input::get('requestable'));
           }
 
 

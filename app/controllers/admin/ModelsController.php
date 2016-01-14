@@ -401,7 +401,13 @@ class ModelsController extends AdminController
     public function getDatatable($status = null)
     {
         $models = Model::with('category','assets','depreciation');
-        ($status != 'Deleted') ?: $models->withTrashed()->Deleted();
+
+        switch ($status) {
+        case 'Deleted':
+          $models->withTrashed()->Deleted();
+          break;
+        }
+
 
         if (Input::has('search')) {
             $models = $models->TextSearch(Input::get('search'));

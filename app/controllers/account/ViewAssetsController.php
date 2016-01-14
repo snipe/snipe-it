@@ -17,6 +17,8 @@ use Slack;
 use Setting;
 use Config;
 use Mail;
+use User;
+
 
 class ViewAssetsController extends AuthorizedController
 {
@@ -27,18 +29,22 @@ class ViewAssetsController extends AuthorizedController
      */
     public function getIndex()
     {
-    	$user = Sentry::getUser();
+
+      $user = User::with('assets', 'assets.model', 'consumables', 'accessories', 'licenses', 'userloc')->withTrashed()->find(Sentry::getUser()->id);
+
+      $userlog = $user->userlog->load('assetlog', 'consumablelog', 'assetlog.model', 'licenselog', 'accessorylog', 'userlog', 'adminlog');
 
 
-            if (isset($user->id)) {
-                return View::make('frontend/account/view-assets', compact('user'));
-            } else {
-                // Prepare the error message
-                $error = Lang::get('admin/users/message.user_not_found', compact('id' ));
 
-                // Redirect to the user management page
-                return Redirect::route('users')->with('error', $error);
-            }
+        if (isset($user->id)) {
+            return View::make('frontend/account/view-assets', compact('user', 'userlog'));
+        } else {
+            // Prepare the error message
+            $error = Lang::get('admin/users/message.user_not_found', compact('id' ));
+
+            // Redirect to the user management page
+            return Redirect::route('users')->with('error', $error);
+        }
 
 	}
 
@@ -133,9 +139,9 @@ class ViewAssetsController extends AuthorizedController
             // Redirect to the asset management page
             return Redirect::to('account')->with('error', Lang::get('admin/hardware/message.does_not_exist'));
         }
-        
+
         $user = Sentry::getUser();
-        
+
         if ($user->id != $findlog->checkedout_to) {
             return Redirect::to('account/view-assets')->with('error', Lang::get('admin/users/message.error.incorrect_user_accepted'));
         }
@@ -190,11 +196,11 @@ class ViewAssetsController extends AuthorizedController
         }
 
     	$user = Sentry::getUser();
-        
+
         if ($user->id != $findlog->checkedout_to) {
             return Redirect::to('account/view-assets')->with('error', Lang::get('admin/users/message.error.incorrect_user_accepted'));
         }
-        
+
 		$logaction = new Actionlog();
 
         if (Input::get('asset_acceptance')=='accepted') {

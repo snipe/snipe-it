@@ -334,7 +334,7 @@
                     <label class="col-md-2 control-label" for="image_delete">@lang('general.image_delete')</label>
                     <div class="col-md-5">
                         {{ Form::checkbox('image_delete') }}
-                        <img src="/uploads/assets/{{{ $asset->image }}}" />
+                        <img src="{{ Config::get('app.url') }}/uploads/assets/{{{ $asset->image }}}" />
                         {{ $errors->first('image_delete', '<br><span class="alert-msg">:message</span>') }}
                     </div>
                 </div>
@@ -374,7 +374,7 @@ $(function() {
       $('#custom_fields_content').html("");
     } else {
       // console.warn("Model ID is: "+modelid);
-      $.get("/hardware/models/"+modelid+"/custom_fields",{_token: "{{ csrf_token() }}"},function (data) {
+      $.get("{{Config::get('app.url')}}/hardware/models/"+modelid+"/custom_fields",{_token: "{{ csrf_token() }}"},function (data) {
         // console.warn("Ajax call came back okay! Data is: "+data);
         $('#custom_fields_content').html(data);
       });

@@ -284,7 +284,7 @@ class UsersController extends AdminController {
             $permissions = Config::get('permissions');
             $this->encodeAllPermissions($permissions);
 
-            $location_list = array('' => '') + Location::lists('name', 'id');
+            $location_list = locationsList();
             $company_list = Company::getSelectList();
             $manager_list = array('' => 'Select a User') + DB::table('users')
                             ->select(DB::raw('concat(last_name,", ",first_name," (",email,")") as full_name, id'))
@@ -377,7 +377,9 @@ class UsersController extends AdminController {
             $user->email = Input::get('email');
             $user->employee_num = Input::get('employee_num');
             $user->activated = Input::get('activated', $user->activated);
-            $user->permissions = Input::get('permissions');
+            if (Sentry::getUser()->hasAccess('superuser')) {
+              $user->permissions = Input::get('permissions');
+            }
             $user->jobtitle = Input::get('jobtitle');
             $user->phone = Input::get('phone');
             $user->location_id = Input::get('location_id');
@@ -810,7 +812,15 @@ class UsersController extends AdminController {
                     $activated = '0';
                 }
 
-                $pass = substr(str_shuffle("0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"), 0, 10);
+                $pass = substr(str_shuffle("0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"), 0, 15);
+
+                // Location
+          			if (array_key_exists('4',$row)) {
+          				$user_location_id = trim($row[4]);
+                  if ($user_location_id=='') {
+                    $user_location_id = null;
+                  }
+          			}
 
 
 
@@ -828,8 +838,11 @@ class UsersController extends AdminController {
                             'email' => $row[3],
                             'password' => $pass,
                             'activated' => $activated,
-                            'location_id' => $row[4],
-                            //'company_id' => Company::getIdForUser($row[5]),
+                            'location_id' => $user_location_id,
+                            'phone' => $row[5],
+                            'jobtitle' => $row[6],
+                            'employee_num' => $row[7],
+                            //'company_id' => Company::getIdForUser($row[8]),
                             'permissions' => '{"user":1}',
                             'notes' => 'Imported user'
                         );
@@ -1158,7 +1171,7 @@ class UsersController extends AdminController {
     protected $ldapValidationRules = array(
         'firstname' => 'required|alpha_space|min:2',
         'lastname' => 'required|alpha_space|min:2',
-        'employee_number' => 'numeric',
+        'employee_number' => 'alpha_space',
         'username' => 'required|min:2|unique:users,username',
         'email' => 'email|unique:users,email',
     );
@@ -1201,8 +1214,8 @@ class UsersController extends AdminController {
         $ldap_result_first_name = Setting::getSettings()->ldap_fname_field;
 
         $ldap_result_active_flag = Setting::getSettings()->ldap_active_flag_field;
-        $ldap_result_emp_num = Setting::getSettings()->ldap_emp_num_field;
-        $ldap_result_email = Setting::getSettings()->ldap_email_field;
+        $ldap_result_emp_num = Setting::getSettings()->ldap_emp_num;
+        $ldap_result_email = Setting::getSettings()->ldap_email;
         $ldap_server_cert_ignore = Setting::getSettings()->ldap_server_cert_ignore;
 
         // If we are ignoring the SSL cert we need to setup the environment variable

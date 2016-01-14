@@ -333,6 +333,8 @@ Form::macro('currencies', function ($name = "currency", $selected = null, $class
         'TRY' => array('name'=>'TRY - Turkish Liras', 'symbol'=>'TL','symbol_html'=>' &#3647;'),
         'UAH' => array('name'=>'UAH - Ukrainian Hryvnias', 'symbol'=>'₴','symbol_html'=>'&#8372;'),
         'ZAR' => array('name'=>'ZAR - South African Rand', 'symbol'=>'R','symbol_html'=>'R'),
+        'AED' => array('name'=>'AED - United Arab Emirates Dirham', 'symbol'=>'AED','symbol_html'=>'AED'),
+        'CNY' => array('name'=>'CNY - Chinese Yuan', 'symbol'=>'¥','symbol_html'=>'&#165;'),
   	);
 
     $select = '<select name="'.$name.'" class="'.$class.'">';

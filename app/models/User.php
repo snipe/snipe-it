@@ -50,21 +50,33 @@ class User extends SentryUserModel
       return "//gravatar.com/avatar/{$gravatar}";
   }
 
+  /**
+  * Get assets assigned to this user
+  */
   public function assets()
   {
       return $this->hasMany('Asset', 'assigned_to')->withTrashed();
   }
 
+  /**
+  * Get accessories assigned to this user
+  */
   public function accessories()
   {
       return $this->belongsToMany('Accessory', 'accessories_users', 'assigned_to','accessory_id')->withPivot('id')->withTrashed();
   }
 
+  /**
+  * Get consumables assigned to this user
+  */
   public function consumables()
  {
      return $this->belongsToMany('Consumable', 'consumables_users', 'assigned_to','consumable_id')->withPivot('id')->withTrashed();
  }
 
+ /**
+ * Get licenses assigned to this user
+ */
   public function licenses()
   {
       return $this->belongsToMany('License', 'license_seats', 'assigned_to', 'license_id')->withPivot('id');
