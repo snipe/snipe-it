@@ -359,6 +359,13 @@ class AssetsController extends AdminController
                 $asset->rtd_location_id     = e(Input::get('rtd_location_id'));
             }
 
+            if (Input::has('image_delete')) {
+                unlink(public_path().'/uploads/assets/'.$asset->image);
+                $asset->image = '';
+            }
+
+
+
             $checkModel = Config::get('app.url').'/api/models/'.e(Input::get('model_id')).'/check';
             //$asset->mac_address = ($checkModel == true) ? e(Input::get('mac_address')) : NULL;
 
