@@ -334,7 +334,7 @@
                     <label class="col-md-2 control-label" for="image_delete">@lang('general.image_delete')</label>
                     <div class="col-md-5">
                         {{ Form::checkbox('image_delete') }}
-                        <img src="/uploads/assets/{{{ $asset->image }}}" />
+                        <img src="{{ Config::get('app.url') }}/uploads/assets/{{{ $asset->image }}}" />
                         {{ $errors->first('image_delete', '<br><span class="alert-msg">:message</span>') }}
                     </div>
                 </div>
