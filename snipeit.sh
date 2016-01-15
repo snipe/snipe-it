@@ -1,5 +1,5 @@
 #!/bin/bash
-
+set -e
 ######################################################
 #           Snipe-It Install Script                  #
 #          Script created by Mike Tucker             #
