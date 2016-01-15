@@ -388,6 +388,7 @@ case $distro in
 		php composer.phar install --no-dev --prefer-source
 
 		# Change permissions on directories
+		echo "##  Seting permissions on web directory."
 		sudo chmod -R 755 $webdir/$name/app/storage
 		sudo chmod -R 755 $webdir/$name/app/private_uploads
 		sudo chmod -R 755 $webdir/$name/public/uploads
@@ -521,6 +522,7 @@ case $distro in
 		php composer.phar install --no-dev --prefer-source
 
 		# Change permissions on directories
+		echo "##  Seting permissions on web directory."
 		sudo chmod -R 755 $webdir/$name/app/storage
 		sudo chmod -R 755 $webdir/$name/app/private_uploads
 		sudo chmod -R 755 $webdir/$name/public/uploads
