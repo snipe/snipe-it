@@ -1,5 +1,5 @@
 #!/bin/bash
-set -e
+
 ######################################################
 #           Snipe-It Install Script                  #
 #          Script created by Mike Tucker             #
@@ -18,13 +18,13 @@ set -e
 if [ "$(id -u)" != "0" ]; then
   exec sudo "$0" "$@"
 fi
-#First things first, let's set some variables and find our distro.
+
 clear
-##TODO Preping things to switch over from wget to git to pull down files
+
 #  Set this to your github username to pull your changes ** Only for Devs **
 fork='snipe'
-#  Set this to the branch you want to pull  ** Only for Devs **
-branch='develop'
+#  Set this to the branch you want to pull  ** Only for Devs ** ##TODO not working yet
+#branch='develop'
 
 name="snipeit"
 si="Snipe-IT"
@@ -104,7 +104,7 @@ echo ""
 
 #Do you want to set your own passwords, or have me generate random ones?
 until [[ $ans == "yes" ]] || [[ $ans == "no" ]]; do
-echo -n "  Q. Do you want me to automatically create the snipe database user password? (y/n) "
+echo -n "  Q. Do you want to automatically create the snipe database user password? (y/n) "
 read setpw
 
 case $setpw in
@@ -113,12 +113,12 @@ case $setpw in
                 ans="yes"
                 ;;
         [nN] | [n|N][O|o] )
-                echo -n  "  Q. What do you want your snipeit user password to be?"
+                echo -n  "    Q. What do you want your snipeit user password to be?"
                 read -s mysqluserpw
                 echo ""
 				ans="no"
                 ;;
-        *) 		echo "  Invalid answer. Please type y or n"
+        *) 		echo "    Invalid answer. Please type y or n"
                 ;;
 esac
 done
@@ -161,10 +161,11 @@ case $distro in
 
 		#  Get files and extract to web dir
 		echo ""
-		echo "##  Downloading snipeit and extract to web directory."
-		wget -P $tmp/ https://github.com/snipe/snipe-it/archive/$file >> /var/log/snipeit-install.log 2>&1
-		unzip -qo $tmp/$file -d $tmp/
-		cp -R $tmp/snipe-it-master $webdir/$name
+		echo "##  Cloning Snipe-IT from github to the web directory.";
+		git clone https://github.com/$fork/snipe-it /var/www/html/snipeit >> /var/log/snipeit-install.log 2>&1
+		# wget -P $tmp/ https://github.com/snipe/snipe-it/archive/$file >> /var/log/snipeit-install.log 2>&1
+		# unzip -qo $tmp/$file -d $tmp/
+		# cp -R $tmp/snipe-it-master $webdir/$name
 
 		##  TODO make sure apache is set to start on boot and go ahead and start it
 
@@ -238,19 +239,19 @@ case $distro in
 		echo "##  Input your MySQL/MariaDB root password (blank if this is a fresh install): "
 		sudo mysql -u root -p < $dbsetup
 
-		echo "##  Securing Mysql"
+		echo "##  Securing Mysql."
 
 		# Have user set own root password when securing install
 		# and just set the snipeit database user at the beginning
 		/usr/bin/mysql_secure_installation
 
 		# Install / configure composer
-		echo "##  Configure composer"
+		echo "##  Configuring composer."
 		cd $webdir/$name
 		curl -sS https://getcomposer.org/installer | php
 		php composer.phar install --no-dev --prefer-source
 
-		echo "##  Installing Snipe-IT"
+		echo "##  Installing Snipe-IT."
 		php artisan app:install --env=production
 
 		echo "##  Restarting apache."
@@ -299,11 +300,12 @@ case $distro in
 		done;
 
         echo ""
-		echo "##  Downloading Snipe-IT from github and putting it in the web directory.";
+		echo "##  Cloning Snipe-IT from github to the web directory.";
 
-		wget -P $tmp/ https://github.com/snipe/snipe-it/archive/$file >> /var/log/snipeit-install.log 2>&1
-		unzip -qo $tmp/$file -d $tmp/
-		cp -R $tmp/snipe-it-master $webdir/$name
+		git clone https://github.com/$fork/snipe-it /var/www/html/snipeit >> /var/log/snipeit-install.log 2>&1
+		# wget -P $tmp/ https://github.com/snipe/snipe-it/archive/$file >> /var/log/snipeit-install.log 2>&1
+		# unzip -qo $tmp/$file -d $tmp/
+		# cp -R $tmp/snipe-it-master $webdir/$name
 
 		# Make mariaDB start on boot and restart the daemon
 		echo "##  Starting the mariaDB server.";
@@ -387,12 +389,12 @@ case $distro in
 		sudo chown -R apache:apache $webdir/$name
 
 		# Install / configure composer
-		echo "##  Configure composer"
+		echo "##  Configuring composer."
 		cd $webdir/$name
 		curl -sS https://getcomposer.org/installer | php
 		php composer.phar install --no-dev --prefer-source
 
-		echo "##  Installing Snipe-IT"
+		echo "##  Installing Snipe-IT."
 		php artisan app:install --env=production
 
 #TODO detect if SELinux and firewall are enabled to decide what to do
@@ -434,9 +436,10 @@ case $distro in
         echo ""
 		echo "##  Downloading Snipe-IT from github and put it in the web directory.";
 
-		wget -P $tmp/ https://github.com/snipe/snipe-it/archive/$file >> /var/log/snipeit-install.log 2>&1
-		unzip -qo $tmp/$file -d $tmp/
-		cp -R $tmp/snipe-it-master $webdir/$name
+		git clone https://github.com/$fork/snipe-it /var/www/html/snipeit >> /var/log/snipeit-install.log 2>&1
+		# wget -P $tmp/ https://github.com/snipe/snipe-it/archive/$file >> /var/log/snipeit-install.log 2>&1
+		# unzip -qo $tmp/$file -d $tmp/
+		# cp -R $tmp/snipe-it-master $webdir/$name
 
 		# Make mariaDB start on boot and restart the daemon
 		echo "##  Starting the mariaDB server.";
@@ -519,12 +522,12 @@ case $distro in
 		sudo chown -R apache:apache $webdir/$name
 
 		# Install / configure composer
-		echo "##  Configure composer"
+		echo "##  Configuring composer."
 		cd $webdir/$name
 		curl -sS https://getcomposer.org/installer | php
 		php composer.phar install --no-dev --prefer-source
 
-		echo "##  Installing Snipe-IT"
+		echo "##  Installing Snipe-IT."
 		php artisan app:install --env=production
 
 #TODO detect if SELinux and firewall are enabled to decide what to do
