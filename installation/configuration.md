@@ -194,7 +194,17 @@ You should also change your secret key here from `Change_this_key_or_snipe_will_
 
 You’ll need to make sure that the `app/storage` directory and its subdirectories are writable by your web server, since caches and log files get written there. You should use the minimum permissions available for writing, based on how you’ve got your web server configured. You also need to change permissions for your `uploads` directory for user avatars and model images.
 
-On Linux/OSX, you would do something like this:
+First, you'll need to figure out which user your webserver is running under. On Linux/OS X systems, it's usually something like "nobody", "apache", "httpd", "www", or "\_www" Determine that by using `ps auxwww` - then you can see who the server is running as.
+
+Once you've determined your webserver's user, you will want to make sure your webserver has ownership of the appropriate directories:
+
+```sh
+chown -R that_username app/storage app/private_uploads public/uploads
+```
+
+Next, you'll want to ensure that this user has write permissions to those directories.
+
+On Linux/OS X, you would do something like this:
 
 ```
 chmod -R 755 app/storage
