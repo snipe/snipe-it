@@ -266,7 +266,7 @@ case $distro in
 		echo "##  Adding IUS, epel-release and mariaDB repos.";
 		mariadbRepo=/etc/yum.repos.d/MariaDB.repo
 
-		if [$mariadbRepo]
+		if [ -f "$mariadbRepo" ]
 		then
 			echo "    Repo already exists. $apachefile"
 		else
@@ -321,7 +321,7 @@ case $distro in
 		echo "##  Creating the new virtual host in Apache.";
 		apachefile=/etc/httpd/conf.d/$name.conf
 
-		if [$apachefile]
+		if [ -f "$apachefile" ]
 		then
 			echo "    VirtualHost already exists. $apachefile"
 		else
