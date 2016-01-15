@@ -167,7 +167,7 @@ case $distro in
 		# unzip -qo $tmp/$file -d $tmp/
 		# cp -R $tmp/snipe-it-master $webdir/$name
 
-		##  TODO make sure apache is set to start on boot and go ahead and start it
+##  TODO make sure apache is set to start on boot and go ahead and start it
 
 		#Enable mcrypt and rewrite
 		echo "##  Enabling mcrypt and rewrite"
@@ -226,16 +226,7 @@ case $distro in
 		echo "	Setting up mail file."
 		cp $webdir/$name/app/config/production/mail.example.php $webdir/$name/app/config/production/mail.php
 
-		##  TODO make sure mysql is set to start on boot and go ahead and start it
-
-		#Change permissions on directories
-		echo "##  Seting permissions on web directory."
-		sudo chmod -R 755 $webdir/$name/app/storage
-		sudo chmod -R 755 $webdir/$name/app/private_uploads
-		sudo chmod -R 755 $webdir/$name/public/uploads
-		sudo chown -R www-data:www-data /var/www/
-		# echo "##  Finished permission changes."
-
+##  TODO make sure mysql is set to start on boot and go ahead and start it
 		echo "##  Input your MySQL/MariaDB root password (blank if this is a fresh install): "
 		sudo mysql -u root -p < $dbsetup
 
@@ -250,6 +241,14 @@ case $distro in
 		cd $webdir/$name
 		curl -sS https://getcomposer.org/installer | php
 		php composer.phar install --no-dev --prefer-source
+
+		#Change permissions on directories
+		echo "##  Seting permissions on web directory."
+		sudo chmod -R 755 $webdir/$name/app/storage
+		sudo chmod -R 755 $webdir/$name/app/private_uploads
+		sudo chmod -R 755 $webdir/$name/public/uploads
+		sudo chown -R www-data:www-data /var/www/
+		# echo "##  Finished permission changes."
 
 		echo "##  Installing Snipe-IT."
 		php artisan app:install --env=production
@@ -382,17 +381,17 @@ case $distro in
 		echo "	Setting up mail file."
 		cp $webdir/$name/app/config/production/mail.example.php $webdir/$name/app/config/production/mail.php
 
-		# Change permissions on directories
-		sudo chmod -R 755 $webdir/$name/app/storage
-		sudo chmod -R 755 $webdir/$name/app/private_uploads
-		sudo chmod -R 755 $webdir/$name/public/uploads
-		sudo chown -R apache:apache $webdir/$name
-
 		# Install / configure composer
 		echo "##  Configuring composer."
 		cd $webdir/$name
 		curl -sS https://getcomposer.org/installer | php
 		php composer.phar install --no-dev --prefer-source
+
+		# Change permissions on directories
+		sudo chmod -R 755 $webdir/$name/app/storage
+		sudo chmod -R 755 $webdir/$name/app/private_uploads
+		sudo chmod -R 755 $webdir/$name/public/uploads
+		sudo chown -R apache:apache $webdir/$name
 
 		echo "##  Installing Snipe-IT."
 		php artisan app:install --env=production
@@ -515,17 +514,17 @@ case $distro in
 		echo "	Setting up mail file."
 		cp $webdir/$name/app/config/production/mail.example.php $webdir/$name/app/config/production/mail.php
 
-		# Change permissions on directories
-		sudo chmod -R 755 $webdir/$name/app/storage
-		sudo chmod -R 755 $webdir/$name/app/private_uploads
-		sudo chmod -R 755 $webdir/$name/public/uploads
-		sudo chown -R apache:apache $webdir/$name
-
 		# Install / configure composer
 		echo "##  Configuring composer."
 		cd $webdir/$name
 		curl -sS https://getcomposer.org/installer | php
 		php composer.phar install --no-dev --prefer-source
+
+		# Change permissions on directories
+		sudo chmod -R 755 $webdir/$name/app/storage
+		sudo chmod -R 755 $webdir/$name/app/private_uploads
+		sudo chmod -R 755 $webdir/$name/public/uploads
+		sudo chown -R apache:apache $webdir/$name
 
 		echo "##  Installing Snipe-IT."
 		php artisan app:install --env=production
