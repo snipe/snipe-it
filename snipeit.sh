@@ -163,9 +163,10 @@ case $distro in
 		echo ""
 		echo "##  Cloning Snipe-IT from github to the web directory.";
 		git clone https://github.com/$fork/snipe-it $webdir/$name >> /var/log/snipeit-install.log 2>&1
-		# wget -P $tmp/ https://github.com/snipe/snipe-it/archive/$file >> /var/log/snipeit-install.log 2>&1
-		# unzip -qo $tmp/$file -d $tmp/
-		# cp -R $tmp/snipe-it-master $webdir/$name
+        # get latest stable release
+        cd $webdir/$name
+        branch=$(git tag | grep -v 'pre' | tail -1)
+        git checkout -b $branch $branch
 
 ##  TODO make sure apache is set to start on boot and go ahead and start it
 
@@ -302,9 +303,10 @@ case $distro in
 		echo "##  Cloning Snipe-IT from github to the web directory.";
 
 		git clone https://github.com/$fork/snipe-it $webdir/$name >> /var/log/snipeit-install.log 2>&1
-		# wget -P $tmp/ https://github.com/snipe/snipe-it/archive/$file >> /var/log/snipeit-install.log 2>&1
-		# unzip -qo $tmp/$file -d $tmp/
-		# cp -R $tmp/snipe-it-master $webdir/$name
+        # get latest stable release
+        cd $webdir/$name
+        branch=$(git tag | grep -v 'pre' | tail -1)
+        git checkout -b $branch $branch
 
 		# Make mariaDB start on boot and restart the daemon
 		echo "##  Starting the mariaDB server.";
@@ -437,9 +439,10 @@ case $distro in
 		echo "##  Downloading Snipe-IT from github and put it in the web directory.";
 
 		git clone https://github.com/$fork/snipe-it $webdir/$name >> /var/log/snipeit-install.log 2>&1
-		# wget -P $tmp/ https://github.com/snipe/snipe-it/archive/$file >> /var/log/snipeit-install.log 2>&1
-		# unzip -qo $tmp/$file -d $tmp/
-		# cp -R $tmp/snipe-it-master $webdir/$name
+        # get latest stable release
+        cd $webdir/$name
+        branch=$(git tag | grep -v 'pre' | tail -1)
+        git checkout -b $branch $branch
 
 		# Make mariaDB start on boot and restart the daemon
 		echo "##  Starting the mariaDB server.";
