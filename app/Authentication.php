@@ -1,6 +1,7 @@
 <?php
+use Illuminate\Database\Eloquent\Model;
 
-class Authentication extends Eloquent
+class Authentication extends Model
 {
     /**
      * @return

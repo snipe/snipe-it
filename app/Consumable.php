@@ -2,7 +2,7 @@
 
 class Consumable extends Elegant
 {
-    use SoftDeletingTrait;
+    use SoftDeletes;
     use CompanyableTrait;
 
     protected $dates = ['deleted_at'];

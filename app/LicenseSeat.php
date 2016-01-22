@@ -3,7 +3,7 @@
 class LicenseSeat extends Elegant implements ICompanyableChild
 {
     use CompanyableChildTrait;
-    use SoftDeletingTrait;
+    use SoftDeletes;
 
     protected $dates = ['deleted_at'];
     protected $guarded = 'id';

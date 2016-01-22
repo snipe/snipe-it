@@ -1,13 +1,14 @@
 <?php
 
-    use Illuminate\Database\Eloquent\SoftDeletingTrait;
+    use Illuminate\Database\Eloquent\SoftDeletes;
     use Illuminate\Support\Facades\DB;
     use Illuminate\Support\Facades\Log;
+use Illuminate\Database\Eloquent\Model;
 
-class Actionlog extends Eloquent implements ICompanyableChild
+class Actionlog extends Model implements ICompanyableChild
 {
     use CompanyableChildTrait;
-    use SoftDeletingTrait;
+    use SoftDeletes;
 
     protected $dates = [ 'deleted_at' ];
 

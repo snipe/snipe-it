@@ -1,12 +1,12 @@
 <?php
 
-    use Illuminate\Database\Eloquent\SoftDeletingTrait;
+    use Illuminate\Database\Eloquent\SoftDeletes;
     use Illuminate\Support\Facades\Lang;
 
 class AssetMaintenance extends Elegant implements ICompanyableChild
 {
     use CompanyableChildTrait;
-    use SoftDeletingTrait;
+    use SoftDeletes;
 
     protected $dates = [ 'deleted_at' ];
     protected $table = 'asset_maintenances';

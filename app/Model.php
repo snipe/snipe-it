@@ -4,7 +4,7 @@
 
 class Model extends Elegant
 {
-    use SoftDeletingTrait;
+    use SoftDeletes;
     protected $dates = ['deleted_at'];
     protected $table = 'models';
 

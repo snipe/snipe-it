@@ -9,7 +9,7 @@ class User extends SentryUserModel
   *
   * @var bool
   */
-    use SoftDeletingTrait;
+    use SoftDeletes;
     protected $dates = ['deleted_at'];
 
   // public function __construct()

@@ -2,8 +2,9 @@
 
 //use Eloquent;
 use Illuminate\Database\Eloquent\Model as Eloquent;
+use Illuminate\Database\Eloquent\Model;
 
-class Elegant extends Eloquent
+class Elegant extends Model
 {
     protected $rules = array();
     protected $errors;

@@ -2,7 +2,7 @@
 
 class Location extends Elegant
 {
-    use SoftDeletingTrait;
+    use SoftDeletes;
     protected $dates = ['deleted_at'];
     protected $table = 'locations';
     protected $rules = array(

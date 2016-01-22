@@ -1,7 +1,7 @@
 <?php
 class Manufacturer extends Elegant
 {
-    use SoftDeletingTrait;
+    use SoftDeletes;
     protected $dates = ['deleted_at'];
     protected $table = 'manufacturers';
 
