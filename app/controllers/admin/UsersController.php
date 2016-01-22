@@ -43,8 +43,8 @@ class UsersController extends AdminController {
      * @var array
      */
     protected $validationRules = array(
-      'first_name' => 'required|alpha_space|min:2',
-      'last_name' => 'required|alpha_space|min:2',
+      'first_name' => 'required|alpha_space|min:1',
+      'last_name' => 'required|alpha_space|min:1',
       'location_id' => 'numeric',
       'username' => 'required|min:2|unique:users,deleted_at,NULL',
       'email' => 'email|unique:users,email',
