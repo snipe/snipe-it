@@ -670,7 +670,7 @@
     |
     |
     */
-    Route::group([ 'prefix' => 'account', 'before' => 'auth', 'namespace' => 'Controllers\Account' ], function () {
+    Route::group([ 'prefix' => 'account', 'middleware' => 'auth', 'namespace' => 'Controllers\Account' ], function () {
 
         # Profile
         Route::get('profile', [ 'as' => 'profile', 'uses' => 'ProfileController@getIndex' ]);
