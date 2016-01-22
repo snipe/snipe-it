@@ -12,7 +12,13 @@ class Kernel extends ConsoleKernel
      * @var array
      */
     protected $commands = [
+        'App\Console\Commands\AppCommand',
+        'App\Console\Commands\SystemBackup',
+        'App\Console\Commands\AssetImportCommand',
+        'App\Console\Commands\Versioning',
         'App\Console\Commands\Inspire',
+        'App\Console\Commands\LicenseImportCommand',
+        'App\Console\Commands\SendExpirationAlerts',
     ];
 
     /**
