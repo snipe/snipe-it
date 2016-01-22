@@ -1,12 +1,12 @@
 @extends('backend/layouts/default')
 
-{{-- Page title --}}
+{!!-- Page title --!!}
 @section('title')
-@lang('admin/hardware/general.view') {{ $asset->asset_tag }} ::
+@lang('admin/hardware/general.view') {!! $asset->asset_tag !!} ::
 @parent
 @stop
 
-{{-- Page content --}}
+{!!-- Page content --!!}
 @section('content')
 
 
@@ -29,13 +29,13 @@
             <ul class="dropdown-menu pull-right" role="menu" aria-labelledby="dropdownMenu1">
 
                     @if ($asset->assigned_to != '')
-                            <li role="presentation"><a href="{{ route('checkin/hardware', $asset->id) }}">@lang('admin/hardware/general.checkin')</a></li>
+                            <li role="presentation"><a href="{!! route('checkin/hardware', $asset->id) !!}">@lang('admin/hardware/general.checkin')</a></li>
 
                         @else
-                            <li role="presentation"><a href="{{ route('checkout/hardware', $asset->id)  }}">@lang('admin/hardware/general.checkout')</a></li>
+                            <li role="presentation"><a href="{!! route('checkout/hardware', $asset->id)  !!}">@lang('admin/hardware/general.checkout')</a></li>
                         @endif
-                <li role="presentation"><a href="{{ route('update/hardware', $asset->id) }}">@lang('admin/hardware/general.edit')</a></li>
-                <li role="presentation"><a href="{{ route('clone/hardware', $asset->id) }}">@lang('admin/hardware/general.clone')</a></li>
+                <li role="presentation"><a href="{!! route('update/hardware', $asset->id) !!}">@lang('admin/hardware/general.edit')</a></li>
+                <li role="presentation"><a href="{!! route('clone/hardware', $asset->id) !!}">@lang('admin/hardware/general.clone')</a></li>
             </ul>
         </div>
     </div>
@@ -72,11 +72,11 @@
 
         @if ($asset->model->manufacturer)
             <div class="col-md-12" style="padding-bottom: 5px;"><strong>@lang('admin/hardware/form.manufacturer'): </strong>
-            <a href="{{ route('update/manufacturer', $asset->model->manufacturer->id) }}">
+            <a href="{!! route('update/manufacturer', $asset->model->manufacturer->id) !!}">
             {{{ $asset->model->manufacturer->name }}}
             </a> </div>
             <div class="col-md-12" style="padding-bottom: 5px;"><strong>@lang('admin/hardware/form.model'):</strong>
-            <a href="{{ route('view/model', $asset->model->id) }}">
+            <a href="{!! route('view/model', $asset->model->id) !!}">
             {{{ $asset->model->name }}}
             </a>
              / {{{ $asset->model->modelno }}}</div>
@@ -109,7 +109,7 @@
         @if ($asset->supplier_id)
             <div class="col-md-6" style="padding-bottom: 5px;">
                   <strong>@lang('admin/hardware/form.supplier'): </strong>
-                  <a href="{{ route('view/supplier', $asset->supplier_id) }}">
+                  <a href="{!! route('view/supplier', $asset->supplier_id) !!}">
                   {{{ $asset->supplier->name }}}
                   </a>
             </div>
@@ -126,7 +126,7 @@
 
         @if ($asset->depreciation)
             <div class="col-md-12" style="padding-bottom: 5px;"><strong>@lang('admin/hardware/form.depreciation'): </strong>
-            {{ $asset->depreciation->name }}
+            {!! $asset->depreciation->name !!}
                 ({{{ $asset->depreciation->months }}}
                 @lang('admin/hardware/form.months')
                 )</div>
@@ -205,9 +205,9 @@
 			<tbody>
 				@foreach ($asset->licenseseats as $seat)
 				<tr>
-					<td><a href="{{ route('view/license', $seat->license->id) }}">{{{ $seat->license->name }}}</a></td>
+					<td><a href="{!! route('view/license', $seat->license->id) !!}">{{{ $seat->license->name }}}</a></td>
 					<td>{{{ $seat->license->serial }}}</td>
-					<td><a href="{{ route('checkin/license', $seat->id) }}" class="btn-flat info btn-sm">@lang('general.checkin')</a>
+					<td><a href="{!! route('checkin/license', $seat->id) !!}" class="btn-flat info btn-sm">@lang('general.checkin')</a>
 					</td>
 				</tr>
 				@endforeach
@@ -228,7 +228,7 @@
         <div class="col-md-12">
 
             <h6>@lang('general.asset_maintenances')
-            [ <a href="{{ route('create/asset_maintenances', $asset->id) }}">@lang('button.add')</a> ]
+            [ <a href="{!! route('create/asset_maintenances', $asset->id) !!}">@lang('button.add')</a> ]
         </h6>
         </div>
     </div>
@@ -252,7 +252,7 @@
             @foreach ($asset->asset_maintenances as $assetMaintenance)
                 @if (is_null($assetMaintenance->deleted_at))
                 <tr>
-                    <td><a href="{{ route('view/supplier', $assetMaintenance->supplier_id) }}">{{{ $assetMaintenance->supplier->name }}}</a></td>
+                    <td><a href="{!! route('view/supplier', $assetMaintenance->supplier_id) !!}">{{{ $assetMaintenance->supplier->name }}}</a></td>
                     <td>{{{ $assetMaintenance->title }}}</td>
                     <td>{{{ $assetMaintenance->asset_maintenance_type }}}</td>
                     <td>{{{ $assetMaintenance->start_date }}}</td>
@@ -260,7 +260,7 @@
                     <td>{{{ $assetMaintenance->is_warranty ? Lang::get('admin/asset_maintenances/message.warranty') : Lang::get('admin/asset_maintenances/message.not_warranty') }}}</td>
                     <td><nobr>{{{ $use_currency.$assetMaintenance->cost }}}</nobr></td>
                     <?php $totalCost += $assetMaintenance->cost; ?>
-                    <td><a href="{{ route('update/asset_maintenance', $assetMaintenance->id) }}" class="btn btn-warning btn-sm"><i class="fa fa-pencil icon-white"></i></a>
+                    <td><a href="{!! route('update/asset_maintenance', $assetMaintenance->id) !!}" class="btn btn-warning btn-sm"><i class="fa fa-pencil icon-white"></i></a>
                     </td>
                 </tr>
                 @endif
@@ -309,11 +309,11 @@
                     </td>
                     <td>
                         @if ($file->filename)
-                        <a href="{{ route('show/assetfile', [$asset->id, $file->id]) }}" class="btn btn-default">@lang('general.download')</a>
+                        <a href="{!! route('show/assetfile', [$asset->id, $file->id]) !!}" class="btn btn-default">@lang('general.download')</a>
                         @endif
                     </td>
                     <td>
-                        <a class="btn delete-asset btn-danger btn-sm" href="{{ route('delete/assetfile', [$asset->id, $file->id]) }}"><i class="fa fa-trash icon-white"></i></a>
+                        <a class="btn delete-asset btn-danger btn-sm" href="{!! route('delete/assetfile', [$asset->id, $file->id]) !!}"><i class="fa fa-trash icon-white"></i></a>
                     </td>
                 </tr>
                 @endforeach
@@ -354,12 +354,12 @@
                     {{{ $log->adminlog->fullName() }}}
                     @endif
                 </td>
-                <td>{{ $log->action_type }}</td>
+                <td>{!! $log->action_type !!}</td>
                 <td>
                     @if ((isset($log->checkedout_to)) && ($log->checkedout_to!=0) && ($log->checkedout_to!=''))
 
                         @if ($log->userlog->deleted_at=='')
-                            <a href="{{ route('view/user', $log->checkedout_to) }}">
+                            <a href="{!! route('view/user', $log->checkedout_to) !!}">
                             {{{ $log->userlog->fullName() }}}
                              </a>
                         @else
@@ -377,7 +377,7 @@
             @endforeach
             @endif
             <tr>
-                <td>{{ $asset->created_at }}</td>
+                <td>{!! $asset->created_at !!}</td>
                 <td>
                 @if (isset($asset->adminuser->id)) {{{ $asset->adminuser->fullName() }}}
                 @else
@@ -404,7 +404,7 @@
 @if ($asset->notes)
 
 		<h6>@lang('admin/hardware/form.notes'):</h6>
-		 <div class="break-word">{{ nl2br(e($asset->notes)) }}</div>
+		 <div class="break-word">{!! nl2br(e($asset->notes)) !!}</div>
 
 @endif
 
@@ -420,10 +420,10 @@
 		<!-- Is there an asset or model image to show? -->
 
         @if ($asset->image)
-          <img src="{{ Config::get('app.url') }}/uploads/assets/{{{ $asset->image }}}" class="assetimg">
+          <img src="{!! Config::get('app.url') !!}/uploads/assets/{{{ $asset->image }}}" class="assetimg">
         @else
           @if ($asset->model->image!='')
-            <img src="{{ Config::get('app.url') }}/uploads/models/{{{ $asset->model->image }}}" class="assetimg">
+            <img src="{!! Config::get('app.url') !!}/uploads/models/{{{ $asset->model->image }}}" class="assetimg">
           @endif
         @endif
 
@@ -434,7 +434,7 @@
                 <ul>
 
                     <li><img src="{{{ $asset->assigneduser->gravatar() }}}" class="img-circle" style="width: 100px; margin-right: 20px;" /><br /><br /></li>
-                    <li><a href="{{ route('view/user', $asset->assigned_to) }}">{{ $asset->assigneduser->fullName() }}</a></li>
+                    <li><a href="{!! route('view/user', $asset->assigned_to) !!}">{!! $asset->assigneduser->fullName() !!}</a></li>
 		<br>
 
 
@@ -492,12 +492,12 @@
 
                     	 @if (($asset->assetstatus->deployable=='1') && ($asset->assigned_to > 0) && ($asset->deleted_at=='') && ($asset->assetlog->first()))
 
-                    	<li><br /><a href="{{ route('checkin/hardware', $asset->id) }}" class="btn btn-primary btn-sm">@lang('admin/hardware/general.checkin')</a></li>
+                    	<li><br /><a href="{!! route('checkin/hardware', $asset->id) !!}" class="btn btn-primary btn-sm">@lang('admin/hardware/general.checkin')</a></li>
                     	@elseif ((($asset->assetstatus->deployable=='1') &&  (($asset->assigned_to=='') || ($asset->assigned_to==0))) && ($asset->deleted_at==''))
-                    	<li><br /><a href="{{ route('checkout/hardware', $asset->id) }}" class="btn btn-info btn-sm">@lang('admin/hardware/general.checkout')</a></li>
+                    	<li><br /><a href="{!! route('checkout/hardware', $asset->id) !!}" class="btn btn-info btn-sm">@lang('admin/hardware/general.checkout')</a></li>
 						@elseif  (($asset->deleted_at!='') && ($asset->model->deleted_at==''))
 
-						<li><br /><a href="{{ route('restore/hardware', $asset->id) }}" class="btn-flat large info ">@lang('admin/hardware/general.restore')</a></li>
+						<li><br /><a href="{!! route('restore/hardware', $asset->id) !!}" class="btn-flat large info ">@lang('admin/hardware/general.restore')</a></li>
 
                     	@endif
                     </ul>
@@ -527,10 +527,10 @@
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
         <h4 class="modal-title" id="uploadFileModalLabel">Upload File</h4>
       </div>
-      {{ Form::open([
+      {!! Form::open([
       'method' => 'POST',
       'route' => ['upload/asset', $asset->id],
-      'files' => true, 'class' => 'form-horizontal' ]) }}
+      'files' => true, 'class' => 'form-horizontal' ]) !!}
       <div class="modal-body">
 
 		<p><p>@lang('admin/hardware/general.filetype_info')</p>.</p>
@@ -542,7 +542,7 @@
 		</div>
 		<div class="form-group col-md-12">
 		 <div class="input-group col-md-12">
-			{{ Form::file('assetfile[]', ['multiple' => 'multiple']) }}
+			{!! Form::file('assetfile[]', ['multiple' => 'multiple']) !!}
 		</div>
 		</div>
 
@@ -552,7 +552,7 @@
         <button type="button" class="btn btn-default btn-sm" data-dismiss="modal">@lang('button.cancel')</button>
         <button type="submit" class="btn btn-primary btn-sm">@lang('button.upload')</button>
       </div>
-      {{ Form::close() }}
+      {!! Form::close() !!}
     </div>
   </div>
 </div>

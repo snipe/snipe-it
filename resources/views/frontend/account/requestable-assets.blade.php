@@ -5,12 +5,12 @@
     @lang('general.assets')
 @stop
 
-{{-- Page title --}}
+{!!-- Page title --!!}
 @section('title')
     @yield('title0') :: @parent
 @stop
 
-{{-- Page content --}}
+{!!-- Page content --!!}
 @section('content')
 
 
@@ -59,7 +59,7 @@
 
             </td>
             <td>
-                <a href="{{ route('account/request-asset', $asset->id) }}" class="btn btn-info btn-sm" title="@lang('button.request')">@lang('button.request')</a>
+                <a href="{!! route('account/request-asset', $asset->id) !!}" class="btn btn-info btn-sm" title="@lang('button.request')">@lang('button.request')</a>
             </td>
 
         </tr>

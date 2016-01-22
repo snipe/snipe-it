@@ -1,12 +1,12 @@
 @extends('backend/layouts/default')
 
-{{-- Page title --}}
+{!!-- Page title --!!}
 @section('title')
 Account Sign in ::
 @parent
 @stop
 
-{{-- Page content --}}
+{!!-- Page content --!!}
 @section('content')
 
 <div class="row header">
@@ -17,25 +17,25 @@ Account Sign in ::
 
 <div class="col-md-11 col-md-offset-1">
 
-    <form method="post" action="{{ route('signin') }}" class="form-horizontal">
+    <form method="post" action="{!! route('signin') !!}" class="form-horizontal">
         <!-- CSRF Token -->
-        <input type="hidden" name="_token" value="{{ csrf_token() }}" />
+        <input type="hidden" name="_token" value="{!! csrf_token() !!}" />
 
             <!-- username -->
-            <div class="form-group{{ $errors->has('username') ? ' has-error' : '' }}">
+            <div class="form-group{!! $errors->has('username') ? ' has-error' : '' !!}">
                 <label for="username" class="col-md-2 col-sm-12 control-label">Username</label>
                     <div class="col-md-5 col-sm-12">
                         <input class="form-control" type="username" name="username" id="username" value="{{{ Input::old('username') }}}" />
-                        {{ $errors->first('username', '<br><span class="alert-msg"><i class="fa fa-times"></i> :message</span>') }}
+                        {!! $errors->first('username', '<br><span class="alert-msg"><i class="fa fa-times"></i> :message</span>') !!}
                     </div>
             </div>
 
             <!-- Password -->
-            <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
+            <div class="form-group{!! $errors->has('password') ? ' has-error' : '' !!}">
                 <label for="password" class="col-md-2 col-sm-12 control-label">Password</label>
                     <div class="col-md-5 col-sm-12">
                         <input class="form-control" type="password" name="password" id="password" value="{{{ Input::old('password') }}}" />
-                        {{ $errors->first('password', '<br><span class="alert-msg"><i class="fa fa-times"></i> :message</span>') }}
+                        {!! $errors->first('password', '<br><span class="alert-msg"><i class="fa fa-times"></i> :message</span>') !!}
                     </div>
             </div>
 
@@ -45,7 +45,7 @@ Account Sign in ::
                 <div class="col-md-3 col-sm-12 col-xs-12" style="padding-left: 0px;">
                     <div class="checkbox">
                         <label>
-                          {{ Form::checkbox('remember-me', '1', Input::old('remember-me')) }} Remember me
+                          {!! Form::checkbox('remember-me', '1', Input::old('remember-me')) !!} Remember me
                         </label>
                     </div>
                 </div>
@@ -59,7 +59,7 @@ Account Sign in ::
 </div>
 
 <div class="col-md-6 col-sm-12 col-xs-12 col-md-offset-2 text-right" style="padding-top: 40px; padding-right: 60px">
-      <a href="{{ route('forgot-password') }}">I forgot my password</a>
+      <a href="{!! route('forgot-password') !!}">I forgot my password</a>
 </div>
 
 @stop

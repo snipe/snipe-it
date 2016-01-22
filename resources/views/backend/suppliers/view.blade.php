@@ -1,18 +1,18 @@
 @extends('backend/layouts/default')
 
-{{-- Page title --}}
+{!!-- Page title --!!}
 @section('title')
 @lang('admin/suppliers/table.view') -
 {{{ $supplier->name }}} ::
 @parent
 @stop
 
-{{-- Page content --}}
+{!!-- Page content --!!}
 @section('content')
 
 <div class="row header">
     <div class="col-md-12">
-        <a href="{{ route('update/supplier', $supplier->id) }}" class="btn-flat white pull-right">
+        <a href="{!! route('update/supplier', $supplier->id) !!}" class="btn-flat white pull-right">
         @lang('admin/suppliers/table.update')</a>
         <h3 class="name">
         @lang('admin/suppliers/table.view_assets_for')
@@ -43,20 +43,20 @@
                     @foreach ($supplier->assets as $supplierassets)
                     <tr>
 
-                        <td><a href="{{ route('view/hardware', $supplierassets->id) }}">{{{ $supplierassets->asset_tag }}}</a></td>
-                        <td><a href="{{ route('view/hardware', $supplierassets->id) }}">{{{ $supplierassets->showAssetName() }}}</a></td>
+                        <td><a href="{!! route('view/hardware', $supplierassets->id) !!}">{{{ $supplierassets->asset_tag }}}</a></td>
+                        <td><a href="{!! route('view/hardware', $supplierassets->id) !!}">{{{ $supplierassets->showAssetName() }}}</a></td>
                         <td>
                         @if ($supplierassets->assigneduser)
-                        <a href="{{ route('view/user', $supplierassets->assigned_to) }}">
+                        <a href="{!! route('view/user', $supplierassets->assigned_to) !!}">
                         {{{ $supplierassets->assigneduser->fullName() }}}
                         </a>
                         @endif
                         </td>
                         <td>
                         @if ($supplierassets->assigned_to != '')
-                            <a href="{{ route('checkin/hardware', $supplierassets->id) }}" class="btn btn-info btn-sm">Checkin</a>
+                            <a href="{!! route('checkin/hardware', $supplierassets->id) !!}" class="btn btn-info btn-sm">Checkin</a>
                         @else
-                            <a href="{{ route('checkout/hardware', $supplierassets->id) }}" class="btn btn-success btn-sm">Checkout</a>
+                            <a href="{!! route('checkout/hardware', $supplierassets->id) !!}" class="btn btn-success btn-sm">Checkout</a>
                         @endif
                         </td>
 
@@ -91,8 +91,8 @@
                 <tbody>
                     @foreach ($supplier->licenses as $license)
                     <tr>
-                        <td><a href="{{ route('view/license', $license->id) }}">{{{ $license->name }}}</a></td>
-                        <td><a href="{{ route('view/license', $license->id) }}">{{{ $license->serial }}}</a></td>
+                        <td><a href="{!! route('view/license', $license->id) !!}">{{{ $license->name }}}</a></td>
+                        <td><a href="{!! route('view/license', $license->id) !!}">{{{ $license->serial }}}</a></td>
                         </td>
                     </tr>
                     @endforeach
@@ -131,14 +131,14 @@
                     @foreach ($supplier->improvements as $improvement)
                         @if (is_null($improvement->deleted_at))
                             <tr>
-                                <td><a href="{{ route('view/hardware', $improvement->asset_id) }}">{{{ $improvement->asset->name }}}</a></td>
+                                <td><a href="{!! route('view/hardware', $improvement->asset_id) !!}">{{{ $improvement->asset->name }}}</a></td>
                                 <td>{{{ $improvement->improvement_type }}}</td>
                                 <td>{{{ $improvement->start_date }}}</td>
                                 <td>{{{ $improvement->completion_date }}}</td>
                                 <td>{{{ $improvement->is_warranty ? Lang::get('admin/improvements/message.warranty') : Lang::get('admin/improvements/message.not_warranty') }}}</td>
                                 <td>{{{ sprintf( Lang::get( 'general.currency' ) . '%01.2f', $improvement->cost) }}}</td>
                                 <?php $totalCost += $improvement->cost; ?>
-                                <td><a href="{{ route('update/improvement', $improvement->id) }}" class="btn btn-warning"><i class="fa fa-pencil icon-white"></i></a>
+                                <td><a href="{!! route('update/improvement', $improvement->id) !!}" class="btn btn-warning"><i class="fa fa-pencil icon-white"></i></a>
                                 </td>
                             </tr>
                         @endif
@@ -214,7 +214,7 @@
                                 @endif
 
                                 @if ($supplier->image)
-                                <li><br /><img src="{{ Config::get('app.url') }}/uploads/suppliers/{{{ $supplier->image }}}" /></li>
+                                <li><br /><img src="{!! Config::get('app.url') !!}/uploads/suppliers/{{{ $supplier->image }}}" /></li>
                                 @endif
 
                                 </ul>

@@ -1,19 +1,19 @@
 @extends('backend/layouts/default')
 
-{{-- Page title --}}
+{!!-- Page title --!!}
 @section('title')
         	@lang('admin/hardware/form.bulk_delete') ::
 
 @parent
 @stop
 
-{{-- Page content --}}
+{!!-- Page content --!!}
 
 @section('content')
 
 <div class="row header">
     <div class="col-md-12">
-            <a href="{{ URL::previous() }}" class="btn-flat gray pull-right right"><i class="fa fa-arrow-left icon-white"></i> @lang('general.back')</a>
+            <a href="{!! URL::previous() !!}" class="btn-flat gray pull-right right"><i class="fa fa-arrow-left icon-white"></i> @lang('general.back')</a>
         <h3>
 
         	@lang('admin/hardware/form.bulk_delete')
@@ -28,8 +28,8 @@
         <p style="color: red"><strong><big>@lang('admin/hardware/form.bulk_delete_warn', ['asset_count' => count($assets)])</big></strong></p>
 
 
-  			 <form class="form-horizontal" method="post" action="{{ route('hardware/bulkdelete') }}" autocomplete="off" role="form">
-           <input type="hidden" name="_token" value="{{ csrf_token() }}" />
+  			 <form class="form-horizontal" method="post" action="{!! route('hardware/bulkdelete') !!}" autocomplete="off" role="form">
+           <input type="hidden" name="_token" value="{!! csrf_token() !!}" />
            <table class="table table-striped table-condensed">
             <thead>
               <tr>

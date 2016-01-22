@@ -1,6 +1,6 @@
 @extends('backend/layouts/default')
 
-{{-- Page title --}}
+{!!-- Page title --!!}
 @section('title')
   @lang('admin/custom_fields/general.custom_fields')
 @parent
@@ -13,7 +13,7 @@
         <div class="col-md-9 bio">
 
           <div class="pull-right">
-            <a class="btn btn-info btn-sm" href="{{ route('admin.custom_fields.create') }}">@lang('admin/custom_fields/general.create_fieldset')</a>
+            <a class="btn btn-info btn-sm" href="{!! route('admin.custom_fields.create') !!}">@lang('admin/custom_fields/general.create_fieldset')</a>
           </div>
           <h3>@lang('admin/custom_fields/general.fieldsets')</h3>
 
@@ -35,25 +35,25 @@
                   @foreach($custom_fieldsets AS $fieldset)
                     <tr>
                       <td>
-                        {{ link_to_route("admin.custom_fields.show",$fieldset->name,['id' => $fieldset->id]) }}
+                        {!! link_to_route("admin.custom_fields.show",$fieldset->name,['id' => $fieldset->id]) !!}
                       </td>
                       <td>
-                          {{ $fieldset->fields->count() }}
+                          {!! $fieldset->fields->count() !!}
                       </td>
                       <td>
                           @foreach($fieldset->models as $model)
-                            {{ link_to_route("view/model",$model->name,[$model->id]) }}
+                            {!! link_to_route("view/model",$model->name,[$model->id]) !!}
                           @endforeach
                       </td>
                       <td>
-                          {{ Form::open(array('route' => array('admin.custom_fields.destroy', $fieldset->id), 'method' => 'delete')) }}
+                          {!! Form::open(array('route' => array('admin.custom_fields.destroy', $fieldset->id), 'method' => 'delete')) !!}
 
                           @if($fieldset->models->count() > 0)
                             <button type="submit" class="btn btn-danger btn-sm disabled" disabled><i class="fa fa-trash"></i></button>
                           @else
                             <button type="submit" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></button>
                           @endif
-                          {{ Form::close() }}
+                          {!! Form::close() !!}
                       </td>
                     </tr>
                   @endforeach
@@ -64,7 +64,7 @@
 
 
             <div class="pull-right">
-              <a class="btn btn-info btn-sm" href="{{ route('admin.custom_fields.create-field') }}">@lang('admin/custom_fields/general.create_field')</a>
+              <a class="btn btn-info btn-sm" href="{!! route('admin.custom_fields.create-field') !!}">@lang('admin/custom_fields/general.create_field')</a>
             </div>
 
             <h3>@lang('admin/custom_fields/general.custom_fields')</h3>
@@ -91,18 +91,18 @@
                     <td>{{{ $field->element }}}</td>
                     <td>
                       @foreach($field->fieldset as $fieldset)
-                      {{link_to_route("admin.custom_fields.show",$fieldset->name,[$fieldset->id])}}
+                      {!!link_to_route("admin.custom_fields.show",$fieldset->name,[$fieldset->id])!!}
                       @endforeach
                   </td>
                   <td>
-                    {{ Form::open(array('route' => array('admin.custom_fields.delete-field', $field->id), 'method' => 'delete')) }}
+                    {!! Form::open(array('route' => array('admin.custom_fields.delete-field', $field->id), 'method' => 'delete')) !!}
 
                     @if($field->fieldset->count()>0)
                       <button type="submit" class="btn btn-danger btn-sm disabled" disabled><i class="fa fa-trash"></i></button>
                     @else
                       <button type="submit" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></button>
                     @endif
-                    {{ Form::close() }}
+                    {!! Form::close() !!}
                     </td>
 
                   </tr>

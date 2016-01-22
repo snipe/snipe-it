@@ -1,12 +1,12 @@
 @extends('backend/layouts/default')
 
-{{-- Page title --}}
+{!!-- Page title --!!}
 @section('title')
 View Assets for  {{{ $user->fullName() }}} ::
 @parent
 @stop
 
-{{-- Account page content --}}
+{!!-- Account page content --!!}
 @section('content')
 
 <div class="row user-profile">
@@ -70,10 +70,10 @@ View Assets for  {{{ $user->fullName() }}} ::
                                         <td>
 
                                         @if (($asset->image) && ($asset->image!=''))
-                                          <img src="{{ Config::get('app.url') }}/uploads/assets/{{{ $asset->image }}}" height="50" width="50">
+                                          <img src="{!! Config::get('app.url') !!}/uploads/assets/{{{ $asset->image }}}" height="50" width="50">
 
                                         @elseif (($asset->model) && ($asset->model->image!=''))
-                                          <img src="{{ Config::get('app.url') }}/uploads/models/{{{ $asset->model->image }}}" height="50" width="50">
+                                          <img src="{!! Config::get('app.url') !!}/uploads/models/{{{ $asset->model->image }}}" height="50" width="50">
                                         @endif
 
                                        </td>

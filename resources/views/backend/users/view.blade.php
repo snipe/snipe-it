@@ -1,12 +1,12 @@
 @extends('backend/layouts/default')
 
-{{-- Page title --}}
+{!!-- Page title --!!}
 @section('title')
 @lang('admin/users/general.view_user', array('name' => $user->first_name)) ::
 @parent
 @stop
 
-{{-- Page content --}}
+{!!-- Page content --!!}
 @section('content')
 
 <div class="user-profile">
@@ -32,17 +32,17 @@
                         @if (count($user->groups) > 0)
 
                             @foreach ($user->groups as $group)
-                            <a href="{{ route('update/group', $group->id) }}" class="label label-default">{{{ $group->name }}}</a>
+                            <a href="{!! route('update/group', $group->id) !!}" class="label label-default">{{{ $group->name }}}</a>
                             @endforeach
 
                         @endif
 					 </span>
                 </div>
                 @if ($user->deleted_at != NULL)
-                            <a href="{{ route('restore/user', $user->id) }}" class="btn-flat white large pull-right edit"><i class="fa fa-pencil"></i> Restore This User</a>
+                            <a href="{!! route('restore/user', $user->id) !!}" class="btn-flat white large pull-right edit"><i class="fa fa-pencil"></i> Restore This User</a>
 
                 @else
-                        <!--<a href="{{ route('update/user', $user->id) }}" class="btn btn-warning pull-right edit"><i class="fa fa-pencil"></i> @lang('button.edit') This User</a>-->
+                        <!--<a href="{!! route('update/user', $user->id) !!}" class="btn btn-warning pull-right edit"><i class="fa fa-pencil"></i> @lang('button.edit') This User</a>-->
                     <div class="row header">
 
                         <div class="btn-group pull-right hidden-print" role="group">
@@ -50,10 +50,10 @@
                             <span class="caret"></span>
                             </button>
                             <ul class="dropdown-menu">
-                                <li><a href="{{ route('update/user', $user->id) }}">@lang('admin/users/general.edit')</a></li>
-                                <li><a href="{{ route('clone/user', $user->id) }}">@lang('admin/users/general.clone')</a></li>
+                                <li><a href="{!! route('update/user', $user->id) !!}">@lang('admin/users/general.edit')</a></li>
+                                <li><a href="{!! route('clone/user', $user->id) !!}">@lang('admin/users/general.clone')</a></li>
                                 @if ((Sentry::getId() !== $user->id) && (!Config::get('app.lock_passwords')))
-                                    <li><a href="{{ route('delete/user', $user->id) }}">@lang('button.delete')</a></li>
+                                    <li><a href="{!! route('delete/user', $user->id) !!}">@lang('button.delete')</a></li>
                                 @endif
                             </ul>
                         </div>
@@ -101,10 +101,10 @@
 		                                        @if ($asset->physical=='1') {{{ $asset->model->name }}}
 		                                        @endif
 		                                        </td>
-		                                        <td><a href="{{ route('view/hardware', $asset->id) }}">{{{ $asset->asset_tag }}}</a></td>
-		                                        <td><a href="{{ route('view/hardware', $asset->id) }}">{{{ $asset->name }}}</a></td>
+		                                        <td><a href="{!! route('view/hardware', $asset->id) !!}">{{{ $asset->asset_tag }}}</a></td>
+		                                        <td><a href="{!! route('view/hardware', $asset->id) !!}">{{{ $asset->name }}}</a></td>
 
-		                                        <td class="hidden-print"> <a href="{{ route('checkin/hardware', array('assetId'=> $asset->id, 'backto'=>'user')) }}" class="btn-flat info">Checkin</a></td>
+		                                        <td class="hidden-print"> <a href="{!! route('checkin/hardware', array('assetId'=> $asset->id, 'backto'=>'user')) !!}" class="btn-flat info">Checkin</a></td>
 		                                    </tr>
 		                                    @endforeach
 		                                </tbody>
@@ -137,9 +137,9 @@
                                 <tbody>
                                     @foreach ($user->licenses as $license)
                                     <tr>
-                                        <td><a href="{{ route('view/license', $license->id) }}">{{{ $license->name }}}</a></td>
-                                        <td><a href="{{ route('view/license', $license->id) }}">{{{ mb_strimwidth($license->serial, 0, 50, "...") }}}</a></td>
-                                        <td class="hidden-print"> <a href="{{ route('checkin/license', array('licenseseat_id'=> $license->pivot->id, 'backto'=>'user')) }}" class="btn-flat info">Checkin</a>
+                                        <td><a href="{!! route('view/license', $license->id) !!}">{{{ $license->name }}}</a></td>
+                                        <td><a href="{!! route('view/license', $license->id) !!}">{{{ mb_strimwidth($license->serial, 0, 50, "...") }}}</a></td>
+                                        <td class="hidden-print"> <a href="{!! route('checkin/license', array('licenseseat_id'=> $license->pivot->id, 'backto'=>'user')) !!}" class="btn-flat info">Checkin</a>
                                         </td>
                                     </tr>
                                     @endforeach
@@ -175,8 +175,8 @@
                                 <tbody>
                                     @foreach ($user->accessories as $accessory)
                                     <tr>
-                                        <td><a href="{{ route('view/accessory', $accessory->id) }}">{{{ $accessory->name }}}</a></td>
-                                        <td class="hidden-print"> <a href="{{ route('checkin/accessory', array('accessory_id'=> $accessory->pivot->id, 'backto'=>'user')) }}" class="btn-flat info">Checkin</a>
+                                        <td><a href="{!! route('view/accessory', $accessory->id) !!}">{{{ $accessory->name }}}</a></td>
+                                        <td class="hidden-print"> <a href="{!! route('checkin/accessory', array('accessory_id'=> $accessory->pivot->id, 'backto'=>'user')) !!}" class="btn-flat info">Checkin</a>
                                         </td>
                                     </tr>
                                     @endforeach
@@ -210,7 +210,7 @@
                                 <tbody>
                                     @foreach ($user->consumables as $consumable)
                                     <tr>
-                                        <td><a href="{{ route('view/consumable', $consumable->id) }}">{{{ $consumable->name }}}</a></td>
+                                        <td><a href="{!! route('view/consumable', $consumable->id) !!}">{{{ $consumable->name }}}</a></td>
                                         <td>{{{ $consumable->created_at }}}</td>
                                     </tr>
                                     @endforeach
@@ -252,11 +252,11 @@
                                                         </td>
                                                         <td>
                                                             @if ($file->filename)
-                                                            <a href="{{ route('show/userfile', [$user->id, $file->id]) }}" class="btn btn-default">Download</a>
+                                                            <a href="{!! route('show/userfile', [$user->id, $file->id]) !!}" class="btn btn-default">Download</a>
                                                             @endif
                                                         </td>
                                                         <td>
-                                                            <a class="btn delete-asset btn-danger btn-sm" href="{{ route('delete/userfile', [$user->id, $file->id]) }}" data-content="Are you sure you wish to delete this file?" data-title="Delete {{{ $file->filename }}}?"><i class="fa fa-trash icon-white"></i></a>
+                                                            <a class="btn delete-asset btn-danger btn-sm" href="{!! route('delete/userfile', [$user->id, $file->id]) !!}" data-content="Are you sure you wish to delete this file?" data-title="Delete {{{ $file->filename }}}?"><i class="fa fa-trash icon-white"></i></a>
                                                         </td>
                                                     </tr>
                                                     @endforeach
@@ -280,10 +280,10 @@
                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                                 <h4 class="modal-title" id="uploadFileModalLabel">Upload File</h4>
                               </div>
-                              {{ Form::open([
+                              {!! Form::open([
                               'method' => 'POST',
                               'route' => ['upload/user', $user->id],
-                              'files' => true, 'class' => 'form-horizontal' ]) }}
+                              'files' => true, 'class' => 'form-horizontal' ]) !!}
                               <div class="modal-body">
 
                                 <p>@lang('admin/users/general.filetype_info')</p>
@@ -295,7 +295,7 @@
                                 </div>
                                 <div class="form-group col-md-12">
                                  <div class="input-group col-md-12">
-                                    {{ Form::file('userfile[]', ['multiple' => 'multiple']) }}
+                                    {!! Form::file('userfile[]', ['multiple' => 'multiple']) !!}
                                 </div>
                                 </div>
 
@@ -305,7 +305,7 @@
                                 <button type="button" class="btn btn-default" data-dismiss="modal">@lang('button.cancel')</button>
                                 <button type="submit" class="btn btn-primary btn-sm">@lang('button.upload')</button>
                               </div>
-                              {{ Form::close() }}
+                              {!! Form::close() !!}
                             </div>
                           </div>
                         </div>
@@ -350,7 +350,7 @@
                                             @if (($log->assetlog) && ($log->asset_type=="hardware"))
 
                                                 @if ($log->assetlog->deleted_at=='')
-                                                    <a href="{{ route('view/hardware', $log->asset_id) }}">
+                                                    <a href="{!! route('view/hardware', $log->asset_id) !!}">
                                                         {{{ $log->assetlog->showAssetName() }}}
                                                     </a>
                                                 @else
@@ -360,7 +360,7 @@
                                             @elseif (($log->licenselog) && ($log->asset_type=="software"))
 
                                                 @if ($log->licenselog->deleted_at=='')
-                                                    <a href="{{ route('view/license', $log->license_id) }}">
+                                                    <a href="{!! route('view/license', $log->license_id) !!}">
                                                         {{{ $log->licenselog->name }}}
                                                     </a>
                                                 @else
@@ -370,14 +370,14 @@
                                              @elseif (($log->consumablelog) && ($log->asset_type=="consumable"))
 
                                                  @if ($log->consumablelog->deleted_at=='')
-                                                     <a href="{{ route('view/consumable', $log->consumable_id) }}">{{{ $log->consumablelog->name }}}</a>
+                                                     <a href="{!! route('view/consumable', $log->consumable_id) !!}">{{{ $log->consumablelog->name }}}</a>
                                                  @else
                                                      <del>{{{ $log->consumablelog->name }}}</del> (deleted)
                                                  @endif
 
                                             @elseif (($log->accessorylog) && ($log->asset_type=="accessory"))
                                                 @if ($log->accessorylog->deleted_at=='')
-                                                    <a href="{{ route('view/accessory', $log->accessory_id) }}">{{{ $log->accessorylog->name }}}</a>
+                                                    <a href="{!! route('view/accessory', $log->accessory_id) !!}">{{{ $log->accessorylog->name }}}</a>
                                                 @else
                                                     <del>{{{ $log->accessorylog->name }}}</del> (deleted)
                                                 @endif

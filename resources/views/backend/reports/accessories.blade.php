@@ -1,12 +1,12 @@
 @extends('backend/layouts/default')
 
-{{-- Page title --}}
+{!!-- Page title --!!}
 @section('title')
 @lang('general.accessory_report') ::
 @parent
 @stop
 
-{{-- Page content --}}
+{!!-- Page content --!!}
 @section('content')
 
 
@@ -37,9 +37,9 @@
                     @foreach ($accessories as $accessory)
                     <tr>
                         <td>{{{ is_null($accessory->company) ? '' : $accessory->company->name }}}</td>
-                        <td>{{ $accessory->name }}</td>
-                        <td>{{ $accessory->qty }}</td>
-                        <td>{{ $accessory->numRemaining() }}</td>
+                        <td>{!! $accessory->name !!}</td>
+                        <td>{!! $accessory->qty !!}</td>
+                        <td>{!! $accessory->numRemaining() !!}</td>
                     </tr>
                     @endforeach
                 </tbody>
@@ -48,12 +48,12 @@
 </div>
 
 @section('moar_scripts')
-<script src="{{ asset('assets/js/bootstrap-table.js') }}"></script>
-<script src="{{ asset('assets/js/extensions/cookie/bootstrap-table-cookie.js') }}"></script>
-<script src="{{ asset('assets/js/extensions/mobile/bootstrap-table-mobile.js') }}"></script>
-<script src="{{ asset('assets/js/extensions/export/bootstrap-table-export.js') }}"></script>
-<script src="{{ asset('assets/js/extensions/export/tableExport.js') }}"></script>
-<script src="{{ asset('assets/js/extensions/export/jquery.base64.js') }}"></script>
+<script src="{!! asset('assets/js/bootstrap-table.js') !!}"></script>
+<script src="{!! asset('assets/js/extensions/cookie/bootstrap-table-cookie.js') !!}"></script>
+<script src="{!! asset('assets/js/extensions/mobile/bootstrap-table-mobile.js') !!}"></script>
+<script src="{!! asset('assets/js/extensions/export/bootstrap-table-export.js') !!}"></script>
+<script src="{!! asset('assets/js/extensions/export/tableExport.js') !!}"></script>
+<script src="{!! asset('assets/js/extensions/export/jquery.base64.js') !!}"></script>
 <script type="text/javascript">
     $('#table').bootstrapTable({
         classes: 'table table-responsive table-no-bordered',

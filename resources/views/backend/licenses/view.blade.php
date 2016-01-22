@@ -1,13 +1,13 @@
 @extends('backend/layouts/default')
 
-{{-- Page title --}}
+{!!-- Page title --!!}
 @section('title')
 @lang('admin/licenses/general.view')
  - {{{ $license->name }}}
 @parent
 @stop
 
-{{-- Page content --}}
+{!!-- Page content --!!}
 @section('content')
 
 <div class="row header">
@@ -17,8 +17,8 @@
                 <span class="caret"></span>
             </button>
             <ul class="dropdown-menu">
-                <li><a href="{{ route('update/license', $license->id) }}">@lang('admin/licenses/general.edit')</a></li>
-                <li><a href="{{ route('clone/license', $license->id) }}">@lang('admin/licenses/general.clone')</a></li>
+                <li><a href="{!! route('update/license', $license->id) !!}">@lang('admin/licenses/general.edit')</a></li>
+                <li><a href="{!! route('clone/license', $license->id) !!}">@lang('admin/licenses/general.clone')</a></li>
             </ul>
         </div>
        <h3 class="name">@lang('general.history_for')
@@ -40,7 +40,7 @@
 @if ($license->serial)
 	<div class="col-md-12 col-sm-12" style="padding-bottom: 10px; margin-left: 15px; word-wrap: break-word;">
 	<strong>@lang('admin/licenses/form.serial'): </strong>
-	{{ nl2br($license->serial) }}
+	{!! nl2br($license->serial) !!}
 	</div>
 @endif
 
@@ -58,7 +58,7 @@
 
 @if ($license->supplier_id)
     <div class="col-md-6" style="padding-bottom: 5px"><strong>@lang('admin/licenses/form.supplier'): </strong>
-    <a href="{{ route('view/supplier', $license->supplier_id) }}">
+    <a href="{!! route('view/supplier', $license->supplier_id) !!}">
     {{{ $license->supplier->name }}}
     </a> </div>
 @endif
@@ -100,7 +100,7 @@
 
 <div class="col-md-12" style="padding-top: 60px;">
                 <!-- checked out assets table -->
-                <h6>{{ $license->seats }} @lang('admin/licenses/general.license_seats')</h6>
+                <h6>{!! $license->seats !!} @lang('admin/licenses/general.license_seats')</h6>
                 <table class="table table-hover">
                     <thead>
                         <tr>
@@ -116,17 +116,17 @@
                             @foreach ($license->licenseseats as $licensedto)
 
                             <tr>
-                                <td>Seat {{ $count }} </td>
+                                <td>Seat {!! $count !!} </td>
                                 <td>
                                     @if (($licensedto->assigned_to) && ($licensedto->deleted_at == NULL))
-                                        <a href="{{ route('view/user', $licensedto->assigned_to) }}">
+                                        <a href="{!! route('view/user', $licensedto->assigned_to) !!}">
                                     {{{ $licensedto->user->fullName() }}}
                                     </a>
                                     @elseif (($licensedto->assigned_to) && ($licensedto->deleted_at != NULL))
                                         <del>{{{ $licensedto->user->fullName() }}}</del>
                                     @elseif ($licensedto->asset_id)
                                         @if ($licensedto->asset->assigned_to != 0)
-                                            <a href="{{ route('view/user', $licensedto->asset->assigned_to) }}">
+                                            <a href="{!! route('view/user', $licensedto->asset->assigned_to) !!}">
                                                 {{{ $licensedto->asset->assigneduser->fullName() }}}
                                             </a>
                                         @endif
@@ -134,7 +134,7 @@
                                 </td>
                                 <td>
                                     @if ($licensedto->asset_id)
-                                        <a href="{{ route('view/hardware', $licensedto->asset_id) }}">
+                                        <a href="{!! route('view/hardware', $licensedto->asset_id) !!}">
                                         {{{ $licensedto->asset->name }}} {{{ $licensedto->asset->asset_tag }}}
                                     </a>
                                     @endif
@@ -142,14 +142,14 @@
                                 <td>
                                     @if (($licensedto->assigned_to) || ($licensedto->asset_id))
                                         @if ($license->reassignable)
-                                            <a href="{{ route('checkin/license', $licensedto->id) }}" class="btn btn-primary btn-sm">
+                                            <a href="{!! route('checkin/license', $licensedto->id) !!}" class="btn btn-primary btn-sm">
                                             @lang('general.checkin')
                                             </a>
                                         @else
                                             <span>Assigned</span>
                                         @endif
                                     @else
-                                        <a href="{{ route('checkout/license', $licensedto->id) }}" class="btn btn-info btn-sm">
+                                        <a href="{!! route('checkout/license', $licensedto->id) !!}" class="btn btn-info btn-sm">
                                         @lang('general.checkout')</a>
                                     @endif
                                 </td>
@@ -192,11 +192,11 @@
 								</td>
 								<td>
 									@if ($file->filename)
-									<a href="{{ route('show/licensefile', [$license->id, $file->id]) }}" class="btn btn-default">Download</a>
+									<a href="{!! route('show/licensefile', [$license->id, $file->id]) !!}" class="btn btn-default">Download</a>
 									@endif
 								</td>
 								<td>
-									<a class="btn delete-asset btn-danger btn-sm" href="{{ route('delete/licensefile', [$license->id, $file->id]) }}" data-content="Are you sure you wish to delete this file?" data-title="Delete {{{ $file->filename }}}?"><i class="fa fa-trash icon-white"></i></a>
+									<a class="btn delete-asset btn-danger btn-sm" href="{!! route('delete/licensefile', [$license->id, $file->id]) !!}" data-content="Are you sure you wish to delete this file?" data-title="Delete {{{ $file->filename }}}?"><i class="fa fa-trash icon-white"></i></a>
 								</td>
 							</tr>
 							@endforeach
@@ -222,10 +222,10 @@
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
         <h4 class="modal-title" id="uploadFileModalLabel">Upload File</h4>
       </div>
-      {{ Form::open([
+      {!! Form::open([
       'method' => 'POST',
       'route' => ['upload/license', $license->id],
-      'files' => true, 'class' => 'form-horizontal' ]) }}
+      'files' => true, 'class' => 'form-horizontal' ]) !!}
       <div class="modal-body">
 
 		<p>@lang('admin/licenses/general.filetype_info')</p>
@@ -237,7 +237,7 @@
 		</div>
 		<div class="form-group col-md-12">
 		 <div class="input-group col-md-12">
-			{{ Form::file('licensefile[]', ['multiple' => 'multiple']) }}
+			{!! Form::file('licensefile[]', ['multiple' => 'multiple']) !!}
 		</div>
 		</div>
 
@@ -247,7 +247,7 @@
         <button type="button" class="btn btn-default" data-dismiss="modal">@lang('button.cancel')</button>
         <button type="submit" class="btn btn-primary btn-sm">@lang('button.upload')</button>
       </div>
-      {{ Form::close() }}
+      {!! Form::close() !!}
     </div>
   </div>
 </div>
@@ -271,23 +271,23 @@
                         @if (count($license->assetlog) > 0)
                         @foreach ($license->assetlog as $log)
                         <tr>
-                            <td>{{ $log->created_at }}</td>
+                            <td>{!! $log->created_at !!}</td>
                             <td>
                                 @if (isset($log->user_id))
                                 {{{ $log->adminlog->fullName() }}}
                                 @endif
                             </td>
-                            <td>{{ $log->action_type }}</td>
+                            <td>{!! $log->action_type !!}</td>
 
                             <td>
                                 @if (($log->userlog) && ($log->userlog->id!='0'))
-                                <a href="{{ route('view/user', $log->checkedout_to) }}">
+                                <a href="{!! route('view/user', $log->checkedout_to) !!}">
                                 {{{ $log->userlog->fullName() }}}
                                 </a>
 
                                 @elseif ($log->action_type=='uploaded')
 
-                                		{{ $log->filename }}
+                                		{!! $log->filename !!}
 
                                 @endif
 
@@ -346,12 +346,12 @@
                     @endif
 
                     <li><strong>@lang('admin/licenses/form.reassignable'):</strong>
-                                {{ $license->reassignable ? 'Yes' : 'No' }}
+                                {!! $license->reassignable ? 'Yes' : 'No' !!}
                     </li>
 
                     @if ($license->notes)
                     	 <li><strong>@lang('admin/licenses/form.notes'):</strong>
-                        <li class="break-word">{{ nl2br(e($license->notes)) }}</li>
+                        <li class="break-word">{!! nl2br(e($license->notes)) !!}</li>
                     @endif
                 </ul>
         </div>

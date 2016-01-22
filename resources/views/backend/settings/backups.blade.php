@@ -1,12 +1,12 @@
 @extends('backend/layouts/default')
 
-{{-- Page title --}}
+{!!-- Page title --!!}
 @section('title')
     @lang('admin/settings/general.backups') ::
 @parent
 @stop
 
-{{-- Page content --}}
+{!!-- Page content --!!}
 @section('content')
 <div class="user-profile">
                 <!-- header -->
@@ -39,7 +39,7 @@
                                         <td>{{{ $file['filesize'] }}}</td>
                                         <td>
                                             <a data-html="false"
-                                            class="btn delete-asset btn-danger btn-sm {{ (Config::get('app.lock_passwords')) ? ' disabled': '' }}" data-toggle="modal" href=" {{ route('settings/delete-file', $file['filename']) }}" data-content="@lang('admin/settings/message.backup.delete_confirm')" data-title="{{ Lang::get('general.delete') }}  {{ htmlspecialchars($file['filename']) }} ?" onClick="return false;">
+                                            class="btn delete-asset btn-danger btn-sm {!! (Config::get('app.lock_passwords')) ? ' disabled': '' !!}" data-toggle="modal" href=" {!! route('settings/delete-file', $file['filename']) !!}" data-content="@lang('admin/settings/message.backup.delete_confirm')" data-title="{!! Lang::get('general.delete') !!}  {!! htmlspecialchars($file['filename']) !!} ?" onClick="return false;">
                                                 <i class="fa fa-trash icon-white"></i>
                                             </a>
                                         </td>
@@ -55,10 +55,10 @@
                         <br><br>
 
                         <form method="POST">
-                          {{ Form::hidden('_token', csrf_token()) }}
+                          {!! Form::hidden('_token', csrf_token()) !!}
 
                             <p>
-                                <button class="btn btn-default {{ (Config::get('app.lock_passwords')) ? ' disabled': '' }}">@lang('admin/settings/general.generate_backup')</button>
+                                <button class="btn btn-default {!! (Config::get('app.lock_passwords')) ? ' disabled': '' !!}">@lang('admin/settings/general.generate_backup')</button>
                             </p>
 
                              @if (Config::get('app.lock_passwords'))

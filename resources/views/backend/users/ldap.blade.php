@@ -1,12 +1,12 @@
 @extends('backend/layouts/default')
 
-{{-- Page title --}}
+{!!-- Page title --!!}
 @section('title')
 Create a User ::
 @parent
 @stop
 
-{{-- Page content --}}
+{!!-- Page content --!!}
 @section('content')
 
 <script type="text/javascript">
@@ -24,13 +24,13 @@ Create a User ::
         Create Users from LDAP
 
         <div class="pull-right">
-            <a href="{{ route('users') }}" class="btn-flat gray pull-right"><i class="fa fa-arrow-circle-left icon-white"></i>  @lang('general.back')</a>
+            <a href="{!! route('users') !!}" class="btn-flat gray pull-right"><i class="fa fa-arrow-circle-left icon-white"></i>  @lang('general.back')</a>
 
         </div>
     </h3>
 </div>
 
-<script type="text/javascript" src="{{ asset('/assets/js/pGenerator.jquery.js') }}"></script>
+<script type="text/javascript" src="{!! asset('/assets/js/pGenerator.jquery.js') !!}"></script>
 
 @if (Setting::getSettings()->ldap_enabled == 0)
     @Lang('admin/users/message.ldap_not_configured')
@@ -44,14 +44,14 @@ Create a User ::
     </p>
     <form class="form-horizontal" role="form" method="post" action="" id="ldap-form">
         <!-- CSRF Token -->
-        <input type="hidden" name="_token" value="{{ csrf_token() }}" />
+        <input type="hidden" name="_token" value="{!! csrf_token() !!}" />
 
-        <div class="form-group {{ $errors->has('location_id') ? 'has-error' : '' }}">
+        <div class="form-group {!! $errors->has('location_id') ? 'has-error' : '' !!}">
                 <label class="col-md-3 control-label" for="location_id">@lang('admin/users/table.location')
                     </label>
                 <div class="col-md-7">
-                    {{ Form::select('location_id', $location_list, array('class'=>'select2', 'style'=>'width:350px')) }}
-                    {{ $errors->first('location_id', '<br><span class="alert-msg">:message</span>') }}
+                    {!! Form::select('location_id', $location_list, array('class'=>'select2', 'style'=>'width:350px')) !!}
+                    {!! $errors->first('location_id', '<br><span class="alert-msg">:message</span>') !!}
                 </div>
             </div>
         

@@ -1,18 +1,18 @@
 @extends('backend/layouts/default')
 
-{{-- Page title --}}
+{!!-- Page title --!!}
 @section('title')
     @lang('admin/settings/general.settings') ::
 @parent
 @stop
 
-{{-- Page content --}}
+{!!-- Page content --!!}
 @section('content')
 <div id="pad-wrapper" class="user-profile">
                 <!-- header -->
 
                 <div class="pull-right">
-                     <a href="{{ route('edit/settings') }}" class="btn btn-warning btn-sm"><i class="fa fa-pencil icon-white"></i> @lang('button.edit') Settings</a>
+                     <a href="{!! route('edit/settings') !!}" class="btn btn-warning btn-sm"><i class="fa fa-pencil icon-white"></i> @lang('button.edit') Settings</a>
                 </div>
 
                 <div class="row-fluid profile">

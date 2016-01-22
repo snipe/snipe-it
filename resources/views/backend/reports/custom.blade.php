@@ -1,12 +1,12 @@
 @extends('backend/layouts/default')
 
-{{-- Page Title --}}
+{!!-- Page Title --!!}
 @section('title')
 @lang('general.custom_report') ::
 @parent
 @stop
 
-{{-- Page Content --}}
+{!!-- Page Content --!!}
 @section('content')
 
 <div id="pad-wrapper" class="user-profile">
@@ -14,92 +14,92 @@
     <div class="row-fluid profile">
         <div class="col-md-9 bio">
             <div class="profile-box">
-                {{ Form::open(['method' => 'post', 'class' => 'form-horizontal']) }}
+                {!! Form::open(['method' => 'post', 'class' => 'form-horizontal']) !!}
 
 
                     <div class="checkbox col-md-12">
                     	<label>
-                     	{{ Form::checkbox('asset_name', '1') }}
+                     	{!! Form::checkbox('asset_name', '1') !!}
                         @lang('admin/settings/general.display_asset_name')
                         </label>
 
                     </div>
                     <div class="checkbox col-md-12">
                     	<label>
-                    	{{ Form::checkbox('asset_tag', '1') }}
+                    	{!! Form::checkbox('asset_tag', '1') !!}
                         @lang('general.asset_tag')
 						</label>
                     </div>
                     <div class="checkbox col-md-12">
                     	<label>
-                    	 {{ Form::checkbox('manufacturer', '1') }}
+                    	 {!! Form::checkbox('manufacturer', '1') !!}
                        	@lang('general.manufacturer')
 						</label>
                     </div>
                     <div class="checkbox col-md-12">
                     	<label>
-                        {{ Form::checkbox('model', '1') }}
+                        {!! Form::checkbox('model', '1') !!}
                         @lang('general.asset_models')
                         </label>
                     </div>
                     <div class="checkbox col-md-12">
                     	<label>
-                        {{ Form::checkbox('serial', '1') }}
+                        {!! Form::checkbox('serial', '1') !!}
                         @lang('admin/hardware/table.serial')
                         </label>
                     </div>
                     <div class="checkbox col-md-12">
                     	<label>
 
-                        {{ Form::checkbox('purchase_date', '1') }}
+                        {!! Form::checkbox('purchase_date', '1') !!}
                           @lang('admin/licenses/table.purchase_date')
                         </label>
                     </div>
                     <div class="checkbox col-md-12">
                     	<label>
-                        {{ Form::checkbox('purchase_cost', '1') }}
+                        {!! Form::checkbox('purchase_cost', '1') !!}
                          @lang('admin/hardware/form.cost')
                         </label>
                     </div>
                     <div class="checkbox col-md-12">
                     	<label>
-                        {{ Form::checkbox('order', '1') }}
+                        {!! Form::checkbox('order', '1') !!}
                         @lang('admin/hardware/form.order')
                         </label>
                     </div>
                     <div class="checkbox col-md-12">
                     	<label>
-                        {{ Form::checkbox('supplier', '1') }}
+                        {!! Form::checkbox('supplier', '1') !!}
                         @lang('general.suppliers')
                         </label>
                     </div>
                     <div class="checkbox col-md-12">
                     	<label>
-                        {{ Form::checkbox('location', '1') }}
+                        {!! Form::checkbox('location', '1') !!}
                         @lang('general.location')
                         </label>
                     </div>
                     <div class="checkbox col-md-12">
                     	<label>
-                        {{ Form::checkbox('assigned_to', '1') }}
+                        {!! Form::checkbox('assigned_to', '1') !!}
                         @lang('admin/licenses/table.assigned_to')
                         </label>
                     </div>
                     <div class="checkbox col-md-12">
                     	<label>
-                        {{ Form::checkbox('status', '1') }}
+                        {!! Form::checkbox('status', '1') !!}
                         @lang('general.status')
                         </label>
                     </div>
                     <div class="checkbox col-md-12">
                     	<label>
-                        {{ Form::checkbox('warranty', '1') }}
+                        {!! Form::checkbox('warranty', '1') !!}
                         @lang('admin/hardware/form.warranty')
                         </label>
                     </div>
                     <div class="checkbox col-md-12">
                     	<label>
-                        {{ Form::checkbox('depreciation', '1') }}
+                        {!! Form::checkbox('depreciation', '1') !!}
                         @lang('general.depreciation')
                         </label>
                     </div>

@@ -13,7 +13,7 @@
 		<td><strong>Days</strong></td>
 	</tr>
 	
-{{ $email_content }}
+{!! $email_content !!}
 </table>
 
 

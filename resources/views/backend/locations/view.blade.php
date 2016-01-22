@@ -1,6 +1,6 @@
 @extends('backend/layouts/default')
 
-{{-- Page title --}}
+{!!-- Page title --!!}
 @section('title')
 
  {{{ $location->name }}}
@@ -8,15 +8,15 @@
 @parent
 @stop
 
-{{-- Page content --}}
+{!!-- Page content --!!}
 @section('content')
 
 
 <div class="row header">
     <div class="col-md-12">
         <div class="btn-group pull-right">
-           <a href="{{ URL::previous() }}" class="btn-flat gray" style="margin-right: 10px;"><i class="fa fa-arrow-left icon-white"></i>  @lang('general.back')</a>
-           <a href="{{ route('update/location', $location->id) }}" class="btn-flat default">@lang('admin/locations/table.update') </a>
+           <a href="{!! URL::previous() !!}" class="btn-flat gray" style="margin-right: 10px;"><i class="fa fa-arrow-left icon-white"></i>  @lang('general.back')</a>
+           <a href="{!! route('update/location', $location->id) !!}" class="btn-flat default">@lang('admin/locations/table.update') </a>
         </div>
         <h3>
             {{{ $location->name }}}
@@ -38,7 +38,7 @@
     <table
     name="location_users"
     id="table-users"
-    data-url="{{route('api.locations.viewusers', $location->id)}}"
+    data-url="{!!route('api.locations.viewusers', $location->id)!!}"
     data-cookie="true"
     data-click-to-select="true"
     data-cookie-id-table="location_usersDetailTable">
@@ -58,7 +58,7 @@
     <table
     name="location_assets"
     id="table-assets"
-    data-url="{{route('api.locations.viewassets', $location->id)}}"
+    data-url="{!!route('api.locations.viewassets', $location->id)!!}"
     data-cookie="true"
     data-click-to-select="true"
     data-cookie-id-table="location_assetsDetailTable">
@@ -78,12 +78,12 @@
 
 
 @section('moar_scripts')
-<script src="{{ asset('assets/js/bootstrap-table.js') }}"></script>
-<script src="{{ asset('assets/js/extensions/cookie/bootstrap-table-cookie.js') }}"></script>
-<script src="{{ asset('assets/js/extensions/mobile/bootstrap-table-mobile.js') }}"></script>
-<script src="{{ asset('assets/js/extensions/export/bootstrap-table-export.js') }}"></script>
-<script src="{{ asset('assets/js/extensions/export/tableExport.js') }}"></script>
-<script src="{{ asset('assets/js/extensions/export/jquery.base64.js') }}"></script>
+<script src="{!! asset('assets/js/bootstrap-table.js') !!}"></script>
+<script src="{!! asset('assets/js/extensions/cookie/bootstrap-table-cookie.js') !!}"></script>
+<script src="{!! asset('assets/js/extensions/mobile/bootstrap-table-mobile.js') !!}"></script>
+<script src="{!! asset('assets/js/extensions/export/bootstrap-table-export.js') !!}"></script>
+<script src="{!! asset('assets/js/extensions/export/tableExport.js') !!}"></script>
+<script src="{!! asset('assets/js/extensions/export/jquery.base64.js') !!}"></script>
 <script type="text/javascript">
     $('#table-users').bootstrapTable({
         classes: 'table table-responsive table-no-bordered',

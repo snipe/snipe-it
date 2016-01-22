@@ -53,7 +53,7 @@
 				<br><br>
 			@endif
             		@if ($asset->name!='')
-                		<b>N: {{ $asset->name }}</b>
+                		<b>N: {!! $asset->name !!}</b>
                 		<br>
             		@endif
 			@if ($asset->asset_tag!='')

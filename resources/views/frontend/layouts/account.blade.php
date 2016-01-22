@@ -1,6 +1,6 @@
 @extends('backend/layouts/default')
 
-{{-- Page content --}}
+{!!-- Page content --!!}
 @section('content')
 <div class="row">
     <div class="col-md-12">

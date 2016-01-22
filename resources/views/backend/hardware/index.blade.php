@@ -25,18 +25,18 @@
     @lang('general.assets')
 @stop
 
-{{-- Page title --}}
+{!!-- Page title --!!}
 @section('title')
     @yield('title0') :: @parent
 @stop
 
-{{-- Page content --}}
+{!!-- Page content --!!}
 @section('content')
 
 
 <div class="row header">
     <div class="col-md-12">
-        <a href="{{ route('create/hardware') }}" class="btn btn-success pull-right"><i class="fa fa-plus icon-white"></i> @lang('general.create')</a>
+        <a href="{!! route('create/hardware') !!}" class="btn btn-success pull-right"><i class="fa fa-plus icon-white"></i> @lang('general.create')</a>
         <h3>@yield('title0')
 
              @if (Input::has('order_number'))
@@ -50,26 +50,26 @@
 
 <div class="row">
 
- {{ Form::open([
+ {!! Form::open([
       'method' => 'POST',
       'route' => ['hardware/bulkedit'],
-	    'class' => 'form-horizontal' ]) }}
+	    'class' => 'form-horizontal' ]) !!}
 
-    {{-- <div id="toolbar" class="pull-left" style="padding-top: 10px;">
+    {!!-- <div id="toolbar" class="pull-left" style="padding-top: 10px;">
         <select class="form-control">
             <option value="">Export Type</option>
             <option value="all">Export All</option>
             <option value="selected">Export Selected</option>
         </select>
-    </div> --}}
+    </div> --!!}
 
     <table
     name="assets"
     id="table"
-    data-url="{{route('api.hardware.list', array(''=>Input::get('status'),'order_number'=>Input::get('order_number')))}}"
+    data-url="{!!route('api.hardware.list', array(''=>Input::get('status'),'order_number'=>Input::get('order_number')))!!}"
     data-cookie="true"
     data-click-to-select="true"
-    data-cookie-id-table="assetTable-{{ Config::get('version.hash_version') }}">
+    data-cookie-id-table="assetTable-{!! Config::get('version.hash_version') !!}">
         <thead>
             <tr>
                 <th data-class="hidden-xs" data-switchable="false" data-searchable="false" data-sortable="false" data-field="checkbox"><div class="text-center"><input type="checkbox" id="checkAll" style="padding-left: 0px;"></div></th>
@@ -89,7 +89,7 @@
                 <th data-sortable="true" data-searchable="true" data-field="last_checkout">@lang('admin/hardware/table.checkout_date')</th>
                 <th data-sortable="true" data-field="expected_checkin" data-searchable="true">@lang('admin/hardware/form.expected_checkin')</th>
                 @foreach(CustomField::all() AS $field)
-                  <th data-sortable="true" data-visible="false" data-field="{{$field->db_column_name()}}">{{{$field->name}}}</th>
+                  <th data-sortable="true" data-visible="false" data-field="{!!$field->db_column_name()!!}">{{{$field->name}}}</th>
                 @endforeach
                 <th data-switchable="false" data-searchable="false" data-sortable="false" data-field="change">@lang('admin/hardware/table.change')</th>
                 <th data-switchable="false" data-searchable="false" data-sortable="false" data-field="actions" >@lang('table.actions')</th>
@@ -108,17 +108,17 @@
             </tr>
         </tfoot>
     </table>
- {{ Form::close() }}
+ {!! Form::close() !!}
 </div>
 
 
 @section('moar_scripts')
-<script src="{{ asset('assets/js/bootstrap-table.js') }}"></script>
-<script src="{{ asset('assets/js/extensions/cookie/bootstrap-table-cookie.js') }}"></script>
-<script src="{{ asset('assets/js/extensions/mobile/bootstrap-table-mobile.js') }}"></script>
-<script src="{{ asset('assets/js/extensions/export/bootstrap-table-export.js') }}"></script>
-<script src="{{ asset('assets/js/extensions/export/tableExport.js') }}"></script>
-<script src="{{ asset('assets/js/extensions/export/jquery.base64.js') }}"></script>
+<script src="{!! asset('assets/js/bootstrap-table.js') !!}"></script>
+<script src="{!! asset('assets/js/extensions/cookie/bootstrap-table-cookie.js') !!}"></script>
+<script src="{!! asset('assets/js/extensions/mobile/bootstrap-table-mobile.js') !!}"></script>
+<script src="{!! asset('assets/js/extensions/export/bootstrap-table-export.js') !!}"></script>
+<script src="{!! asset('assets/js/extensions/export/tableExport.js') !!}"></script>
+<script src="{!! asset('assets/js/extensions/export/jquery.base64.js') !!}"></script>
 <script type="text/javascript">
 
 

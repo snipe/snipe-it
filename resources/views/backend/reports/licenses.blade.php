@@ -1,12 +1,12 @@
 @extends('backend/layouts/default')
 
-{{-- Page title --}}
+{!!-- Page title --!!}
 @section('title')
 @lang('general.license_report') ::
 @parent
 @stop
 
-{{-- Page content --}}
+{!!-- Page content --!!}
 @section('content')
 
 
@@ -42,10 +42,10 @@
             <td>{{{ is_null($license->company) ? '' : $license->company->name }}}</td>
             <td>{{{ $license->name }}}</td>
             <td>{{{ mb_strimwidth($license->serial, 0, 50, "...") }}}</td>
-            <td>{{ $license->seats }}</td>
-            <td>{{ $license->remaincount() }}</td>
-            <td>{{ $license->expiration_date }}</td>
-            <td>{{ $license->purchase_date }}</td>
+            <td>{!! $license->seats !!}</td>
+            <td>{!! $license->remaincount() !!}</td>
+            <td>{!! $license->expiration_date !!}</td>
+            <td>{!! $license->purchase_date !!}</td>
             <td>
             {{{ Setting::first()->default_currency }}}
             {{{ number_format($license->purchase_cost) }}}</td>
@@ -57,12 +57,12 @@
 </div>
 
 @section('moar_scripts')
-<script src="{{ asset('assets/js/bootstrap-table.js') }}"></script>
-<script src="{{ asset('assets/js/extensions/cookie/bootstrap-table-cookie.js') }}"></script>
-<script src="{{ asset('assets/js/extensions/mobile/bootstrap-table-mobile.js') }}"></script>
-<script src="{{ asset('assets/js/extensions/export/bootstrap-table-export.js') }}"></script>
-<script src="{{ asset('assets/js/extensions/export/tableExport.js') }}"></script>
-<script src="{{ asset('assets/js/extensions/export/jquery.base64.js') }}"></script>
+<script src="{!! asset('assets/js/bootstrap-table.js') !!}"></script>
+<script src="{!! asset('assets/js/extensions/cookie/bootstrap-table-cookie.js') !!}"></script>
+<script src="{!! asset('assets/js/extensions/mobile/bootstrap-table-mobile.js') !!}"></script>
+<script src="{!! asset('assets/js/extensions/export/bootstrap-table-export.js') !!}"></script>
+<script src="{!! asset('assets/js/extensions/export/tableExport.js') !!}"></script>
+<script src="{!! asset('assets/js/extensions/export/jquery.base64.js') !!}"></script>
 <script type="text/javascript">
     $('#table').bootstrapTable({
         classes: 'table table-responsive table-no-bordered',

@@ -1,17 +1,17 @@
 @extends('backend/layouts/default')
 
-{{-- Page title --}}
+{!!-- Page title --!!}
 @section('title')
 @lang('admin/categories/general.asset_categories') ::
 @parent
 @stop
 
-{{-- Page content --}}
+{!!-- Page content --!!}
 @section('content')
 
 <div class="row header">
     <div class="col-md-12">
-        <a href="{{ route('create/category') }}" class="btn btn-success pull-right"><i class="fa fa-plus icon-white"></i> @lang('general.create')</a>
+        <a href="{!! route('create/category') !!}" class="btn btn-success pull-right"><i class="fa fa-plus icon-white"></i> @lang('general.create')</a>
         <h3>@lang('admin/categories/general.asset_categories')</h3>
     </div>
 </div>
@@ -22,19 +22,19 @@
 		<table
             name="categories"
             id="table"
-            data-url="{{route('api.categories.list')}}"
+            data-url="{!!route('api.categories.list')!!}"
             data-cookie="true"
             data-click-to-select="true"
-            data-cookie-id-table="categoriesTable-{{ Config::get('version.hash_version') }}">
+            data-cookie-id-table="categoriesTable-{!! Config::get('version.hash_version') !!}">
 		        <thead>
 		            <tr>
                     <th data-sortable="true" data-field="id" data-visible="false">@lang('general.id')</th>
-		                <th data-sortable="true" data-field="name">{{Lang::get('admin/categories/table.title')}}</th>
-		                <th data-sortable="true" data-field="category_type">{{Lang::get('general.type')}}</th>
-		                <th data-searchable="false" data-sortable="false" data-field="count">{{Lang::get('general.assets')}}</th>
-		                <th data-searchable="false" data-sortable="true" data-field="acceptance">{{Lang::get('admin/categories/table.require_acceptance')}}</th>
-		                <th data-searchable="false" data-sortable="true" data-field="eula">{{Lang::get('admin/categories/table.eula_text')}}</th>
-		                <th data-switchable="false" data-searchable="false" data-sortable="false" data-field="actions">{{ Lang::get('table.actions') }}</th>
+		                <th data-sortable="true" data-field="name">{!!Lang::get('admin/categories/table.title')!!}</th>
+		                <th data-sortable="true" data-field="category_type">{!!Lang::get('general.type')!!}</th>
+		                <th data-searchable="false" data-sortable="false" data-field="count">{!!Lang::get('general.assets')!!}</th>
+		                <th data-searchable="false" data-sortable="true" data-field="acceptance">{!!Lang::get('admin/categories/table.require_acceptance')!!}</th>
+		                <th data-searchable="false" data-sortable="true" data-field="eula">{!!Lang::get('admin/categories/table.eula_text')!!}</th>
+		                <th data-switchable="false" data-searchable="false" data-sortable="false" data-field="actions">{!! Lang::get('table.actions') !!}</th>
 		            </tr>
 		        </thead>
 		    </table>
@@ -51,12 +51,12 @@
 </div>
 
 @section('moar_scripts')
-<script src="{{ asset('assets/js/bootstrap-table.js') }}"></script>
-<script src="{{ asset('assets/js/extensions/cookie/bootstrap-table-cookie.js') }}"></script>
-<script src="{{ asset('assets/js/extensions/mobile/bootstrap-table-mobile.js') }}"></script>
-<script src="{{ asset('assets/js/extensions/export/bootstrap-table-export.js') }}"></script>
-<script src="{{ asset('assets/js/extensions/export/tableExport.js') }}"></script>
-<script src="{{ asset('assets/js/extensions/export/jquery.base64.js') }}"></script>
+<script src="{!! asset('assets/js/bootstrap-table.js') !!}"></script>
+<script src="{!! asset('assets/js/extensions/cookie/bootstrap-table-cookie.js') !!}"></script>
+<script src="{!! asset('assets/js/extensions/mobile/bootstrap-table-mobile.js') !!}"></script>
+<script src="{!! asset('assets/js/extensions/export/bootstrap-table-export.js') !!}"></script>
+<script src="{!! asset('assets/js/extensions/export/tableExport.js') !!}"></script>
+<script src="{!! asset('assets/js/extensions/export/jquery.base64.js') !!}"></script>
 <script type="text/javascript">
     $('#table').bootstrapTable({
         classes: 'table table-responsive table-no-bordered',

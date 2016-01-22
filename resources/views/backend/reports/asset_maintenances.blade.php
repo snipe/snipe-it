@@ -3,13 +3,13 @@ use Carbon\Carbon;
 ?>
 @extends('backend/layouts/default')
 
-{{-- Page title --}}
+{!!-- Page title --!!}
 @section('title')
     @lang('general.asset_maintenance_report') ::
     @parent
 @stop
 
-{{-- Page content --}}
+{!!-- Page content --!!}
 @section('content')
     <div class="page-header">
         <h3>@lang('general.asset_maintenance_report')</h3>
@@ -62,7 +62,7 @@ use Carbon\Carbon;
                         <td>{{{ $assetMaintenanceTime }}}</td>
                         <td>
                           {{{ Setting::first()->default_currency }}}
-                          {{ number_format($assetMaintenance->cost,2) }}
+                          {!! number_format($assetMaintenance->cost,2) !!}
                         </td>
                     </tr>
                     <?php
@@ -74,10 +74,10 @@ use Carbon\Carbon;
                 <tfoot>
                     <tr>
                         <td colspan="6" align="right"><strong>Totals:</strong></td>
-                        <td>{{number_format($totalDays)}}</td>
+                        <td>{!!number_format($totalDays)!!}</td>
                         <td>
                           {{{ Setting::first()->default_currency }}}
-                          {{ number_format($totalCost,2) }}
+                          {!! number_format($totalCost,2) !!}
                         </td>
                     </tr>
                 </tfoot>
@@ -86,12 +86,12 @@ use Carbon\Carbon;
     </div>
 
 @section('moar_scripts')
-<script src="{{ asset('assets/js/bootstrap-table.js') }}"></script>
-<script src="{{ asset('assets/js/extensions/cookie/bootstrap-table-cookie.js') }}"></script>
-<script src="{{ asset('assets/js/extensions/mobile/bootstrap-table-mobile.js') }}"></script>
-<script src="{{ asset('assets/js/extensions/export/bootstrap-table-export.js') }}"></script>
-<script src="{{ asset('assets/js/extensions/export/tableExport.js') }}"></script>
-<script src="{{ asset('assets/js/extensions/export/jquery.base64.js') }}"></script>
+<script src="{!! asset('assets/js/bootstrap-table.js') !!}"></script>
+<script src="{!! asset('assets/js/extensions/cookie/bootstrap-table-cookie.js') !!}"></script>
+<script src="{!! asset('assets/js/extensions/mobile/bootstrap-table-mobile.js') !!}"></script>
+<script src="{!! asset('assets/js/extensions/export/bootstrap-table-export.js') !!}"></script>
+<script src="{!! asset('assets/js/extensions/export/tableExport.js') !!}"></script>
+<script src="{!! asset('assets/js/extensions/export/jquery.base64.js') !!}"></script>
 <script type="text/javascript">
   $('#table').bootstrapTable({
       classes: 'table table-responsive table-no-bordered',

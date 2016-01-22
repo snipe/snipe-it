@@ -1,17 +1,17 @@
 @extends('backend/layouts/default')
 
-{{-- Page title --}}
+{!!-- Page title --!!}
 @section('title')
 Locations ::
 @parent
 @stop
 
-{{-- Page content --}}
+{!!-- Page content --!!}
 @section('content')
 
 <div class="row header">
     <div class="col-md-12">
-        <a href="{{ route('create/location') }}" class="btn btn-success pull-right"><i class="fa fa-plus icon-white"></i>  @lang('general.create')</a>
+        <a href="{!! route('create/location') !!}" class="btn btn-success pull-right"><i class="fa fa-plus icon-white"></i>  @lang('general.create')</a>
         <h3>@lang('admin/locations/table.locations')</h3>
     </div>
 </div>
@@ -21,10 +21,10 @@ Locations ::
     <table
     name="categories"
     id="table"
-    data-url="{{ route('api.locations.list') }}"
+    data-url="{!! route('api.locations.list') !!}"
     data-cookie="true"
     data-click-to-select="true"
-    data-cookie-id-table="locationsTable-{{ Config::get('version.hash_version') }}">
+    data-cookie-id-table="locationsTable-{!! Config::get('version.hash_version') !!}">
         <thead>
             <tr>
                 <th data-sortable="true" data-field="id" data-visible="false">@lang('general.id')</th>
@@ -41,19 +41,19 @@ Locations ::
                 </th>
                 <th data-searchable="true" data-sortable="true" data-field="country">
                 @lang('admin/locations/table.country')</th>
-                <th data-switchable="false" data-searchable="false" data-sortable="false" data-field="actions">{{ Lang::get('table.actions') }}</th>
+                <th data-switchable="false" data-searchable="false" data-sortable="false" data-field="actions">{!! Lang::get('table.actions') !!}</th>
             </tr>
         </thead>
     </table>
 </div>
 
 @section('moar_scripts')
-<script src="{{ asset('assets/js/bootstrap-table.js') }}"></script>
-<script src="{{ asset('assets/js/extensions/cookie/bootstrap-table-cookie.js') }}"></script>
-<script src="{{ asset('assets/js/extensions/mobile/bootstrap-table-mobile.js') }}"></script>
-<script src="{{ asset('assets/js/extensions/export/bootstrap-table-export.js') }}"></script>
-<script src="{{ asset('assets/js/extensions/export/tableExport.js') }}"></script>
-<script src="{{ asset('assets/js/extensions/export/jquery.base64.js') }}"></script>
+<script src="{!! asset('assets/js/bootstrap-table.js') !!}"></script>
+<script src="{!! asset('assets/js/extensions/cookie/bootstrap-table-cookie.js') !!}"></script>
+<script src="{!! asset('assets/js/extensions/mobile/bootstrap-table-mobile.js') !!}"></script>
+<script src="{!! asset('assets/js/extensions/export/bootstrap-table-export.js') !!}"></script>
+<script src="{!! asset('assets/js/extensions/export/tableExport.js') !!}"></script>
+<script src="{!! asset('assets/js/extensions/export/jquery.base64.js') !!}"></script>
 <script type="text/javascript">
     $('#table').bootstrapTable({
         classes: 'table table-responsive table-no-bordered',

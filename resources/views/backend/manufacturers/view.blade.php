@@ -1,6 +1,6 @@
 @extends('backend/layouts/default')
 
-{{-- Page title --}}
+{!!-- Page title --!!}
 @section('title')
 
  {{{ $manufacturer->name }}}
@@ -8,7 +8,7 @@
 @parent
 @stop
 
-{{-- Page content --}}
+{!!-- Page content --!!}
 @section('content')
 
 
@@ -19,8 +19,8 @@
                 <span class="caret"></span>
             </button>
             <ul class="dropdown-menu">
-                    <li><a href="{{ route('update/manufacturer', $manufacturer->id) }}">@lang('admin/manufacturers/table.update')</a></li>
-                    <li><a href="{{ route('create/manufacturer') }}">@lang('admin/manufacturers/table.create')</a></li>
+                    <li><a href="{!! route('update/manufacturer', $manufacturer->id) !!}">@lang('admin/manufacturers/table.update')</a></li>
+                    <li><a href="{!! route('create/manufacturer') !!}">@lang('admin/manufacturers/table.create')</a></li>
             </ul>
         </div>
         <h3>
@@ -38,7 +38,7 @@
   <table
   name="category_assets"
   id="table"
-  data-url="{{ route('api.manufacturers.view', $manufacturer->id) }}"
+  data-url="{!! route('api.manufacturers.view', $manufacturer->id) !!}"
   data-cookie="true"
   data-click-to-select="true"
   data-cookie-id-table="maufacturerAssetsTableOIUOIUI">
@@ -60,12 +60,12 @@
   </table>
 
   @section('moar_scripts')
-    <script src="{{ asset('assets/js/bootstrap-table.js') }}"></script>
-    <script src="{{ asset('assets/js/extensions/cookie/bootstrap-table-cookie.js') }}"></script>
-    <script src="{{ asset('assets/js/extensions/mobile/bootstrap-table-mobile.js') }}"></script>
-    <script src="{{ asset('assets/js/extensions/export/bootstrap-table-export.js') }}"></script>
-    <script src="{{ asset('assets/js/extensions/export/tableExport.js') }}"></script>
-    <script src="{{ asset('assets/js/extensions/export/jquery.base64.js') }}"></script>
+    <script src="{!! asset('assets/js/bootstrap-table.js') !!}"></script>
+    <script src="{!! asset('assets/js/extensions/cookie/bootstrap-table-cookie.js') !!}"></script>
+    <script src="{!! asset('assets/js/extensions/mobile/bootstrap-table-mobile.js') !!}"></script>
+    <script src="{!! asset('assets/js/extensions/export/bootstrap-table-export.js') !!}"></script>
+    <script src="{!! asset('assets/js/extensions/export/tableExport.js') !!}"></script>
+    <script src="{!! asset('assets/js/extensions/export/jquery.base64.js') !!}"></script>
     <script type="text/javascript">
         $('#table').bootstrapTable({
             classes: 'table table-responsive table-no-bordered',

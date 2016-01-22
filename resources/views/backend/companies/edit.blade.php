@@ -1,6 +1,6 @@
 @extends('backend/layouts/default')
 
-{{-- Page title --}}
+{!!-- Page title --!!}
 @section('title')
   @if ($company->id)
     @lang('admin/companies/table.update') ::
@@ -10,12 +10,12 @@
 @parent
 @stop
 
-{{-- Page content --}}
+{!!-- Page content --!!}
 @section('content')
 
 <div class="row header">
   <div class="col-md-12">
-    <a href="{{ URL::previous() }}" class="btn-flat gray pull-right">
+    <a href="{!! URL::previous() !!}" class="btn-flat gray pull-right">
       <i class="fa fa-arrow-left icon-white"></i>
       @lang('general.back')
     </a>
@@ -35,10 +35,10 @@
 
       <form class="form-horizontal" method="post" action="" autocomplete="off">
         <!-- CSRF Token -->
-        <input type="hidden" name="_token" value="{{ csrf_token() }}" />
+        <input type="hidden" name="_token" value="{!! csrf_token() !!}" />
 
         <!-- Name -->
-        <div class="form-group {{ $errors->has('name') ? ' has-error' : '' }}">
+        <div class="form-group {!! $errors->has('name') ? ' has-error' : '' !!}">
           <label for="name" class="col-md-3 control-label">
             @lang('admin/companies/table.name')
             <i class='fa fa-asterisk'></i>
@@ -47,7 +47,7 @@
           <div class="col-md-6">
             <input class="form-control" type="text" name="name" id="name"
                     value="{{{ Input::old('name', $company->name) }}}" />
-            {{ $errors->first('name', '<br><span class="alert-msg"><i class="fa fa-times"></i> :message</span>') }}
+            {!! $errors->first('name', '<br><span class="alert-msg"><i class="fa fa-times"></i> :message</span>') !!}
           </div>
         </div>
 
@@ -57,9 +57,9 @@
           <label class="col-md-2 control-label"></label>
           <div class="col-md-7">
             @if ($company->id)
-              <a class="btn btn-link" href="{{ URL::previous() }}">@lang('button.cancel')</a>
+              <a class="btn btn-link" href="{!! URL::previous() !!}">@lang('button.cancel')</a>
             @else
-              <a class="btn btn-link" href="{{ route('companies') }}">@lang('button.cancel')</a>
+              <a class="btn btn-link" href="{!! route('companies') !!}">@lang('button.cancel')</a>
             @endif
 
             <button type="submit" class="btn btn-success">

@@ -1,21 +1,21 @@
 @extends('backend/layouts/default')
 
-{{-- Page title --}}
+{!!-- Page title --!!}
 @section('title')
 @lang('admin/models/table.title') ::
 @parent
 @stop
 
-{{-- Page content --}}
+{!!-- Page content --!!}
 @section('content')
 
 <div class="row header">
     <div class="col-md-12">
-        <a href="{{ route('create/model') }}" class="btn btn-success pull-right"><i class="fa fa-plus icon-white"></i>  @lang('general.create')</a>
+        <a href="{!! route('create/model') !!}" class="btn btn-success pull-right"><i class="fa fa-plus icon-white"></i>  @lang('general.create')</a>
         @if(Input::get('status')=='Deleted')
-            <a href="{{ URL::to('hardware/models') }}" class="btn btn-default pull-right" style="margin-right:5px;"><i class="fa fa-trash"></i>  @lang('admin/models/general.view_models')</a>
+            <a href="{!! URL::to('hardware/models') !!}" class="btn btn-default pull-right" style="margin-right:5px;"><i class="fa fa-trash"></i>  @lang('admin/models/general.view_models')</a>
         @else
-            <a href="{{ URL::to('hardware/models?status=Deleted') }}" class="btn btn-default pull-right" style="margin-right:5px;"><i class="fa fa-trash"></i>  @lang('admin/models/general.view_deleted')</a>
+            <a href="{!! URL::to('hardware/models?status=Deleted') !!}" class="btn btn-default pull-right" style="margin-right:5px;"><i class="fa fa-trash"></i>  @lang('admin/models/general.view_deleted')</a>
         @endif
         <h3>@lang('admin/models/table.title')</h3>
     </div>
@@ -26,10 +26,10 @@
   <table
   name="models"
   id="table"
-  data-url="{{route('api.models.list',array('status'=>Input::get('status')))}}"
+  data-url="{!!route('api.models.list',array('status'=>Input::get('status')))!!}"
   data-cookie="true"
   data-click-to-select="true"
-  data-cookie-id-table="modelsTable-{{ Config::get('version.hash_version') }}">
+  data-cookie-id-table="modelsTable-{!! Config::get('version.hash_version') !!}">
         <thead>
             <tr>
                 <th data-sortable="true" data-field="id" data-visible="false">@lang('general.id')</th>
@@ -47,12 +47,12 @@
     </table>
 
 @section('moar_scripts')
-<script src="{{ asset('assets/js/bootstrap-table.js') }}"></script>
-<script src="{{ asset('assets/js/extensions/mobile/bootstrap-table-mobile.js') }}"></script>
-<script src="{{ asset('assets/js/extensions/export/bootstrap-table-export.js?v=1') }}"></script>
-<script src="{{ asset('assets/js/extensions/cookie/bootstrap-table-cookie.js?v=1') }}"></script>
-<script src="{{ asset('assets/js/extensions/export/tableExport.js') }}"></script>
-<script src="{{ asset('assets/js/extensions/export/jquery.base64.js') }}"></script>
+<script src="{!! asset('assets/js/bootstrap-table.js') !!}"></script>
+<script src="{!! asset('assets/js/extensions/mobile/bootstrap-table-mobile.js') !!}"></script>
+<script src="{!! asset('assets/js/extensions/export/bootstrap-table-export.js?v=1') !!}"></script>
+<script src="{!! asset('assets/js/extensions/cookie/bootstrap-table-cookie.js?v=1') !!}"></script>
+<script src="{!! asset('assets/js/extensions/export/tableExport.js') !!}"></script>
+<script src="{!! asset('assets/js/extensions/export/jquery.base64.js') !!}"></script>
 <script type="text/javascript">
     $('#table').bootstrapTable({
         classes: 'table table-hover table-no-bordered',

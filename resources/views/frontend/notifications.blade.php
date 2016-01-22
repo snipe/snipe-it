@@ -16,7 +16,7 @@
         <button type="button" class="close" data-dismiss="alert">&times;</button>
         <i class="fa fa-check"></i>
         <strong>Success: </strong>
-        {{ $message }}
+        {!! $message !!}
     </div>
 </div>
 @endif
@@ -27,7 +27,7 @@
         <button type="button" class="close" data-dismiss="alert">&times;</button>
         <i class="fa fa-exclamation-circle"></i>
         <strong>Error: </strong>
-        {{ $message }}
+        {!! $message !!}
     </div>
 </div>
 @endif
@@ -38,7 +38,7 @@
         <button type="button" class="close" data-dismiss="alert">&times;</button>
         <i class="fa fa-warning"></i>
         <strong>Warning: </strong>
-        {{ $message }}
+        {!! $message !!}
     </div>
 </div>
 @endif
@@ -49,7 +49,7 @@
         <button type="button" class="close" data-dismiss="alert">&times;</button>
         <i class="fa fa-info-circle"></i>
         <strong>Info: </strong>
-        {{ $message }}
+        {!! $message !!}
     </div>
 </div>
 @endif

@@ -1,6 +1,6 @@
 @extends('backend/layouts/default')
 
-{{-- Page title --}}
+{!!-- Page title --!!}
 @section('title')
 
  {{{ $consumable->name }}}
@@ -8,14 +8,14 @@
 @parent
 @stop
 
-{{-- Page content --}}
+{!!-- Page content --!!}
 @section('content')
 
 
 <div class="row header">
     <div class="col-md-12">
         <div class="btn-group pull-right">
-           <a href="{{ URL::previous() }}" class="btn-flat gray pull-right"><i class="fa fa-arrow-left icon-white"></i>  @lang('general.back')</a>        </div>
+           <a href="{!! URL::previous() !!}" class="btn-flat gray pull-right"><i class="fa fa-arrow-left icon-white"></i>  @lang('general.back')</a>        </div>
         <h3>
             {{{ $consumable->name }}}
  @lang('general.consumable')
@@ -49,15 +49,15 @@
         <table
         name="consumable_users"
         id="table"
-        data-url="{{route('api.consumables.view', $consumable->id)}}"
+        data-url="{!!route('api.consumables.view', $consumable->id)!!}"
         data-cookie="true"
         data-click-to-select="true"
-        data-cookie-id-table="consumableDetailTable-{{ Config::get('version.hash_version') }}">
+        data-cookie-id-table="consumableDetailTable-{!! Config::get('version.hash_version') !!}">
             <thead>
                 <tr>
-                    <th data-switchable="false" data-searchable="false" data-sortable="false" data-field="name">{{Lang::get('general.user')}}</th>
-                    <th data-switchable="false" data-searchable="false" data-sortable="false" data-field="created_at">{{Lang::get('general.date')}}</th>
-                    <th data-switchable="false" data-searchable="false" data-sortable="false" data-field="admin">{{Lang::get('general.admin')}}</th>
+                    <th data-switchable="false" data-searchable="false" data-sortable="false" data-field="name">{!!Lang::get('general.user')!!}</th>
+                    <th data-switchable="false" data-searchable="false" data-sortable="false" data-field="created_at">{!!Lang::get('general.date')!!}</th>
+                    <th data-switchable="false" data-searchable="false" data-sortable="false" data-field="admin">{!!Lang::get('general.admin')!!}</th>
                 </tr>
             </thead>
         </table>
@@ -73,12 +73,12 @@
 </div>
 
 @section('moar_scripts')
-<script src="{{ asset('assets/js/bootstrap-table.js') }}"></script>
-<script src="{{ asset('assets/js/extensions/cookie/bootstrap-table-cookie.js') }}"></script>
-<script src="{{ asset('assets/js/extensions/mobile/bootstrap-table-mobile.js') }}"></script>
-<script src="{{ asset('assets/js/extensions/export/bootstrap-table-export.js') }}"></script>
-<script src="{{ asset('assets/js/extensions/export/tableExport.js') }}"></script>
-<script src="{{ asset('assets/js/extensions/export/jquery.base64.js') }}"></script>
+<script src="{!! asset('assets/js/bootstrap-table.js') !!}"></script>
+<script src="{!! asset('assets/js/extensions/cookie/bootstrap-table-cookie.js') !!}"></script>
+<script src="{!! asset('assets/js/extensions/mobile/bootstrap-table-mobile.js') !!}"></script>
+<script src="{!! asset('assets/js/extensions/export/bootstrap-table-export.js') !!}"></script>
+<script src="{!! asset('assets/js/extensions/export/tableExport.js') !!}"></script>
+<script src="{!! asset('assets/js/extensions/export/jquery.base64.js') !!}"></script>
 <script type="text/javascript">
     $('#table').bootstrapTable({
         classes: 'table table-responsive table-no-bordered',

@@ -1,12 +1,12 @@
 @extends('backend/layouts/default')
 
-{{-- Page title --}}
+{!!-- Page title --!!}
 @section('title')
 @lang('general.depreciation_report') ::
 @parent
 @stop
 
-{{-- Page content --}}
+{!!-- Page content --!!}
 @section('content')
 
 
@@ -58,13 +58,13 @@
             @if (Setting::getSettings()->display_asset_name)
                 <td>{{{ $asset->name }}}</td>
             @endif
-            <td>{{ $asset->serial }}</td>
+            <td>{!! $asset->serial !!}</td>
             <td>
             @if ($asset->assigneduser)
             	 @if ($asset->assigneduser->deleted_at!='')
             	 	<del>{{{ $asset->assigneduser->fullName() }}}</del>
             	 @else
-            	 	<a href="{{ route('view/user', $asset->assigned_to) }}">
+            	 	<a href="{!! route('view/user', $asset->assigned_to) !!}">
 					{{{ $asset->assigneduser->fullName() }}}
 					</a>
             	 @endif
@@ -124,12 +124,12 @@
 </div>
 
 @section('moar_scripts')
-<script src="{{ asset('assets/js/bootstrap-table.js') }}"></script>
-<script src="{{ asset('assets/js/extensions/cookie/bootstrap-table-cookie.js') }}"></script>
-<script src="{{ asset('assets/js/extensions/mobile/bootstrap-table-mobile.js') }}"></script>
-<script src="{{ asset('assets/js/extensions/export/bootstrap-table-export.js') }}"></script>
-<script src="{{ asset('assets/js/extensions/export/tableExport.js') }}"></script>
-<script src="{{ asset('assets/js/extensions/export/jquery.base64.js') }}"></script>
+<script src="{!! asset('assets/js/bootstrap-table.js') !!}"></script>
+<script src="{!! asset('assets/js/extensions/cookie/bootstrap-table-cookie.js') !!}"></script>
+<script src="{!! asset('assets/js/extensions/mobile/bootstrap-table-mobile.js') !!}"></script>
+<script src="{!! asset('assets/js/extensions/export/bootstrap-table-export.js') !!}"></script>
+<script src="{!! asset('assets/js/extensions/export/tableExport.js') !!}"></script>
+<script src="{!! asset('assets/js/extensions/export/jquery.base64.js') !!}"></script>
 <script type="text/javascript">
     $('#table').bootstrapTable({
         classes: 'table table-responsive table-striped table-bordered',

@@ -1,25 +1,25 @@
 @extends('backend/layouts/default')
 
-{{-- Page title --}}
+{!!-- Page title --!!}
 @section('title')
 @lang('admin/users/table.viewusers') ::
 @parent
 @stop
 
-{{-- Page content --}}
+{!!-- Page content --!!}
 @section('content')
 
 <div class="row header">
     <div class="col-md-12">
         @if (Setting::getSettings()->ldap_enabled == 1)
-            <a href="{{ route('ldap/user') }}" class="btn btn-default pull-right"><span class="fa fa-upload"></span> LDAP</a>
+            <a href="{!! route('ldap/user') !!}" class="btn btn-default pull-right"><span class="fa fa-upload"></span> LDAP</a>
         @endif
-	<a href="{{ route('import/user') }}" class="btn btn-default pull-right" style="margin-right: 5px;"><span class="fa fa-upload"></span> @lang('general.import')</a>
-        <a href="{{ route('create/user') }}" class="btn btn-success pull-right" style="margin-right: 5px;"><i class="fa fa-plus icon-white"></i>  @lang('general.create')</a>
+	<a href="{!! route('import/user') !!}" class="btn btn-default pull-right" style="margin-right: 5px;"><span class="fa fa-upload"></span> @lang('general.import')</a>
+        <a href="{!! route('create/user') !!}" class="btn btn-success pull-right" style="margin-right: 5px;"><i class="fa fa-plus icon-white"></i>  @lang('general.create')</a>
          @if (Input::get('status')=='deleted')
-            <a class="btn btn-default pull-right" href="{{ URL::to('admin/users') }}" style="margin-right: 5px;">@lang('admin/users/table.show_current')</a>
+            <a class="btn btn-default pull-right" href="{!! URL::to('admin/users') !!}" style="margin-right: 5px;">@lang('admin/users/table.show_current')</a>
         @else
-            <a class="btn btn-default pull-right" href="{{ URL::to('admin/users?status=deleted') }}" style="margin-right: 5px;">@lang('admin/users/table.show_deleted')</a>
+            <a class="btn btn-default pull-right" href="{!! URL::to('admin/users?status=deleted') !!}" style="margin-right: 5px;">@lang('admin/users/table.show_deleted')</a>
         @endif
 
         <h3>
@@ -34,33 +34,33 @@
 </div>
 
 <div class="row">
-    {{ Form::open([
+    {!! Form::open([
          'method' => 'POST',
          'route' => ['users/bulkedit'],
-         'class' => 'form-horizontal' ]) }}
+         'class' => 'form-horizontal' ]) !!}
 
        <table
         name="assets"
         id="table"
         data-toggle="table"
-        data-url="{{ route('api.users.list', array(''=>Input::get('status'))) }}"
+        data-url="{!! route('api.users.list', array(''=>Input::get('status'))) !!}"
         data-cookie="true"
         data-click-to-select="true"
-        data-cookie-id-table="userTableDisplay-{{ Config::get('version.hash_version') }}">
+        data-cookie-id-table="userTableDisplay-{!! Config::get('version.hash_version') !!}">
            <thead>
                <tr>
                    <th data-class="hidden-xs hidden-sm" data-switchable="false" data-searchable="false" data-sortable="false" data-field="checkbox"><div class="text-center"><input type="checkbox" id="checkAll" style="padding-left: 0px;" style="hidden-xs hidden-sm"></div></th>
                    <th data-switchable="true" data-sortable="true" data-field="id" data-visible="false">@lang('general.id')</th>
                    <th data-switchable="true" data-sortable="false" data-field="companyName" data-visible="false">@lang('admin/companies/table.title')</th>
                    <th data-switchable="true" data-sortable="true" data-field="employee_num" data-visible="false">@lang('admin/users/table.employee_num')</th>
-                   <th data-sortable="true" data-field="name">{{ Lang::get('admin/users/table.name') }}</th>
+                   <th data-sortable="true" data-field="name">{!! Lang::get('admin/users/table.name') !!}</th>
                    <th data-sortable="true" data-field="email">
                        <span class="hidden-md hidden-lg">Email</span>
                        <span class="hidden-xs"><i class="fa fa-envelope fa-lg"></i></span>
                    </th>
-                   <th data-sortable="true" data-field="username">{{ Lang::get('admin/users/table.username') }}</th>
-                   <th data-searchable="true" data-sortable="true" data-field="manager">{{ Lang::get('admin/users/table.manager') }}</th>
-                   <th data-sortable="true" data-field="location">{{ Lang::get('admin/users/table.location') }}</th>
+                   <th data-sortable="true" data-field="username">{!! Lang::get('admin/users/table.username') !!}</th>
+                   <th data-searchable="true" data-sortable="true" data-field="manager">{!! Lang::get('admin/users/table.manager') !!}</th>
+                   <th data-sortable="true" data-field="location">{!! Lang::get('admin/users/table.location') !!}</th>
                    <th data-sortable="false" data-field="assets">
                        <span class="hidden-md hidden-lg">Assets</span>
                        <span class="hidden-xs"><i class="fa fa-barcode fa-lg"></i></span>
@@ -77,9 +77,9 @@
                        <span class="hidden-md hidden-lg">Consumables</span>
                        <span class="hidden-xs"><i class="fa fa-tint fa-lg"></i></span>
                    </th>
-                   <th data-sortable="false" data-field="groups">{{ Lang::get('general.groups') }}</th>
-                   <th data-sortable="true" data-field="notes">{{ Lang::get('general.notes') }}</th>
-                   <th data-switchable="false" data-searchable="false" data-sortable="false" data-field="actions" >{{ Lang::get('table.actions') }}</th>
+                   <th data-sortable="false" data-field="groups">{!! Lang::get('general.groups') !!}</th>
+                   <th data-sortable="true" data-field="notes">{!! Lang::get('general.notes') !!}</th>
+                   <th data-switchable="false" data-searchable="false" data-sortable="false" data-field="actions" >{!! Lang::get('table.actions') !!}</th>
                </tr>
            </thead>
            <tfoot>
@@ -94,16 +94,16 @@
            </tfoot>
        </table>
 
-    {{ Form::close() }}
+    {!! Form::close() !!}
 </div>
 </div>
 @section('moar_scripts')
-<script src="{{ asset('assets/js/bootstrap-table.js') }}"></script>
-<script src="{{ asset('assets/js/extensions/cookie/bootstrap-table-cookie.js') }}"></script>
-<script src="{{ asset('assets/js/extensions/mobile/bootstrap-table-mobile.js') }}"></script>
-<script src="{{ asset('assets/js/extensions/export/bootstrap-table-export.js') }}"></script>
-<script src="{{ asset('assets/js/extensions/export/tableExport.js') }}"></script>
-<script src="{{ asset('assets/js/extensions/export/jquery.base64.js') }}"></script>
+<script src="{!! asset('assets/js/bootstrap-table.js') !!}"></script>
+<script src="{!! asset('assets/js/extensions/cookie/bootstrap-table-cookie.js') !!}"></script>
+<script src="{!! asset('assets/js/extensions/mobile/bootstrap-table-mobile.js') !!}"></script>
+<script src="{!! asset('assets/js/extensions/export/bootstrap-table-export.js') !!}"></script>
+<script src="{!! asset('assets/js/extensions/export/tableExport.js') !!}"></script>
+<script src="{!! asset('assets/js/extensions/export/jquery.base64.js') !!}"></script>
 <script type="text/javascript">
     $('#table').bootstrapTable({
         classes: 'table table-responsive table-no-bordered',

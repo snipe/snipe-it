@@ -7,7 +7,7 @@
         <h2>Password Reset</h2>
 
         <div>
-            To reset your {{{ Setting::getSettings()->site_name }}} password, complete this form: {{ URL::to('password/reset', array($token)) }}.
+            To reset your {{{ Setting::getSettings()->site_name }}} password, complete this form: {!! URL::to('password/reset', array($token)) !!}.
         </div>
     </body>
 </html>

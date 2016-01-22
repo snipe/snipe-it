@@ -1,12 +1,12 @@
 @extends('backend/layouts/default')
 
-{{-- Page title --}}
+{!!-- Page title --!!}
 @section('title')
 
 @parent
 @stop
 
-{{-- Page content --}}
+{!!-- Page content --!!}
 @section('content')
 
 <style>
@@ -31,8 +31,8 @@
 <div class="col-md-12">
         <form class="form-horizontal" method="post" action="" autocomplete="off">
         <!-- CSRF Token -->
-        <input type="hidden" name="_token" value="{{ csrf_token() }}" />
-        <input type="hidden" name="logId" value="{{ $findlog->id }}" />
+        <input type="hidden" name="_token" value="{!! csrf_token() !!}" />
+        <input type="hidden" name="logId" value="{!! $findlog->id !!}" />
 
         <div class="radio">
           <label>

@@ -1,22 +1,22 @@
 @extends('backend/layouts/default')
 
-{{-- Page title --}}
+{!!-- Page title --!!}
 @section('title')
 @lang('general.dashboard') ::
 @parent
 @stop
 
-{{-- Page content --}}
+{!!-- Page content --!!}
 @section('content')
 
 
 
 
-<link rel="stylesheet" type="text/css" href="{{ asset('assets/css/lib/morris.css') }}">
+<link rel="stylesheet" type="text/css" href="{!! asset('assets/css/lib/morris.css') !!}">
 
 <!-- morrisjs -->
-<script src="{{ asset('assets/js/raphael-min.js') }}"></script>
-<script src="{{ asset('assets/js/morris.min.js') }}"></script>
+<script src="{!! asset('assets/js/raphael-min.js') !!}"></script>
+<script src="{!! asset('assets/js/morris.min.js') !!}"></script>
 
 
 <div class="row">
@@ -28,7 +28,7 @@
         <br>
     </div>
     <div class="col-md-9 chart">
-        <h5>@lang('general.recent_activity') (<a href="{{ Config::get('app.url') }}/reports/activity">view all</a>)</h5>
+        <h5>@lang('general.recent_activity') (<a href="{!! Config::get('app.url') !!}/reports/activity">view all</a>)</h5>
 
         <table class="table table-hover table-fixed break-word">
 			<thead>
@@ -47,33 +47,33 @@
 			       <td>{{{ date("M d", strtotime($activity->created_at)) }}}</td>
 			       <td>
                        @if ($activity->action_type!='requested')
-                            <a href="{{ route('view/user', $activity->user_id) }}">{{{ $activity->adminlog->fullName() }}}</a>
+                            <a href="{!! route('view/user', $activity->user_id) !!}">{{{ $activity->adminlog->fullName() }}}</a>
                        @endif
 
                        </td>
 
 			       <td>
 			           	@if (($activity->assetlog) && ($activity->asset_type=="hardware"))
-			            	<a href="{{ route('view/hardware', $activity->asset_id) }}">{{ $activity->assetlog->showAssetName() }}</a>
+			            	<a href="{!! route('view/hardware', $activity->asset_id) !!}">{!! $activity->assetlog->showAssetName() !!}</a>
 			            @elseif (($activity->licenselog) && ($activity->asset_type=="software"))
-			            	<a href="{{ route('view/license', $activity->asset_id) }}">{{{ $activity->licenselog->name }}}</a>
+			            	<a href="{!! route('view/license', $activity->asset_id) !!}">{{{ $activity->licenselog->name }}}</a>
                         @elseif (($activity->consumablelog) && ($activity->asset_type=="consumable"))
-    			            <a href="{{ route('view/consumable', $activity->consumable_id) }}">{{{ $activity->consumablelog->name }}}</a>
+    			            <a href="{!! route('view/consumable', $activity->consumable_id) !!}">{{{ $activity->consumablelog->name }}}</a>
 			            @elseif (($activity->accessorylog) && ($activity->asset_type=="accessory"))
-			            	<a href="{{ route('view/accessory', $activity->accessory_id) }}">{{{ $activity->accessorylog->name }}}</a>
+			            	<a href="{!! route('view/accessory', $activity->accessory_id) !!}">{{{ $activity->accessorylog->name }}}</a>
                         @else
                             @lang('general.bad_data')
 			            @endif
 
 			           	</td>
 			       <td>
-				       {{ strtolower(Lang::get('general.'.str_replace(' ','_',$activity->action_type))) }}
+				       {!! strtolower(Lang::get('general.'.str_replace(' ','_',$activity->action_type))) !!}
 			       </td>
 			       <td>
                        @if ($activity->action_type=='requested')
-                            <a href="{{ route('view/user', $activity->user_id) }}">{{{ $activity->adminlog->fullName() }}}</a>
+                            <a href="{!! route('view/user', $activity->user_id) !!}">{{{ $activity->adminlog->fullName() }}}</a>
                        @elseif ($activity->userlog)
-			           		<a href="{{ route('view/user', $activity->checkedout_to) }}">{{{ $activity->userlog->fullName() }}}</a>
+			           		<a href="{!! route('view/user', $activity->checkedout_to) !!}">{{{ $activity->userlog->fullName() }}}</a>
 			           @endif
 
 			           </td>
@@ -106,11 +106,11 @@
         Morris.Donut({
             element: 'hero-assets',
             data: [
-	            {label: '@lang('general.ready_to_deploy')', value: {{ $asset_stats['rtd']['percent'] }} },
-                {label: '@lang('general.deployed')', value: {{ $asset_stats['deployed']['percent'] }} },
-                {label: '@lang('general.pending')', value: {{ $asset_stats['pending']['percent'] }} },
-                {label: '@lang('general.undeployable')', value: {{ $asset_stats['undeployable']['percent'] }} },
-                {label: '@lang('general.archived')', value: {{ $asset_stats['archived']['percent'] }} },
+	            {label: '@lang('general.ready_to_deploy')', value: {!! $asset_stats['rtd']['percent'] !!} },
+                {label: '@lang('general.deployed')', value: {!! $asset_stats['deployed']['percent'] !!} },
+                {label: '@lang('general.pending')', value: {!! $asset_stats['pending']['percent'] !!} },
+                {label: '@lang('general.undeployable')', value: {!! $asset_stats['undeployable']['percent'] !!} },
+                {label: '@lang('general.archived')', value: {!! $asset_stats['archived']['percent'] !!} },
             ],
             colors: ["#30a1ec", "#76bdee", "#c4dafe"],
             formatter: function (y) { return y + "%" }

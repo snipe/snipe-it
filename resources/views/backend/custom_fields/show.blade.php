@@ -1,6 +1,6 @@
 @extends('backend/layouts/default')
 
-{{-- Page title --}}
+{!!-- Page title --!!}
 @section('title')
   @lang('admin/custom_fields/general.custom_fields')
 @parent
@@ -11,7 +11,7 @@
 @section('content')
 <div class="row header">
     <div class="col-md-12">
-        <a href="{{ route('admin.custom_fields.index') }}" class="btn-flat gray pull-right">
+        <a href="{!! route('admin.custom_fields.index') !!}" class="btn-flat gray pull-right">
           <i class="fa fa-arrow-left icon-white"></i>
           @lang('general.back')</a>
         <h3>
@@ -36,11 +36,11 @@
       <tfoot>
           <tr>
             <td colspan="4" class="text-right">
-              {{ Form::open(['route' => ["admin.custom_fields.associate",$custom_fieldset->id], 'class'=>'form-horizontal']) }}
-              {{ Form::checkbox("required","on") }}
+              {!! Form::open(['route' => ["admin.custom_fields.associate",$custom_fieldset->id], 'class'=>'form-horizontal']) !!}
+              {!! Form::checkbox("required","on") !!}
               @lang('admin/custom_fields/general.required')
-              {{ Form::text("order",$maxid)}}
-              {{ Form::select("field_id",$custom_fields_list,"",["onchange" => "document.forms[0].submit()"]) }}
+              {!! Form::text("order",$maxid)!!}
+              {!! Form::select("field_id",$custom_fields_list,"",["onchange" => "document.forms[0].submit()"]) !!}
               <span class="alert-msg"><?= $errors->first('field_id'); ?></span>
 
             </td>
@@ -49,11 +49,11 @@
       <tbody>
         @foreach($custom_fieldset->fields AS $field)
         <tr>
-          <td>{{$field->pivot->order}}</td>
-          <td>{{$field->name}}</td>
-          <td>{{$field->format}}</td>
-          <td>{{$field->element}}</td>
-          <td>{{$field->pivot->required ? "REQUIRED" : "OPTIONAL"}}</td>
+          <td>{!!$field->pivot->order!!}</td>
+          <td>{!!$field->name!!}</td>
+          <td>{!!$field->format!!}</td>
+          <td>{!!$field->element!!}</td>
+          <td>{!!$field->pivot->required ? "REQUIRED" : "OPTIONAL"!!}</td>
         </tr>
         @endforeach
       </tbody>

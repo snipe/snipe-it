@@ -1,18 +1,18 @@
 @extends('backend/layouts/default')
 
-{{-- Web site Title --}}
+{!!-- Web site Title --!!}
 @section('title')
 @lang('admin/groups/titles.group_management') ::
 @parent
 @stop
 
-{{-- Content --}}
+{!!-- Content --!!}
 @section('content')
 
 
 <div class="row header">
     <div class="col-md-12">
-        <a href="{{ route('create/group') }}" class="btn btn-success pull-right"><i class="fa fa-plus icon-white"></i> @lang('general.create')</a>
+        <a href="{!! route('create/group') !!}" class="btn btn-success pull-right"><i class="fa fa-plus icon-white"></i> @lang('general.create')</a>
         <h3>@lang('admin/groups/titles.group_management')</h3>
     </div>
 </div>
@@ -24,17 +24,17 @@
         name="groups"
         id="table"
         data-toggle="table"
-        data-url="{{ route('api.groups.list') }}"
+        data-url="{!! route('api.groups.list') !!}"
         data-cookie="true"
         data-click-to-select="true"
-        data-cookie-id-table="userGroupDisplay-{{ Config::get('version.hash_version') }}">
+        data-cookie-id-table="userGroupDisplay-{!! Config::get('version.hash_version') !!}">
            <thead>
                <tr>
                    <th data-switchable="true" data-sortable="false" data-field="id" data-visible="false">@lang('general.id')</th>
                    <th data-switchable="true" data-sortable="true" data-field="name" data-visible="true">@lang('admin/groups/table.name')</th>
                    <th data-switchable="true" data-sortable="false" data-field="users" data-visible="true">@lang('admin/groups/table.users')</th>
                    <th data-switchable="true" data-sortable="true" data-field="created_at" data-visible="true">@lang('general.created_at')</th>
-                   <th data-switchable="false" data-searchable="false" data-sortable="false" data-field="actions" >{{ Lang::get('table.actions') }}</th>
+                   <th data-switchable="false" data-searchable="false" data-sortable="false" data-field="actions" >{!! Lang::get('table.actions') !!}</th>
                </tr>
            </thead>
        </table>
@@ -42,12 +42,12 @@
 </div>
 </div>
 @section('moar_scripts')
-<script src="{{ asset('assets/js/bootstrap-table.js') }}"></script>
-<script src="{{ asset('assets/js/extensions/cookie/bootstrap-table-cookie.js') }}"></script>
-<script src="{{ asset('assets/js/extensions/mobile/bootstrap-table-mobile.js') }}"></script>
-<script src="{{ asset('assets/js/extensions/export/bootstrap-table-export.js') }}"></script>
-<script src="{{ asset('assets/js/extensions/export/tableExport.js') }}"></script>
-<script src="{{ asset('assets/js/extensions/export/jquery.base64.js') }}"></script>
+<script src="{!! asset('assets/js/bootstrap-table.js') !!}"></script>
+<script src="{!! asset('assets/js/extensions/cookie/bootstrap-table-cookie.js') !!}"></script>
+<script src="{!! asset('assets/js/extensions/mobile/bootstrap-table-mobile.js') !!}"></script>
+<script src="{!! asset('assets/js/extensions/export/bootstrap-table-export.js') !!}"></script>
+<script src="{!! asset('assets/js/extensions/export/tableExport.js') !!}"></script>
+<script src="{!! asset('assets/js/extensions/export/jquery.base64.js') !!}"></script>
 <script type="text/javascript">
     $('#table').bootstrapTable({
         classes: 'table table-responsive table-no-bordered',

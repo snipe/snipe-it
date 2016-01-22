@@ -1,6 +1,6 @@
 @extends('backend/layouts/default')
 
-{{-- Page title --}}
+{!!-- Page title --!!}
 @section('title')
 
  {{{ $accessory->name }}}
@@ -8,14 +8,14 @@
 @parent
 @stop
 
-{{-- Page content --}}
+{!!-- Page content --!!}
 @section('content')
 
 
 <div class="row header">
     <div class="col-md-12">
         <div class="btn-group pull-right">
-           <a href="{{ URL::to('admin/accessories') }}" class="btn-flat gray pull-right"><i class="fa fa-arrow-left icon-white"></i>  @lang('general.back')</a>        </div>
+           <a href="{!! URL::to('admin/accessories') !!}" class="btn-flat gray pull-right"><i class="fa fa-arrow-left icon-white"></i>  @lang('general.back')</a>        </div>
         <h3>
             {{{ $accessory->name }}}
  @lang('general.accessory')
@@ -30,15 +30,15 @@
               <table
               name="accessory_users"
               id="table"
-              data-url="{{ route('api.accessories.view', $accessory->id) }}"
+              data-url="{!! route('api.accessories.view', $accessory->id) !!}"
               data-cookie="true"
               data-click-to-select="true"
               data-cookie-id-table="accessoryUsersTable">
 
                     <thead>
                         <tr>
-                            <th data-switchable="false" data-searchable="false" data-sortable="false" data-field="name">{{Lang::get('general.user')}}</th>
-                            <th data-switchable="false" data-searchable="false" data-sortable="false" data-field="actions">{{Lang::get('table.actions')}}</th>
+                            <th data-switchable="false" data-searchable="false" data-sortable="false" data-field="name">{!!Lang::get('general.user')!!}</th>
+                            <th data-switchable="false" data-searchable="false" data-sortable="false" data-field="actions">{!!Lang::get('table.actions')!!}</th>
                         </tr>
                     </thead>
                 </table>
@@ -47,7 +47,7 @@
 <!-- side address column -->
 <div class="col-md-3 col-xs-12 address pull-right">
     <div class="text-center">
-        <a href="{{ route('checkout/accessory', $accessory->id) }}" style="margin-right:5px;" class="btn btn-info btn-sm" {{ (($accessory->numRemaining() > 0 ) ? '' : ' disabled') }}>@lang('general.checkout')</a>
+        <a href="{!! route('checkout/accessory', $accessory->id) !!}" style="margin-right:5px;" class="btn btn-info btn-sm" {!! (($accessory->numRemaining() > 0 ) ? '' : ' disabled') !!}>@lang('general.checkout')</a>
     </div>
 
     <br /><br />
@@ -57,12 +57,12 @@
 </div>
 
 @section('moar_scripts')
-<script src="{{ asset('assets/js/bootstrap-table.js') }}"></script>
-<script src="{{ asset('assets/js/extensions/mobile/bootstrap-table-mobile.js') }}"></script>
-<script src="{{ asset('assets/js/extensions/export/bootstrap-table-export.js?v=1') }}"></script>
-<script src="{{ asset('assets/js/extensions/cookie/bootstrap-table-cookie.js?v=1') }}"></script>
-<script src="{{ asset('assets/js/extensions/export/tableExport.js') }}"></script>
-<script src="{{ asset('assets/js/extensions/export/jquery.base64.js') }}"></script>
+<script src="{!! asset('assets/js/bootstrap-table.js') !!}"></script>
+<script src="{!! asset('assets/js/extensions/mobile/bootstrap-table-mobile.js') !!}"></script>
+<script src="{!! asset('assets/js/extensions/export/bootstrap-table-export.js?v=1') !!}"></script>
+<script src="{!! asset('assets/js/extensions/cookie/bootstrap-table-cookie.js?v=1') !!}"></script>
+<script src="{!! asset('assets/js/extensions/export/tableExport.js') !!}"></script>
+<script src="{!! asset('assets/js/extensions/export/jquery.base64.js') !!}"></script>
 <script type="text/javascript">
     $('#table').bootstrapTable({
         classes: 'table table-responsive table-no-bordered',

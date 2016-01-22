@@ -5,7 +5,7 @@
 
 <p>Please click on the following link to update your {{{ Setting::getSettings()->site_name }}} password:</p>
 
-<p><a href="{{ $forgotPasswordUrl }}">{{ $forgotPasswordUrl }}</a></p>
+<p><a href="{!! $forgotPasswordUrl !!}">{!! $forgotPasswordUrl !!}</a></p>
 
 <p>Best regards,</p>
 

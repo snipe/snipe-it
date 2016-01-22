@@ -2,13 +2,13 @@
 ?>
 @extends('backend/layouts/default')
 
-{{-- Page title --}}
+{!!-- Page title --!!}
 @section('title')
     @lang('general.unaccepted_asset_report') ::
     @parent
 @stop
 
-{{-- Page content --}}
+{!!-- Page content --!!}
 @section('content')
     <div class="page-header">
         <h3>@lang('general.unaccepted_asset_report')</h3>
@@ -38,9 +38,9 @@
                             <td>{{{ is_null($assetItem->company) ? '' : $assetItem->company->name }}}</td>
                             <td>{{{ $assetItem->model->category->name }}}</td>
                             <td>{{{ $assetItem->model->name }}}</td>
-                            <td>{{ link_to(Config::get('app.url').'/hardware/'.$assetItem->id.'/view',$assetItem->showAssetName()) }}</td>
+                            <td>{!! link_to(Config::get('app.url').'/hardware/'.$assetItem->id.'/view',$assetItem->showAssetName()) !!}</td>
                             <td>{{{ $assetItem->asset_tag }}}</td>
-                            <td>{{ link_to(Config::get('app.url').'/admin/users/'.$assetItem->assigned_to.'/view', $assetItem->assigneduser->fullName())}}</td>
+                            <td>{!! link_to(Config::get('app.url').'/admin/users/'.$assetItem->assigned_to.'/view', $assetItem->assigneduser->fullName())!!}</td>
                         </tr>
                     @endforeach
                 @endif
@@ -54,12 +54,12 @@
     </div>
 
     @section('moar_scripts')
-    <script src="{{ asset('assets/js/bootstrap-table.js') }}"></script>
-    <script src="{{ asset('assets/js/extensions/cookie/bootstrap-table-cookie.js') }}"></script>
-    <script src="{{ asset('assets/js/extensions/mobile/bootstrap-table-mobile.js') }}"></script>
-    <script src="{{ asset('assets/js/extensions/export/bootstrap-table-export.js') }}"></script>
-    <script src="{{ asset('assets/js/extensions/export/tableExport.js') }}"></script>
-    <script src="{{ asset('assets/js/extensions/export/jquery.base64.js') }}"></script>
+    <script src="{!! asset('assets/js/bootstrap-table.js') !!}"></script>
+    <script src="{!! asset('assets/js/extensions/cookie/bootstrap-table-cookie.js') !!}"></script>
+    <script src="{!! asset('assets/js/extensions/mobile/bootstrap-table-mobile.js') !!}"></script>
+    <script src="{!! asset('assets/js/extensions/export/bootstrap-table-export.js') !!}"></script>
+    <script src="{!! asset('assets/js/extensions/export/tableExport.js') !!}"></script>
+    <script src="{!! asset('assets/js/extensions/export/jquery.base64.js') !!}"></script>
     <script type="text/javascript">
         $('#table').bootstrapTable({
             classes: 'table table-responsive table-no-bordered',

@@ -1,28 +1,28 @@
 @extends('backend/layouts/default')
 
-{{-- Page title --}}
+{!!-- Page title --!!}
 @section('title')
 Bulk Edit/Delete ::
 @parent
 @stop
 
-{{-- Page content --}}
+{!!-- Page content --!!}
 @section('content')
 <div class="page-header">
     <h3>
         Bulk Process Users
 
         <div class="pull-right">
-            <a href="{{ route('users') }}" class="btn-flat gray pull-right"><i class="fa fa-arrow-circle-left icon-white"></i>  @lang('general.back')</a>
+            <a href="{!! route('users') !!}" class="btn-flat gray pull-right"><i class="fa fa-arrow-circle-left icon-white"></i>  @lang('general.back')</a>
 
         </div>
     </h3>
 </div>
 
 
-<form class="form-horizontal" role="form" method="post" action="{{ route('users/bulksave') }}">
+<form class="form-horizontal" role="form" method="post" action="{!! route('users/bulksave') !!}">
     <!-- CSRF Token -->
-    <input type="hidden" name="_token" value="{{ csrf_token() }}" />
+    <input type="hidden" name="_token" value="{!! csrf_token() !!}" />
 
     <!-- Tabs Content -->
     <div class="col-md-12 col-sm-12">
@@ -55,7 +55,7 @@ Bulk Edit/Delete ::
                                 Update all assets for these users to this status:
                             </td>
                             <td>
-                                {{ Form::select('status_id', $statuslabel_list , Input::old('status_id'), array('class'=>'select2', 'style'=>'width:350px')) }}
+                                {!! Form::select('status_id', $statuslabel_list , Input::old('status_id'), array('class'=>'select2', 'style'=>'width:350px')) !!}
                         </td>
                         </tr>
                     </tfoot>
@@ -70,10 +70,10 @@ Bulk Edit/Delete ::
                                         <input type="checkbox" name="edit_user[]" value="{{{ $user->id }}}" disabled>
                                     @endif
                                 </td>
-                                <td{{ ($user->hasAccess('admin') ? ' style="color: #b94a48; font-weight: bold"' : '') }}>
-                                    <span{{ (Sentry::getId()==$user->id ? ' style="text-decoration: line-through"' : '') }}>{{{ $user->fullName() }}}</span>
+                                <td{!! ($user->hasAccess('admin') ? ' style="color: #b94a48; font-weight: bold"' : '') !!}>
+                                    <span{!! (Sentry::getId()==$user->id ? ' style="text-decoration: line-through"' : '') !!}>{{{ $user->fullName() }}}</span>
 
-                                    {{ (Sentry::getId()==$user->id ? ' (cannot delete yourself)' : '') }}
+                                    {!! (Sentry::getId()==$user->id ? ' (cannot delete yourself)' : '') !!}
 
                                 </td>
                                 <td>
@@ -91,7 +91,7 @@ Bulk Edit/Delete ::
     <!-- Form Actions -->
     <div class="form-group">
         <div class="col-sm-offset-2 col-sm-4">
-            <a class="btn btn-link" href="{{ route('users') }}">@lang('button.cancel')</a>
+            <a class="btn btn-link" href="{!! route('users') !!}">@lang('button.cancel')</a>
             <button type="submit" class="btn btn-default">@lang('button.submit')</button>
         </div>
     </div>

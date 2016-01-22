@@ -1,17 +1,17 @@
 @extends('backend/layouts/default')
 
-{{-- Page title --}}
+{!!-- Page title --!!}
 @section('title')
      @lang('general.import') ::
 @parent
 @stop
 
-{{-- Page content --}}
+{!!-- Page content --!!}
 @section('content')
 
 <div class="row header">
     <div class="col-md-12">
-        <a href="{{ URL::previous() }}" class="btn-flat gray pull-right"><i class="fa fa-arrow-left icon-white"></i>  @lang('general.back')</a>
+        <a href="{!! URL::previous() !!}" class="btn-flat gray pull-right"><i class="fa fa-arrow-left icon-white"></i>  @lang('general.back')</a>
         <h3> @lang('general.import')</h3>
     </div>
 </div>
@@ -45,11 +45,11 @@
             </div>
         </div>
 
-        <script src="{{ asset('assets/js/jquery.ui.widget.js') }}"></script>
-        <script src="{{ asset('assets/js/jquery.iframe-transport.js') }}"></script>
-        <script src="{{ asset('assets/js/jquery.fileupload.js') }}"></script>
-        <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/lib/jquery.fileupload.css') }}">
-        <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/lib/jquery.fileupload-ui.css') }}">
+        <script src="{!! asset('assets/js/jquery.ui.widget.js') !!}"></script>
+        <script src="{!! asset('assets/js/jquery.iframe-transport.js') !!}"></script>
+        <script src="{!! asset('assets/js/jquery.fileupload.js') !!}"></script>
+        <link rel="stylesheet" type="text/css" href="{!! asset('assets/css/lib/jquery.fileupload.css') !!}">
+        <link rel="stylesheet" type="text/css" href="{!! asset('assets/css/lib/jquery.fileupload-ui.css') !!}">
 
 
             <script>
@@ -68,7 +68,7 @@
                 $('#fileupload').fileupload({
                     //maxChunkSize: 100000,
                     dataType: 'json',
-                    formData: {_token: '{{ csrf_token() }}'},
+                    formData: {_token: '{!! csrf_token() !!}'},
                     progress: function (e, data) {
                         //var overallProgress = $('#fileupload').fileupload('progress');
                         //var activeUploads = $('#fileupload').fileupload('active');
@@ -130,7 +130,7 @@
                     <i class="fa fa-spinner process"></i> Process</a>
 
                 <!-- <a data-html="false"
-                class="btn delete-asset btn-danger btn-sm {{ (Config::get('app.lock_passwords')) ? ' disabled': '' }}" data-toggle="modal" href=" {{ route('assets/import/delete-file', $file['filename']) }}" data-content="@lang('admin/settings/message.backup.delete_confirm')" data-title="{{ Lang::get('general.delete') }}  {{ htmlspecialchars($file['filename']) }} ?" onClick="return false;">
+                class="btn delete-asset btn-danger btn-sm {!! (Config::get('app.lock_passwords')) ? ' disabled': '' !!}" data-toggle="modal" href=" {!! route('assets/import/delete-file', $file['filename']) !!}" data-content="@lang('admin/settings/message.backup.delete_confirm')" data-title="{!! Lang::get('general.delete') !!}  {!! htmlspecialchars($file['filename']) !!} ?" onClick="return false;">
                     <i class="fa fa-trash icon-white"></i>
                 </a> -->
             </td>

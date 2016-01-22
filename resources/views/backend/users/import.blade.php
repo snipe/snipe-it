@@ -1,29 +1,29 @@
 @extends('backend/layouts/default')
 
-{{-- Page title --}}
+{!!-- Page title --!!}
 @section('title')
 Create a User ::
 @parent
 @stop
 
-{{-- Page content --}}
+{!!-- Page content --!!}
 @section('content')
 <div class="page-header">
     <h3>
         Import Users
 
         <div class="pull-right">
-            <a href="{{ route('users') }}" class="btn-flat gray pull-right"><i class="fa fa-arrow-circle-left icon-white"></i>  @lang('general.back')</a>
+            <a href="{!! route('users') !!}" class="btn-flat gray pull-right"><i class="fa fa-arrow-circle-left icon-white"></i>  @lang('general.back')</a>
 
         </div>
     </h3>
 </div>
 
-<script type="text/javascript" src="{{ asset('/assets/js/pGenerator.jquery.js') }}"></script>
+<script type="text/javascript" src="{!! asset('/assets/js/pGenerator.jquery.js') !!}"></script>
 
 <form class="form-horizontal" role="form" method="post" enctype="multipart/form-data" action="">
     <!-- CSRF Token -->
-    <input type="hidden" name="_token" value="{{ csrf_token() }}" />
+    <input type="hidden" name="_token" value="{!! csrf_token() !!}" />
 
     <!-- Tabs Content -->
     <div class="tab-content">
@@ -33,7 +33,7 @@ Create a User ::
 			@if (Session::get('message'))
 			<p class="alert-danger">
 				You have an error in your CSV file:<br />
-				{{ Session::get('message') }}
+				{!! Session::get('message') !!}
 			</p>
 			@endif
 
@@ -49,7 +49,7 @@ Create a User ::
                 <p>Note: Email notification for users is disabled for this installation.</p>
             @endif
 
-            <div class="form-group {{ $errors->first('user_import_csv', 'has-error') }}">
+            <div class="form-group {!! $errors->first('user_import_csv', 'has-error') !!}">
                 <label for="first_name" class="col-sm-2 control-label">@lang('admin/users/general.usercsv')</label>
 				<div class="col-sm-5">
 					<input type="file" name="user_import_csv" id="user_import_csv">
@@ -61,7 +61,7 @@ Create a User ::
 				<div class="col-sm-2 ">
 				</div>
 				<div class="col-sm-5">
-					{{ Form::checkbox('has_headers', '1', Input::old('has_headers')) }} This CSV has a header row
+					{!! Form::checkbox('has_headers', '1', Input::old('has_headers')) !!} This CSV has a header row
 				</div>
 			</div>
 
@@ -71,7 +71,7 @@ Create a User ::
 				<div class="col-sm-2 ">
 				</div>
 				<div class="col-sm-5">
-					{{ Form::checkbox('email_user', '1', Input::old('email_user')) }} Email these users their credentials? (Only possible where email address is included with user data.)
+					{!! Form::checkbox('email_user', '1', Input::old('email_user')) !!} Email these users their credentials? (Only possible where email address is included with user data.)
 				</div>
 			</div>
 
@@ -80,7 +80,7 @@ Create a User ::
 				<div class="col-sm-2 ">
 				</div>
 				<div class="col-sm-5">
-					{{ Form::checkbox('activate', '1', Input::old('activate')) }} Activate user?
+					{!! Form::checkbox('activate', '1', Input::old('activate')) !!} Activate user?
 				</div>
 			</div>
 
@@ -92,7 +92,7 @@ Create a User ::
     <!-- Form Actions -->
     <div class="form-group">
         <div class="col-sm-offset-2 col-sm-4">
-            <a class="btn btn-link" href="{{ route('users') }}">@lang('button.cancel')</a>
+            <a class="btn btn-link" href="{!! route('users') !!}">@lang('button.cancel')</a>
             <button type="submit" class="btn btn-default">@lang('button.submit')</button>
         </div>
     </div>

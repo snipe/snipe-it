@@ -113,7 +113,7 @@
             </p>
 
             <p>
-                Perhaps you would like to go to our <a href="{{ URL::route('home'); }}">home page</a>?
+                Perhaps you would like to go to our <a href="{!! URL::route('home'); !!}">home page</a>?
             </p>
         </div>
     </div>

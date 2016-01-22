@@ -3,13 +3,13 @@ use Carbon\Carbon;
 ?>
 @extends('backend/layouts/default')
 
-{{-- Page title --}}
+{!!-- Page title --!!}
 @section('title')
-    @lang('admin/asset_maintenances/general.view') {{ $assetMaintenance->title }} ::
+    @lang('admin/asset_maintenances/general.view') {!! $assetMaintenance->title !!} ::
     @parent
 @stop
 
-{{-- Page content --}}
+{!!-- Page content --!!}
 @section('content')
     <div class="row header">
         <div class="col-md-12">
@@ -25,7 +25,7 @@ use Carbon\Carbon;
                         <span class="caret"></span>
                     </button>
                     <ul class="dropdown-menu pull-right" role="menu" aria-labelledby="dropdownMenu1">
-                        <li role="presentation"><a href="{{ route('update/asset_maintenance', $assetMaintenance->id) }}">@lang('admin/asset_maintenances/general.edit')</a></li>
+                        <li role="presentation"><a href="{!! route('update/asset_maintenance', $assetMaintenance->id) !!}">@lang('admin/asset_maintenances/general.edit')</a></li>
                     </ul>
                 </div>
             </div>
@@ -47,13 +47,13 @@ use Carbon\Carbon;
                 <div class="row">
                     <div class="col-md-3 col-sm-3" style="padding-bottom: 10px; margin-left: 15px; word-wrap: break-word;">
                         <strong>@lang('admin/asset_maintenances/table.asset_name'): </strong>
-                        <a href="{{ route('view/hardware', $assetMaintenance->asset_id) }}">
+                        <a href="{!! route('view/hardware', $assetMaintenance->asset_id) !!}">
                             {{{ $assetMaintenance->asset->name }}}
                         </a>
                     </div>
                     <div class="col-md-3 col-sm-3" style="padding-bottom: 10px; margin-left: 15px; word-wrap: break-word;">
                         <strong>@lang('admin/asset_maintenances/table.supplier_name'): </strong>
-                        <a href="{{ route('view/supplier', $assetMaintenance->supplier_id) }}">
+                        <a href="{!! route('view/supplier', $assetMaintenance->supplier_id) !!}">
                             {{{ $assetMaintenance->supplier->name }}}
                         </a>
                     </div>
@@ -68,12 +68,12 @@ use Carbon\Carbon;
                     </div>
                     <div class="col-md-3 col-sm-3" style="padding-bottom: 10px; margin-left: 15px; word-wrap: break-word;">
                         <strong>@lang('admin/asset_maintenances/form.completion_date'): </strong>
-			{{ $completionDate = $assetMaintenance->completion_date }}
+			{!! $completionDate = $assetMaintenance->completion_date !!}
                         {{{ $completionDate ? $completionDate : Lang::get('admin/asset_maintenances/message.asset_maintenance_incomplete') }}}
                     </div>
                     <div class="col-md-3 col-sm-3" style="padding-bottom: 10px; margin-left: 15px; word-wrap: break-word;">
                         <strong>@lang('admin/asset_maintenances/form.asset_maintenance_time'): </strong>
-                        {{ $assetMaintenance->asset_maintenance_time }}
+                        {!! $assetMaintenance->asset_maintenance_time !!}
                     </div>
                 </div>
                 <!-- 3rd Row End -->
