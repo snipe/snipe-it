@@ -33,7 +33,7 @@ App::after(function ($request, $response) {
 
 Route::filter('auth', function () {
     // Check if the user is logged in
-    if ( ! Sentry::check()) {
+    if (! Sentry::check()) {
         // Store the current uri in the session
         Session::put('loginRedirect', Request::url());
 
@@ -59,7 +59,9 @@ Route::filter('auth.basic', function () {
 */
 
 Route::filter('guest', function () {
-    if (Auth::check()) return Redirect::to('/');
+    if (Auth::check()) {
+        return Redirect::to('/');
+    }
 });
 
 /*
@@ -74,7 +76,7 @@ Route::filter('guest', function () {
 
 Route::filter('admin-auth', function () {
      // Check if the user is logged in
-    if ( ! Sentry::check()) {
+    if (! Sentry::check()) {
         // Store the current uri in the session
         Session::put('loginRedirect', Request::url());
 
@@ -83,7 +85,7 @@ Route::filter('admin-auth', function () {
     }
 
     // Check if the user has access to the admin pages
-    if ( ! Sentry::getUser()->hasAccess('admin')) {
+    if (! Sentry::getUser()->hasAccess('admin')) {
         // Show the insufficient permissions page
         return Redirect::route('view-assets');
     }
@@ -101,7 +103,7 @@ Route::filter('admin-auth', function () {
 
 Route::filter('reporting-auth', function () {
      // Check if the user is logged in
-    if ( ! Sentry::check()) {
+    if (! Sentry::check()) {
         // Store the current uri in the session
         Session::put('loginRedirect', Request::url());
 
@@ -110,9 +112,9 @@ Route::filter('reporting-auth', function () {
     }
 
     // Check if the user has access to the admin pages
-    if ( ! Sentry::getUser()->hasAccess('reports')) {
+    if (! Sentry::getUser()->hasAccess('reports')) {
         // Show the insufficient permissions page
-        return Redirect::route('profile')->with("error","You do not have permission to view this page.");
+        return Redirect::route('profile')->with("error", "You do not have permission to view this page.");
     }
 });
 

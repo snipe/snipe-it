@@ -23,5 +23,4 @@ class UnitTester extends \Codeception\Actor
    /**
     * Define custom actions here
     */
-
 }

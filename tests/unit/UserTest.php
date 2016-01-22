@@ -1,5 +1,6 @@
 <?php
-class UserTest extends TestCase {
+class UserTest extends TestCase
+{
 
     /**
      * Username is required
@@ -31,8 +32,4 @@ class UserTest extends TestCase {
       $this->assertEquals($errors[0], "The username field is required.");
     }
     */
-
-
-
-
 }
