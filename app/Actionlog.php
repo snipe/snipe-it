@@ -3,6 +3,9 @@
     use Illuminate\Database\Eloquent\SoftDeletes;
     use Illuminate\Support\Facades\DB;
     use Illuminate\Support\Facades\Log;
+namespace App;
+
+use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Eloquent\Model;
 
 class Actionlog extends Model implements ICompanyableChild

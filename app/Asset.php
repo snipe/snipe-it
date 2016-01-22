@@ -1,5 +1,12 @@
 <?php
 
+namespace App;
+
+use Illuminate\Support\Facades\Config;
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\DB;
+
+
 class Asset extends Depreciable
 {
     use SoftDeletes;

@@ -1,5 +1,10 @@
 <?php
 
+namespace App;
+
+
+
+
 class ConsumableAssignment extends Elegant
 {
     use CompanyableTrait;

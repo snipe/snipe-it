@@ -1,4 +1,9 @@
 <?php
+
+namespace App;
+
+
+
 class Supplier extends Elegant
 {
     use SoftDeletes;

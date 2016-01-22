@@ -1,5 +1,10 @@
 <?php
 
+namespace App;
+
+
+
+
 class LicenseSeat extends Elegant implements ICompanyableChild
 {
     use CompanyableChildTrait;

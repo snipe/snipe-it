@@ -1,5 +1,12 @@
 <?php
 
+namespace App\Console\Commands;
+
+use App\Asset;
+use Illuminate\Support\Facades\Config;
+use App\License;
+use App\Setting;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Console\Command;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Input\InputArgument;

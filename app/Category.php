@@ -1,5 +1,10 @@
 <?php
 
+namespace App;
+
+
+
+
 class Category extends Elegant
 {
     use SoftDeletes;

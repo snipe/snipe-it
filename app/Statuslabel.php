@@ -1,5 +1,10 @@
 <?php
 
+namespace App;
+
+
+
+
 class Statuslabel extends Elegant
 {
     use SoftDeletes;

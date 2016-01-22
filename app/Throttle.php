@@ -1,4 +1,9 @@
 <?php
+
+namespace App;
+
+
+
 class Throttle extends Elegant
 {
     

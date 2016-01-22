@@ -1,5 +1,10 @@
 <?php
 
+namespace App;
+
+use Illuminate\Support\Facades\DB;
+
+
 class License extends Depreciable
 {
     use SoftDeletes;

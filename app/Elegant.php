@@ -1,6 +1,9 @@
 <?php
 
 //use Eloquent;
+namespace App;
+
+use Illuminate\Support\Facades\Validator;
 use Illuminate\Database\Eloquent\Model as Eloquent;
 use Illuminate\Database\Eloquent\Model;
 

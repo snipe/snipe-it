@@ -1,5 +1,10 @@
 <?php
 
+namespace App;
+
+
+
+
 class Depreciation extends Elegant
 {
     // Declare the rules for the form validation

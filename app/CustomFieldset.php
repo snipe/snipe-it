@@ -1,4 +1,9 @@
 <?php
+
+namespace App;
+
+
+
 class CustomFieldset extends Elegant
 {
     protected $guarded=["id"];

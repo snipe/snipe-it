@@ -1,9 +1,16 @@
 <?php
 
+namespace App\Console\Commands;
+
+use League\Csv\Reader;
+use App\User;
+use Cartalyst\Sentry\Facades\Laravel\Sentry;
+use App\Supplier;
+use App\License;
+use App\LicenseSeat;
 use Illuminate\Console\Command;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Input\InputArgument;
-use League\Csv\Reader;
 
 class LicenseImportCommand extends Command
 {

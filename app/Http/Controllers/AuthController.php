@@ -1,5 +1,21 @@
 <?php
 
+namespace App\Http\Controllers;
+
+use Cartalyst\Sentry\Facades\Laravel\Sentry;
+use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\View;
+use App\Setting;
+use Illuminate\Support\Facades\Crypt;
+use Illuminate\Support\Facades\Input;
+use Illuminate\Support\Facades\Validator;
+use App\User;
+use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Lang;
+use Illuminate\Support\Facades\URL;
+use Illuminate\Support\Facades\Mail;
+
+
 class AuthController extends Controller
 {
     /**

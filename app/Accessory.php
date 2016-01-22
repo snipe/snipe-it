@@ -1,5 +1,10 @@
 <?php
 
+namespace App;
+
+
+
+
 class Accessory extends Elegant
 {
     use SoftDeletes;

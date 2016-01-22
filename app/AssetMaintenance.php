@@ -1,5 +1,10 @@
 <?php
 
+namespace App;
+
+use Illuminate\Support\Facades\Lang;
+
+
     use Illuminate\Database\Eloquent\SoftDeletes;
     use Illuminate\Support\Facades\Lang;
 

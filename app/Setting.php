@@ -1,5 +1,10 @@
 <?php
 
+namespace App;
+
+
+
+
 class Setting extends Elegant
 {
     public static function getSettings()

@@ -1,5 +1,10 @@
 <?php
 
+namespace App;
+
+
+
+
 class Depreciable extends Elegant
 {
     /**

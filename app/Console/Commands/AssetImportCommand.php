@@ -1,9 +1,20 @@
 <?php
 
+namespace App\Console\Commands;
+
+use League\Csv\Reader;
+use App\User;
+use Illuminate\Support\Facades\Config;
+use Cartalyst\Sentry\Facades\Laravel\Sentry;
+use App\Location;
+use App\Category;
+use App\Manufacturer;
+use App\Model;
+use App\Company;
+use App\Asset;
 use Illuminate\Console\Command;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Input\InputArgument;
-use League\Csv\Reader;
 
 class AssetImportCommand extends Command
 {

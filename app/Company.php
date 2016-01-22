@@ -1,5 +1,12 @@
 <?php
 
+namespace App;
+
+use Cartalyst\Sentry\Facades\Laravel\Sentry;
+use Illuminate\Support\Facades\Lang;
+use Illuminate\Support\Facades\DB;
+
+
 final class Company extends Elegant
 {
     protected $table = 'companies';

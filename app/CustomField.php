@@ -1,5 +1,11 @@
 <?php
 
+namespace App;
+
+use Illuminate\Support\Facades\Schema;
+use Illuminate\Support\Facades\DB;
+
+
 class CustomField extends Elegant
 {
     public $guarded=["id"];

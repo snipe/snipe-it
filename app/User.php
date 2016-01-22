@@ -1,5 +1,8 @@
 <?php
 
+namespace App;
+
+use Illuminate\Support\Facades\Config;
 use Cartalyst\Sentry\Users\Eloquent\User as SentryUserModel;
 
 class User extends SentryUserModel
