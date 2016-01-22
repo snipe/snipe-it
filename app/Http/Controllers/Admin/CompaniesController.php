@@ -25,65 +25,47 @@ final class CompaniesController extends AdminController
     {
         $company = new Company;
 
-        if ($company->validate(Input::all()))
-        {
+        if ($company->validate(Input::all())) {
             $company->name = e(Input::get('name'));
 
-            if($company->save())
-            {
+            if ($company->save()) {
                 return Redirect::to('admin/settings/companies')
                     ->with('success', Lang::get('admin/companies/message.create.success'));
-            }
-            else
-            {
+            } else {
                 return Redirect::to('admin/settings/companies/create')
                     ->with('error', Lang::get('admin/companies/message.create.error'));
             }
-        }
-        else
-        {
+        } else {
             return Redirect::back()->withInput()->withErrors($company->errors());
         }
     }
 
     public function getEdit($companyId)
     {
-        if (is_null($company = Company::find($companyId)))
-        {
+        if (is_null($company = Company::find($companyId))) {
             return Redirect::to('admin/settings/companies')
                 ->with('error', Lang::get('admin/companies/message.does_not_exist'));
-        }
-        else
-        {
+        } else {
             return View::make('backend/companies/edit')->with('company', $company);
         }
     }
 
     public function postEdit($companyId)
     {
-        if (is_null($company = Company::find($companyId)))
-        {
+        if (is_null($company = Company::find($companyId))) {
             return Redirect::to('admin/settings/companies')->with('error', Lang::get('admin/companies/message.does_not_exist'));
-        }
-        else
-        {
+        } else {
             $validator = Validator::make(Input::all(), $company->validationRules($companyId));
 
-            if ($validator->fails())
-            {
+            if ($validator->fails()) {
                 return Redirect::back()->withInput()->withErrors($validator->messages());
-            }
-            else
-            {
+            } else {
                 $company->name = e(Input::get('name'));
 
-                if($company->save())
-                {
+                if ($company->save()) {
                     return Redirect::to('admin/settings/companies')
                         ->with('success', Lang::get('admin/companies/message.update.success'));
-                }
-                else
-                {
+                } else {
                     return Redirect::to("admin/settings/companies/$companyId/edit")
                         ->with('error', Lang::get('admin/companies/message.update.error'));
                 }
@@ -93,32 +75,23 @@ final class CompaniesController extends AdminController
 
     public function postDelete($companyId)
     {
-        if (is_null($company = Company::find($companyId)))
-        {
+        if (is_null($company = Company::find($companyId))) {
             return Redirect::to('admin/settings/companies')
                 ->with('error', Lang::get('admin/companies/message.not_found'));
-        }
-        else
-        {
-            try
-            {
+        } else {
+            try {
                 $company->delete();
                 return Redirect::to('admin/settings/companies')
                     ->with('success', Lang::get('admin/companies/message.delete.success'));
-            }
-            catch (\Illuminate\Database\QueryException $exception)
-            {
-                /*
+            } catch (\Illuminate\Database\QueryException $exception) {
+            /*
                  * NOTE: This happens when there's a foreign key constraint violation
                  * For example when rows in other tables are referencing this company
                  */
-                if ($exception->getCode() == 23000)
-                {
+                if ($exception->getCode() == 23000) {
                     return Redirect::to('admin/settings/companies')
                         ->with('error', Lang::get('admin/companies/message.assoc_users'));
-                }
-                else
-                {
+                } else {
                     throw $exception;
                 }
             }

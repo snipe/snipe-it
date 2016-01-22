@@ -59,7 +59,7 @@ class ManufacturersController extends AdminController
             $manufacturer->user_id          = Sentry::getId();
 
             // Was it created?
-            if($manufacturer->save()) {
+            if ($manufacturer->save()) {
                 // Redirect to the new manufacturer  page
                 return Redirect::to("admin/settings/manufacturers")->with('success', Lang::get('admin/manufacturers/message.create.success'));
             }
@@ -109,18 +109,16 @@ class ManufacturersController extends AdminController
 
         $validator = Validator::make(Input::all(), $manufacturer->validationRules($manufacturerId));
 
-        if ($validator->fails())
-        {
-            // The given data did not pass validation
+        if ($validator->fails()) {
+        // The given data did not pass validation
             return Redirect::back()->withInput()->withErrors($validator->messages());
-        }
-        // attempt validation
+        } // attempt validation
         else {
             // Save the  data
-            $manufacturer->name 	= e(Input::get('name'));
+            $manufacturer->name     = e(Input::get('name'));
 
             // Was it created?
-            if($manufacturer->save()) {
+            if ($manufacturer->save()) {
                 // Redirect to the new manufacturer page
                 return Redirect::to("admin/settings/manufacturers")->with('success', Lang::get('admin/manufacturers/message.update.success'));
             }
@@ -155,7 +153,7 @@ class ManufacturersController extends AdminController
             $manufacturer->delete();
 
             // Redirect to the manufacturers management page
-        return Redirect::to('admin/settings/manufacturers')->with('success', Lang::get('admin/manufacturers/message.delete.success'));
+            return Redirect::to('admin/settings/manufacturers')->with('success', Lang::get('admin/manufacturers/message.delete.success'));
         }
 
 
@@ -222,7 +220,7 @@ class ManufacturersController extends AdminController
 
         $rows = array();
 
-        foreach($manufacturers as $manufacturer) {
+        foreach ($manufacturers as $manufacturer) {
             $actions = '<a href="'.route('update/manufacturer', $manufacturer->id).'" class="btn btn-warning btn-sm" style="margin-right:5px;"><i class="fa fa-pencil icon-white"></i></a><a data-html="false" class="btn delete-asset btn-danger btn-sm" data-toggle="modal" href="'.route('delete/manufacturer', $manufacturer->id).'" data-content="'.Lang::get('admin/manufacturers/message.delete.confirm').'" data-title="'.Lang::get('general.delete').' '.htmlspecialchars($manufacturer->name).'?" onClick="return false;"><i class="fa fa-trash icon-white"></i></a>';
 
             $rows[] = array(
@@ -241,73 +239,74 @@ class ManufacturersController extends AdminController
 
 
 
-    public function getDataView($manufacturerID) {
+    public function getDataView($manufacturerID)
+    {
 
-      $manufacturer = Manufacturer::with('assets.company')->find($manufacturerID);
-      $manufacturer_assets = $manufacturer->assets;
+        $manufacturer = Manufacturer::with('assets.company')->find($manufacturerID);
+        $manufacturer_assets = $manufacturer->assets;
 
-      if (Input::has('search')) {
-          $manufacturer_assets = $manufacturer_assets->TextSearch(e(Input::get('search')));
-      }
-
-      if (Input::has('offset')) {
-          $offset = e(Input::get('offset'));
-      } else {
-          $offset = 0;
-      }
-
-      if (Input::has('limit')) {
-          $limit = e(Input::get('limit'));
-      } else {
-          $limit = 50;
-      }
-
-      $order = Input::get('order') === 'asc' ? 'asc' : 'desc';
-
-      $allowed_columns = ['id','name','serial','asset_tag'];
-      $sort = in_array(Input::get('sort'), $allowed_columns) ? Input::get('sort') : 'created_at';
-      $count = $manufacturer_assets->count();
-
-      $rows = array();
-
-      foreach ($manufacturer_assets as $asset) {
-
-        $actions = '';
-        if ($asset->deleted_at=='') {
-            $actions = '<div style=" white-space: nowrap;"><a href="'.route('clone/hardware', $asset->id).'" class="btn btn-info btn-sm" title="Clone asset"><i class="fa fa-files-o"></i></a> <a href="'.route('update/hardware', $asset->id).'" class="btn btn-warning btn-sm"><i class="fa fa-pencil icon-white"></i></a> <a data-html="false" class="btn delete-asset btn-danger btn-sm" data-toggle="modal" href="'.route('delete/hardware', $asset->id).'" data-content="'.Lang::get('admin/hardware/message.delete.confirm').'" data-title="'.Lang::get('general.delete').' '.htmlspecialchars($asset->asset_tag).'?" onClick="return false;"><i class="fa fa-trash icon-white"></i></a></div>';
-        } elseif ($asset->deleted_at!='') {
-            $actions = '<a href="'.route('restore/hardware', $asset->id).'" class="btn btn-warning btn-sm"><i class="fa fa-recycle icon-white"></i></a>';
+        if (Input::has('search')) {
+            $manufacturer_assets = $manufacturer_assets->TextSearch(e(Input::get('search')));
         }
 
-        if ($asset->assetstatus) {
-            if ($asset->assetstatus->deployable != 0) {
-                if (($asset->assigned_to !='') && ($asset->assigned_to > 0)) {
-                    $inout = '<a href="'.route('checkin/hardware', $asset->id).'" class="btn btn-primary btn-sm">'.Lang::get('general.checkin').'</a>';
-                } else {
-                    $inout = '<a href="'.route('checkout/hardware', $asset->id).'" class="btn btn-info btn-sm">'.Lang::get('general.checkout').'</a>';
+        if (Input::has('offset')) {
+            $offset = e(Input::get('offset'));
+        } else {
+            $offset = 0;
+        }
+
+        if (Input::has('limit')) {
+            $limit = e(Input::get('limit'));
+        } else {
+            $limit = 50;
+        }
+
+        $order = Input::get('order') === 'asc' ? 'asc' : 'desc';
+
+        $allowed_columns = ['id','name','serial','asset_tag'];
+        $sort = in_array(Input::get('sort'), $allowed_columns) ? Input::get('sort') : 'created_at';
+        $count = $manufacturer_assets->count();
+
+        $rows = array();
+
+        foreach ($manufacturer_assets as $asset) {
+
+            $actions = '';
+            if ($asset->deleted_at=='') {
+                $actions = '<div style=" white-space: nowrap;"><a href="'.route('clone/hardware', $asset->id).'" class="btn btn-info btn-sm" title="Clone asset"><i class="fa fa-files-o"></i></a> <a href="'.route('update/hardware', $asset->id).'" class="btn btn-warning btn-sm"><i class="fa fa-pencil icon-white"></i></a> <a data-html="false" class="btn delete-asset btn-danger btn-sm" data-toggle="modal" href="'.route('delete/hardware', $asset->id).'" data-content="'.Lang::get('admin/hardware/message.delete.confirm').'" data-title="'.Lang::get('general.delete').' '.htmlspecialchars($asset->asset_tag).'?" onClick="return false;"><i class="fa fa-trash icon-white"></i></a></div>';
+            } elseif ($asset->deleted_at!='') {
+                $actions = '<a href="'.route('restore/hardware', $asset->id).'" class="btn btn-warning btn-sm"><i class="fa fa-recycle icon-white"></i></a>';
+            }
+
+            if ($asset->assetstatus) {
+                if ($asset->assetstatus->deployable != 0) {
+                    if (($asset->assigned_to !='') && ($asset->assigned_to > 0)) {
+                        $inout = '<a href="'.route('checkin/hardware', $asset->id).'" class="btn btn-primary btn-sm">'.Lang::get('general.checkin').'</a>';
+                    } else {
+                        $inout = '<a href="'.route('checkout/hardware', $asset->id).'" class="btn btn-info btn-sm">'.Lang::get('general.checkout').'</a>';
+                    }
                 }
             }
+
+            $row = array(
+            'id' => $asset->id,
+            'name' => link_to('/hardware/'.$asset->id.'/view', $asset->showAssetName()),
+            'model' => $asset->model->name,
+            'asset_tag' => $asset->asset_tag,
+            'serial' => $asset->serial,
+            'assigned_to' => ($asset->assigneduser) ? link_to('/admin/users/'.$asset->assigneduser->id.'/view', $asset->assigneduser->fullName()): '',
+            'actions' => $actions,
+            'companyName' => Company::getName($asset),
+            );
+
+            if (isset($inout)) {
+                $row['change'] = $inout;
+            }
+
+            $rows[] = $row;
         }
 
-        $row = array(
-          'id' => $asset->id,
-          'name' => link_to('/hardware/'.$asset->id.'/view', $asset->showAssetName()),
-          'model' => $asset->model->name,
-          'asset_tag' => $asset->asset_tag,
-          'serial' => $asset->serial,
-          'assigned_to' => ($asset->assigneduser) ? link_to('/admin/users/'.$asset->assigneduser->id.'/view', $asset->assigneduser->fullName()): '',
-          'actions' => $actions,
-          'companyName' => Company::getName($asset),
-        );
-
-        if (isset($inout)) { $row['change'] = $inout; }
-
-        $rows[] = $row;
-      }
-
-      $data = array('total' => $count, 'rows' => $rows);
-      return $data;
+        $data = array('total' => $count, 'rows' => $rows);
+        return $data;
     }
-
-
 }

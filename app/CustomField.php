@@ -2,62 +2,62 @@
 
 class CustomField extends Elegant
 {
-  public $guarded=["id"];
-  public static $PredefinedFormats=[
+    public $guarded=["id"];
+    public static $PredefinedFormats=[
     "ANY" => "",
     "ALPHA" => "[a-zA-Z]*",
     "NUMERIC" => "[0-9]*",
     "MAC" => "[a-fA-F0-9]{2}:[a-fA-F0-9]{2}:[a-fA-F0-9]{2}:[a-fA-F0-9]{2}:[a-fA-F0-9]{2}:[a-fA-F0-9]{2}",
     "IP" => "([01]?\\d\\d?|2[0-4]\\d|25[0-5])\\.([01]?\\d\\d?|2[0-4]\\d|25[0-5])\\.([01]?\\d\\d?|2[0-4]\\d|25[0-5])\\.([01]?\\d\\d?|2[0-4]\\d|25[0-5])"
-  ];
+    ];
 
-  public $rules=[
+    public $rules=[
     "name" => "required|unique:custom_fields"
-  ];
+    ];
 
-  public static $table_name="assets";
+    public static $table_name="assets";
 
-  public static function name_to_db_name($name)
-  {
-    return "_snipeit_".preg_replace("/[^a-zA-Z0-9]/","_",strtolower($name));
-  }
+    public static function name_to_db_name($name)
+    {
+        return "_snipeit_".preg_replace("/[^a-zA-Z0-9]/", "_", strtolower($name));
+    }
 
-  public static function boot()
-  {
-    self::creating(function ($custom_field) {
+    public static function boot()
+    {
+        self::creating(function ($custom_field) {
 
-      if(in_array($custom_field->db_column_name(),Schema::getColumnListing(DB::getTablePrefix().CustomField::$table_name))) {
-        //field already exists when making a new custom field; fail.
-        return false;
-      }
-      return DB::statement("ALTER TABLE ".DB::getTablePrefix().CustomField::$table_name." ADD COLUMN (".$custom_field->db_column_name()." TEXT)");
-    });
+            if (in_array($custom_field->db_column_name(), Schema::getColumnListing(DB::getTablePrefix().CustomField::$table_name))) {
+              //field already exists when making a new custom field; fail.
+                return false;
+            }
+            return DB::statement("ALTER TABLE ".DB::getTablePrefix().CustomField::$table_name." ADD COLUMN (".$custom_field->db_column_name()." TEXT)");
+        });
 
-    self::updating(function ($custom_field) {
-      //print("    SAVING CALLBACK FIRING!!!!!    ");
-      if($custom_field->isDirty("name")) {
-        //print("DIRTINESS DETECTED!");
-        //$fields=array_keys($custom_field->getAttributes());
-        //;
-        //add timestamp fields, add id column
-        //array_push($fields,$custom_field->getKeyName());
-        /*if($custom_field::timestamps) {
+        self::updating(function ($custom_field) {
+          //print("    SAVING CALLBACK FIRING!!!!!    ");
+            if ($custom_field->isDirty("name")) {
+              //print("DIRTINESS DETECTED!");
+              //$fields=array_keys($custom_field->getAttributes());
+              //;
+              //add timestamp fields, add id column
+              //array_push($fields,$custom_field->getKeyName());
+              /*if($custom_field::timestamps) {
 
-        }*/
-        //print("Fields are: ".print_r($fields,true));
-        if(in_array($custom_field->db_column_name(),Schema::getColumnListing(CustomField::$table_name))) {
-          //field already exists when renaming a custom field
-          return false;
-        }
-        return DB::statement("UPDATE ".CustomField::$table_name." RENAME ".self::name_to_db_name($custom_field->get_original("name"))." TO ".$custom_field->db_column_name());
-      }
-      return true;
-    });
+              }*/
+              //print("Fields are: ".print_r($fields,true));
+                if (in_array($custom_field->db_column_name(), Schema::getColumnListing(CustomField::$table_name))) {
+                  //field already exists when renaming a custom field
+                    return false;
+                }
+                return DB::statement("UPDATE ".CustomField::$table_name." RENAME ".self::name_to_db_name($custom_field->get_original("name"))." TO ".$custom_field->db_column_name());
+            }
+            return true;
+        });
 
-    self::deleting(function ($custom_field) {
-      return DB::statement("ALTER TABLE ".CustomField::$table_name." DROP COLUMN ".$custom_field->db_column_name());
-    });
-  }
+        self::deleting(function ($custom_field) {
+            return DB::statement("ALTER TABLE ".CustomField::$table_name." DROP COLUMN ".$custom_field->db_column_name());
+        });
+    }
 
   /*public static function boot() {
     parent::boot();
@@ -68,13 +68,15 @@ class CustomField extends Elegant
     });
   }*/
 
-  public function fieldset() {
-    return $this->belongsToMany('CustomFieldset'); //?!?!?!?!?!?
-  }
+    public function fieldset()
+    {
+        return $this->belongsToMany('CustomFieldset'); //?!?!?!?!?!?
+    }
   
-  public function user() {
-    return $this->belongsTo('User');
-  }
+    public function user()
+    {
+        return $this->belongsTo('User');
+    }
 
   //public function
 
@@ -83,29 +85,33 @@ class CustomField extends Elegant
 
   //need helper for save() stuff - basically to alter table for the fields in question
 
-  public function check_format($value) {
-    return preg_match('/^'.$this->attributes['format'].'$/',$value)===1;
-  }
+    public function check_format($value)
+    {
+        return preg_match('/^'.$this->attributes['format'].'$/', $value)===1;
+    }
 
-  public function db_column_name() {
-    return self::name_to_db_name($this->name);
-  }
+    public function db_column_name()
+    {
+        return self::name_to_db_name($this->name);
+    }
 
   //mutators for 'format' attribute
-  public function getFormatAttribute($value) {
-    foreach(self::$PredefinedFormats AS $name => $pattern) {
-      if($pattern===$value) {
-        return $name;
-      }
+    public function getFormatAttribute($value)
+    {
+        foreach (self::$PredefinedFormats as $name => $pattern) {
+            if ($pattern===$value) {
+                return $name;
+            }
+        }
+        return $value;
     }
-    return $value;
-  }
 
-  public function setFormatAttribute($value) {
-    if(isset(self::$PredefinedFormats[$value])) {
-      $this->attributes['format']=self::$PredefinedFormats[$value];
-    } else {
-      $this->attributes['format']=$value;
+    public function setFormatAttribute($value)
+    {
+        if (isset(self::$PredefinedFormats[$value])) {
+            $this->attributes['format']=self::$PredefinedFormats[$value];
+        } else {
+            $this->attributes['format']=$value;
+        }
     }
-  }
 }

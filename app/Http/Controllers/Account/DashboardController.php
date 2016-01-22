@@ -15,5 +15,4 @@ class DashboardController extends AuthorizedController
         // Redirect to the profile page
         return Redirect::route('profile');
     }
-
 }

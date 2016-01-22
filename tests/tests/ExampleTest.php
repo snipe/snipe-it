@@ -7,10 +7,8 @@ class ExampleTest extends TestCase
      *
      * @return void
      */
-     public function testSomethingIsTrue()
+    public function testSomethingIsTrue()
     {
         $this->assertTrue(true);
     }
-
-
 }

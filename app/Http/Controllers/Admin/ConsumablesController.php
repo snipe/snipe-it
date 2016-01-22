@@ -41,7 +41,7 @@ class ConsumablesController extends AdminController
     public function getCreate()
     {
         // Show the page
-        $category_list = array('' => '') + DB::table('categories')->where('category_type','=','consumable')->whereNull('deleted_at')->orderBy('name','ASC')->lists('name', 'id');
+        $category_list = array('' => '') + DB::table('categories')->where('category_type', '=', 'consumable')->whereNull('deleted_at')->orderBy('name', 'ASC')->lists('name', 'id');
         $company_list = Company::getSelectList();
         $location_list = locationsList();
 
@@ -66,12 +66,10 @@ class ConsumablesController extends AdminController
 
         $validator = Validator::make(Input::all(), $consumable->rules);
 
-        if ($validator->fails())
-        {
-            // The given data did not pass validation
+        if ($validator->fails()) {
+        // The given data did not pass validation
             return Redirect::back()->withInput()->withErrors($validator->messages());
-        }
-        else{
+        } else {
 
             // Update the consumable data
             $consumable->name                   = e(Input::get('name'));
@@ -81,13 +79,13 @@ class ConsumablesController extends AdminController
             $consumable->order_number           = e(Input::get('order_number'));
 
             if (e(Input::get('purchase_date')) == '') {
-                $consumable->purchase_date       =  NULL;
+                $consumable->purchase_date       =  null;
             } else {
                 $consumable->purchase_date       = e(Input::get('purchase_date'));
             }
 
             if (e(Input::get('purchase_cost')) == '0.00') {
-                $consumable->purchase_cost       =  NULL;
+                $consumable->purchase_cost       =  null;
             } else {
                 $consumable->purchase_cost       = ParseFloat(e(Input::get('purchase_cost')));
             }
@@ -96,7 +94,7 @@ class ConsumablesController extends AdminController
             $consumable->user_id                = Sentry::getId();
 
             // Was the consumable created?
-            if($consumable->save()) {
+            if ($consumable->save()) {
                 // Redirect to the new consumable  page
                 return Redirect::to("admin/consumables")->with('success', Lang::get('admin/consumables/message.create.success'));
             }
@@ -120,12 +118,11 @@ class ConsumablesController extends AdminController
         if (is_null($consumable = Consumable::find($consumableId))) {
             // Redirect to the blogs management page
             return Redirect::to('admin/consumables')->with('error', Lang::get('admin/consumables/message.does_not_exist'));
-        }
-        else if (!Company::isCurrentUserHasAccess($consumable)) {
+        } elseif (!Company::isCurrentUserHasAccess($consumable)) {
             return Redirect::to('admin/consumables')->with('error', Lang::get('general.insufficient_permissions'));
         }
 
-		$category_list = array('' => '') + DB::table('categories')->where('category_type','=','consumable')->whereNull('deleted_at')->orderBy('name','ASC')->lists('name', 'id');
+        $category_list = array('' => '') + DB::table('categories')->where('category_type', '=', 'consumable')->whereNull('deleted_at')->orderBy('name', 'ASC')->lists('name', 'id');
         $company_list = Company::getSelectList();
         $location_list = locationsList();
 
@@ -148,8 +145,7 @@ class ConsumablesController extends AdminController
         if (is_null($consumable = Consumable::find($consumableId))) {
             // Redirect to the blogs management page
             return Redirect::to('admin/consumables')->with('error', Lang::get('admin/consumables/message.does_not_exist'));
-        }
-        else if (!Company::isCurrentUserHasAccess($consumable)) {
+        } elseif (!Company::isCurrentUserHasAccess($consumable)) {
             return Redirect::to('admin/consumables')->with('error', Lang::get('general.insufficient_permissions'));
         }
 
@@ -161,12 +157,10 @@ class ConsumablesController extends AdminController
         $validator = Validator::make(Input::all(), $consumable->validationRules($consumableId));
 
 
-        if ($validator->fails())
-        {
-            // The given data did not pass validation
+        if ($validator->fails()) {
+        // The given data did not pass validation
             return Redirect::back()->withInput()->withErrors($validator->messages());
-        }
-        // attempt validation
+        } // attempt validation
         else {
 
             // Update the consumable data
@@ -177,13 +171,13 @@ class ConsumablesController extends AdminController
             $consumable->order_number           = e(Input::get('order_number'));
 
             if (e(Input::get('purchase_date')) == '') {
-                $consumable->purchase_date       =  NULL;
+                $consumable->purchase_date       =  null;
             } else {
                 $consumable->purchase_date       = e(Input::get('purchase_date'));
             }
 
             if (e(Input::get('purchase_cost')) == '0.00') {
-                $consumable->purchase_cost       =  NULL;
+                $consumable->purchase_cost       =  null;
             } else {
                 $consumable->purchase_cost       = ParseFloat(e(Input::get('purchase_cost')));
             }
@@ -191,7 +185,7 @@ class ConsumablesController extends AdminController
             $consumable->qty                    = e(Input::get('qty'));
 
             // Was the consumable created?
-            if($consumable->save()) {
+            if ($consumable->save()) {
                 // Redirect to the new consumable page
                 return Redirect::to("admin/consumables")->with('success', Lang::get('admin/consumables/message.update.success'));
             }
@@ -214,12 +208,11 @@ class ConsumablesController extends AdminController
         if (is_null($consumable = Consumable::find($consumableId))) {
             // Redirect to the blogs management page
             return Redirect::to('admin/consumables')->with('error', Lang::get('admin/consumables/message.not_found'));
-        }
-        else if (!Company::isCurrentUserHasAccess($consumable)) {
+        } elseif (!Company::isCurrentUserHasAccess($consumable)) {
             return Redirect::to('admin/consumables')->with('error', Lang::get('general.insufficient_permissions'));
         }
 
-			$consumable->delete();
+            $consumable->delete();
 
             // Redirect to the locations management page
             return Redirect::to('admin/consumables')->with('success', Lang::get('admin/consumables/message.delete.success'));
@@ -243,8 +236,7 @@ class ConsumablesController extends AdminController
 
             if (!Company::isCurrentUserHasAccess($consumable)) {
                 return Redirect::to('admin/consumables')->with('error', Lang::get('general.insufficient_permissions'));
-            }
-            else {
+            } else {
                 return View::make('backend/consumables/view', compact('consumable'));
             }
         } else {
@@ -267,15 +259,14 @@ class ConsumablesController extends AdminController
         if (is_null($consumable = Consumable::find($consumableId))) {
             // Redirect to the consumable management page with error
             return Redirect::to('consumables')->with('error', Lang::get('admin/consumables/message.not_found'));
-        }
-        else if (!Company::isCurrentUserHasAccess($consumable)) {
+        } elseif (!Company::isCurrentUserHasAccess($consumable)) {
             return Redirect::to('admin/consumables')->with('error', Lang::get('general.insufficient_permissions'));
         }
 
         // Get the dropdown of users and then pass it to the checkout view
         $users_list = array('' => 'Select a User') + DB::table('users')->select(DB::raw('concat(last_name,", ",first_name," (",username,")") as full_name, id'))->whereNull('deleted_at')->orderBy('last_name', 'asc')->orderBy('first_name', 'asc')->lists('full_name', 'id');
 
-        return View::make('backend/consumables/checkout', compact('consumable'))->with('users_list',$users_list);
+        return View::make('backend/consumables/checkout', compact('consumable'))->with('users_list', $users_list);
 
     }
 
@@ -285,113 +276,112 @@ class ConsumablesController extends AdminController
     public function postCheckout($consumableId)
     {
       // Check if the consumable exists
-      if (is_null($consumable = Consumable::find($consumableId))) {
-          // Redirect to the consumable management page with error
-          return Redirect::to('consumables')->with('error', Lang::get('admin/consumables/message.not_found'));
-      }
-      else if (!Company::isCurrentUserHasAccess($consumable)) {
-          return Redirect::to('admin/consumables')->with('error', Lang::get('general.insufficient_permissions'));
-      }
+        if (is_null($consumable = Consumable::find($consumableId))) {
+            // Redirect to the consumable management page with error
+            return Redirect::to('consumables')->with('error', Lang::get('admin/consumables/message.not_found'));
+        } elseif (!Company::isCurrentUserHasAccess($consumable)) {
+            return Redirect::to('admin/consumables')->with('error', Lang::get('general.insufficient_permissions'));
+        }
 
-	    $admin_user = Sentry::getUser();
-      $assigned_to = e(Input::get('assigned_to'));
+        $admin_user = Sentry::getUser();
+        $assigned_to = e(Input::get('assigned_to'));
 
 
       // Declare the rules for the form validation
-      $rules = array(
+        $rules = array(
           'assigned_to'   => 'required|min:1'
-      );
+        );
 
       // Create a new validator instance from our validation rules
-      $validator = Validator::make(Input::all(), $rules);
+        $validator = Validator::make(Input::all(), $rules);
 
       // If validation fails, we'll exit the operation now.
-      if ($validator->fails()) {
-          // Ooops.. something went wrong
-          return Redirect::back()->withInput()->withErrors($validator);
-      }
+        if ($validator->fails()) {
+            // Ooops.. something went wrong
+            return Redirect::back()->withInput()->withErrors($validator);
+        }
 
 
       // Check if the user exists
-      if (is_null($user = User::find($assigned_to))) {
-          // Redirect to the consumable management page with error
-          return Redirect::to('admin/consumables')->with('error', Lang::get('admin/consumables/message.user_does_not_exist'));
-      }
+        if (is_null($user = User::find($assigned_to))) {
+            // Redirect to the consumable management page with error
+            return Redirect::to('admin/consumables')->with('error', Lang::get('admin/consumables/message.user_does_not_exist'));
+        }
 
       // Update the consumable data
-      $consumable->assigned_to = e(Input::get('assigned_to'));
+        $consumable->assigned_to = e(Input::get('assigned_to'));
 
-      $consumable->users()->attach($consumable->id, array(
-      'consumable_id' => $consumable->id,
-      'user_id' => $admin_user->id,
-      'assigned_to' => e(Input::get('assigned_to'))));
+        $consumable->users()->attach($consumable->id, array(
+        'consumable_id' => $consumable->id,
+        'user_id' => $admin_user->id,
+        'assigned_to' => e(Input::get('assigned_to'))));
 
-      $logaction = new Actionlog();
-      $logaction->consumable_id = $consumable->id;
-      $logaction->checkedout_to = $consumable->assigned_to;
-      $logaction->asset_type = 'consumable';
-      $logaction->location_id = $user->location_id;
-      $logaction->user_id = Sentry::getUser()->id;
-      $logaction->note = e(Input::get('note'));
+        $logaction = new Actionlog();
+        $logaction->consumable_id = $consumable->id;
+        $logaction->checkedout_to = $consumable->assigned_to;
+        $logaction->asset_type = 'consumable';
+        $logaction->location_id = $user->location_id;
+        $logaction->user_id = Sentry::getUser()->id;
+        $logaction->note = e(Input::get('note'));
 
-      $settings = Setting::getSettings();
+        $settings = Setting::getSettings();
 
-			if ($settings->slack_endpoint) {
+        if ($settings->slack_endpoint) {
 
-				$slack_settings = [
-				    'username' => $settings->botname,
-				    'channel' => $settings->slack_channel,
-				    'link_names' => true
-				];
+            $slack_settings = [
+                'username' => $settings->botname,
+                'channel' => $settings->slack_channel,
+                'link_names' => true
+            ];
 
-				$client = new \Maknz\Slack\Client($settings->slack_endpoint,$slack_settings);
+            $client = new \Maknz\Slack\Client($settings->slack_endpoint, $slack_settings);
 
-				try {
-						$client->attach([
-						    'color' => 'good',
-						    'fields' => [
-						        [
-						            'title' => 'Checked Out:',
-						            'value' => strtoupper($logaction->asset_type).' <'.Config::get('app.url').'/admin/consumables/'.$consumable->id.'/view'.'|'.$consumable->name.'> checked out to <'.Config::get('app.url').'/admin/users/'.$user->id.'/view|'.$user->fullName().'> by <'.Config::get('app.url').'/admin/users/'.$admin_user->id.'/view'.'|'.$admin_user->fullName().'>.'
-						        ],
-						        [
-						            'title' => 'Note:',
-						            'value' => e($logaction->note)
-						        ],
-						    ]
-						])->send('Consumable Checked Out');
+            try {
+                    $client->attach([
+                        'color' => 'good',
+                        'fields' => [
+                            [
+                                'title' => 'Checked Out:',
+                                'value' => strtoupper($logaction->asset_type).' <'.Config::get('app.url').'/admin/consumables/'.$consumable->id.'/view'.'|'.$consumable->name.'> checked out to <'.Config::get('app.url').'/admin/users/'.$user->id.'/view|'.$user->fullName().'> by <'.Config::get('app.url').'/admin/users/'.$admin_user->id.'/view'.'|'.$admin_user->fullName().'>.'
+                            ],
+                            [
+                                'title' => 'Note:',
+                                'value' => e($logaction->note)
+                            ],
+                        ]
+                    ])->send('Consumable Checked Out');
 
-					} catch (Exception $e) {
+            } catch (Exception $e) {
 
-					}
-			}
-
-
-      $log = $logaction->logaction('checkout');
-
-      $consumable_user = DB::table('consumables_users')->where('assigned_to','=',$consumable->assigned_to)->where('consumable_id','=',$consumable->id)->first();
-
-      $data['log_id'] = $logaction->id;
-      $data['eula'] = $consumable->getEula();
-      $data['first_name'] = $user->first_name;
-      $data['item_name'] = $consumable->name;
-      $data['checkout_date'] = $logaction->created_at;
-      $data['item_tag'] = '';
-      $data['expected_checkin'] = '';
-      $data['note'] = $logaction->note;
-      $data['require_acceptance'] = $consumable->requireAcceptance();
+            }
+        }
 
 
-      if (($consumable->requireAcceptance()=='1')  || ($consumable->getEula())) {
+        $log = $logaction->logaction('checkout');
 
-        Mail::send('emails.accept-asset', $data, function ($m) use ($user) {
-            $m->to($user->email, $user->first_name . ' ' . $user->last_name);
-            $m->subject('Confirm consumable delivery');
-        });
-      }
+        $consumable_user = DB::table('consumables_users')->where('assigned_to', '=', $consumable->assigned_to)->where('consumable_id', '=', $consumable->id)->first();
+
+        $data['log_id'] = $logaction->id;
+        $data['eula'] = $consumable->getEula();
+        $data['first_name'] = $user->first_name;
+        $data['item_name'] = $consumable->name;
+        $data['checkout_date'] = $logaction->created_at;
+        $data['item_tag'] = '';
+        $data['expected_checkin'] = '';
+        $data['note'] = $logaction->note;
+        $data['require_acceptance'] = $consumable->requireAcceptance();
+
+
+        if (($consumable->requireAcceptance()=='1')  || ($consumable->getEula())) {
+
+            Mail::send('emails.accept-asset', $data, function ($m) use ($user) {
+                $m->to($user->email, $user->first_name . ' ' . $user->last_name);
+                $m->subject('Confirm consumable delivery');
+            });
+        }
 
       // Redirect to the new consumable page
-      return Redirect::to("admin/consumables")->with('success', Lang::get('admin/consumables/message.checkout.success'));
+        return Redirect::to("admin/consumables")->with('success', Lang::get('admin/consumables/message.checkout.success'));
 
 
 
@@ -401,7 +391,7 @@ class ConsumablesController extends AdminController
     public function getDatatable()
     {
         $consumables = Consumable::select('consumables.*')->whereNull('consumables.deleted_at')
-            ->with('company','location','category','users');
+            ->with('company', 'location', 'category', 'users');
 
         if (Input::has('search')) {
             $consumables = $consumables->TextSearch(Input::get('search'));
@@ -423,8 +413,7 @@ class ConsumablesController extends AdminController
         $order = Input::get('order') === 'asc' ? 'asc' : 'desc';
         $sort = in_array(Input::get('sort'), $allowed_columns) ? Input::get('sort') : 'created_at';
 
-        switch ($sort)
-        {
+        switch ($sort) {
             case 'category':
                 $consumables = $consumables->OrderCategory($order);
                 break;
@@ -444,7 +433,7 @@ class ConsumablesController extends AdminController
 
         $rows = array();
 
-        foreach($consumables as $consumable) {
+        foreach ($consumables as $consumable) {
             $actions = '<nobr><a href="'.route('checkout/consumable', $consumable->id).'" style="margin-right:5px;" class="btn btn-info btn-sm" '.(($consumable->numRemaining() > 0 ) ? '' : ' disabled').'>'.Lang::get('general.checkout').'</a><a href="'.route('update/consumable', $consumable->id).'" class="btn btn-warning btn-sm" style="margin-right:5px;"><i class="fa fa-pencil icon-white"></i></a><a data-html="false" class="btn delete-asset btn-danger btn-sm" data-toggle="modal" href="'.route('delete/consumable', $consumable->id).'" data-content="'.Lang::get('admin/consumables/message.delete.confirm').'" data-title="'.Lang::get('general.delete').' '.htmlspecialchars($consumable->name).'?" onClick="return false;"><i class="fa fa-trash icon-white"></i></a></nobr>';
             $company = $consumable->company;
 
@@ -456,7 +445,7 @@ class ConsumablesController extends AdminController
                 'category'           => ($consumable->category) ? $consumable->category->name : 'Missing category',
                 'order_number'  => $consumable->order_number,
                 'purchase_date'  => $consumable->purchase_date,
-                'purchase_cost'  => ($consumable->purchase_cost!='') ? number_format($consumable->purchase_cost,2): '' ,
+                'purchase_cost'  => ($consumable->purchase_cost!='') ? number_format($consumable->purchase_cost, 2): '' ,
                 'numRemaining'  => $consumable->numRemaining(),
                 'actions'       => $actions,
                 'companyName'   => is_null($company) ? '' : e($company->name),
@@ -469,36 +458,37 @@ class ConsumablesController extends AdminController
 
     }
 
-	public function getDataView($consumableID)
-	{
-		//$consumable = Consumable::find($consumableID);
-    $consumable = Consumable::with(array('consumableAssigments'=>
-      function($query) {
-        $query->orderBy('created_at','DESC');
-      },
-      'consumableAssigments.admin'=> function($query) {},
-      'consumableAssigments.user'=> function($query) {},
-    ))->find($consumableID);
+    public function getDataView($consumableID)
+    {
+        //$consumable = Consumable::find($consumableID);
+        $consumable = Consumable::with(array('consumableAssigments'=>
+        function ($query) {
+            $query->orderBy('created_at', 'DESC');
+        },
+        'consumableAssigments.admin'=> function ($query) {
+        },
+        'consumableAssigments.user'=> function ($query) {
+        },
+        ))->find($consumableID);
 
   //  $consumable->load('consumableAssigments.admin','consumableAssigments.user');
 
-    if (!Company::isCurrentUserHasAccess($consumable)) {
-      return ['total' => 0, 'rows' => []];
+        if (!Company::isCurrentUserHasAccess($consumable)) {
+            return ['total' => 0, 'rows' => []];
+        }
+
+        $rows = array();
+
+        foreach ($consumable->consumableAssigments as $consumable_assignment) {
+            $rows[] = array(
+            'name' => link_to('/admin/users/'.$consumable_assignment->user->id.'/view', $consumable_assignment->user->fullName()),
+            'created_at' => ($consumable_assignment->created_at->format('Y-m-d H:i:s')=='-0001-11-30 00:00:00') ? '' : $consumable_assignment->created_at->format('Y-m-d H:i:s'),
+            'admin' => ($consumable_assignment->admin) ? $consumable_assignment->admin->fullName() : '',
+            );
+        }
+
+        $consumableCount = $consumable->users->count();
+        $data = array('total' => $consumableCount, 'rows' => $rows);
+        return $data;
     }
-
-    $rows = array();
-
-    foreach ($consumable->consumableAssigments as $consumable_assignment) {
-      $rows[] = array(
-        'name' => link_to('/admin/users/'.$consumable_assignment->user->id.'/view', $consumable_assignment->user->fullName()),
-        'created_at' => ($consumable_assignment->created_at->format('Y-m-d H:i:s')=='-0001-11-30 00:00:00') ? '' : $consumable_assignment->created_at->format('Y-m-d H:i:s'),
-        'admin' => ($consumable_assignment->admin) ? $consumable_assignment->admin->fullName() : '',
-      );
-    }
-
-    $consumableCount = $consumable->users->count();
-    $data = array('total' => $consumableCount, 'rows' => $rows);
-    return $data;
-  }
-
 }

@@ -2,8 +2,8 @@
 
 class License extends Depreciable
 {
-	use SoftDeletingTrait;
-	use CompanyableTrait;
+    use SoftDeletingTrait;
+    use CompanyableTrait;
 
     protected $dates = ['deleted_at'];
 
@@ -32,7 +32,7 @@ class License extends Depreciable
      */
     public function assignedusers()
     {
-        return $this->belongsToMany('User','license_seats','assigned_to','license_id');
+        return $this->belongsToMany('User', 'license_seats', 'assigned_to', 'license_id');
     }
 
     /**
@@ -40,7 +40,7 @@ class License extends Depreciable
     */
     public function assetlog()
     {
-        return $this->hasMany('Actionlog','asset_id')
+        return $this->hasMany('Actionlog', 'asset_id')
             ->where('asset_type', '=', 'software')
             ->orderBy('created_at', 'desc');
     }
@@ -50,7 +50,7 @@ class License extends Depreciable
     */
     public function uploads()
     {
-        return $this->hasMany('Actionlog','asset_id')
+        return $this->hasMany('Actionlog', 'asset_id')
             ->where('asset_type', '=', 'software')
             ->where('action_type', '=', 'uploaded')
             ->whereNotNull('filename')
@@ -63,39 +63,39 @@ class License extends Depreciable
     */
     public function adminuser()
     {
-        return $this->belongsTo('User','user_id');
+        return $this->belongsTo('User', 'user_id');
     }
 
     /**
     * Get total licenses
     */
-     public static function assetcount()
+    public static function assetcount()
     {
         return LicenseSeat::whereNull('deleted_at')
-                    ->count();
+                   ->count();
     }
 
 
     /**
     * Get total licenses
     */
-     public function totalSeatsByLicenseID()
+    public function totalSeatsByLicenseID()
     {
         return LicenseSeat::where('license_id', '=', $this->id)
-                    ->whereNull('deleted_at')
-                    ->count();
+                   ->whereNull('deleted_at')
+                   ->count();
     }
 
 
     /**
     * Get total licenses not checked out
     */
-     public static function availassetcount()
+    public static function availassetcount()
     {
         return LicenseSeat::whereNull('assigned_to')
-                    ->whereNull('asset_id')
-                    ->whereNull('deleted_at')
-                    ->count();
+                   ->whereNull('asset_id')
+                   ->whereNull('deleted_at')
+                   ->count();
     }
 
     /**
@@ -117,20 +117,20 @@ class License extends Depreciable
     public function assignedcount()
     {
 
-		return LicenseSeat::where('license_id', '=', $this->id)
-			->where( function ( $query )
-			{
-			$query->whereNotNull('assigned_to')
-			->orWhereNotNull('asset_id');
-			})
-		->count();
+        return LicenseSeat::where('license_id', '=', $this->id)
+            ->where(function ($query) {
+            
+                $query->whereNotNull('assigned_to')
+                ->orWhereNotNull('asset_id');
+            })
+        ->count();
 
 
     }
 
     public function remaincount()
     {
-    	$total = $this->totalSeatsByLicenseID();
+        $total = $this->totalSeatsByLicenseID();
         $taken =  $this->assignedcount();
         $diff =   ($total - $taken);
         return $diff;
@@ -157,12 +157,12 @@ class License extends Depreciable
 
     public function supplier()
     {
-        return $this->belongsTo('Supplier','supplier_id');
+        return $this->belongsTo('Supplier', 'supplier_id');
     }
 
-public function freeSeat()
+    public function freeSeat()
     {
-        $seat = LicenseSeat::where('license_id','=',$this->id)
+        $seat = LicenseSeat::where('license_id', '=', $this->id)
                     ->whereNull('deleted_at')
                     ->whereNull('assigned_to')
                     ->whereNull('asset_id')
@@ -170,14 +170,15 @@ public function freeSeat()
         return $seat->id;
     }
 
-	public static function getExpiringLicenses($days = 60) {
+    public static function getExpiringLicenses($days = 60)
+    {
 
-	    return License::whereNotNull('expiration_date')
-		->whereNull('deleted_at')
-		->whereRaw(DB::raw( 'DATE_SUB(`expiration_date`,INTERVAL '.$days.' DAY) <= DATE(NOW()) ' ))
-		->where('expiration_date','>',date("Y-m-d"))
-		->orderBy('expiration_date', 'ASC')
-		->get();
+        return License::whereNotNull('expiration_date')
+        ->whereNull('deleted_at')
+        ->whereRaw(DB::raw('DATE_SUB(`expiration_date`,INTERVAL '.$days.' DAY) <= DATE(NOW()) '))
+        ->where('expiration_date', '>', date("Y-m-d"))
+        ->orderBy('expiration_date', 'ASC')
+        ->get();
 
     }
 
@@ -192,14 +193,14 @@ public function freeSeat()
     public function scopeTextSearch($query, $search)
     {
 
-        return $query->where(function($query) use ($search)
-        {
-        $query->where('name', 'LIKE', '%'.$search.'%')
-				->orWhere('serial', 'LIKE', '%'.$search.'%')
-				->orWhere('notes', 'LIKE', '%'.$search.'%')
-				->orWhere('order_number', 'LIKE', '%'.$search.'%')
-				->orWhere('purchase_date', 'LIKE', '%'.$search.'%')
-				->orWhere('purchase_cost', 'LIKE', '%'.$search.'%');
+        return $query->where(function ($query) use ($search) {
+        
+            $query->where('name', 'LIKE', '%'.$search.'%')
+                ->orWhere('serial', 'LIKE', '%'.$search.'%')
+                ->orWhere('notes', 'LIKE', '%'.$search.'%')
+                ->orWhere('order_number', 'LIKE', '%'.$search.'%')
+                ->orWhere('purchase_date', 'LIKE', '%'.$search.'%')
+                ->orWhere('purchase_cost', 'LIKE', '%'.$search.'%');
         });
     }
 }

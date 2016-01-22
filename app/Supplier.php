@@ -1,8 +1,8 @@
 <?php
 class Supplier extends Elegant
 {
-	use SoftDeletingTrait;
-	protected $dates = ['deleted_at'];
+    use SoftDeletingTrait;
+    protected $dates = ['deleted_at'];
 
     protected $rules = array(
         'name'              => 'required|alpha_space|min:3|max:255|unique:suppliers,name,{id}',
@@ -50,23 +50,23 @@ class Supplier extends Elegant
         if (!preg_match("~^(?:f|ht)tps?://~i", $url)) {
             $url = "http://" . $url;
         }
-    return $url;
+        return $url;
     }
 
-	/**
-	* Query builder scope to search on text
-	*
-	* @param  Illuminate\Database\Query\Builder  $query  Query builder instance
-	* @param  text                              $search      Search term
-	*
-	* @return Illuminate\Database\Query\Builder          Modified query builder
-	*/
-	public function scopeTextSearch($query, $search)
-	{
+    /**
+    * Query builder scope to search on text
+    *
+    * @param  Illuminate\Database\Query\Builder  $query  Query builder instance
+    * @param  text                              $search      Search term
+    *
+    * @return Illuminate\Database\Query\Builder          Modified query builder
+    */
+    public function scopeTextSearch($query, $search)
+    {
 
-		return $query->where(function($query) use ($search)
-		{
-			$query->where('name', 'LIKE', '%'.$search.'%');
-		});
-	}
+        return $query->where(function ($query) use ($search) {
+        
+            $query->where('name', 'LIKE', '%'.$search.'%');
+        });
+    }
 }

@@ -47,10 +47,10 @@ class ModelsController extends AdminController
         $manufacturer_list = manufacturerList();
         $category_list = categoryList();
         $view = View::make('backend/models/edit');
-        $view->with('category_list',$category_list);
-        $view->with('depreciation_list',$depreciation_list);
-        $view->with('manufacturer_list',$manufacturer_list);
-        $view->with('model',new Model);
+        $view->with('category_list', $category_list);
+        $view->with('depreciation_list', $depreciation_list);
+        $view->with('manufacturer_list', $manufacturer_list);
+        $view->with('model', new Model);
         return $view;
     }
 
@@ -79,9 +79,8 @@ class ModelsController extends AdminController
         );
 
         // attempt validation
-        if ($validator->fails())
-        {
-            // The given data did not pass validation
+        if ($validator->fails()) {
+        // The given data did not pass validation
             return Redirect::back()->withInput()->with('error', Lang::get('admin/models/message.create.duplicate_set'));
         }
 
@@ -90,34 +89,32 @@ class ModelsController extends AdminController
         $validator = Validator::make(Input::all(), $model->validationRules());
 
         // attempt validation
-        if ($validator->fails())
-        {
-            // The given data did not pass validation
+        if ($validator->fails()) {
+        // The given data did not pass validation
             return Redirect::back()->withInput()->withErrors($validator->messages());
-        }
-        // attempt validation
+        } // attempt validation
         else {
 
-            if ( e(Input::get('depreciation_id')) == '') {
+            if (e(Input::get('depreciation_id')) == '') {
                 $model->depreciation_id =  0;
             } else {
                 $model->depreciation_id = e(Input::get('depreciation_id'));
             }
 
-            if ( e(Input::get('eol')) == '') {
+            if (e(Input::get('eol')) == '') {
                 $model->eol =  0;
             } else {
                 $model->eol = e(Input::get('eol'));
             }
 
             // Save the model data
-            $model->name            	= e(Input::get('name'));
-            $model->modelno            	= e(Input::get('modelno'));
-            $model->manufacturer_id    	= e(Input::get('manufacturer_id'));
-            $model->category_id    		= e(Input::get('category_id'));
-            $model->user_id          	= Sentry::getId();
+            $model->name                = e(Input::get('name'));
+            $model->modelno             = e(Input::get('modelno'));
+            $model->manufacturer_id     = e(Input::get('manufacturer_id'));
+            $model->category_id         = e(Input::get('category_id'));
+            $model->user_id             = Sentry::getId();
             if (Input::get('custom_fieldset')!='') {
-              $model->fieldset_id = e(Input::get('custom_fieldset'));
+                $model->fieldset_id = e(Input::get('custom_fieldset'));
             }
 
             //$model->show_mac_address 	= e(Input::get('show_mac_address', '0'));
@@ -135,7 +132,7 @@ class ModelsController extends AdminController
             }
 
             // Was it created?
-            if($model->save()) {
+            if ($model->save()) {
                 // Redirect to the new model  page
                 return Redirect::to("hardware/models")->with('success', Lang::get('admin/models/message.create.success'));
             }
@@ -149,31 +146,30 @@ class ModelsController extends AdminController
     public function store()
     {
       //COPYPASTA!!!! FIXME
-      $model = new Model;
+        $model = new Model;
 
-      $settings=Input::all();
-      $settings['eol']=0;
+        $settings=Input::all();
+        $settings['eol']=0;
       //
 
-      $validator = Validator::make($settings, $model->validationRules());
-      if ($validator->fails())
-      {
-          // The given data did not pass validation
-          return JsonResponse::create(["error" => "Failed validation: ".print_r($validator->messages()->all('<li>:message</li>'),true)],500);
-      } else {
-        $model->name=e(Input::get('name'));
-        $model->manufacturer_id = e(Input::get('manufacturer_id'));
-        $model->category_id = e(Input::get('category_id'));
-        $model->modelno = e(Input::get('modelno'));
-        $model->user_id = Sentry::getUser()->id;
-        $model->eol=0;
-
-        if($model->save()) {
-          return JsonResponse::create($model);
+        $validator = Validator::make($settings, $model->validationRules());
+        if ($validator->fails()) {
+        // The given data did not pass validation
+            return JsonResponse::create(["error" => "Failed validation: ".print_r($validator->messages()->all('<li>:message</li>'), true)], 500);
         } else {
-          return JsonResponse::create(["error" => "Couldn't save Model"],500);
+            $model->name=e(Input::get('name'));
+            $model->manufacturer_id = e(Input::get('manufacturer_id'));
+            $model->category_id = e(Input::get('category_id'));
+            $model->modelno = e(Input::get('modelno'));
+            $model->user_id = Sentry::getUser()->id;
+            $model->eol=0;
+
+            if ($model->save()) {
+                return JsonResponse::create($model);
+            } else {
+                return JsonResponse::create(["error" => "Couldn't save Model"], 500);
+            }
         }
-      }
     }
 
     /**
@@ -194,9 +190,9 @@ class ModelsController extends AdminController
         $manufacturer_list = array('' => 'Select One') + Manufacturer::lists('name', 'id');
         $category_list = array('' => '') + DB::table('categories')->whereNull('deleted_at')->lists('name', 'id');
         $view = View::make('backend/models/edit', compact('model'));
-        $view->with('category_list',$category_list);
-        $view->with('depreciation_list',$depreciation_list);
-        $view->with('manufacturer_list',$manufacturer_list);
+        $view->with('category_list', $category_list);
+        $view->with('depreciation_list', $depreciation_list);
+        $view->with('manufacturer_list', $manufacturer_list);
         return $view;
     }
 
@@ -218,35 +214,33 @@ class ModelsController extends AdminController
           //attempt to validate
         $validator = Validator::make(Input::all(), $model->validationRules($modelId));
 
-        if ($validator->fails())
-        {
-            // The given data did not pass validation
+        if ($validator->fails()) {
+        // The given data did not pass validation
             return Redirect::back()->withInput()->withErrors($validator->messages());
-        }
-        // attempt validation
+        } // attempt validation
         else {
 
-            if ( e(Input::get('depreciation_id')) == '') {
+            if (e(Input::get('depreciation_id')) == '') {
                 $model->depreciation_id =  0;
             } else {
                 $model->depreciation_id = e(Input::get('depreciation_id'));
             }
 
-             if ( e(Input::get('eol')) == '') {
+            if (e(Input::get('eol')) == '') {
                 $model->eol =  0;
             } else {
                 $model->eol = e(Input::get('eol'));
             }
 
             // Update the model data
-            $model->name            	= e(Input::get('name'));
-            $model->modelno            	= e(Input::get('modelno'));
-            $model->manufacturer_id    	= e(Input::get('manufacturer_id'));
-            $model->category_id    		= e(Input::get('category_id'));
+            $model->name                = e(Input::get('name'));
+            $model->modelno             = e(Input::get('modelno'));
+            $model->manufacturer_id     = e(Input::get('manufacturer_id'));
+            $model->category_id         = e(Input::get('category_id'));
             if (Input::get('custom_fieldset')=='') {
-              $model->fieldset_id = null;
+                $model->fieldset_id = null;
             } else {
-              $model->fieldset_id = e(Input::get('custom_fieldset'));
+                $model->fieldset_id = e(Input::get('custom_fieldset'));
             }
 
             if (Input::file('image')) {
@@ -261,11 +255,11 @@ class ModelsController extends AdminController
             }
 
             if (Input::get('image_delete') == 1 && Input::file('image') == "") {
-                $model->image = NULL;
+                $model->image = null;
             }
 
             // Was it created?
-            if($model->save()) {
+            if ($model->save()) {
                 // Redirect to the new model  page
                 return Redirect::to("hardware/models")->with('success', Lang::get('admin/models/message.update.success'));
             }
@@ -306,23 +300,23 @@ class ModelsController extends AdminController
     public function getRestore($modelId = null)
     {
 
-		// Get user information
-		$model = Model::withTrashed()->find($modelId);
+        // Get user information
+        $model = Model::withTrashed()->find($modelId);
 
-		 if (isset($model->id)) {
+        if (isset($model->id)) {
 
-			// Restore the model
-			$model->restore();
+            // Restore the model
+            $model->restore();
 
-			// Prepare the success message
-			$success = Lang::get('admin/models/message.restore.success');
+            // Prepare the success message
+            $success = Lang::get('admin/models/message.restore.success');
 
-			// Redirect back
-			return Redirect::back()->with('success', $success);
+            // Redirect back
+            return Redirect::back()->with('success', $success);
 
-		 } else {
-			 return Redirect::back()->with('error', Lang::get('admin/models/message.not_found'));
-		 }
+        } else {
+            return Redirect::back()->with('error', Lang::get('admin/models/message.not_found'));
+        }
 
     }
 
@@ -373,11 +367,11 @@ class ModelsController extends AdminController
         $manufacturer_list = array('' => 'Select One') + Manufacturer::lists('name', 'id');
         $category_list = array('' => '') + DB::table('categories')->whereNull('deleted_at')->lists('name', 'id');
         $view = View::make('backend/models/edit');
-        $view->with('category_list',$category_list);
-        $view->with('depreciation_list',$depreciation_list);
-        $view->with('manufacturer_list',$manufacturer_list);
-        $view->with('model',$model);
-        $view->with('clone_model',$model_to_clone);
+        $view->with('category_list', $category_list);
+        $view->with('depreciation_list', $depreciation_list);
+        $view->with('manufacturer_list', $manufacturer_list);
+        $view->with('model', $model);
+        $view->with('clone_model', $model_to_clone);
         return $view;
 
     }
@@ -385,8 +379,8 @@ class ModelsController extends AdminController
 
     public function getCustomFields($modelId)
     {
-      $model=Model::find($modelId);
-      return View::make("backend.models.custom_fields_form")->with("model",$model);
+        $model=Model::find($modelId);
+        return View::make("backend.models.custom_fields_form")->with("model", $model);
     }
 
 
@@ -400,12 +394,12 @@ class ModelsController extends AdminController
 
     public function getDatatable($status = null)
     {
-        $models = Model::with('category','assets','depreciation');
+        $models = Model::with('category', 'assets', 'depreciation');
 
         switch ($status) {
-        case 'Deleted':
-          $models->withTrashed()->Deleted();
-          break;
+            case 'Deleted':
+                $models->withTrashed()->Deleted();
+                break;
         }
 
 
@@ -472,7 +466,7 @@ class ModelsController extends AdminController
     **/
     public function getDataView($modelID)
     {
-        $assets = Asset::where('model_id','=',$modelID)->withTrashed()->with('company');
+        $assets = Asset::where('model_id', '=', $modelID)->withTrashed()->with('company');
 
         if (Input::has('search')) {
             $assets = $assets->TextSearch(Input::get('search'));
@@ -504,7 +498,7 @@ class ModelsController extends AdminController
 
 
         foreach ($assets as $asset) {
-          $actions = '';
+            $actions = '';
 
             if ($asset->assetstatus) {
                 if ($asset->assetstatus->deployable != 0) {
@@ -531,5 +525,4 @@ class ModelsController extends AdminController
 
         return $data;
     }
-
 }

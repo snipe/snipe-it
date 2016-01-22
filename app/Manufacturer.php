@@ -16,7 +16,7 @@ class Manufacturer extends Elegant
         return $this->hasMany('Model', 'manufacturer_id')->count();
     }
 
-     public function assetscount()
+    public function assetscount()
     {
         return $this->hasManyThrough('Asset', 'Model')->count();
     }
@@ -37,8 +37,8 @@ class Manufacturer extends Elegant
     public function scopeTextSearch($query, $search)
     {
 
-        return $query->where(function($query) use ($search)
-        {
+        return $query->where(function ($query) use ($search) {
+        
             $query->where('name', 'LIKE', '%'.$search.'%');
         });
     }

@@ -12,20 +12,26 @@ final class Company extends Elegant
         $settings = Setting::getSettings();
 
         // NOTE: this can happen when seeding the database
-        if (is_null($settings)) { return FALSE;                                           }
-        else                    { return $settings->full_multiple_companies_support == 1; }
+        if (is_null($settings)) {
+            return false;
+        } else {
+            return $settings->full_multiple_companies_support == 1;
+        }
     }
 
     private static function scopeCompanyablesDirectly($query, $column = 'company_id')
     {
         if (Sentry::getUser()) {
-          $company_id = Sentry::getUser()->company_id;
+            $company_id = Sentry::getUser()->company_id;
         } else {
-          $company_id = NULL;
+            $company_id = null;
         }
 
-        if ($company_id == NULL) { return $query;                                   }
-        else                     { return $query->where($column, '=', $company_id); }
+        if ($company_id == null) {
+            return $query;
+        } else {
+            return $query->where($column, '=', $company_id);
+        }
     }
 
     public static function getSelectList()
@@ -38,44 +44,51 @@ final class Company extends Elegant
     {
         $escaped_input = e($unescaped_input);
 
-        if ($escaped_input == '0') { return NULL;           }
-        else                       { return $escaped_input; }
+        if ($escaped_input == '0') {
+            return null;
+        } else {
+            return $escaped_input;
+        }
     }
 
     public static function getIdForCurrentUser($unescaped_input)
     {
-        if (!static::isFullMultipleCompanySupportEnabled()) { return static::getIdFromInput($unescaped_input); }
-        else
-        {
+        if (!static::isFullMultipleCompanySupportEnabled()) {
+            return static::getIdFromInput($unescaped_input);
+        } else {
             $current_user = Sentry::getUser();
 
-            if ($current_user->company_id != NULL) { return $current_user->company_id;                }
-            else                                   { return static::getIdFromInput($unescaped_input); }
+            if ($current_user->company_id != null) {
+                return $current_user->company_id;
+            } else {
+                return static::getIdFromInput($unescaped_input);
+            }
         }
     }
 
     public static function isCurrentUserHasAccess($companyable)
     {
-        if      (is_null($companyable))                          { return FALSE; }
-        else if (!static::isFullMultipleCompanySupportEnabled()) { return TRUE;  }
-        else
-        {
+        if (is_null($companyable)) {
+            return false;
+        } elseif (!static::isFullMultipleCompanySupportEnabled()) {
+            return true;
+        } else {
             $current_user_company_id = Sentry::getUser()->company_id;
             $companyable_company_id = $companyable->company_id;
 
-            return ($current_user_company_id == NULL || $current_user_company_id == $companyable_company_id);
+            return ($current_user_company_id == null || $current_user_company_id == $companyable_company_id);
         }
     }
 
     public static function isCurrentUserAuthorized()
     {
-        return (!static::isFullMultipleCompanySupportEnabled() || Sentry::getUser()->company_id == NULL);
+        return (!static::isFullMultipleCompanySupportEnabled() || Sentry::getUser()->company_id == null);
     }
 
     public static function canManageUsersCompanies()
     {
         return (!static::isFullMultipleCompanySupportEnabled() || Sentry::getUser()->isSuperUser() ||
-                Sentry::getUser()->company_id == NULL);
+                Sentry::getUser()->company_id == null);
     }
 
     public static function getIdForUser($unescaped_input)
@@ -89,28 +102,31 @@ final class Company extends Elegant
 
     public static function scopeCompanyables($query, $column = 'company_id')
     {
-        if (!static::isFullMultipleCompanySupportEnabled()) { return $query; }
-        else { return static::scopeCompanyablesDirectly($query, $column); }
+        if (!static::isFullMultipleCompanySupportEnabled()) {
+            return $query;
+        } else {
+            return static::scopeCompanyablesDirectly($query, $column);
+        }
     }
 
     public static function scopeCompanyableChildren(array $companyable_names, $query)
     {
-        if      (count($companyable_names) == 0)                 { throw new Exception('No Companyable Children to scope'); }
-        else if (!static::isFullMultipleCompanySupportEnabled()) { return $query;              }
-        else
-        {
-            $f = function ($q)
-            {
+        if (count($companyable_names) == 0) {
+            throw new Exception('No Companyable Children to scope');
+        } elseif (!static::isFullMultipleCompanySupportEnabled()) {
+            return $query;
+        } else {
+            $f = function ($q) {
+            
                 static::scopeCompanyablesDirectly($q);
             };
 
             $q = $query->where(function ($q) use ($companyable_names, $f) {
-              $q2 = $q->whereHas($companyable_names[0], $f);
+                $q2 = $q->whereHas($companyable_names[0], $f);
 
-              for ($i = 1; $i < count($companyable_names); $i++)
-              {
-                  $q2 = $q2->orWhereHas($companyable_names[$i], $f);
-              }
+                for ($i = 1; $i < count($companyable_names); $i++) {
+                    $q2 = $q2->orWhereHas($companyable_names[$i], $f);
+                }
             });
             return $q;
         }
@@ -120,7 +136,10 @@ final class Company extends Elegant
     {
         $company = $companyable->company;
 
-        if (is_null($company)) { return '';                }
-        else                   { return e($company->name); }
+        if (is_null($company)) {
+            return '';
+        } else {
+            return e($company->name);
+        }
     }
 }

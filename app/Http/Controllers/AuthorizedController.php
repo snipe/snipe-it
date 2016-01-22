@@ -22,5 +22,4 @@ class AuthorizedController extends BaseController
         // Call parent
         parent::__construct();
     }
-
 }

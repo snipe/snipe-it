@@ -9,14 +9,14 @@ class AppCommand extends Command
     /**
      * The console command name.
      *
-     * @var	string
+     * @var     string
      */
     protected $name = 'app:install';
 
     /**
      * The console command description.
      *
-     * @var	string
+     * @var     string
      */
     protected $description = 'This command kicks off your database table creation and migration, and creates your first admin user.';
 
@@ -32,7 +32,7 @@ class AppCommand extends Command
         'password'   => null
     );
 
-	protected $dummyData = false;
+    protected $dummyData = false;
 
     /**
      * Create a new command instance.
@@ -70,7 +70,7 @@ class AppCommand extends Command
         $this->askUserEmail();
         $this->askUserPassword();
 
-		    $this->askUserDummyData();
+            $this->askUserDummyData();
 
         $this->comment('');
         $this->comment('');
@@ -99,19 +99,16 @@ class AppCommand extends Command
         $this->sentryRunner();
 
         // Seed the tables with dummy data
-		if( $this->dummyData === true )
-		{
-			$this->call('db:seed', array('--force'=>true));
-		}
-		else
-		{
-			// Seeding Settings table is mandatory
-			$this->call('db:seed', array('--class' => 'SettingsSeeder', '--force'=>true));
-			// Seeding Statuslabels is strongly recommended
-			$this->call('db:seed', array('--class' => 'StatuslabelsSeeder', '--force'=>true));
-			// Seeding Categories is good to have
-			$this->call('db:seed', array('--class' => 'CategoriesSeeder', '--force'=>true));
-		}
+        if ($this->dummyData === true) {
+            $this->call('db:seed', array('--force'=>true));
+        } else {
+            // Seeding Settings table is mandatory
+            $this->call('db:seed', array('--class' => 'SettingsSeeder', '--force'=>true));
+            // Seeding Statuslabels is strongly recommended
+            $this->call('db:seed', array('--class' => 'StatuslabelsSeeder', '--force'=>true));
+            // Seeding Categories is good to have
+            $this->call('db:seed', array('--class' => 'CategoriesSeeder', '--force'=>true));
+        }
     }
 
     /**
@@ -134,8 +131,7 @@ class AppCommand extends Command
 
             // Store the user first name
             $this->userData['first_name'] = $first_name;
-        }
-        while( ! $first_name);
+        } while (! $first_name);
     }
 
     /**
@@ -158,8 +154,7 @@ class AppCommand extends Command
 
             // Store the user last name
             $this->userData['last_name'] = $last_name;
-        }
-        while( ! $last_name);
+        } while (! $last_name);
     }
 
     /**
@@ -182,8 +177,7 @@ class AppCommand extends Command
 
             // Store the email address
             $this->userData['email'] = $email;
-        }
-        while ( ! $email);
+        } while (! $email);
     }
 
 
@@ -207,8 +201,7 @@ class AppCommand extends Command
 
             // Store the username address
             $this->userData['username'] = $username;
-        }
-        while ( ! $username);
+        } while (! $username);
     }
 
 
@@ -231,10 +224,9 @@ class AppCommand extends Command
                 $this->error('Password is invalid. Please try again.');
                 $password = '';
                 $password1 = '';
-            }
-            else{
+            } else {
                 // Verify the user password
-                if ($password != $password1){
+                if ($password != $password1) {
                     $this->error('Password do not match. Please try again.');
                     $password = '';
                     $password1 = '';
@@ -243,7 +235,7 @@ class AppCommand extends Command
 
             // Store the password
             $this->userData['password'] = $password;
-        } while( ! $password);
+        } while (! $password);
     }
 
     /**
@@ -256,7 +248,7 @@ class AppCommand extends Command
     {
         // Ask the user to input the user password
         $dummydata = $this->ask('Do you want to seed your database with dummy data? y/N (default is no): ');
-        $this->dummyData = (strstr($dummydata, 'y' )) ? true : false;
+        $this->dummyData = (strstr($dummydata, 'y')) ? true : false;
     }
 
     /**
@@ -273,10 +265,9 @@ class AppCommand extends Command
         $this->sentryCreateUser();
 
         // Create dummy user
-		if( $this->dummyData === true )
-		{
-			$this->sentryCreateDummyUser();
-		}
+        if ($this->dummyData === true) {
+            $this->sentryCreateDummyUser();
+        }
     }
 
     /**
@@ -354,7 +345,7 @@ class AppCommand extends Command
         // Prepare the user data array.
         $data = array_merge($this->userData, array(
             'activated'   => 1,
-            'manager_id'  => NULL,
+            'manager_id'  => null,
             'notes'  => 'Generated on install',
             'permissions' => array(
                 'admin' => 1,
@@ -390,7 +381,7 @@ class AppCommand extends Command
             'last_name'  => 'Doe',
             'email'      => 'john.doe@example.com',
             'username'      => 'john.doe@example.com',
-            'password'   => substr(str_shuffle(str_repeat('0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ', mt_rand(1,10))),1,10),
+            'password'   => substr(str_shuffle(str_repeat('0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ', mt_rand(1, 10))), 1, 10),
             'notes'      => 'Generated on install',
             'activated'  => 1,
             'manager_id'  => 1,
@@ -399,5 +390,4 @@ class AppCommand extends Command
         // Create the user
         Sentry::getUserProvider()->create($data);
     }
-
 }

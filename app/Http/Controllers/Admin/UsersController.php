@@ -34,8 +34,8 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Illuminate\Support\Facades\Log;
 use Crypt;
 
-
-class UsersController extends AdminController {
+class UsersController extends AdminController
+{
 
     /**
      * Declare the rules for the form validation
@@ -58,7 +58,8 @@ class UsersController extends AdminController {
      *
      * @return View
      */
-    public function getIndex() {
+    public function getIndex()
+    {
 
         // Show the page
         return View::make('backend/users/index');
@@ -69,7 +70,8 @@ class UsersController extends AdminController {
      *
      * @return View
      */
-    public function getCreate() {
+    public function getCreate()
+    {
         // Get all the available groups
         $groups = Sentry::getGroupProvider()->findAll();
 
@@ -107,7 +109,8 @@ class UsersController extends AdminController {
      *
      * @return Redirect
      */
-    public function postCreate() {
+    public function postCreate()
+    {
 
         // echo '<pre>';
         // print_r($this->validationRules);
@@ -196,7 +199,8 @@ class UsersController extends AdminController {
         return Redirect::route('create/user')->withInput()->with('error', $error);
     }
 
-    public function store() {
+    public function store()
+    {
         // Create a new validator instance from our validation rules
         $validator = Validator::make(Input::all(), $this->validationRules);
         $permissions = Input::get('permissions', array());
@@ -261,7 +265,8 @@ class UsersController extends AdminController {
      * @param  int  $id
      * @return View
      */
-    public function getEdit($id = null) {
+    public function getEdit($id = null)
+    {
         try {
             // Get the user information
             $user = Sentry::getUserProvider()->findById($id);
@@ -314,7 +319,8 @@ class UsersController extends AdminController {
      * @param  int  $id
      * @return Redirect
      */
-    public function postEdit($id = null) {
+    public function postEdit($id = null)
+    {
         // We need to reverse the UI specific logic for our
         // permissions here before we update the user.
         $permissions = Input::get('permissions', array());
@@ -378,7 +384,7 @@ class UsersController extends AdminController {
             $user->employee_num = Input::get('employee_num');
             $user->activated = Input::get('activated', $user->activated);
             if (Sentry::getUser()->hasAccess('superuser')) {
-              $user->permissions = Input::get('permissions');
+                $user->permissions = Input::get('permissions');
             }
             $user->jobtitle = Input::get('jobtitle');
             $user->phone = Input::get('phone');
@@ -388,11 +394,11 @@ class UsersController extends AdminController {
             $user->notes = Input::get('notes');
 
             if ($user->manager_id == "") {
-                $user->manager_id = NULL;
+                $user->manager_id = null;
             }
 
             if ($user->location_id == "") {
-                $user->location_id = NULL;
+                $user->location_id = null;
             }
 
 
@@ -458,7 +464,8 @@ class UsersController extends AdminController {
      * @param  int  $id
      * @return Redirect
      */
-    public function getDelete($id = null) {
+    public function getDelete($id = null)
+    {
         try {
             // Get user information
             $user = Sentry::getUserProvider()->findById($id);
@@ -508,7 +515,8 @@ class UsersController extends AdminController {
         }
     }
 
-    public function postBulkEdit() {
+    public function postBulkEdit()
+    {
 
         if ((!Input::has('edit_user')) || (count(Input::has('edit_user')) == 0)) {
             return Redirect::back()->with('error', 'No users selected');
@@ -523,7 +531,8 @@ class UsersController extends AdminController {
         }
     }
 
-    public function postBulkSave() {
+    public function postBulkSave()
+    {
 
         if ((!Input::has('edit_user')) || (count(Input::has('edit_user')) == 0)) {
             return Redirect::back()->with('error', 'No users selected');
@@ -564,10 +573,11 @@ class UsersController extends AdminController {
                     $log = $logaction->logaction('checkin from');
 
                     $update_assets = Asset::whereIn('id', $asset_array)->update(
-                            array(
+                        array(
                                 'status_id' => e(Input::get('status_id')),
                                 'assigned_to' => null,
-                    ));
+                            )
+                    );
                 }
 
                 foreach ($accessories as $accessory) {
@@ -582,9 +592,10 @@ class UsersController extends AdminController {
                     $log = $logaction->logaction('checkin from');
 
                     $update_accessories = DB::table('accessories_users')->whereIn('id', $accessory_array)->update(
-                            array(
+                        array(
                                 'assigned_to' => null,
-                    ));
+                            )
+                    );
                 }
 
 
@@ -604,16 +615,15 @@ class UsersController extends AdminController {
      * @param  int  $id
      * @return Redirect
      */
-    public function getRestore($id = null) {
+    public function getRestore($id = null)
+    {
         try {
             // Get user information
             $user = Sentry::getUserProvider()->createModel()->withTrashed()->find($id);
 
             if (!Company::isCurrentUserHasAccess($user)) {
                 return Redirect::route('users')->with('error', Lang::get('general.insufficient_permissions'));
-            }
-            else
-            {
+            } else {
                 // Restore the user
                 $user->restore();
 
@@ -638,7 +648,8 @@ class UsersController extends AdminController {
      * @param  int  $userId
      * @return View
      */
-    public function getView($userId = null) {
+    public function getView($userId = null)
+    {
 
         $user = User::with('assets', 'assets.model', 'consumables', 'accessories', 'licenses', 'userloc')->withTrashed()->find($userId);
 
@@ -666,7 +677,8 @@ class UsersController extends AdminController {
      * @param  int      $id
      * @return Redirect
      */
-    public function getUnsuspend($id = null) {
+    public function getUnsuspend($id = null)
+    {
         try {
             // Get user information
             $user = Sentry::getUserProvider()->findById($id);
@@ -704,7 +716,8 @@ class UsersController extends AdminController {
         }
     }
 
-    public function getClone($id = null) {
+    public function getClone($id = null)
+    {
         // We need to reverse the UI specific logic for our
         // permissions here before we update the user.
         $permissions = Input::get('permissions', array());
@@ -767,7 +780,8 @@ class UsersController extends AdminController {
      *
      * @return View
      */
-    public function getImport() {
+    public function getImport()
+    {
         // Get all the available groups
         $groups = Sentry::getGroupProvider()->findAll();
         // Selected groups
@@ -787,7 +801,8 @@ class UsersController extends AdminController {
      *
      * @return Redirect
      */
-    public function postImport() {
+    public function postImport()
+    {
 
         if (!ini_get("auto_detect_line_endings")) {
             ini_set("auto_detect_line_endings", '1');
@@ -815,12 +830,12 @@ class UsersController extends AdminController {
                 $pass = substr(str_shuffle("0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"), 0, 15);
 
                 // Location
-          			if (array_key_exists('4',$row)) {
-          				$user_location_id = trim($row[4]);
-                  if ($user_location_id=='') {
-                    $user_location_id = null;
-                  }
-          			}
+                if (array_key_exists('4', $row)) {
+                    $user_location_id = trim($row[4]);
+                    if ($user_location_id=='') {
+                        $user_location_id = null;
+                    }
+                }
 
 
 
@@ -908,48 +923,45 @@ class UsersController extends AdminController {
         }
 
         $users = User::select(array('users.id','users.employee_num','users.email','users.username','users.location_id','users.manager_id','users.first_name','users.last_name','users.created_at','users.notes','users.company_id', 'users.deleted_at'))
-        ->with('assets','accessories','consumables','licenses','manager','sentryThrottle','groups','userloc','company');
+        ->with('assets', 'accessories', 'consumables', 'licenses', 'manager', 'sentryThrottle', 'groups', 'userloc', 'company');
         $users = Company::scopeCompanyables($users);
 
         switch ($status) {
-        case 'deleted':
-          $users = $users->withTrashed()->Deleted();
-          break;
+            case 'deleted':
+                $users = $users->withTrashed()->Deleted();
+                break;
         }
 
-         if (Input::has('search')) {
-             $users = $users->TextSearch(Input::get('search'));
-         }
+        if (Input::has('search')) {
+            $users = $users->TextSearch(Input::get('search'));
+        }
 
          $order = Input::get('order') === 'asc' ? 'asc' : 'desc';
 
-         switch (Input::get('sort'))
-         {
-             case 'manager':
+        switch (Input::get('sort')) {
+            case 'manager':
                 $users = $users->OrderManager($order);
-               break;
-             case 'location':
+                break;
+            case 'location':
                 $users = $users->OrderLocation($order);
-              break;
-             default:
+                break;
+            default:
                 $allowed_columns =
                 [
-                  'last_name','first_name','email','username','employee_num',
-                  'assets','accessories', 'consumables','licenses','groups'
+                 'last_name','first_name','email','username','employee_num',
+                 'assets','accessories', 'consumables','licenses','groups'
                 ];
 
                 $sort = in_array($sort, $allowed_columns) ? $sort : 'first_name';
                 $users = $users->orderBy($sort, $order);
-             break;
-         }
+                break;
+        }
 
         $userCount = $users->count();
         $users = $users->skip($offset)->take($limit)->get();
         $rows = array();
 
-        foreach ($users as $user)
-        {
-
+        foreach ($users as $user) {
             $group_names = '';
             $inout = '';
             $actions = '<nobr>';
@@ -1011,7 +1023,8 @@ class UsersController extends AdminController {
      * @param  int  $userId
      * @return View
      * */
-    public function postUpload($userId = null) {
+    public function postUpload($userId = null)
+    {
         $user = User::find($userId);
 
         // the license is valid
@@ -1021,8 +1034,7 @@ class UsersController extends AdminController {
 
             if (!Company::isCurrentUserHasAccess($user)) {
                 return Redirect::route('users')->with('error', Lang::get('general.insufficient_permissions'));
-            }
-            else if (Input::hasFile('userfile')) {
+            } elseif (Input::hasFile('userfile')) {
 
                 foreach (Input::file('userfile') as $file) {
 
@@ -1044,7 +1056,7 @@ class UsersController extends AdminController {
                         $logaction->asset_type = 'user';
                         $logaction->user_id = Sentry::getUser()->id;
                         $logaction->note = e(Input::get('notes'));
-                        $logaction->checkedout_to = NULL;
+                        $logaction->checkedout_to = null;
                         $logaction->created_at = date("Y-m-d h:i:s");
                         $logaction->filename = $filename;
                         $log = $logaction->logaction('uploaded');
@@ -1077,7 +1089,8 @@ class UsersController extends AdminController {
      * @param  int  $fileId
      * @return View
      * */
-    public function getDeleteFile($userId = null, $fileId = null) {
+    public function getDeleteFile($userId = null, $fileId = null)
+    {
         $user = User::find($userId);
         $destinationPath = app_path() . '/private_uploads';
 
@@ -1086,9 +1099,7 @@ class UsersController extends AdminController {
 
             if (!Company::isCurrentUserHasAccess($user)) {
                 return Redirect::route('users')->with('error', Lang::get('general.insufficient_permissions'));
-            }
-            else
-            {
+            } else {
                 $log = Actionlog::find($fileId);
                 $full_filename = $destinationPath . '/' . $log->filename;
                 if (file_exists($full_filename)) {
@@ -1113,7 +1124,8 @@ class UsersController extends AdminController {
      * @param  int  $fileId
      * @return View
      * */
-    public function displayFile($userId = null, $fileId = null) {
+    public function displayFile($userId = null, $fileId = null)
+    {
 
         $user = User::find($userId);
 
@@ -1121,9 +1133,7 @@ class UsersController extends AdminController {
         if (isset($user->id)) {
             if (!Company::isCurrentUserHasAccess($user)) {
                 return Redirect::route('users')->with('error', Lang::get('general.insufficient_permissions'));
-            }
-            else
-            {
+            } else {
                 $log = Actionlog::find($fileId);
                 $file = $log->get_src();
                 return Response::download($file);
@@ -1143,7 +1153,8 @@ class UsersController extends AdminController {
      * @author Aladin Alaily
      * @return View
      */
-    public function getLDAP() {
+    public function getLDAP()
+    {
         // Get all the available groups
         $groups = Sentry::getGroupProvider()->findAll();
         // Selected groups
@@ -1191,7 +1202,8 @@ class UsersController extends AdminController {
      * @author Aldin Alaily
      * @return Redirect
      */
-    public function postLDAP() {
+    public function postLDAP()
+    {
 
         $location_id = Input::get('location_id');
 
@@ -1220,7 +1232,7 @@ class UsersController extends AdminController {
 
         // If we are ignoring the SSL cert we need to setup the environment variable
         // before we create the connection
-        if($ldap_server_cert_ignore) {
+        if ($ldap_server_cert_ignore) {
             putenv('LDAPTLS_REQCERT=never');
         }
 
@@ -1265,11 +1277,11 @@ class UsersController extends AdminController {
             if (empty($ldap_result_active_flag) || $results[$i][$ldap_result_active_flag][0] == "TRUE") {
 
                 $item = array();
-                $item["username"] = isset( $results[$i][$ldap_result_username][0] ) ? $results[$i][$ldap_result_username][0] : "";
-                $item["employee_number"] = isset( $results[$i][$ldap_result_emp_num][0] ) ? $results[$i][$ldap_result_emp_num][0] : "";
-                $item["lastname"] = isset( $results[$i][$ldap_result_last_name][0] ) ? $results[$i][$ldap_result_last_name][0] : "";
-                $item["firstname"] = isset( $results[$i][$ldap_result_first_name][0] ) ? $results[$i][$ldap_result_first_name][0] : "";
-                $item["email"] = isset( $results[$i][$ldap_result_email][0] ) ? $results[$i][$ldap_result_email][0] : "" ;
+                $item["username"] = isset($results[$i][$ldap_result_username][0]) ? $results[$i][$ldap_result_username][0] : "";
+                $item["employee_number"] = isset($results[$i][$ldap_result_emp_num][0]) ? $results[$i][$ldap_result_emp_num][0] : "";
+                $item["lastname"] = isset($results[$i][$ldap_result_last_name][0]) ? $results[$i][$ldap_result_last_name][0] : "";
+                $item["firstname"] = isset($results[$i][$ldap_result_first_name][0]) ? $results[$i][$ldap_result_first_name][0] : "";
+                $item["email"] = isset($results[$i][$ldap_result_email][0]) ? $results[$i][$ldap_result_email][0] : "" ;
 
                 $user = DB::table('users')->where('username', $item["username"])->first();
                 if ($user) {
@@ -1282,10 +1294,9 @@ class UsersController extends AdminController {
                     if ($validator->fails()) {
                         $validator_msg = '';
 
-                		foreach($validator->messages()->all() as $key)
-                		{
-                			$validator_msg .= '<li>'.$key;
-                		}
+                        foreach ($validator->messages()->all() as $key) {
+                            $validator_msg .= '<li>'.$key;
+                        }
 
                         $item["note"] = '<span class="alert-msg">Validator failed: <br>'.$validator_msg.'</span>';
 
@@ -1331,5 +1342,4 @@ class UsersController extends AdminController {
 
         return Redirect::route('ldap/user')->with('success', "OK")->with('summary', $summary);
     }
-
 }

@@ -2,8 +2,8 @@
 
 class LicenseSeat extends Elegant implements ICompanyableChild
 {
-	use CompanyableChildTrait;
-	use SoftDeletingTrait;
+    use CompanyableChildTrait;
+    use SoftDeletingTrait;
 
     protected $dates = ['deleted_at'];
     protected $guarded = 'id';
@@ -16,16 +16,16 @@ class LicenseSeat extends Elegant implements ICompanyableChild
 
     public function license()
     {
-        return $this->belongsTo('License','license_id');
+        return $this->belongsTo('License', 'license_id');
     }
 
     public function user()
     {
-        return $this->belongsTo('User','assigned_to')->withTrashed();
+        return $this->belongsTo('User', 'assigned_to')->withTrashed();
     }
 
     public function asset()
     {
-        return $this->belongsTo('Asset','asset_id')->withTrashed();
+        return $this->belongsTo('Asset', 'asset_id')->withTrashed();
     }
 }

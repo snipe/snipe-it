@@ -4,7 +4,7 @@ class Setting extends Elegant
 {
     public static function getSettings()
     {
-        static $static_cache = NULL;
+        static $static_cache = null;
 
         if (!$static_cache) {
             $static_cache = Setting::find(1);
@@ -14,27 +14,29 @@ class Setting extends Elegant
 
     public function lar_ver()
     {
-    	$app = App::getFacadeApplication();
+        $app = App::getFacadeApplication();
         return $app::VERSION;
     }
 
-    public static function getDefaultEula() {
+    public static function getDefaultEula()
+    {
 
-	    $Parsedown = new Parsedown();
-	    if (Setting::getSettings()->default_eula_text) {
-		    return $Parsedown->text(e(Setting::getSettings()->default_eula_text));
-	    } else {
-		    return null;
-	    }
+        $Parsedown = new Parsedown();
+        if (Setting::getSettings()->default_eula_text) {
+            return $Parsedown->text(e(Setting::getSettings()->default_eula_text));
+        } else {
+            return null;
+        }
 
     }
 
-    public function show_custom_css() {
+    public function show_custom_css()
+    {
         $custom_css = Setting::getSettings()->custom_css;
         $custom_css = e($custom_css);
         // Needed for modifying the bootstrap nav :(
-        $custom_css = str_ireplace('script','SCRIPTS-NOT-ALLOWED-HERE',$custom_css);
-        $custom_css = str_replace('&gt;','>',$custom_css);
+        $custom_css = str_ireplace('script', 'SCRIPTS-NOT-ALLOWED-HERE', $custom_css);
+        $custom_css = str_replace('&gt;', '>', $custom_css);
         return $custom_css;
     }
 
@@ -71,16 +73,13 @@ class Setting extends Elegant
                 ),
             );
 
-        foreach($arBytes as $arItem)
-        {
-            if($bytes >= $arItem["VALUE"])
-            {
-                $result = $bytes / $arItem["VALUE"];
-                $result = round($result,2) .$arItem["UNIT"];
-                break;
+            foreach ($arBytes as $arItem) {
+                if ($bytes >= $arItem["VALUE"]) {
+                    $result = $bytes / $arItem["VALUE"];
+                    $result = round($result, 2) .$arItem["UNIT"];
+                    break;
+                }
             }
-        }
-        return $result;
+            return $result;
     }
-
 }

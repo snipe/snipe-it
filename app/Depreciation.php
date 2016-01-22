@@ -15,7 +15,7 @@ class Depreciation extends Elegant
 
     public function has_licenses()
     {
-      return $this->hasMany('License','depreciation_id')->count();
+        return $this->hasMany('License', 'depreciation_id')->count();
     }
 
       /**
@@ -26,13 +26,13 @@ class Depreciation extends Elegant
       *
       * @return Illuminate\Database\Query\Builder          Modified query builder
       */
-      public function scopeTextSearch($query, $search)
-      {
+    public function scopeTextSearch($query, $search)
+    {
 
-      return $query->where(function($query) use ($search)
-      {
-           $query->where('name', 'LIKE', '%'.$search.'%')
-           ->orWhere('months', 'LIKE', '%'.$search.'%');
-      });
-      }
+        return $query->where(function ($query) use ($search) {
+      
+             $query->where('name', 'LIKE', '%'.$search.'%')
+             ->orWhere('months', 'LIKE', '%'.$search.'%');
+        });
+    }
 }

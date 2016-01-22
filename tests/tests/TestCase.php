@@ -38,5 +38,4 @@ class TestCase extends Illuminate\Foundation\Testing\TestCase
         Artisan::call('migrate', array('--package' => 'cartalyst/sentry'));
         Artisan::call('migrate');
     }
-
 }

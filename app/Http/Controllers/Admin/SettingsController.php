@@ -16,7 +16,6 @@ use Response;
 use Artisan;
 use Crypt;
 
-
 class SettingsController extends AdminController
 {
     /**
@@ -50,11 +49,11 @@ class SettingsController extends AdminController
         // exit;
 
         if ($setting->ldap_pword!='') {
-          $show_ldap_pword = Crypt::decrypt($setting->ldap_pword);
+            $show_ldap_pword = Crypt::decrypt($setting->ldap_pword);
         } else {
-          $show_ldap_pword = '';
+            $show_ldap_pword = '';
         }
-        return View::make('backend/settings/edit', compact('setting'))->with('is_gd_installed',$is_gd_installed)->with('show_ldap_pword',$show_ldap_pword);
+        return View::make('backend/settings/edit', compact('setting'))->with('is_gd_installed', $is_gd_installed)->with('show_ldap_pword', $show_ldap_pword);
     }
 
 
@@ -78,16 +77,16 @@ class SettingsController extends AdminController
         // Declare the rules for the form validation
 
         $rules = array(
-	        "brand"     => 'required|min:1|numeric',
-            "per_page"   	=> 'required|min:1|numeric',
-	        "qr_text"		=> 'min:1|max:31',
-	        "logo"   		=> 'mimes:jpeg,bmp,png,gif',
+            "brand"     => 'required|min:1|numeric',
+            "per_page"      => 'required|min:1|numeric',
+            "qr_text"       => 'min:1|max:31',
+            "logo"          => 'mimes:jpeg,bmp,png,gif',
             "custom_css"   => 'alpha_space',
-	        "alert_email"   => 'email',
-	        "slack_endpoint"   => 'url',
+            "alert_email"   => 'email',
+            "slack_endpoint"   => 'url',
             "default_currency"   => 'required',
-	        "slack_channel"   => 'regex:/(?<!\w)#\w+/',
-	        "slack_botname"   => 'alpha_dash',
+            "slack_channel"   => 'regex:/(?<!\w)#\w+/',
+            "slack_botname"   => 'alpha_dash',
             "ldap_server"   => 'sometimes|required_if:ldap_enabled,1|url',
             "ldap_uname"     => 'sometimes|required_if:ldap_enabled,1',
             "ldap_pword"     => 'sometimes|required_if:ldap_enabled,1',
@@ -97,11 +96,11 @@ class SettingsController extends AdminController
             "ldap_lname_field"     => 'sometimes|required_if:ldap_enabled,1',
             "ldap_auth_filter_query"     => 'sometimes|required_if:ldap_enabled,1',
             "ldap_version"     => 'sometimes|required_if:ldap_enabled,1',
-	        );
+            );
 
         if (Config::get('app.lock_passwords')==false) {
-	        $rules['site_name'] = 'required|min:3';
-	      }
+            $rules['site_name'] = 'required|min:3';
+        }
 
         // Create a new validator instance from our validation rules
         $validator = Validator::make(Input::all(), $rules);
@@ -114,7 +113,7 @@ class SettingsController extends AdminController
         }
 
         if (Input::get('clear_logo')=='1') {
-	        $setting->logo = NULL;
+            $setting->logo = null;
         } elseif (Input::file('logo')) {
             if (!Config::get('app.lock_passwords')) {
                 $image = Input::file('logo');
@@ -132,11 +131,11 @@ class SettingsController extends AdminController
         // Update the asset data
             $setting->id = '1';
 
-             if (Config::get('app.lock_passwords')==false) {
-	             $setting->site_name = e(Input::get('site_name'));
-                 $setting->brand = e(Input::get('brand'));
-                 $setting->custom_css = e(Input::get('custom_css'));
-             }
+        if (Config::get('app.lock_passwords')==false) {
+            $setting->site_name = e(Input::get('site_name'));
+            $setting->brand = e(Input::get('brand'));
+            $setting->custom_css = e(Input::get('custom_css'));
+        }
 
             $setting->per_page = e(Input::get('per_page'));
             $setting->qr_code = e(Input::get('qr_code', '0'));
@@ -169,16 +168,16 @@ class SettingsController extends AdminController
             $setting->ldap_emp_num = Input::get('ldap_emp_num');
             $setting->ldap_email = Input::get('ldap_email');
 
-            if (Sentry::getUser()->isSuperUser()) {
-                $setting->full_multiple_companies_support = e(Input::get('full_multiple_companies_support', '0'));
-            }
+        if (Sentry::getUser()->isSuperUser()) {
+            $setting->full_multiple_companies_support = e(Input::get('full_multiple_companies_support', '0'));
+        }
 
 
             // Was the asset updated?
-            if($setting->save()) {
-                // Redirect to the settings page
-                return Redirect::to("admin/settings/app")->with('success', Lang::get('admin/settings/message.update.success'));
-            }
+        if ($setting->save()) {
+            // Redirect to the settings page
+            return Redirect::to("admin/settings/app")->with('success', Lang::get('admin/settings/message.update.success'));
+        }
 
             // Redirect to the setting management page
             return Redirect::to("admin/settings/app/edit")->with('error', Lang::get('admin/settings/message.update.error'));
@@ -202,7 +201,7 @@ class SettingsController extends AdminController
             /* This is the correct way to loop over the directory. */
             while (false !== ($entry = readdir($handle))) {
                 clearstatcache();
-                if (substr(strrchr($entry,'.'),1)=='zip') {
+                if (substr(strrchr($entry, '.'), 1)=='zip') {
                     $files[] = array(
                             'filename' => $entry,
                             'filesize' => Setting::fileSizeConvert(filesize(Config::get('backup::path').$entry)),
@@ -216,7 +215,7 @@ class SettingsController extends AdminController
         }
 
 
-        return View::make('backend/settings/backups', compact('path','files'));
+        return View::make('backend/settings/backups', compact('path', 'files'));
     }
 
 
@@ -251,15 +250,15 @@ class SettingsController extends AdminController
         if (!Config::get('app.lock_passwords')) {
             $file = Config::get('backup::path').'/'.$filename;
             if (file_exists($file)) {
-    				return Response::download($file);
+                    return Response::download($file);
             } else {
 
                 // Redirect to the backup page
-                return Redirect::route('settings/backups')->with('error',  Lang::get('admin/settings/message.backup.file_not_found'));
+                return Redirect::route('settings/backups')->with('error', Lang::get('admin/settings/message.backup.file_not_found'));
             }
         } else {
             // Redirect to the backup page
-            return Redirect::route('settings/backups')->with('error',  Lang::get('general.feature_disabled'));
+            return Redirect::route('settings/backups')->with('error', Lang::get('general.feature_disabled'));
         }
 
 
@@ -278,18 +277,14 @@ class SettingsController extends AdminController
 
             $file = Config::get('backup::path').'/'.$filename;
             if (file_exists($file)) {
-    			unlink($file);
+                unlink($file);
                 return Redirect::route('settings/backups')->with('success', Lang::get('admin/settings/message.backup.file_deleted'));
             } else {
                 return Redirect::route('settings/backups')->with('error', Lang::get('admin/settings/message.backup.file_not_found'));
             }
         } else {
-            return Redirect::route('settings/backups')->with('error',  Lang::get('general.feature_disabled'));
+            return Redirect::route('settings/backups')->with('error', Lang::get('general.feature_disabled'));
         }
 
     }
-
-
-
-
 }

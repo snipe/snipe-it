@@ -10,7 +10,7 @@ class AdminController extends AuthorizedController
 
     public function __construct()
     {
-    	// These have been moved into the routes for more granular control
+        // These have been moved into the routes for more granular control
         // Apply the admin auth filter
         //$this->beforeFilter('admin-auth', array('except' => $this->whitelist));
 
@@ -83,5 +83,4 @@ class AdminController extends AuthorizedController
 
         $permissions = $decodedPermissions;
     }
-
 }

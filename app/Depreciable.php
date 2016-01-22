@@ -9,10 +9,10 @@ class Depreciable extends Elegant
     //REQUIRES a purchase_date field
     //     and a purchase_cost field
 
-    //REQUIRES a get_depreciation method, 
+    //REQUIRES a get_depreciation method,
     //which will return the deprecation.
-    //this is needed because assets get 
-    //their depreciation from a model, 
+    //this is needed because assets get
+    //their depreciation from a model,
     //whereas licenses have deprecations
     //directly associated with them.
 
@@ -23,7 +23,7 @@ class Depreciable extends Elegant
 
     public function depreciation()
     {
-        return $this->belongsTo('Depreciation','depreciation_id');
+        return $this->belongsTo('Depreciation', 'depreciation_id');
     }
 
     public function get_depreciation()
@@ -63,7 +63,7 @@ class Depreciable extends Elegant
 
         // @link http://www.php.net/manual/en/class.dateinterval.php
         $interval = $d1->diff($d2);
-        if(!$interval->invert) {
+        if (!$interval->invert) {
             return $interval;
         } else {
             return new DateInterval("PT0S"); //null interval (zero seconds from now)
@@ -75,5 +75,5 @@ class Depreciable extends Elegant
         $date = date_create($this->purchase_date);
         date_add($date, date_interval_create_from_date_string($this->get_depreciation()->months . ' months'));
         return $date; //date_format($date, 'Y-m-d'); //don't bake-in format, for internationalization
-    }    
+    }
 }

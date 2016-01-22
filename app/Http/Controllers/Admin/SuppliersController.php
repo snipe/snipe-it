@@ -15,7 +15,6 @@ use View;
 
 use Symfony\Component\HttpFoundation\JsonResponse;
 
-
 class SuppliersController extends AdminController
 {
     /**
@@ -89,7 +88,7 @@ class SuppliersController extends AdminController
             }
 
             // Was it created?
-            if($supplier->save()) {
+            if ($supplier->save()) {
                 // Redirect to the new supplier  page
                 return Redirect::to("admin/settings/suppliers")->with('success', Lang::get('admin/suppliers/message.create.success'));
             }
@@ -106,22 +105,22 @@ class SuppliersController extends AdminController
 
     public function store()
     {
-      $supplier=new Supplier;
-      $new=Input::all();
-      $validator = Validator::make($new, $supplier->validationRules());
-      if($validator->fails()) {
-        return JsonResponse::create(["error" => "Failed validation: ".print_r($validator->messages()->all('<li>:message</li>'),true)],500);
-      } else {
-        //$supplier->fill($new);
-        $supplier->name=$new['name'];
-        $supplier->user_id              = Sentry::getId();
-
-        if($supplier->save()) {
-          return JsonResponse::create($supplier);
+        $supplier=new Supplier;
+        $new=Input::all();
+        $validator = Validator::make($new, $supplier->validationRules());
+        if ($validator->fails()) {
+            return JsonResponse::create(["error" => "Failed validation: ".print_r($validator->messages()->all('<li>:message</li>'), true)], 500);
         } else {
-          return JsonResponse::create(["error" => "Couldn't save Supplier"]);
+          //$supplier->fill($new);
+            $supplier->name=$new['name'];
+            $supplier->user_id              = Sentry::getId();
+
+            if ($supplier->save()) {
+                return JsonResponse::create($supplier);
+            } else {
+                return JsonResponse::create(["error" => "Couldn't save Supplier"]);
+            }
         }
-      }
     }
 
     /**
@@ -161,12 +160,10 @@ class SuppliersController extends AdminController
           //attempt to validate
         $validator = Validator::make(Input::all(), $supplier->validationRules($supplierId));
 
-        if ($validator->fails())
-        {
-            // The given data did not pass validation
+        if ($validator->fails()) {
+        // The given data did not pass validation
             return Redirect::back()->withInput()->withErrors($validator->messages());
-        }
-        // attempt validation
+        } // attempt validation
         else {
 
             // Save the  data
@@ -196,11 +193,11 @@ class SuppliersController extends AdminController
             }
 
             if (Input::get('image_delete') == 1 && Input::file('image') == "") {
-                $supplier->image = NULL;
+                $supplier->image = null;
             }
 
             // Was it created?
-            if($supplier->save()) {
+            if ($supplier->save()) {
                 // Redirect to the new supplier page
                 return Redirect::to("admin/settings/suppliers")->with('success', Lang::get('admin/suppliers/message.update.success'));
             }
@@ -235,7 +232,7 @@ class SuppliersController extends AdminController
             $supplier->delete();
 
             // Redirect to the suppliers management page
-        return Redirect::to('admin/settings/suppliers')->with('success', Lang::get('admin/suppliers/message.delete.success'));
+            return Redirect::to('admin/settings/suppliers')->with('success', Lang::get('admin/suppliers/message.delete.success'));
         }
 
     }
@@ -296,7 +293,7 @@ class SuppliersController extends AdminController
 
         $rows = array();
 
-        foreach($suppliers as $supplier) {
+        foreach ($suppliers as $supplier) {
             $actions = '<a href="'.route('update/supplier', $supplier->id).'" class="btn btn-warning btn-sm" style="margin-right:5px;"><i class="fa fa-pencil icon-white"></i></a><a data-html="false" class="btn delete-asset btn-danger btn-sm" data-toggle="modal" href="'.route('delete/supplier', $supplier->id).'" data-content="'.Lang::get('admin/suppliers/message.delete.confirm').'" data-title="'.Lang::get('general.delete').' '.htmlspecialchars($supplier->name).'?" onClick="return false;"><i class="fa fa-trash icon-white"></i></a>';
 
             $rows[] = array(
@@ -318,7 +315,4 @@ class SuppliersController extends AdminController
         return $data;
 
     }
-
-
-
 }

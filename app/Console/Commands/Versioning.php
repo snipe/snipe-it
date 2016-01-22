@@ -1,10 +1,11 @@
 <?php
-	
+    
 use Illuminate\Console\Command;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Input\InputArgument;
  
-class Versioning extends Command {
+class Versioning extends Command
+{
  
     /**
      * The console command name.
@@ -43,14 +44,14 @@ class Versioning extends Command {
  
         // The git's output
         // get the argument passed in the git command
-		 $hash_version = $this->argument('app_version');
-		 
-		 // discard the commit hash
-		 $version = explode('-', $hash_version);
-		 $realVersion = $version[0] . '-' . $version[1];
-		 
-		 // save the version array to a variable
-		 $array = var_export(array('app_version' => $realVersion,'hash_version' => $hash_version), true);
+         $hash_version = $this->argument('app_version');
+         
+         // discard the commit hash
+         $version = explode('-', $hash_version);
+         $realVersion = $version[0] . '-' . $version[1];
+         
+         // save the version array to a variable
+         $array = var_export(array('app_version' => $realVersion,'hash_version' => $hash_version), true);
  
  
         // Construct our file content

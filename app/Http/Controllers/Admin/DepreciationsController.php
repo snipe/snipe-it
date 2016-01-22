@@ -36,7 +36,7 @@ class DepreciationsController extends AdminController
     {
         // Show the page
         $depreciation_options = array('0' => 'Top Level') + Depreciation::lists('name', 'id');
-        return View::make('backend/depreciations/edit')->with('depreciation_options',$depreciation_options)->with('depreciation',new Depreciation);
+        return View::make('backend/depreciations/edit')->with('depreciation_options', $depreciation_options)->with('depreciation', new Depreciation);
     }
 
 
@@ -63,7 +63,7 @@ class DepreciationsController extends AdminController
             $depreciation->user_id          = Sentry::getId();
 
             // Was the asset created?
-            if($depreciation->save()) {
+            if ($depreciation->save()) {
                 // Redirect to the new depreciation  page
                 return Redirect::to("admin/settings/depreciations")->with('success', Lang::get('admin/depreciations/message.create.success'));
             }
@@ -96,7 +96,7 @@ class DepreciationsController extends AdminController
         //$depreciation_options = array('' => 'Top Level') + Depreciation::lists('name', 'id');
 
         $depreciation_options = array('' => 'Top Level') + DB::table('depreciations')->where('id', '!=', $depreciationId)->lists('name', 'id');
-        return View::make('backend/depreciations/edit', compact('depreciation'))->with('depreciation_options',$depreciation_options);
+        return View::make('backend/depreciations/edit', compact('depreciation'))->with('depreciation_options', $depreciation_options);
     }
 
 
@@ -118,19 +118,17 @@ class DepreciationsController extends AdminController
 //attempt to validate
         $validator = Validator::make(Input::all(), $depreciation->validationRules($depreciationId));
 
-        if ($validator->fails())
-        {
-            // The given data did not pass validation
+        if ($validator->fails()) {
+        // The given data did not pass validation
             return Redirect::back()->withInput()->withErrors($validator->messages());
-        }
-        // attempt validation
+        } // attempt validation
         else {
             // Depreciation data
             $depreciation->name      = e(Input::get('name'));
             $depreciation->months    = e(Input::get('months'));
 
             // Was the asset created?
-            if($depreciation->save()) {
+            if ($depreciation->save()) {
                 // Redirect to the depreciation page
                 return Redirect::to("admin/settings/depreciations/")->with('success', Lang::get('admin/depreciations/message.update.success'));
             }
@@ -202,7 +200,7 @@ class DepreciationsController extends AdminController
 
         $rows = array();
 
-        foreach($depreciations as $depreciation) {
+        foreach ($depreciations as $depreciation) {
             $actions = '<a href="'.route('update/depreciations', $depreciation->id).'" class="btn btn-warning btn-sm" style="margin-right:5px;"><i class="fa fa-pencil icon-white"></i></a><a data-html="false" class="btn delete-asset btn-danger btn-sm" data-toggle="modal" href="'.route('delete/depreciations', $depreciation->id).'" data-content="'.Lang::get('admin/depreciations/message.delete.confirm').'" data-title="'.Lang::get('general.delete').' '.htmlspecialchars($depreciation->name).'?" onClick="return false;"><i class="fa fa-trash icon-white"></i></a>';
 
             $rows[] = array(
@@ -218,8 +216,4 @@ class DepreciationsController extends AdminController
         return $data;
 
     }
-
-
-
-
 }

@@ -68,17 +68,18 @@ class Category extends Elegant
         return $this->hasMany('Model', 'category_id');
     }
 
-    public function getEula() {
+    public function getEula()
+    {
 
-	    $Parsedown = new Parsedown();
+        $Parsedown = new Parsedown();
 
-	    if ($this->eula_text) {
-		    return $Parsedown->text(e($this->eula_text));
-	    } elseif ((Setting::getSettings()->default_eula_text) && ($this->use_default_eula=='1')) {
-		    return $Parsedown->text(e(Setting::getSettings()->default_eula_text));
-	    } else {
-		    return null;
-	    }
+        if ($this->eula_text) {
+            return $Parsedown->text(e($this->eula_text));
+        } elseif ((Setting::getSettings()->default_eula_text) && ($this->use_default_eula=='1')) {
+            return $Parsedown->text(e(Setting::getSettings()->default_eula_text));
+        } else {
+            return null;
+        }
 
     }
 
@@ -91,10 +92,10 @@ class Category extends Elegant
      * @author  Vincent Sposato <vincent.sposato@gmail.com>
      * @version v1.0
      */
-    public function scopeRequiresAcceptance( $query )
+    public function scopeRequiresAcceptance($query)
     {
 
-        return $query->where( 'require_acceptance', '=', true );
+        return $query->where('require_acceptance', '=', true);
     }
     
     /**
@@ -108,11 +109,10 @@ class Category extends Elegant
     public function scopeTextSearch($query, $search)
     {
 
-        return $query->where(function($query) use ($search)
-        {
+        return $query->where(function ($query) use ($search) {
+        
             $query->where('name', 'LIKE', '%'.$search.'%')
             ->orWhere('category_type', 'LIKE', '%'.$search.'%');
         });
     }
-
 }

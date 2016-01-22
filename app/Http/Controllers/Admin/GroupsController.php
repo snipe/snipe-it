@@ -208,7 +208,7 @@ class GroupsController extends AdminController
                 return Redirect::route('groups')->with('error', Lang::get('admin/groups/message.group_not_found', compact('id')));
             }
         } else {
-            return Redirect::route('groups')->with('error',  Lang::get('general.feature_disabled'));
+            return Redirect::route('groups')->with('error', Lang::get('general.feature_disabled'));
         }
     }
 
@@ -239,9 +239,9 @@ class GroupsController extends AdminController
         $groups = Sentry::getGroupProvider()->createModel();
         //$users = Company::scopeCompanyables($users);
 
-         if (Input::has('search')) {
-             $groups = $users->TextSearch(Input::get('search'));
-         }
+        if (Input::has('search')) {
+            $groups = $users->TextSearch(Input::get('search'));
+        }
 
          $order = Input::get('order') === 'asc' ? 'asc' : 'desc';
 
@@ -257,8 +257,7 @@ class GroupsController extends AdminController
         $groups = $groups->skip($offset)->take($limit)->get();
         $rows = array();
 
-        foreach ($groups as $group)
-        {
+        foreach ($groups as $group) {
             $group_names = '';
             $inout = '';
             $actions = '<nobr>';
@@ -267,9 +266,9 @@ class GroupsController extends AdminController
 
             if (!Config::get('app.lock_passwords')) {
                   $actions .= '<a data-html="false" class="btn delete-asset btn-danger btn-sm" data-toggle="modal" href="' . route('delete/group', $group->id) . '" data-content="'.Lang::get('admin/groups/message.delete.confirm').'" data-title="Delete ' . htmlspecialchars($group->name) . '?" onClick="return false;"><i class="fa fa-trash icon-white"></i></a> ';
-              } else {
-                  $actions .= ' <span class="btn delete-asset btn-danger btn-sm disabled"><i class="fa fa-trash icon-white"></i></span>';
-              }
+            } else {
+                $actions .= ' <span class="btn delete-asset btn-danger btn-sm disabled"><i class="fa fa-trash icon-white"></i></span>';
+            }
 
             $actions .= '</nobr>';
 
@@ -285,5 +284,4 @@ class GroupsController extends AdminController
         $data = array('total'=>$groupsCount, 'rows'=>$rows);
         return $data;
     }
-
 }

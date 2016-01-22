@@ -37,11 +37,11 @@ class StatuslabelsController extends AdminController
     public function getCreate()
     {
         // Show the page
-		$statuslabel = new Statuslabel;
-		$use_statuslabel_type = $statuslabel->getStatuslabelType();
-    	$statuslabel_types = statusTypeList();
+        $statuslabel = new Statuslabel;
+        $use_statuslabel_type = $statuslabel->getStatuslabelType();
+        $statuslabel_types = statusTypeList();
 
-        return View::make('backend/statuslabels/edit', compact('statuslabel_types','statuslabel'))->with('use_statuslabel_type',$use_statuslabel_type);
+        return View::make('backend/statuslabels/edit', compact('statuslabel_types', 'statuslabel'))->with('use_statuslabel_type', $use_statuslabel_type);
     }
 
 
@@ -62,10 +62,10 @@ class StatuslabelsController extends AdminController
         // attempt validation
         if ($statuslabel->validate($new)) {
 
-        	$statustype = Statuslabel::getStatuslabelTypesForDB(Input::get('statuslabel_types'));
+            $statustype = Statuslabel::getStatuslabelTypesForDB(Input::get('statuslabel_types'));
 
             // Save the Statuslabel data
-            $statuslabel->name            	= e(Input::get('name'));
+            $statuslabel->name              = e(Input::get('name'));
             $statuslabel->user_id          = Sentry::getId();
             $statuslabel->notes          =  e(Input::get('notes'));
             $statuslabel->deployable          =  $statustype['deployable'];
@@ -73,7 +73,7 @@ class StatuslabelsController extends AdminController
             $statuslabel->archived          =  $statustype['archived'];
 
             // Was the asset created?
-            if($statuslabel->save()) {
+            if ($statuslabel->save()) {
                 // Redirect to the new Statuslabel  page
                 return Redirect::to("admin/settings/statuslabels")->with('success', Lang::get('admin/statuslabels/message.create.success'));
             }
@@ -91,39 +91,39 @@ class StatuslabelsController extends AdminController
     public function store()
     {
       // get the POST data
-      $new = Input::all();
+        $new = Input::all();
 
-      $new['statuslabel_types']="deployable";
+        $new['statuslabel_types']="deployable";
 
       // create a new model instance
-      $statuslabel = new Statuslabel();
-      $statustype = Statuslabel::getStatuslabelTypesForDB(Input::get('statuslabel_types'));
+        $statuslabel = new Statuslabel();
+        $statustype = Statuslabel::getStatuslabelTypesForDB(Input::get('statuslabel_types'));
 
       // attempt validation
-      if ($statuslabel->validate($new)) {
+        if ($statuslabel->validate($new)) {
 
-        //$statustype = Statuslabel::getStatuslabelTypesForDB(Input::get('statuslabel_types'));
+          //$statustype = Statuslabel::getStatuslabelTypesForDB(Input::get('statuslabel_types'));
 
-          // Save the Statuslabel data
-          $statuslabel->name            = e(Input::get('name'));
-          $statuslabel->user_id         = Sentry::getId();
-          $statuslabel->notes           =  '';
-          $statuslabel->deployable      =  $statustype['deployable'];
-          $statuslabel->pending         =  $statustype['pending'];
-          $statuslabel->archived        =  $statustype['archived'];
+            // Save the Statuslabel data
+            $statuslabel->name            = e(Input::get('name'));
+            $statuslabel->user_id         = Sentry::getId();
+            $statuslabel->notes           =  '';
+            $statuslabel->deployable      =  $statustype['deployable'];
+            $statuslabel->pending         =  $statustype['pending'];
+            $statuslabel->archived        =  $statustype['archived'];
 
-          // Was the asset created?
-          if($statuslabel->save()) {
-              // Redirect to the new Statuslabel  page
-              return JsonResponse::create($statuslabel);
-          } else {
-            return JsonResponse::create(["error" => "Couldn't save Statuslabel"],500);
-          }
-      } else {
-          // failure
-          $errors = $statuslabel->errors();
-          return  JsonResponse::create(["error" => "Failed validation: ".print_r($errors->all('<li>:message</li>'),true)],500);
-      }
+            // Was the asset created?
+            if ($statuslabel->save()) {
+                // Redirect to the new Statuslabel  page
+                return JsonResponse::create($statuslabel);
+            } else {
+                return JsonResponse::create(["error" => "Couldn't save Statuslabel"], 500);
+            }
+        } else {
+            // failure
+            $errors = $statuslabel->errors();
+            return  JsonResponse::create(["error" => "Failed validation: ".print_r($errors->all('<li>:message</li>'), true)], 500);
+        }
     }
 
 
@@ -141,11 +141,11 @@ class StatuslabelsController extends AdminController
             return Redirect::to('admin/settings/statuslabels')->with('error', Lang::get('admin/statuslabels/message.does_not_exist'));
         }
 
-		$use_statuslabel_type = $statuslabel->getStatuslabelType();
+        $use_statuslabel_type = $statuslabel->getStatuslabelType();
 
-		$statuslabel_types = array('' => Lang::get('admin/hardware/form.select_statustype')) + array('undeployable' => Lang::get('admin/hardware/general.undeployable')) + array('pending' => Lang::get('admin/hardware/general.pending')) + array('archived' => Lang::get('admin/hardware/general.archived')) + array('deployable' => Lang::get('admin/hardware/general.deployable'));
+        $statuslabel_types = array('' => Lang::get('admin/hardware/form.select_statustype')) + array('undeployable' => Lang::get('admin/hardware/general.undeployable')) + array('pending' => Lang::get('admin/hardware/general.pending')) + array('archived' => Lang::get('admin/hardware/general.archived')) + array('deployable' => Lang::get('admin/hardware/general.deployable'));
 
-        return View::make('backend/statuslabels/edit', compact('statuslabel','statuslabel_types'))->with('use_statuslabel_type',$use_statuslabel_type);
+        return View::make('backend/statuslabels/edit', compact('statuslabel', 'statuslabel_types'))->with('use_statuslabel_type', $use_statuslabel_type);
     }
 
 
@@ -166,17 +166,15 @@ class StatuslabelsController extends AdminController
         //attempt to validate
         $validator = Validator::make(Input::all(), $statuslabel->validationRules($statuslabelId));
 
-        if ($validator->fails())
-        {
-            // The given data did not pass validation
+        if ($validator->fails()) {
+        // The given data did not pass validation
             return Redirect::back()->withInput()->withErrors($validator->messages());
-        }
-        // attempt validation
+        } // attempt validation
         else {
             // Update the Statuslabel data
             $statustype = Statuslabel::getStatuslabelTypesForDB(Input::get('statuslabel_types'));
 
-            $statuslabel->name            	= e(Input::get('name'));
+            $statuslabel->name              = e(Input::get('name'));
             $statuslabel->notes          =  e(Input::get('notes'));
             $statuslabel->deployable          =  $statustype['deployable'];
             $statuslabel->pending          =  $statustype['pending'];
@@ -184,7 +182,7 @@ class StatuslabelsController extends AdminController
 
 
             // Was the asset created?
-            if($statuslabel->save()) {
+            if ($statuslabel->save()) {
                 // Redirect to the saved Statuslabel page
                 return Redirect::to("admin/settings/statuslabels/")->with('success', Lang::get('admin/statuslabels/message.update.success'));
             }
@@ -259,16 +257,16 @@ class StatuslabelsController extends AdminController
 
         $rows = array();
 
-        foreach($statuslabels as $statuslabel) {
+        foreach ($statuslabels as $statuslabel) {
 
             if ($statuslabel->deployable == 1) {
-			$label_type = Lang::get('admin/statuslabels/table.deployable');
+                $label_type = Lang::get('admin/statuslabels/table.deployable');
             } elseif ($statuslabel->pending == 1) {
-			$label_type = Lang::get('admin/statuslabels/table.pending');
+                $label_type = Lang::get('admin/statuslabels/table.pending');
             } elseif ($statuslabel->archived == 1) {
-		      $label_type = Lang::get('admin/statuslabels/table.archived');
-		} else {
-                  $label_type = Lang::get('admin/statuslabels/table.undeployable');
+                $label_type = Lang::get('admin/statuslabels/table.archived');
+            } else {
+                $label_type = Lang::get('admin/statuslabels/table.undeployable');
             }
 
             $actions = '<a href="'.route('update/statuslabel', $statuslabel->id).'" class="btn btn-warning btn-sm" style="margin-right:5px;"><i class="fa fa-pencil icon-white"></i></a><a data-html="false" class="btn delete-asset btn-danger btn-sm" data-toggle="modal" href="'.route('delete/statuslabel', $statuslabel->id).'" data-content="'.Lang::get('admin/statuslabels/message.delete.confirm').'" data-title="'.Lang::get('general.delete').' '.htmlspecialchars($statuslabel->name).'?" onClick="return false;"><i class="fa fa-trash icon-white"></i></a>';
@@ -286,8 +284,4 @@ class StatuslabelsController extends AdminController
         return $data;
 
     }
-
-
-
-
 }

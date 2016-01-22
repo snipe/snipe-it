@@ -7,9 +7,8 @@ class AssetTest extends TestCase
      *
      * @return void
      */
-    public function testConstructor() {
+    public function testConstructor()
+    {
         $f=new Asset();
     }
-
-    
 }
