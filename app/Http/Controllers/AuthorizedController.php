@@ -1,6 +1,6 @@
 <?php
 
-class AuthorizedController extends BaseController
+class AuthorizedController extends Controller
 {
     /**
      * Whitelisted auth routes.
