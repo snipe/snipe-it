@@ -214,7 +214,7 @@
                                 @endif
 
                                 @if ($supplier->image)
-                                <li><br /><img src="/uploads/suppliers/{{{ $supplier->image }}}" /></li>
+                                <li><br /><img src="{{ Config::get('app.url') }}/uploads/suppliers/{{{ $supplier->image }}}" /></li>
                                 @endif
 
                                 </ul>

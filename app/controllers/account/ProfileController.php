@@ -20,12 +20,7 @@ class ProfileController extends AuthorizedController
     {
         // Get the user information
         $user = Sentry::getUser();
-
-        // Show the page
-
-        $location_list = array('' => 'Select One') + Location::lists('name', 'id');
-
-        // Show the page
+        $location_list = locationsList();
         return View::make('frontend/account/profile', compact('user'))->with('location_list',$location_list);
     }
 
@@ -63,7 +58,7 @@ class ProfileController extends AuthorizedController
         $user->website    = Input::get('website');
         $user->location_id    = Input::get('location_id');
         $user->gravatar   = Input::get('gravatar');
-		
+
 		if (Input::file('avatar')) {
             $image = Input::file('avatar');
             $file_name = $user->first_name."-".$user->last_name.".".$image->getClientOriginalExtension();
@@ -75,7 +70,7 @@ class ProfileController extends AuthorizedController
         if (Input::get('avatar_delete') == 1 && Input::file('avatar') == "") {
             $user->avatar = NULL;
         }
-		
+
         $user->save();
 
         // Redirect to the settings page
