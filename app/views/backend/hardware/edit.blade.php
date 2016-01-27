@@ -164,6 +164,8 @@
               @endif
               @if (Input::old('model_id'))
                 <?php $model=Model::find(Input::old('model_id')); ?>
+              @elseif (isset($selected_model))
+                <?php $model=$selected_model; ?>
               @endif
               @if (isset($model) && $model)
                 @include("backend.models.custom_fields_form",["model" => $model])
