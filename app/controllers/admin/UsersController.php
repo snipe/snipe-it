@@ -439,7 +439,7 @@ class UsersController extends AdminController {
                 $success = Lang::get('admin/users/message.success.update');
 
                 // Redirect to the user page
-                return Redirect::route('view/user', $id)->with('success', $success);
+                return Redirect::route('users')->with('success', $success);
             }
 
             // Prepare the error message
