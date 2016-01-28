@@ -20,6 +20,12 @@
   padding-top: 0px;
 }
 
+input[type='text'][disabled], input[disabled], textarea[disabled], input[readonly], textarea[readonly], .form-control[disabled], .form-control[readonly], fieldset[disabled] .form-control {
+  background-color: white;
+  color: #555555;
+  cursor:text;
+}
+
 </style>
 
 <div class="page-header">
