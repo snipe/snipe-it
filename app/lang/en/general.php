@@ -85,6 +85,7 @@
     'logout'				=> 'Logout',
     'manufacturer'			=> 'Manufacturer',
     'manufacturers'			=> 'Manufacturers',
+    'markdown'					=> '<a href="https://help.github.com/articles/github-flavored-markdown/">Github flavored markdown</a> is allowed',
     'model_no'				=> 'Model No.',
     'months'				=> 'months',
     'moreinfo'				=> 'More Info',

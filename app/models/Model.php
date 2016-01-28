@@ -48,6 +48,16 @@ class Model extends Elegant
         return $this->belongsTo('CustomFieldset','fieldset_id');
     }
 
+    public function getNote() {
+
+	    $Parsedown = new Parsedown();
+
+	    if ($this->note) {
+		    return $Parsedown->text(e($this->note));
+	    } 
+
+    }
+
     /**
 	* -----------------------------------------------
 	* BEGIN QUERY SCOPES
