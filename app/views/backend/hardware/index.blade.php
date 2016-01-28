@@ -144,7 +144,7 @@
         paginationLastText: "@lang('general.last')",
         paginationPreText: "@lang('general.previous')",
         paginationNextText: "@lang('general.next')",
-        pageList: ['10','25','50','100','150','200'],
+        pageList: ['10','25','50','100','150','200','500','1000'],
         icons: {
             paginationSwitchDown: 'fa-caret-square-o-down',
             paginationSwitchUp: 'fa-caret-square-o-up',
