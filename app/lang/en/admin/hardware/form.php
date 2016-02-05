@@ -10,7 +10,8 @@ return array(
     'checkedout_to'		=> 'Checked Out To',
     'checkout_date'		=> 'Checkout Date',
     'checkin_date'		=> 'Checkin Date',
-    'checkout_to'		=> 'Checkout to',
+    'checkout_to_user'	=> 'Checkout to user',
+    'checkout_to_location'	=> 'Checkout to location',
     'cost'				=> 'Purchase Cost',
     'create'			=> 'Create Asset',
     'date'				=> 'Purchase Date',
@@ -38,6 +39,8 @@ return array(
     'supplier'			=> 'Supplier',
     'tag'				=> 'Asset Tag',
     'update'			=> 'Asset Update',
+    'user_loc_help'     => 'Assets can be checked out to a user, a location, or both.',
+    'user_loc_separator' => 'AND/OR',
     'warranty'			=> 'Warranty',
     'years'				=> 'years',
 )

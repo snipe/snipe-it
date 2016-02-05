@@ -465,8 +465,9 @@ class AssetsController extends AdminController
 
         // Get the dropdown of users and then pass it to the checkout view
         $users_list = usersList();
+        $location_list = locationsList();
 
-        return View::make('backend/hardware/checkout', compact('asset'))->with('users_list',$users_list);
+        return View::make('backend/hardware/checkout', compact('asset'))->with('users_list', $users_list)->with('location_list', $location_list);
 
     }
 

@@ -59,11 +59,25 @@
             <!-- User -->
 
             <div class="form-group {{ $errors->has('assigned_to') ? ' has-error' : '' }}">
-                <label for="assigned_to" class="col-md-2 control-label">@lang('admin/hardware/form.checkout_to')
-                 <i class='fa fa-asterisk'></i></label>
+                <label for="assigned_to" class="col-md-2 control-label">@lang('admin/hardware/form.checkout_to_user')</label>
                 <div class="col-md-9">
                     {{ Form::select('assigned_to', $users_list , Input::old('assigned_to', $asset->assigned_to), array('class'=>'select2', 'style'=>'min-width:350px')) }}
                     {{ $errors->first('assigned_to', '<br><span class="alert-msg"><i class="fa fa-times"></i> :message</span>') }}
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <div class="col-md-2 control-label"><strong>@lang('admin/hardware/form.user_loc_separator')</strong></div>
+                <div class="col-md-9 help-block">@lang('admin/hardware/form.user_loc_help')</div>
+            </div>
+            
+            <!-- Location -->
+
+            <div class="form-group {{ $errors->has('assigned_location') ? ' has-error' : '' }}">
+                <label for="assigned_to" class="col-md-2 control-label">@lang('admin/hardware/form.checkout_to_location')</label>
+                <div class="col-md-9">
+                    {{ Form::select('assigned_location', $location_list , Input::old('assigned_location', $asset->assigned_location), array('class'=>'select2', 'style'=>'min-width:350px')) }}
+                    {{ $errors->first('assigned_location', '<br><span class="alert-msg"><i class="fa fa-times"></i> :message</span>') }}
                 </div>
             </div>
 
@@ -80,7 +94,7 @@
 
             <!-- Expected Checkin Date -->
             <div class="form-group {{ $errors->has('expected_checkin') ? ' has-error' : '' }}">
-                <label for="checkout_at" class="col-md-2 control-label">@lang('admin/hardware/form.expected_checkin')</label>
+                <label for="expected_checkin" class="col-md-2 control-label">@lang('admin/hardware/form.expected_checkin')</label>
                 <div class="input-group col-md-3">
                     <input type="date" class="datepicker form-control" data-date-format="yyyy-mm-dd" placeholder="Expected Checkin Date" name="expected_checkin" id="expected_checkin" value="{{{ Input::old('expected_checkin') }}}">
                     <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
