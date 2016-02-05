@@ -9,6 +9,12 @@
 {{-- Page content --}}
 @section('content')
 
+<style>
+.hidden-xs {
+  display: inline-block !important;
+}
+</style>
+
 <div class="row header">
     <div class="col-md-12">
         @if (Setting::getSettings()->ldap_enabled == 1)
@@ -79,6 +85,7 @@
                    </th>
                    <th data-sortable="false" data-field="groups">{{ Lang::get('general.groups') }}</th>
                    <th data-sortable="true" data-field="notes">{{ Lang::get('general.notes') }}</th>
+                   <th data-sortable="true" data-field="activated">{{ Lang::get('general.activated') }}</th>
                    <th data-switchable="false" data-searchable="false" data-sortable="false" data-field="actions" >{{ Lang::get('table.actions') }}</th>
                </tr>
            </thead>

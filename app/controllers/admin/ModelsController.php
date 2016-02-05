@@ -115,6 +115,7 @@ class ModelsController extends AdminController
             $model->modelno            	= e(Input::get('modelno'));
             $model->manufacturer_id    	= e(Input::get('manufacturer_id'));
             $model->category_id    		= e(Input::get('category_id'));
+            $model->note    		= e(Input::get('note'));
             $model->user_id          	= Sentry::getId();
             if (Input::get('custom_fieldset')!='') {
               $model->fieldset_id = e(Input::get('custom_fieldset'));
@@ -166,6 +167,7 @@ class ModelsController extends AdminController
         $model->category_id = e(Input::get('category_id'));
         $model->modelno = e(Input::get('modelno'));
         $model->user_id = Sentry::getUser()->id;
+        $model->note    		= e(Input::get('note'));
         $model->eol=0;
 
         if($model->save()) {
@@ -243,6 +245,7 @@ class ModelsController extends AdminController
             $model->modelno            	= e(Input::get('modelno'));
             $model->manufacturer_id    	= e(Input::get('manufacturer_id'));
             $model->category_id    		= e(Input::get('category_id'));
+            $model->note    		= e(Input::get('note'));
             if (Input::get('custom_fieldset')=='') {
               $model->fieldset_id = null;
             } else {
@@ -454,6 +457,7 @@ class ModelsController extends AdminController
                 'depreciation'      => (($model->depreciation)&&($model->depreciation->id > 0)) ? $model->depreciation->name.' ('.$model->depreciation->months.')' : Lang::get('general.no_depreciation'),
                 'category'          => ($model->category) ? $model->category->name : '',
                 'eol'               => ($model->eol) ? $model->eol.' '.Lang::get('general.months') : '',
+                'note'       => $model->getNote(),
                 'actions'           => $actions
                 );
         }

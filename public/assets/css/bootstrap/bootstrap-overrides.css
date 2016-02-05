@@ -313,7 +313,6 @@ textarea::-webkit-input-placeholder {
 .table td{
 	color: #526273;
 	border-top-color: #edf2f7 !important;
-	vertical-align: middle !important;
 }
 .table th.align-right,
 .table td.align-right {
