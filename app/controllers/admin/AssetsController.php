@@ -487,7 +487,8 @@ class AssetsController extends AdminController
 
         // Declare the rules for the form validation
         $rules = array(
-            'assigned_to'   => 'required|min:1',
+            'assigned_to'   => 'required_without:assigned_location|min:1',
+            'assigned_location' => 'required_without:assigned_to|min:1',
             'checkout_at'   => 'required|date',
             'note'   => 'alpha_space',
         );
