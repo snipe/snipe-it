@@ -16,7 +16,7 @@ class Asset extends Depreciable
       'warranty_months' => 'integer|min:0|max:240',
       'note'            => 'alpha_space',
       'notes'           => 'alpha_space',
-      'physical'         => 'integer',
+      'physical'        => 'integer',
       'checkout_date'   => 'date|max:10|min:10',
       'checkin_date'    => 'date|max:10|min:10',
       'supplier_id'     => 'integer',
@@ -35,19 +35,19 @@ class Asset extends Depreciable
     */
     public function checkOutToUser($user, $admin, $checkout_at = null, $expected_checkin = null, $note = null, $name = null) {
 
-		if ($expected_checkin) {
-			$this->expected_checkin = $expected_checkin ;
+		if ($expected_checkin) {//
+			$this->expected_checkin = $expected_checkin ;//
 		}
 
-		$this->last_checkout = $checkout_at;
+		$this->last_checkout = $checkout_at;//
 
-            $this->assigneduser()->associate($user);
-            $this->name = $name;
+            $this->assigneduser()->associate($user);//
+            $this->name = $name;//
 
             $settings = Setting::getSettings();
 
-            if($this->requireAcceptance()) {
-              $this->accepted="pending";
+            if($this->requireAcceptance()) {//
+              $this->accepted="pending";//
             }
 
             if($this->save()) {
@@ -67,6 +67,45 @@ class Asset extends Depreciable
             return false;
 
         }
+        
+    public function checkOut($user = null, $location = null, $admin, $checkout_at = null, $expected_checkin = null, $note = null, $name = null) {
+        $settings = Setting::getSettings();
+        $this->last_checkout = $checkout_at;
+        $this->name = $name;
+        
+        if ($expected_checkin) {
+            $this->expected_checkin = $expected_checkin;
+        }
+        
+        if ($user) {
+            $this->assigneduser()->associate($user);
+        }
+        
+        if ($location) {
+            $this->assignedlocation()->associate($location);
+        } 
+        
+        if ($this->requireAcceptance()) {
+            $this->accepted = "pending";
+        }
+        
+        if ($this->save()) {
+            
+            $log_id = null; // need to reimplement createCheckoutLog
+            
+            // If we require acceptance or there's a EULA and there is an assigned user who has an email
+            if (($this->requireAcceptance() || $this->getEula()) && ($user && !is_empty($user->email))) {
+                $this->checkOutNotifyMail($log_id, $user, $checkout_at, $expected_checkin, $note);
+            }
+            if ($settings->slack_endpoint) {
+                $this->checkOutNotifySlack($settings, $admin, $note);
+            }
+            
+            return true;
+        }
+        
+        return false;
+    }
 
         public function checkOutNotifyMail($log_id, $user, $checkout_at, $expected_checkin, $note) {
 
@@ -186,11 +225,26 @@ if (($filetype=="image/jpeg") || ($filetype=="image/jpg") || ($filetype=="image/
 return false;
 }
 
+  /**
+   * Relationship for the assigned user
+   **/
   public function assigneduser()
   {
 
       return $this->belongsTo( 'User', 'assigned_to' )
                   ->withTrashed();
+  }
+  
+  /**
+   * Relationship for the assigned location
+   **/
+  public function assignedlocation() {
+      return $this->belongsTo('Location', 'assigned_location')
+                  ->withTrashed();
+  }
+  
+  public function is_assigned() {
+      return (!empty($this->assigned_to) || !empty($this->assigned_location));
   }
 
   /**

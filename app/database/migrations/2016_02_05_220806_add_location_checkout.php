@@ -15,6 +15,10 @@ class AddLocationCheckout extends Migration {
 		Schema::table('assets', function ($table) {
  			$table->integer('assigned_location')->nullable()->default(NULL);
  		});
+        
+        Schema::table('asset_logs', function ($table) {
+ 			$table->integer('checkedout_location')->nullable()->default(NULL);
+ 		});
 	}
 
 	/**
@@ -27,6 +31,10 @@ class AddLocationCheckout extends Migration {
 		Schema::table('assets', function ($table) {
             $table->dropColumn('assigned_location');
         });
+        
+        Schema::table('asset_logs', function ($table) {
+ 			$table->dropColumn('checkedout_location');
+ 		});
 	}
 
 }
