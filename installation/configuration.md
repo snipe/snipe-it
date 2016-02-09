@@ -93,6 +93,8 @@ Copy the example database config from `app/config/production/database.example.ph
 
 You can generally leave `charset`, `collation` and `prefix` as they are.
 
+You do not need to run migrations or worry about the database schema during the installation. The [command-line installer](/installation/command-line.html) will create the initial database tables for you. 
+
 -----
 
 ## Edit Mail Settings

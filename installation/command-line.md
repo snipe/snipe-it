@@ -4,9 +4,11 @@ currentMenu: command-line
 
 # Using the CLI Installer
 
-Now, you need to create yourself a user.
+At this point you should have an *empty* database created, and all of your configuration settings set up the way you want them by carefully following the [configuration documentation](/installation/configuration.html) and editing the configuration files.
 
-Use the following command to create your default user, user groups and run all the necessary migrations.
+Now, you need to create yourself an admin user.
+
+Use the following command to create your database tables, add a default user, create the default user groups and run all the necessary database migrations to ensure your database schema is up to date.
 
 -----
 
