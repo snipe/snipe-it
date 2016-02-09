@@ -4,7 +4,7 @@
 <p>Hello {{{ $first_name }}},</p>
 
 
-<p>A new item has been checked out to under your name, details are below. 
+<p>A new item has been checked out under your name, details are below.
 
 <table>
 	<tr>
@@ -54,9 +54,9 @@
 		</tr>
 	@endif
 </table>
-	
+
 @if (($require_acceptance==1) && ($eula!=''))
-	
+
 	Please read the terms of use below, and click on the link at the bottom to confirm that you read and agree to the terms of use, and have received the asset.
 
 @elseif (($require_acceptance==1) && ($eula==''))
@@ -68,7 +68,7 @@
 	Please read the terms of use below.
 
 @endif
-	
+
 </p>
 
 <p><blockquote>{{ $eula }}</blockquote></p>
