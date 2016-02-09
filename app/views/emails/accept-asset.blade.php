@@ -25,6 +25,16 @@
 			</td>
 		</tr>
 	@endif
+  @if ($item_serial)
+		<tr>
+			<td style="background-color:#ccc">
+				Serial:
+			</td>
+			<td>
+				<strong>{{{ $item_serial }}}</strong>
+			</td>
+		</tr>
+	@endif
 	<tr>
 		<td style="background-color:#ccc">
 			Checkout Date:

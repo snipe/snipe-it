@@ -650,6 +650,7 @@ class AssetsController extends AdminController
             $data['item_name'] = $asset->showAssetName();
             $data['checkin_date'] = $logaction->created_at;
             $data['item_tag'] = $asset->asset_tag;
+            $data['item_serial'] = $asset->serial;
             $data['note'] = $logaction->note;
 
             if ((($asset->checkin_email()=='1')) && ($user) && (!Config::get('app.lock_passwords'))) {
