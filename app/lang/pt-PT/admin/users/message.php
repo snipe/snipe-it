@@ -33,7 +33,7 @@ return array(
         'import'    => 'Ocorreu um problema ao importar os utilizadores. Por favor, tente novamente.',
         'asset_already_accepted' => 'Este artigo já foi aceite.',
         'accept_or_decline' => 'Tem que aceitar ou recusar este artigo.',
-        'incorrect_user_accepted' => 'The asset you have attempted to accept was not checked out to you.',
+        'incorrect_user_accepted' => 'O ativo que tentou aceitar não foi solicitado por si.',
         'ldap_could_not_connect' => 'Não foi possível estabelecer uma ligação ao servidor LDAP. Por favor, verifique a configuração de servidor no ficheiro de configuração. <br>Error do Servidor LDAP:',
         'ldap_could_not_bind' => 'Não foi possível estabelecer uma vinculação com o servidor LDAP. Por favor, verifique a configuração de servidor no ficheiro de configuração. <br>Error do Servidor LDAP: ',
         'ldap_could_not_search' => 'Não foi possível pesquisar no servidor LDAP. Por favor, verifique a configuração de servidor no ficheiro de configuração. <br>Error do Servidor LDAP:',

@@ -7,7 +7,7 @@ return array(
 	'show_mac_address'			      => 'MAC Adressen Feld anzeigen für Assets mit diesses Modell',
     'view_deleted'              => 'Gelöschte anzeigen',
     'view_models'               => 'Modelle anzeigen',
-    'fieldset'                  => 'Fieldset',
-    'no_custom_field'           => 'No custom fields',
+    'fieldset'                  => 'Feldsatz',
+    'no_custom_field'           => 'Keine benutzerdefinierten Felder',
 
 );

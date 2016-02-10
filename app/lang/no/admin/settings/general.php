@@ -41,7 +41,7 @@ return array(
     'ldap_lname_field'          => 'Etternavn',
     'ldap_fname_field'          => 'LDAP Fornavn',
     'ldap_auth_filter_query'    => 'LDAP autentisering spørring',
-    'ldap_version'              => 'LDAP Version',
+    'ldap_version'              => 'LDAP Versjon',
     'ldap_active_flag'          => 'LDAP Active Flag',
     'ldap_emp_num'              => 'LDAP Employee Number',
     'ldap_email'                => 'LDAP E-post',

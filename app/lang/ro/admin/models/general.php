@@ -2,11 +2,11 @@
 
 return array(
 
-    'deleted'  					        => 'This model has been deleted. <a href="/hardware/models/:model_id/restore">Click here to restore it</a>.',
-    'restore'                   => 'Restore Model',
-	'show_mac_address'			      => 'Show MAC address field in assets in this model',
-    'view_deleted'              => 'View Deleted',
-    'view_models'               => 'View Models',
+    'deleted'  					        => 'Modelul a fost sters. <a href="/hardware/models/:model_id/restore">Apasati aici pentru a-l restaura</a>.',
+    'restore'                   => 'Restaurare model',
+	'show_mac_address'			      => 'Arata campul Adresa MAC in acest model',
+    'view_deleted'              => 'Vizualizare Sterse',
+    'view_models'               => 'Vizualizare Modele',
     'fieldset'                  => 'Fieldset',
     'no_custom_field'           => 'No custom fields',
 

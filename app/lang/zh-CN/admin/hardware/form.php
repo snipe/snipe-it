@@ -1,9 +1,9 @@
 <?php
 
 return array(
-	'bulk_delete'		=> 'Confrm Bulk Delete Assets',
-  'bulk_delete_help'	=> 'Review the assets for bulk deletion below. Once deleted, these assets can be restored, but they will no longer be associated with any users they are currently assigned to.',
-  'bulk_delete_warn'	=> 'You are about to delete :asset_count assets.',
+	'bulk_delete'		=> '确认批量删除',
+  'bulk_delete_help'	=> '请在此确认将批量删除的资产。在删除后，资产可以恢复，但一切当前的用户关联将会丢失。',
+  'bulk_delete_warn'	=> '即将删除 :asset_count 项资产',
 	'bulk_update'		=> '批量更新',
 	'bulk_update_help'	=> '该表格允许你同时修改多项资产。请仅填写需要修改的字段，留空的字段不会做任何修改。 ',
 	'bulk_update_warn'	=> '你即将同时修改 :asset_count 项资产的属性。',

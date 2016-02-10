@@ -33,7 +33,7 @@ return array(
         'import'    => 'Проблем при зареждането на потребителите. Моля опитайте отново.',
         'asset_already_accepted' => 'Този актив е вече приет.',
         'accept_or_decline' => 'Трябва да приемете или да откажете този актив.',
-        'incorrect_user_accepted' => 'The asset you have attempted to accept was not checked out to you.',
+        'incorrect_user_accepted' => 'Активът, който се опитвате да приемете не е изписан към Вас.',
         'ldap_could_not_connect' => 'Проблем при комуникацията с LDAP сървъра. Моля прегледайте конфигурацията на LDAP.<br/>Грешка от LDAP сървъра: ',
         'ldap_could_not_bind' => 'Проблем при връзката с LDAP сървъра. Моля прегледайте конфигурацията на LDAP.<br/>Грешка от LDAP сървъра: ',
         'ldap_could_not_search' => 'Проблем при търсенето в LDAP сървъра. Моля прегледайте конфигурацията на LDAP.<br/>Грешка от LDAP сървъра: ',

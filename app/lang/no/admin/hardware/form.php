@@ -1,9 +1,9 @@
 <?php
 
 return array(
-	'bulk_delete'		=> 'Confrm Bulk Delete Assets',
-  'bulk_delete_help'	=> 'Review the assets for bulk deletion below. Once deleted, these assets can be restored, but they will no longer be associated with any users they are currently assigned to.',
-  'bulk_delete_warn'	=> 'You are about to delete :asset_count assets.',
+	'bulk_delete'		=> 'Bekreft sletting av flere enheter',
+  'bulk_delete_help'	=> 'Se gjennom listen over enheter som er valgt for sletting. Etter sletting er det mulig å gjenopprette enheter, men nåværende koblinger til brukere vil ikke lenger finnes.',
+  'bulk_delete_warn'	=> 'Du er i ferd med å slette :asset_count enheter.',
 	'bulk_update'		=> 'Masseoppdater eiendeler',
 	'bulk_update_help'	=> 'Dette skjemaet lar deg oppdatere flere eiendeler på en gang. Fyll kun ut feltene du ønsker å endre. Tomme felter forblir uendret. ',
 	'bulk_update_warn'	=> 'Du er på vei til å endre egenskapene til :asset_count eiendeler.',

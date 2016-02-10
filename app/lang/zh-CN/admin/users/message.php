@@ -33,7 +33,7 @@ return array(
         'import'    => '导入用户出现问题。请再试一次。',
         'asset_already_accepted' => '资产已被接受',
         'accept_or_decline' => '你必须选择接受或者拒绝该资产。',
-        'incorrect_user_accepted' => 'The asset you have attempted to accept was not checked out to you.',
+        'incorrect_user_accepted' => '您正尝试接受的资产未被分配与您',
         'ldap_could_not_connect' => '无法连接到LDAP服务器，请检查LDAP配置文件中的相关设置。<br>LDAP服务器错误信息:',
         'ldap_could_not_bind' => '无法绑定到LDAP服务器，请检查LDAP配置文件中的相关设置。<br>LDAP服务器错误信息: ',
         'ldap_could_not_search' => '查询LDAP服务器失败，请检查LDAP配置文件中的相关设置。<br>LDAP服务器错误信息:',

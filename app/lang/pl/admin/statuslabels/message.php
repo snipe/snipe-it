@@ -3,7 +3,7 @@
 return array(
 
     'does_not_exist' => 'Lokalizacja nie istnieje.',
-    'assoc_users'	 => 'This location is currently associated with at least one user and cannot be deleted. Please update your users to no longer reference this location and try again. ',
+    'assoc_users'	 => 'Lokacja jest aktualnie przypisana do użytkownika przez co nie może być usunięta. Przypisz do użytkownika inną lokacje i spróbuj ponownie. ',
 
 
     'create' => array(
@@ -17,7 +17,7 @@ return array(
     ),
 
     'delete' => array(
-        'confirm'   => 'Are you sure you wish to delete this status label?',
+        'confirm'   => 'Na pewno usunąć etykietę statusu?',
         'error'   => 'Podczas usuwania lokalizacji napotkano problem. Spróbuj ponownie.',
         'success' => 'Lokalizacja usunięta pomyślnie.'
     )

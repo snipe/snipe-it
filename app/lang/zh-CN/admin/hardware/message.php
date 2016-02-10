@@ -55,8 +55,8 @@ return array(
     ),
 
     'requests' => array(
-        'error'   		=> 'Asset was not requested, please try again',
-        'success' 		=> 'Asset requested successfully.',
+        'error'   		=> '未能成功请求分配资产，请重试。',
+        'success' 		=> '成功请求资产',
     )
 
 );

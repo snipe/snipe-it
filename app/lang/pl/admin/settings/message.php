@@ -8,10 +8,10 @@ return array(
         'success'               => 'Ustawienia zaktualizowane pomyślnie.'
     ),
     'backup' => array(
-        'delete_confirm'        => 'Are you sure you would like to delete this backup file? This action cannot be undone. ',
-        'file_deleted'          => 'The backup file was successfully deleted. ',
-        'generated'             => 'A new backup file was successfully created.',
-        'file_not_found'        => 'That backup file could not be found on the server.',
+        'delete_confirm'        => 'Czy na pewno chcesz usunąć kopie zapasową? Nie można cofnąć tej akcji. ',
+        'file_deleted'          => 'Kopia zapasowa usunięta pomyślnie. ',
+        'generated'             => 'Nowa kopia zapasowa utworzona pomyślnie.',
+        'file_not_found'        => 'Nie odnaleziono kopii zapasowej na serwerze.',
     ),
 
 );

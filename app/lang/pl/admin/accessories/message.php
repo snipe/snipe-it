@@ -2,17 +2,17 @@
 
 return array(
 
-    'does_not_exist' => 'Accessory does not exist.',
+    'does_not_exist' => 'Akcesorium nie istnieje.',
     'assoc_users'	 => 'Akcesoria z tej kategorii zostały wydane do :count użytkowników. Zbierz akcesoria i spróbuj ponownie. ',
 
     'create' => array(
-        'error'   => 'Accessory was not created, please try again.',
-        'success' => 'Accessory created successfully.'
+        'error'   => 'Akcesorium nie utworzono, spróbuj ponownie.',
+        'success' => 'Akcesorium utworzono pomyślnie.'
     ),
 
     'update' => array(
-        'error'   => 'Accessory was not updated, please try again',
-        'success' => 'Accessory updated successfully.'
+        'error'   => 'Nie zaktualizowano Akcesorium, spróbuj ponownie',
+        'success' => 'Akcesorium utworzono pomyślnie.'
     ),
 
     'delete' => array(

@@ -7,7 +7,7 @@ return array(
 	'show_mac_address'			      => 'Mostrar endereço MAC dos artigos neste modelo',
     'view_deleted'              => 'Ver removidos',
     'view_models'               => 'Ver modelos',
-    'fieldset'                  => 'Fieldset',
-    'no_custom_field'           => 'No custom fields',
+    'fieldset'                  => 'Conjunto de campos',
+    'no_custom_field'           => 'Sem campos customizados',
 
 );

@@ -1,7 +1,7 @@
 <?php
 
 return array(
-	'alert_email'				=> 'Send alerts to',
+	'alert_email'				=> 'Trimite alerte catre',
 	'alerts_enabled'			=> 'Alerts enabled',
 	'asset_ids'					=> 'Asset IDs',
 	'auto_increment_assets'		=> 'Genereaza ID-uri crescatoare de active',
@@ -12,8 +12,8 @@ return array(
 	'barcode_settings'			=> 'Barcode Settings',
 	'custom_css'				=> 'Custom CSS',
 	'custom_css_help'			=> 'Enter any custom CSS overrides you would like to use. Do not include the &lt;style&gt;&lt;/style&gt; tags.',
-	'default_currency'  		=> 'Default Currency',
-	'default_eula_text'			=> 'Default EULA',
+	'default_currency'  		=> 'Moneda implicita',
+	'default_eula_text'			=> 'EULA implicita',
 	'default_eula_help_text'	=> 'You can also associate custom EULAs to specific asset categories.',
     'display_asset_name'        => 'Afiseaza nume activ',
     'display_checkout_date'     => 'Arata data predare',

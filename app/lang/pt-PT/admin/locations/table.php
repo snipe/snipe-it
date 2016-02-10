@@ -1,8 +1,8 @@
 <?php
 
 return array(
-    'assets_rtd'		=> 'Assets RTD',
-    'assets_checkedout'		=> 'Assets Assigned',
+    'assets_rtd'		=> 'Ativos Retirados',
+    'assets_checkedout'		=> 'Ativos Atribuídos',
     'id'      		=> 'ID',
     'city'   		=> 'Cidade',
     'state'   		=> 'Distrito',

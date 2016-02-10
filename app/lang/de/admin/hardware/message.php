@@ -56,8 +56,8 @@ return array(
     ),
 
     'requests' => array(
-        'error'   		=> 'Asset was not requested, please try again',
-        'success' 		=> 'Asset requested successfully.',
+        'error'   		=> 'Das Asset wurde nicht angefordert, bitte versuchen Sie es erneut',
+        'success' 		=> 'Asset erfolgreich angefordert.',
     )
 
 );

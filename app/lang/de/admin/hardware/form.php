@@ -1,9 +1,9 @@
 <?php
 
 return array(
-	'bulk_delete'		=> 'Confrm Bulk Delete Assets',
-  'bulk_delete_help'	=> 'Review the assets for bulk deletion below. Once deleted, these assets can be restored, but they will no longer be associated with any users they are currently assigned to.',
-  'bulk_delete_warn'	=> 'You are about to delete :asset_count assets.',
+	'bulk_delete'		=> 'Massenlöschung von Assets bestätigen',
+  'bulk_delete_help'	=> 'Überprüfen Sie die nachfolgenden Assets für die Massenlöschung. Sobald diese gelöscht sind, können diese zwar wiederhergestellt werden, sind aber dem aktuellen Nutzer nicht mehr zugeordnet.',
+  'bulk_delete_warn'	=> 'Sie sind im Begriff :asset_count Assets zu löschen.',
 	'bulk_update'		=> 'Massenaktualisierung von Assets',
 	'bulk_update_help'	=> 'Diese Eingabemaske erlaubt Ihnen die Aktualisierung von mehrere Assets zugleich. Füllen Sie die Felder aus welche Sie ändern möchten. Alle leeren Felder bleiben unverändert. ',
 	'bulk_update_warn'	=> 'Sie sind dabei die Eigenschaften von :asset_count assets zu bearbeiten.',

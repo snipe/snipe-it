@@ -3,11 +3,11 @@
 
 return array(
 
-    'assets_user'       => 'Assets assigned to :name',
+    'assets_user'       => 'Aktwo przypisane do :name',
     'clone'             => 'Kopiuj Użytkownika',
     'contact_user'      => 'Kontakt :name',
     'edit'              => 'Edycja Użytkownika',
-    'filetype_info'     => 'Allowed filetypes are png, gif, jpg, jpeg, doc, docx, pdf, txt, zip, and rar.',
+    'filetype_info'     => 'Dozwolone typy plików: png, gif, jpg, jpeg, doc, docx, pdf, txt, zip, rar.',
     'history_user'      => 'Historia',
     'last_login'        => 'Ostatnie logowanie',
     'ldap_config_text'  => 'LDAP configuration settings can be found in the app/config folder in a file called ldap.php. The selected location will be set for all imported users. You will need to have at least one location set to use this feature.',

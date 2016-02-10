@@ -103,7 +103,7 @@
     'processing'			=> 'Processando',
     'profile'				=> 'Seu perfil',
     'qty'		            => 'QTD',
-    'quantity'		        => 'Quantity',
+    'quantity'		        => 'Quantidade',
     'ready_to_deploy'		=> 'Pronto para Implantar',
     'recent_activity'		=> 'Atividade Recente',
     'remove_company'    => 'Remove Company Association',
