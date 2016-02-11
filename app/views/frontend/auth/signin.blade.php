@@ -25,7 +25,7 @@ Account Sign in ::
             <div class="form-group{{ $errors->has('username') ? ' has-error' : '' }}">
                 <label for="username" class="col-md-2 col-sm-12 control-label">Username</label>
                     <div class="col-md-5 col-sm-12">
-                        <input class="form-control" type="username" name="username" id="username" value="{{{ Input::old('username') }}}" />
+                        <input class="form-control" type="text" name="username" id="username" value="{{{ Input::old('username') }}}" />
                         {{ $errors->first('username', '<br><span class="alert-msg"><i class="fa fa-times"></i> :message</span>') }}
                     </div>
             </div>
