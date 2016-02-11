@@ -140,3 +140,5 @@ docker exec snipeit composer dump-autoload
 ```
 
 To fix the autoloading cache (if, for example, your class names change, or you add new ones...)
+
+**NOTE: When upgrading your docker install, make a note of the app key in `app/config/production/app.php`. If you are using LDAP, your LDAP server password is encrypted using this app key, and you will have a bad time if your app key changes. The upgraded docker WILL change your app key, so just replace the newly created on with your old one. ** 
