@@ -34,6 +34,7 @@ App::after(function ($request, $response) {
 Route::filter('auth', function () {
     // Check if the user is logged in
     if ( ! Sentry::check()) {
+        Log::debug('Not logged in - auth filter');
         // Store the current uri in the session
         Session::put('loginRedirect', Request::url());
 
@@ -74,18 +75,20 @@ Route::filter('guest', function () {
 
 Route::filter('admin-auth', function () {
      // Check if the user is logged in
-    if ( ! Sentry::check()) {
+    if ( !Sentry::check()) {
+       LOG::debug('Not logged in - admin-auth');
         // Store the current uri in the session
         Session::put('loginRedirect', Request::url());
 
         // Redirect to the login page
-        return Redirect::route('signin');
+        return Redirect::route('signin')->with('error','Not logged in!');
     }
 
     // Check if the user has access to the admin pages
     if ( ! Sentry::getUser()->hasAccess('admin')) {
+       LOG::debug('Not a super admin');
         // Show the insufficient permissions page
-        return Redirect::route('view-assets');
+        return Redirect::route('view-assets')->with('error','You do not have permission to view this page.');
     }
 });
 
@@ -102,6 +105,7 @@ Route::filter('admin-auth', function () {
 Route::filter('reporting-auth', function () {
      // Check if the user is logged in
     if ( ! Sentry::check()) {
+       LOG::debug('Not logged in');
         // Store the current uri in the session
         Session::put('loginRedirect', Request::url());
 
@@ -111,6 +115,7 @@ Route::filter('reporting-auth', function () {
 
     // Check if the user has access to the admin pages
     if ( ! Sentry::getUser()->hasAccess('reports')) {
+        LOG::debug('Unsufficient permissions');
         // Show the insufficient permissions page
         return Redirect::route('profile')->with("error","You do not have permission to view this page.");
     }
@@ -119,6 +124,7 @@ Route::filter('reporting-auth', function () {
 Route::filter('backup-auth', function () {
 
     if (!Sentry::getUser()->isSuperUser()) {
+        LOG::debug('Not a super admin');
         return Redirect::route('home')->with('error', Lang::get('general.insufficient_permissions'));
     }
 });
@@ -138,6 +144,7 @@ Route::filter('backup-auth', function () {
 
 Route::filter('csrf', function () {
     if (Session::token() != Input::get('_token')) {
+        LOG::debug('No CSRF token');
         throw new Illuminate\Session\TokenMismatchException;
     }
 });
