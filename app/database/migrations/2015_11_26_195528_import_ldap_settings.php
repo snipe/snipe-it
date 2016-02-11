@@ -18,8 +18,8 @@ class ImportLdapSettings extends Migration {
     // Only update the settings record if there IS an LDAP Config
     // AND the Settings table doesn't already have LDAP settings in it
 
-		if ((Config::get('ldap.url')) && ($settings->ldap_server=='')) {
-      
+		if ((Config::get('ldap.url'))  && ($settings) && ($settings->ldap_server)) {
+
       $settings->ldap_enabled = 1;
       $settings->ldap_server = Config::get('ldap.url');
       $settings->ldap_uname = Config::get('ldap.username');
