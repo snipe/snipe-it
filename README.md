@@ -1,9 +1,10 @@
-[![Click here to lend your support to: Snipe IT - Free Open Source Asset Management System and make a donation at pledgie.com](https://pledgie.com/campaigns/22899.png?skin_name=chrome)](https://pledgie.com/campaigns/22899) [![Build Status](https://travis-ci.org/snipe/snipe-it.svg?branch=develop)](https://travis-ci.org/snipe/snipe-it) [![Stories in Ready](https://badge.waffle.io/snipe/snipe-it.png?label=ready&title=Ready)](http://waffle.io/snipe/snipe-it) [![ProjectStatus](http://stillmaintained.com/snipe/snipe-it.png)](http://stillmaintained.com/snipe/snipe-it) [![Crowdin](https://d322cqt584bo4o.cloudfront.net/snipe-it/localized.png)](https://crowdin.com/project/snipe-it)
+[![Build Status](https://travis-ci.org/snipe/snipe-it.svg?branch=develop)](https://travis-ci.org/snipe/snipe-it) [![Stories in Ready](https://badge.waffle.io/snipe/snipe-it.png?label=ready+for+dev&amp;title=Ready+for+development)](http://waffle.io/snipe/snipe-it) [![Maintenance](https://img.shields.io/maintenance/yes/2016.svg)]() [![Crowdin](https://d322cqt584bo4o.cloudfront.net/snipe-it/localized.png)](https://crowdin.com/project/snipe-it)
+[![Gitter](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/snipe/snipe-it?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+[![Docker Pulls](https://img.shields.io/docker/pulls/snipe/snipe-it.svg)](https://hub.docker.com/r/snipe/snipe-it/)
+[![Twitter Follow](https://img.shields.io/twitter/follow/snipeyhead.svg?style=social)](https://twitter.com/snipeyhead)
 
 
 ## Snipe-IT - Asset Management For the Rest of Us
-
-[![Gitter](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/snipe/snipe-it?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
 This is a FOSS project for asset management in IT Operations. Knowing who has which laptop, when it was purchased in order to depreciate it correctly, handling software licenses, etc.
 
