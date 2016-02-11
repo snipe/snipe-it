@@ -78,6 +78,7 @@ class Asset extends Depreciable
             $data['expected_checkin'] = $expected_checkin;
             $data['item_tag'] = $this->asset_tag;
             $data['note'] = $note;
+            $data['item_serial'] = $this->serial;
             $data['require_acceptance'] = $this->requireAcceptance();
 
             if ((($this->requireAcceptance()=='1')  || ($this->getEula())) && (!Config::get('app.lock_passwords'))) {
