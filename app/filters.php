@@ -81,7 +81,7 @@ Route::filter('admin-auth', function () {
         Session::put('loginRedirect', Request::url());
 
         // Redirect to the login page
-        return Redirect::route('signin')->with('error','Not logged in!');
+        return Redirect::route('signin');
     }
 
     // Check if the user has access to the admin pages
