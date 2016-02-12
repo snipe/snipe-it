@@ -27,7 +27,7 @@ function modelList() {
 }
 
 function companyList() {
-    $company_list = array('' => '') + DB::table('companies')
+   $company_list = array('0' => Lang::get('general.select_company')) + DB::table('companies')
     ->orderBy('name', 'asc')
     ->lists('name', 'id');
     return $company_list;

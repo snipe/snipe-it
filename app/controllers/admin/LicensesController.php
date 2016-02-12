@@ -56,7 +56,7 @@ class LicensesController extends AdminController
         $depreciation_list = array('0' => Lang::get('admin/licenses/form.no_depreciation')) + Depreciation::lists('name', 'id');
         $supplier_list = array('' => 'Select Supplier') + Supplier::orderBy('name', 'asc')->lists('name', 'id');
         $maintained_list = array('' => 'Maintained', '1' => 'Yes', '0' => 'No');
-        $company_list = Company::getSelectList();
+        $company_list = companyList();
 
         return View::make('backend/licenses/edit')
             ->with('license_options',$license_options)
@@ -203,7 +203,7 @@ class LicensesController extends AdminController
         $depreciation_list = array('0' => Lang::get('admin/licenses/form.no_depreciation')) + Depreciation::lists('name', 'id');
         $supplier_list = array('' => 'Select Supplier') + Supplier::orderBy('name', 'asc')->lists('name', 'id');
         $maintained_list = array('' => 'Maintained', '1' => 'Yes', '0' => 'No');
-        $company_list = Company::getSelectList();
+        $company_list = companyList();
 
         return View::make('backend/licenses/edit', compact('license'))
             ->with('license_options',$license_options)
@@ -782,7 +782,7 @@ class LicensesController extends AdminController
           // Show the page
         $license_options = array('0' => 'Top Level') + License::lists('name', 'id');
 		    $maintained_list = array('' => 'Maintained', '1' => 'Yes', '0' => 'No');
-        $company_list = Company::getSelectList();
+        $company_list = companyList();
         //clone the orig
         $license = clone $license_to_clone;
         $license->id = null;

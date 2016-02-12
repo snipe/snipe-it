@@ -68,7 +68,7 @@ class AssetsController extends AdminController
         $manufacturer_list = manufacturerList();
         $category_list = categoryList();
         $supplier_list = suppliersList();
-        $company_list = Company::getSelectList();
+        $company_list = companyList();
         $assigned_to = usersList();
         $statuslabel_types = statusTypeList();
 
@@ -253,7 +253,7 @@ class AssetsController extends AdminController
         $manufacturer_list = manufacturerList();
         $category_list = categoryList();
         $supplier_list = suppliersList();
-        $company_list = Company::getSelectList();
+        $company_list = companyList();
         $assigned_to = usersList();
         $statuslabel_types = statusTypeList();
 
@@ -883,7 +883,7 @@ class AssetsController extends AdminController
         $supplier_list = suppliersList();
         $assigned_to = usersList();
         $statuslabel_types = statusTypeList();
-        $company_list = Company::getSelectList();
+        $company_list = companyList();
 
         $asset = clone $asset_to_clone;
         $asset->id = null;

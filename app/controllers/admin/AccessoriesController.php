@@ -42,7 +42,7 @@ class AccessoriesController extends AdminController
     {
         // Show the page
         $category_list = array('' => '') + DB::table('categories')->where('category_type','=','accessory')->whereNull('deleted_at')->orderBy('name','ASC')->lists('name', 'id');
-        $company_list = Company::getSelectList();
+        $company_list = companyList();
         $location_list = locationsList();
         return View::make('backend/accessories/edit')
             ->with('accessory', new Accessory)
@@ -125,7 +125,7 @@ class AccessoriesController extends AdminController
         }
 
 		    $category_list = array('' => '') + DB::table('categories')->where('category_type','=','accessory')->whereNull('deleted_at')->orderBy('name','ASC')->lists('name', 'id');
-        $company_list = Company::getSelectList();
+        $company_list = companyList();
         $location_list = locationsList();
 
         return View::make('backend/accessories/edit', compact('accessory'))
