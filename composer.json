@@ -72,5 +72,5 @@
 		"bin-dir": "vendor/bin"
 
 	},
-	"minimum-stability": "dev"
+	"minimum-stability": "stable"
 }
