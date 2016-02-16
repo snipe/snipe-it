@@ -378,7 +378,7 @@ class UsersController extends AdminController {
             $user->employee_num = e(Input::get('employee_num'));
             $user->activated = e(Input::get('activated', $user->activated));
             if (Sentry::getUser()->hasAccess('superuser')) {
-              $user->permissions = e(Input::get('permissions'));
+              $user->permissions = Input::get('permissions');
             }
             $user->jobtitle = e(Input::get('jobtitle'));
             $user->phone = e(Input::get('phone'));
