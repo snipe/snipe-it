@@ -18,8 +18,13 @@
 if [ "$(id -u)" != "0" ]; then
   exec sudo "$0" "$@"
 fi
-#First things first, let's set some variables and find our distro.
+
 clear
+
+#  Set this to your github username to pull your changes ** Only for Devs **
+fork='snipe'
+#  Set this to the branch you want to pull  ** Only for Devs ** ##TODO not working yet
+#branch='develop'
 
 name="snipeit"
 si="Snipe-IT"
@@ -99,7 +104,7 @@ echo ""
 
 #Do you want to set your own passwords, or have me generate random ones?
 until [[ $ans == "yes" ]] || [[ $ans == "no" ]]; do
-echo -n "  Q. Do you want me to automatically create the snipe database user password? (y/n) "
+echo -n "  Q. Do you want to automatically create the snipe database user password? (y/n) "
 read setpw
 
 case $setpw in
@@ -108,12 +113,12 @@ case $setpw in
                 ans="yes"
                 ;;
         [nN] | [n|N][O|o] )
-                echo -n  "  Q. What do you want your snipeit user password to be?"
+                echo -n  "    Q. What do you want your snipeit user password to be?"
                 read -s mysqluserpw
                 echo ""
 				ans="no"
                 ;;
-        *) 		echo "  Invalid answer. Please type y or n"
+        *) 		echo "    Invalid answer. Please type y or n"
                 ;;
 esac
 done
@@ -138,55 +143,65 @@ case $distro in
 		#####################################  Install for Debian/ubuntu  ##############################################
 
 		webdir=/var/www
+		apachefile=/etc/apache2/sites-available/$name.conf
 
 		#Update/upgrade Debian/Ubuntu repositories, get the latest version of git.
 		echo ""
 		echo "##  Updating ubuntu in the background. Please be patient."
 		echo ""
-		apachefile=/etc/apache2/sites-available/$name.conf
-		sudo apt-get update >> /var/log/snipeit-install.log 2>&1 
-		sudo apt-get -y upgrade >> /var/log/snipeit-install.log 2>&1 
+
+		sudo apt-get update >> /var/log/snipeit-install.log 2>&1
+		sudo apt-get -y upgrade >> /var/log/snipeit-install.log 2>&1
 
 		echo "##  Installing packages."
-		sudo apt-get install -y git unzip php5 php5-mcrypt php5-curl php5-mysql php5-gd php5-ldap >> /var/log/snipeit-install.log 2>&1 
+		sudo apt-get install -y git unzip php5 php5-mcrypt php5-curl php5-mysql php5-gd php5-ldap >> /var/log/snipeit-install.log 2>&1
 		#We already established MySQL root & user PWs, so we dont need to be prompted. Let's go ahead and install Apache, PHP and MySQL.
 		echo "##  Setting up LAMP."
-		sudo DEBIAN_FRONTEND=noninteractive apt-get install -y lamp-server^ >> /var/log/snipeit-install.log 2>&1 
+		sudo DEBIAN_FRONTEND=noninteractive apt-get install -y lamp-server^ >> /var/log/snipeit-install.log 2>&1
 
 		#  Get files and extract to web dir
 		echo ""
-		echo "##  Downloading snipeit and extract to web directory."
-		wget -P $tmp/ https://github.com/snipe/snipe-it/archive/$file >> /var/log/snipeit-install.log 2>&1 
-		unzip -qo $tmp/$file -d $tmp/
-		cp -R $tmp/snipe-it-master $webdir/$name
+		echo "##  Cloning Snipe-IT from github to the web directory.";
+		git clone https://github.com/$fork/snipe-it $webdir/$name >> /var/log/snipeit-install.log 2>&1
+        # get latest stable release
+        cd $webdir/$name
+        branch=$(git tag | grep -v 'pre' | tail -1)
+        git checkout -b $branch $branch
 
-		##  TODO make sure apache is set to start on boot and go ahead and start it
+##  TODO make sure apache is set to start on boot and go ahead and start it
 
 		#Enable mcrypt and rewrite
 		echo "##  Enabling mcrypt and rewrite"
-		sudo php5enmod mcrypt >> /var/log/snipeit-install.log 2>&1 
-		sudo a2enmod rewrite >> /var/log/snipeit-install.log 2>&1 
-		sudo ls -al /etc/apache2/mods-enabled/rewrite.load >> /var/log/snipeit-install.log 2>&1 
+		sudo php5enmod mcrypt >> /var/log/snipeit-install.log 2>&1
+		sudo a2enmod rewrite >> /var/log/snipeit-install.log 2>&1
+		sudo ls -al /etc/apache2/mods-enabled/rewrite.load >> /var/log/snipeit-install.log 2>&1
 
-		#Create a new virtual host for Apache.
-		echo "##  Create Virtual host for apache."
-		echo >> $apachefile ""
-		echo >> $apachefile ""
-		echo >> $apachefile "<VirtualHost *:80>"
-		echo >> $apachefile "ServerAdmin webmaster@localhost"
-		echo >> $apachefile "    <Directory $webdir/$name/public>"
-		echo >> $apachefile "        Require all granted"
-		echo >> $apachefile "        AllowOverride All"
-		echo >> $apachefile "   </Directory>"
-		echo >> $apachefile "    DocumentRoot $webdir/$name/public"
-		echo >> $apachefile "    ServerName $fqdn"
-		echo >> $apachefile "        ErrorLog /var/log/apache2/snipeIT.error.log"
-		echo >> $apachefile "        CustomLog /var/log/apache2/access.log combined"
-		echo >> $apachefile "</VirtualHost>"
+		if [$apachefile]
+		then
+			echo "    VirtualHost already exists. $apachefile"
+		else
+			echo >> $apachefile ""
+			echo >> $apachefile ""
+			echo >> $apachefile "<VirtualHost *:80>"
+			echo >> $apachefile "ServerAdmin webmaster@localhost"
+			echo >> $apachefile "    <Directory $webdir/$name/public>"
+			echo >> $apachefile "        Require all granted"
+			echo >> $apachefile "        AllowOverride All"
+			echo >> $apachefile "   </Directory>"
+			echo >> $apachefile "    DocumentRoot $webdir/$name/public"
+			echo >> $apachefile "    ServerName $fqdn"
+			echo >> $apachefile "        ErrorLog /var/log/apache2/snipeIT.error.log"
+			echo >> $apachefile "        CustomLog /var/log/apache2/access.log combined"
+			echo >> $apachefile "</VirtualHost>"
+		fi
 
-		echo "##  Setting up hosts file."
-		echo >> $hosts "127.0.0.1 $hostname $fqdn"
-		a2ensite $name.conf >> /var/log/snipeit-install.log 2>&1 
+		echo "##  Setting up hosts file.";
+		if grep -q "127.0.0.1 $hostname $fqdn" "$hosts"; then
+			echo "    Hosts file already setup."
+		else
+			echo >> $hosts "127.0.0.1 $hostname $fqdn"
+			a2ensite $name.conf >> /var/log/snipeit-install.log 2>&1
+		fi
 
 		#Modify the Snipe-It files necessary for a production environment.
 		echo "##  Modify the Snipe-It files necessary for a production environment."
@@ -212,31 +227,31 @@ case $distro in
 		echo "	Setting up mail file."
 		cp $webdir/$name/app/config/production/mail.example.php $webdir/$name/app/config/production/mail.php
 
-		##  TODO make sure mysql is set to start on boot and go ahead and start it
+##  TODO make sure mysql is set to start on boot and go ahead and start it
+		echo "##  Input your MySQL/MariaDB root password (blank if this is a fresh install): "
+		sudo mysql -u root -p < $dbsetup
+
+		echo "##  Securing Mysql."
+
+		# Have user set own root password when securing install
+		# and just set the snipeit database user at the beginning
+		/usr/bin/mysql_secure_installation
+
+		# Install / configure composer
+		echo "##  Configuring composer."
+		cd $webdir/$name
+		curl -sS https://getcomposer.org/installer | php
+		php composer.phar install --no-dev --prefer-source
 
 		#Change permissions on directories
-		echo "##  Seting permissions on web directory."
+		echo "##  Setting permissions on web directory."
 		sudo chmod -R 755 $webdir/$name/app/storage
 		sudo chmod -R 755 $webdir/$name/app/private_uploads
 		sudo chmod -R 755 $webdir/$name/public/uploads
 		sudo chown -R www-data:www-data /var/www/
 		# echo "##  Finished permission changes."
 
-		echo "##  Input your MySQL/MariaDB root password (blank if this is a fresh install): "
-		sudo mysql -u root -p < $dbsetup
-
-		echo "##  Securing Mysql"
-
-		# Have user set own root password when securing install
-		# and just set the snipeit database user at the beginning
-		/usr/bin/mysql_secure_installation
-
-		#Install / configure composer
-		echo "##  Installing and configuring composer"
-		curl -sS https://getcomposer.org/installer | php
-		mv composer.phar /usr/local/bin/composer
-		cd $webdir/$name/
-		composer install --no-dev --prefer-source
+		echo "##  Installing Snipe-IT."
 		php artisan app:install --env=production
 
 		echo "##  Restarting apache."
@@ -247,23 +262,27 @@ case $distro in
 
 		webdir=/var/www/html
 
-##TODO make sure the repo doesnt exhist isnt already in there
-
 		#Allow us to get the mysql engine
 		echo ""
 		echo "##  Adding IUS, epel-release and mariaDB repos.";
 		mariadbRepo=/etc/yum.repos.d/MariaDB.repo
-		touch $mariadbRepo
-		echo >> $mariadbRepo "[mariadb]"
-		echo >> $mariadbRepo "name = MariaDB"
-		echo >> $mariadbRepo "baseurl = http://yum.mariadb.org/10.0/centos6-amd64"
-		echo >> $mariadbRepo "gpgkey=https://yum.mariadb.org/RPM-GPG-KEY-MariaDB"
-		echo >> $mariadbRepo "gpgcheck=1"
-		echo >> $mariadbRepo "enable=1"
 
-		yum -y install wget epel-release >> /var/log/snipeit-install.log 2>&1 
-		wget -P $tmp/ https://centos6.iuscommunity.org/ius-release.rpm >> /var/log/snipeit-install.log 2>&1 
-		rpm -Uvh $tmp/ius-release*.rpm >> /var/log/snipeit-install.log 2>&1 
+		if [ -f "$mariadbRepo" ]
+		then
+			echo "    Repo already exists. $apachefile"
+		else
+			touch $mariadbRepo
+			echo >> $mariadbRepo "[mariadb]"
+			echo >> $mariadbRepo "name = MariaDB"
+			echo >> $mariadbRepo "baseurl = http://yum.mariadb.org/10.0/centos6-amd64"
+			echo >> $mariadbRepo "gpgkey=https://yum.mariadb.org/RPM-GPG-KEY-MariaDB"
+			echo >> $mariadbRepo "gpgcheck=1"
+			echo >> $mariadbRepo "enable=1"
+		fi
+
+		yum -y install wget epel-release >> /var/log/snipeit-install.log 2>&1
+		wget -P $tmp/ https://centos6.iuscommunity.org/ius-release.rpm >> /var/log/snipeit-install.log 2>&1
+		rpm -Uvh $tmp/ius-release*.rpm >> /var/log/snipeit-install.log 2>&1
 
 
 		#Install PHP and other needed stuff.
@@ -275,17 +294,19 @@ case $distro in
 				echo " ##" $p "Installed"
 			else
 				echo -n " ##" $p "Installing... "
-				yum -y install $p >> /var/log/snipeit-install.log 2>&1 
+				yum -y install $p >> /var/log/snipeit-install.log 2>&1
 				echo "";
 			fi
 		done;
 
         echo ""
-		echo "##  Downloading Snipe-IT from github and putting it in the web directory.";
+		echo "##  Cloning Snipe-IT from github to the web directory.";
 
-		wget -P $tmp/ https://github.com/snipe/snipe-it/archive/$file >> /var/log/snipeit-install.log 2>&1 
-		unzip -qo $tmp/$file -d $tmp/
-		cp -R $tmp/snipe-it-master $webdir/$name
+		git clone https://github.com/$fork/snipe-it $webdir/$name >> /var/log/snipeit-install.log 2>&1
+        # get latest stable release
+        cd $webdir/$name
+        branch=$(git tag | grep -v 'pre' | tail -1)
+        git checkout -b $branch $branch
 
 		# Make mariaDB start on boot and restart the daemon
 		echo "##  Starting the mariaDB server.";
@@ -298,38 +319,47 @@ case $distro in
 		echo "##  Securing mariaDB server.";
 		/usr/bin/mysql_secure_installation
 
-##TODO make sure the apachefile doesnt exhist isnt already in there
 		#Create the new virtual host in Apache and enable rewrite
+
 		echo "##  Creating the new virtual host in Apache.";
 		apachefile=/etc/httpd/conf.d/$name.conf
 
-		echo >> $apachefile ""
-		echo >> $apachefile ""
-		echo >> $apachefile "LoadModule rewrite_module modules/mod_rewrite.so"
-		echo >> $apachefile ""
-		echo >> $apachefile "<VirtualHost *:80>"
-		echo >> $apachefile "ServerAdmin webmaster@localhost"
-		echo >> $apachefile "    <Directory $webdir/$name/public>"
-		echo >> $apachefile "        Allow From All"
-		echo >> $apachefile "        AllowOverride All"
-		echo >> $apachefile "        Options +Indexes"
-		echo >> $apachefile "   </Directory>"
-		echo >> $apachefile "    DocumentRoot $webdir/$name/public"
-		echo >> $apachefile "    ServerName $fqdn"
-		echo >> $apachefile "        ErrorLog /var/log/httpd/snipeIT.error.log"
-		echo >> $apachefile "        CustomLog /var/log/access.log combined"
-		echo >> $apachefile "</VirtualHost>"
+		if [ -f "$apachefile" ]
+		then
+			echo "    VirtualHost already exists. $apachefile"
+		else
+			echo >> $apachefile ""
+			echo >> $apachefile ""
+			echo >> $apachefile "LoadModule rewrite_module modules/mod_rewrite.so"
+			echo >> $apachefile ""
+			echo >> $apachefile "<VirtualHost *:80>"
+			echo >> $apachefile "ServerAdmin webmaster@localhost"
+			echo >> $apachefile "    <Directory $webdir/$name/public>"
+			echo >> $apachefile "        Allow From All"
+			echo >> $apachefile "        AllowOverride All"
+			echo >> $apachefile "        Options +Indexes"
+			echo >> $apachefile "   </Directory>"
+			echo >> $apachefile "    DocumentRoot $webdir/$name/public"
+			echo >> $apachefile "    ServerName $fqdn"
+			echo >> $apachefile "        ErrorLog /var/log/httpd/snipeIT.error.log"
+			echo >> $apachefile "        CustomLog /var/log/access.log combined"
+			echo >> $apachefile "</VirtualHost>"
+		fi
 
-##TODO make sure hosts file doesnt already contain this info
 		echo "##  Setting up hosts file.";
-		echo >> $hosts "127.0.0.1 $hostname $fqdn"
+		if grep -q "127.0.0.1 $hostname $fqdn" "$hosts"; then
+			echo "    Hosts file already setup."
+		else
+			echo >> $hosts "127.0.0.1 $hostname $fqdn"
+		fi
+
 
 		# Make apache start on boot and restart the daemon
 		echo "##  Starting the apache server.";
 		chkconfig httpd on
 		/sbin/service httpd start
 
-		#Modify the Snipe-It files necessary for a production environment.
+		# Modify the Snipe-It files necessary for a production environment.
 		echo "##  Modifying the Snipe-It files necessary for a production environment."
 		echo "	Setting up Timezone."
 		tzone=$(grep ZONE /etc/sysconfig/clock | tr -d '"' | sed 's/ZONE=//g');
@@ -353,19 +383,20 @@ case $distro in
 		echo "	Setting up mail file."
 		cp $webdir/$name/app/config/production/mail.example.php $webdir/$name/app/config/production/mail.php
 
+		# Install / configure composer
+		echo "##  Configuring composer."
+		cd $webdir/$name
+		curl -sS https://getcomposer.org/installer | php
+		php composer.phar install --no-dev --prefer-source
+
 		# Change permissions on directories
+		echo "##  Setting permissions on web directory."
 		sudo chmod -R 755 $webdir/$name/app/storage
 		sudo chmod -R 755 $webdir/$name/app/private_uploads
 		sudo chmod -R 755 $webdir/$name/public/uploads
 		sudo chown -R apache:apache $webdir/$name
 
-		#Install / configure composer
-		echo "##  Configure composer"
-		cd $webdir/$name
-		curl -sS https://getcomposer.org/installer | php
-		php composer.phar install --no-dev --prefer-source
-
-		echo "##  Installing Snipe-IT"
+		echo "##  Installing Snipe-IT."
 		php artisan app:install --env=production
 
 #TODO detect if SELinux and firewall are enabled to decide what to do
@@ -374,6 +405,8 @@ case $distro in
 		# firewall-cmd --zone=public --add-port=80/tcp --permanent
 		# firewall-cmd --reload
 
+
+		echo "##  Restarting apache."
 		service httpd restart
 		;;
 	centos7 )
@@ -384,9 +417,9 @@ case $distro in
 		#Allow us to get the mysql engine
 		echo ""
 		echo "##  Add IUS, epel-release and mariaDB repos.";
-		yum -y install wget epel-release >> /var/log/snipeit-install.log 2>&1 
-		wget -P $tmp/ https://centos7.iuscommunity.org/ius-release.rpm >> /var/log/snipeit-install.log 2>&1 
-		rpm -Uvh $tmp/ius-release*.rpm >> /var/log/snipeit-install.log 2>&1 
+		yum -y install wget epel-release >> /var/log/snipeit-install.log 2>&1
+		wget -P $tmp/ https://centos7.iuscommunity.org/ius-release.rpm >> /var/log/snipeit-install.log 2>&1
+		rpm -Uvh $tmp/ius-release*.rpm >> /var/log/snipeit-install.log 2>&1
 
 		#Install PHP and other needed stuff.
 		echo "##  Installing PHP and other needed stuff";
@@ -397,7 +430,7 @@ case $distro in
 				echo " ##" $p "Installed"
 			else
 				echo -n " ##" $p "Installing... "
-				yum -y install $p >> /var/log/snipeit-install.log 2>&1 
+				yum -y install $p >> /var/log/snipeit-install.log 2>&1
 			echo "";
 			fi
 		done;
@@ -405,9 +438,11 @@ case $distro in
         echo ""
 		echo "##  Downloading Snipe-IT from github and put it in the web directory.";
 
-		wget -P $tmp/ https://github.com/snipe/snipe-it/archive/$file >> /var/log/snipeit-install.log 2>&1 
-		unzip -qo $tmp/$file -d $tmp/
-		cp -R $tmp/snipe-it-master $webdir/$name
+		git clone https://github.com/$fork/snipe-it $webdir/$name >> /var/log/snipeit-install.log 2>&1
+        # get latest stable release
+        cd $webdir/$name
+        branch=$(git tag | grep -v 'pre' | tail -1)
+        git checkout -b $branch $branch
 
 		# Make mariaDB start on boot and restart the daemon
 		echo "##  Starting the mariaDB server.";
@@ -422,33 +457,37 @@ case $distro in
 		echo "";
 		/usr/bin/mysql_secure_installation
 
-
-##TODO make sure the apachefile doesnt exhist isnt already in there
 		#Create the new virtual host in Apache and enable rewrite
 		apachefile=/etc/httpd/conf.d/$name.conf
 
-		echo "##  Creating the new virtual host in Apache.";
-		echo >> $apachefile ""
-		echo >> $apachefile ""
-		echo >> $apachefile "LoadModule rewrite_module modules/mod_rewrite.so"
-		echo >> $apachefile ""
-		echo >> $apachefile "<VirtualHost *:80>"
-		echo >> $apachefile "ServerAdmin webmaster@localhost"
-		echo >> $apachefile "    <Directory $webdir/$name/public>"
-		echo >> $apachefile "        Allow From All"
-		echo >> $apachefile "        AllowOverride All"
-		echo >> $apachefile "        Options +Indexes"
-		echo >> $apachefile "   </Directory>"
-		echo >> $apachefile "    DocumentRoot $webdir/$name/public"
-		echo >> $apachefile "    ServerName $fqdn"
-		echo >> $apachefile "        ErrorLog /var/log/httpd/snipeIT.error.log"
-		echo >> $apachefile "        CustomLog /var/log/access.log combined"
-		echo >> $apachefile "</VirtualHost>"
+		if [$apachefile]
+		then
+			echo "    VirtualHost already exists. $apachefile"
+		else
+			echo >> $apachefile ""
+			echo >> $apachefile ""
+			echo >> $apachefile "LoadModule rewrite_module modules/mod_rewrite.so"
+			echo >> $apachefile ""
+			echo >> $apachefile "<VirtualHost *:80>"
+			echo >> $apachefile "ServerAdmin webmaster@localhost"
+			echo >> $apachefile "    <Directory $webdir/$name/public>"
+			echo >> $apachefile "        Allow From All"
+			echo >> $apachefile "        AllowOverride All"
+			echo >> $apachefile "        Options +Indexes"
+			echo >> $apachefile "   </Directory>"
+			echo >> $apachefile "    DocumentRoot $webdir/$name/public"
+			echo >> $apachefile "    ServerName $fqdn"
+			echo >> $apachefile "        ErrorLog /var/log/httpd/snipeIT.error.log"
+			echo >> $apachefile "        CustomLog /var/log/access.log combined"
+			echo >> $apachefile "</VirtualHost>"
+		fi
 
-##TODO make sure this isnt already in there
 		echo "##  Setting up hosts file.";
-		echo >> $hosts "127.0.0.1 $hostname $fqdn"
-
+		if grep -q "127.0.0.1 $hostname $fqdn" "$hosts"; then
+			echo "    Hosts file already setup."
+		else
+			echo >> $hosts "127.0.0.1 $hostname $fqdn"
+		fi
 
 		echo "##  Starting the apache server.";
 		# Make apache start on boot and restart the daemon
@@ -479,17 +518,20 @@ case $distro in
 		echo "	Setting up mail file."
 		cp $webdir/$name/app/config/production/mail.example.php $webdir/$name/app/config/production/mail.php
 
+		# Install / configure composer
+		echo "##  Configuring composer."
+		cd $webdir/$name
+		curl -sS https://getcomposer.org/installer | php
+		php composer.phar install --no-dev --prefer-source
+
 		# Change permissions on directories
+		echo "##  Setting permissions on web directory."
 		sudo chmod -R 755 $webdir/$name/app/storage
 		sudo chmod -R 755 $webdir/$name/app/private_uploads
 		sudo chmod -R 755 $webdir/$name/public/uploads
 		sudo chown -R apache:apache $webdir/$name
 
-		#Install / configure composer
-		cd $webdir/$name
-
-		curl -sS https://getcomposer.org/installer | php
-		php composer.phar install --no-dev --prefer-source
+		echo "##  Installing Snipe-IT."
 		php artisan app:install --env=production
 
 #TODO detect if SELinux and firewall are enabled to decide what to do
@@ -498,6 +540,7 @@ case $distro in
 		# firewall-cmd --zone=public --add-port=80/tcp --permanent
 		# firewall-cmd --reload
 
+		echo "##  Restarting apache."
 		systemctl restart httpd.service
 		;;
 esac
