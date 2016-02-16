@@ -1,7 +1,7 @@
 <?php
 
 return array(
-    'assets_rtd'		=> 'Assets RTD',
+    'assets_rtd'		=> 'Bien RTD',
     'assets_checkedout'		=> 'Equipo asignado',
     'id'      		=> 'ID',
     'city'   		=> 'Ciudad',
