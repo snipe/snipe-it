@@ -383,10 +383,12 @@ return false;
   public function eol_date()
   {
 
-      if (( $this->purchase_date ) && ( $this->model )) {
+      if (( $this->purchase_date ) && ( $this->model->eol !='' ) && ( $this->model->eol > 0 )) {
           $date = date_create( $this->purchase_date );
           date_add( $date, date_interval_create_from_date_string( $this->model->eol . ' months' ));
           return date_format( $date, 'Y-m-d' );
+      } else {
+	      return false;
       }
 
   }
