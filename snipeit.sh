@@ -69,8 +69,12 @@ echo "  Welcome to Snipe-IT Inventory Installer for Centos and Debian!"
 echo ""
 
 case $distro in
-        *Ubuntu*|*Debian*)
-                echo "  The installer has detected Ubuntu/Debian as the OS."
+        *Ubuntu*)
+                echo "  The installer has detected Ubuntu as the OS."
+                distro=ubuntu
+                ;;
+	*Debian*)
+                echo "  The installer has detected Debian as the OS."
                 distro=debian
                 ;;
         *centos6*|*redhat6*)
@@ -135,7 +139,124 @@ chmod 700 $dbsetup
 
 case $distro in
 	debian)
-		#####################################  Install for Debian/ubuntu  ##############################################
+		#####################################  Install for Debian ##############################################
+
+		webdir=/var/www
+
+		#Update/upgrade Debian repositories.
+		echo ""
+		echo "##  Updating Debian packages in the background. Please be patient."
+		echo ""
+		apachefile=/etc/apache2/sites-available/$name.conf
+		sudo apt-get update >> /var/log/snipeit-install.log 2>&1
+		sudo apt-get -y upgrade >> /var/log/snipeit-install.log 2>&1
+
+		echo "##  Installing packages."
+		sudo apt-get -y install mariadb-server mariadb-client
+		echo "## Going to suppress more messages that you don't need to worry about. Please wait."
+		sudo apt-get -y install apache2 >> /var/log/snipeit-install.log 2>&1
+		sudo apt-get install -y git unzip php5 php5-mcrypt php5-curl php5-mysql php5-gd php5-ldap libapache2-mod-php5 curl >> /var/log/snipeit-install.log 2>&1
+		sudo service apache2 restart
+		
+		#We already established MySQL root & user PWs, so we dont need to be prompted. Let's go ahead and install Apache, PHP and MySQL.
+		echo "##  Setting up LAMP."
+		#sudo DEBIAN_FRONTEND=noninteractive apt-get install -y lamp-server^ >> /var/log/snipeit-install.log 2>&1 
+
+		#  Get files and extract to web dir
+		echo ""
+		echo "##  Downloading snipeit and extract to web directory."
+		wget -P $tmp/ https://github.com/snipe/snipe-it/archive/$file >> /var/log/snipeit-install.log 2>&1 
+		unzip -qo $tmp/$file -d $tmp/
+		cp -R $tmp/snipe-it-master $webdir/$name
+
+		##  TODO make sure apache is set to start on boot and go ahead and start it
+
+		#Enable mcrypt and rewrite
+		echo "##  Enabling mcrypt and rewrite"
+		sudo php5enmod mcrypt >> /var/log/snipeit-install.log 2>&1 
+		sudo a2enmod rewrite >> /var/log/snipeit-install.log 2>&1 
+		sudo ls -al /etc/apache2/mods-enabled/rewrite.load >> /var/log/snipeit-install.log 2>&1 
+
+		#Create a new virtual host for Apache.
+		echo "##  Create Virtual host for apache."
+		echo >> $apachefile ""
+		echo >> $apachefile ""
+		echo >> $apachefile "<VirtualHost *:80>"
+		echo >> $apachefile "ServerAdmin webmaster@localhost"
+		echo >> $apachefile "    <Directory $webdir/$name/public>"
+		echo >> $apachefile "        Require all granted"
+		echo >> $apachefile "        AllowOverride All"
+		echo >> $apachefile "   </Directory>"
+		echo >> $apachefile "    DocumentRoot $webdir/$name/public"
+		echo >> $apachefile "    ServerName $fqdn"
+		echo >> $apachefile "        ErrorLog /var/log/apache2/snipeIT.error.log"
+		echo >> $apachefile "        CustomLog /var/log/apache2/access.log combined"
+		echo >> $apachefile "</VirtualHost>"
+
+		echo "##  Setting up hosts file."
+		echo >> $hosts "127.0.0.1 $hostname $fqdn"
+		a2ensite $name.conf >> /var/log/snipeit-install.log 2>&1 
+
+		#Modify the Snipe-It files necessary for a production environment.
+		echo "##  Modify the Snipe-It files necessary for a production environment."
+		echo "	Setting up Timezone."
+		tzone=$(cat /etc/timezone);
+		sed -i "s,UTC,$tzone,g" $webdir/$name/app/config/app.php
+
+		echo "	Setting up bootstrap file."
+		sed -i "s,www.yourserver.com,$hostname,g" $webdir/$name/bootstrap/start.php
+
+		echo "	Setting up database file."
+		cp $webdir/$name/app/config/production/database.example.php $webdir/$name/app/config/production/database.php
+		sed -i "s,snipeit_laravel,snipeit,g" $webdir/$name/app/config/production/database.php
+		sed -i "s,travis,snipeit,g" $webdir/$name/app/config/production/database.php
+		sed -i "s,password'  => '',password'  => '$mysqluserpw',g" $webdir/$name/app/config/production/database.php
+
+		echo "	Setting up app file."
+		cp $webdir/$name/app/config/production/app.example.php $webdir/$name/app/config/production/app.php
+		sed -i "s,production.yourserver.com,$fqdn,g" $webdir/$name/app/config/production/app.php
+		sed -i "s,Change_this_key_or_snipe_will_get_ya,$random32,g" $webdir/$name/app/config/production/app.php
+		## from mtucker6784: Is there a particular reason we want end users to have debug mode on with a fresh install?
+		#sed -i "s,false,true,g" $webdir/$name/app/config/production/app.php
+
+		echo "	Setting up mail file."
+		cp $webdir/$name/app/config/production/mail.example.php $webdir/$name/app/config/production/mail.php
+
+		##  TODO make sure mysql is set to start on boot and go ahead and start it
+
+		#Change permissions on directories
+		echo "##  Seting permissions on web directory."
+		sudo chmod -R 755 $webdir/$name/app/storage
+		sudo chmod -R 755 $webdir/$name/app/private_uploads
+		sudo chmod -R 755 $webdir/$name/public/uploads
+		sudo chown -R www-data:www-data /var/www/
+		# echo "##  Finished permission changes."
+		
+		echo "##  Input your MySQL/MariaDB root password: "
+		echo ""
+		sudo mysql -u root -p < $dbsetup
+		echo ""
+		
+		echo "##  Securing Mysql"
+		echo "## I understand this is redundant. You don't need to change your root pw again if you don't want to."
+		# Have user set own root password when securing install
+		# and just set the snipeit database user at the beginning
+		/usr/bin/mysql_secure_installation
+
+		#Install / configure composer
+		echo "##  Installing and configuring composer"
+		curl -sS https://getcomposer.org/installer | php
+		mv composer.phar /usr/local/bin/composer
+		cd $webdir/$name/
+		composer install --no-dev --prefer-source
+		php artisan app:install --env=production
+
+		echo "##  Restarting apache."
+		service apache2 restart
+		;;
+		
+	ubuntu)
+		#####################################  Install for Ubuntu  ##############################################
 
 		webdir=/var/www
 
@@ -144,8 +265,8 @@ case $distro in
 		echo "##  Updating ubuntu in the background. Please be patient."
 		echo ""
 		apachefile=/etc/apache2/sites-available/$name.conf
-		sudo apt-get update >> /var/log/snipeit-install.log 2>&1 
-		sudo apt-get -y upgrade >> /var/log/snipeit-install.log 2>&1 
+		sudo apt-get update >> /var/log/snipeit-install.log 2>&1
+		sudo apt-get -y upgrade >> /var/log/snipeit-install.log 2>&1
 
 		echo "##  Installing packages."
 		sudo apt-get install -y git unzip php5 php5-mcrypt php5-curl php5-mysql php5-gd php5-ldap >> /var/log/snipeit-install.log 2>&1 
@@ -207,7 +328,8 @@ case $distro in
 		cp $webdir/$name/app/config/production/app.example.php $webdir/$name/app/config/production/app.php
 		sed -i "s,production.yourserver.com,$fqdn,g" $webdir/$name/app/config/production/app.php
 		sed -i "s,Change_this_key_or_snipe_will_get_ya,$random32,g" $webdir/$name/app/config/production/app.php
-		sed -i "s,false,true,g" $webdir/$name/app/config/production/app.php
+		## from mtucker6784: Is there a particular reason we want end users to have debug mode on with a fresh install?
+		#sed -i "s,false,true,g" $webdir/$name/app/config/production/app.php
 
 		echo "	Setting up mail file."
 		cp $webdir/$name/app/config/production/mail.example.php $webdir/$name/app/config/production/mail.php
@@ -222,7 +344,7 @@ case $distro in
 		sudo chown -R www-data:www-data /var/www/
 		# echo "##  Finished permission changes."
 
-		echo "##  Input your MySQL/MariaDB root password (blank if this is a fresh install): "
+		echo "##  Input your MySQL/MariaDB root password: "
 		sudo mysql -u root -p < $dbsetup
 
 		echo "##  Securing Mysql"
@@ -292,8 +414,8 @@ case $distro in
 		chkconfig mysql on
 		/sbin/service mysql start
 
-		echo "##  Input your MySQL/MariaDB root password (blank if this is a fresh install): "
-		mysql -u root -p < $dbsetup
+		echo "##  Input your MySQL/MariaDB root password: "
+		mysql -u root < $dbsetup
 
 		echo "##  Securing mariaDB server.";
 		/usr/bin/mysql_secure_installation
@@ -348,7 +470,8 @@ case $distro in
 		cp $webdir/$name/app/config/production/app.example.php $webdir/$name/app/config/production/app.php
 		sed -i "s,production.yourserver.com,$fqdn,g" $webdir/$name/app/config/production/app.php
 		sed -i "s,Change_this_key_or_snipe_will_get_ya,$random32,g" $webdir/$name/app/config/production/app.php
-		sed -i "s,false,true,g" $webdir/$name/app/config/production/app.php
+		## from mtucker6784: Is there a particular reason we want end users to have debug mode on with a fresh install?
+		#sed -i "s,false,true,g" $webdir/$name/app/config/production/app.php
 
 		echo "	Setting up mail file."
 		cp $webdir/$name/app/config/production/mail.example.php $webdir/$name/app/config/production/mail.php
@@ -414,7 +537,7 @@ case $distro in
 		systemctl enable mariadb.service
 		systemctl start mariadb.service
 
-		echo "##  Input your MySQL/MariaDB root password (blank if this is a fresh install): "
+		echo "##  Input your MySQL/MariaDB root password "
 		mysql -u root -p < $dbsetup
 
 		echo "##  Securing mariaDB server.";
