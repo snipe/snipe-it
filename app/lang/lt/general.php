@@ -2,6 +2,7 @@
 
     return [
     'accessories'			=> 'Įrangos',
+    'activated'			=> 'Activated',
     'accessory'				=> 'Įranga',
     'accessory_report'			=> 'Įrangos ataskaita',
     'action'                => 'Veiksmas',
@@ -120,6 +121,7 @@
     'select_user'			=> 'Pasirinkti vartotoją',
     'select_date'			=> 'Pasirinkti datą',
     'select_statuslabel'	=> 'Pasirinkti būseną',
+    'select_company'    			=> 'Select Company',
     'settings'				=> 'Nustatymai',
     'sign_in'				=> 'Prisijungti',
     'site_name'				=> 'Interneto puslapio pavadinimas',

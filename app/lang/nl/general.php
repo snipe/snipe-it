@@ -2,6 +2,7 @@
 
     return [
     'accessories'			=> 'Accessoires',
+    'activated'			=> 'Activated',
     'accessory'				=> 'Accessoire',
     'accessory_report'			=> 'Accessory Report',
     'action'                => 'Actie',
@@ -120,6 +121,7 @@
     'select_user'			=> 'Selecteer een gebruiker',
     'select_date'			=> 'Selecteer een datum',
     'select_statuslabel'	=> 'Selecteer de status',
+    'select_company'    			=> 'Select Company',
     'settings'				=> 'Instellingen',
     'sign_in'				=> 'Aanmelden',
     'site_name'				=> 'Sitenaam',

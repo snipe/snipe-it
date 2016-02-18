@@ -2,6 +2,7 @@
 
     return [
     'accessories'			=> 'อุปกรณ์',
+    'activated'			=> 'Activated',
     'accessory'				=> 'อุปกรณ์',
     'accessory_report'			=> 'รายงานอุปกรณ์เสริม',
     'action'                => 'ดำเนินการ',
@@ -120,6 +121,7 @@
     'select_user'			=> 'เลือกผู้ใช้',
     'select_date'			=> 'เลือกวันที่',
     'select_statuslabel'	=> 'เลือกสถานะ',
+    'select_company'    			=> 'Select Company',
     'settings'				=> 'การตั้งค่า',
     'sign_in'				=> 'ลงชื่อเข้าใช้',
     'site_name'				=> 'ชื่อไซต์',

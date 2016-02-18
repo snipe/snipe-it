@@ -2,6 +2,7 @@
 
     return [
     'accessories'			=> 'Accesorios',
+    'activated'			=> 'Activated',
     'accessory'				=> 'Accesorio',
     'accessory_report'			=> 'Reporte de Accesorios',
     'action'                => 'Acción',
@@ -120,6 +121,7 @@
     'select_user'			=> 'Seleccionar un usuario',
     'select_date'			=> 'Seleccionar fecha',
     'select_statuslabel'	=> 'Seleccionar Estado',
+    'select_company'    			=> 'Select Company',
     'settings'				=> 'Opciones',
     'sign_in'				=> 'Entrar',
     'site_name'				=> 'Sitio',

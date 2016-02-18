@@ -56,8 +56,8 @@ return array(
     ),
 
     'requests' => array(
-        'error'   		=> 'Asset was not requested, please try again',
-        'success' 		=> 'Asset requested successfully.',
+        'error'   		=> '자산을 불러오지 못했습니다. 재시도해 주십시오.',
+        'success' 		=> '자산을 불러왔습니다.',
     )
 
 );

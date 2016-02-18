@@ -1,9 +1,9 @@
 <?php
 
 return array(
-	'bulk_delete'		=> 'Confrm Bulk Delete Assets',
-  'bulk_delete_help'	=> 'Review the assets for bulk deletion below. Once deleted, these assets can be restored, but they will no longer be associated with any users they are currently assigned to.',
-  'bulk_delete_warn'	=> 'You are about to delete :asset_count assets.',
+	'bulk_delete'		=> '대량 자산 삭제 승인',
+  'bulk_delete_help'	=> '아래의 대량 자산 삭제 내용을 검토하십시오. 삭제하시면 복구할 수 없고, 현재 할당되어 있는 사용자와의 연결이 끊어집니다.',
+  'bulk_delete_warn'	=> '삭제 대상: asset_count 개',
 	'bulk_update'		=> '대량 자산 갱신',
 	'bulk_update_help'	=> '이 양식은 한번에 여러개의 자산들을 갱신하게 해줍니다. 변경하고 싶은 항목만 채워 넣으세요. 빈란으로 남겨둔 항목들은 변경되지 않을 것입니다. ',
 	'bulk_update_warn'	=> '당신은 asset_count 자산들의 속성들을 편집하려 합니다.',

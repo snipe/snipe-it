@@ -2,6 +2,7 @@
 
     return [
     'accessories'			=> 'Phụ kiện',
+    'activated'			=> 'Activated',
     'accessory'				=> 'Phụ kiện',
     'accessory_report'			=> 'Báo cáo phụ kiện',
     'action'                => 'Tác vụ',
@@ -120,6 +121,7 @@
     'select_user'			=> 'Lựa chọn một Người dùng',
     'select_date'			=> 'Chọn ngày',
     'select_statuslabel'	=> 'Chọn tình trạng',
+    'select_company'    			=> 'Select Company',
     'settings'				=> 'Cài đặt',
     'sign_in'				=> 'Đăng nhập',
     'site_name'				=> 'Tên trang web',

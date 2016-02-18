@@ -2,6 +2,7 @@
 
     return [
     'accessories'			=> 'Tilbehør',
+    'activated'			=> 'Activated',
     'accessory'				=> 'Tilbehør',
     'accessory_report'			=> 'Accessory Report',
     'action'                => 'Action',
@@ -120,6 +121,7 @@
     'select_user'			=> 'Select a User',
     'select_date'			=> 'Select Date',
     'select_statuslabel'	=> 'Select Status',
+    'select_company'    			=> 'Select Company',
     'settings'				=> 'Instillinger',
     'sign_in'				=> 'Log ind',
     'site_name'				=> 'Site Navn',

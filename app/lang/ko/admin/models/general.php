@@ -7,7 +7,7 @@ return array(
 	'show_mac_address'			      => '이 모델의 자산에서 MAC 어드레스 항목 보기',
     'view_deleted'              => '삭제 목록 보기',
     'view_models'               => '모델 보기',
-    'fieldset'                  => 'Fieldset',
-    'no_custom_field'           => 'No custom fields',
+    'fieldset'                  => '항목세트',
+    'no_custom_field'           => '사용자 정의 항목 없음',
 
 );

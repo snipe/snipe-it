@@ -2,6 +2,7 @@
 
     return [
     'accessories'			=> 'Аксесоари',
+    'activated'			=> 'Activated',
     'accessory'				=> 'Аксесоар',
     'accessory_report'			=> 'Справка за аксесоарите',
     'action'                => 'Действие',
@@ -120,6 +121,7 @@
     'select_user'			=> 'Избор на потребител',
     'select_date'			=> 'Избор на дата',
     'select_statuslabel'	=> 'Избор на статус',
+    'select_company'    			=> 'Select Company',
     'settings'				=> 'Настройки',
     'sign_in'				=> 'Вход',
     'site_name'				=> 'Име на системата',

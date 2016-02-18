@@ -33,7 +33,7 @@ return array(
         'import'    => '사용자를 내보내기 할 때 문제가 발생했습니다. 다시 시도하세요.',
         'asset_already_accepted' => '이 자산은 이미 수락되었습니다.',
         'accept_or_decline' => '이 자산을 승인 하거나 거부 하셔야 합니다.',
-        'incorrect_user_accepted' => 'The asset you have attempted to accept was not checked out to you.',
+        'incorrect_user_accepted' => '승인하려는 자산이 체크아웃되지 않았습니다.',
         'ldap_could_not_connect' => 'LDAP 서버에 접속 할 수 없습니다. LDAP 설정 파일의 LDAP 서버 구성을 확인해 보세요.<br>LDAP 서버 오류:',
         'ldap_could_not_bind' => 'LDAP 서버와 동기화 할 수 없습니다. LDAP 설정 파일의 LDAP 서버 구성을 확인해 보세요.<br>LDAP 서버 오류: ',
         'ldap_could_not_search' => 'LDAP 서버를 찾을 수 없습니다. LDAP 설정 파일의 LDAP 서버 구성을 확인해 보세요.<br>LDAP 서버 오류:',

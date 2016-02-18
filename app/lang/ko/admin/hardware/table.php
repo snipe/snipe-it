@@ -18,7 +18,7 @@ return array(
     'serial'   		=> '일련번호',
     'status'   		=> '상태',
     'title'      	=> '자산 ',
-    'image'		=> 'Device Image',
+    'image'		=> '장비 사진',
     'days_without_acceptance' => '미 승인 기간'
 
 );

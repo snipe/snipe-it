@@ -2,6 +2,7 @@
 
     return [
     'accessories'			=> 'Aksesuarlar',
+    'activated'			=> 'Activated',
     'accessory'				=> 'Aksesuar',
     'accessory_report'			=> 'Aksesuar Raporu',
     'action'                => 'Hareket',
@@ -120,6 +121,7 @@
     'select_user'			=> 'Kullanıcı Seç',
     'select_date'			=> 'Tarih seç',
     'select_statuslabel'	=> 'Durum Seç',
+    'select_company'    			=> 'Select Company',
     'settings'				=> 'Ayarlar',
     'sign_in'				=> 'Oturum Aç',
     'site_name'				=> 'Site Adı',

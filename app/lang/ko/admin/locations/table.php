@@ -1,8 +1,8 @@
 <?php
 
 return array(
-    'assets_rtd'		=> 'Assets RTD',
-    'assets_checkedout'		=> 'Assets Assigned',
+    'assets_rtd'		=> 'RTD 자산',
+    'assets_checkedout'		=> '할당된 자산',
     'id'      		=> '아이디',
     'city'   		=> '시',
     'state'   		=> '주',

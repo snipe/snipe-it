@@ -2,6 +2,7 @@
 
     return [
     'accessories'			=> 'Příslušenství',
+    'activated'			=> 'Activated',
     'accessory'				=> 'Příslušenství',
     'accessory_report'			=> 'Zpráva o doplňcích',
     'action'                => 'Akce',
@@ -120,6 +121,7 @@
     'select_user'			=> 'Zvolit uživatele',
     'select_date'			=> 'Zvolit datum',
     'select_statuslabel'	=> 'Vybrat stav',
+    'select_company'    			=> 'Select Company',
     'settings'				=> 'Nastavení',
     'sign_in'				=> 'Přihlásit se',
     'site_name'				=> 'Název lokality',

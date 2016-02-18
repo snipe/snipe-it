@@ -2,6 +2,7 @@
 
     return [
     'accessories'			=> 'Accessories',
+    'activated'			=> 'Activated',
     'accessory'				=> 'Accessory',
     'accessory_report'			=> 'Accessory Report',
     'action'                => 'Action',
@@ -120,6 +121,7 @@
     'select_user'			=> 'Selectati un utilizatori',
     'select_date'			=> 'Selectaţi data',
     'select_statuslabel'	=> 'Selecteaza Starea',
+    'select_company'    			=> 'Select Company',
     'settings'				=> 'Setari',
     'sign_in'				=> 'Logheaza-te',
     'site_name'				=> 'Nume site',

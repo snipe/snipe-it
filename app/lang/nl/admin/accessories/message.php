@@ -2,22 +2,22 @@
 
 return array(
 
-    'does_not_exist' => 'Accessory does not exist.',
+    'does_not_exist' => 'Accessoire bestaat niet.',
     'assoc_users'	 => 'This accessory currently has :count items checked out to users. Please check in the accessories and and try again. ',
 
     'create' => array(
         'error'   => 'Accessory was not created, please try again.',
-        'success' => 'Accessory created successfully.'
+        'success' => 'Accessoire succesvol aangemaakt.'
     ),
 
     'update' => array(
         'error'   => 'Accessory was not updated, please try again',
-        'success' => 'Accessory updated successfully.'
+        'success' => 'Accessoire succesvol geupdate.'
     ),
 
     'delete' => array(
-        'confirm'   => 'Are you sure you wish to delete this category?',
-        'error'   => 'There was an issue deleting the category. Please try again.',
+        'confirm'   => 'Weet je zeker dat je deze categorie wilt verwijderen?',
+        'error'   => 'Er is een probleem opgetreden bij het verwijderen van deze categorie. Probeer opnieuw, aub.',
         'success' => 'The category was deleted successfully.'
     ),
 

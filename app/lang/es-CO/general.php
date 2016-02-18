@@ -2,6 +2,7 @@
 
     return [
     'accessories'			=> 'Accessories',
+    'activated'			=> 'Activated',
     'accessory'				=> 'Accessory',
     'accessory_report'			=> 'Accessory Report',
     'action'                => 'Action',
@@ -120,6 +121,7 @@
     'select_user'			=> 'Select a User',
     'select_date'			=> 'Select Date',
     'select_statuslabel'	=> 'Select Status',
+    'select_company'    			=> 'Select Company',
     'settings'				=> 'Settings',
     'sign_in'				=> 'Sign in',
     'site_name'				=> 'Site Name',

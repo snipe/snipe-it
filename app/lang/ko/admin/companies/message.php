@@ -1,18 +1,18 @@
 <?php
 return array(
-    'does_not_exist' => 'Company does not exist.',
-    'assoc_users'    => 'This company is currently associated with at least one model and cannot be deleted. Please update your models to no longer reference this company and try again. ',
+    'does_not_exist' => '회사가 없습니다.',
+    'assoc_users'    => '이 회사는 적어도 한개의 모델과 연결되어 있기에 삭제할 수 없습니다. 이 회사를 참조하지 않게 모델을 수정하고 다시 시도해 주세요. ',
     'create' => array(
-        'error'   => 'Company was not created, please try again.',
-        'success' => 'Company created successfully.'
+        'error'   => '회사를 만들지 못했습니다. 재시도해 주십시오.',
+        'success' => '회사를 만들었습니다.'
     ),
     'update' => array(
-        'error'   => 'Company was not updated, please try again',
-        'success' => 'Company updated successfully.'
+        'error'   => '회사를 갱신하지 못했습니다. 재시도해 주십시오.',
+        'success' => '회사를 갱신했습니다.'
     ),
     'delete' => array(
-        'confirm' => 'Are you sure you wish to delete this company?',
-        'error'   => 'There was an issue deleting the company. Please try again.',
-        'success' => 'The Company was deleted successfully.'
+        'confirm' => '이 회사를 삭제하고자 하는게 맞습니까?',
+        'error'   => '회사 삭제 도중 이슈가 발생했습니다. 재시도해 주십시오.',
+        'success' => '회사를 삭제했습니다.'
     )
 );

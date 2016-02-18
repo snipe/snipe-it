@@ -2,6 +2,7 @@
 
     return [
     'accessories'			=> '付属品群',
+    'activated'			=> 'Activated',
     'accessory'				=> '付属品',
     'accessory_report'			=> '付属品レポート',
     'action'                => '操作',
@@ -120,6 +121,7 @@
     'select_user'			=> '利用者を選択',
     'select_date'			=> '日付を選択',
     'select_statuslabel'	=> 'ステータスを選択',
+    'select_company'    			=> 'Select Company',
     'settings'				=> '設定',
     'sign_in'				=> 'サインイン',
     'site_name'				=> 'サイト名',

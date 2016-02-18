@@ -2,6 +2,7 @@
 
     return [
     'accessories'			=> '附属品',
+    'activated'			=> 'Activated',
     'accessory'				=> '附属品',
     'accessory_report'			=> '配件报告',
     'action'                => '操作',
@@ -120,6 +121,7 @@
     'select_user'			=> '选择用户',
     'select_date'			=> '选择日期',
     'select_statuslabel'	=> '选择状态',
+    'select_company'    			=> 'Select Company',
     'settings'				=> '设置',
     'sign_in'				=> '登录',
     'site_name'				=> '站点名称',
