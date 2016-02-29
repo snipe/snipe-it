@@ -465,8 +465,9 @@ class AssetsController extends AdminController
 
         // Get the dropdown of users and then pass it to the checkout view
         $users_list = usersList();
+        $location_list = locationsList();
 
-        return View::make('backend/hardware/checkout', compact('asset'))->with('users_list',$users_list);
+        return View::make('backend/hardware/checkout', compact('asset'))->with('users_list', $users_list)->with('location_list', $location_list);
 
     }
 
@@ -486,7 +487,8 @@ class AssetsController extends AdminController
 
         // Declare the rules for the form validation
         $rules = array(
-            'assigned_to'   => 'required|min:1',
+            'assigned_to'   => 'required_without:assigned_location|min:1',
+            'assigned_location' => 'required_without:assigned_to|min:1',
             'checkout_at'   => 'required|date',
             'note'   => 'alpha_space',
         );
@@ -498,8 +500,16 @@ class AssetsController extends AdminController
             return Redirect::back()->withInput()->withErrors($validator);
         }
 
-        if (!$user = User::find(e(Input::get('assigned_to')))) {
+        $user = null;
+        $user_input = e(Input::get('assigned_to'));
+        if (!empty($user_input) && !$user = User::find($user_input)) {
             return Redirect::to('hardware')->with('error', Lang::get('admin/hardware/message.user_does_not_exist'));
+        }
+        
+        $loc = null;
+        $loc_input = e(Input::get('assigned_location'));
+        if (!empty($loc_input) && !$loc = Location::find($loc_input)) {
+            return Redirect::to('hardware')->with('error', Lang::get('admin/hardware/message.location_does_not_exist'));
         }
 
         if (!$admin = Sentry::getUser()) {
@@ -520,7 +530,7 @@ class AssetsController extends AdminController
         }
 
 
-        if ($asset->checkOutToUser($user, $admin, $checkout_at, $expected_checkin, e(Input::get('note')), e(Input::get('name')))) {
+        if ($asset->checkOut($user, $loc, $admin, $checkout_at, $expected_checkin, e(Input::get('note')), e(Input::get('name')))) {
             // Redirect to the new asset page
             return Redirect::to("hardware")->with('success', Lang::get('admin/hardware/message.checkout.success'));
         }
@@ -1441,7 +1451,7 @@ class AssetsController extends AdminController
 
         if ($asset->assetstatus) {
             if ($asset->assetstatus->deployable != 0) {
-                if (($asset->assigned_to !='') && ($asset->assigned_to > 0)) {
+                if ($asset->is_assigned()) {
                     $inout = '<a href="'.route('checkin/hardware', $asset->id).'" class="btn btn-primary btn-sm">'.Lang::get('general.checkin').'</a>';
                 } else {
                     $inout = '<a href="'.route('checkout/hardware', $asset->id).'" class="btn btn-info btn-sm">'.Lang::get('general.checkout').'</a>';

@@ -28,7 +28,7 @@
             </button>
             <ul class="dropdown-menu pull-right" role="menu" aria-labelledby="dropdownMenu1">
 
-                    @if ($asset->assigned_to != '')
+                    @if ($asset->is_assigned)
                             <li role="presentation"><a href="{{ route('checkin/hardware', $asset->id) }}">@lang('admin/hardware/general.checkin')</a></li>
 
                         @else
