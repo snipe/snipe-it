@@ -433,7 +433,12 @@
                 <h6><br>@lang('admin/hardware/form.checkedout_to')</h6>
                 <ul>
 
-                    <li><img src="{{{ $asset->assigneduser->gravatar() }}}" class="img-circle" style="width: 100px; margin-right: 20px;" /><br /><br /></li>
+                    <li>
+                        @if ($asset->assigneduser->avatar)
+                                <img src="/uploads/avatars/{{{ $asset->assigneduser->avatar }}}" class="img-circle" style="width: 100px; margin-right: 20px;" /><br /><br /></li>
+                        @else
+                                <img src="{{{ $asset->assigneduser->gravatar() }}}" class="img-circle" style="width: 100px; margin-right: 20px;" /><br /><br /></li>
+                        @endif
                     <li><a href="{{ route('view/user', $asset->assigned_to) }}">{{ $asset->assigneduser->fullName() }}</a></li>
 		<br>
 
