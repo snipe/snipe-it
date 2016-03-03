@@ -30,7 +30,7 @@ Once your composer errors are resolved, you can <a href="installation/command-li
 
 ## Error message: mcrypt_encrypt(): Size of key is too large for this algorithm
 
-In `app/production/config/app.php`, find the `key` on line 43.
+In `app/config/production/app.php`, find the `key` on line 56.
 
 You can run
 
@@ -48,7 +48,7 @@ to auto-generate a 32-character key for you. Paste the generated key in as the v
 
 ## Error message: mcrypt_encrypt(): Key size not supported by this algorithm. Only keys of sizes 16, 24 or 32 supported.
 
-In `app/production/config/app.php`, find the `key` on line 43.
+In `app/config/production/app.php`, find the `key` on line 56.
 
 You can run
 
