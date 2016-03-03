@@ -51,15 +51,32 @@ class AssetImportCommand extends Command {
 		if (! ini_get("auto_detect_line_endings")) {
 			ini_set("auto_detect_line_endings", '1');
 		}
+		
+		// Get header of CSV file
+		$firstline = fgets(fopen($filename, 'r'));
+
+		// Set delimiter based on header, if comma, semicolon or tab
+		if (substr_count($firstline, ",") > 0) $delimiter = ",";
+		elseif (substr_count($firstline, ";") > 0) $delimiter = ";";
+		elseif (substr_count($firstline, "\t") > 0) $delimiter = "\t";
+		else $delimiter = ",";
+
+		$numheaderfields = substr_count($firstline, $delimiter) + 1;
 
 		$csv = Reader::createFromPath($this->argument('filename'));
 		$csv->setNewline("\r\n");
-		$csv->setOffset(1);
-		$duplicates = '';
+		$csv->setDelimiter($delimiter);
 
 		// Loop through the records
-		$nbInsert = $csv->each(function ($row) use ($duplicates) {
+		foreach ($csv as $index => $row) {
+			if ($index == 0) continue;	// Ignore first line
 			$status_id = 1;
+			
+			// # of fields in row must be the same of the header
+			if (count($row) != $numheaderfields) {
+				$this->comment('The number of fields in data line '.$index.' is different from the header. Nothing will be done.');
+				continue;
+			}
 
 			// Let's just map some of these entries to more user friendly words
 
@@ -162,6 +179,9 @@ class AssetImportCommand extends Command {
 			if (array_key_exists('13',$row)) {
 				if ($row[13]!='') {
 					$user_asset_purchase_cost = trim($row[13]);
+					if ($user_asset_purchase_cost[strlen($user_asset_purchase_cost)-3] == ',') {
+                                                $user_asset_purchase_cost = str_replace(',','.',$user_asset_purchase_cost);
+					}
 				} else {
 					$user_asset_purchase_cost = '';
 				}
@@ -169,16 +189,16 @@ class AssetImportCommand extends Command {
 				$user_asset_purchase_cost = '';
 			}
 
-       // Asset Company Name
-       if (array_key_exists('14',$row)) {
-              if ($row[14]!='') {
-                  $user_asset_company_name = trim($row[14]);
-              } else {
-                      $user_asset_company_name= '';
-              }
-       } else {
-              $user_asset_company_name = '';
-       }
+			// Asset Company Name
+			if (array_key_exists('14',$row)) {
+				if ($row[14]!='') {
+					$user_asset_company_name = trim($row[14]);
+				} else {
+					$user_asset_company_name= '';
+				}
+			} else {
+				$user_asset_company_name = '';
+			}
 
 
 			// A number was given instead of a name
@@ -269,7 +289,7 @@ class AssetImportCommand extends Command {
 				$this->comment('Location '.$user_asset_location.' already exists');
 			} else {
 
-        $location = new Location();
+				$location = new Location();
 
 				if ($user_asset_location!='') {
 
@@ -298,11 +318,11 @@ class AssetImportCommand extends Command {
 
 			}
 
-      if (e($user_asset_category)=='') {
-        $category_name = 'Unnamed Category';
-      } else {
-        $category_name = e($user_asset_category);
-      }
+			if (e($user_asset_category)=='') {
+				$category_name = 'Unnamed Category';
+			} else {
+				$category_name = e($user_asset_category);
+			}
 
 			// Check for the category match and create it if it doesn't exist
 			if ($category = Category::where('name', e($category_name))->where('category_type', 'asset')->first()) {
@@ -357,31 +377,31 @@ class AssetImportCommand extends Command {
 
 			}
 
-      // Check for the asset company match and create it if it doesn't exist
-      if ($user_asset_company_name!='') {
-        if ($company = Company::where('name', e($user_asset_company_name))->first()) {
-            $this->comment('Company '.$user_asset_company_name.' already exists');
-        } else {
-            $company = new Company();
-            $company->name = e($user_asset_company_name);
+			// Check for the asset company match and create it if it doesn't exist
+			if ($user_asset_company_name!='') {
+				if ($company = Company::where('name', e($user_asset_company_name))->first()) {
+					$this->comment('Company '.$user_asset_company_name.' already exists');
+				} else {
+					$company = new Company();
+					$company->name = e($user_asset_company_name);
 
-            if ($company->save()) {
-                $this->comment('Company '.$user_asset_company_name.' was created');
-            } else {
-                    $this->comment('Something went wrong! Company '.$user_asset_company_name.' was NOT created');
-            }
-        }
+					if ($company->save()) {
+						$this->comment('Company '.$user_asset_company_name.' was created');
+					} else {
+						$this->comment('Something went wrong! Company '.$user_asset_company_name.' was NOT created');
+					}
+				}
 
-      } else {
-	      $company = new Company();
-      }
+			} else {
+				$company = new Company();
+			}
 
 			// Check for the asset match and create it if it doesn't exist
-        if ($asset = Asset::where('asset_tag', e($user_asset_tag))->first()) {
-          $this->comment('The Asset with asset tag '.$user_asset_tag.' already exists');
-        } else {
-          $asset = new Asset();
-          $asset->name = e($user_asset_asset_name);
+			if ($asset = Asset::where('asset_tag', e($user_asset_tag))->first()) {
+				$this->comment('The Asset with asset tag '.$user_asset_tag.' already exists');
+			} else {
+				$asset = new Asset();
+				$asset->name = e($user_asset_asset_name);
   				if ($user_asset_purchase_date!='') {
   					$asset->purchase_date = $user_asset_purchase_date;
   				} else {
@@ -399,7 +419,7 @@ class AssetImportCommand extends Command {
   				$asset->rtd_location_id = $location->id;
   				$asset->user_id = 1;
   				$asset->status_id = $status_id;
-                $asset->company_id = $company->id;
+				$asset->company_id = $company->id;
   				if ($user_asset_purchase_date!='') {
   					$asset->purchase_date = $user_asset_purchase_date;
   				} else {
@@ -409,20 +429,15 @@ class AssetImportCommand extends Command {
 
   				if ($asset->save()) {
   					$this->comment('Asset '.$user_asset_name.' with serial number '.$user_asset_serial.' was created');
-  	            } else {
+				} else {
   					$this->comment('Something went wrong! Asset '.$user_asset_name.' was NOT created');
   				}
 
-        }
-
-
+			}
 
 			$this->comment('=====================================');
 
-			return true;
-
-		});
-
+		}
 
 	}
 
