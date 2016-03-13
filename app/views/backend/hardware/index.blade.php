@@ -69,7 +69,7 @@
     data-url="{{route('api.hardware.list', array(''=>Input::get('status'),'order_number'=>Input::get('order_number')))}}"
     data-cookie="true"
     data-click-to-select="true"
-    data-cookie-id-table="{{ Input::get('status') }}assetTable-{{ Config::get('version.hash_version') }}">
+    data-cookie-id-table="{{{ Input::get('status') }}}assetTable-{{ Config::get('version.hash_version') }}">
         <thead>
             <tr>
                 <th data-class="hidden-xs" data-switchable="false" data-searchable="false" data-sortable="false" data-field="checkbox"><div class="text-center"><input type="checkbox" id="checkAll" style="padding-left: 0px;"></div></th>
