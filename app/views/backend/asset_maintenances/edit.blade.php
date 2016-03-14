@@ -73,7 +73,7 @@
                     <i class='fa fa-asterisk'></i></label>
                 </label>
                 <div class="col-md-7">
-                    <input class="form-control" type="text" name="title" id="title" value="{{ Input::old('title', $assetMaintenance->title) }}" />
+                    <input class="form-control" type="text" name="title" id="title" value="{{{ Input::old('title', $assetMaintenance->title) }}}" />
                     {{ $errors->first('title', '<br><span class="alert-msg"><i class="fa fa-times"></i> :message</span>') }}
                 </div>
             </div>
@@ -83,7 +83,7 @@
                 <label for="start_date" class="col-md-3 control-label">@lang('admin/asset_maintenances/form.start_date')
                     <i class='fa fa-asterisk'></i></label>
                 <div class="input-group col-md-2">
-                    <input type="date" class="datepicker form-control" data-date-format="yyyy-mm-dd" placeholder="Select Date" name="start_date" id="start_date" value="{{ Input::old('start_date', $assetMaintenance->start_date) }}">
+                    <input type="date" class="datepicker form-control" data-date-format="yyyy-mm-dd" placeholder="Select Date" name="start_date" id="start_date" value="{{{ Input::old('start_date', $assetMaintenance->start_date) }}}">
                     <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
                     {{ $errors->first('start_date', '<br><span class="alert-msg"><i class="fa fa-times"></i> :message</span>') }}
                 </div>
@@ -93,7 +93,7 @@
             <div class="form-group {{ $errors->has('completion_date') ? ' has-error' : '' }}">
                 <label for="start_date" class="col-md-3 control-label">@lang('admin/asset_maintenances/form.completion_date')</label>
                 <div class="input-group col-md-2">
-                    <input type="date" class="datepicker form-control" data-date-format="yyyy-mm-dd" placeholder="Select Date" name="completion_date" id="completion_date" value="{{ Input::old('completion_date', $assetMaintenance->completion_date) }}">
+                    <input type="date" class="datepicker form-control" data-date-format="yyyy-mm-dd" placeholder="Select Date" name="completion_date" id="completion_date" value="{{{ Input::old('completion_date', $assetMaintenance->completion_date) }}}">
                     <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
                     {{ $errors->first('completion_date', '<br><span class="alert-msg"><i class="fa fa-times"></i> :message</span>') }}
                 </div>
