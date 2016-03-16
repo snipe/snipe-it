@@ -75,7 +75,7 @@ class LocationsController extends AdminController
             } else {
                 $location->parent_id		= e(Input::get('parent_id'));
             }
-            $location->currency			= Input::get('currency','$');
+            $location->currency			= e(Input::get('currency','$'));
             $location->address			= e(Input::get('address'));
             $location->address2			= e(Input::get('address2'));
             $location->city    			= e(Input::get('city'));
@@ -203,7 +203,7 @@ class LocationsController extends AdminController
             } else {
                 $location->parent_id		= e(Input::get('parent_id',''));
             }
-            $location->currency			= Input::get('currency','$');
+            $location->currency			= e(Input::get('currency','$'));
             $location->address			= e(Input::get('address'));
             $location->address2			= e(Input::get('address2'));
             $location->city    			= e(Input::get('city'));
