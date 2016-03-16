@@ -47,6 +47,9 @@ RUN sed -i 's/return $app;/$env="production";\nreturn $app;/' bootstrap/start.ph
 
 #copy all configuration files
 COPY docker/*.php /var/www/html/app/config/production/
+RUN mkdir /opt/snipe-it && cd /opt/snipe-it && ln -s -T /var/www/html/app/config/production/ config
+# Create a volume for attaching to from outside the container, if desired.
+VOLUME /opt/snipe-it/config
 
 RUN chown -R docker /var/www/html
 
