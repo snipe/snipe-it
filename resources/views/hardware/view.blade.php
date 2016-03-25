@@ -496,7 +496,7 @@
                                 @endif
                             </td>
                             <td>
-                                 @if (Asset::checkUploadIsImage($file->get_src()))
+                                 @if (\App\Models\Asset::checkUploadIsImage($file->get_src()))
                                       <a class='preview' data-placement="top" data-image-url="showfile/{{ $file->id }}" data-container="body" data-toggle="popover" data-placement="top" >{{ $file->filename }}</a>
                                  @else
                                       {{ $file->filename }}
