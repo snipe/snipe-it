@@ -1149,17 +1149,43 @@ class UsersController extends Controller
             return Redirect::route('users')->with('error', Lang::get('admin/users/message.error.ldap_could_not_bind').ldap_error($ldapconn));
         }
 
-        // Perform the search
-        $search_results = @ldap_search($ldapconn, $base_dn, '('.$filter.')');
-        if (!$search_results) {
-            return Redirect::route('users')->with('error', Lang::get('admin/users/message.error.ldap_could_not_search').ldap_error($ldapconn));
-        }
+        // Set up LDAP pagination for very large databases
+        // @author Richard Hofman
+        $page_size = 500;
+        $cookie = '';
+        $result_set = array();
+        $global_count = 0;
 
-        // Get results
-        $results = @ldap_get_entries($ldapconn, $search_results);
-        if (!$results) {
-            return Redirect::route('users')->with('error', Lang::get('admin/users/message.error.ldap_could_not_get_entries').ldap_error($ldapconn));
-        }
+        // Perform the search
+	    do {
+    		// Paginate (non-critical, if not supported by server)
+    		ldap_control_paged_result($ldapconn, $page_size, false, $cookie);
+
+            	$search_results = ldap_search($ldapconn, $base_dn, '('.$filter.')');
+
+    	        if (!$search_results) {
+    	            return Redirect::route('users')->with('error', Lang::get('admin/users/message.error.ldap_could_not_search').ldap_error($ldapconn));
+    	        }
+
+    	        // Get results from page
+    	        $results = ldap_get_entries($ldapconn, $search_results);
+    	        if (!$results) {
+    	            return Redirect::route('users')->with('error', Lang::get('admin/users/message.error.ldap_could_not_get_entries').ldap_error($ldapconn));
+    	        }
+
+    		// Add results to result set
+    		$global_count += $results['count'];
+    		$result_set = array_merge($result_set, $results);
+
+    		ldap_control_paged_result_response($ldapconn, $search_results, $cookie);
+
+	   } while ($cookie !== null && $cookie != '');
+
+
+        // Clean up after search
+        $result_set['count'] = $global_count;
+        $results = $result_set;
+        ldap_control_paged_result($ldapconn, 0);
 
         $summary = array();
 
@@ -1173,7 +1199,7 @@ class UsersController extends Controller
                 $item["firstname"] = isset($results[$i][$ldap_result_first_name][0]) ? $results[$i][$ldap_result_first_name][0] : "";
                 $item["email"] = isset($results[$i][$ldap_result_email][0]) ? $results[$i][$ldap_result_email][0] : "" ;
 
-              // User exists
+                // User exists
                 $item["createorupdate"] = 'updated';
                 if (!$user = \App\Models\User::where('username', $item["username"])->first()) {
                     $user = new \App\Models\User;
