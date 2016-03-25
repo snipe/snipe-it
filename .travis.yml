@@ -1,7 +1,7 @@
 addons:
     hosts:
         - localhost
-sudo: false
+sudo: required
 
 # see http://about.travis-ci.org/docs/user/languages/php/ for more hints
 language: php
@@ -19,6 +19,10 @@ env:
 # execute any number of scripts before the test run, custom env's are available as variables
 before_script:
 #  - php -S localhost:8000 &
+  - wget https://s3.amazonaws.com/travis-phantomjs/phantomjs-2.0.0-ubuntu-12.04.tar.bz2
+  - tar -xjf phantomjs-2.0.0-ubuntu-12.04.tar.bz2
+  - sudo rm -rf /usr/local/phantomjs/bin/phantomjs
+  - sudo mv phantomjs /usr/local/phantomjs/bin/phantomjs
   - phantomjs --webdriver=4444  &
   - sleep 10
   - touch database/testing.sqlite
