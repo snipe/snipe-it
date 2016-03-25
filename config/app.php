@@ -113,11 +113,27 @@ return [
 
     /*
     |--------------------------------------------------------------------------
+    | Default Storage path for private uploads
+    |--------------------------------------------------------------------------
+    | This is the path for any uploaded files that have to be run through the
+    | auth system to ensure they are not visible to the public. These should be
+    | stored somewhere outside of the web root so that an unautenticated user
+    | cannot access them.
+    |
+    | For example: license keys, contracts, etc.
+    |
+    */
+
+    'private_uploads' => storage_path().'/private_uploads',
+
+
+    /*
+    |--------------------------------------------------------------------------
     | Demo Mode Lockdown
     |--------------------------------------------------------------------------
     |
     | Normal users will never need to edit this. This option lets you run a
-    | version of Snipe-IT with limited functionality to prevent demo abuse. 
+    | version of Snipe-IT with limited functionality to prevent demo abuse.
     |
     */
 

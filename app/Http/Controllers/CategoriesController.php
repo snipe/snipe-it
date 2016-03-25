@@ -1,4 +1,13 @@
-<?php namespace App\Http\Controllers;
+<?php
+/**
+ * This controller handles all actions related to Asset Categories for
+ * the Snipe-IT Asset Management application.
+ *
+ * PHP version 5.5.9
+ * @package    Snipe-IT
+ * @version    v1.0
+ */
+namespace App\Http\Controllers;
 
 use App\Helpers\Helper;
 use App\Models\Category as Category;

@@ -1,4 +1,12 @@
 <?php
+/**
+ * This controller handles all actions related to Asset Depreciation
+ * for the Snipe-IT Asset Management application.
+ *
+ * PHP version 5.5.9
+ * @package    Snipe-IT
+ * @version    v1.0
+ */
 namespace App\Http\Controllers;
 
 use Input;

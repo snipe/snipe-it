@@ -938,7 +938,7 @@ class UsersController extends Controller
 
 
         $user = User::find($userId);
-        $destinationPath = storage_path() . '/app/private_uploads/users';
+        $destinationPath = config('app.private_uploads') . '/users';
 
         if (isset($user->id)) {
 
@@ -986,7 +986,7 @@ class UsersController extends Controller
     public function getDeleteFile($userId = null, $fileId = null)
     {
         $user = User::find($userId);
-        $destinationPath = app_path() . '/private_uploads';
+        $destinationPath = config('app.private_uploads').'/users';
 
         // the license is valid
         if (isset($user->id)) {

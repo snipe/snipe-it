@@ -1,4 +1,14 @@
 <?php
+/**
+ * This controller handles all actions that allow a logged in user
+ * to view the assets assigned to them (and request an asset) for 
+ * the Snipe-IT Asset Management application.
+ *
+ * PHP version 5.5.9
+ * @package    Snipe-IT
+ * @version    v1.0
+ */
+
 namespace App\Http\Controllers;
 
 use App\Models\Accessory;

@@ -1,4 +1,13 @@
 <?php
+/**
+ * This controller handles all actions related to Licenses and
+ * License Seats for the Snipe-IT Asset Management application.
+ *
+ * PHP version 5.5.9
+ * @package    Snipe-IT
+ * @version    v1.0
+ */
+
 namespace App\Http\Controllers;
 
 use Assets;
@@ -790,7 +799,7 @@ class LicensesController extends Controller
         $license = License::find($licenseId);
 
         // the license is valid
-        $destinationPath = storage_path().'/app/private_uploads';
+        $destinationPath = config('app.private_uploads').'/licenses';
 
         if (isset($license->id)) {
 
@@ -866,7 +875,7 @@ class LicensesController extends Controller
     public function getDeleteFile($licenseId = null, $fileId = null)
     {
         $license = License::find($licenseId);
-        $destinationPath = storage_path().'/app/private_uploads';
+        $destinationPath = config('app.private_uploads').'/licenses';
 
         // the license is valid
         if (isset($license->id)) {

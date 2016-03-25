@@ -5,7 +5,7 @@
  *
  * PHP version 5.5.9
  * @package    Snipe-IT
- * @version    v3.0
+ * @version    v1.0
  */
 
 namespace App\Http\Controllers;

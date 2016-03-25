@@ -421,7 +421,9 @@ class SettingsController extends Controller
     */
     public function getBackups()
     {
-        $path = storage_path().'/app/'.config('laravel-backup.destination.path');
+
+        $path = config('app.private_uploads').'/backups';
+
         $files = array();
 
         if ($handle = opendir($path)) {
@@ -479,7 +481,7 @@ class SettingsController extends Controller
     public function downloadFile($filename = null)
     {
         if (!config('app.lock_passwords')) {
-            $path = storage_path().'/app/'.config('laravel-backup.destination.path');
+            $path = config('app.private_uploads').'/backups';
             $file = $path.'/'.$filename;
             if (file_exists($file)) {
                 return Response::download($file);

@@ -1,26 +1,34 @@
 <?php
+/**
+ * This controller handles all actions related to Asset Maintenance for
+ * the Snipe-IT Asset Management application.
+ *
+ * PHP version 5.5.9
+ * @package    Snipe-IT
+ * @version    v2.0
+ */
 
-    namespace App\Http\Controllers;
+namespace App\Http\Controllers;
 
-    use App\Models\AssetMaintenance;
-    use Carbon\Carbon;
-    use App\Models\Company;
-    use DB;
-    use Input;
-    use Lang;
-    use Log;
-    use Mail;
-    use Redirect;
-    use Response;
-    use Slack;
-    use Str;
-    use App\Models\Supplier;
-    use TCPDF;
-    use Validator;
-    use View;
-    use App\Models\Setting;
-    use App\Models\Asset;
-    use App\Helpers\Helper;
+use App\Models\AssetMaintenance;
+use Carbon\Carbon;
+use App\Models\Company;
+use DB;
+use Input;
+use Lang;
+use Log;
+use Mail;
+use Redirect;
+use Response;
+use Slack;
+use Str;
+use App\Models\Supplier;
+use TCPDF;
+use Validator;
+use View;
+use App\Models\Setting;
+use App\Models\Asset;
+use App\Helpers\Helper;
 
 class AssetMaintenancesController extends Controller
 {
@@ -30,13 +38,13 @@ class AssetMaintenancesController extends Controller
           ->with('error', Lang::get('general.insufficient_permissions'));
     }
 
-  /**
-       * getIndex
-       *
-       * @return mixed
-       * @author  Vincent Sposato <vincent.sposato@gmail.com>
-       * @version v1.0
-       */
+    /**
+    * getIndex
+    *
+    * @return mixed
+    * @author  Vincent Sposato <vincent.sposato@gmail.com>
+    * @version v1.0
+    */
     public function getIndex()
     {
 

@@ -734,7 +734,7 @@ class AssetsController extends Controller
     public function getImportUpload()
     {
 
-        $path = storage_path().'/app/private_uploads/imports/assets';
+        $path = config('app.private_uploads').'/imports/assets';
         $files = array();
 
         if (!Company::isCurrentUserAuthorized()) {
@@ -780,7 +780,7 @@ class AssetsController extends Controller
         } elseif (!config('app.lock_passwords')) {
 
             $files = Input::file('files');
-            $path = storage_path().'/app/private_uploads/imports/assets';
+            $path = config('app.private_uploads').'/imports/assets';
             $results = array();
 
             foreach ($files as $file) {
@@ -838,9 +838,9 @@ class AssetsController extends Controller
         }
 
         $output = new BufferedOutput;
-        Artisan::call('asset-import:csv', ['filename'=> storage_path().'/app/private_uploads/imports/assets/'.$filename, '--email_format'=>'firstname.lastname', '--username_format'=>'firstname.lastname'], $output);
+        Artisan::call('asset-import:csv', ['filename'=> config('app.private_uploads').'/imports/assets/'.$filename, '--email_format'=>'firstname.lastname', '--username_format'=>'firstname.lastname'], $output);
         $display_output =  $output->fetch();
-        $file = storage_path().'/app/private_uploads/imports/assets/'.str_replace('.csv', '', $filename).'-output-'.date("Y-m-d-his").'.txt';
+        $file = config('app.private_uploads').'/imports/assets/'.str_replace('.csv', '', $filename).'-output-'.date("Y-m-d-his").'.txt';
         file_put_contents($file, $display_output);
 
 
@@ -948,7 +948,7 @@ class AssetsController extends Controller
         }
 
         // the asset is valid
-        $destinationPath = storage_path().'/private_uploads/app/imports/assets';
+        $destinationPath = config('app.private_uploads').'/imports/assets';
 
 
 
@@ -1001,7 +1001,7 @@ class AssetsController extends Controller
     public function getDeleteFile($assetId = null, $fileId = null)
     {
         $asset = Asset::find($assetId);
-        $destinationPath = storage_path().'private_uploads/app/imports/assets';
+        $destinationPath = config('app.private_uploads').'/imports/assets';
 
         // the asset is valid
         if (isset($asset->id)) {
