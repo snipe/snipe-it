@@ -20,6 +20,10 @@
 }
 </style>
 
+<!-- Bootstrap Color Picker -->
+<link rel="stylesheet" href="{{ asset('assets/js/plugins/colorpicker/bootstrap-colorpicker.min.css') }}">
+
+
 {{ Form::open(['method' => 'POST', 'files' => true, 'class' => 'form-horizontal', 'role' => 'form' ]) }}
 <!-- CSRF Token -->
 {{ Form::hidden('_token', csrf_token()) }}
