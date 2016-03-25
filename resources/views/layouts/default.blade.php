@@ -14,25 +14,17 @@
     <!-- Bootstrap 3.3.5 -->
     <link rel="stylesheet" href="{{ asset('assets/css/bootstrap.min.css') }}">
     <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
-    <!-- Ionicons -->
-    <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+    <link rel="stylesheet" href="{{ asset('assets/css/font-awesome.min.css') }}">
 
     <!-- Select2 -->
     <link rel="stylesheet" href="{{ asset('assets/js/plugins/select2/select2.min.css') }}">
-
-    <!-- Bootstrap Color Picker -->
-    <link rel="stylesheet" href="{{ asset('assets/js/plugins/colorpicker/bootstrap-colorpicker.min.css') }}">
 
     <link rel="stylesheet" href="{{ asset('assets/js/plugins/datepicker/bootstrap-datepicker.css') }}">
 
     <!-- iCheck for checkboxes and radio inputs -->
     <link rel="stylesheet" href="{{ asset('assets/js/plugins/iCheck/all.css') }}">
 
-    <!-- jvectormap -->
-    <link rel="stylesheet" href="{{ asset('assets/js/plugins/jvectormap/jquery-jvectormap-1.2.2.css') }}">
     <!-- Theme style -->
-    <link rel="stylesheet" href="{{ asset('assets/css/AdminLTE.min.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/css/skins/skin-blue.css') }}">
 
     <!-- bootstrap tables CSS -->
@@ -516,44 +508,7 @@
     </div>
 
 
-
-
-    <!-- jQuery 2.1.4 -->
-    <script src="/assets/js/plugins/jQuery/jQuery-2.1.4.min.js"></script>
-
-    <!-- jQuery UI 1.11.4 -->
-    <script src="https://code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
-
-    <!-- Bootstrap 3.3.5 -->
-    <script src="/assets/js/bootstrap/js/bootstrap.min.js"></script>
-
-
-
-    <!-- FastClick -->
-    <script src="/assets/js/plugins/fastclick/fastclick.min.js"></script>
-    <!-- AdminLTE App -->
-
-
-    <!-- SlimScroll 1.3.0 -->
-    <script src="/assets/js/plugins/slimScroll/jquery.slimscroll.min.js"></script>
-
-     <script src="/assets/js/plugins/select2/select2.full.min.js"></script>
-     <script src="/assets/js/plugins/colorpicker/bootstrap-colorpicker.min.js"></script>
-
-    <!-- ChartJS 1.0.1 -->
-    <script src="/assets/js/plugins/chartjs/Chart.min.js"></script>
-    <script src="{{ asset('assets/js/bootstrap-table.js') }}"></script>
-    <script src="{{ asset('assets/js/bootstrap.datepicker.js') }}"></script>
-
-    <script src="{{ asset('assets/js/jquery.ui.widget.js') }}"></script>
-    <script src="{{ asset('assets/js/jquery.iframe-transport.js') }}"></script>
-    <script src="{{ asset('assets/js/jquery.fileupload.js') }}"></script>
-
-    <!-- iCheck 1.0.1 -->
-    <script src="{{ asset('assets/js/plugins/iCheck/icheck.min.js') }}"></script>
-
-
-    <script src="/assets/js/all.js"></script>
+    <script src="{{ elixir('assets/js/all.js') }}"></script>
 
     <script>
        $(function () {

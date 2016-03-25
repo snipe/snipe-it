@@ -12,15 +12,29 @@ require('laravel-elixir-codeception');
  */
 
 elixir(function(mix) {
-    //mix.sass(['app.scss','bootstrap-overrides.scss'],'public/assets/css');
-    mix.less(['overrides.less'],'public/assets/css');
-    mix.version('assets/css/app.css');
+    mix.less(['AdminLTE.less','skins/skin-blue.less','overrides.less'],'public/assets/css');
+
 
     mix.scripts([
+        'plugins/jQuery/jQuery-2.1.4.min.js',
+        'plugins/jQueryUI/jquery-ui.js',
+        'plugins/jQueryUI/jquery.ui.widget.js',
+        'plugins/iframe-transport/jquery.iframe-transport.js',
+        'plugins/fileupload/jquery.fileupload.js',
+        'bootstrap.js',
+        'plugins/fastclick/fastclick.js',
+        'plugins/slimScroll/jquery.slimscroll.js',
+        'plugins/select2/select2.full.min.js',
+        'plugins/colorpicker/bootstrap-colorpicker.js',
+        'bootstrap-table.js',
+        'plugins/datepicker/bootstrap-datepicker.js',
+        'plugins/select2/select2.js',
+        'plugins/iCheck/icheck.js',
         'snipeit.js',
         'app.js'
 
     ],'public/assets/js');
+    mix.version(['assets/css/app.css','assets/js/all.js']);
 
 
   //  mix.codeception();
