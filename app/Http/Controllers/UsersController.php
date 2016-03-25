@@ -110,7 +110,7 @@ class UsersController extends Controller
         $user->last_name = e(Input::get('last_name'));
         $user->email = $data['email'] = e(Input::get('email'));
         $user->activated = 1;
-        $user->locale = Input::get('locale');
+        $user->locale = e(Input::get('locale'));
         $user->username = $data['username'] = e(Input::get('username'));
         $user->password = bcrypt(Input::get('password'));
         $data['password'] =  Input::get('password');
@@ -273,19 +273,19 @@ class UsersController extends Controller
 
 
             // Update the user
-            $user->first_name = Input::get('first_name');
-            $user->last_name = Input::get('last_name');
-            $user->locale = Input::get('locale');
-            $user->username = Input::get('username');
-            $user->email = Input::get('email');
-            $user->employee_num = Input::get('employee_num');
-            $user->activated = Input::get('activated', $user->activated);
-            $user->jobtitle = Input::get('jobtitle');
-            $user->phone = Input::get('phone');
-            $user->location_id = Input::get('location_id');
-            $user->company_id = Company::getIdForUser(Input::get('company_id'));
-            $user->manager_id = Input::get('manager_id');
-            $user->notes = Input::get('notes');
+            $user->first_name = e(Input::get('first_name'));
+            $user->last_name = e(Input::get('last_name'));
+            $user->locale = e(Input::get('locale'));
+            $user->username = e(Input::get('username'));
+            $user->email = e(Input::get('email'));
+            $user->employee_num = e(Input::get('employee_num'));
+            $user->activated = e(Input::get('activated', $user->activated));
+            $user->jobtitle = e(Input::get('jobtitle'));
+            $user->phone = e(Input::get('phone'));
+            $user->location_id = e(Input::get('location_id'));
+            $user->company_id = e(Company::getIdForUser(Input::get('company_id')));
+            $user->manager_id = e(Input::get('manager_id'));
+            $user->notes = e(Input::get('notes'));
 
         if ($user->manager_id == "") {
             $user->manager_id = null;
@@ -298,7 +298,7 @@ class UsersController extends Controller
 
             // Do we want to update the user password?
         if ((Input::has('password')) && (!config('app.lock_passwords'))) {
-            $user->password = $password;
+            $user->password = bcrypt(Input::get('password'));
         }
 
             // Do we want to update the user email?
@@ -899,22 +899,22 @@ class UsersController extends Controller
 
             $rows[] = array(
                 'id'         => $user->id,
-                'checkbox'      =>'<div class="text-center hidden-xs hidden-sm"><input type="checkbox" name="edit_user['.$user->id.']" class="one_required"></div>',
-                'name'          => '<a title="'.$user->fullName().'" href="../admin/users/'.$user->id.'/view">'.$user->fullName().'</a>',
+                'checkbox'      =>'<div class="text-center hidden-xs hidden-sm"><input type="checkbox" name="edit_user['.e($user->id).']" class="one_required"></div>',
+                'name'          => '<a title="'.e($user->fullName()).'" href="../admin/users/'.e($user->id).'/view">'.e($user->fullName()).'</a>',
                 'email'         => ($user->email!='') ?
-                            '<a href="mailto:'.$user->email.'" class="hidden-md hidden-lg">'.$user->email.'</a>'
-                            .'<a href="mailto:'.$user->email.'" class="hidden-xs hidden-sm"><i class="fa fa-envelope"></i></a>'
+                            '<a href="mailto:'.e($user->email).'" class="hidden-md hidden-lg">'.e($user->email).'</a>'
+                            .'<a href="mailto:'.e($user->email).'" class="hidden-xs hidden-sm"><i class="fa fa-envelope"></i></a>'
                             .'</span>' : '',
-                'username'         => $user->username,
-                'location'      => ($user->userloc) ? $user->userloc->name : '',
-                'manager'         => ($user->manager) ? '<a title="' . $user->manager->fullName() . '" href="users/' . $user->manager->id . '/view">' . $user->manager->fullName() . '</a>' : '',
+                'username'         => e($user->username),
+                'location'      => ($user->userloc) ? e($user->userloc->name) : '',
+                'manager'         => ($user->manager) ? '<a title="' . e($user->manager->fullName()) . '" href="users/' . e($user->manager->id) . '/view">' . e($user->manager->fullName()) . '</a>' : '',
                 'assets'        => $user->assets->count(),
-                'employee_num'  => $user->employee_num,
+                'employee_num'  => e($user->employee_num),
                 'licenses'        => $user->licenses->count(),
                 'accessories'        => $user->accessories->count(),
                 'consumables'        => $user->consumables->count(),
                 'groups'        => $group_names,
-                'notes'         => $user->notes,
+                'notes'         => e($user->notes),
                 'activated'      => ($user->activated=='1') ? '<i class="fa fa-check"></i>' : '<i class="fa fa-times"></i>',
                 'actions'       => ($actions) ? $actions : '',
                 'companyName'   => is_null($user->company) ? '' : e($user->company->name)
