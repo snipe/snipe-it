@@ -157,15 +157,15 @@ case $distro in
 		sudo apt-get -y install apache2 >> /var/log/snipeit-install.log 2>&1
 		sudo apt-get install -y git unzip php5 php5-mcrypt php5-curl php5-mysql php5-gd php5-ldap libapache2-mod-php5 curl >> /var/log/snipeit-install.log 2>&1
 		sudo service apache2 restart
-		
+
 		#We already established MySQL root & user PWs, so we dont need to be prompted. Let's go ahead and install Apache, PHP and MySQL.
 		echo "##  Setting up LAMP."
-		#sudo DEBIAN_FRONTEND=noninteractive apt-get install -y lamp-server^ >> /var/log/snipeit-install.log 2>&1 
+		#sudo DEBIAN_FRONTEND=noninteractive apt-get install -y lamp-server^ >> /var/log/snipeit-install.log 2>&1
 
 		#  Get files and extract to web dir
 		echo ""
 		echo "##  Downloading snipeit and extract to web directory."
-		wget -P $tmp/ https://github.com/snipe/snipe-it/archive/$file >> /var/log/snipeit-install.log 2>&1 
+		wget -P $tmp/ https://github.com/snipe/snipe-it/archive/$file >> /var/log/snipeit-install.log 2>&1
 		unzip -qo $tmp/$file -d $tmp/
 		cp -R $tmp/snipe-it-master $webdir/$name
 
@@ -173,9 +173,9 @@ case $distro in
 
 		#Enable mcrypt and rewrite
 		echo "##  Enabling mcrypt and rewrite"
-		sudo php5enmod mcrypt >> /var/log/snipeit-install.log 2>&1 
-		sudo a2enmod rewrite >> /var/log/snipeit-install.log 2>&1 
-		sudo ls -al /etc/apache2/mods-enabled/rewrite.load >> /var/log/snipeit-install.log 2>&1 
+		sudo php5enmod mcrypt >> /var/log/snipeit-install.log 2>&1
+		sudo a2enmod rewrite >> /var/log/snipeit-install.log 2>&1
+		sudo ls -al /etc/apache2/mods-enabled/rewrite.load >> /var/log/snipeit-install.log 2>&1
 
 		#Create a new virtual host for Apache.
 		echo "##  Create Virtual host for apache."
@@ -195,7 +195,7 @@ case $distro in
 
 		echo "##  Setting up hosts file."
 		echo >> $hosts "127.0.0.1 $hostname $fqdn"
-		a2ensite $name.conf >> /var/log/snipeit-install.log 2>&1 
+		a2ensite $name.conf >> /var/log/snipeit-install.log 2>&1
 
 		#Modify the Snipe-It files necessary for a production environment.
 		echo "##  Modify the Snipe-It files necessary for a production environment."
@@ -231,12 +231,12 @@ case $distro in
 		sudo chmod -R 755 $webdir/$name/public/uploads
 		sudo chown -R www-data:www-data /var/www/
 		# echo "##  Finished permission changes."
-		
+
 		echo "##  Input your MySQL/MariaDB root password: "
 		echo ""
 		sudo mysql -u root -p < $dbsetup
 		echo ""
-		
+
 		echo "##  Securing Mysql"
 		echo "## I understand this is redundant. You don't need to change your root pw again if you don't want to."
 		# Have user set own root password when securing install
@@ -254,7 +254,7 @@ case $distro in
 		echo "##  Restarting apache."
 		service apache2 restart
 		;;
-		
+
 	ubuntu)
 		#####################################  Install for Ubuntu  ##############################################
 
@@ -269,15 +269,15 @@ case $distro in
 		sudo apt-get -y upgrade >> /var/log/snipeit-install.log 2>&1
 
 		echo "##  Installing packages."
-		sudo apt-get install -y git unzip php5 php5-mcrypt php5-curl php5-mysql php5-gd php5-ldap >> /var/log/snipeit-install.log 2>&1 
+		sudo apt-get install -y git unzip php5 php5-mcrypt php5-curl php5-mysql php5-gd php5-ldap >> /var/log/snipeit-install.log 2>&1
 		#We already established MySQL root & user PWs, so we dont need to be prompted. Let's go ahead and install Apache, PHP and MySQL.
 		echo "##  Setting up LAMP."
-		sudo DEBIAN_FRONTEND=noninteractive apt-get install -y lamp-server^ >> /var/log/snipeit-install.log 2>&1 
+		sudo DEBIAN_FRONTEND=noninteractive apt-get install -y lamp-server^ >> /var/log/snipeit-install.log 2>&1
 
 		#  Get files and extract to web dir
 		echo ""
 		echo "##  Downloading snipeit and extract to web directory."
-		wget -P $tmp/ https://github.com/snipe/snipe-it/archive/$file >> /var/log/snipeit-install.log 2>&1 
+		wget -P $tmp/ https://github.com/snipe/snipe-it/archive/$file >> /var/log/snipeit-install.log 2>&1
 		unzip -qo $tmp/$file -d $tmp/
 		cp -R $tmp/snipe-it-master $webdir/$name
 
@@ -285,9 +285,9 @@ case $distro in
 
 		#Enable mcrypt and rewrite
 		echo "##  Enabling mcrypt and rewrite"
-		sudo php5enmod mcrypt >> /var/log/snipeit-install.log 2>&1 
-		sudo a2enmod rewrite >> /var/log/snipeit-install.log 2>&1 
-		sudo ls -al /etc/apache2/mods-enabled/rewrite.load >> /var/log/snipeit-install.log 2>&1 
+		sudo php5enmod mcrypt >> /var/log/snipeit-install.log 2>&1
+		sudo a2enmod rewrite >> /var/log/snipeit-install.log 2>&1
+		sudo ls -al /etc/apache2/mods-enabled/rewrite.load >> /var/log/snipeit-install.log 2>&1
 
 		#Create a new virtual host for Apache.
 		echo "##  Create Virtual host for apache."
@@ -307,7 +307,7 @@ case $distro in
 
 		echo "##  Setting up hosts file."
 		echo >> $hosts "127.0.0.1 $hostname $fqdn"
-		a2ensite $name.conf >> /var/log/snipeit-install.log 2>&1 
+		a2ensite $name.conf >> /var/log/snipeit-install.log 2>&1
 
 		#Modify the Snipe-It files necessary for a production environment.
 		echo "##  Modify the Snipe-It files necessary for a production environment."
@@ -383,9 +383,9 @@ case $distro in
 		echo >> $mariadbRepo "gpgcheck=1"
 		echo >> $mariadbRepo "enable=1"
 
-		yum -y install wget epel-release >> /var/log/snipeit-install.log 2>&1 
-		wget -P $tmp/ https://centos6.iuscommunity.org/ius-release.rpm >> /var/log/snipeit-install.log 2>&1 
-		rpm -Uvh $tmp/ius-release*.rpm >> /var/log/snipeit-install.log 2>&1 
+		yum -y install wget epel-release >> /var/log/snipeit-install.log 2>&1
+		wget -P $tmp/ https://centos6.iuscommunity.org/ius-release.rpm >> /var/log/snipeit-install.log 2>&1
+		rpm -Uvh $tmp/ius-release*.rpm >> /var/log/snipeit-install.log 2>&1
 
 
 		#Install PHP and other needed stuff.
@@ -397,7 +397,7 @@ case $distro in
 				echo " ##" $p "Installed"
 			else
 				echo -n " ##" $p "Installing... "
-				yum -y install $p >> /var/log/snipeit-install.log 2>&1 
+				yum -y install $p >> /var/log/snipeit-install.log 2>&1
 				echo "";
 			fi
 		done;
@@ -405,7 +405,7 @@ case $distro in
         echo ""
 		echo "##  Downloading Snipe-IT from github and putting it in the web directory.";
 
-		wget -P $tmp/ https://github.com/snipe/snipe-it/archive/$file >> /var/log/snipeit-install.log 2>&1 
+		wget -P $tmp/ https://github.com/snipe/snipe-it/archive/$file >> /var/log/snipeit-install.log 2>&1
 		unzip -qo $tmp/$file -d $tmp/
 		cp -R $tmp/snipe-it-master $webdir/$name
 
@@ -507,9 +507,9 @@ case $distro in
 		#Allow us to get the mysql engine
 		echo ""
 		echo "##  Add IUS, epel-release and mariaDB repos.";
-		yum -y install wget epel-release >> /var/log/snipeit-install.log 2>&1 
-		wget -P $tmp/ https://centos7.iuscommunity.org/ius-release.rpm >> /var/log/snipeit-install.log 2>&1 
-		rpm -Uvh $tmp/ius-release*.rpm >> /var/log/snipeit-install.log 2>&1 
+		yum -y install wget epel-release >> /var/log/snipeit-install.log 2>&1
+		wget -P $tmp/ https://centos7.iuscommunity.org/ius-release.rpm >> /var/log/snipeit-install.log 2>&1
+		rpm -Uvh $tmp/ius-release*.rpm >> /var/log/snipeit-install.log 2>&1
 
 		#Install PHP and other needed stuff.
 		echo "##  Installing PHP and other needed stuff";
@@ -520,7 +520,7 @@ case $distro in
 				echo " ##" $p "Installed"
 			else
 				echo -n " ##" $p "Installing... "
-				yum -y install $p >> /var/log/snipeit-install.log 2>&1 
+				yum -y install $p >> /var/log/snipeit-install.log 2>&1
 			echo "";
 			fi
 		done;
@@ -528,7 +528,7 @@ case $distro in
         echo ""
 		echo "##  Downloading Snipe-IT from github and put it in the web directory.";
 
-		wget -P $tmp/ https://github.com/snipe/snipe-it/archive/$file >> /var/log/snipeit-install.log 2>&1 
+		wget -P $tmp/ https://github.com/snipe/snipe-it/archive/$file >> /var/log/snipeit-install.log 2>&1
 		unzip -qo $tmp/$file -d $tmp/
 		cp -R $tmp/snipe-it-master $webdir/$name
 
@@ -581,7 +581,7 @@ case $distro in
 		#Modify the Snipe-It files necessary for a production environment.
 		echo "##  Modifying the Snipe-IT files necessary for a production environment."
 		echo "	Setting up Timezone."
-		tzone=$(timedatectl | gawk -F'[: ]+' ' $2 ~ /Timezone/ {print $3}');
+		tzone=$(timedatectl | gawk -F'[: ]' ' $9 ~ /zone/ {print $11}');
 		sed -i "s,UTC,$tzone,g" $webdir/$name/app/config/app.php
 
 		echo "	Setting up bootstrap file."
