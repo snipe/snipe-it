@@ -71,7 +71,7 @@ class LocationsController extends Controller
         } else {
             $location->parent_id        = e(Input::get('parent_id'));
         }
-        $location->currency             = Input::get('currency', '$');
+        $location->currency             = e(Input::get('currency', '$'));
         $location->address          = e(Input::get('address'));
         $location->address2             = e(Input::get('address2'));
         $location->city             = e(Input::get('city'));
@@ -172,7 +172,7 @@ class LocationsController extends Controller
         } else {
             $location->parent_id        = e(Input::get('parent_id', ''));
         }
-        $location->currency             = Input::get('currency', '$');
+        $location->currency             = e(Input::get('currency', '$'));
         $location->address          = e(Input::get('address'));
         $location->address2             = e(Input::get('address2'));
         $location->city             = e(Input::get('city'));
@@ -302,16 +302,16 @@ class LocationsController extends Controller
 
             $rows[] = array(
                 'id'            => $location->id,
-                'name'          => (string)link_to('admin/settings/locations/'.$location->id.'/view', $location->name),
-                'parent'        => ($location->parent) ? $location->parent->name : '',
+                'name'          => (string)link_to('admin/settings/locations/'.$location->id.'/view', e($location->name)),
+                'parent'        => ($location->parent) ? e($location->parent->name) : '',
               //  'assets'        => ($location->assets->count() + $location->assignedassets->count()),
                 'assets_default' => $location->assignedassets->count(),
                 'assets_checkedout' => $location->assets->count(),
-                'address'       => ($location->address) ? $location->address: '',
-                'city'          => $location->city,
-                'state'         => $location->state,
-                'country'       => $location->country,
-                'currency'      => $location->currency,
+                'address'       => ($location->address) ? e($location->address): '',
+                'city'          => e($location->city),
+                'state'         => e($location->state),
+                'country'       => e($location->country),
+                'currency'      => e($location->currency),
                 'actions'       => $actions
             );
         }
@@ -339,7 +339,7 @@ class LocationsController extends Controller
 
         foreach ($location_users as $user) {
             $rows[] = array(
-              'name' => (string)link_to('/admin/users/'.$user->id.'/view', $user->fullName())
+              'name' => (string)link_to('/admin/users/'.$user->id.'/view', e($user->fullName()))
               );
         }
 
@@ -364,10 +364,10 @@ class LocationsController extends Controller
 
         foreach ($location->assets as $asset) {
             $rows[] = array(
-            'name' => (string)link_to('/hardware/'.$asset->id.'/view', $asset->showAssetName()),
-            'asset_tag' => $asset->asset_tag,
-            'serial' => $asset->serial,
-            'model' => $asset->model->name,
+            'name' => (string)link_to('/hardware/'.$asset->id.'/view', e($asset->showAssetName())),
+            'asset_tag' => e($asset->asset_tag),
+            'serial' => e($asset->serial),
+            'model' => e($asset->model->name),
 
             );
         }

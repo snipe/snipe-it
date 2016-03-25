@@ -165,7 +165,7 @@ class GroupsController extends Controller
         //$users = Company::scopeCompanyables($users);
 
         if (Input::has('search')) {
-            $groups = $users->TextSearch(Input::get('search'));
+            $groups = $users->TextSearch(e(Input::get('search')));
         }
 
          $order = Input::get('order') === 'asc' ? 'asc' : 'desc';

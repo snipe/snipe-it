@@ -379,23 +379,23 @@ class SettingsController extends Controller
         $setting->slack_endpoint = e(Input::get('slack_endpoint'));
         $setting->slack_channel = e(Input::get('slack_channel'));
         $setting->slack_botname = e(Input::get('slack_botname'));
-        $setting->ldap_enabled = Input::get('ldap_enabled', '0');
-        $setting->ldap_server = Input::get('ldap_server');
+        $setting->ldap_enabled = e(Input::get('ldap_enabled', '0'));
+        $setting->ldap_server = e(Input::get('ldap_server'));
         $setting->ldap_server_cert_ignore = e(Input::get('ldap_server_cert_ignore', false));
-        $setting->ldap_uname = Input::get('ldap_uname');
+        $setting->ldap_uname = e(Input::get('ldap_uname'));
         if (Input::has('ldap_pword')) {
             $setting->ldap_pword = Crypt::encrypt(Input::get('ldap_pword'));
         }
         $setting->ldap_basedn = e(Input::get('ldap_basedn'));
         $setting->ldap_filter = Input::get('ldap_filter');
         $setting->ldap_username_field = Input::get('ldap_username_field');
-        $setting->ldap_lname_field = Input::get('ldap_lname_field');
-        $setting->ldap_fname_field = Input::get('ldap_fname_field');
+        $setting->ldap_lname_field = e(Input::get('ldap_lname_field'));
+        $setting->ldap_fname_field = e(Input::get('ldap_fname_field'));
         $setting->ldap_auth_filter_query = Input::get('ldap_auth_filter_query');
-        $setting->ldap_version = Input::get('ldap_version');
-        $setting->ldap_active_flag = Input::get('ldap_active_flag');
-        $setting->ldap_emp_num = Input::get('ldap_emp_num');
-        $setting->ldap_email = Input::get('ldap_email');
+        $setting->ldap_version = e(Input::get('ldap_version'));
+        $setting->ldap_active_flag = e(Input::get('ldap_active_flag'));
+        $setting->ldap_emp_num = e(Input::get('ldap_emp_num'));
+        $setting->ldap_email = e(Input::get('ldap_email'));
 
         // If validation fails, we'll exit the operation now.
         if ($setting->save()) {

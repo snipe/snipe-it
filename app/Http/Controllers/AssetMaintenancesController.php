@@ -75,7 +75,7 @@ class AssetMaintenancesController extends Controller
 
         $allowed_columns = ['id','title','asset_maintenance_time','asset_maintenance_type','cost','start_date','completion_date','notes'];
         $order = Input::get('order') === 'asc' ? 'asc' : 'desc';
-        $sort = in_array(Input::get('sort'), $allowed_columns) ? Input::get('sort') : 'created_at';
+        $sort = in_array(Input::get('sort'), $allowed_columns) ? e(Input::get('sort')) : 'created_at';
 
         $maintenances->orderBy($sort, $order);
 
@@ -428,7 +428,7 @@ class AssetMaintenancesController extends Controller
                          ->with('success', Lang::get('admin/asset_maintenances/message.create.success'));
         }
         return Redirect::back() ->withInput()->withErrors($assetMaintenance->getErrors());
-      
+
 
     }
 

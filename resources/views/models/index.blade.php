@@ -30,7 +30,7 @@
         name="models"
         class="table table-striped"
         id="table"
-        data-url="{{ route('api.models.list',array('status'=>Input::get('status'))) }}"
+        data-url="{{ route('api.models.list',array('status'=>e(Input::get('status')))) }}"
         data-cookie="true"
         data-click-to-select="true"
         data-cookie-id-table="modelsTable-{{ config('version.hash_version') }}">

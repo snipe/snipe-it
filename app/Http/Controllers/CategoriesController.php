@@ -218,7 +218,7 @@ class CategoriesController extends Controller
 
         $allowed_columns = ['id','name','category_type'];
         $order = Input::get('order') === 'asc' ? 'asc' : 'desc';
-        $sort = in_array(Input::get('sort'), $allowed_columns) ? Input::get('sort') : 'created_at';
+        $sort = in_array(Input::get('sort'), $allowed_columns) ? e(Input::get('sort')) : 'created_at';
 
         $categories = $categories->orderBy($sort, $order);
 
@@ -309,10 +309,10 @@ class CategoriesController extends Controller
 
             $rows[] = array(
             'id' => $asset->id,
-            'name' => (string)link_to('/hardware/'.$asset->id.'/view', $asset->name),
+            'name' => (string)link_to('/hardware/'.$asset->id.'/view', e($asset->name)),
             //'model' => $asset->model->name,
-            'asset_tag' => $asset->asset_tag,
-            'serial' => $asset->serial,
+            'asset_tag' => e($asset->asset_tag),
+            'serial' => e($asset->serial),
             'assigned_to' => ($asset->assigneduser) ? (string)link_to(config('app.url').'/admin/users/'.$asset->assigneduser->id.'/view', $asset->assigneduser->fullName()): '',
             'change' => $inout,
             'actions' => $actions,

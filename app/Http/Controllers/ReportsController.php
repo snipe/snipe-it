@@ -58,10 +58,10 @@ class ReportsController extends Controller
         // Row per accessory
         foreach ($accessories as $accessory) {
             $row = array();
-            $row[] = $accessory->accessory_name;
-            $row[] = $accessory->accessory_category;
-            $row[] = $accessory->total;
-            $row[] = $accessory->remaining;
+            $row[] = e($accessory->accessory_name);
+            $row[] = e($accessory->accessory_category);
+            $row[] = e($accessory->total);
+            $row[] = e($accessory->remaining);
 
             $rows[] = implode($row, ',');
         }
@@ -133,37 +133,37 @@ class ReportsController extends Controller
         // Create a row per asset
         foreach ($assets as $asset) {
             $row   = [ ];
-            $row[] = $asset->asset_tag;
+            $row[] = e($asset->asset_tag);
             if ($asset->model->manufacturer) {
-                $row[] = $asset->model->manufacturer->name;
+                $row[] = e($asset->model->manufacturer->name);
             } else {
                 $row[] = '';
             }
-            $row[] = '"' . $asset->model->name . '"';
-            $row[] = '"' . $asset->model->modelno . '"';
-            $row[] = $asset->name;
-            $row[] = $asset->serial;
+            $row[] = '"' . e($asset->model->name) . '"';
+            $row[] = '"' . e($asset->model->modelno) . '"';
+            $row[] = e($asset->name);
+            $row[] = e($asset->serial);
             if ($asset->assetstatus) {
-                $row[] = $asset->assetstatus->name;
+                $row[] = e($asset->assetstatus->name);
             } else {
                 $row[] = '';
             }
             $row[] = $asset->purchase_date;
-            $row[] = '"' . number_format($asset->purchase_cost) . '"';
+            $row[] = '"' . number_format($asset->purchase_cost, 2) . '"';
             if ($asset->order_number) {
-                $row[] = $asset->order_number;
+                $row[] = e($asset->order_number);
             } else {
                 $row[] = '';
             }
             if ($asset->supplier_id) {
-                $row[] = $asset->supplier->name;
+                $row[] = e($asset->supplier->name);
             } else {
                 $row[] = '';
             }
 
             if ($asset->assigned_to > 0) {
                 $user  = User::find($asset->assigned_to);
-                $row[] = $user->fullName();
+                $row[] = e($user->fullName());
             } else {
                 $row[] = ''; // Empty string if unassigned
             }
@@ -171,14 +171,14 @@ class ReportsController extends Controller
             if (( $asset->assigned_to > 0 ) && ( $asset->assigneduser->location_id > 0 )) {
                 $location = Location::find($asset->assigneduser->location_id);
                 if ($location) {
-                    $row[] = $location->name;
+                    $row[] = e($location->name);
                 } else {
                     $row[] = '';
                 }
             } elseif ($asset->rtd_location_id) {
                 $location = Location::find($asset->rtd_location_id);
                 if ($location->name) {
-                    $row[] = $location->name;
+                    $row[] = e($location->name);
                 } else {
                     $row[] = '';
                 }
@@ -187,7 +187,7 @@ class ReportsController extends Controller
             }
 
             if ($asset->notes) {
-                $row[] = '"' . $asset->notes . '"';
+                $row[] = '"' . e($asset->notes) . '"';
             } else {
                 $row[] = '';
             }
@@ -255,13 +255,13 @@ class ReportsController extends Controller
         // Create a row per asset
         foreach ($assets as $asset) {
             $row   = [ ];
-            $row[] = $asset->asset_tag;
-            $row[] = $asset->name;
-            $row[] = $asset->serial;
+            $row[] = e($asset->asset_tag);
+            $row[] = e($asset->name);
+            $row[] = e($asset->serial);
 
             if ($asset->assigned_to > 0) {
                 $user  = User::find($asset->assigned_to);
-                $row[] = $user->fullName();
+                $row[] = e($user->fullName());
             } else {
                 $row[] = ''; // Empty string if unassigned
             }
@@ -269,9 +269,9 @@ class ReportsController extends Controller
             if (( $asset->assigned_to > 0 ) && ( $asset->assigneduser->location_id > 0 )) {
                 $location = Location::find($asset->assigneduser->location_id);
                 if ($location->city) {
-                    $row[] = $location->city . ', ' . $location->state;
+                    $row[] = e($location->city) . ', ' . e($location->state);
                 } elseif ($location->name) {
-                    $row[] = $location->name;
+                    $row[] = e($location->name);
                 } else {
                     $row[] = '';
                 }
@@ -280,15 +280,15 @@ class ReportsController extends Controller
             }
 
             if ($asset->assetloc) {
-                $currency = $asset->assetloc->currency;
+                $currency = e($asset->assetloc->currency);
             } else {
-                $currency = Setting::first()->default_currency;
+                $currency = e(Setting::first()->default_currency);
             }
 
             $row[] = $asset->purchase_date;
-            $row[] = $currency . number_format($asset->purchase_cost);
-            $row[] = $currency . number_format($asset->getDepreciatedValue());
-            $row[] = $currency . number_format(( $asset->purchase_cost - $asset->getDepreciatedValue() ));
+            $row[] = $currency . number_format($asset->purchase_cost, 2);
+            $row[] = $currency . number_format($asset->getDepreciatedValue(), 2);
+            $row[] = $currency . number_format(( $asset->purchase_cost - $asset->getDepreciatedValue() ), 2);
             $csv->insertOne($row);
         }
 
@@ -357,13 +357,13 @@ class ReportsController extends Controller
         // Row per license
         foreach ($licenses as $license) {
             $row   = [ ];
-            $row[] = $license->name;
-            $row[] = $license->serial;
-            $row[] = $license->seats;
+            $row[] = e($license->name);
+            $row[] = e($license->serial);
+            $row[] = e($license->seats);
             $row[] = $license->remaincount();
             $row[] = $license->expiration_date;
             $row[] = $license->purchase_date;
-            $row[] = '"' . number_format($license->purchase_cost) . '"';
+            $row[] = '"' . number_format($license->purchase_cost, 2) . '"';
 
             $rows[] = implode($row, ',');
         }
@@ -445,45 +445,45 @@ class ReportsController extends Controller
         foreach ($assets as $asset) {
             $row = [ ];
             if (e(Input::get('asset_name')) == '1') {
-                $row[] = '"' .$asset->name . '"';
+                $row[] = '"' .e($asset->name) . '"';
             }
             if (e(Input::get('asset_tag')) == '1') {
-                $row[] = $asset->asset_tag;
+                $row[] = e($asset->asset_tag);
             }
             if (e(Input::get('manufacturer')) == '1') {
                 if ($asset->model->manufacturer) {
-                    $row[] = '"' .$asset->model->manufacturer->name . '"';
+                    $row[] = '"' .e($asset->model->manufacturer->name) . '"';
                 } else {
                     $row[] = '';
                 }
             }
             if (e(Input::get('model')) == '1') {
-                $row[] = '"' . $asset->model->name . '"';
-                $row[] = '"' . $asset->model->modelno . '"';
+                $row[] = '"' . e($asset->model->name) . '"';
+                $row[] = '"' . e($asset->model->modelno) . '"';
             }
             if (e(Input::get('category')) == '1') {
-                $row[] = '"' .$asset->model->category->name . '"';
+                $row[] = '"' .e($asset->model->category->name) . '"';
             }
 
             if (e(Input::get('serial')) == '1') {
-                $row[] = $asset->serial;
+                $row[] = e($asset->serial);
             }
             if (e(Input::get('purchase_date')) == '1') {
-                $row[] = $asset->purchase_date;
+                $row[] = e($asset->purchase_date);
             }
             if (e(Input::get('purchase_cost')) == '1' && ( e(Input::get('depreciation')) != '1' )) {
-                $row[] = '"' . number_format($asset->purchase_cost) . '"';
+                $row[] = '"' . number_format($asset->purchase_cost, 2) . '"';
             }
             if (e(Input::get('order')) == '1') {
                 if ($asset->order_number) {
-                    $row[] = $asset->order_number;
+                    $row[] = e($asset->order_number);
                 } else {
                     $row[] = '';
                 }
             }
             if (e(Input::get('supplier')) == '1') {
                 if ($asset->supplier_id) {
-                    $row[] = '"' .$asset->supplier->name . '"';
+                    $row[] = '"' .e($asset->supplier->name) . '"';
                 } else {
                     $row[] = '';
                 }
@@ -493,14 +493,14 @@ class ReportsController extends Controller
                 if (( $asset->assigned_to > 0 ) && ( $asset->assigneduser->location_id !='' )) {
                     $location = Location::find($asset->assigneduser->location_id);
                     if ($location) {
-                        $show_loc .= '"' .$location->name. '"';
+                        $show_loc .= '"' .e($location->name). '"';
                     } else {
                         $show_loc .= 'User location '.$asset->assigneduser->location_id.' is invalid';
                     }
                 } elseif ($asset->rtd_location_id!='') {
                     $location = Location::find($asset->rtd_location_id);
                     if ($location) {
-                        $show_loc .= '"' .$location->name. '"';
+                        $show_loc .= '"' .e($location->name). '"';
                     } else {
                         $show_loc .= 'Default location '.$asset->rtd_location_id.' is invalid';
                     }
@@ -512,7 +512,7 @@ class ReportsController extends Controller
             if (e(Input::get('assigned_to')) == '1') {
                 if ($asset->assigned_to > 0) {
                     $user  = User::find($asset->assigned_to);
-                    $row[] = '"' .$user->fullName(). '"';
+                    $row[] = '"' .e($user->fullName()). '"';
                 } else {
                     $row[] = ''; // Empty string if unassigned
                 }
@@ -523,7 +523,7 @@ class ReportsController extends Controller
                 } elseif (( $asset->status_id == '' ) && ( $asset->assigned_to == '0' )) {
                     $row[] = Lang::get('general.pending');
                 } elseif ($asset->assetstatus) {
-                    $row[] = '"' .$asset->assetstatus->name. '"';
+                    $row[] = '"' .e($asset->assetstatus->name). '"';
                 } else {
                     $row[] = '';
                 }
@@ -539,9 +539,9 @@ class ReportsController extends Controller
             }
             if (e(Input::get('depreciation')) == '1') {
                 $depreciation = $asset->getDepreciatedValue();
-                $row[]        = '"' . number_format($asset->purchase_cost) . '"';
-                $row[]        = '"' . number_format($depreciation) . '"';
-                $row[]        = '"' . number_format($asset->purchase_cost - $depreciation) . '"';
+                $row[]        = '"' . number_format($asset->purchase_cost, 2) . '"';
+                $row[]        = '"' . number_format($depreciation, 2) . '"';
+                $row[]        = '"' . number_format($asset->purchase_cost - $depreciation, 2) . '"';
             }
             $rows[] = implode($row, ',');
         }
@@ -610,12 +610,12 @@ class ReportsController extends Controller
 
         foreach ($assetMaintenances as $assetMaintenance) {
             $row   = [ ];
-            $row[] = str_replace(',', '', $assetMaintenance->asset->name);
-            $row[] = str_replace(',', '', $assetMaintenance->supplier->name);
-            $row[] = $assetMaintenance->improvement_type;
-            $row[] = $assetMaintenance->title;
-            $row[] = $assetMaintenance->start_date;
-            $row[] = $assetMaintenance->completion_date;
+            $row[] = str_replace(',', '', e($assetMaintenance->asset->name));
+            $row[] = str_replace(',', '', e($assetMaintenance->supplier->name));
+            $row[] = e($assetMaintenance->improvement_type);
+            $row[] = e($assetMaintenance->title);
+            $row[] = e($assetMaintenance->start_date);
+            $row[] = e($assetMaintenance->completion_date;)
             if (is_null($assetMaintenance->asset_maintenance_time)) {
                 $improvementTime = intval(Carbon::now()
                                                  ->diffInDays(Carbon::parse($assetMaintenance->start_date)));
@@ -679,11 +679,11 @@ class ReportsController extends Controller
 
         foreach ($assetsForReport as $assetItem) {
             $row    = [ ];
-            $row[]  = str_replace(',', '', $assetItem->assetlog->model->category->name);
-            $row[]  = str_replace(',', '', $assetItem->assetlog->model->name);
-            $row[]  = str_replace(',', '', $assetItem->assetlog->showAssetName());
-            $row[]  = str_replace(',', '', $assetItem->assetlog->asset_tag);
-            $row[]  = str_replace(',', '', $assetItem->assetlog->assigneduser->fullName());
+            $row[]  = str_replace(',', '', e($assetItem->assetlog->model->category->name));
+            $row[]  = str_replace(',', '', e($assetItem->assetlog->model->name));
+            $row[]  = str_replace(',', '', e($assetItem->assetlog->showAssetName()));
+            $row[]  = str_replace(',', '', e($assetItem->assetlog->asset_tag));
+            $row[]  = str_replace(',', '', e($assetItem->assetlog->assigneduser->fullName()));
             $rows[] = implode($row, ',');
         }
 

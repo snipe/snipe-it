@@ -184,8 +184,8 @@ class DepreciationsController extends Controller
 
             $rows[] = array(
                 'id'            => $depreciation->id,
-                'name'          => $depreciation->name,
-                'months'        => $depreciation->months,
+                'name'          => e($depreciation->name),
+                'months'        => e($depreciation->months),
                 'actions'       => $actions
             );
         }

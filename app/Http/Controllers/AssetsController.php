@@ -136,7 +136,7 @@ class AssetsController extends Controller
 
         $asset->name                    = e(Input::get('name'));
         $asset->serial                  = e(Input::get('serial'));
-        $asset->company_id              = \App\Models\Company::getIdForCurrentUser(Input::get('company_id'));
+        $asset->company_id              = \App\Models\Company::getIdForCurrentUser(e(Input::get('company_id')));
         $asset->model_id                = e(Input::get('model_id'));
         $asset->order_number            = e(Input::get('order_number'));
         $asset->notes                   = e(Input::get('notes'));
@@ -358,12 +358,11 @@ class AssetsController extends Controller
 
 
         $checkModel = config('app.url').'/api/models/'.e(Input::get('model_id')).'/check';
-        //$asset->mac_address = ($checkModel == true) ? e(Input::get('mac_address')) : NULL;
 
         // Update the asset data
         $asset->name         = e(Input::get('name'));
         $asset->serial       = e(Input::get('serial'));
-        $asset->company_id   = Company::getIdForCurrentUser(Input::get('company_id'));
+        $asset->company_id   = Company::getIdForCurrentUser(e(Input::get('company_id')));
         $asset->model_id     = e(Input::get('model_id'));
         $asset->order_number = e(Input::get('order_number'));
         $asset->asset_tag    = e(Input::get('asset_tag'));
@@ -439,7 +438,7 @@ class AssetsController extends Controller
     public function getCheckout($assetId)
     {
         // Check if the asset exists
-        if (is_null($asset = Asset::find($assetId))) {
+        if (is_null($asset = Asset::find(e($assetId)))) {
             // Redirect to the asset management page with error
             return Redirect::to('hardware')->with('error', Lang::get('admin/hardware/message.does_not_exist'));
         } elseif (!Company::isCurrentUserHasAccess($asset)) {
@@ -582,8 +581,7 @@ class AssetsController extends Controller
             $logaction->note = e(Input::get('note'));
             $logaction->user_id = Auth::user()->id;
             $log = $logaction->logaction('checkin from');
-
-                     $settings = Setting::getSettings();
+            $settings = Setting::getSettings();
 
             if ($settings->slack_endpoint) {
 
@@ -601,7 +599,7 @@ class AssetsController extends Controller
                             'fields' => [
                                 [
                                     'title' => 'Checked In:',
-                                    'value' => strtoupper($logaction->asset_type).' asset <'.config('app.url').'/hardware/'.$asset->id.'/view'.'|'.$asset->showAssetName().'> checked in by <'.config('app.url').'/hardware/'.$asset->id.'/view'.'|'.Auth::user()->fullName().'>.'
+                                    'value' => strtoupper($logaction->asset_type).' asset <'.config('app.url').'/hardware/'.$asset->id.'/view'.'|'.e($asset->showAssetName()).'> checked in by <'.config('app.url').'/hardware/'.$asset->id.'/view'.'|'.e(Auth::user()->fullName()).'>.'
                                 ],
                                 [
                                     'title' => 'Note:',
@@ -1462,19 +1460,19 @@ class AssetsController extends Controller
             'checkbox'      =>'<div class="text-center"><input type="checkbox" name="edit_asset['.$asset->id.']" class="one_required"></div>',
             'id'        => $asset->id,
             'image' => (($asset->image) && ($asset->image!='')) ? '<img src="'.config('app.url').'/uploads/assets/'.$asset->image.'" height=50 width=50>' : ((($asset->model) && ($asset->model->image!='')) ? '<img src="'.config('app.url').'/uploads/models/'.$asset->model->image.'" height=40 width=50>' : ''),
-            'name'          => '<a title="'.$asset->name.'" href="hardware/'.$asset->id.'/view">'.$asset->name.'</a>',
-            'asset_tag'     => '<a title="'.$asset->asset_tag.'" href="hardware/'.$asset->id.'/view">'.$asset->asset_tag.'</a>',
-            'serial'        => $asset->serial,
-            'model'         => ($asset->model) ? (string)link_to('/hardware/models/'.$asset->model->id.'/view', $asset->model->name) : 'No model',
-            'status_label'        => ($asset->assigneduser) ? 'Deployed' : (($asset->assetstatus) ? $asset->assetstatus->name : ''),
-            'assigned_to'        => ($asset->assigneduser) ? (string)link_to('../admin/users/'.$asset->assigned_to.'/view', $asset->assigneduser->fullName()) : '',
-            'location'      => (($asset->assigneduser) && ($asset->assigneduser->userloc!='')) ? (string)link_to('admin/settings/locations/'.$asset->assigneduser->userloc->id.'/edit', $asset->assigneduser->userloc->name) : (($asset->defaultLoc!='') ? (string)link_to('admin/settings/locations/'.$asset->defaultLoc->id.'/edit', $asset->defaultLoc->name) : ''),
-            'category'      => (($asset->model) && ($asset->model->category)) ? $asset->model->category->name : '',
+            'name'          => '<a title="'.e($asset->name).'" href="hardware/'.$asset->id.'/view">'.e($asset->name).'</a>',
+            'asset_tag'     => '<a title="'.e($asset->asset_tag).'" href="hardware/'.$asset->id.'/view">'.e($asset->asset_tag).'</a>',
+            'serial'        => e($asset->serial),
+            'model'         => ($asset->model) ? (string)link_to('/hardware/models/'.$asset->model->id.'/view', e($asset->model->name)) : 'No model',
+            'status_label'        => ($asset->assigneduser) ? 'Deployed' : ((e($asset->assetstatus)) ? e($asset->assetstatus->name) : ''),
+            'assigned_to'        => ($asset->assigneduser) ? (string)link_to('../admin/users/'.$asset->assigned_to.'/view', e($asset->assigneduser->fullName())) : '',
+            'location'      => (($asset->assigneduser) && ($asset->assigneduser->userloc!='')) ? (string)link_to('admin/settings/locations/'.$asset->assigneduser->userloc->id.'/edit', e($asset->assigneduser->userloc->name)) : (($asset->defaultLoc!='') ? (string)link_to('admin/settings/locations/'.$asset->defaultLoc->id.'/edit', e($asset->defaultLoc->name)) : ''),
+            'category'      => (($asset->model) && ($asset->model->category)) ? e($asset->model->category->name) : '',
             'eol'           => ($asset->eol_date()) ? $asset->eol_date() : '',
-            'notes'         => $asset->notes,
-            'order_number'  => ($asset->order_number!='') ? '<a href="'.config('app.url').'/hardware?order_number='.$asset->order_number.'">'.$asset->order_number.'</a>' : '',
-            'last_checkout' => ($asset->last_checkout!='') ? $asset->last_checkout : '',
-            'expected_checkin' => ($asset->expected_checkin!='')  ? $asset->expected_checkin : '',
+            'notes'         => e($asset->notes),
+            'order_number'  => ($asset->order_number!='') ? '<a href="'.config('app.url').'/hardware?order_number='.e($asset->order_number).'">'.e($asset->order_number).'</a>' : '',
+            'last_checkout' => ($asset->last_checkout!='') ? e($asset->last_checkout) : '',
+            'expected_checkin' => ($asset->expected_checkin!='')  ? e($asset->expected_checkin) : '',
             'change'        => ($inout) ? $inout : '',
             'actions'       => ($actions) ? $actions : '',
             'companyName'   => is_null($asset->company) ? '' : e($asset->company->name)

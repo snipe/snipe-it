@@ -26,6 +26,7 @@ use Slack;
 use Str;
 use View;
 use Auth;
+use Request;
 
 /**
  * This class controls all actions related to accessories
@@ -42,7 +43,7 @@ class AccessoriesController extends Controller
     * @since [v1.0]
     * @return View
     */
-    public function getIndex()
+    public function getIndex(Request $request)
     {
         return View::make('accessories/index');
     }
@@ -54,7 +55,7 @@ class AccessoriesController extends Controller
    * @author [A. Gianotto] [<snipe@snipe.net>]
    * @return View
    */
-    public function getCreate()
+    public function getCreate(Request $request)
     {
         // Show the page
         $category_list = array('' => '') + DB::table('categories')->where('category_type', '=', 'accessory')->whereNull('deleted_at')->orderBy('name', 'ASC')->lists('name', 'id');
@@ -74,7 +75,7 @@ class AccessoriesController extends Controller
    * @author [A. Gianotto] [<snipe@snipe.net>]
    * @return Redirect
    */
-    public function postCreate()
+    public function postCreate(Request $request)
     {
 
         // create a new model instance
@@ -120,7 +121,7 @@ class AccessoriesController extends Controller
    * @param  int  $accessoryId
    * @return View
    */
-    public function getEdit($accessoryId = null)
+    public function getEdit(Request $request, $accessoryId = null)
     {
         // Check if the accessory exists
         if (is_null($accessory = Accessory::find($accessoryId))) {
@@ -148,7 +149,7 @@ class AccessoriesController extends Controller
    * @param  int  $accessoryId
    * @return Redirect
    */
-    public function postEdit($accessoryId = null)
+    public function postEdit(Request $request, $accessoryId = null)
     {
       // Check if the blog post exists
         if (is_null($accessory = Accessory::find($accessoryId))) {
@@ -203,7 +204,7 @@ class AccessoriesController extends Controller
    * @param  int  $accessoryId
    * @return Redirect
    */
-    public function getDelete($accessoryId)
+    public function getDelete(Request $request, $accessoryId)
     {
         // Check if the blog post exists
         if (is_null($accessory = Accessory::find($accessoryId))) {
@@ -237,7 +238,7 @@ class AccessoriesController extends Controller
   * @since [v1.0]
   * @return View
   */
-    public function getView($accessoryID = null)
+    public function getView(Request $request, $accessoryID = null)
     {
         $accessory = Accessory::find($accessoryID);
 
@@ -266,7 +267,7 @@ class AccessoriesController extends Controller
    * @param  int  $accessoryId
    * @return View
    */
-    public function getCheckout($accessoryId)
+    public function getCheckout(Request $request, $accessoryId)
     {
         // Check if the accessory exists
         if (is_null($accessory = Accessory::find($accessoryId))) {
@@ -293,7 +294,7 @@ class AccessoriesController extends Controller
    * @param  int  $accessoryId
    * @return Redirect
    */
-    public function postCheckout($accessoryId)
+    public function postCheckout(Request $request, $accessoryId)
     {
       // Check if the accessory exists
         if (is_null($accessory = Accessory::find($accessoryId))) {
@@ -399,7 +400,7 @@ class AccessoriesController extends Controller
   * @param  int  $accessoryId
   * @return View
   **/
-    public function getCheckin($accessoryUserId = null, $backto = null)
+    public function getCheckin(Request $request, $accessoryUserId = null, $backto = null)
     {
         // Check if the accessory exists
         if (is_null($accessory_user = DB::table('accessories_users')->find($accessoryUserId))) {
@@ -425,7 +426,7 @@ class AccessoriesController extends Controller
   * @param  int  $accessoryId
   * @return Redirect
   **/
-    public function postCheckin($accessoryUserId = null, $backto = null)
+    public function postCheckin(Request $request, $accessoryUserId = null, $backto = null)
     {
       // Check if the accessory exists
         if (is_null($accessory_user = DB::table('accessories_users')->find($accessoryUserId))) {
@@ -441,18 +442,18 @@ class AccessoriesController extends Controller
         }
 
         $logaction = new Actionlog();
-        $logaction->checkedout_to = $accessory_user->assigned_to;
-        $return_to = $accessory_user->assigned_to;
+        $logaction->checkedout_to = e($accessory_user->assigned_to);
+        $return_to = e($accessory_user->assigned_to);
         $admin_user = Auth::user();
 
 
       // Was the accessory updated?
         if (DB::table('accessories_users')->where('id', '=', $accessory_user->id)->delete()) {
 
-            $logaction->accessory_id = $accessory->id;
+            $logaction->accessory_id = e($accessory->id);
             $logaction->location_id = null;
             $logaction->asset_type = 'accessory';
-            $logaction->user_id = $admin_user->id;
+            $logaction->user_id = e($admin_user->id);
             $logaction->note = e(Input::get('note'));
 
             $settings = Setting::getSettings();
@@ -461,8 +462,8 @@ class AccessoriesController extends Controller
 
 
                 $slack_settings = [
-                'username' => $settings->botname,
-                'channel' => $settings->slack_channel,
+                'username' => e($settings->botname),
+                'channel' => e($settings->slack_channel),
                 'link_names' => true
                 ];
 
@@ -474,7 +475,7 @@ class AccessoriesController extends Controller
                         'fields' => [
                             [
                                 'title' => 'Checked In:',
-                                'value' => strtoupper($logaction->asset_type).' <'.config('app.url').'/admin/accessories/'.$accessory->id.'/view'.'|'.$accessory->name.'> checked in by <'.config('app.url').'/admin/users/'.$admin_user->id.'/view'.'|'.$admin_user->fullName().'>.'
+                                'value' => strtoupper($logaction->asset_type).' <'.config('app.url').'/admin/accessories/'.e($accessory->id).'/view'.'|'.e($accessory->name).'> checked in by <'.config('app.url').'/admin/users/'.e($admin_user->id).'/view'.'|'.e($admin_user->fullName()).'>.'
                             ],
                             [
                                 'title' => 'Note:',
@@ -498,11 +499,11 @@ class AccessoriesController extends Controller
             }
 
             $data['log_id'] = $logaction->id;
-            $data['first_name'] = $user->first_name;
-            $data['item_name'] = $accessory->name;
-            $data['checkin_date'] = $logaction->created_at;
+            $data['first_name'] = e($user->first_name);
+            $data['item_name'] = e($accessory->name);
+            $data['checkin_date'] = e($logaction->created_at);
             $data['item_tag'] = '';
-            $data['note'] = $logaction->note;
+            $data['note'] = e($logaction->note);
 
             if (($accessory->checkin_email()=='1')) {
 
@@ -550,13 +551,13 @@ class AccessoriesController extends Controller
   * @param  int  $accessoryId
   * @return string JSON containing accessories and their associated atrributes.
   **/
-    public function getDatatable()
+    public function getDatatable(Request $request)
     {
         $accessories = Accessory::select('accessories.*')->with('category', 'company')
         ->whereNull('accessories.deleted_at');
 
         if (Input::has('search')) {
-            $accessories = $accessories->TextSearch(Input::get('search'));
+            $accessories = $accessories->TextSearch(e(Input::get('search')));
         }
 
         if (Input::has('offset')) {
@@ -574,7 +575,7 @@ class AccessoriesController extends Controller
 
         $allowed_columns = ['name','min_amt','order_number','purchase_date','purchase_cost','companyName','category'];
         $order = Input::get('order') === 'asc' ? 'asc' : 'desc';
-        $sort = in_array(Input::get('sort'), $allowed_columns) ? Input::get('sort') : 'created_at';
+        $sort = in_array(Input::get('sort'), $allowed_columns) ? e(Input::get('sort')) : 'created_at';
 
         switch ($sort) {
             case 'category':
@@ -600,11 +601,11 @@ class AccessoriesController extends Controller
             $rows[] = array(
             'name'          => '<a href="'.url('admin/accessories/'.$accessory->id).'/view">'. $accessory->name.'</a>',
             'category'      => ($accessory->category) ? (string)link_to('admin/settings/categories/'.$accessory->category->id.'/view', $accessory->category->name) : '',
-            'qty'           => $accessory->qty,
-            'order_number'  => $accessory->order_number,
-            'min_amt'  => $accessory->min_amt,
-            'location'      => ($accessory->location) ? $accessory->location->name: '',
-            'purchase_date' => $accessory->purchase_date,
+            'qty'           => e($accessory->qty),
+            'order_number'  => e($accessory->order_number),
+            'min_amt'  => e($accessory->min_amt),
+            'location'      => ($accessory->location) ? e($accessory->location->name): '',
+            'purchase_date' => e($accessory->purchase_date),
             'purchase_cost' => number_format($accessory->purchase_cost, 2),
             'numRemaining'  => $accessory->numRemaining(),
             'actions'       => $actions,
@@ -643,7 +644,7 @@ class AccessoriesController extends Controller
   * @param  int  $accessoryId
   * @return string JSON containing accessories and their associated atrributes.
   **/
-    public function getDataView($accessoryID)
+    public function getDataView(Request $request, $accessoryID)
     {
         $accessory = Accessory::find($accessoryID);
 
@@ -660,7 +661,7 @@ class AccessoriesController extends Controller
             $actions = '<a href="'.route('checkin/accessory', $user->pivot->id).'" class="btn btn-info btn-sm">Checkin</a>';
 
             $rows[] = array(
-              'name'          =>(string) link_to('/admin/users/'.$user->id.'/view', $user->fullName()),
+              'name'          =>(string) link_to('/admin/users/'.$user->id.'/view', e($user->fullName())),
               'actions'       => $actions
               );
         }

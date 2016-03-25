@@ -441,7 +441,7 @@ class AssetModelsController extends Controller
 
         $allowed_columns = ['id','name','modelno'];
         $order = Input::get('order') === 'asc' ? 'asc' : 'desc';
-        $sort = in_array(Input::get('sort'), $allowed_columns) ? Input::get('sort') : 'created_at';
+        $sort = in_array(Input::get('sort'), $allowed_columns) ? e(Input::get('sort')) : 'created_at';
 
         $models = $models->orderBy($sort, $order);
 
@@ -491,7 +491,7 @@ class AssetModelsController extends Controller
         $assets = Asset::where('model_id', '=', $modelID)->withTrashed()->with('company');
 
         if (Input::has('search')) {
-            $assets = $assets->TextSearch(Input::get('search'));
+            $assets = $assets->TextSearch(e(Input::get('search')));
         }
 
         if (Input::has('offset')) {
@@ -509,7 +509,7 @@ class AssetModelsController extends Controller
 
         $allowed_columns = ['name', 'serial','asset_tag'];
         $order = Input::get('order') === 'asc' ? 'asc' : 'desc';
-        $sort = in_array(Input::get('sort'), $allowed_columns) ? Input::get('sort') : 'created_at';
+        $sort = in_array(Input::get('sort'), $allowed_columns) ? e(Input::get('sort')) : 'created_at';
 
         $assets = $assets->orderBy($sort, $order);
 

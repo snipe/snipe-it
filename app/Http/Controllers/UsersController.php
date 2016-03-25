@@ -1101,7 +1101,7 @@ class UsersController extends Controller
     public function postLDAP()
     {
 
-        $location_id = Input::get('location_id');
+        $location_id = e(Input::get('location_id'));
 
         $ldap_version = Setting::getSettings()->ldap_version;
         $url = Setting::getSettings()->ldap_server;

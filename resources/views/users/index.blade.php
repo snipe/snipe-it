@@ -56,7 +56,7 @@
               class="table table-striped"
               id="table"
               data-toggle="table"
-              data-url="{{ route('api.users.list', array(''=>Input::get('status'))) }}"
+              data-url="{{ route('api.users.list', array(''=>e(Input::get('status')))) }}"
               data-cookie="true"
               data-click-to-select="true"
               data-cookie-id-table="userTableDisplay-{{ config('version.hash_version') }}">

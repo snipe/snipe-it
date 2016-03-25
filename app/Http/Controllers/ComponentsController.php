@@ -70,7 +70,7 @@ class ComponentsController extends Controller
         $component->location_id            = e(Input::get('location_id'));
         $component->company_id             = Company::getIdForCurrentUser(Input::get('company_id'));
         $component->order_number           = e(Input::get('order_number'));
-        $component->min_amt             = e(Input::get('min_amt'));
+        $component->min_amt                = e(Input::get('min_amt'));
 
         if (e(Input::get('purchase_date')) == '') {
             $component->purchase_date       =  null;
@@ -397,13 +397,13 @@ class ComponentsController extends Controller
             $rows[] = array(
                 'checkbox'      =>'<div class="text-center"><input type="checkbox" name="component['.$component->id.']" class="one_required"></div>',
                 'id'            => $component->id,
-                'name'          => (string)link_to('admin/components/'.$component->id.'/view', $component->name),
+                'name'          => (string)link_to('admin/components/'.$component->id.'/view', e($component->name)),
                 'location'   => ($component->location) ? e($component->location->name) : '',
-                'total_qty'           => $component->total_qty,
-                'min_amt'           => $component->min_amt,
-                'category'           => ($component->category) ? $component->category->name : 'Missing category',
-                'order_number'  => $component->order_number,
-                'purchase_date'  => $component->purchase_date,
+                'total_qty'           => e($component->total_qty),
+                'min_amt'           => e($component->min_amt),
+                'category'           => ($component->category) ? e($component->category->name) : 'Missing category',
+                'order_number'  => e($component->order_number),
+                'purchase_date'  => e($component->purchase_date),
                 'purchase_cost'  => ($component->purchase_cost!='') ? number_format($component->purchase_cost, 2): '' ,
                 'numRemaining'  => $component->numRemaining(),
                 'actions'       => $actions,
@@ -432,8 +432,8 @@ class ComponentsController extends Controller
 
         foreach ($component->assets as $component_assignment) {
             $rows[] = array(
-            'name' => (string)link_to('/hardware/'.$component_assignment->id.'/view', $component_assignment->name),
-            'qty' => $component_assignment->pivot->assigned_qty,
+            'name' => (string)link_to('/hardware/'.$component_assignment->id.'/view', e($component_assignment->name)),
+            'qty' => e($component_assignment->pivot->assigned_qty),
             'created_at' => ($component_assignment->created_at->format('Y-m-d H:i:s')=='-0001-11-30 00:00:00') ? '' : $component_assignment->created_at->format('Y-m-d H:i:s'),
             );
         }

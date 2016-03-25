@@ -68,7 +68,7 @@ class ConsumablesController extends Controller
         $consumable->location_id            = e(Input::get('location_id'));
         $consumable->company_id             = Company::getIdForCurrentUser(Input::get('company_id'));
         $consumable->order_number           = e(Input::get('order_number'));
-        $consumable->min_amt                   = e(Input::get('min_amt'));
+        $consumable->min_amt                = e(Input::get('min_amt'));
 
         if (e(Input::get('purchase_date')) == '') {
             $consumable->purchase_date       =  null;
@@ -79,7 +79,7 @@ class ConsumablesController extends Controller
         if (e(Input::get('purchase_cost')) == '0.00') {
             $consumable->purchase_cost       =  null;
         } else {
-            $consumable->purchase_cost       = ParseFloat(e(Input::get('purchase_cost')));
+            $consumable->purchase_cost       = e(Input::get('purchase_cost'));
         }
 
         $consumable->qty                    = e(Input::get('qty'));
@@ -157,7 +157,7 @@ class ConsumablesController extends Controller
         if (e(Input::get('purchase_cost')) == '0.00') {
             $consumable->purchase_cost       =  null;
         } else {
-            $consumable->purchase_cost       = ParseFloat(e(Input::get('purchase_cost')));
+            $consumable->purchase_cost       = e(Input::get('purchase_cost'));
         }
 
         $consumable->qty                    = e(Input::get('qty'));
@@ -357,7 +357,7 @@ class ConsumablesController extends Controller
             ->with('company', 'location', 'category', 'users');
 
         if (Input::has('search')) {
-            $consumables = $consumables->TextSearch(Input::get('search'));
+            $consumables = $consumables->TextSearch(e(Input::get('search')));
         }
 
         if (Input::has('offset')) {
@@ -398,17 +398,17 @@ class ConsumablesController extends Controller
 
         foreach ($consumables as $consumable) {
             $actions = '<nobr><a href="'.route('checkout/consumable', $consumable->id).'" style="margin-right:5px;" class="btn btn-info btn-sm" '.(($consumable->numRemaining() > 0 ) ? '' : ' disabled').'>'.Lang::get('general.checkout').'</a><a href="'.route('update/consumable', $consumable->id).'" class="btn btn-warning btn-sm" style="margin-right:5px;"><i class="fa fa-pencil icon-white"></i></a><a data-html="false" class="btn delete-asset btn-danger btn-sm" data-toggle="modal" href="'.route('delete/consumable', $consumable->id).'" data-content="'.Lang::get('admin/consumables/message.delete.confirm').'" data-title="'.Lang::get('general.delete').' '.htmlspecialchars($consumable->name).'?" onClick="return false;"><i class="fa fa-trash icon-white"></i></a></nobr>';
-            $company = $consumable->company;
+            $company = e($consumable->company);
 
             $rows[] = array(
                 'id'            => $consumable->id,
-                'name'          => (string)link_to('admin/consumables/'.$consumable->id.'/view', $consumable->name),
+                'name'          => (string)link_to('admin/consumables/'.$consumable->id.'/view', e($consumable->name)),
                 'location'   => ($consumable->location) ? e($consumable->location->name) : '',
-                'min_amt'           => $consumable->min_amt,
-                'qty'           => $consumable->qty,
-                'category'           => ($consumable->category) ? $consumable->category->name : 'Missing category',
-                'order_number'  => $consumable->order_number,
-                'purchase_date'  => $consumable->purchase_date,
+                'min_amt'           => e($consumable->min_amt),
+                'qty'           => e($consumable->qty),
+                'category'           => ($consumable->category) ? e($consumable->category->name) : 'Missing category',
+                'order_number'  => e($consumable->order_number),
+                'purchase_date'  => e($consumable->purchase_date),
                 'purchase_cost'  => ($consumable->purchase_cost!='') ? number_format($consumable->purchase_cost, 2): '' ,
                 'numRemaining'  => $consumable->numRemaining(),
                 'actions'       => $actions,
@@ -445,9 +445,9 @@ class ConsumablesController extends Controller
 
         foreach ($consumable->consumableAssigments as $consumable_assignment) {
             $rows[] = array(
-            'name' => (string)link_to('/admin/users/'.$consumable_assignment->user->id.'/view', $consumable_assignment->user->fullName()),
+            'name' => (string)link_to('/admin/users/'.$consumable_assignment->user->id.'/view', e($consumable_assignment->user->fullName())),
             'created_at' => ($consumable_assignment->created_at->format('Y-m-d H:i:s')=='-0001-11-30 00:00:00') ? '' : $consumable_assignment->created_at->format('Y-m-d H:i:s'),
-            'admin' => ($consumable_assignment->admin) ? $consumable_assignment->admin->fullName() : '',
+            'admin' => ($consumable_assignment->admin) ? e($consumable_assignment->admin->fullName()) : '',
             );
         }
 

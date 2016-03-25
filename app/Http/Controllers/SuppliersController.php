@@ -270,12 +270,12 @@ class SuppliersController extends Controller
 
             $rows[] = array(
                 'id'                => $supplier->id,
-                'name'              => (string)link_to('admin/settings/suppliers/'.$supplier->id.'/view', $supplier->name),
-                'contact'           => $supplier->contact,
-                'address'           => $supplier->address.' '.$supplier->address2.' '.$supplier->city.' '.$supplier->state.' '.$supplier->country,
-                'phone'             => $supplier->phone,
-                'fax'             => $supplier->fax,
-                'email'             => ($supplier->email!='') ? '<a href="mailto:'.$supplier->email.'">'.$supplier->email.'</a>' : '',
+                'name'              => (string)link_to('admin/settings/suppliers/'.$supplier->id.'/view', e($supplier->name)),
+                'contact'           => e($supplier->contact),
+                'address'           => e($supplier->address).' '.e($supplier->address2).' '.e($supplier->city).' '.e($supplier->state).' '.e($supplier->country),
+                'phone'             => e($supplier->phone),
+                'fax'             => e($supplier->fax),
+                'email'             => ($supplier->email!='') ? '<a href="mailto:'.e($supplier->email).'">'.e($supplier->email).'</a>' : '',
                 'assets'            => $supplier->num_assets(),
                 'licenses'          => $supplier->num_licenses(),
                 'actions'           => $actions

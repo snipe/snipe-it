@@ -248,8 +248,8 @@ class StatuslabelsController extends Controller
             $actions = '<a href="'.route('update/statuslabel', $statuslabel->id).'" class="btn btn-warning btn-sm" style="margin-right:5px;"><i class="fa fa-pencil icon-white"></i></a><a data-html="false" class="btn delete-asset btn-danger btn-sm" data-toggle="modal" href="'.route('delete/statuslabel', $statuslabel->id).'" data-content="'.Lang::get('admin/statuslabels/message.delete.confirm').'" data-title="'.Lang::get('general.delete').' '.htmlspecialchars($statuslabel->name).'?" onClick="return false;"><i class="fa fa-trash icon-white"></i></a>';
 
             $rows[] = array(
-                'id'            => $statuslabel->id,
-                'type'          => $label_type,
+                'id'            => e($statuslabel->id),
+                'type'          => e($label_type),
                 'name'          => e($statuslabel->name),
                 'actions'       => $actions
             );

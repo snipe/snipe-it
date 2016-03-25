@@ -936,7 +936,7 @@ class LicensesController extends Controller
 
         $allowed_columns = ['id','name','purchase_cost','expiration_date','purchase_order','order_number','notes','purchase_date','serial'];
         $order = Input::get('order') === 'asc' ? 'asc' : 'desc';
-        $sort = in_array(Input::get('sort'), $allowed_columns) ? Input::get('sort') : 'created_at';
+        $sort = in_array(Input::get('sort'), $allowed_columns) ? e(Input::get('sort')) : 'created_at';
 
         $licenses = $licenses->orderBy($sort, $order);
 
@@ -954,14 +954,14 @@ class LicensesController extends Controller
                 'serial'            => (string) link_to('/admin/licenses/'.$license->id.'/view', mb_strimwidth($license->serial, 0, 50, "...")),
                 'totalSeats'        => $license->totalSeatsByLicenseID(),
                 'remaining'         => $license->remaincount(),
-                'license_name'      => $license->license_name,
-                'license_email'      => $license->license_email,
+                'license_name'      => e($license->license_name),
+                'license_email'      => e($license->license_email),
                 'purchase_date'     => ($license->purchase_date) ? $license->purchase_date : '',
                 'expiration_date'     => ($license->expiration_date) ? $license->expiration_date : '',
                 'purchase_cost'     => ($license->purchase_cost) ? $license->purchase_cost : '',
-                'purchase_order'     => ($license->purchase_order) ? $license->purchase_order : '',
-                'order_number'     => ($license->order_number) ? $license->order_number : '',
-                'notes'     => ($license->notes) ? $license->notes : '',
+                'purchase_order'     => ($license->purchase_order) ? e($license->purchase_order) : '',
+                'order_number'     => ($license->order_number) ? e($license->order_number) : '',
+                'notes'     => ($license->notes) ? e($license->notes) : '',
                 'actions'           => $actions,
                 'companyName'       => is_null($license->company) ? '' : e($license->company->name)
             );

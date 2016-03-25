@@ -36,12 +36,12 @@ class ProfileController extends Controller
         $user = Auth::user();
 
       // Update the user information
-        $user->first_name = Input::get('first_name');
-        $user->last_name  = Input::get('last_name');
-        $user->website    = Input::get('website');
-        $user->location_id    = Input::get('location_id');
-        $user->gravatar   = Input::get('gravatar');
-        $user->locale = Input::get('locale');
+        $user->first_name = e(Input::get('first_name'));
+        $user->last_name  = e(Input::get('last_name'));
+        $user->website    = e(Input::get('website'));
+        $user->location_id    = e(Input::get('location_id'));
+        $user->gravatar   = e(Input::get('gravatar'));
+        $user->locale = e(Input::get('locale'));
 
         if (Input::file('avatar')) {
             $image = Input::file('avatar');

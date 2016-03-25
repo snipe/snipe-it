@@ -132,11 +132,6 @@ class ManufacturersController extends Controller
             return Redirect::to('admin/settings/manufacturers')->with('success', Lang::get('admin/manufacturers/message.delete.success'));
         }
 
-
-
-
-
-
     }
 
 
@@ -201,7 +196,7 @@ class ManufacturersController extends Controller
 
             $rows[] = array(
                 'id'              => $manufacturer->id,
-                'name'          => (string)link_to('admin/settings/manufacturers/'.$manufacturer->id.'/view', $manufacturer->name),
+                'name'          => (string)link_to('admin/settings/manufacturers/'.$manufacturer->id.'/view', e($manufacturer->name)),
                 'assets'              => $manufacturer->assets->count(),
                 'actions'       => $actions
             );
@@ -266,13 +261,13 @@ class ManufacturersController extends Controller
 
             $row = array(
             'id' => $asset->id,
-            'name' => (string)link_to('/hardware/'.$asset->id.'/view', $asset->showAssetName()),
-            'model' => $asset->model->name,
-            'asset_tag' => $asset->asset_tag,
-            'serial' => $asset->serial,
-            'assigned_to' => ($asset->assigneduser) ? (string)link_to('/admin/users/'.$asset->assigneduser->id.'/view', $asset->assigneduser->fullName()): '',
+            'name' => (string)link_to('/hardware/'.$asset->id.'/view', e($asset->showAssetName())),
+            'model' => e($asset->model->name),
+            'asset_tag' => e($asset->asset_tag),
+            'serial' => e($asset->serial),
+            'assigned_to' => ($asset->assigneduser) ? (string)link_to('/admin/users/'.$asset->assigneduser->id.'/view', e($asset->assigneduser->fullName())): '',
             'actions' => $actions,
-            'companyName' => Company::getName($asset),
+            'companyName' => e(Company::getName($asset)),
             );
 
             if (isset($inout)) {
