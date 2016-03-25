@@ -12,7 +12,7 @@ class_name: AcceptanceTester
 modules:
   enabled:
     - WebDriver:
-       url: 'https://snipe-it5.dev:8890'
+       url: 'https://snipe-it.dev:1337'
        browser: phantomjs
 
 env:
