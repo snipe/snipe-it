@@ -64,10 +64,10 @@
                 data-toolbar="#toolbar"
                 class="table table-striped"
                 id="table"
-                data-url="{{route('api.hardware.list', array(''=>Input::get('status'),'order_number'=>Input::get('order_number')))}}"
+                data-url="{{route('api.hardware.list', array(''=>e(Input::get('status')),'order_number'=>e(Input::get('order_number'))))}}"
                 data-cookie="true"
                 data-click-to-select="true"
-                data-cookie-id-table="{{ Input::get('status') }}assetTable-{{ config('version.hash_version') }}">
+                data-cookie-id-table="{{ e(Input::get('status')) }}assetTable-{{ config('version.hash_version') }}">
                     <thead>
                         <tr>
                             <th data-class="hidden-xs" data-switchable="false" data-searchable="false" data-sortable="false" data-field="checkbox"><div class="text-center"><input type="checkbox" id="checkAll" style="padding-left: 0px;"></div></th>
