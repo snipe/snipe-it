@@ -1,0 +1,24 @@
+<?php
+
+return array(
+
+    'does_not_exist' => 'Diese Kategorie existiert nicht.',
+    'assoc_users'	 => 'Diese Kategorie kann nicht gelöscht werden da sie bereits mit einem Modell verbunden ist. Bitte trennen sie diese Kategorie von Ihren Modellen und versuchen sie es erneut. ',
+
+    'create' => array(
+        'error'   => 'Die Kategorie konnte nicht erstellt werden, bitte versuchen sie es erneut.',
+        'success' => 'Die Kategorie wurde erfolgreich erstellt.'
+    ),
+
+    'update' => array(
+        'error'   => 'Die Kategorie konnte nicht aktualisiert werden, bitte versuchen sie es erneut',
+        'success' => 'Die Kategorie wurde erfolgreich aktualisiert.'
+    ),
+
+    'delete' => array(
+        'confirm'   => 'Sind sie sicher, dass sie diese Kategorie löschen wollen?',
+        'error'   => 'Beim löschen der Kategorie ist ein Problem aufgetreten. Bitte versuchen sie es erneut.',
+        'success' => 'Die Kategorie wurde erfolgreich gelöscht.'
+    )
+
+);

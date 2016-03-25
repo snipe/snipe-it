@@ -1,0 +1,55 @@
+<?php
+
+return array(
+
+    'accepted'                  => 'Jūs sėkmingai priėmėte šią įrangą.',
+    'declined'                  => 'Jūs sėkmingai atšaukėte šią įrangą.',
+    'user_exists'               => 'Naudotojas jau yra!',
+    'user_not_found'            => 'Naudotojas [:id] neegzistuoja.',
+    'user_login_required'       => 'Prisijungimo laukelis privalomas',
+    'user_password_required'    => 'Slaptažodis būtinas.',
+    'insufficient_permissions'  => 'Nepakankamos teisės.',
+    'user_deleted_warning'      => 'Šis naudotojas ištrintas. Jūs turėsite atkurti naudotoją norėdami redaguoto ar priskirti jam naują įrangą.',
+    'ldap_not_configured'        => 'LDAP integracija nebuvo sukonfikuruota šiam diegimui.',
+
+
+    'success' => array(
+        'create'    => 'Naudotojas sėkmingai sukurtas.',
+        'update'    => 'Naudotojas sėkmingai atnaujintas.',
+        'delete'    => 'Naudotojas sėkmingai ištrintas.',
+        'ban'       => 'Naudotojas sėkmingai užblokuotas.',
+        'unban'     => 'Naudotojas sėkmingai atblokuotas.',
+        'suspend'   => 'Naudotojas sėkmingai užšaldytas.',
+        'unsuspend' => 'Naudotojas sėkmingai atšaldytas.',
+        'restored'  => 'Naudotojas sėkmingai atkurtas.',
+        'import'    => 'Naudotojai sėkmingai įkelti.',
+    ),
+
+    'error' => array(
+        'create' => 'Nepavyko sukurti naudotojo. Prašome bandykite dar kartą.',
+        'update' => 'Nepavyko atnaujinti naudotojo. Prašome bandykite dar kartą.',
+        'delete' => 'Nepavyko ištrinti naudotojo. Prašome bandykite dar kartą.',
+        'unsuspend' => 'Nepavyko atšaldyti naudotojo. Prašome bandykite dar kartą.',
+        'import'    => 'Nepavyko įkelti naudotojų. Prašome bandykite dar kartą.',
+        'asset_already_accepted' => 'ši įranga jau buvo priimta.',
+        'accept_or_decline' => 'Jūs turite arba priimti arba atmesti šią įrangą.',
+        'incorrect_user_accepted' => 'Įranga kurią bandote priimti, nebuvo priskirta Jums.',
+        'ldap_could_not_connect' => 'Negali prisijungti prie LDAP serverio. Prašome patikrinkite savo LDAP serverio konfigūraciją LDAP konfigūracijos faile. <br>Klaida iš LDAP Serverio:',
+        'ldap_could_not_bind' => 'Negali nustatyti vartotojo prisijungiant prie LDAP serverio. Prašome patikrinkite savo LDAP serverio konfigūraciją LDAP konfigūracijos faile. <br>Klaida iš LDAP Serverio: ',
+        'ldap_could_not_search' => 'Negali rasti LDAP serverio. Prašome patikrinkite savo LDAP serverio konfigūraciją LDAP konfigūracijos faile. <br>Klaida iš LDAP Serverio:',
+        'ldap_could_not_get_entries' => 'Negali gauti prieigos prie LDAP serverio. Prašome patikrinkite savo LDAP serverio konfigūraciją LDAP konfigūracijos faile. <br>Klaida iš LDAP Serverio:',
+    ),
+
+    'deletefile' => array(
+        'error'   => 'Failas neištrintas. Prašome bandykite dar kartą.',
+        'success' => 'Failas sėkmingai ištrintas.',
+    ),
+
+    'upload' => array(
+        'error'   => 'Failas (-ai) neįkelti. Prašome bandykite dar kartą.',
+        'success' => 'Failas (-ai) sėkmingai įkelti.',
+        'nofiles' => 'Įkėlimui jūs nepasirinkote jokių failų',
+        'invalidfiles' => 'Vienas ar keli failai yra per dideli arba neleidžiamas šis failų formatas. Primename, kad leidžiami sekantys formatai png, gif, jpg, doc, docx, pdf, txt.',
+    ),
+
+);
