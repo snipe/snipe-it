@@ -963,7 +963,7 @@ class AssetsController extends Controller
             foreach (Input::file('assetfile') as $file) {
                 $extension = $file->getClientOriginalExtension();
                 $filename = 'hardware-'.$asset->id.'-'.str_random(8);
-                $filename .= '-'.Str::slug($file->getClientOriginalName()).'.'.$extension;
+                $filename .= '-'.str_slug($file->getClientOriginalName()).'.'.$extension;
                 $upload_success = $file->move($destinationPath, $filename);
 
                 //Log the deletion of seats to the log
