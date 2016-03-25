@@ -25,7 +25,7 @@ class CheckLocale
             \App::setLocale($request->user()->locale);
 
         // App setting preference
-        } elseif (\App\Models\Setting::getSettings()->locale!='') {
+        } elseif ((\App\Models\Setting::getSettings()) &&  (\App\Models\Setting::getSettings()->locale!='')) {
             \App::setLocale(\App\Models\Setting::getSettings()->locale);
 
         // Default app setting
