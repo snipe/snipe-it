@@ -41,11 +41,14 @@ class SystemBackup extends Command {
 		$files['avatars'] = glob(public_path().'/uploads/avatars/*');
 		$files['models'] = glob(public_path().'/uploads/models/*');
 		$files['suppliers'] = glob(public_path().'/uploads/suppliers/*');
-		$files['private_uploads'] = glob(storage_path().'/app/private_uploads/*');
+		$files['private_uploads'] = glob(config('app.private_uploads').'/*');
 		$base_filename = date('Ymdgis');
-		$zip_file = app_path().'/storage/dumps/'.$base_filename.'-backup.zip';
-		$db_dump = config('backup::path').$base_filename.'-db.sql';
+		$zip_file = config('app.private_uploads').'/backups/zips/'.$base_filename.'-backup.zip';
+		$db_dump = config('app.private_uploads').'/backups/sql/'.$base_filename.'-db.sql';
 		$this->call('db:backup', array('filename' => $db_dump));
+        echo $zip_file."\n";
+        echo $db_dump."\n";
+
 
 		Zipper::make($zip_file)
 			->folder('avatars')->add($files['avatars'])
