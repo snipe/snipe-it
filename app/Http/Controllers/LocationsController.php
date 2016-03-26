@@ -374,18 +374,15 @@ class LocationsController extends Controller
     public function getDataViewUsers($locationID)
     {
         $location = Location::find($locationID);
-        $location_users = $location->users;
-        $count = $location_users->count();
-
         $rows = array();
 
-        foreach ($location_users as $user) {
+        foreach ($location->users as $user) {
             $rows[] = array(
               'name' => (string)link_to('/admin/users/'.$user->id.'/view', e($user->fullName()))
               );
         }
 
-        $data = array('total' => $count, 'rows' => $rows);
+        $data = array('total' => $location->users->count(), 'rows' => $rows);
 
         return $data;
     }
@@ -413,7 +410,6 @@ class LocationsController extends Controller
             'asset_tag' => e($asset->asset_tag),
             'serial' => e($asset->serial),
             'model' => e($asset->model->name),
-
             );
         }
 
