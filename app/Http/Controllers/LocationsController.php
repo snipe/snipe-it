@@ -22,6 +22,7 @@ use View;
 use Auth;
 
 
+
 use Symfony\Component\HttpFoundation\JsonResponse;
 
 class LocationsController extends Controller
@@ -39,7 +40,7 @@ class LocationsController extends Controller
     public function getIndex()
     {
         // Grab all the locations
-        $locations = \App\Models\Location::orderBy('created_at', 'DESC')->with('parent', 'assets', 'assignedassets')->get();
+        $locations = Location::orderBy('created_at', 'DESC')->with('parent', 'assets', 'assignedassets')->get();
 
         // Show the page
         return View::make('locations/index', compact('locations'));
@@ -56,10 +57,10 @@ class LocationsController extends Controller
     */
     public function getCreate()
     {
-        $locations = \App\Models\Location::orderBy('name', 'ASC')->get();
+        $locations = Location::orderBy('name', 'ASC')->get();
 
-        $location_options_array = \App\Models\Location::getLocationHierarchy($locations);
-        $location_options = \App\Models\Location::flattenLocationsArray($location_options_array);
+        $location_options_array = Location::getLocationHierarchy($locations);
+        $location_options = Location::flattenLocationsArray($location_options_array);
         $location_options = array('' => 'Top Level') + $location_options;
 
         return View::make('locations/edit')
@@ -81,7 +82,7 @@ class LocationsController extends Controller
     {
 
     // create a new location instance
-        $location = new \App\Models\Location();
+        $location = new Location();
 
 
     // Save the location data
@@ -162,14 +163,14 @@ class LocationsController extends Controller
     public function getEdit($locationId = null)
     {
         // Check if the location exists
-        if (is_null($location = \App\Models\Location::find($locationId))) {
+        if (is_null($location = Location::find($locationId))) {
             return Redirect::to('admin/settings/locations')->with('error', Lang::get('admin/locations/message.does_not_exist'));
         }
 
         // Show the page
-        $locations = \App\Models\Location::orderBy('name', 'ASC')->get();
-        $location_options_array = \App\Models\Location::getLocationHierarchy($locations);
-        $location_options = \App\Models\Location::flattenLocationsArray($location_options_array);
+        $locations = Location::orderBy('name', 'ASC')->get();
+        $location_options_array = Location::getLocationHierarchy($locations);
+        $location_options = Location::flattenLocationsArray($location_options_array);
         $location_options = array('' => 'Top Level') + $location_options;
 
         return View::make('locations/edit', compact('location'))->with('location_options', $location_options);
@@ -188,7 +189,7 @@ class LocationsController extends Controller
     public function postEdit($locationId = null)
     {
         // Check if the location exists
-        if (is_null($location = \App\Models\Location::find($locationId))) {
+        if (is_null($location = Location::find($locationId))) {
             // Redirect to the blogs management page
             return Redirect::to('admin/settings/locations')->with('error', Lang::get('admin/locations/message.does_not_exist'));
         }
@@ -230,7 +231,7 @@ class LocationsController extends Controller
     public function getDelete($locationId)
     {
         // Check if the location exists
-        if (is_null($location = \App\Models\Location::find($locationId))) {
+        if (is_null($location = Location::find($locationId))) {
             // Redirect to the blogs management page
             return Redirect::to('admin/settings/locations')->with('error', Lang::get('admin/locations/message.not_found'));
         }
@@ -267,7 +268,7 @@ class LocationsController extends Controller
     */
     public function getView($locationId = null)
     {
-        $location = \App\Models\Location::find($locationId);
+        $location = Location::find($locationId);
 
         if (isset($location->id)) {
                 return View::make('locations/view', compact('location'));
@@ -293,7 +294,7 @@ class LocationsController extends Controller
     */
     public function getDatatable()
     {
-        $locations = \App\Models\Location::select(array('locations.id','locations.name','locations.address','locations.address2','locations.city','locations.state','locations.zip','locations.country','locations.parent_id','locations.currency'))->with('assets');
+        $locations = Location::select(array('locations.id','locations.name','locations.address','locations.address2','locations.city','locations.state','locations.zip','locations.country','locations.parent_id','locations.currency'))->with('assets');
 
 
         if (Input::has('search')) {
@@ -372,7 +373,7 @@ class LocationsController extends Controller
     */
     public function getDataViewUsers($locationID)
     {
-        $location = \App\Models\Location::find($locationID);
+        $location = Location::find($locationID);
         $location_users = $location->users;
         $count = $location_users->count();
 
@@ -403,12 +404,10 @@ class LocationsController extends Controller
     */
     public function getDataViewAssets($locationID)
     {
-        $location = \App\Models\Location::find($locationID);
-        $count = $location->assets->count();
-
+        $location = Location::find($locationID)->load('assignedassets.model');
         $rows = array();
 
-        foreach ($location->assets as $asset) {
+        foreach ($location->assignedassets as $asset) {
             $rows[] = array(
             'name' => (string)link_to('/hardware/'.$asset->id.'/view', e($asset->showAssetName())),
             'asset_tag' => e($asset->asset_tag),
@@ -418,7 +417,7 @@ class LocationsController extends Controller
             );
         }
 
-        $data = array('total' => $count, 'rows' => $rows);
+        $data = array('total' => $location->assignedassets->count(), 'rows' => $rows);
         return $data;
 
     }
