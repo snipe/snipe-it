@@ -407,7 +407,7 @@ class ConsumablesController extends Controller
 
         foreach ($consumables as $consumable) {
             $actions = '<nobr><a href="'.route('checkout/consumable', $consumable->id).'" style="margin-right:5px;" class="btn btn-info btn-sm" '.(($consumable->numRemaining() > 0 ) ? '' : ' disabled').'>'.Lang::get('general.checkout').'</a><a href="'.route('update/consumable', $consumable->id).'" class="btn btn-warning btn-sm" style="margin-right:5px;"><i class="fa fa-pencil icon-white"></i></a><a data-html="false" class="btn delete-asset btn-danger btn-sm" data-toggle="modal" href="'.route('delete/consumable', $consumable->id).'" data-content="'.Lang::get('admin/consumables/message.delete.confirm').'" data-title="'.Lang::get('general.delete').' '.htmlspecialchars($consumable->name).'?" onClick="return false;"><i class="fa fa-trash icon-white"></i></a></nobr>';
-            $company = e($consumable->company);
+            $company = $consumable->company;
 
             $rows[] = array(
                 'id'            => $consumable->id,
