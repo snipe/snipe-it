@@ -87,10 +87,10 @@ class Actionlog extends Model implements ICompanyableChild
     /**
        * Check if the file exists, and if it does, force a download
        **/
-    public function get_src()
+    public function get_src($type = 'assets')
     {
 
-        $file = storage_path() . '/app/private_uploads/' . $this->filename;
+        $file = config('app.private_uploads') . '/' . $type . '/' . $this->filename;
 
         return $file;
 

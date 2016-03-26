@@ -947,8 +947,7 @@ class AssetsController extends Controller
             return Redirect::route('hardware')->with('error', trans('admin/hardware/message.does_not_exist'));
         }
 
-        // the asset is valid
-        $destinationPath = config('app.private_uploads').'/imports/assets';
+        $destinationPath = config('app.private_uploads').'/assets';
 
 
 

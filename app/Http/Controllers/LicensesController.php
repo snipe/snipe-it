@@ -11,7 +11,6 @@
 namespace App\Http\Controllers;
 
 use Assets;
-
 use Input;
 use Lang;
 use App\Models\License;
@@ -36,15 +35,16 @@ use Auth;
 
 class LicensesController extends Controller
 {
+
     /**
-     * Show a list of all the licenses.
-     *
-     * @return View
-     */
-
-
-
-
+    * Returns a view that invokes the ajax tables which actually contains
+    * the content for the licenses listing, which is generated in getDatatable.
+    *
+    * @author [A. Gianotto] [<snipe@snipe.net>]
+    * @see LicensesController::getDatatable() method that generates the JSON response
+    * @since [v1.0]
+    * @return View
+    */
     public function getIndex()
     {
         // Show the page
@@ -53,15 +53,16 @@ class LicensesController extends Controller
 
 
     /**
-     * License create.
-     *
-     * @return View
-     */
+    * Returns a form view that allows an admin to create a new licence.
+    *
+    * @author [A. Gianotto] [<snipe@snipe.net>]
+    * @see AccessoriesController::getDatatable() method that generates the JSON response
+    * @since [v1.0]
+    * @return View
+    */
     public function getCreate()
     {
-        // Show the page
-      //  $license_options = array('0' => 'Top Level') + License::lists('name', 'id');
-        // Show the page
+
         $depreciation_list = Helper::depreciationList();
         $supplier_list = Helper::suppliersList();
         $maintained_list = array('' => 'Maintained', '1' => 'Yes', '0' => 'No');
@@ -78,10 +79,14 @@ class LicensesController extends Controller
 
 
     /**
-     * License create form processing.
-     *
-     * @return Redirect
-     */
+    * Validates and stores the license form data submitted from the new
+    * license form.
+    *
+    * @author [A. Gianotto] [<snipe@snipe.net>]
+    * @see LicensesController::getCreate() method that provides the form view
+    * @since [v1.0]
+    * @return Redirect
+    */
     public function postCreate()
     {
 
@@ -173,11 +178,14 @@ class LicensesController extends Controller
     }
 
     /**
-     * License update.
-     *
-     * @param  int  $licenseId
-     * @return View
-     */
+    * Returns a form with existing license data to allow an admin to
+    * update license information.
+    *
+    * @author [A. Gianotto] [<snipe@snipe.net>]
+    * @since [v1.0]
+    * @param int $licenseId
+    * @return View
+    */
     public function getEdit($licenseId = null)
     {
         // Check if the license exists
@@ -213,14 +221,18 @@ class LicensesController extends Controller
 
 
     /**
-     * License update form processing page.
-     *
-     * @param  int  $licenseId
-     * @return Redirect
-     */
+    * Validates and stores the license form data submitted from the edit
+    * license form.
+    *
+    * @author [A. Gianotto] [<snipe@snipe.net>]
+    * @see LicensesController::getEdit() method that provides the form view
+    * @since [v1.0]
+    * @param int $licenseId
+    * @return Redirect
+    */
     public function postEdit($licenseId = null)
     {
-      // Check if the license exists
+        // Check if the license exists
         if (is_null($license = License::find($licenseId))) {
             // Redirect to the blogs management page
             return Redirect::to('admin/licenses')->with('error', Lang::get('admin/licenses/message.does_not_exist'));
@@ -359,11 +371,14 @@ class LicensesController extends Controller
     }
 
     /**
-     * Delete the given license.
-     *
-     * @param  int  $licenseId
-     * @return Redirect
-     */
+    * Checks to see whether the selected license can be deleted, and
+    * if it can, marks it as deleted.
+    *
+    * @author [A. Gianotto] [<snipe@snipe.net>]
+    * @since [v1.0]
+    * @param int $licenseId
+    * @return Redirect
+    */
     public function getDelete($licenseId)
     {
         // Check if the license exists
@@ -402,11 +417,19 @@ class LicensesController extends Controller
 
 
     /**
-    * Check out the asset to a person
-    **/
+    * Provides the form view for checking out a license to a user.
+    * Here we pass the license seat ID instead of the license ID,
+    * because licenses themselves are never checked out to anyone,
+    * only the seats associated with them.
+    *
+    * @author [A. Gianotto] [<snipe@snipe.net>]
+    * @since [v1.0]
+    * @param int $seatId
+    * @return View
+    */
     public function getCheckout($seatId)
     {
-        // Check if the asset exists
+        // Check if the license seat exists
         if (is_null($licenseseat = LicenseSeat::find($seatId))) {
             // Redirect to the asset management page with error
             return Redirect::to('admin/licenses')->with('error', Lang::get('admin/licenses/message.not_found'));
@@ -455,8 +478,14 @@ class LicensesController extends Controller
 
 
     /**
-    * Check out the asset to a person
-    **/
+    * Validates and stores the license checkout action.
+    *
+    * @todo Switch to using a FormRequest for validation here.
+    * @author [A. Gianotto] [<snipe@snipe.net>]
+    * @since [v1.0]
+    * @param int $seatId
+    * @return Redirect
+    */
     public function postCheckout($seatId)
     {
 
@@ -604,8 +633,14 @@ class LicensesController extends Controller
 
 
     /**
-    * Check the license back into inventory
-    **/
+    * Makes the form view to check a license seat back into inventory.
+    *
+    * @author [A. Gianotto] [<snipe@snipe.net>]
+    * @since [v1.0]
+    * @param int $seatId
+    * @param string $backto
+    * @return View
+    */
     public function getCheckin($seatId = null, $backto = null)
     {
         // Check if the asset exists
@@ -622,8 +657,15 @@ class LicensesController extends Controller
 
 
     /**
-    * Check in the item so that it can be checked out again to someone else
-    **/
+    * Validates and stores the license checkin action.
+    *
+    * @author [A. Gianotto] [<snipe@snipe.net>]
+    * @see LicensesController::getCheckin() method that provides the form view
+    * @since [v1.0]
+    * @param int $seatId
+    * @param string $backto
+    * @return Redirect
+    */
     public function postCheckin($seatId = null, $backto = null)
     {
         // Check if the asset exists
@@ -729,11 +771,13 @@ class LicensesController extends Controller
     }
 
     /**
-    *  Get the asset information to present to the asset view page
+    * Makes the license detail page.
     *
-    * @param  int  $licenseId
+    * @author [A. Gianotto] [<snipe@snipe.net>]
+    * @since [v1.0]
+    * @param int $licenseId
     * @return View
-    **/
+    */
     public function getView($licenseId = null)
     {
 
@@ -767,7 +811,7 @@ class LicensesController extends Controller
 
           // Show the page
         $license_options = array('0' => 'Top Level') + License::pluck('name', 'id')->toArray();
-            $maintained_list = array('' => 'Maintained', '1' => 'Yes', '0' => 'No');
+        $maintained_list = array('' => 'Maintained', '1' => 'Yes', '0' => 'No');
         $company_list = Helper::companyList();
         //clone the orig
         $license = clone $license_to_clone;
@@ -789,11 +833,14 @@ class LicensesController extends Controller
 
 
     /**
-    *  Upload the file to the server
+    * Validates and stores files associated with a license.
     *
-    * @param  int  $licenseId
-    * @return View
-    **/
+    * @todo Switch to using the AssetFileRequest form request validator.
+    * @author [A. Gianotto] [<snipe@snipe.net>]
+    * @since [v1.0]
+    * @param int $licenseId
+    * @return Redirect
+    */
     public function postUpload($licenseId = null)
     {
         $license = License::find($licenseId);
@@ -852,9 +899,6 @@ class LicensesController extends Controller
             }
 
 
-
-
-
         } else {
             // Prepare the error message
             $error = Lang::get('admin/licenses/message.does_not_exist', compact('id'));
@@ -866,12 +910,14 @@ class LicensesController extends Controller
 
 
     /**
-    *  Delete the associated file
+    * Deletes the selected license file.
     *
-    * @param  int  $licenseId
-    * @param  int  $fileId
-    * @return View
-    **/
+    * @author [A. Gianotto] [<snipe@snipe.net>]
+    * @since [v1.0]
+    * @param int $licenseId
+    * @param int $fileId
+    * @return Redirect
+    */
     public function getDeleteFile($licenseId = null, $fileId = null)
     {
         $license = License::find($licenseId);
@@ -905,12 +951,14 @@ class LicensesController extends Controller
 
 
     /**
-    *  Display/download the uploaded file
+    * Allows the selected file to be viewed.
     *
-    * @param  int  $licenseId
-    * @param  int  $fileId
-    * @return View
-    **/
+    * @author [A. Gianotto] [<snipe@snipe.net>]
+    * @since [v1.4]
+    * @param int $licenseId
+    * @param int $fileId
+    * @return Redirect
+    */
     public function displayFile($licenseId = null, $fileId = null)
     {
 
@@ -924,7 +972,7 @@ class LicensesController extends Controller
             }
 
                 $log = Actionlog::find($fileId);
-                $file = $log->get_src();
+                $file = $log->get_src('licenses');
                 return Response::download($file);
         } else {
             // Prepare the error message
@@ -935,6 +983,15 @@ class LicensesController extends Controller
         }
     }
 
+
+    /**
+    * Generates a JSON response to populate the licence index datatables.
+    *
+    * @author [A. Gianotto] [<snipe@snipe.net>]
+    * @see LicensesController::getIndex() method that provides the view
+    * @since [v1.0]
+    * @return String JSON
+    */
     public function getDatatable()
     {
         $licenses = License::with('company');
@@ -981,6 +1038,19 @@ class LicensesController extends Controller
         return $data;
     }
 
+    /**
+    * Generates the next free seat ID for checkout.
+    *
+    * @todo This is a dumb way to solve this problem.
+    * Author should refactor. And go hide in a hole and
+    * think about what she's done. And perhaps find a new
+    * line of work. And get in the sea.
+    *
+    * @author [A. Gianotto] [<snipe@snipe.net>]
+    * @since [v1.0]
+    * @param int $licenseId
+    * @return View
+    */
     public function getFreeLicense($licenseId)
     {
         // Check if the asset exists

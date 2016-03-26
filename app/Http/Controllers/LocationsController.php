@@ -26,12 +26,16 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 
 class LocationsController extends Controller
 {
-    /**
-     * Show a list of all the locations.
-     *
-     * @return View
-     */
 
+    /**
+    * Returns a view that invokes the ajax tables which actually contains
+    * the content for the locations listing, which is generated in getDatatable.
+    *
+    * @author [A. Gianotto] [<snipe@snipe.net>]
+    * @see LocationsController::getDatatable() method that generates the JSON response
+    * @since [v1.0]
+    * @return View
+    */
     public function getIndex()
     {
         // Grab all the locations
@@ -43,10 +47,13 @@ class LocationsController extends Controller
 
 
     /**
-     * Location create.
-     *
-     * @return View
-     */
+    * Returns a form view used to create a new location.
+    *
+    * @author [A. Gianotto] [<snipe@snipe.net>]
+    * @see LocationsController::postCreate() method that validates and stores the data
+    * @since [v1.0]
+    * @return View
+    */
     public function getCreate()
     {
         $locations = \App\Models\Location::orderBy('name', 'ASC')->get();
@@ -62,10 +69,14 @@ class LocationsController extends Controller
 
 
     /**
-     * Location create form processing.
-     *
-     * @return Redirect
-     */
+    * Validates and stores a new location.
+    *
+    * @todo Check if a Form Request would work better here.
+    * @author [A. Gianotto] [<snipe@snipe.net>]
+    * @see LocationsController::getCreate() method that makes the form
+    * @since [v1.0]
+    * @return Redirect
+    */
     public function postCreate()
     {
 
@@ -89,7 +100,6 @@ class LocationsController extends Controller
         $location->zip              = e(Input::get('zip'));
         $location->user_id          = Auth::user()->id;
 
-    // Was the asset created?
         if ($location->save()) {
             // Redirect to the new location  page
             return Redirect::to("admin/settings/locations")->with('success', Lang::get('admin/locations/message.create.success'));
@@ -99,37 +109,41 @@ class LocationsController extends Controller
 
     }
 
+    /**
+    * Validates and stores a new location created via the Create Asset form modal.
+    *
+    * @todo Check if a Form Request would work better here.
+    * @author [A. Gianotto] [<snipe@snipe.net>]
+    * @see AssetsController::getCreate() method that makes the form
+    * @since [v1.0]
+    * @return String JSON
+    */
     public function store()
     {
 
         $new['currency']=Setting::first()->default_currency;
 
-      // create a new location instance
+        // create a new location instance
         $location = new Location();
 
-      // Save the location data
+        // Save the location data
         $location->name               = e(Input::get('name'));
-      // if (Input::get('parent_id')=='') {
-      //     $location->parent_id		= null;
-      // } else {
-      //     $location->parent_id		= e(Input::get('parent_id'));
-      // }
         $location->currency           =  Setting::first()->default_currency; //e(Input::get('currency'));
         $location->address            = ''; //e(Input::get('address'));
-      // $location->address2			= e(Input::get('address2'));
+        // $location->address2			= e(Input::get('address2'));
         $location->city               = e(Input::get('city'));
         $location->state          = '';//e(Input::get('state'));
         $location->country            = e(Input::get('country'));
-      // $location->zip    			= e(Input::get('zip'));
+        // $location->zip    			= e(Input::get('zip'));
         $location->user_id          = Auth::user()->id;
 
-      // Was the location created?
+        // Was the location created?
         if ($location->save()) {
             return JsonResponse::create($location);
 
         }
 
-      // failure
+        // failure
         $errors = $location->errors();
         return JsonResponse::create(["error" => "Failed validation: ".print_r($location->getErrors(), true)], 500);
 
@@ -137,11 +151,14 @@ class LocationsController extends Controller
 
 
     /**
-     * Location update.
-     *
-     * @param  int  $locationId
-     * @return View
-     */
+    * Makes a form view to edit location information.
+    *
+    * @author [A. Gianotto] [<snipe@snipe.net>]
+    * @see LocationsController::postCreate() method that validates and stores
+    * @param int $locationId
+    * @since [v1.0]
+    * @return View
+    */
     public function getEdit($locationId = null)
     {
         // Check if the location exists
@@ -160,11 +177,14 @@ class LocationsController extends Controller
 
 
     /**
-     * Location update form processing page.
-     *
-     * @param  int  $locationId
-     * @return Redirect
-     */
+    * Validates and stores updated location data from edit form.
+    *
+    * @author [A. Gianotto] [<snipe@snipe.net>]
+    * @see LocationsController::getEdit() method that makes the form view
+    * @param int $locationId
+    * @since [v1.0]
+    * @return Redirect
+    */
     public function postEdit($locationId = null)
     {
         // Check if the location exists
@@ -172,7 +192,6 @@ class LocationsController extends Controller
             // Redirect to the blogs management page
             return Redirect::to('admin/settings/locations')->with('error', Lang::get('admin/locations/message.does_not_exist'));
         }
-
 
         // Update the location data
         $location->name         = e(Input::get('name'));
@@ -201,11 +220,13 @@ class LocationsController extends Controller
     }
 
     /**
-     * Delete the given location.
-     *
-     * @param  int  $locationId
-     * @return Redirect
-     */
+    * Validates and deletes selected location.
+    *
+    * @author [A. Gianotto] [<snipe@snipe.net>]
+    * @param int $locationId
+    * @since [v1.0]
+    * @return Redirect
+    */
     public function getDelete($locationId)
     {
         // Check if the location exists
@@ -234,11 +255,16 @@ class LocationsController extends Controller
 
 
     /**
-    *  Get the location page detail page
+    * Returns a view that invokes the ajax tables which actually contains
+    * the content for the locations detail page.
     *
-    * @param  int  $locationID
+    * @author [A. Gianotto] [<snipe@snipe.net>]
+    * @see LocationsController::getDataViewUsers() method that returns JSON for location users
+    * @see LocationsController::getDataViewAssets() method that returns JSON for location assets
+    * @param int $locationId
+    * @since [v1.0]
     * @return View
-    **/
+    */
     public function getView($locationId = null)
     {
         $location = \App\Models\Location::find($locationId);
@@ -258,11 +284,13 @@ class LocationsController extends Controller
 
 
     /**
-    *  Get the locations API information to present to the location view page
+    * Returns the JSON response to populate the bootstrap tables on the locationa view.
     *
-    * @param  int  $locationID
-    * @return JSON
-    **/
+    * @author [A. Gianotto] [<snipe@snipe.net>]
+    * @see LocationsController::getIndex() method that returns JSON for location index
+    * @since [v1.0]
+    * @return View
+    */
     public function getDatatable()
     {
         $locations = \App\Models\Location::select(array('locations.id','locations.name','locations.address','locations.address2','locations.city','locations.state','locations.zip','locations.country','locations.parent_id','locations.currency'))->with('assets');
@@ -333,11 +361,15 @@ class LocationsController extends Controller
 
 
     /**
-    *  Get the location user listing information to present to the location details page
+    * Returns a JSON response that contains the users association with the
+    * selected location, to be used by the location detail view.
     *
-    * @param  int  $locationID
-    * @return JSON
-    **/
+    * @author [A. Gianotto] [<snipe@snipe.net>]
+    * @see LocationsController::getView() method that creates the display view
+    * @param int $locationId
+    * @since [v1.8]
+    * @return View
+    */
     public function getDataViewUsers($locationID)
     {
         $location = \App\Models\Location::find($locationID);
@@ -358,12 +390,17 @@ class LocationsController extends Controller
     }
 
 
-  /**
-  *  Get the location asset information to present to the location details page
-  *
-  * @param  int  $locationID
-  * @return JSON
-  **/
+    /**
+    * Returns a JSON response that contains the assets association with the
+    * selected location, to be used by the location detail view.
+    *
+    * @todo This is broken for accessories and consumables.
+    * @author [A. Gianotto] [<snipe@snipe.net>]
+    * @see LocationsController::getView() method that creates the display view
+    * @param int $locationId
+    * @since [v1.8]
+    * @return View
+    */
     public function getDataViewAssets($locationID)
     {
         $location = \App\Models\Location::find($locationID);
