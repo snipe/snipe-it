@@ -260,4 +260,19 @@ class Helper
 
 
     }
+
+
+    public static function checkUploadIsImage($file)
+    {
+        // Check if the file is an image, so we can show a preview
+        $finfo = @finfo_open(FILEINFO_MIME_TYPE); // return mime type ala mimetype extension
+        $filetype = @finfo_file($finfo, $file);
+        finfo_close($finfo);
+
+        if (($filetype=="image/jpeg") || ($filetype=="image/jpg")   || ($filetype=="image/png") || ($filetype=="image/bmp") || ($filetype=="image/gif")) {
+            return $filetype;
+        }
+
+        return false;
+    }
 }

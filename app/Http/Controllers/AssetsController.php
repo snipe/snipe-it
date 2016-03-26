@@ -1052,17 +1052,13 @@ class AssetsController extends Controller
             }
 
             $log = Actionlog::find($fileId);
-            $file = $log->get_src();
+            $file = $log->get_src('assets');
 
-            $filetype = Asset::checkUploadIsImage($file);
+            $filetype = Helper::checkUploadIsImage($file);
 
             if ($filetype) {
-
                   $contents = file_get_contents($file);
-                  $response = Response::make($contents);
-                  $response->header('Content-Type', $filetype);
-                  return $response;
-
+                  return Response::make($contents)->header('Content-Type', $filetype);
             } else {
                   return Response::download($file);
             }

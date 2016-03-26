@@ -12,7 +12,7 @@ require('laravel-elixir-codeception');
  */
 
 elixir(function(mix) {
-    mix.less(['AdminLTE.less','skins/skin-blue.less','overrides.less'],'public/assets/css');
+    mix.less(['AdminLTE.less','skins/skin-blue.less','ekko-lightbox.less','overrides.less'],'public/assets/css');
 
 
     mix.scripts([
@@ -30,6 +30,7 @@ elixir(function(mix) {
         'plugins/datepicker/bootstrap-datepicker.js',
         'plugins/select2/select2.js',
         'plugins/iCheck/icheck.js',
+        'ekko-lightbox.js',
         'snipeit.js',
         'app.js'
 

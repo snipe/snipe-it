@@ -4890,6 +4890,59 @@ fieldset[disabled] .btn-yahoo.active {
   background-color: #3b8ab8;
 }
 
+/*!
+ * Lightbox for Bootstrap 3 by @ashleydw
+ * https://github.com/ashleydw/lightbox
+ *
+ * License: https://github.com/ashleydw/lightbox/blob/master/LICENSE
+ */
+.ekko-lightbox-container {
+  position: relative;
+}
+.ekko-lightbox-nav-overlay {
+  z-index: 100;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+.ekko-lightbox-nav-overlay a {
+  opacity: 0;
+  transition: opacity 0.5s;
+  color: #fff;
+  font-size: 30px;
+  height: 100%;
+  width: 49%;
+  display: block;
+  text-shadow: 2px 2px 4px #000;
+  -webkit-filter: dropshadow(color=#000, offx=2, offy=2);
+  filter: dropshadow(color=#000, offx=2, offy=2);
+  z-index: 100;
+}
+.ekko-lightbox-nav-overlay a:empty {
+  width: 49%;
+}
+.ekko-lightbox a:hover {
+  opacity: 1;
+  text-decoration: none;
+}
+.ekko-lightbox .glyphicon-chevron-left {
+  padding-left: 15px;
+  float: left;
+  left: 0;
+  text-align: left;
+}
+.ekko-lightbox .glyphicon-chevron-right {
+  padding-right: 15px;
+  float: right;
+  right: 0;
+  text-align: right;
+}
+.ekko-lightbox .modal-footer {
+  text-align: left;
+}
+
 .skin-blue .main-header .logo {
   background-color: inherit;
 }

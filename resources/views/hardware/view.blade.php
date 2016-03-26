@@ -481,8 +481,9 @@
           <table class="table table-hover">
                 <thead>
                     <tr>
-                        <th class="col-md-5">{{ trans('general.notes') }}</th>
-                        <th class="col-md-5"><span class="line"></span>{{ trans('general.file_name') }}</th>
+                        <th class="col-md-4">{{ trans('general.notes') }}</th>
+                        <th class="col-md-2"></th>
+                        <th class="col-md-4"><span class="line"></span>{{ trans('general.file_name') }}</th>
                         <th class="col-md-2"></th>
                         <th class="col-md-2"></th>
                     </tr>
@@ -492,15 +493,17 @@
                         @foreach ($asset->uploads as $file)
                         <tr>
                             <td>
-                                @if ($file->note) {{ $file->note }}
+                                @if ($file->note)
+                                    {{ $file->note }}
                                 @endif
                             </td>
                             <td>
-                                 @if (\App\Models\Asset::checkUploadIsImage($file->get_src()))
-                                      <a class='preview' data-placement="top" data-image-url="showfile/{{ $file->id }}" data-container="body" data-toggle="popover" data-placement="top" >{{ $file->filename }}</a>
-                                 @else
-                                      {{ $file->filename }}
-                                 @endif
+                                @if ( \App\Helpers\Helper::checkUploadIsImage($file->get_src('assets')))
+                                     <a href="../{{ $asset->id }}/showfile/{{ $file->id }}" data-toggle="lightbox" data-type="image"><img src="../{{ $asset->id }}/showfile/{{ $file->id }}"" class="img-thumbnail" style="max-width: 50px;"></a>
+                                @endif
+                            </td>
+                            <td>
+                                {{ $file->filename }}
                             </td>
                             <td>
                                 @if ($file->filename)
@@ -535,13 +538,10 @@
 
 @section('moar_scripts')
 <script>
-      $('.preview').popover({
-          'trigger':'hover',
-          'html':true,
-          'content':function(){
-              return "<img src='"+$(this).data('imageUrl')+"' style='max-height: 350px; max-width: 250px;'>";
-          }
-      });
+    $(document).delegate('*[data-toggle="lightbox"]', 'click', function(event) {
+        event.preventDefault();
+        $(this).ekkoLightbox();
+    });
 </script>
 @stop
 
