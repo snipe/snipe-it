@@ -32,6 +32,16 @@ use App\Helpers\Helper;
 
 class AssetMaintenancesController extends Controller
 {
+
+    /**
+    * Checks for permissions for this action.
+    *
+    * @todo This should be replaced with middleware and/or policies
+    * @author  Vincent Sposato <vincent.sposato@gmail.com>
+    * @version v1.0
+    * @since [v1.8]
+    * @return View
+    */
     private static function getInsufficientPermissionsRedirect()
     {
         return redirect()->route('asset_maintenances')
@@ -39,11 +49,15 @@ class AssetMaintenancesController extends Controller
     }
 
     /**
-    * getIndex
+    *  Returns a view that invokes the ajax tables which actually contains
+    * the content for the asset maintenances listing, which is generated in getDatatable.
     *
-    * @return mixed
+    * @todo This should be replaced with middleware and/or policies
+    * @see AssetMaintenancesController::getDatatable() method that generates the JSON response
     * @author  Vincent Sposato <vincent.sposato@gmail.com>
     * @version v1.0
+    * @since [v1.8]
+    * @return View
     */
     public function getIndex()
     {
@@ -51,15 +65,16 @@ class AssetMaintenancesController extends Controller
         return View::make('asset_maintenances/index');
     }
 
-  /**
-       * getDatatable
-       * Gets the datatable for the index page
-       *
-       * @return mixed
-       * @author  Vincent Sposato <vincent.sposato@gmail.com>
-       * @version v1.0
-       */
 
+    /**
+    *  Generates the JSON response for asset maintenances listing view.
+    *
+    * @see AssetMaintenancesController::getIndex() method that generates view
+    * @author  Vincent Sposato <vincent.sposato@gmail.com>
+    * @version v1.0
+    * @since [v1.8]
+    * @return String JSON
+    */
     public function getDatatable()
     {
         $maintenances = AssetMaintenance::with('asset', 'supplier', 'asset.company')
@@ -95,7 +110,7 @@ class AssetMaintenancesController extends Controller
 
         foreach ($maintenances as $maintenance) {
 
-             $actions = '<nobr><a href="'.route('update/asset_maintenance', $maintenance->id).'" class="btn btn-warning btn-sm" style="margin-right:5px;"><i class="fa fa-pencil icon-white"></i></a><a data-html="false" class="btn delete-asset btn-danger btn-sm" data-toggle="modal" href="'.route('delete/asset_maintenance', $maintenance->id).'" data-content="'.Lang::get('admin/asset_maintenances/message.delete.confirm').'" data-title="'.Lang::get('general.delete').' '.htmlspecialchars($maintenance->title).'?" onClick="return false;"><i class="fa fa-trash icon-white"></i></a></nobr>';
+            $actions = '<nobr><a href="'.route('update/asset_maintenance', $maintenance->id).'" class="btn btn-warning btn-sm" style="margin-right:5px;"><i class="fa fa-pencil icon-white"></i></a><a data-html="false" class="btn delete-asset btn-danger btn-sm" data-toggle="modal" href="'.route('delete/asset_maintenance', $maintenance->id).'" data-content="'.Lang::get('admin/asset_maintenances/message.delete.confirm').'" data-title="'.Lang::get('general.delete').' '.htmlspecialchars($maintenance->title).'?" onClick="return false;"><i class="fa fa-trash icon-white"></i></a></nobr>';
 
             if (($maintenance->cost) && ($maintenance->asset->assetloc) &&  ($maintenance->asset->assetloc->currency!='')) {
                 $maintenance_cost = $maintenance->asset->assetloc->currency.$maintenance->cost;
@@ -103,7 +118,7 @@ class AssetMaintenancesController extends Controller
                 $maintenance_cost = $settings->default_currency.$maintenance->cost;
             }
 
-               $company = $maintenance->asset->company;
+            $company = $maintenance->asset->company;
 
             $rows[] = array(
                 'id'            => $maintenance->id,
@@ -127,14 +142,14 @@ class AssetMaintenancesController extends Controller
     }
 
     /**
-         * getCreate
-         *
-         * @param null $assetId
-         *
-         * @return mixed
-         * @author  Vincent Sposato <vincent.sposato@gmail.com>
-         * @version v1.0
-         */
+    *  Returns a form view to create a new asset maintenance.
+    *
+    * @see AssetMaintenancesController::postCreate() method that stores the data
+    * @author  Vincent Sposato <vincent.sposato@gmail.com>
+    * @version v1.0
+    * @since [v1.8]
+    * @return mixed
+    */
     public function getCreate($assetId = null)
     {
         // Prepare Asset Maintenance Type List
@@ -144,21 +159,22 @@ class AssetMaintenancesController extends Controller
         // Mark the selected asset, if it came in
         $selectedAsset = $assetId;
         // Get the possible assets using a left join to get a list of assets and some other helpful info
-        $asset               = Company::scopeCompanyables(DB::table('assets'), 'assets.company_id')
-                                 ->leftJoin('users', 'users.id', '=', 'assets.assigned_to')
-                                 ->leftJoin('models', 'assets.model_id', '=', 'models.id')
-                                 ->select(
-                                     'assets.id',
-                                     'assets.name',
-                                     'first_name',
-                                     'last_name',
-                                     'asset_tag',
-                                     DB::raw('concat(first_name," ",last_name) as full_name, assets.id as id, models.name as modelname')
-                                 )
-                                 ->whereNull('assets.deleted_at')
-                                 ->get();
+        $asset = Company::scopeCompanyables(DB::table('assets'), 'assets.company_id')
+                 ->leftJoin('users', 'users.id', '=', 'assets.assigned_to')
+                 ->leftJoin('models', 'assets.model_id', '=', 'models.id')
+                 ->select(
+                     'assets.id',
+                     'assets.name',
+                     'first_name',
+                     'last_name',
+                     'asset_tag',
+                     DB::raw('concat(first_name," ",last_name) as full_name, assets.id as id, models.name as modelname')
+                 )
+                 ->whereNull('assets.deleted_at')
+                 ->get();
         $asset_array         = json_decode(json_encode($asset), true);
         $asset_element[ '' ] = 'Please select an asset';
+
         // Build a list out of the data results
         for ($x = 0; $x < count($asset_array); $x++) {
 
@@ -170,6 +186,7 @@ class AssetMaintenancesController extends Controller
             $asset_element[ $asset_array[ $x ][ 'id' ] ] =
                 $asset_array[ $x ][ 'asset_tag' ] . ' - ' . $asset_array[ $x ][ 'name' ] . $full_name;
         }
+
         // Get Supplier List
         $supplier_list = Helper::suppliersList();
 
@@ -183,12 +200,14 @@ class AssetMaintenancesController extends Controller
     }
 
     /**
-         * postCreate
-         *
-         * @return mixed
-         * @author  Vincent Sposato <vincent.sposato@gmail.com>
-         * @version v1.0
-         */
+    *  Validates and stores the new asset maintenance
+    *
+    * @see AssetMaintenancesController::getCreate() method for the form
+    * @author  Vincent Sposato <vincent.sposato@gmail.com>
+    * @version v1.0
+    * @since [v1.8]
+    * @return mixed
+    */
     public function postCreate()
     {
 
@@ -268,14 +287,15 @@ class AssetMaintenancesController extends Controller
     }
 
     /**
-         * getEdit
-         *
-         * @param null $assetMaintenanceId
-         *
-         * @return mixed
-         * @author  Vincent Sposato <vincent.sposato@gmail.com>
-         * @version v1.0
-         */
+    *  Returns a form view to edit a selected asset maintenance.
+    *
+    * @see AssetMaintenancesController::postEdit() method that stores the data
+    * @author  Vincent Sposato <vincent.sposato@gmail.com>
+    * @param int $assetMaintenanceId
+    * @version v1.0
+    * @since [v1.8]
+    * @return mixed
+    */
     public function getEdit($assetMaintenanceId = null)
     {
         // Check if the asset maintenance exists
@@ -305,21 +325,22 @@ class AssetMaintenancesController extends Controller
                                 ] + AssetMaintenance::getImprovementOptions();
 
         // Get the possible assets using a left join to get a list of assets and some other helpful info
-        $asset               = Company::scopeCompanyables(DB::table('assets'), 'assets.company_id')
-                                 ->leftJoin('users', 'users.id', '=', 'assets.assigned_to')
-                                 ->leftJoin('models', 'assets.model_id', '=', 'models.id')
-                                 ->select(
-                                     'assets.id',
-                                     'assets.name',
-                                     'first_name',
-                                     'last_name',
-                                     'asset_tag',
-                                     DB::raw('concat(first_name," ",last_name) as full_name, assets.id as id, models.name as modelname')
-                                 )
-                                 ->whereNull('assets.deleted_at')
-                                 ->get();
+        $asset = Company::scopeCompanyables(DB::table('assets'), 'assets.company_id')
+                 ->leftJoin('users', 'users.id', '=', 'assets.assigned_to')
+                 ->leftJoin('models', 'assets.model_id', '=', 'models.id')
+                 ->select(
+                     'assets.id',
+                     'assets.name',
+                     'first_name',
+                     'last_name',
+                     'asset_tag',
+                     DB::raw('concat(first_name," ",last_name) as full_name, assets.id as id, models.name as modelname')
+                 )
+                 ->whereNull('assets.deleted_at')
+                 ->get();
         $asset_array         = json_decode(json_encode($asset), true);
         $asset_element[ '' ] = 'Please select an asset';
+
         // Build a list out of the data results
         for ($x = 0; $x < count($asset_array); $x++) {
 
@@ -345,14 +366,15 @@ class AssetMaintenancesController extends Controller
     }
 
     /**
-         * postEdit
-         *
-         * @param null $assetMaintenanceId
-         *
-         * @return mixed
-         * @author  Vincent Sposato <vincent.sposato@gmail.com>
-         * @version v1.0
-         */
+    *  Validates and stores an update to an asset maintenance
+    *
+    * @see AssetMaintenancesController::postEdit() method that stores the data
+    * @author  Vincent Sposato <vincent.sposato@gmail.com>
+    * @param int $assetMaintenanceId
+    * @version v1.0
+    * @since [v1.8]
+    * @return mixed
+    */
     public function postEdit($assetMaintenanceId = null)
     {
 
@@ -400,7 +422,7 @@ class AssetMaintenancesController extends Controller
             return static::getInsufficientPermissionsRedirect();
         }
 
-      // Save the asset maintenance data
+        // Save the asset maintenance data
         $assetMaintenance->asset_id               = e(Input::get('asset_id'));
         $assetMaintenance->asset_maintenance_type = e(Input::get('asset_maintenance_type'));
         $assetMaintenance->title                  = e(Input::get('title'));
@@ -441,14 +463,14 @@ class AssetMaintenancesController extends Controller
     }
 
     /**
-         * getDelete
-         *
-         * @param $assetMaintenanceId
-         *
-         * @return mixed
-         * @author  Vincent Sposato <vincent.sposato@gmail.com>
-         * @version v1.0
-         */
+    *  Delete an asset maintenance
+    *
+    * @author  Vincent Sposato <vincent.sposato@gmail.com>
+    * @param int $assetMaintenanceId
+    * @version v1.0
+    * @since [v1.8]
+    * @return mixed
+    */
     public function getDelete($assetMaintenanceId)
     {
         // Check if the asset maintenance exists
@@ -469,14 +491,14 @@ class AssetMaintenancesController extends Controller
     }
 
     /**
-         * getView
-         *
-         * @param $assetMaintenanceId
-         *
-         * @return mixed
-         * @author  Vincent Sposato <vincent.sposato@gmail.com>
-         * @version v1.0
-         */
+    *  View an asset maintenance
+    *
+    * @author  Vincent Sposato <vincent.sposato@gmail.com>
+    * @param int $assetMaintenanceId
+    * @version v1.0
+    * @since [v1.8]
+    * @return View
+    */
     public function getView($assetMaintenanceId)
     {
         // Check if the asset maintenance exists

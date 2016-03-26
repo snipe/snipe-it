@@ -23,12 +23,16 @@ use View;
 
 class CategoriesController extends Controller
 {
-    /**
-     * Show a list of all the categories.
-     *
-     * @return View
-     */
 
+    /**
+    * Returns a view that invokes the ajax tables which actually contains
+    * the content for the categories listing, which is generated in getDatatable.
+    *
+    * @author [A. Gianotto] [<snipe@snipe.net>]
+    * @see CategoriesController::getDatatable() method that generates the JSON response
+    * @since [v1.0]
+    * @return View
+    */
     public function getIndex()
     {
         // Show the page
@@ -37,10 +41,13 @@ class CategoriesController extends Controller
 
 
     /**
-     * Category create.
-     *
-     * @return View
-     */
+    * Returns a form view to create a new category.
+    *
+    * @author [A. Gianotto] [<snipe@snipe.net>]
+    * @see CategoriesController::postCreate() method that stores the data
+    * @since [v1.0]
+    * @return View
+    */
     public function getCreate()
     {
         // Show the page
@@ -51,10 +58,13 @@ class CategoriesController extends Controller
 
 
     /**
-     * Category create form processing.
-     *
-     * @return Redirect
-     */
+    * Validates and stores the new category data.
+    *
+    * @author [A. Gianotto] [<snipe@snipe.net>]
+    * @see CategoriesController::getCreate() method that makes the form.
+    * @since [v1.0]
+    * @return Redirect
+    */
     public function postCreate()
     {
 
@@ -87,11 +97,14 @@ class CategoriesController extends Controller
     }
 
     /**
-     * Category update.
-     *
-     * @param  int  $categoryId
-     * @return View
-     */
+    * Returns a view that makes a form to update a category.
+    *
+    * @author [A. Gianotto] [<snipe@snipe.net>]
+    * @see CategoriesController::postEdit() method saves the data
+    * @param int $categoryId
+    * @since [v1.0]
+    * @return View
+    */
     public function getEdit($categoryId = null)
     {
         // Check if the category exists
@@ -113,11 +126,14 @@ class CategoriesController extends Controller
 
 
     /**
-     * Category update form processing page.
-     *
-     * @param  int  $categoryId
-     * @return Redirect
-     */
+    * Validates and stores the updated category data.
+    *
+    * @author [A. Gianotto] [<snipe@snipe.net>]
+    * @see CategoriesController::getEdit() method that makes the form.
+    * @param int $categoryId
+    * @since [v1.0]
+    * @return Redirect
+    */
     public function postEdit($categoryId = null)
     {
         // Check if the blog post exists
@@ -149,11 +165,13 @@ class CategoriesController extends Controller
     }
 
     /**
-     * Delete the given category.
-     *
-     * @param  int  $categoryId
-     * @return Redirect
-     */
+    * Validates and marks a category as deleted.
+    *
+    * @author [A. Gianotto] [<snipe@snipe.net>]
+    * @since [v1.0]
+    * @param int $categoryId
+    * @return Redirect
+    */
     public function getDelete($categoryId)
     {
         // Check if the category exists
@@ -181,14 +199,18 @@ class CategoriesController extends Controller
 
 
     /**
-    *  Get the asset information to present to the category view page
+    * Returns a view that invokes the ajax tables which actually contains
+    * the content for the categories detail view, which is generated in getDataView.
     *
-    * @param  int  $assetId
+    * @author [A. Gianotto] [<snipe@snipe.net>]
+    * @see CategoriesController::getDataView() method that generates the JSON response
+    * @param int $categoryId
+    * @since [v1.8]
     * @return View
-    **/
-    public function getView($categoryID = null)
+    */
+    public function getView($categoryId = null)
     {
-        $category = Category::find($categoryID);
+        $category = Category::find($categoryId);
 
         if (isset($category->id)) {
                 return View::make('categories/view', compact('category'));
@@ -203,6 +225,15 @@ class CategoriesController extends Controller
 
     }
 
+    /**
+    * Returns a JSON response with the data to populate the bootstrap table on the
+    * cateory listing page.
+    *
+    * @author [A. Gianotto] [<snipe@snipe.net>]
+    * @see CategoriesController::getIndex() method that generates the view
+    * @since [v1.8]
+    * @return String JSON
+    */
     public function getDatatable()
     {
         // Grab all the categories
@@ -255,6 +286,15 @@ class CategoriesController extends Controller
         return $data;
     }
 
+    /**
+    * Returns JSON response that contains the data for the category detail page.
+    *
+    * @author [A. Gianotto] [<snipe@snipe.net>]
+    * @see CategoriesController::getView() method that generates the view
+    * @param int $categoryId
+    * @since [v1.8]
+    * @return String JSON
+    */
     public function getDataView($categoryID)
     {
 
