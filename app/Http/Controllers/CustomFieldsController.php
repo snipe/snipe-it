@@ -15,7 +15,7 @@ use App\Models\CustomField;
 use Input;
 use Validator;
 use Redirect;
-use AssetModel;
+use App\Models\AssetModel;
 use Lang;
 use Auth;
 
@@ -192,7 +192,7 @@ class CustomFieldsController extends Controller
         //
         $fieldset=CustomFieldset::find($id);
 
-        $models=\App\Models\AssetModel::where("fieldset_id", "=", $id);
+        $models = AssetModel::where("fieldset_id", "=", $id);
         if ($models->count()==0) {
             $fieldset->delete();
             return Redirect::route("admin.custom_fields.index")->with("success", Lang::get('admin/custom_fields/message.fieldset.delete.success'));

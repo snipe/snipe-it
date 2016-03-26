@@ -579,7 +579,7 @@ class ReportsController extends Controller
     public function getAssetMaintenancesReport()
     {
         // Grab all the improvements
-        $assetMaintenances = \App\Models\AssetMaintenance::with('asset', 'supplier', 'asset.company')
+        $assetMaintenances = AssetMaintenance::with('asset', 'supplier', 'asset.company')
                                               ->orderBy('created_at', 'DESC')
                                               ->get();
 

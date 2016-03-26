@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use App\Http\Requests\Request;
+use App\Models\AssetModel;
 
 class AssetRequest extends Request
 {
@@ -37,7 +38,7 @@ class AssetRequest extends Request
           'status'          => 'integer',
         ];
 
-        $model = \App\Models\AssetModel::find($this->request->get('model_id'));
+        $model = AssetModel::find($this->request->get('model_id'));
 
         if ($model->fieldset)
         {

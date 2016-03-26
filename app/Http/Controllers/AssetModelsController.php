@@ -142,7 +142,7 @@ class AssetModelsController extends Controller
     public function store()
     {
       //COPYPASTA!!!! FIXME
-        $model = new \App\Models\AssetModel;
+        $model = new AssetModel;
 
         $settings=Input::all();
         $settings['eol']=0;

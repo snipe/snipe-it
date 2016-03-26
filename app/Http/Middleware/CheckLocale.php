@@ -5,6 +5,7 @@ namespace App\Http\Middleware;
 use Closure;
 use Config;
 use Route;
+use App\Models\Setting;
 
 class CheckLocale
 {
@@ -25,8 +26,8 @@ class CheckLocale
             \App::setLocale($request->user()->locale);
 
         // App setting preference
-        } elseif ((\App\Models\Setting::getSettings()) &&  (\App\Models\Setting::getSettings()->locale!='')) {
-            \App::setLocale(\App\Models\Setting::getSettings()->locale);
+        } elseif ((Setting::getSettings()) &&  (Setting::getSettings()->locale!='')) {
+            \App::setLocale(Setting::getSettings()->locale);
 
         // Default app setting
         } else {

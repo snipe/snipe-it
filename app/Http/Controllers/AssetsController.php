@@ -136,7 +136,7 @@ class AssetsController extends Controller
 
         $asset->name                    = e(Input::get('name'));
         $asset->serial                  = e(Input::get('serial'));
-        $asset->company_id              = \App\Models\Company::getIdForCurrentUser(e(Input::get('company_id')));
+        $asset->company_id              = Company::getIdForCurrentUser(e(Input::get('company_id')));
         $asset->model_id                = e(Input::get('model_id'));
         $asset->order_number            = e(Input::get('order_number'));
         $asset->notes                   = e(Input::get('notes'));
@@ -799,7 +799,7 @@ class AssetsController extends Controller
                 $fixed_filename = str_replace(' ', '-', $file->getClientOriginalName());
                 $file->move($path, $date.'-'.$fixed_filename);
                 $name = date('Y-m-d-his').'-'.$fixed_filename;
-                $filesize = \App\Models\Setting::fileSizeConvert(filesize($path.'/'.$name));
+                $filesize = Setting::fileSizeConvert(filesize($path.'/'.$name));
                 $results[] = compact('name', 'filesize');
             }
 
@@ -1115,7 +1115,7 @@ class AssetsController extends Controller
                 $settings = Setting::getSettings();
                 if ($settings->qr_code=='1') {
 
-                    $assets = \App\Models\Asset::find($asset_ids);
+                    $assets = Asset::find($asset_ids);
                     $assetcount = count($assets);
                     $count = 0;
 

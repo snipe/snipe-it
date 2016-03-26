@@ -1,5 +1,6 @@
 <?php
-
+use App\Models\Statuslabel;
+use App\Models\Location;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,7 +23,7 @@ Route::group([ 'prefix' => 'api', 'middleware' => 'auth' ], function () {
         Route::resource('/', 'StatuslabelsController');
         Route::get('{statuslabelId}/deployable', function ($statuslabelId) {
 
-            $statuslabel = \App\Models\Statuslabel::find($statuslabelId);
+            $statuslabel = Statuslabel::find($statuslabelId);
             if (( $statuslabel->deployable == '1' ) && ( $statuslabel->pending != '1' )
                 && ( $statuslabel->archived != '1' )
             ) {
@@ -109,7 +110,7 @@ Route::group([ 'prefix' => 'api', 'middleware' => 'auth' ], function () {
         Route::resource('/', 'LocationsController');
         Route::get('{locationID}/check', function ($locationID) {
 
-            $location = \App\Models\Location::find($locationID);
+            $location = Location::find($locationID);
 
             return $location;
         });

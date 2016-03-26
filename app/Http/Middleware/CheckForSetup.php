@@ -5,6 +5,7 @@ namespace App\Http\Middleware;
 use Closure;
 use Config;
 use Route;
+use App\Models\User;
 
 class CheckForSetup
 {
@@ -12,7 +13,7 @@ class CheckForSetup
     {
 
         try {
-            $usercount = \App\Models\User::withTrashed()->count();
+            $usercount = User::withTrashed()->count();
             if (($usercount > 0) && (Route::is('setup*'))) {
                 return redirect(config('app.url'));
             } else {

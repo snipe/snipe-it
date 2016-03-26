@@ -16,6 +16,7 @@ use Redirect;
 use App\Models\Setting;
 use Validator;
 use View;
+use App\Models\Group;
 
 class GroupsController extends Controller
 {
@@ -37,7 +38,7 @@ class GroupsController extends Controller
      */
     public function getCreate()
     {
-        $group = new \App\Models\Group;
+        $group = new Group;
         // Get all the available permissions
         $permissions = config('permissions');
 
@@ -56,7 +57,7 @@ class GroupsController extends Controller
     public function postCreate()
     {
         // create a new group instance
-        $group = new \App\Models\Group();
+        $group = new Group();
         // Update the consumable data
         $group->name = e(Input::get('name'));
 
@@ -79,7 +80,7 @@ class GroupsController extends Controller
      */
     public function getEdit($id = null)
     {
-        $group = \App\Models\Group::find($id);
+        $group = Group::find($id);
         $group->name = e(Input::get('name'));
         $group->permissions = json_decode($group->permissions, true);
         $permissions = config('permissions');
@@ -97,7 +98,7 @@ class GroupsController extends Controller
     public function postEdit($id = null)
     {
 
-        if (!$group = \App\Models\Group::find($id)) {
+        if (!$group = Group::find($id)) {
             return Redirect::route('groups')->with('error', Lang::get('admin/groups/message.group_not_found', compact('id')));
 
         }
@@ -169,7 +170,7 @@ class GroupsController extends Controller
         }
 
         // Grab all the groups
-        $groups = \App\Models\Group::with('users')->orderBy('name', 'ASC');
+        $groups = Group::with('users')->orderBy('name', 'ASC');
         //$users = Company::scopeCompanyables($users);
 
         if (Input::has('search')) {

@@ -23,7 +23,7 @@ use Response;
 use Artisan;
 use Crypt;
 use Mail;
-use App\User;
+use App\Models\User;
 use App\Http\Requests\SetupUserRequest;
 use App\Http\Requests\SettingRequest;
 
@@ -165,7 +165,7 @@ class SettingsController extends Controller
     {
 
 
-        $user = new \App\Models\User;
+        $user = new User;
         $user->first_name  = $data['first_name']= e(Input::get('first_name'));
         $user->last_name = e(Input::get('last_name'));
         $user->email = $data['email'] = e(Input::get('email'));
@@ -174,7 +174,7 @@ class SettingsController extends Controller
         $user->password = bcrypt(Input::get('password'));
         $data['password'] =  Input::get('password');
 
-        $settings = new \App\Models\Setting;
+        $settings = new Setting;
         $settings->site_name = e(Input::get('site_name'));
         $settings->alert_email = e(Input::get('email'));
         $settings->alerts_enabled = 1;

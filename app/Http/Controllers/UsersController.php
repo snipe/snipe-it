@@ -105,7 +105,7 @@ class UsersController extends Controller
     public function postCreate(SetupUserRequest $request)
     {
 
-        $user = new \App\Models\User;
+        $user = new User;
         $user->first_name  = $data['first_name']= e(Input::get('first_name'));
         $user->last_name = e(Input::get('last_name'));
         $user->email = $data['email'] = e(Input::get('email'));
@@ -1201,8 +1201,8 @@ class UsersController extends Controller
 
                 // User exists
                 $item["createorupdate"] = 'updated';
-                if (!$user = \App\Models\User::where('username', $item["username"])->first()) {
-                    $user = new \App\Models\User;
+                if (!$user = User::where('username', $item["username"])->first()) {
+                    $user = new User;
                     $item["createorupdate"] = 'created';
                 }
 

@@ -160,7 +160,7 @@ class LicensesController extends Controller
             $insertedId = $license->id;
           // Save the license seat data
             for ($x=0; $x<$license->seats; $x++) {
-                $license_seat = new \App\Models\LicenseSeat();
+                $license_seat = new LicenseSeat();
                 $license_seat->license_id       = $insertedId;
                 $license_seat->user_id          = Auth::user()->id;
                 $license_seat->assigned_to      = null;
@@ -785,7 +785,7 @@ class LicensesController extends Controller
 
         if (isset($license->id)) {
 
-            if (!\App\Models\Company::isCurrentUserHasAccess($license)) {
+            if (!Company::isCurrentUserHasAccess($license)) {
                 return Redirect::to('admin/licenses')->with('error', Lang::get('general.insufficient_permissions'));
             }
             return View::make('licenses/view', compact('license'));

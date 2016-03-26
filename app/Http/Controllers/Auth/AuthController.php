@@ -5,8 +5,8 @@ namespace App\Http\Controllers\Auth;
 use Validator;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\ThrottlesLogins;
-//use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
-//use Socialite;
+use App\Models\Setting;
+use App\Models\User;
 use Auth;
 use Config;
 use Illuminate\Http\Request;
@@ -14,7 +14,6 @@ use Input;
 use Redirect;
 use Log;
 use View;
-use App\Models\User;
 
 class AuthController extends Controller
 {
@@ -77,13 +76,13 @@ class AuthController extends Controller
     function ldap($username, $password, $returnUser = false)
     {
 
-        $ldaphost    = \App\Models\Setting::getSettings()->ldap_server;
-        $ldaprdn     = \App\Models\Setting::getSettings()->ldap_uname;
-        $ldappass    = \Crypt::decrypt(\App\Models\Setting::getSettings()->ldap_pword);
-        $baseDn      = \App\Models\Setting::getSettings()->ldap_basedn;
-        $filterQuery = \App\Models\Setting::getSettings()->ldap_auth_filter_query . $username;
-        $ldapversion = \App\Models\Setting::getSettings()->ldap_version;
-        $ldap_server_cert_ignore = \App\Models\Setting::getSettings()->ldap_server_cert_ignore;
+        $ldaphost    = Setting::getSettings()->ldap_server;
+        $ldaprdn     = Setting::getSettings()->ldap_uname;
+        $ldappass    = \Crypt::decrypt(Setting::getSettings()->ldap_pword);
+        $baseDn      = Setting::getSettings()->ldap_basedn;
+        $filterQuery = Setting::getSettings()->ldap_auth_filter_query . $username;
+        $ldapversion = Setting::getSettings()->ldap_version;
+        $ldap_server_cert_ignore = Setting::getSettings()->ldap_server_cert_ignore;
 
         // If we are ignoring the SSL cert we need to setup the environment variable
         // before we create the connection
@@ -128,11 +127,11 @@ class AuthController extends Controller
     function createUserFromLdap($ldapatttibutes)
     {
         //Get LDAP attribute config
-        $ldap_result_username = \App\Models\Setting::getSettings()->ldap_username_field;
-        $ldap_result_emp_num = \App\Models\Setting::getSettings()->ldap_emp_num;
-        $ldap_result_last_name = \App\Models\Setting::getSettings()->ldap_lname_field;
-        $ldap_result_first_name = \App\Models\Setting::getSettings()->ldap_fname_field;
-        $ldap_result_email = \App\Models\Setting::getSettings()->ldap_email;
+        $ldap_result_username = Setting::getSettings()->ldap_username_field;
+        $ldap_result_emp_num = Setting::getSettings()->ldap_emp_num;
+        $ldap_result_last_name = Setting::getSettings()->ldap_lname_field;
+        $ldap_result_first_name = Setting::getSettings()->ldap_fname_field;
+        $ldap_result_email = Setting::getSettings()->ldap_email;
 
         //Get LDAP user data
         $item = array();
@@ -157,7 +156,7 @@ class AuthController extends Controller
               'permissions' => ["user" => 1], //'{"user":1}',
               'notes' => 'Imported from LDAP'
             );
-            \App\Models\User::save($newuser);
+            User::save($newuser);
 
         } else {
             throw new Cartalyst\Sentry\Users\UserNotFoundException();
@@ -186,11 +185,11 @@ class AuthController extends Controller
         }
 
         // Should we even check for LDAP users?
-        if (\App\Models\Setting::getSettings()->ldap_enabled=='1') {
+        if (Setting::getSettings()->ldap_enabled=='1') {
 
             LOG::debug("LDAP is enabled.");
           // Check if the user exists in the database
-            $user = \App\Models\User::where('username', '=', Input::get('username'))->whereNull('deleted_at')->first();
+            $user = User::where('username', '=', Input::get('username'))->whereNull('deleted_at')->first();
             LOG::debug("Auth lookup complete");
 
 
@@ -213,7 +212,7 @@ class AuthController extends Controller
 
                 if ($this->ldap(Input::get('username'), Input::get('password'))) {
                     LOG::debug("Valid LDAP login. Updating the local data.");
-                    $user = \App\Models\User::find($user->id); //need the Sentry object, not the Eloquent object, to access critical password hashing functions
+                    $user = User::find($user->id); //need the Sentry object, not the Eloquent object, to access critical password hashing functions
                     $user->password = bcrypt(Input::get('password'));
                     $user->ldap_import = 1;
                     $user->save();
