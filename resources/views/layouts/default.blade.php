@@ -228,13 +228,8 @@
                           <a href="{{ route('profile') }}">
                              <i class="fa fa-user fa-fw"></i> @lang('general.editprofile')
                          </a>
-                          <a href="{{ route('change-password') }}">
-                             <i class="fa fa-lock fa-fw"></i> @lang('general.changepassword')
-                         </a>
-                         <a href="{{ route('change-email') }}">
-                             <i class="fa fa-envelope fa-fw"></i> @lang('general.changeemail')
-                         </a>
                      </li>
+                     <li class="divider"></li>
                      <li>
                          <a href="{{ url('/logout') }}">
                              <i class="fa fa-sign-out fa-fw"></i>

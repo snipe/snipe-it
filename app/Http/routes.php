@@ -676,16 +676,8 @@ Route::group([ 'prefix' => 'account', 'middleware' => 'auth' ], function () {
     Route::get('profile', [ 'as' => 'profile', 'uses' => 'ProfileController@getIndex' ]);
     Route::post('profile', 'ProfileController@postIndex');
 
-    # Change Password
-    Route::get('change-password', [ 'as' => 'change-password', 'uses' => 'ChangePasswordController@getIndex' ]);
-    Route::post('change-password', 'ChangePasswordController@postIndex');
-
     # View Assets
     Route::get('view-assets', [ 'as' => 'view-assets', 'uses' => 'ViewAssetsController@getIndex' ]);
-
-    # Change Email
-    Route::get('change-email', [ 'as' => 'change-email', 'uses' => 'ChangeEmailController@getIndex' ]);
-    Route::post('change-email', 'ChangeEmailController@postIndex');
 
     # Accept Asset
     Route::get(
