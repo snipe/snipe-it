@@ -2,26 +2,26 @@
 
 return array(
 
-    'does_not_exist' => 'Location does not exist.',
-    'assoc_users'	 => 'This location is currently associated with at least one user and cannot be deleted. Please update your users to no longer reference this location and try again. ',
-    'assoc_assets'	 => 'This location is currently associated with at least one asset and cannot be deleted. Please update your assets to no longer reference this location and try again. ',
-    'assoc_child_loc'	 => 'This location is currently the parent of at least one child location and cannot be deleted. Please update your locations to no longer reference this location and try again. ',
+    'does_not_exist' => 'המיקום אינו קיים.',
+    'assoc_users'	 => 'המיקום משויך לפחות למשתמש אחד ולכן לא ניתן למחוק אותו. אנא עדכן את המשתמשים כך שלא יהיה אף משתמש משויך למיקום זה ונסה שנית. ',
+    'assoc_assets'	 => 'המיקום משויך לפחות לפריט אחד ולכן לא ניתן למחוק אותו. אנא עדכן את הפריטים כך שלא יהיה אף פריט משויך למיקום זה ונסה שנית. ',
+    'assoc_child_loc'	 => 'למיקום זה מוגדרים תתי-מיקומים ולכן לא ניתן למחוק אותו. אנא עדכן את המיקומים כך שלא שמיקום זה לא יכיל תתי מיקומים ונסה שנית. ',
 
 
     'create' => array(
-        'error'   => 'Location was not created, please try again.',
-        'success' => 'Location created successfully.'
+        'error'   => 'המיקום לא נוצר, אנא נסה שנית.',
+        'success' => 'המיקום נוצר בהצלחה.'
     ),
 
     'update' => array(
-        'error'   => 'Location was not updated, please try again',
-        'success' => 'Location updated successfully.'
+        'error'   => 'המיקום לא עודכן, אנא נסה שנית',
+        'success' => 'המיקום עודכן בהצלחה.'
     ),
 
     'delete' => array(
-        'confirm'   	=> 'Are you sure you wish to delete this location?',
-        'error'   => 'There was an issue deleting the location. Please try again.',
-        'success' => 'The location was deleted successfully.'
+        'confirm'   	=> 'האם אתה בטוח שברצונך למחוק את המיקום?',
+        'error'   => 'אירעה תקלה במחיקת המיקום. אנא נסה שנית.',
+        'success' => 'המיקום נמחק בהצלחה.'
     )
 
 );

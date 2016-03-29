@@ -53,7 +53,7 @@ return array(
         'error'   		=> 'Asset konnte nicht eingebucht werden. Bitte versuchen Sie es erneut',
         'success' 		=> 'Asset wurde erfolgreich eingebucht.',
         'user_does_not_exist' => 'Dieser Benutzer existiert nicht. Bitte versuchen Sie es erneut.',
-        'already_checked_in'  => 'That asset is already checked in.',
+        'already_checked_in'  => 'Dieses Asset ist bereits eingebucht.',
 
     ),
 

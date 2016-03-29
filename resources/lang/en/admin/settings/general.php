@@ -49,7 +49,7 @@ return array(
     'load_remote_text'          => 'Remote Scripts',
     'load_remote_help_text'		=> 'This Snipe-IT install can load scripts from the outside world.',
     'logo'                    	=> 'Logo',
-    'full_multiple_companies_support_help_text' => 'Restricts users (including admins) assigned to companies to their company\'s assets.',
+    'full_multiple_companies_support_help_text' => 'Restricting users (including admins) assigned to companies to their company\'s assets.',
     'full_multiple_companies_support_text' => 'Full Multiple Companies Support',
     'optional'					=> 'optional',
     'per_page'                  => 'Results Per Page',

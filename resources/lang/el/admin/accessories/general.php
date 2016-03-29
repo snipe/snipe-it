@@ -17,7 +17,7 @@ return array(
     'no_default_eula'					=> 'No primary default EULA found. Add one in Settings.',
     'order'					=> 'Order Number',
     'qty'  								=> 'QTY',
-    'total'  							=> 'Total',
+    'total'  							=> 'Σύνολο',
     'remaining'  						=> 'Avail',
     'update'  							=> 'Update Accessory',
     'use_default_eula'					=> 'Use the <a href="#" data-toggle="modal" data-target="#eulaModal">primary default EULA</a> instead.',

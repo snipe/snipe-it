@@ -16,9 +16,9 @@ return array(
     ),
 
     'delete' => array(
-        'confirm'   => 'Are you sure you wish to delete this accessory?',
-        'error'   => 'There was an issue deleting the accessory. Please try again.',
-        'success' => 'The accessory was deleted successfully.'
+        'confirm'   => 'Sind Sie sicher, dass Sie diese Ticket-Notiz löschen möchten?',
+        'error'   => 'Beim löschen dieses Zubehörs ist ein Problem aufgetreten. Bitte versuchen sie es erneut.',
+        'success' => 'Das Zubehör wurde erfolgreich gelöscht.'
     ),
 
      'checkout' => array(
