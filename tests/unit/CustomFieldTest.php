@@ -14,29 +14,6 @@ class CustomFieldTest extends \Codeception\TestCase\Test
     $customfield = new CustomField();
   }
 
-  public function testBadIP() {
-    $customfield = factory(CustomField::class, 'customfield-ip')->make();
-    $values = [
-      'name' => $customfield->name,
-      'format' => $customfield->format,
-      'element' => $customfield->element,
-    ];
-
-    CustomField::create($values);
-    $this->assertFalse($customfield->check_format("300.2.3.4"));
-  }
-
-  public function testGoodIP() {
-    $customfield = factory(CustomField::class, 'customfield-ip')->make();
-    $values = [
-      'name' => $customfield->name,
-      'format' => $customfield->format,
-      'element' => $customfield->element,
-    ];
-    CustomField::create($values);
-    $this->assertTrue($customfield->check_format("1.2.3.4"));
-  }
-
   public function testFormat() {
     $customfield = factory(CustomField::class, 'customfield-ip')->make();
     $values = [
