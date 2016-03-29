@@ -17,16 +17,38 @@ use View;
 
 final class CompaniesController extends Controller
 {
+
+    /**
+    * Returns view to display listing of companies.
+    *
+    * @author [Abdullah Alansari] [<ahimta@gmail.com>]
+    * @since [v1.8]
+    * @return View
+    */
     public function getIndex()
     {
         return View::make('companies/index')->with('companies', Company::all());
     }
 
+    /**
+    * Returns view to create a new company.
+    *
+    * @author [Abdullah Alansari] [<ahimta@gmail.com>]
+    * @since [v1.8]
+    * @return View
+    */
     public function getCreate()
     {
         return View::make('companies/edit')->with('company', new Company);
     }
 
+    /**
+    * Save data from new company form.
+    *
+    * @author [Abdullah Alansari] [<ahimta@gmail.com>]
+    * @since [v1.8]
+    * @return Redirect
+    */
     public function postCreate()
     {
         $company = new Company;
@@ -42,6 +64,15 @@ final class CompaniesController extends Controller
 
     }
 
+
+    /**
+    * Return form to edit existing company.
+    *
+    * @author [Abdullah Alansari] [<ahimta@gmail.com>]
+    * @since [v1.8]
+    * @param int $companyId
+    * @return View
+    */
     public function getEdit($companyId)
     {
         if (is_null($company = Company::find($companyId))) {
@@ -52,6 +83,14 @@ final class CompaniesController extends Controller
         }
     }
 
+    /**
+    * Save data from edit company form.
+    *
+    * @author [Abdullah Alansari] [<ahimta@gmail.com>]
+    * @since [v1.8]
+    * @param int $companyId
+    * @return Redirect
+    */
     public function postEdit($companyId)
     {
         if (is_null($company = Company::find($companyId))) {
@@ -72,6 +111,14 @@ final class CompaniesController extends Controller
         }
     }
 
+    /**
+    * Delete company
+    *
+    * @author [Abdullah Alansari] [<ahimta@gmail.com>]
+    * @since [v1.8]
+    * @param int $companyId
+    * @return Redirect
+    */
     public function postDelete($companyId)
     {
         if (is_null($company = Company::find($companyId))) {

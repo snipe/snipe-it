@@ -29,11 +29,13 @@ use View;
 class ConsumablesController extends Controller
 {
     /**
-     * Show a list of all the consumables.
-     *
-     * @return View
-     */
-
+    * Return a view to display component information.
+    *
+    * @author [A. Gianotto] [<snipe@snipe.net>]
+    * @see ConsumablesController::getDatatable() method that generates the JSON response
+    * @since [v1.0]
+    * @return View
+    */
     public function getIndex()
     {
         return View::make('consumables/index');
@@ -41,10 +43,13 @@ class ConsumablesController extends Controller
 
 
     /**
-     * Consumable create.
-     *
-     * @return View
-     */
+    * Return a view to display the form view to create a new consumable
+    *
+    * @author [A. Gianotto] [<snipe@snipe.net>]
+    * @see ConsumablesController::postCreate() method that stores the form data
+    * @since [v1.0]
+    * @return View
+    */
     public function getCreate()
     {
         // Show the page
@@ -61,17 +66,16 @@ class ConsumablesController extends Controller
 
 
     /**
-     * Consumable create form processing.
-     *
-     * @return Redirect
-     */
+    * Validate and store new consumable data.
+    *
+    * @author [A. Gianotto] [<snipe@snipe.net>]
+    * @see ConsumablesController::getCreate() method that returns the form view
+    * @since [v1.0]
+    * @return Redirect
+    */
     public function postCreate()
     {
-
-        // create a new model instance
         $consumable = new Consumable();
-
-        // Update the consumable data
         $consumable->name                   = e(Input::get('name'));
         $consumable->category_id            = e(Input::get('category_id'));
         $consumable->location_id            = e(Input::get('location_id'));
@@ -106,11 +110,14 @@ class ConsumablesController extends Controller
     }
 
     /**
-     * Consumable update.
-     *
-     * @param  int  $consumableId
-     * @return View
-     */
+    * Returns a form view to edit a consumable.
+    *
+    * @author [A. Gianotto] [<snipe@snipe.net>]
+    * @param  int $consumableId
+    * @see ConsumablesController::postEdit() method that stores the form data.
+    * @since [v1.0]
+    * @return View
+    */
     public function getEdit($consumableId = null)
     {
         // Check if the consumable exists
@@ -133,23 +140,22 @@ class ConsumablesController extends Controller
 
 
     /**
-     * Consumable update form processing page.
-     *
-     * @param  int  $consumableId
-     * @return Redirect
-     */
+    * Returns a form view to edit a consumable.
+    *
+    * @author [A. Gianotto] [<snipe@snipe.net>]
+    * @param  int $consumableId
+    * @see ConsumablesController::getEdit() method that stores the form data.
+    * @since [v1.0]
+    * @return Redirect
+    */
     public function postEdit($consumableId = null)
     {
-        // Check if the blog post exists
         if (is_null($consumable = Consumable::find($consumableId))) {
-            // Redirect to the blogs management page
             return Redirect::to('admin/consumables')->with('error', Lang::get('admin/consumables/message.does_not_exist'));
         } elseif (!Company::isCurrentUserHasAccess($consumable)) {
             return Redirect::to('admin/consumables')->with('error', Lang::get('general.insufficient_permissions'));
         }
 
-
-        // Update the consumable data
         $consumable->name                   = e(Input::get('name'));
         $consumable->category_id            = e(Input::get('category_id'));
         $consumable->location_id            = e(Input::get('location_id'));
@@ -171,25 +177,22 @@ class ConsumablesController extends Controller
 
         $consumable->qty                    = e(Input::get('qty'));
 
-        // Was the consumable created?
         if ($consumable->save()) {
-            // Redirect to the new consumable page
             return Redirect::to("admin/consumables")->with('success', Lang::get('admin/consumables/message.update.success'));
         }
 
         return Redirect::back()->withInput()->withErrors($consumable->getErrors());
 
-
-
-
     }
 
     /**
-     * Delete the given consumable.
-     *
-     * @param  int  $consumableId
-     * @return Redirect
-     */
+    * Delete a consumable.
+    *
+    * @author [A. Gianotto] [<snipe@snipe.net>]
+    * @param  int $consumableId
+    * @since [v1.0]
+    * @return Redirect
+    */
     public function getDelete($consumableId)
     {
         // Check if the blog post exists
@@ -210,14 +213,17 @@ class ConsumablesController extends Controller
 
 
     /**
-    *  Get the consumable information to present to the consumable view page
+    * Return a view to display component information.
     *
-    * @param  int  $consumableId
+    * @author [A. Gianotto] [<snipe@snipe.net>]
+    * @see ConsumablesController::getDataView() method that generates the JSON response
+    * @since [v1.0]
+    * @param int $consumableId
     * @return View
-    **/
-    public function getView($consumableID = null)
+    */
+    public function getView($consumableId = null)
     {
-        $consumable = Consumable::find($consumableID);
+        $consumable = Consumable::find($consumableId);
 
         if (isset($consumable->id)) {
 
@@ -239,8 +245,14 @@ class ConsumablesController extends Controller
     }
 
     /**
-    * Check out the consumable to a person
-    **/
+    * Return a view to checkout a consumable to a user.
+    *
+    * @author [A. Gianotto] [<snipe@snipe.net>]
+    * @see ConsumablesController::postCheckout() method that stores the data.
+    * @since [v1.0]
+    * @param int $consumableId
+    * @return View
+    */
     public function getCheckout($consumableId)
     {
         // Check if the consumable exists
@@ -259,8 +271,14 @@ class ConsumablesController extends Controller
     }
 
     /**
-    * Check out the consumable to a person
-    **/
+    * Saves the checkout information
+    *
+    * @author [A. Gianotto] [<snipe@snipe.net>]
+    * @see ConsumablesController::getCheckout() method that returns the form.
+    * @since [v1.0]
+    * @param int $consumableId
+    * @return Redirect
+    */
     public function postCheckout($consumableId)
     {
       // Check if the consumable exists
@@ -360,6 +378,15 @@ class ConsumablesController extends Controller
     }
 
 
+    /**
+    * Returns the JSON response containing the the consumables data.
+    *
+    * @author [A. Gianotto] [<snipe@snipe.net>]
+    * @see ConsumablesController::getIndex() method that returns the view that consumes the JSON.
+    * @since [v1.0]
+    * @param int $consumableId
+    * @return View
+    */
     public function getDatatable()
     {
         $consumables = Consumable::select('consumables.*')->whereNull('consumables.deleted_at')
@@ -431,7 +458,16 @@ class ConsumablesController extends Controller
 
     }
 
-    public function getDataView($consumableID)
+    /**
+    * Returns a JSON response containing details on the users associated with this consumable.
+    *
+    * @author [A. Gianotto] [<snipe@snipe.net>]
+    * @see ConsumablesController::getView() method that returns the form.
+    * @since [v1.0]
+    * @param int $consumableId
+    * @return View
+    */
+    public function getDataView($consumableId)
     {
         //$consumable = Consumable::find($consumableID);
         $consumable = Consumable::with(array('consumableAssigments'=>
@@ -442,7 +478,7 @@ class ConsumablesController extends Controller
         },
         'consumableAssigments.user'=> function ($query) {
         },
-        ))->find($consumableID);
+        ))->find($consumableId);
 
   //  $consumable->load('consumableAssigments.admin','consumableAssigments.user');
 

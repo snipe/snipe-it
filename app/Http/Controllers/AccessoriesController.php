@@ -524,33 +524,33 @@ class AccessoriesController extends Controller
         return Redirect::to("admin/accessories")->with('error', Lang::get('admin/accessories/message.checkin.error'));
     }
 
-  /**
-  * Generates the JSON response for accessories listing view.
-  *
-  * Example:
-  * {
-  *  "actions": "(links to available actions)",
-  *  "category": "(link to category)",
-  *  "companyName": "My Company",
-  *  "location":  "My Location",
-  *  "min_amt": 2,
-  *  "name":  "(link to accessory),
-  *  "numRemaining": 6,
-  *  "order_number": null,
-  *  "purchase_cost": "0.00",
-  *  "purchase_date": null,
-  *  "qty": 7
-  *  },
-  *
-  * The names of the fields in the returns JSON correspond directly to the the
-  * names of the fields in the bootstrap-tables in the view.
-  *
-  * For debugging, see at /api/accessories/list
-  *
-  * @author [A. Gianotto] [<snipe@snipe.net>]
-  * @param  int  $accessoryId
-  * @return string JSON containing accessories and their associated atrributes.
-  **/
+    /**
+    * Generates the JSON response for accessories listing view.
+    *
+    * Example:
+    * {
+    *  "actions": "(links to available actions)",
+    *  "category": "(link to category)",
+    *  "companyName": "My Company",
+    *  "location":  "My Location",
+    *  "min_amt": 2,
+    *  "name":  "(link to accessory),
+    *  "numRemaining": 6,
+    *  "order_number": null,
+    *  "purchase_cost": "0.00",
+    *  "purchase_date": null,
+    *  "qty": 7
+    *  },
+    *
+    * The names of the fields in the returns JSON correspond directly to the the
+    * names of the fields in the bootstrap-tables in the view.
+    *
+    * For debugging, see at /api/accessories/list
+    *
+    * @author [A. Gianotto] [<snipe@snipe.net>]
+    * @param  int  $accessoryId
+    * @return string JSON containing accessories and their associated atrributes.
+    **/
     public function getDatatable(Request $request)
     {
         $accessories = Accessory::select('accessories.*')->with('category', 'company')

@@ -1,11 +1,11 @@
 <?php
 /**
- * This controller handles all actions related to Asset Models for
+ * This controller handles all actions related to Components for
  * the Snipe-IT Asset Management application.
  *
  * PHP version 5.5.9
  * @package    Snipe-IT
- * @version    v1.0
+ * @version    v3.0
  */
  namespace App\Http\Controllers;
 
@@ -31,11 +31,14 @@ use View;
 class ComponentsController extends Controller
 {
     /**
-     * Show a list of all the components.
-     *
-     * @return View
-     */
-
+    * Returns a view that invokes the ajax tables which actually contains
+    * the content for the components listing, which is generated in getDatatable.
+    *
+    * @author [A. Gianotto] [<snipe@snipe.net>]
+    * @see ComponentsController::getDatatable() method that generates the JSON response
+    * @since [v3.0]
+    * @return View
+    */
     public function getIndex()
     {
         return View::make('components/index');
@@ -43,10 +46,13 @@ class ComponentsController extends Controller
 
 
     /**
-     * Component create.
-     *
-     * @return View
-     */
+    * Returns a form to create a new component.
+    *
+    * @author [A. Gianotto] [<snipe@snipe.net>]
+    * @see ComponentsController::postCreate() method that stores the data
+    * @since [v3.0]
+    * @return View
+    */
     public function getCreate()
     {
         // Show the page
@@ -63,10 +69,13 @@ class ComponentsController extends Controller
 
 
     /**
-     * Component create form processing.
-     *
-     * @return Redirect
-     */
+    * Validate and store data for new component.
+    *
+    * @author [A. Gianotto] [<snipe@snipe.net>]
+    * @see ComponentsController::getCreate() method that generates the view
+    * @since [v3.0]
+    * @return Redirect
+    */
     public function postCreate()
     {
 
@@ -108,11 +117,14 @@ class ComponentsController extends Controller
     }
 
     /**
-     * Component update.
-     *
-     * @param  int  $componentId
-     * @return View
-     */
+    * Return a view to edit a component.
+    *
+    * @author [A. Gianotto] [<snipe@snipe.net>]
+    * @see ComponentsController::postEdit() method that stores the data.
+    * @since [v3.0]
+    * @param int $componentId
+    * @return View
+    */
     public function getEdit($componentId = null)
     {
         // Check if the component exists
@@ -135,11 +147,14 @@ class ComponentsController extends Controller
 
 
     /**
-     * Component update form processing page.
-     *
-     * @param  int  $componentId
-     * @return Redirect
-     */
+    * Return a view to edit a component.
+    *
+    * @author [A. Gianotto] [<snipe@snipe.net>]
+    * @see ComponentsController::getEdit() method presents the form.
+    * @param int $componentId
+    * @since [v3.0]
+    * @return Redirect
+    */
     public function postEdit($componentId = null)
     {
         // Check if the blog post exists
@@ -187,11 +202,13 @@ class ComponentsController extends Controller
     }
 
     /**
-     * Delete the given component.
-     *
-     * @param  int  $componentId
-     * @return Redirect
-     */
+    * Delete a component.
+    *
+    * @author [A. Gianotto] [<snipe@snipe.net>]
+    * @since [v3.0]
+    * @param int $componentId
+    * @return Redirect
+    */
     public function getDelete($componentId)
     {
         // Check if the blog post exists
@@ -220,17 +237,18 @@ class ComponentsController extends Controller
     }
 
 
-
-
     /**
-    *  Get the component information to present to the component view page
+    * Return a view to display component information.
     *
-    * @param  int  $componentId
+    * @author [A. Gianotto] [<snipe@snipe.net>]
+    * @see ComponentsController::getDataView() method that generates the JSON response
+    * @since [v3.0]
+    * @param int $componentId
     * @return View
-    **/
-    public function getView($componentID = null)
+    */
+    public function getView($componentId = null)
     {
-        $component = Component::find($componentID);
+        $component = Component::find($componentId);
 
         if (isset($component->id)) {
 
@@ -252,8 +270,14 @@ class ComponentsController extends Controller
     }
 
     /**
-    * Check out the component to a person
-    **/
+    * Returns a view that allows the checkout of a component to an asset.
+    *
+    * @author [A. Gianotto] [<snipe@snipe.net>]
+    * @see ComponentsController::postCheckout() method that stores the data.
+    * @since [v3.0]
+    * @param int $componentId
+    * @return View
+    */
     public function getCheckout($componentId)
     {
         // Check if the component exists
@@ -272,8 +296,14 @@ class ComponentsController extends Controller
     }
 
     /**
-    * Check out the component to a person
-    **/
+    * Validate and store checkout data.
+    *
+    * @author [A. Gianotto] [<snipe@snipe.net>]
+    * @see ComponentsController::getCheckout() method that returns the form.
+    * @since [v3.0]
+    * @param int $componentId
+    * @return Redirect
+    */
     public function postCheckout(ComponentCheckoutRequest $request, $componentId)
     {
       // Check if the component exists
@@ -354,6 +384,15 @@ class ComponentsController extends Controller
     }
 
 
+    /**
+    * Generates the JSON response for accessories listing view.
+    *
+    * For debugging, see at /api/accessories/list
+    *
+    * @author [A. Gianotto] [<snipe@snipe.net>]
+    * @since [v3.0]
+    * @return string JSON
+    **/
     public function getDatatable()
     {
         $components = Component::select('components.*')->whereNull('components.deleted_at')
@@ -426,12 +465,20 @@ class ComponentsController extends Controller
 
     }
 
-    public function getDataView($componentID)
+    /**
+    * Return JSON data to populate the components view,
+    *
+    * @author [A. Gianotto] [<snipe@snipe.net>]
+    * @see ComponentsController::getView() method that returns the view.
+    * @since [v3.0]
+    * @param int $componentId
+    * @return string JSON
+    */
+    public function getDataView($componentId)
     {
         //$component = Component::find($componentID);
-        $component = Component::with('assets')->find($componentID);
+        $component = Component::with('assets')->find($componentId);
 
-  //  $component->load('componentAssigments.admin','componentAssigments.user');
 
         if (!Company::isCurrentUserHasAccess($component)) {
             return ['total' => 0, 'rows' => []];
