@@ -22,3 +22,9 @@ env:
         WebDriver:
           url: http://localhost:8000
           browser: phantomjs
+  testing:
+    modules:
+      config:
+        WebDriver:
+          url: http://localhost:8000
+          browser: phantomjs
