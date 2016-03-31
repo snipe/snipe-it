@@ -174,3 +174,20 @@ This happens sometimes with composer, though we don't really know why, as it's n
 - delete your `composer.lock` file
 - run `php composer.phar dump-autoload`
 - run `php composer.phar update --no-dev --prefer-source`
+
+-----
+
+## Error: Insufficient permissions! after upgrading
+
+While older versions of Snipe can be updated rather painlessly by simply using `php artisan migrate`, when upgrading from ancient versions (i.e. v1.1) to newer versions you may experience issues with user deletion, viewing backups etc.
+
+This is due to the fact that migrations will not automatically add "Admin" users to the new "Super User" permission group.
+
+To resolve (without raw SQL/db queries) try the following:
+
+- login as an admin user
+- create a new (throw away) admin user with Super User permissions
+- log out and log back in as new user
+- elevate all the users who need Super User
+- log out and back into your regular admin account, that has just been elevated
+- delete the throw away user you created earlier to ensure elevation worked
