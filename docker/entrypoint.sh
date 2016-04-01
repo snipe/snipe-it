@@ -8,7 +8,7 @@ then
   MYSQL_ENV_MYSQL_USER='' MYSQL_ENV_MYSQL_PASSWORD='' php artisan --env=production -n key:generate
 fi
 
-if [ -f /etc/ssl/private/snipeit-ssl.crt -a -f /etc/ssl/private/snipeit-ssl.key ]
+if [ -f /var/lib/snipeit/ssl/snipeit-ssl.crt -a -f /var/lib/snipeit/ssl/snipeit-ssl.key ]
 then
   a2enmod ssl
 else
