@@ -34,7 +34,7 @@
               <tr>
                   <th data-sortable="true" data-field="id" data-visible="false">{{ trans('general.id') }}</th>
                   <th data-field="companyName" data-sortable="false" data-switchable="true">{{ trans('general.company') }}</th>
-                  <th data-field="name">{{Lang::get('admin/licenses/table.title')}}</th>
+                  <th data-field="name" data-sortable="true">{{Lang::get('admin/licenses/table.title')}}</th>
                   <th data-field="serial" data-sortable="true" >{{Lang::get('admin/licenses/table.serial')}}</th>
                   <th data-field="license_name" data-sortable="true" data-visible="false">{{Lang::get('admin/licenses/form.to_name')}}</th>
                   <th data-field="license_email" data-sortable="true" data-visible="false">{{Lang::get('admin/licenses/form.to_email')}}</th>
