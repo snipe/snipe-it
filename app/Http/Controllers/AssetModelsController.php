@@ -120,7 +120,7 @@ class AssetModelsController extends Controller
             // Was it created?
         if ($model->save()) {
             // Redirect to the new model  page
-            return Redirect::to("hardware/models")->with('success', Lang::get('admin/models/message.create.success'));
+            return Redirect::to("hardware/models")->with('success', trans('admin/models/message.create.success'));
         }
 
             return Redirect::back()->withInput()->withErrors($model->getErrors());
@@ -174,7 +174,7 @@ class AssetModelsController extends Controller
         // Check if the model exists
         if (is_null($model = AssetModel::find($modelId))) {
             // Redirect to the model management page
-            return Redirect::to('assets/models')->with('error', Lang::get('admin/models/message.does_not_exist'));
+            return Redirect::to('assets/models')->with('error', trans('admin/models/message.does_not_exist'));
         }
 
         $depreciation_list = \App\Helpers\Helper::depreciationList();
@@ -202,7 +202,7 @@ class AssetModelsController extends Controller
         // Check if the model exists
         if (is_null($model = AssetModel::find($modelId))) {
             // Redirect to the models management page
-            return Redirect::to('admin/models')->with('error', Lang::get('admin/models/message.does_not_exist'));
+            return Redirect::to('admin/models')->with('error', trans('admin/models/message.does_not_exist'));
         }
 
 
@@ -248,14 +248,14 @@ class AssetModelsController extends Controller
         // Was it created?
         if ($model->save()) {
             // Redirect to the new model  page
-            return Redirect::to("hardware/models")->with('success', Lang::get('admin/models/message.update.success'));
+            return Redirect::to("hardware/models")->with('success', trans('admin/models/message.update.success'));
         } else {
             return redirect()->back()->withInput()->withErrors($model->getErrors());
         }
 
 
         // Redirect to the model create page
-        return Redirect::to("hardware/models/$modelId/edit")->with('error', Lang::get('admin/models/message.update.error'));
+        return Redirect::to("hardware/models/$modelId/edit")->with('error', trans('admin/models/message.update.error'));
 
     }
 
@@ -273,19 +273,19 @@ class AssetModelsController extends Controller
         // Check if the model exists
         if (is_null($model = AssetModel::find($modelId))) {
             // Redirect to the blogs management page
-            return Redirect::to('hardware/models')->with('error', Lang::get('admin/models/message.not_found'));
+            return Redirect::to('hardware/models')->with('error', trans('admin/models/message.not_found'));
         }
 
         if ($model->assets->count() > 0) {
             // Throw an error that this model is associated with assets
-            return Redirect::to('hardware/models')->with('error', Lang::get('admin/models/message.assoc_users'));
+            return Redirect::to('hardware/models')->with('error', trans('admin/models/message.assoc_users'));
 
         } else {
             // Delete the model
             $model->delete();
 
             // Redirect to the models management page
-            return Redirect::to('hardware/models')->with('success', Lang::get('admin/models/message.delete.success'));
+            return Redirect::to('hardware/models')->with('success', trans('admin/models/message.delete.success'));
         }
     }
 
@@ -310,13 +310,13 @@ class AssetModelsController extends Controller
             $model->restore();
 
             // Prepare the success message
-            $success = Lang::get('admin/models/message.restore.success');
+            $success = trans('admin/models/message.restore.success');
 
             // Redirect back
             return Redirect::back()->with('success', $success);
 
         } else {
-            return Redirect::back()->with('error', Lang::get('admin/models/message.not_found'));
+            return Redirect::back()->with('error', trans('admin/models/message.not_found'));
         }
 
     }
@@ -338,7 +338,7 @@ class AssetModelsController extends Controller
                 return View::make('models/view', compact('model'));
         } else {
             // Prepare the error message
-            $error = Lang::get('admin/models/message.does_not_exist', compact('id'));
+            $error = trans('admin/models/message.does_not_exist', compact('id'));
 
             // Redirect to the user management page
             return Redirect::route('models')->with('error', $error);
@@ -360,7 +360,7 @@ class AssetModelsController extends Controller
         // Check if the model exists
         if (is_null($model_to_clone = AssetModel::find($modelId))) {
             // Redirect to the model management page
-            return Redirect::to('assets/models')->with('error', Lang::get('admin/models/message.does_not_exist'));
+            return Redirect::to('assets/models')->with('error', trans('admin/models/message.does_not_exist'));
         }
 
         $model = clone $model_to_clone;
@@ -448,7 +448,7 @@ class AssetModelsController extends Controller
 
         foreach ($models as $model) {
             if ($model->deleted_at == '') {
-                $actions = '<div style=" white-space: nowrap;"><a href="'.route('update/model', $model->id).'" class="btn btn-warning btn-sm" style="margin-right:5px;"><i class="fa fa-pencil icon-white"></i></a><a data-html="false" class="btn delete-asset btn-danger btn-sm" data-toggle="modal" href="'.route('delete/model', $model->id).'" data-content="'.Lang::get('admin/models/message.delete.confirm').'" data-title="'.Lang::get('general.delete').' '.htmlspecialchars($model->name).'?" onClick="return false;"><i class="fa fa-trash icon-white"></i></a></div>';
+                $actions = '<div style=" white-space: nowrap;"><a href="'.route('update/model', $model->id).'" class="btn btn-warning btn-sm" style="margin-right:5px;"><i class="fa fa-pencil icon-white"></i></a><a data-html="false" class="btn delete-asset btn-danger btn-sm" data-toggle="modal" href="'.route('delete/model', $model->id).'" data-content="'.trans('admin/models/message.delete.confirm').'" data-title="'.trans('general.delete').' '.htmlspecialchars($model->name).'?" onClick="return false;"><i class="fa fa-trash icon-white"></i></a></div>';
             } else {
                 $actions = '<a href="'.route('restore/model', $model->id).'" class="btn btn-warning btn-sm"><i class="fa fa-recycle icon-white"></i></a>';
             }
@@ -460,9 +460,9 @@ class AssetModelsController extends Controller
                 'image' => ($model->image!='') ? '<img src="'.config('app.url').'/uploads/models/'.$model->image.'" height=50 width=50>' : '',
                 'modelnumber'       => $model->modelno,
                 'numassets'         => $model->assets->count(),
-                'depreciation'      => (($model->depreciation)&&($model->depreciation->id > 0)) ? $model->depreciation->name.' ('.$model->depreciation->months.')' : Lang::get('general.no_depreciation'),
+                'depreciation'      => (($model->depreciation)&&($model->depreciation->id > 0)) ? $model->depreciation->name.' ('.$model->depreciation->months.')' : trans('general.no_depreciation'),
                 'category'          => ($model->category) ? $model->category->name : '',
-                'eol'               => ($model->eol) ? $model->eol.' '.Lang::get('general.months') : '',
+                'eol'               => ($model->eol) ? $model->eol.' '.trans('general.months') : '',
                 'note'       => $model->getNote(),
                 'actions'           => $actions
                 );
@@ -521,9 +521,9 @@ class AssetModelsController extends Controller
             if ($asset->assetstatus) {
                 if ($asset->assetstatus->deployable != 0) {
                     if (($asset->assigned_to !='') && ($asset->assigned_to > 0)) {
-                        $actions = '<a href="'.route('checkin/hardware', $asset->id).'" class="btn btn-primary btn-sm">'.Lang::get('general.checkin').'</a>';
+                        $actions = '<a href="'.route('checkin/hardware', $asset->id).'" class="btn btn-primary btn-sm">'.trans('general.checkin').'</a>';
                     } else {
-                        $actions = '<a href="'.route('checkout/hardware', $asset->id).'" class="btn btn-info btn-sm">'.Lang::get('general.checkout').'</a>';
+                        $actions = '<a href="'.route('checkout/hardware', $asset->id).'" class="btn btn-info btn-sm">'.trans('general.checkout').'</a>';
                     }
                 }
             }

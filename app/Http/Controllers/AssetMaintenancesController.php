@@ -42,7 +42,7 @@ class AssetMaintenancesController extends Controller
     private static function getInsufficientPermissionsRedirect()
     {
         return redirect()->route('asset_maintenances')
-          ->with('error', Lang::get('general.insufficient_permissions'));
+          ->with('error', trans('general.insufficient_permissions'));
     }
 
     /**
@@ -107,7 +107,7 @@ class AssetMaintenancesController extends Controller
 
         foreach ($maintenances as $maintenance) {
 
-            $actions = '<nobr><a href="'.route('update/asset_maintenance', $maintenance->id).'" class="btn btn-warning btn-sm" style="margin-right:5px;"><i class="fa fa-pencil icon-white"></i></a><a data-html="false" class="btn delete-asset btn-danger btn-sm" data-toggle="modal" href="'.route('delete/asset_maintenance', $maintenance->id).'" data-content="'.Lang::get('admin/asset_maintenances/message.delete.confirm').'" data-title="'.Lang::get('general.delete').' '.htmlspecialchars($maintenance->title).'?" onClick="return false;"><i class="fa fa-trash icon-white"></i></a></nobr>';
+            $actions = '<nobr><a href="'.route('update/asset_maintenance', $maintenance->id).'" class="btn btn-warning btn-sm" style="margin-right:5px;"><i class="fa fa-pencil icon-white"></i></a><a data-html="false" class="btn delete-asset btn-danger btn-sm" data-toggle="modal" href="'.route('delete/asset_maintenance', $maintenance->id).'" data-content="'.trans('admin/asset_maintenances/message.delete.confirm').'" data-title="'.trans('general.delete').' '.htmlspecialchars($maintenance->title).'?" onClick="return false;"><i class="fa fa-trash icon-white"></i></a></nobr>';
 
             if (($maintenance->cost) && ($maintenance->asset->assetloc) &&  ($maintenance->asset->assetloc->currency!='')) {
                 $maintenance_cost = $maintenance->asset->assetloc->currency.$maintenance->cost;
@@ -273,7 +273,7 @@ class AssetMaintenancesController extends Controller
 
             // Redirect to the new asset maintenance page
             return Redirect::to("admin/asset_maintenances")
-                           ->with('success', Lang::get('admin/asset_maintenances/message.create.success'));
+                           ->with('success', trans('admin/asset_maintenances/message.create.success'));
         }
 
         return redirect()->back()->withInput()->withErrors($assetMaintenance->getErrors());
@@ -299,7 +299,7 @@ class AssetMaintenancesController extends Controller
         if (is_null($assetMaintenance = AssetMaintenance::find($assetMaintenanceId))) {
             // Redirect to the improvement management page
             return Redirect::to('admin/asset_maintenances')
-                           ->with('error', Lang::get('admin/asset_maintenances/message.not_found'));
+                           ->with('error', trans('admin/asset_maintenances/message.not_found'));
         } elseif (!Company::isCurrentUserHasAccess($assetMaintenance->asset)) {
             return static::getInsufficientPermissionsRedirect();
         }
@@ -382,7 +382,7 @@ class AssetMaintenancesController extends Controller
         if (is_null($assetMaintenance = AssetMaintenance::find($assetMaintenanceId))) {
             // Redirect to the asset maintenance management page
             return Redirect::to('admin/asset_maintenances')
-                           ->with('error', Lang::get('admin/asset_maintenances/message.not_found'));
+                           ->with('error', trans('admin/asset_maintenances/message.not_found'));
         } elseif (!Company::isCurrentUserHasAccess($assetMaintenance->asset)) {
             return static::getInsufficientPermissionsRedirect();
         }
@@ -452,7 +452,7 @@ class AssetMaintenancesController extends Controller
 
             // Redirect to the new asset maintenance page
             return Redirect::to("admin/asset_maintenances")
-                         ->with('success', Lang::get('admin/asset_maintenances/message.create.success'));
+                         ->with('success', trans('admin/asset_maintenances/message.create.success'));
         }
         return Redirect::back() ->withInput()->withErrors($assetMaintenance->getErrors());
 
@@ -474,7 +474,7 @@ class AssetMaintenancesController extends Controller
         if (is_null($assetMaintenance = AssetMaintenance::find($assetMaintenanceId))) {
             // Redirect to the asset maintenance management page
             return Redirect::to('admin/asset_maintenances')
-                           ->with('error', Lang::get('admin/asset_maintenances/message.not_found'));
+                           ->with('error', trans('admin/asset_maintenances/message.not_found'));
         } elseif (!Company::isCurrentUserHasAccess($assetMaintenance->asset)) {
             return static::getInsufficientPermissionsRedirect();
         }
@@ -484,7 +484,7 @@ class AssetMaintenancesController extends Controller
 
         // Redirect to the asset_maintenance management page
         return Redirect::to('admin/asset_maintenances')
-                       ->with('success', Lang::get('admin/asset_maintenances/message.delete.success'));
+                       ->with('success', trans('admin/asset_maintenances/message.delete.success'));
     }
 
     /**
@@ -502,7 +502,7 @@ class AssetMaintenancesController extends Controller
         if (is_null($assetMaintenance = AssetMaintenance::find($assetMaintenanceId))) {
             // Redirect to the asset maintenance management page
             return Redirect::to('admin/asset_maintenances')
-                           ->with('error', Lang::get('admin/asset_maintenances/message.not_found'));
+                           ->with('error', trans('admin/asset_maintenances/message.not_found'));
         } elseif (!Company::isCurrentUserHasAccess($assetMaintenance->asset)) {
             return static::getInsufficientPermissionsRedirect();
         }

@@ -100,7 +100,7 @@ class ConsumablesController extends Controller
         // Was the consumable created?
         if ($consumable->save()) {
             // Redirect to the new consumable  page
-            return Redirect::to("admin/consumables")->with('success', Lang::get('admin/consumables/message.create.success'));
+            return Redirect::to("admin/consumables")->with('success', trans('admin/consumables/message.create.success'));
         }
 
         return Redirect::back()->withInput()->withErrors($consumable->getErrors());
@@ -122,9 +122,9 @@ class ConsumablesController extends Controller
         // Check if the consumable exists
         if (is_null($consumable = Consumable::find($consumableId))) {
             // Redirect to the blogs management page
-            return Redirect::to('admin/consumables')->with('error', Lang::get('admin/consumables/message.does_not_exist'));
+            return Redirect::to('admin/consumables')->with('error', trans('admin/consumables/message.does_not_exist'));
         } elseif (!Company::isCurrentUserHasAccess($consumable)) {
-            return Redirect::to('admin/consumables')->with('error', Lang::get('general.insufficient_permissions'));
+            return Redirect::to('admin/consumables')->with('error', trans('general.insufficient_permissions'));
         }
 
             $category_list =  Helper::categoryList();
@@ -150,9 +150,9 @@ class ConsumablesController extends Controller
     public function postEdit($consumableId = null)
     {
         if (is_null($consumable = Consumable::find($consumableId))) {
-            return Redirect::to('admin/consumables')->with('error', Lang::get('admin/consumables/message.does_not_exist'));
+            return Redirect::to('admin/consumables')->with('error', trans('admin/consumables/message.does_not_exist'));
         } elseif (!Company::isCurrentUserHasAccess($consumable)) {
-            return Redirect::to('admin/consumables')->with('error', Lang::get('general.insufficient_permissions'));
+            return Redirect::to('admin/consumables')->with('error', trans('general.insufficient_permissions'));
         }
 
         $consumable->name                   = e(Input::get('name'));
@@ -177,7 +177,7 @@ class ConsumablesController extends Controller
         $consumable->qty                    = e(Input::get('qty'));
 
         if ($consumable->save()) {
-            return Redirect::to("admin/consumables")->with('success', Lang::get('admin/consumables/message.update.success'));
+            return Redirect::to("admin/consumables")->with('success', trans('admin/consumables/message.update.success'));
         }
 
         return Redirect::back()->withInput()->withErrors($consumable->getErrors());
@@ -197,15 +197,15 @@ class ConsumablesController extends Controller
         // Check if the blog post exists
         if (is_null($consumable = Consumable::find($consumableId))) {
             // Redirect to the blogs management page
-            return Redirect::to('admin/consumables')->with('error', Lang::get('admin/consumables/message.not_found'));
+            return Redirect::to('admin/consumables')->with('error', trans('admin/consumables/message.not_found'));
         } elseif (!Company::isCurrentUserHasAccess($consumable)) {
-            return Redirect::to('admin/consumables')->with('error', Lang::get('general.insufficient_permissions'));
+            return Redirect::to('admin/consumables')->with('error', trans('general.insufficient_permissions'));
         }
 
             $consumable->delete();
 
             // Redirect to the locations management page
-            return Redirect::to('admin/consumables')->with('success', Lang::get('admin/consumables/message.delete.success'));
+            return Redirect::to('admin/consumables')->with('success', trans('admin/consumables/message.delete.success'));
 
     }
 
@@ -228,13 +228,13 @@ class ConsumablesController extends Controller
 
 
             if (!Company::isCurrentUserHasAccess($consumable)) {
-                return Redirect::to('admin/consumables')->with('error', Lang::get('general.insufficient_permissions'));
+                return Redirect::to('admin/consumables')->with('error', trans('general.insufficient_permissions'));
             } else {
                 return View::make('consumables/view', compact('consumable'));
             }
         } else {
             // Prepare the error message
-            $error = Lang::get('admin/consumables/message.does_not_exist', compact('id'));
+            $error = trans('admin/consumables/message.does_not_exist', compact('id'));
 
             // Redirect to the user management page
             return Redirect::route('consumables')->with('error', $error);
@@ -257,9 +257,9 @@ class ConsumablesController extends Controller
         // Check if the consumable exists
         if (is_null($consumable = Consumable::find($consumableId))) {
             // Redirect to the consumable management page with error
-            return Redirect::to('consumables')->with('error', Lang::get('admin/consumables/message.not_found'));
+            return Redirect::to('consumables')->with('error', trans('admin/consumables/message.not_found'));
         } elseif (!Company::isCurrentUserHasAccess($consumable)) {
-            return Redirect::to('admin/consumables')->with('error', Lang::get('general.insufficient_permissions'));
+            return Redirect::to('admin/consumables')->with('error', trans('general.insufficient_permissions'));
         }
 
         // Get the dropdown of users and then pass it to the checkout view
@@ -283,9 +283,9 @@ class ConsumablesController extends Controller
       // Check if the consumable exists
         if (is_null($consumable = Consumable::find($consumableId))) {
             // Redirect to the consumable management page with error
-            return Redirect::to('consumables')->with('error', Lang::get('admin/consumables/message.not_found'));
+            return Redirect::to('consumables')->with('error', trans('admin/consumables/message.not_found'));
         } elseif (!Company::isCurrentUserHasAccess($consumable)) {
-            return Redirect::to('admin/consumables')->with('error', Lang::get('general.insufficient_permissions'));
+            return Redirect::to('admin/consumables')->with('error', trans('general.insufficient_permissions'));
         }
 
         $admin_user = Auth::user();
@@ -294,7 +294,7 @@ class ConsumablesController extends Controller
       // Check if the user exists
         if (is_null($user = User::find($assigned_to))) {
             // Redirect to the consumable management page with error
-            return Redirect::to('admin/consumables')->with('error', Lang::get('admin/consumables/message.user_does_not_exist'));
+            return Redirect::to('admin/consumables')->with('error', trans('admin/consumables/message.user_does_not_exist'));
         }
 
       // Update the consumable data
@@ -370,7 +370,7 @@ class ConsumablesController extends Controller
         }
 
       // Redirect to the new consumable page
-        return Redirect::to("admin/consumables")->with('success', Lang::get('admin/consumables/message.checkout.success'));
+        return Redirect::to("admin/consumables")->with('success', trans('admin/consumables/message.checkout.success'));
 
 
 
@@ -432,7 +432,7 @@ class ConsumablesController extends Controller
         $rows = array();
 
         foreach ($consumables as $consumable) {
-            $actions = '<nobr><a href="'.route('checkout/consumable', $consumable->id).'" style="margin-right:5px;" class="btn btn-info btn-sm" '.(($consumable->numRemaining() > 0 ) ? '' : ' disabled').'>'.Lang::get('general.checkout').'</a><a href="'.route('update/consumable', $consumable->id).'" class="btn btn-warning btn-sm" style="margin-right:5px;"><i class="fa fa-pencil icon-white"></i></a><a data-html="false" class="btn delete-asset btn-danger btn-sm" data-toggle="modal" href="'.route('delete/consumable', $consumable->id).'" data-content="'.Lang::get('admin/consumables/message.delete.confirm').'" data-title="'.Lang::get('general.delete').' '.htmlspecialchars($consumable->name).'?" onClick="return false;"><i class="fa fa-trash icon-white"></i></a></nobr>';
+            $actions = '<nobr><a href="'.route('checkout/consumable', $consumable->id).'" style="margin-right:5px;" class="btn btn-info btn-sm" '.(($consumable->numRemaining() > 0 ) ? '' : ' disabled').'>'.trans('general.checkout').'</a><a href="'.route('update/consumable', $consumable->id).'" class="btn btn-warning btn-sm" style="margin-right:5px;"><i class="fa fa-pencil icon-white"></i></a><a data-html="false" class="btn delete-asset btn-danger btn-sm" data-toggle="modal" href="'.route('delete/consumable', $consumable->id).'" data-content="'.trans('admin/consumables/message.delete.confirm').'" data-title="'.trans('general.delete').' '.htmlspecialchars($consumable->name).'?" onClick="return false;"><i class="fa fa-trash icon-white"></i></a></nobr>';
             $company = $consumable->company;
 
             $rows[] = array(

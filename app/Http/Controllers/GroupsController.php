@@ -72,7 +72,7 @@ class GroupsController extends Controller
         // Was the consumable created?
         if ($group->save()) {
             // Redirect to the new consumable  page
-            return Redirect::to("admin/groups")->with('success', Lang::get('admin/groups/message.create.success'));
+            return Redirect::to("admin/groups")->with('success', trans('admin/groups/message.create.success'));
         }
 
         return Redirect::back()->withInput()->withErrors($group->getErrors());
@@ -113,7 +113,7 @@ class GroupsController extends Controller
     {
 
         if (!$group = Group::find($id)) {
-            return Redirect::route('groups')->with('error', Lang::get('admin/groups/message.group_not_found', compact('id')));
+            return Redirect::route('groups')->with('error', trans('admin/groups/message.group_not_found', compact('id')));
 
         }
         $group->name = e(Input::get('name'));
@@ -123,7 +123,7 @@ class GroupsController extends Controller
           // Was the consumable created?
             if ($group->save()) {
               // Redirect to the new consumable  page
-                return Redirect::to("admin/groups")->with('success', Lang::get('admin/groups/message.create.success'));
+                return Redirect::to("admin/groups")->with('success', trans('admin/groups/message.create.success'));
             }
             return Redirect::back()->withInput()->withErrors($group->getErrors());
 
@@ -153,13 +153,13 @@ class GroupsController extends Controller
                 $group->delete();
 
                 // Redirect to the group management page
-                return Redirect::route('groups')->with('success', Lang::get('admin/groups/message.success.delete'));
+                return Redirect::route('groups')->with('success', trans('admin/groups/message.success.delete'));
             } catch (GroupNotFoundException $e) {
                 // Redirect to the group management page
-                return Redirect::route('groups')->with('error', Lang::get('admin/groups/message.group_not_found', compact('id')));
+                return Redirect::route('groups')->with('error', trans('admin/groups/message.group_not_found', compact('id')));
             }
         } else {
-            return Redirect::route('groups')->with('error', Lang::get('general.feature_disabled'));
+            return Redirect::route('groups')->with('error', trans('general.feature_disabled'));
         }
     }
 
@@ -222,7 +222,7 @@ class GroupsController extends Controller
             $actions .= '<a href="' . route('update/group', $group->id) . '" class="btn btn-warning btn-sm"><i class="fa fa-pencil icon-white"></i></a> ';
 
             if (!config('app.lock_passwords')) {
-                  $actions .= '<a data-html="false" class="btn delete-asset btn-danger btn-sm" data-toggle="modal" href="' . route('delete/group', $group->id) . '" data-content="'.Lang::get('admin/groups/message.delete.confirm').'" data-title="Delete ' . htmlspecialchars($group->name) . '?" onClick="return false;"><i class="fa fa-trash icon-white"></i></a> ';
+                  $actions .= '<a data-html="false" class="btn delete-asset btn-danger btn-sm" data-toggle="modal" href="' . route('delete/group', $group->id) . '" data-content="'.trans('admin/groups/message.delete.confirm').'" data-title="Delete ' . htmlspecialchars($group->name) . '?" onClick="return false;"><i class="fa fa-trash icon-white"></i></a> ';
             } else {
                 $actions .= ' <span class="btn delete-asset btn-danger btn-sm disabled"><i class="fa fa-trash icon-white"></i></span>';
             }

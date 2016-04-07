@@ -187,7 +187,7 @@ class UsersController extends Controller
             $user = User::find($id);
 
             if (!Company::isCurrentUserHasAccess($user)) {
-                return Redirect::route('users')->with('error', Lang::get('general.insufficient_permissions'));
+                return Redirect::route('users')->with('error', trans('general.insufficient_permissions'));
             }
 
             // Get this user groups
@@ -216,7 +216,7 @@ class UsersController extends Controller
                             ->lists('full_name', 'id');
         } catch (UserNotFoundException $e) {
             // Prepare the error message
-            $error = Lang::get('admin/users/message.user_not_found', compact('id'));
+            $error = trans('admin/users/message.user_not_found', compact('id'));
 
             // Redirect to the user management page
             return Redirect::route('users')->with('error', $error);
@@ -255,11 +255,11 @@ class UsersController extends Controller
             $user = User::find($id);
 
             if (!Company::isCurrentUserHasAccess($user)) {
-                return Redirect::route('users')->with('error', Lang::get('general.insufficient_permissions'));
+                return Redirect::route('users')->with('error', trans('general.insufficient_permissions'));
             }
         } catch (UserNotFoundException $e) {
             // Prepare the error message
-            $error = Lang::get('admin/users/message.user_not_found', compact('id'));
+            $error = trans('admin/users/message.user_not_found', compact('id'));
 
             // Redirect to the user management page
             return Redirect::route('users')->with('error', $error);
@@ -308,7 +308,7 @@ class UsersController extends Controller
             // Was the user updated?
         if ($user->save()) {
             // Prepare the success message
-            $success = Lang::get('admin/users/message.success.update');
+            $success = trans('admin/users/message.success.update');
 
             // Redirect to the user page
             return Redirect::route('users')->with('success', $success);
@@ -335,7 +335,7 @@ class UsersController extends Controller
             // Check if we are not trying to delete ourselves
             if ($user->id === Auth::user()->id) {
                 // Prepare the error message
-                $error = Lang::get('admin/users/message.error.delete');
+                $error = trans('admin/users/message.error.delete');
 
                 // Redirect to the user management page
                 return Redirect::route('users')->with('error', $error);
@@ -364,13 +364,13 @@ class UsersController extends Controller
             $user->delete();
 
             // Prepare the success message
-            $success = Lang::get('admin/users/message.success.delete');
+            $success = trans('admin/users/message.success.delete');
 
             // Redirect to the user management page
             return Redirect::route('users')->with('success', $success);
         } catch (UserNotFoundException $e) {
             // Prepare the error message
-            $error = Lang::get('admin/users/message.user_not_found', compact('id'));
+            $error = trans('admin/users/message.user_not_found', compact('id'));
 
             // Redirect to the user management page
             return Redirect::route('users')->with('error', $error);
@@ -424,7 +424,7 @@ class UsersController extends Controller
             }
 
             if (!Auth::user()->isSuperUser()) {
-                return Redirect::route('users')->with('error', Lang::get('admin/users/message.insufficient_permissions'));
+                return Redirect::route('users')->with('error', trans('admin/users/message.insufficient_permissions'));
             }
 
             if (!config('app.lock_passwords')) {
@@ -500,20 +500,20 @@ class UsersController extends Controller
             //$user = Sentry::getUserProvider()->createModel()->withTrashed()->find($id);
 
             if (!Company::isCurrentUserHasAccess($user)) {
-                return Redirect::route('users')->with('error', Lang::get('general.insufficient_permissions'));
+                return Redirect::route('users')->with('error', trans('general.insufficient_permissions'));
             } else {
                 // Restore the user
                 $user->restore();
 
                 // Prepare the success message
-                $success = Lang::get('admin/users/message.success.restored');
+                $success = trans('admin/users/message.success.restored');
 
                 // Redirect to the user management page
                 return Redirect::route('users')->with('success', $success);
             }
         } catch (UserNotFoundException $e) {
             // Prepare the error message
-            $error = Lang::get('admin/users/message.user_not_found', compact('id'));
+            $error = trans('admin/users/message.user_not_found', compact('id'));
 
             // Redirect to the user management page
             return Redirect::route('users')->with('error', $error);
@@ -539,13 +539,13 @@ class UsersController extends Controller
         if (isset($user->id)) {
 
             if (!Company::isCurrentUserHasAccess($user)) {
-                return Redirect::route('users')->with('error', Lang::get('general.insufficient_permissions'));
+                return Redirect::route('users')->with('error', trans('general.insufficient_permissions'));
             } else {
                 return View::make('users/view', compact('user', 'userlog'));
             }
         } else {
             // Prepare the error message
-            $error = Lang::get('admin/users/message.user_not_found', compact('id'));
+            $error = trans('admin/users/message.user_not_found', compact('id'));
 
             // Redirect to the user management page
             return Redirect::route('users')->with('error', $error);
@@ -569,7 +569,7 @@ class UsersController extends Controller
             // Check if we are not trying to unsuspend ourselves
             if ($user->id === Auth::user()->id) {
                 // Prepare the error message
-                $error = Lang::get('admin/users/message.error.unsuspend');
+                $error = trans('admin/users/message.error.unsuspend');
 
                 // Redirect to the user management page
                 return Redirect::route('users')->with('error', $error);
@@ -582,13 +582,13 @@ class UsersController extends Controller
             }
 
             // Prepare the success message
-            $success = Lang::get('admin/users/message.success.unsuspend');
+            $success = trans('admin/users/message.success.unsuspend');
 
             // Redirect to the user management page
             return Redirect::route('users')->with('success', $success);
         } catch (UserNotFoundException $e) {
             // Prepare the error message
-            $error = Lang::get('admin/users/message.user_not_found', compact('id'));
+            $error = trans('admin/users/message.user_not_found', compact('id'));
 
             // Redirect to the user management page
             return Redirect::route('users')->with('error', $error);
@@ -657,7 +657,7 @@ class UsersController extends Controller
                             ->with('clone_user', $user_to_clone);
         } catch (UserNotFoundException $e) {
             // Prepare the error message
-            $error = Lang::get('admin/users/message.user_not_found', compact('id'));
+            $error = trans('admin/users/message.user_not_found', compact('id'));
 
             // Redirect to the user management page
             return Redirect::route('users')->with('error', $error);
@@ -937,7 +937,7 @@ class UsersController extends Controller
         if (isset($user->id)) {
 
             if (!Company::isCurrentUserHasAccess($user)) {
-                return Redirect::route('users')->with('error', Lang::get('general.insufficient_permissions'));
+                return Redirect::route('users')->with('error', trans('general.insufficient_permissions'));
             }
 
             foreach (Input::file('file') as $file) {
@@ -986,7 +986,7 @@ class UsersController extends Controller
         if (isset($user->id)) {
 
             if (!Company::isCurrentUserHasAccess($user)) {
-                return Redirect::route('users')->with('error', Lang::get('general.insufficient_permissions'));
+                return Redirect::route('users')->with('error', trans('general.insufficient_permissions'));
             } else {
                 $log = Actionlog::find($fileId);
                 $full_filename = $destinationPath . '/' . $log->filename;
@@ -994,11 +994,11 @@ class UsersController extends Controller
                     unlink($destinationPath . '/' . $log->filename);
                 }
                 $log->delete();
-                return Redirect::back()->with('success', Lang::get('admin/users/message.deletefile.success'));
+                return Redirect::back()->with('success', trans('admin/users/message.deletefile.success'));
             }
         } else {
             // Prepare the error message
-            $error = Lang::get('admin/users/message.does_not_exist', compact('id'));
+            $error = trans('admin/users/message.does_not_exist', compact('id'));
 
             // Redirect to the licence management page
             return Redirect::route('users')->with('error', $error);
@@ -1022,7 +1022,7 @@ class UsersController extends Controller
         // the license is valid
         if (isset($user->id)) {
             if (!Company::isCurrentUserHasAccess($user)) {
-                return Redirect::route('users')->with('error', Lang::get('general.insufficient_permissions'));
+                return Redirect::route('users')->with('error', trans('general.insufficient_permissions'));
             } else {
                 $log = Actionlog::find($fileId);
                 $file = $log->get_src();
@@ -1030,7 +1030,7 @@ class UsersController extends Controller
             }
         } else {
             // Prepare the error message
-            $error = Lang::get('admin/users/message.does_not_exist', compact('id'));
+            $error = trans('admin/users/message.does_not_exist', compact('id'));
 
             // Redirect to the licence management page
             return Redirect::route('users')->with('error', $error);
@@ -1126,13 +1126,13 @@ class UsersController extends Controller
         ldap_set_option($ldapconn, LDAP_OPT_REFERRALS, 0);
 
         if (!$ldapconn) {
-            return Redirect::route('users')->with('error', Lang::get('admin/users/message.error.ldap_could_not_connect'));
+            return Redirect::route('users')->with('error', trans('admin/users/message.error.ldap_could_not_connect'));
         }
 
         // Set options
         $ldapopt = @ldap_set_option($ldapconn, LDAP_OPT_PROTOCOL_VERSION, $ldap_version);
         if (!$ldapopt) {
-            return Redirect::route('users')->with('error', Lang::get('admin/users/message.error.ldap_could_not_connect'));
+            return Redirect::route('users')->with('error', trans('admin/users/message.error.ldap_could_not_connect'));
         }
 
         // Binding to ldap server
@@ -1140,7 +1140,7 @@ class UsersController extends Controller
 
         Log::error(ldap_errno($ldapconn));
         if (!$ldapbind) {
-            return Redirect::route('users')->with('error', Lang::get('admin/users/message.error.ldap_could_not_bind').ldap_error($ldapconn));
+            return Redirect::route('users')->with('error', trans('admin/users/message.error.ldap_could_not_bind').ldap_error($ldapconn));
         }
 
         // Set up LDAP pagination for very large databases
@@ -1158,13 +1158,13 @@ class UsersController extends Controller
             	$search_results = ldap_search($ldapconn, $base_dn, '('.$filter.')');
 
     	        if (!$search_results) {
-    	            return Redirect::route('users')->with('error', Lang::get('admin/users/message.error.ldap_could_not_search').ldap_error($ldapconn));
+    	            return Redirect::route('users')->with('error', trans('admin/users/message.error.ldap_could_not_search').ldap_error($ldapconn));
     	        }
 
     	        // Get results from page
     	        $results = ldap_get_entries($ldapconn, $search_results);
     	        if (!$results) {
-    	            return Redirect::route('users')->with('error', Lang::get('admin/users/message.error.ldap_could_not_get_entries').ldap_error($ldapconn));
+    	            return Redirect::route('users')->with('error', trans('admin/users/message.error.ldap_could_not_get_entries').ldap_error($ldapconn));
     	        }
 
     		// Add results to result set

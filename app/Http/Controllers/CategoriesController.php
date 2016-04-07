@@ -81,7 +81,7 @@ class CategoriesController extends Controller
 
         if ($category->save()) {
         // Redirect to the new category  page
-            return Redirect::to("admin/settings/categories")->with('success', Lang::get('admin/categories/message.create.success'));
+            return Redirect::to("admin/settings/categories")->with('success', trans('admin/categories/message.create.success'));
         } else {
 
           // The given data did not pass validation
@@ -90,7 +90,7 @@ class CategoriesController extends Controller
         }
 
         // Redirect to the category create page
-        return Redirect::to('admin/settings/categories/create')->with('error', Lang::get('admin/categories/message.create.error'));
+        return Redirect::to('admin/settings/categories/create')->with('error', trans('admin/categories/message.create.error'));
 
 
     }
@@ -109,7 +109,7 @@ class CategoriesController extends Controller
         // Check if the category exists
         if (is_null($category = Category::find($categoryId))) {
             // Redirect to the blogs management page
-            return Redirect::to('admin/settings/categories')->with('error', Lang::get('admin/categories/message.does_not_exist'));
+            return Redirect::to('admin/settings/categories')->with('error', trans('admin/categories/message.does_not_exist'));
         }
 
         // Show the page
@@ -138,7 +138,7 @@ class CategoriesController extends Controller
         // Check if the blog post exists
         if (is_null($category = Category::find($categoryId))) {
             // Redirect to the blogs management page
-            return Redirect::to('admin/categories')->with('error', Lang::get('admin/categories/message.does_not_exist'));
+            return Redirect::to('admin/categories')->with('error', trans('admin/categories/message.does_not_exist'));
         }
 
         // Update the category data
@@ -151,7 +151,7 @@ class CategoriesController extends Controller
 
         if ($category->save()) {
         // Redirect to the new category page
-            return Redirect::to("admin/settings/categories")->with('success', Lang::get('admin/categories/message.update.success'));
+            return Redirect::to("admin/settings/categories")->with('success', trans('admin/categories/message.update.success'));
         } // attempt validation
         else {
           // The given data did not pass validation
@@ -159,7 +159,7 @@ class CategoriesController extends Controller
         }
 
         // Redirect to the category management page
-        return Redirect::back()->with('error', Lang::get('admin/categories/message.update.error'));
+        return Redirect::back()->with('error', trans('admin/categories/message.update.error'));
 
     }
 
@@ -176,20 +176,20 @@ class CategoriesController extends Controller
         // Check if the category exists
         if (is_null($category = Category::find($categoryId))) {
             // Redirect to the blogs management page
-            return Redirect::to('admin/settings/categories')->with('error', Lang::get('admin/categories/message.not_found'));
+            return Redirect::to('admin/settings/categories')->with('error', trans('admin/categories/message.not_found'));
         }
 
 
         if ($category->has_models() > 0) {
 
             // Redirect to the asset management page
-            return Redirect::to('admin/settings/categories')->with('error', Lang::get('admin/categories/message.assoc_users'));
+            return Redirect::to('admin/settings/categories')->with('error', trans('admin/categories/message.assoc_users'));
         } else {
 
             $category->delete();
 
             // Redirect to the locations management page
-            return Redirect::to('admin/settings/categories')->with('success', Lang::get('admin/categories/message.delete.success'));
+            return Redirect::to('admin/settings/categories')->with('success', trans('admin/categories/message.delete.success'));
         }
 
 
@@ -215,7 +215,7 @@ class CategoriesController extends Controller
                 return View::make('categories/view', compact('category'));
         } else {
             // Prepare the error message
-            $error = Lang::get('admin/categories/message.does_not_exist', compact('id'));
+            $error = trans('admin/categories/message.does_not_exist', compact('id'));
 
             // Redirect to the user management page
             return Redirect::route('categories')->with('error', $error);
@@ -267,7 +267,7 @@ class CategoriesController extends Controller
         $rows = array();
 
         foreach ($categories as $category) {
-            $actions = '<a href="'.route('update/category', $category->id).'" class="btn btn-warning btn-sm" style="margin-right:5px;"><i class="fa fa-pencil icon-white"></i></a><a data-html="false" class="btn delete-asset btn-danger btn-sm" data-toggle="modal" href="'.route('delete/category', $category->id).'" data-content="'.Lang::get('admin/categories/message.delete.confirm').'" data-title="'.Lang::get('general.delete').' '.htmlspecialchars($category->name).'?" onClick="return false;"><i class="fa fa-trash icon-white"></i></a>';
+            $actions = '<a href="'.route('update/category', $category->id).'" class="btn btn-warning btn-sm" style="margin-right:5px;"><i class="fa fa-pencil icon-white"></i></a><a data-html="false" class="btn delete-asset btn-danger btn-sm" data-toggle="modal" href="'.route('delete/category', $category->id).'" data-content="'.trans('admin/categories/message.delete.confirm').'" data-title="'.trans('general.delete').' '.htmlspecialchars($category->name).'?" onClick="return false;"><i class="fa fa-trash icon-white"></i></a>';
             $rows[] = array(
                 'id'      => $category->id,
                 'name'  => (string)link_to('/admin/settings/categories/'.$category->id.'/view', $category->name) ,
@@ -340,7 +340,7 @@ class CategoriesController extends Controller
             $inout='';
 
             if ($asset->deleted_at=='') {
-                $actions = '<div style=" white-space: nowrap;"><a href="'.route('clone/hardware', $asset->id).'" class="btn btn-info btn-sm" title="Clone asset"><i class="fa fa-files-o"></i></a> <a href="'.route('update/hardware', $asset->id).'" class="btn btn-warning btn-sm"><i class="fa fa-pencil icon-white"></i></a> <a data-html="false" class="btn delete-asset btn-danger btn-sm" data-toggle="modal" href="'.route('delete/hardware', $asset->id).'" data-content="'.Lang::get('admin/hardware/message.delete.confirm').'" data-title="'.Lang::get('general.delete').' '.htmlspecialchars($asset->asset_tag).'?" onClick="return false;"><i class="fa fa-trash icon-white"></i></a></div>';
+                $actions = '<div style=" white-space: nowrap;"><a href="'.route('clone/hardware', $asset->id).'" class="btn btn-info btn-sm" title="Clone asset"><i class="fa fa-files-o"></i></a> <a href="'.route('update/hardware', $asset->id).'" class="btn btn-warning btn-sm"><i class="fa fa-pencil icon-white"></i></a> <a data-html="false" class="btn delete-asset btn-danger btn-sm" data-toggle="modal" href="'.route('delete/hardware', $asset->id).'" data-content="'.trans('admin/hardware/message.delete.confirm').'" data-title="'.trans('general.delete').' '.htmlspecialchars($asset->asset_tag).'?" onClick="return false;"><i class="fa fa-trash icon-white"></i></a></div>';
             } elseif ($asset->deleted_at!='') {
                 $actions = '<a href="'.route('restore/hardware', $asset->id).'" class="btn btn-warning btn-sm"><i class="fa fa-recycle icon-white"></i></a>';
             }
@@ -348,9 +348,9 @@ class CategoriesController extends Controller
             if ($asset->assetstatus) {
                 if ($asset->assetstatus->deployable != 0) {
                     if (($asset->assigned_to !='') && ($asset->assigned_to > 0)) {
-                        $inout = '<a href="'.route('checkin/hardware', $asset->id).'" class="btn btn-primary btn-sm">'.Lang::get('general.checkin').'</a>';
+                        $inout = '<a href="'.route('checkin/hardware', $asset->id).'" class="btn btn-primary btn-sm">'.trans('general.checkin').'</a>';
                     } else {
-                        $inout = '<a href="'.route('checkout/hardware', $asset->id).'" class="btn btn-info btn-sm">'.Lang::get('general.checkout').'</a>';
+                        $inout = '<a href="'.route('checkout/hardware', $asset->id).'" class="btn btn-info btn-sm">'.trans('general.checkout').'</a>';
                     }
                 }
             }

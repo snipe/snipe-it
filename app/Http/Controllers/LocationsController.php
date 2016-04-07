@@ -97,7 +97,7 @@ class LocationsController extends Controller
 
         if ($location->save()) {
             // Redirect to the new location  page
-            return Redirect::to("admin/settings/locations")->with('success', Lang::get('admin/locations/message.create.success'));
+            return Redirect::to("admin/settings/locations")->with('success', trans('admin/locations/message.create.success'));
         }
 
         return Redirect::back()->withInput()->withErrors($location->getErrors());
@@ -158,7 +158,7 @@ class LocationsController extends Controller
     {
         // Check if the location exists
         if (is_null($location = Location::find($locationId))) {
-            return Redirect::to('admin/settings/locations')->with('error', Lang::get('admin/locations/message.does_not_exist'));
+            return Redirect::to('admin/settings/locations')->with('error', trans('admin/locations/message.does_not_exist'));
         }
 
         // Show the page
@@ -185,7 +185,7 @@ class LocationsController extends Controller
         // Check if the location exists
         if (is_null($location = Location::find($locationId))) {
             // Redirect to the blogs management page
-            return Redirect::to('admin/settings/locations')->with('error', Lang::get('admin/locations/message.does_not_exist'));
+            return Redirect::to('admin/settings/locations')->with('error', trans('admin/locations/message.does_not_exist'));
         }
 
         // Update the location data
@@ -206,7 +206,7 @@ class LocationsController extends Controller
         // Was the asset created?
         if ($location->save()) {
           // Redirect to the saved location page
-            return Redirect::to("admin/settings/locations/")->with('success', Lang::get('admin/locations/message.update.success'));
+            return Redirect::to("admin/settings/locations/")->with('success', trans('admin/locations/message.update.success'));
         }
 
         // Redirect to the location management page
@@ -227,21 +227,21 @@ class LocationsController extends Controller
         // Check if the location exists
         if (is_null($location = Location::find($locationId))) {
             // Redirect to the blogs management page
-            return Redirect::to('admin/settings/locations')->with('error', Lang::get('admin/locations/message.not_found'));
+            return Redirect::to('admin/settings/locations')->with('error', trans('admin/locations/message.not_found'));
         }
 
 
         if ($location->users->count() > 0) {
-            return Redirect::to('admin/settings/locations')->with('error', Lang::get('admin/locations/message.assoc_users'));
+            return Redirect::to('admin/settings/locations')->with('error', trans('admin/locations/message.assoc_users'));
         } elseif ($location->childLocations->count() > 0) {
-            return Redirect::to('admin/settings/locations')->with('error', Lang::get('admin/locations/message.assoc_child_loc'));
+            return Redirect::to('admin/settings/locations')->with('error', trans('admin/locations/message.assoc_child_loc'));
         } elseif ($location->assets->count() > 0) {
-            return Redirect::to('admin/settings/locations')->with('error', Lang::get('admin/locations/message.assoc_assets'));
+            return Redirect::to('admin/settings/locations')->with('error', trans('admin/locations/message.assoc_assets'));
         } elseif ($location->assignedassets->count() > 0) {
-            return Redirect::to('admin/settings/locations')->with('error', Lang::get('admin/locations/message.assoc_assets'));
+            return Redirect::to('admin/settings/locations')->with('error', trans('admin/locations/message.assoc_assets'));
         } else {
             $location->delete();
-            return Redirect::to('admin/settings/locations')->with('success', Lang::get('admin/locations/message.delete.success'));
+            return Redirect::to('admin/settings/locations')->with('success', trans('admin/locations/message.delete.success'));
         }
 
 
@@ -268,7 +268,7 @@ class LocationsController extends Controller
                 return View::make('locations/view', compact('location'));
         } else {
             // Prepare the error message
-            $error = Lang::get('admin/locations/message.does_not_exist', compact('id'));
+            $error = trans('admin/locations/message.does_not_exist', compact('id'));
 
             // Redirect to the user management page
             return Redirect::route('locations')->with('error', $error);
@@ -330,7 +330,7 @@ class LocationsController extends Controller
         $rows = array();
 
         foreach ($locations as $location) {
-            $actions = '<nobr><a href="'.route('update/location', $location->id).'" class="btn btn-warning btn-sm" style="margin-right:5px;"><i class="fa fa-pencil icon-white"></i></a><a data-html="false" class="btn delete-asset btn-danger btn-sm" data-toggle="modal" href="'.route('delete/location', $location->id).'" data-content="'.Lang::get('admin/locations/message.delete.confirm').'" data-title="'.Lang::get('general.delete').' '.htmlspecialchars($location->name).'?" onClick="return false;"><i class="fa fa-trash icon-white"></i></a></nobr>';
+            $actions = '<nobr><a href="'.route('update/location', $location->id).'" class="btn btn-warning btn-sm" style="margin-right:5px;"><i class="fa fa-pencil icon-white"></i></a><a data-html="false" class="btn delete-asset btn-danger btn-sm" data-toggle="modal" href="'.route('delete/location', $location->id).'" data-content="'.trans('admin/locations/message.delete.confirm').'" data-title="'.trans('general.delete').' '.htmlspecialchars($location->name).'?" onClick="return false;"><i class="fa fa-trash icon-white"></i></a></nobr>';
 
             $rows[] = array(
                 'id'            => $location->id,

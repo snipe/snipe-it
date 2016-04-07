@@ -46,7 +46,7 @@ class ViewAssetsController extends Controller
             return View::make('account/view-assets', compact('user', 'userlog'));
         } else {
             // Prepare the error message
-            $error = Lang::get('admin/users/message.user_not_found', compact('id'));
+            $error = trans('admin/users/message.user_not_found', compact('id'));
 
             // Redirect to the user management page
             return Redirect::route('users')->with('error', $error);
@@ -72,9 +72,9 @@ class ViewAssetsController extends Controller
         // Check if the asset exists and is requestable
         if (is_null($asset = Asset::RequestableAssets()->find($assetId))) {
             // Redirect to the asset management page
-            return Redirect::route('requestable-assets')->with('error', Lang::get('admin/hardware/message.does_not_exist_or_not_requestable'));
+            return Redirect::route('requestable-assets')->with('error', trans('admin/hardware/message.does_not_exist_or_not_requestable'));
         } elseif (!Company::isCurrentUserHasAccess($asset)) {
-            return Redirect::route('requestable-assets')->with('error', Lang::get('general.insufficient_permissions'));
+            return Redirect::route('requestable-assets')->with('error', trans('general.insufficient_permissions'));
         } else {
 
             $logaction = new Actionlog();
@@ -130,7 +130,7 @@ class ViewAssetsController extends Controller
 
             }
 
-            return Redirect::route('requestable-assets')->with('success')->with('success', Lang::get('admin/hardware/message.requests.success'));
+            return Redirect::route('requestable-assets')->with('success')->with('success', trans('admin/hardware/message.requests.success'));
         }
 
 
@@ -144,13 +144,13 @@ class ViewAssetsController extends Controller
 
         if (is_null($findlog = Actionlog::find($logID))) {
             // Redirect to the asset management page
-            return Redirect::to('account')->with('error', Lang::get('admin/hardware/message.does_not_exist'));
+            return Redirect::to('account')->with('error', trans('admin/hardware/message.does_not_exist'));
         }
 
         $user = Auth::user();
 
         if ($user->id != $findlog->checkedout_to) {
-            return Redirect::to('account/view-assets')->with('error', Lang::get('admin/users/message.error.incorrect_user_accepted'));
+            return Redirect::to('account/view-assets')->with('error', trans('admin/users/message.error.incorrect_user_accepted'));
         }
 
         // Asset
@@ -168,9 +168,9 @@ class ViewAssetsController extends Controller
         // Check if the asset exists
         if (is_null($item)) {
             // Redirect to the asset management page
-            return Redirect::to('account')->with('error', Lang::get('admin/hardware/message.does_not_exist'));
+            return Redirect::to('account')->with('error', trans('admin/hardware/message.does_not_exist'));
         } elseif (!Company::isCurrentUserHasAccess($item)) {
-            return Redirect::route('requestable-assets')->with('error', Lang::get('general.insufficient_permissions'));
+            return Redirect::route('requestable-assets')->with('error', trans('general.insufficient_permissions'));
         } else {
             return View::make('account/accept-asset', compact('item'))->with('findlog', $findlog);
         }
@@ -183,28 +183,28 @@ class ViewAssetsController extends Controller
         // Check if the asset exists
         if (is_null($findlog = Actionlog::find($logID))) {
             // Redirect to the asset management page
-            return Redirect::to('account/view-assets')->with('error', Lang::get('admin/hardware/message.does_not_exist'));
+            return Redirect::to('account/view-assets')->with('error', trans('admin/hardware/message.does_not_exist'));
         }
 
         // NOTE: make sure the global scope is applied
         $is_unauthorized = is_null(Actionlog::where('id', '=', $logID)->first());
         if ($is_unauthorized) {
-            return Redirect::route('requestable-assets')->with('error', Lang::get('general.insufficient_permissions'));
+            return Redirect::route('requestable-assets')->with('error', trans('general.insufficient_permissions'));
         }
 
         if ($findlog->accepted_id!='') {
             // Redirect to the asset management page
-            return Redirect::to('account/view-assets')->with('error', Lang::get('admin/users/message.error.asset_already_accepted'));
+            return Redirect::to('account/view-assets')->with('error', trans('admin/users/message.error.asset_already_accepted'));
         }
 
         if (!Input::has('asset_acceptance')) {
-            return Redirect::to('account/view-assets')->with('error', Lang::get('admin/users/message.error.accept_or_decline'));
+            return Redirect::to('account/view-assets')->with('error', trans('admin/users/message.error.accept_or_decline'));
         }
 
         $user = Auth::user();
 
         if ($user->id != $findlog->checkedout_to) {
-            return Redirect::to('account/view-assets')->with('error', Lang::get('admin/users/message.error.incorrect_user_accepted'));
+            return Redirect::to('account/view-assets')->with('error', trans('admin/users/message.error.incorrect_user_accepted'));
         }
 
         $logaction = new Actionlog();
@@ -212,11 +212,11 @@ class ViewAssetsController extends Controller
         if (Input::get('asset_acceptance')=='accepted') {
             $logaction_msg  = 'accepted';
             $accepted="accepted";
-            $return_msg = Lang::get('admin/users/message.accepted');
+            $return_msg = trans('admin/users/message.accepted');
         } else {
             $logaction_msg = 'declined';
             $accepted="rejected";
-            $return_msg = Lang::get('admin/users/message.declined');
+            $return_msg = trans('admin/users/message.declined');
         }
 
         // Asset

@@ -76,7 +76,7 @@ class DepreciationsController extends Controller
       // Was the asset created?
         if ($depreciation->save()) {
             // Redirect to the new depreciation  page
-            return Redirect::to("admin/settings/depreciations")->with('success', Lang::get('admin/depreciations/message.create.success'));
+            return Redirect::to("admin/settings/depreciations")->with('success', trans('admin/depreciations/message.create.success'));
         }
 
         return Redirect::back()->withInput()->withErrors($depreciation->getErrors());
@@ -97,7 +97,7 @@ class DepreciationsController extends Controller
         // Check if the depreciation exists
         if (is_null($depreciation = Depreciation::find($depreciationId))) {
             // Redirect to the blogs management page
-            return Redirect::to('admin/settings/depreciations')->with('error', Lang::get('admin/depreciations/message.does_not_exist'));
+            return Redirect::to('admin/settings/depreciations')->with('error', trans('admin/depreciations/message.does_not_exist'));
         }
 
         // Show the page
@@ -122,7 +122,7 @@ class DepreciationsController extends Controller
         // Check if the depreciation exists
         if (is_null($depreciation = Depreciation::find($depreciationId))) {
             // Redirect to the blogs management page
-            return Redirect::to('admin/settings/depreciations')->with('error', Lang::get('admin/depreciations/message.does_not_exist'));
+            return Redirect::to('admin/settings/depreciations')->with('error', trans('admin/depreciations/message.does_not_exist'));
         }
 
         // Depreciation data
@@ -132,7 +132,7 @@ class DepreciationsController extends Controller
         // Was the asset created?
         if ($depreciation->save()) {
             // Redirect to the depreciation page
-            return Redirect::to("admin/settings/depreciations/")->with('success', Lang::get('admin/depreciations/message.update.success'));
+            return Redirect::to("admin/settings/depreciations/")->with('success', trans('admin/depreciations/message.update.success'));
         }
 
         return Redirect::back()->withInput()->withErrors($depreciation->getErrors());
@@ -154,19 +154,19 @@ class DepreciationsController extends Controller
         // Check if the depreciation exists
         if (is_null($depreciation = Depreciation::find($depreciationId))) {
             // Redirect to the blogs management page
-            return Redirect::to('admin/settings/depreciations')->with('error', Lang::get('admin/depreciations/message.not_found'));
+            return Redirect::to('admin/settings/depreciations')->with('error', trans('admin/depreciations/message.not_found'));
         }
 
         if ($depreciation->has_models() > 0) {
 
             // Redirect to the asset management page
-            return Redirect::to('admin/settings/depreciations')->with('error', Lang::get('admin/depreciations/message.assoc_users'));
+            return Redirect::to('admin/settings/depreciations')->with('error', trans('admin/depreciations/message.assoc_users'));
         } else {
 
             $depreciation->delete();
 
             // Redirect to the depreciations management page
-            return Redirect::to('admin/settings/depreciations')->with('success', Lang::get('admin/depreciations/message.delete.success'));
+            return Redirect::to('admin/settings/depreciations')->with('success', trans('admin/depreciations/message.delete.success'));
         }
 
     }
@@ -213,7 +213,7 @@ class DepreciationsController extends Controller
         $rows = array();
 
         foreach ($depreciations as $depreciation) {
-            $actions = '<a href="'.route('update/depreciations', $depreciation->id).'" class="btn btn-warning btn-sm" style="margin-right:5px;"><i class="fa fa-pencil icon-white"></i></a><a data-html="false" class="btn delete-asset btn-danger btn-sm" data-toggle="modal" href="'.route('delete/depreciations', $depreciation->id).'" data-content="'.Lang::get('admin/depreciations/message.delete.confirm').'" data-title="'.Lang::get('general.delete').' '.htmlspecialchars($depreciation->name).'?" onClick="return false;"><i class="fa fa-trash icon-white"></i></a>';
+            $actions = '<a href="'.route('update/depreciations', $depreciation->id).'" class="btn btn-warning btn-sm" style="margin-right:5px;"><i class="fa fa-pencil icon-white"></i></a><a data-html="false" class="btn delete-asset btn-danger btn-sm" data-toggle="modal" href="'.route('delete/depreciations', $depreciation->id).'" data-content="'.trans('admin/depreciations/message.delete.confirm').'" data-title="'.trans('general.delete').' '.htmlspecialchars($depreciation->name).'?" onClick="return false;"><i class="fa fa-trash icon-white"></i></a>';
 
             $rows[] = array(
                 'id'            => $depreciation->id,

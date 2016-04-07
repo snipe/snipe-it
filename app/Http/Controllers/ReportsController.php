@@ -31,10 +31,12 @@ class ReportsController extends Controller
 {
 
     /**
-     * Show Report for Accessories
-     *
-     * @return View
-     */
+    * Returns a view that displaysthe accessories report.
+    *
+    * @author [A. Gianotto] [<snipe@snipe.net>]
+    * @since [v1.0]
+    * @return View
+    */
     public function getAccessoryReport()
     {
         $accessories = Accessory::orderBy('created_at', 'DESC')->with('company')->get();
@@ -43,20 +45,24 @@ class ReportsController extends Controller
     }
 
     /**
-     * Export Accessories Report as CSV
-     *
-     * @return file download
-     */
+    * Exports the accessories to CSV
+    *
+    * @deprecated Server-side exports have been replaced by datatables export since v2.
+    * @author [A. Gianotto] [<snipe@snipe.net>]
+    * @see ManufacturersController::getDatatable() method that generates the JSON response
+    * @since [v1.0]
+    * @return file download
+    */
     public function exportAccessoryReport()
     {
         $accessories = Accessory::orderBy('created_at', 'DESC')->get();
 
         $rows = array();
         $header = array(
-            Lang::get('admin/accessories/table.title'),
-            Lang::get('admin/accessories/general.accessory_category'),
-            Lang::get('admin/accessories/general.total'),
-            Lang::get('admin/accessories/general.remaining')
+            trans('admin/accessories/table.title'),
+            trans('admin/accessories/general.accessory_category'),
+            trans('admin/accessories/general.total'),
+            trans('admin/accessories/general.remaining')
         );
         $header = array_map('trim', $header);
         $rows[] = implode($header, ', ');
@@ -81,10 +87,12 @@ class ReportsController extends Controller
     }
 
     /**
-     * Show Asset Report
-     *
-     * @return View
-     */
+    * Display asset report.
+    *
+    * @author [A. Gianotto] [<snipe@snipe.net>]
+    * @since [v1.0]
+    * @return View
+    */
     public function getAssetsReport()
     {
         // Grab all the assets
@@ -105,10 +113,12 @@ class ReportsController extends Controller
     }
 
     /**
-     * Export Asset Report as CSV
-     *
-     * @return file download
-     */
+    * Exports the assets to CSV
+    *
+    * @author [A. Gianotto] [<snipe@snipe.net>]
+    * @since [v1.0]
+    * @return file download
+    */
     public function exportAssetReport()
     {
         // Grab all the assets
@@ -118,20 +128,20 @@ class ReportsController extends Controller
 
         // Create the header row
         $header = [
-            Lang::get('admin/hardware/table.asset_tag'),
-            Lang::get('admin/hardware/form.manufacturer'),
-            Lang::get('admin/hardware/form.model'),
-            Lang::get('general.model_no'),
-            Lang::get('general.name'),
-            Lang::get('admin/hardware/table.serial'),
-            Lang::get('general.status'),
-            Lang::get('admin/hardware/table.purchase_date'),
-            Lang::get('admin/hardware/table.purchase_cost'),
-            Lang::get('admin/hardware/form.order'),
-            Lang::get('admin/hardware/form.supplier'),
-            Lang::get('admin/hardware/table.checkoutto'),
-            Lang::get('admin/hardware/table.location'),
-            Lang::get('general.notes'),
+            trans('admin/hardware/table.asset_tag'),
+            trans('admin/hardware/form.manufacturer'),
+            trans('admin/hardware/form.model'),
+            trans('general.model_no'),
+            trans('general.name'),
+            trans('admin/hardware/table.serial'),
+            trans('general.status'),
+            trans('admin/hardware/table.purchase_date'),
+            trans('admin/hardware/table.purchase_cost'),
+            trans('admin/hardware/form.order'),
+            trans('admin/hardware/form.supplier'),
+            trans('admin/hardware/table.checkoutto'),
+            trans('admin/hardware/table.location'),
+            trans('general.notes'),
         ];
         $header = array_map('trim', $header);
         $rows[] = implode($header, ',');
@@ -244,15 +254,15 @@ class ReportsController extends Controller
 
         // Create the header row
         $header = [
-            Lang::get('admin/hardware/table.asset_tag'),
-            Lang::get('admin/hardware/table.title'),
-            Lang::get('admin/hardware/table.serial'),
-            Lang::get('admin/hardware/table.checkoutto'),
-            Lang::get('admin/hardware/table.location'),
-            Lang::get('admin/hardware/table.purchase_date'),
-            Lang::get('admin/hardware/table.purchase_cost'),
-            Lang::get('admin/hardware/table.book_value'),
-            Lang::get('admin/hardware/table.diff')
+            trans('admin/hardware/table.asset_tag'),
+            trans('admin/hardware/table.title'),
+            trans('admin/hardware/table.serial'),
+            trans('admin/hardware/table.checkoutto'),
+            trans('admin/hardware/table.location'),
+            trans('admin/hardware/table.purchase_date'),
+            trans('admin/hardware/table.purchase_cost'),
+            trans('admin/hardware/table.book_value'),
+            trans('admin/hardware/table.diff')
         ];
 
         //we insert the CSV header
@@ -348,13 +358,13 @@ class ReportsController extends Controller
 
         $rows     = [ ];
         $header   = [
-            Lang::get('admin/licenses/table.title'),
-            Lang::get('admin/licenses/table.serial'),
-            Lang::get('admin/licenses/form.seats'),
-            Lang::get('admin/licenses/form.remaining_seats'),
-            Lang::get('admin/licenses/form.expiration'),
-            Lang::get('admin/licenses/form.date'),
-            Lang::get('admin/licenses/form.cost')
+            trans('admin/licenses/table.title'),
+            trans('admin/licenses/table.serial'),
+            trans('admin/licenses/form.seats'),
+            trans('admin/licenses/form.remaining_seats'),
+            trans('admin/licenses/form.expiration'),
+            trans('admin/licenses/form.date'),
+            trans('admin/licenses/form.cost')
         ];
 
         $header = array_map('trim', $header);
@@ -525,9 +535,9 @@ class ReportsController extends Controller
             }
             if (e(Input::get('status')) == '1') {
                 if (( $asset->status_id == '0' ) && ( $asset->assigned_to == '0' )) {
-                    $row[] = Lang::get('general.ready_to_deploy');
+                    $row[] = trans('general.ready_to_deploy');
                 } elseif (( $asset->status_id == '' ) && ( $asset->assigned_to == '0' )) {
-                    $row[] = Lang::get('general.pending');
+                    $row[] = trans('general.pending');
                 } elseif ($asset->assetstatus) {
                     $row[] = '"' .e($asset->assetstatus->name). '"';
                 } else {
@@ -562,7 +572,7 @@ class ReportsController extends Controller
             return $response;
         } else {
             return Redirect::to("reports/custom")
-                           ->with('error', Lang::get('admin/reports/message.error'));
+                           ->with('error', trans('admin/reports/message.error'));
         }
     }
 
@@ -601,14 +611,14 @@ class ReportsController extends Controller
         $rows = [ ];
 
         $header = [
-            Lang::get('admin/asset_maintenances/table.asset_name'),
-            Lang::get('admin/asset_maintenances/table.supplier_name'),
-            Lang::get('admin/asset_maintenances/form.asset_maintenance_type'),
-            Lang::get('admin/asset_maintenances/form.title'),
-            Lang::get('admin/asset_maintenances/form.start_date'),
-            Lang::get('admin/asset_maintenances/form.completion_date'),
-            Lang::get('admin/asset_maintenances/form.asset_maintenance_time'),
-            Lang::get('admin/asset_maintenances/form.cost')
+            trans('admin/asset_maintenances/table.asset_name'),
+            trans('admin/asset_maintenances/table.supplier_name'),
+            trans('admin/asset_maintenances/form.asset_maintenance_type'),
+            trans('admin/asset_maintenances/form.title'),
+            trans('admin/asset_maintenances/form.start_date'),
+            trans('admin/asset_maintenances/form.completion_date'),
+            trans('admin/asset_maintenances/form.asset_maintenance_time'),
+            trans('admin/asset_maintenances/form.cost')
         ];
 
         $header = array_map('trim', $header);
@@ -629,7 +639,7 @@ class ReportsController extends Controller
                 $improvementTime = intval($assetMaintenance->asset_maintenance_time);
             }
             $row[]  = $improvementTime;
-            $row[]  = Lang::get('general.currency') . number_format($assetMaintenance->cost, 2);
+            $row[]  = trans('general.currency') . number_format($assetMaintenance->cost, 2);
             $rows[] = implode($row, ',');
         }
 
@@ -673,11 +683,11 @@ class ReportsController extends Controller
         $rows = [ ];
 
         $header = [
-            Lang::get('general.category'),
-            Lang::get('admin/hardware/form.model'),
-            Lang::get('admin/hardware/form.name'),
-            Lang::get('admin/hardware/table.asset_tag'),
-            Lang::get('admin/hardware/table.checkoutto'),
+            trans('general.category'),
+            trans('admin/hardware/form.model'),
+            trans('admin/hardware/form.name'),
+            trans('admin/hardware/table.asset_tag'),
+            trans('admin/hardware/table.checkoutto'),
         ];
 
         $header = array_map('trim', $header);

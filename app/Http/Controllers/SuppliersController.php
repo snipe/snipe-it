@@ -94,7 +94,7 @@ class SuppliersController extends Controller
             // Was it created?
         if ($supplier->save()) {
           // Redirect to the new supplier  page
-            return Redirect::to("admin/settings/suppliers")->with('success', Lang::get('admin/suppliers/message.create.success'));
+            return Redirect::to("admin/settings/suppliers")->with('success', trans('admin/suppliers/message.create.success'));
         }
 
 
@@ -126,7 +126,7 @@ class SuppliersController extends Controller
         // Check if the supplier exists
         if (is_null($supplier = Supplier::find($supplierId))) {
             // Redirect to the supplier  page
-            return Redirect::to('admin/settings/suppliers')->with('error', Lang::get('admin/suppliers/message.does_not_exist'));
+            return Redirect::to('admin/settings/suppliers')->with('error', trans('admin/suppliers/message.does_not_exist'));
         }
 
         // Show the page
@@ -145,7 +145,7 @@ class SuppliersController extends Controller
         // Check if the supplier exists
         if (is_null($supplier = Supplier::find($supplierId))) {
             // Redirect to the supplier  page
-            return Redirect::to('admin/settings/suppliers')->with('error', Lang::get('admin/suppliers/message.does_not_exist'));
+            return Redirect::to('admin/settings/suppliers')->with('error', trans('admin/suppliers/message.does_not_exist'));
         }
 
         // Save the  data
@@ -179,7 +179,7 @@ class SuppliersController extends Controller
         }
 
         if ($supplier->save()) {
-            return Redirect::to("admin/settings/suppliers")->with('success', Lang::get('admin/suppliers/message.update.success'));
+            return Redirect::to("admin/settings/suppliers")->with('success', trans('admin/suppliers/message.update.success'));
         }
 
         return Redirect::back()->withInput()->withErrors($supplier->getErrors());
@@ -197,20 +197,20 @@ class SuppliersController extends Controller
         // Check if the supplier exists
         if (is_null($supplier = Supplier::find($supplierId))) {
             // Redirect to the suppliers page
-            return Redirect::to('admin/settings/suppliers')->with('error', Lang::get('admin/suppliers/message.not_found'));
+            return Redirect::to('admin/settings/suppliers')->with('error', trans('admin/suppliers/message.not_found'));
         }
 
         if ($supplier->num_assets() > 0) {
 
             // Redirect to the asset management page
-            return Redirect::to('admin/settings/suppliers')->with('error', Lang::get('admin/suppliers/message.assoc_users'));
+            return Redirect::to('admin/settings/suppliers')->with('error', trans('admin/suppliers/message.assoc_users'));
         } else {
 
             // Delete the supplier
             $supplier->delete();
 
             // Redirect to the suppliers management page
-            return Redirect::to('admin/settings/suppliers')->with('success', Lang::get('admin/suppliers/message.delete.success'));
+            return Redirect::to('admin/settings/suppliers')->with('success', trans('admin/suppliers/message.delete.success'));
         }
 
     }
@@ -230,7 +230,7 @@ class SuppliersController extends Controller
                 return View::make('suppliers/view', compact('supplier'));
         } else {
             // Prepare the error message
-            $error = Lang::get('admin/suppliers/message.does_not_exist', compact('id'));
+            $error = trans('admin/suppliers/message.does_not_exist', compact('id'));
 
             // Redirect to the user management page
             return Redirect::route('suppliers')->with('error', $error);
@@ -272,7 +272,7 @@ class SuppliersController extends Controller
         $rows = array();
 
         foreach ($suppliers as $supplier) {
-            $actions = '<a href="'.route('update/supplier', $supplier->id).'" class="btn btn-warning btn-sm" style="margin-right:5px;"><i class="fa fa-pencil icon-white"></i></a><a data-html="false" class="btn delete-asset btn-danger btn-sm" data-toggle="modal" href="'.route('delete/supplier', $supplier->id).'" data-content="'.Lang::get('admin/suppliers/message.delete.confirm').'" data-title="'.Lang::get('general.delete').' '.htmlspecialchars($supplier->name).'?" onClick="return false;"><i class="fa fa-trash icon-white"></i></a>';
+            $actions = '<a href="'.route('update/supplier', $supplier->id).'" class="btn btn-warning btn-sm" style="margin-right:5px;"><i class="fa fa-pencil icon-white"></i></a><a data-html="false" class="btn delete-asset btn-danger btn-sm" data-toggle="modal" href="'.route('delete/supplier', $supplier->id).'" data-content="'.trans('admin/suppliers/message.delete.confirm').'" data-title="'.trans('general.delete').' '.htmlspecialchars($supplier->name).'?" onClick="return false;"><i class="fa fa-trash icon-white"></i></a>';
 
             $rows[] = array(
                 'id'                => $supplier->id,

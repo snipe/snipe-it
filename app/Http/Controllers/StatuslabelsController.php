@@ -75,7 +75,7 @@ class StatuslabelsController extends Controller
         // Was the asset created?
         if ($statuslabel->save()) {
             // Redirect to the new Statuslabel  page
-            return Redirect::to("admin/settings/statuslabels")->with('success', Lang::get('admin/statuslabels/message.create.success'));
+            return Redirect::to("admin/settings/statuslabels")->with('success', trans('admin/statuslabels/message.create.success'));
         }
 
         return Redirect::back()->withInput()->withErrors($statuslabel->getErrors());
@@ -126,12 +126,12 @@ class StatuslabelsController extends Controller
         // Check if the Statuslabel exists
         if (is_null($statuslabel = Statuslabel::find($statuslabelId))) {
             // Redirect to the blogs management page
-            return Redirect::to('admin/settings/statuslabels')->with('error', Lang::get('admin/statuslabels/message.does_not_exist'));
+            return Redirect::to('admin/settings/statuslabels')->with('error', trans('admin/statuslabels/message.does_not_exist'));
         }
 
         $use_statuslabel_type = $statuslabel->getStatuslabelType();
 
-        $statuslabel_types = array('' => Lang::get('admin/hardware/form.select_statustype')) + array('undeployable' => Lang::get('admin/hardware/general.undeployable')) + array('pending' => Lang::get('admin/hardware/general.pending')) + array('archived' => Lang::get('admin/hardware/general.archived')) + array('deployable' => Lang::get('admin/hardware/general.deployable'));
+        $statuslabel_types = array('' => trans('admin/hardware/form.select_statustype')) + array('undeployable' => trans('admin/hardware/general.undeployable')) + array('pending' => trans('admin/hardware/general.pending')) + array('archived' => trans('admin/hardware/general.archived')) + array('deployable' => trans('admin/hardware/general.deployable'));
 
         return View::make('statuslabels/edit', compact('statuslabel', 'statuslabel_types'))->with('use_statuslabel_type', $use_statuslabel_type);
     }
@@ -148,7 +148,7 @@ class StatuslabelsController extends Controller
         // Check if the Statuslabel exists
         if (is_null($statuslabel = Statuslabel::find($statuslabelId))) {
             // Redirect to the blogs management page
-            return Redirect::to('admin/settings/statuslabels')->with('error', Lang::get('admin/statuslabels/message.does_not_exist'));
+            return Redirect::to('admin/settings/statuslabels')->with('error', trans('admin/statuslabels/message.does_not_exist'));
         }
 
 
@@ -164,14 +164,14 @@ class StatuslabelsController extends Controller
         // Was the asset created?
         if ($statuslabel->save()) {
             // Redirect to the saved Statuslabel page
-            return Redirect::to("admin/settings/statuslabels/")->with('success', Lang::get('admin/statuslabels/message.update.success'));
+            return Redirect::to("admin/settings/statuslabels/")->with('success', trans('admin/statuslabels/message.update.success'));
         } else {
             return Redirect::back()->withInput()->withErrors($statuslabel->getErrors());
         }
 
 
         // Redirect to the Statuslabel management page
-        return Redirect::to("admin/settings/statuslabels/$statuslabelId/edit")->with('error', Lang::get('admin/statuslabels/message.update.error'));
+        return Redirect::to("admin/settings/statuslabels/$statuslabelId/edit")->with('error', trans('admin/statuslabels/message.update.error'));
 
     }
 
@@ -186,20 +186,20 @@ class StatuslabelsController extends Controller
         // Check if the Statuslabel exists
         if (is_null($statuslabel = Statuslabel::find($statuslabelId))) {
             // Redirect to the blogs management page
-            return Redirect::to('admin/settings/statuslabels')->with('error', Lang::get('admin/statuslabels/message.not_found'));
+            return Redirect::to('admin/settings/statuslabels')->with('error', trans('admin/statuslabels/message.not_found'));
         }
 
 
         if ($statuslabel->has_assets() > 0) {
 
             // Redirect to the asset management page
-            return Redirect::to('admin/settings/statuslabels')->with('error', Lang::get('admin/statuslabels/message.assoc_users'));
+            return Redirect::to('admin/settings/statuslabels')->with('error', trans('admin/statuslabels/message.assoc_users'));
         } else {
 
             $statuslabel->delete();
 
             // Redirect to the statuslabels management page
-            return Redirect::to('admin/settings/statuslabels')->with('success', Lang::get('admin/statuslabels/message.delete.success'));
+            return Redirect::to('admin/settings/statuslabels')->with('success', trans('admin/statuslabels/message.delete.success'));
         }
 
 
@@ -242,16 +242,16 @@ class StatuslabelsController extends Controller
         foreach ($statuslabels as $statuslabel) {
 
             if ($statuslabel->deployable == 1) {
-                $label_type = Lang::get('admin/statuslabels/table.deployable');
+                $label_type = trans('admin/statuslabels/table.deployable');
             } elseif ($statuslabel->pending == 1) {
-                $label_type = Lang::get('admin/statuslabels/table.pending');
+                $label_type = trans('admin/statuslabels/table.pending');
             } elseif ($statuslabel->archived == 1) {
-                $label_type = Lang::get('admin/statuslabels/table.archived');
+                $label_type = trans('admin/statuslabels/table.archived');
             } else {
-                $label_type = Lang::get('admin/statuslabels/table.undeployable');
+                $label_type = trans('admin/statuslabels/table.undeployable');
             }
 
-            $actions = '<a href="'.route('update/statuslabel', $statuslabel->id).'" class="btn btn-warning btn-sm" style="margin-right:5px;"><i class="fa fa-pencil icon-white"></i></a><a data-html="false" class="btn delete-asset btn-danger btn-sm" data-toggle="modal" href="'.route('delete/statuslabel', $statuslabel->id).'" data-content="'.Lang::get('admin/statuslabels/message.delete.confirm').'" data-title="'.Lang::get('general.delete').' '.htmlspecialchars($statuslabel->name).'?" onClick="return false;"><i class="fa fa-trash icon-white"></i></a>';
+            $actions = '<a href="'.route('update/statuslabel', $statuslabel->id).'" class="btn btn-warning btn-sm" style="margin-right:5px;"><i class="fa fa-pencil icon-white"></i></a><a data-html="false" class="btn delete-asset btn-danger btn-sm" data-toggle="modal" href="'.route('delete/statuslabel', $statuslabel->id).'" data-content="'.trans('admin/statuslabels/message.delete.confirm').'" data-title="'.trans('general.delete').' '.htmlspecialchars($statuslabel->name).'?" onClick="return false;"><i class="fa fa-trash icon-white"></i></a>';
 
             $rows[] = array(
                 'id'            => e($statuslabel->id),

@@ -18,10 +18,12 @@ use App\Helpers\Helper;
 class ProfileController extends Controller
 {
     /**
-     * User profile page.
-     *
-     * @return View
-     */
+    * Returns a view with the user's profile form for editing
+    *
+    * @author [A. Gianotto] [<snipe@snipe.net>]
+    * @since [v1.0]
+    * @return View
+    */
     public function getIndex()
     {
         // Get the user information
@@ -31,10 +33,12 @@ class ProfileController extends Controller
     }
 
     /**
-     * User profile form processing page.
-     *
-     * @return Redirect
-     */
+    * Validates and stores the user's update data.
+    *
+    * @author [A. Gianotto] [<snipe@snipe.net>]
+    * @since [v1.0]
+    * @return Redirect
+    */
     public function postIndex()
     {
 

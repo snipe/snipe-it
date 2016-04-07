@@ -106,7 +106,7 @@ class ComponentsController extends Controller
         // Was the component created?
         if ($component->save()) {
             // Redirect to the new component  page
-            return Redirect::to("admin/components")->with('success', Lang::get('admin/components/message.create.success'));
+            return Redirect::to("admin/components")->with('success', trans('admin/components/message.create.success'));
         }
 
         return Redirect::back()->withInput()->withErrors($component->getErrors());
@@ -128,9 +128,9 @@ class ComponentsController extends Controller
         // Check if the component exists
         if (is_null($component = Component::find($componentId))) {
             // Redirect to the blogs management page
-            return Redirect::to('admin/components')->with('error', Lang::get('admin/components/message.does_not_exist'));
+            return Redirect::to('admin/components')->with('error', trans('admin/components/message.does_not_exist'));
         } elseif (!Company::isCurrentUserHasAccess($component)) {
-            return Redirect::to('admin/components')->with('error', Lang::get('general.insufficient_permissions'));
+            return Redirect::to('admin/components')->with('error', trans('general.insufficient_permissions'));
         }
 
             $category_list =  Helper::categoryList();
@@ -158,9 +158,9 @@ class ComponentsController extends Controller
         // Check if the blog post exists
         if (is_null($component = Component::find($componentId))) {
             // Redirect to the blogs management page
-            return Redirect::to('admin/components')->with('error', Lang::get('admin/components/message.does_not_exist'));
+            return Redirect::to('admin/components')->with('error', trans('admin/components/message.does_not_exist'));
         } elseif (!Company::isCurrentUserHasAccess($component)) {
-            return Redirect::to('admin/components')->with('error', Lang::get('general.insufficient_permissions'));
+            return Redirect::to('admin/components')->with('error', trans('general.insufficient_permissions'));
         }
 
 
@@ -189,7 +189,7 @@ class ComponentsController extends Controller
         // Was the component created?
         if ($component->save()) {
             // Redirect to the new component page
-            return Redirect::to("admin/components")->with('success', Lang::get('admin/components/message.update.success'));
+            return Redirect::to("admin/components")->with('success', trans('admin/components/message.update.success'));
         }
 
         return Redirect::back()->withInput()->withErrors($component->getErrors());
@@ -212,15 +212,15 @@ class ComponentsController extends Controller
         // Check if the blog post exists
         if (is_null($component = Component::find($componentId))) {
             // Redirect to the blogs management page
-            return Redirect::to('admin/components')->with('error', Lang::get('admin/components/message.not_found'));
+            return Redirect::to('admin/components')->with('error', trans('admin/components/message.not_found'));
         } elseif (!Company::isCurrentUserHasAccess($component)) {
-            return Redirect::to('admin/components')->with('error', Lang::get('general.insufficient_permissions'));
+            return Redirect::to('admin/components')->with('error', trans('general.insufficient_permissions'));
         }
 
             $component->delete();
 
             // Redirect to the locations management page
-            return Redirect::to('admin/components')->with('success', Lang::get('admin/components/message.delete.success'));
+            return Redirect::to('admin/components')->with('success', trans('admin/components/message.delete.success'));
 
     }
 
@@ -252,13 +252,13 @@ class ComponentsController extends Controller
 
 
             if (!Company::isCurrentUserHasAccess($component)) {
-                return Redirect::to('admin/components')->with('error', Lang::get('general.insufficient_permissions'));
+                return Redirect::to('admin/components')->with('error', trans('general.insufficient_permissions'));
             } else {
                 return View::make('components/view', compact('component'));
             }
         } else {
             // Prepare the error message
-            $error = Lang::get('admin/components/message.does_not_exist', compact('id'));
+            $error = trans('admin/components/message.does_not_exist', compact('id'));
 
             // Redirect to the user management page
             return Redirect::route('components')->with('error', $error);
@@ -281,9 +281,9 @@ class ComponentsController extends Controller
         // Check if the component exists
         if (is_null($component = Component::find($componentId))) {
             // Redirect to the component management page with error
-            return Redirect::to('components')->with('error', Lang::get('admin/components/message.not_found'));
+            return Redirect::to('components')->with('error', trans('admin/components/message.not_found'));
         } elseif (!Company::isCurrentUserHasAccess($component)) {
-            return Redirect::to('admin/components')->with('error', Lang::get('general.insufficient_permissions'));
+            return Redirect::to('admin/components')->with('error', trans('general.insufficient_permissions'));
         }
 
         // Get the dropdown of assets and then pass it to the checkout view
@@ -307,9 +307,9 @@ class ComponentsController extends Controller
       // Check if the component exists
         if (is_null($component = Component::find($componentId))) {
             // Redirect to the component management page with error
-            return Redirect::to('components')->with('error', Lang::get('admin/components/message.not_found'));
+            return Redirect::to('components')->with('error', trans('admin/components/message.not_found'));
         } elseif (!Company::isCurrentUserHasAccess($component)) {
-            return Redirect::to('admin/components')->with('error', Lang::get('general.insufficient_permissions'));
+            return Redirect::to('admin/components')->with('error', trans('general.insufficient_permissions'));
         }
 
         $admin_user = Auth::user();
@@ -318,7 +318,7 @@ class ComponentsController extends Controller
       // Check if the user exists
         if (is_null($asset = Asset::find($asset_id))) {
             // Redirect to the component management page with error
-            return Redirect::to('admin/components')->with('error', Lang::get('admin/components/message.asset_does_not_exist'));
+            return Redirect::to('admin/components')->with('error', trans('admin/components/message.asset_does_not_exist'));
         }
 
       // Update the component data
@@ -375,7 +375,7 @@ class ComponentsController extends Controller
         $log = $logaction->logaction('checkout');
 
       // Redirect to the new component page
-        return Redirect::to("admin/components")->with('success', Lang::get('admin/components/message.checkout.success'));
+        return Redirect::to("admin/components")->with('success', trans('admin/components/message.checkout.success'));
 
 
 
@@ -437,7 +437,7 @@ class ComponentsController extends Controller
         $rows = array();
 
         foreach ($components as $component) {
-            $actions = '<nobr><a href="'.route('checkout/component', $component->id).'" style="margin-right:5px;" class="btn btn-info btn-sm" '.(($component->numRemaining() > 0 ) ? '' : ' disabled').'>'.Lang::get('general.checkout').'</a><a href="'.route('update/component', $component->id).'" class="btn btn-warning btn-sm" style="margin-right:5px;"><i class="fa fa-pencil icon-white"></i></a><a data-html="false" class="btn delete-asset btn-danger btn-sm" data-toggle="modal" href="'.route('delete/component', $component->id).'" data-content="'.Lang::get('admin/components/message.delete.confirm').'" data-title="'.Lang::get('general.delete').' '.htmlspecialchars($component->name).'?" onClick="return false;"><i class="fa fa-trash icon-white"></i></a></nobr>';
+            $actions = '<nobr><a href="'.route('checkout/component', $component->id).'" style="margin-right:5px;" class="btn btn-info btn-sm" '.(($component->numRemaining() > 0 ) ? '' : ' disabled').'>'.trans('general.checkout').'</a><a href="'.route('update/component', $component->id).'" class="btn btn-warning btn-sm" style="margin-right:5px;"><i class="fa fa-pencil icon-white"></i></a><a data-html="false" class="btn delete-asset btn-danger btn-sm" data-toggle="modal" href="'.route('delete/component', $component->id).'" data-content="'.trans('admin/components/message.delete.confirm').'" data-title="'.trans('general.delete').' '.htmlspecialchars($component->name).'?" onClick="return false;"><i class="fa fa-trash icon-white"></i></a></nobr>';
             $company = $component->company;
 
             $rows[] = array(

@@ -56,7 +56,7 @@ final class CompaniesController extends Controller
 
         if ($company->save()) {
             return Redirect::to('admin/settings/companies')
-                ->with('success', Lang::get('admin/companies/message.create.success'));
+                ->with('success', trans('admin/companies/message.create.success'));
         } else {
             return Redirect::back()->withInput()->withErrors($company->getErrors());
         }
@@ -76,7 +76,7 @@ final class CompaniesController extends Controller
     {
         if (is_null($company = Company::find($companyId))) {
             return Redirect::to('admin/settings/companies')
-                ->with('error', Lang::get('admin/companies/message.does_not_exist'));
+                ->with('error', trans('admin/companies/message.does_not_exist'));
         } else {
             return View::make('companies/edit')->with('company', $company);
         }
@@ -93,7 +93,7 @@ final class CompaniesController extends Controller
     public function postEdit($companyId)
     {
         if (is_null($company = Company::find($companyId))) {
-            return Redirect::to('admin/settings/companies')->with('error', Lang::get('admin/companies/message.does_not_exist'));
+            return Redirect::to('admin/settings/companies')->with('error', trans('admin/companies/message.does_not_exist'));
         } else {
 
 
@@ -101,10 +101,10 @@ final class CompaniesController extends Controller
 
             if ($company->save()) {
                 return Redirect::to('admin/settings/companies')
-                    ->with('success', Lang::get('admin/companies/message.update.success'));
+                    ->with('success', trans('admin/companies/message.update.success'));
             } else {
                 return Redirect::to("admin/settings/companies/$companyId/edit")
-                    ->with('error', Lang::get('admin/companies/message.update.error'));
+                    ->with('error', trans('admin/companies/message.update.error'));
             }
 
         }
@@ -122,12 +122,12 @@ final class CompaniesController extends Controller
     {
         if (is_null($company = Company::find($companyId))) {
             return Redirect::to('admin/settings/companies')
-                ->with('error', Lang::get('admin/companies/message.not_found'));
+                ->with('error', trans('admin/companies/message.not_found'));
         } else {
             try {
                 $company->delete();
                 return Redirect::to('admin/settings/companies')
-                    ->with('success', Lang::get('admin/companies/message.delete.success'));
+                    ->with('success', trans('admin/companies/message.delete.success'));
             } catch (\Illuminate\Database\QueryException $exception) {
             /*
                  * NOTE: This happens when there's a foreign key constraint violation
@@ -135,7 +135,7 @@ final class CompaniesController extends Controller
                  */
                 if ($exception->getCode() == 23000) {
                     return Redirect::to('admin/settings/companies')
-                        ->with('error', Lang::get('admin/companies/message.assoc_users'));
+                        ->with('error', trans('admin/companies/message.assoc_users'));
                 } else {
                     throw $exception;
                 }
