@@ -4,6 +4,11 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Watson\Validating\ValidatingTrait;
 
+/**
+ * Model for Companies.
+ *
+ * @version    v1.8
+ */
 final class Company extends Model
 {
     protected $table = 'companies';
@@ -139,7 +144,7 @@ final class Company extends Model
             return $query;
         } else {
             $f = function ($q) {
-            
+
                 static::scopeCompanyablesDirectly($q);
             };
 

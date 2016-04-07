@@ -1,13 +1,4 @@
 <?php
-/**
- * This controller handles all actions related to Locations for
- * the Snipe-IT Asset Management application.
- *
- * PHP version 5.5.9
- * @package    Snipe-IT
- * @version    v1.0
- */
-
 namespace App\Http\Controllers;
 
 use Input;
@@ -20,11 +11,14 @@ use Str;
 use Validator;
 use View;
 use Auth;
-
-
-
 use Symfony\Component\HttpFoundation\JsonResponse;
 
+/**
+ * This controller handles all actions related to Locations for
+ * the Snipe-IT Asset Management application.
+ *
+ * @version    v1.0
+ */
 class LocationsController extends Controller
 {
 

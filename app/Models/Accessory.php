@@ -5,6 +5,11 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Watson\Validating\ValidatingTrait;
 
+/**
+ * Model for Accessories.
+ * 
+ * @version    v1.0
+ */
 class Accessory extends Model
 {
     use SoftDeletes;
@@ -122,7 +127,7 @@ class Accessory extends Model
         $search = explode('+', $search);
 
         return $query->where(function ($query) use ($search) {
-        
+
             foreach ($search as $search) {
                     $query->whereHas('category', function ($query) use ($search) {
                         $query->where('categories.name', 'LIKE', '%'.$search.'%');

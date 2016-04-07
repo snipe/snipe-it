@@ -5,6 +5,12 @@ use Illuminate\Database\Eloquent\Model;
 use \Illuminate\Database\Eloquent\Builder;
 use \Illuminate\Database\Eloquent\Scope;
 
+/**
+ * Handle query scoping for full company support.
+ *
+ * @todo Move this to a more Laravel 5.2 esque way
+ * @version    v1.0
+ */
 final class CompanyableChildScope implements Scope
 {
     /**

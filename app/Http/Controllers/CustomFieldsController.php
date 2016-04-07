@@ -1,12 +1,4 @@
 <?php
-/**
- * This controller handles all actions related to Custom Asset Fields for
- * the Snipe-IT Asset Management application.
- *
- * PHP version 5.5.9
- * @package    Snipe-IT
- * @version    v2.0
- */
 namespace App\Http\Controllers;
 
 use View;
@@ -19,14 +11,26 @@ use App\Models\AssetModel;
 use Lang;
 use Auth;
 
+/**
+ * This controller handles all actions related to Custom Asset Fields for
+ * the Snipe-IT Asset Management application.
+ *
+ * @todo Improve documentation here.
+ * @todo Check for raw DB queries and try to convert them to query builder statements
+ * @version    v2.0
+ * @author [Brady Wetherington] [<uberbrady@gmail.com>]
+ */
+
 class CustomFieldsController extends Controller
 {
 
     /**
-     * Display a listing of the resource.
-     *
-     * @return Response
-     */
+    * Returns a view with a listing of custom fields.
+    *
+    * @author [Brady Wetherington] [<uberbrady@gmail.com>]
+    * @since [v1.8]
+    * @return View
+    */
     public function index()
     {
         //
@@ -39,10 +43,12 @@ class CustomFieldsController extends Controller
 
 
     /**
-     * Show the form for creating a new resource.
-     *
-     * @return Response
-     */
+    * Returns a view with a form for creating a new custom fieldset.
+    *
+    * @author [Brady Wetherington] [<uberbrady@gmail.com>]
+    * @since [v1.8]
+    * @return View
+    */
     public function create()
     {
         //
@@ -51,10 +57,12 @@ class CustomFieldsController extends Controller
 
 
     /**
-     * Store a newly created resource in storage.
-     *
-     * @return Response
-     */
+    * Validates and stores a new custom fieldset.
+    *
+    * @author [Brady Wetherington] [<uberbrady@gmail.com>]
+    * @since [v1.8]
+    * @return Redirect
+    */
     public function store()
     {
         //
@@ -68,6 +76,13 @@ class CustomFieldsController extends Controller
         }
     }
 
+    /**
+    * Associate the custom field with a custom fieldset.
+    *
+    * @author [Brady Wetherington] [<uberbrady@gmail.com>]
+    * @since [v1.8]
+    * @return View
+    */
     public function associate($id)
     {
 
@@ -84,11 +99,29 @@ class CustomFieldsController extends Controller
         return Redirect::route("admin.custom_fields.show", [$id])->with("success", Lang::get('admin/custom_fields/message.field.create.assoc_success'));
     }
 
+
+    /**
+    * Returns a view with a form to create a new custom field.
+    *
+    * @see CustomFieldsController::storeField()
+    * @author [Brady Wetherington] [<uberbrady@gmail.com>]
+    * @since [v1.8]
+    * @return View
+    */
     public function createField()
     {
         return View::make("custom_fields.create_field");
     }
 
+
+    /**
+    * Validates and stores a new custom field.
+    *
+    * @see CustomFieldsController::createField()
+    * @author [Brady Wetherington] [<uberbrady@gmail.com>]
+    * @since [v1.8]
+    * @return Redirect
+    */
     public function storeField()
     {
         $field=new CustomField(["name" => Input::get("name"),"element" => Input::get("element"),"user_id" => Auth::user()->id]);
@@ -114,6 +147,13 @@ class CustomFieldsController extends Controller
         }
     }
 
+    /**
+    * Delete a custom field.
+    *
+    * @author [Brady Wetherington] [<uberbrady@gmail.com>]
+    * @since [v1.8]
+    * @return Redirect
+    */
     public function deleteField($field_id)
     {
         $field=CustomField::find($field_id);
@@ -127,11 +167,13 @@ class CustomFieldsController extends Controller
     }
 
     /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return Response
-     */
+    * Validates and stores a new custom field.
+    *
+    * @author [Brady Wetherington] [<uberbrady@gmail.com>]
+    * @param int $id
+    * @since [v1.8]
+    * @return View
+    */
     public function show($id)
     {
         //$id=$parameters[0];
@@ -158,11 +200,14 @@ class CustomFieldsController extends Controller
 
 
     /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return Response
-     */
+    * What the actual fuck, Brady?
+    *
+    * @todo Uhh, build this?
+    * @author [Brady Wetherington] [<uberbrady@gmail.com>]
+    * @param  int  $id
+    * @since [v1.8]
+    * @return Fuckall
+    */
     public function edit($id)
     {
         //
@@ -170,11 +215,14 @@ class CustomFieldsController extends Controller
 
 
     /**
-     * Update the specified resource in storage.
-     *
-     * @param  int  $id
-     * @return Response
-     */
+    * GET IN THE SEA BRADY.
+    *
+    * @todo Uhh, build this too?
+    * @author [Brady Wetherington] [<uberbrady@gmail.com>]
+    * @param  int  $id
+    * @since [v1.8]
+    * @return Fuckall
+    */
     public function update($id)
     {
         //
@@ -182,11 +230,13 @@ class CustomFieldsController extends Controller
 
 
     /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return Response
-     */
+    * Validates a custom fieldset and then deletes if it has no models associated.
+    *
+    * @author [Brady Wetherington] [<uberbrady@gmail.com>]
+    * @param  int  $id
+    * @since [v1.8]
+    * @return View
+    */
     public function destroy($id)
     {
         //

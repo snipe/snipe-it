@@ -1,13 +1,6 @@
 <?php
-/**
- * This controller handles all actions related to Consumables for
- * the Snipe-IT Asset Management application.
- *
- * PHP version 5.5.9
- * @package    Snipe-IT
- * @version    v1.8
- */
- namespace App\Http\Controllers;
+
+namespace App\Http\Controllers;
 
 use App\Helpers\Helper;
 use App\Models\Actionlog;
@@ -26,6 +19,12 @@ use Slack;
 use Str;
 use View;
 
+/**
+ * This controller handles all actions related to Consumables for
+ * the Snipe-IT Asset Management application.
+ *
+ * @version    v1.0
+ */
 class ConsumablesController extends Controller
 {
     /**

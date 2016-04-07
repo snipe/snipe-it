@@ -1,13 +1,4 @@
 <?php
-/**
- * This controller handles all reporting actions for
- * the Snipe-IT Asset Management application.
- *
- * PHP version 5.5.9
- * @package    Snipe-IT
- * @version    v1.0
- */
-
 namespace App\Http\Controllers;
 
 use App\Models\Accessory;
@@ -30,6 +21,12 @@ use Redirect;
 use App\Models\Setting;
 use App\Models\User;
 
+/**
+ * This controller handles all actions related to Reports for
+ * the Snipe-IT Asset Management application.
+ *
+ * @version    v1.0
+ */
 class ReportsController extends Controller
 {
 

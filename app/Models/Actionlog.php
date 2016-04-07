@@ -6,6 +6,12 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
+/**
+ * Model for the Actionlog (the table that keeps a historical log of
+ * checkouts, checkins, and updates).
+ *
+ * @version    v1.0
+ */
 class Actionlog extends Model implements ICompanyableChild
 {
     use SoftDeletes;

@@ -5,6 +5,14 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Watson\Validating\ValidatingTrait;
 
+/**
+ * Model for Categories. Categories are a higher-level group
+ * than Asset Models, and handle things like whether or not
+ * to require acceptance from the user, whether or not to
+ * send a EULA to the user, etc.
+ *
+ * @version    v1.0
+ */
 class Category extends Model
 {
 
@@ -127,7 +135,7 @@ class Category extends Model
     {
 
         return $query->where(function ($query) use ($search) {
-        
+
             $query->where('name', 'LIKE', '%'.$search.'%')
             ->orWhere('category_type', 'LIKE', '%'.$search.'%');
         });

@@ -1,12 +1,4 @@
 <?php
-/**
- * This controller handles all actions related to the admin dashboard
- * the Snipe-IT Asset Management application.
- *
- * PHP version 5.5.9
- * @package    Snipe-IT
- * @version    v1.0
- */
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\AdminController;
@@ -17,13 +9,22 @@ use Redirect;
 use App\Models\Asset;
 use App\Models\Company;
 
+/**
+ * This controller handles all actions related to the Admin Dashboard
+ * for the Snipe-IT Asset Management application.
+ *
+ * @version    v1.0
+ */
 class DashboardController extends Controller
 {
     /**
-     * Show the administration dashboard page.
-     *
-     * @return View
-     */
+    * Check authorization and display admin dashboard, otherwise display
+    * the user's checked-out assets.
+    *
+    * @author [A. Gianotto] [<snipe@snipe.net>]
+    * @since [v1.0]
+    * @return View
+    */
     public function getIndex()
     {
         // Show the page

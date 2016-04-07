@@ -1,12 +1,4 @@
 <?php
-/**
- * This controller handles all actions related to Manufacturers for
- * the Snipe-IT Asset Management application.
- *
- * PHP version 5.5.9
- * @package    Snipe-IT
- * @version    v1.0
- */
 namespace App\Http\Controllers;
 
 use App\Models\Company;
@@ -19,6 +11,12 @@ use Str;
 use View;
 use Auth;
 
+/**
+ * This controller handles all actions related to Manufacturers for
+ * the Snipe-IT Asset Management application.
+ *
+ * @version    v1.0
+ */
 class ManufacturersController extends Controller
 {
     /**

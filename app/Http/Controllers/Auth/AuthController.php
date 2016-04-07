@@ -15,18 +15,16 @@ use Redirect;
 use Log;
 use View;
 
+/**
+ * This controller handles authentication for the user, including local
+ * database users and LDAP users.
+ *
+ * @todo Move LDAP methods into user model for better separation of concerns.
+ * @author [A. Gianotto] [<snipe@snipe.net>]
+ * @version    v1.0
+ */
 class AuthController extends Controller
 {
-    /*
-    |--------------------------------------------------------------------------
-    | Registration & Login Controller
-    |--------------------------------------------------------------------------
-    |
-    | This controller handles the registration of new users, as well as the
-    | authentication of existing users. By default, this controller uses
-    | a simple trait to add these behaviors. Why don't you explore it?
-    |
-    */
 
     use ThrottlesLogins;
 

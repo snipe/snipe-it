@@ -1,19 +1,18 @@
 <?php
-/**
- * This controller handles all actions related to Company support for
- * the Snipe-IT Asset Management application.
- *
- * PHP version 5.5.9
- * @package    Snipe-IT
- * @version    v2.0
- */
- namespace App\Http\Controllers;
+namespace App\Http\Controllers;
 
 use App\Models\Company;
 use Input;
 use Lang;
 use Redirect;
 use View;
+
+/**
+ * This controller handles all actions related to Companies for
+ * the Snipe-IT Asset Management application.
+ *
+ * @version    v1.0
+ */
 
 final class CompaniesController extends Controller
 {

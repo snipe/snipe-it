@@ -1,12 +1,4 @@
 <?php
-/**
- * This controller handles all actions related to User Groups for
- * the Snipe-IT Asset Management application.
- *
- * PHP version 5.5.9
- * @package    Snipe-IT
- * @version    v1.0
- */
 namespace App\Http\Controllers;
 
 use Config;
@@ -18,13 +10,23 @@ use Validator;
 use View;
 use App\Models\Group;
 
+/**
+ * This controller handles all actions related to User Groups for
+ * the Snipe-IT Asset Management application.
+ *
+ * @version    v1.0
+ */
 class GroupsController extends Controller
 {
     /**
-     * Show a list of all the groups.
-     *
-     * @return View
-     */
+    * Returns a view that invokes the ajax tables which actually contains
+    * the content for the user group listing, which is generated in getDatatable.
+    *
+    * @author [A. Gianotto] [<snipe@snipe.net]
+    * @see GroupsController::getDatatable() method that generates the JSON response
+    * @since [v1.0]
+    * @return View
+    */
     public function getIndex()
     {
         // Show the page
@@ -32,10 +34,13 @@ class GroupsController extends Controller
     }
 
     /**
-     * Group create.
-     *
-     * @return View
-     */
+    * Returns a view that displays a form to create a new User Group.
+    *
+    * @author [A. Gianotto] [<snipe@snipe.net]
+    * @see GroupsController::postCreate()
+    * @since [v1.0]
+    * @return View
+    */
     public function getCreate()
     {
         $group = new Group;
@@ -50,10 +55,13 @@ class GroupsController extends Controller
     }
 
     /**
-     * Group create form processing.
-     *
-     * @return Redirect
-     */
+    * Validates and stores the new User Group data.
+    *
+    * @author [A. Gianotto] [<snipe@snipe.net]
+    * @see GroupsController::getCreate()
+    * @since [v1.0]
+    * @return Redirect
+    */
     public function postCreate()
     {
         // create a new group instance
@@ -73,11 +81,14 @@ class GroupsController extends Controller
     }
 
     /**
-     * Group update.
-     *
-     * @param  int  $id
-     * @return View
-     */
+    * Returns a view that presents a form to edit a User Group.
+    *
+    * @author [A. Gianotto] [<snipe@snipe.net]
+    * @see GroupsController::postEdit()
+    * @param int $id
+    * @since [v1.0]
+    * @return View
+    */
     public function getEdit($id = null)
     {
         $group = Group::find($id);
@@ -90,11 +101,14 @@ class GroupsController extends Controller
     }
 
     /**
-     * Group update form processing page.
-     *
-     * @param  int  $id
-     * @return Redirect
-     */
+    * Validates and stores the updated User Group data.
+    *
+    * @author [A. Gianotto] [<snipe@snipe.net]
+    * @see GroupsController::getEdit()
+    * @param int $id
+    * @since [v1.0]
+    * @return Redirect
+    */
     public function postEdit($id = null)
     {
 
@@ -120,11 +134,14 @@ class GroupsController extends Controller
     }
 
     /**
-     * Delete the given group.
-     *
-     * @param  int  $id
-     * @return Redirect
-     */
+    * Validates and deletes the User Group.
+    *
+    * @author [A. Gianotto] [<snipe@snipe.net]
+    * @see GroupsController::getEdit()
+    * @param int $id
+    * @since [v1.0]
+    * @return Redirect
+    */
     public function getDelete($id = null)
     {
         if (!config('app.lock_passwords')) {
@@ -147,8 +164,14 @@ class GroupsController extends Controller
     }
 
 
-
-    public function getDatatable($status = null)
+    /**
+    * Generates the JSON used to display the User Group listing.
+    *
+    * @author [A. Gianotto] [<snipe@snipe.net>]
+    * @since [v2.0]
+    * @return String JSON
+    */
+    public function getDatatable()
     {
 
         if (Input::has('offset')) {

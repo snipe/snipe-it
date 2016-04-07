@@ -6,6 +6,11 @@ use Illuminate\Support\Facades\Lang;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Watson\Validating\ValidatingTrait;
 
+/**
+ * Model for Asset Maintenances.
+ *
+ * @version    v1.0
+ */
 class AssetMaintenance extends Model implements ICompanyableChild
 {
     use SoftDeletes;
@@ -104,7 +109,7 @@ class AssetMaintenance extends Model implements ICompanyableChild
     {
 
          return $query->where(function ($query) use ($search) {
-           
+
                 $query->where('title', 'LIKE', '%'.$search.'%')
                 ->orWhere('notes', 'LIKE', '%'.$search.'%')
                 ->orWhere('asset_maintenance_type', 'LIKE', '%'.$search.'%')

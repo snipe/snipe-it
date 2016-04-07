@@ -1,13 +1,4 @@
 <?php
-/**
- * This controller handles all actions related to Licenses and
- * License Seats for the Snipe-IT Asset Management application.
- *
- * PHP version 5.5.9
- * @package    Snipe-IT
- * @version    v1.0
- */
-
 namespace App\Http\Controllers;
 
 use Assets;
@@ -33,6 +24,12 @@ use Session;
 use App\Helpers\Helper;
 use Auth;
 
+/**
+ * This controller handles all actions related to Licenses for
+ * the Snipe-IT Asset Management application.
+ *
+ * @version    v1.0
+ */
 class LicensesController extends Controller
 {
 

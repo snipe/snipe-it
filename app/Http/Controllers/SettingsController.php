@@ -1,13 +1,4 @@
 <?php
-/**
- * This controller handles all actions related to Settings for
- * the Snipe-IT Asset Management application.
- *
- * PHP version 5.5.9
- * @package    Snipe-IT
- * @version    v1.0
- */
-
 namespace App\Http\Controllers;
 
 use Input;
@@ -28,7 +19,10 @@ use App\Http\Requests\SetupUserRequest;
 use App\Http\Requests\SettingRequest;
 
 /**
- * This class controls all actions related to settings
+ * This controller handles all actions related to Settings for
+ * the Snipe-IT Asset Management application.
+ *
+ * @version    v1.0
  */
 class SettingsController extends Controller
 {

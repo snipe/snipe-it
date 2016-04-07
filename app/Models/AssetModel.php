@@ -5,6 +5,12 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Watson\Validating\ValidatingTrait;
 
+/**
+ * Model for Asset Models. Asset Models contain higher level
+ * attributes that are common among the same type of asset.
+ *
+ * @version    v1.0
+ */
 class AssetModel extends Model
 {
     use SoftDeletes;

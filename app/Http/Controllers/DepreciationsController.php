@@ -1,12 +1,4 @@
 <?php
-/**
- * This controller handles all actions related to Asset Depreciation
- * for the Snipe-IT Asset Management application.
- *
- * PHP version 5.5.9
- * @package    Snipe-IT
- * @version    v1.0
- */
 namespace App\Http\Controllers;
 
 use Input;
@@ -19,14 +11,23 @@ use Str;
 use View;
 use Auth;
 
+/**
+ * This controller handles all actions related to Depreciations for
+ * the Snipe-IT Asset Management application.
+ *
+ * @version    v1.0
+ */
 class DepreciationsController extends Controller
 {
     /**
-     * Show a list of all the depreciations.
-     *
-     * @return View
-     */
-
+    * Returns a view that invokes the ajax tables which actually contains
+    * the content for the depreciation listing, which is generated in getDatatable.
+    *
+    * @author [A. Gianotto] [<snipe@snipe.net]
+    * @see DepreciationsController::getDatatable() method that generates the JSON response
+    * @since [v1.0]
+    * @return View
+    */
     public function getIndex()
     {
         // Show the page
@@ -35,10 +36,13 @@ class DepreciationsController extends Controller
 
 
     /**
-     * Depreciation create.
-     *
-     * @return View
-     */
+    * Returns a view that displays a form to create a new depreciation.
+    *
+    * @author [A. Gianotto] [<snipe@snipe.net]
+    * @see DepreciationsController::postCreate()
+    * @since [v1.0]
+    * @return View
+    */
     public function getCreate()
     {
         // Show the page
@@ -48,10 +52,13 @@ class DepreciationsController extends Controller
 
 
     /**
-     * Depreciation create form processing.
-     *
-     * @return Redirect
-     */
+    * Validates and stores the new depreciation data.
+    *
+    * @author [A. Gianotto] [<snipe@snipe.net]
+    * @see DepreciationsController::postCreate()
+    * @since [v1.0]
+    * @return Redirect
+    */
     public function postCreate()
     {
 
@@ -77,11 +84,14 @@ class DepreciationsController extends Controller
     }
 
     /**
-     * Depreciation update.
-     *
-     * @param  int  $depreciationId
-     * @return View
-     */
+    * Returns a view that displays a form to update a depreciation.
+    *
+    * @author [A. Gianotto] [<snipe@snipe.net]
+    * @see DepreciationsController::postEdit()
+    * @param int $depreciationId
+    * @since [v1.0]
+    * @return View
+    */
     public function getEdit($depreciationId = null)
     {
         // Check if the depreciation exists
@@ -99,11 +109,14 @@ class DepreciationsController extends Controller
 
 
     /**
-     * Depreciation update form processing page.
-     *
-     * @param  int  $depreciationId
-     * @return Redirect
-     */
+    * Validates and stores the updated depreciation data.
+    *
+    * @author [A. Gianotto] [<snipe@snipe.net]
+    * @see DepreciationsController::getEdit()
+    * @param int $depreciationId
+    * @since [v1.0]
+    * @return Redirect
+    */
     public function postEdit($depreciationId = null)
     {
         // Check if the depreciation exists
@@ -128,11 +141,14 @@ class DepreciationsController extends Controller
     }
 
     /**
-     * Delete the given depreciation.
-     *
-     * @param  int  $depreciationId
-     * @return Redirect
-     */
+    * Validates and deletes a selected depreciation.
+    *
+    * This is a hard-delete. We do not currently soft-delete depreciations.
+    *
+    * @author [A. Gianotto] [<snipe@snipe.net]
+    * @since [v1.0]
+    * @return Redirect
+    */
     public function getDelete($depreciationId)
     {
         // Check if the depreciation exists
@@ -156,6 +172,15 @@ class DepreciationsController extends Controller
     }
 
 
+    /**
+    * Generates the JSON used to display the depreciation listing.
+    *
+    * @see DepreciationsController::getIndex()
+    * @author [A. Gianotto] [<snipe@snipe.net>]
+    * @param  string  $status
+    * @since [v1.2]
+    * @return String JSON
+    */
     public function getDatatable()
     {
         $depreciations = Depreciation::select(array('id','name','months'));

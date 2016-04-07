@@ -13,7 +13,11 @@ use Watson\Validating\ValidatingTrait;
 use DateTime;
 use App\Models\Setting;
 
-
+/**
+ * Model for Assets.
+ *
+ * @version    v1.0
+ */
 class Asset extends Depreciable
 {
     use SoftDeletes;

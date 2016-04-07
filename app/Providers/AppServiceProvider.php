@@ -1,16 +1,15 @@
 <?php
-/**
- * This service provider handles a few custom validation rules.
- *
- * PHP version 5.5.9
- * @package    Snipe-IT
- * @version    v3.0
- */
-
 namespace App\Providers;
 
 use Validator;
 use Illuminate\Support\ServiceProvider;
+
+/**
+ * This service provider handles a few custom validation rules.
+ *
+ * PHP version 5.5.9
+ * @version    v3.0
+ */
 
 class AppServiceProvider extends ServiceProvider
 {

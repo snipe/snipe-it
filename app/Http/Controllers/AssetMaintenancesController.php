@@ -1,13 +1,4 @@
 <?php
-/**
- * This controller handles all actions related to Asset Maintenance for
- * the Snipe-IT Asset Management application.
- *
- * PHP version 5.5.9
- * @package    Snipe-IT
- * @version    v2.0
- */
-
 namespace App\Http\Controllers;
 
 use App\Models\AssetMaintenance;
@@ -30,6 +21,12 @@ use App\Models\Setting;
 use App\Models\Asset;
 use App\Helpers\Helper;
 
+/**
+ * This controller handles all actions related to Asset Maintenance for
+ * the Snipe-IT Asset Management application.
+ *
+ * @version    v2.0
+ */
 class AssetMaintenancesController extends Controller
 {
 
