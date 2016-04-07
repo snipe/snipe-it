@@ -278,7 +278,7 @@ class AccessoriesController extends Controller
         }
 
         // Get the dropdown of users and then pass it to the checkout view
-        $users_list = array('' => 'Select a User') + DB::table('users')->select(DB::raw('concat(last_name,", ",first_name," (",username,")") as full_name, id'))->whereNull('deleted_at')->orderBy('last_name', 'asc')->orderBy('first_name', 'asc')->lists('full_name', 'id');
+        $users_list = Helper::usersList();
 
         return View::make('accessories/checkout', compact('accessory'))->with('users_list', $users_list);
 
