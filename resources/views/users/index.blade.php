@@ -66,14 +66,14 @@
                          <th data-switchable="true" data-sortable="true" data-field="id" data-visible="false">{{ trans('general.id') }}</th>
                          <th data-switchable="true" data-sortable="false" data-field="companyName" data-visible="false">{{ trans('admin/companies/table.title') }}</th>
                          <th data-switchable="true" data-sortable="true" data-field="employee_num" data-visible="false">{{ trans('admin/users/table.employee_num') }}</th>
-                         <th data-sortable="true" data-field="name">{{ Lang::get('admin/users/table.name') }}</th>
+                         <th data-sortable="true" data-field="name">{{ trans('admin/users/table.name') }}</th>
                          <th data-sortable="true" data-field="email">
                              <span class="hidden-md hidden-lg">Email</span>
                              <span class="hidden-xs"><i class="fa fa-envelope fa-lg"></i></span>
                          </th>
-                         <th data-sortable="true" data-field="username">{{ Lang::get('admin/users/table.username') }}</th>
-                         <th data-searchable="true" data-sortable="true" data-field="manager">{{ Lang::get('admin/users/table.manager') }}</th>
-                         <th data-sortable="true" data-field="location">{{ Lang::get('admin/users/table.location') }}</th>
+                         <th data-sortable="true" data-field="username">{{ trans('admin/users/table.username') }}</th>
+                         <th data-searchable="true" data-sortable="true" data-field="manager">{{ trans('admin/users/table.manager') }}</th>
+                         <th data-sortable="true" data-field="location">{{ trans('admin/users/table.location') }}</th>
                          <th data-sortable="false" data-field="assets">
                              <span class="hidden-md hidden-lg">Assets</span>
                              <span class="hidden-xs"><i class="fa fa-barcode fa-lg"></i></span>
@@ -90,10 +90,10 @@
                              <span class="hidden-md hidden-lg">Consumables</span>
                              <span class="hidden-xs"><i class="fa fa-tint fa-lg"></i></span>
                          </th>
-                         <th data-sortable="false" data-field="groups">{{ Lang::get('general.groups') }}</th>
-                         <th data-sortable="true" data-field="notes">{{ Lang::get('general.notes') }}</th>
-                         <th data-sortable="true" data-field="activated">{{ Lang::get('general.activated') }}</th>
-                         <th data-switchable="false" data-searchable="false" data-sortable="false" data-field="actions" >{{ Lang::get('table.actions') }}</th>
+                         <th data-sortable="false" data-field="groups">{{ trans('general.groups') }}</th>
+                         <th data-sortable="true" data-field="notes">{{ trans('general.notes') }}</th>
+                         <th data-sortable="true" data-field="activated">{{ trans('general.activated') }}</th>
+                         <th data-switchable="false" data-searchable="false" data-sortable="false" data-field="actions" >{{ trans('table.actions') }}</th>
                      </tr>
                  </thead>
                  {{-- <tfoot>

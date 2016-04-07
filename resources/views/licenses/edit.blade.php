@@ -42,7 +42,7 @@
               <!-- Company -->
               <div class="form-group{{ $errors->has('company_id') ? ' has-error' : '' }}">
                   <div class="col-md-3 control-label">
-                      {{ Form::label('company_id', Lang::get('general.company')) }}
+                      {{ Form::label('company_id', trans('general.company')) }}
                   </div>
                   <div class="col-md-7">
                       {{ Form::select('company_id', $company_list , Input::old('company_id', $license->company_id), array('class'=>'select2', 'style'=>'min-width:350px')) }}

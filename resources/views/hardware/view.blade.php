@@ -45,20 +45,22 @@
     <div class="nav-tabs-custom">
       <ul class="nav nav-tabs">
         <li class="active">
-          <a href="#details" data-toggle="tab">Details</a>
+          <a href="#details" data-toggle="tab"><span class="hidden-lg hidden-md"><i class="fa fa-info-circle"></i></span> <span class="hidden-xs hidden-sm">Details</span></a>
         </li>
         <li>
-          <a href="#software" data-toggle="tab">Software</a>
+          <a href="#software" data-toggle="tab"><span class="hidden-lg hidden-md"><i class="fa fa-floppy-o"></i></span> <span class="hidden-xs hidden-sm">Licenses</span></a>
         </li>
         <li>
-          <a href="#maintenances" data-toggle="tab">Maintenance</a>
+          <a href="#maintenances" data-toggle="tab"><span class="hidden-lg hidden-md"><i class="fa fa-wrench"></i></span> <span class="hidden-xs hidden-sm">Maintenances</span></a>
         </li>
         <li>
-          <a href="#history" data-toggle="tab">History</a>
+          <a href="#history" data-toggle="tab"><span class="hidden-lg hidden-md"><i class="fa fa-history"></i></span> <span class="hidden-xs hidden-sm">History</span></a>
         </li>
         <li>
-          <a href="#files" data-toggle="tab">Files</a>
+          <a href="#files" data-toggle="tab"><span class="hidden-lg hidden-md"><i class="fa fa-files-o"></i></span> <span class="hidden-xs hidden-sm">Files</span></a>
         </li>
+        <li class="pull-right">
+            <a href="#" data-toggle="modal" data-target="#uploadFileModal"><i class="fa fa-paperclip"></i> </a></li>
       </ul>
       <div class="tab-content">
         <div class="tab-pane fade in active" id="details">
@@ -360,7 +362,7 @@
                           <td>{{ $assetMaintenance->asset_maintenance_type }}</td>
                           <td>{{ $assetMaintenance->start_date }}</td>
                           <td>{{ $assetMaintenance->completion_date }}</td>
-                          <td>{{ $assetMaintenance->is_warranty ? Lang::get('admin/asset_maintenances/message.warranty') : Lang::get('admin/asset_maintenances/message.not_warranty') }}</td>
+                          <td>{{ $assetMaintenance->is_warranty ? trans('admin/asset_maintenances/message.warranty') : trans('admin/asset_maintenances/message.not_warranty') }}</td>
                           <td><nobr>{{ $use_currency.$assetMaintenance->cost }}</nobr></td>
                             <?php $totalCost += $assetMaintenance->cost; ?>
                           <td><a href="{{ route('update/asset_maintenance', $assetMaintenance->id) }}" class="btn btn-warning btn-sm"><i class="fa fa-pencil icon-white"></i></a>

@@ -122,7 +122,7 @@
 
                             </td>
                        <td>
-                         {{ strtolower(Lang::get('general.'.str_replace(' ','_',$activity->action_type))) }}
+                         {{ strtolower(trans('general.'.str_replace(' ','_',$activity->action_type))) }}
                        </td>
                        <td>
                        @if ($activity->action_type=='requested')

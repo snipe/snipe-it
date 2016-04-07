@@ -55,7 +55,7 @@
           <!-- Company -->
           <div class="form-group{{ $errors->has('company_id') ? ' has-error' : '' }}">
                <div class="col-md-3">
-                   {{ Form::label('company_id', Lang::get('general.company')) }}
+                   {{ Form::label('company_id', trans('general.company')) }}
                </div>
                   <div class="col-md-8">
                     {{ Form::select('company_id', $company_list , Input::old('company_id', $accessory->company_id), array('class'=>'select2', 'style'=>'width:100%')) }}
@@ -67,7 +67,7 @@
         <!-- Name -->
         <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
             <div class="col-md-3">
-            	{{ Form::label('name', Lang::get('admin/accessories/general.accessory_name')) }}
+            	{{ Form::label('name', trans('admin/accessories/general.accessory_name')) }}
             </div>
             <div class="col-md-8">
                 <input class="form-control" type="text" name="name" id="name" value="{{ Input::old('name', $accessory->name) }}" />
@@ -78,7 +78,7 @@
     	<!-- Category -->
         <div class="form-group{{ $errors->has('category_id') ? ' has-error' : '' }}">
     	     <div class="col-md-3">
-    		     {{ Form::label('category_id', Lang::get('admin/accessories/general.accessory_category')) }}
+    		     {{ Form::label('category_id', trans('admin/accessories/general.accessory_category')) }}
              </div>
                 <div class="col-md-7">
                     {{ Form::select('category_id', $category_list , Input::old('category_id', $accessory->category_id), array('class'=>'select2', 'style'=>'width:100%')) }}
@@ -89,7 +89,7 @@
         <!--  Location -->
         <div class="form-group{{ $errors->has('location_id') ? ' has-error' : '' }}">
            <div class="col-md-3">
-           {{ Form::label('location_id', Lang::get('general.location')) }}
+           {{ Form::label('location_id', trans('general.location')) }}
            </div>
                 <div class="col-md-7 col-sm-12">
                     {{ Form::select('location_id', $location_list , Input::old('location_id', $accessory->location_id), array('class'=>'select2', 'style'=>'width:100%')) }}
@@ -101,7 +101,7 @@
         <!-- Order Number -->
         <div class="form-group{{ $errors->has('order_number') ? ' has-error' : '' }}">
             <div class="col-md-3">
-    		     {{ Form::label('order_number', Lang::get('admin/accessories/general.order')) }}
+    		     {{ Form::label('order_number', trans('admin/accessories/general.order')) }}
             </div>
             <div class="col-md-3">
                 <input class="form-control" type="text" name="order_number" id="order_number" value="{{ Input::old('order_number', $accessory->order_number) }}" />
@@ -113,7 +113,7 @@
         <!-- Purchase Date -->
         <div class="form-group{{ $errors->has('purchase_date') ? ' has-error' : '' }}">
             <div class="col-md-3">
-    		     {{ Form::label('purchase_date', Lang::get('admin/accessories/general.date')) }}
+    		     {{ Form::label('purchase_date', trans('admin/accessories/general.date')) }}
             </div>
             <div class="input-group col-md-3">
                 <input type="date" class="datepicker form-control" data-date-format="yyyy-mm-dd" placeholder="{{ trans('general.select_date') }}" name="purchase_date" id="purchase_date" value="{{ Input::old('purchase_date', $accessory->purchase_date) }}">
@@ -125,7 +125,7 @@
         <!-- Purchase Cost -->
         <div class="form-group{{ $errors->has('purchase_cost') ? ' has-error' : '' }}">
             <div class="col-md-3">
-    		     {{ Form::label('purchase_cost', Lang::get('admin/accessories/general.cost')) }}
+    		     {{ Form::label('purchase_cost', trans('admin/accessories/general.cost')) }}
             </div>
             <div class="col-md-3">
                 <div class="input-group">
@@ -141,7 +141,7 @@
         <!-- QTY -->
         <div class="form-group{{ $errors->has('qty') ? ' has-error' : '' }}">
             <div class="col-md-3">
-            	{{ Form::label('qty', Lang::get('admin/accessories/general.qty')) }}
+            	{{ Form::label('qty', trans('admin/accessories/general.qty')) }}
             </div>
             <div class="col-md-9" style="margin-left: -15px">
                 <div class="col-md-3">
@@ -157,7 +157,7 @@
         <!-- Min QTY -->
         <div class="form-group{{ $errors->has('min_amt') ? ' has-error' : '' }}">
             <div class="col-md-3">
-            	{{ Form::label('min_amt', Lang::get('general.min_amt')) }}
+            	{{ Form::label('min_amt', trans('general.min_amt')) }}
             </div>
             <div class="col-md-9" style="margin-left: -15px">
                 <div class="col-md-2">

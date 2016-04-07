@@ -24,8 +24,6 @@
 {{-- Page content --}}
 @section('content')
 
-
-
 <div class="row">
 
   <div class="col-md-12">
@@ -36,7 +34,7 @@
         <li><a href="#tab_2" data-toggle="tab">{{ trans('general.file_uploads') }}</a></li>
         <li><a href="#tab_3" data-toggle="tab">{{ trans('admin/licenses/general.checkout_history') }}</a></li>
 
-        <li class="pull-right"><a href="#"  data-toggle="modal" data-target="#uploadFileModal"><i class="fa fa-paperclip"></i></a></li>
+        <li class="pull-right"><a href="#" data-toggle="modal" data-target="#uploadFileModal"><i class="fa fa-paperclip"></i> {{ trans('button.upload') }}</a></li>
       </ul>
       <div class="tab-content">
         <div class="tab-pane active" id="tab_1">

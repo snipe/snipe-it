@@ -43,7 +43,7 @@
                 </th>
                 <th data-searchable="true" data-sortable="true" data-field="country">
                 {{ trans('admin/locations/table.country') }}</th>
-                <th data-switchable="false" data-searchable="false" data-sortable="false" data-field="actions">{{ Lang::get('table.actions') }}</th>
+                <th data-switchable="false" data-searchable="false" data-sortable="false" data-field="actions">{{ trans('table.actions') }}</th>
               </tr>
             </thead>
           </table>

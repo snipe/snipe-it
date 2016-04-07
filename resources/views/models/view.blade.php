@@ -51,13 +51,13 @@
                 <thead>
                     <tr>
 
-                        <th data-sortable="false" data-field="companyName" data-searchable="false" data-visible="false">{{ Lang::get('admin/companies/table.title') }}</th>
-                        <th data-sortable="true" data-field="id" data-searchable="false" data-visible="false">{{Lang::get('general.id')}}</th>
-                        <th data-sortable="true" data-field="name" data-searchable="true">{{Lang::get('general.name')}}</th>
-                        <th data-sortable="true" data-field="asset_tag">{{Lang::get('general.asset_tag')}}</th>
-                        <th data-sortable="true" data-field="serial">{{Lang::get('admin/hardware/table.serial')}}</th>
-                        <th data-sortable="false" data-field="assigned_to">{{Lang::get('general.user')}}</th>
-                        <th data-switchable="false" data-searchable="false" data-sortable="false" data-field="actions">{{ Lang::get('table.actions') }}</th>
+                        <th data-sortable="false" data-field="companyName" data-searchable="false" data-visible="false">{{ trans('admin/companies/table.title') }}</th>
+                        <th data-sortable="true" data-field="id" data-searchable="false" data-visible="false">{{ trans('general.id') }}</th>
+                        <th data-sortable="true" data-field="name" data-searchable="true">{{ trans('general.name') }}</th>
+                        <th data-sortable="true" data-field="asset_tag">{{ trans('general.asset_tag') }}</th>
+                        <th data-sortable="true" data-field="serial">{{ trans('admin/hardware/table.serial') }}</th>
+                        <th data-sortable="false" data-field="assigned_to">{{ trans('general.user') }}</th>
+                        <th data-switchable="false" data-searchable="false" data-sortable="false" data-field="actions">{{ trans('table.actions') }}</th>
                     </tr>
                 </thead>
             </table>

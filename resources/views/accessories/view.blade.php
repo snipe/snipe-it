@@ -47,8 +47,8 @@
 
                <thead>
                    <tr>
-                       <th data-switchable="false" data-searchable="false" data-sortable="false" data-field="name">{{Lang::get('general.user')}}</th>
-                       <th data-switchable="false" data-searchable="false" data-sortable="false" data-field="actions">{{Lang::get('table.actions')}}</th>
+                       <th data-switchable="false" data-searchable="false" data-sortable="false" data-field="name">{{ trans('general.user') }}</th>
+                       <th data-switchable="false" data-searchable="false" data-sortable="false" data-field="actions">{{ trans('table.actions') }}</th>
                    </tr>
                </thead>
            </table>

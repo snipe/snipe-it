@@ -36,7 +36,7 @@
                <th data-switchable="true" data-sortable="true" data-field="name" data-visible="true">{{ trans('admin/groups/table.name') }}</th>
                <th data-switchable="true" data-sortable="false" data-field="users" data-visible="true">{{ trans('admin/groups/table.users') }}</th>
                <th data-switchable="true" data-sortable="true" data-field="created_at" data-visible="true">{{ trans('general.created_at') }}</th>
-               <th data-switchable="false" data-searchable="false" data-sortable="false" data-field="actions" >{{ Lang::get('table.actions') }}</th>
+               <th data-switchable="false" data-searchable="false" data-sortable="false" data-field="actions" >{{ trans('table.actions') }}</th>
              </tr>
            </thead>
        </table>

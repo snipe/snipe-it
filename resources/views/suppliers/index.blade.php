@@ -40,7 +40,7 @@
             <th data-searchable="true" data-sortable="true" data-field="fax" data-visible="false">{{ trans('admin/suppliers/table.fax') }}</th>
             <th data-searchable="false" data-sortable="false" data-field="assets">{{ trans('admin/suppliers/table.assets') }}</th>
             <th data-searchable="false" data-sortable="false" data-field="licenses">{{ trans('admin/suppliers/table.licenses') }}</th>
-            <th data-switchable="false" data-searchable="false" data-sortable="false" data-field="actions">{{ Lang::get('table.actions') }}</th>
+            <th data-switchable="false" data-searchable="false" data-sortable="false" data-field="actions">{{ trans('table.actions') }}</th>
           </tr>
         </thead>
       </table>

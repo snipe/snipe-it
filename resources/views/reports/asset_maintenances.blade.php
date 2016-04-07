@@ -48,7 +48,7 @@
                         <td>{{ $assetMaintenance->asset_maintenance_type }}</td>
                         <td>{{ $assetMaintenance->title }}</td>
                         <td>{{ $assetMaintenance->start_date }}</td>
-                        <td>{{ is_null($assetMaintenance->completion_date) ? Lang::get('admin/asset_maintenances/message.asset_maintenance_incomplete') : $assetMaintenance->completion_date }}</td>
+                        <td>{{ is_null($assetMaintenance->completion_date) ? trans('admin/asset_maintenances/message.asset_maintenance_incomplete') : $assetMaintenance->completion_date }}</td>
                         @if (is_null($assetMaintenance->asset_maintenance_time))
                             <?php
                                 $assetMaintenanceTime = intval(Carbon::now()->diffInDays(Carbon::parse($assetMaintenance->start_date)));

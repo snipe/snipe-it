@@ -31,7 +31,7 @@
                 <th data-sortable="true" data-field="id" data-visible="false">{{ trans('general.id') }}</th>
                 <th data-sortable="true" data-field="name">{{ trans('admin/statuslabels/table.name') }}</th>
                 <th data-sortable="false" data-field="type">{{ trans('admin/statuslabels/table.status_type') }}</th>
-                <th data-switchable="false" data-searchable="false" data-sortable="false" data-field="actions">{{ Lang::get('table.actions') }}</th>
+                <th data-switchable="false" data-searchable="false" data-sortable="false" data-field="actions">{{ trans('table.actions') }}</th>
               </tr>
             </thead>
           </table>

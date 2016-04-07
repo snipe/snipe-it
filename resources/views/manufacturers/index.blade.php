@@ -25,7 +25,7 @@
         name="manufacturers"
         class="table table-striped"
         id="table"
-        data-url="{{route('api.manufacturers.list')}}"
+        data-url="{{route('api.manufacturers.list') }}"
         data-cookie="true"
         data-click-to-select="true"
         data-cookie-id-table="manufacturersTable-{{ config('version.hash_version') }}">

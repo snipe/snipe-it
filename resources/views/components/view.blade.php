@@ -49,9 +49,9 @@
             data-cookie-id-table="componentDetailTable-{{ config('version.hash_version') }}">
               <thead>
                 <tr>
-                  <th data-switchable="false" data-searchable="false" data-sortable="false" data-field="name">{{Lang::get('general.asset')}}</th>
-                  <th data-switchable="false" data-searchable="false" data-sortable="false" data-field="qty">{{Lang::get('general.qty')}}</th>
-                  <th data-switchable="false" data-searchable="false" data-sortable="false" data-field="created_at">{{Lang::get('general.date')}}</th>
+                  <th data-switchable="false" data-searchable="false" data-sortable="false" data-field="name">{{ trans('general.asset') }}</th>
+                  <th data-switchable="false" data-searchable="false" data-sortable="false" data-field="qty">{{ trans('general.qty') }}</th>
+                  <th data-switchable="false" data-searchable="false" data-sortable="false" data-field="created_at">{{ trans('general.date') }}</th>
                 </tr>
               </thead>
             </table>

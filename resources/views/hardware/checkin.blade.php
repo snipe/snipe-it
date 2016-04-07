@@ -42,7 +42,7 @@
           <!-- Asset name -->
           <div class="form-group">
             <div class="col-md-3">
-              {{ Form::label('name', Lang::get('admin/hardware/form.model')) }}
+              {{ Form::label('name', trans('admin/hardware/form.model')) }}
             </div>
             <div class="col-md-9">
               <p class="form-control-static">{{ $asset->model->name }}</p>
@@ -54,7 +54,7 @@
           <!-- Asset name -->
           <div class="form-group {{ $errors->has('name') ? 'error' : '' }}">
             <div class="col-md-3">
-              {{ Form::label('name', Lang::get('admin/hardware/form.name')) }}
+              {{ Form::label('name', trans('admin/hardware/form.name')) }}
             </div>
             <div class="col-md-9">
               <p class="form-control-static">{{ $asset->name }}</p>
@@ -65,7 +65,7 @@
         <!-- Status -->
         <div class="form-group {{ $errors->has('status_id') ? 'error' : '' }}">
           <div class="col-md-3">
-            {{ Form::label('name', Lang::get('admin/hardware/form.name')) }}
+            {{ Form::label('name', trans('admin/hardware/form.name')) }}
           </div>
           <div class="col-md-9">
             {{ Form::select('status_id', $statusLabel_list, '', array('class'=>'select2', 'style'=>'width:350px','id' =>'modal-statuslabel_types')) }}
@@ -77,7 +77,7 @@
 
         <div class="form-group {{ $errors->has('checkin_at') ? 'error' : '' }}">
           <div class="col-md-3">
-            {{ Form::label('name', Lang::get('admin/hardware/form.checkin_date')) }}
+            {{ Form::label('name', trans('admin/hardware/form.checkin_date')) }}
           </div>
           <div class="col-md-9">
             <div class="col-md-4 input-group">
@@ -92,7 +92,7 @@
         <!-- Note -->
         <div class="form-group {{ $errors->has('note') ? 'error' : '' }}">
           <div class="col-md-3">
-            {{ Form::label('note', Lang::get('admin/hardware/form.notes')) }}
+            {{ Form::label('note', trans('admin/hardware/form.notes')) }}
           </div>
           <div class="col-md-9">
             <textarea class="col-md-6 form-control" id="note" name="note">{{ Input::old('note', $asset->note) }}</textarea>

@@ -236,7 +236,7 @@
        <!-- Company -->
        @if (\App\Models\Company::isCurrentUserAuthorized())
          <div class="form-group {{ $errors->has('company_id') ? ' has-error' : '' }}">
-           <div class="col-md-3 control-label">{{ Form::label('company_id', Lang::get('general.company')) }}</div>
+           <div class="col-md-3 control-label">{{ Form::label('company_id', trans('general.company')) }}</div>
            <div class="col-md-7 col-sm-12">
              {{ Form::select('company_id', $company_list , Input::old('company_id', $asset->company_id),
                              ['class'=>'select2', 'style'=>'min-width:100%']) }}
@@ -401,7 +401,7 @@ $(function() {
       $('#custom_fields_content').html("");
     } else {
       // console.warn("Model ID is: "+modelid);
-      $.get("{{config('app.url')}}/hardware/models/"+modelid+"/custom_fields",{_token: "{{ csrf_token() }}"},function (data) {
+      $.get("{{config('app.url') }}/hardware/models/"+modelid+"/custom_fields",{_token: "{{ csrf_token() }}"},function (data) {
         // console.warn("Ajax call came back okay! Data is: "+data);
         $('#custom_fields_content').html(data);
       });
@@ -424,7 +424,7 @@ $(function() {
         if(status_id!=''){
             $(".status_spinner").css("display", "inline");
     	    $.ajax({
-    	        url: "{{config('app.url')}}/api/statuslabels/"+status_id+"/deployable",
+    	        url: "{{config('app.url') }}/api/statuslabels/"+status_id+"/deployable",
     	        success: function(data) {
                     console.log(data);
                     $(".status_spinner").css("display", "none");
@@ -512,7 +512,7 @@ $(function () {
     data._token =  '{{ csrf_token() }}',
     //console.dir(data);
 
-    $.post("{{config('app.url')}}/api/"+model+"s",data,function (result) {
+    $.post("{{config('app.url') }}/api/"+model+"s",data,function (result) {
       var id=result.id;
       var name=result.name || (result.first_name+" "+result.last_name);
       $('.modal-body input:visible').val("");

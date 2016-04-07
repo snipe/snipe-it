@@ -69,7 +69,7 @@ use Carbon\Carbon;
                     <div class="col-md-3 col-sm-3" style="padding-bottom: 10px; margin-left: 15px; word-wrap: break-word;">
                         <strong>{{ trans('admin/asset_maintenances/form.completion_date') }}: </strong>
 			{{ $completionDate = $assetMaintenance->completion_date }}
-                        {{ $completionDate ? $completionDate : Lang::get('admin/asset_maintenances/message.asset_maintenance_incomplete') }}
+                        {{ $completionDate ? $completionDate : trans('admin/asset_maintenances/message.asset_maintenance_incomplete') }}
                     </div>
                     <div class="col-md-3 col-sm-3" style="padding-bottom: 10px; margin-left: 15px; word-wrap: break-word;">
                         <strong>{{ trans('admin/asset_maintenances/form.asset_maintenance_time') }}: </strong>
@@ -81,11 +81,11 @@ use Carbon\Carbon;
                 <div class="row">
                     <div class="col-md-3 col-sm-3" style="padding-bottom: 10px; margin-left: 15px; word-wrap: break-word;">
                         <strong>{{ trans('admin/asset_maintenances/form.cost') }}: </strong>
-                        {{ sprintf( Lang::get( 'general.currency' ) . '%01.2f', $assetMaintenance->cost) }}
+                        {{ sprintf( trans( 'general.currency' ) . '%01.2f', $assetMaintenance->cost) }}
                     </div>
                     <div class="col-md-3 col-sm-3" style="padding-bottom: 10px; margin-left: 15px; word-wrap: break-word;">
                         <strong>{{ trans('admin/asset_maintenances/form.is_warranty') }}: </strong>
-                        {{ $assetMaintenance->is_warranty ? Lang::get('admin/asset_maintenances/message.warranty') : Lang::get('admin/asset_maintenances/message.not_warranty') }}
+                        {{ $assetMaintenance->is_warranty ? trans('admin/asset_maintenances/message.warranty') : trans('admin/asset_maintenances/message.not_warranty') }}
                     </div>
                 </div>
                 <!-- 4th Row End -->

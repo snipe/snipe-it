@@ -37,11 +37,11 @@
                       <input type="hidden" name="_token" value="{{ csrf_token() }}" />
 
                       <a href="{{ route('update/company', $company->id) }}" class="btn btn-sm btn-warning"
-                         title="{{ Lang::get('button.edit') }}">
+                         title="{{ trans('button.edit') }}">
                         <i class="fa fa-pencil icon-white"></i>
                       </a>
 
-                      <button type="submit" class="btn btn-sm btn-danger" title="{{ Lang::get('button.delete') }}">
+                      <button type="submit" class="btn btn-sm btn-danger" title="{{ trans('button.delete') }}">
                         <i class="fa fa-trash icon-white"></i>
                       </button>
 

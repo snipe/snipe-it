@@ -39,7 +39,7 @@
         <!-- Name -->
         <div class="form-group {{ $errors->has('name') ? ' has-error' : '' }}">
           <div class="col-md-3">
-            {{ Form::label('name', Lang::get('admin/categories/general.category_name')) }}
+            {{ Form::label('name', trans('admin/categories/general.category_name')) }}
             <i class='fa fa-asterisk'></i>
           </div>
             <div class="col-md-9">
@@ -51,7 +51,7 @@
       <!-- Type -->
       <div class="form-group {{ $errors->has('category_type') ? ' has-error' : '' }}">
         <div class="col-md-3">
-          {{ Form::label('category_type', Lang::get('general.type')) }}
+          {{ Form::label('category_type', trans('general.type')) }}
           <i class='fa fa-asterisk'></i>
         </div>
           <div class="col-md-7">
@@ -63,7 +63,7 @@
       <!-- EULA text -->
       <div class="form-group {{ $errors->has('eula_text') ? 'error' : '' }}">
         <div class="col-md-3">
-          {{ Form::label('eula_text', Lang::get('admin/categories/general.eula_text')) }}
+          {{ Form::label('eula_text', trans('admin/categories/general.eula_text')) }}
         </div>
         <div class="col-md-9">
         {{ Form::textarea('eula_text', Input::old('eula_text', $category->eula_text), array('class' => 'form-control')) }}

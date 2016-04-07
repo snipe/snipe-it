@@ -25,7 +25,7 @@
       <table
       name="licenses"
       id="table"
-      data-url="{{route('api.licenses.list')}}"
+      data-url="{{route('api.licenses.list') }}"
       class="table table-striped"
       data-cookie="true"
       data-click-to-select="true"
@@ -34,18 +34,18 @@
               <tr>
                   <th data-sortable="true" data-field="id" data-visible="false">{{ trans('general.id') }}</th>
                   <th data-field="companyName" data-sortable="false" data-switchable="true">{{ trans('general.company') }}</th>
-                  <th data-field="name" data-sortable="true">{{Lang::get('admin/licenses/table.title')}}</th>
-                  <th data-field="serial" data-sortable="true" >{{Lang::get('admin/licenses/table.serial')}}</th>
-                  <th data-field="license_name" data-sortable="true" data-visible="false">{{Lang::get('admin/licenses/form.to_name')}}</th>
-                  <th data-field="license_email" data-sortable="true" data-visible="false">{{Lang::get('admin/licenses/form.to_email')}}</th>
-                  <th data-field="totalSeats" data-sortable="false">{{Lang::get('admin/licenses/form.seats')}}</th>
-                  <th data-field="remaining" data-sortable="false">{{Lang::get('admin/licenses/form.remaining_seats')}}</th>
-                  <th data-field="purchase_date" data-sortable="true">{{Lang::get('admin/licenses/table.purchase_date')}}</th>
-                  <th data-field="purchase_cost" data-sortable="true">{{Lang::get('admin/licenses/form.cost')}}</th>
-                  <th data-field="purchase_order" data-sortable="true" data-visible="false">{{Lang::get('admin/licenses/form.purchase_order')}}</th>
-                  <th data-field="expiration_date" data-sortable="true" data-visible="false">{{Lang::get('admin/licenses/form.expiration')}}</th>
-                  <th data-field="notes" data-sortable="true" data-visible="false">{{Lang::get('admin/licenses/form.notes')}}</th>
-                  <th data-field="actions">{{Lang::get('table.actions')}}</th>
+                  <th data-field="name" data-sortable="true">{{ trans('admin/licenses/table.title') }}</th>
+                  <th data-field="serial" data-sortable="true" >{{ trans('admin/licenses/table.serial') }}</th>
+                  <th data-field="license_name" data-sortable="true" data-visible="false">{{ trans('admin/licenses/form.to_name') }}</th>
+                  <th data-field="license_email" data-sortable="true" data-visible="false">{{ trans('admin/licenses/form.to_email') }}</th>
+                  <th data-field="totalSeats" data-sortable="false">{{ trans('admin/licenses/form.seats') }}</th>
+                  <th data-field="remaining" data-sortable="false">{{ trans('admin/licenses/form.remaining_seats') }}</th>
+                  <th data-field="purchase_date" data-sortable="true">{{ trans('admin/licenses/table.purchase_date') }}</th>
+                  <th data-field="purchase_cost" data-sortable="true">{{ trans('admin/licenses/form.cost') }}</th>
+                  <th data-field="purchase_order" data-sortable="true" data-visible="false">{{ trans('admin/licenses/form.purchase_order') }}</th>
+                  <th data-field="expiration_date" data-sortable="true" data-visible="false">{{ trans('admin/licenses/form.expiration') }}</th>
+                  <th data-field="notes" data-sortable="true" data-visible="false">{{ trans('admin/licenses/form.notes') }}</th>
+                  <th data-field="actions">{{ trans('table.actions') }}</th>
               </tr>
           </thead>
       </table>

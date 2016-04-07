@@ -27,7 +27,7 @@
           name="maintenances"
           id="table"
           class="table table-striped"
-          data-url="{{route('api.asset_maintenances.list')}}"
+          data-url="{{route('api.asset_maintenances.list') }}"
           data-cookie="true"
           data-click-to-select="true"
           data-cookie-id-table="maintenancesTable-{{ config('version.hash_version') }}">
@@ -44,7 +44,7 @@
               <th data-searchable="true" data-sortable="true" data-field="asset_maintenance_time">{{ trans('admin/asset_maintenances/form.asset_maintenance_time') }}</th>
               <th data-searchable="true" data-sortable="true" data-field="cost" class="text-right">{{ trans('admin/asset_maintenances/form.cost') }}</th>
               <th data-searchable="true" data-sortable="true" data-field="notes" data-visible="false">{{ trans('admin/asset_maintenances/form.notes') }}</th>
-              <th data-switchable="false" data-searchable="false" data-sortable="false" data-field="actions">{{ Lang::get('table.actions') }}</th>
+              <th data-switchable="false" data-searchable="false" data-sortable="false" data-field="actions">{{ trans('table.actions') }}</th>
               </tr>
             </thead>
           </table>
