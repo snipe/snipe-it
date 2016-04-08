@@ -92,8 +92,8 @@ $factory->defineAs(App\Models\Manufacturer::class, 'manufacturer', function (Fak
 $factory->defineAs(App\Models\Component::class, 'component', function (Faker\Generator $faker) {
   return [
     'name' => $faker->text(20),
-    'category_id' => $faker->numberBetween(16,20),
-    'total_qty' => $faker->numberBetween(5, 10),
+    'category_id' => $faker->numberBetween(21,25),
+    'total_qty' => $faker->numberBetween(3, 10),
     'min_amt' => $faker->numberBetween($min = 1, $max = 2),
   ];
 });
