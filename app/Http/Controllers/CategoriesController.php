@@ -235,6 +235,7 @@ class CategoriesController extends Controller
     * Returns a JSON response with the data to populate the bootstrap table on the
     * cateory listing page.
     *
+    * @todo Refactor this nastiness. Assets do not behave the same as accessories, etc.
     * @author [A. Gianotto] [<snipe@snipe.net>]
     * @see CategoriesController::getIndex() method that generates the view
     * @since [v1.8]
@@ -302,16 +303,19 @@ class CategoriesController extends Controller
     /**
     * Returns JSON response that contains the data for the category detail page.
     *
+    * @todo Refactor this nastiness. Assets do not behave
+    * the same as accessories, etc. Need to figure out if I should
+    * make separate controllers, or what. Too much copypasta if I try to work it in here.
     * @author [A. Gianotto] [<snipe@snipe.net>]
     * @see CategoriesController::getView() method that generates the view
     * @param int $categoryId
     * @since [v1.8]
     * @return String JSON
     */
-    public function getDataView($categoryID)
+    public function getDataView($categoryId)
     {
 
-        $category = Category::find($categoryID);
+        $category = Category::find($categoryId);
 
         if ($category->category_type =='asset') {
             $category_assets = $category->assets;
