@@ -51,7 +51,7 @@ class ReportsController extends Controller
     * @author [A. Gianotto] [<snipe@snipe.net>]
     * @see ManufacturersController::getDatatable() method that generates the JSON response
     * @since [v1.0]
-    * @return file download
+    * @return \Illuminate\Http\Response
     */
     public function exportAccessoryReport()
     {
@@ -117,7 +117,7 @@ class ReportsController extends Controller
     *
     * @author [A. Gianotto] [<snipe@snipe.net>]
     * @since [v1.0]
-    * @return file download
+    * @return \Illuminate\Http\Response
     */
     public function exportAssetReport()
     {
@@ -221,10 +221,12 @@ class ReportsController extends Controller
     }
 
     /**
-     * Show Depreciation Report for Assets
-     *
-     * @return View
-     */
+    * Show depreciation report for assets.
+    *
+    * @author [A. Gianotto] [<snipe@snipe.net>]
+    * @since [v1.0]
+    * @return View
+    */
     public function getDeprecationReport()
     {
 
@@ -236,10 +238,13 @@ class ReportsController extends Controller
     }
 
     /**
-     * Export Depreciation Report as CSV
-     *
-     * @return file download
-     */
+    * Exports the depreciations to CSV
+    *
+    * @deprecated Server-side exports have been replaced by datatables export since v2.
+    * @author [A. Gianotto] [<snipe@snipe.net>]
+    * @since [v1.0]
+    * @return \Illuminate\Http\Response
+    */
     public function exportDeprecationReport()
     {
 
@@ -314,10 +319,12 @@ class ReportsController extends Controller
     }
 
     /**
-     * Show Report for Activity
-     *
-     * @return View
-     */
+    * Displays activity report.
+    *
+    * @author [A. Gianotto] [<snipe@snipe.net>]
+    * @since [v1.0]
+    * @return View
+    */
     public function getActivityReport()
     {
         $log_actions = Actionlog::orderBy('created_at', 'DESC')
@@ -333,10 +340,12 @@ class ReportsController extends Controller
     }
 
     /**
-     * Show Report for Licenses
-     *
-     * @return View
-     */
+    * Displays license report
+    *
+    * @author [A. Gianotto] [<snipe@snipe.net>]
+    * @since [v1.0]
+    * @return View
+    */
     public function getLicenseReport()
     {
 
@@ -348,10 +357,13 @@ class ReportsController extends Controller
     }
 
     /**
-     * Export License Report as CSV
-     *
-     * @return file download
-     */
+    * Exports the licenses to CSV
+    *
+    * @deprecated Server-side exports have been replaced by datatables export since v2.
+    * @author [A. Gianotto] [<snipe@snipe.net>]
+    * @since [v1.0]
+    * @return \Illuminate\Http\Response
+    */
     public function exportLicenseReport()
     {
         $licenses = License::orderBy('created_at', 'DESC')->get();
@@ -392,12 +404,28 @@ class ReportsController extends Controller
         return $response;
     }
 
+    /**
+    * Returns a form that allows the user to generate a custom CSV report.
+    *
+    * @author [A. Gianotto] [<snipe@snipe.net>]
+    * @see ReportsController::postCustomReport() method that generates the CSV
+    * @since [v1.0]
+    * @return \Illuminate\Http\Response
+    */
     public function getCustomReport()
     {
 
         return View::make('reports/custom');
     }
 
+    /**
+    * Exports the custom report to CSV
+    *
+    * @author [A. Gianotto] [<snipe@snipe.net>]
+    * @see ReportsController::getCustomReport() method that generates form view
+    * @since [v1.0]
+    * @return \Illuminate\Http\Response
+    */
     public function postCustom()
     {
         $assets = Asset::orderBy('created_at', 'DESC')->get();
@@ -579,7 +607,7 @@ class ReportsController extends Controller
     /**
      * getImprovementsReport
      *
-     * @return mixed
+     * @return View
      * @author  Vincent Sposato <vincent.sposato@gmail.com>
      * @version v1.0
      */
@@ -737,7 +765,6 @@ class ReportsController extends Controller
      * getModelsInCategoriesThatRequireAcceptance
      *
      * @param $assetCategoriesRequiringAcceptance
-     *
      * @return array
      * @author  Vincent Sposato <vincent.sposato@gmail.com>
      * @version v1.0
