@@ -181,9 +181,16 @@ class CategoriesController extends Controller
 
 
         if ($category->has_models() > 0) {
+            return Redirect::to('admin/settings/categories')->with('error', trans('admin/categories/message.assoc_models'));
 
-            // Redirect to the asset management page
-            return Redirect::to('admin/settings/categories')->with('error', trans('admin/categories/message.assoc_users'));
+        } elseif ($category->accessories()->count() > 0) {
+                return Redirect::to('admin/settings/categories')->with('error', trans('admin/categories/message.assoc_accessories'));
+
+        } elseif ($category->consumables()->count() > 0) {
+                return Redirect::to('admin/settings/categories')->with('error', trans('admin/categories/message.assoc_consumables'));
+
+        } elseif ($category->components()->count() > 0) {
+                return Redirect::to('admin/settings/categories')->with('error', trans('admin/categories/message.assoc_components'));
         } else {
 
             $category->delete();
@@ -236,7 +243,7 @@ class CategoriesController extends Controller
     public function getDatatable()
     {
         // Grab all the categories
-        $categories = Category::with('assets', 'accessories', 'consumables');
+        $categories = Category::with('assets', 'accessories', 'consumables','components');
 
         if (Input::has('search')) {
             $categories = $categories->TextSearch(e(Input::get('search')));
@@ -267,12 +274,19 @@ class CategoriesController extends Controller
         $rows = array();
 
         foreach ($categories as $category) {
-            $actions = '<a href="'.route('update/category', $category->id).'" class="btn btn-warning btn-sm" style="margin-right:5px;"><i class="fa fa-pencil icon-white"></i></a><a data-html="false" class="btn delete-asset btn-danger btn-sm" data-toggle="modal" href="'.route('delete/category', $category->id).'" data-content="'.trans('admin/categories/message.delete.confirm').'" data-title="'.trans('general.delete').' '.htmlspecialchars($category->name).'?" onClick="return false;"><i class="fa fa-trash icon-white"></i></a>';
+
+            $actions = '<a href="'.route('update/category', $category->id).'" class="btn btn-warning btn-sm" style="margin-right:5px;">';
+            $actions .='<i class="fa fa-pencil icon-white"></i></a>';
+            $actions .='<a data-html="false" class="btn delete-asset btn-danger btn-sm';
+            if ($category->itemCount() > 0) {
+                $actions .=' disabled';
+            }
+            $actions .=' data-toggle="modal" href="'.route('delete/category', $category->id).'" data-content="'.trans('admin/categories/message.delete.confirm').'" data-title="'.trans('general.delete').' '.htmlspecialchars($category->name).'?" onClick="return false;"><i class="fa fa-trash icon-white"></i></a>';
             $rows[] = array(
                 'id'      => $category->id,
                 'name'  => (string)link_to('/admin/settings/categories/'.$category->id.'/view', $category->name) ,
                 'category_type' => ucwords($category->category_type),
-                'count'         => $category->assets->count(),
+                'count'         => $category->itemCount(),
                 'acceptance'    => ($category->require_acceptance=='1') ? '<i class="fa fa-check"></i>' : '',
                 //EULA is still not working correctly
                 'eula'          => ($category->getEula()) ? '<i class="fa fa-check"></i>' : '',
@@ -340,7 +354,7 @@ class CategoriesController extends Controller
             $inout='';
 
             if ($asset->deleted_at=='') {
-                $actions = '<div style=" white-space: nowrap;"><a href="'.route('clone/hardware', $asset->id).'" class="btn btn-info btn-sm" title="Clone asset"><i class="fa fa-files-o"></i></a> <a href="'.route('update/hardware', $asset->id).'" class="btn btn-warning btn-sm"><i class="fa fa-pencil icon-white"></i></a> <a data-html="false" class="btn delete-asset btn-danger btn-sm" data-toggle="modal" href="'.route('delete/hardware', $asset->id).'" data-content="'.trans('admin/hardware/message.delete.confirm').'" data-title="'.trans('general.delete').' '.htmlspecialchars($asset->asset_tag).'?" onClick="return false;"><i class="fa fa-trash icon-white"></i></a></div>';
+                $actions = '<div style=" white-space: nowrap;"><a href="'.route('clone/hardware', $asset->id).'" class="btn btn-info btn-sm" title="Clone asset"><i class="fa fa-files-o"></i></a> <a href="'.route('update/'.$category->category_type, $asset->id).'" class="btn btn-warning btn-sm"><i class="fa fa-pencil icon-white"></i></a> <a data-html="false" class="btn delete-asset btn-danger btn-sm" data-toggle="modal" href="'.route('delete/hardware', $asset->id).'" data-content="'.trans('admin/hardware/message.delete.confirm').'" data-title="'.trans('general.delete').' '.htmlspecialchars($asset->asset_tag).'?" onClick="return false;"><i class="fa fa-trash icon-white"></i></a></div>';
             } elseif ($asset->deleted_at!='') {
                 $actions = '<a href="'.route('restore/hardware', $asset->id).'" class="btn btn-warning btn-sm"><i class="fa fa-recycle icon-white"></i></a>';
             }
