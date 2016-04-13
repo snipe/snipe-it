@@ -34,8 +34,8 @@ before_script:
 
 # omitting "script:" will default to phpunit
 # use the $DB env variable to determine the phpunit.xml to use
-script: ./vendor/bin/codecept run --env testing-ci
-# script: ./vendor/bin/codecept run unit
+# script: ./vendor/bin/codecept run --env testing-ci - broken :(
+script: ./vendor/bin/codecept run unit --env testing-ci
 #script: ./vendor/bin/codecept run
 
 after_success:
