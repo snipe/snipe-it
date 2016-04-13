@@ -10,9 +10,9 @@
 class_name: AcceptanceTester
 modules:
     enabled:
-        - WebDriver
-        - \Helper\Acceptance
-    config:
-        WebDriver:
+        - WebDriver:
             url: 'https://snipe-it.dev:1337'
             browser: 'firefox'
+        - \Helper\Acceptance
+        - Laravel5:
+            part: ORM
