@@ -12,7 +12,9 @@ modules:
     enabled:
         - WebDriver
         - \Helper\Acceptance
+        - Laravel5:
+            part: ORM
     config:
         WebDriver:
-            url: http://localhost:8000
-            browser: phantomjs
+            url: 'http://localhost:8000'
+            browser: 'phantomjs'
