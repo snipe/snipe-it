@@ -19,8 +19,7 @@ use View;
 use Auth;
 use Request;
 
-/**
- * This controller handles all actions related to Accessories for
+/** This controller handles all actions related to Accessories for
  * the Snipe-IT Asset Management application.
  *
  * @version    v1.0
