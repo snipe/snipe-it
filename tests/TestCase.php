@@ -7,13 +7,6 @@ class TestCase extends Illuminate\Foundation\Testing\TestCase
      *
      * @var string
      */
-    //protected $baseUrl = 'http://snipe-it5.dev:8888';
-    function __construct()
-    {
-        parent::createApplication();
-        parent::setUp();
-
-    }
 
     /**
      * Creates the application.
@@ -30,7 +23,6 @@ class TestCase extends Illuminate\Foundation\Testing\TestCase
     public function setUp()
     {
         parent::setUp();
-        $this->app['artisan']->call('migrate');
     }
 
     public function tearDown()
