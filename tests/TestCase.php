@@ -7,7 +7,7 @@ class TestCase extends Illuminate\Foundation\Testing\TestCase
      *
      * @var string
      */
-    protected $baseUrl = 'http://snipe-it5.dev:8888';
+    //protected $baseUrl = 'http://snipe-it5.dev:8888';
 
     /**
      * Creates the application.
