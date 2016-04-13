@@ -14,5 +14,5 @@ modules:
         - \Helper\Acceptance
     config:
         WebDriver:
-            url: 'https://snipe-it.dev:1337'
-            browser: 'firefox'
+            url: 'http://localhost:8000'
+            browser: 'phantomjs'
