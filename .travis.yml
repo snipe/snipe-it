@@ -25,7 +25,7 @@ before_script:
   - mysql -e "create database IF NOT EXISTS snipeit_unit;" -utravis
   - composer self-update
   - composer install -n --prefer-source
-  - cp .env.testing .env
+  - cp .env.testing-ci .env
   - chmod -R 777 storage
   - php artisan migrate --force
   - ./vendor/bin/codecept build
@@ -36,7 +36,6 @@ before_script:
   - sleep 5
   - pip install --user codecov
   - sleep 5
-  - composer global update
 
 
 
