@@ -36,6 +36,7 @@ before_script:
   - sleep 5
   - pip install --user codecov
   - sleep 5
+  - composer global update
 
 
 
