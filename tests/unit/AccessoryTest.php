@@ -15,7 +15,7 @@ class AccessoryTest extends \Codeception\TestCase\Test
 
   public function testAccessoryAdd()
   {
-    $accessory = factory(Accessory::class)->make();
+    $accessory = factory(Accessory::class, 'accessory')->make();
     $values = [
       'name' => $accessory->name,
       'category_id' => $accessory->category_id,

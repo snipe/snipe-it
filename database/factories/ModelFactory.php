@@ -105,7 +105,7 @@ $factory->defineAs(App\Models\Depreciation::class, 'depreciation', function (Fak
   ];
 });
 
-$factory->define(App\Models\Accessory::class, function (Faker\Generator $faker) {
+$factory->defineAs(App\Models\Accessory::class, 'accessory', function (Faker\Generator $faker) {
   return [
     'name' => $faker->text(20),
     'category_id' => $faker->numberBetween(11,15),
