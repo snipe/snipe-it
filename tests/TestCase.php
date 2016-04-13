@@ -11,8 +11,9 @@ class TestCase extends Illuminate\Foundation\Testing\TestCase
     function __construct()
     {
         parent::setUp();
+        parent::createApplication();
     }
-    
+
     /**
      * Creates the application.
      *
@@ -28,7 +29,7 @@ class TestCase extends Illuminate\Foundation\Testing\TestCase
     public function setUp()
     {
         parent::setUp();
-        //Artisan::call('migrate');
+        $this->app['artisan']->call('migrate');
     }
 
     public function tearDown()
