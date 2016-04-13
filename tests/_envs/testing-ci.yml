@@ -10,7 +10,8 @@
 class_name: AcceptanceTester
 modules:
     enabled:
-        - WebDriver
+        - WebDriver:
+            url: 'http://localhost:8000'
         - \Helper\Acceptance
         - Laravel5:
             part: ORM
