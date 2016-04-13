@@ -10,8 +10,9 @@ class TestCase extends Illuminate\Foundation\Testing\TestCase
     //protected $baseUrl = 'http://snipe-it5.dev:8888';
     function __construct()
     {
-        parent::setUp();
         parent::createApplication();
+        parent::setUp();
+
     }
 
     /**
@@ -21,7 +22,7 @@ class TestCase extends Illuminate\Foundation\Testing\TestCase
      */
     public function createApplication()
     {
-        $app = require __DIR__.'/../bootstrap/app.php';
+        $app = require_once __DIR__.'/../bootstrap/app.php';
         $app->make(Illuminate\Contracts\Console\Kernel::class)->bootstrap();
         return $app;
     }
