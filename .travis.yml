@@ -14,12 +14,6 @@ php:
 
 # execute any number of scripts before the test run, custom env's are available as variables
 before_script:
-#  - php -S localhost:8000 &
-  # - mkdir travis-phantomjs
-  # - wget https://bitbucket.org/ariya/phantomjs/downloads/phantomjs-2.1.1-linux-x86_64.tar.bz2 -O $PWD/travis-phantomjs/phantomjs-2.1.1-linux-x86_64.tar.bz2
-  # - tar -xvf $PWD/travis-phantomjs/phantomjs-2.1.1-linux-x86_64.tar.bz2 -C $PWD/travis-phantomjs
-  # - export PATH=$PWD/travis-phantomjs/phantomjs-2.1.1-linux-x86_64/bin:$PATH
-
   - phantomjs --webdriver=4444  &
   - sleep 10
   - mysql -e "create database IF NOT EXISTS snipeit_unit;" -utravis
@@ -27,10 +21,10 @@ before_script:
   - composer install -n --prefer-source
   - cp .env.testing-ci .env
   - chmod -R 777 storage
-  - php artisan migrate --force
+  - php artisan migrate --database=mysql --force
   - ./vendor/bin/codecept build
   - php artisan key:generate
-  - php artisan db:seed --force
+  - php artisan db:seed --database=mysql --force
   - php artisan admin:create --first_name=Alison --last_name=Foobar --email=me@example.com --username=snipe --password=password
   - php artisan serve --port=8000 --host=localhost &
   - sleep 5
