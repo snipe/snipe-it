@@ -27,10 +27,10 @@ before_script:
   - composer install -n --prefer-source
   - cp .env.testing .env
   - chmod -R 777 storage
-  - php artisan migrate --database=sqlite_testing --force
+  - php artisan migrate --force
   - ./vendor/bin/codecept build
   - php artisan key:generate
-  - php artisan db:seed --database=sqlite_testing --force
+  - php artisan db:seed --force
   - php artisan admin:create --first_name=Alison --last_name=Foobar --email=me@example.com --username=snipe --password=password
   - php artisan serve --port=8000 --host=localhost &
   - sleep 5
