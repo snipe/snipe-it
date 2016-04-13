@@ -42,7 +42,6 @@
   <!-- Content -->
   @yield('content')
 
-<script src="{{ asset('assets/js/all.js') }}"></script>
 
 
 </body>
