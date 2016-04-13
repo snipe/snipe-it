@@ -18,13 +18,11 @@ modules:
 env:
   testing-ci:
     modules:
-      config:
-        WebDriver:
+        - WebDriver:
           url: http://localhost:8000
           browser: phantomjs
   testing:
     modules:
-      config:
-        WebDriver:
+        - WebDriver:
           url: http://localhost:8000
           browser: phantomjs
