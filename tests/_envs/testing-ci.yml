@@ -10,9 +10,11 @@
 class_name: AcceptanceTester
 modules:
     enabled:
-        - WebDriver:
-            url: 'http://localhost:8000'
-            browser: 'phantomjs'
+        - WebDriver
         - \Helper\Acceptance
         - Laravel5:
             part: ORM
+    config:
+        WebDriver:
+            url: 'http://localhost:8000'
+            browser: 'phantomjs'
