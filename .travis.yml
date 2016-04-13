@@ -26,7 +26,7 @@ before_script:
 
   - phantomjs --webdriver=4444  &
   - sleep 10
-  - touch database/testing.sqlite
+  - mysql -e "create database IF NOT EXISTS snipeit_unit;" -utravis
   - composer self-update
   - composer install -n --prefer-source
   - cp .env.testing .env
