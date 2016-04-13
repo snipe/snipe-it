@@ -9,12 +9,6 @@ class TestCase extends Illuminate\Foundation\Testing\TestCase
      */
     protected $baseUrl = 'http://snipe-it5.dev:8888';
 
-    function __construct()
-    {
-        parent::createApplication();
-        parent::setUp();
-    }
-
     /**
      * Creates the application.
      *
