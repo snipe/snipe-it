@@ -11,6 +11,7 @@ class TestCase extends Illuminate\Foundation\Testing\TestCase
 
     function __construct()
     {
+        parent::createApplication();
         parent::setUp();
     }
 
