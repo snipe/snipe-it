@@ -12,7 +12,7 @@ class TestCase extends Illuminate\Foundation\Testing\TestCase
     function __construct()
     {
         parent::createApplication();
-        parent::setUp();
+        //parent::setUp();
     }
 
     /**
@@ -22,7 +22,7 @@ class TestCase extends Illuminate\Foundation\Testing\TestCase
      */
     public function createApplication()
     {
-        putenv('DB_DEFAULT=sqlite');
+        //putenv('DB_DEFAULT=sqlite');
         $app = require __DIR__.'/../bootstrap/app.php';
         $app->make(Illuminate\Contracts\Console\Kernel::class)->bootstrap();
         return $app;
@@ -30,8 +30,8 @@ class TestCase extends Illuminate\Foundation\Testing\TestCase
 
     public function setUp()
     {
-        Artisan::call('migrate');
-        parent::setUp();
+        //Artisan::call('migrate');
+        //parent::setUp();
         //Artisan::call('migrate');
     }
 
