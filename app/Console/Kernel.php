@@ -21,6 +21,7 @@ class Kernel extends ConsoleKernel
         Commands\LicenseImportCommand::class,
         Commands\Versioning::class,
         Commands\SystemBackup::class,
+        Commands\DisableLDAP::class,
     ];
 
     /**
