@@ -55,76 +55,78 @@ class Purge extends Command
 
         if ($this->confirm("\n****************************************************\nTHIS WILL PURGE ALL SOFT-DELETED ITEMS IN YOUR SYSTEM. \nThere is NO undo. This WILL permanently destroy \nALL of your deleted data. \n****************************************************\n\nDo you wish to continue? No backsies! [y|N]")) {
 
-            $assets = Asset::whereNotNull('deleted_at');
+            /**
+             * Delete assets
+             */
+            $assets = Asset::whereNotNull('deleted_at')->withTrashed()->get();
+            $assetcount = $assets->count();
+            $this->info($assets->count().' assets purged.');
+            $asset_assoc = 0;
 
             foreach ($assets as $asset) {
+                $this->info('- Asset "'.$asset->showAssetName().'" deleted.');
+                $asset_assoc += $asset->assetlog()->count();
                 $asset->assetlog()->forceDelete();
+                $asset->forceDelete();
             }
 
-            $assets->forceDelete();
+            $this->info($asset_assoc.' corresponding log records purged.');
 
-            $locations = Location::whereNotNull('deleted_at');
+            $locations = Location::whereNotNull('deleted_at')->withTrashed()->get();
+            $this->info($locations->count().' locations purged.');
             $locations->forceDelete();
 
-            $accessories = Accessory::whereNotNull('deleted_at');
+
+            $accessories = Accessory::whereNotNull('deleted_at')->withTrashed()->get();
             foreach ($accessories as $accessory) {
                 $accessory->assetlog()->forceDelete();
             }
             $accessories->forceDelete();
 
-            $consumables = Consumable::whereNotNull('deleted_at');
+            $consumables = Consumable::whereNotNull('deleted_at')->withTrashed()->get();
             foreach ($consumables as $consumable) {
                 $consumable->assetlog()->forceDelete();
             }
             $consumables->forceDelete();
 
-            $components = Component::whereNotNull('deleted_at');
+            $components = Component::whereNotNull('deleted_at')->withTrashed()->get();
             foreach ($components as $component) {
                 $component->assetlog()->forceDelete();
             }
             $components->forceDelete();
 
-            $licenses = License::whereNotNull('deleted_at');
+            $licenses = License::whereNotNull('deleted_at')->withTrashed()->get();
             $licenses->forceDelete();
 
-            $models = AssetModel::whereNotNull('deleted_at');
+            $models = AssetModel::whereNotNull('deleted_at')->withTrashed()->get();
             $models->forceDelete();
 
-            $categories = Category::whereNotNull('deleted_at');
+            $categories = Category::whereNotNull('deleted_at')->withTrashed()->get();
             $categories->forceDelete();
 
-            $suppliers = Supplier::whereNotNull('deleted_at');
+            $suppliers = Supplier::whereNotNull('deleted_at')->withTrashed()->get();
             $suppliers->forceDelete();
 
-            $users = User::whereNotNull('deleted_at');
+            $users = User::whereNotNull('deleted_at')->withTrashed()->get();
+            $this->info($users->count().' users purged.');
+            $user_assoc = 0;
             foreach ($users as $user) {
+                $this->info('- User "'.$user->username.'" deleted.');
+                $user_assoc += $user->userlog()->count();
                 $user->userlog()->forceDelete();
+                $user->forceDelete();
             }
-            $users->forceDelete();
+            $this->info($user_assoc.' corresponding log records purged.');
 
-            $manufacturers = Manufacturer::whereNotNull('deleted_at');
+            $manufacturers = Manufacturer::whereNotNull('deleted_at')->withTrashed()->get();
             $manufacturers->forceDelete();
 
-            $status_labels = StatusLabel::whereNotNull('deleted_at');
+            $status_labels = StatusLabel::whereNotNull('deleted_at')->withTrashed()->get();
             $status_labels->forceDelete();
 
 
-
-            // \DB::update('drop table IF EXISTS accessories_users');
-            // \DB::statement('drop table IF EXISTS asset_logs');
-            // \DB::statement('drop table IF EXISTS asset_maintenances');
-            // \DB::statement('drop table IF EXISTS asset_uploads');
-            // \DB::statement('drop table IF EXISTS consumables_users');
-            // \DB::statement('drop table IF EXISTS groups');
-            // //\DB::statement('drop table IF EXISTS history');
-            // \DB::statement('drop table IF EXISTS license_seats');
-            // \DB::statement('drop table IF EXISTS licenses');
-            // \DB::statement('drop table IF EXISTS requested_assets');
-            // \DB::statement('drop table IF EXISTS requests');
-            // \DB::statement('drop table IF EXISTS users_groups');
-            // \DB::statement('drop table IF EXISTS users');
-
-
+        } else {
+            $this->info('Action canceled. Nothing was purged.');
         }
 
     }
