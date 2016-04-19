@@ -11,6 +11,7 @@ use Str;
 use View;
 use Auth;
 
+
 /**
  * This controller handles all actions related to Depreciations for
  * the Snipe-IT Asset Management application.
@@ -46,8 +47,7 @@ class DepreciationsController extends Controller
     public function getCreate()
     {
         // Show the page
-        $depreciation_options = \App\Helpers\Helper::depreciationList();
-        return View::make('depreciations/edit')->with('depreciation_options', $depreciation_options)->with('depreciation', new Depreciation);
+        return View::make('depreciations/edit')->with('depreciation', new Depreciation);
     }
 
 
@@ -103,7 +103,7 @@ class DepreciationsController extends Controller
         // Show the page
         //$depreciation_options = array('' => 'Top Level') + Depreciation::lists('name', 'id');
 
-        $depreciation_options = array('' => 'Top Level') + DB::table('depreciations')->where('id', '!=', $depreciationId)->lists('name', 'id');
+        $depreciation_options = Helper::depreciationList();
         return View::make('depreciations/edit', compact('depreciation'))->with('depreciation_options', $depreciation_options);
     }
 

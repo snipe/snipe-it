@@ -9,7 +9,7 @@ class Depreciation extends Model
     // Declare the rules for the form validation
     protected $rules = array(
         'name' => 'required|min:3|max:255|unique:depreciations,name',
-        'months' => 'required|min:1|max:240|integer',
+        'months' => 'required|max:240|integer',
     );
 
     /**
@@ -53,7 +53,7 @@ class Depreciation extends Model
     {
 
         return $query->where(function ($query) use ($search) {
-      
+
              $query->where('name', 'LIKE', '%'.$search.'%')
              ->orWhere('months', 'LIKE', '%'.$search.'%');
         });
