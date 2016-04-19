@@ -433,8 +433,12 @@ Route::group([ 'prefix' => 'admin','middleware' => ['web','auth','authorize:admi
     # Admin Settings Routes (for categories, maufactureres, etc)
     Route::group([ 'prefix' => 'settings'], function () {
 
+
+
         # Settings
         Route::group([ 'prefix' => 'app' ], function () {
+
+            Route::post('purge', ['as' => 'purge', 'uses' => 'SettingsController@postPurge']);
 
             Route::get('/', [ 'as' => 'app', 'uses' => 'SettingsController@getIndex' ]);
             Route::get('edit', [ 'as' => 'edit/settings', 'uses' => 'SettingsController@getEdit' ]);
@@ -471,6 +475,8 @@ Route::group([ 'prefix' => 'admin','middleware' => ['web','auth','authorize:admi
             Route::post('{companyId}/edit', 'CompaniesController@postEdit');
             Route::post('create', 'CompaniesController@postCreate');
         });
+
+
 
         # Manufacturers
         Route::group([ 'prefix' => 'manufacturers' ], function () {

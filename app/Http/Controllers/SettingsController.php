@@ -516,4 +516,29 @@ class SettingsController extends Controller
         }
 
     }
+
+
+    /**
+    * Purges soft-deletes
+    *
+    * @author [A. Gianotto] [<snipe@snipe.net>]
+    * @since [v3.0]
+    * @return View
+    */
+    public function postPurge()
+    {
+        if (!config('app.lock_passwords')) {
+            if (Input::get('confirm_purge')=='DELETE') {
+                Artisan::call('snipeit:purge',['--force'=>'true','--no-interaction'=>true]);
+                $output = Artisan::output();
+                return View::make('settings/purge')
+                ->with('output', $output)->with('success', trans('admin/settings/message.purge.success'));
+            } else {
+                return Redirect::back()->with('error', trans('admin/settings/message.purge.validation_failed'));
+            }
+
+        } else {
+            return Redirect::back()->with('error', trans('general.feature_disabled'));
+        }
+    }
 }

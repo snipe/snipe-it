@@ -26,7 +26,7 @@ class Purge extends Command
      *
      * @var string
      */
-    protected $signature = 'snipeit:purge';
+    protected $signature = 'snipeit:purge {--force=false}';
 
     /**
      * The console command description.
@@ -52,8 +52,8 @@ class Purge extends Command
      */
     public function handle()
     {
-
-        if ($this->confirm("\n****************************************************\nTHIS WILL PURGE ALL SOFT-DELETED ITEMS IN YOUR SYSTEM. \nThere is NO undo. This WILL permanently destroy \nALL of your deleted data. \n****************************************************\n\nDo you wish to continue? No backsies! [y|N]")) {
+        $force = $this->option('force');
+        if (($this->confirm("\n****************************************************\nTHIS WILL PURGE ALL SOFT-DELETED ITEMS IN YOUR SYSTEM. \nThere is NO undo. This WILL permanently destroy \nALL of your deleted data. \n****************************************************\n\nDo you wish to continue? No backsies! [y|N]")) ||  $force == 'true')  {
 
             /**
              * Delete assets
