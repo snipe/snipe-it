@@ -484,7 +484,7 @@ class AssetModelsController extends Controller
     */
     public function getDataView($modelID)
     {
-        $assets = Asset::where('model_id', '=', $modelID)->withTrashed()->with('company');
+        $assets = Asset::where('model_id', '=', $modelID)->with('company');
 
         if (Input::has('search')) {
             $assets = $assets->TextSearch(e(Input::get('search')));
