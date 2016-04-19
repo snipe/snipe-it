@@ -95,6 +95,7 @@ class ReportsController extends Controller
     */
     public function getAssetsReport()
     {
+        $settings = \App\Models\Setting::first();
         // Grab all the assets
         $assets = Asset::with(
             'model',
@@ -109,7 +110,7 @@ class ReportsController extends Controller
                        ->orderBy('created_at', 'DESC')
                        ->get();
 
-        return View::make('reports/asset', compact('assets'));
+        return View::make('reports/asset', compact('assets'))->with('settings',$settings);
     }
 
     /**

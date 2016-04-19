@@ -37,7 +37,7 @@
             <th class="col-sm-1">{{ trans('admin/hardware/form.manufacturer') }}</th>
             <th class="col-sm-1">{{ trans('admin/hardware/form.model') }}</th>
             <th class="col-sm-1">{{ trans('general.model_no') }}</th>
-            @if (\App\Models\Setting::getSettings()->display_asset_name)
+            @if ($settings->display_asset_name)
                 <th class="col-sm-1">{{ trans('general.name') }}</th>
             @endif
             <th class="col-sm-1">{{ trans('admin/hardware/table.serial') }}</th>
@@ -63,7 +63,7 @@
             </td>
             <td>{{ $asset->model->name }}</td>
             <td>{{ $asset->model->modelno }}</td>
-            @if (\App\Models\Setting::getSettings()->display_asset_name)
+            @if ($settings->display_asset_name)
                 <td>{{ $asset->name }}</td>
             @endif
             <td>{{ $asset->serial }}</td>
@@ -76,7 +76,7 @@
             @endif
             </td>
             <td>{{ $asset->purchase_date }}</td>
-            <td class="align-right">{{ \App\Models\Setting::first()->default_currency }}
+            <td class="align-right">{{ $settings->default_currency }}
                 {{ number_format($asset->purchase_cost) }}
             </td>
             <td>
@@ -134,7 +134,7 @@
         iconsPrefix: 'fa',
         showRefresh: true,
         search: true,
-        pageSize: {{ \App\Models\Setting::getSettings()->per_page }},
+        pageSize: {{ $settings->per_page }},
         pagination: true,
         sidePagination: 'client',
         sortable: true,
