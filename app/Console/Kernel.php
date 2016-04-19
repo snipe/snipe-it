@@ -34,8 +34,8 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule)
     {
 
-        $schedule->command('alerts:inventory')->daily();
-        $schedule->command('alerts:expiring')->daily();
+        $schedule->command('snipeit:inventory-alerts')->daily();
+        $schedule->command('snipeit:expiring-alerts')->daily();
         $schedule->command('snipeit:backup')->weekly();
     }
 }
