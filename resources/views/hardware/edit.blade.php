@@ -426,7 +426,7 @@ $(function() {
     	    $.ajax({
     	        url: "{{config('app.url') }}/api/statuslabels/"+status_id+"/deployable",
     	        success: function(data) {
-                    console.log(data);
+                    //console.log(data);
                     $(".status_spinner").css("display", "none");
 
     	            if(data == true){
