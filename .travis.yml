@@ -24,7 +24,7 @@ before_script:
   - ./vendor/bin/codecept build
   - php artisan key:generate
   - php artisan db:seed --database=mysql --force
-  - php artisan admin:create --first_name=Alison --last_name=Foobar --email=me@example.com --username=snipe --password=password
+  - php artisan snipeit:create-admin --first_name=Alison --last_name=Foobar --email=me@example.com --username=snipe --password=password
   - php artisan serve --port=8000 --host=localhost &
   - sleep 5
   - pip install --user codecov
