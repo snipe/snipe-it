@@ -1,15 +1,15 @@
 <?php
 
 return array(
-    'about'      	=> 'About Status Labels',
-    'archived'      	=> 'Archived',
-    'create'      	=> 'Create Status Label',
-    'deployable'      	=> 'Deployable',
-    'info'      	=> 'Status labels are used to describe the various states your assets could be in. They may be out for repair, lost/stolen, etc. You can create new status labels for deployable, pending and archived assets.',
-    'name'      	=> 'Status Name',
-    'pending'      	=> 'Pending',
-    'status_type'   => 'Status Type',
-    'title'      	=> 'Status Labels',
-    'undeployable'  => 'Undeployable',
-    'update'      	=> 'Update Status Label',
+    'about'      	=> 'A státusz címkékről',
+    'archived'      	=> 'Archivált',
+    'create'      	=> 'Státusz címke létrehozása',
+    'deployable'      	=> 'Telepíthető',
+    'info'      	=> 'A státusz címkék arra szolgálnak, hogy az eszközök különböző állapotát leírják. Például javítás alatt, eltűnt/ellopott, stb. Új címkéket is létre lehet hozni telepíthető, függőben levő és archivált eszközökhöz.',
+    'name'      	=> 'Státusz elnevezése',
+    'pending'      	=> 'Függőben',
+    'status_type'   => 'Státusz típusa',
+    'title'      	=> 'Státusz címkék',
+    'undeployable'  => 'Nem telepíthető',
+    'update'      	=> 'Státusz címke frissítése',
 );

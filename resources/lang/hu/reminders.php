@@ -13,7 +13,7 @@ return array(
     |
     */
 
-    "password" => "Passwords must be six characters and match the confirmation.",
+    "password" => "A jelszónak 6 karakteresnek kell lennie és egyeznie kell a megerősítésével.",
 
     "user"     => "A felhasználónév vagy az e-mail cím téves",
 

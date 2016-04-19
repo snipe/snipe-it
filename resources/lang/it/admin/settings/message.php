@@ -13,5 +13,10 @@ return array(
         'generated'             => 'Un nuovo file di backup è stato creato con successo.',
         'file_not_found'        => 'Quel file di backup non può essere trovato sul server.',
     ),
+    'purge' => array(
+        'error'     => 'An error has occurred while purging. ',
+        'validation_failed'     => 'Your purge confirmation is incorrect. Please type the word "DELETE" in the confirmation box.',
+        'success'               => 'Deleted records successfully purged.'
+    ),
 
 );

@@ -13,5 +13,10 @@ return array(
         'generated'             => '新しいバックアップファイルが作成されました。',
         'file_not_found'        => 'そのバックアップファイルをサーバー上に見つけることが出来ませんでした。',
     ),
+    'purge' => array(
+        'error'     => 'An error has occurred while purging. ',
+        'validation_failed'     => 'Your purge confirmation is incorrect. Please type the word "DELETE" in the confirmation box.',
+        'success'               => 'Deleted records successfully purged.'
+    ),
 
 );

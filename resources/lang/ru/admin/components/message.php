@@ -2,34 +2,34 @@
 
 return array(
 
-    'does_not_exist' => 'Component does not exist.',
+    'does_not_exist' => 'Компонент не существует.',
 
     'create' => array(
-        'error'   => 'Component was not created, please try again.',
-        'success' => 'Component created successfully.'
+        'error'   => 'Не удалось создать компонент, попробуйте еще раз.',
+        'success' => 'Компонент успешно создан.'
     ),
 
     'update' => array(
-        'error'   => 'Component was not updated, please try again',
-        'success' => 'Component updated successfully.'
+        'error'   => 'Не удалось обновить компонент, попробуйте еще раз',
+        'success' => 'Компонент успешно обновлен.'
     ),
 
     'delete' => array(
-        'confirm'   => 'Are you sure you wish to delete this component?',
-        'error'   => 'There was an issue deleting the component. Please try again.',
-        'success' => 'The component was deleted successfully.'
+        'confirm'   => 'Вы уверены, что хотите удалить этот компонент?',
+        'error'   => 'Возникла проблема при удалении компонента, пожалуйста попробуйте еще раз.',
+        'success' => 'Компонент успешно удален.'
     ),
 
      'checkout' => array(
-        'error'   		=> 'Component was not checked out, please try again',
-        'success' 		=> 'Component checked out successfully.',
-        'user_does_not_exist' => 'That user is invalid. Please try again.'
+        'error'   		=> 'Не удалось отвязать компонент, пожалуйста попробуйте еще раз',
+        'success' 		=> 'Связь с компонентом успешно удалена.',
+        'user_does_not_exist' => 'Неверный пользователь. Попробуйте еще раз.'
     ),
 
     'checkin' => array(
-        'error'   		=> 'Component was not checked in, please try again',
-        'success' 		=> 'Component checked in successfully.',
-        'user_does_not_exist' => 'That user is invalid. Please try again.'
+        'error'   		=> 'Не удалось привязать компонент, пожалуйста попробуйте еще раз',
+        'success' 		=> 'Компонент успешно привязан.',
+        'user_does_not_exist' => 'Неверный пользователь. Пожалуйста, попробуйте еще раз.'
     )
 
 

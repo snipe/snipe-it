@@ -2,34 +2,34 @@
 
 return array(
 
-    'does_not_exist' => 'Component does not exist.',
+    'does_not_exist' => '组件不存在',
 
     'create' => array(
-        'error'   => 'Component was not created, please try again.',
-        'success' => 'Component created successfully.'
+        'error'   => '新增组件失败，请重试。',
+        'success' => '新增组件成功。'
     ),
 
     'update' => array(
-        'error'   => 'Component was not updated, please try again',
-        'success' => 'Component updated successfully.'
+        'error'   => '更新组件失败，请重试。',
+        'success' => '更新成功。'
     ),
 
     'delete' => array(
-        'confirm'   => 'Are you sure you wish to delete this component?',
-        'error'   => 'There was an issue deleting the component. Please try again.',
-        'success' => 'The component was deleted successfully.'
+        'confirm'   => '你确定要删除这个组件吗？',
+        'error'   => '删除组件出错，请重试。',
+        'success' => '删除组件成功。'
     ),
 
      'checkout' => array(
-        'error'   		=> 'Component was not checked out, please try again',
-        'success' 		=> 'Component checked out successfully.',
-        'user_does_not_exist' => 'That user is invalid. Please try again.'
+        'error'   		=> '借出组件失败，请重试。',
+        'success' 		=> '借出组件成功。',
+        'user_does_not_exist' => '无效用户，请重试。'
     ),
 
     'checkin' => array(
-        'error'   		=> 'Component was not checked in, please try again',
-        'success' 		=> 'Component checked in successfully.',
-        'user_does_not_exist' => 'That user is invalid. Please try again.'
+        'error'   		=> '借入组件失败，请重试。',
+        'success' 		=> '借入组件成功。',
+        'user_does_not_exist' => '无效用户，请重试。'
     )
 
 

@@ -1,18 +1,18 @@
 <?php
 return array(
-    'does_not_exist' => 'Company does not exist.',
-    'assoc_users'    => 'This company is currently associated with at least one model and cannot be deleted. Please update your models to no longer reference this company and try again. ',
+    'does_not_exist' => 'الشركة غير موجودة.',
+    'assoc_users'    => 'هذه الشركة مرتبطة حاليا مع نموذج ولا يمكن حذفها. رجاءً قم بتحديث النماذج بحيث لا تكون مرتبطة بهذه الشركة ثم حاول مرة اُخرى. ',
     'create' => array(
-        'error'   => 'Company was not created, please try again.',
-        'success' => 'Company created successfully.'
+        'error'   => 'لم يتم انشاء الشركة، رجاءً حاول مرة اُخرى.',
+        'success' => 'تم إنشاء الشركة بنجاح.'
     ),
     'update' => array(
-        'error'   => 'Company was not updated, please try again',
-        'success' => 'Company updated successfully.'
+        'error'   => 'لم يتم تحديث الشركة، رجاءً حاول مرة اُخرى',
+        'success' => 'تم تحديث الشركة بنجاح.'
     ),
     'delete' => array(
-        'confirm' => 'Are you sure you wish to delete this company?',
-        'error'   => 'There was an issue deleting the company. Please try again.',
-        'success' => 'The Company was deleted successfully.'
+        'confirm' => 'هل أنت متأكد من رغبتك في حذف هذه الشركة؟',
+        'error'   => 'حدثت مشكلة اثناء عملية حذف الشركة. رجاءً المحاولة مرة اُخرى.',
+        'success' => 'تم حذف الشركة بنجاح.'
     )
 );
