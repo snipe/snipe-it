@@ -13,7 +13,7 @@ class DisableLDAP extends Command
      *
      * @var string
      */
-    protected $signature = 'ldap:disable';
+    protected $signature = 'snipeit:ldap-disable';
 
     /**
      * The console command description.

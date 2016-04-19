@@ -12,7 +12,7 @@ class PaveIt extends Command
      *
      * @var string
      */
-    protected $signature = 'pave';
+    protected $signature = 'snipeit:pave';
 
     /**
      * The console command description.

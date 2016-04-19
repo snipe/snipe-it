@@ -15,7 +15,7 @@ class SendExpirationAlerts extends Command {
 	 *
 	 * @var string
 	 */
-	protected $name = 'alerts:expiring';
+	protected $name = 'snipeit:expiring-alerts';
 
 	/**
 	 * The console command description.

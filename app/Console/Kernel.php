@@ -22,6 +22,7 @@ class Kernel extends ConsoleKernel
         Commands\Versioning::class,
         Commands\SystemBackup::class,
         Commands\DisableLDAP::class,
+        Commands\Purge::class,
     ];
 
     /**

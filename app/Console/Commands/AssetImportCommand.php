@@ -20,7 +20,7 @@ class AssetImportCommand extends Command {
 	 *
 	 * @var string
 	 */
-	protected $name = 'asset-import:csv';
+	protected $name = 'snipeit:asset-import';
 
 	/**
 	 * The console command description.

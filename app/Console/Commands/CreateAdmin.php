@@ -11,7 +11,7 @@ class CreateAdmin extends Command
      *
      * @var string
      */
-    protected $signature = 'admin:create {--first_name=} {--last_name=}  {--email=}  {--username=}  {--password=}';
+    protected $signature = 'snipeit:create-admin {--first_name=} {--last_name=}  {--email=}  {--username=}  {--password=}';
 
     /**
      * The console command description.

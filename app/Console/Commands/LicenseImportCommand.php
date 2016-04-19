@@ -13,7 +13,7 @@ class LicenseImportCommand extends Command {
 	 *
 	 * @var string
 	 */
-	protected $name = 'license-import:csv';
+	protected $name = 'snipeit:license-import';
 
 	/**
 	 * The console command description.
