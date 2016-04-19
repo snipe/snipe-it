@@ -2,6 +2,7 @@
 [![Gitter](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/snipe/snipe-it?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 [![Docker Pulls](https://img.shields.io/docker/pulls/snipe/snipe-it.svg)](https://hub.docker.com/r/snipe/snipe-it/)
 [![Twitter Follow](https://img.shields.io/twitter/follow/snipeyhead.svg?style=social)](https://twitter.com/snipeyhead)
+[![Zenhub](https://raw.githubusercontent.com/ZenHubIO/support/master/zenhub-badge.png)](https://zenhub.io)
 
 
 ## Snipe-IT - Asset Management For the Rest of Us
