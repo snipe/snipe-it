@@ -53,7 +53,7 @@
                </tfoot>
                <tbody>
                  @foreach($custom_fieldset->fields AS $field)
-                 <tr class="cansort">
+                 <tr class="cansort" data-index="{{ $field->pivot->custom_field_id }}">  
                    <td>
                      <!-- drag handle -->
                          <span class="handle">
@@ -93,6 +93,13 @@
       updateIndex = function(e, ui) {
           $('td.index', ui.item.parent()).each(function (i) {
               $(this).html(i + 1);
+              $.ajax({
+      	        url: "{{config('app.url') }}/api/custom_fields/order",
+      	        success: function(data) {
+                // do some stuff here
+
+      	        }
+      	    });
           });
       };
 
