@@ -261,8 +261,8 @@ class AssetImportCommand extends Command {
                 if ($user->save()) {
                     $this->comment('User '.$first_name.' created');
                 } else {
-                    $this->comment('ERROR CREATING User '.$first_name.' '.$last_name);
-                    $this->comment($user->getErrors());
+                    $this->error('ERROR CREATING User '.$first_name.' '.$last_name);
+                    $this->error($user->getErrors());
                 }
 
 			}
@@ -291,8 +291,8 @@ class AssetImportCommand extends Command {
 						if ($location->save()) {
 							$this->comment('Location '.$user_asset_location.' was created');
 			            } else {
-							$this->comment('Something went wrong! Location '.$user_asset_location.' was NOT created');
-                            $this->comment($location->getErrors());
+							$this->error('Something went wrong! Location '.$user_asset_location.' was NOT created');
+                            $this->error($location->getErrors());
 						}
 
 					}
@@ -327,8 +327,8 @@ class AssetImportCommand extends Command {
     		if ($category->save()) {
     			$this->comment('Category '.$user_asset_category.' was created');
             } else {
-    			$this->comment('Something went wrong! Category '.$user_asset_category.' was NOT created');
-                $this->comment($category->getErrors());
+    			$this->error('Something went wrong! Category '.$user_asset_category.' was NOT created');
+                $this->error($category->getErrors());
     		}
 
     	}
@@ -344,7 +344,7 @@ class AssetImportCommand extends Command {
     		if ($manufacturer->save()) {
     			$this->comment('Manufacturer '.$user_asset_mfgr.' was created');
             } else {
-    			$this->comment('Something went wrong! Manufacturer '.$user_asset_mfgr.' was NOT created: '. $manufacturer->getErrors()->first());
+    			$this->error('Something went wrong! Manufacturer '.$user_asset_mfgr.' was NOT created: '. $manufacturer->getErrors()->first());
     		}
 
     	}
@@ -363,7 +363,7 @@ class AssetImportCommand extends Command {
     		if ($asset_model->save()) {
     			$this->comment('Asset Model '.$user_asset_name.' with model number '.$user_asset_modelno.' was created');
             } else {
-    			$this->comment('Something went wrong! Asset Model '.$user_asset_name.' was NOT created: '.$asset_model->getErrors()->first());
+    			$this->error('Something went wrong! Asset Model '.$user_asset_name.' was NOT created: '.$asset_model->getErrors()->first());
     		}
 
     	}
@@ -379,7 +379,7 @@ class AssetImportCommand extends Command {
                 if ($company->save()) {
                     $this->comment('Company '.$user_asset_company_name.' was created');
                 } else {
-                    $this->comment('Something went wrong! Company '.$user_asset_company_name.' was NOT created: '.$company->getErrors()->first());
+                    $this->error('Something went wrong! Company '.$user_asset_company_name.' was NOT created: '.$company->getErrors()->first());
                 }
             }
 
@@ -421,7 +421,7 @@ class AssetImportCommand extends Command {
   				if ($asset->save()) {
   					$this->comment('Asset '.$user_asset_name.' with serial number '.$user_asset_serial.' was created');
   	            } else {
-  					$this->comment('Something went wrong! Asset '.$user_asset_name.' was NOT created: '.$asset->getErrors()->first());
+  					$this->error('Something went wrong! Asset '.$user_asset_name.' was NOT created: '.$asset->getErrors()->first());
   				}
 
         }
