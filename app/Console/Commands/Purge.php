@@ -74,38 +74,71 @@ class Purge extends Command
 
             $locations = Location::whereNotNull('deleted_at')->withTrashed()->get();
             $this->info($locations->count().' locations purged.');
-            $locations->forceDelete();
+            foreach ($locations as $location) {
+                $this->info('- Location "'.$location->name.'" deleted.');
+                $location->forceDelete();
+            }
 
 
             $accessories = Accessory::whereNotNull('deleted_at')->withTrashed()->get();
+            $accessory_assoc=0;
+            $this->info($accessories->count().' accessories purged.');
             foreach ($accessories as $accessory) {
+                $this->info('- Accessory "'.$accessory->name.'" deleted.');
+                $accessory_assoc += $accessory->assetlog()->count();
                 $accessory->assetlog()->forceDelete();
+                $accessory->forceDelete();
             }
-            $accessories->forceDelete();
+            $this->info($accessory_assoc.' corresponding log records purged.');
+
 
             $consumables = Consumable::whereNotNull('deleted_at')->withTrashed()->get();
+            $this->info($consumables->count().'" consumables purged.');
             foreach ($consumables as $consumable) {
+                $this->info('- Consumable "'.$consumable->name.'" deleted.');
                 $consumable->assetlog()->forceDelete();
+                $consumable->forceDelete();
             }
-            $consumables->forceDelete();
+
 
             $components = Component::whereNotNull('deleted_at')->withTrashed()->get();
+            $this->info($components->count().'" components purged.');
             foreach ($components as $component) {
+                $this->info('- Component "'.$component->name.'" deleted.');
                 $component->assetlog()->forceDelete();
+                $component->forceDelete();
             }
-            $components->forceDelete();
 
             $licenses = License::whereNotNull('deleted_at')->withTrashed()->get();
-            $licenses->forceDelete();
+            $this->info($licenses->count().'" licenses purged.');
+            foreach ($licenses as $license) {
+                $this->info('- License "'.$license->name.'" deleted.');
+                $license->assetlog()->forceDelete();
+                $license->licenseseats()->forceDelete();
+                $license->forceDelete();
+            }
 
             $models = AssetModel::whereNotNull('deleted_at')->withTrashed()->get();
-            $models->forceDelete();
+            $this->info($models->count().'" asset models purged.');
+            foreach ($models as $model) {
+                $this->info('- Asset Model "'.$model->name.'" deleted.');
+                $model->forceDelete();
+            }
+
 
             $categories = Category::whereNotNull('deleted_at')->withTrashed()->get();
-            $categories->forceDelete();
+            $this->info($categories->count().'" categories purged.');
+            foreach ($categories as $category) {
+                $this->info('- Category "'.$category->name.'" deleted.');
+                $category->forceDelete();
+            }
 
             $suppliers = Supplier::whereNotNull('deleted_at')->withTrashed()->get();
-            $suppliers->forceDelete();
+            $this->info($suppliers->count().'" suppliers purged.');
+            foreach ($suppliers as $supplier) {
+                $this->info('- Supplier "'.$supplier->name.'" deleted.');
+                $supplier->forceDelete();
+            }
 
             $users = User::whereNotNull('deleted_at')->withTrashed()->get();
             $this->info($users->count().' users purged.');
@@ -116,13 +149,21 @@ class Purge extends Command
                 $user->userlog()->forceDelete();
                 $user->forceDelete();
             }
-            $this->info($user_assoc.' corresponding log records purged.');
+            $this->info($user_assoc.' corresponding user log records purged.');
 
             $manufacturers = Manufacturer::whereNotNull('deleted_at')->withTrashed()->get();
-            $manufacturers->forceDelete();
+            $this->info($manufacturers->count().'" manufacturers purged.');
+            foreach ($manufacturers as $manufacturer) {
+                $this->info('- Manufacturer "'.$manufacturer->name.'" deleted.');
+                $manufacturer->forceDelete();
+            }
 
             $status_labels = StatusLabel::whereNotNull('deleted_at')->withTrashed()->get();
-            $status_labels->forceDelete();
+            $this->info($status_labels->count().'" status labels purged.');
+            foreach ($status_labels as $status_label) {
+                $this->info('- Status Label "'.$status_label->name.'" deleted.');
+                $status_label->forceDelete();
+            }
 
 
         } else {
