@@ -100,11 +100,7 @@ class DepreciationsController extends Controller
             return Redirect::to('admin/settings/depreciations')->with('error', trans('admin/depreciations/message.does_not_exist'));
         }
 
-        // Show the page
-        //$depreciation_options = array('' => 'Top Level') + Depreciation::lists('name', 'id');
-
-        $depreciation_options = Helper::depreciationList();
-        return View::make('depreciations/edit', compact('depreciation'))->with('depreciation_options', $depreciation_options);
+        return View::make('depreciations/edit', compact('depreciation'));
     }
 
 

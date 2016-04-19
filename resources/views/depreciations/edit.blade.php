@@ -29,11 +29,7 @@
     <input type="hidden" name="_token" value="{{ csrf_token() }}" />
 
     <div class="box box-default">
-      @if ($depreciation->id)
-        <div class="box-heading">
-            {{ $depreciation->name }}
-        </div>
-      @endif
+      
 
 
       <div class="box-body">
