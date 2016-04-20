@@ -6,6 +6,8 @@ use Lang;
 use App\Models\Location;
 use Redirect;
 use App\Models\Setting;
+use App\Models\User;
+use App\Models\Asset;
 use DB;
 use Str;
 use Validator;
@@ -368,15 +370,22 @@ class LocationsController extends Controller
     public function getDataViewUsers($locationID)
     {
         $location = Location::find($locationID);
+        $users = User::where('location_id','=',$location->id);
+
+        if (Input::has('search')) {
+            $users = $users->TextSearch(e(Input::get('search')));
+        }
+
+        $users = $users->get();
         $rows = array();
 
-        foreach ($location->users as $user) {
+        foreach ($users as $user) {
             $rows[] = array(
               'name' => (string)link_to('/admin/users/'.$user->id.'/view', e($user->fullName()))
               );
         }
 
-        $data = array('total' => $location->users->count(), 'rows' => $rows);
+        $data = array('total' => $users->count(), 'rows' => $rows);
 
         return $data;
     }
@@ -387,27 +396,36 @@ class LocationsController extends Controller
     * selected location, to be used by the location detail view.
     *
     * @todo This is broken for accessories and consumables.
+    * @todo This is a very naive implementation. Should clean this up with query scopes.
     * @author [A. Gianotto] [<snipe@snipe.net>]
     * @see LocationsController::getView() method that creates the display view
-    * @param int $locationId
+    * @param int $locationID
     * @since [v1.8]
     * @return View
     */
     public function getDataViewAssets($locationID)
     {
         $location = Location::find($locationID)->load('assignedassets.model');
+        $assets = Asset::AssetsByLocation($location);
+
+        if (Input::has('search')) {
+            $assets = $assets->TextSearch(e(Input::get('search')));
+        }
+
+        $assets = $assets->get();
+
         $rows = array();
 
-        foreach ($location->assignedassets as $asset) {
+        foreach ($assets as $asset) {
             $rows[] = array(
-            'name' => (string)link_to('/hardware/'.$asset->id.'/view', e($asset->showAssetName())),
+            'name' => (string)link_to(config('app.url').'/hardware/'.$asset->id.'/view', e($asset->showAssetName())),
             'asset_tag' => e($asset->asset_tag),
             'serial' => e($asset->serial),
             'model' => e($asset->model->name),
             );
         }
 
-        $data = array('total' => $location->assignedassets->count(), 'rows' => $rows);
+        $data = array('total' => $assets->count(), 'rows' => $rows);
         return $data;
 
     }

@@ -191,8 +191,8 @@ class UsersController extends Controller
             }
 
             // Get this user groups
-            //$userGroups = $user->groups()->lists('group_id', 'name');
-            $userGroups = null;
+            $userGroups = $user->groups()->lists('group_id', 'name');
+            //$userGroups = null;
 
             // Get this user permissions
             $userPermissions = null;

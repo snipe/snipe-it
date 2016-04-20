@@ -18,7 +18,7 @@
   <div class="row">
     <div class="col-md-12">
       <div class="box box-default">
-  
+
         <div class="box-body">
           <div class="row">
             <div class="col-md-12">
@@ -96,7 +96,7 @@
         undefinedText: '',
         iconsPrefix: 'fa',
         showRefresh: true,
-        search: false,
+        search: true,
         pageSize: {{ \App\Models\Setting::getSettings()->per_page }},
         pagination: true,
         sidePagination: 'server',
@@ -128,7 +128,7 @@
         undefinedText: '',
         iconsPrefix: 'fa',
         showRefresh: true,
-        search: false,
+        search: true,
         pageSize: {{ \App\Models\Setting::getSettings()->per_page }},
         pagination: true,
         sidePagination: 'server',

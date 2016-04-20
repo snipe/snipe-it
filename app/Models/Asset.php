@@ -499,13 +499,38 @@ class Asset extends Depreciable
         });
     }
 
-  /**
-   * Query builder scope for RTD assets
-   *
-   * @param  Illuminate\Database\Query\Builder $query Query builder instance
-   *
-   * @return Illuminate\Database\Query\Builder          Modified query builder
-   */
+
+    /**
+    * Query builder scope for pending assets
+    *
+    * @param  Illuminate\Database\Query\Builder $query Query builder instance
+    *
+    * @return Illuminate\Database\Query\Builder          Modified query builder
+    */
+
+    public function scopeAssetsByLocation($query, $location)
+    {
+        return $query->where(function ($query) use ($location)
+        {
+            $query->whereHas('assigneduser', function ($query) use ($location)
+            {
+                $query->where('users.location_id', '=', $location->id);
+            })->orWhere(function ($query) use ($location)
+            {
+                $query->where('assets.rtd_location_id', '=', $location->id);
+                $query->whereNull('assets.assigned_to');
+            });
+        });
+    }
+
+
+    /**
+    * Query builder scope for RTD assets
+    *
+    * @param  Illuminate\Database\Query\Builder $query Query builder instance
+    *
+    * @return Illuminate\Database\Query\Builder          Modified query builder
+    */
 
     public function scopeRTD($query)
     {
@@ -583,12 +608,12 @@ class Asset extends Depreciable
     {
 
         return $query->where('requestable', '=', 1)
-                   ->whereHas('assetstatus', function ($query) {
+        ->whereHas('assetstatus', function ($query) {
 
-                       $query->where('deployable', '=', 1)
-                             ->where('pending', '=', 0)
-                             ->where('archived', '=', 0);
-                   });
+           $query->where('deployable', '=', 1)
+                 ->where('pending', '=', 0)
+                 ->where('archived', '=', 0);
+        });
     }
 
 
