@@ -1327,7 +1327,7 @@ class AssetsController extends Controller
         ->Hardware();
 
         if (Input::has('search')) {
-             $assets = $assets->TextSearch(Input::get('search'));
+             $assets = $assets->TextSearch(e(Input::get('search')));
         }
 
         if (Input::has('offset')) {
