@@ -254,7 +254,7 @@ View Assets for  {{ $user->fullName() }}
                         @elseif (($log->consumablelog) && ($log->asset_type=="consumable"))
                             <i class="fa fa-tint"></i>
                         @elseif (($log->licenselog) && ($log->asset_type=="software"))
-                            <i class="fa fa-certificate"></i>
+                            <i class="fa fa-floppy-o"></i>
                         @else
                         <i class="fa fa-times"></i>
                         @endif

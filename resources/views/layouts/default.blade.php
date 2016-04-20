@@ -131,7 +131,7 @@
                           </li>
                        <li {!! (Request::is('admin/licenses/create') ? 'class="active"' : '') !!}>
                            <a href="{{ route('create/licenses') }}">
-                               <i class="fa fa-certificate fa-fw"></i>
+                               <i class="fa fa-floppy-o fa-fw"></i>
                                @lang('general.license')</a>
                        </li>
                        <li {!! (Request::is('admin/accessories/create') ? 'class="active"' : '') !!}>
@@ -375,7 +375,7 @@
               </li>
               <li{!! (Request::is('admin/licenses*') ? ' class="active"' : '') !!}>
                   <a href="{{ URL::to('admin/licenses') }}">
-                    <i class="fa fa-certificate"></i>
+                    <i class="fa fa-floppy-o"></i>
                     <span>@lang('general.licenses')</span>
                   </a>
               </li>

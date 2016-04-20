@@ -36,7 +36,7 @@
             <p>{{ trans('general.total_licenses') }}</p>
           </div>
           <div class="icon">
-            <i class="fa fa-certificate"></i>
+            <i class="fa fa-floppy-o"></i>
           </div>
           <a href="{{ route('licenses') }}" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
         </div>

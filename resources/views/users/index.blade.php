@@ -80,7 +80,7 @@
                          </th>
                          <th data-sortable="false" data-field="licenses">
                              <span class="hidden-md hidden-lg">Licenses</span>
-                             <span class="hidden-xs"><i class="fa fa-certificate fa-lg"></i></span>
+                             <span class="hidden-xs"><i class="fa fa-floppy-o fa-lg"></i></span>
                          </th>
                          <th data-sortable="false" data-field="accessories">
                              <span class="hidden-md hidden-lg">Accessories</span>
