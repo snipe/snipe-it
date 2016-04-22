@@ -24,7 +24,7 @@ Bulk Edit/Delete
                 <div class="callout callout-danger">
                     <i class="fa fa-exclamation-circle"></i>
                     <strong>WARNING: </strong>
-                    You are about to delete the {{ count($users) }} user(s) listed below. Admin names are highlighted in red.
+                    You are about to delete the {{ count($users) }} user(s) listed below. Super admin names are highlighted in red.
                 </div>
             </div>
 
@@ -52,14 +52,12 @@ Bulk Edit/Delete
                                   <td colspan="3" class="warning">
                                       {{ Form::select('status_id', $statuslabel_list , Input::old('status_id'), array('class'=>'select2', 'style'=>'width:250px')) }}
                                       <label>Update all assets for these users to this status</label>
-
-
                               </td>
                               </tr>
                           </tfoot>
                           <tbody>
                               @foreach ($users as $user)
-                                  <tr>
+                                  <tr {!! ($user->isSuperUser() ? ' class="danger"':'') !!}>
                                       <td>
                                           @if (Auth::user()->id!=$user->id)
                                               <input type="checkbox" name="edit_user[]" value="{{ $user->id }}" checked="checked">
