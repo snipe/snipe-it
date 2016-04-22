@@ -360,6 +360,12 @@ class UsersController extends Controller
                 return Redirect::route('users')->with('error', 'This user still has ' . count($user->licenses) . ' licenses associated with them.');
             }
 
+            if (count($user->accessories) > 0) {
+
+                // Redirect to the user management page
+                return Redirect::route('users')->with('error', 'This user still has ' . count($user->accessories) . ' accessories associated with them.');
+            }
+
             // Delete the user
             $user->delete();
 
@@ -504,7 +510,7 @@ class UsersController extends Controller
             if (!Company::isCurrentUserHasAccess($user)) {
                 return Redirect::route('users')->with('error', trans('general.insufficient_permissions'));
             } else {
-                
+
                 // Restore the user
                 if (User::withTrashed()->where('id',$id)->restore()) {
                     return Redirect::route('users')->with('success', trans('admin/users/message.success.restored'));
