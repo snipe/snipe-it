@@ -181,8 +181,8 @@
 
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
-            <div class="box box-danger">
-                <div class="box-header">
+            <div class="box box-solid box-danger">
+                <div class="box-header with-border">
                     <h3 class="box-title"><i class="fa fa-warning"></i> {{ trans('admin/settings/general.purge') }}</h3>
                 </div>
                 {{ Form::open(['method' => 'POST', 'route' => ['purge'], 'class' => 'form-horizontal', 'role' => 'form' ]) }}
