@@ -495,26 +495,24 @@ class UsersController extends Controller
     */
     public function getRestore($id = null)
     {
-        try {
+
             // Get user information
-            if (!$user = User::withTrashed()->find($id)) {
-                return Redirect::route('users')->with('error', trans('admins/users/messages.user_not_found'));
+            if (!$user = User::onlyTrashed()->find($id)) {
+                return Redirect::route('users')->with('error', trans('admin/users/messages.user_not_found'));
             }
 
             if (!Company::isCurrentUserHasAccess($user)) {
                 return Redirect::route('users')->with('error', trans('general.insufficient_permissions'));
             } else {
+                
                 // Restore the user
-                $user->restore();
-                return Redirect::route('users')->with('success', trans('admin/users/message.success.restored'));
-            }
-        } catch (UserNotFoundException $e) {
-            // Prepare the error message
-            $error = trans('admin/users/message.user_not_found', compact('id'));
+                if (User::withTrashed()->where('id',$id)->restore()) {
+                    return Redirect::route('users')->with('success', trans('admin/users/message.success.restored'));
+                } else {
+                    return Redirect::route('users')->with('error','User could not be restored.');
+                }
 
-            // Redirect to the user management page
-            return Redirect::route('users')->with('error', $error);
-        }
+            }
     }
 
 
@@ -613,7 +611,7 @@ class UsersController extends Controller
 
         try {
             // Get the user information
-            $user_to_clone = User::find($id);
+            $user_to_clone = User::withTrashed()->find($id);
             $user = clone $user_to_clone;
             $user->first_name = '';
             $user->last_name = '';
