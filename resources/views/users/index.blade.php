@@ -43,7 +43,7 @@
                'class' => 'form-inline' ]) }}
 
                <div id="toolbar">
-                 <select name="bulk_actions" class="form-control select2">
+                 <select name="bulk_actions" class="form-control select2" style="width: 200px;">
                      <option value="delete">Bulk Delete</option>
                  </select>
                  <button class="btn btn-default" id="bulkEdit" disabled>Go</button>
