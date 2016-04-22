@@ -15,13 +15,13 @@
 
       <div class="nav-tabs-custom">
         <ul class="nav nav-tabs">
-          <li class="active"><a href="#tab_1" data-toggle="tab">Information</a></li>
-          <li><a href="#tab_2" data-toggle="tab">Assets</a></li>
-          <li><a href="#tab_3" data-toggle="tab">Software</a></li>
-          <li><a href="#tab_4" data-toggle="tab">Accessories</a></li>
-          <li><a href="#tab_5" data-toggle="tab">Consumables</a></li>
-          <li><a href="#tab_6" data-toggle="tab">Files</a></li>
-          <li><a href="#tab_7" data-toggle="tab">History</a></li>
+          <li class="active"><a href="#info_tab" data-toggle="tab"><span class="hidden-lg hidden-md"><i class="fa fa-info-circle"></i></span> <span class="hidden-xs hidden-sm">Info</span></a></li>
+          <li><a href="#asset_tab" data-toggle="tab"><span class="hidden-lg hidden-md"><i class="fa fa-barcode"></i></span> <span class="hidden-xs hidden-sm">{{ trans('general.assets') }}</span></a></li>
+          <li><a href="#licenses_tab" data-toggle="tab"><span class="hidden-lg hidden-md"><i class="fa fa-floppy-o"></i></span> <span class="hidden-xs hidden-sm">{{ trans('general.licenses') }}</span></a></li>
+          <li><a href="#accessories_tab" data-toggle="tab"><span class="hidden-lg hidden-md"><i class="fa fa-keyboard-o"></i></span> <span class="hidden-xs hidden-sm">{{ trans('general.accessories') }}</span></a></li>
+          <li><a href="#consumables_tab" data-toggle="tab"><span class="hidden-lg hidden-md"><i class="fa fa-tint"></i></span> <span class="hidden-xs hidden-sm">{{ trans('general.consumables') }}</span></a></li>
+          <li><a href="#files_tab" data-toggle="tab"><span class="hidden-lg hidden-md"><i class="fa fa-paperclip"></i></span> <span class="hidden-xs hidden-sm">{{ trans('general.file_uploads') }}</span></a></li>
+          <li><a href="#history_tab" data-toggle="tab"><span class="hidden-lg hidden-md"><i class="fa fa-clock-o"></i></span> <span class="hidden-xs hidden-sm">{{ trans('general.history') }}</span></a></li>
 
           <li class="dropdown pull-right">
             <a class="dropdown-toggle" data-toggle="dropdown" href="#">
@@ -38,7 +38,7 @@
           </li>
         </ul>
         <div class="tab-content">
-          <div class="tab-pane active" id="tab_1">
+          <div class="tab-pane active" id="info_tab">
             <div class="row">
               <div class="col-md-6">
               @if ($user->avatar)
@@ -60,7 +60,7 @@
 
 
           </div><!-- /.tab-pane -->
-          <div class="tab-pane" id="tab_2">
+          <div class="tab-pane" id="asset_tab">
             <!-- checked out assets table -->
               <div class="table-responsive">
                 <table class="display table table-striped">
@@ -89,7 +89,7 @@
                 </table>
               </div>
           </div><!-- /.tab-pane -->
-          <div class="tab-pane" id="tab_3">
+          <div class="tab-pane" id="licenses_tab">
             <div class="table-responsive">
               <table class="display table table-hover">
                 <thead>
@@ -112,7 +112,7 @@
             </table>
             </div>
           </div><!-- /.tab-pane -->
-          <div class="tab-pane" id="tab_4">
+          <div class="tab-pane" id="accessories_tab">
             <div class="table-responsive">
               <table class="display table table-hover">
                 <thead>
@@ -133,7 +133,7 @@
               </table>
             </div>
           </div><!-- /.tab-pane -->
-          <div class="tab-pane" id="tab_5">
+          <div class="tab-pane" id="consumables_tab">
             <div class="table-responsive">
               <table class="display table table-striped">
                 <thead>
@@ -153,7 +153,7 @@
             </table>
             </div>
           </div><!-- /.tab-pane -->
-          <div class="tab-pane" id="tab_6">
+          <div class="tab-pane" id="files_tab">
 
             <div class="row">
             <div class="col-md-12 col-sm-12">
@@ -236,7 +236,7 @@
 
 
           </div><!-- /.tab-pane -->
-          <div class="tab-pane" id="tab_7">
+          <div class="tab-pane" id="history_tab">
             <div class="table-responsive">
             <table class="table table-striped" id="example">
               <thead>
