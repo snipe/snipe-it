@@ -42,8 +42,7 @@
             <div class="row">
                 @if ($user->deleted_at!='')
                     <div class="col-md-12">
-                    <div class="callout callout-warning">
-                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                    <div class="callout callout-warning">                    
                         <i class="icon fa fa-warning"></i>
                         This user has been marked as deleted. <a href="{{ route('restore/user', $user->id) }}">Click here</a> to restore them.
                       </div>
@@ -130,11 +129,11 @@
 
                     @if ($user->deleted_at=='')
                         <div class="col-md-12" style="padding-top: 5px;">
-                            <a href="{{ route('delete/user', $user->id) }}" style="width: 100%;" class="btn btn-sm btn-default">{{ trans('button.delete') }}</a>
+                            <a href="{{ route('delete/user', $user->id) }}" style="width: 100%;" class="btn btn-sm btn-danger">{{ trans('button.delete') }}</a>
                         </div>
                     @else
                         <div class="col-md-12" style="padding-top: 5px;">
-                            <a href="{{ route('restore/user', $user->id) }}" style="width: 100%;" class="btn btn-sm btn-default">{{ trans('button.restore') }}</a>
+                            <a href="{{ route('restore/user', $user->id) }}" style="width: 100%;" class="btn btn-sm btn-warning">{{ trans('button.restore') }}</a>
                         </div>
                     @endif
 
