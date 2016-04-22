@@ -40,21 +40,109 @@
         <div class="tab-content">
           <div class="tab-pane active" id="info_tab">
             <div class="row">
-              <div class="col-md-6">
+                @if ($user->deleted_at!='')
+                    <div class="col-md-12">
+                    <div class="callout callout-warning">
+                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                        <i class="icon fa fa-warning"></i>
+                        This user has been marked as deleted. <a href="{{ route('restore/user', $user->id) }}">Click here</a> to restore them.
+                      </div>
+                  </div>
+                @endif
+              <div class="col-md-1">
               @if ($user->avatar)
                 <img src="/uploads/avatars/{{ $user->avatar }}" class="avatar img-thumbnail hidden-print">
               @else
                 <img src="{{ $user->gravatar() }}" class="avatar img-circle hidden-print">
               @endif
-              {{ $user->fullName() }}
-              @if (!is_null($user->company))
-                  - {{ $user->company->name }}
-              @endif
-              @if ($user->employee_num)
-                  ({{ $user->employee_num }})
-              @endif
-              {{ $user->jobtitle }}
             </div>
+            <div class="col-md-8">
+
+                <div class="table table-responsive">
+                  <table class="table table-striped">
+                    @if (!is_null($user->company))
+                      <tr>
+                          <td>Company</td>
+                          <td>{{ $user->company->name }}</td>
+                      </tr>
+                    @endif
+
+                    <tr>
+                        <td>Name</td>
+                        <td>{{ $user->fullName() }}</td>
+                    </tr>
+                    @if ($user->jobtitle)
+                    <tr>
+                        <td>Title</td>
+                        <td>{{ $user->jobtitle }}</td>
+                    </tr>
+                    @endif
+
+                    @if ($user->employee_num)
+                    <tr>
+                        <td>Employee No.</td>
+                        <td>{{ $user->employee_num }}</td>
+                    </tr>
+                    @endif
+
+                    @if ($user->manager)
+                    <tr>
+                        <td>Manager</td>
+                        <td><a href="{{ route('view/user', $user->manager->id) }}">{{ $user->manager->fullName() }}</a></td>
+                    </tr>
+                    @endif
+
+                    @if ($user->email)
+                    <tr>
+                        <td>Email</td>
+                        <td><a href="mailto:{{ $user->email }}">{{ $user->email }}</a></td>
+                    </tr>
+                    @endif
+
+                    @if ($user->phone)
+                    <tr>
+                        <td>Phone</td>
+                        <td>{{ $user->phone }}</td>
+                    </tr>
+                    @endif
+
+                    @if ($user->userloc)
+                    <tr>
+                        <td>Location</td>
+                        <td>{{ $user->userloc->name }}</td>
+                    </tr>
+                    @endif
+
+                  </table>
+                </div>
+              </div>
+
+              <!-- Start button column -->
+              <div class="col-md-2">
+                  <div class="col-md-12">
+                      <a href="{{ route('update/user', $user->id) }}" style="width: 100%;" class="btn btn-sm btn-default">{{ trans('admin/users/general.edit') }}</a>
+                  </div>
+                  <div class="col-md-12" style="padding-top: 5px;">
+                      <a href="{{ route('clone/user', $user->id) }}" style="width: 100%;" class="btn btn-sm btn-default">{{ trans('admin/users/general.clone') }}</a>
+                  </div>
+
+                  @if ((Auth::user()->id !== $user->id) && (!config('app.lock_passwords')))
+
+                    @if ($user->deleted_at=='')
+                        <div class="col-md-12" style="padding-top: 5px;">
+                            <a href="{{ route('delete/user', $user->id) }}" style="width: 100%;" class="btn btn-sm btn-default">{{ trans('button.delete') }}</a>
+                        </div>
+                    @else
+                        <div class="col-md-12" style="padding-top: 5px;">
+                            <a href="{{ route('restore/user', $user->id) }}" style="width: 100%;" class="btn btn-sm btn-default">{{ trans('button.restore') }}</a>
+                        </div>
+                    @endif
+
+                  @endif
+
+              </div>
+              <!-- End button column -->
+
             </div>
 
 
