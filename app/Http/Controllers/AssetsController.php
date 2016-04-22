@@ -911,14 +911,9 @@ class AssetsController extends Controller
             return Redirect::to('hardware')->with('error', trans('general.insufficient_permissions'));
         } elseif (isset($asset->id)) {
 
-            // Restore the user
-            $asset->restore();
-
-            // Prepare the success message
-            $success = trans('admin/hardware/message.restore.success');
-
-            // Redirect to the user management page
-            return Redirect::route('hardware')->with('success', $success);
+            // Restore the asset
+            Asset::withTrashed()->where('id',$assetId)->restore();
+            return Redirect::route('hardware')->with('success', trans('admin/hardware/message.restore.success'));
 
         } else {
             return Redirect::to('hardware')->with('error', trans('admin/hardware/message.does_not_exist'));
