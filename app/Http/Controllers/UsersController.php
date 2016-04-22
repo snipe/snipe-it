@@ -497,19 +497,16 @@ class UsersController extends Controller
     {
         try {
             // Get user information
-            //$user = Sentry::getUserProvider()->createModel()->withTrashed()->find($id);
+            if (!$user = User::withTrashed()->find($id)) {
+                return Redirect::route('users')->with('error', trans('admins/users/messages.user_not_found'));
+            }
 
             if (!Company::isCurrentUserHasAccess($user)) {
                 return Redirect::route('users')->with('error', trans('general.insufficient_permissions'));
             } else {
                 // Restore the user
                 $user->restore();
-
-                // Prepare the success message
-                $success = trans('admin/users/message.success.restored');
-
-                // Redirect to the user management page
-                return Redirect::route('users')->with('success', $success);
+                return Redirect::route('users')->with('success', trans('admin/users/message.success.restored'));
             }
         } catch (UserNotFoundException $e) {
             // Prepare the error message
