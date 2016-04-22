@@ -1021,7 +1021,7 @@ class LicensesController extends Controller
                 'license_email'      => e($license->license_email),
                 'purchase_date'     => ($license->purchase_date) ? $license->purchase_date : '',
                 'expiration_date'     => ($license->expiration_date) ? $license->expiration_date : '',
-                'purchase_cost'     => ($license->purchase_cost) ? $license->purchase_cost : '',
+                'purchase_cost'     => ($license->purchase_cost) ? number_format($license->purchase_cost, 2) : '',
                 'purchase_order'     => ($license->purchase_order) ? e($license->purchase_order) : '',
                 'order_number'     => ($license->order_number) ? e($license->order_number) : '',
                 'notes'     => ($license->notes) ? e($license->notes) : '',
