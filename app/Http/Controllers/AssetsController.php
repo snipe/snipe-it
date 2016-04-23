@@ -296,7 +296,7 @@ class AssetsController extends Controller
         if (e(Input::get('purchase_cost')) == '') {
             $asset->purchase_cost =  null;
         } else {
-            $asset->purchase_cost = \App\Helpers\Helper::ParseFloat(e(Input::get('purchase_cost')));
+            $asset->purchase_cost = e(Input::get('purchase_cost'));
         }
 
         if (e(Input::get('purchase_date')) == '') {
@@ -446,10 +446,8 @@ class AssetsController extends Controller
         $user = User::find(e(Input::get('assigned_to')));
         $admin = Auth::user();
 
-
-
         if (Input::get('checkout_at')!= date("Y-m-d")) {
-                 $checkout_at = e(Input::get('checkout_at')).' 00:00:00';
+            $checkout_at = e(Input::get('checkout_at')).' 00:00:00';
         } else {
             $checkout_at = date("Y-m-d H:i:s");
         }
@@ -512,8 +510,8 @@ class AssetsController extends Controller
             return Redirect::to('hardware')->with('error', trans('general.insufficient_permissions'));
         }
 
-        // Check for a valid user to checkout fa-random
-        // This will need to be tweaked for checkout to location
+        $admin = Auth::user();
+
         if (!is_null($asset->assigned_to)) {
             $user = User::find($asset->assigned_to);
         } else {
@@ -522,16 +520,11 @@ class AssetsController extends Controller
 
         // This is just used for the redirect
         $return_to = $asset->assigned_to;
-
-        $logaction = new Actionlog();
-        $logaction->checkedout_to = $asset->assigned_to;
-
-        // Update the asset data to null, since it's being checked in
-        $asset->assigned_to                 = null;
-        $asset->accepted                  = null;
-
         $asset->expected_checkin = null;
         $asset->last_checkout = null;
+        $asset->assigned_to = null;
+        $asset->accepted = null;
+
 
         if (Input::has('status_id')) {
             $asset->status_id =  e(Input::get('status_id'));
@@ -539,21 +532,10 @@ class AssetsController extends Controller
         // Was the asset updated?
         if ($asset->save()) {
 
-            if (Input::has('checkin_at')) {
+            $checkout_at = e(Input::get('checkin_at'));
+            $logaction = $asset->createLogRecord('checkin', $asset, $admin, $user, null, e(Input::get('note')), $checkout_at);
 
-                if (!strtotime(Input::get('checkin_at'))) {
-                    $logaction->created_at = date("Y-m-d H:i:s");
-                } elseif (Input::get('checkin_at')!= date("Y-m-d")) {
-                    $logaction->created_at = e(Input::get('checkin_at')).' 00:00:00';
-                }
-            }
 
-            $logaction->asset_id = $asset->id;
-            $logaction->location_id = null;
-            $logaction->asset_type = 'hardware';
-            $logaction->note = e(Input::get('note'));
-            $logaction->user_id = Auth::user()->id;
-            $log = $logaction->logaction('checkin from');
             $settings = Setting::getSettings();
 
             if ($settings->slack_endpoint) {
@@ -1416,6 +1398,8 @@ class AssetsController extends Controller
                     } else {
                         $inout = '<a href="'.route('checkout/hardware', $asset->id).'" class="btn btn-info btn-sm" title="Checkout this asset to a user" data-toggle="tooltip">'.trans('general.checkout').'</a>';
                     }
+                } else {
+                    $inout = 'nope'.$asset->assetstatus->deployable;
                 }
             }
 
