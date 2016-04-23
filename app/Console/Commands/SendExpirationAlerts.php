@@ -61,11 +61,13 @@ class SendExpirationAlerts extends Command {
 			} else {
 				$asset_data['email_content'] .= '<tr style="background-color:#d9534f;">';
 			}
-				$asset_data['email_content'] .= '<td><a href="'.config('app.url').'/hardware/'.$asset->id.'/view">';
-				$asset_data['email_content'] .= $asset->showAssetName().'</a></td><td>'.$asset->asset_tag.'</td>';
-				$asset_data['email_content'] .= '<td>'.$asset->warrantee_expires().'</td>';
-				$asset_data['email_content'] .= '<td>'.$difference.' days</td>';
-				$asset_data['email_content'] .= '</tr>';
+			$asset_data['email_content'] .= '<td><a href="'.config('app.url').'/hardware/'.e($asset->id).'/view">';
+			$asset_data['email_content'] .= $asset->showAssetName().'</a></td><td>'.e($asset->asset_tag).'</td>';
+			$asset_data['email_content'] .= '<td>'.e($asset->warrantee_expires()).'</td>';
+			$asset_data['email_content'] .= '<td>'.$difference.' days</td>';
+            $asset_data['email_content'] .= '<td>'.($asset->supplier ? e($asset->supplier->name) : '').'</td>';
+            $asset_data['email_content'] .= '<td>'.($asset->assigneduser ? e($asset->assigneduser->fullName()) : '').'</td>';
+			$asset_data['email_content'] .= '</tr>';
 		}
 
 		// Expiring licenses
@@ -96,7 +98,7 @@ class SendExpirationAlerts extends Command {
 
 
 			if (count($expiring_assets) > 0) {
-				Mail::send('emails.expiring-assets-report', $asset_data, function ($m)  {
+				\Mail::send('emails.expiring-assets-report', $asset_data, function ($m)  {
 	                $m->to(explode(',',Setting::getSettings()->alert_email), Setting::getSettings()->site_name);
 	                $m->subject('Expiring Assets Report');
 	        	});
@@ -104,7 +106,7 @@ class SendExpirationAlerts extends Command {
 			}
 
 			if (count($expiring_licenses) > 0) {
-				Mail::send('emails.expiring-licenses-report', $license_data, function ($m)  {
+				\Mail::send('emails.expiring-licenses-report', $license_data, function ($m)  {
 	                $m->to(explode(',',Setting::getSettings()->alert_email), Setting::getSettings()->site_name);
 	                $m->subject('Expiring Licenses Report');
 	        	});
