@@ -10,6 +10,13 @@
 {{-- Page content --}}
 @section('content')
 
+<style>
+
+.input-group {
+    padding-left: 0px !important;
+}
+</style>
+
 
 <div class="row">
 
@@ -61,36 +68,34 @@
                     </div>
                   </div>
 
-
                   <!-- Checkout/Checkin Date -->
                   <div class="form-group {{ $errors->has('checkout_at') ? 'error' : '' }}">
                     <div class="col-md-3">
-                      {{ Form::label('checkout_at', trans('admin/hardware/form.checkout_date')) }}
+                      {{ Form::label('name', trans('admin/hardware/form.checkout_date')) }}
                     </div>
-                    <div class="col-md-4">
-                      <div class="right-inner-addon">
-                        <i class="fa fa-calendar"></i>
-                        <input type="date" class="datepicker form-control" data-date-format="yyyy-mm-dd" placeholder="Checkout Date" name="checkout_at" id="checkout_at" value="{{ Input::old('checkout_at', date('Y-m-d')) }}">
-                      </div>
-
+                    <div class="col-md-9">
+                      <div class="col-md-4 input-group">
+                      <input type="date" class="datepicker form-control" data-date-format="yyyy-mm-dd" name="checkout_at" id="checkout_at" value="{{ Input::old('checkout_at', date('Y-m-d')) }}">
+                      <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                    </div>
                       {!! $errors->first('checkout_at', '<span class="alert-msg"><i class="fa fa-times"></i> :message</span>') !!}
                     </div>
                   </div>
 
+
                   <!-- Expected Checkin Date -->
                   <div class="form-group {{ $errors->has('expected_checkin') ? 'error' : '' }}">
                     <div class="col-md-3">
-                      {{ Form::label('expected_checkin', trans('admin/hardware/form.expected_checkin')) }}
+                      {{ Form::label('name', trans('admin/hardware/form.expected_checkin')) }}
                     </div>
-                    <div class="col-md-4">
-                      <div class="right-inner-addon">
-                        <i class="fa fa-calendar"></i>
-                        <input type="date" class="datepicker form-control" data-date-format="yyyy-mm-dd" placeholder="Expected Checkin Date" name="expected_checkin" id="expected_checkin" value="{{ Input::old('expected_checkin') }}">
-                      </div>
+                    <div class="col-md-9">
+                      <div class="col-md-4 input-group">
+                      <input type="date" class="datepicker form-control" data-date-format="yyyy-mm-dd" name="expected_checkin" id="expected_checkin" value="{{ Input::old('expected_checkin') }}">
+                      <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                    </div>
                       {!! $errors->first('expected_checkin', '<span class="alert-msg"><i class="fa fa-times"></i> :message</span>') !!}
                     </div>
                   </div>
-
 
                   <!-- Note -->
                   <div class="form-group {{ $errors->has('note') ? 'error' : '' }}">
@@ -98,9 +103,7 @@
                       {{ Form::label('note', trans('admin/hardware/form.notes')) }}
                     </div>
                     <div class="col-md-9">
-                      <textarea class="col-md-6 form-control" id="note" name="note">
-                        {{ Input::old('note', $asset->note) }}
-                      </textarea>
+                      <textarea class="col-md-6 form-control" id="note" name="note">{{ Input::old('note', $asset->note) }}</textarea>
                       {!! $errors->first('note', '<span class="alert-msg"><i class="fa fa-times"></i> :message</span>') !!}
                     </div>
                   </div>
