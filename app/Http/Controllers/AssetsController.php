@@ -281,28 +281,6 @@ class AssetsController extends Controller
             return Redirect::to('hardware')->with('error', trans('general.insufficient_permissions'));
         }
 
-        // $input=Input::all();
-        // // return "INPUT IS: <pre>".print_r($input,true)."</pre>";
-        // $rules=$asset->validationRules($assetId);
-        // $model=AssetModel::find(e(Input::get('model_id'))); //validate by the NEW model's custom fields, not the current one
-        // if($model->fieldset)
-        // {
-        //   foreach($model->fieldset->fields AS $field) {
-        //     $input[$field->db_column_name()]=$input['fields'][$field->db_column_name()];
-        //     $asset->{$field->db_column_name()}=$input[$field->db_column_name()];
-        //   }
-        //   $rules+=$model->fieldset->validation_rules();
-        //   unset($input['fields']);
-        // }
-
-        //return "Rules: <pre>".print_r($rules,true)."</pre>";
-
-        //attempt to validate
-        // $validator = Validator::make($input,  $rules );
-        //
-        // $custom_errors=[];
-
-
         if (e(Input::get('status_id')) == '') {
             $asset->status_id =  null;
         } else {
