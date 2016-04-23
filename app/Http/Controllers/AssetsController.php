@@ -107,7 +107,7 @@ class AssetsController extends Controller
         $view->with('statuslabel_types', $statuslabel_types);
 
         if (!is_null($model_id)) {
-            $selected_model = AssetAssetModel::find($model_id);
+            $selected_model = AssetModel::find($model_id);
             $view->with('selected_model', $selected_model);
         }
 
