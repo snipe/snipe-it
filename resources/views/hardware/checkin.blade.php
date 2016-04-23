@@ -65,7 +65,7 @@
         <!-- Status -->
         <div class="form-group {{ $errors->has('status_id') ? 'error' : '' }}">
           <div class="col-md-3">
-            {{ Form::label('name', trans('admin/hardware/form.name')) }}
+            {{ Form::label('name', trans('admin/hardware/form.status')) }}
           </div>
           <div class="col-md-9">
             {{ Form::select('status_id', $statusLabel_list, '', array('class'=>'select2', 'style'=>'width:350px','id' =>'modal-statuslabel_types')) }}
