@@ -1,7 +1,7 @@
 <?php
 namespace App\Models;
 
-use App\Models\Assetlog;
+use App\Models\Actionlog;
 use App\Models\Company;
 use App\Models\Location;
 use Config;
@@ -12,6 +12,7 @@ use Parsedown;
 use Watson\Validating\ValidatingTrait;
 use DateTime;
 use App\Models\Setting;
+use App\Helpers\Helper;
 
 /**
  * Model for Assets.
@@ -95,7 +96,8 @@ class Asset extends Depreciable
 
         if ($this->save()) {
 
-            $log_id = $this->createCheckoutLog($checkout_at, $admin, $user, $expected_checkin, $note);
+            // $action, $admin, $user, $expected_checkin = null, $note = null, $checkout_at = null
+            $log_id = $this->createLogRecord('checkout', $this, $admin, $user, $expected_checkin, $note, $checkout_at);
 
             if ((($this->requireAcceptance()=='1')  || ($this->getEula())) && ($user->email!='')) {
                 $this->checkOutNotifyMail($log_id, $user, $checkout_at, $expected_checkin, $note);
@@ -113,7 +115,6 @@ class Asset extends Depreciable
 
     public function checkOutNotifyMail($log_id, $user, $checkout_at, $expected_checkin, $note)
     {
-
         $data['log_id'] = $log_id;
         $data['eula'] = $this->getEula();
         $data['first_name'] = $user->first_name;
@@ -176,24 +177,39 @@ class Asset extends Depreciable
         return $this->rules;
     }
 
-    public function createCheckoutLog($checkout_at = null, $admin, $user, $expected_checkin = null, $note = null)
+
+    public function createLogRecord($action, $asset, $admin, $user, $expected_checkin = null, $note = null, $checkout_at = null)
     {
 
-        $logaction = new \App\Models\Actionlog();
+        $logaction = new Actionlog();
         $logaction->asset_id = $this->id;
         $logaction->checkedout_to = $this->assigned_to;
         $logaction->asset_type = 'hardware';
-        if ($user) {
-            $logaction->location_id = $user->location_id;
-        }
-
-        $logaction->adminlog()->associate($admin);
         $logaction->note = $note;
         if ($checkout_at) {
-            $logaction->created_at = $checkout_at;
+            $logaction->created_at = \Carbon\Carbon::createFromFormat('Y-m-d H:i:s', date('Y-m-d H:i:s', strtotime($checkout_at)));
+        } else {
+            $logaction->created_at = \Carbon\Carbon::now();
         }
-        $log = $logaction->logaction('checkout');
-        return $logaction->id;
+
+        if ($action=="checkout") {
+            if ($user) {
+                $logaction->location_id = $user->location_id;
+            }
+        } else {
+            // Update the asset data to null, since it's being checked in
+            $logaction->checkedout_to = $asset->assigned_to;
+            $logaction->checkedout_to = '';
+            $logaction->asset_id = $asset->id;
+            $logaction->location_id = null;
+            $logaction->asset_type = 'hardware';
+            $logaction->note = $note;
+            $logaction->user_id = $admin->id;
+        }
+        $logaction->adminlog()->associate($admin);
+        $log = $logaction->logaction($action);
+
+        return $logaction;
     }
 
 
