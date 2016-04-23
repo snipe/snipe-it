@@ -11,9 +11,11 @@
 		<td><strong>Tag</strong></td>
 		<td><strong>Expires</strong></td>
 		<td><strong>Days</strong></td>
+        <td><strong>Supplier</strong></td>
+        <td><strong>Assigned To</strong></td>
 	</tr>
-	
-{{ $email_content }}
+
+{!! $email_content !!}
 </table>
 
 
