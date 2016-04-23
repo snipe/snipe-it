@@ -186,7 +186,7 @@ class Asset extends Depreciable
         $logaction->checkedout_to = $this->assigned_to;
         $logaction->asset_type = 'hardware';
         $logaction->note = $note;
-        if ($checkout_at) {
+        if ($checkout_at!='') {
             $logaction->created_at = \Carbon\Carbon::createFromFormat('Y-m-d H:i:s', date('Y-m-d H:i:s', strtotime($checkout_at)));
         } else {
             $logaction->created_at = \Carbon\Carbon::now();
