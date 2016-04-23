@@ -4,6 +4,7 @@ namespace App\Helpers;
 use DB;
 use App\Models\Statuslabel;
 use App\Models\Location;
+use App\Models\AssetModel;
 use App\Models\Company;
 use App\Models\User;
 use App\Models\Manufacturer;
@@ -38,6 +39,7 @@ class Helper
         return trim($value);
     }
 
+
     public static function ParseFloat($floatString)
     {
         // use comma for thousands until local info is property used
@@ -50,12 +52,12 @@ class Helper
 
     public static function modelList()
     {
-        $model_list = array('' => trans('general.select_model')) + DB::table('models')
-        ->select(DB::raw('IF (modelno="" OR modelno IS NULL,name,concat(name, " / ",modelno)) as name, id'))
-        ->orderBy('name', 'asc')
-        ->whereNull('deleted_at')
-        ->pluck('name', 'id');
-        return $model_list;
+        $models = AssetModel::with('manufacturer')->get();
+        $model_array[''] = trans('general.select_model');
+        foreach ($models as $model) {
+            $model_array[$model->id] = $model->displayModelName();
+        }
+        return $model_array;
     }
 
     public static function companyList()

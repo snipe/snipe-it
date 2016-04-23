@@ -87,6 +87,15 @@ class AssetModel extends Model
 
     }
 
+    public function displayModelName()
+    {
+        $name = $this->manufacturer->name.' '.$this->name;
+        if ($this->modelno) {
+            $name .=" / ".$this->modelno;
+        }
+        return $name;
+    }
+
     /**
     * -----------------------------------------------
     * BEGIN QUERY SCOPES
