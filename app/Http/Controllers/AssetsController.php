@@ -446,8 +446,8 @@ class AssetsController extends Controller
         $user = User::find(e(Input::get('assigned_to')));
         $admin = Auth::user();
 
-        if (Input::get('checkout_at')!= date("Y-m-d")) {
-            $checkout_at = e(Input::get('checkout_at')).' 00:00:00';
+        if ((Input::has('checkout_at')) && (Input::get('checkout_at')!= date("Y-m-d"))) {
+            $checkout_at = e(Input::get('checkout_at'));
         } else {
             $checkout_at = date("Y-m-d H:i:s");
         }
@@ -1398,7 +1398,7 @@ class AssetsController extends Controller
                     } else {
                         $inout = '<a href="'.route('checkout/hardware', $asset->id).'" class="btn btn-info btn-sm" title="Checkout this asset to a user" data-toggle="tooltip">'.trans('general.checkout').'</a>';
                     }
-                } 
+                }
             }
 
             $row = array(
