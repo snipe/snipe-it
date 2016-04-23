@@ -44,14 +44,14 @@
         </div>
 
         <div class="dynamic-form-row">
-          <div class="col-md-4 col-xs-12"><label for="modal-modelno">{{ trans('general.model_no') }}*:</label></div>
+          <div class="col-md-4 col-xs-12"><label for="modal-modelno">{{ trans('general.model_no') }}:</label></div>
           <div class="col-md-8 col-xs-12"><input type='text' id='modal-modelno' class="form-control"></div>
         </div>
 
         <div class="dynamic-form-row">
           <div class="col-md-4 col-xs-12"><label for="modal-statuslabel_types">{{ trans('admin/statuslabels/table.status_type') }}*:
           </label></div>
-          <div class="col-md-8 col-xs-12">{{ Form::select('modal-statuslabel_types', $statuslabel_types, '', array('class'=>'select2', 'style'=>'width:100%','id' =>'modal-statuslabel_types')) }}</div>
+          <div class="col-md-8 col-xs-12">{{ Form::select('modal-statuslabel_types', $statuslabel_types, '', array('class'=>'select2', 'style'=>'width:90%','id' =>'modal-statuslabel_types')) }}</div>
         </div>
 
         <div class="dynamic-form-row">
@@ -62,6 +62,11 @@
         <div class="dynamic-form-row">
           <div class="col-md-4 col-xs-12"><label for="modal-country">{{ trans('general.country') }}*:</label></div>
           <div class="col-md-8 col-xs-12">{!! Form::countries('country', Input::old('country'), 'select2 country',"modal-country") !!}</div>
+        </div>
+
+        <div class="dynamic-form-row">
+          <div class="col-md-4 col-xs-12"><label for="modal-fieldset_id">{{ trans('admin/models/general.fieldset') }}:</label></div>
+          <div class="col-md-8 col-xs-12">{{ Form::select('custom_fieldset', \App\Helpers\Helper::customFieldsetList(),Input::old('custom_fieldset'), array('class'=>'select2', 'id'=>'modal-fieldset_id', 'style'=>'width:350px')) }}</div>
         </div>
 
         <div class="dynamic-form-row">
@@ -391,23 +396,20 @@
 @section('moar_scripts')
 <script>
 
-
-
-$(function() {
-  $('#model_select_id').on("change",function () {
-    // console.warn("Model Id has changed!");
-    var modelid=$('#model_select_id').val();
-    if(modelid=='') {
-      $('#custom_fields_content').html("");
-    } else {
-      // console.warn("Model ID is: "+modelid);
-      $.get("{{config('app.url') }}/hardware/models/"+modelid+"/custom_fields",{_token: "{{ csrf_token() }}"},function (data) {
-        // console.warn("Ajax call came back okay! Data is: "+data);
-        $('#custom_fields_content').html(data);
-      });
+    function fetchCustomFields() {
+      var modelid=$('#model_select_id').val();
+      if(modelid=='') {
+        $('#custom_fields_content').html("");
+      } else {
+        $.get("{{config('app.url') }}/hardware/models/"+modelid+"/custom_fields",{_token: "{{ csrf_token() }}"},function (data) {
+          $('#custom_fields_content').html(data);
+        });
+      }
     }
-  });
-});
+
+    $(function() {
+      $('#model_select_id').on("change",fetchCustomFields);
+    });
 
     $(function() {
         user_add($(".status_id option:selected").val());
@@ -419,7 +421,6 @@ $(function() {
     });
 
 	function user_add(status_id) {
-        console.log(status_id);
 
         if(status_id!=''){
             $(".status_spinner").css("display", "inline");
@@ -444,17 +445,12 @@ $(function () {
 
   $('#createModal').on("show.bs.modal",function (event) {
     var link = $(event.relatedTarget);
-    // data-dependency="model" data-select="model_select_id"
     model=link.data("dependency");
     select=link.data("select");
 
     var modal = $(this);
     modal.find('.modal-title').text('Add a new ' + model);
-    //modal.find('.modal-body').text("This is where I should be AJAX'ing in the contents for the new " +model+" that you'are about to add!");
-    //use a spinner instead?
-    //$('.dynamic-form-element').hide();
-    //$('.modal-body input').parent().parent().hide();
-    //$('.modal-body select').parent().parent().hide();
+
     $('.dynamic-form-row').hide();
     function show_er(selector) {
       //$(selector).show().parent().show();
@@ -466,6 +462,7 @@ $(function () {
       show_er('#modal-manufacturer_id');
       show_er('#modal-category_id');
       show_er('#modal-modelno');
+      show_er('#modal-fieldset_id');
       break;
 
       case 'user':
@@ -523,6 +520,8 @@ $(function () {
       selector.options[selector.length]=new Option(name,id);
       selector.selectedIndex=selector.length-1;
       $(selector).trigger("change");
+      fetchCustomFields();
+
     }).fail(function (result) {
       //console.dir(result.responseJSON);
       msg=result.responseJSON.error.message || result.responseJSON.error;
