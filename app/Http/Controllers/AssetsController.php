@@ -1398,9 +1398,7 @@ class AssetsController extends Controller
                     } else {
                         $inout = '<a href="'.route('checkout/hardware', $asset->id).'" class="btn btn-info btn-sm" title="Checkout this asset to a user" data-toggle="tooltip">'.trans('general.checkout').'</a>';
                     }
-                } else {
-                    $inout = 'nope'.$asset->assetstatus->deployable;
-                }
+                } 
             }
 
             $row = array(
