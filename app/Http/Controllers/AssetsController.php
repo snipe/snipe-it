@@ -155,7 +155,7 @@ class AssetsController extends Controller
         if (e(Input::get('purchase_cost')) == '') {
             $asset->purchase_cost =  null;
         } else {
-            $asset->purchase_cost = \App\Helpers\Helper::ParseFloat(e(Input::get('purchase_cost')));
+            $asset->purchase_cost = (e(Input::get('purchase_cost')));
         }
 
         if (e(Input::get('purchase_date')) == '') {
