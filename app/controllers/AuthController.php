@@ -332,6 +332,7 @@ class AuthController extends BaseController
             }
 
         } catch (Cartalyst\Sentry\Users\UserNotFoundException $e) {
+            return Redirect::route('forgot-password')->withInput()->with('error', $e->getMessage());
             // Even though the username was not found, we will pretend
             // we have sent the password reset code through username,
             // this is a security measure against hackers.
