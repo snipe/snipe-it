@@ -52,7 +52,7 @@
     @endif
 
     @if (\App\Models\Setting::getSettings()->custom_css)
-        {{ Setting::getSettings()->show_custom_css() }}
+        {{ \App\Models\Setting::getSettings()->show_custom_css() }}
     @endif
     </style>
 
