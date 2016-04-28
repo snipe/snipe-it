@@ -92,12 +92,10 @@ class GroupsController extends Controller
     public function getEdit($id = null)
     {
         $group = Group::find($id);
-        $group->name = e(Input::get('name'));
-        $group->permissions = json_decode($group->permissions, true);
         $permissions = config('permissions');
-
-      // Show the page
-        return View::make('groups/edit', compact('group', 'permissions','allpermissions'));
+        $group->permissions = $group->decodePermissions();
+        $selected_array = $group->selectedPermissionsArray($permissions, $group->permissions);
+        return View::make('groups/edit', compact('group', 'permissions','selected_array'));
     }
 
     /**
@@ -111,12 +109,16 @@ class GroupsController extends Controller
     */
     public function postEdit($id = null)
     {
-
+        // print_r(Input::get('permission'));
+        // exit;
+        $permissions = config('permissions');
         if (!$group = Group::find($id)) {
             return Redirect::route('groups')->with('error', trans('admin/groups/message.group_not_found', compact('id')));
 
         }
         $group->name = e(Input::get('name'));
+        $group->permissions = json_encode(Input::get('permission'));
+
 
         if (!config('app.lock_passwords')) {
 

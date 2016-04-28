@@ -20,6 +20,7 @@
         }
     </style>
 
+
   <div class="row">
     <div class="col-md-9">
       <div class="box box-default">
@@ -48,26 +49,39 @@
                       {!! $errors->first('name', '<span class="alert-msg"><i class="fa fa-times"></i> :message</span>') !!}
                   </div>
           </div>
+
           <div class="col-md-9 col-md-offset-3">
 
           @foreach ($permissions as $area => $permission)
 
-            @for ($i = 0; $i < count($area); $i++)
-                <h3>{{ $area }}: {{ $permission[$i]['label'] }}</h3>
-                <p>{{ $permission[$i]['note'] }}</p>
+            @for ($i = 0; $i < count($permission); $i++)
+                <?php
+                $permission_name = $permission[$i]['permission'];
+                ?>
 
-                <!-- radio -->
-                <div class="form-group" style="padding-left: 15px;">
-                <label class="radio-padding"><input type="radio" name="{{ $permission[$i]['permission']}}" class="minimal" value="1"> Grant</label>
-                <label class="radio-padding"><input type="radio" name="{{ $permission[$i]['permission'] }}" class="minimal" value="0"> Deny</label>
+                @if ($permission[$i]['display'])
+                    <h3>{{ $area }}: {{ $permission[$i]['label'] }}</h3>
+                    <p>{{ $permission[$i]['note'] }}</p>
+
+                    <!-- radio -->
+                    <div class="form-group" style="padding-left: 15px;">
+
+                        <label class="radio-padding">
+                        {{ Form::radio('permission['.$permission_name.']', 1, $group->permissions[$permission_name], ['class' => 'minimal']) }}
+                        Grant</label>
+
+                        <label class="radio-padding">
+                         {{ Form::radio('permission['.$permission_name.']', 0, !$group->permissions[$permission_name], ['class' => 'minimal']) }}
+                        Deny</label>
+                    </div>
+                    <hr>
+              @endif
             @endfor
-
-            </div>
-
-            <hr>
         @endforeach
 
+        </div>
 
+        <hr>
 
         </div>
 
