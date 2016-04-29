@@ -76,10 +76,10 @@ class DepreciationsController extends Controller
       // Was the asset created?
         if ($depreciation->save()) {
             // Redirect to the new depreciation  page
-            return Redirect::to("admin/settings/depreciations")->with('success', trans('admin/depreciations/message.create.success'));
+            return redirect()->to("admin/settings/depreciations")->with('success', trans('admin/depreciations/message.create.success'));
         }
 
-        return Redirect::back()->withInput()->withErrors($depreciation->getErrors());
+        return redirect()->back()->withInput()->withErrors($depreciation->getErrors());
 
     }
 
@@ -97,7 +97,7 @@ class DepreciationsController extends Controller
         // Check if the depreciation exists
         if (is_null($depreciation = Depreciation::find($depreciationId))) {
             // Redirect to the blogs management page
-            return Redirect::to('admin/settings/depreciations')->with('error', trans('admin/depreciations/message.does_not_exist'));
+            return redirect()->to('admin/settings/depreciations')->with('error', trans('admin/depreciations/message.does_not_exist'));
         }
 
         return View::make('depreciations/edit', compact('depreciation'));
@@ -118,7 +118,7 @@ class DepreciationsController extends Controller
         // Check if the depreciation exists
         if (is_null($depreciation = Depreciation::find($depreciationId))) {
             // Redirect to the blogs management page
-            return Redirect::to('admin/settings/depreciations')->with('error', trans('admin/depreciations/message.does_not_exist'));
+            return redirect()->to('admin/settings/depreciations')->with('error', trans('admin/depreciations/message.does_not_exist'));
         }
 
         // Depreciation data
@@ -128,10 +128,10 @@ class DepreciationsController extends Controller
         // Was the asset created?
         if ($depreciation->save()) {
             // Redirect to the depreciation page
-            return Redirect::to("admin/settings/depreciations/")->with('success', trans('admin/depreciations/message.update.success'));
+            return redirect()->to("admin/settings/depreciations/")->with('success', trans('admin/depreciations/message.update.success'));
         }
 
-        return Redirect::back()->withInput()->withErrors($depreciation->getErrors());
+        return redirect()->back()->withInput()->withErrors($depreciation->getErrors());
 
 
     }
@@ -150,19 +150,19 @@ class DepreciationsController extends Controller
         // Check if the depreciation exists
         if (is_null($depreciation = Depreciation::find($depreciationId))) {
             // Redirect to the blogs management page
-            return Redirect::to('admin/settings/depreciations')->with('error', trans('admin/depreciations/message.not_found'));
+            return redirect()->to('admin/settings/depreciations')->with('error', trans('admin/depreciations/message.not_found'));
         }
 
         if ($depreciation->has_models() > 0) {
 
             // Redirect to the asset management page
-            return Redirect::to('admin/settings/depreciations')->with('error', trans('admin/depreciations/message.assoc_users'));
+            return redirect()->to('admin/settings/depreciations')->with('error', trans('admin/depreciations/message.assoc_users'));
         } else {
 
             $depreciation->delete();
 
             // Redirect to the depreciations management page
-            return Redirect::to('admin/settings/depreciations')->with('success', trans('admin/depreciations/message.delete.success'));
+            return redirect()->to('admin/settings/depreciations')->with('success', trans('admin/depreciations/message.delete.success'));
         }
 
     }

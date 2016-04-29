@@ -81,16 +81,16 @@ class CategoriesController extends Controller
 
         if ($category->save()) {
         // Redirect to the new category  page
-            return Redirect::to("admin/settings/categories")->with('success', trans('admin/categories/message.create.success'));
+            return redirect()->to("admin/settings/categories")->with('success', trans('admin/categories/message.create.success'));
         } else {
 
           // The given data did not pass validation
-            return Redirect::back()->withInput()->withErrors($category->getErrors());
+            return redirect()->back()->withInput()->withErrors($category->getErrors());
 
         }
 
         // Redirect to the category create page
-        return Redirect::to('admin/settings/categories/create')->with('error', trans('admin/categories/message.create.error'));
+        return redirect()->to('admin/settings/categories/create')->with('error', trans('admin/categories/message.create.error'));
 
 
     }
@@ -109,7 +109,7 @@ class CategoriesController extends Controller
         // Check if the category exists
         if (is_null($category = Category::find($categoryId))) {
             // Redirect to the blogs management page
-            return Redirect::to('admin/settings/categories')->with('error', trans('admin/categories/message.does_not_exist'));
+            return redirect()->to('admin/settings/categories')->with('error', trans('admin/categories/message.does_not_exist'));
         }
 
         // Show the page
@@ -138,7 +138,7 @@ class CategoriesController extends Controller
         // Check if the blog post exists
         if (is_null($category = Category::find($categoryId))) {
             // Redirect to the blogs management page
-            return Redirect::to('admin/categories')->with('error', trans('admin/categories/message.does_not_exist'));
+            return redirect()->to('admin/categories')->with('error', trans('admin/categories/message.does_not_exist'));
         }
 
         // Update the category data
@@ -151,15 +151,15 @@ class CategoriesController extends Controller
 
         if ($category->save()) {
         // Redirect to the new category page
-            return Redirect::to("admin/settings/categories")->with('success', trans('admin/categories/message.update.success'));
+            return redirect()->to("admin/settings/categories")->with('success', trans('admin/categories/message.update.success'));
         } // attempt validation
         else {
           // The given data did not pass validation
-            return Redirect::back()->withInput()->withErrors($category->getErrors());
+            return redirect()->back()->withInput()->withErrors($category->getErrors());
         }
 
         // Redirect to the category management page
-        return Redirect::back()->with('error', trans('admin/categories/message.update.error'));
+        return redirect()->back()->with('error', trans('admin/categories/message.update.error'));
 
     }
 
@@ -176,27 +176,27 @@ class CategoriesController extends Controller
         // Check if the category exists
         if (is_null($category = Category::find($categoryId))) {
             // Redirect to the blogs management page
-            return Redirect::to('admin/settings/categories')->with('error', trans('admin/categories/message.not_found'));
+            return redirect()->to('admin/settings/categories')->with('error', trans('admin/categories/message.not_found'));
         }
 
 
         if ($category->has_models() > 0) {
-            return Redirect::to('admin/settings/categories')->with('error', trans('admin/categories/message.assoc_models'));
+            return redirect()->to('admin/settings/categories')->with('error', trans('admin/categories/message.assoc_models'));
 
         } elseif ($category->accessories()->count() > 0) {
-                return Redirect::to('admin/settings/categories')->with('error', trans('admin/categories/message.assoc_accessories'));
+                return redirect()->to('admin/settings/categories')->with('error', trans('admin/categories/message.assoc_accessories'));
 
         } elseif ($category->consumables()->count() > 0) {
-                return Redirect::to('admin/settings/categories')->with('error', trans('admin/categories/message.assoc_consumables'));
+                return redirect()->to('admin/settings/categories')->with('error', trans('admin/categories/message.assoc_consumables'));
 
         } elseif ($category->components()->count() > 0) {
-                return Redirect::to('admin/settings/categories')->with('error', trans('admin/categories/message.assoc_components'));
+                return redirect()->to('admin/settings/categories')->with('error', trans('admin/categories/message.assoc_components'));
         } else {
 
             $category->delete();
 
             // Redirect to the locations management page
-            return Redirect::to('admin/settings/categories')->with('success', trans('admin/categories/message.delete.success'));
+            return redirect()->to('admin/settings/categories')->with('success', trans('admin/categories/message.delete.success'));
         }
 
 
@@ -225,7 +225,7 @@ class CategoriesController extends Controller
             $error = trans('admin/categories/message.does_not_exist', compact('id'));
 
             // Redirect to the user management page
-            return Redirect::route('categories')->with('error', $error);
+            return redirect()->route('categories')->with('error', $error);
         }
 
 

@@ -179,7 +179,7 @@ class AuthController extends Controller
         $validator = $this->validator(Input::all());
 
         if ($validator->fails()) {
-            return Redirect::back()->withInput()->withErrors($validator);
+            return redirect()->back()->withInput()->withErrors($validator);
         }
 
         // Should we even check for LDAP users?
@@ -229,7 +229,7 @@ class AuthController extends Controller
         if (!Auth::attempt(Input::only('username', 'password'), Input::get('remember-me', 0))) {
             LOG::debug("Local authentication failed.");
           // throw new Cartalyst\Sentry\Users\UserNotFoundException();
-            return Redirect::back()->withInput()->with('error', trans('auth/message.account_not_found'));
+            return redirect()->back()->withInput()->with('error', trans('auth/message.account_not_found'));
         }
 
         // Get the page we were before
@@ -239,10 +239,10 @@ class AuthController extends Controller
         \Session::forget('loginRedirect');
 
         // Redirect to the users page
-        return Redirect::to($redirect)->with('success', trans('auth/message.signin.success'));
+        return redirect()->to($redirect)->with('success', trans('auth/message.signin.success'));
 
         // Ooops.. something went wrong
-        return Redirect::back()->withInput()->withErrors($this->messageBag);
+        return redirect()->back()->withInput()->withErrors($this->messageBag);
     }
 
     /**
@@ -256,7 +256,7 @@ class AuthController extends Controller
         Auth::logout();
 
         // Redirect to the users page
-        return Redirect::route('home')->with('success', 'You have successfully logged out!');
+        return redirect()->route('home')->with('success', 'You have successfully logged out!');
     }
 
 

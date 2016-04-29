@@ -120,10 +120,10 @@ class AssetModelsController extends Controller
             // Was it created?
         if ($model->save()) {
             // Redirect to the new model  page
-            return Redirect::to("hardware/models")->with('success', trans('admin/models/message.create.success'));
+            return redirect()->to("hardware/models")->with('success', trans('admin/models/message.create.success'));
         }
 
-            return Redirect::back()->withInput()->withErrors($model->getErrors());
+            return redirect()->back()->withInput()->withErrors($model->getErrors());
 
     }
 
@@ -178,7 +178,7 @@ class AssetModelsController extends Controller
         // Check if the model exists
         if (is_null($model = AssetModel::find($modelId))) {
             // Redirect to the model management page
-            return Redirect::to('assets/models')->with('error', trans('admin/models/message.does_not_exist'));
+            return redirect()->to('assets/models')->with('error', trans('admin/models/message.does_not_exist'));
         }
 
         $depreciation_list = \App\Helpers\Helper::depreciationList();
@@ -206,7 +206,7 @@ class AssetModelsController extends Controller
         // Check if the model exists
         if (is_null($model = AssetModel::find($modelId))) {
             // Redirect to the models management page
-            return Redirect::to('admin/models')->with('error', trans('admin/models/message.does_not_exist'));
+            return redirect()->to('admin/models')->with('error', trans('admin/models/message.does_not_exist'));
         }
 
 
@@ -252,14 +252,14 @@ class AssetModelsController extends Controller
         // Was it created?
         if ($model->save()) {
             // Redirect to the new model  page
-            return Redirect::to("hardware/models")->with('success', trans('admin/models/message.update.success'));
+            return redirect()->to("hardware/models")->with('success', trans('admin/models/message.update.success'));
         } else {
             return redirect()->back()->withInput()->withErrors($model->getErrors());
         }
 
 
         // Redirect to the model create page
-        return Redirect::to("hardware/models/$modelId/edit")->with('error', trans('admin/models/message.update.error'));
+        return redirect()->to("hardware/models/$modelId/edit")->with('error', trans('admin/models/message.update.error'));
 
     }
 
@@ -277,19 +277,19 @@ class AssetModelsController extends Controller
         // Check if the model exists
         if (is_null($model = AssetModel::find($modelId))) {
             // Redirect to the blogs management page
-            return Redirect::to('hardware/models')->with('error', trans('admin/models/message.not_found'));
+            return redirect()->to('hardware/models')->with('error', trans('admin/models/message.not_found'));
         }
 
         if ($model->assets->count() > 0) {
             // Throw an error that this model is associated with assets
-            return Redirect::to('hardware/models')->with('error', trans('admin/models/message.assoc_users'));
+            return redirect()->to('hardware/models')->with('error', trans('admin/models/message.assoc_users'));
 
         } else {
             // Delete the model
             $model->delete();
 
             // Redirect to the models management page
-            return Redirect::to('hardware/models')->with('success', trans('admin/models/message.delete.success'));
+            return redirect()->to('hardware/models')->with('success', trans('admin/models/message.delete.success'));
         }
     }
 
@@ -317,10 +317,10 @@ class AssetModelsController extends Controller
             $success = trans('admin/models/message.restore.success');
 
             // Redirect back
-            return Redirect::back()->with('success', $success);
+            return redirect()->back()->with('success', $success);
 
         } else {
-            return Redirect::back()->with('error', trans('admin/models/message.not_found'));
+            return redirect()->back()->with('error', trans('admin/models/message.not_found'));
         }
 
     }
@@ -345,7 +345,7 @@ class AssetModelsController extends Controller
             $error = trans('admin/models/message.does_not_exist', compact('id'));
 
             // Redirect to the user management page
-            return Redirect::route('models')->with('error', $error);
+            return redirect()->route('models')->with('error', $error);
         }
 
 
@@ -364,7 +364,7 @@ class AssetModelsController extends Controller
         // Check if the model exists
         if (is_null($model_to_clone = AssetModel::find($modelId))) {
             // Redirect to the model management page
-            return Redirect::to('assets/models')->with('error', trans('admin/models/message.does_not_exist'));
+            return redirect()->to('assets/models')->with('error', trans('admin/models/message.does_not_exist'));
         }
 
         $model = clone $model_to_clone;

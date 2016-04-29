@@ -94,11 +94,11 @@ class SuppliersController extends Controller
             // Was it created?
         if ($supplier->save()) {
           // Redirect to the new supplier  page
-            return Redirect::to("admin/settings/suppliers")->with('success', trans('admin/suppliers/message.create.success'));
+            return redirect()->to("admin/settings/suppliers")->with('success', trans('admin/suppliers/message.create.success'));
         }
 
 
-        return Redirect::back()->withInput()->withErrors($supplier->getErrors());
+        return redirect()->back()->withInput()->withErrors($supplier->getErrors());
 
     }
 
@@ -126,7 +126,7 @@ class SuppliersController extends Controller
         // Check if the supplier exists
         if (is_null($supplier = Supplier::find($supplierId))) {
             // Redirect to the supplier  page
-            return Redirect::to('admin/settings/suppliers')->with('error', trans('admin/suppliers/message.does_not_exist'));
+            return redirect()->to('admin/settings/suppliers')->with('error', trans('admin/suppliers/message.does_not_exist'));
         }
 
         // Show the page
@@ -145,7 +145,7 @@ class SuppliersController extends Controller
         // Check if the supplier exists
         if (is_null($supplier = Supplier::find($supplierId))) {
             // Redirect to the supplier  page
-            return Redirect::to('admin/settings/suppliers')->with('error', trans('admin/suppliers/message.does_not_exist'));
+            return redirect()->to('admin/settings/suppliers')->with('error', trans('admin/suppliers/message.does_not_exist'));
         }
 
         // Save the  data
@@ -179,10 +179,10 @@ class SuppliersController extends Controller
         }
 
         if ($supplier->save()) {
-            return Redirect::to("admin/settings/suppliers")->with('success', trans('admin/suppliers/message.update.success'));
+            return redirect()->to("admin/settings/suppliers")->with('success', trans('admin/suppliers/message.update.success'));
         }
 
-        return Redirect::back()->withInput()->withErrors($supplier->getErrors());
+        return redirect()->back()->withInput()->withErrors($supplier->getErrors());
 
     }
 
@@ -197,20 +197,20 @@ class SuppliersController extends Controller
         // Check if the supplier exists
         if (is_null($supplier = Supplier::find($supplierId))) {
             // Redirect to the suppliers page
-            return Redirect::to('admin/settings/suppliers')->with('error', trans('admin/suppliers/message.not_found'));
+            return redirect()->to('admin/settings/suppliers')->with('error', trans('admin/suppliers/message.not_found'));
         }
 
         if ($supplier->num_assets() > 0) {
 
             // Redirect to the asset management page
-            return Redirect::to('admin/settings/suppliers')->with('error', trans('admin/suppliers/message.assoc_users'));
+            return redirect()->to('admin/settings/suppliers')->with('error', trans('admin/suppliers/message.assoc_users'));
         } else {
 
             // Delete the supplier
             $supplier->delete();
 
             // Redirect to the suppliers management page
-            return Redirect::to('admin/settings/suppliers')->with('success', trans('admin/suppliers/message.delete.success'));
+            return redirect()->to('admin/settings/suppliers')->with('success', trans('admin/suppliers/message.delete.success'));
         }
 
     }
@@ -233,7 +233,7 @@ class SuppliersController extends Controller
             $error = trans('admin/suppliers/message.does_not_exist', compact('id'));
 
             // Redirect to the user management page
-            return Redirect::route('suppliers')->with('error', $error);
+            return redirect()->route('suppliers')->with('error', $error);
         }
 
 

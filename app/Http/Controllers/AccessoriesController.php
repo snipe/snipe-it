@@ -100,11 +100,11 @@ class AccessoriesController extends Controller
         // Was the accessory created?
         if ($accessory->save()) {
             // Redirect to the new accessory  page
-            return Redirect::to("admin/accessories")->with('success', trans('admin/accessories/message.create.success'));
+            return redirect()->to("admin/accessories")->with('success', trans('admin/accessories/message.create.success'));
         }
 
 
-        return Redirect::back()->withInput()->withErrors($accessory->getErrors());
+        return redirect()->back()->withInput()->withErrors($accessory->getErrors());
     }
 
   /**
@@ -119,9 +119,9 @@ class AccessoriesController extends Controller
         // Check if the accessory exists
         if (is_null($accessory = Accessory::find($accessoryId))) {
             // Redirect to the blogs management page
-            return Redirect::to('admin/accessories')->with('error', trans('admin/accessories/message.does_not_exist'));
+            return redirect()->to('admin/accessories')->with('error', trans('admin/accessories/message.does_not_exist'));
         } elseif (!Company::isCurrentUserHasAccess($accessory)) {
-            return Redirect::to('admin/accessories')->with('error', trans('general.insufficient_permissions'));
+            return redirect()->to('admin/accessories')->with('error', trans('general.insufficient_permissions'));
         }
 
         $category_list = array('' => '') + DB::table('categories')->where('category_type', '=', 'accessory')->whereNull('deleted_at')->orderBy('name', 'ASC')->lists('name', 'id');
@@ -147,9 +147,9 @@ class AccessoriesController extends Controller
       // Check if the blog post exists
         if (is_null($accessory = Accessory::find($accessoryId))) {
             // Redirect to the blogs management page
-            return Redirect::to('admin/accessories')->with('error', trans('admin/accessories/message.does_not_exist'));
+            return redirect()->to('admin/accessories')->with('error', trans('admin/accessories/message.does_not_exist'));
         } elseif (!Company::isCurrentUserHasAccess($accessory)) {
-            return Redirect::to('admin/accessories')->with('error', trans('general.insufficient_permissions'));
+            return redirect()->to('admin/accessories')->with('error', trans('general.insufficient_permissions'));
         }
 
       // Update the accessory data
@@ -182,11 +182,11 @@ class AccessoriesController extends Controller
       // Was the accessory created?
         if ($accessory->save()) {
             // Redirect to the new accessory page
-            return Redirect::to("admin/accessories")->with('success', trans('admin/accessories/message.update.success'));
+            return redirect()->to("admin/accessories")->with('success', trans('admin/accessories/message.update.success'));
         }
 
 
-        return Redirect::back()->withInput()->withErrors($accessory->getErrors());
+        return redirect()->back()->withInput()->withErrors($accessory->getErrors());
 
     }
 
@@ -202,19 +202,19 @@ class AccessoriesController extends Controller
         // Check if the blog post exists
         if (is_null($accessory = Accessory::find($accessoryId))) {
             // Redirect to the blogs management page
-            return Redirect::to('admin/accessories')->with('error', trans('admin/accessories/message.not_found'));
+            return redirect()->to('admin/accessories')->with('error', trans('admin/accessories/message.not_found'));
         } elseif (!Company::isCurrentUserHasAccess($accessory)) {
-            return Redirect::to('admin/accessories')->with('error', trans('general.insufficient_permissions'));
+            return redirect()->to('admin/accessories')->with('error', trans('general.insufficient_permissions'));
         }
 
 
         if ($accessory->hasUsers() > 0) {
-             return Redirect::to('admin/accessories')->with('error', trans('admin/accessories/message.assoc_users', array('count'=> $accessory->hasUsers())));
+             return redirect()->to('admin/accessories')->with('error', trans('admin/accessories/message.assoc_users', array('count'=> $accessory->hasUsers())));
         } else {
             $accessory->delete();
 
             // Redirect to the locations management page
-            return Redirect::to('admin/accessories')->with('success', trans('admin/accessories/message.delete.success'));
+            return redirect()->to('admin/accessories')->with('success', trans('admin/accessories/message.delete.success'));
 
         }
     }
@@ -238,7 +238,7 @@ class AccessoriesController extends Controller
         if (isset($accessory->id)) {
 
             if (!Company::isCurrentUserHasAccess($accessory)) {
-                return Redirect::to('admin/accessories')->with('error', trans('general.insufficient_permissions'));
+                return redirect()->to('admin/accessories')->with('error', trans('general.insufficient_permissions'));
             } else {
                 return View::make('accessories/view', compact('accessory'));
             }
@@ -247,7 +247,7 @@ class AccessoriesController extends Controller
             $error = trans('admin/accessories/message.does_not_exist', compact('id'));
 
             // Redirect to the user management page
-            return Redirect::route('accessories')->with('error', $error);
+            return redirect()->route('accessories')->with('error', $error);
         }
 
 
@@ -265,9 +265,9 @@ class AccessoriesController extends Controller
         // Check if the accessory exists
         if (is_null($accessory = Accessory::find($accessoryId))) {
             // Redirect to the accessory management page with error
-            return Redirect::to('accessories')->with('error', trans('admin/accessories/message.not_found'));
+            return redirect()->to('accessories')->with('error', trans('admin/accessories/message.not_found'));
         } elseif (!Company::isCurrentUserHasAccess($accessory)) {
-            return Redirect::to('admin/accessories')->with('error', trans('general.insufficient_permissions'));
+            return redirect()->to('admin/accessories')->with('error', trans('general.insufficient_permissions'));
         }
 
         // Get the dropdown of users and then pass it to the checkout view
@@ -292,13 +292,13 @@ class AccessoriesController extends Controller
       // Check if the accessory exists
         if (is_null($accessory = Accessory::find($accessoryId))) {
             // Redirect to the accessory management page with error
-            return Redirect::to('accessories')->with('error', trans('admin/accessories/message.user_not_found'));
+            return redirect()->to('accessories')->with('error', trans('admin/accessories/message.user_not_found'));
         } elseif (!Company::isCurrentUserHasAccess($accessory)) {
-            return Redirect::to('admin/accessories')->with('error', trans('general.insufficient_permissions'));
+            return redirect()->to('admin/accessories')->with('error', trans('general.insufficient_permissions'));
         }
 
         if (!$user = User::find(Input::get('assigned_to'))) {
-            return Redirect::to('admin/accessories')->with('error', trans('admin/accessories/message.not_found'));
+            return redirect()->to('admin/accessories')->with('error', trans('admin/accessories/message.not_found'));
         }
 
       // Update the accessory data
@@ -379,7 +379,7 @@ class AccessoriesController extends Controller
         }
 
       // Redirect to the new accessory page
-        return Redirect::to("admin/accessories")->with('success', trans('admin/accessories/message.checkout.success'));
+        return redirect()->to("admin/accessories")->with('success', trans('admin/accessories/message.checkout.success'));
 
 
 
@@ -398,13 +398,13 @@ class AccessoriesController extends Controller
         // Check if the accessory exists
         if (is_null($accessory_user = DB::table('accessories_users')->find($accessoryUserId))) {
             // Redirect to the accessory management page with error
-            return Redirect::to('admin/accessories')->with('error', trans('admin/accessories/message.not_found'));
+            return redirect()->to('admin/accessories')->with('error', trans('admin/accessories/message.not_found'));
         }
 
         $accessory = Accessory::find($accessory_user->accessory_id);
 
         if (!Company::isCurrentUserHasAccess($accessory)) {
-            return Redirect::to('admin/accessories')->with('error', trans('general.insufficient_permissions'));
+            return redirect()->to('admin/accessories')->with('error', trans('general.insufficient_permissions'));
         } else {
             return View::make('accessories/checkin', compact('accessory'))->with('backto', $backto);
         }
@@ -424,14 +424,14 @@ class AccessoriesController extends Controller
       // Check if the accessory exists
         if (is_null($accessory_user = DB::table('accessories_users')->find($accessoryUserId))) {
             // Redirect to the accessory management page with error
-            return Redirect::to('admin/accessories')->with('error', trans('admin/accessories/message.not_found'));
+            return redirect()->to('admin/accessories')->with('error', trans('admin/accessories/message.not_found'));
         }
 
 
         $accessory = Accessory::find($accessory_user->accessory_id);
 
         if (!Company::isCurrentUserHasAccess($accessory)) {
-            return Redirect::to('admin/accessories')->with('error', trans('general.insufficient_permissions'));
+            return redirect()->to('admin/accessories')->with('error', trans('general.insufficient_permissions'));
         }
 
         $logaction = new Actionlog();
@@ -507,14 +507,14 @@ class AccessoriesController extends Controller
             }
 
             if ($backto=='user') {
-                return Redirect::to("admin/users/".$return_to.'/view')->with('success', trans('admin/accessories/message.checkin.success'));
+                return redirect()->to("admin/users/".$return_to.'/view')->with('success', trans('admin/accessories/message.checkin.success'));
             } else {
-                return Redirect::to("admin/accessories/".$accessory->id."/view")->with('success', trans('admin/accessories/message.checkin.success'));
+                return redirect()->to("admin/accessories/".$accessory->id."/view")->with('success', trans('admin/accessories/message.checkin.success'));
             }
         }
 
         // Redirect to the accessory management page with error
-        return Redirect::to("admin/accessories")->with('error', trans('admin/accessories/message.checkin.error'));
+        return redirect()->to("admin/accessories")->with('error', trans('admin/accessories/message.checkin.error'));
     }
 
     /**

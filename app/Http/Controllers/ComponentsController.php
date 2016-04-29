@@ -106,10 +106,10 @@ class ComponentsController extends Controller
         // Was the component created?
         if ($component->save()) {
             // Redirect to the new component  page
-            return Redirect::to("admin/components")->with('success', trans('admin/components/message.create.success'));
+            return redirect()->to("admin/components")->with('success', trans('admin/components/message.create.success'));
         }
 
-        return Redirect::back()->withInput()->withErrors($component->getErrors());
+        return redirect()->back()->withInput()->withErrors($component->getErrors());
 
 
     }
@@ -128,9 +128,9 @@ class ComponentsController extends Controller
         // Check if the component exists
         if (is_null($component = Component::find($componentId))) {
             // Redirect to the blogs management page
-            return Redirect::to('admin/components')->with('error', trans('admin/components/message.does_not_exist'));
+            return redirect()->to('admin/components')->with('error', trans('admin/components/message.does_not_exist'));
         } elseif (!Company::isCurrentUserHasAccess($component)) {
-            return Redirect::to('admin/components')->with('error', trans('general.insufficient_permissions'));
+            return redirect()->to('admin/components')->with('error', trans('general.insufficient_permissions'));
         }
 
             $category_list =  Helper::categoryList();
@@ -158,9 +158,9 @@ class ComponentsController extends Controller
         // Check if the blog post exists
         if (is_null($component = Component::find($componentId))) {
             // Redirect to the blogs management page
-            return Redirect::to('admin/components')->with('error', trans('admin/components/message.does_not_exist'));
+            return redirect()->to('admin/components')->with('error', trans('admin/components/message.does_not_exist'));
         } elseif (!Company::isCurrentUserHasAccess($component)) {
-            return Redirect::to('admin/components')->with('error', trans('general.insufficient_permissions'));
+            return redirect()->to('admin/components')->with('error', trans('general.insufficient_permissions'));
         }
 
 
@@ -189,10 +189,10 @@ class ComponentsController extends Controller
         // Was the component created?
         if ($component->save()) {
             // Redirect to the new component page
-            return Redirect::to("admin/components")->with('success', trans('admin/components/message.update.success'));
+            return redirect()->to("admin/components")->with('success', trans('admin/components/message.update.success'));
         }
 
-        return Redirect::back()->withInput()->withErrors($component->getErrors());
+        return redirect()->back()->withInput()->withErrors($component->getErrors());
 
 
 
@@ -212,15 +212,15 @@ class ComponentsController extends Controller
         // Check if the blog post exists
         if (is_null($component = Component::find($componentId))) {
             // Redirect to the blogs management page
-            return Redirect::to('admin/components')->with('error', trans('admin/components/message.not_found'));
+            return redirect()->to('admin/components')->with('error', trans('admin/components/message.not_found'));
         } elseif (!Company::isCurrentUserHasAccess($component)) {
-            return Redirect::to('admin/components')->with('error', trans('general.insufficient_permissions'));
+            return redirect()->to('admin/components')->with('error', trans('general.insufficient_permissions'));
         }
 
             $component->delete();
 
             // Redirect to the locations management page
-            return Redirect::to('admin/components')->with('success', trans('admin/components/message.delete.success'));
+            return redirect()->to('admin/components')->with('success', trans('admin/components/message.delete.success'));
 
     }
 
@@ -252,7 +252,7 @@ class ComponentsController extends Controller
 
 
             if (!Company::isCurrentUserHasAccess($component)) {
-                return Redirect::to('admin/components')->with('error', trans('general.insufficient_permissions'));
+                return redirect()->to('admin/components')->with('error', trans('general.insufficient_permissions'));
             } else {
                 return View::make('components/view', compact('component'));
             }
@@ -261,7 +261,7 @@ class ComponentsController extends Controller
             $error = trans('admin/components/message.does_not_exist', compact('id'));
 
             // Redirect to the user management page
-            return Redirect::route('components')->with('error', $error);
+            return redirect()->route('components')->with('error', $error);
         }
 
 
@@ -281,9 +281,9 @@ class ComponentsController extends Controller
         // Check if the component exists
         if (is_null($component = Component::find($componentId))) {
             // Redirect to the component management page with error
-            return Redirect::to('components')->with('error', trans('admin/components/message.not_found'));
+            return redirect()->to('components')->with('error', trans('admin/components/message.not_found'));
         } elseif (!Company::isCurrentUserHasAccess($component)) {
-            return Redirect::to('admin/components')->with('error', trans('general.insufficient_permissions'));
+            return redirect()->to('admin/components')->with('error', trans('general.insufficient_permissions'));
         }
 
         // Get the dropdown of assets and then pass it to the checkout view
@@ -307,9 +307,9 @@ class ComponentsController extends Controller
       // Check if the component exists
         if (is_null($component = Component::find($componentId))) {
             // Redirect to the component management page with error
-            return Redirect::to('components')->with('error', trans('admin/components/message.not_found'));
+            return redirect()->to('components')->with('error', trans('admin/components/message.not_found'));
         } elseif (!Company::isCurrentUserHasAccess($component)) {
-            return Redirect::to('admin/components')->with('error', trans('general.insufficient_permissions'));
+            return redirect()->to('admin/components')->with('error', trans('general.insufficient_permissions'));
         }
 
         $admin_user = Auth::user();
@@ -318,7 +318,7 @@ class ComponentsController extends Controller
       // Check if the user exists
         if (is_null($asset = Asset::find($asset_id))) {
             // Redirect to the component management page with error
-            return Redirect::to('admin/components')->with('error', trans('admin/components/message.asset_does_not_exist'));
+            return redirect()->to('admin/components')->with('error', trans('admin/components/message.asset_does_not_exist'));
         }
 
       // Update the component data
@@ -375,7 +375,7 @@ class ComponentsController extends Controller
         $log = $logaction->logaction('checkout');
 
       // Redirect to the new component page
-        return Redirect::to("admin/components")->with('success', trans('admin/components/message.checkout.success'));
+        return redirect()->to("admin/components")->with('success', trans('admin/components/message.checkout.success'));
 
 
 

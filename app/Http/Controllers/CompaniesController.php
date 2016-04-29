@@ -55,10 +55,10 @@ final class CompaniesController extends Controller
             $company->name = e(Input::get('name'));
 
         if ($company->save()) {
-            return Redirect::to('admin/settings/companies')
+            return redirect()->to('admin/settings/companies')
                 ->with('success', trans('admin/companies/message.create.success'));
         } else {
-            return Redirect::back()->withInput()->withErrors($company->getErrors());
+            return redirect()->back()->withInput()->withErrors($company->getErrors());
         }
 
     }
@@ -75,7 +75,7 @@ final class CompaniesController extends Controller
     public function getEdit($companyId)
     {
         if (is_null($company = Company::find($companyId))) {
-            return Redirect::to('admin/settings/companies')
+            return redirect()->to('admin/settings/companies')
                 ->with('error', trans('admin/companies/message.does_not_exist'));
         } else {
             return View::make('companies/edit')->with('company', $company);
@@ -93,17 +93,17 @@ final class CompaniesController extends Controller
     public function postEdit($companyId)
     {
         if (is_null($company = Company::find($companyId))) {
-            return Redirect::to('admin/settings/companies')->with('error', trans('admin/companies/message.does_not_exist'));
+            return redirect()->to('admin/settings/companies')->with('error', trans('admin/companies/message.does_not_exist'));
         } else {
 
 
             $company->name = e(Input::get('name'));
 
             if ($company->save()) {
-                return Redirect::to('admin/settings/companies')
+                return redirect()->to('admin/settings/companies')
                     ->with('success', trans('admin/companies/message.update.success'));
             } else {
-                return Redirect::to("admin/settings/companies/$companyId/edit")
+                return redirect()->to("admin/settings/companies/$companyId/edit")
                     ->with('error', trans('admin/companies/message.update.error'));
             }
 
@@ -121,12 +121,12 @@ final class CompaniesController extends Controller
     public function postDelete($companyId)
     {
         if (is_null($company = Company::find($companyId))) {
-            return Redirect::to('admin/settings/companies')
+            return redirect()->to('admin/settings/companies')
                 ->with('error', trans('admin/companies/message.not_found'));
         } else {
             try {
                 $company->delete();
-                return Redirect::to('admin/settings/companies')
+                return redirect()->to('admin/settings/companies')
                     ->with('success', trans('admin/companies/message.delete.success'));
             } catch (\Illuminate\Database\QueryException $exception) {
             /*
@@ -134,7 +134,7 @@ final class CompaniesController extends Controller
                  * For example when rows in other tables are referencing this company
                  */
                 if ($exception->getCode() == 23000) {
-                    return Redirect::to('admin/settings/companies')
+                    return redirect()->to('admin/settings/companies')
                         ->with('error', trans('admin/companies/message.assoc_users'));
                 } else {
                     throw $exception;

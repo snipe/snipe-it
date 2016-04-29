@@ -85,7 +85,7 @@ class DashboardController extends Controller
             return View::make('dashboard')->with('asset_stats', $asset_stats)->with('recent_activity', $recent_activity);
         } else {
         // Redirect to the profile page
-            return Redirect::route('view-assets');
+            return redirect()->route('view-assets');
         }
     }
 }

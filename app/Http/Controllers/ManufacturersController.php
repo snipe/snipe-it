@@ -64,10 +64,10 @@ class ManufacturersController extends Controller
         $manufacturer->user_id          = Auth::user()->id;
 
         if ($manufacturer->save()) {
-            return Redirect::to("admin/settings/manufacturers")->with('success', trans('admin/manufacturers/message.create.success'));
+            return redirect()->to("admin/settings/manufacturers")->with('success', trans('admin/manufacturers/message.create.success'));
         }
 
-        return Redirect::back()->withInput()->withErrors($manufacturer->getErrors());
+        return redirect()->back()->withInput()->withErrors($manufacturer->getErrors());
 
     }
 
@@ -85,7 +85,7 @@ class ManufacturersController extends Controller
         // Check if the manufacturer exists
         if (is_null($manufacturer = Manufacturer::find($manufacturerId))) {
             // Redirect to the manufacturer  page
-            return Redirect::to('admin/settings/manufacturers')->with('error', trans('admin/manufacturers/message.does_not_exist'));
+            return redirect()->to('admin/settings/manufacturers')->with('error', trans('admin/manufacturers/message.does_not_exist'));
         }
 
         // Show the page
@@ -107,7 +107,7 @@ class ManufacturersController extends Controller
         // Check if the manufacturer exists
         if (is_null($manufacturer = Manufacturer::find($manufacturerId))) {
             // Redirect to the manufacturer  page
-            return Redirect::to('admin/settings/manufacturers')->with('error', trans('admin/manufacturers/message.does_not_exist'));
+            return redirect()->to('admin/settings/manufacturers')->with('error', trans('admin/manufacturers/message.does_not_exist'));
         }
 
         // Save the  data
@@ -116,10 +116,10 @@ class ManufacturersController extends Controller
         // Was it created?
         if ($manufacturer->save()) {
             // Redirect to the new manufacturer page
-            return Redirect::to("admin/settings/manufacturers")->with('success', trans('admin/manufacturers/message.update.success'));
+            return redirect()->to("admin/settings/manufacturers")->with('success', trans('admin/manufacturers/message.update.success'));
         }
 
-        return Redirect::back()->withInput()->withErrors($manufacturer->getErrors());
+        return redirect()->back()->withInput()->withErrors($manufacturer->getErrors());
 
 
     }
@@ -137,20 +137,20 @@ class ManufacturersController extends Controller
         // Check if the manufacturer exists
         if (is_null($manufacturer = Manufacturer::find($manufacturerId))) {
             // Redirect to the manufacturers page
-            return Redirect::to('admin/settings/manufacturers')->with('error', trans('admin/manufacturers/message.not_found'));
+            return redirect()->to('admin/settings/manufacturers')->with('error', trans('admin/manufacturers/message.not_found'));
         }
 
         if ($manufacturer->has_models() > 0) {
 
             // Redirect to the asset management page
-            return Redirect::to('admin/settings/manufacturers')->with('error', trans('admin/manufacturers/message.assoc_users'));
+            return redirect()->to('admin/settings/manufacturers')->with('error', trans('admin/manufacturers/message.assoc_users'));
         } else {
 
             // Delete the manufacturer
             $manufacturer->delete();
 
             // Redirect to the manufacturers management page
-            return Redirect::to('admin/settings/manufacturers')->with('success', trans('admin/manufacturers/message.delete.success'));
+            return redirect()->to('admin/settings/manufacturers')->with('success', trans('admin/manufacturers/message.delete.success'));
         }
 
     }
@@ -179,7 +179,7 @@ class ManufacturersController extends Controller
             $error = trans('admin/manufacturers/message.does_not_exist', compact('id'));
 
             // Redirect to the user management page
-            return Redirect::route('manufacturers')->with('error', $error);
+            return redirect()->route('manufacturers')->with('error', $error);
         }
 
 

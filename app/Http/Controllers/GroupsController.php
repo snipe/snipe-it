@@ -70,10 +70,10 @@ class GroupsController extends Controller
         $group->permissions = json_encode(Input::get('permission'));
 
         if ($group->save()) {
-            return Redirect::to("admin/groups")->with('success', trans('admin/groups/message.create.success'));
+            return redirect()->to("admin/groups")->with('success', trans('admin/groups/message.create.success'));
         }
 
-        return Redirect::back()->withInput()->withErrors($group->getErrors());
+        return redirect()->back()->withInput()->withErrors($group->getErrors());
 
 
     }
@@ -109,7 +109,7 @@ class GroupsController extends Controller
     {
         $permissions = config('permissions');
         if (!$group = Group::find($id)) {
-            return Redirect::route('groups')->with('error', trans('admin/groups/message.group_not_found', compact('id')));
+            return redirect()->route('groups')->with('error', trans('admin/groups/message.group_not_found', compact('id')));
 
         }
         $group->name = e(Input::get('name'));
@@ -119,12 +119,12 @@ class GroupsController extends Controller
         if (!config('app.lock_passwords')) {
 
             if ($group->save()) {
-                return Redirect::to("admin/groups")->with('success', trans('admin/groups/message.create.success'));
+                return redirect()->to("admin/groups")->with('success', trans('admin/groups/message.create.success'));
             }
-            return Redirect::back()->withInput()->withErrors($group->getErrors());
+            return redirect()->back()->withInput()->withErrors($group->getErrors());
 
         } else {
-            return Redirect::route('update/group', $id)->withInput()->with('error', 'Denied! Editing groups is not allowed in the demo.');
+            return redirect()->route('update/group', $id)->withInput()->with('error', 'Denied! Editing groups is not allowed in the demo.');
         }
 
     }
@@ -147,13 +147,13 @@ class GroupsController extends Controller
                 $group->delete();
 
                 // Redirect to the group management page
-                return Redirect::route('groups')->with('success', trans('admin/groups/message.success.delete'));
+                return redirect()->route('groups')->with('success', trans('admin/groups/message.success.delete'));
             } catch (GroupNotFoundException $e) {
                 // Redirect to the group management page
-                return Redirect::route('groups')->with('error', trans('admin/groups/message.group_not_found', compact('id')));
+                return redirect()->route('groups')->with('error', trans('admin/groups/message.group_not_found', compact('id')));
             }
         } else {
-            return Redirect::route('groups')->with('error', trans('general.feature_disabled'));
+            return redirect()->route('groups')->with('error', trans('general.feature_disabled'));
         }
     }
 

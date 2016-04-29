@@ -75,10 +75,10 @@ class StatuslabelsController extends Controller
         // Was the asset created?
         if ($statuslabel->save()) {
             // Redirect to the new Statuslabel  page
-            return Redirect::to("admin/settings/statuslabels")->with('success', trans('admin/statuslabels/message.create.success'));
+            return redirect()->to("admin/settings/statuslabels")->with('success', trans('admin/statuslabels/message.create.success'));
         }
 
-        return Redirect::back()->withInput()->withErrors($statuslabel->getErrors());
+        return redirect()->back()->withInput()->withErrors($statuslabel->getErrors());
 
     }
 
@@ -126,7 +126,7 @@ class StatuslabelsController extends Controller
         // Check if the Statuslabel exists
         if (is_null($statuslabel = Statuslabel::find($statuslabelId))) {
             // Redirect to the blogs management page
-            return Redirect::to('admin/settings/statuslabels')->with('error', trans('admin/statuslabels/message.does_not_exist'));
+            return redirect()->to('admin/settings/statuslabels')->with('error', trans('admin/statuslabels/message.does_not_exist'));
         }
 
         $use_statuslabel_type = $statuslabel->getStatuslabelType();
@@ -148,7 +148,7 @@ class StatuslabelsController extends Controller
         // Check if the Statuslabel exists
         if (is_null($statuslabel = Statuslabel::find($statuslabelId))) {
             // Redirect to the blogs management page
-            return Redirect::to('admin/settings/statuslabels')->with('error', trans('admin/statuslabels/message.does_not_exist'));
+            return redirect()->to('admin/settings/statuslabels')->with('error', trans('admin/statuslabels/message.does_not_exist'));
         }
 
 
@@ -164,14 +164,14 @@ class StatuslabelsController extends Controller
         // Was the asset created?
         if ($statuslabel->save()) {
             // Redirect to the saved Statuslabel page
-            return Redirect::to("admin/settings/statuslabels/")->with('success', trans('admin/statuslabels/message.update.success'));
+            return redirect()->to("admin/settings/statuslabels/")->with('success', trans('admin/statuslabels/message.update.success'));
         } else {
-            return Redirect::back()->withInput()->withErrors($statuslabel->getErrors());
+            return redirect()->back()->withInput()->withErrors($statuslabel->getErrors());
         }
 
 
         // Redirect to the Statuslabel management page
-        return Redirect::to("admin/settings/statuslabels/$statuslabelId/edit")->with('error', trans('admin/statuslabels/message.update.error'));
+        return redirect()->to("admin/settings/statuslabels/$statuslabelId/edit")->with('error', trans('admin/statuslabels/message.update.error'));
 
     }
 
@@ -186,20 +186,20 @@ class StatuslabelsController extends Controller
         // Check if the Statuslabel exists
         if (is_null($statuslabel = Statuslabel::find($statuslabelId))) {
             // Redirect to the blogs management page
-            return Redirect::to('admin/settings/statuslabels')->with('error', trans('admin/statuslabels/message.not_found'));
+            return redirect()->to('admin/settings/statuslabels')->with('error', trans('admin/statuslabels/message.not_found'));
         }
 
 
         if ($statuslabel->has_assets() > 0) {
 
             // Redirect to the asset management page
-            return Redirect::to('admin/settings/statuslabels')->with('error', trans('admin/statuslabels/message.assoc_users'));
+            return redirect()->to('admin/settings/statuslabels')->with('error', trans('admin/statuslabels/message.assoc_users'));
         } else {
 
             $statuslabel->delete();
 
             // Redirect to the statuslabels management page
-            return Redirect::to('admin/settings/statuslabels')->with('success', trans('admin/statuslabels/message.delete.success'));
+            return redirect()->to('admin/settings/statuslabels')->with('success', trans('admin/statuslabels/message.delete.success'));
         }
 
 

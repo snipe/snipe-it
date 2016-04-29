@@ -177,7 +177,7 @@ class SettingsController extends Controller
         $settings->user_id = 1;
 
         if ((!$user->isValid('initial')) && (!$settings->isValid('initial'))) {
-            return Redirect::back()->withInput()->withErrors($user->getErrors())->withErrors($settings->getErrors());
+            return redirect()->back()->withInput()->withErrors($user->getErrors())->withErrors($settings->getErrors());
         } else {
             $user->save();
             $settings->save();
@@ -291,7 +291,7 @@ class SettingsController extends Controller
         // Check if the asset exists
         if (is_null($setting = Setting::find(1))) {
             // Redirect to the asset management page with error
-            return Redirect::to('admin')->with('error', trans('admin/settings/message.update.error'));
+            return redirect()->to('admin')->with('error', trans('admin/settings/message.update.error'));
         }
 
         if (Input::get('clear_logo')=='1') {
@@ -393,15 +393,15 @@ class SettingsController extends Controller
 
         // If validation fails, we'll exit the operation now.
         if ($setting->save()) {
-            return Redirect::to("admin/settings/app")->with('success', trans('admin/settings/message.update.success'));
+            return redirect()->to("admin/settings/app")->with('success', trans('admin/settings/message.update.success'));
 
         } else {
-            return Redirect::back()->withInput()->withErrors($setting->getErrors());
+            return redirect()->back()->withInput()->withErrors($setting->getErrors());
         }
 
 
         // Redirect to the setting management page
-        return Redirect::to("admin/settings/app/edit")->with('error', trans('admin/settings/message.update.error'));
+        return redirect()->to("admin/settings/app/edit")->with('error', trans('admin/settings/message.update.error'));
 
     }
 
@@ -455,10 +455,10 @@ class SettingsController extends Controller
     {
         if (!config('app.lock_passwords')) {
             Artisan::call('backup:run');
-            return Redirect::to("admin/settings/backups")->with('success', trans('admin/settings/message.backup.generated'));
+            return redirect()->to("admin/settings/backups")->with('success', trans('admin/settings/message.backup.generated'));
         } else {
 
-            return Redirect::to("admin/settings/backups")->with('error', trans('general.feature_disabled'));
+            return redirect()->to("admin/settings/backups")->with('error', trans('general.feature_disabled'));
         }
 
 
@@ -482,11 +482,11 @@ class SettingsController extends Controller
             } else {
 
                 // Redirect to the backup page
-                return Redirect::route('settings/backups')->with('error', trans('admin/settings/message.backup.file_not_found'));
+                return redirect()->route('settings/backups')->with('error', trans('admin/settings/message.backup.file_not_found'));
             }
         } else {
             // Redirect to the backup page
-            return Redirect::route('settings/backups')->with('error', trans('general.feature_disabled'));
+            return redirect()->route('settings/backups')->with('error', trans('general.feature_disabled'));
         }
 
 
@@ -507,12 +507,12 @@ class SettingsController extends Controller
             $file = config('backup::path').'/'.$filename;
             if (file_exists($file)) {
                 unlink($file);
-                return Redirect::route('settings/backups')->with('success', trans('admin/settings/message.backup.file_deleted'));
+                return redirect()->route('settings/backups')->with('success', trans('admin/settings/message.backup.file_deleted'));
             } else {
-                return Redirect::route('settings/backups')->with('error', trans('admin/settings/message.backup.file_not_found'));
+                return redirect()->route('settings/backups')->with('error', trans('admin/settings/message.backup.file_not_found'));
             }
         } else {
-            return Redirect::route('settings/backups')->with('error', trans('general.feature_disabled'));
+            return redirect()->route('settings/backups')->with('error', trans('general.feature_disabled'));
         }
 
     }
@@ -534,11 +534,11 @@ class SettingsController extends Controller
                 return View::make('settings/purge')
                 ->with('output', $output)->with('success', trans('admin/settings/message.purge.success'));
             } else {
-                return Redirect::back()->with('error', trans('admin/settings/message.purge.validation_failed'));
+                return redirect()->back()->with('error', trans('admin/settings/message.purge.validation_failed'));
             }
 
         } else {
-            return Redirect::back()->with('error', trans('general.feature_disabled'));
+            return redirect()->back()->with('error', trans('general.feature_disabled'));
         }
     }
 }

@@ -600,7 +600,7 @@ class ReportsController extends Controller
 
             return $response;
         } else {
-            return Redirect::to("reports/custom")
+            return redirect()->to("reports/custom")
                            ->with('error', trans('admin/reports/message.error'));
         }
     }

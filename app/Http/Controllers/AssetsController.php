@@ -214,10 +214,10 @@ class AssetsController extends Controller
                     $log = $logaction->logaction('checkout');
             }
             // Redirect to the asset listing page
-            return Redirect::to("hardware")->with('success', trans('admin/hardware/message.create.success'));
+            return redirect()->to("hardware")->with('success', trans('admin/hardware/message.create.success'));
         }
 
-        return Redirect::back()->withInput()->withErrors($asset->getErrors());
+        return redirect()->back()->withInput()->withErrors($asset->getErrors());
 
     }
 
@@ -234,9 +234,9 @@ class AssetsController extends Controller
         // Check if the asset exists
         if (is_null($asset = Asset::find($assetId))) {
             // Redirect to the asset management page
-            return Redirect::to('hardware')->with('error', trans('admin/hardware/message.does_not_exist'));
+            return redirect()->to('hardware')->with('error', trans('admin/hardware/message.does_not_exist'));
         } elseif (!Company::isCurrentUserHasAccess($asset)) {
-            return Redirect::to('hardware')->with('error', trans('general.insufficient_permissions'));
+            return redirect()->to('hardware')->with('error', trans('general.insufficient_permissions'));
         }
 
         // Grab the dropdown lists
@@ -276,9 +276,9 @@ class AssetsController extends Controller
         // Check if the asset exists
         if (is_null($asset = Asset::find($assetId))) {
             // Redirect to the asset management page with error
-            return Redirect::to('hardware')->with('error', trans('admin/hardware/message.does_not_exist'));
+            return redirect()->to('hardware')->with('error', trans('admin/hardware/message.does_not_exist'));
         } elseif (!Company::isCurrentUserHasAccess($asset)) {
-            return Redirect::to('hardware')->with('error', trans('general.insufficient_permissions'));
+            return redirect()->to('hardware')->with('error', trans('general.insufficient_permissions'));
         }
 
         if (e(Input::get('status_id')) == '') {
@@ -359,10 +359,10 @@ class AssetsController extends Controller
         // Was the asset updated?
         if ($asset->save()) {
             // Redirect to the new asset page
-            return Redirect::to("hardware/$assetId/view")->with('success', trans('admin/hardware/message.update.success'));
+            return redirect()->to("hardware/$assetId/view")->with('success', trans('admin/hardware/message.update.success'));
         }
 
-        return Redirect::back()->withInput()->withErrors($asset->getErrors());
+        return redirect()->back()->withInput()->withErrors($asset->getErrors());
 
     }
 
@@ -379,9 +379,9 @@ class AssetsController extends Controller
         // Check if the asset exists
         if (is_null($asset = Asset::find($assetId))) {
             // Redirect to the asset management page with error
-            return Redirect::to('hardware')->with('error', trans('admin/hardware/message.does_not_exist'));
+            return redirect()->to('hardware')->with('error', trans('admin/hardware/message.does_not_exist'));
         } elseif (!Company::isCurrentUserHasAccess($asset)) {
-            return Redirect::to('hardware')->with('error', trans('general.insufficient_permissions'));
+            return redirect()->to('hardware')->with('error', trans('general.insufficient_permissions'));
         }
 
         DB::table('assets')
@@ -392,7 +392,7 @@ class AssetsController extends Controller
         $asset->delete();
 
         // Redirect to the asset management page
-        return Redirect::to('hardware')->with('success', trans('admin/hardware/message.delete.success'));
+        return redirect()->to('hardware')->with('success', trans('admin/hardware/message.delete.success'));
 
 
 
@@ -413,9 +413,9 @@ class AssetsController extends Controller
         // Check if the asset exists
         if (is_null($asset = Asset::find(e($assetId)))) {
             // Redirect to the asset management page with error
-            return Redirect::to('hardware')->with('error', trans('admin/hardware/message.does_not_exist'));
+            return redirect()->to('hardware')->with('error', trans('admin/hardware/message.does_not_exist'));
         } elseif (!Company::isCurrentUserHasAccess($asset)) {
-            return Redirect::to('hardware')->with('error', trans('general.insufficient_permissions'));
+            return redirect()->to('hardware')->with('error', trans('general.insufficient_permissions'));
         }
 
         // Get the dropdown of users and then pass it to the checkout view
@@ -438,9 +438,9 @@ class AssetsController extends Controller
 
         // Check if the asset exists
         if (!$asset = Asset::find($assetId)) {
-            return Redirect::to('hardware')->with('error', trans('admin/hardware/message.does_not_exist'));
+            return redirect()->to('hardware')->with('error', trans('admin/hardware/message.does_not_exist'));
         } elseif (!Company::isCurrentUserHasAccess($asset)) {
-            return Redirect::to('hardware')->with('error', trans('general.insufficient_permissions'));
+            return redirect()->to('hardware')->with('error', trans('general.insufficient_permissions'));
         }
 
         $user = User::find(e(Input::get('assigned_to')));
@@ -461,11 +461,11 @@ class AssetsController extends Controller
 
         if ($asset->checkOutToUser($user, $admin, $checkout_at, $expected_checkin, e(Input::get('note')), e(Input::get('name')))) {
           // Redirect to the new asset page
-            return Redirect::to("hardware")->with('success', trans('admin/hardware/message.checkout.success'));
+            return redirect()->to("hardware")->with('success', trans('admin/hardware/message.checkout.success'));
         }
 
       // Redirect to the asset management page with error
-        return Redirect::to("hardware/$assetId/checkout")->with('error', trans('admin/hardware/message.checkout.error'))->withErrors($asset->getErrors());
+        return redirect()->to("hardware/$assetId/checkout")->with('error', trans('admin/hardware/message.checkout.error'))->withErrors($asset->getErrors());
     }
 
 
@@ -483,9 +483,9 @@ class AssetsController extends Controller
         // Check if the asset exists
         if (is_null($asset = Asset::find($assetId))) {
             // Redirect to the asset management page with error
-            return Redirect::to('hardware')->with('error', trans('admin/hardware/message.does_not_exist'));
+            return redirect()->to('hardware')->with('error', trans('admin/hardware/message.does_not_exist'));
         } elseif (!Company::isCurrentUserHasAccess($asset)) {
-            return Redirect::to('hardware')->with('error', trans('general.insufficient_permissions'));
+            return redirect()->to('hardware')->with('error', trans('general.insufficient_permissions'));
         }
         $statusLabel_list = Helper::statusLabelList();
         return View::make('hardware/checkin', compact('asset'))->with('statusLabel_list', $statusLabel_list)->with('backto', $backto);
@@ -505,9 +505,9 @@ class AssetsController extends Controller
         // Check if the asset exists
         if (is_null($asset = Asset::find($assetId))) {
             // Redirect to the asset management page with error
-            return Redirect::to('hardware')->with('error', trans('admin/hardware/message.does_not_exist'));
+            return redirect()->to('hardware')->with('error', trans('admin/hardware/message.does_not_exist'));
         } elseif (!Company::isCurrentUserHasAccess($asset)) {
-            return Redirect::to('hardware')->with('error', trans('general.insufficient_permissions'));
+            return redirect()->to('hardware')->with('error', trans('general.insufficient_permissions'));
         }
 
         $admin = Auth::user();
@@ -515,7 +515,7 @@ class AssetsController extends Controller
         if (!is_null($asset->assigned_to)) {
             $user = User::find($asset->assigned_to);
         } else {
-            return Redirect::to('hardware')->with('error', trans('admin/hardware/message.checkin.already_checked_in'));
+            return redirect()->to('hardware')->with('error', trans('admin/hardware/message.checkin.already_checked_in'));
         }
 
         // This is just used for the redirect
@@ -586,15 +586,15 @@ class AssetsController extends Controller
             }
 
             if ($backto=='user') {
-                return Redirect::to("admin/users/".$return_to.'/view')->with('success', trans('admin/hardware/message.checkin.success'));
+                return redirect()->to("admin/users/".$return_to.'/view')->with('success', trans('admin/hardware/message.checkin.success'));
             } else {
-                return Redirect::to("hardware")->with('success', trans('admin/hardware/message.checkin.success'));
+                return redirect()->to("hardware")->with('success', trans('admin/hardware/message.checkin.success'));
             }
 
         }
 
         // Redirect to the asset management page with error
-        return Redirect::to("hardware")->with('error', trans('admin/hardware/message.checkin.error'));
+        return redirect()->to("hardware")->with('error', trans('admin/hardware/message.checkin.error'));
     }
 
 
@@ -612,7 +612,7 @@ class AssetsController extends Controller
         $settings = Setting::getSettings();
 
         if (!Company::isCurrentUserHasAccess($asset)) {
-            return Redirect::to('hardware')->with('error', trans('general.insufficient_permissions'));
+            return redirect()->to('hardware')->with('error', trans('general.insufficient_permissions'));
         } elseif ($asset->userloc) {
             $use_currency = $asset->userloc->currency;
         } elseif ($asset->assetloc) {
@@ -643,7 +643,7 @@ class AssetsController extends Controller
             $error = trans('admin/hardware/message.does_not_exist', compact('id'));
 
             // Redirect to the user management page
-            return Redirect::route('hardware')->with('error', $error);
+            return redirect()->route('hardware')->with('error', $error);
         }
 
     }
@@ -665,7 +665,7 @@ class AssetsController extends Controller
             $size = Helper::barcodeDimensions($settings->barcode_type);
 
             if (!Company::isCurrentUserHasAccess($asset)) {
-                return Redirect::to('hardware')->with('error', trans('general.insufficient_permissions'));
+                return redirect()->to('hardware')->with('error', trans('general.insufficient_permissions'));
             }
 
             if (isset($asset->id,$asset->asset_tag)) {
@@ -693,7 +693,7 @@ class AssetsController extends Controller
         $files = array();
 
         if (!Company::isCurrentUserAuthorized()) {
-            return Redirect::to('hardware')->with('error', trans('general.insufficient_permissions'));
+            return redirect()->to('hardware')->with('error', trans('general.insufficient_permissions'));
         }
 
         if ($handle = opendir($path)) {
@@ -730,7 +730,7 @@ class AssetsController extends Controller
     {
 
         if (!Company::isCurrentUserAuthorized()) {
-            return Redirect::to('hardware')->with('error', trans('general.insufficient_permissions'));
+            return redirect()->to('hardware')->with('error', trans('general.insufficient_permissions'));
 
         } elseif (!config('app.lock_passwords')) {
 
@@ -789,7 +789,7 @@ class AssetsController extends Controller
         // php artisan asset-import:csv path/to/your/file.csv --domain=yourdomain.com --email_format=firstname.lastname
 
         if (!Company::isCurrentUserAuthorized()) {
-            return Redirect::to('hardware')->with('error', trans('general.insufficient_permissions'));
+            return redirect()->to('hardware')->with('error', trans('general.insufficient_permissions'));
         }
 
         $output = new BufferedOutput;
@@ -799,7 +799,7 @@ class AssetsController extends Controller
         file_put_contents($file, $display_output);
 
 
-        return Redirect::to('hardware')->with('success', 'Your file has been imported');
+        return redirect()->to('hardware')->with('success', 'Your file has been imported');
 
     }
 
@@ -816,9 +816,9 @@ class AssetsController extends Controller
         // Check if the asset exists
         if (is_null($asset_to_clone = Asset::find($assetId))) {
             // Redirect to the asset management page
-            return Redirect::to('hardware')->with('error', trans('admin/hardware/message.does_not_exist'));
+            return redirect()->to('hardware')->with('error', trans('admin/hardware/message.does_not_exist'));
         } elseif (!Company::isCurrentUserHasAccess($asset_to_clone)) {
-            return Redirect::to('hardware')->with('error', trans('general.insufficient_permissions'));
+            return redirect()->to('hardware')->with('error', trans('general.insufficient_permissions'));
         }
 
         // Grab the dropdown lists
@@ -868,15 +868,15 @@ class AssetsController extends Controller
         $asset = Asset::withTrashed()->find($assetId);
 
         if (!Company::isCurrentUserHasAccess($asset)) {
-            return Redirect::to('hardware')->with('error', trans('general.insufficient_permissions'));
+            return redirect()->to('hardware')->with('error', trans('general.insufficient_permissions'));
         } elseif (isset($asset->id)) {
 
             // Restore the asset
             Asset::withTrashed()->where('id',$assetId)->restore();
-            return Redirect::route('hardware')->with('success', trans('admin/hardware/message.restore.success'));
+            return redirect()->route('hardware')->with('success', trans('admin/hardware/message.restore.success'));
 
         } else {
-            return Redirect::to('hardware')->with('error', trans('admin/hardware/message.does_not_exist'));
+            return redirect()->to('hardware')->with('error', trans('admin/hardware/message.does_not_exist'));
         }
 
     }
@@ -894,7 +894,7 @@ class AssetsController extends Controller
     {
 
         if (!$asset = Asset::find($assetId)) {
-            return Redirect::route('hardware')->with('error', trans('admin/hardware/message.does_not_exist'));
+            return redirect()->route('hardware')->with('error', trans('admin/hardware/message.does_not_exist'));
         }
 
         $destinationPath = config('app.private_uploads').'/assets';
@@ -902,7 +902,7 @@ class AssetsController extends Controller
 
 
         if (!Company::isCurrentUserHasAccess($asset)) {
-            return Redirect::to('hardware')->with('error', trans('general.insufficient_permissions'));
+            return redirect()->to('hardware')->with('error', trans('general.insufficient_permissions'));
         }
 
         if (Input::hasFile('assetfile')) {
@@ -925,13 +925,13 @@ class AssetsController extends Controller
                 $log = $logaction->logaction('uploaded');
             }
         } else {
-            return Redirect::back()->with('error', trans('admin/hardware/message.upload.nofiles'));
+            return redirect()->back()->with('error', trans('admin/hardware/message.upload.nofiles'));
         }
 
         if ($upload_success) {
-            return Redirect::back()->with('success', trans('admin/hardware/message.upload.success'));
+            return redirect()->back()->with('success', trans('admin/hardware/message.upload.success'));
         } else {
-            return Redirect::back()->with('error', trans('admin/hardware/message.upload.error'));
+            return redirect()->back()->with('error', trans('admin/hardware/message.upload.error'));
         }
 
 
@@ -957,7 +957,7 @@ class AssetsController extends Controller
 
 
             if (!Company::isCurrentUserHasAccess($asset)) {
-                return Redirect::to('hardware')->with('error', trans('general.insufficient_permissions'));
+                return redirect()->to('hardware')->with('error', trans('general.insufficient_permissions'));
             }
 
             $log = Actionlog::find($fileId);
@@ -966,14 +966,14 @@ class AssetsController extends Controller
                 unlink($destinationPath.'/'.$log->filename);
             }
             $log->delete();
-            return Redirect::back()->with('success', trans('admin/hardware/message.deletefile.success'));
+            return redirect()->back()->with('success', trans('admin/hardware/message.deletefile.success'));
 
         } else {
             // Prepare the error message
             $error = trans('admin/hardware/message.does_not_exist', compact('id'));
 
             // Redirect to the hardware management page
-            return Redirect::route('hardware')->with('error', $error);
+            return redirect()->route('hardware')->with('error', $error);
         }
     }
 
@@ -998,7 +998,7 @@ class AssetsController extends Controller
 
 
             if (!Company::isCurrentUserHasAccess($asset)) {
-                return Redirect::to('hardware')->with('error', trans('general.insufficient_permissions'));
+                return redirect()->to('hardware')->with('error', trans('general.insufficient_permissions'));
             }
 
             $log = Actionlog::find($fileId);
@@ -1018,7 +1018,7 @@ class AssetsController extends Controller
             $error = trans('admin/hardware/message.does_not_exist', compact('id'));
 
             // Redirect to the hardware management page
-            return Redirect::route('hardware')->with('error', $error);
+            return redirect()->route('hardware')->with('error', $error);
         }
     }
 
@@ -1037,10 +1037,10 @@ class AssetsController extends Controller
     {
 
         if (!Company::isCurrentUserAuthorized()) {
-            return Redirect::to('hardware')->with('error', trans('general.insufficient_permissions'));
+            return redirect()->to('hardware')->with('error', trans('general.insufficient_permissions'));
 
         } elseif (!Input::has('edit_asset')) {
-                 return Redirect::back()->with('error', 'No assets selected');
+                 return redirect()->back()->with('error', 'No assets selected');
 
         } else {
             $asset_raw_array = Input::get('edit_asset');
@@ -1069,7 +1069,7 @@ class AssetsController extends Controller
 
                 } else {
                   // QR codes are not enabled
-                    return Redirect::to("hardware")->with('error', 'Barcodes are not enabled in Admin > Settings');
+                    return redirect()->to("hardware")->with('error', 'Barcodes are not enabled in Admin > Settings');
                 }
 
             } elseif (Input::get('bulk_actions')=='delete') {
@@ -1100,7 +1100,7 @@ class AssetsController extends Controller
             }
 
         } else {
-            return Redirect::back()->with('error', 'No action selected');
+            return redirect()->back()->with('error', 'No action selected');
         }
 
 
@@ -1121,7 +1121,7 @@ class AssetsController extends Controller
     {
 
         if (!Company::isCurrentUserAuthorized()) {
-            return Redirect::to('hardware')->with('error', trans('general.insufficient_permissions'));
+            return redirect()->to('hardware')->with('error', trans('general.insufficient_permissions'));
 
         } elseif (Input::has('bulk_edit')) {
 
@@ -1198,18 +1198,18 @@ class AssetsController extends Controller
 
                 } // endforeach
 
-                return Redirect::to("hardware")->with('success', trans('admin/hardware/message.update.success'));
+                return redirect()->to("hardware")->with('success', trans('admin/hardware/message.update.success'));
 
             // no values given, nothing to update
             } else {
-                return Redirect::to("hardware")->with('info', trans('admin/hardware/message.update.nothing_updated'));
+                return redirect()->to("hardware")->with('info', trans('admin/hardware/message.update.nothing_updated'));
 
             }
 
 
         } // endif
 
-        return Redirect::to("hardware");
+        return redirect()->to("hardware");
 
     }
 
@@ -1225,7 +1225,7 @@ class AssetsController extends Controller
     {
 
         if (!Company::isCurrentUserAuthorized()) {
-            return Redirect::to('hardware')->with('error', trans('general.insufficient_permissions'));
+            return redirect()->to('hardware')->with('error', trans('general.insufficient_permissions'));
         } elseif (Input::has('bulk_edit')) {
               //$assets = Input::get('bulk_edit');
             $assets = Asset::find(Input::get('bulk_edit'));
@@ -1251,16 +1251,16 @@ class AssetsController extends Controller
                 }
 
             } // endforeach
-                return Redirect::to("hardware")->with('success', trans('admin/hardware/message.delete.success'));
+                return redirect()->to("hardware")->with('success', trans('admin/hardware/message.delete.success'));
 
             // no values given, nothing to update
         } else {
-            return Redirect::to("hardware")->with('info', trans('admin/hardware/message.delete.nothing_updated'));
+            return redirect()->to("hardware")->with('info', trans('admin/hardware/message.delete.nothing_updated'));
 
         }
 
         // Something weird happened here - default to hardware
-        return Redirect::to("hardware");
+        return redirect()->to("hardware");
 
     }
 
