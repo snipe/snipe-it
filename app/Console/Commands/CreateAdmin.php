@@ -11,7 +11,7 @@ class CreateAdmin extends Command
      *
      * @var string
      */
-    protected $signature = 'snipeit:create-admin {--first_name=} {--last_name=}  {--email=}  {--username=}  {--password=}';
+    protected $signature = 'snipeit:create-admin {--first_name=} {--last_name=}  {--email=}  {--username=}  {--password=}   {show_in_list?}';
 
     /**
      * The console command description.
@@ -43,6 +43,7 @@ class CreateAdmin extends Command
         $username = $this->option('username');
         $email = $this->option('email');
         $password = $this->option('password');
+        $show_in_list = $this->argument('show_in_list');
 
         if (($first_name=='') || ($last_name=='') || ($username=='') || ($email=='') || ($password=='')) {
           $this->info('ERROR: All fields are required.');
@@ -55,6 +56,10 @@ class CreateAdmin extends Command
           $user->permissions = '{"admin":1,"user":1,"superuser":1,"reports":1}';
           $user->password = bcrypt($password);
           $user->activated = 1;
+
+          if ($show_in_list == 'false') {
+             $user->show_in_list = 0;
+          }
           if ($user->save()) {
             $this->info('New user created');
             $user->groups()->attach(1);

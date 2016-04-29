@@ -142,6 +142,7 @@ class Helper
         $users_list = array('' => trans('general.select_user')) + DB::table('users')
         ->select(DB::raw('concat(last_name,", ",first_name," (",username,")") as full_name, id'))
         ->whereNull('deleted_at')
+        ->where('show_in_list','=',1)
         ->orderBy('last_name', 'asc')
         ->orderBy('first_name', 'asc')
         ->pluck('full_name', 'id');
