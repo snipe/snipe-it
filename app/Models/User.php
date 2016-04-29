@@ -307,6 +307,12 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 
     }
 
+
+    public function decodePermissions()
+    {
+        return json_decode($this->permissions, true);
+    }
+
 /**
 * Query builder scope to search on text
 *

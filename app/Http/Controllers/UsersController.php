@@ -7,6 +7,7 @@ use App\Helpers\Helper;
 use App\Models\Accessory;
 use App\Models\Actionlog;
 use App\Models\Asset;
+use App\Models\Group;
 use App\Models\Company;
 use App\Models\Location;
 use App\Models\Setting;
@@ -64,24 +65,21 @@ class UsersController extends Controller
     {
 
         // Selected groups
-        $userGroups = Input::old('groups', array());
+        if (Input::has('groups')) {
+            $userGroups = Group::pluck('name', 'id')->whereIn('id',Input::get('groups'));
+        } else {
+            $userGroups = collect();
+        }
 
-        // Get all the available permissions
         $permissions = config('permissions');
+        $groups = Group::pluck('name', 'id');
+        $userPermissions = Helper::selectedPermissionsArray($permissions, Input::old('groups', array()));
 
-        // Selected permissions
-        $userPermissions = Input::old('permissions', array('superuser' => -1));
+
         $location_list = Helper::locationsList();
         $manager_list = Helper::managerList();
         $company_list = Helper::companyList();
 
-        /* echo '<pre>';
-          print_r($userPermissions);
-          echo '</pre>';
-          exit;
-         */
-
-        // Show the page
         return View::make('users/edit', compact('groups', 'userGroups', 'permissions', 'userPermissions'))
         ->with('location_list', $location_list)
         ->with('manager_list', $manager_list)
@@ -132,9 +130,9 @@ class UsersController extends Controller
     }
 
     /**
-    * JSON handler for creating a user through a modal
+    * JSON handler for creating a user through a modal popup
     *
-    * @author [A. Gianotto] [<snipe@snipe.net>]
+    * @author [B. Wetherington] [<uberbrady@gmail.com>]
     * @since [v1.8]
     * @return string JSON
     */
@@ -185,25 +183,17 @@ class UsersController extends Controller
         try {
             // Get the user information
             $user = User::find($id);
+            $permissions = config('permissions');
 
             if (!Company::isCurrentUserHasAccess($user)) {
                 return redirect()->route('users')->with('error', trans('general.insufficient_permissions'));
             }
 
-            // Get this user groups
-            $userGroups = $user->groups()->lists('group_id', 'name');
-            //$userGroups = null;
+            $groups = Group::pluck('name', 'id');
 
-            // Get this user permissions
-            $userPermissions = null;
-            //$this->encodePermissions($userPermissions);
-
-            // Get a list of all the available groups
-            //$groups = Sentry::getGroupProvider()->findAll();
-
-            // Get all the available permissions
-            $permissions = config('permissions');
-            //$this->encodeAllPermissions($permissions);
+            $userGroups = $user->groups()->pluck('name', 'id');
+            $user->permissions = $user->decodePermissions();
+            $userPermissions = Helper::selectedPermissionsArray($permissions, $user->permissions);
 
             $location_list = Helper::locationsList();
             $company_list = Helper::companyList();
