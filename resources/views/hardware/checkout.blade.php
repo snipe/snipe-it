@@ -169,7 +169,7 @@ $(function() {
     } else {
 
       $.get("{{config('app.url') }}/api/users/"+userid+"/assets",{_token: "{{ csrf_token() }}"},function (data) {
-        console.warn("Ajax call came back okay for user " + userid + "! " + data.length + " Data is: "+data);
+        // console.warn("Ajax call came back okay for user " + userid + "! " + data.length + " Data is: "+data);
         if (data.length > 0) {
             $('#current_assets_box').fadeIn();
 
