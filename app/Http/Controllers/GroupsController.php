@@ -9,6 +9,7 @@ use App\Models\Setting;
 use Validator;
 use View;
 use App\Models\Group;
+use App\Helpers\Helper;
 
 /**
  * This controller handles all actions related to User Groups for
@@ -94,7 +95,7 @@ class GroupsController extends Controller
         $group = Group::find($id);
         $permissions = config('permissions');
         $group->permissions = $group->decodePermissions();
-        $selected_array = $group->selectedPermissionsArray($permissions, $group->permissions);
+        $selected_array = Helper::selectedPermissionsArray($permissions, $group->permissions);
         return View::make('groups/edit', compact('group', 'permissions','selected_array'));
     }
 
@@ -109,8 +110,6 @@ class GroupsController extends Controller
     */
     public function postEdit($id = null)
     {
-        // print_r(Input::get('permission'));
-        // exit;
         $permissions = config('permissions');
         if (!$group = Group::find($id)) {
             return Redirect::route('groups')->with('error', trans('admin/groups/message.group_not_found', compact('id')));
