@@ -48,7 +48,6 @@ class GroupsController extends Controller
         // Get all the available permissions
         $permissions = config('permissions');
 
-
         $selectedPermissions = Input::old('permissions', array());
 
         // Show the page
@@ -67,12 +66,10 @@ class GroupsController extends Controller
     {
         // create a new group instance
         $group = new Group();
-        // Update the consumable data
         $group->name = e(Input::get('name'));
+        $group->permissions = json_encode(Input::get('permission'));
 
-        // Was the consumable created?
         if ($group->save()) {
-            // Redirect to the new consumable  page
             return Redirect::to("admin/groups")->with('success', trans('admin/groups/message.create.success'));
         }
 
@@ -121,9 +118,7 @@ class GroupsController extends Controller
 
         if (!config('app.lock_passwords')) {
 
-          // Was the consumable created?
             if ($group->save()) {
-              // Redirect to the new consumable  page
                 return Redirect::to("admin/groups")->with('success', trans('admin/groups/message.create.success'));
             }
             return Redirect::back()->withInput()->withErrors($group->getErrors());
@@ -148,7 +143,7 @@ class GroupsController extends Controller
         if (!config('app.lock_passwords')) {
             try {
                 // Get group information
-                $group = Sentry::getGroupProvider()->findById($id);
+                $group = Group::find($id);
 
                 // Delete the group
                 $group->delete();
