@@ -144,8 +144,6 @@ class GroupsController extends Controller
             try {
                 // Get group information
                 $group = Group::find($id);
-
-                // Delete the group
                 $group->delete();
 
                 // Redirect to the group management page
