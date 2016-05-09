@@ -34,7 +34,7 @@ input[type='text'][disabled], input[disabled], textarea[disabled], input[readonl
 </style>
 
 <div class="row">
-<div class="col-md-9">
+<div class="col-md-8 col-md-offset-2">
 
 
 <form class="form-horizontal" method="post" action="" autocomplete="off">
@@ -294,7 +294,34 @@ input[type='text'][disabled], input[disabled], textarea[disabled], input[readonl
       </div>
     </div><!-- /.tab-pane -->
     <div class="tab-pane" id="tab_2">
-        Permission stuff goes here
+        <div class="col-md-10 col-md-offset-2">
+        @foreach ($permissions as $area => $permission)
+
+            @for ($i = 0; $i < count($permission); $i++)
+                <?php
+                $permission_name = $permission[$i]['permission'];
+                ?>
+
+                @if ($permission[$i]['display'])
+                    <h3>{{ $area }}: {{ $permission[$i]['label'] }}</h3>
+                    <p>{{ $permission[$i]['note'] }}</p>
+
+                    <!-- radio -->
+                    <div class="form-group" style="padding-left: 15px;">
+
+                        <label class="radio-padding">
+                            {{ Form::radio('permission['.$permission_name.']', 1, $userPermissions[$permission_name], ['class' => 'minimal']) }}
+                            Grant</label>
+
+                        <label class="radio-padding">
+                            {{ Form::radio('permission['.$permission_name.']', 0, !$userPermissions[$permission_name], ['class' => 'minimal']) }}
+                            Deny</label>
+                    </div>
+                    <hr>
+                @endif
+            @endfor
+        @endforeach
+            </div>
 
     </div><!-- /.tab-pane -->
   </div><!-- /.tab-content -->

@@ -63,6 +63,7 @@ class UsersController extends Controller
     */
     public function getCreate()
     {
+        $user = new User;
 
         // Selected groups
         if (Input::has('groups')) {
@@ -70,11 +71,11 @@ class UsersController extends Controller
         } else {
             $userGroups = collect();
         }
-
+        
         $permissions = config('permissions');
         $groups = Group::pluck('name', 'id');
-        $userPermissions = Helper::selectedPermissionsArray($permissions, Input::old('groups', array()));
-
+        $userGroups = $user->groups()->pluck('name', 'id');
+        $userPermissions = Helper::selectedPermissionsArray($permissions, Input::old('permissions', array()));
 
         $location_list = Helper::locationsList();
         $manager_list = Helper::managerList();
@@ -197,13 +198,7 @@ class UsersController extends Controller
 
             $location_list = Helper::locationsList();
             $company_list = Helper::companyList();
-            $manager_list = array('' => 'Select a User') + DB::table('users')
-                            ->select(DB::raw('concat(last_name,", ",first_name," (",email,")") as full_name, id'))
-                            ->whereNull('deleted_at')
-                            ->where('id', '!=', $id)
-                            ->orderBy('last_name', 'asc')
-                            ->orderBy('first_name', 'asc')
-                            ->lists('full_name', 'id');
+            $manager_list = Helper::managerList();
         } catch (UserNotFoundException $e) {
             // Prepare the error message
             $error = trans('admin/users/message.user_not_found', compact('id'));
@@ -260,7 +255,10 @@ class UsersController extends Controller
             $user->first_name = e(Input::get('first_name'));
             $user->last_name = e(Input::get('last_name'));
             $user->locale = e(Input::get('locale'));
-            $user->username = e(Input::get('username'));
+            if (Input::has('username')) {
+                $user->username = e(Input::get('username'));
+            }
+
             $user->email = e(Input::get('email'));
             $user->employee_num = e(Input::get('employee_num'));
             $user->activated = e(Input::get('activated', $user->activated));
@@ -270,6 +268,7 @@ class UsersController extends Controller
             $user->company_id = e(Company::getIdForUser(Input::get('company_id')));
             $user->manager_id = e(Input::get('manager_id'));
             $user->notes = e(Input::get('notes'));
+            $user->permissions = json_encode(Input::get('permission'));
 
         if ($user->manager_id == "") {
             $user->manager_id = null;
