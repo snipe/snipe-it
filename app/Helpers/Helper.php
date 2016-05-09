@@ -310,12 +310,12 @@ class Helper
 
                     if ($selected_arr) {
                         if (array_key_exists($permission_name,$selected_arr)) {
-                            $permissions_arr[$permission_name] = ($selected_arr[$permission_name] === 1) ? '1': '0';
+                            $permissions_arr[$permission_name] = ($selected_arr[$permission_name] == 1) ? '1': '0';
                         } else {
-                            $permissions_arr[$permission_name] = 'bum';
+                            $permissions_arr[$permission_name] = '0';
                         }
                     } else {
-                        $permissions_arr[$permission_name] = 'hodor';
+                        $permissions_arr[$permission_name] = '0';
                     }
                 }
 
@@ -324,7 +324,7 @@ class Helper
 
 
         }
-
+        
         return $permissions_arr;
     }
 
