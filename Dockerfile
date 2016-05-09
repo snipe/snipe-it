@@ -29,6 +29,7 @@ RUN echo export APACHE_RUN_GROUP=staff >> /etc/apache2/envvars
 COPY docker/000-default.conf /etc/apache2/sites-enabled/000-default.conf
 
 #SSL
+RUN mkdir -p /var/lib/snipeit/ssl
 COPY docker/001-default-ssl.conf /etc/apache2/sites-enabled/001-default-ssl.conf
 #COPY docker/001-default-ssl.conf /etc/apache2/sites-available/001-default-ssl.conf
 
@@ -51,6 +52,13 @@ COPY docker/*.php /var/www/html/app/config/production/
 
 RUN chown -R docker /var/www/html
 
+RUN \
+	rm -r "/var/www/html/app/private_uploads"      && ln -fs "/var/lib/snipeit/data/private_uploads"   "/var/www/html/app/private_uploads"      && \
+	rm -r "/var/www/html/public/uploads/avatars"   && ln -fs "/var/lib/snipeit/data/uploads/avatars"   "/var/www/html/public/uploads/avatars"   && \
+	rm -r "/var/www/html/public/uploads/models"    && ln -fs "/var/lib/snipeit/data/uploads/models"    "/var/www/html/public/uploads/models"    && \
+	rm -r "/var/www/html/public/uploads/suppliers" && ln -fs "/var/lib/snipeit/data/uploads/suppliers" "/var/www/html/public/uploads/suppliers" && \
+	rm -r "/var/www/html/app/storage/dumps"        && ln -fs "/var/lib/snipeit/dumps"                  "/var/www/html/app/storage/dumps"
+
 ############## DEPENDENCIES via COMPOSER ###################
 
 #global install of composer
@@ -67,6 +75,10 @@ RUN cd /var/www/html;composer install
 #COPY docker/app_install.exp /tmp/app_install.exp
 #RUN chmod +x /tmp/app_install.exp
 #RUN /tmp/app_install.exp
+
+############### DATA VOLUME #################
+
+VOLUME [/var/lib/snipeit]
 
 ##### START SERVER
 
