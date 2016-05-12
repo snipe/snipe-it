@@ -722,6 +722,12 @@ class Asset extends Depreciable
                             ->orWhere('models.name', 'LIKE', '%'.$search.'%');
                         });
                     });
+                })->orWhereHas('model', function ($query) use ($search) {
+                    $query->whereHas('manufacturer', function ($query) use ($search) {
+                        $query->where(function ($query) use ($search) {
+                            $query->where('manufacturers.name', 'LIKE', '%'.$search.'%');
+                        });
+                    });
                 })->orWhere(function ($query) use ($search) {
                     $query->whereHas('assetstatus', function ($query) use ($search) {
                         $query->where('status_labels.name', 'LIKE', '%'.$search.'%');
@@ -824,6 +830,22 @@ class Asset extends Depreciable
         return $query->join('models', 'assets.model_id', '=', 'models.id')
             ->join('categories', 'models.category_id', '=', 'categories.id')
             ->orderBy('categories.name', $order);
+    }
+
+
+    /**
+     * Query builder scope to order on manufacturer
+     *
+     * @param  Illuminate\Database\Query\Builder  $query  Query builder instance
+     * @param  text                              $order         Order
+     *
+     * @return Illuminate\Database\Query\Builder          Modified query builder
+     */
+    public function scopeOrderManufacturer($query, $order)
+    {
+        return $query->join('models', 'assets.model_id', '=', 'models.id')
+            ->join('manufacturers', 'models.manufacturer_id', '=', 'manufacturers.id')
+            ->orderBy('manufacturers.name', $order);
     }
 
   /**

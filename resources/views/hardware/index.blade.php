@@ -82,6 +82,7 @@
                             <th data-sortable="true" data-field="assigned_to">{{ trans('admin/hardware/form.checkedout_to') }}</th>
                             <th data-sortable="true" data-field="location" data-searchable="true">{{ trans('admin/hardware/table.location') }}</th>
                             <th data-sortable="true" data-field="category" data-searchable="true">{{ trans('general.category') }}</th>
+                            <th data-sortable="true" data-field="manufacturer" data-searchable="true" data-visible="false">{{ trans('general.manufacturer') }}</th>
                             <th data-sortable="false" data-field="eol"  data-searchable="true">{{ trans('general.eol') }}</th>
                             <th data-sortable="true" data-searchable="true" data-field="notes">{{ trans('general.notes') }}</th>
                             <th data-sortable="true" data-searchable="true"  data-field="order_number">{{ trans('admin/hardware/form.order') }}</th>

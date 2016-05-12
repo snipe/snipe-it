@@ -1278,7 +1278,7 @@ class AssetsController extends Controller
     {
 
 
-        $assets = Asset::select('assets.*')->with('model', 'assigneduser', 'assigneduser.userloc', 'assetstatus', 'defaultLoc', 'assetlog', 'model', 'model.category', 'model.fieldset', 'assetstatus', 'assetloc', 'company')
+        $assets = Asset::select('assets.*')->with('model', 'assigneduser', 'assigneduser.userloc', 'assetstatus', 'defaultLoc', 'assetlog', 'model', 'model.category', 'model.manufacturer', 'model.fieldset', 'assetstatus', 'assetloc', 'company')
         ->Hardware();
 
         if (Input::has('search')) {
@@ -1334,6 +1334,7 @@ class AssetsController extends Controller
         'model',
         'last_checkout',
         'category',
+        'manufacturer',
         'notes',
         'expected_checkin',
         'order_number',
@@ -1359,6 +1360,9 @@ class AssetsController extends Controller
                 break;
             case 'category':
                 $assets = $assets->OrderCategory($order);
+                break;
+            case 'manufacturer':
+                $assets = $assets->OrderManufacturer($order);
                 break;
             case 'companyName':
                 $assets = $assets->OrderCompany($order);
@@ -1412,7 +1416,8 @@ class AssetsController extends Controller
             'status_label'        => ($asset->assigneduser) ? 'Deployed' : ((e($asset->assetstatus)) ? e($asset->assetstatus->name) : ''),
             'assigned_to'        => ($asset->assigneduser) ? (string)link_to(config('app.url').'/admin/users/'.$asset->assigned_to.'/view', e($asset->assigneduser->fullName())) : '',
             'location'      => (($asset->assigneduser) && ($asset->assigneduser->userloc!='')) ? (string)link_to('admin/settings/locations/'.$asset->assigneduser->userloc->id.'/edit', e($asset->assigneduser->userloc->name)) : (($asset->defaultLoc!='') ? (string)link_to('admin/settings/locations/'.$asset->defaultLoc->id.'/edit', e($asset->defaultLoc->name)) : ''),
-            'category'      => (($asset->model) && ($asset->model->category)) ? e($asset->model->category->name) : '',
+            'category'      => (($asset->model) && ($asset->model->category)) ?(string)link_to('/admin/settings/categories/'.$asset->model->category->id.'/view', e($asset->model->category->name)) : '',
+            'manufacturer'      => (($asset->model) && ($asset->model->manufacturer)) ? (string)link_to('/admin/settings/manufacturers/'.$asset->model->manufacturer->id.'/view', e($asset->model->manufacturer->name)) : '',
             'eol'           => ($asset->eol_date()) ? $asset->eol_date() : '',
             'notes'         => e($asset->notes),
             'order_number'  => ($asset->order_number!='') ? '<a href="'.config('app.url').'/hardware?order_number='.e($asset->order_number).'">'.e($asset->order_number).'</a>' : '',
