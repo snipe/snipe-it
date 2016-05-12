@@ -47,3 +47,4 @@ app/config/local/session.php
 .couscous
 app/storage/dumps/*
 tests/_data/scenarios
+storage/laravel-backups
