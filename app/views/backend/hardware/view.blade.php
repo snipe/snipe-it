@@ -166,7 +166,7 @@
 
         @if ($asset->model->fieldset)
           <hr>
-          <div class="col-md-12" style="padding-bottom: 5px;"><strong>FIELDSET:</strong> 
+          <div class="col-md-12" style="padding-bottom: 5px;"><strong>FIELDSET:</strong>
             {{{ $asset->model->fieldset->name }}}</div>
           @foreach($asset->model->fieldset->fields as $field)
             <div class="col-md-12" style="padding-bottom: 5px;"><strong>{{{ $field->name }}}:</strong>
@@ -379,9 +379,10 @@
             <tr>
                 <td>{{ $asset->created_at }}</td>
                 <td>
-                @if (isset($asset->adminuser->id)) {{{ $asset->adminuser->fullName() }}}
+                @if ($asset->adminuser) 
+                    {{{ $asset->adminuser->fullName() }}}
                 @else
-                @lang('general.unknown_admin')
+                    @lang('general.unknown_admin')
                 @endif
                 </td>
                 <td>@lang('general.created_asset')</td>
