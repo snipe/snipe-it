@@ -30,7 +30,7 @@
     <!-- bootstrap tables CSS -->
     <link rel="stylesheet" href="{{ asset('assets/css/bootstrap-table.css') }}">
 
-    <link rel="stylesheet" href="{{ elixir('assets/css/app.css') }}">
+    <link rel="stylesheet" href="{{ asset(elixir('assets/css/app.css')) }}">
 
     <style>
     @if (\App\Models\Setting::getSettings()->header_color)
@@ -503,7 +503,7 @@
     </div>
 
 
-    <script src="{{ elixir('assets/js/all.js') }}"></script>
+    <script src="{{ asset(elixir('assets/js/all.js')) }}"></script>
 
     <script>
        $(function () {
