@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "12b97719862dc701bb0c465f434db081",
-    "content-hash": "7e60a755ea83a5007fa6906346c00cc8",
+    "hash": "abd2bfc01b3565b7dd1f6aac9e9311b1",
+    "content-hash": "21294a0f9fd03e194e64084844a1d380",
     "packages": [
         {
             "name": "aws/aws-sdk-php",
@@ -2324,16 +2324,16 @@
         },
         {
             "name": "spatie/laravel-backup",
-            "version": "3.0.0",
+            "version": "3.7.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/spatie/laravel-backup.git",
-                "reference": "1937f83d663257d1066d843cc3b634751bc98cf6"
+                "reference": "d41a03bae8f2b3555f9d77bd6f89133e76c2bcd2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spatie/laravel-backup/zipball/1937f83d663257d1066d843cc3b634751bc98cf6",
-                "reference": "1937f83d663257d1066d843cc3b634751bc98cf6",
+                "url": "https://api.github.com/repos/spatie/laravel-backup/zipball/d41a03bae8f2b3555f9d77bd6f89133e76c2bcd2",
+                "reference": "d41a03bae8f2b3555f9d77bd6f89133e76c2bcd2",
                 "shasum": ""
             },
             "require": {
@@ -2342,7 +2342,7 @@
                 "illuminate/support": "^5.1",
                 "league/flysystem": "^1.0.8",
                 "php": "^5.5|^7.0",
-                "spatie/db-dumper": "^1.1.0",
+                "spatie/db-dumper": "^1.3",
                 "symfony/finder": "^2.7|^3.0"
             },
             "require-dev": {
@@ -2382,7 +2382,7 @@
                 "laravel-backup",
                 "spatie"
             ],
-            "time": "2016-03-07 18:32:17"
+            "time": "2016-05-12 13:34:22"
         },
         {
             "name": "swiftmailer/swiftmailer",
