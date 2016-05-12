@@ -29,6 +29,7 @@
       </div><!-- /.box-header -->
 
       <div class="box-body">
+        <div class="col-md-12">
 
         @if ($backto=='user')
         	<form class="form-horizontal" method="post" action="{{ route('checkin/hardware', array('assetId'=> $asset->id, 'backto'=>'user')) }}" autocomplete="off">
@@ -50,17 +51,17 @@
           </div>
         @endif
 
-        @if ($asset->name)
-          <!-- Asset name -->
+
+        <!-- Asset Name -->
           <div class="form-group {{ $errors->has('name') ? 'error' : '' }}">
             <div class="col-md-3">
               {{ Form::label('name', trans('admin/hardware/form.name')) }}
             </div>
             <div class="col-md-9">
-              <p class="form-control-static">{{ $asset->name }}</p>
+              <input class="form-control" type="text" name="name" id="name" value="{{ Input::old('name', $asset->name) }}" />
+              {!! $errors->first('name', '<span class="alert-msg"><i class="fa fa-times"></i> :message</span>') !!}
             </div>
           </div>
-        @endif
 
         <!-- Status -->
         <div class="form-group {{ $errors->has('status_id') ? 'error' : '' }}">
@@ -101,7 +102,7 @@
         </div>
 
 
-
+        </div>
       </div>
       <div class="box-footer">
         <a class="btn btn-link" href="{{ URL::previous() }}"> {{ trans('button.cancel') }}</a>

@@ -524,6 +524,7 @@ class AssetsController extends Controller
         $asset->last_checkout = null;
         $asset->assigned_to = null;
         $asset->accepted = null;
+        $asset->name = e(Input::get('name'));
 
 
         if (Input::has('status_id')) {
