@@ -59,7 +59,7 @@
 
 
       </form>
-      <p>Backup files are located in: app/storage/dumps</p>
+      <p>Backup files are located in: {{ $path  }}</p>
 
 
 

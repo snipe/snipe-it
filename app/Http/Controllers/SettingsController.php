@@ -416,7 +416,7 @@ class SettingsController extends Controller
     public function getBackups()
     {
 
-        $path = config('app.private_uploads').'/backups';
+        $path = storage_path().'/app/'.config('laravel-backup.destination.path');
 
         $files = array();
 
@@ -475,7 +475,7 @@ class SettingsController extends Controller
     public function downloadFile($filename = null)
     {
         if (!config('app.lock_passwords')) {
-            $path = config('app.private_uploads').'/backups';
+            $path = storage_path().'/app/'.config('laravel-backup.destination.path');
             $file = $path.'/'.$filename;
             if (file_exists($file)) {
                 return Response::download($file);
@@ -504,7 +504,8 @@ class SettingsController extends Controller
 
         if (!config('app.lock_passwords')) {
 
-            $file = config('backup::path').'/'.$filename;
+            $path = storage_path().'/app/'.config('laravel-backup.destination.path');
+            $file = $path.'/'.$filename;
             if (file_exists($file)) {
                 unlink($file);
                 return redirect()->route('settings/backups')->with('success', trans('admin/settings/message.backup.file_deleted'));
