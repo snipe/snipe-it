@@ -65,16 +65,15 @@ class UsersController extends Controller
     {
         $user = new User;
 
-        // Selected groups
-        if (Input::has('groups')) {
-            $userGroups = Group::pluck('name', 'id')->whereIn('id',Input::get('groups'));
+        $groups = Group::pluck('name', 'id');
+
+        if (Input::old('groups')) {
+            $userGroups = Group::whereIn('id', Input::old('groups'))->pluck('name', 'id');
         } else {
             $userGroups = collect();
         }
         
         $permissions = config('permissions');
-        $groups = Group::pluck('name', 'id');
-        $userGroups = $user->groups()->pluck('name', 'id');
         $userPermissions = Helper::selectedPermissionsArray($permissions, Input::old('permissions', array()));
 
         $location_list = Helper::locationsList();
@@ -109,6 +108,7 @@ class UsersController extends Controller
         $data['password'] =  Input::get('password');
 
         if ($user->save()) {
+            $user->groups()->sync(Input::get('groups'));
             if ((Input::get('email_user') == 1) && (Input::has('email'))) {
               // Send the credentials through email
                 $data = array();
@@ -269,6 +269,7 @@ class UsersController extends Controller
             $user->manager_id = e(Input::get('manager_id'));
             $user->notes = e(Input::get('notes'));
             $user->permissions = json_encode(Input::get('permission'));
+            $user->groups()->sync(Input::get('groups'));
 
         if ($user->manager_id == "") {
             $user->manager_id = null;
