@@ -5,6 +5,7 @@ use App\Http\Requests\SetupUserRequest;
 use App\Http\Requests\AssetFileRequest;
 use App\Helpers\Helper;
 use App\Models\Accessory;
+use App\Models\LicenseSeat;
 use App\Models\Actionlog;
 use App\Models\Asset;
 use App\Models\Group;
@@ -29,6 +30,7 @@ use Str;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use URL;
 use View;
+use Request;
 
 /**
  * This controller handles all actions related to Users for
@@ -388,9 +390,12 @@ class UsersController extends Controller
         } else {
             $statuslabel_list = Helper::statusLabelList();
             $user_raw_array = array_keys(Input::get('edit_user'));
+            $licenses = DB::table('license_seats')->whereIn('assigned_to', $user_raw_array)->get();
 
-            $users = User::whereIn('id', $user_raw_array)->with('groups');
-            $users = Company::scopeCompanyables($users)->get();
+            //print_r($licenses);
+
+            $users = User::whereIn('id', $user_raw_array)->with('groups', 'assets', 'licenses','accessories')->get();
+           // $users = Company::scopeCompanyables($users)->get();
 
             return View::make('users/confirm-bulk-delete', compact('users', 'statuslabel_list'));
         }
@@ -425,11 +430,14 @@ class UsersController extends Controller
 
             if (!config('app.lock_passwords')) {
 
+                $users = User::whereIn('id', $user_raw_array)->get();
                 $assets = Asset::whereIn('assigned_to', $user_raw_array)->get();
                 $accessories = DB::table('accessories_users')->whereIn('assigned_to', $user_raw_array)->get();
+                $licenses = DB::table('license_seats')->whereIn('assigned_to', $user_raw_array)->get();
+                $license_array = array();
+                $accessory_array = array();
 
-                $users = User::whereIn('id', $user_raw_array);
-                $users = Company::scopeCompanyables($users)->delete();
+
 
                 foreach ($assets as $asset) {
 
@@ -441,10 +449,10 @@ class UsersController extends Controller
                     $logaction->checkedout_to = $asset->assigned_to;
                     $logaction->asset_type = 'hardware';
                     $logaction->user_id = Auth::user()->id;
-                    $logaction->note = 'Bulk checkin';
-                    $log = $logaction->logaction('checkin from');
+                    $logaction->note = 'Bulk checkin asset and delete user';
+                    $logaction->logaction('checkin from');
 
-                    $update_assets = Asset::whereIn('id', $asset_array)->update(
+                    Asset::whereIn('id', $asset_array)->update(
                         array(
                                 'status_id' => e(Input::get('status_id')),
                                 'assigned_to' => null,
@@ -453,22 +461,39 @@ class UsersController extends Controller
                 }
 
                 foreach ($accessories as $accessory) {
-                    $accessory_array[] = $accessory->id;
+                    $accessory_array[] = $accessory->accessory_id;
                     // Update the asset log
                     $logaction = new Actionlog();
                     $logaction->accessory_id = $accessory->id;
                     $logaction->checkedout_to = $accessory->assigned_to;
                     $logaction->asset_type = 'accessory';
                     $logaction->user_id = Auth::user()->id;
-                    $logaction->note = 'Bulk checkin';
-                    $log = $logaction->logaction('checkin from');
+                    $logaction->note = 'Bulk checkin accessory and delete user';
+                    $logaction->logaction('checkin from');
 
-                    $update_accessories = DB::table('accessories_users')->whereIn('id', $accessory_array)->update(
-                        array(
-                                'assigned_to' => null,
-                            )
-                    );
+
                 }
+
+                foreach ($licenses as $license) {
+                    $license_array[] = $license->id;
+                    // Update the asset log
+                    $logaction = new Actionlog();
+                    $logaction->accessory_id = $license->id;
+                    $logaction->checkedout_to = $license->assigned_to;
+                    $logaction->asset_type = 'software';
+                    $logaction->user_id = Auth::user()->id;
+                    $logaction->note = 'Bulk checkin license and delete user';
+                    $logaction->logaction('checkin from');
+                }
+                
+                LicenseSeat::whereIn('id', $license_array)->update(['assigned_to' => NULL]);
+
+                foreach ($users as $user) {
+                    $user->accessories()->sync(array());
+                    $user->delete();
+                }
+
+
 
 
                 return redirect()->route('users')->with('success', 'Your selected users have been deleted and their assets have been updated.');
@@ -476,8 +501,6 @@ class UsersController extends Controller
                 return redirect()->route('users')->with('error', 'Bulk delete is not enabled in this installation');
             }
 
-            /** @noinspection PhpUnreachableStatementInspection Known to be unreachable but kept following discussion: https://github.com/snipe/snipe-it/pull/1423 */
-            return redirect()->route('users')->with('error', 'An error has occurred');
         }
     }
 
@@ -725,7 +748,7 @@ class UsersController extends Controller
 
                 try {
                     // Check if this email already exists in the system
-                    $user = DB::table('users')->where('username', $row[2])->first();
+                    $user = User::where('username', $row[2])->first();
                     if ($user) {
                         $duplicates .= $row[2] . ', ';
                     } else {
@@ -884,7 +907,7 @@ class UsersController extends Controller
 
             $rows[] = array(
                 'id'         => $user->id,
-                'checkbox'      =>'<div class="text-center hidden-xs hidden-sm"><input type="checkbox" name="edit_user['.e($user->id).']" class="one_required"></div>',
+                'checkbox'      => ($status!='deleted') ? '<div class="text-center hidden-xs hidden-sm"><input type="checkbox" name="edit_user['.e($user->id).']" class="one_required"></div>' : '',
                 'name'          => '<a title="'.e($user->fullName()).'" href="../admin/users/'.e($user->id).'/view">'.e($user->fullName()).'</a>',
                 'email'         => ($user->email!='') ?
                             '<a href="mailto:'.e($user->email).'" class="hidden-md hidden-lg">'.e($user->email).'</a>'

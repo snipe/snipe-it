@@ -42,12 +42,14 @@
                'route' => ['users/bulkedit'],
                'class' => 'form-inline' ]) }}
 
+            @if (Input::get('status')!='deleted')
                <div id="toolbar">
                  <select name="bulk_actions" class="form-control select2" style="width: 200px;">
-                     <option value="delete">Bulk Delete</option>
+                     <option value="delete">Bulk Checkin &amp; Delete</option>
                  </select>
                  <button class="btn btn-default" id="bulkEdit" disabled>Go</button>
              </div>
+            @endif
 
 
              <table
@@ -62,7 +64,11 @@
               data-cookie-id-table="userTableDisplay-{{ config('version.hash_version') }}">
                  <thead>
                      <tr>
-                         <th data-class="hidden-xs hidden-sm" data-switchable="false" data-searchable="false" data-sortable="false" data-field="checkbox"><div class="text-center"><input type="checkbox" id="checkAll" style="padding-left: 0px;" style="hidden-xs hidden-sm"></div></th>
+                         <th data-class="hidden-xs hidden-sm" data-switchable="false" data-searchable="false" data-sortable="false" data-field="checkbox">
+                             @if (Input::get('status')!='deleted')
+                                 <div class="text-center"><input type="checkbox" id="checkAll" style="padding-left: 0px;" style="hidden-xs hidden-sm"></div>
+                             @endif
+                         </th>
                          <th data-switchable="true" data-sortable="true" data-field="id" data-visible="false">{{ trans('general.id') }}</th>
                          <th data-switchable="true" data-sortable="false" data-field="companyName" data-visible="false">{{ trans('admin/companies/table.title') }}</th>
                          <th data-switchable="true" data-sortable="true" data-field="employee_num" data-visible="false">{{ trans('admin/users/table.employee_num') }}</th>

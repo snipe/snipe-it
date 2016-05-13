@@ -18,6 +18,7 @@ $factory->defineAs(App\Models\Asset::class, 'asset', function (Faker\Generator $
     'rtd_location_id' => $faker->numberBetween(1,5),
     'serial' => $faker->uuid,
     'status_id' => 1,
+    'user_id' => 1,
     'asset_tag' => $faker->unixTime('now'),
     'notes'   => $faker->sentence,
     'purchase_date' 		=> $faker->dateTime(),

@@ -2,7 +2,7 @@
 
 {{-- Page title --}}
 @section('title')
-Bulk Edit/Delete
+Bulk Checkin &amp; Delete
 @parent
 @stop
 
@@ -45,14 +45,22 @@ Bulk Edit/Delete
                                   <th class="col-md-1"></th>
                                   <th class="col-md-6">Name</th>
                                   <th class="col-md-5">Groups</th>
+                                  <th class="col-md-5">Assets</th>
+                                  <th class="col-md-5">Accessories</th>
+                                  <th class="col-md-5">Licenses</th>
                               </tr>
                           </thead>
                           <tfoot>
                               <tr>
-                                  <td colspan="3" class="warning">
+                                  <td colspan="6" class="warning">
                                       {{ Form::select('status_id', $statuslabel_list , Input::old('status_id'), array('class'=>'select2', 'style'=>'width:250px')) }}
                                       <label>Update all assets for these users to this status</label>
                               </td>
+                              </tr>
+                              <tr>
+                                  <td colspan="6" class="warning">
+                                      <label><input type="checkbox" name="edit_user['.e($user->id).']" checked> Check in all properties associated with these users</label>
+                                  </td>
                               </tr>
                           </tfoot>
                           <tbody>
@@ -65,6 +73,7 @@ Bulk Edit/Delete
                                               <input type="checkbox" name="edit_user[]" value="{{ $user->id }}" disabled>
                                           @endif
                                       </td>
+
                                       <td>
                                           <span{{ (Auth::user()->id==$user->id ? ' style="text-decoration: line-through"' : '') }}>{{ $user->fullName() }} ({{ $user->username }})</span>
 
@@ -72,8 +81,23 @@ Bulk Edit/Delete
 
                                       </td>
                                       <td>
-
+                                          @foreach ($user->groups as $group)
+                                              <a href=" {{ config('app.url')  }}/admin/groups/{{ $group->id }}'/edit" class="label  label-default">
+                                              {{ $group->name  }}
+                                              </a>
+                                          @endforeach
                                       </td>
+
+                                      <td>
+                                         {{ number_format($user->assets->count())  }}
+                                      </td>
+                                      <td>
+                                          {{ number_format($user->accessories->count())  }}
+                                      </td>
+                                      <td>
+                                          {{ number_format($user->licenses->count())  }}
+                                      </td>
+
                                   </tr>
                               @endforeach
                           </tbody>

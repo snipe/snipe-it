@@ -7,6 +7,7 @@ use App\Models\Actionlog;
 use App\Models\Company;
 use App\Models\Setting;
 use App\Models\User;
+use Carbon\Carbon;
 use Config;
 use DB;
 use Input;
@@ -306,16 +307,16 @@ class AccessoriesController extends Controller
 
         $accessory->users()->attach($accessory->id, array(
         'accessory_id' => $accessory->id,
+        'created_at' => Carbon::now(),
+        'user_id' => Auth::user()->id,
         'assigned_to' => e(Input::get('assigned_to'))));
-
-        $admin_user = Auth::user();
 
         $logaction = new Actionlog();
         $logaction->accessory_id = $accessory->id;
         $logaction->checkedout_to = $accessory->assigned_to;
         $logaction->asset_type = 'accessory';
-        $logaction->location_id = Auth::user()->location_id;
-        $logaction->user_id = $admin_user->id;
+        $logaction->location_id = $user->location_id;
+        $logaction->user_id = Auth::user()->id;
         $logaction->note = e(Input::get('note'));
 
 

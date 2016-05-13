@@ -438,10 +438,12 @@
                   <tr>
                       <td>{{ $asset->created_at }}</td>
                       <td>
-                      @if (isset($asset->adminuser->id)) {{ $asset->adminuser->fullName() }}
-                      @else
-                      {{ trans('general.unknown_admin') }}
-                      @endif
+                          @if ($asset->adminuser)
+                              {{ $asset->adminuser->fullName() }}
+                          @else
+                              @trans('general.unknown_admin')
+                          @endif
+
                       </td>
                       <td>{{ trans('general.created_asset') }}</td>
                       <td></td>

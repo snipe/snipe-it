@@ -62,12 +62,21 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     }
 
     public function isSuperUser() {
-        $user_permissions = json_decode($this->permissions, true);
-        $user_groups = $this->groups();
+        if (!$user_permissions = json_decode($this->permissions, true)) {
+            return false;
+        }
+        $group_array = array();
+        foreach ($this->groups() as $user_group) {
+            $group_permissions = json_decode($user_group->permissions, true);
+            $group_array[] = $group_permissions;
+        }
 
         if ((array_key_exists('superuser', $user_permissions)) && ($user_permissions['superuser']=='1')) {
             return true;
         } else {
+            if ((array_key_exists('superuser', $group_array)) && ($group_array['superuser']=='1')) {
+                return true;
+            }
             return false;
         }
 

@@ -132,7 +132,12 @@
                             <a href="{{ route('delete/user', $user->id) }}" style="width: 100%;" class="btn btn-sm btn-warning">{{ trans('button.delete') }}</a>
                         </div>
                         <div class="col-md-12" style="padding-top: 5px;">
-                            <a href="{{ route('delete/user', $user->id) }}" style="width: 100%;" class="btn btn-sm btn-danger">{{ trans('button.checkin_and_delete') }}</a>
+                            <form action="{{ route('users/bulkedit') }}" method="POST">
+                                <!-- CSRF Token -->
+                                <input type="hidden" name="_token" value="{{ csrf_token() }}" />
+                                <input type="hidden" name="edit_user[{{ $user->id }}]" value="{{ $user->id }}" />
+                                <button style="width: 100%;" class="btn btn-sm btn-danger">{{ trans('button.checkin_and_delete') }}</button>
+                            </form>
                         </div>
                     @else
                         <div class="col-md-12" style="padding-top: 5px;">
