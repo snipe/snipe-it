@@ -8,7 +8,7 @@ return [
          * The name of this application. You can use this name to monitor
          * the backups.
          */
-        'name' => env('APP_URL'),
+        'name' => 'backups',
 
         'source' => [
 
@@ -29,8 +29,8 @@ return [
                  * You can specify individual files as well.
                  */
                 'exclude' => [
-                    base_path('vendor'),
-                    base_path('node_modules'),
+//                    base_path('vendor'),
+//                    base_path('node_modules'),
                 ],
 
                 /*
@@ -109,7 +109,7 @@ return [
      */
     'monitorBackups' => [
         [
-            'name' => env('APP_URL'),
+            'name' => 'backups',
             'disks' => ['local'],
             'newestBackupsShouldNotBeOlderThanDays' => 1,
             'storageUsedMayNotBeHigherThanMegabytes' => 5000,
@@ -151,8 +151,8 @@ return [
          * Here you can specify how emails should be sent.
          */
         'mail' => [
-            'from' => 'your@email.com',
-            'to'   => 'your@email.com',
+            'from' => env('MAIL_FROM_ADDR'), 'your@email.com'),
+            'to'   => env('MAIL_FROM_ADDR'), 'your@email.com'),
         ],
 
         /*
