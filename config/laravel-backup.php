@@ -151,8 +151,8 @@ return [
          * Here you can specify how emails should be sent.
          */
         'mail' => [
-            'from' => env('MAIL_FROM_ADDR'), 'your@email.com'),
-            'to'   => env('MAIL_FROM_ADDR'), 'your@email.com'),
+            'from' => env('MAIL_FROM_ADDR', 'your@email.com'),
+            'to'   => env('MAIL_FROM_ADDR', 'your@email.com'),
         ],
 
         /*
