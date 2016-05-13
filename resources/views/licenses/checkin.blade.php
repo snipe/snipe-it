@@ -6,16 +6,15 @@
 @parent
 @stop
 
+@section('header_right')
+    <a href="{{ URL::previous() }}" class="btn btn-primary pull-right">
+        {{ trans('general.back') }}</a>
+@stop
+
 {{-- Page content --}}
 @section('content')
 
-<div class="row header">
-    <div class="col-md-12">
-        <a href="{{ URL::previous() }}" class="btn-flat gray pull-right">
-        <i class="fa fa-arrow-left icon-white"></i> {{ trans('general.back') }}</a>
-        <h3> {{ trans('admin/licenses/general.checkin') }} </h3>
-    </div>
-</div>
+
 
 <div class="row form-wrapper">
 <!-- left column -->
