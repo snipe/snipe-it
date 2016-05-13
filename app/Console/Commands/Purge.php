@@ -17,7 +17,7 @@ use \App\Models\User;
 use \App\Models\Supplier;
 use \App\Models\Manufacturer;
 use \App\Models\Depreciation;
-use \App\Models\StatusLabel;
+use \App\Models\Statuslabel;
 
 class Purge extends Command
 {
@@ -158,7 +158,7 @@ class Purge extends Command
                 $manufacturer->forceDelete();
             }
 
-            $status_labels = StatusLabel::whereNotNull('deleted_at')->withTrashed()->get();
+            $status_labels = Statuslabel::whereNotNull('deleted_at')->withTrashed()->get();
             $this->info($status_labels->count().' status labels purged.');
             foreach ($status_labels as $status_label) {
                 $this->info('- Status Label "'.$status_label->name.'" deleted.');
