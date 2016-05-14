@@ -97,12 +97,12 @@
                 method: "POST",
                 url: "{{ route('api.customfields.order', $custom_fieldset->id)  }}",
                 data: $("#sort tbody").sortable('serialize', {
-                   // key:
                 }),
 
                 success: function(data) {
                     //console.log('ajax fired');
                     // do some stuff here
+
 
                 }
       	    });
