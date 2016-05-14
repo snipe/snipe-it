@@ -34,7 +34,6 @@ class Kernel extends HttpKernel
             \Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse::class,
             \App\Http\Middleware\VerifyCsrfToken::class,
             \App\Http\Middleware\CheckLocale::class,
-            \App\Http\Middleware\CheckForSetup::class,
         ],
 
         'api' => [

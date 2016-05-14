@@ -7,35 +7,29 @@ use Config;
 use Route;
 use Schema;
 use App\Models\User;
+use App\Models\Setting;
 
 class CheckForSetup
 {
     public function handle($request, Closure $next, $guard = null)
     {
 
-        try {
+            if (Setting::setupCompleted()) {
 
-            $users_table_exists = Schema::hasTable('users');
-            $settings_table_exists = Schema::hasTable('settings');
-
-            if ($users_table_exists && $settings_table_exists) {
-                $usercount = User::withTrashed()->count();
-                if (($usercount > 0) && (Route::is('setup*'))) {
+                if  ($request->is('setup*')) {
                     return redirect(config('app.url'));
                 } else {
                     return $next($request);
                 }
+
             } else {
+                if (!$request->is('setup*')) {
+                    return redirect(config('app.url').'/setup')->with('Request',$request);
+                }
+
                 return $next($request);
+
             }
-
-
-        } catch (\Exception $e) {
-            return $next($request);
-        }
-
-
-
 
 
     }

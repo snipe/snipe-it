@@ -3,6 +3,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Watson\Validating\ValidatingTrait;
+use Schema;
 
 class Setting extends Model
 {
@@ -38,6 +39,28 @@ class Setting extends Model
             $static_cache = Setting::first();
         }
         return $static_cache;
+    }
+
+    public static function setupCompleted() {
+        
+            $users_table_exists = Schema::hasTable('users');
+            $settings_table_exists = Schema::hasTable('settings');
+
+
+            if ($users_table_exists && $settings_table_exists) {
+                $usercount = User::withTrashed()->count();
+
+                if ($usercount > 0) {
+                    return true;
+                }
+                return false;
+            } else {
+                return false;
+            }
+        return false;
+
+
+
     }
 
     public function lar_ver()
