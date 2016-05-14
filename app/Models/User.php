@@ -42,6 +42,9 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
   // This is very coarse and should be changed
     public function hasAccess($section)
     {
+        if ($this->isSuperUser()) {
+            return true;
+        }
         $user_permissions = json_decode($this->permissions, true);
         $user_groups = $this->groups();
 
@@ -65,6 +68,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
         if (!$user_permissions = json_decode($this->permissions, true)) {
             return false;
         }
+
         $group_array = array();
         foreach ($this->groups() as $user_group) {
             $group_permissions = json_decode($user_group->permissions, true);
