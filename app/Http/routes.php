@@ -148,6 +148,16 @@ Route::group([ 'prefix' => 'api', 'middleware' => 'auth' ], function () {
 
         Route::resource('/', 'SuppliersController');
     });
+
+    /*-- Custom fields API --*/
+    Route::group([ 'prefix' => 'custom_fields' ], function () {
+        Route::post(
+            '{fieldsetID}/order',
+            [ 'as' => 'api.customfields.order', 'uses' => 'CustomFieldsController@postReorder' ]
+        );
+    });
+
+
 });
 
 /*

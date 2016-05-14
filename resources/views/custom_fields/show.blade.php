@@ -41,7 +41,7 @@
                <tfoot>
                    <tr>
                      <td colspan="5" class="text-right">
-                       {{ Form::open(['route' => ["admin.custom_fields.associate",$custom_fieldset->id], 'class'=>'form-horizontal']) }}
+                       {{ Form::open(['route' => ["admin.custom_fields.associate",$custom_fieldset->id], 'class'=>'form-horizontal', 'id' => 'ordering']) }}
                        {{ Form::checkbox("required","on") }}
                        {{ trans('admin/custom_fields/general.required') }}
                        {{ Form::text("order",$maxid)}}
@@ -52,8 +52,8 @@
                    </tr>
                </tfoot>
                <tbody>
-                 @foreach($custom_fieldset->fields AS $field)
-                 <tr class="cansort" data-index="{{ $field->pivot->custom_field_id }}">  
+                 @foreach($custom_fieldset->fields as $field)
+                 <tr class="cansort" data-index="{{ $field->pivot->custom_field_id }}" id="item_{{ $field->pivot->custom_field_id }}">
                    <td>
                      <!-- drag handle -->
                          <span class="handle">
@@ -94,11 +94,17 @@
           $('td.index', ui.item.parent()).each(function (i) {
               $(this).html(i + 1);
               $.ajax({
-      	        url: "{{config('app.url') }}/api/custom_fields/order",
-      	        success: function(data) {
-                // do some stuff here
+                method: "POST",
+                url: "{{ route('api.customfields.order', $custom_fieldset->id)  }}",
+                data: $("#sort tbody").sortable('serialize', {
+                   // key:
+                }),
 
-      	        }
+                success: function(data) {
+                    //console.log('ajax fired');
+                    // do some stuff here
+
+                }
       	    });
           });
       };

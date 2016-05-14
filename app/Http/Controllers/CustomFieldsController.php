@@ -250,4 +250,27 @@ class CustomFieldsController extends Controller
             return redirect()->route("admin.custom_fields.index")->with("error", trans('admin/custom_fields/message.fieldset.delete.in_use')); //->with("models",$models);
         }
     }
+
+
+    /**
+     * Reorder the custom fields within a fieldset
+     *
+     * @author [Brady Wetherington] [<uberbrady@gmail.com>]
+     * @param  int  $id
+     * @since [v3.0]
+     * @return Array
+     */
+    public function postReorder($id) {
+        $fieldset=CustomFieldset::find($id);
+        $fields = array();
+
+        $items = Input::get('item');
+        foreach ($fieldset->fields as $field) {
+            $value = array_shift($items);
+            $fields[$field->id] = ['required' => $field->pivot->required, 'order' => $value];
+        }
+        return $fieldset->fields()->sync($fields);
+
+
+    }
 }
