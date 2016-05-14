@@ -50,7 +50,8 @@ class SettingsController extends Controller
             $start_settings['db_error'] = $e->getMessage();
         }
 
-        $protocol = stripos($_SERVER['SERVER_PROTOCOL'], 'https') === true ? 'https://' : 'http://';
+        $protocol = $_SERVER['HTTPS'] == "on" ? 'https://' : 'http://';
+
 
         $pageURL = $protocol;
         if ($_SERVER["SERVER_PORT"] != "80") {
@@ -164,6 +165,8 @@ class SettingsController extends Controller
         $user->last_name = e(Input::get('last_name'));
         $user->email = $data['email'] = e(Input::get('email'));
         $user->activated = 1;
+        $permissions = array('superuser' => 1);
+        $user->permissions = json_encode($permissions);
         $user->username = $data['username'] = e(Input::get('username'));
         $user->password = bcrypt(Input::get('password'));
         $data['password'] =  Input::get('password');
