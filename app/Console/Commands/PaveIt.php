@@ -56,7 +56,9 @@ class PaveIt extends Command
           \DB::statement('drop table IF EXISTS custom_fieldsets');
           \DB::statement('drop table IF EXISTS depreciations');
           \DB::statement('drop table IF EXISTS groups');
-          //\DB::statement('drop table IF EXISTS history');
+          \DB::statement('drop table IF EXISTS history');
+          \DB::statement('drop table IF EXISTS components');
+          \DB::statement('drop table IF EXISTS components_assets');
           \DB::statement('drop table IF EXISTS license_seats');
           \DB::statement('drop table IF EXISTS licenses');
           \DB::statement('drop table IF EXISTS locations');
