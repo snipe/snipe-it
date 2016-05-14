@@ -12,7 +12,7 @@ require('laravel-elixir-codeception');
  */
 
 elixir(function(mix) {
-    mix.less(['AdminLTE.less','skins/skin-blue.less','ekko-lightbox.less','overrides.less'],'public/assets/css');
+    mix.less(['AdminLTE.less','skins/skin-blue.less','ekko-lightbox.less','overrides.less','fontawesome-animated.css'],'public/assets/css');
 
 
     mix.scripts([
