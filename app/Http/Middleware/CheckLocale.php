@@ -5,6 +5,7 @@ namespace App\Http\Middleware;
 use Closure;
 use Config;
 use Route;
+use Schema;
 use App\Models\Setting;
 
 class CheckLocale
@@ -20,19 +21,22 @@ class CheckLocale
 
     public function handle($request, Closure $next, $guard = null)
     {
+        if (Schema::hasTable('settings')) {
+            // User's preference
+            if (($request->user()) && ($request->user()->locale)) {
+                \App::setLocale($request->user()->locale);
 
-      // User's preference
-        if (($request->user()) && ($request->user()->locale)) {
-            \App::setLocale($request->user()->locale);
+                // App setting preference
+            } elseif ((Setting::getSettings()) &&  (Setting::getSettings()->locale!='')) {
+                \App::setLocale(Setting::getSettings()->locale);
 
-        // App setting preference
-        } elseif ((Setting::getSettings()) &&  (Setting::getSettings()->locale!='')) {
-            \App::setLocale(Setting::getSettings()->locale);
-
-        // Default app setting
-        } else {
-            \App::setLocale(config('app.locale'));
+                // Default app setting
+            } else {
+                \App::setLocale(config('app.locale'));
+            }
         }
+        \App::setLocale(config('app.locale'));
+
         return $next($request);
     }
 }
