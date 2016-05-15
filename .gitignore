@@ -48,3 +48,4 @@ app/config/local/session.php
 app/storage/dumps/*
 tests/_data/scenarios
 storage/laravel-backups
+storage/private_uploads/users/*
