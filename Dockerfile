@@ -1,4 +1,4 @@
-FROM ubuntu:wily
+FROM ubuntu:trusty
 MAINTAINER Brady Wetherington <uberbrady@gmail.com>
 
 RUN apt-get update && apt-get install -y \
@@ -12,7 +12,8 @@ php5-gd \
 patch \
 curl \
 vim \
-git 
+git \
+mysql-client
 
 RUN php5enmod mcrypt
 RUN php5enmod gd
@@ -28,6 +29,7 @@ RUN echo export APACHE_RUN_GROUP=staff >> /etc/apache2/envvars
 COPY docker/000-default.conf /etc/apache2/sites-enabled/000-default.conf
 
 #SSL
+RUN mkdir -p /var/lib/snipeit/ssl
 COPY docker/001-default-ssl.conf /etc/apache2/sites-enabled/001-default-ssl.conf
 #COPY docker/001-default-ssl.conf /etc/apache2/sites-available/001-default-ssl.conf
 
@@ -43,12 +45,21 @@ RUN a2enmod rewrite
 WORKDIR /var/www/html
 
 #Append to bootstrap file (less brittle than 'patch')
-RUN sed -i 's/return $app;/$env="production";\nreturn $app;/' bootstrap/start.php
+# RUN sed -i 's/return $app;/$env="production";\nreturn $app;/' bootstrap/start.php
 
 #copy all configuration files
-COPY docker/*.php /var/www/html/app/config/production/
+# COPY docker/*.php /var/www/html/app/config/production/
+COPY docker/docker.env /var/www/html/.env
 
 RUN chown -R docker /var/www/html
+
+RUN \
+	rm -r "/var/www/html/storage/private_uploads"      && ln -fs "/var/lib/snipeit/data/private_uploads"   "/var/www/html/storage/private_uploads"      && \
+	mkdir -p "/var/www/html/public/uploads" && \
+	rm -rf "/var/www/html/public/uploads/avatars"   && ln -fs "/var/lib/snipeit/data/uploads/avatars"   "/var/www/html/public/uploads/avatars"   && \
+	rm -rf "/var/www/html/public/uploads/models"    && ln -fs "/var/lib/snipeit/data/uploads/models"    "/var/www/html/public/uploads/models"    && \
+	rm -rf "/var/www/html/public/uploads/suppliers" && ln -fs "/var/lib/snipeit/data/uploads/suppliers" "/var/www/html/public/uploads/suppliers" && \
+	rm -r "/var/www/html/storage/backups"        && ln -fs "/var/lib/snipeit/dumps"                  "/var/www/html/storage/backups"
 
 ############## DEPENDENCIES via COMPOSER ###################
 
@@ -66,6 +77,10 @@ RUN cd /var/www/html;composer install
 #COPY docker/app_install.exp /tmp/app_install.exp
 #RUN chmod +x /tmp/app_install.exp
 #RUN /tmp/app_install.exp
+
+############### DATA VOLUME #################
+
+VOLUME [/var/lib/snipeit]
 
 ##### START SERVER
 
