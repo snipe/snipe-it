@@ -687,7 +687,7 @@ Route::group([ 'prefix' => 'admin','middleware' => ['web','auth','authorize:admi
 |
 |
 */
-Route::group([ 'prefix' => 'account', 'middleware' => 'auth' ], function () {
+Route::group([ 'prefix' => 'account', 'middleware' => ['web', 'auth']], function () {
 
     # Profile
     Route::get('profile', [ 'as' => 'profile', 'uses' => 'ProfileController@getIndex' ]);
@@ -787,11 +787,10 @@ Route::group(['middleware' => ['web','auth','authorize:reports']], function () {
 |
 |
 */
-Route::group([ 'prefix' => 'setup' ], function () {
+Route::group([ 'prefix' => 'setup', 'middleware' => 'web'], function () {
     Route::get(
         'user',
         [
-        'middleware' => 'web',
         'as'  => 'setup.user',
         'uses' => 'SettingsController@getSetupUser' ]
     );
@@ -799,7 +798,6 @@ Route::group([ 'prefix' => 'setup' ], function () {
     Route::post(
         'user',
         [
-        'middleware' => 'web',
         'as'  => 'setup.user.save',
         'uses' => 'SettingsController@postSaveFirstAdmin' ]
     );
@@ -808,7 +806,6 @@ Route::group([ 'prefix' => 'setup' ], function () {
     Route::get(
         'migrate',
         [
-        'middleware' => 'web',
         'as'  => 'setup.migrate',
         'uses' => 'SettingsController@getSetupMigrate' ]
     );
@@ -816,7 +813,6 @@ Route::group([ 'prefix' => 'setup' ], function () {
     Route::get(
         'done',
         [
-        'middleware' => 'web',
         'as'  => 'setup.done',
         'uses' => 'SettingsController@getSetupDone' ]
     );
@@ -824,7 +820,6 @@ Route::group([ 'prefix' => 'setup' ], function () {
     Route::get(
         'mailtest',
         [
-        'middleware' => 'web',
         'as'  => 'setup.mailtest',
         'uses' => 'SettingsController@ajaxTestEmail' ]
     );
@@ -833,7 +828,6 @@ Route::group([ 'prefix' => 'setup' ], function () {
     Route::get(
         '/',
         [
-        'middleware' => 'web',
         'as'  => 'setup',
         'uses' => 'SettingsController@getSetupIndex' ]
     );
@@ -845,7 +839,7 @@ Route::get(
     '/',
     [
     'as' => 'home',
-    'middleware' => 'auth',
+    'middleware' => ['web', 'auth'],
     'uses' => 'DashboardController@getIndex' ]
 );
 
