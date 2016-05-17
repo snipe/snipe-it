@@ -9,9 +9,9 @@ return array(
     'cost'				=> 'Purchase Cost',
     'create'                             => 'Create Component',
     'edit'                             => 'Edit Component',
-    'date'					=> 'Purchase Date',
-    'order'					=> 'Order Number',
-    'remaining' 			             => 'Remaining',
-    'total' 			                 => 'Total',
+    'date'					=> 'Datum nákupu',
+    'order'					=> 'Číslo objednávky',
+    'remaining' 			             => 'Zbývá',
+    'total' 			                 => 'Celkem',
     'update'                            => 'Update Component',
 );

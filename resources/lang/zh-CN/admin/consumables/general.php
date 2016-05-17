@@ -7,6 +7,7 @@ return array(
     'cost'				=> '采购成本',
     'create'                             => '创建耗材',
     'date'					=> '采购日期',
+    'item_no'               => 'Item No.',
     'order'					=> '订单号',
     'remaining' 			             => '剩余',
     'total' 			                 => '总计',

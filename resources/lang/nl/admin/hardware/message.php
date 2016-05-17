@@ -52,7 +52,7 @@ return array(
         'error'   		=> 'Product is niet ingecheckt, probeer het opnieuw',
         'success' 		=> 'Product is met succes ingecheckt.',
         'user_does_not_exist' => 'De gebruiker is ongeldig. Probeer het opnieuw.',
-        'already_checked_in'  => 'That asset is already checked in.',
+        'already_checked_in'  => 'Product is reeds ingecheckt.',
 
     ),
 

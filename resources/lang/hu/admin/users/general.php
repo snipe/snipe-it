@@ -3,9 +3,9 @@
 
 return array(
 
-    'assets_user'       => 'Assets assigned to :name',
-    'current_assets'    => 'Assets currently checked out to this user',
-    'clone'             => 'Clone User',
+    'assets_user'       => 'Eszköz(ök) hozzárendelve: :name',
+    'current_assets'    => 'Az eszköz jelenleg ki van adva ennek a felhasználónak',
+    'clone'             => 'Felhasználó másolása',
     'contact_user'      => 'Contact :name',
     'edit'              => 'Felhasználó szerkesztése',
     'filetype_info'     => 'Allowed filetypes are png, gif, jpg, jpeg, doc, docx, pdf, txt, zip, and rar.',

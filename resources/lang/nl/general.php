@@ -63,6 +63,7 @@
     'generate'				=> 'Genereer',
     'groups'				=> 'Groepen',
     'gravatar_email'        => 'Gravatar E-mailadres',
+    'history'  			    => 'History',
     'history_for'  			=> 'Geschiedenis van',
     'id'  					=> 'ID',
     'image_delete'         	=> 'Afbeelding verwijderen',

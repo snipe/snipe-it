@@ -3,7 +3,8 @@
 return array(
 
     'does_not_exist' => 'Tidak wujud.',
-    'assoc_users'	 => 'Kategori ini berkait dengan model lain dan tidak boleh dipadam. Sila kemaskini model anda supaya ianya tidak dirujuk dengan kategori lain dan cuba sekali lagi.',
+    'assoc_models'	 => 'This category is currently associated with at least one model and cannot be deleted. Please update your models to no longer reference this category and try again. ',
+    'assoc_items'	 => 'This category is currently associated with at least one :asset_type and cannot be deleted. Please update your :asset_type  to no longer reference this category and try again. ',
 
     'create' => array(
         'error'   => 'Kategori tidak dapat dicipta, Sila cuba lagi.',

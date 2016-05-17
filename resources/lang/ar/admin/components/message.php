@@ -2,34 +2,34 @@
 
 return array(
 
-    'does_not_exist' => 'Component does not exist.',
+    'does_not_exist' => 'المكون غير موجود.',
 
     'create' => array(
-        'error'   => 'Component was not created, please try again.',
-        'success' => 'Component created successfully.'
+        'error'   => 'لم يتم إنشاء المكون، الرجاء المحاولة مرة أخرى.',
+        'success' => 'تم إنشاء المكون بنجاح.'
     ),
 
     'update' => array(
-        'error'   => 'Component was not updated, please try again',
-        'success' => 'Component updated successfully.'
+        'error'   => 'لم يتم تحديث المكون، الرجاء المحاولة مرة أخرى',
+        'success' => 'تم تحديث المكون بنجاح.'
     ),
 
     'delete' => array(
-        'confirm'   => 'Are you sure you wish to delete this component?',
-        'error'   => 'There was an issue deleting the component. Please try again.',
-        'success' => 'The component was deleted successfully.'
+        'confirm'   => 'هل أنت متأكد من رغبتك في حذف هذا المكون؟',
+        'error'   => 'حدثت مشكلة اثناء عملية حذف المكون. رجاءً المحاولة مرة اُخرى.',
+        'success' => 'تم حذف المكون بنجاح.'
     ),
 
      'checkout' => array(
-        'error'   		=> 'Component was not checked out, please try again',
-        'success' 		=> 'Component checked out successfully.',
-        'user_does_not_exist' => 'That user is invalid. Please try again.'
+        'error'   		=> 'لم تتم عملة اخراج المكون، الرجاء المحاولة مرة اخرى',
+        'success' 		=> 'تم إخراج المكون بنجاح.',
+        'user_does_not_exist' => 'هذا المستخدم خاطئ، الرجاء المحاولة مرة أخرى.'
     ),
 
     'checkin' => array(
-        'error'   		=> 'Component was not checked in, please try again',
-        'success' 		=> 'Component checked in successfully.',
-        'user_does_not_exist' => 'That user is invalid. Please try again.'
+        'error'   		=> 'لم تتم عملية اخراج المكون، الرجاء المحاولة مرة اخرى',
+        'success' 		=> 'تم إدخال المكون بنجاح.',
+        'user_does_not_exist' => 'هذا المستخدم خاطئ، الرجاء المحاولة مرة أخرى.'
     )
 
 

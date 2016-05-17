@@ -63,6 +63,7 @@
     'generate'				=> '生成',
     'groups'				=> '分组',
     'gravatar_email'        => 'Gravatar头像邮件地址',
+    'history'  			    => 'History',
     'history_for'  			=> '历史记录',
     'id'  					=> '编号',
     'image_delete'         	=> '删除图片',

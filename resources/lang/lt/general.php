@@ -63,6 +63,7 @@
     'generate'				=> 'Sukurti',
     'groups'				=> 'Grupės',
     'gravatar_email'        => 'Gravatar el. paštas',
+    'history'  			    => 'History',
     'history_for'  			=> 'Istorija žmogui: ',
     'id'  					=> 'ID',
     'image_delete'         	=> 'Ištrinti nuotrauką',

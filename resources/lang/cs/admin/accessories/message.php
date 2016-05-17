@@ -16,9 +16,9 @@ return array(
     ),
 
     'delete' => array(
-        'confirm'   => 'Are you sure you wish to delete this accessory?',
-        'error'   => 'There was an issue deleting the accessory. Please try again.',
-        'success' => 'The accessory was deleted successfully.'
+        'confirm'   => 'Jste si jisti, že chcete odstranit toto příslušenství?',
+        'error'   => 'Vyskytl se problém při mazání kategorie. Zkuste to znovu prosím.',
+        'success' => 'Příslušenství bylo úspěšně odstraněno.'
     ),
 
      'checkout' => array(

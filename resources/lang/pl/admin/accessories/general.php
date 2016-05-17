@@ -10,7 +10,7 @@ return array(
     'checkin'  							=> 'Checkin Accessory',
     'create'  							=> 'Utwórz akcesorium',
     'date'					=> 'Data Zakupu',
-    'edit'  							=> 'Edit Accessory',
+    'edit'  							=> 'Edycja Akcesoriów',
     'eula_text'							=> 'Kategoria EULA',
     'eula_text_help'					=> 'To pole pozwala dostosować EULA dla określonych rodzajów aktywów. Jeśli masz tylko jeden EULA dla wszystkich swoich aktywów, można zaznaczyć poniższe pole, aby korzystać z podstawowej domyślnej.',
     'require_acceptance'				=> 'Wymaga od użytkowników, aby potwierdzić akceptację aktywów w tej kategorii.',

@@ -63,6 +63,7 @@
     'generate'				=> 'Generar',
     'groups'				=> 'Grupos',
     'gravatar_email'        => 'Gravatar Email',
+    'history'  			    => 'History',
     'history_for'  			=> 'Historial de',
     'id'  					=> 'Id',
     'image_delete'         	=> 'Borrar imagen',

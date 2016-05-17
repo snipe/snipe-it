@@ -2,9 +2,8 @@
 
 return array(
 
-    'undeployable' 		=> '<strong>Warning: </strong> This asset has been marked as currently undeployable.
-                        If this status has changed, please update the asset status.',
-    'does_not_exist' 	=> 'Asset does not exist.',
+    'undeployable' 		=> '<strong>Figyelem: </strong> Ez az eszköz pillanatnyilag  nem kiadható. Ha ez a helyzet változott, kérjük, frissítse az eszköz állapotát.',
+    'does_not_exist' 	=> 'Eszköz nem létezik.',
     'does_not_exist_or_not_requestable' => 'Nice try. That asset does not exist or is not requestable.',
     'assoc_users'	 	=> 'This asset is currently checked out to a user and cannot be deleted. Please check the asset in first, and then try deleting again. ',
 

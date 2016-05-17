@@ -4,8 +4,8 @@ return array(
 
 
     'update' => array(
-        'error'                 => 'An error has occurred while updating. ',
-        'success'               => 'Settings updated successfully.'
+        'error'                 => 'Hiba történt frissítés közben. ',
+        'success'               => 'A beállítások sikeresen frissítve.'
     ),
     'backup' => array(
         'delete_confirm'        => 'Are you sure you would like to delete this backup file? This action cannot be undone. ',

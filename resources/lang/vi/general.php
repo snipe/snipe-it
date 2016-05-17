@@ -63,6 +63,7 @@
     'generate'				=> 'Tạo ra',
     'groups'				=> 'Nhóm',
     'gravatar_email'        => 'Gravatar địa chỉ email',
+    'history'  			    => 'History',
     'history_for'  			=> 'Lịch cấp phát của',
     'id'  					=> 'ID',
     'image_delete'         	=> 'Xóa hình',

@@ -53,7 +53,7 @@ return array(
         'error'   		=> 'Актив не был отвязан, пожалуйста попробуйте снова',
         'success' 		=> 'Актив успешно отвязан.',
         'user_does_not_exist' => 'Этот пользователь является недопустимым. Пожалуйста, попробуйте еще раз.',
-        'already_checked_in'  => 'That asset is already checked in.',
+        'already_checked_in'  => 'Этот актив уже привязан.',
 
     ),
 

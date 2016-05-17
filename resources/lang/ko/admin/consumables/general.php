@@ -7,6 +7,7 @@ return array(
     'cost'				=> '구매 원가',
     'create'                             => '소모품 생성',
     'date'					=> '구매 일자',
+    'item_no'               => 'Item No.',
     'order'					=> '주문 번호',
     'remaining' 			             => '잔여수량',
     'total' 			                 => '총계',

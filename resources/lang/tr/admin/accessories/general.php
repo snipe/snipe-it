@@ -10,7 +10,7 @@ return array(
     'checkin'  							=> 'Checkin Accessory',
     'create'  							=> 'Aksesuar oluşturun',
     'date'					=> 'Satın Alma Tarihi',
-    'edit'  							=> 'Edit Accessory',
+    'edit'  							=> 'Aksesuarı Düzenle',
     'eula_text'							=> 'Kategori Sözleşmeleri',
     'eula_text_help'					=> 'Bu alan özel tipteki demirbaşlarınız için Sözleşmesi\'ni özelleştirmeniz içindir. Eğer tüm demirbaşlarınız için sadece tek sözleşmeniz var ise yukarıdaki kutucuğu işaretlereyerek varsayılan yapabilirsiniz.',
     'require_acceptance'				=> 'Bu kategoride kullanıcının kabul onayı gerekmektedir.',

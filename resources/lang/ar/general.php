@@ -63,6 +63,7 @@
     'generate'				=> 'Generate',
     'groups'				=> 'المجموعات',
     'gravatar_email'        => 'البريد الإلكتروني لخدمة Gravatar',
+    'history'  			    => 'History',
     'history_for'  			=> 'السجل لـ',
     'id'  					=> 'الرقم',
     'image_delete'         	=> 'حذف الصورة',

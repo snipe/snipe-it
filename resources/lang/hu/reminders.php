@@ -17,8 +17,8 @@ return array(
 
     "user"     => "A felhasználónév vagy az e-mail cím téves",
 
-    "token"    => "This password reset token is invalid.",
+    "token"    => "Ez a jelszó visszaállítási kérelem érvénytelen.",
 
-    "sent" => "If a matching email address was found, a password reminder has been sent!",
+    "sent" => "Ha megfelelő az email cím, egy jelszó emlékeztetőt küldünk!",
 
 );

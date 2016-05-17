@@ -2,9 +2,9 @@
 
 return array(
 
-    'actions'	 	=> 'Actions',
-    'action' 		=> 'Action',
-    'by'      		=> 'By',
-    'item' 			=> 'Item',
+    'actions'	 	=> 'Lehetőség',
+    'action' 		=> 'Művelet',
+    'by'      		=> 'Által',
+    'item' 			=> 'Tétel',
 
 );

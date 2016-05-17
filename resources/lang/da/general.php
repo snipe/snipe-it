@@ -63,6 +63,7 @@
     'generate'				=> 'Skab',
     'groups'				=> 'Grupper',
     'gravatar_email'        => 'Gravatar email addresse',
+    'history'  			    => 'History',
     'history_for'  			=> 'Historie for',
     'id'  					=> 'ID',
     'image_delete'         	=> 'Slet billede',

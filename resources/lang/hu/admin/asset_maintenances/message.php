@@ -1,17 +1,17 @@
 <?php
 
     return [
-        'not_found'                    => 'Asset Maintenance you were looking for was not found!',
+        'not_found'                    => 'Az eszköz karbantartás, amit keresel, az nem létezik!',
         'delete'                       => [
-            'confirm' => 'Are you sure you wish to delete this asset maintenance?',
-            'error'   => 'There was an issue deleting the asset maintenance. Please try again.',
-            'success' => 'The asset maintenance was deleted successfully.'
+            'confirm' => 'Biztosan törli ezt a z eszköz karbantartást?',
+            'error'   => 'Volt egy kérés az eszköz karbantartás törlésére. Kérjük, próbálja meg újra.',
+            'success' => 'Az eszköz karbantartás sikeresen törölve lett.'
         ],
         'create'                       => [
-            'error'   => 'Asset Maintenance was not created, please try again.',
-            'success' => 'Asset Maintenance created successfully.'
+            'error'   => 'Eszköz karbantartás nem jött létre, próbálja meg újra.',
+            'success' => 'Eszköz karbantartás sikeresen létrejött.'
         ],
-        'asset_maintenance_incomplete' => 'Not Completed Yet',
-        'warranty'                     => 'Warranty',
-        'not_warranty'                 => 'Not Warranty',
+        'asset_maintenance_incomplete' => 'Nincs kitöltve teljesen',
+        'warranty'                     => 'Garancia',
+        'not_warranty'                 => 'Nem garancia',
     ];

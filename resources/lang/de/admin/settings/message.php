@@ -14,9 +14,9 @@ return array(
         'file_not_found'        => 'Backup Datei konnte nicht gefunden werden.',
     ),
     'purge' => array(
-        'error'     => 'An error has occurred while purging. ',
-        'validation_failed'     => 'Your purge confirmation is incorrect. Please type the word "DELETE" in the confirmation box.',
-        'success'               => 'Deleted records successfully purged.'
+        'error'     => 'Beim Bereinigen ist ein Fehler augetreten. ',
+        'validation_failed'     => 'Falsche Bereinigungsbestätigung. Bitte geben Sie das Wort "Löschen" im Bestätigungsfeld ein.',
+        'success'               => 'Gelöschte Einträge erfolgreich bereinigt.'
     ),
 
 );

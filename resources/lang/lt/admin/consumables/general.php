@@ -7,6 +7,7 @@ return array(
     'cost'				=> 'Pirkimo kaina',
     'create'                             => 'Sukurti suvartojamą įrangą',
     'date'					=> 'Pirkimo data',
+    'item_no'               => 'Item No.',
     'order'					=> 'Užsakymo numeris',
     'remaining' 			             => 'Likutis',
     'total' 			                 => 'Viso',

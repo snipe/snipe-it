@@ -2,10 +2,10 @@
 
 return array(
 
-    'asset_manufacturers'	=> 'Asset Manufacturers',
-    'create'				=> 'Create Manufacturer',
+    'asset_manufacturers'	=> 'Eszköz gyártoi',
+    'create'				=> 'Gyártó lértehozása',
     'id'   					=> 'ID',
-    'name'      			=> 'Manufacturer Name',
-    'update'				=> 'Update Manufacturer',
+    'name'      			=> 'Gyártó neve',
+    'update'				=> 'Gyártó frissítése',
 
 );

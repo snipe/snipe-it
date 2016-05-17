@@ -2,9 +2,9 @@
 
 return array(
 
-    'checkin'  					=> 'Checkin License Seat',
-    'checkout_history'  		=> 'Checkout History',
-    'checkout'  				=> 'Checkout License Seat',
+    'checkin'  					=> 'Bevét engedély Seat',
+    'checkout_history'  		=> 'Visszavét előzmények',
+    'checkout'  				=> 'Kiadás Licence ülés/kérelem',
     'edit'  					=> 'Edit License',
     'filetype_info'				=> 'Allowed filetypes are png, gif, jpg, jpeg, doc, docx, pdf, txt, zip, and rar.',
     'clone'  					=> 'Clone License',

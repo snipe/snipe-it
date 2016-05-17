@@ -10,7 +10,7 @@ return array(
     'checkin'  							=> 'Checkin Accessory',
     'create'  							=> 'Vytvoř příslušenství',
     'date'					=> 'Datum pořízení',
-    'edit'  							=> 'Edit Accessory',
+    'edit'  							=> 'Upravit Příslušenství',
     'eula_text'							=> 'Kategorie EULA',
     'eula_text_help'					=> 'Toto pole umožňuje upravit EULA pro různé druhy majetku. Pokud máte pouze jeden typ pro všechen majetek, můžete zaškrtnout položku níže pro použití jako výchozí.',
     'require_acceptance'				=> 'Požadovat potvrzení převzetí majetku v této kategorii.',

@@ -4,7 +4,7 @@
 return array(
 
     'assets_user'       => 'Bene assegnato a :name',
-    'current_assets'    => 'Assets currently checked out to this user',
+    'current_assets'    => 'Asset assegnato a questo utente',
     'clone'             => 'Clona Utente',
     'contact_user'      => 'Contatta :name',
     'edit'              => 'Modifica Utente',

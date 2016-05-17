@@ -1,14 +1,15 @@
 <?php
 
 return array(
-    'about_consumables_title' 			=> 'About Consumables',
-    'about_consumables_text'  			=> 'Consumables are anything purchased that will be used up over time. For example, printer ink or copier paper.',
-    'consumable_name'                  => 'Consumable Name',
-    'cost'				=> 'Purchase Cost',
-    'create'                             => 'Create Consumable',
-    'date'					=> 'Purchase Date',
-    'order'					=> 'Order Number',
-    'remaining' 			             => 'Remaining',
-    'total' 			                 => 'Total',
-    'update'                            => 'Update Consumable',
+    'about_consumables_title' 			=> 'A Kellékekről',
+    'about_consumables_text'  			=> 'Kellékek azok a megvásárolt dolgok amiket idővel felhasználsz. Például nyomtató festék parton vagy fénymásoló papír.',
+    'consumable_name'                  => 'Kellék Neve',
+    'cost'				=> 'Beszerzési ár',
+    'create'                             => 'Kellék létrehozva',
+    'date'					=> 'Beszerzés dátuma',
+    'item_no'               => 'Item No.',
+    'order'					=> 'Rendelési szám',
+    'remaining' 			             => 'Fennmaradó',
+    'total' 			                 => 'Összesen',
+    'update'                            => 'Kellék frissítése',
 );

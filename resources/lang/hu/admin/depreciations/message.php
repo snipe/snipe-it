@@ -2,24 +2,24 @@
 
 return array(
 
-    'does_not_exist' => 'Depreciation class does not exist.',
-    'assoc_users'	 => 'This depreciation is currently associated with one or more models and cannot be deleted. Please delete the models, and then try deleting again. ',
+    'does_not_exist' => 'Értékcsökkentétsi kategória nem létezik.',
+    'assoc_users'	 => 'Ez az értékcsökkenés jelenleg társított egy vagy több modellhez, és nem törölhető. Kérjük, törölje a modellek, és próbálja meg ismét. ',
 
 
     'create' => array(
-        'error'   => 'Depreciation class was not created, please try again. :(',
-        'success' => 'Depreciation class created successfully. :)'
+        'error'   => 'Értékcsökkenési osztály nem jött létre, próbálkozz újra. :(',
+        'success' => 'Az értékcsökkenési osztály sikeresen létrehozva. :-)'
     ),
 
     'update' => array(
-        'error'   => 'Depreciation class was not updated, please try again',
-        'success' => 'Depreciation class updated successfully.'
+        'error'   => 'Az értékcsökkenési osztály nem frissült, próbálkozz újra',
+        'success' => 'Az értékcsökkenési osztály sikeresen frissítve.'
     ),
 
     'delete' => array(
-        'confirm'   => 'Are you sure you wish to delete this depreciation class?',
-        'error'   => 'There was an issue deleting the depreciation class. Please try again.',
-        'success' => 'The depreciation class was deleted successfully.'
+        'confirm'   => 'Biztos benne, hogy törli az értékcsökkenési osztályt?',
+        'error'   => 'Probléma támadt az értékcsökkenési osztály törlésével. Próbálkozz újra.',
+        'success' => 'Az értékcsökkenési osztály sikeresen törölve.'
     )
 
 );

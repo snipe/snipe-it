@@ -7,6 +7,7 @@ return array(
     'cost'				=> 'Satın Alma Maliyeti',
     'create'                             => 'Create Consumable',
     'date'					=> 'Satın Alma Tarihi',
+    'item_no'               => 'Item No.',
     'order'					=> 'Sipariş Numarası',
     'remaining' 			             => 'Kalan',
     'total' 			                 => 'Toplam',

@@ -63,6 +63,7 @@
     'generate'				=> 'Gerar',
     'groups'				=> 'Grupos',
     'gravatar_email'        => 'Endereço de email do Gravatar',
+    'history'  			    => 'History',
     'history_for'  			=> 'Histórico para',
     'id'  					=> 'ID',
     'image_delete'         	=> 'Apagar imagem',

@@ -2,23 +2,23 @@
 
 return array(
 
-    'asset_tag'   	=> 'Asset Tag',
-    'asset_model'       => 'Model',
-    'book_value'  	=> 'Value',
-    'change' 		=> 'In/Out',
-    'checkout_date' => 'Checkout Date',
-    'checkoutto' 	=> 'Checked Out',
-    'diff' 			=> 'Diff',
-    'dl_csv' 		=> 'Download CSV',
-    'eol' 			=> 'EOL',
+    'asset_tag'   	=> 'Eszköz cimke',
+    'asset_model'       => 'Modell',
+    'book_value'  	=> 'Érték',
+    'change' 		=> 'Be/ki',
+    'checkout_date' => 'Kiadási dátum',
+    'checkoutto' 	=> 'Kiadva',
+    'diff' 			=> 'Eltérés',
+    'dl_csv' 		=> 'Cvs letöltése',
+    'eol' 			=> 'Lejárat',
     'id'      		=> 'ID',
-    'location' 		=> 'Location',
-    'purchase_cost'	=> 'Cost',
-    'purchase_date'	=> 'Purchased',
-    'serial'   		=> 'Serial',
-    'status'   		=> 'Status',
-    'title'      	=> 'Asset ',
-    'image'		=> 'Device Image',
-    'days_without_acceptance' => 'Days Without Acceptance'
+    'location' 		=> 'Helyszín',
+    'purchase_cost'	=> 'Költség',
+    'purchase_date'	=> 'Megvásárolva',
+    'serial'   		=> 'Sorozatszám',
+    'status'   		=> 'Állapot',
+    'title'      	=> 'Eszköz ',
+    'image'		=> 'Készülék kép',
+    'days_without_acceptance' => 'Nem elfogadás óta eltelt napok száma'
 
 );

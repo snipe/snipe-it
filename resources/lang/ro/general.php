@@ -63,6 +63,7 @@
     'generate'				=> 'Genereaza',
     'groups'				=> 'Grupuri',
     'gravatar_email'        => 'Adresa E-mail Gravatar',
+    'history'  			    => 'History',
     'history_for'  			=> 'Istoric pentru',
     'id'  					=> 'ID',
     'image_delete'         	=> 'Sterge poza',

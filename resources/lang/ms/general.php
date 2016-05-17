@@ -63,6 +63,7 @@
     'generate'				=> 'Laksanakan',
     'groups'				=> 'Kumpulan',
     'gravatar_email'        => 'Alam e-mel gravatar',
+    'history'  			    => 'History',
     'history_for'  			=> 'Sejarah untuk',
     'id'  					=> 'ID',
     'image_delete'         	=> 'Hapuskan imej',

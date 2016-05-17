@@ -63,6 +63,7 @@
     'generate'				=> 'Generer',
     'groups'				=> 'Grupper',
     'gravatar_email'        => 'Gravatar e-postadresse',
+    'history'  			    => 'History',
     'history_for'  			=> 'Historikk for',
     'id'  					=> 'ID',
     'image_delete'         	=> 'Slett bilde',

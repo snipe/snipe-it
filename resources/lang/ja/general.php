@@ -63,6 +63,7 @@
     'generate'				=> '作成',
     'groups'				=> 'グループ',
     'gravatar_email'        => 'Gravatar のメールアドレス',
+    'history'  			    => 'History',
     'history_for'  			=> '履歴',
     'id'  					=> 'ID',
     'image_delete'         	=> '画像を削除',

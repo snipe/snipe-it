@@ -2,22 +2,22 @@
 
 return array(
 
-    'does_not_exist' => 'Component does not exist.',
+    'does_not_exist' => 'Il Componente non esiste.',
 
     'create' => array(
-        'error'   => 'Component was not created, please try again.',
-        'success' => 'Component created successfully.'
+        'error'   => 'Il Componente non è stato creato, riprova.',
+        'success' => 'Componente creato correttamente.'
     ),
 
     'update' => array(
-        'error'   => 'Component was not updated, please try again',
-        'success' => 'Component updated successfully.'
+        'error'   => 'Il Componente non è stato aggiornato, riprova',
+        'success' => 'Componente aggiornato correttamente.'
     ),
 
     'delete' => array(
-        'confirm'   => 'Are you sure you wish to delete this component?',
-        'error'   => 'There was an issue deleting the component. Please try again.',
-        'success' => 'The component was deleted successfully.'
+        'confirm'   => 'Sei sicuro di voler eliminare questo Componente?',
+        'error'   => 'Si è verificato un problema durante l\'eliminazione del componente. Riprova.',
+        'success' => 'Il componente è stato eliminato correttamente.'
     ),
 
      'checkout' => array(

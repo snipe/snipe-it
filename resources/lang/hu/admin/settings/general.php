@@ -1,9 +1,9 @@
 <?php
 
 return array(
-	'alert_email'				=> 'Send alerts to',
-	'alerts_enabled'			=> 'Alerts enabled',
-	'asset_ids'					=> 'Asset IDs',
+	'alert_email'				=> 'Riasztás címzettje',
+	'alerts_enabled'			=> 'Riasztás engedélyezve',
+	'asset_ids'					=> 'Eszköz ID',
 	'auto_increment_assets'		=> 'Generate auto-incrementing asset IDs',
 	'auto_increment_prefix'		=> 'Prefix (optional)',
 	'auto_incrementing_help'    => 'Enable auto-incrementing asset IDs first to set this',

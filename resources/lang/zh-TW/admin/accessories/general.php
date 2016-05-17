@@ -1,16 +1,16 @@
 <?php
 
 return array(
-    'about_accessories_title' 			=> 'About Accessories',
+    'about_accessories_title' 			=> '關於配件',
     'about_accessories_text'  			=> 'Accessories are anything you issue to users but that do not have a serial number (or you do not care about tracking them uniquely). For example, computer mice or keyboards.',
     'accessory_category' 				=> 'Accessory Category',
-    'accessory_name'  					=> 'Accessory Name',
-    'cost'					=> 'Purchase Cost',
+    'accessory_name'  					=> '配件名稱',
+    'cost'					=> '採購成本',
     'checkout'  							=> 'Checkout Accessory',
     'checkin'  							=> 'Checkin Accessory',
-    'create'  							=> 'Create Accessory',
-    'date'					=> 'Purchase Date',
-    'edit'  							=> 'Edit Accessory',
+    'create'  							=> '新增配件',
+    'date'					=> '購買日期',
+    'edit'  							=> '編輯配件',
     'eula_text'							=> 'Category EULA',
     'eula_text_help'					=> 'This field allows you to customize your EULAs for specific types of assets. If you only have one EULA for all of your assets, you can check the box below to use the primary default.',
     'require_acceptance'				=> 'Require users to confirm acceptance of assets in this category.',

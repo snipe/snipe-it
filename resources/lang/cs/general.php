@@ -63,6 +63,7 @@
     'generate'				=> 'Vytvořit',
     'groups'				=> 'Skupiny',
     'gravatar_email'        => 'Emailová adresa Gravatar',
+    'history'  			    => 'History',
     'history_for'  			=> 'Historie uživatele',
     'id'  					=> 'ID',
     'image_delete'         	=> 'Smazat obrázek',

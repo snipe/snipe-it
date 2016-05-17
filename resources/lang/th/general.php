@@ -63,6 +63,7 @@
     'generate'				=> 'สร้าง',
     'groups'				=> 'กลุ่ม',
     'gravatar_email'        => 'อีเมลแอดเดรส Gravatar',
+    'history'  			    => 'History',
     'history_for'  			=> 'ประวัติของ',
     'id'  					=> 'ID',
     'image_delete'         	=> 'ลบรูปภาพประจำตัว',

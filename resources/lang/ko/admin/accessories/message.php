@@ -16,9 +16,9 @@ return array(
     ),
 
     'delete' => array(
-        'confirm'   => 'Are you sure you wish to delete this accessory?',
-        'error'   => 'There was an issue deleting the accessory. Please try again.',
-        'success' => 'The accessory was deleted successfully.'
+        'confirm'   => '이 부속품을 삭제하시겠습니까?',
+        'error'   => '분류 삭제 중 문제가 발생했습니다. 다시 시도해 주세요.',
+        'success' => '해당 부속품이 삭제 완료 되었습니다.'
     ),
 
      'checkout' => array(

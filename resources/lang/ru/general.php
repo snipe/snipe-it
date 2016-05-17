@@ -63,6 +63,7 @@
     'generate'				=> 'Сгенерировать',
     'groups'				=> 'Группы',
     'gravatar_email'        => 'Адрес электронной почты Gravatar',
+    'history'  			    => 'History',
     'history_for'  			=> 'История для',
     'id'  					=> 'ID',
     'image_delete'         	=> 'Удалить изображение',

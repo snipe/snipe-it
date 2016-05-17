@@ -3,7 +3,8 @@
 return array(
 
     'does_not_exist' => 'Categoría inexistente.',
-    'assoc_users'	 => 'Esta categoría está asignada al menos a un modelo y no puede ser eliminada.',
+    'assoc_models'	 => 'This category is currently associated with at least one model and cannot be deleted. Please update your models to no longer reference this category and try again. ',
+    'assoc_items'	 => 'This category is currently associated with at least one :asset_type and cannot be deleted. Please update your :asset_type  to no longer reference this category and try again. ',
 
     'create' => array(
         'error'   => 'La categoría no se ha creado, intentalo de nuevo.',

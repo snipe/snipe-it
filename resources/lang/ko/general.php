@@ -63,6 +63,7 @@
     'generate'				=> '생성',
     'groups'				=> '그룹',
     'gravatar_email'        => 'Gravatar 메일 주소',
+    'history'  			    => 'History',
     'history_for'  			=> '이력',
     'id'  					=> '아이디',
     'image_delete'         	=> '이미지 삭제',

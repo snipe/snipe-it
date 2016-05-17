@@ -8,7 +8,7 @@ return array(
 	'bulk_update_help'	=> 'Tämän lomakkeen avulla voit päivittää useita laitteita kerralla. Täytä vain ne kentät joita haluat muuttaa. Tyhjäksi jätetyt kenttyihin kenttiä ei päivitetä. ',
 	'bulk_update_warn'	=> 'Olet päivittämässä :asset_count laitteen ominaisuuksia.',
     'checkedout_to'		=> 'Jotka Luovutettuna Käyttäjälle',
-    'checkout_date'		=> 'Checkout Date',
+    'checkout_date'		=> 'Luovutuspäivä',
     'checkin_date'		=> 'Checkin Date',
     'checkout_to'		=> 'Luovuta Käyttäjälle',
     'cost'				=> 'Ostohinta',

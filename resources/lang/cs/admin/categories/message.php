@@ -3,7 +3,8 @@
 return array(
 
     'does_not_exist' => 'Kategorie neexistuje.',
-    'assoc_users'	 => 'Tato kategorie je právě přiřazena k alespoň jednomu modelu a nelze ji tedy odstranit. Upravte patřičné modely majetku tak, aby k nim nebyla přiřazena a akci opakujte. ',
+    'assoc_models'	 => 'This category is currently associated with at least one model and cannot be deleted. Please update your models to no longer reference this category and try again. ',
+    'assoc_items'	 => 'This category is currently associated with at least one :asset_type and cannot be deleted. Please update your :asset_type  to no longer reference this category and try again. ',
 
     'create' => array(
         'error'   => 'Kategorie nebyla vytvořena, zkuste to znovu prosím.',

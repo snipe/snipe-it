@@ -63,6 +63,7 @@
     'generate'				=> 'Генериране',
     'groups'				=> 'Групи',
     'gravatar_email'        => 'Gravatar email адрес',
+    'history'  			    => 'History',
     'history_for'  			=> 'История за',
     'id'  					=> 'ID',
     'image_delete'         	=> 'Изтриване на изображението',

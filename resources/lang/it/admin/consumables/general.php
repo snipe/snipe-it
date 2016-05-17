@@ -7,6 +7,7 @@ return array(
     'cost'				=> 'Costo acquisto',
     'create'                             => 'Crea Consumabile',
     'date'					=> 'Data acquisto',
+    'item_no'               => 'Item No.',
     'order'					=> 'Numero Ordine',
     'remaining' 			             => 'Rimanenti',
     'total' 			                 => 'Totale',

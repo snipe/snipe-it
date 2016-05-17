@@ -33,7 +33,7 @@ return array(
         'import'    => '利用者をインポートする際に問題が発生しました。もう一度、やり直して下さい。',
         'asset_already_accepted' => 'この資産は既に承認されています。',
         'accept_or_decline' => 'あなたはこの資産を承認もしくは却下しなけれなばなりません。',
-        'incorrect_user_accepted' => 'The asset you have attempted to accept was not checked out to you.',
+        'incorrect_user_accepted' => '資産を受諾しようとしましたが貸し出しできませんでした。',
         'ldap_could_not_connect' => 'LDAPサーバーに接続できません。LDAP設定ファイル内のサーバー設定を確認して下さい。<br> LDAPサーバーからのエラー:',
         'ldap_could_not_bind' => 'LDAPサーバーにバインドできません。LDAP設定ファイル内のサーバー設定を確認して下さい。<br> LDAPサーバーからのエラー: ',
         'ldap_could_not_search' => 'LDAPサーバーを検索できません。LDAP設定ファイル内のサーバー設定を確認して下さい。<br> LDAPサーバーからのエラー:',

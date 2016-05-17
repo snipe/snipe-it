@@ -7,6 +7,7 @@ return array(
     'cost'				=> 'Coût d\'achat',
     'create'                             => 'Créer une fourniture',
     'date'					=> 'Date d\'achat',
+    'item_no'               => 'Item No.',
     'order'					=> 'Numéro de commande',
     'remaining' 			             => 'Quantité restante',
     'total' 			                 => 'Total',
