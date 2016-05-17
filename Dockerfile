@@ -1,4 +1,4 @@
-FROM ubuntu:wily
+FROM ubuntu:trusty
 MAINTAINER Brady Wetherington <uberbrady@gmail.com>
 
 RUN apt-get update && apt-get install -y \

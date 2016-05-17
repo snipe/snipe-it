@@ -267,7 +267,7 @@ class CategoriesController extends AdminController
         return $data;
     }
 
-    public function getDataView($categoryID) {
+    public function getDataViewAssets($categoryID) {
 
       $category = Category::with('assets.company')->find($categoryID);
       $category_assets = $category->assets;
@@ -325,6 +325,117 @@ class CategoriesController extends AdminController
           'serial' => $asset->serial,
           'assigned_to' => ($asset->assigneduser) ? link_to('/admin/users/'.$asset->assigneduser->id.'/view', $asset->assigneduser->fullName()): '',
           'change' => $inout,
+          'actions' => $actions,
+          'companyName' => Company::getName($asset),
+        );
+      }
+
+      $data = array('total' => $count, 'rows' => $rows);
+      return $data;
+    }
+
+
+
+    public function getDataViewAccessories($categoryID) {
+
+      $category = Category::with('accessories.company')->find($categoryID);
+      $category_assets = $category->accessories;
+
+      if (Input::has('search')) {
+          $category_assets = $category_assets->TextSearch(e(Input::get('search')));
+      }
+
+      if (Input::has('offset')) {
+          $offset = e(Input::get('offset'));
+      } else {
+          $offset = 0;
+      }
+
+      if (Input::has('limit')) {
+          $limit = e(Input::get('limit'));
+      } else {
+          $limit = 50;
+      }
+
+      $order = Input::get('order') === 'asc' ? 'asc' : 'desc';
+
+      $allowed_columns = ['id','name','serial','asset_tag'];
+      $sort = in_array(Input::get('sort'), $allowed_columns) ? Input::get('sort') : 'created_at';
+      $count = $category_assets->count();
+
+      $rows = array();
+
+      foreach ($category_assets as $asset) {
+
+        $actions = '';
+        $inout='';
+
+        if ($asset->deleted_at=='') {
+            $actions = '<div style=" white-space: nowrap;"><a href="'.route('update/accessory', $asset->id).'" class="btn btn-warning btn-sm"><i class="fa fa-pencil icon-white"></i></a> <a data-html="false" class="btn delete-asset btn-danger btn-sm" data-toggle="modal" href="'.route('delete/accessory', $asset->id).'" data-content="'.Lang::get('admin/hardware/message.delete.confirm').'" data-title="'.Lang::get('general.delete').' '.htmlspecialchars($asset->name).'?" onClick="return false;"><i class="fa fa-trash icon-white"></i></a></div>';
+        } elseif ($asset->deleted_at!='') {
+            $actions = '<a href="'.route('restore/accessory', $asset->id).'" class="btn btn-warning btn-sm"><i class="fa fa-recycle icon-white"></i></a>';
+        }
+
+
+
+        $rows[] = array(
+          'id' => $asset->id,
+          'name' => link_to_route('view/accessory', $asset->name, [$asset->id]),
+          'actions' => $actions,
+          'companyName' => Company::getName($asset),
+        );
+      }
+
+      $data = array('total' => $count, 'rows' => $rows);
+      return $data;
+    }
+
+
+    public function getDataViewConsumables($categoryID) {
+
+      $category = Category::with('accessories.company')->find($categoryID);
+      $category_assets = $category->consumables;
+
+      if (Input::has('search')) {
+          $category_assets = $category_assets->TextSearch(e(Input::get('search')));
+      }
+
+      if (Input::has('offset')) {
+          $offset = e(Input::get('offset'));
+      } else {
+          $offset = 0;
+      }
+
+      if (Input::has('limit')) {
+          $limit = e(Input::get('limit'));
+      } else {
+          $limit = 50;
+      }
+
+      $order = Input::get('order') === 'asc' ? 'asc' : 'desc';
+
+      $allowed_columns = ['id','name','serial','asset_tag'];
+      $sort = in_array(Input::get('sort'), $allowed_columns) ? Input::get('sort') : 'created_at';
+      $count = $category_assets->count();
+
+      $rows = array();
+
+      foreach ($category_assets as $asset) {
+
+        $actions = '';
+        $inout='';
+
+        if ($asset->deleted_at=='') {
+            $actions = '<div style=" white-space: nowrap;"><a href="'.route('update/consumable', $asset->id).'" class="btn btn-warning btn-sm"><i class="fa fa-pencil icon-white"></i></a> <a data-html="false" class="btn delete-asset btn-danger btn-sm" data-toggle="modal" href="'.route('delete/consumable', $asset->id).'" data-content="'.Lang::get('admin/hardware/message.delete.confirm').'" data-title="'.Lang::get('general.delete').' '.htmlspecialchars($asset->name).'?" onClick="return false;"><i class="fa fa-trash icon-white"></i></a></div>';
+        } elseif ($asset->deleted_at!='') {
+            $actions = '<a href="'.route('restore/consumable', $asset->id).'" class="btn btn-warning btn-sm"><i class="fa fa-recycle icon-white"></i></a>';
+        }
+
+
+
+        $rows[] = array(
+          'id' => $asset->id,
+          'name' => link_to_route('view/consumable', $asset->name, [$asset->id]),
           'actions' => $actions,
           'companyName' => Company::getName($asset),
         );
