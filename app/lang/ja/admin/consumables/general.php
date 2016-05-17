@@ -7,6 +7,7 @@ return array(
     'cost'				=> '購入費用',
     'create'                             => '消耗品を作成',
     'date'					=> '購入日',
+    'item_no'               => 'Item No.',
     'order'					=> '注文番号',
     'remaining' 			             => '残数',
     'total' 			                 => '合計',

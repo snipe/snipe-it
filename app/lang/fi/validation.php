@@ -33,6 +33,7 @@ return array(
     "digits_between"   => ":attribute tulee olla numero väliltä :min ja :max.",
     "email"            => ":attribute muotoilu on virheellinen.",
     "exists"           => "Valittu :attribute on virheellinen.",
+    "email_array"      => "One or more email addresses is invalid.",
     "image"            => ":attribute tulee olla kuva.",
     "in"               => "Valittu :attribute on virheellinen.",
     "integer"          => ":attribute tulee olla kokonaisluku.",

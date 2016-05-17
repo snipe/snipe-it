@@ -1,9 +1,9 @@
 <?php
 return array(
-    'companies' => 'Companies',
-    'create'    => 'Create Company',
-    'title'     => 'Company',
-    'update'    => 'Update Company',
-    'name'      => 'Company Name',
+    'companies' => 'Cégek',
+    'create'    => 'Vállalat létrehozása',
+    'title'     => 'Társág',
+    'update'    => 'Társaság frissítése',
+    'name'      => 'A cég neve',
     'id'        => 'ID',
 );

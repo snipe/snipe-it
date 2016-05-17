@@ -33,11 +33,11 @@ return array(
         'import'    => 'При импорте пользователей произошла ошибка. Попробуйте еще раз.',
         'asset_already_accepted' => 'Этот актив уже был принят.',
         'accept_or_decline' => 'Примите или отклоните актив.',
-        'incorrect_user_accepted' => 'The asset you have attempted to accept was not checked out to you.',
-        'ldap_could_not_connect' => 'Could not connect to the LDAP server. Please check your LDAP server configuration in the LDAP config file. <br>Error from LDAP Server:',
-        'ldap_could_not_bind' => 'Could not bind to the LDAP server. Please check your LDAP server configuration in the LDAP config file. <br>Error from LDAP Server: ',
-        'ldap_could_not_search' => 'Could not search the LDAP server. Please check your LDAP server configuration in the LDAP config file. <br>Error from LDAP Server:',
-        'ldap_could_not_get_entries' => 'Could not get entries from the LDAP server. Please check your LDAP server configuration in the LDAP config file. <br>Error from LDAP Server:',
+        'incorrect_user_accepted' => 'Актив, который вы попытались принять, не был записан на вас.',
+        'ldap_could_not_connect' => 'Не могу подключиться к серверу LDAP. Проверьте настройки LDAP сервера в файле конфигурации LDAP.<br>Ошибка от LDAP сервера:',
+        'ldap_could_not_bind' => 'Не могу связаться (bind) с сервером LDAP. Проверьте настройки LDAP сервера в файле конфигурации LDAP.<br>Ошибка от LDAP сервера: ',
+        'ldap_could_not_search' => 'Не могу найти сервер LDAP. Проверьте настройки LDAP сервера в файле конфигурации LDAP.<br>Ошибка от LDAP сервера:',
+        'ldap_could_not_get_entries' => 'Не могу загрузить записи с сервера LDAP. Проверьте настройки LDAP сервера в файле конфигурации LDAP.<br>Ошибка от LDAP сервера:',
     ),
 
     'deletefile' => array(

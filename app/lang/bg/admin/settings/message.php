@@ -13,5 +13,10 @@ return array(
         'generated'             => 'Нов архивен файл беше създаден успешно.',
         'file_not_found'        => 'Архивният файл не беше открит на сървъра.',
     ),
+    'purge' => array(
+        'error'     => 'An error has occurred while purging. ',
+        'validation_failed'     => 'Your purge confirmation is incorrect. Please type the word "DELETE" in the confirmation box.',
+        'success'               => 'Deleted records successfully purged.'
+    ),
 
 );

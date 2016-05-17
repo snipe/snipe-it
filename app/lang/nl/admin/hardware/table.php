@@ -6,9 +6,9 @@ return array(
     'asset_model'       => 'Model',
     'book_value'  	=> 'Waarde',
     'change' 		=> 'In/out',
-    'checkout_date' => 'Checkout Date',
-    'checkoutto' 	=> 'Checked Out',
-    'diff' 			=> 'Diff',
+    'checkout_date' => 'Uitcheck datum',
+    'checkoutto' 	=> 'Uitgecheckt',
+    'diff' 			=> 'Verschil',
     'dl_csv' 		=> 'CSV downloaden',
     'eol' 			=> 'EOL',
     'id'      		=> 'ID',
@@ -18,7 +18,7 @@ return array(
     'serial'   		=> 'Serienummer',
     'status'   		=> 'Status',
     'title'      	=> 'Asset ',
-    'image'		=> 'Device Image',
-    'days_without_acceptance' => 'Days Without Acceptance'
+    'image'		=> 'Product afbeelding',
+    'days_without_acceptance' => 'Dagen zonder acceptatie'
 
 );

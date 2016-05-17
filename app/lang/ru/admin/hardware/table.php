@@ -18,7 +18,7 @@ return array(
     'serial'   		=> 'Серийный номер',
     'status'   		=> 'Статус',
     'title'      	=> 'Актив ',
-    'image'		=> 'Device Image',
-    'days_without_acceptance' => 'Days Without Acceptance'
+    'image'		=> 'Изображение устройства',
+    'days_without_acceptance' => 'Дней без принятия'
 
 );

@@ -7,6 +7,7 @@ return array(
     'cost'				=> 'Koszt zakupu',
     'create'                             => 'Utwórz materiał eksploatacyjny',
     'date'					=> 'Data zakupu',
+    'item_no'               => 'Item No.',
     'order'					=> 'Numer zamówienia',
     'remaining' 			             => 'Pozostało',
     'total' 			                 => 'Łącznie',

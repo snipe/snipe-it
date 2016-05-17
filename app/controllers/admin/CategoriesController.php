@@ -171,20 +171,25 @@ class CategoriesController extends AdminController
         // Check if the category exists
         if (is_null($category = Category::find($categoryId))) {
             // Redirect to the blogs management page
-            return Redirect::to('admin/settings/categories')->with('error', Lang::get('admin/categories/message.not_found'));
+            return Redirect::route('categories')->with('error', Lang::get('admin/categories/message.not_found'));
         }
 
 
         if ($category->has_models() > 0) {
+            return Redirect::route('categories')->with('error', Lang::get('admin/categories/message.assoc_models'));
 
-            // Redirect to the asset management page
-            return Redirect::to('admin/settings/categories')->with('error', Lang::get('admin/categories/message.assoc_users'));
+        } elseif ($category->accessories()->count() > 0) {
+                return Redirect::route('categories')->with('error', Lang::get('admin/categories/message.assoc_accessories'));
+
+        } elseif ($category->consumables()->count() > 0) {
+                return Redirect::route('categories')->with('error', Lang::get('admin/categories/message.assoc_consumables'));
+
         } else {
 
             $category->delete();
 
             // Redirect to the locations management page
-            return Redirect::to('admin/settings/categories')->with('success', Lang::get('admin/categories/message.delete.success'));
+            return Redirect::route('categories')->with('success', Lang::get('admin/categories/message.delete.success'));
         }
 
 
@@ -372,8 +377,6 @@ class CategoriesController extends AdminController
 
         if ($asset->deleted_at=='') {
             $actions = '<div style=" white-space: nowrap;"><a href="'.route('update/accessory', $asset->id).'" class="btn btn-warning btn-sm"><i class="fa fa-pencil icon-white"></i></a> <a data-html="false" class="btn delete-asset btn-danger btn-sm" data-toggle="modal" href="'.route('delete/accessory', $asset->id).'" data-content="'.Lang::get('admin/hardware/message.delete.confirm').'" data-title="'.Lang::get('general.delete').' '.htmlspecialchars($asset->name).'?" onClick="return false;"><i class="fa fa-trash icon-white"></i></a></div>';
-        } elseif ($asset->deleted_at!='') {
-            $actions = '<a href="'.route('restore/accessory', $asset->id).'" class="btn btn-warning btn-sm"><i class="fa fa-recycle icon-white"></i></a>';
         }
 
 
@@ -427,8 +430,6 @@ class CategoriesController extends AdminController
 
         if ($asset->deleted_at=='') {
             $actions = '<div style=" white-space: nowrap;"><a href="'.route('update/consumable', $asset->id).'" class="btn btn-warning btn-sm"><i class="fa fa-pencil icon-white"></i></a> <a data-html="false" class="btn delete-asset btn-danger btn-sm" data-toggle="modal" href="'.route('delete/consumable', $asset->id).'" data-content="'.Lang::get('admin/hardware/message.delete.confirm').'" data-title="'.Lang::get('general.delete').' '.htmlspecialchars($asset->name).'?" onClick="return false;"><i class="fa fa-trash icon-white"></i></a></div>';
-        } elseif ($asset->deleted_at!='') {
-            $actions = '<a href="'.route('restore/consumable', $asset->id).'" class="btn btn-warning btn-sm"><i class="fa fa-recycle icon-white"></i></a>';
         }
 
 

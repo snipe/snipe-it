@@ -16,9 +16,9 @@ return array(
     ),
 
     'delete' => array(
-        'confirm'   => '你确定要删除这个分类吗？',
-        'error'   => '删除分类出现异常，请重试。',
-        'success' => '分类已经被成功删除。'
+        'confirm'   => '你确定要删除此配件？',
+        'error'   => '删除配件出错，请重试。',
+        'success' => '删除配件成功'
     ),
 
      'checkout' => array(

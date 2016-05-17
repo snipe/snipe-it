@@ -2,23 +2,23 @@
 
 return array(
 
-    'does_not_exist' => 'Manufacturer does not exist.',
-    'assoc_users'	 => 'This manufacturer is currently associated with at least one model and cannot be deleted. Please update your models to no longer reference this manufacturer and try again. ',
+    'does_not_exist' => 'Gyártó nem létezik.',
+    'assoc_users'	 => 'Ez a gyártó jelenleg legalább egy modellel társítva van, így nem lehet törölni. Kérjük, frissítse a modellt úgy, hogy ne hivatkozzon erre a gyártóra, és próbálkozzon újra. ',
 
     'create' => array(
-        'error'   => 'Manufacturer was not created, please try again.',
-        'success' => 'Manufacturer created successfully.'
+        'error'   => 'Gyártó nem jött létre, próbálkozz újra.',
+        'success' => 'Gyártó sikeresen létrehozva.'
     ),
 
     'update' => array(
-        'error'   => 'Manufacturer was not updated, please try again',
-        'success' => 'Manufacturer updated successfully.'
+        'error'   => 'Gyártó nem lett frissítve, próbálkozz újra',
+        'success' => 'Gyártó sikeresen frissítve.'
     ),
 
     'delete' => array(
-        'confirm'   => 'Are you sure you wish to delete this manufacturer?',
-        'error'   => 'There was an issue deleting the manufacturer. Please try again.',
-        'success' => 'The Manufacturer was deleted successfully.'
+        'confirm'   => 'Biztosan törölni szeretnéd ezt a gyártót?',
+        'error'   => 'Probléma adódott a gyártó törlése közben. Próbálkozz újra.',
+        'success' => 'A gyártó sikeresen törölve.'
     )
 
 );

@@ -52,7 +52,9 @@ return array(
     'checkin' => array(
         'error'   		=> 'Não foi possível devolver o artigo, por favor tente novamente',
         'success' 		=> 'Artigo devolvido com sucesso.',
-        'user_does_not_exist' => 'O utilizador é inválido. Por favor, tente novamente.'
+        'user_does_not_exist' => 'O utilizador é inválido. Por favor, tente novamente.',
+        'already_checked_in'  => 'Este artigo já foi devolvido.',
+
     ),
 
     'requests' => array(

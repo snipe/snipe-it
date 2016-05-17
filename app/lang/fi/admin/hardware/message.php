@@ -52,7 +52,9 @@ return array(
     'checkin' => array(
         'error'   		=> 'Laitteen palautus epäonnistui, yritä uudelleen',
         'success' 		=> 'Laite palautettu onnistuneesti.',
-        'user_does_not_exist' => 'Käyttäjä on virheellinen. Yritä uudelleen.'
+        'user_does_not_exist' => 'Käyttäjä on virheellinen. Yritä uudelleen.',
+        'already_checked_in'  => 'That asset is already checked in.',
+
     ),
 
     'requests' => array(

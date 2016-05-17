@@ -33,6 +33,7 @@ return array(
     "digits_between"   => ":attribute privalo būti tarp :min ir:max skaičių.",
     "email"            => ":attribute formatas neteisingas.",
     "exists"           => "Pasirinktas :attribute neteisingas.",
+    "email_array"      => "One or more email addresses is invalid.",
     "image"            => ":attribute privalo būti paveikslėlis.",
     "in"               => "Pasirinktas :attribute neteisingas.",
     "integer"          => ":attribute turi būti sveikas skaičius.",

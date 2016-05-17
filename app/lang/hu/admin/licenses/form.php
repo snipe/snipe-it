@@ -2,9 +2,9 @@
 
 return array(
 
-    'asset'             => 'Asset',
-    'checkin'           => 'Checkin',
-    'cost'              => 'Purchase Cost',
+    'asset'             => 'Eszköz',
+    'checkin'           => 'Kiadás',
+    'cost'              => 'Beszerzési érték',
     'create'            => 'Create License',
     'date'              => 'Purchase Date',
     'depreciation'      => 'Depreciation',

@@ -2,12 +2,12 @@
 
 return array(
 
-    'does_not_exist' => 'Model does not exist.',
-    'assoc_users'	 => 'This model is currently associated with one or more assets and cannot be deleted. Please delete the assets, and then try deleting again. ',
+    'does_not_exist' => 'Modell nem létezik.',
+    'assoc_users'	 => 'Ez a modell jelenleg társított egy vagy több eszközhöz, és nem törölhető. Legyen szíves törölje az eszközt, és próbálja meg ismét a modell törlését. ',
 
 
     'create' => array(
-        'error'   => 'Model was not created, please try again.',
+        'error'   => 'A model nem lett létrehozva. Próbálkozz újra.',
         'success' => 'Model created successfully.',
         'duplicate_set' => 'An asset model with that name, manufacturer and model number already exists.',
     ),

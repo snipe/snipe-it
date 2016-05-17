@@ -7,7 +7,7 @@ return array(
 	'show_mac_address'			      => '在此型号资产中显示MAC地址',
     'view_deleted'              => '查看已删除',
     'view_models'               => '查看已型号',
-    'fieldset'                  => 'Fieldset',
-    'no_custom_field'           => 'No custom fields',
+    'fieldset'                  => '字段集',
+    'no_custom_field'           => '没有自定义字段',
 
 );

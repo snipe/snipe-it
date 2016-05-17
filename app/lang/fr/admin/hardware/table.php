@@ -18,7 +18,7 @@ return array(
     'serial'   		=> 'Numéro de série',
     'status'   		=> 'Statut',
     'title'      	=> 'Actif ',
-    'image'		=> 'Device Image',
+    'image'		=> 'Image',
     'days_without_acceptance' => 'Jours sans acceptation'
 
 );

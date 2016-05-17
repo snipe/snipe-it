@@ -33,6 +33,7 @@ return array(
     "digits_between"   => ":attribute должно быть между :min и :max цифр.",
     "email"            => "Неправильный формат :attribute.",
     "exists"           => "Выбранный :attribute неправильный.",
+    "email_array"      => "Один или несколько адресов эл. почты являются недействительным.",
     "image"            => ":attribute должен быть изображением.",
     "in"               => "Выбранный :attribute неправильный.",
     "integer"          => ":attribute должно быть числом.",

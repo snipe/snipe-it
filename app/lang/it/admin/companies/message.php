@@ -1,18 +1,18 @@
 <?php
 return array(
-    'does_not_exist' => 'Company does not exist.',
-    'assoc_users'    => 'This company is currently associated with at least one model and cannot be deleted. Please update your models to no longer reference this company and try again. ',
+    'does_not_exist' => 'L\'azienda non esiste.',
+    'assoc_users'    => 'Questa azienda è attualmente associata con almeno un modello e non può essere cancellata. Aggiorna i tuoi modelli perchè non facciano più riferimento a questa azienda e riprova. ',
     'create' => array(
-        'error'   => 'Company was not created, please try again.',
-        'success' => 'Company created successfully.'
+        'error'   => 'L\'azienda non è stata creata, riprova.',
+        'success' => 'Azienda creata con successo.'
     ),
     'update' => array(
-        'error'   => 'Company was not updated, please try again',
-        'success' => 'Company updated successfully.'
+        'error'   => 'Azienda non aggiornata, riprova',
+        'success' => 'Azienda aggiornata con successo.'
     ),
     'delete' => array(
-        'confirm' => 'Are you sure you wish to delete this company?',
-        'error'   => 'There was an issue deleting the company. Please try again.',
-        'success' => 'The Company was deleted successfully.'
+        'confirm' => 'Sei sicuro di voler cancellare questa azienda?',
+        'error'   => 'Si è verificato un problema eliminando l\'azienda. Riprova.',
+        'success' => 'L\'azienda è stata cancellata con successo.'
     )
 );

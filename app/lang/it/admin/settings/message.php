@@ -8,10 +8,15 @@ return array(
         'success'               => 'Impostazioni aggiornate correttamente.'
     ),
     'backup' => array(
-        'delete_confirm'        => 'Are you sure you would like to delete this backup file? This action cannot be undone. ',
-        'file_deleted'          => 'The backup file was successfully deleted. ',
-        'generated'             => 'A new backup file was successfully created.',
-        'file_not_found'        => 'That backup file could not be found on the server.',
+        'delete_confirm'        => 'Sei sicuro di voler cancellare questo file di backup? Questa operazione è irreversibile. ',
+        'file_deleted'          => 'Il file di backup è stato cancellato con successo. ',
+        'generated'             => 'Un nuovo file di backup è stato creato con successo.',
+        'file_not_found'        => 'Quel file di backup non può essere trovato sul server.',
+    ),
+    'purge' => array(
+        'error'     => 'Si è verificato un errore durante la pulizia. ',
+        'validation_failed'     => 'La conferma dell\'eliminazione non è corretta. Digita "DELETE" nel box di conferma.',
+        'success'               => 'Deleted records successfully purged.'
     ),
 
 );

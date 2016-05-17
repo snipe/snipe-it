@@ -33,6 +33,7 @@ return array(
     "digits_between"   => ":attribute 必须在 :min 和 :max 数字之间",
     "email"            => ":attribute 格式不对",
     "exists"           => "选择的 :attribute 无效",
+    "email_array"      => "一个或多个邮件地址不正确",
     "image"            => ":attribute 必须是图片格式",
     "in"               => "选择的 :attribute 无效",
     "integer"          => ":attribute 必须是整数",

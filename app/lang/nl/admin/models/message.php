@@ -2,30 +2,30 @@
 
 return array(
 
-    'does_not_exist' => 'Model does not exist.',
-    'assoc_users'	 => 'This model is currently associated with one or more assets and cannot be deleted. Please delete the assets, and then try deleting again. ',
+    'does_not_exist' => 'Model bestaat niet.',
+    'assoc_users'	 => 'Dit model is momenteel gekoppeld met één of meer producten en kan niet worden verwijderd. Verwijder de producten en probeer het opnieuw. ',
 
 
     'create' => array(
-        'error'   => 'Model was not created, please try again.',
-        'success' => 'Model created successfully.',
-        'duplicate_set' => 'An asset model with that name, manufacturer and model number already exists.',
+        'error'   => 'Model is niet aangemaakt, probeer het opnieuw.',
+        'success' => 'Model is met succes aangemaakt.',
+        'duplicate_set' => 'Een product model met die naam, fabrikant en model nummer bestaat al.',
     ),
 
     'update' => array(
-        'error'   => 'Model was not updated, please try again',
-        'success' => 'Model updated successfully.'
+        'error'   => 'Model is niet gewijzigd, probeer het opnieuw',
+        'success' => 'Model met succes gewijzigd.'
     ),
 
     'delete' => array(
-        'confirm'   => 'Are you sure you wish to delete this asset model?',
-        'error'   => 'There was an issue deleting the model. Please try again.',
-        'success' => 'The model was deleted successfully.'
+        'confirm'   => 'Weet je het zeker dat je deze product model wilt verwijderen?',
+        'error'   => 'Er was een probleem tijden het verwijderen van dit model. Probeer het opnieuw.',
+        'success' => 'Het model is met succes verwijderd.'
     ),
 
     'restore' => array(
-        'error'   		=> 'Model was not restored, please try again',
-        'success' 		=> 'Model restored successfully.'
+        'error'   		=> 'Model is niet hersteld. Probeer opnieuw',
+        'success' 		=> 'Model is met succes hersteld.'
     ),
 
 );

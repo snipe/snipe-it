@@ -1,14 +1,15 @@
 <?php
 
 return array(
-    'about_consumables_title' 			=> 'About Consumables',
-    'about_consumables_text'  			=> 'Consumables are anything purchased that will be used up over time. For example, printer ink or copier paper.',
-    'consumable_name'                  => 'Consumable Name',
-    'cost'				=> 'Purchase Cost',
-    'create'                             => 'Create Consumable',
-    'date'					=> 'Purchase Date',
-    'order'					=> 'Order Number',
-    'remaining' 			             => 'Remaining',
-    'total' 			                 => 'Total',
-    'update'                            => 'Update Consumable',
+    'about_consumables_title' 			=> 'حول المواد الاستهلاكية',
+    'about_consumables_text'  			=> 'المواد الاستهلاكية هي الأشياء المشتراة والتي ستستخدم مع مرور الوقت. على سبيل المثال، حبر الطابعة أو ورق الناسخة.',
+    'consumable_name'                  => 'اسم المادة الإستهلاكية',
+    'cost'				=> 'تكلفة الشراء',
+    'create'                             => 'إنشاء مادة إستهلاكية',
+    'date'					=> 'تاريخ الشراء',
+    'item_no'               => 'Item No.',
+    'order'					=> 'رقم طلب الشراء',
+    'remaining' 			             => 'المتبقية',
+    'total' 			                 => 'المجموع',
+    'update'                            => 'تحديث المادة الإستهلاكية',
 );

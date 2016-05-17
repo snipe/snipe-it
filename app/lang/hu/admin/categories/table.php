@@ -1,10 +1,10 @@
 <?php
 
 return array(
-	'eula_text'      			=> 'EULA',
+	'eula_text'      			=> 'Végfelhasználói engedély',
     'id'      					=> 'ID',
-    'parent'   					=> 'Parent',
-    'require_acceptance'      	=> 'Acceptance',
-    'title'      				=> 'Asset Category Name',
+    'parent'   					=> 'Szülő',
+    'require_acceptance'      	=> 'Elfogadás',
+    'title'      				=> 'Eszköz-kategória neve',
 
 );

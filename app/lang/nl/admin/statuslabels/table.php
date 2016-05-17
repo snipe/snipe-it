@@ -1,15 +1,15 @@
 <?php
 
 return array(
-    'about'      	=> 'About Status Labels',
-    'archived'      	=> 'Archived',
-    'create'      	=> 'Create Status Label',
-    'deployable'      	=> 'Deployable',
-    'info'      	=> 'Status labels are used to describe the various states your assets could be in. They may be out for repair, lost/stolen, etc. You can create new status labels for deployable, pending and archived assets.',
-    'name'      	=> 'Status Name',
-    'pending'      	=> 'Pending',
-    'status_type'   => 'Status Type',
-    'title'      	=> 'Status Labels',
-    'undeployable'  => 'Undeployable',
+    'about'      	=> 'Over status labels',
+    'archived'      	=> 'Gearchiveerd',
+    'create'      	=> 'Maak een Status Label',
+    'deployable'      	=> 'Uitrolbaar',
+    'info'      	=> 'Status labels worden gebruikt om de status van je producten te beschrijven. Ze kunnen worden gerepareerd, verloren/gestolen, etc. Je kan nieuwe status labels maken voor uitrolbaar, inbehandeling en gearchiveerde producten.',
+    'name'      	=> 'Statusnaam',
+    'pending'      	=> 'In behandeling',
+    'status_type'   => 'Statustype',
+    'title'      	=> 'Statuslabels',
+    'undeployable'  => 'Niet uitrolbaar',
     'update'      	=> 'Update Status Label',
 );

@@ -4,14 +4,14 @@
 return array(
 
     'assets_user'       => 'Активи предадени на :name',
+    'current_assets'    => 'Assets currently checked out to this user',
     'clone'             => 'Копиране на потребител',
     'contact_user'      => 'Връзка :name',
     'edit'              => 'Редактиране на потребител',
     'filetype_info'     => 'Позволените типове файлове са png, gif, jpg, jpeg, doc, docx, pdf, txt, zip, и rar.',
     'history_user'      => 'История за :name',
     'last_login'        => 'Последен достъп до системата',
-    'ldap_config_text'  => 'Конфигурационните настройки за LDAP са в директорията app/config във файла ldap.php. Избраното местоположение ще бъде асоциирано с всички заредени от LDAP потребители. Необходимо е да имате създадено поне едно местоположение, за да използвате тази функционалност.',
-    'ldap_text'         => 'Връзка с LDAP и създаване на потребители. Паролите ще бъдат генерирани автоматично.',
+    'ldap_config_text'  => 'LDAP configuration settings can be found Admin > Settings. The (optional) selected location will be set for all imported users.',
     'software_user'     => 'Софтуерни продукти, изписани на :name',
     'view_user'         => 'Преглед на потребител :name',
     'usercsv'           => 'CSV файл',

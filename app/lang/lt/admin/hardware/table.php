@@ -18,7 +18,7 @@ return array(
     'serial'   		=> 'Serijinis numeris',
     'status'   		=> 'Būklė',
     'title'      	=> 'Įranga ',
-    'image'		=> 'Device Image',
+    'image'		=> 'Įrenginio nuotrauka',
     'days_without_acceptance' => 'Dienų skaičius be priėmimo'
 
 );

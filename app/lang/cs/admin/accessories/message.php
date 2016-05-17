@@ -16,9 +16,9 @@ return array(
     ),
 
     'delete' => array(
-        'confirm'   => 'Opravdu chcete smazat tuto kategorii?',
-        'error'   => 'Vyskytl se problém při mazání kategorie. Zkuste to znovu.',
-        'success' => 'Kategorie byla úspěšně smazána.'
+        'confirm'   => 'Jste si jisti, že chcete odstranit toto příslušenství?',
+        'error'   => 'Vyskytl se problém při mazání kategorie. Zkuste to znovu prosím.',
+        'success' => 'Příslušenství bylo úspěšně odstraněno.'
     ),
 
      'checkout' => array(

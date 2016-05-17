@@ -1,9 +1,9 @@
 <?php
 
 return array(
-	'bulk_delete'		=> 'Confrm Bulk Delete Assets',
-  'bulk_delete_help'	=> 'Review the assets for bulk deletion below. Once deleted, these assets can be restored, but they will no longer be associated with any users they are currently assigned to.',
-  'bulk_delete_warn'	=> 'You are about to delete :asset_count assets.',
+	'bulk_delete'		=> 'Confirmo a exclusão dos ativos selecionados',
+  'bulk_delete_help'	=> 'Reveja os ativos selecionados para deletar. Depois de deletados, estes ativos podem ser restaurados, mas não estarão associados aos usuários.',
+  'bulk_delete_warn'	=> 'Você está prestes a excluir.',
 	'bulk_update'		=> 'Ativos da Atualização em Massa',
 	'bulk_update_help'	=> 'Este formulário lhe permite atualizar múltiplos ativos de uma vez só. Apenas preencha os campos que você precisa alterar. Qualquer campo deixado em branco permanecerá inalterado. ',
 	'bulk_update_warn'	=> 'Você está prestes a editar as propriedades de :asset_count ativos.',

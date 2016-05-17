@@ -33,6 +33,7 @@ return array(
     "digits_between"   => ":attribute skal være imellem :min og :max cifre.",
     "email"            => ":attribute formatet er ugylidgt.",
     "exists"           => "The selected :attribute is invalid.",
+    "email_array"      => "One or more email addresses is invalid.",
     "image"            => ":attribute skal være et billede.",
     "in"               => "Det valgte :attribute er ugyldigt.",
     "integer"          => "The :attribute must be an integer.",

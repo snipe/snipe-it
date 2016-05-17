@@ -3,7 +3,8 @@
 return array(
 
     'does_not_exist' => '分类不存在',
-    'assoc_users'	 => '此分类下至少还有一个相关资产，目前不能被删除，请你确定您的所有资产不在此分类下，然后重试。',
+    'assoc_models'	 => 'This category is currently associated with at least one model and cannot be deleted. Please update your models to no longer reference this category and try again. ',
+    'assoc_items'	 => 'This category is currently associated with at least one :asset_type and cannot be deleted. Please update your :asset_type  to no longer reference this category and try again. ',
 
     'create' => array(
         'error'   => '分类创建失败，请重试。',

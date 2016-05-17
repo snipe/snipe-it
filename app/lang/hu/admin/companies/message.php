@@ -1,18 +1,18 @@
 <?php
 return array(
-    'does_not_exist' => 'Company does not exist.',
-    'assoc_users'    => 'This company is currently associated with at least one model and cannot be deleted. Please update your models to no longer reference this company and try again. ',
+    'does_not_exist' => 'A vállalat nem létezik.',
+    'assoc_users'    => 'Ez a vállalat jelenleg legalább egy modellel társítva van, így nem lehet törölni. Kérjük, frissítse a modellt úgy, hogy ne hivatkozzon erre a vállalatra, és próbálkozzon újra. ',
     'create' => array(
-        'error'   => 'Company was not created, please try again.',
-        'success' => 'Company created successfully.'
+        'error'   => 'A vállalat nem jött létre, próbálkozz újra.',
+        'success' => 'Vállalat sikeresen létrehozva.'
     ),
     'update' => array(
-        'error'   => 'Company was not updated, please try again',
-        'success' => 'Company updated successfully.'
+        'error'   => 'A vállalat nem frissült, próbálkozz újra',
+        'success' => 'A vállalat sikereresen frissítve.'
     ),
     'delete' => array(
-        'confirm' => 'Are you sure you wish to delete this company?',
-        'error'   => 'There was an issue deleting the company. Please try again.',
-        'success' => 'The Company was deleted successfully.'
+        'confirm' => 'Biztosan törölni szeretnéd a vállalatot?',
+        'error'   => 'Probléma támadt a vállalat törlésével. Próbálkozz újra.',
+        'success' => 'A vállalat sikeresen törölve lett.'
     )
 );

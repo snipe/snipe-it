@@ -7,7 +7,7 @@ return array(
 	'show_mac_address'			      => 'Отображать поле MAC адрес для данной модели',
     'view_deleted'              => 'Просмотр удаленных',
     'view_models'               => 'Просмотр моделей',
-    'fieldset'                  => 'Fieldset',
-    'no_custom_field'           => 'No custom fields',
+    'fieldset'                  => 'Набор полей',
+    'no_custom_field'           => 'Нет пользовательских полей',
 
 );

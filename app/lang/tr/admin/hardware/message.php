@@ -52,7 +52,9 @@ return array(
     'checkin' => array(
         'error'   		=> 'Demirbaş girişi yapılamadı. Lütfen tekrar deneyin',
         'success' 		=> 'Demirbaş girişi yapıldı.',
-        'user_does_not_exist' => 'Bu kullanıcı geçersiz. Lütfen tekrar deneyin.'
+        'user_does_not_exist' => 'Bu kullanıcı geçersiz. Lütfen tekrar deneyin.',
+        'already_checked_in'  => 'That asset is already checked in.',
+
     ),
 
     'requests' => array(

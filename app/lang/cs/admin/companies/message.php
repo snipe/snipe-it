@@ -1,18 +1,18 @@
 <?php
 return array(
-    'does_not_exist' => 'Company does not exist.',
-    'assoc_users'    => 'This company is currently associated with at least one model and cannot be deleted. Please update your models to no longer reference this company and try again. ',
+    'does_not_exist' => 'Společnost nebyla založena.',
+    'assoc_users'    => 'Tato společnost je právě přiřazena alespoň k jednomu modelu majetku a nemůže tak být odstraněna. Odeberte její vazbu z patřičných modelů a akci opakujte. ',
     'create' => array(
-        'error'   => 'Company was not created, please try again.',
-        'success' => 'Company created successfully.'
+        'error'   => 'Společnost nebyla založena, zkuste to znovu.',
+        'success' => 'Společnost byla v pořádku založena.'
     ),
     'update' => array(
-        'error'   => 'Company was not updated, please try again',
-        'success' => 'Company updated successfully.'
+        'error'   => 'Společnost se nepodařilo upravit, zkuste to prosím znovu',
+        'success' => 'Společnost byla v pořádku upravena.'
     ),
     'delete' => array(
-        'confirm' => 'Are you sure you wish to delete this company?',
-        'error'   => 'There was an issue deleting the company. Please try again.',
-        'success' => 'The Company was deleted successfully.'
+        'confirm' => 'Opravdu si přejete odstranit tuto společnost?',
+        'error'   => 'Nepodařilo se nám zvolenou společnost odstranit. Zkuste to prosím znovu.',
+        'success' => 'Společnost byla v pořádku odstraněna.'
     )
 );

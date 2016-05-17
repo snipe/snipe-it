@@ -3,23 +3,23 @@
 return array(
 
     'field' => array(
-        'invalid'   => 'That field does not exist.',
-        'already_added'   => 'Field already added',
+        'invalid'   => 'Bu alan geçersiz.',
+        'already_added'   => 'Alan zaten mevcut',
 
         'create' => array(
-            'error'   => 'Field was not created, please try again.',
-            'success' => 'Field created successfully.',
+            'error'   => 'Alan oluşturulamadı. Lütfen tekrar deneyin.',
+            'success' => 'Alan başarıyla oluşturuldu.',
             'assoc_success' => 'Field successfully added to fieldset.'
         ),
 
         'update' => array(
-            'error'   => 'Field was not updated, please try again',
-            'success' => 'Field updated successfully.'
+            'error'   => 'Alan güncellenmedi. Lütfen tekrar deneyin',
+            'success' => 'Alan başarıyla güncellendi.'
         ),
 
         'delete' => array(
-            'confirm'   	=> 'Are you sure you wish to delete this field?',
-            'error'   => 'There was an issue deleting the field. Please try again.',
+            'confirm'   	=> 'Bu alanı silmek istediğinizden emin misiniz?',
+            'error'   => 'Silme işleminde başarısız. Lütfen tekrar deneyiniz.',
             'success' => 'The field was deleted successfully.',
             'in_use'   => 'Field is still in use.',
         )

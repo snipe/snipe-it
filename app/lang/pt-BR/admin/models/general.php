@@ -7,7 +7,7 @@ return array(
 	'show_mac_address'			      => 'Exibir o campo de endereço MAC nos ativos neste modelo',
     'view_deleted'              => 'Ver Excluídos',
     'view_models'               => 'Ver Modelos',
-    'fieldset'                  => 'Fieldset',
-    'no_custom_field'           => 'No custom fields',
+    'fieldset'                  => 'Conjunto de campos',
+    'no_custom_field'           => 'Sem campos customizados',
 
 );

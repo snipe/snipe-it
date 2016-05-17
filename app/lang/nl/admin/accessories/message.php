@@ -3,34 +3,34 @@
 return array(
 
     'does_not_exist' => 'Accessoire bestaat niet.',
-    'assoc_users'	 => 'This accessory currently has :count items checked out to users. Please check in the accessories and and try again. ',
+    'assoc_users'	 => 'Deze accessoire heeft op dit moment :count artikelen uitgecheckt aan gebruikers. Check alsjeblieft de accessoire in en probeer opnieuw. ',
 
     'create' => array(
-        'error'   => 'Accessory was not created, please try again.',
+        'error'   => 'Accessoire is niet gecreëerd, Probeer alsjeblieft opnieuw.',
         'success' => 'Accessoire succesvol aangemaakt.'
     ),
 
     'update' => array(
-        'error'   => 'Accessory was not updated, please try again',
+        'error'   => 'Accessoire is niet geüpdatet, Probeer alsjeblieft opnieuw',
         'success' => 'Accessoire succesvol geupdate.'
     ),
 
     'delete' => array(
-        'confirm'   => 'Weet je zeker dat je deze categorie wilt verwijderen?',
-        'error'   => 'Er is een probleem opgetreden bij het verwijderen van deze categorie. Probeer opnieuw, aub.',
-        'success' => 'The category was deleted successfully.'
+        'confirm'   => 'Weet u zeker dat u dit accessoire wilt verwijderen?',
+        'error'   => 'Er was een probleem met verwijderen van het accessoire. Probeer het opnieuw.',
+        'success' => 'Het accessoire is succesvol verwijderd.'
     ),
 
      'checkout' => array(
-        'error'   		=> 'Accessory was not checked out, please try again',
-        'success' 		=> 'Accessory checked out successfully.',
-        'user_does_not_exist' => 'That user is invalid. Please try again.'
+        'error'   		=> 'Accessoire is niet uitgecheckt, probeer alsjeblieft opnieuw',
+        'success' 		=> 'Accessoire is succesvol uitgecheckt.',
+        'user_does_not_exist' => 'Die gebruiker is ongeldig. Probeer alsjeblieft opnieuw.'
     ),
 
     'checkin' => array(
-        'error'   		=> 'Accessory was not checked in, please try again',
-        'success' 		=> 'Accessory checked in successfully.',
-        'user_does_not_exist' => 'That user is invalid. Please try again.'
+        'error'   		=> 'Accessoire is niet ingecheckt. Probeer alsjeblieft opnieuw',
+        'success' 		=> 'Accessoire succesvol ingecheckt.',
+        'user_does_not_exist' => 'Die gebruiker is ongeldig. Probeer alsjeblieft opnieuw.'
     )
 
 

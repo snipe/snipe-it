@@ -16,9 +16,9 @@ return array(
     ),
 
     'delete' => array(
-        'confirm'   => 'Sind Sie sicher, dass Sie diese Kategorie löschen wollen?',
-        'error'   => 'Beim Löschen der Kategorie ist ein Problem aufgetreten. Bitte versuchen Sie es erneut.',
-        'success' => 'Die Kategorie wurde erfolgreich gelöscht.'
+        'confirm'   => 'Sind Sie sicher, dass Sie diese Ticket-Notiz löschen möchten?',
+        'error'   => 'Beim löschen dieses Zubehörs ist ein Problem aufgetreten. Bitte versuchen sie es erneut.',
+        'success' => 'Das Zubehör wurde erfolgreich gelöscht.'
     ),
 
      'checkout' => array(

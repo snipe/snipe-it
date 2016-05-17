@@ -3,7 +3,8 @@
 return array(
 
     'does_not_exist' => 'カテゴリーが存在しません。',
-    'assoc_users'	 => 'このカテゴリーは１つ以上のモデルに関連付けられているため削除できません。このカテゴリーを参照しないようにモデルを更新して再度実行してください。 ',
+    'assoc_models'	 => 'This category is currently associated with at least one model and cannot be deleted. Please update your models to no longer reference this category and try again. ',
+    'assoc_items'	 => 'This category is currently associated with at least one :asset_type and cannot be deleted. Please update your :asset_type  to no longer reference this category and try again. ',
 
     'create' => array(
         'error'   => 'カテゴリーが作成されていません。再度実行してください。',

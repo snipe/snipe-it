@@ -33,6 +33,7 @@ return array(
     "digits_between"   => ":attribute soll mindestens :min und darf maximal :max Stellen haben.",
     "email"            => "Das Format von :attribute ist ungültig.",
     "exists"           => "Das ausgewählte :attribute ist ungültig.",
+    "email_array"      => "Eine oder mehrere Email Adressen sind ungültig.",
     "image"            => ":attribute muss ein Bild sein.",
     "in"               => "Auswahl :attribute ist ungültig.",
     "integer"          => ":attribute muss eine ganze Zahl sein.",

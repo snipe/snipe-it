@@ -38,7 +38,7 @@ return array(
     'supplier'			=> 'Supplier',
     'tag'				=> 'Asset Tag',
     'update'			=> 'Asset Update',
-    'warranty'			=> 'Warranty',
+    'warranty'			=> 'Garanti',
     'years'				=> 'år',
 )
 ;

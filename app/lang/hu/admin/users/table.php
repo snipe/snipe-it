@@ -5,7 +5,7 @@ return array(
     'activated'  			=> 'Aktív',
     'allow'  				=> 'Engedélyezés',
     'checkedout'  			=> 'Eszközök',
-    'created_at' 			=> 'Created',
+    'created_at' 			=> 'Létrehozva',
     'createuser' 			=> 'Felhasználó létrehozása',
     'deny'  				=> 'Elutasítás',
     'email'      			=> 'E-mail cím',

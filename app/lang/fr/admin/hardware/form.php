@@ -3,7 +3,7 @@
 return array(
 	'bulk_delete'		=> 'Confrm Bulk Delete Assets',
   'bulk_delete_help'	=> 'Review the assets for bulk deletion below. Once deleted, these assets can be restored, but they will no longer be associated with any users they are currently assigned to.',
-  'bulk_delete_warn'	=> 'You are about to delete :asset_count assets.',
+  'bulk_delete_warn'	=> 'Vous allez supprimer :asset_count objets.',
 	'bulk_update'		=> 'Mise à jour en bloc d\'actifs',
 	'bulk_update_help'	=> 'Ce formulaire vous permet de mettre à jour plusieurs actifs à la fois. Seulement remplir les champs que vous devez modifier. Tous les champs laissés vides resteront inchangés. ',
 	'bulk_update_warn'	=> 'Vous êtes sur le point de modifier les propriétés de l\'actif :asset_count .',

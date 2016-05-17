@@ -3,25 +3,25 @@
 return array(
 
     'field' => array(
-        'invalid'   => 'That field does not exist.',
-        'already_added'   => 'Field already added',
+        'invalid'   => 'Laukelis neegzistuoja.',
+        'already_added'   => 'Laukelis jau pridėtas',
 
         'create' => array(
-            'error'   => 'Field was not created, please try again.',
-            'success' => 'Field created successfully.',
-            'assoc_success' => 'Field successfully added to fieldset.'
+            'error'   => 'Laukelis nebuvo sukurtas. Prašome bandyti dar kartą.',
+            'success' => 'Laukelis sukurtas sėkmingai.',
+            'assoc_success' => 'Laukelis sėkmingai pridėtas į laukų grupę.'
         ),
 
         'update' => array(
-            'error'   => 'Field was not updated, please try again',
-            'success' => 'Field updated successfully.'
+            'error'   => 'Laukelis nebuvo atnaujintas, prašome bandykite dar kartą',
+            'success' => 'Laukelis atnaujintas sėkmingai.'
         ),
 
         'delete' => array(
-            'confirm'   	=> 'Are you sure you wish to delete this field?',
-            'error'   => 'There was an issue deleting the field. Please try again.',
-            'success' => 'The field was deleted successfully.',
-            'in_use'   => 'Field is still in use.',
+            'confirm'   	=> 'Ar esate tikri jog norite pašalinti šį laukelį?',
+            'error'   => 'Nepavyko ištrinti laukelio. Prašome bandykite dar kartą.',
+            'success' => 'Laukelis buvo sėkmingas ištrintas.',
+            'in_use'   => 'Laukelis naudojamas.',
         )
 
     ),
@@ -31,20 +31,20 @@ return array(
 
 
         'create' => array(
-            'error'   => 'Fieldset was not created, please try again.',
-            'success' => 'Fieldset created successfully.'
+            'error'   => 'Laukelis nebuvo sukurtas. Prašome bandyti dar kartą.',
+            'success' => 'Laukų grupė sukurta sėkmingai.'
         ),
 
         'update' => array(
-            'error'   => 'Fieldset was not updated, please try again',
-            'success' => 'Fieldset updated successfully.'
+            'error'   => 'Laukų grupė nebuvo atnaujinta. Prašome bandyti dar kartą',
+            'success' => 'Laukų grupė atnaujinta sėkmingai.'
         ),
 
         'delete' => array(
-            'confirm'   	=> 'Are you sure you wish to delete this fieldset?',
-            'error'   => 'There was an issue deleting the fieldset. Please try again.',
-            'success' => 'The fieldset was deleted successfully.',
-            'in_use'   => 'Fieldset is still in use.',
+            'confirm'   	=> 'Ar esate tikri jog norite pašalinti šią lankų grupę?',
+            'error'   => 'Klaida bandant ištrinti laukų grupę. Prašome bandykite dar kartą.',
+            'success' => 'Laukų grupė ištrinta sėkmingai.',
+            'in_use'   => 'Laukų grupė vis dar naudojama.',
         )
 
     ),

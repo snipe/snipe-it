@@ -3,25 +3,25 @@
 return array(
 
     'field' => array(
-        'invalid'   => 'That field does not exist.',
-        'already_added'   => 'Field already added',
+        'invalid'   => 'Dat veld bestaat niet.',
+        'already_added'   => 'Veld is al toegevoegd',
 
         'create' => array(
-            'error'   => 'Field was not created, please try again.',
-            'success' => 'Field created successfully.',
-            'assoc_success' => 'Field successfully added to fieldset.'
+            'error'   => 'Veld is niet aangemaakt, probeer het opnieuw.',
+            'success' => 'Veld is met succes aangemaakt.',
+            'assoc_success' => 'Veld is met succes aan veldverzameling toegevoegd.'
         ),
 
         'update' => array(
-            'error'   => 'Field was not updated, please try again',
-            'success' => 'Field updated successfully.'
+            'error'   => 'Veld was niet gewijzigd, probeer het opnieuw',
+            'success' => 'Veld is met succes gewijzigd.'
         ),
 
         'delete' => array(
-            'confirm'   	=> 'Are you sure you wish to delete this field?',
-            'error'   => 'There was an issue deleting the field. Please try again.',
-            'success' => 'The field was deleted successfully.',
-            'in_use'   => 'Field is still in use.',
+            'confirm'   	=> 'Weet je zeker dat je dit veld wilt verwijderen?',
+            'error'   => 'Er was een probleem tijden het verwijderen van dit veld. Probeer het opnieuw.',
+            'success' => 'Het veld is met succes verwijderd.',
+            'in_use'   => 'Veld is nog in gebruik.',
         )
 
     ),
@@ -31,20 +31,20 @@ return array(
 
 
         'create' => array(
-            'error'   => 'Fieldset was not created, please try again.',
-            'success' => 'Fieldset created successfully.'
+            'error'   => 'Veldverzameling is niet aangemaakt, probeer het opnieuw.',
+            'success' => 'Veldverzameling is met succes aangemaakt.'
         ),
 
         'update' => array(
-            'error'   => 'Fieldset was not updated, please try again',
-            'success' => 'Fieldset updated successfully.'
+            'error'   => 'Veldverzameling is niet gewijzigd, probeer het opnieuw',
+            'success' => 'Veldverzameling is met succes gewijzigd.'
         ),
 
         'delete' => array(
-            'confirm'   	=> 'Are you sure you wish to delete this fieldset?',
-            'error'   => 'There was an issue deleting the fieldset. Please try again.',
-            'success' => 'The fieldset was deleted successfully.',
-            'in_use'   => 'Fieldset is still in use.',
+            'confirm'   	=> 'Weet je zeker dat je deze veldverzameling wilt verwijderen?',
+            'error'   => 'Er was een probleem tijdens het verwijderen van deze veldverzameling, probeer het opnieuw.',
+            'success' => 'De veldverzameling is met succes verwijderd.',
+            'in_use'   => 'Veldverzamelingen is nog in gebruikt.',
         )
 
     ),

@@ -2,23 +2,23 @@
 
 return array(
 
-    'does_not_exist' => 'Accessory does not exist.',
+    'does_not_exist' => 'Phụ kiện này hiện không có sẵn.',
     'assoc_users'	 => 'Phụ kiện này hiện có :count cái đã giao cho người dùng. Bạn hãy nhập lại vào trong phần phụ kiện và thử lại lần nữa. ',
 
     'create' => array(
-        'error'   => 'Accessory was not created, please try again.',
-        'success' => 'Accessory created successfully.'
+        'error'   => 'The accessory was not created, please try again.',
+        'success' => 'The accessory was successfully created.'
     ),
 
     'update' => array(
-        'error'   => 'Accessory was not updated, please try again',
-        'success' => 'Accessory updated successfully.'
+        'error'   => 'The accessory was not updated, please try again',
+        'success' => 'The accessory was updated successfully.'
     ),
 
     'delete' => array(
-        'confirm'   => 'Bạn có chắc chắn muốn xoá hạng mục này?',
-        'error'   => 'Có vấn đề xảy ra khi xoá hạng mục này. Bạn hãy thử lại.',
-        'success' => 'Hạng mục này đã được xoá thành công.'
+        'confirm'   => 'Are you sure you wish to delete this accessory?',
+        'error'   => 'There was an issue deleting the accessory. Please try again.',
+        'success' => 'The accessory was deleted successfully.'
     ),
 
      'checkout' => array(

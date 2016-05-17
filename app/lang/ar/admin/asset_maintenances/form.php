@@ -1,14 +1,14 @@
 <?php
 
     return [
-        'asset_maintenance_type' => 'Maintenance Type',
-        'title'                  => 'Title',
-        'start_date'             => 'Started',
-        'completion_date'        => 'Completed',
-        'cost'                   => 'Cost',
-        'is_warranty'            => 'Warranty Improvement',
-        'asset_maintenance_time' => 'Days',
-        'notes'                  => 'Notes',
-        'update'                 => 'Update',
-        'create'                 => 'Create'
+        'asset_maintenance_type' => 'تصنيف الصيانة',
+        'title'                  => 'المسمى',
+        'start_date'             => 'بدأت',
+        'completion_date'        => 'أنجزت',
+        'cost'                   => 'التكلفة',
+        'is_warranty'            => 'تحسين الضمان',
+        'asset_maintenance_time' => 'أيام',
+        'notes'                  => 'مُلاحظات',
+        'update'                 => 'تعديل',
+        'create'                 => 'إنشاء'
     ];

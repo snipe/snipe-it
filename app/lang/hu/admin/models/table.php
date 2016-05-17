@@ -2,10 +2,10 @@
 
 return array(
 
-    'create'				=> 'Create Asset Model',
-    'created_at' 			=> 'Created at',
+    'create'				=> 'Eszköz modell létrehozása',
+    'created_at' 			=> 'Létrehozva',
     'eol'	 				=> 'EOL',
-    'modelnumber'   		=> 'Model No.',
+    'modelnumber'   		=> 'Modell Száma.',
     'name'      			=> 'Asset Model Name',
     'numassets' 			=> 'Assets',
     'title'					=> 'Asset Models',

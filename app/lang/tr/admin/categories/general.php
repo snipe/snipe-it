@@ -5,7 +5,7 @@ return array(
     'about_categories'  				=> 'Demirbaş kategorileri size kategorileri organize etme konusunda yardımcı olur. ',
     'asset_categories' 					=> 'Demirbaş Kategorileri',
     'category_name'  					=> 'Kategori Adı',
-    'checkin_email'                     => 'Send email to user on checkin.',
+    'checkin_email'                     => 'Kullanıcıya mail gönder.',
     'clone'                             => 'Kategoriyi Kopyala',
     'create'  							=> 'Kategori Oluştur',
     'edit'                              => 'Kategoriyi Düzenle',

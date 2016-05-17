@@ -3,7 +3,7 @@
 return array(
 
     'account_already_exists' => 'Tällä email-osoitteella löytyy jo käyttäjätili.',
-    'account_not_found'      => 'The username or password is incorrect.',
+    'account_not_found'      => 'Käyttäjänimi tai salasana on virheellinen.',
     'account_not_activated'  => 'Käyttäjätiliä ei ole aktivoitu.',
     'account_suspended'      => 'Käyttäjätili on jäädytetty.',
     'account_banned'         => 'Käyttäjätili on estetty.',

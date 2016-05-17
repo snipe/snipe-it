@@ -51,7 +51,9 @@ return array(
     'checkin' => array(
         'error'   		=> 'Активът не беше вписан. Моля опитайте отново.',
         'success' 		=> 'Активът вписан успешно.',
-        'user_does_not_exist' => 'Невалиден потребител. Моля опитайте отново.'
+        'user_does_not_exist' => 'Невалиден потребител. Моля опитайте отново.',
+        'already_checked_in'  => 'That asset is already checked in.',
+
     ),
 
     'requests' => array(

@@ -33,7 +33,7 @@ return array(
         'import'    => 'Nepavyko įkelti naudotojų. Prašome bandykite dar kartą.',
         'asset_already_accepted' => 'ši įranga jau buvo priimta.',
         'accept_or_decline' => 'Jūs turite arba priimti arba atmesti šią įrangą.',
-        'incorrect_user_accepted' => 'The asset you have attempted to accept was not checked out to you.',
+        'incorrect_user_accepted' => 'Įranga kurią bandote priimti, nebuvo priskirta Jums.',
         'ldap_could_not_connect' => 'Negali prisijungti prie LDAP serverio. Prašome patikrinkite savo LDAP serverio konfigūraciją LDAP konfigūracijos faile. <br>Klaida iš LDAP Serverio:',
         'ldap_could_not_bind' => 'Negali nustatyti vartotojo prisijungiant prie LDAP serverio. Prašome patikrinkite savo LDAP serverio konfigūraciją LDAP konfigūracijos faile. <br>Klaida iš LDAP Serverio: ',
         'ldap_could_not_search' => 'Negali rasti LDAP serverio. Prašome patikrinkite savo LDAP serverio konfigūraciją LDAP konfigūracijos faile. <br>Klaida iš LDAP Serverio:',

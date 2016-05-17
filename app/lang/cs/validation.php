@@ -33,6 +33,7 @@ return array(
     "digits_between"   => ":attribute musí být mezi hodnotami :min a :max.",
     "email"            => "Formát :attribute je neplatný.",
     "exists"           => "Zvolený :attribute je neplatný.",
+    "email_array"      => "One or more email addresses is invalid.",
     "image"            => ":attribute musí být obrázek.",
     "in"               => "Zvolený :attribute je neplatný.",
     "integer"          => ":attribute musí být celočíselný.",

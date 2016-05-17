@@ -52,7 +52,9 @@ return array(
     'checkin' => array(
         'error'   		=> 'Harta tidak diterima, sila cuba lagi',
         'success' 		=> 'Harta berjaya diterima.',
-        'user_does_not_exist' => 'Pengguna tidah sah. Sila cuba lagi.'
+        'user_does_not_exist' => 'Pengguna tidah sah. Sila cuba lagi.',
+        'already_checked_in'  => 'That asset is already checked in.',
+
     ),
 
     'requests' => array(

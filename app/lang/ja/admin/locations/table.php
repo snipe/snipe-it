@@ -1,7 +1,7 @@
 <?php
 
 return array(
-    'assets_rtd'		=> '資産RTD',
+    'assets_rtd'		=> '資産', // This has NEVER meant Assets Retired. I don't know how it keeps getting reverted.
     'assets_checkedout'		=> '資産割当先',
     'id'      		=> 'ID',
     'city'   		=> '市区町村',

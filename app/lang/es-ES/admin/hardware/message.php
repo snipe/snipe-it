@@ -52,7 +52,9 @@ return array(
     'checkin' => array(
         'error'   		=> 'No se ha quitado el equipo. Intentalo de nuevo.',
         'success' 		=> 'Equipo quitado correctamente.',
-        'user_does_not_exist' => 'Este usuario no es correcto. Intentalo de nuevo.'
+        'user_does_not_exist' => 'Este usuario no es correcto. Intentalo de nuevo.',
+        'already_checked_in'  => 'That asset is already checked in.',
+
     ),
 
     'requests' => array(

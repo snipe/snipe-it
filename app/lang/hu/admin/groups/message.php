@@ -2,21 +2,21 @@
 
 return array(
 
-    'group_exists'        => 'Group already exists!',
-    'group_not_found'     => 'Group [:id] does not exist.',
-    'group_name_required' => 'The name field is required',
+    'group_exists'        => 'A csoport már létezik!',
+    'group_not_found'     => '[:id] csoport nem létezik.',
+    'group_name_required' => 'A név mező kötelező',
 
     'success' => array(
-        'create' => 'Group was successfully created.',
-        'update' => 'Group was successfully updated.',
-        'delete' => 'Group was successfully deleted.',
+        'create' => 'A csoport sikeresen létrehozva.',
+        'update' => 'A csoport sikeresen frissítve.',
+        'delete' => 'A csoport sikeresen törölve.',
     ),
 
     'delete' => array(
-        'confirm'   => 'Are you sure you wish to delete this group?',
-        'create' => 'There was an issue creating the group. Please try again.',
-        'update' => 'There was an issue updating the group. Please try again.',
-        'delete' => 'There was an issue deleting the group. Please try again.',
+        'confirm'   => 'Biztosan törölni szeretnéd ezt a csoportot?',
+        'create' => 'Egy probléma támadt a csoport létrehozása közben. Próbálkozz újra.',
+        'update' => 'Egy probléma támadt a csoport frissítése közben. Próbálkozz újra.',
+        'delete' => 'Egy probléma támadt a csoport törlése közben. Próbálkozz újra.',
     ),
 
 );

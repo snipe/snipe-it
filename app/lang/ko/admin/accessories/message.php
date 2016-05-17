@@ -16,9 +16,9 @@ return array(
     ),
 
     'delete' => array(
-        'confirm'   => '이 분류를 삭제하시겠습니까?',
+        'confirm'   => '이 부속품을 삭제하시겠습니까?',
         'error'   => '분류 삭제 중 문제가 발생했습니다. 다시 시도해 주세요.',
-        'success' => '분류가 삭제되었습니다'
+        'success' => '해당 부속품이 삭제 완료 되었습니다.'
     ),
 
      'checkout' => array(

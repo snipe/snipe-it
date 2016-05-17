@@ -13,5 +13,10 @@ return array(
         'generated'             => 'Backup Datei erfolgreich erstellt.',
         'file_not_found'        => 'Backup Datei konnte nicht gefunden werden.',
     ),
+    'purge' => array(
+        'error'     => 'Beim Bereinigen ist ein Fehler augetreten. ',
+        'validation_failed'     => 'Falsche Bereinigungsbestätigung. Bitte geben Sie das Wort "Löschen" im Bestätigungsfeld ein.',
+        'success'               => 'Gelöschte Einträge erfolgreich bereinigt.'
+    ),
 
 );
