@@ -2,23 +2,23 @@
 
 return array(
 
-    'does_not_exist' => 'Accessory does not exist.',
+    'does_not_exist' => 'L\'accessoire n\'existe pas.',
     'assoc_users'	 => 'Cet accessoire à présentement des items d\'attribué à des utilisateurs. S\'il vous plaît vérifier l\'accessoire et veuillez réessayer. ',
 
     'create' => array(
-        'error'   => 'Accessory was not created, please try again.',
-        'success' => 'Accessory created successfully.'
+        'error'   => 'L\'accessoire n\'a pas été créé, veuillez réessayer.',
+        'success' => 'L\'accessoire a bien été créé.'
     ),
 
     'update' => array(
-        'error'   => 'Accessory was not updated, please try again',
-        'success' => 'Accessory updated successfully.'
+        'error'   => 'L\'accessoire n\'a pas été mis-à-jour, veuillez réessayer',
+        'success' => 'L\'accessoire a bien été mis-à-jour.'
     ),
 
     'delete' => array(
-        'confirm'   => 'Êtes vous sûr de vouloir effacer cette catégorie?',
-        'error'   => 'Problème lors de l\'effacement de cette catégorie. Veuillez réessayer.',
-        'success' => 'Catégorie effacée.'
+        'confirm'   => 'Are you sure you wish to delete this accessory?',
+        'error'   => 'There was an issue deleting the accessory. Please try again.',
+        'success' => 'The accessory was deleted successfully.'
     ),
 
      'checkout' => array(

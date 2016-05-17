@@ -33,6 +33,7 @@ return array(
     "digits_between"   => ":attribute mesti diantara :min and :max digit.",
     "email"            => ":attribute format tidak sah.",
     "exists"           => "Piliah :attribute tidak sah.",
+    "email_array"      => "One or more email addresses is invalid.",
     "image"            => ":attribute mesti imej.",
     "in"               => "Piliah :attribute tidak sah.",
     "integer"          => ":attribute mesti integer.",

@@ -2,34 +2,34 @@
 
 return array(
 
-    'does_not_exist' => 'Consumable does not exist.',
+    'does_not_exist' => 'A fogyóeszköz nem létezik.',
 
     'create' => array(
-        'error'   => 'Consumable was not created, please try again.',
-        'success' => 'Consumable created successfully.'
+        'error'   => 'A kellék nem jött létre, kérlek próbáld meg újra.',
+        'success' => 'A Kellékek sikeresen létrejött.'
     ),
 
     'update' => array(
-        'error'   => 'Consumable was not updated, please try again',
-        'success' => 'Consumable updated successfully.'
+        'error'   => 'A kellék nem frissült, kérlek próbáld meg újra',
+        'success' => 'A Kellékek sikeresen frissítve.'
     ),
 
     'delete' => array(
-        'confirm'   => 'Are you sure you wish to delete this consumable?',
-        'error'   => 'There was an issue deleting the consumable. Please try again.',
-        'success' => 'The consumable was deleted successfully.'
+        'confirm'   => 'Biztosan törli ezt a kelléket?',
+        'error'   => 'Probléma támadt a kellék törlésével. Próbálkozz újra.',
+        'success' => 'A kellék sikeresen törölve lett.'
     ),
 
      'checkout' => array(
-        'error'   		=> 'Consumable was not checked out, please try again',
-        'success' 		=> 'Consumable checked out successfully.',
-        'user_does_not_exist' => 'That user is invalid. Please try again.'
+        'error'   		=> 'A kellék nem lett kiadva, próbálkozz újra',
+        'success' 		=> 'A kellék sikeresen kiadva.',
+        'user_does_not_exist' => 'Érvénytelen felhasználó. Kérem, próbálja újra.'
     ),
 
     'checkin' => array(
-        'error'   		=> 'Consumable was not checked in, please try again',
-        'success' 		=> 'Consumable checked in successfully.',
-        'user_does_not_exist' => 'That user is invalid. Please try again.'
+        'error'   		=> 'A kellék nem lett visszavéve, próbálkozz újra',
+        'success' 		=> 'A kellék sikeresen visszavéve.',
+        'user_does_not_exist' => 'Érvénytelen felhasználó. Kérem, próbálja újra.'
     )
 
 

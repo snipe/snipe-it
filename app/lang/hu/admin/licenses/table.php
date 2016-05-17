@@ -2,16 +2,16 @@
 
 return array(
 
-    'assigned_to'   	=> 'Assigned To',
-    'checkout'   		=> 'In/Out',
+    'assigned_to'   	=> 'Hozzárendelve',
+    'checkout'   		=> 'Be/ki',
     'id'      			=> 'ID',
-    'license_email'   	=> 'License Email',
-    'license_name'   	=> 'Licensed To',
-    'purchase_date'   	=> 'Purchase Date',
-    'purchased'   		=> 'Purchased',
-    'seats'   			=> 'Seats',
-    'hardware'   		=> 'Hardware',
-    'serial'   			=> 'Serial',
-    'title'      		=> 'License',
+    'license_email'   	=> 'Licensz Email',
+    'license_name'   	=> 'Kiállítva',
+    'purchase_date'   	=> 'Beszerzés dátuma',
+    'purchased'   		=> 'Megvásárolva',
+    'seats'   			=> 'Kszékek',
+    'hardware'   		=> 'Hardver',
+    'serial'   			=> 'Sorozatszám',
+    'title'      		=> 'Licensz',
 
 );

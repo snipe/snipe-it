@@ -3,25 +3,25 @@
 return array(
 
     'field' => array(
-        'invalid'   => 'That field does not exist.',
-        'already_added'   => 'Field already added',
+        'invalid'   => 'Takové pole neexistuje.',
+        'already_added'   => 'Takové pole již existuje',
 
         'create' => array(
-            'error'   => 'Field was not created, please try again.',
-            'success' => 'Field created successfully.',
-            'assoc_success' => 'Field successfully added to fieldset.'
+            'error'   => 'Pole se nepodařilo přidat, pokuste se o to znovu.',
+            'success' => 'Pole se v pořádku vytvořilo.',
+            'assoc_success' => 'Pole se v pořádku přidalo do sady.'
         ),
 
         'update' => array(
-            'error'   => 'Field was not updated, please try again',
-            'success' => 'Field updated successfully.'
+            'error'   => 'Pole se nepodařilo upravit, pokuste se o to znovu',
+            'success' => 'Pole v pořádku upraveno.'
         ),
 
         'delete' => array(
-            'confirm'   	=> 'Are you sure you wish to delete this field?',
-            'error'   => 'There was an issue deleting the field. Please try again.',
-            'success' => 'The field was deleted successfully.',
-            'in_use'   => 'Field is still in use.',
+            'confirm'   	=> 'Opravdu si přejete odstranit toto pole?',
+            'error'   => 'Nepodařilo se nám pole odstranit. Zkuste to prosím znovu.',
+            'success' => 'Pole bylo v pořádku odstraněno.',
+            'in_use'   => 'Toto pole je stále používané.',
         )
 
     ),
@@ -31,20 +31,20 @@ return array(
 
 
         'create' => array(
-            'error'   => 'Fieldset was not created, please try again.',
-            'success' => 'Fieldset created successfully.'
+            'error'   => 'Sadu se nám nepodařilo vytvořit, pokuste se o to znovu.',
+            'success' => 'Sada byla úspěšně vytvořena.'
         ),
 
         'update' => array(
-            'error'   => 'Fieldset was not updated, please try again',
-            'success' => 'Fieldset updated successfully.'
+            'error'   => 'Sadu se nám nepodařilo upravit, pokuste se o to znovu',
+            'success' => 'Sada byla v pořádku upravena.'
         ),
 
         'delete' => array(
-            'confirm'   	=> 'Are you sure you wish to delete this fieldset?',
-            'error'   => 'There was an issue deleting the fieldset. Please try again.',
-            'success' => 'The fieldset was deleted successfully.',
-            'in_use'   => 'Fieldset is still in use.',
+            'confirm'   	=> 'Opravdu si přejete odstranit celou tuto sadu?',
+            'error'   => 'Nepodařilo se nám sadu odstranit. Zkuste to prosím znovu.',
+            'success' => 'Sada byla v pořádku odstraněna.',
+            'in_use'   => 'Sada je stále užívána.',
         )
 
     ),

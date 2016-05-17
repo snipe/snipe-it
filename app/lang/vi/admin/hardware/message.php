@@ -52,7 +52,9 @@ return array(
     'checkin' => array(
         'error'   		=> 'Tài sản chưa được checkin, xin vui lòng thử lại',
         'success' 		=> 'Tài sản đã checkin thành công.',
-        'user_does_not_exist' => 'Người dùng này không tồn tại. Bạn hãy thử lại.'
+        'user_does_not_exist' => 'Người dùng này không tồn tại. Bạn hãy thử lại.',
+        'already_checked_in'  => 'That asset is already checked in.',
+
     ),
 
     'requests' => array(

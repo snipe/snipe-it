@@ -3,7 +3,8 @@
 return array(
 
     'does_not_exist' => 'Categoria nu exista.',
-    'assoc_users'	 => 'Aceasta categorie este momentan asociata cu cel putin un model si nu poate fi stearsa. Va rugam actualizati modelele asociate acestei categorii si incercati iar. ',
+    'assoc_models'	 => 'This category is currently associated with at least one model and cannot be deleted. Please update your models to no longer reference this category and try again. ',
+    'assoc_items'	 => 'This category is currently associated with at least one :asset_type and cannot be deleted. Please update your :asset_type  to no longer reference this category and try again. ',
 
     'create' => array(
         'error'   => 'Categoria nu a fost creata, va rugam incercati iar.',

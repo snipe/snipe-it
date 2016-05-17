@@ -2,9 +2,9 @@
 
 return array(
 
-    'does_not_exist' => 'License does not exist.',
-    'user_does_not_exist' => 'User does not exist.',
-    'asset_does_not_exist' 	=> 'The asset you are trying to associate with this license does not exist.',
+    'does_not_exist' => 'Engedély nem létezik.',
+    'user_does_not_exist' => 'Felhasználó nem létezik.',
+    'asset_does_not_exist' 	=> 'A licencel társítani kívánt eszköz nem létezik.',
     'owner_doesnt_match_asset' => 'The asset you are trying to associate with this license is owned by somene other than the person selected in the assigned to dropdown.',
     'assoc_users'	 => 'This license is currently checked out to a user and cannot be deleted. Please check the license in first, and then try deleting again. ',
 

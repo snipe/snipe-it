@@ -3,15 +3,15 @@
 return array(
 
     'does_not_exist' => 'De leverancier bestaat niet.',
-    'assoc_users'	 => 'This supplier is currently associated with at least one model and cannot be deleted. Please update your models to no longer reference this supplier and try again. ',
+    'assoc_users'	 => 'Deze leverancier is momenteel gekoppeld met ten minste één model en kan hierdoor niet verwijderd worden. Pas je modellen aan zodat deze leverancier niet langer gebruikt wordt en probeer het opnieuw. ',
 
     'create' => array(
-        'error'   => 'Supplier was not created, please try again.',
+        'error'   => 'De leverancier is niet aangemaakt, probeer het opnieuw.',
         'success' => 'De leverancier is succesvol aangemaakt.'
     ),
 
     'update' => array(
-        'error'   => 'Supplier was not updated, please try again',
+        'error'   => 'De leverancier is niet gewijzigd, probeer het opnieuw',
         'success' => 'De leverancier is succesvol aangemaakt.'
     ),
 

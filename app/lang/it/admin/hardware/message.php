@@ -52,12 +52,14 @@ return array(
     'checkin' => array(
         'error'   		=> 'Il bene non è stato registrato, per favore riprova',
         'success' 		=> 'Il bene è stato registrato con successo.',
-        'user_does_not_exist' => 'Questo utente non è valido. Riprova.'
+        'user_does_not_exist' => 'Questo utente non è valido. Riprova.',
+        'already_checked_in'  => 'That asset is already checked in.',
+
     ),
 
     'requests' => array(
-        'error'   		=> 'Asset was not requested, please try again',
-        'success' 		=> 'Asset requested successfully.',
+        'error'   		=> 'L\'asset non è stato richiesto, si prega di riprovare',
+        'success' 		=> 'Asset richiesto con successo.',
     )
 
 );

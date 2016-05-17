@@ -7,6 +7,7 @@ return array(
     'cost'				=> 'Innkjøpskostnad',
     'create'                             => 'Legg til forbruksvare',
     'date'					=> 'Innkjøpsdato',
+    'item_no'               => 'Item No.',
     'order'					=> 'Ordrenummer',
     'remaining' 			             => 'Gjenstår',
     'total' 			                 => 'Total',

@@ -8,6 +8,6 @@ return array(
     'view_deleted'              => 'Visualizza Eliminati',
     'view_models'               => 'Visualizza i modelli',
     'fieldset'                  => 'Fieldset',
-    'no_custom_field'           => 'No custom fields',
+    'no_custom_field'           => 'Nessun campo personalizzato',
 
 );

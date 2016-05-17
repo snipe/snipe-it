@@ -1,14 +1,15 @@
 <?php
 
 return array(
-    'about_consumables_title' 			=> 'About Consumables',
-    'about_consumables_text'  			=> 'Consumables are anything purchased that will be used up over time. For example, printer ink or copier paper.',
-    'consumable_name'                  => 'Consumable Name',
-    'cost'				=> 'Purchase Cost',
-    'create'                             => 'Create Consumable',
-    'date'					=> 'Purchase Date',
-    'order'					=> 'Order Number',
+    'about_consumables_title' 			=> 'O spotřebním materiálu',
+    'about_consumables_text'  			=> 'Spotřební materiál jsou takové položky, které jsou v čase spotřebovávány, jako např. toner, inkoust či papír do tiskáren.',
+    'consumable_name'                  => 'Název sp. materiálu',
+    'cost'				=> 'Náklady',
+    'create'                             => 'Vytvořit sp. materiál',
+    'date'					=> 'Datum pořízení',
+    'item_no'               => 'Item No.',
+    'order'					=> 'Číslo objednávky',
     'remaining' 			             => 'Zbývá',
     'total' 			                 => 'Celkem',
-    'update'                            => 'Update Consumable',
+    'update'                            => 'Upravit sp. materiál',
 );

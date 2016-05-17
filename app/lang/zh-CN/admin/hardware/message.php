@@ -51,7 +51,9 @@ return array(
     'checkin' => array(
         'error'   		=> '资产还没有借入，请重试。',
         'success' 		=> '资产借入成功。',
-        'user_does_not_exist' => '无效用户，请重试。'
+        'user_does_not_exist' => '无效用户，请重试。',
+        'already_checked_in'  => '资产已经被申领',
+
     ),
 
     'requests' => array(

@@ -1,17 +1,17 @@
 <?php
 
     return [
-        'not_found'                    => 'Asset Maintenance you were looking for was not found!',
+        'not_found'                    => 'Údržbu zařízení, kterou hledáte, se nepodařilo najít.',
         'delete'                       => [
-            'confirm' => 'Are you sure you wish to delete this asset maintenance?',
-            'error'   => 'There was an issue deleting the asset maintenance. Please try again.',
-            'success' => 'The asset maintenance was deleted successfully.'
+            'confirm' => 'Opravdu si přejete smazat tuto údržbu?',
+            'error'   => 'Při odstraňování údržby nastala chyba. Zkuste to prosím znovu.',
+            'success' => 'Údržba zařízení byla úspěšně odstraněna.'
         ],
         'create'                       => [
-            'error'   => 'Asset Maintenance was not created, please try again.',
-            'success' => 'Asset Maintenance created successfully.'
+            'error'   => 'Údržbu zařízení se nepodařilo vytvořit, zkuste to prosím znovu.',
+            'success' => 'Údržba zařízení byla v pořádku vytvořena.'
         ],
-        'asset_maintenance_incomplete' => 'Not Completed Yet',
+        'asset_maintenance_incomplete' => 'Prozatím nedokončeno',
         'warranty'                     => 'Záruka',
         'not_warranty'                 => 'Bez záruky',
     ];

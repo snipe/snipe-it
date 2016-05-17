@@ -2,12 +2,12 @@
 
 return array(
 
-    'deleted'  					        => 'This model has been deleted. <a href="/hardware/models/:model_id/restore">Click here to restore it</a>.',
-    'restore'                   => 'Restore Model',
-	'show_mac_address'			      => 'Show MAC address field in assets in this model',
-    'view_deleted'              => 'View Deleted',
-    'view_models'               => 'View Models',
-    'fieldset'                  => 'Fieldset',
-    'no_custom_field'           => 'No custom fields',
+    'deleted'  					        => 'Ez a modell törölve lett. <a href="/hardware/models/:model_id/restore">Itt visszaállíthatod</a>.',
+    'restore'                   => 'Modell Visszaállítása',
+	'show_mac_address'			      => 'Mutasd a MAC cím mezőt ennél az eszköznél',
+    'view_deleted'              => 'Töröltek megtekintése',
+    'view_models'               => 'Modellek megtekintése',
+    'fieldset'                  => 'Mezőcsoport',
+    'no_custom_field'           => 'Nincsenek egyedi mezők',
 
 );

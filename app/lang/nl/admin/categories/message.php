@@ -3,7 +3,8 @@
 return array(
 
     'does_not_exist' => 'Categorie bestaat niet.',
-    'assoc_users'	 => 'Deze categorie is momenteel gekoppeld met ten minste 1 model en kan niet verwijderd worden. Pas uw modellen aan zodat deze categorie niet langer gebruikt wordt en probeer opnieuw.',
+    'assoc_models'	 => 'This category is currently associated with at least one model and cannot be deleted. Please update your models to no longer reference this category and try again. ',
+    'assoc_items'	 => 'This category is currently associated with at least one :asset_type and cannot be deleted. Please update your :asset_type  to no longer reference this category and try again. ',
 
     'create' => array(
         'error'   => 'Categorie werd  niet aangemaakt. Probeer opnieuw, aub.',

@@ -2,20 +2,20 @@
 
 return array(
 
-    'account_already_exists' => 'An account with the this email already exists.',
-    'account_not_found'      => 'The username or password is incorrect.',
-    'account_not_activated'  => 'This user account is not activated.',
-    'account_suspended'      => 'This user account is suspended.',
-    'account_banned'         => 'This user account is banned.',
+    'account_already_exists' => 'Bu email adresi ile tanımlanmış bir hesap var.',
+    'account_not_found'      => 'Kullanıcı adı veya şifresi yanlış.',
+    'account_not_activated'  => 'Hesabınız aktif edilmemiş.',
+    'account_suspended'      => 'Hesabınız durdurulmuş.',
+    'account_banned'         => 'Hesabınız engellenmiş.',
 
     'signin' => array(
-        'error'   => 'There was a problem while trying to log you in, please try again.',
-        'success' => 'You have successfully logged in.',
+        'error'   => 'Bir problem ile karşılaştık, lütfen tekrar deneyin.',
+        'success' => 'Başarıyla giriş yaptınız.',
     ),
 
     'signup' => array(
         'error'   => 'There was a problem while trying to create your account, please try again.',
-        'success' => 'Account sucessfully created.',
+        'success' => 'Hesap başarılı bir şekilde oluşturuldu.',
     ),
 
         'forgot-password' => array(

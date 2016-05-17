@@ -2,13 +2,13 @@
 
 return array(
 
-    'accepted'                  => 'You have successfully accepted this asset.',
+    'accepted'                  => 'Bu aksesuarı başarıyla kabul ettiniz.',
     'declined'                  => 'You have successfully declined this asset.',
-    'user_exists'               => 'User already exists!',
-    'user_not_found'            => 'User [:id] does not exist.',
+    'user_exists'               => 'Kullanıcı zaten var!',
+    'user_not_found'            => 'Kullanıcı [:id] yok.',
     'user_login_required'       => 'The login field is required',
-    'user_password_required'    => 'The password is required.',
-    'insufficient_permissions'  => 'Insufficient Permissions.',
+    'user_password_required'    => 'Şifre Gerekli.',
+    'insufficient_permissions'  => 'Yetersiz izinler.',
     'user_deleted_warning'      => 'This user has been deleted. You will have to restore this user to edit them or assign them new assets.',
     'ldap_not_configured'        => 'LDAP integration has not been configured for this installation.',
 

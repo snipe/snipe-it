@@ -7,7 +7,7 @@ return array(
 	'show_mac_address'			      => 'Rodykite MAC adreso laukelį įrangoje šiam modeliui',
     'view_deleted'              => 'Peržiūrėti ištrintus',
     'view_models'               => 'Peržiūrėti modelius',
-    'fieldset'                  => 'Fieldset',
-    'no_custom_field'           => 'No custom fields',
+    'fieldset'                  => 'Laukų grupė',
+    'no_custom_field'           => 'Nėra pritaikytų laukų',
 
 );

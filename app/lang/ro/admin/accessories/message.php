@@ -16,9 +16,9 @@ return array(
     ),
 
     'delete' => array(
-        'confirm'   => 'Sunteti sigur ca vreti sa stergeti aceasta categorie?',
-        'error'   => 'A aparut o problema la stergerea categoriei. Va rugam incercati din nou.',
-        'success' => 'Categoria a fost stearsa.'
+        'confirm'   => 'Are you sure you wish to delete this accessory?',
+        'error'   => 'There was an issue deleting the accessory. Please try again.',
+        'success' => 'The accessory was deleted successfully.'
     ),
 
      'checkout' => array(

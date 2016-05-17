@@ -7,6 +7,7 @@ return array(
     'cost'				=> 'Purchase Cost',
     'create'                             => 'Tạo vật tư phụ',
     'date'					=> 'Purchase Date',
+    'item_no'               => 'Item No.',
     'order'					=> 'Order Number',
     'remaining' 			             => 'Còn lại',
     'total' 			                 => 'Tổng số',

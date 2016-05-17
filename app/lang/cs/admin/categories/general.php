@@ -5,7 +5,7 @@ return array(
     'about_categories'  				=> 'Kategorie pomáhají organizovat majetek. Takovou kategorii může být např. &quot;Desktopy&quot;, &quot;Notebooky&quot;, &quot;Mobilní telefony&quot;, &quot;Tablety&quot;, apod., kategorie můžete ale používat jakkoliv Vám to bude dávat smysl. ',
     'asset_categories' 					=> 'Kategorie majetku',
     'category_name'  					=> 'Jméno kategorie',
-    'checkin_email'                     => 'Send email to user on checkin.',
+    'checkin_email'                     => 'Poslat uživateli zprávu při přejímce.',
     'clone'                             => 'Klonovat Kategorii',
     'create'  							=> 'Vytvořit kategorii',
     'edit'                              => 'Upravit Kategorii',

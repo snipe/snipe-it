@@ -33,6 +33,7 @@ return array(
     "digits_between"   => ":attribute трябва да бъде с дължина между :min и :max цифри.",
     "email"            => ":attribute е с невалиден формат.",
     "exists"           => "Избраният :attribute е невалиден.",
+    "email_array"      => "One or more email addresses is invalid.",
     "image"            => ":attribute трябва да бъде изображение.",
     "in"               => "Избраният :attribute е невалиден.",
     "integer"          => ":attribute трябва да бъде целочислен.",

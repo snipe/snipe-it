@@ -7,7 +7,7 @@ return array(
 	'show_mac_address'			      => 'Vis felt for MAC-adresse for denne modellen',
     'view_deleted'              => 'Vis slettede',
     'view_models'               => 'Vis modeller',
-    'fieldset'                  => 'Fieldset',
-    'no_custom_field'           => 'No custom fields',
+    'fieldset'                  => 'Felt',
+    'no_custom_field'           => 'Ingen egendefinerte felt',
 
 );

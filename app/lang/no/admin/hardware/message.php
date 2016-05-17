@@ -52,12 +52,14 @@ return array(
     'checkin' => array(
         'error'   		=> 'Eiendel ble ikke sjekket inn. Prøv igjen',
         'success' 		=> 'Vellykket innsjekk av eiendel.',
-        'user_does_not_exist' => 'Denne brukeren er ugyldig. Vennligst prøv igjen.'
+        'user_does_not_exist' => 'Denne brukeren er ugyldig. Vennligst prøv igjen.',
+        'already_checked_in'  => 'That asset is already checked in.',
+
     ),
 
     'requests' => array(
-        'error'   		=> 'Asset was not requested, please try again',
-        'success' 		=> 'Asset requested successfully.',
+        'error'   		=> 'Eiendelen ble ikke forespurt, prøv igjen',
+        'success' 		=> 'Eiendel ble forespurt.',
     )
 
 );

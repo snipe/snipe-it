@@ -51,12 +51,14 @@ return array(
     'checkin' => array(
         'error'   		=> 'Ativo não foi retornado, favor tentar novamente',
         'success' 		=> 'Ativo retornado com sucesso.',
-        'user_does_not_exist' => 'Este usuário é inválido. Tente novamente.'
+        'user_does_not_exist' => 'Este usuário é inválido. Tente novamente.',
+        'already_checked_in'  => 'That asset is already checked in.',
+
     ),
 
     'requests' => array(
-        'error'   		=> 'Asset was not requested, please try again',
-        'success' 		=> 'Asset requested successfully.',
+        'error'   		=> 'Ativo não foi solicitado, por favor tente novamente',
+        'success' 		=> 'Ativo solicitado com sucesso.',
     )
 
 );

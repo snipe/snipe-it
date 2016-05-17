@@ -16,9 +16,9 @@ return array(
     ),
 
     'delete' => array(
-        'confirm'   => 'Estás seguro de eliminar esta categoría?',
-        'error'   => 'Ha habido un problema eliminando la categoría. Intentalo de nuevo.',
-        'success' => 'La categoría fue eliminada exitosamente.'
+        'confirm'   => 'Are you sure you wish to delete this accessory?',
+        'error'   => 'There was an issue deleting the accessory. Please try again.',
+        'success' => 'The accessory was deleted successfully.'
     ),
 
      'checkout' => array(

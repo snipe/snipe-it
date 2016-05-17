@@ -2,11 +2,11 @@
 
 return array(
 
-    'does_not_exist' => 'Supplier does not exist.',
-    'assoc_users'	 => 'This supplier is currently associated with at least one model and cannot be deleted. Please update your models to no longer reference this supplier and try again. ',
+    'does_not_exist' => 'Beszállító nem létezik.',
+    'assoc_users'	 => 'Ez a beszállító jelenleg legalább egy modellel társítva van, így nem lehet törölni. Kérjük, frissítse a modellt úgy, hogy ne hivatkozzon erre a beszállítóra, és próbálkozzon újra. ',
 
     'create' => array(
-        'error'   => 'Supplier was not created, please try again.',
+        'error'   => 'Beszállító nem lett létrehozva, próbálja meg újra.',
         'success' => 'Supplier created successfully.'
     ),
 

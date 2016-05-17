@@ -2,34 +2,34 @@
 
 return array(
 
-    'does_not_exist' => 'Consumable does not exist.',
+    'does_not_exist' => 'Verbruiksartikel bestaat niet.',
 
     'create' => array(
-        'error'   => 'Consumable was not created, please try again.',
-        'success' => 'Consumable created successfully.'
+        'error'   => 'Verbruiksartikel is niet aangemaakt, probeer het opnieuw.',
+        'success' => 'Verbruiksartikel is met succes aangemaakt.'
     ),
 
     'update' => array(
-        'error'   => 'Consumable was not updated, please try again',
-        'success' => 'Consumable updated successfully.'
+        'error'   => 'Verbruiksartikel is niet gewijzigd, probeer het opnieuw',
+        'success' => 'Verbruiksartikel is met succes gewijzigd.'
     ),
 
     'delete' => array(
-        'confirm'   => 'Are you sure you wish to delete this consumable?',
-        'error'   => 'There was an issue deleting the consumable. Please try again.',
-        'success' => 'The consumable was deleted successfully.'
+        'confirm'   => 'Weet je het zeker dat je deze verbruiksartikel wilt verwijderen?',
+        'error'   => 'Er was een probleem met het verwijderen van dit verbruiksartikel. Probeer het opnieuw.',
+        'success' => 'Het verbruiksartikel is met succes verwijderd.'
     ),
 
      'checkout' => array(
-        'error'   		=> 'Consumable was not checked out, please try again',
-        'success' 		=> 'Consumable checked out successfully.',
-        'user_does_not_exist' => 'That user is invalid. Please try again.'
+        'error'   		=> 'Verbruiksartikel is niet uitgecheckt, probeer het opnieuw',
+        'success' 		=> 'Verbruiksartikel is met succes uitgecheckt.',
+        'user_does_not_exist' => 'Die gebruiker is ongeldig. Probeer het opnieuw.'
     ),
 
     'checkin' => array(
-        'error'   		=> 'Consumable was not checked in, please try again',
-        'success' 		=> 'Consumable checked in successfully.',
-        'user_does_not_exist' => 'That user is invalid. Please try again.'
+        'error'   		=> 'Verbruiksartikel is niet ingecheckt, probeer het opnieuw',
+        'success' 		=> 'Verbruiksartikel is met succes ingecheckt.',
+        'user_does_not_exist' => 'Die gebruiker is ongeldig. Probeer het opnieuw.'
     )
 
 

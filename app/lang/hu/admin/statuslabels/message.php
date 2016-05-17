@@ -2,12 +2,12 @@
 
 return array(
 
-    'does_not_exist' => 'Location does not exist.',
-    'assoc_users'	 => 'This location is currently associated with at least one user and cannot be deleted. Please update your users to no longer reference this location and try again. ',
+    'does_not_exist' => 'Hely nem létezik.',
+    'assoc_users'	 => 'Ez a hely jelenleg hozzá rendelve legalább egy felhasználóhoz, és nem törölhető. Kérjük, frissítse a felhasználókat, hogy ne hivatkozzanak erre a helyre, és próbálja meg újra. ',
 
 
     'create' => array(
-        'error'   => 'Location was not created, please try again.',
+        'error'   => 'Az elhelyezkedés nem jött létre, próbálkozz újra.',
         'success' => 'Location created successfully.'
     ),
 

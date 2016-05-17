@@ -3,25 +3,25 @@
 return array(
 
     'field' => array(
-        'invalid'   => 'That field does not exist.',
-        'already_added'   => 'Field already added',
+        'invalid'   => 'Это поле не существует.',
+        'already_added'   => 'Поле уже добавлено',
 
         'create' => array(
-            'error'   => 'Field was not created, please try again.',
-            'success' => 'Field created successfully.',
-            'assoc_success' => 'Field successfully added to fieldset.'
+            'error'   => 'Поле не было создано, попробуйте ещё раз.',
+            'success' => 'Поле успешно создано.',
+            'assoc_success' => 'Поле успешно добавлено в набор.'
         ),
 
         'update' => array(
-            'error'   => 'Field was not updated, please try again',
-            'success' => 'Field updated successfully.'
+            'error'   => 'Поле не было обновлено, попробуйте ещё раз',
+            'success' => 'Поле успешно обновлено.'
         ),
 
         'delete' => array(
-            'confirm'   	=> 'Are you sure you wish to delete this field?',
-            'error'   => 'There was an issue deleting the field. Please try again.',
-            'success' => 'The field was deleted successfully.',
-            'in_use'   => 'Field is still in use.',
+            'confirm'   	=> 'Вы уверены, что хотите удалить это поле?',
+            'error'   => 'При удалении поля возникла ошибка. Попробуйте еще раз.',
+            'success' => 'Поле было успешно удалено.',
+            'in_use'   => 'Поле ещё используется.',
         )
 
     ),
@@ -31,20 +31,20 @@ return array(
 
 
         'create' => array(
-            'error'   => 'Fieldset was not created, please try again.',
-            'success' => 'Fieldset created successfully.'
+            'error'   => 'Набор полей не был создан, попробуйте ещё раз.',
+            'success' => 'Набор полей создан успешно.'
         ),
 
         'update' => array(
-            'error'   => 'Fieldset was not updated, please try again',
-            'success' => 'Fieldset updated successfully.'
+            'error'   => 'Набор полей не был обновлен, попробуйте ещё раз',
+            'success' => 'Набор полей успешно обновлён.'
         ),
 
         'delete' => array(
-            'confirm'   	=> 'Are you sure you wish to delete this fieldset?',
-            'error'   => 'There was an issue deleting the fieldset. Please try again.',
-            'success' => 'The fieldset was deleted successfully.',
-            'in_use'   => 'Fieldset is still in use.',
+            'confirm'   	=> 'Вы уверены, что хотите удалить этот набор полей?',
+            'error'   => 'При удалении набора полей возникла ошибка. Попробуйте еще раз.',
+            'success' => 'Набор полей был успешно удален.',
+            'in_use'   => 'Набор полей всё ещё используется.',
         )
 
     ),

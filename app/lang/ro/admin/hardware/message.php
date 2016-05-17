@@ -52,7 +52,9 @@ return array(
     'checkin' => array(
         'error'   		=> 'Activul nu a fost primit, va rugam incercati iar',
         'success' 		=> 'Activul a fost primit.',
-        'user_does_not_exist' => 'Utilizatorul este invalid. Va rugam incercati iar.'
+        'user_does_not_exist' => 'Utilizatorul este invalid. Va rugam incercati iar.',
+        'already_checked_in'  => 'That asset is already checked in.',
+
     ),
 
     'requests' => array(

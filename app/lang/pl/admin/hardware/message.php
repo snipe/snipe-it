@@ -52,7 +52,9 @@ return array(
     'checkin' => array(
         'error'   		=> 'Nie można przypisać nabytku/zasobu, proszę spróbować ponownie',
         'success' 		=> 'Nabytek/zasób przypisany.',
-        'user_does_not_exist' => 'Nieprawidłowy użytkownik. Proszę spróbować ponownie.'
+        'user_does_not_exist' => 'Nieprawidłowy użytkownik. Proszę spróbować ponownie.',
+        'already_checked_in'  => 'That asset is already checked in.',
+
     ),
 
     'requests' => array(

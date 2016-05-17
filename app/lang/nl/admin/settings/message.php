@@ -4,14 +4,19 @@ return array(
 
 
     'update' => array(
-        'error'                 => 'An error has occurred while updating. ',
-        'success'               => 'Settings updated successfully.'
+        'error'                 => 'Er is een fout opgetreden tijdens het updaten. ',
+        'success'               => 'Instellingen zijn met succes gewijzigd.'
     ),
     'backup' => array(
-        'delete_confirm'        => 'Are you sure you would like to delete this backup file? This action cannot be undone. ',
-        'file_deleted'          => 'The backup file was successfully deleted. ',
-        'generated'             => 'A new backup file was successfully created.',
-        'file_not_found'        => 'That backup file could not be found on the server.',
+        'delete_confirm'        => 'Weet je het zeker dat je deze Back-up bestand wilt verwijderen? Dit kan niet meer terug gedraaid worden. ',
+        'file_deleted'          => 'De Back-up bestand is met succes verwijderd. ',
+        'generated'             => 'Een nieuw Back-up bestand is met succes aangemaakt.',
+        'file_not_found'        => 'Die Back-up bestand kon niet gevonden worden op de server.',
+    ),
+    'purge' => array(
+        'error'     => 'An error has occurred while purging. ',
+        'validation_failed'     => 'Your purge confirmation is incorrect. Please type the word "DELETE" in the confirmation box.',
+        'success'               => 'Deleted records successfully purged.'
     ),
 
 );

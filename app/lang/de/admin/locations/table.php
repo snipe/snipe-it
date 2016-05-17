@@ -1,7 +1,7 @@
 <?php
 
 return array(
-    'assets_rtd'		=> 'Asset bereit zum Herausgeben',
+    'assets_rtd'		=> 'Assets', // This has NEVER meant Assets Retired. I don't know how it keeps getting reverted.
     'assets_checkedout'		=> 'Zugewiesene Assets',
     'id'      		=> 'ID',
     'city'   		=> 'Stadt',

@@ -16,9 +16,9 @@ return array(
     ),
 
     'delete' => array(
-        'confirm'   => 'Apakah Anda yakin ingin menghapus kategori ini?',
-        'error'   => 'Ada masalah menghapus kategori. Silakan coba lagi.',
-        'success' => 'Kategori berhasil dihapus.'
+        'confirm'   => 'Are you sure you wish to delete this accessory?',
+        'error'   => 'There was an issue deleting the accessory. Please try again.',
+        'success' => 'The accessory was deleted successfully.'
     ),
 
      'checkout' => array(

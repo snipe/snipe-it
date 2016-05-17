@@ -1,7 +1,7 @@
 <?php
 
 return array(
-	'dl_csv'      				=> 'Download CSV',
+	'dl_csv'      				=> 'CSV olarak indir',
 	'eula_text'      			=> 'Son Kullanıcı Lisans Sözleşmesi',
     'id'      					=> 'ID',
     'require_acceptance'      	=> 'Onaylama',

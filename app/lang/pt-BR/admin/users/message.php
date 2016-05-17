@@ -33,7 +33,7 @@ return array(
         'import'    => 'Houve um problema ao importar usuários. Tente novamente.',
         'asset_already_accepted' => 'Este ativo já foi aceito.',
         'accept_or_decline' => 'Você precisa aceita ou rejeitar esse ativo.',
-        'incorrect_user_accepted' => 'The asset you have attempted to accept was not checked out to you.',
+        'incorrect_user_accepted' => 'O ativo que tentou aceitar não foi solicitado por você.',
         'ldap_could_not_connect' => 'Não foi possível conectar ao servidor LDAP. Por favor verifique as configurações do servidor LDAP no arquivo de configurações.<br>Erro do Servidor LDAP:',
         'ldap_could_not_bind' => 'Não foi possível se ligar ao servidor LDAP. Por favor verifique as configurações do servidor LDAP no arquivo de configurações.<br>Erro do Servidor LDAP: ',
         'ldap_could_not_search' => 'Não foi possível procurar o servidor LDAP. Por favor verifique as configurações do servidor LDAP no arquivo de configurações.<br>Erro do Servidor LDAP:',

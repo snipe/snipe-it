@@ -2,23 +2,23 @@
 
 return array(
 
-    'does_not_exist' => 'Accessory does not exist.',
+    'does_not_exist' => 'الملحق غير موجود.',
     'assoc_users'	 => 'تم إخراج :count عنصر من هذا الملحق للمستخدمين، الرجاء إيداع الملحقات ثم حاول مرة أخرى. ',
 
     'create' => array(
-        'error'   => 'Accessory was not created, please try again.',
-        'success' => 'Accessory created successfully.'
+        'error'   => 'لم يتم انشاء الملحق، الرجاء المحاولة مرة اخرى.',
+        'success' => 'تم انشاء الملحق بنجاح.'
     ),
 
     'update' => array(
-        'error'   => 'Accessory was not updated, please try again',
-        'success' => 'Accessory updated successfully.'
+        'error'   => 'لم يتم تحديث الملحق، الرجاء المحاولة مرة أخرى',
+        'success' => 'تم بنجاح تحديث الملحق.'
     ),
 
     'delete' => array(
-        'confirm'   => 'Are you sure you wish to delete this category?',
-        'error'   => 'There was an issue deleting the category. Please try again.',
-        'success' => 'The category was deleted successfully.'
+        'confirm'   => 'هل أنت متأكد من رغبتك في حذف هذا الملحق؟',
+        'error'   => 'حدث خطأ أثناء محاولة حذف الملحق. الرجاء حاول مرة أخرى.',
+        'success' => 'تم حذف الملحق بنجاح.'
     ),
 
      'checkout' => array(
@@ -30,7 +30,7 @@ return array(
     'checkin' => array(
         'error'   		=> 'لم يتم إيداع الملحق، الرجاء المحاولة مرة أخرى',
         'success' 		=> 'تم إيداع الملحق بنجاح.',
-        'user_does_not_exist' => 'That user is invalid. Please try again.'
+        'user_does_not_exist' => 'هذا المستخدم خاطئ، الرجاء المحاولة مرة أخرى.'
     )
 
 

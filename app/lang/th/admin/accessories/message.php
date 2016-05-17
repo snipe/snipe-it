@@ -16,9 +16,9 @@ return array(
     ),
 
     'delete' => array(
-        'confirm'   => 'คุณแน่ใจที่ต้องการจะลบหมวดหมู่นี้?',
-        'error'   => 'มีปัญหาขณะลบหมวดหมู่นี้ กรุณาลองอีกครั้ง',
-        'success' => 'ลบหมวดหมู่เรียบร้อยแล้ว'
+        'confirm'   => 'Are you sure you wish to delete this accessory?',
+        'error'   => 'There was an issue deleting the accessory. Please try again.',
+        'success' => 'The accessory was deleted successfully.'
     ),
 
      'checkout' => array(

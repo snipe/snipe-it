@@ -3,25 +3,25 @@
 return array(
 
     'field' => array(
-        'invalid'   => 'That field does not exist.',
-        'already_added'   => 'Field already added',
+        'invalid'   => 'Ce champ n\'existe pas.',
+        'already_added'   => 'Le champ a déjà été ajouté',
 
         'create' => array(
-            'error'   => 'Field was not created, please try again.',
-            'success' => 'Field created successfully.',
-            'assoc_success' => 'Field successfully added to fieldset.'
+            'error'   => 'Le champ n\'a pas été créé, veuillez réessayer.',
+            'success' => 'Le champ a bien été créé.',
+            'assoc_success' => 'Le champ a bien été ajouté au fieldset.'
         ),
 
         'update' => array(
-            'error'   => 'Field was not updated, please try again',
-            'success' => 'Field updated successfully.'
+            'error'   => 'Le champ n\'a pas été actualisé, veuillez réessayer',
+            'success' => 'Le champ a bien été actualisé.'
         ),
 
         'delete' => array(
-            'confirm'   	=> 'Are you sure you wish to delete this field?',
-            'error'   => 'There was an issue deleting the field. Please try again.',
-            'success' => 'The field was deleted successfully.',
-            'in_use'   => 'Field is still in use.',
+            'confirm'   	=> 'Êtes-vous sûr de vouloir supprimer ce champ ?',
+            'error'   => 'Un problème a eu lien pendant la suppression du champ. Veuillez réessayer.',
+            'success' => 'Le champ a bien été supprimé.',
+            'in_use'   => 'Le champ est actuellement en utilisation.',
         )
 
     ),
@@ -31,20 +31,20 @@ return array(
 
 
         'create' => array(
-            'error'   => 'Fieldset was not created, please try again.',
-            'success' => 'Fieldset created successfully.'
+            'error'   => 'Le fieldset n\'a pas pur être créé, veuillez réessayer.',
+            'success' => 'Le Fieldset a bien été créé.'
         ),
 
         'update' => array(
-            'error'   => 'Fieldset was not updated, please try again',
-            'success' => 'Fieldset updated successfully.'
+            'error'   => 'Le fieldset n\'a pas été actualisé, veuillez réessayer',
+            'success' => 'Le fieldset a bien été actualisé.'
         ),
 
         'delete' => array(
-            'confirm'   	=> 'Are you sure you wish to delete this fieldset?',
-            'error'   => 'There was an issue deleting the fieldset. Please try again.',
-            'success' => 'The fieldset was deleted successfully.',
-            'in_use'   => 'Fieldset is still in use.',
+            'confirm'   	=> 'Êtes-vous sûr de vouloir supprimer ce fieldset ?',
+            'error'   => 'Un problème a eu lien pendant la suppression du fieldset. Veuillez réessayer.',
+            'success' => 'Le fieldset a bien été supprimé.',
+            'in_use'   => 'Le fieldset est actuellement utilisé.',
         )
 
     ),

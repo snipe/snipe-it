@@ -52,7 +52,9 @@ return array(
     'checkin' => array(
         'error'   		=> 'Ce bien n\'a pas été retourné, veuillez réessayer',
         'success' 		=> 'Ce bien a été retourné correctement.',
-        'user_does_not_exist' => 'Cet utilisateur est invalide. Veuillez réessayer.'
+        'user_does_not_exist' => 'Cet utilisateur est invalide. Veuillez réessayer.',
+        'already_checked_in'  => 'That asset is already checked in.',
+
     ),
 
     'requests' => array(

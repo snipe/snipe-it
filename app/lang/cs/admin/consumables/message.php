@@ -2,34 +2,34 @@
 
 return array(
 
-    'does_not_exist' => 'Consumable does not exist.',
+    'does_not_exist' => 'Spotřební materiál nebyl nalezen.',
 
     'create' => array(
-        'error'   => 'Consumable was not created, please try again.',
-        'success' => 'Consumable created successfully.'
+        'error'   => 'Spotřební materiál se nepodařilo vytvořit, pokuste se o to znovu.',
+        'success' => 'Spotřební materiál byl úspěšně vytvořen.'
     ),
 
     'update' => array(
-        'error'   => 'Consumable was not updated, please try again',
-        'success' => 'Consumable updated successfully.'
+        'error'   => 'Spotřební materiál se nepodařilo upravit, pokuste se o to znovu',
+        'success' => 'Spotřební materiál byl v pořádku upraven.'
     ),
 
     'delete' => array(
-        'confirm'   => 'Are you sure you wish to delete this consumable?',
-        'error'   => 'There was an issue deleting the consumable. Please try again.',
-        'success' => 'The consumable was deleted successfully.'
+        'confirm'   => 'Opravdu si přejete odstranit tento spotřební materiál?',
+        'error'   => 'Nepodařilo se nám spotřební materiál odstranit. Zkuste to prosím znovu.',
+        'success' => 'Spotřební materiál byl v pořádku odstraněn.'
     ),
 
      'checkout' => array(
-        'error'   		=> 'Consumable was not checked out, please try again',
-        'success' 		=> 'Consumable checked out successfully.',
-        'user_does_not_exist' => 'That user is invalid. Please try again.'
+        'error'   		=> 'Spotřební materiál se nepodařilo přidělit, pokuste se o to znovu',
+        'success' 		=> 'Spotřební materiál byl v pořádku přidělen.',
+        'user_does_not_exist' => 'Tento uživatel není platný, zkuste to prosím jinak.'
     ),
 
     'checkin' => array(
-        'error'   		=> 'Consumable was not checked in, please try again',
-        'success' 		=> 'Consumable checked in successfully.',
-        'user_does_not_exist' => 'That user is invalid. Please try again.'
+        'error'   		=> 'Spotřební materiál se nepodařilo převzít, pokuste se o to znovu',
+        'success' 		=> 'Spotřební materiál byl v pořádku převzat.',
+        'user_does_not_exist' => 'Tento uživatel není platný, zkuste to prosím jinak.'
     )
 
 

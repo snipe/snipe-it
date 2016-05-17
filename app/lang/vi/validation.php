@@ -33,6 +33,7 @@ return array(
     "digits_between"   => ":attribute phải ở giữa :min và :max số.",
     "email"            => "Định dạng :attribute thì không phù hợp.",
     "exists"           => ":attribute đã chọn không phù hợp.",
+    "email_array"      => "One or more email addresses is invalid.",
     "image"            => ":attribute phải là một hình.",
     "in"               => ":attribute đã lựa chọn không hợp lý.",
     "integer"          => ":attribute phải là một số nguyên.",

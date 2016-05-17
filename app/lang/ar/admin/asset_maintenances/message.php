@@ -1,17 +1,17 @@
 <?php
 
     return [
-        'not_found'                    => 'Asset Maintenance you were looking for was not found!',
+        'not_found'                    => 'لم يتم العثور على صيانة الأصل!',
         'delete'                       => [
-            'confirm' => 'Are you sure you wish to delete this asset maintenance?',
-            'error'   => 'There was an issue deleting the asset maintenance. Please try again.',
-            'success' => 'The asset maintenance was deleted successfully.'
+            'confirm' => 'هل أنت متأكد من رغبتك في حذف صيانة الأصل؟',
+            'error'   => 'حدثت مشكلة في عملية الحذف لصيانة الأصل. الرجاء المحاولة مرة اُخرى.',
+            'success' => 'تم حذف صيانة الأصل بنجاح.'
         ],
         'create'                       => [
-            'error'   => 'Asset Maintenance was not created, please try again.',
-            'success' => 'Asset Maintenance created successfully.'
+            'error'   => 'لم يتم إنشاء صيانة الأصل، الرجاء المحاولة مرة أخرى.',
+            'success' => 'تم إنشاء صيانة الأصل بنجاح.'
         ],
-        'asset_maintenance_incomplete' => 'Not Completed Yet',
-        'warranty'                     => 'Warranty',
-        'not_warranty'                 => 'Not Warranty',
+        'asset_maintenance_incomplete' => 'لم يكتمل بعد',
+        'warranty'                     => 'الضمان',
+        'not_warranty'                 => 'لا يوجد ضمان',
     ];

@@ -33,6 +33,7 @@ return array(
     "digits_between"   => ":attribute は :min - :max 内の数値にして下さい。",
     "email"            => ":attribute フォーマットが不正です。",
     "exists"           => "選択された :attribute は不正です。",
+    "email_array"      => "指定の電子メールアドレスは無効です。",
     "image"            => ":attribute は画像にして下さい。",
     "in"               => "選択された :attribute は不正です。",
     "integer"          => ":attribute は整数にして下さい。",

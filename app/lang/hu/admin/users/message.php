@@ -2,9 +2,9 @@
 
 return array(
 
-    'accepted'                  => 'You have successfully accepted this asset.',
-    'declined'                  => 'You have successfully declined this asset.',
-    'user_exists'               => 'User already exists!',
+    'accepted'                  => 'Ön sikeresen elfogadta ezt az eszközt.',
+    'declined'                  => 'Az eszközt sikeresen csökkentetted.',
+    'user_exists'               => 'Felhasználó már létezik!',
     'user_not_found'            => 'User [:id] does not exist.',
     'user_login_required'       => 'The login field is required',
     'user_password_required'    => 'The password is required.',

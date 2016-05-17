@@ -2,35 +2,35 @@
 
 return array(
 
-    'does_not_exist' => 'Accessory does not exist.',
-    'assoc_users'	 => 'This accessory currently has :count items checked out to users. Please check in the accessories and and try again. ',
+    'does_not_exist' => 'A tartozék nem létezik.',
+    'assoc_users'	 => 'Ebből a tartozékból jelenleg :count db van kiadva felhasználóknak. Kérem vegyen vissza tartozékot és próbálja újra! ',
 
     'create' => array(
-        'error'   => 'Accessory was not created, please try again.',
-        'success' => 'Accessory created successfully.'
+        'error'   => 'A tartozék nem jött létre, kérem, próbálja újra!',
+        'success' => 'A tartozék sikeresen létrejött.'
     ),
 
     'update' => array(
-        'error'   => 'Accessory was not updated, please try again',
-        'success' => 'Accessory updated successfully.'
+        'error'   => 'A tartozékot nem sikerült frissíteni, kérem, próbálja újra!',
+        'success' => 'A tartozék sikeresen frissült.'
     ),
 
     'delete' => array(
-        'confirm'   => 'Are you sure you wish to delete this category?',
-        'error'   => 'There was an issue deleting the category. Please try again.',
-        'success' => 'The category was deleted successfully.'
+        'confirm'   => 'Biztosan törölni akarja ezt a tartozékot?',
+        'error'   => 'A tartozék törlése közben probléma merült fel, kérjük, próbálja újra!',
+        'success' => 'A tartozék sikeresen törlődött.'
     ),
 
      'checkout' => array(
-        'error'   		=> 'Accessory was not checked out, please try again',
-        'success' 		=> 'Accessory checked out successfully.',
-        'user_does_not_exist' => 'That user is invalid. Please try again.'
+        'error'   		=> 'A tartozékot nem sikerült kiadni, kérem, próbálja újra!',
+        'success' 		=> 'A tartozék sikeresen kiadva.',
+        'user_does_not_exist' => 'Érvénytelen felhasználó. Kérem, próbálja újra!'
     ),
 
     'checkin' => array(
-        'error'   		=> 'Accessory was not checked in, please try again',
-        'success' 		=> 'Accessory checked in successfully.',
-        'user_does_not_exist' => 'That user is invalid. Please try again.'
+        'error'   		=> 'A tartozékot nem sikerült visszavenni, kérem, próbálja újra!',
+        'success' 		=> 'A tartozék sikeresen visszavéve.',
+        'user_does_not_exist' => 'Érvénytelen felhasználó. Kérem, próbálja újra!'
     )
 
 

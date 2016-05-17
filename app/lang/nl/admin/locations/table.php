@@ -1,18 +1,18 @@
 <?php
 
 return array(
-    'assets_rtd'		=> 'Assets RTD',
-    'assets_checkedout'		=> 'Assets Assigned',
+    'assets_rtd'		=> 'Assets', // This has NEVER meant Assets Retired. I don't know how it keeps getting reverted.
+    'assets_checkedout'		=> 'Toegewezen producten',
     'id'      		=> 'ID',
-    'city'   		=> 'City',
-    'state'   		=> 'State',
-    'country'   	=> 'Country',
-    'create'		=> 'Create Location',
-    'update'		=> 'Update Location',
-    'name'			=> 'Location Name',
-    'address'		=> 'Address',
-    'zip'			=> 'Postal Code',
-    'locations'		=> 'Locations',
-    'parent'		=> 'Parent',
-    'currency'  	=> 'Location Currency',
+    'city'   		=> 'Stad',
+    'state'   		=> 'Staat/provincie',
+    'country'   	=> 'Land',
+    'create'		=> 'Locatie aanmaken',
+    'update'		=> 'Locatie bijwerken',
+    'name'			=> 'Locatie naam',
+    'address'		=> 'Adres',
+    'zip'			=> 'Postcode',
+    'locations'		=> 'Locaties',
+    'parent'		=> 'Bovenliggend',
+    'currency'  	=> 'Locatie valuta',
 );

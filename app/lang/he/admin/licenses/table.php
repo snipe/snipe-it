@@ -3,10 +3,10 @@
 return array(
 
     'assigned_to'   	=> 'מוקצה ל-',
-    'checkout'   		=> 'In/Out',
-    'id'      			=> 'ID',
-    'license_email'   	=> 'License Email',
-    'license_name'   	=> 'Licensed To',
+    'checkout'   		=> 'ניפוק/החזרה',
+    'id'      			=> 'מזהה',
+    'license_email'   	=> 'דוא"ל רשיון',
+    'license_name'   	=> 'רשום על שם',
     'purchase_date'   	=> 'תאריך הרכישה',
     'purchased'   		=> 'נרכש',
     'seats'   			=> 'מספר',

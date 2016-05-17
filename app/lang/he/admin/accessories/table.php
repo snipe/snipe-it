@@ -1,11 +1,11 @@
 <?php
 
 return array(
-	'dl_csv'      				=> 'Download CSV',
-	'eula_text'      			=> 'EULA',
-    'id'      					=> 'ID',
-    'require_acceptance'      	=> 'Acceptance',
-    'title'      				=> 'Accessory Name',
+	'dl_csv'      				=> 'הורדה כ-CSV',
+	'eula_text'      			=> 'רשיון שימוש',
+    'id'      					=> 'מזהה',
+    'require_acceptance'      	=> 'קבלה',
+    'title'      				=> 'שם אבזר',
 
 
 );

@@ -15,9 +15,9 @@ return array(
     ),
 
     'delete' => array(
-        'confirm'   => 'Are you sure you wish to delete this consumable?',
+        'confirm'   => 'Sei sicuro di voler cancellare questo consumabile?',
         'error'   => 'C\'è stato un problema durante l\'eliminazione del consumabile. Prova di nuovo.',
-        'success' => 'The consumable was deleted successfully.'
+        'success' => 'Il consumabile è stato cancellato con successo.'
     ),
 
      'checkout' => array(

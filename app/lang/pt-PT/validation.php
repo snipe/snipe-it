@@ -33,6 +33,7 @@ return array(
     "digits_between"   => "O :attribute deve estar entre :min e :max dígitos.",
     "email"            => "O formato do :attribute é inválido.",
     "exists"           => "O :attribute é inválido.",
+    "email_array"      => "Um ou mais endereços de email são invalidos.",
     "image"            => "O :attribute tem que ser uma imagem.",
     "in"               => "O :attribute selecionado é inválido.",
     "integer"          => "O :attribute tem que ser um inteiro.",

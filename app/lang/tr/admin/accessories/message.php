@@ -2,23 +2,23 @@
 
 return array(
 
-    'does_not_exist' => 'Accessory does not exist.',
+    'does_not_exist' => 'Bu aksesuar yok.',
     'assoc_users'	 => 'Bu aksesuardan :count adet kullanıcılara çıkış yapıldı. Lütfen aksesuar girişi yapınız ve tekrar deneyin.',
 
     'create' => array(
-        'error'   => 'Accessory was not created, please try again.',
-        'success' => 'Accessory created successfully.'
+        'error'   => 'Aksesuar oluşturma başarısız. lütfen tekrar deneyin.',
+        'success' => 'Aksesuar başarıyla güncellendi.'
     ),
 
     'update' => array(
-        'error'   => 'Accessory was not updated, please try again',
-        'success' => 'Accessory updated successfully.'
+        'error'   => 'Aksesuar güncellenmedi. Lütfen tekrar deneyin',
+        'success' => 'Aksesuar başarı ile güncellendi.'
     ),
 
     'delete' => array(
-        'confirm'   => 'Bu kategoriyi silmek istediğinize emin misiniz?',
-        'error'   => 'Bu kategoriyi silerken bir hata ile karşılaşıldı. Lütfen tekrar deneyin.',
-        'success' => 'Kategori silindi.'
+        'confirm'   => 'Bu Aksesuar silmek istediğinizden emin misiniz?',
+        'error'   => 'Aksesuarı silerken bir hata oluştu. Lütfen tekrar deneyin.',
+        'success' => 'Aksesuar başarıyla silindi.'
     ),
 
      'checkout' => array(

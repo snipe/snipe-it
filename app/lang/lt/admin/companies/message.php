@@ -1,18 +1,18 @@
 <?php
 return array(
-    'does_not_exist' => 'Company does not exist.',
-    'assoc_users'    => 'This company is currently associated with at least one model and cannot be deleted. Please update your models to no longer reference this company and try again. ',
+    'does_not_exist' => 'Kompanija neegzistuoja.',
+    'assoc_users'    => 'Ši kompanija šiuo metu susieta su mažiausiai viena įranga ir negali būti ištrinta. prašome atnaujinkite savo įrangą, kad nebūtų nuorodų į šią kompaniją ir bandykite iš naujo. ',
     'create' => array(
-        'error'   => 'Company was not created, please try again.',
-        'success' => 'Company created successfully.'
+        'error'   => 'Kompanija nebuvo sukurta, prašome bandykite dar kartą.',
+        'success' => 'Kompanija sėkmingai įtraukta.'
     ),
     'update' => array(
-        'error'   => 'Company was not updated, please try again',
-        'success' => 'Company updated successfully.'
+        'error'   => 'Kompanija nebuvo atnaujinta, prašome bandykite dar kartą',
+        'success' => 'Kompanija sėkmingai atnaujinta.'
     ),
     'delete' => array(
-        'confirm' => 'Are you sure you wish to delete this company?',
-        'error'   => 'There was an issue deleting the company. Please try again.',
-        'success' => 'The Company was deleted successfully.'
+        'confirm' => 'Ar tikrai norite ištrinti šią kompaniją?',
+        'error'   => 'Įvyko klaida, prašome bandykite dar kartą.',
+        'success' => 'Kompanija sėkmingai ištrinta.'
     )
 );

@@ -2,23 +2,23 @@
 
 return array(
 
-    'does_not_exist' => 'Accessory does not exist.',
+    'does_not_exist' => 'Įranga neegzistuoja.',
     'assoc_users'	 => 'Ši įranga šiuo metu turi:count vienetus išduotus vartotojams. Prašome patikrinkite irangos meniu ir bandykite dar kartą. ',
 
     'create' => array(
-        'error'   => 'Accessory was not created, please try again.',
-        'success' => 'Accessory created successfully.'
+        'error'   => 'Įranga nebuvo įtrautka. Prašome bandykite dar kartą.',
+        'success' => 'Įranga sėkmingai įtraukta.'
     ),
 
     'update' => array(
-        'error'   => 'Accessory was not updated, please try again',
-        'success' => 'Accessory updated successfully.'
+        'error'   => 'Įranga nebuvo atnaujinta. Prašome bandykite dar kartą',
+        'success' => 'Įranga atnaujinta sėkmingai.'
     ),
 
     'delete' => array(
-        'confirm'   => 'Ar jūs tikrai norite ištrinti šią kategoriją?',
-        'error'   => 'Nepavyko ištrinti kategorijos. Prašome bandykite dar kartą.',
-        'success' => 'Kategorija sėkmingai ištrinta.'
+        'confirm'   => 'Are you sure you wish to delete this accessory?',
+        'error'   => 'There was an issue deleting the accessory. Please try again.',
+        'success' => 'The accessory was deleted successfully.'
     ),
 
      'checkout' => array(

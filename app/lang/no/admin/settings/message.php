@@ -13,5 +13,10 @@ return array(
         'generated'             => 'En ny sikkerhetskopi fil ble opprettet.',
         'file_not_found'        => 'Den backup-filen ble ikke funnet på serveren.',
     ),
+    'purge' => array(
+        'error'     => 'An error has occurred while purging. ',
+        'validation_failed'     => 'Your purge confirmation is incorrect. Please type the word "DELETE" in the confirmation box.',
+        'success'               => 'Deleted records successfully purged.'
+    ),
 
 );
