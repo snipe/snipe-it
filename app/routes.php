@@ -124,6 +124,14 @@
             Route::get( 'list', [ 'as' => 'api.categories.list', 'uses' => 'CategoriesController@getDatatable' ] );
             Route::get( '{categoryID}/view',
                 [ 'as' => 'api.categories.view', 'uses' => 'CategoriesController@getDataView' ] );
+            Route::get( '{categoryID}/asset/view',
+                [ 'as' => 'api.categories.asset.view', 'uses' => 'CategoriesController@getDataViewAssets' ] );
+            Route::get( '{categoryID}/accessory/view',
+                [ 'as' => 'api.categories.accessory.view', 'uses' => 'CategoriesController@getDataViewAccessories' ] );
+            Route::get( '{categoryID}/consumable/view',
+                [ 'as' => 'api.categories.consumable.view', 'uses' => 'CategoriesController@getDataViewConsumables' ] );
+            Route::get( '{categoryID}/component/view',
+                [ 'as' => 'api.categories.component.view', 'uses' => 'CategoriesController@getDataViewComponent' ] );
         } );
 
         /*-- Suppliers API (mostly for creating new ones in-line while creating an asset) --*/

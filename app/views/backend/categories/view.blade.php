@@ -36,7 +36,7 @@
   <table
   name="category_assets"
   id="table"
-  data-url="{{ route('api.categories.view', $category->id) }}"
+  data-url="{{ route('api.categories.'.$category->category_type.'.view', [$category->id, $category->category_type]) }}"
   data-cookie="true"
   data-click-to-select="true"
   data-cookie-id-table="categoryAssetsTable">
@@ -47,11 +47,14 @@
               </th>
               <th data-searchable="false" data-sortable="false" data-field="id" data-visible="false">@lang('general.id')</th>
               <th data-searchable="false" data-sortable="false" data-field="name">@lang('general.name')</th>
+              @if ($category->category_type=='asset')
               <th data-searchable="false" data-sortable="false" data-field="model">@lang('admin/hardware/form.model')</th>
               <th data-searchable="false" data-sortable="false" data-field="asset_tag">@lang('general.asset_tag')</th>
               <th data-searchable="false" data-sortable="false" data-field="serial">@lang('admin/hardware/form.serial')</th>
               <th data-searchable="false" data-sortable="false" data-field="assigned_to">@lang('general.user')</th>
               <th data-searchable="false" data-sortable="false" data-field="change"  data-switchable="false">@lang('admin/hardware/table.change')</th>
+              @endif
+
               <th data-searchable="false" data-sortable="false" data-field="actions"  data-switchable="false">@lang('table.actions')</th>
           </tr>
       </thead>
@@ -71,7 +74,7 @@
           iconsPrefix: 'fa',
           showRefresh: true,
           //search: true,
-          pageSize: {{{ Setting::getSettings()->per_page }}},
+          pageSize: {{ Setting::getSettings()->per_page }},
           pagination: true,
           sidePagination: 'server',
           sortable: true,
