@@ -43,16 +43,17 @@ function isinstalled {
 
 
 #  Lets find what distro we are using and what version
-distro="$(cat /proc/version)"
-if grep -q centos <<<$distro; then
-	for f in $(find /etc -type f -maxdepth 1 \( ! -wholename /etc/os-release ! -wholename /etc/lsb-release -wholename /etc/\*release -o -wholename /etc/\*version \) 2> /dev/null);
-	do
-		distro="${f:5:${#f}-13}"
-	done;
-	if [ "$distro" = "centos" ] || [ "$distro" = "redhat" ]; then
-		distro+="$(rpm -q --qf "%{VERSION}" $(rpm -q --whatprovides redhat-release))"
-	fi
-fi
+distro=$(. /etc/os-release && echo $ID)
+version=$(. /etc/os-release && echo $VERSION_ID) 
+# if grep -q centos <<<$distro; then
+# 	for f in $(find /etc -type f -maxdepth 1 \( ! -wholename /etc/os-release ! -wholename /etc/lsb-release -wholename /etc/\*release -o -wholename /etc/\*version \) 2> /dev/null);
+# 	do
+# 		distro="${f:5:${#f}-13}"
+# 	done;
+# 	if [ "$distro" = "centos" ] || [ "$distro" = "redhat" ]; then
+# 		distro+="$(rpm -q --qf "%{VERSION}" $(rpm -q --whatprovides redhat-release))"
+# 	fi
+# fi
 
 echo "
 	   _____       _                  __________
@@ -67,30 +68,26 @@ echo ""
 echo ""
 echo "  Welcome to Snipe-IT Inventory Installer for Centos and Debian!"
 echo ""
-
+shopt -s nocasematch
 case $distro in
         *Ubuntu*)
                 echo "  The installer has detected Ubuntu as the OS."
                 distro=ubuntu
                 ;;
-	*Debian*)
+		*Debian*)
                 echo "  The installer has detected Debian as the OS."
                 distro=debian
                 ;;
-        *centos6*|*redhat6*)
+        *centos*|*redhat*)
                 echo "  The installer has detected $distro as the OS."
-                distro=centos6
-                ;;
-        *centos7*|*redhat7*)
-                echo "  The installer has detected $distro as the OS."
-                distro=centos7
+                distro=centos
                 ;;
         *)
                 echo "  The installer was unable to determine your OS. Exiting for safety."
                 exit
                 ;;
 esac
-
+shopt -u nocasematch
 #Get your FQDN.
 
 echo -n "  Q. What is the FQDN of your server? ($fqdn): "
@@ -269,12 +266,26 @@ case $distro in
 		sudo apt-get -y upgrade >> /var/log/snipeit-install.log 2>&1
 
 		echo "##  Installing packages."
-		sudo apt-get install -y git unzip php5 php5-mcrypt php5-curl php5-mysql php5-gd php5-ldap >> /var/log/snipeit-install.log 2>&1
+
 		#We already established MySQL root & user PWs, so we dont need to be prompted. Let's go ahead and install Apache, PHP and MySQL.
 		echo "##  Setting up LAMP."
 		sudo DEBIAN_FRONTEND=noninteractive apt-get install -y lamp-server^ >> /var/log/snipeit-install.log 2>&1
 
+		if [ "$version" == "16.04" ]; then
+			sudo apt-get install -y git unzip php php-mcrypt php-curl php-mysql php-gd php-ldap php-mbstring >> /var/log/snipeit-install.log 2>&1
+			#Enable mcrypt and rewrite
+			echo "##  Enabling mcrypt and rewrite"
+			sudo phpenmod mcrypt >> /var/log/snipeit-install.log 2>&1
+			sudo phpenmod mbstring >> /var/log/snipeit-install 2>&1
+			sudo a2enmod rewrite >> /var/log/snipeit-install.log 2>&1
+		else
+			sudo apt-get install -y git unzip php5 php5-mcrypt php5-curl php5-mysql php5-gd php5-ldap >> /var/log/snipeit-install.log 2>&1
+			#Enable mcrypt and rewrite
+			echo "##  Enabling mcrypt and rewrite"
+			sudo php5enmod mcrypt >> /var/log/snipeit-install.log 2>&1
+			sudo a2enmod rewrite >> /var/log/snipeit-install.log 2>&1
 		#  Get files and extract to web dir
+		fi
 		echo ""
 		echo "##  Downloading snipeit and extract to web directory."
 		wget -P $tmp/ https://github.com/snipe/snipe-it/archive/$file >> /var/log/snipeit-install.log 2>&1
@@ -283,10 +294,8 @@ case $distro in
 
 		##  TODO make sure apache is set to start on boot and go ahead and start it
 
-		#Enable mcrypt and rewrite
-		echo "##  Enabling mcrypt and rewrite"
-		sudo php5enmod mcrypt >> /var/log/snipeit-install.log 2>&1
-		sudo a2enmod rewrite >> /var/log/snipeit-install.log 2>&1
+
+
 		sudo ls -al /etc/apache2/mods-enabled/rewrite.load >> /var/log/snipeit-install.log 2>&1
 
 		#Create a new virtual host for Apache.
@@ -364,7 +373,8 @@ case $distro in
 		echo "##  Restarting apache."
 		service apache2 restart
 		;;
-	centos6 )
+	centos )
+	if [ "$version" == "6" ];
 		#####################################  Install for Centos/Redhat 6  ##############################################
 
 		webdir=/var/www/html
@@ -499,7 +509,8 @@ case $distro in
 
 		service httpd restart
 		;;
-	centos7 )
+		
+	elif [ "$version" == "7" ]; then
 		#####################################  Install for Centos/Redhat 7  ##############################################
 
 		webdir=/var/www/html
@@ -623,6 +634,11 @@ case $distro in
 
 		systemctl restart httpd.service
 		;;
+		
+	else
+		echo "Unable to Handle Centos Version #.  Version Found: " $version
+		return 1
+	fi
 esac
 
 echo ""
