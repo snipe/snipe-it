@@ -51,12 +51,18 @@
               </thead>
             </table>
           </div>
+          </div>
 
           </div>
         </div>
       </div>
   </div>
   <div class="col-md-3">
+
+      <h4>{{ trans('admin/consumables/general.about_consumables_title') }}</h4>
+      <p>{{ trans('admin/consumables/general.about_consumables_text') }} </p>
+
+      
     @if ($consumable->purchase_date)
         <div class="col-md-12" style="padding-bottom: 5px;"><strong>{{ trans('admin/consumables/general.date') }}: </strong>
         {{ $consumable->purchase_date }} </div>
@@ -69,6 +75,21 @@
         {{ number_format($consumable->purchase_cost,2) }} </div>
     @endif
 
+    @if ($consumable->item_no)
+        <div class="col-md-12" style="padding-bottom: 5px;"><strong>{{ trans('admin/consumables/general.item_no') }}:</strong>
+            {{ $consumable->item_no }} </div>
+    @endif
+
+    @if ($consumable->model_no)
+        <div class="col-md-12" style="padding-bottom: 5px;"><strong>{{ trans('general.model_no') }}:</strong>
+            {{ $consumable->model_no }} </div>
+    @endif
+
+    @if ($consumable->manufacturer)
+        <div class="col-md-12" style="padding-bottom: 5px;"><strong>{{ trans('general.manufacturer') }}:</strong>
+            {{ $consumable->manufacturer->name }} </div>
+    @endif
+
     @if ($consumable->order_number)
         <div class="col-md-12" style="padding-bottom: 5px;"><strong>{{ trans('admin/consumables/general.order') }}:</strong>
         {{ $consumable->order_number }} </div>
@@ -77,14 +98,6 @@
 </div>
 
 
-
-
-<!-- side address column -->
-<div class="col-md-3">
-    <h4>{{ trans('admin/consumables/general.about_consumables_title') }}</h4>
-    <p>{{ trans('admin/consumables/general.about_consumables_text') }} </p>
-
-</div>
 
 @section('moar_scripts')
 <script src="{{ asset('assets/js/bootstrap-table.js') }}"></script>

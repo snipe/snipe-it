@@ -7,6 +7,7 @@ return array(
     'cost'				=> 'Purchase Cost',
     'create'                             => 'Create Consumable',
     'date'					=> 'Purchase Date',
+    'item_no'               => 'Item No.',
     'order'					=> 'Order Number',
     'remaining' 			             => 'Remaining',
     'total' 			                 => 'Total',

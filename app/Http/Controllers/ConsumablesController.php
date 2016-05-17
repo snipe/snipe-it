@@ -55,12 +55,14 @@ class ConsumablesController extends Controller
         $category_list = array('' => '') + DB::table('categories')->where('category_type', '=', 'consumable')->whereNull('deleted_at')->orderBy('name', 'ASC')->lists('name', 'id');
         $company_list = Helper::companyList();
         $location_list = Helper::locationsList();
+        $manufacturer_list = Helper::manufacturerList();
 
         return View::make('consumables/edit')
             ->with('consumable', new Consumable)
             ->with('category_list', $category_list)
             ->with('company_list', $company_list)
-            ->with('location_list', $location_list);
+            ->with('location_list', $location_list)
+            ->with('manufacturer_list', $manufacturer_list);
     }
 
 
@@ -81,6 +83,9 @@ class ConsumablesController extends Controller
         $consumable->company_id             = Company::getIdForCurrentUser(Input::get('company_id'));
         $consumable->order_number           = e(Input::get('order_number'));
         $consumable->min_amt                = e(Input::get('min_amt'));
+        $consumable->manufacturer_id         = e(Input::get('manufacturer_id'));
+        $consumable->model_no               = e(Input::get('model_no'));
+        $consumable->item_no         = e(Input::get('item_no'));
 
         if (e(Input::get('purchase_date')) == '') {
             $consumable->purchase_date       =  null;
@@ -130,11 +135,13 @@ class ConsumablesController extends Controller
             $category_list =  Helper::categoryList();
         $company_list = Helper::companyList();
         $location_list = Helper::locationsList();
+        $manufacturer_list = Helper::manufacturerList();
 
         return View::make('consumables/edit', compact('consumable'))
             ->with('category_list', $category_list)
             ->with('company_list', $company_list)
-            ->with('location_list', $location_list);
+            ->with('location_list', $location_list)
+            ->with('manufacturer_list', $manufacturer_list);
     }
 
 
@@ -161,6 +168,9 @@ class ConsumablesController extends Controller
         $consumable->company_id             = Company::getIdForCurrentUser(Input::get('company_id'));
         $consumable->order_number           = e(Input::get('order_number'));
         $consumable->min_amt                   = e(Input::get('min_amt'));
+        $consumable->manufacturer_id         = e(Input::get('manufacturer_id'));
+        $consumable->model_no               = e(Input::get('model_no'));
+        $consumable->item_no         = e(Input::get('item_no'));
 
         if (e(Input::get('purchase_date')) == '') {
             $consumable->purchase_date       =  null;
@@ -407,7 +417,7 @@ class ConsumablesController extends Controller
             $limit = 50;
         }
 
-        $allowed_columns = ['id','name','order_number','min_amt','purchase_date','purchase_cost','companyName','category'];
+        $allowed_columns = ['id','name','order_number','min_amt','purchase_date','purchase_cost','companyName','category','model_no', 'item_no', 'manufacturer'];
         $order = Input::get('order') === 'asc' ? 'asc' : 'desc';
         $sort = in_array(Input::get('sort'), $allowed_columns) ? Input::get('sort') : 'created_at';
 
@@ -417,6 +427,9 @@ class ConsumablesController extends Controller
                 break;
             case 'location':
                 $consumables = $consumables->OrderLocation($order);
+                break;
+            case 'manufacturer':
+                $consumables = $consumables->OrderManufacturer($order);
                 break;
             case 'companyName':
                 $consumables = $consumables->OrderCompany($order);
@@ -441,6 +454,9 @@ class ConsumablesController extends Controller
                 'location'   => ($consumable->location) ? e($consumable->location->name) : '',
                 'min_amt'           => e($consumable->min_amt),
                 'qty'           => e($consumable->qty),
+                'manufacturer'           => ($consumable->manufacturer) ? e($consumable->manufacturer->name) : '',
+                'model_no'           => e($consumable->model_no),
+                'item_no'           => e($consumable->item_no),
                 'category'           => ($consumable->category) ? e($consumable->category->name) : 'Missing category',
                 'order_number'  => e($consumable->order_number),
                 'purchase_date'  => e($consumable->purchase_date),

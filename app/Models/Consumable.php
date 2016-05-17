@@ -64,6 +64,11 @@ class Consumable extends Model
         return $this->belongsTo('\App\Models\Company', 'company_id');
     }
 
+    public function manufacturer()
+    {
+        return $this->belongsTo('\App\Models\Manufacturer', 'manufacturer_id');
+    }
+
     public function location()
     {
         return $this->belongsTo('\App\Models\Location', 'location_id');
@@ -155,6 +160,10 @@ class Consumable extends Model
                         $query->whereHas('location', function ($query) use ($search) {
                             $query->where('locations.name', 'LIKE', '%'.$search.'%');
                         });
+                    })->orWhere(function ($query) use ($search) {
+                        $query->whereHas('manufacturer', function ($query) use ($search) {
+                            $query->where('manufacturers.name', 'LIKE', '%'.$search.'%');
+                        });
                     })->orWhere('consumables.name', 'LIKE', '%'.$search.'%')
                             ->orWhere('consumables.order_number', 'LIKE', '%'.$search.'%')
                             ->orWhere('consumables.purchase_cost', 'LIKE', '%'.$search.'%')
@@ -177,7 +186,7 @@ class Consumable extends Model
     }
 
     /**
-    * Query builder scope to order on company
+    * Query builder scope to order on location
     *
     * @param  Illuminate\Database\Query\Builder  $query  Query builder instance
     * @param  text                              $order       Order
@@ -187,6 +196,19 @@ class Consumable extends Model
     public function scopeOrderLocation($query, $order)
     {
         return $query->leftJoin('locations', 'consumables.location_id', '=', 'locations.id')->orderBy('locations.name', $order);
+    }
+
+    /**
+     * Query builder scope to order on manufacturer
+     *
+     * @param  Illuminate\Database\Query\Builder  $query  Query builder instance
+     * @param  text                              $order       Order
+     *
+     * @return Illuminate\Database\Query\Builder          Modified query builder
+     */
+    public function scopeOrderManufacturer($query, $order)
+    {
+        return $query->leftJoin('manufacturers', 'consumables.manufacturer_id', '=', 'manufacturers.id')->orderBy('manufacturers.name', $order);
     }
 
 

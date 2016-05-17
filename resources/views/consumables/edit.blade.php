@@ -79,6 +79,18 @@
                  </div>
          </div>
 
+           <!-- Manufacturer -->
+           <div class="form-group {{ $errors->has('manufacturer_id') ? ' has-error' : '' }}">
+               <div class="col-md-3">
+                   {{ Form::label('manufacturer_id', trans('general.manufacturer')) }}
+
+               </div>
+               <div class="col-md-7">
+                   {{ Form::select('manufacturer_id', $manufacturer_list , Input::old('manufacturer_id', $consumable->manufacturer_id), array('class'=>'select2', 'style'=>'width:100%')) }}
+                   {!! $errors->first('manufacturer_id', '<span class="alert-msg"><i class="fa fa-times"></i> :message</span>') !!}
+               </div>
+           </div>
+
          <!--  Location -->
          <div class="form-group {{ $errors->has('location_id') ? ' has-error' : '' }}">
             <div class="col-md-3">
@@ -90,6 +102,28 @@
                      {!! $errors->first('location_id', '<span class="alert-msg"><i class="fa fa-times"></i> :message</span>') !!}
                  </div>
          </div>
+
+           <!-- Model Number -->
+           <div class="form-group {{ $errors->has('model_no') ? ' has-error' : '' }}">
+               <div class="col-md-3">
+                   {{ Form::label('model_no', trans('general.model_no')) }}
+               </div>
+               <div class="col-md-3">
+                   <input class="form-control" type="text" name="model_no" id="model_no" value="{{ Input::old('model_no', $consumable->model_no) }}" />
+                   {!! $errors->first('model_no', '<span class="alert-msg"><i class="fa fa-times"></i> :message</span>') !!}
+               </div>
+           </div>
+
+           <!-- Item Number -->
+           <div class="form-group {{ $errors->has('item_no') ? ' has-error' : '' }}">
+               <div class="col-md-3">
+                   {{ Form::label('item_no', trans('admin/consumables/general.item_no')) }}
+               </div>
+               <div class="col-md-3">
+                   <input class="form-control" type="text" name="item_no" id="item_no" value="{{ Input::old('item_no', $consumable->item_no) }}" />
+                   {!! $errors->first('item_no', '<span class="alert-msg"><i class="fa fa-times"></i> :message</span>') !!}
+               </div>
+           </div>
 
 
          <!-- Order Number -->
