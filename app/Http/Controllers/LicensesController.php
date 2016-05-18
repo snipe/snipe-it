@@ -156,6 +156,7 @@ class LicensesController extends Controller
 
             $insertedId = $license->id;
           // Save the license seat data
+            DB::transaction(function() use (&$insertedId,&$license) {
             for ($x=0; $x<$license->seats; $x++) {
                 $license_seat = new LicenseSeat();
                 $license_seat->license_id       = $insertedId;
@@ -164,6 +165,7 @@ class LicensesController extends Controller
                 $license_seat->notes            = null;
                 $license_seat->save();
             }
+        });
 
 
           // Redirect to the new license page
