@@ -50,7 +50,7 @@ class SettingsController extends Controller
             $start_settings['db_error'] = $e->getMessage();
         }
 
-        $protocol = $_SERVER['HTTPS'] == "on" ? 'https://' : 'http://';
+        $protocol = array_key_exists('HTTPS',$_SERVER) && ( $_SERVER['HTTPS'] == "on") ? 'https://' : 'http://';
 
 
         $pageURL = $protocol;
