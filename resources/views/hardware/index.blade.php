@@ -126,6 +126,7 @@
 <script src="{{ asset('assets/js/extensions/export/bootstrap-table-export.js') }}"></script>
 <script src="{{ asset('assets/js/extensions/export/tableExport.js') }}"></script>
 <script src="{{ asset('assets/js/extensions/export/jquery.base64.js') }}"></script>
+<script src="{{ asset('assets/js/extensions/multiple-sort/bootstrap-table-multiple-sort.js') }}"></script>
 <script type="text/javascript">
 
 
@@ -139,6 +140,7 @@
         pagination: true,
         sidePagination: 'server',
         sortable: true,
+        showMultiSort: true,
         //cookie: true,
         //cookieExpire: '2y',
         mobileResponsive: true,
@@ -155,6 +157,9 @@
         icons: {
             paginationSwitchDown: 'fa-caret-square-o-down',
             paginationSwitchUp: 'fa-caret-square-o-up',
+            sort: 'fa fa-sort-amount-desc',
+            plus: 'fa fa-plus',
+            minus: 'fa fa-minus',
             columns: 'fa-columns',
             refresh: 'fa-refresh'
         },
