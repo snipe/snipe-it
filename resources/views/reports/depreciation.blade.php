@@ -25,7 +25,8 @@
       data-cookie-id-table="depreciationReportTable">
         <thead>
             <tr role="row">
-            <th class="col-sm-1">{{ trans('admin/companies/table.title') }}</th>
+            <th class="col-sm-1" data-visible="false">{{ trans('admin/companies/table.title') }}</th>
+            <th class="col-sm-1" data-visible="false">{{ trans('admin/categories/general.category_name') }}</th>
             <th class="col-sm-1">{{ trans('admin/hardware/table.asset_tag') }}</th>
             <th class="col-sm-1">{{ trans('admin/hardware/table.title') }}</th>
             @if (\App\Models\Setting::getSettings()->display_asset_name)
@@ -49,6 +50,12 @@
         <tr>
             <td>{{ is_null($asset->company) ? '' : $asset->company->name }}</td>
             <td>
+                @if ($asset->model)
+                    {{ $asset->model->category->name }}
+                @endif
+
+            </td>
+            <td>
 	            @if ($asset->deleted_at!='')
 	            	 <del>{{ $asset->asset_tag }}</del>
 	            @else
@@ -68,7 +75,7 @@
             </td>
             <td>
                 @if ($asset->model->depreciation)
-                    {{ $asset->model->depreciation->months }} 
+                    {{ $asset->model->depreciation->months }}
                 @endif
             </td>
             <td>
