@@ -156,6 +156,7 @@ class LicensesController extends Controller
 
             $insertedId = $license->id;
           // Save the license seat data
+            DB::transaction(function() use (&$insertedId,&$license) {
             for ($x=0; $x<$license->seats; $x++) {
                 $license_seat = new LicenseSeat();
                 $license_seat->license_id       = $insertedId;
@@ -164,6 +165,7 @@ class LicensesController extends Controller
                 $license_seat->notes            = null;
                 $license_seat->save();
             }
+        });
 
 
           // Redirect to the new license page
@@ -435,8 +437,7 @@ class LicensesController extends Controller
         }
 
         // Get the dropdown of users and then pass it to the checkout view
-         $users_list = array('' => 'Select a User') + DB::table('users')->select(DB::raw('concat(last_name,", ",first_name," (",username,")") as full_name, id'))->whereNull('deleted_at')->orderBy('last_name', 'asc')->orderBy('first_name', 'asc')->lists('full_name', 'id');
-
+        $users_list = Helper::usersList();
 
         // Left join to get a list of assets and some other helpful info
         $asset = DB::table('assets')
