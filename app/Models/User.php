@@ -45,6 +45,10 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
         if ($this->isSuperUser()) {
             return true;
         }
+
+        if ($this->permissions=='') {
+            return false;
+        }
         $user_permissions = json_decode($this->permissions, true);
         $user_groups = $this->groups();
 
