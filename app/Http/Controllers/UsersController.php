@@ -110,7 +110,10 @@ class UsersController extends Controller
         $data['password'] =  Input::get('password');
 
         if ($user->save()) {
-            $user->groups()->sync(Input::get('groups'));
+            if (Input::has('groups')) {
+                $user->groups()->sync(Input::get('groups'));
+            }
+
             if ((Input::get('email_user') == 1) && (Input::has('email'))) {
               // Send the credentials through email
                 $data = array();
