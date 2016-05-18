@@ -159,10 +159,185 @@ class ObjectImportCommand extends Command {
 	 * @return string
      */
 	public function array_smart_fetch(Array $array, $key, $default = ''){
-		return array_key_exists($key,$array) ? trim($array[ $key ]) : $default;
+		return array_key_exists($key,$array) ? e(trim($array[ $key ])) : $default;
 	}
 
+	private $asset_models;
+    /**
+     * @param array
+     * @param $category Category
+     * @param $manufacturer Manufacturer
+     * @return Model
+     * @internal param $asset_modelno string
+     */
+	public function createOrFetchAssetModel(array $row, $category, $manufacturer)
+	{
+
+		$asset_model_name = $this->array_smart_fetch($row, "model name");
+		$asset_modelno = $this->array_smart_fetch($row, "model number");
+		if(empty($asset_model_name))
+			$asset_model_name='Unknown';
+		if(empty($asset_modelno))
+			$asset_modelno=0;
+		$this->comment('Model Name: ' . $asset_model_name);
+		$this->comment('Model No: ' . $asset_modelno);
+
+
+		foreach ($this->asset_models as $tempmodel) {
+			if ($tempmodel->name === $asset_model_name 
+				&& $tempmodel->modelno == $asset_modelno
+				&& $tempmodel->category_id == $category->id 
+				&& $tempmodel->manufacturer_id == $manufacturer->id )
+			{
+				$this->comment('A matching model ' . $asset_model_name . ' with model number ' . $asset_modelno . ' already exists');
+				return $tempmodel;
+			}
+		}
+		$asset_model = new AssetModel();
+		$asset_model->name = $asset_model_name;
+		$asset_model->manufacturer_id = $manufacturer->id;
+		$asset_model->modelno = e($asset_modelno);
+		$asset_model->category_id = $category->id;
+		$asset_model->user_id = 1;
+		$this->asset_models->add($asset_model);
+
+		if(!$this->option('testrun')) {
+			if ($asset_model->save()) {
+				$this->comment('Asset Model ' . $asset_model_name . ' with model number ' . $asset_modelno . ' was created');
+				return $asset_model;
+			} else {
+				$this->comment('Something went wrong! Asset Model ' . $asset_model_name . ' was NOT created');
+				dd($asset_model);
+				return $asset_model;
+			}
+		} else {
+			return $asset_model;
+		}
+
+	}
+
+	private $categories;
+
 	/**
+	 * Finds a category with the same name and item type in the database, otherwise creates it
+	 * @param $asset_category string
+	 * @param $item_type string
+	 * @return Category
+	 */
+	public function createOrFetchCategory($asset_category, $item_type)
+	{
+		if (empty($asset_category))
+			$asset_category = 'Unnamed Category';
+
+		foreach($this->categories as $tempcategory) {
+			if( $tempcategory->name === $asset_category && $tempcategory->category_type === $item_type) {
+				$this->comment('Category ' . $asset_category . ' already exists');
+				return $tempcategory;
+			}
+		}
+
+		$category = new Category();
+
+		$category->name = $asset_category;
+		$category->category_type = $item_type;
+		$category->user_id = 1;
+		$this->categories->add($category);
+
+		if(!$this->option('testrun')) {
+			if ($category->save()) {
+				$this->comment('Category ' . $asset_category . ' was created');
+				return $category;
+			} else {
+				$this->comment('Something went wrong! Category ' . $asset_category . ' was NOT created');
+				dd($asset_category);
+				return $category;
+			}
+		} else {
+			return $category;
+		}
+
+	}
+
+	private $companies;
+
+	/**
+	 * @param $asset_company_name string
+	 * @return Company
+	 */
+	public function createOrFetchCompany($asset_company_name)
+	{
+		foreach ($this->companies as $tempcompany) {
+			if ($tempcompany->name === $asset_company_name) {
+				$this->comment('A matching Company ' . $asset_company_name . ' already exists');
+				return $tempcompany;
+			}
+		}
+
+		$company = new Company();
+		$company->name = $asset_company_name;
+
+		if(!$this->option('testrun')) {
+			if ($company->save()) {
+				$this->comment('Company ' . $asset_company_name . ' was created');
+				return $company;
+			} else {
+				$this->comment('Something went wrong! Company ' . $asset_company_name . ' was NOT created');
+				return $company;
+			}
+		} else {
+			return $company;
+		}
+	}
+
+
+	private $manufacturers;
+
+	/**
+	 * Finds a manufacturer with matching name, otherwise create it.
+	 * @param $row array
+	 * @return Manufacturer
+	 * @internal param $asset_mfgr string
+	 */
+
+	public function createOrFetchManufacturer(array $row)
+	{
+		$asset_mfgr = $this->array_smart_fetch($row, "manufacturer");
+
+		if(empty($asset_mfgr)) {
+			$asset_mfgr='Unknown';
+		}
+		$this->comment('Manufacturer ID: ' . $asset_mfgr);
+
+		foreach ($this->manufacturers as $tempmanufacturer) {
+			if ($tempmanufacturer->name === $asset_mfgr) {
+				$this->comment('Manufacturer ' . $asset_mfgr . ' already exists');
+				return $tempmanufacturer;
+			}
+		}
+
+		//Otherwise create a manufacturer.
+
+		$manufacturer = new Manufacturer();
+		$manufacturer->name = $asset_mfgr;
+		$manufacturer->user_id = 1;
+		$this->manufacturers->add($manufacturer);
+
+		if (!$this->option('testrun')) {
+			if ($manufacturer->save()) {
+				$this->comment('Manufacturer ' . $manufacturer->name . ' was created');
+				return $manufacturer;
+			} else {
+				$this->comment('Something went wrong! Manufacturer ' . $asset_mfgr . ' was NOT created');
+				dd($manufacturer);
+				return $manufacturer;
+			}
+
+		} else {
+			return $manufacturer;
+		}
+	}
+
+		/**
 	 * @var
      */
 	private $locations;
@@ -174,7 +349,7 @@ class ObjectImportCommand extends Command {
 	public function createOrFetchLocation($asset_location)
 	{
 		foreach($this->locations as $templocation) {
-			if( (strcmp($templocation->name,e($asset_location)) == 0) ) {
+			if( $templocation->name === $asset_location ) {
 				$this->comment('Location ' . $asset_location . ' already exists');
 				return $templocation;
 			}
@@ -183,7 +358,7 @@ class ObjectImportCommand extends Command {
 		$location = new Location();
 
 		if (!empty($asset_location)) {
-			$location->name = e($asset_location);
+			$location->name = $asset_location;
 			$location->address = '';
 			$location->city = '';
 			$location->state = '';
@@ -210,8 +385,43 @@ class ObjectImportCommand extends Command {
 
 	}
 
+	private $suppliers;
 
 	/**
+	 * @param $row array
+	 * @return Supplier
+     */
+	public function createOrFetchSupplier(array $row)
+	{
+		$supplier_name = $this->array_smart_fetch($row, "supplier");
+		if(empty($supplier_name))
+			$supplier_name='Unknown';
+		foreach ($this->suppliers as $tempsupplier) {
+			if ($tempsupplier->name === $supplier_name) {
+				$this->comment('A matching Company ' . $supplier_name . ' already exists');
+				return $tempsupplier;
+			}
+		}
+
+		$supplier = new Supplier();
+		$supplier->name = $supplier_name;
+		$supplier->user_id = 1;
+
+		if(!$this->option('testrun')) {
+			if ($supplier->save()) {
+				$this->comment('Supplier ' . $supplier_name . ' was created');
+				return $supplier;
+			} else {
+				$this->comment('Something went wrong! Supplier ' . $supplier_name . ' was NOT created');
+				dd($supplier);
+				return $supplier;
+			}
+		} else {
+			return $supplier;
+		}
+	}
+
+		/**
 	 * Finds the user matching given data, or creates a new one if there is no match
 	 * @param $row array
 	 * @return User Model w/ matching name
@@ -303,216 +513,6 @@ class ObjectImportCommand extends Command {
 		}
 	}
 
-	private $categories;
-
-	/**
-	 * Finds a category with the same name and item type in the database, otherwise creates it
-	 * @param $asset_category string
-	 * @param $item_type string
-	 * @return Category
-	 */
-	public function createOrFetchCategory($asset_category, $item_type)
-	{
-		if (empty($asset_category)) {
-			$category_name = 'Unnamed Category';
-		} else {
-			$category_name = e($asset_category);
-		}
-
-		foreach($this->categories as $tempcategory) {
-			if( (strcmp($tempcategory->name, $category_name) == 0) && $tempcategory->category_type == $item_type) {
-				$this->comment('Category ' . $asset_category . ' already exists');
-				return $tempcategory;
-			}
-		}
-
-		$category = new Category();
-
-		$category->name = $category_name;
-		$category->category_type = $item_type;
-		$category->user_id = 1;
-		$this->categories->add($category);
-
-		if(!$this->option('testrun')) {
-			if ($category->save()) {
-				$this->comment('Category ' . $asset_category . ' was created');
-				return $category;
-			} else {
-				$this->comment('Something went wrong! Category ' . $asset_category . ' was NOT created');
-				dd($asset_category);
-				return $category;
-			}
-		} else {
-			return $category;
-		}
-
-	}
-
-
-	private $manufacturers;
-
-	/**
-	 * Finds a manufacturer with matching name, otherwise create it.
-	 * @param $row array
-	 * @return Manufacturer
-	 * @internal param $asset_mfgr string
-	 */
-	public function createOrFetchManufacturer(array $row)
-	{
-		$asset_mfgr = $this->array_smart_fetch($row, "manufacturer");
-
-		if(empty($asset_mfgr)) {
-			$asset_mfgr='Unknown';
-		}
-		$this->comment('Manufacturer ID: ' . $asset_mfgr);
-
-		foreach ($this->manufacturers as $tempmanufacturer) {
-			if ($tempmanufacturer->name == $asset_mfgr) {
-				$this->comment('Manufacturer ' . $asset_mfgr . ' already exists');
-				return $tempmanufacturer;
-			}
-		}
-
-		//Otherwise create a manufacturer.
-
-		$manufacturer = new Manufacturer();
-		$manufacturer->name = e($asset_mfgr);
-		$manufacturer->user_id = 1;
-		$this->manufacturers->add($manufacturer);
-
-		if (!$this->option('testrun')) {
-			if ($manufacturer->save()) {
-				$this->comment('Manufacturer ' . $manufacturer->name . ' was created');
-				return $manufacturer;
-			} else {
-				$this->comment('Something went wrong! Manufacturer ' . $asset_mfgr . ' was NOT created');
-				dd($manufacturer);
-				return $manufacturer;
-			}
-
-		} else {
-			return $manufacturer;
-		}
-	}
-
-	private $asset_models;
-    /**
-     * @param array
-     * @param $category Category
-     * @param $manufacturer Manufacturer
-     * @return Model
-     * @internal param $asset_modelno string
-     */
-	public function createOrFetchAssetModel(array $row, $category, $manufacturer)
-	{
-
-		$asset_model_name = $this->array_smart_fetch($row, "model name");
-		$asset_modelno = $this->array_smart_fetch($row, "model number");
-		if(empty($asset_model_name))
-			$asset_model_name='Unknown';
-		if(empty($asset_modelno))
-			$asset_modelno=0;
-		$this->comment('Model Name: ' . $asset_model_name);
-		$this->comment('Model No: ' . $asset_modelno);
-
-
-		foreach ($this->asset_models as $tempmodel) {
-			if ($tempmodel->name == $asset_model_name && $tempmodel->modelno == $asset_modelno
-				&& $tempmodel->category_id == $category->id && $tempmodel->manufacturer_id == $manufacturer->id
-			) {
-				$this->comment('A matching model ' . $asset_model_name . ' with model number ' . $asset_modelno . ' already exists');
-				return $tempmodel;
-			}
-		}
-		$asset_model = new AssetModel();
-		$asset_model->name = e($asset_model_name);
-		$asset_model->manufacturer_id = $manufacturer->id;
-		$asset_model->modelno = e($asset_modelno);
-		$asset_model->category_id = $category->id;
-		$asset_model->user_id = 1;
-		$this->asset_models->add($asset_model);
-
-		if(!$this->option('testrun')) {
-			if ($asset_model->save()) {
-				$this->comment('Asset Model ' . $asset_model_name . ' with model number ' . $asset_modelno . ' was created');
-				return $asset_model;
-			} else {
-				$this->comment('Something went wrong! Asset Model ' . $asset_model_name . ' was NOT created');
-				dd($asset_model);
-				return $asset_model;
-			}
-		} else {
-			return $asset_model;
-		}
-
-	}
-
-	private $companies;
-
-	/**
-	 * @param $asset_company_name string
-	 * @return Company
-	 */
-	public function createOrFetchCompany($asset_company_name)
-	{
-		foreach ($this->companies as $tempcompany) {
-			if ($tempcompany->name == $asset_company_name ) {
-				$this->comment('A matching Company ' . $asset_company_name . ' already exists');
-				return $tempcompany;
-			}
-		}
-
-		$company = new Company();
-		$company->name = e($asset_company_name);
-
-		if(!$this->option('testrun')) {
-			if ($company->save()) {
-				$this->comment('Company ' . $asset_company_name . ' was created');
-				return $company;
-			} else {
-				$this->comment('Something went wrong! Company ' . $asset_company_name . ' was NOT created');
-				return $company;
-			}
-		} else {
-			return $company;
-		}
-	}
-
-	private $suppliers;
-
-	/**
-	 * @param $row array
-	 * @return Supplier
-     */
-	public function createOrFetchSupplier(array $row)
-	{
-		$supplier_name = $this->array_smart_fetch($row, "supplier");
-		if(empty($supplier_name))
-			$supplier_name='Unknown';
-		foreach ($this->suppliers as $tempsupplier) {
-			if ($tempsupplier->name == $supplier_name ) {
-				$this->comment('A matching Company ' . $supplier_name . ' already exists');
-				return $tempsupplier;
-			}
-		}
-
-		$supplier = new Supplier();
-		$supplier->name = e($supplier_name);
-		$supplier->user_id = 1;
-
-		if(!$this->option('testrun')) {
-			if ($supplier->save()) {
-				$this->comment('Supplier ' . $supplier_name . ' was created');
-				return $supplier;
-			} else {
-				$this->comment('Something went wrong! Supplier ' . $supplier_name . ' was NOT created');
-				dd($supplier);
-				return $supplier;
-			}
-		} else {
-			return $supplier;
-		}
-	}
 	private $assets;
 
 	/**
@@ -533,7 +533,7 @@ class ObjectImportCommand extends Command {
         $this->comment('Notes: '.$item["notes"]);
 
 		foreach ($this->assets as $tempasset) {
-			if ($tempasset->asset_tag == $asset_tag ) {
+			if ($tempasset->asset_tag === $asset_tag ) {
 				$this->comment('A matching Asset ' . $asset_tag . ' already exists');
 				return;
 			}
