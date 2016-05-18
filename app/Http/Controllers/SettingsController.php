@@ -50,7 +50,7 @@ class SettingsController extends Controller
             $start_settings['db_error'] = $e->getMessage();
         }
 
-        $protocol = $_SERVER['HTTPS'] == "on" ? 'https://' : 'http://';
+        $protocol = array_key_exists('HTTPS', $_SERVER) && $_SERVER['HTTPS'] == "on" ? 'https://' : 'http://';
 
 
         $pageURL = $protocol;
@@ -178,6 +178,8 @@ class SettingsController extends Controller
         $settings->brand = 1;
         $settings->default_currency = 'USD';
         $settings->user_id = 1;
+        $settings->option_name = '135';
+        $settings->option_value = '1356';
 
         if ((!$user->isValid('initial')) && (!$settings->isValid('initial'))) {
             return redirect()->back()->withInput()->withErrors($user->getErrors())->withErrors($settings->getErrors());
