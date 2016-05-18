@@ -32,6 +32,8 @@
                 <th class="col-sm-1">{{ trans('general.name') }}</th>
             @endif
             <th class="col-sm-1">{{ trans('admin/hardware/table.serial') }}</th>
+            <th class="col-sm-1">{{ trans('admin/depreciations/general.depreciation_name') }}</th>
+                <th class="col-sm-1">{{ trans('admin/depreciations/general.number_of_months') }}</th>
             <th class="col-sm-1">{{ trans('admin/hardware/table.checkoutto') }}</th>
             <th class="col-sm-1">{{ trans('admin/hardware/table.location') }}</th>
             <th class="col-sm-1">{{ trans('admin/hardware/table.purchase_date') }}</th>
@@ -59,6 +61,16 @@
                 <td>{{ $asset->name }}</td>
             @endif
             <td>{{ $asset->serial }}</td>
+            <td>
+                @if ($asset->model->depreciation)
+                    {{ $asset->model->depreciation->name }}
+                @endif
+            </td>
+            <td>
+                @if ($asset->model->depreciation)
+                    {{ $asset->model->depreciation->months }} 
+                @endif
+            </td>
             <td>
             @if ($asset->assigneduser)
             	 @if ($asset->assigneduser->deleted_at!='')
