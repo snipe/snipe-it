@@ -181,16 +181,16 @@ class CategoriesController extends Controller
 
 
         if ($category->has_models() > 0) {
-            return redirect()->to('admin/settings/categories')->with('error', trans('admin/categories/message.assoc_models'));
+            return redirect()->to('admin/settings/categories')->with('error', trans('admin/categories/message.assoc_items', ['asset_type'=>'model']));
 
         } elseif ($category->accessories()->count() > 0) {
-                return redirect()->to('admin/settings/categories')->with('error', trans('admin/categories/message.assoc_accessories'));
+                return redirect()->to('admin/settings/categories')->with('error', trans('admin/categories/message.assoc_items', ['asset_type'=>'accessory']));
 
         } elseif ($category->consumables()->count() > 0) {
-                return redirect()->to('admin/settings/categories')->with('error', trans('admin/categories/message.assoc_consumables'));
+                return redirect()->to('admin/settings/categories')->with('error', trans('admin/categories/message.assoc_items', ['asset_type'=>'consumable']));
 
         } elseif ($category->components()->count() > 0) {
-                return redirect()->to('admin/settings/categories')->with('error', trans('admin/categories/message.assoc_components'));
+                return redirect()->to('admin/settings/categories')->with('error', trans('admin/categories/message.assoc_items', ['asset_type'=>'component']));
         } else {
 
             $category->delete();
@@ -365,7 +365,9 @@ class CategoriesController extends Controller
 
             if ($asset->deleted_at=='') {
                 $actions = '<div style=" white-space: nowrap;">';
-                //$actions .= '<a href="'.route('clone/hardware', $asset->id).'" class="btn btn-info btn-sm" title="Clone asset"><i class="fa fa-files-o"></i></a> ';
+                if ($category_type != 'component') {
+                    $actions .= '<a href="'.route('clone/'.$category_type, $asset->id).'" class="btn btn-info btn-sm" title="Clone '.$category_type.'"><i class="fa fa-files-o"></i></a> ';
+                }
                 $actions .= '<a href="'.route('update/'.$category_type, $asset->id).'" class="btn btn-warning btn-sm"><i class="fa fa-pencil icon-white"></i></a> ';
                 $actions .= '<a data-html="false" class="btn delete-asset btn-danger btn-sm" data-toggle="modal" href="'.route('delete/'.$category_type, $asset->id).'" data-content="'.trans('admin/hardware/message.delete.confirm').'" data-title="'.trans('general.delete').' '.htmlspecialchars($asset->asset_tag).'?" onClick="return false;"><i class="fa fa-trash icon-white"></i></a></div>';
             } elseif ($asset->deleted_at!='') {
