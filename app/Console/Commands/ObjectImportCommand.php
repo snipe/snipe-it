@@ -568,7 +568,7 @@ class ObjectImportCommand extends Command {
 		$asset->supplier_id = $supplier->id;
 		$asset->notes = $item["notes"];
 		$asset->image = $asset_image;
-
+		$this->assets->add($asset);
 		if (!$this->option('testrun')) {
 
 			if ($asset->save()) {
