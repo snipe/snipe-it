@@ -196,7 +196,7 @@ class ObjectImportCommand extends Command {
 		$asset_model = new AssetModel();
 		$asset_model->name = $asset_model_name;
 		$asset_model->manufacturer_id = $manufacturer->id;
-		$asset_model->modelno = e($asset_modelno);
+		$asset_model->modelno = $asset_modelno;
 		$asset_model->category_id = $category->id;
 		$asset_model->user_id = 1;
 		$this->asset_models->add($asset_model);
@@ -526,6 +526,7 @@ class ObjectImportCommand extends Command {
 		$status_id = 1;
         $asset_serial = $this->array_smart_fetch($row, "serial number");
         $asset_tag = $this->array_smart_fetch($row, "asset tag");
+        $asset_image = $this->array_smart_fetch($row, "image");
         // Check for the asset model match and create it if it doesn't exist
         $asset_model = $this->createOrFetchAssetModel($row, $item["category"], $item["manufacturer"]);
 		$supplier = $this->createOrFetchSupplier($row);
@@ -542,7 +543,7 @@ class ObjectImportCommand extends Command {
 		}
 
 		$asset = new Asset();
-		$asset->name = e($item["item_name"]);
+		$asset->name = $item["item_name"];
 		if ($item["purchase_date"] != '') {
 			$asset->purchase_date = $item["purchase_date"];
 		} else {
@@ -550,13 +551,13 @@ class ObjectImportCommand extends Command {
 		}
 
 		if (!empty($item_purchase_cost)) {
-			$asset->purchase_cost = number_format(e($item["purchase_cost"]),2);
+			$asset->purchase_cost = number_format($item["purchase_cost"],2);
 			$this->comment("Asset cost parsed: " . $asset->purchase_cost);
 		} else {
 			$asset->purchase_cost = 0.00;
 		}
-		$asset->serial = e($asset_serial);
-		$asset->asset_tag = e($asset_tag);
+		$asset->serial = $asset_serial;
+		$asset->asset_tag = $asset_tag;
 		$asset->model_id = $asset_model->id;
 		$asset->assigned_to = $item["user"]->id;
 		$asset->rtd_location_id = $item["location"]->id;
@@ -565,7 +566,8 @@ class ObjectImportCommand extends Command {
 		$asset->company_id = $item["company"]->id;
 		$asset->order_number = $item["order_number"];
 		$asset->supplier_id = $supplier->id;
-		$asset->notes = e($item["notes"]);
+		$asset->notes = $item["notes"];
+		$asset->image = $asset_image;
 
 		if (!$this->option('testrun')) {
 
@@ -599,7 +601,7 @@ class ObjectImportCommand extends Command {
 		}
 
 		$accessory = new Accessory();
-		$accessory->name = e($item["item_name"]);
+		$accessory->name = $item["item_name"];
 		if (!empty($item["purchase_date"])) {
 			$accessory->purchase_date = $item["purchase_date"];
 		} else {
@@ -656,7 +658,7 @@ class ObjectImportCommand extends Command {
 		}
 
 		$consumable = new Consumable();
-		$consumable->name = e($item["item_name"]);
+		$consumable->name = $item["item_name"];
 
 		if(!empty($item["purchase_date"])) {
 			$consumable->purchase_date = $item["purchase_date"];
