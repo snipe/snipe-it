@@ -50,9 +50,13 @@
         <li>
           <a href="#software" data-toggle="tab"><span class="hidden-lg hidden-md"><i class="fa fa-floppy-o"></i></span> <span class="hidden-xs hidden-sm">Licenses</span></a>
         </li>
+          <li>
+              <a href="#components" data-toggle="tab"><span class="hidden-lg hidden-md"><i class="fa fa-hdd-o"></i></span> <span class="hidden-xs hidden-sm">Components</span></a>
+          </li>
         <li>
           <a href="#maintenances" data-toggle="tab"><span class="hidden-lg hidden-md"><i class="fa fa-wrench"></i></span> <span class="hidden-xs hidden-sm">Maintenances</span></a>
         </li>
+
         <li>
           <a href="#history" data-toggle="tab"><span class="hidden-lg hidden-md"><i class="fa fa-history"></i></span> <span class="hidden-xs hidden-sm">History</span></a>
         </li>
@@ -292,6 +296,33 @@
           </div>
         </div><!-- /row -->
         </div><!-- /.tab-pane -->
+
+          <div class="tab-pane fade" id="components">
+              <!-- checked out assets table -->
+              <div class="row">
+                  <div class="col-md-12">
+                      <table class="table table-striped">
+
+                          <tbody>
+                          <?php $totalCost = 0; ?>
+
+                          @foreach ($asset->components as $component)
+                              @if (is_null($component->deleted_at))
+                                  <tr>
+                                      <td><a href="{{ route('view/component', $component->id) }}">{{ $component->name }}</a></td>
+                                  </tr>
+                              @endif
+                          @endforeach
+                          </tbody>
+                          <tfoot>
+                          <tr>
+                              <td colspan="7" class="text-right">{{ $use_currency.$totalCost }}</td>
+                          </tr>
+                          </tfoot>
+                      </table>
+                   </div>
+              </div>
+          </div>
         <div class="tab-pane fade" id="software">
           <div class="row">
           <div class="col-md-12">

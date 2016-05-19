@@ -213,12 +213,20 @@ class Asset extends Depreciable
     }
 
 
-  /**
+    /**
    * Set depreciation relationship
    */
     public function depreciation()
     {
         return $this->model->belongsTo('\App\Models\Depreciation', 'depreciation_id');
+    }
+
+    /**
+     * Get components assigned to this asset
+     */
+    public function components()
+    {
+        return $this->belongsToMany('\App\Models\Component', 'components_assets', 'asset_id', 'component_id')->withPivot('id')->withTrashed();
     }
 
   /**
