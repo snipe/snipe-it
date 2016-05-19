@@ -275,6 +275,7 @@ class ObjectImportCommand extends Command {
 
 		$company = new Company();
 		$company->name = $asset_company_name;
+		$this->companies->add($company);
 
 		if(!$this->option('testrun')) {
 			if ($company->save()) {
@@ -406,6 +407,7 @@ class ObjectImportCommand extends Command {
 		$supplier = new Supplier();
 		$supplier->name = $supplier_name;
 		$supplier->user_id = 1;
+		$this->suppliers->add($supplier);
 
 		if(!$this->option('testrun')) {
 			if ($supplier->save()) {
