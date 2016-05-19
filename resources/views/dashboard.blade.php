@@ -88,7 +88,7 @@
                 <table class="table table-hover table-fixed break-word">
                 <thead>
                     <tr>
-                        <th class="col-md-1"><span class="line"></span>{{ trans('general.date') }}</th>
+                        <th class="col-md-2"><span class="line"></span>{{ trans('general.date') }}</th>
                         <th class="col-md-2"><span class="line"></span>{{ trans('general.admin') }}</th>
                         <th class="col-md-3"><span class="line"></span>{{ trans('table.item') }}</th>
                         <th class="col-md-2"><span class="line"></span>{{ trans('table.actions') }}</th>
@@ -99,7 +99,7 @@
                 @if (count($recent_activity) > 0)
                   @foreach ($recent_activity as $activity)
                     <tr>
-                       <td>{{ date("M d", strtotime($activity->created_at)) }}</td>
+                       <td>{{ date("M d, Y H:iA", strtotime($activity->created_at)) }}</td>
                        <td>
                                  @if ($activity->action_type!='requested')
                                       <a href="{{ route('view/user', $activity->user_id) }}">{{ $activity->adminlog->fullName() }}</a>
@@ -116,8 +116,10 @@
                                 <a href="{{ route('view/consumable', $activity->consumable_id) }}">{{ $activity->consumablelog->name }}</a>
                             @elseif (($activity->accessorylog) && ($activity->asset_type=="accessory"))
                               <a href="{{ route('view/accessory', $activity->accessory_id) }}">{{ $activity->accessorylog->name }}</a>
-                                  @else
-                                      {{ trans('general.bad_data') }}
+                            @elseif (($activity->componentlog) && ($activity->asset_type=="component"))
+                               <a href="{{ route('view/component', $activity->component_id) }}">{{ $activity->componentlog->name }}</a>
+                            @else
+                                {{ trans('general.bad_data') }}
                             @endif
 
                             </td>

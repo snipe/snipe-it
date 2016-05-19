@@ -50,6 +50,13 @@ class Actionlog extends Model implements ICompanyableChild
                     ->withTrashed();
     }
 
+    public function componentlog()
+    {
+
+        return $this->belongsTo('\App\Models\Component', 'component_id')
+            ->withTrashed();
+    }
+
     public function accessorylog()
     {
 
