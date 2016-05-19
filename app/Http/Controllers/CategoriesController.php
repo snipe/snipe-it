@@ -300,33 +300,10 @@ class CategoriesController extends Controller
         return $data;
     }
 
-    /**
-    * Returns JSON response that contains the data for the category detail page.
-    *
-    * @todo Refactor this nastiness. Assets do not behave
-    * the same as accessories, etc. Need to figure out if I should
-    * make separate controllers, or what. Too much copypasta if I try to work it in here.
-    * @author [A. Gianotto] [<snipe@snipe.net>]
-    * @see CategoriesController::getView() method that generates the view
-    * @param int $categoryId
-    * @since [v1.8]
-    * @return String JSON
-    */
-    public function getDataView($categoryId)
-    {
+    public function getDataViewAssets($categoryID) {
 
-        $category = Category::find($categoryId);
-
-        if ($category->category_type =='asset') {
-            $category_assets = $category->assets;
-        } elseif ($category->category_type =='accessory') {
-            $category_assets = $category->accessories;
-        } elseif ($category->category_type =='consumable') {
-            $category_assets = $category->consumables;
-        } elseif ($category->category_type =='component') {
-            $category_assets = $category->components;
-        }
-
+        $category = Category::with('assets.company')->find($categoryID);
+        $category_assets = $category->assets;
 
         if (Input::has('search')) {
             $category_assets = $category_assets->TextSearch(e(Input::get('search')));
@@ -354,22 +331,11 @@ class CategoriesController extends Controller
 
         foreach ($category_assets as $asset) {
 
-            if ($category->category_type=='asset') {
-                $category_type = 'hardware';
-            } else {
-                $category_type = $category->category_type;
-            }
-
             $actions = '';
             $inout='';
 
             if ($asset->deleted_at=='') {
-                $actions = '<div style=" white-space: nowrap;">';
-                if ($category_type != 'component') {
-                    $actions .= '<a href="'.route('clone/'.$category_type, $asset->id).'" class="btn btn-info btn-sm" title="Clone '.$category_type.'"><i class="fa fa-files-o"></i></a> ';
-                }
-                $actions .= '<a href="'.route('update/'.$category_type, $asset->id).'" class="btn btn-warning btn-sm"><i class="fa fa-pencil icon-white"></i></a> ';
-                $actions .= '<a data-html="false" class="btn delete-asset btn-danger btn-sm" data-toggle="modal" href="'.route('delete/'.$category_type, $asset->id).'" data-content="'.trans('admin/hardware/message.delete.confirm').'" data-title="'.trans('general.delete').' '.htmlspecialchars($asset->asset_tag).'?" onClick="return false;"><i class="fa fa-trash icon-white"></i></a></div>';
+                $actions = '<div style=" white-space: nowrap;"><a href="'.route('clone/hardware', $asset->id).'" class="btn btn-info btn-sm" title="Clone asset"><i class="fa fa-files-o"></i></a> <a href="'.route('update/hardware', $asset->id).'" class="btn btn-warning btn-sm"><i class="fa fa-pencil icon-white"></i></a> <a data-html="false" class="btn delete-asset btn-danger btn-sm" data-toggle="modal" href="'.route('delete/hardware', $asset->id).'" data-content="'.Lang::get('admin/hardware/message.delete.confirm').'" data-title="'.Lang::get('general.delete').' '.htmlspecialchars($asset->asset_tag).'?" onClick="return false;"><i class="fa fa-trash icon-white"></i></a></div>';
             } elseif ($asset->deleted_at!='') {
                 $actions = '<a href="'.route('restore/hardware', $asset->id).'" class="btn btn-warning btn-sm"><i class="fa fa-recycle icon-white"></i></a>';
             }
@@ -377,27 +343,189 @@ class CategoriesController extends Controller
             if ($asset->assetstatus) {
                 if ($asset->assetstatus->deployable != 0) {
                     if (($asset->assigned_to !='') && ($asset->assigned_to > 0)) {
-                        $inout = '<a href="'.route('checkin/hardware', $asset->id).'" class="btn btn-primary btn-sm">'.trans('general.checkin').'</a>';
+                        $inout = '<a href="'.route('checkin/hardware', $asset->id).'" class="btn btn-primary btn-sm">'.Lang::get('general.checkin').'</a>';
                     } else {
-                        $inout = '<a href="'.route('checkout/hardware', $asset->id).'" class="btn btn-info btn-sm">'.trans('general.checkout').'</a>';
+                        $inout = '<a href="'.route('checkout/hardware', $asset->id).'" class="btn btn-info btn-sm">'.Lang::get('general.checkout').'</a>';
                     }
                 }
             }
 
             $rows[] = array(
-            'id' => $asset->id,
-            'name' => (string)link_to('/hardware/'.$asset->id.'/view', e($asset->name)),
-            //'model' => $asset->model->name,
-            'asset_tag' => e($asset->asset_tag),
-            'serial' => e($asset->serial),
-            'assigned_to' => ($asset->assigneduser) ? (string)link_to(config('app.url').'/admin/users/'.$asset->assigneduser->id.'/view', $asset->assigneduser->fullName()): '',
-            'change' => $inout,
-            'actions' => $actions,
-            'companyName' => Company::getName($asset),
+                'id' => $asset->id,
+                'name' => (string)link_to('/hardware/'.$asset->id.'/view', $asset->showAssetName()),
+                'model' => $asset->model->name,
+                'asset_tag' => $asset->asset_tag,
+                'serial' => $asset->serial,
+                'assigned_to' => ($asset->assigneduser) ? link_to('/admin/users/'.$asset->assigneduser->id.'/view', $asset->assigneduser->fullName()): '',
+                'change' => $inout,
+                'actions' => $actions,
+                'companyName' => Company::getName($asset),
             );
         }
 
         $data = array('total' => $count, 'rows' => $rows);
         return $data;
     }
+
+
+
+    public function getDataViewAccessories($categoryID) {
+
+        $category = Category::with('accessories.company')->find($categoryID);
+        $category_assets = $category->accessories;
+
+        if (Input::has('search')) {
+            $category_assets = $category_assets->TextSearch(e(Input::get('search')));
+        }
+
+        if (Input::has('offset')) {
+            $offset = e(Input::get('offset'));
+        } else {
+            $offset = 0;
+        }
+
+        if (Input::has('limit')) {
+            $limit = e(Input::get('limit'));
+        } else {
+            $limit = 50;
+        }
+
+        $order = Input::get('order') === 'asc' ? 'asc' : 'desc';
+
+        $allowed_columns = ['id','name','serial','asset_tag'];
+        $sort = in_array(Input::get('sort'), $allowed_columns) ? Input::get('sort') : 'created_at';
+        $count = $category_assets->count();
+
+        $rows = array();
+
+        foreach ($category_assets as $asset) {
+
+            $actions = '';
+            $inout='';
+
+            if ($asset->deleted_at=='') {
+                $actions = '<div style=" white-space: nowrap;"><a href="'.route('update/accessory', $asset->id).'" class="btn btn-warning btn-sm"><i class="fa fa-pencil icon-white"></i></a> <a data-html="false" class="btn delete-asset btn-danger btn-sm" data-toggle="modal" href="'.route('delete/accessory', $asset->id).'" data-content="'.Lang::get('admin/hardware/message.delete.confirm').'" data-title="'.Lang::get('general.delete').' '.htmlspecialchars($asset->name).'?" onClick="return false;"><i class="fa fa-trash icon-white"></i></a></div>';
+            }
+
+
+
+            $rows[] = array(
+                'id' => $asset->id,
+                'name' => (string)link_to_route('view/accessory', $asset->name, [$asset->id]),
+                'actions' => $actions,
+                'companyName' => Company::getName($asset),
+            );
+        }
+
+        $data = array('total' => $count, 'rows' => $rows);
+        return $data;
+    }
+
+
+    public function getDataViewConsumables($categoryID) {
+
+        $category = Category::with('accessories.company')->find($categoryID);
+        $category_assets = $category->consumables;
+
+        if (Input::has('search')) {
+            $category_assets = $category_assets->TextSearch(e(Input::get('search')));
+        }
+
+        if (Input::has('offset')) {
+            $offset = e(Input::get('offset'));
+        } else {
+            $offset = 0;
+        }
+
+        if (Input::has('limit')) {
+            $limit = e(Input::get('limit'));
+        } else {
+            $limit = 50;
+        }
+
+        $order = Input::get('order') === 'asc' ? 'asc' : 'desc';
+
+        $allowed_columns = ['id','name','serial','asset_tag'];
+        $sort = in_array(Input::get('sort'), $allowed_columns) ? Input::get('sort') : 'created_at';
+        $count = $category_assets->count();
+
+        $rows = array();
+
+        foreach ($category_assets as $asset) {
+
+            $actions = '';
+            $inout='';
+
+            if ($asset->deleted_at=='') {
+                $actions = '<div style=" white-space: nowrap;"><a href="'.route('update/consumable', $asset->id).'" class="btn btn-warning btn-sm"><i class="fa fa-pencil icon-white"></i></a> <a data-html="false" class="btn delete-asset btn-danger btn-sm" data-toggle="modal" href="'.route('delete/consumable', $asset->id).'" data-content="'.Lang::get('admin/hardware/message.delete.confirm').'" data-title="'.Lang::get('general.delete').' '.htmlspecialchars($asset->name).'?" onClick="return false;"><i class="fa fa-trash icon-white"></i></a></div>';
+            }
+
+
+
+            $rows[] = array(
+                'id' => $asset->id,
+                'name' => (string) link_to_route('view/consumable', $asset->name, [$asset->id]),
+                'actions' => $actions,
+                'companyName' => Company::getName($asset),
+            );
+        }
+
+        $data = array('total' => $count, 'rows' => $rows);
+        return $data;
+    }
+
+    public function getDataViewComponent($categoryID) {
+
+        $category = Category::with('accessories.company')->find($categoryID);
+        $category_assets = $category->components;
+
+        if (Input::has('search')) {
+            $category_assets = $category_assets->TextSearch(e(Input::get('search')));
+        }
+
+        if (Input::has('offset')) {
+            $offset = e(Input::get('offset'));
+        } else {
+            $offset = 0;
+        }
+
+        if (Input::has('limit')) {
+            $limit = e(Input::get('limit'));
+        } else {
+            $limit = 50;
+        }
+
+        $order = Input::get('order') === 'asc' ? 'asc' : 'desc';
+
+        $allowed_columns = ['id','name','serial','asset_tag'];
+        $sort = in_array(Input::get('sort'), $allowed_columns) ? Input::get('sort') : 'created_at';
+        $count = $category_assets->count();
+
+        $rows = array();
+
+        foreach ($category_assets as $asset) {
+
+            $actions = '';
+            $inout='';
+
+            if ($asset->deleted_at=='') {
+                $actions = '<div style=" white-space: nowrap;"><a href="'.route('update/component', $asset->id).'" class="btn btn-warning btn-sm"><i class="fa fa-pencil icon-white"></i></a> <a data-html="false" class="btn delete-asset btn-danger btn-sm" data-toggle="modal" href="'.route('delete/component', $asset->id).'" data-content="'.Lang::get('admin/hardware/message.delete.confirm').'" data-title="'.Lang::get('general.delete').' '.htmlspecialchars($asset->name).'?" onClick="return false;"><i class="fa fa-trash icon-white"></i></a></div>';
+            }
+
+
+
+            $rows[] = array(
+                'id' => $asset->id,
+                'name' => (string)link_to_route('view/accessory', $asset->name, [$asset->id]),
+                'actions' => $actions,
+                'companyName' => Company::getName($asset),
+            );
+        }
+
+        $data = array('total' => $count, 'rows' => $rows);
+        return $data;
+    }
+
+
+
 }
