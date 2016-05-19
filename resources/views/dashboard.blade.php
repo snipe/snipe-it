@@ -90,9 +90,9 @@
                     <tr>
                         <th class="col-md-2"><span class="line"></span>{{ trans('general.date') }}</th>
                         <th class="col-md-2"><span class="line"></span>{{ trans('general.admin') }}</th>
-                        <th class="col-md-3"><span class="line"></span>{{ trans('table.item') }}</th>
                         <th class="col-md-2"><span class="line"></span>{{ trans('table.actions') }}</th>
-                        <th class="col-md-3"><span class="line"></span>{{ trans('general.user') }}</th>
+                        <th class="col-md-3"><span class="line"></span>{{ trans('table.item') }}</th>
+                        <th class="col-md-3"><span class="line"></span>To</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -106,7 +106,9 @@
                                  @endif
 
                                  </td>
-
+                        <td>
+                            {{ strtolower(trans('general.'.str_replace(' ','_',$activity->action_type))) }}
+                        </td>
                        <td>
                             @if (($activity->assetlog) && ($activity->asset_type=="hardware"))
                               <a href="{{ route('view/hardware', $activity->asset_id) }}">{{ $activity->assetlog->showAssetName() }}</a>
@@ -118,19 +120,22 @@
                               <a href="{{ route('view/accessory', $activity->accessory_id) }}">{{ $activity->accessorylog->name }}</a>
                             @elseif (($activity->componentlog) && ($activity->asset_type=="component"))
                                <a href="{{ route('view/component', $activity->component_id) }}">{{ $activity->componentlog->name }}</a>
+                            @elseif (($activity->assetlog) && ($activity->action_type=="uploaded"))
+                                   <a href="{{ route('view/hardware', $activity->asset_id) }}">{{ $activity->assetlog->showAssetName() }}</a>
                             @else
                                 {{ trans('general.bad_data') }}
                             @endif
 
                             </td>
+
                        <td>
-                         {{ strtolower(trans('general.'.str_replace(' ','_',$activity->action_type))) }}
-                       </td>
-                       <td>
-                       @if ($activity->action_type=='requested')
+                        @if (($activity->componentlog) && ($activity->asset_type=="component"))
+                           <a href="{{ route('view/hardware', $activity->asset_id) }}">{{ $activity->assetlog->showAssetName() }}</a>
+                        @elseif($activity->action_type=='requested')
                           <a href="{{ route('view/user', $activity->user_id) }}">{{ $activity->adminlog->fullName() }}</a>
                        @elseif ($activity->userlog)
                           <a href="{{ route('view/user', $activity->checkedout_to) }}">{{ $activity->userlog->fullName() }}</a>
+
                        @endif
 
                       </td>
