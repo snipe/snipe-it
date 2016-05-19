@@ -147,7 +147,7 @@
         showExport: true,
         showColumns: true,
         exportDataType: 'all',
-        exportTypes: ['csv', 'txt','json', 'xml'],
+        exportTypes: ['csv', 'excel', 'txt','json', 'xml'],
         maintainSelected: true,
         paginationFirstText: "{{ trans('general.first') }}",
         paginationLastText: "{{ trans('general.last') }}",
