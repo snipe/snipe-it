@@ -11,6 +11,7 @@ class Setting extends Model
     use ValidatingTrait;
 
     protected $rules = [
+    "site_name"     => 'required|min:1',
     "brand"     => 'required|min:1|numeric',
     "qr_text"       => 'min:1|max:31',
     "custom_css"   => 'string',
