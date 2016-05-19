@@ -249,7 +249,7 @@ class ObjectImportCommand extends Command {
 				return $category;
 			} else {
 				$this->comment('Something went wrong! Category ' . $asset_category . ' was NOT created');
-				dd($asset_category);
+				dd($category);
 				return $category;
 			}
 		} else {
@@ -440,26 +440,28 @@ class ObjectImportCommand extends Command {
 
 		// A number was given instead of a name
 		if (is_numeric($user_name)) {
-			$this->comment('User ' . $user_name . ' is a number - Assuming UID - hopefully this user already exists');
+			$this->comment('User '.$user_name.' is not a name - assume this user already exists');
 			$user_username = '';
+            $first_name = '';
+			$last_name = '';
 
-			// No name was given
+		// No name was given
 		} elseif (empty($user_name)) {
 			$this->comment('No user data provided - skipping user creation, just adding asset');
 			$first_name = '';
 			$last_name = '';
-
+			//$user_username = '';
 		} else {
 			$user_email_array = User::generateFormattedNameFromFullName($this->option('email_format'), $user_name);
 			$first_name = $user_email_array['first_name'];
 			$last_name = $user_email_array['last_name'];
 
-			if (empty($user_email)) {
-				$user_email = $user_email_array['username'] . '@' . Config::get('app.domain');
+			if ($user_email=='') {
+				$user_email = $user_email_array['username'].'@'.config('app.domain');
 			}
 
-			if (empty($user_username)) {
-				if ($this->option('username_format') == 'email') {
+			if ($user_username=='') {
+				if ($this->option('username_format')=='email') {
 					$user_username = $user_email;
 				} else {
 					$user_name_array = User::generateFormattedNameFromFullName($this->option('username_format'), $user_name);
@@ -479,40 +481,33 @@ class ObjectImportCommand extends Command {
 
         if($this->option('testrun'))
             return new User;
+
 		if (!empty($user_username)) {
 			if ($user = User::MatchEmailOrUsername($user_username, $user_email)
-				->whereNotNull('username')->first()
-			) {
-				$this->comment('User ' . $user_username . ' already exists');
-				return $user;
+				->whereNotNull('username')->first()) {
+				$this->comment('User '.$user_username.' already exists');
 			} else {
-				// Create the user
-				$user = Sentry::createUser(array(
-					'first_name' => $first_name,
-					'last_name' => $last_name,
-					'email' => $user_email,
-					'username' => $user_username,
-					'password' => substr(str_shuffle("0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"), 0, 12),
-					'activated' => true,
-					'permissions' => array(
-						'admin' => 0,
-						'user' => 1,
-					),
-					'notes' => 'User imported through asset importer'
-				));
+                $user = new \App\Models\User;
+                $password  = substr(str_shuffle("0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"), 0, 20);
 
-				// Find the group using the group id
-				$userGroup = Sentry::findGroupById(3);
+                $user->first_name = $first_name;
+                $user->last_name = $last_name;
+                $user->username = $user_username;
+                $user->email = $user_email;
+                $user->password = bcrypt($password);
+                $user->activated = 1;
+                if ($user->save()) {
+                    $this->comment('User '.$first_name.' created');
+                } else {
+                    $this->error('ERROR CREATING User '.$first_name.' '.$last_name);
+                    $this->error($user->getErrors());
+                }
 
-				// Assign the group to the user
-				$user->addGroup($userGroup);
-				$this->comment('User ' . $first_name . ' created');
-				return $user;
 			}
 		} else {
 			$user = new User;
-			return $user;
 		}
+		return $user;
 	}
 
 	private $assets;
