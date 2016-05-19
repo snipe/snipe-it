@@ -26,11 +26,12 @@
 
 
           <div id="toolbar">
-            <select name="bulk_actions" class="form-control select2" style="width: 130px;">
+            <!-- <select name="bulk_actions" class="form-control select2" style="width: 130px;">
               <option value="checkout">Checkout</option>
               <option value="checkin">Checkin</option>
             </select>
             <button class="btn btn-default" id="bulkEdit" disabled>Go</button>
+            -->
           </div>
 
 
