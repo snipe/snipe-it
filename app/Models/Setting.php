@@ -13,6 +13,8 @@ class Setting extends Model
     protected $rules = [
     "site_name"     => 'required|min:1',
     "brand"     => 'required|min:1|numeric',
+    "alert_threshold"     => 'numeric',
+    "alert_interval"     => 'numeric',
     "qr_text"       => 'min:1|max:31',
     "custom_css"   => 'string',
     "slack_endpoint"   => 'url',
