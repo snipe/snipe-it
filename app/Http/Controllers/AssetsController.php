@@ -1088,18 +1088,13 @@ class AssetsController extends Controller
 
 
                 $settings = Setting::getSettings();
-                if ($settings->qr_code=='1') {
 
                     $assets = Asset::find($asset_ids);
-                    $assetcount = count($assets);
                     $count = 0;
 
                     return View::make('hardware/labels')->with('assets', $assets)->with('settings', $settings)->with('count', $count)->with('settings', $settings);
 
-                } else {
-                  // QR codes are not enabled
-                    return redirect()->to("hardware")->with('error', 'Barcodes are not enabled in Admin > Settings');
-                }
+                
 
             } elseif (Input::get('bulk_actions')=='delete') {
 

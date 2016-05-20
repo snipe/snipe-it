@@ -95,9 +95,11 @@
 	<?php $count++; ?>
   <div class="label" {!!  ($count % $settings->labels_per_page == 0) ? 'style="margin-bottom: 0px;"' : '' !!}>
 
+      @if ($settings->qr_code=='1')
     <div class="qr_img">
       <img src="./{{ $asset->id }}/qr_code" class="qr_img">
     </div>
+      @endif
 
     <div class="qr_text">
         @if ($settings->qr_text!='')
