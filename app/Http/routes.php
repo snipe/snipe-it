@@ -211,6 +211,7 @@ Route::group(
         Route::get('{assetId}/view', [ 'as' => 'view/hardware', 'uses' => 'AssetsController@getView' ]);
         Route::get('{assetId}/qr-view', [ 'as' => 'qr-view/hardware', 'uses' => 'AssetsController@getView' ]);
         Route::get('{assetId}/qr_code', [ 'as' => 'qr_code/hardware', 'uses' => 'AssetsController@getQrCode' ]);
+        Route::get('{assetId}/barcode', [ 'as' => 'barcode/hardware', 'uses' => 'AssetsController@getBarCode' ]);
         Route::get('{assetId}/restore', [ 'as' => 'restore/hardware', 'uses' => 'AssetsController@getRestore' ]);
         Route::post('{assetId}/upload', [ 'as' => 'upload/asset', 'uses' => 'AssetsController@postUpload' ]);
         Route::get(

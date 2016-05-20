@@ -681,6 +681,34 @@ class AssetsController extends Controller
 
 
     /**
+     * Return a 2D barcode for the asset
+     *
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @param int $assetId
+     * @since [v1.0]
+     * @return Response
+     */
+    public function getBarCode($assetId = null)
+    {
+
+        $settings = Setting::getSettings();
+        $asset = Asset::find($assetId);
+
+        if (!Company::isCurrentUserHasAccess($asset)) {
+            return redirect()->to('hardware')->with('error', trans('general.insufficient_permissions'));
+        }
+
+        if (isset($asset->id,$asset->asset_tag)) {
+            $barcode = new \Com\Tecnick\Barcode\Barcode();
+            $size = Helper::barcodeDimensions($settings->alt_barcode_type);
+            $barcode_obj =  $barcode->getBarcodeObj($settings->alt_barcode,  $asset->asset_tag, 250, 20);
+            return response($barcode_obj->getPngData())->header('Content-type', 'image/png');
+        }
+
+    }
+
+
+    /**
     * Get the Asset import upload page.
     *
     * @author [A. Gianotto] [<snipe@snipe.net>]

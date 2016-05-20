@@ -412,13 +412,34 @@ Form::macro('currencies', function ($name = "currency", $selected = null, $class
 
 
 
-Form::macro('barcode_types', function ($name = "barcode_type", $selected = null, $class = null) {
+Form::macro('alt_barcode_types', function ($name = "alt_barcode", $selected = null, $class = null) {
 
     $barcode_types = array(
         'C128',
-        'DATAMATRIX',
+        'C39',
         'PDF417',
+        'EAN5',
+
+    );
+
+    $select = '<select name="'.$name.'" class="'.$class.'">';
+    foreach ($barcode_types as $barcode_type) {
+        $select .= '<option value="'.$barcode_type.'"'.($selected == $barcode_type ? ' selected="selected"' : '').'>'.$barcode_type.'</option> ';
+    }
+
+    $select .= '</select>';
+
+    return $select;
+
+});
+
+
+Form::macro('barcode_types', function ($name = "barcode_type", $selected = null, $class = null) {
+
+    $barcode_types = array(
         'QRCODE',
+        'DATAMATRIX',
+
     );
 
     $select = '<select name="'.$name.'" class="'.$class.'">';

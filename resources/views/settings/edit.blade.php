@@ -262,24 +262,46 @@
                   <!-- qr code -->
                   <div class="form-group">
                     <div class="col-md-3">
-                    {{ Form::label('qr_code', trans('admin/settings/general.display_qr')) }}
+                      {{ Form::label('qr_code', trans('admin/settings/general.display_qr')) }}
                     </div>
                     <div class="col-md-9">
-                    {{ Form::checkbox('qr_code', '1', Input::old('qr_code', $setting->qr_code),array('class' => 'minimal')) }}
-                              {{ trans('admin/settings/general.display_qr') }}
+                      {{ Form::checkbox('qr_code', '1', Input::old('qr_code', $setting->qr_code),array('class' => 'minimal')) }}
+                      {{ trans('general.yes') }}
                     </div>
                   </div>
 
-                  <!-- barcode type -->
+                  <!-- square barcode type -->
                   <div class="form-group{{ $errors->has('barcode_type') ? ' has-error' : '' }}">
                     <div class="col-md-3">
                       {{ Form::label('barcode_type', trans('admin/settings/general.barcode_type')) }}
                     </div>
                     <div class="col-md-9">
-                    {!! Form::barcode_types('barcode_type', Input::old('barcode_type', $setting->barcode_type), 'select2') !!}
-                    {!! $errors->first('barcode_type', '<span class="alert-msg"><i class="fa fa-times"></i> :message</span>') !!}
+                      {!! Form::barcode_types('barcode_type', Input::old('barcode_type', $setting->barcode_type), 'select2') !!}
+                      {!! $errors->first('barcode_type', '<span class="alert-msg"><i class="fa fa-times"></i> :message</span>') !!}
                     </div>
                   </div>
+
+                    <!-- barcode -->
+                    <div class="form-group">
+                      <div class="col-md-3">
+                        {{ Form::label('qr_code', trans('admin/settings/general.display_alt_barcode')) }}
+                      </div>
+                      <div class="col-md-9">
+                        {{ Form::checkbox('alt_barcode_enabled', '1', Input::old('alt_barcode_enabled', $setting->alt_barcode_enabled),array('class' => 'minimal')) }}
+                        {{ trans('general.yes') }}
+                      </div>
+                    </div>
+
+                    <!-- barcode type -->
+                    <div class="form-group{{ $errors->has('alt_barcode') ? ' has-error' : '' }}">
+                      <div class="col-md-3">
+                        {{ Form::label('alt_barcode', trans('admin/settings/general.alt_barcode_type')) }}
+                      </div>
+                      <div class="col-md-9">
+                        {!! Form::alt_barcode_types('alt_barcode', Input::old('alt_barcode', $setting->alt_barcode), 'select2') !!}
+                        {!! $errors->first('barcode_type', '<span class="alert-msg"><i class="fa fa-times"></i> :message</span>') !!}
+                      </div>
+                    </div>
 
                 @else
                   <span class="help-inline col-md-offset-3 col-md-12">
