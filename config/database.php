@@ -69,6 +69,9 @@ return [
             'prefix'    => env('DB_PREFIX', null),
             'strict'    => false,
             'engine'    => null,
+            'dump_command_path' => env('DB_DUMP_PATH', '/usr/local/bin'),  // only the path, so without 'mysqldump'
+            'dump_command_timeout' => 60 * 5, // 5 minute timeout
+            'dump_using_single_transaction' => true, // perform dump using a single transaction
         ],
 
         'pgsql' => [
