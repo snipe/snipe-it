@@ -2,34 +2,34 @@
 
 return array(
 
-    'does_not_exist' => 'Consumable does not exist.',
+    'does_not_exist' => 'مواد مصرفی یافت نشد.',
 
     'create' => array(
-        'error'   => 'Consumable was not created, please try again.',
-        'success' => 'Consumable created successfully.'
+        'error'   => 'لوازم مصرفي ایجاد نشد, لطفا دوباره سعی کنید.',
+        'success' => 'مواد مصرفی ایجاد شد.'
     ),
 
     'update' => array(
-        'error'   => 'Consumable was not updated, please try again',
-        'success' => 'Consumable updated successfully.'
+        'error'   => 'لوازم مصرفي بروز رسانی نشد, لطفا دوباره سعی کنید',
+        'success' => 'لوازم مصرفي با موفقیت به روز رسانی شد.'
     ),
 
     'delete' => array(
-        'confirm'   => 'Are you sure you wish to delete this consumable?',
-        'error'   => 'There was an issue deleting the consumable. Please try again.',
-        'success' => 'The consumable was deleted successfully.'
+        'confirm'   => 'آیا مطمعنید که می خواهید این ماده مصرفی را حذف کنید؟',
+        'error'   => 'یک مشکل در حذف کردن ماده مصرفی وجود دارد،دوباره سعی کنید.',
+        'success' => 'مواد مصرفی حذف شد.'
     ),
 
      'checkout' => array(
-        'error'   		=> 'Consumable was not checked out, please try again',
-        'success' 		=> 'Consumable checked out successfully.',
-        'user_does_not_exist' => 'That user is invalid. Please try again.'
+        'error'   		=> 'مواد مصرفی بررسی نشد ، دوباره سعی کنید.',
+        'success' 		=> 'مواد مصرفی بررسی شد.',
+        'user_does_not_exist' => 'کاربر نامعتبر است لطفا دوباره امتحان کنید.'
     ),
 
     'checkin' => array(
-        'error'   		=> 'Consumable was not checked in, please try again',
-        'success' 		=> 'Consumable checked in successfully.',
-        'user_does_not_exist' => 'That user is invalid. Please try again.'
+        'error'   		=> 'مواد مصرفی بررسی نشد ، دوباره سعی کنید',
+        'success' 		=> 'مواد مصرفی بررسی شد.',
+        'user_does_not_exist' => 'کاربر نامعتبر است لطفا دوباره امتحان کنید.'
     )
 
 

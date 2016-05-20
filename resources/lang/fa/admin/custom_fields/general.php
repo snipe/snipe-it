@@ -1,8 +1,8 @@
 <?php
 
 return array(
-    'custom_fields'		        => 'Custom Fields',
-    'field'		                => 'Field',
+    'custom_fields'		        => 'فیلدهای سفارشی',
+    'field'		                => 'فیلد',
     'about_fieldsets_title'		=> 'About Fieldsets',
     'about_fieldsets_text'		=> 'Fieldsets allow you to create groups of custom fields that are frequently re-used used for specific asset model types.',
     'fieldset'      	        => 'Fieldset',

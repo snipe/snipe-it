@@ -3,8 +3,8 @@
 return array(
 
     'does_not_exist' => 'Nie ma takiej kategorii.',
-    'assoc_models'	 => 'This category is currently associated with at least one model and cannot be deleted. Please update your models to no longer reference this category and try again. ',
-    'assoc_items'	 => 'This category is currently associated with at least one :asset_type and cannot be deleted. Please update your :asset_type  to no longer reference this category and try again. ',
+    'assoc_models'	 => 'Wybrana kategoria jest obecnie powiązana z co najmniej jednym typem urządzenia i nie może zostać usunięta. Uaktualnij swoją listę modeli urządzeń by nie zwierała tej kategorii, a następnie spróbuj ponownie. ',
+    'assoc_items'	 => 'Ta kategoria jest obecnie powiązana z co najmniej jednym :asset_type i nie można jej usunąć. Uaktualnij swój :asset_type tak, aby nie odnosiła się do tej kategorii, a następnie spróbuj ponownie. ',
 
     'create' => array(
         'error'   => 'Kategoria nie została utworzona, spróbuj ponownie.',

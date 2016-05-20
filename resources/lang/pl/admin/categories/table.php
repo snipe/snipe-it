@@ -1,10 +1,10 @@
 <?php
 
 return array(
-	'eula_text'      			=> 'EULA',
+	'eula_text'      			=> 'Licencja dla użytkownika końcowego',
     'id'      					=> 'ID',
     'parent'   					=> 'Kategoria nadrzędna',
-    'require_acceptance'      	=> 'Acceptance',
+    'require_acceptance'      	=> 'Akceptacja',
     'title'      				=> 'Nazwa kategorii',
 
 );

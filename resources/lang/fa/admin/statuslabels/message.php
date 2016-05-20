@@ -2,24 +2,24 @@
 
 return array(
 
-    'does_not_exist' => 'Location does not exist.',
-    'assoc_users'	 => 'This location is currently associated with at least one user and cannot be deleted. Please update your users to no longer reference this location and try again. ',
+    'does_not_exist' => 'مکان وجود ندارد.',
+    'assoc_users'	 => 'این مکان در حال حاضر با حداقل یک کاربر در ارتباط است و نمی تواند حذف شود. لطفا کاربران خود را به روز رسانی به دیگر مرجع این مکان و دوباره امتحان کنید.',
 
 
     'create' => array(
-        'error'   => 'Location was not created, please try again.',
-        'success' => 'Location created successfully.'
+        'error'   => 'مکان ایجاد نشد،دوباره سعی کنید.',
+        'success' => 'مکان ایجاد شد.'
     ),
 
     'update' => array(
-        'error'   => 'Location was not updated, please try again',
-        'success' => 'Location updated successfully.'
+        'error'   => 'مکان بروزرسانی نشد،دوباره سعی کنید',
+        'success' => 'مکان با موفقیت به روز رسانی شد.'
     ),
 
     'delete' => array(
-        'confirm'   => 'Are you sure you wish to delete this status label?',
-        'error'   => 'There was an issue deleting the location. Please try again.',
-        'success' => 'The location was deleted successfully.'
+        'confirm'   => 'آیا شما مطمئن هستید که میخواهید این برچسب وضعیت را حذف کنید؟',
+        'error'   => 'یک مشکل در حذف مکان وجود دارد،دوباره سعی کنید.',
+        'success' => 'این مکان حذف شد.'
     )
 
 );
