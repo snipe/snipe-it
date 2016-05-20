@@ -47,11 +47,11 @@ class GroupsController extends Controller
         $group = new Group;
         // Get all the available permissions
         $permissions = config('permissions');
-
-        $selectedPermissions = Input::old('permissions', array());
+        $groupPermissions = array();
+        $selectedPermissions = Input::old('permissions', $groupPermissions);
 
         // Show the page
-        return View::make('groups/edit', compact('permissions', 'selectedPermissions'))->with('group', $group);
+        return View::make('groups/edit', compact('permissions', 'selectedPermissions', 'groupPermissions'))->with('group', $group);
     }
 
     /**
@@ -91,9 +91,9 @@ class GroupsController extends Controller
     {
         $group = Group::find($id);
         $permissions = config('permissions');
-        $group->permissions = $group->decodePermissions();
-        $selected_array = Helper::selectedPermissionsArray($permissions, $group->permissions);
-        return View::make('groups/edit', compact('group', 'permissions','selected_array'));
+        $groupPermissions = $group->decodePermissions();
+        $selected_array = Helper::selectedPermissionsArray($permissions, $groupPermissions);
+        return View::make('groups/edit', compact('group', 'permissions','selected_array','groupPermissions'));
     }
 
     /**

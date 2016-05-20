@@ -67,11 +67,12 @@
                     <div class="form-group" style="padding-left: 15px;">
 
                         <label class="radio-padding">
-                        {{ Form::radio('permission['.$permission_name.']', 1, $group->permissions[$permission_name], ['class' => 'minimal']) }}
+                        {{ Form::radio('permission['.$permission_name.']', 1,
+                        (array_key_exists($permission_name, $groupPermissions) && $groupPermissions[$permission_name]), ['class' => 'minimal']) }}
                         Grant</label>
 
                         <label class="radio-padding">
-                         {{ Form::radio('permission['.$permission_name.']', 0, !$group->permissions[$permission_name], ['class' => 'minimal']) }}
+                         {{ Form::radio('permission['.$permission_name.']', 0, (!array_key_exists($permission_name, $groupPermissions) || !$groupPermissions[$permission_name]), ['class' => 'minimal']) }}
                         Deny</label>
                     </div>
                     <hr>
