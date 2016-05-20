@@ -50,10 +50,6 @@
                     <div class="box-footer">
                       <button class="btn btn-lg btn-primary btn-block">Login</button>
                     </div>
-                    <div class="col-md-12 col-sm-12 col-xs-12 text-center" style="padding-top: 10px;">
-                        Local user: <code>admin</code> / <code>password</code>  <br>LDAP user: <code>einstein</code> / <code>password</code> 
-                    </div>
-
                     <div class="col-md-12 col-sm-12 col-xs-12 text-right" style="padding-top: 10px;">
                           <a href="../password/reset">I forgot my password</a>
                     </div>
