@@ -493,22 +493,29 @@
           <div class="row">
 
 
-          {{ Form::open([
-          'method' => 'POST',
-          'route' => ['upload/asset', $asset->id],
-          'files' => true, 'class' => 'form-horizontal' ]) }}
+        {{ Form::open([
+        'method' => 'POST',
+        'route' => ['upload/asset', $asset->id],
+        'files' => true, 'class' => 'form-horizontal' ]) }}
 
-          <div class="col-md-3">
+        <div class="col-md-2">
             <span class="btn btn-default btn-file">Browse for file...
-       			    {{ Form::file('assetfile[]', ['multiple' => 'multiple']) }}
+                {{ Form::file('assetfile[]', ['multiple' => 'multiple']) }}
             </span>
+        </div>
+        <div class="col-md-7">
+            {{ Form::text('notes', Input::old('notes', Input::old('notes')), array('class' => 'form-control','placeholder' => 'Notes')) }}
+        </div>
+        <div class="col-md-3">
+          <button type="submit" class="btn btn-primary">{{ trans('button.upload') }}</button>
+        </div>
 
-            <button type="submit" class="btn btn-primary">{{ trans('button.upload') }}</button>
-          </div>
-          <div class="col-md-9">
+        <div class="col-md-12">
             <p>{{ trans('admin/hardware/general.filetype_info') }}</p>
-          </div>
-          {{ Form::close() }}
+            <hr>
+        </div>
+
+        {{ Form::close() }}
 
           <div class="col-md-12">
 
