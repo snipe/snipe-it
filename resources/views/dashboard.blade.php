@@ -88,6 +88,7 @@
                 <table class="table table-hover table-fixed break-word">
                 <thead>
                     <tr>
+                        <th></th>
                         <th class="col-md-2"><span class="line"></span>{{ trans('general.date') }}</th>
                         <th class="col-md-2"><span class="line"></span>{{ trans('general.admin') }}</th>
                         <th class="col-md-2"><span class="line"></span>{{ trans('table.actions') }}</th>
@@ -99,6 +100,21 @@
                 @if (count($recent_activity) > 0)
                   @foreach ($recent_activity as $activity)
                     <tr>
+                        <td>
+                            @if ($activity->asset_type=="hardware")
+                                <i class="fa fa-barcode"></i>
+                            @elseif ($activity->asset_type=="accessory")
+                                <i class="fa fa-keyboard-o"></i>
+                            @elseif ($activity->asset_type=="consumable")
+                                <i class="fa fa-tint"></i>
+                            @elseif ($activity->asset_type=="license")
+                                <i class="fa fa-floppy-o"></i>
+                            @elseif ($activity->asset_type=="component")
+                                <i class="fa fa-hdd-o"></i>
+                            @else
+                                <i class="fa fa-paperclip"></i>
+                            @endif
+                        </td>
                        <td>{{ date("M d, Y H:iA", strtotime($activity->created_at)) }}</td>
                        <td>
                                  @if ($activity->action_type!='requested')
