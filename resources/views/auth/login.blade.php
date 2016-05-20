@@ -13,7 +13,7 @@
 
                 <div class="box login-box">
                   <div class="box-header">
-                    <h3 class="box-title"> Please Login</h3>
+                    <h3 class="box-title"> {{ trans('auth/general.login_prompt')  }}</h3>
                   </div>
 
 
@@ -30,16 +30,16 @@
 
                             <fieldset>
                               <div class="form-group{{ $errors->has('username') ? ' has-error' : '' }}">
-                                <input class="form-control" placeholder="Username" name="username" type="text" autofocus>
+                                <input class="form-control" placeholder="{{ trans('admin/users/table.username')  }}" name="username" type="text" autofocus>
                                 {!! $errors->first('username', '<span class="alert-msg"><i class="fa fa-times"></i> :message</span>') !!}
                               </div>
                               <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
-                                  <input class="form-control" placeholder="Password" name="password" type="password">
+                                  <input class="form-control" placeholder="{{ trans('admin/users/table.password')  }}" name="password" type="password">
                                   {!! $errors->first('password', '<span class="alert-msg"><i class="fa fa-times"></i> :message</span>') !!}
                               </div>
                               <div class="checkbox">
                                   <label>
-                                      <input name="remember" type="checkbox" value="Remember Me">Remember Me
+                                      <input name="remember" type="checkbox" value="Remember Me">{{ trans('auth/general.remember_me')  }}
                                   </label>
                               </div>
                             </fieldset>
@@ -48,10 +48,10 @@
                       </div>
                     </div>
                     <div class="box-footer">
-                      <button class="btn btn-lg btn-primary btn-block">Login</button>
+                      <button class="btn btn-lg btn-primary btn-block">{{ trans('auth/general.login')  }}</button>
                     </div>
                     <div class="col-md-12 col-sm-12 col-xs-12 text-right" style="padding-top: 10px;">
-                          <a href="../password/reset">I forgot my password</a>
+                          <a href="../password/reset">{{ trans('auth/general.forgot_password')  }}</a>
                     </div>
                 </div>
             </div>

@@ -1,72 +1,79 @@
 @extends('layouts/basic')
 
+
+{{-- Page content --}}
 @section('content')
-<div class="container">
-    <div class="row">
-        <div class="col-md-5 col-md-offset-4">
-            <div class="login-panel panel panel-default">
-                <div class="panel-heading">
-                    <h3 class="panel-title">Reset Password</h3>
-                </div>
 
-                <div class="panel-body">
-                    <form class="form-horizontal" role="form" method="POST" action="{{ url('/password/reset') }}">
-                        {!! csrf_field() !!}
 
-                        <input type="hidden" name="token" value="{{ $token }}">
+    <form class="form-horizontal" role="form" method="POST" action="{{ url('/password/reset') }}">
+        {!! csrf_field() !!}
 
-                        <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
-                            <label class="col-md-4 control-label">E-Mail Address</label>
+        <div class="container">
+            <div class="row">
 
-                            <div class="col-md-6">
-                                <input type="email" class="form-control" name="email" value="{{ $email or old('email') }}">
 
-                                @if ($errors->has('email'))
-                                    <span class="help-block">
-                                        <strong>{!! $errors->first('email') }}</strong>
-                                    </span>
-                                @endif
+
+                <div class="col-md-4 col-md-offset-4">
+
+                    <div class="box login-box" style="width: 100%">
+                        <div class="box-header">
+                            <h3 class="box-title"> {{ trans('auth/general.reset_password')  }}</h3>
+                        </div>
+
+
+                        <div class="login-box-body">
+                            <div class="row">
+
+                                <!-- Notifications -->
+                                @include('notifications')
+
+
+
+                                    <input type="hidden" name="token" value="{{ $token }}">
+
+                                    <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
+                                        <label class="col-md-4 control-label">{{ trans('admin/users/table.email')  }}</label>
+
+                                        <div class="col-md-6">
+                                            <input type="email" class="form-control" name="email" value="{{ $email or old('email') }}">
+                                            {!! $errors->first('email', '<span class="alert-msg"><i class="fa fa-times"></i> :message</span>') !!}
+
                             </div>
                         </div>
 
                         <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
-                            <label class="col-md-4 control-label">Password</label>
+                            <label class="col-md-4 control-label">{{ trans('admin/users/table.password')  }}</label>
 
                             <div class="col-md-6">
                                 <input type="password" class="form-control" name="password">
-
-                                @if ($errors->has('password'))
-                                    <span class="help-block">
-                                        <strong>{!! $errors->first('password') }}</strong>
-                                    </span>
-                                @endif
+                                {!! $errors->first('password', '<span class="alert-msg"><i class="fa fa-times"></i> :message</span>') !!}
                             </div>
                         </div>
 
                         <div class="form-group{{ $errors->has('password_confirmation') ? ' has-error' : '' }}">
-                            <label class="col-md-4 control-label">Confirm Password</label>
+                            <label class="col-md-4 control-label">{{ trans('admin/users/table.password_confirm')  }}</label>
                             <div class="col-md-6">
                                 <input type="password" class="form-control" name="password_confirmation">
+                                {!! $errors->first('password_confirmation', '<span class="alert-msg"><i class="fa fa-times"></i> :message</span>') !!}
 
-                                @if ($errors->has('password_confirmation'))
-                                    <span class="help-block">
-                                        <strong>{!! $errors->first('password_confirmation') }}</strong>
-                                    </span>
-                                @endif
                             </div>
                         </div>
 
-                        <div class="form-group">
-                            <div class="col-md-6 col-md-offset-4">
-                                <button type="submit" class="btn btn-primary">
-                                    Reset Password
-                                </button>
+
                             </div>
                         </div>
-                    </form>
+                        <div class="box-footer">
+                            <button type="submit" class="btn btn-lg btn-primary btn-block">
+                                {{ trans('auth/general.reset_password')  }}
+                            </button>
+                        </div>
+
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-</div>
-@endsection
+</form>
+
+@stop
+
+

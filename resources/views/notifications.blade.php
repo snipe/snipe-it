@@ -10,6 +10,19 @@
 
 @endif
 
+
+@if ($message = Session::get('status'))
+    <div class="col-md-12">
+        <div class="alert alert-success">
+            <button type="button" class="close" data-dismiss="alert">&times;</button>
+            <i class="fa fa-check faa-pulse animated"></i>
+            <strong>Success: </strong>
+            {{ $message }}
+        </div>
+    </div>
+@endif
+
+
 @if ($message = Session::get('success'))
 <div class="col-md-12">
     <div class="alert alert-success">
