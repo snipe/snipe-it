@@ -19,10 +19,10 @@ __This is web-based software__. This means there there is no executable file (ak
 
 ### Installation
 
-__Installation and configuration documentation for this project has been moved to http://docs.snipeitapp.com.__
+__Installation and configuration documentation for this project has been moved to https://snipe-it.readme.io.__
 
 #### Server Requirements
-Please see the [requirements documentation](http://docs.snipeitapp.com/requirements.html) for full requirements.
+Please see the [requirements documentation](https://snipe-it.readme.io/docs/requirements) for full requirements.
 
 -----
 ### Bug Reports & Feature Requests
@@ -31,13 +31,13 @@ Feel free to check out the [GitHub Issues for this project](https://github.com/s
 
 We use Waffle.io to help better communicate our roadmap with users. Our [project page there](http://waffle.io/snipe/snipe-it) will show you the backlog, what's ready to be worked on, what's in progress, and what's completed.
 
-If you're having trouble with the installation, please check the [Common Issues](http://docs.snipeitapp.com/common-issues.html) and [Getting Help](http://docs.snipeitapp.com/getting-help.html) documentation.
+If you're having trouble with the installation, please check the [Common Issues](https://snipe-it.readme.io/docs/common-issues) and [Getting Help](https://snipe-it.readme.io/docs/getting-help) documentation.
 
 -----
 
 ### Upgrading
 
-Please see the [upgrading documentation](http://docs.snipeitapp.com/upgrading.html) for instructions on upgrading Snipe-IT.
+Please see the [upgrading documentation](https://snipe-it.readme.io/docs/upgrading) for instructions on upgrading Snipe-IT.
 
 ------
 ### Announcement List
@@ -48,13 +48,13 @@ To be notified of important news (such as new releases, security advisories, etc
 
 ### Translations!
 
-Please see the [translations documentation](http://docs.snipeitapp.com/translations.html) for information about available languages and how to add translations to Snipe-IT.
+Please see the [translations documentation](https://snipe-it.readme.io/docs/translations) for information about available languages and how to add translations to Snipe-IT.
 
 -----
 
 ### Contributing
 
-Please see the documentation on [contributing and developing for Snipe-IT](http://docs.snipeitapp.com/contributing.html).
+Please see the documentation on [contributing and developing for Snipe-IT](https://snipe-it.readme.io/docs/contributing).
 
 [![Stories in Ready](https://badge.waffle.io/snipe/snipe-it.png?label=ready+for+dev&title=Ready+for+Development)](http://waffle.io/snipe/snipe-it)
 
