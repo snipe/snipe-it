@@ -338,6 +338,9 @@ class SettingsController extends Controller
         $setting->qr_text = e(Input::get('qr_text'));
         $setting->auto_increment_prefix = e(Input::get('auto_increment_prefix'));
         $setting->auto_increment_assets = e(Input::get('auto_increment_assets', '0'));
+        $setting->alert_interval = e(Input::get('alert_interval'));
+        $setting->alert_threshold = e(Input::get('alert_threshold'));
+
 
         $setting->labels_per_page = e(Input::get('labels_per_page'));
         $setting->labels_width = e(Input::get('labels_width'));

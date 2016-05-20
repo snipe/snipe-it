@@ -213,7 +213,7 @@ class Helper
 
         foreach ($consumables as $consumable) {
             $avail = $consumable->numRemaining();
-            if ($avail < ($consumable->min_amt) + 3) {
+            if ($avail < ($consumable->min_amt) + \App\Models\Setting::getSettings()->alert_threshold) {
                 $percent = number_format((($consumable->numRemaining() / $consumable->qty) * 100), 0);
                 $items_array[$all_count]['id'] = $consumable->id;
                 $items_array[$all_count]['name'] = $consumable->name;
@@ -229,7 +229,7 @@ class Helper
 
         foreach ($accessories as $accessory) {
             $avail = $accessory->numRemaining();
-            if ($avail < ($accessory->min_amt) + 3) {
+            if ($avail < ($accessory->min_amt) + \App\Models\Setting::getSettings()->alert_threshold) {
                 $percent = number_format((($accessory->numRemaining() / $accessory->qty) * 100), 0);
                 $items_array[$all_count]['id'] = $accessory->id;
                 $items_array[$all_count]['name'] = $accessory->name;
@@ -244,7 +244,7 @@ class Helper
 
         foreach ($components as $component) {
             $avail = $component->numRemaining();
-            if ($avail < ($component->min_amt) + 3) {
+            if ($avail < ($component->min_amt) + \App\Models\Setting::getSettings()->alert_threshold) {
                 $percent = number_format((($component->numRemaining() / $component->total_qty) * 100), 0);
                 $items_array[$all_count]['id'] = $component->id;
                 $items_array[$all_count]['name'] = $component->name;

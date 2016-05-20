@@ -43,7 +43,7 @@ class SendExpirationAlerts extends Command {
 	{
 
 		// Expiring Assets
-		$expiring_assets = Asset::getExpiringWarrantee(60);
+		$expiring_assets = Asset::getExpiringWarrantee(Setting::getSettings()->alert_interval);
 		$this->info(count($expiring_assets).' expiring assets');
 
 		$asset_data['count'] =  count($expiring_assets);
@@ -71,7 +71,7 @@ class SendExpirationAlerts extends Command {
 		}
 
 		// Expiring licenses
-		$expiring_licenses = License::getExpiringLicenses(60);
+		$expiring_licenses = License::getExpiringLicenses(Setting::getSettings()->alert_interval);
 		$this->info(count($expiring_licenses).' expiring licenses');
 
 

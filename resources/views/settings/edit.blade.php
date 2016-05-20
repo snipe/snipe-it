@@ -153,6 +153,31 @@
                   </div>
                 </div>
 
+                <!-- Alert interval -->
+                <div class="form-group {{ $errors->has('alert_interval') ? 'error' : '' }}">
+                  <div class="col-md-3">
+                    {{ Form::label('alert_interval', trans('admin/settings/general.alert_interval')) }}
+                  </div>
+                  <div class="col-md-9">
+                    {{ Form::text('alert_interval', Input::old('alert_interval', $setting->alert_interval), array('class' => 'form-control','placeholder' => '30', 'maxlength'=>'3', 'style'=>'width: 60px;')) }}
+                    {!! $errors->first('alert_interval', '<span class="alert-msg">:message</span>') !!}
+                  </div>
+                </div>
+
+                <!-- Alert threshold -->
+                <div class="form-group {{ $errors->has('alert_threshold') ? 'error' : '' }}">
+                  <div class="col-md-3">
+                    {{ Form::label('alert_threshold', trans('admin/settings/general.alert_inv_threshold')) }}
+                  </div>
+                  <div class="col-md-9">
+                    {{ Form::text('alert_threshold', Input::old('alert_threshold', $setting->alert_threshold), array('class' => 'form-control','placeholder' => '5', 'maxlength'=>'3', 'style'=>'width: 60px;')) }}
+                    {!! $errors->first('alert_threshold', '<span class="alert-msg">:message</span>') !!}
+                  </div>
+                </div>
+
+
+
+
                 <!-- Header color -->
                 <div class="form-group {{ $errors->has('header_color') ? 'error' : '' }}">
                   <div class="col-md-3">

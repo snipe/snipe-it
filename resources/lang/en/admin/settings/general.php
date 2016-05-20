@@ -2,7 +2,9 @@
 
 return array(
 	'alert_email'				=> 'Send alerts to',
-	'alerts_enabled'			=> 'Alerts enabled',
+	'alerts_enabled'			=> 'Alerts Enabled',
+	'alert_interval'			=> 'Expiring Alerts Threshold (in days)',
+	'alert_inv_threshold'		=> 'Inventory Alert Threshold',
 	'asset_ids'					=> 'Asset IDs',
 	'auto_increment_assets'		=> 'Generate auto-incrementing asset IDs',
 	'auto_increment_prefix'		=> 'Prefix (optional)',
