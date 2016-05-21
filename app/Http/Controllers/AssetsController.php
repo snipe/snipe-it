@@ -59,7 +59,6 @@ class AssetsController extends Controller
         parent::__construct();
     }
 
-
     /**
     * Returns a view that invokes the ajax tables which actually contains
     * the content for the assets listing, which is generated in getDatatable.
@@ -72,6 +71,21 @@ class AssetsController extends Controller
     public function getIndex()
     {
         return View::make('hardware/index');
+    }
+
+    /**
+     * Searches the assets table by asset tag, and redirects if it finds one
+     *
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @since [v3.0]
+     * @return Redirect
+     */
+    public function getAssetByTag() {
+        if ($asset = Asset::where('asset_tag','=',Input::get('assetTag'))->first()) {
+            return redirect()->route('view/hardware', $asset->id);
+        }
+        return redirect()->to('hardware')->with('error',trans('admin/hardware/message.does_not_exist'));
+
     }
 
     /**

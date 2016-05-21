@@ -88,6 +88,7 @@
     'location'              => 'Location',
     'locations'				=> 'Locations',
     'logout'				=> 'Logout',
+    'lookup_by_tag'     => 'Lookup by Asset Tag',
     'manufacturer'			=> 'Manufacturer',
     'manufacturers'			=> 'Manufacturers',
     'markdown'				=> 'This field allows <a href="https://help.github.com/articles/github-flavored-markdown/">Github flavored markdown</a>.',

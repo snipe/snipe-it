@@ -194,6 +194,10 @@ Route::group(
                 'as'   => 'update/hardware',
                 'uses' => 'AssetsController@getEdit'
             ]);
+        Route::get('/bytag', [
+            'as'   => 'findbytag/hardware',
+            'uses' => 'AssetsController@getAssetByTag'
+        ]);
 
         Route::get('{assetId}/clone', [ 'as' => 'clone/hardware', 'uses' => 'AssetsController@getClone' ]);
         Route::post('{assetId}/clone', 'AssetsController@postCreate');

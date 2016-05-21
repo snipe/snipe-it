@@ -118,6 +118,14 @@
             <ul class="nav navbar-nav">
 
             @if (Auth::user()->hasAccess('admin'))
+                    <form class="navbar-form navbar-left" role="search" action="{{ route('findbytag/hardware') }}" method="get">
+                        <div class="form-group">
+                            <input type="text" class="form-control" id="tagSearch" name="assetTag" placeholder="{{ trans('general.lookup_by_tag') }}">
+                            <input type="hidden" name="topsearch" value="true">
+                        </div>
+                        <button type="submit" class="btn btn-primary"><i class="fa fa-search"></i></button>
+                    </form>
+
               <li class="dropdown">
                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                        @lang('general.create')
@@ -540,7 +548,9 @@
     @section('moar_scripts')
     @show
 
-
+    <script>
+        // $("#tagSearch").focus();
+    </script>
 
   </body>
 </html>
