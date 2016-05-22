@@ -373,7 +373,7 @@
            <label class="col-md-3 control-label" for="image">{{ trans('general.image_upload') }}</label>
            <div class="col-md-5">
                <!-- {{ Form::file('image') }} -->
-               <input type="file" id="file-upload" accept="image/*" capture="camera" name="image">
+               <input type="file" id="file-upload" accept="image/*" name="image">
                {!! $errors->first('image', '<span class="alert-msg">:message</span>') !!}
            </div>
        </div>
@@ -561,7 +561,7 @@ $(function () {
         newWidth = maxWidth;
       } else {
         newWidth = width * (maxHeight/height);
-        newHeight = height;
+        newHeight = maxHeight;
       }
       var canvas = document.createElement('canvas');
 
