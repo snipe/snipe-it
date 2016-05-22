@@ -218,12 +218,10 @@ class AssetsController extends Controller
             $path = public_path('uploads/assets/'.$file_name);
 
             //Currently resizing happens on Client.  Maybe use this for thumbnails in the future?
-            Image::make($image)
-            ->resize(500, 500, function ($constraint) {
+            Image::make($image)->resize(500, 500, function ($constraint) {
                 $constraint->aspectRatio();
                 $constraint->upsize();
-            })
-            ->save($path);
+            })->save($path);
             $asset->image = $file_name;
 
         }
@@ -370,11 +368,17 @@ class AssetsController extends Controller
         $asset->physical     = '1';
 
            // Update the image
-        if (Input::file('image')) {
-            $image = Input::file('image');
-            $file_name = str_random(25).".".$image->getClientOriginalExtension();
+          if (Input::has('image')) {
+            $image = Input::get('image');
+            $header = explode(';', $image, 2)[0];
+            $extension = substr( $header, strpos($header, '/')+1);
+            $image = substr( $image, strpos($image, ',')+1);
+
+            $file_name = str_random(25).".".$extension;
             $path = public_path('uploads/assets/'.$file_name);
-            Image::make($image->getRealPath())->resize(500, null, function ($constraint) {
+
+
+            Image::make($image)->resize(500, 500, function ($constraint) {
                 $constraint->aspectRatio();
                 $constraint->upsize();
             })->save($path);
