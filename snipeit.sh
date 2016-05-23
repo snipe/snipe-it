@@ -66,6 +66,7 @@ echo ""
 echo "  Welcome to Snipe-IT Inventory Installer for Centos and Debian!"
 echo ""
 
+shopt -s nocasematch
 case $distro in
         *Ubuntu*)
                 echo "  The installer has detected Ubuntu as the OS."
@@ -131,6 +132,7 @@ chmod 700 $dbsetup
 
 ## TODO: Progress tracker on each step
 
+shopt -s nocasematch
 case $distro in
 	*Debian*)
 		#####################################  Install for Debian ##############################################
