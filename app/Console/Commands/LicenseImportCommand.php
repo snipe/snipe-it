@@ -5,6 +5,7 @@ use Illuminate\Console\Command;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Input\InputArgument;
 use League\Csv\Reader;
+use App\Models\User;
 
 class LicenseImportCommand extends Command {
 
@@ -240,26 +241,24 @@ class LicenseImportCommand extends Command {
 				if ($user = User::where('username', $user_username)->whereNotNull('username')->first()) {
 					$this->comment('User '.$user_username.' already exists');
 				} else {
-					// Create the user
-					$user = Sentry::createUser(array(
-						'first_name' => $first_name,
-						'last_name' => $last_name,
-						'email'     => $user_email,
-						'username'     => $user_username,
-						'password'  => substr(str_shuffle("0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"), 0, 10),
-						'activated' => true,
-						'permissions' => array(
-							'admin' => 0,
-							'user'  => 1,
-						),
-						'notes'         => 'User importerd through license importer'
-					));
 
-					// Find the group using the group id
-					$userGroup = Sentry::findGroupById(3);
+					$user = new \App\Models\User;
+					$password  = substr(str_shuffle("0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"), 0, 20);
 
-					// Assign the group to the user
-					$user->addGroup($userGroup);
+					$user->first_name = $first_name;
+					$user->last_name = $last_name;
+					$user->username = $user_username;
+					$user->email = $user_email;
+					$user->permissions = '{user":1}';
+					$user->password = bcrypt($password);
+					$user->activated = 1;
+					if ($user->save()) {
+						$this->comment('User '.$first_name.' created');
+					} else {
+						$this->error('ERROR CREATING User '.$first_name.' '.$last_name);
+						$this->error($user->getErrors());
+					}
+
 					$this->comment('User '.$first_name.' created');
 				}
 			} else {
