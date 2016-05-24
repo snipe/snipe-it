@@ -28,6 +28,11 @@ class Statuslabel extends Model
         return $this->hasMany('\App\Models\Asset', 'status_id')->count();
     }
 
+    public function assets()
+    {
+        return $this->hasMany('\App\Models\Asset', 'status_id');
+    }
+
     public function getStatuslabelType()
     {
 
