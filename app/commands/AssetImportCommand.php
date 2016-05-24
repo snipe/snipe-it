@@ -77,7 +77,7 @@ class AssetImportCommand extends Command {
 				$user_email = '';
 			}
 
-			// User's email
+			// User's username
 			if (array_key_exists('2',$row)) {
 				$user_username = trim($row[2]);
 			} else {
@@ -98,23 +98,24 @@ class AssetImportCommand extends Command {
 				$user_asset_category = '';
 			}
 
-			// Asset Name
+			// Asset Model
 			if (array_key_exists('5',$row)) {
-				$user_asset_name = trim($row[5]);
+                $user_asset_model = substr(trim($row[5]), 0, 254);
 			} else {
-				$user_asset_name = '';
+				$user_asset_model = '';
 			}
 
 			// Asset Manufacturer
 			if (array_key_exists('6',$row)) {
-				$user_asset_mfgr = trim($row[6]);
+                $user_asset_mfgr = substr(trim($row[6]), 0, 254);
 			} else {
 				$user_asset_mfgr = '';
 			}
 
 			// Asset model number
 			if (array_key_exists('7',$row)) {
-				$user_asset_modelno = trim($row[7]);
+                $user_asset_modelno = substr(trim($row[7]), 0, 254);
+				//$user_asset_modelno = trim($row[7]);
 			} else {
 				$user_asset_modelno = '';
 			}
@@ -194,7 +195,7 @@ class AssetImportCommand extends Command {
            // Asset Warranty Months
            if (array_key_exists('16',$row)) {
                 if ($row[16]!='') {
-                  $user_asset_warranty = number_format($row[16],0);
+                  $user_asset_warranty = intval($row[16]);
                 } else {
                     $user_asset_warranty= NULL;
                 }
@@ -253,7 +254,7 @@ class AssetImportCommand extends Command {
 			$this->comment('Username: '.$user_username);
 			$this->comment('Email: '.$user_email);
 			$this->comment('Category Name: '.$user_asset_category);
-			$this->comment('Item: '.$user_asset_name);
+			$this->comment('Item: '.$user_asset_model);
 			$this->comment('Manufacturer ID: '.$user_asset_mfgr);
 			$this->comment('Model No: '.$user_asset_modelno);
 			$this->comment('Serial No: '.$user_asset_serial);
@@ -418,20 +419,20 @@ class AssetImportCommand extends Command {
 
 
 			// Check for the asset model match and create it if it doesn't exist
-			if ($asset_model = Model::where('name', e($user_asset_name))->where('modelno', e($user_asset_modelno))->where('category_id', $category->id)->where('manufacturer_id', $manufacturer->id)->first()) {
-				$this->comment('The Asset Model '.$user_asset_name.' with model number '.$user_asset_modelno.' already exists');
+			if ($asset_model = Model::where('name', e($user_asset_model ))->where('modelno', e($user_asset_modelno))->where('category_id', $category->id)->where('manufacturer_id', $manufacturer->id)->first()) {
+				$this->comment('The Asset Model '.$user_asset_model .' with model number '.$user_asset_modelno.' already exists');
 			} else {
 				$asset_model = new Model();
-				$asset_model->name = e($user_asset_name);
+				$asset_model->name = e($user_asset_model );
 				$asset_model->manufacturer_id = $manufacturer->id;
 				$asset_model->modelno = e($user_asset_modelno);
 				$asset_model->category_id = $category->id;
 				$asset_model->user_id = 1;
 
 				if ($asset_model->save()) {
-					$this->comment('Asset Model '.$user_asset_name.' with model number '.$user_asset_modelno.' was created');
+					$this->comment('Asset Model '.$user_asset_model .' with model number '.$user_asset_modelno.' was created');
                                 } else {
-					$this->comment('Something went wrong! Asset Model '.$user_asset_name.' was NOT created');
+					$this->comment('Something went wrong! Asset Model '.$user_asset_model .' was NOT created');
 				}
 
 			}
@@ -488,9 +489,9 @@ class AssetImportCommand extends Command {
   				$asset->notes = e($user_asset_notes);
 
   				if ($asset->save()) {
-  					$this->comment('Asset '.$user_asset_name.' with serial number '.$user_asset_serial.' was created');
+  					$this->comment('Asset '.$user_asset_model .' with serial number '.$user_asset_serial.' was created');
   	            } else {
-  					$this->comment('Something went wrong! Asset '.$user_asset_name.' was NOT created');
+  					$this->comment('Something went wrong! Asset '.$user_asset_model .' was NOT created');
   				}
 
         }
