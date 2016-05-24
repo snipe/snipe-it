@@ -49,6 +49,43 @@ class Helper
         return trim($value);
     }
 
+    // Static colors
+    public static function chartColors()
+    {
+        $colors = [
+            '#f56954',
+            '#00a65a',
+            '#f39c12',
+            '#00c0ef',
+            '#3c8dbc',
+            '#d2d6de',
+            '#3c8dbc',
+            '#3c8dbc',
+            '#3c8dbc',
+
+        ];
+        return $colors;
+    }
+
+    // Static colors
+    public static function chartBackgroundColors()
+    {
+        $colors = [
+            '#f56954',
+            '#00a65a',
+            '#f39c12',
+            '#00c0ef',
+            '#3c8dbc',
+            '#d2d6de',
+            '#3c8dbc',
+            '#3c8dbc',
+            '#3c8dbc',
+
+        ];
+        return $colors;
+    }
+
+
 
     public static function ParseFloat($floatString)
     {
