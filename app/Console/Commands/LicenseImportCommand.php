@@ -7,6 +7,8 @@ use Symfony\Component\Console\Input\InputArgument;
 use League\Csv\Reader;
 use App\Models\User;
 use App\Models\Supplier;
+use App\Models\License;
+use App\Models\LicenseSeat;
 
 class LicenseImportCommand extends Command {
 
