@@ -59,7 +59,7 @@ class AssetImportCommand extends Command {
 
 		// Loop through the records
 		$nbInsert = $csv->each(function ($row) use ($duplicates) {
-			$status_id = 1;
+
 
 			// Let's just map some of these entries to more user friendly words
 
@@ -169,16 +169,49 @@ class AssetImportCommand extends Command {
 				$user_asset_purchase_cost = '';
 			}
 
-       // Asset Company Name
-       if (array_key_exists('14',$row)) {
-              if ($row[14]!='') {
-                  $user_asset_company_name = trim($row[14]);
-              } else {
-                      $user_asset_company_name= '';
-              }
-       } else {
-              $user_asset_company_name = '';
-       }
+           // Asset Company Name
+           if (array_key_exists('14',$row)) {
+                  if ($row[14]!='') {
+                      $user_asset_company_name = trim($row[14]);
+                  } else {
+                          $user_asset_company_name= '';
+                  }
+           } else {
+                  $user_asset_company_name = '';
+           }
+
+           // Asset Status Name
+           if (array_key_exists('15',$row)) {
+                if ($row[15]!='') {
+                  $user_asset_status = trim($row[15]);
+                } else {
+                  $user_asset_status= '';
+                }
+           } else {
+                  $user_asset_status = '';
+           }
+
+           // Asset Warranty Months
+           if (array_key_exists('16',$row)) {
+                if ($row[16]!='') {
+                  $user_asset_warranty = number_format($row[16],0);
+                } else {
+                    $user_asset_warranty= NULL;
+                }
+           } else {
+                  $user_asset_warranty = NULL;
+           }
+
+           // Asset Supplier
+           if (array_key_exists('17',$row)) {
+                if ($row[17]!='') {
+                  $user_asset_supplier = trim($row[17]);
+                } else {
+                      $user_asset_supplier= '';
+                }
+           } else {
+                  $user_asset_supplier = '';
+           }
 
 
 			// A number was given instead of a name
@@ -228,9 +261,11 @@ class AssetImportCommand extends Command {
 			$this->comment('Location: '.$user_asset_location);
 			$this->comment('Purchase Date: '.$user_asset_purchase_date);
 			$this->comment('Purchase Cost: '.$user_asset_purchase_cost);
+            $this->comment('Status: '.$user_asset_status);
+            $this->comment('Supplier: '.$user_asset_supplier);
+            $this->comment('Warranty Months: '.$user_asset_warranty);
 			$this->comment('Notes: '.$user_asset_notes);
-                        $this->comment('Company Name: '.$user_asset_company_name);
-
+            $this->comment('Company Name: '.$user_asset_company_name);
 			$this->comment('------------- Action Summary ----------------');
 
 			if ($user_username!='') {
@@ -269,7 +304,7 @@ class AssetImportCommand extends Command {
 				$this->comment('Location '.$user_asset_location.' already exists');
 			} else {
 
-        $location = new Location();
+            $location = new Location();
 
 				if ($user_asset_location!='') {
 
@@ -310,7 +345,7 @@ class AssetImportCommand extends Command {
 
 			} else {
 				$category = new Category();
-        $category->name = e($category_name);
+                $category->name = e($category_name);
 				$category->category_type = 'asset';
 				$category->user_id = 1;
 
@@ -337,6 +372,42 @@ class AssetImportCommand extends Command {
 				}
 
 			}
+
+            // Check for the supplier match and create it if it doesn't exist
+			if ($supplier = Supplier::where('name', e($user_asset_supplier))->first()) {
+				$this->comment('Supplier '.$user_asset_supplier.' already exists');
+			} else {
+				$supplier = new Supplier();
+				$supplier->name = e($user_asset_supplier);
+				$supplier->user_id = 1;
+
+				if ($supplier->save()) {
+					$this->comment('Supplier '.$user_asset_supplier.' was created');
+                } else {
+					$this->comment('Something went wrong! Supplier '.$user_asset_supplier.' was NOT created');
+				}
+
+			}
+
+
+            // Check for the status label match and create it if it doesn't exist
+			if ($statuslabel = Statuslabel::where('name', e($user_asset_status))->first()) {
+				$this->comment('Status Label '.$user_asset_status.' already exists');
+			} else {
+				$statuslabel = new Statuslabel();
+				$statuslabel->name = e($user_asset_status);
+				$statuslabel->user_id = 1;
+
+				if ($statuslabel->save()) {
+					$this->comment('Supplier '.$user_asset_status.' was created');
+                } else {
+					$this->comment('Something went wrong! Supplier '.$user_asset_status.' was NOT created');
+				}
+
+			}
+            $status_id = $statuslabel->id;
+
+
 
 			// Check for the asset model match and create it if it doesn't exist
 			if ($asset_model = Model::where('name', e($user_asset_name))->where('modelno', e($user_asset_modelno))->where('category_id', $category->id)->where('manufacturer_id', $manufacturer->id)->first()) {
@@ -390,7 +461,7 @@ class AssetImportCommand extends Command {
   				if ($user_asset_purchase_cost!='') {
   					$asset->purchase_cost = ParseFloat(e($user_asset_purchase_cost));
   				} else {
-  					$asset->purchase_cost = 0.00;
+  					$asset->purchase_cost = '0.00';
   				}
   				$asset->serial = e($user_asset_serial);
   				$asset->asset_tag = e($user_asset_tag);
@@ -399,6 +470,7 @@ class AssetImportCommand extends Command {
   				$asset->rtd_location_id = $location->id;
   				$asset->user_id = 1;
   				$asset->status_id = $status_id;
+                $asset->warranty_months = $user_asset_warranty;
                 $asset->company_id = $company->id;
   				if ($user_asset_purchase_date!='') {
   					$asset->purchase_date = $user_asset_purchase_date;
