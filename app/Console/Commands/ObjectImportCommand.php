@@ -14,6 +14,7 @@ use App\Models\Company;
 use App\Models\Consumable;
 use App\Models\Location;
 use App\Models\Manufacturer;
+use App\Models\Statuslabel;
 use App\Models\Supplier;
 use App\Models\User;
 use DB;
@@ -90,6 +91,7 @@ class ObjectImportCommand extends Command {
 		$this->suppliers = Supplier::All(['name']);
 		$this->accessories = Accessory::All(['name']);
 		$this->consumables = Consumable::All(['name']);
+		$this->status_labels = Statuslabel::All(['name']);
 		// Loop through the records
 		DB::transaction(function() use (&$newarray){
 		$item_type = strtolower($this->option('item-type'));
@@ -104,6 +106,8 @@ class ObjectImportCommand extends Command {
 			$item_company_name = $this->array_smart_fetch($row, "company");
 			$item_location = $this->array_smart_fetch($row, "location");
 
+			$item_status_name = $this->array_smart_fetch($row, "status");
+
 			$item["item_name"] = $this->array_smart_fetch($row, "item name");
 			$item["purchase_date"] = date("Y-m-d 00:00:01", strtotime($this->array_smart_fetch($row, "purchase date")));
 			$item["purchase_cost"] = $this->array_smart_fetch($row, "purchase cost");
@@ -111,6 +115,7 @@ class ObjectImportCommand extends Command {
 			$item["notes"] = $this->array_smart_fetch($row, "notes");
 			$item["quantity"] = $this->array_smart_fetch($row, "quantity");
 			$item["requestable"] = $this->array_smart_fetch($row, "requestable");
+			
 
 
 			$this->current_assetId = $item["item_name"];
@@ -126,6 +131,8 @@ class ObjectImportCommand extends Command {
 			$item["category"] = $this->createOrFetchCategory($item_category, $item_type);
 			$item["manufacturer"] = $this->createOrFetchManufacturer($row);
 			$item["company"] = $this->createOrFetchCompany($item_company_name);
+
+			$item["status_label"] = $this->createOrFetchStatusLabel($item_status_name);
 
 			switch ($item_type) {
 				case "asset":
@@ -329,7 +336,38 @@ class ObjectImportCommand extends Command {
 			return $company;
 		}
 	}
+	private $status_labels;
+	/**
+	 * @param string $asset_statuslabel_name 
+	 * @return Company
+	 */
+	public function createOrFetchStatusLabel($asset_statuslabel_name)
+	{
+		if(empty($asset_statuslabel_name))
+			return;
+		foreach ($this->status_labels as $tempstatus) {
+			if ($tempstatus->name === $asset_statuslabel_name) {
+				$this->comment('A matching Status ' . $asset_statuslabel_name . ' already exists');
+				return $tempstatus;
+			}
+		}
 
+		$status = new Statuslabel();
+		$status->name = $asset_statuslabel_name;
+		$this->status_labels->add($status);
+
+		if(!$this->option('testrun')) {
+			if ($status->save()) {
+				$this->comment('Status ' . $asset_statuslabel_name . ' was created');
+				return $status;
+			} else {
+				$this->comment('Something went wrong! Status ' . $asset_statuslabel_name . ' was NOT created');
+				return $status;
+			}
+		} else {
+			return $status;
+		}
+	}
 
 	private $manufacturers;
 
@@ -557,7 +595,7 @@ class ObjectImportCommand extends Command {
 	 */
 	public function createAssetIfNotExists(array $row, array $item )
 	{
-		$status_id = 1;
+
         $asset_serial = $this->array_smart_fetch($row, "serial number");
         $asset_tag = $this->array_smart_fetch($row, "asset tag");
         $asset_image = $this->array_smart_fetch($row, "image");
@@ -577,6 +615,13 @@ class ObjectImportCommand extends Command {
 				$this->comment('A matching Asset ' . $asset_tag . ' already exists');
 				return;
 			}
+		}
+
+		if(empty($item["status_label"])) {
+			$this->comment("No status field found, defaulting to id 1.");
+			$status_id = 1;
+		} else {
+			$status_id = $item["status_label"]->id;
 		}
 
 		$asset = new Asset();
