@@ -23,11 +23,22 @@ class Statuslabel extends Model
 
     protected $fillable = ['name'];
 
+    /**
+     * Show count of assets with status label
+     *
+     * @todo Remove this. It's dumb.
+     * @return Collection
+     */
     public function has_assets()
     {
         return $this->hasMany('\App\Models\Asset', 'status_id')->count();
     }
 
+    /**
+     * Get assets with associated status label
+     *
+     * @return Collection
+     */
     public function assets()
     {
         return $this->hasMany('\App\Models\Asset', 'status_id');
