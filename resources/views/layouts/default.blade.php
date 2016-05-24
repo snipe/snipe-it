@@ -118,6 +118,34 @@
             <ul class="nav navbar-nav">
 
             @if (Auth::user()->hasAccess('admin'))
+                    @if (!Request::is('/'))
+                    <li{!! (Request::is('hardware*') ? ' class="active"' : '') !!}>
+                        <a href="{{ URL::to('hardware') }}">
+                            <i class="fa fa-barcode"></i>
+                        </a>
+                    </li>
+                    <li{!! (Request::is('admin/licenses*') ? ' class="active"' : '') !!}>
+                        <a href="{{ URL::to('admin/licenses') }}">
+                            <i class="fa fa-floppy-o"></i>
+                        </a>
+                    </li>
+                    <li{!! (Request::is('admin/accessories*') ? ' class="active"' : '') !!}>
+                        <a href="{{ URL::to('admin/accessories') }}">
+                            <i class="fa fa-keyboard-o"></i>
+                        </a>
+                    </li>
+                    <li{!! (Request::is('admin/consumables*') ? ' class="active"' : '') !!}>
+                        <a href="{{ URL::to('admin/consumables') }}">
+                            <i class="fa fa-tint"></i>
+                        </a>
+                    </li>
+                        <li{!! (Request::is('admin/components*') ? ' class="active"' : '') !!}>
+                            <a href="{{ URL::to('admin/components') }}">
+                                <i class="fa fa-hdd-o"></i>
+                            </a>
+                        </li>
+                    @endif
+
                     <form class="navbar-form navbar-left" role="search" action="{{ route('findbytag/hardware') }}" method="get">
                         <div class="form-group">
                             <input type="text" class="form-control" id="tagSearch" name="assetTag" placeholder="{{ trans('general.lookup_by_tag') }}">
