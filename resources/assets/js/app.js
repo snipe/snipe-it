@@ -16,6 +16,7 @@ if (typeof jQuery === "undefined") {
   throw new Error("AdminLTE requires jQuery");
 }
 
+
 /* AdminLTE
  *
  * @type Object
@@ -744,3 +745,11 @@ function _init() {
     });
   };
 }(jQuery));
+
+//-------------
+//- PIE CHART -
+//-------------
+// Get context with jQuery - using jQuery's .get() method.
+
+
+

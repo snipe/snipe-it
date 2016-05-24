@@ -72,9 +72,10 @@
 
 </div>
 
-<!-- morris bar & donut charts -->
+
+<!-- recent activity -->
   <div class="row">
-    <div class="col-md-12">
+    <div class="col-md-9">
         <div class="box">
           <div class="box-header with-border">
             <h3 class="box-title">{{ trans('general.recent_activity') }}</h3>
@@ -167,17 +168,65 @@
           </div><!-- ./box-body -->
         </div><!-- /.box -->
     </div>
+      <div class="col-md-3">
+          <div class="box box-default">
+              <div class="box-header with-border">
+                  <h3 class="box-title">{{ trans('general.status') }}</h3>
+
+                  <div class="box-tools pull-right">
+                      <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+                      </button>
+                  </div>
+              </div>
+              <!-- /.box-header -->
+              <div class="box-body">
+                  <div class="row">
+                      <div class="col-md-12">
+                          <div class="chart-responsive">
+                              <canvas id="statusPieChart" height="150"></canvas>
+                          </div>
+                          <!-- ./chart-responsive -->
+                      </div>
+
+                      <!-- /.col -->
+                  </div>
+                  <!-- /.row -->
+              </div>
+          </div>
+          <!-- /.box -->
+      </div>
     </div>
 
 
-
-
 @section('moar_scripts')
+<script src="{{ asset('assets/js/plugins/chartjs/Chart.min.js') }}"></script>
+<script>
 
-<!-- AdminLTE for demo purposes -->
-<script src="/assets/js/demo.js"></script>
+
+    var pieChartCanvas = $("#statusPieChart").get(0).getContext("2d");
+    var pieChart = new Chart(pieChartCanvas);
+    var ctx = document.getElementById("statusPieChart");
+
+
+    $.get('{{  route('api.statuslabels.assets') }}', function (data) {
+        var myPieChart = new Chart(ctx,{
+
+            type: 'doughnut',
+            data: data,
+            options: pieOptions
+        });
+       // document.getElementById('my-doughnut-legend').innerHTML = myPieChart.generateLegend();
+    });
+
+
+
+
+
+</script>
 
 
 
 @stop
+
+
 @stop
