@@ -105,8 +105,8 @@
     </ul>
 
     @if ($model->note)
-    Notes:
-    <p>{{ $model->getNote() }}
+    Notesd:
+    <p>{!! $model->getNote() !!}
     </p>
     @endif
 
