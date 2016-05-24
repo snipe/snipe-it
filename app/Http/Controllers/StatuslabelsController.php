@@ -227,7 +227,7 @@ class StatuslabelsController extends Controller
         if ($statuslabel->has_assets() > 0) {
 
             // Redirect to the asset management page
-            return redirect()->to('admin/settings/statuslabels')->with('error', trans('admin/statuslabels/message.assoc_users'));
+            return redirect()->to('admin/settings/statuslabels')->with('error', trans('admin/statuslabels/message.assoc_assets'));
         } else {
 
             $statuslabel->delete();
