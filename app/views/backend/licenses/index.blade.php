@@ -28,8 +28,8 @@
             <tr>
                 <th data-sortable="true" data-field="id" data-visible="false">@lang('general.id')</th>
                 <th data-field="companyName" data-sortable="false" data-switchable="true">@lang('general.company')</th>
-                <th data-field="name">{{Lang::get('admin/licenses/table.title')}}</th>
-                <th data-field="serial">{{Lang::get('admin/licenses/table.serial')}}</th>
+                <th data-field="name" data-sortable="true">{{Lang::get('admin/licenses/table.title')}}</th>
+                <th data-field="serial" data-sortable="true">{{Lang::get('admin/licenses/table.serial')}}</th>
                 <th data-field="totalSeats">{{Lang::get('admin/licenses/form.seats')}}</th>
                 <th data-field="remaining">{{Lang::get('admin/licenses/form.remaining_seats')}}</th>
                 <th data-field="purchase_date">{{Lang::get('admin/licenses/table.purchase_date')}}</th>
