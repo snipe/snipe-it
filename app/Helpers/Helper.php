@@ -26,6 +26,16 @@ use App\Models\Asset;
 class Helper
 {
 
+
+    public static function parseEscapedMarkedown($str) {
+        $Parsedown = new \Parsedown();
+
+        if ($str) {
+            return $Parsedown->text(e($str));
+        }
+    }
+
+
     // This doesn't do anything yet
     public static function parseEmailList($emails)
     {
