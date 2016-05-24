@@ -49,7 +49,7 @@ class Helper
         return trim($value);
     }
 
-    // Static colors
+    // Static colors for pie charts
     public static function chartColors()
     {
         $colors = [
@@ -67,7 +67,8 @@ class Helper
         return $colors;
     }
 
-    // Static colors
+    // Static background (highlight) colors for pie charts
+    // This is not currently used, but might be in the near future.
     public static function chartBackgroundColors()
     {
         $colors = [

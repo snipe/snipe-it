@@ -62,7 +62,7 @@ class StatuslabelsController extends Controller
             "datasets" => [ [
                 "data" => $points,
                 "backgroundColor" => Helper::chartColors(),
-                "hoverBackgroundColor" =>  Helper::chartBackgroundColors()
+                "hoverBackgroundColor" =>  Helper::chartColors()
             ]]
         ];
         return $result;
