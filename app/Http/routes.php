@@ -35,6 +35,7 @@ Route::group([ 'prefix' => 'api', 'middleware' => 'auth' ], function () {
         });
 
         Route::get('list', [ 'as' => 'api.statuslabels.list', 'uses' => 'StatuslabelsController@getDatatable' ]);
+        Route::get('assets', [ 'as' => 'api.statuslabels.assets', 'uses' => 'StatuslabelsController@getAssetCountByStatuslabel' ]);
 
     });
 

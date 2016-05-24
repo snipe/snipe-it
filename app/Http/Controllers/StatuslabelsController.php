@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use Input;
 use Lang;
 use App\Models\Statuslabel;
+use App\Models\Asset;
 use Redirect;
 use DB;
 use App\Models\Setting;
@@ -32,6 +33,39 @@ class StatuslabelsController extends Controller
     {
         // Show the page
         return View::make('statuslabels/index', compact('statuslabels'));
+    }
+
+
+    /**
+     * Show a count of assets by status label
+     *
+     * @return View
+     */
+
+    public function getAssetCountByStatuslabel()
+    {
+        $colors = [];
+
+        $statuslabels = Statuslabel::get();
+        $labels=[];
+        $points=[];
+
+        foreach ($statuslabels as $statuslabel) {
+            $labels[]=$statuslabel->name;
+            $points[]=$statuslabel->assets()->whereNull('assigned_to')->count();
+        }
+        $labels[]='Deployed';
+        $points[]=Asset::whereNotNull('assigned_to')->count();
+
+        $result= [
+            "labels" => $labels,
+            "datasets" => [ [
+                "data" => $points,
+                "backgroundColor" => Helper::chartColors(),
+                "hoverBackgroundColor" =>  Helper::chartBackgroundColors()
+            ]]
+        ];
+        return $result;
     }
 
 
