@@ -43,15 +43,13 @@ function isinstalled {
 
 
 #  Lets find what distro we are using and what version
-distro="$(cat /proc/version)"
-if grep -q centos <<<$distro; then
-	for f in $(find /etc -type f -maxdepth 1 \( ! -wholename /etc/os-release ! -wholename /etc/lsb-release -wholename /etc/\*release -o -wholename /etc/\*version \) 2> /dev/null);
-	do
-		distro="${f:5:${#f}-13}"
-	done;
-	if [ "$distro" = "centos" ] || [ "$distro" = "redhat" ]; then
-		distro+="$(rpm -q --qf "%{VERSION}" $(rpm -q --whatprovides redhat-release))"
-	fi
+if [ -f /etc/lsb-release ]; then
+    distro="$(lsb_release -s -i -r)"
+elif [ -f /etc/os-release ]; then
+    distro="$(. /etc/os-release && echo $ID $VERSION_ID)"
+    version="$(. /etc/os-release && echo $VERSION_ID)"
+else
+    distro="unsupported"
 fi
 
 echo "
@@ -68,22 +66,19 @@ echo ""
 echo "  Welcome to Snipe-IT Inventory Installer for Centos and Debian!"
 echo ""
 
+shopt -s nocasematch
 case $distro in
         *Ubuntu*)
                 echo "  The installer has detected Ubuntu as the OS."
-                distro=ubuntu
                 ;;
 	*Debian*)
                 echo "  The installer has detected Debian as the OS."
-                distro=debian
                 ;;
-        *centos6*|*redhat6*)
+        *centos*6*|*redhat*6*)
                 echo "  The installer has detected $distro as the OS."
-                distro=centos6
                 ;;
-        *centos7*|*redhat7*)
+        *centos*7*|*redhat*7*)
                 echo "  The installer has detected $distro as the OS."
-                distro=centos7
                 ;;
         *)
                 echo "  The installer was unable to determine your OS. Exiting for safety."
@@ -137,8 +132,9 @@ chmod 700 $dbsetup
 
 ## TODO: Progress tracker on each step
 
+shopt -s nocasematch
 case $distro in
-	debian)
+	*Debian*)
 		#####################################  Install for Debian ##############################################
 
 		webdir=/var/www
@@ -255,7 +251,7 @@ case $distro in
 		service apache2 restart
 		;;
 		
-	ubuntu)
+	*Ubuntu*)
 		#####################################  Install for Ubuntu  ##############################################
 
 		webdir=/var/www
@@ -268,8 +264,22 @@ case $distro in
 		sudo apt-get update >> /var/log/snipeit-install.log 2>&1
 		sudo apt-get -y upgrade >> /var/log/snipeit-install.log 2>&1
 
+		if [ "$version" == "16.04" ]; then
+			sudo apt-get install -y git unzip php php-mcrypt php-curl php-mysql php-gd php-ldap php-mbstring >> /var/log/snipeit-install.log 2>&1
+			#Enable mcrypt and rewrite
+			echo "##  Enabling mcrypt and rewrite"
+			sudo phpenmod mcrypt >> /var/log/snipeit-install.log 2>&1
+			sudo phpenmod mbstring >> /var/log/snipeit-install 2>&1
+			sudo a2enmod rewrite >> /var/log/snipeit-install.log 2>&1
+		else
+			sudo apt-get install -y git unzip php5 php5-mcrypt php5-curl php5-mysql php5-gd php5-ldap >> /var/log/snipeit-install.log 2>&1
+			#Enable mcrypt and rewrite
+			echo "##  Enabling mcrypt and rewrite"
+			sudo php5enmod mcrypt >> /var/log/snipeit-install.log 2>&1
+			sudo a2enmod rewrite >> /var/log/snipeit-install.log 2>&1
+  		#  Get files and extract to web dir
+		fi
 		echo "##  Installing packages."
-		sudo apt-get install -y git unzip php5 php5-mcrypt php5-curl php5-mysql php5-gd php5-ldap >> /var/log/snipeit-install.log 2>&1 
 		#We already established MySQL root & user PWs, so we dont need to be prompted. Let's go ahead and install Apache, PHP and MySQL.
 		echo "##  Setting up LAMP."
 		sudo DEBIAN_FRONTEND=noninteractive apt-get install -y lamp-server^ >> /var/log/snipeit-install.log 2>&1 
@@ -282,12 +292,6 @@ case $distro in
 		cp -R $tmp/snipe-it-master $webdir/$name
 
 		##  TODO make sure apache is set to start on boot and go ahead and start it
-
-		#Enable mcrypt and rewrite
-		echo "##  Enabling mcrypt and rewrite"
-		sudo php5enmod mcrypt >> /var/log/snipeit-install.log 2>&1 
-		sudo a2enmod rewrite >> /var/log/snipeit-install.log 2>&1 
-		sudo ls -al /etc/apache2/mods-enabled/rewrite.load >> /var/log/snipeit-install.log 2>&1 
 
 		#Create a new virtual host for Apache.
 		echo "##  Create Virtual host for apache."
@@ -364,7 +368,7 @@ case $distro in
 		echo "##  Restarting apache."
 		service apache2 restart
 		;;
-	centos6 )
+	*centos*6*|*redhat*6*)
 		#####################################  Install for Centos/Redhat 6  ##############################################
 
 		webdir=/var/www/html
@@ -499,7 +503,7 @@ case $distro in
 
 		service httpd restart
 		;;
-	centos7 )
+	*centos*7*|*redhat*7*)
 		#####################################  Install for Centos/Redhat 7  ##############################################
 
 		webdir=/var/www/html
