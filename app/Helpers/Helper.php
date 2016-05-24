@@ -26,14 +26,14 @@ use App\Models\Asset;
 class Helper
 {
 
-   // This doesn't do anything yet
+    // This doesn't do anything yet
     public static function parseEmailList($emails)
     {
         $emails_array = explode(',', $emails);
         return array_walk($emails_array, 'trim_value');
     }
 
-   // This doesn't do anything yet
+    // This doesn't do anything yet
     public static function trim_value(&$value)
     {
         return trim($value);
@@ -63,8 +63,8 @@ class Helper
     public static function companyList()
     {
         $company_list = array('0' => trans('general.select_company')) + DB::table('companies')
-        ->orderBy('name', 'asc')
-        ->pluck('name', 'id');
+                ->orderBy('name', 'asc')
+                ->pluck('name', 'id');
         return $company_list;
     }
 
@@ -72,39 +72,39 @@ class Helper
     public static function categoryList()
     {
         $category_list = array('' => '') + Category::orderBy('name', 'asc')
-        ->whereNull('deleted_at')
-        ->orderBy('name', 'asc')
-        ->pluck('name', 'id')->toArray();
+                ->whereNull('deleted_at')
+                ->orderBy('name', 'asc')
+                ->pluck('name', 'id')->toArray();
         return $category_list;
     }
 
     public static function suppliersList()
     {
         $supplier_list = array('' => trans('general.select_supplier')) + Supplier::orderBy('name', 'asc')
-        ->orderBy('name', 'asc')
-        ->pluck('name', 'id')->toArray();
+                ->orderBy('name', 'asc')
+                ->pluck('name', 'id')->toArray();
         return $supplier_list;
     }
 
     public static function statusLabelList()
     {
         $statuslabel_list = array('' => trans('general.select_statuslabel')) + Statuslabel::orderBy('name', 'asc')
-        ->pluck('name', 'id')->toArray();
+                ->pluck('name', 'id')->toArray();
         return $statuslabel_list;
     }
 
     public static function locationsList()
     {
         $location_list = array('' => trans('general.select_location')) + Location::orderBy('name', 'asc')
-        ->pluck('name', 'id')->toArray();
+                ->pluck('name', 'id')->toArray();
         return $location_list;
     }
 
     public static function manufacturerList()
     {
         $manufacturer_list = array('' => 'Select One') +
-        Manufacturer::orderBy('name', 'asc')
-        ->pluck('name', 'id')->toArray();
+            Manufacturer::orderBy('name', 'asc')
+                ->pluck('name', 'id')->toArray();
         return $manufacturer_list;
     }
 
@@ -117,43 +117,43 @@ class Helper
     public static function managerList()
     {
         $manager_list = array('' => '') + User::select(DB::raw('concat(last_name,", ",first_name," (",username,")") as full_name, id'))
-        ->whereNull('deleted_at', 'and')
-        ->orderBy('last_name', 'asc')
-        ->orderBy('first_name', 'asc')
-        ->pluck('full_name', 'id')->toArray();
+                ->whereNull('deleted_at', 'and')
+                ->orderBy('last_name', 'asc')
+                ->orderBy('first_name', 'asc')
+                ->pluck('full_name', 'id')->toArray();
         return $manager_list;
     }
 
     public static function depreciationList()
     {
         $depreciation_list = ['' => 'Do Not Depreciate'] + Depreciation::orderBy('name', 'asc')
-        ->pluck('name', 'id')->toArray();
+                ->pluck('name', 'id')->toArray();
         return $depreciation_list;
     }
 
     public static function categoryTypeList()
     {
-         $category_types = array('' => '','accessory' => 'Accessory', 'asset' => 'Asset', 'consumable' => 'Consumable','component' => 'Component');
-         return $category_types;
+        $category_types = array('' => '','accessory' => 'Accessory', 'asset' => 'Asset', 'consumable' => 'Consumable','component' => 'Component');
+        return $category_types;
     }
 
     public static function usersList()
     {
         $users_list = array('' => trans('general.select_user')) + DB::table('users')
-        ->select(DB::raw('concat(last_name,", ",first_name," (",username,")") as full_name, id'))
-        ->whereNull('deleted_at')
-        ->where('show_in_list','=',1)
-        ->orderBy('last_name', 'asc')
-        ->orderBy('first_name', 'asc')
-        ->pluck('full_name', 'id');
+                ->select(DB::raw('concat(last_name,", ",first_name," (",username,")") as full_name, id'))
+                ->whereNull('deleted_at')
+                ->where('show_in_list','=',1)
+                ->orderBy('last_name', 'asc')
+                ->orderBy('first_name', 'asc')
+                ->pluck('full_name', 'id');
         return $users_list;
     }
 
     public static function assetsList()
     {
         $assets_list = array('' => trans('general.select_asset')) + Asset::orderBy('name', 'asc')
-        ->whereNull('deleted_at')
-        ->pluck('name', 'id')->toArray();
+                ->whereNull('deleted_at')
+                ->pluck('name', 'id')->toArray();
         return $assets_list;
     }
 
@@ -197,10 +197,10 @@ class Helper
         return $randomString;
     }
 
-  /**
-  * This nasty little method gets the low inventory info for the
-  * alert dropdown
-  **/
+    /**
+     * This nasty little method gets the low inventory info for the
+     * alert dropdown
+     **/
     public static function checkLowInventory()
     {
         $consumables = Consumable::with('users')->whereNotNull('min_amt')->get();
@@ -214,7 +214,12 @@ class Helper
         foreach ($consumables as $consumable) {
             $avail = $consumable->numRemaining();
             if ($avail < ($consumable->min_amt) + \App\Models\Setting::getSettings()->alert_threshold) {
-                $percent = number_format((($consumable->numRemaining() / $consumable->qty) * 100), 0);
+                if ($consumable->total_qty > 0) {
+                    $percent = number_format((($consumable->numRemaining() / $consumable->total_qty) * 100), 0);
+                } else {
+                    $percent = 100;
+                }
+
                 $items_array[$all_count]['id'] = $consumable->id;
                 $items_array[$all_count]['name'] = $consumable->name;
                 $items_array[$all_count]['type'] = 'consumables';
@@ -230,7 +235,13 @@ class Helper
         foreach ($accessories as $accessory) {
             $avail = $accessory->numRemaining();
             if ($avail < ($accessory->min_amt) + \App\Models\Setting::getSettings()->alert_threshold) {
-                $percent = number_format((($accessory->numRemaining() / $accessory->qty) * 100), 0);
+
+                if ($accessory->total_qty > 0) {
+                    $percent = number_format((($accessory->numRemaining() / $accessory->total_qty) * 100), 0);
+                } else {
+                    $percent = 100;
+                }
+
                 $items_array[$all_count]['id'] = $accessory->id;
                 $items_array[$all_count]['name'] = $accessory->name;
                 $items_array[$all_count]['type'] = 'accessories';
@@ -245,7 +256,12 @@ class Helper
         foreach ($components as $component) {
             $avail = $component->numRemaining();
             if ($avail < ($component->min_amt) + \App\Models\Setting::getSettings()->alert_threshold) {
-                $percent = number_format((($component->numRemaining() / $component->total_qty) * 100), 0);
+                if ($component->total_qty > 0) {
+                    $percent = number_format((($component->numRemaining() / $component->total_qty) * 100), 0);
+                } else {
+                    $percent = 100;
+                }
+
                 $items_array[$all_count]['id'] = $component->id;
                 $items_array[$all_count]['name'] = $component->name;
                 $items_array[$all_count]['type'] = 'components';
@@ -280,22 +296,22 @@ class Helper
     }
 
     /**
-    * Walks through the permissions in the permissions config file and determines if
-    * permissions are granted based on a $selected_arr array.
-    *
-    * The $permissions array is a multidimensional array broke down by section.
-    * (Licenses, Assets, etc)
-    *
-    * The $selected_arr should be a flattened array that contains just the
-    * corresponding permission name and a true or false boolean to determine
-    * if that group/user has been granted that permission.
-    *
-    * @author [A. Gianotto] [<snipe@snipe.net]
-    * @param array $permissions
-    * @param array $selected_arr
-    * @since [v1.0]
-    * @return Array
-    */
+     * Walks through the permissions in the permissions config file and determines if
+     * permissions are granted based on a $selected_arr array.
+     *
+     * The $permissions array is a multidimensional array broke down by section.
+     * (Licenses, Assets, etc)
+     *
+     * The $selected_arr should be a flattened array that contains just the
+     * corresponding permission name and a true or false boolean to determine
+     * if that group/user has been granted that permission.
+     *
+     * @author [A. Gianotto] [<snipe@snipe.net]
+     * @param array $permissions
+     * @param array $selected_arr
+     * @since [v1.0]
+     * @return Array
+     */
     public static function selectedPermissionsArray($permissions, $selected_arr = array())
     {
 
@@ -324,7 +340,7 @@ class Helper
 
 
         }
-        
+
         return $permissions_arr;
     }
 
