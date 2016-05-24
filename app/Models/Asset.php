@@ -348,7 +348,7 @@ class Asset extends Depreciable
     }
 
   /**
-   * Get total assets
+   * Get asset status
    */
     public function assetstatus()
     {
