@@ -81,8 +81,13 @@ class AssetsController extends Controller
      * @return Redirect
      */
     public function getAssetByTag() {
+        if (Input::get('topsearch')=="true") {
+            $topsearch = true;
+        } else {
+            $topsearch = false;
+        }
         if ($asset = Asset::where('asset_tag','=',Input::get('assetTag'))->first()) {
-            return redirect()->route('view/hardware', $asset->id);
+            return redirect()->route('view/hardware', $asset->id)->with('topsearch', $topsearch);
         }
         return redirect()->to('hardware')->with('error',trans('admin/hardware/message.does_not_exist'));
 

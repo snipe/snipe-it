@@ -575,10 +575,11 @@
 
     @section('moar_scripts')
     @show
-
+    @if ((Session::get('topsearch')=='true') || (Request::is('/')))
     <script>
-        // $("#tagSearch").focus();
+         $("#tagSearch").focus();
     </script>
+        @endif
 
   </body>
 </html>
