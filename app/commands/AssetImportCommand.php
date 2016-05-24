@@ -390,22 +390,35 @@ class AssetImportCommand extends Command {
 			}
 
 
-            // Check for the status label match and create it if it doesn't exist
-			if ($statuslabel = Statuslabel::where('name', e($user_asset_status))->first()) {
-				$this->comment('Status Label '.$user_asset_status.' already exists');
-			} else {
-				$statuslabel = new Statuslabel();
-				$statuslabel->name = e($user_asset_status);
-				$statuslabel->user_id = 1;
+            if ($user_asset_status=='') {
+                $status_id = 1;
+            } else {
+                // Check for the status label match and create it if it doesn't exist
+    			if ($statuslabel = Statuslabel::where('name', e($user_asset_status))->first()) {
+    				$this->comment('Status Label '.$user_asset_status.' already exists');
+    			} else {
 
-				if ($statuslabel->save()) {
-					$this->comment('Supplier '.$user_asset_status.' was created');
-                } else {
-					$this->comment('Something went wrong! Supplier '.$user_asset_status.' was NOT created');
-				}
+                    $statuslabel = new Statuslabel();
+                    if ($user_asset_status=='') {
+                        $statuslabel->name = 'Unspecified Status';
+                    } else {
+                        $statuslabel->name = e($user_asset_status);
+                    }
 
-			}
-            $status_id = $statuslabel->id;
+
+    				$statuslabel->user_id = 1;
+
+    				if ($statuslabel->save()) {
+    					$this->comment('Status Label '.$user_asset_status.' was created');
+                    } else {
+    					$this->comment('Something went wrong! Status Label '.$user_asset_status.' was NOT created');
+    				}
+
+    			}
+                $status_id = $statuslabel->id;
+            }
+
+
 
 
 
