@@ -956,7 +956,7 @@ class LicensesController extends AdminController
             $licenses = $licenses->TextSearch(Input::get('search'));
         }
 
-        $allowed_columns = ['id','name'];
+        $allowed_columns = ['id','name','serial'];
         $order = Input::get('order') === 'asc' ? 'asc' : 'desc';
         $sort = in_array(Input::get('sort'), $allowed_columns) ? Input::get('sort') : 'created_at';
 

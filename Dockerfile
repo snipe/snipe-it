@@ -12,7 +12,8 @@ php5-gd \
 patch \
 curl \
 vim \
-git 
+git \
+mysql-client
 
 RUN php5enmod mcrypt
 RUN php5enmod gd
