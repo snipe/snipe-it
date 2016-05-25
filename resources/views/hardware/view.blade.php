@@ -253,7 +253,7 @@
 
             @if (($asset->assigneduser) && ($asset->assigned_to > 0) && ($asset->deleted_at==''))
                 <h4>{{ trans('admin/hardware/form.checkedout_to') }}</h4>
-                <p><img src="//gravatar.com/avatar/ea5075ac915b019f86eb19756665f20a" class="user-image-inline" alt="User Image">
+                <p><img src="{{ $asset->assigneduser->gravatar() }}" class="user-image-inline" alt="User Image">
                 <a href="{{ route('view/user', $asset->assigned_to) }}">{{ $asset->assigneduser->fullName() }}</a></p>
 
                     <ul class="list-unstyled">
