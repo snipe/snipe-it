@@ -86,6 +86,7 @@
           <div class="box-body">
             <div class="row">
               <div class="col-md-12">
+               <div class="table-responsive">
                 <table class="table table-hover table-fixed break-word">
                 <thead>
                     <tr>
@@ -163,6 +164,7 @@
                 @endif
                 </tbody>
                 </table>
+               </div><!-- /.responsive -->
               </div><!-- /.col -->
             </div><!-- /.row -->
           </div><!-- ./box-body -->
