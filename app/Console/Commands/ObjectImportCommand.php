@@ -563,8 +563,9 @@ class ObjectImportCommand extends Command {
 		if (!empty($user_username)) {
 			if ($user = User::MatchEmailOrUsername($user_username, $user_email)
 				->whereNotNull('username')->first()) {
+
 				$this->log('User '.$user_username.' already exists');
-			} else {
+			} else if(( $first_name != '') && ($last_name != '') && ($user_username != '')) {
                 $user = new \App\Models\User;
                 $password  = substr(str_shuffle("0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"), 0, 20);
 
@@ -580,6 +581,8 @@ class ObjectImportCommand extends Command {
                     $this->error('User: ' . $user->getErrors());
                 }
 
+			} else {
+				$user = new User;
 			}
 		} else {
 			$user = new User;
