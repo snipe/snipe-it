@@ -6,9 +6,7 @@ currentMenu: importing-assets
 
 <div id="generated-toc" class="generate_from_h2"></div>
 
-Snipe it v3 brings with it a new importing tool that can import Assets, accessories, and consumables.<sup>*</sup>.
-
-<sup>*</sup>This web-based importer should be limited to imports of 1000 records at a time or less. We're working on making it able to handle more records at a time.
+Snipe it v3 brings with it a new importing tool that can import Assets, accessories, and consumables.
 
 Make sure you have your organization's domain name filled out in the `domain` value in `app/config/production/app.php`, so that it knows what domain to use when generating email addresses if none are provided in your CSV.
 
