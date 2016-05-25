@@ -6,7 +6,7 @@ currentMenu: importing-assets
 
 <div id="generated-toc" class="generate_from_h2"></div>
 
-There is an asset import tool in later versions of Snipe-IT ( > `1.2.8`). It is available through the command-line only, as very large file uploading and processing will cause memory exhaustion issues on many servers<sup>*</sup>.
+Snipe it v3 brings with it a new importing tool that can import Assets, accessories, and consumables.<sup>*</sup>.
 
 <sup>*</sup>This web-based importer should be limited to imports of 1000 records at a time or less. We're working on making it able to handle more records at a time.
 
@@ -15,7 +15,7 @@ Make sure you have your organization's domain name filled out in the `domain` va
 ## Usage:
 
 ```
-php artisan asset-import:csv path/to/your/file.csv --email_format=firstname.lastname --username_format=firstname.lastname
+php artisan snipeit:import path/to/your/file.csv --email_format=firstname.lastname --username_format=firstname.lastname
 ```
 
 
@@ -26,32 +26,35 @@ php artisan asset-import:csv path/to/your/file.csv --email_format=firstname.last
 
 
 ## CSV Format
-The importer will be looking for a CSV in the format of:
+The importer uses the first row of the CSV to determine what each column is.  The value in each cell must match the following table in order to be parsed.  This is not case sensative, and order does not matter.
 
 ```
-Name (Firstname Lastname), Email, Username, Asset Name, Asset Category, Asset Model, Manufacturer, Asset Model Number, Asset Serial, Asset Tag, Location Name, Asset Notes, Purchase Date, Purchase Cost
+Item Type, Name, Email, Username, Item Name, Category, Model Name, Manufacturer, Model Number, serial number, Asset Tag, Location, Notes, Purchase Date, Purchase Cost, Image, Status
 ```
 
-The importer will ignore the first line of your CSV, so if you don't have a header row, you should add one. **There should not be any blank lines at the end of the CSV.**
+ **There should not be any blank lines at the end of the CSV.**
 
 [__Download a sample CSV with dummy data__](http://docs.snipeitapp.com/sample-assets.csv)
 
 | Field   | Example Data | Required | Notes |
 | ------------- | ------------- |
+|Item Type|`Asset`| No | Valid options are `Asset`, `Accessory`, or `Consumable`.  If this field is blank, asset is assumed.|
 |Name|`Firstname Lastname` | No| No commas. First name first, last name last |
 |Email| `you@example.com`| No|If empty, will be generated using the `email_format` and `domain` you provide in your `app/config/production/app.php`|
 |Username| `yourname.lastname`| No|If empty, will be generated using the `username_format` you provide in the import command|
-|Asset Name |`Karen 2015`| No |  |
-|Asset Category |`Laptop`| Yes | Created if it doesn't exist |
-|Asset Model |`MBP Retina 13-inch`| Yes |Created if it doesn't exist |
-|Manufacturer Name| `Apple`|Yes | Created if it doesn't exist |
-|Asset Model No.| `MacbookPro12,1`| No |  |
-|Asset Serial | `C20095805496869045H6`| No |  |
+|Item Name |`Karen 2015`| No |  |
+|Category |`Laptop`| Yes | Created if it doesn't exist |
+|Model Name | `MBP Retina 13-inch`| Yes |Created if it doesn't exist |
+|Manufacturer| `Apple`|Yes | Created if it doesn't exist |
+|Model Number| `MacbookPro12,1`| No |  |
+|Serial Number | `C20095805496869045H6`| No |  |
 |Asset Tag | `KJH90890`| Yes | |
-|Location Name | `San Diego`| Yes | Created if it doesn't exist |
-|Asset Notes | `Karens old machine`| No | |
+|Location | `San Diego`| Yes | Created if it doesn't exist |
+|Notes | `Karens old machine`| No | |
 |Purchase Date | `2015-01-12 07:30:30`| No | Can take any date format that can be translated by `strtotime()`|
 |Purchase Cost | `2999.99`| No | Cost of asset|
+|Image         | 'Filename.jpg' | No | If Present, this is the basename of the image assocaited with the item.  **Images must be manually uploaded to public/uploads/images**|
+|Status		   | `Working` | No | A status label applied to the item.  Created if it doesn't exist.
 
 ## What It Does
 
