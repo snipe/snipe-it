@@ -399,6 +399,21 @@ a:focus {
     right: 40px;
   }
 }
+@media (max-width: 991px) {
+  .content-header {
+    padding-top: 110px;
+  }
+}
+@media (max-width: 991px) {
+  ul.sidebar-menu {
+    padding-top: 120px;
+  }
+}
+@media (max-width: 991px) {
+  .sidebar-toggle-mobile a {
+    color: white;
+  }
+}
 /*
  * Component: Sidebar
  * ------------------
@@ -4838,7 +4853,7 @@ fieldset[disabled] .btn-yahoo.active {
   background-color: inherit;
 }
 .main-header .logo {
-  min-width: 530px;
+  min-width: 380px;
   text-align: left;
   display: block;
   clear: both;
