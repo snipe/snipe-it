@@ -35,9 +35,6 @@
       }
     }
     //Logo
-    .logo {
-      .logo-variant(darken(@light-blue, 5%));
-    }
 
     li.user-header {
       background-color: @light-blue;
@@ -54,5 +51,7 @@
 }
 
 .skin-blue.layout-top-nav .main-header > .logo {
-  .logo-variant(@light-blue);
+  .logo-variant {
+    background-color: none;
+  }
 }

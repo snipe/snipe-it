@@ -2,8 +2,11 @@
   background-color: inherit;
 }
 .main-header .logo {
-  min-width: 430px;
+  min-width: 530px;
   text-align: left;
+  display: block;
+  clear: both;
+  //text-overflow: hidden;
 }
 .huge {
   font-size: 40px;
@@ -260,3 +263,20 @@ a.accordion-header {
  .bs-wizard > .bs-wizard-step:last-child  > .progress {width: 50%;}
  .bs-wizard > .bs-wizard-step.disabled a.bs-wizard-dot{ pointer-events: none; }
  /*END Form Wizard*/
+
+.left-navblock{
+  display: inline-block;
+  float: left;
+  text-align: left;
+  color: white;
+  padding: 0px;
+  /* adjust based on your layout */
+
+}
+.skin-blue .main-header .navbar .dropdown-menu li a {
+  color: #333;
+}
+
+a.logo.no-hover a:hover {
+ background-color: transparent;
+}

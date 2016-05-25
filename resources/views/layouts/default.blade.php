@@ -64,8 +64,6 @@
           };
       </script>
 
-
-
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -83,39 +81,43 @@
 
         <!-- Header Navbar: style can be found in header.less -->
         <nav class="navbar navbar-static-top" role="navigation">
-          <!-- Sidebar toggle button-->
+          <!-- Sidebar toggle button above the compact sidenav -->
           <a href="#" style="color: white" class="sidebar-toggle btn btn-white" data-toggle="offcanvas" role="button">
             <span class="sr-only">Toggle navigation</span>
           </a>
 
 
 
-         @if (\App\Models\Setting::getSettings()->brand == '3')
-          <a class="logo navbar-brand" href="{{ config('app.url') }}">
-          <img class="navbar-brand-img" src="{{ config('app.url') }}/uploads/{{ \App\Models\Setting::getSettings()->logo }}">
-          {{ \App\Models\Setting::getSettings()->site_name }}
-          </a>
-        @elseif (\App\Models\Setting::getSettings()->brand == '2')
-          <a class="logo navbar-brand" href="{{ config('app.url') }}">
-          <img class="navbar-brand-img" src="{{ config('app.url') }}/uploads/{{ \App\Models\Setting::getSettings()->logo }}">
-          </a>
-        @else
-          <a class="logo" href="{{ config('app.url') }}">
-          {{ \App\Models\Setting::getSettings()->site_name }}
-          </a>
-         @endif
-
-
-         <!-- Sidebar toggle button-->
-          <a href="#" style="color: white" class="sidebar-toggle-mobile visible-xs-inline-block btn btn-white" data-toggle="offcanvas" role="button">
-            <span class="sr-only">Toggle navigation</span>
-            <i class="fa fa-bars"></i>
-          </a>
 
 
           <!-- Navbar Right Menu -->
           <div class="navbar-custom-menu">
             <ul class="nav navbar-nav">
+                <div class="left-navblock">
+                    <div class="pull-left">
+
+                        <!-- Sidebar toggle button-->
+                        <a href="#" style="color: white" class="sidebar-toggle-mobile visible-xs-inline-block btn btn-white" data-toggle="offcanvas" role="button">
+                            <span class="sr-only">Toggle navigation</span>
+                            <i class="fa fa-bars"></i>
+                        </a>
+
+                    @if (\App\Models\Setting::getSettings()->brand == '3')
+                        <a class="logo navbar-brand no-hover" href="{{ config('app.url') }}">
+                            <img class="navbar-brand-img" src="{{ config('app.url') }}/uploads/{{ \App\Models\Setting::getSettings()->logo }}">
+                            {{ \App\Models\Setting::getSettings()->site_name }}
+                        </a>
+                    @elseif (\App\Models\Setting::getSettings()->brand == '2')
+                        <a class="logo navbar-brand no-hover" href="{{ config('app.url') }}">
+                            <img class="navbar-brand-img" src="{{ config('app.url') }}/uploads/{{ \App\Models\Setting::getSettings()->logo }}">
+                        </a>
+                    @else
+                        <a class="logo no-hover" href="{{ config('app.url') }}">
+                            {{ \App\Models\Setting::getSettings()->site_name }}
+                        </a>
+                    @endif
+                    </div>
+                </div>
 
             @if (Auth::user()->hasAccess('admin'))
                     @if (!Request::is('/'))
@@ -146,12 +148,13 @@
                         </li>
                     @endif
 
-                    <form class="navbar-form navbar-left" role="search" action="{{ route('findbytag/hardware') }}" method="get">
+                    <form class="navbar-form navbar-left form-inline" role="search" action="{{ route('findbytag/hardware') }}" method="get">
                         <div class="form-group">
+                            <label class="sr-only" for="tagSearch">{{ trans('general.lookup_by_tag') }}</label>
                             <input type="text" class="form-control" id="tagSearch" name="assetTag" placeholder="{{ trans('general.lookup_by_tag') }}">
                             <input type="hidden" name="topsearch" value="true">
                         </div>
-                        <button type="submit" class="btn btn-primary"><i class="fa fa-search"></i></button>
+                        <button type="submit" class="btn btn-primary pull-right"><i class="fa fa-search"></i></button>
                     </form>
 
               <li class="dropdown">
@@ -351,6 +354,7 @@
 
             </ul>
           </div>
+
 
         </nav>
       </header>
