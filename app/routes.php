@@ -177,6 +177,14 @@
             Route::get( '{assetId}/checkout',
                 [ 'as' => 'checkout/hardware', 'uses' => 'AssetsController@getCheckout' ] );
             Route::post( '{assetId}/checkout', 'AssetsController@postCheckout' );
+
+//TODO: POST postCheckoutLocation
+            Route::get( '{assetId}/checkout/location',
+                [ 'as' => 'checkout/hardware/location', 'uses' => 'AssetsController@getLocationCheckout' ] );
+            Route::post( '{assetId}/checkout/location', 'AssetsController@postCheckoutLocation' );
+//TODO: ABSTRACT OUT LocationCheckout OR RUBBER STAMP ACROSS ASSET TYPES
+
+
             Route::get( '{assetId}/checkin/{backto?}',
                 [ 'as' => 'checkin/hardware', 'uses' => 'AssetsController@getCheckin' ] );
             Route::post( '{assetId}/checkin/{backto?}', 'AssetsController@postCheckin' );

@@ -60,6 +60,24 @@
             </div>
           @endif
 
+        <!-- Location-Checkout-Enabled -->
+        <div class="form-group {{ $errors->has('location_checkout') ? 'has-error' : '' }}">
+            <div class="col-md-3">
+                {{ Form::label('location_checkout', "Checkout to Location*") }}
+            </div>
+            <div class="col-md-9">
+                @if (Config::get('app.lock_passwords'))
+                    <p class="help-block">@lang('general.lock_passwords')</p>
+                @else
+                    {{ Form::checkbox('location_checkout', '1', Input::old('location_checkout', $setting->location_checkout)) }}
+                    <b>check out assets to locations instead of users**</b>
+                @endif
+            </div>
+        </div>
+
+
+
+
           <!-- Logo -->
           <div class="form-group {{ $errors->has('logo') ? 'has-error' : '' }}">
             <div class="col-md-3">

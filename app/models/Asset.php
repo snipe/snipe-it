@@ -68,6 +68,58 @@ class Asset extends Depreciable
 
         }
 
+    /**
+     * location-based checkouts
+     *
+     * @param $location
+     * @param $admin
+     * @param null $checkout_at
+     * @param null $expected_checkin
+     * @param null $note
+     * @param null $name
+     * @return bool
+     */
+    public function checkOutToLocation($location, $admin, $checkout_at = null, $expected_checkin = null, $note = null, $name = null) {
+
+        if ($expected_checkin) {
+            $this->expected_checkin = $expected_checkin ;
+        }
+
+        $this->last_checkout = $checkout_at;
+
+
+        //associate the location with the asset
+        //and let's try associating the logged in admin and see what happens
+        $this->assignedlocation()->associate($location);
+        $this->assigneduser()->associate($admin);
+        $this->name = $name;
+
+        $settings = Setting::getSettings();
+
+        if($this->requireAcceptance()) {
+            $this->accepted="pending";
+        }
+
+        if($this->save()) {
+
+            $log_id = $this->createLocationCheckoutLog($checkout_at, $admin, $location, $expected_checkin, $note);
+
+
+            // TODO: fire off email notification events on location assign
+
+//            if ((($this->requireAcceptance()=='1')  || ($this->getEula())) && ($user->email!='')) {
+//                $this->checkOutNotifyMail($log_id, $user, $checkout_at, $expected_checkin, $note);
+//            }
+
+            if ($settings->slack_endpoint) {
+                $this->checkOutNotifySlack($settings, $admin, $note);
+            }
+            return true;
+
+        }
+        return false;
+    }
+
         public function checkOutNotifyMail($log_id, $user, $checkout_at, $expected_checkin, $note) {
 
             $data['log_id'] = $log_id;
@@ -128,6 +180,32 @@ class Asset extends Depreciable
 
         }
 
+    /**
+     * create the log for location-checkout
+     *
+     * @param null $checkout_at
+     * @param $admin
+     * @param $location
+     * @param null $expected_checkin
+     * @param null $note
+     * @return int|mixed
+     */
+    public function createLocationCheckoutLog($checkout_at = null, $admin, $location, $expected_checkin = null, $note = null) {
+
+        $logaction = new Actionlog();
+        $logaction->asset_id = $this->id;
+        $logaction->checkedout_to = $this->assigned_to;
+        $logaction->asset_type = 'hardware';
+        $logaction->location_id = $location->id;
+        $logaction->adminlog()->associate($admin);
+        $logaction->note = $note;
+        if ($checkout_at) {
+            $logaction->created_at = $checkout_at;
+        }
+        $log = $logaction->logaction('checkout');
+        return $logaction->id;
+    }
+
   public function createCheckoutLog($checkout_at = null, $admin, $user, $expected_checkin = null, $note = null) {
 
       $logaction = new Actionlog();
@@ -186,6 +264,13 @@ if (($filetype=="image/jpeg") || ($filetype=="image/jpg") || ($filetype=="image/
 
 return false;
 }
+
+    public function assignedlocation()
+    {
+
+        return $this->belongsTo( 'Location', 'rtd_location_id' )
+            ->withTrashed();
+    }
 
   public function assigneduser()
   {
@@ -392,6 +477,28 @@ return false;
       }
 
   }
+
+    // TODO: is the location-checkout setting enabled?
+    // do we need to fire off some changes on this flip of the switch?
+
+
+    /**
+     *
+     *
+     * @return bool
+     */
+    public static function location_checkout_asset()
+    {
+
+        $settings = Setting::getSettings();
+
+        if ($settings->location_checkout== '1') {
+
+            return true;
+        } else {
+            return false;
+        }
+    }
 
   /**
    * Get total assets

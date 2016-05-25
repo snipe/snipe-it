@@ -506,6 +506,7 @@ class ModelsController extends AdminController
 
         $rows = array();
 
+        $settings = Setting::getSettings();
 
         foreach ($assets as $asset) {
           $actions = '';
@@ -520,12 +521,17 @@ class ModelsController extends AdminController
                 }
             }
 
+            if (($asset->assigned_to > 0) && ($settings->location_checkout == '1') )  {
+                $statusText = "Assigned to Location";
+            }else{
+                $statusText = $asset->assigneduser->fullName();
+            }
             $rows[] = array(
                 'id'            => $asset->id,
                 'name'          => link_to('/hardware/'.$asset->id.'/view', $asset->showAssetName()),
                 'asset_tag'     => link_to('hardware/'.$asset->id.'/view', $asset->asset_tag),
                 'serial'        => $asset->serial,
-                'assigned_to'   => ($asset->assigned_to) ? link_to('/admin/users/'.$asset->assigned_to.'/view', $asset->assigneduser->fullName()) : '',
+                'assigned_to'   => ($asset->assigned_to) ? link_to('/admin/users/'.$asset->assigned_to.'/view', $statusText) : '',
                 'actions'       => $actions,
                 'companyName'   => Company::getName($asset)
             );

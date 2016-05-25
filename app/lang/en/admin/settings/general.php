@@ -4,6 +4,7 @@ return array(
 	'alert_email'				=> 'Send alerts to',
 	'alerts_enabled'			=> 'Alerts enabled',
 	'asset_ids'					=> 'Asset IDs',
+	'checkout_to_location'		=> 'Checkout to Location Enabled',
 	'auto_increment_assets'		=> 'Generate auto-incrementing asset IDs',
 	'auto_increment_prefix'		=> 'Prefix (optional)',
 	'auto_incrementing_help'    => 'Enable auto-incrementing asset IDs first to set this',
