@@ -173,8 +173,7 @@ class Asset extends Depreciable
 
 
     public function getDetailedNameAttribute() {
-      $user = $this->assigneduser;
-      if($user) {
+      if($this->assigned_user) {
         $user_name = $user->fullName();
       } else {
         $user_name = "Unassigned";
