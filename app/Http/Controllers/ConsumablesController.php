@@ -319,6 +319,7 @@ class ConsumablesController extends Controller
         $logaction->consumable_id = $consumable->id;
         $logaction->checkedout_to = $consumable->assigned_to;
         $logaction->asset_type = 'consumable';
+        $logaction->asset_id = 0;
         $logaction->location_id = $user->location_id;
         $logaction->user_id = Auth::user()->id;
         $logaction->note = e(Input::get('note'));
