@@ -55,8 +55,6 @@ class ObjectImportCommand extends Command {
 	{
 		$filename = $this->argument('filename');
 		$logFile = $this->option('logfile');
-		if(empty($logFile))
-			$logFile=storage_path('logs/importer.log');
 		\Log::useFiles($logFile);
 
 		if ($this->option('testrun')) {
@@ -94,6 +92,7 @@ class ObjectImportCommand extends Command {
 		$this->consumables = Consumable::All(['name']);
 		// Loop through the records
 		DB::transaction(function() use (&$newarray){
+		$item_type = strtolower($this->option('item-type'));
 		foreach( $newarray as $row ) {
 
 			// Let's just map some of these entries to more user friendly words
@@ -105,12 +104,6 @@ class ObjectImportCommand extends Command {
 			$item_company_name = $this->array_smart_fetch($row, "company");
 			$item_location = $this->array_smart_fetch($row, "location");
 
-			$item["item_type"] = strtolower($this->array_smart_fetch($row, "item type"));
-			if(empty($item["item_type"])) {
-				$this->log("Item Type not set.  Assuming asset");
-				$item["item_type"] = 'asset';
-			}
-
 			$item["item_name"] = $this->array_smart_fetch($row, "item name");
 			$item["purchase_date"] = date("Y-m-d 00:00:01", strtotime($this->array_smart_fetch($row, "purchase date")));
 			$item["purchase_cost"] = $this->array_smart_fetch($row, "purchase cost");
@@ -121,7 +114,6 @@ class ObjectImportCommand extends Command {
 
 
 			$this->current_assetId = $item["item_name"];
-			$this->log("Item Type: " . $item["item_type"]);
 			$this->log('Category Name: ' . $item_category);
 			$this->log('Location: ' . $item_location);
 			$this->log('Purchase Date: ' . $item["purchase_date"]);
@@ -131,11 +123,11 @@ class ObjectImportCommand extends Command {
 			$item["user"] = $this->createOrFetchUser($row);
 
 			$item["location"] = $this->createOrFetchLocation($item_location);
-			$item["category"] = $this->createOrFetchCategory($item_category, $item["item_type"]);
+			$item["category"] = $this->createOrFetchCategory($item_category, $item_type);
 			$item["manufacturer"] = $this->createOrFetchManufacturer($row);
 			$item["company"] = $this->createOrFetchCompany($item_company_name);
 
-			switch ($item["item_type"]) {
+			switch ($item_type) {
 				case "asset":
 					$this->createAssetIfNotExists($row, $item);
 					break;
@@ -455,7 +447,7 @@ class ObjectImportCommand extends Command {
 		$supplier = new Supplier();
 		$supplier->name = $supplier_name;
 		$supplier->user_id = 1;
-		
+
 		if(!$this->option('testrun')) {
 			if ($supplier->save()) {
 				$this->suppliers->add($supplier);
@@ -664,11 +656,14 @@ class ObjectImportCommand extends Command {
 		} else {
 			$accessory->purchase_cost = 0.00;
 		}
-		$accessory->location_id = $item["location"]->id;
+		if($item["location"])
+			$accessory->location_id = $item["location"]->id;
 		$accessory->user_id = 1;
-		$accessory->company_id = $item["company"]->id;
+		if($item["company"])
+			$accessory->company_id = $item["company"]->id;
 		$accessory->order_number = $item["order_number"];
-		$accessory->category_id = $item["category"]->id;
+		if($item["category"])
+			$accessory->category_id = $item["category"]->id;
 
 		//TODO: Implement
 //		$accessory->notes = e($item_notes);
@@ -684,8 +679,10 @@ class ObjectImportCommand extends Command {
 		if (!$this->option('testrun')) {
 			if ($accessory->save()) {
 				$this->log('Accessory ' . $item["item_name"] . ' was created');
+				$this->comment('Accessory ' . $item["item_name"] . ' was created');
+
 			} else {
-				$this->log('Something went wrong! Accessory ' . $item["item_name"] . ' was NOT created');
+				$this->error('Accessory: ' . $accessory->getErrors());
 			}
 		} else {
 			$this->log('TEST RUN - Accessory  ' . $item["item_name"] . ' not created');
@@ -703,7 +700,7 @@ class ObjectImportCommand extends Command {
 		$this->log("Creating Consumable");
 		foreach($this->consumables as $tempconsumable) {
 			if($tempconsumable->name === $item["item_name"]) {
-				$this->log("A matching sumable " . $item["item_name"] . " already exists");
+				$this->log("A matching consumable " . $item["item_name"] . " already exists");
 				//TODO: Adjust quantity if different maybe?
 				return;
 			}
@@ -741,8 +738,10 @@ class ObjectImportCommand extends Command {
 		if(!$this->option("testrun")) {
 			if($consumable->save()) {
 				$this->log("Consumable " . $item["item_name"] . ' was created');
+				$this->comment("Consumable " . $item["item_name"] . ' was created');
+
 			} else {
-				$this->log('Something went wrong! Consumable ' . $item["item_name"] . ' not created');
+				$this->error('Consumable: ' . $consumable->getErrors());
 			}
 		} else {
 			$this->log('TEST RUN - Consumable ' . $item['item_name'] . ' not created');
@@ -773,7 +772,8 @@ class ObjectImportCommand extends Command {
 		array('email_format', null, InputOption::VALUE_REQUIRED, 'The format of the email addresses that should be generated. Options are firstname.lastname, firstname, filastname', null),
 		array('username_format', null, InputOption::VALUE_REQUIRED, 'The format of the username that should be generated. Options are firstname.lastname, firstname, filastname, email', null),
 		array('testrun', null, InputOption::VALUE_NONE, 'If set, will parse and output data without adding to database', null),
-		array('logfile', null, InputOption::VALUE_REQUIRED, 'The path to log output to.  storage/logs/importer.log by default' )
+		array('logfile', null, InputOption::VALUE_REQUIRED, 'The path to log output to.  storage/logs/importer.log by default', storage_path('logs/importer.log') ),
+		array('item-type', null, InputOption::VALUE_REQUIRED, 'Item Type To import.  Valid Options are Asset, Consumable, Or Accessory', 'Asset')
 	);
 
 	}
