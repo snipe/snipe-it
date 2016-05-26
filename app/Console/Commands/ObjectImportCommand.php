@@ -347,24 +347,25 @@ class ObjectImportCommand extends Command {
 			return;
 		foreach ($this->status_labels as $tempstatus) {
 			if ($tempstatus->name === $asset_statuslabel_name) {
-				$this->comment('A matching Status ' . $asset_statuslabel_name . ' already exists');
+				$this->log('A matching Status ' . $asset_statuslabel_name . ' already exists');
 				return $tempstatus;
 			}
 		}
-
 		$status = new Statuslabel();
 		$status->name = $asset_statuslabel_name;
-		$this->status_labels->add($status);
+
 
 		if(!$this->option('testrun')) {
 			if ($status->save()) {
-				$this->comment('Status ' . $asset_statuslabel_name . ' was created');
+				$this->status_labels->add($status);
+				$this->log('Status ' . $asset_statuslabel_name . ' was created');
 				return $status;
 			} else {
-				$this->comment('Something went wrong! Status ' . $asset_statuslabel_name . ' was NOT created');
+                $this->error('Status: ' . $status->getErrors());
 				return $status;
 			}
 		} else {
+			$this->status_labels->add($status);
 			return $status;
 		}
 	}
@@ -602,6 +603,10 @@ class ObjectImportCommand extends Command {
         $asset_serial = $this->array_smart_fetch($row, "serial number");
         $asset_tag = $this->array_smart_fetch($row, "asset tag");
         $asset_image = $this->array_smart_fetch($row, "image");
+        $asset_warranty_months = intval($this->array_smart_fetch($row, "warranty months"));
+        if(empty($asset_warranty_months)) {
+        	$asset_warranty_months = NULL;
+        }
         // Check for the asset model match and create it if it doesn't exist
         $asset_model = $this->createOrFetchAssetModel($row, $item["category"], $item["manufacturer"]);
 		$supplier = $this->createOrFetchSupplier($row);
@@ -621,7 +626,7 @@ class ObjectImportCommand extends Command {
 		}
 
 		if(empty($item["status_label"])) {
-			$this->comment("No status field found, defaulting to id 1.");
+			$this->log("No status field found, defaulting to id 1.");
 			$status_id = 1;
 		} else {
 			$status_id = $item["status_label"]->id;
