@@ -744,6 +744,9 @@ class AssetsController extends Controller
             return redirect()->to('hardware')->with('error', trans('general.insufficient_permissions'));
         }
 
+        // Check if the uploads directory exists.  If not, try to create it.
+        if(!file_exists($path))
+            mkdir($path, 0755);
         if ($handle = opendir($path)) {
 
             /* This is the correct way to loop over the directory. */
@@ -841,7 +844,7 @@ class AssetsController extends Controller
         }
 
         $output = new BufferedOutput;
-        Artisan::call('asset-import:csv', ['filename'=> config('app.private_uploads').'/imports/assets/'.$filename, '--email_format'=>'firstname.lastname', '--username_format'=>'firstname.lastname'], $output);
+        Artisan::call('snipeit:import', ['filename'=> config('app.private_uploads').'/imports/assets/'.$filename, '--email_format'=>'firstname.lastname', '--username_format'=>'firstname.lastname'], $output);
         $display_output =  $output->fetch();
         $file = config('app.private_uploads').'/imports/assets/'.str_replace('.csv', '', $filename).'-output-'.date("Y-m-d-his").'.txt';
         file_put_contents($file, $display_output);
