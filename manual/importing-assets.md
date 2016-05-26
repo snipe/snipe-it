@@ -18,8 +18,11 @@ php artisan snipeit:import path/to/your/file.csv --email_format=firstname.lastna
 
 | Option            | Values                                                                                    | Required |
 |-------------------|-------------------------------------------------------------------------------------------|----------|
-| `email_format`    | `firstname`, `firstname.lastname`, or `filastname` (for first initial, last name)         | Yes      |
-| `username_format` | `firstname`, `firstname.lastname`, `filastname` (for first initial, last name) or `email` | Yes      |
+| `email_format`    | `firstname`, `firstname.lastname`, or `filastname` (for first initial, last name)         | No       |
+| `username_format` | `firstname`, `firstname.lastname`, `filastname` (for first initial, last name) or `email` | No       |
+| `testrun`         | None. This option just parses data without saving it to database.                         | No       |
+| `item-type`       | `Asset`, `Accessory`, `Consumable` (defaults to Asset)                                    | No       |
+| `logfile`         | Any valid path.  Defaults to `snipe-it-directory/storage/logs/importer.log`               | No       |
 
 ## CSV Format
 The importer uses the first row of the CSV to determine what each column is.  The value in each cell must match the following table in order to be parsed.  This is not case sensative, and order does not matter.
@@ -31,25 +34,38 @@ Item Type, Name, Email, Username, Item Name, Category, Model Name, Manufacturer,
  **There should not be any blank lines at the end of the CSV.**
 
 [__Download a sample CSV with dummy data__](http://docs.snipeitapp.com/sample-assets.csv)
+### Common Fields
 | Field         | Example Data           | Required | Notes                                                                                                                                  |
 |---------------|------------------------|----------|----------------------------------------------------------------------------------------------------------------------------------------|
-| Item Type     | `Asset`                | No       | Valid options are `Asset`, `Accessory`, or `Consumable`.  If this field is blank, asset is assumed.                                    |
+| Item Name     | `Karen 2015`           | No       |                                                                                                                                        |
+| Category      | `Laptop`               | Yes      | Created if it doesn't exist                                                                                                            |
+| Location      | `San Diego`            | Yes      | Created if it doesn't exist                                                                                                            |
+| Purchase Date | `2015-01-12 07:30:30`  | No       | Can take any date format that can be translated by `strtotime()`                                                                       |
+| Purchase Cost | `2999.99`              | No       | Cost of asset                                                                                                                          |
+| 
+
+### Asset Exclusive Fields
+| Field         | Example Data           | Required | Notes                                                                                                                                  |
+|---------------|------------------------|----------|----------------------------------------------------------------------------------------------------------------------------------------|
 | Name          | `Firstname Lastname`   | No       | No commas. First name first, last name last                                                                                            |
 | Email         | `you@example.com`      | No       | If empty, will be generated using the `email_format` and `domain` you provide in your `app/config/production/app.php`                  |
 | Username      | `yourname.lastname`    | No       | If empty, will be generated using the `username_format` you provide in the import command                                              |
-| Item Name     | `Karen 2015`           | No       |                                                                                                                                        |
-| Category      | `Laptop`               | Yes      | Created if it doesn't exist                                                                                                            |
 | Model Name    | `MBP Retina 13-inch`   | Yes      | Created if it doesn't exist                                                                                                            |
 | Manufacturer  | `Apple`                | Yes      | Created if it doesn't exist                                                                                                            |
 | Model Number  | `MacbookPro12,1`       | No       |                                                                                                                                        |
 | Serial Number | `C20095805496869045H6` | No       |                                                                                                                                        |
 | Asset Tag     | `KJH90890`             | Yes      |                                                                                                                                        |
-| Location      | `San Diego`            | Yes      | Created if it doesn't exist                                                                                                            |
 | Notes         | `Karens old machine`   | No       |                                                                                                                                        |
-| Purchase Date | `2015-01-12 07:30:30`  | No       | Can take any date format that can be translated by `strtotime()`                                                                       |
-| Purchase Cost | `2999.99`              | No       | Cost of asset                                                                                                                          |
 | Image         | 'Filename.jpg'         | No       | If Present, this is the basename of the image assocaited with the item.  **Images must be manually uploaded to public/uploads/images** |
 | Status        | `Working`              | No       | A status label applied to the item.  Created if it doesn't exist.                                                                      |
+
+
+
+### Accessory/Consumable Exclusive Fields
+| Field         | Example Data           | Required | Notes                                                                                                                                  |
+|---------------|------------------------|----------|----------------------------------------------------------------------------------------------------------------------------------------|
+| Quantity      | `15`                   | No       |  Amount of item in stock.  Defaults to 1.                                                                                              |
+
 ## What It Does
 
 When you execute this command with a valid path to your CSV, the importer will:
