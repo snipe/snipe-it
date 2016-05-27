@@ -38,6 +38,7 @@ Item Type, Name, Email, Username, Item Name, Category, Model Name, Manufacturer,
 | Field         | Example Data           | Required | Notes                                                                                                                                  |
 |---------------|------------------------|----------|----------------------------------------------------------------------------------------------------------------------------------------|
 | Item Name     | `Karen 2015`           | No       |                                                                                                                                        |
+| Company       | `MacandDonalds`        | Yes      | Created if it doesn't exist                                                                                                            |
 | Category      | `Laptop`               | Yes      | Created if it doesn't exist                                                                                                            |
 | Location      | `San Diego`            | Yes      | Created if it doesn't exist                                                                                                            |
 | Purchase Date | `2015-01-12 07:30:30`  | No       | Can take any date format that can be translated by `strtotime()`                                                                       |
@@ -56,8 +57,9 @@ Item Type, Name, Email, Username, Item Name, Category, Model Name, Manufacturer,
 | Serial Number | `C20095805496869045H6` | No       |                                                                                                                                        |
 | Asset Tag     | `KJH90890`             | Yes      |                                                                                                                                        |
 | Notes         | `Karens old machine`   | No       |                                                                                                                                        |
-| Image         | 'Filename.jpg'         | No       | If Present, this is the basename of the image assocaited with the item.  **Images must be manually uploaded to public/uploads/images** |
+| Image         | `Filename.jpg`         | No       | If Present, this is the basename of the image assocaited with the item.  **Images must be manually uploaded to public/uploads/images** |
 | Status        | `Working`              | No       | A status label applied to the item.  Created if it doesn't exist.                                                                      |
+| Warranty      | `15`                   | No       | Time in months until warranty expires                                                                                                  |
 
 
 
