@@ -55,15 +55,18 @@ class ObjectImportCommand extends Command {
 	public function fire()
 	{
 		$filename = $this->argument('filename');
-		$logFile = $this->option('logfile');
-		\Log::useFiles($logFile);
 
-		if ($this->option('testrun')) {
-			$this->comment('====== TEST ONLY Asset Import for '.$filename.' ====');
-			$this->comment('============== NO DATA WILL BE WRITTEN ==============');
-		} else {
 
-			$this->comment('======= Importing Assets from '.$filename.' =========');
+		if(!$this->option('web-importer')) {
+			$logFile = $this->option('logfile');
+			\Log::useFiles($logFile);
+			if ($this->option('testrun')) {
+				$this->comment('====== TEST ONLY Asset Import for '.$filename.' ====');
+				$this->comment('============== NO DATA WILL BE WRITTEN ==============');
+			} else {
+
+				$this->comment('======= Importing Assets from '.$filename.' =========');
+			}
 		}
 
 		if (! ini_get("auto_detect_line_endings")) {
@@ -87,11 +90,12 @@ class ObjectImportCommand extends Command {
 		$this->manufacturers = Manufacturer::All(['name', 'id']);
 		$this->asset_models = AssetModel::All(['name','modelno','category_id','manufacturer_id', 'id']);
 		$this->companies = Company::All(['name', 'id']);
+		$this->status_labels = Statuslabel::All(['name', 'id']);
+		$this->suppliers = Supplier::All(['name', 'id']);
 		$this->assets = Asset::all(['asset_tag']);
-		$this->suppliers = Supplier::All(['name']);
 		$this->accessories = Accessory::All(['name']);
 		$this->consumables = Consumable::All(['name']);
-		$this->status_labels = Statuslabel::All(['name']);
+
 		// Loop through the records
 		DB::transaction(function() use (&$newarray){
 		$item_type = strtolower($this->option('item-type'));
@@ -124,6 +128,7 @@ class ObjectImportCommand extends Command {
 			$this->log('Purchase Date: ' . $item["purchase_date"]);
 			$this->log('Purchase Cost: ' . $item["purchase_cost"]);
 			$this->log('Company Name: ' . $item_company_name);
+			$this->log('Status: ' . $item_status_name);
 
 			$item["user"] = $this->createOrFetchUser($row);
 
@@ -149,17 +154,30 @@ class ObjectImportCommand extends Command {
 
 		}
 	});
+
 			$this->log('=====================================');
-			if(!empty($this->errors)) {
-				$this->comment("The following Errors were encountered.");
-				foreach($this->errors as $error)
-				{
-					$this->comment($error);
+			if(!$this->option('web-importer'))
+			{
+				if(!empty($this->errors)) {
+					$this->comment("The following Errors were encountered.");
+					foreach($this->errors as $asset => $error)
+					{
+						$this->comment('Error: Item: ' . $asset . 'failed validation: ' . json_encode($error));
+					}
+				} else {
+					$this->comment("All Items imported successfully!");
+				}
+			} else {
+				if(empty($this->errors))
+					return 0;
+				else {
+					$this->comment(json_encode($this->errors)); //Send a big string to the 
+					return 1;
 				}
 			}
 			$this->comment("");
 
-			return true;
+			return 2;
 	}
 	// Tracks the current item for error messages
 	private $current_assetId;
@@ -167,12 +185,11 @@ class ObjectImportCommand extends Command {
 	// An array of errors encountered while parsing
 	private $errors;
 
-	public function error($string, $verbosity = null)
+	public function jsonError($field, $errorString)
 	{
-		$errorString = 'Error: Item ' . $this->current_assetId . ': ' . $string;
-		$this->errors[] = $errorString;
+		$this->errors[$this->current_assetId] = array($field => $errorString);
 		if($this->option('verbose'))
-			parent::error($string, $verbosity);
+			parent::error($errorString);
 	}
 
 	/**
@@ -183,6 +200,8 @@ class ObjectImportCommand extends Command {
 	*/
 	private function log($string, $level = 'info')
 	{
+		if($this->option('web-importer'))
+			return;
 		if($level === 'warning')
 		{
 			\Log::warning($string);
@@ -252,7 +271,7 @@ class ObjectImportCommand extends Command {
 				$this->log('Asset Model ' . $asset_model_name . ' with model number ' . $asset_modelno . ' was created');
 				return $asset_model;
 			} else {
-                $this->error('Asset Model: ' . $asset_model->getErrors());
+                $this->jsonError('Asset Model', $asset_model->getErrors());
 				return $asset_model;
 			}
 		} else {
@@ -295,7 +314,7 @@ class ObjectImportCommand extends Command {
 				$this->log('Category ' . $asset_category . ' was created');
 				return $category;
 			} else {
-                $this->error('Category: ' . $category->getErrors());
+                $this->jsonError('Category', $category->getErrors());
                 return $category;
 			}
 		} else {
@@ -329,7 +348,7 @@ class ObjectImportCommand extends Command {
 				$this->log('Company ' . $asset_company_name . ' was created');
 				return $company;
 			} else {
-                $this->error('Company: ' . $company->getErrors());
+                $this->jsonError('Company', $company->getErrors());
 			}
 		} else {
 			$this->companies->add($company);
@@ -361,7 +380,7 @@ class ObjectImportCommand extends Command {
 				$this->log('Status ' . $asset_statuslabel_name . ' was created');
 				return $status;
 			} else {
-                $this->error('Status: ' . $status->getErrors());
+                $this->jsonError('Status', $status->getErrors());
 				return $status;
 			}
 		} else {
@@ -390,7 +409,7 @@ class ObjectImportCommand extends Command {
 
 		foreach ($this->manufacturers as $tempmanufacturer) {
 			if ($tempmanufacturer->name === $asset_mfgr) {
-				$this->log('Manufacturer ' . $asset_mfgr . ' already exists');
+				$this->log('{Manufacturer [' . $asset_mfgr . ' already exists') . ']}';
 				return $tempmanufacturer;
 			}
 		}
@@ -407,7 +426,7 @@ class ObjectImportCommand extends Command {
 				$this->log('Manufacturer ' . $manufacturer->name . ' was created');
 				return $manufacturer;
 			} else {
-                $this->error('Manufacturer: ' . $manufacturer->getErrors());
+                $this->jsonError('Manufacturer', $manufacturer->getErrors());
 				return $manufacturer;
 			}
 
@@ -451,7 +470,7 @@ class ObjectImportCommand extends Command {
 					$this->log('Location ' . $asset_location . ' was created');
 					return $location;
 				} else {
-					$this->error('Location: ' . $location->getErrors());
+					$this->jsonError('Location', $location->getErrors()) ;
 					return $location;
 				}
 			} else {
@@ -493,7 +512,7 @@ class ObjectImportCommand extends Command {
 				$this->log('Supplier ' . $supplier_name . ' was created');
 				return $supplier;
 			} else {
-                $this->error('Supplier: ' . $supplier->getErrors());
+                $this->jsonError('Supplier', $supplier->getErrors());
                 return $supplier;
 			}
 		} else {
@@ -579,7 +598,7 @@ class ObjectImportCommand extends Command {
                 if ($user->save()) {
                     $this->log('User '.$first_name.' created');
                 } else {
-                    $this->error('User: ' . $user->getErrors());
+                    $this->jsonError('User', $user->getErrors());
                 }
 
 			} else {
@@ -620,16 +639,17 @@ class ObjectImportCommand extends Command {
 		foreach ($this->assets as $tempasset) {
 			if ($tempasset->asset_tag === $asset_tag ) {
 				$this->log('A matching Asset ' . $asset_tag . ' already exists');
-				$this->comment('A matching Asset ' . $asset_tag . ' already exists');
+				// $this->comment('A matching Asset ' . $asset_tag . ' already exists');
 				return;
 			}
 		}
 
-		if(empty($item["status_label"])) {
+		if($item["status_label"]) {
+			$status_id = $item["status_label"]->id;
+
+		} else {
 			$this->log("No status field found, defaulting to id 1.");
 			$status_id = 1;
-		} else {
-			$status_id = $item["status_label"]->id;
 		}
 
 		$asset = new Asset();
@@ -640,8 +660,10 @@ class ObjectImportCommand extends Command {
 			$asset->purchase_date = NULL;
 		}
 
-		if (!empty($item_purchase_cost)) {
-			$asset->purchase_cost = number_format($item["purchase_cost"],2);
+		if (!empty($item["purchase_cost"])) {
+			//TODO How to generalize this for not USD?
+			$purchase_cost = substr($item["purchase_cost"],0,1) === '$' ? substr($item["purchase_cost"],1) : $item["purchase_cost"];
+			$asset->purchase_cost = number_format($purchase_cost,2);
 			$this->log("Asset cost parsed: " . $asset->purchase_cost);
 		} else {
 			$asset->purchase_cost = 0.00;
@@ -656,6 +678,7 @@ class ObjectImportCommand extends Command {
 		if($item["location"])
 			$asset->rtd_location_id = $item["location"]->id;
 		$asset->user_id = 1;
+		$this->log("status_id: " . $status_id);
 		$asset->status_id = $status_id;
 		if($item["company"])
 			$asset->company_id = $item["company"]->id;
@@ -669,9 +692,8 @@ class ObjectImportCommand extends Command {
 
 			if ($asset->save()) {
 				$this->log('Asset ' . $item["item_name"] . ' with serial number ' . $asset_serial . ' was created');
-				$this->comment('Asset ' . $item["item_name"] . ' with serial number ' . $asset_serial . ' was created');
 			} else {
-                $this->error('Asset: ' . $asset->getErrors());
+                $this->jsonError('Asset', $asset->getErrors());
 			}
 
 		} else {
@@ -732,10 +754,10 @@ class ObjectImportCommand extends Command {
 		if (!$this->option('testrun')) {
 			if ($accessory->save()) {
 				$this->log('Accessory ' . $item["item_name"] . ' was created');
-				$this->comment('Accessory ' . $item["item_name"] . ' was created');
+				// $this->comment('Accessory ' . $item["item_name"] . ' was created');
 
 			} else {
-				$this->error('Accessory: ' . $accessory->getErrors());
+				$this->jsonError('Accessory', $accessory->getErrors()) ;
 			}
 		} else {
 			$this->log('TEST RUN - Accessory  ' . $item["item_name"] . ' not created');
@@ -791,10 +813,10 @@ class ObjectImportCommand extends Command {
 		if(!$this->option("testrun")) {
 			if($consumable->save()) {
 				$this->log("Consumable " . $item["item_name"] . ' was created');
-				$this->comment("Consumable " . $item["item_name"] . ' was created');
+				// $this->comment("Consumable " . $item["item_name"] . ' was created');
 
 			} else {
-				$this->error('Consumable: ' . $consumable->getErrors());
+				$this->jsonError('Consumable', $consumable->getErrors());
 			}
 		} else {
 			$this->log('TEST RUN - Consumable ' . $item['item_name'] . ' not created');
@@ -826,7 +848,8 @@ class ObjectImportCommand extends Command {
 		array('username_format', null, InputOption::VALUE_REQUIRED, 'The format of the username that should be generated. Options are firstname.lastname, firstname, filastname, email', null),
 		array('testrun', null, InputOption::VALUE_NONE, 'If set, will parse and output data without adding to database', null),
 		array('logfile', null, InputOption::VALUE_REQUIRED, 'The path to log output to.  storage/logs/importer.log by default', storage_path('logs/importer.log') ),
-		array('item-type', null, InputOption::VALUE_REQUIRED, 'Item Type To import.  Valid Options are Asset, Consumable, Or Accessory', 'Asset')
+		array('item-type', null, InputOption::VALUE_REQUIRED, 'Item Type To import.  Valid Options are Asset, Consumable, Or Accessory', 'Asset'),
+		array('web-importer', null, InputOption::VALUE_NONE, 'Internal: packages output for use with the web importer')
 	);
 
 	}
