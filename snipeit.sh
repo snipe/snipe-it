@@ -342,7 +342,7 @@ case $distro in
 		service apache2 restart
 		;;
 	centos )
-	if [ "$version" == "6" ];
+	if [ "$version" == "6" ]; then
 		#####################################  Install for Centos/Redhat 6  ##############################################
 
 		webdir=/var/www/html
@@ -467,7 +467,6 @@ case $distro in
 		# firewall-cmd --reload
 
 		service httpd restart
-		;;
 		
 	elif [ "$version" == "7" ]; then
 		#####################################  Install for Centos/Redhat 7  ##############################################
@@ -586,8 +585,7 @@ case $distro in
 		# firewall-cmd --reload
 
 		systemctl restart httpd.service
-		;;
-		
+
 	else
 		echo "Unable to Handle Centos Version #.  Version Found: " $version
 		return 1
