@@ -46,7 +46,7 @@ if [ -f /etc/lsb-release ]; then
     distro="$(lsb_release -s -i )"
     version="$(lsb_release -s -r)"
 elif [ -f /etc/os-release ]; then
-    distro="$(. /etc/os-release && echo $ID $VERSION_ID)"
+    distro="$(. /etc/os-release && echo $ID)"
     version="$(. /etc/os-release && echo $VERSION_ID)"
 #Order is important here.  If /etc/os-release and /etc/centos-release exist, we're on centos 7.
 #If only /etc/centos-release exist, we're on centos6(or earlier).  Centos-release is less parsable,
@@ -75,15 +75,15 @@ echo ""
 shopt -s nocasematch
 case $distro in
         *Ubuntu*)
-                echo "  The installer has detected Ubuntu as the OS."
+                echo "  The installer has detected Ubuntu version $version as the OS."
                 distro=ubuntu
                 ;;
 		*Debian*)
-                echo "  The installer has detected Debian as the OS."
+                echo "  The installer has detected Debian version $version as the OS."
                 distro=debian
                 ;;
         *centos*|*redhat*)
-                echo "  The installer has detected $distro as the OS."
+                echo "  The installer has detected $distro version $version as the OS."
                 distro=centos
                 ;;
         *)
