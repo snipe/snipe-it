@@ -48,6 +48,12 @@ if [ -f /etc/lsb-release ]; then
 elif [ -f /etc/os-release ]; then
     distro="$(. /etc/os-release && echo $ID $VERSION_ID)"
     version="$(. /etc/os-release && echo $VERSION_ID)"
+#Order is important here.  If /etc/os-release and /etc/centos-release exist, we're on centos 7.
+#If only /etc/centos-release exist, we're on centos6(or earlier).  Centos-release is less parsable,
+#so lets assume that it's version 6 (Plus, who would be doing a new install of anything on centos5 at this point..)
+elif [ -f /etc/centos-release]; then
+	distro="Centos"
+	version="6"
 else
     distro="unsupported"
 fi
@@ -406,7 +412,6 @@ case $distro in
 
 		echo >> $apachefile ""
 		echo >> $apachefile ""
-		echo >> $apachefile "LoadModule rewrite_module modules/mod_rewrite.so"
 		echo >> $apachefile ""
 		echo >> $apachefile "<VirtualHost *:80>"
 		echo >> $apachefile "ServerAdmin webmaster@localhost"
@@ -451,12 +456,8 @@ case $distro in
 		curl -sS https://getcomposer.org/installer | php
 		php composer.phar install --no-dev --prefer-source
 
-		echo "##  Installing Snipe-IT"
-		php artisan app:install --env=production
-
 		# Change permissions on directories
-		sudo chmod -R 755 $webdir/$name/app/storage
-		sudo chmod -R 755 $webdir/$name/app/private_uploads
+		sudo chmod -R 755 $webdir/$name/storage
 		sudo chmod -R 755 $webdir/$name/public/uploads
 		sudo chown -R apache:apache $webdir/$name
 
