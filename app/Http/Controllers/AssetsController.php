@@ -744,6 +744,9 @@ class AssetsController extends Controller
             return redirect()->to('hardware')->with('error', trans('general.insufficient_permissions'));
         }
 
+        // Check if the uploads directory exists.  If not, try to create it.
+        if(!file_exists($path))
+            mkdir($path, 0755);
         if ($handle = opendir($path)) {
 
             /* This is the correct way to loop over the directory. */
@@ -840,14 +843,20 @@ class AssetsController extends Controller
             return redirect()->to('hardware')->with('error', trans('general.insufficient_permissions'));
         }
 
-        $output = new BufferedOutput;
-        Artisan::call('asset-import:csv', ['filename'=> config('app.private_uploads').'/imports/assets/'.$filename, '--email_format'=>'firstname.lastname', '--username_format'=>'firstname.lastname'], $output);
-        $display_output =  $output->fetch();
+        $return = Artisan::call('snipeit:import',
+                                ['filename'=> config('app.private_uploads').'/imports/assets/'.$filename,
+                                '--email_format'=>'firstname.lastname',
+                                '--username_format'=>'firstname.lastname',
+                                '--web-importer' => true
+            ]);
+        $display_output =  Artisan::output();
         $file = config('app.private_uploads').'/imports/assets/'.str_replace('.csv', '', $filename).'-output-'.date("Y-m-d-his").'.txt';
         file_put_contents($file, $display_output);
-
-
-        return redirect()->to('hardware')->with('success', 'Your file has been imported');
+        if( $return === 0) //Success
+            return redirect()->to('hardware')->with('success', trans('admin/hardware/message.import.success'));
+        else if( $return === 1) // Failure
+            return redirect()->back()->with('import_errors', json_decode($display_output))->with('error', trans('admin/hardware/message.import.error'));
+        dd("Shouldn't be here");
 
     }
 
