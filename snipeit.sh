@@ -213,7 +213,7 @@ case $distro in
 		echo "Creating Mysql Database and User."
 		echo "##  Please Input your MySQL/MariaDB root password: "
 		echo ""
-		sudo mysql -u root -p < $dbsetup
+		mysql -u root -p < $dbsetup
 		echo ""
 
 		#Install / configure composer
@@ -317,7 +317,7 @@ case $distro in
 		/usr/bin/mysql_secure_installation
 		echo "##  Creating MySQL Database and user. "
 		echo "##  Please Input your MySQL/MariaDB root password: "
-		sudo mysql -u root -p < $dbsetup
+		mysql -u root -p < $dbsetup
 
 		echo "##  Securing Mysql"
 
@@ -397,7 +397,7 @@ case $distro in
 
 		echo "##  Creating MySQL Database/User."
 		echo "##  Please Input your MySQL/MariaDB root password: "
-		mysql -u root < $dbsetup
+		mysql -u root -p < $dbsetup
 
 ##TODO make sure the apachefile doesnt exhist isnt already in there
 		#Create the new virtual host in Apache and enable rewrite
