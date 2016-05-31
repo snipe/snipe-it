@@ -66,7 +66,38 @@
                     </div>
                 </div>
             </div>
+ 
         </div>
+        @if (session()->has('import_errors'))
+        <div class="errors-table">
+        <div class="alert alert-warning">
+            <strong>Warning</strong> {{trans('admin/hardware/message.import.errorDetail')}}
+        </div>
+        <table class="table table-striped" id="errors-table">
+            <thead>
+                <th>Asset</th>
+                <th colspan="1">Field</th>
+                <th colspan ="1">Parameter</th>
+                <th colspan ="1">Errors</th>
+            </thead>
+            <tbody>
+                @foreach (session('import_errors') as $asset => $error)
+                <tr>
+                    <td> {{ $asset }}</td>
+
+                    @foreach ($error as $field => $values )
+                        <td> {{ $field }} </td>
+                        @foreach( $values as $fieldName=>$errorString)
+                                <td>{{$fieldName}}</td>
+                                <td>{{$errorString[0]}}</td>
+                        @endforeach
+                    @endforeach
+                </tr>
+                @endforeach
+            </tbody>
+        </table>
+        </div>
+        @endif
     </div>
 </div>
 @section('moar_scripts')
