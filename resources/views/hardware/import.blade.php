@@ -73,24 +73,21 @@
         <div class="alert alert-warning">
             <strong>Warning</strong> {{trans('admin/hardware/message.import.errorDetail')}}
         </div>
-        <table class="table table-striped" id="errors-table">
+        <table class="table table-striped table-bordered" id="errors-table">
             <thead>
                 <th>Asset</th>
-                <th colspan="1">Field</th>
-                <th colspan ="1">Parameter</th>
-                <th colspan ="1">Errors</th>
+                <th>Errors</th>
             </thead>
             <tbody>
                 @foreach (session('import_errors') as $asset => $error)
                 <tr>
                     <td> {{ $asset }}</td>
-
                     @foreach ($error as $field => $values )
-                        <td> {{ $field }} </td>
-                        @foreach( $values as $fieldName=>$errorString)
-                                <td>{{$fieldName}}</td>
-                                <td>{{$errorString[0]}}</td>
-                        @endforeach
+                        <td> <span><b>{{ $field }}:</b>
+                            @foreach( $values as $errorString)
+                                    <span>{{$errorString[0]}} </span>
+                            @endforeach
+                        </td>
                     @endforeach
                 </tr>
                 @endforeach
