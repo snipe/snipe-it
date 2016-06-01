@@ -10,16 +10,26 @@
          <!-- CSS -->
           <link rel="stylesheet" href="{{ asset('assets/css/bootstrap.min.css') }}">
           <!-- Font Awesome -->
-          <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+          <link rel="stylesheet" href="{{ asset('assets/css/font-awesome.min.css') }}">
           <!-- Theme style -->
           <link rel="stylesheet" href="{{ asset('assets/css/AdminLTE.min.css') }}">
           <link rel="stylesheet" href="{{ asset('assets/css/skins/skin-blue.css') }}">
-
-          <!-- bootstrap tables CSS -->
-
+        <link rel="stylesheet" href="{{ asset('assets/js/plugins/select2/select2.min.css') }}">
           <link rel="stylesheet" href="{{ elixir('assets/css/app.css') }}">
 
-          <script src="{{ asset('assets/js/jquery.js') }}"></script>
+
+
+
+
+        <script>
+            window.snipeit = {
+                settings: {
+                    "per_page": {{ \App\Models\Setting::getSettings()->per_page }}
+                }
+            };
+        </script>
+
+
 
         <style>
           td, th {
@@ -116,6 +126,12 @@
                   </div>
               </div>
           </div>
+          <script src="{{ asset(elixir('assets/js/all.js')) }}"></script>
+        <script>
+            $(function () {
+                $(".select2").select2();
+            });
+        </script>
 
     </body>
 </html>
