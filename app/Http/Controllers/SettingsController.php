@@ -16,7 +16,6 @@ use Crypt;
 use Mail;
 use App\Models\User;
 use App\Http\Requests\SetupUserRequest;
-use App\Http\Requests\SettingRequest;
 
 /**
  * This controller handles all actions related to Settings for
@@ -176,21 +175,24 @@ class SettingsController extends Controller
         $settings->alert_email = e(Input::get('email'));
         $settings->alerts_enabled = 1;
         $settings->brand = 1;
+        $settings->locale = 'en';
         $settings->default_currency = 'USD';
         $settings->user_id = 1;
+        $settings->email_domain = e(Input::get('email_domain'));
+        $settings->email_format = e(Input::get('email_format'));
 
-        if ((!$user->isValid('initial')) && (!$settings->isValid('initial'))) {
+
+        if ((!$user->isValid()) || (!$settings->isValid())) {
             return redirect()->back()->withInput()->withErrors($user->getErrors())->withErrors($settings->getErrors());
         } else {
-            $user->save();
-            $settings->save();
-
+            
             if (Input::get('email_creds')=='1') {
                 Mail::send(['text' => 'emails.firstadmin'], $data, function ($m) use ($data) {
                     $m->to($data['email'], $data['first_name']);
                     $m->subject('Your Snipe-IT credentials');
                 });
             }
+
 
             return redirect()->route('setup.done');
         }
@@ -288,7 +290,7 @@ class SettingsController extends Controller
     * @since [v1.0]
     * @return Redirect
     */
-    public function postEdit(SettingRequest $request)
+    public function postEdit()
     {
 
         // Check if the asset exists
@@ -338,6 +340,9 @@ class SettingsController extends Controller
         $setting->auto_increment_assets = e(Input::get('auto_increment_assets', '0'));
         $setting->alert_interval = e(Input::get('alert_interval'));
         $setting->alert_threshold = e(Input::get('alert_threshold'));
+        $setting->email_domain = e(Input::get('email_domain'));
+        $setting->email_format = e(Input::get('email_format'));
+        $setting->username_format = e(Input::get('username_format'));
 
 
         $setting->labels_per_page = e(Input::get('labels_per_page'));
