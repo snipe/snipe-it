@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use App\Http\Requests\Request;
 use App\Models\AssetModel;
-
+use Session;
 class AssetRequest extends Request
 {
     /**
@@ -53,6 +53,10 @@ class AssetRequest extends Request
 
     public function response(array $errors)
     {
-        return $this->redirector->back()->withInput()->withErrors($errors, $this->errorBag);
+        $this->session()->flash('errors', Session::get('errors', new \Illuminate\Support\ViewErrorBag)
+            ->put('default', new \Illuminate\Support\MessageBag($errors)));
+
+        return parent::response($errors);
+    //     return $this->redirector->back()->withInput()->withErrors($errors, $this->errorBag);
     }
 }

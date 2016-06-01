@@ -162,7 +162,6 @@ Route::group([ 'prefix' => 'api', 'middleware' => 'auth' ], function () {
         );
     });
 
-
 });
 
 /*

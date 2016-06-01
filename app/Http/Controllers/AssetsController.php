@@ -208,15 +208,21 @@ class AssetsController extends Controller
         }
 
         // Create the image (if one was chosen.)
-        if (Input::file('image')) {
-            $image = Input::file('image');
-            $file_name = str_random(25).".".$image->getClientOriginalExtension();
+        if (Input::has('image')) {
+            $image = Input::get('image');
+            $header = explode(';', $image, 2)[0];
+            $extension = substr( $header, strpos($header, '/')+1);
+            $image = substr( $image, strpos($image, ',')+1);
+
+            $file_name = str_random(25).".".$extension;
             $path = public_path('uploads/assets/'.$file_name);
-            Image::make($image->getRealPath())->resize(500, null, function ($constraint) {
+
+            //Currently resizing happens on Client.  Maybe use this for thumbnails in the future?
+            Image::make($image)->resize(500, 500, function ($constraint) {
                 $constraint->aspectRatio();
                 $constraint->upsize();
             })->save($path);
-                $asset->image = $file_name;
+            $asset->image = $file_name;
 
         }
 
@@ -233,11 +239,11 @@ class AssetsController extends Controller
                     $log = $logaction->logaction('checkout');
             }
             // Redirect to the asset listing page
-            return redirect()->to("hardware")->with('success', trans('admin/hardware/message.create.success'));
+            \Session::flash('success', trans('admin/hardware/message.create.success'));
+            return response()->json(['redirect_url' => route('hardware')]);
         }
 
-        return redirect()->back()->withInput()->withErrors($asset->getErrors());
-
+        return response()->json(['errors' => $asset->getErrors()]);
     }
 
     /**
@@ -362,11 +368,17 @@ class AssetsController extends Controller
         $asset->physical     = '1';
 
            // Update the image
-        if (Input::file('image')) {
-            $image = Input::file('image');
-            $file_name = str_random(25).".".$image->getClientOriginalExtension();
+          if (Input::has('image')) {
+            $image = Input::get('image');
+            $header = explode(';', $image, 2)[0];
+            $extension = substr( $header, strpos($header, '/')+1);
+            $image = substr( $image, strpos($image, ',')+1);
+
+            $file_name = str_random(25).".".$extension;
             $path = public_path('uploads/assets/'.$file_name);
-            Image::make($image->getRealPath())->resize(500, null, function ($constraint) {
+
+
+            Image::make($image)->resize(500, 500, function ($constraint) {
                 $constraint->aspectRatio();
                 $constraint->upsize();
             })->save($path);
