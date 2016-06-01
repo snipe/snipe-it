@@ -452,3 +452,23 @@ Form::macro('barcode_types', function ($name = "barcode_type", $selected = null,
     return $select;
 
 });
+
+Form::macro('username_format', function ($name = "username_format", $selected = null, $class = null) {
+
+    $formats = array(
+        'firstname.lastname' => trans('general.firstname_lastname_format'),
+        'firstname' => trans('general.first_name_format'),
+        'filastname' => trans('general.filastname_format'),
+
+    );
+
+    $select = '<select name="'.$name.'" class="'.$class.'" style="width: 100%">';
+    foreach ($formats as $format => $label) {
+        $select .= '<option value="'.$format.'"'.($selected == $format ? ' selected="selected"' : '').'>'.$label.'</option> '."\n";
+    }
+
+    $select .= '</select>';
+
+    return $select;
+
+});
