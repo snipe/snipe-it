@@ -26,15 +26,10 @@ php artisan asset-import:csv path/to/your/file.csv --email_format=firstname.last
 
 
 ## CSV Format
-The importer will be looking for a CSV in the format of:
-
-```
-Name (Firstname Lastname), Email, Username, Asset Name, Asset Category, Asset Model, Manufacturer, Asset Model Number, Asset Serial, Asset Tag, Location Name, Asset Notes, Purchase Date, Purchase Cost
-```
-
 The importer will ignore the first line of your CSV, so if you don't have a header row, you should add one. **There should not be any blank lines at the end of the CSV.**
 
-[__Download a sample CSV with dummy data__](http://docs.snipeitapp.com/sample-assets.csv)
+- [__Download a sample CSV template for v2.1.0__](http://docs.snipeitapp.com/sample-assets-2.1.csv)
+- [__Download a sample CSV with dummy data for v2.1.1__](http://docs.snipeitapp.com/sample-assets-2.1.1.csv)
 
 | Field   | Example Data | Required | Notes |
 | ------------- | ------------- |
@@ -52,6 +47,11 @@ The importer will ignore the first line of your CSV, so if you don't have a head
 |Asset Notes | `Karens old machine`| No | |
 |Purchase Date | `2015-01-12 07:30:30`| No | Can take any date format that can be translated by `strtotime()`|
 |Purchase Cost | `2999.99`| No | Cost of asset|
+|Company Name | `Google`| No | Name of the associated company. This is NOT for manufacturer or supplier, only for the sub-company within your organization. Do not populate this if you don't use company support. (ONLY available in v2.1.0 or higher.)|
+|Status | `Archived`| No | Name of the status label you wish to apply to this asset. (ONLY available in v2.1.1 or higher.)|
+|Warranty | `36`| No | Number of months for the warranty (ONLY available in v2.1.1 or higher.)|
+|Supplier | `Frys`| No | Name of the supplier for this asset. (ONLY available in v2.1.1 or higher.)|
+
 
 ## What It Does
 
