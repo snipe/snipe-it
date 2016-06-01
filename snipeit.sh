@@ -27,8 +27,9 @@ hostname="$(hostname)"
 fqdn="$(hostname --fqdn)"
 ans=default
 hosts=/etc/hosts
-file=master.zip
+file=v3.0-alpha2.zip #CHANGE THIS WHEN MASTER IS V3 AGAIN
 tmp=/tmp/$name
+fileName=snipe-it-3.0-alpha2
 
 rm -rf $tmp/
 mkdir $tmp
@@ -41,19 +42,22 @@ function isinstalled {
   fi
 }
 
+if [ -f /etc/lsb-release ]; then
+    distro="$(lsb_release -s -i )"
+    version="$(lsb_release -s -r)"
+elif [ -f /etc/os-release ]; then
+    distro="$(. /etc/os-release && echo $ID)"
+    version="$(. /etc/os-release && echo $VERSION_ID)"
+#Order is important here.  If /etc/os-release and /etc/centos-release exist, we're on centos 7.
+#If only /etc/centos-release exist, we're on centos6(or earlier).  Centos-release is less parsable,
+#so lets assume that it's version 6 (Plus, who would be doing a new install of anything on centos5 at this point..)
+elif [ -f /etc/centos-release]; then
+	distro="Centos"
+	version="6"
+else
+    distro="unsupported"
+fi
 
-#  Lets find what distro we are using and what version
-distro=$(. /etc/os-release && echo $ID)
-version=$(. /etc/os-release && echo $VERSION_ID) 
-# if grep -q centos <<<$distro; then
-# 	for f in $(find /etc -type f -maxdepth 1 \( ! -wholename /etc/os-release ! -wholename /etc/lsb-release -wholename /etc/\*release -o -wholename /etc/\*version \) 2> /dev/null);
-# 	do
-# 		distro="${f:5:${#f}-13}"
-# 	done;
-# 	if [ "$distro" = "centos" ] || [ "$distro" = "redhat" ]; then
-# 		distro+="$(rpm -q --qf "%{VERSION}" $(rpm -q --whatprovides redhat-release))"
-# 	fi
-# fi
 
 echo "
 	   _____       _                  __________
@@ -71,15 +75,15 @@ echo ""
 shopt -s nocasematch
 case $distro in
         *Ubuntu*)
-                echo "  The installer has detected Ubuntu as the OS."
+                echo "  The installer has detected Ubuntu version $version as the OS."
                 distro=ubuntu
                 ;;
 		*Debian*)
-                echo "  The installer has detected Debian as the OS."
+                echo "  The installer has detected Debian version $version as the OS."
                 distro=debian
                 ;;
         *centos*|*redhat*)
-                echo "  The installer has detected $distro as the OS."
+                echo "  The installer has detected $distro version $version as the OS."
                 distro=centos
                 ;;
         *)
@@ -153,26 +157,21 @@ case $distro in
 		echo "## Going to suppress more messages that you don't need to worry about. Please wait."
 		sudo apt-get -y install apache2 >> /var/log/snipeit-install.log 2>&1
 		sudo apt-get install -y git unzip php5 php5-mcrypt php5-curl php5-mysql php5-gd php5-ldap libapache2-mod-php5 curl >> /var/log/snipeit-install.log 2>&1
-		sudo service apache2 restart
-
-		#We already established MySQL root & user PWs, so we dont need to be prompted. Let's go ahead and install Apache, PHP and MySQL.
-		echo "##  Setting up LAMP."
-		#sudo DEBIAN_FRONTEND=noninteractive apt-get install -y lamp-server^ >> /var/log/snipeit-install.log 2>&1
 
 		#  Get files and extract to web dir
 		echo ""
 		echo "##  Downloading snipeit and extract to web directory."
 		wget -P $tmp/ https://github.com/snipe/snipe-it/archive/$file >> /var/log/snipeit-install.log 2>&1
 		unzip -qo $tmp/$file -d $tmp/
-		cp -R $tmp/snipe-it-master $webdir/$name
+		cp -R $tmp/$fileName $webdir/$name
 
 		##  TODO make sure apache is set to start on boot and go ahead and start it
 
 		#Enable mcrypt and rewrite
 		echo "##  Enabling mcrypt and rewrite"
-		sudo php5enmod mcrypt >> /var/log/snipeit-install.log 2>&1
+
+		sudo php5enmod mcrypt >> /var/log/snipeit-install.log 2>&1 
 		sudo a2enmod rewrite >> /var/log/snipeit-install.log 2>&1
-		sudo ls -al /etc/apache2/mods-enabled/rewrite.load >> /var/log/snipeit-install.log 2>&1
 
 		#Create a new virtual host for Apache.
 		echo "##  Create Virtual host for apache."
@@ -190,63 +189,52 @@ case $distro in
 		echo >> $apachefile "        CustomLog /var/log/apache2/access.log combined"
 		echo >> $apachefile "</VirtualHost>"
 
+
+		echo "## Configuring .env file."
+		cat > $webdir/$name/.env <<-EOF
+		#Created By Snipe-it Installer
+		APP_TIMEZONE=$(cat /etc/timezone)
+		DB_HOST=localhost
+		DB_DATABASE=snipeit
+		DB_USERNAME=snipeit
+		DB_PASSWORD=$mysqluserpw
+		APP_URL=http://$fqdn
+		APP_KEY=$random32
+		EOF
+
 		echo "##  Setting up hosts file."
 		echo >> $hosts "127.0.0.1 $hostname $fqdn"
 		a2ensite $name.conf >> /var/log/snipeit-install.log 2>&1
 
 		#Modify the Snipe-It files necessary for a production environment.
 		echo "##  Modify the Snipe-It files necessary for a production environment."
-		echo "	Setting up Timezone."
-		tzone=$(cat /etc/timezone);
-		sed -i "s,UTC,$tzone,g" $webdir/$name/app/config/app.php
-
-		echo "	Setting up bootstrap file."
-		sed -i "s,www.yourserver.com,$hostname,g" $webdir/$name/bootstrap/start.php
-
-		echo "	Setting up database file."
-		cp $webdir/$name/app/config/production/database.example.php $webdir/$name/app/config/production/database.php
-		sed -i "s,snipeit_laravel,snipeit,g" $webdir/$name/app/config/production/database.php
-		sed -i "s,travis,snipeit,g" $webdir/$name/app/config/production/database.php
-		sed -i "s,password'  => '',password'  => '$mysqluserpw',g" $webdir/$name/app/config/production/database.php
-
-		echo "	Setting up app file."
-		cp $webdir/$name/app/config/production/app.example.php $webdir/$name/app/config/production/app.php
-		sed -i "s,production.yourserver.com,$fqdn,g" $webdir/$name/app/config/production/app.php
-		sed -i "s,Change_this_key_or_snipe_will_get_ya,$random32,g" $webdir/$name/app/config/production/app.php
-		## from mtucker6784: Is there a particular reason we want end users to have debug mode on with a fresh install?
-		#sed -i "s,false,true,g" $webdir/$name/app/config/production/app.php
-
-		echo "	Setting up mail file."
-		cp $webdir/$name/app/config/production/mail.example.php $webdir/$name/app/config/production/mail.php
-
-		##  TODO make sure mysql is set to start on boot and go ahead and start it
-
-		#Change permissions on directories
-		echo "##  Seting permissions on web directory."
-		sudo chmod -R 755 $webdir/$name/app/storage
-		sudo chmod -R 755 $webdir/$name/app/private_uploads
-		sudo chmod -R 755 $webdir/$name/public/uploads
-		sudo chown -R www-data:www-data /var/www/
-		# echo "##  Finished permission changes."
-
-		echo "##  Input your MySQL/MariaDB root password: "
-		echo ""
-		sudo mysql -u root -p < $dbsetup
-		echo ""
 
 		echo "##  Securing Mysql"
-		echo "## I understand this is redundant. You don't need to change your root pw again if you don't want to."
 		# Have user set own root password when securing install
 		# and just set the snipeit database user at the beginning
 		/usr/bin/mysql_secure_installation
 
+		##  TODO make sure mysql is set to start on boot and go ahead and start it
+		
+		echo "Creating Mysql Database and User."
+		echo "##  Please Input your MySQL/MariaDB root password: "
+		echo ""
+		mysql -u root -p < $dbsetup
+		echo ""
+
 		#Install / configure composer
 		echo "##  Installing and configuring composer"
-		curl -sS https://getcomposer.org/installer | php
-		mv composer.phar /usr/local/bin/composer
 		cd $webdir/$name/
-		composer install --no-dev --prefer-source
-		php artisan app:install --env=production
+		curl -sS https://getcomposer.org/installer | php
+		php composer.phar install --no-dev --prefer-source
+
+		#Change permissions on directories
+		echo "##  Seting permissions on web directory."
+		sudo chmod -R 755 $webdir/$name/storage
+		sudo chmod -R 755 $webdir/$name/storage/private_uploads
+		sudo chmod -R 755 $webdir/$name/public/uploads
+		sudo chown -R www-data:www-data /var/www/
+		# echo "##  Finished permission changes."
 
 		echo "##  Restarting apache."
 		service apache2 restart
@@ -264,12 +252,11 @@ case $distro in
 		apachefile=/etc/apache2/sites-available/$name.conf
 		sudo apt-get update >> /var/log/snipeit-install.log 2>&1
 		sudo apt-get -y upgrade >> /var/log/snipeit-install.log 2>&1
-
 		echo "##  Installing packages."
 
 		#We already established MySQL root & user PWs, so we dont need to be prompted. Let's go ahead and install Apache, PHP and MySQL.
 		echo "##  Setting up LAMP."
-		sudo DEBIAN_FRONTEND=noninteractive apt-get install -y lamp-server^ >> /var/log/snipeit-install.log 2>&1
+		sudo DEBIAN_FRONTEND=noninteractive apt-get install -y lamp-server^ >> /var/log/snipeit-install.log 2>&1 
 
 		if [ "$version" == "16.04" ]; then
 			sudo apt-get install -y git unzip php php-mcrypt php-curl php-mysql php-gd php-ldap php-mbstring >> /var/log/snipeit-install.log 2>&1
@@ -284,13 +271,13 @@ case $distro in
 			echo "##  Enabling mcrypt and rewrite"
 			sudo php5enmod mcrypt >> /var/log/snipeit-install.log 2>&1
 			sudo a2enmod rewrite >> /var/log/snipeit-install.log 2>&1
-		#  Get files and extract to web dir
 		fi
+		#  Get files and extract to web dir
 		echo ""
 		echo "##  Downloading snipeit and extract to web directory."
 		wget -P $tmp/ https://github.com/snipe/snipe-it/archive/$file >> /var/log/snipeit-install.log 2>&1
 		unzip -qo $tmp/$file -d $tmp/
-		cp -R $tmp/snipe-it-master $webdir/$name
+		cp -R $tmp/$fileName $webdir/$name
 
 		##  TODO make sure apache is set to start on boot and go ahead and start it
 
@@ -316,65 +303,52 @@ case $distro in
 
 		echo "##  Setting up hosts file."
 		echo >> $hosts "127.0.0.1 $hostname $fqdn"
+
 		a2ensite $name.conf >> /var/log/snipeit-install.log 2>&1
 
-		#Modify the Snipe-It files necessary for a production environment.
-		echo "##  Modify the Snipe-It files necessary for a production environment."
-		echo "	Setting up Timezone."
-		tzone=$(cat /etc/timezone);
-		sed -i "s,UTC,$tzone,g" $webdir/$name/app/config/app.php
-
-		echo "	Setting up bootstrap file."
-		sed -i "s,www.yourserver.com,$hostname,g" $webdir/$name/bootstrap/start.php
-
-		echo "	Setting up database file."
-		cp $webdir/$name/app/config/production/database.example.php $webdir/$name/app/config/production/database.php
-		sed -i "s,snipeit_laravel,snipeit,g" $webdir/$name/app/config/production/database.php
-		sed -i "s,travis,snipeit,g" $webdir/$name/app/config/production/database.php
-		sed -i "s,password'  => '',password'  => '$mysqluserpw',g" $webdir/$name/app/config/production/database.php
-
-		echo "	Setting up app file."
-		cp $webdir/$name/app/config/production/app.example.php $webdir/$name/app/config/production/app.php
-		sed -i "s,production.yourserver.com,$fqdn,g" $webdir/$name/app/config/production/app.php
-		sed -i "s,Change_this_key_or_snipe_will_get_ya,$random32,g" $webdir/$name/app/config/production/app.php
-		## from mtucker6784: Is there a particular reason we want end users to have debug mode on with a fresh install?
-		#sed -i "s,false,true,g" $webdir/$name/app/config/production/app.php
-
-		echo "	Setting up mail file."
-		cp $webdir/$name/app/config/production/mail.example.php $webdir/$name/app/config/production/mail.php
+		cat > $webdir/$name/.env <<-EOF
+		#Created By Snipe-it Installer
+		APP_TIMEZONE=$(cat /etc/timezone)
+		DB_HOST=localhost
+		DB_DATABASE=snipeit
+		DB_USERNAME=snipeit
+		DB_PASSWORD=$mysqluserpw
+		APP_URL=http://$fqdn
+		APP_KEY=$random32
+		EOF
 
 		##  TODO make sure mysql is set to start on boot and go ahead and start it
 
-		#Change permissions on directories
-		echo "##  Seting permissions on web directory."
-		sudo chmod -R 755 $webdir/$name/app/storage
-		sudo chmod -R 755 $webdir/$name/app/private_uploads
-		sudo chmod -R 755 $webdir/$name/public/uploads
-		sudo chown -R www-data:www-data /var/www/
-		# echo "##  Finished permission changes."
-
-		echo "##  Input your MySQL/MariaDB root password: "
-		sudo mysql -u root -p < $dbsetup
+		# Setup Mysql, then run the command.
+		/usr/bin/mysql_secure_installation
+		echo "##  Creating MySQL Database and user. "
+		echo "##  Please Input your MySQL/MariaDB root password: "
+		mysql -u root -p < $dbsetup
 
 		echo "##  Securing Mysql"
 
 		# Have user set own root password when securing install
 		# and just set the snipeit database user at the beginning
-		/usr/bin/mysql_secure_installation
 
 		#Install / configure composer
 		echo "##  Installing and configuring composer"
-		curl -sS https://getcomposer.org/installer | php
-		mv composer.phar /usr/local/bin/composer
 		cd $webdir/$name/
-		composer install --no-dev --prefer-source
-		php artisan app:install --env=production
+		curl -sS https://getcomposer.org/installer  | php
+		php composer.phar install --no-dev --prefer-source
+
+		#Change permissions on directories
+		echo "##  Seting permissions on web directory."
+		sudo chmod -R 755 $webdir/$name/storage
+		sudo chmod -R 755 $webdir/$name/storage/private_uploads
+		sudo chmod -R 755 $webdir/$name/public/uploads
+		sudo chown -R www-data:www-data /var/www/$name
+		# echo "##  Finished permission changes."
 
 		echo "##  Restarting apache."
 		service apache2 restart
 		;;
 	centos )
-	if [ "$version" == "6" ];
+	if [ "$version" == "6" ]; then
 		#####################################  Install for Centos/Redhat 6  ##############################################
 
 		webdir=/var/www/html
@@ -417,18 +391,19 @@ case $distro in
 
 		wget -P $tmp/ https://github.com/snipe/snipe-it/archive/$file >> /var/log/snipeit-install.log 2>&1
 		unzip -qo $tmp/$file -d $tmp/
-		cp -R $tmp/snipe-it-master $webdir/$name
+		cp -R $tmp/$fileName $webdir/$name
 
 		# Make mariaDB start on boot and restart the daemon
 		echo "##  Starting the mariaDB server.";
 		chkconfig mysql on
 		/sbin/service mysql start
 
-		echo "##  Input your MySQL/MariaDB root password: "
-		mysql -u root < $dbsetup
-
 		echo "##  Securing mariaDB server.";
 		/usr/bin/mysql_secure_installation
+
+		echo "##  Creating MySQL Database/User."
+		echo "##  Please Input your MySQL/MariaDB root password: "
+		mysql -u root -p < $dbsetup
 
 ##TODO make sure the apachefile doesnt exhist isnt already in there
 		#Create the new virtual host in Apache and enable rewrite
@@ -437,7 +412,6 @@ case $distro in
 
 		echo >> $apachefile ""
 		echo >> $apachefile ""
-		echo >> $apachefile "LoadModule rewrite_module modules/mod_rewrite.so"
 		echo >> $apachefile ""
 		echo >> $apachefile "<VirtualHost *:80>"
 		echo >> $apachefile "ServerAdmin webmaster@localhost"
@@ -461,36 +435,20 @@ case $distro in
 		chkconfig httpd on
 		/sbin/service httpd start
 
-		#Modify the Snipe-It files necessary for a production environment.
-		echo "##  Modifying the Snipe-It files necessary for a production environment."
-		echo "	Setting up Timezone."
 		tzone=$(grep ZONE /etc/sysconfig/clock | tr -d '"' | sed 's/ZONE=//g');
-		sed -i "s,UTC,$tzone,g" $webdir/$name/app/config/app.php
+		echo "## Configuring .env file."
 
-		echo "	Setting up bootstrap file."
-		sed -i "s,www.yourserver.com,$hostname,g" $webdir/$name/bootstrap/start.php
+		cat > $webdir/$name/.env <<-EOF
+		#Created By Snipe-it Installer
+		APP_TIMEZONE=$tzone
+		DB_HOST=localhost
+		DB_DATABASE=snipeit
+		DB_USERNAME=snipeit
+		DB_PASSWORD=$mysqluserpw
+		APP_URL=http://$fqdn
+		APP_KEY=$random32
+		EOF
 
-		echo "	Setting up database file."
-		cp $webdir/$name/app/config/production/database.example.php $webdir/$name/app/config/production/database.php
-		sed -i "s,snipeit_laravel,snipeit,g" $webdir/$name/app/config/production/database.php
-		sed -i "s,travis,snipeit,g" $webdir/$name/app/config/production/database.php
-		sed -i "s,password'  => '',password'  => '$mysqluserpw',g" $webdir/$name/app/config/production/database.php
-
-		echo "	Setting up app file."
-		cp $webdir/$name/app/config/production/app.example.php $webdir/$name/app/config/production/app.php
-		sed -i "s,production.yourserver.com,$fqdn,g" $webdir/$name/app/config/production/app.php
-		sed -i "s,Change_this_key_or_snipe_will_get_ya,$random32,g" $webdir/$name/app/config/production/app.php
-		## from mtucker6784: Is there a particular reason we want end users to have debug mode on with a fresh install?
-		#sed -i "s,false,true,g" $webdir/$name/app/config/production/app.php
-
-		echo "	Setting up mail file."
-		cp $webdir/$name/app/config/production/mail.example.php $webdir/$name/app/config/production/mail.php
-
-		# Change permissions on directories
-		sudo chmod -R 755 $webdir/$name/app/storage
-		sudo chmod -R 755 $webdir/$name/app/private_uploads
-		sudo chmod -R 755 $webdir/$name/public/uploads
-		sudo chown -R apache:apache $webdir/$name
 
 		#Install / configure composer
 		echo "##  Configure composer"
@@ -498,8 +456,10 @@ case $distro in
 		curl -sS https://getcomposer.org/installer | php
 		php composer.phar install --no-dev --prefer-source
 
-		echo "##  Installing Snipe-IT"
-		php artisan app:install --env=production
+		# Change permissions on directories
+		sudo chmod -R 755 $webdir/$name/storage
+		sudo chmod -R 755 $webdir/$name/public/uploads
+		sudo chown -R apache:apache $webdir/$name
 
 #TODO detect if SELinux and firewall are enabled to decide what to do
 		#Add SELinux and firewall exception/rules. Youll have to allow 443 if you want ssl connectivity.
@@ -508,7 +468,6 @@ case $distro in
 		# firewall-cmd --reload
 
 		service httpd restart
-		;;
 		
 	elif [ "$version" == "7" ]; then
 		#####################################  Install for Centos/Redhat 7  ##############################################
@@ -541,21 +500,21 @@ case $distro in
 
 		wget -P $tmp/ https://github.com/snipe/snipe-it/archive/$file >> /var/log/snipeit-install.log 2>&1
 		unzip -qo $tmp/$file -d $tmp/
-		cp -R $tmp/snipe-it-master $webdir/$name
+		cp -R $tmp/$fileName $webdir/$name
 
 		# Make mariaDB start on boot and restart the daemon
 		echo "##  Starting the mariaDB server.";
 		systemctl enable mariadb.service
 		systemctl start mariadb.service
 
-		echo "##  Input your MySQL/MariaDB root password "
-		mysql -u root -p < $dbsetup
-
 		echo "##  Securing mariaDB server.";
 		echo "";
 		echo "";
 		/usr/bin/mysql_secure_installation
 
+		echo "##  Creating MySQL Database/User."
+		echo "##  Please Input your MySQL/MariaDB root password "
+		mysql -u root -p < $dbsetup
 
 ##TODO make sure the apachefile doesnt exhist isnt already in there
 		#Create the new virtual host in Apache and enable rewrite
@@ -589,43 +548,37 @@ case $distro in
 		systemctl enable httpd.service
 		systemctl restart httpd.service
 
-		#Modify the Snipe-It files necessary for a production environment.
-		echo "##  Modifying the Snipe-IT files necessary for a production environment."
-		echo "	Setting up Timezone."
+
 		tzone=$(timedatectl | gawk -F'[: ]' ' $9 ~ /zone/ {print $11}');
-		sed -i "s,UTC,$tzone,g" $webdir/$name/app/config/app.php
+		echo "## Configuring .env file."
 
-		echo "	Setting up bootstrap file."
-		sed -i "s,www.yourserver.com,$hostname,g" $webdir/$name/bootstrap/start.php
+		cat > $webdir/$name/.env <<-EOF
+		#Created By Snipe-it Installer
+		APP_TIMEZONE=$tzone
+		DB_HOST=localhost
+		DB_DATABASE=snipeit
+		DB_USERNAME=snipeit
+		DB_PASSWORD=$mysqluserpw
+		APP_URL=http://$fqdn
+		APP_KEY=$random32
 
-		echo "	Setting up database file."
-		cp $webdir/$name/app/config/production/database.example.php $webdir/$name/app/config/production/database.php
-		sed -i "s,snipeit_laravel,snipeit,g" $webdir/$name/app/config/production/database.php
-		sed -i "s,travis,snipeit,g" $webdir/$name/app/config/production/database.php
-		sed -i "s,password'  => '',password'  => '$mysqluserpw',g" $webdir/$name/app/config/production/database.php
-
-		echo "	Setting up app file."
-		cp $webdir/$name/app/config/production/app.example.php $webdir/$name/app/config/production/app.php
-		sed -i "s,production.yourserver.com,$fqdn,g" $webdir/$name/app/config/production/app.php
-		sed -i "s,Change_this_key_or_snipe_will_get_ya,$random32,g" $webdir/$name/app/config/production/app.php
-		sed -i "s,false,true,g" $webdir/$name/app/config/production/app.php
-
-		echo "	Setting up mail file."
-		cp $webdir/$name/app/config/production/mail.example.php $webdir/$name/app/config/production/mail.php
+		EOF
 
 		# Change permissions on directories
-		sudo chmod -R 755 $webdir/$name/app/storage
-		sudo chmod -R 755 $webdir/$name/app/private_uploads
-		sudo chmod -R 755 $webdir/$name/public/uploads
-		sudo chown -R apache:apache $webdir/$name
+
 
 		#Install / configure composer
 		cd $webdir/$name
 
 		curl -sS https://getcomposer.org/installer | php
 		php composer.phar install --no-dev --prefer-source
-		php artisan app:install --env=production
 
+		sudo chmod -R 755 $webdir/$name/storage
+		sudo chmod -R 755 $webdir/$name/storage/private_uploads
+		sudo chmod -R 755 $webdir/$name/public/uploads
+		sudo chown -R apache:apache $webdir/$name
+		# Make SeLinux happy
+		sudo chcon -R -h -t httpd_sys_script_rw_t $webdir/$name/
 #TODO detect if SELinux and firewall are enabled to decide what to do
 		#Add SELinux and firewall exception/rules. Youll have to allow 443 if you want ssl connectivity.
 		# chcon -R -h -t httpd_sys_script_rw_t $webdir/$name/
@@ -633,8 +586,7 @@ case $distro in
 		# firewall-cmd --reload
 
 		systemctl restart httpd.service
-		;;
-		
+
 	else
 		echo "Unable to Handle Centos Version #.  Version Found: " $version
 		return 1
@@ -642,7 +594,7 @@ case $distro in
 esac
 
 echo ""
-echo "  ***If you want mail capabilities, open $webdir/$name/app/config/production/mail.php and fill out the attributes***"
+echo "  ***If you want mail capabilities, edit $webdir/$name/.env and edit based on .env.example***"
 echo ""
 echo "  ***Open http://$fqdn to login to Snipe-IT.***"
 echo ""
