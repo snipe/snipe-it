@@ -37,7 +37,7 @@ input[type='text'][disabled], input[disabled], textarea[disabled], input[readonl
 <div class="col-md-8 col-md-offset-2">
 
 
-<form class="form-horizontal" method="post" action="" autocomplete="off">
+<form class="form-horizontal" method="post" action="" autocomplete="off" id="userForm">
 <!-- CSRF Token -->
 <input type="hidden" name="_token" value="{{ csrf_token() }}">
 

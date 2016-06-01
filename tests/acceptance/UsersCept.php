@@ -21,13 +21,13 @@ $I->am('logged in admin');
 $I->wantTo('ensure that you get errors when you submit an incomplete form');
 $I->lookForwardTo('seeing errors display');
 $I->click(['link' => 'Create New']);
-$I->amOnPage('/admin/users/create');
+$I->amOnPage('admin/users/create');
 $I->dontSee('Create User', '.page-header');
 $I->see('Create User', 'h1.pull-left');
 
 /* Submit form and expect errors */
 $I->click(['name' => 'email']);
-$I->submitForm('.form-horizontal', [
+$I->submitForm('#userForm', [
     'email' => 'me@example.com',
 ]);
 $I->seeElement('.alert-danger');
@@ -37,11 +37,11 @@ $I->dontSeeInSource('&lt;br&gt;&lt;');
 /* Submit form and expect errors */
 $I->click(['name' => 'email']);
 $I->click(['name' => 'username']);
-$I->submitForm('.form-horizontal', [
-    'email' => 'me@example.com',
+$I->submitForm('#userForm', [
+    'email' => \App\Helpers\Helper::generateRandomString(15).'@example.com',
     'first_name' => 'Joe',
     'last_name' => 'Smith',
-    'username' => 'joesmith',
+    'username' => \App\Helpers\Helper::generateRandomString(15),
 ]);
 
 $I->seeElement('.alert-danger');
