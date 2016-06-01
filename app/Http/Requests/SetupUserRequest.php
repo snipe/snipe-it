@@ -24,14 +24,14 @@ class SetupUserRequest extends Request
     public function rules()
     {
         return [
+          'site_name' => 'required|string|min:1',
           'first_name' => 'required|string|min:1',
           'last_name' => 'required|string|min:1',
-          'location_id' => 'numeric',
           'username' => 'required|string|min:2|unique:users,username,NULL,deleted_at',
           'email' => 'email|unique:users,email',
           'password' => 'required|min:6',
           'password_confirm' => 'required|min:6|same:password',
-          'company_id' => 'integer',
+          'email_domain' => 'required|min:4',
         ];
     }
 
