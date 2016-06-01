@@ -123,6 +123,11 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
       return $this->first_name . " " . $this->last_name;
     }
 
+    public function getCompleteNameAttribute()
+    {
+      return $this->last_name . ", " . $this->first_name . " (" . $this->username . ")";
+    }
+
   /**
    * Returns the user Gravatar image url.
    *
