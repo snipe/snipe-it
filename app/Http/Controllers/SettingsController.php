@@ -185,7 +185,7 @@ class SettingsController extends Controller
         if ((!$user->isValid()) || (!$settings->isValid())) {
             return redirect()->back()->withInput()->withErrors($user->getErrors())->withErrors($settings->getErrors());
         } else {
-            
+
             if (Input::get('email_creds')=='1') {
                 Mail::send(['text' => 'emails.firstadmin'], $data, function ($m) use ($data) {
                     $m->to($data['email'], $data['first_name']);
@@ -294,7 +294,7 @@ class SettingsController extends Controller
     {
 
         // Check if the asset exists
-        if (is_null($setting = Setting::find(1))) {
+        if (is_null($setting = Setting::first())) {
             // Redirect to the asset management page with error
             return redirect()->to('admin')->with('error', trans('admin/settings/message.update.error'));
         }
@@ -313,8 +313,7 @@ class SettingsController extends Controller
                 $setting->logo = $file_name;
             }
         }
-
-        $setting->id = '1';
+        
 
         if (config('app.lock_passwords')==false) {
             $setting->site_name = e(Input::get('site_name'));
