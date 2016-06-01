@@ -26,6 +26,25 @@ Create a User ::
                 </div>
               </div>
 
+              <!-- email domain -->
+
+              <div class="row">
+                <div class="form-group col-lg-6 {{ $errors->has('email_domain') ? 'error' : '' }}">
+                  {{ Form::label('email_domain', trans('general.email_domain')) }}
+                  {{ Form::text('email_domain', Input::old('email_domain'), array('class' => 'form-control','placeholder' => 'example.com')) }}
+                  <span class="help-block">{{ trans('general.email_domain_help')  }}</span>
+
+                  {!! $errors->first('email_domain', '<span class="alert-msg">:message</span>') !!}
+                </div>
+
+                <!-- email format  -->
+                <div class="form-group col-lg-6 {{ $errors->has('email_format') ? 'error' : '' }}">
+                  {{ Form::label('email_format', trans('general.email_format')) }}
+                  {!! Form::username_format('email_format', Input::old('email_format', 'filastname'), 'select2') !!}
+                  {!! $errors->first('email_format', '<span class="alert-msg">:message</span>') !!}
+                </div>
+              </div>
+
 
               <!-- first name -->
 

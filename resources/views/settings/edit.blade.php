@@ -91,7 +91,7 @@
                     {{ Form::checkbox('full_multiple_companies_support', '1', Input::old('full_multiple_companies_support', $setting->full_multiple_companies_support),array('class' => 'minimal')) }}
                     {{ trans('admin/settings/general.full_multiple_companies_support_text') }}
                     {!! $errors->first('full_multiple_companies_support', '<span class="alert-msg">:message</span>') !!}
-                    <p class="help-inline">{{ trans('admin/settings/general.full_multiple_companies_support_help_text') }}</p>
+                    <p class="help-block">{{ trans('admin/settings/general.full_multiple_companies_support_help_text') }}</p>
                   </div>
                 </div>
                 <!-- /.form-group -->
@@ -131,6 +131,44 @@
                   <div class="col-md-9">
                     {{ Form::text('default_currency', Input::old('default_currency', $setting->default_currency), array('class' => 'form-control','placeholder' => 'USD', 'maxlength'=>'3', 'style'=>'width: 60px;')) }}
                     {!! $errors->first('default_currency', '<span class="alert-msg">:message</span>') !!}
+                  </div>
+                </div>
+
+                <!-- Email domain -->
+                <div class="form-group {{ $errors->has('email_domain') ? 'error' : '' }}">
+                  <div class="col-md-3">
+                    {{ Form::label('email_domain', trans('general.email_domain')) }}
+                  </div>
+                  <div class="col-md-9">
+                    {{ Form::text('email_domain', Input::old('email_domain', $setting->email_domain), array('class' => 'form-control','placeholder' => 'example.com')) }}
+                    <span class="help-block">{{ trans('general.email_domain_help')  }}</span>
+
+                    {!! $errors->first('email_domain', '<span class="alert-msg">:message</span>') !!}
+                  </div>
+                </div>
+
+
+                <!-- Email format -->
+                <div class="form-group {{ $errors->has('email_format') ? 'error' : '' }}">
+                  <div class="col-md-3">
+                    {{ Form::label('email_format', trans('general.email_format')) }}
+                  </div>
+                  <div class="col-md-9">
+                    {!! Form::username_format('email_format', Input::old('email_format', $setting->email_format), 'select2') !!}
+
+                    {!! $errors->first('email_format', '<span class="alert-msg">:message</span>') !!}
+                  </div>
+                </div>
+
+                <!-- Username format -->
+                <div class="form-group {{ $errors->has('username_format') ? 'error' : '' }}">
+                  <div class="col-md-3">
+                    {{ Form::label('username_format', trans('general.username_format')) }}
+                  </div>
+                  <div class="col-md-9">
+                    {!! Form::username_format('username_format', Input::old('username_format', $setting->username_format), 'select2') !!}
+
+                    {!! $errors->first('username_format', '<span class="alert-msg">:message</span>') !!}
                   </div>
                 </div>
 
@@ -210,7 +248,7 @@
                       {{ Form::textarea('custom_css', Input::old('custom_css', $setting->custom_css), array('class' => 'form-control','placeholder' => 'Add your custom CSS')) }}
                       {!! $errors->first('custom_css', '<span class="alert-msg">:message</span>') !!}
                     @endif
-                   <p class="help-inline">{{ trans('admin/settings/general.custom_css_help') }}</p>
+                   <p class="help-block">{{ trans('admin/settings/general.custom_css_help') }}</p>
                   </div>
                 </div>
 
@@ -329,7 +367,7 @@
                     </div>
 
                 @else
-                  <span class="help-inline col-md-offset-3 col-md-12">
+                  <span class="help-block col-md-offset-3 col-md-12">
                     {{ trans('admin/settings/general.php_gd_warning') }}
                     <br>
                     {{ trans('admin/settings/general.php_gd_info') }}
@@ -371,7 +409,7 @@
                     {!! $errors->first('qr_text', '<span class="alert-msg">:message</span>') !!}
                   @else
                     {{ Form::text('qr_text', Input::old('qr_text', $setting->qr_text), array('class' => 'form-control', 'disabled'=>'disabled','placeholder' => 'Property of Your Company')) }}
-                    <p class="help-inline">{{ trans('admin/settings/general.qr_help') }}</p>
+                    <p class="help-block">{{ trans('admin/settings/general.qr_help') }}</p>
                   @endif
                   </div>
                 </div>
@@ -554,8 +592,8 @@
                 <div class="col-md-12">
                   {{ Form::textarea('default_eula_text', Input::old('default_eula_text', $setting->default_eula_text), array('class' => 'form-control','placeholder' => 'Add your default EULA text')) }}
                   {!! $errors->first('default_eula_text', '<span class="alert-msg">:message</span>') !!}
-                  <p class="help-inline">{{ trans('admin/settings/general.default_eula_help_text') }}</p>
-                  <p class="help-inline">{!! trans('admin/settings/general.eula_markdown') !!}</p>
+                  <p class="help-block">{{ trans('admin/settings/general.default_eula_help_text') }}</p>
+                  <p class="help-block">{!! trans('admin/settings/general.eula_markdown') !!}</p>
                 </div>
               </div>
 
@@ -577,7 +615,7 @@
             </div>
           <div id="collapseFive" class="box-collapse collapse" role="tabbox" aria-labelledby="headingFive">
             <div class="box-body">
-              <p class="help-inline">{!! trans('admin/settings/general.slack_integration_help',array('slack_link' => 'https://my.slack.com/services/new/incoming-webhook')) !!}</p>
+              <p class="help-block">{!! trans('admin/settings/general.slack_integration_help',array('slack_link' => 'https://my.slack.com/services/new/incoming-webhook')) !!}</p>
 
               <!-- slack endpoint -->
               <div class="form-group {{ $errors->has('slack_endpoint') ? 'error' : '' }}">
@@ -661,7 +699,7 @@
                     {{ Form::checkbox('ldap_server_cert_ignore', '1', Input::old('ldap_server_cert_ignore', $setting->ldap_server_cert_ignore),array('class' => 'minimal')) }}
                     {{ trans('admin/settings/general.ldap_server_cert_ignore') }}
                     {!! $errors->first('ldap_server_cert_ignore', '<span class="alert-msg">:message</span>') !!}
-                    <p class="help-inline">{{ trans('admin/settings/general.ldap_server_cert_help') }}</p>
+                    <p class="help-block">{{ trans('admin/settings/general.ldap_server_cert_help') }}</p>
                   </div>
               </div>
 
