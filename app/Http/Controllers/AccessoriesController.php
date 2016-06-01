@@ -313,6 +313,7 @@ class AccessoriesController extends Controller
 
         $logaction = new Actionlog();
         $logaction->accessory_id = $accessory->id;
+        $logaction->asset_id = 0;
         $logaction->checkedout_to = $accessory->assigned_to;
         $logaction->asset_type = 'accessory';
         $logaction->location_id = $user->location_id;

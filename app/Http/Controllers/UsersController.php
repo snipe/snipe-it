@@ -657,13 +657,7 @@ class UsersController extends Controller
 
             $location_list = Helper::locationsList();
             $company_list = Helper::companyList();
-            $manager_list = array('' => 'Select a User') + DB::table('users')
-                            ->select(DB::raw('concat(last_name,", ",first_name," (",email,")") as full_name, id'))
-                            ->whereNull('deleted_at')
-                            ->where('id', '!=', $id)
-                            ->orderBy('last_name', 'asc')
-                            ->orderBy('first_name', 'asc')
-                            ->lists('full_name', 'id');
+            $manager_list = Helper::managerList();
 
             // Show the page
             return View::make('users/edit', compact('groups', 'userGroups', 'permissions', 'userPermissions'))
