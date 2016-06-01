@@ -156,6 +156,7 @@ class LicensesController extends Controller
 
             $insertedId = $license->id;
           // Save the license seat data
+            DB::transaction(function() use (&$insertedId,&$license) {
             for ($x=0; $x<$license->seats; $x++) {
                 $license_seat = new LicenseSeat();
                 $license_seat->license_id       = $insertedId;
@@ -164,6 +165,7 @@ class LicensesController extends Controller
                 $license_seat->notes            = null;
                 $license_seat->save();
             }
+        });
 
 
           // Redirect to the new license page
@@ -435,40 +437,13 @@ class LicensesController extends Controller
         }
 
         // Get the dropdown of users and then pass it to the checkout view
-         $users_list = array('' => 'Select a User') + DB::table('users')->select(DB::raw('concat(last_name,", ",first_name," (",username,")") as full_name, id'))->whereNull('deleted_at')->orderBy('last_name', 'asc')->orderBy('first_name', 'asc')->lists('full_name', 'id');
+        $users_list = Helper::usersList();
 
+        $assets = Company::scopeCompanyables(Asset::all(), 'assets.company_id')->lists('detailed_name', 'id');
 
-        // Left join to get a list of assets and some other helpful info
-        $asset = DB::table('assets')
-            ->leftJoin('users', 'users.id', '=', 'assets.assigned_to')
-            ->leftJoin('models', 'assets.model_id', '=', 'models.id')
-            ->select(
-                'assets.id',
-                'assets.name',
-                'first_name',
-                'last_name',
-                'asset_tag',
-                DB::raw('concat(first_name," ",last_name) as full_name, assets.id as id, models.name as modelname')
-            )
-            ->whereNull('assets.deleted_at')
-            ->get();
-
-            $asset_array = json_decode(json_encode($asset), true);
-            $asset_element[''] = 'Please select an asset';
-
-            // Build a list out of the data results
-        for ($x=0; $x<count($asset_array); $x++) {
-
-            if ($asset_array[$x]['full_name']!='') {
-                $full_name = ' ('.$asset_array[$x]['full_name'].') '.$asset_array[$x]['modelname'];
-            } else {
-                $full_name = ' (Unassigned) '.$asset_array[$x]['modelname'];
-            }
-            $asset_element[$asset_array[$x]['id']] = $asset_array[$x]['asset_tag'].' - '.$asset_array[$x]['name'].$full_name;
-
-        }
-
-        return View::make('licenses/checkout', compact('licenseseat'))->with('users_list', $users_list)->with('asset_list', $asset_element);
+        return View::make('licenses/checkout', compact('licenseseat'))
+        ->with('users_list', $users_list)
+        ->with('asset_list', $assets);
 
     }
 
@@ -525,8 +500,8 @@ class LicensesController extends Controller
                 // Redirect to the asset management page with error
                 return redirect()->to('admin/licenses')->with('error', trans('admin/licenses/message.asset_does_not_exist'));
             }
-
-            if (($is_asset_id->assigned_to!=$assigned_to) && ($assigned_to!='')) {
+            $was_assigned_to = $is_asset_id->assigned_to;
+            if (($was_assigned_to!=$assigned_to) && !is_null($was_assigned_to) && ($was_assigned_to != '')) {
                 //echo 'asset assigned to: '.$is_asset_id->assigned_to.'<br>license assigned to: '.$assigned_to;
                 return redirect()->to('admin/licenses')->with('error', trans('admin/licenses/message.owner_doesnt_match_asset'));
             }

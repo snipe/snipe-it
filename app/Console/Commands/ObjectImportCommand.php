@@ -348,7 +348,7 @@ class ObjectImportCommand extends Command {
 				$this->log('Company ' . $asset_company_name . ' was created');
 				return $company;
 			} else {
-                $this->jsonError('Company', $company->getErrors());
+                $this->log('Company', $company->getErrors());
 			}
 		} else {
 			$this->companies->add($company);
@@ -470,7 +470,7 @@ class ObjectImportCommand extends Command {
 					$this->log('Location ' . $asset_location . ' was created');
 					return $location;
 				} else {
-					$this->jsonError('Location', $location->getErrors()) ;
+					$this->log('Location', $location->getErrors()) ;
 					return $location;
 				}
 			} else {
@@ -512,7 +512,7 @@ class ObjectImportCommand extends Command {
 				$this->log('Supplier ' . $supplier_name . ' was created');
 				return $supplier;
 			} else {
-                $this->jsonError('Supplier', $supplier->getErrors());
+                $this->log('Supplier', $supplier->getErrors());
                 return $supplier;
 			}
 		} else {
