@@ -54,6 +54,12 @@
     @if (\App\Models\Setting::getSettings()->custom_css)
         {{ \App\Models\Setting::getSettings()->show_custom_css() }}
     @endif
+    @media (max-width: 400px) {
+      .navbar-left {
+       margin: 2px;
+      }
+
+    }
     </style>
 
     <script>
@@ -85,84 +91,77 @@
           <a href="#" style="color: white" class="sidebar-toggle btn btn-white" data-toggle="offcanvas" role="button">
             <span class="sr-only">Toggle navigation</span>
           </a>
-
+          <ul class="nav navbar-nav navbar-left">
+              <li class="left-navblock">
+                  <div class="pull-left">
+                 @if (\App\Models\Setting::getSettings()->brand == '3')
+                      <a class="logo navbar-brand no-hover" href="{{ config('app.url') }}">
+                          <img class="navbar-brand-img" src="{{ config('app.url') }}/uploads/{{ \App\Models\Setting::getSettings()->logo }}">
+                          {{ \App\Models\Setting::getSettings()->site_name }}
+                      </a>
+                  @elseif (\App\Models\Setting::getSettings()->brand == '2')
+                      <a class="logo navbar-brand no-hover" href="{{ config('app.url') }}">
+                          <img class="navbar-brand-img" src="{{ config('app.url') }}/uploads/{{ \App\Models\Setting::getSettings()->logo }}">
+                      </a>
+                  @else
+                      <a class="logo no-hover" href="{{ config('app.url') }}">
+                          {{ \App\Models\Setting::getSettings()->site_name }}
+                      </a>
+                  @endif
+                  </div>
+              </li>
+            </ul> 
 
           <!-- Navbar Right Menu -->
-          <div class="navbar-custom-menu">
-            <ul class="nav navbar-nav">
-                <!-- Sidebar toggle button-->
-                <li>
-                  <a href="#" style="color: white; float: right;" class="sidebar-toggle-mobile visible-xs btn btn-white pull-right" data-toggle="offcanvas" role="button">
-                  <span class="sr-only">Toggle navigation</span>
-                  <i class="fa fa-bars"></i>
-                  </a>
-                </li>
-                <div class="left-navblock">
-                    <div class="pull-left">
-                   @if (\App\Models\Setting::getSettings()->brand == '3')
-                        <a class="logo navbar-brand no-hover" href="{{ config('app.url') }}">
-                            <img class="navbar-brand-img" src="{{ config('app.url') }}/uploads/{{ \App\Models\Setting::getSettings()->logo }}">
-                            {{ \App\Models\Setting::getSettings()->site_name }}
-                        </a>
-                    @elseif (\App\Models\Setting::getSettings()->brand == '2')
-                        <a class="logo navbar-brand no-hover" href="{{ config('app.url') }}">
-                            <img class="navbar-brand-img" src="{{ config('app.url') }}/uploads/{{ \App\Models\Setting::getSettings()->logo }}">
-                        </a>
-                    @else
-                        <a class="logo no-hover" href="{{ config('app.url') }}">
-                            {{ \App\Models\Setting::getSettings()->site_name }}
-                        </a>
-                    @endif
-                    </div>
-                  </div>
+            <div class="navbar-custom-menu">
+              <ul class="nav navbar-nav">
+                @if (Auth::user()->hasAccess('admin'))
+                  @if (!Request::is('/'))
+                  <li {!! (Request::is('hardware*') ? ' class="active"' : '') !!}>
+                      <a href="{{ URL::to('hardware') }}">
+                          <i class="fa fa-barcode"></i>
+                      </a>
+                  </li>
+                  <li {!! (Request::is('admin/licenses*') ? ' class="active"' : '') !!}>
+                      <a href="{{ URL::to('admin/licenses') }}">
+                          <i class="fa fa-floppy-o"></i>
+                      </a>
+                  </li>
+                  <li {!! (Request::is('admin/accessories*') ? ' class="active"' : '') !!}>
+                      <a href="{{ URL::to('admin/accessories') }}">
+                          <i class="fa fa-keyboard-o"></i>
+                      </a>
+                  </li>
+                  <li {!! (Request::is('admin/consumables*') ? ' class="active"' : '') !!}>
+                      <a href="{{ URL::to('admin/consumables') }}">
+                          <i class="fa fa-tint"></i>
+                      </a>
+                  </li>
+                  <li {!! (Request::is('admin/components*') ? ' class="active"' : '') !!}>
+                      <a href="{{ URL::to('admin/components') }}">
+                          <i class="fa fa-hdd-o"></i>
+                      </a>
+                  </li>
+                  @endif
 
-                  @if (Auth::user()->hasAccess('admin'))
-                    @if (!Request::is('/'))
-                    <li {!! (Request::is('hardware*') ? ' class="active"' : '') !!}>
-                        <a href="{{ URL::to('hardware') }}">
-                            <i class="fa fa-barcode"></i>
-                        </a>
-                    </li>
-                    <li {!! (Request::is('admin/licenses*') ? ' class="active"' : '') !!}>
-                        <a href="{{ URL::to('admin/licenses') }}">
-                            <i class="fa fa-floppy-o"></i>
-                        </a>
-                    </li>
-                    <li {!! (Request::is('admin/accessories*') ? ' class="active"' : '') !!}>
-                        <a href="{{ URL::to('admin/accessories') }}">
-                            <i class="fa fa-keyboard-o"></i>
-                        </a>
-                    </li>
-                    <li {!! (Request::is('admin/consumables*') ? ' class="active"' : '') !!}>
-                        <a href="{{ URL::to('admin/consumables') }}">
-                            <i class="fa fa-tint"></i>
-                        </a>
-                    </li>
-                    <li {!! (Request::is('admin/components*') ? ' class="active"' : '') !!}>
-                        <a href="{{ URL::to('admin/components') }}">
-                            <i class="fa fa-hdd-o"></i>
-                        </a>
-                    </li>
-                    @endif
+                  <form class="navbar-form navbar-left form-horizontal" role="search" action="{{ route('findbytag/hardware') }}" method="get">
+                      <div class="col-xs-12 col-md-12">
+                          <div class="col-xs-12 form-group">
+                              <label class="sr-only" for="tagSearch">{{ trans('general.lookup_by_tag') }}</label>
+                              <input type="text" class="form-control" id="tagSearch" name="assetTag" placeholder="{{ trans('general.lookup_by_tag') }}">
+                              <input type="hidden" name="topsearch" value="true">
+                          </div>
+                          <div class="col-xs-1">
+                              <button type="submit" class="btn btn-primary pull-right"><i class="fa fa-search"></i></button>
+                          </div>
+                      </div>
+                  </form>
 
-                    <form class="navbar-form navbar-left form-horizontal" role="search" action="{{ route('findbytag/hardware') }}" method="get">
-                        <div class="col-xs-12 col-md-12">
-                            <div class="col-xs-12 form-group">
-                                <label class="sr-only" for="tagSearch">{{ trans('general.lookup_by_tag') }}</label>
-                                <input type="text" class="form-control" id="tagSearch" name="assetTag" placeholder="{{ trans('general.lookup_by_tag') }}">
-                                <input type="hidden" name="topsearch" value="true">
-                            </div>
-                            <div class="col-xs-1">
-                                <button type="submit" class="btn btn-primary pull-right"><i class="fa fa-search"></i></button>
-                            </div>
-                        </div>
-                    </form>
-
-              <li class="dropdown">
-                   <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                       @lang('general.create')
-                       <b class="caret"></b>
-                   </a>
+                  <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                      @lang('general.create')
+                      <b class="caret"></b>
+                    </a>
                    <ul class="dropdown-menu">
                       <li {!! (Request::is('hardware/create') ? 'class="active>"' : '') !!}>
                               <a href="{{ route('create/hardware') }}">
@@ -349,6 +348,13 @@
             </ul>
           </div>
       </nav>
+       <!-- Sidebar toggle button-->
+      <li>
+        <a href="#" style="float:left" class="sidebar-toggle-mobile visible-xs btn" data-toggle="offcanvas" role="button">
+          <span class="sr-only">Toggle navigation</span>
+          <i class="fa fa-bars"></i>
+        </a>
+      </li>
       </header>
       <!-- Left side column. contains the logo and sidebar -->
       <aside class="main-sidebar">
