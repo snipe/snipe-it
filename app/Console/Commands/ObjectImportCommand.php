@@ -286,7 +286,7 @@ class ObjectImportCommand extends Command {
 	/**
 	 * Finds a category with the same name and item type in the database, otherwise creates it
 	 * @param $asset_category string
-	 * @param $item_type stringI
+	 * @param $item_type string
 	 * @return Category
 	 */
 	public function createOrFetchCategory($asset_category, $item_type)
