@@ -1,7 +1,6 @@
 <?php
 namespace App\Http\Controllers;
 
-use App\Http\Requests\SetupUserRequest;
 use App\Http\Requests\AssetFileRequest;
 use App\Helpers\Helper;
 use App\Models\Accessory;
@@ -96,7 +95,7 @@ class UsersController extends Controller
     * @since [v1.0]
     * @return Redirect
     */
-    public function postCreate(SetupUserRequest $request)
+    public function postCreate()
     {
 
         $user = new User;
