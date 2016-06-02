@@ -10,7 +10,7 @@ use App\Models\Location;
 Route::group([ 'prefix' => 'api', 'middleware' => 'auth' ], function () {
 
     /*---Hardware API---*/
-    Route::group([ 'prefix' => 'hardware','middleware' => ['web','auth','authorize:hardware']], function () {
+    Route::group([ 'prefix' => 'hardware','middleware' => ['web','auth','authorize:assets.view']], function () {
 
         Route::get('list/{status?}', [ 'as' => 'api.hardware.list', 'uses' => 'AssetsController@getDatatable' ]);
 
@@ -177,7 +177,7 @@ Route::group(
     [ 'prefix' => 'hardware',
     'middleware' => ['web',
     'auth',
-    'authorize:hardware']],
+    'authorize:assets.view']],
     function () {
 
         Route::get('create/{model?}', [
@@ -300,10 +300,10 @@ Route::group(
 |
 */
 
-Route::group([ 'prefix' => 'admin','middleware' => ['web','auth','authorize:admin']], function () {
+Route::group([ 'prefix' => 'admin','middleware' => ['web','auth']], function () {
 
     # Licenses
-    Route::group([ 'prefix' => 'licenses' ], function () {
+    Route::group([ 'prefix' => 'licenses', 'middleware'=>'authorize:licenses.view' ], function () {
 
         Route::get('create', [ 'as' => 'create/licenses', 'uses' => 'LicensesController@getCreate' ]);
         Route::post('create', 'LicensesController@postCreate');
@@ -343,7 +343,7 @@ Route::group([ 'prefix' => 'admin','middleware' => ['web','auth','authorize:admi
     });
 
     # Asset Maintenances
-    Route::group([ 'prefix' => 'asset_maintenances' ], function () {
+    Route::group([ 'prefix' => 'asset_maintenances', 'middleware'=>'authorize:assets.view'  ], function () {
 
         Route::get(
             'create/{assetId?}',
@@ -367,7 +367,7 @@ Route::group([ 'prefix' => 'admin','middleware' => ['web','auth','authorize:admi
     });
 
     # Accessories
-    Route::group([ 'prefix' => 'accessories' ], function () {
+    Route::group([ 'prefix' => 'accessories', 'middleware'=>'authorize:accessories.view'  ], function () {
 
         Route::get('create', [ 'as' => 'create/accessory', 'uses' => 'AccessoriesController@getCreate' ]);
         Route::post('create', 'AccessoriesController@postCreate');
@@ -396,7 +396,7 @@ Route::group([ 'prefix' => 'admin','middleware' => ['web','auth','authorize:admi
     });
 
     # Consumables
-    Route::group([ 'prefix' => 'consumables' ], function () {
+    Route::group([ 'prefix' => 'consumables', 'middleware'=>'authorize:consumables.view'  ], function () {
 
         Route::get('create', [ 'as' => 'create/consumable', 'uses' => 'ConsumablesController@getCreate' ]);
         Route::post('create', 'ConsumablesController@postCreate');
@@ -422,7 +422,7 @@ Route::group([ 'prefix' => 'admin','middleware' => ['web','auth','authorize:admi
     });
 
     # Components
-    Route::group([ 'prefix' => 'components' ], function () {
+    Route::group([ 'prefix' => 'components', 'middleware'=>'authorize:components.view'  ], function () {
 
         Route::get('create', [ 'as' => 'create/component', 'uses' => 'ComponentsController@getCreate' ]);
         Route::post('create', 'ComponentsController@postCreate');
@@ -450,7 +450,7 @@ Route::group([ 'prefix' => 'admin','middleware' => ['web','auth','authorize:admi
     });
 
     # Admin Settings Routes (for categories, maufactureres, etc)
-    Route::group([ 'prefix' => 'settings'], function () {
+    Route::group([ 'prefix' => 'settings', 'middleware'=>'authorize:superuser'], function () {
 
 
 
@@ -731,7 +731,7 @@ Route::group([ 'prefix' => 'account', 'middleware' => ['web', 'auth']], function
 });
 
 
-Route::group(['middleware' => ['web','auth','authorize:reports']], function () {
+Route::group(['middleware' => ['web','auth','authorize:reports.view']], function () {
 
     Route::get(
         'reports/depreciation',
