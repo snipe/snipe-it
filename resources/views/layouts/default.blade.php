@@ -352,14 +352,13 @@
             </ul>
           </div>
       </nav>
+      <a href="#" style="float:left" class="sidebar-toggle-mobile visible-xs btn btn-white" data-toggle="offcanvas" role="button">
+        <span class="sr-only">Toggle navigation</span>
+        <i class="fa fa-bars"></i>
+      </a>
        <!-- Sidebar toggle button-->
       </header>
-      <li >
-        <a href="#" style="float:left" class="sidebar-toggle-mobile visible-xs btn" data-toggle="offcanvas" role="button">
-          <span class="sr-only">Toggle navigation</span>
-          <i class="fa fa-bars"></i>
-        </a>
-      </li>
+
       <!-- Left side column. contains the logo and sidebar -->
       <aside class="main-sidebar">
         <!-- sidebar: style can be found in sidebar.less -->
