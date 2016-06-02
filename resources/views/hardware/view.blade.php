@@ -16,11 +16,13 @@
       <span class="caret"></span>
   </button>
   <ul class="dropdown-menu pull-right" role="menu" aria-labelledby="dropdownMenu1">
+      @if ($asset->assetstatus->deployable=='1')
         @if ($asset->assigned_to != '')
           <li role="presentation"><a href="{{ route('checkin/hardware', $asset->id) }}">{{ trans('admin/hardware/general.checkin') }}</a></li>
         @else
           <li role="presentation"><a href="{{ route('checkout/hardware', $asset->id)  }}">{{ trans('admin/hardware/general.checkout') }}</a></li>
         @endif
+      @endif
         <li role="presentation"><a href="{{ route('update/hardware', $asset->id) }}">{{ trans('admin/hardware/general.edit') }}</a></li>
         <li role="presentation"><a href="{{ route('clone/hardware', $asset->id) }}">{{ trans('admin/hardware/general.clone') }}</a></li>
   </ul>
