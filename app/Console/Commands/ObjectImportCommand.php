@@ -248,7 +248,7 @@ class ObjectImportCommand extends Command {
 
 
 		foreach ($this->asset_models as $tempmodel) {
-			if ($tempmodel->name === $asset_model_name 
+			if ((strcasecmp($tempmodel->name, $asset_model_name) == 0)
 				&& $tempmodel->modelno == $asset_modelno
 				&& $tempmodel->category_id == $category->id 
 				&& $tempmodel->manufacturer_id == $manufacturer->id )
@@ -295,7 +295,7 @@ class ObjectImportCommand extends Command {
 			$asset_category = 'Unnamed Category';
 
 		foreach($this->categories as $tempcategory) {
-			if( $tempcategory->name === $asset_category && $tempcategory->category_type === $item_type) {
+			if( (strcasecmp($tempcategory->name, $asset_category) == 0) && $tempcategory->category_type === $item_type) {
 				$this->log('Category ' . $asset_category . ' already exists');
 				return $tempcategory;
 			}
@@ -333,7 +333,7 @@ class ObjectImportCommand extends Command {
 	public function createOrFetchCompany($asset_company_name)
 	{
 		foreach ($this->companies as $tempcompany) {
-			if ($tempcompany->name === $asset_company_name) {
+			if (strcasecmp($tempcompany->name, $asset_company_name) == 0) {
 				$this->log('A matching Company ' . $asset_company_name . ' already exists');
 				return $tempcompany;
 			}
@@ -365,7 +365,7 @@ class ObjectImportCommand extends Command {
 		if(empty($asset_statuslabel_name))
 			return;
 		foreach ($this->status_labels as $tempstatus) {
-			if ($tempstatus->name === $asset_statuslabel_name) {
+			if (strcasecmp($tempstatus->name, $asset_statuslabel_name) == 0 ) {
 				$this->log('A matching Status ' . $asset_statuslabel_name . ' already exists');
 				return $tempstatus;
 			}
@@ -408,8 +408,8 @@ class ObjectImportCommand extends Command {
 		$this->log('Manufacturer ID: ' . $asset_mfgr);
 
 		foreach ($this->manufacturers as $tempmanufacturer) {
-			if ($tempmanufacturer->name === $asset_mfgr) {
-				$this->log('{Manufacturer [' . $asset_mfgr . ' already exists') . ']}';
+			if (strcasecmp($tempmanufacturer->name, $asset_mfgr) == 0 ) {
+				$this->log('Manufacturer ' . $asset_mfgr . ' already exists') ;
 				return $tempmanufacturer;
 			}
 		}
@@ -448,7 +448,7 @@ class ObjectImportCommand extends Command {
 	public function createOrFetchLocation($asset_location)
 	{
 		foreach($this->locations as $templocation) {
-			if( $templocation->name === $asset_location ) {
+			if( strcasecmp($templocation->name, $asset_location) == 0 ) {
 				$this->log('Location ' . $asset_location . ' already exists');
 				return $templocation;
 			}
@@ -496,7 +496,7 @@ class ObjectImportCommand extends Command {
 		if(empty($supplier_name))
 			$supplier_name='Unknown';
 		foreach ($this->suppliers as $tempsupplier) {
-			if ($tempsupplier->name === $supplier_name) {
+			if (strcasecmp($tempsupplier->name, $supplier_name) == 0) {
 				$this->log('A matching Company ' . $supplier_name . ' already exists');
 				return $tempsupplier;
 			}
@@ -618,7 +618,6 @@ class ObjectImportCommand extends Command {
 	 */
 	public function createAssetIfNotExists(array $row, array $item )
 	{
-
         $asset_serial = $this->array_smart_fetch($row, "serial number");
         $asset_tag = $this->array_smart_fetch($row, "asset tag");
         $asset_image = $this->array_smart_fetch($row, "image");
@@ -637,7 +636,7 @@ class ObjectImportCommand extends Command {
         $this->log('Notes: '.$item["notes"]);
 
 		foreach ($this->assets as $tempasset) {
-			if ($tempasset->asset_tag === $asset_tag ) {
+			if (strcasecmp($tempasset->asset_tag, $asset_tag ) == 0 ) {
 				$this->log('A matching Asset ' . $asset_tag . ' already exists');
 				// $this->comment('A matching Asset ' . $asset_tag . ' already exists');
 				return;
@@ -711,7 +710,7 @@ class ObjectImportCommand extends Command {
 	{
 		$this->log("Creating Accessory");
 		foreach ($this->accessories as $tempaccessory) {
-			if ($tempaccessory->name === $item["item_name"] ) {
+			if (strcasecmp($tempaccessory->name, $item["item_name"] ) == 0 ) {
 				$this->log('A matching Accessory ' . $item["item_name"] . ' already exists.  ');
 				// FUTURE: Adjust quantity on import maybe?
 				return;
@@ -774,7 +773,7 @@ class ObjectImportCommand extends Command {
 	{
 		$this->log("Creating Consumable");
 		foreach($this->consumables as $tempconsumable) {
-			if($tempconsumable->name === $item["item_name"]) {
+			if(strcasecmp($tempconsumable->name, $item["item_name"]) == 0) {
 				$this->log("A matching consumable " . $item["item_name"] . " already exists");
 				//TODO: Adjust quantity if different maybe?
 				return;
