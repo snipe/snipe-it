@@ -70,7 +70,7 @@ class GroupsController extends Controller
         $group->permissions = json_encode(Input::get('permission'));
 
         if ($group->save()) {
-            return redirect()->to("admin/groups")->with('success', trans('admin/groups/message.create.success'));
+            return redirect()->to("admin/groups")->with('success', trans('admin/groups/message.success.create'));
         }
 
         return redirect()->back()->withInput()->withErrors($group->getErrors());
@@ -119,7 +119,7 @@ class GroupsController extends Controller
         if (!config('app.lock_passwords')) {
 
             if ($group->save()) {
-                return redirect()->to("admin/groups")->with('success', trans('admin/groups/message.create.success'));
+                return redirect()->to("admin/groups")->with('success', trans('admin/groups/message.success.update'));
             }
             return redirect()->back()->withInput()->withErrors($group->getErrors());
 
