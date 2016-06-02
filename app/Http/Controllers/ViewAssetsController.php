@@ -58,7 +58,7 @@ class ViewAssetsController extends Controller
     public function getRequestableIndex()
     {
 
-        $assets = Asset::with('model', 'defaultLoc')->Hardware()->RequestableAssets()->get();
+        $assets = Asset::with('model', 'defaultLoc', 'assetloc','assigneduser')->Hardware()->RequestableAssets()->get();
 
         return View::make('account/requestable-assets', compact('user', 'assets'));
     }
