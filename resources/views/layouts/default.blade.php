@@ -62,6 +62,13 @@
       .nav::after {
         clear: none;
       }
+      .left-navblock,
+      .main-header .logo {
+        width:100%;
+        left-margin: auto;
+        right-margin: auto;
+        text-align: center;
+      }
 
     }
     </style>
@@ -97,7 +104,6 @@
           </a>
           <ul class="nav navbar-nav navbar-left">
               <li class="left-navblock">
-                  <div class="pull-left">
                  @if (\App\Models\Setting::getSettings()->brand == '3')
                       <a class="logo navbar-brand no-hover" href="{{ config('app.url') }}">
                           <img class="navbar-brand-img" src="{{ config('app.url') }}/uploads/{{ \App\Models\Setting::getSettings()->logo }}">
@@ -112,7 +118,6 @@
                           {{ \App\Models\Setting::getSettings()->site_name }}
                       </a>
                   @endif
-                  </div>
               </li>
             </ul> 
 
