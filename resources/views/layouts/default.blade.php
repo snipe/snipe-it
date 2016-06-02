@@ -59,6 +59,10 @@
        margin: 2px;
       }
 
+      .nav::after {
+        clear: none;
+      }
+
     }
     </style>
 
