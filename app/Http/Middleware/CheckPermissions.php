@@ -5,6 +5,7 @@ namespace App\Http\Middleware;
 use Closure;
 use Config;
 use Route;
+use Gate;
 
 class CheckPermissions
 {
@@ -13,19 +14,22 @@ class CheckPermissions
    *
    * @param  \Illuminate\Http\Request  $request
    * @param  \Closure  $next
-   * @param  string|null  $guard
+   * @param  string|null  $section
    * @return mixed
    */
-    public function handle($request, Closure $next, $section = null, $guard = null)
+    public function handle($request, Closure $next, $section = null)
     {
 
-        if (($request->user()->hasAccess($section)) || ($request->user()->isSuperUser())) {
+        if (Gate::allows($section)) {
             return $next($request);
         }
 
         return response()->view('layouts/basic', [
-          'content' => view('errors/403')
+            'content' => view('errors/403')
         ]);
+
+
+
 
     }
 }
