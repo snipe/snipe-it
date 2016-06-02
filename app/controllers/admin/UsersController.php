@@ -49,7 +49,7 @@ class UsersController extends AdminController {
       'username' => 'required|min:2|unique:users,deleted_at,NULL',
       'email' => 'email|unique:users,email',
       'password' => 'required|min:6',
-      'password_confirm' => 'required|min:6|same:password',
+      'password_confirm' => 'required|same:password',
       'company_id' => 'integer',
     );
 
