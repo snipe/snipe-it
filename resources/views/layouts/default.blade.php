@@ -54,6 +54,15 @@
     @if (\App\Models\Setting::getSettings()->custom_css)
         {{ \App\Models\Setting::getSettings()->show_custom_css() }}
     @endif
+    @media (max-width: 400px) {
+      .navbar-left {
+       margin: 2px;
+      }
+
+      .nav::after {
+        clear: none;
+      }
+    }
     </style>
 
     <script>
@@ -85,91 +94,81 @@
           <a href="#" style="color: white" class="sidebar-toggle btn btn-white" data-toggle="offcanvas" role="button">
             <span class="sr-only">Toggle navigation</span>
           </a>
-
+          <ul class="nav navbar-nav navbar-left">
+              <li class="left-navblock">
+                 @if (\App\Models\Setting::getSettings()->brand == '3')
+                      <a class="logo navbar-brand no-hover" href="{{ config('app.url') }}">
+                          <img class="navbar-brand-img" src="{{ config('app.url') }}/uploads/{{ \App\Models\Setting::getSettings()->logo }}">
+                          {{ \App\Models\Setting::getSettings()->site_name }}
+                      </a>
+                  @elseif (\App\Models\Setting::getSettings()->brand == '2')
+                      <a class="logo navbar-brand no-hover" href="{{ config('app.url') }}">
+                          <img class="navbar-brand-img" src="{{ config('app.url') }}/uploads/{{ \App\Models\Setting::getSettings()->logo }}">
+                      </a>
+                  @else
+                      <a class="logo no-hover" href="{{ config('app.url') }}">
+                          {{ \App\Models\Setting::getSettings()->site_name }}
+                      </a>
+                  @endif
+              </li>
+            </ul> 
 
           <!-- Navbar Right Menu -->
-          <div class="navbar-custom-menu">
-            <ul class="nav navbar-nav">
-                <!-- Sidebar toggle button-->
-                <li><a href="#" style="color: white; float: right;" class="sidebar-toggle-mobile visible-xs btn btn-white pull-right" data-toggle="offcanvas" role="button">
-                    <span class="sr-only">Toggle navigation</span>
-                    <i class="fa fa-bars"></i>
-                </a>
-                </li>
-                <div class="left-navblock">
-                    <div class="pull-left">
-                   @if (\App\Models\Setting::getSettings()->brand == '3')
-                        <a class="logo navbar-brand no-hover" href="{{ config('app.url') }}">
-                            <img class="navbar-brand-img" src="{{ config('app.url') }}/uploads/{{ \App\Models\Setting::getSettings()->logo }}">
-                            {{ \App\Models\Setting::getSettings()->site_name }}
-                        </a>
-                    @elseif (\App\Models\Setting::getSettings()->brand == '2')
-                        <a class="logo navbar-brand no-hover" href="{{ config('app.url') }}">
-                            <img class="navbar-brand-img" src="{{ config('app.url') }}/uploads/{{ \App\Models\Setting::getSettings()->logo }}">
-                        </a>
-                    @else
-                        <a class="logo no-hover" href="{{ config('app.url') }}">
-                            {{ \App\Models\Setting::getSettings()->site_name }}
-                        </a>
-                    @endif
+            <div class="navbar-custom-menu">
+              <ul class="nav navbar-nav">
+                @if (Auth::user()->hasAccess('admin'))
+                  @if (!Request::is('/'))
+                  <li {!! (Request::is('hardware*') ? ' class="active"' : '') !!}>
+                      <a href="{{ URL::to('hardware') }}">
+                          <i class="fa fa-barcode"></i>
+                      </a>
+                  </li>
+                  <li {!! (Request::is('admin/licenses*') ? ' class="active"' : '') !!}>
+                      <a href="{{ URL::to('admin/licenses') }}">
+                          <i class="fa fa-floppy-o"></i>
+                      </a>
+                  </li>
+                  <li {!! (Request::is('admin/accessories*') ? ' class="active"' : '') !!}>
+                      <a href="{{ URL::to('admin/accessories') }}">
+                          <i class="fa fa-keyboard-o"></i>
+                      </a>
+                  </li>
+                  <li {!! (Request::is('admin/consumables*') ? ' class="active"' : '') !!}>
+                      <a href="{{ URL::to('admin/consumables') }}">
+                          <i class="fa fa-tint"></i>
+                      </a>
+                  </li>
+                  <li {!! (Request::is('admin/components*') ? ' class="active"' : '') !!}>
+                      <a href="{{ URL::to('admin/components') }}">
+                          <i class="fa fa-hdd-o"></i>
+                      </a>
+                  </li>
+                  @endif
 
-                    </div>
+                  <form class="navbar-form navbar-left form-horizontal" role="search" action="{{ route('findbytag/hardware') }}" method="get">
+                      <div class="col-xs-12 col-md-12">
+                          <div class="col-xs-12 form-group">
+                              <label class="sr-only" for="tagSearch">{{ trans('general.lookup_by_tag') }}</label>
+                              <input type="text" class="form-control" id="tagSearch" name="assetTag" placeholder="{{ trans('general.lookup_by_tag') }}">
+                              <input type="hidden" name="topsearch" value="true">
+                          </div>
+                          <div class="col-xs-1">
+                              <button type="submit" class="btn btn-primary pull-right"><i class="fa fa-search"></i></button>
+                          </div>
+                      </div>
+                  </form>
 
-                </div>
-
-            @if (Auth::user()->hasAccess('admin'))
-                    @if (!Request::is('/'))
-                    <li{!! (Request::is('hardware*') ? ' class="active"' : '') !!}>
-                        <a href="{{ URL::to('hardware') }}">
-                            <i class="fa fa-barcode"></i>
-                        </a>
-                    </li>
-                    <li{!! (Request::is('admin/licenses*') ? ' class="active"' : '') !!}>
-                        <a href="{{ URL::to('admin/licenses') }}">
-                            <i class="fa fa-floppy-o"></i>
-                        </a>
-                    </li>
-                    <li{!! (Request::is('admin/accessories*') ? ' class="active"' : '') !!}>
-                        <a href="{{ URL::to('admin/accessories') }}">
-                            <i class="fa fa-keyboard-o"></i>
-                        </a>
-                    </li>
-                    <li{!! (Request::is('admin/consumables*') ? ' class="active"' : '') !!}>
-                        <a href="{{ URL::to('admin/consumables') }}">
-                            <i class="fa fa-tint"></i>
-                        </a>
-                    </li>
-                        <li{!! (Request::is('admin/components*') ? ' class="active"' : '') !!}>
-                            <a href="{{ URL::to('admin/components') }}">
-                                <i class="fa fa-hdd-o"></i>
-                            </a>
-                        </li>
-                    @endif
-
-                    <form class="navbar-form navbar-left form-horizontal" role="search" action="{{ route('findbytag/hardware') }}" method="get">
-                        <div class="col-xs-12 col-md-12">
-                            <div class="col-xs-12 form-group">
-                                <label class="sr-only" for="tagSearch">{{ trans('general.lookup_by_tag') }}</label>
-                                <input type="text" class="form-control" id="tagSearch" name="assetTag" placeholder="{{ trans('general.lookup_by_tag') }}">
-                                <input type="hidden" name="topsearch" value="true">
-                            </div>
-                            <div class="col-xs-1">
-                                <button type="submit" class="btn btn-primary pull-right"><i class="fa fa-search"></i></button>
-                            </div>
-                        </div>
-                    </form>
-
-              <li class="dropdown">
-                   <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                       @lang('general.create')
-                       <b class="caret"></b>
-                   </a>
+                  <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                      @lang('general.create')
+                      <b class="caret"></b>
+                    </a>
                    <ul class="dropdown-menu">
                       <li {!! (Request::is('hardware/create') ? 'class="active>"' : '') !!}>
                               <a href="{{ route('create/hardware') }}">
                                   <i class="fa fa-barcode fa-fw"></i>
                                   @lang('general.asset')</a>
-                          </li>
+                      </li>
                        <li {!! (Request::is('admin/licenses/create') ? 'class="active"' : '') !!}>
                            <a href="{{ route('create/licenses') }}">
                                <i class="fa fa-floppy-o fa-fw"></i>
@@ -195,7 +194,6 @@
                            <i class="fa fa-hdd-o"></i>
                            @lang('general.component')</a>
                        </li>
-
                    </ul>
                </li>
 
@@ -207,7 +205,7 @@
                  <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                    <i class="fa fa-flag-o"></i>
                    @if (count($alert_items))
-                   <span class="label label-danger">{{ count($alert_items) }}</span>
+                    <span class="label label-danger">{{ count($alert_items) }}</span>
                    @endif
                  </a>
                  <ul class="dropdown-menu">
@@ -233,12 +231,7 @@
                           </a>
                         </li>
                         <!-- end task item -->
-
-
                       @endfor
-
-
-
                      </ul>
                    </li>
                    {{-- <li class="footer">
@@ -262,7 +255,7 @@
                  <ul class="dropdown-menu">
                    <!-- User image -->
                    <li>
-                     <li{!! (Request::is('account/profile') ? ' class="active"' : '') !!}>
+                     <li {!! (Request::is('account/profile') ? ' class="active"' : '') !!}>
                        <a href="{{ route('view-assets') }}">
                              <i class="fa fa-check fa-fw"></i> @lang('general.viewassets')
                        </a>
@@ -277,6 +270,7 @@
                              @lang('general.logout')
                          </a>
                      </li>
+                   </li>
                  </ul>
                </li>
 
@@ -288,57 +282,57 @@
                        <b class="caret"></b>
                    </a>
                    <ul class="dropdown-menu">
-                       <li{!! (Request::is('admin/settings/companies*') ? ' class="active"' : '') !!}>
+                       <li {!! (Request::is('admin/settings/companies*') ? ' class="active"' : '') !!}>
                            <a href="{{ URL::to('admin/settings/companies') }}">
                                <i class="fa fa-building-o fa-fw"></i> @lang('general.companies')
                            </a>
                        </li>
-                       <li{!! (Request::is('hardware/models*') ? ' class="active"' : '') !!}>
+                       <li {!! (Request::is('hardware/models*') ? ' class="active"' : '') !!}>
                            <a href="{{ URL::to('hardware/models') }}">
                                <i class="fa fa-th fa-fw"></i> @lang('general.asset_models')
                            </a>
                        </li>
-                       <li{!! (Request::is('admin/settings/categories*') ? ' class="active"' : '') !!}>
+                       <li {!! (Request::is('admin/settings/categories*') ? ' class="active"' : '') !!}>
                            <a href="{{ URL::to('admin/settings/categories') }}">
                                <i class="fa fa-check fa-fw"></i> @lang('general.categories')
                            </a>
                        </li>
-                       <li{!! (Request::is('admin/settings/manufacturers*') ? ' class="active"' : '') !!}>
+                       <li {!! (Request::is('admin/settings/manufacturers*') ? ' class="active"' : '') !!}>
                            <a href="{{ URL::to('admin/settings/manufacturers') }}">
                                <i class="fa fa-briefcase fa-fw"></i> @lang('general.manufacturers')
                            </a>
                        </li>
-                       <li{!! (Request::is('admin/settings/suppliers*') ? ' class="active"' : '') !!}>
+                       <li {!! (Request::is('admin/settings/suppliers*') ? ' class="active"' : '') !!}>
                            <a href="{{ URL::to('admin/settings/suppliers') }}">
                                <i class="fa fa-credit-card fa-fw"></i> @lang('general.suppliers')
                            </a>
                        </li>
-                       <li{!! (Request::is('admin/settings/statuslabels*') ? ' class="active"' : '') !!}>
+                       <li {!! (Request::is('admin/settings/statuslabels*') ? ' class="active"' : '') !!}>
                            <a href="{{ URL::to('admin/settings/statuslabels') }}">
                                <i class="fa fa-list fa-fw"></i> @lang('general.status_labels')
                            </a>
                        </li>
-                       <li{!! (Request::is('admin/settings/depreciations*') ? ' class="active"' : '') !!}>
+                       <li {!! (Request::is('admin/settings/depreciations*') ? ' class="active"' : '') !!}>
                            <a href="{{ URL::to('admin/settings/depreciations') }}">
                                <i class="fa fa-arrow-down fa-fw"></i> @lang('general.depreciation')
                            </a>
                        </li>
-                       <li{!! (Request::is('admin/settings/locations*') ? ' class="active"' : '') !!}>
+                       <li {!! (Request::is('admin/settings/locations*') ? ' class="active"' : '') !!}>
                            <a href="{{ URL::to('admin/settings/locations') }}">
                                <i class="fa fa-globe fa-fw"></i> @lang('general.locations')
                            </a>
                        </li>
-                       <li{!! (Request::is('admin/groups*') ? ' class="active"' : '') !!}>
+                       <li {!! (Request::is('admin/groups*') ? ' class="active"' : '') !!}>
                            <a href="{{ URL::to('admin/groups') }}">
                                <i class="fa fa-group fa-fw"></i> @lang('general.groups')
                            </a>
                        </li>
-                       <li{!! (Request::is('admin/settings/backups*') ? ' class="active"' : '') !!}>
+                       <li {!! (Request::is('admin/settings/backups*') ? ' class="active"' : '') !!}>
                            <a href="{{ URL::to('admin/settings/backups') }}">
                                <i class="fa fa-download fa-fw"></i> @lang('admin/settings/general.backups')
                            </a>
                        </li>
-                       <li{!! (Request::is('admin/custom_fields*') ? ' class="active"' : '') !!}>
+                       <li {!! (Request::is('admin/custom_fields*') ? ' class="active"' : '') !!}>
                            <a href="{{ route('admin.custom_fields.index') }}">
                                <i class="fa fa-wrench fa-fw"></i> @lang('admin/custom_fields/general.custom_fields')
                            </a>
@@ -349,17 +343,19 @@
                                <i class="fa fa-cog fa-fw"></i> @lang('general.settings')
                            </a>
                        </li>
-
                    </ul>
                </li>
-            @endif
-
+               @endif
             </ul>
           </div>
-
-
-        </nav>
+      </nav>
+       <a href="#" style="float:left" class="sidebar-toggle-mobile visible-xs btn" data-toggle="offcanvas" role="button">
+        <span class="sr-only">Toggle navigation</span>
+        <i class="fa fa-bars"></i>
+      </a>
+       <!-- Sidebar toggle button-->
       </header>
+     
       <!-- Left side column. contains the logo and sidebar -->
       <aside class="main-sidebar">
         <!-- sidebar: style can be found in sidebar.less -->
