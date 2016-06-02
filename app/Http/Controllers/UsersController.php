@@ -29,7 +29,8 @@ use Str;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use URL;
 use View;
-use Request;
+use Illuminate\Http\Request;
+
 
 /**
  * This controller handles all actions related to Users for
@@ -64,7 +65,6 @@ class UsersController extends Controller
     */
     public function getCreate()
     {
-        $user = new User;
 
         $groups = Group::pluck('name', 'id');
 
@@ -95,7 +95,7 @@ class UsersController extends Controller
     * @since [v1.0]
     * @return Redirect
     */
-    public function postCreate()
+    public function postCreate(Request $request)
     {
 
         $user = new User;
@@ -109,11 +109,13 @@ class UsersController extends Controller
         $data['password'] =  Input::get('password');
 
         if ($user->save()) {
-            if (Input::has('groups')) {
+            if ($request->has('groups')) {
                 $user->groups()->sync(Input::get('groups'));
+            } else {
+                $user->groups()->sync(array());
             }
 
-            if ((Input::get('email_user') == 1) && (Input::has('email'))) {
+            if (($request->input('email_user') == 1) && ($request->has('email'))) {
               // Send the credentials through email
                 $data = array();
                 $data['email'] = e(Input::get('email'));
@@ -226,12 +228,11 @@ class UsersController extends Controller
     * @param  int  $id
     * @return Redirect
     */
-    public function postEdit($id = null)
+    public function postEdit(Request $request, $id = null)
     {
         // We need to reverse the UI specific logic for our
         // permissions here before we update the user.
         $permissions = Input::get('permissions', array());
-        //$this->decodePermissions($permissions);
         app('request')->request->set('permissions', $permissions);
 
         // Only update the email address if locking is set to false
@@ -254,7 +255,7 @@ class UsersController extends Controller
             return redirect()->route('users')->with('error', $error);
         }
 
-
+            $user_groups = array (Input::get('groups'));
             // Update the user
             $user->first_name = e(Input::get('first_name'));
             $user->last_name = e(Input::get('last_name'));
@@ -273,7 +274,12 @@ class UsersController extends Controller
             $user->manager_id = e(Input::get('manager_id'));
             $user->notes = e(Input::get('notes'));
             $user->permissions = json_encode(Input::get('permission'));
-            $user->groups()->sync(Input::get('groups'));
+            if ($request->has('groups')) {
+                $user->groups()->sync(Input::get('groups'));
+            } else {
+                $user->groups()->sync(array());
+            }
+
 
         if ($user->manager_id == "") {
             $user->manager_id = null;
@@ -641,14 +647,13 @@ class UsersController extends Controller
             $user->id = null;
 
             // Get this user groups
-            $userGroups = $user_to_clone->groups()->lists('group_id', 'name');
+            $userGroups = $user_to_clone->groups()->lists('name', 'id');
 
             // Get this user permissions
             $userPermissions = null;
-            //$this->encodePermissions($userPermissions);
 
             // Get a list of all the available groups
-            //$groups = Sentry::getGroupProvider()->findAll();
+            $groups = Group::pluck('name', 'id');
 
             // Get all the available permissions
             $permissions = config('permissions');
@@ -664,6 +669,8 @@ class UsersController extends Controller
                             ->with('company_list', $company_list)
                             ->with('manager_list', $manager_list)
                             ->with('user', $user)
+                            ->with('groups',$groups)
+                            ->with('userGroups',$userGroups)
                             ->with('clone_user', $user_to_clone);
         } catch (UserNotFoundException $e) {
             // Prepare the error message
