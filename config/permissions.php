@@ -6,7 +6,7 @@ return array(
         array(
             'permission' => 'superuser',
             'label'      => 'Super User',
-            'note'       => 'Determines whether the user has full access to all aspects of the admin. ',
+            'note'       => 'Determines whether the user has full access to all aspects of the admin. This setting overrides any more specific permissions throughout the system. ',
             'display'    => true,
         ),
     ),
@@ -15,16 +15,22 @@ return array(
         array(
             'permission' => 'admin',
             'label'      => '',
-            'note'       => 'Determines whether the user has access to most aspects of the admin.',
+            'note'       => 'Determines whether the user has access to most aspects of the admin. ',
             'display'    => true,
+        ),
+        array(
+            'permission' => 'admin.api_key',
+            'label'      => 'Create API Key',
+            'note'       => 'Determines whether the user can access the API via API key.',
+            'display'    => false,
         ),
     ),
 
     'Reports' => array(
         array(
             'permission' => 'reports.view',
-            'label'      => '',
-            'note'       => 'Determines whether the user has the abiity to view reports.',
+            'label'      => 'View',
+            'note'       => 'Determines whether the user has the ability to view reports.',
             'display'    => true,
         ),
     ),
@@ -32,64 +38,92 @@ return array(
     'Assets' => array(
         array(
             'permission' => 'assets.view',
-            'label'      => '',
+            'label'      => 'View ',
             'note'       => '',
-            'display'    => false,
+            'display'    => true,
         ),
         array(
             'permission' => 'assets.create',
-            'label'      => 'Create Assets',
+            'label'      => 'Create ',
             'note'       => '',
             'display'    => false,
         ),
         array(
             'permission' => 'assets.edit',
-            'label'      => 'Edit Assets',
+            'label'      => 'Edit ',
             'note'       => '',
             'display'    => false,
         ),
         array(
             'permission' => 'assets.delete',
-            'label'      => 'Delete Assets',
+            'label'      => 'Delete ',
             'note'       => '',
             'display'    => false,
         ),
         array(
             'permission' => 'assets.checkout',
-            'label'      => 'View Assets',
+            'label'      => 'Checkout ',
             'note'       => '',
             'display'    => false,
+        ),
+
+        array(
+            'permission' => 'assets.checkin',
+            'label'      => 'Checkin ',
+            'note'       => '',
+            'display'    => false,
+        ),
+
+        array(
+            'permission' => 'assets.audit',
+            'label'      => 'Audit ',
+            'note'       => '',
+            'display'    => false,
+        ),
+
+
+        array(
+            'permission' => 'assets.view.requestable',
+            'label'      => 'View Requestable Assets',
+            'note'       => '',
+            'display'    => true,
         ),
     ),
 
     'Accessories' => array(
         array(
             'permission' => 'accessories.view',
-            'label'      => '',
+            'label'      => 'View ',
             'note'       => '',
-            'display'    => false,
+            'display'    => true,
         ),
         array(
             'permission' => 'accessory.create',
-            'label'      => 'Create Assets',
+            'label'      => 'Create ',
             'note'       => '',
             'display'    => false,
         ),
         array(
             'permission' => 'accessories.edit',
-            'label'      => 'Edit Assets',
+            'label'      => 'Edit ',
             'note'       => '',
             'display'    => false,
         ),
         array(
             'permission' => 'accessories.delete',
-            'label'      => 'Delete Assets',
+            'label'      => 'Delete ',
             'note'       => '',
             'display'    => false,
         ),
         array(
             'permission' => 'accessories.checkout',
-            'label'      => 'View Assets',
+            'label'      => 'Checkout ',
+            'note'       => '',
+            'display'    => false,
+        ),
+        array(
+            'permission' => 'accessories.checkin',
+            'label'      => 'Checkin ',
             'note'       => '',
             'display'    => false,
         ),
@@ -98,31 +132,31 @@ return array(
     'Consumables' => array(
         array(
             'permission' => 'consumables.view',
-            'label'      => '',
+            'label'      => 'View',
             'note'       => '',
-            'display'    => false,
+            'display'    => true,
         ),
         array(
             'permission' => 'consumables.create',
-            'label'      => 'Create Consumables',
+            'label'      => 'Create ',
             'note'       => '',
             'display'    => false,
         ),
         array(
             'permission' => 'consumables.edit',
-            'label'      => 'Edit Consumables',
+            'label'      => 'Edit ',
             'note'       => '',
             'display'    => false,
         ),
         array(
             'permission' => 'consumables.delete',
-            'label'      => 'Delete Consumables',
+            'label'      => 'Delete ',
             'note'       => '',
             'display'    => false,
         ),
         array(
             'permission' => 'consumables.checkout',
-            'label'      => 'Checkout Consumables',
+            'label'      => 'Checkout ',
             'note'       => '',
             'display'    => false,
         ),
@@ -132,9 +166,9 @@ return array(
     'Licenses' => array(
         array(
             'permission' => 'licenses.view',
-            'label'      => '',
+            'label'      => 'View',
             'note'       => '',
-            'display'    => false,
+            'display'    => true,
         ),
         array(
             'permission' => 'licenses.create',
@@ -172,9 +206,9 @@ return array(
     'Components' => array(
         array(
             'permission' => 'components.view',
-            'label'      => '',
+            'label'      => 'View',
             'note'       => '',
-            'display'    => false,
+            'display'    => true,
         ),
         array(
             'permission' => 'components.create',
@@ -200,15 +234,21 @@ return array(
             'note'       => '',
             'display'    => false,
         ),
+        array(
+            'permission' => 'components.checkin',
+            'label'      => 'Checkin Components',
+            'note'       => '',
+            'display'    => false,
+        ),
 
     ),
 
     'Users' => array(
         array(
             'permission' => 'users.view',
-            'label'      => 'View Users',
+            'label'      => 'View ',
             'note'       => '',
-            'display'    => false,
+            'display'    => true,
         ),
         array(
             'permission' => 'users.create',
