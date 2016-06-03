@@ -24,7 +24,7 @@
         <script>
             window.snipeit = {
                 settings: {
-                    "per_page": {{ \App\Models\Setting::getSettings()->per_page }}
+                    "per_page": 20
                 }
             };
         </script>
