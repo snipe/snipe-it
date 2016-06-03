@@ -2,34 +2,34 @@
 
 return array(
 
-    'does_not_exist' => 'Component does not exist.',
+    'does_not_exist' => 'جزء وجود ندارد.',
 
     'create' => array(
-        'error'   => 'Component was not created, please try again.',
-        'success' => 'Component created successfully.'
+        'error'   => 'شرکت ایجاد نشد،دوباره سعی کنید.',
+        'success' => 'کامپیوننت ایجاد شد.'
     ),
 
     'update' => array(
-        'error'   => 'Component was not updated, please try again',
-        'success' => 'Component updated successfully.'
+        'error'   => 'کامپیوننت ایجاد نشد،دوباره سعی کنید',
+        'success' => 'کامپیوننت ایجاد شد.'
     ),
 
     'delete' => array(
-        'confirm'   => 'Are you sure you wish to delete this component?',
-        'error'   => 'There was an issue deleting the component. Please try again.',
-        'success' => 'The component was deleted successfully.'
+        'confirm'   => 'آیا مطمعن هستید میخواهید این کامپیوننت را پاک کنید؟?',
+        'error'   => 'موضوع کامپوننت حذف شد. لطفا دوباره سعی کنید.',
+        'success' => 'کامپیوننت حذف شد.'
     ),
 
      'checkout' => array(
-        'error'   		=> 'Component was not checked out, please try again',
-        'success' 		=> 'Component checked out successfully.',
-        'user_does_not_exist' => 'That user is invalid. Please try again.'
+        'error'   		=> 'کامپیوننت پرداخت نشد ، دوباره سعی کنید.',
+        'success' 		=> 'کامپیوننت پرداخت شد.',
+        'user_does_not_exist' => 'کاربر نامعتبر است لطفا دوباره امتحان کنید.'
     ),
 
     'checkin' => array(
-        'error'   		=> 'Component was not checked in, please try again',
-        'success' 		=> 'Component checked in successfully.',
-        'user_does_not_exist' => 'That user is invalid. Please try again.'
+        'error'   		=> 'کامپیوننت بررسی نشد ، دوباره سعی کنید',
+        'success' 		=> 'کامپیوننت بررسی شد.',
+        'user_does_not_exist' => 'کاربر نامعتبر است لطفا دوباره امتحان کنید.'
     )
 
 

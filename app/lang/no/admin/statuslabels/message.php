@@ -2,24 +2,24 @@
 
 return array(
 
-    'does_not_exist' => 'Lokasjon finnes ikke.',
-    'assoc_users'	 => 'Denne lokasjonen er tilknyttet minst en bruker og kan ikke slettes. Endre dine brukere til å ikke bruke denne lokasjonen og prøv igjen. ',
+    'does_not_exist' => 'Status Label does not exist.',
+    'assoc_assets'	 => 'This Status Label is currently associated with at least one Asset and cannot be deleted. Please update your assets to no longer reference this status and try again. ',
 
 
     'create' => array(
-        'error'   => 'Lokasjon ble ikke opprettet. Prøv igjen.',
-        'success' => 'Opprettelse av lokasjon vellykket.'
+        'error'   => 'Status Label was not created, please try again.',
+        'success' => 'Status Label created successfully.'
     ),
 
     'update' => array(
-        'error'   => 'Lokasjon ble ikke oppdatert. Prøv igjen',
-        'success' => 'Oppdatering av lokasjon vellykket.'
+        'error'   => 'Status Label was not updated, please try again',
+        'success' => 'Status Label updated successfully.'
     ),
 
     'delete' => array(
-        'confirm'   => 'Er du sikker på at du vil slette dette statusmerket?',
-        'error'   => 'Det oppstod et problem under sletting av denne lokasjonen. Prøv igjen.',
-        'success' => 'Sletting av lokasjon vellykket.'
+        'confirm'   => 'Are you sure you wish to delete this Status Label?',
+        'error'   => 'There was an issue deleting the Status Label. Please try again.',
+        'success' => 'The Status Label was deleted successfully.'
     )
 
 );

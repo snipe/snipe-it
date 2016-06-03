@@ -7,7 +7,7 @@ return array(
     'cost'				=> 'Aankoopprijs',
     'create'                             => 'Maak verbruiksartikel aan',
     'date'					=> 'Aankoopdatum',
-    'item_no'               => 'Item No.',
+    'item_no'               => 'Item nr.',
     'order'					=> 'Ordernummer',
     'remaining' 			             => 'Resterende',
     'total' 			                 => 'Totaal',

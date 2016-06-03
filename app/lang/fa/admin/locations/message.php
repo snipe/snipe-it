@@ -2,26 +2,26 @@
 
 return array(
 
-    'does_not_exist' => 'Location does not exist.',
-    'assoc_users'	 => 'This location is currently associated with at least one user and cannot be deleted. Please update your users to no longer reference this location and try again. ',
-    'assoc_assets'	 => 'This location is currently associated with at least one asset and cannot be deleted. Please update your assets to no longer reference this location and try again. ',
-    'assoc_child_loc'	 => 'This location is currently the parent of at least one child location and cannot be deleted. Please update your locations to no longer reference this location and try again. ',
+    'does_not_exist' => 'مکان وجود ندارد.',
+    'assoc_users'	 => 'این مکان در حال حاضر با حداقل یک کاربر در ارتباط است و نمی تواند حذف شود. لطفا کاربران خود را به روز رسانی به دیگر مرجع این مکان و دوباره امتحان کنید. ',
+    'assoc_assets'	 => 'این مکان در حال حاضر همراه با حداقل یک دارایی است و قادر به حذف نمی شود. لطفا بروز دارایی های خود را به دیگر این مکان مرجع و دوباره امتحان کنید. ',
+    'assoc_child_loc'	 => 'این مکان در حال حاضر پدر و مادر کودک حداقل یک مکان است و قادر به حذف نمی شود. لطفا به روز رسانی مکان خود را به دیگر این مکان مرجع و دوباره امتحان کنید. ',
 
 
     'create' => array(
-        'error'   => 'Location was not created, please try again.',
-        'success' => 'Location created successfully.'
+        'error'   => 'مکان ایجاد نشد،دوباره سعی کنید.',
+        'success' => 'مکان با موفقیت ایجاد شد.'
     ),
 
     'update' => array(
-        'error'   => 'Location was not updated, please try again',
-        'success' => 'Location updated successfully.'
+        'error'   => 'مکان بروزرسانی نشد،دوباره سعی کنید',
+        'success' => 'مکان با موفقیت به روز رسانی شد.'
     ),
 
     'delete' => array(
-        'confirm'   	=> 'Are you sure you wish to delete this location?',
-        'error'   => 'There was an issue deleting the location. Please try again.',
-        'success' => 'The location was deleted successfully.'
+        'confirm'   	=> 'آیا مطمئن هستید که می خواهید این مکان را حذف کنید؟',
+        'error'   => 'یک مشکل در حذف مکان وجود دارد،دوباره سعی کنید.',
+        'success' => 'این مکان با موفقیت حذف شد.'
     )
 
 );

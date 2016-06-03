@@ -14,9 +14,9 @@ return array(
         'file_not_found'        => 'Die Back-up bestand kon niet gevonden worden op de server.',
     ),
     'purge' => array(
-        'error'     => 'An error has occurred while purging. ',
-        'validation_failed'     => 'Your purge confirmation is incorrect. Please type the word "DELETE" in the confirmation box.',
-        'success'               => 'Deleted records successfully purged.'
+        'error'     => 'Er is iets fout gegaan tijdens het opschonen.',
+        'validation_failed'     => 'De opschoon bevestiging is niet correct. Typ het woord "DELETE" in het bevestigingsveld.',
+        'success'               => 'Verwijderde items succesvol opgeschoond'
     ),
 
 );

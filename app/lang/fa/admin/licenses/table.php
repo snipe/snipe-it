@@ -2,16 +2,17 @@
 
 return array(
 
-    'assigned_to'   	=> 'Assigned To',
-    'checkout'   		=> 'In/Out',
-    'id'      			=> 'ID',
-    'license_email'   	=> 'License Email',
-    'license_name'   	=> 'Licensed To',
-    'purchase_date'   	=> 'Purchase Date',
-    'purchased'   		=> 'Purchased',
-    'seats'   			=> 'Seats',
-    'hardware'   		=> 'Hardware',
-    'serial'   			=> 'Serial',
-    'title'      		=> 'License',
+    'assigned_to'   	=> 'اختصاص داده شده به',
+    'checkout'   		=> '/ خارج',
+    'id'      			=> 'شناسه',
+    'license_email'   	=> 'مجوز ایمیل',
+    'license_name'   	=> 'دارای مجوز به
+',
+    'purchase_date'   	=> 'تاریخ خرید',
+    'purchased'   		=> 'خریداری شده',
+    'seats'   			=> 'صندلی',
+    'hardware'   		=> 'سخت‌افزار',
+    'serial'   			=> 'سریال',
+    'title'      		=> 'توافق‌نامه',
 
 );

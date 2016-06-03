@@ -2,30 +2,30 @@
 
 return array(
 
-    'does_not_exist' => 'Model does not exist.',
-    'assoc_users'	 => 'This model is currently associated with one or more assets and cannot be deleted. Please delete the assets, and then try deleting again. ',
+    'does_not_exist' => 'مدل موجود نیست.',
+    'assoc_users'	 => 'این مدل در حال حاضر همراه یک یا بیشتر از یک دارایی است و نمی تواند حذف شود. لطفا دارایی ها را حذف کنید و سپس برای حذف کردن مجددا تلاش کنید. ',
 
 
     'create' => array(
-        'error'   => 'Model was not created, please try again.',
-        'success' => 'Model created successfully.',
-        'duplicate_set' => 'An asset model with that name, manufacturer and model number already exists.',
+        'error'   => 'مدل ساخته نشده است، لطفا دوباره تلاش کنید.',
+        'success' => 'مدل با موفقیت ساخته شد.',
+        'duplicate_set' => 'یک مدل دارایی با آن نام، سازنده و شماره ی مدل در حال حاضر موجود است.',
     ),
 
     'update' => array(
-        'error'   => 'Model was not updated, please try again',
-        'success' => 'Model updated successfully.'
+        'error'   => 'مدل به روزرسانی نشده است، لطفا دوباره تلاش کنید',
+        'success' => 'مدل با موفقیت به روز رسانی شد.'
     ),
 
     'delete' => array(
-        'confirm'   => 'Are you sure you wish to delete this asset model?',
-        'error'   => 'There was an issue deleting the model. Please try again.',
-        'success' => 'The model was deleted successfully.'
+        'confirm'   => 'آیا شما مطمئن هستید که می خواهید این مدل دارایی را حذف کنید؟',
+        'error'   => 'در زمان حذف کردن مدل، مشکلی وجود داشت. لطفا دوباره تلاش کنید.',
+        'success' => 'مدل با موفقیت حذف شد.'
     ),
 
     'restore' => array(
-        'error'   		=> 'Model was not restored, please try again',
-        'success' 		=> 'Model restored successfully.'
+        'error'   		=> 'مدل بازیابی نشد، لطفا دوباره تلاش کنید',
+        'success' 		=> 'مدل با موفقیت بازیابی شد.'
     ),
 
 );

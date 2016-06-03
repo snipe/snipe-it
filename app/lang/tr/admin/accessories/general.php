@@ -7,7 +7,7 @@ return array(
     'accessory_name'  					=> 'Aksesuar Adı',
     'cost'					=> 'Satın Alma Maliyeti',
     'checkout'  							=> 'Checkout Accessory',
-    'checkin'  							=> 'Checkin Accessory',
+    'checkin'  							=> 'Aksesuar Atama',
     'create'  							=> 'Aksesuar oluşturun',
     'date'					=> 'Satın Alma Tarihi',
     'edit'  							=> 'Aksesuarı Düzenle',

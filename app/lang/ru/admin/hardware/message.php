@@ -36,6 +36,12 @@ return array(
         'invalidfiles' => 'Один или несколько ваших файлов слишком большого размера или имеют неподдерживаемый формат. Разрешены только следующие форматы файлов:  png, gif, jpg, doc, docx, pdf, txt.',
     ),
 
+    'import' => array(
+        'error'         => 'Some Items did not import Correctly.',
+        'errorDetail'   => 'The Following Items were not imported because of errors.',
+        'success'       => "Your File has been imported",
+    ),
+
 
     'delete' => array(
         'confirm'   	=> 'Вы уверены что хотите удалить этот актив?',

@@ -2,24 +2,24 @@
 
 return array(
 
-    'does_not_exist' => 'Lokalizacja nie istnieje.',
-    'assoc_users'	 => 'Lokacja jest aktualnie przypisana do użytkownika przez co nie może być usunięta. Przypisz do użytkownika inną lokacje i spróbuj ponownie. ',
+    'does_not_exist' => 'Status Label does not exist.',
+    'assoc_assets'	 => 'This Status Label is currently associated with at least one Asset and cannot be deleted. Please update your assets to no longer reference this status and try again. ',
 
 
     'create' => array(
-        'error'   => 'Lokalizacja nie została stworzona. Spróbuj ponownie.',
-        'success' => 'Lokalizacja stworzona pomyślnie.'
+        'error'   => 'Status Label was not created, please try again.',
+        'success' => 'Status Label created successfully.'
     ),
 
     'update' => array(
-        'error'   => 'Lokalizacja nie została zaktualizowana, spróbuj ponownie',
-        'success' => 'Lokalizacja zaktualizowana pomyślnie.'
+        'error'   => 'Status Label was not updated, please try again',
+        'success' => 'Status Label updated successfully.'
     ),
 
     'delete' => array(
-        'confirm'   => 'Na pewno usunąć etykietę statusu?',
-        'error'   => 'Podczas usuwania lokalizacji napotkano problem. Spróbuj ponownie.',
-        'success' => 'Lokalizacja usunięta pomyślnie.'
+        'confirm'   => 'Are you sure you wish to delete this Status Label?',
+        'error'   => 'There was an issue deleting the Status Label. Please try again.',
+        'success' => 'The Status Label was deleted successfully.'
     )
 
 );

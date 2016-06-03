@@ -2,24 +2,24 @@
 
 return array(
 
-    'does_not_exist' => 'Sijaintia ei löydy.',
-    'assoc_users'	 => 'Sijainti on määritetty käyttöön yhdelle tai useammalle käyttäjälle joten sitä ei voida poistaa. Poista sijainti käytöstä kaikilta käyttäjiltä ja yritä uudelleen. ',
+    'does_not_exist' => 'Status Label does not exist.',
+    'assoc_assets'	 => 'This Status Label is currently associated with at least one Asset and cannot be deleted. Please update your assets to no longer reference this status and try again. ',
 
 
     'create' => array(
-        'error'   => 'Sijaintia ei luotu, yritä uudelleen.',
-        'success' => 'Sijainti luotiin onnistuneesti.'
+        'error'   => 'Status Label was not created, please try again.',
+        'success' => 'Status Label created successfully.'
     ),
 
     'update' => array(
-        'error'   => 'Sijaintia ei päivitetty, yritä uudelleen',
-        'success' => 'Sijainti päivitettiin onnistuneesti.'
+        'error'   => 'Status Label was not updated, please try again',
+        'success' => 'Status Label updated successfully.'
     ),
 
     'delete' => array(
-        'confirm'   => 'Oletko varma että haluat poistaa tämän tilamerkinnän?',
-        'error'   => 'Sijainnin poistossa tapahtui virhe. Yritä uudelleen.',
-        'success' => 'Sijainti poistettiin onnistuneesti.'
+        'confirm'   => 'Are you sure you wish to delete this Status Label?',
+        'error'   => 'There was an issue deleting the Status Label. Please try again.',
+        'success' => 'The Status Label was deleted successfully.'
     )
 
 );

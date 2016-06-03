@@ -2,24 +2,24 @@
 
 return array(
 
-    'does_not_exist' => 'Địa phương không tồn tại.',
-    'assoc_users'	 => 'Địa phương này hiện tại đang được liên kết với ít nhất một người dùng và không thể xóa. Xin vui lòng cập nhật người dùng để không còn liên kết đến địa phương này và thử lại. ',
+    'does_not_exist' => 'Status Label does not exist.',
+    'assoc_assets'	 => 'This Status Label is currently associated with at least one Asset and cannot be deleted. Please update your assets to no longer reference this status and try again. ',
 
 
     'create' => array(
-        'error'   => 'Địa phương chưa được tạo, xin thử lại.',
-        'success' => 'Địa phương đã tạo thành công.'
+        'error'   => 'Status Label was not created, please try again.',
+        'success' => 'Status Label created successfully.'
     ),
 
     'update' => array(
-        'error'   => 'Địa phương chưa được cập nhật, xin thử lại',
-        'success' => 'Địa phương đã cập nhật thành công.'
+        'error'   => 'Status Label was not updated, please try again',
+        'success' => 'Status Label updated successfully.'
     ),
 
     'delete' => array(
-        'confirm'   => 'Bạn có chắc muốn xóa tình trạng nhãn này?',
-        'error'   => 'Có vấn đề xảy ra khi xóa địa phương. Xin thử lại.',
-        'success' => 'Địa phương đã xóa thành công.'
+        'confirm'   => 'Are you sure you wish to delete this Status Label?',
+        'error'   => 'There was an issue deleting the Status Label. Please try again.',
+        'success' => 'The Status Label was deleted successfully.'
     )
 
 );

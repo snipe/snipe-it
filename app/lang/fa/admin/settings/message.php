@@ -4,19 +4,19 @@ return array(
 
 
     'update' => array(
-        'error'                 => 'An error has occurred while updating. ',
-        'success'               => 'Settings updated successfully.'
+        'error'                 => 'در حین به روزرسانی خطایی رخ داد. ',
+        'success'               => 'تنظیمات با موفقیت به روزرسانی شد.'
     ),
     'backup' => array(
-        'delete_confirm'        => 'Are you sure you would like to delete this backup file? This action cannot be undone. ',
-        'file_deleted'          => 'The backup file was successfully deleted. ',
-        'generated'             => 'A new backup file was successfully created.',
-        'file_not_found'        => 'That backup file could not be found on the server.',
+        'delete_confirm'        => 'آیا شما مطمئن هستید که می خواهید این فایل پشتیبانی را حذف کنید؟ این کار برگشت ناپذیر است. ',
+        'file_deleted'          => 'فایل پشتیبانی با موفقیت حذف شد. ',
+        'generated'             => 'یک فایل پشتیبانی جدید با موفقیت ساخته شد.',
+        'file_not_found'        => 'فایل پشتیبانی بر روی سرور یافت نمی شود.',
     ),
     'purge' => array(
-        'error'     => 'An error has occurred while purging. ',
-        'validation_failed'     => 'Your purge confirmation is incorrect. Please type the word "DELETE" in the confirmation box.',
-        'success'               => 'Deleted records successfully purged.'
+        'error'     => 'در حین پاکسازی خطایی رخ داد. ',
+        'validation_failed'     => 'تایید پاکسازی ناصحیح است. لطفا کلمه ی "حذف" را در جعبه ی تاییدیه تایپ کنید.',
+        'success'               => 'سوابق حذف شده با موفقیت پاکسازی شده اند.'
     ),
 
 );

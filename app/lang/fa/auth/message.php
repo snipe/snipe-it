@@ -2,35 +2,35 @@
 
 return array(
 
-    'account_already_exists' => 'An account with the this email already exists.',
-    'account_not_found'      => 'The username or password is incorrect.',
-    'account_not_activated'  => 'This user account is not activated.',
-    'account_suspended'      => 'This user account is suspended.',
-    'account_banned'         => 'This user account is banned.',
+    'account_already_exists' => 'یک حساب با این ایمیل در حال حاضر وجود دارد.',
+    'account_not_found'      => 'نام کاربری یا رمز عبور اشتباه است.',
+    'account_not_activated'  => 'این حساب کاربری فعال نشده است.',
+    'account_suspended'      => 'این حساب کاربری بسته است.',
+    'account_banned'         => 'این حساب کاربری ممنوع است.',
 
     'signin' => array(
-        'error'   => 'There was a problem while trying to log you in, please try again.',
-        'success' => 'You have successfully logged in.',
+        'error'   => 'مشکلی در حین تلاش به شما در ورود به سیستم وجود دارد، لطفا دوباره امتحان کنید.',
+        'success' => 'شما با موفقیت وارد شدید.',
     ),
 
     'signup' => array(
-        'error'   => 'There was a problem while trying to create your account, please try again.',
-        'success' => 'Account sucessfully created.',
+        'error'   => 'هنگام تلاش برای ایجاد حساب مشکلی روی داد، لطفا دوباره امتحان کنید.',
+        'success' => 'حساب با موفقیت ایجاد شد.',
     ),
 
         'forgot-password' => array(
-            'error'   => 'There was a problem while trying to get a reset password code, please try again.',
-            'success' => 'Password recovery email successfully sent.',
+            'error'   => 'یک مشکل هنگام دریافت کد تنظیم مجدد رمز عبور وجود دارد، لطفا دوباره امتحان کنید.',
+            'success' => 'رمز عبور ایمیل بازیابی با موفقیت ارسال شد.',
         ),
 
         'forgot-password-confirm' => array(
-            'error'   => 'There was a problem while trying to reset your password, please try again.',
-            'success' => 'Your password has been successfully reset.',
+            'error'   => 'مشکلی برای تنظیم مجدد رمز عبور خود وجود دارد، لطفا دوباره امتحان کنید.',
+            'success' => 'رمز عبور خود را با موفقیت بازنشانی شد.',
         ),
 
     'activate' => array(
-        'error'   => 'There was a problem while trying to activate your account, please try again.',
-        'success' => 'Your account has been successfully activated.',
+        'error'   => 'هنگام تلاش برای فعالسازی حساب مشکلی روی داد، لطفا دوباره امتحان کنید.',
+        'success' => 'حساب کاربری شما به موفقیت فعال شد.',
     ),
 
 );

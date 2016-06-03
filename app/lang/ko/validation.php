@@ -33,7 +33,7 @@ return array(
     "digits_between"   => ":attribute 는 :min - :max 자릿수 사이여야 합니다.",
     "email"            => ":attribute 형식이 부정확 합니다.",
     "exists"           => "선택한 :attribute 가 부정확 합니다.",
-    "email_array"      => "One or more email addresses is invalid.",
+    "email_array"      => "하나 이상의 주소가 유효하지 않습니다.",
     "image"            => ":attribute 는 이미지 형식만 가능합니다.",
     "in"               => "선택한 :attribute 가 부정확 합니다.",
     "integer"          => ":attribute 는 정수이어야 합니다.",

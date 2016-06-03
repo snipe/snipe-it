@@ -36,6 +36,12 @@ return array(
         'invalidfiles' => 'Uno o più file è troppo grande o è un tipo di file non consentito. Tipi di file ammessi sono png, gif, jpg, doc, docx, pdf, txt.',
     ),
 
+    'import' => array(
+        'error'         => 'Some Items did not import Correctly.',
+        'errorDetail'   => 'The Following Items were not imported because of errors.',
+        'success'       => "Your File has been imported",
+    ),
+
 
     'delete' => array(
         'confirm'   	=> 'Sei sicuro di voler eliminare questo bene?',

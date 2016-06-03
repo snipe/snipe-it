@@ -35,6 +35,12 @@ return array(
         'invalidfiles' => '一个或多个文件过大或者属于不被允许的文件类型。允许上传的文件类型有PNG，GIF，JPG，DOC，DOCX，PDF和TXT。',
     ),
 
+    'import' => array(
+        'error'         => 'Some Items did not import Correctly.',
+        'errorDetail'   => 'The Following Items were not imported because of errors.',
+        'success'       => "Your File has been imported",
+    ),
+
 
     'delete' => array(
         'confirm'   	=> '你确定要删除这个资产吗？',

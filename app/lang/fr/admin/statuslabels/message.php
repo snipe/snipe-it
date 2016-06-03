@@ -2,24 +2,24 @@
 
 return array(
 
-    'does_not_exist' => 'Le lieu n\'existe pas.',
-    'assoc_users'	 => 'Ce lieu est actuellement associé avec au moins un utilisateur et ne peut pas être supprimé. Veuillez mettre à jour vos utilisateurs pour ne plus faire référence à ce lieu et essayez à nouveau. ',
+    'does_not_exist' => 'Status Label does not exist.',
+    'assoc_assets'	 => 'This Status Label is currently associated with at least one Asset and cannot be deleted. Please update your assets to no longer reference this status and try again. ',
 
 
     'create' => array(
-        'error'   => 'Le lieu n\'a pas été créé, veuillez essayer à nouveau.',
-        'success' => 'Le lieu a été créé avec succès.'
+        'error'   => 'Status Label was not created, please try again.',
+        'success' => 'Status Label created successfully.'
     ),
 
     'update' => array(
-        'error'   => 'Le lieu n\'a pas été mis à jour, veuillez essayer à nouveau',
-        'success' => 'Le lieu a été mis à jour avec succès.'
+        'error'   => 'Status Label was not updated, please try again',
+        'success' => 'Status Label updated successfully.'
     ),
 
     'delete' => array(
-        'confirm'   => 'Êtes-vous sûr de vouloir supprimer cette étiquette de statut ?',
-        'error'   => 'Un problème a eu lieu pendant la suppression du lieu. Veuillez essayer à nouveau.',
-        'success' => 'Le lieu a été supprimé avec succès.'
+        'confirm'   => 'Are you sure you wish to delete this Status Label?',
+        'error'   => 'There was an issue deleting the Status Label. Please try again.',
+        'success' => 'The Status Label was deleted successfully.'
     )
 
 );

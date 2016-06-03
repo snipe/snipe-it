@@ -7,7 +7,7 @@ return array(
     'cost'				=> 'Preço de compra',
     'create'                             => 'Criar um suprimento',
     'date'					=> 'Data da Compra',
-    'item_no'               => 'Item No.',
+    'item_no'               => 'Nº do Item.',
     'order'					=> 'Número da Ordem',
     'remaining' 			             => 'Restante',
     'total' 			                 => 'Total',

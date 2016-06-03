@@ -3,8 +3,8 @@
 return array(
 
     'does_not_exist' => 'دسته بندی موجود نیست.',
-    'assoc_models'	 => 'This category is currently associated with at least one model and cannot be deleted. Please update your models to no longer reference this category and try again. ',
-    'assoc_items'	 => 'This category is currently associated with at least one :asset_type and cannot be deleted. Please update your :asset_type  to no longer reference this category and try again. ',
+    'assoc_models'	 => 'این گروه در حال حاضر همراه با حداقل یک مدل است و قادر به حذف نمی شود. لطفا بروز مدل های خود را به دیگر مرجع این رده و دوباره امتحان کنید. ',
+    'assoc_items'	 => 'این گروه در حال حاضر همراه با حداقل یکی است: asset_type و قادر به حذف نمی شود. لطفا به روز رسانی خود را: asset_type دیگر این گروه مرجع و دوباره امتحان کنید. ',
 
     'create' => array(
         'error'   => 'دسته ایجاد نشد ،دوباره امتحان کنید.',

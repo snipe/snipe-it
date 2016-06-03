@@ -2,12 +2,13 @@
 
 return array(
 
-    'deleted'  					        => 'This model has been deleted. <a href="/hardware/models/:model_id/restore">Click here to restore it</a>.',
-    'restore'                   => 'Restore Model',
-	'show_mac_address'			      => 'Show MAC address field in assets in this model',
-    'view_deleted'              => 'View Deleted',
-    'view_models'               => 'View Models',
-    'fieldset'                  => 'Fieldset',
-    'no_custom_field'           => 'No custom fields',
+    'deleted'  					        => 'این مدل حذف شده است. <a href="/hardware/models/:model_id/restore"> اینجا برای بازگرداندن کلیک کنید it</a>.',
+    'restore'                   => 'بازیابی مدل',
+	'show_mac_address'			      => 'نمایش قسمت آدرس MAC در دارایی در این مدل',
+    'view_deleted'              => 'دیدن پاک شده ها',
+    'view_models'               => 'دیدن مدل ها',
+    'fieldset'                  => 'تنظیمات فیلد',
+    'no_custom_field'           => 'بدون زمینه های سفارشی
+',
 
 );

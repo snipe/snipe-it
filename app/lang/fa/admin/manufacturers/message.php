@@ -2,23 +2,23 @@
 
 return array(
 
-    'does_not_exist' => 'Manufacturer does not exist.',
-    'assoc_users'	 => 'This manufacturer is currently associated with at least one model and cannot be deleted. Please update your models to no longer reference this manufacturer and try again. ',
+    'does_not_exist' => 'تولید کننده وجود ندارد.',
+    'assoc_users'	 => 'این تولید کننده در حال حاضر با حداقل یک مدل همراه است و نمی تواند حذف شود. لطفا مدل های خود را به دیگر مرجع این تولید کننده به روز رسانی کنید و دوباره امتحان کنید.',
 
     'create' => array(
-        'error'   => 'Manufacturer was not created, please try again.',
-        'success' => 'Manufacturer created successfully.'
+        'error'   => 'تولید کننده ایجاد نشد، لطفا دوباره امتحان کنید.',
+        'success' => 'تولید کننده موفقیت ایجاد شد.'
     ),
 
     'update' => array(
-        'error'   => 'Manufacturer was not updated, please try again',
-        'success' => 'Manufacturer updated successfully.'
+        'error'   => 'تولید کننده به روز رسانی نشد، لطفا دوباره امتحان کنید',
+        'success' => 'تولید کننده موفقیت به روز رسانی شد.'
     ),
 
     'delete' => array(
-        'confirm'   => 'Are you sure you wish to delete this manufacturer?',
-        'error'   => 'There was an issue deleting the manufacturer. Please try again.',
-        'success' => 'The Manufacturer was deleted successfully.'
+        'confirm'   => 'آیا شما مطمئن هستید که میخواهید این تولید کننده را حذف کنید؟',
+        'error'   => 'مسئله ای در حذف سازنده وجود دارد. لطفا دوباره تلاش کنید.',
+        'success' => 'تولید کننده با موفقیت حذف شد.'
     )
 
 );
