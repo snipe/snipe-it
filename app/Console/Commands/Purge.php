@@ -140,7 +140,7 @@ class Purge extends Command
                 $supplier->forceDelete();
             }
 
-            $users = User::whereNotNull('deleted_at')->withTrashed()->get();
+            $users = User::whereNotNull('deleted_at')->where('show_in_list','=','0')->withTrashed()->get();
             $this->info($users->count().' users purged.');
             $user_assoc = 0;
             foreach ($users as $user) {
