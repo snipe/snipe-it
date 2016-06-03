@@ -303,7 +303,7 @@ class CategoriesController extends Controller
     public function getDataViewAssets($categoryID) {
 
         $category = Category::with('assets.company')->find($categoryID);
-        $category_assets = $category->assets;
+        $category_assets = $category->assets();
 
         if (Input::has('search')) {
             $category_assets = $category_assets->TextSearch(e(Input::get('search')));
