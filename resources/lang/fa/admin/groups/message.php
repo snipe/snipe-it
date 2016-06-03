@@ -2,21 +2,21 @@
 
 return array(
 
-    'group_exists'        => 'Group already exists!',
-    'group_not_found'     => 'Group [:id] does not exist.',
-    'group_name_required' => 'The name field is required',
+    'group_exists'        => 'گروه در حال حاضر وجود دارد!',
+    'group_not_found'     => 'گروه [: شناسه] وجود ندارد.',
+    'group_name_required' => 'نام زمینه مورد نیاز است',
 
     'success' => array(
-        'create' => 'Group was successfully created.',
-        'update' => 'Group was successfully updated.',
-        'delete' => 'Group was successfully deleted.',
+        'create' => 'گروه با موفقیت ایجاد شد.',
+        'update' => 'گروه با موفقیت بروز شد.',
+        'delete' => 'گروه با موفقیت حذف شد.',
     ),
 
     'delete' => array(
-        'confirm'   => 'Are you sure you wish to delete this group?',
-        'create' => 'There was an issue creating the group. Please try again.',
-        'update' => 'There was an issue updating the group. Please try again.',
-        'delete' => 'There was an issue deleting the group. Please try again.',
+        'confirm'   => 'آیا مطمئن هستید که می خواهید این گروه را حذف کنید؟',
+        'create' => 'اشکال در ایجاد گروه.لطفا دوباره تلاش کنید.',
+        'update' => 'اشکال در به روزرسانی گروه .لطفا دوباره تلاش کنید.',
+        'delete' => 'اشکال در حذف گروه.لطفا دوباره تلاش کنید.',
     ),
 
 );

@@ -13,12 +13,15 @@ return array(
     |
     */
 
-    "password" => "Passwords must be six characters and match the confirmation.",
+    "password" => "کلمه عبور باید شش کاراکتر باشد و مطابقت با تایید آن.
+",
 
-    "user"     => "Username or email address is incorrect",
+    "user"     => "نام کاربری یا آدرس ایمیل اشتباه است",
 
-    "token"    => "This password reset token is invalid.",
+    "token"    => " تنظیم مجدد رمز عبور این نشانه نامعتبر است.
+",
 
-    "sent" => "If a matching email address was found, a password reminder has been sent!",
+    "sent" => "اگر یک آدرس ایمیل تطبیق پیدا شد، یک یادآوری رمز عبور ارسال شده است!
+",
 
 );

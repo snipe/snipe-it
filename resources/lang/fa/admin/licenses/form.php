@@ -2,27 +2,35 @@
 
 return array(
 
-    'asset'             => 'Asset',
-    'checkin'           => 'Checkin',
-    'cost'              => 'Purchase Cost',
-    'create'            => 'Create License',
-    'date'              => 'Purchase Date',
-    'depreciation'      => 'Depreciation',
-    'expiration'        => 'Expiration Date',
-    'maintained'        => 'Maintained',
-    'name'              => 'Software Name',
-    'no_depreciation'   => 'Do Not Depreciate',
-    'notes'             => 'Notes',
-    'order'             => 'Order No.',
-    'purchase_order'    => 'Purchase Order Number',
-    'reassignable'      => 'Reassignable',
-    'remaining_seats'   => 'Remaining Seats',
-    'seats'             => 'Seats',
-    'serial'            => 'Serial',
-    'supplier'          => 'Supplier',
-    'termination_date'  => 'Termination Date',
-    'to_email'          => 'Licensed to Email',
-    'to_name'           => 'Licensed to Name',
-    'update'            => 'Update License',
-    'checkout_help'     => 'You must check a license out to a hardware asset or a person. You can select both, but the owner of the asset must match the person you\'re checking the asset out to.'
+    'asset'             => 'دارایی',
+    'checkin'           => 'چک در',
+    'cost'              => 'هزینه خرید
+',
+    'create'            => 'ایجاد مجوز
+',
+    'date'              => 'تاریخ خرید',
+    'depreciation'      => 'مستهلک کردن',
+    'expiration'        => 'تاریخ انقضا',
+    'maintained'        => 'نگهداری',
+    'name'              => 'نام نرم افزار
+',
+    'no_depreciation'   => 'هنوز مستهلک نشده
+',
+    'notes'             => 'نت ها',
+    'order'             => 'شماره سفارش',
+    'purchase_order'    => 'شماره سفارش خرید',
+    'reassignable'      => 'واگذاری مجدد
+',
+    'remaining_seats'   => 'کرسی های باقی مانده
+',
+    'seats'             => 'صندلی
+',
+    'serial'            => 'سریال',
+    'supplier'          => 'تامین کننده',
+    'termination_date'  => 'تاریخ پایان
+',
+    'to_email'          => ' مجوز به ایمیل',
+    'to_name'           => 'مجوز به نام',
+    'update'            => 'به روز رسانی مجوز',
+    'checkout_help'     => 'شما باید یک مجوز به یک دارایی سخت افزار و یا یک شخص را بررسی کنید. شما می توانید هر دو را انتخاب کنید، اما مالک دارایی باید شخص شما چک کردن دارایی به مطابقت.'
 );

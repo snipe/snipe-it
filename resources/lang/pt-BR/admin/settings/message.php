@@ -14,9 +14,9 @@ return array(
         'file_not_found'        => 'Arquivo de backup não foi encontrado no servidor.',
     ),
     'purge' => array(
-        'error'     => 'An error has occurred while purging. ',
-        'validation_failed'     => 'Your purge confirmation is incorrect. Please type the word "DELETE" in the confirmation box.',
-        'success'               => 'Deleted records successfully purged.'
+        'error'     => 'Ocorreu um erro ao excluir os registros. ',
+        'validation_failed'     => 'Sua confirmação de exclusão está incorreta. Por favor, digite a palavra "DELETE" na caixa de confirmação.',
+        'success'               => 'Registros excluídos com sucesso.'
     ),
 
 );

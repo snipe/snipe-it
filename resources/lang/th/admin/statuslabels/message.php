@@ -2,24 +2,24 @@
 
 return array(
 
-    'does_not_exist' => 'ไม่มีสถานที่นี้',
-    'assoc_users'	 => 'สถานที่นี้ถูกใช้งานหรือเกี่ยวข้องอยู่กับผู้ใช้งานคนใดคนหนึ่ง และไม่สามารถลบได้ กรุณาปรับปรุงผู้ใช้งานของท่านไม่ให้มีส่วนเกี่ยวข้องกับสถานที่นี้ และลองอีกครั้ง ',
+    'does_not_exist' => 'Status Label does not exist.',
+    'assoc_assets'	 => 'This Status Label is currently associated with at least one Asset and cannot be deleted. Please update your assets to no longer reference this status and try again. ',
 
 
     'create' => array(
-        'error'   => 'สถานที่ยังไม่ถูกสร้าง กรุณาลองใหม่อีกครั้ง',
-        'success' => 'สร้างสถานที่เรียบร้อยแล้ว'
+        'error'   => 'Status Label was not created, please try again.',
+        'success' => 'Status Label created successfully.'
     ),
 
     'update' => array(
-        'error'   => 'สถานที่ยังไม่ถูกปรับปรุง กรุณาลองใหม่อีกครั้ง',
-        'success' => 'ปรับปรุงสถานที่เรียบร้อยแล้ว'
+        'error'   => 'Status Label was not updated, please try again',
+        'success' => 'Status Label updated successfully.'
     ),
 
     'delete' => array(
-        'confirm'   => 'คุณแน่ใจที่จะลบป้ายสถานะนี้?',
-        'error'   => 'มีปัญหาระหว่างการลบ กรุณาลองใหม่อีกครั้ง',
-        'success' => 'ลบสถานที่เรียบร้อยแล้ว'
+        'confirm'   => 'Are you sure you wish to delete this Status Label?',
+        'error'   => 'There was an issue deleting the Status Label. Please try again.',
+        'success' => 'The Status Label was deleted successfully.'
     )
 
 );

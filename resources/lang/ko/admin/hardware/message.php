@@ -36,6 +36,12 @@ return array(
         'invalidfiles' => '하나 이상의 파일이 너무 크거나 허용되지 않는  형식입니다. 허용되는 형식은 png, gif, jpg, doc, docx, pdf, txt 입니다.',
     ),
 
+    'import' => array(
+        'error'         => 'Some Items did not import Correctly.',
+        'errorDetail'   => 'The Following Items were not imported because of errors.',
+        'success'       => "Your File has been imported",
+    ),
+
 
     'delete' => array(
         'confirm'   	=> '이 자산을 삭제하시겠습니까?',
@@ -53,7 +59,7 @@ return array(
         'error'   		=> '자산이 반입되지 않았습니다. 다시 시도해 주세요.',
         'success' 		=> '자산이 반입되었습니다.',
         'user_does_not_exist' => '잘못된 사용자 입니다. 다시 시도해 주세요.',
-        'already_checked_in'  => 'That asset is already checked in.',
+        'already_checked_in'  => '그 자산은 이미 반입되었습니다.',
 
     ),
 

@@ -1,12 +1,12 @@
 <?php
 
 return [
-    'send_password_link'	        => 'Send Password Reset Link',
-    'email_reset_password'			=> 'Email Password Reset',
-    'reset_password'			    => 'Reset Password',
-    'login'                         => 'Login',
-    'login_prompt'                  => 'Please Login',
-    'forgot_password'               => 'I forgot my password',
-    'remember_me'                   => 'Remember Me',
+    'send_password_link'	        => 'ارسال لینک بازنشانی کلمه عبور',
+    'email_reset_password'			=> 'پست الکترونیکی کلمه عبور بازنشانی',
+    'reset_password'			    => 'بازنشانی گذرواژه',
+    'login'                         => 'ورود',
+    'login_prompt'                  => 'لطفا وارد شوید',
+    'forgot_password'               => 'گذرواژه خود را فراموش کرده ام',
+    'remember_me'                   => 'مرا به خاطر بسپار',
     ];
 

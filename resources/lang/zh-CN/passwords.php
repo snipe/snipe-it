@@ -1,7 +1,7 @@
 <?php
 
 return [
-    'sent'	        => 'Your password link has been sent!',
-    'user'			=> 'That user does not exist or does not have an email address associated',
+    'sent'	        => '已发送您的密码链接 ！',
+    'user'			=> '该用户不存在或没有关联的电子邮件地址',
 ];
 

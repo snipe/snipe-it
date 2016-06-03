@@ -2,9 +2,9 @@
 
 return array(
 
-    'actions'	 	=> 'Actions',
-    'action' 		=> 'Action',
-    'by'      		=> 'By',
-    'item' 			=> 'Item',
+    'actions'	 	=> 'فعالیت ها',
+    'action' 		=> 'فعالیت',
+    'by'      		=> 'توسط',
+    'item' 			=> 'مورد',
 
 );

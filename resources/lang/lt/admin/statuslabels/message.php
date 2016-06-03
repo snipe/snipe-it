@@ -2,24 +2,24 @@
 
 return array(
 
-    'does_not_exist' => 'Tokios vietovės nėra.',
-    'assoc_users'	 => 'Ši vietovė šiuo metu yra susieta bent su vienu vartotoju ir negali būti ištrinta. Prašome atnaujinkite naudotojus, kad atsieti šią vietovę ir tuomet bandykite iš naujo. ',
+    'does_not_exist' => 'Status Label does not exist.',
+    'assoc_assets'	 => 'This Status Label is currently associated with at least one Asset and cannot be deleted. Please update your assets to no longer reference this status and try again. ',
 
 
     'create' => array(
-        'error'   => 'Vietovė nesukurta. Prašome bandykite dar kartą.',
-        'success' => 'Vietovė sėkmingai sukurta.'
+        'error'   => 'Status Label was not created, please try again.',
+        'success' => 'Status Label created successfully.'
     ),
 
     'update' => array(
-        'error'   => 'Vietovė neatnaujinta. Prašome bandykite dar kartą',
-        'success' => 'Vietovė sėkmingai atnaujinta.'
+        'error'   => 'Status Label was not updated, please try again',
+        'success' => 'Status Label updated successfully.'
     ),
 
     'delete' => array(
-        'confirm'   => 'Ar jūs tikrai norite ištrinti būklės kortelę?',
-        'error'   => 'Nepavyko ištrinti vietovės. Prašome bandykite dar kartą.',
-        'success' => 'Vietovė sėkmingai ištrinta.'
+        'confirm'   => 'Are you sure you wish to delete this Status Label?',
+        'error'   => 'There was an issue deleting the Status Label. Please try again.',
+        'success' => 'The Status Label was deleted successfully.'
     )
 
 );

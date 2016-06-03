@@ -2,64 +2,69 @@
 
 return array(
 
-    'undeployable' 		=> '<strong>Warning: </strong> This asset has been marked as currently undeployable.
-                        If this status has changed, please update the asset status.',
-    'does_not_exist' 	=> 'Asset does not exist.',
-    'does_not_exist_or_not_requestable' => 'Nice try. That asset does not exist or is not requestable.',
-    'assoc_users'	 	=> 'This asset is currently checked out to a user and cannot be deleted. Please check the asset in first, and then try deleting again. ',
+    'undeployable' 		=> '<strong> اخطار: </ strong> این دارایی به برانگیز گزارش شده است که در حال حاضر undeployable. اگر این وضعیت تغییر کرده است، لطفا به روز رسانی وضعیت دارایی.',
+    'does_not_exist' 	=> 'دارایی وجود ندارد.',
+    'does_not_exist_or_not_requestable' => 'دوباره تلاش کنید . این دارایی وجود ندارد.',
+    'assoc_users'	 	=> 'این دارایی در حال حاضر به یک کاربر چک کردن و پاک نمی شود. لطفا دارایی در اولین بار چک کنید، و سپس سعی کنید دوباره حذف کنید.',
 
     'create' => array(
-        'error'   		=> 'Asset was not created, please try again. :(',
-        'success' 		=> 'Asset created successfully. :)'
+        'error'   		=> 'دارایی ساخته نشده است، لطفا دوباره تلاش کنید.',
+        'success' 		=> 'دارایی موفقیت ایجاد شده است. :)'
     ),
 
     'update' => array(
-        'error'   			=> 'Asset was not updated, please try again',
-        'success' 			=> 'Asset updated successfully.',
-        'nothing_updated'	=>  'No fields were selected, so nothing was updated.',
+        'error'   			=> 'دارایی به روز نیست، لطفا دوباره امتحان کنید',
+        'success' 			=> 'دارایی ها با موفقیت به روز رسانی.',
+        'nothing_updated'	=>  'هیچ زمینه، انتخاب شدند تا هیچ چیز به روز شد.',
     ),
 
     'restore' => array(
-        'error'   		=> 'Asset was not restored, please try again',
-        'success' 		=> 'Asset restored successfully.'
+        'error'   		=> 'دارایی بازیابی نشد، لطفا دوباره تلاش کنید',
+        'success' 		=> 'دارایی با موفقیت بازیابی شد.'
     ),
 
     'deletefile' => array(
-        'error'   => 'File not deleted. Please try again.',
-        'success' => 'File successfully deleted.',
+        'error'   => 'فایل حذف نمی شود. لطفا دوباره تلاش کنید.',
+        'success' => 'فایل با موفقیت حذف شده است.',
     ),
 
     'upload' => array(
-        'error'   => 'File(s) not uploaded. Please try again.',
-        'success' => 'File(s) successfully uploaded.',
-        'nofiles' => 'You did not select any files for upload, or the file you are trying to upload is too large',
-        'invalidfiles' => 'One or more of your files is too large or is a filetype that is not allowed. Allowed filetypes are png, gif, jpg, doc, docx, pdf, and txt.',
+        'error'   => 'فایل) آپلود نیست. لطفا دوباره تلاش کنید.',
+        'success' => 'فایل (موفقیت آپلود شد.',
+        'nofiles' => 'شما هر فایل برای آپلود انتخاب کنید، و یا فایل شما در حال تلاش برای آپلود بیش از حد بزرگ است',
+        'invalidfiles' => 'یک یا بیشتر از فایل های خود را بیش از حد بزرگ است یا یک نوع فایل است که مجاز است. انواع فایل های مجاز عبارتند از PNG، GIF، JPG، DOC، DOCX، PDF، TXT و.',
+    ),
+
+    'import' => array(
+        'error'         => 'Some Items did not import Correctly.',
+        'errorDetail'   => 'The Following Items were not imported because of errors.',
+        'success'       => "Your File has been imported",
     ),
 
 
     'delete' => array(
-        'confirm'   	=> 'Are you sure you wish to delete this asset?',
-        'error'   		=> 'There was an issue deleting the asset. Please try again.',
-        'success' 		=> 'The asset was deleted successfully.'
+        'confirm'   	=> 'آیا شما مطمئن هستید که می خواهید این تنظیمات دارایی را حذف کنید؟',
+        'error'   		=> 'اشکال در حذف دارایی.لطفا دوباره تلاش کنید.',
+        'success' 		=> 'دارایی با موفقیت حذف شد.'
     ),
 
     'checkout' => array(
-        'error'   		=> 'Asset was not checked out, please try again',
-        'success' 		=> 'Asset checked out successfully.',
-        'user_does_not_exist' => 'That user is invalid. Please try again.'
+        'error'   		=> 'دارایی در بررسی نیست، لطفا دوباره امتحان کنید',
+        'success' 		=> 'دارایی را بررسی کنید موفقیت.',
+        'user_does_not_exist' => 'کاربر نامعتبر است لطفا دوباره امتحان کنید.'
     ),
 
     'checkin' => array(
-        'error'   		=> 'Asset was not checked in, please try again',
-        'success' 		=> 'Asset checked in successfully.',
-        'user_does_not_exist' => 'That user is invalid. Please try again.',
-        'already_checked_in'  => 'That asset is already checked in.',
+        'error'   		=> 'دارایی در بررسی نیست، لطفا دوباره امتحان کنید',
+        'success' 		=> 'دارایی ها با موفقیت در بررسی.',
+        'user_does_not_exist' => 'آن کاربر نامعتبر است. لطفا دوباره سعی کنید.',
+        'already_checked_in'  => 'دارایی ها که در حال حاضر انتخاب شده است.',
 
     ),
 
     'requests' => array(
-        'error'   		=> 'Asset was not requested, please try again',
-        'success' 		=> 'Asset requested successfully.',
+        'error'   		=> 'دارایی شد درخواست نمی کند، لطفا دوباره امتحان کنید',
+        'success' 		=> 'دارایی موفقیت درخواست شده است.',
     )
 
 );

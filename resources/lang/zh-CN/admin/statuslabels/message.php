@@ -2,24 +2,24 @@
 
 return array(
 
-    'does_not_exist' => '位置不存在',
-    'assoc_users'	 => '该位置下关联的还有其他用户，目前不能删除，请更新该用户的信息之后，再尝试删除。',
+    'does_not_exist' => 'Status Label does not exist.',
+    'assoc_assets'	 => 'This Status Label is currently associated with at least one Asset and cannot be deleted. Please update your assets to no longer reference this status and try again. ',
 
 
     'create' => array(
-        'error'   => '位置没有被创建，请重试。',
-        'success' => '位置创建成功。'
+        'error'   => 'Status Label was not created, please try again.',
+        'success' => 'Status Label created successfully.'
     ),
 
     'update' => array(
-        'error'   => '位置没有被更新，请重试。',
-        'success' => '位置更新成功。'
+        'error'   => 'Status Label was not updated, please try again',
+        'success' => 'Status Label updated successfully.'
     ),
 
     'delete' => array(
-        'confirm'   => '确定删除状态标签？',
-        'error'   => '删除位置的过成中出现了一点儿问题，请重试。',
-        'success' => '位置已经成功删除。'
+        'confirm'   => 'Are you sure you wish to delete this Status Label?',
+        'error'   => 'There was an issue deleting the Status Label. Please try again.',
+        'success' => 'The Status Label was deleted successfully.'
     )
 
 );

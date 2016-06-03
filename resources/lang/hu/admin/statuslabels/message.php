@@ -2,24 +2,24 @@
 
 return array(
 
-    'does_not_exist' => 'Hely nem létezik.',
-    'assoc_users'	 => 'Ez a hely jelenleg hozzá rendelve legalább egy felhasználóhoz, és nem törölhető. Kérjük, frissítse a felhasználókat, hogy ne hivatkozzanak erre a helyre, és próbálja meg újra. ',
+    'does_not_exist' => 'Status Label does not exist.',
+    'assoc_assets'	 => 'This Status Label is currently associated with at least one Asset and cannot be deleted. Please update your assets to no longer reference this status and try again. ',
 
 
     'create' => array(
-        'error'   => 'Az elhelyezkedés nem jött létre, próbálkozz újra.',
-        'success' => 'Location created successfully.'
+        'error'   => 'Status Label was not created, please try again.',
+        'success' => 'Status Label created successfully.'
     ),
 
     'update' => array(
-        'error'   => 'Location was not updated, please try again',
-        'success' => 'Location updated successfully.'
+        'error'   => 'Status Label was not updated, please try again',
+        'success' => 'Status Label updated successfully.'
     ),
 
     'delete' => array(
-        'confirm'   => 'Are you sure you wish to delete this status label?',
-        'error'   => 'There was an issue deleting the location. Please try again.',
-        'success' => 'The location was deleted successfully.'
+        'confirm'   => 'Are you sure you wish to delete this Status Label?',
+        'error'   => 'There was an issue deleting the Status Label. Please try again.',
+        'success' => 'The Status Label was deleted successfully.'
     )
 
 );

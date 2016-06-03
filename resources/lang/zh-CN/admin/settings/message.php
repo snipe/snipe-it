@@ -14,9 +14,9 @@ return array(
         'file_not_found'        => '在服务器上找不到备份文件。',
     ),
     'purge' => array(
-        'error'     => 'An error has occurred while purging. ',
-        'validation_failed'     => 'Your purge confirmation is incorrect. Please type the word "DELETE" in the confirmation box.',
-        'success'               => 'Deleted records successfully purged.'
+        'error'     => '清除过程中出现了错误。 ',
+        'validation_failed'     => '你的清除确认不正确，请在输入框中输入“DELETE”。',
+        'success'               => '删除记录已被成功的清除。'
     ),
 
 );

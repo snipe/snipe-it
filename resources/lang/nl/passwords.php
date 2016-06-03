@@ -1,7 +1,7 @@
 <?php
 
 return [
-    'sent'	        => 'Your password link has been sent!',
-    'user'			=> 'That user does not exist or does not have an email address associated',
+    'sent'	        => 'Er is een wachtwoord link naar je verstuurd!',
+    'user'			=> 'Deze gebruiker bestaat niet of er is geen e-mail adres ingevuld.',
 ];
 

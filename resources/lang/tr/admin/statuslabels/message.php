@@ -2,24 +2,24 @@
 
 return array(
 
-    'does_not_exist' => 'Konum mevcut değil.',
-    'assoc_users'	 => 'Konum en az 1 kullanıcı ile ilişkili durumda ve silinemez. Lütfen önce kullanıcıları güncelleyerek konumu boşaltın ve tekrar deneyin. ',
+    'does_not_exist' => 'Status Label does not exist.',
+    'assoc_assets'	 => 'This Status Label is currently associated with at least one Asset and cannot be deleted. Please update your assets to no longer reference this status and try again. ',
 
 
     'create' => array(
-        'error'   => 'Konum oluşturulamadı, lütfen tekrar deneyin.',
-        'success' => 'Konum oluşturuldu.'
+        'error'   => 'Status Label was not created, please try again.',
+        'success' => 'Status Label created successfully.'
     ),
 
     'update' => array(
-        'error'   => 'Konum güncellenemedi, lütfen tekrar deneyin',
-        'success' => 'Konum güncellendi.'
+        'error'   => 'Status Label was not updated, please try again',
+        'success' => 'Status Label updated successfully.'
     ),
 
     'delete' => array(
-        'confirm'   => 'Durum Etiketini silmek istediğinize emin misiniz?',
-        'error'   => 'Konum silinirken bir hata oluştu. Lütfen tekrar deneyin.',
-        'success' => 'Konum silindi.'
+        'confirm'   => 'Are you sure you wish to delete this Status Label?',
+        'error'   => 'There was an issue deleting the Status Label. Please try again.',
+        'success' => 'The Status Label was deleted successfully.'
     )
 
 );

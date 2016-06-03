@@ -1,44 +1,60 @@
 <?php
 
 return array(
-	'bulk_delete'		=> 'Confrm Bulk Delete Assets',
-  'bulk_delete_help'	=> 'Review the assets for bulk deletion below. Once deleted, these assets can be restored, but they will no longer be associated with any users they are currently assigned to.',
-  'bulk_delete_warn'	=> 'You are about to delete :asset_count assets.',
-	'bulk_update'		=> 'Bulk Update Assets',
-	'bulk_update_help'	=> 'This form allows you to update multiple assets at once. Only fill in the fields you need to change. Any fields left blank will remain unchanged. ',
-	'bulk_update_warn'	=> 'You are about to edit the properties of :asset_count assets.',
-    'checkedout_to'		=> 'Checked Out To',
-    'checkout_date'		=> 'Checkout Date',
-    'checkin_date'		=> 'Checkin Date',
-    'checkout_to'		=> 'Checkout to',
-    'cost'				=> 'Purchase Cost',
-    'create'			=> 'Create Asset',
-    'date'				=> 'Purchase Date',
-    'depreciates_on'	=> 'Depreciates On',
-    'depreciation'		=> 'Depreciation',
-    'default_location'	=> 'Default Location',
-    'eol_date'			=> 'EOL Date',
-    'eol_rate'			=> 'EOL Rate',
-    'expected_checkin'  => 'Expected Checkin Date',
-    'expires'			=> 'Expires',
-    'fully_depreciated'	=> 'Fully Depreciated',
-    'help_checkout'		=> 'If you wish to assign this asset immediately, select "Ready to Deploy" from the status list above. ',
-    'mac_address'		=> 'MAC Address',
-    'manufacturer'		=> 'Manufacturer',
-    'model'				=> 'Model',
-    'months'			=> 'months',
-    'name'				=> 'Asset Name',
-    'notes'				=> 'Notes',
-    'order'				=> 'Order Number',
-    'qr'				=> 'QR Code',
-    'requestable'		=> 'Users may request this asset',
-    'select_statustype'	=> 'Select Status Type',
-    'serial'			=> 'Serial',
-    'status'			=> 'Status',
-    'supplier'			=> 'Supplier',
-    'tag'				=> 'Asset Tag',
-    'update'			=> 'Asset Update',
-    'warranty'			=> 'Warranty',
-    'years'				=> 'years',
+	'bulk_delete'		=> 'اعلام حذف دسته ای دارایی ها',
+  'bulk_delete_help'	=> 'بررسی دارایی برای حذف فله زیر کلیک کنید. به محض حذف این دارایی ها را می توان ترمیم کرد، اما ان ها دیگر قابل دسترسی با یوزر های دیگر نیستند.',
+  'bulk_delete_warn'	=> 'شما در حال حذف: دارایی های تعداد دارایی.',
+	'bulk_update'		=> 'به روز رسانی دارایی های فله',
+	'bulk_update_help'	=> 'این فرم برای به روز رسانی دارایی های متعدد در یک بار را به شما اجازه می دهد. تنها قسمت ها نیاز به تغییر را پر کنید. هر زمینه های خالی سمت چپ بدون تغییر باقی می ماند. ',
+	'bulk_update_warn'	=> 'شما در حال ادیت مشخصات : ',
+    'checkedout_to'		=> 'تحویل شده به
+
+',
+    'checkout_date'		=> 'چک کردن تاریخ
+',
+    'checkin_date'		=> 'تاریخ ورود
+',
+    'checkout_to'		=> 'اتمام به
+',
+    'cost'				=> 'هزینه خرید',
+    'create'			=> 'ایجاد دارایی
+',
+    'date'				=> 'تاریخ خرید
+',
+    'depreciates_on'	=> 'مستهلک کردن 
+',
+    'depreciation'		=> 'مستهلک کردن
+',
+    'default_location'	=> ' پیش فرض محل سکونت
+',
+    'eol_date'			=> ' تاریخ EOL
+',
+    'eol_rate'			=> ' نرخ EOL',
+    'expected_checkin'  => ' چک در تاریخ را پر کنید',
+    'expires'			=> 'تاریخ انقضا
+',
+    'fully_depreciated'	=> 'به طور کامل مستهلک شده',
+    'help_checkout'		=> 'اگر شما مایل به اختصاص این دارایی ها هستید بلافاصله، "آماده به استقرار" از لیست وضعیت به بالا انتخاب کنید.',
+    'mac_address'		=> 'مک ادرس',
+    'manufacturer'		=> 'سازنده',
+    'model'				=> 'مدل',
+    'months'			=> 'ماه ها',
+    'name'				=> 'نام دارایی',
+    'notes'				=> 'نت ها',
+    'order'				=> 'شماره سفارش',
+    'qr'				=> 'کیو آر کد',
+    'requestable'		=> 'کاربران ممکن است این دارایی هارا درخواست کنند
+',
+    'select_statustype'	=> 'انتخاب نوع وضعیت',
+    'serial'			=> 'سریال',
+    'status'			=> 'وضعیت',
+    'supplier'			=> 'تامین کننده
+',
+    'tag'				=> 'برچسب دارایی
+',
+    'update'			=> 'به روز رسانی دارایی
+',
+    'warranty'			=> 'گارانتی',
+    'years'				=> 'سال ها',
 )
 ;

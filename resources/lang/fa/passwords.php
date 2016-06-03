@@ -1,7 +1,7 @@
 <?php
 
 return [
-    'sent'	        => 'Your password link has been sent!',
-    'user'			=> 'That user does not exist or does not have an email address associated',
+    'sent'	        => 'لینک رمز عبور شما ارسال شده است!',
+    'user'			=> 'کاربر وجود ندارد  و یا یک آدرس ایمیل مرتبط ندارد ',
 ];
 

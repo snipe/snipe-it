@@ -1,12 +1,12 @@
 <?php
 
 return [
-    'send_password_link'	        => 'Send Password Reset Link',
-    'email_reset_password'			=> 'Email Password Reset',
-    'reset_password'			    => 'Reset Password',
-    'login'                         => 'Login',
-    'login_prompt'                  => 'Please Login',
-    'forgot_password'               => 'I forgot my password',
-    'remember_me'                   => 'Remember Me',
+    'send_password_link'	        => '发送密码重置链接',
+    'email_reset_password'			=> '邮箱密码重置',
+    'reset_password'			    => '重置密码',
+    'login'                         => '登录',
+    'login_prompt'                  => '请登录',
+    'forgot_password'               => '我忘记了我的密码',
+    'remember_me'                   => '记住我',
     ];
 

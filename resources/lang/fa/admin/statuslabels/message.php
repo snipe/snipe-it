@@ -2,24 +2,24 @@
 
 return array(
 
-    'does_not_exist' => 'مکان وجود ندارد.',
-    'assoc_users'	 => 'این مکان در حال حاضر با حداقل یک کاربر در ارتباط است و نمی تواند حذف شود. لطفا کاربران خود را به روز رسانی به دیگر مرجع این مکان و دوباره امتحان کنید.',
+    'does_not_exist' => 'Status Label does not exist.',
+    'assoc_assets'	 => 'This Status Label is currently associated with at least one Asset and cannot be deleted. Please update your assets to no longer reference this status and try again. ',
 
 
     'create' => array(
-        'error'   => 'مکان ایجاد نشد،دوباره سعی کنید.',
-        'success' => 'مکان ایجاد شد.'
+        'error'   => 'Status Label was not created, please try again.',
+        'success' => 'Status Label created successfully.'
     ),
 
     'update' => array(
-        'error'   => 'مکان بروزرسانی نشد،دوباره سعی کنید',
-        'success' => 'مکان با موفقیت به روز رسانی شد.'
+        'error'   => 'Status Label was not updated, please try again',
+        'success' => 'Status Label updated successfully.'
     ),
 
     'delete' => array(
-        'confirm'   => 'آیا شما مطمئن هستید که میخواهید این برچسب وضعیت را حذف کنید؟',
-        'error'   => 'یک مشکل در حذف مکان وجود دارد،دوباره سعی کنید.',
-        'success' => 'این مکان حذف شد.'
+        'confirm'   => 'Are you sure you wish to delete this Status Label?',
+        'error'   => 'There was an issue deleting the Status Label. Please try again.',
+        'success' => 'The Status Label was deleted successfully.'
     )
 
 );

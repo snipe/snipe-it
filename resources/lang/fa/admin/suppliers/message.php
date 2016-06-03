@@ -12,13 +12,13 @@ return array(
 
     'update' => array(
         'error'   => 'تامین کننده آپدیت نشد, لطفا دوباره سعی کنید',
-        'success' => 'Supplier updated successfully.'
+        'success' => 'کارپرداز با موفقیت به روز رسانی شد.'
     ),
 
     'delete' => array(
-        'confirm'   => 'Are you sure you wish to delete this supplier?',
-        'error'   => 'There was an issue deleting the supplier. Please try again.',
-        'success' => 'Supplier was deleted successfully.'
+        'confirm'   => 'آیا شما مطمئن هستید که می خواهید این کارپرداز را حذف کنید؟',
+        'error'   => 'در حذف کردن این کارپرداز مشکلی وجود داشت. لطفا دوباره تلاش کنید.',
+        'success' => 'کارپرداز با موفقیت حذف شد.'
     )
 
 );

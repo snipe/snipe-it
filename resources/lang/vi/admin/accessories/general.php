@@ -5,7 +5,7 @@ return array(
     'about_accessories_text'  			=> 'Phụ kiện (Accessories) đã bàn giao cho người dùng mà ko có số sê-ri (hoặc bạn không quan tâm đến việc theo dõi những phụ kiện này). Ví dụ như: chuột hay bàn phím.',
     'accessory_category' 				=> 'Hạng Mục Phụ Kiện',
     'accessory_name'  					=> 'Tên Phụ Kiện',
-    'cost'					=> 'Purchase Cost',
+    'cost'					=> 'Chi phí mua hàng',
     'checkout'  							=> 'Checkout Accessory',
     'checkin'  							=> 'Checkin Accessory',
     'create'  							=> 'Tạo Phụ Kiện',

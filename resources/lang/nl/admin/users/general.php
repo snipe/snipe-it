@@ -4,14 +4,14 @@
 return array(
 
     'assets_user'       => 'Materiaal toegewezen aan :name',
-    'current_assets'    => 'Assets currently checked out to this user',
+    'current_assets'    => 'Op dit moment aan deze gebruiker uitgeleverde producten',
     'clone'             => 'Gebruiker klonen',
     'contact_user'      => 'Contact :name',
     'edit'              => 'Gebruiker aanpassen',
     'filetype_info'     => 'Toegestane bestandstypes zijn png, gif, jpg, jpeg, doc, docx, pdf, txt, zip, and rar.',
     'history_user'      => 'Geschiedenis voor :name',
     'last_login'        => 'Laatst aangemeld',
-    'ldap_config_text'  => 'LDAP configuration settings can be found Admin > Settings. The (optional) selected location will be set for all imported users.',
+    'ldap_config_text'  => 'LDAP configuratie kan worden gevonden in Admin > Instellingen. De (optioneel) geselecteerde locatie zal voor alle geimporteerde gebruikers ingesteld worden.',
     'software_user'     => 'Software toegekend aan :name',
     'view_user'         => 'Bekijk gebruiker :name',
     'usercsv'           => 'CSV bestand',

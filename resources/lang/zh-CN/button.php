@@ -5,7 +5,7 @@ return array(
     'actions' 	                => '操作',
     'add'    	                => '新增',
     'cancel'                    => '取消',
-    'checkin_and_delete'  	    => 'Checkin & Delete User',
+    'checkin_and_delete'  	    => '签入与删除用户',
     'delete'  	                => '刪除',
     'edit'    	                => '编辑',
     'restore' 	                => '恢复',

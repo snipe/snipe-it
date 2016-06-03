@@ -2,49 +2,50 @@
 
 return array(
 
-    'does_not_exist' => 'License does not exist.',
-    'user_does_not_exist' => 'User does not exist.',
-    'asset_does_not_exist' 	=> 'The asset you are trying to associate with this license does not exist.',
-    'owner_doesnt_match_asset' => 'The asset you are trying to associate with this license is owned by somene other than the person selected in the assigned to dropdown.',
-    'assoc_users'	 => 'This license is currently checked out to a user and cannot be deleted. Please check the license in first, and then try deleting again. ',
+    'does_not_exist' => 'مجوز وجود ندارد.',
+    'user_does_not_exist' => 'کاربر وجود ندارد.',
+    'asset_does_not_exist' 	=> 'دارایی شما در حال تلاش برای ارتباط با این مجوز وجود ندارد.',
+    'owner_doesnt_match_asset' => 'دارایی شما در حال تلاش برای ارتباط با این مجوز توسط کسی غیر از فرد در اختصاص داده شده به انتخاب کرکره متعلق به.
+',
+    'assoc_users'	 => 'این مجوز در حال حاضر به یک کاربر چک کردن و پاک نمی شود. لطفا مجوز در اولین بار چک کنید، و سپس سعی کنید دوباره حذف کنید.',
 
 
     'create' => array(
-        'error'   => 'License was not created, please try again.',
-        'success' => 'License created successfully.'
+        'error'   => 'مجوز ایجاد نمی شد، لطفا دوباره امتحان کنید.',
+        'success' => 'مجوز ایجاد نمی شد، لطفا دوباره امتحان کنید.مجوز ایجاد نمی شد، لطفا دوباممجوز موفقیت ایجاد شده است.اد شده است.ره امتحان کنید.'
     ),
 
     'deletefile' => array(
-        'error'   => 'File not deleted. Please try again.',
-        'success' => 'File successfully deleted.',
+        'error'   => 'فایل حذف نمی شود. لطفا دوباره تلاش کنید.',
+        'success' => 'فایل با موفقیت حذف شده است.',
     ),
 
     'upload' => array(
-        'error'   => 'File(s) not uploaded. Please try again.',
-        'success' => 'File(s) successfully uploaded.',
-        'nofiles' => 'You did not select any files for upload, or the file you are trying to upload is too large',
-        'invalidfiles' => 'One or more of your files is too large or is a filetype that is not allowed. Allowed filetypes are png, gif, jpg, doc, docx, pdf, and txt.',
+        'error'   => 'فایل) آپلود نیست. لطفا دوباره تلاش کنید.',
+        'success' => 'فایل (موفقیت آپلود شد.',
+        'nofiles' => 'شما هر فایل برای آپلود انتخاب کنید، و یا فایل شما در حال تلاش برای آپلود بیش از حد بزرگ است',
+        'invalidfiles' => 'یک یا بیشتر از فایل های خود را بیش از حد بزرگ است یا یک نوع فایل است که مجاز است. انواع فایل های مجاز عبارتند از PNG، GIF، JPG، DOC، DOCX، PDF، TXT و.',
     ),
 
     'update' => array(
-        'error'   => 'License was not updated, please try again',
-        'success' => 'License updated successfully.'
+        'error'   => 'مجوز به روز رسانی نمی شد، لطفا دوباره امتحان کنید',
+        'success' => 'مجوز موفقیت به روز شد.'
     ),
 
     'delete' => array(
-        'confirm'   => 'Are you sure you wish to delete this license?',
-        'error'   => 'There was an issue deleting the license. Please try again.',
-        'success' => 'The license was deleted successfully.'
+        'confirm'   => 'آیا شما مطمئن هستید که میخواهید حذف این مجوز؟',
+        'error'   => 'بود یک موضوع حذف مجوز وجود دارد. لطفا دوباره تلاش کنید.',
+        'success' => 'مجوز موفقیت حذف شد.'
     ),
 
     'checkout' => array(
-        'error'   => 'There was an issue checking out the license. Please try again.',
-        'success' => 'The license was checked out successfully'
+        'error'   => 'بود یک موضوع چک کردن مجوز وجود دارد. لطفا دوباره تلاش کنید.',
+        'success' => 'مجوز خارج بررسی شد موفقیت'
     ),
 
     'checkin' => array(
-        'error'   => 'There was an issue checking in the license. Please try again.',
-        'success' => 'The license was checked in successfully'
+        'error'   => 'بود یک موضوع چک کردن در مجوز وجود دارد. لطفا دوباره تلاش کنید.',
+        'success' => 'مجوز بررسی شده با موفقیت'
     ),
 
 );

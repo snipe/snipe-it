@@ -2,24 +2,24 @@
 
 return array(
 
-    'does_not_exist' => 'Depreciation class does not exist.',
-    'assoc_users'	 => 'This depreciation is currently associated with one or more models and cannot be deleted. Please delete the models, and then try deleting again. ',
+    'does_not_exist' => 'دسته ی استهلاک وجود ندارد.',
+    'assoc_users'	 => 'این استهلاک در حال حاضر همراه با یک یا چند مدل دیگر است و نمی تواند حذف شود. لطفا یکی از مدل ها را حذف کنید و سپس برای حذف کردن دوباره تلاش کنید. ',
 
 
     'create' => array(
-        'error'   => 'Depreciation class was not created, please try again. :(',
-        'success' => 'Depreciation class created successfully. :)'
+        'error'   => 'دسته ی استهلاک ساخته نشده بود، لطفا دوباره تلاش کنید. :(',
+        'success' => 'دسته ی استهلاک با موفقیت ساخته شد :)'
     ),
 
     'update' => array(
-        'error'   => 'Depreciation class was not updated, please try again',
-        'success' => 'Depreciation class updated successfully.'
+        'error'   => 'دسته ی استهلاک به روز رسانی نشده بود، لطفا دوباره تلاش کنید',
+        'success' => 'دسته ی استهلاک با موفقیت به روز رسانی شد.'
     ),
 
     'delete' => array(
-        'confirm'   => 'Are you sure you wish to delete this depreciation class?',
-        'error'   => 'There was an issue deleting the depreciation class. Please try again.',
-        'success' => 'The depreciation class was deleted successfully.'
+        'confirm'   => 'آیا شما مطمئن هستید که می خواهید این دسته ی استهلاک را حذف کنید؟',
+        'error'   => 'در حذف کردن دسته ی استهلاک مشکلی وجود داشت. لطفا دوباره تلاش کنید.',
+        'success' => 'دسته ی استهلاک با موفقیت حذف شد.'
     )
 
 );

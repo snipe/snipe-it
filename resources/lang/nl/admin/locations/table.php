@@ -1,7 +1,7 @@
 <?php
 
 return array(
-    'assets_rtd'		=> 'Assets', // This has NEVER meant Assets Retired. I don't know how it keeps getting reverted.
+    'assets_rtd'		=> 'Producten', // This has NEVER meant Assets Retired. I don't know how it keeps getting reverted.
     'assets_checkedout'		=> 'Toegewezen producten',
     'id'      		=> 'ID',
     'city'   		=> 'Stad',

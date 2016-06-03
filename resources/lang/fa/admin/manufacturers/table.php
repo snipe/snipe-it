@@ -2,10 +2,10 @@
 
 return array(
 
-    'asset_manufacturers'	=> 'Asset Manufacturers',
-    'create'				=> 'Create Manufacturer',
-    'id'   					=> 'ID',
-    'name'      			=> 'Manufacturer Name',
-    'update'				=> 'Update Manufacturer',
+    'asset_manufacturers'	=> 'تولید کنندگان دارایی',
+    'create'				=> 'ایجاد سازنده',
+    'id'   					=> 'شناسه',
+    'name'      			=> 'نام تولیدکننده',
+    'update'				=> 'به روز رسانی تولیدکننده',
 
 );
