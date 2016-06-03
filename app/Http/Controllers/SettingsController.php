@@ -185,7 +185,9 @@ class SettingsController extends Controller
         if ((!$user->isValid()) || (!$settings->isValid())) {
             return redirect()->back()->withInput()->withErrors($user->getErrors())->withErrors($settings->getErrors());
         } else {
-
+            $user->save();
+            $settings->save();
+            
             if (Input::get('email_creds')=='1') {
                 Mail::send(['text' => 'emails.firstadmin'], $data, function ($m) use ($data) {
                     $m->to($data['email'], $data['first_name']);
