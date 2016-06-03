@@ -81,20 +81,16 @@ class AuthController extends Controller
     function loginRemoteUser($username){
         try {
             $user = User::where('username', '=', $username)->whereNull('deleted_at')->first();
-            if(!$user){
+            if(!$user) {
                 return false;
             }
             // Log the user in
             Auth::login($user,false);        
             LOG::info("Login complete as $username");
             return true;
-        } catch (Cartalyst\Sentry\Users\LoginRequiredException $e) {
-           LOG::error('Login field is required.');
+        } catch (Exception $e) {
+           LOG::error($e->getMessage());
            return false;
-        } catch (Cartalyst\Sentry\Users\UserNotFoundException $e) {
-            LOG::error("User $username not found.");
-        } catch (Cartalyst\Sentry\Users\UserNotActivatedException $e) {
-            LOG::error('User not activated.');
         }
     }
 
