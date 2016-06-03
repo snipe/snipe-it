@@ -24,22 +24,21 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     protected $fillable = ['first_name', 'last_name', 'email','password','username'];
 
 
-  /**
-   * Model validation rules
-   *
-   * @var array
-   */
+    /**
+     * Model validation rules
+     *
+     * @var array
+     */
 
     protected $rules = [
-      'first_name'              => 'required|string|min:1',
-      'last_name'               => 'required|string|min:1',
-      'username'                => 'required|string|min:2|unique:users,username,NULL,deleted_at',
-      'email'                   => 'email',
-      'password'                => 'required|min:6',
+        'first_name'              => 'required|string|min:1',
+        'last_name'               => 'required|string|min:1',
+        'username'                => 'required|string|min:2|unique:users,username,NULL,deleted_at',
+        'email'                   => 'email',
+        'password'                => 'required|min:6',
     ];
 
 
-  // This is very coarse and should be changed
     public function hasAccess($section)
     {
 
@@ -56,7 +55,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 
         $user_permissions = json_decode($this->permissions, true);
 
-        if ((array_key_exists($section, $user_permissions)) && ($user_permissions[$section]=='1'))  {
+        if (($user_permissions!='') && ((array_key_exists($section, $user_permissions)) && ($user_permissions[$section]=='1')) ) {
             $permitted = true;
         }
 
@@ -83,7 +82,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
                 return true;
             }
         }
-        
+
         if ((array_key_exists('superuser', $user_permissions)) && ($user_permissions['superuser']=='1')) {
             return true;
         }
@@ -107,12 +106,12 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     }
 
 
-  /**
-   * Returns the user full name, it simply concatenates
-   * the user first and last name.
-   *
-   * @return string
-   */
+    /**
+     * Returns the user full name, it simply concatenates
+     * the user first and last name.
+     *
+     * @return string
+     */
     public function fullName()
     {
         return "{$this->first_name} {$this->last_name}";
@@ -120,19 +119,19 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 
     public function getFullNameAttribute()
     {
-      return $this->first_name . " " . $this->last_name;
+        return $this->first_name . " " . $this->last_name;
     }
 
     public function getCompleteNameAttribute()
     {
-      return $this->last_name . ", " . $this->first_name . " (" . $this->username . ")";
+        return $this->last_name . ", " . $this->first_name . " (" . $this->username . ")";
     }
 
-  /**
-   * Returns the user Gravatar image url.
-   *
-   * @return string
-   */
+    /**
+     * Returns the user Gravatar image url.
+     *
+     * @return string
+     */
     public function gravatar()
     {
 
@@ -141,9 +140,9 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
         }
 
         if ($this->email) {
-          // Generate the Gravatar hash
+            // Generate the Gravatar hash
             $gravatar = md5(strtolower(trim($this->email)));
-          // Return the Gravatar url
+            // Return the Gravatar url
             return "//gravatar.com/avatar/".$gravatar;
         }
 
@@ -151,65 +150,65 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 
     }
 
-  /**
-  * Get assets assigned to this user
-  */
+    /**
+     * Get assets assigned to this user
+     */
     public function assets()
     {
         return $this->hasMany('\App\Models\Asset', 'assigned_to')->withTrashed();
     }
 
-  /**
-  * Get accessories assigned to this user
-  */
+    /**
+     * Get accessories assigned to this user
+     */
     public function accessories()
     {
         return $this->belongsToMany('\App\Models\Accessory', 'accessories_users', 'assigned_to', 'accessory_id')->withPivot('id')->withTrashed();
     }
 
-  /**
-  * Get consumables assigned to this user
-  */
+    /**
+     * Get consumables assigned to this user
+     */
     public function consumables()
     {
         return $this->belongsToMany('\App\Models\Consumable', 'consumables_users', 'assigned_to', 'consumable_id')->withPivot('id')->withTrashed();
     }
 
- /**
- * Get licenses assigned to this user
- */
+    /**
+     * Get licenses assigned to this user
+     */
     public function licenses()
     {
         return $this->belongsToMany('\App\Models\License', 'license_seats', 'assigned_to', 'license_id')->withPivot('id');
     }
 
-  /**
-  * Get action logs for this user
-  */
+    /**
+     * Get action logs for this user
+     */
     public function userlog()
     {
         return $this->hasMany('\App\Models\Actionlog', 'checkedout_to')->orderBy('created_at', 'DESC')->withTrashed();
     }
 
-  /**
-  * Get the asset's location based on the assigned user
-  **/
+    /**
+     * Get the asset's location based on the assigned user
+     **/
     public function userloc()
     {
         return $this->belongsTo('\App\Models\Location', 'location_id')->withTrashed();
     }
 
-  /**
-  * Get the user's manager based on the assigned user
-  **/
+    /**
+     * Get the user's manager based on the assigned user
+     **/
     public function manager()
     {
         return $this->belongsTo('\App\Models\User', 'manager_id')->withTrashed();
     }
 
-  /**
-  * Get user groups
-  */
+    /**
+     * Get user groups
+     */
     public function groups()
     {
         static $static_cache = null;
@@ -242,16 +241,16 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
         return $this->hasMany('\App\Models\Asset', 'id')->withTrashed();
     }
 
-  /**
-  * Get uploads for this asset
-  */
+    /**
+     * Get uploads for this asset
+     */
     public function uploads()
     {
         return $this->hasMany('\App\Models\Actionlog', 'asset_id')
-          ->where('asset_type', '=', 'user')
-          ->where('action_type', '=', 'uploaded')
-          ->whereNotNull('filename')
-          ->orderBy('created_at', 'desc');
+            ->where('asset_type', '=', 'user')
+            ->where('action_type', '=', 'uploaded')
+            ->whereNotNull('filename')
+            ->orderBy('created_at', 'desc');
     }
 
     public function sentryThrottle()
@@ -269,10 +268,10 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
         return $query->whereNull('deleted_at');
     }
 
-  /**
-  * Override the SentryUser getPersistCode method for
-  * multiple logins at one time
-  **/
+    /**
+     * Override the SentryUser getPersistCode method for
+     * multiple logins at one time
+     **/
     public function getPersistCode()
     {
 
@@ -290,8 +289,8 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     public function scopeMatchEmailOrUsername($query, $user_username, $user_email)
     {
         return $query->where('email', '=', $user_email)
-        ->orWhere('username', '=', $user_username)
-        ->orWhere('username', '=', $user_email);
+            ->orWhere('username', '=', $user_username)
+            ->orWhere('username', '=', $user_email);
     }
 
 
@@ -309,7 +308,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
             $email_last_name = $last_name;
             $user_username = $first_name;
 
-        // There is a last name given
+            // There is a last name given
         } else {
 
             $last_name = str_replace($first_name, '', $users_name);
@@ -345,46 +344,46 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
         return json_decode($this->permissions, true);
     }
 
-/**
-* Query builder scope to search on text
-*
-* @param  Illuminate\Database\Query\Builder  $query  Query builder instance
-* @param  text                              $search      Search term
-*
-* @return Illuminate\Database\Query\Builder          Modified query builder
-*/
+    /**
+     * Query builder scope to search on text
+     *
+     * @param  Illuminate\Database\Query\Builder  $query  Query builder instance
+     * @param  text                              $search      Search term
+     *
+     * @return Illuminate\Database\Query\Builder          Modified query builder
+     */
     public function scopeTextsearch($query, $search)
     {
 
         return $query->where(function ($query) use ($search) {
             $query->where('users.first_name', 'LIKE', "%$search%")
-            ->orWhere('users.last_name', 'LIKE', "%$search%")
-            ->orWhere('users.email', 'LIKE', "%$search%")
-            ->orWhere('users.username', 'LIKE', "%$search%")
-            ->orWhere('users.notes', 'LIKE', "%$search%")
-            ->orWhere('users.employee_num', 'LIKE', "%$search%")
-            ->orWhere(function ($query) use ($search) {
-                $query->whereHas('userloc', function ($query) use ($search) {
-                    $query->where('locations.name', 'LIKE', '%'.$search.'%');
-                });
-            })
+                ->orWhere('users.last_name', 'LIKE', "%$search%")
+                ->orWhere('users.email', 'LIKE', "%$search%")
+                ->orWhere('users.username', 'LIKE', "%$search%")
+                ->orWhere('users.notes', 'LIKE', "%$search%")
+                ->orWhere('users.employee_num', 'LIKE', "%$search%")
+                ->orWhere(function ($query) use ($search) {
+                    $query->whereHas('userloc', function ($query) use ($search) {
+                        $query->where('locations.name', 'LIKE', '%'.$search.'%');
+                    });
+                })
 
-        // Ugly, ugly code because Laravel sucks at self-joins
-            ->orWhere(function ($query) use ($search) {
-                $query->whereRaw("users.manager_id IN (select id from users where first_name LIKE '%".$search."%' OR last_name LIKE '%".$search."%') ");
-            });
+                // Ugly, ugly code because Laravel sucks at self-joins
+                ->orWhere(function ($query) use ($search) {
+                    $query->whereRaw("users.manager_id IN (select id from users where first_name LIKE '%".$search."%' OR last_name LIKE '%".$search."%') ");
+                });
         });
 
     }
 
 
-  /**
-   * Query builder scope for Deleted users
-   *
-   * @param  Illuminate\Database\Query\Builder $query Query builder instance
-   *
-   * @return Illuminate\Database\Query\Builder          Modified query builder
-   */
+    /**
+     * Query builder scope for Deleted users
+     *
+     * @param  Illuminate\Database\Query\Builder $query Query builder instance
+     *
+     * @return Illuminate\Database\Query\Builder          Modified query builder
+     */
 
     public function scopeDeleted($query)
     {
@@ -392,28 +391,28 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     }
 
 
-  /**
-  * Query builder scope to order on manager
-  *
-  * @param  Illuminate\Database\Query\Builder  $query  Query builder instance
-  * @param  text                              $order         Order
-  *
-  * @return Illuminate\Database\Query\Builder          Modified query builder
-  */
+    /**
+     * Query builder scope to order on manager
+     *
+     * @param  Illuminate\Database\Query\Builder  $query  Query builder instance
+     * @param  text                              $order         Order
+     *
+     * @return Illuminate\Database\Query\Builder          Modified query builder
+     */
     public function scopeOrderManager($query, $order)
     {
-      // Left join here, or it will only return results with parents
+        // Left join here, or it will only return results with parents
         return $query->leftJoin('users as manager', 'users.manager_id', '=', 'manager.id')->orderBy('manager.first_name', $order)->orderBy('manager.last_name', $order);
     }
 
-  /**
-  * Query builder scope to order on company
-  *
-  * @param  Illuminate\Database\Query\Builder  $query  Query builder instance
-  * @param  text                              $order         Order
-  *
-  * @return Illuminate\Database\Query\Builder          Modified query builder
-  */
+    /**
+     * Query builder scope to order on company
+     *
+     * @param  Illuminate\Database\Query\Builder  $query  Query builder instance
+     * @param  text                              $order         Order
+     *
+     * @return Illuminate\Database\Query\Builder          Modified query builder
+     */
     public function scopeOrderLocation($query, $order)
     {
         return $query->leftJoin('locations', 'users.location_id', '=', 'locations.id')->orderBy('locations.name', $order);
