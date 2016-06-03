@@ -59,7 +59,7 @@ RUN \
 	rm -rf "/var/www/html/public/uploads/avatars"   && ln -fs "/var/lib/snipeit/data/uploads/avatars"   "/var/www/html/public/uploads/avatars"   && \
 	rm -rf "/var/www/html/public/uploads/models"    && ln -fs "/var/lib/snipeit/data/uploads/models"    "/var/www/html/public/uploads/models"    && \
 	rm -rf "/var/www/html/public/uploads/suppliers" && ln -fs "/var/lib/snipeit/data/uploads/suppliers" "/var/www/html/public/uploads/suppliers" && \
-	rm -r "/var/www/html/storage/backups"        && ln -fs "/var/lib/snipeit/dumps"                  "/var/www/html/storage/backups"
+	rm -r "/var/www/html/storage/app/backups"        && ln -fs "/var/lib/snipeit/dumps"                  "/var/www/html/storage/app/backups"
 
 ############## DEPENDENCIES via COMPOSER ###################
 
