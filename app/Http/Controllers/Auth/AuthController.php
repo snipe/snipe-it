@@ -17,7 +17,7 @@ use View;
 
 /**
  * This controller handles authentication for the user, including local
- * database users and LDAP users.
+ * database users, LDAP users, and built in webserver authentication.
  *
  * @todo Move LDAP methods into user model for better separation of concerns.
  * @author [A. Gianotto] [<snipe@snipe.net>]
@@ -51,49 +51,27 @@ class AuthController extends Controller
 
     function showLoginForm()
     {
-      // Is the user logged in?
+        // Is the user logged in?
         if (Auth::check()) {
             return redirect()->intended('dashboard');
         }
+        // Are we using webserver based authentication
+        if (getenv('HTTP_AUTHENTICATION')) {
+            $loggedInUser = getenv(getenv('HTTP_AUTHENTICATION_VARIABLE_USER'));
+            if ($loggedInUser) {
+                if ($this->loginRemoteUser($loggedInUser)) {
+                    $redirect = \Session::get('loginRedirect', 'home');
+                    // Unset the page we were before from the session
+                    \Session::forget('loginRedirect');
 
-        if(getenv('OIDC_CLAIM_upn')) {
-            if($this->loginRemoteUser(getenv('OIDC_CLAIM_upn'))){
-                $redirect = \Session::get('loginRedirect', 'dashboard');
-                // Unset the page we were before from the session
-                \Session::forget('loginRedirect');
-
-                // Redirect to the users page
-                return redirect()->to($redirect)->with('success', trans('auth/message.signin.success'));
+                    // Redirect to the users page
+                    return redirect()->to($redirect)->with('success', trans('auth/message.signin.success'));
+                }
             }
         }
         // Show the page
         return View::make('auth.login');
     }
-
-
-    /**
-     * Authenticates a user via Remote_USER
-     *
-     * @param $username
-     * @return bool true    if the username is valid 
-     *              false   if the username is invalud
-     */
-    function loginRemoteUser($username){
-        try {
-            $user = User::where('username', '=', $username)->whereNull('deleted_at')->first();
-            if(!$user) {
-                return false;
-            }
-            // Log the user in
-            Auth::login($user,false);        
-            LOG::info("Login complete as $username");
-            return true;
-        } catch (Exception $e) {
-           LOG::error($e->getMessage());
-           return false;
-        }
-    }
-
 
 
 
@@ -112,10 +90,10 @@ class AuthController extends Controller
     function ldap($username, $password, $returnUser = false)
     {
 
-        $ldaphost    = Setting::getSettings()->ldap_server;
-        $ldaprdn     = Setting::getSettings()->ldap_uname;
-        $ldappass    = \Crypt::decrypt(Setting::getSettings()->ldap_pword);
-        $baseDn      = Setting::getSettings()->ldap_basedn;
+        $ldaphost = Setting::getSettings()->ldap_server;
+        $ldaprdn = Setting::getSettings()->ldap_uname;
+        $ldappass = \Crypt::decrypt(Setting::getSettings()->ldap_pword);
+        $baseDn = Setting::getSettings()->ldap_basedn;
         $filterQuery = Setting::getSettings()->ldap_auth_filter_query . $username;
         $ldapversion = Setting::getSettings()->ldap_version;
         $ldap_server_cert_ignore = Setting::getSettings()->ldap_server_cert_ignore;
@@ -134,15 +112,15 @@ class AuthController extends Controller
 
         try {
             if ($connection) {
-              // binding to ldap server
+                // binding to ldap server
                 $ldapbind = ldap_bind($connection, $ldaprdn, $ldappass);
                 if (($results = @ldap_search($connection, $baseDn, $filterQuery)) != false) {
                     $entry = ldap_first_entry($connection, $results);
                     if (($userDn = @ldap_get_dn($connection, $entry)) != false) {
                         if (($isBound = ldap_bind($connection, $userDn, $password)) == "true") {
                             return $returnUser ?
-                            array_change_key_case(ldap_get_attributes($connection, $entry), CASE_LOWER)
-                            : true;
+                                array_change_key_case(ldap_get_attributes($connection, $entry), CASE_LOWER)
+                                : true;
                         }
                     }
                 }
@@ -150,8 +128,8 @@ class AuthController extends Controller
         } catch (Exception $e) {
             LOG::error($e->getMessage());
         }
-           ldap_close($connection);
-            return false;
+        ldap_close($connection);
+        return false;
     }
 
     /**
@@ -192,10 +170,11 @@ class AuthController extends Controller
               'permissions' => ["user" => 1], //'{"user":1}',
               'notes' => 'Imported from LDAP'
             );
+            //FIXME this code hasn't been updated
             User::save($newuser);
 
         } else {
-            throw new Cartalyst\Sentry\Users\UserNotFoundException();
+            throw new Exception('User not found');
         }
 
         //$item["note"] = "<strong>created</strong>";
@@ -290,7 +269,7 @@ class AuthController extends Controller
      */
     public function logout()
     {
-        if(getenv('OIDC_CLAIM_upn')){
+        if(getenv('HTTP_AUTHENTICATION')  && getenv(getenv('HTTP_AUTHENTICATION_VARIABLE_USER'))){
                 return redirect()->route('home')->with('error', 'You must log out of SSO to log out of snipeit.');
         }
         // Log the user out
@@ -314,4 +293,127 @@ class AuthController extends Controller
             'password' => 'required',
         ]);
     }
+
+
+
+    /**
+     * Authenticates a user via Remote_USER
+     *
+     * @param $username
+     * @return bool true    if the username is valid
+     *              false   if the username is invalud
+     */
+    function loginRemoteUser($username){
+        try {
+            $user = User::where('username', '=', $username)->whereNull('deleted_at')->first();
+            if(!$user) {
+                if(getenv('HTTP_AUTHENTICATION_AUTO_PROVISION')){
+                    return $this->createUserFromHttpEnv();
+                }
+                return false;
+            }
+            // Log the user in
+            Auth::login($user,false);
+            LOG::info("Login complete as $username via HTTP Authentication");
+            if(getenv('HTTP_AUTHENTICATION_AUTO_PROVISION')) {
+                $this->maybeUpdateFromEnv($user);
+            }
+            return true;
+        } catch (Exception $e) {
+            LOG::error($e->getMessage());
+            return false;
+        }
+    }
+
+    /**
+     * Create user from web server passed variables
+     *
+     * @return bool
+     */
+    function createUserFromHttpEnv()
+    {
+        //Get environement attributes
+        $http_result_username = getenv(getenv('HTTP_AUTHENTICATION_VARIABLE_USER'));
+        $http_result_last_name = getenv(getenv('HTTP_AUTHENTICATION_VARIABLE_FIRSTNAME'));
+        $http_result_first_name = getenv(getenv('HTTP_AUTHENTICATION_VARIABLE_LASTNAME'));
+        $http_result_email = getenv(getenv('HTTP_AUTHENTICATION_VARIABLE_EMAIL'));
+        $http_permissions = getenv(getenv('HTTP_AUTHENTICATION_DEFAULT_GROUP'));
+
+        //Populate user data
+        $item = array();
+        $item["username"] = isset($http_result_username) ? $http_result_username : "";
+        $item["lastname"] = isset($http_result_last_name) ? $http_result_last_name : "";
+        $item["firstname"] = isset($http_result_first_name) ? $http_result_first_name : "";
+        $item["email"] = isset($http_result_email) ? $http_result_email : "";
+        $item["permissions"] = isset($http_permissions) ? $http_permissions : "";
+
+        //create user
+        if (!empty($item["username"])) {
+            $pass = bin2hex(openssl_random_pseudo_bytes(8)); //random hex string via secure PRNG
+            //CONSIDER is there a way to specify user has no password instead?
+
+            $user = new User();
+            $user->first_name = $item["firstname"];
+            $user->last_name = $item["lastname"];
+            $user->username = $item["username"];
+            $user->email = $item["email"];
+            $user->password = bcrypt($pass); //$pass,
+            $user->activated = 1;
+            $user->permissions = "\{ {$item['permissions']}:1\}";
+            $user->notes = 'Provisioned from HTTP Authentication';
+            return $user->save();
+
+        } else {
+            throw new Exception('User not found');
+        }
+    }
+
+    /**
+     * Update user profile based on information from HTTP Environment provider
+     * @param $user
+     * @return User
+     */
+    function maybeUpdateFromEnv($user){
+        //Get environement attributes
+        $http_result_last_name = getenv(getenv('HTTP_AUTHENTICATION_VARIABLE_FIRSTNAME'));
+        $http_result_first_name = getenv(getenv('HTTP_AUTHENTICATION_VARIABLE_LASTNAME'));
+        $http_result_email = getenv(getenv('HTTP_AUTHENTICATION_VARIABLE_EMAIL'));
+
+        return $this->maybeUpdate($user,$http_result_first_name,$http_result_last_name,$http_result_email);
+    }
+
+    /**
+     * If fields on user differ, then update.
+     * @param $user
+     * @param $first_name
+     * @param $last_name
+     * @param $email
+     * @return User
+     */
+    function maybeUpdate($user,$first_name,$last_name,$email){
+        $changed=false;
+        if($user['first_name']!= isset($first_name)?$first_name:$user['first_name']){
+            $changed=true;
+            $user['first_name']=$first_name;
+        }
+        if($user['last_name']!= isset($last_name)?$last_name:$user['last_name']){
+            $changed=true;
+            $user['last_name']=$last_name;
+        }
+        if($user['email']!= isset($email)?$email:$user['email']){
+            $changed=true;
+            $user['email']=$email;
+        }
+        if($changed){
+            LOG::info("Updating user {$user['username']} with information from authentication provider");
+            return $user->save();
+        }
+        return $user;
+    }
+
+
+
+
+
+
 }
