@@ -52,7 +52,7 @@ class ConsumablesController extends Controller
     public function getCreate()
     {
         // Show the page
-        $category_list = array('' => '') + DB::table('categories')->where('category_type', '=', 'consumable')->whereNull('deleted_at')->orderBy('name', 'ASC')->lists('name', 'id');
+        $category_list = Helper::categoryList('consumable');
         $company_list = Helper::companyList();
         $location_list = Helper::locationsList();
         $manufacturer_list = Helper::manufacturerList();
@@ -132,7 +132,7 @@ class ConsumablesController extends Controller
             return redirect()->to('admin/consumables')->with('error', trans('general.insufficient_permissions'));
         }
 
-            $category_list =  Helper::categoryList();
+        $category_list =  Helper::categoryList('consumable');
         $company_list = Helper::companyList();
         $location_list = Helper::locationsList();
         $manufacturer_list = Helper::manufacturerList();

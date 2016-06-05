@@ -52,7 +52,7 @@ class AccessoriesController extends Controller
     public function getCreate(Request $request)
     {
         // Show the page
-        $category_list = array('' => '') + DB::table('categories')->where('category_type', '=', 'accessory')->whereNull('deleted_at')->orderBy('name', 'ASC')->lists('name', 'id');
+        $category_list = Helper::categoryList('accessory'); 
         $company_list = Helper::companyList();
         $location_list = Helper::locationsList();
         return View::make('accessories/edit')
@@ -125,7 +125,7 @@ class AccessoriesController extends Controller
             return redirect()->to('admin/accessories')->with('error', trans('general.insufficient_permissions'));
         }
 
-        $category_list = array('' => '') + DB::table('categories')->where('category_type', '=', 'accessory')->whereNull('deleted_at')->orderBy('name', 'ASC')->lists('name', 'id');
+        $category_list = Helper::categoryList('accessory');
         $company_list = Helper::companyList();
         $location_list = Helper::locationsList();
 
