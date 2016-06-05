@@ -452,7 +452,7 @@ class AssetModelsController extends Controller
 
         foreach ($models as $model) {
             if ($model->deleted_at == '') {
-                $actions = '<div style=" white-space: nowrap;"><a href="'.route('update/model', $model->id).'" class="btn btn-warning btn-sm" style="margin-right:5px;"><i class="fa fa-pencil icon-white"></i></a><a data-html="false" class="btn delete-asset btn-danger btn-sm" data-toggle="modal" href="'.route('delete/model', $model->id).'" data-content="'.trans('admin/models/message.delete.confirm').'" data-title="'.trans('general.delete').' '.htmlspecialchars($model->name).'?" onClick="return false;"><i class="fa fa-trash icon-white"></i></a></div>';
+                $actions = '<div style=" white-space: nowrap;"><a href="'.route('clone/model', $model->id).'" class="btn btn-info btn-sm" title="Clone Model" data-toggle="tooltip"><i class="fa fa-clone"></i></a> <a href="'.route('update/model', $model->id).'" class="btn btn-warning btn-sm" style="margin-right:5px;"><i class="fa fa-pencil icon-white"></i></a><a data-html="false" class="btn delete-asset btn-danger btn-sm" data-toggle="modal" href="'.route('delete/model', $model->id).'" data-content="'.trans('admin/models/message.delete.confirm').'" data-title="'.trans('general.delete').' '.htmlspecialchars($model->name).'?" onClick="return false;"><i class="fa fa-trash icon-white"></i></a></div>';
             } else {
                 $actions = '<a href="'.route('restore/model', $model->id).'" class="btn btn-warning btn-sm"><i class="fa fa-recycle icon-white"></i></a>';
             }
