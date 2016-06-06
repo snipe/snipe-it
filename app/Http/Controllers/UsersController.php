@@ -130,10 +130,8 @@ class UsersController extends Controller
             }
             return redirect::route('users')->with('success', trans('admin/users/message.success.create'));
         } else {
-            redirect()->back()->withInput()->withInput()->withErrors($user->getErrors())->withErrors($settings->getErrors());
+            return redirect()->back()->withInput()->withInput()->withErrors($user->getErrors());
         }
-
-        return redirect()->route('create/user')->withInput()->with('error', $error);
     }
 
     /**
