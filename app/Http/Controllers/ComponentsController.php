@@ -54,7 +54,7 @@ class ComponentsController extends Controller
     public function getCreate()
     {
         // Show the page
-        $category_list = array('' => '') + DB::table('categories')->where('category_type', '=', 'component')->whereNull('deleted_at')->orderBy('name', 'ASC')->lists('name', 'id');
+        $category_list = Helper::categoryList('component');
         $company_list = Helper::companyList();
         $location_list = Helper::locationsList();
 
@@ -133,7 +133,7 @@ class ComponentsController extends Controller
             return redirect()->to('admin/components')->with('error', trans('general.insufficient_permissions'));
         }
 
-            $category_list =  Helper::categoryList();
+        $category_list =  Helper::categoryList('component');
         $company_list = Helper::companyList();
         $location_list = Helper::locationsList();
 

@@ -117,12 +117,14 @@ class Helper
     }
 
 
-    public static function categoryList()
+    public static function categoryList($category_type = null)
     {
-        $category_list = array('' => '') + Category::orderBy('name', 'asc')
+        $categories = Category::orderBy('name', 'asc')
                 ->whereNull('deleted_at')
-                ->orderBy('name', 'asc')
-                ->pluck('name', 'id')->toArray();
+                ->orderBy('name', 'asc');
+        if(!empty($category_type))
+            $categories = $categories->where('category_type', '=', $category_type);
+        $category_list = array('' => trans('general.select_category')) + $categories->pluck('name', 'id')->toArray();
         return $category_list;
     }
 
@@ -150,7 +152,7 @@ class Helper
 
     public static function manufacturerList()
     {
-        $manufacturer_list = array('' => 'Select One') +
+        $manufacturer_list = array('' => trans('general.select_manufacturer')) +
             Manufacturer::orderBy('name', 'asc')
                 ->pluck('name', 'id')->toArray();
         return $manufacturer_list;
@@ -164,7 +166,7 @@ class Helper
 
     public static function managerList()
     {
-        $manager_list = array('' => '') +
+        $manager_list = array('' => trans('general.select_user')) +
                         User::where('deleted_at', '=', null)
                         ->orderBy('last_name', 'asc')
                         ->orderBy('first_name', 'asc')->get()

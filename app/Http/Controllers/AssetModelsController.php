@@ -55,9 +55,9 @@ class AssetModelsController extends Controller
     public function getCreate()
     {
         // Show the page
-        $depreciation_list = \App\Helpers\Helper::depreciationList();
-        $manufacturer_list = \App\Helpers\Helper::manufacturerList();
-        $category_list = \App\Helpers\Helper::categoryList();
+        $depreciation_list = Helper::depreciationList();
+        $manufacturer_list = Helper::manufacturerList();
+        $category_list = Helper::categoryList('asset');
         return View::make('models/edit')
         ->with('category_list', $category_list)
         ->with('depreciation_list', $depreciation_list)
@@ -181,9 +181,9 @@ class AssetModelsController extends Controller
             return redirect()->to('assets/models')->with('error', trans('admin/models/message.does_not_exist'));
         }
 
-        $depreciation_list = \App\Helpers\Helper::depreciationList();
-        $manufacturer_list = \App\Helpers\Helper::manufacturerList();
-        $category_list = \App\Helpers\Helper::categoryList();
+        $depreciation_list = Helper::depreciationList();
+        $manufacturer_list = Helper::manufacturerList();
+        $category_list = Helper::categoryList('asset');
         $view = View::make('models/edit', compact('model'));
         $view->with('category_list', $category_list);
         $view->with('depreciation_list', $depreciation_list);
@@ -371,9 +371,9 @@ class AssetModelsController extends Controller
         $model->id = null;
 
         // Show the page
-        $depreciation_list = array('' => 'Do Not Depreciate') + Depreciation::lists('name', 'id');
-        $manufacturer_list = array('' => 'Select One') + Manufacturer::lists('name', 'id');
-        $category_list = array('' => '') + DB::table('categories')->whereNull('deleted_at')->lists('name', 'id');
+        $depreciation_list = Helper::depreciationList();
+        $manufacturer_list = Helper::manufacturerList();
+        $category_list = Helper::categoryList('asset');
         $view = View::make('models/edit');
         $view->with('category_list', $category_list);
         $view->with('depreciation_list', $depreciation_list);

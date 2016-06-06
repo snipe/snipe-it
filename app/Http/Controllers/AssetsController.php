@@ -107,7 +107,7 @@ class AssetsController extends Controller
         $statuslabel_list = Helper::statusLabelList();
         $location_list = Helper::locationsList();
         $manufacturer_list = Helper::manufacturerList();
-        $category_list = Helper::categoryList();
+        $category_list = Helper::categoryList('asset');
         $supplier_list = Helper::suppliersList();
         $company_list = Helper::companyList();
         $assigned_to = Helper::usersList();
@@ -269,11 +269,11 @@ class AssetsController extends Controller
         $statuslabel_list = Helper::statusLabelList();
         $location_list = Helper::locationsList();
         $manufacturer_list = Helper::manufacturerList();
-        $category_list = Helper::categoryList();
+        $category_list = Helper::categoryList('asset');
         $supplier_list = Helper::suppliersList();
         $company_list = Helper::companyList();
         $assigned_to = Helper::usersList();
-        $statuslabel_types =Helper:: statusTypeList();
+        $statuslabel_types =Helper::statusTypeList();
 
         return View::make('hardware/edit', compact('asset'))
         ->with('model_list', $model_list)
@@ -895,7 +895,7 @@ class AssetsController extends Controller
         $statuslabel_list = Helper::statusLabelList();
         $location_list = Helper::locationsList();
         $manufacturer_list = Helper::manufacturerList();
-        $category_list = Helper::categoryList();
+        $category_list = Helper::categoryList('asset');
         $supplier_list = Helper::suppliersList();
         $assigned_to =Helper::usersList();
         $statuslabel_types = Helper::statusTypeList();
