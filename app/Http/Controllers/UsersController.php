@@ -12,6 +12,7 @@ use App\Models\Company;
 use App\Models\Location;
 use App\Models\Setting;
 use App\Models\Statuslabel;
+use App\Http\Requests\SaveUserRequest;
 use App\Models\User;
 use Auth;
 use Config;
@@ -95,33 +96,38 @@ class UsersController extends Controller
     * @since [v1.0]
     * @return Redirect
     */
-    public function postCreate(Request $request)
+    public function postCreate(Request $request, SaveUserRequest $request)
     {
 
         $user = new User;
-        $user->first_name  = $data['first_name']= e(Input::get('first_name'));
-        $user->last_name = e(Input::get('last_name'));
-        $user->email = $data['email'] = e(Input::get('email'));
+        $user->first_name  = $data['first_name']= e($request->input('first_name'));
+        $user->last_name = e($request->input('last_name'));
+        $user->email = $data['email'] = e($request->input('email'));
         $user->activated = 1;
-        $user->locale = e(Input::get('locale'));
-        $user->username = $data['username'] = e(Input::get('username'));
-        $user->password = bcrypt(Input::get('password'));
-        $data['password'] =  Input::get('password');
+        $user->locale = e($request->input('locale'));
+        $user->username = $data['username'] = e($request->input('username'));
+
+        if ($request->has('password')) {
+            $user->password = bcrypt($request->input('password'));
+            $data['password'] =  $request->input('password');
+        }
+
+         if ($request->has('groups')) {
+             $user->groups()->sync($request->input('groups'));
+         } else {
+             $user->groups()->sync(array());
+         }
 
         if ($user->save()) {
-            if ($request->has('groups')) {
-                $user->groups()->sync(Input::get('groups'));
-            } else {
-                $user->groups()->sync(array());
-            }
+
 
             if (($request->input('email_user') == 1) && ($request->has('email'))) {
               // Send the credentials through email
                 $data = array();
-                $data['email'] = e(Input::get('email'));
-                $data['username'] = e(Input::get('username'));
-                $data['first_name'] = e(Input::get('first_name'));
-                $data['password'] = e(Input::get('password'));
+                $data['email'] = e($request->input('email'));
+                $data['username'] = e($request->input('username'));
+                $data['first_name'] = e($request->input('first_name'));
+                $data['password'] = e($request->input('password'));
 
                 Mail::send('emails.send-login', $data, function ($m) use ($user) {
                     $m->to($user->email, $user->first_name . ' ' . $user->last_name);
@@ -129,11 +135,12 @@ class UsersController extends Controller
                 });
             }
             return redirect::route('users')->with('success', trans('admin/users/message.success.create'));
-        } else {
-            redirect()->back()->withInput()->withInput()->withErrors($user->getErrors())->withErrors($settings->getErrors());
         }
 
-        return redirect()->route('create/user')->withInput()->with('error', $error);
+       return redirect()->back()->withInput()->withErrors($user->getErrors())->withErrors($errors);
+
+
+
     }
 
     /**
@@ -228,11 +235,11 @@ class UsersController extends Controller
     * @param  int  $id
     * @return Redirect
     */
-    public function postEdit(Request $request, $id = null)
+    public function postEdit(Request $request, SaveUserRequest $request, $id = null)
     {
         // We need to reverse the UI specific logic for our
         // permissions here before we update the user.
-        $permissions = Input::get('permissions', array());
+        $permissions = $request->input('permissions', array());
         app('request')->request->set('permissions', $permissions);
 
         // Only update the email address if locking is set to false
@@ -255,27 +262,27 @@ class UsersController extends Controller
             return redirect()->route('users')->with('error', $error);
         }
 
-            $user_groups = array (Input::get('groups'));
+            $user_groups = array ($request->input('groups'));
             // Update the user
-            $user->first_name = e(Input::get('first_name'));
-            $user->last_name = e(Input::get('last_name'));
-            $user->locale = e(Input::get('locale'));
+            $user->first_name = e($request->input('first_name'));
+            $user->last_name = e($request->input('last_name'));
+            $user->locale = e($request->input('locale'));
             if (Input::has('username')) {
-                $user->username = e(Input::get('username'));
+                $user->username = e($request->input('username'));
             }
 
-            $user->email = e(Input::get('email'));
-            $user->employee_num = e(Input::get('employee_num'));
-            $user->activated = e(Input::get('activated', $user->activated));
-            $user->jobtitle = e(Input::get('jobtitle'));
-            $user->phone = e(Input::get('phone'));
-            $user->location_id = e(Input::get('location_id'));
-            $user->company_id = e(Company::getIdForUser(Input::get('company_id')));
-            $user->manager_id = e(Input::get('manager_id'));
-            $user->notes = e(Input::get('notes'));
-            $user->permissions = json_encode(Input::get('permission'));
+            $user->email = e($request->input('email'));
+            $user->employee_num = e($request->input('employee_num'));
+            $user->activated = e($request->input('activated', $user->activated));
+            $user->jobtitle = e($request->input('jobtitle'));
+            $user->phone = e($request->input('phone'));
+            $user->location_id = e($request->input('location_id'));
+            $user->company_id = e(Company::getIdForUser($request->input('company_id')));
+            $user->manager_id = e($request->input('manager_id'));
+            $user->notes = e($request->input('notes'));
+            $user->permissions = json_encode($request->input('permission'));
             if ($request->has('groups')) {
-                $user->groups()->sync(Input::get('groups'));
+                $user->groups()->sync($request->input('groups'));
             } else {
                 $user->groups()->sync(array());
             }
@@ -291,13 +298,13 @@ class UsersController extends Controller
 
 
             // Do we want to update the user password?
-        if ((Input::has('password')) && (!config('app.lock_passwords'))) {
-            $user->password = bcrypt(Input::get('password'));
+        if (($request->has('password')) && (!config('app.lock_passwords'))) {
+            $user->password = bcrypt($request->input('password'));
         }
 
             // Do we want to update the user email?
         if (!config('app.lock_passwords')) {
-            $user->email = Input::get('email');
+            $user->email = e($request->input('email'));
         }
 
 
