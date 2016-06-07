@@ -106,6 +106,7 @@ class UsersController extends Controller
         $user->activated = 1;
         $user->locale = e($request->input('locale'));
         $user->username = $data['username'] = e($request->input('username'));
+        $user->permissions = json_encode($request->input('permission'));
 
         if ($request->has('password')) {
             $user->password = bcrypt($request->input('password'));
