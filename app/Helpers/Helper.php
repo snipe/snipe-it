@@ -208,6 +208,13 @@ class Helper
         return $assets_list;
     }
 
+    public static function detailedAssetList()
+    {
+
+        $assets = array('' => trans('general.select_asset')) + Company::scopeCompanyables(Asset::all(), 'assets.company_id')->lists('detailed_name', 'id')->toArray();
+        return $assets;
+    }
+
 
     public static function customFieldsetList()
     {

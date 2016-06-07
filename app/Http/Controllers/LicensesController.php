@@ -439,8 +439,7 @@ class LicensesController extends Controller
         // Get the dropdown of users and then pass it to the checkout view
         $users_list = Helper::usersList();
 
-        $assets = Company::scopeCompanyables(Asset::all(), 'assets.company_id')->lists('detailed_name', 'id');
-
+        $assets = Helper::detailedAssetList();
         return View::make('licenses/checkout', compact('licenseseat'))
         ->with('users_list', $users_list)
         ->with('asset_list', $assets);
