@@ -13,6 +13,7 @@ use App\Models\Location;
 use App\Models\Setting;
 use App\Models\Statuslabel;
 use App\Http\Requests\SaveUserRequest;
+use App\Http\Requests\UpdateUserRequest;
 use App\Models\User;
 use Auth;
 use Config;
@@ -96,7 +97,7 @@ class UsersController extends Controller
     * @since [v1.0]
     * @return Redirect
     */
-    public function postCreate(Request $request, SaveUserRequest $request)
+    public function postCreate(SaveUserRequest $request)
     {
 
         $user = new User;
@@ -138,7 +139,7 @@ class UsersController extends Controller
             return redirect::route('users')->with('success', trans('admin/users/message.success.create'));
         }
 
-       return redirect()->back()->withInput()->withErrors($user->getErrors())->withErrors($errors);
+       return redirect()->back()->withInput()->withErrors($user->getErrors());
 
 
 
@@ -236,7 +237,7 @@ class UsersController extends Controller
     * @param  int  $id
     * @return Redirect
     */
-    public function postEdit(Request $request, SaveUserRequest $request, $id = null)
+    public function postEdit(UpdateUserRequest $request, $id = null)
     {
         // We need to reverse the UI specific logic for our
         // permissions here before we update the user.
