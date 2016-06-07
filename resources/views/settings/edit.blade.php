@@ -470,19 +470,19 @@
                     </div>
                     <div class="col-md-3 form-group">
                       <div class="input-group">
-                        {{ Form::text('labels_display_bgutter', Input::old('labels_display_bgutter', $setting->labels_display_bgutter), array('class' => 'form-control')) }}
+                        {{ Form::text('labels_display_sgutter', Input::old('labels_display_sgutter', $setting->labels_display_sgutter), array('class' => 'form-control')) }}
                         <div class="input-group-addon">{{ trans('admin/settings/general.horizontal') }}</div>
                       </div>
                     </div>
                     <div class="col-md-3 form-group" style="margin-left: 10px">
                       <div class="input-group">
-                        {{ Form::text('labels_display_sgutter', Input::old('labels_display_sgutter', $setting->labels_display_sgutter), array('class' => 'form-control')) }}
+                        {{ Form::text('labels_display_bgutter', Input::old('labels_display_bgutter', $setting->labels_display_bgutter), array('class' => 'form-control')) }}
                         <div class="input-group-addon">{{ trans('admin/settings/general.vertical') }}</div>
                       </div>
                     </div>
                     <div class="col-md-9 col-md-offset-3">
-                      {!! $errors->first('labels_display_bgutter', '<span class="alert-msg">:message</span>') !!}
                       {!! $errors->first('labels_display_sgutter', '<span class="alert-msg">:message</span>') !!}
+                      {!! $errors->first('labels_display_bgutter', '<span class="alert-msg">:message</span>') !!}
                     </div>
                   </div>
 
