@@ -731,7 +731,6 @@ class AssetsController extends Controller
 
         if (isset($asset->id,$asset->asset_tag)) {
             $barcode = new \Com\Tecnick\Barcode\Barcode();
-            $size = Helper::barcodeDimensions($settings->alt_barcode_type);
             $barcode_obj =  $barcode->getBarcodeObj($settings->alt_barcode,  $asset->asset_tag, 250, 20);
             return response($barcode_obj->getPngData())->header('Content-type', 'image/png');
         }
