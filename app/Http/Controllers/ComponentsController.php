@@ -287,7 +287,7 @@ class ComponentsController extends Controller
         }
 
         // Get the dropdown of assets and then pass it to the checkout view
-        $assets_list = Helper::assetsList();
+        $assets_list = Helper::detailedAssetList();
 
         return View::make('components/checkout', compact('component'))->with('assets_list', $assets_list);
 
