@@ -10,7 +10,6 @@ use App\Models\Actionlog;
 use App\Models\Asset;
 use App\Models\AssetMaintenance;
 use App\Models\AssetModel;
-use App\Models\AssetModels;
 use App\Models\Company;
 use App\Models\CustomField;
 use App\Models\Depreciation;
