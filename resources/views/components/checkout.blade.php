@@ -32,7 +32,7 @@
           @if ($component->name)
           <!-- consumable name -->
           <div class="form-group">
-          <label class="col-sm-3 control-label">{{ trans('admin/consumables/general.consumable_name') }}</label>
+          <label class="col-sm-3 control-label">{{ trans('admin/components/general.component_name') }}</label>
               <div class="col-md-6">
                 <p class="form-control-static">{{ $component->name }}</p>
               </div>
