@@ -356,7 +356,7 @@ class CategoriesController extends Controller
                 'model' => $asset->model->name,
                 'asset_tag' => $asset->asset_tag,
                 'serial' => $asset->serial,
-                'assigned_to' => ($asset->assigneduser) ? link_to('/admin/users/'.$asset->assigneduser->id.'/view', $asset->assigneduser->fullName()): '',
+                'assigned_to' => ($asset->assigneduser) ? (string)link_to('/admin/users/'.$asset->assigneduser->id.'/view', $asset->assigneduser->fullName()): '',
                 'change' => $inout,
                 'actions' => $actions,
                 'companyName' => Company::getName($asset),
