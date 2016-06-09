@@ -148,16 +148,29 @@ class UsersController extends Controller
     /**
     * JSON handler for creating a user through a modal popup
     *
+    * @todo Handle validation more graciously
     * @author [B. Wetherington] [<uberbrady@gmail.com>]
     * @since [v1.8]
     * @return string JSON
     */
     public function store()
     {
-        $user = new User;
 
+        $user = new User;
         $inputs = Input::except('csrf_token', 'password_confirm', 'groups', 'email_user');
         $inputs['activated'] = true;
+
+        $user->first_name = e(Input::get('first_name'));
+        $user->last_name = e(Input::get('last_name'));
+        $user->username = e(Input::get('username'));
+        $user->email = e(Input::get('email'));
+        if (Input::has('password')) {
+            $user->password = bcrypt(Input::get('password'));
+        }
+
+        $user->activated = true;
+
+
 
       // Was the user created?
         if ($user->save()) {
@@ -167,6 +180,7 @@ class UsersController extends Controller
                 $data = array();
                 $data['email'] = e(Input::get('email'));
                 $data['first_name'] = e(Input::get('first_name'));
+                $data['last_name'] = e(Input::get('last_name'));
                 $data['password'] = e(Input::get('password'));
 
                 Mail::send('emails.send-login', $data, function ($m) use ($user) {
@@ -180,7 +194,6 @@ class UsersController extends Controller
         } else {
             return JsonResponse::create(["error" => "Failed validation: " . print_r($user->getErrors(), true)], 500);
         }
-        return JsonResponse::create(["error" => "Couldn't save User"], 500);
 
 
 
