@@ -297,9 +297,8 @@ class AssetsController extends Controller
     * @return Redirect
     */
 
-    public function postEdit($assetId = null, AssetRequest $request)
+    public function postEdit(AssetRequest $request, $assetId = null)
     {
-        exit;
         // Check if the asset exists
         if (!$asset = Asset::find($assetId)) {
             // Redirect to the asset management page with error
