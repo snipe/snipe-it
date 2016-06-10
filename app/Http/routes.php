@@ -726,7 +726,7 @@ Route::group([ 'prefix' => 'account', 'middleware' => ['web', 'auth']], function
     );
 
     # Account Dashboard
-    Route::get('/', [ 'as' => 'account', 'uses' => 'ProfileController@getDashboard' ]);
+    Route::get('/', [ 'as' => 'account', 'uses' => 'ViewAssetsController@getIndex' ]);
 
 });
 

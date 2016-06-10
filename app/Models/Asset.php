@@ -97,10 +97,10 @@ class Asset extends Depreciable
         if ($this->save()) {
 
             // $action, $admin, $user, $expected_checkin = null, $note = null, $checkout_at = null
-            $log_id = $this->createLogRecord('checkout', $this, $admin, $user, $expected_checkin, $note, $checkout_at);
+            $log = $this->createLogRecord('checkout', $this, $admin, $user, $expected_checkin, $note, $checkout_at);
 
             if ((($this->requireAcceptance()=='1')  || ($this->getEula())) && ($user->email!='')) {
-                $this->checkOutNotifyMail($log_id, $user, $checkout_at, $expected_checkin, $note);
+                $this->checkOutNotifyMail($log->id, $user, $checkout_at, $expected_checkin, $note);
             }
 
             if ($settings->slack_endpoint) {

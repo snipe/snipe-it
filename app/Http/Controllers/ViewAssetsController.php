@@ -6,6 +6,7 @@ use App\Models\Actionlog;
 use App\Models\Asset;
 use App\Models\Company;
 use App\Models\Consumable;
+use App\Models\Component;
 use App\Models\Location;
 use App\Models\Setting;
 use App\Models\User;
@@ -142,10 +143,11 @@ class ViewAssetsController extends Controller
     public function getAcceptAsset($logID = null)
     {
 
-        if (is_null($findlog = Actionlog::find($logID))) {
-            // Redirect to the asset management page
-            return redirect()->to('account')->with('error', trans('admin/hardware/message.does_not_exist'));
+        if (!$findlog = DB::table('asset_logs')->where('id','=',$logID)->first()) {
+            echo 'no record';
+            //return redirect()->to('account')->with('error', trans('admin/hardware/message.does_not_exist'));
         }
+
 
         $user = Auth::user();
 
@@ -163,6 +165,12 @@ class ViewAssetsController extends Controller
         // accessories
         } elseif ($findlog->accessory_id!='') {
             $item = Accessory::find($findlog->accessory_id);
+        // consumable
+        } elseif ($findlog->consumable_id!='') {
+            $item = Consumable::find($findlog->consumable_id);
+        // components
+        } elseif ($findlog->component_id!='') {
+            $item = Component::find($findlog->component_id);
         }
 
         // Check if the asset exists
@@ -181,16 +189,11 @@ class ViewAssetsController extends Controller
     {
 
         // Check if the asset exists
-        if (is_null($findlog = Actionlog::find($logID))) {
+        if (is_null($findlog = DB::table('asset_logs')->where('id','=',$logID)->first())) {
             // Redirect to the asset management page
             return redirect()->to('account/view-assets')->with('error', trans('admin/hardware/message.does_not_exist'));
         }
-
-        // NOTE: make sure the global scope is applied
-        $is_unauthorized = is_null(Actionlog::where('id', '=', $logID)->first());
-        if ($is_unauthorized) {
-            return redirect()->route('requestable-assets')->with('error', trans('general.insufficient_permissions'));
-        }
+        
 
         if ($findlog->accepted_id!='') {
             // Redirect to the asset management page
@@ -236,13 +239,28 @@ class ViewAssetsController extends Controller
         } elseif (($findlog->asset_id!='') && ($findlog->asset_type=='software')) {
             $logaction->asset_id = $findlog->asset_id;
             $logaction->accessory_id = null;
+            $logaction->component_id = null;
             $logaction->asset_type = 'software';
 
         // accessories
         } elseif ($findlog->accessory_id!='') {
             $logaction->asset_id = null;
+            $logaction->component_id = null;
             $logaction->accessory_id = $findlog->accessory_id;
             $logaction->asset_type = 'accessory';
+            // accessories
+        } elseif ($findlog->consumable_id!='') {
+            $logaction->asset_id = null;
+            $logaction->accessory_id = null;
+            $logaction->component_id = null;
+            $logaction->consumable_id = $findlog->consumable_id;
+            $logaction->asset_type = 'consumable';
+        } elseif ($findlog->component_id!='') {
+            $logaction->asset_id = null;
+            $logaction->accessory_id = null;
+            $logaction->consumable_id = null;
+            $logaction->component_id = $findlog->component_id;
+            $logaction->asset_type = 'component';
         }
 
         $logaction->checkedout_to = $findlog->checkedout_to;
