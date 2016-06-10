@@ -296,7 +296,7 @@ class AssetsController extends Controller
     * @since [v1.0]
     * @return Redirect
     */
-    public function postEdit($assetId = null)
+    public function postEdit($assetId = null, AssetRequest $request)
     {
         // Check if the asset exists
         if (is_null($asset = Asset::find($assetId))) {
@@ -390,10 +390,11 @@ class AssetsController extends Controller
         // Was the asset updated?
         if ($asset->save()) {
             // Redirect to the new asset page
-            return redirect()->to("hardware/$assetId/view")->with('success', trans('admin/hardware/message.update.success'));
+            \Session::flash('success', trans('admin/hardware/message.update.success'));
+            return response()->json(['redirect_url' => route("view/hardware", $assetId)]);
         }
 
-        return redirect()->back()->withInput()->withErrors($asset->getErrors());
+        return response()->json(['errors' => $asset->getErrors()]);
 
     }
 
