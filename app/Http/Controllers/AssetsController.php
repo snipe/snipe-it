@@ -255,8 +255,9 @@ class AssetsController extends Controller
     */
     public function getEdit($assetId = null)
     {
+        
         // Check if the asset exists
-        if (is_null($asset = Asset::find($assetId))) {
+        if (!$asset = Asset::find($assetId)) {
             // Redirect to the asset management page
             return redirect()->to('hardware')->with('error', trans('admin/hardware/message.does_not_exist'));
         } elseif (!Company::isCurrentUserHasAccess($asset)) {

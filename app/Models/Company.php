@@ -102,14 +102,14 @@ final class Company extends Model
         } else {
             $current_user_company_id = Auth::user()->company_id;
             $companyable_company_id = $companyable->company_id;
-
-            return ($current_user_company_id == null || $current_user_company_id == $companyable_company_id);
+            return ($current_user_company_id == null || $current_user_company_id == $companyable_company_id || Auth::user()->isSuperUser());
         }
     }
 
     public static function isCurrentUserAuthorized()
     {
-        return (!static::isFullMultipleCompanySupportEnabled() || (Auth::user()->company_id == null) || Auth::user()->isSuperUser());
+
+        return ((!static::isFullMultipleCompanySupportEnabled()) || (Auth::user()->company_id == null) || (Auth::user()->isSuperUser()));
     }
 
     public static function canManageUsersCompanies()
