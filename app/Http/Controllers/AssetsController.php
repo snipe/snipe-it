@@ -34,6 +34,7 @@ use Redirect;
 use Response;
 use Slack;
 use Str;
+use Illuminate\Http\Request;
 use Symfony\Component\Console\Output\BufferedOutput;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use TCPDF;
@@ -225,6 +226,18 @@ class AssetsController extends Controller
 
         }
 
+        // Update custom fields in the database.
+        // Validation for these fields is handlded through the AssetRequest form request
+        // FIXME: No idea why this is returning a Builder error on db_column_name.
+        // Need to investigate and fix. Using static method for now.
+        $model = AssetModel::find($request->get('model_id'));
+        if($model->fieldset)
+        {
+            foreach($model->fieldset->fields as $field) {
+                $asset->{\App\Models\CustomField::name_to_db_name($field->name)} = e($request->input(\App\Models\CustomField::name_to_db_name($field->name)));
+            }
+        }
+
             // Was the asset created?
         if ($asset->save()) {
 
@@ -299,6 +312,7 @@ class AssetsController extends Controller
 
     public function postEdit(AssetRequest $request, $assetId = null)
     {
+
         // Check if the asset exists
         if (!$asset = Asset::find($assetId)) {
             // Redirect to the asset management page with error
@@ -365,8 +379,8 @@ class AssetsController extends Controller
         $asset->notes        = e($request->input('notes'));
         $asset->physical     = '1';
 
-           // Update the image
-          if (Input::has('image')) {
+        // Update the image
+        if (Input::has('image')) {
             $image = $request->input('image');
             $header = explode(';', $image, 2)[0];
             $extension = substr( $header, strpos($header, '/')+1);
@@ -375,17 +389,29 @@ class AssetsController extends Controller
             $file_name = str_random(25).".".$extension;
             $path = public_path('uploads/assets/'.$file_name);
 
-
             Image::make($image)->resize(500, 500, function ($constraint) {
-                $constraint->aspectRatio();
-                $constraint->upsize();
+            $constraint->aspectRatio();
+            $constraint->upsize();
             })->save($path);
             $asset->image = $file_name;
         }
 
+        // Update custom fields in the database.
+        // Validation for these fields is handlded through the AssetRequest form request
+        // FIXME: No idea why this is returning a Builder error on db_column_name.
+        // Need to investigate and fix. Using static method for now.
+        $model = AssetModel::find($request->get('model_id'));
+        if($model->fieldset)
+        {
+            foreach($model->fieldset->fields as $field) {
+                $asset->{\App\Models\CustomField::name_to_db_name($field->name)} = e($request->input(\App\Models\CustomField::name_to_db_name($field->name)));
+//                LOG::debug($field->name);
+//                LOG::debug(\App\Models\CustomField::name_to_db_name($field->name));
+//                LOG::debug($field->db_column_name());
 
+            }
+        }
 
-        // Was the asset updated?
         if ($asset->save()) {
             // Redirect to the new asset page
             \Session::flash('success', trans('admin/hardware/message.update.success'));

@@ -31,10 +31,11 @@ class AssetRequest extends Request
           'company_id'      => 'integer',
           'warranty_months' => 'integer|min:0|max:240',
           'physical'         => 'integer',
-          'checkout_date'   => 'date|max:10|min:10',
-          'checkin_date'    => 'date|max:10|min:10',
+          'checkout_date'   => 'date',
+          'checkin_date'    => 'date',
           'supplier_id'     => 'integer',
           'status'          => 'integer',
+          'asset_tag'       => 'required',
         ];
 
         $model = AssetModel::find($this->request->get('model_id'));
@@ -43,7 +44,6 @@ class AssetRequest extends Request
         {
             $rules += $model->fieldset->validation_rules();
         }
-
 
 
         return $rules;
