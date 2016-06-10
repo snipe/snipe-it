@@ -113,7 +113,12 @@ class ObjectImportCommand extends Command {
 			$item_status_name = $this->array_smart_fetch($row, "status");
 
 			$item["item_name"] = $this->array_smart_fetch($row, "item name");
-			$item["purchase_date"] = date("Y-m-d 00:00:01", strtotime($this->array_smart_fetch($row, "purchase date")));
+			if ($this->array_smart_fetch($row, "purchase date")!='') {
+				$item["purchase_date"] = date("Y-m-d 00:00:01", strtotime($this->array_smart_fetch($row, "purchase date")));
+			} else {
+				$item["purchase_date"] = null;
+			}
+
 			$item["purchase_cost"] = $this->array_smart_fetch($row, "purchase cost");
 			$item["order_number"] = $this->array_smart_fetch($row, "order number");
 			$item["notes"] = $this->array_smart_fetch($row, "notes");
