@@ -695,9 +695,7 @@ class AssetsController extends Controller
             $asset = Asset::find($assetId);
             $size = Helper::barcodeDimensions($settings->barcode_type);
 
-            if (!Company::isCurrentUserHasAccess($asset)) {
-                return redirect()->to('hardware')->with('error', trans('general.insufficient_permissions'));
-            }
+
 
             if (isset($asset->id,$asset->asset_tag)) {
                 $barcode = new \Com\Tecnick\Barcode\Barcode();
@@ -724,9 +722,6 @@ class AssetsController extends Controller
         $settings = Setting::getSettings();
         $asset = Asset::find($assetId);
 
-        if (!Company::isCurrentUserHasAccess($asset)) {
-            return redirect()->to('hardware')->with('error', trans('general.insufficient_permissions'));
-        }
 
         if (isset($asset->id,$asset->asset_tag)) {
             $barcode = new \Com\Tecnick\Barcode\Barcode();
