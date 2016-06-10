@@ -515,7 +515,7 @@ $(function () {
       },
       error: function(data) {
         // AssetRequest Validator will flash all errors to session, this just refreshes to see them.
-        window.location.reload();
+        window.location.reload(true);
       }
     });
 
