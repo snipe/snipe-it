@@ -501,7 +501,6 @@ $(function () {
 
   function sendForm() {
     var form = $("#create-form").get(0);
-    var successRoute = "{{route('hardware')}}";
     var formData = $('#create-form').serializeArray();
     formData.push({name:'image', value:imageData});
     $.ajax({
@@ -512,7 +511,7 @@ $(function () {
       dataType: 'json',
       success: function(data) {
         // AssetController flashes success to session, redirect to hardware page.
-        window.location.href = successRoute;
+        window.location.href = data.redirect_url;
       },
       error: function(data) {
         // AssetRequest Validator will flash all errors to session, this just refreshes to see them.
