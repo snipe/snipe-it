@@ -15,7 +15,7 @@
   {{ trans('general.back') }}</a>
 @stop
 
-@include('partials/modals')
+
 
 {{-- Page content --}}
 
@@ -309,6 +309,7 @@
 
 
 @section('moar_scripts')
+    @include('partials/modals')
 <script>
 
     function fetchCustomFields() {

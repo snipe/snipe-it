@@ -93,7 +93,7 @@
 
 @foreach ($assets as $asset)
 	<?php $count++; ?>
-  <div class="label" {!!  ($count % $settings->labels_per_page == 0) ? 'style="margin-bottom: 0px;"' : '' !!}>
+  <div class="label"{!!  ($count % $settings->labels_per_page == 0) ? ' style="margin-bottom: 0px;"' : '' !!}>
 
       @if ($settings->qr_code=='1')
     <div class="qr_img">
@@ -102,23 +102,28 @@
       @endif
 
     <div class="qr_text">
+        <div class="pull-left">
         @if ($settings->qr_text!='')
             <strong>{{ $settings->qr_text }}</strong>
-        <br>
+            <br>
         @endif
+        </div>
+        <div class="pull-left">
         @if (($settings->labels_display_name=='1') && ($asset->name!=''))
             N: {{ $asset->name }}
-          <br>
         @endif
-
+        </div>
+        <div class="pull-left">
         @if (($settings->labels_display_tag=='1') && ($asset->asset_tag!=''))
             T: {{ $asset->asset_tag }}
-        <br>
         @endif
+        </div>
+        <div class="pull-left">
         @if (($settings->labels_display_serial=='1') && ($asset->serial!=''))
             S: {{ $asset->serial }}
-
         @endif
+         </div>
+
     </div>
 
     @if ((($settings->alt_barcode_enabled=='1') && $settings->alt_barcode!=''))

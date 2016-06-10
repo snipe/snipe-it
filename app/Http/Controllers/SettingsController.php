@@ -338,6 +338,7 @@ class SettingsController extends Controller
 
         $setting->locale = e(Input::get('locale', 'en'));
         $setting->qr_code = e(Input::get('qr_code', '0'));
+        $setting->full_multiple_companies_support = e(Input::get('full_multiple_companies_support', '0'));
         $setting->alt_barcode = e(Input::get('alt_barcode'));
         $setting->alt_barcode_enabled = e(Input::get('alt_barcode_enabled', '0'));
         $setting->barcode_type = e(Input::get('barcode_type'));

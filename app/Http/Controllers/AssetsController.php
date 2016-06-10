@@ -10,7 +10,6 @@ use App\Models\Actionlog;
 use App\Models\Asset;
 use App\Models\AssetMaintenance;
 use App\Models\AssetModel;
-use App\Models\AssetModels;
 use App\Models\Company;
 use App\Models\CustomField;
 use App\Models\Depreciation;
@@ -256,8 +255,9 @@ class AssetsController extends Controller
     */
     public function getEdit($assetId = null)
     {
+        
         // Check if the asset exists
-        if (is_null($asset = Asset::find($assetId))) {
+        if (!$asset = Asset::find($assetId)) {
             // Redirect to the asset management page
             return redirect()->to('hardware')->with('error', trans('admin/hardware/message.does_not_exist'));
         } elseif (!Company::isCurrentUserHasAccess($asset)) {
@@ -296,80 +296,79 @@ class AssetsController extends Controller
     * @since [v1.0]
     * @return Redirect
     */
+
     public function postEdit($assetId = null, AssetRequest $request)
     {
+        exit;
         // Check if the asset exists
-        if (is_null($asset = Asset::find($assetId))) {
+        if (!$asset = Asset::find($assetId)) {
             // Redirect to the asset management page with error
             return redirect()->to('hardware')->with('error', trans('admin/hardware/message.does_not_exist'));
         } elseif (!Company::isCurrentUserHasAccess($asset)) {
             return redirect()->to('hardware')->with('error', trans('general.insufficient_permissions'));
         }
 
-        if (e(Input::get('status_id')) == '') {
+        if ($request->has('status_id')) {
+            $asset->status_id = e($request->input('status_id'));
+        } else {
             $asset->status_id =  null;
-        } else {
-            $asset->status_id = e(Input::get('status_id'));
         }
 
-        if (e(Input::get('warranty_months')) == '') {
+        if ($request->has('warranty_months')) {
+            $asset->warranty_months = e($request->input('warranty_months'));
+        } else {
             $asset->warranty_months =  null;
-        } else {
-            $asset->warranty_months = e(Input::get('warranty_months'));
         }
 
-        if (e(Input::get('purchase_cost')) == '') {
+        if ($request->has('purchase_cost')) {
+            $asset->purchase_cost = e($request->input('purchase_cost'));
+        } else {
             $asset->purchase_cost =  null;
-        } else {
-            $asset->purchase_cost = e(Input::get('purchase_cost'));
         }
 
-        if (e(Input::get('purchase_date')) == '') {
+        if ($request->has('purchase_date')) {
+            $asset->purchase_date = e($request->input('purchase_date'));
+        } else {
             $asset->purchase_date =  null;
-        } else {
-            $asset->purchase_date        = e(Input::get('purchase_date'));
         }
 
-        if (e(Input::get('supplier_id')) == '') {
+        if ($request->has('supplier_id')) {
+            $asset->supplier_id = e($request->input('supplier_id'));
+        } else {
             $asset->supplier_id =  null;
-        } else {
-            $asset->supplier_id        = e(Input::get('supplier_id'));
         }
 
-        if (e(Input::get('requestable')) == '') {
-            $asset->requestable =  0;
+        if ($request->has('requestable')) {
+            $asset->requestable = e($request->input('requestable'));
         } else {
-            $asset->requestable        = e(Input::get('requestable'));
+            $asset->requestable =  null;
         }
 
-        if (e(Input::get('rtd_location_id')) == '') {
-            $asset->rtd_location_id = 0;
+        if ($request->has('rtd_location_id')) {
+            $asset->rtd_location_id = e($request->input('rtd_location_id'));
         } else {
-            $asset->rtd_location_id     = e(Input::get('rtd_location_id'));
+            $asset->requestable =  null;
         }
 
-        if (Input::has('image_delete')) {
+        if ($request->has('image_delete')) {
             unlink(public_path().'/uploads/assets/'.$asset->image);
             $asset->image = '';
         }
 
 
-
-        $checkModel = config('app.url').'/api/models/'.e(Input::get('model_id')).'/check';
-
         // Update the asset data
-        $asset->name         = e(Input::get('name'));
-        $asset->serial       = e(Input::get('serial'));
-        $asset->company_id   = Company::getIdForCurrentUser(e(Input::get('company_id')));
-        $asset->model_id     = e(Input::get('model_id'));
-        $asset->order_number = e(Input::get('order_number'));
-        $asset->asset_tag    = e(Input::get('asset_tag'));
-        $asset->notes        = e(Input::get('notes'));
+        $asset->name         = e($request->input('name'));
+        $asset->serial       = e($request->input('serial'));
+        $asset->company_id   = Company::getIdForCurrentUser(e($request->input('company_id')));
+        $asset->model_id     = e($request->input('model_id'));
+        $asset->order_number = e($request->input('order_number'));
+        $asset->asset_tag    = e($request->input('asset_tag'));
+        $asset->notes        = e($request->input('notes'));
         $asset->physical     = '1';
 
            // Update the image
           if (Input::has('image')) {
-            $image = Input::get('image');
+            $image = $request->input('image');
             $header = explode(';', $image, 2)[0];
             $extension = substr( $header, strpos($header, '/')+1);
             $image = substr( $image, strpos($image, ',')+1);
@@ -697,9 +696,7 @@ class AssetsController extends Controller
             $asset = Asset::find($assetId);
             $size = Helper::barcodeDimensions($settings->barcode_type);
 
-            if (!Company::isCurrentUserHasAccess($asset)) {
-                return redirect()->to('hardware')->with('error', trans('general.insufficient_permissions'));
-            }
+
 
             if (isset($asset->id,$asset->asset_tag)) {
                 $barcode = new \Com\Tecnick\Barcode\Barcode();
@@ -726,9 +723,6 @@ class AssetsController extends Controller
         $settings = Setting::getSettings();
         $asset = Asset::find($assetId);
 
-        if (!Company::isCurrentUserHasAccess($asset)) {
-            return redirect()->to('hardware')->with('error', trans('general.insufficient_permissions'));
-        }
 
         if (isset($asset->id,$asset->asset_tag)) {
             $barcode = new \Com\Tecnick\Barcode\Barcode();
