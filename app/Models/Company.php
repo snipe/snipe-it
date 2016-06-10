@@ -3,6 +3,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Watson\Validating\ValidatingTrait;
+use Auth;
 
 /**
  * Model for Companies.
@@ -108,7 +109,7 @@ final class Company extends Model
 
     public static function isCurrentUserAuthorized()
     {
-        return (!static::isFullMultipleCompanySupportEnabled() || Auth::user()->company_id == null);
+        return (!static::isFullMultipleCompanySupportEnabled() || (Auth::user()->company_id == null) || Auth::user()->isSuperUser());
     }
 
     public static function canManageUsersCompanies()
