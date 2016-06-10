@@ -34,7 +34,6 @@ class AssetRequest extends Request
           'checkout_date'   => 'date|max:10|min:10',
           'checkin_date'    => 'date|max:10|min:10',
           'supplier_id'     => 'integer',
-          'asset_tag'       => 'required|min:2|max:255|unique:assets,asset_tag,NULL,deleted_at',
           'status'          => 'integer',
         ];
 
