@@ -501,7 +501,6 @@ $(function () {
 
   function sendForm() {
     var form = $("#create-form").get(0);
-    var successRoute = "{{route('hardware')}}";
     var formData = $('#create-form').serializeArray();
     formData.push({name:'image', value:imageData});
     $.ajax({
