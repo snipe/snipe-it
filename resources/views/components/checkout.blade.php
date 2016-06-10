@@ -46,7 +46,7 @@
               <label for="asset_id" class="col-md-3 control-label">{{ trans('admin/hardware/form.checkout_to') }}
                <i class='icon-asterisk'></i></label>
               <div class="col-md-9">
-                  {{ Form::select('asset_id', $assets_list , Input::old('asset_id', $component->asset_id), array('class'=>'select2', 'style'=>'min-width:100%')) }}
+                  {{ Form::select('asset_id', $assets_list , Input::old('asset_id', $component->asset_id), array('class'=>'select2', 'style'=>'width:100%')) }}
                   {!! $errors->first('asset_id', '<span class="alert-msg"><i class="fa fa-times"></i> :message</span>') !!}
               </div>
           </div>

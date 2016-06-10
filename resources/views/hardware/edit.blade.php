@@ -68,10 +68,10 @@
             </label>
            <div class="col-md-7 col-sm-10">
                @if (isset($selected_model))
-                   {{ Form::select('model_id', $model_list , $selected_model->id, array('class'=>'select2 model', 'style'=>'min-width:100%','id' =>'model_select_id')) }}
+                   {{ Form::select('model_id', $model_list , $selected_model->id, array('class'=>'select2 model', 'style'=>'width:100%','id' =>'model_select_id')) }}
 
                @else
-                   {{ Form::select('model_id', $model_list , Input::old('model_id', $asset->model_id), array('class'=>'select2 model', 'style'=>'min-width:100%','id' =>'model_select_id')) }}
+                   {{ Form::select('model_id', $model_list , Input::old('model_id', $asset->model_id), array('class'=>'select2 model', 'style'=>'width:100%','id' =>'model_select_id')) }}
                @endif
 
                 <!-- onclick="return dependency('model')" -->
@@ -158,7 +158,7 @@
            <div class="col-md-3 control-label">{{ Form::label('company_id', trans('general.company')) }}</div>
            <div class="col-md-7 col-sm-12">
              {{ Form::select('company_id', $company_list , Input::old('company_id', $asset->company_id),
-                             ['class'=>'select2', 'style'=>'min-width:100%']) }}
+                             ['class'=>'select2', 'style'=>'width:100%']) }}
              {!! $errors->first('company_id', '<span class="alert-msg"><i class="fa fa-times"></i> :message</span>') !!}
            </div>
          </div>
@@ -181,7 +181,7 @@
        <div class="form-group {{ $errors->has('supplier_id') ? ' has-error' : '' }}">
            <label for="supplier_id" class="col-md-3 control-label">{{ trans('admin/hardware/form.supplier') }}</label>
            <div class="col-md-7 col-sm-11">
-               {{ Form::select('supplier_id', $supplier_list , Input::old('supplier_id', $asset->supplier_id), array('class'=>'select2', 'style'=>'min-width:100%','id'=>'supplier_select_id')) }}
+               {{ Form::select('supplier_id', $supplier_list , Input::old('supplier_id', $asset->supplier_id), array('class'=>'select2', 'style'=>'width:100%','id'=>'supplier_select_id')) }}
 
                {!! $errors->first('supplier_id', '<span class="alert-msg"><i class="fa fa-times"></i> :message</span>') !!}
            </div>

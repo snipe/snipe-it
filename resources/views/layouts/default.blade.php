@@ -560,7 +560,11 @@
     <script>
        $(function () {
          //Initialize Select2 Elements
-         $(".select2").select2();
+         var iOS = /iPhone|iPad|iPod/.test(navigator.userAgent)  && !window.MSStream;
+         if(!iOS)
+         {
+          $(".select2").select2();
+         }
          $('.datepicker').datepicker();
        });
 
