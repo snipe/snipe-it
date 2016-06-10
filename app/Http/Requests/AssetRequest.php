@@ -55,8 +55,7 @@ class AssetRequest extends Request
     {
         $this->session()->flash('errors', Session::get('errors', new \Illuminate\Support\ViewErrorBag)
             ->put('default', new \Illuminate\Support\MessageBag($errors)));
-
+        \Input::flash();
         return parent::response($errors);
-    //     return $this->redirector->back()->withInput()->withErrors($errors, $this->errorBag);
     }
 }
