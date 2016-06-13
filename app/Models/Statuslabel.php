@@ -27,7 +27,7 @@ class Statuslabel extends Model
      * Show count of assets with status label
      *
      * @todo Remove this. It's dumb.
-     * @return Collection
+     * @return \Illuminate\Support\Collection
      */
     public function has_assets()
     {
@@ -37,7 +37,7 @@ class Statuslabel extends Model
     /**
      * Get assets with associated status label
      *
-     * @return Collection
+     * @return \Illuminate\Support\Collection
      */
     public function assets()
     {
