@@ -36,9 +36,9 @@ return array(
     ),
 
     'import' => array(
-        'error'         => 'Some Items did not import Correctly.',
-        'errorDetail'   => 'The Following Items were not imported because of errors.',
-        'success'       => "Your File has been imported",
+        'error'         => 'برخی از موارد به درستی وارد بود.',
+        'errorDetail'   => 'موارد زیر به دلیل خطاهای وارد شدند.',
+        'success'       => "دستور شما وارد شده است.",
     ),
 
 

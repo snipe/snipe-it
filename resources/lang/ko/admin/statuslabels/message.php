@@ -2,24 +2,24 @@
 
 return array(
 
-    'does_not_exist' => 'Status Label does not exist.',
-    'assoc_assets'	 => 'This Status Label is currently associated with at least one Asset and cannot be deleted. Please update your assets to no longer reference this status and try again. ',
+    'does_not_exist' => '상태 꼬리표가 존재하지 않습니다.',
+    'assoc_assets'	 => '이 상태 꼬리표는 하나 이상의 자산과 연결되어 있어서 삭제할 수 없습니다. 이 상태를 참조하지 않게 자산을 수정하고 다시 시도해 주세요. ',
 
 
     'create' => array(
-        'error'   => 'Status Label was not created, please try again.',
-        'success' => 'Status Label created successfully.'
+        'error'   => '상태 꼬리표가 생성되지 않았습니다. 다시 시도해 주세요.',
+        'success' => '상태 꼬리표가 생성되었습니다.'
     ),
 
     'update' => array(
-        'error'   => 'Status Label was not updated, please try again',
-        'success' => 'Status Label updated successfully.'
+        'error'   => '상태 꼬리표가 수정되지 않았습니다. 다시 시도해 주세요.',
+        'success' => '상태 꼬리표가 수정되었습니다.'
     ),
 
     'delete' => array(
-        'confirm'   => 'Are you sure you wish to delete this Status Label?',
-        'error'   => 'There was an issue deleting the Status Label. Please try again.',
-        'success' => 'The Status Label was deleted successfully.'
+        'confirm'   => '이 상태 꼬리표를 삭제하시겠습니까?',
+        'error'   => '상태 꼬리표 삭제시 문제가 발생했습니다. 다시 시도해 주세요.',
+        'success' => '상태 꼬리표가 삭제되었습니다.'
     )
 
 );

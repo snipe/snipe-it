@@ -9,6 +9,7 @@ return array(
     'date'              => 'Data achizitie',
     'depreciation'      => 'Depreciere',
     'expiration'        => 'Data expirarii',
+    'license_key'       => 'Product Key',
     'maintained'        => 'Mentinut',
     'name'              => 'Nume software',
     'no_depreciation'   => 'Nu deprecia',

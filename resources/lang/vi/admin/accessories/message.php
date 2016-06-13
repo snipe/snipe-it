@@ -6,19 +6,19 @@ return array(
     'assoc_users'	 => 'Phụ kiện này hiện có :count cái đã giao cho người dùng. Bạn hãy nhập lại vào trong phần phụ kiện và thử lại lần nữa. ',
 
     'create' => array(
-        'error'   => 'The accessory was not created, please try again.',
-        'success' => 'The accessory was successfully created.'
+        'error'   => 'Phụ kiện chưa tạo, hãy thử một lần nữa.',
+        'success' => 'Phụ kiện đã được tạo thành công.'
     ),
 
     'update' => array(
-        'error'   => 'The accessory was not updated, please try again',
-        'success' => 'The accessory was updated successfully.'
+        'error'   => 'Phụ kiện chưa được cập nhật, vui lòng thử lại',
+        'success' => 'Phụ kiện đã được cập nhật thành công.'
     ),
 
     'delete' => array(
-        'confirm'   => 'Are you sure you wish to delete this accessory?',
-        'error'   => 'There was an issue deleting the accessory. Please try again.',
-        'success' => 'The accessory was deleted successfully.'
+        'confirm'   => 'Bạn có chắc muốn xoá phụ kiện này không?',
+        'error'   => 'Có lỗi xảy ra khi xoá phụ kiện. Vui lòng thử lại.',
+        'success' => 'Phụ kiện đã được xoá thành công.'
     ),
 
      'checkout' => array(

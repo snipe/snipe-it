@@ -1,7 +1,7 @@
 <?php
 
 return [
-    'sent'	        => 'Your password link has been sent!',
-    'user'			=> 'That user does not exist or does not have an email address associated',
+    'sent'	        => 'O link com a senha de acesso foi enviado com sucesso!',
+    'user'			=> 'Este utilizador não existe, ou não possui um endereço de email associado',
 ];
 

@@ -9,6 +9,7 @@ return array(
     'date'              => 'Data di acquisto',
     'depreciation'      => 'Ammortamento',
     'expiration'        => 'Data di scadenza',
+    'license_key'       => 'Product Key',
     'maintained'        => 'Mantenuto',
     'name'              => 'Nome Software',
     'no_depreciation'   => 'Non svaluta',

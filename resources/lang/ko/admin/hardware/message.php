@@ -37,9 +37,9 @@ return array(
     ),
 
     'import' => array(
-        'error'         => 'Some Items did not import Correctly.',
-        'errorDetail'   => 'The Following Items were not imported because of errors.',
-        'success'       => "Your File has been imported",
+        'error'         => '몇몇 품목들을 정확하게 읽어오지 못했습니다.',
+        'errorDetail'   => '다음 품목들은 오류로 읽어오지 못했습니다.',
+        'success'       => "파일에서 읽어오기가 완료되었습니다",
     ),
 
 

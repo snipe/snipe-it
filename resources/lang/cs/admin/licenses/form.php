@@ -9,6 +9,7 @@ return array(
     'date'              => 'Datum pořízení',
     'depreciation'      => 'Amortizace',
     'expiration'        => 'Expirace',
+    'license_key'       => 'Product Key',
     'maintained'        => 'Údržba',
     'name'              => 'Software',
     'no_depreciation'   => 'Do Not Depreciate',

@@ -9,6 +9,7 @@ return array(
     'date'              => 'Satın Alma Tarihi',
     'depreciation'      => 'Amortisman Türü',
     'expiration'        => 'Son Geçerlilik Tarihi',
+    'license_key'       => 'Product Key',
     'maintained'        => 'Korumalı',
     'name'              => 'Yazılım Adı',
     'no_depreciation'   => 'Mortisman Yok',

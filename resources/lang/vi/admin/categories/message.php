@@ -3,8 +3,8 @@
 return array(
 
     'does_not_exist' => 'Hạng mục không tồn tại.',
-    'assoc_models'	 => 'This category is currently associated with at least one model and cannot be deleted. Please update your models to no longer reference this category and try again. ',
-    'assoc_items'	 => 'This category is currently associated with at least one :asset_type and cannot be deleted. Please update your :asset_type  to no longer reference this category and try again. ',
+    'assoc_models'	 => 'Danh mục này hiện đang liên kết với một kiểu nào đó nên không thể xoá. Vui lòng cập nhật kiểu có liên quan để ngừng liên kết với danh mục này và thử xoá lại.',
+    'assoc_items'	 => 'Danh mục này hiện đang liên kết với :asset_type nào đó nên không thể xoá. Vui lòng cập nhật  :asset_type có liên quan để ngừng liên kết với danh mục này và thử xoá lại.',
 
     'create' => array(
         'error'   => 'Hạng mục chưa được tạo. Bạn hãy thử lại.',

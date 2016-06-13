@@ -9,6 +9,7 @@ return array(
     'date'              => 'Data Zakupu',
     'depreciation'      => 'Depreciation',
     'expiration'        => 'Data wygaśnięcia',
+    'license_key'       => 'Product Key',
     'maintained'        => 'Wsparcie Producenta',
     'name'              => 'Nazwa Oprogramowania',
     'no_depreciation'   => 'Do Not Depreciate',

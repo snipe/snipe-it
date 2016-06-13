@@ -9,6 +9,7 @@ return array(
     'date'              => 'Purchase Date',
     'depreciation'      => 'Depreciation',
     'expiration'        => 'Expiration Date',
+    'license_key'       => 'Product Key',
     'maintained'        => 'Maintained',
     'name'              => 'Software Name',
     'no_depreciation'   => 'Do Not Depreciate',

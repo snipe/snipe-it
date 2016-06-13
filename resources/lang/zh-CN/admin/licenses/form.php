@@ -9,6 +9,7 @@ return array(
     'date'              => '采购日期',
     'depreciation'      => '折旧',
     'expiration'        => '到期日期',
+    'license_key'       => 'Product Key',
     'maintained'        => '保持',
     'name'              => '软件名称',
     'no_depreciation'   => '永久',

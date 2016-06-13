@@ -9,6 +9,7 @@ return array(
     'date'              => 'Tarikh Belian',
     'depreciation'      => 'Susut Nilai',
     'expiration'        => 'Tarikh Luput',
+    'license_key'       => 'Product Key',
     'maintained'        => 'Maintained',
     'name'              => 'Nama Perisian',
     'no_depreciation'   => 'Tiada Susut Nilai',

@@ -9,6 +9,7 @@ return array(
     'date'              => 'Ostopäivämäärä',
     'depreciation'      => 'Poistoluokka',
     'expiration'        => 'Viimeinen Käyttöpäivä',
+    'license_key'       => 'Product Key',
     'maintained'        => 'Ylläpidossa',
     'name'              => 'Ohjelmiston Nimi',
     'no_depreciation'   => 'Ei Poistoluokkaa',

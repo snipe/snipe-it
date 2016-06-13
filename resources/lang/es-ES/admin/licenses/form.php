@@ -9,6 +9,7 @@ return array(
     'date'              => 'Fecha Compra',
     'depreciation'      => 'Amortización',
     'expiration'        => 'Fecha de vencimiento',
+    'license_key'       => 'Product Key',
     'maintained'        => 'Mantenido',
     'name'              => 'Aplicación',
     'no_depreciation'   => 'No Amortizar',

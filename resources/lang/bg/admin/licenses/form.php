@@ -9,6 +9,7 @@ return array(
     'date'              => 'Дата на закупуване',
     'depreciation'      => 'Амортизация',
     'expiration'        => 'Срок на валидност',
+    'license_key'       => 'Product Key',
     'maintained'        => 'В поддръжка',
     'name'              => 'Софтуерен продукт',
     'no_depreciation'   => 'Без амортизация',

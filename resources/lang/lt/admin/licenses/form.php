@@ -9,6 +9,7 @@ return array(
     'date'              => 'Pirkimo data',
     'depreciation'      => 'Nusidėvėjimas',
     'expiration'        => 'Galiojimo pabaiga',
+    'license_key'       => 'Product Key',
     'maintained'        => 'Turėta',
     'name'              => 'Programinės įrangos pavadinimas',
     'no_depreciation'   => 'Nenusidėvi',

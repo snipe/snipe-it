@@ -9,6 +9,7 @@ return array(
     'date'              => 'Ngày mua',
     'depreciation'      => 'Khấu hao',
     'expiration'        => 'Ngày hết hạn',
+    'license_key'       => 'Product Key',
     'maintained'        => 'Đã duy trì',
     'name'              => 'Tên phần mềm',
     'no_depreciation'   => 'Không khấu hao',

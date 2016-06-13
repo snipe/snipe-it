@@ -11,6 +11,7 @@ return array(
     'date'              => 'تاریخ خرید',
     'depreciation'      => 'مستهلک کردن',
     'expiration'        => 'تاریخ انقضا',
+    'license_key'       => 'Product Key',
     'maintained'        => 'نگهداری',
     'name'              => 'نام نرم افزار
 ',

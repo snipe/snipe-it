@@ -37,9 +37,9 @@ return array(
     ),
 
     'import' => array(
-        'error'         => 'Some Items did not import Correctly.',
-        'errorDetail'   => 'The Following Items were not imported because of errors.',
-        'success'       => "Your File has been imported",
+        'error'         => 'Alguns itens não foram importados correctamente.',
+        'errorDetail'   => 'Os seguintes itens não foram importados devido a erros.',
+        'success'       => "O seu ficheiro foi importado",
     ),
 
 
