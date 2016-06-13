@@ -783,7 +783,7 @@ class UsersController extends Controller
                             'last_name' => trim(e($row[1])),
                             'username' => trim(e($row[2])),
                             'email' => trim(e($row[3])),
-                            'password' => $pass,
+                            'password' => bcrypt($pass),
                             'activated' => $activated,
                             'location_id' => trim(e($user_location_id)),
                             'phone' => trim(e($row[5])),
@@ -793,16 +793,9 @@ class UsersController extends Controller
                             'permissions' => '{"user":1}',
                             'notes' => 'Imported user'
                         );
+                        //dd($newuser);
 
                         DB::table('users')->insert($newuser);
-
-                        $updateuser = User::find($row[2]);
-
-                        // Update the user details
-                        $updateuser->password = $pass;
-
-                        // Update the user
-                        $updateuser->save();
 
 
                         if (((Input::get('email_user') == 1) && !config('app.lock_passwords'))) {
