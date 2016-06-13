@@ -335,7 +335,7 @@
             <thead>
               <tr>
                 <th class="col-md-4">{{ trans('general.name') }}</th>
-                <th class="col-md-4"><span class="line"></span>{{ trans('admin/licenses/form.serial') }}</th>
+                <th class="col-md-4"><span class="line"></span>{{ trans('admin/licenses/form.license_key') }}</th>
                 <th class="col-md-1"><span class="line"></span>{{ trans('table.actions') }}</th>
               </tr>
             </thead>

@@ -66,7 +66,7 @@
 
                       <!-- Serial -->
                       <div class="form-group {{ $errors->has('serial') ? ' has-error' : '' }}">
-                          <label for="serial" class="col-md-3 control-label">{{ trans('admin/licenses/form.serial') }}
+                          <label for="serial" class="col-md-3 control-label">{{ trans('admin/licenses/form.license_key') }}
                            <i class='fa fa-asterisk'></i></label>
                            </label>
                               <div class="col-md-7">

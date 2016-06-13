@@ -118,7 +118,7 @@
 
                     @if (!is_null($license->serial))
                     <tr>
-                      <td>{{ trans('admin/licenses/form.serial') }}</td>
+                      <td>{{ trans('admin/licenses/form.license_key') }}</td>
                       <td style="word-wrap: break-word;overflow-wrap: break-word;word-break: break-word;">{{ nl2br(e($license->serial)) }}</td>
                     </tr>
                     @endif
