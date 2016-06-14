@@ -81,15 +81,16 @@ class ObjectImportCommand extends Command {
 
 		$csv = Reader::createFromPath($this->argument('filename'));
 		$csv->setNewline("\r\n");
-
 		$results = $csv->fetchAssoc();
-
-
 		$newarray = NULL;
-		foreach( $results as $index => $arraytoNormalize) {
+
+		foreach ($results as $index => $arraytoNormalize)
+		{
 			$internalnewarray = array_change_key_case($arraytoNormalize);
 			$newarray[$index] = $internalnewarray;
 		}
+
+
 
 		$this->locations = Location::All(['name', 'id']);
 		$this->categories = Category::All(['name', 'category_type', 'id']);
@@ -101,10 +102,16 @@ class ObjectImportCommand extends Command {
 		$this->assets = Asset::all(['asset_tag']);
 		$this->accessories = Accessory::All(['name']);
 		$this->consumables = Consumable::All(['name']);
+		$this->customfields = CustomField::All(['name']);
 
+		$bar = $this->output->createProgressBar(count($newarray));
 		// Loop through the records
-		DB::transaction(function() use (&$newarray){
+		DB::transaction(function() use (&$newarray, $bar){
+		Model::unguard();
 		$item_type = strtolower($this->option('item-type'));
+
+
+
 		foreach( $newarray as $row ) {
 
 			// Let's just map some of these entries to more user friendly words
@@ -134,7 +141,7 @@ class ObjectImportCommand extends Command {
 
 
 			$this->current_assetId = $item["item_name"];
-			$this->log('Category Name: ' . $item_category);
+			$this->log('Category: ' . $item_category);
 			$this->log('Location: ' . $item_location);
 			$this->log('Purchase Date: ' . $item["purchase_date"]);
 			$this->log('Purchase Cost: ' . $item["purchase_cost"]);
@@ -152,6 +159,17 @@ class ObjectImportCommand extends Command {
 
 			switch ($item_type) {
 				case "asset":
+					// -----------------------------
+					// CUSTOM FIELDS
+					// -----------------------------
+					// Loop through custom fields in the database and see if we have any matches in the CSV
+					foreach ($this->customfields as $customfield) {
+						if ($item['custom_fields'][$customfield->db_column_name()] = $this->array_smart_custom_field_fetch($row, $customfield)) {
+							$this->log('Custom Field '. $customfield->name.': '.$this->array_smart_custom_field_fetch($row, $customfield));
+						}
+
+					}
+
 					$this->createAssetIfNotExists($row, $item);
 					break;
 				case "accessory":
@@ -161,10 +179,14 @@ class ObjectImportCommand extends Command {
 					$this->createConsumableIfNotExists($item);
 					break;
 			}
+
+			$bar->advance();
 			$this->log('------------- Action Summary ----------------');
 
 		}
 	});
+		$bar->finish();
+
 
 			$this->log('=====================================');
 			if(!$this->option('web-importer'))
@@ -204,10 +226,13 @@ class ObjectImportCommand extends Command {
 	}
 
 	/**
-	* Log a message to file, configurable by the --log-file parameter.
-	* If a warning message is passed, we'll spit it to the console as well.
-	* @param string $string
-	* @param string $level
+	 * Log a message to file, configurable by the --log-file parameter.
+	 * If a warning message is passed, we'll spit it to the console as well.
+	 *
+	 * @author Daniel Melzter
+	 * @since 3.0
+	 * @param string $string
+	 * @param string $level
 	*/
 	private function log($string, $level = 'info')
 	{
@@ -228,17 +253,40 @@ class ObjectImportCommand extends Command {
 
 	/**
 	 * Check to see if the given key exists in the array, and trim excess white space before returning it
+	 *
+	 * @author Daniel Melzter
+	 * @since 3.0
 	 * @param $array array
 	 * @param $key string
 	 * @param $default string
 	 * @return string
      */
-	public function array_smart_fetch(Array $array, $key, $default = ''){
+	public function array_smart_fetch(Array $array, $key, $default = '') {
 		return array_key_exists($key,$array) ? e(trim($array[ $key ])) : $default;
 	}
 
+
+	/**
+	 * Figure out the fieldname of the custom field
+	 *
+	 * @author A. Gianotto <snipe@snipe.net>
+	 * @since 3.0
+	 * @param $array array
+	 * @return string
+	 */
+	public function array_smart_custom_field_fetch(Array $array, $key) {
+		$index_name = strtolower($key->name);
+		return array_key_exists($index_name,$array) ? e(trim($array[$index_name])) : '';
+	}
+
+
+
 	private $asset_models;
     /**
+	 * Select the asset model if it exists, otherwise create it.
+	 *
+	 * @author Daniel Melzter
+	 * @since 3.0
      * @param array
      * @param $category Category
      * @param $manufacturer Manufacturer
@@ -253,7 +301,7 @@ class ObjectImportCommand extends Command {
 		if(empty($asset_model_name))
 			$asset_model_name='Unknown';
 		if(empty($asset_modelno))
-			$asset_modelno=0;
+			$asset_modelno='';
 		$this->log('Model Name: ' . $asset_model_name);
 		$this->log('Model No: ' . $asset_modelno);
 
@@ -296,6 +344,9 @@ class ObjectImportCommand extends Command {
 
 	/**
 	 * Finds a category with the same name and item type in the database, otherwise creates it
+	 *
+	 * @author Daniel Melzter
+	 * @since 3.0
 	 * @param $asset_category string
 	 * @param $item_type string
 	 * @return Category
@@ -338,6 +389,10 @@ class ObjectImportCommand extends Command {
 	private $companies;
 
 	/**
+	 * Fetch an existing company, or create new if it doesn't exist
+	 *
+	 * @author Daniel Melzter
+	 * @since 3.0
 	 * @param $asset_company_name string
 	 * @return Company
 	 */
@@ -368,6 +423,10 @@ class ObjectImportCommand extends Command {
 	}
 	private $status_labels;
 	/**
+	 * Fetch the existing status label or create new if it doesn't exist.
+	 *
+	 * @author Daniel Melzter
+	 * @since 3.0
 	 * @param string $asset_statuslabel_name 
 	 * @return Company
 	 */
@@ -404,6 +463,9 @@ class ObjectImportCommand extends Command {
 
 	/**
 	 * Finds a manufacturer with matching name, otherwise create it.
+	 *
+	 * @author Daniel Melzter
+	 * @since 3.0
 	 * @param $row array
 	 * @return Manufacturer
 	 * @internal param $asset_mfgr string
@@ -447,12 +509,15 @@ class ObjectImportCommand extends Command {
 		}
 	}
 
-		/**
+	/**
 	 * @var
      */
 	private $locations;
 	/**
 	 * Checks the DB to see if a location with the same name exists, otherwise create it
+	 *
+	 * @author Daniel Melzter
+	 * @since 3.0
 	 * @param $asset_location string
 	 * @return Location
 	 */
@@ -498,6 +563,10 @@ class ObjectImportCommand extends Command {
 	private $suppliers;
 
 	/**
+	 * Fetch an existing supplier or create new if it doesn't exist
+	 *
+	 * @author Daniel Melzter
+	 * @since 3.0
 	 * @param $row array
 	 * @return Supplier
      */
@@ -532,8 +601,11 @@ class ObjectImportCommand extends Command {
 		}
 	}
 
-		/**
+	/**
 	 * Finds the user matching given data, or creates a new one if there is no match
+	 *
+	 * @author Daniel Melzter
+	 * @since 3.0
 	 * @param $row array
 	 * @return User Model w/ matching name
 	 * @internal param string $user_username Username extracted from CSV
@@ -561,19 +633,19 @@ class ObjectImportCommand extends Command {
 			$last_name = '';
 			//$user_username = '';
 		} else {
-			$user_email_array = User::generateFormattedNameFromFullName($this->option('email_format'), $user_name);
+			$user_email_array = User::generateFormattedNameFromFullName(Setting::getSettings()->email_format, $user_name);
 			$first_name = $user_email_array['first_name'];
 			$last_name = $user_email_array['last_name'];
 
 			if ($user_email=='') {
-				$user_email = $user_email_array['username'].'@'.config('app.domain');
+				$user_email = $user_email_array['username'].'@'.Setting::getSettings()->email_domain;
 			}
 
 			if ($user_username=='') {
 				if ($this->option('username_format')=='email') {
 					$user_username = $user_email;
 				} else {
-					$user_name_array = User::generateFormattedNameFromFullName($this->option('username_format'), $user_name);
+					$user_name_array = User::generateFormattedNameFromFullName(Setting::getSettings()->username_format, $user_name);
 					$user_username = $user_name_array['username'];
 				}
 
@@ -624,6 +696,10 @@ class ObjectImportCommand extends Command {
 	private $assets;
 
 	/**
+	 * Create the asset if it doesn't exist.
+	 *
+	 * @author Daniel Melzter
+	 * @since 3.0
 	 * @param array $row
 	 * @param array $item
 	 */
@@ -658,6 +734,7 @@ class ObjectImportCommand extends Command {
 			$status_id = $item["status_label"]->id;
 
 		} else {
+			// FIXME: We're already grabbing the list of statuses, we should probably not hardcode here
 			$this->log("No status field found, defaulting to id 1.");
 			$status_id = 1;
 		}
@@ -668,6 +745,10 @@ class ObjectImportCommand extends Command {
 			$asset->purchase_date = $item["purchase_date"];
 		} else {
 			$asset->purchase_date = NULL;
+		}
+
+		foreach ($item['custom_fields'] as $custom_field => $val) {
+			$asset->{$custom_field} = $val;
 		}
 
 		if (!empty($item["purchase_cost"])) {
@@ -715,6 +796,9 @@ class ObjectImportCommand extends Command {
 
 	/**
 	 * Create an accessory if a duplicate does not exist
+	 *
+	 * @author Daniel Melzter
+	 * @since 3.0
 	 * @param $item array
 	 */
 	public function createAccessoryIfNotExists(array $item )
@@ -778,6 +862,9 @@ class ObjectImportCommand extends Command {
 
 	/**
 	 * Create a consumable if a duplicate does not exist
+	 *
+	 * @author Daniel Melzter
+	 * @since 3.0
 	 * @param $item array
 	 */
 	public function createConsumableIfNotExists(array $item)
@@ -836,6 +923,8 @@ class ObjectImportCommand extends Command {
 	/**
 	 * Get the console command arguments.
 	 *
+	 * @author Daniel Melzter
+	 * @since 3.0
 	 * @return array
 	 */
 	protected function getArguments()
@@ -849,6 +938,8 @@ class ObjectImportCommand extends Command {
 	/**
 	 * Get the console command options.
 	 *
+	 * @author Daniel Melzter
+	 * @since 3.0
 	 * @return array
 	 */
 	protected function getOptions()
