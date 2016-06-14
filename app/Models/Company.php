@@ -129,7 +129,7 @@ final class Company extends Model
 
     public static function scopeCompanyables($query, $column = 'company_id')
     {
-        if (!static::isFullMultipleCompanySupportEnabled() || Auth::user()->isSuperUser())  {
+        if (!static::isFullMultipleCompanySupportEnabled() || (Auth::check() && Auth::user()->isSuperUser()))  {
             return $query;
         } else {
             return static::scopeCompanyablesDirectly($query, $column);
