@@ -2,7 +2,6 @@
 namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
-use Illuminate\Support\Facades\Config;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Input\InputArgument;
 use League\Csv\Reader;
@@ -17,7 +16,14 @@ use App\Models\Manufacturer;
 use App\Models\Statuslabel;
 use App\Models\Supplier;
 use App\Models\User;
+use App\Models\CustomField;
 use DB;
+use App\Models\Setting;
+use Illuminate\Database\Eloquent\Model;
+
+ini_set('max_execution_time', 600); //600 seconds = 10 minutes
+ini_set('memory_limit', '500M');
+
 /**
  * Class ObjectImportCommand
  */
