@@ -27,7 +27,7 @@ hostname="$(hostname)"
 fqdn="$(hostname --fqdn)"
 ans=default
 hosts=/etc/hosts
-file=v3.0-alpha2.zip #CHANGE THIS WHEN MASTER IS V3 AGAIN
+file=v3-master.zip #CHANGE THIS WHEN MASTER IS V3 AGAIN
 tmp=/tmp/$name
 fileName=snipe-it-3.0-alpha2
 
