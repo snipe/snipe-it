@@ -75,7 +75,7 @@ class UsersController extends Controller
         } else {
             $userGroups = collect();
         }
-        
+
         $permissions = config('permissions');
         $userPermissions = Helper::selectedPermissionsArray($permissions, Input::old('permissions', array()));
 
@@ -114,15 +114,16 @@ class UsersController extends Controller
             $data['password'] =  $request->input('password');
         }
 
-         if ($request->has('groups')) {
-             $user->groups()->sync($request->input('groups'));
-         } else {
-             $user->groups()->sync(array());
-         }
+
 
         if ($user->save()) {
 
-
+            if ($request->has('groups')) {
+                $user->groups()->sync($request->input('groups'));
+            } else {
+                $user->groups()->sync(array());
+            }
+            
             if (($request->input('email_user') == 1) && ($request->has('email'))) {
               // Send the credentials through email
                 $data = array();
@@ -515,7 +516,7 @@ class UsersController extends Controller
                     $logaction->note = 'Bulk checkin license and delete user';
                     $logaction->logaction('checkin from');
                 }
-                
+
                 LicenseSeat::whereIn('id', $license_array)->update(['assigned_to' => NULL]);
 
                 foreach ($users as $user) {
