@@ -75,10 +75,16 @@
             <div class="table-responsive" style="margin-top: 10px;">
               <table class="table">
                   <tbody>
-                    @if ($asset->company)
+                  @if ($asset->company)
+                      <tr>
+                          <td>{{ trans('general.company') }}</td>
+                          <td>{{ $asset->company->name }}</td>
+                      </tr>
+                  @endif
+                    @if ($asset->name)
                     <tr>
-                      <td>{{ trans('general.company') }}</td>
-                      <td>{{ $asset->company->name }}</td>
+                      <td>{{ trans('admin/hardware/form.name') }}</td>
+                      <td>{{ $asset->name }}</td>
                     </tr>
                     @endif
                     @if ($asset->serial)
