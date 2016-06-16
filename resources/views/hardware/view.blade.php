@@ -97,7 +97,7 @@
                       <tr>
                         <td>{{ trans('admin/hardware/form.manufacturer') }}</td>
                         <td>
-                          <a href="{{ route('update/manufacturer', $asset->model->manufacturer->id) }}">
+                          <a href="{{ route('view/manufacturer', $asset->model->manufacturer->id) }}">
                           {{ $asset->model->manufacturer->name }}
                           </a>
                          </td>
