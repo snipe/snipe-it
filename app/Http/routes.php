@@ -625,7 +625,7 @@ Route::group([ 'prefix' => 'admin','middleware' => ['web','auth']], function () 
     Route::resource('custom_fields', 'CustomFieldsController');
 
     # User Management
-    Route::group([ 'prefix' => 'users' ], function () {
+    Route::group([ 'prefix' => 'users', 'middleware' => ['web','auth','authorize:users.view']], function () {
 
         Route::get('ldap', ['as' => 'ldap/user', 'uses' => 'UsersController@getLDAP' ]);
         Route::post('ldap', 'UsersController@postLDAP');
@@ -671,7 +671,7 @@ Route::group([ 'prefix' => 'admin','middleware' => ['web','auth']], function () 
     });
 
     # Group Management
-    Route::group([ 'prefix' => 'groups' ], function () {
+    Route::group([ 'prefix' => 'groups', 'middleware' => ['web','auth','authorize:superadmin'] ], function () {
 
         Route::get('/', [ 'as' => 'groups', 'uses' => 'GroupsController@getIndex' ]);
         Route::get('create', [ 'as' => 'create/group', 'uses' => 'GroupsController@getCreate' ]);
