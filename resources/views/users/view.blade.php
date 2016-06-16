@@ -111,6 +111,10 @@
                         <td>{{ $user->userloc->name }}</td>
                     </tr>
                     @endif
+                    <tr>
+                        <td>{{ trans('general.created_at') }}</td>
+                        <td>{{ $user->created_at->format('F j, Y h:iA') }}</td>
+                    </tr>
 
                   </table>
                 </div>

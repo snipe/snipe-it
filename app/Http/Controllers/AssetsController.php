@@ -1425,7 +1425,8 @@ class AssetsController extends Controller
         'location',
         'image',
         'status_label',
-        'assigned_to'
+        'assigned_to',
+        'created_at'
         ];
 
         $all_custom_fields=CustomField::all(); //used as a 'cache' of custom fields throughout this page load
@@ -1506,6 +1507,7 @@ class AssetsController extends Controller
             'order_number'  => ($asset->order_number!='') ? '<a href="'.config('app.url').'/hardware?order_number='.e($asset->order_number).'">'.e($asset->order_number).'</a>' : '',
             'last_checkout' => ($asset->last_checkout!='') ? e($asset->last_checkout) : '',
             'expected_checkin' => ($asset->expected_checkin!='')  ? e($asset->expected_checkin) : '',
+            'created_at' => ($asset->created_at!='')  ? e($asset->created_at->format('F j, Y h:iA')) : '',
             'change'        => ($inout) ? $inout : '',
             'actions'       => ($actions) ? $actions : '',
             'companyName'   => is_null($asset->company) ? '' : e($asset->company->name)

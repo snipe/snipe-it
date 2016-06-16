@@ -92,6 +92,7 @@
                               <th data-sortable="true" data-visible="false" data-field="{{$field->db_column_name()}}">{{$field->name}}</th>
                             @endforeach
                             <th data-switchable="false" data-searchable="false" data-sortable="false" data-field="change">{{ trans('admin/hardware/table.change') }}</th>
+                            <th data-sortable="true" data-field="created_at" data-searchable="true" data-visible="false">{{ trans('general.created_at') }}</th>
                             <th data-switchable="false" data-searchable="false" data-sortable="false" data-field="actions" >{{ trans('table.actions') }}</th>
                         </tr>
                     </thead>

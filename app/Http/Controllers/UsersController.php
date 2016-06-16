@@ -887,7 +887,7 @@ class UsersController extends Controller
                 $allowed_columns =
                 [
                  'last_name','first_name','email','username','employee_num',
-                 'assets','accessories', 'consumables','licenses','groups','activated'
+                 'assets','accessories', 'consumables','licenses','groups','activated','created_at'
                 ];
 
                 $sort = in_array($sort, $allowed_columns) ? $sort : 'first_name';
@@ -946,6 +946,7 @@ class UsersController extends Controller
                 'consumables'        => $user->consumables->count(),
                 'groups'        => $group_names,
                 'notes'         => e($user->notes),
+                'created_at' => ($user->created_at!='')  ? e($user->created_at->format('F j, Y h:iA')) : '',
                 'activated'      => ($user->activated=='1') ? '<i class="fa fa-check"></i>' : '<i class="fa fa-times"></i>',
                 'actions'       => ($actions) ? $actions : '',
                 'companyName'   => is_null($user->company) ? '' : e($user->company->name)

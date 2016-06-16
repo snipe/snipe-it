@@ -249,6 +249,10 @@
                       <td>{{ trans('admin/hardware/form.notes') }}</td>
                       <td>{{ $asset->notes }}</td>
                     </tr>
+                  <tr>
+                      <td>{{ trans('general.created_at') }}</td>
+                      <td>{{ $asset->created_at->format('F j, Y h:iA') }}</td>
+                  </tr>
                   </tbody>
               </table>
             </div> <!-- /table-responsive -->
