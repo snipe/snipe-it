@@ -45,7 +45,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
         if ($this->isSuperUser()) {
             return true;
         }
-        $permitted = false;
+
         $user_groups = $this->groups;
 
 
@@ -55,19 +55,25 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 
         $user_permissions = json_decode($this->permissions, true);
 
+        //If the user is explicitly granted, return false
         if (($user_permissions!='') && ((array_key_exists($section, $user_permissions)) && ($user_permissions[$section]=='1')) ) {
-            $permitted = true;
+            return true;
         }
 
+        // If the user is explicitly denied, return false
+        if (($user_permissions=='') || array_key_exists($section, $user_permissions) && ($user_permissions[$section]=='-1'))  {
+            return false;
+        }
+
+        // Loop through the groups to see if any of them grant this permission
         foreach ($user_groups as $user_group) {
             $group_permissions = json_decode($user_group->permissions, true);
             if (((array_key_exists($section, $group_permissions)) && ($group_permissions[$section]=='1'))) {
-                $permitted = true;
+                return true;
             }
         }
 
-
-        return $permitted;
+        return false;
     }
 
     public function isSuperUser() {
@@ -211,13 +217,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
      */
     public function groups()
     {
-        static $static_cache = null;
-
-        if (!$static_cache) {
-            $static_cache = $this->belongsToMany('\App\Models\Group', 'users_groups');
-        }
-        return $static_cache;
-        //return $this->belongsToMany('\App\Models\Group', 'users_groups');
+        return $this->belongsToMany('\App\Models\Group', 'users_groups');
     }
 
 

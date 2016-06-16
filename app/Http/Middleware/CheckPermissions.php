@@ -6,6 +6,7 @@ use Closure;
 use Config;
 use Route;
 use Gate;
+use Log;
 
 class CheckPermissions
 {
@@ -19,8 +20,10 @@ class CheckPermissions
    */
     public function handle($request, Closure $next, $section = null)
     {
+        Log::debug($section .' is the section');
 
         if (Gate::allows($section)) {
+
             return $next($request);
         }
 

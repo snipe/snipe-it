@@ -373,6 +373,7 @@ class Helper
     public static function selectedPermissionsArray($permissions, $selected_arr = array())
     {
 
+
         $permissions_arr = array();
 
         foreach ($permissions as $permission) {
@@ -384,7 +385,7 @@ class Helper
 
                     if ($selected_arr) {
                         if (array_key_exists($permission_name,$selected_arr)) {
-                            $permissions_arr[$permission_name] = ($selected_arr[$permission_name] == 1) ? '1': '0';
+                            $permissions_arr[$permission_name] = $selected_arr[$permission_name];
                         } else {
                             $permissions_arr[$permission_name] = '0';
                         }

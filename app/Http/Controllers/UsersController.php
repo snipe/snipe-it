@@ -278,7 +278,6 @@ class UsersController extends Controller
             return redirect()->route('users')->with('error', $error);
         }
 
-            $user_groups = array ($request->input('groups'));
             // Update the user
             $user->first_name = e($request->input('first_name'));
             $user->last_name = e($request->input('last_name'));
@@ -297,11 +296,8 @@ class UsersController extends Controller
             $user->manager_id = e($request->input('manager_id'));
             $user->notes = e($request->input('notes'));
             $user->permissions = json_encode($request->input('permission'));
-            if ($request->has('groups')) {
-                $user->groups()->sync($request->input('groups'));
-            } else {
-                $user->groups()->sync(array());
-            }
+
+
 
 
         if ($user->manager_id == "") {
@@ -310,6 +306,12 @@ class UsersController extends Controller
 
         if ($user->location_id == "") {
             $user->location_id = null;
+        }
+
+        if ($request->has('groups')) {
+            $user->groups()->sync($request->input('groups'));
+        } else {
+            $user->groups()->sync(array());
         }
 
 
@@ -330,6 +332,8 @@ class UsersController extends Controller
 
             // Was the user updated?
         if ($user->save()) {
+
+
             // Prepare the success message
             $success = trans('admin/users/message.success.update');
 

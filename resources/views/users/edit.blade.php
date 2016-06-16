@@ -30,7 +30,9 @@ input[type='text'][disabled], input[disabled], textarea[disabled], input[readonl
   color: #555555;
   cursor:text;
 }
-
+.radio-padding {
+    padding-left: 50px;
+}
 </style>
 
 <div class="row">
@@ -242,7 +244,7 @@ input[type='text'][disabled], input[disabled], textarea[disabled], input[readonl
       </div>
 
        <!-- Notes -->
-      <div class="form-group {!! $errors->has('notes') ? ' has-error' : '' !!}">
+      <div class="form-group{!! $errors->has('notes') ? ' has-error' : '' !!}">
           <label for="notes" class="col-md-3 control-label">{{ trans('admin/users/table.notes') }}</label>
           <div class="col-md-9">
               <textarea class="form-control" id="notes" name="notes">{{ Input::old('notes', $user->notes) }}</textarea>
@@ -251,7 +253,7 @@ input[type='text'][disabled], input[disabled], textarea[disabled], input[readonl
       </div>
 
       <!-- Groups -->
-            <div class="form-group {{ $errors->has('groups') ? 'has-error' : '' }}">
+            <div class="form-group{{ $errors->has('groups') ? ' has-error' : '' }}">
                 <label class="col-md-3 control-label" for="groups"> {{ trans('general.groups') }}</label>
                 <div class="col-md-5">
                    <div class="controls">
@@ -295,6 +297,7 @@ input[type='text'][disabled], input[disabled], textarea[disabled], input[readonl
     </div><!-- /.tab-pane -->
     <div class="tab-pane" id="tab_2">
         <div class="col-md-10 col-md-offset-2">
+
         @foreach ($permissions as $area => $permission)
 
             @for ($i = 0; $i < count($permission); $i++)
@@ -308,14 +311,18 @@ input[type='text'][disabled], input[disabled], textarea[disabled], input[readonl
 
                     <!-- radio -->
                     <div class="form-group" style="padding-left: 15px;">
-
+                        
                         <label class="radio-padding">
-                            {{ Form::radio('permission['.$permission_name.']', 1, $userPermissions[$permission_name], ['class' => 'minimal']) }}
+                            {{ Form::radio('permission['.$permission_name.']', '1', $userPermissions[$permission_name] == '1', ['class' => 'minimal']) }}
                             Grant</label>
 
                         <label class="radio-padding">
-                            {{ Form::radio('permission['.$permission_name.']', 0, !$userPermissions[$permission_name], ['class' => 'minimal']) }}
+                            {{ Form::radio('permission['.$permission_name.']', '-1', $userPermissions[$permission_name] == '-1', ['class' => 'minimal']) }}
                             Deny</label>
+
+                        <label class="radio-padding">
+                            {{ Form::radio('permission['.$permission_name.']', '0', $userPermissions[$permission_name] =='0', ['class' => 'minimal']) }}
+                            Inherit</label>
                     </div>
                     <hr>
                 @endif
