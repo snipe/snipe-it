@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "abd2bfc01b3565b7dd1f6aac9e9311b1",
-    "content-hash": "21294a0f9fd03e194e64084844a1d380",
+    "hash": "11dadd0d32641538b6855a62bc083aa2",
+    "content-hash": "dd7dd05440de96bf23863dec984217af",
     "packages": [
         {
             "name": "aws/aws-sdk-php",
@@ -792,31 +792,35 @@
         },
         {
             "name": "fideloper/proxy",
-            "version": "2.1.1",
+            "version": "3.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/fideloper/TrustedProxy.git",
-                "reference": "a0ec0f35c82dceecc0d8975f29e6e8e85acbd419"
+                "reference": "ec4dd30141e2515e307aea3539ff242e85c3f120"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/fideloper/TrustedProxy/zipball/a0ec0f35c82dceecc0d8975f29e6e8e85acbd419",
-                "reference": "a0ec0f35c82dceecc0d8975f29e6e8e85acbd419",
+                "url": "https://api.github.com/repos/fideloper/TrustedProxy/zipball/ec4dd30141e2515e307aea3539ff242e85c3f120",
+                "reference": "ec4dd30141e2515e307aea3539ff242e85c3f120",
                 "shasum": ""
             },
             "require": {
-                "illuminate/support": "~4.0|~5.0",
-                "php": ">=5.3.0"
+                "illuminate/contracts": "~5.0",
+                "php": ">=5.4.0"
+            },
+            "require-dev": {
+                "illuminate/http": "~5.0",
+                "mockery/mockery": "~0.9.3"
             },
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "2.0-dev"
+                    "dev-master": "3.1-dev"
                 }
             },
             "autoload": {
-                "psr-0": {
-                    "Fideloper\\Proxy": "src/"
+                "psr-4": {
+                    "Fideloper\\Proxy\\": "src/"
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -835,7 +839,7 @@
                 "proxy",
                 "trusted proxy"
             ],
-            "time": "2014-11-20 02:20:43"
+            "time": "2015-12-24 15:02:55"
         },
         {
             "name": "guzzlehttp/guzzle",
