@@ -9,7 +9,7 @@
 
   <?php
     $settings->labels_width = $settings->labels_width - $settings->labels_display_sgutter;
-    $settings->labels_height = $settings->labels_height - $settings->labels_display_sgutter;
+    $settings->labels_height = $settings->labels_height - $settings->labels_display_bgutter;
     $qr_size = ($settings->labels_height - .25);
     $qr_txt_size = $settings->labels_width - $qr_size - $settings->labels_display_sgutter - .1;
     ?>
