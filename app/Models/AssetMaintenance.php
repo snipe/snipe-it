@@ -15,6 +15,7 @@ class AssetMaintenance extends Model implements ICompanyableChild
 {
     use SoftDeletes;
     use CompanyableChildTrait;
+    use ValidatingTrait;
 
 
     protected $dates = [ 'deleted_at' ];
