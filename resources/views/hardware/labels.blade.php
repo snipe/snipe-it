@@ -49,6 +49,11 @@
     width: 100%;
     height: 100%;
   }
+  img.barcode {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+  }
 
  .qr_text {
     width: {{ $qr_txt_size }}in;
@@ -88,6 +93,9 @@
     }
   }
 
+  @if (\App\Models\Setting::getSettings()->custom_css)
+    {{ \App\Models\Setting::getSettings()->show_custom_css() }}
+  @endif
 
   </style>
 
