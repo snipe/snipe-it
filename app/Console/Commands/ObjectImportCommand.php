@@ -321,7 +321,7 @@ class ObjectImportCommand extends Command {
 		$asset_model->manufacturer_id = $manufacturer->id;
 		$asset_model->modelno = $asset_modelno;
 		$asset_model->category_id = $category->id;
-		$asset_model->user_id = 1;
+		$asset_model->user_id = $this->option('user_id');
 
 
 		if(!$this->option('testrun')) {
@@ -367,7 +367,7 @@ class ObjectImportCommand extends Command {
 
 		$category->name = $asset_category;
 		$category->category_type = $item_type;
-		$category->user_id = 1;
+		$category->user_id = $this->option('user_id');
 
 
 		if(!$this->option('testrun')) {
@@ -491,7 +491,7 @@ class ObjectImportCommand extends Command {
 
 		$manufacturer = new Manufacturer();
 		$manufacturer->name = $asset_mfgr;
-		$manufacturer->user_id = 1;
+		$manufacturer->user_id = $this->option('user_id');
 
 		if (!$this->option('testrun')) {
 			if ($manufacturer->save()) {
@@ -538,7 +538,7 @@ class ObjectImportCommand extends Command {
 			$location->city = '';
 			$location->state = '';
 			$location->country = '';
-			$location->user_id = 1;
+			$location->user_id = $this->option('user_id');
 
 			if (!$this->option('testrun')) {
 				if ($location->save()) {
@@ -584,7 +584,7 @@ class ObjectImportCommand extends Command {
 
 		$supplier = new Supplier();
 		$supplier->name = $supplier_name;
-		$supplier->user_id = 1;
+		$supplier->user_id = $this->option('user_id');
 
 		if(!$this->option('testrun')) {
 			if ($supplier->save()) {
@@ -721,6 +721,7 @@ class ObjectImportCommand extends Command {
         $this->log('Serial No: '.$asset_serial);
         $this->log('Asset Tag: '.$asset_tag);
         $this->log('Notes: '.$item["notes"]);
+        $this->log('Warranty Months: ' . $asset_warranty_months);
 
 		foreach ($this->assets as $tempasset) {
 			if (strcasecmp($tempasset->asset_tag, $asset_tag ) == 0 ) {
@@ -761,6 +762,7 @@ class ObjectImportCommand extends Command {
 		}
 		$asset->serial = $asset_serial;
 		$asset->asset_tag = $asset_tag;
+                $asset->warranty_months = $asset_warranty_months;
 
 		if($asset_model)
 			$asset->model_id = $asset_model->id;
@@ -768,7 +770,7 @@ class ObjectImportCommand extends Command {
 			$asset->assigned_to = $item["user"]->id;
 		if($item["location"])
 			$asset->rtd_location_id = $item["location"]->id;
-		$asset->user_id = 1;
+		$asset->user_id = $this->option('user_id');
 		$this->log("status_id: " . $status_id);
 		$asset->status_id = $status_id;
 		if($item["company"])
@@ -827,7 +829,7 @@ class ObjectImportCommand extends Command {
 		}
 		if($item["location"])
 			$accessory->location_id = $item["location"]->id;
-		$accessory->user_id = 1;
+		$accessory->user_id = $this->option('user_id');
 		if($item["company"])
 			$accessory->company_id = $item["company"]->id;
 		$accessory->order_number = $item["order_number"];
@@ -893,7 +895,7 @@ class ObjectImportCommand extends Command {
 			$consumable->purchase_cost = 0.00;
 		}
 		$consumable->location_id = $item["location"]->id;
-		$consumable->user_id = 1; // TODO: What user_id should we use for imports?
+		$consumable->user_id = $this->option('user_id');
 		$consumable->company_id = $item["company"]->id;
 		$consumable->order_number = $item["order_number"];
 		$consumable->category_id = $item["category"]->id;
@@ -950,7 +952,8 @@ class ObjectImportCommand extends Command {
 		array('testrun', null, InputOption::VALUE_NONE, 'If set, will parse and output data without adding to database', null),
 		array('logfile', null, InputOption::VALUE_REQUIRED, 'The path to log output to.  storage/logs/importer.log by default', storage_path('logs/importer.log') ),
 		array('item-type', null, InputOption::VALUE_REQUIRED, 'Item Type To import.  Valid Options are Asset, Consumable, Or Accessory', 'Asset'),
-		array('web-importer', null, InputOption::VALUE_NONE, 'Internal: packages output for use with the web importer')
+                array('web-importer', null, InputOption::VALUE_NONE, 'Internal: packages output for use with the web importer'),
+                array('user_id', null, InputOption::VALUE_REQUIRED, 'ID of user creating items', 1)
 	);
 
 	}
