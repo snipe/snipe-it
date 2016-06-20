@@ -103,8 +103,10 @@ class ObjectImportCommand extends Command {
 		$this->accessories = Accessory::All(['name']);
 		$this->consumables = Consumable::All(['name']);
 		$this->customfields = CustomField::All(['name']);
-
-		$bar = $this->output->createProgressBar(count($newarray));
+                $bar = NULL;
+                if(!$this->option('web-importer')) {
+		        $bar = $this->output->createProgressBar(count($newarray));
+                }
 		// Loop through the records
 		DB::transaction(function() use (&$newarray, $bar){
 		Model::unguard();
@@ -180,12 +182,16 @@ class ObjectImportCommand extends Command {
 					break;
 			}
 
-			$bar->advance();
+                        if(!$this->option('web-importer')) {
+			        $bar->advance();
+                        }
 			$this->log('------------- Action Summary ----------------');
 
 		}
 	});
-		$bar->finish();
+                if(!$this->option('web-importer')) {
+		        $bar->finish();
+                }
 
 
 			$this->log('=====================================');
