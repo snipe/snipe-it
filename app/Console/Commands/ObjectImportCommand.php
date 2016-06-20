@@ -748,9 +748,11 @@ class ObjectImportCommand extends Command {
 			$asset->purchase_date = NULL;
 		}
 
-		foreach ($item['custom_fields'] as $custom_field => $val) {
-			$asset->{$custom_field} = $val;
-		}
+                if( array_key_exists('custom_fields', $item)) {
+		        foreach ($item['custom_fields'] as $custom_field => $val) {
+			        $asset->{$custom_field} = $val;
+                        }
+                }
 
 		if (!empty($item["purchase_cost"])) {
 			//TODO How to generalize this for not USD?
