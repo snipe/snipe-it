@@ -396,7 +396,7 @@ class AssetImportCommand extends Command {
   				if ($user_asset_purchase_date!='') {
   					$asset->purchase_date = $user_asset_purchase_date;
   				} else {
-  					$asset->purchase_date = NULL;
+  					$asset->purchase_date = null;
   				}
   				if ($user_asset_purchase_cost!='') {
   					$asset->purchase_cost = ParseFloat(e($user_asset_purchase_cost));
@@ -414,7 +414,7 @@ class AssetImportCommand extends Command {
   				if ($user_asset_purchase_date!='') {
   					$asset->purchase_date = $user_asset_purchase_date;
   				} else {
-  					$asset->purchase_date = NULL;
+  					$asset->purchase_date = null;
   				}
   				$asset->notes = e($user_asset_notes);
 

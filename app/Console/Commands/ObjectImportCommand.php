@@ -82,7 +82,7 @@ class ObjectImportCommand extends Command {
 		$csv = Reader::createFromPath($this->argument('filename'));
 		$csv->setNewline("\r\n");
 		$results = $csv->fetchAssoc();
-		$newarray = NULL;
+		$newarray = null;
 
 		foreach ($results as $index => $arraytoNormalize)
 		{
@@ -103,7 +103,7 @@ class ObjectImportCommand extends Command {
 		$this->accessories = Accessory::All(['name']);
 		$this->consumables = Consumable::All(['name']);
 		$this->customfields = CustomField::All(['name']);
-                $bar = NULL;
+                $bar = null;
                 if(!$this->option('web-importer')) {
 		        $bar = $this->output->createProgressBar(count($newarray));
                 }
@@ -716,7 +716,7 @@ class ObjectImportCommand extends Command {
         $asset_image = $this->array_smart_fetch($row, "image");
         $asset_warranty_months = intval($this->array_smart_fetch($row, "warranty months"));
         if(empty($asset_warranty_months)) {
-        	$asset_warranty_months = NULL;
+        	$asset_warranty_months = null;
         }
         // Check for the asset model match and create it if it doesn't exist
         $asset_model = $this->createOrFetchAssetModel($row, $item["category"], $item["manufacturer"]);
@@ -751,7 +751,7 @@ class ObjectImportCommand extends Command {
 		if ($item["purchase_date"] != '') {
 			$asset->purchase_date = $item["purchase_date"];
 		} else {
-			$asset->purchase_date = NULL;
+			$asset->purchase_date = null;
 		}
 
                 if( array_key_exists('custom_fields', $item)) {
@@ -828,7 +828,7 @@ class ObjectImportCommand extends Command {
 		if (!empty($item["purchase_date"])) {
 			$accessory->purchase_date = $item["purchase_date"];
 		} else {
-			$accessory->purchase_date = NULL;
+			$accessory->purchase_date = null;
 		}
 		if (!empty($item["purchase_cost"])) {
 			$accessory->purchase_cost = number_format(e($item["purchase_cost"]),2);
@@ -894,7 +894,7 @@ class ObjectImportCommand extends Command {
 		if(!empty($item["purchase_date"])) {
 			$consumable->purchase_date = $item["purchase_date"];
 		} else {
-			$consumable->purchase_date = NULL;
+			$consumable->purchase_date = null;
 		}
 
 		if(!empty($item["purchase_cost"])) {

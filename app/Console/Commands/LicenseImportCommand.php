@@ -266,7 +266,7 @@ class LicenseImportCommand extends Command {
 				}
 			} else {
 				$user = new User;
-				$user->user_id = NULL;
+				$user->user_id = null;
 			}
 
 
@@ -293,7 +293,7 @@ class LicenseImportCommand extends Command {
 			if ($user_license_purchase_date!='') {
 				$license->purchase_date = $user_license_purchase_date;
 			} else {
-				$license->purchase_date = NULL;
+				$license->purchase_date = null;
 			}
 			$license->serial = e($user_license_serial);
 			$license->seats = e($user_license_seats);
@@ -302,7 +302,7 @@ class LicenseImportCommand extends Command {
 			if ($user_license_purchase_date!='') {
 				$license->purchase_date = $user_license_purchase_date;
 			} else {
-				$license->purchase_date = NULL;
+				$license->purchase_date = null;
 			}
 			$license->license_name = $user_licensed_to_name;
 			$license->license_email = $user_licensed_to_email;
@@ -323,7 +323,7 @@ class LicenseImportCommand extends Command {
 					if ($x==0) {
 						$license_seat->assigned_to = $user->id;
 					} else {
-						$license_seat->assigned_to = NULL;
+						$license_seat->assigned_to = null;
 					}
 
 					if ($license_seat->save()) {
