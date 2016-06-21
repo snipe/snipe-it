@@ -11,7 +11,7 @@
       "league/csv": "~7.0",
       "maknz/slack": "dev-master",
       "erusev/parsedown": "dev-master",
-      "fideloper/proxy": "2.1.1",
+      "fideloper/proxy": "^3.1",
       "guzzlehttp/guzzle": "5.3.0",
       "aws/aws-sdk-php-laravel": "~3.0",
       "tecnickcom/tc-lib-barcode": "dev-master",
