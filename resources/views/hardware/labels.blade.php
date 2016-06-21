@@ -9,7 +9,7 @@
 
   <?php
     $settings->labels_width = $settings->labels_width - $settings->labels_display_sgutter;
-    $settings->labels_height = $settings->labels_height - $settings->labels_display_sgutter;
+    $settings->labels_height = $settings->labels_height - $settings->labels_display_bgutter;
     $qr_size = ($settings->labels_height - .25);
     $qr_txt_size = $settings->labels_width - $qr_size - $settings->labels_display_sgutter - .1;
     ?>
@@ -48,6 +48,11 @@
   img.qr_img {
     width: 100%;
     height: 100%;
+  }
+  img.barcode {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
   }
 
  .qr_text {
@@ -88,6 +93,9 @@
     }
   }
 
+  @if (\App\Models\Setting::getSettings()->custom_css)
+    {{ \App\Models\Setting::getSettings()->show_custom_css() }}
+  @endif
 
   </style>
 

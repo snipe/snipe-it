@@ -6,7 +6,7 @@ use Closure;
 use Config;
 use Route;
 use Gate;
-use Log;
+
 
 class CheckPermissions
 {
