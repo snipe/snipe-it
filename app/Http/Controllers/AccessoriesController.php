@@ -322,6 +322,7 @@ class AccessoriesController extends Controller
 
 
 
+        $admin_user = Auth::user();
         $settings = Setting::getSettings();
 
         if ($settings->slack_endpoint) {
