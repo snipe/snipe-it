@@ -40,6 +40,8 @@ use Illuminate\Http\Request;
  *
  * @version    v1.0
  */
+
+
 class UsersController extends Controller
 {
 
@@ -1132,6 +1134,8 @@ class UsersController extends Controller
     */
     public function postLDAP()
     {
+        ini_set('max_execution_time', 600); //600 seconds = 10 minutes
+        ini_set('memory_limit', '500M');
 
         $location_id = e(Input::get('location_id'));
 
