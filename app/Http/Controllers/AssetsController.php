@@ -878,15 +878,17 @@ class AssetsController extends Controller
                                 ['filename'=> config('app.private_uploads').'/imports/assets/'.$filename,
                                 '--email_format'=>'firstname.lastname',
                                 '--username_format'=>'firstname.lastname',
-                                '--web-importer' => true
+                                '--web-importer' => true,
+                                '--user_id' => Auth::user()->id
             ]);
         $display_output =  Artisan::output();
         $file = config('app.private_uploads').'/imports/assets/'.str_replace('.csv', '', $filename).'-output-'.date("Y-m-d-his").'.txt';
         file_put_contents($file, $display_output);
         if( $return === 0) //Success
             return redirect()->to('hardware')->with('success', trans('admin/hardware/message.import.success'));
-        else if( $return === 1) // Failure
+        else if( $return === 1) { // Failure
             return redirect()->back()->with('import_errors', json_decode($display_output))->with('error', trans('admin/hardware/message.import.error'));
+        }
         dd("Shouldn't be here");
 
     }
