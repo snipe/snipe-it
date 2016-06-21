@@ -260,8 +260,18 @@
 
           <div class="col-md-4">
 
+              @if ($asset->image)
+                  <img src="{{ Config::get('app.url') }}/uploads/assets/{{{ $asset->image }}}" class="assetimg">
+              @else
+                  @if ($asset->model->image!='')
+                      <img src="{{ Config::get('app.url') }}/uploads/models/{{{ $asset->model->image }}}" class="assetimg">
+                  @endif
+              @endif
 
-              <img src="{{ config('get.url') }}/hardware/{{ $asset->id }}/qr_code" class="img-thumbnail pull-right" style="height: 100px; width: 100px; margin-right: 10px;">
+              @if  (App\Models\Setting::getSettings()->qr_code=='1')
+                 <img src="{{ config('get.url') }}/hardware/{{ $asset->id }}/qr_code" class="img-thumbnail pull-right" style="height: 100px; width: 100px; margin-right: 10px;">
+              @endif
+
 
             @if (($asset->assigneduser) && ($asset->assigned_to > 0) && ($asset->deleted_at==''))
                 <h4>{{ trans('admin/hardware/form.checkedout_to') }}</h4>
