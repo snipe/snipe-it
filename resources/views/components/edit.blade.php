@@ -58,7 +58,7 @@
          <!-- Name -->
          <div class="form-group {{ $errors->has('name') ? ' has-error' : '' }}">
              <div class="col-md-3">
-             	{{ Form::label('name', trans('admin/components/table.title')) }}
+             	{{ Form::label('name', trans('admin/components/table.title')) }} *
 
              </div>
              <div class="col-md-9">
@@ -70,7 +70,7 @@
      	<!-- Category -->
          <div class="form-group {{ $errors->has('category_id') ? ' has-error' : '' }}">
      	     <div class="col-md-3">
-     		     {{ Form::label('category_id', trans('general.category')) }}
+     		     {{ Form::label('category_id', trans('general.category')) }} *
 
               </div>
                  <div class="col-md-7">
@@ -134,7 +134,7 @@
          <!-- QTY -->
          <div class="form-group {{ $errors->has('total_qty') ? ' has-error' : '' }}">
              <div class="col-md-3">
-             	{{ Form::label('total_qty', trans('general.quantity')) }}
+             	{{ Form::label('total_qty', trans('general.quantity')) }} *
              </div>
              <div class="col-md-9" style="margin-left: -15px">
                  <div class="col-md-2">

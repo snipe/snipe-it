@@ -21,7 +21,7 @@
           @if ($component->id)
             <div class="box-header with-border">
               <div class="box-heading">
-                <h3 class="box-title">{{ $component->name }} </h3>
+                <h3 class="box-title">{{ $component->name }}  ({{ $component->numRemaining()  }}  {{ trans('admin/components/general.remaining') }})</h3>
               </div>
             </div><!-- /.box-header -->
           @endif
@@ -54,9 +54,12 @@
           <div class="form-group {{ $errors->has('assigned_qty') ? ' has-error' : '' }}">
               <label for="assigned_qty" class="col-md-3 control-label">{{ trans('general.qty') }}
                <i class='icon-asterisk'></i></label>
-              <div class="col-md-9">
-                <input class="form-control" type="text" name="assigned_qty" id="assigned_qty" style="width: 70px;" value="{{ Input::old('assigned_qty') }}" />
+              <div class="col-md-1">
+                <input class="form-control" type="text" name="assigned_qty" id="assigned_qty"  value="{{ Input::old('assigned_qty') }}" />
                 {!! $errors->first('assigned_qty', '<br><span class="alert-msg"><i class="fa fa-times"></i> :message</span>') !!}
+              </div>
+              <div class="col-md-8">
+                  {{ $component->numRemaining()  }} Max
               </div>
           </div>
 
