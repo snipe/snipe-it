@@ -19,7 +19,7 @@ class AssetModel extends Model
 
     // Declare the rules for the model validation
     protected $rules = array(
-        'name'          => 'required|min:2|max:255',
+        'name'          => 'required|min:1|max:255',
         'modelno'           => 'min:1|max:255',
         'category_id'       => 'required|integer',
         'manufacturer_id'   => 'required|integer',
