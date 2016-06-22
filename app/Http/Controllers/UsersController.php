@@ -33,7 +33,6 @@ use URL;
 use View;
 use Illuminate\Http\Request;
 
-
 /**
  * This controller handles all actions related to Users for
  * the Snipe-IT Asset Management application.
@@ -142,7 +141,7 @@ class UsersController extends Controller
             return redirect::route('users')->with('success', trans('admin/users/message.success.create'));
         }
 
-       return redirect()->back()->withInput()->withErrors($user->getErrors());
+        return redirect()->back()->withInput()->withErrors($user->getErrors());
 
 
 
@@ -284,9 +283,9 @@ class UsersController extends Controller
             $user->first_name = e($request->input('first_name'));
             $user->last_name = e($request->input('last_name'));
             $user->locale = e($request->input('locale'));
-            if (Input::has('username')) {
-                $user->username = e($request->input('username'));
-            }
+        if (Input::has('username')) {
+            $user->username = e($request->input('username'));
+        }
 
             $user->email = e($request->input('email'));
             $user->employee_num = e($request->input('employee_num'));
@@ -431,7 +430,7 @@ class UsersController extends Controller
 
             //print_r($licenses);
 
-            $users = User::whereIn('id', $user_raw_array)->with('groups', 'assets', 'licenses','accessories')->get();
+            $users = User::whereIn('id', $user_raw_array)->with('groups', 'assets', 'licenses', 'accessories')->get();
            // $users = Company::scopeCompanyables($users)->get();
 
             return View::make('users/confirm-bulk-delete', compact('users', 'statuslabel_list'));
@@ -523,7 +522,7 @@ class UsersController extends Controller
                     $logaction->logaction('checkin from');
                 }
 
-                LicenseSeat::whereIn('id', $license_array)->update(['assigned_to' => NULL]);
+                LicenseSeat::whereIn('id', $license_array)->update(['assigned_to' => null]);
 
                 foreach ($users as $user) {
                     $user->accessories()->sync(array());
@@ -553,22 +552,22 @@ class UsersController extends Controller
     {
 
             // Get user information
-            if (!$user = User::onlyTrashed()->find($id)) {
-                return redirect()->route('users')->with('error', trans('admin/users/messages.user_not_found'));
-            }
+        if (!$user = User::onlyTrashed()->find($id)) {
+            return redirect()->route('users')->with('error', trans('admin/users/messages.user_not_found'));
+        }
 
-            if (!Company::isCurrentUserHasAccess($user)) {
-                return redirect()->route('users')->with('error', trans('general.insufficient_permissions'));
+        if (!Company::isCurrentUserHasAccess($user)) {
+            return redirect()->route('users')->with('error', trans('general.insufficient_permissions'));
+        } else {
+
+            // Restore the user
+            if (User::withTrashed()->where('id', $id)->restore()) {
+                return redirect()->route('users')->with('success', trans('admin/users/message.success.restored'));
             } else {
-
-                // Restore the user
-                if (User::withTrashed()->where('id',$id)->restore()) {
-                    return redirect()->route('users')->with('success', trans('admin/users/message.success.restored'));
-                } else {
-                    return redirect()->route('users')->with('error','User could not be restored.');
-                }
-
+                return redirect()->route('users')->with('error', 'User could not be restored.');
             }
+
+        }
     }
 
 
@@ -698,8 +697,8 @@ class UsersController extends Controller
                             ->with('company_list', $company_list)
                             ->with('manager_list', $manager_list)
                             ->with('user', $user)
-                            ->with('groups',$groups)
-                            ->with('userGroups',$userGroups)
+                            ->with('groups', $groups)
+                            ->with('userGroups', $userGroups)
                             ->with('clone_user', $user_to_clone);
         } catch (UserNotFoundException $e) {
             // Prepare the error message
@@ -1193,29 +1192,29 @@ class UsersController extends Controller
         $global_count = 0;
 
         // Perform the search
-	    do {
-    		// Paginate (non-critical, if not supported by server)
-    		ldap_control_paged_result($ldapconn, $page_size, false, $cookie);
+        do {
+            // Paginate (non-critical, if not supported by server)
+            ldap_control_paged_result($ldapconn, $page_size, false, $cookie);
 
-            	$search_results = ldap_search($ldapconn, $base_dn, '('.$filter.')');
+                $search_results = ldap_search($ldapconn, $base_dn, '('.$filter.')');
 
-    	        if (!$search_results) {
-    	            return redirect()->route('users')->with('error', trans('admin/users/message.error.ldap_could_not_search').ldap_error($ldapconn));
-    	        }
+            if (!$search_results) {
+                return redirect()->route('users')->with('error', trans('admin/users/message.error.ldap_could_not_search').ldap_error($ldapconn));
+            }
 
-    	        // Get results from page
-    	        $results = ldap_get_entries($ldapconn, $search_results);
-    	        if (!$results) {
-    	            return redirect()->route('users')->with('error', trans('admin/users/message.error.ldap_could_not_get_entries').ldap_error($ldapconn));
-    	        }
+                // Get results from page
+                $results = ldap_get_entries($ldapconn, $search_results);
+            if (!$results) {
+                return redirect()->route('users')->with('error', trans('admin/users/message.error.ldap_could_not_get_entries').ldap_error($ldapconn));
+            }
 
-    		// Add results to result set
-    		$global_count += $results['count'];
-    		$result_set = array_merge($result_set, $results);
+            // Add results to result set
+            $global_count += $results['count'];
+            $result_set = array_merge($result_set, $results);
 
-    		ldap_control_paged_result_response($ldapconn, $search_results, $cookie);
+            ldap_control_paged_result_response($ldapconn, $search_results, $cookie);
 
-	   } while ($cookie !== null && $cookie != '');
+        } while ($cookie !== null && $cookie != '');
 
 
         // Clean up after search

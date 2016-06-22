@@ -5,6 +5,7 @@ namespace App\Http\Requests;
 use App\Http\Requests\Request;
 use App\Models\AssetModel;
 use Session;
+
 class AssetRequest extends Request
 {
     /**
@@ -40,8 +41,7 @@ class AssetRequest extends Request
 
         $model = AssetModel::find($this->request->get('model_id'));
 
-        if (($model) && ($model->fieldset))
-        {
+        if (($model) && ($model->fieldset)) {
             $rules += $model->fieldset->validation_rules();
         }
 

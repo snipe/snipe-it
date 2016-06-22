@@ -244,7 +244,7 @@ class CategoriesController extends Controller
     public function getDatatable()
     {
         // Grab all the categories
-        $categories = Category::with('assets', 'accessories', 'consumables','components');
+        $categories = Category::with('assets', 'accessories', 'consumables', 'components');
 
         if (Input::has('search')) {
             $categories = $categories->TextSearch(e(Input::get('search')));
@@ -300,7 +300,8 @@ class CategoriesController extends Controller
         return $data;
     }
 
-    public function getDataViewAssets($categoryID) {
+    public function getDataViewAssets($categoryID)
+    {
 
         $category = Category::with('assets.company')->find($categoryID);
         $category_assets = $category->assets();
@@ -369,7 +370,8 @@ class CategoriesController extends Controller
 
 
 
-    public function getDataViewAccessories($categoryID) {
+    public function getDataViewAccessories($categoryID)
+    {
 
         $category = Category::with('accessories.company')->find($categoryID);
         $category_assets = $category->accessories;
@@ -422,7 +424,8 @@ class CategoriesController extends Controller
     }
 
 
-    public function getDataViewConsumables($categoryID) {
+    public function getDataViewConsumables($categoryID)
+    {
 
         $category = Category::with('accessories.company')->find($categoryID);
         $category_assets = $category->consumables;
@@ -474,7 +477,8 @@ class CategoriesController extends Controller
         return $data;
     }
 
-    public function getDataViewComponent($categoryID) {
+    public function getDataViewComponent($categoryID)
+    {
 
         $category = Category::with('accessories.company')->find($categoryID);
         $category_assets = $category->components;
@@ -525,7 +529,4 @@ class CategoriesController extends Controller
         $data = array('total' => $count, 'rows' => $rows);
         return $data;
     }
-
-
-
 }

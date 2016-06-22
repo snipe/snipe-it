@@ -56,12 +56,12 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
         $user_permissions = json_decode($this->permissions, true);
 
         //If the user is explicitly granted, return false
-        if (($user_permissions!='') && ((array_key_exists($section, $user_permissions)) && ($user_permissions[$section]=='1')) ) {
+        if (($user_permissions!='') && ((array_key_exists($section, $user_permissions)) && ($user_permissions[$section]=='1'))) {
             return true;
         }
 
         // If the user is explicitly denied, return false
-        if (($user_permissions=='') || array_key_exists($section, $user_permissions) && ($user_permissions[$section]=='-1'))  {
+        if (($user_permissions=='') || array_key_exists($section, $user_permissions) && ($user_permissions[$section]=='-1')) {
             return false;
         }
 
@@ -76,7 +76,8 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
         return false;
     }
 
-    public function isSuperUser() {
+    public function isSuperUser()
+    {
         if (!$user_permissions = json_decode($this->permissions, true)) {
             return false;
         }

@@ -80,16 +80,17 @@ class AssetsController extends Controller
      * @since [v3.0]
      * @return Redirect
      */
-    public function getAssetByTag() {
+    public function getAssetByTag()
+    {
         if (Input::get('topsearch')=="true") {
             $topsearch = true;
         } else {
             $topsearch = false;
         }
-        if ($asset = Asset::where('asset_tag','=',Input::get('assetTag'))->first()) {
+        if ($asset = Asset::where('asset_tag', '=', Input::get('assetTag'))->first()) {
             return redirect()->route('view/hardware', $asset->id)->with('topsearch', $topsearch);
         }
-        return redirect()->to('hardware')->with('error',trans('admin/hardware/message.does_not_exist'));
+        return redirect()->to('hardware')->with('error', trans('admin/hardware/message.does_not_exist'));
 
     }
 
@@ -211,8 +212,8 @@ class AssetsController extends Controller
         if (Input::has('image')) {
             $image = Input::get('image');
             $header = explode(';', $image, 2)[0];
-            $extension = substr( $header, strpos($header, '/')+1);
-            $image = substr( $image, strpos($image, ',')+1);
+            $extension = substr($header, strpos($header, '/')+1);
+            $image = substr($image, strpos($image, ',')+1);
 
             $file_name = str_random(25).".".$extension;
             $path = public_path('uploads/assets/'.$file_name);
@@ -231,9 +232,8 @@ class AssetsController extends Controller
         // FIXME: No idea why this is returning a Builder error on db_column_name.
         // Need to investigate and fix. Using static method for now.
         $model = AssetModel::find($request->get('model_id'));
-        if($model->fieldset)
-        {
-            foreach($model->fieldset->fields as $field) {
+        if ($model->fieldset) {
+            foreach ($model->fieldset->fields as $field) {
                 $asset->{\App\Models\CustomField::name_to_db_name($field->name)} = e($request->input(\App\Models\CustomField::name_to_db_name($field->name)));
             }
         }
@@ -254,8 +254,9 @@ class AssetsController extends Controller
             \Session::flash('success', trans('admin/hardware/message.create.success'));
             return response()->json(['redirect_url' => route('hardware')]);
         }
-
-        return response()->json(['errors' => $asset->getErrors()]);
+        \Input::flash();
+        \Session::flash('errors', $asset->getErrors());
+        return response()->json(['errors' => $asset->getErrors()], 500);
     }
 
     /**
@@ -383,15 +384,15 @@ class AssetsController extends Controller
         if (Input::has('image')) {
             $image = $request->input('image');
             $header = explode(';', $image, 2)[0];
-            $extension = substr( $header, strpos($header, '/')+1);
-            $image = substr( $image, strpos($image, ',')+1);
+            $extension = substr($header, strpos($header, '/')+1);
+            $image = substr($image, strpos($image, ',')+1);
 
             $file_name = str_random(25).".".$extension;
             $path = public_path('uploads/assets/'.$file_name);
 
             Image::make($image)->resize(500, 500, function ($constraint) {
-            $constraint->aspectRatio();
-            $constraint->upsize();
+                $constraint->aspectRatio();
+                $constraint->upsize();
             })->save($path);
             $asset->image = $file_name;
         }
@@ -401,13 +402,12 @@ class AssetsController extends Controller
         // FIXME: No idea why this is returning a Builder error on db_column_name.
         // Need to investigate and fix. Using static method for now.
         $model = AssetModel::find($request->get('model_id'));
-        if($model->fieldset)
-        {
-            foreach($model->fieldset->fields as $field) {
+        if ($model->fieldset) {
+            foreach ($model->fieldset->fields as $field) {
                 $asset->{\App\Models\CustomField::name_to_db_name($field->name)} = e($request->input(\App\Models\CustomField::name_to_db_name($field->name)));
-//                LOG::debug($field->name);
-//                LOG::debug(\App\Models\CustomField::name_to_db_name($field->name));
-//                LOG::debug($field->db_column_name());
+    //                LOG::debug($field->name);
+    //                LOG::debug(\App\Models\CustomField::name_to_db_name($field->name));
+    //                LOG::debug($field->db_column_name());
 
             }
         }
@@ -417,8 +417,9 @@ class AssetsController extends Controller
             \Session::flash('success', trans('admin/hardware/message.update.success'));
             return response()->json(['redirect_url' => route("view/hardware", $assetId)]);
         }
-
-        return response()->json(['errors' => $asset->getErrors()]);
+        \Input::flash();
+        \Session::flash('errors', $asset->getErrors());
+        return response()->json(['errors' => $asset->getErrors()], 500);
 
     }
 
@@ -611,7 +612,7 @@ class AssetsController extends Controller
                             'fields' => [
                                 [
                                     'title' => 'Checked In:',
-                                    'value' => strtoupper($logaction->asset_type).' asset <'.config('app.url').'/hardware/'.$asset->id.'/view'.'|'.e($asset->showAssetName()).'> checked in by <'.config('app.url').'/hardware/'.$asset->id.'/view'.'|'.e(Auth::user()->fullName()).'>.'
+                                    'value' => strtoupper($logaction->asset_type).' asset <'.config('app.url').'/hardware/'.$asset->id.'/view'.'|'.e($asset->showAssetName()).'> checked in by <'.config('app.url').'/admin/users/'.Auth::user()->id.'/view'.'|'.e(Auth::user()->fullName()).'>.'
                                 ],
                                 [
                                     'title' => 'Note:',
@@ -751,7 +752,7 @@ class AssetsController extends Controller
 
         if (isset($asset->id,$asset->asset_tag)) {
             $barcode = new \Com\Tecnick\Barcode\Barcode();
-            $barcode_obj =  $barcode->getBarcodeObj($settings->alt_barcode,  $asset->asset_tag, 250, 20);
+            $barcode_obj =  $barcode->getBarcodeObj($settings->alt_barcode, $asset->asset_tag, 250, 20);
             return response($barcode_obj->getPngData())->header('Content-type', 'image/png');
         }
 
@@ -776,8 +777,9 @@ class AssetsController extends Controller
         }
 
         // Check if the uploads directory exists.  If not, try to create it.
-        if(!file_exists($path))
+        if (!file_exists($path)) {
             mkdir($path, 0755);
+        }
         if ($handle = opendir($path)) {
 
             /* This is the correct way to loop over the directory. */
@@ -874,19 +876,21 @@ class AssetsController extends Controller
             return redirect()->to('hardware')->with('error', trans('general.insufficient_permissions'));
         }
 
-        $return = Artisan::call('snipeit:import',
-                                ['filename'=> config('app.private_uploads').'/imports/assets/'.$filename,
+        $return = Artisan::call(
+            'snipeit:import',
+            ['filename'=> config('app.private_uploads').'/imports/assets/'.$filename,
                                 '--email_format'=>'firstname.lastname',
                                 '--username_format'=>'firstname.lastname',
                                 '--web-importer' => true,
                                 '--user_id' => Auth::user()->id
-            ]);
+                                ]
+        );
         $display_output =  Artisan::output();
         $file = config('app.private_uploads').'/imports/assets/'.str_replace('.csv', '', $filename).'-output-'.date("Y-m-d-his").'.txt';
         file_put_contents($file, $display_output);
-        if( $return === 0) //Success
+        if ($return === 0) { //Success
             return redirect()->to('hardware')->with('success', trans('admin/hardware/message.import.success'));
-        else if( $return === 1) { // Failure
+        } elseif ($return === 1) { // Failure
             return redirect()->back()->with('import_errors', json_decode($display_output))->with('error', trans('admin/hardware/message.import.error'));
         }
         dd("Shouldn't be here");
@@ -962,7 +966,7 @@ class AssetsController extends Controller
         } elseif (isset($asset->id)) {
 
             // Restore the asset
-            Asset::withTrashed()->where('id',$assetId)->restore();
+            Asset::withTrashed()->where('id', $assetId)->restore();
             return redirect()->route('hardware')->with('success', trans('admin/hardware/message.restore.success'));
 
         } else {

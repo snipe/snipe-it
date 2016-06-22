@@ -59,7 +59,7 @@ class ViewAssetsController extends Controller
     public function getRequestableIndex()
     {
 
-        $assets = Asset::with('model', 'defaultLoc', 'assetloc','assigneduser')->Hardware()->RequestableAssets()->get();
+        $assets = Asset::with('model', 'defaultLoc', 'assetloc', 'assigneduser')->Hardware()->RequestableAssets()->get();
 
         return View::make('account/requestable-assets', compact('user', 'assets'));
     }
@@ -143,7 +143,7 @@ class ViewAssetsController extends Controller
     public function getAcceptAsset($logID = null)
     {
 
-        if (!$findlog = DB::table('asset_logs')->where('id','=',$logID)->first()) {
+        if (!$findlog = DB::table('asset_logs')->where('id', '=', $logID)->first()) {
             echo 'no record';
             //return redirect()->to('account')->with('error', trans('admin/hardware/message.does_not_exist'));
         }
@@ -189,7 +189,7 @@ class ViewAssetsController extends Controller
     {
 
         // Check if the asset exists
-        if (is_null($findlog = DB::table('asset_logs')->where('id','=',$logID)->first())) {
+        if (is_null($findlog = DB::table('asset_logs')->where('id', '=', $logID)->first())) {
             // Redirect to the asset management page
             return redirect()->to('account/view-assets')->with('error', trans('admin/hardware/message.does_not_exist'));
         }

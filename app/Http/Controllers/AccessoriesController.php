@@ -52,7 +52,7 @@ class AccessoriesController extends Controller
     public function getCreate(Request $request)
     {
         // Show the page
-        $category_list = Helper::categoryList('accessory'); 
+        $category_list = Helper::categoryList('accessory');
         $company_list = Helper::companyList();
         $location_list = Helper::locationsList();
         return View::make('accessories/edit')
@@ -322,6 +322,7 @@ class AccessoriesController extends Controller
 
 
 
+        $admin_user = Auth::user();
         $settings = Setting::getSettings();
 
         if ($settings->slack_endpoint) {
