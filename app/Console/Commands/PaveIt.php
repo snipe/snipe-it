@@ -29,7 +29,7 @@ class PaveIt extends Command
      * @var string
      */
     protected $signature = 'snipeit:pave
-              {--soft: Perform a "Soft" Delete, leaving all migrations, table structure, and the first user in place.}';
+              {--soft : Perform a "Soft" Delete, leaving all migrations, table structure, and the first user in place.}';
 
     /**
      * The console command description.
