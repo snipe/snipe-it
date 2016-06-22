@@ -14,22 +14,22 @@ class CheckForSetup
     public function handle($request, Closure $next, $guard = null)
     {
 
-            if (Setting::setupCompleted()) {
+        if (Setting::setupCompleted()) {
 
-                if  ($request->is('setup*')) {
-                    return redirect(config('app.url'));
-                } else {
-                    return $next($request);
-                }
-
+            if ($request->is('setup*')) {
+                return redirect(config('app.url'));
             } else {
-                if (!$request->is('setup*')) {
-                    return redirect(config('app.url').'/setup')->with('Request',$request);
-                }
-
                 return $next($request);
-
             }
+
+        } else {
+            if (!$request->is('setup*')) {
+                return redirect(config('app.url').'/setup')->with('Request', $request);
+            }
+
+            return $next($request);
+
+        }
 
 
     }

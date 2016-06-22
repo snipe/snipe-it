@@ -172,13 +172,14 @@ class Asset extends Depreciable
     }
 
 
-    public function getDetailedNameAttribute() {
-      if($this->assigned_user) {
-        $user_name = $user->fullName();
-      } else {
-        $user_name = "Unassigned";
-      }
-      return $this->asset_tag . ' - ' . $this->name . ' (' . $user_name . ') ' . $this->model->name;
+    public function getDetailedNameAttribute()
+    {
+        if ($this->assigned_user) {
+            $user_name = $user->fullName();
+        } else {
+            $user_name = "Unassigned";
+        }
+        return $this->asset_tag . ' - ' . $this->name . ' (' . $user_name . ') ' . $this->model->name;
     }
     public function validationRules($id = '0')
     {
@@ -542,13 +543,13 @@ class Asset extends Depreciable
 
     public function scopeAssetsByLocation($query, $location)
     {
-        return $query->where(function ($query) use ($location)
-        {
-            $query->whereHas('assigneduser', function ($query) use ($location)
-            {
+        return $query->where(function ($query) use ($location) {
+        
+            $query->whereHas('assigneduser', function ($query) use ($location) {
+            
                 $query->where('users.location_id', '=', $location->id);
-            })->orWhere(function ($query) use ($location)
-            {
+            })->orWhere(function ($query) use ($location) {
+            
                 $query->where('assets.rtd_location_id', '=', $location->id);
                 $query->whereNull('assets.assigned_to');
             });
@@ -642,7 +643,7 @@ class Asset extends Depreciable
         return $query->where('requestable', '=', 1)
         ->whereHas('assetstatus', function ($query) {
 
-           $query->where('deployable', '=', 1)
+            $query->where('deployable', '=', 1)
                  ->where('pending', '=', 0)
                  ->where('archived', '=', 0);
         });

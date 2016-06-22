@@ -49,7 +49,7 @@ class SettingsController extends Controller
             $start_settings['db_error'] = $e->getMessage();
         }
 
-        $protocol = array_key_exists('HTTPS',$_SERVER) && ( $_SERVER['HTTPS'] == "on") ? 'https://' : 'http://';
+        $protocol = array_key_exists('HTTPS', $_SERVER) && ( $_SERVER['HTTPS'] == "on") ? 'https://' : 'http://';
 
 
         $pageURL = $protocol;
@@ -97,7 +97,7 @@ class SettingsController extends Controller
 
         }
 
-        if(function_exists('posix_getpwuid')) { // Probably Linux
+        if (function_exists('posix_getpwuid')) { // Probably Linux
             $owner = posix_getpwuid(fileowner($_SERVER["SCRIPT_FILENAME"]));
             $start_settings['owner'] = $owner['name'];
         } else { // Windows
@@ -552,7 +552,7 @@ class SettingsController extends Controller
     {
         if (!config('app.lock_passwords')) {
             if (Input::get('confirm_purge')=='DELETE') {
-                Artisan::call('snipeit:purge',['--force'=>'true','--no-interaction'=>true]);
+                Artisan::call('snipeit:purge', ['--force'=>'true','--no-interaction'=>true]);
                 $output = Artisan::output();
                 return View::make('settings/purge')
                 ->with('output', $output)->with('success', trans('admin/settings/message.purge.success'));

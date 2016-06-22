@@ -260,7 +260,8 @@ class CustomFieldsController extends Controller
      * @since [v3.0]
      * @return Array
      */
-    public function postReorder($id) {
+    public function postReorder($id)
+    {
         $fieldset=CustomFieldset::find($id);
         $fields = array();
 

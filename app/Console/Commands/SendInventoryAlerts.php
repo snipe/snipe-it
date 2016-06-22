@@ -48,22 +48,21 @@ class SendInventoryAlerts extends Command
             $data['count'] = count($data['data']);
 
             if (count($data['data']) > 0) {
-				\Mail::send('emails.low-inventory', $data, function ($m)  {
-	                $m->to(explode(',',Setting::getSettings()->alert_email), Setting::getSettings()->site_name);
-	                $m->subject('Low Inventory Report');
-	        	});
+                \Mail::send('emails.low-inventory', $data, function ($m) {
+                    $m->to(explode(',', Setting::getSettings()->alert_email), Setting::getSettings()->site_name);
+                    $m->subject('Low Inventory Report');
+                });
 
-			}
+            }
 
         } else {
             if (Setting::getSettings()->alert_email=='') {
-				echo "Could not send email. No alert email configured in settings. \n";
-			} elseif (Setting::getSettings()->alerts_enabled!=1) {
-				echo "Alerts are disabled in the settings. No mail will be sent. \n";
-			}
+                echo "Could not send email. No alert email configured in settings. \n";
+            } elseif (Setting::getSettings()->alerts_enabled!=1) {
+                echo "Alerts are disabled in the settings. No mail will be sent. \n";
+            }
         }
 
 
     }
-
 }

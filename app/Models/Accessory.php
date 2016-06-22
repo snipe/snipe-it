@@ -7,7 +7,7 @@ use Watson\Validating\ValidatingTrait;
 
 /**
  * Model for Accessories.
- * 
+ *
  * @version    v1.0
  */
 class Accessory extends Model

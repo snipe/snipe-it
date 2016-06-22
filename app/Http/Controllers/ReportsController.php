@@ -110,7 +110,7 @@ class ReportsController extends Controller
                        ->orderBy('created_at', 'DESC')
                        ->get();
 
-        return View::make('reports/asset', compact('assets'))->with('settings',$settings);
+        return View::make('reports/asset', compact('assets'))->with('settings', $settings);
     }
 
     /**

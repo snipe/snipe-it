@@ -11,7 +11,6 @@ use Str;
 use View;
 use Auth;
 
-
 /**
  * This controller handles all actions related to Depreciations for
  * the Snipe-IT Asset Management application.

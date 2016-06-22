@@ -53,7 +53,7 @@ class Purge extends Command
     public function handle()
     {
         $force = $this->option('force');
-        if (($this->confirm("\n****************************************************\nTHIS WILL PURGE ALL SOFT-DELETED ITEMS IN YOUR SYSTEM. \nThere is NO undo. This WILL permanently destroy \nALL of your deleted data. \n****************************************************\n\nDo you wish to continue? No backsies! [y|N]")) ||  $force == 'true')  {
+        if (($this->confirm("\n****************************************************\nTHIS WILL PURGE ALL SOFT-DELETED ITEMS IN YOUR SYSTEM. \nThere is NO undo. This WILL permanently destroy \nALL of your deleted data. \n****************************************************\n\nDo you wish to continue? No backsies! [y|N]")) ||  $force == 'true') {
 
             /**
              * Delete assets
@@ -140,7 +140,7 @@ class Purge extends Command
                 $supplier->forceDelete();
             }
 
-            $users = User::whereNotNull('deleted_at')->where('show_in_list','!=','0')->withTrashed()->get();
+            $users = User::whereNotNull('deleted_at')->where('show_in_list', '!=', '0')->withTrashed()->get();
             $this->info($users->count().' users purged.');
             $user_assoc = 0;
             foreach ($users as $user) {

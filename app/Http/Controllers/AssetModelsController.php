@@ -110,10 +110,10 @@ class AssetModelsController extends Controller
             $image = Input::file('image');
             $file_name = str_random(25).".".$image->getClientOriginalExtension();
             $path = public_path('uploads/models/'.$file_name);
-           Image::make($image->getRealPath())->resize(500, null, function ($constraint) {
-               $constraint->aspectRatio();
-               $constraint->upsize();
-           })->save($path);
+            Image::make($image->getRealPath())->resize(500, null, function ($constraint) {
+                $constraint->aspectRatio();
+                $constraint->upsize();
+            })->save($path);
             $model->image = $file_name;
         }
 

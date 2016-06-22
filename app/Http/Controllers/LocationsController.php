@@ -370,7 +370,7 @@ class LocationsController extends Controller
     public function getDataViewUsers($locationID)
     {
         $location = Location::find($locationID);
-        $users = User::where('location_id','=',$location->id);
+        $users = User::where('location_id', '=', $location->id);
 
         if (Input::has('search')) {
             $users = $users->TextSearch(e(Input::get('search')));

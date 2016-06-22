@@ -55,22 +55,23 @@ class Setting extends Model
         return $static_cache;
     }
 
-    public static function setupCompleted() {
+    public static function setupCompleted()
+    {
         
             $users_table_exists = Schema::hasTable('users');
             $settings_table_exists = Schema::hasTable('settings');
 
 
-            if ($users_table_exists && $settings_table_exists) {
-                $usercount = User::withTrashed()->count();
+        if ($users_table_exists && $settings_table_exists) {
+            $usercount = User::withTrashed()->count();
 
-                if ($usercount > 0) {
-                    return true;
-                }
-                return false;
-            } else {
-                return false;
+            if ($usercount > 0) {
+                return true;
             }
+            return false;
+        } else {
+            return false;
+        }
         return false;
 
 
