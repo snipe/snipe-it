@@ -9,7 +9,7 @@ return array(
     'date'              => 'Aankoopdatum',
     'depreciation'      => 'Afschrijving',
     'expiration'        => 'Vervaldatum',
-    'license_key'       => 'Product Key',
+    'license_key'       => 'Productcode',
     'maintained'        => 'Wordt onderhouden',
     'name'              => 'Applicatie naam',
     'no_depreciation'   => 'Niet afschrijven',
