@@ -156,7 +156,7 @@ class AssetMaintenancesController extends Controller
         // Mark the selected asset, if it came in
         $selectedAsset = $assetId;
 
-        $assets = Company::scopeCompanyables(Asset::all(), 'assets.company_id')->lists('detailed_name', 'id');
+        $assets = Helper::detailedAssetList();
 
         $supplier_list = Helper::suppliersList();
 
