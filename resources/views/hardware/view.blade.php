@@ -249,10 +249,14 @@
                       <td>{{ trans('admin/hardware/form.notes') }}</td>
                       <td>{{ $asset->notes }}</td>
                     </tr>
-                  <tr>
-                      <td>{{ trans('general.created_at') }}</td>
-                      <td>{{ $asset->created_at->format('F j, Y h:iA') }}</td>
-                  </tr>
+                   @if ($asset->created_at)
+                      <tr>
+                          <td>{{ trans('general.created_at') }}</td>
+                          <td>
+                              {{ $user->created_at->format('F j, Y h:iA') }}
+                          </td>
+                      </tr>
+                   @endif
                   </tbody>
               </table>
             </div> <!-- /table-responsive -->
