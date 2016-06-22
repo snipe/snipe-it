@@ -254,8 +254,8 @@ class AssetsController extends Controller
             \Session::flash('success', trans('admin/hardware/message.create.success'));
             return response()->json(['redirect_url' => route('hardware')]);
         }
-
-        return response()->json(['errors' => $asset->getErrors()]);
+        \Session::flash('errors', $asset->getErrors());
+        return response()->json(['errors' => $asset->getErrors()], 500);
     }
 
     /**
@@ -417,8 +417,8 @@ class AssetsController extends Controller
             \Session::flash('success', trans('admin/hardware/message.update.success'));
             return response()->json(['redirect_url' => route("view/hardware", $assetId)]);
         }
-
-        return response()->json(['errors' => $asset->getErrors()]);
+        \Session::flash('errors', $asset->getErrors());
+        return response()->json(['errors' => $asset->getErrors()], 500);
 
     }
 
