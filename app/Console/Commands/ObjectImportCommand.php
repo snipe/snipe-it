@@ -139,10 +139,13 @@ class ObjectImportCommand extends Command {
 			$item["notes"] = $this->array_smart_fetch($row, "notes");
 			$item["quantity"] = $this->array_smart_fetch($row, "quantity");
 			$item["requestable"] = $this->array_smart_fetch($row, "requestable");
-			
+			$item["asset_tag"] = $this->array_smart_fetch($row, "asset tag");
 
 
 			$this->current_assetId = $item["item_name"];
+                        if($item["asset_tag"] != '') {
+                            $this->current_assetId = $item["asset_tag"];
+                        }
 			$this->log('Category: ' . $item_category);
 			$this->log('Location: ' . $item_location);
 			$this->log('Purchase Date: ' . $item["purchase_date"]);
@@ -226,9 +229,9 @@ class ObjectImportCommand extends Command {
 
 	public function jsonError($field, $errorString)
 	{
-		$this->errors[$this->current_assetId] = array($field => $errorString);
+		$this->errors[$this->current_assetId][$field] = $errorString;
 		if($this->option('verbose'))
-			parent::error($errorString);
+			parent::error($field . $errorString);
 	}
 
 	/**
@@ -712,7 +715,6 @@ class ObjectImportCommand extends Command {
 	public function createAssetIfNotExists(array $row, array $item )
 	{
         $asset_serial = $this->array_smart_fetch($row, "serial number");
-        $asset_tag = $this->array_smart_fetch($row, "asset tag");
         $asset_image = $this->array_smart_fetch($row, "image");
         $asset_warranty_months = intval($this->array_smart_fetch($row, "warranty months"));
         if(empty($asset_warranty_months)) {
@@ -722,17 +724,14 @@ class ObjectImportCommand extends Command {
         $asset_model = $this->createOrFetchAssetModel($row, $item["category"], $item["manufacturer"]);
 		$supplier = $this->createOrFetchSupplier($row);
 
-		$this->current_assetId = $asset_tag;
-
         $this->log('Serial No: '.$asset_serial);
-        $this->log('Asset Tag: '.$asset_tag);
+        $this->log('Asset Tag: '.$item['asset_tag']);
         $this->log('Notes: '.$item["notes"]);
         $this->log('Warranty Months: ' . $asset_warranty_months);
 
 		foreach ($this->assets as $tempasset) {
-			if (strcasecmp($tempasset->asset_tag, $asset_tag ) == 0 ) {
-				$this->log('A matching Asset ' . $asset_tag . ' already exists');
-				// $this->comment('A matching Asset ' . $asset_tag . ' already exists');
+			if (strcasecmp($tempasset->asset_tag, $item['asset_tag'] ) == 0 ) {
+				$this->log('A matching Asset ' . $item['asset_tag'] . ' already exists');
 				return;
 			}
 		}
@@ -769,7 +768,7 @@ class ObjectImportCommand extends Command {
 			$asset->purchase_cost = 0.00;
 		}
 		$asset->serial = $asset_serial;
-		$asset->asset_tag = $asset_tag;
+		$asset->asset_tag = $item['asset_tag'];
                 $asset->warranty_months = $asset_warranty_months;
 
 		if($asset_model)

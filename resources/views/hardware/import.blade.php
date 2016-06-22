@@ -79,16 +79,18 @@
                 <th>Errors</th>
             </thead>
             <tbody>
-                @foreach (session('import_errors') as $asset => $error)
+                @foreach (session('import_errors') as $asset => $itemErrors)
                 <tr>
                     <td> {{ $asset }}</td>
-                    @foreach ($error as $field => $values )
-                        <td> <span><b>{{ $field }}:</b>
-                            @foreach( $values as $errorString)
-                                    <span>{{$errorString[0]}} </span>
-                            @endforeach
-                        </td>
+                    <td>
+                    @foreach ($itemErrors as $field => $values )
+                            <b>{{ $field }}:</b>
+                              @foreach( $values as $errorString)
+                                      <span>{{$errorString[0]}} </span>
+                              @endforeach
+                              <br />
                     @endforeach
+                    </td>
                 </tr>
                 @endforeach
             </tbody>
