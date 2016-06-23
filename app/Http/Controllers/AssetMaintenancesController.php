@@ -20,6 +20,7 @@ use View;
 use App\Models\Setting;
 use App\Models\Asset;
 use App\Helpers\Helper;
+use Auth;
 
 /**
  * This controller handles all actions related to Asset Maintenance for
@@ -74,12 +75,15 @@ class AssetMaintenancesController extends Controller
     */
     public function getDatatable()
     {
-        $maintenances = AssetMaintenance::with('asset', 'supplier', 'asset.company')
-        ->whereNull('deleted_at');
+        $maintenances = AssetMaintenance::with('asset', 'supplier', 'asset.company','admin')
+        ->withTrashed();
 
         if (Input::has('search')) {
             $maintenances = $maintenances->TextSearch(e(Input::get('search')));
         }
+
+
+
 
         if (Input::has('offset')) {
             $offset = e(Input::get('offset'));
@@ -93,11 +97,20 @@ class AssetMaintenancesController extends Controller
             $limit = 50;
         }
 
-        $allowed_columns = ['id','title','asset_maintenance_time','asset_maintenance_type','cost','start_date','completion_date','notes'];
+
+
+        $allowed_columns = ['id','title','asset_maintenance_time','asset_maintenance_type','cost','start_date','completion_date','notes','user_id'];
         $order = Input::get('order') === 'asc' ? 'asc' : 'desc';
         $sort = in_array(Input::get('sort'), $allowed_columns) ? e(Input::get('sort')) : 'created_at';
 
-        $maintenances->orderBy($sort, $order);
+        switch ($sort) {
+            case 'user_id':
+                $maintenances = $maintenances->OrderAdmin($order);
+                break;
+            default:
+                $maintenances = $maintenances->orderBy($sort, $order);
+                break;
+        }
 
         $maintenancesCount = $maintenances->count();
         $maintenances = $maintenances->skip($offset)->take($limit)->get();
@@ -128,6 +141,7 @@ class AssetMaintenancesController extends Controller
                 'start_date'         => $maintenance->start_date,
                 'asset_maintenance_time'          => $maintenance->asset_maintenance_time,
                 'completion_date'     => $maintenance->completion_date,
+                'user_id'       => ($maintenance->admin) ? (string)link_to('/admin/users/'.$maintenance->admin->id.'/view', $maintenance->admin->fullName()) : '',
                 'actions'       => $actions,
                 'companyName'   => is_null($company) ? '' : $company->name
             );
@@ -224,6 +238,7 @@ class AssetMaintenancesController extends Controller
         $assetMaintenance->title                  = e(Input::get('title'));
         $assetMaintenance->start_date             = e(Input::get('start_date'));
         $assetMaintenance->completion_date        = e(Input::get('completion_date'));
+        $assetMaintenance->user_id                = Auth::user()->id;
 
         if (( $assetMaintenance->completion_date == "" )
             || ( $assetMaintenance->completion_date == "0000-00-00" )

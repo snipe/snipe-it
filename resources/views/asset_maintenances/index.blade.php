@@ -43,6 +43,7 @@
               <th data-searchable="true" data-sortable="true" data-field="completion_date">{{ trans('admin/asset_maintenances/form.completion_date') }}</th>
               <th data-searchable="true" data-sortable="true" data-field="asset_maintenance_time">{{ trans('admin/asset_maintenances/form.asset_maintenance_time') }}</th>
               <th data-searchable="true" data-sortable="true" data-field="cost" class="text-right">{{ trans('admin/asset_maintenances/form.cost') }}</th>
+              <th data-searchable="true" data-sortable="true" data-field="user_id">{{ trans('general.admin') }}</th>
               <th data-searchable="true" data-sortable="true" data-field="notes" data-visible="false">{{ trans('admin/asset_maintenances/form.notes') }}</th>
               <th data-switchable="false" data-searchable="false" data-sortable="false" data-field="actions">{{ trans('table.actions') }}</th>
               </tr>

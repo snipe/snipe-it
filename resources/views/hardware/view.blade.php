@@ -398,14 +398,15 @@
               <table class="table table-striped">
                   <thead>
                   <tr>
-                      <th class="col-md-2">{{ trans('admin/asset_maintenances/table.supplier_name') }}</th>
-                      <th class="col-md-2"><span class="line"></span>{{ trans('admin/asset_maintenances/form.title') }}</th>
-                      <th class="col-md-2"><span class="line"></span>{{ trans('admin/asset_maintenances/form.asset_maintenance_type') }}</th>
-                      <th class="col-md-2"><span class="line"></span>{{ trans('admin/asset_maintenances/form.start_date') }}</th>
-                      <th class="col-md-2"><span class="line"></span>{{ trans('admin/asset_maintenances/form.completion_date') }}</th>
-                      <th class="col-md-2"><span class="line"></span>{{ trans('admin/asset_maintenances/table.is_warranty') }}</th>
-                      <th class="col-md-2"><span class="line"></span>{{ trans('admin/asset_maintenances/form.cost') }}</th>
-                      <th class="col-md-1"><span class="line"></span>{{ trans('table.actions') }}</th>
+                      <th>{{ trans('admin/asset_maintenances/table.supplier_name') }}</th>
+                      <th>{{ trans('admin/asset_maintenances/form.title') }}</th>
+                      <th>{{ trans('admin/asset_maintenances/form.asset_maintenance_type') }}</th>
+                      <th>{{ trans('admin/asset_maintenances/form.start_date') }}</th>
+                      <th>{{ trans('admin/asset_maintenances/form.completion_date') }}</th>
+                      <th>{{ trans('admin/asset_maintenances/table.is_warranty') }}</th>
+                      <th>{{ trans('admin/asset_maintenances/form.cost') }}</th>
+                      <th>{{ trans('general.admin') }}</th>
+                      <th>{{ trans('table.actions') }}</th>
                   </tr>
                   </thead>
                   <tbody>
@@ -420,7 +421,14 @@
                           <td>{{ $assetMaintenance->start_date }}</td>
                           <td>{{ $assetMaintenance->completion_date }}</td>
                           <td>{{ $assetMaintenance->is_warranty ? trans('admin/asset_maintenances/message.warranty') : trans('admin/asset_maintenances/message.not_warranty') }}</td>
-                          <td><nobr>{{ $use_currency.$assetMaintenance->cost }}</nobr></td>
+                          <td class="text-right"><nobr>{{ $use_currency.$assetMaintenance->cost }}</nobr></td>
+                          <td>
+
+                              @if ($assetMaintenance->admin)
+                                  <a href="{{ config('app.url')  }}/admin/users/{{ $assetMaintenance->admin->id }}/view">{{ $assetMaintenance->admin->fullName() }}</a>
+                              @endif
+
+                              </td>
                             <?php $totalCost += $assetMaintenance->cost; ?>
                           <td><a href="{{ route('update/asset_maintenance', $assetMaintenance->id) }}" class="btn btn-warning btn-sm"><i class="fa fa-pencil icon-white"></i></a>
                           </td>
@@ -430,7 +438,7 @@
                   </tbody>
                   <tfoot>
                   <tr>
-                      <td colspan="7" class="text-right">{{ $use_currency.$totalCost }}</td>
+                      <td colspan="7" class="text-right">{{ $use_currency.number_format($totalCost, 2) }}</td>
                   </tr>
                   </tfoot>
               </table>
