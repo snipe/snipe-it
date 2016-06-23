@@ -1,7 +1,7 @@
 <?php
 
 return [
-    'send_password_link'	        => 'Send Password Reset Link',
+    'send_password_link'	        => 'Parola sıfırlama bağlantısını gönder',
     'email_reset_password'			=> 'Email Password Reset',
     'reset_password'			    => 'Reset Password',
     'login'                         => 'Login',

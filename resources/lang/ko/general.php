@@ -127,7 +127,7 @@
     'save'  				=> '저장',
     'select'				=> '선택',
     'search'				=> '찾기',
-    'select_category'       => 'Select a Category',
+    'select_category'       => '분류 선택',
     'select_depreciation'	=> '감가 상각 유형 선택',
     'select_location'		=> '장소 선택',
     'select_manufacturer'	=> '제조업체 선택',

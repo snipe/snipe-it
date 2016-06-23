@@ -71,6 +71,20 @@ class AssetMaintenance extends Model implements ICompanyableChild
                     ->withTrashed();
     }
 
+    /**
+     * Get the admin who created the maintenance
+     *
+     * @return mixed
+     * @author  A. Gianotto <snipe@snipe.net>
+     * @version v3.0
+     */
+    public function admin()
+    {
+
+        return $this->belongsTo('\App\Models\User', 'user_id')
+            ->withTrashed();
+    }
+
     public function supplier()
     {
 
@@ -79,24 +93,11 @@ class AssetMaintenance extends Model implements ICompanyableChild
     }
 
     /**
-       * -----------------------------------------------
-       * BEGIN QUERY SCOPES
-       * -----------------------------------------------
-       **/
-
-    /**
-       * Query builder scope for Deleted assets
-       *
-       * @param  Illuminate\Database\Query\Builder $query Query builder instance
-       *
-       * @return Illuminate\Database\Query\Builder          Modified query builder
-       */
-
-    public function scopeDeleted($query)
-    {
-
-        return $query->whereNotNull('deleted_at');
-    }
+   * -----------------------------------------------
+   * BEGIN QUERY SCOPES
+   * -----------------------------------------------
+   **/
+    
 
     /**
       * Query builder scope to search on text
@@ -118,5 +119,20 @@ class AssetMaintenance extends Model implements ICompanyableChild
                 ->orWhere('start_date', 'LIKE', '%'.$search.'%')
                 ->orWhere('completion_date', 'LIKE', '%'.$search.'%');
          });
+    }
+
+    /**
+     * Query builder scope to order on admin user
+     *
+     * @param  Illuminate\Database\Query\Builder  $query  Query builder instance
+     * @param  text                              $order       Order
+     *
+     * @return Illuminate\Database\Query\Builder          Modified query builder
+     */
+    public function scopeOrderAdmin($query, $order)
+    {
+        return $query->leftJoin('users', 'asset_maintenances.user_id', '=', 'users.id')
+            ->orderBy('users.first_name', $order)
+            ->orderBy('users.last_name', $order);
     }
 }

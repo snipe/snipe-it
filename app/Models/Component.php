@@ -30,7 +30,10 @@ class Component extends Model
     */
     public $rules = array(
         'name'        => 'required|min:3|max:255',
-        'min_amt'     => 'integer|min:1',
+        'total_qty'     => 'required|integer|min:1',
+        'category_id' => 'required|integer',
+        'company_id'  => 'integer',
+        'purchase_date'  => 'date',
     );
 
     /**

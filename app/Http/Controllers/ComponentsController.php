@@ -8,7 +8,6 @@ use App\Models\Component;
 use App\Models\Setting;
 use App\Models\User;
 use App\Models\Asset;
-use App\Http\Requests\ComponentCheckoutRequest;
 use Auth;
 use Config;
 use DB;
@@ -19,6 +18,8 @@ use Redirect;
 use Slack;
 use Str;
 use View;
+use Validator;
+use Illuminate\Http\Request;
 
 /**
  * This class controls all actions related to Components for
@@ -302,14 +303,30 @@ class ComponentsController extends Controller
     * @param int $componentId
     * @return Redirect
     */
-    public function postCheckout(ComponentCheckoutRequest $request, $componentId)
+    public function postCheckout(Request $request, $componentId)
     {
-      // Check if the component exists
+
+
+
+        // Check if the component exists
         if (is_null($component = Component::find($componentId))) {
             // Redirect to the component management page with error
             return redirect()->to('components')->with('error', trans('admin/components/message.not_found'));
         } elseif (!Company::isCurrentUserHasAccess($component)) {
             return redirect()->to('admin/components')->with('error', trans('general.insufficient_permissions'));
+        }
+
+
+        $max_to_checkout = $component->numRemaining();
+        $validator = Validator::make($request->all(),[
+            "asset_id"          => "required",
+            "assigned_qty"      => "required|numeric|between:1,$max_to_checkout"
+        ]);
+
+        if ($validator->fails()) {
+            return redirect()->back()
+                ->withErrors($validator)
+                ->withInput();
         }
 
         $admin_user = Auth::user();
@@ -320,7 +337,7 @@ class ComponentsController extends Controller
             // Redirect to the component management page with error
             return redirect()->to('admin/components')->with('error', trans('admin/components/message.asset_does_not_exist'));
         }
-
+        
       // Update the component data
         $component->asset_id =   $asset_id;
 
@@ -437,7 +454,7 @@ class ComponentsController extends Controller
         $rows = array();
 
         foreach ($components as $component) {
-            $actions = '<nobr><a href="'.route('checkout/component', $component->id).'" style="margin-right:5px;" class="btn btn-info btn-sm" '.(($component->numRemaining() > 0 ) ? '' : ' disabled').'>'.trans('general.checkout').'</a><a href="'.route('update/component', $component->id).'" class="btn btn-warning btn-sm" style="margin-right:5px;"><i class="fa fa-pencil icon-white"></i></a><a data-html="false" class="btn delete-asset btn-danger btn-sm" data-toggle="modal" href="'.route('delete/component', $component->id).'" data-content="'.trans('admin/components/message.delete.confirm').'" data-title="'.trans('general.delete').' '.htmlspecialchars($component->name).'?" onClick="return false;"><i class="fa fa-trash icon-white"></i></a></nobr>';
+            $actions = '<nobr><a href="'.route('checkout/component', $component->id).'" style="margin-right:5px;" class="btn btn-info btn-sm '.(($component->numRemaining() > 0 ) ? '' : ' disabled').'" '.(($component->numRemaining() > 0 ) ? '' : ' disabled').'>'.trans('general.checkout').'</a><a href="'.route('update/component', $component->id).'" class="btn btn-warning btn-sm" style="margin-right:5px;"><i class="fa fa-pencil icon-white"></i></a><a data-html="false" class="btn delete-asset btn-danger btn-sm" data-toggle="modal" href="'.route('delete/component', $component->id).'" data-content="'.trans('admin/components/message.delete.confirm').'" data-title="'.trans('general.delete').' '.htmlspecialchars($component->name).'?" onClick="return false;"><i class="fa fa-trash icon-white"></i></a></nobr>';
             $company = $component->company;
 
             $rows[] = array(

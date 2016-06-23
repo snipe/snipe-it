@@ -166,6 +166,14 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     }
 
     /**
+     * Get assets assigned to this user
+     */
+    public function assetmaintenances()
+    {
+        return $this->hasMany('\App\Models\AssetMaintenance', 'user_id')->withTrashed();
+    }
+
+    /**
      * Get accessories assigned to this user
      */
     public function accessories()

@@ -127,7 +127,7 @@
     'save'  				=> 'Opslaan',
     'select'				=> 'Selecteer',
     'search'				=> 'Zoeken',
-    'select_category'       => 'Select a Category',
+    'select_category'       => 'Selecteer een categorie',
     'select_depreciation'	=> 'Selecteer een afschrijvingstype',
     'select_location'		=> 'Selecteer een locatie',
     'select_manufacturer'	=> 'Selecteer een fabrikant',

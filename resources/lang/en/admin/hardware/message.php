@@ -38,7 +38,7 @@ return array(
 
     'import' => array(
         'error'         => 'Some items did not import correctly.',
-        'errorDetail'   => 'The following items were not imported because of validation.',
+        'errorDetail'   => 'The following Items were not imported because of errors.',
         'success'       => "Your file has been imported",
     ),
 

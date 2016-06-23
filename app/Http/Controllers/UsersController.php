@@ -514,7 +514,7 @@ class UsersController extends Controller
                     $license_array[] = $license->id;
                     // Update the asset log
                     $logaction = new Actionlog();
-                    $logaction->accessory_id = $license->id;
+                    $logaction->asset_id = $license->id;
                     $logaction->checkedout_to = $license->assigned_to;
                     $logaction->asset_type = 'software';
                     $logaction->user_id = Auth::user()->id;

@@ -2,7 +2,7 @@
 
     return [
     'accessories'			=> '付属品群',
-    'activated'			=> 'Activated',
+    'activated'			=> 'アクティベート',
     'accessory'				=> '付属品',
     'accessory_report'			=> '付属品レポート',
     'action'                => '操作',

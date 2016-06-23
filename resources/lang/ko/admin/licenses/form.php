@@ -9,7 +9,7 @@ return array(
     'date'              => '구매 일자',
     'depreciation'      => '감가 상각',
     'expiration'        => '만료 날짜',
-    'license_key'       => 'Product Key',
+    'license_key'       => '제품 키',
     'maintained'        => '유지보수',
     'name'              => '소프트웨어 명',
     'no_depreciation'   => '감가 상각하지 않음',
