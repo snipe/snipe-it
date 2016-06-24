@@ -73,10 +73,10 @@ docker run -d -p $(docker-machine ip b2d)::80 --name="snipeit" --link snipe-mysq
 #### SSL enabled
 Start your Snipe-IT container - but make sure you can "mount" your local copies of your SSL key and SSL certificate onto the container.
 
-They're expected to be named exactly: `/etc/ssl/private/snipeit-ssl.key` and `/etc/ssl/private/snipeit-ssl.crt` for the key and certificate, respectively.
+They're expected to be named exactly: `/var/lib/snipeit/ssl/snipeit-ssl.key` and `/var/lib/snipeit/ssl/snipeit-ssl.crt` for the key and certificate, respectively.
 
 ```sh
-docker run -d -P --name="snipeit" --link snipe-mysql:mysql -v /Absolute/Path/To/Your/SSL_Cert_directory:/etc/ssl/private --env-file=my_env_file snipe-it
+docker run -d -P --name="snipeit" --link snipe-mysql:mysql -v /Absolute/Path/To/Your/SSL_Cert_directory:/var/lib/snipeit/ssl --env-file=my_env_file snipe-it
 ```
 
 ### Email, Management, Access
