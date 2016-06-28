@@ -736,7 +736,8 @@ class Asset extends Depreciable
                     $query->whereHas('category', function ($query) use ($search) {
                         $query->where(function ($query) use ($search) {
                             $query->where('categories.name', 'LIKE', '%'.$search.'%')
-                            ->orWhere('models.name', 'LIKE', '%'.$search.'%');
+                            ->orWhere('models.name', 'LIKE', '%'.$search.'%')
+                            ->orWhere('models.modelno', 'LIKE', '%'.$search.'%');
                         });
                     });
                 })->orWhereHas('model', function ($query) use ($search) {
