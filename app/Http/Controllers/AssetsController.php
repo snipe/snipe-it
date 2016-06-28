@@ -352,16 +352,13 @@ class AssetsController extends Controller
             $asset->supplier_id =  null;
         }
 
-        if ($request->has('requestable')) {
-            $asset->requestable = e($request->input('requestable'));
-        } else {
-            $asset->requestable =  null;
-        }
+        // If the box isn't checked, it's not in the request at all.
+        $asset->requestable = $request->has('requestable');
 
         if ($request->has('rtd_location_id')) {
             $asset->rtd_location_id = e($request->input('rtd_location_id'));
         } else {
-            $asset->requestable =  null;
+            $asset->rtd_location_id =  null;
         }
 
         if ($request->has('image_delete')) {
@@ -836,7 +833,15 @@ class AssetsController extends Controller
 
                 $date = date('Y-m-d-his');
                 $fixed_filename = str_replace(' ', '-', $file->getClientOriginalName());
-                $file->move($path, $date.'-'.$fixed_filename);
+                try {
+                    $file->move($path, $date.'-'.$fixed_filename);
+                } catch (\Symfony\Component\HttpFoundation\File\Exception\FileException $exception) {
+                        $results['error']=trans('admin/hardware/message.upload.error');
+                        if( config('app.debug')) {
+                            $results['error'].= ' ' . $exception->getMessage();
+                        }
+                        return $results;
+                }
                 $name = date('Y-m-d-his').'-'.$fixed_filename;
                 $filesize = Setting::fileSizeConvert(filesize($path.'/'.$name));
                 $results[] = compact('name', 'filesize');
@@ -850,7 +855,6 @@ class AssetsController extends Controller
 
 
         } else {
-
             $results['error']=trans('general.feature_disabled');
             return $results;
         }
