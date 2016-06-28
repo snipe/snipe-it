@@ -31,7 +31,7 @@
             <ul class="dropdown-menu">
               <li><a href="{{ route('update/user', $user->id) }}">{{ trans('admin/users/general.edit') }}</a></li>
                <li><a href="{{ route('clone/user', $user->id) }}">{{ trans('admin/users/general.clone') }}</a></li>
-               @if ((Auth::user()->id !== $user->id) && (!config('app.lock_passwords')))
+               @if ((Auth::user()->id !== $user->id) && (!config('app.lock_passwords')) && ($user->deleted_at==''))
                    <li><a href="{{ route('delete/user', $user->id) }}">{{ trans('button.delete') }}</a></li>
                @endif
             </ul>
