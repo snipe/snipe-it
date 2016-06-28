@@ -109,8 +109,32 @@ class UsersController extends Controller
             $user->password = bcrypt($request->input('password'));
             $data['password'] =  $request->input('password');
         }
-        //populate all generic data.
-        $user = $this->extractUserDataFromRequest($user, $request);
+        // Update the user
+        $user->first_name = e($request->input('first_name'));
+        $user->last_name = e($request->input('last_name'));
+        $user->locale = e($request->input('locale'));
+        $user->employee_num = e($request->input('employee_num'));
+        $user->activated = e($request->input('activated', $user->activated));
+        $user->jobtitle = e($request->input('jobtitle'));
+        $user->phone = e($request->input('phone'));
+        $user->location_id = e($request->input('location_id'));
+        $user->company_id = e(Company::getIdForUser($request->input('company_id')));
+        $user->manager_id = e($request->input('manager_id'));
+        $user->notes = e($request->input('notes'));
+        $user->permissions = json_encode($request->input('permission'));
+
+
+        if ($user->manager_id == "") {
+            $user->manager_id = null;
+        }
+
+        if ($user->location_id == "") {
+            $user->location_id = null;
+        }
+
+        if ($user->company_id == "") {
+            $user->company_id = null;
+        }
 
 
         if ($user->save()) {
@@ -281,47 +305,16 @@ class UsersController extends Controller
         } else {
             $user->groups()->sync(array());
         }
-        // If lock passwords is set, the username, email, and password cannot be changed.
-        if(!config('app.lock_passwords')) {
-
-            // Do we want to update the user password?
-            if ($request->has('password')) {
-                $user->password = bcrypt($request->input('password'));
-            }
-            if ( $request->has('username')) {
-                $user->username = e($request->input('username'));
-            }
-            $user->email = e($request->input('email'));
-
+        // Do we want to update the user password?
+        if ($request->has('password')) {
+            $user->password = bcrypt($request->input('password'));
         }
-        $user = $this->extractUserDataFromRequest($user, $request);
-
-            // Was the user updated?
-        if ($user->save()) {
-
-
-            // Prepare the success message
-            $success = trans('admin/users/message.success.update');
-
-            // Redirect to the user page
-            return redirect()->route('users')->with('success', $success);
+        if ( $request->has('username')) {
+            $user->username = e($request->input('username'));
         }
+        $user->email = e($request->input('email'));
 
-            return redirect()->back()->withInput()->withErrors($user->getErrors());
 
-    }
-
-    /**
-    * Maps Request Information to a User object
-    *
-    * @auther [Daniel Meltzer] [<parallelgrapefruit@gmail.com>]
-    * @since [v3.0]
-    * @param User $user
-    * @param Request $request
-    * @return User
-    */
-    private function extractUserDataFromRequest(User $user, Request $request)
-    {
        // Update the user
         $user->first_name = e($request->input('first_name'));
         $user->last_name = e($request->input('last_name'));
@@ -350,7 +343,19 @@ class UsersController extends Controller
         }
 
 
-        return $user;
+            // Was the user updated?
+        if ($user->save()) {
+
+
+            // Prepare the success message
+            $success = trans('admin/users/message.success.update');
+
+            // Redirect to the user page
+            return redirect()->route('users')->with('success', $success);
+        }
+
+            return redirect()->back()->withInput()->withErrors($user->getErrors());
+
     }
 
     /**
