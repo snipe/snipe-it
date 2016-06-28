@@ -51,10 +51,10 @@ class Statuslabel extends Model
             return 'pending';
         } elseif ($this->archived == 1) {
             return 'archived';
-        } elseif (($this->archived == 0) && ($this->deployable == 0) && ($this->deployable == 0)) {
-            return 'undeployable';
-        } else {
+        } elseif ($this->deployable == 1) {
             return 'deployable';
+        } else {
+            return 'undeployable';
         }
     }
 
