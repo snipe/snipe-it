@@ -119,33 +119,24 @@ class StatuslabelsController extends Controller
     public function store()
     {
 
-      // create a new model instance
+      // create a new status label instance
         $statuslabel = new Statuslabel();
-        $statustype = Statuslabel::getStatuslabelTypesForDB(Input::get('modal-statuslabel_types'));
+        $statustype = Statuslabel::getStatuslabelTypesForDB(Input::get('statuslabel_types'));
+        $statuslabel->name            = e(Input::get('name'));
+        $statuslabel->user_id         = Auth::user()->id;
+        $statuslabel->notes           =  '';
+        $statuslabel->deployable      =  $statustype['deployable'];
+        $statuslabel->pending         =  $statustype['pending'];
+        $statuslabel->archived        =  $statustype['archived'];
 
-      // attempt validation
-        if ($statuslabel->validate($new)) {
 
-            // Save the Statuslabel data
-            $statuslabel->name            = e(Input::get('name'));
-            $statuslabel->user_id         = Auth::user()->id;
-            $statuslabel->notes           =  '';
-            $statuslabel->deployable      =  $statustype['deployable'];
-            $statuslabel->pending         =  $statustype['pending'];
-            $statuslabel->archived        =  $statustype['archived'];
-
-            // Was the asset created?
-            if ($statuslabel->save()) {
-                // Redirect to the new Statuslabel  page
-                return JsonResponse::create($statuslabel);
-            } else {
-                return JsonResponse::create(["error" => "Couldn't save Statuslabel"], 500);
-            }
-        } else {
-            // failure
-            $errors = $statuslabel->getErrors();
-            return  JsonResponse::create(["error" => "Failed validation: ".print_r($errors->all('<li>:message</li>'), true)], 500);
+        if ($statuslabel->isValid()) {
+            $statuslabel->save();
+            // Redirect to the new Statuslabel  page
+            return JsonResponse::create($statuslabel);
         }
+        return JsonResponse::create(["error" => "Failed validation: ".print_r($statuslabel->getErrors()->first(), true)], 500);
+
     }
 
 

@@ -155,7 +155,7 @@ class Asset extends Depreciable
                 'fields' => [
                 [
                   'title' => 'Checked Out:',
-                  'value' => 'HARDWARE asset <'.config('app.url').'/hardware/'.$this->id.'/view'.'|'.$this->showAssetName().'> checked out to <'.config('app.url').'/admin/users/'.$this->assigned_to.'/view|'.$this->assigneduser->fullName().'> by <'.config('app.url').'/hardware/'.$this->id.'/view'.'|'.$admin->fullName().'>.'
+                  'value' => 'HARDWARE asset <'.config('app.url').'/hardware/'.$this->id.'/view'.'|'.$this->showAssetName().'> checked out to <'.config('app.url').'/admin/users/'.$this->assigned_to.'/view|'.$this->assigneduser->fullName().'> by <'.config('app.url').'/admin/users/'.Auth::user()->id.'/view'.'|'.$admin->fullName().'>.'
                 ],
                 [
                     'title' => 'Note:',
@@ -736,7 +736,8 @@ class Asset extends Depreciable
                     $query->whereHas('category', function ($query) use ($search) {
                         $query->where(function ($query) use ($search) {
                             $query->where('categories.name', 'LIKE', '%'.$search.'%')
-                            ->orWhere('models.name', 'LIKE', '%'.$search.'%');
+                            ->orWhere('models.name', 'LIKE', '%'.$search.'%')
+                            ->orWhere('models.modelno', 'LIKE', '%'.$search.'%');
                         });
                     });
                 })->orWhereHas('model', function ($query) use ($search) {
@@ -792,6 +793,19 @@ class Asset extends Depreciable
     public function scopeOrderModels($query, $order)
     {
         return $query->join('models', 'assets.model_id', '=', 'models.id')->orderBy('models.name', $order);
+    }
+
+    /**
+    * Query builder scope to order on model number
+    *
+    * @param  Illuminate\Database\Query\Builder  $query  Query builder instance
+    * @param  text                              $order       Order
+    *
+    * @return Illuminate\Database\Query\Builder          Modified query builder
+    */
+    public function scopeOrderModelNumber($query, $order)
+    {
+        return $query->join('models', 'assets.model_id', '=', 'models.id')->orderBy('models.modelno', $order);
     }
 
 
@@ -866,7 +880,7 @@ class Asset extends Depreciable
     }
 
   /**
-    * Query builder scope to order on model
+    * Query builder scope to order on location
     *
     * @param  Illuminate\Database\Query\Builder  $query  Query builder instance
     * @param  text                              $order       Order

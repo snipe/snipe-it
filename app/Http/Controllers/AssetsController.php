@@ -352,16 +352,13 @@ class AssetsController extends Controller
             $asset->supplier_id =  null;
         }
 
-        if ($request->has('requestable')) {
-            $asset->requestable = e($request->input('requestable'));
-        } else {
-            $asset->requestable =  null;
-        }
+        // If the box isn't checked, it's not in the request at all.
+        $asset->requestable = $request->has('requestable');
 
         if ($request->has('rtd_location_id')) {
             $asset->rtd_location_id = e($request->input('rtd_location_id'));
         } else {
-            $asset->requestable =  null;
+            $asset->rtd_location_id =  null;
         }
 
         if ($request->has('image_delete')) {
@@ -836,7 +833,15 @@ class AssetsController extends Controller
 
                 $date = date('Y-m-d-his');
                 $fixed_filename = str_replace(' ', '-', $file->getClientOriginalName());
-                $file->move($path, $date.'-'.$fixed_filename);
+                try {
+                    $file->move($path, $date.'-'.$fixed_filename);
+                } catch (\Symfony\Component\HttpFoundation\File\Exception\FileException $exception) {
+                        $results['error']=trans('admin/hardware/message.upload.error');
+                        if( config('app.debug')) {
+                            $results['error'].= ' ' . $exception->getMessage();
+                        }
+                        return $results;
+                }
                 $name = date('Y-m-d-his').'-'.$fixed_filename;
                 $filesize = Setting::fileSizeConvert(filesize($path.'/'.$name));
                 $results[] = compact('name', 'filesize');
@@ -850,7 +855,6 @@ class AssetsController extends Controller
 
 
         } else {
-
             $results['error']=trans('general.feature_disabled');
             return $results;
         }
@@ -1421,6 +1425,7 @@ class AssetsController extends Controller
         'asset_tag',
         'serial',
         'model',
+        'model_number',
         'last_checkout',
         'category',
         'manufacturer',
@@ -1447,6 +1452,9 @@ class AssetsController extends Controller
         switch ($sort) {
             case 'model':
                 $assets = $assets->OrderModels($order);
+                break;
+            case 'model_number':
+                $assets = $assets->OrderModelNumber($order);
                 break;
             case 'category':
                 $assets = $assets->OrderCategory($order);
@@ -1503,6 +1511,7 @@ class AssetsController extends Controller
             'asset_tag'     => '<a title="'.e($asset->asset_tag).'" href="hardware/'.$asset->id.'/view">'.e($asset->asset_tag).'</a>',
             'serial'        => e($asset->serial),
             'model'         => ($asset->model) ? (string)link_to('/hardware/models/'.$asset->model->id.'/view', e($asset->model->name)) : 'No model',
+            'model_number'  => ($asset->model && $asset->model->modelno) ? (string)$asset->model->modelno : '',
             'status_label'        => ($asset->assigneduser) ? 'Deployed' : ((e($asset->assetstatus)) ? e($asset->assetstatus->name) : ''),
             'assigned_to'        => ($asset->assigneduser) ? (string)link_to(config('app.url').'/admin/users/'.$asset->assigned_to.'/view', e($asset->assigneduser->fullName())) : '',
             'location'      => (($asset->assigneduser) && ($asset->assigneduser->userloc!='')) ? (string)link_to('admin/settings/locations/'.$asset->assigneduser->userloc->id.'/edit', e($asset->assigneduser->userloc->name)) : (($asset->defaultLoc!='') ? (string)link_to('admin/settings/locations/'.$asset->defaultLoc->id.'/edit', e($asset->defaultLoc->name)) : ''),

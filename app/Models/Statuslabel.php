@@ -75,11 +75,11 @@ class Statuslabel extends Model
             $statustype['deployable'] = 0;
             $statustype['archived'] = 1;
 
-        } elseif ($type == 'undeployable') {
+        } else {
             $statustype['pending'] = 0;
             $statustype['deployable'] = 0;
             $statustype['archived'] = 0;
-        }
+        } 
 
         return $statustype;
     }
