@@ -1425,7 +1425,7 @@ class AssetsController extends Controller
         'asset_tag',
         'serial',
         'model',
-        'modelno',
+        'model_number',
         'last_checkout',
         'category',
         'manufacturer',
@@ -1452,6 +1452,9 @@ class AssetsController extends Controller
         switch ($sort) {
             case 'model':
                 $assets = $assets->OrderModels($order);
+                break;
+            case 'model_number':
+                $assets = $assets->OrderModelNumber($order);
                 break;
             case 'category':
                 $assets = $assets->OrderCategory($order);

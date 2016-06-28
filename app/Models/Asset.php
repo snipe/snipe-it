@@ -795,6 +795,19 @@ class Asset extends Depreciable
         return $query->join('models', 'assets.model_id', '=', 'models.id')->orderBy('models.name', $order);
     }
 
+    /**
+    * Query builder scope to order on model number
+    *
+    * @param  Illuminate\Database\Query\Builder  $query  Query builder instance
+    * @param  text                              $order       Order
+    *
+    * @return Illuminate\Database\Query\Builder          Modified query builder
+    */
+    public function scopeOrderModelNumber($query, $order)
+    {
+        return $query->join('models', 'assets.model_id', '=', 'models.id')->orderBy('models.modelno', $order);
+    }
+
 
         /**
         * Query builder scope to order on assigned user
