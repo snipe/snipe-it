@@ -840,6 +840,9 @@ class AssetsController extends Controller
                     $file->move($path, $date.'-'.$fixed_filename);
                 } catch (\Symfony\Component\HttpFoundation\File\Exception\FileException $exception) {
                         $results['error']=trans('admin/hardware/message.upload.error');
+                        if( config('app.debug')) {
+                            $results['error'].= ' ' . $exception->getMessage();
+                        }
                         return $results;
                 }
                 $name = date('Y-m-d-his').'-'.$fixed_filename;
