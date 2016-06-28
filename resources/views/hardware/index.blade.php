@@ -78,6 +78,7 @@
                             <th data-sortable="true" data-field="asset_tag">{{ trans('admin/hardware/table.asset_tag') }}</th>
                             <th data-sortable="true" data-field="serial">{{ trans('admin/hardware/table.serial') }}</th>
                             <th data-sortable="true" data-field="model">{{ trans('admin/hardware/form.model') }}</th>
+                            <th data-sortable="true" data-field="model_number" data-visible="false">{{ trans('admin/models/table.modelnumber') }}</th>
                             <th data-sortable="true" data-field="status_label">{{ trans('admin/hardware/table.status') }}</th>
                             <th data-sortable="true" data-field="assigned_to">{{ trans('admin/hardware/form.checkedout_to') }}</th>
                             <th data-sortable="true" data-field="location" data-searchable="true">{{ trans('admin/hardware/table.location') }}</th>
