@@ -866,7 +866,7 @@ class Asset extends Depreciable
     }
 
   /**
-    * Query builder scope to order on model
+    * Query builder scope to order on location
     *
     * @param  Illuminate\Database\Query\Builder  $query  Query builder instance
     * @param  text                              $order       Order
