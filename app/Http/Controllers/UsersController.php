@@ -102,19 +102,15 @@ class UsersController extends Controller
     {
 
         $user = new User;
-        $user->first_name  = $data['first_name']= e($request->input('first_name'));
-        $user->last_name = e($request->input('last_name'));
+        //Username, email, and password need to be handled specially because the need to respect config values on an edit.
         $user->email = $data['email'] = e($request->input('email'));
-        $user->activated = 1;
-        $user->locale = e($request->input('locale'));
         $user->username = $data['username'] = e($request->input('username'));
-        $user->permissions = json_encode($request->input('permission'));
-
         if ($request->has('password')) {
             $user->password = bcrypt($request->input('password'));
             $data['password'] =  $request->input('password');
         }
-
+        //populate all generic data.
+        $user = $this->extractUserDataFromRequest($user, $request);
 
 
         if ($user->save()) {
@@ -279,57 +275,26 @@ class UsersController extends Controller
             return redirect()->route('users')->with('error', $error);
         }
 
-            // Update the user
-            $user->first_name = e($request->input('first_name'));
-            $user->last_name = e($request->input('last_name'));
-            $user->locale = e($request->input('locale'));
-        if (Input::has('username')) {
-            $user->username = e($request->input('username'));
-        }
-
-            $user->email = e($request->input('email'));
-            $user->employee_num = e($request->input('employee_num'));
-            $user->activated = e($request->input('activated', $user->activated));
-            $user->jobtitle = e($request->input('jobtitle'));
-            $user->phone = e($request->input('phone'));
-            $user->location_id = e($request->input('location_id'));
-            $user->company_id = e(Company::getIdForUser($request->input('company_id')));
-            $user->manager_id = e($request->input('manager_id'));
-            $user->notes = e($request->input('notes'));
-            $user->permissions = json_encode($request->input('permission'));
-
-
-
-
-        if ($user->manager_id == "") {
-            $user->manager_id = null;
-        }
-
-        if ($user->location_id == "") {
-            $user->location_id = null;
-        }
-
+        // First handle anything exclusive to editing.
         if ($request->has('groups')) {
             $user->groups()->sync($request->input('groups'));
         } else {
             $user->groups()->sync(array());
         }
-
+        // If lock passwords is set, the username, email, and password cannot be changed.
+        if(!config('app.lock_passwords')) {
 
             // Do we want to update the user password?
-        if (($request->has('password')) && (!config('app.lock_passwords'))) {
-            $user->password = bcrypt($request->input('password'));
-        }
-
-            // Do we want to update the user email?
-        if (!config('app.lock_passwords')) {
+            if ($request->has('password')) {
+                $user->password = bcrypt($request->input('password'));
+            }
+            if ( $request->has('username')) {
+                $user->username = e($request->input('username'));
+            }
             $user->email = e($request->input('email'));
-        }
-
-
-        if (!config('app.lock_passwords')) {
 
         }
+        $user = $this->extractUserDataFromRequest($user, $request);
 
             // Was the user updated?
         if ($user->save()) {
@@ -344,6 +309,48 @@ class UsersController extends Controller
 
             return redirect()->back()->withInput()->withErrors($user->getErrors());
 
+    }
+
+    /**
+    * Maps Request Information to a User object
+    *
+    * @auther [Daniel Meltzer] [<parallelgrapefruit@gmail.com>]
+    * @since [v3.0]
+    * @param User $user
+    * @param Request $request
+    * @return User
+    */
+    private function extractUserDataFromRequest(User $user, Request $request)
+    {
+       // Update the user
+        $user->first_name = e($request->input('first_name'));
+        $user->last_name = e($request->input('last_name'));
+        $user->locale = e($request->input('locale'));
+        $user->employee_num = e($request->input('employee_num'));
+        $user->activated = e($request->input('activated', $user->activated));
+        $user->jobtitle = e($request->input('jobtitle'));
+        $user->phone = e($request->input('phone'));
+        $user->location_id = e($request->input('location_id'));
+        $user->company_id = e(Company::getIdForUser($request->input('company_id')));
+        $user->manager_id = e($request->input('manager_id'));
+        $user->notes = e($request->input('notes'));
+        $user->permissions = json_encode($request->input('permission'));
+
+
+        if ($user->manager_id == "") {
+            $user->manager_id = null;
+        }
+
+        if ($user->location_id == "") {
+            $user->location_id = null;
+        }
+
+        if ($user->company_id == "") {
+            $user->company_id = null;
+        }
+
+
+        return $user;
     }
 
     /**
