@@ -833,7 +833,15 @@ class AssetsController extends Controller
 
                 $date = date('Y-m-d-his');
                 $fixed_filename = str_replace(' ', '-', $file->getClientOriginalName());
-                $file->move($path, $date.'-'.$fixed_filename);
+                try {
+                    $file->move($path, $date.'-'.$fixed_filename);
+                } catch (\Symfony\Component\HttpFoundation\File\Exception\FileException $exception) {
+                        $results['error']=trans('admin/hardware/message.upload.error');
+                        if( config('app.debug')) {
+                            $results['error'].= ' ' . $exception->getMessage();
+                        }
+                        return $results;
+                }
                 $name = date('Y-m-d-his').'-'.$fixed_filename;
                 $filesize = Setting::fileSizeConvert(filesize($path.'/'.$name));
                 $results[] = compact('name', 'filesize');
@@ -847,7 +855,6 @@ class AssetsController extends Controller
 
 
         } else {
-
             $results['error']=trans('general.feature_disabled');
             return $results;
         }
