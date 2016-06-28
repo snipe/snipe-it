@@ -1425,6 +1425,7 @@ class AssetsController extends Controller
         'asset_tag',
         'serial',
         'model',
+        'model_number',
         'last_checkout',
         'category',
         'manufacturer',
@@ -1451,6 +1452,9 @@ class AssetsController extends Controller
         switch ($sort) {
             case 'model':
                 $assets = $assets->OrderModels($order);
+                break;
+            case 'model_number':
+                $assets = $assets->OrderModelNumber($order);
                 break;
             case 'category':
                 $assets = $assets->OrderCategory($order);
@@ -1507,6 +1511,7 @@ class AssetsController extends Controller
             'asset_tag'     => '<a title="'.e($asset->asset_tag).'" href="hardware/'.$asset->id.'/view">'.e($asset->asset_tag).'</a>',
             'serial'        => e($asset->serial),
             'model'         => ($asset->model) ? (string)link_to('/hardware/models/'.$asset->model->id.'/view', e($asset->model->name)) : 'No model',
+            'model_number'  => ($asset->model && $asset->model->modelno) ? (string)$asset->model->modelno : '',
             'status_label'        => ($asset->assigneduser) ? 'Deployed' : ((e($asset->assetstatus)) ? e($asset->assetstatus->name) : ''),
             'assigned_to'        => ($asset->assigneduser) ? (string)link_to(config('app.url').'/admin/users/'.$asset->assigned_to.'/view', e($asset->assigneduser->fullName())) : '',
             'location'      => (($asset->assigneduser) && ($asset->assigneduser->userloc!='')) ? (string)link_to('admin/settings/locations/'.$asset->assigneduser->userloc->id.'/edit', e($asset->assigneduser->userloc->name)) : (($asset->defaultLoc!='') ? (string)link_to('admin/settings/locations/'.$asset->defaultLoc->id.'/edit', e($asset->defaultLoc->name)) : ''),
