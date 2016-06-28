@@ -352,16 +352,13 @@ class AssetsController extends Controller
             $asset->supplier_id =  null;
         }
 
-        if ($request->has('requestable')) {
-            $asset->requestable = e($request->input('requestable'));
-        } else {
-            $asset->requestable =  null;
-        }
+        // If the box isn't checked, it's not in the request at all.
+        $asset->requestable = $request->has('requestable');
 
         if ($request->has('rtd_location_id')) {
             $asset->rtd_location_id = e($request->input('rtd_location_id'));
         } else {
-            $asset->requestable =  null;
+            $asset->rtd_location_id =  null;
         }
 
         if ($request->has('image_delete')) {
