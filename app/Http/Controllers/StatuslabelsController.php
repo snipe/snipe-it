@@ -12,6 +12,7 @@ use Str;
 use View;
 use App\Helpers\Helper;
 use Auth;
+use Illuminate\Http\Request;
 
 use Symfony\Component\HttpFoundation\JsonResponse;
 
@@ -90,12 +91,17 @@ class StatuslabelsController extends Controller
      *
      * @return Redirect
      */
-    public function postCreate()
+    public function postCreate(Request $request)
     {
 
         // create a new model instance
         $statuslabel = new Statuslabel();
-        $statustype = Statuslabel::getStatuslabelTypesForDB(Input::get('statuslabel_types'));
+
+        if (!$request->has('statuslabel_types')) {
+            return redirect()->back()->withInput()->withErrors(['statuslabel_types' => trans('validation.statuslabel_type')]);
+        }
+
+        $statustype = Statuslabel::getStatuslabelTypesForDB($request->input('statuslabel_types'));
 
         // Save the Statuslabel data
         $statuslabel->name              = e(Input::get('name'));
@@ -116,11 +122,14 @@ class StatuslabelsController extends Controller
 
     }
 
-    public function store()
+    public function store(Request $request)
     {
 
-      // create a new status label instance
         $statuslabel = new Statuslabel();
+        if (!$request->has('statuslabel_types')) {
+            return JsonResponse::create(["error" => trans('validation.statuslabel_type')], 500);
+        }
+
         $statustype = Statuslabel::getStatuslabelTypesForDB(Input::get('statuslabel_types'));
         $statuslabel->name            = e(Input::get('name'));
         $statuslabel->user_id         = Auth::user()->id;
@@ -135,7 +144,7 @@ class StatuslabelsController extends Controller
             // Redirect to the new Statuslabel  page
             return JsonResponse::create($statuslabel);
         }
-        return JsonResponse::create(["error" => "Failed validation: ".print_r($statuslabel->getErrors()->first(), true)], 500);
+        return JsonResponse::create(["error" => $statuslabel->getErrors()->first()], 500);
 
     }
 
@@ -168,12 +177,16 @@ class StatuslabelsController extends Controller
      * @param  int  $statuslabelId
      * @return Redirect
      */
-    public function postEdit($statuslabelId = null)
+    public function postEdit(Request $request, $statuslabelId = null)
     {
         // Check if the Statuslabel exists
         if (is_null($statuslabel = Statuslabel::find($statuslabelId))) {
             // Redirect to the blogs management page
             return redirect()->to('admin/settings/statuslabels')->with('error', trans('admin/statuslabels/message.does_not_exist'));
+        }
+
+        if (!$request->has('statuslabel_types')) {
+            return redirect()->back()->withInput()->withErrors(['statuslabel_types' => trans('validation.statuslabel_type')]);
         }
 
 

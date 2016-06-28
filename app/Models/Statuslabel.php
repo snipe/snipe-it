@@ -16,9 +16,11 @@ class Statuslabel extends Model
 
 
     protected $rules = array(
-      'name'  => 'required|string|unique:status_labels,name,NULL,deleted_at',
-      //'statuslabel_types' => 'required|in:deployable,pending,archived,undeployable',
-      'notes'   => 'string',
+        'name'  => 'required|string|unique:status_labels,name,NULL,deleted_at',
+        'notes'   => 'string',
+        'deployable' => 'required',
+        'pending' => 'required',
+        'archived' => 'required',
     );
 
     protected $fillable = ['name'];
@@ -47,14 +49,14 @@ class Statuslabel extends Model
     public function getStatuslabelType()
     {
 
-        if ($this->pending == 1) {
+        if (($this->pending == '1') && ($this->archived == '0')  && ($this->deployable == '0')) {
             return 'pending';
-        } elseif ($this->archived == 1) {
+        } elseif (($this->pending == '0') && ($this->archived == '1')  && ($this->deployable == '0')) {
             return 'archived';
-        } elseif ($this->deployable == 1) {
-            return 'deployable';
-        } else {
+        } elseif (($this->pending == '0') && ($this->archived == '0')  && ($this->deployable == '0')) {
             return 'undeployable';
+        } else {
+            return 'deployable';
         }
     }
 
@@ -74,12 +76,13 @@ class Statuslabel extends Model
             $statustype['pending'] = 0;
             $statustype['deployable'] = 0;
             $statustype['archived'] = 1;
-
+            
         } else {
             $statustype['pending'] = 0;
             $statustype['deployable'] = 0;
             $statustype['archived'] = 0;
-        } 
+
+        }
 
         return $statustype;
     }
