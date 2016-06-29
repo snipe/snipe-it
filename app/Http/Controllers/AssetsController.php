@@ -1494,7 +1494,7 @@ class AssetsController extends Controller
             }
 
             if ($asset->assetstatus) {
-                if ($asset->assetstatus->deployable != 0) {
+                if (($asset->assetstatus->deployable != 0) && ($asset->deleted_at=='')) {
                     if (($asset->assigned_to !='') && ($asset->assigned_to > 0)) {
                         $inout = '<a href="'.route('checkin/hardware', $asset->id).'" class="btn btn-primary btn-sm" title="Checkin this asset" data-toggle="tooltip">'.trans('general.checkin').'</a>';
                     } else {
