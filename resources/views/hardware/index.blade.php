@@ -47,7 +47,7 @@
                  'class' => 'form-inline' ]) }}
             <div class="row">
               <div class="col-md-12">
-
+                @if (Input::get('status')!='Deleted')
                 <div id="toolbar">
                   <select name="bulk_actions" class="form-control select2">
                       <option value="edit">Edit</option>
@@ -55,7 +55,8 @@
                       <option value="labels">Generate Labels</option>
                   </select>
                   <button class="btn btn-default" id="bulkEdit" disabled>Go</button>
-              </div>
+                </div>
+                  @endif
 
 
                 <table
@@ -70,7 +71,9 @@
                 data-cookie-id-table="{{ e(Input::get('status')) }}assetTable-{{ config('version.hash_version') }}">
                     <thead>
                         <tr>
+                            @if (Input::get('status')!='Deleted')
                             <th data-class="hidden-xs" data-switchable="false" data-searchable="false" data-sortable="false" data-field="checkbox"><div class="text-center"><input type="checkbox" id="checkAll" style="padding-left: 0px;"></div></th>
+                            @endif
                             <th data-sortable="true" data-field="id" data-visible="false">{{ trans('general.id') }}</th>
                             <th data-field="companyName" data-searchable="true" data-sortable="true" data-switchable="true" data-visible="false">{{ trans('general.company') }}</th>
                             <th data-sortable="true" data-field="image"  data-visible="false">{{ trans('admin/hardware/table.image') }}</th>
