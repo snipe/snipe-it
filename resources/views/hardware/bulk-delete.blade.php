@@ -7,65 +7,76 @@
 @parent
 @stop
 
+@section('header_right')
+    <a href="{{ URL::previous() }}" class="btn btn-primary pull-right">
+        {{ trans('general.back') }}</a>
+@stop
+
+
+
 {{-- Page content --}}
 
 @section('content')
 
-<div class="row header">
-    <div class="col-md-12">
-            <a href="{{ URL::previous() }}" class="btn-flat gray pull-right right"><i class="fa fa-arrow-left icon-white"></i> {{ trans('general.back') }}</a>
-        <h3>
-
-        	{{ trans('admin/hardware/form.bulk_delete') }}
-        </h3>
-    </div>
-</div>
-
-<div class="row form-wrapper">
-
-      <div class="col-md-12 column">
-        <p>{{ trans('admin/hardware/form.bulk_delete_help') }}</p>
-        <p style="color: red"><strong><big>{{ trans('admin/hardware/form.bulk_delete_warn', ['asset_count' => count($assets)]) }}</big></strong></p>
+    <div class="row">
 
 
-  			 <form class="form-horizontal" method="post" action="{{ route('hardware/bulkdelete') }}" autocomplete="off" role="form">
-           <input type="hidden" name="_token" value="{{ csrf_token() }}" />
-           <table class="table table-striped table-condensed">
-            <thead>
-              <tr>
-                <td></td>
-                <td>ID</td>
-                <td>Name</td>
-                <td>Location</td>
-                <td>Assigned To</td>
-              </tr>
-            </thead>
-            <tbody>
-            @foreach ($assets as $asset)
-            	<tr>
-                <td><input type="checkbox" name="bulk_edit[]" value="{{ $asset->id }}" checked="checked"></td>
-                <td>{{ $asset->id }}</td>
-                <td>{{ $asset->showAssetName() }}</td>
-                <td>
-                  @if ($asset->assetloc)
-                    {{ $asset->assetloc->name }}
-                  @endif
-                </td>
-                <td>
-                  @if ($asset->assigneduser)
-                    {{ $asset->assigneduser->fullName() }} ({{ $asset->assigneduser->username }})
-                  @endif
-                </td>
-              </tr>
-            @endforeach
+        <!-- left column -->
+        <div class="col-md-12">
 
-            </tbody>
+            <p>{{ trans('admin/hardware/form.bulk_delete_help') }}</p>
 
-          </table>
+            <form class="form-horizontal" method="post" action="{{ route('hardware/bulkdelete') }}" autocomplete="off" role="form">
+            <div class="box box-default">
+                <div class="box-header with-border">
+                    <h3 class="box-title" style="color: red">{{ trans('admin/hardware/form.bulk_delete_warn', ['asset_count' => count($assets)]) }}</h3>
+                </div>
+                <div class="box-body">
 
-          <button class="btn btn-sm btn-default">Delete</button>
+                    <input type="hidden" name="_token" value="{{ csrf_token() }}" />
+                    <table class="table table-striped table-condensed">
+                        <thead>
+                        <tr>
+                            <td></td>
+                            <td>ID</td>
+                            <td>Name</td>
+                            <td>Location</td>
+                            <td>Assigned To</td>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        @foreach ($assets as $asset)
+                            <tr>
+                                <td><input type="checkbox" name="bulk_edit[]" value="{{ $asset->id }}" checked="checked"></td>
+                                <td>{{ $asset->id }}</td>
+                                <td>{{ $asset->showAssetName() }}</td>
+                                <td>
+                                    @if ($asset->assetloc)
+                                        {{ $asset->assetloc->name }}
+                                    @endif
+                                </td>
+                                <td>
+                                    @if ($asset->assigneduser)
+                                        {{ $asset->assigneduser->fullName() }} ({{ $asset->assigneduser->username }})
+                                    @endif
+                                </td>
+                            </tr>
+                        @endforeach
 
-        </form>
+                        </tbody>
+
+                    </table>
+      
+
+        </div><!-- /.box-body -->
+        <div class="box-footer text-right">
+            <a class="btn btn-link" href="{{ URL::previous() }}" method="post" enctype="multipart/form-data">{{ trans('button.cancel') }}</a>
+            <button type="submit" class="btn btn-success" id="submit-button"><i class="fa fa-check icon-white"></i> {{ trans('general.delete') }}</button>
+        </div><!-- /.box-footer -->
+    </div><!-- /.box -->
+            </form>
+
+
     </div>
 </div>
 @stop
