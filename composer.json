@@ -27,6 +27,7 @@
       "fzaninotto/faker": "~1.4",
       "mockery/mockery": "0.9.*",
       "phpunit/phpunit": "~4.0",
+      "squizlabs/php_codesniffer": "2.*",
       "phpspec/phpspec": "~2.1",
       "codeception/codeception": "2.1.*",
       "symfony/dom-crawler": "~3.0",
