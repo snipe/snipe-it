@@ -165,7 +165,7 @@ class Asset extends Depreciable
                 ])->send('Asset Checked Out');
 
             } catch (Exception $e) {
-                print_r($e);
+                LOG::error($e);
             }
         }
 
