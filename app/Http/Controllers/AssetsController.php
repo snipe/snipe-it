@@ -1437,10 +1437,12 @@ class AssetsController extends Controller
         'image',
         'status_label',
         'assigned_to',
-        'created_at'
+        'created_at',
+        'purchase_date',
+        'purchase_cost'
         ];
 
-        $all_custom_fields=CustomField::all(); //used as a 'cache' of custom fields throughout this page load
+        $all_custom_fields = CustomField::all(); //used as a 'cache' of custom fields throughout this page load
 
         foreach ($all_custom_fields as $field) {
             $allowed_columns[]=$field->db_column_name();
@@ -1518,6 +1520,8 @@ class AssetsController extends Controller
             'category'      => (($asset->model) && ($asset->model->category)) ?(string)link_to('/admin/settings/categories/'.$asset->model->category->id.'/view', e($asset->model->category->name)) : '',
             'manufacturer'      => (($asset->model) && ($asset->model->manufacturer)) ? (string)link_to('/admin/settings/manufacturers/'.$asset->model->manufacturer->id.'/view', e($asset->model->manufacturer->name)) : '',
             'eol'           => ($asset->eol_date()) ? $asset->eol_date() : '',
+            'purchase_cost'           => ($asset->purchase_cost) ? number_format($asset->purchase_cost, 2) : '',
+            'purchase_date'           => ($asset->purchase_date) ? $asset->purchase_date : '',
             'notes'         => e($asset->notes),
             'order_number'  => ($asset->order_number!='') ? '<a href="'.config('app.url').'/hardware?order_number='.e($asset->order_number).'">'.e($asset->order_number).'</a>' : '',
             'last_checkout' => ($asset->last_checkout!='') ? e($asset->last_checkout) : '',
