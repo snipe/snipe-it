@@ -1,8 +1,8 @@
 {
-  "name": "Snipe-IT Laravel 5.2",
-  "description": "The Laravel Framework.",
-  "keywords": ["framework", "laravel"],
-  "license": "MIT",
+  "name": "snipe-it",
+  "description": "Open source asset management system built on Laravel.",
+  "keywords": ["assets", "asset-management", "laravel"],
+  "license": "AGPL-3",
   "type": "project",
       "require": {
       "php": ">=5.5.9",
