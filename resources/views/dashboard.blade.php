@@ -117,7 +117,7 @@
                                 <i class="fa fa-paperclip"></i>
                             @endif
                         </td>
-                       <td>{{ date("M d, Y H:iA", strtotime($activity->created_at)) }}</td>
+                       <td>{{ date("M d, Y g:iA", strtotime($activity->created_at)) }}</td>
                        <td>
                                  @if ($activity->action_type!='requested')
                                       <a href="{{ route('view/user', $activity->user_id) }}">{{ $activity->adminlog->fullName() }}</a>
@@ -150,7 +150,9 @@
                         @if (($activity->componentlog) && ($activity->asset_type=="component"))
                            <a href="{{ route('view/hardware', $activity->asset_id) }}">{{ $activity->assetlog->showAssetName() }}</a>
                         @elseif($activity->action_type=='requested')
-                          <a href="{{ route('view/user', $activity->user_id) }}">{{ $activity->adminlog->fullName() }}</a>
+                            @if ($activity->adminlog)
+                                <a href="{{ route('view/user', $activity->user_id) }}">{{ $activity->adminlog->fullName() }}</a>
+                            @endif
                        @elseif ($activity->userlog)
                           <a href="{{ route('view/user', $activity->checkedout_to) }}">{{ $activity->userlog->fullName() }}</a>
 
