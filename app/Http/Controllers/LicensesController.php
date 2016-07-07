@@ -495,13 +495,13 @@ class LicensesController extends Controller
 
         if ($asset_id!='') {
 
-            if (is_null($is_asset_id = Asset::find($asset_id))) {
+            if (is_null($asset = Asset::find($asset_id))) {
                 // Redirect to the asset management page with error
                 return redirect()->to('admin/licenses')->with('error', trans('admin/licenses/message.asset_does_not_exist'));
             }
-            $was_assigned_to = $is_asset_id->assigned_to;
-            if (($was_assigned_to!=$assigned_to) && !is_null($was_assigned_to) && ($was_assigned_to != '')) {
-                //echo 'asset assigned to: '.$is_asset_id->assigned_to.'<br>license assigned to: '.$assigned_to;
+
+
+            if (($asset->assigned_to!='') && (($asset->assigned_to!=$assigned_to)) && ($assigned_to!='') ) {
                 return redirect()->to('admin/licenses')->with('error', trans('admin/licenses/message.owner_doesnt_match_asset'));
             }
 
