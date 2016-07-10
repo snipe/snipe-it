@@ -103,7 +103,8 @@ class ObjectImportCommand extends Command
         $this->accessories = Accessory::All(['name']);
         $this->consumables = Consumable::All(['name']);
         $this->customfields = CustomField::All(['name']);
-                $bar = null;
+        $bar = null;
+
         if (!$this->option('web-importer')) {
             $bar = $this->output->createProgressBar(count($newarray));
         }
