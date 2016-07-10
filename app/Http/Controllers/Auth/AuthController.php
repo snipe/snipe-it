@@ -210,7 +210,7 @@ class AuthController extends Controller
 
                 if ($this->ldap(Input::get('username'), Input::get('password'))) {
                     LOG::debug("Valid LDAP login. Updating the local data.");
-                    $user = User::find($user->id); //need the Sentry object, not the Eloquent object, to access critical password hashing functions
+                    $user = User::find($user->id);
                     $user->password = bcrypt(Input::get('password'));
                     $user->ldap_import = 1;
                     $user->save();
