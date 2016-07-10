@@ -31,12 +31,13 @@ class AssetRequest extends Request
           'status_id'       => 'required|integer',
           'company_id'      => 'integer',
           'warranty_months' => 'integer|min:0|max:240',
-          'physical'         => 'integer',
+          'physical'        => 'integer',
           'checkout_date'   => 'date',
           'checkin_date'    => 'date',
           'supplier_id'     => 'integer',
           'status'          => 'integer',
           'asset_tag'       => 'required',
+    
         ];
 
         $model = AssetModel::find($this->request->get('model_id'));
