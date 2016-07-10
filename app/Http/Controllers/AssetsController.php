@@ -214,8 +214,13 @@ class AssetsController extends Controller
 
 
             $image = Input::get('image');
+
+            // After modification, the image is prefixed by mime info like the following:
+            // data:image/jpeg;base64,; This causes the image library to be unhappy, so we need to remove it.
             $header = explode(';', $image, 2)[0];
+            // Grab the image type from the header while we're at it.
             $extension = substr($header, strpos($header, '/')+1);
+            // Start reading the image after the first comma, postceding the base64.
             $image = substr($image, strpos($image, ',')+1);
 
             $file_name = str_random(25).".".$extension;
@@ -396,6 +401,7 @@ class AssetsController extends Controller
         // Update the image
         if (Input::has('image')) {
             $image = $request->input('image');
+            // See postCreate for more explaination of the following.
             $header = explode(';', $image, 2)[0];
             $extension = substr($header, strpos($header, '/')+1);
             $image = substr($image, strpos($image, ',')+1);
