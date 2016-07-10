@@ -689,14 +689,14 @@ class UsersController extends Controller
             // Get this user groups
             $userGroups = $user_to_clone->groups()->lists('name', 'id');
 
-            // Get this user permissions
-            $userPermissions = null;
-
             // Get a list of all the available groups
             $groups = Group::pluck('name', 'id');
 
             // Get all the available permissions
             $permissions = config('permissions');
+            $clonedPermissions = $user_to_clone->decodePermissions();
+
+            $userPermissions =Helper::selectedPermissionsArray($permissions, $clonedPermissions);
             //$this->encodeAllPermissions($permissions);
 
             $location_list = Helper::locationsList();
@@ -932,6 +932,8 @@ class UsersController extends Controller
                 }
 
                 $actions .= '<a href="' . route('update/user', $user->id) . '" class="btn btn-warning btn-sm"><i class="fa fa-pencil icon-white"></i></a> ';
+
+                $actions .= '<a href="' . route('clone/user', $user->id) . '" class="btn btn-info btn-sm"><i class="fa fa-clone"></i></a>';
 
                 if ((Auth::user()->id !== $user->id) && (!config('app.lock_passwords'))) {
                     $actions .= '<a data-html="false" class="btn delete-asset btn-danger btn-sm" data-toggle="modal" href="' . route('delete/user', $user->id) . '" data-content="Are you sure you wish to delete this user?" data-title="Delete ' . htmlspecialchars($user->first_name) . '?" onClick="return false;"><i class="fa fa-trash icon-white"></i></a> ';
