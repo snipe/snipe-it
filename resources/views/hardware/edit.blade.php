@@ -26,7 +26,7 @@
 <div class="row">
   <div class="col-md-8 col-md-offset-2">
     @if ($asset->id)
-     <form id="create-form" class="form-horizontal" method="post" action="{{ route('update/hardware',$asset->id) }}" autocomplete="off" role="form" enctype="multipart/form-data" >
+     <form id="create-form" class="form-horizontal" method="post" action="{{ route('update/hardware',$asset->id) }}" autocomplete="off" role="form" enctype="multipart/form-data">
    @else
      <form id="create-form" class="form-horizontal" method="post" action="{{ route('savenew/hardware') }}" autocomplete="off" role="form" enctype="multipart/form-data">
    @endif
