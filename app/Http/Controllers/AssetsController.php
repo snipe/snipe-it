@@ -210,20 +210,36 @@ class AssetsController extends Controller
 
         // Create the image (if one was chosen.)
         if (Input::has('image')) {
+
+
+
             $image = Input::get('image');
             $header = explode(';', $image, 2)[0];
             $extension = substr($header, strpos($header, '/')+1);
             $image = substr($image, strpos($image, ',')+1);
 
             $file_name = str_random(25).".".$extension;
-            $path = public_path('uploads/assets/'.$file_name);
 
-            //Currently resizing happens on Client.  Maybe use this for thumbnails in the future?
-            Image::make($image)->resize(500, 500, function ($constraint) {
-                $constraint->aspectRatio();
-                $constraint->upsize();
-            })->save($path);
-            $asset->image = $file_name;
+            $directory= public_path('uploads/assets/');
+            // Check if the uploads directory exists.  If not, try to create it.
+            if (!file_exists($directory)) {
+                mkdir($directory, 0755);
+            }
+            $path = public_path('uploads/assets/'.$file_name);
+            try {
+                Image::make($image)->resize(500, 500, function ($constraint) {
+                    $constraint->aspectRatio();
+                    $constraint->upsize();
+                })->save($path);
+                $asset->image = $file_name;
+            } catch(\Exception $e) {
+                \Input::flash();
+                $messageBag = new \Illuminate\Support\MessageBag();
+                $messageBag->add('image', $e->getMessage());
+                \Session()->flash('errors', \Session::get('errors', new \Illuminate\Support\ViewErrorBag)
+                    ->put('default', $messageBag));
+                return response()->json(['image' => $e->getMessage()], 422);
+            }
 
         }
 
@@ -384,13 +400,28 @@ class AssetsController extends Controller
             $extension = substr($header, strpos($header, '/')+1);
             $image = substr($image, strpos($image, ',')+1);
 
+            $directory= public_path('uploads/assets/');
+            // Check if the uploads directory exists.  If not, try to create it.
+            if (!file_exists($directory)) {
+                mkdir($directory, 0755);
+            }
+
             $file_name = str_random(25).".".$extension;
             $path = public_path('uploads/assets/'.$file_name);
-
-            Image::make($image)->resize(500, 500, function ($constraint) {
-                $constraint->aspectRatio();
-                $constraint->upsize();
-            })->save($path);
+            try {
+                Image::make($image)->resize(500, 500, function ($constraint) {
+                    $constraint->aspectRatio();
+                    $constraint->upsize();
+                })->save($path);
+                $asset->image = $file_name;
+            } catch(\Exception $e) {
+                \Input::flash();
+                $messageBag = new \Illuminate\Support\MessageBag();
+                $messageBag->add('image', $e->getMessage());
+                \Session()->flash('errors', \Session::get('errors', new \Illuminate\Support\ViewErrorBag)
+                    ->put('default', $messageBag));
+                return response()->json(['image' => $e->getMessage()], 422);
+            }
             $asset->image = $file_name;
         }
 
