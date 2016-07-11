@@ -4,6 +4,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Watson\Validating\ValidatingTrait;
 use Auth;
+use DB;
 
 /**
  * Model for Companies.
@@ -63,7 +64,7 @@ final class Company extends Model
 
     public static function getSelectList()
     {
-        $select_company = Lang::get('general.select_company');
+        $select_company = trans('general.select_company');
         return ['0' => $select_company] + DB::table('companies')->orderBy('name', 'ASC')->lists('name', 'id');
     }
 
