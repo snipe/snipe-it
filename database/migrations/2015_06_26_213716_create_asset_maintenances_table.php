@@ -44,9 +44,9 @@
         {
 
             return [
-                Lang::get( 'admin/asset_maintenances/general.maintenance' ),
-                Lang::get( 'admin/asset_maintenances/general.repair' ),
-                Lang::get( 'admin/asset_maintenances/general.upgrade' )
+                trans( 'admin/asset_maintenances/general.maintenance' ),
+                trans( 'admin/asset_maintenances/general.repair' ),
+                trans( 'admin/asset_maintenances/general.upgrade' )
             ];
         }
 
