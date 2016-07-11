@@ -1,5 +1,5 @@
 {
-  "name": "snipe-it",
+  "name": "snipe/snipe-it",
   "description": "Open source asset management system built on Laravel.",
   "keywords": ["assets", "asset-management", "laravel"],
   "license": "AGPL-3",
