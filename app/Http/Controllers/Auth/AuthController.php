@@ -89,7 +89,7 @@ class AuthController extends Controller
         }
 
         // Connecting to LDAP
-        $connection = ldap_connect($ldaphost) or die("Could not connect to {$ldaphost}");
+        $connection = ldap_connect($ldaphost) || die("Could not connect to {$ldaphost}");
         // Needed for AD
         ldap_set_option($connection, LDAP_OPT_REFERRALS, 0);
         ldap_set_option($connection, LDAP_OPT_PROTOCOL_VERSION, $ldapversion);
@@ -210,7 +210,7 @@ class AuthController extends Controller
 
                 if ($this->ldap(Input::get('username'), Input::get('password'))) {
                     LOG::debug("Valid LDAP login. Updating the local data.");
-                    $user = User::find($user->id);
+                    $user = User::find($user->id); //need the Sentry object, not the Eloquent object, to access critical password hashing functions
                     $user->password = bcrypt(Input::get('password'));
                     $user->ldap_import = 1;
                     $user->save();

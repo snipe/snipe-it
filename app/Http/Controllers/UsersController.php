@@ -638,7 +638,7 @@ class UsersController extends Controller
             }
 
             // Do we have permission to unsuspend this user?
-            if ($user->isSuperUser() and ! Auth::user()->isSuperUser()) {
+            if ($user->isSuperUser() && !Auth::user()->isSuperUser()) {
                 // Redirect to the user management page
                 return redirect()->route('users')->with('error', 'Insufficient permissions!');
             }
