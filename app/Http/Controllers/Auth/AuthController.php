@@ -89,7 +89,7 @@ class AuthController extends Controller
         }
 
         // Connecting to LDAP
-        $connection = ldap_connect($ldaphost) || die("Could not connect to {$ldaphost}");
+        $connection = ldap_connect($ldaphost) or die("Could not connect to {$ldaphost}");
         // Needed for AD
         ldap_set_option($connection, LDAP_OPT_REFERRALS, 0);
         ldap_set_option($connection, LDAP_OPT_PROTOCOL_VERSION, $ldapversion);
