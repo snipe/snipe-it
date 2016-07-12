@@ -15,7 +15,7 @@
 			<strong>{{ $item_name }}</strong>
 		</td>
 	</tr>
-	@if ($item_tag)
+	@if isset($item_tag)
 		<tr>
 			<td>
 				Asset Tag:
@@ -25,7 +25,7 @@
 			</td>
 		</tr>
 	@endif
-  @if ($item_serial)
+    @if isset($item_serial)
 		<tr>
 			<td>
 				Serial:
@@ -43,7 +43,7 @@
 			<strong>{{ $checkout_date }}</strong>
 		</td>
 	</tr>
-	@if ($expected_checkin)
+	@if isset($expected_checkin)
 		<tr>
 			<td>
 				Expected Checkin Date:
@@ -53,7 +53,7 @@
 			</td>
 		</tr>
 	@endif
-	@if ($note)
+	@if isset($note)
 		<tr>
 			<td>
 				Additional Notes:
