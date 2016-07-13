@@ -21,8 +21,16 @@
         </div>
       </div>
       <div class="box-body">
+
+
+
+
+
         <div class="table-responsive">
           <table class="table table-striped">
+
+
+
               <tbody>
                   @foreach ($settings as $setting)
                   <tr>
@@ -147,6 +155,24 @@
                           <td>{{ trans('general.no') }}</td>
                       @endif
                   </tr>
+                  @if ($setting->ldap_enabled == 1)
+                  <tr id="ldaptestrow">
+                      <td class="col-md-4">Test LDAP Connection</td>
+                      <td class="col-md-8">
+
+                         <a class="btn btn-default btn-sm pull-left" id="ldaptest" style="margin-right: 10px;"> Test LDAP</a>
+
+                          <span id="ldaptesticon">
+                          </span>
+                          <span id="ldaptestresult">
+                          </span>
+                          <span id="ldapteststatus">
+                          </span>
+                      </td>
+                  </tr>
+                  @endif
+
+
                   @endforeach
               </tbody>
           </table>
@@ -215,5 +241,41 @@
             </div>
         </div>
     </div>
+@section('moar_scripts')
 
+
+        <script>
+            $("#ldaptest").click(function(){
+                $("#ldaptestrow").removeClass('success');
+                $("#ldaptestrow").removeClass('danger');
+                $.ajax({
+                    url: '{{ route('settings/ldaptest') }}',
+                    type: 'GET',
+                    data: {},
+                    dataType: 'json',
+
+                    success: function (data) {
+                        // console.dir(data);
+                        //console.log(data.responseJSON.message);
+                        $("#ldaptestrow").addClass('success');
+                        $("#ldapteststatus").html('<i class="fa fa-check text-success"></i>It worked!');
+                        //$('#ldapteststatus').html('<i class="fa fa-check text-success"></i>');
+                    },
+
+                    error: function (data) {
+                        //console.dir(data);
+                        //console.log(data.responseJSON.message);
+                        $("#ldaptestrow").addClass('danger');
+                        $("#ldaptesticon").html('<i class="fa fa-exclamation-triangle text-danger"></i>');
+                        $('#ldapteststatus').text(data.responseJSON.message);
+                    }
+
+
+                });
+            });
+
+
+
+        </script>
+@stop
 @stop
