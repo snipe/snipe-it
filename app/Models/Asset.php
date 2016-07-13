@@ -13,6 +13,7 @@ use Watson\Validating\ValidatingTrait;
 use DateTime;
 use App\Models\Setting;
 use App\Helpers\Helper;
+use Auth;
 
 /**
  * Model for Assets.
