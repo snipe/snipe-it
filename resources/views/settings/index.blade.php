@@ -248,6 +248,8 @@
             $("#ldaptest").click(function(){
                 $("#ldaptestrow").removeClass('success');
                 $("#ldaptestrow").removeClass('danger');
+                $("#ldapteststatus").html('');
+                $("#ldaptesticon").html('<i class="fa fa-spinner spin"></i>');
                 $.ajax({
                     url: '{{ route('settings/ldaptest') }}',
                     type: 'GET',
@@ -257,14 +259,16 @@
                     success: function (data) {
                         // console.dir(data);
                         //console.log(data.responseJSON.message);
+                        $("#ldaptesticon").html('');
                         $("#ldaptestrow").addClass('success');
-                        $("#ldapteststatus").html('<i class="fa fa-check text-success"></i>It worked!');
+                        $("#ldapteststatus").html('<i class="fa fa-check text-success"></i> It worked!');
                         //$('#ldapteststatus').html('<i class="fa fa-check text-success"></i>');
                     },
 
                     error: function (data) {
                         //console.dir(data);
                         //console.log(data.responseJSON.message);
+                        $("#ldaptesticon").html('');
                         $("#ldaptestrow").addClass('danger');
                         $("#ldaptesticon").html('<i class="fa fa-exclamation-triangle text-danger"></i>');
                         $('#ldapteststatus').text(data.responseJSON.message);
