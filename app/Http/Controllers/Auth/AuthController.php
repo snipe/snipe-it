@@ -56,9 +56,47 @@ class AuthController extends Controller
             return redirect()->intended('dashboard');
         }
 
-      // Show the page
+        if(getenv('OIDC_CLAIM_upn')) {
+            if($this->loginRemoteUser(getenv('OIDC_CLAIM_upn'))){
+                $redirect = \Session::get('loginRedirect', 'dashboard');
+                // Unset the page we were before from the session
+                \Session::forget('loginRedirect');
+
+                // Redirect to the users page
+                return redirect()->to($redirect)->with('success', trans('auth/message.signin.success'));
+            }
+        }
+        // Show the page
         return View::make('auth.login');
     }
+
+
+    /**
+     * Authenticates a user via Remote_USER
+     *
+     * @param $username
+     * @return bool true    if the username is valid 
+     *              false   if the username is invalud
+     */
+    function loginRemoteUser($username){
+        try {
+            $user = User::where('username', '=', $username)->whereNull('deleted_at')->first();
+            if(!$user) {
+                return false;
+            }
+            // Log the user in
+            Auth::login($user,false);        
+            LOG::info("Login complete as $username");
+            return true;
+        } catch (Exception $e) {
+           LOG::error($e->getMessage());
+           return false;
+        }
+    }
+
+
+
+
 
 
     /**
@@ -252,6 +290,9 @@ class AuthController extends Controller
      */
     public function logout()
     {
+        if(getenv('OIDC_CLAIM_upn')){
+                return redirect()->route('home')->with('error', 'You must log out of SSO to log out of snipeit.');
+        }
         // Log the user out
         Auth::logout();
 
