@@ -67,7 +67,13 @@ class Ldap extends Model
         $connection = Ldap::connectToLdap();
 
         $ldap_username_field     = Setting::getSettings()->ldap_username_field;
-        $baseDn      = $ldap_username_field.'='.$username.','.Setting::getSettings()->ldap_basedn;
+
+        if (Setting::getSettings()->is_ad=='1') {
+            $baseDn      = $username;
+        } else {
+            $baseDn      = $ldap_username_field.'='.$username.','.Setting::getSettings()->ldap_basedn;
+        }
+
         $filterQuery = Setting::getSettings()->ldap_auth_filter_query . $username;
 
         if (!$ldapbind = @ldap_bind($connection, $baseDn, $password)) {

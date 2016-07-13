@@ -398,6 +398,7 @@ class SettingsController extends Controller
         $setting->slack_botname = e(Input::get('slack_botname'));
         $setting->ldap_enabled = e(Input::get('ldap_enabled', '0'));
         $setting->ldap_server = e(Input::get('ldap_server'));
+        $setting->is_ad = e(Input::get('is_ad', '0'));
         $setting->ldap_server_cert_ignore = e(Input::get('ldap_server_cert_ignore', false));
         $setting->ldap_uname = e(Input::get('ldap_uname'));
         if (Input::has('ldap_pword')) {

@@ -676,6 +676,21 @@
                 </div>
               </div>
 
+
+              <!-- Full Multiple Companies Support -->
+              <div class="form-group {{ $errors->has('full_multiple_companies_support') ? 'error' : '' }}">
+                <div class="col-md-3">
+                  {{ Form::label('is_ad','Active Directory') }}
+                </div>
+                <div class="col-md-9">
+                  {{ Form::checkbox('is_ad', '1', Input::old('is_ad', $setting->is_ad),array('class' => 'minimal')) }}
+
+                  {!! $errors->first('is_ad', '<span class="alert-msg">:message</span>') !!}
+
+                </div>
+              </div>
+              <!-- /.form-group -->
+
               <!-- LDAP Server -->
               <div class="form-group {{ $errors->has('ldap_server') ? 'error' : '' }}">
                   <div class="col-md-3">
