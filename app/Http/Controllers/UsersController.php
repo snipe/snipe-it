@@ -1098,7 +1098,7 @@ class UsersController extends Controller
     * @since [v1.8]
     * @return View
     */
-    public function getLDAP(Request $request)
+    public function getLDAP()
     {
 
         $location_list = Helper::locationsList();
@@ -1113,7 +1113,6 @@ class UsersController extends Controller
         try {
             Ldap::bindAdminToLdap($ldapconn);
         } catch (\Exception $e) {
-            //$request->session()->flash('error', $e->getMessage());
             return redirect()->route('users')->with('error',$e->getMessage());
         }
 
@@ -1172,7 +1171,7 @@ class UsersController extends Controller
         }
 
         try {
-            $ldap_bind = Ldap::bindAdminToLdap($ldapconn);
+            Ldap::bindAdminToLdap($ldapconn);
         } catch (\Exception $e) {
             return redirect()->back()->withInput()->with('error',$e->getMessage());
         }
