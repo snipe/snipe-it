@@ -466,11 +466,18 @@ Route::group([ 'prefix' => 'admin','middleware' => ['web','auth']], function () 
         Route::group([ 'prefix' => 'app' ], function () {
 
             Route::post('purge', ['as' => 'purge', 'uses' => 'SettingsController@postPurge']);
-
-            Route::get('/', [ 'as' => 'app', 'uses' => 'SettingsController@getIndex' ]);
             Route::get('edit', [ 'as' => 'edit/settings', 'uses' => 'SettingsController@getEdit' ]);
             Route::post('edit', 'SettingsController@postEdit');
+
+            Route::get('ldaptest', [
+                'as' => 'settings/ldaptest',
+                'uses' => 'SettingsController@getLdapTest'
+            ]);
+
+            Route::get('/', [ 'as' => 'app', 'uses' => 'SettingsController@getIndex' ]);
         });
+
+
 
         # Settings
         Route::group([ 'prefix' => 'backups', 'middleware' => 'auth' ], function () {
@@ -488,6 +495,8 @@ Route::group([ 'prefix' => 'admin','middleware' => ['web','auth']], function () 
                 'as' => 'settings/backups',
                 'uses' => 'SettingsController@postBackups'
             ]);
+
+
             Route::get('/', [ 'as' => 'settings/backups', 'uses' => 'SettingsController@getBackups' ]);
         });
 

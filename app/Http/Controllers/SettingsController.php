@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use Input;
 use Lang;
 use App\Models\Setting;
+use App\Models\Ldap;
 use Redirect;
 use DB;
 use Str;
@@ -424,6 +425,25 @@ class SettingsController extends Controller
 
         // Redirect to the setting management page
         return redirect()->to("admin/settings/app/edit")->with('error', trans('admin/settings/message.update.error'));
+
+    }
+
+
+    public function getLdapTest() {
+
+        try {
+            $connection = Ldap::connectToLdap();
+            try {
+                Ldap::bindAdminToLdap($connection);
+                return response()->json(['message' => 'It worked!'], 200);
+            } catch (\Exception $e) {
+                return response()->json(['message' => $e->getMessage()], 500);
+            }
+            return response()->json(['message' => 'It worked!'], 200);
+        } catch (\Exception $e) {
+            return response()->json(['message' => $e->getMessage()], 500);
+        }
+
 
     }
 
