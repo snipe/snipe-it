@@ -6,6 +6,7 @@ use Validator;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\ThrottlesLogins;
 use App\Models\Setting;
+use App\Models\Ldap;
 use App\Models\User;
 use Auth;
 use Config;
@@ -14,6 +15,8 @@ use Input;
 use Redirect;
 use Log;
 use View;
+
+
 
 /**
  * This controller handles authentication for the user, including local
@@ -61,120 +64,13 @@ class AuthController extends Controller
     }
 
 
-    /**
-     * Authenticates a user to LDAP
-     *
-     * @param $username
-     * @param $password
-     * @param bool|false $returnUser
-     * @return bool true    if the username and/or password provided are valid
-     *              false   if the username and/or password provided are invalid
-     *         array of ldap_attributes if $returnUser is true
-     */
-    function ldap($username, $password, $returnUser = false)
-    {
-
-        $ldaphost    = Setting::getSettings()->ldap_server;
-        $ldaprdn     = Setting::getSettings()->ldap_uname;
-        $ldappass    = \Crypt::decrypt(Setting::getSettings()->ldap_pword);
-        $baseDn      = Setting::getSettings()->ldap_basedn;
-        $filterQuery = Setting::getSettings()->ldap_auth_filter_query . $username;
-        $ldapversion = Setting::getSettings()->ldap_version;
-        $ldap_server_cert_ignore = Setting::getSettings()->ldap_server_cert_ignore;
-
-        // If we are ignoring the SSL cert we need to setup the environment variable
-        // before we create the connection
-        if ($ldap_server_cert_ignore) {
-            putenv('LDAPTLS_REQCERT=never');
-        }
-
-        // Connecting to LDAP
-        $connection = ldap_connect($ldaphost) or die("Could not connect to {$ldaphost}");
-        // Needed for AD
-        ldap_set_option($connection, LDAP_OPT_REFERRALS, 0);
-        ldap_set_option($connection, LDAP_OPT_PROTOCOL_VERSION, $ldapversion);
-
-        try {
-            if ($connection) {
-              // binding to ldap server
-                $ldapbind = ldap_bind($connection, $ldaprdn, $ldappass);
-                if (($results = @ldap_search($connection, $baseDn, $filterQuery)) != false) {
-                    $entry = ldap_first_entry($connection, $results);
-                    if (($userDn = @ldap_get_dn($connection, $entry)) != false) {
-                        if (($isBound = ldap_bind($connection, $userDn, $password)) == "true") {
-                            return $returnUser ?
-                            array_change_key_case(ldap_get_attributes($connection, $entry), CASE_LOWER)
-                            : true;
-                        }
-                    }
-                }
-            }
-        } catch (Exception $e) {
-            LOG::error($e->getMessage());
-        }
-           ldap_close($connection);
-            return false;
-    }
-
-    /**
-     * Create user from LDAP attributes
-     *
-     * @param $ldapatttibutes
-     * @return array|bool
-     */
-    function createUserFromLdap($ldapatttibutes)
-    {
-        //Get LDAP attribute config
-        $ldap_result_username = Setting::getSettings()->ldap_username_field;
-        $ldap_result_emp_num = Setting::getSettings()->ldap_emp_num;
-        $ldap_result_last_name = Setting::getSettings()->ldap_lname_field;
-        $ldap_result_first_name = Setting::getSettings()->ldap_fname_field;
-        $ldap_result_email = Setting::getSettings()->ldap_email;
-
-        //Get LDAP user data
-        $item = array();
-        $item["username"] = isset($ldapatttibutes[$ldap_result_username][0]) ? $ldapatttibutes[$ldap_result_username][0] : "";
-        $item["employee_number"] = isset($ldapatttibutes[$ldap_result_emp_num][0]) ? $ldapatttibutes[$ldap_result_emp_num][0] : "";
-        $item["lastname"] = isset($ldapatttibutes[$ldap_result_last_name][0]) ? $ldapatttibutes[$ldap_result_last_name][0] : "";
-        $item["firstname"] = isset($ldapatttibutes[$ldap_result_first_name][0]) ? $ldapatttibutes[$ldap_result_first_name][0] : "";
-        $item["email"] = isset($ldapatttibutes[$ldap_result_email][0]) ? $ldapatttibutes[$ldap_result_email][0] : "" ;
-
-        //create user
-        if (!empty($item["username"])) {
-            //$pass = substr(str_shuffle("0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"), 0, 10);
-
-            $newuser = array(
-              'first_name' => $item["firstname"],
-              'last_name' => $item["lastname"],
-              'username' => $item["username"],
-              'email' => $item["email"],
-              'employee_num' => $item["employee_number"],
-              'password' => bcrypt(Input::get("password")), //$pass,
-              'activated' => 1,
-              'permissions' => ["user" => 1], //'{"user":1}',
-              'notes' => 'Imported from LDAP'
-            );
-            User::save($newuser);
-
-        } else {
-            throw new Cartalyst\Sentry\Users\UserNotFoundException();
-        }
-
-        //$item["note"] = "<strong>created</strong>";
-        $credentials = array(
-            'username' => $item["username"],
-            'password' => Input::get("password")//$pass,
-        );
-        return $credentials;
-    }
-
 
     /**
      * Account sign in form processing.
      *
      * @return Redirect
      */
-    public function login()
+    public function login(Request $request)
     {
         $validator = $this->validator(Input::all());
 
@@ -186,21 +82,43 @@ class AuthController extends Controller
         if (Setting::getSettings()->ldap_enabled=='1') {
 
             LOG::debug("LDAP is enabled.");
-          // Check if the user exists in the database
+            // Check if the user exists in the database
             $user = User::where('username', '=', Input::get('username'))->whereNull('deleted_at')->first();
-            LOG::debug("Auth lookup complete");
+            LOG::debug("Local auth lookup complete");
+
+            try {
+                Ldap::findAndBindUserLdap($request->input('username'), $request->input('password'));
+                LOG::debug("Binding user to LDAP.");
+            } catch (\Exception $e) {
+                LOG::debug("User ".Input::get('username').' did not authenticate successfully against LDAP.');
+                //$ldap_error = $e->getMessage();
+                // return redirect()->back()->withInput()->with('error',$e->getMessage());
+            }
 
 
-          // The user does not exist in the database. Try to get them from LDAP.
-          // If user does not exist and authenticates sucessfully with LDAP we
-          // will create it on the fly and sign in with default permissions
+            // The user does not exist in the database. Try to get them from LDAP.
+            // If user does not exist and authenticates sucessfully with LDAP we
+            // will create it on the fly and sign in with default permissions
             if (!$user) {
                 LOG::debug("Local user ".Input::get('username')." does not exist");
-                if ($userattr = $this->ldap(Input::get('username'), Input::get('password'), true)) {
-                    LOG::debug("Creating local user from authenticated LDAP user.");
-                    $credentials = $this->createUserFromLdap($userattr);
-                } else {
-                    LOG::debug("User did not authenticate correctly against LDAP. No local user was created.");
+
+                try {
+
+                    if ($userattr = Ldap::findAndBindUserLdap($request->input('username'), $request->input('password'))) {
+                        LOG::debug("Creating local user ".Input::get('username'));
+
+                        if ($newuser = Ldap::createUserFromLdap($userattr)) {
+                            LOG::debug("Local user created..");
+                        } else {
+                            LOG::debug("Could not create local user.");
+                        }
+
+                    } else {
+                        LOG::debug("User did not authenticate correctly against LDAP. No local user was created.");
+                    }
+
+                } catch (\Exception $e) {
+                    return redirect()->back()->withInput()->with('error',$e->getMessage());
                 }
 
             // If the user exists and they were imported from LDAP already
@@ -208,15 +126,14 @@ class AuthController extends Controller
 
                 LOG::debug("Local user ".Input::get('username')." exists in database. Authenticating existing user against LDAP.");
 
-                if ($this->ldap(Input::get('username'), Input::get('password'))) {
+                if (Ldap::findAndBindUserLdap($request->input('username'), $request->input('password'))) {
                     LOG::debug("Valid LDAP login. Updating the local data.");
                     $user = User::find($user->id); //need the Sentry object, not the Eloquent object, to access critical password hashing functions
-                    $user->password = bcrypt(Input::get('password'));
-                    $user->ldap_import = 1;
+                    $user->password = bcrypt($request->input('password'));
                     $user->save();
 
                 } else {
-                    LOG::debug("User did not authenticate correctly against LDAP. Local user was not updated.");
+                    LOG::debug("User ".Input::get('username')." did not authenticate correctly against LDAP. Local user was not updated.");
                 }// End LDAP auth
 
             } // End if(!user)

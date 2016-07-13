@@ -15,6 +15,7 @@ use App\Models\Statuslabel;
 use App\Http\Requests\SaveUserRequest;
 use App\Http\Requests\UpdateUserRequest;
 use App\Models\User;
+use App\Models\Ldap;
 use Auth;
 use Config;
 use Crypt;
@@ -1097,24 +1098,27 @@ class UsersController extends Controller
     * @since [v1.8]
     * @return View
     */
-    public function getLDAP()
+    public function getLDAP(Request $request)
     {
-        // Get all the available groups
-        //s$groups = Sentry::getGroupProvider()->findAll();
-        // Selected groups
-        $selectedGroups = Input::old('groups', array());
-        // Get all the available permissions
-        $permissions = config('permissions');
-        //$this->encodeAllPermissions($permissions);
-        // Selected permissions
-        $selectedPermissions = Input::old('permissions', array('superuser' => -1));
-        //$this->encodePermissions($selectedPermissions);
 
         $location_list = Helper::locationsList();
 
-        // Show the page
-        return View::make('users/ldap', compact('groups', 'selectedGroups', 'permissions', 'selectedPermissions'))
-                        ->with('location_list', $location_list);
+        try {
+            $ldapconn = Ldap::connectToLdap();
+        } catch (\Exception $e) {
+            return redirect()->route('users')->with('error',$e->getMessage());
+        }
+
+
+        try {
+            Ldap::bindAdminToLdap($ldapconn);
+        } catch (\Exception $e) {
+            //$request->session()->flash('error', $e->getMessage());
+            return redirect()->route('users')->with('error',$e->getMessage());
+        }
+
+        return View::make('users/ldap')
+              ->with('location_list', $location_list);
 
     }
 
@@ -1150,15 +1154,6 @@ class UsersController extends Controller
         ini_set('max_execution_time', 600); //600 seconds = 10 minutes
         ini_set('memory_limit', '500M');
 
-        $location_id = e(Input::get('location_id'));
-
-        $ldap_version = Setting::getSettings()->ldap_version;
-        $url = Setting::getSettings()->ldap_server;
-        $username = Setting::getSettings()->ldap_uname;
-        $password = Crypt::decrypt(Setting::getSettings()->ldap_pword);
-        $base_dn = Setting::getSettings()->ldap_basedn;
-        $filter = Setting::getSettings()->ldap_filter;
-
         $ldap_result_username = Setting::getSettings()->ldap_username_field;
         $ldap_result_last_name = Setting::getSettings()->ldap_lname_field;
         $ldap_result_first_name = Setting::getSettings()->ldap_fname_field;
@@ -1166,77 +1161,25 @@ class UsersController extends Controller
         $ldap_result_active_flag = Setting::getSettings()->ldap_active_flag_field;
         $ldap_result_emp_num = Setting::getSettings()->ldap_emp_num;
         $ldap_result_email = Setting::getSettings()->ldap_email;
-        $ldap_server_cert_ignore = Setting::getSettings()->ldap_server_cert_ignore;
 
-        // If we are ignoring the SSL cert we need to setup the environment variable
-        // before we create the connection
-        if ($ldap_server_cert_ignore) {
-            putenv('LDAPTLS_REQCERT=never');
+
+        $location_id = e(Input::get('location_id'));
+
+        try {
+            $ldapconn = Ldap::connectToLdap();
+        } catch (\Exception $e) {
+            return redirect()->back()->withInput()->with('error',$e->getMessage());
         }
 
-        // Connect to LDAP server
-        $ldapconn = @ldap_connect($url);
-
-        // Needed for AD
-        ldap_set_option($ldapconn, LDAP_OPT_REFERRALS, 0);
-
-        if (!$ldapconn) {
-            return redirect()->route('users')->with('error', trans('admin/users/message.error.ldap_could_not_connect'));
+        try {
+            $ldap_bind = Ldap::bindAdminToLdap($ldapconn);
+        } catch (\Exception $e) {
+            return redirect()->back()->withInput()->with('error',$e->getMessage());
         }
-
-        // Set options
-        $ldapopt = @ldap_set_option($ldapconn, LDAP_OPT_PROTOCOL_VERSION, $ldap_version);
-        if (!$ldapopt) {
-            return redirect()->route('users')->with('error', trans('admin/users/message.error.ldap_could_not_connect'));
-        }
-
-        // Binding to ldap server
-        $ldapbind = @ldap_bind($ldapconn, $username, $password);
-
-        Log::error(ldap_errno($ldapconn));
-        if (!$ldapbind) {
-            return redirect()->route('users')->with('error', trans('admin/users/message.error.ldap_could_not_bind').ldap_error($ldapconn));
-        }
-
-        // Set up LDAP pagination for very large databases
-        // @author Richard Hofman
-        $page_size = 500;
-        $cookie = '';
-        $result_set = array();
-        $global_count = 0;
-
-        // Perform the search
-        do {
-            // Paginate (non-critical, if not supported by server)
-            ldap_control_paged_result($ldapconn, $page_size, false, $cookie);
-
-                $search_results = ldap_search($ldapconn, $base_dn, '('.$filter.')');
-
-            if (!$search_results) {
-                return redirect()->route('users')->with('error', trans('admin/users/message.error.ldap_could_not_search').ldap_error($ldapconn));
-            }
-
-                // Get results from page
-                $results = ldap_get_entries($ldapconn, $search_results);
-            if (!$results) {
-                return redirect()->route('users')->with('error', trans('admin/users/message.error.ldap_could_not_get_entries').ldap_error($ldapconn));
-            }
-
-            // Add results to result set
-            $global_count += $results['count'];
-            $result_set = array_merge($result_set, $results);
-
-            ldap_control_paged_result_response($ldapconn, $search_results, $cookie);
-
-        } while ($cookie !== null && $cookie != '');
-
-
-        // Clean up after search
-        $result_set['count'] = $global_count;
-        $results = $result_set;
-        ldap_control_paged_result($ldapconn, 0);
 
         $summary = array();
+
+        $results = Ldap::findLdapUsers();
 
         for ($i = 0; $i < $results["count"]; $i++) {
             if (empty($ldap_result_active_flag) || $results[$i][$ldap_result_active_flag][0] == "TRUE") {
