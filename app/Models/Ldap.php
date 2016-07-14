@@ -73,7 +73,7 @@ class Ldap extends Model
         {
 
             // In case they haven't added an AD domain
-            if ($settings->ad_domain ='') {
+            if ($settings->ad_domain == '') {
                 $userDn      = $username.'@'.$settings->email_domain;
             } else {
                $userDn      = $username.'@'.$settings->ad_domain;
