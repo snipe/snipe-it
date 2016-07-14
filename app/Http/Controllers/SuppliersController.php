@@ -104,6 +104,9 @@ class SuppliersController extends Controller
 
     public function store()
     {
+        // get the POST data
+        $new = Input::all();
+
         $supplier=new Supplier;
         $supplier->name=$new['name'];
         $supplier->user_id              = Auth::user()->id;
