@@ -67,16 +67,24 @@ class Ldap extends Model
         $connection = Ldap::connectToLdap();
 
         $ldap_username_field     = Setting::getSettings()->ldap_username_field;
+        $baseDn      = Setting::getSettings()->ldap_basedn;
 
         if (Setting::getSettings()->is_ad=='1') {
-            $baseDn      = $username;
+
+            // In case they haven't added an AD domain
+            if (Setting::getSettings()->ad_domain='') {
+                $userDn      = $username.'@'.Setting::getSettings()->email_domain;
+            } else {
+                $userDn      = $username.'@'.Setting::getSettings()->ad_domain;
+            }
+
         } else {
-            $baseDn      = $ldap_username_field.'='.$username.','.Setting::getSettings()->ldap_basedn;
+            $userDn      = $ldap_username_field.'='.$username.','.Setting::getSettings()->ldap_basedn;
         }
 
         $filterQuery = Setting::getSettings()->ldap_auth_filter_query . $username;
 
-        if (!$ldapbind = @ldap_bind($connection, $baseDn, $password)) {
+        if (!$ldapbind = @ldap_bind($connection, $userDn, $password)) {
             return false;
         }
 

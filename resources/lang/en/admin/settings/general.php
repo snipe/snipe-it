@@ -1,6 +1,10 @@
 <?php
 
 return array(
+    'ad'				        => 'Active Directory',
+    'ad_domain'				    => 'Active Directory domain',
+    'ad_domain_help'			=> 'This is sometimes the same as your email domain, but not always.',
+    'is_ad'				        => 'This is an Active Directory server',
 	'alert_email'				=> 'Send alerts to',
 	'alerts_enabled'			=> 'Alerts Enabled',
 	'alert_interval'			=> 'Expiring Alerts Threshold (in days)',
@@ -37,6 +41,7 @@ return array(
     'ldap_integration'          => 'LDAP Integration',
     'ldap_settings'             => 'LDAP Settings',
     'ldap_server'               => 'LDAP Server',
+    'ldap_server_help'          => 'This should start with ldap:// or ldaps://',
 	'ldap_server_cert'			=> 'LDAP SSL certificate validation',
 	'ldap_server_cert_ignore'	=> 'Allow invalid SSL Certificate',
 	'ldap_server_cert_help'		=> 'Select this checkbox if you are using a self signed SSL cert and would like to accept an invalid SSL certificate.',

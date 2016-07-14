@@ -677,19 +677,39 @@
               </div>
 
 
-              <!-- Full Multiple Companies Support -->
-              <div class="form-group {{ $errors->has('full_multiple_companies_support') ? 'error' : '' }}">
+              <!-- AD Flag -->
+              <div class="form-group">
                 <div class="col-md-3">
-                  {{ Form::label('is_ad','Active Directory') }}
+                  {{ Form::label('is_ad', trans('admin/settings/general.ad')) }}
                 </div>
                 <div class="col-md-9">
                   {{ Form::checkbox('is_ad', '1', Input::old('is_ad', $setting->is_ad),array('class' => 'minimal')) }}
-
+                  {{ trans('admin/settings/general.is_ad') }}
                   {!! $errors->first('is_ad', '<span class="alert-msg">:message</span>') !!}
 
                 </div>
               </div>
               <!-- /.form-group -->
+
+              <!-- AD Domain -->
+              <div class="form-group {{ $errors->has('ad_domain') ? 'error' : '' }}">
+                <div class="col-md-3">
+                  {{ Form::label('ldap_server', trans('admin/settings/general.ad_domain')) }}
+                </div>
+                <div class="col-md-9">
+                  @if (config('app.lock_passwords')===true)
+                    {{ Form::text('ad_domain', Input::old('ad_domain', $setting->ad_domain), array('class' => 'form-control', 'disabled'=>'disabled','placeholder' => 'example.com')) }}
+                  @else
+                    {{ Form::text('ad_domain', Input::old('ldap_server', $setting->ad_domain), array('class' => 'form-control','placeholder' => 'example.com')) }}
+                  @endif
+
+                    <p class="help-block">{{ trans('admin/settings/general.ad_domain_help') }}</p>
+
+
+                    {!! $errors->first('ad_domain', '<span class="alert-msg">:message</span>') !!}
+                </div>
+              </div><!-- LDAP Server -->
+
 
               <!-- LDAP Server -->
               <div class="form-group {{ $errors->has('ldap_server') ? 'error' : '' }}">
@@ -702,7 +722,7 @@
                     @else
                       {{ Form::text('ldap_server', Input::old('ldap_server', $setting->ldap_server), array('class' => 'form-control','placeholder' => 'ldap://ldap.example.com')) }}
                     @endif
-
+                      <p class="help-block">{{ trans('admin/settings/general.ldap_server_help') }}</p>
                     {!! $errors->first('ldap_server', '<span class="alert-msg">:message</span>') !!}
                   </div>
               </div><!-- LDAP Server -->

@@ -398,7 +398,6 @@ class SettingsController extends Controller
         $setting->slack_botname = e(Input::get('slack_botname'));
         $setting->ldap_enabled = e(Input::get('ldap_enabled', '0'));
         $setting->ldap_server = e(Input::get('ldap_server'));
-        $setting->is_ad = e(Input::get('is_ad', '0'));
         $setting->ldap_server_cert_ignore = e(Input::get('ldap_server_cert_ignore', false));
         $setting->ldap_uname = e(Input::get('ldap_uname'));
         if (Input::has('ldap_pword')) {
@@ -414,6 +413,8 @@ class SettingsController extends Controller
         $setting->ldap_active_flag = e(Input::get('ldap_active_flag'));
         $setting->ldap_emp_num = e(Input::get('ldap_emp_num'));
         $setting->ldap_email = e(Input::get('ldap_email'));
+        $setting->ad_domain = e(Input::get('ad_domain'));
+        $setting->is_ad = e(Input::get('is_ad', '0'));
 
         // If validation fails, we'll exit the operation now.
         if ($setting->save()) {
