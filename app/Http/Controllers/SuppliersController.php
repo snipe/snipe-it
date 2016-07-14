@@ -11,6 +11,7 @@ use App\Models\Setting;
 use Str;
 use View;
 use Auth;
+use Illuminate\Http\Request;
 
 use Symfony\Component\HttpFoundation\JsonResponse;
 
@@ -102,10 +103,10 @@ class SuppliersController extends Controller
 
     }
 
-    public function store()
+    public function store(Request $request)
     {
-        $supplier=new Supplier;
-        $supplier->name=$new['name'];
+        $supplier = new Supplier;
+        $supplier->name =  e($request->input('name'));
         $supplier->user_id              = Auth::user()->id;
 
         if ($supplier->save()) {
