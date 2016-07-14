@@ -62,27 +62,29 @@ class Ldap extends Model
      *         array of ldap_attributes if $user is true
      *
      */
-    static function findAndBindUserLdap($username, $password) {
-
+    static function findAndBindUserLdap($username, $password)
+    {
+        $settings = Setting::getSettings();
         $connection = Ldap::connectToLdap();
+        $ldap_username_field     = $settings->ldap_username_field;
+        $baseDn      = $settings->ldap_basedn;
 
-        $ldap_username_field     = Setting::getSettings()->ldap_username_field;
-        $baseDn      = Setting::getSettings()->ldap_basedn;
-
-        if (Setting::getSettings()->is_ad=='1') {
+        if ($settings->is_ad =='1')
+        {
 
             // In case they haven't added an AD domain
-            if (Setting::getSettings()->ad_domain='') {
-                $userDn      = $username.'@'.Setting::getSettings()->email_domain;
+            if ($settings->ad_domain ='') {
+                $userDn      = $username.'@'.$settings->email_domain;
             } else {
-                $userDn      = $username.'@'.Setting::getSettings()->ad_domain;
+               $userDn      = $username.'@'.$settings->ad_domain;
             }
 
         } else {
-            $userDn      = $ldap_username_field.'='.$username.','.Setting::getSettings()->ldap_basedn;
+            $userDn      = $ldap_username_field.'='.$username.','.$settings->ldap_basedn;
         }
 
-        $filterQuery = Setting::getSettings()->ldap_auth_filter_query . $username;
+
+        $filterQuery = $settings->ldap_auth_filter_query . $username;
 
         if (!$ldapbind = @ldap_bind($connection, $userDn, $password)) {
             return false;
@@ -116,7 +118,8 @@ class Ldap extends Model
      *              false   if the username and/or password provided are invalid
      *
      */
-    static function bindAdminToLdap($connection) {
+    static function bindAdminToLdap($connection)
+    {
 
         $ldap_username     = Setting::getSettings()->ldap_uname;
 

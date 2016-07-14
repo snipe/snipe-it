@@ -694,13 +694,13 @@
               <!-- AD Domain -->
               <div class="form-group {{ $errors->has('ad_domain') ? 'error' : '' }}">
                 <div class="col-md-3">
-                  {{ Form::label('ldap_server', trans('admin/settings/general.ad_domain')) }}
+                  {{ Form::label('ad_domain', trans('admin/settings/general.ad_domain')) }}
                 </div>
                 <div class="col-md-9">
                   @if (config('app.lock_passwords')===true)
                     {{ Form::text('ad_domain', Input::old('ad_domain', $setting->ad_domain), array('class' => 'form-control', 'disabled'=>'disabled','placeholder' => 'example.com')) }}
                   @else
-                    {{ Form::text('ad_domain', Input::old('ldap_server', $setting->ad_domain), array('class' => 'form-control','placeholder' => 'example.com')) }}
+                    {{ Form::text('ad_domain', Input::old('ad_domain', $setting->ad_domain), array('class' => 'form-control','placeholder' => 'example.com')) }}
                   @endif
 
                     <p class="help-block">{{ trans('admin/settings/general.ad_domain_help') }}</p>
