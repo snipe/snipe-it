@@ -714,7 +714,7 @@ class Asset extends Depreciable
   */
     public function scopeAccepted($query)
     {
-        return $uery->where("accepted", "=", "accepted");
+        return $query->where("accepted", "=", "accepted");
     }
 
 
