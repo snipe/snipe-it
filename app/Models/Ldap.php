@@ -139,14 +139,16 @@ class Ldap extends Model
     }
 
 
-
     /**
-     * Create user from LDAP attributes
+     * Parse and map LDAP attributes based on settings
+     *
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @since [v3.0]
      *
      * @param $ldapatttibutes
      * @return array|bool
      */
-    static function createUserFromLdap($ldapatttibutes)
+    static function parseAndMapLdapAttributes($ldapatttibutes)
     {
         //Get LDAP attribute config
         $ldap_result_username = Setting::getSettings()->ldap_username_field;
@@ -163,22 +165,43 @@ class Ldap extends Model
         $item["firstname"] = isset($ldapatttibutes[$ldap_result_first_name][0]) ? $ldapatttibutes[$ldap_result_first_name][0] : "";
         $item["email"] = isset($ldapatttibutes[$ldap_result_email][0]) ? $ldapatttibutes[$ldap_result_email][0] : "" ;
 
+        return $item;
+
+
+    }
+
+    /**
+     * Create user from LDAP attributes
+     *
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @since [v3.0]
+     * @param $ldapatttibutes
+     * @return array|bool
+     */
+    static function createUserFromLdap($ldapatttibutes)
+    {
+        $item = Ldap::parseAndMapLdapAttributes($ldapatttibutes);
+
         // Create user from LDAP data
         if (!empty($item["username"])) {
-            $newuser = new User;
-            $newuser->first_name = $item["firstname"];
-            $newuser->last_name = $item["lastname"];
-            $newuser->username = $item["username"];
-            $newuser->email = $item["email"];
-            $newuser->password = bcrypt(Input::get("password"));
-            $newuser->activated = 1;
-            $newuser->ldap_import = 1;
-            $newuser->notes = 'Imported on first login from LDAP';
-            //dd($newuser);
-            if ($newuser->save()) {
+
+            if (!$user) {
+                $user = new User;
+            }
+
+            $user->first_name = $item["firstname"];
+            $user->last_name = $item["lastname"];
+            $user->username = $item["username"];
+            $user->email = $item["email"];
+            $user->password = bcrypt(Input::get("password"));
+            $user->activated = 1;
+            $user->ldap_import = 1;
+            $user->notes = 'Imported on first login from LDAP';
+
+            if ($user->save()) {
                 return true;
             } else {
-                LOG::debug('Could not create user.'.$newuser->getErrors());
+                LOG::debug('Could not create user.'.$user->getErrors());
                 exit;
             }
         }
@@ -187,6 +210,14 @@ class Ldap extends Model
 
     }
 
+    /**
+     * Searches LDAP
+     *
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @since [v3.0]
+     * @param $ldapatttibutes
+     * @return array|bool
+     */
     static function findLdapUsers() {
 
         $ldapconn = Ldap::connectToLdap();

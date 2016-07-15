@@ -1209,7 +1209,6 @@ class UsersController extends Controller
                 $user->password = bcrypt($pass);
                 $user->activated = 1;
                 $user->location_id = e($location_id);
-                $user->permissions = '{"user":1}';
                 $user->notes = 'Imported from LDAP';
                 $user->ldap_import = 1;
 
