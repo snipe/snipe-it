@@ -172,7 +172,6 @@ class Ldap extends Model
             $newuser->email = $item["email"];
             $newuser->password = bcrypt(Input::get("password"));
             $newuser->activated = 1;
-            $newuser->permissions = '{"user": 1}';
             $newuser->ldap_import = 1;
             $newuser->notes = 'Imported on first login from LDAP';
             //dd($newuser);
