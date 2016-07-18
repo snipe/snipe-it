@@ -44,7 +44,8 @@ function isinstalled {
 
 #  Lets find what distro we are using and what version
 if [ -f /etc/lsb-release ]; then
-    distro="$(lsb_release -s -i -r)"
+    distro="$(lsb_release -s -i)"
+    version="$(lsb_release -s -r)"
 elif [ -f /etc/os-release ]; then
     distro="$(. /etc/os-release && echo $ID $VERSION_ID)"
     version="$(. /etc/os-release && echo $VERSION_ID)"
