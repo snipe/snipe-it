@@ -137,13 +137,13 @@
                     // We use this instead of the fail option, since our API
                     // returns a 200 OK status which always shows as "success"
 
-                    if (data && data.jqXHR.responseJSON.error && data.jqXHR.responseJSON && data.jqXHR.responseJSON.error) {
+                    if (data && data.jqXHR.responseJSON && data.jqXHR.responseJSON.error) {
                         $('#progress-bar-text').html(data.jqXHR.responseJSON.error);
                         $('.progress-bar').removeClass('progress-bar-warning').addClass('progress-bar-danger').css('width','100%');
                         $('.progress-checkmark').fadeIn('fast').html('<i class="fa fa-times fa-3x icon-white" style="color: #d9534f"></i>');
                         //console.log(data.jqXHR.responseJSON.error);
                     } else {
-                        $('.progress-bar').removeClass('progress-bar-warning').addClass('progress-bar-success').css('width','100%');
+                        $('.progress-bar').removeClass('progress-bar-warning').removeClass('progress-bar-danger').addClass('progress-bar-success').css('width','100%');
                         $('.progress-checkmark').fadeIn('fast');
                         $('#progress-container').delay(950).css('visibility', 'visible');
                         $('.progress-bar-text').html('Finished!');
