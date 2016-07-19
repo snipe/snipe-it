@@ -184,7 +184,6 @@ class Ldap extends Model
 
         // Create user from LDAP data
         if (!empty($item["username"])) {
-
             $user = new User;
             $user->first_name = $item["firstname"];
             $user->last_name = $item["lastname"];

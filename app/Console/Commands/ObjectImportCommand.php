@@ -341,7 +341,7 @@ class ObjectImportCommand extends Command
                 $this->log('Asset Model ' . $asset_model_name . ' with model number ' . $asset_modelno . ' was created');
                 return $asset_model;
             } else {
-                $this->jsonError('Asset Model ' . $asset_model_name, $asset_model->getErrors());
+                $this->jsonError('Asset Model "' . $asset_model_name . '"', $asset_model->getErrors());
                 return $asset_model;
             }
         } else {
@@ -388,7 +388,7 @@ class ObjectImportCommand extends Command
                 $this->log('Category ' . $asset_category . ' was created');
                 return $category;
             } else {
-                $this->jsonError('Category '. $asset_category, $category->getErrors());
+                $this->jsonError('Category "'. $asset_category. '"', $category->getErrors());
                 return $category;
             }
         } else {
@@ -463,7 +463,7 @@ class ObjectImportCommand extends Command
                 $this->log('Status ' . $asset_statuslabel_name . ' was created');
                 return $status;
             } else {
-                $this->jsonError('Status '. $asset_statuslabel_name, $status->getErrors());
+                $this->jsonError('Status "'. $asset_statuslabel_name . '"', $status->getErrors());
                 return $status;
             }
         } else {
@@ -512,7 +512,7 @@ class ObjectImportCommand extends Command
                 $this->log('Manufacturer ' . $manufacturer->name . ' was created');
                 return $manufacturer;
             } else {
-                $this->jsonError('Manufacturer '. $manufacturer->name, $manufacturer->getErrors());
+                $this->jsonError('Manufacturer "'. $manufacturer->name . '"', $manufacturer->getErrors());
                 return $manufacturer;
             }
 
@@ -696,7 +696,7 @@ class ObjectImportCommand extends Command
                 if ($user->save()) {
                     $this->log('User '.$first_name.' created');
                 } else {
-                    $this->jsonError('User', $user->getErrors());
+                    $this->jsonError('User "' . $first_name . '"', $user->getErrors());
                 }
 
             } else {
