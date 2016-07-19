@@ -4,25 +4,25 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "17edcfcd319a08ff70ceced7a8eba93a",
-    "content-hash": "825bf05d61eea6d7b2f63ccd3dc7adf0",
+    "hash": "bf63c53f99a010e882f5c4b797e9f098",
+    "content-hash": "47c6ecb6331ff36a3e58ca8ddac195f8",
     "packages": [
         {
             "name": "aws/aws-sdk-php",
-            "version": "3.18.28",
+            "version": "3.18.30",
             "source": {
                 "type": "git",
                 "url": "https://github.com/aws/aws-sdk-php.git",
-                "reference": "c75d3ba185d5db6998124fa1a99a63e5d529b247"
+                "reference": "fbce85229b913a9e1aded54e464a9bbff0787bf1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/c75d3ba185d5db6998124fa1a99a63e5d529b247",
-                "reference": "c75d3ba185d5db6998124fa1a99a63e5d529b247",
+                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/fbce85229b913a9e1aded54e464a9bbff0787bf1",
+                "reference": "fbce85229b913a9e1aded54e464a9bbff0787bf1",
                 "shasum": ""
             },
             "require": {
-                "guzzlehttp/guzzle": "~5.3|~6.0.1|~6.1",
+                "guzzlehttp/guzzle": "^5.3.1|^6.2.1",
                 "guzzlehttp/promises": "~1.0",
                 "guzzlehttp/psr7": "~1.3.1",
                 "mtdowling/jmespath.php": "~2.2",
@@ -85,7 +85,7 @@
                 "s3",
                 "sdk"
             ],
-            "time": "2016-07-13 20:34:06"
+            "time": "2016-07-18 16:15:53"
         },
         {
             "name": "aws/aws-sdk-php-laravel",
@@ -843,21 +843,22 @@
         },
         {
             "name": "guzzlehttp/guzzle",
-            "version": "5.3.0",
+            "version": "6.2.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/guzzle/guzzle.git",
-                "reference": "f3c8c22471cb55475105c14769644a49c3262b93"
+                "reference": "3f808fba627f2c5b69e2501217bf31af349c1427"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/guzzle/guzzle/zipball/f3c8c22471cb55475105c14769644a49c3262b93",
-                "reference": "f3c8c22471cb55475105c14769644a49c3262b93",
+                "url": "https://api.github.com/repos/guzzle/guzzle/zipball/3f808fba627f2c5b69e2501217bf31af349c1427",
+                "reference": "3f808fba627f2c5b69e2501217bf31af349c1427",
                 "shasum": ""
             },
             "require": {
-                "guzzlehttp/ringphp": "^1.1",
-                "php": ">=5.4.0"
+                "guzzlehttp/promises": "^1.0",
+                "guzzlehttp/psr7": "^1.3.1",
+                "php": ">=5.5"
             },
             "require-dev": {
                 "ext-curl": "*",
@@ -867,10 +868,13 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "5.0-dev"
+                    "dev-master": "6.2-dev"
                 }
             },
             "autoload": {
+                "files": [
+                    "src/functions_include.php"
+                ],
                 "psr-4": {
                     "GuzzleHttp\\": "src/"
                 }
@@ -886,7 +890,7 @@
                     "homepage": "https://github.com/mtdowling"
                 }
             ],
-            "description": "Guzzle is a PHP HTTP client library and framework for building RESTful web service clients",
+            "description": "Guzzle is a PHP HTTP client library",
             "homepage": "http://guzzlephp.org/",
             "keywords": [
                 "client",
@@ -897,7 +901,7 @@
                 "rest",
                 "web service"
             ],
-            "time": "2015-05-20 03:47:55"
+            "time": "2016-07-15 17:22:37"
         },
         {
             "name": "guzzlehttp/promises",
@@ -1007,107 +1011,6 @@
                 "uri"
             ],
             "time": "2016-06-24 23:00:38"
-        },
-        {
-            "name": "guzzlehttp/ringphp",
-            "version": "1.1.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/guzzle/RingPHP.git",
-                "reference": "dbbb91d7f6c191e5e405e900e3102ac7f261bc0b"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/guzzle/RingPHP/zipball/dbbb91d7f6c191e5e405e900e3102ac7f261bc0b",
-                "reference": "dbbb91d7f6c191e5e405e900e3102ac7f261bc0b",
-                "shasum": ""
-            },
-            "require": {
-                "guzzlehttp/streams": "~3.0",
-                "php": ">=5.4.0",
-                "react/promise": "~2.0"
-            },
-            "require-dev": {
-                "ext-curl": "*",
-                "phpunit/phpunit": "~4.0"
-            },
-            "suggest": {
-                "ext-curl": "Guzzle will use specific adapters if cURL is present"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "1.1-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "GuzzleHttp\\Ring\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Michael Dowling",
-                    "email": "mtdowling@gmail.com",
-                    "homepage": "https://github.com/mtdowling"
-                }
-            ],
-            "description": "Provides a simple API and specification that abstracts away the details of HTTP into a single PHP function.",
-            "time": "2015-05-20 03:37:09"
-        },
-        {
-            "name": "guzzlehttp/streams",
-            "version": "3.0.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/guzzle/streams.git",
-                "reference": "47aaa48e27dae43d39fc1cea0ccf0d84ac1a2ba5"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/guzzle/streams/zipball/47aaa48e27dae43d39fc1cea0ccf0d84ac1a2ba5",
-                "reference": "47aaa48e27dae43d39fc1cea0ccf0d84ac1a2ba5",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.4.0"
-            },
-            "require-dev": {
-                "phpunit/phpunit": "~4.0"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "3.0-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "GuzzleHttp\\Stream\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Michael Dowling",
-                    "email": "mtdowling@gmail.com",
-                    "homepage": "https://github.com/mtdowling"
-                }
-            ],
-            "description": "Provides a simple abstraction over streams of data",
-            "homepage": "http://guzzlephp.org/",
-            "keywords": [
-                "Guzzle",
-                "stream"
-            ],
-            "time": "2014-10-12 19:18:40"
         },
         {
             "name": "intervention/image",
@@ -1558,16 +1461,16 @@
         },
         {
             "name": "league/flysystem",
-            "version": "1.0.24",
+            "version": "1.0.25",
             "source": {
                 "type": "git",
                 "url": "https://github.com/thephpleague/flysystem.git",
-                "reference": "9aca859a303fdca30370f42b8c611d9cf0dedf4b"
+                "reference": "a76afa4035931be0c78ca8efc6abf3902362f437"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/thephpleague/flysystem/zipball/9aca859a303fdca30370f42b8c611d9cf0dedf4b",
-                "reference": "9aca859a303fdca30370f42b8c611d9cf0dedf4b",
+                "url": "https://api.github.com/repos/thephpleague/flysystem/zipball/a76afa4035931be0c78ca8efc6abf3902362f437",
+                "reference": "a76afa4035931be0c78ca8efc6abf3902362f437",
                 "shasum": ""
             },
             "require": {
@@ -1580,7 +1483,7 @@
                 "ext-fileinfo": "*",
                 "mockery/mockery": "~0.9",
                 "phpspec/phpspec": "^2.2",
-                "phpunit/phpunit": "~4.8 || ~5.0"
+                "phpunit/phpunit": "~4.8"
             },
             "suggest": {
                 "ext-fileinfo": "Required for MimeType",
@@ -1637,7 +1540,7 @@
                 "sftp",
                 "storage"
             ],
-            "time": "2016-06-03 19:11:39"
+            "time": "2016-07-18 12:22:57"
         },
         {
             "name": "maknz/slack",
@@ -2231,50 +2134,6 @@
                 "shell"
             ],
             "time": "2016-03-09 05:03:14"
-        },
-        {
-            "name": "react/promise",
-            "version": "v2.4.1",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/reactphp/promise.git",
-                "reference": "8025426794f1944de806618671d4fa476dc7626f"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/reactphp/promise/zipball/8025426794f1944de806618671d4fa476dc7626f",
-                "reference": "8025426794f1944de806618671d4fa476dc7626f",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.4.0"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "2.0-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "React\\Promise\\": "src/"
-                },
-                "files": [
-                    "src/functions_include.php"
-                ]
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Jan Sorgalla",
-                    "email": "jsorgalla@gmail.com"
-                }
-            ],
-            "description": "A lightweight implementation of CommonJS Promises/A for PHP",
-            "time": "2016-05-03 17:50:52"
         },
         {
             "name": "spatie/db-dumper",
@@ -4047,16 +3906,16 @@
         },
         {
             "name": "phpspec/phpspec",
-            "version": "2.5.0",
+            "version": "2.5.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpspec/phpspec.git",
-                "reference": "385ecb015e97c13818074f1517928b24d4a26067"
+                "reference": "531d00ee76e9ae98279ed4dbb2419e5e0f7fb82d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpspec/phpspec/zipball/385ecb015e97c13818074f1517928b24d4a26067",
-                "reference": "385ecb015e97c13818074f1517928b24d4a26067",
+                "url": "https://api.github.com/repos/phpspec/phpspec/zipball/531d00ee76e9ae98279ed4dbb2419e5e0f7fb82d",
+                "reference": "531d00ee76e9ae98279ed4dbb2419e5e0f7fb82d",
                 "shasum": ""
             },
             "require": {
@@ -4074,7 +3933,7 @@
             },
             "require-dev": {
                 "behat/behat": "^3.0.11",
-                "bossa/phpspec2-expect": "~1.0",
+                "ciaranmcnulty/versionbasedtestskipper": "^0.2.1",
                 "phpunit/phpunit": "~4.4",
                 "symfony/filesystem": "~2.1|~3.0"
             },
@@ -4087,7 +3946,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "2.2.x-dev"
+                    "dev-master": "2.5.x-dev"
                 }
             },
             "autoload": {
@@ -4121,7 +3980,7 @@
                 "testing",
                 "tests"
             ],
-            "time": "2016-03-20 20:34:32"
+            "time": "2016-07-16 08:34:07"
         },
         {
             "name": "phpspec/prophecy",
