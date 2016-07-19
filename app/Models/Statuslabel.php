@@ -23,7 +23,7 @@ class Statuslabel extends Model
         'archived' => 'required',
     );
 
-    protected $fillable = ['name'];
+    protected $fillable = ['name', 'deployable', 'pending', 'archived'];
 
     /**
      * Show count of assets with status label
