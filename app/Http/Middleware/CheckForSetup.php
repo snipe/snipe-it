@@ -23,6 +23,9 @@ class CheckForSetup
             }
 
         } else {
+            // Force debug until the setup happens.
+            // Should catch a lot of the early 500 errors that lead to "Turn on Debug"
+            config(['app.debug' => true]);
             if (!$request->is('setup*')) {
                 return redirect(config('app.url').'/setup')->with('Request', $request);
             }
