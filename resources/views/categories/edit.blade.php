@@ -80,7 +80,7 @@
 
       @if (\App\Models\Setting::getSettings()->default_eula_text!='')
         {{ Form::checkbox('use_default_eula', '1', Input::old('use_default_eula', $category->use_default_eula)) }}
-        {{ trans('admin/categories/general.use_default_eula') }}
+        {!! trans('admin/categories/general.use_default_eula') !!}
                  @else
                   {{ Form::checkbox('use_default_eula', '0', Input::old('use_default_eula'), array('disabled' => 'disabled')) }}
                   {!! trans('admin/categories/general.use_default_eula_disabled') !!}
