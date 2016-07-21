@@ -23,6 +23,7 @@ $I->see('Create Category', 'h1.pull-left');
 $I->dontSee('&lt;span class=&quot;');
 
 $I->fillField('name', 'testcategory');
+$I->selectOption('form select[name=category_type]', 'Asset');
 $I->click('Save');
 $I->dontSee('&lt;span class=&quot;');
-$I->dontSee('.alert-danger');
+$I->dontSeeElement('.alert-danger');
