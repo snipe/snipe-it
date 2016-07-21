@@ -55,7 +55,7 @@
           <i class='fa fa-asterisk'></i>
         </div>
           <div class="col-md-7">
-              {{ Form::select('category_type', $category_types , Input::old('category_type', $category->category_type), array('class'=>'select2', 'style'=>'min-width:350px')) }}
+              {{ Form::select('category_type', $category_types , Input::old('category_type', $category->category_type), array('class'=>'select2', 'style'=>'min-width:350px', $category->itemCount() > 0 ? 'disabled' : '')) }}
               {!! $errors->first('category_type', '<span class="alert-msg"><i class="fa fa-times"></i> :message</span>') !!}
           </div>
       </div>
