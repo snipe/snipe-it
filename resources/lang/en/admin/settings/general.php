@@ -45,6 +45,8 @@ return array(
 	'ldap_server_cert'			=> 'LDAP SSL certificate validation',
 	'ldap_server_cert_ignore'	=> 'Allow invalid SSL Certificate',
 	'ldap_server_cert_help'		=> 'Select this checkbox if you are using a self signed SSL cert and would like to accept an invalid SSL certificate.',
+    'ldap_tls'                  => 'Use TLS',
+    'ldap_tls_help'             => 'This should be checked only if you are running STARTTLS on your LDAP server. ',
     'ldap_uname'                => 'LDAP Bind Username',
     'ldap_pword'                => 'LDAP Bind Password',
     'ldap_port'                 => 'LDAP Port',

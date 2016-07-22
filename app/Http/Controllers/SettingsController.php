@@ -416,6 +416,7 @@ class SettingsController extends Controller
         $setting->ldap_email = e(Input::get('ldap_email'));
         $setting->ad_domain = e(Input::get('ad_domain'));
         $setting->is_ad = e(Input::get('is_ad', '0'));
+        $setting->ldap_tls = e(Input::get('ldap_tls', '0'));
 
         // If validation fails, we'll exit the operation now.
         if ($setting->save()) {

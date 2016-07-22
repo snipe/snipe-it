@@ -27,6 +27,7 @@ class Ldap extends Model
         $ldap_port    = Setting::getSettings()->ldap_port;
         $ldap_version = Setting::getSettings()->ldap_version;
         $ldap_server_cert_ignore = Setting::getSettings()->ldap_server_cert_ignore;
+        $ldap_use_tls = Setting::getSettings()->ldap_tls;
 
 
         // If we are ignoring the SSL cert we need to setup the environment variable
@@ -44,6 +45,10 @@ class Ldap extends Model
         // Needed for AD
         ldap_set_option($connection, LDAP_OPT_REFERRALS, 0);
         ldap_set_option($connection, LDAP_OPT_PROTOCOL_VERSION, $ldap_version);
+
+        if ($ldap_use_tls=='1') {
+            ldap_start_tls($connection);
+        }
 
         return $connection;
     }

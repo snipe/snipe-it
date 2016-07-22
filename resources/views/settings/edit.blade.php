@@ -747,6 +747,21 @@
                 </div><!-- LDAP Server -->
 
 
+                <!-- Start TLS -->
+                <div class="form-group">
+                    <div class="col-md-3">
+                        {{ Form::label('ldap_tls', trans('admin/settings/general.ldap_tls')) }}
+                    </div>
+                    <div class="col-md-9">
+                        {{ Form::checkbox('ldap_tls', '1', Input::old('ldap_tls', $setting->ldap_tls),array('class' => 'minimal')) }}
+                        {{ trans('admin/settings/general.ldap_tls_help') }}
+                        {!! $errors->first('ldap_tls', '<span class="alert-msg">:message</span>') !!}
+
+                    </div>
+                </div>
+                <!-- /.form-group -->
+
+
               <div class="form-group {{ $errors->has('ldap_server_cert_ignore') ? 'error' : '' }}">
                   <div class="col-md-3">
                      {{ Form::label('ldap_server_cert_ignore', trans('admin/settings/general.ldap_server_cert')) }}
