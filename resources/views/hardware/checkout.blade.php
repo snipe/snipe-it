@@ -37,10 +37,10 @@
                   @if ($asset->model->name)
                   <!-- Asset name -->
                   <div class="form-group {{ $errors->has('name') ? 'error' : '' }}">
-                    <div class="col-md-3">
-                      {{ Form::label('name', trans('admin/hardware/form.model')) }}
-                    </div>
-                    <div class="col-md-9">
+
+                      {{ Form::label('name', trans('admin/hardware/form.model'), array('class' => 'col-md-3 control-label')) }}
+
+                    <div class="col-md-8">
                       <p class="form-control-static">{{ $asset->model->name }}</p>
                     </div>
                   </div>
@@ -48,10 +48,10 @@
 
                   <!-- Asset Name -->
                   <div class="form-group {{ $errors->has('name') ? 'error' : '' }}">
-                    <div class="col-md-3">
-                      {{ Form::label('name', trans('admin/hardware/form.name')) }}
-                    </div>
-                    <div class="col-md-9">
+
+                      {{ Form::label('name', trans('admin/hardware/form.name'), array('class' => 'col-md-3 control-label')) }}
+
+                    <div class="col-md-8">
                       <input class="form-control" type="text" name="name" id="name" value="{{ Input::old('name', $asset->name) }}" />
                       {!! $errors->first('name', '<span class="alert-msg"><i class="fa fa-times"></i> :message</span>') !!}
                     </div>
@@ -59,16 +59,16 @@
 
                     <!-- User -->
                     <div id="assigned_user" class="form-group{{ $errors->has('assigned_to') ? ' has-error' : '' }}">
-                        <div class="col-md-3">
-                            {{ Form::label('assigned_to', trans('admin/hardware/form.checkout_to')) }}
-                        </div>
-                        <div class="col-md-8">
+
+                            {{ Form::label('assigned_to', trans('admin/hardware/form.checkout_to'), array('class' => 'col-md-3 control-label')) }}
+
+                        <div class="col-md-7 required">
                             {{ Form::select('assigned_to', $users_list , Input::old('assigned_to', $asset->assigned_to), array('class'=>'select2', 'id'=>'assigned_to', 'style'=>'width:100%')) }}
 
                             {!! $errors->first('assigned_to', '<span class="alert-msg"><i class="fa fa-times"></i> :message</span>') !!}
                         </div>
-                        <div class="col-md-1 col-sm-1 text-left" style="margin-left: -20px; padding-top: 3px">
-                            <a href='#' data-toggle="modal"  data-target="#createModal" data-dependency="user" data-select='assigned_to'><i class="verticon fa fa-plus-square-o fa-2x"></i></a>
+                        <div class="col-md-1 col-sm-1 text-left">
+                            <a href='#' data-toggle="modal"  data-target="#createModal" data-dependency="user" data-select='assigned_to' class="btn btn-sm btn-default">New</a>
                         </div>
                     </div>
 
@@ -76,11 +76,11 @@
 
                   <!-- Checkout/Checkin Date -->
                   <div class="form-group {{ $errors->has('checkout_at') ? 'error' : '' }}">
-                    <div class="col-md-3">
-                      {{ Form::label('name', trans('admin/hardware/form.checkout_date')) }}
-                    </div>
-                    <div class="col-md-9">
-                      <div class="col-md-4 input-group">
+
+                      {{ Form::label('name', trans('admin/hardware/form.checkout_date'), array('class' => 'col-md-3 control-label')) }}
+
+                    <div class="col-md-8">
+                      <div class="col-md-4 input-group required">
                       <input type="date" class="datepicker form-control" data-date-format="yyyy-mm-dd" name="checkout_at" id="checkout_at" value="{{ Input::old('checkout_at', date('Y-m-d')) }}">
                       <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
                     </div>
@@ -91,10 +91,10 @@
 
                   <!-- Expected Checkin Date -->
                   <div class="form-group {{ $errors->has('expected_checkin') ? 'error' : '' }}">
-                    <div class="col-md-3">
-                      {{ Form::label('name', trans('admin/hardware/form.expected_checkin')) }}
-                    </div>
-                    <div class="col-md-9">
+
+                      {{ Form::label('name', trans('admin/hardware/form.expected_checkin'), array('class' => 'col-md-3 control-label')) }}
+
+                    <div class="col-md-8">
                       <div class="col-md-4 input-group">
                       <input type="date" class="datepicker form-control" data-date-format="yyyy-mm-dd" name="expected_checkin" id="expected_checkin" value="{{ Input::old('expected_checkin') }}">
                       <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
@@ -105,10 +105,10 @@
 
                   <!-- Note -->
                   <div class="form-group {{ $errors->has('note') ? 'error' : '' }}">
-                    <div class="col-md-3">
-                      {{ Form::label('note', trans('admin/hardware/form.notes')) }}
-                    </div>
-                    <div class="col-md-9">
+
+                      {{ Form::label('note', trans('admin/hardware/form.notes'), array('class' => 'col-md-3 control-label')) }}
+
+                    <div class="col-md-8">
                       <textarea class="col-md-6 form-control" id="note" name="note">{{ Input::old('note', $asset->note) }}</textarea>
                       {!! $errors->first('note', '<span class="alert-msg"><i class="fa fa-times"></i> :message</span>') !!}
                     </div>
@@ -119,7 +119,7 @@
                     @if ($asset->requireAcceptance())
 
                     <div class="form-group">
-                      <div class="col-md-9 col-md-offset-3">
+                      <div class="col-md-8 col-md-offset-3">
                         <p class="text-yellow"><i class="fa fa-warning"></i> {{ trans('admin/categories/general.required_acceptance') }}</p>
                       </div>
                     </div>
@@ -128,7 +128,7 @@
 
                     @if ($asset->getEula())
                     <div class="form-group">
-                      <div class="col-md-9 col-md-offset-3">
+                      <div class="col-md-8 col-md-offset-3">
                         <p class="text-yellow"><i class="fa fa-warning"></i> {{ trans('admin/categories/general.required_eula') }}</p>
                       </div>
                     </div>
@@ -173,18 +173,18 @@
                 <div class="modal-body">
 
                     <div class="dynamic-form-row">
-                        <div class="col-md-4 col-xs-12"><label for="modal-first_name">{{ trans('general.first_name') }}*:</label></div>
-                        <div class="col-md-8 col-xs-12"><input type='text' id='modal-first_name' class="form-control"></div>
+                        <div class="col-md-4 col-xs-12"><label for="modal-first_name">{{ trans('general.first_name') }}:</label></div>
+                        <div class="col-md-8 col-xs-12 required"><input type='text' id='modal-first_name' class="form-control"></div>
                     </div>
 
                     <div class="dynamic-form-row">
-                        <div class="col-md-4 col-xs-12"><label for="modal-last_name">{{ trans('general.last_name') }}*:</label></div>
+                        <div class="col-md-4 col-xs-12"><label for="modal-last_name">{{ trans('general.last_name') }}:</label></div>
                         <div class="col-md-8 col-xs-12"><input type='text' id='modal-last_name' class="form-control"></div>
                     </div>
 
                     <div class="dynamic-form-row">
-                        <div class="col-md-4 col-xs-12"><label for="modal-username">{{ trans('admin/users/table.username') }}*:</label></div>
-                        <div class="col-md-8 col-xs-12"><input type='text' id='modal-username' class="form-control"></div>
+                        <div class="col-md-4 col-xs-12"><label for="modal-username">{{ trans('admin/users/table.username') }}:</label></div>
+                        <div class="col-md-8 col-xs-12 required"><input type='text' id='modal-username' class="form-control"></div>
                     </div>
 
                     <div class="dynamic-form-row">
@@ -193,8 +193,8 @@
                     </div>
 
                     <div class="dynamic-form-row">
-                        <div class="col-md-4 col-xs-12"><label for="modal-password">{{ trans('admin/users/table.password') }}*:</label></div>
-                        <div class="col-md-8 col-xs-12"><input type='password' id='modal-password' class="form-control"></div>
+                        <div class="col-md-4 col-xs-12"><label for="modal-password">{{ trans('admin/users/table.password') }}:</label></div>
+                        <div class="col-md-8 col-xs-12 required"><input type='password' id='modal-password' class="form-control"></div>
                     </div>
 
 
