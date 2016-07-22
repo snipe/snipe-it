@@ -140,7 +140,7 @@
     'select_asset'    		=> 'Select Asset',
     'settings'				=> 'Settings',
     'sign_in'				=> 'Sign in',
-    'some_features_disabled' => 'Some features are disabled for this installation.',
+    'some_features_disabled' => 'DEMO MODE: Some features are disabled for this installation.',
     'site_name'				=> 'Site Name',
     'state'  				=> 'State',
     'status_labels'			=> 'Status Labels',
