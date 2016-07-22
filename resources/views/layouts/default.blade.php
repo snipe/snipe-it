@@ -495,20 +495,29 @@
         <section class="content-header" style="padding-bottom: 30px;">
           <h1 class="pull-left">
             @yield('title')
-            @if (config('app.lock_passwords'))
-               <p class="help-block">{{ trans('general.some_features_disabled') }}</p>
-            @endif
+
 
           </h1>
           <div class="pull-right">
             @yield('header_right')
           </div>
+
+
+
         </section>
 
 
         <section class="content">
           <!-- Notifications -->
           <div class="row">
+              @if (config('app.lock_passwords'))
+                  <div class="col-md-12">
+                      <div class="callout callout-info">
+                          {{ trans('general.some_features_disabled') }}
+                      </div>
+                  </div>
+              @endif
+
           @include('notifications')
           </div>
 
