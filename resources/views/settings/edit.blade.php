@@ -727,25 +727,6 @@
                   </div>
               </div><!-- LDAP Server -->
 
-                <!-- LDAP port -->
-                <div class="form-group {{ $errors->has('ldap_port') ? 'error' : '' }}">
-                    <div class="col-md-3">
-                        {{ Form::label('ldap_port', trans('admin/settings/general.ldap_port')) }}
-                    </div>
-                    <div class="col-md-1">
-                        @if (config('app.lock_passwords')===true)
-                            {{ Form::text('ldap_port', Input::old('ldap_port', $setting->ldap_port), array('class' => 'form-control', 'disabled'=>'disabled','placeholder' => '389')) }}
-                        @else
-                            {{ Form::text('ldap_port', Input::old('ldap_port', $setting->ldap_port), array('class' => 'form-control','placeholder' => '389')) }}
-                        @endif
-                    </div>
-                    <div class="col-md-8 col-md-offset-3">
-
-                        <p class="help-block">{{ trans('admin/settings/general.ldap_port_help') }}</p>
-                        {!! $errors->first('ldap_port', '<span class="alert-msg">:message</span>') !!}
-                    </div>
-                </div><!-- LDAP Server -->
-
 
                 <!-- Start TLS -->
                 <div class="form-group">

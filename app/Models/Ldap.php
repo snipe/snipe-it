@@ -24,7 +24,6 @@ class Ldap extends Model
     {
 
         $ldap_host    = Setting::getSettings()->ldap_server;
-        $ldap_port    = Setting::getSettings()->ldap_port;
         $ldap_version = Setting::getSettings()->ldap_version;
         $ldap_server_cert_ignore = Setting::getSettings()->ldap_server_cert_ignore;
         $ldap_use_tls = Setting::getSettings()->ldap_tls;
@@ -32,14 +31,14 @@ class Ldap extends Model
 
         // If we are ignoring the SSL cert we need to setup the environment variable
         // before we create the connection
-        if ($ldap_server_cert_ignore) {
+        if ($ldap_server_cert_ignore=='1') {
             putenv('LDAPTLS_REQCERT=never');
         }
 
-        $connection = @ldap_connect($ldap_host,$ldap_port);
+        $connection = @ldap_connect($ldap_host);
 
         if (!$connection) {
-            throw new Exception('Could not connect to LDAP server at '.$ldap_host.' on port '.$ldap_port.'. Please check your LDAP server name and port number in your settings.');
+            throw new Exception('Could not connect to LDAP server at '.$ldap_host.'. Please check your LDAP server name and port number in your settings.');
         }
 
         // Needed for AD
