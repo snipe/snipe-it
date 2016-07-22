@@ -47,26 +47,24 @@
 
        <!-- Asset Tag -->
        <div class="form-group {{ $errors->has('asset_tag') ? ' has-error' : '' }}">
-           <label for="asset_tag" class="col-md-3 control-label">{{ trans('admin/hardware/form.tag') }}
-            *</label>
+           <label for="asset_tag" class="col-md-3 control-label">{{ trans('admin/hardware/form.tag') }}</label>
             </label>
-               <div class="col-md-7 col-sm-12">
-                 @if  ($asset->id)
-         <input class="form-control" type="text" name="asset_tag" id="asset_tag" value="{{ Input::old('asset_tag', $asset->asset_tag) }}" />
-       @else
-         <input class="form-control" type="text" name="asset_tag" id="asset_tag" value="{{ Input::old('asset_tag', \App\Models\Asset::autoincrement_asset()) }}" />
-       @endif
+               <div class="col-md-7 col-sm-12{{  (\App\Helpers\Helper::checkIfRequired($asset, 'asset_tag')) ? ' required' : '' }}">
+                   @if  ($asset->id)
+                         <input class="form-control" type="text" name="asset_tag" id="asset_tag" value="{{ Input::old('asset_tag', $asset->asset_tag) }}" />
+                   @else
+                         <input class="form-control" type="text" name="asset_tag" id="asset_tag" value="{{ Input::old('asset_tag', \App\Models\Asset::autoincrement_asset()) }}">
+                   @endif
 
-       {!! $errors->first('asset_tag', '<span class="alert-msg"><i class="fa fa-times"></i> :message</span>') !!}
+                {!! $errors->first('asset_tag', '<span class="alert-msg"><i class="fa fa-times"></i> :message</span>') !!}
                </div>
        </div>
 
        <!-- Model -->
        <div class="form-group {{ $errors->has('model_id') ? ' has-error' : '' }}">
-           <label for="parent" class="col-md-3 control-label">{{ trans('admin/hardware/form.model') }}
-            *</label>
+           <label for="parent" class="col-md-3 control-label">{{ trans('admin/hardware/form.model') }}</label>
             </label>
-           <div class="col-md-7 col-sm-10">
+           <div class="col-md-7 col-sm-10{{  (\App\Helpers\Helper::checkIfRequired($asset, 'model_id')) ? ' required' : '' }}">
                @if (isset($selected_model))
                    {{ Form::select('model_id', $model_list , $selected_model->id, array('class'=>'select2 model', 'style'=>'width:100%','id' =>'model_select_id')) }}
 
@@ -78,8 +76,8 @@
                {!! $errors->first('model_id', '<span class="alert-msg"><i class="fa fa-times"></i> :message</span>') !!}
 
            </div>
-           <div class="col-md-1 col-sm-1 text-left" style="margin-left: -20px; padding-top: 3px">
-              <a href='#' data-toggle="modal" data-target="#createModal" data-dependency="model" data-select="model_select_id"><i class="verticon fa fa-plus-square-o fa-2x"></i></a>
+           <div class="col-md-1 col-sm-1 text-left">
+              <a href='#' data-toggle="modal" data-target="#createModal" data-dependency="model" data-select="model_select_id" class="btn btn-sm btn-default">New</a>
               <span class="mac_spinner" style="padding-left: 10px; color: green; display:none; width: 30px;"><i class="fa fa-spinner fa-spin"></i> </span>
            </div>
        </div>
@@ -102,17 +100,20 @@
 
        <!-- Status -->
        <div class="form-group {{ $errors->has('status_id') ? ' has-error' : '' }}">
-           <label for="status_id" class="col-md-3 control-label">{{ trans('admin/hardware/form.status') }} *</label>
-               <div class="col-md-7 col-sm-11">
+           <label for="status_id" class="col-md-3 control-label">{{ trans('admin/hardware/form.status') }}</label>
+               <div class="col-md-7 col-sm-11{{  (\App\Helpers\Helper::checkIfRequired($asset, 'status_id')) ? ' required' : '' }}">
                    {{ Form::select('status_id', $statuslabel_list , Input::old('status_id', $asset->status_id), array('class'=>'select2 status_id', 'style'=>'width:100%','id'=>'status_select_id')) }}
 
 
-                   <p class="help-block">{{ trans('admin/hardware/form.help_checkout') }}</p>
+
                    {!! $errors->first('status_id', '<span class="alert-msg"><i class="fa fa-times"></i> :message</span>') !!}
                </div>
-               <div class="col-md-1 col-sm-1 text-left" style="margin-left: -20px; padding-top: 3px">
-                 <a href='#' data-toggle="modal"  data-target="#createModal" data-dependency='statuslabel' data-select='status_select_id'><i class="verticon fa fa-plus-square-o fa-2x"></i></a>
+               <div class="col-md-1 col-sm-1 text-left">
+                 <a href='#' data-toggle="modal"  data-target="#createModal" data-dependency='statuslabel' data-select='status_select_id' class="btn btn-sm btn-default">New</a>
                  <span class="status_spinner" style="padding-left: 10px; color: green; display:none; width: 30px;"><i class="fa fa-spinner fa-spin"></i> </span>
+               </div>
+                <div class="col-md-7 col-sm-11 col-md-offset-3">
+                    <p class="help-block">{{ trans('admin/hardware/form.help_checkout') }}</p>
                </div>
        </div>
 
@@ -127,7 +128,7 @@
                {!! $errors->first('assigned_to', '<span class="alert-msg"><i class="fa fa-times"></i> :message</span>') !!}
            </div>
            <div class="col-md-1 col-sm-1 text-left" style="margin-left: -20px; padding-top: 3px">
-              <a href='#' data-toggle="modal"  data-target="#createModal" data-dependency="user" data-select='assigned_to'><i class="verticon fa fa-plus-square-o fa-2x"></i></a>
+              <a href='#' data-toggle="modal"  data-target="#createModal" data-dependency="user" data-select='assigned_to' class="btn btn-sm btn-default">New</a>
           </div>
        </div>
        @endif
@@ -136,7 +137,7 @@
        <!-- Serial -->
        <div class="form-group {{ $errors->has('serial') ? ' has-error' : '' }}">
            <label for="serial" class="col-md-3 control-label">{{ trans('admin/hardware/form.serial') }} </label>
-           <div class="col-md-7 col-sm-12">
+           <div class="col-md-7 col-sm-12{{  (\App\Helpers\Helper::checkIfRequired($asset, 'serial')) ? ' required' : '' }}">
                <input class="form-control" type="text" name="serial" id="serial" value="{{ Input::old('serial', $asset->serial) }}" />
                {!! $errors->first('serial', '<span class="alert-msg"><i class="fa fa-times"></i> :message</span>') !!}
            </div>
@@ -145,7 +146,7 @@
        <!-- Asset Name -->
        <div class="form-group {{ $errors->has('name') ? ' has-error' : '' }}">
            <label for="name" class="col-md-3 control-label">{{ trans('admin/hardware/form.name') }}</label>
-               <div class="col-md-7 col-sm-12">
+               <div class="col-md-7 col-sm-12{{  (\App\Helpers\Helper::checkIfRequired($asset, 'name')) ? ' required' : '' }}">
                    <input class="form-control" type="text" name="name" id="name" value="{{ Input::old('name', $asset->name) }}" />
                    {!! $errors->first('name', '<span class="alert-msg"><i class="fa fa-times"></i> :message</span>') !!}
                </div>
@@ -156,7 +157,7 @@
        @if (\App\Models\Company::isCurrentUserAuthorized())
          <div class="form-group {{ $errors->has('company_id') ? ' has-error' : '' }}">
            <div class="col-md-3 control-label">{{ Form::label('company_id', trans('general.company')) }}</div>
-           <div class="col-md-7 col-sm-12">
+           <div class="col-md-7 col-sm-12{{  (\App\Helpers\Helper::checkIfRequired($asset, 'company_id')) ? ' required' : '' }}">
              {{ Form::select('company_id', $company_list , Input::old('company_id', $asset->company_id),
                              ['class'=>'select2', 'style'=>'width:100%']) }}
              {!! $errors->first('company_id', '<span class="alert-msg"><i class="fa fa-times"></i> :message</span>') !!}
@@ -171,9 +172,10 @@
              <div class="input-group">
 
                  <input type="text" class="datepicker form-control" data-date-format="yyyy-mm-dd" placeholder="yyyy-mm-dd" name="purchase_date" id="purchase_date" value="{{ Input::old('purchase_date', $asset->purchase_date) }}">
+                 <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
                </div><!-- /.input group -->
 
-               <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+
                {!! $errors->first('purchase_date', '<span class="alert-msg"><i class="fa fa-times"></i> :message</span>') !!}
            </div>
        </div>
@@ -185,8 +187,8 @@
 
                {!! $errors->first('supplier_id', '<span class="alert-msg"><i class="fa fa-times"></i> :message</span>') !!}
            </div>
-           <div class="col-md-1 col-sm-1 text-left" style="margin-left: -20px; padding-top: 3px">
-             <a href='#' data-toggle="modal"  data-target="#createModal" data-dependency="supplier" data-select='supplier_select_id'><i class="verticon fa fa-plus-square-o fa-2x"></i></a>
+           <div class="col-md-1 col-sm-1 text-left">
+             <a href='#' data-toggle="modal"  data-target="#createModal" data-dependency="supplier" data-select='supplier_select_id' class="btn btn-sm btn-default">New</a>
            </div>
        </div>
 
@@ -255,8 +257,8 @@
 
                    {!! $errors->first('rtd_location_id', '<span class="alert-msg"><i class="fa fa-times"></i> :message</span>') !!}
                </div>
-               <div class="col-md-1 col-sm-1 text-left" style="margin-left: -20px; padding-top: 3px">
-                 <a href='#' data-toggle="modal" data-target="#createModal" data-dependency='location' data-select='rtd_location_select'><i class="verticon fa fa-plus-square-o fa-2x"></i></a>
+               <div class="col-md-1 col-sm-1 text-left">
+                 <a href='#' data-toggle="modal" data-target="#createModal" data-dependency='location' data-select='rtd_location_select' class="btn btn-sm btn-default">New</a>
                </div>
        </div>
 

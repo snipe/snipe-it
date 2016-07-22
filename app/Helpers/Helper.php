@@ -403,4 +403,30 @@ class Helper
         return $permissions_arr;
     }
 
+    /**
+     * Introspects into the model validation to see if the field passed is required.
+     * This is used by the blades to add a required class onto the HTML element.
+     * This isn't critical, but is helpful to keep form fields in sync with the actual
+     * model level validation.
+     *
+     * This does not currently handle form request validation requiredness :(
+     *
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @since [v3.0]
+     * @return boolean
+     */
+    public static function checkIfRequired($class, $field) {
+        $rules = $class::rules();
+        foreach ($rules as $rule_name => $rule) {
+            if ($rule_name == $field) {
+                if (strpos($rule, 'required') === false) {
+                    return false;
+                } else {
+                    return true;
+                }
+
+            }
+        }
+    }
+
 }
