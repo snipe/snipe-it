@@ -300,9 +300,9 @@
 <script>
 
 $(function() {
-  $('#checkout_to_user').on("change",function () {
+  $('#assigned_to').on("change",function () {
     // console.warn("Model Id has changed!");
-    var userid=$('#checkout_to_user').val();
+    var userid=$('#assigned_to').val();
     if(userid=='') {
       console.warn('no user selected');
       $('#current_assets_box').fadeOut();
