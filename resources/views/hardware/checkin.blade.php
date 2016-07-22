@@ -42,10 +42,10 @@
         @if ($asset->model->name)
           <!-- Asset name -->
           <div class="form-group">
-            <div class="col-md-3">
-              {{ Form::label('name', trans('admin/hardware/form.model')) }}
-            </div>
-            <div class="col-md-9">
+
+              {{ Form::label('name', trans('admin/hardware/form.model'), array('class' => 'col-md-3 control-label')) }}
+
+            <div class="col-md-8">
               <p class="form-control-static">{{ $asset->model->name }}</p>
             </div>
           </div>
@@ -54,10 +54,8 @@
 
         <!-- Asset Name -->
           <div class="form-group {{ $errors->has('name') ? 'error' : '' }}">
-            <div class="col-md-3">
-              {{ Form::label('name', trans('admin/hardware/form.name')) }}
-            </div>
-            <div class="col-md-9">
+              {{ Form::label('name', trans('admin/hardware/form.name'), array('class' => 'col-md-3 control-label')) }}
+            <div class="col-md-8">
               <input class="form-control" type="text" name="name" id="name" value="{{ Input::old('name', $asset->name) }}" />
               {!! $errors->first('name', '<span class="alert-msg"><i class="fa fa-times"></i> :message</span>') !!}
             </div>
@@ -65,11 +63,11 @@
 
         <!-- Status -->
         <div class="form-group {{ $errors->has('status_id') ? 'error' : '' }}">
-          <div class="col-md-3">
-            {{ Form::label('name', trans('admin/hardware/form.status')) }}
-          </div>
-          <div class="col-md-9">
-            {{ Form::select('status_id', $statusLabel_list, '', array('class'=>'select2', 'style'=>'width:350px','id' =>'modal-statuslabel_types')) }}
+
+            {{ Form::label('name', trans('admin/hardware/form.status'), array('class' => 'col-md-3 control-label')) }}
+
+          <div class="col-md-7 required">
+            {{ Form::select('status_id', $statusLabel_list, '', array('class'=>'select2', 'style'=>'width:100%','id' =>'modal-statuslabel_types')) }}
             {!! $errors->first('status_id', '<span class="alert-msg"><i class="fa fa-times"></i> :message</span>') !!}
           </div>
         </div>
@@ -77,11 +75,11 @@
         <!-- Checkout/Checkin Date -->
 
         <div class="form-group {{ $errors->has('checkin_at') ? 'error' : '' }}">
-          <div class="col-md-3">
-            {{ Form::label('name', trans('admin/hardware/form.checkin_date')) }}
-          </div>
-          <div class="col-md-9">
-            <div class="col-md-4 input-group">
+
+            {{ Form::label('name', trans('admin/hardware/form.checkin_date'), array('class' => 'col-md-3 control-label')) }}
+
+          <div class="col-md-8">
+            <div class="col-md-4 input-group required">
             <input type="date" class="datepicker form-control" data-date-format="yyyy-mm-dd" placeholder="Checkin Date" name="checkin_at" id="checkin_at" value="{{ Input::old('checkin_at', date('Y-m-d')) }}">
             <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
           </div>
@@ -92,10 +90,10 @@
 
         <!-- Note -->
         <div class="form-group {{ $errors->has('note') ? 'error' : '' }}">
-          <div class="col-md-3">
-            {{ Form::label('note', trans('admin/hardware/form.notes')) }}
-          </div>
-          <div class="col-md-9">
+
+            {{ Form::label('note', trans('admin/hardware/form.notes'), array('class' => 'col-md-3 control-label')) }}
+
+          <div class="col-md-8">
             <textarea class="col-md-6 form-control" id="note" name="note">{{ Input::old('note', $asset->note) }}</textarea>
             {!! $errors->first('note', '<span class="alert-msg"><i class="fa fa-times"></i> :message</span>') !!}
           </div>
