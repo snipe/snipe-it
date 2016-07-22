@@ -320,7 +320,12 @@ $(function() {
 
             for (var i in data) {
                 var asset = data[i];
-                table_html += "<tr><td class=\"col-md-8\"><a href=\"{{ config('app.url') }}/hardware/" + asset.id + "/view\">" + asset.name + " (" + asset.model.name + ")</a></td><td class=\"col-md-4\">" + asset.asset_tag + "</td></tr>";
+                table_html += "<tr><td class=\"col-md-8\"><a href=\"{{ config('app.url') }}/hardware/" + asset.id + "/view\">" + asset.name;
+                if (asset.model.name!='') {
+                    table_html += " (" + asset.model.name + ")";
+
+                }
+                table_html += "</a></td><td class=\"col-md-4\">" + asset.asset_tag + "</td></tr>";
             }
 
             $('#current_assets_content').html(table_html + '</tbody></table></div></div>');
