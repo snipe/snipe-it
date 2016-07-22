@@ -150,7 +150,8 @@
                       <td>{{ trans('admin/settings/general.ldap_integration') }}</td>
 
                       @if ($setting->ldap_enabled == 1)
-                          <td>{{ trans('general.yes') }}
+                          <td>
+                              {{ $setting->ldap_server }}:{{ $setting->ldap_port }}
                           @if ($setting->is_ad == '1')
                                 (Active Directory)
                           @endif

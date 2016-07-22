@@ -47,6 +47,8 @@ return array(
 	'ldap_server_cert_help'		=> 'Select this checkbox if you are using a self signed SSL cert and would like to accept an invalid SSL certificate.',
     'ldap_uname'                => 'LDAP Bind Username',
     'ldap_pword'                => 'LDAP Bind Password',
+    'ldap_port'                 => 'LDAP Port',
+    'ldap_port_help'            => 'This is usually 389 for ldap, 636 for ldaps.',
     'ldap_basedn'               => 'Base Bind DN',
     'ldap_filter'               => 'LDAP Filter',
     'ldap_username_field'       => 'Username Field',

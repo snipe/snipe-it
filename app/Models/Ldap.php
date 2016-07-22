@@ -24,6 +24,7 @@ class Ldap extends Model
     {
 
         $ldap_host    = Setting::getSettings()->ldap_server;
+        $ldap_port    = Setting::getSettings()->ldap_port;
         $ldap_version = Setting::getSettings()->ldap_version;
         $ldap_server_cert_ignore = Setting::getSettings()->ldap_server_cert_ignore;
 
@@ -34,11 +35,10 @@ class Ldap extends Model
             putenv('LDAPTLS_REQCERT=never');
         }
 
-        // Connecting to LDAP
-        $connection = @ldap_connect($ldap_host) or die("Could not connect to {$ldap_host}");
+        $connection = @ldap_connect($ldap_host,$ldap_port);
 
         if (!$connection) {
-            throw new Exception('Could not connect to LDAP server at '.$ldap_host.': '.ldap_error($connection));
+            throw new Exception('Could not connect to LDAP server at '.$ldap_host.' on port '.$ldap_port.'. Please check your LDAP server name and port number in your settings.');
         }
 
         // Needed for AD

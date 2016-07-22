@@ -400,6 +400,7 @@ class SettingsController extends Controller
         $setting->ldap_server = e(Input::get('ldap_server'));
         $setting->ldap_server_cert_ignore = e(Input::get('ldap_server_cert_ignore', false));
         $setting->ldap_uname = e(Input::get('ldap_uname'));
+        $setting->ldap_port = e(Input::get('ldap_port'));
         if (Input::has('ldap_pword')) {
             $setting->ldap_pword = Crypt::encrypt(Input::get('ldap_pword'));
         }
