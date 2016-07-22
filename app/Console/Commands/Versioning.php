@@ -42,7 +42,7 @@ class Versioning extends Command
     {
         // Path to the file containing your version
         // This will be overwritten everything you commit a message
-        $versionFile = app_path().'/config/version.php';
+        $versionFile = 'config/version.php';
 
         // The git's output
         // get the argument passed in the git command
