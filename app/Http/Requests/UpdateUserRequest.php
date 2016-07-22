@@ -25,7 +25,6 @@ class UpdateUserRequest extends Request
     {
         return [
             'first_name'              => 'required|string|min:1',
-            'last_name'               => 'required|string|min:1',
             'email'                   => 'email',
             'password_confirm'        => 'sometimes|required_with:password',
         ];
