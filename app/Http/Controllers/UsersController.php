@@ -1246,9 +1246,7 @@ class UsersController extends Controller
     */
     public function getAssetList($userId)
     {
-        $assets = Asset::where('assigned_to', '=', $userId)->get();
+        $assets = Asset::where('assigned_to', '=', $userId)->with('model')->get();
         return response()->json($assets);
-        //$foo = Asset::where('assigned_to','=',$userId)->get();
-        //print_r($foo);
     }
 }
