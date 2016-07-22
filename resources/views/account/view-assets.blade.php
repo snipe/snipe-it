@@ -303,7 +303,11 @@ View Assets for  {{ $user->fullName() }}
                         @endif
 
                     </td>
-                    <td>{{ $log->adminlog->fullName() }}</td>
+                    <td>
+                        @if ($log->adminlog)
+                        {{ $log->adminlog->fullName() }}
+                        @endif
+                    </td>
                     <td>{{ $log->created_at }}</td>
                 </tr>
                 @endforeach
