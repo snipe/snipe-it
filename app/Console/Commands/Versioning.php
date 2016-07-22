@@ -50,7 +50,7 @@ class Versioning extends Command
 
          // discard the commit hash
          $version = explode('-', $hash_version);
-         $realVersion = $version[0] . '-' . $version[1];
+         $realVersion = $version[0];
 
          // save the version array to a variable
          $array = var_export(array('app_version' => $realVersion,'hash_version' => $hash_version), true);
