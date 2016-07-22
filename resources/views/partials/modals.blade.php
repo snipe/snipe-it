@@ -8,21 +8,21 @@
             </div>
             <div class="modal-body">
                 <div class="dynamic-form-row">
-                    <div class="col-md-4 col-xs-12"><label for="modal-name">{{ trans('general.name') }}*:
+                    <div class="col-md-4 col-xs-12"><label for="modal-name">{{ trans('general.name') }}:
                         </label></div>
-                    <div class="col-md-8 col-xs-12"><input type='text' id='modal-name' class="form-control"></div>
+                    <div class="col-md-8 col-xs-12 required"><input type='text' id='modal-name' class="form-control"></div>
                 </div>
 
                 <div class="dynamic-form-row">
-                    <div class="col-md-4 col-xs-12"><label for="modal-manufacturer_id">{{ trans('general.manufacturer') }}*:
+                    <div class="col-md-4 col-xs-12"><label for="modal-manufacturer_id">{{ trans('general.manufacturer') }}:
                         </label></div>
-                    <div class="col-md-8 col-xs-12">{{ Form::select('modal-manufacturer', $manufacturer , '', array('class'=>'select2 parent', 'style'=>'width:100%','id' =>'modal-manufacturer_id')) }}</div>
+                    <div class="col-md-8 col-xs-12 required">{{ Form::select('modal-manufacturer', $manufacturer , '', array('class'=>'select2 parent', 'style'=>'width:100%','id' =>'modal-manufacturer_id')) }}</div>
                 </div>
 
                 <div class="dynamic-form-row">
-                    <div class="col-md-4 col-xs-12"><label for="modal-category_id">{{ trans('general.category') }}*:
+                    <div class="col-md-4 col-xs-12"><label for="modal-category_id">{{ trans('general.category') }}:
                         </label></div>
-                    <div class="col-md-8 col-xs-12">{{ Form::select('modal-category', $category ,'', array('class'=>'select2 parent', 'style'=>'width:100%','id' => 'modal-category_id')) }}</div>
+                    <div class="col-md-8 col-xs-12 required">{{ Form::select('modal-category', $category ,'', array('class'=>'select2 parent', 'style'=>'width:100%','id' => 'modal-category_id')) }}</div>
                 </div>
 
                 <div class="dynamic-form-row">
@@ -31,18 +31,18 @@
                 </div>
 
                 <div class="dynamic-form-row">
-                    <div class="col-md-4 col-xs-12"><label for="modal-statuslabel_types">{{ trans('admin/statuslabels/table.status_type') }}*:
+                    <div class="col-md-4 col-xs-12"><label for="modal-statuslabel_types">{{ trans('admin/statuslabels/table.status_type') }}:
                         </label></div>
-                    <div class="col-md-8 col-xs-12">{{ Form::select('modal-statuslabel_types', $statuslabel_types, '', array('class'=>'select2', 'style'=>'width:90%','id' =>'modal-statuslabel_types')) }}</div>
+                    <div class="col-md-8 col-xs-12 required">{{ Form::select('modal-statuslabel_types', $statuslabel_types, '', array('class'=>'select2', 'style'=>'width:90%','id' =>'modal-statuslabel_types')) }}</div>
                 </div>
 
                 <div class="dynamic-form-row">
-                    <div class="col-md-4 col-xs-12"><label for="modal-city">{{ trans('general.city') }}*:</label></div>
-                    <div class="col-md-8 col-xs-12"><input type='text' id='modal-city' class="form-control"></div>
+                    <div class="col-md-4 col-xs-12"><label for="modal-city">{{ trans('general.city') }}:</label></div>
+                    <div class="col-md-8 col-xs-12 required"><input type='text' id='modal-city' class="form-control"></div>
                 </div>
 
                 <div class="dynamic-form-row">
-                    <div class="col-md-4 col-xs-12"><label for="modal-country">{{ trans('general.country') }}*:</label></div>
+                    <div class="col-md-4 col-xs-12 country"><label for="modal-country">{{ trans('general.country') }}:</label></div>
                     <div class="col-md-8 col-xs-12">{!! Form::countries('country', Input::old('country'), 'select2 country',"modal-country") !!}</div>
                 </div>
 
@@ -52,28 +52,28 @@
                 </div>
 
                 <div class="dynamic-form-row">
-                    <div class="col-md-4 col-xs-12"><label for="modal-first_name">{{ trans('general.first_name') }}*:</label></div>
-                    <div class="col-md-8 col-xs-12"><input type='text' id='modal-first_name' class="form-control"></div>
+                    <div class="col-md-4 col-xs-12"><label for="modal-first_name">{{ trans('general.first_name') }}:</label></div>
+                    <div class="col-md-8 col-xs-12 required"><input type='text' id='modal-first_name' class="form-control"></div>
                 </div>
 
                 <div class="dynamic-form-row">
-                    <div class="col-md-4 col-xs-12"><label for="modal-last_name">{{ trans('general.last_name') }}*:</label></div>
-                    <div class="col-md-8 col-xs-12"><input type='text' id='modal-last_name' class="form-control"></div>
+                    <div class="col-md-4 col-xs-12"><label for="modal-last_name">{{ trans('general.last_name') }}:</label></div>
+                    <div class="col-md-8 col-xs-12 required"><input type='text' id='modal-last_name' class="form-control"></div>
                 </div>
 
                 <div class="dynamic-form-row">
-                    <div class="col-md-4 col-xs-12"><label for="modal-username">{{ trans('admin/users/table.username') }}*:</label></div>
-                    <div class="col-md-8 col-xs-12"><input type='text' id='modal-username' class="form-control"></div>
+                    <div class="col-md-4 col-xs-12"><label for="modal-username">{{ trans('admin/users/table.username') }}:</label></div>
+                    <div class="col-md-8 col-xs-12 required"><input type='text' id='modal-username' class="form-control"></div>
                 </div>
 
                 <div class="dynamic-form-row">
-                    <div class="col-md-4 col-xs-12"><label for="modal-password">{{ trans('admin/users/table.password') }}*:</label></div>
-                    <div class="col-md-8 col-xs-12"><input type='password' id='modal-password' class="form-control"></div>
+                    <div class="col-md-4 col-xs-12"><label for="modal-password">{{ trans('admin/users/table.password') }}:</label></div>
+                    <div class="col-md-8 col-xs-12 required"><input type='password' id='modal-password' class="form-control"></div>
                 </div>
 
                 <div class="dynamic-form-row">
-                    <div class="col-md-4 col-xs-12"><label for="modal-password_confirm">{{ trans('admin/users/table.password_confirm') }}*:</label></div>
-                    <div class="col-md-8 col-xs-12"><input type='password' id='modal-password_confirm' class="form-control"></div>
+                    <div class="col-md-4 col-xs-12"><label for="modal-password_confirm">{{ trans('admin/users/table.password_confirm') }}:</label></div>
+                    <div class="col-md-8 col-xs-12 required"><input type='password' id='modal-password_confirm' class="form-control"></div>
                 </div>
 
             </div>

@@ -56,9 +56,8 @@ input[type='text'][disabled], input[disabled], textarea[disabled], input[readonl
 
       <!-- First Name -->
       <div class="form-group {{ $errors->has('first_name') ? 'has-error' : '' }}">
-          <label class="col-md-3 control-label" for="first_name">{{ trans('general.first_name') }}
-          <i class='fa fa-asterisk'></i></label>
-          <div class="col-md-9">
+          <label class="col-md-3 control-label" for="first_name">{{ trans('general.first_name') }}</label>
+          <div class="col-md-8{{  (\App\Helpers\Helper::checkIfRequired($user, 'first_name')) ? ' required' : '' }}">
               <input class="form-control" type="text" name="first_name" id="first_name" value="{{ Input::old('first_name', $user->first_name) }}" />
               {!! $errors->first('first_name', '<span class="alert-msg">:message</span>') !!}
           </div>
@@ -66,8 +65,8 @@ input[type='text'][disabled], input[disabled], textarea[disabled], input[readonl
 
       <!-- Last Name -->
       <div class="form-group {{ $errors->has('last_name') ? 'has-error' : '' }}">
-          <label class="col-md-3 control-label" for="last_name">{{ trans('general.last_name') }} <i class='fa fa-asterisk'></i></label>
-          <div class="col-md-9">
+          <label class="col-md-3 control-label" for="last_name">{{ trans('general.last_name') }} </label>
+          <div class="col-md-8{{  (\App\Helpers\Helper::checkIfRequired($user, 'last_name')) ? ' required' : '' }}">
               <input class="form-control" type="text" name="last_name" id="last_name" value="{{ Input::old('last_name', $user->last_name) }}" />
               {!! $errors->first('last_name', '<span class="alert-msg">:message</span>') !!}
           </div>
@@ -76,8 +75,8 @@ input[type='text'][disabled], input[disabled], textarea[disabled], input[readonl
 
 <!-- Username -->
   <div class="form-group {{ $errors->has('username') ? 'has-error' : '' }}">
-      <label class="col-md-3 control-label" for="username">{{ trans('admin/users/table.username') }} <i class='fa fa-asterisk'></i></label>
-      <div class="col-md-9">
+      <label class="col-md-3 control-label" for="username">{{ trans('admin/users/table.username') }}</label>
+      <div class="col-md-8{{  (\App\Helpers\Helper::checkIfRequired($user, 'username')) ? ' required' : '' }}">
         @if ($user->ldap_import!='1')
             <input class="form-control" type="text" name="username" id="username" value="{{ Input::old('username', $user->username) }}"  {{ ((config('app.lock_passwords') && ($user->id)) ? ' disabled' : '') }} autocomplete="false" readonly onfocus="this.removeAttribute('readonly');">
             @if (config('app.lock_passwords') && ($user->id))
@@ -95,11 +94,8 @@ input[type='text'][disabled], input[disabled], textarea[disabled], input[readonl
   <!-- Password -->
   <div class="form-group {{ $errors->has('password') ? 'has-error' : '' }}">
     <label class="col-md-3 control-label" for="password">{{ trans('admin/users/table.password') }}
-    @if (!$user->id)
-      <i class='fa fa-asterisk'></i>
-    @endif
     </label>
-    <div class="col-md-5">
+    <div class="col-md-5{{  (\App\Helpers\Helper::checkIfRequired($user, 'password')) ? ' required' : '' }}">
       @if ($user->ldap_import!='1')
           <input type="password" name="password" class="form-control" id="password" value="" {{ ((config('app.lock_passwords') && ($user->id)) ? ' disabled' : '') }} autocomplete="false" readonly onfocus="this.removeAttribute('readonly');">
       @else
@@ -119,11 +115,8 @@ input[type='text'][disabled], input[disabled], textarea[disabled], input[readonl
   <!-- Password Confirm -->
   <div class="form-group {{ $errors->has('password_confirm') ? 'has-error' : '' }}">
     <label class="col-md-3 control-label" for="password_confirm">{{ trans('admin/users/table.password_confirm') }}
-    @if (!$user->id)
-    <i class='fa fa-asterisk'></i>
-    @endif
     </label>
-    <div class="col-md-5">
+    <div class="col-md-5{{  ((\App\Helpers\Helper::checkIfRequired($user, 'first_name')) && (!$user->id)) ? ' required' : '' }}">
     <input type="password" name="password_confirm" id="password_confirm"  class="form-control" value="" {{ ((config('app.lock_passwords') && ($user->id)) ? ' disabled' : '') }} autocomplete="off">
     @if (config('app.lock_passwords') && ($user->id))
       <p class="help-block">{{ trans('admin/users/table.lock_passwords') }}</p>
@@ -137,7 +130,7 @@ input[type='text'][disabled], input[disabled], textarea[disabled], input[readonl
     <!-- Email -->
       <div class="form-group {{ $errors->has('email') ? 'has-error' : '' }}">
           <label class="col-md-3 control-label" for="email">{{ trans('admin/users/table.email') }} </label>
-          <div class="col-md-9">
+          <div class="col-md-8{{  (\App\Helpers\Helper::checkIfRequired($user, 'email')) ? ' required' : '' }}">
               <input class="form-control" type="text" name="email" id="email" value="{{ Input::old('email', $user->email) }}"  {{ ((config('app.lock_passwords') && ($user->id)) ? ' disabled' : '') }} autocomplete="off"  readonly onfocus="this.removeAttribute('readonly');">
                @if (config('app.lock_passwords') && ($user->id))
                 <p class="help-block">{{ trans('admin/users/table.lock_passwords') }}</p>
@@ -154,7 +147,7 @@ input[type='text'][disabled], input[disabled], textarea[disabled], input[readonl
             <div class="col-md-3 control-label">
                 {{ Form::label('company_id', trans('general.company')) }}
             </div>
-            <div class="col-md-9">
+            <div class="col-md-8">
                 {{ Form::select('company_id', $company_list , Input::old('company_id', $user->company_id), array('class'=>'select2', 'style'=>'width:350px')) }}
                 {!! $errors->first('company_id', '<span class="alert-msg">:message</span>') !!}
             </div>
@@ -167,7 +160,7 @@ input[type='text'][disabled], input[disabled], textarea[disabled], input[readonl
        <!-- language -->
          <div class="form-group {{ $errors->has('locale') ? 'has-error' : '' }}">
              <label class="col-md-3 control-label" for="locale">{{ trans('general.language') }}</label>
-             <div class="col-md-9">
+             <div class="col-md-8">
                  {!! Form::locales('locale', Input::old('locale', $user->locale), 'select2') !!}
                  {!! $errors->first('locale', '<span class="alert-msg">:message</span>') !!}
              </div>
@@ -177,7 +170,7 @@ input[type='text'][disabled], input[disabled], textarea[disabled], input[readonl
     <!-- Employee Number -->
       <div class="form-group {{ $errors->has('employee_num') ? 'has-error' : '' }}">
           <label class="col-md-3 control-label" for="employee_num">{{ trans('admin/users/table.employee_num') }}</label>
-          <div class="col-md-9">
+          <div class="col-md-8">
               <input class="form-control" type="text" name="employee_num" id="employee_num" value="{{ Input::old('employee_num', $user->employee_num) }}" />
               {!! $errors->first('employee_num', '<span class="alert-msg">:message</span>') !!}
           </div>
@@ -187,7 +180,7 @@ input[type='text'][disabled], input[disabled], textarea[disabled], input[readonl
       <!-- Jobtitle -->
       <div class="form-group {{ $errors->has('jobtitle') ? 'has-error' : '' }}">
           <label class="col-md-3 control-label" for="jobtitle">{{ trans('admin/users/table.title') }}</label>
-          <div class="col-md-9">
+          <div class="col-md-8">
               <input class="form-control" type="text" name="jobtitle" id="jobtitle" value="{{ Input::old('jobtitle', $user->jobtitle) }}" />
               {!! $errors->first('jobtitle', '<span class="alert-msg">:message</span>') !!}
           </div>
@@ -197,7 +190,7 @@ input[type='text'][disabled], input[disabled], textarea[disabled], input[readonl
 <!-- Manager -->
       <div class="form-group {{ $errors->has('manager_id') ? 'has-error' : '' }}">
           <label class="col-md-3 control-label" for="manager_id">{{ trans('admin/users/table.manager') }}</label>
-          <div class="col-md-9">
+          <div class="col-md-8">
               {{ Form::select('manager_id', $manager_list , Input::old('manager_id', $user->manager_id), array('class'=>'select2', 'style'=>'width:350px')) }}
               {!! $errors->first('manager_id', '<span class="alert-msg">:message</span>') !!}
           </div>
@@ -207,7 +200,7 @@ input[type='text'][disabled], input[disabled], textarea[disabled], input[readonl
       <div class="form-group {{ $errors->has('location_id') ? 'has-error' : '' }}">
           <label class="col-md-3 control-label" for="location_id">{{ trans('admin/users/table.location') }}
               </label>
-          <div class="col-md-9">
+          <div class="col-md-8">
               {{ Form::select('location_id', $location_list , Input::old('location_id', $user->location_id), array('class'=>'select2', 'style'=>'width:350px')) }}
               {!! $errors->first('location_id', '<span class="alert-msg">:message</span>') !!}
           </div>
@@ -225,7 +218,7 @@ input[type='text'][disabled], input[disabled], textarea[disabled], input[readonl
 <!-- Activation Status -->
       <div class="form-group {{ $errors->has('activated') ? 'has-error' : '' }}">
           <label class="col-md-3 control-label" for="activated">{{ trans('admin/users/table.activated') }}</label>
-          <div class="col-md-9">
+          <div class="col-md-8">
              <div class="controls">
               <select{{ ($user->id === Auth::user()->id ? ' disabled="disabled"' : '') }} name="activated" id="activated" {{ ((config('app.lock_passwords') && ($user->id)) ? ' disabled' : '') }}>
               @if ($user->id)
@@ -246,7 +239,7 @@ input[type='text'][disabled], input[disabled], textarea[disabled], input[readonl
        <!-- Notes -->
       <div class="form-group{!! $errors->has('notes') ? ' has-error' : '' !!}">
           <label for="notes" class="col-md-3 control-label">{{ trans('admin/users/table.notes') }}</label>
-          <div class="col-md-9">
+          <div class="col-md-8">
               <textarea class="form-control" id="notes" name="notes">{{ Input::old('notes', $user->notes) }}</textarea>
               {!! $errors->first('notes', '<span class="alert-msg"><i class="fa fa-times"></i> :message</span>') !!}
           </div>
