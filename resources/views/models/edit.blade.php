@@ -20,7 +20,7 @@
 @section('content')
 
   <div class="row">
-    <div class="col-md-9">
+    <div class="col-md-8 col-md-offset-2">
 
       {{ Form::open(['method' => 'POST', 'files' => true, 'class' => 'form-horizontal' ]) }}
       <!-- CSRF Token -->
@@ -40,10 +40,9 @@
         <div class="box-body">
           <!-- Model name -->
           <div class="form-group {{ $errors->has('name') ? ' has-error' : '' }}">
-            <label for="name" class="col-md-3 control-label">{{ trans('admin/models/table.name') }}
-             <i class='fa fa-asterisk'></i></label>
+            <label for="name" class="col-md-3 control-label">{{ trans('admin/models/table.name') }}</label>
              </label>
-                <div class="col-md-7">
+                <div class="col-md-7 required">
                   <input class="form-control" type="text" name="name" id="name" value="{{ Input::old('name', $model->name) }}" />
                   {!! $errors->first('name', '<span class="alert-msg"><i class="fa fa-times"></i> :message</span>') !!}
                 </div>
@@ -51,9 +50,9 @@
 
            <div class="form-group {{ $errors->has('manufacturer_id') ? ' has-error' : '' }}">
             <label for="manufacturer_id" class="col-md-3 control-label">{{ trans('general.manufacturer') }}
-             <i class='fa fa-asterisk'></i></label>
+            </label>
              </label>
-              <div class="col-md-7">
+              <div class="col-md-7 required">
                 {{ Form::select('manufacturer_id', $manufacturer_list , Input::old('manufacturer_id', $model->manufacturer_id), array('class'=>'select2', 'style'=>'width:350px')) }}
                 {!! $errors->first('manufacturer_id', '<span class="alert-msg"><br><i class="fa fa-times"></i> :message</span>') !!}
               </div>
@@ -62,9 +61,9 @@
           <!-- Category -->
                 <div class="form-group {{ $errors->has('category_id') ? ' has-error' : '' }}">
                     <label for="category_id" class="col-md-3 control-label">{{ trans('general.category') }}
-                     <i class='fa fa-asterisk'></i></label>
+                    </label>
                      </label>
-                        <div class="col-md-7">
+                        <div class="col-md-7 required">
                             {{ Form::select('category_id', $category_list , Input::old('category_id', $model->category_id), array('class'=>'select2', 'style'=>'width:350px')) }}
                             {!! $errors->first('category_id', '<span class="alert-msg"><br><i class="fa fa-times"></i> :message</span>') !!}
                         </div>

@@ -42,7 +42,7 @@
         <div class="form-group {{ $errors->has('name') ? ' has-error' : '' }}">
           <label for="name" class="col-md-3 control-label">{{ trans('admin/manufacturers/table.name') }}
            </label>
-          <div class="col-md-9">
+          <div class="col-md-9 required">
               <input class="form-control" type="text" name="name" id="name" value="{{ Input::old('name', $manufacturer->name) }}" />
               {!! $errors->first('name', '<span class="alert-msg"><i class="fa fa-times"></i> :message</span>') !!}
           </div>

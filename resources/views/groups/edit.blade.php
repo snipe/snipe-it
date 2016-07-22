@@ -22,7 +22,7 @@
 
 
   <div class="row">
-    <div class="col-md-9">
+    <div class="col-md-8 col-md-offset-2">
       <div class="box box-default">
 
           @if ($group->id)
@@ -44,13 +44,13 @@
               <label for="name" class="col-md-3 control-label">{{ trans('admin/groups/titles.group_name') }}
                <i class='fa fa-asterisk'></i></label>
                </label>
-                  <div class="col-md-6">
+                  <div class="col-md-6 required">
                       <input class="form-control" type="text" name="name" id="name" value="{{ Input::old('name', $group->name) }}" />
                       {!! $errors->first('name', '<span class="alert-msg"><i class="fa fa-times"></i> :message</span>') !!}
                   </div>
           </div>
 
-          <div class="col-md-9 col-md-offset-3">
+          <div class="col-md-8 col-md-offset-3">
 
           @foreach ($permissions as $area => $permission)
 

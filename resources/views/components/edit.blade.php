@@ -42,26 +42,14 @@
         </div><!-- /.box-header -->
 
        <div class="box-body">
-         <!-- Company -->
-         @if (\App\Models\Company::isCurrentUserAuthorized())
-             <div class="form-group {{ $errors->has('company_id') ? ' has-error' : '' }}">
-                 <div class="col-md-3">
-                     {{ Form::label('company_id', trans('general.company')) }}
-                 </div>
-                 <div class="col-md-7">
-                     {{ Form::select('company_id', $company_list , Input::old('company_id', $component->company_id), array('class'=>'select2', 'style'=>'width:350px')) }}
-                     {!! $errors->first('company_id', '<span class="alert-msg"><i class="fa fa-times"></i> :message</span>') !!}
-                 </div>
-             </div>
-         @endif
+
 
          <!-- Name -->
          <div class="form-group {{ $errors->has('name') ? ' has-error' : '' }}">
-             <div class="col-md-3">
-             	{{ Form::label('name', trans('admin/components/table.title')) }} *
 
-             </div>
-             <div class="col-md-9">
+             {{ Form::label('name', trans('admin/components/table.title'), array('class' => 'col-md-3 control-label')) }}
+
+             <div class="col-md-8 required">
                  <input class="form-control" type="text" name="name" id="name" value="{{ Input::old('name', $component->name) }}" />
                  {!! $errors->first('name', '<span class="alert-msg"><i class="fa fa-times"></i> :message</span>') !!}
              </div>
@@ -69,21 +57,64 @@
 
      	<!-- Category -->
          <div class="form-group {{ $errors->has('category_id') ? ' has-error' : '' }}">
-     	     <div class="col-md-3">
-     		     {{ Form::label('category_id', trans('general.category')) }} *
 
-              </div>
-                 <div class="col-md-7">
+     		     {{ Form::label('category_id', trans('general.category'), array('class' => 'col-md-3 control-label')) }}
+
+                 <div class="col-md-8 required">
                      {{ Form::select('category_id', $category_list , Input::old('category_id', $component->category_id), array('class'=>'select2', 'style'=>'width:100%')) }}
                      {!! $errors->first('category_id', '<span class="alert-msg"><i class="fa fa-times"></i> :message</span>') !!}
                  </div>
          </div>
 
+           <!-- QTY -->
+           <div class="form-group {{ $errors->has('total_qty') ? ' has-error' : '' }}">
+
+               {{ Form::label('total_qty', trans('general.quantity'), array('class' => 'col-md-3 control-label')) }}
+
+               <div class="col-md-2 required">
+                   <input class="form-control" type="text" name="total_qty" id="total_qty" value="{{ Input::old('qty', $component->total_qty) }}" />
+
+               </div>
+               {!! $errors->first('total_qty', ' <div class="col-md-8 col-md-offset-3"><span class="alert-msg"><i class="fa fa-times"></i> :message</span></div>') !!}
+           </div>
+
+           <!-- Min QTY -->
+           <div class="form-group{{ $errors->has('min_amt') ? ' has-error' : '' }}">
+
+               {{ Form::label('min_amt', trans('general.min_amt'), array('class' => 'col-md-3 control-label')) }}
+
+               <div class="col-md-2">
+                   <input class="form-control" type="text" name="min_amt" id="min_amt" value="{{ Input::old('qty', $component->min_amt) }}" />
+               </div>
+               <div class="col-md-1 text-left">
+                   <a href="#" data-toggle="tooltip" title="{{ trans('general.min_amt_help') }}"><i class="fa fa-info-circle"></i></a>
+               </div>
+               <div class="col-md-12">
+                   {!! $errors->first('min_amt', '<span class="alert-msg"><i class="fa fa-times"></i> :message</span>') !!}
+               </div>
+
+
+           </div>
+
+
+           <!-- Company -->
+           @if (\App\Models\Company::isCurrentUserAuthorized())
+               <div class="form-group {{ $errors->has('company_id') ? ' has-error' : '' }}">
+
+                       {{ Form::label('company_id', trans('general.company'), array('class' => 'col-md-3 control-label')) }}
+
+                   <div class="col-md-8">
+                       {{ Form::select('company_id', $company_list , Input::old('company_id', $component->company_id), array('class'=>'select2', 'style'=>'width:350px')) }}
+                       {!! $errors->first('company_id', '<span class="alert-msg"><i class="fa fa-times"></i> :message</span>') !!}
+                   </div>
+               </div>
+       @endif
+
          <!--  Location -->
          <div class="form-group {{ $errors->has('location_id') ? ' has-error' : '' }}">
-            <div class="col-md-3">
-            {{ Form::label('location_id', trans('general.location')) }}
-            </div>
+
+            {{ Form::label('location_id', trans('general.location'), array('class' => 'col-md-3 control-label')) }}
+
                  <div class="col-md-7 col-sm-12">
                      {{ Form::select('location_id', $location_list , Input::old('location_id', $component->location_id), array('class'=>'select2', 'style'=>'width:350px')) }}
 
@@ -94,9 +125,9 @@
 
          <!-- Order Number -->
          <div class="form-group {{ $errors->has('order_number') ? ' has-error' : '' }}">
-             <div class="col-md-3">
-     		     {{ Form::label('order_number', trans('admin/components/general.order')) }}
-             </div>
+
+     		     {{ Form::label('order_number', trans('admin/components/general.order'), array('class' => 'col-md-3 control-label')) }}
+
              <div class="col-md-3">
                  <input class="form-control" type="text" name="order_number" id="order_number" value="{{ Input::old('order_number', $component->order_number) }}" />
                  {!! $errors->first('order_number', '<span class="alert-msg"><i class="fa fa-times"></i> :message</span>') !!}
@@ -105,9 +136,9 @@
 
          <!-- Purchase Date -->
          <div class="form-group {{ $errors->has('purchase_date') ? ' has-error' : '' }}">
-             <div class="col-md-3">
-     		     {{ Form::label('purchase_date', trans('admin/components/general.date')) }}
-             </div>
+
+     		     {{ Form::label('purchase_date', trans('admin/components/general.date'), array('class' => 'col-md-3 control-label')) }}
+
              <div class="input-group col-md-3">
                  <input type="date" class="datepicker form-control" data-date-format="yyyy-mm-dd" placeholder="{{ trans('general.select_date') }}" name="purchase_date" id="purchase_date" value="{{ Input::old('purchase_date', $component->purchase_date) }}">
                  <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
@@ -117,9 +148,9 @@
 
          <!-- Purchase Cost -->
          <div class="form-group {{ $errors->has('purchase_cost') ? ' has-error' : '' }}">
-             <div class="col-md-3">
-     		     {{ Form::label('purchase_cost', trans('admin/components/general.cost')) }}
-             </div>
+
+     		     {{ Form::label('purchase_cost', trans('admin/components/general.cost'), array('class' => 'col-md-3 control-label')) }}
+
              <div class="col-md-2">
                  <div class="input-group">
                      <span class="input-group-addon">
@@ -131,36 +162,7 @@
              </div>
          </div>
 
-         <!-- QTY -->
-         <div class="form-group {{ $errors->has('total_qty') ? ' has-error' : '' }}">
-             <div class="col-md-3">
-             	{{ Form::label('total_qty', trans('general.quantity')) }} *
-             </div>
-             <div class="col-md-9" style="margin-left: -15px">
-                 <div class="col-md-2">
-                     <input class="form-control" type="text" name="total_qty" id="total_qty" value="{{ Input::old('qty', $component->total_qty) }}" />
-                 </div>
-                 {!! $errors->first('total_qty', '<span class="alert-msg"><i class="fa fa-times"></i> :message</span>') !!}
-             </div>
-         </div>
 
-         <!-- Min QTY -->
-         <div class="form-group{{ $errors->has('min_amt') ? ' has-error' : '' }}">
-             <div class="col-md-3">
-             	{{ Form::label('min_amt', trans('general.min_amt')) }}
-             </div>
-             <div class="col-md-9" style="margin-left: -15px">
-                 <div class="col-md-2">
-     	           <input class="form-control col-md-3" type="text" name="min_amt" id="min_amt" value="{{ Input::old('qty', $component->min_amt) }}" />
-                </div>
-                <div class="col-md-7" style="margin-left: -15px;">
-                  <a href="#" data-toggle="tooltip" title="{{ trans('general.min_amt_help') }}"><i class="fa fa-info-circle"></i></a>
-                </div>
-                <div class="col-md-12">
-                 {!! $errors->first('min_amt', '<span class="alert-msg"><i class="fa fa-times"></i> :message</span>') !!}
-               </div>
-             </div>
-           </div>
 
       </div>
       <div class="box-footer text-right">

@@ -24,7 +24,7 @@
 
 
 <div class="row">
-  <div class="col-md-8">
+  <div class="col-md-8 col-md-offset-2">
 
     <div class="box box-default">
       @if ($location->id)
@@ -43,7 +43,7 @@
           <div class="form-group {{ $errors->has('name') ? ' has-error' : '' }}">
             <label for="name" class="col-md-3 control-label">{{ trans('admin/locations/table.name') }}
             </label>
-            <div class="col-md-9">
+            <div class="col-md-8 required">
                 <input class="form-control" type="text" name="name" id="name" value="{{ Input::old('name', $location->name) }}" />
                 {!! $errors->first('name', '<span class="alert-msg"><i class="fa fa-times"></i> :message</span>') !!}
             </div>

@@ -40,9 +40,9 @@
         <div class="form-group {{ $errors->has('name') ? ' has-error' : '' }}">
           <div class="col-md-3">
             {{ Form::label('name', trans('admin/categories/general.category_name')) }}
-            <i class='fa fa-asterisk'></i>
+
           </div>
-            <div class="col-md-9">
+            <div class="col-md-8 required">
                 <input class="form-control" type="text" name="name" id="name" value="{{ Input::old('name', $category->name) }}" />
                 {!! $errors->first('name', '<span class="alert-msg"><i class="fa fa-times"></i> :message</span>') !!}
             </div>
@@ -52,9 +52,8 @@
       <div class="form-group {{ $errors->has('category_type') ? ' has-error' : '' }}">
         <div class="col-md-3">
           {{ Form::label('category_type', trans('general.type')) }}
-          <i class='fa fa-asterisk'></i>
         </div>
-          <div class="col-md-7">
+          <div class="col-md-7 required">
               {{ Form::select('category_type', $category_types , Input::old('category_type', $category->category_type), array('class'=>'select2', 'style'=>'min-width:350px', $category->itemCount() > 0 ? 'disabled' : '')) }}
               {!! $errors->first('category_type', '<span class="alert-msg"><i class="fa fa-times"></i> :message</span>') !!}
           </div>
@@ -65,7 +64,7 @@
         <div class="col-md-3">
           {{ Form::label('eula_text', trans('admin/categories/general.eula_text')) }}
         </div>
-        <div class="col-md-9">
+        <div class="col-md-8">
         {{ Form::textarea('eula_text', Input::old('eula_text', $category->eula_text), array('class' => 'form-control')) }}
         <p class="help-block">{!! trans('admin/categories/general.eula_text_help') !!} </p>
         <p class="help-block">{!! trans('admin/settings/general.eula_markdown') !!} </p>

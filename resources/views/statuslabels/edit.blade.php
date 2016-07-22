@@ -31,15 +31,24 @@
           <div class="box-body">
             <!-- Asset Title -->
             <div class="form-group {{ $errors->has('name') ? ' has-error' : '' }}">
-                <label for="name" class="col-md-3 control-label">{{ trans('general.name') }}
-                <i class='fa fa-asterisk'></i></label>
+                <label for="name" class="col-md-3 control-label">{{ trans('general.name') }}</label>
                 </label>
-                    <div class="col-md-7">
+                    <div class="col-md-7 required">
                         <input class="form-control" type="text" name="name" id="name" value="{{ Input::old('name', $statuslabel->name) }}" />
                         {!! $errors->first('name', '<span class="alert-msg"><i class="fa fa-times"></i> :message</span>') !!}
                     </div>
             </div>
 
+          <!-- Label type -->
+          <div class="form-group {{ $errors->has('statuslabel_types') ? 'has-error' : '' }}">
+              <label for="statuslabel_types" class="col-md-3 control-label">{{ trans('admin/statuslabels/table.status_type') }}
+              </label>
+              </label>
+              <div class="col-md-7 required">
+                  {{ Form::select('statuslabel_types', $statuslabel_types, $statuslabel->getStatuslabelType(), array('class'=>'select2', 'style'=>'min-width:400px')) }}
+                  {!! $errors->first('statuslabel_types', '<span class="alert-msg"><i class="fa fa-times"></i> :message</span>') !!}
+              </div>
+          </div>
 
             <!-- Note -->
             <div class="form-group {{ $errors->has('notes') ? 'has-error' : '' }}">
@@ -51,16 +60,7 @@
             </div>
 
 
-            <!-- Label type -->
-            <div class="form-group {{ $errors->has('statuslabel_types') ? 'has-error' : '' }}">
-                <label for="statuslabel_types" class="col-md-3 control-label">{{ trans('admin/statuslabels/table.status_type') }}
-                <i class='fa fa-asterisk'></i></label>
-                </label>
-                <div class="col-md-7">
-                    {{ Form::select('statuslabel_types', $statuslabel_types, $statuslabel->getStatuslabelType(), array('class'=>'select2', 'style'=>'min-width:400px')) }}
-                    {!! $errors->first('statuslabel_types', '<span class="alert-msg"><i class="fa fa-times"></i> :message</span>') !!}
-                </div>
-            </div>
+
 
           </div>
           <div class="box-footer text-right">
@@ -71,7 +71,7 @@
 
 <!-- side address column -->
 <div class="col-md-3">
-    <h6>{{ trans('admin/statuslabels/table.about') }}</h6>
+    <h4>{{ trans('admin/statuslabels/table.about') }}</h4>
     <p>{{ trans('admin/statuslabels/table.info') }}</p>
 
 </div>

@@ -20,7 +20,7 @@
 @section('content')
 
   <div class="row">
-    <div class="col-md-9">
+    <div class="col-md-9 col-md-offset-2">
 
       {{ Form::open(['method' => 'POST', 'files' => true, 'class' => 'form-horizontal', 'autocomplete' => 'off' ]) }}
            <!-- CSRF Token -->
@@ -41,7 +41,7 @@
           <!-- Name -->
           <div class="form-group {{ $errors->has('name') ? ' has-error' : '' }}">
               {{ Form::label('name', trans('admin/suppliers/table.name'), array('class' => 'col-md-3 control-label')) }}
-                  <div class="col-md-6">
+                  <div class="col-md-6 required">
                       {{ Form::text('name', Input::old('name', $supplier->name), array('class' => 'form-control')) }}
                       {!! $errors->first('name', '<span class="alert-msg"><i class="fa fa-times"></i> :message</span>') !!}
                   </div>
