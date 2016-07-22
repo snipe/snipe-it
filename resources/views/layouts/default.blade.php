@@ -496,7 +496,7 @@
           <h1 class="pull-left">
             @yield('title')
             @if (config('app.lock_passwords'))
-               <p class="help-block">{{ trans('general.feature_disabled') }}</p>
+               <p class="help-block">{{ trans('general.some_features_disabled') }}</p>
             @endif
 
           </h1>
