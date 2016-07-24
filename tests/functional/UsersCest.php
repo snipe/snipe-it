@@ -1,11 +1,10 @@
 <?php
 
 
-class AccessoriesCest
+class UsersCest
 {
     public function _before(FunctionalTester $I)
     {
-        exec("mysql -u snipeit -psnipe snipeit < tests/_data/dump.sql");
          $I->amOnPage('/login');
          $I->fillField('username', 'snipeit');
          $I->fillField('password', 'snipeit');
@@ -51,4 +50,18 @@ class AccessoriesCest
         $I->click('Save');
         $I->seeElement('.alert-success');
     }
+
+    public function failsEmptyValidation(FunctionalTester $I)
+    {
+        
+    }
+
+    public function failsShortValidation(FunctionalTester $I)
+    {
+        
+    }
+    public function passesCorrectValidation(FunctionalTester $I)
+    {
+        
+    }    
 }

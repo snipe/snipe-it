@@ -1,11 +1,10 @@
 <?php
 
 
-class AccessoriesCest
+class StatusLabelsCest
 {
     public function _before(FunctionalTester $I)
     {
-        exec("mysql -u snipeit -psnipe snipeit < tests/_data/dump.sql");
          $I->amOnPage('/login');
          $I->fillField('username', 'snipeit');
          $I->fillField('password', 'snipeit');
@@ -24,15 +23,23 @@ class AccessoriesCest
         $I->amOnPage('/admin/settings/statuslabels/create');
         $I->dontSee('Create Status Label', '.page-header');
         $I->see('Create Status Label', 'h1.pull-left');
+    }
 
+    public function failsEmptyValidation(FunctionalTester $I)
+    {
         $I->wantTo("Test Validation Fails with blank elements");
+        $I->amOnPage('/admin/settings/statuslabels/create');
         $I->click('Save');
         $I->seeElement('.alert-danger');
         $I->see('The name field is required.', '.alert-msg');
+    }
 
+    public function passesCorrectValidation(FunctionalTester $I)
+    {
         $I->wantTo("Test Validation Succeeds");
+        $I->amOnPage('/admin/settings/statuslabels/create');
         $I->fillField('name', 'TestStatus');
         $I->click('Save');
         $I->seeElement('.alert-success');
-    }
+    }    
 }
