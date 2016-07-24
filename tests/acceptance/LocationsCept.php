@@ -6,7 +6,7 @@ $I->wantTo('ensure that the locations listing page loads without errors');
 $I->lookForwardTo('seeing it load without errors');
 $I->amOnPage('/admin/settings/locations');
 $I->waitForElement('.table', 5); // secs
-$I->seeNumberOfElements('tr', [1,10]);
+$I->seeNumberOfElements('tr', [5,30]);
 $I->seeInTitle('Locations');
 $I->see('Locations');
 $I->seeInPageSource('admin/settings/locations/create');
