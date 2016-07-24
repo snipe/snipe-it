@@ -52,6 +52,6 @@ class LocationsCest
         $I->fillField('zip', 't232a');
         $I->click('Save');
         $I->dontSee('&lt;span class=&quot;');
-        $I->dontSeeElement('.alert-danger');
+        $I->seeElement('.alert-success');
     }
 }
