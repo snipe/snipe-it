@@ -1,0 +1,3 @@
+* Dump should contain at least one category of each type for functional testing.
+* acceptance: replace some amonpage with checking url after clicking create
+* acceptance: asset model test
