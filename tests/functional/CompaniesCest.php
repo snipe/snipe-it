@@ -5,7 +5,6 @@ class CompaniesCest
 {
     public function _before(FunctionalTester $I)
     {
-         exec("mysql -u snipeit -psnipe snipeit < tests/_data/dump.sql");
          $I->amOnPage('/login');
          $I->fillField('username', 'snipeit');
          $I->fillField('password', 'snipeit');
@@ -24,12 +23,21 @@ class CompaniesCest
         $I->amOnPage('/admin/settings/companies/create');
         $I->seeInTitle('Create Company');
         $I->see('Create Company', 'h1.pull-left');
+    }
 
+    public function failsEmptyValidation(FunctionalTester $I)
+    {
         $I->wantTo("Test Validation Fails with blank elements");
+        $I->amOnPage('/admin/settings/companies/create');
         $I->click('Save');
         $I->seeElement('.alert-danger');
         $I->see('The name field is required.', '.alert-msg');
+    }
+
+    public function passesCorrectValidation(FunctionalTester $I)
+    {
         $I->wantTo("Test Validation Succeeds");
+        $I->amOnPage('/admin/settings/companies/create');
         $I->fillField('name', 'TestCompany');
         $I->click('Save');
         $I->dontSee('&lt;span class=&quot;');

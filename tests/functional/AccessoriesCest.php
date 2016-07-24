@@ -5,7 +5,6 @@ class AccessoriesCest
 {
     public function _before(FunctionalTester $I)
     {
-        exec("mysql -u snipeit -psnipe snipeit < tests/_data/dump.sql");
          $I->amOnPage('/login');
          $I->fillField('username', 'snipeit');
          $I->fillField('password', 'snipeit');
@@ -24,16 +23,23 @@ class AccessoriesCest
         $I->amOnPage('/admin/accessories/create');
         $I->dontSee('Create Accessory', '.page-header');
         $I->see('Create Accessory', 'h1.pull-left');
-        $I->dontSee('&lt;span class=&quot;');
-         $I->dontSee('&lt;span class=&quot;');
+    }
 
+    public function failsEmptyValidation(FunctionalTester $I)
+    {
         $I->wantTo("Test Validation Fails with blank elements");
+        $I->amOnPage('/admin/accessories/create');
         $I->click('Save');
         $I->seeElement('.alert-danger');
         $I->see('The name field is required.', '.alert-msg');
         $I->see('The category id field is required.', '.alert-msg');
         $I->see('The qty field is required.', '.alert-msg');
+    }
+
+    public function failsShortValidation(FunctionalTester $I)
+    {
         $I->wantTo("Test Validation Fails with short name");
+        $I->amOnPage('/admin/accessories/create');
         $I->fillField('name', 't2');
         $I->fillField('qty', '-15');
         $I->fillField('min_amt', '-15');
@@ -42,7 +48,12 @@ class AccessoriesCest
         $I->see('The name must be at least 3 characters', '.alert-msg');
         $I->see('The qty must be at least 1', '.alert-msg');
         $I->see('The min amt must be at least 1', '.alert-msg');
+    }
+
+    public function passesCorrectValidation(FunctionalTester $I)
+    {
         $I->wantTo("Test Validation Succeeds");
+        $I->amOnPage('/admin/accessories/create');
         $I->fillField('name', 'TestAccessory');
         $I->fillField('qty', '12');
         $I->fillField('min_amt', '15');
@@ -51,4 +62,5 @@ class AccessoriesCest
         $I->dontSee('&lt;span class=&quot;');
         $I->seeElement('.alert-success');
     }
+
 }

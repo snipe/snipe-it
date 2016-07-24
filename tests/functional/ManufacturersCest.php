@@ -5,7 +5,6 @@ class AssetModelCest
 {
     public function _before(FunctionalTester $I)
     {
-         exec("mysql -u snipeit -psnipe snipeit < tests/_data/dump.sql");
          $I->amOnPage('/login');
          $I->fillField('username', 'snipeit');
          $I->fillField('password', 'snipeit');
@@ -24,17 +23,30 @@ class AssetModelCest
         $I->amOnPage('/admin/settings/manufacturers/create');
         $I->seeInTitle('Create Manufacturer');
         $I->see('Create Manufacturer', 'h1.pull-left');
+    }
 
+    public function failsEmptyValidation(FunctionalTester $I)
+    {
         $I->wantTo("Test Validation Fails with blank elements");
+        $I->amOnPage('/admin/settings/manufacturers/create');
         $I->click('Save');
         $I->seeElement('.alert-danger');
         $I->see('The name field is required.', '.alert-msg');
+    }
+
+    public function failsShortValidation(FunctionalTester $I)
+    {
         $I->wantTo("Test Validation Fails with short name");
+        $I->amOnPage('/admin/settings/manufacturers/create');
         $I->fillField('name', 't');
         $I->click('Save');
         $I->seeElement('.alert-danger');
         $I->see('The name must be at least 2 characters', '.alert-msg');
+    }
+    public function passesCorrectValidation(FunctionalTester $I)
+    {
         $I->wantTo("Test Validation Succeeds");
+        $I->amOnPage('/admin/settings/manufacturers/create');
         $I->fillField('name', 'TestManufacturer');
         $I->click('Save');
         $I->dontSee('&lt;span class=&quot;');

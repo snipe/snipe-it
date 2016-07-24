@@ -5,7 +5,6 @@ class CategoryCest
 {
     public function _before(FunctionalTester $I)
     {
-         exec("mysql -u snipeit -psnipe snipeit < tests/_data/dump.sql");
          $I->amOnPage('/login');
          $I->fillField('username', 'snipeit');
          $I->fillField('password', 'snipeit');
@@ -24,13 +23,22 @@ class CategoryCest
         $I->amOnPage('/admin/settings/categories/create');
         $I->seeInTitle('Create Category');
         $I->see('Create Category', 'h1.pull-left');
+    }
 
+    public function failsEmptyValidation(FunctionalTester $I)
+    {
         $I->wantTo("Test Validation Fails with blank elements");
+        $I->amOnPage('/admin/settings/categories/create');
         $I->click('Save');
         $I->seeElement('.alert-danger');
         $I->see('The name field is required.', '.alert-msg');
         $I->see('The category type field is required.', '.alert-msg');
+    }
+
+    public function passesCorrectValidation(FunctionalTester $I)
+    {
         $I->wantTo("Test Validation Succeeds");
+        $I->amOnPage('/admin/settings/categories/create');
         $I->fillField('name', 'TestCategory');
         $I->selectOption('form select[name=category_type]', 'Asset');
         $I->click('Save');
