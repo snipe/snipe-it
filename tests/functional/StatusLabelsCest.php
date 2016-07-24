@@ -41,5 +41,5 @@ class StatusLabelsCest
         $I->fillField('name', 'TestStatus');
         $I->click('Save');
         $I->seeElement('.alert-success');
-    }
+    }    
 }

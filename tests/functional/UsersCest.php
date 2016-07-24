@@ -52,7 +52,6 @@ class UsersCest
 
     public function failsEmptyValidation(FunctionalTester $I)
     {
-
     }
 
     public function failsShortValidation(FunctionalTester $I)
