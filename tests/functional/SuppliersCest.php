@@ -42,11 +42,6 @@ class SuppliersCest
         $I->click('Save');
         $I->seeElement('.alert-danger');
         $I->see('The name must be at least 3 characters', '.alert-msg');
-        $I->wantTo("Test Validation Fails with short name");
-        $I->fillField('name', 't2');
-        $I->click('Save');
-        $I->seeElement('.alert-danger');
-        $I->see('The name must be at least 3 characters', '.alert-msg');
     }
     public function passesCorrectValidation(FunctionalTester $I)
     {

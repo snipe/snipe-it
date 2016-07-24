@@ -1,6 +1,5 @@
 <?php
 
-
 class UsersCest
 {
     public function _before(FunctionalTester $I)
@@ -53,15 +52,15 @@ class UsersCest
 
     public function failsEmptyValidation(FunctionalTester $I)
     {
-        
+
     }
 
     public function failsShortValidation(FunctionalTester $I)
     {
-        
+
     }
     public function passesCorrectValidation(FunctionalTester $I)
     {
-        
-    }    
+
+    }
 }
