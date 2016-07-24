@@ -20,7 +20,7 @@
         <div class="table-responsive">
 
           <table
-          name="categories"
+          name="locations"
           class="table table-striped"
           id="table"
           data-url="{{ route('api.locations.list') }}"
