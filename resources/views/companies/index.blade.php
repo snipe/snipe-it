@@ -20,7 +20,7 @@
     <div class="box box-default">
       <div class="box-body">
         <div class="table-responsive">
-          <table class="table table-striped">
+          <table class="table table-striped" name="companies">
             <thead>
               <tr>
                 <th class="col-md-1">{{ trans('general.id') }}</th>
