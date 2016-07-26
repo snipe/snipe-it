@@ -965,7 +965,7 @@ class LicensesController extends Controller
     */
     public function getDatatable()
     {
-        $licenses = License::with('company');
+        $licenses = Company::scopeCompanyables(License::with('company'));
 
         if (Input::has('search')) {
             $licenses = $licenses->TextSearch(Input::get('search'));

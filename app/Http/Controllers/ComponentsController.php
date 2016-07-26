@@ -410,8 +410,8 @@ class ComponentsController extends Controller
     **/
     public function getDatatable()
     {
-        $components = Component::select('components.*')->whereNull('components.deleted_at')
-            ->with('company', 'location', 'category');
+        $components = Company::scopeCompanyables(Component::select('components.*')->whereNull('components.deleted_at')
+            ->with('company', 'location', 'category'));
 
         if (Input::has('search')) {
             $components = $components->TextSearch(Input::get('search'));
