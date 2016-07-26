@@ -16,7 +16,11 @@ final class Company extends Model
     protected $table = 'companies';
 
     // Declare the rules for the model validation
-    protected $rules = ['name' => 'required|min:1|max:255|unique:companies,name'];
+    protected $rules = [
+        'name' => 'required|min:1|max:255|unique_undeleted:companies'
+    ];
+
+
     /**
     * Whether the model should inject it's identifier to the unique
     * validation rules before attempting validation. If this property

@@ -16,7 +16,7 @@ class Statuslabel extends Model
 
 
     protected $rules = array(
-        'name'  => 'required|string|unique:status_labels,name,NULL,deleted_at',
+        'name'  => 'required|string|unique_undeleted:status_labels',
         'notes'   => 'string',
         'deployable' => 'required',
         'pending' => 'required',

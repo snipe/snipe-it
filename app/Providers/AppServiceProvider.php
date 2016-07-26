@@ -3,6 +3,8 @@ namespace App\Providers;
 
 use Validator;
 use Illuminate\Support\ServiceProvider;
+use Log;
+use DB;
 
 /**
  * This service provider handles a few custom validation rules.
@@ -45,6 +47,21 @@ class AppServiceProvider extends ServiceProvider
             } else {
                 return false;
             }
+
+        });
+
+        // Unique only if undeleted
+        // This works around the use case where multiple deleted items have the same unique attribute.
+        // (I think this is a bug in Laravel's validator?)
+        Validator::extend('unique_undeleted', function($attribute, $value, $parameters, $validator) {
+
+            $count = DB::table($parameters[0])->where($attribute,'=',$value)->whereNull('deleted_at')->count();
+
+            if ($count < 1) {
+                return true;
+            }
+            return false;
+
 
         });
     }
