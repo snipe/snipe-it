@@ -137,7 +137,7 @@ final class Company extends Model
     {
         if (count($companyable_names) == 0) {
             throw new Exception('No Companyable Children to scope');
-        } elseif (!static::isFullMultipleCompanySupportEnabled()) {
+        } elseif (!static::isFullMultipleCompanySupportEnabled() || (Auth::check() && Auth::user()->isSuperUser())) {
             return $query;
         } else {
             $f = function ($q) {
