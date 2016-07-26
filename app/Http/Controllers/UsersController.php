@@ -1180,6 +1180,10 @@ class UsersController extends Controller
 
         $results = Ldap::findLdapUsers();
 
+        $tmp_pass = substr(str_shuffle("0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"), 0, 20);
+        $pass = bcrypt($tmp_pass);
+
+
         for ($i = 0; $i < $results["count"]; $i++) {
             if (empty($ldap_result_active_flag) || $results[$i][$ldap_result_active_flag][0] == "TRUE") {
 
@@ -1194,19 +1198,18 @@ class UsersController extends Controller
                 $item["createorupdate"] = 'updated';
                 if (!$user = User::where('username', $item["username"])->first()) {
                     $user = new User;
+                    $user->password = $pass;
                     $item["createorupdate"] = 'created';
                 }
 
-
               // Create the user if they don't exist.
-                $pass = substr(str_shuffle("0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"), 0, 20);
+
 
                 $user->first_name = e($item["firstname"]);
                 $user->last_name = e($item["lastname"]);
                 $user->username = e($item["username"]);
                 $user->email = e($item["email"]);
                 $user->employee_num = e($item["employee_number"]);
-                $user->password = bcrypt($pass);
                 $user->activated = 1;
                 $user->location_id = e($location_id);
                 $user->notes = 'Imported from LDAP';
@@ -1234,7 +1237,7 @@ class UsersController extends Controller
 
 
 
-        return redirect()->route('ldap/user')->with('success', "OK")->with('summary', $summary);
+        return redirect()->route('ldap/user')->with('success', "LDAP Import successful.")->with('summary', $summary);
     }
 
     /**
