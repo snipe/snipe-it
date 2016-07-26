@@ -18,7 +18,7 @@ final class Company extends Model
 
     // Declare the rules for the model validation
     protected $rules = [
-        'name' => 'required|min:1|max:255|unique_undeleted:companies'
+        'name' => 'required|min:1|max:255|unique_undeleted'
     ];
 
 

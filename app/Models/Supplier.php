@@ -12,7 +12,7 @@ class Supplier extends Model
     protected $dates = ['deleted_at'];
 
     protected $rules = array(
-        'name'              => 'required|min:3|max:255|unique_undeleted:suppliers',
+        'name'              => 'required|min:3|max:255|unique_undeleted',
         'address'           => 'min:3|max:255',
         'address2'          => 'min:2|max:255',
         'city'              => 'min:3|max:255',

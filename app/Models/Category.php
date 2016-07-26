@@ -26,7 +26,7 @@ class Category extends Model
     */
     public $rules = array(
         'user_id' => 'numeric',
-        'name'   => 'required|min:1|max:255|unique_undeleted:categories',
+        'name'   => 'required|min:1|max:255|unique_undeleted',
         'category_type'   => 'required',
     );
 

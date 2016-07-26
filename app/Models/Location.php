@@ -14,7 +14,7 @@ class Location extends Model
     protected $dates = ['deleted_at'];
     protected $table = 'locations';
     protected $rules = array(
-      'name'        => 'required|min:3|max:255|unique_undeleted:locations',
+      'name'        => 'required|min:3|max:255|unique_undeleted',
       'city'        => 'min:3|max:255',
       'state'           => 'min:2|max:32',
       'country'     => 'min:2|max:2|max:2',
