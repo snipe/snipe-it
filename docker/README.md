@@ -1,1 +1,1 @@
-See http://docs.snipeitapp.com/installation/server/docker.html for Docker information
+See https://snipe-it.readme.io/docs/docker for Docker information
