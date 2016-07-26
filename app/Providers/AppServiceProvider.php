@@ -3,7 +3,6 @@ namespace App\Providers;
 
 use Validator;
 use Illuminate\Support\ServiceProvider;
-use Log;
 use DB;
 
 /**
