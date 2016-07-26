@@ -110,7 +110,7 @@ final class Company extends Model
     public static function isCurrentUserAuthorized()
     {
 
-        return ((!static::isFullMultipleCompanySupportEnabled()) || (Auth::user()->company_id == null) || (Auth::user()->isSuperUser()));
+        return ((!static::isFullMultipleCompanySupportEnabled()) || (Auth::user()->isSuperUser()));
     }
 
     public static function canManageUsersCompanies()
