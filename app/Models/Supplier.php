@@ -10,6 +10,7 @@ class Supplier extends Model
 {
     use SoftDeletes;
     protected $dates = ['deleted_at'];
+    protected $table = 'suppliers';
 
     protected $rules = array(
         'name'              => 'required|min:3|max:255|unique_undeleted',
