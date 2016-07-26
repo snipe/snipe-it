@@ -63,6 +63,9 @@ class ObjectImportCommand extends Command
     {
         $filename = $this->argument('filename');
 
+        $tmp_password  = substr(str_shuffle("0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"), 0, 20);
+        $password = bcrypt($tmp_password);
+
 
         if (!$this->option('web-importer')) {
             $logFile = $this->option('logfile');
@@ -109,7 +112,7 @@ class ObjectImportCommand extends Command
             $bar = $this->output->createProgressBar(count($newarray));
         }
         // Loop through the records
-        DB::transaction(function () use (&$newarray, $bar) {
+        DB::transaction(function () use (&$newarray, $bar, $password) {
             Model::unguard();
             $item_type = strtolower($this->option('item-type'));
 
@@ -154,7 +157,8 @@ class ObjectImportCommand extends Command
                 $this->log('Company Name: ' . $item_company_name);
                 $this->log('Status: ' . $item_status_name);
 
-                $item["user"] = $this->createOrFetchUser($row);
+
+                $item["user"] = $this->createOrFetchUser($row, $password);
 
                 $item["location"] = $this->createOrFetchLocation($item_location);
                 $item["category"] = $this->createOrFetchCategory($item_category, $item_type);
@@ -631,7 +635,7 @@ class ObjectImportCommand extends Command
      * @internal param string $first_name
      * @internal param string $last_name
      */
-    public function createOrFetchUser($row)
+    public function createOrFetchUser($row, $password = null)
     {
         $user_name = $this->array_smart_fetch($row, "name");
         $user_email = $this->array_smart_fetch($row, "email");
@@ -689,14 +693,13 @@ class ObjectImportCommand extends Command
                 $this->log('User '.$user_username.' already exists');
             } elseif (( $first_name != '') && ($last_name != '') && ($user_username != '')) {
                 $user = new \App\Models\User;
-                $password  = substr(str_shuffle("0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"), 0, 20);
-
                 $user->first_name = $first_name;
                 $user->last_name = $last_name;
                 $user->username = $user_username;
                 $user->email = $user_email;
-                $user->password = bcrypt($password);
                 $user->activated = 1;
+                $user->password = $password;
+
                 if ($user->save()) {
                     $this->log('User '.$first_name.' created');
                 } else {
