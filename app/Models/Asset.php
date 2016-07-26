@@ -328,7 +328,7 @@ class Asset extends Depreciable
     public static function assetcount()
     {
 
-        return Asset::where('physical', '=', '1')
+        return Company::scopeCompanyables(Asset::where('physical', '=', '1'))
                ->whereNull('deleted_at', 'and')
                ->count();
     }
