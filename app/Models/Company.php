@@ -3,7 +3,6 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Watson\Validating\ValidatingTrait;
-use App\Http\Traits\UniqueUndeletedTrait;
 use Auth;
 use DB;
 
@@ -18,7 +17,7 @@ final class Company extends Model
 
     // Declare the rules for the model validation
     protected $rules = [
-        'name' => 'required|min:1|max:255|unique_undeleted'
+        'name' => 'required|min:1|max:255|unique:companies,name'
     ];
 
 
@@ -31,7 +30,6 @@ final class Company extends Model
     */
     protected $injectUniqueIdentifier = true;
     use ValidatingTrait;
-    use UniqueUndeletedTrait;
 
 
     /**
