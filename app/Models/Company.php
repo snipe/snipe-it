@@ -55,11 +55,7 @@ final class Company extends Model
             $company_id = null;
         }
 
-        if ($company_id == null) {
-            return $query;
-        } else {
-            return $query->where($column, '=', $company_id);
-        }
+        return $query->where($column, '=', $company_id);
     }
 
     public static function getSelectList()
