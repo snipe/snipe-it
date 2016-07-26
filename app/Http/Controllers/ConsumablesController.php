@@ -397,8 +397,8 @@ class ConsumablesController extends Controller
     */
     public function getDatatable()
     {
-        $consumables = Consumable::select('consumables.*')->whereNull('consumables.deleted_at')
-            ->with('company', 'location', 'category', 'users');
+        $consumables = Company::scopeCompanyables(Consumable::select('consumables.*')->whereNull('consumables.deleted_at')
+            ->with('company', 'location', 'category', 'users'));
 
         if (Input::has('search')) {
             $consumables = $consumables->TextSearch(e(Input::get('search')));
