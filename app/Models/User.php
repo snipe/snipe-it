@@ -7,8 +7,8 @@ use Illuminate\Auth\Passwords\CanResetPassword;
 use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
 use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
 use Watson\Validating\ValidatingTrait;
-use App\Models\Company;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use App\Http\Traits\UniqueUndeletedTrait;
 
 class User extends Model implements AuthenticatableContract, CanResetPasswordContract
 {
@@ -17,6 +17,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     use ValidatingTrait;
     use Authenticatable;
     use CanResetPassword;
+    use UniqueUndeletedTrait;
 
     protected $dates = ['deleted_at'];
     protected $table = 'users';

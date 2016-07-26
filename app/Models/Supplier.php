@@ -4,6 +4,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Watson\Validating\ValidatingTrait;
+use App\Http\Traits\UniqueUndeletedTrait;
 
 class Supplier extends Model
 {
@@ -35,6 +36,7 @@ class Supplier extends Model
     */
     protected $injectUniqueIdentifier = true;
     use ValidatingTrait;
+    use UniqueUndeletedTrait;
 
     /**
      * The attributes that are mass assignable.

@@ -3,6 +3,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Watson\Validating\ValidatingTrait;
+use App\Http\Traits\UniqueUndeletedTrait;
 use Auth;
 use DB;
 
@@ -30,6 +31,7 @@ final class Company extends Model
     */
     protected $injectUniqueIdentifier = true;
     use ValidatingTrait;
+    use UniqueUndeletedTrait;
 
 
     /**

@@ -5,6 +5,7 @@ use Validator;
 use Illuminate\Support\ServiceProvider;
 use DB;
 
+
 /**
  * This service provider handles a few custom validation rules.
  *
@@ -54,13 +55,13 @@ class AppServiceProvider extends ServiceProvider
         // (I think this is a bug in Laravel's validator?)
         Validator::extend('unique_undeleted', function($attribute, $value, $parameters, $validator) {
 
-            $count = DB::table($parameters[0])->where($attribute,'=',$value)->whereNull('deleted_at')->count();
+            $count = DB::table($parameters[0])->select('id')->where($attribute,'=',$value)->whereNull('deleted_at')->where('id','!=',$parameters[1])->count();
 
             if ($count < 1) {
                 return true;
+            } else {
+                return false;
             }
-            return false;
-
 
         });
     }

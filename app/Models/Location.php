@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Models\User;
 use App\Models\Asset;
 use Watson\Validating\ValidatingTrait;
+use App\Http\Traits\UniqueUndeletedTrait;
 
 class Location extends Model
 {
@@ -31,6 +32,7 @@ class Location extends Model
     */
     protected $injectUniqueIdentifier = true;
     use ValidatingTrait;
+    use UniqueUndeletedTrait;
 
 
     /**

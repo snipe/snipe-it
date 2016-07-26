@@ -10,6 +10,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Log;
 use Parsedown;
 use Watson\Validating\ValidatingTrait;
+use App\Http\Traits\UniqueUndeletedTrait;
 use DateTime;
 use App\Models\Setting;
 use App\Helpers\Helper;
@@ -40,6 +41,7 @@ class Asset extends Depreciable
   */
     protected $injectUniqueIdentifier = true;
     use ValidatingTrait;
+    use UniqueUndeletedTrait;
 
     protected $rules = [
     'name'            => 'min:2|max:255',
@@ -51,7 +53,7 @@ class Asset extends Depreciable
     'checkout_date'   => 'date|max:10|min:10',
     'checkin_date'    => 'date|max:10|min:10',
     'supplier_id'     => 'integer',
-    'asset_tag'       => 'required|min:1|max:255|unique_undeleted:assets',
+    'asset_tag'       => 'required|min:1|max:255|unique_undeleted',
     'status'          => 'integer',
     ];
 
@@ -68,6 +70,8 @@ class Asset extends Depreciable
     {
         return $this->belongsTo('\App\Models\Company', 'company_id');
     }
+
+
 
 
   /**

@@ -4,11 +4,13 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Watson\Validating\ValidatingTrait;
+use App\Http\Traits\UniqueUndeletedTrait;
 
 class Statuslabel extends Model
 {
     use SoftDeletes;
     use ValidatingTrait;
+    use UniqueUndeletedTrait;
 
     protected $injectUniqueIdentifier = true;
     protected $dates = ['deleted_at'];
