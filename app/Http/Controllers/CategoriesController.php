@@ -1,6 +1,7 @@
 <?php
 namespace App\Http\Controllers;
 
+use Illuminate\Http\Request;
 use App\Helpers\Helper;
 use App\Models\Category as Category;
 use App\Models\Company;
@@ -133,7 +134,7 @@ class CategoriesController extends Controller
     * @since [v1.0]
     * @return Redirect
     */
-    public function postEdit($categoryId = null)
+    public function postEdit(Request $request, $categoryId = null)
     {
         // Check if the blog post exists
         if (is_null($category = Category::find($categoryId))) {
@@ -142,12 +143,14 @@ class CategoriesController extends Controller
         }
 
         // Update the category data
-        $category->name            = e(Input::get('name'));
-        $category->category_type        = e(Input::get('category_type'));
-        $category->eula_text            = e(Input::get('eula_text'));
-        $category->use_default_eula     = e(Input::get('use_default_eula', '0'));
-        $category->require_acceptance   = e(Input::get('require_acceptance', '0'));
-        $category->checkin_email        = e(Input::get('checkin_email', '0'));
+        $category->name            = e($request->input('name'));
+        // If the item count is > 0, we disable the category type in the edit. Disabled items
+        // don't POST, so if the category_type is blank we just set it to the default.
+        $category->category_type        = e($request->input('category_type', $category->category_type));
+        $category->eula_text            = e($request->input('eula_text'));
+        $category->use_default_eula     = e($request->input('use_default_eula', '0'));
+        $category->require_acceptance   = e($request->input('require_acceptance', '0'));
+        $category->checkin_email        = e($request->input('checkin_email', '0'));
 
         if ($category->save()) {
         // Redirect to the new category page
