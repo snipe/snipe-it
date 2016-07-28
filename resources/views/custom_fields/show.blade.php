@@ -6,6 +6,11 @@
 @parent
 @stop
 
+@section('header_right')
+    <a href="{{ route('admin.custom_fields.index') }}" class="btn btn-primary pull-right">
+        {{ trans('general.back') }}</a>
+@stop
+
 
 
 @section('content')
@@ -32,10 +37,11 @@
                    <tr>
                      <th class="col-md-1"></th>
                      <th class="col-md-1">{{ trans('admin/custom_fields/general.order') }}</th>
-                     <th class="col-md-5">{{ trans('admin/custom_fields/general.field_name') }}</th>
+                     <th class="col-md-4">{{ trans('admin/custom_fields/general.field_name') }}</th>
                      <th class="col-md-2">{{ trans('admin/custom_fields/general.field_format') }}</th>
                      <th class="col-md-2">{{ trans('admin/custom_fields/general.field_element') }}</th>
                      <th class="col-md-1">{{ trans('admin/custom_fields/general.required') }}</th>
+                     <th class="col-md-1"></th>
                    </tr>
                </thead>
                <tfoot>
@@ -66,6 +72,7 @@
                    <td>{{$field->format}}</td>
                    <td>{{$field->element}}</td>
                    <td>{{$field->pivot->required ? "REQUIRED" : "OPTIONAL"}}</td>
+                   <td><a href="{{ route('admin.custom_fields.disassociate', [$field,$custom_fieldset->id]) }}" class="btn btn-sm btn-danger">Remove</a></td>
                  </tr>
                  @endforeach
                </tbody>

@@ -147,6 +147,25 @@ class CustomFieldsController extends Controller
         }
     }
 
+
+    /**
+     * Detach a custom field from a fieldset.
+     *
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @since [v3.0]
+     * @return Redirect
+     */
+    public function deleteFieldFromFieldset($field_id, $fieldset_id)
+    {
+        $field = CustomField::find($field_id);
+
+        if ($field->fieldset()->detach($fieldset_id)) {
+            return redirect()->route("admin.custom_fields.index")->with("success", trans('admin/custom_fields/message.field.delete.success'));
+        }
+
+        return redirect()->back()->withErrors(['message' => "Field is in-use"]);
+    }
+
     /**
     * Delete a custom field.
     *
@@ -157,6 +176,8 @@ class CustomFieldsController extends Controller
     public function deleteField($field_id)
     {
         $field=CustomField::find($field_id);
+
+
 
         if ($field->fieldset->count()>0) {
             return redirect()->back()->withErrors(['message' => "Field is in-use"]);

@@ -638,6 +638,7 @@ Route::group([ 'prefix' => 'admin','middleware' => ['web','auth']], function () 
     Route::get('custom_fields/create-field', ['uses' =>'CustomFieldsController@createField','as' => 'admin.custom_fields.create-field']);
     Route::post('custom_fields/create-field', ['uses' => 'CustomFieldsController@storeField','as' => 'admin.custom_fields.store-field']);
     Route::post('custom_fields/{id}/associate', ['uses' => 'CustomFieldsController@associate','as' => 'admin.custom_fields.associate']);
+    Route::get('custom_fields/{field_id}/{fieldset_id}/disassociate', ['uses' => 'CustomFieldsController@deleteFieldFromFieldset','as' => 'admin.custom_fields.disassociate']);
     Route::match(['DELETE'], 'custom_fields/delete-field/{id}', ['uses' => 'CustomFieldsController@deleteField','as' => 'admin.custom_fields.delete-field']);
     Route::resource('custom_fields', 'CustomFieldsController');
 
