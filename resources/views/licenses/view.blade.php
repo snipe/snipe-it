@@ -261,7 +261,7 @@
                        <tr><td>
                          {{ trans('admin/licenses/form.notes') }}:
                          </td><td>
-                        {{ nl2br(e($license->notes)) }}</td></tr>
+                        {!! nl2br(e($license->notes)) !!}</td></tr>
                     @endif
 
 
