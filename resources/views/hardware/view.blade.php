@@ -247,7 +247,7 @@
                    @endif
                    <tr>
                       <td>{{ trans('admin/hardware/form.notes') }}</td>
-                      <td>{{ $asset->notes }}</td>
+                      <td style="white-space:pre-wrap; word-wrap:break-word;">{{ $asset->notes }}</td>
                     </tr>
                    @if ($asset->created_at)
                       <tr>
