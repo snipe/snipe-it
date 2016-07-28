@@ -247,7 +247,7 @@
                    @endif
                    <tr>
                       <td>{{ trans('admin/hardware/form.notes') }}</td>
-                      <td>{{ $asset->notes }}</td>
+                      <td> {!! nl2br(e($asset->notes)) !!}</td>
                     </tr>
                    @if ($asset->created_at)
                       <tr>
@@ -514,7 +514,7 @@
                       <td></td>
                       <td>
       <!--             @if ($asset->notes)
-                      {{ $asset->notes }}
+                      {!! nl2br(e($asset->notes)) !!}
                       @endif -->
                       </td>
                   </tr>
