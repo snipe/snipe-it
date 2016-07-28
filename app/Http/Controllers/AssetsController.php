@@ -39,6 +39,7 @@ use Symfony\Component\Console\Output\BufferedOutput;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use TCPDF;
 use View;
+use Carbon\Carbon;
 
 /**
  * This class controls all actions related to assets for
@@ -624,10 +625,10 @@ class AssetsController extends Controller
         // Was the asset updated?
         if ($asset->save()) {
 
-            if ($request->input('checkout_at')== Carbon::now()->format('Y-m-d')) {
+            if ($request->input('checkin_at') == Carbon::now()->format('Y-m-d')) {
                 $checkout_at = Carbon::now();
             } else {
-                $checkout_at = Carbon::now()->format('Y-m-d h:i:s');
+                $checkout_at = $request->input('checkin_at').' 00:00:00';
             }
             //$checkout_at = e(Input::get('checkin_at'));
             $logaction = $asset->createLogRecord('checkin', $asset, $admin, $user, null, e(Input::get('note')), $checkout_at);
