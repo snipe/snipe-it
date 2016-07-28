@@ -33,6 +33,7 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use URL;
 use View;
 use Illuminate\Http\Request;
+use Gate;
 
 /**
  * This controller handles all actions related to Users for
@@ -853,7 +854,7 @@ class UsersController extends Controller
     * @see UsersController::getIndex() method that consumed this JSON response
     * @return string JSON
     */
-    public function getDatatable($status = null)
+    public function getDatatable(Request $request, $status = null)
     {
 
         if (Input::has('offset')) {
@@ -922,24 +923,30 @@ class UsersController extends Controller
                 $group_names .= '<a href="' . config('app.url') . '/admin/groups/' . $group->id . '/edit" class="label  label-default">' . $group->name . '</a> ';
             }
 
+            if (Gate::allows('users:edit')) {
+                if (!is_null($user->deleted_at)) {
 
-            if (!is_null($user->deleted_at)) {
-
-                $actions .= '<a href="' . route('restore/user', $user->id) . '" class="btn btn-warning btn-sm"><i class="fa fa-share icon-white"></i></a> ';
-            } else {
-
-                if ($user->accountStatus() == 'suspended') {
-                    $actions .= '<a href="' . route('unsuspend/user', $user->id) . '" class="btn btn-default btn-sm"><span class="fa fa-clock-o"></span></a> ';
-                }
-
-                $actions .= '<a href="' . route('update/user', $user->id) . '" class="btn btn-warning btn-sm"><i class="fa fa-pencil icon-white"></i></a> ';
-
-                $actions .= '<a href="' . route('clone/user', $user->id) . '" class="btn btn-info btn-sm"><i class="fa fa-clone"></i></a>';
-
-                if ((Auth::user()->id !== $user->id) && (!config('app.lock_passwords'))) {
-                    $actions .= '<a data-html="false" class="btn delete-asset btn-danger btn-sm" data-toggle="modal" href="' . route('delete/user', $user->id) . '" data-content="Are you sure you wish to delete this user?" data-title="Delete ' . htmlspecialchars($user->first_name) . '?" onClick="return false;"><i class="fa fa-trash icon-white"></i></a> ';
+                    $actions .= '<a href="' . route('restore/user',
+                            $user->id) . '" class="btn btn-warning btn-sm"><i class="fa fa-share icon-white"></i></a> ';
                 } else {
-                    $actions .= ' <span class="btn delete-asset btn-danger btn-sm disabled"><i class="fa fa-trash icon-white"></i></span>';
+
+                    if ($user->accountStatus() == 'suspended') {
+                        $actions .= '<a href="' . route('unsuspend/user',
+                                $user->id) . '" class="btn btn-default btn-sm"><span class="fa fa-clock-o"></span></a> ';
+                    }
+
+                    $actions .= '<a href="' . route('update/user',
+                            $user->id) . '" class="btn btn-warning btn-sm"><i class="fa fa-pencil icon-white"></i></a> ';
+
+                    $actions .= '<a href="' . route('clone/user',
+                            $user->id) . '" class="btn btn-info btn-sm"><i class="fa fa-clone"></i></a>';
+
+                    if ((Auth::user()->id !== $user->id) && (!config('app.lock_passwords'))) {
+                        $actions .= '<a data-html="false" class="btn delete-asset btn-danger btn-sm" data-toggle="modal" href="' . route('delete/user',
+                                $user->id) . '" data-content="Are you sure you wish to delete this user?" data-title="Delete ' . htmlspecialchars($user->first_name) . '?" onClick="return false;"><i class="fa fa-trash icon-white"></i></a> ';
+                    } else {
+                        $actions .= ' <span class="btn delete-asset btn-danger btn-sm disabled"><i class="fa fa-trash icon-white"></i></span>';
+                    }
                 }
             }
             $actions .= '</nobr>';
