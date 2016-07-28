@@ -26,7 +26,6 @@ class SaveUserRequest extends Request
         return [
             'first_name'              => 'required|string|min:1',
             'last_name'               => 'required|string|min:1',
-            'username'                => 'required|string|min:2|unique:users,username,NULL,deleted_at',
             'email'                   => 'email',
             'password'                => 'required|min:6',
             'password_confirm'        => 'sometimes|required_with:password',
