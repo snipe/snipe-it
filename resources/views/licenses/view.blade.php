@@ -258,10 +258,14 @@
                     </tr>
 
                     @if ($license->notes)
-                       <tr><td>
-                         {{ trans('admin/licenses/form.notes') }}:
-                         </td><td>
-                        {{ nl2br(e($license->notes)) }}</td></tr>
+                     <tr>
+                        <td>
+                          {{ trans('admin/licenses/form.notes') }}:
+                        </td>
+                        <td style="white-space:pre-wrap; word-wrap:break-word;">
+                          {{ $license->notes }}
+                        </td>
+                      </tr>
                     @endif
 
 
