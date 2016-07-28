@@ -145,7 +145,7 @@ class UsersController extends Controller
             } else {
                 $user->groups()->sync(array());
             }
-            
+
             if (($request->input('email_user') == 1) && ($request->has('email'))) {
               // Send the credentials through email
                 $data = array();
@@ -1079,7 +1079,7 @@ class UsersController extends Controller
                 return redirect()->route('users')->with('error', trans('general.insufficient_permissions'));
             } else {
                 $log = Actionlog::find($fileId);
-                $file = $log->get_src();
+                $file = $log->get_src('users');
                 return Response::download($file);
             }
         } else {
