@@ -304,6 +304,18 @@
                   </div>
                 </div>
 
+                <!-- auto zerofill -->
+                <div class="form-group {{ $errors->has('zerofill_count') ? 'error' : '' }}">
+                  <div class="col-md-3">
+                    {{ Form::label('auto_increment_prefix', trans('admin/settings/general.zerofill_count')) }}
+                  </div>
+                  <div class="col-md-9">
+                      {{ Form::text('zerofill_count', Input::old('zerofill_count', $setting->zerofill_count), array('class' => 'form-control', 'style'=>'width: 100px;')) }}
+                      {!! $errors->first('zerofill_count', '<span class="alert-msg">:message</span>') !!}
+
+                  </div>
+                </div>
+
               </div>
             </div>
           </div>

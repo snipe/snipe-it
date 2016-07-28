@@ -466,13 +466,24 @@ class Asset extends Depreciable
             $asset_tag = \DB::table('assets')
                 ->where('physical', '=', '1')
                 ->max('id');
+
+            if ($settings->zerofill_count > 0) {
+                return $settings->auto_increment_prefix.Asset::zerofill(($asset_tag + 1),$settings->zerofill_count);
+            }
             return $settings->auto_increment_prefix.($asset_tag + 1);
         } else {
             return false;
         }
     }
 
-    public function checkin_email()
+
+    public static function zerofill ($num, $zerofill = 3)
+    {
+        return str_pad($num, $zerofill, '0', STR_PAD_LEFT);
+    }
+
+
+public function checkin_email()
     {
         return $this->model->category->checkin_email;
     }
