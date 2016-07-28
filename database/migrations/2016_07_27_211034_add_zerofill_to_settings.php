@@ -13,7 +13,7 @@ class AddZerofillToSettings extends Migration
     public function up()
     {
         Schema::table('settings', function (Blueprint $table) {
-            $table->integer('zerofill_count')->default(0);
+            $table->integer('zerofill_count')->default(5);
         });
     }
 
