@@ -503,7 +503,7 @@ class ComponentsController extends Controller
 
         foreach ($component->assets as $component_assignment) {
             $rows[] = array(
-            'name' => (string)link_to('/hardware/'.$component_assignment->id.'/view', e($component_assignment->name)),
+            'name' => (string)link_to('/hardware/'.$component_assignment->id.'/view', e($component_assignment->showAssetName())),
             'qty' => e($component_assignment->pivot->assigned_qty),
             'created_at' => ($component_assignment->created_at->format('Y-m-d H:i:s')=='-0001-11-30 00:00:00') ? '' : $component_assignment->created_at->format('Y-m-d H:i:s'),
             );

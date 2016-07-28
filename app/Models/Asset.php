@@ -376,7 +376,7 @@ class Asset extends Depreciable
     {
 
         if ($this->name == '') {
-            return $this->model->name;
+            return $this->model->name.' ('.$this->asset_tag.')';
         } else {
             return $this->name;
         }
