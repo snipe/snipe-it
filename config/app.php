@@ -117,7 +117,7 @@ return [
     |--------------------------------------------------------------------------
     | This is the path for any uploaded files that have to be run through the
     | auth system to ensure they are not visible to the public. These should be
-    | stored somewhere outside of the web root so that an unautenticated user
+    | stored somewhere outside of the web root so that an unauthenticated user
     | cannot access them.
     |
     | For example: license keys, contracts, etc.
