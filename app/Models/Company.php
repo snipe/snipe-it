@@ -86,11 +86,17 @@ final class Company extends Model
         } else {
             $current_user = Auth::user();
 
-            if ($current_user->company_id != null) {
-                return $current_user->company_id;
-            } else {
+            // Super users should be able to set a company to whatever they need
+            if ($current_user->isSuperUser()) {
                 return static::getIdFromInput($unescaped_input);
+            } else {
+                if ($current_user->company_id != null) {
+                    return $current_user->company_id;
+                } else {
+                    return static::getIdFromInput($unescaped_input);
+                }
             }
+
         }
     }
 
