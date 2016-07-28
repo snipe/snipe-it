@@ -624,7 +624,12 @@ class AssetsController extends Controller
         // Was the asset updated?
         if ($asset->save()) {
 
-            $checkout_at = e(Input::get('checkin_at'));
+            if ($request->input('checkout_at')== Carbon::now()->format('Y-m-d')) {
+                $checkout_at = Carbon::now();
+            } else {
+                $checkout_at = Carbon::now()->format('Y-m-d h:i:s');
+            }
+            //$checkout_at = e(Input::get('checkin_at'));
             $logaction = $asset->createLogRecord('checkin', $asset, $admin, $user, null, e(Input::get('note')), $checkout_at);
 
 
