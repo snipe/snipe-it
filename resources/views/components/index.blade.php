@@ -96,6 +96,9 @@
         showColumns: true,
         exportDataType: 'all',
         exportTypes: ['csv', 'txt','json', 'xml'],
+        exportOptions: {
+            fileName: 'components-export-' + (new Date()).toISOString().slice(0,10),
+        },
         maintainSelected: true,
         paginationFirstText: "{{ trans('general.first') }}",
         paginationLastText: "{{ trans('general.last') }}",
