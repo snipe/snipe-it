@@ -161,6 +161,9 @@
         paginationPreText: "{{ trans('general.previous') }}",
         paginationNextText: "{{ trans('general.next') }}",
         pageList: ['10','25','50','100','150','200','500','1000'],
+        exportOptions: {
+            fileName: 'assets-export-' + (new Date()).toISOString().slice(0,10),
+        },
         icons: {
             paginationSwitchDown: 'fa-caret-square-o-down',
             paginationSwitchUp: 'fa-caret-square-o-up',

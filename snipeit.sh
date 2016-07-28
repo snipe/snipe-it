@@ -259,7 +259,7 @@ case $distro in
 		sudo DEBIAN_FRONTEND=noninteractive apt-get install -y lamp-server^ >> /var/log/snipeit-install.log 2>&1 
 
 		if [ "$version" == "16.04" ]; then
-			sudo apt-get install -y git unzip php php-mcrypt php-curl php-mysql php-gd php-ldap php-mbstring >> /var/log/snipeit-install.log 2>&1
+			sudo apt-get install -y git unzip php php-mcrypt php-curl php-mysql php-gd php-ldap php-zip php-mbstring >> /var/log/snipeit-install.log 2>&1
 			#Enable mcrypt and rewrite
 			echo "##  Enabling mcrypt and rewrite"
 			sudo phpenmod mcrypt >> /var/log/snipeit-install.log 2>&1
