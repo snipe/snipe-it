@@ -348,6 +348,7 @@ class SettingsController extends Controller
         $setting->qr_text = e(Input::get('qr_text'));
         $setting->auto_increment_prefix = e(Input::get('auto_increment_prefix'));
         $setting->auto_increment_assets = e(Input::get('auto_increment_assets', '0'));
+        $setting->zerofill_count = e(Input::get('zerofill_count'));
         $setting->alert_interval = e(Input::get('alert_interval'));
         $setting->alert_threshold = e(Input::get('alert_threshold'));
         $setting->email_domain = e(Input::get('email_domain'));

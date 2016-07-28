@@ -304,6 +304,18 @@
                   </div>
                 </div>
 
+                <!-- auto zerofill -->
+                <div class="form-group {{ $errors->has('zerofill_count') ? 'error' : '' }}">
+                  <div class="col-md-3">
+                    {{ Form::label('auto_increment_prefix', trans('admin/settings/general.zerofill_count')) }}
+                  </div>
+                  <div class="col-md-9">
+                      {{ Form::text('zerofill_count', Input::old('zerofill_count', $setting->zerofill_count), array('class' => 'form-control', 'style'=>'width: 100px;')) }}
+                      {!! $errors->first('zerofill_count', '<span class="alert-msg">:message</span>') !!}
+
+                  </div>
+                </div>
+
               </div>
             </div>
           </div>
@@ -812,9 +824,9 @@
                   </div>
                   <div class="col-md-9">
                     @if (config('app.lock_passwords')===true)
-                      {{ Form::text('ldap_filter', Input::old('ldap_filter', $setting->ldap_filter), array('class' => 'form-control', 'disabled'=>'disabled','placeholder' => 'cn=users/authorized,dc=example,dc=com')) }}
+                      {{ Form::text('ldap_filter', Input::old('ldap_filter', $setting->ldap_filter), array('class' => 'form-control', 'disabled'=>'disabled','placeholder' => '&(cn=*)')) }}
                     @else
-                      {{ Form::text('ldap_filter', Input::old('ldap_filter', $setting->ldap_filter), array('class' => 'form-control','placeholder' => 'cn=users/authorized,dc=example,dc=com')) }}
+                      {{ Form::text('ldap_filter', Input::old('ldap_filter', $setting->ldap_filter), array('class' => 'form-control','placeholder' => '&(cn=*)')) }}
                     @endif
 
                     {!! $errors->first('ldap_filter', '<span class="alert-msg">:message</span>') !!}
