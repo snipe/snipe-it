@@ -55,7 +55,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 
         $user_permissions = json_decode($this->permissions, true);
 
-        //If the user is explicitly granted, return false
+        //If the user is explicitly granted, return true
         if (($user_permissions!='') && ((array_key_exists($section, $user_permissions)) && ($user_permissions[$section]=='1'))) {
             return true;
         }

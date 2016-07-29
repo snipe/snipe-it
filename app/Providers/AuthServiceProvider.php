@@ -205,7 +205,7 @@ class AuthServiceProvider extends ServiceProvider
         # Components
         # -----------------------------------------
         $gate->define('components.view', function ($user) {
-            if (($user->hasAccess('components.create')) || ($user->hasAccess('admin'))) {
+            if (($user->hasAccess('components.view')) || ($user->hasAccess('admin'))) {
                 return true;
             }
         });

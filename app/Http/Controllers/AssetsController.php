@@ -626,12 +626,12 @@ class AssetsController extends Controller
         if ($asset->save()) {
 
             if ($request->input('checkin_at') == Carbon::now()->format('Y-m-d')) {
-                $checkout_at = Carbon::now();
+                $checkin_at = Carbon::now();
             } else {
-                $checkout_at = $request->input('checkin_at').' 00:00:00';
+                $checkin_at = $request->input('checkin_at').' 00:00:00';
             }
-            //$checkout_at = e(Input::get('checkin_at'));
-            $logaction = $asset->createLogRecord('checkin', $asset, $admin, $user, null, e(Input::get('note')), $checkout_at);
+            //$checkin_at = e(Input::get('checkin_at'));
+            $logaction = $asset->createLogRecord('checkin', $asset, $admin, $user, null, e(Input::get('note')), $checkin_at);
 
 
             $settings = Setting::getSettings();

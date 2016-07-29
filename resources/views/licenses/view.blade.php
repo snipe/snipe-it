@@ -148,14 +148,14 @@
                     @if (!is_null($license->license_name))
                     <tr>
                       <td>{{ trans('admin/licenses/form.to_name') }}</td>
-                      <td>{{ nl2br(e($license->license_name)) }}</td>
+                      <td>{{ $license->license_name }}</td>
                     </tr>
                     @endif
 
                     @if (!is_null($license->license_email))
                     <tr>
                       <td>{{ trans('admin/licenses/form.to_email') }}</td>
-                      <td>{{ nl2br(e($license->license_email)) }}</td>
+                      <td>{{ $license->license_email }}</td>
                     </tr>
                     @endif
 
