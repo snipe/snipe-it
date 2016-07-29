@@ -10,6 +10,7 @@
 {{-- Right header --}}
 @section('header_right')
 <div class="btn-group pull-right">
+    @can('licenses.edit')
       <button class="btn btn-default dropdown-toggle" data-toggle="dropdown">{{ trans('button.actions') }}
           <span class="caret"></span>
       </button>
@@ -17,6 +18,7 @@
           <li><a href="{{ route('update/license', $license->id) }}">{{ trans('admin/licenses/general.edit') }}</a></li>
           <li><a href="{{ route('clone/license', $license->id) }}">{{ trans('admin/licenses/general.clone') }}</a></li>
       </ul>
+     @endcan
   </div>
 @stop
 
@@ -60,39 +62,57 @@
                             <td>Seat {{ $count }} </td>
                             <td>
                                 @if (($licensedto->assigned_to) && ($licensedto->deleted_at == NULL))
-                                    <a href="{{ route('view/user', $licensedto->assigned_to) }}">
-                                {{ $licensedto->user->fullName() }}
-                                </a>
+                                    @can('users.view')
+                                        <a href="{{ route('view/user', $licensedto->assigned_to) }}">
+                                            {{ $licensedto->user->fullName() }}
+                                        </a>
+                                     @else
+                                        {{ $licensedto->user->fullName() }}
+                                     @endcan
+
                                 @elseif (($licensedto->assigned_to) && ($licensedto->deleted_at != NULL))
                                     <del>{{ $licensedto->user->fullName() }}</del>
                                 @elseif ($licensedto->asset_id)
                                     @if ($licensedto->asset->assigned_to != 0)
-                                        <a href="{{ route('view/user', $licensedto->asset->assigned_to) }}">
+                                        @can('users.view')
+                                            <a href="{{ route('view/user', $licensedto->asset->assigned_to) }}">
+                                                {{ $licensedto->asset->assigneduser->fullName() }}
+                                            </a>
+                                        @else
                                             {{ $licensedto->asset->assigneduser->fullName() }}
-                                        </a>
+                                        @endcan
+
                                     @endif
                                 @endif
                             </td>
                             <td>
                                 @if ($licensedto->asset_id)
-                                    <a href="{{ route('view/hardware', $licensedto->asset_id) }}">
-                                    {{ $licensedto->asset->name }} {{ $licensedto->asset->asset_tag }}
-                                </a>
+                                        @can('assets.view')
+                                            <a href="{{ route('view/hardware', $licensedto->asset_id) }}">
+                                                {{ $licensedto->asset->name }} {{ $licensedto->asset->asset_tag }}
+                                            </a>
+                                        @else
+                                            {{ $licensedto->asset->name }} {{ $licensedto->asset->asset_tag }}
+                                        @endcan
+
                                 @endif
                             </td>
                             <td>
-                                @if (($licensedto->assigned_to) || ($licensedto->asset_id))
-                                    @if ($license->reassignable)
-                                        <a href="{{ route('checkin/license', $licensedto->id) }}" class="btn btn-primary btn-sm">
-                                        {{ trans('general.checkin') }}
-                                        </a>
-                                    @else
-                                        <span>Assigned</span>
-                                    @endif
-                                @else
-                                    <a href="{{ route('checkout/license', $licensedto->id) }}" class="btn btn-info btn-sm">
-                                    {{ trans('general.checkout') }}</a>
-                                @endif
+                                @can('licenses.checkout')
+                                        @if (($licensedto->assigned_to) || ($licensedto->asset_id))
+
+                                            @if ($license->reassignable)
+                                                <a href="{{ route('checkin/license', $licensedto->id) }}" class="btn btn-primary btn-sm">
+                                                {{ trans('general.checkin') }}
+                                                </a>
+                                            @else
+                                                <span>Assigned</span>
+                                            @endif
+                                        @else
+                                            <a href="{{ route('checkout/license', $licensedto->id) }}" class="btn btn-info btn-sm">
+                                            {{ trans('general.checkout') }}</a>
+                                        @endif
+                                @endcan
                             </td>
 
                         </tr>
@@ -116,24 +136,26 @@
                     </tr>
                     @endif
 
-                    @if (!is_null($license->serial))
-                    <tr>
-                      <td>{{ trans('admin/licenses/form.license_key') }}</td>
-                      <td style="word-wrap: break-word;overflow-wrap: break-word;word-break: break-word;">{{ nl2br(e($license->serial)) }}</td>
-                    </tr>
-                    @endif
+                    @can('licenses.keys')
+                        @if (!is_null($license->serial))
+                        <tr>
+                          <td>{{ trans('admin/licenses/form.license_key') }}</td>
+                          <td style="word-wrap: break-word;overflow-wrap: break-word;word-break: break-word;">{!! nl2br(e($license->serial)) !!}</td>
+                        </tr>
+                        @endif
+                    @endcan
 
                     @if (!is_null($license->license_name))
                     <tr>
                       <td>{{ trans('admin/licenses/form.to_name') }}</td>
-                      <td>{{ nl2br(e($license->license_name)) }}</td>
+                      <td>{{ $license->license_name }}</td>
                     </tr>
                     @endif
 
                     @if (!is_null($license->license_email))
                     <tr>
                       <td>{{ trans('admin/licenses/form.to_email') }}</td>
-                      <td>{{ nl2br(e($license->license_email)) }}</td>
+                      <td>{{ $license->license_email }}</td>
                     </tr>
                     @endif
 
@@ -270,7 +292,7 @@
               </div>
 
             </div>
-        </div>
+        </div>ey
 
         </div>
         <!-- /.tab-pane -->
