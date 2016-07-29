@@ -206,6 +206,7 @@
                    </ul>
                </li>
                @endcan
+
                @can('admin')
                <!-- Tasks: style can be found in dropdown.less -->
                <?php $alert_items = \App\Helpers\Helper::checkLowInventory(); ?>
@@ -389,24 +390,28 @@
                   <li>
                     <a href="{{ URL::to('hardware') }}">@lang('general.list_all')</a>
                   </li>
-                  <li>
-                    <a href="{{ URL::to('hardware?status=Deployed') }}" {!! (Request::query('status') == 'Deployed' ? ' class="active"' : '') !!} >@lang('general.deployed')
+                  <li{!! (Request::query('status') == 'Deployed' ? ' class="active"' : '') !!}>
+                    <a href="{{ URL::to('hardware?status=Deployed') }}">@lang('general.deployed')
                     </a>
                   </li>
-                  <li>
-                    <a href="{{ URL::to('hardware?status=RTD') }}" {!! (Request::query('status') == 'RTD' ? ' class="active"' : '') !!}>
+                  <li{!! (Request::query('status') == 'RTD' ? ' class="active"' : '') !!}>
+                    <a href="{{ URL::to('hardware?status=RTD') }}">
                     @lang('general.ready_to_deploy')</a>
                   </li>
-                  <li><a href="{{ URL::to('hardware?status=Pending') }}"
-                  {!! (Request::query('status') == 'Pending' ? ' class="active"' : '') !!} >@lang('general.pending')</a></li>
-                  <li><a href="{{ URL::to('hardware?status=Undeployable') }}" {!! (Request::query('status') == 'Undeployable' ? ' class="active"' : '') !!} >@lang('general.undeployable')</a></li>
-                  <li><a href="{{ URL::to('hardware?status=Archived') }}" {!! (Request::query('status') == 'Archived' ? ' class="active"' : '') !!} >@lang('admin/hardware/general.archived')</a></li>
-                  <li><a href="{{ URL::to('hardware?status=Requestable') }}" {!! (Request::query('status') == 'Requestable' ? ' class="active"' : '') !!} >@lang('admin/hardware/general.requestable')</a></li>
+                  <li{!! (Request::query('status') == 'Pending' ? ' class="active"' : '') !!}><a href="{{ URL::to('hardware?status=Pending') }}">@lang('general.pending')</a></li>
+                  <li{!! (Request::query('status') == 'Undeployable' ? ' class="active"' : '') !!} ><a href="{{ URL::to('hardware?status=Undeployable') }}">@lang('general.undeployable')</a></li>
+                  <li{!! (Request::query('status') == 'Archived' ? ' class="active"' : '') !!} >@lang('admin/hardware/general.archived')</a></li>
+                    <li><a href="{{ URL::to('hardware?status=Requestable') }}" {!! (Request::query('status') == 'Requestable' ? ' class="active"' : '') !!}><a href="{{ URL::to('hardware?status=Archived') }}" >@lang('admin/hardware/general.requestable')</a></li>
 
                   <li class="divider">&nbsp;</li>
-                  <li><a href="{{ URL::to('hardware/models') }}" {!! (Request::is('hardware/models*') ? ' class="active"' : '') !!} >@lang('general.asset_models')</a></li>
+                    <li{!! (Request::is('hardware/bulkcheckout') ? ' class="active>"' : '') !!}>
+                        <small class="label pull-right bg-orange">{{ trans('general.new')  }}</small>
+                        <a href="{{ route('hardware/bulkcheckout') }}">
+                            {{ trans('general.bulk_checkout') }}</a>
+                    </li>
+                    <li{!! (Request::is('hardware/models*') ? ' class="active"' : '') !!}><a href="{{ URL::to('hardware/models') }}">@lang('general.asset_models')</a></li>
                   <li><a href="{{ URL::to('admin/settings/categories') }}" {!! (Request::is('admin/settings/categories*') ? ' class="active"' : '') !!} >@lang('general.categories')</a></li>
-                  <li><a href="{{ URL::to('hardware?status=Deleted') }}" {!! (Request::query('Deleted') ? ' class="active"' : '') !!} >@lang('general.deleted')</a></li>
+                  <li{!! (Request::query('Deleted') ? ' class="active"' : '') !!}><a href="{{ URL::to('hardware?status=Deleted') }}">@lang('general.deleted')</a></li>
                   <li><a href="{{ URL::to('admin/asset_maintenances') }}"  >@lang('general.asset_maintenances') </a></li>
                   <li><a href="{{ URL::to('hardware/import') }}"  >@lang('general.import') </a></li>
                 </ul>
