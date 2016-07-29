@@ -64,6 +64,8 @@ return array(
     ),
     "unique"           => ":attribute は、取得済みです。",
     "url"              => ":attribute フォーマットが不正です。",
+    "statuslabel_type" => "You must select a valid status label type",
+    "unique_undeleted" => "The :attribute must be unique.",
 
 
     /*

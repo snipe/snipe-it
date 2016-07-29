@@ -3,6 +3,7 @@
 return array(
 	'archived'  				=> '已存档',
     'asset'  					=> '资产',
+    'bulk_checkout'             => 'Checkout Assets to User',
     'checkin'  					=> '借入资产',
     'checkout'  				=> '借出资产给某人',
     'clone'  					=> '复制资产',

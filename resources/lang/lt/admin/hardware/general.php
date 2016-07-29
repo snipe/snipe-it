@@ -3,6 +3,7 @@
 return array(
 	'archived'  				=> 'Archyvuota',
     'asset'  					=> 'Įranga',
+    'bulk_checkout'             => 'Checkout Assets to User',
     'checkin'  					=> 'Išduota įranga',
     'checkout'  				=> 'Įranga išduota naudotojui',
     'clone'  					=> 'Kopijuoti įrangą',

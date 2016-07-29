@@ -3,6 +3,7 @@
 return array(
 	'archived'  				=> 'Archived',
     'asset'  					=> 'Harta',
+    'bulk_checkout'             => 'Checkout Assets to User',
     'checkin'  					=> 'Terima Harta',
     'checkout'  				=> 'Agih Harta Kepada Pengguna',
     'clone'  					=> 'Pendua Harta',

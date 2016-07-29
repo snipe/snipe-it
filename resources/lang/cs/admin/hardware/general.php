@@ -3,6 +3,7 @@
 return array(
 	'archived'  				=> 'Archivováno',
     'asset'  					=> 'Majetek',
+    'bulk_checkout'             => 'Checkout Assets to User',
     'checkin'  					=> 'Převzít majetek',
     'checkout'  				=> 'Předat majetek uživateli',
     'clone'  					=> 'Klonovat majetek',

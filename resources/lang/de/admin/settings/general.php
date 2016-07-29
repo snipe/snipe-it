@@ -1,6 +1,10 @@
 <?php
 
 return array(
+    'ad'				        => 'Active Directory',
+    'ad_domain'				    => 'Active Directory domain',
+    'ad_domain_help'			=> 'This is sometimes the same as your email domain, but not always.',
+    'is_ad'				        => 'This is an Active Directory server',
 	'alert_email'				=> 'Alarme senden an',
 	'alerts_enabled'			=> 'Alarme aktiviert',
 	'alert_interval'			=> 'Ablauf Alarmschwelle (in Tagen)',
@@ -23,9 +27,9 @@ return array(
     'display_checkout_date'     => 'Zeige Herausgabedatum',
     'display_eol'               => 'Zeige EOL in der Tabellenansicht',
     'display_qr'                => 'Zeige quadratische Codes',
-	'display_alt_barcode'		=> 'Display 1D barcode',
-	'barcode_type'				=> '2D Barcode Type',
-	'alt_barcode_type'			=> '1D barcode type',
+	'display_alt_barcode'		=> 'Zeige 1D Barcode an',
+	'barcode_type'				=> '2D Barcode Typ',
+	'alt_barcode_type'			=> '1D Barcode Typ',
     'eula_settings'				=> 'EULA Einstellungen',
     'eula_markdown'				=> 'Diese EULA <a href="https://help.github.com/articles/github-flavored-markdown/"> erlaubt Github Flavored Markdown</a>.',
     'general_settings'			=> 'Generelle Einstellungen',
@@ -37,9 +41,12 @@ return array(
     'ldap_integration'          => 'LDAP Integration',
     'ldap_settings'             => 'LDAP Einstellungen',
     'ldap_server'               => 'LDAP Server',
+    'ldap_server_help'          => 'This should start with ldap:// (for unencrypted or TLS) or ldaps:// (for SSL)',
 	'ldap_server_cert'			=> 'LDAP SSL Zertifikatsüberprüfung',
 	'ldap_server_cert_ignore'	=> 'Erlaube ungültige SSL Zertifikate',
 	'ldap_server_cert_help'		=> 'Wählen Sie diese Option, wenn Sie selbstsignierte SSL Zertifikate verwenden und diese gegebenenfalls ungültigen Zertifikate akzeptieren möchten.',
+    'ldap_tls'                  => 'Use TLS',
+    'ldap_tls_help'             => 'This should be checked only if you are running STARTTLS on your LDAP server. ',
     'ldap_uname'                => 'LDAP Bind Nutzername',
     'ldap_pword'                => 'LDAP Bind Passwort',
     'ldap_basedn'               => 'Basis Bind DN',
@@ -101,4 +108,5 @@ return array(
     'bottom'        => 'Unten',
     'vertical'        => 'Vertikal',
     'horizontal'        => 'Horizontal',
+    'zerofill_count'        => 'Length of asset tags, including zerofill',
 );

@@ -64,6 +64,8 @@ return array(
     ),
     "unique"           => ":attribute กำลังใช้งานอยู่",
     "url"              => "รูปแบบของ :attribute ไม่ถูกต้อง",
+    "statuslabel_type" => "You must select a valid status label type",
+    "unique_undeleted" => "The :attribute must be unique.",
 
 
     /*

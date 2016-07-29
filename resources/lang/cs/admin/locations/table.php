@@ -1,8 +1,8 @@
 <?php
 
 return array(
-    'assets_rtd'		=> 'Assets', // This has NEVER meant Assets Retired. I don't know how it keeps getting reverted.
-    'assets_checkedout'		=> 'Assets Assigned',
+    'assets_rtd'		=> 'Zařízení', // This has NEVER meant Assets Retired. I don't know how it keeps getting reverted.
+    'assets_checkedout'		=> 'Předaných zař.',
     'id'      		=> 'ID',
     'city'   		=> 'Město',
     'state'   		=> 'Stát',
@@ -13,6 +13,6 @@ return array(
     'address'		=> 'Adresa',
     'zip'			=> 'PSČ',
     'locations'		=> 'Umístění',
-    'parent'		=> 'Parent',
-    'currency'  	=> 'Location Currency',
+    'parent'		=> 'Nadřazené',
+    'currency'  	=> 'Měna',
 );

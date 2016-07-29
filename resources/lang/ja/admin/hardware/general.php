@@ -3,6 +3,7 @@
 return array(
 	'archived'  				=> 'アーカイブ',
     'asset'  					=> '資産',
+    'bulk_checkout'             => 'Checkout Assets to User',
     'checkin'  					=> '資産をチェックイン',
     'checkout'  				=> '利用者に資産をチェックアウト',
     'clone'  					=> '資産を複製',

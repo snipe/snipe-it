@@ -4,7 +4,7 @@
         'not_found'                    => 'Asset Maintenance you were looking for was not found!',
         'delete'                       => [
             'confirm' => 'Varlık bakımını silmek istediğinizden emin misiniz?',
-            'error'   => 'There was an issue deleting the asset maintenance. Please try again.',
+            'error'   => 'Varlık bakımını silerken bir hata oluştu. Lütfen tekrar deneyiniz.',
             'success' => 'Varlık bakımı başarıyla silindi.'
         ],
         'create'                       => [

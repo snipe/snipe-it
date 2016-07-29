@@ -2,17 +2,17 @@
 
 return array(
 
-    'checkin'  					=> 'Checkin License Seat',
+    'checkin'  					=> 'Převzít jednu licenci',
     'checkout_history'  		=> 'Historie',
-    'checkout'  				=> 'Checkout License Seat',
+    'checkout'  				=> 'Předat jednu licenci',
     'edit'  					=> 'Uprav licenci',
-    'filetype_info'				=> 'Allowed filetypes are png, gif, jpg, jpeg, doc, docx, pdf, txt, zip, and rar.',
+    'filetype_info'				=> 'Povolené druhy souborů jsou png, gif, jpg, jpeg, doc, docx, pdf, txt, zip a rar.',
     'clone'  					=> 'Duplikovat licenci',
     'history_for'  				=> 'Historie uživatele ',
     'in_out'  					=> 'Stav',
     'info'  					=> 'Informace o licenci',
-    'license_seats'  			=> 'License Seats',
-    'seat'  					=> 'Seat',
+    'license_seats'  			=> 'Počet licencí',
+    'seat'  					=> 'Licence',
     'seats'  					=> 'Počet licencí',
     'software_licenses'  		=> 'Softwarové licence',
     'user'  					=> 'Uživatel',

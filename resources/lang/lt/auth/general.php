@@ -1,12 +1,12 @@
 <?php
 
 return [
-    'send_password_link'	        => 'Send Password Reset Link',
+    'send_password_link'	        => 'Slaptažodžio atkūrimo nuoroda',
     'email_reset_password'			=> 'Email Password Reset',
-    'reset_password'			    => 'Reset Password',
+    'reset_password'			    => 'Atstatyti slaptažodį',
     'login'                         => 'Login',
-    'login_prompt'                  => 'Please Login',
-    'forgot_password'               => 'I forgot my password',
-    'remember_me'                   => 'Remember Me',
+    'login_prompt'                  => 'Prašome prisijungti',
+    'forgot_password'               => 'Aš pamiršau savo slaptažodį',
+    'remember_me'                   => 'Prisiminti mane',
     ];
 

@@ -64,6 +64,8 @@ return array(
     ),
     "unique"           => ":attribute este deja folosit.",
     "url"              => "Formatul :attribute nu este valid.",
+    "statuslabel_type" => "You must select a valid status label type",
+    "unique_undeleted" => "The :attribute must be unique.",
 
 
     /*

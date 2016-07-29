@@ -2,24 +2,24 @@
 
 return array(
 
-    'does_not_exist' => 'Depreciation class does not exist.',
-    'assoc_users'	 => 'This depreciation is currently associated with one or more models and cannot be deleted. Please delete the models, and then try deleting again. ',
+    'does_not_exist' => 'فئة الإستهلاك غير موجود.',
+    'assoc_users'	 => 'لا يزال سند هذا الإستهلاك مرتبط مع أحد الموديلات ولا يمكن حذفه، الرجاء حذف الموديلات، وثم حاول حذف سند الإستهلاك مرة اخرى. ',
 
 
     'create' => array(
-        'error'   => 'Depreciation class was not created, please try again. :(',
-        'success' => 'Depreciation class created successfully. :)'
+        'error'   => 'لم يتم إنشاء فئة الإستهلاك، الرجاء المحاولة مرة اخرى',
+        'success' => 'تم إنشاء فئة الإستهلاك بنجاح.'
     ),
 
     'update' => array(
-        'error'   => 'Depreciation class was not updated, please try again',
-        'success' => 'Depreciation class updated successfully.'
+        'error'   => 'لم يتم تحديث فئة الإستهلاك، الرجاء المحاولة مرة اخرى',
+        'success' => 'تم تحديث فئة الإستهلاك بنجاح.'
     ),
 
     'delete' => array(
-        'confirm'   => 'Are you sure you wish to delete this depreciation class?',
-        'error'   => 'There was an issue deleting the depreciation class. Please try again.',
-        'success' => 'The depreciation class was deleted successfully.'
+        'confirm'   => 'هل أنت متأكد من رغبتك في حذف فئة الإستهلاك هذه؟',
+        'error'   => 'لقد حدثت مشكلة أثناء عملية حذف فئة الإستهلاك، الرجاء المحاولة مرة اخرى.',
+        'success' => 'تم إنشاء فئة الإستهلاك بنجاح.'
     )
 
 );

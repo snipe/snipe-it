@@ -2,34 +2,34 @@
 
 return array(
 
-    'does_not_exist' => 'Component does not exist.',
+    'does_not_exist' => 'Takový díl neexistuje.',
 
     'create' => array(
-        'error'   => 'Component was not created, please try again.',
-        'success' => 'Component created successfully.'
+        'error'   => 'Nepodařilo se vytvořit díl, zkuste to prosím znovu.',
+        'success' => 'Díl byl v pořádku vytvořen.'
     ),
 
     'update' => array(
-        'error'   => 'Component was not updated, please try again',
-        'success' => 'Component updated successfully.'
+        'error'   => 'Nepodařilo se upravit díl, zkuste to prosím znovu',
+        'success' => 'Díl byl v pořádku upraven.'
     ),
 
     'delete' => array(
-        'confirm'   => 'Are you sure you wish to delete this component?',
-        'error'   => 'There was an issue deleting the component. Please try again.',
-        'success' => 'The component was deleted successfully.'
+        'confirm'   => 'Opravdu si přejete odstranit tento díl?',
+        'error'   => 'Nepodařilo se díl odstranit. Zkuste to prosím později.',
+        'success' => 'Díl byl v pořádku odstraněn.'
     ),
 
      'checkout' => array(
-        'error'   		=> 'Component was not checked out, please try again',
-        'success' 		=> 'Component checked out successfully.',
-        'user_does_not_exist' => 'That user is invalid. Please try again.'
+        'error'   		=> 'Díl se nepodařilo předat, zkuste to prosím znovu',
+        'success' 		=> 'Díl byl v pořádku předán.',
+        'user_does_not_exist' => 'Neplatný uživatel. Zkuste to prosím znovu.'
     ),
 
     'checkin' => array(
-        'error'   		=> 'Component was not checked in, please try again',
-        'success' 		=> 'Component checked in successfully.',
-        'user_does_not_exist' => 'That user is invalid. Please try again.'
+        'error'   		=> 'Díl se nepodařilo převzít, zkuste to prosím znovu',
+        'success' 		=> 'Díl byl v pořádku převzat.',
+        'user_does_not_exist' => 'Neplatný uživatel. Zkuste to prosím znovu.'
     )
 
 

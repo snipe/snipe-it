@@ -18,7 +18,7 @@ return array(
     'serial'   		=> 'Sériové číslo',
     'status'   		=> 'Stav',
     'title'      	=> 'Majetek ',
-    'image'		=> 'Device Image',
-    'days_without_acceptance' => 'Days Without Acceptance'
+    'image'		=> 'Obrázek zařízení',
+    'days_without_acceptance' => 'Dní bez schválení'
 
 );

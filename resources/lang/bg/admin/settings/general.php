@@ -1,6 +1,10 @@
 <?php
 
 return array(
+    'ad'				        => 'Active Directory',
+    'ad_domain'				    => 'Active Directory domain',
+    'ad_domain_help'			=> 'This is sometimes the same as your email domain, but not always.',
+    'is_ad'				        => 'This is an Active Directory server',
 	'alert_email'				=> 'Изпращане на нотификации към',
 	'alerts_enabled'			=> 'Alerts Enabled',
 	'alert_interval'			=> 'Expiring Alerts Threshold (in days)',
@@ -37,9 +41,12 @@ return array(
     'ldap_integration'          => 'LDAP интеграция',
     'ldap_settings'             => 'LDAP настройки',
     'ldap_server'               => 'LDAP сървър',
+    'ldap_server_help'          => 'This should start with ldap:// (for unencrypted or TLS) or ldaps:// (for SSL)',
 	'ldap_server_cert'			=> 'Валидация на LDAP SSL сертификата',
 	'ldap_server_cert_ignore'	=> 'Допускане на невалиден SSL сертификат',
 	'ldap_server_cert_help'		=> 'Изберете тази опция ако използвате самоподписан SSL сертификат.',
+    'ldap_tls'                  => 'Use TLS',
+    'ldap_tls_help'             => 'This should be checked only if you are running STARTTLS on your LDAP server. ',
     'ldap_uname'                => 'LDAP потребител за връзка',
     'ldap_pword'                => 'LDAP парола на потребител за връзка',
     'ldap_basedn'               => 'Базов DN',
@@ -101,4 +108,5 @@ return array(
     'bottom'        => 'bottom',
     'vertical'        => 'vertical',
     'horizontal'        => 'horizontal',
+    'zerofill_count'        => 'Length of asset tags, including zerofill',
 );

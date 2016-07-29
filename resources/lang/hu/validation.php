@@ -64,6 +64,8 @@ return array(
     ),
     "unique"           => "A :attribute már foglalt.",
     "url"              => "Az :attribute formátuma érvénytelen.",
+    "statuslabel_type" => "You must select a valid status label type",
+    "unique_undeleted" => "The :attribute must be unique.",
 
 
     /*

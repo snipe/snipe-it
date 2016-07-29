@@ -3,6 +3,7 @@
 return array(
 	'archived'  				=> 'Arhivált',
     'asset'  					=> 'Eszköz',
+    'bulk_checkout'             => 'Checkout Assets to User',
     'checkin'  					=> 'Eszköz visszavétele',
     'checkout'  				=> 'Eszköz kiadása felhasználónak',
     'clone'  					=> 'Eszköz klónozása',

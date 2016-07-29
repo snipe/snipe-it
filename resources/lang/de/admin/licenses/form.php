@@ -9,7 +9,7 @@ return array(
     'date'              => 'Kaufdatum',
     'depreciation'      => 'Abschreibung',
     'expiration'        => 'Ablaufdatum',
-    'license_key'       => 'Product Key',
+    'license_key'       => 'Produktschlüssel',
     'maintained'        => 'Verwaltet',
     'name'              => 'Software Name',
     'no_depreciation'   => 'Nicht abschreiben',

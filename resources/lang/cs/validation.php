@@ -64,6 +64,8 @@ return array(
     ),
     "unique"           => ":attribute byl již vybrán.",
     "url"              => "Formát :attribute je neplatný.",
+    "statuslabel_type" => "You must select a valid status label type",
+    "unique_undeleted" => "The :attribute must be unique.",
 
 
     /*

@@ -4,7 +4,7 @@
 return array(
 
     'assets_user'       => 'Priskirta įranga :name',
-    'current_assets'    => 'Assets currently checked out to this user',
+    'current_assets'    => 'Šiam vartotojui priskirta įranga',
     'clone'             => 'Kopijuoti naudotoją',
     'contact_user'      => 'Susisiekti su :name',
     'edit'              => 'Redaguoti naudotoją',

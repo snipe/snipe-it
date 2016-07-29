@@ -3,6 +3,7 @@
 return array(
 	'archived'  				=> 'بایگانی شد',
     'asset'  					=> 'دارایی',
+    'bulk_checkout'             => 'Checkout Assets to User',
     'checkin'  					=> 'دارایی checkin',
     'checkout'  				=> 'پرداخت سرمایه به کاربر',
     'clone'  					=> 'دارایی شگرف',

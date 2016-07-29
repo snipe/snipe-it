@@ -2,34 +2,34 @@
 
 return array(
 
-    'does_not_exist' => 'Consumable does not exist.',
+    'does_not_exist' => 'المادة الإستهلاكية غير موجودة.',
 
     'create' => array(
-        'error'   => 'Consumable was not created, please try again.',
-        'success' => 'Consumable created successfully.'
+        'error'   => 'لم يتم انشاء المادة الإستهلاكية، الرجاء المحاولة مرة اخرى.',
+        'success' => 'تم إنشاء المادة الإستهلاكية بنجاح.'
     ),
 
     'update' => array(
-        'error'   => 'Consumable was not updated, please try again',
-        'success' => 'Consumable updated successfully.'
+        'error'   => 'لم يتم تحديث المادة الإستهلاكية، الرجاء المحاولة مرة اخرى',
+        'success' => 'تم تحديث المادة الإستهلاكية بنجاح.'
     ),
 
     'delete' => array(
-        'confirm'   => 'Are you sure you wish to delete this consumable?',
-        'error'   => 'There was an issue deleting the consumable. Please try again.',
-        'success' => 'The consumable was deleted successfully.'
+        'confirm'   => 'هل أنت متأكد من رغبتك في حذف هذه المادة الإستهلاكية؟',
+        'error'   => 'لقد حدثت مشكلة لعملية حذف المادة الإستهلاكية، الرجاء المحاولة مرة اخرى.',
+        'success' => 'تم حذف المادة الإستهلاكية بنجاح.'
     ),
 
      'checkout' => array(
-        'error'   		=> 'Consumable was not checked out, please try again',
-        'success' 		=> 'Consumable checked out successfully.',
-        'user_does_not_exist' => 'That user is invalid. Please try again.'
+        'error'   		=> 'لم يتم إخراج المادة الإستهلاكية، الرجاء المحاولة مرة اخرى',
+        'success' 		=> 'تم إخراج المادة الإستهلاكية بنجاح.',
+        'user_does_not_exist' => 'هذا المستخدم غير صحيح. الرجاء المحاولة مرة أخرى.'
     ),
 
     'checkin' => array(
-        'error'   		=> 'Consumable was not checked in, please try again',
-        'success' 		=> 'Consumable checked in successfully.',
-        'user_does_not_exist' => 'That user is invalid. Please try again.'
+        'error'   		=> 'لم يتم إيداع المادة الإستهلاكية، الرجاء المحاولة مرة اخرى',
+        'success' 		=> 'تم إخراج المادة الإستهلاكية بنجاح.',
+        'user_does_not_exist' => 'هذا المستخدم غير صحيح. الرجاء المحاولة مرة أخرى.'
     )
 
 

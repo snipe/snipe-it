@@ -64,6 +64,8 @@ return array(
     ),
     "unique"           => "ویژگی در حال حاضر گرفته شده است.",
     "url"              => "شکل ویژگی نامعتبر است.",
+    "statuslabel_type" => "You must select a valid status label type",
+    "unique_undeleted" => "The :attribute must be unique.",
 
 
     /*

@@ -3,25 +3,25 @@
 return array(
 
     'field' => array(
-        'invalid'   => 'That field does not exist.',
-        'already_added'   => 'Field already added',
+        'invalid'   => 'هذا الحقل غير موجود.',
+        'already_added'   => 'تم إضافة الحقل سابقا',
 
         'create' => array(
-            'error'   => 'Field was not created, please try again.',
-            'success' => 'Field created successfully.',
-            'assoc_success' => 'Field successfully added to fieldset.'
+            'error'   => 'لم يتم إنشاء الحقل، الرجاء المحاولة مرة اخرى.',
+            'success' => 'تم إنشاء الحقل بنجاح.',
+            'assoc_success' => 'تم اضافة الحقل الى مجموعة-الحقول بنجاح.'
         ),
 
         'update' => array(
-            'error'   => 'Field was not updated, please try again',
-            'success' => 'Field updated successfully.'
+            'error'   => 'لم يتم تحديث الحقل، الرجاء المحاولة مرة اخرى',
+            'success' => 'تم تحديث الحقل بنجاح.'
         ),
 
         'delete' => array(
-            'confirm'   	=> 'Are you sure you wish to delete this field?',
-            'error'   => 'There was an issue deleting the field. Please try again.',
-            'success' => 'The field was deleted successfully.',
-            'in_use'   => 'Field is still in use.',
+            'confirm'   	=> 'هل أنت متأكد من رغبتك في حذف هذا الحقل؟',
+            'error'   => 'لقد حدثت مشكلة أثناء عملية حذف الحقل، الرجاء المحاولة مرة اخرى.',
+            'success' => 'تم حذف الحقل بنجاح.',
+            'in_use'   => 'لا يزال الحقل قيد الإستخدام.',
         )
 
     ),
@@ -31,20 +31,20 @@ return array(
 
 
         'create' => array(
-            'error'   => 'Fieldset was not created, please try again.',
-            'success' => 'Fieldset created successfully.'
+            'error'   => 'لم يتم إنشاء مجموعة-الحقول، الرجاء المحاولة مرة اخرى.',
+            'success' => 'تم إنشاء مجموعة-الحقول بنجاح.'
         ),
 
         'update' => array(
-            'error'   => 'Fieldset was not updated, please try again',
-            'success' => 'Fieldset updated successfully.'
+            'error'   => 'لم يتم تحديث مجموعة-الحقول، الرجاء المحاولة مرة اخرى',
+            'success' => 'تم تحديث مجموعة-الحقول بنجاح.'
         ),
 
         'delete' => array(
-            'confirm'   	=> 'Are you sure you wish to delete this fieldset?',
-            'error'   => 'There was an issue deleting the fieldset. Please try again.',
-            'success' => 'The fieldset was deleted successfully.',
-            'in_use'   => 'Fieldset is still in use.',
+            'confirm'   	=> 'هل أنت متأكد من رغبتك في حذف مجموعة-الحقول هذه؟',
+            'error'   => 'لقد حدثت مشكلة أثناء عملية حذف مجموعة-الحقول هذه، الرجاء المحاولة مرة اخرى.',
+            'success' => 'تم حذف مجموعة-الحقول بنجاح.',
+            'in_use'   => 'لا تزال مجموعة-الحقول هذه قيد الإستخدام.',
         )
 
     ),

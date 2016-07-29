@@ -1,6 +1,10 @@
 <?php
 
 return array(
+    'ad'				        => 'Active Directory',
+    'ad_domain'				    => 'Active Directory domain',
+    'ad_domain_help'			=> 'This is sometimes the same as your email domain, but not always.',
+    'is_ad'				        => 'This is an Active Directory server',
 	'alert_email'				=> 'ارسال هشدار به',
 	'alerts_enabled'			=> 'هشدارها فعال شد',
 	'alert_interval'			=> 'آستانه ی انقضای هشدارها( به روز)',
@@ -37,9 +41,12 @@ return array(
     'ldap_integration'          => 'ادغام LDAP',
     'ldap_settings'             => 'تنظیمات LDAP',
     'ldap_server'               => 'سرویس دهنده LDAP',
+    'ldap_server_help'          => 'This should start with ldap:// (for unencrypted or TLS) or ldaps:// (for SSL)',
 	'ldap_server_cert'			=> 'اعتبار گواهی نامه LDAP SSL',
 	'ldap_server_cert_ignore'	=> 'اجازه می دهد به گواهی های بی اعتبار SSL',
 	'ldap_server_cert_help'		=> 'اگر از یک امضای SSL شخصی معتبر استفاده می کنید این گزینه را فعال کنید.',
+    'ldap_tls'                  => 'Use TLS',
+    'ldap_tls_help'             => 'This should be checked only if you are running STARTTLS on your LDAP server. ',
     'ldap_uname'                => 'حالت نام کاربری نامرئی LDAP',
     'ldap_pword'                => 'LDAP اتصال رمز عبور',
     'ldap_basedn'               => 'اتصال پایگاه DN',
@@ -102,4 +109,5 @@ return array(
     'bottom'        => 'پایین',
     'vertical'        => 'عمودی',
     'horizontal'        => 'افقی',
+    'zerofill_count'        => 'Length of asset tags, including zerofill',
 );

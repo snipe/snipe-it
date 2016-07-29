@@ -2,8 +2,8 @@
 
     return [
         'title'         => 'Asset Maintenance',
-        'asset_name'    => 'Asset',
-        'supplier_name' => 'Supplier',
-        'is_warranty'   => 'Warranty',
-        'dl_csv'        => 'Download CSV'
+        'asset_name'    => 'Inventarie',
+        'supplier_name' => 'Leverantör',
+        'is_warranty'   => 'Garanti',
+        'dl_csv'        => 'Ladda ner CSV'
     ];

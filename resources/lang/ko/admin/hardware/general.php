@@ -3,6 +3,7 @@
 return array(
 	'archived'  				=> '보관됨',
     'asset'  					=> '자산',
+    'bulk_checkout'             => 'Checkout Assets to User',
     'checkin'  					=> '반입 자산',
     'checkout'  				=> '사용자에게 반출된 자산',
     'clone'  					=> '자산 복제',

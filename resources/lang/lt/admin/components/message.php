@@ -2,11 +2,11 @@
 
 return array(
 
-    'does_not_exist' => 'Component does not exist.',
+    'does_not_exist' => 'Komponentas \'%s\' neegzistuoja.',
 
     'create' => array(
-        'error'   => 'Component was not created, please try again.',
-        'success' => 'Component created successfully.'
+        'error'   => 'Komponentas nebuvo sukurtas, prašome bandyti vėl.',
+        'success' => 'Komponentas sėkmingai sukurtas.'
     ),
 
     'update' => array(
@@ -15,7 +15,7 @@ return array(
     ),
 
     'delete' => array(
-        'confirm'   => 'Are you sure you wish to delete this component?',
+        'confirm'   => 'Ar tikrai norite ištrinti šį komponentą?',
         'error'   => 'There was an issue deleting the component. Please try again.',
         'success' => 'The component was deleted successfully.'
     ),

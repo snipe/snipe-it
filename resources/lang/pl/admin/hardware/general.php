@@ -3,6 +3,7 @@
 return array(
 	'archived'  				=> 'Zarchiwizowane',
     'asset'  					=> 'Nabytek',
+    'bulk_checkout'             => 'Checkout Assets to User',
     'checkin'  					=> 'Potwierdzanie zasobu/aktywa',
     'checkout'  				=> 'Przypisanie aktywa do Użytkownika',
     'clone'  					=> 'Klonuj zasób',

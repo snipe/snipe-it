@@ -1,6 +1,10 @@
 <?php
 
 return array(
+    'ad'				        => 'Active Directory',
+    'ad_domain'				    => 'Active Directory domain',
+    'ad_domain_help'			=> 'This is sometimes the same as your email domain, but not always.',
+    'is_ad'				        => 'This is an Active Directory server',
 	'alert_email'				=> '알림 전송',
 	'alerts_enabled'			=> '알림 사용',
 	'alert_interval'			=> '(일자) 최대값 만료 알림',
@@ -37,9 +41,12 @@ return array(
     'ldap_integration'          => 'LDAP 연동',
     'ldap_settings'             => 'LDAP 설정',
     'ldap_server'               => 'LDAP 서버',
+    'ldap_server_help'          => 'This should start with ldap:// (for unencrypted or TLS) or ldaps:// (for SSL)',
 	'ldap_server_cert'			=> 'LDAP SSL 인증서 확인',
 	'ldap_server_cert_ignore'	=> '유효하지 않은 SSL 인증서 허용',
 	'ldap_server_cert_help'		=> '자체 서명한 SSL 인증서를 사용하고, 유효하지 않은 SSL 인증서 사용을 승인하고자 하는 경우, 이 확인 상자를 선택하십시오.',
+    'ldap_tls'                  => 'Use TLS',
+    'ldap_tls_help'             => 'This should be checked only if you are running STARTTLS on your LDAP server. ',
     'ldap_uname'                => 'LDAP 연결용 사용자명',
     'ldap_pword'                => 'LDAP 연결용 비밀번호',
     'ldap_basedn'               => 'Base BIND DN',
@@ -101,4 +108,5 @@ return array(
     'bottom'        => '아래',
     'vertical'        => '수직',
     'horizontal'        => '수평',
+    'zerofill_count'        => 'Length of asset tags, including zerofill',
 );

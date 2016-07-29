@@ -19,7 +19,7 @@ return array(
     'delete' => array(
         'confirm'   => 'Are you sure you wish to delete this Status Label?',
         'error'   => 'There was an issue deleting the Status Label. Please try again.',
-        'success' => 'The Status Label was deleted successfully.'
+        'success' => '状态标签删除成功。'
     )
 
 );

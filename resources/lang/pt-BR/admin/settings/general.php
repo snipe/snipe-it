@@ -1,6 +1,10 @@
 <?php
 
 return array(
+    'ad'				        => 'Active Directory',
+    'ad_domain'				    => 'Active Directory domain',
+    'ad_domain_help'			=> 'This is sometimes the same as your email domain, but not always.',
+    'is_ad'				        => 'This is an Active Directory server',
 	'alert_email'				=> 'Enviar alertas a',
 	'alerts_enabled'			=> 'Alertas ativados',
 	'alert_interval'			=> 'Limite de Expiração dos Alertas (em dias)',
@@ -23,9 +27,9 @@ return array(
     'display_checkout_date'     => 'Mostrar data de check-out',
     'display_eol'               => 'Exibir EOL na visualização de tabela',
     'display_qr'                => 'Exibir Códigos QR',
-	'display_alt_barcode'		=> 'Display 1D barcode',
-	'barcode_type'				=> '2D Barcode Type',
-	'alt_barcode_type'			=> '1D barcode type',
+	'display_alt_barcode'		=> 'Exibir códigos de barra em 1D',
+	'barcode_type'				=> 'Código de barras do tipo 2D',
+	'alt_barcode_type'			=> 'Código de barras do tipo 1D',
     'eula_settings'				=> 'Configuração do termo de uso',
     'eula_markdown'				=> 'Este EULA permite <a href="https://help.github.com/articles/github-flavored-markdown/">Github flavored markdown</a>.',
     'general_settings'			=> 'Configuracoes Gerais',
@@ -37,9 +41,12 @@ return array(
     'ldap_integration'          => 'Integração LDAP',
     'ldap_settings'             => 'Configurações LDAP',
     'ldap_server'               => 'Servidor LDAP',
+    'ldap_server_help'          => 'This should start with ldap:// (for unencrypted or TLS) or ldaps:// (for SSL)',
 	'ldap_server_cert'			=> 'Validação certificado SSL LDAP',
 	'ldap_server_cert_ignore'	=> 'Permitir certificado SSL inválido',
 	'ldap_server_cert_help'		=> 'Selecione esta opção se está utilizando um certificado SSL próprio e deseja aceitar um certificado SSL inválido.',
+    'ldap_tls'                  => 'Use TLS',
+    'ldap_tls_help'             => 'This should be checked only if you are running STARTTLS on your LDAP server. ',
     'ldap_uname'                => 'Login do usuário LDAP',
     'ldap_pword'                => 'Senha do usuário LDAP',
     'ldap_basedn'               => 'DN de Atribuição Básico',
@@ -101,4 +108,5 @@ return array(
     'bottom'        => 'rodapé',
     'vertical'        => 'vertical',
     'horizontal'        => 'horizontal',
+    'zerofill_count'        => 'Length of asset tags, including zerofill',
 );

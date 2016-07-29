@@ -64,6 +64,8 @@ return array(
     ),
     "unique"           => ":attribute đã sẵn sàng.",
     "url"              => "Định dạng :attribute thì không hợp lý.",
+    "statuslabel_type" => "You must select a valid status label type",
+    "unique_undeleted" => "The :attribute must be unique.",
 
 
     /*

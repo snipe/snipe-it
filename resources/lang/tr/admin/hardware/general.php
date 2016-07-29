@@ -3,6 +3,7 @@
 return array(
 	'archived'  				=> 'Arşivlenmiş',
     'asset'  					=> 'Demirbaş',
+    'bulk_checkout'             => 'Checkout Assets to User',
     'checkin'  					=> 'Demirbaş Girişi Yap',
     'checkout'  				=> 'Demirbaşı bu kullanıcıya çıkış yap',
     'clone'  					=> 'Demirbaşı Kopyala',

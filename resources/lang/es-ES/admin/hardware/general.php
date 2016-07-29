@@ -3,6 +3,7 @@
 return array(
 	'archived'  				=> 'Archivado',
     'asset'  					=> 'Equipo',
+    'bulk_checkout'             => 'Checkout Assets to User',
     'checkin'  					=> 'Quitar Equipo',
     'checkout'  				=> 'Asignar a un usuario',
     'clone'  					=> 'Clonar Equipo',
