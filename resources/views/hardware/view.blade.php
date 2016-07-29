@@ -249,11 +249,11 @@
                       <td>{{ trans('admin/hardware/form.notes') }}</td>
                       <td> {!! nl2br(e($asset->notes)) !!}</td>
                     </tr>
-                   @if ($asset->created_at)
+                   @if ($asset->created_at!=''')
                       <tr>
                           <td>{{ trans('general.created_at') }}</td>
                           <td>
-                              {{ $user->created_at->format('F j, Y h:iA') }}
+                              {{ $asset->created_at->format('F j, Y h:iA') }}
                           </td>
                       </tr>
                    @endif
