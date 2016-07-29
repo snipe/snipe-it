@@ -1584,4 +1584,68 @@ class AssetsController extends Controller
 
         return $data;
     }
+
+      public function getBulkCheckout()
+      {
+          // Get the dropdown of users and then pass it to the checkout view
+          $users_list = Helper::usersList();
+          // Filter out assets that are not deployable.
+          $assets = Asset::RTD()->get();
+  
+          $assets_list = Company::scopeCompanyables($assets, 'assets.company_id')->lists('detailed_name', 'id')->toArray();
+  
+          return View::make('hardware/bulk-checkout')->with('users_list', $users_list)->with('assets_list', $assets_list);
+      }
+  
+      public function postBulkCheckout(Request $request)
+      {
+
+          $this->validate($request, [
+             "assigned_to"   => 'required'
+          ]);
+
+          $user = User::find(e(Input::get('assigned_to')));
+          $admin = Auth::user();
+  
+          $asset_ids = array_filter(Input::get('selected_assets'));
+  
+          if ((Input::has('checkout_at')) && (Input::get('checkout_at')!= date("Y-m-d"))) {
+              $checkout_at = e(Input::get('checkout_at'));
+          } else {
+              $checkout_at = date("Y-m-d H:i:s");
+          }
+  
+          if (Input::has('expected_checkin')) {
+              $expected_checkin = e(Input::get('expected_checkin'));
+          } else {
+              $expected_checkin = '';
+          }
+  
+          $has_errors = false;
+          $errors = [];
+          DB::transaction(function() use ($user, $admin, $checkout_at, $expected_checkin, $errors, $asset_ids)
+          {          
+              foreach($asset_ids as $asset_id)
+              {
+                  $asset = Asset::find($asset_id);
+  
+                  $error = $asset->checkOutToUser($user, $admin, $checkout_at, $expected_checkin, e(Input::get('note')), null);
+  
+                  if($error)
+                  {
+                      $has_errors = true;
+                      array_merge_recursive($errors, $asset->getErrors()->toArray());
+                  }
+              }
+            });
+  
+          if (!$errors) {
+            // Redirect to the new asset page
+              return redirect()->to("hardware")->with('success', trans('admin/hardware/message.checkout.success'));
+          }
+  
+        // Redirect to the asset management page with error
+          return redirect()->to("hardware/bulk-checkout")->with('error', trans('admin/hardware/message.checkout.error'))->withErrors($errors);
+      }
+
 }

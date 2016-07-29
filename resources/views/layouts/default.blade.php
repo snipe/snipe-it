@@ -206,6 +206,20 @@
                    </ul>
                </li>
                @endcan
+               @can('assets.view')
+                  <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                      @lang('general.bulk_actions')
+                      <b class="caret"></b>
+                    </a>
+                   <ul class="dropdown-menu">
+                      <li {!! (Request::is('hardware/bulkcheckout') ? 'class="active>"' : '') !!}>
+                              <a href="{{ route('hardware/bulkcheckout') }}">                                  
+                                  @lang('general.checkout')</a>
+                      </li>                       
+                   </ul>
+               </li>
+              @endcan
                @can('admin')
                <!-- Tasks: style can be found in dropdown.less -->
                <?php $alert_items = \App\Helpers\Helper::checkLowInventory(); ?>
