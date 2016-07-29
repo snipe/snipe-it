@@ -612,6 +612,26 @@ public function checkin_email()
         });
     }
 
+    /**
+   * Query builder scope for Deployable assets
+   *
+   * @param  Illuminate\Database\Query\Builder $query Query builder instance
+   *
+   * @return Illuminate\Database\Query\Builder          Modified query builder
+   */
+
+    public function scopeDeployable($query)
+    {
+
+        return $query->whereHas('assetstatus', function ($query) {
+
+            $query->where('deployable', '=', 1)
+                ->where('pending', '=', 0)
+                ->where('archived', '=', 0);
+            })->whereNull('assigned_to')
+              ->whereNull('deleted_at', 'and');
+    }
+
   /**
    * Query builder scope for Archived assets
    *
