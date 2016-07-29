@@ -26,10 +26,12 @@
                 <table class="table table-striped">
 
                     <thead>
-                        <tr role="row">
+                        <tr role="row">                            
                             <th class="col-md-3" bSortable="true">{{ trans('admin/hardware/table.asset_model') }}</th>
                             <th class="col-md-3" bSortable="true">{{ trans('admin/hardware/table.serial') }}</th>
                             <th class="col-md-2" bSortable="true">{{ trans('admin/hardware/table.location') }}</th>
+                            <th class="col-md-2" bSortable="true">{{ trans('admin/hardware/table.status') }}</th>
+                            <th class="col-md-2" bSortable="true">{{ trans('admin/hardware/form.expected_checkin') }}</th>
                             <th class="col-md-1 actions" bSortable="false">{{ trans('table.actions') }}</th>
                         </tr>
                     </thead>
@@ -44,15 +46,28 @@
                             @endif
 
                             <td>{{ $asset->serial }}</td>
+
+
+
                             <td>
                                 @if ($asset->assigneduser && $asset->assetloc)
-                                    	{{ $asset->assetloc->name }}
+                                        {{ $asset->assetloc->name }}
                                 @elseif ($asset->defaultLoc)
-                                    	{{ $asset->defaultLoc->name }}
+                                        {{ $asset->defaultLoc->name }}
 
                                 @endif
 
                             </td>
+                             @if ($asset->assigned_to != '' && $asset->assigned_to > 0)
+                                <td>Checked out</td>
+                            @else
+                            <td>{{ trans('admin/hardware/general.requestable') }}</td>
+                            @endif
+                            
+
+                            <td>{{ $asset->expected_checkin }}</td>
+                            
+                            
                             <td>
                                 <a href="{{ route('account/request-asset', $asset->id) }}" class="btn btn-info btn-sm" title="{{ trans('button.request') }}">{{ trans('button.request') }}</a>
                             </td>
