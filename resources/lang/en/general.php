@@ -23,6 +23,7 @@
     'avatar_upload'         => 'Upload Avatar',
     'back'      			=> 'Back',
     'bad_data'      		=> 'Nothing found. Maybe bad data?',
+    'bulk_actions'          => 'Bulk actions',
     'cancel'  				=> 'Cancel',
     'categories'			=> 'Categories',
     'category'				=> 'Category',
