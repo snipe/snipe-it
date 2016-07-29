@@ -102,12 +102,12 @@ View Assets for  {{ $user->fullName() }}
                       <td>{{ $license->name }}</td>
                       <td>
 
-                         @if (($user->hasAccess('admin')) || ($user->hasAccess('license_keys')))
+                          @can('licenses.keys')
 
-                         {{ mb_strimwidth($license->serial, 0, 50, "...") }}
-                        @else
-                          ---
-                        @endif
+                             {{ mb_strimwidth($license->serial, 0, 50, "...") }}
+                            @else
+                              ---
+                            @endcan
                       </td>
                   </tr>
                   @endforeach

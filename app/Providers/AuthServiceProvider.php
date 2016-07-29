@@ -205,7 +205,7 @@ class AuthServiceProvider extends ServiceProvider
         # Components
         # -----------------------------------------
         $gate->define('components.view', function ($user) {
-            if (($user->hasAccess('components.create')) || ($user->hasAccess('admin'))) {
+            if (($user->hasAccess('components.view')) || ($user->hasAccess('admin'))) {
                 return true;
             }
         });
@@ -264,6 +264,12 @@ class AuthServiceProvider extends ServiceProvider
 
         $gate->define('licenses.checkin', function ($user) {
             if (($user->hasAccess('licenses.checkin')) || ($user->hasAccess('admin'))) {
+                return true;
+            }
+        });
+
+        $gate->define('licenses.keys', function ($user) {
+            if (($user->hasAccess('licenses.keys')) || ($user->hasAccess('admin'))) {
                 return true;
             }
         });
