@@ -9,7 +9,7 @@ return array(
     'date'              => 'Data da Compra',
     'depreciation'      => 'Depreciação',
     'expiration'        => 'Data de validade',
-    'license_key'       => 'Product Key',
+    'license_key'       => 'Chave do produto',
     'maintained'        => 'Mantido',
     'name'              => 'Nome do Software',
     'no_depreciation'   => 'Não Depreciar',

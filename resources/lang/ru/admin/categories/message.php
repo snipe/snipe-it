@@ -3,8 +3,8 @@
 return array(
 
     'does_not_exist' => 'Категория не существует.',
-    'assoc_models'	 => 'This category is currently associated with at least one model and cannot be deleted. Please update your models to no longer reference this category and try again. ',
-    'assoc_items'	 => 'This category is currently associated with at least one :asset_type and cannot be deleted. Please update your :asset_type  to no longer reference this category and try again. ',
+    'assoc_models'	 => 'Эта категория уже связана с одной или несколькими моделями и не может быть удалена. Пожалуйста обновите категории в моделях и повторите попытку. ',
+    'assoc_items'	 => 'Эта категория связана с одним или несколькими типами активов и не может быть удалена. Пожалуйста обновите категории типов активов и повторите попытку. ',
 
     'create' => array(
         'error'   => 'Категория не создана, пожалуйста попробуйте снова.',

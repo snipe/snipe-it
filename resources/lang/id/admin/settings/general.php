@@ -1,6 +1,10 @@
 <?php
 
 return array(
+    'ad'				        => 'Active Directory',
+    'ad_domain'				    => 'Active Directory domain',
+    'ad_domain_help'			=> 'This is sometimes the same as your email domain, but not always.',
+    'is_ad'				        => 'This is an Active Directory server',
 	'alert_email'				=> 'Kirim pemberitahuan kepada',
 	'alerts_enabled'			=> 'Aktifkan pemberitahuan',
 	'alert_interval'			=> 'Expiring Alerts Threshold (in days)',
@@ -37,9 +41,12 @@ return array(
     'ldap_integration'          => 'Integrasi LDAP',
     'ldap_settings'             => 'Konfigurasi LDAP',
     'ldap_server'               => 'LDAP Server',
+    'ldap_server_help'          => 'This should start with ldap:// (for unencrypted or TLS) or ldaps:// (for SSL)',
 	'ldap_server_cert'			=> 'Validasi sertifikat LDAP SSL',
 	'ldap_server_cert_ignore'	=> 'Izinkan sertifikat SSL tak terdaftar',
 	'ldap_server_cert_help'		=> 'Pilih kotak ini jika anda menggunakan sertifikat SSL self sign dan menerima sertifikat SSL yang tak terdaftar.',
+    'ldap_tls'                  => 'Use TLS',
+    'ldap_tls_help'             => 'This should be checked only if you are running STARTTLS on your LDAP server. ',
     'ldap_uname'                => 'Nama pengguna LDAP',
     'ldap_pword'                => 'Katakunci LDAP',
     'ldap_basedn'               => 'Base Bind DN',
@@ -101,4 +108,5 @@ return array(
     'bottom'        => 'bottom',
     'vertical'        => 'vertical',
     'horizontal'        => 'horizontal',
+    'zerofill_count'        => 'Length of asset tags, including zerofill',
 );

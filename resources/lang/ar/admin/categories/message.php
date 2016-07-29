@@ -3,8 +3,8 @@
 return array(
 
     'does_not_exist' => 'التصنيف غير موجود.',
-    'assoc_models'	 => 'This category is currently associated with at least one model and cannot be deleted. Please update your models to no longer reference this category and try again. ',
-    'assoc_items'	 => 'This category is currently associated with at least one :asset_type and cannot be deleted. Please update your :asset_type  to no longer reference this category and try again. ',
+    'assoc_models'	 => 'هذا التصنيف حاليا مرتبط مع نموذج ولا يمكن حذفه. الرجاء القيام بتحديث النماذج بحيث لا تكون مرتبطة بهذا التصنيف، ثم حاول مرة اخرى. ',
+    'assoc_items'	 => 'هذه التصنيف مرتبط حاليا مع واحد على الأقل من أنواع الاصول asset_type: ولا يمكن حذفه. الرجاء تحديث نوع الاصل الخاص بك asset_type: حيث لا يكون مرتبط بهذا التصنيف، ثم حاول مرة أخرى. ',
 
     'create' => array(
         'error'   => 'فشل إنشاء التصنيف، فضلاً حاول مرة أخرى.',

@@ -2,16 +2,16 @@
 
 return array(
 
-    'create'				=> 'Create Asset Model',
+    'create'				=> 'Vytvořit vzor majetku',
     'created_at' 			=> 'Vytvořeno',
     'eol'	 				=> 'KŽ',
     'modelnumber'   		=> 'Modelová řada',
-    'name'      			=> 'Asset Model Name',
+    'name'      			=> 'Název vzoru majetku',
     'numassets' 			=> 'Počet',
     'title'					=> 'Model',
-    'update'				=> 'Update Asset Model',
-    'view'					=> 'View Asset Model',
-    'update'				=> 'Update Asset Model',
+    'update'				=> 'Upravit vzor majetku',
+    'view'					=> 'Zobrazit vzor majetku',
+    'update'				=> 'Upravit vzor majetku',
     'clone'				=> 'Kopíruj modelovou řadu',
     'edit'				=> 'Edituj model',
 );

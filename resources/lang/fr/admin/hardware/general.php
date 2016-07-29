@@ -3,6 +3,7 @@
 return array(
 	'archived'  				=> 'Retiré',
     'asset'  					=> 'Biens',
+    'bulk_checkout'             => 'Checkout Assets to User',
     'checkin'  					=> 'Retour des Biens',
     'checkout'  				=> 'Sortie des Biens',
     'clone'  					=> 'Cloner le Bien',

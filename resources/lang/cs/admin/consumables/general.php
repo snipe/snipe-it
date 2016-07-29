@@ -7,7 +7,7 @@ return array(
     'cost'				=> 'Náklady',
     'create'                             => 'Vytvořit sp. materiál',
     'date'					=> 'Datum pořízení',
-    'item_no'               => 'Item No.',
+    'item_no'               => 'Položka č.',
     'order'					=> 'Číslo objednávky',
     'remaining' 			             => 'Zbývá',
     'total' 			                 => 'Celkem',

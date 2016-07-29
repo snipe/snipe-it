@@ -1,17 +1,17 @@
 <?php
 
 return array(
-    'about_components_title' 			=> 'About Components',
-    'about_components_text'  			=> 'Components are items that are part of an asset, for example HDD, RAM, etc.',
-    'component_name'                  => 'Component Name',
-    'checkin'                             => 'Checkin Component',
-    'checkout'                             => 'Checkout Component',
-    'cost'				=> 'Purchase Cost',
-    'create'                             => 'Create Component',
-    'edit'                             => 'Edit Component',
+    'about_components_title' 			=> 'O dílech',
+    'about_components_text'  			=> 'Díly jsou položky, které jsou součástí majetku, jako např. HDD, RAM atp.',
+    'component_name'                  => 'Název dílu',
+    'checkin'                             => 'Převzít díl',
+    'checkout'                             => 'Předat díl',
+    'cost'				=> 'Pořizovací cena',
+    'create'                             => 'Vytvořit díl',
+    'edit'                             => 'Upravit díl',
     'date'					=> 'Datum nákupu',
     'order'					=> 'Číslo objednávky',
     'remaining' 			             => 'Zbývá',
     'total' 			                 => 'Celkem',
-    'update'                            => 'Update Component',
+    'update'                            => 'Upravit díl',
 );

@@ -9,7 +9,7 @@ return array(
     'date'              => 'Дата покупки',
     'depreciation'      => 'Амортизация',
     'expiration'        => 'Истекает',
-    'license_key'       => 'Product Key',
+    'license_key'       => 'Ключ продукта',
     'maintained'        => 'Поддерживаемая',
     'name'              => 'Название ПО',
     'no_depreciation'   => 'Не амортизируется',

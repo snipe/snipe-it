@@ -1,6 +1,10 @@
 <?php
 
 return array(
+    'ad'				        => 'Active Directory',
+    'ad_domain'				    => 'Active Directory domain',
+    'ad_domain_help'			=> 'This is sometimes the same as your email domain, but not always.',
+    'is_ad'				        => 'This is an Active Directory server',
 	'alert_email'				=> 'Verstuur meldingen naar',
 	'alerts_enabled'			=> 'Meldingen ingeschakeld',
 	'alert_interval'			=> 'Drempel verlopende meldingen (in dagen)',
@@ -37,9 +41,12 @@ return array(
     'ldap_integration'          => 'LDAP integratie',
     'ldap_settings'             => 'LDAP instellingen',
     'ldap_server'               => 'LDAP server',
+    'ldap_server_help'          => 'This should start with ldap:// (for unencrypted or TLS) or ldaps:// (for SSL)',
 	'ldap_server_cert'			=> 'LDAP SSL certificaat validatie',
 	'ldap_server_cert_ignore'	=> 'Staat ongeldige SSL certificaat toe',
 	'ldap_server_cert_help'		=> 'Selecteer deze box als je een eigen ondergetekende SSL certificaat gebruik en deze wilt accepteren.',
+    'ldap_tls'                  => 'Use TLS',
+    'ldap_tls_help'             => 'This should be checked only if you are running STARTTLS on your LDAP server. ',
     'ldap_uname'                => 'LDAP Bind gebruikersnaam',
     'ldap_pword'                => 'LDAP Bind wachtwoord',
     'ldap_basedn'               => 'Basis Bind DN',
@@ -101,4 +108,5 @@ return array(
     'bottom'        => 'onderkant',
     'vertical'        => 'verticaal',
     'horizontal'        => 'horizontaal',
+    'zerofill_count'        => 'Length of asset tags, including zerofill',
 );

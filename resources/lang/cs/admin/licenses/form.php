@@ -9,14 +9,14 @@ return array(
     'date'              => 'Datum pořízení',
     'depreciation'      => 'Amortizace',
     'expiration'        => 'Expirace',
-    'license_key'       => 'Product Key',
+    'license_key'       => 'Klíč',
     'maintained'        => 'Údržba',
     'name'              => 'Software',
-    'no_depreciation'   => 'Do Not Depreciate',
+    'no_depreciation'   => 'Neznehodnocovat',
     'notes'             => 'Poznámky',
     'order'             => 'Koupeno',
-    'purchase_order'    => 'Purchase Order Number',
-    'reassignable'      => 'Reassignable',
+    'purchase_order'    => 'Číslo objednávky',
+    'reassignable'      => 'Přeřaditelné',
     'remaining_seats'   => 'Nasazeno',
     'seats'             => 'Počet licencí',
     'serial'            => 'Sériové číslo',
@@ -25,5 +25,5 @@ return array(
     'to_email'          => 'Registrováno na Email',
     'to_name'           => 'Registrace na jméno',
     'update'            => 'Úprava licence',
-    'checkout_help'     => 'You must check a license out to a hardware asset or a person. You can select both, but the owner of the asset must match the person you\'re checking the asset out to.'
+    'checkout_help'     => 'Licence musí být přidělena majetku nebo uživateli. Pokud zvolíte obojí, uživatel zvoleného majetku musí souhlasit se zvoleným uživatelem.'
 );

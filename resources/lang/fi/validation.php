@@ -64,6 +64,8 @@ return array(
     ),
     "unique"           => ":attribute on jo käytössä.",
     "url"              => ":attribute muotoilu on virheellinen.",
+    "statuslabel_type" => "You must select a valid status label type",
+    "unique_undeleted" => "The :attribute must be unique.",
 
 
     /*

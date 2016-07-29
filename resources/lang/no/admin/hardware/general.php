@@ -3,6 +3,7 @@
 return array(
 	'archived'  				=> 'Arkivert',
     'asset'  					=> 'Eiendel',
+    'bulk_checkout'             => 'Checkout Assets to User',
     'checkin'  					=> 'Sjekk inn eiendel',
     'checkout'  				=> 'Sjekk ut eiendel til bruker',
     'clone'  					=> 'Klon eiendel',

@@ -1,6 +1,10 @@
 <?php
 
 return array(
+    'ad'				        => 'Active Directory',
+    'ad_domain'				    => 'Active Directory domain',
+    'ad_domain_help'			=> 'This is sometimes the same as your email domain, but not always.',
+    'is_ad'				        => 'This is an Active Directory server',
 	'alert_email'				=> '发送警报',
 	'alerts_enabled'			=> '警报已启用',
 	'alert_interval'			=> '警报阈值(天)',
@@ -37,9 +41,12 @@ return array(
     'ldap_integration'          => 'LDAP集成',
     'ldap_settings'             => 'LDAP 设置',
     'ldap_server'               => 'LDAP 服务器',
+    'ldap_server_help'          => 'This should start with ldap:// (for unencrypted or TLS) or ldaps:// (for SSL)',
 	'ldap_server_cert'			=> '检验LDAP的SSL证书',
 	'ldap_server_cert_ignore'	=> '允许未通过校验的SSL证书',
 	'ldap_server_cert_help'		=> '如果你使用了自签发证书，请勾选',
+    'ldap_tls'                  => 'Use TLS',
+    'ldap_tls_help'             => 'This should be checked only if you are running STARTTLS on your LDAP server. ',
     'ldap_uname'                => 'LDAP 用户名',
     'ldap_pword'                => 'LDAP 密码',
     'ldap_basedn'               => 'Base Bind DN',
@@ -101,4 +108,5 @@ return array(
     'bottom'        => '底部',
     'vertical'        => '竖向',
     'horizontal'        => '水平',
+    'zerofill_count'        => 'Length of asset tags, including zerofill',
 );

@@ -1,6 +1,10 @@
 <?php
 
 return array(
+    'ad'				        => 'Active Directory',
+    'ad_domain'				    => 'Active Directory domain',
+    'ad_domain_help'			=> 'This is sometimes the same as your email domain, but not always.',
+    'is_ad'				        => 'This is an Active Directory server',
 	'alert_email'				=> 'Enviar alertas a',
 	'alerts_enabled'			=> 'Alertas habilitadas',
 	'alert_interval'			=> 'Expiring Alerts Threshold (in days)',
@@ -37,9 +41,12 @@ return array(
     'ldap_integration'          => 'Integración LDAP',
     'ldap_settings'             => 'Ajustes LDAP',
     'ldap_server'               => 'Servidor LDAP',
+    'ldap_server_help'          => 'This should start with ldap:// (for unencrypted or TLS) or ldaps:// (for SSL)',
 	'ldap_server_cert'			=> 'Certificado de validación SSL LDAP',
 	'ldap_server_cert_ignore'	=> 'Permitir certificados SSL inválidos',
 	'ldap_server_cert_help'		=> 'Selecciona este campo si estás usando un certificado SSL auto firmado y quieres aceptar un certificado SSL inválido.',
+    'ldap_tls'                  => 'Use TLS',
+    'ldap_tls_help'             => 'This should be checked only if you are running STARTTLS on your LDAP server. ',
     'ldap_uname'                => 'Enlazar usuario LDAP',
     'ldap_pword'                => 'Enlazar contraseña LDAP',
     'ldap_basedn'               => 'Enlazar base DN',
@@ -101,4 +108,5 @@ return array(
     'bottom'        => 'bottom',
     'vertical'        => 'vertical',
     'horizontal'        => 'horizontal',
+    'zerofill_count'        => 'Length of asset tags, including zerofill',
 );

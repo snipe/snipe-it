@@ -4,68 +4,68 @@ return array(
 
     'undeployable' 		=> '<strong>Varování:</strong> Toto zařízení bylo označeno jako momentálně nepřiřaditelné.
                         Pokud se na jeho stavu něco změnilo, upravte jej.',
-    'does_not_exist' 	=> 'Asset does not exist.',
-    'does_not_exist_or_not_requestable' => 'Nice try. That asset does not exist or is not requestable.',
-    'assoc_users'	 	=> 'This asset is currently checked out to a user and cannot be deleted. Please check the asset in first, and then try deleting again. ',
+    'does_not_exist' 	=> 'Majetek nenalezen.',
+    'does_not_exist_or_not_requestable' => 'Hezký pokus, ale majetek buď neexistuje, nebo není možné jej převzít.',
+    'assoc_users'	 	=> 'Majetek je předán svému uživateli a nelze jej odstranit. Před odstraněním jej nejprve převezměte. ',
 
     'create' => array(
-        'error'   		=> 'Asset was not created, please try again. :(',
-        'success' 		=> 'Asset created successfully. :)'
+        'error'   		=> 'Majetek se nepodařilo vytvořit, zkuste to prosím znovu.',
+        'success' 		=> 'Majetek byl v pořádku vytvořen.'
     ),
 
     'update' => array(
-        'error'   			=> 'Asset was not updated, please try again',
+        'error'   			=> 'Majetek se nepodařilo upravit, zkuste to prosím znovu',
         'success' 			=> 'Majetek úspěšně aktualizován.',
-        'nothing_updated'	=>  'No fields were selected, so nothing was updated.',
+        'nothing_updated'	=>  'Nebyla zvolena žádná pole, nic se tedy neupravilo.',
     ),
 
     'restore' => array(
-        'error'   		=> 'Asset was not restored, please try again',
-        'success' 		=> 'Asset restored successfully.'
+        'error'   		=> 'Majetek se nepodařilo obnovit, zkuste to prosím později',
+        'success' 		=> 'Majetek byl v pořádku obnoven.'
     ),
 
     'deletefile' => array(
-        'error'   => 'File not deleted. Please try again.',
+        'error'   => 'Soubor se nesmazal, prosím zkuste to znovu.',
         'success' => 'Soubor byl úspěšně smazán.',
     ),
 
     'upload' => array(
-        'error'   => 'File(s) not uploaded. Please try again.',
-        'success' => 'File(s) successfully uploaded.',
-        'nofiles' => 'You did not select any files for upload, or the file you are trying to upload is too large',
-        'invalidfiles' => 'One or more of your files is too large or is a filetype that is not allowed. Allowed filetypes are png, gif, jpg, doc, docx, pdf, and txt.',
+        'error'   => 'Soubor(y) se nepodařilo nahrát, zkuste to prosím znovu.',
+        'success' => 'Soubor(y) byly v pořádku nahrány.',
+        'nofiles' => 'K nahrání jste nevybrali žádný, nebo příliš velký soubor',
+        'invalidfiles' => 'Jeden nebo více označených souborů je příliš velkých nebo nejsou podporované. Povolenými příponami jsou png, gif, pdf a txt.',
     ),
 
     'import' => array(
-        'error'         => 'Some Items did not import Correctly.',
-        'errorDetail'   => 'The Following Items were not imported because of errors.',
-        'success'       => "Your File has been imported",
+        'error'         => 'Některé položky se nepodařilo správně nahrát.',
+        'errorDetail'   => 'Pro chyby se nepodařilo nahrát následující položky.',
+        'success'       => "Váš soubor byl v pořádku nahrán",
     ),
 
 
     'delete' => array(
-        'confirm'   	=> 'Are you sure you wish to delete this asset?',
-        'error'   		=> 'There was an issue deleting the asset. Please try again.',
+        'confirm'   	=> 'Opravdu si přejete tento majetek odstranit?',
+        'error'   		=> 'Nepodařilo se nám tento majetek odstranit. Zkuste to prosím znovu.',
         'success' 		=> 'Majetek byl úspěšně smazán.'
     ),
 
     'checkout' => array(
-        'error'   		=> 'Asset was not checked out, please try again',
-        'success' 		=> 'Asset checked out successfully.',
-        'user_does_not_exist' => 'That user is invalid. Please try again.'
+        'error'   		=> 'Majetek nebyl předán, zkuste to prosím znovu',
+        'success' 		=> 'Majetek byl v pořádku předán.',
+        'user_does_not_exist' => 'Tento uživatel je neplatný. Zkuste to prosím znovu.'
     ),
 
     'checkin' => array(
-        'error'   		=> 'Asset was not checked in, please try again',
-        'success' 		=> 'Asset checked in successfully.',
-        'user_does_not_exist' => 'That user is invalid. Please try again.',
-        'already_checked_in'  => 'That asset is already checked in.',
+        'error'   		=> 'Majetek nebyl převzat. Zkuste to prosím znovu',
+        'success' 		=> 'Majetek byl v pořádku převzat.',
+        'user_does_not_exist' => 'Tento uživatel je neplatný. Zkuste to prosím znovu.',
+        'already_checked_in'  => 'Tento majetek je již předaný.',
 
     ),
 
     'requests' => array(
-        'error'   		=> 'Asset was not requested, please try again',
-        'success' 		=> 'Asset requested successfully.',
+        'error'   		=> 'Majetek nebyl vyžádán, zkuste to prosím znovu',
+        'success' 		=> 'Vyžádání majetku proběhlo v pořádku.',
     )
 
 );

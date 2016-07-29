@@ -2,24 +2,24 @@
 
 return array(
 
-    'does_not_exist' => 'Status Label does not exist.',
-    'assoc_assets'	 => 'This Status Label is currently associated with at least one Asset and cannot be deleted. Please update your assets to no longer reference this status and try again. ',
+    'does_not_exist' => 'Etiqueta de estado não existe.',
+    'assoc_assets'	 => 'Esta etiqueta de estado está associada a pelo menos um Asset e não pode ser apagada. Atualize os seus Assets para que não sejam usados novamente como referência a estes estado e tente novamente. ',
 
 
     'create' => array(
-        'error'   => 'Status Label was not created, please try again.',
-        'success' => 'Status Label created successfully.'
+        'error'   => 'Etiqueta de estado não foi criada, tente novamente.',
+        'success' => 'Etiqueta de estado criada com sucesso.'
     ),
 
     'update' => array(
-        'error'   => 'Status Label was not updated, please try again',
-        'success' => 'Status Label updated successfully.'
+        'error'   => 'Etiqueta de estado não foi atulizada, tente novamente',
+        'success' => 'Etiqueta de estado atualizada com sucesso.'
     ),
 
     'delete' => array(
-        'confirm'   => 'Are you sure you wish to delete this Status Label?',
-        'error'   => 'There was an issue deleting the Status Label. Please try again.',
-        'success' => 'The Status Label was deleted successfully.'
+        'confirm'   => 'Tem a certeza que pretende eliminar esta etiqueta de estado?',
+        'error'   => 'Ocorreu um erra ao eliminar a etiqueta de estado. Tente novamente.',
+        'success' => 'A etiqueta de estado foi eliminada com sucesso.'
     )
 
 );

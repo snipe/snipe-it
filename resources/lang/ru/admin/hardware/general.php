@@ -3,6 +3,7 @@
 return array(
 	'archived'  				=> 'Архивированные',
     'asset'  					=> 'Актив',
+    'bulk_checkout'             => 'Checkout Assets to User',
     'checkin'  					=> 'Вернуть актив на склад',
     'checkout'  				=> 'Выдать актив пользователю',
     'clone'  					=> 'Клонировать актив',

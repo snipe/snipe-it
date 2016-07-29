@@ -3,6 +3,7 @@
 return array(
 	'archived'  				=> 'Đã lưu trữ',
     'asset'  					=> 'Tài sản',
+    'bulk_checkout'             => 'Checkout Assets to User',
     'checkin'  					=> 'Checkin tài sản',
     'checkout'  				=> 'Checkout tài sản đến người dùng',
     'clone'  					=> 'Nhân đôi tài sản',

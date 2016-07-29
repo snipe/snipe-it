@@ -64,6 +64,8 @@ return array(
     ),
     "unique"           => ":attribute 는 이미 획득하였습니다.",
     "url"              => ":attribute 형식이 부정확 합니다.",
+    "statuslabel_type" => "You must select a valid status label type",
+    "unique_undeleted" => "The :attribute must be unique.",
 
 
     /*

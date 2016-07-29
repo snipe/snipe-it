@@ -64,6 +64,8 @@ return array(
     ),
     "unique"           => ":attribute telah diambil.",
     "url"              => ":attribute format tidak sah.",
+    "statuslabel_type" => "You must select a valid status label type",
+    "unique_undeleted" => "The :attribute must be unique.",
 
 
     /*

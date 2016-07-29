@@ -3,6 +3,7 @@
 return array(
 	'archived'  				=> 'ถูกเก็บไว้',
     'asset'  					=> 'สินทรัพย์',
+    'bulk_checkout'             => 'Checkout Assets to User',
     'checkin'  					=> 'เช็คอินสินทรัพย์',
     'checkout'  				=> 'เช็คเอ้าท์สินทรัพย์ให้ผู้ใช้งาน',
     'clone'  					=> 'คัดลอกแบบสินทรัพย์',

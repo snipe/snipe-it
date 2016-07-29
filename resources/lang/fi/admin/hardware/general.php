@@ -3,6 +3,7 @@
 return array(
 	'archived'  				=> 'Arkistoitu',
     'asset'  					=> 'Laite',
+    'bulk_checkout'             => 'Checkout Assets to User',
     'checkin'  					=> 'Palauta Laite',
     'checkout'  				=> 'Luovuta Laite Käyttäjälle',
     'clone'  					=> 'Monista Laite',

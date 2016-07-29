@@ -64,6 +64,8 @@ return array(
     ),
     "unique"           => "L' :attribute è già stato preso.",
     "url"              => "Il formato dell' :attribute è invalido.",
+    "statuslabel_type" => "You must select a valid status label type",
+    "unique_undeleted" => "The :attribute must be unique.",
 
 
     /*
