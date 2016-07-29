@@ -1591,13 +1591,11 @@ class AssetsController extends Controller
         // Get the dropdown of users and then pass it to the checkout view
         $users_list = Helper::usersList();
 
-        $query = Asset::with(array('status' => function($q) {
-            return $q->where('deployable', '=', '1');
-        }));
+        
+        // Filter out assets that are not deployable.
+        $assets = Asset::Hardware()->Deployable()->get();
 
-
-        // TODO?: Filter out assets that are not deployable.
-        $assets_list = Company::scopeCompanyables(Asset::all(), 'assets.company_id')->lists('detailed_name', 'id')->toArray();
+        $assets_list = Company::scopeCompanyables($assets, 'assets.company_id')->lists('detailed_name', 'id')->toArray();
 
         return View::make('hardware/bulk-checkout')->with('users_list', $users_list)->with('assets_list', $assets_list);
     }
