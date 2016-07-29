@@ -268,6 +268,12 @@ class AuthServiceProvider extends ServiceProvider
             }
         });
 
+        $gate->define('licenses.keys', function ($user) {
+            if (($user->hasAccess('licenses.keys')) || ($user->hasAccess('admin'))) {
+                return true;
+            }
+        });
+
 
     }
 }
