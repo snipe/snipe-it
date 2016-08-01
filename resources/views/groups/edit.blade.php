@@ -2,7 +2,12 @@
 
 {{-- Web site Title --}}
 @section('title')
-{{ trans('admin/groups/titles.edit_group') }}
+  @if ($group->id)
+    {{ trans('admin/groups/titles.edit_group') }}
+    {{ $group->name }}
+  @else
+    {{ trans('admin/groups/titles.create_group') }}
+  @endif
 @parent
 @stop
 
@@ -24,14 +29,6 @@
   <div class="row">
     <div class="col-md-8 col-md-offset-2">
       <div class="box box-default">
-
-          @if ($group->id)
-            <div class="box-header with-border">
-              <div class="box-heading">
-                <h3 class="box-title"> {{ $group->name }}</h3>
-              </div>
-            </div><!-- /.box-header -->
-          @endif
 
         <div class="box-body">
 

@@ -6,7 +6,7 @@ $I->wantTo('ensure that the suppliers listing page loads without errors');
 $I->lookForwardTo('seeing it load without errors');
 $I->amOnPage('/admin/settings/suppliers');
 $I->waitForElement('.table', 5); // secs
-$I->seeNumberOfElements('tr', [1,10]);
+$I->seeNumberOfElements('table[name="suppliers"] tr', [5,25]);
 $I->seeInTitle('Suppliers');
 $I->see('Suppliers');
 $I->seeInPageSource('admin/settings/suppliers/create');

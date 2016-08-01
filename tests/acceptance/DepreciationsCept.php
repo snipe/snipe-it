@@ -3,12 +3,12 @@ $I = new AcceptanceTester($scenario);
 AcceptanceTester::test_login($I);
 $I->am('logged in user');
 $I->wantTo('ensure that depreciations page loads without errors');
-$I->amGoingTo('go to the assets listing page');
+$I->amGoingTo('go to the depreciations listing page');
 $I->lookForwardTo('seeing it load without errors');
 $I->amOnPage('/admin/settings/depreciations');
 $I->seeInTitle('Depreciations');
 $I->waitForElement('.table', 5); // secs
-$I->seeNumberOfElements('tr', [0,10]);
+$I->seeNumberOfElements('table[name="depreciations"] tbody tr', 1);
 $I->seeInPageSource('/admin/settings/depreciations/create');
 $I->dontSee('Depreciations', '.page-header');
 $I->see('Depreciations', 'h1.pull-left');
