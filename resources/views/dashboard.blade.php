@@ -120,7 +120,11 @@
                        <td>{{ date("M d, Y g:iA", strtotime($activity->created_at)) }}</td>
                        <td>
                                  @if ($activity->action_type!='requested')
-                                      <a href="{{ route('view/user', $activity->user_id) }}">{{ $activity->adminlog->fullName() }}</a>
+                                     @if ($activity->adminlog)
+                                        <a href="{{ route('view/user', $activity->user_id) }}">{{ $activity->adminlog->fullName() }}</a>
+                                     @else
+                                        Deleted Admin
+                                     @endif
                                  @endif
 
                                  </td>
