@@ -59,8 +59,9 @@
 
 <body class="hold-transition login-page">
 
-
-  <center><img class="logo" style="padding-top: 20px; padding-bottom: 20px;" src="{{ config('app.url') }}/uploads/{{ \App\Models\Setting::getSettings()->logo }}"></center>
+    @if (\App\Models\Setting::getSettings()->logo!='')
+    <center><img class="logo" style="padding-top: 20px; padding-bottom: 10px;" src="{{ config('app.url') }}/uploads/{{ \App\Models\Setting::getSettings()->logo }}"></center>
+    @endif
   <!-- Content -->
   @yield('content')
 
