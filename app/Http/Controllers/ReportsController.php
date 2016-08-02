@@ -472,6 +472,9 @@ class ReportsController extends Controller
         if (e(Input::get('assigned_to')) == '1') {
             $header[] = 'Assigned To';
         }
+        if (e(Input::get('username')) == '1') {
+            $header[] = 'Username';
+        }
         if (e(Input::get('status')) == '1') {
             $header[] = 'Status';
         }
@@ -574,7 +577,7 @@ class ReportsController extends Controller
             if (e(Input::get('username')) == '1') {
                 if ($asset->assigned_to > 0) {
                     $user  = User::find($asset->assigned_to);
-                    $row[] = '"' .e($user-username). '"';
+                    $row[] = '"' .e($user->username). '"';
                 } else {
                     $row[] = ''; // Empty string if unassigned
                 }
