@@ -152,6 +152,8 @@
                                <a href="{{ route('view/component', $activity->component_id) }}">{{ $activity->componentlog->name }}</a>
                             @elseif (($activity->assetlog) && ($activity->action_type=="uploaded"))
                                    <a href="{{ route('view/hardware', $activity->asset_id) }}">{{ $activity->assetlog->showAssetName() }}</a>
+                           @elseif (($activity->userlog) && ($activity->action_type=="uploaded"))
+                               <a href="{{ route('view/user', $activity->asset_id) }}">{{ $activity->userlog->fullName() }}</a>
                             @else
                                 {{ trans('general.bad_data') }}
                             @endif
