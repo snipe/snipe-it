@@ -514,7 +514,7 @@
                           @if ($asset->adminuser)
                               {{ $asset->adminuser->fullName() }}
                           @else
-                              @trans('general.unknown_admin')
+                              {{ trans('general.unknown_admin') }}
                           @endif
 
                       </td>
