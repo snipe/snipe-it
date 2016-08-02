@@ -265,13 +265,8 @@ class AssetsController extends Controller
         if ($asset->save()) {
 
             if (Input::get('assigned_to')!='') {
-                    $logaction = new Actionlog();
-                    $logaction->asset_id = $asset->id;
-                    $logaction->checkedout_to = $asset->assigned_to;
-                    $logaction->asset_type = 'hardware';
-                    $logaction->user_id = Auth::user()->id;
-                    $logaction->note = e(Input::get('note'));
-                    $log = $logaction->logaction('checkout');
+                $user = User::find(e(Input::get('assigned_to')));
+                $asset->checkOutToUser($user, Auth::user(), date('Y-m-d h:i:s'), '', 'Checked out on asset creation', e(Input::get('name')));
             }
             // Redirect to the asset listing page
             \Session::flash('success', trans('admin/hardware/message.create.success'));
