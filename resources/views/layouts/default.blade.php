@@ -24,6 +24,8 @@
     <!-- iCheck for checkboxes and radio inputs -->
     <link rel="stylesheet" href="{{ asset('assets/js/plugins/iCheck/all.css') }}">
 
+    <!-- Favicon -->
+    <link rel="shortcut icon" type="image/ico" href="{{ asset('favicon.ico') }}">
     <!-- Theme style -->
     <link rel="stylesheet" href="{{ asset('assets/css/skins/skin-blue.css') }}">
 
@@ -111,7 +113,7 @@
                       </a>
                   @endif
               </li>
-            </ul> 
+            </ul>
 
           <!-- Navbar Right Menu -->
             <div class="navbar-custom-menu">
@@ -379,7 +381,7 @@
       </a>
        <!-- Sidebar toggle button-->
       </header>
-     
+
       <!-- Left side column. contains the logo and sidebar -->
       <aside class="main-sidebar">
         <!-- sidebar: style can be found in sidebar.less -->
