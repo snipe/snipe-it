@@ -33,6 +33,7 @@
     <link rel="stylesheet" href="{{ asset('assets/css/bootstrap-table.css') }}">
 
     <link rel="stylesheet" href="{{ elixir('assets/css/app.css') }}">
+    <link rel="shortcut icon" type="image/ico" href="{{ asset('favicon.ico') }}">
 
 
     @if (\App\Models\Setting::getSettings()->header_color)
