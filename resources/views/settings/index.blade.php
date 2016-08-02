@@ -151,7 +151,7 @@
 
                       @if ($setting->ldap_enabled == 1)
                           <td>
-                              {{ $setting->ldap_server }}:{{ $setting->ldap_port }}
+                              {{ $setting->ldap_server }}
                           @if ($setting->is_ad == '1')
                                 (Active Directory)
                           @endif
