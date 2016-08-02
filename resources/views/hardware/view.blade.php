@@ -287,7 +287,7 @@
                     <ul class="list-unstyled">
 
 
-                      @if (isset($asset->assigneduser->email))
+                      @if ((isset($asset->assigneduser->email)) && ($asset->assigneduser->email!=''))
                         <li><i class="fa fa-envelope-o"></i> <a href="mailto:{{ $asset->assigneduser->email }}">{{ $asset->assigneduser->email }}</a></li>
                       @endif
 
