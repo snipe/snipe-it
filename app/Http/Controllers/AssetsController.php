@@ -761,14 +761,20 @@ class AssetsController extends Controller
         if ($settings->qr_code == '1') {
             $asset = Asset::find($assetId);
             $size = Helper::barcodeDimensions($settings->barcode_type);
-
-
+            $qr_file = public_path().'/uploads/barcodes/qr-'.str_slug($asset->asset_tag).'.png';
 
             if (isset($asset->id,$asset->asset_tag)) {
-                $barcode = new \Com\Tecnick\Barcode\Barcode();
-                $barcode_obj =  $barcode->getBarcodeObj($settings->barcode_type, route('view/hardware', $asset->id), $size['height'], $size['width'], 'black', array(-2, -2, -2, -2));
 
-                return response($barcode_obj->getPngData())->header('Content-type', 'image/png');
+                if (file_exists($qr_file)) {
+                    $header = ['Content-type' => 'image/png'];
+                    return response()->file($qr_file, $header);
+                } else {
+                    $barcode = new \Com\Tecnick\Barcode\Barcode();
+                    $barcode_obj =  $barcode->getBarcodeObj($settings->barcode_type, route('view/hardware', $asset->id), $size['height'], $size['width'], 'black', array(-2, -2, -2, -2));
+                    file_put_contents($qr_file,$barcode_obj->getPngData());
+                    return response($barcode_obj->getPngData())->header('Content-type', 'image/png');
+                }
+
             }
         }
 
@@ -788,12 +794,20 @@ class AssetsController extends Controller
 
         $settings = Setting::getSettings();
         $asset = Asset::find($assetId);
+        $barcode_file = public_path().'/uploads/barcodes/'.str_slug($settings->alt_barcode).'-'.str_slug($asset->asset_tag).'.png';
 
 
         if (isset($asset->id,$asset->asset_tag)) {
-            $barcode = new \Com\Tecnick\Barcode\Barcode();
-            $barcode_obj =  $barcode->getBarcodeObj($settings->alt_barcode, $asset->asset_tag, 250, 20);
-            return response($barcode_obj->getPngData())->header('Content-type', 'image/png');
+
+            if (file_exists($barcode_file)) {
+                $header = ['Content-type' => 'image/png'];
+                return response()->file($barcode_file, $header);
+            } else {
+                $barcode = new \Com\Tecnick\Barcode\Barcode();
+                $barcode_obj = $barcode->getBarcodeObj($settings->alt_barcode, $asset->asset_tag, 250, 20);
+                file_put_contents($barcode_file,$barcode_obj->getPngData());
+                return response($barcode_obj->getPngData())->header('Content-type', 'image/png');
+            }
         }
 
     }

@@ -15,6 +15,7 @@ Homestead.yaml
 output
 phpDocumentor.phar
 public/uploads/*.gif
+public/uploads/barcodes/*.png
 public/uploads/*.jpg
 public/uploads/*.png
 public/uploads/*.svg
