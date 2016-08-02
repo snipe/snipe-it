@@ -6,7 +6,6 @@ use App\Models\Actionlog;
 use App\Models\Asset;
 use App\Models\AssetMaintenance;
 use Carbon\Carbon;
-use Category;
 use App\Models\Company;
 use Illuminate\Support\Facades\Lang;
 use Illuminate\Support\Facades\Log;
@@ -17,6 +16,7 @@ use League\Csv\Reader;
 use App\Models\License;
 use App\Models\Location;
 use App\Models\AssetModel;
+use App\Models\CustomField;
 use Redirect;
 use App\Models\Setting;
 use App\Models\User;
@@ -415,8 +415,8 @@ class ReportsController extends Controller
     */
     public function getCustomReport()
     {
-
-        return View::make('reports/custom');
+        $customfields = CustomField::get();
+        return View::make('reports/custom')->with('customfields',$customfields);
     }
 
     /**
@@ -430,6 +430,7 @@ class ReportsController extends Controller
     public function postCustom()
     {
         $assets = Asset::orderBy('created_at', 'DESC')->get();
+        $customfields = CustomField::get();
 
         $rows   = [ ];
         $header = [ ];
@@ -483,6 +484,13 @@ class ReportsController extends Controller
             $header[] = 'Value';
             $header[] = 'Diff';
         }
+
+        foreach ($customfields as $customfield) {
+            if (e(Input::get($customfield->db_column_name())) == '1') {
+                $header[] = $customfield->name;
+            }
+        }
+
 
         $header = array_map('trim', $header);
         $rows[] = implode($header, ',');
@@ -562,6 +570,16 @@ class ReportsController extends Controller
                     $row[] = ''; // Empty string if unassigned
                 }
             }
+
+            if (e(Input::get('username')) == '1') {
+                if ($asset->assigned_to > 0) {
+                    $user  = User::find($asset->assigned_to);
+                    $row[] = '"' .e($user-username). '"';
+                } else {
+                    $row[] = ''; // Empty string if unassigned
+                }
+            }
+
             if (e(Input::get('status')) == '1') {
                 if (( $asset->status_id == '0' ) && ( $asset->assigned_to == '0' )) {
                     $row[] = trans('general.ready_to_deploy');
@@ -588,6 +606,15 @@ class ReportsController extends Controller
                 $row[]        = '"' . number_format($depreciation, 2) . '"';
                 $row[]        = '"' . number_format($asset->purchase_cost - $depreciation, 2) . '"';
             }
+
+            foreach ($customfields as $customfield) {
+                $column_name = $customfield->db_column_name();
+                if (e(Input::get($customfield->db_column_name())) == '1') {
+                    $row[] = $asset->$column_name;
+                }
+            }
+
+
             $rows[] = implode($row, ',');
         }
 

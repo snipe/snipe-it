@@ -101,6 +101,14 @@
             {{ trans('admin/licenses/table.assigned_to') }}
             </label>
         </div>
+
+          <div class="checkbox col-md-12">
+            <label>
+              {{ Form::checkbox('username', '1') }}
+              {{ trans('admin/users/table.username') }}
+            </label>
+          </div>
+
         <div class="checkbox col-md-12">
         	<label>
             {{ Form::checkbox('status', '1') }}
@@ -119,6 +127,15 @@
             {{ trans('general.depreciation') }}
             </label>
         </div>
+
+          @foreach ($customfields as $customfield)
+            <div class="checkbox col-md-12">
+              <label>
+                {{ Form::checkbox($customfield->db_column_name(), '1') }}
+                {{ $customfield->name }}
+              </label>
+            </div>
+          @endforeach
       </div>
 
 
