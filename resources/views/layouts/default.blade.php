@@ -32,6 +32,8 @@
 
     <link rel="stylesheet" href="{{ asset(elixir('assets/css/app.css')) }}">
 
+    <link rel="shortcut icon" type="image/ico" href="{{ asset('favicon.ico') }}">
+
     <style>
     @if (\App\Models\Setting::getSettings()->header_color)
     .main-header .navbar, .main-header .logo {
