@@ -15,9 +15,11 @@
 .checkbox label {
   padding-right: 40px;
 }
-.input-group {
-    padding-left: 15px;
+
+.input-group-addon {
+  width: 30px;
 }
+
 </style>
 
 <!-- Bootstrap Color Picker -->

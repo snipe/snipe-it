@@ -47,23 +47,32 @@ class StatuslabelsController extends Controller
     {
         $colors = [];
 
-        $statuslabels = Statuslabel::get();
+        $statuslabels = Statuslabel::with('assets')->get();
         $labels=[];
         $points=[];
-
+        $colors=[];
         foreach ($statuslabels as $statuslabel) {
-            $labels[]=$statuslabel->name;
-            $points[]=$statuslabel->assets()->whereNull('assigned_to')->count();
+            if ($statuslabel->assets->count() > 0) {
+                $labels[]=$statuslabel->name;
+                $points[]=$statuslabel->assets()->whereNull('assigned_to')->count();
+                if ($statuslabel->color!='') {
+                    $colors[]=$statuslabel->color;
+                }
+            }
+
+
         }
         $labels[]='Deployed';
         $points[]=Asset::whereNotNull('assigned_to')->count();
+
+        $colors_array = array_merge($colors, Helper::chartColors());
 
         $result= [
             "labels" => $labels,
             "datasets" => [ [
                 "data" => $points,
-                "backgroundColor" => Helper::chartColors(),
-                "hoverBackgroundColor" =>  Helper::chartColors()
+                "backgroundColor" => $colors_array,
+                "hoverBackgroundColor" =>  $colors_array
             ]]
         ];
         return $result;
@@ -110,6 +119,7 @@ class StatuslabelsController extends Controller
         $statuslabel->deployable          =  $statustype['deployable'];
         $statuslabel->pending          =  $statustype['pending'];
         $statuslabel->archived          =  $statustype['archived'];
+        $statuslabel->color          =  e(Input::get('color'));
 
 
         // Was the asset created?
@@ -197,6 +207,7 @@ class StatuslabelsController extends Controller
         $statuslabel->deployable          =  $statustype['deployable'];
         $statuslabel->pending          =  $statustype['pending'];
         $statuslabel->archived          =  $statustype['archived'];
+        $statuslabel->color          =  e(Input::get('color'));
 
 
         // Was the asset created?
@@ -247,7 +258,7 @@ class StatuslabelsController extends Controller
 
     public function getDatatable()
     {
-        $statuslabels = Statuslabel::select(array('id','name','deployable','pending','archived'))
+        $statuslabels = Statuslabel::select(array('id','name','deployable','pending','archived','color'))
         ->whereNull('deleted_at');
 
         if (Input::has('search')) {
@@ -291,10 +302,18 @@ class StatuslabelsController extends Controller
 
             $actions = '<a href="'.route('update/statuslabel', $statuslabel->id).'" class="btn btn-warning btn-sm" style="margin-right:5px;"><i class="fa fa-pencil icon-white"></i></a><a data-html="false" class="btn delete-asset btn-danger btn-sm" data-toggle="modal" href="'.route('delete/statuslabel', $statuslabel->id).'" data-content="'.trans('admin/statuslabels/message.delete.confirm').'" data-title="'.trans('general.delete').' '.htmlspecialchars($statuslabel->name).'?" onClick="return false;"><i class="fa fa-trash icon-white"></i></a>';
 
+            if ($statuslabel->color!='') {
+                $color = '<div class="pull-left" style="margin-right: 5px; height: 20px; width: 20px; background-color: '.e($statuslabel->color).'"></div>'.e($statuslabel->color);
+            } else {
+                $color = '';
+            }
+
+
             $rows[] = array(
                 'id'            => e($statuslabel->id),
                 'type'          => e($label_type),
                 'name'          => e($statuslabel->name),
+                'color'          => $color,
                 'actions'       => $actions
             );
         }
