@@ -1233,9 +1233,7 @@ class UsersController extends Controller
                     $item["note"] = $item["createorupdate"];
                     $item["status"]='success';
                 } else {
-                  //$errors_array = array($user->getErrors());
                     foreach ($user->getErrors()->getMessages() as $key => $err) {
-                      //echo $user->getErrors();
                         $errors .='<li>'.$err[0];
                     }
                     $item["note"] = $errors;
