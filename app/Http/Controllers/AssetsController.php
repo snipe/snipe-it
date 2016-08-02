@@ -358,7 +358,7 @@ class AssetsController extends Controller
         }
 
         if ($request->has('purchase_cost')) {
-            $asset->purchase_cost = e($request->input('purchase_cost'));
+            $asset->purchase_cost = e(number_format($request->input('purchase_cost'), 2, '.', ''));
         } else {
             $asset->purchase_cost =  null;
         }
