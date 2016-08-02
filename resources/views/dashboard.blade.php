@@ -140,7 +140,7 @@
                             {{ strtolower(trans('general.'.str_replace(' ','_',$activity->action_type))) }}
                         </td>
                        <td>
-                            @if (($activity->assetlog) && ($activity->asset_type=="hardware"))
+                           @if (($activity->assetlog) && ($activity->asset_type=="hardware"))
                               <a href="{{ route('view/hardware', $activity->asset_id) }}">{{ $activity->assetlog->showAssetName() }}</a>
                             @elseif (($activity->licenselog) && ($activity->asset_type=="software"))
                               <a href="{{ route('view/license', $activity->asset_id) }}">{{ $activity->licenselog->name }}</a>
@@ -150,18 +150,17 @@
                               <a href="{{ route('view/accessory', $activity->accessory_id) }}">{{ $activity->accessorylog->name }}</a>
                             @elseif (($activity->componentlog) && ($activity->asset_type=="component"))
                                <a href="{{ route('view/component', $activity->component_id) }}">{{ $activity->componentlog->name }}</a>
-                            @elseif (($activity->assetlog) && ($activity->action_type=="uploaded"))
+                            @elseif (($activity->assetlog) && ($activity->action_type=="uploaded") && ($activity->asset_type=="hardware"))
                                    <a href="{{ route('view/hardware', $activity->asset_id) }}">{{ $activity->assetlog->showAssetName() }}</a>
-                           @elseif (($activity->userlog) && ($activity->action_type=="uploaded"))
-                               <a href="{{ route('view/user', $activity->asset_id) }}">{{ $activity->userlog->fullName() }}</a>
-                            @else
-                                {{ trans('general.bad_data') }}
+
                             @endif
 
                             </td>
 
                        <td>
-                        @if (($activity->componentlog) && ($activity->asset_type=="component"))
+                        @if (($activity->userasassetlog) && ($activity->action_type=="uploaded") && ($activity->asset_type=="user"))
+                            <a href="{{ route('view/user', $activity->asset_id) }}">{{ $activity->userasassetlog->fullName() }}</a>
+                        @elseif (($activity->componentlog) && ($activity->asset_type=="component"))
                            <a href="{{ route('view/hardware', $activity->asset_id) }}">{{ $activity->assetlog->showAssetName() }}</a>
                         @elseif($activity->action_type=='requested')
                             @if ($activity->adminlog)

@@ -85,6 +85,13 @@ class Actionlog extends Model implements ICompanyableChild
                     ->withTrashed();
     }
 
+    public function userasassetlog()
+    {
+
+        return $this->belongsTo('\App\Models\User', 'asset_id')
+            ->withTrashed();
+    }
+
     public function childlogs()
     {
 
