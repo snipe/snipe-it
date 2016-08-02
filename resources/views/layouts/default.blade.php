@@ -414,7 +414,7 @@
                   <li{!! (Request::query('status') == 'Pending' ? ' class="active"' : '') !!}><a href="{{ URL::to('hardware?status=Pending') }}">@lang('general.pending')</a></li>
                   <li{!! (Request::query('status') == 'Undeployable' ? ' class="active"' : '') !!} ><a href="{{ URL::to('hardware?status=Undeployable') }}">@lang('general.undeployable')</a></li>
                   <li{!! (Request::query('status') == 'Archived' ? ' class="active"' : '') !!}><a href="{{ URL::to('hardware?status=Archived') }}">@lang('admin/hardware/general.archived')</a></li>
-                    <li><a href="{{ URL::to('hardware?status=Requestable') }}" {!! (Request::query('status') == 'Requestable' ? ' class="active"' : '') !!}><a href="{{ URL::to('hardware?status=Archived') }}" >@lang('admin/hardware/general.requestable')</a></li>
+                    <li{!! (Request::query('status') == 'Requestable' ? ' class="active"' : '') !!}><a href="{{ URL::to('hardware?status=Requestable') }}"><a href="{{ URL::to('hardware?status=Requestable') }}" >@lang('admin/hardware/general.requestable')</a></li>
 
                   <li class="divider">&nbsp;</li>
                     <li{!! (Request::is('hardware/bulkcheckout') ? ' class="active>"' : '') !!}>
