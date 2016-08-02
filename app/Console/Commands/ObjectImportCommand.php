@@ -660,7 +660,7 @@ class ObjectImportCommand extends Command
             $last_name = $user_email_array['last_name'];
 
             if ($user_email=='') {
-                $user_email = $user_email_array['username'].'@'.Setting::getSettings()->email_domain;
+                $user_email = str_slug($user_email_array['username']).'@'.Setting::getSettings()->email_domain;
             }
 
             if ($user_username=='') {
