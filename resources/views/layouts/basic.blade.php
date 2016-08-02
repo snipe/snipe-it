@@ -35,10 +35,32 @@
     <link rel="stylesheet" href="{{ elixir('assets/css/app.css') }}">
 
 
+    @if (\App\Models\Setting::getSettings()->header_color)
+        <style>
+        .main-header .navbar, .main-header .logo {
+        background-color: {{ \App\Models\Setting::getSettings()->header_color }};
+        background: -webkit-linear-gradient(top,  {{ \App\Models\Setting::getSettings()->header_color }} 0%,{{ \App\Models\Setting::getSettings()->header_color }} 100%);
+        background: linear-gradient(to bottom, {{ \App\Models\Setting::getSettings()->header_color }} 0%,{{ \App\Models\Setting::getSettings()->header_color }} 100%);
+        border-color: {{ \App\Models\Setting::getSettings()->header_color }};
+        }
+        .skin-blue .sidebar-menu > li:hover > a, .skin-blue .sidebar-menu > li.active > a {
+        border-left-color: {{ \App\Models\Setting::getSettings()->header_color }};
+        }
+
+        .btn-primary {
+        background-color: {{ \App\Models\Setting::getSettings()->header_color }};
+        border-color: {{ \App\Models\Setting::getSettings()->header_color }};
+        }
+        </style>
+
+    @endif
+
 </head>
 
 <body class="hold-transition login-page">
 
+
+  <center><img class="logo" style="padding-top: 20px; padding-bottom: 20px;" src="{{ config('app.url') }}/uploads/{{ \App\Models\Setting::getSettings()->logo }}"></center>
   <!-- Content -->
   @yield('content')
 
