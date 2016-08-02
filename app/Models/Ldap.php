@@ -35,6 +35,11 @@ class Ldap extends Model
             putenv('LDAPTLS_REQCERT=never');
         }
 
+        // If the user specifies where CA Certs are, make sure to use them
+        if(env("LDAPTLS_CACERT")) {
+          putenv("LDAPTLS_CACERT=".env("LDAPTLS_CACERT"));
+        }
+
         $connection = @ldap_connect($ldap_host);
 
         if (!$connection) {
