@@ -442,7 +442,18 @@
                           @endif
 
                         </td>
-                        <td>{{ $log->adminlog->fullName() }}</td>
+                        <td>@if ($log->adminlog)
+
+                                @if ($log->adminlog->deleted_at=='')
+                                    <a href="{{ route('view/user', $log->checkedout_to) }}">
+                                        {{ $log->adminlog->fullName() }}
+                                    </a>
+                                @else
+                                    <del>{{ $log->adminlog->fullName() }}</del>
+                                @endif
+                            @else
+                                Deleted User
+                            @endif</td>
                     </tr>
                     @endforeach
                 </tbody>
