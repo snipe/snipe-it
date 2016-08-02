@@ -297,13 +297,20 @@ input[type='text'][disabled], input[disabled], textarea[disabled], input[readonl
             @endif
 
 
-
+                <?php $counter = 1; ?>
         @foreach ($permissions as $area => $permission)
+
 
             @for ($i = 0; $i < count($permission); $i++)
                 <?php
                 $permission_name = $permission[$i]['permission'];
+
                 ?>
+
+                @if ($counter == 2)
+                    <div id="nonadmin">
+                 @endif
+
 
                 @if ($permission[$i]['display'])
                     <h3>{{ $area }}: {{ $permission[$i]['label'] }}</h3>
@@ -315,9 +322,9 @@ input[type='text'][disabled], input[disabled], textarea[disabled], input[readonl
                         <label class="radio-padding">
 
                             @if (($permission_name == 'superuser') && (!Auth::user()->isSuperUser()))
-                                {{ Form::radio('permission['.$permission_name.']', '1', $userPermissions[$permission_name] == '1', ['class' => 'minimal', 'disabled'=>'disabled']) }}
+                                {{ Form::radio('permission['.$permission_name.']', '1', $userPermissions[$permission_name] == '1', ['disabled'=>'disabled']) }}
                             @else
-                                {{ Form::radio('permission['.$permission_name.']', '1', $userPermissions[$permission_name] == '1', ['class' => 'minimal']) }}
+                                {{ Form::radio('permission['.$permission_name.']', '1', $userPermissions[$permission_name] == '1', ['class' => "$permission_name"]) }}
                             @endif
 
                             Grant</label>
@@ -325,28 +332,35 @@ input[type='text'][disabled], input[disabled], textarea[disabled], input[readonl
                         <label class="radio-padding">
 
                             @if (($permission_name == 'superuser') && (!Auth::user()->isSuperUser()))
-                                {{ Form::radio('permission['.$permission_name.']', '-1', $userPermissions[$permission_name] == '-1', ['class' => 'minimal', 'disabled'=>'disabled']) }}
+                                {{ Form::radio('permission['.$permission_name.']', '-1', $userPermissions[$permission_name] == '-1', ['disabled'=>'disabled']) }}
 
                             @else
-                                {{ Form::radio('permission['.$permission_name.']', '-1', $userPermissions[$permission_name] == '-1', ['class' => 'minimal']) }}
+                                {{ Form::radio('permission['.$permission_name.']', '-1', $userPermissions[$permission_name] == '-1', ['class' => "$permission_name"]) }}
 
                             @endif
                             Deny</label>
 
                         <label class="radio-padding">
                             @if (($permission_name == 'superuser') && (!Auth::user()->isSuperUser()))
-                                {{ Form::radio('permission['.$permission_name.']', '0', $userPermissions[$permission_name] =='0', ['class' => 'minimal', 'disabled'=>'disabled']) }}
+                                {{ Form::radio('permission['.$permission_name.']', '0', $userPermissions[$permission_name] =='0', ['disabled'=>'disabled']) }}
                             @else
-                                {{ Form::radio('permission['.$permission_name.']', '0', $userPermissions[$permission_name] =='0', ['class' => 'minimal']) }}
+                                {{ Form::radio('permission['.$permission_name.']', '0', $userPermissions[$permission_name] =='0', ['class' => "$permission_name"]) }}
                             @endif
 
                               Inherit</label>
                     </div>
                     <hr>
                 @endif
+
             @endfor
+                        @if ($counter == count($permissions))
+                            POOP
+                    </div>
+                    @endif
+        <?php $counter++; ?>
         @endforeach
             </div>
+
 
     </div><!-- /.tab-pane -->
   </div><!-- /.tab-content -->
@@ -379,7 +393,21 @@ $(document).ready(function() {
 <script src="{{ asset('assets/js/pGenerator.jquery.js') }}"></script>
 
 <script>
+
+
 $(document).ready(function(){
+
+    $(".superuser").change(function() {
+        var perms = $(this).val();
+        if (perms =='1') {
+            $("#nonadmin").hide();
+        } else {
+            $("#nonadmin").show();
+        }
+        //alert(perms);
+    });
+
+    console.dir($('.superuser'));
 
     $('#genPassword').pGenerator({
         'bind': 'click',
