@@ -91,6 +91,13 @@ class AuthServiceProvider extends ServiceProvider
             }
         });
 
+        // Checks for some level of management
+        $gate->define('assets.manage', function ($user) {
+            if (($user->hasAccess('assets.checkin')) || ($user->hasAccess('assets.edit')) || ($user->hasAccess('assets.delete')) || ($user->hasAccess('assets.checkout')) || ($user->hasAccess('admin'))) {
+                return true;
+            }
+        });
+
 
         # -----------------------------------------
         # Accessories
@@ -131,6 +138,13 @@ class AuthServiceProvider extends ServiceProvider
             }
         });
 
+        // Checks for some level of management
+        $gate->define('accessories.manage', function ($user) {
+            if (($user->hasAccess('accessories.checkin')) || ($user->hasAccess('accessories.edit')) || ($user->hasAccess('accessories.checkout')) || ($user->hasAccess('admin'))) {
+                return true;
+            }
+        });
+
         # -----------------------------------------
         # Consumables
         # -----------------------------------------
@@ -166,6 +180,13 @@ class AuthServiceProvider extends ServiceProvider
 
         $gate->define('consumables.checkin', function ($user) {
             if (($user->hasAccess('consumables.checkin')) || ($user->hasAccess('admin'))) {
+                return true;
+            }
+        });
+
+        // Checks for some level of management
+        $gate->define('consumables.manage', function ($user) {
+            if (($user->hasAccess('consumables.checkin')) || ($user->hasAccess('consumables.edit')) || ($user->hasAccess('consumables.delete')) || ($user->hasAccess('consumables.checkout')) || ($user->hasAccess('admin'))) {
                 return true;
             }
         });
@@ -228,6 +249,13 @@ class AuthServiceProvider extends ServiceProvider
             }
         });
 
+        // Checks for some level of management
+        $gate->define('components.manage', function ($user) {
+            if (($user->hasAccess('components.edit')) || ($user->hasAccess('components.delete')) || ($user->hasAccess('components.checkout')) || ($user->hasAccess('admin'))) {
+                return true;
+            }
+        });
+
 
         # -----------------------------------------
         # Licenses
@@ -270,6 +298,13 @@ class AuthServiceProvider extends ServiceProvider
 
         $gate->define('licenses.keys', function ($user) {
             if (($user->hasAccess('licenses.keys')) || ($user->hasAccess('admin'))) {
+                return true;
+            }
+        });
+
+        // Checks for some level of management
+        $gate->define('licenses.manage', function ($user) {
+            if (($user->hasAccess('licenses.checkin')) || ($user->hasAccess('licenses.edit')) || ($user->hasAccess('licenses.delete')) || ($user->hasAccess('licenses.checkout')) || ($user->hasAccess('admin'))) {
                 return true;
             }
         });

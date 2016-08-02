@@ -19,6 +19,7 @@ use Str;
 use View;
 use Auth;
 use Request;
+use Gate;
 
 /** This controller handles all actions related to Accessories for
  * the Snipe-IT Asset Management application.
@@ -591,7 +592,21 @@ class AccessoriesController extends Controller
         $rows = array();
 
         foreach ($accessories as $accessory) {
-            $actions = '<nobr><a href="'.route('checkout/accessory', $accessory->id).'" style="margin-right:5px;" class="btn btn-info btn-sm" '.(($accessory->numRemaining() > 0 ) ? '' : ' disabled').'>'.trans('general.checkout').'</a><a href="'.route('update/accessory', $accessory->id).'" class="btn btn-warning btn-sm" style="margin-right:5px;"><i class="fa fa-pencil icon-white"></i></a><a data-html="false" class="btn delete-asset btn-danger btn-sm" data-toggle="modal" href="'.route('delete/accessory', $accessory->id).'" data-content="'.trans('admin/accessories/message.delete.confirm').'" data-title="'.trans('general.delete').' '.htmlspecialchars($accessory->name).'?" onClick="return false;"><i class="fa fa-trash icon-white"></i></a></nobr>';
+
+            $actions = '<nobr>';
+            if (Gate::allows('accessories.checkout')) {
+                $actions .= '<a href="' . route('checkout/accessory',
+                        $accessory->id) . '" style="margin-right:5px;" class="btn btn-info btn-sm" ' . (($accessory->numRemaining() > 0) ? '' : ' disabled') . '>' . trans('general.checkout') . '</a>';
+            }
+            if (Gate::allows('accessories.edit')) {
+                $actions .= '<a href="' . route('update/accessory',
+                        $accessory->id) . '" class="btn btn-warning btn-sm" style="margin-right:5px;"><i class="fa fa-pencil icon-white"></i></a>';
+            }
+            if (Gate::allows('accessories.delete')) {
+                $actions .= '<a data-html="false" class="btn delete-asset btn-danger btn-sm" data-toggle="modal" href="' . route('delete/accessory',
+                        $accessory->id) . '" data-content="' . trans('admin/accessories/message.delete.confirm') . '" data-title="' . trans('general.delete') . ' ' . htmlspecialchars($accessory->name) . '?" onClick="return false;"><i class="fa fa-trash icon-white"></i></a>';
+            }
+            $actions .= '</nobr>';
             $company = $accessory->company;
 
             $rows[] = array(
@@ -654,10 +669,20 @@ class AccessoriesController extends Controller
         $rows = array();
 
         foreach ($accessory_users as $user) {
-            $actions = '<a href="'.route('checkin/accessory', $user->pivot->id).'" class="btn btn-info btn-sm">Checkin</a>';
+            $actions = '';
+            if (Gate::allows('accessories.checkin')) {
+                $actions .= '<a href="' . route('checkin/accessory',
+                        $user->pivot->id) . '" class="btn btn-info btn-sm">Checkin</a>';
+            }
+
+            if (Gate::allows('users.view')) {
+                $name = (string) link_to('/admin/users/'.$user->id.'/view', e($user->fullName()));
+            } else {
+                $name = e($user->fullName());
+            }
 
             $rows[] = array(
-              'name'          =>(string) link_to('/admin/users/'.$user->id.'/view', e($user->fullName())),
+              'name'          => $name,
               'actions'       => $actions
               );
         }

@@ -5,8 +5,8 @@ $I->am('logged in user');
 $I->wantTo('ensure that the categories listing page loads without errors');
 $I->lookForwardTo('seeing it load without errors');
 $I->amOnPage('/admin/settings/categories');
-$I->waitForElement('.table', 5); // secs
-$I->seeNumberOfElements('tr', [1,30]);
+$I->waitForElement('.table', 10); // secs
+$I->seeNumberOfElements('tr', [1,100]);
 $I->seeInTitle('Categories');
 $I->see('Categories');
 $I->seeInPageSource('admin/settings/categories/create');
@@ -22,7 +22,7 @@ $I->dontSee('Create Category', '.page-header');
 $I->see('Create Category', 'h1.pull-left');
 $I->dontSee('&lt;span class=&quot;');
 
-$I->fillField('name', 'testcategory');
+$I->fillField('name', \App\Helpers\Helper::generateRandomString(15));
 $I->selectOption('form select[name=category_type]', 'Asset');
 $I->click('Save');
 $I->dontSee('&lt;span class=&quot;');

@@ -35,7 +35,7 @@ var pieOptions = {
     //String - A tooltip template
     tooltipTemplate: "<%=value %> <%=label%> "
 };
-console.dir(pieOptions);
+//console.dir(pieOptions);
 //Create pie or douhnut chart
 // You can switch between pie and douhnut using the method below.
 //pieChart.Doughnut(PieData, pieOptions);

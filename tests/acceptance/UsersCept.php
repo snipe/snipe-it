@@ -6,14 +6,13 @@ $I->wantTo('ensure that the users listing page loads without errors');
 $I->lookForwardTo('seeing it load without errors');
 $I->amOnPage('/admin/users');
 //$I->waitForJS("return $.active == 0;", 60);
-//$I->waitForElement('.table', 5); // secs
+$I->waitForElement('.table', 5); // secs
 //$I->seeNumberOfElements('tr', [1,10]);
 $I->seeInTitle('Users');
 $I->see('Users');
 $I->seeInPageSource('admin/users/create');
 $I->dontSee('Users', '.page-header');
 $I->see('Users', 'h1.pull-left');
-$I->seeLink('Create New','/admin/users/create'); // matches <a href="/logout">Logout</a>
 
 
 /* Create form */

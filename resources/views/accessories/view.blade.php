@@ -10,20 +10,28 @@
 
 {{-- Right header --}}
 @section('header_right')
-<div class="dropdown pull-right">
-  <button class="btn btn-default dropdown-toggle" data-toggle="dropdown">{{ trans('button.actions') }}
-      <span class="caret"></span>
-  </button>
-  <ul class="dropdown-menu pull-right" role="menu" aria-labelledby="dropdownMenu1">
-        @if ($accessory->assigned_to != '')
-          <li role="presentation"><a href="{{ route('checkin/accessory', $accessory->id) }}">{{ trans('admin/accessories/general.checkin') }}</a></li>
-        @else
-          <li role="presentation"><a href="{{ route('checkout/accessory', $accessory->id)  }}">{{ trans('admin/accessories/general.checkout') }}</a></li>
-        @endif
-        <li role="presentation"><a href="{{ route('update/accessory', $accessory->id) }}">{{ trans('admin/accessories/general.edit') }}</a></li>
+    @can('accessories.manage')
+        <div class="dropdown pull-right">
+          <button class="btn btn-default dropdown-toggle" data-toggle="dropdown">{{ trans('button.actions') }}
+              <span class="caret"></span>
+          </button>
+          <ul class="dropdown-menu pull-right" role="menu" aria-labelledby="dropdownMenu1">
+                @if ($accessory->assigned_to != '')
+                  @can('accessories.checkin')
+                  <li role="presentation"><a href="{{ route('checkin/accessory', $accessory->id) }}">{{ trans('admin/accessories/general.checkin') }}</a></li>
+                  @endcan
+                @else
+                  @can('accessories.checkout')
+                  <li role="presentation"><a href="{{ route('checkout/accessory', $accessory->id)  }}">{{ trans('admin/accessories/general.checkout') }}</a></li>
+                  @endcan
+                @endif
+                    @can('accessories.edit')
+                <li role="presentation"><a href="{{ route('update/accessory', $accessory->id) }}">{{ trans('admin/accessories/general.edit') }}</a></li>
+                        @endcan
 
-  </ul>
-</div>
+          </ul>
+        </div>
+    @endcan
 @stop
 
 {{-- Page content --}}
@@ -64,7 +72,9 @@
     <h4>{{ trans('admin/accessories/general.about_accessories_title') }}</h4>
     <p>{{ trans('admin/accessories/general.about_accessories_text') }} </p>
     <div class="text-center">
+        @can('accessories.checkout')
         <a href="{{ route('checkout/accessory', $accessory->id) }}" style="margin-right:5px;" class="btn btn-info btn-sm" {{ (($accessory->numRemaining() > 0 ) ? '' : ' disabled') }}>{{ trans('general.checkout') }}</a>
+        @endcan
     </div>
 
 </div>

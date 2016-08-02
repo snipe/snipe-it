@@ -18,6 +18,7 @@ use Redirect;
 use Slack;
 use Str;
 use View;
+use Gate;
 
 /**
  * This controller handles all actions related to Consumables for
@@ -444,7 +445,23 @@ class ConsumablesController extends Controller
         $rows = array();
 
         foreach ($consumables as $consumable) {
-            $actions = '<nobr><a href="'.route('checkout/consumable', $consumable->id).'" style="margin-right:5px;" class="btn btn-info btn-sm" '.(($consumable->numRemaining() > 0 ) ? '' : ' disabled').'>'.trans('general.checkout').'</a><a href="'.route('update/consumable', $consumable->id).'" class="btn btn-warning btn-sm" style="margin-right:5px;"><i class="fa fa-pencil icon-white"></i></a><a data-html="false" class="btn delete-asset btn-danger btn-sm" data-toggle="modal" href="'.route('delete/consumable', $consumable->id).'" data-content="'.trans('admin/consumables/message.delete.confirm').'" data-title="'.trans('general.delete').' '.htmlspecialchars($consumable->name).'?" onClick="return false;"><i class="fa fa-trash icon-white"></i></a></nobr>';
+            $actions = '<nobr>';
+            if (Gate::allows('consumables.checkout')) {
+                $actions .= '<a href="' . route('checkout/consumable',
+                        $consumable->id) . '" style="margin-right:5px;" class="btn btn-info btn-sm" ' . (($consumable->numRemaining() > 0) ? '' : ' disabled') . '>' . trans('general.checkout') . '</a>';
+            }
+
+            if (Gate::allows('consumables.edit')) {
+                $actions .= '<a href="' . route('update/consumable',
+                        $consumable->id) . '" class="btn btn-warning btn-sm" style="margin-right:5px;"><i class="fa fa-pencil icon-white"></i></a>';
+            }
+            if (Gate::allows('consumables.delete')) {
+                $actions .= '<a data-html="false" class="btn delete-asset btn-danger btn-sm" data-toggle="modal" href="' . route('delete/consumable',
+                        $consumable->id) . '" data-content="' . trans('admin/consumables/message.delete.confirm') . '" data-title="' . trans('general.delete') . ' ' . htmlspecialchars($consumable->name) . '?" onClick="return false;"><i class="fa fa-trash icon-white"></i></a>';
+            }
+
+            $actions .='</nobr>';
+
             $company = $consumable->company;
 
             $rows[] = array(

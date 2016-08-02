@@ -15,16 +15,20 @@
 @stop
 
 @section('header_right')
-@if (\App\Models\Setting::getSettings()->ldap_enabled == 1)
-  <a href="{{ route('ldap/user') }}" class="btn btn-default pull-right"><span class="fa fa-upload"></span> LDAP</a>
-@endif
-  <a href="{{ route('import/user') }}" class="btn btn-default pull-right" style="margin-right: 5px;"><span class="fa fa-upload"></span> {{ trans('general.import') }}</a>
-  <a href="{{ route('create/user') }}" class="btn btn-primary pull-right" style="margin-right: 5px;">  {{ trans('general.create') }}</a>
-@if (Input::get('status')=='deleted')
-  <a class="btn btn-default pull-right" href="{{ URL::to('admin/users') }}" style="margin-right: 5px;">{{ trans('admin/users/table.show_current') }}</a>
-@else
-  <a class="btn btn-default pull-right" href="{{ URL::to('admin/users?status=deleted') }}" style="margin-right: 5px;">{{ trans('admin/users/table.show_deleted') }}</a>
-@endif
+    @can('users.create')
+        @if (\App\Models\Setting::getSettings()->ldap_enabled == 1)
+          <a href="{{ route('ldap/user') }}" class="btn btn-default pull-right"><span class="fa fa-upload"></span> LDAP</a>
+        @endif
+          <a href="{{ route('import/user') }}" class="btn btn-default pull-right" style="margin-right: 5px;"><span class="fa fa-upload"></span> {{ trans('general.import') }}</a>
+          <a href="{{ route('create/user') }}" class="btn btn-primary pull-right" style="margin-right: 5px;">  {{ trans('general.create') }}</a>
+    @endcan
+
+        @if (Input::get('status')=='deleted')
+          <a class="btn btn-default pull-right" href="{{ URL::to('admin/users') }}" style="margin-right: 5px;">{{ trans('admin/users/table.show_current') }}</a>
+        @else
+          <a class="btn btn-default pull-right" href="{{ URL::to('admin/users?status=deleted') }}" style="margin-right: 5px;">{{ trans('admin/users/table.show_deleted') }}</a>
+        @endif
+
 @stop
 
 {{-- Page content --}}
@@ -43,12 +47,14 @@
                'class' => 'form-inline' ]) }}
 
             @if (Input::get('status')!='deleted')
+                @can('users.delete')
                <div id="toolbar">
                  <select name="bulk_actions" class="form-control select2" style="width: 200px;">
                      <option value="delete">Bulk Checkin &amp; Delete</option>
                  </select>
                  <button class="btn btn-default" id="bulkEdit" disabled>Go</button>
              </div>
+                @endcan
             @endif
 
 

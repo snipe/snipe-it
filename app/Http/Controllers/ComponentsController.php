@@ -20,6 +20,7 @@ use Str;
 use View;
 use Validator;
 use Illuminate\Http\Request;
+use Gate;
 
 /**
  * This class controls all actions related to Components for
@@ -454,7 +455,23 @@ class ComponentsController extends Controller
         $rows = array();
 
         foreach ($components as $component) {
-            $actions = '<nobr><a href="'.route('checkout/component', $component->id).'" style="margin-right:5px;" class="btn btn-info btn-sm '.(($component->numRemaining() > 0 ) ? '' : ' disabled').'" '.(($component->numRemaining() > 0 ) ? '' : ' disabled').'>'.trans('general.checkout').'</a><a href="'.route('update/component', $component->id).'" class="btn btn-warning btn-sm" style="margin-right:5px;"><i class="fa fa-pencil icon-white"></i></a><a data-html="false" class="btn delete-asset btn-danger btn-sm" data-toggle="modal" href="'.route('delete/component', $component->id).'" data-content="'.trans('admin/components/message.delete.confirm').'" data-title="'.trans('general.delete').' '.htmlspecialchars($component->name).'?" onClick="return false;"><i class="fa fa-trash icon-white"></i></a></nobr>';
+            $actions = '<nobr>';
+            if (Gate::allows('components.checkout')) {
+                $actions .= '<a href="' . route('checkout/component',
+                        $component->id) . '" style="margin-right:5px;" class="btn btn-info btn-sm ' . (($component->numRemaining() > 0) ? '' : ' disabled') . '" ' . (($component->numRemaining() > 0) ? '' : ' disabled') . '>' . trans('general.checkout') . '</a>';
+            }
+
+            if (Gate::allows('components.edit')) {
+                $actions .= '<a href="' . route('update/component',
+                        $component->id) . '" class="btn btn-warning btn-sm" style="margin-right:5px;"><i class="fa fa-pencil icon-white"></i></a>';
+            }
+
+            if (Gate::allows('components.delete')) {
+                $actions .= '<a data-html="false" class="btn delete-asset btn-danger btn-sm" data-toggle="modal" href="' . route('delete/component',
+                        $component->id) . '" data-content="' . trans('admin/components/message.delete.confirm') . '" data-title="' . trans('general.delete') . ' ' . htmlspecialchars($component->name) . '?" onClick="return false;"><i class="fa fa-trash icon-white"></i></a>';
+            }
+
+            $actions .='</nobr>';
             $company = $component->company;
 
             $rows[] = array(

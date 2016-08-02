@@ -24,7 +24,9 @@
           <div class="icon">
             <i class="fa fa-barcode"></i>
           </div>
-          <a href="{{ route('hardware') }}" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+            @can('assets.view')
+                <a href="{{ route('hardware') }}" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+             @endcan
         </div>
       </div><!-- ./col -->
 
@@ -38,7 +40,9 @@
           <div class="icon">
             <i class="fa fa-floppy-o"></i>
           </div>
-          <a href="{{ route('licenses') }}" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+            @can('licenses.view')
+                <a href="{{ route('licenses') }}" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+            @endcan
         </div>
       </div><!-- ./col -->
 
@@ -52,7 +56,9 @@
           <div class="icon">
             <i class="fa fa-keyboard-o"></i>
           </div>
-          <a href="{{ route('accessories') }}" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+            @can('accessories.view')
+                <a href="{{ route('accessories') }}" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+            @endcan
         </div>
       </div><!-- ./col -->
 
@@ -66,7 +72,9 @@
           <div class="icon">
             <i class="fa fa-tint"></i>
           </div>
-          <a href="{{ route('consumables') }}" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+            @can('consumables.view')
+                <a href="{{ route('consumables') }}" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+            @endcan
         </div>
       </div><!-- ./col -->
 
