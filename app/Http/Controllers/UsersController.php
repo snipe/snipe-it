@@ -1149,7 +1149,6 @@ class UsersController extends Controller
 
     protected $ldapValidationRules = array(
         'firstname' => 'required|string|min:2',
-        'lastname' => 'required|string|min:2',
         'employee_number' => 'string',
         'username' => 'required|min:2|unique:users,username',
         'email' => 'email|unique:users,email',
@@ -1162,7 +1161,7 @@ class UsersController extends Controller
     * @since [v1.8]
     * @return Redirect
     */
-    public function postLDAP()
+    public function postLDAP(Request $request)
     {
         ini_set('max_execution_time', 600); //600 seconds = 10 minutes
         ini_set('memory_limit', '500M');
@@ -1174,9 +1173,6 @@ class UsersController extends Controller
         $ldap_result_active_flag = Setting::getSettings()->ldap_active_flag_field;
         $ldap_result_emp_num = Setting::getSettings()->ldap_emp_num;
         $ldap_result_email = Setting::getSettings()->ldap_email;
-
-
-        $location_id = e(Input::get('location_id'));
 
         try {
             $ldapconn = Ldap::connectToLdap();
@@ -1225,7 +1221,9 @@ class UsersController extends Controller
                 $user->email = e($item["email"]);
                 $user->employee_num = e($item["employee_number"]);
                 $user->activated = 1;
-                $user->location_id = e($location_id);
+                if ($request->has('location_id')) {
+                    $user->location_id = e($request->input('location_id'));
+                }
                 $user->notes = 'Imported from LDAP';
                 $user->ldap_import = 1;
 
