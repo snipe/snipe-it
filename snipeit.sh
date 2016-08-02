@@ -51,7 +51,7 @@ elif [ -f /etc/os-release ]; then
 #Order is important here.  If /etc/os-release and /etc/centos-release exist, we're on centos 7.
 #If only /etc/centos-release exist, we're on centos6(or earlier).  Centos-release is less parsable,
 #so lets assume that it's version 6 (Plus, who would be doing a new install of anything on centos5 at this point..)
-elif [ -f /etc/centos-release]; then
+elif [ -f /etc/centos-release ]; then
 	distro="Centos"
 	version="6"
 else

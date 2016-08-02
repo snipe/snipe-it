@@ -251,7 +251,7 @@ input[type='text'][disabled], input[disabled], textarea[disabled], input[readonl
                 <div class="col-md-5">
                    <div class="controls">
 
-                    <select name="groups[]" id="groups[]" multiple="multiple" class="form-control" {{ ((Config::get('app.lock_passwords') && ($user->id)) ? ' disabled' : '') }}>
+                    <select name="groups[]" id="groups[]" multiple="multiple" class="form-control" {{ ((Config::get('app.lock_passwords') || ($user->id==Auth::user()->id) || (!Auth::user()->isSuperUser())) ? ' disabled' : '') }}>
 
                         @foreach ($groups as $id => $group)
                         <option value="{{ $id }}"
@@ -290,6 +290,13 @@ input[type='text'][disabled], input[disabled], textarea[disabled], input[readonl
     </div><!-- /.tab-pane -->
     <div class="tab-pane" id="tab_2">
         <div class="col-md-10 col-md-offset-2">
+            
+
+            @if (!Auth::user()->isSuperUser())
+                <p class="alert alert-warning">Only superadmins may grant a user superadmin access.</p>
+            @endif
+
+
 
         @foreach ($permissions as $area => $permission)
 
@@ -306,16 +313,34 @@ input[type='text'][disabled], input[disabled], textarea[disabled], input[readonl
                     <div class="form-group" style="padding-left: 15px;">
                         
                         <label class="radio-padding">
-                            {{ Form::radio('permission['.$permission_name.']', '1', $userPermissions[$permission_name] == '1', ['class' => 'minimal']) }}
+
+                            @if (($permission_name == 'superuser') && (!Auth::user()->isSuperUser()))
+                                {{ Form::radio('permission['.$permission_name.']', '1', $userPermissions[$permission_name] == '1', ['class' => 'minimal', 'disabled'=>'disabled']) }}
+                            @else
+                                {{ Form::radio('permission['.$permission_name.']', '1', $userPermissions[$permission_name] == '1', ['class' => 'minimal']) }}
+                            @endif
+
                             Grant</label>
 
                         <label class="radio-padding">
-                            {{ Form::radio('permission['.$permission_name.']', '-1', $userPermissions[$permission_name] == '-1', ['class' => 'minimal']) }}
+
+                            @if (($permission_name == 'superuser') && (!Auth::user()->isSuperUser()))
+                                {{ Form::radio('permission['.$permission_name.']', '-1', $userPermissions[$permission_name] == '-1', ['class' => 'minimal', 'disabled'=>'disabled']) }}
+
+                            @else
+                                {{ Form::radio('permission['.$permission_name.']', '-1', $userPermissions[$permission_name] == '-1', ['class' => 'minimal']) }}
+
+                            @endif
                             Deny</label>
 
                         <label class="radio-padding">
-                            {{ Form::radio('permission['.$permission_name.']', '0', $userPermissions[$permission_name] =='0', ['class' => 'minimal']) }}
-                            Inherit</label>
+                            @if (($permission_name == 'superuser') && (!Auth::user()->isSuperUser()))
+                                {{ Form::radio('permission['.$permission_name.']', '0', $userPermissions[$permission_name] =='0', ['class' => 'minimal', 'disabled'=>'disabled']) }}
+                            @else
+                                {{ Form::radio('permission['.$permission_name.']', '0', $userPermissions[$permission_name] =='0', ['class' => 'minimal']) }}
+                            @endif
+
+                              Inherit</label>
                     </div>
                     <hr>
                 @endif
