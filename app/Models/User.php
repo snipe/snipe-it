@@ -232,10 +232,10 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 
     public function accountStatus()
     {
-        if ($this->sentryThrottle) {
-            if ($this->sentryThrottle->suspended==1) {
+        if ($this->throttle) {
+            if ($this->throttle->suspended==1) {
                 return 'suspended';
-            } elseif ($this->sentryThrottle->banned==1) {
+            } elseif ($this->throttle->banned==1) {
                 return 'banned';
             } else {
                 return false;
@@ -262,7 +262,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
             ->orderBy('created_at', 'desc');
     }
 
-    public function sentryThrottle()
+    public function throttle()
     {
         return $this->hasOne('\App\Models\Throttle');
     }
