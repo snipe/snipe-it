@@ -8,9 +8,11 @@
 
 
 @section('header_right')
-<a href="{{ route('create/licenses') }}" class="btn btn-primary pull-right">
-  {{ trans('general.create') }}
-</a>
+@can('licenses.create')
+    <a href="{{ route('create/licenses') }}" class="btn btn-primary pull-right">
+      {{ trans('general.create') }}
+    </a>
+    @endcan
 @stop
 
 {{-- Page content --}}

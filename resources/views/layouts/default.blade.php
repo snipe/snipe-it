@@ -166,6 +166,7 @@
                       </div>
                   </form>
                   @endcan
+
                   @can('admin')
                   <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
@@ -173,36 +174,48 @@
                       <b class="caret"></b>
                     </a>
                    <ul class="dropdown-menu">
+                     @can('assets.create')
                       <li {!! (Request::is('hardware/create') ? 'class="active>"' : '') !!}>
                               <a href="{{ route('create/hardware') }}">
                                   <i class="fa fa-barcode fa-fw"></i>
                                   @lang('general.asset')</a>
                       </li>
+                       @endcan
+                       @can('licenses.create')
                        <li {!! (Request::is('admin/licenses/create') ? 'class="active"' : '') !!}>
                            <a href="{{ route('create/licenses') }}">
                                <i class="fa fa-floppy-o fa-fw"></i>
                                @lang('general.license')</a>
                        </li>
+                       @endcan
+                       @can('accessories.create')
                        <li {!! (Request::is('admin/accessories/create') ? 'class="active"' : '') !!}>
                            <a href="{{ route('create/accessory') }}">
                                <i class="fa fa-keyboard-o fa-fw"></i>
                                @lang('general.accessory')</a>
                        </li>
+                       @endcan
+                       @can('consumables.create')
                        <li {!! (Request::is('admin/consumables/create') ? 'class="active"' : '') !!}>
                            <a href="{{ route('create/consumable') }}">
                                <i class="fa fa-tint fa-fw"></i>
                                @lang('general.consumable')</a>
                        </li>
+                       @endcan
+                       @can('users.create')
                        <li {!! (Request::is('admin/users/create') ? 'class="active"' : '') !!}>
                            <a href="{{ route('create/user') }}">
                            <i class="fa fa-user fa-fw"></i>
                            @lang('general.user')</a>
                        </li>
+                       @endcan
+                       @can('components.create')
                        <li {!! (Request::is('admin/components/create') ? 'class="active"' : '') !!}>
                            <a href="{{ route('create/component') }}">
                            <i class="fa fa-hdd-o"></i>
                            @lang('general.component')</a>
                        </li>
+                       @endcan
                    </ul>
                </li>
                @endcan

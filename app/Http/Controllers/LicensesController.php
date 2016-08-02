@@ -23,6 +23,7 @@ use Config;
 use Session;
 use App\Helpers\Helper;
 use Auth;
+use Gate;
 
 /**
  * This controller handles all actions related to Licenses for
@@ -983,7 +984,26 @@ class LicensesController extends Controller
         $rows = array();
 
         foreach ($licenses as $license) {
-            $actions = '<span style="white-space: nowrap;"><a href="'.route('freecheckout/license', $license->id).'" class="btn btn-primary btn-sm'.(($license->remaincount() > 0) ? '' : ' disabled').'" style="margin-right:5px;">'.trans('general.checkout').'</a> <a href="'.route('clone/license', $license->id).'" class="btn btn-info btn-sm" style="margin-right:5px;" title="Clone asset"><i class="fa fa-files-o"></i></a><a href="'.route('update/license', $license->id).'" class="btn btn-warning btn-sm" style="margin-right:5px;"><i class="fa fa-pencil icon-white"></i></a><a data-html="false" class="btn delete-asset btn-danger btn-sm" data-toggle="modal" href="'.route('delete/license', $license->id).'" data-content="'.trans('admin/licenses/message.delete.confirm').'" data-title="'.trans('general.delete').' '.htmlspecialchars($license->name).'?" onClick="return false;"><i class="fa fa-trash icon-white"></i></a></span>';
+            $actions = '<span style="white-space: nowrap;">';
+
+            if (Gate::allows('licenses.checkout')) {
+                $actions .= '<a href="' . route('freecheckout/license',
+                        $license->id) . '" class="btn btn-primary btn-sm' . (($license->remaincount() > 0) ? '' : ' disabled') . '" style="margin-right:5px;">' . trans('general.checkout') . '</a> ';
+            }
+
+            if (Gate::allows('licenses.create')) {
+                $actions .= '<a href="' . route('clone/license',
+                        $license->id) . '" class="btn btn-info btn-sm" style="margin-right:5px;" title="Clone asset"><i class="fa fa-files-o"></i></a>';
+            }
+            if (Gate::allows('licenses.edit')) {
+                $actions .= '<a href="' . route('update/license',
+                        $license->id) . '" class="btn btn-warning btn-sm" style="margin-right:5px;"><i class="fa fa-pencil icon-white"></i></a>';
+            }
+            if (Gate::allows('licenses.delete')) {
+                $actions .= '<a data-html="false" class="btn delete-asset btn-danger btn-sm" data-toggle="modal" href="' . route('delete/license',
+                        $license->id) . '" data-content="' . trans('admin/licenses/message.delete.confirm') . '" data-title="' . trans('general.delete') . ' ' . htmlspecialchars($license->name) . '?" onClick="return false;"><i class="fa fa-trash icon-white"></i></a>';
+            }
+            $actions .='</span>';
 
             $rows[] = array(
                 'id'                => $license->id,

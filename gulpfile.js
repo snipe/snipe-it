@@ -38,7 +38,7 @@ elixir(function(mix) {
     mix.version(['assets/css/app.css','assets/js/all.js']);
 
 
-  //  mix.codeception();
+    mix.codeception();
 
 
 

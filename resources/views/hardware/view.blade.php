@@ -11,6 +11,7 @@
 
 {{-- Right header --}}
 @section('header_right')
+    @can('assets.manage')
 <div class="dropdown pull-right">
   <button class="btn btn-default dropdown-toggle" data-toggle="dropdown">{{ trans('button.actions') }}
       <span class="caret"></span>
@@ -27,6 +28,7 @@
         <li role="presentation"><a href="{{ route('clone/hardware', $asset->id) }}">{{ trans('admin/hardware/general.clone') }}</a></li>
   </ul>
 </div>
+    @endcan
 @stop
 
 

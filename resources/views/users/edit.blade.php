@@ -290,7 +290,7 @@ input[type='text'][disabled], input[disabled], textarea[disabled], input[readonl
     </div><!-- /.tab-pane -->
     <div class="tab-pane" id="tab_2">
         <div class="col-md-10 col-md-offset-2">
-            
+
 
             @if (!Auth::user()->isSuperUser())
                 <p class="alert alert-warning">Only superadmins may grant a user superadmin access.</p>
@@ -318,7 +318,7 @@ input[type='text'][disabled], input[disabled], textarea[disabled], input[readonl
 
                     <!-- radio -->
                     <div class="form-group" style="padding-left: 15px;">
-                        
+
                         <label class="radio-padding">
 
                             @if (($permission_name == 'superuser') && (!Auth::user()->isSuperUser()))
@@ -354,7 +354,7 @@ input[type='text'][disabled], input[disabled], textarea[disabled], input[readonl
 
             @endfor
                         @if ($counter == count($permissions))
-                            POOP
+                            
                     </div>
                     @endif
         <?php $counter++; ?>

@@ -40,6 +40,7 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use TCPDF;
 use View;
 use Carbon\Carbon;
+use Gate;
 
 /**
  * This class controls all actions related to assets for
@@ -1547,7 +1548,18 @@ class AssetsController extends Controller
             $inout = '';
             $actions = '';
             if ($asset->deleted_at=='') {
-                $actions = '<div style=" white-space: nowrap;"><a href="'.route('clone/hardware', $asset->id).'" class="btn btn-info btn-sm" title="Clone asset" data-toggle="tooltip"><i class="fa fa-clone"></i></a> <a href="'.route('update/hardware', $asset->id).'" class="btn btn-warning btn-sm" title="Edit asset" data-toggle="tooltip"><i class="fa fa-pencil icon-white"></i></a> <a data-html="false" class="btn delete-asset btn-danger btn-sm" data-toggle="modal" href="'.route('delete/hardware', $asset->id).'" data-content="'.trans('admin/hardware/message.delete.confirm').'" data-title="'.trans('general.delete').' '.htmlspecialchars($asset->asset_tag).'?" onClick="return false;"><i class="fa fa-trash icon-white"></i></a></div>';
+                if (Gate::allows('assets.create')) {
+                    $actions = '<div style=" white-space: nowrap;"><a href="' . route('clone/hardware',
+                            $asset->id) . '" class="btn btn-info btn-sm" title="Clone asset" data-toggle="tooltip"><i class="fa fa-clone"></i>';
+                }
+                if (Gate::allows('assets.edit')) {
+                    $actions .= '</a> <a href="' . route('update/hardware',
+                            $asset->id) . '" class="btn btn-warning btn-sm" title="Edit asset" data-toggle="tooltip"><i class="fa fa-pencil icon-white"></i></a> ';
+                }
+                if (Gate::allows('assets.delete')) {
+                    $actions .= '<a data-html="false" class="btn delete-asset btn-danger btn-sm" data-toggle="modal" href="' . route('delete/hardware',
+                            $asset->id) . '" data-content="' . trans('admin/hardware/message.delete.confirm') . '" data-title="' . trans('general.delete') . ' ' . htmlspecialchars($asset->asset_tag) . '?" onClick="return false;"><i class="fa fa-trash icon-white"></i></a></div>';
+                }
             } elseif ($asset->model->deleted_at=='') {
                 $actions = '<a href="'.route('restore/hardware', $asset->id).'" title="Restore asset" data-toggle="tooltip" class="btn btn-warning btn-sm"><i class="fa fa-recycle icon-white"></i></a>';
             }
@@ -1555,9 +1567,15 @@ class AssetsController extends Controller
             if ($asset->assetstatus) {
                 if (($asset->assetstatus->deployable != 0) && ($asset->deleted_at=='')) {
                     if (($asset->assigned_to !='') && ($asset->assigned_to > 0)) {
-                        $inout = '<a href="'.route('checkin/hardware', $asset->id).'" class="btn btn-primary btn-sm" title="Checkin this asset" data-toggle="tooltip">'.trans('general.checkin').'</a>';
+                        if (Gate::allows('assets.checkin')) {
+                            $inout = '<a href="' . route('checkin/hardware',
+                                    $asset->id) . '" class="btn btn-primary btn-sm" title="Checkin this asset" data-toggle="tooltip">' . trans('general.checkin') . '</a>';
+                        }
                     } else {
-                        $inout = '<a href="'.route('checkout/hardware', $asset->id).'" class="btn btn-info btn-sm" title="Checkout this asset to a user" data-toggle="tooltip">'.trans('general.checkout').'</a>';
+                        if (Gate::allows('assets.checkout')) {
+                            $inout = '<a href="' . route('checkout/hardware',
+                                    $asset->id) . '" class="btn btn-info btn-sm" title="Checkout this asset to a user" data-toggle="tooltip">' . trans('general.checkout') . '</a>';
+                        }
                     }
                 }
             }

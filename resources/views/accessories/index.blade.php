@@ -7,7 +7,9 @@
 @stop
 
 @section('header_right')
-<a href="{{ route('create/accessory') }}" class="btn btn-primary pull-right"> {{ trans('general.create') }}</a>
+    @can('accessories.create')
+        <a href="{{ route('create/accessory') }}" class="btn btn-primary pull-right"> {{ trans('general.create') }}</a>
+    @endcan
 @stop
 
 {{-- Page content --}}
