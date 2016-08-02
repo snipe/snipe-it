@@ -404,7 +404,6 @@ $(document).ready(function(){
         } else {
             $("#nonadmin").show();
         }
-        //alert(perms);
     });
 
     console.dir($('.superuser'));
