@@ -1221,7 +1221,7 @@ class UsersController extends Controller
                 $user->email = e($item["email"]);
                 $user->employee_num = e($item["employee_number"]);
                 $user->activated = 1;
-                if ($request->has('location_id')) {
+                if ($request->input('location_id')!='') {
                     $user->location_id = e($request->input('location_id'));
                 }
                 $user->notes = 'Imported from LDAP';
