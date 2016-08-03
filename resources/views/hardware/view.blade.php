@@ -298,24 +298,32 @@
                       @if (isset($asset->userloc))
                         <li>{{ $asset->userloc->name }}
                         <li>{{ $asset->userloc->address }}
-                        @if (isset($asset->userloc->address2))
+                        @if ($asset->userloc->address2!='')
                           {{ $asset->userloc->address2 }}
                         @endif
                         </li>
-                        @if (isset($asset->assetloc->city))
-                          <li>{{ $asset->assetloc->city }}, {{ $asset->assetloc->state }} {{ $asset->assetloc->zip }}</li>
-                        @endif
+
+                          <li>{{ $asset->userloc->city }}
+                              @if (($asset->userloc->city!='') && ($asset->userloc->state!=''))
+                                  ,
+                              @endif
+                              {{ $asset->userloc->state }} {{ $asset->userloc->zip }}</li>
+
 
                       @elseif (isset($asset->assetloc))
                           <li>{{ $asset->assetloc->name }}
                           <li>{{ $asset->assetloc->address }}
-                          @if (isset($asset->assetloc->address2))
+                          @if ($asset->assetloc->address2!='')
                             {{ $asset->assetloc->address2 }}
                           @endif
                           </li>
-                          @if (isset($asset->assetloc->city))
-                            <li>{{ $asset->assetloc->city }}, {{ $asset->assetloc->state }} {{ $asset->assetloc->zip }}</li>
-                          @endif
+
+                            <li>{{ $asset->assetloc->city }}
+                                @if (($asset->assetloc->city!='') && ($asset->assetloc->state!=''))
+                                ,
+                                @endif
+                                {{ $asset->assetloc->state }} {{ $asset->assetloc->zip }}</li>
+         
 
                       @endif
                     </ul>
