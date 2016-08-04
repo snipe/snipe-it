@@ -239,7 +239,7 @@ class AssetsController extends Controller
                     $constraint->upsize();
                 })->save($path);
                 $asset->image = $file_name;
-            } catch(\Exception $e) {
+            } catch (\Exception $e) {
                 \Input::flash();
                 $messageBag = new \Illuminate\Support\MessageBag();
                 $messageBag->add('image', $e->getMessage());
@@ -417,7 +417,7 @@ class AssetsController extends Controller
                     $constraint->upsize();
                 })->save($path);
                 $asset->image = $file_name;
-            } catch(\Exception $e) {
+            } catch (\Exception $e) {
                 \Input::flash();
                 $messageBag = new \Illuminate\Support\MessageBag();
                 $messageBag->add('image', $e->getMessage());
@@ -767,7 +767,7 @@ class AssetsController extends Controller
                 } else {
                     $barcode = new \Com\Tecnick\Barcode\Barcode();
                     $barcode_obj =  $barcode->getBarcodeObj($settings->barcode_type, route('view/hardware', $asset->id), $size['height'], $size['width'], 'black', array(-2, -2, -2, -2));
-                    file_put_contents($qr_file,$barcode_obj->getPngData());
+                    file_put_contents($qr_file, $barcode_obj->getPngData());
                     return response($barcode_obj->getPngData())->header('Content-type', 'image/png');
                 }
 
@@ -801,7 +801,7 @@ class AssetsController extends Controller
             } else {
                 $barcode = new \Com\Tecnick\Barcode\Barcode();
                 $barcode_obj = $barcode->getBarcodeObj($settings->alt_barcode, $asset->asset_tag, 250, 20);
-                file_put_contents($barcode_file,$barcode_obj->getPngData());
+                file_put_contents($barcode_file, $barcode_obj->getPngData());
                 return response($barcode_obj->getPngData())->header('Content-type', 'image/png');
             }
         }
@@ -889,11 +889,11 @@ class AssetsController extends Controller
                 try {
                     $file->move($path, $date.'-'.$fixed_filename);
                 } catch (\Symfony\Component\HttpFoundation\File\Exception\FileException $exception) {
-                        $results['error']=trans('admin/hardware/message.upload.error');
-                        if( config('app.debug')) {
-                            $results['error'].= ' ' . $exception->getMessage();
-                        }
-                        return $results;
+                    $results['error']=trans('admin/hardware/message.upload.error');
+                    if (config('app.debug')) {
+                        $results['error'].= ' ' . $exception->getMessage();
+                    }
+                    return $results;
                 }
                 $name = date('Y-m-d-his').'-'.$fixed_filename;
                 $filesize = Setting::fileSizeConvert(filesize($path.'/'.$name));
@@ -1575,6 +1575,12 @@ class AssetsController extends Controller
                 }
             }
 
+            // Lots going on here.  Importer has parsed numbers before importing, so we need to check and see if it's a number before trying to parse.
+            $purchase_cost = $asset->purchase_cost ?: '';
+            if (is_numeric($purchase_cost)) {
+                $purchase_cost = number_format($purchase_cost, 2);
+            }
+
             $row = array(
             'checkbox'      =>'<div class="text-center"><input type="checkbox" name="edit_asset['.$asset->id.']" class="one_required"></div>',
             'id'        => $asset->id,
@@ -1590,7 +1596,7 @@ class AssetsController extends Controller
             'category'      => (($asset->model) && ($asset->model->category)) ?(string)link_to('/admin/settings/categories/'.$asset->model->category->id.'/view', e($asset->model->category->name)) : '',
             'manufacturer'      => (($asset->model) && ($asset->model->manufacturer)) ? (string)link_to('/admin/settings/manufacturers/'.$asset->model->manufacturer->id.'/view', e($asset->model->manufacturer->name)) : '',
             'eol'           => ($asset->eol_date()) ? $asset->eol_date() : '',
-            'purchase_cost'           => ($asset->purchase_cost) ? number_format($asset->purchase_cost, 2) : '',
+            'purchase_cost'           => $purchase_cost,
             'purchase_date'           => ($asset->purchase_date) ? $asset->purchase_date : '',
             'notes'         => e($asset->notes),
             'order_number'  => ($asset->order_number!='') ? '<a href="'.config('app.url').'/hardware?order_number='.e($asset->order_number).'">'.e($asset->order_number).'</a>' : '',
