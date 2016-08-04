@@ -417,6 +417,7 @@ class SettingsController extends Controller
         $setting->ad_domain = e(Input::get('ad_domain'));
         $setting->is_ad = e(Input::get('is_ad', '0'));
         $setting->ldap_tls = e(Input::get('ldap_tls', '0'));
+        $setting->ldap_pw_sync = e(Input::get('ldap_pw_sync', '0'));
 
         // If validation fails, we'll exit the operation now.
         if ($setting->save()) {

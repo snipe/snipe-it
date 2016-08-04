@@ -191,6 +191,7 @@ class Ldap extends Model
     {
         $item = Ldap::parseAndMapLdapAttributes($ldapatttibutes);
 
+
         // Create user from LDAP data
         if (!empty($item["username"])) {
             $user = new User;
@@ -198,7 +199,14 @@ class Ldap extends Model
             $user->last_name = $item["lastname"];
             $user->username = $item["username"];
             $user->email = $item["email"];
-            $user->password = bcrypt(Input::get("password"));
+
+            if (Setting::getSettings()->ldap_pw_sync=='1') {
+                $user->password = bcrypt(Input::get("password"));
+            } else {
+                $pass = substr(str_shuffle("0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"), 0, 25);
+                $user->password = bcrypt($pass);
+            }
+
             $user->activated = 1;
             $user->ldap_import = 1;
             $user->notes = 'Imported on first login from LDAP';
