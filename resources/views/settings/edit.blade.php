@@ -705,6 +705,21 @@
               </div>
               <!-- /.form-group -->
 
+              <!-- LDAP Password Sync -->
+              <div class="form-group">
+                <div class="col-md-3">
+                  {{ Form::label('is_ad', trans('admin/settings/general.ldap_pw_sync')) }}
+                </div>
+                <div class="col-md-9">
+                  {{ Form::checkbox('ldap_pw_sync', '1', Input::old('ldap_pw_sync', $setting->ldap_pw_sync),array('class' => 'minimal')) }}
+                  {{ trans('general.yes') }}
+                  <p class="help-block">{{ trans('admin/settings/general.ldap_pw_sync_help') }}</p>
+                  {!! $errors->first('ldap_pw_sync', '<span class="alert-msg">:message</span>') !!}
+
+                </div>
+              </div>
+              <!-- /.form-group -->
+
               <!-- AD Domain -->
               <div class="form-group {{ $errors->has('ad_domain') ? 'error' : '' }}">
                 <div class="col-md-3">

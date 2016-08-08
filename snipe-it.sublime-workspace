@@ -1,0 +1,1468 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"myTotalRe",
+				"myTotalRevenueToday"
+			],
+			[
+				"totalRe",
+				"totalRevenueToday"
+			],
+			[
+				"dona",
+				"donationResult"
+			],
+			[
+				"getMyD",
+				"getMyDonationTotalToday"
+			],
+			[
+				"getDon",
+				"getDonationTotalToday"
+			],
+			[
+				"callh",
+				"callHasOrder"
+			],
+			[
+				"attr",
+				"attributeId"
+			],
+			[
+				"att",
+				"attributeId"
+			],
+			[
+				"process",
+				"processFieldGroups"
+			],
+			[
+				"sta",
+				"startsWith"
+			],
+			[
+				"lin",
+				"linesValid"
+			],
+			[
+				"order",
+				"orderDeliveryChanged"
+			],
+			[
+				"model",
+				"model_line"
+			],
+			[
+				"claime",
+				"claimed_by"
+			],
+			[
+				"input",
+				"inputField"
+			],
+			[
+				"donat",
+				"donationTypeChanged"
+			],
+			[
+				"donatio",
+				"donationChecked"
+			],
+			[
+				"at",
+				"attributes"
+			],
+			[
+				"claim",
+				"claimFamily"
+			],
+			[
+				"total",
+				"total_price"
+			],
+			[
+				"total_",
+				"total_quantity"
+			],
+			[
+				"form",
+				"formatted_total"
+			],
+			[
+				"produ",
+				"product_id"
+			],
+			[
+				"family",
+				"family_id"
+			],
+			[
+				"l",
+				"lchgrp"
+			]
+		]
+	},
+	"buffers":
+	[
+		{
+			"file": "app/Http/Controllers/AssetsController.php",
+			"settings":
+			{
+				"buffer_size": 61204,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "resources/views/hardware/labels.blade.php",
+			"settings":
+			{
+				"buffer_size": 3976,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "storage/logs/laravel.log",
+			"settings":
+			{
+				"buffer_size": 1883229,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "app/Models/Asset.php",
+			"settings":
+			{
+				"buffer_size": 27595,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "resources/lang/en/admin/hardware/general.php",
+			"settings":
+			{
+				"buffer_size": 976,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "resources/lang/en/general.php",
+			"settings":
+			{
+				"buffer_size": 7002,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "resources/views/hardware/bulk-checkout.blade.php",
+			"settings":
+			{
+				"buffer_size": 12927,
+				"line_ending": "Windows",
+				"name": "@extends('layouts/default')"
+			}
+		},
+		{
+			"file": "resources/views/layouts/default.blade.php",
+			"settings":
+			{
+				"buffer_size": 31020,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "resources/lang/en/admin/hardware/form.php",
+			"settings":
+			{
+				"buffer_size": 1916,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "app/Helpers/Helper.php",
+			"settings":
+			{
+				"buffer_size": 14262,
+				"line_ending": "Windows"
+			}
+		}
+	],
+	"build_system": "",
+	"build_system_choices":
+	[
+	],
+	"build_varint": "",
+	"command_palette":
+	{
+		"height": 104.0,
+		"last_filter": "Package Control: insta",
+		"selected_items":
+		[
+			[
+				"Package Control: insta",
+				"Package Control: Install Package"
+			],
+			[
+				"format",
+				"CodeFormatter: Format Code"
+			],
+			[
+				"Package Control: tag",
+				"Package Control: Install Package"
+			],
+			[
+				"inst",
+				"Package Control: Install Package"
+			],
+			[
+				"Package Control: ",
+				"Package Control: Install Package"
+			]
+		],
+		"width": 512.0
+	},
+	"console":
+	{
+		"height": 126.0,
+		"history":
+		[
+			"package",
+			"install package",
+			"import urllib.request,os,hashlib; h = 'eb2297e1a458f27d836c04bb0cbaf282' + 'd0e7a3098092775ccb37ca9d6b2e4b7d'; pf = 'Package Control.sublime-package'; ipp = sublime.installed_packages_path(); urllib.request.install_opener( urllib.request.build_opener( urllib.request.ProxyHandler()) ); by = urllib.request.urlopen( 'http://packagecontrol.io/' + pf.replace(' ', '%20')).read(); dh = hashlib.sha256(by).hexdigest(); print('Error validating download (got %s instead of %s), please try manual install' % (dh, h)) if dh != h else open(os.path.join( ipp, pf), 'wb' ).write(by)"
+		]
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"expanded_folders":
+	[
+		"/G/xampp2/htdocs/snipe-it/zjean/develop",
+		"/G/xampp2/htdocs/snipe-it/zjean/develop/app",
+		"/G/xampp2/htdocs/snipe-it/zjean/develop/app/Http",
+		"/G/xampp2/htdocs/snipe-it/zjean/develop/app/Http/Controllers",
+		"/G/xampp2/htdocs/snipe-it/zjean/develop/app/Http/Controllers/Auth",
+		"/G/xampp2/htdocs/snipe-it/zjean/develop/app/Http/Middleware",
+		"/G/xampp2/htdocs/snipe-it/zjean/develop/app/Http/Requests",
+		"/G/xampp2/htdocs/snipe-it/zjean/develop/public",
+		"/G/xampp2/htdocs/snipe-it/zjean/develop/public/assets/css",
+		"/G/xampp2/htdocs/snipe-it/zjean/develop/public/assets/css/skins",
+		"/G/xampp2/htdocs/snipe-it/zjean/develop/resources",
+		"/G/xampp2/htdocs/snipe-it/zjean/develop/resources/views",
+		"/G/xampp2/htdocs/snipe-it/zjean/develop/resources/views/account",
+		"/G/xampp2/htdocs/snipe-it/zjean/develop/resources/views/hardware",
+		"/G/xampp2/htdocs/snipe-it/zjean/develop/resources/views/layouts",
+		"/G/xampp2/htdocs/snipe-it/zjean/develop/storage"
+	],
+	"file_history":
+	[
+		"/G/xampp2/htdocs/snipe-it/zjean/develop/config/debugbar.php",
+		"/G/xampp2/htdocs/snipe-it/zjean/develop/public/assets/css/select2.css",
+		"/G/xampp2/htdocs/snipe-it/zjean/develop/app/Http/routes.php",
+		"/G/xampp2/htdocs/snipe-it/zjean/develop/resources/lang/en/general.php",
+		"/G/xampp2/htdocs/snipe-it/zjean/develop/vendor/laravel/framework/src/Illuminate/View/View.php",
+		"/G/xampp2/htdocs/snipe-it/zjean/develop/app/Http/Controllers/ViewAssetsController.php",
+		"/G/xampp2/htdocs/snipe-it/zjean/develop/resources/lang/ar/table.php",
+		"/G/xampp2/htdocs/snipe-it/zjean/develop/app/Models/Asset.php",
+		"/G/xampp2/htdocs/snipe-it/zjean/develop/resources/views/account/requestable-assets.blade.php",
+		"/G/xampp2/htdocs/snipe-it/zjean/develop/public/assets/css/AdminLTE.css",
+		"/G/xampp2/htdocs/snipe-it/zjean/develop/resources/views/hardware/bulk-checkout.blade.php",
+		"/G/xampp2/htdocs/snipe-it/zjean/develop/app/Http/Controllers/AssetModelsController.php",
+		"/G/xampp2/htdocs/snipe-it/zjean/develop/public/assets/css/skins/_all-skins.css",
+		"/G/xampp2/htdocs/snipe-it/zjean/develop/resources/assets/less/select2.less",
+		"/G/xampp2/htdocs/snipe-it/zjean/develop/app/Models/Company.php",
+		"/G/xampp2/htdocs/snipe-it/zjean/develop/config/app.php",
+		"/G/xampp2/htdocs/snipe-it/zjean/develop/storage/logs/laravel.log",
+		"/G/xampp2/htdocs/snipe-it/zjean/develop/vendor/laravel/framework/src/Illuminate/Database/Eloquent/Model.php",
+		"/G/xampp2/htdocs/snipe-it/zjean/develop/resources/views/hardware/checkin.blade.php",
+		"/G/xampp2/htdocs/snipe-it/zjean/develop/resources/views/layouts/default.blade.php",
+		"/G/xampp2/htdocs/snipe-it/zjean/develop/app/Http/Requests/BulkAssetCheckoutRequest.php",
+		"/G/xampp2/htdocs/snipe-it/zjean/develop/vendor/laravel/framework/src/Illuminate/Contracts/Support/MessageBag.php",
+		"/G/xampp2/htdocs/snipe-it/zjean/develop/app/Http/Controllers/ConsumablesController.php",
+		"/G/xampp2/htdocs/snipe-it/zjean/develop/app/Helpers/Helper.php",
+		"/G/xampp2/htdocs/snipe-it/zjean/develop/app/Http/Requests/AssetCheckoutRequest.php",
+		"/G/xampp2/htdocs/snipe-it/zjean/develop/resources/views/hardware/view.blade.php",
+		"/G/xampp2/htdocs/snipe-it/zjean/develop/app/Http/Requests/AssetCheckinRequest.php",
+		"/G/xampp2/htdocs/snipe-it/zjean/develop/app/Models/Actionlog.php",
+		"/D/Projects/Php/lcjbelactie_gemeentes/web/app/models/Congregation.php",
+		"/D/Projects/Php/lcjbelactie_gemeentes/web/app/messages/nl-NL/app.php",
+		"/D/Projects/Php/lcjbelactie_gemeentes/web/app/models/ProductCongregationQuery.php",
+		"/D/Projects/Php/lcjbelactie_gemeentes/web/app/models/Product.php",
+		"/D/Projects/Php/lcjbelactie_gemeentes/web/app/views/congregation/index.php",
+		"/D/Projects/Php/lcjbelactie_gemeentes/web/app/views/order/index.php",
+		"/D/Projects/Php/lcjbelactie_gemeentes/web/app/views/product/view.php",
+		"/D/Projects/Php/lcjbelactie_gemeentes/web/app/views/product/_form.php",
+		"/D/Projects/Php/lcjbelactie_gemeentes/web/app/views/product/index.php",
+		"/D/Projects/Php/lcjbelactie_gemeentes/web/app/views/user/index.php",
+		"/D/Projects/Php/lcjbelactie_gemeentes/web/app/views/user/view.php",
+		"/D/Projects/Php/lcjbelactie_gemeentes/web/app/views/congregation/view.php",
+		"/D/Projects/Php/lcjbelactie_gemeentes/web/app/controllers/ProductController.php",
+		"/D/Projects/Php/lcjbelactie_gemeentes/web/app/views/process-call/process.php",
+		"/D/Projects/Php/lcjbelactie_gemeentes/scripts/install/lcjbelactie-structure.sql",
+		"/D/Projects/Php/lcjbelactie_gemeentes/web/app/models/OrderLine.php",
+		"/D/Projects/Php/lcjbelactie_gemeentes/web/app/vendor/kartik-v/yii2-datecontrol/DateControl.php",
+		"/D/Projects/Php/lcjbelactie_gemeentes/web/app/vendor/yiisoft/yii2/widgets/InputWidget.php",
+		"/D/Projects/Php/lcjbelactie_gemeentes/web/app/vendor/froala/yii2-froala-editor/FroalaEditorWidget.php",
+		"/D/Projects/Php/lcjbelactie_gemeentes/web/app/views/congregation/_form.php",
+		"/D/Projects/Php/lcjbelactie_gemeentes/web/app/vendor/kartik-v/yii2-widget-activeform/ActiveField.php",
+		"/D/Projects/Php/lcjbelactie_gemeentes/web/app/models/Family.php",
+		"/D/Projects/Php/lcjbelactie_gemeentes/web/app/models/Order.php",
+		"/D/Projects/Php/lcjbelactie_gemeentes/web/app/models/Call.php",
+		"/D/Projects/Php/lcjbelactie_gemeentes/web/app/config/params.php",
+		"/D/Projects/Php/lcjbelactie_gemeentes/web/app/config/console.php",
+		"/D/Projects/Php/lcjbelactie_gemeentes/web/app/config/container.php",
+		"/D/Projects/Php/lcjbelactie_gemeentes/web/app/config/web.php",
+		"/D/Projects/Php/lcjbelactie_gemeentes/web/app/vendor/froala/yii2-froala-editor/FroalaEditorAsset.php",
+		"/D/Projects/Php/lcjbelactie_gemeentes/web/app/models/CongregationTrait.php",
+		"/D/Projects/Php/lcjbelactie_gemeentes/web/app/models/UserSearch.php",
+		"/D/Projects/Php/lcjbelactie_gemeentes/web/app/models/Donation.php",
+		"/D/Projects/Php/lcjbelactie_gemeentes/web/app/views/layouts/main.php",
+		"/D/Projects/Php/lcjbelactie_gemeentes/web/app/vendor/yiisoft/yii2/db/BaseActiveRecord.php",
+		"/D/Projects/Php/lcjbelactie_gemeentes/web/app/models/FamilyQuery.php",
+		"/D/Projects/Php/lcjbelactie_gemeentes/web/app/controllers/ProcessCallController.php",
+		"/D/Projects/Php/lcjbelactie_gemeentes/web/app/models/OrderLineQuery.php",
+		"/D/Projects/Php/lcjbelactie_gemeentes/web/app/models/OrderQuery.php",
+		"/D/Projects/Php/lcjbelactie_gemeentes/web/app/models/ProductQuery.php",
+		"/D/Projects/Php/lcjbelactie_gemeentes/web/app/models/CallQuery.php",
+		"/D/Projects/Php/lcjbelactie_gemeentes/web/app/models/DonationQuery.php",
+		"/D/Projects/Php/lcjbelactie_gemeentes/web/app/models/User.php",
+		"/D/Projects/Php/lcjbelactie_gemeentes/web/app/controllers/CallController.php",
+		"/D/Projects/Php/lcjbelactie_gemeentes/web/app/models/UserQuery.php",
+		"/D/Projects/Php/lcjbelactie_gemeentes/web/app/models/OrderSearch.php",
+		"/D/Projects/Php/lcjbelactie_gemeentes/web/app/components/behaviors/CongregationBehavior.php",
+		"/D/Projects/Php/lcjbelactie_gemeentes/web/app/models/FamilyClaimer.php",
+		"/D/Projects/Php/lcjbelactie_gemeentes/web/app/models/BlaimableRelations.php",
+		"/D/Projects/Php/lcjbelactie_gemeentes/web/app/models/LoginForm.php",
+		"/D/Projects/Php/lcjbelactie_gemeentes/web/app/components/behaviours/CongregationBehaviour",
+		"/D/Projects/Php/lcjbelactie_gemeentes/web/app/models/IdentifiableModel.php",
+		"/D/Projects/Php/lcjbelactie_gemeentes/web/app/models/StatsModel.php",
+		"/D/Projects/Php/lcjbelactie_gemeentes/web/app/controllers/ExportController.php",
+		"/D/Projects/Php/lcjbelactie_gemeentes/web/app/views/donation/update.php",
+		"/D/Projects/Php/lcjbelactie_gemeentes/scripts/install/lcj_belactie-test-data.sql",
+		"/D/Projects/Php/lcjbelactie_gemeentes/web/app/config/db.php",
+		"/D/Projects/Php/lcjbelactie/web/app/components/assets/MainAsset.php",
+		"/D/Projects/Php/lcjbelactie/web/app/static/js/assets/script.js",
+		"/D/Projects/Php/lcjbelactie/web/app/static/js/assets/call-validator.js",
+		"/D/Projects/Php/lcjbelactie/web/app/views/process-call/process.php",
+		"/D/Projects/Php/lcjbelactie/web/app/views/order/update.php",
+		"/D/Projects/Php/lcjbelactie/web/app/components/assets/ProcessCallAsset.php",
+		"/D/Projects/Php/lcjbelactie/web/app/components/assets/UpdateOrderAsset",
+		"/D/Projects/Php/lcjbelactie/web/app/components/assets/CallValidatorAsset.php",
+		"/D/Projects/Php/lcjbelactie/web/app/components/validators/CallValidator.php",
+		"/D/Projects/Php/lcjbelactie/web/app/static/js/assets/update-order.js",
+		"/D/Projects/Php/lcjbelactie/web/app/vendor/yiisoft/yii2/validators/StringValidator.php",
+		"/D/Projects/Php/lcjbelactie/web/app/views/layouts/main.php",
+		"/D/Projects/Php/lcjbelactie/web/app/components/assets/Mainasset.php",
+		"/D/Projects/Php/lcjbelactie/app/controllers/ProcessCallController.php",
+		"/D/Projects/Php/lcjbelactie/app/assets/983e333b/yii.activeForm.js",
+		"/D/Projects/Php/lcjbelactie/app/vendor/yiisoft/yii2/assets/yii.activeForm.js",
+		"/D/Projects/Php/lcjbelactie/app/static/js/call-process.js",
+		"/D/Projects/Php/lcjbelactie/app/static/js/assets/call-validator.js",
+		"/D/Projects/Php/lcjbelactie/app/components/assets/CallValidatorAsset.php",
+		"/D/Projects/Php/lcjbelactie/app/components/validators/CallValidator.php",
+		"/D/Projects/Php/lcjbelactie/app/models/Call.php",
+		"/D/Projects/Php/lcjbelactie/app/vendor/yiisoft/yii2/base/Model.php",
+		"/D/Projects/Php/lcjbelactie/app/vendor/yiisoft/yii2/helpers/BaseHtml.php",
+		"/D/Projects/Php/lcjbelactie/app/views/process-call/process.php",
+		"/D/Projects/Php/lcjbelactie/app/models/FamilyClaimer.php",
+		"/D/Projects/Php/lcjbelactie/app/assets/191b8bb3/js/calc.js",
+		"/D/Projects/Php/lcjbelactie/app/assets/191b8bb3/js/script.js",
+		"/D/Projects/Php/lcjbelactie/app/assets/191b8bb3/js/call-process.js",
+		"/D/Projects/Php/lcjbelactie/app/static/js/call-validator.js",
+		"/D/Projects/Php/lcjbelactie/app/assets/983e333b/yii.validation.js",
+		"/D/Projects/Php/lcjbelactie/app/vendor/yiisoft/yii2/validators/StringValidator.php",
+		"/D/Projects/Php/lcjbelactie/app/models/CallForm.php",
+		"/D/Projects/Php/lcjbelactie/app/config/console.php",
+		"/D/Projects/Php/lcjbelactie/app/models/CallSearch.php",
+		"/D/Projects/Php/lcjbelactie/app/models/Order.php",
+		"/D/Projects/Php/lcjbelactie/app/config/db.php",
+		"/D/Projects/Php/lcjbelactie/public/protected/components/UserIdentity.php",
+		"/D/xampp/htdocs/mailinglcj/public/protected/views/mailing/template.php",
+		"/D/xampp/htdocs/mailinglcj/public/protected/components/TemplateHelper.php",
+		"/D/xampp/htdocs/mailinglcj/public/protected/components/MailHelper.php",
+		"/D/xampp/htdocs/mailinglcj/public/protected/controllers/MailingController.php",
+		"/D/xampp/htdocs/ticketslcj/include/staff/templates.inc.php",
+		"/D/xampp/htdocs/ticketslcj/include/class.ticket.php",
+		"/D/Projects/Php/lcjbelactie/database/2015-09-11 - na import families.sql"
+	],
+	"find":
+	{
+		"height": 34.0
+	},
+	"find_in_files":
+	{
+		"height": 90.0,
+		"where_history":
+		[
+			"",
+			"D:\\Projects\\Php\\lcjbelactie\\app\\views",
+			"D:\\Projects\\Php\\lcjbelactie\\app",
+			""
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+			"+",
+			"physical",
+			"isnull(",
+			"isnotnull",
+			"whereisnotnull",
+			"whereisnull",
+			"isnull",
+			"whereis",
+			"unassigned",
+			"scopede",
+			"deployable",
+			"expected_checkin",
+			"available",
+			"list",
+			"hardware",
+			"requestable",
+			"field:focus",
+			":focus",
+			":fodus",
+			"field:focus",
+			".select2-search__field:focus",
+			"checkout",
+			"where(",
+			"log::info",
+			"detailed_name",
+			"get(",
+			"get",
+			"::with(",
+			"::with",
+			"status",
+			"assetstatus",
+			"Asset::where",
+			"witherr",
+			"selecte",
+			"selected_",
+			"selected ass",
+			"log",
+			"history",
+			"checkin",
+			"'),\n",
+			"widget",
+			"validationsummary",
+			"findone",
+			"identifiablemodel",
+			"activerecord",
+			"identifiablemodel",
+			"modified_at",
+			"modified_by",
+			"modified_on",
+			"created_on",
+			"modified_on",
+			"created_on",
+			"modified_by",
+			"modified_on",
+			"modified_by",
+			"stringvalidator",
+			"enableFieldsValidation",
+			"calculateTotalsPool",
+			"call-process",
+			"callvalidatorasset",
+			"validateattribute",
+			"};",
+			"validateattribute",
+			"yii.validation.string",
+			"%response",
+			"templates",
+			"thisuser",
+			"user",
+			"%staff",
+			"GEsloten",
+			"NTUrYAu\\+A79jY/@WEl&",
+			"password",
+			"enco",
+			"h2",
+			"doubleval",
+			"with('",
+			"with",
+			"result",
+			"with(",
+			"integer",
+			"order-donation",
+			":rad",
+			"][",
+			"field(",
+			"format",
+			"zip",
+			"process-call-form",
+			"url::to",
+			"$order",
+			"clientValidateAttribute",
+			"urlmanager",
+			"panel",
+			"well ",
+			"boolean",
+			"table-condensed",
+			"disableFieldsValidation",
+			"deliver",
+			"validate",
+			"identifiablemodel",
+			"order->t",
+			"VarDumper",
+			"base",
+			"baseurl",
+			"donationchdonationTypeChanged",
+			"status",
+			"My Yii application",
+			"url",
+			"integeronly",
+			"                       ",
+			"IdentityInterface",
+			"adminEmail",
+			"close",
+			"staff",
+			"thisuser",
+			"$cfg->getId()",
+			"config",
+			"Customers",
+			"customerN",
+			"route"
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+			" ",
+			"updated_at",
+			"modified_at",
+			"created_at",
+			"updated_by",
+			"modified_at",
+			"updated_by",
+			"h3",
+			"record",
+			"update-order-form",
+			"$model"
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"selected": 2,
+			"sheets":
+			[
+				{
+					"buffer": 0,
+					"file": "app/Http/Controllers/AssetsController.php",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 61204,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								42621,
+								42621
+							]
+						],
+						"settings":
+						{
+							"auto_complete": false,
+							"syntax": "Packages/PHP/PHP.sublime-syntax",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 17524.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 2,
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "resources/views/hardware/labels.blade.php",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 3976,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"auto_complete": false,
+							"syntax": "Packages/PHP/PHP.sublime-syntax",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "storage/logs/laravel.log",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1883229,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1830940,
+								1830940
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Text/Plain text.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 261090.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "app/Models/Asset.php",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 27595,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								15795,
+								15795
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/PHP/PHP.sublime-syntax",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 8329.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 7,
+					"type": "text"
+				},
+				{
+					"buffer": 4,
+					"file": "resources/lang/en/admin/hardware/general.php",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 976,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								82,
+								82
+							]
+						],
+						"settings":
+						{
+							"auto_complete": false,
+							"syntax": "Packages/PHP/PHP.sublime-syntax",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 4,
+					"type": "text"
+				},
+				{
+					"buffer": 5,
+					"file": "resources/lang/en/general.php",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 7002,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								923,
+								923
+							]
+						],
+						"settings":
+						{
+							"auto_complete": false,
+							"syntax": "Packages/PHP/PHP.sublime-syntax",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 5,
+					"type": "text"
+				},
+				{
+					"buffer": 6,
+					"file": "resources/views/hardware/bulk-checkout.blade.php",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 12927,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								4319,
+								4319
+							]
+						],
+						"settings":
+						{
+							"auto_complete": false,
+							"auto_name": "@extends('layouts/default')",
+							"syntax": "Packages/PHP/PHP.sublime-syntax",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 1080.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 3,
+					"type": "text"
+				},
+				{
+					"buffer": 7,
+					"file": "resources/views/layouts/default.blade.php",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 31020,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								10332,
+								10344
+							]
+						],
+						"settings":
+						{
+							"auto_complete": false,
+							"syntax": "Packages/PHP/PHP.sublime-syntax",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 2880.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 6,
+					"type": "text"
+				},
+				{
+					"buffer": 8,
+					"file": "resources/lang/en/admin/hardware/form.php",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1916,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"auto_complete": false,
+							"syntax": "Packages/PHP/PHP.sublime-syntax",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 8,
+					"type": "text"
+				},
+				{
+					"buffer": 9,
+					"file": "app/Helpers/Helper.php",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 14262,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1837,
+								1837
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/PHP/PHP.sublime-syntax",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 544.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 9,
+					"type": "text"
+				}
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 23.0
+	},
+	"input":
+	{
+		"height": 31.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.find_results":
+	{
+		"height": 0.0
+	},
+	"pinned_build_system": "",
+	"project": "snipe-it.sublime-project",
+	"replace":
+	{
+		"height": 62.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+			[
+				"larave",
+				"storage\\logs\\laravel.log"
+			],
+			[
+				"debug",
+				"config\\debugbar.php"
+			],
+			[
+				"asset",
+				"app\\Models\\Asset.php"
+			],
+			[
+				"default.",
+				"resources\\views\\layouts\\default.blade.php"
+			],
+			[
+				"hardware/gen",
+				"resources\\lang\\en\\admin\\hardware\\general.php"
+			],
+			[
+				"app/rou",
+				"app\\Http\\routes.php"
+			],
+			[
+				"lang/",
+				"resources\\lang\\ar\\table.php"
+			],
+			[
+				"app/route",
+				"app\\Http\\routes.php"
+			],
+			[
+				"laravel.lo",
+				"storage\\logs\\laravel.log"
+			],
+			[
+				"helper",
+				"app\\Helpers\\Helper.php"
+			],
+			[
+				"heper",
+				"app\\Helpers\\Helper.php"
+			],
+			[
+				"rout",
+				"app\\Http\\routes.php"
+			],
+			[
+				"processca",
+				"app\\views\\process-call\\process.php"
+			],
+			[
+				"congregationt",
+				"app\\models\\CongregationTrait.php"
+			],
+			[
+				"pcc",
+				"app\\controllers\\ProcessCallController.php"
+			],
+			[
+				"pc",
+				"app\\controllers\\ProcessCallController.php"
+			],
+			[
+				"familcl",
+				"app\\models\\FamilyClaimer.php"
+			],
+			[
+				"activeform.js",
+				"lcjbelactie\\app\\vendor\\yiisoft\\yii2\\assets\\yii.activeForm.js"
+			],
+			[
+				"stringvali",
+				"lcjbelactie\\app\\vendor\\yiisoft\\yii2\\validators\\StringValidator.php"
+			],
+			[
+				"basehtml",
+				"lcjbelactie\\app\\vendor\\yiisoft\\yii2\\helpers\\BaseHtml.php"
+			],
+			[
+				"processcal",
+				"lcjbelactie\\app\\controllers\\ProcessCallController.php"
+			],
+			[
+				"userid",
+				"lcjbelactie\\public\\protected\\components\\UserIdentity.php"
+			],
+			[
+				"useriden",
+				"lcjbelactie\\public\\protected\\components\\UserIdentity.php"
+			],
+			[
+				"template.php",
+				"mailinglcj\\public\\protected\\views\\mailing\\template.php"
+			],
+			[
+				"template",
+				"mailinglcj\\public\\protected\\data\\template.html"
+			],
+			[
+				"proc",
+				"app\\views\\process-call\\process.php"
+			],
+			[
+				"process",
+				"app\\controllers\\ProcessCallController.php"
+			],
+			[
+				"pccon",
+				"app\\controllers\\ProcessCallController.php"
+			],
+			[
+				"procaco",
+				"app\\controllers\\ProcessCallController.php"
+			],
+			[
+				"familycla",
+				"app\\models\\FamilyClaimer.php"
+			],
+			[
+				"family",
+				"app\\models\\Family.php"
+			],
+			[
+				"family/in",
+				"app\\views\\family\\index.php"
+			],
+			[
+				"order/in",
+				"app\\views\\order\\index.php"
+			],
+			[
+				"order/cr",
+				"app\\views\\order\\create.php"
+			],
+			[
+				"donation/in",
+				"app\\views\\donation\\index.php"
+			],
+			[
+				"donationcon",
+				"app\\controllers\\DonationController.php"
+			],
+			[
+				"rocess",
+				"app\\views\\process-call\\process.php"
+			],
+			[
+				"order/up",
+				"app\\views\\order\\update.php"
+			],
+			[
+				"doncon",
+				"app\\controllers\\DonationController.php"
+			],
+			[
+				"proce",
+				"app\\views\\process-call\\process.php"
+			],
+			[
+				"donation/up",
+				"app\\views\\donation\\update.php"
+			],
+			[
+				"export",
+				"app\\controllers\\ExportController.php"
+			],
+			[
+				"stats",
+				"app\\views\\stats\\stats.php"
+			],
+			[
+				"call-",
+				"app\\static\\js\\call-process.js"
+			],
+			[
+				"order",
+				"app\\models\\Order.php"
+			],
+			[
+				"donation",
+				"app\\models\\Donation.php"
+			],
+			[
+				"process-c",
+				"app\\views\\process-call\\process.php"
+			],
+			[
+				"export/in",
+				"app\\views\\export\\index.php"
+			],
+			[
+				"statsmo",
+				"app\\models\\StatsModel.php"
+			],
+			[
+				"statsm",
+				"app\\models\\StatsModel.php"
+			],
+			[
+				"orderli",
+				"app\\models\\OrderLine.php"
+			],
+			[
+				"exco",
+				"app\\controllers\\ExportController.php"
+			],
+			[
+				"user",
+				"app\\models\\User.php"
+			],
+			[
+				"expo",
+				"app\\controllers\\ExportController.php"
+			],
+			[
+				"pr",
+				"app\\models\\Product.php"
+			],
+			[
+				"produ",
+				"app\\models\\Product.php"
+			],
+			[
+				"call",
+				"app\\models\\Call.php"
+			],
+			[
+				"exc",
+				"app\\controllers\\ExportController.php"
+			],
+			[
+				"expo/in",
+				"app\\views\\export\\index.php"
+			],
+			[
+				"app",
+				"app\\messages\\nl-NL\\app.php"
+			],
+			[
+				"fam/in",
+				"app\\views\\family\\index.php"
+			],
+			[
+				"familyse",
+				"app\\models\\FamilySearch.php"
+			],
+			[
+				"user/up",
+				"app\\views\\user\\update.php"
+			],
+			[
+				"iden",
+				"app\\models\\IdentifiableModel.php"
+			],
+			[
+				"claim",
+				"app\\models\\FamilyClaimer.php"
+			],
+			[
+				"familycon",
+				"app\\controllers\\FamilyController.php"
+			],
+			[
+				"ord/in",
+				"app\\views\\order\\index.php"
+			],
+			[
+				"orderc",
+				"app\\controllers\\OrderController.php"
+			],
+			[
+				"productcon",
+				"app\\controllers\\ProductController.php"
+			],
+			[
+				"family/ind",
+				"app\\views\\family\\index.php"
+			],
+			[
+				"expoc",
+				"app\\controllers\\ExportController.php"
+			],
+			[
+				"product",
+				"app\\models\\Product.php"
+			],
+			[
+				"main",
+				"app\\views\\layouts\\main.php"
+			],
+			[
+				"call/in",
+				"app\\views\\call\\index.php"
+			],
+			[
+				"callser",
+				"app\\models\\CallSearch.php"
+			],
+			[
+				"orderse",
+				"app\\models\\OrderSearch.php"
+			],
+			[
+				"o/up",
+				"app\\views\\order\\update.php"
+			],
+			[
+				"producon",
+				"app\\controllers\\ProductController.php"
+			],
+			[
+				"orcon",
+				"app\\controllers\\OrderController.php"
+			],
+			[
+				"pro/ind",
+				"app\\views\\product\\index.php"
+			],
+			[
+				"produc",
+				"app\\models\\Product.php"
+			],
+			[
+				"site/in",
+				"app\\views\\site\\index.php"
+			],
+			[
+				"activefor",
+				"app\\vendor\\yiisoft\\yii2-bootstrap\\ActiveForm.php"
+			],
+			[
+				"orderlin",
+				"app\\models\\OrderLine.php"
+			],
+			[
+				"activeform",
+				"app\\assets\\983e333b\\yii.activeForm.js"
+			],
+			[
+				"sitecon",
+				"app\\controllers\\SiteController.php"
+			],
+			[
+				"update",
+				"app\\views\\order\\update.php"
+			],
+			[
+				"dona",
+				"app\\models\\Donation.php"
+			],
+			[
+				"processc",
+				"app\\controllers\\ProcessCallController.php"
+			],
+			[
+				"oup",
+				"app\\views\\order\\update.php"
+			],
+			[
+				"or/up",
+				"app\\views\\order\\update.php"
+			],
+			[
+				"don",
+				"app\\models\\Donation.php"
+			],
+			[
+				"fami",
+				"app\\models\\Family.php"
+			],
+			[
+				"or/u",
+				"app\\views\\order\\update.php"
+			],
+			[
+				"script.",
+				"app\\static\\js\\script.js"
+			],
+			[
+				"ord",
+				"app\\models\\Order.php"
+			],
+			[
+				"ord/up",
+				"app\\views\\order\\update.php"
+			],
+			[
+				"or/in",
+				"app\\views\\order\\index.php"
+			],
+			[
+				"call-pr",
+				"app\\static\\js\\call-process.js"
+			],
+			[
+				"procca",
+				"app\\controllers\\ProcessCallController.php"
+			],
+			[
+				"orderco",
+				"app\\controllers\\OrderController.php"
+			],
+			[
+				"ordc",
+				"app\\controllers\\OrderController.php"
+			],
+			[
+				"emailvali",
+				"app\\vendor\\yiisoft\\yii2\\validators\\EmailValidator.php"
+			],
+			[
+				"projc",
+				"app\\static\\js\\call-process.js"
+			],
+			[
+				"prod/in",
+				"app\\views\\product\\index.php"
+			],
+			[
+				"dona/in",
+				"app\\views\\donation\\index.php"
+			],
+			[
+				"fam/index",
+				"app\\views\\family\\index.php"
+			],
+			[
+				"site/",
+				"app\\views\\site\\index.php"
+			],
+			[
+				"style",
+				"app\\static\\css\\style.css"
+			],
+			[
+				"proces",
+				"app\\views\\process-call\\process.php"
+			],
+			[
+				"call.",
+				"app\\models\\Call.php"
+			],
+			[
+				"donatoincon",
+				"app\\controllers\\DonationController.php"
+			],
+			[
+				"donation/ind",
+				"app\\views\\donation\\index.php"
+			],
+			[
+				"order/index",
+				"app\\views\\order\\index.php"
+			],
+			[
+				"ident",
+				"app\\models\\IdentifiableModel.php"
+			],
+			[
+				"style.cs",
+				"app\\static\\css\\style.css"
+			],
+			[
+				"app.ph",
+				"app\\messages\\nl-NL\\app.php"
+			],
+			[
+				"process-ca",
+				"app\\views\\process-call\\index.php"
+			],
+			[
+				"site",
+				"app\\controllers\\SiteController.php"
+			],
+			[
+				"login",
+				"app\\models\\LoginForm.php"
+			],
+			[
+				"baseh",
+				"app\\vendor\\yiisoft\\yii2\\helpers\\BaseHtml.php"
+			],
+			[
+				"identi",
+				"app\\models\\IdentifiableModel.php"
+			],
+			[
+				"yii.acti",
+				"app\\vendor\\yiisoft\\yii2\\assets\\yii.activeForm.js"
+			],
+			[
+				"datacolu",
+				"app\\vendor\\yiisoft\\yii2\\grid\\DataColumn.php"
+			],
+			[
+				"layout/in",
+				"app\\views\\layouts\\main.php"
+			],
+			[
+				"process-",
+				"app\\views\\process-call\\process.php"
+			],
+			[
+				"main.php",
+				"app\\views\\layouts\\main.php"
+			]
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 500.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 380.0
+	},
+	"select_symbol":
+	{
+		"height": 392.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 632.0
+	},
+	"selected_group": 0,
+	"settings":
+	{
+		"xdebug":
+		{
+			"hide_conflict": false
+		}
+	},
+	"show_minimap": true,
+	"show_open_files": false,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 470.0,
+	"status_bar_visible": true,
+	"template_settings":
+	{
+	}
+}

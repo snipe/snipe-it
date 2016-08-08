@@ -108,7 +108,7 @@ class AuthController extends Controller
                         LOG::debug("Creating local user ".Input::get('username'));
 
                         if ($newuser = Ldap::createUserFromLdap($userattr)) {
-                            LOG::debug("Local user created..");
+                            LOG::debug("Local user created.");
                         } else {
                             LOG::debug("Could not create local user.");
                         }
@@ -131,11 +131,20 @@ class AuthController extends Controller
 
                     LOG::debug("Valid LDAP login. Updating the local data.");
 
-                    $user->password = bcrypt($request->input('password'));
+                    if (Setting::getSettings()->ldap_pw_sync=='1') {
+                        $user->password = bcrypt($request->input('password'));
+                    }
+
                     $user->email = $ldap_attr['email'];
                     $user->first_name = $ldap_attr['firstname'];
                     $user->last_name = $ldap_attr['lastname'];
                     $user->save();
+
+                    if (Setting::getSettings()->ldap_pw_sync!='1') {
+                        Auth::login($user, true);
+                        // Redirect to the users page
+                        return redirect()->to('/home')->with('success', trans('auth/message.signin.success'));
+                    }
 
                 } else {
                     LOG::debug("User ".Input::get('username')." did not authenticate correctly against LDAP. Local user was not updated.");
@@ -146,13 +155,16 @@ class AuthController extends Controller
         // NO LDAP enabled - just try to login the user normally
         }
 
+
         LOG::debug("Authenticating user against database.");
         // Try to log the user in
         if (!Auth::attempt(Input::only('username', 'password'), Input::get('remember-me', 0))) {
             LOG::debug("Local authentication failed.");
-          // throw new Cartalyst\Sentry\Users\UserNotFoundException();
+            // throw new Cartalyst\Sentry\Users\UserNotFoundException();
             return redirect()->back()->withInput()->with('error', trans('auth/message.account_not_found'));
         }
+
+
 
         // Get the page we were before
         $redirect = \Session::get('loginRedirect', 'home');

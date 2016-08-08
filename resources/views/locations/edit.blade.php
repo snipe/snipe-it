@@ -43,7 +43,7 @@
           <div class="form-group {{ $errors->has('name') ? ' has-error' : '' }}">
             <label for="name" class="col-md-3 control-label">{{ trans('admin/locations/table.name') }}
             </label>
-            <div class="col-md-8 required">
+            <div class="col-md-8{{  (\App\Helpers\Helper::checkIfRequired($location, 'name')) ? ' required' : '' }}">
                 <input class="form-control" type="text" name="name" id="name" value="{{ Input::old('name', $location->name) }}" />
                 {!! $errors->first('name', '<span class="alert-msg"><i class="fa fa-times"></i> :message</span>') !!}
             </div>
@@ -55,7 +55,7 @@
             <label for="parent_id" class="col-md-3 control-label">
               {{ trans('admin/locations/table.parent') }}
             </label>
-            <div class="col-md-9">
+            <div class="col-md-9{{  (\App\Helpers\Helper::checkIfRequired($location, 'parent_id')) ? ' required' : '' }}">
               {!! Form::select('parent_id', $location_options , Input::old('parent_id', $location->parent_id), array('class'=>'select2 parent', 'style'=>'width:350px')) !!}
               {!! $errors->first('parent_id', '<span class="alert-msg"><i class="fa fa-times"></i> :message</span>') !!}
             </div>
@@ -66,7 +66,7 @@
                 <label for="currency" class="col-md-3 control-label">
                   {{ trans('admin/locations/table.currency') }}
                 </label>
-                      <div class="col-md-9">
+                      <div class="col-md-9{{  (\App\Helpers\Helper::checkIfRequired($location, 'currency')) ? ' required' : '' }}">
                         {{ Form::text('currency', Input::old('currency', $location->currency), array('class' => 'form-control','placeholder' => 'USD', 'maxlength'=>'3', 'style'=>'width: 60px;')) }}
                         {!! $errors->first('currency', '<span class="alert-msg">:message</span>') !!}
                       </div>
@@ -77,7 +77,7 @@
                     <label for="address" class="col-md-3 control-label">
                       {{ trans('admin/locations/table.address') }}
                     </label>
-                        <div class="col-md-9">
+                        <div class="col-md-9{{  (\App\Helpers\Helper::checkIfRequired($location, 'address')) ? ' required' : '' }}">
                             <input class="form-control" type="text" name="address" id="address" value="{{ Input::old('address', $location->address) }}" />
                             {!! $errors->first('address', '<span class="alert-msg"><i class="fa fa-times"></i> :message</span>') !!}
                         </div>
@@ -94,10 +94,9 @@
 
                 <!-- City -->
                 <div class="form-group {{ $errors->has('city') ? ' has-error' : '' }}">
-                    <label for="city" class="col-md-3 control-label">{{ trans('admin/locations/table.city') }}
-                     <i class='fa fa-asterisk'></i></label>
+                    <label for="city" class="col-md-3 control-label">{{ trans('admin/locations/table.city') }}</label>
                      </label>
-                        <div class="col-md-9">
+                        <div class="col-md-9{{  (\App\Helpers\Helper::checkIfRequired($location, 'city')) ? ' required' : '' }}">
                             <input class="form-control" type="text" name="city" id="city" value="{{ Input::old('city', $location->city) }}" />
                         {!! $errors->first('city', '<span class="alert-msg"><i class="fa fa-times"></i> :message</span>') !!}
                         </div>
@@ -115,7 +114,7 @@
                 <!-- Zip -->
                 <div class="form-group {{ $errors->has('zip') ? ' has-error' : '' }}">
                     <label for="zip" class="col-md-3 control-label">{{ trans('admin/locations/table.zip') }}</label>
-                        <div class="col-md-9">
+                        <div class="col-md-9{{  (\App\Helpers\Helper::checkIfRequired($location, 'zip')) ? ' required' : '' }}">
                             <input class="form-control" type="text" name="zip" id="zip" value="{{ Input::old('zip', $location->zip) }}" />
                         {!! $errors->first('zip', '<span class="alert-msg"><i class="fa fa-times"></i> :message</span>') !!}
                         </div>
@@ -123,10 +122,9 @@
 
                 <!-- Country -->
                 <div class="form-group {{ $errors->has('country') ? ' has-error' : '' }}">
-                    <label for="country" class="col-md-3 control-label">{{ trans('admin/locations/table.country') }}
-                     <i class='fa fa-asterisk'></i></label>
+                    <label for="country" class="col-md-3 control-label">{{ trans('admin/locations/table.country') }}</label>
                      </label>
-                        <div class="col-md-9">
+                        <div class="col-md-9{{  (\App\Helpers\Helper::checkIfRequired($location, 'country')) ? ' required' : '' }}">
                          {!! Form::countries('country', Input::old('country', $location->country), 'select2 country') !!}
                         {!! $errors->first('country', '<span class="alert-msg"><i class="fa fa-times"></i> :message</span>') !!}
                         </div>
