@@ -255,14 +255,26 @@ class ManufacturersController extends Controller
     * @since [v1.0]
     * @return String JSON
     */
-    public function getDataView($manufacturerId)
+    public function getDataView($manufacturerId, $itemtype = null)
     {
 
         $manufacturer = Manufacturer::with('assets.company')->find($manufacturerId);
-        $manufacturer_assets = $manufacturer->assets;
+        $manufacturer_items = null;
+        $route_word = null;
+        switch ($itemtype) {
+            case 'licenses':
+                $manufacturer_items = $manufacturer->licenses;
+                $route_word = "license";
+                break;
+            case 'assets':
+            default:
+                $manufacturer_items = $manufacturer->assets;
+                $route_word = "hardware";
+                break;
+        }
 
         if (Input::has('search')) {
-            $manufacturer_assets = $manufacturer_assets->TextSearch(e(Input::get('search')));
+            $manufacturer_items = $manufacturer_assets->TextSearch(e(Input::get('search')));
         }
 
         if (Input::has('offset')) {
@@ -281,17 +293,17 @@ class ManufacturersController extends Controller
 
         $allowed_columns = ['id','name','serial','asset_tag'];
         $sort = in_array(Input::get('sort'), $allowed_columns) ? Input::get('sort') : 'created_at';
-        $count = $manufacturer_assets->count();
+        $count = $manufacturer_items->count();
 
         $rows = array();
 
-        foreach ($manufacturer_assets as $asset) {
+        foreach ($manufacturer_items as $item) {
 
             $actions = '';
-            if ($asset->deleted_at=='') {
-                $actions = '<div style=" white-space: nowrap;"><a href="'.route('clone/hardware', $asset->id).'" class="btn btn-info btn-sm" title="Clone asset"><i class="fa fa-files-o"></i></a> <a href="'.route('update/hardware', $asset->id).'" class="btn btn-warning btn-sm"><i class="fa fa-pencil icon-white"></i></a> <a data-html="false" class="btn delete-asset btn-danger btn-sm" data-toggle="modal" href="'.route('delete/hardware', $asset->id).'" data-content="'.trans('admin/hardware/message.delete.confirm').'" data-title="'.trans('general.delete').' '.htmlspecialchars($asset->asset_tag).'?" onClick="return false;"><i class="fa fa-trash icon-white"></i></a></div>';
-            } elseif ($asset->deleted_at!='') {
-                $actions = '<a href="'.route('restore/hardware', $asset->id).'" class="btn btn-warning btn-sm"><i class="fa fa-recycle icon-white"></i></a>';
+            if ($item->deleted_at=='') {
+                $actions = '<div style=" white-space: nowrap;"><a href="'.route('clone/'.$route_word, $item->id).'" class="btn btn-info btn-sm" title="Clone item"><i class="fa fa-files-o"></i></a> <a href="'.route('update/'.$route_word, $item->id).'" class="btn btn-warning btn-sm"><i class="fa fa-pencil icon-white"></i></a> <a data-html="false" class="btn delete-asset btn-danger btn-sm" data-toggle="modal" href="'.route('delete/'.$route_word, $item->id).'" data-content="'.trans('admin/hardware/message.delete.confirm').'" data-title="'.trans('general.delete').' '.htmlspecialchars($item->name).'?" onClick="return false;"><i class="fa fa-trash icon-white"></i></a></div>';
+            } elseif ($item->deleted_at!='') {
+                $actions = '<a href="'.route('restore/'.$route_word, $item->id).'" class="btn btn-warning btn-sm"><i class="fa fa-recycle icon-white"></i></a>';
             }
 
             if ($asset->availableForCheckout()) {
@@ -305,14 +317,15 @@ class ManufacturersController extends Controller
             }
 
             $row = array(
-            'id' => $asset->id,
-            'name' => (string)link_to('/hardware/'.$asset->id.'/view', e($asset->showAssetName())),
-            'model' => e($asset->model->name),
-            'asset_tag' => e($asset->asset_tag),
-            'serial' => e($asset->serial),
-            'assigned_to' => ($asset->assigneduser) ? (string)link_to('/admin/users/'.$asset->assigneduser->id.'/view', e($asset->assigneduser->fullName())): '',
+            'id' => $item->id,
+            // 'name' => (string)link_to('/hardware/'.$asset->id.'/view', e($asset->showAssetName())),
+            'name' => (string)link_to('/'.$route_word.'/'.$item->id.'/view', e($item->name)),
+            // 'model' => e($asset->model->name),
+            // 'asset_tag' => e($asset->asset_tag),
+            // 'serial' => e($asset->serial),
+            // 'assigned_to' => ($asset->assigneduser) ? (string)link_to('/admin/users/'.$asset->assigneduser->id.'/view', e($asset->assigneduser->fullName())): '',
             'actions' => $actions,
-            'companyName' => e(Company::getName($asset)),
+            'companyName' => e(Company::getName($item)),
             );
 
             if (isset($inout)) {

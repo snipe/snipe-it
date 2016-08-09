@@ -27,7 +27,11 @@
     <div class="col-md-12">
       <div class="box box-default">
         <div class="box-body">
-
+        <ul id="tab-menu" class="nav nav-tabs">
+            <li role="presentation" class="active" data-toggle="tab"><a href="#" data-itemtype="assets">Assets</a></li>
+            <li role="presentation" data-toggle="tab" ><a href="#" data-itemtype="licenses">Licenses</a></li>
+            <li role="presentation" data-toggle="tab" ><a href="#" data-itemtype="accessory">Accessories</a></li>
+        </ul>
           <table
           name="category_assets"
           class="table table-striped"
@@ -95,6 +99,13 @@
                 refresh: 'fa-refresh'
             },
 
+        });
+
+        $("#tab-menu").click(function(e) {
+                var itemtype = e.target.dataset.itemtype; // asset, license, accessory, etc
+                $('#table').bootstrapTable('refresh', {
+                    url: "{{ route('api.manufacturers.view', $manufacturer->id)}}/"+itemtype,
+                });
         });
     </script>
   @stop
