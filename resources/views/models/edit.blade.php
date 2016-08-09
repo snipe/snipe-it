@@ -41,7 +41,6 @@
           <!-- Model name -->
           <div class="form-group {{ $errors->has('name') ? ' has-error' : '' }}">
             <label for="name" class="col-md-3 control-label">{{ trans('admin/models/table.name') }}</label>
-             </label>
                 <div class="col-md-7 required">
                   <input class="form-control" type="text" name="name" id="name" value="{{ Input::old('name', $model->name) }}" />
                   {!! $errors->first('name', '<span class="alert-msg"><i class="fa fa-times"></i> :message</span>') !!}
@@ -49,20 +48,16 @@
           </div>
 
            <div class="form-group {{ $errors->has('manufacturer_id') ? ' has-error' : '' }}">
-            <label for="manufacturer_id" class="col-md-3 control-label">{{ trans('general.manufacturer') }}
-            </label>
-             </label>
+            <label for="manufacturer_id" class="col-md-3 control-label">{{ trans('general.manufacturer') }}</label>
               <div class="col-md-7 required">
                 {{ Form::select('manufacturer_id', $manufacturer_list , Input::old('manufacturer_id', $model->manufacturer_id), array('class'=>'select2', 'style'=>'width:350px')) }}
                 {!! $errors->first('manufacturer_id', '<span class="alert-msg"><br><i class="fa fa-times"></i> :message</span>') !!}
               </div>
-          </div>
+            </div>
 
           <!-- Category -->
                 <div class="form-group {{ $errors->has('category_id') ? ' has-error' : '' }}">
-                    <label for="category_id" class="col-md-3 control-label">{{ trans('general.category') }}
-                    </label>
-                     </label>
+                    <label for="category_id" class="col-md-3 control-label">{{ trans('general.category') }}</label>
                         <div class="col-md-7 required">
                             {{ Form::select('category_id', $category_list , Input::old('category_id', $model->category_id), array('class'=>'select2', 'style'=>'width:350px')) }}
                             {!! $errors->first('category_id', '<span class="alert-msg"><br><i class="fa fa-times"></i> :message</span>') !!}
@@ -94,9 +89,9 @@
                     <label for="eol" class="col-md-3 control-label">{{ trans('general.eol') }}</label>
                     <div class="col-md-3">
                         <div class="input-group">
-                        <input class="col-md-1 form-control" type="text" name="eol" id="eol" value="{{ Input::old('eol', isset($model->eol)) ? $model->eol : 0  }}" />   <span class="input-group-addon">
-                        {{ trans('general.months') }}
-
+                        <input class="col-md-1 form-control" type="text" name="eol" id="eol" value="{{ Input::old('eol', isset($model->eol)) ? $model->eol : 0  }}" />
+                        <span class="input-group-addon">
+                            {{ trans('general.months') }}
                         </span>
                         {!! $errors->first('eol', '<span class="alert-msg"><br><i class="fa fa-times"></i> :message</span>') !!}
                         </div>
@@ -109,7 +104,6 @@
                   <div class="col-md-7">
                       {{ Form::select('custom_fieldset', \App\Helpers\Helper::customFieldsetList(),Input::old('custom_fieldset', $model->fieldset_id), array('class'=>'select2', 'style'=>'width:350px')) }}
                       {!! $errors->first('custom_fieldset', '<span class="alert-msg"><br><i class="fa fa-times"></i> :message</span>') !!}
-                    </label>
                   </div>
                 </div>
 
@@ -152,7 +146,4 @@
       </div>
     </div>
 
-
-</form>
-</div>
 @stop
