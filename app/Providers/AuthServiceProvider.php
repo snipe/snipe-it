@@ -91,6 +91,12 @@ class AuthServiceProvider extends ServiceProvider
             }
         });
 
+        $gate->define('assets.edit', function ($user) {
+            if (($user->hasAccess('assets.edit')) || ($user->hasAccess('admin'))) {
+                return true;
+            }
+        });
+
         // Checks for some level of management
         $gate->define('assets.manage', function ($user) {
             if (($user->hasAccess('assets.checkin')) || ($user->hasAccess('assets.edit')) || ($user->hasAccess('assets.delete')) || ($user->hasAccess('assets.checkout')) || ($user->hasAccess('admin'))) {
