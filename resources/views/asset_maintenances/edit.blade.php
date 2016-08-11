@@ -42,8 +42,8 @@
           <!-- Asset -->
           <div class="form-group {{ $errors->has('asset_id') ? ' has-error' : '' }}">
               <label for="asset_id" class="col-md-3 control-label">{{ trans('admin/asset_maintenances/table.asset_name') }}
-                  <i class='fa fa-asterisk'></i></label>
-              <div class="col-md-7">
+                 </label>
+              <div class="col-md-7{{  (\App\Helpers\Helper::checkIfRequired($assetMaintenance, 'asset_id')) ? ' required' : '' }}">
                   @if ($selectedAsset == null)
                       {{ Form::select('asset_id', $asset_list , Input::old('asset_id', $assetMaintenance->asset_id), ['class'=>'select2', 'style'=>'min-width:350px']) }}
                   @else
@@ -56,8 +56,8 @@
           <!-- Supplier -->
           <div class="form-group {{ $errors->has('supplier_id') ? ' has-error' : '' }}">
               <label for="supplier_id" class="col-md-3 control-label">{{ trans('admin/asset_maintenances/table.supplier_name') }}
-                  <i class='fa fa-asterisk'></i></label>
-              <div class="col-md-7">
+                 </label>
+              <div class="col-md-7{{  (\App\Helpers\Helper::checkIfRequired($assetMaintenance, 'supplier_id')) ? ' required' : '' }}">
                   {{ Form::select('supplier_id', $supplier_list , Input::old('supplier_id', $assetMaintenance->supplier_id), ['class'=>'select2', 'style'=>'min-width:350px']) }}
                   {!! $errors->first('supplier_id', '<span class="alert-msg"><i class="fa fa-times"></i> :message</span>') !!}
               </div>
@@ -66,8 +66,8 @@
           <!-- Improvement Type -->
           <div class="form-group {{ $errors->has('asset_maintenance_type') ? ' has-error' : '' }}">
               <label for="asset_maintenance_type" class="col-md-3 control-label">{{ trans('admin/asset_maintenances/form.asset_maintenance_type') }}
-                  <i class='fa fa-asterisk'></i></label>
-              <div class="col-md-7">
+              </label>
+              <div class="col-md-7{{  (\App\Helpers\Helper::checkIfRequired($assetMaintenance, 'asset_maintenance_type')) ? ' required' : '' }}">
                   {{ Form::select('asset_maintenance_type', $assetMaintenanceType , Input::old('asset_maintenance_type', $assetMaintenance->asset_maintenance_type), ['class'=>'select2', 'style'=>'min-width:350px']) }}
                   {!! $errors->first('asset_maintenance_type', '<span class="alert-msg"><i class="fa fa-times"></i> :message</span>') !!}
               </div>
@@ -76,9 +76,9 @@
           <!-- Title -->
           <div class="form-group {{ $errors->has('title') ? ' has-error' : '' }}">
               <label for="title" class="col-md-3 control-label">{{ trans('admin/asset_maintenances/form.title') }}
-                  <i class='fa fa-asterisk'></i></label>
+                  </label>
               </label>
-              <div class="col-md-7">
+              <div class="col-md-7{{  (\App\Helpers\Helper::checkIfRequired($assetMaintenance, 'title')) ? ' required' : '' }}">
                   <input class="form-control" type="text" name="title" id="title" value="{{ Input::old('title', $assetMaintenance->title) }}" />
                   {!! $errors->first('title', '<span class="alert-msg"><i class="fa fa-times"></i> :message</span>') !!}
               </div>
@@ -87,8 +87,8 @@
           <!-- Start Date -->
           <div class="form-group {{ $errors->has('start_date') ? ' has-error' : '' }}">
               <label for="start_date" class="col-md-3 control-label">{{ trans('admin/asset_maintenances/form.start_date') }}
-                  <i class='fa fa-asterisk'></i></label>
-              <div class="input-group col-md-2">
+                  </label>
+              <div class="input-group col-md-2{{  (\App\Helpers\Helper::checkIfRequired($assetMaintenance, 'start_date')) ? ' required' : '' }}">
                   <input type="date" class="datepicker form-control" data-date-format="yyyy-mm-dd" placeholder="Select Date" name="start_date" id="start_date" value="{{ Input::old('start_date', $assetMaintenance->start_date) }}">
                   <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
                   {!! $errors->first('start_date', '<span class="alert-msg"><i class="fa fa-times"></i> :message</span>') !!}
