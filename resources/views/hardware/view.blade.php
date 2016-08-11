@@ -413,6 +413,7 @@
                       <th>{{ trans('admin/asset_maintenances/form.asset_maintenance_type') }}</th>
                       <th>{{ trans('admin/asset_maintenances/form.start_date') }}</th>
                       <th>{{ trans('admin/asset_maintenances/form.completion_date') }}</th>
+                      <th>{{ trans('admin/asset_maintenances/form.notes') }}</th>
                       <th>{{ trans('admin/asset_maintenances/table.is_warranty') }}</th>
                       <th>{{ trans('admin/asset_maintenances/form.cost') }}</th>
                       <th>{{ trans('general.admin') }}</th>
@@ -430,6 +431,7 @@
                           <td>{{ $assetMaintenance->asset_maintenance_type }}</td>
                           <td>{{ $assetMaintenance->start_date }}</td>
                           <td>{{ $assetMaintenance->completion_date }}</td>
+                          <td>{{ $assetMaintenance->notes }}</td>
                           <td>{{ $assetMaintenance->is_warranty ? trans('admin/asset_maintenances/message.warranty') : trans('admin/asset_maintenances/message.not_warranty') }}</td>
                           <td class="text-right"><nobr>{{ $use_currency.$assetMaintenance->cost }}</nobr></td>
                           <td>
@@ -448,7 +450,7 @@
                   </tbody>
                   <tfoot>
                   <tr>
-                      <td colspan="7" class="text-right">{{ $use_currency.number_format($totalCost, 2) }}</td>
+                      <td colspan="8" class="text-right">{{ $use_currency.number_format($totalCost, 2) }}</td>
                   </tr>
                   </tfoot>
               </table>
