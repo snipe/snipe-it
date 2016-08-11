@@ -309,7 +309,7 @@ class AssetMaintenancesController extends Controller
                                     '' => 'Select an improvement type',
                                 ] + AssetMaintenance::getImprovementOptions();
 
-        $assets = Company::scopeCompanyables(Asset::all(), 'assets.company_id')->lists('detailed_name', 'id');
+        $assets = Company::scopeCompanyables(Asset::with('model','assignedUser')->get(), 'assets.company_id')->lists('detailed_name', 'id');
         // Get Supplier List
         $supplier_list = Helper::suppliersList();
 
