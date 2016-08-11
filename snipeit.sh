@@ -161,7 +161,7 @@ case $distro in
 		#  Get files and extract to web dir
 		echo ""
 		echo "##  Downloading snipeit and extract to web directory."
-		wget -P $tmp/ https://github.com/snipe/snipe-it/archive/$file >> /var/log/snipeit-install.log 2>&1
+		wget -P $tmp/ https://github.com/snipe/snipe-it/archive/$file
 		unzip -qo $tmp/$file -d $tmp/
 		cp -R $tmp/$fileName $webdir/$name
 
@@ -170,8 +170,8 @@ case $distro in
 		#Enable mcrypt and rewrite
 		echo "##  Enabling mcrypt and rewrite"
 
-		sudo php5enmod mcrypt >> /var/log/snipeit-install.log 2>&1 
-		sudo a2enmod rewrite >> /var/log/snipeit-install.log 2>&1
+		sudo php5enmod mcrypt
+		sudo a2enmod rewrite
 
 		#Create a new virtual host for Apache.
 		echo "##  Create Virtual host for apache."
@@ -204,7 +204,7 @@ case $distro in
 
 		echo "##  Setting up hosts file."
 		echo >> $hosts "127.0.0.1 $hostname $fqdn"
-		a2ensite $name.conf >> /var/log/snipeit-install.log 2>&1
+		a2ensite $name.conf
 
 		#Modify the Snipe-It files necessary for a production environment.
 		echo "##  Modify the Snipe-It files necessary for a production environment."
