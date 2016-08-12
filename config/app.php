@@ -197,6 +197,8 @@ return [
         Collective\Html\HtmlServiceProvider::class,
         Spatie\Backup\BackupServiceProvider::class,
         Fideloper\Proxy\TrustedProxyServiceProvider::class,
+        MisterPhilip\MaintenanceMode\MaintenanceModeServiceProvider::class,
+        MisterPhilip\MaintenanceMode\MaintenanceCommandServiceProvider::class,
 
         /*
          * Custom service provider
