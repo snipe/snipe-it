@@ -23,6 +23,7 @@ use Validator;
 use Artisan;
 use Auth;
 use Config;
+use League\Csv\Reader;
 use DB;
 use Image;
 use Input;
@@ -1001,6 +1002,170 @@ class AssetsController extends Controller
         ->with('category', $category_list)
         ->with('company_list', $company_list);
 
+    }
+
+
+    /**
+     * Return history import view
+     *
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @since [v1.0]
+     * @return View
+     */
+    public function getImportHistory()
+    {
+
+        return View::make('hardware/history');
+    }
+
+    /**
+     * Import history
+     *
+     * This needs a LOT of love. It's done very inelegantly right now, and there are
+     * a ton of optimizations that could (and should) be done.
+     *
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @since [v3.3]
+     * @return View
+     */
+    public function postImportHistory(Request $request)
+    {
+
+        if (!ini_get("auto_detect_line_endings")) {
+            ini_set("auto_detect_line_endings", '1');
+        }
+
+        $assets = Asset::all(['asset_tag']);
+
+        $csv = Reader::createFromPath(Input::file('user_import_csv'));
+        $csv->setNewline("\r\n");
+        //get the first row, usually the CSV header
+        //$headers = $csv->fetchOne();
+
+        $results = $csv->fetchAssoc();
+        $item = array();
+        $errors = array();
+
+
+        foreach($results as $row) {
+
+            if (is_array($row)) {
+
+                $row = array_change_key_case($row, CASE_LOWER);
+                $asset_tag = Helper::array_smart_fetch($row, "asset tag");
+                if (!array_key_exists($asset_tag, $item)) {
+                    $item[$asset_tag] = array();
+                }
+                $batch_counter = count($item[$asset_tag]);
+
+                $item[$asset_tag][$batch_counter]['date'] = date('Y-m-d H:i:s', strtotime(Helper::array_smart_fetch($row, "date")));
+                $item[$asset_tag][$batch_counter]['asset_tag'] = Helper::array_smart_fetch($row, "asset tag");
+                $item[$asset_tag][$batch_counter]['name'] = Helper::array_smart_fetch($row, "name");
+                $item[$asset_tag][$batch_counter]['email'] = Helper::array_smart_fetch($row, "email");
+
+                $asset = Asset::where('asset_tag','=',$asset_tag)->first();
+                $item[$asset_tag][$batch_counter]['asset_id'] = $asset->id;
+
+                $base_username = User::generateFormattedNameFromFullName(Setting::getSettings()->username_format,$item[$asset_tag][$batch_counter]['name']);
+                $user = User::where('username','=',$base_username['username']);
+                $user_query = ' on username '.$base_username['username'];
+
+                if ($request->input('match_firstnamelastname')=='1') {
+                    $firstnamedotlastname = User::generateFormattedNameFromFullName('firstname.lastname',$item[$asset_tag][$batch_counter]['name']);
+                    $item[$asset_tag][$batch_counter]['username'][] = $firstnamedotlastname['username'];
+                    $user->orWhere('username','=',$firstnamedotlastname['username']);
+                    $user_query .= ', or on username '.$firstnamedotlastname['username'];
+                }
+
+                if ($request->input('match_flastname')=='1') {
+                    $flastname = User::generateFormattedNameFromFullName('filastname',$item[$asset_tag][$batch_counter]['name']);
+                    $item[$asset_tag][$batch_counter]['username'][] = $flastname['username'];
+                    $user->orWhere('username','=',$flastname['username']);
+                    $user_query .= ', or on username '.$flastname['username'];
+                }
+                if ($request->input('match_firstname')=='1') {
+                    $firstname = User::generateFormattedNameFromFullName('firstname',$item[$asset_tag][$batch_counter]['name']);
+                    $item[$asset_tag][$batch_counter]['username'][] = $firstname['username'];
+                    $user->orWhere('username','=',$firstname['username']);
+                    $user_query .= ', or on username '.$firstname['username'];
+                }
+                if ($request->input('match_email')=='1') {
+                    if ($item[$asset_tag][$batch_counter]['email']=='') {
+                        $item[$asset_tag][$batch_counter]['username'][] = $user_email = User::generateEmailFromFullName($item[$asset_tag][$batch_counter]['name']);
+                        $user->orWhere('username','=',$user_email);
+                        $user_query .= ', or on username '.$user_email;
+                    }
+                }
+
+                // A matching user was found
+                if ($user = $user->first()) {
+
+                    $status['success'][] = 'Found user '.Helper::array_smart_fetch($row, "name").$user_query;
+
+                    if ($asset) {
+
+                        $item[$asset_tag][$batch_counter]['user_id'] = $user->id;
+
+                        Actionlog::firstOrCreate(array(
+                            'asset_id' => $asset->id,
+                            'asset_type' => 'hardware',
+                            'user_id' =>  Auth::user()->id,
+                            'note' => 'Imported by '.Auth::user()->fullName().' from history importer',
+                            'checkedout_to' => $item[$asset_tag][$batch_counter]['user_id'],
+                            'created_at' =>  $item[$asset_tag][$batch_counter]['date'],
+                            'action_type'   => 'checkout'
+                            )
+                        );
+
+                        $asset->assigned_to = $user->id;
+                        $asset->save();
+
+                    } else {
+                        $status['error'][] = 'Asset does not exist so no checkin log was created.';
+                    }
+
+
+                } else {
+                    $status['error'][] = 'No matching user for '.Helper::array_smart_fetch($row, "name");
+                }
+
+            }
+        }
+
+        // Loop through and backfill the checkins
+        foreach ($item as $key => $asset_batch) {
+            $batch_counter = 0;
+
+            echo '<pre>';
+            print_r($asset_batch);
+            echo '</pre>';
+
+            for($x = 0; $x < count($asset_batch); $x++) {
+                $batch_counter++;
+
+                if ((count($asset_batch) != 1) && ($batch_counter < count($asset_batch))) {
+                    $checkin_date = date('Y-m-d H:i:s',(strtotime($asset_batch[$x]['date']) - 10));
+                    Actionlog::firstOrCreate(array(
+                            'asset_id' => $asset_batch[$x]['asset_id'],
+                            'asset_type' => 'hardware',
+                            'user_id' =>  Auth::user()->id,
+                            'note' => 'Imported by '.Auth::user()->fullName().' from history importer',
+                            'checkedout_to' => null,
+                            'created_at' =>  $checkin_date,
+                            'action_type'   => 'checkin'
+                        )
+                    );
+                }
+
+            }
+
+
+
+
+
+        }
+
+        return View::make('hardware/history')->with('status',$status);
     }
 
 
