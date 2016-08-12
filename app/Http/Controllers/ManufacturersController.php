@@ -5,7 +5,11 @@ use App\Models\Company;
 use App\Models\Manufacturer;
 use App\Models\Setting;
 use Auth;
+<<<<<<< 1ac036095937275b47aac8bf56b6daeb27d9e790
 use Illuminate\Support\Facades\Gate;
+=======
+use Gate;
+>>>>>>> Show table of licenses on manufacturer view page.
 use Input;
 use Lang;
 use Redirect;
@@ -257,24 +261,24 @@ class ManufacturersController extends Controller
     */
     public function getDataView($manufacturerId, $itemtype = null)
     {
-
-        $manufacturer = Manufacturer::with('assets.company')->find($manufacturerId);
-        $manufacturer_items = null;
-        $route_word = null;
         switch ($itemtype) {
-            case 'licenses':
-                $manufacturer_items = $manufacturer->licenses;
-                $route_word = "license";
-                break;
-            case 'assets':
-            default:
-                $manufacturer_items = $manufacturer->assets;
-                $route_word = "hardware";
-                break;
+            case "assets":
+                return $this->getDataAssetsView($manufacturerId);
+            case "licenses":
+                return $this->getDataLicensesView($manufacturerId);
         }
 
+        throw new Exception("We shouldn't be here");
+
+    }
+
+    protected function getDataAssetsView($manufacturerId)
+    {
+        $manufacturer = Manufacturer::with('assets.company')->find($manufacturerId);
+        $manufacturer_assets = $manufacturer->assets;
+
         if (Input::has('search')) {
-            $manufacturer_items = $manufacturer_assets->TextSearch(e(Input::get('search')));
+            $manufacturer_assets = $manufacturer_assets->TextSearch(e(Input::get('search')));
         }
 
         if (Input::has('offset')) {
@@ -293,17 +297,17 @@ class ManufacturersController extends Controller
 
         $allowed_columns = ['id','name','serial','asset_tag'];
         $sort = in_array(Input::get('sort'), $allowed_columns) ? Input::get('sort') : 'created_at';
-        $count = $manufacturer_items->count();
+        $count = $manufacturer_assets->count();
 
         $rows = array();
 
-        foreach ($manufacturer_items as $item) {
+        foreach ($manufacturer_assets as $asset) {
 
             $actions = '';
-            if ($item->deleted_at=='') {
-                $actions = '<div style=" white-space: nowrap;"><a href="'.route('clone/'.$route_word, $item->id).'" class="btn btn-info btn-sm" title="Clone item"><i class="fa fa-files-o"></i></a> <a href="'.route('update/'.$route_word, $item->id).'" class="btn btn-warning btn-sm"><i class="fa fa-pencil icon-white"></i></a> <a data-html="false" class="btn delete-asset btn-danger btn-sm" data-toggle="modal" href="'.route('delete/'.$route_word, $item->id).'" data-content="'.trans('admin/hardware/message.delete.confirm').'" data-title="'.trans('general.delete').' '.htmlspecialchars($item->name).'?" onClick="return false;"><i class="fa fa-trash icon-white"></i></a></div>';
-            } elseif ($item->deleted_at!='') {
-                $actions = '<a href="'.route('restore/'.$route_word, $item->id).'" class="btn btn-warning btn-sm"><i class="fa fa-recycle icon-white"></i></a>';
+            if ($asset->deleted_at=='') {
+                $actions = '<div style=" white-space: nowrap;"><a href="'.route('clone/hardware', $asset->id).'" class="btn btn-info btn-sm" title="Clone asset"><i class="fa fa-files-o"></i></a> <a href="'.route('update/hardware', $asset->id).'" class="btn btn-warning btn-sm"><i class="fa fa-pencil icon-white"></i></a> <a data-html="false" class="btn delete-asset btn-danger btn-sm" data-toggle="modal" href="'.route('delete/hardware', $asset->id).'" data-content="'.trans('admin/hardware/message.delete.confirm').'" data-title="'.trans('general.delete').' '.htmlspecialchars($asset->asset_tag).'?" onClick="return false;"><i class="fa fa-trash icon-white"></i></a></div>';
+            } elseif ($asset->deleted_at!='') {
+                $actions = '<a href="'.route('restore/hardware', $asset->id).'" class="btn btn-warning btn-sm"><i class="fa fa-recycle icon-white"></i></a>';
             }
 
             if ($asset->availableForCheckout()) {
@@ -313,19 +317,17 @@ class ManufacturersController extends Controller
             } else {
                 if (Gate::allows('assets.checkin')) {
                     $inout = '<a href="'.route('checkin/hardware', $asset->id).'" class="btn btn-primary btn-sm">'.trans('general.checkin').'</a>';
-                }
             }
 
             $row = array(
-            'id' => $item->id,
-            // 'name' => (string)link_to('/hardware/'.$asset->id.'/view', e($asset->showAssetName())),
-            'name' => (string)link_to('/'.$route_word.'/'.$item->id.'/view', e($item->name)),
-            // 'model' => e($asset->model->name),
-            // 'asset_tag' => e($asset->asset_tag),
-            // 'serial' => e($asset->serial),
-            // 'assigned_to' => ($asset->assigneduser) ? (string)link_to('/admin/users/'.$asset->assigneduser->id.'/view', e($asset->assigneduser->fullName())): '',
+            'id' => $asset->id,
+            'name' => (string)link_to('/hardware/'.$asset->id.'/view', e($asset->showAssetName())),
+            'model' => e($asset->model->name),
+            'asset_tag' => e($asset->asset_tag),
+            'serial' => e($asset->serial),
+            'assigned_to' => ($asset->assigneduser) ? (string)link_to('/admin/users/'.$asset->assigneduser->id.'/view', e($asset->assigneduser->fullName())): '',
             'actions' => $actions,
-            'companyName' => e(Company::getName($item)),
+            'companyName' => e(Company::getName($asset)),
             );
 
             if (isset($inout)) {
@@ -336,6 +338,70 @@ class ManufacturersController extends Controller
         }
 
         $data = array('total' => $count, 'rows' => $rows);
+        return $data;
+    }
+
+    protected function getDataLicensesView($manufacturerId)
+    {
+        $manufacturer = Manufacturer::with('assets.company')->find($manufacturerId);
+
+        $licenses = $manufacturer->licenses;
+
+        if (Input::has('search')) {
+            $licenses = $licenses->TextSearch(Input::get('search'));
+        }
+
+        $allowed_columns = ['id','name','purchase_cost','expiration_date','purchase_order','order_number','notes','purchase_date','serial'];
+
+        $licenseCount = $licenses->count();
+
+        $rows = array();
+
+        foreach ($licenses as $license) {
+            $actions = '<span style="white-space: nowrap;">';
+
+            if (Gate::allows('licenses.checkout')) {
+                $actions .= '<a href="' . route('freecheckout/license', $license->id)
+                . '" class="btn btn-primary btn-sm' . (($license->remaincount() > 0) ? '' : ' disabled') . '" style="margin-right:5px;">' . trans('general.checkout') . '</a> ';
+            }
+
+            if (Gate::allows('licenses.create')) {
+                $actions .= '<a href="' . route('clone/license', $license->id)
+                . '" class="btn btn-info btn-sm" style="margin-right:5px;" title="Clone asset"><i class="fa fa-files-o"></i></a>';
+            }
+            if (Gate::allows('licenses.edit')) {
+                $actions .= '<a href="' . route('update/license', $license->id)
+                . '" class="btn btn-warning btn-sm" style="margin-right:5px;"><i class="fa fa-pencil icon-white"></i></a>';
+            }
+            if (Gate::allows('licenses.delete')) {
+                $actions .= '<a data-html="false" class="btn delete-asset btn-danger btn-sm" data-toggle="modal" href="'
+                 . route('delete/license', $license->id)
+                 . '" data-content="' . trans('admin/licenses/message.delete.confirm') . '" data-title="' . trans('general.delete') . ' ' . htmlspecialchars($license->name) . '?" onClick="return false;"><i class="fa fa-trash icon-white"></i></a>';
+            }
+            $actions .='</span>';
+
+            $rows[] = array(
+                'id'                => $license->id,
+                'name'              => (string) link_to('/admin/licenses/'.$license->id.'/view', $license->name),
+                'serial'            => (string) link_to('/admin/licenses/'.$license->id.'/view', mb_strimwidth($license->serial, 0, 50, "...")),
+                'totalSeats'        => $license->totalSeatsByLicenseID(),
+                'remaining'         => $license->remaincount(),
+                'license_name'      => e($license->license_name),
+                'license_email'     => e($license->license_email),
+                'purchase_date'     => ($license->purchase_date) ? $license->purchase_date : '',
+                'expiration_date'   => ($license->expiration_date) ? $license->expiration_date : '',
+                'purchase_cost'     => ($license->purchase_cost) ? number_format($license->purchase_cost, 2) : '',
+                'purchase_order'    => ($license->purchase_order) ? e($license->purchase_order) : '',
+                'order_number'      => ($license->order_number) ? e($license->order_number) : '',
+                'notes'             => ($license->notes) ? e($license->notes) : '',
+                'actions'           => $actions,
+                'companyName'       => is_null($license->company) ? '' : e($license->company->name),
+                'manufacturer'      => $license->manufacturer ? (string) link_to('/admin/settings/manufacturers/'.$license->manufacturer_id.'/view', $license->manufacturer->name) : ''
+            );
+        }
+
+        $data = array('total' => $licenseCount, 'rows' => $rows);
+
         return $data;
     }
 }
