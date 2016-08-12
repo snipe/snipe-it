@@ -187,6 +187,19 @@ Route::group(
     'auth']],
     function () {
 
+        Route::get('history', [
+            'as' => 'asset.import-history',
+            'middleware' => 'authorize:assets.checkout',
+            'uses' => 'AssetsController@getImportHistory'
+        ]);
+
+        Route::post('history', [
+            'as' => 'asset.process-import-history',
+            'middleware' => 'authorize:assets.checkout',
+            'uses' => 'AssetsController@postImportHistory'
+        ]);
+
+
         Route::get('create/{model?}', [
                 'as'   => 'create/hardware',
                 'middleware' => 'authorize:assets.create',
