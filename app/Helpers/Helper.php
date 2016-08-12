@@ -429,4 +429,42 @@ class Helper
         }
     }
 
+
+    /**
+     * Check to see if the given key exists in the array, and trim excess white space before returning it
+     *
+     * @author Daniel Melzter
+     * @since 3.0
+     * @param $array array
+     * @param $key string
+     * @param $default string
+     * @return string
+     */
+    public static function array_smart_fetch(array $array, $key, $default = '')
+    {
+       array_change_key_case($array, CASE_LOWER);
+        return array_key_exists(strtolower($key), array_change_key_case($array)) ? e(trim($array[ $key ])) : $default;
+    }
+
+    /**
+     * Check to see if the given key exists in the array, and trim excess white space before returning it
+     *
+     * @author A. Gianotto
+     * @since 3.2
+     * @param $array array
+     * @return string
+     */
+    public static function getLastDateFromHistoryArray(array $array)
+    {
+        foreach ($array as $key => $value) {
+//            echo '<pre>';
+//            echo 'last:'.$key;
+//            print_r($array);
+//            echo '</pre>';
+        }
+    }
+
+
+
+
 }
