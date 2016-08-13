@@ -23,7 +23,7 @@
     <div class="col-md-12">
 
         <h3>
-        Accept {{ $item->name }}</h3>
+        Accept {{ $item->showAssetName() }}</h3>
     </div>
 </div>
 
