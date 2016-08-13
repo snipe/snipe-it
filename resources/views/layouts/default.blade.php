@@ -420,7 +420,6 @@
 
                   <li class="divider">&nbsp;</li>
                     <li{!! (Request::is('hardware/bulkcheckout') ? ' class="active>"' : '') !!}>
-                        <small class="label pull-right bg-orange">{{ trans('general.new')  }}</small>
                         <a href="{{ route('hardware/bulkcheckout') }}">
                             {{ trans('general.bulk_checkout') }}</a>
                     </li>
@@ -428,7 +427,8 @@
                   <li><a href="{{ URL::to('admin/settings/categories') }}" {!! (Request::is('admin/settings/categories*') ? ' class="active"' : '') !!} >@lang('general.categories')</a></li>
                   <li{!! (Request::query('Deleted') ? ' class="active"' : '') !!}><a href="{{ URL::to('hardware?status=Deleted') }}">@lang('general.deleted')</a></li>
                   <li><a href="{{ URL::to('admin/asset_maintenances') }}"  >@lang('general.asset_maintenances') </a></li>
-                  <li><a href="{{ URL::to('hardware/import') }}"  >@lang('general.import') </a></li>
+                  <li><a href="{{ URL::to('hardware/import') }}">@lang('general.import') </a></li>
+                  <li><small class="label pull-right bg-orange">{{ trans('general.new')  }}</small><a href="{{ URL::to('hardware/history') }}">@lang('general.import-history') </a></li>
                 </ul>
               </li>
               @endcan

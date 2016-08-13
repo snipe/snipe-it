@@ -31,35 +31,22 @@
                         @endif
 
                         <p>
-                           Upload a CSV that contains asset history. The assets MUST already exist in the system, or they will be skipped. Matching assets for history import happens against the asset tag.
+                           Upload a CSV that contains asset history. The assets and users MUST already exist in the system, or they will be skipped. Matching assets for history import happens against the asset tag. We will try to find a matching user based on the user's name you provide, and the criteria you select below. If you do not select any criteria below, it will simply try to match on the username format you configured in the Admin &lt; Settings.
                         </p>
 
-                        <p>Fields included in the CSV must match the headers: <strong>Date, Tag, Name, Action</strong>. Any additional fields will be ignored. </p>
+                        <p>Fields included in the CSV must match the headers: <strong>Date, Tag, Name</strong>. Any additional fields will be ignored. </p>
 
-                        <p><strong>Date</strong> should be the checkin/checkout date. <strong>Tag</strong> should be the asset tag. <strong>Name</strong> should be the user's name (firstname lastname). <strong>Action</strong> should be either <strong>checkin</strong> or <strong>checkout</strong>.</p>
-
-                        @if (config('app.lock_passwords'))
-                            <p>Note: Email notification for users is disabled for this installation.</p>
-                        @endif
+                        <p><strong>Date</strong> should be the checkout date. <strong>Tag</strong> should be the asset tag. <strong>Name</strong> should be the user's name (firstname lastname).</p>
 
                         <div class="form-group">
-                        <label for="first_name" class="col-sm-3 control-label">{{ trans('admin/users/general.usercsv') }}</label>
-        				<div class="col-sm-5">
-        					<input type="file" name="user_import_csv" id="user_import_csv">
-        				</div>
-            </div>
+                            <label for="first_name" class="col-sm-3 control-label">{{ trans('admin/users/general.usercsv') }}</label>
+                            <div class="col-sm-9">
+                                <input type="file" name="user_import_csv" id="user_import_csv">
+                            </div>
+                        </div>
 
 
 
-
-    			<!-- Create Users -->
-    			<div class="form-group">
-    				<div class="col-sm-2">
-    				</div>
-    				<div class="col-sm-10">
-    					{{ Form::checkbox('create_users', '1', Input::old('create_users')) }} Create users if they do not exist?
-    				</div>
-    			</div>
 
                 <!-- Match firstname.lastname -->
                 <div class="form-group">
@@ -97,14 +84,6 @@
                     </div>
                 </div>
 
-                <!-- Checkin Date -->
-                <div class="form-group">
-                    <div class="col-sm-2">
-                    </div>
-                    <div class="col-sm-10">
-                        {{ Form::checkbox('checkin_date', '1', Input::old('checkin_date')) }} If no checkin date info is available, should we generate a checkin right before the next checkout?
-                    </div>
-                </div>
 
                </div>
 

@@ -1099,6 +1099,7 @@ class AssetsController extends Controller
 
                 // A matching user was found
                 if ($user = $user->first()) {
+                    $item[$asset_tag][$batch_counter]['checkedout_to'] = $user->id;
 
                     $status['success'][] = 'Found user '.Helper::array_smart_fetch($row, "name").$user_query;
 
@@ -1110,7 +1111,7 @@ class AssetsController extends Controller
                             'asset_id' => $asset->id,
                             'asset_type' => 'hardware',
                             'user_id' =>  Auth::user()->id,
-                            'note' => 'Imported by '.Auth::user()->fullName().' from history importer',
+                            'note' => 'Checkout imported by '.Auth::user()->fullName().' from history importer',
                             'checkedout_to' => $item[$asset_tag][$batch_counter]['user_id'],
                             'created_at' =>  $item[$asset_tag][$batch_counter]['date'],
                             'action_type'   => 'checkout'
@@ -1126,6 +1127,7 @@ class AssetsController extends Controller
 
 
                 } else {
+                    $item[$asset_tag][$batch_counter]['checkedout_to'] = null;
                     $status['error'][] = 'No matching user for '.Helper::array_smart_fetch($row, "name");
                 }
 
@@ -1136,30 +1138,29 @@ class AssetsController extends Controller
         foreach ($item as $key => $asset_batch) {
             $batch_counter = 0;
 
-            echo '<pre>';
-            print_r($asset_batch);
-            echo '</pre>';
-
             for($x = 0; $x < count($asset_batch); $x++) {
+
+                // Only do this if a matching user was found
+                if ($asset_batch[$x]['checkedout_to']!='') {
                 $batch_counter++;
 
-                if ((count($asset_batch) != 1) && ($batch_counter < count($asset_batch))) {
-                    $checkin_date = date('Y-m-d H:i:s',(strtotime($asset_batch[$x]['date']) - 10));
-                    Actionlog::firstOrCreate(array(
-                            'asset_id' => $asset_batch[$x]['asset_id'],
-                            'asset_type' => 'hardware',
-                            'user_id' =>  Auth::user()->id,
-                            'note' => 'Imported by '.Auth::user()->fullName().' from history importer',
-                            'checkedout_to' => null,
-                            'created_at' =>  $checkin_date,
-                            'action_type'   => 'checkin'
-                        )
-                    );
+                    if ((count($asset_batch) != 1) && ($batch_counter < count($asset_batch))) {
+                        
+                        $checkin_date = date('Y-m-d H:i:s',(strtotime($asset_batch[$x]['date']) + 10));
+                        Actionlog::firstOrCreate(array(
+                                'asset_id' => $asset_batch[$x]['asset_id'],
+                                'asset_type' => 'hardware',
+                                'user_id' =>  Auth::user()->id,
+                                'note' => 'Checkin imported by '.Auth::user()->fullName().' from history importer',
+                                'checkedout_to' => null,
+                                'created_at' =>  $checkin_date,
+                                'action_type'   => 'checkin'
+                            )
+                        );
+                    }
                 }
 
             }
-
-
 
 
 
