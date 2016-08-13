@@ -38,6 +38,8 @@
 
                         <p><strong>Date</strong> should be the checkout date. <strong>Tag</strong> should be the asset tag. <strong>Name</strong> should be the user's name (firstname lastname).</p>
 
+                        <p><strong>History should be ordered by date in ascending order.</strong></p>
+
                         <div class="form-group">
                             <label for="first_name" class="col-sm-3 control-label">{{ trans('admin/users/general.usercsv') }}</label>
                             <div class="col-sm-9">

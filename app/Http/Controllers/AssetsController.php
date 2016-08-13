@@ -1044,7 +1044,7 @@ class AssetsController extends Controller
 
         $results = $csv->fetchAssoc();
         $item = array();
-        $errors = array();
+        $status = array();
 
 
         foreach($results as $row) {
@@ -1058,7 +1058,8 @@ class AssetsController extends Controller
                 }
                 $batch_counter = count($item[$asset_tag]);
 
-                $item[$asset_tag][$batch_counter]['date'] = date('Y-m-d H:i:s', strtotime(Helper::array_smart_fetch($row, "date")));
+                $item[$asset_tag][$batch_counter]['checkout_date'] = Carbon::parse(Helper::array_smart_fetch($row, "date"))->format('Y-m-d H:i:s');
+
                 $item[$asset_tag][$batch_counter]['asset_tag'] = Helper::array_smart_fetch($row, "asset tag");
                 $item[$asset_tag][$batch_counter]['name'] = Helper::array_smart_fetch($row, "name");
                 $item[$asset_tag][$batch_counter]['email'] = Helper::array_smart_fetch($row, "email");
@@ -1113,7 +1114,7 @@ class AssetsController extends Controller
                             'user_id' =>  Auth::user()->id,
                             'note' => 'Checkout imported by '.Auth::user()->fullName().' from history importer',
                             'checkedout_to' => $item[$asset_tag][$batch_counter]['user_id'],
-                            'created_at' =>  $item[$asset_tag][$batch_counter]['date'],
+                            'created_at' =>  $item[$asset_tag][$batch_counter]['checkout_date'],
                             'action_type'   => 'checkout'
                             )
                         );
@@ -1136,35 +1137,34 @@ class AssetsController extends Controller
 
         // Loop through and backfill the checkins
         foreach ($item as $key => $asset_batch) {
-            $batch_counter = 0;
-
-            for($x = 0; $x < count($asset_batch); $x++) {
+            $total_in_batch = count($asset_batch);
+            for($x = 0; $x < $total_in_batch; $x++) {
+                $next = $x + 1;
 
                 // Only do this if a matching user was found
                 if ($asset_batch[$x]['checkedout_to']!='') {
-                $batch_counter++;
 
-                    if ((count($asset_batch) != 1) && ($batch_counter < count($asset_batch))) {
-                        
-                        $checkin_date = date('Y-m-d H:i:s',(strtotime($asset_batch[$x]['date']) + 10));
+                    if (($total_in_batch > 1) && ($x < $total_in_batch) && (array_key_exists($next,$asset_batch))) {
+                        $checkin_date = Carbon::parse($asset_batch[$next]['checkout_date'])->subDay(1)->format('Y-m-d H:i:s');
+                        $asset_batch[$x]['real_checkin'] = $checkin_date;
+
                         Actionlog::firstOrCreate(array(
                                 'asset_id' => $asset_batch[$x]['asset_id'],
                                 'asset_type' => 'hardware',
-                                'user_id' =>  Auth::user()->id,
-                                'note' => 'Checkin imported by '.Auth::user()->fullName().' from history importer',
+                                'user_id' => Auth::user()->id,
+                                'note' => 'Checkin imported by ' . Auth::user()->fullName() . ' from history importer',
                                 'checkedout_to' => null,
-                                'created_at' =>  $checkin_date,
-                                'action_type'   => 'checkin'
+                                'created_at' => $checkin_date,
+                                'action_type' => 'checkin'
                             )
                         );
                     }
                 }
 
+
             }
-
-
-
         }
+
 
         return View::make('hardware/history')->with('status',$status);
     }
