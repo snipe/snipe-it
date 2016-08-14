@@ -261,20 +261,23 @@ class ManufacturersController extends Controller
     */
     public function getDataView($manufacturerId, $itemtype = null)
     {
+        $manufacturer = Manufacturer::with('assets.company')->find($manufacturerId);
+
         switch ($itemtype) {
             case "assets":
-                return $this->getDataAssetsView($manufacturerId);
+                return $this->getDataAssetsView($manufacturer);
             case "licenses":
-                return $this->getDataLicensesView($manufacturerId);
+                return $this->getDataLicensesView($manufacturer);
+            case "accessories":
+                return $this->getDataAccessoriesView($manufacturer);
         }
 
         throw new Exception("We shouldn't be here");
 
     }
 
-    protected function getDataAssetsView($manufacturerId)
+    protected function getDataAssetsView(Manufacturer $manufacturer)
     {
-        $manufacturer = Manufacturer::with('assets.company')->find($manufacturerId);
         $manufacturer_assets = $manufacturer->assets;
 
         if (Input::has('search')) {
@@ -341,17 +344,13 @@ class ManufacturersController extends Controller
         return $data;
     }
 
-    protected function getDataLicensesView($manufacturerId)
+    protected function getDataLicensesView(Manufacturer $manufacturer)
     {
-        $manufacturer = Manufacturer::with('assets.company')->find($manufacturerId);
-
         $licenses = $manufacturer->licenses;
 
         if (Input::has('search')) {
             $licenses = $licenses->TextSearch(Input::get('search'));
         }
-
-        $allowed_columns = ['id','name','purchase_cost','expiration_date','purchase_order','order_number','notes','purchase_date','serial'];
 
         $licenseCount = $licenses->count();
 
@@ -401,6 +400,64 @@ class ManufacturersController extends Controller
         }
 
         $data = array('total' => $licenseCount, 'rows' => $rows);
+
+        return $data;
+    }
+
+    public function getDataAccessoriesView(Manufacturer $manufacturer)
+    {
+        $accessories = $manufacturer->accessories;
+
+        if (Input::has('search')) {
+            $accessories = $accessories->TextSearch(e(Input::get('search')));
+        }
+
+        if (Input::has('limit')) {
+            $limit = e(Input::get('limit'));
+        } else {
+            $limit = 50;
+        }
+
+        $accessCount = $accessories->count();
+
+        $rows = array();
+
+        foreach ($accessories as $accessory) {
+
+            $actions = '<nobr>';
+            if (Gate::allows('accessories.checkout')) {
+                $actions .= '<a href="' . route('checkout/accessory',
+                        $accessory->id) . '" style="margin-right:5px;" class="btn btn-info btn-sm" ' . (($accessory->numRemaining() > 0) ? '' : ' disabled') . '>' . trans('general.checkout') . '</a>';
+            }
+            if (Gate::allows('accessories.edit')) {
+                $actions .= '<a href="' . route('update/accessory',
+                        $accessory->id) . '" class="btn btn-warning btn-sm" style="margin-right:5px;"><i class="fa fa-pencil icon-white"></i></a>';
+            }
+            if (Gate::allows('accessories.delete')) {
+                $actions .= '<a data-html="false" class="btn delete-asset btn-danger btn-sm" data-toggle="modal" href="' . route('delete/accessory',
+                        $accessory->id) . '" data-content="' . trans('admin/accessories/message.delete.confirm') . '" data-title="' . trans('general.delete') . ' ' . htmlspecialchars($accessory->name) . '?" onClick="return false;"><i class="fa fa-trash icon-white"></i></a>';
+            }
+            $actions .= '</nobr>';
+            $company = $accessory->company;
+
+            $rows[] = array(
+            'name'          => '<a href="'.url('admin/accessories/'.$accessory->id).'/view">'. $accessory->name.'</a>',
+            'category'      => ($accessory->category) ? (string)link_to('admin/settings/categories/'.$accessory->category->id.'/view', $accessory->category->name) : '',
+            'qty'           => e($accessory->qty),
+            'order_number'  => e($accessory->order_number),
+            'min_amt'  => e($accessory->min_amt),
+            'location'      => ($accessory->location) ? e($accessory->location->name): '',
+            'purchase_date' => e($accessory->purchase_date),
+            'purchase_cost' => number_format($accessory->purchase_cost, 2),
+            'numRemaining'  => $accessory->numRemaining(),
+            'actions'       => $actions,
+            'companyName'   => is_null($company) ? '' : e($company->name),
+            'manufacturer'      => $accessory->manufacturer ? (string) link_to('/admin/settings/manufacturers/'.$accessory->manufacturer_id.'/view', $accessory->manufacturer->name) : ''
+
+            );
+        }
+
+        $data = array('total'=>$accessCount, 'rows'=>$rows);
 
         return $data;
     }

@@ -51,6 +51,11 @@ class Manufacturer extends Model
         return $this->hasMany('\App\Models\License', 'manufacturer_id');
     }
 
+    public function accessories()
+    {
+        return $this->hasMany('\App\Models\Accessory', 'manufacturer_id');
+    }
+
     /**
     * Query builder scope to search on text
     *
