@@ -215,7 +215,7 @@
 
 
                                </span>
-                               <input class="col-md-2 form-control" type="text" name="purchase_cost" id="purchase_cost" value="{{ Input::old('purchase_cost', number_format($asset->purchase_cost,2, '.', '')) }}" />
+                               <input class="col-md-2 form-control" type="text" name="purchase_cost" id="purchase_cost" value="{{ Input::old('purchase_cost', \App\Helpers\Helper::parseCurrencyString($asset->purchase_cost)) }}" />
                                {!! $errors->first('purchase_cost', '<span class="alert-msg"><i class="fa fa-times"></i> :message</span>') !!}
                         </div>
                 </div>

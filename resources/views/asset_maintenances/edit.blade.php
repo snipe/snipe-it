@@ -122,7 +122,7 @@
               <div class="col-md-2">
                   <div class="input-group">
                       <span class="input-group-addon">{{ \App\Models\Setting::first()->default_currency }}</span>
-                      <input class="col-md-2 form-control" type="text" name="cost" id="cost" value="{{ Input::old('cost', number_format($assetMaintenance->cost,2)) }}" />
+                      <input class="col-md-2 form-control" type="text" name="cost" id="cost" value="{{ Input::old('cost', \App\Helpers\Helper::parseCurrencyString($assetMaintenance->cost)) }}" />
                       {!! $errors->first('cost', '<span class="alert-msg"><i class="fa fa-times"></i> :message</span>') !!}
                   </div>
               </div>

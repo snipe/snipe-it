@@ -246,7 +246,7 @@
                       </td>
                       <td>
                         {{ \App\Models\Setting::first()->default_currency }}
-                        {{ number_format($license->purchase_cost,2) }}
+                        {{ \App\Helpers\Helper::parseCurrencyString($license->purchase_cost) }}
                       </td>
                     </tr>
                     @endif

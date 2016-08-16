@@ -476,7 +476,7 @@ class ConsumablesController extends Controller
                 'category'           => ($consumable->category) ? e($consumable->category->name) : 'Missing category',
                 'order_number'  => e($consumable->order_number),
                 'purchase_date'  => e($consumable->purchase_date),
-                'purchase_cost'  => ($consumable->purchase_cost!='') ? number_format($consumable->purchase_cost, 2): '' ,
+                'purchase_cost'  => Helper::parseCurrencyString($consumable->purchase_cost),
                 'numRemaining'  => $consumable->numRemaining(),
                 'actions'       => $actions,
                 'companyName'   => is_null($company) ? '' : e($company->name),

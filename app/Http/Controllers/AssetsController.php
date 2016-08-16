@@ -354,7 +354,7 @@ class AssetsController extends Controller
         }
 
         if ($request->has('purchase_cost')) {
-            $asset->purchase_cost = e(number_format($request->input('purchase_cost'), 2, '.', ''));
+            $asset->purchase_cost = e(Helper::parseCurrencyString($request->input('purchase_cost')));
         } else {
             $asset->purchase_cost =  null;
         }
@@ -1741,11 +1741,7 @@ class AssetsController extends Controller
                 }
             }
 
-            // Lots going on here.  Importer has parsed numbers before importing, so we need to check and see if it's a number before trying to parse.
-            $purchase_cost = $asset->purchase_cost ?: '';
-            if (is_numeric($purchase_cost)) {
-                $purchase_cost = number_format($purchase_cost, 2);
-            }
+            $purchase_cost = Helper::parseCurrencyString($asset->purchase_cost);
 
             $row = array(
             'checkbox'      =>'<div class="text-center"><input type="checkbox" name="edit_asset['.$asset->id.']" class="one_required"></div>',
