@@ -1,13 +1,14 @@
 <?php
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Helpers\Helper;
 use App\Models\Category as Category;
 use App\Models\Company;
 use App\Models\Setting;
 use Auth;
 use DB;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 use Input;
 use Lang;
 use Redirect;
@@ -344,13 +345,13 @@ class CategoriesController extends Controller
                 $actions = '<a href="'.route('restore/hardware', $asset->id).'" class="btn btn-warning btn-sm"><i class="fa fa-recycle icon-white"></i></a>';
             }
 
-            if ($asset->assetstatus) {
-                if ($asset->assetstatus->deployable != 0) {
-                    if (($asset->assigned_to !='') && ($asset->assigned_to > 0)) {
-                        $inout = '<a href="'.route('checkin/hardware', $asset->id).'" class="btn btn-primary btn-sm">'.trans('general.checkin').'</a>';
-                    } else {
-                        $inout = '<a href="'.route('checkout/hardware', $asset->id).'" class="btn btn-info btn-sm">'.trans('general.checkout').'</a>';
-                    }
+            if ($asset->availableForCheckout()) {
+                if (Gate::allows('assets.checkout')) {
+                    $inout = '<a href="'.route('checkout/hardware', $asset->id).'" class="btn btn-info btn-sm">'.trans('general.checkout').'</a>';
+                }
+            } else {
+                if (Gate::allows('assets.checkin')) {
+                    $inout = '<a href="'.route('checkin/hardware', $asset->id).'" class="btn btn-primary btn-sm">'.trans('general.checkin').'</a>';
                 }
             }
 
