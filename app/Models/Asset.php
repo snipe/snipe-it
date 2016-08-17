@@ -55,6 +55,7 @@ class Asset extends Depreciable
     'supplier_id'     => 'integer',
     'asset_tag'       => 'required|min:1|max:255|unique_undeleted',
     'status'          => 'integer',
+    'purchase_cost'   => 'numeric',
     ];
 
 
