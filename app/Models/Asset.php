@@ -98,7 +98,11 @@ class Asset extends Depreciable
         $this->last_checkout = $checkout_at;
 
         $this->assigneduser()->associate($user);
-        $this->name = $name;
+
+        if($name != null)
+        {
+            $this->name = $name;
+        }
 
         $settings = Setting::getSettings();
 
