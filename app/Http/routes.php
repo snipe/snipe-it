@@ -78,7 +78,7 @@ Route::group([ 'prefix' => 'api', 'middleware' => 'auth' ], function () {
     /*---Manufacturers API---*/
     Route::group(array('prefix'=>'manufacturers'), function () {
         Route::get('list', array('as'=>'api.manufacturers.list', 'uses'=>'ManufacturersController@getDatatable'));
-        Route::get('{manufacturerID}/view', array('as'=>'api.manufacturers.view', 'uses'=>'ManufacturersController@getDataView'));
+        Route::get('{manufacturerID}/view/{itemtype}', array('as'=>'api.manufacturers.view', 'uses'=>'ManufacturersController@getDataView'));
     });
 
     /*---Suppliers API---*/

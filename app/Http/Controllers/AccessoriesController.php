@@ -53,14 +53,12 @@ class AccessoriesController extends Controller
     public function getCreate(Request $request)
     {
         // Show the page
-        $category_list = Helper::categoryList('accessory');
-        $company_list = Helper::companyList();
-        $location_list = Helper::locationsList();
         return View::make('accessories/edit')
           ->with('accessory', new Accessory)
-          ->with('category_list', $category_list)
-          ->with('company_list', $company_list)
-          ->with('location_list', $location_list);
+          ->with('category_list', Helper::categoryList('accessory'))
+          ->with('company_list', Helper::companyList())
+          ->with('location_list', Helper::locationsList())
+          ->with('manufacturer_list', Helper::manufacturerList());
     }
 
 
@@ -77,12 +75,13 @@ class AccessoriesController extends Controller
         $accessory = new Accessory();
 
         // Update the accessory data
-        $accessory->name                  = e(Input::get('name'));
-        $accessory->category_id               = e(Input::get('category_id'));
-        $accessory->location_id               = e(Input::get('location_id'));
-        $accessory->min_amt               = e(Input::get('min_amt'));
+        $accessory->name                    = e(Input::get('name'));
+        $accessory->category_id             = e(Input::get('category_id'));
+        $accessory->location_id             = e(Input::get('location_id'));
+        $accessory->min_amt                 = e(Input::get('min_amt'));
         $accessory->company_id              = Company::getIdForCurrentUser(Input::get('company_id'));
         $accessory->order_number            = e(Input::get('order_number'));
+        $accessory->manufacturer_id         = e(Input::get('manufacturer_id'));
 
         if (e(Input::get('purchase_date')) == '') {
             $accessory->purchase_date       =  null;
@@ -96,8 +95,8 @@ class AccessoriesController extends Controller
             $accessory->purchase_cost       = e(Input::get('purchase_cost'));
         }
 
-        $accessory->qty                       = e(Input::get('qty'));
-        $accessory->user_id               = Auth::user()->id;
+        $accessory->qty                     = e(Input::get('qty'));
+        $accessory->user_id                 = Auth::user()->id;
 
         // Was the accessory created?
         if ($accessory->save()) {
@@ -126,14 +125,11 @@ class AccessoriesController extends Controller
             return redirect()->to('admin/accessories')->with('error', trans('general.insufficient_permissions'));
         }
 
-        $category_list = Helper::categoryList('accessory');
-        $company_list = Helper::companyList();
-        $location_list = Helper::locationsList();
-
         return View::make('accessories/edit', compact('accessory'))
-          ->with('category_list', $category_list)
-          ->with('company_list', $company_list)
-          ->with('location_list', $location_list);
+          ->with('category_list', Helper::categoryList('accessory'))
+          ->with('company_list', Helper::companyList())
+          ->with('location_list', Helper::locationsList())
+          ->with('manufacturer_list', Helper::manufacturerList());
     }
 
 
@@ -146,9 +142,9 @@ class AccessoriesController extends Controller
    */
     public function postEdit(Request $request, $accessoryId = null)
     {
-      // Check if the blog post exists
+      // Check if the accessory exists
         if (is_null($accessory = Accessory::find($accessoryId))) {
-            // Redirect to the blogs management page
+            // Redirect to the accessory index page
             return redirect()->to('admin/accessories')->with('error', trans('admin/accessories/message.does_not_exist'));
         } elseif (!Company::isCurrentUserHasAccess($accessory)) {
             return redirect()->to('admin/accessories')->with('error', trans('general.insufficient_permissions'));
@@ -160,11 +156,12 @@ class AccessoriesController extends Controller
         if (e(Input::get('location_id')) == '') {
             $accessory->location_id = null;
         } else {
-            $accessory->location_id     = e(Input::get('location_id'));
+            $accessory->location_id         = e(Input::get('location_id'));
         }
-        $accessory->min_amt             = e(Input::get('min_amt'));
+        $accessory->min_amt                 = e(Input::get('min_amt'));
         $accessory->category_id             = e(Input::get('category_id'));
         $accessory->company_id              = Company::getIdForCurrentUser(Input::get('company_id'));
+        $accessory->manufacturer_id         = e(Input::get('manufacturer_id'));
         $accessory->order_number            = e(Input::get('order_number'));
 
         if (e(Input::get('purchase_date')) == '') {
@@ -181,9 +178,9 @@ class AccessoriesController extends Controller
 
         $accessory->qty                     = e(Input::get('qty'));
 
-      // Was the accessory created?
+      // Was the accessory updated?
         if ($accessory->save()) {
-            // Redirect to the new accessory page
+            // Redirect to the updated accessory page
             return redirect()->to("admin/accessories")->with('success', trans('admin/accessories/message.update.success'));
         }
 
@@ -620,7 +617,9 @@ class AccessoriesController extends Controller
             'purchase_cost' => number_format($accessory->purchase_cost, 2),
             'numRemaining'  => $accessory->numRemaining(),
             'actions'       => $actions,
-            'companyName'   => is_null($company) ? '' : e($company->name)
+            'companyName'   => is_null($company) ? '' : e($company->name),
+            'manufacturer'      => $accessory->manufacturer ? (string) link_to('/admin/settings/manufacturers/'.$accessory->manufacturer_id.'/view', $accessory->manufacturer->name) : ''
+
             );
         }
 

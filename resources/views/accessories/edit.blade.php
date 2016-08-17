@@ -86,6 +86,18 @@
                 </div>
         </div>
 
+        <!-- Manufacturer -->
+        <div class="form-group {{ $errors->has('manufacturer_id') ? ' has-error' : '' }}">
+        <div class="col-md-3">
+            {{ Form::label('manufacturer_id', trans('general.manufacturer')) }}
+        </div>
+        </label>
+          <div class="col-md-7">
+            {{ Form::select('manufacturer_id', $manufacturer_list , Input::old('manufacturer_id', $accessory->manufacturer_id), array('class'=>'select2', 'style'=>'width:350px')) }}
+            {!! $errors->first('manufacturer_id', '<span class="alert-msg"><br><i class="fa fa-times"></i> :message</span>') !!}
+          </div>
+        </div>
+
         <!--  Location -->
         <div class="form-group{{ $errors->has('location_id') ? ' has-error' : '' }}">
            <div class="col-md-3">

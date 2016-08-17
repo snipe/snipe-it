@@ -136,6 +136,13 @@
                     </tr>
                     @endif
 
+                    @if (!is_null($license->manufacturer))
+                    <tr>
+                      <td>{{ trans('general.manufacturer') }}</td>
+                      <td>{{ $license->manufacturer->name }}</td>
+                    </tr>
+                    @endif
+
                     @can('licenses.keys')
                         @if (!is_null($license->serial))
                         <tr>
