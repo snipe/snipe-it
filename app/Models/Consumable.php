@@ -29,6 +29,7 @@ class Consumable extends Model
         'category_id' => 'required|integer',
         'company_id'  => 'integer',
         'min_amt'     => 'integer|min:1',
+        'purchase_cost'   => 'numeric',
     );
 
     /**

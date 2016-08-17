@@ -34,6 +34,7 @@ class Component extends Model
         'category_id' => 'required|integer',
         'company_id'  => 'integer',
         'purchase_date'  => 'date',
+        'purchase_cost'   => 'numeric',
     );
 
     /**
