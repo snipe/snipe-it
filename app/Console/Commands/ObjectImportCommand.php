@@ -102,7 +102,7 @@ class ObjectImportCommand extends Command
         $this->companies = Company::All(['name', 'id']);
         $this->status_labels = Statuslabel::All(['name', 'id']);
         $this->suppliers = Supplier::All(['name', 'id']);
-        $this->assets = Asset::all(['asset_tag']);
+        $this->assets = Asset::all();
         $this->accessories = Accessory::All(['name']);
         $this->consumables = Consumable::All(['name']);
         $this->customfields = CustomField::All(['name']);
@@ -732,6 +732,24 @@ class ObjectImportCommand extends Command
      */
     public function createAssetIfNotExists(array $row, array $item)
     {
+        $asset = null;
+        $editingAsset = false;
+        foreach ($this->assets as $tempasset) {
+            if (strcasecmp($tempasset->asset_tag, $item['asset_tag']) == 0) {
+                $this->log('A matching Asset ' . $item['asset_tag'] . ' already exists');
+                if(!$this->option('update')) {
+                    $this->log("Skipping item.");
+                    return;
+                }
+                $this->log('Updating matching asset with new values');
+                $editingAsset = true;
+                $asset = $tempasset;
+            }
+        }
+        if (is_null($asset)) {
+            $this->log("No Matching Asset, Creating a new one");
+            $asset = new Asset;
+        }
         $asset_serial = $this->array_smart_fetch($row, "serial number");
         $asset_image = $this->array_smart_fetch($row, "image");
         $asset_warranty_months = intval($this->array_smart_fetch($row, "warranty months"));
@@ -747,12 +765,7 @@ class ObjectImportCommand extends Command
         $this->log('Notes: '.$item["notes"]);
         $this->log('Warranty Months: ' . $asset_warranty_months);
 
-        foreach ($this->assets as $tempasset) {
-            if (strcasecmp($tempasset->asset_tag, $item['asset_tag']) == 0) {
-                $this->log('A matching Asset ' . $item['asset_tag'] . ' already exists');
-                return;
-            }
-        }
+
 
         if ($item["status_label"]) {
             $status_id = $item["status_label"]->id;
@@ -763,12 +776,14 @@ class ObjectImportCommand extends Command
             $status_id = 1;
         }
 
-        $asset = new Asset();
-        $asset->name = $item["item_name"];
-        if ($item["purchase_date"] != '') {
+        if (!$editingAsset) {
+            $asset->asset_tag = $item['asset_tag']; // This doesn't need to be guarded for empty because it's the key we use to identify the asset.
+        }
+        if (!empty($item['item_name'])) {
+            $asset->name = $item["item_name"];
+        }
+        if (!empty($item["purchase_date"])) {
             $asset->purchase_date = $item["purchase_date"];
-        } else {
-            $asset->purchase_date = null;
         }
 
         if (array_key_exists('custom_fields', $item)) {
@@ -785,32 +800,47 @@ class ObjectImportCommand extends Command
         } else {
             $asset->purchase_cost = 0.00;
         }
-        $asset->serial = $asset_serial;
-        $asset->asset_tag = $item['asset_tag'];
-                $asset->warranty_months = $asset_warranty_months;
+        if (!empty($asset_serial)) {
+            $asset->serial = $asset_serial;
+        }
+        if (!empty($asset_warranty_months)) {
+            $asset->warranty_months = $asset_warranty_months;
+        }
 
         if ($asset_model) {
             $asset->model_id = $asset_model->id;
         }
+
         if ($item["user"]) {
             $asset->assigned_to = $item["user"]->id;
         }
+
         if ($item["location"]) {
             $asset->rtd_location_id = $item["location"]->id;
         }
+
         $asset->user_id = $this->option('user_id');
-        $this->log("status_id: " . $status_id);
-        $asset->status_id = $status_id;
+        if (!empty($status_id)) {
+            $asset->status_id = $status_id;
+        }
         if ($item["company"]) {
             $asset->company_id = $item["company"]->id;
         }
-        $asset->order_number = $item["order_number"];
+        if ($item["order_number"]) {
+            $asset->order_number = $item["order_number"];
+        }
         if ($supplier) {
             $asset->supplier_id = $supplier->id;
         }
-        $asset->notes = $item["notes"];
-        $asset->image = $asset_image;
-        $this->assets->add($asset);
+        if ($item["notes"]) {
+            $asset->notes = $item["notes"];
+        }
+        if (!empty($asset_image)) {
+            $asset->image = $asset_image;
+        }
+        if (!$editingAsset) {
+            $this->assets->add($asset);
+        }
         if (!$this->option('testrun')) {
 
             if ($asset->save()) {
@@ -853,10 +883,9 @@ class ObjectImportCommand extends Command
             $accessory->purchase_date = null;
         }
         if (!empty($item["purchase_cost"])) {
-            $accessory->purchase_cost = number_format(e($item["purchase_cost"]), 2);
-        } else {
-            $accessory->purchase_cost = 0.00;
+            $accessory->purchase_cost = $item["purchase_cost"];
         }
+
         if ($item["location"]) {
             $accessory->location_id = $item["location"]->id;
         }
@@ -923,9 +952,7 @@ class ObjectImportCommand extends Command
         }
 
         if (!empty($item["purchase_cost"])) {
-            $consumable->purchase_cost = number_format(e($item["purchase_cost"]), 2);
-        } else {
-            $consumable->purchase_cost = 0.00;
+            $consumable->purchase_cost = $item["purchase_cost"];
         }
         $consumable->location_id = $item["location"]->id;
         $consumable->user_id = $this->option('user_id');
@@ -985,8 +1012,9 @@ class ObjectImportCommand extends Command
         array('testrun', null, InputOption::VALUE_NONE, 'If set, will parse and output data without adding to database', null),
         array('logfile', null, InputOption::VALUE_REQUIRED, 'The path to log output to.  storage/logs/importer.log by default', storage_path('logs/importer.log') ),
         array('item-type', null, InputOption::VALUE_REQUIRED, 'Item Type To import.  Valid Options are Asset, Consumable, Or Accessory', 'Asset'),
-                array('web-importer', null, InputOption::VALUE_NONE, 'Internal: packages output for use with the web importer'),
-                array('user_id', null, InputOption::VALUE_REQUIRED, 'ID of user creating items', 1)
+        array('web-importer', null, InputOption::VALUE_NONE, 'Internal: packages output for use with the web importer'),
+        array('user_id', null, InputOption::VALUE_REQUIRED, 'ID of user creating items', 1),
+        array('update', null, InputOption::VALUE_NONE, 'If a matching item is found, update item information'),
         );
 
     }
