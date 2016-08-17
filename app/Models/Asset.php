@@ -55,6 +55,7 @@ class Asset extends Depreciable
     'supplier_id'     => 'integer',
     'asset_tag'       => 'required|min:1|max:255|unique_undeleted',
     'status'          => 'integer',
+    'purchase_cost'   => 'numeric',
     ];
 
 
@@ -72,16 +73,26 @@ class Asset extends Depreciable
     }
 
 
-
+    public function availableForCheckout()
+    {
+      return (
+          empty($this->assigned_to) &&
+          $this->assetstatus->deployable == 1 &&
+          empty($this->deleted_at)
+        );
+    }
 
   /**
   * Checkout asset
   */
     public function checkOutToUser($user, $admin, $checkout_at = null, $expected_checkin = null, $note = null, $name = null)
     {
+        if (!$user) {
+            return false;
+        }
 
         if ($expected_checkin) {
-            $this->expected_checkin = $expected_checkin ;
+            $this->expected_checkin = $expected_checkin;
         }
 
         $this->last_checkout = $checkout_at;
@@ -95,9 +106,7 @@ class Asset extends Depreciable
             $this->accepted="pending";
         }
 
-        if (!$user) {
-            return false;
-        }
+
 
         if ($this->save()) {
 

@@ -530,6 +530,8 @@ class AssetsController extends Controller
             return redirect()->to('hardware')->with('error', trans('admin/hardware/message.does_not_exist'));
         } elseif (!Company::isCurrentUserHasAccess($asset)) {
             return redirect()->to('hardware')->with('error', trans('general.insufficient_permissions'));
+        } elseif (!$asset->availableForCheckout()) {
+            return redirect()->to('hardware')->with('error', trans('admin/hardware/message.checkout.not_available'));
         }
 
         $user = User::find(e(Input::get('assigned_to')));
@@ -1725,19 +1727,17 @@ class AssetsController extends Controller
                 $actions = '<a href="'.route('restore/hardware', $asset->id).'" title="Restore asset" data-toggle="tooltip" class="btn btn-warning btn-sm"><i class="fa fa-recycle icon-white"></i></a>';
             }
 
-            if ($asset->assetstatus) {
-                if (($asset->assetstatus->deployable != 0) && ($asset->deleted_at=='')) {
-                    if (($asset->assigned_to !='') && ($asset->assigned_to > 0)) {
-                        if (Gate::allows('assets.checkin')) {
-                            $inout = '<a href="' . route('checkin/hardware',
-                                    $asset->id) . '" class="btn btn-primary btn-sm" title="Checkin this asset" data-toggle="tooltip">' . trans('general.checkin') . '</a>';
-                        }
-                    } else {
-                        if (Gate::allows('assets.checkout')) {
-                            $inout = '<a href="' . route('checkout/hardware',
-                                    $asset->id) . '" class="btn btn-info btn-sm" title="Checkout this asset to a user" data-toggle="tooltip">' . trans('general.checkout') . '</a>';
-                        }
-                    }
+            if (($asset->availableForCheckout()))
+            {
+                if (Gate::allows('assets.checkout')) {
+                    $inout = '<a href="' . route('checkout/hardware',
+                            $asset->id) . '" class="btn btn-info btn-sm" title="Checkout this asset to a user" data-toggle="tooltip">' . trans('general.checkout') . '</a>';
+                }
+
+            } else {
+                if (Gate::allows('assets.checkin')) {
+                    $inout = '<a href="' . route('checkin/hardware',
+                            $asset->id) . '" class="btn btn-primary btn-sm" title="Checkin this asset" data-toggle="tooltip">' . trans('general.checkin') . '</a>';
                 }
             }
 

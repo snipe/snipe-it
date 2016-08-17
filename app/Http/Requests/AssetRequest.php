@@ -37,6 +37,7 @@ class AssetRequest extends Request
           'supplier_id'     => 'integer',
           'status'          => 'integer',
           'asset_tag'       => 'required',
+          'purchase_cost'   => 'numeric',
     
         ];
 
