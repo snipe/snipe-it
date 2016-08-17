@@ -154,7 +154,7 @@
                           @else
                             {{ \App\Models\Setting::first()->default_currency }}
                           @endif
-                          {{ \App\Helpers\Helper::parseCurrencyString($asset->purchase_cost)}}
+                          {{ \App\Helpers\Helper::formatCurrencyOutput($asset->purchase_cost)}}
 
                           @if ($asset->order_number)
                               (Order #{{ $asset->order_number }})

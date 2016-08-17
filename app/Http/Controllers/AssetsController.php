@@ -354,7 +354,7 @@ class AssetsController extends Controller
         }
 
         if ($request->has('purchase_cost')) {
-            $asset->purchase_cost = e(Helper::parseCurrencyString($request->input('purchase_cost')));
+            $asset->purchase_cost = e(Helper::formatCurrencyOutput($request->input('purchase_cost')));
         } else {
             $asset->purchase_cost =  null;
         }
@@ -1741,7 +1741,7 @@ class AssetsController extends Controller
                 }
             }
 
-            $purchase_cost = Helper::parseCurrencyString($asset->purchase_cost);
+            $purchase_cost = Helper::formatCurrencyOutput($asset->purchase_cost);
 
             $row = array(
             'checkbox'      =>'<div class="text-center"><input type="checkbox" name="edit_asset['.$asset->id.']" class="one_required"></div>',

@@ -617,7 +617,7 @@ class AccessoriesController extends Controller
             'min_amt'  => e($accessory->min_amt),
             'location'      => ($accessory->location) ? e($accessory->location->name): '',
             'purchase_date' => e($accessory->purchase_date),
-            'purchase_cost' => Helper::parseCurrencyString($accessory->purchase_cost),
+            'purchase_cost' => Helper::formatCurrencyOutput($accessory->purchase_cost),
             'numRemaining'  => $accessory->numRemaining(),
             'actions'       => $actions,
             'companyName'   => is_null($company) ? '' : e($company->name)

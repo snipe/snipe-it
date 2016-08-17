@@ -43,7 +43,7 @@ class Helper
         return array_walk($emails_array, 'trim_value');
     }
 
-    public static function parseCurrencyString($cost)
+    public static function formatCurrencyOutput($cost)
     {
         // The importer has formatted number strings since v3, so the value might be a string, or an integer.
         // If it's a number, format it as a string

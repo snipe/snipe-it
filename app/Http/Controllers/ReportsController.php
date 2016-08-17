@@ -309,9 +309,9 @@ class ReportsController extends Controller
             }
 
             $row[] = $asset->purchase_date;
-            $row[] = $currency . Helper::parseCurrencyString($asset->purchase_cost);
-            $row[] = $currency . Helper::parseCurrencyString($asset->getDepreciatedValue());
-            $row[] = $currency . Helper::parseCurrencyString(( $asset->purchase_cost - $asset->getDepreciatedValue() ));
+            $row[] = $currency . Helper::formatCurrencyOutput($asset->purchase_cost);
+            $row[] = $currency . Helper::formatCurrencyOutput($asset->getDepreciatedValue());
+            $row[] = $currency . Helper::formatCurrencyOutput(( $asset->purchase_cost - $asset->getDepreciatedValue() ));
             $csv->insertOne($row);
         }
 
@@ -393,7 +393,7 @@ class ReportsController extends Controller
             $row[] = $license->remaincount();
             $row[] = $license->expiration_date;
             $row[] = $license->purchase_date;
-            $row[] = '"' . Helper::parseCurrencyString($license->purchase_cost) . '"';
+            $row[] = '"' . Helper::formatCurrencyOutput($license->purchase_cost) . '"';
 
             $rows[] = implode($row, ',');
         }
@@ -529,7 +529,7 @@ class ReportsController extends Controller
                 $row[] = e($asset->purchase_date);
             }
             if (e(Input::get('purchase_cost')) == '1' && ( e(Input::get('depreciation')) != '1' )) {
-                $row[] = '"' . Helper::parseCurrencyString($asset->purchase_cost) . '"';
+                $row[] = '"' . Helper::formatCurrencyOutput($asset->purchase_cost) . '"';
             }
             if (e(Input::get('order')) == '1') {
                 if ($asset->order_number) {
@@ -606,9 +606,9 @@ class ReportsController extends Controller
             }
             if (e(Input::get('depreciation')) == '1') {
                 $depreciation = $asset->getDepreciatedValue();
-                $row[]        = '"' . Helper::parseCurrencyString($asset->purchase_cost) . '"';
-                $row[]        = '"' . Helper::parseCurrencyString($depreciation) . '"';
-                $row[]        = '"' . Helper::parseCurrencyString($asset->purchase_cost) . '"';
+                $row[]        = '"' . Helper::formatCurrencyOutput($asset->purchase_cost) . '"';
+                $row[]        = '"' . Helper::formatCurrencyOutput($depreciation) . '"';
+                $row[]        = '"' . Helper::formatCurrencyOutput($asset->purchase_cost) . '"';
             }
 
             foreach ($customfields as $customfield) {
@@ -699,7 +699,7 @@ class ReportsController extends Controller
                 $improvementTime = intval($assetMaintenance->asset_maintenance_time);
             }
             $row[]  = $improvementTime;
-            $row[]  = trans('general.currency') . Helper::parseCurrencyString($assetMaintenance->cost);
+            $row[]  = trans('general.currency') . Helper::formatCurrencyOutput($assetMaintenance->cost);
             $rows[] = implode($row, ',');
         }
 

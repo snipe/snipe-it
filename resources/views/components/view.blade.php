@@ -83,7 +83,7 @@
         <div class="col-md-12" style="padding-bottom: 5px;"><strong>{{ trans('admin/components/general.cost') }}:</strong>
         {{ \App\Models\Setting::first()->default_currency }}
 
-        {{ \App\Helpers\Helper::parseCurrencyString($component->purchase_cost) }} </div>
+        {{ \App\Helpers\Helper::formatCurrencyOutput($component->purchase_cost) }} </div>
     @endif
 
     @if ($component->order_number)

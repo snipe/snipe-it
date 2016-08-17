@@ -74,7 +74,7 @@
             @if ($asset->purchase_cost > 0)
             <td class="align-right">
               {{ \App\Models\Setting::first()->default_currency }}
-              {{ \App\Helpers\Helper::parseCurrencyString($asset->purchase_cost) }}
+              {{ \App\Helpers\Helper::formatCurrencyOutput($asset->purchase_cost) }}
             </td>
             <td class="align-right">
               {{ \App\Models\Setting::first()->default_currency }}
