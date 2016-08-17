@@ -149,7 +149,7 @@
                           @else
                             {{ \App\Models\Setting::first()->default_currency }}
                           @endif
-                          {{ is_numeric($asset->purchase_cost) ? number_format($asset->purchase_cost,2) : $asset->purchase_cost }}
+                          {{ \App\Helpers\Helper::formatCurrencyOutput($asset->purchase_cost)}}
 
                           @if ($asset->order_number)
                               (Order #{{ $asset->order_number }})

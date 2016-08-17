@@ -72,7 +72,7 @@
         <div class="col-md-12" style="padding-bottom: 5px;"><strong>{{ trans('admin/consumables/general.cost') }}:</strong>
         {{ \App\Models\Setting::first()->default_currency }}
 
-        {{ number_format($consumable->purchase_cost,2) }} </div>
+        {{ \App\Helpers\Helper::formatCurrencyOutput($consumable->purchase_cost) }} </div>
     @endif
 
     @if ($consumable->item_no)

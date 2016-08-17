@@ -159,7 +159,7 @@
                      <span class="input-group-addon">
                          {{ \App\Models\Setting::first()->default_currency }}
                      </span>
-                     <input class="col-md-2 form-control" type="text" name="purchase_cost" id="purchase_cost" value="{{ Input::old('purchase_cost', number_format($consumable->purchase_cost,2)) }}" />
+                     <input class="col-md-2 form-control" type="text" name="purchase_cost" id="purchase_cost" value="{{ Input::old('purchase_cost', \App\Helpers\Helper::formatCurrencyOutput($consumable->purchase_cost)) }}" />
                      {!! $errors->first('purchase_cost', '<span class="alert-msg"><i class="fa fa-times"></i> :message</span>') !!}
                  </div>
              </div>

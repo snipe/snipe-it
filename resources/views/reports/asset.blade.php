@@ -77,7 +77,7 @@
             </td>
             <td>{{ $asset->purchase_date }}</td>
             <td class="align-right">{{ $settings->default_currency }}
-                {{ number_format($asset->purchase_cost) }}
+                {{ \App\Helpers\Helper::formatCurrencyOutput($asset->purchase_cost) }}
             </td>
             <td>
                 @if ($asset->order_number)

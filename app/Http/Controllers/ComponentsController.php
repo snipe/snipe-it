@@ -484,7 +484,7 @@ class ComponentsController extends Controller
                 'category'           => ($component->category) ? e($component->category->name) : 'Missing category',
                 'order_number'  => e($component->order_number),
                 'purchase_date'  => e($component->purchase_date),
-                'purchase_cost'  => ($component->purchase_cost!='') ? number_format($component->purchase_cost, 2): '' ,
+                'purchase_cost'  => Helper::formatCurrencyOutput($component->purchase_cost),
                 'numRemaining'  => $component->numRemaining(),
                 'actions'       => $actions,
                 'companyName'   => is_null($company) ? '' : e($company->name),
