@@ -927,6 +927,18 @@ class AssetsController extends Controller
 
     }
 
+    public function getDeleteImportFile($filename)
+    {
+        if (!Company::isCurrentUserAuthorized()) {
+            return redirect()->to('hardware')->with('error', trans('general.insufficient_permissions'));
+        }
+
+        if (unlink(config('app.private_uploads').'/imports/assets/'.$filename)) {
+            return redirect()->back()->with('success', trans('admin/hardware/message.import.file_delete_success'));
+        }
+        return redirect()->back()->with('error', trans('admin/hardware/message.import.file_delete_error'));
+    }
+
 
     /**
     * Process the uploaded file

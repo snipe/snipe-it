@@ -57,7 +57,9 @@
                                     <td>{{ $file['filesize'] }}</td>
                                     <td>
                                         <a class="btn btn-info btn-sm" href="import/process/{{ $file['filename'] }}">
-                                            <i class="fa fa-spinner process"></i> Process</a>
+                                            <i class="fa fa-spinner process"></i> Process
+                                        </a>
+                                        <a class="btn btn-danger btn-sm" href="import/delete/{{ $file['filename'] }}"><i class="fa fa-trash icon-white"></i></a>
                                     </td>
                                 </tr>
                                 @endforeach
