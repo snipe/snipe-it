@@ -144,11 +144,12 @@ class Asset extends Depreciable
         $data['item_serial'] = $this->serial;
         $data['require_acceptance'] = $this->requireAcceptance();
 
-        if ((($this->requireAcceptance()=='1')  || ($this->getEula())) && (!config('app.lock_passwords'))) {
 
+        if ((($this->requireAcceptance()=='1')  || ($this->getEula())) && (!config('app.lock_passwords'))) {
+            
             \Mail::send('emails.accept-asset', $data, function ($m) use ($user) {
                 $m->to($user->email, $user->first_name . ' ' . $user->last_name);
-                $m->subject('Confirm asset delivery');
+                $m->subject(trans('mail.Confirm_asset_delivery'));
             });
         }
 

@@ -375,7 +375,7 @@ class ConsumablesController extends Controller
 
             Mail::send('emails.accept-asset', $data, function ($m) use ($user) {
                 $m->to($user->email, $user->first_name . ' ' . $user->last_name);
-                $m->subject('Confirm consumable delivery');
+                $m->subject(trans('mail.Confirm_consumable_delivery'));
             });
         }
 

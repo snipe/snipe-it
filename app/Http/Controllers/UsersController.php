@@ -157,7 +157,8 @@ class UsersController extends Controller
 
                 Mail::send('emails.send-login', $data, function ($m) use ($user) {
                     $m->to($user->email, $user->first_name . ' ' . $user->last_name);
-                    $m->subject('Welcome ' . $user->first_name);
+                    $m->subject(trans('mail.welcome', ['name' => $user->first_name]));
+//                    $m->subject('Welcome ' . $user->first_name);
                 });
             }
             return redirect::route('users')->with('success', trans('admin/users/message.success.create'));
@@ -209,7 +210,7 @@ class UsersController extends Controller
 
                 Mail::send('emails.send-login', $data, function ($m) use ($user) {
                     $m->to($user->email, $user->first_name . ' ' . $user->last_name);
-                    $m->subject('Welcome ' . $user->first_name);
+                    $m->subject(trans('mail.welcome', ['name' => $user->first_name]));
                 });
             }
 
@@ -829,7 +830,7 @@ class UsersController extends Controller
                                 if ($newuser['email']) {
                                     Mail::send('emails.send-login', $data, function ($m) use ($newuser) {
                                         $m->to($newuser['email'], $newuser['first_name'] . ' ' . $newuser['last_name']);
-                                        $m->subject('Welcome ' . $newuser['first_name']);
+                                        $m->subject(trans('mail.welcome', ['name' => $newuser['first_name']]));
                                     });
                                 }
                             }

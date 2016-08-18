@@ -147,7 +147,7 @@ class SettingsController extends Controller
         try {
             Mail::send('emails.test', [], function ($m) {
                 $m->to(config('mail.from.address'), config('mail.from.name'));
-                $m->subject('Test Email from Snipe-IT');
+                $m->subject(trans('mail.test_email'));
             });
             return 'success';
         } catch (Exception $e) {
@@ -199,7 +199,7 @@ class SettingsController extends Controller
             if (Input::get('email_creds')=='1') {
                 Mail::send(['text' => 'emails.firstadmin'], $data, function ($m) use ($data) {
                     $m->to($data['email'], $data['first_name']);
-                    $m->subject('Your Snipe-IT credentials');
+                    $m->subject(trans('mail.your_credentials'));
                 });
             }
 
