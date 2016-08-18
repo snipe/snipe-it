@@ -82,6 +82,11 @@ class Accessory extends Model
         return $this->belongsToMany('\App\Models\User', 'accessories_users', 'accessory_id', 'assigned_to')->count();
     }
 
+    public function manufacturer()
+    {
+        return $this->belongsTo('\App\Models\Manufacturer', 'manufacturer_id');
+    }
+
     public function checkin_email()
     {
         return $this->category->checkin_email;

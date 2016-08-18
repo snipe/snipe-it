@@ -111,7 +111,7 @@
                 @else
                     {{ \App\Models\Setting::first()->default_currency }}
                 @endif
-            	{{ number_format($asset->purchase_cost) }}</td>
+                {{ \App\Helpers\Helper::formatCurrencyOutput($asset->purchase_cost) }}</td>
             <td class="align-right">
                 @if ($asset->assetloc )
                     {{ $asset->assetloc->currency }}
@@ -119,7 +119,7 @@
                     {{ \App\Models\Setting::first()->default_currency }}
                 @endif
 
-            	{{ number_format($asset->getDepreciatedValue()) }}</td>
+                {{ \App\Helpers\Helper::formatCurrencyOutput($asset->getDepreciatedValue()) }}</td>
             <td class="align-right">
                 @if ($asset->assetloc)
                     {{ $asset->assetloc->currency }}
@@ -127,7 +127,7 @@
                     {{ \App\Models\Setting::first()->default_currency }}
                 @endif
 
-            	-{{ number_format(($asset->purchase_cost - $asset->getDepreciatedValue())) }}</td>
+                -{{ \App\Helpers\Helper::formatCurrencyOutput(($asset->purchase_cost - $asset->getDepreciatedValue())) }}</td>
             @else
 	            <td></td>
 	            <td></td>

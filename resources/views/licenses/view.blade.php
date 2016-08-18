@@ -136,6 +136,13 @@
                     </tr>
                     @endif
 
+                    @if (!is_null($license->manufacturer))
+                    <tr>
+                      <td>{{ trans('general.manufacturer') }}</td>
+                      <td>{{ $license->manufacturer->name }}</td>
+                    </tr>
+                    @endif
+
                     @can('licenses.keys')
                         @if (!is_null($license->serial))
                         <tr>
@@ -246,7 +253,7 @@
                       </td>
                       <td>
                         {{ \App\Models\Setting::first()->default_currency }}
-                        {{ number_format($license->purchase_cost,2) }}
+                        {{ \App\Helpers\Helper::formatCurrencyOutput($license->purchase_cost) }}
                       </td>
                     </tr>
                     @endif

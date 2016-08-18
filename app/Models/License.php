@@ -36,6 +36,11 @@ class License extends Depreciable
         return $this->belongsTo('\App\Models\Company', 'company_id');
     }
 
+    public function manufacturer()
+    {
+        return $this->belongsTo('\App\Models\Manufacturer', 'manufacturer_id');
+    }
+
     /**
      * Get the assigned user
      */
