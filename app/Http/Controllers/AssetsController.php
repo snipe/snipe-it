@@ -1709,10 +1709,10 @@ class AssetsController extends Controller
         $rows = array();
         foreach ($assets as $asset) {
             $inout = '';
-            $actions = '<div style=" white-space: nowrap;">';
+            $actions = '<div style="white-space: nowrap;">';
             if ($asset->deleted_at=='') {
                 if (Gate::allows('assets.create')) {
-                    $actions = '<a href="' . route('clone/hardware',
+                    $actions .= '<a href="' . route('clone/hardware',
                             $asset->id) . '" class="btn btn-info btn-sm" title="Clone asset" data-toggle="tooltip"><i class="fa fa-clone"></i></a> ';
                 }
                 if (Gate::allows('assets.edit')) {
@@ -1724,9 +1724,9 @@ class AssetsController extends Controller
                             $asset->id) . '" data-content="' . trans('admin/hardware/message.delete.confirm') . '" data-title="' . trans('general.delete') . ' ' . htmlspecialchars($asset->asset_tag) . '?" onClick="return false;"><i class="fa fa-trash icon-white"></i></a>';
                 }
             } elseif ($asset->model->deleted_at=='') {
-                $actions = '<a href="'.route('restore/hardware', $asset->id).'" title="Restore asset" data-toggle="tooltip" class="btn btn-warning btn-sm"><i class="fa fa-recycle icon-white"></i></a>';
+                $actions .= '<a href="'.route('restore/hardware', $asset->id).'" title="Restore asset" data-toggle="tooltip" class="btn btn-warning btn-sm"><i class="fa fa-recycle icon-white"></i></a>';
             }
-            
+
             $actions .= '</div>';
 
             if (($asset->availableForCheckout()))
@@ -1772,7 +1772,12 @@ class AssetsController extends Controller
             'companyName'   => is_null($asset->company) ? '' : e($asset->company->name)
             );
             foreach ($all_custom_fields as $field) {
-                $row[$field->db_column_name()] = Helper::parseEscapedMarkedown($asset->{$field->db_column_name()});
+                if (($field->format=='URL') && ($asset->{$field->db_column_name()}!='')) {
+                    $row[$field->db_column_name()] = '<a href="'.$asset->{$field->db_column_name()}.'" target="_blank">'.$asset->{$field->db_column_name()}.'</a>';
+                } else {
+                    $row[$field->db_column_name()] = e($asset->{$field->db_column_name()});
+                }
+
             }
             $rows[]=$row;
         }

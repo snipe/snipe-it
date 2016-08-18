@@ -123,7 +123,14 @@
                         <tr>
                           <td>{{ $field->name }}</td>
                           <td>
-                            {{ $asset->{$field->db_column_name()} }}
+
+                              @if (($field->format=='URL') && ($asset->{$field->db_column_name()}!=''))
+                                <a href="{{ $asset->{$field->db_column_name()} }}" target="_new">{{ $asset->{$field->db_column_name()} }}</a>
+                              @else
+                                  {{ $asset->{$field->db_column_name()} }}
+                              @endif
+                              
+
                            </td>
                         </tr>
                       @endforeach
