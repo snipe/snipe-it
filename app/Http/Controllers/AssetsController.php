@@ -1709,23 +1709,25 @@ class AssetsController extends Controller
         $rows = array();
         foreach ($assets as $asset) {
             $inout = '';
-            $actions = '';
+            $actions = '<div style=" white-space: nowrap;">';
             if ($asset->deleted_at=='') {
                 if (Gate::allows('assets.create')) {
-                    $actions = '<div style=" white-space: nowrap;"><a href="' . route('clone/hardware',
-                            $asset->id) . '" class="btn btn-info btn-sm" title="Clone asset" data-toggle="tooltip"><i class="fa fa-clone"></i>';
+                    $actions = '<a href="' . route('clone/hardware',
+                            $asset->id) . '" class="btn btn-info btn-sm" title="Clone asset" data-toggle="tooltip"><i class="fa fa-clone"></i></a> ';
                 }
                 if (Gate::allows('assets.edit')) {
-                    $actions .= '</a> <a href="' . route('update/hardware',
+                    $actions .= '<a href="' . route('update/hardware',
                             $asset->id) . '" class="btn btn-warning btn-sm" title="Edit asset" data-toggle="tooltip"><i class="fa fa-pencil icon-white"></i></a> ';
                 }
                 if (Gate::allows('assets.delete')) {
                     $actions .= '<a data-html="false" class="btn delete-asset btn-danger btn-sm" data-toggle="modal" href="' . route('delete/hardware',
-                            $asset->id) . '" data-content="' . trans('admin/hardware/message.delete.confirm') . '" data-title="' . trans('general.delete') . ' ' . htmlspecialchars($asset->asset_tag) . '?" onClick="return false;"><i class="fa fa-trash icon-white"></i></a></div>';
+                            $asset->id) . '" data-content="' . trans('admin/hardware/message.delete.confirm') . '" data-title="' . trans('general.delete') . ' ' . htmlspecialchars($asset->asset_tag) . '?" onClick="return false;"><i class="fa fa-trash icon-white"></i></a>';
                 }
             } elseif ($asset->model->deleted_at=='') {
                 $actions = '<a href="'.route('restore/hardware', $asset->id).'" title="Restore asset" data-toggle="tooltip" class="btn btn-warning btn-sm"><i class="fa fa-recycle icon-white"></i></a>';
             }
+            
+            $actions .= '</div>';
 
             if (($asset->availableForCheckout()))
             {
@@ -1770,7 +1772,7 @@ class AssetsController extends Controller
             'companyName'   => is_null($asset->company) ? '' : e($asset->company->name)
             );
             foreach ($all_custom_fields as $field) {
-                $row[$field->db_column_name()]=$asset->{$field->db_column_name()};
+                $row[$field->db_column_name()] = Helper::parseEscapedMarkedown($asset->{$field->db_column_name()});
             }
             $rows[]=$row;
         }
