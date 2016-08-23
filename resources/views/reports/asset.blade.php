@@ -68,12 +68,7 @@
             @endif
             <td>{{ $asset->serial }}</td>
             <td>
-
-            @if ($asset->assetstatus)
-            	{{ $asset->assetstatus->name }}
-            @elseif ($asset->assigneduser)
-				{{ $asset->assigneduser->fullName() }}
-            @endif
+                {{ ($asset->assigneduser) ? 'Deployed' : ((e($asset->assetstatus)) ? e($asset->assetstatus->name) : '')  }}
             </td>
             <td>{{ $asset->purchase_date }}</td>
             <td class="align-right">{{ $settings->default_currency }}
