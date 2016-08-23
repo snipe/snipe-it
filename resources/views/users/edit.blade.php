@@ -406,8 +406,6 @@ $(document).ready(function(){
         }
     });
 
-    console.dir($('.superuser'));
-
     $('#genPassword').pGenerator({
         'bind': 'click',
         'passwordElement': '#password',
