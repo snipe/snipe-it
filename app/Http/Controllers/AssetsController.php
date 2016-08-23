@@ -1588,7 +1588,7 @@ class AssetsController extends Controller
     * @since [v2.0]
     * @return String JSON
     */
-    public function getDatatable($status = null)
+    public function getDatatable(Request $request, $status = null, $status_id = null)
     {
 
 
@@ -1639,6 +1639,12 @@ class AssetsController extends Controller
                 break;
 
         }
+
+        if ($request->has('status_id')) {
+            $assets->where('status_id','=', e($request->get('status_id')));
+        }
+
+
 
         $allowed_columns = [
         'id',
