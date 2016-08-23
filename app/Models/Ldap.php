@@ -247,8 +247,12 @@ class Ldap extends Model
 
         // Perform the search
         do {
+
             // Paginate (non-critical, if not supported by server)
-            ldap_control_paged_result($ldapconn, $page_size, false, $cookie);
+            if (!$ldap_paging = @ldap_control_paged_result($ldapconn, $page_size, false, $cookie)) {
+                throw new Exception('Problem with your LDAP connection. Try checking the Use TLS setting in Admin > Settings. ');
+            }
+
 
             $search_results = ldap_search($ldapconn, $base_dn, '('.$filter.')');
 
