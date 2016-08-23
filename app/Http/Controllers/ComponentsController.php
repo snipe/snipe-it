@@ -375,7 +375,7 @@ class ComponentsController extends Controller
                         'fields' => [
                             [
                                 'title' => 'Checked Out:',
-                                'value' => strtoupper($logaction->asset_type).' <'.config('app.url').'/admin/components/'.$component->id.'/view'.'|'.$component->name.'> checked out to <'.config('app.url').'/hardware/'.$asset->id.'/view|'.$asset->name.'> by <'.config('app.url').'/admin/users/'.$admin_user->id.'/view'.'|'.$admin_user->fullName().'>.'
+                                'value' => strtoupper($logaction->asset_type).' <'.config('app.url').'/admin/components/'.$component->id.'/view'.'|'.$component->name.'> checked out to <'.config('app.url').'/hardware/'.$asset->id.'/view|'.$asset->showAssetName().'> by <'.config('app.url').'/admin/users/'.$admin_user->id.'/view'.'|'.$admin_user->fullName().'>.'
                             ],
                             [
                                 'title' => 'Note:',
@@ -484,7 +484,7 @@ class ComponentsController extends Controller
                 'category'           => ($component->category) ? e($component->category->name) : 'Missing category',
                 'order_number'  => e($component->order_number),
                 'purchase_date'  => e($component->purchase_date),
-                'purchase_cost'  => ($component->purchase_cost!='') ? number_format($component->purchase_cost, 2): '' ,
+                'purchase_cost'  => Helper::formatCurrencyOutput($component->purchase_cost),
                 'numRemaining'  => $component->numRemaining(),
                 'actions'       => $actions,
                 'companyName'   => is_null($company) ? '' : e($company->name),

@@ -354,7 +354,7 @@ class AssetsController extends Controller
         }
 
         if ($request->has('purchase_cost')) {
-            $asset->purchase_cost = e(number_format($request->input('purchase_cost'), 2, '.', ''));
+            $asset->purchase_cost = e(Helper::formatCurrencyOutput($request->input('purchase_cost')));
         } else {
             $asset->purchase_cost =  null;
         }
@@ -1709,23 +1709,25 @@ class AssetsController extends Controller
         $rows = array();
         foreach ($assets as $asset) {
             $inout = '';
-            $actions = '';
+            $actions = '<div style="white-space: nowrap;">';
             if ($asset->deleted_at=='') {
                 if (Gate::allows('assets.create')) {
-                    $actions = '<div style=" white-space: nowrap;"><a href="' . route('clone/hardware',
-                            $asset->id) . '" class="btn btn-info btn-sm" title="Clone asset" data-toggle="tooltip"><i class="fa fa-clone"></i>';
+                    $actions .= '<a href="' . route('clone/hardware',
+                            $asset->id) . '" class="btn btn-info btn-sm" title="Clone asset" data-toggle="tooltip"><i class="fa fa-clone"></i></a> ';
                 }
                 if (Gate::allows('assets.edit')) {
-                    $actions .= '</a> <a href="' . route('update/hardware',
+                    $actions .= '<a href="' . route('update/hardware',
                             $asset->id) . '" class="btn btn-warning btn-sm" title="Edit asset" data-toggle="tooltip"><i class="fa fa-pencil icon-white"></i></a> ';
                 }
                 if (Gate::allows('assets.delete')) {
                     $actions .= '<a data-html="false" class="btn delete-asset btn-danger btn-sm" data-toggle="modal" href="' . route('delete/hardware',
-                            $asset->id) . '" data-content="' . trans('admin/hardware/message.delete.confirm') . '" data-title="' . trans('general.delete') . ' ' . htmlspecialchars($asset->asset_tag) . '?" onClick="return false;"><i class="fa fa-trash icon-white"></i></a></div>';
+                            $asset->id) . '" data-content="' . trans('admin/hardware/message.delete.confirm') . '" data-title="' . trans('general.delete') . ' ' . htmlspecialchars($asset->asset_tag) . '?" onClick="return false;"><i class="fa fa-trash icon-white"></i></a>';
                 }
             } elseif ($asset->model->deleted_at=='') {
-                $actions = '<a href="'.route('restore/hardware', $asset->id).'" title="Restore asset" data-toggle="tooltip" class="btn btn-warning btn-sm"><i class="fa fa-recycle icon-white"></i></a>';
+                $actions .= '<a href="'.route('restore/hardware', $asset->id).'" title="Restore asset" data-toggle="tooltip" class="btn btn-warning btn-sm"><i class="fa fa-recycle icon-white"></i></a>';
             }
+
+            $actions .= '</div>';
 
             if (($asset->availableForCheckout()))
             {
@@ -1741,11 +1743,7 @@ class AssetsController extends Controller
                 }
             }
 
-            // Lots going on here.  Importer has parsed numbers before importing, so we need to check and see if it's a number before trying to parse.
-            $purchase_cost = $asset->purchase_cost ?: '';
-            if (is_numeric($purchase_cost)) {
-                $purchase_cost = number_format($purchase_cost, 2);
-            }
+            $purchase_cost = Helper::formatCurrencyOutput($asset->purchase_cost);
 
             $row = array(
             'checkbox'      =>'<div class="text-center"><input type="checkbox" name="edit_asset['.$asset->id.']" class="one_required"></div>',
@@ -1774,7 +1772,12 @@ class AssetsController extends Controller
             'companyName'   => is_null($asset->company) ? '' : e($asset->company->name)
             );
             foreach ($all_custom_fields as $field) {
-                $row[$field->db_column_name()]=$asset->{$field->db_column_name()};
+                if (($field->format=='URL') && ($asset->{$field->db_column_name()}!='')) {
+                    $row[$field->db_column_name()] = '<a href="'.$asset->{$field->db_column_name()}.'" target="_blank">'.$asset->{$field->db_column_name()}.'</a>';
+                } else {
+                    $row[$field->db_column_name()] = e($asset->{$field->db_column_name()});
+                }
+
             }
             $rows[]=$row;
         }
