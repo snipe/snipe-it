@@ -472,3 +472,24 @@ Form::macro('username_format', function ($name = "username_format", $selected = 
     return $select;
 
 });
+
+
+Form::macro('customfield_elements', function ($name = "customfield_elements", $selected = null, $class = null) {
+
+    $formats = array(
+        'text' => 'Text Box',
+        'listbox' => 'List Box',
+        'checkbox' => 'Checkbox',
+        'radio' => 'Radio Buttons',
+    );
+
+    $select = '<select name="'.$name.'" class="'.$class.'" style="width: 100%">';
+    foreach ($formats as $format => $label) {
+        $select .= '<option value="'.$format.'"'.($selected == $format ? ' selected="selected"' : '').'>'.$label.'</option> '."\n";
+    }
+
+    $select .= '</select>';
+
+    return $select;
+
+});
