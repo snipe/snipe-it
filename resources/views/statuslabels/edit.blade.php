@@ -38,9 +38,8 @@
         <div class="box box-default">
           <div class="box-body">
             <!-- Asset Title -->
-            <div class="form-group {{ $errors->has('name') ? ' has-error' : '' }}">
+            <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
                 <label for="name" class="col-md-3 control-label">{{ trans('general.name') }}</label>
-                </label>
                     <div class="col-md-7 required">
                         <input class="form-control" type="text" name="name" id="name" value="{{ Input::old('name', $statuslabel->name) }}" />
                         {!! $errors->first('name', '<span class="alert-msg"><i class="fa fa-times"></i> :message</span>') !!}
@@ -48,9 +47,8 @@
             </div>
 
           <!-- Label type -->
-          <div class="form-group {{ $errors->has('statuslabel_types') ? 'has-error' : '' }}">
-              <label for="statuslabel_types" class="col-md-3 control-label">{{ trans('admin/statuslabels/table.status_type') }}
-              </label>
+          <div class="form-group{{ $errors->has('statuslabel_types') ? ' has-error' : '' }}">
+              <label for="statuslabel_types" class="col-md-3 control-label">{{ trans('admin/statuslabels/table.status_type') }} </label>
               <div class="col-md-7 required">
                   {{ Form::select('statuslabel_types', $statuslabel_types, $statuslabel->getStatuslabelType(), array('class'=>'select2', 'style'=>'min-width:400px')) }}
                   {!! $errors->first('statuslabel_types', '<span class="alert-msg"><i class="fa fa-times"></i> :message</span>') !!}
@@ -65,20 +63,27 @@
                           {{ Form::text('color', Input::old('color', $statuslabel->color), array('class' => 'form-control', 'style' => 'width: 100px;', 'maxlength'=>'10')) }}
                           <div class="input-group-addon"><i></i></div>
                       </div><!-- /.input group -->
-
-
                       {!! $errors->first('header_color', '<span class="alert-msg">:message</span>') !!}
                   </div>
               </div>
 
             <!-- Note -->
-            <div class="form-group {{ $errors->has('notes') ? 'has-error' : '' }}">
+            <div class="form-group{{ $errors->has('notes') ? ' has-error' : '' }}">
                 <label for="notes" class="col-md-3 control-label">{{ trans('admin/hardware/form.notes') }}</label>
                 <div class="col-md-7">
                     <textarea class="col-md-12 form-control" id="notes" name="notes">{{ Input::old('notes', $statuslabel->notes) }}</textarea>
                     {!! $errors->first('notes', '<span class="alert-msg"><i class="fa fa-times"></i> :message</span>') !!}
                 </div>
             </div>
+
+              <!-- Show in Nav -->
+              <div class="form-group{{ $errors->has('notes') ? ' has-error' : '' }}">
+
+                  <label class="col-md-offset-3" style="padding-left: 15px;">
+                      <input type="checkbox" value="1" name="show_in_nav" id="show_in_nav" class="minimal" {{ Input::old('show_in_nav', $statuslabel->show_in_nav) == '1' ? ' checked="checked"' : '' }}> {{ trans('admin/statuslabels/table.show_in_nav') }}
+                  </label>
+              </div>
+
 
 
 

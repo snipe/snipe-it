@@ -405,6 +405,16 @@
                   <li>
                     <a href="{{ URL::to('hardware') }}">@lang('general.list_all')</a>
                   </li>
+
+                    <?php $status_navs = \App\Models\Statuslabel::where('show_in_nav','=',1)->get(); ?>
+                    @if (count($status_navs) > 0)
+                        <li class="divider">&nbsp;</li>
+                        @foreach ($status_navs as $status_nav)
+                            <li><a href="{{ URL::to('hardware?status_id='.$status_nav->id) }}"}> {{ $status_nav->name }}</a></li>
+                        @endforeach
+                    @endif
+
+
                   <li{!! (Request::query('status') == 'Deployed' ? ' class="active"' : '') !!}>
                     <a href="{{ URL::to('hardware?status=Deployed') }}">@lang('general.deployed')
                     </a>
@@ -489,8 +499,7 @@
                     <li><a href="{{ URL::to('reports/assets') }}" {{ (Request::is('reports/assets') ? ' class="active"' : '') }} >@lang('general.asset_report')</a></li>
                     <li><a href="{{ URL::to('reports/unaccepted_assets') }}" {{ (Request::is('reports/unaccepted_assets') ? ' class="active"' : '') }} >@lang('general.unaccepted_asset_report')</a></li>
                     <li><a href="{{ URL::to('reports/accessories') }}" {{ (Request::is('reports/accessories') ? ' class="active"' : '') }} >@lang('general.accessory_report')</a></li>
-                    <li><a href="{{ URL::to('reports/custom') }}" {{ (Request::is('reports/custom') ? ' class="active"' : '') }} >@lang('general.custom_report')</a></li>
-
+                    <li><a href="{{ URL::to('reports/custom') }}" {{ (Request::is('reports/custom') ? ' class="active"' : '') }}>@lang('general.custom_report')</a></li>
                 </ul>
             </li>
             @endcan
