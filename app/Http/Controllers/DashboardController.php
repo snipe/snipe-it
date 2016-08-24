@@ -32,7 +32,7 @@ class DashboardController extends Controller
 
             $recent_activity = Actionlog::orderBy('created_at', 'DESC')
                 ->with('accessorylog', 'consumablelog', 'licenselog', 'assetlog', 'adminlog', 'userlog', 'componentlog')
-                ->take(30)
+                ->take(20)
                 ->get();
 
 
