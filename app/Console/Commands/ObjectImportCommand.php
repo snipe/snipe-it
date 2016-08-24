@@ -780,7 +780,7 @@ class ObjectImportCommand extends Command
         if (!empty($item["purchase_cost"])) {
             //TODO How to generalize this for not USD?
             $purchase_cost = substr($item["purchase_cost"], 0, 1) === '$' ? substr($item["purchase_cost"], 1) : $item["purchase_cost"];
-            $asset->purchase_cost = number_format($purchase_cost, 2);
+            $asset->purchase_cost = number_format($purchase_cost, 2, '.', '');
             $this->log("Asset cost parsed: " . $asset->purchase_cost);
         } else {
             $asset->purchase_cost = 0.00;
