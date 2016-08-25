@@ -11,14 +11,14 @@ class CustomField extends Model
 
     */
     public static $PredefinedFormats=[
-    "ANY" => "",
-    "ALPHA" => "alpha",
-    "EMAIL" => "email",
-    "DATE" => "date",
-    "URL" => "url",
-    "NUMERIC" => "numeric",
-    "MAC" => "regex:/^[a-fA-F0-9]{2}:[a-fA-F0-9]{2}:[a-fA-F0-9]{2}:[a-fA-F0-9]{2}:[a-fA-F0-9]{2}:[a-fA-F0-9]{2}$/",
-    "IP" => "ip"
+        "ANY" => "",
+        "ALPHA" => "alpha",
+        "EMAIL" => "email",
+        "DATE" => "date",
+        "URL" => "url",
+        "NUMERIC" => "numeric",
+        "MAC" => "regex:/^[a-fA-F0-9]{2}:[a-fA-F0-9]{2}:[a-fA-F0-9]{2}:[a-fA-F0-9]{2}:[a-fA-F0-9]{2}:[a-fA-F0-9]{2}$/",
+        "IP" => "ip",
     ];
 
     public $rules=[

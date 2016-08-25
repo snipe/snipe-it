@@ -32,6 +32,7 @@
                 <th data-sortable="true" data-field="name">{{ trans('admin/statuslabels/table.name') }}</th>
                 <th data-sortable="false" data-field="type">{{ trans('admin/statuslabels/table.status_type') }}</th>
                 <th data-sortable="false" data-field="color">{{ trans('admin/statuslabels/table.color') }}</th>
+                <th data-sortable="true" data-field="show_in_nav">{{ trans('admin/statuslabels/table.show_in_nav') }}</th>
                 <th data-switchable="false" data-searchable="false" data-sortable="false" data-field="actions">{{ trans('table.actions') }}</th>
               </tr>
             </thead>

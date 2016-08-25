@@ -269,13 +269,13 @@
             <div class="col-md-4">
 
               @if ($asset->image)
-                <img src="{{ Config::get('app.url') }}/uploads/assets/{{{ $asset->image }}}" class="assetimg">
+                <img src="{{ config('app.url') }}/uploads/assets/{{{ $asset->image }}}" class="assetimg">
               @elseif ($asset->model->image!='')
-                <img src="{{ Config::get('app.url') }}/uploads/models/{{{ $asset->model->image }}}" class="assetimg">
+                <img src="{{ config('app.url') }}/uploads/models/{{{ $asset->model->image }}}" class="assetimg">
               @endif
 
               @if  (App\Models\Setting::getSettings()->qr_code=='1')
-                 <img src="{{ config('get.url') }}/hardware/{{ $asset->id }}/qr_code" class="img-thumbnail pull-right" style="height: 100px; width: 100px; margin-right: 10px;">
+                 <img src="{{ config('app.url') }}/hardware/{{ $asset->id }}/qr_code" class="img-thumbnail pull-right" style="height: 100px; width: 100px; margin-right: 10px;">
               @endif
 
               @if (($asset->assigneduser) && ($asset->assigned_to > 0) && ($asset->deleted_at==''))

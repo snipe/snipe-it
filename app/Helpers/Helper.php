@@ -237,7 +237,7 @@ class Helper
     {
         $keys=array_keys(CustomField::$PredefinedFormats);
         $stuff=array_combine($keys, $keys);
-        return $stuff+["" => "Custom Format..."];
+        return $stuff+["" => trans('admin/custom_fields/general.custom_format')];
     }
 
     public static function barcodeDimensions($barcode_type = 'QRCODE')
