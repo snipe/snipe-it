@@ -10,6 +10,7 @@ use Redirect;
 use App\Models\AssetModel;
 use Lang;
 use Auth;
+use Illuminate\Http\Request;
 
 /**
  * This controller handles all actions related to Custom Asset Fields for
@@ -63,10 +64,15 @@ class CustomFieldsController extends Controller
     * @since [v1.8]
     * @return Redirect
     */
-    public function store()
+    public function store(Request $request)
     {
         //
-        $cfset=new CustomFieldset(["name" => Input::get("name"),"user_id" => Auth::user()->id]);
+        $cfset = new CustomFieldset(
+            [
+                "name" => e($request->get("name")),
+                "user_id" => Auth::user()->id]
+            );
+
         $validator=Validator::make(Input::all(), $cfset->rules);
         if ($validator->passes()) {
             $cfset->save();
