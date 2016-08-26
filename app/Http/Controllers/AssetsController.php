@@ -1588,7 +1588,7 @@ class AssetsController extends Controller
     * @since [v2.0]
     * @return String JSON
     */
-    public function getDatatable(Request $request, $status = null, $status_id = null)
+    public function getDatatable(Request $request, $status = null)
     {
 
 
