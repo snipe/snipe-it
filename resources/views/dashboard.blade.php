@@ -141,7 +141,7 @@
                         </td>
                        <td>
                            @if (($activity->assetlog) && ($activity->asset_type=="hardware"))
-                              <a href="{{ route('view/hardware', $activity->asset_id) }}">{{ $activity->assetlog->showAssetName() }}</a>
+                              <a href="{{ route('view/hardware', $activity->asset_id) }}">{{ $activity->assetlog->asset_tag }} - {{ $activity->assetlog->showAssetName() }}</a>
                             @elseif (($activity->licenselog) && ($activity->asset_type=="software"))
                               <a href="{{ route('view/license', $activity->asset_id) }}">{{ $activity->licenselog->name }}</a>
                                   @elseif (($activity->consumablelog) && ($activity->asset_type=="consumable"))
