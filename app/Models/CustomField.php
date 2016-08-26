@@ -120,16 +120,32 @@ class CustomField extends Model
     public function formatFieldValuesAsArray() {
         $arr = preg_split("/\\r\\n|\\r|\\n/", $this->field_values);
 
+        $result[''] = 'Select '.strtolower($this->format);
+
         for ($x = 0; $x < count($arr); $x++) {
             $arr_parts = explode('|', $arr[$x]);
-
-            if (key_exists('1',$arr_parts)) {
-                $result[$arr_parts[0]] = $arr_parts[1];
-            } else {
-                $result[$arr_parts[0]] = $arr_parts[0];
+            if ($arr_parts[0]!='') {
+                if (key_exists('1',$arr_parts)) {
+                    $result[$arr_parts[0]] = $arr_parts[1];
+                } else {
+                    $result[$arr_parts[0]] = $arr_parts[0];
+                }
             }
+
         }
+
 
         return $result;
     }
+
+    public function isFieldDecryptable($string) {
+        if (($this->field_encrypted=='1') && ($string!='')) {
+            return true;
+        }
+        return false;
+    }
+
+
+
+
 }
