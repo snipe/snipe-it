@@ -37,9 +37,10 @@
                    <tr>
                      <th class="col-md-1"></th>
                      <th class="col-md-1">{{ trans('admin/custom_fields/general.order') }}</th>
-                     <th class="col-md-4">{{ trans('admin/custom_fields/general.field_name') }}</th>
+                     <th class="col-md-3">{{ trans('admin/custom_fields/general.field_name') }}</th>
                      <th class="col-md-2">{{ trans('admin/custom_fields/general.field_format') }}</th>
                      <th class="col-md-2">{{ trans('admin/custom_fields/general.field_element') }}</th>
+                     <th class="col-md-1">{{ trans('admin/custom_fields/general.encrypted') }}</th>
                      <th class="col-md-1">{{ trans('admin/custom_fields/general.required') }}</th>
                      <th class="col-md-1"></th>
                    </tr>
@@ -71,6 +72,7 @@
                    <td>{{$field->name}}</td>
                    <td>{{$field->format}}</td>
                    <td>{{$field->element}}</td>
+                     <td>{{ $field->field_encrypted=='1' ?  trans('general.yes') : trans('general.no') }}</td>
                    <td>{{$field->pivot->required ? "REQUIRED" : "OPTIONAL"}}</td>
                    <td><a href="{{ route('admin.custom_fields.disassociate', [$field,$custom_fieldset->id]) }}" class="btn btn-sm btn-danger">Remove</a></td>
                  </tr>
