@@ -8,7 +8,6 @@ return array(
     'custom_format'             => 'Custom format...',
     'encrypt_field'      	        => 'Encrypt the value of this field in the database',
     'encrypt_field_help'      => 'WARNING: Encrypting a field makes it unsearchable.',
-
     'fieldset'      	        => 'Fieldset',
     'qty_fields'      	      => 'Qty Fields',
     'fieldsets'      	        => 'Fieldsets',
