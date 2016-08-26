@@ -87,8 +87,7 @@
             <div class="form-group {{ $errors->has('custom_format') ? ' has-error' : '' }}">
                 <div class="col-md-8 col-md-offset-4">
                     <label for="field_encrypted">
-                        <input type="checkbox" value="1" name="field_encrypted" id="field_encrypted" class="minimal"
-                          {{ Input::old('field_encrypted') ? ' checked="checked"' : '' }}> {{ trans('admin/custom_fields/general.encrypt_field') }}
+                        <input type="checkbox" value="1" name="field_encrypted" id="field_encrypted" class="minimal"{{ Input::old('field_encrypted') ? ' checked="checked"' : '' }}> {{ trans('admin/custom_fields/general.encrypt_field') }}
                     </label>
                 </div>
 
