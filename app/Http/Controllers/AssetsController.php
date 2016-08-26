@@ -436,13 +436,21 @@ class AssetsController extends Controller
         $model = AssetModel::find($request->get('model_id'));
         if ($model->fieldset) {
             foreach ($model->fieldset->fields as $field) {
-                $asset->{\App\Models\CustomField::name_to_db_name($field->name)} = e($request->input(\App\Models\CustomField::name_to_db_name($field->name)));
-    //                LOG::debug($field->name);
-    //                LOG::debug(\App\Models\CustomField::name_to_db_name($field->name));
-    //                LOG::debug($field->db_column_name());
+
+
+                if ($field->field_encrypted=='1') {
+                    if (Gate::allows('admin')) {
+                        $asset->{\App\Models\CustomField::name_to_db_name($field->name)} = \Crypt::encrypt(e($request->input(\App\Models\CustomField::name_to_db_name($field->name))));
+                    }
+
+                } else {
+                    $asset->{\App\Models\CustomField::name_to_db_name($field->name)} = e($request->input(\App\Models\CustomField::name_to_db_name($field->name)));
+                }
+
 
             }
         }
+
 
         if ($asset->save()) {
             // Redirect to the new asset page
