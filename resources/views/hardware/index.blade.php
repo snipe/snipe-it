@@ -95,7 +95,16 @@
                             <th data-sortable="true" data-searchable="true" data-field="last_checkout">{{ trans('admin/hardware/table.checkout_date') }}</th>
                             <th data-sortable="true" data-field="expected_checkin" data-searchable="true">{{ trans('admin/hardware/form.expected_checkin') }}</th>
                             @foreach(\App\Models\CustomField::all() AS $field)
-                              <th data-sortable="true" data-visible="false" data-field="{{$field->db_column_name()}}">{{$field->name}}</th>
+
+
+                                    <th data-sortable="{{ ($field->field_encrypted=='1' ? 'false' : 'true') }}" data-visible="false" data-field="{{$field->db_column_name()}}">
+                                        @if ($field->field_encrypted=='1')
+                                            <i class="fa fa-lock"></i>
+                                        @endif
+
+                                        {{$field->name}}
+                                    </th>
+
                             @endforeach
                             <th data-sortable="true" data-field="created_at" data-searchable="true" data-visible="false">{{ trans('general.created_at') }}</th>
                             <th data-switchable="false" data-searchable="false" data-sortable="false" data-field="change">{{ trans('admin/hardware/table.change') }}</th>

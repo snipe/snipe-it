@@ -1786,10 +1786,26 @@ class AssetsController extends Controller
             'companyName'   => is_null($asset->company) ? '' : e($asset->company->name)
             );
             foreach ($all_custom_fields as $field) {
-                if (($field->format=='URL') && ($asset->{$field->db_column_name()}!='')) {
-                    $row[$field->db_column_name()] = '<a href="'.$asset->{$field->db_column_name()}.'" target="_blank">'.$asset->{$field->db_column_name()}.'</a>';
+                $column_name = $field->db_column_name();
+
+                if ($field->isFieldDecryptable($asset->{$column_name})) {
+
+                    if (Gate::allows('admin')) {
+                        if (($field->format=='URL') && ($asset->{$column_name}!='')) {
+                            $row[$column_name] = '<a href="'.Helper::gracefulDecrypt($field, $asset->{$column_name}).'" target="_blank">'.Helper::gracefulDecrypt($field, $asset->{$column_name}).'</a>';
+                        } else {
+                            $row[$column_name] = Helper::gracefulDecrypt($field, $asset->{$column_name});
+                        }
+
+                    } else {
+                        $row[$field->db_column_name()] = strtoupper(trans('admin/custom_fields/general.encrypted'));
+                    }
                 } else {
-                    $row[$field->db_column_name()] = e($asset->{$field->db_column_name()});
+                    if (($field->format=='URL') && ($asset->{$field->db_column_name()}!='')) {
+                        $row[$field->db_column_name()] = '<a href="'.$asset->{$field->db_column_name()}.'" target="_blank">'.$asset->{$field->db_column_name()}.'</a>';
+                    } else {
+                        $row[$field->db_column_name()] = e($asset->{$field->db_column_name()});
+                    }
                 }
 
             }

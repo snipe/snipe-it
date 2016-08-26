@@ -121,15 +121,34 @@
                     @if ($asset->model->fieldset)
                       @foreach($asset->model->fieldset->fields as $field)
                         <tr>
-                          <td>{{ $field->name }}</td>
-                          <td>
+                          <td>{{ $field->name }}
 
-                              @if (($field->format=='URL') && ($asset->{$field->db_column_name()}!=''))
-                                <a href="{{ $asset->{$field->db_column_name()} }}" target="_new">{{ $asset->{$field->db_column_name()} }}</a>
-                              @else
-                                  {{ $asset->{$field->db_column_name()} }}
+
+                          </td>
+                          <td>
+                              @if ($field->field_encrypted=='1')
+                                  <i class="fa fa-lock" data-toggle="tooltip" data-placement="top" title="{{ trans('admin/custom_fields/general.value_encrypted') }}"></i>
                               @endif
-                              
+
+                              @if ($field->isFieldDecryptable($asset->{$field->db_column_name()} ))
+
+                                  @can('admin')
+                                      @if (($field->format=='URL') && ($asset->{$field->db_column_name()}!=''))
+                                          <a href="{{ \App\Helpers\Helper::gracefulDecrypt($field, $asset->{$field->db_column_name()}) }}" target="_new">{{ \App\Helpers\Helper::gracefulDecrypt($field, $asset->{$field->db_column_name()}) }}</a>
+                                      @else
+                                          {{ \App\Helpers\Helper::gracefulDecrypt($field, $asset->{$field->db_column_name()}) }}
+                                      @endif
+                                  @else
+                                      {{ strtoupper(trans('admin/custom_fields/general.encrypted')) }}
+                                  @endcan
+
+                              @else
+                                  @if (($field->format=='URL') && ($asset->{$field->db_column_name()}!=''))
+                                      <a href="{{ $asset->{$field->db_column_name()} }}" target="_new">{{ $asset->{$field->db_column_name()} }}</a>
+                                  @else
+                                      {{ $asset->{$field->db_column_name()} }}
+                                  @endif
+                              @endif
 
                            </td>
                         </tr>
