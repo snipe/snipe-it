@@ -109,4 +109,27 @@ class CustomField extends Model
             $this->attributes['format']=$value;
         }
     }
+
+    /**
+     * Format a value string as an array for select boxes and checkboxes.
+     *
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @since [v3.4]
+     * @return Array
+     */
+    public function formatFieldValuesAsArray() {
+        $arr = preg_split("/\\r\\n|\\r|\\n/", $this->field_values);
+
+        for ($x = 0; $x < count($arr); $x++) {
+            $arr_parts = explode('|', $arr[$x]);
+
+            if (key_exists('1',$arr_parts)) {
+                $result[$arr_parts[0]] = $arr_parts[1];
+            } else {
+                $result[$arr_parts[0]] = $arr_parts[0];
+            }
+        }
+
+        return $result;
+    }
 }
