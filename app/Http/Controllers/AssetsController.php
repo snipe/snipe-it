@@ -1595,24 +1595,24 @@ class AssetsController extends Controller
         $assets = Company::scopeCompanyables(Asset::select('assets.*'))->with('model', 'assigneduser', 'assigneduser.userloc', 'assetstatus', 'defaultLoc', 'assetlog', 'model', 'model.category', 'model.manufacturer', 'model.fieldset', 'assetstatus', 'assetloc', 'company')
         ->Hardware();
 
-        if (Input::has('search')) {
-             $assets = $assets->TextSearch(e(Input::get('search')));
+        if ($request->has('search')) {
+             $assets = $assets->TextSearch(e($request->get('search')));
         }
 
-        if (Input::has('offset')) {
-             $offset = e(Input::get('offset'));
+        if ($request->has('offset')) {
+             $offset = e($request->get('offset'));
         } else {
              $offset = 0;
         }
 
-        if (Input::has('limit')) {
-             $limit = e(Input::get('limit'));
+        if ($request->has('limit')) {
+             $limit = e($request->get('limit'));
         } else {
              $limit = 50;
         }
 
-        if (Input::has('order_number')) {
-            $assets->where('order_number', '=', e(Input::get('order_number')));
+        if ($request->has('order_number')) {
+            $assets->where('order_number', '=', e($request->get('order_number')));
         }
 
         switch ($status) {
@@ -1675,8 +1675,8 @@ class AssetsController extends Controller
             $allowed_columns[]=$field->db_column_name();
         }
 
-        $order = Input::get('order') === 'asc' ? 'asc' : 'desc';
-        $sort = in_array(Input::get('sort'), $allowed_columns) ? Input::get('sort') : 'asset_tag';
+        $order = $request->get('order') === 'asc' ? 'asc' : 'desc';
+        $sort = in_array($request->get('sort'), $allowed_columns) ? $request->get('sort') : 'asset_tag';
 
         switch ($sort) {
             case 'model':
