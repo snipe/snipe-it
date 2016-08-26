@@ -42,8 +42,8 @@
                </label>
                   <div class="col-md-6 required">
 
-                  {!! Form::customfield_elements('customfield_element', Input::old('customfield_element'), 'field_element select2 form-control') !!}
-                  {!! $errors->first('customfield_element', '<span class="alert-msg"><i class="fa fa-times"></i> :message</span>') !!}
+                  {!! Form::customfield_elements('element', Input::old('element'), 'field_element select2 form-control') !!}
+                  {!! $errors->first('element', '<span class="alert-msg"><i class="fa fa-times"></i> :message</span>') !!}
 
                   </div>
           </div>
