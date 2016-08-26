@@ -128,24 +128,33 @@ class CustomFieldsController extends Controller
     * @since [v1.8]
     * @return Redirect
     */
-    public function storeField()
+    public function storeField(Request $request)
     {
-        $field=new CustomField(["name" => Input::get("name"),"element" => Input::get("element"),"user_id" => Auth::user()->id]);
+        $field = new CustomField([
+            "name" => e($request->get("name")),
+            "element" => e($request->get("element")),
+            "field_values" => e($request->get("field_values")),
+            "field_encrypted" => e($request->get("field_encrypted", 0)),
+            "user_id" => Auth::user()->id
+        ]);
+
 
 
         if (!in_array(Input::get('format'), array_keys(CustomField::$PredefinedFormats))) {
-            $field->format=Input::get("custom_format");
+            $field->format = e($request->get("custom_format"));
         } else {
-            $field->format=Input::get('format');
+            $field->format = e($request->get("format"));
         }
+
+
 
         $validator=Validator::make(Input::all(), $field->rules);
         if ($validator->passes()) {
-            $results=$field->save();
-            //return "postCreateField: $results";
+            $results = $field->save();
             if ($results) {
                 return redirect()->route("admin.custom_fields.index")->with("success", trans('admin/custom_fields/message.field.create.success'));
             } else {
+                dd($field);
                 return redirect()->back()->withInput()->with('error', trans('admin/custom_fields/message.field.create.error'));
             }
         } else {
@@ -181,9 +190,7 @@ class CustomFieldsController extends Controller
     */
     public function deleteField($field_id)
     {
-        $field=CustomField::find($field_id);
-
-
+        $field = CustomField::find($field_id);
 
         if ($field->fieldset->count()>0) {
             return redirect()->back()->withErrors(['message' => "Field is in-use"]);
