@@ -17,6 +17,8 @@ use App\Models\Component;
 use App\Models\Accessory;
 use App\Models\Consumable;
 use App\Models\Asset;
+use Crypt;
+use Illuminate\Contracts\Encryption\DecryptException;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -476,6 +478,21 @@ class Helper
     }
 
 
+    public static function gracefulDecrypt(CustomField $field, $string) {
 
+        if ($field->isFieldDecryptable($string)) {
+
+            try {
+                Crypt::decrypt($string);
+                return Crypt::decrypt($string);
+
+            } catch (DecryptException $e) {
+                return 'Error Decrypting: '.$e->getMessage();
+            }
+
+        }
+        return $string;
+
+    }
 
 }
