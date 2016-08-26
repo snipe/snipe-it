@@ -1,7 +1,7 @@
 <?php
 
 return [
-    'sent'	        => 'Your password link has been sent!',
-    'user'			=> 'That user does not exist or does not have an email address associated',
+    'sent'	        => 'Tautan sandi Anda telah dikirim!',
+    'user'			=> 'User tersebut tidak terdaftar atau tidak memiliki alamat email terdaftar',
 ];
 

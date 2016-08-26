@@ -2,7 +2,7 @@
 
 return array(
     'ad'				        => 'Active Directory',
-    'ad_domain'				    => 'Active Directory domain',
+    'ad_domain'				    => 'Active Directory 도메인',
     'ad_domain_help'			=> 'This is sometimes the same as your email domain, but not always.',
     'is_ad'				        => 'This is an Active Directory server',
 	'alert_email'				=> '알림 전송',
@@ -51,6 +51,8 @@ return array(
     'ldap_pword'                => 'LDAP 연결용 비밀번호',
     'ldap_basedn'               => 'Base BIND DN',
     'ldap_filter'               => 'LDAP 필터',
+    'ldap_pw_sync'              => 'LDAP Password Sync',
+    'ldap_pw_sync_help'         => 'Uncheck this box if you do not wish to keep LDAP passwords synced with local passwords. Disabling this means that your users may not be able to login if your LDAP server is unreachable for some reason.',
     'ldap_username_field'       => '사용자명 항목',
     'ldap_lname_field'          => '성:',
     'ldap_fname_field'          => 'LDAP 이름',

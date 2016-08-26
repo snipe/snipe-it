@@ -2,24 +2,24 @@
 
 return array(
 
-    'does_not_exist' => 'Depreciation class does not exist.',
-    'assoc_users'	 => 'This depreciation is currently associated with one or more models and cannot be deleted. Please delete the models, and then try deleting again. ',
+    'does_not_exist' => 'Klasa amortyzacji nie istnieje.',
+    'assoc_users'	 => 'Amortyzacja ta jest aktualnie skojarzona z jednym lub większą ilością modeli amortyzacji i nie można usunąć. Proszę usunąć modele, a następnie spróbować ją ponownie usunąć. ',
 
 
     'create' => array(
-        'error'   => 'Depreciation class was not created, please try again. :(',
-        'success' => 'Depreciation class created successfully. :)'
+        'error'   => 'Klasa amortyzacji nie został utworzony, spróbuj ponownie. :(',
+        'success' => 'Klasa amortyzacji została utworzona pomyślnie. :)'
     ),
 
     'update' => array(
-        'error'   => 'Depreciation class was not updated, please try again',
-        'success' => 'Depreciation class updated successfully.'
+        'error'   => 'Klasa amortyzacji nie został uaktualniona, spróbuj ponownie',
+        'success' => 'Klasa amortyzacji została uaktualniona pomyślnie.'
     ),
 
     'delete' => array(
-        'confirm'   => 'Are you sure you wish to delete this depreciation class?',
-        'error'   => 'There was an issue deleting the depreciation class. Please try again.',
-        'success' => 'The depreciation class was deleted successfully.'
+        'confirm'   => 'Czy na pewno chcesz usunąć tę klasę amortyzacji?',
+        'error'   => 'Wystąpił problem podczas usuwania klasy amortyzacji. Spróbuj ponownie.',
+        'success' => 'Klasa amortyzacji została usunięta pomyślnie.'
     )
 
 );

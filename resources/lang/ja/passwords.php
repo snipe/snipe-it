@@ -1,7 +1,7 @@
 <?php
 
 return [
-    'sent'	        => 'Your password link has been sent!',
-    'user'			=> 'That user does not exist or does not have an email address associated',
+    'sent'	        => 'パスワード リンクが送信されました!',
+    'user'			=> 'そのユーザーが存在しない、または関連付けられている電子メール アドレスが割り当てられていません。',
 ];
 

@@ -64,8 +64,8 @@ return array(
     ),
     "unique"           => "Het veld :attribute is reeds in gebruik.",
     "url"              => "Het formaat van :attribute is ongeldig.",
-    "statuslabel_type" => "You must select a valid status label type",
-    "unique_undeleted" => "The :attribute must be unique.",
+    "statuslabel_type" => "Je moet een geldig status label type selecteren",
+    "unique_undeleted" => "Het :attribute moet uniek zijn.",
 
 
     /*

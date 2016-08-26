@@ -1,17 +1,17 @@
 <?php
 
     return [
-        'not_found'                    => 'Asset Maintenance you were looking for was not found!',
+        'not_found'                    => 'Aktivets vedligeholdelse blev ikke fundet!',
         'delete'                       => [
-            'confirm' => 'Are you sure you wish to delete this asset maintenance?',
-            'error'   => 'There was an issue deleting the asset maintenance. Please try again.',
-            'success' => 'The asset maintenance was deleted successfully.'
+            'confirm' => 'Er du sikker på du vil slette dette aktivs vedligeholdelse?',
+            'error'   => 'Der opstod et problem under sletning af aktivets vedligeholdelse. Prøv venligst igen.',
+            'success' => 'Aktivets vedligeholdelse blev slettet med succes.'
         ],
         'create'                       => [
-            'error'   => 'Asset Maintenance was not created, please try again.',
-            'success' => 'Asset Maintenance created successfully.'
+            'error'   => 'Aktivets vedligeholdelse blev ikke oprettet, prøv venligst igen.',
+            'success' => 'Aktivets vedligeholdelse blev oprettet med succes.'
         ],
-        'asset_maintenance_incomplete' => 'Not Completed Yet',
-        'warranty'                     => 'Warranty',
-        'not_warranty'                 => 'Not Warranty',
+        'asset_maintenance_incomplete' => 'Ikke afsluttet endnu',
+        'warranty'                     => 'Garanti',
+        'not_warranty'                 => 'Ingen garanti',
     ];

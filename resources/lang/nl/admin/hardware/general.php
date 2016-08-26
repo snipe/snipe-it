@@ -3,7 +3,7 @@
 return array(
 	'archived'  				=> 'Gearchiveerd',
     'asset'  					=> 'Materiaal',
-    'bulk_checkout'             => 'Checkout Assets to User',
+    'bulk_checkout'             => 'Materiaal aan gebruiker uitleveren',
     'checkin'  					=> 'Materiaal uitlenen',
     'checkout'  				=> 'Leen materiaal uit aan deze gebruiker',
     'clone'  					=> 'Kloon Materiaal',

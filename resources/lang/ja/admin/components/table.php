@@ -1,5 +1,5 @@
 <?php
 
 return array(
-    'title'      				=> 'Component Name',
+    'title'      				=> '構成部品名',
 );

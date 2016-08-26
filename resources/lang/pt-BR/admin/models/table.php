@@ -11,7 +11,7 @@ return array(
     'title'					=> 'Modelos de Ativos',
     'update'				=> 'Atualizar Modelo de Ativos',
     'view'					=> 'Ver Modelo de Ativos',
-    'update'				=> 'Atualizar Modelo de Ativos',
+    'update'				=> 'Atualizar Modelo',
     'clone'				=> 'Clonar Modelo',
     'edit'				=> 'Editar Modelo',
 );

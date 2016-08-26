@@ -51,6 +51,8 @@ return array(
     'ldap_pword'                => 'LDAP اتصال رمز عبور',
     'ldap_basedn'               => 'اتصال پایگاه DN',
     'ldap_filter'               => 'LDAP فیلتر',
+    'ldap_pw_sync'              => 'LDAP Password Sync',
+    'ldap_pw_sync_help'         => 'Uncheck this box if you do not wish to keep LDAP passwords synced with local passwords. Disabling this means that your users may not be able to login if your LDAP server is unreachable for some reason.',
     'ldap_username_field'       => 'فیلد نام کاربری',
     'ldap_lname_field'          => 'نام خانوادگی',
     'ldap_fname_field'          => 'LDAP نام',

@@ -1,9 +1,9 @@
 <?php
 return array(
-    'companies' => 'Companies',
-    'create'    => 'Create Company',
-    'title'     => 'Company',
-    'update'    => 'Update Company',
-    'name'      => 'Company Name',
+    'companies' => '所属',
+    'create'    => '所属を作成',
+    'title'     => '所属',
+    'update'    => '所属を更新',
+    'name'      => '所属名',
     'id'        => 'ID',
 );

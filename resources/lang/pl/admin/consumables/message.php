@@ -2,33 +2,33 @@
 
 return array(
 
-    'does_not_exist' => 'Consumable does not exist.',
+    'does_not_exist' => 'Materiał eksploatacyjny nie istnieje.',
 
     'create' => array(
-        'error'   => 'Consumable was not created, please try again.',
-        'success' => 'Consumable created successfully.'
+        'error'   => 'Materiał eksploatacyjny nie został utworzony, spróbuj ponownie.',
+        'success' => 'Materiał eksploatacyjny utworzony pomyślnie.'
     ),
 
     'update' => array(
-        'error'   => 'Consumable was not updated, please try again',
-        'success' => 'Consumable updated successfully.'
+        'error'   => 'Materiał eksploatacyjny nie został uaktualniony, spróbuj ponownie',
+        'success' => 'Materiał eksploatacyjny został zaktualizowany pomyślnie.'
     ),
 
     'delete' => array(
-        'confirm'   => 'Are you sure you wish to delete this consumable?',
-        'error'   => 'There was an issue deleting the consumable. Please try again.',
-        'success' => 'The consumable was deleted successfully.'
+        'confirm'   => 'Czy na pewno chcesz usunąć materiał eksploatacyjny?',
+        'error'   => 'Wystąpił problem podczas usuwania materiału eksploatacyjnego. Spróbuj ponownie.',
+        'success' => 'Materiał eksploatacyjny został usunięty pomyślnie.'
     ),
 
      'checkout' => array(
-        'error'   		=> 'Consumable was not checked out, please try again',
-        'success' 		=> 'Consumable checked out successfully.',
+        'error'   		=> 'Materiał eksploatacyjny nie został wydany, spróbuj ponownie',
+        'success' 		=> 'Materiał eksploatacyjny został wydany pomyślnie.',
         'user_does_not_exist' => 'Użytkownik nie istnieje. Spróbuj ponownie.'
     ),
 
     'checkin' => array(
-        'error'   		=> 'Consumable was not checked in, please try again',
-        'success' 		=> 'Consumable checked in successfully.',
+        'error'   		=> 'Materiał eksploatacyjny nie został odebrany, spróbuj ponownie',
+        'success' 		=> 'Materiał eksploatacyjny odebrany pomyślnie.',
         'user_does_not_exist' => 'Użytkownik nie istnieje. Spróbuj ponownie.'
     )
 

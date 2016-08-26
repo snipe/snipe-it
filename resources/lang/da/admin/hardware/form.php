@@ -1,9 +1,9 @@
 <?php
 
 return array(
-	'bulk_delete'		=> 'Confrm Bulk Delete Assets',
-  'bulk_delete_help'	=> 'Review the assets for bulk deletion below. Once deleted, these assets can be restored, but they will no longer be associated with any users they are currently assigned to.',
-  'bulk_delete_warn'	=> 'You are about to delete :asset_count assets.',
+	'bulk_delete'		=> 'Bekræft massesletning af aktiver',
+  'bulk_delete_help'	=> 'Gennemgå aktiver for massesletning nedenfor. Disse aktiver kan gendannes når slettet, men de vil ikke længere være forbundet med eventuelle brugere, de i øjeblikket er tildelt.',
+  'bulk_delete_warn'	=> 'Du er i gang med at slette :asset_count aktiver.',
 	'bulk_update'		=> 'Masseopdater Aktiver',
 	'bulk_update_help'	=> 'Denne form tillader dig at opdatere flere aktiver på en gang. Udfyld kun de felter der skal ændres. Ikke udfyldte feltet forbilver uændret.',
 	'bulk_update_warn'	=> 'Du er i færd med at redigere egenskaber på :asset_count aktiver.',
@@ -19,10 +19,10 @@ return array(
     'default_location'	=> 'Standardplacering',
     'eol_date'			=> 'EOL Dato',
     'eol_rate'			=> 'EOL Rate',
-    'expected_checkin'  => 'Expected Checkin Date',
+    'expected_checkin'  => 'Forventet indtjekningsdato',
     'expires'			=> 'Udløber',
     'fully_depreciated'	=> 'Fuldt Afskrevet',
-    'help_checkout'		=> 'If you wish to assign this asset immediately, select "Ready to Deploy" from the status list above. ',
+    'help_checkout'		=> 'Vælg "Klar til implementering" fra listen ovenfor, hvis du ønsker at tildele dette aktiv med det samme. ',
     'mac_address'		=> 'MAC-adresse',
     'manufacturer'		=> 'Producent',
     'model'				=> 'Model',

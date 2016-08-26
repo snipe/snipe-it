@@ -76,6 +76,7 @@
     'image_delete'         	=> 'Удалить изображение',
     'image_upload'         	=> 'Загрузить изображение',
     'import'         	    => 'Импорт',
+    'import-history'        => 'Import History',
     'asset_maintenance'        => 'Обслуживание',
     'asset_maintenance_report' => 'Отчет по обслуживанию',
     'asset_maintenances'       => 'Активы на обслуживании',

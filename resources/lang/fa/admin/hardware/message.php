@@ -36,9 +36,9 @@ return array(
     ),
 
     'import' => array(
-        'error'         => 'برخی از موارد به درستی وارد بود.',
-        'errorDetail'   => 'موارد زیر به دلیل خطاهای وارد شدند.',
-        'success'       => "دستور شما وارد شده است.",
+        'error'         => 'Some items did not import correctly.',
+        'errorDetail'   => 'The following Items were not imported because of errors.',
+        'success'       => "Your file has been imported",
     ),
 
 
@@ -51,7 +51,8 @@ return array(
     'checkout' => array(
         'error'   		=> 'دارایی در بررسی نیست، لطفا دوباره امتحان کنید',
         'success' 		=> 'دارایی را بررسی کنید موفقیت.',
-        'user_does_not_exist' => 'کاربر نامعتبر است لطفا دوباره امتحان کنید.'
+        'user_does_not_exist' => 'کاربر نامعتبر است لطفا دوباره امتحان کنید.',
+        'not_available' => 'That asset is not available for checkout!'
     ),
 
     'checkin' => array(

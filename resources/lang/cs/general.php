@@ -76,6 +76,7 @@
     'image_delete'         	=> 'Smazat obrázek',
     'image_upload'         	=> 'Nahrát obrázek',
     'import'         	    => 'Import',
+    'import-history'        => 'Import History',
     'asset_maintenance'        => 'Údržba zařízení',
     'asset_maintenance_report' => 'Zpráva o údržbě zařízení',
     'asset_maintenances'       => 'Záznamy o údržbě zařízení',

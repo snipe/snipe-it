@@ -76,6 +76,7 @@
     'image_delete'         	=> 'Sterge poza',
     'image_upload'         	=> 'Incarca poza',
     'import'         	    => 'Import',
+    'import-history'        => 'Import History',
     'asset_maintenance'        => 'Mentenanta produs',
     'asset_maintenance_report' => 'Raport privind mentenanta produsului',
     'asset_maintenances'       => 'Asset Maintenances',

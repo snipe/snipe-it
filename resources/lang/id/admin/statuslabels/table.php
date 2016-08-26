@@ -1,15 +1,17 @@
 <?php
 
 return array(
-    'about'      	=> 'About Status Labels',
-    'archived'      	=> 'Archived',
-    'create'      	=> 'Create Status Label',
-    'deployable'      	=> 'Deployable',
-    'info'      	=> 'Status labels are used to describe the various states your assets could be in. They may be out for repair, lost/stolen, etc. You can create new status labels for deployable, pending and archived assets.',
-    'name'      	=> 'Status Name',
-    'pending'      	=> 'Pending',
-    'status_type'   => 'Status Type',
-    'title'      	=> 'Status Labels',
-    'undeployable'  => 'Undeployable',
-    'update'      	=> 'Update Status Label',
+    'about'      	=> 'Tentang label status',
+    'archived'      	=> 'Diarsipkan',
+    'create'      	=> 'Membuat label status',
+    'color'      	=> 'Chart Color',
+    'deployable'      	=> 'Dapat digunakan',
+    'info'      	=> 'Label status digunakan untuk menjelaskan berbagai macam status aset. Sebagai contoh, rusak/hilang, dalam perbaikan dan sebagainya. Anda dapat membuat status label baru untuk penundaan aset, aset yang dapat digunakan dan aset yang diarsipkan.',
+    'name'      	=> 'Nama Status',
+    'pending'      	=> 'Tunda',
+    'status_type'   => 'Tipe Status',
+    'show_in_nav'   => 'Show in side nav',
+    'title'      	=> 'Label Status',
+    'undeployable'  => 'Tidak dapat digunakan',
+    'update'      	=> 'Perbarui label status',
 );

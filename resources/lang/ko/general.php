@@ -76,6 +76,7 @@
     'image_delete'         	=> '이미지 삭제',
     'image_upload'         	=> '이미지 올리기',
     'import'         	    => '불러오기',
+    'import-history'        => 'Import History',
     'asset_maintenance'        => '자산 관리',
     'asset_maintenance_report' => '자산 관리 보고서',
     'asset_maintenances'       => '자산 관리',

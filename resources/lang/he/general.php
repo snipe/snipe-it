@@ -76,6 +76,7 @@
     'image_delete'         	=> 'Delete Image',
     'image_upload'         	=> 'Upload Image',
     'import'         	    => 'Import',
+    'import-history'        => 'Import History',
     'asset_maintenance'        => 'Asset Maintenance',
     'asset_maintenance_report' => 'Asset Maintenance Report',
     'asset_maintenances'       => 'Asset Maintenances',

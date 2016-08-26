@@ -33,7 +33,7 @@ return array(
     "digits_between"   => "L'attribut \":attribute\" doit contenir entre :min et :max chiffres.",
     "email"            => "Le format de l'attribut \":attribute\" est invalide.",
     "exists"           => "L'attribut \":attribute\" est invalide.",
-    "email_array"      => "One or more email addresses is invalid.",
+    "email_array"      => "Une ou plusieurs adresses e-mail sont invalides.",
     "image"            => "L'attribut \":attribute\" doit être une image.",
     "in"               => "Le :attribute selectionné est invalide.",
     "integer"          => "L'attribut \":attribute\" doit être un nombre entier.",
@@ -64,8 +64,8 @@ return array(
     ),
     "unique"           => "Cet-te :attribute a déjà été pris-e.",
     "url"              => "Le format de cet-te :attribute est invalide.",
-    "statuslabel_type" => "You must select a valid status label type",
-    "unique_undeleted" => "The :attribute must be unique.",
+    "statuslabel_type" => "Vous devez sélectionner un type d'étiquette de statut valide",
+    "unique_undeleted" => "L'attribut :attribute doit être unique.",
 
 
     /*

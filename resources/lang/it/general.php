@@ -76,6 +76,7 @@
     'image_delete'         	=> 'Cancella l\'Immagine',
     'image_upload'         	=> 'Carica immagine',
     'import'         	    => 'Importa',
+    'import-history'        => 'Import History',
     'asset_maintenance'        => 'Manutenzione Prodotto',
     'asset_maintenance_report' => 'Rapporto manutenzione prodotto',
     'asset_maintenances'       => 'Manutenzione Prodotto',

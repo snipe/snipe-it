@@ -76,6 +76,7 @@
     'image_delete'         	=> 'Slett bilde',
     'image_upload'         	=> 'Last opp bilde',
     'import'         	    => 'Importer',
+    'import-history'        => 'Import History',
     'asset_maintenance'        => 'Vedlikehold av eiendeler',
     'asset_maintenance_report' => 'Rapport Vedlikehold av eiendeler',
     'asset_maintenances'       => 'Vedlikehold av eiendeler',

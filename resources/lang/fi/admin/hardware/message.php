@@ -37,9 +37,9 @@ return array(
     ),
 
     'import' => array(
-        'error'         => 'Some Items did not import Correctly.',
-        'errorDetail'   => 'The Following Items were not imported because of errors.',
-        'success'       => "Your File has been imported",
+        'error'         => 'Some items did not import correctly.',
+        'errorDetail'   => 'The following Items were not imported because of errors.',
+        'success'       => "Your file has been imported",
     ),
 
 
@@ -52,7 +52,8 @@ return array(
     'checkout' => array(
         'error'   		=> 'Laitteen luovutus epäonnistui, yritä uudelleen',
         'success' 		=> 'Laite luovutettu onnistuneesti.',
-        'user_does_not_exist' => 'Käyttäjä on virheellinen. Yritä uudelleen.'
+        'user_does_not_exist' => 'Käyttäjä on virheellinen. Yritä uudelleen.',
+        'not_available' => 'That asset is not available for checkout!'
     ),
 
     'checkin' => array(

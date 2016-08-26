@@ -14,7 +14,7 @@ return array(
     */
 
     "accepted"         => "The :attribute must be accepted.",
-    "active_url"       => "The :attribute is not a valid URL.",
+    "active_url"       => "屬性不是有效的URL",
     "after"            => "The :attribute must be a date after :date.",
     "alpha"            => "The :attribute may only contain letters.",
     "alpha_dash"       => "The :attribute may only contain letters, numbers, and dashes.",

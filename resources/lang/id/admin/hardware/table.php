@@ -2,23 +2,23 @@
 
 return array(
 
-    'asset_tag'   	=> 'Asset Tag',
+    'asset_tag'   	=> 'Tag Aset',
     'asset_model'       => 'Model',
-    'book_value'  	=> 'Value',
-    'change' 		=> 'In/Out',
-    'checkout_date' => 'Checkout Date',
-    'checkoutto' 	=> 'Checked Out',
+    'book_value'  	=> 'Harga',
+    'change' 		=> 'Masuk/Keluar',
+    'checkout_date' => 'Tanggal Pemberian',
+    'checkoutto' 	=> 'Diberikan',
     'diff' 			=> 'Diff',
-    'dl_csv' 		=> 'Download CSV',
-    'eol' 			=> 'EOL',
+    'dl_csv' 		=> 'Unduh CSV',
+    'eol' 			=> 'MHP',
     'id'      		=> 'ID',
-    'location' 		=> 'Location',
-    'purchase_cost'	=> 'Cost',
-    'purchase_date'	=> 'Purchased',
+    'location' 		=> 'Lokasi',
+    'purchase_cost'	=> 'Biaya',
+    'purchase_date'	=> 'Dibeli',
     'serial'   		=> 'Serial',
     'status'   		=> 'Status',
-    'title'      	=> 'Asset ',
-    'image'		=> 'Device Image',
-    'days_without_acceptance' => 'Days Without Acceptance'
+    'title'      	=> 'Aset ',
+    'image'		=> 'Gambar Perangkat',
+    'days_without_acceptance' => 'Tanda Terima'
 
 );

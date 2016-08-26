@@ -13,12 +13,12 @@ return array(
     |
     */
 
-    "password" => "Passwords must be six characters and match the confirmation.",
+    "password" => "Kata sandi harus 6 karakter dan sama.",
 
-    "user"     => "Username or email address is incorrect",
+    "user"     => "Nama pengguna atau alamat email salah",
 
-    "token"    => "This password reset token is invalid.",
+    "token"    => "Password reset token tidak valid.",
 
-    "sent" => "If a matching email address was found, a password reminder has been sent!",
+    "sent" => "Jika alamat email yang cocok ditemukan, pengingat password telah dikirim!",
 
 );

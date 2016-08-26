@@ -7,7 +7,7 @@ return array(
 	'show_mac_address'			      => 'この型番の資産にMACアドレスフィールドを表示',
     'view_deleted'              => '削除したものを表示',
     'view_models'               => '型番を表示',
-    'fieldset'                  => 'Fieldset',
-    'no_custom_field'           => 'No custom fields',
+    'fieldset'                  => 'フィールドセット',
+    'no_custom_field'           => 'カスタム フィールドなし',
 
 );

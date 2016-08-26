@@ -32,11 +32,11 @@ return array(
     "digits"           => ":attribute skal være :digits cifre.",
     "digits_between"   => ":attribute skal være imellem :min og :max cifre.",
     "email"            => ":attribute formatet er ugylidgt.",
-    "exists"           => "The selected :attribute is invalid.",
-    "email_array"      => "One or more email addresses is invalid.",
+    "exists"           => "Den valgte :attribute er ugyldig.",
+    "email_array"      => "En eller flere email-adresser er ugyldige.",
     "image"            => ":attribute skal være et billede.",
     "in"               => "Det valgte :attribute er ugyldigt.",
-    "integer"          => "The :attribute must be an integer.",
+    "integer"          => ":attribute skal være et heltal.",
     "ip"               => ":attribute skal være en gyldig IP adresse.",
     "max"              => array(
         "numeric" => ":attribute må ikke overstige :max.",
@@ -49,8 +49,8 @@ return array(
         "file"    => ":attribute skal mindst være :min kilobytes.",
         "string"  => ":attribute skal mindst være :min tegn.",
     ),
-    "not_in"           => "The selected :attribute is invalid.",
-    "numeric"          => "The :attribute must be a number.",
+    "not_in"           => "Den valgte :attribute er ugyldig.",
+    "numeric"          => ":attribute skal være et tal.",
     "regex"            => ":attribute formatet er ugyldigt.",
     "required"         => ":attribute feltet er krævet.",
     "required_if"      => ":attribute feltet er krævet når :other er :value.",
@@ -62,10 +62,10 @@ return array(
         "file"    => ":attribute skal være :size kilobytes.",
         "string"  => ":attribute skal være :size tegn.",
     ),
-    "unique"           => "The :attribute has already been taken.",
+    "unique"           => ":attribute er allerede taget.",
     "url"              => ":attribute formatet er ugyldigt.",
-    "statuslabel_type" => "You must select a valid status label type",
-    "unique_undeleted" => "The :attribute must be unique.",
+    "statuslabel_type" => "Du skal vælge en gyldig statusmærke type",
+    "unique_undeleted" => ":attribute skal være unik.",
 
 
     /*
@@ -80,7 +80,7 @@ return array(
     */
 
     'custom' => array(),
-    'alpha_space' => "The :attribute field contains a character that is not allowed.",
+    'alpha_space' => ":attribute feltet indeholder en karakter der ikke er tilladt.",
 
     /*
     |--------------------------------------------------------------------------

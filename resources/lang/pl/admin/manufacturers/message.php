@@ -3,7 +3,7 @@
 return array(
 
     'does_not_exist' => 'Producent nie istnieje.',
-    'assoc_users'	 => 'This manufacturer is currently associated with at least one model and cannot be deleted. Please update your models to no longer reference this manufacturer and try again. ',
+    'assoc_users'	 => 'Wybrany producent jest obecnie skojarzony z minimum jednym modelem i nie może zostać usunięty. Uaktualnij swoją listę modeli urządzeń by nie zawierała tego producenta, a następnie spróbuj ponownie. ',
 
     'create' => array(
         'error'   => 'Producent nie został stworzony, spróbuj ponownie.',

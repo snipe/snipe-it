@@ -2,24 +2,24 @@
 
 return array(
 
-    'does_not_exist' => 'Status Label does not exist.',
-    'assoc_assets'	 => 'This Status Label is currently associated with at least one Asset and cannot be deleted. Please update your assets to no longer reference this status and try again. ',
+    'does_not_exist' => 'ステータス ラベルは存在しません。',
+    'assoc_assets'	 => 'このステータスラベルは少なくとも一つの資産に関連付けされているため、削除できません。資産の関連付けを削除し、もう一度試して下さい。 ',
 
 
     'create' => array(
-        'error'   => 'Status Label was not created, please try again.',
-        'success' => 'Status Label created successfully.'
+        'error'   => 'ステータスラベルが作成できませんでした。もう一度試して下さい。',
+        'success' => 'ステータスラベルが作成されました。'
     ),
 
     'update' => array(
-        'error'   => 'Status Label was not updated, please try again',
-        'success' => 'Status Label updated successfully.'
+        'error'   => 'ステータスラベルは更新できませんでした。もう一度試して下さい。',
+        'success' => 'ステータスラベルが更新されました。'
     ),
 
     'delete' => array(
-        'confirm'   => 'Are you sure you wish to delete this Status Label?',
-        'error'   => 'There was an issue deleting the Status Label. Please try again.',
-        'success' => 'The Status Label was deleted successfully.'
+        'confirm'   => 'このステータスラベルを削除しますか？',
+        'error'   => 'ステータスラベルを削除する際に問題が発生しました。もう一度やり直して下さい。',
+        'success' => 'ステータスラベルは削除されました。'
     )
 
 );
