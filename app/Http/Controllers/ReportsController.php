@@ -167,7 +167,7 @@ class ReportsController extends Controller
                 $row[] = '';
             }
             $row[] = $asset->purchase_date;
-            $row[] = '"' . Helper::parsePurchasedCost($asset->purchase_cost) . '"';
+            $row[] = '"' . Helper::formatCurrencyOutput($asset->purchase_cost) . '"';
             if ($asset->order_number) {
                 $row[] = e($asset->order_number);
             } else {
