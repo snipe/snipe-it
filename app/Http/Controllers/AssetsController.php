@@ -948,23 +948,28 @@ class AssetsController extends Controller
     * @since [v2.0]
     * @return Redirect
     */
-    public function getProcessImportFile($filename)
+    public function getProcessImportFile()
     {
         // php artisan asset-import:csv path/to/your/file.csv --domain=yourdomain.com --email_format=firstname.lastname
+        $filename = Input::get('filename');
+        $itemType = Input::get('import-type');
+        $updateItems  = Input::get('import-update');
 
         if (!Company::isCurrentUserAuthorized()) {
             return redirect()->to('hardware')->with('error', trans('general.insufficient_permissions'));
         }
-
-        $return = Artisan::call(
-            'snipeit:import',
-            ['filename'=> config('app.private_uploads').'/imports/assets/'.$filename,
+        $importOptions =    ['filename'=> config('app.private_uploads').'/imports/assets/'.$filename,
                                 '--email_format'=>'firstname.lastname',
                                 '--username_format'=>'firstname.lastname',
                                 '--web-importer' => true,
-                                '--user_id' => Auth::user()->id
-                                ]
-        );
+                                '--user_id' => Auth::user()->id,
+                                '--item-type' => $itemType,
+                            ];
+        if ($updateItems) {
+            $importOptions['--update'] = true;
+        }
+
+        $return = Artisan::call('snipeit:import', $importOptions);
         $display_output =  Artisan::output();
         $file = config('app.private_uploads').'/imports/assets/'.str_replace('.csv', '', $filename).'-output-'.date("Y-m-d-his").'.txt';
         file_put_contents($file, $display_output);

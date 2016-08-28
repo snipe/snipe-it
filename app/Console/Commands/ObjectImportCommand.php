@@ -1,25 +1,26 @@
 <?php
 namespace App\Console\Commands;
 
-use Illuminate\Console\Command;
-use Symfony\Component\Console\Input\InputOption;
-use Symfony\Component\Console\Input\InputArgument;
-use League\Csv\Reader;
+use App\Helpers\Helper;
 use App\Models\Accessory;
 use App\Models\Asset;
 use App\Models\AssetModel;
 use App\Models\Category;
 use App\Models\Company;
 use App\Models\Consumable;
+use App\Models\CustomField;
 use App\Models\Location;
 use App\Models\Manufacturer;
+use App\Models\Setting;
 use App\Models\Statuslabel;
 use App\Models\Supplier;
 use App\Models\User;
-use App\Models\CustomField;
 use DB;
-use App\Models\Setting;
+use Illuminate\Console\Command;
 use Illuminate\Database\Eloquent\Model;
+use League\Csv\Reader;
+use Symfony\Component\Console\Input\InputArgument;
+use Symfony\Component\Console\Input\InputOption;
 
 ini_set('max_execution_time', 600); //600 seconds = 10 minutes
 ini_set('memory_limit', '500M');
@@ -795,7 +796,8 @@ class ObjectImportCommand extends Command
         if (!empty($item["purchase_cost"])) {
             //TODO How to generalize this for not USD?
             $purchase_cost = substr($item["purchase_cost"], 0, 1) === '$' ? substr($item["purchase_cost"], 1) : $item["purchase_cost"];
-            $asset->purchase_cost = number_format($purchase_cost, 2, '.', '');
+            // $asset->purchase_cost = number_format($purchase_cost, 2, '.', '');
+            $asset->purchase_cost = Helper::ParseFloat($purchase_cost);
             $this->log("Asset cost parsed: " . $asset->purchase_cost);
         } else {
             $asset->purchase_cost = 0.00;
