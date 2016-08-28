@@ -948,7 +948,7 @@ class AssetsController extends Controller
     * @since [v2.0]
     * @return Redirect
     */
-    public function getProcessImportFile()
+    public function postProcessImportFile()
     {
         // php artisan asset-import:csv path/to/your/file.csv --domain=yourdomain.com --email_format=firstname.lastname
         $filename = Input::get('filename');

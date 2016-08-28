@@ -295,7 +295,7 @@ Route::group(
 
         Route::post( 'import/process/', [ 'as' => 'assets/import/process-file',
                 'middleware' => 'authorize:assets.create',
-                'uses' => 'AssetsController@getProcessImportFile'
+                'uses' => 'AssetsController@postProcessImportFile'
         ]);
         Route::get( 'import/delete/{filename}', [ 'as' => 'assets/import/delete-file',
                 'middleware' => 'authorize:assets.create', // TODO What permissions should this require?
