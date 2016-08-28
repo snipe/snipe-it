@@ -103,9 +103,17 @@ class ObjectImportCommand extends Command
         $this->companies = Company::All(['name', 'id']);
         $this->status_labels = Statuslabel::All(['name', 'id']);
         $this->suppliers = Supplier::All(['name', 'id']);
-        $this->assets = Asset::all();
-        $this->accessories = Accessory::All(['name']);
-        $this->consumables = Consumable::All(['name']);
+        switch (strtolower($this->option('item-type'))) {
+            case "asset":
+                $this->assets = Asset::all();
+                break;
+            case "accessory":
+                $this->accessories = Accessory::All();
+                break;
+            case "consumable":
+                $this->consumables = Consumable::All();
+                break;
+        }
         $this->customfields = CustomField::All(['name']);
         $bar = null;
 
@@ -738,7 +746,7 @@ class ObjectImportCommand extends Command
         foreach ($this->assets as $tempasset) {
             if (strcasecmp($tempasset->asset_tag, $item['asset_tag']) == 0) {
                 $this->log('A matching Asset ' . $item['asset_tag'] . ' already exists');
-                if(!$this->option('update')) {
+                if (!$this->option('update')) {
                     $this->log("Skipping item.");
                     return;
                 }
@@ -867,17 +875,29 @@ class ObjectImportCommand extends Command
      */
     public function createAccessoryIfNotExists(array $item)
     {
+        $accessory = null;
+        $editingAccessory = false;
         $this->log("Creating Accessory");
         foreach ($this->accessories as $tempaccessory) {
             if (strcasecmp($tempaccessory->name, $item["item_name"]) == 0) {
                 $this->log('A matching Accessory ' . $item["item_name"] . ' already exists.  ');
-                // FUTURE: Adjust quantity on import maybe?
-                return;
+                if (!$this->option('update')) {
+                    $this->log("Skipping accessory.");
+                    return;
+                }
+                $this->log('Updating matching accessory with new values');
+                $editingAsset = true;
+                $accessory = $tempaccessory;
             }
         }
+        if (is_null($accessory)) {
+            $this->log("No Matching Accessory, Creating a new one");
+            $accessory = new Accessory();
+        }
 
-        $accessory = new Accessory();
-        $accessory->name = $item["item_name"];
+        if (!$editingAccessory) {
+            $accessory->name = $item["item_name"];
+        }
 
         if (!empty($item["purchase_date"])) {
             $accessory->purchase_date = $item["purchase_date"];
@@ -885,7 +905,7 @@ class ObjectImportCommand extends Command
             $accessory->purchase_date = null;
         }
         if (!empty($item["purchase_cost"])) {
-            $accessory->purchase_cost = $item["purchase_cost"];
+            $accessory->purchase_cost = Helper::ParseFloat($item["purchase_cost"]);
         }
 
         if ($item["location"]) {
@@ -895,20 +915,26 @@ class ObjectImportCommand extends Command
         if ($item["company"]) {
             $accessory->company_id = $item["company"]->id;
         }
-        $accessory->order_number = $item["order_number"];
+        if (!empty($item["order_number"])) {
+            $accessory->order_number = $item["order_number"];
+        }
         if ($item["category"]) {
             $accessory->category_id = $item["category"]->id;
         }
 
         //TODO: Implement
 //		$accessory->notes = e($item_notes);
-        $accessory->requestable = filter_var($item["requestable"], FILTER_VALIDATE_BOOLEAN);
+        if (!empty($item["requestable"])) {
+            $accessory->requestable = filter_var($item["requestable"], FILTER_VALIDATE_BOOLEAN);
+        }
 
         //Must have at least zero of the item if we import it.
-        if ($item["quantity"] > -1) {
-            $accessory->qty = $item["quantity"];
-        } else {
-            $accessory->qty = 1;
+        if (!empty($item["quantity"])) {
+            if ($item["quantity"] > -1) {
+                $accessory->qty = $item["quantity"];
+            } else {
+                $accessory->qty = 1;
+            }
         }
 
         if (!$this->option('testrun')) {
@@ -935,18 +961,29 @@ class ObjectImportCommand extends Command
      */
     public function createConsumableIfNotExists(array $item)
     {
+        $consumable = null;
+        $editingConsumable = false;
         $this->log("Creating Consumable");
         foreach ($this->consumables as $tempconsumable) {
             if (strcasecmp($tempconsumable->name, $item["item_name"]) == 0) {
                 $this->log("A matching consumable " . $item["item_name"] . " already exists");
-                //TODO: Adjust quantity if different maybe?
-                return;
+                if (!$this->option('update')) {
+                    $this->log("Skipping consumable.");
+                    return;
+                }
+                $this->log('Updating matching consumable with new values');
+                $editingConsumable = true;
+                $consumable = $tempconsumable;
             }
         }
 
-        $consumable = new Consumable();
-        $consumable->name = $item["item_name"];
-
+        if (is_null($consumable)) {
+            $this->log("No matching consumable, creating one");
+            $consumable = new Consumable();
+        }
+        if (!$editingConsumable) {
+            $consumable->name = $item["item_name"];
+        }
         if (!empty($item["purchase_date"])) {
             $consumable->purchase_date = $item["purchase_date"];
         } else {
@@ -954,24 +991,37 @@ class ObjectImportCommand extends Command
         }
 
         if (!empty($item["purchase_cost"])) {
-            $consumable->purchase_cost = $item["purchase_cost"];
+            $consumable->purchase_cost = Helper::ParseFloat($item["purchase_cost"]);
         }
-        $consumable->location_id = $item["location"]->id;
+        if ($item["location"]) {
+            $consumable->location_id = $item["location"]->id;
+        }
         $consumable->user_id = $this->option('user_id');
-        $consumable->company_id = $item["company"]->id;
-        $consumable->order_number = $item["order_number"];
-        $consumable->category_id = $item["category"]->id;
+        if ($item["company"]) {
+            $consumable->company_id = $item["company"]->id;
+        }
+        if (!empty($item["order_number"])) {
+            $consumable->order_number = $item["order_number"];
+        }
+        if ($item["category"]) {
+            $consumable->category_id = $item["category"]->id;
+        }
         // TODO:Implement
         //$consumable->notes= e($item_notes);
-        $consumable->requestable = filter_var($item["requestable"], FILTER_VALIDATE_BOOLEAN);
+        if (!empty($item["requestable"])) {
+            $consumable->requestable = filter_var($item["requestable"], FILTER_VALIDATE_BOOLEAN);
+        }
 
-        if ($item["quantity"] > -1) {
-            $consumable->qty = $item["quantity"];
-        } else {
-            $consumable->qty = 1;
+        if (!empty($item["quantity"])) {
+            if ($item["quantity"] > -1) {
+                $consumable->qty = $item["quantity"];
+            } else {
+                $consumable->qty = 1;
+            }
         }
 
         if (!$this->option("testrun")) {
+            // dd($consumable);
             if ($consumable->save()) {
                 $this->log("Consumable " . $item["item_name"] . ' was created');
                 // $this->comment("Consumable " . $item["item_name"] . ' was created');

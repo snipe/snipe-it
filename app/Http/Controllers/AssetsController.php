@@ -973,8 +973,22 @@ class AssetsController extends Controller
         $display_output =  Artisan::output();
         $file = config('app.private_uploads').'/imports/assets/'.str_replace('.csv', '', $filename).'-output-'.date("Y-m-d-his").'.txt';
         file_put_contents($file, $display_output);
+        // We use hardware instead of asset in the url
+        $redirectTo = "hardware";
+        switch($itemType) {
+            case "asset":
+                $redirectTo = "hardware";
+                break;
+            case "accessory":
+                $redirectTo = "accessories";
+                break;
+            case "consumable":
+                $redirectTo = "consumables";
+                break;
+        }
+
         if ($return === 0) { //Success
-            return redirect()->to('hardware')->with('success', trans('admin/hardware/message.import.success'));
+            return redirect()->to(route($redirectTo))->with('success', trans('admin/hardware/message.import.success'));
         } elseif ($return === 1) { // Failure
             return redirect()->back()->with('import_errors', json_decode($display_output))->with('error', trans('admin/hardware/message.import.error'));
         }
