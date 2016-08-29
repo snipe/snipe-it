@@ -927,6 +927,18 @@ class AssetsController extends Controller
 
     }
 
+    public function getDeleteImportFile($filename)
+    {
+        if (!Company::isCurrentUserAuthorized()) {
+            return redirect()->to('hardware')->with('error', trans('general.insufficient_permissions'));
+        }
+
+        if (unlink(config('app.private_uploads').'/imports/assets/'.$filename)) {
+            return redirect()->back()->with('success', trans('admin/hardware/message.import.file_delete_success'));
+        }
+        return redirect()->back()->with('error', trans('admin/hardware/message.import.file_delete_error'));
+    }
+
 
     /**
     * Process the uploaded file
@@ -936,28 +948,47 @@ class AssetsController extends Controller
     * @since [v2.0]
     * @return Redirect
     */
-    public function getProcessImportFile($filename)
+    public function postProcessImportFile()
     {
         // php artisan asset-import:csv path/to/your/file.csv --domain=yourdomain.com --email_format=firstname.lastname
+        $filename = Input::get('filename');
+        $itemType = Input::get('import-type');
+        $updateItems  = Input::get('import-update');
 
         if (!Company::isCurrentUserAuthorized()) {
             return redirect()->to('hardware')->with('error', trans('general.insufficient_permissions'));
         }
-
-        $return = Artisan::call(
-            'snipeit:import',
-            ['filename'=> config('app.private_uploads').'/imports/assets/'.$filename,
+        $importOptions =    ['filename'=> config('app.private_uploads').'/imports/assets/'.$filename,
                                 '--email_format'=>'firstname.lastname',
                                 '--username_format'=>'firstname.lastname',
                                 '--web-importer' => true,
-                                '--user_id' => Auth::user()->id
-                                ]
-        );
+                                '--user_id' => Auth::user()->id,
+                                '--item-type' => $itemType,
+                            ];
+        if ($updateItems) {
+            $importOptions['--update'] = true;
+        }
+
+        $return = Artisan::call('snipeit:import', $importOptions);
         $display_output =  Artisan::output();
         $file = config('app.private_uploads').'/imports/assets/'.str_replace('.csv', '', $filename).'-output-'.date("Y-m-d-his").'.txt';
         file_put_contents($file, $display_output);
+        // We use hardware instead of asset in the url
+        $redirectTo = "hardware";
+        switch($itemType) {
+            case "asset":
+                $redirectTo = "hardware";
+                break;
+            case "accessory":
+                $redirectTo = "accessories";
+                break;
+            case "consumable":
+                $redirectTo = "consumables";
+                break;
+        }
+
         if ($return === 0) { //Success
-            return redirect()->to('hardware')->with('success', trans('admin/hardware/message.import.success'));
+            return redirect()->to(route($redirectTo))->with('success', trans('admin/hardware/message.import.success'));
         } elseif ($return === 1) { // Failure
             return redirect()->back()->with('import_errors', json_decode($display_output))->with('error', trans('admin/hardware/message.import.error'));
         }
