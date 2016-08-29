@@ -886,7 +886,7 @@ class ObjectImportCommand extends Command
                     return;
                 }
                 $this->log('Updating matching accessory with new values');
-                $editingAsset = true;
+                $editingAccessory = true;
                 $accessory = $tempaccessory;
             }
         }
