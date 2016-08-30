@@ -320,9 +320,7 @@ class ObjectImportCommand extends Command
     public function createOrFetchAssetModel(array $row, $category, $manufacturer)
     {
 
-        $this->log(print_r($row));
         $asset_model_name = $this->array_smart_fetch($row, "model name");
-        $this->log('Raw Model Name: '.$asset_model_name);
         $asset_modelno = $this->array_smart_fetch($row, "model number");
         if (empty($asset_model_name)) {
             $asset_model_name ='Unknown';
