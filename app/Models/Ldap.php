@@ -81,11 +81,18 @@ class Ldap extends Model
         if ($settings->is_ad =='1')
         {
 
-            // In case they haven't added an AD domain
-            if ($settings->ad_domain == '') {
-                $userDn      = $username.'@'.$settings->email_domain;
+            // Check if they are using the userprincipalname for the username field.
+            // If they are, we can skip building the UPN to authenticate against AD
+            if ($ldap_username_field=='userprincipalname')
+            {
+                $userDn = $username;
             } else {
-               $userDn      = $username.'@'.$settings->ad_domain;
+                // In case they haven't added an AD domain
+                if ($settings->ad_domain == '') {
+                    $userDn      = $username.'@'.$settings->email_domain;
+                } else {
+                    $userDn      = $username.'@'.$settings->ad_domain;
+                }
             }
 
         } else {
