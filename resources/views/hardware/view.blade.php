@@ -288,9 +288,9 @@
             <div class="col-md-4">
 
               @if ($asset->image)
-                <img src="{{ config('app.url') }}/uploads/assets/{{{ $asset->image }}}" class="assetimg">
+                <img src="{{ config('app.url') }}/uploads/assets/{{{ $asset->image }}}" class="assetimg img-responsive">
               @elseif ($asset->model->image!='')
-                <img src="{{ config('app.url') }}/uploads/models/{{{ $asset->model->image }}}" class="assetimg">
+                <img src="{{ config('app.url') }}/uploads/models/{{{ $asset->model->image }}}" class="assetimg img-responsive">
               @endif
 
               @if  (App\Models\Setting::getSettings()->qr_code=='1')
