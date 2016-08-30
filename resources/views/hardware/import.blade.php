@@ -12,6 +12,43 @@
 
 {{-- Modal import dialog --}}
 
+@if (session()->has('import_errors'))
+    <div class="box">
+        <div class="box-body">
+            <div class="alert alert-warning">
+                <strong>Warning</strong> {{trans('admin/hardware/message.import.errorDetail')}}
+            </div>
+
+    <div class="errors-table">
+
+        <table class="table table-striped table-bordered" id="errors-table">
+            <thead>
+            <th>Asset</th>
+            <th>Errors</th>
+            </thead>
+            <tbody>
+            @foreach (session('import_errors') as $asset => $itemErrors)
+                <tr>
+                    <td> {{ $asset }}</td>
+                    <td>
+                        @foreach ($itemErrors as $field => $values )
+                            <b>{{ $field }}:</b>
+                            @foreach( $values as $errorString)
+                                <span>{{$errorString[0]}} </span>
+                            @endforeach
+                            <br />
+                        @endforeach
+                    </td>
+                </tr>
+            @endforeach
+            </tbody>
+        </table>
+    </div>
+        </div>
+    </div>
+@endif
+
+
 <div class="modal fade" id="importModal">
     <form id="import-modal-form" class="form-horizontal" method="post" action="{{ route('assets/import/process-file') }}" autocomplete="off" role="form">
         {{ csrf_field()}}
@@ -44,7 +81,7 @@
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">{{ trans('button.cancel') }}</button>
                     <!-- <button type="button" class="btn btn-primary" id="modal-save">{{ trans('general.save') }}</button> -->
-                    {{Form::submit(trans('general.save'))}}
+                    {{Form::submit(trans('general.save'), ['class' => 'btn btn-primary'])}}
                 </div>
             </div>
         </div>
@@ -109,35 +146,7 @@
             </div>
         </div>
 
-        @if (session()->has('import_errors'))
-        <div class="errors-table">
-        <div class="alert alert-warning">
-            <strong>Warning</strong> {{trans('admin/hardware/message.import.errorDetail')}}
-        </div>
-        <table class="table table-striped table-bordered" id="errors-table">
-            <thead>
-                <th>Asset</th>
-                <th>Errors</th>
-            </thead>
-            <tbody>
-                @foreach (session('import_errors') as $asset => $itemErrors)
-                <tr>
-                    <td> {{ $asset }}</td>
-                    <td>
-                    @foreach ($itemErrors as $field => $values )
-                            <b>{{ $field }}:</b>
-                              @foreach( $values as $errorString)
-                                      <span>{{$errorString[0]}} </span>
-                              @endforeach
-                              <br />
-                    @endforeach
-                    </td>
-                </tr>
-                @endforeach
-            </tbody>
-        </table>
-        </div>
-        @endif
+
     </div>
 </div>
 @section('moar_scripts')
@@ -190,7 +199,7 @@
                         $('.progress-bar-text').html('Finished!');
                         $('.progress-checkmark').fadeIn('fast').html('<i class="fa fa-check fa-3x icon-white" style="color: green"></i>');
                         $.each(data.result.files, function (index, file) {
-                            $('<tr><td>' + file.name + '</td><td>Just now</td><td>' + file.filesize + '</td><td><a class="btn btn-info btn-sm" href="#" data-toggle="modal" data-target="#importModal" data-filename='+ file.name + '><i class="fa fa-spinner process"></i> Process</a><a class="btn btn-danger btn-sm" href="import/delete/' +file.name + '"><i class="fa fa-trash icon-white"></i></a></td></tr>').prependTo("#upload-table > tbody");
+                            $('<tr><td>' + file.name + '</td><td>Just now</td><td>' + file.filesize + '</td><td><a class="btn btn-info btn-sm" href="#" data-toggle="modal" data-target="#importModal" data-filename='+ file.name + '><i class="fa fa-spinner process"></i> Process</a> <a class="btn btn-danger btn-sm" href="import/delete/' +file.name + '"><i class="fa fa-trash icon-white"></i></a></td></tr>').prependTo("#upload-table > tbody");
                         });
                     }
                     $('#progress').removeClass('active');
