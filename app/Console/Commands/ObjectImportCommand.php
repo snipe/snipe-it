@@ -21,6 +21,7 @@ use Illuminate\Database\Eloquent\Model;
 use League\Csv\Reader;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputOption;
+use ForceUTF8\Encoding;
 
 ini_set('max_execution_time', 600); //600 seconds = 10 minutes
 ini_set('memory_limit', '500M');
@@ -284,7 +285,7 @@ class ObjectImportCommand extends Command
      */
     public function array_smart_fetch(array $array, $key, $default = '')
     {
-        return array_key_exists($key, $array) ? e(trim($array[ $key ])) : $default;
+        return array_key_exists(trim($key), $array) ? e(Encoding::fixUTF8(trim($array[ $key ]))) : $default;
     }
 
 
@@ -319,10 +320,12 @@ class ObjectImportCommand extends Command
     public function createOrFetchAssetModel(array $row, $category, $manufacturer)
     {
 
+        $this->log(print_r($row));
         $asset_model_name = $this->array_smart_fetch($row, "model name");
+        $this->log('Raw Model Name: '.$asset_model_name);
         $asset_modelno = $this->array_smart_fetch($row, "model number");
         if (empty($asset_model_name)) {
-            $asset_model_name='Unknown';
+            $asset_model_name ='Unknown';
         }
         if (empty($asset_modelno)) {
             $asset_modelno='';
@@ -355,6 +358,7 @@ class ObjectImportCommand extends Command
                 return $asset_model;
             } else {
                 $this->jsonError('Asset Model "' . $asset_model_name . '"', $asset_model->getErrors());
+                $this->log('Asset Model "' . $asset_model_name . '"', $asset_model->getErrors());
                 return $asset_model;
             }
         } else {
