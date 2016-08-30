@@ -7,7 +7,8 @@
           @if ($field->element!='text')
               <!-- Listbox -->
               @if ($field->element=='listbox')
-                  {{ Form::select($field->db_column_name(), $field->formatFieldValuesAsArray(), Input::old($field->db_column_name(), $asset->{$field->db_column_name()}), ['class'=>'format select2 form-control']) }}
+                  {{ Form::select($field->db_column_name(), $field->formatFieldValuesAsArray(),
+                  Input::old($field->db_column_name(),(isset($asset) ? $asset->{$field->db_column_name()} : "")), ['class'=>'format select2 form-control']) }}
 
               @elseif ($field->element=='checkbox')
                     <!-- Checkboxes -->
