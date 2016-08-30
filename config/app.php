@@ -129,6 +129,20 @@ return [
 
     /*
     |--------------------------------------------------------------------------
+    | ALLOW I-FRAMING
+    |--------------------------------------------------------------------------
+    |
+    | Normal users will never need to edit this. This option lets you run
+    | Snipe-IT within an I-Frame, which is normally disabled by default for
+    | security reasons, to prevent clickjacking. It should normally be set to false.
+    |
+    */
+
+    'allow_iframing' => env('ALLOW_IFRAMING', false),
+
+
+    /*
+    |--------------------------------------------------------------------------
     | Demo Mode Lockdown
     |--------------------------------------------------------------------------
     |
@@ -138,7 +152,6 @@ return [
     */
 
     'lock_passwords' => env('APP_LOCKED', false),
-
 
 
     /*
