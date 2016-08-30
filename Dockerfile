@@ -80,7 +80,7 @@ RUN cd /var/www/html;composer install
 
 ############### DATA VOLUME #################
 
-VOLUME [/var/lib/snipeit]
+VOLUME ["/var/lib/snipeit"]
 
 ##### START SERVER
 
