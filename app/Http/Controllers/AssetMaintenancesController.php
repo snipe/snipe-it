@@ -122,20 +122,18 @@ class AssetMaintenancesController extends Controller
 
             $actions = '<nobr><a href="'.route('update/asset_maintenance', $maintenance->id).'" class="btn btn-warning btn-sm" style="margin-right:5px;"><i class="fa fa-pencil icon-white"></i></a><a data-html="false" class="btn delete-asset btn-danger btn-sm" data-toggle="modal" href="'.route('delete/asset_maintenance', $maintenance->id).'" data-content="'.trans('admin/asset_maintenances/message.delete.confirm').'" data-title="'.trans('general.delete').' '.htmlspecialchars($maintenance->title).'?" onClick="return false;"><i class="fa fa-trash icon-white"></i></a></nobr>';
 
-            if (($maintenance->cost) && ($maintenance->asset->assetloc) &&  ($maintenance->asset->assetloc->currency!='')) {
+            if (($maintenance->cost) && (isset($maintenance->asset)) && ($maintenance->asset->assetloc) &&  ($maintenance->asset->assetloc->currency!='')) {
                 $maintenance_cost = $maintenance->asset->assetloc->currency.$maintenance->cost;
             } else {
                 $maintenance_cost = $settings->default_currency.$maintenance->cost;
             }
-
-            $company = $maintenance->asset->company;
-
+            
             $rows[] = array(
                 'id'            => $maintenance->id,
-                'asset_name'    =>  (string)link_to('/hardware/'.$maintenance->asset->id.'/view', $maintenance->asset->showAssetName()) ,
+                'asset_name'    =>  ($maintenance->asset) ? (string)link_to('/hardware/'.$maintenance->asset->id.'/view', $maintenance->asset->showAssetName()) : 'Deleted Asset' ,
                 'title'         => $maintenance->title,
                 'notes'         => $maintenance->notes,
-                'supplier'      => $maintenance->supplier->name,
+                'supplier'      => ($maintenance->supplier) ? (string)link_to('/admin/settings/suppliers/'.$maintenance->supplier->id.'/view', $maintenance->supplier->name) : 'Deleted Supplier',
                 'cost'          => $maintenance_cost,
                 'asset_maintenance_type'          => e($maintenance->asset_maintenance_type),
                 'start_date'         => $maintenance->start_date,
@@ -143,7 +141,7 @@ class AssetMaintenancesController extends Controller
                 'completion_date'     => $maintenance->completion_date,
                 'user_id'       => ($maintenance->admin) ? (string)link_to('/admin/users/'.$maintenance->admin->id.'/view', $maintenance->admin->fullName()) : '',
                 'actions'       => $actions,
-                'companyName'   => is_null($company) ? '' : $company->name
+                'companyName'   => ($maintenance->asset) ? $maintenance->asset->company->name : ''
             );
         }
 
