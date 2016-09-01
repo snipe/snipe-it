@@ -20,11 +20,36 @@
         <div class="box box-default">
             <div class="box-body">
 
+                @if ($models->count() > 0)
+                <h4>Requestable Models</h4>
+                <table class="table table-striped">
+                    <thead>
+                        <tr role="row">                            
+                            <th class="col-md-6" bSortable="true">{{ trans('admin/hardware/table.asset_model') }}</th>
+                            <th class="col-md-5" bSortable="true">Quantity Available TODO TRANSLATE</th>
+                            <th class="col-md-1 actions" bSortable="false">{{ trans('table.actions') }}</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        @foreach($models as $requestableModel)
+                            <tr>
+                                <td>{{$requestableModel->name}}</td>
+                                <td>{{$requestableModel->assets()->where('requestable', '1')->count()}}</td>
+                                <td>
+                                    <a href="{{ route('account/request-asset', $requestableModel->id) }}" class="btn btn-info btn-sm" title="{{ trans('button.request') }}">{{ trans('button.request') }}</a>
+                                </td>
+                            </tr>
+                        @endforeach
+                    </tbody> 
+                </table>
+                
+                @endif
+
                 @if ($assets->count() > 0)
 
                 <div class="table-responsive">
                 <table class="table table-striped">
-
                     <thead>
                         <tr role="row">                            
                             <th class="col-md-3" bSortable="true">{{ trans('admin/hardware/table.asset_model') }}</th>
@@ -76,6 +101,7 @@
                         @endforeach
                     </tbody>
                 </table>
+
 
                 @else
                 <div class="col-md-12">

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use App\Models\Accessory;
 use App\Models\Actionlog;
 use App\Models\Asset;
+use App\Models\AssetModel;
 use App\Models\Company;
 use App\Models\Consumable;
 use App\Models\Component;
@@ -60,8 +61,9 @@ class ViewAssetsController extends Controller
     {
 
         $assets = Asset::with('model', 'defaultLoc', 'assetloc', 'assigneduser')->Hardware()->RequestableAssets()->get();
+        $models = AssetModel::with('category')->RequestableModels()->get();
 
-        return View::make('account/requestable-assets', compact('user', 'assets'));
+        return View::make('account/requestable-assets', compact('user', 'assets', 'models'));
     }
 
 

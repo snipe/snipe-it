@@ -1670,10 +1670,6 @@ class AssetsController extends Controller
             case 'Deployed':
                 $assets->Deployed();
                 break;
-            default:
-                $assets->NotArchived();
-                break;
-
         }
 
         if ($request->has('status_id')) {

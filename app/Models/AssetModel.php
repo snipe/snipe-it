@@ -132,6 +132,22 @@ class AssetModel extends Model
     }
 
     /**
+     * scopeRequestable
+     * Get all models that are requestable by a user.
+     *
+     * @param       $query
+     *
+     * @return $query
+     * @author  Daniel Meltzer <parallelgrapefruit@gmail.com
+     * @version v3.5
+     */
+    public function scopeRequestableModels($query)
+    {
+
+        return $query->where('requestable', '1');
+    }
+
+    /**
     * Query builder scope to search on text
     *
     * @param  Illuminate\Database\Query\Builder  $query  Query builder instance
