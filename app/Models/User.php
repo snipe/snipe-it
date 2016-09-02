@@ -261,6 +261,14 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
             ->orderBy('created_at', 'desc');
     }
 
+    /**
+     * Fetch Items User has requested
+     */
+    public function checkoutRequests()
+    {
+        return $this->belongsToMany(Asset::class, 'checkout_requests');
+    }
+
     public function throttle()
     {
         return $this->hasOne('\App\Models\Throttle');

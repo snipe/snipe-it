@@ -1,6 +1,7 @@
 <?php
 namespace App\Models;
 
+use App\Models\Requestable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Watson\Validating\ValidatingTrait;
@@ -14,6 +15,7 @@ use Watson\Validating\ValidatingTrait;
 class AssetModel extends Model
 {
     use SoftDeletes;
+    use Requestable;
     protected $dates = ['deleted_at'];
     protected $table = 'models';
 
