@@ -1,6 +1,7 @@
 <?php
-use App\Models\Statuslabel;
+use App\Models\CheckoutRequest;
 use App\Models\Location;
+use App\Models\Statuslabel;
 
 /*
 |--------------------------------------------------------------------------
@@ -388,6 +389,11 @@ Route::group(
 
 Route::group([ 'prefix' => 'admin','middleware' => ['web','auth']], function () {
 
+    Route::get('requests', function() {
+        foreach( CheckoutRequest::with('user')->get() as $requestedItem) {
+            echo $requestedItem->user->username . ' requested ' . $requestedItem->requestedItem->name;
+        }
+    });
     # Licenses
     Route::group([ 'prefix' => 'licenses', 'middleware'=>'authorize:licenses.view' ], function () {
 

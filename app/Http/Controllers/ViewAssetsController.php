@@ -104,6 +104,8 @@ class ViewAssetsController extends Controller
                 });
             }
 
+            $asset->request();
+
 
             if ($settings->slack_endpoint) {
 
