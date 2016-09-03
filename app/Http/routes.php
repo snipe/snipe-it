@@ -389,11 +389,13 @@ Route::group(
 
 Route::group([ 'prefix' => 'admin','middleware' => ['web','auth']], function () {
 
-    Route::get('requests', function() {
-        foreach( CheckoutRequest::with('user')->get() as $requestedItem) {
-            echo $requestedItem->user->username . ' requested ' . $requestedItem->requestedItem->name;
-        }
-    });
+    Route::get('requests',
+        // foreach( CheckoutRequest::with('user')->get() as $requestedItem) {
+        //     echo $requestedItem->user->username . ' requested ' . $requestedItem->requestedItem->name;
+            [
+            'as' => 'requests',
+            'uses' => 'ViewAssetsController@getRequestedAssets'
+            ]);
     # Licenses
     Route::group([ 'prefix' => 'licenses', 'middleware'=>'authorize:licenses.view' ], function () {
 

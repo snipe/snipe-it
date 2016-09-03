@@ -78,6 +78,11 @@ class ViewAssetsController extends Controller
             return redirect()->route('requestable-assets')->with('error', trans('admin/hardware/message.does_not_exist_or_not_requestable'));
         } elseif (!Company::isCurrentUserHasAccess($asset)) {
             return redirect()->route('requestable-assets')->with('error', trans('general.insufficient_permissions'));
+        }
+        // If it's requested, cancel the request.
+        if ($asset->isRequestedBy(Auth::user())) {
+            $asset->cancelRequest();
+            return redirect()->route('requestable-assets')->with('success')->with('success', trans('admin/hardware/message.requests.success'));
         } else {
 
             $logaction = new Actionlog();
@@ -140,6 +145,13 @@ class ViewAssetsController extends Controller
         }
 
 
+    }
+
+    public function getRequestedAssets()
+    {
+        $checkoutrequests = CheckoutRequest::all();
+
+        return View::make('account/requested-items', compact($checkoutrequests));
     }
 
 

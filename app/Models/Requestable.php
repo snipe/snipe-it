@@ -37,4 +37,9 @@ trait Requestable
             new CheckoutRequest(['user_id' => Auth::id()])
         );
     }
+
+    public function cancelRequest()
+    {
+        $this->requests()->where('user_id', Auth::id())->delete();
+    }
 }
