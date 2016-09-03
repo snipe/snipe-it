@@ -17,6 +17,7 @@ class CreateCheckoutRequestsTable extends Migration
             $table->integer('user_id');
             $table->integer('requestable_id');
             $table->string('requestable_type');
+            $table->integer('quantity')->default(1);
             $table->timestamps();
 
             $table->unique(['user_id', 'requestable_id', 'requestable_type']);

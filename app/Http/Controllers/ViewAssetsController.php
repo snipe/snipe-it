@@ -67,6 +67,20 @@ class ViewAssetsController extends Controller
     }
 
 
+    public function getRequestItem($itemType, $itemId = null)
+    {
+        $item = null;
+        $itemType = 'App\\Models\\' . studly_case($itemType);
+        $item = $itemType::find($itemId);
+        if ($item->isRequestedBy(Auth::user())) {
+            $item->cancelRequest();
+            return redirect()->route('requestable-assets')->with('success')->with('success', trans('admin/hardware/message.requests.success'));
+
+        } else {
+            $item->request();
+            return redirect()->route('requestable-assets')->with('success')->with('success', trans('admin/hardware/message.requests.success'));
+        }
+    }
     public function getRequestAsset($assetId = null)
     {
 

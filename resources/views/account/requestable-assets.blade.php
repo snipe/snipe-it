@@ -13,7 +13,6 @@
 {{-- Page content --}}
 @section('content')
 
-
 <div class="row">
     <div class="col-md-12">
 
@@ -74,12 +73,12 @@
 
                                     <td>
                                         @if ($asset->isRequestedBy(Auth::user()))
-                                            <a href="{{ route('account/request-asset', $asset->id)}}" class="btn btn-danger btn-sm" title="{{ trans('button.cancel') }}">
+                                            <a href="{{ route('account/request-item', ['itemType' => 'asset', 'itemId' => $asset->id]) }}" class="btn btn-danger btn-sm" title="{{ trans('button.cancel') }}">
                                                 {{ trans('button.cancel') }}
                                             </a>
                                         @else
                                             <a
-                                                href="{{ route('account/request-asset', $asset->id) }}"
+                                                href="{{ route('account/request-item', ['itemType' => 'asset', 'itemId' => $asset->id]) }}"
                                                 class="btn btn-info btn-sm"
                                                 title="{{ trans('button.request') }}"
                                             >
@@ -115,18 +114,26 @@
                         <thead>
                             <tr role="row">
                                 <th class="col-md-6" bSortable="true">{{ trans('admin/hardware/table.asset_model') }}</th>
-                                <th class="col-md-5" bSortable="true">{{ trans('admin/accessories/general.remaining') }}</th>
+                                <th class="col-md-3" bSortable="true">{{ trans('admin/accessories/general.remaining') }}</th>
+                                <th class="col-md-2" bSortable="true">{{ trans('general.quantity') }}</th>
                                 <th class="col-md-1 actions" bSortable="false">{{ trans('table.actions') }}</th>
                             </tr>
-                        </thead>
+                    </thead>
 
                         <tbody>
                             @foreach($models as $requestableModel)
                                 <tr>
                                     <td>{{$requestableModel->name}}</td>
                                     <td>{{$requestableModel->assets()->where('requestable', '1')->count()}}</td>
+                                    <td><input type="text" name="request-quantity" value=""></td>
                                     <td>
-                                        <a href="{{ route('account/request-asset', $requestableModel->id) }}" class="btn btn-info btn-sm" title="{{ trans('button.request') }}">{{ trans('button.request') }}</a>
+                                        @if ($requestableModel->isRequestedBy(Auth::user()))
+                                            <a href="{{ route('account/request-item', ['itemType' => 'asset_model', 'itemId' => $requestableModel->id]) }}" class="btn btn-danger btn-sm" title="{{ trans('button.cancel') }}">
+                                                {{ trans('button.cancel') }}
+                                            </a>
+                                        @else
+                                            <a name="Request" href="{{ route('account/request-item', ['itemId' => $requestableModel->id, 'itemType' => 'asset_model']) }}" class="btn btn-info btn-sm" title="{{ trans('button.request') }}">{{ trans('button.request') }}</a>
+                                        @endif
                                     </td>
                                 </tr>
                             @endforeach
@@ -150,4 +157,16 @@
 
 
 
+@stop
+@section('moar_scripts')
+<script>
+
+    $( "a[name='Request']").click(function(event) {
+        // event.preventDefault();
+        quantity = $(this).closest('td').siblings().find('input').val();
+        currentUrl = $(this).attr('href');
+        // $(this).attr('href', currentUrl + '?quantity=' + quantity);
+        // alert($(this).attr('href'));
+    });
+</script>
 @stop
