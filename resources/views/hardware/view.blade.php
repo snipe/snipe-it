@@ -523,7 +523,6 @@
                         </td>
                         <td>{{ $log->action_type }}</td>
                         <td>
-
                           @if ($log->action_type=='uploaded')
 
                             {{ $log->filename }}

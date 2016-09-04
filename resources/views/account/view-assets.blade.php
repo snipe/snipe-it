@@ -262,12 +262,9 @@ View Assets for  {{ $user->fullName() }}
                     </td>
                     <td>{{ $log->action_type }}</td>
                     <td>
-
                         @if ($log->itemType()=="asset")
                             @if ($log->item->deleted_at=='')
-
-                                    {{ $log->item->showAssetName() }}
-
+                                {{ $log->item->showAssetName() }}
                             @else
                                 <del>{{ $log->item->showAssetName() }}</del> (deleted)
                             @endif
