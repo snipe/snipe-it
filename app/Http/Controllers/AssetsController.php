@@ -659,7 +659,7 @@ class AssetsController extends Controller
                             'fields' => [
                                 [
                                     'title' => 'Checked In:',
-                                    'value' => strtoupper($logaction->asset_type).' asset <'.config('app.url').'/hardware/'.$asset->id.'/view'.'|'.e($asset->showAssetName()).'> checked in by <'.config('app.url').'/admin/users/'.Auth::user()->id.'/view'.'|'.e(Auth::user()->fullName()).'>.'
+                                    'value' => class_basename(strtoupper($logaction->item_type)).' asset <'.config('app.url').'/hardware/'.$asset->id.'/view'.'|'.e($asset->showAssetName()).'> checked in by <'.config('app.url').'/admin/users/'.Auth::user()->id.'/view'.'|'.e(Auth::user()->fullName()).'>.'
                                 ],
                                 [
                                     'title' => 'Note:',
@@ -1150,11 +1150,12 @@ class AssetsController extends Controller
                         $item[$asset_tag][$batch_counter]['user_id'] = $user->id;
 
                         Actionlog::firstOrCreate(array(
-                            'asset_id' => $asset->id,
-                            'asset_type' => 'hardware',
+                            'item_id' => $asset->id,
+                            'item_type' => Asset::class,
                             'user_id' =>  Auth::user()->id,
                             'note' => 'Checkout imported by '.Auth::user()->fullName().' from history importer',
-                            'checkedout_to' => $item[$asset_tag][$batch_counter]['user_id'],
+                            'target_id' => $item[$asset_tag][$batch_counter]['user_id'],
+                            'target_type' => User::class,
                             'created_at' =>  $item[$asset_tag][$batch_counter]['checkout_date'],
                             'action_type'   => 'checkout'
                             )
@@ -1190,11 +1191,11 @@ class AssetsController extends Controller
                         $asset_batch[$x]['real_checkin'] = $checkin_date;
 
                         Actionlog::firstOrCreate(array(
-                                'asset_id' => $asset_batch[$x]['asset_id'],
-                                'asset_type' => 'hardware',
+                                'item_id' => $asset_batch[$x]['asset_id'],
+                                'item_type' => Asset::class,
                                 'user_id' => Auth::user()->id,
                                 'note' => 'Checkin imported by ' . Auth::user()->fullName() . ' from history importer',
-                                'checkedout_to' => null,
+                                'target_id' => null,
                                 'created_at' => $checkin_date,
                                 'action_type' => 'checkin'
                             )
@@ -1272,15 +1273,8 @@ class AssetsController extends Controller
                 $upload_success = $file->move($destinationPath, $filename);
 
                 //Log the deletion of seats to the log
-                $logaction = new Actionlog();
-                $logaction->asset_id = $asset->id;
-                $logaction->asset_type = 'hardware';
-                $logaction->user_id = Auth::user()->id;
-                $logaction->note = e(Input::get('notes'));
-                $logaction->checkedout_to =  null;
-                $logaction->created_at =  date("Y-m-d H:i:s");
-                $logaction->filename =  $filename;
-                $log = $logaction->logaction('uploaded');
+                $asset->logUpload($filename, e(Input::get('notes')));
+
             }
         } else {
             return redirect()->back()->with('error', trans('admin/hardware/message.upload.nofiles'));
@@ -1537,8 +1531,8 @@ class AssetsController extends Controller
                     ->update($update_array)) {
 
                         $logaction = new Actionlog();
-                        $logaction->asset_id = $key;
-                        $logaction->asset_type = 'hardware';
+                        $logaction->item_type = Asset::class;
+                        $logaction->item_id = $key;
                         $logaction->created_at =  date("Y-m-d H:i:s");
 
                         if (Input::has('rtd_location_id')) {
@@ -1595,8 +1589,8 @@ class AssetsController extends Controller
                 ->update($update_array)) {
 
                     $logaction = new Actionlog();
-                    $logaction->asset_id = $asset->id;
-                    $logaction->asset_type = 'hardware';
+                    $logaction->item_type = Asset::class;
+                    $logaction->item_id = $asset->id;
                     $logaction->created_at =  date("Y-m-d H:i:s");
                     $logaction->user_id = Auth::user()->id;
                     $log = $logaction->logaction('deleted');

@@ -331,9 +331,7 @@ class ReportsController extends Controller
     {
         $log_actions = Actionlog::orderBy('created_at', 'DESC')
                                 ->with('adminlog')
-                                ->with('accessorylog')
-                                ->with('assetlog')
-                                ->with('licenselog')
+                                ->with('item')
                                 ->with('userlog')
                                 ->orderBy('created_at', 'DESC')
                                 ->get();

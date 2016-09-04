@@ -495,9 +495,10 @@ class UsersController extends Controller
 
                     // Update the asset log
                     $logaction = new Actionlog();
-                    $logaction->asset_id = $asset->id;
-                    $logaction->checkedout_to = $asset->assigned_to;
-                    $logaction->asset_type = 'hardware';
+                    $logaction->item_id = $asset->id;
+                    $logaction->item_type = Asset::class;
+                    $logaction->target_id = $asset->assigned_to;
+                    $logaction->target_type = User::class;
                     $logaction->user_id = Auth::user()->id;
                     $logaction->note = 'Bulk checkin asset and delete user';
                     $logaction->logaction('checkin from');
@@ -514,9 +515,10 @@ class UsersController extends Controller
                     $accessory_array[] = $accessory->accessory_id;
                     // Update the asset log
                     $logaction = new Actionlog();
-                    $logaction->accessory_id = $accessory->id;
-                    $logaction->checkedout_to = $accessory->assigned_to;
-                    $logaction->asset_type = 'accessory';
+                    $logaction->item_id = $accessory->id;
+                    $logaction->item_type = Accessory::class;
+                    $logaction->target_id = $accessory->assigned_to;
+                    $logaction->target_type = User::class;
                     $logaction->user_id = Auth::user()->id;
                     $logaction->note = 'Bulk checkin accessory and delete user';
                     $logaction->logaction('checkin from');
@@ -528,9 +530,10 @@ class UsersController extends Controller
                     $license_array[] = $license->id;
                     // Update the asset log
                     $logaction = new Actionlog();
-                    $logaction->asset_id = $license->id;
-                    $logaction->checkedout_to = $license->assigned_to;
-                    $logaction->asset_type = 'software';
+                    $logaction->item_id = $license->id;
+                    $logaction->item_type = License::class;
+                    $logaction->target_id = $license->assigned_to;
+                    $logaction->target_type = User::class; 
                     $logaction->user_id = Auth::user()->id;
                     $logaction->note = 'Bulk checkin license and delete user';
                     $logaction->logaction('checkin from');
@@ -598,7 +601,7 @@ class UsersController extends Controller
 
         $user = User::with('assets', 'assets.model', 'consumables', 'accessories', 'licenses', 'userloc')->withTrashed()->find($userId);
 
-        $userlog = $user->userlog->load('assetlog', 'consumablelog', 'assetlog.model', 'licenselog', 'accessorylog', 'userlog', 'adminlog');
+        $userlog = $user->userlog->load('item');
 
         if (isset($user->id)) {
 
@@ -1017,11 +1020,11 @@ class UsersController extends Controller
 
               //Log the deletion of seats to the log
                 $logaction = new Actionlog();
-                $logaction->asset_id = $user->id;
-                $logaction->asset_type = 'user';
+                $logaction->item_id = $user->id;
+                $logaction->item_type = User::class;
                 $logaction->user_id = Auth::user()->id;
                 $logaction->note = e(Input::get('notes'));
-                $logaction->checkedout_to = null;
+                $logaction->target_id = null;
                 $logaction->created_at = date("Y-m-d h:i:s");
                 $logaction->filename = $filename;
                 $logaction->action_type = 'uploaded';

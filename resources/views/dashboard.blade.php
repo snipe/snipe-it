@@ -111,15 +111,15 @@
                   @foreach ($recent_activity as $activity)
                     <tr>
                         <td>
-                            @if ($activity->asset_type=="hardware")
+                            @if ($activity->itemType()=="asset")
                                 <i class="fa fa-barcode"></i>
-                            @elseif ($activity->asset_type=="accessory")
+                            @elseif ($activity->itemType()=="accessory")
                                 <i class="fa fa-keyboard-o"></i>
-                            @elseif ($activity->asset_type=="consumable")
+                            @elseif ($activity->itemType()=="consumable")
                                 <i class="fa fa-tint"></i>
-                            @elseif ($activity->asset_type=="license")
+                            @elseif ($activity->itemType()=="license")
                                 <i class="fa fa-floppy-o"></i>
-                            @elseif ($activity->asset_type=="component")
+                            @elseif ($activity->itemType()=="component")
                                 <i class="fa fa-hdd-o"></i>
                             @else
                                 <i class="fa fa-paperclip"></i>
@@ -140,34 +140,37 @@
                             {{ strtolower(trans('general.'.str_replace(' ','_',$activity->action_type))) }}
                         </td>
                        <td>
-                           @if (($activity->assetlog) && ($activity->asset_type=="hardware"))
-                              <a href="{{ route('view/hardware', $activity->asset_id) }}">{{ $activity->assetlog->asset_tag }} - {{ $activity->assetlog->showAssetName() }}</a>
-                            @elseif (($activity->licenselog) && ($activity->asset_type=="software"))
-                              <a href="{{ route('view/license', $activity->asset_id) }}">{{ $activity->licenselog->name }}</a>
-                                  @elseif (($activity->consumablelog) && ($activity->asset_type=="consumable"))
-                                <a href="{{ route('view/consumable', $activity->consumable_id) }}">{{ $activity->consumablelog->name }}</a>
-                            @elseif (($activity->accessorylog) && ($activity->asset_type=="accessory"))
-                              <a href="{{ route('view/accessory', $activity->accessory_id) }}">{{ $activity->accessorylog->name }}</a>
-                            @elseif (($activity->componentlog) && ($activity->asset_type=="component"))
-                               <a href="{{ route('view/component', $activity->component_id) }}">{{ $activity->componentlog->name }}</a>
-                            @elseif (($activity->assetlog) && ($activity->action_type=="uploaded") && ($activity->asset_type=="hardware"))
-                                   <a href="{{ route('view/hardware', $activity->asset_id) }}">{{ $activity->assetlog->showAssetName() }}</a>
+                           @if (($activity->assetlog) && ($activity->itemType()=="asset"))
+                              <a href="{{ route('view/hardware', $activity->item_id) }}">{{ $activity->assetlog->asset_tag }} - {{ $activity->assetlog->showAssetName() }}</a>
+                            @elseif (($activity->licenselog) && ($activity->itemType()=="license"))
+                              <a href="{{ route('view/license', $activity->item_id) }}">{{ $activity->licenselog->name }}</a>
+                                  @elseif (($activity->consumablelog) && ($activity->itemType()=="consumable"))
+                                <a href="{{ route('view/consumable', $activity->item_id) }}">{{ $activity->consumablelog->name }}</a>
+                            @elseif (($activity->accessorylog) && ($activity->itemType()=="accessory"))
+                              <a href="{{ route('view/accessory', $activity->item_id) }}">{{ $activity->accessorylog->name }}</a>
+                            @elseif (($activity->componentlog) && ($activity->itemType()=="component"))
+                               <a href="{{ route('view/component', $activity->item_id) }}">{{ $activity->componentlog->name }}</a>
+                            @elseif (($activity->assetlog) && ($activity->action_type=="uploaded") && ($activity->itemType()=="asset"))
+                                   <a href="{{ route('view/hardware', $activity->item_id) }}">{{ $activity->assetlog->showAssetName() }}</a>
+
+                           @else
+                            SOMETHING WENT WRONG
 
                             @endif
 
                             </td>
 
                        <td>
-                        @if (($activity->userasassetlog) && ($activity->action_type=="uploaded") && ($activity->asset_type=="user"))
-                            <a href="{{ route('view/user', $activity->asset_id) }}">{{ $activity->userasassetlog->fullName() }}</a>
-                        @elseif (($activity->componentlog) && ($activity->asset_type=="component"))
-                           <a href="{{ route('view/hardware', $activity->asset_id) }}">{{ $activity->assetlog->showAssetName() }}</a>
+                        @if (($activity->userasassetlog) && ($activity->action_type=="uploaded") && ($activity->itemType()=="user"))
+                            <a href="{{ route('view/user', $activity->item_id) }}">{{ $activity->userasassetlog->fullName() }}</a>
+                        @elseif (($activity->componentlog) && ($activity->itemType()=="component"))
+                           <a href="{{ route('view/component', $activity->item_id) }}">{{ $activity->assetlog->name }}</a>
                         @elseif($activity->action_type=='requested')
                             @if ($activity->adminlog)
                                 <a href="{{ route('view/user', $activity->user_id) }}">{{ $activity->adminlog->fullName() }}</a>
                             @endif
                        @elseif ($activity->userlog)
-                          <a href="{{ route('view/user', $activity->checkedout_to) }}">{{ $activity->userlog->fullName() }}</a>
+                          <a href="{{ route('view/user', $activity->target_id) }}">{{ $activity->userlog->fullName() }}</a>
 
                        @endif
 

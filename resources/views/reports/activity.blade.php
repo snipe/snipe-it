@@ -43,29 +43,30 @@
                 <td><a href="../admin/users/{{ $log_action->adminlog->id }}/view">{{ $log_action->adminlog->fullName() }}</a></td>
                 <td>{{ $log_action->action_type }}</td>
                 <td>
-    	            @if ($log_action->asset_type=="hardware")
+    	            @if ($log_action->itemType()=="asset")
     	            	Asset
-    	            @elseif ($log_action->asset_type=="software")
+    	            @elseif ($log_action->itemType()=="license")
     	            	License
-    	            @elseif ($log_action->asset_type=="accessory")
+    	            @elseif ($log_action->itemType()=="accessory")
     	            	Accessory
-                    @elseif ($log_action->asset_type=="consumable")
-        	            Consumable
+                    @elseif ($log_action->itemType()=="consumable")
+                        Consumable
+                    @elseif ($log_action->itemType()=="component")
+        	            Component
     	            @endif
                 </td>
 
                 <td>
-                @if (($log_action->assetlog) && ($log_action->asset_type=="hardware"))
-                     {{ $log_action->assetlog->showAssetName() }}
-                 @elseif (($log_action->licenselog) && ($log_action->asset_type=="software"))
-                     {{ $log_action->licenselog->name }}
-                 @elseif (($log_action->consumablelog) && ($log_action->asset_type=="consumable"))
-                     {{ $log_action->consumablelog->name }}
-                 @elseif (($log_action->accessorylog) && ($log_action->asset_type=="accessory"))
-                     {{ $log_action->accessorylog->name }}
-                 @else
-                     {{ trans('general.bad_data') }}
-                 @endif
+
+                @if ($item = $log_action->item)
+                    @if ($log_action->itemType()=="asset")
+                        {{ $item->showAssetName() }}
+                    @else
+                        {{ $item->name }}
+                    @endif
+                @else
+                    {{ trans('general.bad_data') }}
+                @endif
                 </td>
                 <td>
     	            @if ($log_action->userlog)

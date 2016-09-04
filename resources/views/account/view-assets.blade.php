@@ -247,13 +247,13 @@ View Assets for  {{ $user->fullName() }}
                 @foreach ($user->userlog as $log)
                 <tr>
                     <td class="text-center">
-                        @if (($log->assetlog) && ($log->asset_type=="hardware"))
+                        @if (($log->assetlog) && ($log->itemType()=="asset"))
                             <i class="fa fa-barcode"></i>
-                        @elseif (($log->accessorylog) && ($log->asset_type=="accessory"))
+                        @elseif (($log->accessorylog) && ($log->itemType()=="accessory"))
                             <i class="fa fa-keyboard-o"></i>
-                        @elseif (($log->consumablelog) && ($log->asset_type=="consumable"))
+                        @elseif (($log->consumablelog) && ($log->itemType()=="consumable"))
                             <i class="fa fa-tint"></i>
-                        @elseif (($log->licenselog) && ($log->asset_type=="software"))
+                        @elseif (($log->licenselog) && ($log->itemType()=="license"))
                             <i class="fa fa-floppy-o"></i>
                         @else
                         <i class="fa fa-times"></i>
@@ -263,7 +263,7 @@ View Assets for  {{ $user->fullName() }}
                     <td>{{ $log->action_type }}</td>
                     <td>
 
-                        @if (($log->assetlog) && ($log->asset_type=="hardware"))
+                        @if (($log->assetlog) && ($log->itemType()=="asset"))
 
                             @if ($log->assetlog->deleted_at=='')
 
@@ -273,7 +273,7 @@ View Assets for  {{ $user->fullName() }}
                                 <del>{{ $log->assetlog->showAssetName() }}</del> (deleted)
                             @endif
 
-                        @elseif (($log->licenselog) && ($log->asset_type=="software"))
+                        @elseif (($log->licenselog) && ($log->itemType()=="license"))
 
                             @if ($log->licenselog->deleted_at=='')
 
@@ -283,7 +283,7 @@ View Assets for  {{ $user->fullName() }}
                                 <del>{{ $log->licenselog->name }}</del> (deleted)
                             @endif
 
-                         @elseif (($log->consumablelog) && ($log->asset_type=="consumable"))
+                         @elseif (($log->consumablelog) && ($log->itemType()=="consumable"))
 
                              @if ($log->consumablelog->deleted_at=='')
                                 {{ $log->consumablelog->name }}
@@ -291,7 +291,7 @@ View Assets for  {{ $user->fullName() }}
                                  <del>{{ $log->consumablelog->name }}</del> (deleted)
                              @endif
 
-                        @elseif (($log->accessorylog) && ($log->asset_type=="accessory"))
+                        @elseif (($log->accessorylog) && ($log->itemType()=="accessory"))
                             @if ($log->accessorylog->deleted_at=='')
                                 {{ $log->accessorylog->name }}
                             @else

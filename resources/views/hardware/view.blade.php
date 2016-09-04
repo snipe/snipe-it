@@ -521,7 +521,12 @@
                         </td>
                         <td>{{ $log->action_type }}</td>
                         <td>
-                          @if ((isset($log->checkedout_to)) && ($log->checkedout_to!=0) && ($log->checkedout_to!=''))
+
+                          @if ($log->action_type=='uploaded')
+
+                            {{ $log->filename }}
+                          @elseif ((isset($log->checkedout_to)) && ($log->checkedout_to!=0) && ($log->checkedout_to!=''))
+
 
                             @if ($log->userlog)
 

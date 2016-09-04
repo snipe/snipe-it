@@ -385,13 +385,13 @@
                     @foreach ($userlog as $log)
                     <tr>
                       <td class="text-center">
-                        @if (($log->assetlog) && ($log->asset_type=="hardware"))
+                        @if (($log->assetlog) && ($log->itemType()=="asset"))
                           <i class="fa fa-barcode"></i>
-                        @elseif (($log->accessorylog) && ($log->asset_type=="accessory"))
+                        @elseif (($log->accessorylog) && ($log->itemType()=="accessory"))
                           <i class="fa fa-keyboard-o"></i>
-                        @elseif (($log->consumablelog) && ($log->asset_type=="consumable"))
+                        @elseif (($log->consumablelog) && ($log->itemType()=="consumable"))
                           <i class="fa fa-tint"></i>
-                        @elseif (($log->licenselog) && ($log->asset_type=="software"))
+                        @elseif (($log->licenselog) && ($log->itemType()=="license"))
                           <i class="fa fa-floppy-o"></i>
                         @else
                           <i class="fa fa-times"></i>
@@ -402,37 +402,37 @@
                       <td>{{ $log->action_type }}</td>
                       <td>
 
-                          @if (($log->assetlog) && ($log->asset_type=="hardware"))
+                          @if (($log->assetlog) && ($log->itemType()=="asset"))
 
                             @if ($log->assetlog->deleted_at=='')
-                                <a href="{{ route('view/hardware', $log->asset_id) }}">
+                                <a href="{{ route('view/hardware', $log->item_id) }}">
                                     {{ $log->assetlog->showAssetName() }}
                                 </a>
                             @else
                                 <del>{{ $log->assetlog->showAssetName() }}</del> (deleted)
                             @endif
 
-                          @elseif (($log->licenselog) && ($log->asset_type=="software"))
+                          @elseif (($log->licenselog) && ($log->itemType()=="license"))
 
                             @if ($log->licenselog->deleted_at=='')
-                                <a href="{{ route('view/license', $log->license_id) }}">
+                                <a href="{{ route('view/license', $log->item_id) }}">
                                     {{ $log->licenselog->name }}
                                 </a>
                             @else
                                 <del>{{ $log->licenselog->name }}</del> (deleted)
                             @endif
 
-                           @elseif (($log->consumablelog) && ($log->asset_type=="consumable"))
+                           @elseif (($log->consumablelog) && ($log->itemType()=="consumable"))
 
                              @if ($log->consumablelog->deleted_at=='')
-                                 <a href="{{ route('view/consumable', $log->consumable_id) }}">{{ $log->consumablelog->name }}</a>
+                                 <a href="{{ route('view/consumable', $log->item_id) }}">{{ $log->consumablelog->name }}</a>
                              @else
                                  <del>{{ $log->consumablelog->name }}</del> (deleted)
                              @endif
 
-                          @elseif (($log->accessorylog) && ($log->asset_type=="accessory"))
+                          @elseif (($log->accessorylog) && ($log->itemType()=="accessory"))
                             @if ($log->accessorylog->deleted_at=='')
-                                <a href="{{ route('view/accessory', $log->accessory_id) }}">{{ $log->accessorylog->name }}</a>
+                                <a href="{{ route('view/accessory', $log->item_id) }}">{{ $log->accessorylog->name }}</a>
                             @else
                                 <del>{{ $log->accessorylog->name }}</del> (deleted)
                             @endif

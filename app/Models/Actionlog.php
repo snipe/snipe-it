@@ -21,74 +21,83 @@ class Actionlog extends Model implements ICompanyableChild
 
     protected $table      = 'action_logs';
     public $timestamps = true;
-    protected $fillable   = [ 'created_at', 'asset_type','user_id','asset_id','action_type','note','checkedout_to' ];
+    protected $fillable   = [ 'created_at', 'item_type','user_id','item_id','action_type','note','target_id', 'target_type' ];
 
     public function getCompanyableParents()
     {
         return [ 'accessorylog', 'assetlog', 'licenselog', 'consumablelog' ];
     }
 
+    // Eloquent Relationships below
+    public function item()
+    {
+        return $this->morphTo('item')->withTrashed();
+    }
+
+    public function itemType()
+    {
+        // dd($this);
+        return camel_case(class_basename($this->item_type));
+    }
+
     public function assetlog()
     {
 
-        return $this->belongsTo('\App\Models\Asset', 'asset_id')
-                    ->withTrashed();
+        return $this->item();
     }
 
     public function uploads()
     {
 
-        return $this->belongsTo('\App\Models\Asset', 'asset_id')
+        return $this->morphTo('item')
                     ->where('action_type', '=', 'uploaded')
                     ->withTrashed();
     }
 
     public function licenselog()
     {
-
-        return $this->belongsTo('\App\Models\License', 'asset_id')
-                    ->withTrashed();
+        return $this->item();
     }
 
     public function componentlog()
     {
-
-        return $this->belongsTo('\App\Models\Component', 'component_id')
-            ->withTrashed();
+        return $this->item();
     }
 
     public function accessorylog()
     {
-
-        return $this->belongsTo('\App\Models\Accessory', 'accessory_id')
-                    ->withTrashed();
+        return $this->item();
     }
 
     public function consumablelog()
     {
 
-        return $this->belongsTo('\App\Models\Consumable', 'consumable_id')
-                    ->withTrashed();
+        return $this->item();
     }
 
     public function adminlog()
     {
 
-        return $this->belongsTo('\App\Models\User', 'user_id')
+        return $this->belongsTo(User::class, 'user_id')
                     ->withTrashed();
     }
 
     public function userlog()
     {
 
-        return $this->belongsTo('\App\Models\User', 'checkedout_to')
-                    ->withTrashed();
+        // return $this->belongsTo(User::class, 'target_id')
+        return $this->target();
+    }
+
+    public function target() 
+    {
+        return $this->morphTo('target');
     }
 
     public function userasassetlog()
     {
 
-        return $this->belongsTo('\App\Models\User', 'asset_id')
+        return $this->belongsTo(User::class, 'item_id')
             ->withTrashed();
     }
 
@@ -141,44 +150,10 @@ class Actionlog extends Model implements ICompanyableChild
     public function getListingOfActionLogsChronologicalOrder()
     {
 
-        return DB::table('asset_logs')
-                 ->select('*')
+        return $this->all()
                  ->where('action_type', '!=', 'uploaded')
-                 ->orderBy('asset_id', 'asc')
+                 ->orderBy('item_id', 'asc')
                  ->orderBy('created_at', 'asc')
                  ->get();
-    }
-
-    /**
-       * getLatestCheckoutActionForAssets
-       *
-       * @return mixed
-       * @author  Vincent Sposato <vincent.sposato@gmail.com>
-       * @version v1.0
-       */
-    public function getLatestCheckoutActionForAssets()
-    {
-
-        return DB::table('asset_logs')
-                 ->select(DB::raw('asset_id, MAX(created_at) as last_created'))
-                 ->where('action_type', '=', 'checkout')
-                 ->groupBy('asset_id')
-                 ->get();
-    }
-
-    /**
-       * scopeCheckoutWithoutAcceptance
-       *
-       * @param $query
-       *
-       * @return mixed
-       * @author  Vincent Sposato <vincent.sposato@gmail.com>
-       * @version v1.0
-       */
-    public function scopeCheckoutWithoutAcceptance($query)
-    {
-
-        return $query->where('action_type', '=', 'checkout')
-                     ->where('accepted_id', '=', null);
     }
 }
