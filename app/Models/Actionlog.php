@@ -19,7 +19,7 @@ class Actionlog extends Model implements ICompanyableChild
 
     protected $dates = [ 'deleted_at' ];
 
-    protected $table      = 'asset_logs';
+    protected $table      = 'action_logs';
     public $timestamps = true;
     protected $fillable   = [ 'created_at', 'asset_type','user_id','asset_id','action_type','note','checkedout_to' ];
 
