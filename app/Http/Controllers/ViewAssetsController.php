@@ -39,7 +39,7 @@ class ViewAssetsController extends Controller
 
         $user = User::with('assets', 'assets.model', 'consumables', 'accessories', 'licenses', 'userloc')->withTrashed()->find(Auth::user()->id);
 
-        $userlog = $user->userlog->load('assetlog', 'consumablelog', 'assetlog.model', 'licenselog', 'accessorylog', 'userlog', 'adminlog');
+        $userlog = $user->userlog->load('item', 'item.model', 'user', 'target');
 
 
 
@@ -86,7 +86,8 @@ class ViewAssetsController extends Controller
             if ($user->location_id) {
                 $logaction->location_id = $user->location_id;
             }
-            $logaction->user_id = $data['user_id'] = Auth::user()->id;
+            $logaction->target_id = $data['user_id'] = Auth::user()->id;
+            $logaction->target_type = User::class;
             $log = $logaction->logaction('requested');
 
             $data['requested_by'] = $user->fullName();

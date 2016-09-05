@@ -40,45 +40,11 @@ class Actionlog extends Model implements ICompanyableChild
         return camel_case(class_basename($this->item_type));
     }
 
-    public function assetlog()
-    {
-
-        return $this->item();
-    }
-
     public function uploads()
     {
 
         return $this->morphTo('item')
                     ->where('action_type', '=', 'uploaded')
-                    ->withTrashed();
-    }
-
-    public function licenselog()
-    {
-        return $this->item();
-    }
-
-    public function componentlog()
-    {
-        return $this->item();
-    }
-
-    public function accessorylog()
-    {
-        return $this->item();
-    }
-
-    public function consumablelog()
-    {
-
-        return $this->item();
-    }
-
-    public function adminlog()
-    {
-
-        return $this->belongsTo(User::class, 'user_id')
                     ->withTrashed();
     }
 
@@ -89,16 +55,15 @@ class Actionlog extends Model implements ICompanyableChild
         return $this->target();
     }
 
-    public function target() 
+    public function user()
     {
-        return $this->morphTo('target');
+        return $this->belongsTo(User::class, 'user_id')
+                    ->withTrashed();
     }
 
-    public function userasassetlog()
+    public function target()
     {
-
-        return $this->belongsTo(User::class, 'item_id')
-            ->withTrashed();
+        return $this->morphTo('target');
     }
 
     public function childlogs()

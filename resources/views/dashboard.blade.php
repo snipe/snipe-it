@@ -140,37 +140,23 @@
                             {{ strtolower(trans('general.'.str_replace(' ','_',$activity->action_type))) }}
                         </td>
                        <td>
-                           @if (($activity->assetlog) && ($activity->itemType()=="asset"))
-                              <a href="{{ route('view/hardware', $activity->item_id) }}">{{ $activity->assetlog->asset_tag }} - {{ $activity->assetlog->showAssetName() }}</a>
-                            @elseif (($activity->licenselog) && ($activity->itemType()=="license"))
-                              <a href="{{ route('view/license', $activity->item_id) }}">{{ $activity->licenselog->name }}</a>
-                                  @elseif (($activity->consumablelog) && ($activity->itemType()=="consumable"))
-                                <a href="{{ route('view/consumable', $activity->item_id) }}">{{ $activity->consumablelog->name }}</a>
-                            @elseif (($activity->accessorylog) && ($activity->itemType()=="accessory"))
-                              <a href="{{ route('view/accessory', $activity->item_id) }}">{{ $activity->accessorylog->name }}</a>
-                            @elseif (($activity->componentlog) && ($activity->itemType()=="component"))
-                               <a href="{{ route('view/component', $activity->item_id) }}">{{ $activity->componentlog->name }}</a>
-                            @elseif (($activity->assetlog) && ($activity->action_type=="uploaded") && ($activity->itemType()=="asset"))
-                                   <a href="{{ route('view/hardware', $activity->item_id) }}">{{ $activity->assetlog->showAssetName() }}</a>
-
-                           @else
-                            SOMETHING WENT WRONG
-
+                           @if (($activity->item) && ($activity->itemType()=="asset"))
+                              <a href="{{ route('view/hardware', $activity->item_id) }}">{{ $activity->item->asset_tag }} - {{ $activity->item->showAssetName() }}</a>
+                            @elseif ($activity->item)
+                              <a href="{{ route('view/'. $activity->itemType(), $activity->item_id) }}">{{ $activity->item->name }}</a>
                             @endif
 
                             </td>
 
                        <td>
                         @if (($activity->userasassetlog) && ($activity->action_type=="uploaded") && ($activity->itemType()=="user"))
-                            <a href="{{ route('view/user', $activity->item_id) }}">{{ $activity->userasassetlog->fullName() }}</a>
-                        @elseif (($activity->componentlog) && ($activity->itemType()=="component"))
-                           <a href="{{ route('view/component', $activity->item_id) }}">{{ $activity->assetlog->name }}</a>
-                        @elseif($activity->action_type=='requested')
-                            @if ($activity->adminlog)
-                                <a href="{{ route('view/user', $activity->user_id) }}">{{ $activity->adminlog->fullName() }}</a>
-                            @endif
-                       @elseif ($activity->userlog)
-                          <a href="{{ route('view/user', $activity->target_id) }}">{{ $activity->userlog->fullName() }}</a>
+                            <a href="{{ route('view/user', $activity->target_id) }}">{{ $activity->userasassetlog->fullName() }}</a>
+                        @elseif (($activity->item) && ($activity->target instanceof \App\Models\Asset))
+                           <a href="{{ route('view/hardware', $activity->target_id) }}">{{ $activity->target->showAssetName() }}</a>
+                        @elseif (($activity->item) && ($activity->target instanceof \App\Models\User))
+                            <a href="{{route('view/user', $activity->target_id) }}"> {{ $activity->target->fullName() }}</a>
+                        @elseif ($activity->action_type=='requested') <!--The user is who requested the item, not the target-->
+                            <a href="{{ route('view/user', $activity->user_id) }}">{{ $activity->user->fullName() }}</a>
 
                        @endif
 

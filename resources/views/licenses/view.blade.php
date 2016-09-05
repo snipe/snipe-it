@@ -370,14 +370,14 @@
                           <td>{{ $log->created_at }}</td>
                           <td>
                               @if (isset($log->user_id))
-                              {{ $log->adminlog->fullName() }}
+                              <a href="{{ route('view/user', $log->user_id)}}">{{ $log->user->fullName() }}</a>
                               @endif
                           </td>
                           <td>{{ $log->action_type }}</td>
 
                           <td>
-                              @if (($log->userlog) && ($log->userlog->id!='0'))
-                              <a href="{{ route('view/user', $log->checkedout_to) }}">
+                              @if (($log->target) && ($log->target->id!='0'))
+                              <a href="{{ route('view/user', $log->target_id) }}">
                               {{ $log->userlog->fullName() }}
                               </a>
 

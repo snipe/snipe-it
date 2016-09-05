@@ -385,13 +385,13 @@
                     @foreach ($userlog as $log)
                     <tr>
                       <td class="text-center">
-                        @if (($log->assetlog) && ($log->itemType()=="asset"))
+                        @if ($log->itemType()=="asset")
                           <i class="fa fa-barcode"></i>
-                        @elseif (($log->accessorylog) && ($log->itemType()=="accessory"))
+                        @elseif ($log->itemType()=="accessory")
                           <i class="fa fa-keyboard-o"></i>
-                        @elseif (($log->consumablelog) && ($log->itemType()=="consumable"))
+                        @elseif ($log->itemType()=="consumable")
                           <i class="fa fa-tint"></i>
-                        @elseif (($log->licenselog) && ($log->itemType()=="license"))
+                        @elseif ($log->itemType()=="license")
                           <i class="fa fa-floppy-o"></i>
                         @else
                           <i class="fa fa-times"></i>
@@ -402,58 +402,23 @@
                       <td>{{ $log->action_type }}</td>
                       <td>
 
-                          @if (($log->assetlog) && ($log->itemType()=="asset"))
-
-                            @if ($log->assetlog->deleted_at=='')
-                                <a href="{{ route('view/hardware', $log->item_id) }}">
-                                    {{ $log->assetlog->showAssetName() }}
-                                </a>
-                            @else
-                                <del>{{ $log->assetlog->showAssetName() }}</del> (deleted)
-                            @endif
-
-                          @elseif (($log->licenselog) && ($log->itemType()=="license"))
-
-                            @if ($log->licenselog->deleted_at=='')
-                                <a href="{{ route('view/license', $log->item_id) }}">
-                                    {{ $log->licenselog->name }}
-                                </a>
-                            @else
-                                <del>{{ $log->licenselog->name }}</del> (deleted)
-                            @endif
-
-                           @elseif (($log->consumablelog) && ($log->itemType()=="consumable"))
-
-                             @if ($log->consumablelog->deleted_at=='')
-                                 <a href="{{ route('view/consumable', $log->item_id) }}">{{ $log->consumablelog->name }}</a>
-                             @else
-                                 <del>{{ $log->consumablelog->name }}</del> (deleted)
-                             @endif
-
-                          @elseif (($log->accessorylog) && ($log->itemType()=="accessory"))
-                            @if ($log->accessorylog->deleted_at=='')
-                                <a href="{{ route('view/accessory', $log->item_id) }}">{{ $log->accessorylog->name }}</a>
-                            @else
-                                <del>{{ $log->accessorylog->name }}</del> (deleted)
-                            @endif
-
-                           @else
-                               {{ trans('general.bad_data') }}
-                          @endif
+                        @if (($log->item) && ($log->itemType()=="asset"))
+                            <a href="{{ route('view/hardware', $log->item_id) }}">{{ $log->item->asset_tag }} - {{ $log->item->showAssetName() }}</a>
+                        @elseif ($log->item)
+                            <a href="{{ route('view/'. $log->itemType(), $log->item_id) }}">{{ $log->item->name }}</a
+                        @else
+                            {{ trans('general.bad_data') }}
+                        @endif
 
                         </td>
-                        <td>@if ($log->adminlog)
-
-                                @if ($log->adminlog->deleted_at=='')
-                                    <a href="{{ route('view/user', $log->checkedout_to) }}">
-                                        {{ $log->adminlog->fullName() }}
-                                    </a>
+                        <td>
+                           @if ($log->action_type != 'requested')
+                                @if (isset($log->user))
+                                    <a href="{{route('view/user', $log->user_id)}}">{{ $log->user->fullName() }}</a>
                                 @else
-                                    <del>{{ $log->adminlog->fullName() }}</del>
+                                    Deleted Admin
                                 @endif
-                            @else
-                                Deleted User
-                            @endif</td>
+                            @endif
                     </tr>
                     @endforeach
                 </tbody>
