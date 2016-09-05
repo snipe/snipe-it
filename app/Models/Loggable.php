@@ -81,24 +81,4 @@ trait Loggable
         return $log;
     }
 
-    public function isRequestedBy(User $user)
-    {
-        return $this->requests()
-            ->where('user_id', $user->id)
-            ->exists();
-    }
-
-    public function scopeRequestedBy($query, User $user)
-    {
-        return $query->whereHas('requests', function ($query) use ($user) {
-            $query->where('user_id', $user->id);
-        });
-    }
-
-
-
-    public function cancelRequest()
-    {
-        $this->requests()->where('user_id', Auth::id())->delete();
-    }
 }
