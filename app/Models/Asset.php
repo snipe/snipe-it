@@ -232,7 +232,7 @@ class Asset extends Depreciable
             $logaction->target_id = '';
             $logaction->location_id = null;
         }
-        $logaction->adminlog()->associate($admin);
+        $logaction->user()->associate($admin);
         $log = $logaction->logaction($action);
 
         return $logaction;
