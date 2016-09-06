@@ -36,6 +36,10 @@ class Actionlog extends Model implements ICompanyableChild
 
     public function itemType()
     {
+        // dd($this);
+        if($this->item_type == AssetModel::class) {
+            return "model";
+        }
         return camel_case(class_basename($this->item_type));
     }
 

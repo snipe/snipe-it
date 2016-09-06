@@ -44,49 +44,44 @@
                             </thead>
                             <tbody>
                                 @foreach ($assets as $asset)
+
                                 <tr>
-                                    <td>{{ $asset->model->name }}</td>
+                                    <form action="{{route('account/request-item', ['itemType' => 'asset', 'itemId' => $asset->id])}}" method="POST" accept-charset="utf-8">
+                                        {{ csrf_field() }}
+                                        <td>{{ $asset->model->name }}</td>
 
-                                    @if (\App\Models\Setting::getSettings()->display_asset_name)
-                                        <td>{{ $asset->name }}</td>
-                                    @endif
-
-                                    <td>{{ $asset->serial }}</td>
-
-                                    <td>
-                                        @if ($asset->assigneduser && $asset->assetloc)
-                                                {{ $asset->assetloc->name }}
-                                        @elseif ($asset->defaultLoc)
-                                                {{ $asset->defaultLoc->name }}
-
+                                        @if (\App\Models\Setting::getSettings()->display_asset_name)
+                                            <td>{{ $asset->name }}</td>
                                         @endif
 
-                                    </td>
-                                     @if ($asset->assigned_to != '' && $asset->assigned_to > 0)
-                                        <td>Checked out</td>
-                                    @else
-                                    <td>{{ trans('admin/hardware/general.requestable') }}</td>
-                                    @endif
+                                        <td>{{ $asset->serial }}</td>
 
-                                    <td>{{ $asset->expected_checkin }}</td>
+                                        <td>
+                                            @if ($asset->assigneduser && $asset->assetloc)
+                                                    {{ $asset->assetloc->name }}
+                                            @elseif ($asset->defaultLoc)
+                                                    {{ $asset->defaultLoc->name }}
 
+                                            @endif
 
-                                    <td>
-                                        @if ($asset->isRequestedBy(Auth::user()))
-                                            <a href="{{ route('account/request-item', ['itemType' => 'asset', 'itemId' => $asset->id]) }}" class="btn btn-danger btn-sm" title="{{ trans('button.cancel') }}">
-                                                {{ trans('button.cancel') }}
-                                            </a>
+                                        </td>
+                                         @if ($asset->assigned_to != '' && $asset->assigned_to > 0)
+                                            <td>Checked out</td>
                                         @else
-                                            <a
-                                                href="{{ route('account/request-item', ['itemType' => 'asset', 'itemId' => $asset->id]) }}"
-                                                class="btn btn-info btn-sm"
-                                                title="{{ trans('button.request') }}"
-                                            >
-                                            {{ trans('button.request') }}
-                                            </a>
+                                        <td>{{ trans('admin/hardware/general.requestable') }}</td>
                                         @endif
-                                    </td>
 
+                                        <td>{{ $asset->expected_checkin }}</td>
+
+
+                                        <td>
+                                            @if ($asset->isRequestedBy(Auth::user()))
+                                                {{Form::submit(trans('button.cancel'), ['class' => 'btn btn-danger btn-sm'])}}
+                                            @else
+                                                {{Form::submit(trans('button.request'), ['class' => 'btn btn-primary btn-sm'])}}
+                                            @endif
+                                        </td>
+                                    </form>
                                 </tr>
                                 @endforeach
                             </tbody>
@@ -122,19 +117,24 @@
 
                         <tbody>
                             @foreach($models as $requestableModel)
+
                                 <tr>
-                                    <td>{{$requestableModel->name}}</td>
-                                    <td>{{$requestableModel->assets()->where('requestable', '1')->count()}}</td>
-                                    <td><input type="text" name="request-quantity" value=""></td>
-                                    <td>
-                                        @if ($requestableModel->isRequestedBy(Auth::user()))
-                                            <a href="{{ route('account/request-item', ['itemType' => 'asset_model', 'itemId' => $requestableModel->id]) }}" class="btn btn-danger btn-sm" title="{{ trans('button.cancel') }}">
-                                                {{ trans('button.cancel') }}
-                                            </a>
-                                        @else
-                                            <a name="Request" href="{{ route('account/request-item', ['itemId' => $requestableModel->id, 'itemType' => 'asset_model']) }}" class="btn btn-info btn-sm" title="{{ trans('button.request') }}">{{ trans('button.request') }}</a>
-                                        @endif
-                                    </td>
+                                     <form  action="{{route('account/request-item', ['itemType' => 'asset_model', 'itemId' => $requestableModel->id])}}"
+                                            method="POST"
+                                            accept-charset="utf-8"
+                                    >
+                                        {{ csrf_field() }}
+                                        <td>{{$requestableModel->name}}</td>
+                                        <td>{{$requestableModel->assets()->where('requestable', '1')->count()}}</td>
+                                        <td><input type="text" name="request-quantity" value=""></td>
+                                        <td>
+                                            @if ($requestableModel->isRequestedBy(Auth::user()))
+                                                {{Form::submit(trans('button.cancel'), ['class' => 'btn btn-danger btn-sm'])}}
+                                            @else
+                                                {{Form::submit(trans('button.request'), ['class' => 'btn btn-primary btn-sm'])}}
+                                            @endif
+                                        </td>
+                                    </form>
                                 </tr>
                             @endforeach
                         </tbody>

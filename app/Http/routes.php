@@ -866,7 +866,7 @@ Route::group([ 'prefix' => 'account', 'middleware' => ['web', 'auth']], function
         [ 'as' => 'account/request-asset', 'uses' => 'ViewAssetsController@getRequestAsset' ]
     );
 
-    Route::get(
+    Route::post(
         'request/{itemType}/{itemId}',
         [ 'as' => 'account/request-item', 'uses' => 'ViewAssetsController@getRequestItem']
     );

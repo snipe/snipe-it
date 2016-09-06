@@ -127,7 +127,7 @@
                         </td>
                        <td>{{ date("M d, Y g:iA", strtotime($activity->created_at)) }}</td>
                        <td>
-                                 @if ($activity->action_type!='requested')
+                                 @if (($activity->action_type!='requested') && ($activity->action_type!="request_canceled"))
                                      @if ($activity->user)
                                         <a href="{{ route('view/user', $activity->user_id) }}">{{ $activity->user->fullName() }}</a>
                                      @else

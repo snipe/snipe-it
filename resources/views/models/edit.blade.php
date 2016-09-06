@@ -122,7 +122,7 @@
                 <div class="form-group">
                     <div class="col-sm-offset-3 col-sm-10">
                         <label>
-                            <input type="checkbox" value="1" name="requestable" id="requestable" class="minimal" {{ Input::old('requestable', $model->requestable) == '1' ? ' checked="checked"' : '' }}> {{ trans('admin/hardware/form.requestable') }}
+                            <input type="checkbox" value="1" name="requestable" id="requestable" class="minimal" {{ Input::old('requestable', $model->requestable) == '1' ? ' checked="checked"' : '' }}> {{ trans('admin/models/general.requestable') }}
                         </label>
                     </div>
                 </div>

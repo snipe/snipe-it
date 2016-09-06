@@ -231,7 +231,7 @@ View Assets for  {{ $user->fullName() }}
         @endif
 
       <div class="box-body">
-        @if (count($user->userlog) > 0)
+        @if (count($userlog) > 0)
         <div class="table-responsive">
         <table class="table table-striped" id="example">
             <thead>
@@ -244,7 +244,7 @@ View Assets for  {{ $user->fullName() }}
                 </tr>
             </thead>
             <tbody>
-                @foreach ($user->userlog as $log)
+                @foreach ($userlog as $log)
                 <tr>
                     <td class="text-center">
                         @if ($log->itemType()=="asset")
@@ -260,7 +260,9 @@ View Assets for  {{ $user->fullName() }}
                         @endif
 
                     </td>
-                    <td>{{ $log->action_type }}</td>
+                    <td>
+                        {{ strtolower(trans('general.'.str_replace(' ','_',$log->action_type))) }}
+                    </td>
                     <td>
                         @if ($log->itemType()=="asset")
                             @if ($log->item->deleted_at=='')

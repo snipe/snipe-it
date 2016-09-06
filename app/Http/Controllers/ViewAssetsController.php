@@ -40,9 +40,7 @@ class ViewAssetsController extends Controller
 
         $user = User::with('assets', 'assets.model', 'consumables', 'accessories', 'licenses', 'userloc')->withTrashed()->find(Auth::user()->id);
 
-        $userlog = $user->userlog->load('item', 'item.model', 'user', 'target');
-
-
+        $userlog = $user->userlog->load('item', 'user', 'target');
 
         if (isset($user->id)) {
             return View::make('account/view-assets', compact('user', 'userlog'));
@@ -70,14 +68,112 @@ class ViewAssetsController extends Controller
     public function getRequestItem($itemType, $itemId = null)
     {
         $item = null;
-        $itemType = 'App\\Models\\' . studly_case($itemType);
-        $item = $itemType::find($itemId);
-        if ($item->isRequestedBy(Auth::user())) {
+        $fullItemType = 'App\\Models\\' . studly_case($itemType);
+        if($itemType == "asset_model") {
+            $itemType = "model";
+        }
+        $item = call_user_func(array($fullItemType, 'find'), $itemId);
+        $user = Auth::user();
+        $quantity = $data['item_quantity'] = Input::has('request-quantity') ? e(Input::get('request-quantity')) : 1;
+
+        $logaction = new Actionlog();
+        $logaction->item_id = $data['asset_id'] = $item->id;
+        $logaction->item_type = $fullItemType;
+        $logaction->created_at = $data['requested_date'] = date("Y-m-d h:i:s");
+        if ($user->location_id) {
+            $logaction->location_id = $user->location_id;
+        }
+        $logaction->target_id = $data['user_id'] = Auth::user()->id;
+        $logaction->target_type = User::class;
+
+        $data['requested_by'] = $user->fullName();
+        $data['item_name'] = $item->name;
+        $data['item_type'] = $itemType;
+
+        if ($fullItemType == Asset::class) {
+            $data['item_url'] = route('view/hardware', $item->id);
+            $slackMessage = ' Asset <'.config('app.url').'/hardware/'.$item->id.'/view'.'|'.$item->showAssetName().'> requested by <'.config('app.url').'/users/'.$item->user_id.'/view'.'|'.$user->fullName().'>.';
+        } else {
+            $data['item_url'] = route("view/${itemType}", $item->id);
+            $slackMessage = $quantity. ' ' . class_basename(strtoupper($logaction->item_type)).' <'.$data['item_url'].'|'.$item->name.'> requested by <'.config('app.url').'/user/'.$item->id.'/view'.'|'.$user->fullName().'>.';
+        }
+
+        $settings = Setting::getSettings();
+
+        if ($settings->slack_endpoint) {
+
+            $slack_settings = [
+                'username' => $settings->botname,
+                'channel' => $settings->slack_channel,
+                'link_names' => true
+            ];
+
+            $slackClient = new \Maknz\Slack\Client($settings->slack_endpoint, $slack_settings);
+        }
+
+        if ($item->isRequestedBy($user)) {
+
             $item->cancelRequest();
-            return redirect()->route('requestable-assets')->with('success')->with('success', trans('admin/hardware/message.requests.success'));
+            $log = $logaction->logaction('request_canceled');
+
+            if (($settings->alert_email!='')  && ($settings->alerts_enabled=='1') && (!config('app.lock_passwords'))) {
+                Mail::send('emails.asset-canceled', $data, function ($m) use ($user, $settings) {
+                    $m->to(explode(',', $settings->alert_email), $settings->site_name);
+                    $m->subject('Item Request Canceled');
+                });
+            }
+
+            if ($settings->slack_endpoint) {
+                try {
+                        $slackClient->attach([
+                            'color' => 'good',
+                            'fields' => [
+                                [
+                                    'title' => 'CANCELED:',
+                                    'value' => $slackMessage
+                                ]
+
+                            ]
+                        ])->send('Item Request Canceled');
+
+                } catch (Exception $e) {
+
+                }
+            }
+
+            return redirect()->route('requestable-assets')->with('success')->with('success', trans('admin/hardware/message.requests.canceled'));
 
         } else {
             $item->request();
+
+            $log = $logaction->logaction('requested');
+
+
+            if (($settings->alert_email!='')  && ($settings->alerts_enabled=='1') && (!config('app.lock_passwords'))) {
+                Mail::send('emails.asset-requested', $data, function ($m) use ($user, $settings) {
+                    $m->to(explode(',', $settings->alert_email), $settings->site_name);
+                    $m->subject('Item Requested');
+                });
+            }
+
+            if ($settings->slack_endpoint) {
+                try {
+                        $slackClient->attach([
+                            'color' => 'good',
+                            'fields' => [
+                                [
+                                    'title' => 'REQUESTED:',
+                                    'value' => $slackMessage
+                                ]
+
+                            ]
+                        ])->send('Item Requested');
+
+                } catch (Exception $e) {
+
+                }
+            }
+
             return redirect()->route('requestable-assets')->with('success')->with('success', trans('admin/hardware/message.requests.success'));
         }
     }
