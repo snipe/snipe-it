@@ -270,9 +270,9 @@ $factory->defineAs(App\Models\Actionlog::class, 'asset-checkout', function (Fake
     'action_type' 		=> 'checkout',
     'item_id' 		=> $faker->numberBetween(1, 10),
     'target_id' => 1,
-    'target_type' => User::class,
+    'target_type' => 'App\\Models\\User',
     'created_at'  => $faker->dateTime(),
-    'item_type'  => Asset::class,
+    'item_type'  => 'App\\Models\\Asset',
     'note' 			=> $faker->sentence,
     'user_id' 			=> '1',
   ];
