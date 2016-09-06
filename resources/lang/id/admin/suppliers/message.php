@@ -2,23 +2,23 @@
 
 return array(
 
-    'does_not_exist' => 'Supplier does not exist.',
-    'assoc_users'	 => 'This supplier is currently associated with at least one model and cannot be deleted. Please update your models to no longer reference this supplier and try again. ',
+    'does_not_exist' => 'Pemasok tidak ada.',
+    'assoc_users'	 => 'Saat ini pemasok tersebut terhubung dengan satu model dan tidak dapat di hapus. Silahkan perbarui model anda sehingga tidak terhubung dengan pemasok tersebut dan coba kembali. ',
 
     'create' => array(
-        'error'   => 'Supplier was not created, please try again.',
-        'success' => 'Supplier created successfully.'
+        'error'   => 'Pemasok gagal di buat, silahkan coba kembali.',
+        'success' => 'Pemasok sukses dibuat.'
     ),
 
     'update' => array(
-        'error'   => 'Supplier was not updated, please try again',
-        'success' => 'Supplier updated successfully.'
+        'error'   => 'Pemasok tidak di perbarui, silahkan coba kembali',
+        'success' => 'Sukses perbarui pemasok.'
     ),
 
     'delete' => array(
-        'confirm'   => 'Are you sure you wish to delete this supplier?',
-        'error'   => 'There was an issue deleting the supplier. Please try again.',
-        'success' => 'Supplier was deleted successfully.'
+        'confirm'   => 'Apakah Anda yakin untuk menghapus pemasok ini?',
+        'error'   => 'Terdapat masalah ketika menghapus pemasok. Silahkan coba kembali.',
+        'success' => 'Sukses menghapus pemasok.'
     )
 
 );

@@ -2,20 +2,20 @@
 
 return array(
 
-    'undeployable' 		=> '<strong>Warning: </strong> This asset has been marked as currently undeployable.
-                        If this status has changed, please update the asset status.',
-    'does_not_exist' 	=> 'Asset does not exist.',
-    'does_not_exist_or_not_requestable' => 'Nice try. That asset does not exist or is not requestable.',
-    'assoc_users'	 	=> 'This asset is currently checked out to a user and cannot be deleted. Please check the asset in first, and then try deleting again. ',
+    'undeployable' 		=> '<strong>Peringatan: </strong> Aset ini telah di tandai sebagai aset yang tak dapat digunakan.
+                        Jika status ini telah berubah, silahkan perbarui status aset.',
+    'does_not_exist' 	=> 'Aset tidak ada.',
+    'does_not_exist_or_not_requestable' => 'Aset tersebut tidak terdaftar atau tidak dapat di minta.',
+    'assoc_users'	 	=> 'Aset ini sudah diberikan kepada pengguna dan tidak dapat di hapus. Silahkan cek aset terlebih dahulu kemudian coba hapus kembali. ',
 
     'create' => array(
-        'error'   		=> 'Asset was not created, please try again. :(',
-        'success' 		=> 'Asset created successfully. :)'
+        'error'   		=> 'Aset gagal di buat, silahkan coba kembali',
+        'success' 		=> 'Sukses membuat aset'
     ),
 
     'update' => array(
-        'error'   			=> 'Asset was not updated, please try again',
-        'success' 			=> 'Asset updated successfully.',
+        'error'   			=> 'Gagal perbarui aset, silahkan coba kembali',
+        'success' 			=> 'Sukses perbarui aset.',
         'nothing_updated'	=>  'No fields were selected, so nothing was updated.',
     ),
 
@@ -37,35 +37,36 @@ return array(
     ),
 
     'import' => array(
-        'error'         => 'Some Items did not import Correctly.',
-        'errorDetail'   => 'The Following Items were not imported because of errors.',
-        'success'       => "Your File has been imported",
+        'error'         => 'Some items did not import correctly.',
+        'errorDetail'   => 'The following Items were not imported because of errors.',
+        'success'       => "Your file has been imported",
     ),
 
 
     'delete' => array(
-        'confirm'   	=> 'Are you sure you wish to delete this asset?',
-        'error'   		=> 'There was an issue deleting the asset. Please try again.',
-        'success' 		=> 'The asset was deleted successfully.'
+        'confirm'   	=> 'Apakah Anda yakin untuk menghapus aset ini?',
+        'error'   		=> 'Terdapat kesalahan pada saat penghapusan aset. Silahkan coba kembali.',
+        'success' 		=> 'Aset sukses terhapus.'
     ),
 
     'checkout' => array(
-        'error'   		=> 'Asset was not checked out, please try again',
-        'success' 		=> 'Asset checked out successfully.',
-        'user_does_not_exist' => 'That user is invalid. Please try again.'
+        'error'   		=> 'Aset gagal di berikan, silahkan coba kembali',
+        'success' 		=> 'Sukses memberikan aset.',
+        'user_does_not_exist' => 'Pengguna tersebut tidak terdaftar. Silahkan coba kembali.',
+        'not_available' => 'That asset is not available for checkout!'
     ),
 
     'checkin' => array(
-        'error'   		=> 'Asset was not checked in, please try again',
-        'success' 		=> 'Asset checked in successfully.',
-        'user_does_not_exist' => 'That user is invalid. Please try again.',
-        'already_checked_in'  => 'That asset is already checked in.',
+        'error'   		=> 'Aset gagal di terima, silahkan coba kembali',
+        'success' 		=> 'Sukses menerima aset.',
+        'user_does_not_exist' => 'Pengguna tersebut tidak terdaftar. Silahkan coba kembali.',
+        'already_checked_in'  => 'Aset tersebut telah di terima.',
 
     ),
 
     'requests' => array(
-        'error'   		=> 'Asset was not requested, please try again',
-        'success' 		=> 'Asset requested successfully.',
+        'error'   		=> 'Aset gagal di minta, silahkan coba kembali',
+        'success' 		=> 'Sukses meminta aset.',
     )
 
 );

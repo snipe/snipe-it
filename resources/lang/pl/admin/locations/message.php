@@ -3,9 +3,9 @@
 return array(
 
     'does_not_exist' => 'Lokalizacja nie istnieje.',
-    'assoc_users'	 => 'This location is currently associated with at least one user and cannot be deleted. Please update your users to no longer reference this location and try again. ',
-    'assoc_assets'	 => 'This location is currently associated with at least one asset and cannot be deleted. Please update your assets to no longer reference this location and try again. ',
-    'assoc_child_loc'	 => 'This location is currently the parent of at least one child location and cannot be deleted. Please update your locations to no longer reference this location and try again. ',
+    'assoc_users'	 => 'Lokalizacja obecnie jest skojarzona z minimum jednym użytkownikiem i nie może zostać usunięta. Uaktualnij właściwości użytkownika tak aby nie było relacji z tą lokalizacją i spróbuj ponownie. ',
+    'assoc_assets'	 => 'Lokalizacja obecnie jest skojarzona z minimum jednym aktywem i nie może zostać usunięta. Uaktualnij właściwości aktywów tak aby nie było relacji z tą lokalizacją i spróbuj ponownie. ',
+    'assoc_child_loc'	 => 'Lokalizacja obecnie jest rodzicem minimum jeden innej lokalizacji i nie może zostać usunięta. Uaktualnij właściwości lokalizacji tak aby nie było relacji z tą lokalizacją i spróbuj ponownie. ',
 
 
     'create' => array(

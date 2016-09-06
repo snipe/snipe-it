@@ -11,7 +11,7 @@ return array(
     'title'					=> 'Inventarie Modell',
     'update'				=> 'Uppdatera Inventarie Modell',
     'view'					=> 'View Asset Model',
-    'update'				=> 'Uppdatera Inventarie Modell',
+    'update'				=> 'Uppdatera Modell',
     'clone'				=> 'Kopiera Modell',
     'edit'				=> 'Ändra Modell',
 );

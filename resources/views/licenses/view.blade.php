@@ -299,7 +299,7 @@
               </div>
 
             </div>
-        </div>ey
+        </div>
 
         </div>
         <!-- /.tab-pane -->

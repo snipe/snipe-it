@@ -37,9 +37,9 @@ return array(
     ),
 
     'import' => array(
-        'error'         => 'Some Items did not import Correctly.',
-        'errorDetail'   => 'The Following Items were not imported because of errors.',
-        'success'       => "Your File has been imported",
+        'error'         => 'Some items did not import correctly.',
+        'errorDetail'   => 'The following Items were not imported because of errors.',
+        'success'       => "Your file has been imported",
     ),
 
 
@@ -52,14 +52,15 @@ return array(
     'checkout' => array(
         'error'   		=> 'Equipo no asignado, intentalo de nuevo',
         'success' 		=> 'Equipo asignado.',
-        'user_does_not_exist' => 'Este usuario no es correcto. Intentalo de nuevo.'
+        'user_does_not_exist' => 'Este usuario no es correcto. Intentalo de nuevo.',
+        'not_available' => 'That asset is not available for checkout!'
     ),
 
     'checkin' => array(
         'error'   		=> 'No se ha quitado el equipo. Intentalo de nuevo.',
         'success' 		=> 'Equipo quitado correctamente.',
         'user_does_not_exist' => 'Este usuario no es correcto. Intentalo de nuevo.',
-        'already_checked_in'  => 'That asset is already checked in.',
+        'already_checked_in'  => 'Ese activo ya se quito.',
 
     ),
 

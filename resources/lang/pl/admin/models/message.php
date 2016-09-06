@@ -3,13 +3,13 @@
 return array(
 
     'does_not_exist' => 'Model nie istnieje.',
-    'assoc_users'	 => 'This model is currently associated with one or more assets and cannot be deleted. Please delete the assets, and then try deleting again. ',
+    'assoc_users'	 => 'Ten model jest przypisany do minim jednego aktywa i nie może być usunięty. Proszę usunąć aktywa, a następnie spróbować ponownie. ',
 
 
     'create' => array(
         'error'   => 'Model nie został stworzony. Spróbuj ponownie.',
         'success' => 'Model utworzony pomyślnie.',
-        'duplicate_set' => 'An asset model with that name, manufacturer and model number already exists.',
+        'duplicate_set' => 'Istnieje już model aktywu o tej nazwie, producencie i numerze.',
     ),
 
     'update' => array(
@@ -18,7 +18,7 @@ return array(
     ),
 
     'delete' => array(
-        'confirm'   => 'Are you sure you wish to delete this asset model?',
+        'confirm'   => 'Czy na pewno chcesz usunąć ten model aktywów?',
         'error'   => 'Wystąpił błąd podczas usuwania modelu. Spróbuj ponownie.',
         'success' => 'Model usunięty poprawnie.'
     ),

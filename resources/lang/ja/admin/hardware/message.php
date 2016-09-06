@@ -37,9 +37,9 @@ return array(
     ),
 
     'import' => array(
-        'error'         => 'Some Items did not import Correctly.',
-        'errorDetail'   => 'The Following Items were not imported because of errors.',
-        'success'       => "Your File has been imported",
+        'error'         => 'Some items did not import correctly.',
+        'errorDetail'   => 'The following Items were not imported because of errors.',
+        'success'       => "Your file has been imported",
     ),
 
 
@@ -52,20 +52,21 @@ return array(
     'checkout' => array(
         'error'   		=> '資産はチェックアウトされませんでした。もう一度、やり直して下さい。',
         'success' 		=> '資産は正常にチェックアウトされました。',
-        'user_does_not_exist' => 'その利用者は不正です。もう一度、やり直して下さい。'
+        'user_does_not_exist' => 'その利用者は不正です。もう一度、やり直して下さい。',
+        'not_available' => 'That asset is not available for checkout!'
     ),
 
     'checkin' => array(
         'error'   		=> '資産はチェックインされませんでした。もう一度、やり直して下さい。',
         'success' 		=> '資産は正常にチェックインされました。',
         'user_does_not_exist' => 'その利用者は不正です。もう一度、やり直して下さい。',
-        'already_checked_in'  => 'That asset is already checked in.',
+        'already_checked_in'  => 'その資産はすでにチェックインしています。',
 
     ),
 
     'requests' => array(
-        'error'   		=> 'Asset was not requested, please try again',
-        'success' 		=> 'Asset requested successfully.',
+        'error'   		=> '資産は要求されませんでした。もう一度、やり直して下さい。',
+        'success' 		=> '資産の要求処理が成功しました。',
     )
 
 );

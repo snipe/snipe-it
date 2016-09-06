@@ -3,7 +3,7 @@
 return array(
 
     'does_not_exist' => 'Dostawca nie istnieje.',
-    'assoc_users'	 => 'This supplier is currently associated with at least one model and cannot be deleted. Please update your models to no longer reference this supplier and try again. ',
+    'assoc_users'	 => 'Dostawca jest obecnie powiązany z co najmniej jednym modelem i nie może być usunięty. uaktualnij swoją listę modeli by nie zawierała powiązania z tym dostawcą i spróbuj ponownie. ',
 
     'create' => array(
         'error'   => 'Dostawca nie został utworzony, spróbuj ponownie.',

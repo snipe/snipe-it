@@ -51,6 +51,8 @@ return array(
     'ldap_pword'                => 'LDAP 密码',
     'ldap_basedn'               => 'Base Bind DN',
     'ldap_filter'               => 'LDAP 过滤器',
+    'ldap_pw_sync'              => 'LDAP Password Sync',
+    'ldap_pw_sync_help'         => 'Uncheck this box if you do not wish to keep LDAP passwords synced with local passwords. Disabling this means that your users may not be able to login if your LDAP server is unreachable for some reason.',
     'ldap_username_field'       => '用户名字段',
     'ldap_lname_field'          => '姓氏',
     'ldap_fname_field'          => 'LDAP用户名字字段',

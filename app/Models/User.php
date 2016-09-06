@@ -67,7 +67,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 
         // Loop through the groups to see if any of them grant this permission
         foreach ($user_groups as $user_group) {
-            $group_permissions = json_decode($user_group->permissions, true);
+            $group_permissions = (array) json_decode($user_group->permissions, true);
             if (((array_key_exists($section, $group_permissions)) && ($group_permissions[$section]=='1'))) {
                 return true;
             }
@@ -84,7 +84,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 
         foreach ($this->groups as $user_group) {
             $group_permissions = json_decode($user_group->permissions, true);
-            $group_array = $group_permissions;
+            $group_array = (array)$group_permissions;
             if ((array_key_exists('superuser', $group_array)) && ($group_permissions['superuser']=='1')) {
                 return true;
             }

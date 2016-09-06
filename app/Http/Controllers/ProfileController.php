@@ -55,7 +55,7 @@ class ProfileController extends Controller
 
         if (Input::file('avatar')) {
             $image = Input::file('avatar');
-            $file_name = $user->first_name."-".$user->last_name.".".$image->getClientOriginalExtension();
+            $file_name = str_slug($user->first_name."-".$user->last_name).".".$image->getClientOriginalExtension();
             $path = public_path('uploads/avatars/'.$file_name);
             Image::make($image->getRealPath())->resize(84, 84)->save($path);
             $user->avatar = $file_name;

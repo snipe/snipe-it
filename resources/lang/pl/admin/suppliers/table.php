@@ -2,7 +2,7 @@
 
 return array(
     'address'               => 'Adres Dostawcy',
-    'assets'                => 'Assets',
+    'assets'                => 'Aktywa',
     'city'                  => 'Miasto',
     'contact'               => 'Osoba Kontaktowa',
     'country'               => 'Kraj',
@@ -18,8 +18,8 @@ return array(
     'suppliers'             => 'Dostawcy',
     'update'                => 'Zaktualizuj Dostawcę',
     'url'                   => 'Adres www',
-    'view'                  => 'View Supplier',
-    'view_assets_for'       => 'View Assets for',
+    'view'                  => 'Podgląd dostawcy',
+    'view_assets_for'       => 'Podgląd aktywa dla',
     'zip'                   => 'Kod Pocztowy',
 
 );

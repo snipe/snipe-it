@@ -628,6 +628,23 @@ public function checkin_email()
         });
     }
 
+    /**
+     * Query builder scope for non-Archived assets
+     *
+     * @param  Illuminate\Database\Query\Builder $query Query builder instance
+     *
+     * @return Illuminate\Database\Query\Builder          Modified query builder
+     */
+
+    public function scopeNotArchived($query)
+    {
+
+        return $query->whereHas('assetstatus', function ($query) {
+
+            $query->where('archived', '=', 0);
+        });
+    }
+
   /**
    * Query builder scope for Archived assets
    *

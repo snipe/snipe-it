@@ -52,7 +52,8 @@ return array(
     'checkout' => array(
         'error'   		=> 'Asset was not checked out, please try again',
         'success' 		=> 'Asset checked out successfully.',
-        'user_does_not_exist' => 'That user is invalid. Please try again.'
+        'user_does_not_exist' => 'That user is invalid. Please try again.',
+        'not_available' => 'That asset is not available for checkout!'
     ),
 
     'checkin' => array(

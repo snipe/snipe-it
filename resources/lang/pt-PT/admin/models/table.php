@@ -11,7 +11,7 @@ return array(
     'title'					=> 'Modelos de Artigo',
     'update'				=> 'Atualizar Modelo de Artigo',
     'view'					=> 'Ver Modelo de Artigo',
-    'update'				=> 'Atualizar Modelo de Artigo',
+    'update'				=> 'Atualizar Modelo',
     'clone'				=> 'Clonar Modelo',
     'edit'				=> 'Editar Modelo',
 );

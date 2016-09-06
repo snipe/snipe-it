@@ -9,7 +9,7 @@ return array(
     'date'              => '購入日',
     'depreciation'      => '減価償却',
     'expiration'        => '有効期限',
-    'license_key'       => 'Product Key',
+    'license_key'       => 'プロダクト キー',
     'maintained'        => '保有',
     'name'              => 'ソフトウェア名',
     'no_depreciation'   => '減価償却しない',

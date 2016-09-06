@@ -76,6 +76,7 @@
     'image_delete'         	=> 'Ta bort Bild',
     'image_upload'         	=> 'Ladda upp Bild',
     'import'         	    => 'Import',
+    'import-history'        => 'Import History',
     'asset_maintenance'        => 'Asset Maintenance',
     'asset_maintenance_report' => 'Asset Maintenance Report',
     'asset_maintenances'       => 'Asset Maintenances',

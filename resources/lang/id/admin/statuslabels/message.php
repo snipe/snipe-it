@@ -2,24 +2,24 @@
 
 return array(
 
-    'does_not_exist' => 'Status Label does not exist.',
-    'assoc_assets'	 => 'This Status Label is currently associated with at least one Asset and cannot be deleted. Please update your assets to no longer reference this status and try again. ',
+    'does_not_exist' => 'Label status tidak ada.',
+    'assoc_assets'	 => 'Saat ini label status tersebut terhubung dengan 1 aset dan tidak dapat di hapus. Silahkan perbarui aset anda sehingga tidak terhubung dan kemudian coba kembali. ',
 
 
     'create' => array(
-        'error'   => 'Status Label was not created, please try again.',
-        'success' => 'Status Label created successfully.'
+        'error'   => 'Label status gagal di buat, silahkan coba lagi.',
+        'success' => 'Sukses membuat status label.'
     ),
 
     'update' => array(
-        'error'   => 'Status Label was not updated, please try again',
-        'success' => 'Status Label updated successfully.'
+        'error'   => 'Gagal perbarui label status, silahkan coba kembali',
+        'success' => 'Sukses perbarui label status.'
     ),
 
     'delete' => array(
-        'confirm'   => 'Are you sure you wish to delete this Status Label?',
-        'error'   => 'There was an issue deleting the Status Label. Please try again.',
-        'success' => 'The Status Label was deleted successfully.'
+        'confirm'   => 'Anda yakin untuk menghapus model label status ini?',
+        'error'   => 'Terdapat kesalahan pada saat penghapusan label status ini. Silahkan coba kembali.',
+        'success' => 'Sukses menghapus label status.'
     )
 
 );

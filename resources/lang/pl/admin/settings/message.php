@@ -14,9 +14,9 @@ return array(
         'file_not_found'        => 'Nie odnaleziono kopii zapasowej na serwerze.',
     ),
     'purge' => array(
-        'error'     => 'An error has occurred while purging. ',
-        'validation_failed'     => 'Your purge confirmation is incorrect. Please type the word "DELETE" in the confirmation box.',
-        'success'               => 'Deleted records successfully purged.'
+        'error'     => 'Wystąpił błąd podczas czyszczenia. ',
+        'validation_failed'     => 'Potwierdzenie czyszczenia jest niepoprawne. Wpisz słowo "DELETE" w polu potwierdzenia.',
+        'success'               => 'Pomyślnie wyczyszczono rekordy usunięte.'
     ),
 
 );

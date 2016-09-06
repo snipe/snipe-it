@@ -120,6 +120,7 @@ class StatuslabelsController extends Controller
         $statuslabel->pending          =  $statustype['pending'];
         $statuslabel->archived          =  $statustype['archived'];
         $statuslabel->color          =  e(Input::get('color'));
+        $statuslabel->show_in_nav          =  e(Input::get('show_in_nav'),0);
 
 
         // Was the asset created?
@@ -208,6 +209,7 @@ class StatuslabelsController extends Controller
         $statuslabel->pending          =  $statustype['pending'];
         $statuslabel->archived          =  $statustype['archived'];
         $statuslabel->color          =  e(Input::get('color'));
+        $statuslabel->show_in_nav          =  e(Input::get('show_in_nav'),0);
 
 
         // Was the asset created?
@@ -258,7 +260,7 @@ class StatuslabelsController extends Controller
 
     public function getDatatable()
     {
-        $statuslabels = Statuslabel::select(array('id','name','deployable','pending','archived','color'))
+        $statuslabels = Statuslabel::select(array('id','name','deployable','pending','archived','color','show_in_nav'))
         ->whereNull('deleted_at');
 
         if (Input::has('search')) {
@@ -314,6 +316,7 @@ class StatuslabelsController extends Controller
                 'type'          => e($label_type),
                 'name'          => e($statuslabel->name),
                 'color'          => $color,
+                'show_in_nav' => ($statuslabel->show_in_nav=='1') ? trans('general.yes') : trans('general.no'),
                 'actions'       => $actions
             );
         }

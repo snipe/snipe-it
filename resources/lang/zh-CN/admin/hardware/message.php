@@ -36,9 +36,9 @@ return array(
     ),
 
     'import' => array(
-        'error'         => 'Some Items did not import Correctly.',
-        'errorDetail'   => 'The Following Items were not imported because of errors.',
-        'success'       => "Your File has been imported",
+        'error'         => 'Some items did not import correctly.',
+        'errorDetail'   => 'The following Items were not imported because of errors.',
+        'success'       => "Your file has been imported",
     ),
 
 
@@ -51,7 +51,8 @@ return array(
     'checkout' => array(
         'error'   		=> '资产未被借出，请重试',
         'success' 		=> '资产借出成功。',
-        'user_does_not_exist' => '无效用户，请重试。'
+        'user_does_not_exist' => '无效用户，请重试。',
+        'not_available' => 'That asset is not available for checkout!'
     ),
 
     'checkin' => array(

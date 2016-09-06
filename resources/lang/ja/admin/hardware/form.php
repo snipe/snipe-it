@@ -1,9 +1,9 @@
 <?php
 
 return array(
-	'bulk_delete'		=> 'Confrm Bulk Delete Assets',
-  'bulk_delete_help'	=> 'Review the assets for bulk deletion below. Once deleted, these assets can be restored, but they will no longer be associated with any users they are currently assigned to.',
-  'bulk_delete_warn'	=> 'You are about to delete :asset_count assets.',
+	'bulk_delete'		=> '資産一括削除',
+  'bulk_delete_help'	=> '以下の資産が一括削除されます。削除後のデータは戻すことができませ',
+  'bulk_delete_warn'	=> ':asset_cont 件の資産を削除しました',
 	'bulk_update'		=> '資産を一括更新',
 	'bulk_update_help'	=> 'このフォームは一度に複数の資産を更新することが可能です。変更が必要なフィールドにのみ入力をして下さい。ブランクのフィールドは変更されません。 ',
 	'bulk_update_warn'	=> '資産群（:asset_count）のプロパティを編集します。',

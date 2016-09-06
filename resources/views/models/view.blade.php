@@ -68,7 +68,7 @@
   <!-- side address column -->
   <div class="col-md-3">
   <h4>More Info:</h4>
-    <ul>
+    <ul class="list-unstyled">
 
       @if ($model->manufacturer)
       <li>{{ trans('general.manufacturer') }}:
@@ -94,7 +94,7 @@
       @endif
 
       @if ($model->image)
-      <li><br /><img src="{{ config('app.url') }}/uploads/models/{{ $model->image }}" /></li>
+      <li><br /><img src="{{ config('app.url') }}/uploads/models/{{ $model->image }}" class="img-responsive"></li>
       @endif
 
       @if  ($model->deleted_at!='')

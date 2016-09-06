@@ -37,9 +37,9 @@ return array(
     ),
 
     'import' => array(
-        'error'         => 'Some Items did not import Correctly.',
-        'errorDetail'   => 'The Following Items were not imported because of errors.',
-        'success'       => "Your File has been imported",
+        'error'         => 'Some items did not import correctly.',
+        'errorDetail'   => 'The following Items were not imported because of errors.',
+        'success'       => "Your file has been imported",
     ),
 
 
@@ -52,20 +52,21 @@ return array(
     'checkout' => array(
         'error'   		=> 'Ce bien n\'a pas été sorti, veuillez réessayer',
         'success' 		=> 'Ce bien a été sorti correctement.',
-        'user_does_not_exist' => 'Cet utilisateur est invalide. Veuillez réessayer.'
+        'user_does_not_exist' => 'Cet utilisateur est invalide. Veuillez réessayer.',
+        'not_available' => 'That asset is not available for checkout!'
     ),
 
     'checkin' => array(
         'error'   		=> 'Ce bien n\'a pas été retourné, veuillez réessayer',
         'success' 		=> 'Ce bien a été retourné correctement.',
         'user_does_not_exist' => 'Cet utilisateur est invalide. Veuillez réessayer.',
-        'already_checked_in'  => 'That asset is already checked in.',
+        'already_checked_in'  => 'Ce bien est déjà dissocié.',
 
     ),
 
     'requests' => array(
-        'error'   		=> 'Asset was not requested, please try again',
-        'success' 		=> 'Asset requested successfully.',
+        'error'   		=> 'Le bien n\'a pas été demandé, merci d\'essayer à nouveau',
+        'success' 		=> 'Le bien a été demandé correctement.',
     )
 
 );

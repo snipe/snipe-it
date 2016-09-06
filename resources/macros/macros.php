@@ -30,6 +30,7 @@ Form::macro('locales', function ($name = "locale", $selected = null, $class = nu
       'el'=> "Greek",
       'he'=> "Hebrew",
       'hu'=> "Hungarian",
+      'id'=> "Indonesian",
       'it'=> "Italian",
       'ja'=> "Japanese",
       'ko'=> "Korean",
@@ -460,6 +461,27 @@ Form::macro('username_format', function ($name = "username_format", $selected = 
         'firstname' => trans('general.first_name_format'),
         'filastname' => trans('general.filastname_format'),
 
+    );
+
+    $select = '<select name="'.$name.'" class="'.$class.'" style="width: 100%">';
+    foreach ($formats as $format => $label) {
+        $select .= '<option value="'.$format.'"'.($selected == $format ? ' selected="selected"' : '').'>'.$label.'</option> '."\n";
+    }
+
+    $select .= '</select>';
+
+    return $select;
+
+});
+
+
+Form::macro('customfield_elements', function ($name = "customfield_elements", $selected = null, $class = null) {
+
+    $formats = array(
+        'text' => 'Text Box',
+        'listbox' => 'List Box',
+     //   'checkbox' => 'Checkbox',
+     //   'radio' => 'Radio Buttons',
     );
 
     $select = '<select name="'.$name.'" class="'.$class.'" style="width: 100%">';

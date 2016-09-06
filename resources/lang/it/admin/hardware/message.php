@@ -37,9 +37,9 @@ return array(
     ),
 
     'import' => array(
-        'error'         => 'Some Items did not import Correctly.',
-        'errorDetail'   => 'The Following Items were not imported because of errors.',
-        'success'       => "Your File has been imported",
+        'error'         => 'Some items did not import correctly.',
+        'errorDetail'   => 'The following Items were not imported because of errors.',
+        'success'       => "Your file has been imported",
     ),
 
 
@@ -52,7 +52,8 @@ return array(
     'checkout' => array(
         'error'   		=> 'Il bene non è stato estratto, per favore riprova',
         'success' 		=> 'Il bene è stato estratto con successo.',
-        'user_does_not_exist' => 'Questo utente non è valido. Riprova.'
+        'user_does_not_exist' => 'Questo utente non è valido. Riprova.',
+        'not_available' => 'That asset is not available for checkout!'
     ),
 
     'checkin' => array(

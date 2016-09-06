@@ -3,25 +3,25 @@
 return array(
 
     'field' => array(
-        'invalid'   => 'That field does not exist.',
-        'already_added'   => 'Field already added',
+        'invalid'   => 'Field tersebut tidak ada.',
+        'already_added'   => 'Field sudah di tambahkan',
 
         'create' => array(
-            'error'   => 'Field was not created, please try again.',
-            'success' => 'Field created successfully.',
-            'assoc_success' => 'Field successfully added to fieldset.'
+            'error'   => 'Field gagal di buat, silahkan coba kembali.',
+            'success' => 'Field telah sukses di buat.',
+            'assoc_success' => 'Field sukses di tambahkan ke fieldset.'
         ),
 
         'update' => array(
-            'error'   => 'Field was not updated, please try again',
-            'success' => 'Field updated successfully.'
+            'error'   => 'Field tidak terbaharui, silahkan coba kembali',
+            'success' => 'Field sukses diperbarui.'
         ),
 
         'delete' => array(
-            'confirm'   	=> 'Are you sure you wish to delete this field?',
-            'error'   => 'There was an issue deleting the field. Please try again.',
-            'success' => 'The field was deleted successfully.',
-            'in_use'   => 'Field is still in use.',
+            'confirm'   	=> 'Apakah Anda yakin untuk menghapus field ini?',
+            'error'   => 'Terdapat kesalahan pada saat penghapusan field ini. Silahkan coba kembali.',
+            'success' => 'Field telah berhasil dihapus.',
+            'in_use'   => 'Field sedang digunakan.',
         )
 
     ),
@@ -31,20 +31,20 @@ return array(
 
 
         'create' => array(
-            'error'   => 'Fieldset was not created, please try again.',
-            'success' => 'Fieldset created successfully.'
+            'error'   => 'Fieldset gagal di buat, silahkan coba kembali.',
+            'success' => 'Fieldset telah sukses di buat.'
         ),
 
         'update' => array(
-            'error'   => 'Fieldset was not updated, please try again',
-            'success' => 'Fieldset updated successfully.'
+            'error'   => 'Fieldset tidak terbaharui, silahkan coba kembali',
+            'success' => 'Fieldset sukses diperbarui.'
         ),
 
         'delete' => array(
-            'confirm'   	=> 'Are you sure you wish to delete this fieldset?',
-            'error'   => 'There was an issue deleting the fieldset. Please try again.',
-            'success' => 'The fieldset was deleted successfully.',
-            'in_use'   => 'Fieldset is still in use.',
+            'confirm'   	=> 'Apakah Anda yakin untuk menghapus fieldset ini?',
+            'error'   => 'Terdapat kesalahan pada saat penghapusan fieldset ini. Silahkan coba kembali.',
+            'success' => 'Fieldset telah berhasil dihapus.',
+            'in_use'   => 'Fieldset sedang digunakan.',
         )
 
     ),

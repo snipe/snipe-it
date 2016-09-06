@@ -14,7 +14,7 @@ return array(
         'file_not_found'        => 'El archivo de respaldo no se ha encontrado en el servidor.',
     ),
     'purge' => array(
-        'error'     => 'An error has occurred while purging. ',
+        'error'     => 'Ha ocurrido un error mientras se realizaba el purgado. ',
         'validation_failed'     => 'Su confirmación de purga es incorrecta. Por favor, escriba la palabra "Borrar" en el cuadro de confirmación.',
         'success'               => 'Registros eliminados correctamente purgados.'
     ),

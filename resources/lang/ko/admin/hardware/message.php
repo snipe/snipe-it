@@ -37,9 +37,9 @@ return array(
     ),
 
     'import' => array(
-        'error'         => '몇몇 품목들을 정확하게 읽어오지 못했습니다.',
-        'errorDetail'   => '다음 품목들은 오류로 읽어오지 못했습니다.',
-        'success'       => "파일에서 읽어오기가 완료되었습니다",
+        'error'         => 'Some items did not import correctly.',
+        'errorDetail'   => 'The following Items were not imported because of errors.',
+        'success'       => "Your file has been imported",
     ),
 
 
@@ -52,7 +52,8 @@ return array(
     'checkout' => array(
         'error'   		=> '자산이 반출되지 않았습니다. 다시 시도해 주세요.',
         'success' 		=> '자산이 반출되었습니다.',
-        'user_does_not_exist' => '잘못된 사용자 입니다. 다시 시도해 주세요.'
+        'user_does_not_exist' => '잘못된 사용자 입니다. 다시 시도해 주세요.',
+        'not_available' => 'That asset is not available for checkout!'
     ),
 
     'checkin' => array(

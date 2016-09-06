@@ -76,6 +76,7 @@
     'image_delete'         	=> 'Xóa hình',
     'image_upload'         	=> 'Tải hình',
     'import'         	    => 'Nhập',
+    'import-history'        => 'Import History',
     'asset_maintenance'        => 'Tài sản đang bảo trì',
     'asset_maintenance_report' => 'Báo cáo tài sản bảo trì',
     'asset_maintenances'       => 'Tài sản đang bảo trì',

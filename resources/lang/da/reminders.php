@@ -17,7 +17,7 @@ return array(
 
     "user"     => "Brugernavn eller email adresse er forkert",
 
-    "token"    => "This password reset token is invalid.",
+    "token"    => "Denne adgangskode nulstillingstoken er ugyldig.",
 
     "sent" => "Hvis en tilsvarende email adresse blev fundet, er der afsendt en påmindelse om adgangskode!",
 

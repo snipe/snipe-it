@@ -76,6 +76,7 @@
     'image_delete'         	=> 'ลบรูปภาพประจำตัว',
     'image_upload'         	=> 'อัพโหลดภาพ',
     'import'         	    => 'นำเข้า',
+    'import-history'        => 'Import History',
     'asset_maintenance'        => 'การซ่อมบำรุงสินทรัพย์',
     'asset_maintenance_report' => 'รายงานการซ่อมบำรุงสินทรัพย์',
     'asset_maintenances'       => 'ซ่อมบำรุงสินทรัพย์',

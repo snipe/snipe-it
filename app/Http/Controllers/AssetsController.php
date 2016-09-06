@@ -436,13 +436,21 @@ class AssetsController extends Controller
         $model = AssetModel::find($request->get('model_id'));
         if ($model->fieldset) {
             foreach ($model->fieldset->fields as $field) {
-                $asset->{\App\Models\CustomField::name_to_db_name($field->name)} = e($request->input(\App\Models\CustomField::name_to_db_name($field->name)));
-    //                LOG::debug($field->name);
-    //                LOG::debug(\App\Models\CustomField::name_to_db_name($field->name));
-    //                LOG::debug($field->db_column_name());
+
+
+                if ($field->field_encrypted=='1') {
+                    if (Gate::allows('admin')) {
+                        $asset->{\App\Models\CustomField::name_to_db_name($field->name)} = \Crypt::encrypt(e($request->input(\App\Models\CustomField::name_to_db_name($field->name))));
+                    }
+
+                } else {
+                    $asset->{\App\Models\CustomField::name_to_db_name($field->name)} = e($request->input(\App\Models\CustomField::name_to_db_name($field->name)));
+                }
+
 
             }
         }
+
 
         if ($asset->save()) {
             // Redirect to the new asset page
@@ -919,6 +927,18 @@ class AssetsController extends Controller
 
     }
 
+    public function getDeleteImportFile($filename)
+    {
+        if (!Company::isCurrentUserAuthorized()) {
+            return redirect()->to('hardware')->with('error', trans('general.insufficient_permissions'));
+        }
+
+        if (unlink(config('app.private_uploads').'/imports/assets/'.$filename)) {
+            return redirect()->back()->with('success', trans('admin/hardware/message.import.file_delete_success'));
+        }
+        return redirect()->back()->with('error', trans('admin/hardware/message.import.file_delete_error'));
+    }
+
 
     /**
     * Process the uploaded file
@@ -928,28 +948,47 @@ class AssetsController extends Controller
     * @since [v2.0]
     * @return Redirect
     */
-    public function getProcessImportFile($filename)
+    public function postProcessImportFile()
     {
         // php artisan asset-import:csv path/to/your/file.csv --domain=yourdomain.com --email_format=firstname.lastname
+        $filename = Input::get('filename');
+        $itemType = Input::get('import-type');
+        $updateItems  = Input::get('import-update');
 
         if (!Company::isCurrentUserAuthorized()) {
             return redirect()->to('hardware')->with('error', trans('general.insufficient_permissions'));
         }
-
-        $return = Artisan::call(
-            'snipeit:import',
-            ['filename'=> config('app.private_uploads').'/imports/assets/'.$filename,
+        $importOptions =    ['filename'=> config('app.private_uploads').'/imports/assets/'.$filename,
                                 '--email_format'=>'firstname.lastname',
                                 '--username_format'=>'firstname.lastname',
                                 '--web-importer' => true,
-                                '--user_id' => Auth::user()->id
-                                ]
-        );
+                                '--user_id' => Auth::user()->id,
+                                '--item-type' => $itemType,
+                            ];
+        if ($updateItems) {
+            $importOptions['--update'] = true;
+        }
+
+        $return = Artisan::call('snipeit:import', $importOptions);
         $display_output =  Artisan::output();
         $file = config('app.private_uploads').'/imports/assets/'.str_replace('.csv', '', $filename).'-output-'.date("Y-m-d-his").'.txt';
         file_put_contents($file, $display_output);
+        // We use hardware instead of asset in the url
+        $redirectTo = "hardware";
+        switch($itemType) {
+            case "asset":
+                $redirectTo = "hardware";
+                break;
+            case "accessory":
+                $redirectTo = "accessories";
+                break;
+            case "consumable":
+                $redirectTo = "consumables";
+                break;
+        }
+
         if ($return === 0) { //Success
-            return redirect()->to('hardware')->with('success', trans('admin/hardware/message.import.success'));
+            return redirect()->to(route($redirectTo))->with('success', trans('admin/hardware/message.import.success'));
         } elseif ($return === 1) { // Failure
             return redirect()->back()->with('import_errors', json_decode($display_output))->with('error', trans('admin/hardware/message.import.error'));
         }
@@ -1588,31 +1627,31 @@ class AssetsController extends Controller
     * @since [v2.0]
     * @return String JSON
     */
-    public function getDatatable($status = null)
+    public function getDatatable(Request $request, $status = null)
     {
 
 
         $assets = Company::scopeCompanyables(Asset::select('assets.*'))->with('model', 'assigneduser', 'assigneduser.userloc', 'assetstatus', 'defaultLoc', 'assetlog', 'model', 'model.category', 'model.manufacturer', 'model.fieldset', 'assetstatus', 'assetloc', 'company')
         ->Hardware();
 
-        if (Input::has('search')) {
-             $assets = $assets->TextSearch(e(Input::get('search')));
+        if ($request->has('search')) {
+             $assets = $assets->TextSearch(e($request->get('search')));
         }
 
-        if (Input::has('offset')) {
-             $offset = e(Input::get('offset'));
+        if ($request->has('offset')) {
+             $offset = e($request->get('offset'));
         } else {
              $offset = 0;
         }
 
-        if (Input::has('limit')) {
-             $limit = e(Input::get('limit'));
+        if ($request->has('limit')) {
+             $limit = e($request->get('limit'));
         } else {
              $limit = 50;
         }
 
-        if (Input::has('order_number')) {
-            $assets->where('order_number', '=', e(Input::get('order_number')));
+        if ($request->has('order_number')) {
+            $assets->where('order_number', '=', e($request->get('order_number')));
         }
 
         switch ($status) {
@@ -1637,8 +1676,17 @@ class AssetsController extends Controller
             case 'Deployed':
                 $assets->Deployed();
                 break;
+            default:
+                $assets->NotArchived();
+                break;
 
         }
+
+        if ($request->has('status_id')) {
+            $assets->where('status_id','=', e($request->get('status_id')));
+        }
+
+
 
         $allowed_columns = [
         'id',
@@ -1669,8 +1717,8 @@ class AssetsController extends Controller
             $allowed_columns[]=$field->db_column_name();
         }
 
-        $order = Input::get('order') === 'asc' ? 'asc' : 'desc';
-        $sort = in_array(Input::get('sort'), $allowed_columns) ? Input::get('sort') : 'asset_tag';
+        $order = $request->get('order') === 'asc' ? 'asc' : 'desc';
+        $sort = in_array($request->get('sort'), $allowed_columns) ? $request->get('sort') : 'asset_tag';
 
         switch ($sort) {
             case 'model':
@@ -1772,10 +1820,26 @@ class AssetsController extends Controller
             'companyName'   => is_null($asset->company) ? '' : e($asset->company->name)
             );
             foreach ($all_custom_fields as $field) {
-                if (($field->format=='URL') && ($asset->{$field->db_column_name()}!='')) {
-                    $row[$field->db_column_name()] = '<a href="'.$asset->{$field->db_column_name()}.'" target="_blank">'.$asset->{$field->db_column_name()}.'</a>';
+                $column_name = $field->db_column_name();
+
+                if ($field->isFieldDecryptable($asset->{$column_name})) {
+
+                    if (Gate::allows('admin')) {
+                        if (($field->format=='URL') && ($asset->{$column_name}!='')) {
+                            $row[$column_name] = '<a href="'.Helper::gracefulDecrypt($field, $asset->{$column_name}).'" target="_blank">'.Helper::gracefulDecrypt($field, $asset->{$column_name}).'</a>';
+                        } else {
+                            $row[$column_name] = Helper::gracefulDecrypt($field, $asset->{$column_name});
+                        }
+
+                    } else {
+                        $row[$field->db_column_name()] = strtoupper(trans('admin/custom_fields/general.encrypted'));
+                    }
                 } else {
-                    $row[$field->db_column_name()] = e($asset->{$field->db_column_name()});
+                    if (($field->format=='URL') && ($asset->{$field->db_column_name()}!='')) {
+                        $row[$field->db_column_name()] = '<a href="'.$asset->{$field->db_column_name()}.'" target="_blank">'.$asset->{$field->db_column_name()}.'</a>';
+                    } else {
+                        $row[$field->db_column_name()] = e($asset->{$field->db_column_name()});
+                    }
                 }
 
             }

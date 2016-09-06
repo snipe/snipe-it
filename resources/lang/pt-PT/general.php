@@ -76,6 +76,7 @@
     'image_delete'         	=> 'Apagar imagem',
     'image_upload'         	=> 'Carregar Imagem',
     'import'         	    => 'Importar',
+    'import-history'        => 'Import History',
     'asset_maintenance'        => 'Manutenção de Artigo',
     'asset_maintenance_report' => 'Relatório de Manutenção de Artigos',
     'asset_maintenances'       => 'Manutenções de Artigos',

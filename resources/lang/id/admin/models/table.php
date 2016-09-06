@@ -2,16 +2,16 @@
 
 return array(
 
-    'create'				=> 'Create Asset Model',
-    'created_at' 			=> 'Created at',
-    'eol'	 				=> 'EOL',
-    'modelnumber'   		=> 'Model No.',
-    'name'      			=> 'Asset Model Name',
-    'numassets' 			=> 'Assets',
-    'title'					=> 'Asset Models',
-    'update'				=> 'Update Asset Model',
-    'view'					=> 'View Asset Model',
-    'update'				=> 'Update Asset Model',
-    'clone'				=> 'Clone Model',
-    'edit'				=> 'Edit Model',
+    'create'				=> 'Membuat Model aset',
+    'created_at' 			=> 'Dibuat',
+    'eol'	 				=> 'MHP',
+    'modelnumber'   		=> 'No. Model.',
+    'name'      			=> 'Nama Model Aset',
+    'numassets' 			=> 'Aset',
+    'title'					=> 'Model Aset',
+    'update'				=> 'Perbarui Model Aset',
+    'view'					=> 'Tampilkan Model Aset',
+    'update'				=> 'Pebarui Model',
+    'clone'				=> 'Duplikat Model',
+    'edit'				=> 'Sunting Model',
 );

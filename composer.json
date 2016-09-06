@@ -22,7 +22,8 @@
       "doctrine/dbal": "v2.4.2",
       "barryvdh/laravel-debugbar": "^2.1",
       "spatie/laravel-backup": "3.8.1",
-      "misterphilip/maintenance-mode": "1.0.*"
+      "misterphilip/maintenance-mode": "1.0.*",
+      "neitanod/forceutf8": "dev-master"
     },
     "require-dev": {
       "fzaninotto/faker": "~1.4",

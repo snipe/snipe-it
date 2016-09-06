@@ -76,6 +76,7 @@
     'image_delete'         	=> 'Изтриване на изображението',
     'image_upload'         	=> 'Качване на изображение',
     'import'         	    => 'Зареждане',
+    'import-history'        => 'Import History',
     'asset_maintenance'        => 'Поддръжка на активи',
     'asset_maintenance_report' => 'Справка за поддръжка на активи',
     'asset_maintenances'       => 'Поддръжки на активи',

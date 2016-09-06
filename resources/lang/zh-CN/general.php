@@ -76,6 +76,7 @@
     'image_delete'         	=> '删除图片',
     'image_upload'         	=> '上传图片',
     'import'         	    => '导入',
+    'import-history'        => 'Import History',
     'asset_maintenance'        => '资产维修',
     'asset_maintenance_report' => '资产维修报表',
     'asset_maintenances'       => '资产维修',

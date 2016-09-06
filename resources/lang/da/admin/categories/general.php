@@ -5,7 +5,7 @@ return array(
     'about_categories'  				=> 'Aktiver kategorier hjælper dig med at organisere dine aktiver. Eksempler på kategorier kunne være &quot;Stationære coputere&quot;, &quot;Bærbare&quot;, &quot;Mobiltelefoner&quot;, &quot;Tabletter&quot; osv., men du kan bruge aktiver kategorier på en hvilken som helst måde som giver mening for dig.',
     'asset_categories' 					=> 'Aktiver Kategorier',
     'category_name'  					=> 'Kategorinavn',
-    'checkin_email'                     => 'Send email to user on checkin.',
+    'checkin_email'                     => 'Send email til bruger ved tjek ind.',
     'clone'                             => 'Klon Kategori',
     'create'  							=> 'Opret kategori',
     'edit'                              => 'Rediger Kategori',
