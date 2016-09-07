@@ -134,13 +134,13 @@ class Setting extends Model
                 ],
             ];
 
-        foreach ($arBytes as $arItem) {
-            if ($bytes >= $arItem["VALUE"]) {
-                $result = $bytes / $arItem["VALUE"];
-                $result = round($result, 2) .$arItem["UNIT"];
-                break;
+            foreach ($arBytes as $arItem) {
+                if ($bytes >= $arItem["VALUE"]) {
+                    $result = $bytes / $arItem["VALUE"];
+                    $result = round($result, 2) .$arItem["UNIT"];
+                    break;
+                }
             }
-        }
             return $result;
     }
 }
