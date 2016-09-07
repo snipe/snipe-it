@@ -330,12 +330,12 @@ class ComponentsController extends Controller
       // Update the component data
         $component->asset_id =   $asset_id;
 
-        $component->assets()->attach($component->id, array(
+        $component->assets()->attach($component->id, [
         'component_id' => $component->id,
         'user_id' => $admin_user->id,
         'created_at' => date('Y-m-d h:i:s'),
         'assigned_qty' => e(Input::get('assigned_qty')),
-        'asset_id' => $asset_id));
+        'asset_id' => $asset_id]);
 
         $logaction = $component->logCheckout(e(Input::get('note')), $asset_id);
 
@@ -425,7 +425,7 @@ class ComponentsController extends Controller
         $consumCount = $components->count();
         $components = $components->skip($offset)->take($limit)->get();
 
-        $rows = array();
+        $rows = [];
 
         foreach ($components as $component) {
             $actions = '<nobr>';
@@ -453,7 +453,7 @@ class ComponentsController extends Controller
             $actions .='</nobr>';
             $company = $component->company;
 
-            $rows[] = array(
+            $rows[] = [
                 'checkbox'      =>'<div class="text-center"><input type="checkbox" name="component['.$component->id.']" class="one_required"></div>',
                 'id'            => $component->id,
                 'name'          => (string)link_to('admin/components/'.$component->id.'/view', e($component->name)),
@@ -467,10 +467,10 @@ class ComponentsController extends Controller
                 'numRemaining'  => $component->numRemaining(),
                 'actions'       => $actions,
                 'companyName'   => is_null($company) ? '' : e($company->name),
-            );
+            ];
         }
 
-        $data = array('total' => $consumCount, 'rows' => $rows);
+        $data = ['total' => $consumCount, 'rows' => $rows];
 
         return $data;
     }
@@ -494,18 +494,18 @@ class ComponentsController extends Controller
             return ['total' => 0, 'rows' => []];
         }
 
-        $rows = array();
+        $rows = [];
 
         foreach ($component->assets as $component_assignment) {
-            $rows[] = array(
+            $rows[] = [
             'name' => (string)link_to('/hardware/'.$component_assignment->id.'/view', e($component_assignment->showAssetName())),
             'qty' => e($component_assignment->pivot->assigned_qty),
             'created_at' => ($component_assignment->created_at->format('Y-m-d H:i:s')=='-0001-11-30 00:00:00') ? '' : $component_assignment->created_at->format('Y-m-d H:i:s'),
-            );
+            ];
         }
 
         $componentCount = $component->assets->count();
-        $data = array('total' => $componentCount, 'rows' => $rows);
+        $data = ['total' => $componentCount, 'rows' => $rows];
         return $data;
     }
 }

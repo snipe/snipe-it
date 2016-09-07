@@ -23,14 +23,14 @@ class Accessory extends Model
     /**
     * Accessory validation rules
     */
-    public $rules = array(
+    public $rules = [
         'name'              => 'required|min:3|max:255',
         'qty'               => 'required|integer|min:1',
         'category_id'       => 'required|integer',
         'company_id'        => 'integer',
         'min_amt'           => 'integer|min:1',
         'purchase_cost'     => 'numeric',
-    );
+    ];
 
 
     /**

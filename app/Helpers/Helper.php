@@ -124,7 +124,7 @@ class Helper
 
     public static function companyList()
     {
-        $company_list = array('0' => trans('general.select_company')) + DB::table('companies')
+        $company_list = ['0' => trans('general.select_company')] + DB::table('companies')
                 ->orderBy('name', 'asc')
                 ->pluck('name', 'id');
         return $company_list;
@@ -139,13 +139,13 @@ class Helper
         if (!empty($category_type)) {
             $categories = $categories->where('category_type', '=', $category_type);
         }
-        $category_list = array('' => trans('general.select_category')) + $categories->pluck('name', 'id')->toArray();
+        $category_list = ['' => trans('general.select_category')] + $categories->pluck('name', 'id')->toArray();
         return $category_list;
     }
 
     public static function suppliersList()
     {
-        $supplier_list = array('' => trans('general.select_supplier')) + Supplier::orderBy('name', 'asc')
+        $supplier_list = ['' => trans('general.select_supplier')] + Supplier::orderBy('name', 'asc')
                 ->orderBy('name', 'asc')
                 ->pluck('name', 'id')->toArray();
         return $supplier_list;
@@ -153,21 +153,21 @@ class Helper
 
     public static function statusLabelList()
     {
-        $statuslabel_list = array('' => trans('general.select_statuslabel')) + Statuslabel::orderBy('name', 'asc')
+        $statuslabel_list = ['' => trans('general.select_statuslabel')] + Statuslabel::orderBy('name', 'asc')
                 ->pluck('name', 'id')->toArray();
         return $statuslabel_list;
     }
 
     public static function locationsList()
     {
-        $location_list = array('' => trans('general.select_location')) + Location::orderBy('name', 'asc')
+        $location_list = ['' => trans('general.select_location')] + Location::orderBy('name', 'asc')
                 ->pluck('name', 'id')->toArray();
         return $location_list;
     }
 
     public static function manufacturerList()
     {
-        $manufacturer_list = array('' => trans('general.select_manufacturer')) +
+        $manufacturer_list = ['' => trans('general.select_manufacturer')] +
             Manufacturer::orderBy('name', 'asc')
                 ->pluck('name', 'id')->toArray();
         return $manufacturer_list;
@@ -175,13 +175,13 @@ class Helper
 
     public static function statusTypeList()
     {
-        $statuslabel_types = array('' => trans('admin/hardware/form.select_statustype')) + array('undeployable' => trans('admin/hardware/general.undeployable')) + array('pending' => trans('admin/hardware/general.pending')) + array('archived' => trans('admin/hardware/general.archived')) + array('deployable' => trans('admin/hardware/general.deployable'));
+        $statuslabel_types = ['' => trans('admin/hardware/form.select_statustype')] + ['undeployable' => trans('admin/hardware/general.undeployable')] + ['pending' => trans('admin/hardware/general.pending')] + ['archived' => trans('admin/hardware/general.archived')] + ['deployable' => trans('admin/hardware/general.deployable')];
         return $statuslabel_types;
     }
 
     public static function managerList()
     {
-        $manager_list = array('' => trans('general.select_user')) +
+        $manager_list = ['' => trans('general.select_user')] +
                         User::where('deleted_at', '=', null)
                         ->orderBy('last_name', 'asc')
                         ->orderBy('first_name', 'asc')->get()
@@ -199,13 +199,13 @@ class Helper
 
     public static function categoryTypeList()
     {
-        $category_types = array('' => '','accessory' => 'Accessory', 'asset' => 'Asset', 'consumable' => 'Consumable','component' => 'Component');
+        $category_types = ['' => '','accessory' => 'Accessory', 'asset' => 'Asset', 'consumable' => 'Consumable','component' => 'Component'];
         return $category_types;
     }
 
     public static function usersList()
     {
-        $users_list =   array( '' => trans('general.select_user')) +
+        $users_list =   [ '' => trans('general.select_user')] +
                         User::where('deleted_at', '=', null)
                         ->where('show_in_list', '=', 1)
                         ->orderBy('last_name', 'asc')
@@ -217,7 +217,7 @@ class Helper
 
     public static function assetsList()
     {
-        $assets_list = array('' => trans('general.select_asset')) + Asset::orderBy('name', 'asc')
+        $assets_list = ['' => trans('general.select_asset')] + Asset::orderBy('name', 'asc')
                 ->whereNull('deleted_at')
                 ->pluck('name', 'id')->toArray();
         return $assets_list;
@@ -226,14 +226,14 @@ class Helper
     public static function detailedAssetList()
     {
 
-        $assets = array('' => trans('general.select_asset')) + Company::scopeCompanyables(Asset::all(), 'assets.company_id')->lists('detailed_name', 'id')->toArray();
+        $assets = ['' => trans('general.select_asset')] + Company::scopeCompanyables(Asset::all(), 'assets.company_id')->lists('detailed_name', 'id')->toArray();
         return $assets;
     }
 
 
     public static function customFieldsetList()
     {
-        $customfields = array('' => trans('admin/models/general.no_custom_field')) + CustomFieldset::pluck('name', 'id')->toArray();
+        $customfields = ['' => trans('admin/models/general.no_custom_field')] + CustomFieldset::pluck('name', 'id')->toArray();
         return  $customfields;
     }
 
@@ -281,7 +281,7 @@ class Helper
         $components = Component::with('assets')->whereNotNull('min_amt')->get();
 
         $avail_consumables = 0;
-        $items_array = array();
+        $items_array = [];
         $all_count = 0;
 
         foreach ($consumables as $consumable) {
@@ -378,11 +378,11 @@ class Helper
      * @since [v1.0]
      * @return Array
      */
-    public static function selectedPermissionsArray($permissions, $selected_arr = array())
+    public static function selectedPermissionsArray($permissions, $selected_arr = [])
     {
 
 
-        $permissions_arr = array();
+        $permissions_arr = [];
 
         foreach ($permissions as $permission) {
             for ($x = 0; $x < count($permission); $x++) {

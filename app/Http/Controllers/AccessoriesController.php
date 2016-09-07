@@ -207,7 +207,7 @@ class AccessoriesController extends Controller
 
 
         if ($accessory->hasUsers() > 0) {
-             return redirect()->to('admin/accessories')->with('error', trans('admin/accessories/message.assoc_users', array('count'=> $accessory->hasUsers())));
+             return redirect()->to('admin/accessories')->with('error', trans('admin/accessories/message.assoc_users', ['count'=> $accessory->hasUsers()]));
         } else {
             $accessory->delete();
 
@@ -297,11 +297,11 @@ class AccessoriesController extends Controller
       // Update the accessory data
         $accessory->assigned_to                 = e(Input::get('assigned_to'));
 
-        $accessory->users()->attach($accessory->id, array(
+        $accessory->users()->attach($accessory->id, [
         'accessory_id' => $accessory->id,
         'created_at' => Carbon::now(),
         'user_id' => Auth::user()->id,
-        'assigned_to' => e(Input::get('assigned_to'))));
+        'assigned_to' => e(Input::get('assigned_to'))]);
 
         $logaction = $accessory->logCheckout(e(Input::get('note')));
 
@@ -545,7 +545,7 @@ class AccessoriesController extends Controller
         $accessCount = $accessories->count();
         $accessories = $accessories->skip($offset)->take($limit)->get();
 
-        $rows = array();
+        $rows = [];
 
         foreach ($accessories as $accessory) {
             $actions = '<nobr>';
@@ -570,7 +570,7 @@ class AccessoriesController extends Controller
             $actions .= '</nobr>';
             $company = $accessory->company;
 
-            $rows[] = array(
+            $rows[] = [
             'name'          => '<a href="'.url('admin/accessories/'.$accessory->id).'/view">'. $accessory->name.'</a>',
             'category'      => ($accessory->category) ? (string)link_to('admin/settings/categories/'.$accessory->category->id.'/view', $accessory->category->name) : '',
             'qty'           => e($accessory->qty),
@@ -584,10 +584,10 @@ class AccessoriesController extends Controller
             'companyName'   => is_null($company) ? '' : e($company->name),
             'manufacturer'      => $accessory->manufacturer ? (string) link_to('/admin/settings/manufacturers/'.$accessory->manufacturer_id.'/view', $accessory->manufacturer->name) : ''
 
-            );
+            ];
         }
 
-        $data = array('total'=>$accessCount, 'rows'=>$rows);
+        $data = ['total'=>$accessCount, 'rows'=>$rows];
 
         return $data;
     }
@@ -629,7 +629,7 @@ class AccessoriesController extends Controller
         $accessory_users = $accessory->users;
         $count = $accessory_users->count();
 
-        $rows = array();
+        $rows = [];
 
         foreach ($accessory_users as $user) {
             $actions = '';
@@ -646,13 +646,13 @@ class AccessoriesController extends Controller
                 $name = e($user->fullName());
             }
 
-            $rows[] = array(
+            $rows[] = [
               'name'          => $name,
               'actions'       => $actions
-              );
+              ];
         }
 
-        $data = array('total'=>$count, 'rows'=>$rows);
+        $data = ['total'=>$count, 'rows'=>$rows];
 
         return $data;
     }

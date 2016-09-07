@@ -204,7 +204,7 @@ class ViewAssetsController extends Controller
             if (Input::get('asset_acceptance')!='accepted') {
                 DB::table('assets')
                 ->where('id', $findlog->item_id)
-                ->update(array('assigned_to' => null));
+                ->update(['assigned_to' => null]);
             }
         }
         $logaction->target_id = $findlog->target_id;
@@ -216,7 +216,7 @@ class ViewAssetsController extends Controller
 
         $update_checkout = DB::table('action_logs')
         ->where('id', $findlog->id)
-        ->update(array('accepted_id' => $logaction->id));
+        ->update(['accepted_id' => $logaction->id]);
 
             $affected_asset=$logaction->assetlog;
             $affected_asset->accepted=$accepted;

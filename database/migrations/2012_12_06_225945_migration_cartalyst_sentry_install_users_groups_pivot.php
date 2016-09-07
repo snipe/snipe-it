@@ -37,7 +37,7 @@ class MigrationCartalystSentryInstallUsersGroupsPivot extends Migration {
 			// We'll need to ensure that MySQL uses the InnoDB engine to
 			// support the indexes, other engines aren't affected.
 			$table->engine = 'InnoDB';
-			$table->primary(array('user_id', 'group_id'));
+			$table->primary(['user_id', 'group_id']);
 		});
 	}
 

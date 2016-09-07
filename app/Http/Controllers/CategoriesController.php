@@ -113,7 +113,7 @@ class CategoriesController extends Controller
         // Show the page
         //$category_options = array('' => 'Top Level') + Category::lists('name', 'id');
 
-        $category_options = array('' => 'Top Level') + DB::table('categories')->where('id', '!=', $categoryId)->lists('name', 'id');
+        $category_options = ['' => 'Top Level'] + DB::table('categories')->where('id', '!=', $categoryId)->lists('name', 'id');
         $category_types= Helper::categoryTypeList();
 
         return View::make('categories/edit', compact('category'))
@@ -263,7 +263,7 @@ class CategoriesController extends Controller
         $catCount = $categories->count();
         $categories = $categories->skip($offset)->take($limit)->get();
 
-        $rows = array();
+        $rows = [];
 
         foreach ($categories as $category) {
             $actions = '<a href="'.route('update/category', $category->id).'" class="btn btn-warning btn-sm" style="margin-right:5px;">';
@@ -273,7 +273,7 @@ class CategoriesController extends Controller
                 $actions .=' disabled';
             }
             $actions .=' data-toggle="modal" href="'.route('delete/category', $category->id).'" data-content="'.trans('admin/categories/message.delete.confirm').'" data-title="'.trans('general.delete').' '.htmlspecialchars($category->name).'?" onClick="return false;"><i class="fa fa-trash icon-white"></i></a>';
-            $rows[] = array(
+            $rows[] = [
                 'id'      => $category->id,
                 'name'  => (string)link_to('/admin/settings/categories/'.$category->id.'/view', $category->name) ,
                 'category_type' => ucwords($category->category_type),
@@ -282,10 +282,10 @@ class CategoriesController extends Controller
                 //EULA is still not working correctly
                 'eula'          => ($category->getEula()) ? '<i class="fa fa-check"></i>' : '',
                 'actions'       => $actions
-            );
+            ];
         }
 
-        $data = array('total' => $catCount, 'rows' => $rows);
+        $data = ['total' => $catCount, 'rows' => $rows];
 
         return $data;
     }
@@ -318,7 +318,7 @@ class CategoriesController extends Controller
         $sort = in_array(Input::get('sort'), $allowed_columns) ? Input::get('sort') : 'created_at';
         $count = $category_assets->count();
         $category_assets = $category_assets->skip($offset)->take($limit)->get();
-        $rows = array();
+        $rows = [];
 
         foreach ($category_assets as $asset) {
             $actions = '';
@@ -340,7 +340,7 @@ class CategoriesController extends Controller
                 }
             }
 
-            $rows[] = array(
+            $rows[] = [
                 'id' => $asset->id,
                 'name' => (string)link_to('/hardware/'.$asset->id.'/view', $asset->showAssetName()),
                 'model' => $asset->model->name,
@@ -350,10 +350,10 @@ class CategoriesController extends Controller
                 'change' => $inout,
                 'actions' => $actions,
                 'companyName' => Company::getName($asset),
-            );
+            ];
         }
 
-        $data = array('total' => $count, 'rows' => $rows);
+        $data = ['total' => $count, 'rows' => $rows];
         return $data;
     }
 
@@ -387,7 +387,7 @@ class CategoriesController extends Controller
         $sort = in_array(Input::get('sort'), $allowed_columns) ? Input::get('sort') : 'created_at';
         $count = $category_assets->count();
 
-        $rows = array();
+        $rows = [];
 
         foreach ($category_assets as $asset) {
             $actions = '';
@@ -399,15 +399,15 @@ class CategoriesController extends Controller
 
 
 
-            $rows[] = array(
+            $rows[] = [
                 'id' => $asset->id,
                 'name' => (string)link_to_route('view/accessory', $asset->name, [$asset->id]),
                 'actions' => $actions,
                 'companyName' => Company::getName($asset),
-            );
+            ];
         }
 
-        $data = array('total' => $count, 'rows' => $rows);
+        $data = ['total' => $count, 'rows' => $rows];
         return $data;
     }
 
@@ -440,7 +440,7 @@ class CategoriesController extends Controller
         $sort = in_array(Input::get('sort'), $allowed_columns) ? Input::get('sort') : 'created_at';
         $count = $category_assets->count();
 
-        $rows = array();
+        $rows = [];
 
         foreach ($category_assets as $asset) {
             $actions = '';
@@ -452,15 +452,15 @@ class CategoriesController extends Controller
 
 
 
-            $rows[] = array(
+            $rows[] = [
                 'id' => $asset->id,
                 'name' => (string) link_to_route('view/consumable', $asset->name, [$asset->id]),
                 'actions' => $actions,
                 'companyName' => Company::getName($asset),
-            );
+            ];
         }
 
-        $data = array('total' => $count, 'rows' => $rows);
+        $data = ['total' => $count, 'rows' => $rows];
         return $data;
     }
 
@@ -492,7 +492,7 @@ class CategoriesController extends Controller
         $sort = in_array(Input::get('sort'), $allowed_columns) ? Input::get('sort') : 'created_at';
         $count = $category_assets->count();
 
-        $rows = array();
+        $rows = [];
 
         foreach ($category_assets as $asset) {
             $actions = '';
@@ -504,15 +504,15 @@ class CategoriesController extends Controller
 
 
 
-            $rows[] = array(
+            $rows[] = [
                 'id' => $asset->id,
                 'name' => (string)link_to_route('view/accessory', $asset->name, [$asset->id]),
                 'actions' => $actions,
                 'companyName' => Company::getName($asset),
-            );
+            ];
         }
 
-        $data = array('total' => $count, 'rows' => $rows);
+        $data = ['total' => $count, 'rows' => $rows];
         return $data;
     }
 }

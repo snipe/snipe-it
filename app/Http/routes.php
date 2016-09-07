@@ -48,40 +48,40 @@ Route::group([ 'prefix' => 'api', 'middleware' => 'auth' ], function () {
     });
 
     /*---Consumables API---*/
-    Route::group(array('prefix'=>'consumables'), function () {
-        Route::get('list', array('as'=>'api.consumables.list', 'uses'=>'ConsumablesController@getDatatable'));
-        Route::get('{consumableID}/view', array('as'=>'api.consumables.view', 'uses'=>'ConsumablesController@getDataView'));
+    Route::group(['prefix'=>'consumables'], function () {
+        Route::get('list', ['as'=>'api.consumables.list', 'uses'=>'ConsumablesController@getDatatable']);
+        Route::get('{consumableID}/view', ['as'=>'api.consumables.view', 'uses'=>'ConsumablesController@getDataView']);
     });
 
     /*---Components API---*/
-    Route::group(array('prefix'=>'components'), function () {
-        Route::get('list', array('as'=>'api.components.list', 'uses'=>'ComponentsController@getDatatable'));
-        Route::get('{componentID}/view', array('as'=>'api.components.view', 'uses'=>'ComponentsController@getDataView'));
+    Route::group(['prefix'=>'components'], function () {
+        Route::get('list', ['as'=>'api.components.list', 'uses'=>'ComponentsController@getDatatable']);
+        Route::get('{componentID}/view', ['as'=>'api.components.view', 'uses'=>'ComponentsController@getDataView']);
     });
 
     /*---Locations API---*/
-    Route::group(array('prefix'=>'locations'), function () {
-        Route::get('list', array('as'=>'api.locations.list', 'uses'=>'LocationsController@getDatatable'));
-        Route::get('{locationID}/view', array('as'=>'api.locations.view', 'uses'=>'LocationsController@getDataView'));
-        Route::get('{locationID}/users', array('as'=>'api.locations.viewusers', 'uses'=>'LocationsController@getDataViewUsers'));
-        Route::get('{locationID}/assets', array('as'=>'api.locations.viewassets', 'uses'=>'LocationsController@getDataViewAssets'));
+    Route::group(['prefix'=>'locations'], function () {
+        Route::get('list', ['as'=>'api.locations.list', 'uses'=>'LocationsController@getDatatable']);
+        Route::get('{locationID}/view', ['as'=>'api.locations.view', 'uses'=>'LocationsController@getDataView']);
+        Route::get('{locationID}/users', ['as'=>'api.locations.viewusers', 'uses'=>'LocationsController@getDataViewUsers']);
+        Route::get('{locationID}/assets', ['as'=>'api.locations.viewassets', 'uses'=>'LocationsController@getDataViewAssets']);
     });
 
     /*---Depreciations API---*/
-    Route::group(array('prefix'=>'depreciations'), function () {
-        Route::get('list', array('as'=>'api.depreciations.list', 'uses'=>'DepreciationsController@getDatatable'));
-        Route::get('{$depreciationID}/view', array('as'=>'api.depreciations.view', 'uses'=>'DepreciationsController@getDataView'));
+    Route::group(['prefix'=>'depreciations'], function () {
+        Route::get('list', ['as'=>'api.depreciations.list', 'uses'=>'DepreciationsController@getDatatable']);
+        Route::get('{$depreciationID}/view', ['as'=>'api.depreciations.view', 'uses'=>'DepreciationsController@getDataView']);
     });
 
     /*---Manufacturers API---*/
-    Route::group(array('prefix'=>'manufacturers'), function () {
-        Route::get('list', array('as'=>'api.manufacturers.list', 'uses'=>'ManufacturersController@getDatatable'));
-        Route::get('{manufacturerID}/view/{itemtype}', array('as'=>'api.manufacturers.view', 'uses'=>'ManufacturersController@getDataView'));
+    Route::group(['prefix'=>'manufacturers'], function () {
+        Route::get('list', ['as'=>'api.manufacturers.list', 'uses'=>'ManufacturersController@getDatatable']);
+        Route::get('{manufacturerID}/view/{itemtype}', ['as'=>'api.manufacturers.view', 'uses'=>'ManufacturersController@getDataView']);
     });
 
     /*---Suppliers API---*/
-    Route::group(array('prefix'=>'suppliers'), function () {
-        Route::get('list', array('as'=>'api.suppliers.list', 'uses'=>'SuppliersController@getDatatable'));
+    Route::group(['prefix'=>'suppliers'], function () {
+        Route::get('list', ['as'=>'api.suppliers.list', 'uses'=>'SuppliersController@getDatatable']);
     });
 
     /*---Users API---*/

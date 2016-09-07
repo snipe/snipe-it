@@ -80,7 +80,7 @@ class UsersController extends Controller
         }
 
         $permissions = config('permissions');
-        $userPermissions = Helper::selectedPermissionsArray($permissions, Input::old('permissions', array()));
+        $userPermissions = Helper::selectedPermissionsArray($permissions, Input::old('permissions', []));
 
         $location_list = Helper::locationsList();
         $manager_list = Helper::managerList();
@@ -143,12 +143,12 @@ class UsersController extends Controller
             if ($request->has('groups')) {
                 $user->groups()->sync($request->input('groups'));
             } else {
-                $user->groups()->sync(array());
+                $user->groups()->sync([]);
             }
 
             if (($request->input('email_user') == 1) && ($request->has('email'))) {
               // Send the credentials through email
-                $data = array();
+                $data = [];
                 $data['email'] = e($request->input('email'));
                 $data['username'] = e($request->input('username'));
                 $data['first_name'] = e($request->input('first_name'));
@@ -196,7 +196,7 @@ class UsersController extends Controller
         if ($user->save()) {
             if (Input::get('email_user') == 1) {
                 // Send the credentials through email
-                $data = array();
+                $data = [];
                 $data['email'] = e(Input::get('email'));
                 $data['first_name'] = e(Input::get('first_name'));
                 $data['last_name'] = e(Input::get('last_name'));
@@ -269,7 +269,7 @@ class UsersController extends Controller
     {
         // We need to reverse the UI specific logic for our
         // permissions here before we update the user.
-        $permissions = $request->input('permissions', array());
+        $permissions = $request->input('permissions', []);
         app('request')->request->set('permissions', $permissions);
 
         // Only update the email address if locking is set to false
@@ -296,7 +296,7 @@ class UsersController extends Controller
         if ($request->has('groups')) {
             $user->groups()->sync($request->input('groups'));
         } else {
-            $user->groups()->sync(array());
+            $user->groups()->sync([]);
         }
         // Do we want to update the user password?
         if ($request->has('password')) {
@@ -452,7 +452,7 @@ class UsersController extends Controller
             return redirect()->route('users')->with('error', 'No status selected');
         } else {
             $user_raw_array = Input::get('edit_user');
-            $asset_array = array();
+            $asset_array = [];
 
             if (($key = array_search(Auth::user()->id, $user_raw_array)) !== false) {
                 unset($user_raw_array[$key]);
@@ -467,8 +467,8 @@ class UsersController extends Controller
                 $assets = Asset::whereIn('assigned_to', $user_raw_array)->get();
                 $accessories = DB::table('accessories_users')->whereIn('assigned_to', $user_raw_array)->get();
                 $licenses = DB::table('license_seats')->whereIn('assigned_to', $user_raw_array)->get();
-                $license_array = array();
-                $accessory_array = array();
+                $license_array = [];
+                $accessory_array = [];
 
 
 
@@ -486,10 +486,10 @@ class UsersController extends Controller
                     $logaction->logaction('checkin from');
 
                     Asset::whereIn('id', $asset_array)->update(
-                        array(
+                        [
                                 'status_id' => e(Input::get('status_id')),
                                 'assigned_to' => null,
-                            )
+                            ]
                     );
                 }
 
@@ -522,7 +522,7 @@ class UsersController extends Controller
                 LicenseSeat::whereIn('id', $license_array)->update(['assigned_to' => null]);
 
                 foreach ($users as $user) {
-                    $user->accessories()->sync(array());
+                    $user->accessories()->sync([]);
                     $user->delete();
                 }
 
@@ -652,7 +652,7 @@ class UsersController extends Controller
     {
         // We need to reverse the UI specific logic for our
         // permissions here before we update the user.
-        $permissions = Input::get('permissions', array());
+        $permissions = Input::get('permissions', []);
         //$this->decodePermissions($permissions);
         app('request')->request->set('permissions', $permissions);
 
@@ -714,12 +714,12 @@ class UsersController extends Controller
         // Get all the available groups
         //$groups = Sentry::getGroupProvider()->findAll();
         // Selected groups
-        $selectedGroups = Input::old('groups', array());
+        $selectedGroups = Input::old('groups', []);
         // Get all the available permissions
         $permissions = config('permissions');
         //$this->encodeAllPermissions($permissions);
         // Selected permissions
-        $selectedPermissions = Input::old('permissions', array('superuser' => -1));
+        $selectedPermissions = Input::old('permissions', ['superuser' => -1]);
         //$this->encodePermissions($selectedPermissions);
         // Show the page
         return View::make('users/import', compact('groups', 'selectedGroups', 'permissions', 'selectedPermissions'));
@@ -775,7 +775,7 @@ class UsersController extends Controller
                     if ($user) {
                         $duplicates .= $row[2] . ', ';
                     } else {
-                        $newuser = array(
+                        $newuser = [
                             'first_name' => trim(e($row[0])),
                             'last_name' => trim(e($row[1])),
                             'username' => trim(e($row[2])),
@@ -789,7 +789,7 @@ class UsersController extends Controller
                             //'company_id' => Company::getIdForUser($row[8]),
                             'permissions' => '{"user":1}',
                             'notes' => 'Imported user'
-                        );
+                        ];
                         //dd($newuser);
 
                         DB::table('users')->insert($newuser);
@@ -798,7 +798,7 @@ class UsersController extends Controller
                         if (((Input::get('email_user') == 1) && !config('app.lock_passwords'))) {
                             // Send the credentials through email
                             if ($row[3] != '') {
-                                $data = array();
+                                $data = [];
                                 $data['username'] = trim(e($row[2]));
                                 $data['first_name'] = trim(e($row[0]));
                                 $data['password'] = $pass;
@@ -852,7 +852,7 @@ class UsersController extends Controller
             $sort = e(Input::get('sort'));
         }
 
-        $users = User::select(array('users.id','users.employee_num','users.email','users.username','users.location_id','users.manager_id','users.first_name','users.last_name','users.created_at','users.notes','users.company_id', 'users.deleted_at','users.activated'))
+        $users = User::select(['users.id','users.employee_num','users.email','users.username','users.location_id','users.manager_id','users.first_name','users.last_name','users.created_at','users.notes','users.company_id', 'users.deleted_at','users.activated'])
         ->with('assets', 'accessories', 'consumables', 'licenses', 'manager', 'groups', 'userloc', 'company', 'throttle');
         $users = Company::scopeCompanyables($users);
 
@@ -889,7 +889,7 @@ class UsersController extends Controller
 
         $userCount = $users->count();
         $users = $users->skip($offset)->take($limit)->get();
-        $rows = array();
+        $rows = [];
 
         foreach ($users as $user) {
             $group_names = '';
@@ -944,7 +944,7 @@ class UsersController extends Controller
 
             $actions .= '</nobr>';
 
-            $rows[] = array(
+            $rows[] = [
                 'id'         => $user->id,
                 'checkbox'      => ($status!='deleted') ? '<div class="text-center hidden-xs hidden-sm"><input type="checkbox" name="edit_user['.e($user->id).']" class="one_required"></div>' : '',
                 'name'          => '<a title="'.e($user->fullName()).'" href="../admin/users/'.e($user->id).'/view">'.e($user->fullName()).'</a>',
@@ -966,10 +966,10 @@ class UsersController extends Controller
                 'activated'      => ($user->activated=='1') ? '<i class="fa fa-check"></i>' : '<i class="fa fa-times"></i>',
                 'actions'       => ($actions) ? $actions : '',
                 'companyName'   => is_null($user->company) ? '' : e($user->company->name)
-            );
+            ];
         }
 
-        $data = array('total'=>$userCount, 'rows'=>$rows);
+        $data = ['total'=>$userCount, 'rows'=>$rows];
         return $data;
     }
 
@@ -1127,12 +1127,12 @@ class UsersController extends Controller
     * @var array
     */
 
-    protected $ldapValidationRules = array(
+    protected $ldapValidationRules = [
         'firstname' => 'required|string|min:2',
         'employee_number' => 'string',
         'username' => 'required|min:2|unique:users,username',
         'email' => 'email|unique:users,email',
-    );
+    ];
 
     /**
     * LDAP form processing.
@@ -1166,7 +1166,7 @@ class UsersController extends Controller
             return redirect()->back()->withInput()->with('error', $e->getMessage());
         }
 
-        $summary = array();
+        $summary = [];
 
         $results = Ldap::findLdapUsers();
 
@@ -1176,7 +1176,7 @@ class UsersController extends Controller
 
         for ($i = 0; $i < $results["count"]; $i++) {
             if (empty($ldap_result_active_flag) || $results[$i][$ldap_result_active_flag][0] == "TRUE") {
-                $item = array();
+                $item = [];
                 $item["username"] = isset($results[$i][$ldap_result_username][0]) ? $results[$i][$ldap_result_username][0] : "";
                 $item["employee_number"] = isset($results[$i][$ldap_result_emp_num][0]) ? $results[$i][$ldap_result_emp_num][0] : "";
                 $item["lastname"] = isset($results[$i][$ldap_result_last_name][0]) ? $results[$i][$ldap_result_last_name][0] : "";

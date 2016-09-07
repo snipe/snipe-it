@@ -12,7 +12,7 @@ class Supplier extends Model
     protected $dates = ['deleted_at'];
     protected $table = 'suppliers';
 
-    protected $rules = array(
+    protected $rules = [
         'name'              => 'required|min:3|max:255|unique_undeleted',
         'address'           => 'min:3|max:255',
         'address2'          => 'min:2|max:255',
@@ -26,7 +26,7 @@ class Supplier extends Model
         'email'             => 'email|min:5|max:150',
         'zip'               => 'min:0|max:10',
         'url'               => 'min:3|max:250',
-    );
+    ];
 
     /**
     * Whether the model should inject it's identifier to the unique

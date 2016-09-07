@@ -439,7 +439,7 @@ class AssetModelsController extends Controller
         $modelCount = $models->count();
         $models = $models->skip($offset)->take($limit)->get();
 
-        $rows = array();
+        $rows = [];
 
         foreach ($models as $model) {
             if ($model->deleted_at == '') {
@@ -448,7 +448,7 @@ class AssetModelsController extends Controller
                 $actions = '<a href="'.route('restore/model', $model->id).'" class="btn btn-warning btn-sm"><i class="fa fa-recycle icon-white"></i></a>';
             }
 
-            $rows[] = array(
+            $rows[] = [
                 'id'      => $model->id,
                 'manufacturer'      => (string)link_to('/admin/settings/manufacturers/'.$model->manufacturer->id.'/view', $model->manufacturer->name),
                 'name'              => (string)link_to('/hardware/models/'.$model->id.'/view', $model->name),
@@ -460,10 +460,10 @@ class AssetModelsController extends Controller
                 'eol'               => ($model->eol) ? $model->eol.' '.trans('general.months') : '',
                 'note'       => $model->getNote(),
                 'actions'           => $actions
-                );
+                ];
         }
 
-        $data = array('total' => $modelCount, 'rows' => $rows);
+        $data = ['total' => $modelCount, 'rows' => $rows];
 
         return $data;
     }
@@ -507,7 +507,7 @@ class AssetModelsController extends Controller
         $assetsCount = $assets->count();
         $assets = $assets->skip($offset)->take($limit)->get();
 
-        $rows = array();
+        $rows = [];
 
 
         foreach ($assets as $asset) {
@@ -523,7 +523,7 @@ class AssetModelsController extends Controller
                 }
             }
 
-            $rows[] = array(
+            $rows[] = [
                 'id'            => $asset->id,
                 'name'          => (string)link_to('/hardware/'.$asset->id.'/view', $asset->showAssetName()),
                 'asset_tag'     => (string)link_to('hardware/'.$asset->id.'/view', $asset->asset_tag),
@@ -531,10 +531,10 @@ class AssetModelsController extends Controller
                 'assigned_to'   => ($asset->assigned_to) ? (string)link_to('/admin/users/'.$asset->assigned_to.'/view', $asset->assigneduser->fullName()) : '',
                 'actions'       => $actions,
                 'companyName'   => Company::getName($asset)
-            );
+            ];
         }
 
-        $data = array('total' => $assetsCount, 'rows' => $rows);
+        $data = ['total' => $assetsCount, 'rows' => $rows];
 
         return $data;
     }

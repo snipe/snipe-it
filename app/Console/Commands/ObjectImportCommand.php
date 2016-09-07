@@ -1027,9 +1027,9 @@ class ObjectImportCommand extends Command
      */
     protected function getArguments()
     {
-        return array(
-            array('filename', InputArgument::REQUIRED, 'File for the CSV import.'),
-        );
+        return [
+            ['filename', InputArgument::REQUIRED, 'File for the CSV import.'],
+        ];
     }
 
 
@@ -1042,15 +1042,15 @@ class ObjectImportCommand extends Command
      */
     protected function getOptions()
     {
-        return array(
-        array('email_format', null, InputOption::VALUE_REQUIRED, 'The format of the email addresses that should be generated. Options are firstname.lastname, firstname, filastname', null),
-        array('username_format', null, InputOption::VALUE_REQUIRED, 'The format of the username that should be generated. Options are firstname.lastname, firstname, filastname, email', null),
-        array('testrun', null, InputOption::VALUE_NONE, 'If set, will parse and output data without adding to database', null),
-        array('logfile', null, InputOption::VALUE_REQUIRED, 'The path to log output to.  storage/logs/importer.log by default', storage_path('logs/importer.log') ),
-        array('item-type', null, InputOption::VALUE_REQUIRED, 'Item Type To import.  Valid Options are Asset, Consumable, Or Accessory', 'Asset'),
-        array('web-importer', null, InputOption::VALUE_NONE, 'Internal: packages output for use with the web importer'),
-        array('user_id', null, InputOption::VALUE_REQUIRED, 'ID of user creating items', 1),
-        array('update', null, InputOption::VALUE_NONE, 'If a matching item is found, update item information'),
-        );
+        return [
+        ['email_format', null, InputOption::VALUE_REQUIRED, 'The format of the email addresses that should be generated. Options are firstname.lastname, firstname, filastname', null],
+        ['username_format', null, InputOption::VALUE_REQUIRED, 'The format of the username that should be generated. Options are firstname.lastname, firstname, filastname, email', null],
+        ['testrun', null, InputOption::VALUE_NONE, 'If set, will parse and output data without adding to database', null],
+        ['logfile', null, InputOption::VALUE_REQUIRED, 'The path to log output to.  storage/logs/importer.log by default', storage_path('logs/importer.log') ],
+        ['item-type', null, InputOption::VALUE_REQUIRED, 'Item Type To import.  Valid Options are Asset, Consumable, Or Accessory', 'Asset'],
+        ['web-importer', null, InputOption::VALUE_NONE, 'Internal: packages output for use with the web importer'],
+        ['user_id', null, InputOption::VALUE_REQUIRED, 'ID of user creating items', 1],
+        ['update', null, InputOption::VALUE_NONE, 'If a matching item is found, update item information'],
+        ];
     }
 }

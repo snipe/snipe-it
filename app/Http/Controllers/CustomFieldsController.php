@@ -297,7 +297,7 @@ class CustomFieldsController extends Controller
     public function postReorder($id)
     {
         $fieldset=CustomFieldset::find($id);
-        $fields = array();
+        $fields = [];
 
         $items = Input::get('item');
         foreach ($fieldset->fields as $field) {

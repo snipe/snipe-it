@@ -52,8 +52,8 @@ use Gate;
  */
 class AssetsController extends Controller
 {
-    protected $qrCodeDimensions = array( 'height' => 3.5, 'width' => 3.5);
-    protected $barCodeDimensions = array( 'height' => 2, 'width' => 22);
+    protected $qrCodeDimensions = [ 'height' => 3.5, 'width' => 3.5];
+    protected $barCodeDimensions = [ 'height' => 2, 'width' => 22];
 
 
     public function __construct()
@@ -471,7 +471,7 @@ class AssetsController extends Controller
 
         DB::table('assets')
         ->where('id', $asset->id)
-        ->update(array('assigned_to' => null));
+        ->update(['assigned_to' => null]);
 
 
         $asset->delete();
@@ -710,10 +710,10 @@ class AssetsController extends Controller
         }
 
         if (isset($asset->id)) {
-            $qr_code = (object) array(
+            $qr_code = (object) [
                 'display' => $settings->qr_code == '1',
                 'url' => route('qr_code/hardware', $asset->id)
-            );
+            ];
 
             return View::make('hardware/view', compact('asset', 'qr_code', 'settings'))->with('use_currency', $use_currency);
         } else {
@@ -748,7 +748,7 @@ class AssetsController extends Controller
                     return response()->file($qr_file, $header);
                 } else {
                     $barcode = new \Com\Tecnick\Barcode\Barcode();
-                    $barcode_obj =  $barcode->getBarcodeObj($settings->barcode_type, route('view/hardware', $asset->id), $size['height'], $size['width'], 'black', array(-2, -2, -2, -2));
+                    $barcode_obj =  $barcode->getBarcodeObj($settings->barcode_type, route('view/hardware', $asset->id), $size['height'], $size['width'], 'black', [-2, -2, -2, -2]);
                     file_put_contents($qr_file, $barcode_obj->getPngData());
                     return response($barcode_obj->getPngData())->header('Content-type', 'image/png');
                 }
@@ -798,7 +798,7 @@ class AssetsController extends Controller
     {
 
         $path = config('app.private_uploads').'/imports/assets';
-        $files = array();
+        $files = [];
 
         if (!Company::isCurrentUserAuthorized()) {
             return redirect()->to('hardware')->with('error', trans('general.insufficient_permissions'));
@@ -813,11 +813,11 @@ class AssetsController extends Controller
             while (false !== ($entry = readdir($handle))) {
                 clearstatcache();
                 if (substr(strrchr($entry, '.'), 1)=='csv') {
-                    $files[] = array(
+                    $files[] = [
                             'filename' => $entry,
                             'filesize' => Setting::fileSizeConvert(filesize($path.'/'.$entry)),
                             'modified' => filemtime($path.'/'.$entry)
-                        );
+                        ];
                 }
             }
             closedir($handle);
@@ -844,15 +844,15 @@ class AssetsController extends Controller
         } elseif (!config('app.lock_passwords')) {
             $files = Input::file('files');
             $path = config('app.private_uploads').'/imports/assets';
-            $results = array();
+            $results = [];
 
             foreach ($files as $file) {
-                if (!in_array($file->getMimeType(), array(
+                if (!in_array($file->getMimeType(), [
                     'application/vnd.ms-excel',
                     'text/csv',
                     'text/plain',
                     'text/comma-separated-values',
-                    'text/tsv'))) {
+                    'text/tsv'])) {
                     $results['error']='File type must be CSV';
                     return $results;
                 }
@@ -873,9 +873,9 @@ class AssetsController extends Controller
                 $results[] = compact('name', 'filesize');
             }
 
-            return array(
+            return [
                 'files' => $results
-            );
+            ];
         } else {
             $results['error']=trans('general.feature_disabled');
             return $results;
@@ -1037,8 +1037,8 @@ class AssetsController extends Controller
         //$headers = $csv->fetchOne();
 
         $results = $csv->fetchAssoc();
-        $item = array();
-        $status = array();
+        $item = [];
+        $status = [];
 
 
         foreach ($results as $row) {
@@ -1046,7 +1046,7 @@ class AssetsController extends Controller
                 $row = array_change_key_case($row, CASE_LOWER);
                 $asset_tag = Helper::array_smart_fetch($row, "asset tag");
                 if (!array_key_exists($asset_tag, $item)) {
-                    $item[$asset_tag] = array();
+                    $item[$asset_tag] = [];
                 }
                 $batch_counter = count($item[$asset_tag]);
 
@@ -1099,7 +1099,7 @@ class AssetsController extends Controller
                     if ($asset) {
                         $item[$asset_tag][$batch_counter]['user_id'] = $user->id;
 
-                        Actionlog::firstOrCreate(array(
+                        Actionlog::firstOrCreate([
                             'item_id' => $asset->id,
                             'item_type' => Asset::class,
                             'user_id' =>  Auth::user()->id,
@@ -1108,7 +1108,7 @@ class AssetsController extends Controller
                             'target_type' => User::class,
                             'created_at' =>  $item[$asset_tag][$batch_counter]['checkout_date'],
                             'action_type'   => 'checkout'
-                            ));
+                            ]);
 
                         $asset->assigned_to = $user->id;
                         $asset->save();
@@ -1134,7 +1134,7 @@ class AssetsController extends Controller
                         $checkin_date = Carbon::parse($asset_batch[$next]['checkout_date'])->subDay(1)->format('Y-m-d H:i:s');
                         $asset_batch[$x]['real_checkin'] = $checkin_date;
 
-                        Actionlog::firstOrCreate(array(
+                        Actionlog::firstOrCreate([
                                 'item_id' => $asset_batch[$x]['asset_id'],
                                 'item_type' => Asset::class,
                                 'user_id' => Auth::user()->id,
@@ -1142,7 +1142,7 @@ class AssetsController extends Controller
                                 'target_id' => null,
                                 'created_at' => $checkin_date,
                                 'action_type' => 'checkin'
-                            ));
+                            ]);
                     }
                 }
             }
@@ -1346,7 +1346,7 @@ class AssetsController extends Controller
                 $statuslabel_list = Helper::statusLabelList();
                 $location_list = Helper::locationsList();
                 $models_list =  Helper::modelList();
-                $companies_list = array('' => '') + array('clear' => trans('general.remove_company')) + Helper::companyList();
+                $companies_list = ['' => ''] + ['clear' => trans('general.remove_company')] + Helper::companyList();
 
                 return View::make('hardware/bulk')
                 ->with('assets', $assets)
@@ -1381,7 +1381,7 @@ class AssetsController extends Controller
 
             if ((Input::has('purchase_date')) ||  (Input::has('purchase_cost'))  ||  (Input::has('supplier_id')) ||  (Input::has('order_number')) || (Input::has('warranty_months')) || (Input::has('rtd_location_id'))  || (Input::has('requestable')) ||  (Input::has('company_id')) || (Input::has('status_id')) ||  (Input::has('model_id'))) {
                 foreach ($assets as $key => $value) {
-                    $update_array = array();
+                    $update_array = [];
 
                     if (Input::has('purchase_date')) {
                         $update_array['purchase_date'] =  e(Input::get('purchase_date'));
@@ -1637,7 +1637,7 @@ class AssetsController extends Controller
         $assets = $assets->skip($offset)->take($limit)->get();
 
 
-        $rows = array();
+        $rows = [];
         foreach ($assets as $asset) {
             $inout = '';
             $actions = '<div style="white-space: nowrap;">';
@@ -1684,7 +1684,7 @@ class AssetsController extends Controller
 
             $purchase_cost = Helper::formatCurrencyOutput($asset->purchase_cost);
 
-            $row = array(
+            $row = [
             'checkbox'      =>'<div class="text-center"><input type="checkbox" name="edit_asset['.$asset->id.']" class="one_required"></div>',
             'id'        => $asset->id,
             'image' => (($asset->image) && ($asset->image!='')) ? '<img src="'.config('app.url').'/uploads/assets/'.$asset->image.'" height=50 width=50>' : ((($asset->model) && ($asset->model->image!='')) ? '<img src="'.config('app.url').'/uploads/models/'.$asset->model->image.'" height=40 width=50>' : ''),
@@ -1709,7 +1709,7 @@ class AssetsController extends Controller
             'change'        => ($inout) ? $inout : '',
             'actions'       => ($actions) ? $actions : '',
             'companyName'   => is_null($asset->company) ? '' : e($asset->company->name)
-            );
+            ];
             foreach ($all_custom_fields as $field) {
                 $column_name = $field->db_column_name();
 
@@ -1734,7 +1734,7 @@ class AssetsController extends Controller
             $rows[]=$row;
         }
 
-        $data = array('total'=>$assetCount, 'rows'=>$rows);
+        $data = ['total'=>$assetCount, 'rows'=>$rows];
 
         return $data;
     }

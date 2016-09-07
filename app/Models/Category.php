@@ -24,11 +24,11 @@ class Category extends Model
     /**
     * Category validation rules
     */
-    public $rules = array(
+    public $rules = [
         'user_id' => 'numeric',
         'name'   => 'required|min:1|max:255|unique_undeleted',
         'category_type'   => 'required',
-    );
+    ];
 
     /**
     * Whether the model should inject it's identifier to the unique

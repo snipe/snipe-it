@@ -188,7 +188,7 @@ class ManufacturersController extends Controller
     */
     public function getDatatable()
     {
-        $manufacturers = Manufacturer::select(array('id','name'))->with('assets')
+        $manufacturers = Manufacturer::select(['id','name'])->with('assets')
         ->whereNull('deleted_at');
 
         if (Input::has('search')) {
@@ -216,20 +216,20 @@ class ManufacturersController extends Controller
         $manufacturersCount = $manufacturers->count();
         $manufacturers = $manufacturers->skip($offset)->take($limit)->get();
 
-        $rows = array();
+        $rows = [];
 
         foreach ($manufacturers as $manufacturer) {
             $actions = '<a href="'.route('update/manufacturer', $manufacturer->id).'" class="btn btn-warning btn-sm" style="margin-right:5px;"><i class="fa fa-pencil icon-white"></i></a><a data-html="false" class="btn delete-asset btn-danger btn-sm" data-toggle="modal" href="'.route('delete/manufacturer', $manufacturer->id).'" data-content="'.trans('admin/manufacturers/message.delete.confirm').'" data-title="'.trans('general.delete').' '.htmlspecialchars($manufacturer->name).'?" onClick="return false;"><i class="fa fa-trash icon-white"></i></a>';
 
-            $rows[] = array(
+            $rows[] = [
                 'id'              => $manufacturer->id,
                 'name'          => (string)link_to('admin/settings/manufacturers/'.$manufacturer->id.'/view', e($manufacturer->name)),
                 'assets'              => $manufacturer->assets->count(),
                 'actions'       => $actions
-            );
+            ];
         }
 
-        $data = array('total' => $manufacturersCount, 'rows' => $rows);
+        $data = ['total' => $manufacturersCount, 'rows' => $rows];
 
         return $data;
     }
@@ -290,7 +290,7 @@ class ManufacturersController extends Controller
         $sort = in_array(Input::get('sort'), $allowed_columns) ? Input::get('sort') : 'created_at';
         $count = $manufacturer_assets->count();
 
-        $rows = array();
+        $rows = [];
 
         foreach ($manufacturer_assets as $asset) {
             $actions = '';
@@ -310,7 +310,7 @@ class ManufacturersController extends Controller
                 }
             }
 
-            $rows[] = array(
+            $rows[] = [
                 'id' => $asset->id,
                 'name' => (string)link_to('/hardware/'.$asset->id.'/view', e($asset->showAssetName())),
                 'model' => e($asset->model->name),
@@ -319,14 +319,14 @@ class ManufacturersController extends Controller
                 'assigned_to' => ($asset->assigneduser) ? (string)link_to('/admin/users/'.$asset->assigneduser->id.'/view', e($asset->assigneduser->fullName())): '',
                 'actions' => $actions,
                 'companyName' => e(Company::getName($asset)),
-                );
+                ];
 
             if (isset($inout)) {
                 $row['change'] = $inout;
             }
         }
             
-        $data = array('total' => $count, 'rows' => $rows);
+        $data = ['total' => $count, 'rows' => $rows];
         return $data;
     }
 
@@ -340,7 +340,7 @@ class ManufacturersController extends Controller
 
         $licenseCount = $licenses->count();
 
-        $rows = array();
+        $rows = [];
 
         foreach ($licenses as $license) {
             $actions = '<span style="white-space: nowrap;">';
@@ -365,7 +365,7 @@ class ManufacturersController extends Controller
             }
             $actions .='</span>';
 
-            $rows[] = array(
+            $rows[] = [
                 'id'                => $license->id,
                 'name'              => (string) link_to('/admin/licenses/'.$license->id.'/view', $license->name),
                 'serial'            => (string) link_to('/admin/licenses/'.$license->id.'/view', mb_strimwidth($license->serial, 0, 50, "...")),
@@ -382,10 +382,10 @@ class ManufacturersController extends Controller
                 'actions'           => $actions,
                 'companyName'       => is_null($license->company) ? '' : e($license->company->name),
                 'manufacturer'      => $license->manufacturer ? (string) link_to('/admin/settings/manufacturers/'.$license->manufacturer_id.'/view', $license->manufacturer->name) : ''
-            );
+            ];
         }
 
-        $data = array('total' => $licenseCount, 'rows' => $rows);
+        $data = ['total' => $licenseCount, 'rows' => $rows];
 
         return $data;
     }
@@ -406,7 +406,7 @@ class ManufacturersController extends Controller
 
         $accessCount = $accessories->count();
 
-        $rows = array();
+        $rows = [];
 
         foreach ($accessories as $accessory) {
             $actions = '<nobr>';
@@ -431,7 +431,7 @@ class ManufacturersController extends Controller
             $actions .= '</nobr>';
             $company = $accessory->company;
 
-            $rows[] = array(
+            $rows[] = [
             'name'          => '<a href="'.url('admin/accessories/'.$accessory->id).'/view">'. $accessory->name.'</a>',
             'category'      => ($accessory->category) ? (string)link_to('admin/settings/categories/'.$accessory->category->id.'/view', $accessory->category->name) : '',
             'qty'           => e($accessory->qty),
@@ -445,10 +445,10 @@ class ManufacturersController extends Controller
             'companyName'   => is_null($company) ? '' : e($company->name),
             'manufacturer'      => $accessory->manufacturer ? (string) link_to('/admin/settings/manufacturers/'.$accessory->manufacturer_id.'/view', $accessory->manufacturer->name) : ''
 
-            );
+            ];
         }
 
-        $data = array('total'=>$accessCount, 'rows'=>$rows);
+        $data = ['total'=>$accessCount, 'rows'=>$rows];
 
         return $data;
     }
@@ -469,7 +469,7 @@ class ManufacturersController extends Controller
 
         $consumCount = $consumables->count();
 
-        $rows = array();
+        $rows = [];
 
         foreach ($consumables as $consumable) {
             $actions = '<nobr>';
@@ -497,7 +497,7 @@ class ManufacturersController extends Controller
 
             $company = $consumable->company;
 
-            $rows[] = array(
+            $rows[] = [
                 'id'            => $consumable->id,
                 'name'          => (string)link_to('admin/consumables/'.$consumable->id.'/view', e($consumable->name)),
                 'location'      => ($consumable->location) ? e($consumable->location->name) : '',
@@ -513,10 +513,10 @@ class ManufacturersController extends Controller
                 'numRemaining'  => $consumable->numRemaining(),
                 'actions'       => $actions,
                 'companyName'   => is_null($company) ? '' : e($company->name),
-            );
+            ];
         }
 
-        $data = array('total' => $consumCount, 'rows' => $rows);
+        $data = ['total' => $consumCount, 'rows' => $rows];
 
         return $data;
     }

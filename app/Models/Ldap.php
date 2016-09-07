@@ -166,7 +166,7 @@ class Ldap extends Model
         $ldap_result_email = Setting::getSettings()->ldap_email;
 
         // Get LDAP user data
-        $item = array();
+        $item = [];
         $item["username"] = isset($ldapatttibutes[$ldap_result_username][0]) ? $ldapatttibutes[$ldap_result_username][0] : "";
         $item["employee_number"] = isset($ldapatttibutes[$ldap_result_emp_num][0]) ? $ldapatttibutes[$ldap_result_emp_num][0] : "";
         $item["lastname"] = isset($ldapatttibutes[$ldap_result_last_name][0]) ? $ldapatttibutes[$ldap_result_last_name][0] : "";
@@ -239,7 +239,7 @@ class Ldap extends Model
         // @author Richard Hofman
         $page_size = 500;
         $cookie = '';
-        $result_set = array();
+        $result_set = [];
         $global_count = 0;
 
         // Perform the search

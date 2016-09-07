@@ -33,10 +33,10 @@ class AppServiceProvider extends ServiceProvider
                 $email_to_validate['alert_email'][]=$email;
             }
 
-            $rules = array('alert_email.*'=>'email');
-            $messages = array(
+            $rules = ['alert_email.*'=>'email'];
+            $messages = [
                  'alert_email.*'=>trans('validation.email_array')
-            );
+            ];
 
             $validator = Validator::make($email_to_validate, $rules, $messages);
 

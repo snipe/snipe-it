@@ -18,14 +18,14 @@ class AssetModel extends Model
     protected $table = 'models';
 
     // Declare the rules for the model validation
-    protected $rules = array(
+    protected $rules = [
         'name'          => 'required|min:1|max:255',
         'modelno'           => 'min:1|max:255',
         'category_id'       => 'required|integer',
         'manufacturer_id'   => 'required|integer',
         'eol'   => 'integer:min:0|max:240',
         'user_id' => 'integer',
-    );
+    ];
 
     /**
     * Whether the model should inject it's identifier to the unique

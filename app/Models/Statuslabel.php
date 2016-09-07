@@ -17,13 +17,13 @@ class Statuslabel extends Model
     protected $table = 'status_labels';
 
 
-    protected $rules = array(
+    protected $rules = [
         'name'  => 'required|string|unique_undeleted',
         'notes'   => 'string',
         'deployable' => 'required',
         'pending' => 'required',
         'archived' => 'required',
-    );
+    ];
 
     protected $fillable = ['name', 'deployable', 'pending', 'archived'];
 

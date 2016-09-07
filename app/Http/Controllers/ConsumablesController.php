@@ -302,10 +302,10 @@ class ConsumablesController extends Controller
       // Update the consumable data
         $consumable->assigned_to = e(Input::get('assigned_to'));
 
-        $consumable->users()->attach($consumable->id, array(
+        $consumable->users()->attach($consumable->id, [
         'consumable_id' => $consumable->id,
         'user_id' => $admin_user->id,
-        'assigned_to' => e(Input::get('assigned_to'))));
+        'assigned_to' => e(Input::get('assigned_to'))]);
 
         $logaction = $consumable->logCheckout(e(Input::get('note')));
 
@@ -416,7 +416,7 @@ class ConsumablesController extends Controller
         $consumCount = $consumables->count();
         $consumables = $consumables->skip($offset)->take($limit)->get();
 
-        $rows = array();
+        $rows = [];
 
         foreach ($consumables as $consumable) {
             $actions = '<nobr>';
@@ -444,7 +444,7 @@ class ConsumablesController extends Controller
 
             $company = $consumable->company;
 
-            $rows[] = array(
+            $rows[] = [
                 'id'            => $consumable->id,
                 'name'          => (string)link_to('admin/consumables/'.$consumable->id.'/view', e($consumable->name)),
                 'location'   => ($consumable->location) ? e($consumable->location->name) : '',
@@ -460,10 +460,10 @@ class ConsumablesController extends Controller
                 'numRemaining'  => $consumable->numRemaining(),
                 'actions'       => $actions,
                 'companyName'   => is_null($company) ? '' : e($company->name),
-            );
+            ];
         }
 
-        $data = array('total' => $consumCount, 'rows' => $rows);
+        $data = ['total' => $consumCount, 'rows' => $rows];
 
         return $data;
     }
@@ -480,7 +480,7 @@ class ConsumablesController extends Controller
     public function getDataView($consumableId)
     {
         //$consumable = Consumable::find($consumableID);
-        $consumable = Consumable::with(array('consumableAssigments'=>
+        $consumable = Consumable::with(['consumableAssigments'=>
         function ($query) {
             $query->orderBy('created_at', 'DESC');
         },
@@ -488,7 +488,7 @@ class ConsumablesController extends Controller
         },
         'consumableAssigments.user'=> function ($query) {
         },
-        ))->find($consumableId);
+        ])->find($consumableId);
 
   //  $consumable->load('consumableAssigments.admin','consumableAssigments.user');
 
@@ -496,18 +496,18 @@ class ConsumablesController extends Controller
             return ['total' => 0, 'rows' => []];
         }
 
-        $rows = array();
+        $rows = [];
 
         foreach ($consumable->consumableAssigments as $consumable_assignment) {
-            $rows[] = array(
+            $rows[] = [
             'name' => (string)link_to('/admin/users/'.$consumable_assignment->user->id.'/view', e($consumable_assignment->user->fullName())),
             'created_at' => ($consumable_assignment->created_at->format('Y-m-d H:i:s')=='-0001-11-30 00:00:00') ? '' : $consumable_assignment->created_at->format('Y-m-d H:i:s'),
             'admin' => ($consumable_assignment->admin) ? e($consumable_assignment->admin->fullName()) : '',
-            );
+            ];
         }
 
         $consumableCount = $consumable->users->count();
-        $data = array('total' => $consumableCount, 'rows' => $rows);
+        $data = ['total' => $consumableCount, 'rows' => $rows];
         return $data;
     }
 }

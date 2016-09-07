@@ -30,14 +30,14 @@ class Component extends Model
     /**
     * Category validation rules
     */
-    public $rules = array(
+    public $rules = [
         'name'        => 'required|min:3|max:255',
         'total_qty'     => 'required|integer|min:1',
         'category_id' => 'required|integer',
         'company_id'  => 'integer',
         'purchase_date'  => 'date',
         'purchase_cost'   => 'numeric',
-    );
+    ];
 
     /**
     * Whether the model should inject it's identifier to the unique

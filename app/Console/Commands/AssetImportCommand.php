@@ -424,9 +424,9 @@ class AssetImportCommand extends Command
      */
     protected function getArguments()
     {
-        return array(
-            array('filename', InputArgument::REQUIRED, 'File for the CSV import.'),
-        );
+        return [
+            ['filename', InputArgument::REQUIRED, 'File for the CSV import.'],
+        ];
     }
 
 
@@ -437,10 +437,10 @@ class AssetImportCommand extends Command
      */
     protected function getOptions()
     {
-        return array(
-        array('email_format', null, InputOption::VALUE_REQUIRED, 'The format of the email addresses that should be generated. Options are firstname.lastname, firstname, filastname', null),
-        array('username_format', null, InputOption::VALUE_REQUIRED, 'The format of the username that should be generated. Options are firstname.lastname, firstname, filastname, email', null),
-        array('testrun', null, InputOption::VALUE_REQUIRED, 'Test the output without writing to the database or not.', null),
-        );
+        return [
+        ['email_format', null, InputOption::VALUE_REQUIRED, 'The format of the email addresses that should be generated. Options are firstname.lastname, firstname, filastname', null],
+        ['username_format', null, InputOption::VALUE_REQUIRED, 'The format of the username that should be generated. Options are firstname.lastname, firstname, filastname, email', null],
+        ['testrun', null, InputOption::VALUE_REQUIRED, 'Test the output without writing to the database or not.', null],
+        ];
     }
 }

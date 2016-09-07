@@ -58,19 +58,19 @@ class ReportsController extends Controller
     {
         $accessories = Accessory::orderBy('created_at', 'DESC')->get();
 
-        $rows = array();
-        $header = array(
+        $rows = [];
+        $header = [
             trans('admin/accessories/table.title'),
             trans('admin/accessories/general.accessory_category'),
             trans('admin/accessories/general.total'),
             trans('admin/accessories/general.remaining')
-        );
+        ];
         $header = array_map('trim', $header);
         $rows[] = implode($header, ', ');
 
         // Row per accessory
         foreach ($accessories as $accessory) {
-            $row = array();
+            $row = [];
             $row[] = e($accessory->accessory_name);
             $row[] = e($accessory->accessory_category);
             $row[] = e($accessory->total);

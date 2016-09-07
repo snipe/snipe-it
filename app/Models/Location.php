@@ -13,7 +13,7 @@ class Location extends Model
     use SoftDeletes;
     protected $dates = ['deleted_at'];
     protected $table = 'locations';
-    protected $rules = array(
+    protected $rules = [
       'name'        => 'required|min:3|max:255|unique_undeleted',
       'city'        => 'min:3|max:255',
       'state'           => 'min:2|max:32',
@@ -21,7 +21,7 @@ class Location extends Model
       'address'         => 'min:5|max:80',
       'address2'        => 'min:2|max:80',
       'zip'         => 'min:3|max:10',
-    );
+    ];
 
     /**
     * Whether the model should inject it's identifier to the unique
@@ -71,15 +71,15 @@ class Location extends Model
     {
 
 
-        $op = array();
+        $op = [];
 
         foreach ($locations as $location) {
             if ($location['parent_id'] == $parent_id) {
                 $op[$location['id']] =
-                    array(
+                    [
                         'name' => $location['name'],
                         'parent_id' => $location['parent_id']
-                    );
+                    ];
 
                 // Using recursion
                 $children =  Location::getLocationHierarchy($locations, $location['id']);
@@ -94,7 +94,7 @@ class Location extends Model
 
     public static function flattenLocationsArray($location_options_array = null)
     {
-        $location_options = array();
+        $location_options = [];
         foreach ($location_options_array as $id => $value) {
             // get the top level key value
             $location_options[$id] = $value['name'];

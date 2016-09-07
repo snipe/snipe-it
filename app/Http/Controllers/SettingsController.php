@@ -170,7 +170,7 @@ class SettingsController extends Controller
         $user->last_name = e(Input::get('last_name'));
         $user->email = $data['email'] = e(Input::get('email'));
         $user->activated = 1;
-        $permissions = array('superuser' => 1);
+        $permissions = ['superuser' => 1];
         $user->permissions = json_encode($permissions);
         $user->username = $data['username'] = e(Input::get('username'));
         $user->password = bcrypt(Input::get('password'));
@@ -457,18 +457,18 @@ class SettingsController extends Controller
 
         $path = storage_path().'/app/'.config('laravel-backup.backup.name');
 
-        $files = array();
+        $files = [];
 
         if ($handle = opendir($path)) {
             /* This is the correct way to loop over the directory. */
             while (false !== ($entry = readdir($handle))) {
                 clearstatcache();
                 if (substr(strrchr($entry, '.'), 1)=='zip') {
-                    $files[] = array(
+                    $files[] = [
                           'filename' => $entry,
                           'filesize' => Setting::fileSizeConvert(filesize($path.'/'.$entry)),
                           'modified' => filemtime($path.'/'.$entry)
-                      );
+                      ];
                 }
             }
             closedir($handle);

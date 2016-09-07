@@ -61,7 +61,7 @@ class LicensesController extends Controller
     public function getCreate()
     {
 
-        $maintained_list = array('' => 'Maintained', '1' => 'Yes', '0' => 'No');
+        $maintained_list = ['' => 'Maintained', '1' => 'Yes', '0' => 'No'];
 
         return View::make('licenses/edit')
             //->with('license_options',$license_options)
@@ -207,8 +207,8 @@ class LicensesController extends Controller
         }
 
         // Show the page
-        $license_options = array('' => 'Top Level') + DB::table('assets')->where('id', '!=', $licenseId)->pluck('name', 'id');
-        $maintained_list = array('' => 'Maintained', '1' => 'Yes', '0' => 'No');
+        $license_options = ['' => 'Top Level'] + DB::table('assets')->where('id', '!=', $licenseId)->pluck('name', 'id');
+        $maintained_list = ['' => 'Maintained', '1' => 'Yes', '0' => 'No'];
 
         return View::make('licenses/edit', compact('license'))
             ->with('license_options', $license_options)
@@ -401,7 +401,7 @@ class LicensesController extends Controller
             // Delete the license and the associated license seats
             DB::table('license_seats')
             ->where('id', $license->id)
-            ->update(array('assigned_to' => null,'asset_id' => null));
+            ->update(['assigned_to' => null,'asset_id' => null]);
 
             $licenseseats = $license->licenseseats();
             $licenseseats->delete();
@@ -470,11 +470,11 @@ class LicensesController extends Controller
         }
 
         // Declare the rules for the form validation
-        $rules = array(
+        $rules = [
 
             'note'   => 'string',
             'asset_id'  => 'required_without:assigned_to',
-        );
+        ];
 
         // Create a new validator instance from our validation rules
         $validator = Validator::make(Input::all(), $rules);
@@ -639,10 +639,10 @@ class LicensesController extends Controller
         }
 
         // Declare the rules for the form validation
-        $rules = array(
+        $rules = [
             'note'   => 'string',
             'notes'   => 'string',
-        );
+        ];
 
         // Create a new validator instance from our validation rules
         $validator = Validator::make(Input::all(), $rules);
@@ -745,8 +745,8 @@ class LicensesController extends Controller
         }
 
           // Show the page
-        $license_options = array('0' => 'Top Level') + License::pluck('name', 'id')->toArray();
-        $maintained_list = array('' => 'Maintained', '1' => 'Yes', '0' => 'No');
+        $license_options = ['0' => 'Top Level'] + License::pluck('name', 'id')->toArray();
+        $maintained_list = ['' => 'Maintained', '1' => 'Yes', '0' => 'No'];
         $company_list = Helper::companyList();
         //clone the orig
         $license = clone $license_to_clone;
@@ -789,10 +789,10 @@ class LicensesController extends Controller
 
             if (Input::hasFile('licensefile')) {
                 foreach (Input::file('licensefile') as $file) {
-                    $rules = array(
+                    $rules = [
                     'licensefile' => 'required|mimes:png,gif,jpg,jpeg,doc,docx,pdf,txt,zip,rar|max:2000'
-                    );
-                    $validator = Validator::make(array('licensefile'=> $file), $rules);
+                    ];
+                    $validator = Validator::make(['licensefile'=> $file], $rules);
 
                     if ($validator->passes()) {
                         $extension = $file->getClientOriginalExtension();
@@ -921,7 +921,7 @@ class LicensesController extends Controller
         $licenseCount = $licenses->count();
         $licenses = $licenses->skip(Input::get('offset'))->take(Input::get('limit'))->get();
 
-        $rows = array();
+        $rows = [];
 
         foreach ($licenses as $license) {
             $actions = '<span style="white-space: nowrap;">';
@@ -946,7 +946,7 @@ class LicensesController extends Controller
             }
             $actions .='</span>';
 
-            $rows[] = array(
+            $rows[] = [
                 'id'                => $license->id,
                 'name'              => (string) link_to('/admin/licenses/'.$license->id.'/view', $license->name),
                 'serial'            => (string) link_to('/admin/licenses/'.$license->id.'/view', mb_strimwidth($license->serial, 0, 50, "...")),
@@ -963,10 +963,10 @@ class LicensesController extends Controller
                 'actions'           => $actions,
                 'companyName'       => is_null($license->company) ? '' : e($license->company->name),
                 'manufacturer'      => $license->manufacturer ? (string) link_to('/admin/settings/manufacturers/'.$license->manufacturer_id.'/view', $license->manufacturer->name) : ''
-            );
+            ];
         }
 
-        $data = array('total' => $licenseCount, 'rows' => $rows);
+        $data = ['total' => $licenseCount, 'rows' => $rows];
 
         return $data;
     }

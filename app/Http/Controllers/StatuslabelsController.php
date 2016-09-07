@@ -172,7 +172,7 @@ class StatuslabelsController extends Controller
 
         $use_statuslabel_type = $statuslabel->getStatuslabelType();
 
-        $statuslabel_types = array('' => trans('admin/hardware/form.select_statustype')) + array('undeployable' => trans('admin/hardware/general.undeployable')) + array('pending' => trans('admin/hardware/general.pending')) + array('archived' => trans('admin/hardware/general.archived')) + array('deployable' => trans('admin/hardware/general.deployable'));
+        $statuslabel_types = ['' => trans('admin/hardware/form.select_statustype')] + ['undeployable' => trans('admin/hardware/general.undeployable')] + ['pending' => trans('admin/hardware/general.pending')] + ['archived' => trans('admin/hardware/general.archived')] + ['deployable' => trans('admin/hardware/general.deployable')];
 
         return View::make('statuslabels/edit', compact('statuslabel', 'statuslabel_types'))->with('use_statuslabel_type', $use_statuslabel_type);
     }
@@ -250,7 +250,7 @@ class StatuslabelsController extends Controller
 
     public function getDatatable()
     {
-        $statuslabels = Statuslabel::select(array('id','name','deployable','pending','archived','color','show_in_nav'))
+        $statuslabels = Statuslabel::select(['id','name','deployable','pending','archived','color','show_in_nav'])
         ->whereNull('deleted_at');
 
         if (Input::has('search')) {
@@ -278,7 +278,7 @@ class StatuslabelsController extends Controller
         $statuslabelsCount = $statuslabels->count();
         $statuslabels = $statuslabels->skip($offset)->take($limit)->get();
 
-        $rows = array();
+        $rows = [];
 
         foreach ($statuslabels as $statuslabel) {
             if ($statuslabel->deployable == 1) {
@@ -300,17 +300,17 @@ class StatuslabelsController extends Controller
             }
 
 
-            $rows[] = array(
+            $rows[] = [
                 'id'            => e($statuslabel->id),
                 'type'          => e($label_type),
                 'name'          => e($statuslabel->name),
                 'color'          => $color,
                 'show_in_nav' => ($statuslabel->show_in_nav=='1') ? trans('general.yes') : trans('general.no'),
                 'actions'       => $actions
-            );
+            ];
         }
 
-        $data = array('total' => $statuslabelsCount, 'rows' => $rows);
+        $data = ['total' => $statuslabelsCount, 'rows' => $rows];
 
         return $data;
     }

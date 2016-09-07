@@ -115,7 +115,7 @@ class AssetMaintenancesController extends Controller
         $maintenancesCount = $maintenances->count();
         $maintenances = $maintenances->skip($offset)->take($limit)->get();
 
-        $rows = array();
+        $rows = [];
         $settings = Setting::getSettings();
 
         foreach ($maintenances as $maintenance) {
@@ -127,7 +127,7 @@ class AssetMaintenancesController extends Controller
                 $maintenance_cost = $settings->default_currency.$maintenance->cost;
             }
             
-            $rows[] = array(
+            $rows[] = [
                 'id'            => $maintenance->id,
                 'asset_name'    =>  ($maintenance->asset) ? (string)link_to('/hardware/'.$maintenance->asset->id.'/view', $maintenance->asset->showAssetName()) : 'Deleted Asset' ,
                 'title'         => $maintenance->title,
@@ -141,10 +141,10 @@ class AssetMaintenancesController extends Controller
                 'user_id'       => ($maintenance->admin) ? (string)link_to('/admin/users/'.$maintenance->admin->id.'/view', $maintenance->admin->fullName()) : '',
                 'actions'       => $actions,
                 'companyName'   => ($maintenance->asset) ? $maintenance->asset->company->name : ''
-            );
+            ];
         }
 
-        $data = array('total' => $maintenancesCount, 'rows' => $rows);
+        $data = ['total' => $maintenancesCount, 'rows' => $rows];
         return $data;
     }
 

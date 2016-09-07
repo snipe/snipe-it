@@ -53,7 +53,7 @@ class Versioning extends Command
          $realVersion = $version[0];
 
          // save the version array to a variable
-         $array = var_export(array('app_version' => $realVersion,'hash_version' => $hash_version), true);
+         $array = var_export(['app_version' => $realVersion,'hash_version' => $hash_version], true);
 
 
         // Construct our file content
@@ -74,9 +74,9 @@ CON;
      */
     protected function getArguments()
     {
-        return array(
-            array('app_version', InputArgument::REQUIRED, 'version number is required.'),
-        );
+        return [
+            ['app_version', InputArgument::REQUIRED, 'version number is required.'],
+        ];
     }
 
     /**
@@ -86,7 +86,7 @@ CON;
      */
     protected function getOptions()
     {
-        return array(
-        );
+        return [
+        ];
     }
 }

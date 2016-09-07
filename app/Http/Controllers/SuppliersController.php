@@ -235,7 +235,7 @@ class SuppliersController extends Controller
 
     public function getDatatable()
     {
-        $suppliers = Supplier::select(array('id','name','address','address2','city','state','country','fax', 'phone','email','contact'))
+        $suppliers = Supplier::select(['id','name','address','address2','city','state','country','fax', 'phone','email','contact'])
         ->whereNull('deleted_at');
 
         if (Input::has('search')) {
@@ -263,12 +263,12 @@ class SuppliersController extends Controller
         $suppliersCount = $suppliers->count();
         $suppliers = $suppliers->skip($offset)->take($limit)->get();
 
-        $rows = array();
+        $rows = [];
 
         foreach ($suppliers as $supplier) {
             $actions = '<a href="'.route('update/supplier', $supplier->id).'" class="btn btn-warning btn-sm" style="margin-right:5px;"><i class="fa fa-pencil icon-white"></i></a><a data-html="false" class="btn delete-asset btn-danger btn-sm" data-toggle="modal" href="'.route('delete/supplier', $supplier->id).'" data-content="'.trans('admin/suppliers/message.delete.confirm').'" data-title="'.trans('general.delete').' '.htmlspecialchars($supplier->name).'?" onClick="return false;"><i class="fa fa-trash icon-white"></i></a>';
 
-            $rows[] = array(
+            $rows[] = [
                 'id'                => $supplier->id,
                 'name'              => (string)link_to('admin/settings/suppliers/'.$supplier->id.'/view', e($supplier->name)),
                 'contact'           => e($supplier->contact),
@@ -279,10 +279,10 @@ class SuppliersController extends Controller
                 'assets'            => $supplier->num_assets(),
                 'licenses'          => $supplier->num_licenses(),
                 'actions'           => $actions
-            );
+            ];
         }
 
-        $data = array('total' => $suppliersCount, 'rows' => $rows);
+        $data = ['total' => $suppliersCount, 'rows' => $rows];
 
         return $data;
     }

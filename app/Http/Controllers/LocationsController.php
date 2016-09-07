@@ -57,7 +57,7 @@ class LocationsController extends Controller
 
         $location_options_array = Location::getLocationHierarchy($locations);
         $location_options = Location::flattenLocationsArray($location_options_array);
-        $location_options = array('' => 'Top Level') + $location_options;
+        $location_options = ['' => 'Top Level'] + $location_options;
 
         return View::make('locations/edit')
         ->with('location_options', $location_options)
@@ -164,7 +164,7 @@ class LocationsController extends Controller
         $locations = Location::orderBy('name', 'ASC')->get();
         $location_options_array = Location::getLocationHierarchy($locations);
         $location_options = Location::flattenLocationsArray($location_options_array);
-        $location_options = array('' => 'Top Level') + $location_options;
+        $location_options = ['' => 'Top Level'] + $location_options;
 
         return View::make('locations/edit', compact('location'))->with('location_options', $location_options);
     }
@@ -281,7 +281,7 @@ class LocationsController extends Controller
     */
     public function getDatatable()
     {
-        $locations = Location::select(array('locations.id','locations.name','locations.address','locations.address2','locations.city','locations.state','locations.zip','locations.country','locations.parent_id','locations.currency'))->with('assets');
+        $locations = Location::select(['locations.id','locations.name','locations.address','locations.address2','locations.city','locations.state','locations.zip','locations.country','locations.parent_id','locations.currency'])->with('assets');
 
 
         if (Input::has('search')) {
@@ -320,12 +320,12 @@ class LocationsController extends Controller
         $locationsCount = $locations->count();
         $locations = $locations->skip($offset)->take($limit)->get();
 
-        $rows = array();
+        $rows = [];
 
         foreach ($locations as $location) {
             $actions = '<nobr><a href="'.route('update/location', $location->id).'" class="btn btn-warning btn-sm" style="margin-right:5px;"><i class="fa fa-pencil icon-white"></i></a><a data-html="false" class="btn delete-asset btn-danger btn-sm" data-toggle="modal" href="'.route('delete/location', $location->id).'" data-content="'.trans('admin/locations/message.delete.confirm').'" data-title="'.trans('general.delete').' '.htmlspecialchars($location->name).'?" onClick="return false;"><i class="fa fa-trash icon-white"></i></a></nobr>';
 
-            $rows[] = array(
+            $rows[] = [
                 'id'            => $location->id,
                 'name'          => (string)link_to('admin/settings/locations/'.$location->id.'/view', e($location->name)),
                 'parent'        => ($location->parent) ? e($location->parent->name) : '',
@@ -338,10 +338,10 @@ class LocationsController extends Controller
                 'country'       => e($location->country),
                 'currency'      => e($location->currency),
                 'actions'       => $actions
-            );
+            ];
         }
 
-        $data = array('total' => $locationsCount, 'rows' => $rows);
+        $data = ['total' => $locationsCount, 'rows' => $rows];
 
         return $data;
     }
@@ -367,15 +367,15 @@ class LocationsController extends Controller
         }
 
         $users = $users->get();
-        $rows = array();
+        $rows = [];
 
         foreach ($users as $user) {
-            $rows[] = array(
+            $rows[] = [
               'name' => (string)link_to('/admin/users/'.$user->id.'/view', e($user->fullName()))
-              );
+              ];
         }
 
-        $data = array('total' => $users->count(), 'rows' => $rows);
+        $data = ['total' => $users->count(), 'rows' => $rows];
 
         return $data;
     }
@@ -404,18 +404,18 @@ class LocationsController extends Controller
 
         $assets = $assets->get();
 
-        $rows = array();
+        $rows = [];
 
         foreach ($assets as $asset) {
-            $rows[] = array(
+            $rows[] = [
             'name' => (string)link_to(config('app.url').'/hardware/'.$asset->id.'/view', e($asset->showAssetName())),
             'asset_tag' => e($asset->asset_tag),
             'serial' => e($asset->serial),
             'model' => e($asset->model->name),
-            );
+            ];
         }
 
-        $data = array('total' => $assets->count(), 'rows' => $rows);
+        $data = ['total' => $assets->count(), 'rows' => $rows];
         return $data;
     }
 }

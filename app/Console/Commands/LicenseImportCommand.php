@@ -344,9 +344,9 @@ class LicenseImportCommand extends Command
      */
     protected function getArguments()
     {
-        return array(
-            array('filename', InputArgument::REQUIRED, 'File for the CSV import.'),
-        );
+        return [
+            ['filename', InputArgument::REQUIRED, 'File for the CSV import.'],
+        ];
     }
 
 
@@ -357,10 +357,10 @@ class LicenseImportCommand extends Command
      */
     protected function getOptions()
     {
-        return array(
-            array('domain', null, InputOption::VALUE_REQUIRED, 'Email domain for generated email addresses.', null),
-            array('email_format', null, InputOption::VALUE_REQUIRED, 'The format of the email addresses that should be generated. Options are firstname.lastname, firstname, filastname', null),
-            array('testrun', null, InputOption::VALUE_REQUIRED, 'Test the output without writing to the database or not.', null),
-        );
+        return [
+            ['domain', null, InputOption::VALUE_REQUIRED, 'Email domain for generated email addresses.', null],
+            ['email_format', null, InputOption::VALUE_REQUIRED, 'The format of the email addresses that should be generated. Options are firstname.lastname, firstname, filastname', null],
+            ['testrun', null, InputOption::VALUE_REQUIRED, 'Test the output without writing to the database or not.', null],
+        ];
     }
 }

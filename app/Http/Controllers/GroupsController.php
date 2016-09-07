@@ -47,7 +47,7 @@ class GroupsController extends Controller
         $group = new Group;
         // Get all the available permissions
         $permissions = config('permissions');
-        $groupPermissions = array();
+        $groupPermissions = [];
         $selectedPermissions = Input::old('permissions', $groupPermissions);
 
         // Show the page
@@ -200,7 +200,7 @@ class GroupsController extends Controller
 
         $groupsCount = $groups->count();
         $groups = $groups->skip($offset)->take($limit)->get();
-        $rows = array();
+        $rows = [];
 
         foreach ($groups as $group) {
             $group_names = '';
@@ -217,16 +217,16 @@ class GroupsController extends Controller
 
             $actions .= '</nobr>';
 
-            $rows[] = array(
+            $rows[] = [
                 'id'         => $group->id,
                 'name'        => $group->name,
                 'users'         => $group->users->count(),
                 'created_at'        => $group->created_at->format('Y-m-d'),
                 'actions'       => ($actions) ? $actions : '',
-            );
+            ];
         }
 
-        $data = array('total'=>$groupsCount, 'rows'=>$rows);
+        $data = ['total'=>$groupsCount, 'rows'=>$rows];
         return $data;
     }
 }

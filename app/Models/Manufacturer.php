@@ -12,10 +12,10 @@ class Manufacturer extends Model
     protected $table = 'manufacturers';
 
     // Declare the rules for the form validation
-    protected $rules = array(
+    protected $rules = [
         'name'   => 'required|min:2|max:255|unique:manufacturers,name,NULL,deleted_at',
         'user_id' => 'integer',
-    );
+    ];
 
     /**
     * Whether the model should inject it's identifier to the unique

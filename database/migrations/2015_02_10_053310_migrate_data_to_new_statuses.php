@@ -18,9 +18,9 @@ class MigrateDataToNewStatuses extends Migration {
 
 		foreach ($statuses as $status) {
 			if ($status->name =="Pending") {
-				$pending_id = array($status->id);
+				$pending_id = [$status->id];
 			} elseif ($status->name =="Ready to Deploy") {
-				$rtd_id = array($status->id);
+				$rtd_id = [$status->id];
 			}
 		}
 
