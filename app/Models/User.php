@@ -12,6 +12,7 @@ use App\Http\Traits\UniqueUndeletedTrait;
 
 class User extends Model implements AuthenticatableContract, CanResetPasswordContract
 {
+use Notifiable;
 
     use SoftDeletes;
     use ValidatingTrait;
